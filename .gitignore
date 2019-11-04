@@ -1,0 +1,10 @@
+# rust
+target
+
+# parcel
+.cache
+
+# emacs
+*~
+*#*
+.#*
