@@ -21,7 +21,6 @@ develop category_t {
   ) = {
     tuple(xy, xy_unique) = x.property(y.object)
     tuple(xx, xx_unique) = x.property(x.object)
-    tuple(yx, yx_unique) = y.property(x.object)
     tuple(yy, yy_unique) = y.property(y.object)
     f = xy
     f_iso = new iso_t {
