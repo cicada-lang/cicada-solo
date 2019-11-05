@@ -1,7 +1,7 @@
 class group_t extends monoid_t {
-  inv(x: elem_t): eqv_t(mul(id, x), x)
-  left_inv(x: elem_t): eqv_t(mul(inv(x), x), id)
-  right_inv(x: elem_t): eqv_t(mul(x, inv(x)), id)
+  inv(x: elem_t): eqv_t(elem_t, mul(id, x), x)
+  left_inv(x: elem_t): eqv_t(elem_t, mul(inv(x), x), id)
+  right_inv(x: elem_t): eqv_t(elem_t, mul(x, inv(x)), id)
 }
 
 develop group_t {
@@ -10,34 +10,32 @@ develop group_t {
 
 // TODO
 
-class group_hom_t {
-  G: group_t
-  H: group_t
-
-  hom(G.elem_t): H.elem_t
-  hom_respect_mul(x: G.elem_t, y: G.elem_t): eqv_t(
-    hom(G.mul(x, y)),
-    H.mul(hom(x), hom(y)))
+class group_hom_t(dom: group_t, cod: group_t) {
+  hom(dom.elem_t): cod.elem_t
+  hom_respect_mul(x: dom.elem_t, y: dom.elem_t): eqv_t(
+    cod.elem_t,
+    hom(dom.mul(x, y)),
+    cod.mul(hom(x), hom(y)))
 }
 
-id_group_hom(G: group_t): group_hom_t = new group_hom_t(
-  G, G,
-  (x: G.elem_t): G.elem_t => x,
-  (x: G.elem_t, y: G.elem_t) => same(G.mul(x, y)),
-)
+id_group_hom(dom: group_t): group_hom_t(dom, dom) = new group_hom_t(dom, dom) {
+  dom, dom,
+  (x: dom.elem_t): dom.elem_t => x,
+  (x: dom.elem_t, y: dom.elem_t) => same(dom.mul(x, y)),
+}
 
 group_category: category_t = new category_t(
   group_t,
   group_hom_t,
   id_group_hom,
 
-  (f: group_hom_t(G, H), g: group_hom_t(H, K)) => group_hom_t(
-    G, K,
-    (x: G.elem_t) => { g.hom(f.hom(x)) },
-    (x: G.elem_t, y: G.elem_t) => same(g.hom(H.mul(f.hom(x), f.hom(y))))),
+  (f: group_hom_t(a, b), g: group_hom_t(b, c)) => new group_hom_t(a, c) {
+    (x: a.elem_t) => { g.hom(f.hom(x)) },
+    (x: a.elem_t, y: a.elem_t) => same(g.hom(b.mul(f.hom(x), f.hom(y))))
+  },
 
-  (f: group_hom_t(G, H)) => same(f),
-  (f: group_hom_t(G, H)) => same(f),
+  (f: group_hom_t(a, b)) => same(f),
+  (f: group_hom_t(a, b)) => same(f),
 
   (f: group_hom_t(a, b), g: group_hom_t(b, c), h: group_hom_t(c, d)) => refl
 )

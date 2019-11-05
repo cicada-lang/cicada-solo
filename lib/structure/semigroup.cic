@@ -6,7 +6,8 @@ class semigroup_t {
     y: elem_t,
     z: elem_t
   ): eqv_t(
+    elem_t,
     mul(x, mul(y, z)),
-    mul(mul(x, y), z)
+    mul(mul(x, y), z),
   )
 }

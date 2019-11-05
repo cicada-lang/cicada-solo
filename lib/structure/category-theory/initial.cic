@@ -1,9 +1,8 @@
 develop category_t {
-  class initial_t {
-    object: object_t
+  class initial_t extends object_t {
     property(x: object_t): exists(
-      f: morphism_t(object, x),
-      forall(g: morphism_t(object, x)) -> eqv_t(f, g))
+      f: morphism_t(this, x),
+      forall(g: morphism_t(this, x)) -> eqv_t(morphism_t(this, x), f, g))
   }
 
   initial_unique_up_to_unique_isomorphism: TODO = TODO

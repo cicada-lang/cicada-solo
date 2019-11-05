@@ -6,13 +6,17 @@ class category_t {
     f: morphism_t(a, b),
     g: morphism_t(b, c),
   ): morphism_t(a, c)
-  left_id[a: object_t, b: object_t](f: morphism_t(a, b)): eqv_t(compose(id(a), f), f)
-  right_id[a: object_t, b: object_t](f: morphism_t(a, b)): eqv_t(compose(f, id(b)), f)
+  left_id[a: object_t, b: object_t](f: morphism_t(a, b)): eqv_t(
+    morphism_t(a, b), compose(id(a), f), f)
+  right_id[a: object_t, b: object_t](f: morphism_t(a, b)): eqv_t(
+    morphism_t(a, b), compose(f, id(b)), f)
   associative[a: object_t, b: object_t, c: object_t, d: object_t](
     f: morphism_t(a, b),
     g: morphism_t(b, c),
     h: morphism_t(c, d),
-  ): eqv_t(compose(f, compose(g, h)), compose(compose(f, g), h))
+  ): eqv_t(morphism_t(a, d),
+    compose(f, compose(g, h)),
+    compose(compose(f, g), h))
 }
 
 develop category_t {
@@ -20,7 +24,7 @@ develop category_t {
     right_cancelable[c: object_t](
       f: morphism_t(c, a),
       g: morphism_t(c, a),
-      eqv_t(compose(f, this), compose(g, this)),
+      eqv_t(morphism_t(c, b), compose(f, this), compose(g, this)),
     ): eqv_t(f, g)
   }
 
@@ -28,13 +32,13 @@ develop category_t {
     left_cancelable[c: object_t](
       f: morphism_t(b, c),
       g: morphism_t(b, c),
-      eqv_t(compose(this, f), compose(this, g)),
+      eqv_t(morphism_t(a, c), compose(this, f), compose(this, g)),
     ): eqv_t(f, g)
   }
 
   class iso_t(a: object_t, b: object_t) extends morphism_t(a, b) {
     inverse: morphism_t(b, a)
-    left_inverse: eqv_t(compose(this, inverse), id(a))
-    right_inverse: eqv_t(compose(this, morphism), id(b))
+    left_inverse: eqv_t(morphism_t(a, a), compose(this, inverse), id(a))
+    right_inverse: eqv_t(morphism_t(b, b), compose(this, morphism), id(b))
   }
 }

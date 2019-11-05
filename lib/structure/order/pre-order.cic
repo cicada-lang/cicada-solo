@@ -7,7 +7,7 @@ class pre_order_t {
 
 develop pre_order_t {
   strict_pre_t(a: elem_t, b: elem_t): type = {
-    pre_t(a, b) & not_eqv_t(a, b)
+    pre_t(a, b) & not_eqv_t(elem_t, a, b)
   }
 }
 
