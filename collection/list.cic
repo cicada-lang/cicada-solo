@@ -1,5 +1,5 @@
-import * from "../basic/bool.cic"
-import * from "../basic/nat.cic"
+import * from "../simple/bool.cic"
+import * from "../simple/nat.cic"
 
 datatype list_t(A: type) {
   case null: list_t(A)
