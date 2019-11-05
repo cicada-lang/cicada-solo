@@ -1,9 +1,11 @@
 class monoid_t extends semigroup_t {
-  let id: elem_t
-  fn left_id(x: elem_t): eqv_t(mul(id, x), x)
-  fn right_id(x: elem_t): eqv_t(mul(x, id), x)
+  id: elem_t
+  left_id(x: elem_t): eqv_t(mul(id, x), x)
+  right_id(x: elem_t): eqv_t(mul(x, id), x)
+}
 
-  let as_category: category_t = category_t(
+develop monoid_t {
+  as_category: category_t = category_t(
     unit_t,
     (_: unit_t, _: unit_t): unit_t => elem_t,
     (_: unit_t): elem_t => id,

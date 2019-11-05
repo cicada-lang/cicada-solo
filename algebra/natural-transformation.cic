@@ -1,17 +1,15 @@
 class natural_transformation_t {
   dom: category_t
   cod: category_t
-
   fdom: functor_t(dom, cod)
   fcod: functor_t(dom, cod)
-
   component(a: dom.object_t): cod.morphism_t(fdom.map(a), fcod.map(a))
-
   natural(
     f: fdom.morphism_t(a, b)
   ): eqv_t(
     cod.compose(component(a), fcod.fmap(f)),
-    cod.compose(fdom.fmap(f), component(b)))
+    cod.compose(fdom.fmap(f), component(b)),
+  )
 
   // component(a) : cod.morphism_t(fdom.map(a), fcod.map(a))
   // fcod.fmap(f) : cod.morphism_t(fcod.map(a), fcod.map(b))

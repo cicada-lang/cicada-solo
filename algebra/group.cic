@@ -2,9 +2,13 @@ class group_t extends monoid_t {
   inv(x: elem_t): eqv_t(mul(id, x), x)
   left_inv(x: elem_t): eqv_t(mul(inv(x), x), id)
   right_inv(x: elem_t): eqv_t(mul(x, inv(x)), id)
+}
 
+develop group_t {
   div(x: elem_t, y: elem_t): elem_t = mul(x, inv(y))
 }
+
+// TODO
 
 class group_hom_t {
   G: group_t
