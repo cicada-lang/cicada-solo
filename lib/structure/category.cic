@@ -43,7 +43,7 @@ develop category_t {
 
   class terminal_t {
     terminal: object_t
-    property(x: object_t): (f: morphism_t(x, terminal)) *
-      ((g: morphism_t(x, terminal)) -> eqv_t(f, g))
+    property(x: object_t): exists (f: morphism_t(x, terminal)) *
+      forall (g: morphism_t(x, terminal)) -> eqv_t(f, g)
   }
 }
