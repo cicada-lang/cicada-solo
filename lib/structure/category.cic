@@ -1,6 +1,6 @@
 class category_t {
   object_t: type
-  morphism_t(object_t, object_t): type
+  morphism_t(dom: object_t, cod: object_t): type
   id(a: object_t): morphism_t(a, a)
   compose[a: object_t, b: object_t, c: object_t](
     f: morphism_t(a, b),
