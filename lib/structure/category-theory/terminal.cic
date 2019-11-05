@@ -6,10 +6,10 @@ develop category_t {
       forall(g: morphism_t(x, object)) -> eqv_t(f, g))
   }
 
-  terminal_unique_up_to_unique_isomorphism: forall(
+  terminal_unique_up_to_unique_isomorphism(
     x: terminal_t,
     y: terminal_t,
-  ) -> exists(
+  ): exists(
     f: morphism_t(x.object, y.object),
     f_iso: iso_t,
     eqv_t(f_iso.morphism, f),
