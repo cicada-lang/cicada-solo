@@ -17,8 +17,7 @@ class category_t {
   ): eqv_t(
     morphism_t(a, d),
     compose(f, compose(g, h)),
-    compose(compose(f, g), h),
-  )
+    compose(compose(f, g), h))
 }
 
 develop category_t {

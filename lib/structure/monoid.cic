@@ -12,6 +12,5 @@ develop monoid_t {
     mul,
     left_id,
     left_id,
-    associative,
-  )
+    associative)
 }
