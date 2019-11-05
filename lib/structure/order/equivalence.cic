@@ -1,0 +1,3 @@
+class equivalence_t extends pre_order_t {
+  symmetric(pre_t(a, b)): pre_t(b, a)
+}
