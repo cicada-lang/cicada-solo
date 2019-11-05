@@ -9,5 +9,5 @@ class pre_order_t {
 }
 
 // NOTE
-//   thin category
-//   hom_set(A, B).size <= 1
+// thin category
+// hom_set(A, B).size <= 1

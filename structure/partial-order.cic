@@ -8,5 +8,6 @@ class partial_order_t extends pre_order_t {
 }
 
 // NOTE
-//   no cycle
-//   topological sort
+// no cycle
+// can implement
+// - topological sort

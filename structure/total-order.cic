@@ -3,6 +3,7 @@ class total_order_t extends partial_order_t {
 }
 
 // NOTE
-//   quick sort
-//   bubble sort
-//   merge sort
+// can implement
+// - quick sort
+// - bubble sort
+// - merge sort

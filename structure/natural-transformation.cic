@@ -17,8 +17,8 @@ class natural_transformation_t {
   )
 
   // NOTE
-  //   component(a) : cod.morphism_t(fdom.map(a), fcod.map(a))
-  //   fcod.fmap(f) : cod.morphism_t(fcod.map(a), fcod.map(b))
-  //   fdom.fmap(f) : cod.morphism_t(fdom.map(a), fdom.map(b))
-  //   component(b) : cod.morphism_t(fdom.map(b), fcod.map(b))
+  // component(a) : cod.morphism_t(fdom.map(a), fcod.map(a))
+  // fcod.fmap(f) : cod.morphism_t(fcod.map(a), fcod.map(b))
+  // fdom.fmap(f) : cod.morphism_t(fdom.map(a), fdom.map(b))
+  // component(b) : cod.morphism_t(fdom.map(b), fcod.map(b))
 }
