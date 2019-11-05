@@ -2,21 +2,21 @@ class natural_transformation_t {
   dom: category_t
   cod: category_t
 
-  F: functor_t(dom, cod)
-  G: functor_t(dom, cod)
+  fdom: functor_t(dom, cod)
+  fcod: functor_t(dom, cod)
 
-  component(a: dom.object_t): cod.morphism_t(F.map(a), G.map(a))
+  component(a: dom.object_t): cod.morphism_t(fdom.map(a), fcod.map(a))
 
   natural(
-    f: F.morphism_t(a, b)
+    f: fdom.morphism_t(a, b)
   ): eqv_t(
-    cod.compose(component(a), G.fmap(f)),
-    cod.compose(F.fmap(f), component(b)))
+    cod.compose(component(a), fcod.fmap(f)),
+    cod.compose(fdom.fmap(f), component(b)))
 
-  // component(a) : cod.morphism_t(F.map(a), G.map(a))
-  // G.fmap(f)    : cod.morphism_t(G.map(a), G.map(b))
+  // component(a) : cod.morphism_t(fdom.map(a), fcod.map(a))
+  // fcod.fmap(f) : cod.morphism_t(fcod.map(a), fcod.map(b))
 
-  // F.fmap(f)    : cod.morphism_t(F.map(a), F.map(b))
-  // component(b) : cod.morphism_t(F.map(b), G.map(b))
+  // fdom.fmap(f) : cod.morphism_t(fdom.map(a), fdom.map(b))
+  // component(b) : cod.morphism_t(fdom.map(b), fcod.map(b))
 
 }
