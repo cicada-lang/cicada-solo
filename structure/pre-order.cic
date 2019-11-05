@@ -8,5 +8,6 @@ class pre_order_t {
     cons(pre_t(a, b), not_eqv_t(a, b))
 }
 
-// thin category
-// hom_set(A, B).size <= 1
+// NOTE
+//   thin category
+//   hom_set(A, B).size <= 1

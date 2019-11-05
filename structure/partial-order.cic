@@ -7,5 +7,6 @@ class partial_order_t extends pre_order_t {
       (x: elem_t, pre_t(a, x), strict_pre_t(x, b)) -> eqv_t(x, a))
 }
 
-// no cycle
-// topological sort
+// NOTE
+//   no cycle
+//   topological sort
