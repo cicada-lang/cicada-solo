@@ -16,28 +16,25 @@ class category_t {
 }
 
 develop category_t {
-  class mono_t {
-    morphism[a: object_t, b: object_t]: morphism_t(a, b)
+  class mono_t(a: object_t, b: object_t) extends morphism_t(a, b) {
     right_cancelable[c: object_t](
       f: morphism_t(c, a),
       g: morphism_t(c, a),
-      eqv_t(compose(f, morphism), compose(g, morphism)),
+      eqv_t(compose(f, this), compose(g, this)),
     ): eqv_t(f, g)
   }
 
-  class epi_t {
-    morphism[a: object_t, b: object_t]: morphism_t(a, b)
+  class epi_t(a: object_t, b: object_t) extends morphism_t(a, b) {
     left_cancelable[c: object_t](
       f: morphism_t(b, c),
       g: morphism_t(b, c),
-      eqv_t(compose(morphism, f), compose(morphism, g)),
+      eqv_t(compose(this, f), compose(this, g)),
     ): eqv_t(f, g)
   }
 
-  class iso_t {
-    morphism[a: object_t, b: object_t]: morphism_t(a, b)
-    inverse[a: object_t, b: object_t]: morphism_t(b, a)
-    left_inverse: eqv_t(compose(morphism, inverse), id(a))
-    right_inverse: eqv_t(compose(inverse, morphism), id(b))
+  class iso_t(a: object_t, b: object_t) extends morphism_t(a, b) {
+    inverse: morphism_t(b, a)
+    left_inverse: eqv_t(compose(this, inverse), id(a))
+    right_inverse: eqv_t(compose(this, morphism), id(b))
   }
 }

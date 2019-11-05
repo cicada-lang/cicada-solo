@@ -1,50 +1,33 @@
 develop category_t {
-  class terminal_t {
-    object: object_t
+  class terminal_t extends object_t {
     property(x: object_t): exists(
-      f: morphism_t(x, object),
-      forall(g: morphism_t(x, object)) -> eqv_t(f, g))
+      f: morphism_t(x, this),
+      forall(g: morphism_t(x, this)) -> eqv_t(f, g))
   }
 
   terminal_unique_up_to_unique_isomorphism(
     x: terminal_t,
     y: terminal_t,
   ): exists(
-    f: morphism_t(x.object, y.object),
-    f_iso: iso_t,
-    eqv_t(f_iso.morphism, f),
-    forall(
-      g: morphism_t(x.object, y.object),
-      g_iso: iso_t,
-      eqv_t(g_iso.morphism, g),
-    ) -> eqv_t(f, g),
+    f: iso_t(x, y),
+    forall(g: iso_t(x, y)) -> eqv_t(f, g),
   ) = {
-    tuple(xy, xy_unique) = x.property(y.object)
-    tuple(xx, xx_unique) = x.property(x.object)
-    tuple(yy, yy_unique) = y.property(y.object)
-    f = xy
-    f_iso = new iso_t {
-      morphism = xy
+    tuple(xy, xy_unique) = x.property(y)
+    tuple(xx, xx_unique) = x.property(x)
+    tuple(yy, yy_unique) = y.property(y)
+    f = new iso_t(x, y) extends xx {
       inverse = yx
-      left_inverse: eqv_t(compose(xy, yx), id(x.object)) = {
+      left_inverse: eqv_t(compose(xy, yx), id(x)) = {
         e1 = xx_unique(compose(xy, yx)): eqv_t(xx, compose(xy, yx))
-        e2 = xx_unique(id(x.object)): eqv_t(xx, id(x.object))
+        e2 = xx_unique(id(x)): eqv_t(xx, id(x))
         eqv_compose(eqv_swap(e1), e2)
       }
-      right_inverse: eqv_t(compose(yx, xy), id(y.object)) = {
+      right_inverse: eqv_t(compose(yx, xy), id(y)) = {
         e1 = yy_unique(compose(yx, xy)): eqv_t(yy, compose(yx, xy))
-        e2 = yy_unique(id(y.object)): eqv_t(yy, id(y.object))
+        e2 = yy_unique(id(y)): eqv_t(yy, id(y))
         eqv_compose(eqv_swap(e1), e2)
       }
     }
-    f_eqv = same(xy)
-    unique_iso = (
-      g: morphism_t(x.object, y.object),
-      g_iso: iso_t,
-      g_eqv: eqv_t(g_iso.morphism, g),
-    ) => {
-      xy_unique(g)
-    }
-    tuple(f, f_iso, f_eqv, unique_iso)
+    tuple(f, (g: iso_t(x, y)) => xy_unique(g))
   }
 }
