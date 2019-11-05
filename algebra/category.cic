@@ -1,4 +1,5 @@
 class category_t {
+
   object_t: type
 
   morphism_t(object_t, object_t): type
@@ -18,6 +19,10 @@ class category_t {
     g: morphism_t(b, c),
     h: morphism_t(c, d),
   ): eqv_t(compose(f, compose(g, h)), compose(compose(f, g), h))
+
+}
+
+impl category_t {
 
   class monomorphism_t {
     mono: morphism_t(a, b)
@@ -51,4 +56,5 @@ class category_t {
     left_inverse: left_inverse_t(iso, inv)
     right_inverse: right_inverse_t(iso, inv)
   }
+
 }

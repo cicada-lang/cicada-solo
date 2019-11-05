@@ -19,7 +19,7 @@ class group_hom_t {
 id_group_hom(G: group_t): group_hom_t = new group_hom_t(
   G, G,
   (x: G.elem_t): G.elem_t => x,
-  (x: G.elem_t, y: G.elem_t): TODO => same(G.mul(x, y)),
+  (x: G.elem_t, y: G.elem_t) => same(G.mul(x, y)),
 )
 
 group_category: category_t = new category_t(
@@ -27,13 +27,13 @@ group_category: category_t = new category_t(
   group_hom_t,
   id_group_hom,
 
-  (f: group_hom_t(G, H), g: group_hom_t(H, K)): TODO => group_hom_t(
+  (f: group_hom_t(G, H), g: group_hom_t(H, K)) => group_hom_t(
     G, K,
-    (x: G.elem_t): TODO => { g.hom(f.hom(x)) },
-    (x: G.elem_t, y: G.elem_t): TODO => same(g.hom(H.mul(f.hom(x), f.hom(y))))),
+    (x: G.elem_t) => { g.hom(f.hom(x)) },
+    (x: G.elem_t, y: G.elem_t) => same(g.hom(H.mul(f.hom(x), f.hom(y))))),
 
-  (f: group_hom_t(G, H)): TODO => same(f),
-  (f: group_hom_t(G, H)): TODO => same(f),
+  (f: group_hom_t(G, H)) => same(f),
+  (f: group_hom_t(G, H)) => same(f),
 
-  (f: group_hom_t(a, b), g: group_hom_t(b, c), h: group_hom_t(c, d)): TODO => refl
+  (f: group_hom_t(a, b), g: group_hom_t(b, c), h: group_hom_t(c, d)) => refl
 )
