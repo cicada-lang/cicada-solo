@@ -2,7 +2,7 @@
 
 ## Syntax of expression
 
-| expression | example                                        |
+| Expression | Example                                        |
 |------------|------------------------------------------------|
 | pi type    | `(x: t) -> body[x]`, `forall(x: t) -> body[x]` |
 | function   | `(x: t) => body[x]`                            |
