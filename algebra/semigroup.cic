@@ -1,5 +1,12 @@
 class semigroup_t {
   elem_t: type
   mul(x: elem_t, y: elem_t): elem_t
-  associative(x: elem_t, y: elem_t, z: elem_t): eqv_t(mul(x, mul(y, z)), mul(mul(x, y), z))
+  associative(
+    x: elem_t,
+    y: elem_t,
+    z: elem_t
+  ): eqv_t(
+    mul(x, mul(y, z)),
+    mul(mul(x, y), z)
+  )
 }
