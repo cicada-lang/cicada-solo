@@ -1,5 +1,0 @@
-class equivalence_relation_t extends pre_order_t {
-  equivalence_t(a: elem_t, b: elem_t): type = pre_t(a, b)
-
-  symmetric(equivalence_t(a, b)): equivalence_t(b, a)
-}

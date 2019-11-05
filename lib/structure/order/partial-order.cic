@@ -4,9 +4,8 @@ class partial_order_t extends pre_order_t {
 
 develop partial_order_t {
   cover_t(a: elem_t, b: elem_t): type = {
-    cons(
-      strict_pre_t(a, b),
-      (x: elem_t, pre_t(a, x), strict_pre_t(x, b)) -> eqv_t(x, a))
+    strict_pre_t(a, b) &
+      (x: elem_t, pre_t(a, x), strict_pre_t(x, b)) -> eqv_t(x, a)
   }
 }
 
