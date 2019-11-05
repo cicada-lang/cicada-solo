@@ -16,34 +16,28 @@ class category_t {
 }
 
 develop category_t {
-  class monomorphism_t {
-    mono[a: object_t, b: object_t]: morphism_t(a, b)
+  class mono_t {
+    morphism[a: object_t, b: object_t]: morphism_t(a, b)
     right_cancelable[c: object_t](
       f: morphism_t(c, a),
       g: morphism_t(c, a),
-      eqv_t(compose(f, mono), compose(g, mono)),
+      eqv_t(compose(f, morphism), compose(g, morphism)),
     ): eqv_t(f, g)
   }
 
-  class epimorphism_t {
-    epi[a: object_t, b: object_t]: morphism_t(a, b)
+  class epi_t {
+    morphism[a: object_t, b: object_t]: morphism_t(a, b)
     left_cancelable[c: object_t](
       f: morphism_t(b, c),
       g: morphism_t(b, c),
-      eqv_t(compose(epi, f), compose(epi, g)),
+      eqv_t(compose(morphism, f), compose(morphism, g)),
     ): eqv_t(f, g)
   }
 
-  class isomorphism_t {
-    iso[a: object_t, b: object_t]: morphism_t(a, b)
-    inv[a: object_t, b: object_t]: morphism_t(b, a)
-    left_inverse: eqv_t(compose(iso, inv), id(a))
-    right_inverse: eqv_t(compose(iso, inv), id(b))
-  }
-
-  class terminal_t {
-    terminal: object_t
-    property(x: object_t): exists (f: morphism_t(x, terminal)) *
-      forall (g: morphism_t(x, terminal)) -> eqv_t(f, g)
+  class iso_t {
+    morphism[a: object_t, b: object_t]: morphism_t(a, b)
+    inverse[a: object_t, b: object_t]: morphism_t(b, a)
+    left_inverse: eqv_t(compose(morphism, inverse), id(a))
+    right_inverse: eqv_t(compose(inverse, morphism), id(b))
   }
 }
