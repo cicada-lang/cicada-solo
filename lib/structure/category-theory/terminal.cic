@@ -1,33 +1,26 @@
 develop category_t {
   class terminal_t extends object_t {
-    property(x: object_t): exists(
+    morphism(x: object_t): morphism_t(x, this)
+    morphism_unique(
       f: morphism_t(x, this),
-      forall(g: morphism_t(x, this)) -> eqv_t(morphism_t(x, this), f, g))
+      g: morphism_t(x, this),
+    ): eqv_t(morphism_t(x, this), f, g)
   }
 
-  terminal_unique_up_to_unique_isomorphism(
-    x: terminal_t,
-    y: terminal_t,
-  ): exists(
-    f: iso_t(x, y),
-    forall(g: iso_t(x, y)) -> eqv_t(iso_t(x, y), f, g),
-  ) = {
-    tuple(xy, xy_unique) = x.property(y)
-    tuple(xx, xx_unique) = x.property(x)
-    tuple(yy, yy_unique) = y.property(y)
-    f = new iso_t(x, y) extends xx {
-      inverse = yx
-      left_inverse: eqv_t(morphism_t(x, x), compose(xy, yx), id(x)) = {
-        e1 = xx_unique(compose(xy, yx)): eqv_t(morphism_t(x, x), xx, compose(xy, yx))
-        e2 = xx_unique(id(x)): eqv_t(morphism_t(x, x), xx, id(x))
-        eqv_compose(eqv_swap(e1), e2)
-      }
-      right_inverse: eqv_t(morphism_t(y, y), compose(yx, xy), id(y)) = {
-        e1 = yy_unique(compose(yx, xy)): eqv_t(morphism_t(y, y), yy, compose(yx, xy))
-        e2 = yy_unique(id(y)): eqv_t(morphism_t(y, y), yy, id(y))
-        eqv_compose(eqv_swap(e1), e2)
-      }
+  terminal_iso(x: terminal_t, y: terminal_t): iso_t(x, y) = {
+    f = x.morphism(y)
+    g = y.morphism(x)
+    new iso_t(x, y) extends f {
+      inverse = g
+      left_inverse = x.morphism_unique(compose(f, g), id(x))
+      right_inverse = y.morphism_unique(compose(g, f), id(y))
     }
-    tuple(f, (g: iso_t(x, y)) => xy_unique(g))
+  }
+
+  terminal_iso_unique[x: terminal_t, y: terminal_t](
+    f: iso_t(x, y),
+    g: iso_t(x, y),
+  ): eqv_t(iso_t(x, y), f, g) = {
+    y.morphism_unique(f, g)
   }
 }
