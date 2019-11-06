@@ -1,4 +1,5 @@
 develop category_t {
+
   class terminal_t extends object_t {
     morphism(x: object_t): morphism_t(x, this)
     morphism_unique(
@@ -8,12 +9,14 @@ develop category_t {
   }
 
   terminal_iso(x: terminal_t, y: terminal_t): iso_t(x, y) = {
-    f = x.morphism(y)
-    g = y.morphism(x)
+    f = y.morphism(x)
+    g = x.morphism(y)
     new iso_t(x, y) extends f {
       inverse = g
-      left_inverse = x.morphism_unique(compose(f, g), id(x))
-      right_inverse = y.morphism_unique(compose(g, f), id(y))
+      left_inverse =
+        x.morphism_unique(compose(f, g), id(x))
+      right_inverse =
+        y.morphism_unique(compose(g, f), id(y))
     }
   }
 
@@ -23,4 +26,5 @@ develop category_t {
   ): eqv_t(iso_t(x, y), f, g) = {
     y.morphism_unique(f, g)
   }
+
 }
