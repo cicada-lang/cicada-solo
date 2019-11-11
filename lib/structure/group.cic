@@ -1,5 +1,5 @@
 class group_t extends monoid_t {
-  inv(x: elem_t): eqv_t(elem_t, mul(id, x), x)
+  inv(x: elem_t): elem_t
   left_inv(x: elem_t): eqv_t(elem_t, mul(inv(x), x), id)
   right_inv(x: elem_t): eqv_t(elem_t, mul(x, inv(x)), id)
 }
