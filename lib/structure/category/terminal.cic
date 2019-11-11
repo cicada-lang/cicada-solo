@@ -14,8 +14,8 @@ develop category_t {
     new iso_t(x.object, y.object) {
       morphism = f
       inverse = g
-      left_inverse = x.morphism_unique(compose(f, g), id(x.object))
-      right_inverse = y.morphism_unique(compose(g, f), id(y.object))
+      inverse_left = x.morphism_unique(compose(f, g), id(x.object))
+      inverse_right = y.morphism_unique(compose(g, f), id(y.object))
     }
   }
 

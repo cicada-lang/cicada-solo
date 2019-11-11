@@ -6,8 +6,8 @@ class category_t {
     f: morphism_t(a, b),
     g: morphism_t(b, c),
   ): morphism_t(a, c)
-  left_id[a: object_t, b: object_t](f: morphism_t(a, b)): eqv_t(compose(id(a), f), f)
-  right_id[a: object_t, b: object_t](f: morphism_t(a, b)): eqv_t(compose(f, id(b)), f)
+  id_left[a: object_t, b: object_t](f: morphism_t(a, b)): eqv_t(compose(id(a), f), f)
+  id_right[a: object_t, b: object_t](f: morphism_t(a, b)): eqv_t(compose(f, id(b)), f)
   associative[a: object_t, b: object_t, c: object_t, d: object_t](
     f: morphism_t(a, b),
     g: morphism_t(b, c),
@@ -37,7 +37,7 @@ develop category_t {
   class iso_t {
     morphism[a: object_t, b: object_t]: morphism_t(a, b)
     inverse[a: object_t, b: object_t]: morphism_t(b, a)
-    left_inverse: eqv_t(compose(morphism, inverse), id(a))
-    right_inverse: eqv_t(compose(inverse, morphism), id(b))
+    inverse_left: eqv_t(compose(morphism, inverse), id(a))
+    inverse_right: eqv_t(compose(inverse, morphism), id(b))
   }
 }
