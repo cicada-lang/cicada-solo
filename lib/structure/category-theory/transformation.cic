@@ -4,7 +4,7 @@ class transformation_t {
   src: functor_t(dom, cod)
   tar: functor_t(dom, cod)
   component(a: dom.object_t): cod.morphism_t(src.map(a), tar.map(a))
-  natural(f: src.morphism_t(a, b)): eqv_t(
+  natural(f: dom.morphism_t(a, b)): eqv_t(
     cod.morphism_t(src.map(a), tar.map(b)),
     cod.compose(component(a), tar.fmap(f)),
     cod.compose(src.fmap(f), component(b)))
