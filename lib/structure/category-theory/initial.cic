@@ -1,7 +1,0 @@
-develop category_t {
-  class initial_t extends object_t {
-    TODO
-  }
-
-  TODO
-}

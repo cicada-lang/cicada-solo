@@ -4,7 +4,7 @@ class semigroup_t {
   associative(
     x: elem_t,
     y: elem_t,
-    z: elem_t
+    z: elem_t,
   ): eqv_t(
     elem_t,
     mul(x, mul(y, z)),

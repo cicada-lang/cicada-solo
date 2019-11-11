@@ -1,30 +1,32 @@
 develop category_t {
-
-  class terminal_t extends object_t {
-    morphism(x: object_t): morphism_t(x, this)
-    morphism_unique(
-      f: morphism_t(x, this),
-      g: morphism_t(x, this),
-    ): eqv_t(morphism_t(x, this), f, g)
+  class terminal_t {
+    object: object_t
+    morphism(x: object_t): morphism_t(x, object)
+    morphism_unique[x: object_t](
+      f: morphism_t(x, object),
+      g: morphism_t(x, object),
+    ): eqv_t(morphism_t(x, object), f, g)
   }
 
-  terminal_iso(x: terminal_t, y: terminal_t): iso_t(x, y) = {
-    f = y.morphism(x)
-    g = x.morphism(y)
-    new iso_t(x, y) extends f {
+  terminal_iso(x: terminal_t, y: terminal_t): iso_t(x.object, y.object) = {
+    f = x.morphism(y.object)
+    g = y.morphism(x.object)
+    new iso_t(x.object, y.object) {
+      morphism = f
       inverse = g
-      left_inverse =
-        x.morphism_unique(compose(f, g), id(x))
-      right_inverse =
-        y.morphism_unique(compose(g, f), id(y))
+      left_inverse = x.morphism_unique(compose(f, g), id(x.object))
+      right_inverse = y.morphism_unique(compose(g, f), id(y.object))
     }
   }
 
   terminal_iso_unique[x: terminal_t, y: terminal_t](
-    f: iso_t(x, y),
-    g: iso_t(x, y),
-  ): eqv_t(iso_t(x, y), f, g) = {
-    y.morphism_unique(f, g)
+    f: iso_t(x.object, y.object),
+    g: iso_t(x.object, y.object),
+  ): eqv_t(iso_t(x.object, y.object), f, g) = {
+    iso = new iso_t(x.object, y.object) {
+      morphism = y.morphism_unique(f, g)
+      inverse = y.morphism_unique(f, g)
+    }
+    same(iso)
   }
-
 }
