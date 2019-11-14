@@ -8,7 +8,7 @@ class category_t {
   ): morphism_t(a, c)
   id_left[a: object_t, b: object_t](f: morphism_t(a, b)): eqv_t(compose(id(a), f), f)
   id_right[a: object_t, b: object_t](f: morphism_t(a, b)): eqv_t(compose(f, id(b)), f)
-  associative[a: object_t, b: object_t, c: object_t, d: object_t](
+  compose_associative[a: object_t, b: object_t, c: object_t, d: object_t](
     f: morphism_t(a, b),
     g: morphism_t(b, c),
     h: morphism_t(c, d),
