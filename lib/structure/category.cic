@@ -1,7 +1,7 @@
 class category_t {
   object_t : type
-  morphism_t : { dom, cod : object_t --- type }
-  id : { a : object_t --- morphism_t(a, a) }
+  morphism_t : { dom, cod : object_t -> type }
+  id : { a : object_t -> morphism_t(a, a) }
   compose : {
     [ a, b, c : object_t ]
     f : morphism_t(a, b)

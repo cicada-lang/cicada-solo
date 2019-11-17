@@ -1,11 +1,14 @@
 develop category_t {
   class terminal_t {
     object : object_t
-    morphism(x : object_t) : morphism_t(x, object)
-    morphism_unique[x : object_t](
-      f : morphism_t(x, object),
-      g : morphism_t(x, object),
-    ) : eqv_t(morphism_t(x, object), f, g)
+    morphism : { x : object_t -> morphism_t(x, object) }
+    morphism_unique : {
+      [ x : object_t ]
+      f : morphism_t(x, object)
+      g : morphism_t(x, object)
+      ---------
+      eqv_t(morphism_t(x, object), f, g)
+    }
   }
 
   terminal_iso : {

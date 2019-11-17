@@ -1,8 +1,8 @@
 class functor_t {
   dom : category_t
   cod : category_t
-  map : { a : dom.object_t --- cod.object_t }
-  fmap : { f : dom.morphism_t(a, b) --- cod.morphism_t(map(a), map(b)) }
+  map : { a : dom.object_t -> cod.object_t }
+  fmap : { f : dom.morphism_t(a, b) -> cod.morphism_t(map(a), map(b)) }
   fmap_respect_compose : {
     f : dom.morphism_t(a, b)
     g : dom.morphism_t(b, c)
