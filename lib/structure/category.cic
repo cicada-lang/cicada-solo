@@ -1,31 +1,31 @@
 class category_t {
-  object_t: type
-  morphism_t: { dom, cod: object_t --- type }
-  id: { a: object_t --- morphism_t(a, a) }
-  compose: {
-    [ a, b, c: object_t ]
-    f: morphism_t(a, b)
-    g: morphism_t(b, c)
+  object_t : type
+  morphism_t : { dom, cod : object_t --- type }
+  id : { a : object_t --- morphism_t(a, a) }
+  compose : {
+    [ a, b, c : object_t ]
+    f : morphism_t(a, b)
+    g : morphism_t(b, c)
     ---------
     morphism_t(a, c)
   }
-  id_left: {
-    [ a, b: object_t ]
-    f: morphism_t(a, b)
+  id_left : {
+    [ a, b : object_t ]
+    f : morphism_t(a, b)
     ---------
     eqv_t(compose(id(a), f), f)
   }
-  id_right: {
-    [ a, b: object_t ]
-    f: morphism_t(a, b)
+  id_right : {
+    [ a, b : object_t ]
+    f : morphism_t(a, b)
     ---------
     eqv_t(compose(f, id(b)), f)
   }
-  compose_associative: {
-    [ a, b, c, d: object_t ]
-    f: morphism_t(a, b)
-    g: morphism_t(b, c)
-    h: morphism_t(c, d)
+  compose_associative : {
+    [ a, b, c, d : object_t ]
+    f : morphism_t(a, b)
+    g : morphism_t(b, c)
+    h : morphism_t(c, d)
     ---------
     eqv_t(compose(f, compose(g, h)), compose(compose(f, g), h))
   }
@@ -33,15 +33,15 @@ class category_t {
 
 develop category_t {
   class mono_t {
-    morphism: {
-      [ a, b: object_t ]
+    morphism : {
+      [ a, b : object_t ]
       ---------
       morphism_t(a, b)
     }
-    cancel_right: {
-      [ c: object_t ]
-      f: morphism_t(c, a)
-      g: morphism_t(c, a)
+    cancel_right : {
+      [ c : object_t ]
+      f : morphism_t(c, a)
+      g : morphism_t(c, a)
       eqv_t(compose(f, morphism), compose(g, morphism))
       ---------
       eqv_t(f, g)
@@ -49,15 +49,15 @@ develop category_t {
   }
 
   class epi_t {
-    morphism: {
-      [ a, b: object_t ]
+    morphism : {
+      [ a, b : object_t ]
       ---------
       morphism_t(a, b)
     }
-    cancel_left: {
-      [ c: object_t ]
-      f: morphism_t(b, c)
-      g: morphism_t(b, c)
+    cancel_left : {
+      [ c : object_t ]
+      f : morphism_t(b, c)
+      g : morphism_t(b, c)
       eqv_t(compose(morphism, f), compose(morphism, g))
       ---------
       eqv_t(f, g)
@@ -65,17 +65,17 @@ develop category_t {
   }
 
   class iso_t {
-    morphism: {
-      [ a, b: object_t ]
+    morphism : {
+      [ a, b : object_t ]
       ---------
       morphism_t(a, b)
     }
-    inverse: {
-      [ a, b: object_t ]
+    inverse : {
+      [ a, b : object_t ]
       ---------
       morphism_t(b, a)
     }
-    inverse_left: eqv_t(compose(morphism, inverse), id(a))
-    inverse_right: eqv_t(compose(inverse, morphism), id(b))
+    inverse_left : eqv_t(compose(morphism, inverse), id(a))
+    inverse_right : eqv_t(compose(inverse, morphism), id(b))
   }
 }
