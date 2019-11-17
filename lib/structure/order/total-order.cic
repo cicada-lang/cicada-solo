@@ -1,5 +1,9 @@
 class total_order_t extends partial_order_t {
-  connective(a : elem_t, b : elem_t) : either_t(pre_t(a, b), pre_t(b, a))
+  connective : {
+    a, b : elem_t
+    ---------
+    either_t(pre_t(a, b), pre_t(b, a))
+  }
 }
 
 // NOTE
