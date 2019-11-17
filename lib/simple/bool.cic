@@ -1,16 +1,16 @@
-datatype bool_t {
+bool_t : type = {
   case true
   case false
 }
 
-bool_not(x : bool_t) : bool_t = {
+bool_not : { x : bool_t -> bool_t } = {
   x choice {
     case true => false
     case false => true
   }
 }
 
-bool_and(x : bool_t, y : bool_t) : bool_t = {
+bool_and : { x, y : bool_t -> bool_t } = {
   x choice {
     case true => y choice {
       case true => true
@@ -20,7 +20,7 @@ bool_and(x : bool_t, y : bool_t) : bool_t = {
   }
 }
 
-bool_or(x : bool_t, y : bool_t) : bool_t = {
+bool_or : { x, y : bool_t -> bool_t } = {
   x choice {
     case true => true
     case false => y choice {

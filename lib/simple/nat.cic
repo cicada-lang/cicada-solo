@@ -1,25 +1,25 @@
 import * from "./bool.cic"
 
-datatype nat_t {
+nat_t : type = {
   case zero
   case succ(prev : nat_t)
 }
 
-nat_add(x : nat_t, y : nat_t) : nat_t = {
+nat_add : { x, y : nat_t -> nat_t } = {
   x choice {
     case zero => y
     case succ => succ(nat_add(x.prev, y))
   }
 }
 
-nat_mul(x : nat_t, y : nat_t) : nat_t = {
+nat_mul : { x, y : nat_t -> nat_t } = {
   x choice {
     case zero => zero
     case succ => nat_add(y, nat_mul(x.prev, y))
   }
 }
 
-nat_factorial(x : nat_t) : nat_t = {
+nat_factorial : { x : nat_t -> nat_t } = {
   x choice {
     case zero => succ(zero)
     case succ => nat_mul(x, nat_factorial(x.prev))
@@ -49,7 +49,7 @@ ten : nat_t = succ(nine)
 @assert_eq nat_factorial(two) two
 @assert_eq nat_factorial(three) six
 
-nat_even_p(x : nat_t) : bool_t = {
+nat_even_p : { x : nat_t -> bool_t } = {
   x choice {
     case zero => true
     case succ => x.prev choice {
