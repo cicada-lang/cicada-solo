@@ -8,7 +8,11 @@ develop category_t {
     ): eqv_t(morphism_t(x, object), f, g)
   }
 
-  terminal_iso(x: terminal_t, y: terminal_t): iso_t(x.object, y.object) = {
+  terminal_iso: {
+    x, y: terminal_t
+    ---------
+    iso_t(x.object, y.object)
+  } = {
     f = x.morphism(y.object)
     g = y.morphism(x.object)
     new iso_t(x.object, y.object) {
@@ -19,10 +23,13 @@ develop category_t {
     }
   }
 
-  terminal_iso_unique[x: terminal_t, y: terminal_t](
-    f: iso_t(x.object, y.object),
-    g: iso_t(x.object, y.object),
-  ): eqv_t(iso_t(x.object, y.object), f, g) = {
+  terminal_iso_unique: {
+    [ x, y: terminal_t ]
+    f: iso_t(x.object, y.object)
+    g: iso_t(x.object, y.object)
+    ---------
+    eqv_t(iso_t(x.object, y.object), f, g)
+  } = {
     iso = new iso_t(x.object, y.object) {
       morphism = y.morphism_unique(f, g)
       inverse = y.morphism_unique(f, g)
