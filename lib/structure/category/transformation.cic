@@ -3,23 +3,23 @@ class transformation_t {
   cod : category_t
   src : functor_t(dom, cod)
   tar : functor_t(dom, cod)
-  component : {
+  path : {
     a : dom.object_t
     ---------
     cod.morphism_t(src.map(a), tar.map(a))
   }
-  natural : {
+  naturality : {
     f : dom.morphism_t(a, b)
     ---------
     eqv_t(
       cod.morphism_t(src.map(a), tar.map(b)),
-      cod.compose(component(a), tar.fmap(f)),
-      cod.compose(src.fmap(f), component(b)))
+      cod.compose(path(a), tar.fmap(f)),
+      cod.compose(src.fmap(f), path(b)))
   }
 
   // NOTE
-  // component(a) : cod.morphism_t(src.map(a), tar.map(a))
+  // path(a)     : cod.morphism_t(src.map(a), tar.map(a))
   // tar.fmap(f) : cod.morphism_t(tar.map(a), tar.map(b))
   // src.fmap(f) : cod.morphism_t(src.map(a), src.map(b))
-  // component(b) : cod.morphism_t(src.map(b), tar.map(b))
+  // path(b)     : cod.morphism_t(src.map(b), tar.map(b))
 }
