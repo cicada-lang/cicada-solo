@@ -1,4 +1,4 @@
-class transformation_t {
+class natural_transformation_t {
   dom : category_t
   cod : category_t
   src : functor_t(dom, cod)
