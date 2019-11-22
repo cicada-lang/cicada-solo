@@ -18,4 +18,3 @@
 | sigma type | exists { x : t, ..., body[x, ...] }         |
 | record     | record { x = a, ..., z = c }                |
 | tuple      | tuple(x, ..., z)                            |
-|            |                                             |
