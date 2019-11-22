@@ -11,7 +11,7 @@ class natural_transformation_t {
   naturality : {
     f : dom.morphism_t(a, b)
     ---------
-    eqv_t(
+    the_eqv_t(
       cod.morphism_t(src.map(a), tar.map(b)),
       cod.compose(component(a), tar.fmap(f)),
       cod.compose(src.fmap(f), component(b)))

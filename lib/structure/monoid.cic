@@ -1,7 +1,7 @@
 class monoid_t extends semigroup_t {
   id : elem_t
-  id_left : { x : elem_t -> eqv_t(elem_t, mul(id, x), x) }
-  id_right : { x : elem_t -> eqv_t(elem_t, mul(x, id), x) }
+  id_left : { x : elem_t -> the_eqv_t(elem_t, mul(id, x), x) }
+  id_right : { x : elem_t -> the_eqv_t(elem_t, mul(x, id), x) }
 }
 
 develop monoid_t {

@@ -7,7 +7,7 @@ develop category_t {
       f : morphism_t(x, object)
       g : morphism_t(x, object)
       ---------
-      eqv_t(morphism_t(x, object), f, g)
+      the_eqv_t(morphism_t(x, object), f, g)
     }
   }
 
@@ -31,7 +31,7 @@ develop category_t {
     f : iso_t(x.object, y.object)
     g : iso_t(x.object, y.object)
     ---------
-    eqv_t(iso_t(x.object, y.object), f, g)
+    the_eqv_t(iso_t(x.object, y.object), f, g)
   } = {
     iso = new iso_t(x.object, y.object) {
       morphism = y.morphism_unique(f, g)
