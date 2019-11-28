@@ -1,0 +1,9 @@
+class semigroup_t {
+  elem_t : type
+  mul : { x, y : elem_t -> elem_t }
+  mul_associative : {
+    x, y, z : elem_t
+    ---------
+    eqv_t(mul(x, mul(y, z)), mul(mul(x, y), z))
+  }
+}

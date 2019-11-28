@@ -1,0 +1,13 @@
+class total_order_t extends partial_order_t {
+  connective : {
+    a, b : elem_t
+    ---------
+    either_t(pre_t(a, b), pre_t(b, a))
+  }
+}
+
+// NOTE
+// can implement
+// - quick sort
+// - bubble sort
+// - merge sort

@@ -1,0 +1,48 @@
+import * from "../simple/nat.cic"
+
+vec_t : { A : type; length : nat_t -> type } = {
+  case vec_null : vec_t(A, zero)
+  case vec_cons : {
+    [ n : nat_t ]
+    head : A
+    tail : vec_t(A, n)
+    ---------
+    vec_t(A, succ(n))
+  }
+}
+
+vec_append : {
+  [ A : type
+    m, n : nat_t ]
+  x : vec_t(A, m)
+  y : vec_t(A, n)
+  ---------
+  vec_t(A, nat_add(m, n))
+} = {
+  x choice {
+    case vec_null => y
+    case vec_cons => vec_cons(x.head, vec_append(x.tail, y))
+  }
+}
+
+vec_map : {
+  [ A, B : type
+    n : nat_t ]
+  f : { A -> B }
+  x : vec_t(A, n)
+  ---------
+  vec_t(B, n)
+} = {
+  x choice {
+    case vec_null => x
+    case vec_cons => vec_cons(f(x.head), vec_map(f, x.tail))
+  }
+}
+
+three_zeros : vec_t(nat_t, three) = {
+  vec_cons(zero, vec_cons(zero, vec_cons(zero, vec_null)))
+}
+
+three_ones : vec_t(nat_t, three) = {
+  vec_cons(one, vec_cons(one, vec_cons(one, vec_null)))
+}

@@ -1,0 +1,41 @@
+class group_t extends monoid_t {
+  inv(x : elem_t) : elem_t
+  left_inv(x : elem_t) : the_eqv_t(elem_t, mul(inv(x), x), id)
+  right_inv(x : elem_t) : the_eqv_t(elem_t, mul(x, inv(x)), id)
+}
+
+develop group_t {
+  div(x : elem_t, y : elem_t) : elem_t = mul(x, inv(y))
+}
+
+// TODO
+
+class group_hom_t(dom : group_t, cod : group_t) {
+  hom(dom.elem_t) : cod.elem_t
+  hom_respect_mul(x : dom.elem_t, y : dom.elem_t) : the_eqv_t(
+    cod.elem_t,
+    hom(dom.mul(x, y)),
+    cod.mul(hom(x), hom(y)))
+}
+
+id_group_hom(dom : group_t) : group_hom_t(dom, dom) = new group_hom_t(dom, dom) {
+  dom, dom,
+  (x : dom.elem_t) : dom.elem_t => x,
+  (x : dom.elem_t, y : dom.elem_t) => same(dom.mul(x, y)),
+}
+
+group_category : category_t = new category_t(
+  group_t,
+  group_hom_t,
+  id_group_hom,
+
+  (f : group_hom_t(a, b), g : group_hom_t(b, c)) => new group_hom_t(a, c) {
+    (x : a.elem_t) => { g.hom(f.hom(x)) },
+    (x : a.elem_t, y : a.elem_t) => same(g.hom(b.mul(f.hom(x), f.hom(y))))
+  },
+
+  (f : group_hom_t(a, b)) => same(f),
+  (f : group_hom_t(a, b)) => same(f),
+
+  (f : group_hom_t(a, b), g : group_hom_t(b, c), h : group_hom_t(c, d)) => refl
+)

@@ -1,0 +1,21 @@
+class natural_transformation_t {
+  let dom : category_t
+  let cod : category_t
+  let src : functor_t(dom, cod)
+  let tar : functor_t(dom, cod)
+  let component : {
+    given a : dom.object_t
+    conclude cod.morphism_t(src.map(a), tar.map(a))
+  }
+  let naturality : {
+    given f : dom.morphism_t(a, b)
+    check component(a) : cod.morphism_t(src.map(a), tar.map(a))
+    check tar.fmap(f)  : cod.morphism_t(tar.map(a), tar.map(b))
+    check src.fmap(f)  : cod.morphism_t(src.map(a), src.map(b))
+    check component(b) : cod.morphism_t(src.map(b), tar.map(b))
+    conclude the_eqv_t(
+      cod.morphism_t(src.map(a), tar.map(b)),
+      cod.compose(component(a), tar.fmap(f)),
+      cod.compose(src.fmap(f), component(b)))
+  }
+}

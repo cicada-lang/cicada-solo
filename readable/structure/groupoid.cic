@@ -1,0 +1,4 @@
+class groupoid_t extends category_t {
+  inv(f : morphism_t(a, b)) : morphism_t(b, a)
+  inv_iso(f : morphism_t(a, b)) : iso_t(f, inv(f))
+}

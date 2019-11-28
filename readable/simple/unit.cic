@@ -1,0 +1,5 @@
+class unit_t {}
+
+unit : unit_t = new unit_t
+
+@assert_eq unit unit_t

@@ -1,0 +1,16 @@
+class monoid_t extends semigroup_t {
+  id : elem_t
+  id_left : { x : elem_t -> the_eqv_t(elem_t, mul(id, x), x) }
+  id_right : { x : elem_t -> the_eqv_t(elem_t, mul(x, id), x) }
+}
+
+develop monoid_t {
+  as_category : category_t = category_t(
+    unit_t,
+    (_ : unit_t, _ : unit_t) : unit_t => elem_t,
+    (_ : unit_t) : elem_t => id,
+    mul,
+    id_left,
+    id_left,
+    associative)
+}

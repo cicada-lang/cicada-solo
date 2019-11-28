@@ -1,0 +1,16 @@
+class pre_order_t {
+  elem_t : type
+  pre_t : { elem_t; elem_t -> type }
+  reflexive : { a : elem_t -> pre_t(a, a) }
+  transitive : { pre_t(a, b); pre_t(b, c) -> pre_t(a, c) }
+}
+
+develop pre_order_t {
+  strict_pre_t : { a, b : elem_t -> type } = {
+    pre_t(a, b) & not_eqv_t(elem_t, a, b)
+  }
+}
+
+// NOTE
+// thin category
+// hom_set(A, B).size <= 1

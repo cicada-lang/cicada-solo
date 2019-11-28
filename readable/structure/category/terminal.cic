@@ -1,0 +1,39 @@
+develop category_t {
+  class terminal_t {
+    let object : object_t
+    let morphism : { given x : object_t -> morphism_t(x, object) }
+    let morphism_unique : {
+      suppose x : object_t
+      given f : morphism_t(x, object)
+      given g : morphism_t(x, object)
+      conclude the_eqv_t(morphism_t(x, object), f, g)
+    }
+  }
+
+  let terminal_iso : {
+    given x, y : terminal_t
+    conclude iso_t(x.object, y.object)
+  } = {
+    let f = x.morphism(y.object)
+    let g = y.morphism(x.object)
+    return new iso_t(x.object, y.object) {
+      morphism = f
+      inverse = g
+      inverse_left = x.morphism_unique(compose(f, g), id(x.object))
+      inverse_right = y.morphism_unique(compose(g, f), id(y.object))
+    }
+  }
+
+  let terminal_iso_unique : {
+    suppose x, y : terminal_t
+    given f : iso_t(x.object, y.object)
+    given g : iso_t(x.object, y.object)
+    conclude the_eqv_t(iso_t(x.object, y.object), f, g)
+  } = {
+    let iso = new iso_t(x.object, y.object) {
+      let morphism = y.morphism_unique(f, g)
+      let inverse = y.morphism_unique(f, g)
+    }
+    return same(iso)
+  }
+}

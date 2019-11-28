@@ -1,0 +1,47 @@
+import * from "../simple/bool.cic"
+import * from "../simple/nat.cic"
+
+list_t : { A : type -> type } = {
+  case null : list_t(A)
+  case cons(head : A, tail : list_t(A)) : list_t(A)
+}
+
+list_length : { x : list_t -> nat_t } = {
+  x choice {
+    case null => zero
+    case cons => succ(list_length(x.tail))
+  }
+}
+
+list_append : {
+  [ A : type ]
+  x, y : list_t(A)
+  ---------
+  list_t(A)
+} = {
+  x choice {
+    case null => y
+    case cons => cons(x.head, list_append(x.tail, y))
+  }
+}
+
+list_map : {
+  [ A, B : type ]
+  f : { A -> B }
+  x : list_t(A)
+  ---------
+  list_t(B)
+} = {
+  x choice {
+    case null => null
+    case cons => cons(f(x.head), list_map(f, x.tail))
+  }
+}
+
+three_zeros : list_t(nat_t) = {
+  cons(zero, cons(zero, cons(zero, null)))
+}
+
+three_ones : list_t(nat_t) = {
+  cons(one, cons(one, cons(one, null)))
+}

@@ -1,0 +1,24 @@
+class partial_order_t extends pre_order_t {
+  antisymmetric : {
+    pre_t(a, b)
+    pre_t(b, a)
+    ---------
+    eqv_t(a, b)
+  }
+}
+
+develop partial_order_t {
+  cover_t : { a, b : elem_t -> type } = {
+    strict_pre_t(a, b) &
+      { x : elem_t
+        pre_t(a, x)
+        strict_pre_t(x, b)
+        ---------
+        eqv_t(elem_t, x, a) }
+  }
+}
+
+// NOTE
+// no cycle
+// can implement
+// - topological sort

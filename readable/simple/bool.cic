@@ -1,0 +1,44 @@
+bool_t : type = {
+  case true
+  case false
+}
+
+bool_not : { x : bool_t -> bool_t } = {
+  x choice {
+    case true => false
+    case false => true
+  }
+}
+
+bool_and : { x, y : bool_t -> bool_t } = {
+  x choice {
+    case true => y choice {
+      case true => true
+      case false => false
+    }
+    case false => false
+  }
+}
+
+bool_or : { x, y : bool_t -> bool_t } = {
+  x choice {
+    case true => true
+    case false => y choice {
+      case true => true
+      case false => false
+    }
+  }
+}
+
+@assert_eq bool_not(true) false
+@assert_eq bool_not(false) true
+
+@assert_eq bool_and(true, true) true
+@assert_eq bool_and(true, false) false
+@assert_eq bool_and(false, true) false
+@assert_eq bool_and(false, false) false
+
+@assert_eq bool_or(true, true) true
+@assert_eq bool_or(true, false) true
+@assert_eq bool_or(false, true) true
+@assert_eq bool_or(false, false) false

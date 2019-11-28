@@ -1,0 +1,66 @@
+import * from "./bool.cic"
+
+nat_t : type = {
+  case zero
+  case succ(prev : nat_t)
+}
+
+nat_add : { x, y : nat_t -> nat_t } = {
+  x choice {
+    case zero => y
+    case succ => succ(nat_add(x.prev, y))
+  }
+}
+
+nat_mul : { x, y : nat_t -> nat_t } = {
+  x choice {
+    case zero => zero
+    case succ => nat_add(y, nat_mul(x.prev, y))
+  }
+}
+
+nat_factorial : { x : nat_t -> nat_t } = {
+  x choice {
+    case zero => succ(zero)
+    case succ => nat_mul(x, nat_factorial(x.prev))
+  }
+}
+
+one : nat_t = succ(zero)
+two : nat_t = succ(one)
+three : nat_t = succ(two)
+four : nat_t = succ(three)
+five : nat_t = succ(four)
+six : nat_t = succ(five)
+seven : nat_t = succ(six)
+eight : nat_t = succ(seven)
+nine : nat_t = succ(eight)
+ten : nat_t = succ(nine)
+
+@assert_eq nat_add(one, one) two
+@assert_eq nat_add(two, two) four
+@assert_eq nat_add(three, three) six
+
+@assert_eq nat_mul(one, one) one
+@assert_eq nat_mul(two, two) four
+@assert_eq nat_mul(three, three) nine
+
+@assert_eq nat_factorial(one) one
+@assert_eq nat_factorial(two) two
+@assert_eq nat_factorial(three) six
+
+nat_even_p : { x : nat_t -> bool_t } = {
+  x choice {
+    case zero => true
+    case succ => x.prev choice {
+      case zero => false
+      case succ => nat_even_p(x.prev.prev)
+    }
+  }
+}
+
+@assert_eq nat_even_p(one) false
+@assert_eq nat_even_p(two) true
+@assert_eq nat_even_p(three) false
+@assert_eq nat_even_p(four) true
+@assert_eq nat_even_p(five) false
