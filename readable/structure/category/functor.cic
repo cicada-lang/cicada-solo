@@ -1,13 +1,13 @@
 class functor_t {
-  let dom : category_t
-  let cod : category_t
-  let map : { given a : dom.object_t conclude cod.object_t }
-  let fmap : {
+  given dom : category_t
+  given cod : category_t
+  given map : { given a : dom.object_t conclude cod.object_t }
+  given fmap : {
     suppose a, b : dom.object_t
     given f : dom.morphism_t(a, b)
     conclude cod.morphism_t(map(a), map(b))
   }
-  let fmap_respect_compose : {
+  given fmap_respect_compose : {
     given f : dom.morphism_t(a, b)
     given g : dom.morphism_t(b, c)
     conclude the_eqv_t(
@@ -15,7 +15,7 @@ class functor_t {
       fmap(dom.compose(f, g)),
       cod.compose(fmap(f), fmap(g)))
   }
-  let fmap_respect_id : {
+  given fmap_respect_id : {
     given a : dom.object_t
     conclude the_eqv_t(
       cod.morphism_t(map(a), map(a)),

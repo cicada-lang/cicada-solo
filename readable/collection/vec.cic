@@ -11,6 +11,38 @@ vec_t : { A : type; length : nat_t -> type } = {
   }
 }
 
+let vec_t = class {
+  let A : type
+  let length : nat_t
+}
+
+let vec_null_t = class extends vec_t {
+  let length = zero
+}
+
+let vec_cons_t = class extends vec_t {
+  let n : nat_t
+  let length = succ(n)
+  let head : A
+  let tail : vec_t(A, n)
+}
+
+class vec_t {
+  given A : type
+  given length : nat_t
+}
+
+class vec_null_t extends vec_t {
+  let length = zero
+}
+
+class vec_cons_t extends vec_t {
+  given n : nat_t
+  let length = succ(n)
+  given head : A
+  given tail : vec_t(A, n)
+}
+
 vec_append : {
   [ A : type
     m, n : nat_t ]
