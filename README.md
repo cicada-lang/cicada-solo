@@ -6,7 +6,6 @@ A programming language as formal deduction system for the foundations of mathema
 
 - [How I became interested in foundations of mathematics](https://inner.xieyuheng.now.sh/person/vladimir-voevodsky/how-i-became-interested-in-foundations-of-mathematics)
   - by Vladimir Voevodsky, at the 9th Asian Science Camp, Thailand, 2015
-
 - [Lecture about Univalent Foundations at the Institut Henri Poincaré](https://inner.xieyuheng.now.sh/person/vladimir-voevodsky/lecture-about-univalent-foundations-at-the-institut-henri-poincar%C3%A9)
   - by Vladimir Voevodsky, at the Institut Henri Poincaré, 2014
 
