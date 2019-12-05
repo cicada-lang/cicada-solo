@@ -1,8 +1,16 @@
 # Cicada
 
-> 唯夫蟬之清素兮 潛厥類乎太陰 <br>
-> 在炎陽之仲夏兮 始游豫乎芳林 <br>
-> 實淡泊而寡欲兮 獨咍樂而長吟 <br>
-> 聲噭噭而彌厲兮 似貞士之介心 <br>
-> 內含和而弗食兮 與眾物而無求 <br>
-> 棲高枝而仰首兮 賴朝露之清流 <br>
+## Community
+
+Contributions are welcome, see [current TODO list](TODO.md) for tasks. <br>
+(Please add yourself to [the AUTHORS list](AUTHORS) if you made any contributions.)
+
+- We enforce C4 as collaboration protocol.
+  - [The C4 RFC](https://rfc.zeromq.org/spec:42/C4)
+- [Style Guide](STYLE-GUIDE.md)
+  - Observe the style of existing code and respect it.
+- [Code of Conduct](CODE-OF-CONDUCT.md)
+
+## License
+
+- [GPLv3](LICENSE)
