@@ -1,1 +1,0 @@
-- no subtyping (just like the pure agda)
