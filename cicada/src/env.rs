@@ -7,5 +7,5 @@ use crate::val::Val;
 #[derive (Debug)]
 #[derive (PartialEq, Eq)]
 pub struct Env {
-    val_map: HashMap<String, Arc<Val>>
+    pub val_map: HashMap<String, Arc<Val>>
 }

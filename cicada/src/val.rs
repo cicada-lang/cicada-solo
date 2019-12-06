@@ -17,5 +17,5 @@ pub enum Val {
          env: Env },
     Class { fields: Vec<String>, type_map: HashMap<String, Arc<Exp>>,
             env: Env },
-    Object { fields: Vec<String>, val_map: HashMap<String, Arc<Exp>> },
+    Object { fields: Vec<String>, val_map: HashMap<String, Arc<Val>> },
 }

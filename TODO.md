@@ -1,16 +1,13 @@
-# rust
-- use module system
-- eval use exception instead of `Result`
 # partech
 - Lexer
 - Sym and Span
 - Parser
-- Earley
+- Partech
+- earley
 # cicada
-- Env
-- Ctx
-- Exp
 - Exp use cofree
 - eval
 - check
 - infer
+- readback
+- equivalent

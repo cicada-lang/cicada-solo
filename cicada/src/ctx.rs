@@ -7,5 +7,5 @@ use crate::val::Val;
 #[derive (Debug)]
 #[derive (PartialEq, Eq)]
 pub struct Ctx {
-    type_map: HashMap<String, Arc<Val>>
+    pub type_map: HashMap<String, Arc<Val>>
 }
