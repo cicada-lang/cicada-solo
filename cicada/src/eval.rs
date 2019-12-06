@@ -27,11 +27,11 @@ pub fn eval(env: &Env, exp: &Exp) -> Result<Arc<Val>, Err> {
         Exp::Type {} => {
             Ok(Arc::new(Val::Type {}))
         }
-        Exp::Pi { arg_name, arg_type, dep_type_gen } => {
+        Exp::Pi { arg_name, arg_type, ret_type } => {
             Ok(Arc::new(Val::Pi {
                 arg_name: arg_name.clone(),
                 arg_type: arg_type.clone(),
-                dep_type_gen: dep_type_gen.clone(),
+                ret_type: ret_type.clone(),
                 env: env.clone(),
             }))
         }
@@ -53,8 +53,8 @@ pub fn eval(env: &Env, exp: &Exp) -> Result<Arc<Val>, Err> {
                         }
                     }))
                 }
-                fun => {
-                    apply(fun, eval(env, arg)?.as_ref())
+                val => {
+                    val_apply(val, eval(env, arg)?.as_ref())
                 }
             }
         }
@@ -85,7 +85,7 @@ pub fn eval(env: &Env, exp: &Exp) -> Result<Arc<Val>, Err> {
                         }
                     }))
                 }
-                object => {
+                val => {
                     unimplemented!()
                 }
             }
@@ -93,6 +93,6 @@ pub fn eval(env: &Env, exp: &Exp) -> Result<Arc<Val>, Err> {
     }
 }
 
-pub fn apply(fun: &Val, arg: &Val) -> Result<Arc<Val>, Err> {
+pub fn val_apply(val: &Val, arg: &Val) -> Result<Arc<Val>, Err> {
     unimplemented!()
 }

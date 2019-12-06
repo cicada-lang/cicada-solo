@@ -11,7 +11,7 @@ use crate::neu::Neu;
 pub enum Val {
     Neu { neu: Neu },
     Type {},
-    Pi { arg_name: String, arg_type: Arc<Exp>, dep_type_gen: Arc<Exp>,
+    Pi { arg_name: String, arg_type: Arc<Exp>, ret_type: Arc<Exp>,
          env: Env },
     Fn { arg_name: String, arg_type: Arc<Exp>, body: Arc<Exp>,
          env: Env },

@@ -7,7 +7,7 @@ use std::collections::HashMap;
 pub enum Exp {
     Var { name: String },
     Type {},
-    Pi { arg_name: String, arg_type: Arc<Exp>, dep_type_gen: Arc<Exp> },
+    Pi { arg_name: String, arg_type: Arc<Exp>, ret_type: Arc<Exp> },
     Fn { arg_name: String, arg_type: Arc<Exp>, body: Arc<Exp> },
     Ap { target: Arc<Exp>, arg: Arc<Exp> },
     Class { fields: Vec<String>, type_map: HashMap<String, Arc<Exp>> },
