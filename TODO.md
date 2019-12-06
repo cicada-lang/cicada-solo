@@ -7,8 +7,7 @@
 - support `let` and `define`
 - test eval
 # partech
-- Lexer
-- Sym and Span
+- Lexer & Token
 - Parser
 - Partech
 - earley
