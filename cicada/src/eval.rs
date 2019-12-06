@@ -1,6 +1,10 @@
 use crate::exp::Exp;
-use crate::val::{ Val, Neu };
+use crate::val::Val;
+use crate::neu::Neu;
 use crate::env::Env;
+
+// TODO
+#[allow(unused_variables)]
 
 pub fn eval(env: &Env, exp: &Exp) -> Val {
     match exp {

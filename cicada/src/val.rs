@@ -3,6 +3,7 @@ use std::collections::HashMap;
 
 use crate::exp::Exp;
 use crate::env::Env;
+use crate::neu::Neu;
 
 #[derive (Clone)]
 #[derive (Debug)]
@@ -17,13 +18,4 @@ pub enum Val {
     Class { fields: Vec<String>, type_map: HashMap<String, Arc<Exp>>,
             env: Env },
     Object { fields: Vec<String>, val_map: HashMap<String, Arc<Exp>> },
-}
-
-#[derive (Clone)]
-#[derive (Debug)]
-#[derive (PartialEq, Eq)]
-pub enum Neu {
-    Var { name: String },
-    Ap { target: Arc<Neu>, arg: Arc<Exp> },
-    Dot { target: Arc<Neu>, field: String },
 }
