@@ -1,9 +1,9 @@
 use std::sync::Arc;
 use std::collections::HashMap;
 
-#[derive (Clone)]
-#[derive (Debug)]
-#[derive (PartialEq, Eq)]
+#[derive(Clone)]
+#[derive(Debug)]
+#[derive(PartialEq, Eq)]
 pub enum Exp {
     Var { name: String },
     Type {},

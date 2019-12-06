@@ -5,9 +5,9 @@ use crate::exp::Exp;
 use crate::env::Env;
 use crate::neu::Neu;
 
-#[derive (Clone)]
-#[derive (Debug)]
-#[derive (PartialEq, Eq)]
+#[derive(Clone)]
+#[derive(Debug)]
+#[derive(PartialEq, Eq)]
 pub enum Val {
     Neu { neu: Neu },
     Type {},
