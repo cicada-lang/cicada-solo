@@ -5,6 +5,5 @@ mod val;
 mod neu;
 mod env;
 mod ctx;
-mod err;
+mod error;
 mod eval;
-

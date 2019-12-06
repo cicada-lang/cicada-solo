@@ -5,12 +5,12 @@ use crate::exp::Exp;
 use crate::val::Val;
 use crate::neu::Neu;
 use crate::env::Env;
-use crate::err::Err;
+use crate::error::Error;
 
-pub fn eval(env: &Env, exp: &Exp) -> Result<Arc<Val>, Err> {
+pub fn eval(env: &Env, exp: &Exp) -> Result<Arc<Val>, Error> {
     match exp {
         Exp::Var { name } => {
-            match env.val_map.get(name) {
+            match env.lookup_val(name) {
                 Some(val) => { Ok(val.clone()) }
                 None => {
                     Ok(Arc::new(Val::Neu {
@@ -90,10 +90,43 @@ pub fn eval(env: &Env, exp: &Exp) -> Result<Arc<Val>, Err> {
     }
 }
 
-pub fn val_ap(val: &Val, arg: &Val) -> Result<Arc<Val>, Err> {
-    unimplemented!()
+pub fn val_ap(val: &Val, arg: &Val) -> Result<Arc<Val>, Error> {
+    match val {
+        Val::Fn { arg_name, body, env, .. } => {
+            eval(&env.ext(arg_name.clone(), Arc::new(arg.clone())), body)
+        }
+        _ => {
+            Err(Error {
+                msg: String::from(format!(
+                    "expecting Val::Fn, but found: {:?}", val
+                )),
+            })
+        }
+    }
 }
 
-pub fn val_dot(val: &Val, field: &String) -> Result<Arc<Val>, Err> {
-    unimplemented!()
+pub fn val_dot(val: &Val, field: &String) -> Result<Arc<Val>, Error> {
+    match val {
+        Val::Object { val_map, .. } => {
+            match val_map.get(field) {
+                Some(val) => {
+                    Ok(val.clone())
+                }
+                None => {
+                    Err(Error {
+                        msg: String::from(format!(
+                            "undefined field: {:?}", field
+                        )),
+                    })
+                }
+            }
+        }
+        _ => {
+            Err(Error {
+                msg: String::from(format!(
+                    "expecting Val::Object, but found: {:?}", val
+                )),
+            })
+        }
+    }
 }

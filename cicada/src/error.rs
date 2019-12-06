@@ -1,3 +1,3 @@
-pub struct Err {
+pub struct Error {
     pub msg: String,
 }
