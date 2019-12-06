@@ -59,13 +59,13 @@ fn test_rule_equality() {
         ])
     }
 
-    assert_ne!(exp1(), exp2());
-    assert_ne!(
-        Sym::Ap(non_empty_list, vec![Sym::Fn(exp1)]),
-        Sym::Ap(non_empty_list, vec![Sym::Fn(exp2)]));
-
     assert_eq!(exp1(), exp1());
+    assert_ne!(exp1(), exp2());
+
     assert_eq!(
         Sym::Ap(non_empty_list, vec![Sym::Fn(exp1)]),
         Sym::Ap(non_empty_list, vec![Sym::Fn(exp1)]));
+    assert_ne!(
+        Sym::Ap(non_empty_list, vec![Sym::Fn(exp1)]),
+        Sym::Ap(non_empty_list, vec![Sym::Fn(exp2)]));
 }
