@@ -7,9 +7,6 @@ use crate::neu::Neu;
 use crate::env::Env;
 use crate::err::Err;
 
-// TODO
-#[allow(unused_variables)]
-
 pub fn eval(env: &Env, exp: &Exp) -> Result<Arc<Val>, Err> {
     match exp {
         Exp::Var { name } => {
@@ -54,7 +51,7 @@ pub fn eval(env: &Env, exp: &Exp) -> Result<Arc<Val>, Err> {
                     }))
                 }
                 val => {
-                    val_apply(val, eval(env, arg)?.as_ref())
+                    val_ap(val, eval(env, arg)?.as_ref())
                 }
             }
         }
@@ -86,13 +83,17 @@ pub fn eval(env: &Env, exp: &Exp) -> Result<Arc<Val>, Err> {
                     }))
                 }
                 val => {
-                    unimplemented!()
+                    val_dot(val, &field)
                 }
             }
         }
     }
 }
 
-pub fn val_apply(val: &Val, arg: &Val) -> Result<Arc<Val>, Err> {
+pub fn val_ap(val: &Val, arg: &Val) -> Result<Arc<Val>, Err> {
+    unimplemented!()
+}
+
+pub fn val_dot(val: &Val, field: &String) -> Result<Arc<Val>, Err> {
     unimplemented!()
 }
