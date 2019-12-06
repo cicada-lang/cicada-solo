@@ -11,6 +11,11 @@ pub struct Env {
 }
 
 impl Env {
+    pub fn new() -> Env {
+        let val_map = HashMap::new();
+        Env { val_map }
+    }
+
     pub fn lookup_val(&self, field: &String) -> Option<Arc<Val>> {
         match self.val_map.get(field) {
             Some(val) => {

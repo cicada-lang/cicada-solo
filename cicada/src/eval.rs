@@ -130,3 +130,11 @@ pub fn val_dot(val: &Val, field: &String) -> Result<Arc<Val>, Error> {
         }
     }
 }
+
+#[test]
+fn test_eval() {
+    let env = Env::new();
+    let exp = Exp::Var { name: String::from("x") };
+
+    println!("{:?}", eval(&env, &exp));
+}
