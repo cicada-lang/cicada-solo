@@ -1,3 +1,6 @@
+# rust
+- use module system
+- eval use exception instead of `Result`
 # partech
 - Lexer
 - Sym and Span
@@ -8,4 +11,6 @@
 - Ctx
 - Exp
 - Exp use cofree
-- Eval
+- eval
+- check
+- infer
