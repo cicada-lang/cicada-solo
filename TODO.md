@@ -1,3 +1,11 @@
+# plan
+- finish partech
+- test this simple eval
+- support multi args (no currying)
+  - Pi -- `given` and `conclude`
+  - Fn -- `given` and `return`
+- support `let` and `define`
+- test eval
 # partech
 - Lexer
 - Sym and Span
@@ -6,7 +14,6 @@
 - earley
 # cicada
 - Exp use cofree
-- eval
 - check
 - infer
 - readback
