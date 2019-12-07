@@ -4,6 +4,6 @@ use crate::span::Span;
 #[derive(Debug)]
 #[derive(PartialEq, Eq)]
 pub struct Token <'a> {
-    pub string: &'a str,
+    pub word: &'a str,
     pub span: Span,
 }

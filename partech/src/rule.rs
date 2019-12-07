@@ -3,17 +3,17 @@
 #[derive(PartialEq, Eq)]
 pub struct Rule {
     pub name: String,
-    pub choices: Vec<(String, Vec<Sym>)>,
+    pub choices: Vec<(String, Vec<Symbol>)>,
 }
 
 impl Rule {
     pub fn new(
         name: &str,
-        choices: Vec<(&str, Vec<Sym>)>,
+        choices: Vec<(&str, Vec<Symbol>)>,
     ) -> Rule {
         let mut cloned_choices = Vec::new();
-        for (choice_name, syms) in choices {
-            cloned_choices.push((String::from(choice_name), syms));
+        for (choice_name, symbols) in choices {
+            cloned_choices.push((String::from(choice_name), symbols));
         }
         Rule {
             name: String::from(name),
@@ -25,12 +25,18 @@ impl Rule {
 #[derive(Clone)]
 #[derive(Debug)]
 #[derive(PartialEq, Eq)]
-pub enum Sym {
-    Str(String),
+pub enum Symbol {
+    Word(String),
     Rule(Rule),
     Fn(fn () -> Rule),
-    Ap(fn (Vec<Sym>) -> Rule, Vec<Sym>),
+    Ap(fn (Vec<Symbol>) -> Rule, Vec<Symbol>),
     WordPred(WordPred),
+}
+
+impl Symbol {
+    pub fn word(word: &'static str) -> Symbol {
+        Symbol::Word(String::from(word))
+    }
 }
 
 #[derive(Clone)]
@@ -47,15 +53,15 @@ fn test_rule_equality() {
 
     fn exp1() -> Rule {
         Rule::new("exp1", vec![
-            ("fn", vec![]),
-            ("ap", vec![Sym::Fn(exp1)]),
+            ("fn", vec![Symbol::word("fn")]),
+            ("ap", vec![Symbol::Fn(exp1)]),
         ])
     }
 
     fn exp2() -> Rule {
         Rule::new("exp2", vec![
-            ("fn", vec![]),
-            ("ap", vec![Sym::Fn(exp2)]),
+            ("fn", vec![Symbol::word("fn")]),
+            ("ap", vec![Symbol::Fn(exp2)]),
         ])
     }
 
@@ -63,9 +69,9 @@ fn test_rule_equality() {
     assert_ne!(exp1(), exp2());
 
     assert_eq!(
-        Sym::Ap(non_empty_list, vec![Sym::Fn(exp1)]),
-        Sym::Ap(non_empty_list, vec![Sym::Fn(exp1)]));
+        Symbol::Ap(non_empty_list, vec![Symbol::Fn(exp1)]),
+        Symbol::Ap(non_empty_list, vec![Symbol::Fn(exp1)]));
     assert_ne!(
-        Sym::Ap(non_empty_list, vec![Sym::Fn(exp1)]),
-        Sym::Ap(non_empty_list, vec![Sym::Fn(exp2)]));
+        Symbol::Ap(non_empty_list, vec![Symbol::Fn(exp1)]),
+        Symbol::Ap(non_empty_list, vec![Symbol::Fn(exp2)]));
 }
