@@ -9,7 +9,6 @@ pub trait Lexer {
     fn lex<'a>(&self, text: &'a str) -> Result<Vec<Token<'a>>, ErrorDuringParsing> {
         let mut remain = text;
         let mut tokens = vec![];
-
         while remain.len() > 0 {
             remain = self.ignorer(remain);
             match self.word_matcher(remain) {
@@ -32,7 +31,6 @@ pub trait Lexer {
                 }
             }
         }
-
         Ok(tokens)
     }
 }
@@ -59,6 +57,4 @@ fn test_common_lexer() {
 
     let result = CommonLexer.lex(r#"a "b c"#);
     assert!(result.is_err());
-
-
 }

@@ -1,7 +1,10 @@
+#![allow(dead_code)]
+
 mod span;
 mod token;
 mod rule;
 mod lexer;
+mod tree;
 mod parser;
 mod partech;
 mod earley;

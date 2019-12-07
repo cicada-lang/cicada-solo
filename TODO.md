@@ -7,8 +7,7 @@
 - support `let` and `define`
 - test eval
 # partech
-- Parser
-- Partech
+- tree_matcher
 - earley
 # cicada
 - Exp use cofree
