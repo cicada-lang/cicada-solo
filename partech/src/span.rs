@@ -2,6 +2,6 @@
 #[derive(Debug)]
 #[derive(PartialEq, Eq)]
 pub struct Span {
-    lo: usize,
-    hi: usize,
+    pub lo: usize,
+    pub hi: usize,
 }

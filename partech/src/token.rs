@@ -3,7 +3,7 @@ use crate::span::Span;
 #[derive(Clone)]
 #[derive(Debug)]
 #[derive(PartialEq, Eq)]
-pub struct Token {
-    string: String,
-    span: Span,
+pub struct Token <'a> {
+    pub string: &'a str,
+    pub span: Span,
 }
