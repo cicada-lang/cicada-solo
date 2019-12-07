@@ -1,6 +1,6 @@
 # Cicada
 
-A programming language as formal deduction system for the foundations of mathematics.
+A nascent programming language as formal deduction system for the foundations of mathematics.
 
 ## References
 
