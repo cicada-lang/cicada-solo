@@ -5,6 +5,6 @@ use crate::error::ErrorDuringParsing;
 
 pub trait Partech {
     fn parse_tokens_by_rule<'a>(
-        &self, tokens: Vec<Token>, rule: &Rule,
+        &self, tokens: Vec<Token<'a>>, rule: &'a Rule<'a>,
     ) -> Result<Tree<'a>, ErrorDuringParsing>;
 }

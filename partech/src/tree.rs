@@ -7,7 +7,7 @@ use crate::rule::Rule;
 pub enum Tree <'a> {
     Word(String),
     Node {
-        rule: &'a Rule,
+        rule: &'a Rule<'a>,
         choice_name: String,
         children: Vec<Tree<'a>>,
     },

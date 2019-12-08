@@ -4,11 +4,14 @@ use crate::rule::{ Rule, Symbol };
 use crate::lexer::Lexer;
 use crate::util;
 
-pub fn non_empty_list(args: Vec<Symbol>) -> Rule {
-    Rule::new("non_empty_list", vec![
-        ("one", vec![args[0].clone()]),
-        ("more", vec![args[0].clone(), Symbol::Ap(non_empty_list, args)]),
-    ])
+pub fn non_empty_list<'a>(args: &'a Vec<Symbol<'a>>) -> Rule<'a> {
+    Rule {
+        name: "non_empty_list",
+        choices: vec![
+            ("one", vec![args[0].clone()]),
+            ("more", vec![args[0].clone(), Symbol::Ap(non_empty_list, args)]),
+        ]
+    }
 }
 
 pub fn space_char_set() -> HashSet<char> {
@@ -17,7 +20,7 @@ pub fn space_char_set() -> HashSet<char> {
     ].into_iter().collect()
 }
 
-pub fn symbol_char_set() -> HashSet<char> {
+pub fn punctuation_char_set() -> HashSet<char> {
     vec![
         '=', ':', '.', ',', ';',
         '~', '!', '@', '#', '$', '%', '^', '&', '*',  '-', '+',
@@ -84,12 +87,12 @@ pub fn ignore_space_and_line_comment<'a>(text: &'a str) -> &'a str {
 pub fn word_matcher<'a>(text: &'a str) -> Option<(&'a str, &'a str)> {
     match text.chars().next() {
         Some(c) => {
-            if symbol_char_set().contains(&c) {
+            if punctuation_char_set().contains(&c) {
                 Some(text.split_at(c.len_utf8()))
             } else {
                 fn char_pred(c: char) -> bool {
                     space_char_set().contains(&c) ||
-                        symbol_char_set().contains(&c)
+                        punctuation_char_set().contains(&c)
                 }
                 match util::str_split_by_char_pred(text, char_pred) {
                     Some((left, right)) => {
@@ -123,12 +126,12 @@ pub fn word_matcher_with_string<'a>(text: &'a str) -> Option<(&'a str, &'a str)>
             }
         }
         Some(c) => {
-            if symbol_char_set().contains(&c) {
+            if punctuation_char_set().contains(&c) {
                 Some(text.split_at(c.len_utf8()))
             } else {
                 fn char_pred(c: char) -> bool {
                     space_char_set().contains(&c) ||
-                        symbol_char_set().contains(&c)
+                        punctuation_char_set().contains(&c)
                 }
                 match util::str_split_by_char_pred(text, char_pred) {
                     Some((left, right)) => {
