@@ -1,6 +1,5 @@
-- copy things to cicada repo
-# party
-- clean up partech -- for cicada
+# partech
+- clean up partech
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
