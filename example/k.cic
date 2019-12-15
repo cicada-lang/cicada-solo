@@ -1,0 +1,8 @@
+let unit_t = class {}
+let unit = object {}
+let k = {
+  given x : type
+  given y : type
+  return x
+}
+// return k(type, unit_t)

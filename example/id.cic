@@ -1,0 +1,10 @@
+let x = {
+  given x : type
+  return x
+}({
+  given x : type
+  return x
+}({
+  given x : type
+  return x
+}(type)))

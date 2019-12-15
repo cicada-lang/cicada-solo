@@ -1,17 +1,12 @@
-# plan
-- finish partech
-- test this simple eval
-- support multi args (no currying)
-  - Pi -- `given` and `conclude`
-  - Fn -- `given` and `return`
-- support `let` and `define`
-- test eval
-# partech
-- tree_matcher
-- earley
+- copy things to cicada repo
+# party
+- clean up partech -- for cicada
+- good error report for earley
+  like: https://github.com/kach/nearley/issues/451
 # cicada
-- Exp use cofree
-- check
-- infer
-- readback
-- equivalent
+- factor out `Telescope`
+- equality constrain `equal` in telescope
+  - to define `eqv_t` as class
+  - to specify partial algebraic structure
+- [note] no auto currying
+- [less important] Exp use cofree

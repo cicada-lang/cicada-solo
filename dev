@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+function docs {
+    pushd docs && \
+        rm -rf public && \
+        hexo generate && \
+        surge public cicada-language.surge.sh && \
+        popd
+}
+
+function t {
+    rm -f target/universal/stage/bin/*
+
+    sbt stage && \
+        test_general && \
+        test_cicada
+}
+
+function test_general {
+    for file in $(find . | grep "^\./target/universal/stage/bin/" | grep "test$")
+    do
+        echo ""
+        echo "[test] $file"
+        if ! time $file
+        then
+            exit 1
+        fi
+    done
+}
+
+function test_cicada {
+    prog=./target/universal/stage/bin/cicada
+
+    for file in $(find . | grep "^\./example/" | grep "\.cic$")
+    do
+        echo ""
+        echo "[cicada] $file"
+        if ! time $prog --eval $file
+        then
+            exit 1
+        fi
+    done
+}
+
+function main {
+    for TASK in $@
+    do
+        $TASK
+    done
+}
+
+main $@

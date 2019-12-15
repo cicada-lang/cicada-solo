@@ -1,0 +1,13 @@
+let unit_t = class {}
+let unit = object {}
+let and_t = class {
+  given fst : type
+  given snd : type
+}
+let unit_and_unit_t = object {
+  let fst = unit_t
+  let snd = unit_t
+}
+let fst_unit_t = unit_and_unit_t.fst
+let snd_unit_t = unit_and_unit_t.snd
+// return fst_unit_t
