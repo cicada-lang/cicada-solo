@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+function build {
+    pushd src/partech
+    make -f make.mk clean
+    make -f make.mk
+    popd
+}
+
+function t {
+    build && \
+        test_file_in_src
+}
+
+function test_file_in_src {
+    for file in $(find src | grep "test$")
+    do
+        echo ""
+        echo "[test] $file"
+        if ! time $file
+        then
+            exit 1
+        fi
+    done
+}
+
+function main {
+    for TASK in $@
+    do
+        $TASK
+    done
+}
+
+main $@
