@@ -42,15 +42,37 @@ object subtype {
       case (s: ValCl, t: ValCl) =>
         subtype_list_map(ctx, s.type_map, t.type_map)
 
+      case (s: ValTl, t: ValCl) =>
+        val name_list = s.type_map.keys.toList
+        for {
+          type_map <- util.force_telescope(name_list, s.type_map, s.env)
+          _ <- subtype_list_map(ctx, type_map, t.type_map)
+        } yield ()
+
+      case (s: ValCl, t: ValTl) =>
+        val name_list = t.type_map.keys.toList
+        for {
+          type_map <- util.force_telescope(name_list, t.type_map, t.env)
+          _ <- subtype_list_map(ctx, s.type_map, type_map)
+        } yield ()
+
       case (s, t) =>
         equivalent(ctx, s, t)
     }
 
+//     result.swap.map {
+//       case err => Err(
+//         s"subtype fail\n" +
+//           s"s: ${pretty_value(s)}\n" +
+//           s"t: ${pretty_value(t)}\n"
+//       ).cause(err)
+//     }.swap
+
     result.swap.map {
       case err => Err(
         s"subtype fail\n" +
-          s"s: ${pretty_value(s)}\n" +
-          s"t: ${pretty_value(t)}\n"
+          s"s: ${s}\n" +
+          s"t: ${t}\n"
       ).cause(err)
     }.swap
   }

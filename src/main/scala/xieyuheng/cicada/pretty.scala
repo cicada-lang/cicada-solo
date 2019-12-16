@@ -96,13 +96,13 @@ object pretty {
 
       case ValTl(type_map: ListMap[String, Exp], env: Env) =>
         var s = type_map.map {
-          case (name, exp) => s"given ${name} = ${pretty_exp(exp)}\n"
+          case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
         s"class {${maybe_ln(s)}}"
 
       case ValCl(type_map: ListMap[String, Val]) =>
         var s = type_map.map {
-          case (name, value) => s"given ${name} = ${pretty_value(value)}\n"
+          case (name, value) => s"given ${name} : ${pretty_value(value)}\n"
         }.mkString("")
         s"class {${maybe_ln(s)}}"
 
