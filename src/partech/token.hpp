@@ -1,11 +1,6 @@
 #pragma once
 
-#include "../common.hpp"
-
-struct span_t {
-  size_t lo;
-  size_t hi;
-};
+#include "lib.hpp"
 
 struct token_t {
   string str;

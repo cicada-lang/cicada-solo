@@ -1,8 +1,6 @@
-#include "../common.hpp"
-
-#include "token.hpp"
+#include "lib.hpp"
 
 void
 token_hi() {
-  cout << "token_hi" << "\n";
+  cout << "token_hi!" << "\n";
 }
