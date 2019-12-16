@@ -1,20 +1,8 @@
 # Syntax
 
-## Syntax of expression
-
-| Expression | Example                                      |
-|------------|----------------------------------------------|
-| pi type    | (x : t) -> body[x], forall(x : t) -> body[x] |
-| function   | (x : t) => body[x]                           |
-| sigma type | exists(x : t, ..., body[x, ...])             |
-| tuple      | tuple(x, ..., z)                             |
-
-## Gentzen style
-
-| Expression | Example                                     |
-|------------|---------------------------------------------|
-| pi type    | { x : t --- body[x] }, { x : t -> body[x] } |
-| function   | { x : t --- body[x] }, { x : t -> body[x] } |
-| sigma type | exists { x : t, ..., body[x, ...] }         |
-| record     | record { x = a, ..., z = c }                |
-| tuple      | tuple(x, ..., z)                            |
+| Expression    | Example                                 |
+|---------------|-----------------------------------------|
+| pi type       | pi { given x : A conclude B }           |
+| function      | function { given x : A return b }       |
+| record type   | class { given x : A, ..., given z : C } |
+| record object | object { let x = a, ..., let z = c }    |
