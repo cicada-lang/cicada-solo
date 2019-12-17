@@ -1,4 +1,4 @@
-package xieyuheng.cicada
+package xieyuheng.cicada_backup
 
 import collection.immutable.ListMap
 
@@ -107,13 +107,13 @@ object util {
   def force_telescope(
     name_list: List[String],
     exp_map: ListMap[String, Exp],
-    ctx: Ctx,
+    env: Env,
   ): Either[Err, ListMap[String, Value]] = {
     val full_var_map = ListMap(exp_map.keys.toList.zip(name_list): _*)
     for {
       value_map <- util.list_map_map_entry_with_index_maybe_err(exp_map) {
         case (i, _name, exp) =>
-          eval(ctx, util.exp_subst_var_map(exp, full_var_map.take(i)))
+          eval(env, util.exp_subst_var_map(exp, full_var_map.take(i)))
             .map { case value => (name_list(i), value) }
       }
     } yield value_map
@@ -123,16 +123,16 @@ object util {
     name_list: List[String],
     exp_map: ListMap[String, Exp],
     exp: Exp,
-    ctx: Ctx,
+    env: Env,
   ): Either[Err, (ListMap[String, Value], Value)] = {
     val full_var_map = ListMap(exp_map.keys.toList.zip(name_list): _*)
     for {
       value_map <- util.list_map_map_entry_with_index_maybe_err(exp_map) {
         case (i, _name, exp) =>
-          eval(ctx, util.exp_subst_var_map(exp, full_var_map.take(i)))
+          eval(env, util.exp_subst_var_map(exp, full_var_map.take(i)))
             .map { case value => (name_list(i), value) }
       }
-      value <- eval(ctx, util.exp_subst_var_map(exp, full_var_map))
+      value <- eval(env, util.exp_subst_var_map(exp, full_var_map))
     } yield (value_map, value)
   }
 

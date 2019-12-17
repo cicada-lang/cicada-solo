@@ -1,4 +1,4 @@
-package xieyuheng.cicada
+package xieyuheng.cicada_backup
 
 import collection.immutable.ListMap
 
@@ -80,21 +80,21 @@ object pretty {
       case ValueType() =>
         s"type"
 
-      case ValuePi(arg_type_map: ListMap[String, Exp], return_type: Exp, ctx: Ctx) =>
+      case ValuePi(arg_type_map: ListMap[String, Exp], return_type: Exp, env: Env) =>
         var s = arg_type_map.map {
           case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
         s = s + s"conclude ${pretty_exp(return_type)}\n"
         s"{${maybe_ln(s)}}"
 
-      case ValueFn(arg_type_map: ListMap[String, Exp], body: Exp, ctx: Ctx) =>
+      case ValueFn(arg_type_map: ListMap[String, Exp], body: Exp, env: Env) =>
         var s = arg_type_map.map {
           case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
         s = s + s"return ${pretty_exp(body)}\n"
         s"{${maybe_ln(s)}}"
 
-      case ValueTl(type_map: ListMap[String, Exp], ctx: Ctx) =>
+      case ValueTl(type_map: ListMap[String, Exp], env: Env) =>
         var s = type_map.map {
           case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
         }.mkString("")

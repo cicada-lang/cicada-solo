@@ -6,6 +6,7 @@
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
+- make `Top` consistent
 - `ctx` contains both value and type
   let us call this branch unified-ctx
 - factor out `Telescope`
