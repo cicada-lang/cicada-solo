@@ -93,6 +93,7 @@ object infer {
                     }
                     // TODO apply (not partial) a class to its args get a type
                     // we are already returning type here instead of object
+                    // this is not enough, since arg_map is known now, we can 
                     ValCl(type_map)
                 }
               case t =>

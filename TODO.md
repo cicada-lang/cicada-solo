@@ -6,9 +6,17 @@
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
-- application of class return class instead of object
-- use `new` to construct object from class
+- `ctx` contains both value and type
+  let us call this branch unified-ctx
 - factor out `Telescope`
+  - should we also store `ctx` in `Telescope`?
+    which means we need to thread `ctx` as an argument in `eval`
+  - we may also take this opportunity to handle currying
+    be careful about equality
+- application of class return type instead of object
+- should we handle `A : type` specially?
+  - I think no.
+- use `new` to construct object from class
 - equality constrain `equal` in telescope
   - syntax should be
     `constrain equal x = y`
