@@ -2,17 +2,20 @@ package xieyuheng.cicada
 
 import collection.immutable.ListMap
 
-case class Ctx(map: ListMap[String, Val] = ListMap()) {
+sealed trait CtxEntry
+final case class CtxEntryTypeValueuePair(t: Value, value: Value) extends CtxEntry
 
-  def lookup_type(name: String): Option[Val] = {
+case class Ctx(map: ListMap[String, Value] = ListMap()) {
+
+  def lookup_type(name: String): Option[Value] = {
     map.get(name)
   }
 
-  def ext(name: String, t: Val): Ctx = {
+  def ext(name: String, t: Value): Ctx = {
     Ctx(this.map + (name -> t))
   }
 
-  def ext_map(map: ListMap[String, Val]): Ctx = {
+  def ext_map(map: ListMap[String, Value]): Ctx = {
     Ctx(this.map ++ map)
   }
 

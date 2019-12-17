@@ -9,11 +9,11 @@ import pretty._
 
 object check {
 
-  def check(env: Env, ctx: Ctx, exp: Exp, t: Val): Either[Err, Unit] = {
+  def check(env: Env, ctx: Ctx, exp: Exp, t: Value): Either[Err, Unit] = {
     val result = exp match {
       case Obj(value_map: ListMap[String, Exp]) =>
         t match {
-          case tl: ValTl =>
+          case tl: ValueTl =>
             check_telescope(env, ctx, value_map, tl.type_map, tl.env)
               .map { case _ => () }
 

@@ -26,8 +26,8 @@ object grammar {
 
   def top_list_matcher(tree: Tree): List[Top] = {
     non_empty_list_matcher(block_entry_matcher)(tree).map {
-      case (name, BlockLet(exp)) => TopLet(name, exp)
-      case (name, BlockDefine(t, exp)) => TopDefine(name, t, exp)
+      case (name, BlockEntryLet(exp)) => TopLet(name, exp)
+      case (name, BlockEntryDefine(t, exp)) => TopDefine(name, t, exp)
     }
   }
 
@@ -129,19 +129,19 @@ object grammar {
   def block_entry_matcher = Tree.matcher[(String, BlockEntry)](
     "block_entry", Map(
       "let" -> { case List(_, Leaf(name), _, exp) =>
-        (name, BlockLet(exp_matcher(exp))) },
+        (name, BlockEntryLet(exp_matcher(exp))) },
       "define_cl" -> { case List(_, Leaf(name), _, given_entry_list, _) =>
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
-        (name, BlockDefine(Type(), Cl(type_map))) },
+        (name, BlockEntryDefine(Type(), Cl(type_map))) },
       "define_cl_empty" -> { case List(_, Leaf(name), _, _) =>
-        (name, BlockDefine(Type(), Cl(ListMap.empty))) },
+        (name, BlockEntryDefine(Type(), Cl(ListMap.empty))) },
       "let_obj" -> { case List(_, Leaf(name), _, let_entry_list, _) =>
         val value_map = ListMap(non_empty_list_matcher(let_entry_matcher)(let_entry_list): _*)
-        (name, BlockLet(Obj(value_map))) },
+        (name, BlockEntryLet(Obj(value_map))) },
       "let_obj_empty" -> { case List(_, Leaf(name), _, _) =>
-        (name, BlockLet(Obj(ListMap.empty))) },
+        (name, BlockEntryLet(Obj(ListMap.empty))) },
       "define" -> { case List(_, Leaf(name), _, t, _, exp) =>
-        (name, BlockDefine(exp_matcher(t), exp_matcher(exp))) },
+        (name, BlockEntryDefine(exp_matcher(t), exp_matcher(exp))) },
     ))
 
 }

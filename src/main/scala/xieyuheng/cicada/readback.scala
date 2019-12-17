@@ -4,12 +4,12 @@ import collection.immutable.ListMap
 
 object readback {
 
-  def readback(value: Val): Either[Err, Exp] = {
+  def readback(value: Value): Either[Err, Exp] = {
     value match {
-      case ValType() =>
+      case ValueType() =>
         Right(Type())
 
-      case ValPi(arg_type_map: ListMap[String, Exp], return_type: Exp, env: Env) =>
+      case ValuePi(arg_type_map: ListMap[String, Exp], return_type: Exp, env: Env) =>
         val name_list = arg_type_map.keys.toList
         for {
           force <- util.force_telescope_with_extra_exp(name_list, arg_type_map, return_type, env)
@@ -18,7 +18,7 @@ object readback {
           return_type <- readback(return_type)
         } yield Pi(arg_type_map, return_type)
 
-      case ValFn(arg_type_map: ListMap[String, Exp], body: Exp, env: Env) =>
+      case ValueFn(arg_type_map: ListMap[String, Exp], body: Exp, env: Env) =>
         val name_list = arg_type_map.keys.toList
         for {
           force <- util.force_telescope_with_extra_exp(name_list, arg_type_map, body, env)
@@ -27,33 +27,33 @@ object readback {
           body <- readback(body)
         } yield Fn(arg_type_map, body)
 
-      case ValTl(type_map: ListMap[String, Exp], env: Env) =>
+      case ValueTl(type_map: ListMap[String, Exp], env: Env) =>
         val name_list = type_map.keys.toList
         for {
           type_map <- util.force_telescope(name_list, type_map, env)
           type_map <- readback_list_map(type_map)
         } yield Cl(type_map)
 
-      case ValCl(type_map: ListMap[String, Val]) =>
+      case ValueCl(type_map: ListMap[String, Value]) =>
         for {
           type_map <- readback_list_map(type_map)
         } yield Cl(type_map)
 
-      case ValObj(value_map: ListMap[String, Val]) =>
+      case ValueObj(value_map: ListMap[String, Value]) =>
         for {
           value_map <- readback_list_map(value_map)
         } yield Obj(value_map)
 
-      case NeuVar(name: String) =>
+      case NeutralVar(name: String) =>
         Right(Var(name))
 
-      case NeuAp(target: Neu, arg_list: List[Val]) =>
+      case NeutralAp(target: Neutral, arg_list: List[Value]) =>
         for {
           target <- readback(target)
           arg_list <- readback_list(arg_list)
         } yield Ap(target, arg_list)
 
-      case NeuDot(target: Neu, field: String) =>
+      case NeutralDot(target: Neutral, field: String) =>
         for {
           target <- readback(target)
         } yield Dot(target, field)
@@ -61,7 +61,7 @@ object readback {
   }
 
   def readback_list(
-    value_list: List[Val]
+    value_list: List[Value]
   ): Either[Err, List[Exp]] = {
     util.list_map_maybe_err(value_list) {
       case value =>
@@ -70,7 +70,7 @@ object readback {
   }
 
   def readback_list_map(
-    value_map: ListMap[String, Val]
+    value_map: ListMap[String, Value]
   ): Either[Err, ListMap[String, Exp]] = {
     util.list_map_map_maybe_err(value_map) {
       case (name, value) =>

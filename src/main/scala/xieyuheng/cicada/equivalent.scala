@@ -8,14 +8,14 @@ import pretty._
 
 object equivalent {
 
-  def equivalent(ctx: Ctx, s: Val, t: Val): Either[Err, Unit] = {
+  def equivalent(ctx: Ctx, s: Value, t: Value): Either[Err, Unit] = {
     val result = (s, t) match {
-      case (s: ValType, t: ValType) =>
+      case (s: ValueType, t: ValueType) =>
         Right(())
 
-      case (s: ValPi, t: ValPi) =>
+      case (s: ValuePi, t: ValuePi) =>
         if (s.arg_type_map.size != t.arg_type_map.size) {
-          Left(Err(s"equivalent fail on ValPi, arity mis-match"))
+          Left(Err(s"equivalent fail on ValuePi, arity mis-match"))
         } else {
           val name_list = s.arg_type_map.keys.zip(t.arg_type_map.keys).map {
             case (s_name, t_name) =>
@@ -34,9 +34,9 @@ object equivalent {
           } yield ()
         }
 
-      case (s: ValFn, t: ValFn) =>
+      case (s: ValueFn, t: ValueFn) =>
         if (s.arg_type_map.size != t.arg_type_map.size) {
-          Left(Err(s"equivalent fail on ValFn, arity mis-match"))
+          Left(Err(s"equivalent fail on ValueFn, arity mis-match"))
         } else {
           val name_list = s.arg_type_map.keys.zip(t.arg_type_map.keys).map {
             case (s_name, t_name) =>
@@ -55,10 +55,10 @@ object equivalent {
           } yield ()
         }
 
-      case (s: ValTl, t: ValTl) =>
+      case (s: ValueTl, t: ValueTl) =>
         // NOTE the order matters
         if (s.type_map.size != t.type_map.size) {
-          Left(Err(s"equivalent fail on ValTl, arity mis-match"))
+          Left(Err(s"equivalent fail on ValueTl, arity mis-match"))
         } else {
           val name_list = s.type_map.keys.zip(t.type_map.keys).map {
             case (s_name, t_name) =>
@@ -72,46 +72,46 @@ object equivalent {
           } yield ()
         }
 
-      case (s: ValCl, t: ValCl) =>
+      case (s: ValueCl, t: ValueCl) =>
         equivalent_list_map(ctx, s.type_map, t.type_map)
 
-      case (s: ValTl, t: ValCl) =>
+      case (s: ValueTl, t: ValueCl) =>
         val name_list = s.type_map.keys.toList
         for {
           type_map <- util.force_telescope(name_list, s.type_map, s.env)
           _ <- equivalent_list_map(ctx, type_map, t.type_map)
         } yield ()
 
-      case (s: ValCl, t: ValTl) =>
+      case (s: ValueCl, t: ValueTl) =>
         val name_list = t.type_map.keys.toList
         for {
           type_map <- util.force_telescope(name_list, t.type_map, t.env)
           _ <- equivalent_list_map(ctx, s.type_map, type_map)
         } yield ()
 
-      case (s: ValObj, t: ValObj) =>
+      case (s: ValueObj, t: ValueObj) =>
         equivalent_list_map(ctx, s.value_map, t.value_map)
 
-      case (s: NeuVar, t: NeuVar) =>
+      case (s: NeutralVar, t: NeutralVar) =>
         if (s.name != t.name) {
           Left(Err(
-            s"equivalent fail on NeuVar\n" +
+            s"equivalent fail on NeutralVar\n" +
               s"${s.name} != ${t.name}\n"
           ))
         } else {
           Right(())
         }
 
-      case (s: NeuAp, t: NeuAp) =>
+      case (s: NeutralAp, t: NeutralAp) =>
         for {
           _ <- equivalent(ctx, s.target, t.target)
           _ <- equivalent_list(ctx, s.arg_list, t.arg_list)
         } yield ()
 
-      case (s: NeuDot, t: NeuDot) =>
+      case (s: NeutralDot, t: NeutralDot) =>
         if (s.field != t.field) {
           Left(Err(
-            s"equivalent fail on NeuDot\n" +
+            s"equivalent fail on NeutralDot\n" +
               s"field name mismatch\n" +
               s"${s.field} != ${t.field}\n"
           ))
@@ -137,8 +137,8 @@ object equivalent {
 
   def equivalent_list(
     ctx: Ctx,
-    s_list: List[Val],
-    t_list: List[Val],
+    s_list: List[Value],
+    t_list: List[Value],
   ): Either[Err, Unit] = {
     for {
       _ <- util.list_map_maybe_err(s_list.zip(t_list)) {
@@ -150,8 +150,8 @@ object equivalent {
 
   def equivalent_list_map(
     ctx: Ctx,
-    s_list_map: ListMap[String, Val],
-    t_list_map: ListMap[String, Val],
+    s_list_map: ListMap[String, Value],
+    t_list_map: ListMap[String, Value],
   ): Either[Err, Unit] = {
     if (s_list_map.size != t_list_map.size) {
       Left(Err(

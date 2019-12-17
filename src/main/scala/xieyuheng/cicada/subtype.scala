@@ -10,17 +10,17 @@ import pretty._
 
 object subtype {
 
-  def subtype(ctx: Ctx, s: Val, t: Val): Either[Err, Unit] = {
+  def subtype(ctx: Ctx, s: Value, t: Value): Either[Err, Unit] = {
     val result = (s, t) match {
-      case (s: ValPi, ValType()) =>
+      case (s: ValuePi, ValueType()) =>
         Right(())
 
-      case (s: ValCl, ValType()) =>
+      case (s: ValueCl, ValueType()) =>
         Right(())
 
-      case (s: ValPi, t: ValPi) =>
+      case (s: ValuePi, t: ValuePi) =>
         if (s.arg_type_map.size != t.arg_type_map.size) {
-          Left(Err(s"subtype fail on ValPi, arity mis-match"))
+          Left(Err(s"subtype fail on ValuePi, arity mis-match"))
         } else {
           val name_list = s.arg_type_map.keys.zip(t.arg_type_map.keys).map {
             case (s_name, t_name) =>
@@ -39,17 +39,17 @@ object subtype {
           } yield ()
         }
 
-      case (s: ValCl, t: ValCl) =>
+      case (s: ValueCl, t: ValueCl) =>
         subtype_list_map(ctx, s.type_map, t.type_map)
 
-      case (s: ValTl, t: ValCl) =>
+      case (s: ValueTl, t: ValueCl) =>
         val name_list = s.type_map.keys.toList
         for {
           type_map <- util.force_telescope(name_list, s.type_map, s.env)
           _ <- subtype_list_map(ctx, type_map, t.type_map)
         } yield ()
 
-      case (s: ValCl, t: ValTl) =>
+      case (s: ValueCl, t: ValueTl) =>
         val name_list = t.type_map.keys.toList
         for {
           type_map <- util.force_telescope(name_list, t.type_map, t.env)
@@ -79,8 +79,8 @@ object subtype {
 
   def subtype_list_map(
     ctx: Ctx,
-    s_map: ListMap[String, Val],
-    t_map: ListMap[String, Val],
+    s_map: ListMap[String, Value],
+    t_map: ListMap[String, Value],
   ): Either[Err, Unit] = {
     util.list_map_foreach_maybe_err(t_map) {
       case (name, t) =>
