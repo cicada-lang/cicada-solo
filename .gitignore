@@ -1,8 +1,8 @@
-# c
-*.o
+# scala
+target
 
-# test
-*_test
+# parcel
+.cache
 
 # emacs
 *~
