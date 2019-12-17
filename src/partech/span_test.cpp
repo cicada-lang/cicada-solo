@@ -2,9 +2,18 @@
 
 int
 main() {
-  auto span = span_t {
-    .hi = 10,
+  auto x = span_t {
     .lo = 2,
+    .hi = 10,
   };
-  cout << span.hi;
+  auto y = span_t {
+    .lo = 1,
+    .hi = 10,
+  };
+  auto z = span_t {
+    .lo = 1,
+    .hi = 10,
+  };
+  assert(!span_eq(x, y));
+  assert(span_eq(y, z));
 }
