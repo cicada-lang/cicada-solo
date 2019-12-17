@@ -4,3 +4,4 @@
 
 #include "span.hpp"
 #include "token.hpp"
+#include "rule.hpp"

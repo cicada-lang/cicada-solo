@@ -8,4 +8,4 @@ struct span_t {
 };
 
 bool
-span_eq(span_t &x, span_t &y);
+span_eq(const span_t &x, const span_t &y);

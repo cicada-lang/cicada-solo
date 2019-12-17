@@ -14,6 +14,7 @@ main() {
     .lo = 1,
     .hi = 10,
   };
+
   assert(!span_eq(x, y));
   assert(span_eq(y, z));
 }

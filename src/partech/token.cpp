@@ -1,6 +1,8 @@
 #include "lib.hpp"
 
-void
-token_hi() {
-  cout << "token_hi!" << "\n";
+bool
+token_eq(const token_t &x, const token_t &y) {
+  return
+    span_eq(x.span, y.span) &&
+    x.str == x.str;
 }

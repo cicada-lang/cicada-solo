@@ -3,9 +3,10 @@
 #include "lib.hpp"
 
 struct token_t {
-  string str;
+  std::string str;
   span_t span;
 };
 
-void
-token_hi();
+bool
+token_eq(const token_t &x, const token_t &y);
+
