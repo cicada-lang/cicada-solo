@@ -1,12 +1,19 @@
 #!/usr/bin/env bash
 
 cpp="clang++"
+# cpp="g++"
+warn="-Wall -Wextra -Wno-infinite-recursion -Wno-unused-parameter"
+std="-std=c++17"
+# lib="-lstdc++fs"
+opt="-foptimize-sibling-calls -Ofast"
+debug="-g"
+compile="$cpp $std $lib $warn"
 
 function build {
     for file in $(ls | grep "\.cpp$")
     do
         echo "[build] $file"
-        if ! $cpp -c $file
+        if ! $compile -c $file
         then
             exit 1
         fi
