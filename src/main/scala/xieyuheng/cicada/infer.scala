@@ -91,6 +91,8 @@ object infer {
                     val type_map = new_ctx.type_map.filter {
                       case (name, _t) => tl.type_map.contains(name)
                     }
+                    // TODO apply (not partial) a class to its args get a type
+                    // we are already returning type here instead of object
                     ValCl(type_map)
                 }
               case t =>

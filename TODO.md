@@ -6,7 +6,6 @@
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
-- check class's type during top not just infer
 - application of class return class instead of object
 - use `new` to construct object from class
 - factor out `Telescope`

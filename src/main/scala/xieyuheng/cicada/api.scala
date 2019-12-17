@@ -63,6 +63,7 @@ object api {
             t <- infer(local_env, local_ctx, exp)
             value <- eval(local_env, exp)
             _ = {
+              local_ctx = local_ctx.ext(name, t)
               local_env = local_env.ext(name, value)
               println(s"define ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}")
               println(s">>>>>> ${name} : ${pretty_value(t)} = ${pretty_value(value)}")
