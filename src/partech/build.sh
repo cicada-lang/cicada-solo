@@ -25,7 +25,7 @@ function build_test {
     for file in $(ls | grep "_test\.o$")
     do
         echo "[build_test] $file"
-        if ! $cpp $code_objs $file -o $(echo $file | cut -f 1 -d '.')
+        if ! $compile $code_objs $file -o $(echo $file | cut -f 1 -d '.')
         then
             exit 1
         fi
