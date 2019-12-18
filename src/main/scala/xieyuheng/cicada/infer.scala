@@ -10,7 +10,7 @@ import pretty._
 
 object infer {
 
-  def infer(ctx: Ctx, exp: Exp): Value = {
+  def infer(env: Env, ctx: Ctx, exp: Exp): Value = {
     try {
       exp match {
         case Var(name: String) =>
@@ -27,65 +27,54 @@ object infer {
           var local_ctx = ctx
           arg_type_map.foreach {
             case (name, exp) =>
-              check(local_ctx, exp, ValueType())
-              val infered_t = infer(local_ctx, exp)
-              val value = eval(local_ctx, exp)
-              val entry = CtxEntryTypeValueuePair(infered_t, value)
-              local_ctx = local_ctx.ext(name, entry)
+              check(env, local_ctx, exp, ValueType())
+              local_ctx = local_ctx.ext(name, eval(env, exp))
           }
-          check(local_ctx, return_type, ValueType())
+          check(env, local_ctx, return_type, ValueType())
           ValueType()
 
         case Fn(arg_type_map: ListMap[String, Exp], body: Exp) =>
           var local_ctx = ctx
           arg_type_map.foreach {
             case (name, exp) =>
-              check(local_ctx, exp, ValueType())
-              val infered_t = infer(local_ctx, exp)
-              val value = eval(local_ctx, exp)
-              val entry = CtxEntryTypeValueuePair(infered_t, value)
-              local_ctx = local_ctx.ext(name, entry)
+              check(env, local_ctx, exp, ValueType())
+              local_ctx = local_ctx.ext(name, eval(env, exp))
           }
-          val return_type_value = infer(local_ctx, body)
+          val return_type_value = infer(env, local_ctx, body)
           val return_type = readback(return_type_value)
-          ValuePi(arg_type_map, return_type, ctx)
+          ValuePi(arg_type_map, return_type, env)
 
         case Cl(type_map: ListMap[String, Exp]) =>
           var local_ctx = ctx
           type_map.foreach {
             case (name, exp) =>
-              check(local_ctx, exp, ValueType())
-              val infered_t = infer(local_ctx, exp)
-              val value = eval(local_ctx, exp)
-              val entry = CtxEntryTypeValueuePair(infered_t, value)
-              local_ctx = local_ctx.ext(name, entry)
+              check(env, local_ctx, exp, ValueType())
+              local_ctx = local_ctx.ext(name, eval(env, exp))
           }
           ValueType()
 
         case Obj(value_map: ListMap[String, Exp]) =>
           val type_map = ListMap(value_map.map {
-            case (name, exp) => (name, eval(ctx, exp))
+            case (name, exp) => (name, eval(env, exp))
           }.toList: _*)
           ValueCl(type_map)
 
         case Ap(target: Exp, arg_list: List[Exp]) =>
-          infer(ctx, target) match {
-            case ValuePi(arg_type_map: ListMap[String, Exp], return_type: Exp, pi_ctx: Ctx) =>
+          infer(env, ctx, target) match {
+            case ValuePi(arg_type_map: ListMap[String, Exp], return_type: Exp, pi_env: Env) =>
               val name_list = arg_type_map.keys.toList
               val arg_map = ListMap(name_list.zip(arg_list): _*)
-              val (new_ctx, _new_ctx) = check_telescope(ctx, arg_map, arg_type_map, pi_ctx)
-              eval(new_ctx, return_type)
+              val (new_env, _new_ctx) = check_telescope(env, ctx, arg_map, arg_type_map, pi_env)
+              eval(new_env, return_type)
 
             case ValueType() =>
-              eval(ctx, target) match {
+              eval(env, target) match {
                 case tl: ValueTl =>
                   val name_list = tl.type_map.keys.toList
                   val arg_map = ListMap(name_list.zip(arg_list): _*)
-                  val (_new_ctx, new_ctx) = check_telescope(ctx, arg_map, tl.type_map, tl.ctx)
-                  val type_map = new_ctx.map.filter {
-                    case (name, _entry) => tl.type_map.contains(name)
-                  }.map {
-                    case (name, CtxEntryTypeValueuePair(t, _value)) => (name, t)
+                  val (_new_env, new_ctx) = check_telescope(env, ctx, arg_map, tl.type_map, tl.env)
+                  val type_map = new_ctx.type_map.filter {
+                    case (name, _t) => tl.type_map.contains(name)
                   }
                   // TODO apply (not partial) a class to its args get a type
                   // we are already returning type here instead of object
@@ -101,7 +90,7 @@ object infer {
           }
 
         case Dot(target: Exp, field: String) =>
-          infer(ctx, target) match {
+          infer(env, ctx, target) match {
             case ValueCl(type_map: ListMap[String, Value]) =>
               type_map.get(field) match {
                 case Some(t) => t
@@ -116,20 +105,11 @@ object infer {
           var local_ctx = ctx
           block_entry_map.foreach {
             case (name, BlockEntryLet(exp)) =>
-              val infered_t = infer(local_ctx, exp)
-              val value = eval(local_ctx, exp)
-              val entry = CtxEntryTypeValueuePair(infered_t, value)
-              local_ctx = local_ctx.ext(name, entry)
-            case (name, BlockEntryDefine(expected_t_exp, exp)) =>
-              check(local_ctx, expected_t_exp, ValueType())
-              val expected_t = eval(local_ctx, expected_t_exp)
-              check(local_ctx, exp, expected_t)
-              val infered_t = infer(local_ctx, exp)
-              val value = eval(local_ctx, exp)
-              val entry = CtxEntryTypeValueuePair(infered_t, value)
-              local_ctx = local_ctx.ext(name, entry)
+              local_ctx = local_ctx.ext(name, eval(env, exp))
+            case (name, BlockEntryDefine(_t, exp)) =>
+              local_ctx = local_ctx.ext(name, eval(env, exp))
           }
-          infer(local_ctx, body)
+          infer(env, local_ctx, body)
       }
     } catch {
       case report: Report =>

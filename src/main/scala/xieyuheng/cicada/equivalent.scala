@@ -24,10 +24,10 @@ object equivalent {
             }.toList
             val (s_arg_type_map, s_return_type) =
               util.force_telescope_with_return(
-                name_list, s.arg_type_map, s.return_type, s.ctx)
+                name_list, s.arg_type_map, s.return_type, s.env)
             val (t_arg_type_map, t_return_type) =
               util.force_telescope_with_return(
-                name_list, t.arg_type_map, t.return_type, t.ctx)
+                name_list, t.arg_type_map, t.return_type, t.env)
             equivalent_list_map(ctx, t_arg_type_map, s_arg_type_map)
             equivalent(ctx, s_return_type, t_return_type)
           }
@@ -43,10 +43,10 @@ object equivalent {
             }.toList
             val (s_arg_type_map, s_body) =
               util.force_telescope_with_return(
-                name_list, s.arg_type_map, s.body, s.ctx)
+                name_list, s.arg_type_map, s.body, s.env)
             val (t_arg_type_map, t_body) =
               util.force_telescope_with_return(
-                name_list, t.arg_type_map, t.body, t.ctx)
+                name_list, t.arg_type_map, t.body, t.env)
             equivalent_list_map(ctx, t_arg_type_map, s_arg_type_map)
             equivalent(ctx, s_body, t_body)
           }
@@ -61,8 +61,8 @@ object equivalent {
                 val uuid: UUID = UUID.randomUUID()
                 s"#equivalent-function:${s_name}:${t_name}:${uuid}"
             }.toList
-            val s_type_map = util.force_telescope(name_list, s.type_map, s.ctx)
-            val t_type_map = util.force_telescope(name_list, t.type_map, t.ctx)
+            val s_type_map = util.force_telescope(name_list, s.type_map, s.env)
+            val t_type_map = util.force_telescope(name_list, t.type_map, t.env)
             equivalent_list_map(ctx, t_type_map, s_type_map)
           }
 
@@ -71,12 +71,12 @@ object equivalent {
 
         case (s: ValueTl, t: ValueCl) =>
           val name_list = s.type_map.keys.toList
-          val type_map = util.force_telescope(name_list, s.type_map, s.ctx)
+          val type_map = util.force_telescope(name_list, s.type_map, s.env)
           equivalent_list_map(ctx, type_map, t.type_map)
 
         case (s: ValueCl, t: ValueTl) =>
           val name_list = t.type_map.keys.toList
-          val type_map = util.force_telescope(name_list, t.type_map, t.ctx)
+          val type_map = util.force_telescope(name_list, t.type_map, t.env)
           equivalent_list_map(ctx, s.type_map, type_map)
 
         case (s: ValueObj, t: ValueObj) =>
