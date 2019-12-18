@@ -67,8 +67,10 @@ object eval {
   ): Value = {
     value match {
       case neutral: Neutral =>
-        // TODO should be Right(NeutralAp(neutral, type_list, arg_list))
+        // TODO should be NeutralAp(neutral, type_list, arg_list)
+        // the structure of NeutralAp need to be changed
         NeutralAp(neutral, arg_list)
+
       case ValueFn(arg_type_map: ListMap[String, Exp], body: Exp, ctx: Ctx) =>
         val name_list = arg_type_map.keys.toList
         if (name_list.length != arg_type_map.size) {
@@ -82,6 +84,7 @@ object eval {
           }
           eval(local_ctx, body)
         }
+
       case ValueTl(type_map: ListMap[String, Exp], ctx: Ctx) =>
         val name_list = type_map.keys.toList
         if (name_list.length != type_map.size) {
@@ -90,6 +93,7 @@ object eval {
           val value_map = ListMap(name_list.zip(arg_list): _*)
           ValueObj(value_map)
         }
+
       case _ =>
         throw Report(List(
           "value_apply fail, expecting ValueFn or ValueTl\n" +

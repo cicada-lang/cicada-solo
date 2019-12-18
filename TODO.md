@@ -7,8 +7,13 @@
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
-
 - [big change] `ctx` contains both value and type
+  - [unified-ctx] check
+  - [unified-ctx] infer
+  - [unified-ctx] readback
+  - [unified-ctx] subtype
+  - [unified-ctx] equivalent
+  - [unified-ctx] api and test
 - factor out `Telescope`
   - should we also store `ctx` in `Telescope`?
     which means we need to thread `ctx` as an argument in `eval`
