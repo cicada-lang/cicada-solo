@@ -8,7 +8,6 @@
   like: https://github.com/kach/nearley/issues/451
 # cicada
 - [big change] `ctx` contains both value and type
-  - [unified-ctx] check
   - [unified-ctx] infer
   - [unified-ctx] readback
   - [unified-ctx] subtype
