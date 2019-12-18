@@ -11,10 +11,10 @@ case class Report(msg_list: List[String]) extends Throwable {
   }
 
   def print(): Unit = {
+    println("------")
     msg_list.foreach {
       case msg =>
-        println(s"${msg}")
-        println("------")
+        println(s"${msg}" + "------")
     }
   }
 

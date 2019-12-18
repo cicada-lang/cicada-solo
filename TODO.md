@@ -8,7 +8,6 @@
   like: https://github.com/kach/nearley/issues/451
 # cicada
 - [big change] `ctx` contains both value and type
-- [unified-ctx] test
 - [unified-ctx] trivial re-factor
 - factor out `Telescope`
   - also factor out `Telescope` with return (return type or return value)

@@ -28,8 +28,8 @@ object infer {
           arg_type_map.foreach {
             case (name, exp) =>
               check(local_ctx, exp, ValueType())
-              val infered_t = infer(ctx, exp)
-              val value = eval(ctx, exp)
+              val infered_t = infer(local_ctx, exp)
+              val value = eval(local_ctx, exp)
               val entry = CtxEntryTypeValueuePair(infered_t, value)
               local_ctx = local_ctx.ext(name, entry)
           }
@@ -41,8 +41,8 @@ object infer {
           arg_type_map.foreach {
             case (name, exp) =>
               check(local_ctx, exp, ValueType())
-              val infered_t = infer(ctx, exp)
-              val value = eval(ctx, exp)
+              val infered_t = infer(local_ctx, exp)
+              val value = eval(local_ctx, exp)
               val entry = CtxEntryTypeValueuePair(infered_t, value)
               local_ctx = local_ctx.ext(name, entry)
           }
@@ -55,8 +55,8 @@ object infer {
           type_map.foreach {
             case (name, exp) =>
               check(local_ctx, exp, ValueType())
-              val infered_t = infer(ctx, exp)
-              val value = eval(ctx, exp)
+              val infered_t = infer(local_ctx, exp)
+              val value = eval(local_ctx, exp)
               val entry = CtxEntryTypeValueuePair(infered_t, value)
               local_ctx = local_ctx.ext(name, entry)
           }
@@ -116,16 +116,16 @@ object infer {
           var local_ctx = ctx
           block_entry_map.foreach {
             case (name, BlockEntryLet(exp)) =>
-              val infered_t = infer(ctx, exp)
-              val value = eval(ctx, exp)
+              val infered_t = infer(local_ctx, exp)
+              val value = eval(local_ctx, exp)
               val entry = CtxEntryTypeValueuePair(infered_t, value)
               local_ctx = local_ctx.ext(name, entry)
             case (name, BlockEntryDefine(expected_t_exp, exp)) =>
               check(local_ctx, expected_t_exp, ValueType())
-              val expected_t = eval(ctx, expected_t_exp)
+              val expected_t = eval(local_ctx, expected_t_exp)
               check(local_ctx, exp, expected_t)
-              val infered_t = infer(ctx, exp)
-              val value = eval(ctx, exp)
+              val infered_t = infer(local_ctx, exp)
+              val value = eval(local_ctx, exp)
               val entry = CtxEntryTypeValueuePair(infered_t, value)
               local_ctx = local_ctx.ext(name, entry)
           }

@@ -5,8 +5,8 @@ function t {
 
     sbt stage && \
         test_general && \
-        test_cicada_backup
-        # test_cicada
+        test_cicada_backup &&\
+        test_cicada
 }
 
 function test_general {
