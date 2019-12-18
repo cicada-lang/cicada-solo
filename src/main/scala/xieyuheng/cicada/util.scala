@@ -19,7 +19,7 @@ object util {
     }.toList: _*)
   }
 
-  def force_telescope_with_extra_exp(
+  def force_telescope_with_return(
     name_list: List[String],
     exp_map: ListMap[String, Exp],
     exp: Exp,

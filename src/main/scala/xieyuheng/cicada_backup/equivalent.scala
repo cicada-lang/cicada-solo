@@ -23,10 +23,10 @@ object equivalent {
                 s"#equivalent-pi-type:${s_name}:${t_name}:${uuid}"
             }.toList
             val (s_arg_type_map, s_return_type) =
-              util.force_telescope_with_extra_exp(
+              util.force_telescope_with_return(
                 name_list, s.arg_type_map, s.return_type, s.env)
             val (t_arg_type_map, t_return_type) =
-              util.force_telescope_with_extra_exp(
+              util.force_telescope_with_return(
                 name_list, t.arg_type_map, t.return_type, t.env)
             equivalent_list_map(ctx, t_arg_type_map, s_arg_type_map)
             equivalent(ctx, s_return_type, t_return_type)
@@ -42,10 +42,10 @@ object equivalent {
                 s"#equivalent-function:${s_name}:${t_name}:${uuid}"
             }.toList
             val (s_arg_type_map, s_body) =
-              util.force_telescope_with_extra_exp(
+              util.force_telescope_with_return(
                 name_list, s.arg_type_map, s.body, s.env)
             val (t_arg_type_map, t_body) =
-              util.force_telescope_with_extra_exp(
+              util.force_telescope_with_return(
                 name_list, t.arg_type_map, t.body, t.env)
             equivalent_list_map(ctx, t_arg_type_map, s_arg_type_map)
             equivalent(ctx, s_body, t_body)

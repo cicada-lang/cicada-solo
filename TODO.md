@@ -12,7 +12,10 @@
   - [unified-ctx] subtype
   - [unified-ctx] equivalent
   - [unified-ctx] api and test
+- [unified-ctx] test
+- [unified-ctx] trivial re-factor
 - factor out `Telescope`
+  - also factor out `Telescope` with return (return type or return value)
   - should we also store `ctx` in `Telescope`?
     which means we need to thread `ctx` as an argument in `eval`
   - we may also take this opportunity to handle currying
