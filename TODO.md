@@ -7,7 +7,7 @@
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
-- [cicada] use exception instead of `Either`
+
 - [big change] `ctx` contains both value and type
 - factor out `Telescope`
   - should we also store `ctx` in `Telescope`?

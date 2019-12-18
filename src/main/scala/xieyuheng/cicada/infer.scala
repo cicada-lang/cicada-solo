@@ -10,7 +10,7 @@ import eval._
 
 object infer {
 
-  def infer(ctx: Ctx, exp: Exp): Either[Err, Value] = {
+  def infer(ctx: Ctx, exp: Exp): Value = {
     ???
   }
 
