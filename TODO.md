@@ -6,14 +6,16 @@
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
-- make `Top` consistent
-- `ctx` contains both value and type
-  let us call this branch unified-ctx
+- make `Top` consistent with other `Entry`s
+- [big change] `ctx` contains both value and type
 - factor out `Telescope`
   - should we also store `ctx` in `Telescope`?
     which means we need to thread `ctx` as an argument in `eval`
   - we may also take this opportunity to handle currying
     be careful about equality
+- after out `Telescope`
+  - `Tl` should be called `Cl`
+  - `Cl` should be called `ClInferedFromObj`
 - application of class return type instead of object
 - should we handle `A : type` specially?
   - I think no.
