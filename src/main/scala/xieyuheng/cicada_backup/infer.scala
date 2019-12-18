@@ -37,6 +37,7 @@ object infer {
           var local_ctx = ctx
           arg_type_map.foreach {
             case (name, exp) =>
+              check(env, local_ctx, exp, ValueType())
               local_ctx = local_ctx.ext(name, eval(env, exp))
           }
           val return_type_value = infer(env, local_ctx, body)
