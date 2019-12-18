@@ -9,11 +9,15 @@ object cicada_backup extends mini_interpreter (
     Parser(grammar.lexer, grammar.top_list).parse(code) match {
       case Right(tree) =>
         val top_list = grammar.top_list_matcher(tree)
-        api.run(top_list) match {
-          case Right(_ok) =>
-          // do nothing
-          case Left(err) =>
-            println(s"${err.msg}")
+        try {
+          api.run(top_list)
+        } catch {
+          case report: Report =>
+            report.msg_list.foreach {
+              case msg =>
+                println(s"${msg}")
+                println("------")
+            }
             System.exit(1)
         }
       case Left(error) =>

@@ -6,117 +6,17 @@ import eval._
 
 object util {
 
-  // about list_map and error
-
-  def list_map_foreach_maybe_err[K, A]
-    (list_map: ListMap[K, A])
-    (f: (K, A) => Either[Err, Unit])
-      : Either[Err, Unit] = {
-    val init_result: Either[Err, Unit] = Right(())
-    list_map.foldLeft(init_result) {
-      case (result, (k, a)) =>
-        result match {
-          case Right(_ok) =>
-            f(k, a) match {
-              case Right(ok) => Right(ok)
-              case Left(err) => Left(err)
-            }
-          case Left(err) => Left(err)
-        }
-    }
-  }
-
-  def list_map_map_maybe_err[K, A, B]
-    (list_map: ListMap[K, A])
-    (f: (K, A) => Either[Err, B])
-      : Either[Err, ListMap[K, B]] = {
-    val init_result: Either[Err, ListMap[K, B]] = Right(ListMap.empty)
-    list_map.foldLeft(init_result) {
-      case (result, (k, a)) =>
-        result match {
-          case Right(list_map) =>
-            f(k, a) match {
-              case Right(b) => Right(list_map + (k -> b))
-              case Left(err) => Left(err)
-            }
-          case Left(err) => Left(err)
-        }
-    }
-  }
-
-  def list_map_map_entry_with_index_maybe_err[K, A, B]
-    (list_map: ListMap[K, A])
-    (f: (Int, K, A) => Either[Err, (K, B)])
-      : Either[Err, ListMap[K, B]] = {
-    val init_result: Either[Err, ListMap[K, B]] = Right(ListMap.empty)
-    var i = 0
-    list_map.foldLeft(init_result) {
-      case (result, (k, a)) =>
-        i = i + 1
-        result match {
-          case Right(list_map) =>
-            f(i - 1, k, a) match {
-              case Right((k, b)) => Right(list_map + (k -> b))
-              case Left(err) => Left(err)
-            }
-          case Left(err) => Left(err)
-        }
-    }
-  }
-
-  // about list and error
-
-  def list_map_maybe_err[A, B]
-    (list: List[A])
-    (f: A => Either[Err, B])
-      : Either[Err, List[B]] = {
-    val init: Either[Err, List[B]] = Right(List.empty)
-    list.foldLeft(init) {
-      case (result, a) =>
-        result match {
-          case Right(list) =>
-            f(a) match {
-              case Right(b) => Right(list :+ b)
-              case Left(err) => Left(err)
-            }
-          case Left(err) => Left(err)
-        }
-    }
-  }
-
-  def list_foreach_maybe_err[A]
-    (list: List[A])
-    (f: A => Either[Err, Unit])
-      : Either[Err, Unit] = {
-    val init: Either[Err, Unit] = Right(())
-    list.foldLeft(init) {
-      case (result, a) =>
-        result match {
-          case Right(_ok) =>
-            f(a) match {
-              case Right(_ok) => Right(())
-              case Left(err) => Left(err)
-            }
-          case Left(err) => Left(err)
-        }
-    }
-  }
-
-  // about val
-
   def force_telescope(
     name_list: List[String],
     exp_map: ListMap[String, Exp],
     env: Env,
-  ): Either[Err, ListMap[String, Value]] = {
+  ): ListMap[String, Value] = {
     val full_var_map = ListMap(exp_map.keys.toList.zip(name_list): _*)
-    for {
-      value_map <- util.list_map_map_entry_with_index_maybe_err(exp_map) {
-        case (i, _name, exp) =>
-          eval(env, util.exp_subst_var_map(exp, full_var_map.take(i)))
-            .map { case value => (name_list(i), value) }
-      }
-    } yield value_map
+    ListMap(exp_map.toList.zipWithIndex.map {
+      case ((_name, exp), i) =>
+        val value = eval(env, util.exp_subst_var_map(exp, full_var_map.take(i)))
+        (name_list(i), value)
+    }.toList: _*)
   }
 
   def force_telescope_with_extra_exp(
@@ -124,19 +24,16 @@ object util {
     exp_map: ListMap[String, Exp],
     exp: Exp,
     env: Env,
-  ): Either[Err, (ListMap[String, Value], Value)] = {
+  ): (ListMap[String, Value], Value) = {
     val full_var_map = ListMap(exp_map.keys.toList.zip(name_list): _*)
-    for {
-      value_map <- util.list_map_map_entry_with_index_maybe_err(exp_map) {
-        case (i, _name, exp) =>
-          eval(env, util.exp_subst_var_map(exp, full_var_map.take(i)))
-            .map { case value => (name_list(i), value) }
-      }
-      value <- eval(env, util.exp_subst_var_map(exp, full_var_map))
-    } yield (value_map, value)
+    val value_map = ListMap(exp_map.toList.zipWithIndex.map {
+      case ((_name, exp), i) =>
+        val value = eval(env, util.exp_subst_var_map(exp, full_var_map.take(i)))
+        (name_list(i), value)
+    }.toList: _*)
+    val value = eval(env, util.exp_subst_var_map(exp, full_var_map))
+    (value_map, value)
   }
-
-  // about exp
 
   def exp_subst_var_map(exp: Exp, var_map: ListMap[String, String]): Exp = {
     exp match {

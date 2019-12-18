@@ -6,7 +6,7 @@
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
-- make `Top` consistent with other `Entry`s
+- [cicada] use exception instead of `Either`
 - [big change] `ctx` contains both value and type
 - factor out `Telescope`
   - should we also store `ctx` in `Telescope`?
@@ -25,5 +25,7 @@
     `constrain equal x = y`
   - to define `eqv_t` as class
   - to specify partial algebraic structure
+- make `Top` consistent with other `Entry`s
+  [maybe] other `Entry`s should be like `Top`
 - [note] no auto currying
 - [less important] Exp use cofree
