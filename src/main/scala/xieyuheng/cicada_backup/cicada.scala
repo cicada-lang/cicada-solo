@@ -13,11 +13,7 @@ object cicada_backup extends mini_interpreter (
           api.run(top_list)
         } catch {
           case report: Report =>
-            report.msg_list.foreach {
-              case msg =>
-                println(s"${msg}")
-                println("------")
-            }
+            report.print()
             System.exit(1)
         }
       case Left(error) =>

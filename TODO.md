@@ -3,6 +3,7 @@
   (traditional type theoretical semantics)
 # partech
 - clean up partech
+- [partech] use exception instead of `Either`
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
