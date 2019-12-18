@@ -8,7 +8,6 @@
   like: https://github.com/kach/nearley/issues/451
 # cicada
 - [big change] `ctx` contains both value and type
-- [unified-ctx] grammar
 - [unified-ctx] test
 - [unified-ctx] trivial re-factor
 - factor out `Telescope`
