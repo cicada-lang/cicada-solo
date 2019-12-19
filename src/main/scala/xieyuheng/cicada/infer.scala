@@ -17,7 +17,9 @@ object infer {
           ctx.lookup_type(name) match {
             case Some(t) => t
             case None =>
-              throw Report(List(s"can not find var: ${name} in ctx"))
+              throw Report(List(
+                s"can not find var: ${name} in ctx\n"
+              ))
           }
 
         case Type() =>
@@ -82,11 +84,15 @@ object infer {
                   ValueClAlready(type_map)
 
                 case t =>
-                  throw Report(List(s"expecting ValueCl but found: ${t}"))
+                  throw Report(List(
+                    s"expecting ValueCl but found: ${t}\n"
+                  ))
               }
 
             case t =>
-              throw Report(List(s"expecting ValuePi type but found: ${t}"))
+              throw Report(List(
+                s"expecting ValuePi type but found: ${t}\n"
+              ))
           }
 
         case Dot(target: Exp, field: String) =>
@@ -95,10 +101,14 @@ object infer {
               type_map.get(field) match {
                 case Some(t) => t
                 case None =>
-                  throw Report(List(s"infer fail, can not find field in dot: ${field}"))
+                  throw Report(List(
+                    s"infer fail, can not find field in dot: ${field}\n"
+                  ))
               }
             case t =>
-              throw Report(List(s"expecting ValueClAlready but found: ${t}"))
+              throw Report(List(
+                s"expecting ValueClAlready but found: ${t}\n"
+              ))
           }
 
         case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
@@ -115,7 +125,8 @@ object infer {
       case report: Report =>
         throw report.prepend(
           s"infer fail\n" +
-            s"exp: ${pretty_exp(exp)}\n")
+            s"exp: ${pretty_exp(exp)}\n"
+        )
     }
   }
 

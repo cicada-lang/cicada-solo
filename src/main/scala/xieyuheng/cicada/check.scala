@@ -18,7 +18,9 @@ object check {
               check_telescope(env, ctx, value_map, cl.type_map, cl.env)
 
             case _ =>
-              throw Report(List(s"expecting class type but found: ${t}"))
+              throw Report(List(
+                s"expecting class type but found: ${t}\n"
+              ))
           }
 
         case _ =>
@@ -30,7 +32,8 @@ object check {
         throw report.prepend(
           s"check fail\n" +
             s"exp: ${pretty_exp(exp)}\n" +
-            s"t: ${pretty_value(t)}\n")
+            s"t: ${pretty_value(t)}\n"
+        )
     }
   }
 
@@ -50,7 +53,9 @@ object check {
           case Some(v_exp) => v_exp
           case None =>
             throw Report(List(
-              s"check_telescope fail, can not find a field of object in class, field: ${name}"
+              s"check_telescope fail\n" +
+                s"can not find a field of object in class\n" +
+                s"field: ${name}\n"
             ))
         }
         check(local_env, local_ctx, v_exp, t_value)

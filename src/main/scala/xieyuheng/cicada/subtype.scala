@@ -19,7 +19,9 @@ object subtype {
 
         case (s: ValuePi, t: ValuePi) =>
           if (s.arg_type_map.size != t.arg_type_map.size) {
-            throw Report(List(s"subtype fail on ValuePi, arity mis-match"))
+            throw Report(List(
+              s"subtype fail on ValuePi, arity mismatch"
+            ))
           } else {
             val name_list = s.arg_type_map.keys.zip(t.arg_type_map.keys).map {
               case (s_name, t_name) =>
@@ -72,7 +74,9 @@ object subtype {
           case Some(s) =>
             subtype(ctx, s, t)
           case None =>
-            throw Report(List(s"subtype_list_map can not find field: ${name}"))
+            throw Report(List(
+              s"subtype_list_map can not find field: ${name}\n"
+            ))
         }
     }
   }

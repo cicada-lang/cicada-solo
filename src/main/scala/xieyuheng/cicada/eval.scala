@@ -59,7 +59,9 @@ object eval {
       case ValueFn(arg_type_map: ListMap[String, Exp], body: Exp, env: Env) =>
         val name_list = arg_type_map.keys.toList
         if (name_list.length != arg_type_map.size) {
-          throw Report(List("value_apply fail, ValueFn arity mismatch"))
+          throw Report(List(
+            "value_apply fail, ValueFn arity mismatch\n"
+          ))
         } else {
           val map = Map(name_list.zip(arg_list): _*)
           eval(env.ext_map(map), body)
@@ -68,7 +70,9 @@ object eval {
       case ValueCl(type_map: ListMap[String, Exp], env: Env) =>
         val name_list = type_map.keys.toList
         if (name_list.length != type_map.size) {
-          throw Report(List("value_apply fail, ValueCl arity mismatch"))
+          throw Report(List(
+            "value_apply fail, ValueCl arity mismatch\n"
+          ))
         } else {
           val value_map = ListMap(name_list.zip(arg_list): _*)
           ValueObj(value_map)
@@ -91,11 +95,15 @@ object eval {
         value_map.get(field) match {
           case Some(value) => value
           case None =>
-            throw Report(List(s"missing field: ${field}"))
+            throw Report(List(
+              s"missing field: ${field}\n"
+            ))
         }
 
       case _ =>
-        throw Report(List("value_dot fail, expecting ValueObj"))
+        throw Report(List(
+          "value_dot fail, expecting ValueObj\n"
+        ))
     }
   }
 

@@ -15,7 +15,9 @@ object equivalent {
 
         case (s: ValuePi, t: ValuePi) =>
           if (s.arg_type_map.size != t.arg_type_map.size) {
-            throw Report(List(s"equivalent fail on ValuePi, arity mis-match"))
+            throw Report(List(
+              s"equivalent fail on ValuePi, arity mismatch\n"
+            ))
           } else {
             val name_list = s.arg_type_map.keys.zip(t.arg_type_map.keys).map {
               case (s_name, t_name) =>
@@ -34,7 +36,9 @@ object equivalent {
 
         case (s: ValueFn, t: ValueFn) =>
           if (s.arg_type_map.size != t.arg_type_map.size) {
-            throw Report(List(s"equivalent fail on ValueFn, arity mis-match"))
+            throw Report(List(
+              s"equivalent fail on ValueFn, arity mismatch\n"
+            ))
           } else {
             val name_list = s.arg_type_map.keys.zip(t.arg_type_map.keys).map {
               case (s_name, t_name) =>
@@ -54,7 +58,9 @@ object equivalent {
         case (s: ValueCl, t: ValueCl) =>
           // NOTE the order matters
           if (s.type_map.size != t.type_map.size) {
-            throw Report(List(s"equivalent fail on ValueCl, arity mis-match"))
+            throw Report(List(
+              s"equivalent fail on ValueCl, arity mismatch\n"
+            ))
           } else {
             val name_list = s.type_map.keys.zip(t.type_map.keys).map {
               case (s_name, t_name) =>
