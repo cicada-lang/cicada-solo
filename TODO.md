@@ -7,8 +7,7 @@
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
-- [big change] `ctx` contains both value and type
-- trivial re-factor
+- trivial re-factor, about `map` and `foreach` after using exception
 - factor out `Telescope`
   - also factor out `Telescope` with return (return type or return value)
   - should we also store `ctx` in `Telescope`?
