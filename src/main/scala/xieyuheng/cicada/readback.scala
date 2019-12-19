@@ -21,11 +21,11 @@ object readback {
           util.force_telescope_with_return(name_list, arg_type_map, body, env)
         Fn(readback_list_map(arg_type_value_map), readback(body_value))
 
-      case ValueTl(type_map: ListMap[String, Exp], env: Env) =>
+      case ValueCl(type_map: ListMap[String, Exp], env: Env) =>
         val name_list = type_map.keys.toList
         Cl(readback_list_map(util.force_telescope(name_list, type_map, env)))
 
-      case ValueCl(type_map: ListMap[String, Value]) =>
+      case ValueClAlready(type_map: ListMap[String, Value]) =>
         Cl(readback_list_map(type_map))
 
       case ValueObj(value_map: ListMap[String, Value]) =>

@@ -51,10 +51,10 @@ object equivalent {
             equivalent(ctx, s_body, t_body)
           }
 
-        case (s: ValueTl, t: ValueTl) =>
+        case (s: ValueCl, t: ValueCl) =>
           // NOTE the order matters
           if (s.type_map.size != t.type_map.size) {
-            throw Report(List(s"equivalent fail on ValueTl, arity mis-match"))
+            throw Report(List(s"equivalent fail on ValueCl, arity mis-match"))
           } else {
             val name_list = s.type_map.keys.zip(t.type_map.keys).map {
               case (s_name, t_name) =>
@@ -66,15 +66,15 @@ object equivalent {
             equivalent_list_map(ctx, t_type_map, s_type_map)
           }
 
-        case (s: ValueCl, t: ValueCl) =>
+        case (s: ValueClAlready, t: ValueClAlready) =>
           equivalent_list_map(ctx, s.type_map, t.type_map)
 
-        case (s: ValueTl, t: ValueCl) =>
+        case (s: ValueCl, t: ValueClAlready) =>
           val name_list = s.type_map.keys.toList
           val type_map = util.force_telescope(name_list, s.type_map, s.env)
           equivalent_list_map(ctx, type_map, t.type_map)
 
-        case (s: ValueCl, t: ValueTl) =>
+        case (s: ValueClAlready, t: ValueCl) =>
           val name_list = t.type_map.keys.toList
           val type_map = util.force_telescope(name_list, t.type_map, t.env)
           equivalent_list_map(ctx, s.type_map, type_map)
@@ -125,9 +125,16 @@ object equivalent {
     s_list: List[Value],
     t_list: List[Value],
   ): Unit = {
-    s_list.zip(t_list).foreach {
-      case (s, t) =>
-        equivalent(ctx, s, t)
+    if (s_list.size != t_list.size) {
+      throw Report(List(
+        s"equivalent_list fail\n" +
+          s"length mismatch\n"
+      ))
+    } else {
+      s_list.zip(t_list).foreach {
+        case (s, t) =>
+          equivalent(ctx, s, t)
+      }
     }
   }
 

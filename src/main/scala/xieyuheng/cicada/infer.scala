@@ -57,7 +57,7 @@ object infer {
           val type_map = ListMap(value_map.map {
             case (name, exp) => (name, eval(env, exp))
           }.toList: _*)
-          ValueCl(type_map)
+          ValueClAlready(type_map)
 
         case Ap(target: Exp, arg_list: List[Exp]) =>
           infer(env, ctx, target) match {
@@ -69,20 +69,20 @@ object infer {
 
             case ValueType() =>
               eval(env, target) match {
-                case tl: ValueTl =>
-                  val name_list = tl.type_map.keys.toList
+                case cl: ValueCl =>
+                  val name_list = cl.type_map.keys.toList
                   val arg_map = ListMap(name_list.zip(arg_list): _*)
-                  val (_new_env, new_ctx) = check_telescope(env, ctx, arg_map, tl.type_map, tl.env)
+                  val (_new_env, new_ctx) = check_telescope(env, ctx, arg_map, cl.type_map, cl.env)
                   val type_map = new_ctx.type_map.filter {
-                    case (name, _t) => tl.type_map.contains(name)
+                    case (name, _t) => cl.type_map.contains(name)
                   }
                   // TODO apply (not partial) a class to its args get a type
                   // we are already returning type here instead of object
                   // this is not enough, since arg_map is known now, we can
-                  ValueCl(type_map)
+                  ValueClAlready(type_map)
 
                 case t =>
-                  throw Report(List(s"expecting ValueTl but found: ${t}"))
+                  throw Report(List(s"expecting ValueCl but found: ${t}"))
               }
 
             case t =>
@@ -91,14 +91,14 @@ object infer {
 
         case Dot(target: Exp, field: String) =>
           infer(env, ctx, target) match {
-            case ValueCl(type_map: ListMap[String, Value]) =>
+            case ValueClAlready(type_map: ListMap[String, Value]) =>
               type_map.get(field) match {
                 case Some(t) => t
                 case None =>
                   throw Report(List(s"infer fail, can not find field in dot: ${field}"))
               }
             case t =>
-              throw Report(List(s"expecting ValueCl but found: ${t}"))
+              throw Report(List(s"expecting ValueClAlready but found: ${t}"))
           }
 
         case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>

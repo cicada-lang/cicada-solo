@@ -14,8 +14,8 @@ object check {
       exp match {
         case Obj(value_map: ListMap[String, Exp]) =>
           t match {
-            case tl: ValueTl =>
-              check_telescope(env, ctx, value_map, tl.type_map, tl.env)
+            case cl: ValueCl =>
+              check_telescope(env, ctx, value_map, cl.type_map, cl.env)
 
             case _ =>
               throw Report(List(s"expecting class type but found: ${t}"))

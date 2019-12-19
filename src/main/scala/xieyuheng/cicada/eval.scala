@@ -27,7 +27,7 @@ object eval {
         value_apply(eval(env, target), arg_list.map { eval(env, _) })
 
       case Cl(type_map: ListMap[String, Exp]) =>
-        ValueTl(type_map: ListMap[String, Exp], env: Env)
+        ValueCl(type_map: ListMap[String, Exp], env: Env)
 
       case Obj(value_map: ListMap[String, Exp]) =>
         ValueObj(value_map.map {
@@ -53,7 +53,8 @@ object eval {
 
   def value_apply(value: Value, arg_list: List[Value]): Value = {
     value match {
-      case neutral: Neutral => NeutralAp(neutral, arg_list)
+      case neutral: Neutral =>
+        NeutralAp(neutral, arg_list)
 
       case ValueFn(arg_type_map: ListMap[String, Exp], body: Exp, env: Env) =>
         val name_list = arg_type_map.keys.toList
@@ -64,10 +65,10 @@ object eval {
           eval(env.ext_map(map), body)
         }
 
-      case ValueTl(type_map: ListMap[String, Exp], env: Env) =>
+      case ValueCl(type_map: ListMap[String, Exp], env: Env) =>
         val name_list = type_map.keys.toList
         if (name_list.length != type_map.size) {
-          throw Report(List("value_apply fail, ValueTl arity mismatch"))
+          throw Report(List("value_apply fail, ValueCl arity mismatch"))
         } else {
           val value_map = ListMap(name_list.zip(arg_list): _*)
           ValueObj(value_map)
@@ -75,7 +76,7 @@ object eval {
 
       case _ =>
         throw Report(List(
-          "value_apply fail, expecting ValueFn or ValueTl\n" +
+          "value_apply fail, expecting ValueFn or ValueCl\n" +
             s"value: ${pretty_value(value)}\n"
         ))
     }

@@ -15,7 +15,7 @@ object subtype {
       (s, t) match {
         case (s: ValuePi, ValueType()) => ()
 
-        case (s: ValueCl, ValueType()) => ()
+        case (s: ValueClAlready, ValueType()) => ()
 
         case (s: ValuePi, t: ValuePi) =>
           if (s.arg_type_map.size != t.arg_type_map.size) {
@@ -36,15 +36,15 @@ object subtype {
             subtype(ctx, s_return_type, t_return_type)
           }
 
-        case (s: ValueCl, t: ValueCl) =>
+        case (s: ValueClAlready, t: ValueClAlready) =>
           subtype_list_map(ctx, s.type_map, t.type_map)
 
-        case (s: ValueTl, t: ValueCl) =>
+        case (s: ValueCl, t: ValueClAlready) =>
           val name_list = s.type_map.keys.toList
           val type_map = util.force_telescope(name_list, s.type_map, s.env)
           subtype_list_map(ctx, type_map, t.type_map)
 
-        case (s: ValueCl, t: ValueTl) =>
+        case (s: ValueClAlready, t: ValueCl) =>
           val name_list = t.type_map.keys.toList
           val type_map = util.force_telescope(name_list, t.type_map, t.env)
           subtype_list_map(ctx, s.type_map, type_map)
