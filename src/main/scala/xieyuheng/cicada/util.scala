@@ -7,12 +7,13 @@ import eval._
 object util {
 
   def force_telescope(
+    telescope: Telescope,
     name_list: List[String],
-    exp_map: ListMap[String, Exp],
-    env: Env,
   ): ListMap[String, Value] = {
-    val full_var_map = ListMap(exp_map.keys.toList.zip(name_list): _*)
-    ListMap(exp_map.toList.zipWithIndex.map {
+    val type_map: ListMap[String, Exp] = telescope.type_map
+    val env: Env = telescope.env
+    val full_var_map = ListMap(type_map.keys.toList.zip(name_list): _*)
+    ListMap(type_map.toList.zipWithIndex.map {
       case ((_name, exp), i) =>
         val value = eval(env, util.exp_subst_var_map(exp, full_var_map.take(i)))
         (name_list(i), value)
@@ -20,13 +21,14 @@ object util {
   }
 
   def force_telescope_with_return(
+    telescope: Telescope,
     name_list: List[String],
-    exp_map: ListMap[String, Exp],
     exp: Exp,
-    env: Env,
   ): (ListMap[String, Value], Value) = {
-    val full_var_map = ListMap(exp_map.keys.toList.zip(name_list): _*)
-    val value_map = ListMap(exp_map.toList.zipWithIndex.map {
+    val type_map: ListMap[String, Exp] = telescope.type_map
+    val env: Env = telescope.env
+    val full_var_map = ListMap(type_map.keys.toList.zip(name_list): _*)
+    val value_map = ListMap(type_map.toList.zipWithIndex.map {
       case ((_name, exp), i) =>
         val value = eval(env, util.exp_subst_var_map(exp, full_var_map.take(i)))
         (name_list(i), value)
