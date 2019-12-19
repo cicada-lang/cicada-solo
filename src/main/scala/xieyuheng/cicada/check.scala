@@ -15,7 +15,7 @@ object check {
         case Obj(value_map: ListMap[String, Exp]) =>
           t match {
             case cl: ValueCl =>
-              check_telescope(env, ctx, value_map, cl.type_map, cl.env)
+              check_telescope(env, ctx, value_map, cl.telescope.type_map, cl.telescope.env)
 
             case _ =>
               throw Report(List(

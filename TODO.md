@@ -8,9 +8,9 @@
   like: https://github.com/kach/nearley/issues/451
 # cicada
 - factor out `Telescope`
-  - also factor out `Telescope` with return (return type or return value)
-  - we also take this opportunity to handle currying
-    be careful about equality
+- also factor out `Telescope` with return (return type or return value)
+- we also take this opportunity to handle currying
+  be careful about equality
 - application of class return type instead of object
 - equality constrain `equal` in telescope
   - syntax should be

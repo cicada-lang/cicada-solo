@@ -14,15 +14,15 @@ object pretty {
       case Type() =>
         s"type"
 
-      case Pi(arg_type_map: ListMap[String, Exp], return_type: Exp) =>
-        var s = arg_type_map.map {
+      case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
+        var s = type_map.map {
           case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
         s = s + s"conclude ${pretty_exp(return_type)}\n"
         s"{${maybe_ln(s)}}"
 
-      case Fn(arg_type_map: ListMap[String, Exp], body: Exp) =>
-        var s = arg_type_map.map {
+      case Fn(type_map: ListMap[String, Exp], body: Exp) =>
+        var s = type_map.map {
           case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
         s = s + s"return ${pretty_exp(body)}\n"
@@ -80,21 +80,24 @@ object pretty {
       case ValueType() =>
         s"type"
 
-      case ValuePi(arg_type_map: ListMap[String, Exp], return_type: Exp, env: Env) =>
-        var s = arg_type_map.map {
+      case ValuePi(Telescope(type_map: ListMap[String, Exp], env: Env), return_type: Exp) =>
+        var s = type_map.map {
           case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
         s = s + s"conclude ${pretty_exp(return_type)}\n"
         s"{${maybe_ln(s)}}"
 
-      case ValueFn(arg_type_map: ListMap[String, Exp], body: Exp, env: Env) =>
-        var s = arg_type_map.map {
+      case ValueFn(Telescope(type_map: ListMap[String, Exp], env: Env), body: Exp) =>
+        var s = type_map.map {
           case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
         s = s + s"return ${pretty_exp(body)}\n"
         s"{${maybe_ln(s)}}"
 
-      case ValueCl(type_map: ListMap[String, Exp], env: Env) =>
+      case ValueCl(
+        _defined: ListMap[String, (Value, Value)],
+        Telescope(type_map: ListMap[String, Exp], env: Env),
+      ) =>
         var s = type_map.map {
           case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
         }.mkString("")

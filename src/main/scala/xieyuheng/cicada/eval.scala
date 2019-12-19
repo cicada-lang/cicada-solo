@@ -17,17 +17,17 @@ object eval {
       case Type() =>
         ValueType()
 
-      case Pi(arg_type_map: ListMap[String, Exp], return_type: Exp) =>
-        ValuePi(arg_type_map: ListMap[String, Exp], return_type: Exp, env: Env)
+      case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
+        ValuePi(Telescope(type_map: ListMap[String, Exp], env: Env), return_type: Exp)
 
-      case Fn(arg_type_map: ListMap[String, Exp], body: Exp) =>
-        ValueFn(arg_type_map: ListMap[String, Exp], body: Exp, env: Env)
+      case Fn(type_map: ListMap[String, Exp], body: Exp) =>
+        ValueFn(Telescope(type_map: ListMap[String, Exp], env: Env), body: Exp)
 
       case Ap(target: Exp, arg_list: List[Exp]) =>
         value_apply(eval(env, target), arg_list.map { eval(env, _) })
 
       case Cl(type_map: ListMap[String, Exp]) =>
-        ValueCl(type_map: ListMap[String, Exp], env: Env)
+        ValueCl(ListMap(), Telescope(type_map: ListMap[String, Exp], env: Env))
 
       case Obj(value_map: ListMap[String, Exp]) =>
         ValueObj(value_map.map {
@@ -56,9 +56,9 @@ object eval {
       case neutral: Neutral =>
         NeutralAp(neutral, arg_list)
 
-      case ValueFn(arg_type_map: ListMap[String, Exp], body: Exp, env: Env) =>
-        val name_list = arg_type_map.keys.toList
-        if (name_list.length != arg_type_map.size) {
+      case ValueFn(Telescope(type_map: ListMap[String, Exp], env: Env), body: Exp) =>
+        val name_list = type_map.keys.toList
+        if (name_list.length != type_map.size) {
           throw Report(List(
             "value_apply fail, ValueFn arity mismatch\n"
           ))
@@ -67,7 +67,7 @@ object eval {
           eval(env.ext_map(map), body)
         }
 
-      case ValueCl(type_map: ListMap[String, Exp], env: Env) =>
+      case ValueCl(_defined, Telescope(type_map: ListMap[String, Exp], env: Env)) =>
         val name_list = type_map.keys.toList
         if (name_list.length != type_map.size) {
           throw Report(List(

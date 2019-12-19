@@ -18,23 +18,23 @@ object subtype {
         case (s: ValueClAlready, ValueType()) => ()
 
         case (s: ValuePi, t: ValuePi) =>
-          if (s.arg_type_map.size != t.arg_type_map.size) {
+          if (s.telescope.type_map.size != t.telescope.type_map.size) {
             throw Report(List(
               s"subtype fail on ValuePi, arity mismatch"
             ))
           } else {
-            val name_list = s.arg_type_map.keys.zip(t.arg_type_map.keys).map {
+            val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {
               case (s_name, t_name) =>
                 val uuid: UUID = UUID.randomUUID()
                 s"#subtype-pi-type:${s_name}:${t_name}:${uuid}"
             }.toList
-            val (s_arg_type_map, s_return_type) =
+            val (s_type_map, s_return_type) =
               util.force_telescope_with_return(
-                name_list, s.arg_type_map, s.return_type, s.env)
-            val (t_arg_type_map, t_return_type) =
+                name_list, s.telescope.type_map, s.return_type, s.telescope.env)
+            val (t_type_map, t_return_type) =
               util.force_telescope_with_return(
-                name_list, t.arg_type_map, t.return_type, t.env)
-            subtype_list_map(ctx, t_arg_type_map, s_arg_type_map)
+                name_list, t.telescope.type_map, t.return_type, t.telescope.env)
+            subtype_list_map(ctx, t_type_map, s_type_map)
             subtype(ctx, s_return_type, t_return_type)
           }
 
@@ -42,13 +42,13 @@ object subtype {
           subtype_list_map(ctx, s.type_map, t.type_map)
 
         case (s: ValueCl, t: ValueClAlready) =>
-          val name_list = s.type_map.keys.toList
-          val type_map = util.force_telescope(name_list, s.type_map, s.env)
+          val name_list = s.telescope.type_map.keys.toList
+          val type_map = util.force_telescope(name_list, s.telescope.type_map, s.telescope.env)
           subtype_list_map(ctx, type_map, t.type_map)
 
         case (s: ValueClAlready, t: ValueCl) =>
-          val name_list = t.type_map.keys.toList
-          val type_map = util.force_telescope(name_list, t.type_map, t.env)
+          val name_list = t.telescope.type_map.keys.toList
+          val type_map = util.force_telescope(name_list, t.telescope.type_map, t.telescope.env)
           subtype_list_map(ctx, s.type_map, type_map)
 
         case (s, t) =>

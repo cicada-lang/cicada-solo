@@ -46,21 +46,21 @@ object util {
       case Type() =>
         exp
 
-      case Pi(arg_type_map: ListMap[String, Exp], return_type: Exp) =>
-        val new_arg_type_map = ListMap(arg_type_map.map {
+      case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
+        val new_type_map = ListMap(type_map.map {
           case (name, exp) =>
             (name, exp_subst_var_map(exp, var_map))
         }.toList: _*)
         val new_return_type = exp_subst_var_map(return_type, var_map);
-        Pi(arg_type_map, new_return_type)
+        Pi(type_map, new_return_type)
 
-      case Fn(arg_type_map: ListMap[String, Exp], body: Exp) =>
-        val new_arg_type_map = ListMap(arg_type_map.map {
+      case Fn(type_map: ListMap[String, Exp], body: Exp) =>
+        val new_type_map = ListMap(type_map.map {
           case (name, exp) =>
             (name, exp_subst_var_map(exp, var_map))
         }.toList: _*)
         val new_body = exp_subst_var_map(body, var_map);
-        Fn(arg_type_map, new_body)
+        Fn(type_map, new_body)
 
       case Ap(target: Exp, arg_list: List[Exp]) =>
         val new_target = exp_subst_var_map(target, var_map)
