@@ -63,10 +63,10 @@ object infer {
 
         case Ap(target: Exp, arg_list: List[Exp]) =>
           infer(env, ctx, target) match {
-            case ValuePi(Telescope(type_map: ListMap[String, Exp], pi_env: Env), return_type: Exp) =>
-              val name_list = type_map.keys.toList
+            case ValuePi(telescope: Telescope, return_type: Exp) =>
+              val name_list = telescope.type_map.keys.toList
               val arg_map = ListMap(name_list.zip(arg_list): _*)
-              val (new_env, _new_ctx) = check_telescope(env, ctx, arg_map, type_map, pi_env)
+              val (new_env, _new_ctx) = telescope_check(env, ctx, arg_map, telescope)
               eval(new_env, return_type)
 
             case ValueType() =>
@@ -75,7 +75,7 @@ object infer {
                   val name_list = cl.telescope.type_map.keys.toList
                   val arg_map = ListMap(name_list.zip(arg_list): _*)
                   val (_new_env, new_ctx) =
-                    check_telescope(env, ctx, arg_map, cl.telescope.type_map, cl.telescope.env)
+                    telescope_check(env, ctx, arg_map, cl.telescope)
                   val type_map = new_ctx.type_map.filter {
                     case (name, _t) => cl.telescope.type_map.contains(name)
                   }

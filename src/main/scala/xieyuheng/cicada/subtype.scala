@@ -29,9 +29,9 @@ object subtype {
                 s"#subtype-pi-type:${s_name}:${t_name}:${uuid}"
             }.toList
             val (s_type_map, s_return_type) =
-              util.force_telescope_with_return(s.telescope, name_list, s.return_type)
+              util.telescope_force_with_return(s.telescope, name_list, s.return_type)
             val (t_type_map, t_return_type) =
-              util.force_telescope_with_return(t.telescope, name_list, t.return_type)
+              util.telescope_force_with_return(t.telescope, name_list, t.return_type)
             subtype_list_map(ctx, t_type_map, s_type_map)
             subtype(ctx, s_return_type, t_return_type)
           }
@@ -41,12 +41,12 @@ object subtype {
 
         case (s: ValueCl, t: ValueClAlready) =>
           val name_list = s.telescope.type_map.keys.toList
-          val type_map = util.force_telescope(s.telescope, name_list)
+          val type_map = util.telescope_force(s.telescope, name_list)
           subtype_list_map(ctx, type_map, t.type_map)
 
         case (s: ValueClAlready, t: ValueCl) =>
           val name_list = t.telescope.type_map.keys.toList
-          val type_map = util.force_telescope(t.telescope, name_list)
+          val type_map = util.telescope_force(t.telescope, name_list)
           subtype_list_map(ctx, s.type_map, type_map)
 
         case (s, t) =>

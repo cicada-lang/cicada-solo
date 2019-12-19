@@ -6,7 +6,7 @@ import eval._
 
 object util {
 
-  def force_telescope(
+  def telescope_force(
     telescope: Telescope,
     name_list: List[String],
   ): ListMap[String, Value] = {
@@ -20,7 +20,7 @@ object util {
     }.toList: _*)
   }
 
-  def force_telescope_with_return(
+  def telescope_force_with_return(
     telescope: Telescope,
     name_list: List[String],
     exp: Exp,

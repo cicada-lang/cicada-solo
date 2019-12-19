@@ -12,18 +12,18 @@ object readback {
       case ValuePi(telescope: Telescope, return_type: Exp) =>
         val name_list = telescope.type_map.keys.toList
         val (type_value_map, return_type_value) =
-          util.force_telescope_with_return(telescope, name_list, return_type)
+          util.telescope_force_with_return(telescope, name_list, return_type)
         Pi(readback_list_map(type_value_map), readback(return_type_value))
 
       case ValueFn(telescope: Telescope, body: Exp) =>
         val name_list = telescope.type_map.keys.toList
         val (type_value_map, body_value) =
-          util.force_telescope_with_return(telescope, name_list, body)
+          util.telescope_force_with_return(telescope, name_list, body)
         Fn(readback_list_map(type_value_map), readback(body_value))
 
       case ValueCl(_defined, telescope: Telescope) =>
         val name_list = telescope.type_map.keys.toList
-        Cl(readback_list_map(util.force_telescope(telescope, name_list)))
+        Cl(readback_list_map(util.telescope_force(telescope, name_list)))
 
       case ValueClAlready(type_map: ListMap[String, Value]) =>
         Cl(readback_list_map(type_map))

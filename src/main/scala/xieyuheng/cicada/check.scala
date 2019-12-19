@@ -15,7 +15,7 @@ object check {
         case Obj(value_map: ListMap[String, Exp]) =>
           t match {
             case cl: ValueCl =>
-              check_telescope(env, ctx, value_map, cl.telescope.type_map, cl.telescope.env)
+              telescope_check(env, ctx, value_map, cl.telescope)
 
             case _ =>
               throw Report(List(
@@ -37,23 +37,24 @@ object check {
     }
   }
 
-  def check_telescope(
+  def telescope_check(
     env: Env,
     ctx: Ctx,
-    arg_exp_map: ListMap[String, Exp],
-    type_map: ListMap[String, Exp],
-    init_telescope_env: Env,
+    arg_map: ListMap[String, Exp],
+    telescope: Telescope,
   ): (Env, Ctx) = {
+    val init_telescope_env: Env = telescope.env
+    val type_map: ListMap[String, Exp] = telescope.type_map
     var local_env = init_telescope_env
     var local_ctx = ctx
     type_map.foreach {
       case (name, t_exp) =>
         val t_value = eval(local_env, t_exp)
-        val v_exp = arg_exp_map.get(name) match {
+        val v_exp = arg_map.get(name) match {
           case Some(v_exp) => v_exp
           case None =>
             throw Report(List(
-              s"check_telescope fail\n" +
+              s"telescope_check fail\n" +
                 s"can not find a field of object in class\n" +
                 s"field: ${name}\n"
             ))
