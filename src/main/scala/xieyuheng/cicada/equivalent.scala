@@ -73,17 +73,18 @@ object equivalent {
           equivalent_list_map(ctx, s.type_map, t.type_map)
 
         case (s: ValueCl, t: ValueClAlready) =>
+          // TODO handle defined fields
           // NOTE this can happend only when ValueCl has no defined fields
           //   because this must be a free variable proof
-          // TODO
+
           val name_list = s.telescope.type_map.keys.toList
           val type_map = util.telescope_force(s.telescope, name_list)
           equivalent_list_map(ctx, type_map, t.type_map)
 
         case (s: ValueClAlready, t: ValueCl) =>
+          // TODO handle defined fields
           // NOTE this can happend only when ValueCl has no defined fields
           //   because this must be a free variable proof
-          // TODO
           val name_list = t.telescope.type_map.keys.toList
           val type_map = util.telescope_force(t.telescope, name_list)
           equivalent_list_map(ctx, s.type_map, type_map)
