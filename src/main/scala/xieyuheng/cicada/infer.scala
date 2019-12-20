@@ -66,23 +66,18 @@ object infer {
             case ValuePi(telescope: Telescope, return_type: Exp) =>
               val name_list = telescope.type_map.keys.toList
               val arg_map = ListMap(name_list.zip(arg_list): _*)
-              val (new_env, _new_ctx) = telescope_check(env, ctx, arg_map, telescope)
+              val new_env = telescope_check_yield_env(env, ctx, arg_map, telescope)
               eval(new_env, return_type)
 
             case ValueType() =>
               eval(env, target) match {
-                case cl: ValueCl =>
-                  val name_list = cl.telescope.type_map.keys.toList
+                case ValueCl(defined, telescope) =>
+                  val name_list = telescope.type_map.keys.toList
                   val arg_map = ListMap(name_list.zip(arg_list): _*)
-                  val (_new_env, new_ctx) =
-                    telescope_check(env, ctx, arg_map, cl.telescope)
-                  val type_map = new_ctx.type_map.filter {
-                    case (name, _t) => cl.telescope.type_map.contains(name)
-                  }
-                  // TODO apply (not partial) a class to its args get a type
-                  // we are already returning type here instead of object
-                  // this is not enough, since arg_map is known now, we can
-                  ValueClAlready(type_map)
+                  telescope_check(env, ctx, arg_map, telescope)
+                  val value_list = arg_list.map { eval(env, _) }
+                  val (new_defined, new_telescope) = telescope_apply(telescope, value_list)
+                  ValueCl(defined ++ new_defined, new_telescope)
 
                 case t =>
                   throw Report(List(

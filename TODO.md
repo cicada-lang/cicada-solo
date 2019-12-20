@@ -7,9 +7,10 @@
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
-- application of class return type instead of object
+- readback `ValueCl` (to `Block`?)
+- `subtype` for `ValueCl`
+- `equivalent` for `ValueCl`
 - we also take this opportunity to handle currying
-  be careful about equality
 - equality constrain `equal` in telescope
   - syntax should be
     `constrain equal x = y`

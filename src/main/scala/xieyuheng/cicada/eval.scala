@@ -67,16 +67,9 @@ object eval {
           eval(env.ext_map(map), body)
         }
 
-      case ValueCl(_defined, Telescope(type_map: ListMap[String, Exp], env: Env)) =>
-        val name_list = type_map.keys.toList
-        if (name_list.length != type_map.size) {
-          throw Report(List(
-            "value_apply fail, ValueCl arity mismatch\n"
-          ))
-        } else {
-          val value_map = ListMap(name_list.zip(arg_list): _*)
-          ValueObj(value_map)
-        }
+      case ValueCl(defined, telescope: Telescope) =>
+        val (new_defined, new_telescope) = telescope_apply(telescope, arg_list)
+        ValueCl(defined ++ new_defined, new_telescope)
 
       case _ =>
         throw Report(List(
@@ -105,6 +98,29 @@ object eval {
           "value_dot fail, expecting ValueObj\n"
         ))
     }
+  }
+
+  def telescope_apply(
+    telescope: Telescope,
+    value_list: List[Value],
+  ): (ListMap[String, (Value, Value)], Telescope) = {
+    if (telescope.type_map.size < value_list.length) {
+      throw Report(List(
+        s"telescope_apply fail\n" +
+          s"too many arguments\n"
+      ))
+    }
+    var new_defined: ListMap[String, (Value, Value)] = ListMap()
+    var new_type_map = telescope.type_map
+    var local_env = telescope.env
+    telescope.type_map.zip(value_list).foreach {
+      case ((name, t_exp), value) =>
+        val t = eval(local_env, t_exp)
+        new_defined = new_defined + (name -> (t, value))
+        local_env = local_env.ext(name, value)
+        new_type_map = new_type_map.tail
+    }
+    (new_defined, Telescope(new_type_map, local_env))
   }
 
 }

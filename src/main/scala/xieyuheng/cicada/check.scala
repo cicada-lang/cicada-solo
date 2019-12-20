@@ -42,12 +42,10 @@ object check {
     ctx: Ctx,
     arg_map: ListMap[String, Exp],
     telescope: Telescope,
-  ): (Env, Ctx) = {
-    val init_telescope_env: Env = telescope.env
-    val type_map: ListMap[String, Exp] = telescope.type_map
-    var local_env = init_telescope_env
+  ): Unit = {
+    var local_env = telescope.env
     var local_ctx = ctx
-    type_map.foreach {
+    telescope.type_map.foreach {
       case (name, t_exp) =>
         val t_value = eval(local_env, t_exp)
         val v_exp = arg_map.get(name) match {
@@ -60,11 +58,42 @@ object check {
             ))
         }
         check(local_env, local_ctx, v_exp, t_value)
+        // NOTE not using local_env here
+        //   local_env is only used to eval types in telescope
         val v_value = eval(env, v_exp)
         local_env = local_env.ext(name, v_value)
         local_ctx = local_ctx.ext(name, t_value)
     }
-    (local_env, local_ctx)
+  }
+
+  def telescope_check_yield_env(
+    env: Env,
+    ctx: Ctx,
+    arg_map: ListMap[String, Exp],
+    telescope: Telescope,
+  ): Env = {
+    var local_env = telescope.env
+    var local_ctx = ctx
+    telescope.type_map.foreach {
+      case (name, t_exp) =>
+        val t_value = eval(local_env, t_exp)
+        val v_exp = arg_map.get(name) match {
+          case Some(v_exp) => v_exp
+          case None =>
+            throw Report(List(
+              s"telescope_check fail\n" +
+                s"can not find a field of object in class\n" +
+                s"field: ${name}\n"
+            ))
+        }
+        check(local_env, local_ctx, v_exp, t_value)
+        // NOTE not using local_env here
+        //   local_env is only used to eval types in telescope
+        val v_value = eval(env, v_exp)
+        local_env = local_env.ext(name, v_value)
+        local_ctx = local_ctx.ext(name, t_value)
+    }
+    local_env
   }
 
 }
