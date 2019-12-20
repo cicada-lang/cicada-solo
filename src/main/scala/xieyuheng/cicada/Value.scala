@@ -8,7 +8,10 @@ sealed trait Value
 final case class ValueType() extends Value
 final case class ValuePi(telescope: Telescope, return_type: Exp) extends Value
 final case class ValueFn(telescope: Telescope, body: Exp) extends Value
-final case class ValueCl(collected: ListMap[String, (Value, Value)], telescope: Telescope) extends Value
+final case class ValueCl(
+  defined: ListMap[String, (Value, Value)],
+  telescope: Telescope,
+) extends Value
 final case class ValueClAlready(type_map: ListMap[String, Value]) extends Value
 final case class ValueObj(value_map: ListMap[String, Value]) extends Value
 

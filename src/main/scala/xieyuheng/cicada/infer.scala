@@ -49,9 +49,28 @@ object infer {
         case Cl(type_map: ListMap[String, Exp]) =>
           var local_ctx = ctx
           type_map.foreach {
-            case (name, exp) =>
-              check(env, local_ctx, exp, ValueType())
-              local_ctx = local_ctx.ext(name, eval(env, exp))
+            case (name, t) =>
+              check(env, local_ctx, t, ValueType())
+              local_ctx = local_ctx.ext(name, eval(env, t))
+          }
+          ValueType()
+
+        case ClPredefined(defined, type_map: ListMap[String, Exp]) =>
+          var local_env = env
+          var local_ctx = ctx
+          defined.foreach {
+            case (name, (t, v)) =>
+              check(local_env, local_ctx, t, ValueType())
+              val t_value = eval(local_env, t)
+              check(local_env, local_ctx, v, t_value)
+              val v_value = eval(local_env, v)
+              local_ctx = local_ctx.ext(name, t_value)
+              local_env = local_env.ext(name, v_value)
+          }
+          type_map.foreach {
+            case (name, t) =>
+              check(local_env, local_ctx, t, ValueType())
+              local_ctx = local_ctx.ext(name, eval(env, t))
           }
           ValueType()
 

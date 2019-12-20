@@ -39,6 +39,7 @@ object grammar {
       "fn" -> List("{", non_empty_list(given_entry), "return", exp, "}"),
       "ap" -> List(exp, "(", non_empty_list(arg_entry), ")"),
       "cl" -> List("class", "{", non_empty_list(given_entry), "}"),
+      "cl_predefined" -> List("class", "{", non_empty_list(define_entry), non_empty_list(given_entry), "}"),
       "cl_naked" -> List("{", non_empty_list(given_entry), "}"),
       "cl_empty" -> List("class", "{", "}"),
       "obj" -> List("object", "{", non_empty_list(let_entry), "}"),
@@ -64,6 +65,11 @@ object grammar {
       "cl" -> { case List(_, _, given_entry_list, _) =>
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
         Cl(type_map) },
+      "cl_predefined" -> { case List(
+        _, _, define_entry_list, given_entry_list, _) =>
+        val defined = ListMap(non_empty_list_matcher(define_entry_matcher)(define_entry_list): _*)
+        val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
+        ClPredefined(defined, type_map) },
       "cl_naked" -> { case List(_, given_entry_list, _) =>
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
         Cl(type_map) },
@@ -113,7 +119,19 @@ object grammar {
 
   def let_entry_matcher = Tree.matcher[(String, Exp)](
     "let_entry", Map(
-      "let" -> { case List(_, Leaf(name), _, exp) => (name, exp_matcher(exp)) },
+      "let" -> { case List(_, Leaf(name), _, exp) =>
+        (name, exp_matcher(exp)) },
+    ))
+
+  def define_entry = Rule(
+    "define_entry", Map(
+      "define" -> List("define", identifier, ":", exp, "=", exp),
+    ))
+
+  def define_entry_matcher = Tree.matcher[(String, (Exp, Exp))](
+    "define_entry", Map(
+      "define" -> { case List(_, Leaf(name), _, t, _, exp) =>
+        (name, (exp_matcher(t), exp_matcher(exp))) },
     ))
 
   def block_entry = Rule(

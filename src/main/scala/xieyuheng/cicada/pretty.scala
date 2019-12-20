@@ -40,6 +40,15 @@ object pretty {
         }.mkString("")
         s"class {${maybe_ln(s)}}"
 
+      case ClPredefined(defined, type_map: ListMap[String, Exp]) =>
+        var d = defined.map {
+          case (name, (t, exp)) => s"define ${name} : ${pretty_exp(t)} = ${pretty_exp(exp)}\n"
+        }.mkString("")
+        var s = type_map.map {
+          case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
+        }.mkString("")
+        s"class {${maybe_ln(d)}${maybe_ln(s)}}"
+
       case Obj(value_map: ListMap[String, Exp]) =>
         var s = value_map.map {
           case (name, exp) => s"let ${name} = ${pretty_exp(exp)}\n"
@@ -95,13 +104,16 @@ object pretty {
         s"{${maybe_ln(s)}}"
 
       case ValueCl(
-        _defined: ListMap[String, (Value, Value)],
+        defined: ListMap[String, (Value, Value)],
         Telescope(type_map: ListMap[String, Exp], env: Env),
       ) =>
+        var d = defined.map {
+          case (name, (t, value)) => s"define ${name} : ${pretty_value(t)} = ${pretty_value(value)}\n"
+        }.mkString("")
         var s = type_map.map {
           case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
-        s"class {${maybe_ln(s)}}"
+        s"class {${maybe_ln(d)}${maybe_ln(s)}}"
 
       case ValueClAlready(type_map: ListMap[String, Value]) =>
         var s = type_map.map {

@@ -29,6 +29,11 @@ object eval {
       case Cl(type_map: ListMap[String, Exp]) =>
         ValueCl(ListMap(), Telescope(type_map: ListMap[String, Exp], env: Env))
 
+      case ClPredefined(defined, type_map: ListMap[String, Exp]) =>
+        ValueCl(
+          defined.map { case (name, (t, exp)) => (name, (eval(env, t), eval(env, exp)))},
+          Telescope(type_map: ListMap[String, Exp], env: Env))
+
       case Obj(value_map: ListMap[String, Exp]) =>
         ValueObj(value_map.map {
           case (name, exp) => (name, eval(env, exp))

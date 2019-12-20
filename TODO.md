@@ -7,15 +7,16 @@
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
-- readback `ValueCl` (to `Block`?)
 - `subtype` for `ValueCl`
 - `equivalent` for `ValueCl`
 - we also take this opportunity to handle currying
+  just push value to env and return new `ValueFn`
 - equality constrain `equal` in telescope
-  - syntax should be
-    `constrain equal x = y`
-  - to define `eqv_t` as class
-  - to specify partial algebraic structure
+  syntax should be
+  `constrain equal x = y`
+- define `eqv_t` as class with equality constrains
+- [test] define `category_t` as total algebraic structure
+- [test] define `category_t` as partial algebraic structure
 - [note] we can also use `new` to construct object from class
   but I choose to use `{}` syntax to construct all objects for now
 - [note] no auto currying

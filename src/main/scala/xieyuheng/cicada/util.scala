@@ -49,18 +49,18 @@ object util {
         exp
 
       case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
-        val new_type_map = ListMap(type_map.map {
+        val new_type_map = type_map.map {
           case (name, exp) =>
             (name, exp_subst_var_map(exp, var_map))
-        }.toList: _*)
+        }
         val new_return_type = exp_subst_var_map(return_type, var_map);
         Pi(type_map, new_return_type)
 
       case Fn(type_map: ListMap[String, Exp], body: Exp) =>
-        val new_type_map = ListMap(type_map.map {
+        val new_type_map = type_map.map {
           case (name, exp) =>
             (name, exp_subst_var_map(exp, var_map))
-        }.toList: _*)
+        }
         val new_body = exp_subst_var_map(body, var_map);
         Fn(type_map, new_body)
 
@@ -73,17 +73,28 @@ object util {
         Ap(new_target, new_arg_list)
 
       case Cl(type_map: ListMap[String, Exp]) =>
-        val new_type_map = ListMap(type_map.map {
+        val new_type_map = type_map.map {
           case (name, exp) =>
             (name, exp_subst_var_map(exp, var_map))
-        }.toList: _*)
+        }
         Cl(new_type_map)
 
-      case Obj(value_map: ListMap[String, Exp]) =>
-        val new_value_map = ListMap(value_map.map {
+      case ClPredefined(defined, type_map: ListMap[String, Exp]) =>
+        val new_defined = defined.map {
+          case (name, (t, exp)) =>
+            (name, (exp_subst_var_map(t, var_map), exp_subst_var_map(exp, var_map)))
+        }
+        val new_type_map = type_map.map {
           case (name, exp) =>
             (name, exp_subst_var_map(exp, var_map))
-        }.toList: _*)
+        }
+        ClPredefined(new_defined, new_type_map)
+
+      case Obj(value_map: ListMap[String, Exp]) =>
+        val new_value_map = value_map.map {
+          case (name, exp) =>
+            (name, exp_subst_var_map(exp, var_map))
+        }
         Obj(new_value_map)
 
       case Dot(target: Exp, field: String) =>
@@ -91,12 +102,12 @@ object util {
         Dot(new_target, field)
 
       case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
-        val new_block_entry_map = ListMap(block_entry_map.map {
+        val new_block_entry_map = block_entry_map.map {
           case (name, BlockEntryLet(exp)) =>
             (name, BlockEntryLet(exp_subst_var_map(exp, var_map)))
           case (name, BlockEntryDefine(t, exp)) =>
             (name, BlockEntryDefine(exp_subst_var_map(t, var_map), exp_subst_var_map(exp, var_map)))
-        }.toList: _*)
+        }
         val new_body = exp_subst_var_map(body, var_map)
         Block(new_block_entry_map, new_body)
     }

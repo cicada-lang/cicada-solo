@@ -13,23 +13,37 @@ object readback {
         val name_list = telescope.type_map.keys.toList
         val (type_value_map, return_type_value) =
           util.telescope_force_with_return(telescope, name_list, return_type)
-        Pi(readback_list_map(type_value_map), readback(return_type_value))
+        Pi(
+          type_value_map.map { case (name, v) => (name, readback(v)) },
+          readback(return_type_value))
 
       case ValueFn(telescope: Telescope, body: Exp) =>
         val name_list = telescope.type_map.keys.toList
         val (type_value_map, body_value) =
           util.telescope_force_with_return(telescope, name_list, body)
-        Fn(readback_list_map(type_value_map), readback(body_value))
+        Fn(
+          type_value_map.map { case (name, v) => (name, readback(v)) },
+          readback(body_value))
 
-      case ValueCl(_defined, telescope: Telescope) =>
-        val name_list = telescope.type_map.keys.toList
-        Cl(readback_list_map(util.telescope_force(telescope, name_list)))
+      case ValueCl(defined, telescope: Telescope) =>
+        if (defined.isEmpty) {
+          val name_list = telescope.type_map.keys.toList
+          Cl(
+            util.telescope_force(telescope, name_list)
+              .map { case (name, v) => (name, readback(v)) })
+        } else {
+          val name_list = telescope.type_map.keys.toList
+          ClPredefined(
+            defined.map { case (name, (t, v)) => (name, (readback(t), readback(v))) },
+            util.telescope_force(telescope, name_list)
+              .map { case (name, v) => (name, readback(v)) })
+        }
 
       case ValueClAlready(type_map: ListMap[String, Value]) =>
-        Cl(readback_list_map(type_map))
+        Cl(type_map.map { case (name, v) => (name, readback(v)) })
 
       case ValueObj(value_map: ListMap[String, Value]) =>
-        Obj(readback_list_map(value_map))
+        Obj(value_map.map { case (name, v) => (name, readback(v)) })
 
       case NeutralVar(name: String) =>
         Var(name)
@@ -40,14 +54,6 @@ object readback {
       case NeutralDot(target: Neutral, field: String) =>
         Dot(readback(target), field)
     }
-  }
-
-  def readback_list_map(
-    value_map: ListMap[String, Value]
-  ): ListMap[String, Exp] = {
-    ListMap(value_map.map {
-      case (name, value) => (name, readback(value))
-    }.toList: _*)
   }
 
 }
