@@ -1,49 +1,40 @@
 package xieyuheng.util
 
-class Interpreter(
-  name: String,
-  version: String,
-  run_code: String => Unit,
-) {
+import collection.immutable.ListMap
 
-  def opt(args: Array[String], name: String, arity: Int): Option[Array[String]] = {
-    val i = args.indexOf(name)
-    if (i == -1) {
-      None
-    } else {
-      Some(args.slice(i + 1, i + 1 + arity))
-    }
-  }
+// NOTE
+// comand line option start with `-` (instead of `--`)
+//   will be catched by `JAVA_OPTS`
+//   thus our `Interpreter` only use `--` for option prefix
+
+abstract class Interpreter {
+
+  val name: String
+  val version: String
+  val config_declaration: ListMap[String, Int]
+  def run_code(code: String): Unit
+
+  var config: ListMap[String, List[String]] = ListMap()
 
   def print_help(): Unit = {
     val usage = s"""
         |${name} ${version}
         |
         |usage:
-        |  -e, --eval <file_path> [default]
-        |  -v, --version
-        |  -h, --help
+        |  --eval <file_path> [default]
+        |  --version
+        |  --help
         """.stripMargin
     println(usage)
   }
 
   def main(args: Array[String]): Unit = {
 
-    opt(args, "-h", 0).foreach {
-      case _ =>
-        print_help()
-        System.exit(0)
-    }
+    collect_config(args)
 
     opt(args, "--help", 0).foreach {
       case _ =>
         print_help()
-        System.exit(0)
-    }
-
-    opt(args, "-v", 0).foreach {
-      case _ =>
-        println(version)
         System.exit(0)
     }
 
@@ -54,7 +45,7 @@ class Interpreter(
     }
 
     opt(args, "--eval", 1).foreach {
-      case Array(file_path) =>
+      case List(file_path) =>
         run_file(file_path)
         System.exit(0)
     }
@@ -66,22 +57,36 @@ class Interpreter(
     }
 
     print_help()
-
     System.exit(0)
+  }
+
+  def collect_config(args: Array[String]): Unit = {
+    config_declaration.foreach {
+      case (name, arity) =>
+        opt(args, name, arity).foreach {
+          case values =>
+            config = config + (name -> values)
+        }
+    }
+  }
+
+  def opt(args: Array[String], name: String, arity: Int): Option[List[String]] = {
+    val i = args.indexOf(name)
+    if (i == -1) {
+      None
+    } else {
+      Some(args.slice(i + 1, i + 1 + arity).toList)
+    }
   }
 
   def run_file(file_path: String): Unit = {
     val path = os.Path(file_path, base = os.pwd)
-
     if (!os.isFile(path)) {
       println(s"not a file: ${path}")
       System.exit(1)
     }
-
     val code = os.read(path)
-
     run_code(code)
-
   }
 
 }

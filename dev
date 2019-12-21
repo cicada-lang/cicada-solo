@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-function t {
+function clear_stage {
     rm -f target/universal/stage/bin/*
+}
 
+function t {
     sbt stage && \
         test_general && \
         test_cicada

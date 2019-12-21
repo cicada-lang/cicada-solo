@@ -1,5 +1,4 @@
-- add config to interpreter
-  - explicit "--verbose" for default quiet command line interface
+- explicit "--nocolor" default error and "--verbose" have color
 # cicada
 - we also take this opportunity to handle currying
   - just push value to env and return new `ValueFn`
