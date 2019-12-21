@@ -1,5 +1,7 @@
 package xieyuheng.cicada
 
+import scala.util.{ Try, Success, Failure }
+
 import eval._
 import check._
 import infer._
@@ -35,14 +37,16 @@ object api {
 
       case TopKeywordRefuse(name, t_exp, exp) =>
         val t_expected = eval(local_env, t_exp)
-        try {
+        Try {
           check(local_env, local_ctx, exp, t_expected)
-          throw Report(List(
-            s"@refuse fail\n" +
-              s"@refuse ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}\n"
-          ))
-        } catch {
-          case report: Report =>
+        } match {
+          case Success(_) =>
+            throw Report(List(
+              s"@refuse fail\n" +
+                s"should refuse the following definition\n" +
+                s"@refuse ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}\n"
+            ))
+          case Failure(report) =>
             println(s"@refuse ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}")
         }
     }
