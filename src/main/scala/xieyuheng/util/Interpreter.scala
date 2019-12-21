@@ -1,6 +1,6 @@
 package xieyuheng.util
 
-class mini_interpreter(
+class Interpreter(
   name: String,
   version: String,
   run_code: String => Unit,

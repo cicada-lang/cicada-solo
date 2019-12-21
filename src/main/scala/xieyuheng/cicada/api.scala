@@ -34,15 +34,17 @@ object api {
         println(s">>>>>> ${name} : ${pretty_value(t)} = ${pretty_value(value)}")
 
       case TopKeywordRefuse(name, t_exp, exp) =>
-        // TODO
         val t_expected = eval(local_env, t_exp)
-        check(local_env, local_ctx, exp, t_expected)
-        val t = infer(local_env, local_ctx, exp)
-        val value = eval(local_env, exp)
-        local_ctx = local_ctx.ext(name, t)
-        local_env = local_env.ext(name, value)
-        println(s"define ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}")
-        println(s">>>>>> ${name} : ${pretty_value(t)} = ${pretty_value(value)}")
+        try {
+          check(local_env, local_ctx, exp, t_expected)
+          throw Report(List(
+            s"@refuse fail\n" +
+              s"@refuse ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}\n"
+          ))
+        } catch {
+          case report: Report =>
+            println(s"@refuse ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}")
+        }
     }
   }
 

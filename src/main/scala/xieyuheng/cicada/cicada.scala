@@ -1,10 +1,10 @@
 package xieyuheng.cicada
 
-import xieyuheng.util.mini_interpreter
+import xieyuheng.util.Interpreter
 
 import xieyuheng.partech.Parser
 
-object cicada extends mini_interpreter (
+object cicada extends Interpreter (
   "cicada", "0.0.1", {
     case code =>
       Parser(grammar.lexer, grammar.top_list).parse(code) match {

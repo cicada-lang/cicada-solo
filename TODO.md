@@ -1,6 +1,5 @@
-- add config to interpret
+- add config to interpreter
   - explicit "--verbose" for default quiet command line interface
-- [testing] `@refuse` for testing type checker
 # cicada
 - we also take this opportunity to handle currying
   - just push value to env and return new `ValueFn`
