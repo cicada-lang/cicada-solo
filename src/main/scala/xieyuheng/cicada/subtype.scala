@@ -46,9 +46,10 @@ object subtype {
             t.defined, util.telescope_force(t.telescope, t.telescope.type_map.keys.toList))
 
         case (s: ValueCl, t: ValueClAlready) =>
-          val name_list = s.telescope.type_map.keys.toList
-          val type_map = util.telescope_force(s.telescope, name_list)
-          subtype_list_map(ctx, type_map, t.type_map)
+          subtype_defined_list_map(
+            ctx,
+            s.defined, util.telescope_force(s.telescope, s.telescope.type_map.keys.toList),
+            ListMap(), t.type_map)
 
         case (s: ValueClAlready, t: ValueCl) =>
           if (t.defined.size != 0) {
