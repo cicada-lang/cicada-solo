@@ -20,9 +20,37 @@ object grammar {
 
   def identifier = identifier_with_preserved("identifier", preserved)
 
-  // NOTE reuse `block_entry` and `block_entry_matcher`
+  def top_list = non_empty_list(top_entry)
 
-  def top_list = non_empty_list(block_entry)
+  def top_entry = block_entry
+
+//   def block_entry = Rule(
+//     "block_entry", Map(
+//       "let" -> List("let", identifier, "=", exp),
+//       "define_cl" -> List("class", identifier, "{", non_empty_list(given_entry), "}"),
+//       "define_cl_empty" -> List("class", identifier, "{", "}"),
+//       "let_obj" -> List("object", identifier, "{", non_empty_list(let_entry), "}"),
+//       "let_obj_empty" -> List("object", identifier, "{", "}"),
+//       "define" -> List("define", identifier, ":", exp, "=", exp),
+//     ))
+
+//   def block_entry_matcher = Tree.matcher[(String, BlockEntry)](
+//     "block_entry", Map(
+//       "let" -> { case List(_, Leaf(name), _, exp) =>
+//         (name, BlockEntryLet(exp_matcher(exp))) },
+//       "define_cl" -> { case List(_, Leaf(name), _, given_entry_list, _) =>
+//         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
+//         (name, BlockEntryDefine(Type(), Cl(type_map))) },
+//       "define_cl_empty" -> { case List(_, Leaf(name), _, _) =>
+//         (name, BlockEntryDefine(Type(), Cl(ListMap.empty))) },
+//       "let_obj" -> { case List(_, Leaf(name), _, let_entry_list, _) =>
+//         val value_map = ListMap(non_empty_list_matcher(let_entry_matcher)(let_entry_list): _*)
+//         (name, BlockEntryLet(Obj(value_map))) },
+//       "let_obj_empty" -> { case List(_, Leaf(name), _, _) =>
+//         (name, BlockEntryLet(Obj(ListMap.empty))) },
+//       "define" -> { case List(_, Leaf(name), _, t, _, exp) =>
+//         (name, BlockEntryDefine(exp_matcher(t), exp_matcher(exp))) },
+//     ))
 
   def top_list_matcher(tree: Tree): List[Top] = {
     non_empty_list_matcher(block_entry_matcher)(tree).map {

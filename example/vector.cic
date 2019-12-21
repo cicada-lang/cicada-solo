@@ -22,9 +22,9 @@ class vector_cons_t {
   given length : succ_t(prev)
   given tail : vector_t(A, prev)
 }
-define one_should_pass : succ_t(zero) = one
-// define one_should_fail : succ_t(zero) = zero
-// define zero_should_fail : succ_t = zero
+define one_again : succ_t(zero) = one
+// @refuse wrong_type_of_zero : succ_t(zero) = zero
+// @refuse wrong_type_of_zero : succ_t = zero
 define zero_zeros : vector_t = vector_null_t(nat_t, zero)
 define one_zeros : vector_cons_t = {
   let A = nat_t
