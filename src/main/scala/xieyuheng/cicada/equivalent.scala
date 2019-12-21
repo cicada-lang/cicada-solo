@@ -52,39 +52,42 @@ object equivalent {
           }
 
         case (s: ValueCl, t: ValueCl) =>
-          // TODO handle defined fields
-          // NOTE the order matters
           if (s.telescope.type_map.size != t.telescope.type_map.size) {
             throw Report(List(
               s"equivalent fail on ValueCl, arity mismatch\n"
             ))
-          } else {
-            val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {
-              case (s_name, t_name) =>
-                val uuid: UUID = UUID.randomUUID()
-                s"#equivalent-function:${s_name}:${t_name}:${uuid}"
-            }.toList
-            val s_type_map = util.telescope_force(s.telescope, name_list)
-            val t_type_map = util.telescope_force(t.telescope, name_list)
-            equivalent_list_map(ctx, t_type_map, s_type_map)
           }
+          equivalent_defined(ctx, s.defined, t.defined)
+          // NOTE in the following implementation
+          //   the order matters
+          val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {
+            case (s_name, t_name) =>
+              val uuid: UUID = UUID.randomUUID()
+              s"#equivalent-function:${s_name}:${t_name}:${uuid}"
+          }.toList
+          val s_type_map = util.telescope_force(s.telescope, name_list)
+          val t_type_map = util.telescope_force(t.telescope, name_list)
+          equivalent_list_map(ctx, t_type_map, s_type_map)
 
         case (s: ValueClAlready, t: ValueClAlready) =>
           equivalent_list_map(ctx, s.type_map, t.type_map)
 
         case (s: ValueCl, t: ValueClAlready) =>
-          // TODO handle defined fields
-          // NOTE this can happend only when ValueCl has no defined fields
-          //   because this must be a free variable proof
-
+          if (s.defined.size != 0) {
+            throw Report(List(
+              s"a free variable proof is required for ValueCl == ValueClAlready"
+            ))
+          }
           val name_list = s.telescope.type_map.keys.toList
           val type_map = util.telescope_force(s.telescope, name_list)
           equivalent_list_map(ctx, type_map, t.type_map)
 
         case (s: ValueClAlready, t: ValueCl) =>
-          // TODO handle defined fields
-          // NOTE this can happend only when ValueCl has no defined fields
-          //   because this must be a free variable proof
+          if (t.defined.size != 0) {
+            throw Report(List(
+              s"a free variable proof is required for ValueClAlready == ValueCl"
+            ))
+          }
           val name_list = t.telescope.type_map.keys.toList
           val type_map = util.telescope_force(t.telescope, name_list)
           equivalent_list_map(ctx, s.type_map, type_map)
@@ -171,6 +174,30 @@ object equivalent {
               ))
           }
       }
+    }
+  }
+
+  def equivalent_defined(
+    ctx: Ctx,
+    s_defined: ListMap[String, (Value, Value)],
+    t_defined: ListMap[String, (Value, Value)],
+  ): Unit = {
+    if (s_defined.size != t_defined.size) {
+      throw Report(List(
+        s"equivalent_defined fail, defined fields length mismatch\n"
+      ))
+    }
+    t_defined.foreach {
+      case (name, (t, v)) =>
+        s_defined.get(name) match {
+          case Some((s, u)) =>
+            equivalent(ctx, s, t)
+            equivalent(ctx, u, v)
+          case None =>
+            throw Report(List(
+              s"equivalent_defined can not find field: ${name}\n"
+            ))
+        }
     }
   }
 

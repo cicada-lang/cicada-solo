@@ -40,19 +40,23 @@ object subtype {
           subtype_list_map(ctx, s.type_map, t.type_map)
 
         case (s: ValueCl, t: ValueCl) =>
-          // TODO handle defined fields
-          ???
+          subtype_defined(ctx, s.defined, t.defined)
+          subtype_list_map(
+            ctx,
+            util.telescope_force(s.telescope, s.telescope.type_map.keys.toList),
+            util.telescope_force(t.telescope, t.telescope.type_map.keys.toList))
 
         case (s: ValueCl, t: ValueClAlready) =>
-          // TODO handle defined fields
           val name_list = s.telescope.type_map.keys.toList
           val type_map = util.telescope_force(s.telescope, name_list)
           subtype_list_map(ctx, type_map, t.type_map)
 
         case (s: ValueClAlready, t: ValueCl) =>
-          // TODO handle defined fields
-          // NOTE this can happend only when ValueCl has no defined fields
-          //   because this must be a free variable proof
+          if (t.defined.size != 0) {
+            throw Report(List(
+              s"a free variable proof is required for ValueClAlready <: ValueCl"
+            ))
+          }
           val name_list = t.telescope.type_map.keys.toList
           val type_map = util.telescope_force(t.telescope, name_list)
           subtype_list_map(ctx, s.type_map, type_map)
@@ -69,6 +73,7 @@ object subtype {
     }
   }
 
+
   def subtype_list_map(
     ctx: Ctx,
     s_map: ListMap[String, Value],
@@ -82,6 +87,25 @@ object subtype {
           case None =>
             throw Report(List(
               s"subtype_list_map can not find field: ${name}\n"
+            ))
+        }
+    }
+  }
+
+  def subtype_defined(
+    ctx: Ctx,
+    s_defined: ListMap[String, (Value, Value)],
+    t_defined: ListMap[String, (Value, Value)],
+  ): Unit = {
+    t_defined.foreach {
+      case (name, (t, v)) =>
+        s_defined.get(name) match {
+          case Some((s, u)) =>
+            subtype(ctx, s, t)
+            equivalent(ctx, u, v)
+          case None =>
+            throw Report(List(
+              s"subtype_defined can not find field: ${name}\n"
             ))
         }
     }

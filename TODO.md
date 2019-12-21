@@ -7,8 +7,6 @@
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
-- `subtype` for `ValueCl`
-- `equivalent` for `ValueCl`
 - we also take this opportunity to handle currying
   just push value to env and return new `ValueFn`
 - equality constrain `equal` in telescope
