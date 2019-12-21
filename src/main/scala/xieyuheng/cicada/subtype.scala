@@ -40,11 +40,10 @@ object subtype {
           subtype_list_map(ctx, s.type_map, t.type_map)
 
         case (s: ValueCl, t: ValueCl) =>
-          subtype_defined(ctx, s.defined, t.defined)
-          subtype_list_map(
+          subtype_defined_list_map(
             ctx,
-            util.telescope_force(s.telescope, s.telescope.type_map.keys.toList),
-            util.telescope_force(t.telescope, t.telescope.type_map.keys.toList))
+            s.defined, util.telescope_force(s.telescope, s.telescope.type_map.keys.toList),
+            t.defined, util.telescope_force(t.telescope, t.telescope.type_map.keys.toList))
 
         case (s: ValueCl, t: ValueClAlready) =>
           val name_list = s.telescope.type_map.keys.toList
@@ -92,10 +91,10 @@ object subtype {
     }
   }
 
-  def subtype_defined(
+  def subtype_defined_list_map(
     ctx: Ctx,
-    s_defined: ListMap[String, (Value, Value)],
-    t_defined: ListMap[String, (Value, Value)],
+    s_defined: ListMap[String, (Value, Value)], s_map: ListMap[String, Value],
+    t_defined: ListMap[String, (Value, Value)], t_map: ListMap[String, Value],
   ): Unit = {
     t_defined.foreach {
       case (name, (t, v)) =>
@@ -107,6 +106,22 @@ object subtype {
             throw Report(List(
               s"subtype_defined can not find field: ${name}\n"
             ))
+        }
+    }
+    t_map.foreach {
+      case (name, t) =>
+        s_map.get(name) match {
+          case Some(s) =>
+            subtype(ctx, s, t)
+          case None =>
+            s_defined.get(name) match {
+              case Some((s, _u)) =>
+                subtype(ctx, s, t)
+              case None =>
+                throw Report(List(
+                  s"subtype_defined_list_map can not find field: ${name}\n"
+                ))
+            }
         }
     }
   }
