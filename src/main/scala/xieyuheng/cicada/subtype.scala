@@ -14,7 +14,7 @@ object subtype {
     try {
       (s, t) match {
         case (s: ValuePi, ValueType()) => ()
-
+        case (s: ValueCl, ValueType()) => ()
         case (s: ValueClAlready, ValueType()) => ()
 
         case (s: ValuePi, t: ValuePi) =>
@@ -57,22 +57,22 @@ object subtype {
               s"a free variable proof is required for ValueClAlready <: ValueCl"
             ))
           }
-          val name_list = t.telescope.type_map.keys.toList
-          val type_map = util.telescope_force(t.telescope, name_list)
-          subtype_list_map(ctx, s.type_map, type_map)
+          subtype_list_map(
+            ctx,
+            s.type_map,
+            util.telescope_force(t.telescope, t.telescope.type_map.keys.toList))
 
         case (s, t) =>
           equivalent(ctx, s, t)
       }
     } catch {
       case report: Report =>
-        report.prepend(
+        report.throw_prepend(
           s"subtype fail\n" +
             s"s: ${pretty_value(s)}\n" +
             s"t: ${pretty_value(t)}\n")
     }
   }
-
 
   def subtype_list_map(
     ctx: Ctx,

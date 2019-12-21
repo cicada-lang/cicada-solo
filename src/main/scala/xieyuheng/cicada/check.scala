@@ -29,7 +29,7 @@ object check {
       }
     } catch {
       case report: Report =>
-        throw report.prepend(
+        report.throw_prepend(
           s"check fail\n" +
             s"exp: ${pretty_exp(exp)}\n" +
             s"t: ${pretty_value(t)}\n"
@@ -53,7 +53,7 @@ object check {
           case None =>
             throw Report(List(
               s"telescope_check fail\n" +
-                s"can not find a field of object in class\n" +
+                s"can not find a field of class in object\n" +
                 s"field: ${name}\n"
             ))
         }

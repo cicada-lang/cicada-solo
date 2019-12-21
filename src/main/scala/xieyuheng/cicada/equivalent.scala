@@ -126,7 +126,7 @@ object equivalent {
       }
     } catch {
       case report: Report =>
-        report.prepend(
+        report.throw_prepend(
           s"equivalent fail\n" +
             s"s: ${pretty_value(s)}\n" +
             s"t: ${pretty_value(t)}\n")

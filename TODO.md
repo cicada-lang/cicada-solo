@@ -7,6 +7,9 @@
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 # cicada
+- fix `subtype` between `ValueCl` with defined
+- fix `subtype` between `ValueCl` and `ValueClAlready`
+- macro (like `@refuse`) for testing type checker
 - we also take this opportunity to handle currying
   just push value to env and return new `ValueFn`
 - equality constrain `equal` in telescope

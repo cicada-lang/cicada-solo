@@ -138,7 +138,7 @@ object infer {
       }
     } catch {
       case report: Report =>
-        throw report.prepend(
+        report.throw_prepend(
           s"infer fail\n" +
             s"exp: ${pretty_exp(exp)}\n"
         )

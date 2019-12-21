@@ -2,20 +2,24 @@ package xieyuheng.cicada
 
 case class Report(msg_list: List[String]) extends Throwable {
 
-  def append(msg: String): Report = {
-    Report(msg_list :+ msg)
+  def throw_append(msg: String) = {
+    throw Report(msg_list :+ msg)
   }
 
-  def prepend(msg: String): Report = {
-    Report(msg +: msg_list)
+  def throw_prepend(msg: String) = {
+    throw Report(msg +: msg_list)
   }
 
   def print(): Unit = {
-    println("------")
+    Console.print(Console.RESET)
+    Console.print(Console.RED)
+    Console.println("------")
     msg_list.foreach {
       case msg =>
-        println(s"${msg}" + "------")
+        Console.print(s"${msg}")
+        Console.println("------")
     }
+    Console.print(Console.RESET)
   }
 
 }
