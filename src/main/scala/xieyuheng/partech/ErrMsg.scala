@@ -2,5 +2,5 @@ package xieyuheng.partech
 
 case class ErrMsg(
   tag: String,
-  msg: String,
+  message: String,
   span: Span)

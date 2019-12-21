@@ -251,16 +251,16 @@ case class Earley(words: List[Word], rule: Rule) {
 
           result <- {
             if (prevList.length == 0) {
-              val msg = {
+              val message = {
                 s"newItem: ${newItem}" ::
                 s"cause_of_completion: ${cause_of_completion}" ::
                 s"itemset:" ::
                 itemset.map { case item => s"  ${item}"}.toList
               }.mkString("\n")
-              Left(ErrMsg("Earley.parse", msg, Span(0, 0)))
+              Left(ErrMsg("Earley.parse", message, Span(0, 0)))
             } else {
               if (prevList.length > 1) {
-                val msg = {
+                val message = {
                   s"many trees: ${prevList.length}" ::
                   s"prevList:" ::
                   prevList.map { case item => s"  ${item}"} ++
@@ -269,7 +269,7 @@ case class Earley(words: List[Word], rule: Rule) {
                   s"itemset:" ::
                   itemset.map { case item => s"  ${item}"}.toList
                 }.mkString("\n")
-                Left(ErrMsg("Earley.parse", msg, Span(0, 0)))
+                Left(ErrMsg("Earley.parse", message, Span(0, 0)))
               } else {
                 val prev = prevList(0)
                 for {

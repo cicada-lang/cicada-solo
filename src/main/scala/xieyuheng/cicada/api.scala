@@ -1,8 +1,9 @@
 package xieyuheng.cicada
 
-
 import scala.util.{ Try, Success, Failure }
 import collection.immutable.ListMap
+
+import xieyuheng.util.console._
 
 import eval._
 import check._
@@ -15,7 +16,23 @@ object api {
     top_list: List[Top],
     config: ListMap[String, List[String]],
   ): Unit = {
-    top_list_check_and_eval(top_list, config)
+    try {
+      top_list_check_and_eval(top_list, config)
+    } catch {
+      case report: Report =>
+        console_print_with_color_when {
+          config.get("--nocolor") == None
+        } (Console.RED) {
+          case () =>
+            Console.println("------")
+            report.message_list.foreach {
+              case message =>
+                Console.print(s"${message}")
+                Console.println("------")
+            }
+        }
+        System.exit(1)
+    }
   }
 
   def top_list_check_and_eval(
@@ -33,7 +50,12 @@ object api {
         local_env = local_env.ext(name, value)
         if (config.get("--verbose") != None) {
           println(s"let ${name} = ${pretty_exp(exp)}")
-          println(s">>> ${name} = ${pretty_value(value)} : ${pretty_value(t)}")
+          console_print_with_color_when {
+            config.get("--nocolor") == None
+          } (Console.CYAN) {
+            case () =>
+              println(s">>> ${name} = ${pretty_value(value)} : ${pretty_value(t)}")
+          }
         }
 
       case TopDefine(name, t_exp, exp) =>
@@ -45,7 +67,12 @@ object api {
         local_env = local_env.ext(name, value)
         if (config.get("--verbose") != None) {
           println(s"define ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}")
-          println(s">>>>>> ${name} : ${pretty_value(t)} = ${pretty_value(value)}")
+          console_print_with_color_when {
+            config.get("--nocolor") == None
+          } (Console.CYAN) {
+            case () =>
+              println(s">>>>>> ${name} : ${pretty_value(t)} = ${pretty_value(value)}")
+          }
         }
 
       case TopKeywordRefuse(name, t_exp, exp) =>

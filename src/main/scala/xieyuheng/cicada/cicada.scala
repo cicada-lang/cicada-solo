@@ -19,15 +19,9 @@ object cicada extends Interpreter {
     Parser(grammar.lexer, grammar.top_list).parse(code) match {
       case Right(tree) =>
         val top_list = grammar.top_list_matcher(tree)
-        try {
-          api.run(top_list, this.config)
-        } catch {
-          case report: Report =>
-            report.print()
-            System.exit(1)
-        }
+        api.run(top_list, this.config)
       case Left(error) =>
-        println(s"[parse_error] ${error.msg}")
+        println(s"[parse_error] ${error.message}")
         System.exit(1)
     }
   }
