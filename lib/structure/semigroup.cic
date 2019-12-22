@@ -7,3 +7,8 @@ class semigroup_t {
     eqv_t(mul(x, mul(y, z)), mul(mul(x, y), z))
   }
 }
+
+class semigroup_t {
+  elem_t : type
+  mul : { list_t(elem_t) -> elem_t }
+}
