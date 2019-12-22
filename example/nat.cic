@@ -23,7 +23,7 @@ let three = {
 // } = {
 //   given x : nat_t
 //   given y : nat_t
-//   return x choice {
+//   return x choose {
 //     case zero_t => y
 //     case succ_t => nat_add(x.prev, y)
 //   }
