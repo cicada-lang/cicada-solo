@@ -69,6 +69,7 @@ object grammar {
       "obj" -> List("object", "{", non_empty_list(let_entry), "}"),
       "obj_naked" -> List("{", non_empty_list(let_entry), "}"),
       "obj_empty" -> List("object", "{", "}"),
+      "obj_naked_empty" -> List("{", "}"),
       "dot" -> List(exp, ".", identifier),
       "block" -> List("{", non_empty_list(block_entry), "return", exp, "}"),
     ))
@@ -106,6 +107,8 @@ object grammar {
         val value_map = ListMap(non_empty_list_matcher(let_entry_matcher)(let_entry_list): _*)
         Obj(value_map) },
       "obj_empty" -> { case List(_, _, _) =>
+        Obj(ListMap()) },
+      "obj_naked_empty" -> { case List(_, _) =>
         Obj(ListMap()) },
       "dot" -> { case List(target, _, Leaf(field)) =>
         Dot(exp_matcher(target), field) },

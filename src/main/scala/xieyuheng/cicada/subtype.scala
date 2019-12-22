@@ -42,13 +42,13 @@ object subtype {
         case (s: ValueCl, t: ValueCl) =>
           subtype_defined_list_map(
             ctx,
-            s.defined, util.telescope_force(s.telescope, s.telescope.type_map.keys.toList),
-            t.defined, util.telescope_force(t.telescope, t.telescope.type_map.keys.toList))
+            s.defined, util.telescope_force(s.telescope, s.telescope.name_list),
+            t.defined, util.telescope_force(t.telescope, t.telescope.name_list))
 
         case (s: ValueCl, t: ValueClAlready) =>
           subtype_defined_list_map(
             ctx,
-            s.defined, util.telescope_force(s.telescope, s.telescope.type_map.keys.toList),
+            s.defined, util.telescope_force(s.telescope, s.telescope.name_list),
             ListMap(), t.type_map)
 
         case (s: ValueClAlready, t: ValueCl) =>
@@ -60,7 +60,7 @@ object subtype {
           subtype_list_map(
             ctx,
             s.type_map,
-            util.telescope_force(t.telescope, t.telescope.type_map.keys.toList))
+            util.telescope_force(t.telescope, t.telescope.name_list))
 
         case (s, t) =>
           equivalent(ctx, s, t)

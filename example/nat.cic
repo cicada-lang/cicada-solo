@@ -2,7 +2,64 @@ class nat_t {}
 class zero_t {}
 class succ_t { given prev : nat_t }
 
-let zero = object {}
-let one = succ_t(zero)
-let two = succ_t(one)
-let three = succ_t(two)
+let zero = {}
+
+let one = {
+  let prev = zero
+}
+
+let two = {
+  let prev = one
+}
+
+let three = {
+  let prev = two
+}
+
+// define nat_add : {
+//   given x : nat_t
+//   given y : nat_t
+//   conclude nat_t
+// } = {
+//   given x : nat_t
+//   given y : nat_t
+//   return x choice {
+//     case zero_t => y
+//     case succ_t => nat_add(x.prev, y)
+//   }
+// }
+
+// function add1 : {
+//   given x : nat_t
+//   conclude nat_t
+//   return {
+//     let prev = x
+//   }
+// }
+
+// function add2 : {
+//   given x : nat_t
+//   conclude nat_t
+//   return add1(add1(x))
+// }
+
+define add1 : {
+  given x : nat_t
+  conclude nat_t
+} = {
+  given x : nat_t
+  return {
+    let prev = x
+  }
+}
+
+define add2 : {
+  given x : nat_t
+  conclude nat_t
+} = {
+  given x : nat_t
+  return add1(add1(x))
+}
+
+let x = add2(zero).prev
+let y = two.prev.prev

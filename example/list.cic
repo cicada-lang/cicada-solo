@@ -1,5 +1,5 @@
 let unit_t = class {}
-let unit = object {}
+let unit = {}
 
 let list_t = class { given A : type }
 let null_t = class { given A : type }

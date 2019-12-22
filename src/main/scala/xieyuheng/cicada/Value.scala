@@ -2,7 +2,9 @@ package xieyuheng.cicada
 
 import collection.immutable.ListMap
 
-case class Telescope(type_map: ListMap[String, Exp], env: Env)
+case class Telescope(type_map: ListMap[String, Exp], env: Env) {
+  val name_list = this.type_map.keys.toList
+}
 
 sealed trait Value
 final case class ValueType() extends Value

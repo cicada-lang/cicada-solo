@@ -1,4 +1,9 @@
 # cicada
+- `@show`
+- `@equal`
+- handle recursive definition
+- [test] some functional programming examples
+- add `function` keyword
 - we also take this opportunity to handle currying
   - just push value to env and return new `ValueFn`
 - equality constrain `equal` in telescope
@@ -8,8 +13,8 @@
 - [test] define `category_t` as partial algebraic structure
 # js backend
 - a simple compiler to translate the semantics of `eval` to js
-# docs semantics
-- use the concept of **free variable proof** to explain the semantics of cicada
+# docs
+- [semantics] use the concept of **free variable proof** to explain the semantics of cicada
   (traditional type theoretical semantics)
 # partech
 - clean up partech

@@ -78,7 +78,7 @@ object equivalent {
               s"a free variable proof is required for ValueCl == ValueClAlready"
             ))
           }
-          val name_list = s.telescope.type_map.keys.toList
+          val name_list = s.telescope.name_list
           val type_map = util.telescope_force(s.telescope, name_list)
           equivalent_list_map(ctx, type_map, t.type_map)
 
@@ -88,7 +88,7 @@ object equivalent {
               s"a free variable proof is required for ValueClAlready == ValueCl"
             ))
           }
-          val name_list = t.telescope.type_map.keys.toList
+          val name_list = t.telescope.name_list
           val type_map = util.telescope_force(t.telescope, name_list)
           equivalent_list_map(ctx, s.type_map, type_map)
 

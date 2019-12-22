@@ -2,7 +2,7 @@ class nat_t {}
 class zero_t {}
 class succ_t { given prev : nat_t }
 
-let zero = object {}
+let zero = {}
 let one = succ_t(zero)
 let two = succ_t(one)
 let three = succ_t(two)

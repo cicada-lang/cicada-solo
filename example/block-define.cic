@@ -1,5 +1,5 @@
 let unit_t = class {}
-define unit : unit_t = object {}
+define unit : unit_t = {}
 let type_id = {
   given A : type
   return A

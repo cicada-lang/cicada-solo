@@ -76,14 +76,14 @@ object infer {
 
         case Obj(value_map: ListMap[String, Exp]) =>
           val type_map = ListMap(value_map.map {
-            case (name, exp) => (name, eval(env, exp))
+            case (name, exp) => (name, infer(env, ctx, exp))
           }.toList: _*)
           ValueClAlready(type_map)
 
         case Ap(target: Exp, arg_list: List[Exp]) =>
           infer(env, ctx, target) match {
             case ValuePi(telescope: Telescope, return_type: Exp) =>
-              val name_list = telescope.type_map.keys.toList
+              val name_list = telescope.name_list
               val arg_map = ListMap(name_list.zip(arg_list): _*)
               val new_env = telescope_check_yield_env(env, ctx, arg_map, telescope)
               eval(new_env, return_type)
@@ -91,7 +91,7 @@ object infer {
             case ValueType() =>
               eval(env, target) match {
                 case ValueCl(defined, telescope) =>
-                  val name_list = telescope.type_map.keys.toList
+                  val name_list = telescope.name_list
                   val arg_map = ListMap(name_list.zip(arg_list): _*)
                   telescope_check(env, ctx, arg_map, telescope)
                   val value_list = arg_list.map { eval(env, _) }
@@ -117,12 +117,27 @@ object infer {
                 case Some(t) => t
                 case None =>
                   throw Report(List(
-                    s"infer fail, can not find field in dot: ${field}\n"
+                    s"infer fail, can not find field for dot: ${field}\n"
                   ))
+              }
+            case ValueCl(defined, telescope) =>
+              defined.get(field) match {
+                case Some((t, _v)) => t
+                case None =>
+                  util.telescope_force(telescope, telescope.name_list)
+                    .get(field) match {
+                      case Some(t) => t
+                      case None =>
+                        throw Report(List(
+                          s"infer fail, can not find field for dot: ${field}\n"
+                        ))
+                    }
               }
             case t =>
               throw Report(List(
-                s"expecting ValueClAlready but found: ${t}\n"
+                s"expecting class\n" +
+                  s"found type: ${pretty_value(t)}\n" +
+                  s"target: ${pretty_exp(target)}\n"
               ))
           }
 
