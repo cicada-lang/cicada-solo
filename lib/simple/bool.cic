@@ -4,15 +4,15 @@ bool_t : type = {
 }
 
 bool_not : { x : bool_t -> bool_t } = {
-  x choose {
+  x switch {
     case true => false
     case false => true
   }
 }
 
 bool_and : { x, y : bool_t -> bool_t } = {
-  x choose {
-    case true => y choose {
+  x switch {
+    case true => y switch {
       case true => true
       case false => false
     }
@@ -21,9 +21,9 @@ bool_and : { x, y : bool_t -> bool_t } = {
 }
 
 bool_or : { x, y : bool_t -> bool_t } = {
-  x choose {
+  x switch {
     case true => true
-    case false => y choose {
+    case false => y switch {
       case true => true
       case false => false
     }

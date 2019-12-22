@@ -1,9 +1,27 @@
-- `@show`
+- add `@show` keyword
 - add `function` keyword
 # cicada
-- equality constrain `equal` in telescope
-  - syntax should be `constrain equal x = y`
-- define `eqv_t` as class with equality constrains
+- [string_t] to test tagged union
+- tagged union
+- [equality] how we fail to use equality in agda?
+- [equality]
+  - [built-in] we can implementation equality by built-in equality
+    maybe we need to built-in (make it an axiom) the following function
+    ``` cicada
+    function eqv_replace = {
+      suppose A : type
+      suppose x, y : A
+      given equation : eqv_t(A, x, y)
+      given motive : { given x : A conclude type }
+      given motive(x)
+      conclude motive(y)
+      return base
+    }
+    ```
+  - [constrain] we can implementation equality by constrain system
+    equality `equal` in telescope
+    - syntax should be `constrain equal x = y`
+    - define `eqv_t` as class with equality constrains
 - [test] define `category_t` as total algebraic structure
 - [test] define `category_t` as partial algebraic structure
 - `@equal` maybe `@equal_value` `@equal_type`
@@ -11,6 +29,7 @@
 - [test] some functional programming examples
   - we can not do this without a way to do branching
     like `<exp> choose { case <type> => ... }`
+  - note that the order of `case` matters to `eval`
 - we also take this opportunity to handle currying
   - just push value to env and return new `ValueFn`
   - also need to change `infer`
