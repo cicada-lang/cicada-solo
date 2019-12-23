@@ -1,11 +1,11 @@
 - add `function` keyword
-- string_t (to test tagged union)
-# cicada
-- test tagged union
-- handle recursive definition
+- string_t
 - `<exp> switch { case <type> => ... }`
   - note that the order of `case` matters to `eval`
+- handle recursive definition
+- test tagged union
 - [test] some functional programming examples
+# cicada
 - we also take this opportunity to handle currying
   - just push value to env and return new `ValueFn`
   - also need to change `infer`
