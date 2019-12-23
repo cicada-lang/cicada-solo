@@ -15,7 +15,6 @@ object subtype {
       (s, t) match {
         case (s: ValuePi, ValueType()) => ()
         case (s: ValueCl, ValueType()) => ()
-        case (s: ValueClAlready, ValueType()) => ()
 
         case (s: ValuePi, t: ValuePi) =>
           if (s.telescope.type_map.size != t.telescope.type_map.size) {
@@ -36,31 +35,11 @@ object subtype {
             subtype(ctx, s_return_type, t_return_type)
           }
 
-        case (s: ValueClAlready, t: ValueClAlready) =>
-          subtype_list_map(ctx, s.type_map, t.type_map)
-
         case (s: ValueCl, t: ValueCl) =>
           subtype_defined_list_map(
             ctx,
             s.defined, util.telescope_force(s.telescope, s.telescope.name_list),
             t.defined, util.telescope_force(t.telescope, t.telescope.name_list))
-
-        case (s: ValueCl, t: ValueClAlready) =>
-          subtype_defined_list_map(
-            ctx,
-            s.defined, util.telescope_force(s.telescope, s.telescope.name_list),
-            ListMap(), t.type_map)
-
-        case (s: ValueClAlready, t: ValueCl) =>
-          if (t.defined.size != 0) {
-            throw Report(List(
-              s"a free variable proof is required for ValueClAlready <: ValueCl\n"
-            ))
-          }
-          subtype_list_map(
-            ctx,
-            s.type_map,
-            util.telescope_force(t.telescope, t.telescope.name_list))
 
         case (s, t) =>
           equivalent(ctx, s, t)

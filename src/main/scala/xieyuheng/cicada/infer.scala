@@ -117,14 +117,6 @@ object infer {
 
         case Dot(target: Exp, field: String) =>
           infer(env, ctx, target) match {
-            case ValueClAlready(type_map: ListMap[String, Value]) =>
-              type_map.get(field) match {
-                case Some(t) => t
-                case None =>
-                  throw Report(List(
-                    s"infer fail, can not find field for dot: ${field}\n"
-                  ))
-              }
             case ValueCl(defined, telescope) =>
               defined.get(field) match {
                 case Some((t, _v)) => t

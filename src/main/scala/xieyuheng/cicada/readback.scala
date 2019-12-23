@@ -39,9 +39,6 @@ object readback {
               .map { case (name, v) => (name, readback(v)) })
         }
 
-      case ValueClAlready(type_map: ListMap[String, Value]) =>
-        Cl(type_map.map { case (name, v) => (name, readback(v)) })
-
       case ValueObj(value_map: ListMap[String, Value]) =>
         Obj(value_map.map { case (name, v) => (name, readback(v)) })
 

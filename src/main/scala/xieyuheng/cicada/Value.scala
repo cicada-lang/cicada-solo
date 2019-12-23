@@ -14,7 +14,6 @@ final case class ValueCl(
   defined: ListMap[String, (Value, Value)],
   telescope: Telescope,
 ) extends Value
-final case class ValueClAlready(type_map: ListMap[String, Value]) extends Value
 final case class ValueObj(value_map: ListMap[String, Value]) extends Value
 
 sealed trait Neutral extends Value
