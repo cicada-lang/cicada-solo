@@ -1,6 +1,0 @@
-class eqv_t {
-  given T : type
-  given lhs : T
-  given rhs : T
-  equal lhs = rhs
-}

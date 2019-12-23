@@ -1,15 +1,15 @@
 class monoid_t extends semigroup_t {
   id : elem_t
-  id_left : { x : elem_t -> the_eqv_t(elem_t, mul(id, x), x) }
-  id_right : { x : elem_t -> the_eqv_t(elem_t, mul(x, id), x) }
+  id_left : { x : elem_t -> the_equation_t(elem_t, mul(id, x), x) }
+  id_right : { x : elem_t -> the_equation_t(elem_t, mul(x, id), x) }
 }
 
 class monoid_t {
   elem_t : type
   id : elem_t
   mul : { list_t(elem_t) -> elem_t }
-  mul_id_left : { x : list_t(elem_t) -> eqv_t(mul(append([id], x)), x) }
-  mul_id_right : { x : list_t(elem_t) -> eqv_t(mul(append(x, [id])), x) }
+  mul_id_left : { x : list_t(elem_t) -> equation_t(mul(append([id], x)), x) }
+  mul_id_right : { x : list_t(elem_t) -> equation_t(mul(append(x, [id])), x) }
 }
 
 develop monoid_t {

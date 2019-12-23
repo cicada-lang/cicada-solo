@@ -6,7 +6,7 @@ develop category_t {
       suppose x : object_t
       given f : morphism_t(x, object)
       given g : morphism_t(x, object)
-      conclude the_eqv_t(morphism_t(x, object), f, g)
+      conclude the_equation_t(morphism_t(x, object), f, g)
     }
   }
 
@@ -28,7 +28,7 @@ develop category_t {
     suppose x, y : terminal_t
     given f : iso_t(x.object, y.object)
     given g : iso_t(x.object, y.object)
-    conclude the_eqv_t(iso_t(x.object, y.object), f, g)
+    conclude the_equation_t(iso_t(x.object, y.object), f, g)
   } = {
     let iso = iso_t(x.object, y.object) {
       let morphism = y.morphism_unique(f, g)

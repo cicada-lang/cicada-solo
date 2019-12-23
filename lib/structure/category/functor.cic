@@ -10,14 +10,14 @@ class functor_t {
   given fmap_respect_compose : {
     given f : dom.morphism_t(a, b)
     given g : dom.morphism_t(b, c)
-    conclude the_eqv_t(
+    conclude the_equation_t(
       cod.morphism_t(map(a), map(c)),
       fmap(dom.compose(f, g)),
       cod.compose(fmap(f), fmap(g)))
   }
   given fmap_respect_id : {
     given a : dom.object_t
-    conclude the_eqv_t(
+    conclude the_equation_t(
       cod.morphism_t(map(a), map(a)),
       fmap(dom.id(a)),
       cod.id(map(a)))

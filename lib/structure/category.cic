@@ -11,19 +11,19 @@ class category_t {
   given id_left : {
     suppose a, b : object_t
     given f : morphism_t(a, b)
-    conclude eqv_t(compose(id(a), f), f)
+    conclude equation_t(compose(id(a), f), f)
   }
   given id_right : {
     suppose a, b : object_t
     given f : morphism_t(a, b)
-    conclude eqv_t(compose(f, id(b)), f)
+    conclude equation_t(compose(f, id(b)), f)
   }
   given compose_associative : {
     suppose a, b, c, d : object_t
     given f : morphism_t(a, b)
     given g : morphism_t(b, c)
     given h : morphism_t(c, d)
-    conclude eqv_t(compose(f, compose(g, h)), compose(compose(f, g), h))
+    conclude equation_t(compose(f, compose(g, h)), compose(compose(f, g), h))
   }
 }
 
@@ -37,8 +37,8 @@ develop category_t {
       suppose c : object_t
       given f : morphism_t(c, a)
       given g : morphism_t(c, a)
-      given eqv_t(compose(f, morphism), compose(g, morphism))
-      conclude eqv_t(f, g)
+      given equation_t(compose(f, morphism), compose(g, morphism))
+      conclude equation_t(f, g)
     }
   }
 
@@ -51,8 +51,8 @@ develop category_t {
       suppose c : object_t
       given f : morphism_t(b, c)
       given g : morphism_t(b, c)
-      given eqv_t(compose(morphism, f), compose(morphism, g))
-      conclude eqv_t(f, g)
+      given equation_t(compose(morphism, f), compose(morphism, g))
+      conclude equation_t(f, g)
     }
   }
 
@@ -65,7 +65,7 @@ develop category_t {
       suppose a, b : object_t
       conclude morphism_t(b, a)
     }
-    given inverse_left : eqv_t(compose(morphism, inverse), id(a))
-    given inverse_right : eqv_t(compose(inverse, morphism), id(b))
+    given inverse_left : equation_t(compose(morphism, inverse), id(a))
+    given inverse_right : equation_t(compose(inverse, morphism), id(b))
   }
 }

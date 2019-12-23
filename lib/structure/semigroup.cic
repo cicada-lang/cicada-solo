@@ -4,7 +4,7 @@ class semigroup_t {
   mul_associative : {
     x, y, z : elem_t
     ---------
-    eqv_t(mul(x, mul(y, z)), mul(mul(x, y), z))
+    equation_t(mul(x, mul(y, z)), mul(mul(x, y), z))
   }
 }
 
