@@ -75,10 +75,15 @@ object infer {
           ValueType()
 
         case Obj(value_map: ListMap[String, Exp]) =>
-          val type_map = ListMap(value_map.map {
-            case (name, exp) => (name, infer(env, ctx, exp))
-          }.toList: _*)
-          ValueClAlready(type_map)
+          var local_env = env
+          var defined: ListMap[String, (Value, Value)] = ListMap()
+          value_map.foreach {
+            case (name, exp) =>
+              val v = eval(local_env, exp)
+              val t = infer(local_env, ctx, exp)
+              defined = defined + (name -> (t, v))
+          }
+          ValueCl(defined, Telescope(ListMap(), local_env))
 
         case Ap(target: Exp, arg_list: List[Exp]) =>
           infer(env, ctx, target) match {

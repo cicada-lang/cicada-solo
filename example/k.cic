@@ -5,4 +5,4 @@ let k = {
   given y : type
   return x
 }
-// return k(type, unit_t)
+@show k(type, unit_t)

@@ -54,7 +54,7 @@ object subtype {
         case (s: ValueClAlready, t: ValueCl) =>
           if (t.defined.size != 0) {
             throw Report(List(
-              s"a free variable proof is required for ValueClAlready <: ValueCl"
+              s"a free variable proof is required for ValueClAlready <: ValueCl\n"
             ))
           }
           subtype_list_map(

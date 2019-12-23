@@ -16,6 +16,7 @@ object grammar {
     "claim", "define",
     "given", "conclude",
     "let", "return",
+    "function",
   )
 
   def identifier = identifier_with_preserved("identifier", preserved)
@@ -31,6 +32,7 @@ object grammar {
       "let_obj_empty" -> List("object", identifier, "{", "}"),
       "define" -> List("define", identifier, ":", exp, "=", exp),
       "@refuse" -> List("@", "refuse", identifier, ":", exp, "=", exp),
+      "@show" -> List("@", "show", exp),
     ))
 
   def top_entry_matcher = Tree.matcher[Top](
@@ -51,6 +53,8 @@ object grammar {
         TopDefine(name, exp_matcher(t), exp_matcher(exp)) },
       "@refuse" -> { case List(_, _, Leaf(name), _, t, _, exp) =>
         TopKeywordRefuse(name, exp_matcher(t), exp_matcher(exp)) },
+      "@show" -> { case List(_, _, exp) =>
+        TopKeywordShow(exp_matcher(exp)) },
     ))
 
   def top_list_matcher = non_empty_list_matcher(top_entry_matcher)

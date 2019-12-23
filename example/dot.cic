@@ -10,4 +10,4 @@ let unit_and_unit_t = object {
 }
 let fst_unit_t = unit_and_unit_t.fst
 let snd_unit_t = unit_and_unit_t.snd
-// return fst_unit_t
+@show fst_unit_t

@@ -1,9 +1,16 @@
-- add `@show` keyword
 - add `function` keyword
+- string_t (to test tagged union)
 # cicada
-- [string_t] to test tagged union
-- tagged union
-- [equality] how we fail to use equality in agda?
+- test tagged union
+- handle recursive definition
+- [test] some functional programming examples
+  - we can not do this without a way to do branching
+    like `<exp> choose { case <type> => ... }`
+  - note that the order of `case` matters to `eval`
+- we also take this opportunity to handle currying
+  - just push value to env and return new `ValueFn`
+  - also need to change `infer`
+- `the`
 - [equality]
   - [built-in] we can implementation equality by built-in equality
     maybe we need to built-in (make it an axiom) the following function
@@ -18,21 +25,10 @@
       return base
     }
     ```
-  - [constrain] we can implementation equality by constrain system
-    equality `equal` in telescope
-    - syntax should be `constrain equal x = y`
     - define `eqv_t` as class with equality constrains
 - [test] define `category_t` as total algebraic structure
 - [test] define `category_t` as partial algebraic structure
 - `@equal` maybe `@equal_value` `@equal_type`
-- handle recursive definition
-- [test] some functional programming examples
-  - we can not do this without a way to do branching
-    like `<exp> choose { case <type> => ... }`
-  - note that the order of `case` matters to `eval`
-- we also take this opportunity to handle currying
-  - just push value to env and return new `ValueFn`
-  - also need to change `infer`
 # js backend
 - a simple compiler to translate the semantics of `eval` to js
 # docs

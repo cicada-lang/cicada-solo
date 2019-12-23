@@ -54,7 +54,7 @@ object api {
             config.get("--nocolor") == None
           } (Console.CYAN) {
             case () =>
-              println(s">>> ${name} = ${pretty_value(value)} : ${pretty_value(t)}")
+              println(s"... ${name} = ${pretty_value(value)} : ${pretty_value(t)}")
           }
         }
 
@@ -71,7 +71,7 @@ object api {
             config.get("--nocolor") == None
           } (Console.CYAN) {
             case () =>
-              println(s">>>>>> ${name} : ${pretty_value(t)} = ${pretty_value(value)}")
+              println(s"...... ${name} : ${pretty_value(t)} = ${pretty_value(value)}")
           }
         }
 
@@ -91,6 +91,18 @@ object api {
               println(s"@refuse ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}")
             }
         }
+
+      case TopKeywordShow(exp) =>
+        val t = infer(local_env, local_ctx, exp)
+        val value = eval(local_env, exp)
+        println(s"@show ${pretty_exp(exp)}")
+        console_print_with_color_when {
+          config.get("--nocolor") == None
+        } (Console.CYAN) {
+          case () =>
+            println(s"..... ${pretty_value(value)} : ${pretty_value(t)}")
+        }
+
     }
   }
 

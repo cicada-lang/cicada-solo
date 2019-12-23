@@ -4,4 +4,4 @@ let type_id = {
   given A : type
   return A
 }
-// return type_id(unit_t)
+@show type_id(unit_t)

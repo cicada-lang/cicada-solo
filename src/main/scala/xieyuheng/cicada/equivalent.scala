@@ -75,7 +75,7 @@ object equivalent {
         case (s: ValueCl, t: ValueClAlready) =>
           if (s.defined.size != 0) {
             throw Report(List(
-              s"a free variable proof is required for ValueCl == ValueClAlready"
+              s"a free variable proof is required for ValueCl == ValueClAlready\n"
             ))
           }
           val name_list = s.telescope.name_list
@@ -85,7 +85,7 @@ object equivalent {
         case (s: ValueClAlready, t: ValueCl) =>
           if (t.defined.size != 0) {
             throw Report(List(
-              s"a free variable proof is required for ValueClAlready == ValueCl"
+              s"a free variable proof is required for ValueClAlready == ValueCl\n"
             ))
           }
           val name_list = t.telescope.name_list

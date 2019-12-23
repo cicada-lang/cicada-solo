@@ -1,15 +1,16 @@
-let unit_t = class {}
-let unit = {}
+class unit_t {}
+object unit {}
 
-let list_t = class { given A : type }
-let null_t = class { given A : type }
-let cons_t = class {
+class list_t { given A : type }
+class null_t { given A : type }
+class cons_t {
   given A : type
   given car : A
   given cdr : list_t(A)
 }
 
-let null_unit = null_t(unit_t)
+define null_unit : null_t(unit_t) = { let A = unit_t }
+
 let cons_unit_list = {
   given unit_list : list_t(unit_t)
   return {
@@ -18,4 +19,5 @@ let cons_unit_list = {
     let cdr = unit_list
   }
 }
-// return cons_unit_list(cons_unit_list(null_unit))
+
+@show cons_unit_list(cons_unit_list(null_unit))
