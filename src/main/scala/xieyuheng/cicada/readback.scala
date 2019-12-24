@@ -9,6 +9,12 @@ object readback {
       case ValueType() =>
         Type()
 
+      case ValueStrType() =>
+        StrType()
+
+      case ValueStr(str: String) =>
+        Str(str: String)
+
       case ValuePi(telescope: Telescope, return_type: Exp) =>
         val name_list = telescope.name_list
         val (type_value_map, return_type_value) =

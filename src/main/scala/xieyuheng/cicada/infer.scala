@@ -25,6 +25,12 @@ object infer {
         case Type() =>
           ValueType()
 
+        case StrType() =>
+          ValueType()
+
+        case Str(str: String) =>
+          ValueStrType()
+
         case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
           var local_ctx = ctx
           type_map.foreach {

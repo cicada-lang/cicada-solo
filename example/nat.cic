@@ -16,19 +16,6 @@ let three = {
   let prev = two
 }
 
-// define nat_add : {
-//   given x : nat_t
-//   given y : nat_t
-//   conclude nat_t
-// } = {
-//   given x : nat_t
-//   given y : nat_t
-//   return x switch {
-//     case succ_t => nat_add(x.prev, y)
-//     case zero_t => y
-//   }
-// }
-
 // function nat_add {
 //   given x : nat_t
 //   given y : nat_t

@@ -6,6 +6,10 @@ import xieyuheng.partech._
 import xieyuheng.partech.ruleDSL._
 import xieyuheng.partech.predefined._
 
+// TODO
+//   grammar need proper abstraction
+//   currently a lot of code are repeating
+
 object grammar {
 
   val lexer = Lexer.default

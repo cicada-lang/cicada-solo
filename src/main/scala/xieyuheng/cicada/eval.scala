@@ -17,6 +17,12 @@ object eval {
       case Type() =>
         ValueType()
 
+      case StrType() =>
+        ValueStrType()
+
+      case Str(str: String) =>
+        ValueStr(str)
+
       case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
         ValuePi(Telescope(type_map: ListMap[String, Exp], env: Env), return_type: Exp)
 

@@ -48,6 +48,12 @@ object util {
       case Type() =>
         exp
 
+      case StrType() =>
+        exp
+
+      case Str(str: String) =>
+        exp
+
       case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
         val new_type_map = type_map.map {
           case (name, exp) =>

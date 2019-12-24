@@ -8,6 +8,8 @@ case class Telescope(type_map: ListMap[String, Exp], env: Env) {
 
 sealed trait Value
 final case class ValueType() extends Value
+final case class ValueStrType() extends Value
+final case class ValueStr(str: String) extends Value
 final case class ValuePi(telescope: Telescope, return_type: Exp) extends Value
 final case class ValueFn(telescope: Telescope, body: Exp) extends Value
 final case class ValueCl(

@@ -14,6 +14,13 @@ object pretty {
       case Type() =>
         s"type"
 
+      case StrType() =>
+        s"string_t"
+
+      case Str(str: String) =>
+        val doublequote_char = '"'
+        s"${doublequote_char}${str}${doublequote_char}"
+
       case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
         var s = type_map.map {
           case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
@@ -82,6 +89,13 @@ object pretty {
     value match {
       case ValueType() =>
         s"type"
+
+      case ValueStrType() =>
+        s"string_t"
+
+      case ValueStr(str: String) =>
+        val doublequote_char = '"'
+        s"${doublequote_char}${str}${doublequote_char}"
 
       case ValuePi(Telescope(type_map: ListMap[String, Exp], env: Env), return_type: Exp) =>
         var s = type_map.map {

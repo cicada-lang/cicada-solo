@@ -54,7 +54,8 @@ object api {
             config.get("--nocolor") == None
           } (Console.CYAN) {
             case () =>
-              println(s"... ${name} = ${pretty_value(value)} : ${pretty_value(t)}")
+              println(s"let ${name} = ${pretty_value(value)} : ${pretty_value(t)}")
+              println()
           }
         }
 
@@ -71,7 +72,8 @@ object api {
             config.get("--nocolor") == None
           } (Console.CYAN) {
             case () =>
-              println(s"...... ${name} : ${pretty_value(t)} = ${pretty_value(value)}")
+              println(s"define ${name} : ${pretty_value(t)} = ${pretty_value(value)}")
+              println()
           }
         }
 
@@ -100,7 +102,8 @@ object api {
           config.get("--nocolor") == None
         } (Console.CYAN) {
           case () =>
-            println(s"..... ${pretty_value(value)} : ${pretty_value(t)}")
+            println(s"@show ${pretty_value(value)} : ${pretty_value(t)}")
+            println()
         }
 
     }
