@@ -1,5 +1,5 @@
 - string_t
-- `<exp> switch { case <type> => ... }`
+- `switch <name> { case <type> => ... }`
   - note that the order of `case` matters to `eval`
 - handle recursive definition
 - test tagged union

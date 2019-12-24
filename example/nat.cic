@@ -20,7 +20,7 @@ let three = {
 //   given x : nat_t
 //   given y : nat_t
 //   conclude nat_t
-//   return x switch {
+//   return switch x {
 //     case succ_t => nat_add(x.prev, y)
 //     case zero_t => y
 //   }

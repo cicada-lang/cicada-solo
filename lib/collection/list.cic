@@ -7,7 +7,7 @@ list_t : { A : type -> type } = {
 }
 
 list_length : { x : list_t -> nat_t } = {
-  x switch {
+  switch x {
     case null => zero
     case cons => succ(list_length(x.tail))
   }
@@ -19,7 +19,7 @@ list_append : {
   ---------
   list_t(A)
 } = {
-  x switch {
+  switch x {
     case null => y
     case cons => cons(x.head, list_append(x.tail, y))
   }
@@ -32,7 +32,7 @@ list_map : {
   ---------
   list_t(B)
 } = {
-  x switch {
+  switch x {
     case null => null
     case cons => cons(f(x.head), list_map(f, x.tail))
   }
