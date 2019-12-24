@@ -1,4 +1,4 @@
-- `switch <name> { case <type> => ... }`
+- `switch <name> { case <exp> => <exp> }`
   - note that the order of `case` matters to `eval`
 - handle recursive definition
 - test tagged union
