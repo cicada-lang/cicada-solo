@@ -13,10 +13,11 @@ object subtype {
   def subtype(ctx: Ctx, s: Value, t: Value): Unit = {
     try {
       (s, t) match {
-        // NOTE the following two cases means that
+        // NOTE the following cases means that
         //   `type` is the universe of all objects and types.
         case (s: ValuePi, ValueType()) => ()
         case (s: ValueCl, ValueType()) => ()
+        case (s: ValueStrType, ValueType()) => ()
 
         case (s: ValuePi, t: ValuePi) =>
           if (s.telescope.type_map.size != t.telescope.type_map.size) {

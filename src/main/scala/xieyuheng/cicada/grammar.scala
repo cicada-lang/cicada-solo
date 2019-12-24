@@ -21,6 +21,7 @@ object grammar {
     "given", "conclude",
     "let", "return",
     "function",
+    "string_t",
   )
 
   def identifier = identifier_with_preserved("identifier", preserved)
@@ -108,6 +109,8 @@ object grammar {
     "exp", Map(
       "var" -> List(identifier),
       "type" -> List("type"),
+      "string_t" -> List("string_t"),
+      "string" -> List(double_quoted_string),
       "pi" -> List("{", non_empty_list(given_entry), "conclude", exp, "}"),
       "fn" -> List("{", non_empty_list(given_entry), "return", exp, "}"),
       "ap" -> List(exp, "(", non_empty_list(arg_entry), ")"),
@@ -127,6 +130,9 @@ object grammar {
     "exp", Map(
       "var" -> { case List(Leaf(name)) => Var(name) },
       "type" -> { case List(_) => Type() },
+      "string_t" -> { case List(_) => StrType() },
+      "string" -> { case List(Leaf(str)) =>
+        Str(trim_double_quote(str)) },
       "pi" -> { case List(_, given_entry_list, _, return_type, _) =>
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
         Pi(type_map, exp_matcher(return_type)) },

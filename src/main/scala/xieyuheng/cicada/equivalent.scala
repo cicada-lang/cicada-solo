@@ -13,6 +13,8 @@ object equivalent {
       (s, t) match {
         case (s: ValueType, t: ValueType) => ()
 
+        case (s: ValueStrType, t: ValueStrType) => ()
+
         case (s: ValuePi, t: ValuePi) =>
           if (s.telescope.type_map.size != t.telescope.type_map.size) {
             throw Report(List(
@@ -106,7 +108,9 @@ object equivalent {
         report.throw_prepend(
           s"equivalent fail\n" +
             s"s: ${pretty_value(s)}\n" +
-            s"t: ${pretty_value(t)}\n")
+            s"s: ${s}\n" +
+            s"t: ${pretty_value(t)}\n" +
+            s"t: ${t}\n")
     }
   }
 

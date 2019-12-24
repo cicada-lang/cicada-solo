@@ -1,4 +1,3 @@
-- string_t
 - `switch <name> { case <type> => ... }`
   - note that the order of `case` matters to `eval`
 - handle recursive definition
