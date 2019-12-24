@@ -26,18 +26,11 @@ object readback {
           readback(body_value))
 
       case ValueCl(defined, telescope: Telescope) =>
-        if (defined.isEmpty) {
-          val name_list = telescope.name_list
-          Cl(
-            util.telescope_force(telescope, name_list)
-              .map { case (name, v) => (name, readback(v)) })
-        } else {
-          val name_list = telescope.name_list
-          ClPredefined(
-            defined.map { case (name, (t, v)) => (name, (readback(t), readback(v))) },
-            util.telescope_force(telescope, name_list)
-              .map { case (name, v) => (name, readback(v)) })
-        }
+        val name_list = telescope.name_list
+        Cl(
+          defined.map { case (name, (t, v)) => (name, (readback(t), readback(v))) },
+          util.telescope_force(telescope, name_list)
+            .map { case (name, v) => (name, readback(v)) })
 
       case ValueObj(value_map: ListMap[String, Value]) =>
         Obj(value_map.map { case (name, v) => (name, readback(v)) })

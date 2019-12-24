@@ -34,13 +34,7 @@ object pretty {
         }.mkString(", ")
         s"${pretty_exp(target)}(${args})"
 
-      case Cl(type_map: ListMap[String, Exp]) =>
-        var s = type_map.map {
-          case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
-        }.mkString("")
-        s"class {${maybe_ln(s)}}"
-
-      case ClPredefined(defined, type_map: ListMap[String, Exp]) =>
+      case Cl(defined, type_map: ListMap[String, Exp]) =>
         var d = defined.map {
           case (name, (t, exp)) => s"define ${name} : ${pretty_exp(t)} = ${pretty_exp(exp)}\n"
         }.mkString("")

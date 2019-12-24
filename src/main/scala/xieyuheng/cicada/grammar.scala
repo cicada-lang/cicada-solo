@@ -41,9 +41,9 @@ object grammar {
         TopLet(name, exp_matcher(exp)) },
       "define_cl" -> { case List(_, Leaf(name), _, given_entry_list, _) =>
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
-        TopDefine(name, Type(), Cl(type_map)) },
+        TopDefine(name, Type(), Cl(ListMap.empty, type_map)) },
       "define_cl_empty" -> { case List(_, Leaf(name), _, _) =>
-        TopDefine(name, Type(), Cl(ListMap.empty)) },
+        TopDefine(name, Type(), Cl(ListMap.empty, ListMap.empty)) },
       "let_obj" -> { case List(_, Leaf(name), _, let_entry_list, _) =>
         val value_map = ListMap(non_empty_list_matcher(let_entry_matcher)(let_entry_list): _*)
         TopLet(name, Obj(value_map)) },
@@ -93,17 +93,17 @@ object grammar {
         Ap(exp_matcher(target), arg_list) },
       "cl" -> { case List(_, _, given_entry_list, _) =>
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
-        Cl(type_map) },
+        Cl(ListMap.empty, type_map) },
       "cl_predefined" -> { case List(
         _, _, define_entry_list, given_entry_list, _) =>
         val defined = ListMap(non_empty_list_matcher(define_entry_matcher)(define_entry_list): _*)
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
-        ClPredefined(defined, type_map) },
+        Cl(defined, type_map) },
       "cl_naked" -> { case List(_, given_entry_list, _) =>
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
-        Cl(type_map) },
+        Cl(ListMap.empty, type_map) },
       "cl_empty" -> { case List(_, _, _) =>
-        Cl(ListMap()) },
+        Cl(ListMap.empty, ListMap.empty) },
       "obj" -> { case List(_, _, let_entry_list, _) =>
         val value_map = ListMap(non_empty_list_matcher(let_entry_matcher)(let_entry_list): _*)
         Obj(value_map) },
@@ -111,7 +111,7 @@ object grammar {
         val value_map = ListMap(non_empty_list_matcher(let_entry_matcher)(let_entry_list): _*)
         Obj(value_map) },
       "obj_empty" -> { case List(_, _, _) =>
-        Obj(ListMap()) },
+        Obj(ListMap.empty) },
       "obj_naked_empty" -> { case List(_, _) =>
         Obj(ListMap()) },
       "dot" -> { case List(target, _, Leaf(field)) =>
@@ -181,9 +181,9 @@ object grammar {
         (name, BlockEntryLet(exp_matcher(exp))) },
       "define_cl" -> { case List(_, Leaf(name), _, given_entry_list, _) =>
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
-        (name, BlockEntryDefine(Type(), Cl(type_map))) },
+        (name, BlockEntryDefine(Type(), Cl(ListMap.empty, type_map))) },
       "define_cl_empty" -> { case List(_, Leaf(name), _, _) =>
-        (name, BlockEntryDefine(Type(), Cl(ListMap.empty))) },
+        (name, BlockEntryDefine(Type(), Cl(ListMap.empty, ListMap.empty))) },
       "let_obj" -> { case List(_, Leaf(name), _, let_entry_list, _) =>
         val value_map = ListMap(non_empty_list_matcher(let_entry_matcher)(let_entry_list): _*)
         (name, BlockEntryLet(Obj(value_map))) },

@@ -46,16 +46,7 @@ object infer {
           val return_type = readback(return_type_value)
           ValuePi(Telescope(type_map, env), return_type)
 
-        case Cl(type_map: ListMap[String, Exp]) =>
-          var local_ctx = ctx
-          type_map.foreach {
-            case (name, t) =>
-              check(env, local_ctx, t, ValueType())
-              local_ctx = local_ctx.ext(name, eval(env, t))
-          }
-          ValueType()
-
-        case ClPredefined(defined, type_map: ListMap[String, Exp]) =>
+        case Cl(defined, type_map: ListMap[String, Exp]) =>
           var local_env = env
           var local_ctx = ctx
           defined.foreach {

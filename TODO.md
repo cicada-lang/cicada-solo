@@ -14,7 +14,7 @@
   - [built-in] we can implementation equality by built-in equality
     maybe we need to built-in (make it an axiom) the following function
     ``` cicada
-    function equation_replace = {
+    function transport = {
       suppose A : type
       suppose x, y : A
       given equation : equation_t(A, x, y)
@@ -45,7 +45,6 @@
   - a little bit early to do this now
 - [note] we can also use `new` to construct object from class
   - but I choose to use `{}` syntax to construct all objects for now
-- [note] no auto currying
-- [less important] `Exp` and `Value` use cofree
+- [maybe] `Exp`
 - [maybe] should we handle `A : type` specially?
   - I think no.

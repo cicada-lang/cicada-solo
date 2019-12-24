@@ -72,14 +72,7 @@ object util {
         }
         Ap(new_target, new_arg_list)
 
-      case Cl(type_map: ListMap[String, Exp]) =>
-        val new_type_map = type_map.map {
-          case (name, exp) =>
-            (name, exp_subst_var_map(exp, var_map))
-        }
-        Cl(new_type_map)
-
-      case ClPredefined(defined, type_map: ListMap[String, Exp]) =>
+      case Cl(defined, type_map: ListMap[String, Exp]) =>
         val new_defined = defined.map {
           case (name, (t, exp)) =>
             (name, (exp_subst_var_map(t, var_map), exp_subst_var_map(exp, var_map)))
@@ -88,7 +81,7 @@ object util {
           case (name, exp) =>
             (name, exp_subst_var_map(exp, var_map))
         }
-        ClPredefined(new_defined, new_type_map)
+        Cl(new_defined, new_type_map)
 
       case Obj(value_map: ListMap[String, Exp]) =>
         val new_value_map = value_map.map {
