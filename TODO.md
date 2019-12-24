@@ -1,4 +1,3 @@
-- add `function` keyword
 - string_t
 - `<exp> switch { case <type> => ... }`
   - note that the order of `case` matters to `eval`

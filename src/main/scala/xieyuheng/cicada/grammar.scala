@@ -26,11 +26,23 @@ object grammar {
   def top_entry = Rule(
     "top_entry", Map(
       "let" -> List("let", identifier, "=", exp),
-      "define_cl" -> List("class", identifier, "{", non_empty_list(given_entry), "}"),
-      "define_cl_empty" -> List("class", identifier, "{", "}"),
+      "let_cl" -> List("class", identifier, "{", non_empty_list(given_entry), "}"),
+      "let_cl_empty" -> List("class", identifier, "{", "}"),
       "let_obj" -> List("object", identifier, "{", non_empty_list(let_entry), "}"),
       "let_obj_empty" -> List("object", identifier, "{", "}"),
+      "let_function" -> List("function", identifier, "{",
+        non_empty_list(given_entry),
+        "conclude", exp,
+        "return", exp,
+        "}"),
+      "let_function_block" -> List("function", identifier, "{",
+        non_empty_list(given_entry),
+        "conclude", exp,
+        non_empty_list(block_entry),
+        "return", exp,
+        "}"),
       "define" -> List("define", identifier, ":", exp, "=", exp),
+      // extends block_entry
       "@refuse" -> List("@", "refuse", identifier, ":", exp, "=", exp),
       "@show" -> List("@", "show", exp),
     ))
@@ -39,18 +51,47 @@ object grammar {
     "top_entry", Map(
       "let" -> { case List(_, Leaf(name), _, exp) =>
         TopLet(name, exp_matcher(exp)) },
-      "define_cl" -> { case List(_, Leaf(name), _, given_entry_list, _) =>
+      "let_cl" -> { case List(_, Leaf(name), _, given_entry_list, _) =>
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
         TopDefine(name, Type(), Cl(ListMap.empty, type_map)) },
-      "define_cl_empty" -> { case List(_, Leaf(name), _, _) =>
+      "let_cl_empty" -> { case List(_, Leaf(name), _, _) =>
         TopDefine(name, Type(), Cl(ListMap.empty, ListMap.empty)) },
       "let_obj" -> { case List(_, Leaf(name), _, let_entry_list, _) =>
         val value_map = ListMap(non_empty_list_matcher(let_entry_matcher)(let_entry_list): _*)
         TopLet(name, Obj(value_map)) },
       "let_obj_empty" -> { case List(_, Leaf(name), _, _) =>
         TopLet(name, Obj(ListMap.empty)) },
+      "let_function" -> { case List(_, Leaf(name), _,
+        given_entry_list,
+        _, return_type,
+        _, body,
+        _) =>
+        val pi = Pi(
+          ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*),
+          exp_matcher(return_type))
+        val fn = Fn(
+          ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*),
+          exp_matcher(body))
+        TopDefine(name, pi, fn) },
+      "let_function_block" -> { case List(_, Leaf(name), _,
+        given_entry_list,
+        _, return_type,
+        block_entry_list,
+        _, body,
+        _) =>
+        val pi = Pi(
+          ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*),
+          exp_matcher(return_type))
+        val block = Block(
+          ListMap(non_empty_list_matcher(block_entry_matcher)(block_entry_list): _*),
+          exp_matcher(body))
+        val fn = Fn(
+          ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*),
+          block)
+        TopDefine(name, pi, fn) },
       "define" -> { case List(_, Leaf(name), _, t, _, exp) =>
         TopDefine(name, exp_matcher(t), exp_matcher(exp)) },
+      // extends block_entry_matcher
       "@refuse" -> { case List(_, _, Leaf(name), _, t, _, exp) =>
         TopKeywordRefuse(name, exp_matcher(t), exp_matcher(exp)) },
       "@show" -> { case List(_, _, exp) =>
@@ -165,30 +206,69 @@ object grammar {
         (name, (exp_matcher(t), exp_matcher(exp))) },
     ))
 
-  def block_entry = Rule(
+  def block_entry: Rule = Rule(
     "block_entry", Map(
       "let" -> List("let", identifier, "=", exp),
-      "define_cl" -> List("class", identifier, "{", non_empty_list(given_entry), "}"),
-      "define_cl_empty" -> List("class", identifier, "{", "}"),
+      "let_cl" -> List("class", identifier, "{", non_empty_list(given_entry), "}"),
+      "let_cl_empty" -> List("class", identifier, "{", "}"),
       "let_obj" -> List("object", identifier, "{", non_empty_list(let_entry), "}"),
       "let_obj_empty" -> List("object", identifier, "{", "}"),
+      "let_function" -> List("function", identifier, "{",
+        non_empty_list(given_entry),
+        "conclude", exp,
+        "return", exp,
+        "}"),
+      "let_function_block" -> List("function", identifier, "{",
+        non_empty_list(given_entry),
+        "conclude", exp,
+        non_empty_list(block_entry),
+        "return", exp,
+        "}"),
       "define" -> List("define", identifier, ":", exp, "=", exp),
     ))
 
-  def block_entry_matcher = Tree.matcher[(String, BlockEntry)](
+  def block_entry_matcher: Tree => (String, BlockEntry) = Tree.matcher[(String, BlockEntry)](
     "block_entry", Map(
       "let" -> { case List(_, Leaf(name), _, exp) =>
         (name, BlockEntryLet(exp_matcher(exp))) },
-      "define_cl" -> { case List(_, Leaf(name), _, given_entry_list, _) =>
+      "let_cl" -> { case List(_, Leaf(name), _, given_entry_list, _) =>
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
         (name, BlockEntryDefine(Type(), Cl(ListMap.empty, type_map))) },
-      "define_cl_empty" -> { case List(_, Leaf(name), _, _) =>
+      "let_cl_empty" -> { case List(_, Leaf(name), _, _) =>
         (name, BlockEntryDefine(Type(), Cl(ListMap.empty, ListMap.empty))) },
       "let_obj" -> { case List(_, Leaf(name), _, let_entry_list, _) =>
         val value_map = ListMap(non_empty_list_matcher(let_entry_matcher)(let_entry_list): _*)
         (name, BlockEntryLet(Obj(value_map))) },
       "let_obj_empty" -> { case List(_, Leaf(name), _, _) =>
         (name, BlockEntryLet(Obj(ListMap.empty))) },
+      "let_function" -> { case List(_, Leaf(name), _,
+        given_entry_list,
+        _, return_type,
+        _, body,
+        _) =>
+        val pi = Pi(
+          ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*),
+          exp_matcher(return_type))
+        val fn = Fn(
+          ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*),
+          exp_matcher(body))
+        (name, BlockEntryDefine(pi, fn)) },
+      "let_function_block" -> { case List(_, Leaf(name), _,
+        given_entry_list,
+        _, return_type,
+        block_entry_list,
+        _, body,
+        _) =>
+        val pi = Pi(
+          ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*),
+          exp_matcher(return_type))
+        val block = Block(
+          ListMap(non_empty_list_matcher(block_entry_matcher)(block_entry_list): _*),
+          exp_matcher(body))
+        val fn = Fn(
+          ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*),
+          block)
+        (name, BlockEntryDefine(pi, fn)) },
       "define" -> { case List(_, Leaf(name), _, t, _, exp) =>
         (name, BlockEntryDefine(exp_matcher(t), exp_matcher(exp))) },
     ))

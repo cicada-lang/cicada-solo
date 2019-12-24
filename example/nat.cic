@@ -39,35 +39,17 @@ let three = {
 //   }
 // }
 
-// function add1 {
-//   given x : nat_t
-//   conclude nat_t
-//   return {
-//     let prev = x
-//   }
-// }
-
-// function add2 {
-//   given x : nat_t
-//   conclude nat_t
-//   return add1(add1(x))
-// }
-
-define add1 : {
+function add1 {
   given x : nat_t
   conclude nat_t
-} = {
-  given x : nat_t
   return {
     let prev = x
   }
 }
 
-define add2 : {
+function add2 {
   given x : nat_t
   conclude nat_t
-} = {
-  given x : nat_t
   return add1(add1(x))
 }
 
