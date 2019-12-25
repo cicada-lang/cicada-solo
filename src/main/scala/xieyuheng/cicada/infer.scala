@@ -86,10 +86,17 @@ object infer {
         case Ap(target: Exp, arg_list: List[Exp]) =>
           infer(env, ctx, target) match {
             case ValuePi(telescope: Telescope, return_type: Exp) =>
-              val name_list = telescope.name_list
-              val arg_map = ListMap(name_list.zip(arg_list): _*)
-              val new_env = telescope_check_yield_env(env, ctx, arg_map, telescope)
-              eval(new_env, return_type)
+              val value_list = arg_list.map { eval(env, _) }
+              val (new_defined, new_telescope) = telescope_apply(telescope, value_list)
+              println("><><><")
+              println(s"return_type exp: ${pretty_exp(return_type)}")
+              println(s"return_type value: ${pretty_value(eval(telescope.env, return_type))}")
+              // infer object will return class with defined fields
+              // the value in defined fields might be Neutral
+              // specially when infering the type of Switch
+              eval(new_telescope.env, return_type)
+              println("><><><")
+              eval(new_telescope.env, return_type)
 
             case ValueType() =>
               eval(env, target) match {

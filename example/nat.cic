@@ -16,19 +16,7 @@ let three = {
   let prev = two
 }
 
-function nat_add {
-  given x : nat_t
-  given y : nat_t
-  conclude nat_t
-  return switch x {
-    case succ_t =>
-      // nat_add(x.prev, y)
-    y
-    case zero_t => y
-  }
-}
-
-function add1 {
+function succ {
   given x : nat_t
   conclude nat_t
   return {
@@ -36,11 +24,34 @@ function add1 {
   }
 }
 
+function nat_add {
+  given x : nat_t
+  given y : nat_t
+  conclude nat_t
+  return switch x {
+    case succ_t => succ(nat_add(x.prev, y))
+    case zero_t => y
+  }
+}
+
+function add1 {
+  given x : nat_t
+  conclude succ_t
+  return {
+    let prev = x
+  }
+}
+
 function add2 {
   given x : nat_t
-  conclude nat_t
+  conclude succ_t
   return add1(add1(x))
 }
 
 let x = add2(zero).prev
 let y = two.prev.prev
+
+// @show nat_add(zero, zero)
+// @equal nat_add(zero, zero) = zero
+// @equal nat_add(one, zero) = one
+// @equal nat_add(one, one) = two

@@ -13,7 +13,7 @@ object eval {
   def eval(env: Env, exp: Exp): Value = {
     exp match {
       case Var(name: String) =>
-        env.lookup_val(name) match {
+        env.lookup_value(name) match {
           case Some(value) =>
             value
           case None =>
@@ -55,39 +55,25 @@ object eval {
         ValueUnion(type_list.map { eval(env, _) })
 
       case Switch(name: String, cases: List[(Exp, Exp)]) =>
-        env.lookup_val(name) match {
+        env.lookup_value(name) match {
           case Some(value) =>
             // NOTE this is the only place in `eval` to use `check` and `infer`
             //   because we need to check not `Exp : Value` but `Value : Value`
             //   and we have no `ctx` in `eval`
             //   maybe this is not good and we need to fix this
-            var result: Option[Exp] = None
-            var ctx = Ctx()
-            env.map.foreach {
-              case (name, value) =>
-                ctx = ctx.ext(name, infer(env, ctx, readback(value)))
-            }
-            cases.foreach {
-              case (t, v) =>
+            val ctx = env.to_ctx()
+            val result = cases.find {
+              case (t, _v) =>
                 Try {
                   check(env, ctx, readback(value), eval(env, t))
                 } match {
-                  case Success(()) =>
-                    result = Some(v)
-                    // println(s"name: ${name}")
-                    // println(s"v: ${pretty_exp(readback(value))}")
-                    // println(s"t: ${pretty_value(eval(env, t))}")
-                    // println(s"result: ${result}")
-                  case Failure(error) =>
-                    // println(
-                    //   s"switch fail to match one case " +
-                    //     s"error:\n${error}")
-                    ()
+                  case Success(()) => true
+                  case Failure(_error) => false
                 }
             }
             result match {
-              case Some(exp) =>
-                eval(env, exp)
+              case Some((_t, v)) =>
+                eval(env, v)
               case None =>
                 throw Report(List(
                   "eval fail, switch mismatch\n"
@@ -152,7 +138,8 @@ object eval {
           case Some(value) => value
           case None =>
             throw Report(List(
-              s"missing field: ${field}\n"
+              s"missing field: ${field}\n" +
+                s"on value: ${pretty_value(value)}\n"
             ))
         }
 

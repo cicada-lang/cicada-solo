@@ -1,5 +1,7 @@
 # cicada
 - handle recursive definition
+- no re-definition for top level name
+  - local is re-definition ok
 - test tagged union
 - [test] some functional programming examples
 - we also take this opportunity to handle currying
@@ -22,6 +24,7 @@
     ```
 - [test] define `category_t` as total algebraic structure
 - [test] define `category_t` as partial algebraic structure
+- mutual recursive definition only at top level
 # js backend
 - a simple compiler to translate the semantics of `eval` to js
 # docs
@@ -36,8 +39,6 @@
   but this does not handle recursive definitions of rule
   - we may try to reuse hosting language's inheritance
 # note
-- [note] no neet to not allow re-definition
-  - the scope is ok
 - [maybe] [top] we need a framework for adding new keywords
   - a little bit early to do this now
 - [note] we can also use `new` to construct object from class

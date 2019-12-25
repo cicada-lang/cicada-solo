@@ -47,7 +47,7 @@ object api {
     top_list: List[Top],
     config: ListMap[String, List[String]],
   ): Unit = {
-    var local_env = Env()
+    var local_env = Env(ListMap())
     var local_ctx = Ctx()
 
     top_list.foreach {
@@ -69,11 +69,12 @@ object api {
 
       case TopDefine(name, t_exp, exp) =>
         val t_expected = eval(local_env, t_exp)
+        local_ctx = local_ctx.ext(name, t_expected)
         check(local_env, local_ctx, exp, t_expected)
         val t = infer(local_env, local_ctx, exp)
-        val value = eval(local_env, exp)
         local_ctx = local_ctx.ext(name, t)
-        local_env = local_env.ext(name, value)
+        local_env = local_env.ext_recursive(name, t_exp, exp, local_env)
+        val value = eval(local_env, exp)
         if (config.get("--verbose") != None) {
           println(s"define ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}")
           console_print_with_color_when {

@@ -24,12 +24,12 @@ object check {
     }
   }
 
-  def telescope_check_yield_env(
+  def telescope_check(
     env: Env,
     ctx: Ctx,
     arg_map: ListMap[String, Exp],
     telescope: Telescope,
-  ): Env = {
+  ): Unit = {
     var local_env = telescope.env
     var local_ctx = ctx
     telescope.type_map.foreach {
@@ -51,16 +51,6 @@ object check {
         local_env = local_env.ext(name, v_value)
         local_ctx = local_ctx.ext(name, t_value)
     }
-    local_env
-  }
-
-  def telescope_check(
-    env: Env,
-    ctx: Ctx,
-    arg_map: ListMap[String, Exp],
-    telescope: Telescope,
-  ): Unit = {
-    telescope_check_yield_env(env, ctx, arg_map, telescope)
   }
 
   def defined_check(
