@@ -1,5 +1,4 @@
-- `switch <name> { case <exp> => <exp> }`
-  - note that the order of `case` matters to `eval`
+- we will need union type to infer the type of `switch`
 - handle recursive definition
 - test tagged union
 - [test] some functional programming examples

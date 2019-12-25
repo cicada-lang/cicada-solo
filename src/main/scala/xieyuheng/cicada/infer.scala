@@ -135,6 +135,13 @@ object infer {
               ))
           }
 
+        case Switch(name: String, cases: List[(Exp, Exp)]) =>
+          // NOTE we will need union type to infer the type of `switch`
+          throw Report(List(
+            s"infer fail\n" +
+              s"can not infer type of switch\n"
+          ))
+
         case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
           var local_ctx = ctx
           block_entry_map.foreach {

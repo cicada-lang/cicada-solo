@@ -2,9 +2,6 @@ package xieyuheng.cicada
 
 import collection.immutable.ListMap
 
-sealed trait CtxEntry
-final case class CtxEntryTypeValueuePair(t: Value, value: Value) extends CtxEntry
-
 case class Ctx(map: ListMap[String, Value] = ListMap()) {
 
   def lookup_type(name: String): Option[Value] = {

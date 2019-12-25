@@ -44,6 +44,11 @@ object readback {
       case NeutralVar(name: String) =>
         Var(name)
 
+      case NeutralSwitch(name: String, cases: List[(Value, Value)]) =>
+        Switch(name, cases.map {
+          case (t, v) => (readback(t), readback(v))
+        })
+
       case NeutralAp(target: Neutral, arg_list: List[Value]) =>
         Ap(readback(target), arg_list.map(readback))
 

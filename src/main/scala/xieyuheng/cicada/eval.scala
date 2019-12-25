@@ -1,8 +1,12 @@
 package xieyuheng.cicada
 
+import scala.util.{ Try, Success, Failure }
 import collection.immutable.ListMap
 
 import pretty._
+import check._
+import infer._
+import readback._
 
 object eval {
 
@@ -10,8 +14,10 @@ object eval {
     exp match {
       case Var(name: String) =>
         env.lookup_val(name) match {
-          case Some(value) => value
-          case None => NeutralVar(name)
+          case Some(value) =>
+            value
+          case None =>
+            NeutralVar(name)
         }
 
       case Type() =>
@@ -44,6 +50,45 @@ object eval {
 
       case Dot(target: Exp, field: String) =>
         value_dot(eval(env, target), field)
+
+      case Switch(name: String, cases: List[(Exp, Exp)]) =>
+        env.lookup_val(name) match {
+          case Some(value) =>
+            // NOTE this is the only place in `eval` to use `check` and `infer`
+            //   because we need to check not `Exp : Value` but `Value : Value`
+            //   and we have no `ctx` in `eval`
+            //   maybe this is not good and we need to fix this
+            var result: Option[Exp] = None
+            var ctx = Ctx()
+            env.map.foreach {
+              case (name, value) =>
+                ctx = ctx.ext(name, infer(env, ctx, readback(value)))
+            }
+            cases.foreach {
+              case (t, v) =>
+                Try {
+                  check(env, ctx, readback(value), eval(env, t))
+                } match {
+                  case Success(()) =>
+                    result = Some(v)
+                  case Failure(error) =>
+                    ()
+                }
+            }
+            result match {
+              case Some(exp) =>
+                eval(env, exp)
+              case None =>
+                throw Report(List(
+                  "eval fail, switch mismatch\n"
+                ))
+            }
+
+          case None =>
+            NeutralSwitch(name, cases.map {
+              case (t, v) => (eval(env, t), eval(env, v))
+            })
+        }
 
       case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
         var local_env = env

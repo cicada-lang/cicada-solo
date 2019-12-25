@@ -82,6 +82,15 @@ object equivalent {
             ))
           }
 
+        case (s: NeutralSwitch, t: NeutralSwitch) =>
+          if (s.name != t.name) {
+            throw Report(List(
+              s"equivalent fail on NeutralSwitch\n" +
+                s"${s.name} != ${t.name}\n"
+            ))
+          }
+          equivalent_cases(ctx, s.cases, t.cases)
+
         case (s: NeutralAp, t: NeutralAp) =>
           equivalent(ctx, s.target, t.target)
           equivalent_list(ctx, s.arg_list, t.arg_list)
@@ -128,6 +137,25 @@ object equivalent {
       s_list.zip(t_list).foreach {
         case (s, t) =>
           equivalent(ctx, s, t)
+      }
+    }
+  }
+
+  def equivalent_cases(
+    ctx: Ctx,
+    s_cases: List[(Value, Value)],
+    t_cases: List[(Value, Value)],
+  ): Unit = {
+    if (s_cases.size != t_cases.size) {
+      throw Report(List(
+        s"equivalent_cases fail\n" +
+          s"length mismatch\n"
+      ))
+    } else {
+      s_cases.zip(t_cases).foreach {
+        case ((st, sv), (tt, tv)) =>
+          equivalent(ctx, st, tt)
+          equivalent(ctx, sv, tv)
       }
     }
   }

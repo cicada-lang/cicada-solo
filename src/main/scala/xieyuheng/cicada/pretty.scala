@@ -59,6 +59,12 @@ object pretty {
       case Dot(target: Exp, field: String) =>
         s"${pretty_exp(target)}.${field}"
 
+      case Switch(name: String, cases: List[(Exp, Exp)]) =>
+        val s = cases.map {
+          case (t, v) => s"${pretty_exp(t)} => ${pretty_exp(v)}"
+        }.mkString("")
+        s"switch ${name} {${maybe_ln(s)}}"
+
       case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
         var s = block_entry_map.map {
           case (name, BlockEntryLet(exp)) => s"let ${name} = ${pretty_exp(exp)}\n"
@@ -73,6 +79,12 @@ object pretty {
     neutral match {
       case NeutralVar(name: String) =>
         s"${name}"
+
+      case NeutralSwitch(name: String, cases: List[(Value, Value)]) =>
+        val s = cases.map {
+          case (t, v) => s"${pretty_value(t)} => ${pretty_value(v)}"
+        }.mkString("")
+        s"switch ${name} {${maybe_ln(s)}}"
 
       case NeutralAp(target: Neutral, arg_list: List[Value]) =>
         val args = arg_list.map {

@@ -16,15 +16,17 @@ let three = {
   let prev = two
 }
 
-// function nat_add {
-//   given x : nat_t
-//   given y : nat_t
-//   conclude nat_t
-//   return switch x {
-//     case succ_t => nat_add(x.prev, y)
-//     case zero_t => y
-//   }
-// }
+function nat_add {
+  given x : nat_t
+  given y : nat_t
+  conclude nat_t
+  return switch x {
+    case succ_t =>
+      // nat_add(x.prev, y)
+    y
+    case zero_t => y
+  }
+}
 
 function add1 {
   given x : nat_t

@@ -100,6 +100,11 @@ object util {
         val new_target = exp_subst_var_map(target, var_map)
         Dot(new_target, field)
 
+      case Switch(name: String, cases: List[(Exp, Exp)]) =>
+        Switch(name, cases.map {
+          case (t, v) => (exp_subst_var_map(t, var_map), exp_subst_var_map(v, var_map))
+        })
+
       case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
         val new_block_entry_map = block_entry_map.map {
           case (name, BlockEntryLet(exp)) =>

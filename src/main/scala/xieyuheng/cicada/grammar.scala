@@ -123,6 +123,9 @@ object grammar {
       "obj_empty" -> List("object", "{", "}"),
       "obj_naked_empty" -> List("{", "}"),
       "dot" -> List(exp, ".", identifier),
+      "switch" -> List("switch", identifier, "{",
+        non_empty_list(case_clause),
+        "}"),
       "block" -> List("{", non_empty_list(block_entry), "return", exp, "}"),
     ))
 
@@ -167,9 +170,26 @@ object grammar {
         Obj(ListMap()) },
       "dot" -> { case List(target, _, Leaf(field)) =>
         Dot(exp_matcher(target), field) },
+      "switch" -> { case List(_, Leaf(name), _,
+        case_clause_list,
+        _) =>
+        val cases = non_empty_list_matcher(case_clause_matcher)(case_clause_list)
+        Switch(name, cases) },
       "block" -> { case List(_, block_entry_list, _, body, _) =>
         val block_entry_map = ListMap(non_empty_list_matcher(block_entry_matcher)(block_entry_list): _*)
         Block(block_entry_map, exp_matcher(body)) },
+    ))
+
+  def case_clause = Rule(
+    "case_clause", Map(
+      "case" -> List("case", exp, "=", ">", exp),
+    ))
+
+  def case_clause_matcher = Tree.matcher[(Exp, Exp)](
+    "case_clause", Map(
+      "case" -> { case List(_, t, _, _, v) =>
+        (exp_matcher(t), exp_matcher(v))
+      },
     ))
 
   def arg_entry = Rule(

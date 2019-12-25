@@ -1,6 +1,7 @@
 package xieyuheng.cicada
 
 import collection.immutable.ListMap
+import scala.util.{ Try, Success, Failure }
 
 import eval._
 import infer._
@@ -21,6 +22,34 @@ object check {
               throw Report(List(
                 s"expecting class type but found: ${t}\n"
               ))
+          }
+
+        case Switch(name: String, cases: List[(Exp, Exp)]) =>
+          ctx.lookup_type(name) match {
+            case Some(r) =>
+              cases.foreach {
+                case (s, v) =>
+                  val s_value = eval(env, s)
+                  Try {
+                    subtype(ctx, s_value, r)
+                  } match {
+                    case Success(()) =>
+                      check(env, ctx.ext(name, s_value), v, t)
+                    case Failure(error) =>
+                      throw Report(List(
+                        s"at compile time, we know type of ${name} is ${pretty_value(r)}\n" +
+                          s"in a case of switch\n" +
+                          s"the type ${pretty_value(s_value)} is not a subtype of the abvoe type\n" +
+                          s"it is meaningless to write this case\n" +
+                          s"because we know it will never be matched\n"
+                      ))
+                  }
+              }
+            case None =>
+              cases.foreach {
+                case (s, v) =>
+                  check(env, ctx.ext(name, eval(env, s)), v, t)
+              }
           }
 
         case _ =>
