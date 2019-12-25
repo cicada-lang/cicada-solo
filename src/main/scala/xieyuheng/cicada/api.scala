@@ -82,7 +82,7 @@ object api {
         Try {
           check(local_env, local_ctx, exp, t_expected)
         } match {
-          case Success(_) =>
+          case Success(()) =>
             throw Report(List(
               s"@refuse fail\n" +
                 s"should refuse the following type membership assertion\n" +
@@ -92,6 +92,23 @@ object api {
             if (config.get("--verbose") != None) {
               println(s"@refuse ${pretty_exp(exp)} : ${pretty_exp(t_exp)}")
             }
+        }
+
+      case TopKeywordAccept(exp, t_exp) =>
+        val t_expected = eval(local_env, t_exp)
+        Try {
+          check(local_env, local_ctx, exp, t_expected)
+        } match {
+          case Success(()) =>
+            if (config.get("--verbose") != None) {
+              println(s"@accept ${pretty_exp(exp)} : ${pretty_exp(t_exp)}")
+            }
+          case Failure(report) =>
+            throw Report(List(
+              s"@accept fail\n" +
+                s"should accept the following type membership assertion\n" +
+                s"@accept ${pretty_exp(exp)} : ${pretty_exp(t_exp)}\n"
+            ))
         }
 
       case TopKeywordShow(exp) =>

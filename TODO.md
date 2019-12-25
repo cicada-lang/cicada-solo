@@ -1,5 +1,4 @@
 # cicada
-- `@accept` as dual of `@refuse` -- fix bool.cic
 - `@equal` -- for more tests
 - do not allow re-definition
 - handle recursive definition

@@ -50,6 +50,7 @@ object grammar {
       "define" -> List("define", identifier, ":", exp, "=", exp),
       // extends block_entry
       "@refuse" -> List("@", "refuse", exp, ":", exp),
+      "@accept" -> List("@", "accept", exp, ":", exp),
       "@show" -> List("@", "show", exp),
     ))
 
@@ -100,6 +101,8 @@ object grammar {
       // extends block_entry_matcher
       "@refuse" -> { case List(_, _, exp, _, t) =>
         TopKeywordRefuse(exp_matcher(exp), exp_matcher(t)) },
+      "@accept" -> { case List(_, _, exp, _, t) =>
+        TopKeywordAccept(exp_matcher(exp), exp_matcher(t)) },
       "@show" -> { case List(_, _, exp) =>
         TopKeywordShow(exp_matcher(exp)) },
     ))
