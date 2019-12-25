@@ -100,6 +100,9 @@ object util {
         val new_target = exp_subst_var_map(target, var_map)
         Dot(new_target, field)
 
+      case Union(type_list: List[Exp]) =>
+        Union(type_list.map { exp_subst_var_map(_, var_map) })
+
       case Switch(name: String, cases: List[(Exp, Exp)]) =>
         Switch(name, cases.map {
           case (t, v) => (exp_subst_var_map(t, var_map), exp_subst_var_map(v, var_map))

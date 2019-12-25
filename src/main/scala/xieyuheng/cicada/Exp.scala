@@ -16,6 +16,7 @@ final case class Cl(
 ) extends Exp
 final case class Obj(value_map: ListMap[String, Exp]) extends Exp
 final case class Dot(target: Exp, field: String) extends Exp
+final case class Union(type_list: List[Exp]) extends Exp
 final case class Switch(name: String, cases: List[(Exp, Exp)]) extends Exp
 final case class Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) extends Exp
 

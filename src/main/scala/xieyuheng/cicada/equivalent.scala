@@ -5,6 +5,7 @@ import java.util.UUID
 import collection.immutable.ListMap
 
 import pretty._
+import subtype._
 
 object equivalent {
 
@@ -15,43 +16,52 @@ object equivalent {
 
         case (s: ValueStrType, t: ValueStrType) => ()
 
+        case (ValueStr(s), ValueStr(t)) =>
+          if (s != t) {
+            throw Report(List(
+              s"equivalent fail on ValueStr\n"
+            ))
+          }
+
+        case (s: ValueUnion, t: ValueUnion) =>
+          subtype(ctx, s, t)
+          subtype(ctx, t, s)
+
         case (s: ValuePi, t: ValuePi) =>
           if (s.telescope.type_map.size != t.telescope.type_map.size) {
             throw Report(List(
               s"equivalent fail on ValuePi, arity mismatch\n"
             ))
-          } else {
-            val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {
-              case (s_name, t_name) =>
-                val uuid: UUID = UUID.randomUUID()
-                s"#equivalent-pi-type:${s_name}:${t_name}:${uuid}"
-            }.toList
-            val (s_type_map, s_return_type) =
-              util.telescope_force_with_return(s.telescope, name_list, s.return_type)
-            val (t_type_map, t_return_type) =
-              util.telescope_force_with_return(t.telescope, name_list, t.return_type)
-            equivalent_list_map(ctx, t_type_map, s_type_map)
-            equivalent(ctx, s_return_type, t_return_type)
           }
+          val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {
+            case (s_name, t_name) =>
+              val uuid: UUID = UUID.randomUUID()
+              s"#equivalent-pi-type:${s_name}:${t_name}:${uuid}"
+          }.toList
+          val (s_type_map, s_return_type) =
+            util.telescope_force_with_return(s.telescope, name_list, s.return_type)
+          val (t_type_map, t_return_type) =
+            util.telescope_force_with_return(t.telescope, name_list, t.return_type)
+          equivalent_list_map(ctx, t_type_map, s_type_map)
+          equivalent(ctx, s_return_type, t_return_type)
 
         case (s: ValueFn, t: ValueFn) =>
           if (s.telescope.type_map.size != t.telescope.type_map.size) {
             throw Report(List(
               s"equivalent fail on ValueFn, arity mismatch\n"
             ))
-          } else {
-            val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {
-              case (s_name, t_name) =>
-                val uuid: UUID = UUID.randomUUID()
-                s"#equivalent-function:${s_name}:${t_name}:${uuid}"
-            }.toList
-            val (s_type_map, s_body) =
-              util.telescope_force_with_return(s.telescope, name_list, s.body)
-            val (t_type_map, t_body) =
-              util.telescope_force_with_return(t.telescope, name_list, t.body)
-            equivalent_list_map(ctx, t_type_map, s_type_map)
-            equivalent(ctx, s_body, t_body)
           }
+          val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {
+            case (s_name, t_name) =>
+              val uuid: UUID = UUID.randomUUID()
+              s"#equivalent-function:${s_name}:${t_name}:${uuid}"
+          }.toList
+          val (s_type_map, s_body) =
+            util.telescope_force_with_return(s.telescope, name_list, s.body)
+          val (t_type_map, t_body) =
+            util.telescope_force_with_return(t.telescope, name_list, t.body)
+          equivalent_list_map(ctx, t_type_map, s_type_map)
+          equivalent(ctx, s_body, t_body)
 
         case (s: ValueCl, t: ValueCl) =>
           if (s.telescope.type_map.size != t.telescope.type_map.size) {

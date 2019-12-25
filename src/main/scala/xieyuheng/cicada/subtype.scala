@@ -2,6 +2,7 @@ package xieyuheng.cicada
 
 import java.util.UUID
 import collection.immutable.ListMap
+import scala.util.{ Try, Success, Failure }
 
 import eval._
 import equivalent._
@@ -17,6 +18,26 @@ object subtype {
         case (s: ValuePi, ValueType()) => ()
         case (s: ValueCl, ValueType()) => ()
         case (s: ValueStrType, ValueType()) => ()
+
+        // NOTE the order to match ValueUnion matters
+        case (s: ValueUnion, t) =>
+          s.type_list.foreach { subtype(ctx, _, t) }
+
+        case (s, t: ValueUnion) =>
+          val exists_p = t.type_list.exists {
+            case t =>
+              Try {
+                subtype(ctx, s, t)
+              } match {
+                case Success(()) => true
+                case Failure(_error) => false
+              }
+          }
+          if (!exists_p) {
+            throw Report(List(
+              s"subtype fail on ValueUnion"
+            ))
+          }
 
         case (s: ValuePi, t: ValuePi) =>
           if (s.telescope.type_map.size != t.telescope.type_map.size) {

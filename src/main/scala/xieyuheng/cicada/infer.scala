@@ -1,6 +1,7 @@
 package xieyuheng.cicada
 
 import collection.immutable.ListMap
+import scala.util.{ Try, Success, Failure }
 
 import eval._
 import check._
@@ -135,12 +136,43 @@ object infer {
               ))
           }
 
+        case Union(type_list: List[Exp]) =>
+          type_list.foreach {
+            case (exp) =>
+              check(env, ctx, exp, ValueType())
+          }
+          ValueType()
+
         case Switch(name: String, cases: List[(Exp, Exp)]) =>
-          // NOTE we will need union type to infer the type of `switch`
-          throw Report(List(
-            s"infer fail\n" +
-              s"can not infer type of switch\n"
-          ))
+          ctx.lookup_type(name) match {
+            case Some(r) =>
+              val type_map = cases.map {
+                case (s, v) =>
+                  val s_value = eval(env, s)
+                  Try {
+                    subtype(ctx, s_value, r)
+                  } match {
+                    case Success(()) =>
+                      infer(env, ctx.ext(name, s_value), v)
+                    case Failure(error) =>
+                      throw Report(List(
+                        s"at compile time, we know type of ${name} is ${pretty_value(r)}\n" +
+                          s"in a case of switch\n" +
+                          s"the type ${pretty_value(s_value)} is not a subtype of the abvoe type\n" +
+                          s"it is meaningless to write this case\n" +
+                          s"because we know it will never be matched\n"
+                      ))
+                  }
+              }
+              ValueUnion(type_map)
+
+            case None =>
+              val type_map = cases.map {
+                case (s, v) =>
+                  infer(env, ctx.ext(name, eval(env, s)), v)
+              }
+              ValueUnion(type_map)
+          }
 
         case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
           var local_ctx = ctx

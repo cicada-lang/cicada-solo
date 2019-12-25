@@ -1,4 +1,6 @@
-- we will need union type to infer the type of `switch`
+- grammar for `union`
+- `infer` + subtyping between `ValueCl` and `ValueCl`
+  should handle `check` of `Obj` in `ValueCl`
 - handle recursive definition
 - test tagged union
 - [test] some functional programming examples

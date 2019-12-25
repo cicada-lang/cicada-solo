@@ -17,6 +17,7 @@ final case class ValueCl(
   telescope: Telescope,
 ) extends Value
 final case class ValueObj(value_map: ListMap[String, Value]) extends Value
+final case class ValueUnion(type_list: List[Value]) extends Value
 
 sealed trait Neutral extends Value
 final case class NeutralVar(name: String) extends Neutral

@@ -51,6 +51,9 @@ object eval {
       case Dot(target: Exp, field: String) =>
         value_dot(eval(env, target), field)
 
+      case Union(type_list: List[Exp]) =>
+        ValueUnion(type_list.map { eval(env, _) })
+
       case Switch(name: String, cases: List[(Exp, Exp)]) =>
         env.lookup_val(name) match {
           case Some(value) =>
@@ -71,7 +74,14 @@ object eval {
                 } match {
                   case Success(()) =>
                     result = Some(v)
+                    // println(s"name: ${name}")
+                    // println(s"v: ${pretty_exp(readback(value))}")
+                    // println(s"t: ${pretty_value(eval(env, t))}")
+                    // println(s"result: ${result}")
                   case Failure(error) =>
+                    // println(
+                    //   s"switch fail to match one case " +
+                    //     s"error:\n${error}")
                     ()
                 }
             }

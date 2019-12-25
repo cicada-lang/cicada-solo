@@ -59,9 +59,15 @@ object pretty {
       case Dot(target: Exp, field: String) =>
         s"${pretty_exp(target)}.${field}"
 
+      case Union(type_list: List[Exp]) =>
+        val s = type_list.map {
+          case t => s"case ${pretty_exp(t)}\n"
+        }.mkString("")
+        s"union {${maybe_ln(s)}}"
+
       case Switch(name: String, cases: List[(Exp, Exp)]) =>
         val s = cases.map {
-          case (t, v) => s"${pretty_exp(t)} => ${pretty_exp(v)}"
+          case (t, v) => s"${pretty_exp(t)} => ${pretty_exp(v)}\n"
         }.mkString("")
         s"switch ${name} {${maybe_ln(s)}}"
 
@@ -82,7 +88,7 @@ object pretty {
 
       case NeutralSwitch(name: String, cases: List[(Value, Value)]) =>
         val s = cases.map {
-          case (t, v) => s"${pretty_value(t)} => ${pretty_value(v)}"
+          case (t, v) => s"${pretty_value(t)} => ${pretty_value(v)}\n"
         }.mkString("")
         s"switch ${name} {${maybe_ln(s)}}"
 
@@ -140,6 +146,12 @@ object pretty {
           case (name, value) => s"let ${name} = ${pretty_value(value)}\n"
         }.mkString("")
         s"object {${maybe_ln(s)}}"
+
+      case ValueUnion(type_list: List[Value]) =>
+        val s = type_list.map {
+          case t => s"case ${pretty_value(t)}\n"
+        }.mkString("")
+        s"union {${maybe_ln(s)}}"
 
       case neutral: Neutral =>
         pretty_neutral(neutral)

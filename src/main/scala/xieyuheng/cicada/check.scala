@@ -1,12 +1,12 @@
 package xieyuheng.cicada
 
 import collection.immutable.ListMap
-import scala.util.{ Try, Success, Failure }
 
 import eval._
 import infer._
 import subtype._
 import pretty._
+import equivalent._
 
 object check {
 
@@ -16,40 +16,13 @@ object check {
         case Obj(value_map: ListMap[String, Exp]) =>
           t match {
             case cl: ValueCl =>
+              defined_check(env, ctx, value_map, cl.defined)
               telescope_check(env, ctx, value_map, cl.telescope)
 
             case _ =>
               throw Report(List(
                 s"expecting class type but found: ${t}\n"
               ))
-          }
-
-        case Switch(name: String, cases: List[(Exp, Exp)]) =>
-          ctx.lookup_type(name) match {
-            case Some(r) =>
-              cases.foreach {
-                case (s, v) =>
-                  val s_value = eval(env, s)
-                  Try {
-                    subtype(ctx, s_value, r)
-                  } match {
-                    case Success(()) =>
-                      check(env, ctx.ext(name, s_value), v, t)
-                    case Failure(error) =>
-                      throw Report(List(
-                        s"at compile time, we know type of ${name} is ${pretty_value(r)}\n" +
-                          s"in a case of switch\n" +
-                          s"the type ${pretty_value(s_value)} is not a subtype of the abvoe type\n" +
-                          s"it is meaningless to write this case\n" +
-                          s"because we know it will never be matched\n"
-                      ))
-                  }
-              }
-            case None =>
-              cases.foreach {
-                case (s, v) =>
-                  check(env, ctx.ext(name, eval(env, s)), v, t)
-              }
           }
 
         case _ =>
@@ -103,6 +76,28 @@ object check {
     telescope: Telescope,
   ): Unit = {
     telescope_check_yield_env(env, ctx, arg_map, telescope)
+  }
+
+  def defined_check(
+    env: Env,
+    ctx: Ctx,
+    arg_map: ListMap[String, Exp],
+    defined: ListMap[String, (Value, Value)],
+  ): Unit = {
+    defined.foreach {
+      case (name, (t_value, v_value)) =>
+        val v_exp = arg_map.get(name) match {
+          case Some(v_exp) => v_exp
+          case None =>
+            throw Report(List(
+              s"define_check fail\n" +
+                s"can not find a field of class in object\n" +
+                s"field: ${name}\n"
+            ))
+        }
+        check(env, ctx, v_exp, t_value)
+        equivalent(ctx, eval(env, v_exp), v_value)
+    }
   }
 
 }

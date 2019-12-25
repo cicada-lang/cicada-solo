@@ -1,0 +1,41 @@
+let bool_t = class {
+  given tag : string_t
+}
+
+let true_t = class {
+  define tag : string_t = "true"
+}
+
+let false_t = class {
+  define tag : string_t = "false"
+}
+
+object true {
+  let tag = "true"
+}
+
+object false {
+  let tag = "false"
+}
+
+@refuse x : false_t = true
+
+define not : {
+  given x : bool_t
+  conclude bool_t
+} = {
+  given x : bool_t
+  return switch x {
+    case false_t => true
+    case true_t => false
+  }
+}
+
+@show bool_t
+@show true_t
+
+@show true
+@show false
+
+@show not(true)
+@show not(false)

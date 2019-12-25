@@ -116,6 +116,7 @@ object grammar {
       "ap" -> List(exp, "(", non_empty_list(arg_entry), ")"),
       "cl" -> List("class", "{", non_empty_list(given_entry), "}"),
       "cl_predefined" -> List("class", "{", non_empty_list(define_entry), non_empty_list(given_entry), "}"),
+      "cl_predefined_empty_given" -> List("class", "{", non_empty_list(define_entry), "}"),
       "cl_naked" -> List("{", non_empty_list(given_entry), "}"),
       "cl_empty" -> List("class", "{", "}"),
       "obj" -> List("object", "{", non_empty_list(let_entry), "}"),
@@ -153,6 +154,10 @@ object grammar {
         val defined = ListMap(non_empty_list_matcher(define_entry_matcher)(define_entry_list): _*)
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
         Cl(defined, type_map) },
+      "cl_predefined_empty_given" -> { case List(
+        _, _, define_entry_list, _) =>
+        val defined = ListMap(non_empty_list_matcher(define_entry_matcher)(define_entry_list): _*)
+        Cl(defined, ListMap()) },
       "cl_naked" -> { case List(_, given_entry_list, _) =>
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
         Cl(ListMap.empty, type_map) },

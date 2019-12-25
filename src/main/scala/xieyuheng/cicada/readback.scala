@@ -41,6 +41,9 @@ object readback {
       case ValueObj(value_map: ListMap[String, Value]) =>
         Obj(value_map.map { case (name, v) => (name, readback(v)) })
 
+      case ValueUnion(type_list: List[Value]) =>
+        Union(type_list.map { readback })
+
       case NeutralVar(name: String) =>
         Var(name)
 
