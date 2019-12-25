@@ -20,6 +20,7 @@ object grammar {
     "claim", "define",
     "given", "conclude",
     "let", "return",
+    "union", "switch",
     "function",
     "string_t",
   )
@@ -124,6 +125,7 @@ object grammar {
       "obj_empty" -> List("object", "{", "}"),
       "obj_naked_empty" -> List("{", "}"),
       "dot" -> List(exp, ".", identifier),
+      "union" -> List("union", "{", non_empty_list(union_entry), "}"),
       "switch" -> List("switch", identifier, "{",
         non_empty_list(case_clause),
         "}"),
@@ -175,6 +177,8 @@ object grammar {
         Obj(ListMap()) },
       "dot" -> { case List(target, _, Leaf(field)) =>
         Dot(exp_matcher(target), field) },
+      "union" -> { case List(_, _, union_entry_list, _) =>
+        Union(non_empty_list_matcher(union_entry_matcher)(union_entry_list)) },
       "switch" -> { case List(_, Leaf(name), _,
         case_clause_list,
         _) =>
@@ -183,6 +187,18 @@ object grammar {
       "block" -> { case List(_, block_entry_list, _, body, _) =>
         val block_entry_map = ListMap(non_empty_list_matcher(block_entry_matcher)(block_entry_list): _*)
         Block(block_entry_map, exp_matcher(body)) },
+    ))
+
+  def union_entry = Rule(
+    "union_entry", Map(
+      "case" -> List("case", exp),
+    ))
+
+  def union_entry_matcher = Tree.matcher[Exp](
+    "union_entry", Map(
+      "case" -> { case List(_, t) =>
+        exp_matcher(t)
+      },
     ))
 
   def case_clause = Rule(

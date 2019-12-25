@@ -39,3 +39,11 @@ define not : {
 
 @show not(true)
 @show not(false)
+
+@refuse p1 : union { case false_t } = true
+@refuse p2 : union { case true_t } = false
+
+define p1 : union { case true_t case false_t } = true
+define p2 : union { case true_t case false_t } = false
+define p3 : bool_t = true
+define p4 : bool_t = false

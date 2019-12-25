@@ -1,4 +1,3 @@
-- grammar for `union`
 - `infer` + subtyping between `ValueCl` and `ValueCl`
   should handle `check` of `Obj` in `ValueCl`
 - handle recursive definition
