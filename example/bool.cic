@@ -18,7 +18,7 @@ object false {
   let tag = "false"
 }
 
-@refuse x : false_t = true
+@refuse true : false_t
 
 define not : {
   given x : bool_t
@@ -40,8 +40,8 @@ define not : {
 @show not(true)
 @show not(false)
 
-@refuse p1 : union { case false_t } = true
-@refuse p2 : union { case true_t } = false
+@refuse true : union { case false_t }
+@refuse false : union { case true_t }
 
 define p1 : union { case true_t case false_t } = true
 define p2 : union { case true_t case false_t } = false

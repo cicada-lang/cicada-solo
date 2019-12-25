@@ -49,7 +49,7 @@ object grammar {
         "}"),
       "define" -> List("define", identifier, ":", exp, "=", exp),
       // extends block_entry
-      "@refuse" -> List("@", "refuse", identifier, ":", exp, "=", exp),
+      "@refuse" -> List("@", "refuse", exp, ":", exp),
       "@show" -> List("@", "show", exp),
     ))
 
@@ -98,8 +98,8 @@ object grammar {
       "define" -> { case List(_, Leaf(name), _, t, _, exp) =>
         TopDefine(name, exp_matcher(t), exp_matcher(exp)) },
       // extends block_entry_matcher
-      "@refuse" -> { case List(_, _, Leaf(name), _, t, _, exp) =>
-        TopKeywordRefuse(name, exp_matcher(t), exp_matcher(exp)) },
+      "@refuse" -> { case List(_, _, exp, _, t) =>
+        TopKeywordRefuse(exp_matcher(exp), exp_matcher(t)) },
       "@show" -> { case List(_, _, exp) =>
         TopKeywordShow(exp_matcher(exp)) },
     ))

@@ -77,7 +77,7 @@ object api {
           }
         }
 
-      case TopKeywordRefuse(name, t_exp, exp) =>
+      case TopKeywordRefuse(exp, t_exp) =>
         val t_expected = eval(local_env, t_exp)
         Try {
           check(local_env, local_ctx, exp, t_expected)
@@ -85,12 +85,12 @@ object api {
           case Success(_) =>
             throw Report(List(
               s"@refuse fail\n" +
-                s"should refuse the following definition\n" +
-                s"@refuse ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}\n"
+                s"should refuse the following type membership assertion\n" +
+                s"@refuse ${pretty_exp(exp)} : ${pretty_exp(t_exp)}\n"
             ))
           case Failure(report) =>
             if (config.get("--verbose") != None) {
-              println(s"@refuse ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}")
+              println(s"@refuse ${pretty_exp(exp)} : ${pretty_exp(t_exp)}")
             }
         }
 

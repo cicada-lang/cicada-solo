@@ -1,11 +1,10 @@
 # cicada
+- `@accept` as dual of `@refuse` -- fix bool.cic
+- `@equal` -- for more tests
 - do not allow re-definition
 - handle recursive definition
 - test tagged union
 - [test] some functional programming examples
-- nameless `@refuse`
-- `@accept` as dual of `@refuse` -- fix bool.cic
-- `@equal` -- for more tests
 - we also take this opportunity to handle currying
   - just push value to env and return new `ValueFn`
   - also need to change `infer`
