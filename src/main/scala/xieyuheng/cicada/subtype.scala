@@ -109,7 +109,7 @@ object subtype {
       case (name, t) =>
         s_map.get(name) match {
           case Some(s) =>
-            subtype(ctx, eval(local_env, s), eval(local_env, t))
+            subtype(ctx, eval(s_env, s), eval(local_env, t))
           case None =>
             s_defined.get(name) match {
               case Some((s, u)) =>
