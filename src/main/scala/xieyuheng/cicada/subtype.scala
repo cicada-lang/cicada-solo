@@ -52,10 +52,10 @@ object subtype {
           }
 
         case (s: ValueCl, t: ValueCl) =>
-          subtype_defined_list_map(
+          subtype_class(
             ctx,
-            s.defined, util.telescope_force(s.telescope, s.telescope.name_list),
-            t.defined, util.telescope_force(t.telescope, t.telescope.name_list))
+            s.defined, s.telescope.type_map, s.telescope.env,
+            t.defined, t.telescope.type_map, t.telescope.env)
 
         case (s, t) =>
           equivalent(ctx, s, t)
@@ -87,11 +87,12 @@ object subtype {
     }
   }
 
-  def subtype_defined_list_map(
+  def subtype_class(
     ctx: Ctx,
-    s_defined: ListMap[String, (Value, Value)], s_map: ListMap[String, Value],
-    t_defined: ListMap[String, (Value, Value)], t_map: ListMap[String, Value],
+    s_defined: ListMap[String, (Value, Value)], s_map: ListMap[String, Exp], s_env: Env,
+    t_defined: ListMap[String, (Value, Value)], t_map: ListMap[String, Exp], t_env: Env,
   ): Unit = {
+    var local_env = t_env
     t_defined.foreach {
       case (name, (t, v)) =>
         s_defined.get(name) match {
@@ -100,7 +101,7 @@ object subtype {
             equivalent(ctx, u, v)
           case None =>
             throw Report(List(
-              s"subtype_defined can not find field: ${name}\n"
+              s"subtype_class can not find field in defined: ${name}\n"
             ))
         }
     }
@@ -108,14 +109,15 @@ object subtype {
       case (name, t) =>
         s_map.get(name) match {
           case Some(s) =>
-            subtype(ctx, s, t)
+            subtype(ctx, eval(local_env, s), eval(local_env, t))
           case None =>
             s_defined.get(name) match {
-              case Some((s, _u)) =>
-                subtype(ctx, s, t)
+              case Some((s, u)) =>
+                local_env = local_env.ext(name, u)
+                subtype(ctx, s, eval(local_env, t))
               case None =>
                 throw Report(List(
-                  s"subtype_defined_list_map can not find field: ${name}\n"
+                  s"subtype_class can not find field in telescope: ${name}\n"
                 ))
             }
         }

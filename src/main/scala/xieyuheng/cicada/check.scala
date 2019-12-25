@@ -12,23 +12,8 @@ object check {
 
   def check(env: Env, ctx: Ctx, exp: Exp, t: Value): Unit = {
     try {
-      exp match {
-        case Obj(value_map: ListMap[String, Exp]) =>
-          t match {
-            case cl: ValueCl =>
-              defined_check(env, ctx, value_map, cl.defined)
-              telescope_check(env, ctx, value_map, cl.telescope)
-
-            case _ =>
-              throw Report(List(
-                s"expecting class type but found: ${t}\n"
-              ))
-          }
-
-        case _ =>
-          val s = infer(env, ctx, exp)
-          subtype(ctx, s, t)
-      }
+      val s = infer(env, ctx, exp)
+      subtype(ctx, s, t)
     } catch {
       case report: Report =>
         report.throw_prepend(
