@@ -9,6 +9,7 @@ import eval._
 import check._
 import infer._
 import pretty._
+import equivalent._
 
 object api {
 
@@ -20,18 +21,25 @@ object api {
       top_list_check_and_eval(top_list, config)
     } catch {
       case report: Report =>
-        console_print_with_color_when {
-          config.get("--nocolor") == None
-        } (Console.RED) {
-          case () =>
-            Console.println("------")
-            report.message_list.foreach {
-              case message =>
-                Console.print(s"${message}")
-                Console.println("------")
-            }
-        }
+        report_print(report, config)
         System.exit(1)
+    }
+  }
+
+  def report_print(
+    report: Report,
+    config: ListMap[String, List[String]],
+  ): Unit = {
+    console_print_with_color_when {
+      config.get("--nocolor") == None
+    } (Console.RED) {
+      case () =>
+        Console.println("------")
+        report.message_list.foreach {
+          case message =>
+            Console.print(s"${message}")
+            Console.println("------")
+        }
     }
   }
 
@@ -88,10 +96,12 @@ object api {
                 s"should refuse the following type membership assertion\n" +
                 s"@refuse ${pretty_exp(exp)} : ${pretty_exp(t_exp)}\n"
             ))
-          case Failure(report) =>
+          case Failure(_report: Report) =>
             if (config.get("--verbose") != None) {
               println(s"@refuse ${pretty_exp(exp)} : ${pretty_exp(t_exp)}")
             }
+          case Failure(error) =>
+            throw error
         }
 
       case TopKeywordAccept(exp, t_exp) =>
@@ -103,12 +113,15 @@ object api {
             if (config.get("--verbose") != None) {
               println(s"@accept ${pretty_exp(exp)} : ${pretty_exp(t_exp)}")
             }
-          case Failure(report) =>
+          case Failure(report: Report) =>
+            report_print(report, config)
             throw Report(List(
               s"@accept fail\n" +
                 s"should accept the following type membership assertion\n" +
                 s"@accept ${pretty_exp(exp)} : ${pretty_exp(t_exp)}\n"
             ))
+          case Failure(error) =>
+            throw error
         }
 
       case TopKeywordShow(exp) =>
@@ -121,6 +134,27 @@ object api {
           case () =>
             println(s"@show ${pretty_value(value)} : ${pretty_value(t)}")
             println()
+        }
+
+      case TopKeywordEqual(rhs: Exp, lhs: Exp) =>
+        infer(local_env, local_ctx, rhs)
+        infer(local_env, local_ctx, lhs)
+        Try {
+          equivalent(local_ctx, eval(local_env, rhs), eval(local_env, lhs))
+        } match {
+          case Success(()) =>
+            if (config.get("--verbose") != None) {
+              println(s"@equal ${pretty_exp(rhs)} = ${pretty_exp(lhs)}")
+            }
+          case Failure(report: Report) =>
+            report_print(report, config)
+            throw Report(List(
+              s"@equal fail\n" +
+                s"should accept the following equivalent assertion\n" +
+                s"@equal ${pretty_exp(rhs)} = ${pretty_exp(lhs)}\n"
+            ))
+          case Failure(error) =>
+            throw error
         }
 
     }

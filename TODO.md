@@ -1,6 +1,4 @@
 # cicada
-- `@equal` -- for more tests
-- do not allow re-definition
 - handle recursive definition
 - test tagged union
 - [test] some functional programming examples
@@ -38,6 +36,8 @@
   but this does not handle recursive definitions of rule
   - we may try to reuse hosting language's inheritance
 # note
+- [note] no neet to not allow re-definition
+  - the scope is ok
 - [maybe] [top] we need a framework for adding new keywords
   - a little bit early to do this now
 - [note] we can also use `new` to construct object from class

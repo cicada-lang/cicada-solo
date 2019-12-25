@@ -37,8 +37,8 @@ define not : {
 @show true
 @show false
 
-@show not(true)
-@show not(false)
+@equal not(true) = false
+@equal not(false) = true
 
 @refuse true : union { case false_t }
 @refuse false : union { case true_t }

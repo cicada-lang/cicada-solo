@@ -28,14 +28,14 @@ object subtype {
           }
           if (!exists_p) {
             throw Report(List(
-              s"subtype fail on ValueUnion"
+              s"subtype fail on ValueUnion\n"
             ))
           }
 
         case (s: ValuePi, t: ValuePi) =>
           if (s.telescope.type_map.size != t.telescope.type_map.size) {
             throw Report(List(
-              s"subtype fail on ValuePi, arity mismatch"
+              s"subtype fail on ValuePi, arity mismatch\n"
             ))
           } else {
             val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {

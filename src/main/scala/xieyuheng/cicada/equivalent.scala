@@ -127,9 +127,7 @@ object equivalent {
         report.throw_prepend(
           s"equivalent fail\n" +
             s"s: ${pretty_value(s)}\n" +
-            s"s: ${s}\n" +
-            s"t: ${pretty_value(t)}\n" +
-            s"t: ${t}\n")
+            s"t: ${pretty_value(t)}\n")
     }
   }
 
