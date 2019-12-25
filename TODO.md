@@ -1,9 +1,12 @@
+# cicada
+- do not allow re-define
+- `@accept` as dual of `@refuse`
+- `@same` and `@same_type`
 - `infer` + subtyping between `ValueCl` and `ValueCl`
   should handle `check` of `Obj` in `ValueCl`
 - handle recursive definition
 - test tagged union
 - [test] some functional programming examples
-# cicada
 - we also take this opportunity to handle currying
   - just push value to env and return new `ValueFn`
   - also need to change `infer`
@@ -24,7 +27,6 @@
     ```
 - [test] define `category_t` as total algebraic structure
 - [test] define `category_t` as partial algebraic structure
-- `@equal` maybe `@equal_value` `@equal_type`
 # js backend
 - a simple compiler to translate the semantics of `eval` to js
 # docs
