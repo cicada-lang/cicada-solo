@@ -1,9 +1,10 @@
 # cicada
-- do not allow re-define
-- `@accept` as dual of `@refuse`
-- `@same` and `@same_type`
 - `infer` + subtyping between `ValueCl` and `ValueCl`
   should handle `check` of `Obj` in `ValueCl`
+- do not allow re-definition
+- nameless `@refuse`
+- `@accept` as dual of `@refuse` -- fix bool.cic
+- `@equal` -- for more tests
 - handle recursive definition
 - test tagged union
 - [test] some functional programming examples

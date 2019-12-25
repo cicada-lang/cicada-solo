@@ -97,9 +97,7 @@ object infer {
                   val name_list = telescope.name_list
                   val arg_map = ListMap(name_list.zip(arg_list): _*)
                   telescope_check(env, ctx, arg_map, telescope)
-                  val value_list = arg_list.map { eval(env, _) }
-                  val (new_defined, new_telescope) = telescope_apply(telescope, value_list)
-                  ValueCl(defined ++ new_defined, new_telescope)
+                  ValueType()
 
                 case t =>
                   throw Report(List(

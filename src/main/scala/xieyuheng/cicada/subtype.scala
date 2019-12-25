@@ -13,13 +13,6 @@ object subtype {
   def subtype(ctx: Ctx, s: Value, t: Value): Unit = {
     try {
       (s, t) match {
-        // NOTE the following cases means that
-        //   `type` is the universe of all objects and types.
-        case (s: ValuePi, ValueType()) => ()
-        case (s: ValueCl, ValueType()) => ()
-        case (s: ValueStrType, ValueType()) => ()
-
-        // NOTE the order to match ValueUnion matters
         case (s: ValueUnion, t) =>
           s.type_list.foreach { subtype(ctx, _, t) }
 
