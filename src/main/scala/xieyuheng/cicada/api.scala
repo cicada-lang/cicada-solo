@@ -85,8 +85,6 @@ object api {
         val t_expected = eval(local_env, t_exp)
         local_ctx = local_ctx.ext(name, t_expected)
         check(local_env, local_ctx, exp, t_expected)
-        val t = infer(local_env, local_ctx, exp)
-        local_ctx = local_ctx.ext(name, t)
         local_env = local_env.ext_recursive(name, t_exp, exp, local_env)
         val value = eval(local_env, exp)
         if (config.get("--verbose") != None) {
@@ -95,7 +93,7 @@ object api {
             config.get("--nocolor") == None
           } (Console.CYAN) {
             case () =>
-              println(s"define ${name} : ${pretty_value(t)} = ${pretty_value(value)}")
+              println(s"define ${name} : ${pretty_exp(t_exp)} = ${pretty_value(value)}")
               println()
           }
         }
@@ -165,14 +163,14 @@ object api {
         } match {
           case Success(()) =>
             if (config.get("--verbose") != None) {
-              println(s"@equal ${pretty_exp(rhs)} = ${pretty_exp(lhs)}")
+              println(s"@eq ${pretty_exp(rhs)} = ${pretty_exp(lhs)}")
             }
           case Failure(report: Report) =>
             report_print(report, config)
             throw Report(List(
-              s"@equal fail\n" +
+              s"@eq fail\n" +
                 s"should accept the following equivalent assertion\n" +
-                s"@equal ${pretty_exp(rhs)} = ${pretty_exp(lhs)}\n"
+                s"@eq ${pretty_exp(rhs)} = ${pretty_exp(lhs)}\n"
             ))
           case Failure(error) =>
             throw error

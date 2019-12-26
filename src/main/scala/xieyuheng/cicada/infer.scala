@@ -165,21 +165,20 @@ object infer {
               ValueUnion(cases.map {
                 case (s, v) =>
                   val s_value = eval(env, s)
-                  infer(env, ctx.ext(name, s_value), v)
-                  // Try {
-                  //   subtype(ctx, s_value, r)
-                  // } match {
-                  //   case Success(()) =>
-                  //     infer(env, ctx.ext(name, s_value), v)
-                  //   case Failure(error) =>
-                  //     throw Report(List(
-                  //       s"at compile time, we know type of ${name} is ${pretty_value(r)}\n" +
-                  //         s"in a case of switch\n" +
-                  //         s"the type ${pretty_value(s_value)} is not a subtype of the abvoe type\n" +
-                  //         s"it is meaningless to write this case\n" +
-                  //         s"because we know it will never be matched\n"
-                  //     ))
-                  // }
+                  Try {
+                    subtype(ctx, s_value, r)
+                  } match {
+                    case Success(()) =>
+                      infer(env, ctx.ext(name, s_value), v)
+                    case Failure(error) =>
+                      throw Report(List(
+                        s"at compile time, we know type of ${name} is ${pretty_value(r)}\n" +
+                          s"in a case of switch\n" +
+                          s"the type ${pretty_value(s_value)} is not a subtype of the abvoe type\n" +
+                          s"it is meaningless to write this case\n" +
+                          s"because we know it will never be matched\n"
+                      ))
+                  }
               })
 
             case None =>

@@ -14,43 +14,109 @@ object check {
 
   def check(env: Env, ctx: Ctx, exp: Exp, t: Value): Unit = {
     try {
-      // if it is ok to infer
-      // it is also ok to eval
-      val s = infer(env, ctx, exp)
-      val value = eval(env, exp)
-      value match {
-        case ValueObj(value_map: ListMap[String, Value]) =>
-          t match {
-            case cl: ValueCl =>
-              defined_check(env, ctx, value_map, cl.defined)
-              telescope_check(ctx, value_map, cl.telescope)
 
-            case ValueUnion(type_list: List[Value]) =>
-              type_list.find {
-                case (t) =>
-                  Try {
-                    check(env, ctx, exp, t)
-                  } match {
-                    case Success(()) => true
-                    case Failure(_error) => false
-                  }
+      t match {
+        case ValueUnion(type_list: List[Value]) =>
+          type_list.find {
+            case (t) =>
+              Try {
+                check(env, ctx, exp, t)
               } match {
-                case Some(_t) => ()
-                case None =>
-                  throw Report(List(
-                    s"fail on union type\n"
-                  ))
+                case Success(()) => true
+                case Failure(_error) => false
               }
-
-            case _ =>
+          } match {
+            case Some(_t) => ()
+            case None =>
               throw Report(List(
-                s"expecting class type\n" +
-                  s"but found: ${pretty_value(t)}\n"
+                s"fail on union type\n"
               ))
           }
 
-        case _ =>
-          subtype(ctx, s, t)
+        case t =>
+          exp match {
+            case Var(name: String) =>
+              env.lookup_value(name) match {
+                case Some(value) =>
+                  check(env, ctx, readback(value), t)
+                case None =>
+                  subtype(ctx, infer(env, ctx, exp), t)
+              }
+
+            case Obj(value_map: ListMap[String, Exp]) =>
+              t match {
+                case cl: ValueCl =>
+                  val v_map = value_map.map {
+                    case (name, exp) => (name, eval(env, exp))
+                  }
+                  defined_check(env, ctx, v_map, cl.defined)
+                  telescope_check(ctx, v_map, cl.telescope)
+
+                case _ =>
+                  throw Report(List(
+                    s"expecting class type\n" +
+                      s"but found: ${pretty_value(t)}\n"
+                  ))
+              }
+
+            case Fn(type_map: ListMap[String, Exp], body: Exp) =>
+              t match {
+                case pi: ValuePi =>
+                  val (t_map, return_type_value) =
+                    util.telescope_force_with_return(
+                      pi.telescope,
+                      pi.telescope.name_list,
+                      pi.return_type)
+                  var local_ctx = ctx
+                  type_map.zipWithIndex.foreach {
+                    case ((name, exp), index) =>
+                      check(env, local_ctx, exp, ValueType())
+                      val s = eval(env, exp)
+                      val (_name, t) = t_map.toList(index)
+                      subtype(local_ctx, s, t)
+                      local_ctx = local_ctx.ext(name, s)
+                  }
+                  check(env, local_ctx, body, return_type_value)
+
+                case _ =>
+                  throw Report(List(
+                    s"expecting pi type\n" +
+                      s"but found: ${pretty_value(t)}\n"
+                  ))
+              }
+
+            case Switch(name: String, cases: List[(Exp, Exp)]) =>
+              ctx.lookup_type(name) match {
+                case Some(r) =>
+                  cases.foreach {
+                    case (s, v) =>
+                      val s_value = eval(env, s)
+                      Try {
+                        subtype(ctx, s_value, r)
+                      } match {
+                        case Success(()) =>
+                          check(env, ctx.ext(name, s_value), v, t)
+                        case Failure(error) =>
+                          throw Report(List(
+                            s"at compile time, we know type of ${name} is ${pretty_value(r)}\n" +
+                              s"in a case of switch\n" +
+                              s"the type ${pretty_value(s_value)} is not a subtype of the abvoe type\n" +
+                              s"it is meaningless to write this case\n" +
+                              s"because we know it will never be matched\n"
+                          ))
+                      }
+                  }
+
+                case None =>
+                  cases.foreach {
+                    case (s, v) =>
+                      check(env, ctx.ext(name, eval(env, s)), v, t)
+                  }
+              }
+
+            case _ =>
+              subtype(ctx, infer(env, ctx, exp), t)
+          }
       }
     } catch {
       case report: Report =>
