@@ -1,3 +1,8 @@
+# partech
+- clean up partech
+- [partech] use exception instead of `Either`
+- good error report for earley
+  like: https://github.com/kach/nearley/issues/451
 # cicada
 - fix parsing error
 - [example] vector_length
@@ -28,11 +33,6 @@
 # docs
 - [semantics] use the concept of **free variable proof** to explain the semantics of cicada
   (traditional type theoretical semantics)
-# partech
-- clean up partech
-- [partech] use exception instead of `Either`
-- good error report for earley
-  like: https://github.com/kach/nearley/issues/451
 # note
 - [maybe] [top] we need a framework for adding new keywords
   - a little bit early to do this now
