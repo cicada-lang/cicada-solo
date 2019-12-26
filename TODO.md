@@ -1,8 +1,6 @@
 # cicada
 - bring back `ValueClAlready` -- with some notes
 - handle recursive definition
-- no re-definition for top level name
-  - local is re-definition ok
 - test tagged union
 - [test] some functional programming examples
 - we also take this opportunity to handle currying

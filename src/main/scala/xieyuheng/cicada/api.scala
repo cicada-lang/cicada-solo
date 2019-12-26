@@ -52,6 +52,13 @@ object api {
 
     top_list.foreach {
       case TopLet(name, exp) =>
+        local_env.lookup_value(name) match {
+          case Some(value) =>
+            throw Report(List(
+              s"name: ${name} is already defined to value: ${pretty_value(value)}\n"
+            ))
+          case None => ()
+        }
         val t = infer(local_env, local_ctx, exp)
         val value = eval(local_env, exp)
         local_ctx = local_ctx.ext(name, t)
@@ -68,6 +75,13 @@ object api {
         }
 
       case TopDefine(name, t_exp, exp) =>
+        local_env.lookup_value(name) match {
+          case Some(value) =>
+            throw Report(List(
+              s"name: ${name} is already defined to value: ${pretty_value(value)}\n"
+            ))
+          case None => ()
+        }
         val t_expected = eval(local_env, t_exp)
         local_ctx = local_ctx.ext(name, t_expected)
         check(local_env, local_ctx, exp, t_expected)
