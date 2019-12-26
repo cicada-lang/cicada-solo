@@ -1,6 +1,5 @@
 # cicada
-- bring back `ValueClAlready` -- with some notes
-- handle recursive definition
+- some notes about bring back `ValueClAlready`
 - test tagged union
 - [test] some functional programming examples
 - we also take this opportunity to handle currying

@@ -81,6 +81,29 @@ object equivalent {
           val t_type_map = util.telescope_force(t.telescope, name_list)
           equivalent_list_map(ctx, t_type_map, s_type_map)
 
+        case (s: ValueClInferedFromObj, t: ValueClInferedFromObj) =>
+          equivalent_list_map(ctx, s.type_map, t.type_map)
+
+        case (s: ValueCl, t: ValueClInferedFromObj) =>
+          if (s.defined.size != 0) {
+            throw Report(List(
+              s"a free variable proof is required for ValueCl == ValueClInferedFromObj\n"
+            ))
+          }
+          val name_list = s.telescope.name_list
+          val type_map = util.telescope_force(s.telescope, name_list)
+          equivalent_list_map(ctx, type_map, t.type_map)
+
+        case (s: ValueClInferedFromObj, t: ValueCl) =>
+          if (t.defined.size != 0) {
+            throw Report(List(
+              s"a free variable proof is required for ValueClInferedFromObj == ValueCl\n"
+            ))
+          }
+          val name_list = t.telescope.name_list
+          val type_map = util.telescope_force(t.telescope, name_list)
+          equivalent_list_map(ctx, s.type_map, type_map)
+
         case (s: ValueObj, t: ValueObj) =>
           equivalent_list_map(ctx, s.value_map, t.value_map)
 

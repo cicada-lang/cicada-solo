@@ -57,6 +57,26 @@ object subtype {
             s.defined, s.telescope.type_map, s.telescope.env,
             t.defined, t.telescope.type_map, t.telescope.env)
 
+        case (s: ValueClInferedFromObj, t: ValueClInferedFromObj) =>
+          subtype_list_map(ctx, s.type_map, t.type_map)
+
+        case (s: ValueCl, t: ValueClInferedFromObj) =>
+          subtype_defined_list_map(
+            ctx,
+            s.defined, util.telescope_force(s.telescope, s.telescope.name_list),
+            ListMap(), t.type_map)
+
+        case (s: ValueClInferedFromObj, t: ValueCl) =>
+          if (t.defined.size != 0) {
+            throw Report(List(
+              s"a free variable proof is required for ValueClInferedFromObj <: ValueCl\n"
+            ))
+          }
+          subtype_list_map(
+            ctx,
+            s.type_map,
+            util.telescope_force(t.telescope, t.telescope.name_list))
+
         case (s, t) =>
           equivalent(ctx, s, t)
       }
@@ -83,6 +103,41 @@ object subtype {
             throw Report(List(
               s"subtype_list_map can not find field: ${name}\n"
             ))
+        }
+    }
+  }
+
+  def subtype_defined_list_map(
+    ctx: Ctx,
+    s_defined: ListMap[String, (Value, Value)], s_map: ListMap[String, Value],
+    t_defined: ListMap[String, (Value, Value)], t_map: ListMap[String, Value],
+  ): Unit = {
+    t_defined.foreach {
+      case (name, (t, v)) =>
+        s_defined.get(name) match {
+          case Some((s, u)) =>
+            subtype(ctx, s, t)
+            equivalent(ctx, u, v)
+          case None =>
+            throw Report(List(
+              s"subtype_defined can not find field: ${name}\n"
+            ))
+        }
+    }
+    t_map.foreach {
+      case (name, t) =>
+        s_map.get(name) match {
+          case Some(s) =>
+            subtype(ctx, s, t)
+          case None =>
+            s_defined.get(name) match {
+              case Some((s, _u)) =>
+                subtype(ctx, s, t)
+              case None =>
+                throw Report(List(
+                  s"subtype_defined_list_map can not find field: ${name}\n"
+                ))
+            }
         }
     }
   }

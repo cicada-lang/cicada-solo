@@ -1,4 +1,4 @@
-let bool_t = class {
+class bool_t {
   given tag : string_t
 }
 

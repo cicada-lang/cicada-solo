@@ -104,6 +104,12 @@ object api {
         val t_expected = eval(local_env, t_exp)
         Try {
           check(local_env, local_ctx, exp, t_expected)
+          println("@refuse")
+          println(s"v: ${pretty_value(eval(local_env, exp))}")
+          println(s"t_expected: ${pretty_value(t_expected)}")
+          println("@refuse raw Value")
+          println(s"v: ${eval(local_env, exp)}")
+          println(s"t_expected: ${t_expected}")
         } match {
           case Success(()) =>
             throw Report(List(

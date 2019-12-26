@@ -38,6 +38,11 @@ object readback {
           util.telescope_force(telescope, name_list)
             .map { case (name, v) => (name, readback(v)) })
 
+      case ValueClInferedFromObj(type_map: ListMap[String, Value]) =>
+        Cl(
+          ListMap(),
+          type_map.map { case (name, v) => (name, readback(v)) })
+
       case ValueObj(value_map: ListMap[String, Value]) =>
         Obj(value_map.map { case (name, v) => (name, readback(v)) })
 

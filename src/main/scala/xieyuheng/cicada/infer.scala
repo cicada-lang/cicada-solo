@@ -73,29 +73,24 @@ object infer {
           ValueType()
 
         case Obj(value_map: ListMap[String, Exp]) =>
-          var local_env = env
-          var defined: ListMap[String, (Value, Value)] = ListMap()
-          value_map.foreach {
-            case (name, exp) =>
-              val v = eval(local_env, exp)
-              val t = infer(local_env, ctx, exp)
-              defined = defined + (name -> (t, v))
-          }
-          ValueCl(defined, Telescope(ListMap(), local_env))
+          ValueClInferedFromObj(value_map.map {
+            case (name, exp) => (name, infer(env, ctx, exp))
+          })
 
         case Ap(target: Exp, arg_list: List[Exp]) =>
           infer(env, ctx, target) match {
             case ValuePi(telescope: Telescope, return_type: Exp) =>
               val value_list = arg_list.map { eval(env, _) }
               val (new_defined, new_telescope) = telescope_apply(telescope, value_list)
-              println("><><><")
-              println(s"return_type exp: ${pretty_exp(return_type)}")
-              println(s"return_type value: ${pretty_value(eval(telescope.env, return_type))}")
+              // TODO write some notes
+//               println("><><><")
+//               println(s"return_type exp: ${pretty_exp(return_type)}")
+//               println(s"return_type value: ${pretty_value(eval(telescope.env, return_type))}")
               // infer object will return class with defined fields
               // the value in defined fields might be Neutral
               // specially when infering the type of Switch
-              eval(new_telescope.env, return_type)
-              println("><><><")
+//               eval(new_telescope.env, return_type)
+//               println("><><><")
               eval(new_telescope.env, return_type)
 
             case ValueType() =>
@@ -103,7 +98,10 @@ object infer {
                 case ValueCl(defined, telescope) =>
                   val name_list = telescope.name_list
                   val arg_map = ListMap(name_list.zip(arg_list): _*)
-                  telescope_check(env, ctx, arg_map, telescope)
+                  val value_map = arg_map.map {
+                    case (name, exp) => (name, eval(env, exp))
+                  }
+                  telescope_check(ctx, value_map, telescope)
                   ValueType()
 
                 case t =>
@@ -120,6 +118,17 @@ object infer {
 
         case Dot(target: Exp, field: String) =>
           infer(env, ctx, target) match {
+            case ValueClInferedFromObj(type_map: ListMap[String, Value]) =>
+              type_map.get(field) match {
+                case Some(t) => t
+                case None =>
+                  throw Report(List(
+                    s"infer fail\n" +
+                      s"on ValueClInferedFromObj\n" +
+                      s"can not find field for dot: ${field}\n"
+                  ))
+              }
+
             case ValueCl(defined, telescope) =>
               defined.get(field) match {
                 case Some((t, _v)) => t
@@ -129,10 +138,13 @@ object infer {
                       case Some(t) => t
                       case None =>
                         throw Report(List(
-                          s"infer fail, can not find field for dot: ${field}\n"
+                          s"infer fail\n" +
+                            s"on ValueCl\n" +
+                            s"can not find field for dot: ${field}\n"
                         ))
                     }
               }
+
             case t =>
               throw Report(List(
                 s"expecting class\n" +

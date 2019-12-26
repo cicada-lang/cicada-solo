@@ -3,18 +3,9 @@ class zero_t {}
 class succ_t { given prev : nat_t }
 
 let zero = {}
-
-let one = {
-  let prev = zero
-}
-
-let two = {
-  let prev = one
-}
-
-let three = {
-  let prev = two
-}
+let one = { let prev = zero }
+let two = { let prev = one }
+let three = { let prev = two }
 
 function succ {
   given x : nat_t
@@ -51,7 +42,13 @@ function add2 {
 let x = add2(zero).prev
 let y = two.prev.prev
 
-// @show nat_add(zero, zero)
-// @equal nat_add(zero, zero) = zero
-// @equal nat_add(one, zero) = one
-// @equal nat_add(one, one) = two
+@accept one : succ_t(zero)
+@refuse zero : succ_t(zero)
+@refuse zero : succ_t(zero)
+@refuse zero : succ_t
+@refuse zero : succ_t
+
+@show nat_add(zero, zero)
+@equal nat_add(zero, zero) = zero
+@equal nat_add(one, zero) = one
+@equal nat_add(one, one) = two

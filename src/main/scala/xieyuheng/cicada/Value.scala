@@ -16,6 +16,7 @@ final case class ValueCl(
   defined: ListMap[String, (Value, Value)],
   telescope: Telescope,
 ) extends Value
+final case class ValueClInferedFromObj(type_map: ListMap[String, Value]) extends Value
 final case class ValueObj(value_map: ListMap[String, Value]) extends Value
 final case class ValueUnion(type_list: List[Value]) extends Value
 

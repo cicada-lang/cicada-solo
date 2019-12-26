@@ -1,10 +1,12 @@
 package xieyuheng.cicada
 
 import collection.immutable.ListMap
+import scala.util.{ Try, Success, Failure }
 
 import eval._
 import infer._
 import subtype._
+import readback._
 import pretty._
 import equivalent._
 
@@ -12,8 +14,44 @@ object check {
 
   def check(env: Env, ctx: Ctx, exp: Exp, t: Value): Unit = {
     try {
+      // if it is ok to infer
+      // it is also ok to eval
       val s = infer(env, ctx, exp)
-      subtype(ctx, s, t)
+      val value = eval(env, exp)
+      value match {
+        case ValueObj(value_map: ListMap[String, Value]) =>
+          t match {
+            case cl: ValueCl =>
+              defined_check(env, ctx, value_map, cl.defined)
+              telescope_check(ctx, value_map, cl.telescope)
+
+            case ValueUnion(type_list: List[Value]) =>
+              type_list.find {
+                case (t) =>
+                  Try {
+                    check(env, ctx, exp, t)
+                  } match {
+                    case Success(()) => true
+                    case Failure(_error) => false
+                  }
+              } match {
+                case Some(_t) => ()
+                case None =>
+                  throw Report(List(
+                    s"fail on union type\n"
+                  ))
+              }
+
+            case _ =>
+              throw Report(List(
+                s"expecting class type\n" +
+                  s"but found: ${pretty_value(t)}\n"
+              ))
+          }
+
+        case _ =>
+          subtype(ctx, s, t)
+      }
     } catch {
       case report: Report =>
         report.throw_prepend(
@@ -25,9 +63,8 @@ object check {
   }
 
   def telescope_check(
-    env: Env,
     ctx: Ctx,
-    arg_map: ListMap[String, Exp],
+    value_map: ListMap[String, Value],
     telescope: Telescope,
   ): Unit = {
     var local_env = telescope.env
@@ -35,8 +72,8 @@ object check {
     telescope.type_map.foreach {
       case (name, t_exp) =>
         val t_value = eval(local_env, t_exp)
-        val v_exp = arg_map.get(name) match {
-          case Some(v_exp) => v_exp
+        val v_value = value_map.get(name) match {
+          case Some(v_value) => v_value
           case None =>
             throw Report(List(
               s"telescope_check fail\n" +
@@ -44,10 +81,8 @@ object check {
                 s"field: ${name}\n"
             ))
         }
+        val v_exp = readback(v_value)
         check(local_env, local_ctx, v_exp, t_value)
-        // NOTE not using local_env here
-        //   local_env is only used to eval types in telescope
-        val v_value = eval(env, v_exp)
         local_env = local_env.ext(name, v_value)
         local_ctx = local_ctx.ext(name, t_value)
     }
@@ -56,13 +91,13 @@ object check {
   def defined_check(
     env: Env,
     ctx: Ctx,
-    arg_map: ListMap[String, Exp],
+    value_map: ListMap[String, Value],
     defined: ListMap[String, (Value, Value)],
   ): Unit = {
     defined.foreach {
-      case (name, (t_value, v_value)) =>
-        val v_exp = arg_map.get(name) match {
-          case Some(v_exp) => v_exp
+      case (name, (t_value, defined_value)) =>
+        val v_value = value_map.get(name) match {
+          case Some(v_value) => v_value
           case None =>
             throw Report(List(
               s"define_check fail\n" +
@@ -70,8 +105,9 @@ object check {
                 s"field: ${name}\n"
             ))
         }
+        val v_exp = readback(v_value)
         check(env, ctx, v_exp, t_value)
-        equivalent(ctx, eval(env, v_exp), v_value)
+        equivalent(ctx, v_value, defined_value)
     }
   }
 
