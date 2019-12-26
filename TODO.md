@@ -1,8 +1,8 @@
-# partech
-- clean up partech
-- [partech] use exception instead of `Either`
+# party
+- Rule
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
+- rename party to partech
 # cicada
 - fix parsing error
 - [example] vector_length
