@@ -2,11 +2,11 @@ class bool_t {
   given tag : string_t
 }
 
-let true_t = class {
+class true_t {
   define tag : string_t = "true"
 }
 
-let false_t = class {
+class false_t {
   define tag : string_t = "false"
 }
 

@@ -12,10 +12,6 @@ function succ {
 
 let zero = {}
 let one = succ(zero)
-// TODO
-//   parsing error if un-comment the line below
-//   should be runtime error about re-definition
-// let one = { let prev = zero }
 let two = { let prev = one }
 let three = succ(two)
 let four = succ(three)

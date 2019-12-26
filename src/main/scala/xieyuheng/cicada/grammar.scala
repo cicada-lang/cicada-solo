@@ -216,7 +216,16 @@ object grammar {
   def block_entry: Rule = Rule(
     "block_entry", Map(
       "let" -> List("let", identifier, "=", exp),
-      "let_cl" -> List("class", identifier, "{", non_empty_list(given_entry), "}"),
+      "let_cl" -> List("class", identifier, "{",
+        non_empty_list(given_entry),
+        "}"),
+      "let_cl_predefined" -> List("class", identifier, "{",
+        non_empty_list(define_entry),
+        non_empty_list(given_entry),
+        "}"),
+      "let_cl_predefined_empty_given" -> List("class", identifier, "{",
+        non_empty_list(define_entry),
+        "}"),
       "let_cl_empty" -> List("class", identifier, "{", "}"),
       "let_obj" -> List("object", identifier, "{", non_empty_list(let_entry), "}"),
       "let_obj_empty" -> List("object", identifier, "{", "}"),
@@ -241,6 +250,18 @@ object grammar {
       "let_cl" -> { case List(_, Leaf(name), _, given_entry_list, _) =>
         val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
         (name, BlockEntryDefine(Type(), Cl(ListMap.empty, type_map))) },
+      "let_cl_predefined" -> { case List(_, Leaf(name), _,
+        define_entry_list,
+        given_entry_list,
+        _) =>
+        val defined = ListMap(non_empty_list_matcher(define_entry_matcher)(define_entry_list): _*)
+        val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
+        (name, BlockEntryDefine(Type(), Cl(defined, type_map))) },
+      "let_cl_predefined_empty_given" -> { case List(_, Leaf(name), _,
+        define_entry_list,
+        _) =>
+        val defined = ListMap(non_empty_list_matcher(define_entry_matcher)(define_entry_list): _*)
+        (name, BlockEntryDefine(Type(), Cl(defined, ListMap.empty))) },
       "let_cl_empty" -> { case List(_, Leaf(name), _, _) =>
         (name, BlockEntryDefine(Type(), Cl(ListMap.empty, ListMap.empty))) },
       "let_obj" -> { case List(_, Leaf(name), _, let_entry_list, _) =>
