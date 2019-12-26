@@ -1,5 +1,4 @@
 # cicada
-- [example] nat_mul
 - [example] list_length
 - [example] list_append
 - [example] vector_length

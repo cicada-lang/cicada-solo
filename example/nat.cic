@@ -2,18 +2,25 @@ class nat_t {}
 class zero_t {}
 class succ_t { given prev : nat_t }
 
-let zero = {}
-let one = { let prev = zero }
-let two = { let prev = one }
-let three = { let prev = two }
-
 function succ {
   given x : nat_t
-  conclude nat_t
+  conclude succ_t
   return {
     let prev = x
   }
 }
+
+let zero = {}
+let one = succ(zero)
+// TODO
+//   parsing error if un-comment the line below
+//   should be runtime error about re-definition
+// let one = { let prev = zero }
+let two = { let prev = one }
+let three = succ(two)
+let four = succ(three)
+let five = succ(four)
+let six = succ(five)
 
 function nat_add {
   given x : nat_t
@@ -22,6 +29,16 @@ function nat_add {
   return switch x {
     case succ_t => succ(nat_add(x.prev, y))
     case zero_t => y
+  }
+}
+
+function nat_mul {
+  given x : nat_t
+  given y : nat_t
+  conclude nat_t
+  return switch x {
+    case succ_t => nat_add(y, nat_mul(x.prev, y))
+    case zero_t => zero
   }
 }
 
@@ -39,8 +56,8 @@ function add2 {
   return add1(add1(x))
 }
 
-let x = add2(zero).prev
-let y = two.prev.prev
+@equal add2(zero).prev = one
+@equal one.prev = zero
 
 @accept one : succ_t(zero)
 @refuse zero : succ_t(zero)
@@ -48,7 +65,20 @@ let y = two.prev.prev
 @refuse zero : succ_t
 @refuse zero : succ_t
 
-@show nat_add(zero, zero)
 @equal nat_add(zero, zero) = zero
 @equal nat_add(one, zero) = one
-@equal nat_add(one, one) = two
+@equal nat_add(zero, one) = one
+@equal nat_add(one, two) = three
+@equal nat_add(two, one) = three
+@equal nat_add(two, two) = four
+@equal nat_add(two, three) = five
+@equal nat_add(three, two) = five
+
+@equal nat_mul(zero, zero) = zero
+@equal nat_mul(one, zero) = zero
+@equal nat_mul(zero, one) = zero
+@equal nat_mul(one, two) = two
+@equal nat_mul(two, one) = two
+@equal nat_mul(two, two) = four
+@equal nat_mul(two, three) = six
+@equal nat_mul(three, two) = six

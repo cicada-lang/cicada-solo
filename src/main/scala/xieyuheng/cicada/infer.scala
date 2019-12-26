@@ -74,7 +74,9 @@ object infer {
 
         case Obj(value_map: ListMap[String, Exp]) =>
           ValueClInferedFromObj(value_map.map {
-            case (name, exp) => (name, infer(env, ctx, exp))
+            case (name, exp) =>
+              val value = eval(env, exp)
+              (name, infer(env, ctx, readback(value)))
           })
 
         case Ap(target: Exp, arg_list: List[Exp]) =>
@@ -108,7 +110,9 @@ object infer {
           }
 
         case Dot(target: Exp, field: String) =>
-          infer(env, ctx, target) match {
+          val t_infered = infer(env, ctx, target)
+
+          t_infered match {
             case ValueClInferedFromObj(type_map: ListMap[String, Value]) =>
               type_map.get(field) match {
                 case Some(t) => t
@@ -116,24 +120,28 @@ object infer {
                   throw Report(List(
                     s"infer fail\n" +
                       s"on ValueClInferedFromObj\n" +
+                      s"target exp: ${pretty_exp(target)}\n" +
+                      s"infered target type: ${pretty_value(t_infered)}\n" +
                       s"can not find field for dot: ${field}\n"
                   ))
               }
 
             case ValueCl(defined, telescope) =>
               defined.get(field) match {
-                case Some((t, _v)) => t
+                case Some((t, v)) =>
+                  infer(env, ctx, readback(v))
                 case None =>
-                  util.telescope_force(telescope, telescope.name_list)
-                    .get(field) match {
-                      case Some(t) => t
-                      case None =>
-                        throw Report(List(
-                          s"infer fail\n" +
-                            s"on ValueCl\n" +
-                            s"can not find field for dot: ${field}\n"
-                        ))
-                    }
+                  util.telescope_force(telescope, telescope.name_list).get(field) match {
+                    case Some(t) => t
+                    case None =>
+                      throw Report(List(
+                        s"infer fail\n" +
+                          s"on ValueCl\n" +
+                          s"target exp: ${pretty_exp(target)}\n" +
+                          s"infered target type: ${pretty_value(t_infered)}\n" +
+                          s"can not find field for dot: ${field}\n"
+                      ))
+                  }
               }
 
             case t =>
