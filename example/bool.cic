@@ -20,11 +20,9 @@ object false {
 
 @refuse true : false_t
 
-define not : {
+function not {
   given x : bool_t
   conclude bool_t
-} = {
-  given x : bool_t
   return switch x {
     case false_t => true
     case true_t => false

@@ -1,4 +1,5 @@
 # cicada
+- bring back `ValueClAlready` -- with some notes
 - handle recursive definition
 - no re-definition for top level name
   - local is re-definition ok
@@ -12,7 +13,7 @@
   - [built-in] we can implementation equality by built-in equality
     maybe we need to built-in (make it an axiom) the following function
     ``` cicada
-    function transport = {
+    function transport {
       suppose A : type
       suppose x, y : A
       given equation : equation_t(A, x, y)
@@ -22,9 +23,10 @@
       return base
     }
     ```
-- [test] define `category_t` as total algebraic structure
-- [test] define `category_t` as partial algebraic structure
+- [test] define `category_t` as algebraic structure
+- [test] define  `contextual_pre_category_t` as algebraic structure
 - mutual recursive definition only at top level
+- `class <name> { ... }` handle no `given`
 # js backend
 - a simple compiler to translate the semantics of `eval` to js
 # docs
@@ -35,9 +37,6 @@
 - [partech] use exception instead of `Either`
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
-- [problem] it would be good to be able to use `rule.ext` to reuse rules
-  but this does not handle recursive definitions of rule
-  - we may try to reuse hosting language's inheritance
 # note
 - [maybe] [top] we need a framework for adding new keywords
   - a little bit early to do this now
