@@ -39,13 +39,11 @@ let cons_unit_list = {
   }
 }
 
-@show cons_unit_list(cons_unit_list(unit_null))
-
 function list_length {
-  given list : list_t
+  given x : list_t
   conclude nat_t
-  return switch list {
-    case cons_t => succ(list_length(list.cdr))
+  return switch x {
+    case cons_t => succ(list_length(x.cdr))
     case null_t => zero
   }
 }
@@ -53,3 +51,44 @@ function list_length {
 @equal list_length(unit_null) = zero
 @equal list_length(cons_unit_list(unit_null)) = one
 @equal list_length(cons_unit_list(cons_unit_list(unit_null))) = two
+
+function list_append {
+  given A : type
+  given x : list_t(A)
+  given y : list_t(A)
+  conclude list_t(A)
+  return switch x {
+    case cons_t(A) => {
+      let A = A
+      let car = x.car
+      let cdr = list_append(A, x.cdr, y)
+    }
+    case null_t(A) => y
+  }
+}
+
+@equal list_append(unit_t, unit_null, unit_null) = unit_null
+@equal list_append(unit_t, cons_unit_list(unit_null), unit_null) = cons_unit_list(unit_null)
+@equal list_append(unit_t, unit_null, cons_unit_list(unit_null)) = cons_unit_list(unit_null)
+@equal list_append(unit_t, cons_unit_list(unit_null), cons_unit_list(unit_null))
+  = cons_unit_list(cons_unit_list(unit_null))
+
+define one_null : null_t(succ_t) = { let A = succ_t }
+
+let cons_one_list = {
+  given one_list : list_t(succ_t)
+  return {
+    let A = succ_t
+    let car = one
+    let cdr = one_list
+  }
+}
+
+// function f {
+//   given unit: unit_t
+//   conclude list_t(union { case succ_t case unit_t })
+//   return list_append(
+//     union { case succ_t case unit_t },
+//     cons_unit_list(unit_null),
+//     cons_one_list(one_null))
+// }

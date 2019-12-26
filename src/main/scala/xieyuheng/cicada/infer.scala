@@ -162,32 +162,32 @@ object infer {
         case Switch(name: String, cases: List[(Exp, Exp)]) =>
           ctx.lookup_type(name) match {
             case Some(r) =>
-              val type_map = cases.map {
+              ValueUnion(cases.map {
                 case (s, v) =>
                   val s_value = eval(env, s)
-                  Try {
-                    subtype(ctx, s_value, r)
-                  } match {
-                    case Success(()) =>
-                      infer(env, ctx.ext(name, s_value), v)
-                    case Failure(error) =>
-                      throw Report(List(
-                        s"at compile time, we know type of ${name} is ${pretty_value(r)}\n" +
-                          s"in a case of switch\n" +
-                          s"the type ${pretty_value(s_value)} is not a subtype of the abvoe type\n" +
-                          s"it is meaningless to write this case\n" +
-                          s"because we know it will never be matched\n"
-                      ))
-                  }
-              }
-              ValueUnion(type_map)
+                  infer(env, ctx.ext(name, s_value), v)
+                  // Try {
+                  //   subtype(ctx, s_value, r)
+                  // } match {
+                  //   case Success(()) =>
+                  //     infer(env, ctx.ext(name, s_value), v)
+                  //   case Failure(error) =>
+                  //     throw Report(List(
+                  //       s"at compile time, we know type of ${name} is ${pretty_value(r)}\n" +
+                  //         s"in a case of switch\n" +
+                  //         s"the type ${pretty_value(s_value)} is not a subtype of the abvoe type\n" +
+                  //         s"it is meaningless to write this case\n" +
+                  //         s"because we know it will never be matched\n"
+                  //     ))
+                  // }
+              })
 
             case None =>
-              val type_map = cases.map {
+              ValueUnion(cases.map {
                 case (s, v) =>
                   infer(env, ctx.ext(name, eval(env, s)), v)
-              }
-              ValueUnion(type_map)
+              })
+
           }
 
         case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>

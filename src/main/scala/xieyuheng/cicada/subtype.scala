@@ -155,9 +155,25 @@ object subtype {
             subtype(ctx, s, t)
             equivalent(ctx, u, v)
           case None =>
-            throw Report(List(
-              s"subtype_class can not find field in defined: ${name}\n"
-            ))
+            v match {
+              // NOTE a chance to give free variable proof
+              //   but this is not good
+              //   we need bi-directional type checking
+              case free_variable: NeutralVar =>
+                s_map.get(name) {
+                  case Some(s) =>
+                    subtype(ctx, s, t)
+                    equivalent(ctx, free_variable, v)
+                  case None =>
+                    throw Report(List(
+                      s"subtype_class can not find field in defined: ${name}\n"
+                    ))
+                }
+              case _ =>
+                throw Report(List(
+                  s"subtype_class can not find field in defined: ${name}\n"
+                ))
+            }
         }
     }
     t_map.foreach {

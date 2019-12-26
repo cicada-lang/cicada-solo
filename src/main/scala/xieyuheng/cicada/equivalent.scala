@@ -75,7 +75,7 @@ object equivalent {
           val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {
             case (s_name, t_name) =>
               val uuid: UUID = UUID.randomUUID()
-              s"#equivalent-function:${s_name}:${t_name}:${uuid}"
+              s"#equivalent-class:${s_name}:${t_name}:${uuid}"
           }.toList
           val s_type_map = util.telescope_force(s.telescope, name_list)
           val t_type_map = util.telescope_force(t.telescope, name_list)
