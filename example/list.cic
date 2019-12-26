@@ -1,6 +1,25 @@
 class unit_t {}
 object unit {}
 
+class nat_t {}
+class zero_t {}
+class succ_t { given prev : nat_t }
+
+function succ {
+  given x : nat_t
+  conclude succ_t
+  return {
+    let prev = x
+  }
+}
+
+let zero = {}
+let one = succ(zero)
+let two = succ(one)
+let three = succ(two)
+let four = succ(three)
+let five = succ(four)
+
 class list_t { given A : type }
 class null_t { given A : type }
 class cons_t {
@@ -9,7 +28,7 @@ class cons_t {
   given cdr : list_t(A)
 }
 
-define null_unit : null_t(unit_t) = { let A = unit_t }
+define unit_null : null_t(unit_t) = { let A = unit_t }
 
 let cons_unit_list = {
   given unit_list : list_t(unit_t)
@@ -20,4 +39,17 @@ let cons_unit_list = {
   }
 }
 
-@show cons_unit_list(cons_unit_list(null_unit))
+@show cons_unit_list(cons_unit_list(unit_null))
+
+function list_length {
+  given list : list_t
+  conclude nat_t
+  return switch list {
+    case cons_t => succ(list_length(list.cdr))
+    case null_t => zero
+  }
+}
+
+@equal list_length(unit_null) = zero
+@equal list_length(cons_unit_list(unit_null)) = one
+@equal list_length(cons_unit_list(cons_unit_list(unit_null))) = two

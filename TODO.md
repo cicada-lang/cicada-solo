@@ -1,5 +1,4 @@
 # cicada
-- [example] list_length
 - [example] list_append
 - [example] vector_length
 - [example] vector_append
