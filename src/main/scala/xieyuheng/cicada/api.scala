@@ -157,7 +157,7 @@ object api {
             println()
         }
 
-      case TopKeywordEqual(rhs: Exp, lhs: Exp) =>
+      case TopKeywordEq(rhs: Exp, lhs: Exp) =>
         infer(local_env, local_ctx, rhs)
         infer(local_env, local_ctx, lhs)
         Try {

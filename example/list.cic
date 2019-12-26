@@ -48,9 +48,9 @@ function list_length {
   }
 }
 
-@equal list_length(unit_null) = zero
-@equal list_length(cons_unit_list(unit_null)) = one
-@equal list_length(cons_unit_list(cons_unit_list(unit_null))) = two
+@eq list_length(unit_null) = zero
+@eq list_length(cons_unit_list(unit_null)) = one
+@eq list_length(cons_unit_list(cons_unit_list(unit_null))) = two
 
 function list_append {
   given A : type
@@ -67,10 +67,10 @@ function list_append {
   }
 }
 
-@equal list_append(unit_t, unit_null, unit_null) = unit_null
-@equal list_append(unit_t, cons_unit_list(unit_null), unit_null) = cons_unit_list(unit_null)
-@equal list_append(unit_t, unit_null, cons_unit_list(unit_null)) = cons_unit_list(unit_null)
-@equal list_append(unit_t, cons_unit_list(unit_null), cons_unit_list(unit_null))
+@eq list_append(unit_t, unit_null, unit_null) = unit_null
+@eq list_append(unit_t, cons_unit_list(unit_null), unit_null) = cons_unit_list(unit_null)
+@eq list_append(unit_t, unit_null, cons_unit_list(unit_null)) = cons_unit_list(unit_null)
+@eq list_append(unit_t, cons_unit_list(unit_null), cons_unit_list(unit_null))
   = cons_unit_list(cons_unit_list(unit_null))
 
 define one_null : null_t(succ_t) = { let A = succ_t }

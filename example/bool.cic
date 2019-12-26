@@ -35,8 +35,8 @@ function not {
 @show true
 @show false
 
-@equal not(true) = false
-@equal not(false) = true
+@eq not(true) = false
+@eq not(false) = true
 
 @refuse true : union { case false_t }
 @refuse false : union { case true_t }

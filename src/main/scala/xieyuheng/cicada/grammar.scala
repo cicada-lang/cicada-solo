@@ -35,7 +35,7 @@ object grammar {
       "@refuse" -> List("@", "refuse", exp, ":", exp),
       "@accept" -> List("@", "accept", exp, ":", exp),
       "@show" -> List("@", "show", exp),
-      "@equal" -> List("@", "equal", exp, "=", exp),
+      "@eq" -> List("@", "eq", exp, "=", exp),
     ))
 
   def top_entry_matcher = Tree.matcher[Top](
@@ -56,8 +56,8 @@ object grammar {
         TopKeywordAccept(exp_matcher(exp), exp_matcher(t)) },
       "@show" -> { case List(_, _, exp) =>
         TopKeywordShow(exp_matcher(exp)) },
-      "@equal" -> { case List(_, _, rhs, _, lhs) =>
-        TopKeywordEqual(exp_matcher(rhs), exp_matcher(lhs)) },
+      "@eq" -> { case List(_, _, rhs, _, lhs) =>
+        TopKeywordEq(exp_matcher(rhs), exp_matcher(lhs)) },
     ))
 
   def top_list_matcher = non_empty_list_matcher(top_entry_matcher)

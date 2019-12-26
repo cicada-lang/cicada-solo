@@ -160,9 +160,9 @@ object subtype {
               //   but this is not good
               //   we need bi-directional type checking
               case free_variable: NeutralVar =>
-                s_map.get(name) {
+                s_map.get(name) match {
                   case Some(s) =>
-                    subtype(ctx, s, t)
+                    subtype(ctx, eval(s_env, s), t)
                     equivalent(ctx, free_variable, v)
                   case None =>
                     throw Report(List(
