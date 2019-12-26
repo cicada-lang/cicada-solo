@@ -25,6 +25,7 @@
 - [test] define  `contextual_pre_category_t` as algebraic structure
 - mutual recursive definition only at top level
 - `class <name> { ... }` handle no `given`
+= [module system] not so hurry, after the core is stable
 # js backend
 - a simple compiler to translate the semantics of `eval` to js
 # docs

@@ -1,6 +1,6 @@
 package xieyuheng.test
 
-object exception_try_catch extends App {
+object exception_try_catch_test extends App {
 
   case class Error1(msg: String) extends Throwable
   case class Error2(msg: String) extends Throwable

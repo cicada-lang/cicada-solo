@@ -1,6 +1,7 @@
 package xieyuheng.test
 
-object side_effect_during_folding extends App {
+object side_effect_during_folding_test extends App {
+
   var number_list: List[Int] = List()
   val list = List(0, 1, 2, 3)
   val sum = list.foldLeft(0) {
@@ -10,4 +11,5 @@ object side_effect_during_folding extends App {
   }
   assert(sum == 6)
   assert(number_list == list)
+
 }
