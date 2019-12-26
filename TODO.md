@@ -1,7 +1,9 @@
 # cicada
-- some notes about bring back `ValueClAlready`
-- test tagged union
-- [test] some functional programming examples
+- [example] nat_mul
+- [example] list_length
+- [example] list_append
+- [example] vector_length
+- [example] vector_append
 - we also take this opportunity to handle currying
   - just push value to env and return new `ValueFn`
   - also need to change `infer`

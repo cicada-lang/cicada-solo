@@ -82,15 +82,6 @@ object infer {
             case ValuePi(telescope: Telescope, return_type: Exp) =>
               val value_list = arg_list.map { eval(env, _) }
               val (new_defined, new_telescope) = telescope_apply(telescope, value_list)
-              // TODO write some notes
-//               println("><><><")
-//               println(s"return_type exp: ${pretty_exp(return_type)}")
-//               println(s"return_type value: ${pretty_value(eval(telescope.env, return_type))}")
-              // infer object will return class with defined fields
-              // the value in defined fields might be Neutral
-              // specially when infering the type of Switch
-//               eval(new_telescope.env, return_type)
-//               println("><><><")
               eval(new_telescope.env, return_type)
 
             case ValueType() =>
