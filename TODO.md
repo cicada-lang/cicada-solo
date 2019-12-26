@@ -1,4 +1,5 @@
 # cicada
+- `class <name> { ... }` handle no `given` -- fix bool.cic
 - [example] vector_length
 - [example] vector_append
 - we also take this opportunity to handle currying
@@ -14,16 +15,15 @@
       suppose x, y : A
       given equation : equation_t(A, x, y)
       given motive : { given x : A conclude type }
-      given motive(x)
+      given value : motive(x)
       conclude motive(y)
-      return base
+      return value
     }
     ```
 - [test] define `category_t` as algebraic structure
 - [test] define  `contextual_pre_category_t` as algebraic structure
 - mutual recursive definition only at top level
-- `class <name> { ... }` handle no `given`
-= [module system] not so hurry, after the core is stable
+- [module system] not so hurry, after the core is stable
 # js backend
 - a simple compiler to translate the semantics of `eval` to js
 # docs
