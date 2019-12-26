@@ -10,7 +10,3 @@ final case class SymbolAp(fn: List[Symbol] => Rule, args: List[Symbol]) extends 
 final case class SymbolWordPred(word_pred: WordPred) extends Symbol
 
 case class WordPred(name: String, pred: String => Boolean)
-
-case class Span(lo: Int, hi: Int)
-
-case class ErrorDuringParsing(message: String, span: Span)
