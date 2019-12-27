@@ -7,7 +7,7 @@ import collection.immutable.ListMap
 //   will be catched by `JAVA_OPTS`
 //   thus our `Interpreter` only use `--` for option prefix
 
-abstract class Interpreter {
+trait Interpreter {
 
   val name: String
   val version: String
@@ -32,10 +32,9 @@ abstract class Interpreter {
 
     config_declaration.foreach {
       case (name, arity) =>
-        opt(args, name, arity) match {
-          case Some(values) =>
+        opt(args, name, arity).foreach {
+          case values =>
             config = config + (name -> values)
-          case None => {}
         }
     }
 
@@ -83,11 +82,11 @@ abstract class Interpreter {
       System.exit(1)
     }
     val code = os.read(path)
-    // println(s"code: ${code}")
-    // println(s"code.length: ${code.length}")
     // NOTE fuck scala
-    //   without this empty print sometime will get parsing error
-    // print("")
+    //   without this empty print
+    //   sometime will get parsing error
+    //   sometime will not
+    print("")
     run_code(code)
   }
 
