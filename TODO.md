@@ -1,5 +1,4 @@
 # party
-- earley_test
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 - rename party to partech
