@@ -1,5 +1,4 @@
 # cicada
-- [example] vector_length
 - [example] vector_append
 - we also take this opportunity to handle currying
   - just push value to env and return new `ValueFn`

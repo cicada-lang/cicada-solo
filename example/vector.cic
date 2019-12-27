@@ -11,10 +11,12 @@ class vector_t {
   given A : type
   given length : nat_t
 }
+
 class vector_null_t {
   given A : type
   given length : zero_t
 }
+
 class vector_cons_t {
   given A : type
   given prev : nat_t
@@ -22,7 +24,12 @@ class vector_cons_t {
   given length : succ_t(prev)
   given tail : vector_t(A, prev)
 }
-define zero_zeros : vector_t = { let A = nat_t let length = zero }
+
+define zero_zeros : vector_t = {
+  let A = nat_t
+  let length = zero
+}
+
 define one_zeros : vector_cons_t = {
   let A = nat_t
   let prev = zero
@@ -30,3 +37,12 @@ define one_zeros : vector_cons_t = {
   let length = one
   let tail = zero_zeros
 }
+
+function vector_length {
+  given vector : vector_t
+  conclude nat_t
+  return vector.length
+}
+
+@eq one_zeros.length
+  = vector_length(one_zeros)

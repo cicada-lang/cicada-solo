@@ -30,7 +30,13 @@ abstract class Interpreter {
 
   def main(args: Array[String]): Unit = {
 
-    collect_config(args)
+    config_declaration.foreach {
+      case (name, arity) =>
+        opt(args, name, arity).foreach {
+          case values =>
+            config = config + (name -> values)
+        }
+    }
 
     opt(args, "--help", 0).foreach {
       case _ =>
@@ -58,16 +64,6 @@ abstract class Interpreter {
 
     print_help()
     System.exit(0)
-  }
-
-  def collect_config(args: Array[String]): Unit = {
-    config_declaration.foreach {
-      case (name, arity) =>
-        opt(args, name, arity).foreach {
-          case values =>
-            config = config + (name -> values)
-        }
-    }
   }
 
   def opt(args: Array[String], name: String, arity: Int): Option[List[String]] = {

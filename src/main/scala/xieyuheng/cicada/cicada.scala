@@ -1,6 +1,5 @@
 package xieyuheng.cicada
 
-import scala.util.{ Try, Success, Failure }
 import collection.immutable.ListMap
 
 import xieyuheng.util.Interpreter
@@ -21,17 +20,13 @@ object cicada extends Interpreter {
   def run_code(code: String): Unit = {
     val earley = Earley()
     val parser = Parser(grammar.lexer, grammar.top_list, earley)
-    Try {
-      parser.parse(code)
-    } match {
-      case Success(tree) =>
-        val top_list = grammar.top_list_matcher(tree)
-        api.run(top_list, this.config)
-      case Failure(error: ErrorDuringParsing) =>
-        println(s"[parse_error] ${error.message}")
-        System.exit(1)
-      case Failure(error) =>
-        println(s"error: ${error}")
+    try {
+      val tree = parser.parse(code)
+      val top_list = grammar.top_list_matcher(tree)
+      api.run(top_list, this.config)
+    } catch {
+      case error: ErrorDuringParsing =>
+        println(s"error: ${error.message}")
         System.exit(1)
     }
   }
