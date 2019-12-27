@@ -22,6 +22,7 @@ final case class ValueUnion(type_list: List[Value]) extends Value
 
 sealed trait Neutral extends Value
 final case class NeutralVar(name: String) extends Neutral
+// final case class NeutralSwitch(target: Neutral, cases: List[(Value, Value)]) extends Neutral
 final case class NeutralSwitch(name: String, cases: List[(Value, Value)]) extends Neutral
 final case class NeutralAp(target: Neutral, arg_list: List[Value]) extends Neutral
 final case class NeutralDot(target: Neutral, field: String) extends Neutral

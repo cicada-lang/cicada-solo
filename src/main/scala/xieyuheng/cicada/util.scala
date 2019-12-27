@@ -3,6 +3,7 @@ package xieyuheng.cicada
 import collection.immutable.ListMap
 
 import eval._
+import pretty._
 
 object util {
 
@@ -24,13 +25,17 @@ object util {
     name_list: List[String],
     exp: Exp,
   ): (ListMap[String, Value], Value) = {
+    // println(s"telescope_force_with_return begin")
+    // println(s"name_list: ${name_list}")
     var local_env = telescope.env
     val value_map = ListMap(telescope.type_map.toList.zipWithIndex.map {
       case ((name, exp), i) =>
         val value = eval(local_env, exp)
         (name_list(i), value)
     }.toList: _*)
+    // println(s"exp = ${pretty_exp(exp)}")
     val value = eval(local_env, exp)
+    // println(s"telescope_force_with_return end")
     (value_map, value)
   }
 

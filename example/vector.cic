@@ -2,10 +2,31 @@ class nat_t {}
 class zero_t {}
 class succ_t { given prev : nat_t }
 
+function succ {
+  given x : nat_t
+  conclude succ_t
+  return {
+    let prev = x
+  }
+}
+
 let zero = {}
-let one = { let prev = zero }
+let one = succ(zero)
 let two = { let prev = one }
-let three = { let prev = two }
+let three = succ(two)
+let four = succ(three)
+let five = succ(four)
+let six = succ(five)
+
+function nat_add {
+  given x : nat_t
+  given y : nat_t
+  conclude nat_t
+  return switch x {
+    case succ_t => succ(nat_add(x.prev, y))
+    case zero_t => y
+  }
+}
 
 class vector_t {
   given A : type
@@ -46,3 +67,32 @@ function vector_length {
 
 @eq one_zeros.length
   = vector_length(one_zeros)
+
+// function list_append {
+//   given A : type
+//   given x : list_t(A)
+//   given y : list_t(A)
+//   conclude list_t(A)
+//   return switch x {
+//     case cons_t(A) => {
+//       let A = A
+//       let car = x.car
+//       let cdr = list_append(A, x.cdr, y)
+//     }
+//     case null_t(A) => y
+//   }
+// }
+
+// function vector_append {
+//   given A : type
+//   given m : nat_t
+//   given n : nat_t
+//   given x : vector_t(A, m)
+//   given y : vector_t(A, n)
+//   conclude vector_t(A, nat_add(m, n))
+//   return y
+//   // switch x {
+// //     // case vector_cons_t(A) => y
+// //     case vector_null_t(A) => y
+// //   }
+// }

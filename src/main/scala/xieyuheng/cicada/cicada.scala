@@ -26,7 +26,7 @@ object cicada extends Interpreter {
       api.run(top_list, this.config)
     } catch {
       case error: ErrorDuringParsing =>
-        println(s"error: ${error.message}")
+        println(s"parsing error: ${error.message}")
         System.exit(1)
     }
   }

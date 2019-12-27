@@ -1,4 +1,18 @@
 # cicada
+- Problem: fail to check
+  ``` cicada
+  function vector_append {
+    given A : type
+    given m : nat_t
+    given n : nat_t
+    given x : vector_t(A, m)
+    given y : vector_t(A, n)
+    conclude vector_t(A, nat_add(m, n))
+    return ...
+  }
+  ```
+- Solution: use unified ctx
+- Solution: use `Match` instead of `Switch`
 - [example] vector_append
 - we also take this opportunity to handle currying
   - just push value to env and return new `ValueFn`

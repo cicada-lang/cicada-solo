@@ -56,6 +56,11 @@ object eval {
 
       case Switch(name: String, cases: List[(Exp, Exp)]) =>
         env.lookup_value(name) match {
+          // TODO
+          case Some(value: NeutralVar) =>
+            NeutralSwitch(name, cases.map {
+              case (t, v) => (eval(env, t), eval(env, v))
+            })
           case Some(value) =>
             // NOTE this is the only place in `eval` to use `check` and `infer`
             //   because we need to check not `Exp : Value` but `Value : Value`

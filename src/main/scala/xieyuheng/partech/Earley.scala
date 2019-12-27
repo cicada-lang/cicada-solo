@@ -171,6 +171,8 @@ case class Earley() extends Partech {
         val item = completed_starts(0)
         val node = this.collect_node(item)
         node.children(0)
+      } else if (completed_starts.length > 1) {
+        throw ErrorDuringParsing("ambiguous grammar", Span(0, 0))
       } else {
         throw ErrorDuringParsing("", Span(0, 0))
       }

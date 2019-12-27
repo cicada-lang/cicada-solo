@@ -32,9 +32,10 @@ abstract class Interpreter {
 
     config_declaration.foreach {
       case (name, arity) =>
-        opt(args, name, arity).foreach {
-          case values =>
+        opt(args, name, arity) match {
+          case Some(values) =>
             config = config + (name -> values)
+          case None => {}
         }
     }
 
@@ -82,6 +83,9 @@ abstract class Interpreter {
       System.exit(1)
     }
     val code = os.read(path)
+    // println(s"code: ${code}")
+    // println(s"code.length: ${code.length}")
+    print("") // NOTE fuck scala without is empty print sometime will get parsing error
     run_code(code)
   }
 

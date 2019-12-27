@@ -42,22 +42,29 @@ case class Env(entry_map: ListMap[String, EnvEntry] = ListMap()) {
   }
 
   def to_ctx(): Ctx = {
-    var type_map: ListMap[String, Value] = ListMap()
-    this.entry_map.toList.zipWithIndex.foreach {
-      case ((name, entry), index) =>
-        entry match {
-          case EnvEntryRecursiveDefine(t: Exp, exp: Exp, env: Env) =>
-            val env = Env(this.entry_map.take(index))
-            val ctx = Ctx(type_map)
-            type_map = type_map + (name -> eval(env, t))
-          case EnvEntryValue(value: Value) =>
-            val env = Env(this.entry_map.take(index))
-            val ctx = Ctx(type_map)
-            val t = infer(env, ctx, readback(value))
-            type_map = type_map + (name -> t)
-        }
+    try {
+      var type_map: ListMap[String, Value] = ListMap()
+      this.entry_map.toList.zipWithIndex.foreach {
+        case ((name, entry), index) =>
+          entry match {
+            case EnvEntryRecursiveDefine(t: Exp, exp: Exp, env: Env) =>
+              val env = Env(this.entry_map.take(index))
+              val ctx = Ctx(type_map)
+              type_map = type_map + (name -> eval(env, t))
+            case EnvEntryValue(value: Value) =>
+              val env = Env(this.entry_map.take(index))
+              val ctx = Ctx(type_map)
+              val t = infer(env, ctx, readback(value))
+              type_map = type_map + (name -> t)
+          }
+      }
+      Ctx(type_map)
+    } catch {
+      case report: Report =>
+        report.throw_prepend(
+          s"env.to_ctx fail\n"
+        )
     }
-    Ctx(type_map)
   }
 
 }
