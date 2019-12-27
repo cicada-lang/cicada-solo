@@ -87,7 +87,7 @@ abstract class Interpreter {
     // println(s"code.length: ${code.length}")
     // NOTE fuck scala
     //   without this empty print sometime will get parsing error
-    print("")
+    // print("")
     run_code(code)
   }
 
