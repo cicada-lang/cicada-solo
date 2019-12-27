@@ -1,4 +1,4 @@
-package xieyuheng.party
+package xieyuheng.partech
 
 import predefined._
 import ruleDSL._

@@ -4,9 +4,9 @@ import scala.util.{ Try, Success, Failure }
 import collection.immutable.ListMap
 
 import xieyuheng.util.Interpreter
-import xieyuheng.party.Parser
-import xieyuheng.party.Earley
-import xieyuheng.party.ErrorDuringParsing
+import xieyuheng.partech.Parser
+import xieyuheng.partech.Earley
+import xieyuheng.partech.ErrorDuringParsing
 
 object cicada extends Interpreter {
 

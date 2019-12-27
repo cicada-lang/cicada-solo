@@ -1,4 +1,4 @@
-package xieyuheng.party
+package xieyuheng.partech
 
 import scala.util.{ Try, Success, Failure }
 import scala.collection.mutable.Set

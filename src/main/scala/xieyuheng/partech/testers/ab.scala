@@ -1,8 +1,8 @@
-package xieyuheng.party.testers
+package xieyuheng.partech.testers
 
-import xieyuheng.party._
-import xieyuheng.party.ruleDSL._
-import xieyuheng.party.predefined._
+import xieyuheng.partech._
+import xieyuheng.partech.ruleDSL._
+import xieyuheng.partech.predefined._
 
 object ab extends PartechTester {
 

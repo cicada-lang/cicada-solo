@@ -1,4 +1,4 @@
-package xieyuheng.party
+package xieyuheng.partech
 
 trait Partech {
 

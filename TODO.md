@@ -1,8 +1,3 @@
-# party
-- rename party to partech
-- good error report for earley
-  like: https://github.com/kach/nearley/issues/451
-- handle top list by simple parser first
 # cicada
 - [example] vector_length
 - [example] vector_append
@@ -29,6 +24,10 @@
 - [module system] not so hurry, after the core is stable
 # js backend
 - a simple compiler to translate the semantics of `eval` to js
+# partech
+- good error report for earley
+  like: https://github.com/kach/nearley/issues/451
+- handle top list by simple parser first
 # docs
 - [semantics] use the concept of **free variable proof** to explain the semantics of cicada
   (traditional type theoretical semantics)

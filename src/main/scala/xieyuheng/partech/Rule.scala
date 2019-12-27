@@ -1,55 +1,91 @@
 package xieyuheng.partech
 
-case class Rule(
-  name: String,
-  choices: Map[String, List[RulePart]],
-  args: Map[String, Rule] = Map(),
-) {
+case class Rule(name: String, choices: Map[String, List[Symbol]])
 
-  if (choices.size == 0) {
-    println("Rule should not have empty choices")
-    println(s"name: ${name}")
-    throw new Exception()
-  }
+sealed trait Symbol {
 
-  choices.foreach { case (choice_name, rule_parts) =>
-    if (rule_parts.length == 0) {
-      println("Rule's choice should not have empty List")
-      println(s"name: ${name}")
-      println(s"choice: ${choice_name}")
-      throw new Exception()
+  def non_terminal_p(): Boolean = {
+    this match {
+      case SymbolWord(word: String) =>
+        false
+      case SymbolWordPred(word_pred: WordPred) =>
+        false
+      case SymbolRule(rule: Rule) =>
+        true
+      case SymbolFn(fn) =>
+        true
+      case SymbolAp(fn, args: List[Symbol]) =>
+        true
     }
   }
 
-  // IMPORTANT BUG
-  // - we can not use `==`
-  //   because we can not compare lambda (rule_gen)
-  // - equivalent relation between circular data is problematic
-  //   and equivalent is important in for the correctness of the parser
-  // - even with the following `metters`
-  //   we can not ensure the parser is right
-
-  val choices_matter: Set[(String, Int)] = {
-    choices.map { case (choice_name, list) =>
-      (choice_name, list.length)
-    }.toSet
-  }
-
-  val choices_matter2: Set[String] = {
-    choices.keys.toSet
-  }
-
-  val choices_matter3: Map[String, List[RulePart]] = {
-    choices.map { case (choice_name, list) =>
-      (choice_name, list.filter(_.isInstanceOf[RulePartStr]))
+  def non_terminal_to_rule(): Rule = {
+    this match {
+      case SymbolWord(word: String) =>
+        throw new Error(s"non_terminal_to_rule can not handle: ${this}")
+      case SymbolWordPred(word_pred: WordPred) =>
+        throw new Error(s"non_terminal_to_rule can not handle: ${this}")
+      case SymbolRule(rule: Rule) =>
+        rule
+      case SymbolFn(fn) =>
+        fn()
+      case SymbolAp(fn, args: List[Symbol]) =>
+        fn(args)
     }
   }
 
-  val matters = (name, choices_matter3, args)
+  def terminal_p(): Boolean = {
+    !this.non_terminal_p()
+  }
+
+  def terminal_match(word: String): Boolean = {
+    this match {
+      case SymbolWord(word2: String) =>
+        word == word2
+      case SymbolWordPred(word_pred: WordPred) =>
+        word_pred.pred(word)
+      case SymbolRule(rule: Rule) =>
+        throw new Error(s"terminal_match can not handle: ${this}")
+      case SymbolFn(fn) =>
+        throw new Error(s"terminal_match can not handle: ${this}")
+      case SymbolAp(fn, args: List[Symbol]) =>
+        throw new Error(s"terminal_match can not handle: ${this}")
+    }
+  }
+
+  def repr(): String = {
+    this match {
+      case SymbolWord(word: String) =>
+        val doublequote = '"'
+        s"${doublequote}${word}${doublequote}"
+      case SymbolWordPred(word_pred: WordPred) =>
+        s"?${word_pred.name}"
+      case SymbolRule(rule: Rule) =>
+        s"${rule.name}"
+      case SymbolFn(fn) =>
+        val rule = fn()
+        s"${rule.name}"
+      case SymbolAp(fn, args: List[Symbol]) =>
+        val rule = fn(args)
+        s"${rule.name}"
+    }
+  }
+
+}
+
+final case class SymbolWord(word: String) extends Symbol
+final case class SymbolWordPred(word_pred: WordPred) extends Symbol
+final case class SymbolRule(rule: Rule) extends Symbol
+final case class SymbolFn(fn: () => Rule) extends Symbol
+final case class SymbolAp(fn: List[Symbol] => Rule, args: List[Symbol]) extends Symbol
+
+case class WordPred(name: String, pred: String => Boolean) {
+
+  val matters = name
 
   override def equals(that: Any): Boolean = {
     that match {
-      case that: Rule => this.matters == that.matters
+      case that: WordPred => this.matters == that.matters
       case _ => false
     }
   }
@@ -57,20 +93,3 @@ case class Rule(
   override def hashCode = matters.hashCode
 
 }
-
-sealed trait RulePart
-
-final case class RulePartStr(str: String) extends RulePart {
-  override def toString = {
-    val doublequote = '"'
-    s"${doublequote}${str}${doublequote}"
-  }
-}
-
-final case class RulePartRule(rule_gen: () => Rule) extends RulePart {
-  override def toString = {
-    rule_gen().name
-  }
-}
-
-final case class RulePartPred(word_pred: WordPred) extends RulePart

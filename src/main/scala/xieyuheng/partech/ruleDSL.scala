@@ -2,16 +2,20 @@ package xieyuheng.partech
 
 object ruleDSL {
 
-  implicit def RulePartStrFromString(str: String): RulePartStr = {
-    RulePartStr(str)
+  implicit def SymbolWord_from_word(word: String): SymbolWord = {
+    SymbolWord(word)
   }
 
-  implicit def RulePartRuleFromRule(rule: => Rule): RulePartRule = {
-    RulePartRule(() => rule)
+  implicit def SymbolFn_from_fn(fn: () => Rule): SymbolFn = {
+    SymbolFn(fn)
   }
 
-  implicit def RulePartPredFromWordPred(word_pred: WordPred): RulePartPred = {
-    RulePartPred(word_pred)
+  implicit def SymbolWordPred_from_word_pred(word_pred: WordPred): SymbolWordPred = {
+    SymbolWordPred(word_pred)
+  }
+
+  def $ (fn: List[Symbol] => Rule, args: Symbol*): SymbolAp = {
+    SymbolAp(fn, args.toList)
   }
 
 }
