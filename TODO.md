@@ -1,7 +1,9 @@
 # party
+- test party
+- using party
+- rename party to partech
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
-- rename party to partech
 - handle top list by simple parser first
 # cicada
 - fix parsing error

@@ -164,12 +164,13 @@ case class Earley() extends Partech {
       }
     }
 
-    def unique_tree(): Tree = {
-      this.run()
+    def unique_tree(debug_p: Boolean = false): Tree = {
+      this.run(debug_p)
       val completed_starts = this.completed_starts()
       if (completed_starts.length == 1) {
         val item = completed_starts(0)
-        this.collect_node(item)
+        val node = this.collect_node(item)
+        node.children(0)
       } else {
         throw ErrorDuringParsing("", Span(0, 0))
       }
@@ -177,7 +178,7 @@ case class Earley() extends Partech {
 
     def recognize(debug_p: Boolean = false): Boolean = {
       Try {
-        this.run(true)
+        this.run(debug_p)
       } match {
         case Success(()) =>
           this.completed_starts().length > 0

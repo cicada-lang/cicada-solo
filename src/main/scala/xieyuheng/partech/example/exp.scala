@@ -56,7 +56,7 @@ object exp extends ExampleRule {
   def preserved: List[String] = List(
     "type", "case", "fn", "pi")
 
-  def identifier = identifier_with_preserved("identifier", List())
+  def identifier = identifier_with_preserved("identifier", preserved)
 
   def start = exp
 

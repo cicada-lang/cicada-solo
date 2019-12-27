@@ -124,4 +124,65 @@ object predefined {
     ignorer = ignore_space_and_line_comment,
   )
 
+  def digit_char_set: Set[Char] = Set(
+    '0', '1', '2', '3', '4',
+    '5', '6', '7', '8', '9')
+
+  def lower_case_char_set: Set[Char] = Set(
+    'a', 'b', 'c', 'd', 'e', 'f', 'g',
+    'h', 'i', 'j', 'k', 'l', 'm', 'n',
+    'o', 'p', 'q', 'r', 's', 't',
+    'u', 'v', 'w', 'x', 'y', 'z',
+  )
+
+  def upper_case_char_set: Set[Char] = Set(
+    'A', 'B', 'C', 'D', 'E', 'F', 'G',
+    'H', 'I', 'J', 'K', 'L', 'M', 'N',
+    'O', 'P', 'Q', 'R', 'S', 'T',
+    'U', 'V', 'W', 'X', 'Y', 'Z',
+  )
+
+  def word_in_char_set(set: Set[Char]): String => Boolean = {
+    { case word => word.forall(set.contains(_)) }
+  }
+
+  def digit = WordPred("digit", word_in_char_set(digit_char_set))
+  def lower_case = WordPred("lower_case", word_in_char_set(lower_case_char_set))
+  def upper_case = WordPred("upper_case", word_in_char_set(upper_case_char_set))
+
+  def double_quoted_string = {
+    WordPred("double_quoted_string", { case word =>
+      word.length >= 2 &&
+      word.head == '"' &&
+      word.last == '"'
+    })
+  }
+
+  def trim_double_quote(str: String): String = {
+    assert(double_quoted_string.pred(str))
+    str.slice(1, str.length - 1)
+  }
+
+  def identifier_with_preserved(
+    name: String,
+    preserved: List[String],
+  ): WordPred = {
+    WordPred(name, {
+      case word =>
+        if (preserved.contains(word)) {
+          false
+        } else if (double_quoted_string.pred(word)) {
+          false
+        } else {
+          word.headOption match {
+            case Some(char) =>
+              val head_set = lower_case_char_set ++ upper_case_char_set + '_'
+              val tail_set = head_set ++ digit_char_set
+              head_set.contains(char) && word_in_char_set(tail_set)(word.tail)
+            case None => false
+          }
+        }
+    })
+  }
+
 }
