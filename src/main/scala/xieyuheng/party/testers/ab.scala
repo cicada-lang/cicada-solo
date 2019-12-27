@@ -1,46 +1,49 @@
 package xieyuheng.party.testers
 
 import xieyuheng.party._
+import xieyuheng.party.ruleDSL._
 import xieyuheng.party.predefined._
 
 object ab extends PartechTester {
 
-  val description = """
-  equal number of "a" "b"
-  """
+  val description =
+    """
+    equal number of "a" "b"
+    """
 
   val lexer = common_lexer
 
-  val sentences = List(
-    "a b",
-    "a b a b",
-    "a a b b",
-  )
+  val sentences =
+    List(
+      "a b",
+      "a b a b",
+      "a a b b",
+    )
 
-  val non_sentences = List(
-    "a a b",
-  )
+  val non_sentences =
+    List(
+      "a a b",
+    )
 
-  def start = ab
+  val ab: () => Rule =
+    () => Rule(
+      "ab", Map(
+        "head_a" -> List("a", b),
+        "head_b" -> List("b", a)))
 
-  def matcher = Some(ab_matcher)
+  val a: () => Rule =
+    () => Rule(
+      "a", Map(
+        "one_a" -> List("a"),
+        "more_a" -> List("a", ab),
+        "after_b" -> List("b", a, a)))
 
-  def ab(): Rule = Rule(
-    "ab", Map(
-      "head_a" -> List(SymbolWord("a"), SymbolFn(b)),
-      "head_b" -> List(SymbolWord("b"), SymbolFn(a))))
-
-  def a(): Rule = Rule(
-    "a", Map(
-      "one_a" -> List(SymbolWord("a")),
-      "more_a" -> List(SymbolWord("a"), SymbolFn(ab)),
-      "after_b" -> List(SymbolWord("b"), SymbolFn(a), SymbolFn(a))))
-
-  def b(): Rule = Rule(
-    "b", Map(
-      "one_b" -> List(SymbolWord("b")),
-      "more_b" -> List(SymbolWord("b"), SymbolFn(ab)),
-      "after_a" -> List(SymbolWord("a"), SymbolFn(b), SymbolFn(b))))
+  val b: () => Rule =
+    () => Rule(
+      "b", Map(
+        "one_b" -> List("b"),
+        "more_b" -> List("b", ab),
+        "after_a" -> List("a", b, b)))
 
   sealed trait AB
   final case class HEAD_A(b: B) extends AB
@@ -56,24 +59,31 @@ object ab extends PartechTester {
   final case class MORE_B(ab: AB) extends B
   final case class AFTER_A(b1: B, b2: B) extends B
 
-  def ab_matcher = Tree.matcher[AB](
-    "ab", Map(
-      "head_a" -> { case List(_, b) => HEAD_A(b_matcher(b)) },
-      "head_b" -> { case List(_, a) => HEAD_B(a_matcher(a)) },
-    ))
+  val ab_matcher =
+    Tree.matcher[AB](
+      "ab", Map(
+        "head_a" -> { case List(_, b) => HEAD_A(b_matcher(b)) },
+        "head_b" -> { case List(_, a) => HEAD_B(a_matcher(a)) },
+      ))
 
-  def a_matcher: Tree => A = Tree.matcher[A](
-    "a", Map(
-      "one_a" -> { _ => ONE_A() },
-      "more_a" -> { case List(_, ab) => MORE_A(ab_matcher(ab)) },
-      "after_b" -> { case List(_, a1, a2) => AFTER_B(a_matcher(a1), a_matcher(a2)) },
-    ))
+  val a_matcher: Tree => A =
+    Tree.matcher[A](
+      "a", Map(
+        "one_a" -> { _ => ONE_A() },
+        "more_a" -> { case List(_, ab) => MORE_A(ab_matcher(ab)) },
+        "after_b" -> { case List(_, a1, a2) => AFTER_B(a_matcher(a1), a_matcher(a2)) },
+      ))
 
-  def b_matcher: Tree => B = Tree.matcher[B](
-    "b", Map(
-      "one_b" -> { case _ => ONE_B() },
-      "more_b" -> { case List(_, ab) => MORE_B(ab_matcher(ab)) },
-      "after_a" -> { case List(_, b1, b2) => AFTER_A(b_matcher(b1), b_matcher(b2)) },
-    ))
+  val b_matcher: Tree => B =
+    Tree.matcher[B](
+      "b", Map(
+        "one_b" -> { case _ => ONE_B() },
+        "more_b" -> { case List(_, ab) => MORE_B(ab_matcher(ab)) },
+        "after_a" -> { case List(_, b1, b2) => AFTER_A(b_matcher(b1), b_matcher(b2)) },
+      ))
+
+  val start = ab()
+
+  val matcher = Some(ab_matcher)
 
 }

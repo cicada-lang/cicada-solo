@@ -16,11 +16,9 @@ object predefined {
       "more" -> { case List(a, tail) => matcher(a) :: non_empty_list_matcher(matcher)(tail) }
     ))
 
-
   def word_in_char_set(set: Set[Char]): String => Boolean = {
     { case word => word.forall(set.contains(_)) }
   }
-
 
   def digit_char_set: Set[Char] = Set(
     '0', '1', '2', '3', '4',

@@ -1,5 +1,4 @@
 # party
-- test party
 - using party
 - rename party to partech
 - good error report for earley

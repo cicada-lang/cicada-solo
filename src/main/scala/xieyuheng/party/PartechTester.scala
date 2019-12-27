@@ -24,11 +24,15 @@ trait PartechTester {
           parser.parse(sentence)
         } match {
           case Success(_tree) => ()
-          case Failure(error) =>
+          case Failure(error: ErrorDuringParsing) =>
             println(s"partech tester fail on sentence")
             println(description)
             println(s"- sentence: ${sentence}")
             println(s"- start: ${start.name}")
+            println(s"- error: ${error.message}")
+            println(s"- span: ${error.span}")
+            throw new Exception()
+          case Failure(error) =>
             println(s"- error: ${error}")
             throw new Exception()
         }
@@ -66,11 +70,15 @@ trait PartechTester {
                 val matched = matcher(tree)
               case None => {}
             }
-          case Failure(error) =>
+          case Failure(error: ErrorDuringParsing) =>
             println(s"partech tester fail on matcher")
             println(description)
             println(s"- start: ${start.name}")
             println(s"- sentence: ${sentence}")
+            println(s"- error: ${error.message}")
+            println(s"- span: ${error.span}")
+            throw new Exception()
+          case Failure(error) =>
             println(s"- error: ${error}")
             throw new Exception()
         }

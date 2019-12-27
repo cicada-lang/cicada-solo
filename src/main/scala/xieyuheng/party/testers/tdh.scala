@@ -1,44 +1,53 @@
-// package xieyuheng.party.testers
+package xieyuheng.party.testers
 
-// import xieyuheng.party._
-// import xieyuheng.party.predefined._
+import xieyuheng.party._
+import xieyuheng.party.ruleDSL._
+import xieyuheng.party.predefined._
 
-// object tdh extends PartechTester {
+object tdh extends PartechTester {
 
-//   // regular grammar
+  val description =
+    """
+    tdh -- left regular grammar
+    """
 
-//   def lexer = Lexer.default
+  val lexer = common_lexer
 
-//   def sentences = List(
-//     "t,d&h",
-//   )
+  val sentences =
+    List(
+      "t,d&h",
+    )
 
-//   def non_sentences = List(
-//     "t,d,h",
-//   )
+  val non_sentences =
+    List(
+      "t,d,h",
+    )
 
-//   def start = tdh
+  val tdh: () => Rule =
+    () => Rule(
+      "tdh", Map(
+        "t" -> List("t"),
+        "d" -> List("d"),
+        "h" -> List("h"),
+        "tdh_list" -> List(tdh_list)))
 
-//   def matcher = None
+  val tdh_list: () => Rule =
+    () => Rule(
+      "tdh_list", Map(
+        "t" -> List("t", tdh_list_tail),
+        "d" -> List("d", tdh_list_tail),
+        "h" -> List("h", tdh_list_tail)))
 
-//   def tdh = Rule(
-//     "tdh", Map(
-//       "t" -> List("t"),
-//       "d" -> List("d"),
-//       "h" -> List("h"),
-//       "tdh_list" -> List(tdh_list)))
+  val tdh_list_tail: () => Rule =
+    () => Rule(
+      "tdh_list_tail", Map(
+        "list" -> List(",", tdh_list),
+        "t" -> List("&", "t"),
+        "d" -> List("&", "d"),
+        "h" -> List("&", "h")))
 
-//   def tdh_list = Rule(
-//     "tdh_list", Map(
-//       "t" -> List("t", tdh_list_tail),
-//       "d" -> List("d", tdh_list_tail),
-//       "h" -> List("h", tdh_list_tail)))
+  val start = tdh()
 
-//   def tdh_list_tail: Rule = Rule(
-//     "tdh_list_tail", Map(
-//       "list" -> List(",", tdh_list),
-//       "t" -> List("&", "t"),
-//       "d" -> List("&", "d"),
-//       "h" -> List("&", "h")))
+  val matcher = None
 
-// }
+}

@@ -243,7 +243,7 @@ case class Earley() extends Partech {
       var cursor = item.dot
       var continue_p = true
       while (cursor > 0 && continue_p) {
-        val symbol = symbols(cursor-1)
+        val symbol = symbols(cursor - 1)
         if (symbol.isInstanceOf[SymbolWord]) {
           n = n + 1
           cursor = cursor - 1

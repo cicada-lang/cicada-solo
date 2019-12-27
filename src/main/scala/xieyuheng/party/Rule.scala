@@ -70,6 +70,7 @@ sealed trait Symbol {
         s"${rule.name}"
     }
   }
+
 }
 
 final case class SymbolWord(word: String) extends Symbol
@@ -78,4 +79,17 @@ final case class SymbolRule(rule: Rule) extends Symbol
 final case class SymbolFn(fn: () => Rule) extends Symbol
 final case class SymbolAp(fn: List[Symbol] => Rule, args: List[Symbol]) extends Symbol
 
-case class WordPred(name: String, pred: String => Boolean)
+case class WordPred(name: String, pred: String => Boolean) {
+
+  val matters = name
+
+  override def equals(that: Any): Boolean = {
+    that match {
+      case that: WordPred => this.matters == that.matters
+      case _ => false
+    }
+  }
+
+  override def hashCode = matters.hashCode
+
+}

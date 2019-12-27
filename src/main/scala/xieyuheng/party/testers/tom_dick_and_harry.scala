@@ -1,39 +1,50 @@
-// package xieyuheng.party.testers
+package xieyuheng.party.testers
 
-// import xieyuheng.party._
-// import xieyuheng.party.predefined._
+import xieyuheng.party._
+import xieyuheng.party.ruleDSL._
+import xieyuheng.party.predefined._
 
-// object tom_dick_and_harry extends PartechTester {
+object tom_dick_and_harry extends PartechTester {
 
-//   def lexer = Lexer.default
+  val description =
+    """
+    tom_dick_and_harry
+    """
 
-//   val sentences = List(
-//     "tom, dick and harry",
-//   )
+  val lexer = common_lexer
 
-//   val non_sentences = List(
-//     "tom, dick, harry",
-//   )
+  val sentences =
+    List(
+      "tom, dick and harry",
+    )
 
-//   def start = tom_dick_and_harry
+  val non_sentences =
+    List(
+      "tom, dick, harry",
+    )
 
-//   def matcher = None
+  val tom_dick_and_harry: () => Rule =
+    () => Rule(
+      "tom_dick_and_harry", Map(
+        "name" -> List(name),
+        "list" -> List($(non_empty_list, name_list_entry), "and", name)))
 
-//   def tom_dick_and_harry = Rule(
-//     "tom_dick_and_harry", Map(
-//       "name" -> List(name),
-//       "list" -> List(name_list, "and", name)))
+  val name: () => Rule =
+    () => Rule(
+      "name", Map(
+        "tom" -> List("tom"),
+        "dick" -> List("dick"),
+        "harry" -> List("harry")))
 
-//   def name = Rule(
-//     "name", Map(
-//       "tom" -> List("tom"),
-//       "dick" -> List("dick"),
-//       "harry" -> List("harry")))
+  val name_list_entry: () => Rule =
+    () => Rule(
+      "name_list_entry", Map(
+        "name_alone" -> List(name),
+        "name_comma" -> List(name, ","),
+      ))
 
-//   def name_list = non_empty_list(
-//     Rule("name_list_entry", Map(
-//       "name_alone" -> List(name),
-//       "name_comma" -> List(name, ","),
-//     )))
+  val start = tom_dick_and_harry()
 
-// }
+  val matcher = None
+
+}

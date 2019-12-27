@@ -1,5 +1,7 @@
 package xieyuheng.partech
 
+import scala.util.{ Try, Success, Failure }
+
 case class LexTable(
   word_matcher: String => Option[(String, String)],
   ignorer: String => String)
@@ -18,27 +20,30 @@ case class Lexer(table: LexTable) {
   def lex(text: String): Either[ErrMsg, List[Word]] = {
     var remain: String = text
     var tokens: List[Word] = List()
-    var maybe_err: Option[ErrMsg] = None
-
-    while (remain.length > 0) {
-      remain = table.ignorer(remain)
-
-      table.word_matcher(remain) match {
-        case Some((left, right)) =>
-          val hi = text.length - right.length
-          val lo = hi - left.length
-          tokens = tokens :+ Word(left, Span(lo, hi))
-          remain = right
-        case None =>
-          val hi = text.length
-          val lo = text.length - remain.length
-          Left(ErrMsg("Lexer", s"", Span(lo, hi)))
+    Try {
+      while (remain.length > 0) {
+        remain = table.ignorer(remain)
+        if (remain.length > 0) {
+          table.word_matcher(remain) match {
+            case Some((left, right)) =>
+              val hi = text.length - right.length
+              val lo = hi - left.length
+              tokens = tokens :+ Word(left, Span(lo, hi))
+              remain = right
+            case None =>
+              val hi = text.length
+              val lo = text.length - remain.length
+              throw ErrMsg("Lexer", s"", Span(lo, hi))
+          }
+        }
       }
-    }
-
-    maybe_err match {
-      case Some(err) => Left(err)
-      case None => Right(tokens)
+    } match {
+      case Success(()) =>
+        Right(tokens)
+      case Failure(err: ErrMsg) =>
+        Left(err)
+      case Failure(err) =>
+        throw err
     }
   }
 
