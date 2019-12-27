@@ -76,31 +76,30 @@ function list_append {
 
 define null_one : null_t(succ_t) = { let A = succ_t }
 
-// TODO parsing error
-// function list_cons_one {
-//   given one_list : list_t(succ_t)
-//   conclude list_t(succ_t)
-//   return {
-//     let A = succ_t
-//     let car = one
-//     let cdr = one_list
-//   }
-// }
+function list_cons_one {
+  given one_list : list_t(succ_t)
+  conclude list_t(succ_t)
+  return {
+    let A = succ_t
+    let car = one
+    let cdr = one_list
+  }
+}
 
-// @eq list_append(succ_t, null_one, null_one) = null_one
-// @eq list_append(succ_t, list_cons_one(null_one), null_one) = list_cons_one(null_one)
-// @eq list_append(succ_t, null_one, list_cons_one(null_one)) = list_cons_one(null_one)
-// @eq list_append(succ_t, list_cons_one(null_one), list_cons_one(null_one))
-//   = list_cons_one(list_cons_one(null_one))
+@eq list_append(succ_t, null_one, null_one) = null_one
+@eq list_append(succ_t, list_cons_one(null_one), null_one) = list_cons_one(null_one)
+@eq list_append(succ_t, null_one, list_cons_one(null_one)) = list_cons_one(null_one)
+@eq list_append(succ_t, list_cons_one(null_one), list_cons_one(null_one))
+  = list_cons_one(list_cons_one(null_one))
 
-// @accept list_append(
-//   succ_t,
-//   list_cons_one(null_one),
-//   list_cons_one(null_one))
-// : list_t(succ_t)
+@accept list_append(
+  succ_t,
+  list_cons_one(null_one),
+  list_cons_one(null_one))
+: list_t(succ_t)
 
-// @accept list_append(
-//   union { case succ_t case unit_t },
-//   list_cons_unit(null_unit),
-//   list_cons_one(null_one))
-// : list_t(union { case succ_t case unit_t })
+@accept list_append(
+  union { case succ_t case unit_t },
+  list_cons_unit(null_unit),
+  list_cons_one(null_one))
+: list_t(union { case succ_t case unit_t })
