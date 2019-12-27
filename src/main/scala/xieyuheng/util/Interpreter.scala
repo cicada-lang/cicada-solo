@@ -85,7 +85,9 @@ abstract class Interpreter {
     val code = os.read(path)
     // println(s"code: ${code}")
     // println(s"code.length: ${code.length}")
-    print("") // NOTE fuck scala without is empty print sometime will get parsing error
+    // NOTE fuck scala
+    //   without this empty print sometime will get parsing error
+    print("")
     run_code(code)
   }
 
