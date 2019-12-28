@@ -29,6 +29,15 @@ object earley_test extends App {
   assert(!earley.recognize(common_lexer.lex("a-a+b"), E()))
   assert(!earley.recognize(common_lexer.lex("a-a++"), E()))
 
+  // try {
+  //   earley.parse_tokens_by_rule(common_lexer.lex("a-a+b"), E())
+  // } catch {
+  //   case error: ErrorDuringParsing =>
+  //     println(s"parssing error")
+  //     println(s"span: ${error.span}")
+  //     println(s"message: ${error.message}")
+  // }
+
   testers.ab.test(earley)
   testers.exp.test(earley)
   testers.sexp.test(earley)

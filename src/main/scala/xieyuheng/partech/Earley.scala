@@ -6,14 +6,22 @@ import scala.collection.mutable.ArrayBuffer
 
 case class Earley() extends Partech {
 
-  def parse_tokens_by_rule(tokens: List[Token], rule: Rule): Tree = {
+  def parse_tokens_by_rule(
+    tokens: List[Token],
+    rule: Rule,
+    debug_p: Boolean = false,
+  ): Tree = {
     val parsing = Parsing(tokens, rule)
-    parsing.unique_tree()
+    parsing.unique_tree(debug_p)
   }
 
-  def recognize(tokens: List[Token], rule: Rule): Boolean = {
+  def recognize(
+    tokens: List[Token],
+    rule: Rule,
+    debug_p: Boolean = false,
+  ): Boolean = {
     val parsing = Parsing(tokens, rule)
-    parsing.recognize()
+    parsing.recognize(debug_p)
   }
 
   case class Item(
@@ -42,6 +50,22 @@ case class Earley() extends Partech {
       this.cause.foreach {
         case cause_item =>
           s = s + s" { ${cause_item.repr()} }"
+      }
+      s
+    }
+
+    def repr_concise(): String = {
+      var s = s"${this.rule.name}:${this.choice_name} -> "
+      this.symbols.zipWithIndex.foreach {
+        case (symbol, i) =>
+          val symbol = this.symbols(i)
+          if (this.dot == i) {
+            s = s + "• "
+          }
+          s = s + s"${symbol.repr()} "
+      }
+      if (this.dot == this.symbols.length) {
+        s = s + "• "
       }
       s
     }
@@ -174,7 +198,9 @@ case class Earley() extends Partech {
       } else if (completed_starts.length > 1) {
         throw ErrorDuringParsing("ambiguous grammar", Span(0, 0))
       } else {
-        throw ErrorDuringParsing("", Span(0, 0))
+        val i = find_last_index_with_terminal_items()
+        val span = this.tokens(i).span
+        throw ErrorDuringParsing(s"${this.error_mesage()}", span)
       }
     }
 
@@ -283,6 +309,55 @@ case class Earley() extends Partech {
           s = s + "\n"
       }
       s
+    }
+
+    def error_mesage(): String = {
+      var s = ""
+      val i = find_last_index_with_terminal_items()
+      val items = this.chart(i)
+      val doublequote = '"'
+      s = s + s"found token: ${doublequote}${this.tokens(i).word}${doublequote}, "
+      s = s + s"while expecting token:\n"
+      items.foreach {
+        case item =>
+          if (item_terminal_p(item)) {
+            s = s + " "
+            s = s + item_get_terminal(item).repr
+            s = s + " based on:\n"
+            s = s + "     "
+            s = s + item.repr_concise()
+            s = s + "\n"
+          }
+      }
+      s
+    }
+
+    def find_last_index_with_terminal_items(): Int = {
+      var last_index_with_terminal_items = 0
+      val indexex = 0 until this.tokens.length
+      indexex.foreach {
+        case i =>
+          if (index_with_terminal_items_p(i)) {
+              last_index_with_terminal_items = i
+          }
+      }
+      last_index_with_terminal_items
+    }
+
+    def index_with_terminal_items_p(i: Int): Boolean = {
+      val items = this.chart(i)
+      items.size != 0 &&
+      items.exists { item_terminal_p }
+    }
+
+    def item_terminal_p(item: Item): Boolean = {
+      item.dot < item.symbols.length &&
+      item.symbols(item.dot).terminal_p()
+    }
+
+    def item_get_terminal(item: Item): Symbol = {
+      assert(item_terminal_p(item))
+      item.symbols(item.dot)
     }
 
   }

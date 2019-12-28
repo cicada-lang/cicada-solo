@@ -51,8 +51,6 @@
 # js backend
 - a simple compiler to translate the semantics of `eval` to js
 # partech
-- good error report for earley
-  like: https://github.com/kach/nearley/issues/451
 - handle top list by simple parser first
 # note
 - [maybe] [top] we need a framework for adding new keywords
