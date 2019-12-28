@@ -33,7 +33,7 @@ object earley_test extends App {
   //   earley.parse_tokens_by_rule(common_lexer.lex("a-a+b"), E())
   // } catch {
   //   case error: ErrorDuringParsing =>
-  //     println(s"parssing error")
+  //     println(s"parsing error")
   //     println(s"span: ${error.span}")
   //     println(s"message: ${error.message}")
   // }
