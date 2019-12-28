@@ -1,4 +1,8 @@
 # cicada
+- [change syntax for case-lambda]
+  - drop `define` and `let`
+- [semantics] use the concept of **free variable proof** to explain the semantics of cicada
+  (traditional type theoretical semantics)
 - Problem: fail to check
   ``` cicada
   function vector_append {
@@ -11,8 +15,10 @@
     return ...
   }
   ```
-- Solution: use unified ctx
-- Solution: use `Match` instead of `Switch`
+  fail to form NeutralSwitch
+- Solution:
+  - use case-lambda instead of switch
+  - use `the` to help `env.to_ctx()`
 - [example] vector_append
 - we also take this opportunity to handle currying
   - just push value to env and return new `ValueFn`
@@ -41,9 +47,6 @@
 - good error report for earley
   like: https://github.com/kach/nearley/issues/451
 - handle top list by simple parser first
-# docs
-- [semantics] use the concept of **free variable proof** to explain the semantics of cicada
-  (traditional type theoretical semantics)
 # note
 - [maybe] [top] we need a framework for adding new keywords
   - a little bit early to do this now

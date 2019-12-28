@@ -76,18 +76,14 @@ trait Interpreter {
   }
 
   def run_file(file_path: String): Unit = {
-    val path = os.Path(file_path, base = os.pwd)
-    if (!os.isFile(path)) {
-      println(s"not a file: ${path}")
-      System.exit(1)
+    val pwd = System.getProperty("user.dir")
+    val source = io.Source.fromFile(pwd + "/"+ file_path)
+    try {
+      val code = source.mkString
+      run_code(code)
+    } finally {
+      source.close()
     }
-    val code = os.read(path)
-    // NOTE fuck scala
-    //   without this empty print
-    //   sometime will get parsing error
-    //   sometime will not
-    print("")
-    run_code(code)
   }
 
 }

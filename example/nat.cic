@@ -28,6 +28,36 @@ function nat_add {
   }
 }
 
+// define nat_add : {
+//   given x : nat_t
+//   given y : nat_t
+//   conclude nat_t
+// } = {
+//   case {
+//     given x : succ_t
+//     given y : nat_t
+//     return succ(nat_add(x.prev, y))
+//   }
+//   case {
+//     given x : zero_t
+//     given y : nat_t
+//     return y
+//   }
+// }
+
+// let nat_add : { nat_t, nat_t -> nat_t }
+// let nat_add = { x : succ_t, y : nat_t => succ(nat_add(x.prev, y)) }
+// let nat_add = { x : zero_t, y : nat_t => y }
+
+// nat_add : { nat_t, nat_t -> nat_t }
+// nat_add = { x : succ_t, y : nat_t => succ(nat_add(x.prev, y)) }
+// nat_add = { x : zero_t, y : nat_t => y }
+
+// nat_add : { nat_t, nat_t -> nat_t } = {
+//   case x : succ_t, y : nat_t => succ(nat_add(x.prev, y))
+//   case x : zero_t, y : nat_t => y
+// }
+
 function nat_mul {
   given x : nat_t
   given y : nat_t

@@ -28,6 +28,24 @@ function nat_add {
   }
 }
 
+// class vector_t {
+//   A : type
+//   length : nat_t
+// }
+
+// class vector_null_t {
+//   A : type
+//   length : zero_t
+// }
+
+// class vector_cons_t {
+//   A : type
+//   prev : nat_t
+//   head : A
+//   length : succ_t(prev)
+//   tail : vector_t(A, prev)
+// }
+
 class vector_t {
   given A : type
   given length : nat_t
@@ -50,6 +68,14 @@ define zero_zeros : vector_t = {
   let A = nat_t
   let length = zero
 }
+
+// one_zeros : vector_cons_t = {
+//   A = nat_t
+//   prev = zero
+//   head = zero
+//   length = one
+//   tail = zero_zeros
+// }
 
 define one_zeros : vector_cons_t = {
   let A = nat_t
