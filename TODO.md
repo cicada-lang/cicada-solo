@@ -1,22 +1,22 @@
-# cicada
-- [semantics] use the concept of **free variable proof** to explain the semantics of cicada
-  (traditional type theoretical semantics)
+# Problem
 - Problem: fail to check
   ``` cicada
-  function vector_append {
-    given A : type
-    given m : nat_t
-    given n : nat_t
-    given x : vector_t(A, m)
-    given y : vector_t(A, n)
-    conclude vector_t(A, nat_add(m, n))
-    return ...
+  vector_append : {
+    A : type
+    m : nat_t
+    n : nat_t
+    x : vector_t(A, m)
+    y : vector_t(A, n)
+    -> vector_t(A, nat_add(m, n))
   }
   ```
   fail to form NeutralSwitch
 - Solution:
   - use case-lambda instead of switch
   - use `the` to help `env.to_ctx()`
+# cicada
+- [semantics] use the concept of **free variable proof** to explain the semantics of cicada
+  (traditional type theoretical semantics)
 - [example] vector_append
 - we also take this opportunity to handle currying
   - just push value to env and return new `ValueFn`
@@ -25,14 +25,22 @@
 - [equality] we can implementation equality by built-in equality
   maybe we need to built-in (make it an axiom) the following function
   ``` cicada
-  function transport {
-    suppose A : type
-    suppose x, y : A
-    given equation : equation_t(A, x, y)
-    given motive : { given x : A conclude type }
-    given value : motive(x)
-    conclude motive(y)
-    return value
+  transport : {
+    A : type
+    x : A
+    y : A
+    equation : equation_t(A, x, y)
+    motive : { x : A -> type }
+    value : motive(x)
+    -> motive(y)
+  } = {
+    A : type
+    x : A
+    y : A
+    equation : equation_t(A, x, y)
+    motive : { x : A -> type }
+    value : motive(x)
+    => value
   }
   ```
 - [test] define `category_t` as algebraic structure
