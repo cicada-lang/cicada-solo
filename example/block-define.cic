@@ -1,7 +1,4 @@
-let unit_t = class {}
-define unit : unit_t = {}
-let type_id = {
-  given A : type
-  return A
-}
+unit_t = class {}
+unit : unit_t = {}
+type_id = { A : type => A }
 @show type_id(unit_t)

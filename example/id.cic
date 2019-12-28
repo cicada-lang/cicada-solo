@@ -1,10 +1,9 @@
-let x = {
-  given x : type
-  return x
+x = {
+  x : type => x
 }({
-  given x : type
-  return x
+  x : type => x
 }({
-  given x : type
-  return x
+  x : type => x
 }(type)))
+
+@show x

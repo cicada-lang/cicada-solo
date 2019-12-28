@@ -3,47 +3,49 @@ object unit {}
 
 class nat_t {}
 class zero_t {}
-class succ_t { given prev : nat_t }
+class succ_t { prev : nat_t }
 
-function succ {
-  given x : nat_t
-  conclude succ_t
-  return {
-    let prev = x
+succ : { x : nat_t -> succ_t } = {
+  x : nat_t => {
+    prev = x
   }
 }
 
-let zero = {}
-let one = succ(zero)
-let two = succ(one)
-let three = succ(two)
-let four = succ(three)
-let five = succ(four)
+zero = {}
+one = succ(zero)
+two = succ(one)
+three = succ(two)
+four = succ(three)
+five = succ(four)
 
-class list_t { given A : type }
-class null_t { given A : type }
+class list_t { A : type }
+class null_t { A : type }
 class cons_t {
-  given A : type
-  given car : A
-  given cdr : list_t(A)
+  A : type
+  car : A
+  cdr : list_t(A)
 }
 
-define null_unit : null_t(unit_t) = { let A = unit_t }
+null_unit : null_t(unit_t) = { A = unit_t }
 
-function list_cons_unit {
-  given unit_list : list_t(unit_t)
-  conclude list_t(unit_t)
-  return {
-    let A = unit_t
-    let car = unit
-    let cdr = unit_list
+list_cons_unit : {
+  unit_list : list_t(unit_t)
+  -> list_t(unit_t)
+} = {
+  unit_list : list_t(unit_t)
+  => {
+    A = unit_t
+    car = unit
+    cdr = unit_list
   }
 }
 
-function list_length {
-  given x : list_t
-  conclude nat_t
-  return switch x {
+list_length : {
+  x : list_t
+  -> nat_t
+} = {
+  x : list_t
+  => switch x {
     case cons_t => succ(list_length(x.cdr))
     case null_t => zero
   }
@@ -53,16 +55,20 @@ function list_length {
 @eq list_length(list_cons_unit(null_unit)) = one
 @eq list_length(list_cons_unit(list_cons_unit(null_unit))) = two
 
-function list_append {
-  given A : type
-  given x : list_t(A)
-  given y : list_t(A)
-  conclude list_t(A)
-  return switch x {
+list_append : {
+  A : type
+  x : list_t(A)
+  y : list_t(A)
+  -> list_t(A)
+} = {
+  A : type
+  x : list_t(A)
+  y : list_t(A)
+  => switch x {
     case cons_t(A) => {
-      let A = A
-      let car = x.car
-      let cdr = list_append(A, x.cdr, y)
+      A = A
+      car = x.car
+      cdr = list_append(A, x.cdr, y)
     }
     case null_t(A) => y
   }
@@ -74,15 +80,17 @@ function list_append {
 @eq list_append(unit_t, list_cons_unit(null_unit), list_cons_unit(null_unit))
   = list_cons_unit(list_cons_unit(null_unit))
 
-define null_one : null_t(succ_t) = { let A = succ_t }
+null_one : null_t(succ_t) = { A = succ_t }
 
-function list_cons_one {
-  given one_list : list_t(succ_t)
-  conclude list_t(succ_t)
-  return {
-    let A = succ_t
-    let car = one
-    let cdr = one_list
+list_cons_one : {
+  one_list : list_t(succ_t)
+  -> list_t(succ_t)
+} = {
+  one_list : list_t(succ_t)
+  => {
+    A = succ_t
+    car = one
+    cdr = one_list
   }
 }
 

@@ -1,4 +1,6 @@
-let obj = {
-  let x = type
-  let y = type
+obj = {
+  x = type
+  y = type
 }
+
+@show obj

@@ -1,32 +1,31 @@
 class bool_t {
-  given tag : string_t
+  tag : string_t
 }
 
 class true_t {
-  define tag : string_t = "true"
+  tag : string_t = "true"
 }
 
 class false_t {
-  define tag : string_t = "false"
+  tag : string_t = "false"
 }
 
 object true {
-  let tag = "true"
+  tag = "true"
 }
 
 object false {
-  let tag = "false"
+  tag = "false"
 }
 
 @refuse true : false_t
 
-function not {
-  given x : bool_t
-  conclude bool_t
-  return switch x {
-    case false_t => true
-    case true_t => false
-  }
+not : { x : bool_t -> bool_t } = {
+  x : bool_t
+    => switch x {
+      case false_t => true
+      case true_t => false
+    }
 }
 
 @show bool_t

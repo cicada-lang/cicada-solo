@@ -1,8 +1,4 @@
-let unit_t = class {}
-let unit = {}
-let k = {
-  given x : type
-  given y : type
-  return x
-}
+class unit_t {}
+object unit {}
+k = { x : type, y : type => x }
 @show k(type, unit_t)

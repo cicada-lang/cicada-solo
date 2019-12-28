@@ -1,1 +1,2 @@
-define s : string_t = "abc"
+s : string_t = "abc"
+@show s

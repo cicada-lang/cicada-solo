@@ -1,0 +1,5 @@
+empty_class = class {}
+empty_object = {}
+
+@show empty_class
+@show empty_object

@@ -1,6 +1,4 @@
 # cicada
-- [change syntax for case-lambda]
-  - drop `define` and `let`
 - [semantics] use the concept of **free variable proof** to explain the semantics of cicada
   (traditional type theoretical semantics)
 - Problem: fail to check

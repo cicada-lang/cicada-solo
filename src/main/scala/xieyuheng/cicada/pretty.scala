@@ -23,16 +23,16 @@ object pretty {
 
       case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
         var s = type_map.map {
-          case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
+          case (name, exp) => s"${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
-        s = s + s"conclude ${pretty_exp(return_type)}\n"
+        s = s + s"-> ${pretty_exp(return_type)}\n"
         s"{${maybe_ln(s)}}"
 
       case Fn(type_map: ListMap[String, Exp], body: Exp) =>
         var s = type_map.map {
-          case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
+          case (name, exp) => s"${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
-        s = s + s"return ${pretty_exp(body)}\n"
+        s = s + s"=> ${pretty_exp(body)}\n"
         s"{${maybe_ln(s)}}"
 
       case Ap(target: Exp, arg_list: List[Exp]) =>
@@ -43,16 +43,16 @@ object pretty {
 
       case Cl(defined, type_map: ListMap[String, Exp]) =>
         var d = defined.map {
-          case (name, (t, exp)) => s"define ${name} : ${pretty_exp(t)} = ${pretty_exp(exp)}\n"
+          case (name, (t, exp)) => s"${name} : ${pretty_exp(t)} = ${pretty_exp(exp)}\n"
         }.mkString("")
         var s = type_map.map {
-          case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
+          case (name, exp) => s"${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
         s"class {${maybe_ln(d)}${maybe_ln(s)}}"
 
       case Obj(value_map: ListMap[String, Exp]) =>
         var s = value_map.map {
-          case (name, exp) => s"let ${name} = ${pretty_exp(exp)}\n"
+          case (name, exp) => s"${name} = ${pretty_exp(exp)}\n"
         }.mkString("")
         s"object {${maybe_ln(s)}}"
 
@@ -73,10 +73,10 @@ object pretty {
 
       case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
         var s = block_entry_map.map {
-          case (name, BlockEntryLet(exp)) => s"let ${name} = ${pretty_exp(exp)}\n"
-          case (name, BlockEntryDefine(t, exp)) => s"define ${name} : ${pretty_exp(t)} = ${pretty_exp(exp)}\n"
+          case (name, BlockEntryLet(exp)) => s"${name} = ${pretty_exp(exp)}\n"
+          case (name, BlockEntryDefine(t, exp)) => s"${name} : ${pretty_exp(t)} = ${pretty_exp(exp)}\n"
         }.mkString("")
-        s = s + s"return ${pretty_exp(body)}\n"
+        s = s + s"${pretty_exp(body)}\n"
         s"{${maybe_ln(s)}}"
     }
   }
@@ -117,16 +117,16 @@ object pretty {
 
       case ValuePi(Telescope(type_map: ListMap[String, Exp], env: Env), return_type: Exp) =>
         var s = type_map.map {
-          case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
+          case (name, exp) => s"${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
-        s = s + s"conclude ${pretty_exp(return_type)}\n"
+        s = s + s"-> ${pretty_exp(return_type)}\n"
         s"{${maybe_ln(s)}}"
 
       case ValueFn(Telescope(type_map: ListMap[String, Exp], env: Env), body: Exp) =>
         var s = type_map.map {
-          case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
+          case (name, exp) => s"${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
-        s = s + s"return ${pretty_exp(body)}\n"
+        s = s + s"=> ${pretty_exp(body)}\n"
         s"{${maybe_ln(s)}}"
 
       case ValueCl(
@@ -134,22 +134,22 @@ object pretty {
         Telescope(type_map: ListMap[String, Exp], env: Env),
       ) =>
         var d = defined.map {
-          case (name, (t, value)) => s"define ${name} : ${pretty_value(t)} = ${pretty_value(value)}\n"
+          case (name, (t, value)) => s"${name} : ${pretty_value(t)} = ${pretty_value(value)}\n"
         }.mkString("")
         var s = type_map.map {
-          case (name, exp) => s"given ${name} : ${pretty_exp(exp)}\n"
+          case (name, exp) => s"${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
         s"class {${maybe_ln(d)}${maybe_ln(s)}}"
 
       case ValueClInferedFromObj(type_map: ListMap[String, Value]) =>
         var s = type_map.map {
-          case (name, value) => s"given ${name} : ${pretty_value(value)}\n"
+          case (name, value) => s"${name} : ${pretty_value(value)}\n"
         }.mkString("")
         s"class {${maybe_ln(s)}}"
 
       case ValueObj(value_map: ListMap[String, Value]) =>
         var s = value_map.map {
-          case (name, value) => s"let ${name} = ${pretty_value(value)}\n"
+          case (name, value) => s"${name} = ${pretty_value(value)}\n"
         }.mkString("")
         s"object {${maybe_ln(s)}}"
 

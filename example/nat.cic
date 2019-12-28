@@ -1,85 +1,50 @@
 class nat_t {}
 class zero_t {}
-class succ_t { given prev : nat_t }
+class succ_t { prev : nat_t }
 
-function succ {
-  given x : nat_t
-  conclude succ_t
-  return {
-    let prev = x
+succ : {
+  x : nat_t -> succ_t
+} = {
+  x : nat_t => {
+    prev = x
   }
 }
 
-let zero = {}
-let one = succ(zero)
-let two = { let prev = one }
-let three = succ(two)
-let four = succ(three)
-let five = succ(four)
-let six = succ(five)
+zero = {}
+one = succ(zero)
+two = { prev = one }
+three = succ(two)
+four = succ(three)
+five = succ(four)
+six = succ(five)
 
-function nat_add {
-  given x : nat_t
-  given y : nat_t
-  conclude nat_t
-  return switch x {
+nat_add : { x : nat_t, y : nat_t -> nat_t } = {
+  x : nat_t, y : nat_t => switch x {
     case succ_t => succ(nat_add(x.prev, y))
     case zero_t => y
   }
 }
-
-// define nat_add : {
-//   given x : nat_t
-//   given y : nat_t
-//   conclude nat_t
-// } = {
-//   case {
-//     given x : succ_t
-//     given y : nat_t
-//     return succ(nat_add(x.prev, y))
-//   }
-//   case {
-//     given x : zero_t
-//     given y : nat_t
-//     return y
-//   }
-// }
-
-// let nat_add : { nat_t, nat_t -> nat_t }
-// let nat_add = { x : succ_t, y : nat_t => succ(nat_add(x.prev, y)) }
-// let nat_add = { x : zero_t, y : nat_t => y }
-
-// nat_add : { nat_t, nat_t -> nat_t }
-// nat_add = { x : succ_t, y : nat_t => succ(nat_add(x.prev, y)) }
-// nat_add = { x : zero_t, y : nat_t => y }
 
 // nat_add : { nat_t, nat_t -> nat_t } = {
 //   case x : succ_t, y : nat_t => succ(nat_add(x.prev, y))
 //   case x : zero_t, y : nat_t => y
 // }
 
-function nat_mul {
-  given x : nat_t
-  given y : nat_t
-  conclude nat_t
-  return switch x {
+nat_mul : { x : nat_t, y : nat_t -> nat_t } = {
+  x : nat_t, y : nat_t => switch x {
     case succ_t => nat_add(y, nat_mul(x.prev, y))
     case zero_t => zero
   }
 }
 
-function add1 {
-  given x : nat_t
-  conclude succ_t
-  return {
-    let prev = x
+add1 : { x : nat_t -> succ_t } = {
+  x : nat_t => {
+    prev = x
   }
 }
 
-function add2 {
-  given x : nat_t
-  conclude succ_t
-  return add1(add1(x))
+add2 : { x : nat_t -> succ_t } = {
+  x : nat_t => add1(add1(x))
 }
 
 @eq add2(zero).prev = one
