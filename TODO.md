@@ -1,3 +1,4 @@
+- use case-lambda instead of switch
 # Problem
 - Problem: fail to check
   ``` cicada

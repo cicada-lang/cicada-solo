@@ -86,4 +86,14 @@ trait Interpreter {
     }
   }
 
+//   def run_file(file_path: String): Unit = {
+//     val path = os.Path(file_path, base = os.pwd)
+//     if (!os.isFile(path)) {
+//       println(s"not a file: ${path}")
+//       System.exit(1)
+//     }
+//     val code = os.read(path)
+//     run_code(code)
+//   }
+
 }

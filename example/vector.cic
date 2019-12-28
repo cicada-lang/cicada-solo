@@ -2,12 +2,8 @@ class nat_t {}
 class zero_t {}
 class succ_t { prev : nat_t }
 
-succ : {
-  x : nat_t
-  -> succ_t
-} = {
-  x : nat_t
-  => {
+succ : { x : nat_t -> succ_t } = {
+  x : nat_t => {
     prev = x
   }
 }
@@ -20,14 +16,8 @@ four = succ(three)
 five = succ(four)
 six = succ(five)
 
-nat_add : {
-  x : nat_t
-  y : nat_t
-  -> nat_t
-} = {
-  x : nat_t
-  y : nat_t
-  => switch x {
+nat_add : { x : nat_t, y : nat_t -> nat_t } = {
+  x : nat_t, y : nat_t => switch x {
     case succ_t => succ(nat_add(x.prev, y))
     case zero_t => y
   }

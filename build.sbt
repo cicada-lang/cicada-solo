@@ -12,6 +12,10 @@ scalacOptions ++= Seq(
   "-Xfatal-warnings",
 )
 
+libraryDependencies ++= Seq(
+  "com.lihaoyi" %% "os-lib" % "0.6.2",
+)
+
 enablePlugins(JavaAppPackaging)
 publishArtifact in packageDoc := false
 publishArtifact in packageSrc := false
