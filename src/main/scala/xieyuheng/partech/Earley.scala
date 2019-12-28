@@ -1,7 +1,6 @@
 package xieyuheng.partech
 
 import scala.util.{ Try, Success, Failure }
-import scala.collection.mutable.Set
 import scala.collection.mutable.ArrayBuffer
 
 case class Earley() extends Partech {
@@ -75,7 +74,9 @@ case class Earley() extends Partech {
   case class Parsing(tokens: List[Token], rule: Rule) {
 
     val start: Rule = Rule("$", Map("$" -> List(SymbolRule(rule))))
-    var chart: ArrayBuffer[Set[Item]] = ArrayBuffer.fill(tokens.length + 1)(Set())
+    // NOTE `mutable.ArrayBuffer` is used instead of `mutable.HashSet`
+    //   because of `mutable.HashSet` is buggy
+    val chart: ArrayBuffer[ArrayBuffer[Item]] = ArrayBuffer.fill(tokens.length + 1)(ArrayBuffer())
     var finished_p = false
 
     def run(debug_p: Boolean = false): Unit = {
@@ -131,10 +132,11 @@ case class Earley() extends Partech {
               if (symbol.terminal_match(word)) {
                 var symbols = item.symbols
                 symbols = symbols.updated(item.dot, SymbolWord(word))
-                this.chart(i+1).add(item.copy(
+                val new_item = item.copy(
                   dot = item.dot + 1,
                   symbols = symbols,
-                ))
+                )
+                this.add_item_to_chart(new_item, i+1)
               }
             }
           }
@@ -152,10 +154,11 @@ case class Earley() extends Partech {
                   if (symbol.non_terminal_p()) {
                     val rule = symbol.non_terminal_to_rule()
                     if (rule == cause_item.rule) {
-                      this.chart(i+1).add(origin_item.copy(
+                      val new_item = origin_item.copy(
                         dot = origin_item.dot + 1,
                         cause = Some(cause_item),
-                      ))
+                      )
+                      this.add_item_to_chart(new_item, i+1)
                     }
                   }
                 }
@@ -164,17 +167,24 @@ case class Earley() extends Partech {
       }
     }
 
+    def add_item_to_chart(item: Item, i: Int): Unit = {
+      if (!this.chart(i).contains(item)) {
+        this.chart(i).addOne(item)
+      }
+    }
+
     def add_rule_to_chart(rule: Rule, i: Int): Unit = {
       rule.choices.foreach {
         case (choice_name, symbols) =>
-          this.chart(i).add(Item(
+          val item = Item(
             rule,
             choice_name,
             symbols,
             dot = 0,
             origin = i,
             cause = None,
-          ))
+          )
+          this.add_item_to_chart(item, i)
       }
     }
 
