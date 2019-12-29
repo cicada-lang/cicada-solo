@@ -98,8 +98,8 @@ object eval {
                   "value_apply fail, ValueFn arity mismatch\n"
                 ))
               }
-              val map = ListMap(name_list.zip(arg_list): _*)
-              telescope_check(env.to_ctx(), map, telescope)
+              val value_map = ListMap(name_list.zip(arg_list): _*)
+              telescope_check(env.to_ctx(), value_map, telescope)
             } match {
               case Success(()) => true
               case Failure(_error) => false
@@ -109,10 +109,11 @@ object eval {
             val name_list = telescope.name_list
             val map = Map(name_list.zip(arg_list): _*)
             eval(telescope.env.ext_map(map), body)
-
           case None =>
             throw Report(List(
-              "value_apply fail, ValueFnCase mismatch\n"
+              "value_apply fail, ValueFnCase mismatch\n" +
+                s"value: ${pretty_value(value)}\n" +
+                s"arg_list: ${arg_list.map { pretty_value }}\n"
             ))
         }
 

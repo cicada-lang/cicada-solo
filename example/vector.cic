@@ -21,89 +21,64 @@ nat_add : { x : nat_t, y : nat_t -> nat_t } = {
   case x : zero_t, y : nat_t => y
 }
 
-// class vector_t {
-//   A : type
-//   length : nat_t
-// }
+class vector_t {
+  A : type
+  length : nat_t
+}
 
-// class vector_null_t {
-//   A : type
-//   length : zero_t
-// }
+class vector_null_t {
+  A : type
+  length : zero_t
+}
 
-// class vector_cons_t {
-//   A : type
-//   prev : nat_t
-//   head : A
-//   length : succ_t(prev)
-//   tail : vector_t(A, prev)
-// }
+class vector_cons_t {
+  A : type
+  prev : nat_t
+  head : A
+  length : succ_t(prev)
+  tail : vector_t(A, prev)
+}
 
-// class vector_t {
-//   A : type
-//   length : nat_t
-// }
+zero_zeros : vector_t = {
+  A = nat_t
+  length = zero
+}
 
-// class vector_null_t {
-//   A : type
-//   length : zero_t
-// }
+one_zeros : vector_cons_t = {
+  A = nat_t
+  prev = zero
+  head = zero
+  length = one
+  tail = zero_zeros
+}
 
-// class vector_cons_t {
-//   A : type
-//   prev : nat_t
-//   head : A
-//   length : succ_t(prev)
-//   tail : vector_t(A, prev)
-// }
+vector_length : { vector : vector_t -> nat_t } = {
+  vector : vector_t => vector.length
+}
 
-// zero_zeros : vector_t = {
-//   A = nat_t
-//   length = zero
-// }
+@eq one_zeros.length
+  = vector_length(one_zeros)
 
-// // one_zeros : vector_cons_t = {
-// //   A = nat_t
-// //   prev = zero
-// //   head = zero
-// //   length = one
-// //   tail = zero_zeros
-// // }
-
-// one_zeros : vector_cons_t = {
-//   A = nat_t
-//   prev = zero
-//   head = zero
-//   length = one
-//   tail = zero_zeros
-// }
-
-// vector_length : {
-//   vector : vector_t
-//   -> nat_t
-// } = {
-//   vector : vector_t
-//   => vector.length
-// }
-
-// @eq one_zeros.length
-//   = vector_length(one_zeros)
-
-// // vector_append : {
-// //   A : type
-// //   m : nat_t
-// //   n : nat_t
-// //   x : vector_t(A, m)
-// //   y : vector_t(A, n)
-// //   -> vector_t(A, nat_add(m, n))
-// // } = {
-// //   A : type
-// //   m : nat_t
-// //   n : nat_t
-// //   x : vector_t(A, m)
-// //   y : vector_t(A, n)
-// //   => switch x {
-// //     case vector_cons_t(A) => y
-// //     case vector_null_t(A) => y
-// //   }
-// // }
+vector_append : {
+  A : type
+  m : nat_t
+  n : nat_t
+  x : vector_t(A, m)
+  y : vector_t(A, n)
+  -> vector_t(A, nat_add(m, n))
+} = {
+  case
+      A : type
+      m : nat_t
+      n : nat_t
+      x : vector_cons_t(A)
+      y : vector_t(A, n)
+      => y
+  case
+      A : type
+      m : nat_t
+      n : nat_t
+      x : vector_null_t(A)
+      y : vector_t(A, n)
+      => y
+}

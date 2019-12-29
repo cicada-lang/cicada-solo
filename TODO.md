@@ -1,3 +1,7 @@
+- [semantics] use the concept of **free variable proof** to explain the semantics of cicada
+  (traditional type theoretical semantics)
+- `the`
+- use `the` to help `env.to_ctx()`
 # Problem
 - Problem: fail to check
   ``` cicada
@@ -15,10 +19,7 @@
   - use case-lambda instead of switch
   - use `the` to help `env.to_ctx()`
 # cicada
-- [semantics] use the concept of **free variable proof** to explain the semantics of cicada
-  (traditional type theoretical semantics)
 - [example] vector_append
-- `the`
 - [equality] we can implementation equality by built-in equality
   maybe we need to built-in (make it an axiom) the following function
   ``` cicada
