@@ -1,19 +1,19 @@
 class natural_transformation_t {
-  given dom : category_t
-  given cod : category_t
-  given src : functor_t(dom, cod)
-  given tar : functor_t(dom, cod)
-  given component : {
-    given a : dom.object_t
-    conclude cod.morphism_t(src.map(a), tar.map(a))
+  dom : category_t
+  cod : category_t
+  src : functor_t(dom, cod)
+  tar : functor_t(dom, cod)
+  component : {
+    a : dom.object_t
+    -> cod.morphism_t(src.map(a), tar.map(a))
   }
-  given naturality : {
-    given f : dom.morphism_t(a, b)
+  naturality : {
+    f : dom.morphism_t(a, b)
     check component(a) : cod.morphism_t(src.map(a), tar.map(a))
     check tar.fmap(f)  : cod.morphism_t(tar.map(a), tar.map(b))
     check src.fmap(f)  : cod.morphism_t(src.map(a), src.map(b))
     check component(b) : cod.morphism_t(src.map(b), tar.map(b))
-    conclude the_equation_t(
+    -> the_equation_t(
       cod.morphism_t(src.map(a), tar.map(b)),
       cod.compose(component(a), tar.fmap(f)),
       cod.compose(src.fmap(f), component(b)))

@@ -1,39 +1,39 @@
 develop category_t {
   class terminal_t {
-    given object : object_t
-    given morphism : { given x : object_t -> morphism_t(x, object) }
-    given morphism_unique : {
+    object : object_t
+    morphism : { x : object_t -> morphism_t(x, object) }
+    morphism_unique : {
       suppose x : object_t
-      given f : morphism_t(x, object)
-      given g : morphism_t(x, object)
-      conclude the_equation_t(morphism_t(x, object), f, g)
+      f : morphism_t(x, object)
+      g : morphism_t(x, object)
+      -> the_equation_t(morphism_t(x, object), f, g)
     }
   }
 
-  let terminal_iso : {
-    given x, y : terminal_t
-    conclude iso_t(x.object, y.object)
+  terminal_iso : {
+    x, y : terminal_t
+    -> iso_t(x.object, y.object)
   } = {
-    let f = x.morphism(y.object)
-    let g = y.morphism(x.object)
-    return iso_t(x.object, y.object) {
-      let morphism = f
-      let inverse = g
-      let inverse_left = x.morphism_unique(compose(f, g), id(x.object))
-      let inverse_right = y.morphism_unique(compose(g, f), id(y.object))
+    f = x.morphism(y.object)
+    g = y.morphism(x.object)
+    => iso_t(x.object, y.object) {
+      morphism = f
+      inverse = g
+      inverse_left = x.morphism_unique(compose(f, g), id(x.object))
+      inverse_right = y.morphism_unique(compose(g, f), id(y.object))
     }
   }
 
-  let terminal_iso_unique : {
+  terminal_iso_unique : {
     suppose x, y : terminal_t
-    given f : iso_t(x.object, y.object)
-    given g : iso_t(x.object, y.object)
-    conclude the_equation_t(iso_t(x.object, y.object), f, g)
+    f : iso_t(x.object, y.object)
+    g : iso_t(x.object, y.object)
+    -> the_equation_t(iso_t(x.object, y.object), f, g)
   } = {
-    let iso = iso_t(x.object, y.object) {
-      let morphism = y.morphism_unique(f, g)
-      let inverse = y.morphism_unique(f, g)
+    iso = iso_t(x.object, y.object) {
+      morphism = y.morphism_unique(f, g)
+      inverse = y.morphism_unique(f, g)
     }
-    return same(iso)
+    => same(iso)
   }
 }
