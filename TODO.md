@@ -2,6 +2,7 @@
   (traditional type theoretical semantics)
 - `the`
 - use `the` to help `env.to_ctx()`
+- use unified ctx
 # Problem
 - Problem: fail to check
   ``` cicada

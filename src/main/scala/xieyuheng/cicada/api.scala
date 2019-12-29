@@ -61,6 +61,10 @@ object api {
         }
         val t = infer(local_env, local_ctx, exp)
         val value = eval(local_env, exp)
+        if (name == "true") {
+          println(s"t: ${pretty_value(t)}")
+          println(s"v: ${pretty_value(value)}")
+        }
         local_ctx = local_ctx.ext(name, t)
         local_env = local_env.ext(name, value)
         if (config.get("--verbose") != None) {
@@ -111,8 +115,7 @@ object api {
         } match {
           case Success(()) =>
             throw Report(List(
-              s"@refuse fail\n" +
-                s"should refuse the following type membership assertion\n" +
+              s"should refuse the following type membership assertion\n" +
                 s"@refuse ${pretty_exp(exp)} : ${pretty_exp(t_exp)}\n"
             ))
           case Failure(_report: Report) =>
@@ -135,8 +138,7 @@ object api {
           case Failure(report: Report) =>
             report_print(report, config)
             throw Report(List(
-              s"@accept fail\n" +
-                s"should accept the following type membership assertion\n" +
+              s"should accept the following type membership assertion\n" +
                 s"@accept ${pretty_exp(exp)} : ${pretty_exp(t_exp)}\n"
             ))
           case Failure(error) =>
@@ -168,8 +170,7 @@ object api {
           case Failure(report: Report) =>
             report_print(report, config)
             throw Report(List(
-              s"@eq fail\n" +
-                s"should accept the following equivalent assertion\n" +
+              s"should accept the following equivalent assertion\n" +
                 s"@eq ${pretty_exp(rhs)} = ${pretty_exp(lhs)}\n"
             ))
           case Failure(error) =>

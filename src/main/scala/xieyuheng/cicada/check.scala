@@ -35,6 +35,9 @@ object check {
 
         case t =>
           exp match {
+            // TODO var should be handle in infer
+            //   but fail to @accept true : union { case true_t case false_t }
+            //   if var is not handle in check
             case Var(name: String) =>
               env.lookup_value(name) match {
                 case Some(value) =>

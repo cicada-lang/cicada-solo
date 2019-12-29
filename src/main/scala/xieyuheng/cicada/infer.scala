@@ -13,6 +13,9 @@ object infer {
   def infer(env: Env, ctx: Ctx, exp: Exp): Value = {
     try {
       exp match {
+        // ctx.lookup_type(ctx, x) = T
+        // ------
+        // [infer] env, ctx |- x : T
         case Var(name: String) =>
           ctx.lookup_type(name) match {
             case Some(t) => t

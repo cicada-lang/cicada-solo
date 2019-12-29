@@ -10,13 +10,21 @@ class false_t {
   tag : string_t = "false"
 }
 
-object true {
+true = {
   tag = "true"
 }
 
-object false {
+false = {
   tag = "false"
 }
+
+// true : true_t = {
+//   tag = "true"
+// }
+
+// false : false_t = {
+//   tag = "false"
+// }
 
 @refuse true : false_t
 
