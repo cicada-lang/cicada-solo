@@ -110,10 +110,11 @@ object eval {
             val map = Map(name_list.zip(arg_list): _*)
             eval(telescope.env.ext_map(map), body)
           case None =>
+            val arg_list_repr = arg_list.map { pretty_value }.mkString(", ")
             throw Report(List(
               "value_apply fail, ValueFnCase mismatch\n" +
                 s"value: ${pretty_value(value)}\n" +
-                s"arg_list: ${arg_list.map { pretty_value }}\n"
+                s"arg_list: (${arg_list_repr})\n"
             ))
         }
 
