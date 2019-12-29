@@ -9,7 +9,7 @@ import subtype._
 
 object equivalent {
 
-  def equivalent(ctx: Ctx, s: Value, t: Value): Unit = {
+  def equivalent(s: Value, t: Value): Unit = {
     try {
       (s, t) match {
         case (s: ValueType, t: ValueType) => ()
@@ -24,8 +24,8 @@ object equivalent {
           }
 
         case (s: ValueUnion, t: ValueUnion) =>
-          subtype(ctx, s, t)
-          subtype(ctx, t, s)
+          subtype(s, t)
+          subtype(t, s)
 
         case (s: ValuePi, t: ValuePi) =>
           if (s.telescope.type_map.size != t.telescope.type_map.size) {
@@ -42,8 +42,8 @@ object equivalent {
             util.telescope_force_with_return(s.telescope, name_list, s.return_type)
           val (t_type_map, t_return_type) =
             util.telescope_force_with_return(t.telescope, name_list, t.return_type)
-          equivalent_list_map(ctx, t_type_map, s_type_map)
-          equivalent(ctx, s_return_type, t_return_type)
+          equivalent_list_map(t_type_map, s_type_map)
+          equivalent(s_return_type, t_return_type)
 
         case (s: ValueFn, t: ValueFn) =>
           if (s.telescope.type_map.size != t.telescope.type_map.size) {
@@ -60,8 +60,8 @@ object equivalent {
             util.telescope_force_with_return(s.telescope, name_list, s.body)
           val (t_type_map, t_body) =
             util.telescope_force_with_return(t.telescope, name_list, t.body)
-          equivalent_list_map(ctx, t_type_map, s_type_map)
-          equivalent(ctx, s_body, t_body)
+          equivalent_list_map(t_type_map, s_type_map)
+          equivalent(s_body, t_body)
 
         case (s: ValueFnCase, t: ValueFnCase) =>
           if (s.cases.length != t.cases.length) {
@@ -71,7 +71,7 @@ object equivalent {
           }
           s.cases.zip(t.cases).foreach {
             case ((s_telescope, s_body), (t_telescope, t_body)) =>
-              equivalent(ctx, ValueFn(s_telescope, s_body), ValueFn(t_telescope, t_body))
+              equivalent(ValueFn(s_telescope, s_body), ValueFn(t_telescope, t_body))
           }
 
         case (s: ValueCl, t: ValueCl) =>
@@ -80,7 +80,7 @@ object equivalent {
               s"equivalent fail on ValueCl, arity mismatch\n"
             ))
           }
-          equivalent_defined(ctx, s.defined, t.defined)
+          equivalent_defined(s.defined, t.defined)
           // NOTE in the following implementation
           //   the order matters
           val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {
@@ -90,10 +90,10 @@ object equivalent {
           }.toList
           val s_type_map = util.telescope_force(s.telescope, name_list)
           val t_type_map = util.telescope_force(t.telescope, name_list)
-          equivalent_list_map(ctx, t_type_map, s_type_map)
+          equivalent_list_map(t_type_map, s_type_map)
 
         case (s: ValueClInferedFromObj, t: ValueClInferedFromObj) =>
-          equivalent_list_map(ctx, s.type_map, t.type_map)
+          equivalent_list_map(s.type_map, t.type_map)
 
         case (s: ValueCl, t: ValueClInferedFromObj) =>
           if (s.defined.size != 0) {
@@ -103,7 +103,7 @@ object equivalent {
           }
           val name_list = s.telescope.name_list
           val type_map = util.telescope_force(s.telescope, name_list)
-          equivalent_list_map(ctx, type_map, t.type_map)
+          equivalent_list_map(type_map, t.type_map)
 
         case (s: ValueClInferedFromObj, t: ValueCl) =>
           if (t.defined.size != 0) {
@@ -113,10 +113,10 @@ object equivalent {
           }
           val name_list = t.telescope.name_list
           val type_map = util.telescope_force(t.telescope, name_list)
-          equivalent_list_map(ctx, s.type_map, type_map)
+          equivalent_list_map(s.type_map, type_map)
 
         case (s: ValueObj, t: ValueObj) =>
-          equivalent_list_map(ctx, s.value_map, t.value_map)
+          equivalent_list_map(s.value_map, t.value_map)
 
         case (s: NeutralVar, t: NeutralVar) =>
           if (s.name != t.name) {
@@ -127,8 +127,8 @@ object equivalent {
           }
 
         case (s: NeutralAp, t: NeutralAp) =>
-          equivalent(ctx, s.target, t.target)
-          equivalent_list(ctx, s.arg_list, t.arg_list)
+          equivalent(s.target, t.target)
+          equivalent_list(s.arg_list, t.arg_list)
 
         case (s: NeutralDot, t: NeutralDot) =>
           if (s.field != t.field) {
@@ -138,7 +138,7 @@ object equivalent {
                 s"${s.field} != ${t.field}\n"
             ))
           } else {
-            equivalent(ctx, s.target, t.target)
+            equivalent(s.target, t.target)
           }
 
         case _ =>
@@ -157,7 +157,6 @@ object equivalent {
   }
 
   def equivalent_list(
-    ctx: Ctx,
     s_list: List[Value],
     t_list: List[Value],
   ): Unit = {
@@ -169,13 +168,12 @@ object equivalent {
     } else {
       s_list.zip(t_list).foreach {
         case (s, t) =>
-          equivalent(ctx, s, t)
+          equivalent(s, t)
       }
     }
   }
 
   def equivalent_cases(
-    ctx: Ctx,
     s_cases: List[(Value, Value)],
     t_cases: List[(Value, Value)],
   ): Unit = {
@@ -187,14 +185,13 @@ object equivalent {
     } else {
       s_cases.zip(t_cases).foreach {
         case ((st, sv), (tt, tv)) =>
-          equivalent(ctx, st, tt)
-          equivalent(ctx, sv, tv)
+          equivalent(st, tt)
+          equivalent(sv, tv)
       }
     }
   }
 
   def equivalent_list_map(
-    ctx: Ctx,
     s_list_map: ListMap[String, Value],
     t_list_map: ListMap[String, Value],
   ): Unit = {
@@ -208,7 +205,7 @@ object equivalent {
         case (name, t) =>
           s_list_map.get(name) match {
             case Some(s) =>
-              equivalent(ctx, s, t)
+              equivalent(s, t)
             case None =>
               throw Report(List(
                 s"equivalent_list_map fail\n" +
@@ -220,7 +217,6 @@ object equivalent {
   }
 
   def equivalent_defined(
-    ctx: Ctx,
     s_defined: ListMap[String, (Value, Value)],
     t_defined: ListMap[String, (Value, Value)],
   ): Unit = {
@@ -233,8 +229,8 @@ object equivalent {
       case (name, (t, v)) =>
         s_defined.get(name) match {
           case Some((s, u)) =>
-            equivalent(ctx, s, t)
-            equivalent(ctx, u, v)
+            equivalent(s, t)
+            equivalent(u, v)
           case None =>
             throw Report(List(
               s"equivalent_defined can not find field: ${name}\n"

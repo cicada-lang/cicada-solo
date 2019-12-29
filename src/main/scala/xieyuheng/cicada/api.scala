@@ -159,7 +159,7 @@ object api {
         infer(local_env, local_ctx, rhs)
         infer(local_env, local_ctx, lhs)
         Try {
-          equivalent(local_ctx, eval(local_env, rhs), eval(local_env, lhs))
+          equivalent(eval(local_env, rhs), eval(local_env, lhs))
         } match {
           case Success(()) =>
             if (config.get("--verbose") != None) {

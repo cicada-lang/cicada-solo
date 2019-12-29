@@ -40,7 +40,7 @@ object check {
                 case Some(value) =>
                   check(env, ctx, readback(value), t)
                 case None =>
-                  subtype(ctx, infer(env, ctx, exp), t)
+                  subtype(infer(env, ctx, exp), t)
               }
 
             case Obj(value_map: ListMap[String, Exp]) =>
@@ -73,7 +73,7 @@ object check {
                       check(env, local_ctx, exp, ValueType())
                       val s = eval(env, exp)
                       val (_name, t) = t_map.toList(index)
-                      subtype(local_ctx, s, t)
+                      subtype(s, t)
                       local_ctx = local_ctx.ext(name, s)
                   }
                   check(env, local_ctx, body, return_type_value)
@@ -101,7 +101,7 @@ object check {
                           check(env, local_ctx, exp, ValueType())
                           val s = eval(env, exp)
                           val (_name, t) = t_map.toList(index)
-                          subtype(local_ctx, s, t)
+                          subtype(s, t)
                           local_ctx = local_ctx.ext(name, s)
                       }
                       check(env, local_ctx, body, return_type_value)
@@ -115,7 +115,7 @@ object check {
               }
 
             case _ =>
-              subtype(ctx, infer(env, ctx, exp), t)
+              subtype(infer(env, ctx, exp), t)
           }
       }
     } catch {
@@ -173,7 +173,7 @@ object check {
         }
         val v_exp = readback(v_value)
         check(env, ctx, v_exp, t_value)
-        equivalent(ctx, v_value, defined_value)
+        equivalent(v_value, defined_value)
     }
   }
 

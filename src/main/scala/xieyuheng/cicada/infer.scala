@@ -5,7 +5,6 @@ import scala.util.{ Try, Success, Failure }
 
 import eval._
 import check._
-import subtype._
 import readback._
 import pretty._
 
