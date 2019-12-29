@@ -53,6 +53,14 @@ object infer {
           val return_type = readback(return_type_value)
           ValuePi(Telescope(type_map, env), return_type)
 
+        case FnCase(cases) =>
+          val type_list = cases.map {
+            case (type_map, body) =>
+              val exp = Fn(type_map, body)
+              infer(env, ctx, exp)
+          }
+          ValueUnion(type_list)
+
         case Cl(defined, type_map: ListMap[String, Exp]) =>
           var local_env = env
           var local_ctx = ctx
@@ -89,12 +97,8 @@ object infer {
             case ValueType() =>
               eval(env, target) match {
                 case ValueCl(defined, telescope) =>
-                  val name_list = telescope.name_list
-                  val arg_map = ListMap(name_list.zip(arg_list): _*)
-                  val value_map = arg_map.map {
-                    case (name, exp) => (name, eval(env, exp))
-                  }
-                  telescope_check(ctx, value_map, telescope)
+                  val value_list = arg_list.map { eval(env, _) }
+                  val (new_defined, new_telescope) = telescope_apply(telescope, value_list)
                   ValueType()
 
                 case t =>
@@ -158,36 +162,6 @@ object infer {
               check(env, ctx, exp, ValueType())
           }
           ValueType()
-
-        case Switch(name: String, cases: List[(Exp, Exp)]) =>
-          ctx.lookup_type(name) match {
-            case Some(r) =>
-              ValueUnion(cases.map {
-                case (s, v) =>
-                  val s_value = eval(env, s)
-                  Try {
-                    subtype(ctx, s_value, r)
-                  } match {
-                    case Success(()) =>
-                      infer(env, ctx.ext(name, s_value), v)
-                    case Failure(error) =>
-                      throw Report(List(
-                        s"at compile time, we know type of ${name} is ${pretty_value(r)}\n" +
-                          s"in a case of switch\n" +
-                          s"the type ${pretty_value(s_value)} is not a subtype of the abvoe type\n" +
-                          s"it is meaningless to write this case\n" +
-                          s"because we know it will never be matched\n"
-                      ))
-                  }
-              })
-
-            case None =>
-              ValueUnion(cases.map {
-                case (s, v) =>
-                  infer(env, ctx.ext(name, eval(env, s)), v)
-              })
-
-          }
 
         case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
           var local_ctx = ctx

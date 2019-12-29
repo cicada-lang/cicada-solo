@@ -63,6 +63,17 @@ object equivalent {
           equivalent_list_map(ctx, t_type_map, s_type_map)
           equivalent(ctx, s_body, t_body)
 
+        case (s: ValueFnCase, t: ValueFnCase) =>
+          if (s.cases.length != t.cases.length) {
+            throw Report(List(
+              s"equivalent fail on ValueFnCase, length mismatch\n"
+            ))
+          }
+          s.cases.zip(t.cases).foreach {
+            case ((s_telescope, s_body), (t_telescope, t_body)) =>
+              equivalent(ctx, ValueFn(s_telescope, s_body), ValueFn(t_telescope, t_body))
+          }
+
         case (s: ValueCl, t: ValueCl) =>
           if (s.telescope.type_map.size != t.telescope.type_map.size) {
             throw Report(List(
@@ -114,15 +125,6 @@ object equivalent {
                 s"${s.name} != ${t.name}\n"
             ))
           }
-
-        case (s: NeutralSwitch, t: NeutralSwitch) =>
-          if (s.name != t.name) {
-            throw Report(List(
-              s"equivalent fail on NeutralSwitch\n" +
-                s"${s.name} != ${t.name}\n"
-            ))
-          }
-          equivalent_cases(ctx, s.cases, t.cases)
 
         case (s: NeutralAp, t: NeutralAp) =>
           equivalent(ctx, s.target, t.target)

@@ -12,9 +12,8 @@ object grammar {
 
   val preserved =
     List(
-      "type",
-      "class",
-      "union", "switch",
+      "type", "class",
+      "union", "case",
       "string_t",
     )
 
@@ -66,6 +65,7 @@ object grammar {
         "string" -> List(double_quoted_string),
         "pi" -> List("{", $(non_empty_list, given_entry), "-", ">", exp, "}"),
         "fn" -> List("{", $(non_empty_list, given_entry), "=", ">", exp, "}"),
+        "fn_case" -> List("{", $(non_empty_list, fn_case_clause), "}"),
         "ap" -> List(exp, "(", $(non_empty_list, arg_entry), ")"),
         "cl" -> List("class", "{", $(non_empty_list, given_entry), "}"),
         "cl_predefined" -> List("class", "{",
@@ -81,9 +81,6 @@ object grammar {
         "obj_naked_empty" -> List("{", "}"),
         "dot" -> List(exp, ".", identifier),
         "union" -> List("union", "{", $(non_empty_list, union_entry), "}"),
-        "switch" -> List("switch", identifier, "{",
-          $(non_empty_list, case_clause),
-          "}"),
         "block" -> List("{", $(non_empty_list, block_entry), exp, "}"),
       ))
 
@@ -101,6 +98,8 @@ object grammar {
         "fn" -> { case List(_, given_entry_list, _, _, body, _) =>
           val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
           Fn(type_map, exp_matcher(body)) },
+        "fn_case" -> { case List(_, fn_case_clause_list, _) =>
+          FnCase(non_empty_list_matcher(fn_case_clause_matcher)(fn_case_clause_list)) },
         "ap" -> { case List(target, _, arg_entry_list, _) =>
           val arg_list = non_empty_list_matcher(arg_entry_matcher)(arg_entry_list)
           Ap(exp_matcher(target), arg_list) },
@@ -135,11 +134,6 @@ object grammar {
           Dot(exp_matcher(target), field.word) },
         "union" -> { case List(_, _, union_entry_list, _) =>
           Union(non_empty_list_matcher(union_entry_matcher)(union_entry_list)) },
-        "switch" -> { case List(_, Leaf(name), _,
-          case_clause_list,
-          _) =>
-          val cases = non_empty_list_matcher(case_clause_matcher)(case_clause_list)
-          Switch(name.word, cases) },
         "block" -> { case List(_, block_entry_list, body, _) =>
           val block_entry_map = ListMap(non_empty_list_matcher(block_entry_matcher)(block_entry_list): _*)
           Block(block_entry_map, exp_matcher(body)) },
@@ -159,18 +153,18 @@ object grammar {
         },
       ))
 
-  val case_clause: () => Rule =
+  val fn_case_clause: () => Rule =
     () => Rule(
-      "case_clause", Map(
-        "case" -> List("case", exp, "=", ">", exp),
+      "fn_case_clause", Map(
+        "case" -> List("case", $(non_empty_list, given_entry), "=", ">", exp),
       ))
 
-  def case_clause_matcher =
-    Tree.matcher[(Exp, Exp)](
-      "case_clause", Map(
-        "case" -> { case List(_, t, _, _, v) =>
-          (exp_matcher(t), exp_matcher(v))
-        },
+  def fn_case_clause_matcher =
+    Tree.matcher[(ListMap[String, Exp], Exp)](
+      "fn_case_clause", Map(
+        "case" -> { case List(_, given_entry_list, _, _, body) =>
+          val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
+          (type_map, exp_matcher(body)) },
       ))
 
   val arg_entry: () => Rule =

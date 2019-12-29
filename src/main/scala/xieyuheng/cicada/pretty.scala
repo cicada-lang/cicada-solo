@@ -35,6 +35,16 @@ object pretty {
         s = s + s"=> ${pretty_exp(body)}\n"
         s"{${maybe_ln(s)}}"
 
+      case FnCase(cases) =>
+        var s = cases.map {
+          case (type_map, body) =>
+            var s = type_map.map {
+              case (name, exp) => s"${name} : ${pretty_exp(exp)}"
+            }.mkString(", ")
+            s"case ${s} => ${pretty_exp(body)}\n"
+        }.mkString("")
+        s"{${maybe_ln(s)}}"
+
       case Ap(target: Exp, arg_list: List[Exp]) =>
         val args = arg_list.map {
           case exp => pretty_exp(exp)
@@ -65,12 +75,6 @@ object pretty {
         }.mkString("")
         s"union {${maybe_ln(s)}}"
 
-      case Switch(name: String, cases: List[(Exp, Exp)]) =>
-        val s = cases.map {
-          case (t, v) => s"${pretty_exp(t)} => ${pretty_exp(v)}\n"
-        }.mkString("")
-        s"switch ${name} {${maybe_ln(s)}}"
-
       case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
         var s = block_entry_map.map {
           case (name, BlockEntryLet(exp)) => s"${name} = ${pretty_exp(exp)}\n"
@@ -78,28 +82,6 @@ object pretty {
         }.mkString("")
         s = s + s"${pretty_exp(body)}\n"
         s"{${maybe_ln(s)}}"
-    }
-  }
-
-  def pretty_neutral(neutral: Neutral): String = {
-    neutral match {
-      case NeutralVar(name: String) =>
-        s"${name}"
-
-      case NeutralSwitch(name: String, cases: List[(Value, Value)]) =>
-        val s = cases.map {
-          case (t, v) => s"${pretty_value(t)} => ${pretty_value(v)}\n"
-        }.mkString("")
-        s"switch ${name} {${maybe_ln(s)}}"
-
-      case NeutralAp(target: Neutral, arg_list: List[Value]) =>
-        val args = arg_list.map {
-          case value => pretty_value(value)
-        }.mkString(", ")
-        s"${pretty_neutral(target)}(${args})"
-
-      case NeutralDot(target: Neutral, field: String) =>
-        s"${pretty_neutral(target)}.${field}"
     }
   }
 
@@ -127,6 +109,16 @@ object pretty {
           case (name, exp) => s"${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
         s = s + s"=> ${pretty_exp(body)}\n"
+        s"{${maybe_ln(s)}}"
+
+      case ValueFnCase(cases) =>
+        var s = cases.map {
+          case (telescope, body) =>
+            var s = telescope.type_map.map {
+              case (name, exp) => s"${name} : ${pretty_exp(exp)}"
+            }.mkString(", ")
+            s"case ${s} => ${pretty_exp(body)}\n"
+        }.mkString("")
         s"{${maybe_ln(s)}}"
 
       case ValueCl(
@@ -163,4 +155,21 @@ object pretty {
         pretty_neutral(neutral)
     }
   }
+
+  def pretty_neutral(neutral: Neutral): String = {
+    neutral match {
+      case NeutralVar(name: String) =>
+        s"${name}"
+
+      case NeutralAp(target: Neutral, arg_list: List[Value]) =>
+        val args = arg_list.map {
+          case value => pretty_value(value)
+        }.mkString(", ")
+        s"${pretty_neutral(target)}(${args})"
+
+      case NeutralDot(target: Neutral, field: String) =>
+        s"${pretty_neutral(target)}.${field}"
+    }
+  }
+
 }

@@ -19,22 +19,13 @@ five = succ(four)
 six = succ(five)
 
 nat_add : { x : nat_t, y : nat_t -> nat_t } = {
-  x : nat_t, y : nat_t => switch x {
-    case succ_t => succ(nat_add(x.prev, y))
-    case zero_t => y
-  }
+  case x : succ_t, y : nat_t => succ(nat_add(x.prev, y))
+  case x : zero_t, y : nat_t => y
 }
 
-// nat_add : { nat_t, nat_t -> nat_t } = {
-//   case x : succ_t, y : nat_t => succ(nat_add(x.prev, y))
-//   case x : zero_t, y : nat_t => y
-// }
-
 nat_mul : { x : nat_t, y : nat_t -> nat_t } = {
-  x : nat_t, y : nat_t => switch x {
-    case succ_t => nat_add(y, nat_mul(x.prev, y))
-    case zero_t => zero
-  }
+  case x : succ_t, y : nat_t => nat_add(y, nat_mul(x.prev, y))
+  case x : zero_t, y : nat_t => zero
 }
 
 add1 : { x : nat_t -> succ_t } = {

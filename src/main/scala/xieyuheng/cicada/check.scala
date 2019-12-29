@@ -85,32 +85,32 @@ object check {
                   ))
               }
 
-            case Switch(name: String, cases: List[(Exp, Exp)]) =>
-              ctx.lookup_type(name) match {
-                case Some(r) =>
-                  cases.foreach {
-                    case (s, v) =>
-                      val s_value = eval(env, s)
-                      Try {
-                        subtype(ctx, s_value, r)
-                      } match {
-                        case Success(()) =>
-                          check(env, ctx.ext(name, s_value), v, t)
-                        case Failure(error) =>
-                          throw Report(List(
-                            s"at compile time, we know type of ${name} is ${pretty_value(r)}\n" +
-                              s"in a case of switch\n" +
-                              s"the type ${pretty_value(s_value)} is not a subtype of the abvoe type\n" +
-                              s"it is meaningless to write this case\n" +
-                              s"because we know it will never be matched\n"
-                          ))
+            case FnCase(cases) =>
+              cases.foreach {
+                case (type_map, body) =>
+                  t match {
+                    case pi: ValuePi =>
+                      val (t_map, return_type_value) =
+                        util.telescope_force_with_return(
+                          pi.telescope,
+                          pi.telescope.name_list,
+                          pi.return_type)
+                      var local_ctx = ctx
+                      type_map.zipWithIndex.foreach {
+                        case ((name, exp), index) =>
+                          check(env, local_ctx, exp, ValueType())
+                          val s = eval(env, exp)
+                          val (_name, t) = t_map.toList(index)
+                          subtype(local_ctx, s, t)
+                          local_ctx = local_ctx.ext(name, s)
                       }
-                  }
+                      check(env, local_ctx, body, return_type_value)
 
-                case None =>
-                  cases.foreach {
-                    case (s, v) =>
-                      check(env, ctx.ext(name, eval(env, s)), v, t)
+                    case _ =>
+                      throw Report(List(
+                        s"expecting pi type\n" +
+                          s"but found: ${pretty_value(t)}\n"
+                      ))
                   }
               }
 

@@ -31,6 +31,16 @@ object readback {
           type_value_map.map { case (name, v) => (name, readback(v)) },
           readback(body_value))
 
+      case ValueFnCase(cases) =>
+        FnCase(cases.map {
+          case (telescope, body) =>
+            val name_list = telescope.name_list
+            val (type_value_map, body_value) =
+              util.telescope_force_with_return(telescope, name_list, body)
+            val type_map = type_value_map.map { case (name, v) => (name, readback(v)) }
+            (type_map, readback(body_value))
+        })
+
       case ValueCl(defined, telescope: Telescope) =>
         val name_list = telescope.name_list
         Cl(
@@ -51,11 +61,6 @@ object readback {
 
       case NeutralVar(name: String) =>
         Var(name)
-
-      case NeutralSwitch(name: String, cases: List[(Value, Value)]) =>
-        Switch(name, cases.map {
-          case (t, v) => (readback(t), readback(v))
-        })
 
       case NeutralAp(target: Neutral, arg_list: List[Value]) =>
         Ap(readback(target), arg_list.map(readback))

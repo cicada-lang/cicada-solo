@@ -35,8 +35,13 @@ object eval {
       case Fn(type_map: ListMap[String, Exp], body: Exp) =>
         ValueFn(Telescope(type_map: ListMap[String, Exp], env: Env), body: Exp)
 
+      case FnCase(cases) =>
+        ValueFnCase(cases.map {
+          case (type_map, body) => (Telescope(type_map, env), body)
+        })
+
       case Ap(target: Exp, arg_list: List[Exp]) =>
-        value_apply(eval(env, target), arg_list.map { eval(env, _) })
+        value_apply(env, eval(env, target), arg_list.map { eval(env, _) })
 
       case Cl(defined, type_map: ListMap[String, Exp]) =>
         ValueCl(
@@ -54,43 +59,6 @@ object eval {
       case Union(type_list: List[Exp]) =>
         ValueUnion(type_list.map { eval(env, _) })
 
-      case Switch(name: String, cases: List[(Exp, Exp)]) =>
-        env.lookup_value(name) match {
-          // TODO
-          case Some(value: NeutralVar) =>
-            NeutralSwitch(name, cases.map {
-              case (t, v) => (eval(env, t), eval(env, v))
-            })
-          case Some(value) =>
-            // NOTE this is the only place in `eval` to use `check` and `infer`
-            //   because we need to check not `Exp : Value` but `Value : Value`
-            //   and we have no `ctx` in `eval`
-            //   maybe this is not good and we need to fix this
-            val ctx = env.to_ctx()
-            val result = cases.find {
-              case (t, _v) =>
-                Try {
-                  check(env, ctx, readback(value), eval(env, t))
-                } match {
-                  case Success(()) => true
-                  case Failure(_error) => false
-                }
-            }
-            result match {
-              case Some((_t, v)) =>
-                eval(env, v)
-              case None =>
-                throw Report(List(
-                  "eval fail, switch mismatch\n"
-                ))
-            }
-
-          case None =>
-            NeutralSwitch(name, cases.map {
-              case (t, v) => (eval(env, t), eval(env, v))
-            })
-        }
-
       case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
         var local_env = env
         block_entry_map.foreach {
@@ -105,20 +73,47 @@ object eval {
     }
   }
 
-  def value_apply(value: Value, arg_list: List[Value]): Value = {
+  def value_apply(env: Env, value: Value, arg_list: List[Value]): Value = {
     value match {
       case neutral: Neutral =>
         NeutralAp(neutral, arg_list)
 
       case ValueFn(Telescope(type_map: ListMap[String, Exp], env: Env), body: Exp) =>
         val name_list = type_map.keys.toList
-        if (name_list.length != type_map.size) {
+        if (name_list.length != arg_list.length) {
           throw Report(List(
             "value_apply fail, ValueFn arity mismatch\n"
           ))
-        } else {
-          val map = Map(name_list.zip(arg_list): _*)
-          eval(env.ext_map(map), body)
+        }
+        val map = Map(name_list.zip(arg_list): _*)
+        eval(env.ext_map(map), body)
+
+      case ValueFnCase(cases) =>
+        cases.find {
+          case (telescope, body) =>
+            Try {
+              val name_list = telescope.name_list
+              if (name_list.length != arg_list.length) {
+                throw Report(List(
+                  "value_apply fail, ValueFn arity mismatch\n"
+                ))
+              }
+              val map = ListMap(name_list.zip(arg_list): _*)
+              telescope_check(env.to_ctx(), map, telescope)
+            } match {
+              case Success(()) => true
+              case Failure(_error) => false
+            }
+        } match {
+          case Some((telescope, body)) =>
+            val name_list = telescope.name_list
+            val map = Map(name_list.zip(arg_list): _*)
+            eval(telescope.env.ext_map(map), body)
+
+          case None =>
+            throw Report(List(
+              "value_apply fail, ValueFnCase mismatch\n"
+            ))
         }
 
       case ValueCl(defined, telescope: Telescope) =>

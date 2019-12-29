@@ -21,11 +21,8 @@ object false {
 @refuse true : false_t
 
 not : { x : bool_t -> bool_t } = {
-  x : bool_t
-    => switch x {
-      case false_t => true
-      case true_t => false
-    }
+  case x : false_t => true
+  case x : true_t => false
 }
 
 @show bool_t

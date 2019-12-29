@@ -12,6 +12,7 @@ final case class ValueStrType() extends Value
 final case class ValueStr(str: String) extends Value
 final case class ValuePi(telescope: Telescope, return_type: Exp) extends Value
 final case class ValueFn(telescope: Telescope, body: Exp) extends Value
+final case class ValueFnCase(cases: List[(Telescope, Exp)]) extends Value
 final case class ValueCl(
   defined: ListMap[String, (Value, Value)],
   telescope: Telescope,
@@ -22,7 +23,5 @@ final case class ValueUnion(type_list: List[Value]) extends Value
 
 sealed trait Neutral extends Value
 final case class NeutralVar(name: String) extends Neutral
-// final case class NeutralSwitch(target: Neutral, cases: List[(Value, Value)]) extends Neutral
-final case class NeutralSwitch(name: String, cases: List[(Value, Value)]) extends Neutral
 final case class NeutralAp(target: Neutral, arg_list: List[Value]) extends Neutral
 final case class NeutralDot(target: Neutral, field: String) extends Neutral

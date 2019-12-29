@@ -1,4 +1,3 @@
-- use case-lambda instead of switch
 # Problem
 - Problem: fail to check
   ``` cicada
@@ -19,9 +18,6 @@
 - [semantics] use the concept of **free variable proof** to explain the semantics of cicada
   (traditional type theoretical semantics)
 - [example] vector_append
-- we also take this opportunity to handle currying
-  - just push value to env and return new `ValueFn`
-  - also need to change `infer`
 - `the`
 - [equality] we can implementation equality by built-in equality
   maybe we need to built-in (make it an axiom) the following function

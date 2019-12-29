@@ -40,38 +40,22 @@ list_cons_unit : {
   }
 }
 
-list_length : {
-  x : list_t
-  -> nat_t
-} = {
-  x : list_t
-  => switch x {
-    case cons_t => succ(list_length(x.cdr))
-    case null_t => zero
-  }
+list_length : { x : list_t -> nat_t } = {
+  case x : cons_t => succ(list_length(x.cdr))
+  case x : null_t => zero
 }
 
 @eq list_length(null_unit) = zero
 @eq list_length(list_cons_unit(null_unit)) = one
 @eq list_length(list_cons_unit(list_cons_unit(null_unit))) = two
 
-list_append : {
-  A : type
-  x : list_t(A)
-  y : list_t(A)
-  -> list_t(A)
-} = {
-  A : type
-  x : list_t(A)
-  y : list_t(A)
-  => switch x {
-    case cons_t(A) => {
-      A = A
-      car = x.car
-      cdr = list_append(A, x.cdr, y)
-    }
-    case null_t(A) => y
+list_append : { A : type, x : list_t(A), y : list_t(A) -> list_t(A) } = {
+  case A : type, x : cons_t(A), y : list_t(A) => {
+    A = A
+    car = x.car
+    cdr = list_append(A, x.cdr, y)
   }
+  case A : type, x : null_t(A), y : list_t(A) => y
 }
 
 @eq list_append(unit_t, null_unit, null_unit) = null_unit
