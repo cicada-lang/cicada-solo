@@ -13,7 +13,7 @@ object infer {
   def infer(env: Env, ctx: Ctx, exp: Exp): Value = {
     try {
       exp match {
-        // ctx.lookup_type(ctx, x) = T
+        // ctx.lookup_type(x) == T
         // ------
         // [infer] env, ctx |- x : T
         case Var(name: String) =>
@@ -89,6 +89,15 @@ object infer {
               (name, infer(env, ctx, readback(value)))
           })
 
+        // NOTE env1 + (x1 = a1 : A1)
+        //   should be
+        //      env1 + (x1 = eval(env, a1) : env1(env1, A1))
+        // [infer] env |- f : { x1 : A1, x2 : A2, ... -> T } @ env1
+        // [check] env |- a1 : eval(env1, A1)
+        // [check] env |- a2 : eval(env1 + (x1 = a1 : A1), A2)
+        // [check] ...
+        // ------------
+        // [infer] env |- f(a1, a2, ...) : eval(env1 + (x1 = A1), T)
         case Ap(target: Exp, arg_list: List[Exp]) =>
           infer(env, ctx, target) match {
             case ValuePi(telescope: Telescope, return_type: Exp) =>
@@ -115,6 +124,10 @@ object infer {
               ))
           }
 
+        // TODO maybe we should not use `ValueClInferedFromObj`
+        // [infer]
+        // ------------
+        // [infer]
         case Dot(target: Exp, field: String) =>
           val t_infered = infer(env, ctx, target)
 

@@ -1,0 +1,14 @@
+class nat_t {
+  __club_name__ : string_t = "nat_t"
+}
+
+class zero_t {
+  __club_name__ : string_t = "nat_t"
+  __member_name__ : string_t = "zero_t"
+}
+
+class succ_t {
+  __club_name__ : string_t = "nat_t"
+  __member_name__ : string_t = "succ_t"
+  prev : nat_t
+}

@@ -1,8 +1,8 @@
-- [semantics] use the concept of **free variable proof** to explain the semantics of cicada
-  (traditional type theoretical semantics)
+- maybe we should not re-factor out telescope at the first place
+- the [infer] of dot
 - `the`
 - use `the` to help `env.to_ctx()`
-- use unified ctx
+- use unified env
 # Problem
 - Problem: fail to check
   ``` cicada
@@ -46,6 +46,12 @@
 - [test] define  `contextual_pre_category_t` as algebraic structure
 - mutual recursive definition only at top level
 - [module system] not so hurry, after the core is stable
+# declarative DSL for writing inference rules
+- the traditional way of specifying semantics by inference rules,
+  as a DSL, just like the DSL for specifying grammar by grammar rules,
+  it should be declarative.
+- how to handle common collection like list and map?
+- should we use sequent calculus or natural deduction?
 # js backend
 - a simple compiler to translate the semantics of `eval` to js
 # partech

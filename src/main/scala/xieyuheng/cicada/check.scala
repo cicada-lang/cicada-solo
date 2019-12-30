@@ -46,6 +46,25 @@ object check {
                   subtype(infer(env, ctx, exp), t)
               }
 
+            // TODO should combine the following rules
+            // without defined
+            // [check] a1 : eval(env1, A1)
+            // [check] a2 : eval(env1 + (x1 = a1 : A1), A2)
+            // [check] ...
+            // ------------
+            // [check] env |- { x1 = a1, x2 = a2, ... } : { x1 : A1, x2 : A2, ... } @ env1
+            // NOTE env1 + (x1 = a1 : A1)
+            //   should be
+            //      env1 + (x1 = eval(env, a1) : env1(env1, A1))
+            // with defined
+            // [check] a1 : A1
+            // [equal] eval(env, a1) = d1
+            // [check] a2 : A2
+            // [equal] eval(env + (x1 = a1 : A1), a2) = d2
+            // [check] ...
+            // [equal] ...
+            // ------------
+            // [check] env |- { x1 = a1, x2 = a2, ... } : { x1 = d1 : A1, x2 = d2 : A2, ... }
             case Obj(value_map: ListMap[String, Exp]) =>
               t match {
                 case cl: ValueCl =>
@@ -53,6 +72,7 @@ object check {
                     case (name, exp) => (name, eval(env, exp))
                   }
                   defined_check(env, ctx, v_map, cl.defined)
+                  // TODO the following ctx should use defined_check
                   telescope_check(ctx, v_map, cl.telescope)
 
                 case _ =>
@@ -62,6 +82,17 @@ object check {
                   ))
               }
 
+            // NOTE free variable proof occurs here
+            //   because in `env + (x1 : A1)`, `x1` is a free variable
+            //   it only have type but does not have value
+            // [subtype] eval(env, A1) <: eval(env1, B1)
+            // [subtype] eval(env + (x1 : A1), A2) <: eval(env1 + (y1 : A1), B2)
+            // [subtype] ...
+            // [check] env + (x1 : A1, x2 : A2, ...), ctx |-
+            //   r : eval(env1 + (y1 : A1, y2 : A2, ...), R)
+            // ------------
+            // [check] env |- { x1 : A1, x2 : A2, ... => r }
+            //              : { y1 : B1, y2 : B2, ... -> R } @ env1
             case Fn(type_map: ListMap[String, Exp], body: Exp) =>
               t match {
                 case pi: ValuePi =>
