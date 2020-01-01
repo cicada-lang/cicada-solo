@@ -47,24 +47,29 @@ object check {
               }
 
             // TODO should combine the following rules
-            // without defined
-            // [check] a1 : eval(env1, A1)
-            // [check] a2 : eval(env1 + (x1 = a1 : A1), A2)
+            // CASE without defined
+            // [check] env |- a1 : eval(env1, A1)
+            // [check] env + (x1 = a1 : A1) |- a2 : eval(env1 + (x1 = a1 : A1), A2)
             // [check] ...
             // ------------
             // [check] env |- { x1 = a1, x2 = a2, ... } : { x1 : A1, x2 : A2, ... } @ env1
             // NOTE env1 + (x1 = a1 : A1)
             //   should be
             //      env1 + (x1 = eval(env, a1) : env1(env1, A1))
-            // with defined
-            // [check] a1 : A1
+            // CASE with defined
+            // [check] env |- a1 : A1
             // [equal] eval(env, a1) = d1
-            // [check] a2 : A2
+            // [check] env + (x1 = a1 : A1) |- a2 : A2
             // [equal] eval(env + (x1 = a1 : A1), a2) = d2
             // [check] ...
             // [equal] ...
             // ------------
             // [check] env |- { x1 = a1, x2 = a2, ... } : { x1 = d1 : A1, x2 = d2 : A2, ... }
+            // [check] env |- { x1 = a1, x2 = a2, ... }
+            //              : { x1 = d1 : A1
+            //                  x2 = d2 : A2
+            //                  ...
+            //                  y1 : A1, y2 : A2, ... } @ env1
             case Obj(value_map: ListMap[String, Exp]) =>
               t match {
                 case cl: ValueCl =>

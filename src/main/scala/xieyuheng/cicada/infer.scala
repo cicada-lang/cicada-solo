@@ -13,9 +13,8 @@ object infer {
   def infer(env: Env, ctx: Ctx, exp: Exp): Value = {
     try {
       exp match {
-        // ctx.lookup_type(x) == T
         // ------
-        // [infer] env, ctx |- x : T
+        // [infer] env, ctx |- x : ctx.lookup_type(x)
         case Var(name: String) =>
           ctx.lookup_type(name) match {
             case Some(t) => t
@@ -124,10 +123,12 @@ object infer {
               ))
           }
 
+        // CASE `ValueClInferedFromObj`
         // TODO maybe we should not use `ValueClInferedFromObj`
-        // [infer]
+        // [infer] env |- e : ValueClInferedFromObj { ..., m : T, ... }
         // ------------
-        // [infer]
+        // [infer] env |- e.m : T
+        // CASE `ValueCl` TODO
         case Dot(target: Exp, field: String) =>
           val t_infered = infer(env, ctx, target)
 
