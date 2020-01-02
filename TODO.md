@@ -1,3 +1,8 @@
+# total rewrite
+- use unified env
+- without `the`
+- without `union`
+- without factoring out telescope
 # sm
 - use .sm
 - combine CASE without defined and CASE with defined
