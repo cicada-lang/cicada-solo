@@ -66,7 +66,7 @@ object api {
           println(s"v: ${pretty_value(value)}")
         }
         local_ctx = local_ctx.ext(name, t)
-        local_env = local_env.ext(name, value)
+        local_env = local_env.ext(name, ValueThe(t, value))
         if (config.get("--verbose") != None) {
           println(s"let ${name} = ${pretty_exp(exp)}")
           console_print_with_color_when {

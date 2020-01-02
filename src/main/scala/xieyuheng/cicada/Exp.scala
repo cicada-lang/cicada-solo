@@ -19,6 +19,7 @@ final case class Obj(value_map: ListMap[String, Exp]) extends Exp
 final case class Dot(target: Exp, field: String) extends Exp
 final case class Union(type_list: List[Exp]) extends Exp
 final case class Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) extends Exp
+final case class The(t: Exp, value: Exp) extends Exp
 
 sealed trait BlockEntry
 final case class BlockEntryLet(value: Exp) extends BlockEntry

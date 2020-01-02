@@ -20,8 +20,10 @@ final case class ValueCl(
 final case class ValueClInferedFromObj(type_map: ListMap[String, Value]) extends Value
 final case class ValueObj(value_map: ListMap[String, Value]) extends Value
 final case class ValueUnion(type_list: List[Value]) extends Value
+final case class ValueThe(t: Value, value: Value) extends Value
 
 sealed trait Neutral extends Value
 final case class NeutralVar(name: String) extends Neutral
 final case class NeutralAp(target: Neutral, arg_list: List[Value]) extends Neutral
 final case class NeutralDot(target: Neutral, field: String) extends Neutral
+final case class NeutralThe(t: Value, value: Neutral) extends Neutral

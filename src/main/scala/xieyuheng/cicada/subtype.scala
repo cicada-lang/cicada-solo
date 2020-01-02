@@ -74,6 +74,19 @@ object subtype {
             s.type_map,
             util.telescope_force(t.telescope, t.telescope.name_list))
 
+        case (s: ValueThe, t: ValueThe) =>
+          if (s.t != ValueType()) {
+            throw Report(List(
+              s"type of the s is not type: ${pretty_value(s.t)}\n"
+            ))
+          }
+          if (t.t != ValueType()) {
+            throw Report(List(
+              s"type of the t is not type: ${pretty_value(t.t)}\n"
+            ))
+          }
+          subtype(s.value, t.value)
+
         case (s, t) =>
           equivalent(s, t)
       }

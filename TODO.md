@@ -4,7 +4,6 @@
 - the [infer] of dot
 # impl
 - maybe we should not re-factor out telescope at the first place
-- `the`
 - use `the` to help `env.to_ctx()`
 - use unified env
 # Problem

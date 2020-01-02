@@ -70,6 +70,15 @@ object eval {
             local_env = local_env.ext(name, value)
         }
         eval(local_env, body)
+
+      case The(t, value) =>
+        eval(env, value) match {
+          case value: Neutral =>
+            NeutralThe(eval(env, t), value)
+          case value =>
+            ValueThe(eval(env, t), value)
+        }
+
     }
   }
 
@@ -77,6 +86,9 @@ object eval {
     value match {
       case neutral: Neutral =>
         NeutralAp(neutral, arg_list)
+
+      case ValueThe(t, value) =>
+        value_apply(env, value, arg_list)
 
       case ValueFn(Telescope(type_map: ListMap[String, Exp], env: Env), body: Exp) =>
         val name_list = type_map.keys.toList
@@ -144,6 +156,9 @@ object eval {
                 s"on value: ${pretty_value(value)}\n"
             ))
         }
+
+      case ValueThe(t, value) =>
+        value_dot(value, field)
 
       case _ =>
         throw Report(List(

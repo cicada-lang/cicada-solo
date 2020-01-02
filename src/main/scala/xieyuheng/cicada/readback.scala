@@ -59,6 +59,9 @@ object readback {
       case ValueUnion(type_list: List[Value]) =>
         Union(type_list.map { readback })
 
+      case ValueThe(t: Value, value: Value) =>
+        The(readback(t), readback(value))
+
       case NeutralVar(name: String) =>
         Var(name)
 
@@ -67,6 +70,9 @@ object readback {
 
       case NeutralDot(target: Neutral, field: String) =>
         Dot(readback(target), field)
+
+      case NeutralThe(t: Value, value: Neutral) =>
+        The(readback(t), readback(value))
     }
   }
 

@@ -82,6 +82,9 @@ object pretty {
         }.mkString("")
         s = s + s"${pretty_exp(body)}\n"
         s"{${maybe_ln(s)}}"
+
+      case The(t, value) =>
+        s"the(${pretty_exp(t)}, ${pretty_exp(value)})"
     }
   }
 
@@ -151,6 +154,9 @@ object pretty {
         }.mkString("")
         s"union {${maybe_ln(s)}}"
 
+      case ValueThe(t, value) =>
+        s"the(${pretty_value(t)}, ${pretty_value(value)})"
+
       case neutral: Neutral =>
         pretty_neutral(neutral)
     }
@@ -169,6 +175,9 @@ object pretty {
 
       case NeutralDot(target: Neutral, field: String) =>
         s"${pretty_neutral(target)}.${field}"
+
+      case NeutralThe(t, value) =>
+        s"the(${pretty_value(t)}, ${pretty_neutral(value)})"
     }
   }
 

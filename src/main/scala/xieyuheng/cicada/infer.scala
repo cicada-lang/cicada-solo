@@ -188,6 +188,11 @@ object infer {
               local_ctx = local_ctx.ext(name, eval(env, exp))
           }
           infer(env, local_ctx, body)
+
+        case The(t, value) =>
+          val t_value = eval(env, t)
+          check(env, ctx, value, t_value)
+          t_value
       }
     } catch {
       case report: Report =>

@@ -33,6 +33,9 @@ object check {
               ))
           }
 
+        case ValueThe(_t, value) =>
+          check(env, ctx, exp, value)
+
         case t =>
           exp match {
             // TODO var should be handle in infer
@@ -152,6 +155,10 @@ object check {
                       ))
                   }
               }
+
+            case The(s, value) =>
+              subtype(eval(env, s), t)
+              check(env, ctx, value, t)
 
             case _ =>
               subtype(infer(env, ctx, exp), t)

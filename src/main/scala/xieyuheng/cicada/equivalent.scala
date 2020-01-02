@@ -118,6 +118,16 @@ object equivalent {
         case (s: ValueObj, t: ValueObj) =>
           equivalent_list_map(s.value_map, t.value_map)
 
+        case (s: ValueThe, t: ValueThe) =>
+          equivalent(s.t, t.t)
+          equivalent(s.value, t.value)
+
+        case (s, t: ValueThe) =>
+          equivalent(s, t.value)
+
+        case (s: ValueThe, t) =>
+          equivalent(s.value, t)
+
         case (s: NeutralVar, t: NeutralVar) =>
           if (s.name != t.name) {
             throw Report(List(
@@ -140,6 +150,16 @@ object equivalent {
           } else {
             equivalent(s.target, t.target)
           }
+
+        case (s: NeutralThe, t: NeutralThe) =>
+          equivalent(s.t, t.t)
+          equivalent(s.value, t.value)
+
+        case (s, t: NeutralThe) =>
+          equivalent(s, t.value)
+
+        case (s: NeutralThe, t) =>
+          equivalent(s.value, t)
 
         case _ =>
           throw Report(List(

@@ -1,0 +1,19 @@
+class nat_t {}
+class zero_t {}
+class succ_t { prev : nat_t }
+
+succ : {
+  x : nat_t -> succ_t
+} = {
+  x : nat_t => {
+    prev = x
+  }
+}
+
+zero = the(nat_t, {})
+one = the(nat_t, succ(zero))
+two = the(nat_t, { prev = one })
+
+@show zero
+@show one
+@show two
