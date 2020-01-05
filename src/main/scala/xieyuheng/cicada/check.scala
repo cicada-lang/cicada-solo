@@ -78,42 +78,49 @@ object check {
               ))
           }
 
-//         // NOTE free variable proof occurs here
-//         //   because in `env + (x1 : A1)`, `x1` is a free variable
-//         //   it only have type but does not have value
-//         // [subtype] eval(env, A1) <: eval(env1, B1)
-//         // [subtype] eval(env + (x1 : A1), A2) <: eval(env1 + (y1 : A1), B2)
-//         // [subtype] ...
-//         // [check] env + (x1 : A1, x2 : A2, ...), ctx |-
-//         //   r : eval(env1 + (y1 : A1, y2 : A2, ...), R)
-//         // ------
-//         // [check] env |- { x1 : A1, x2 : A2, ... => r }
-//         //              : { y1 : B1, y2 : B2, ... -> R } @ env1
-//         case Fn(type_map: ListMap[String, Exp], body: Exp) =>
-//           t match {
-//             case pi: ValuePi =>
-//               val (t_map, return_type_value) =
-//                 util.telescope_force_with_return(
-//                   pi.telescope,
-//                   pi.telescope.name_list,
-//                   pi.return_type)
-//               var local_ctx = ctx
-//               type_map.zipWithIndex.foreach {
-//                 case ((name, exp), index) =>
-//                   check(env, local_ctx, exp, ValueType())
-//                   val s = eval(env, exp)
-//                   val (_name, t) = t_map.toList(index)
-//                   subtype(s, t)
-//                   local_ctx = local_ctx.ext(name, s)
-//               }
-//               check(env, local_ctx, body, return_type_value)
+        case Fn(type_map: ListMap[String, Exp], body: Exp) =>
+          t match {
+            case ValuePi(telescope, return_type) =>
+              // NOTE free variable proof occurs here
+              //   because in `(x1 : A1)`, `x1` is a free variable
+              //   it only have type but does not have value
+              // subtype(eval(local_env, A1), eval(telescope_env, B1))
+              // fresh_var = fresh_var_from(x1, y1)
+              // local_env = local_env.ext(x1, eval(local_env, A1), fresh_var)
+              // telescope_env = telescope_env.ext(y1, eval(local_env, A1), fresh_var)
+              // ...
+              // check(local_env, r, eval(telescope_env, R))
+              // ------
+              // check(
+              //   local_env,
+              //   { x1 : A1, x2 : A2, ... => r },
+              //   { y1 : B1, y2 : B2, ... -> R } @ telescope_env)
+              if (type_map.size != telescope.size) {
+                throw Report(List(
+                  s"Fn and pi type arity mismatch\n" +
+                    s"arity of fn: ${type_map.size}\n" +
+                    s"arity of pi: ${telescope.size}\n"
+                ))
+              }
+              var local_env = env
+              var telescope_env = telescope.env
+              telescope.type_map.zip(type_map).foreach {
+                case ((pi_arg_name, pi_arg_type), (fn_arg_name, fn_arg_type)) =>
+                  val pi_arg_type_value = eval(telescope_env, pi_arg_type)
+                  val fn_arg_type_value = eval(local_env, fn_arg_type)
+                  subtype(fn_arg_type_value, pi_arg_type_value)
+                  val fresh_var = util.fresh_var_from(
+                    s"check:${pi_arg_name}:${fn_arg_name}")
+                  local_env = local_env.ext(fn_arg_name, fn_arg_type_value, fresh_var)
+                  telescope_env = telescope_env.ext(pi_arg_name, pi_arg_type_value, fresh_var)
+              }
 
-//             case _ =>
-//               throw Report(List(
-//                 s"expecting pi type\n" +
-//                   s"but found: ${pretty_value(t)}\n"
-//               ))
-//           }
+            case _ =>
+              throw Report(List(
+                s"expecting pi type\n" +
+                  s"but found: ${pretty_value(t)}\n"
+              ))
+          }
 
 //         case FnCase(cases) =>
 //           cases.foreach {

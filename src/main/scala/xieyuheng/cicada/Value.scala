@@ -4,6 +4,7 @@ import collection.immutable.ListMap
 
 case class Telescope(type_map: ListMap[String, Exp], env: Env) {
   val name_list = this.type_map.keys.toList
+  val size = this.type_map.size
 }
 
 sealed trait Value

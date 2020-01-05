@@ -75,7 +75,7 @@ object eval {
         NeutralAp(neutral, arg_list.map { eval(env, _) })
 
       case ValueFn(telescope: Telescope, body: Exp) =>
-        if (telescope.name_list.length != arg_list.length) {
+        if (telescope.size != arg_list.length) {
           throw Report(List(
             "eval_apply fail, ValueFn arity mismatch\n"
           ))
@@ -96,7 +96,7 @@ object eval {
         cases.find { // NOTE find the first checked case
           case (telescope, _body) =>
             Try {
-              if (telescope.name_list.length != arg_list.length) {
+              if (telescope.size != arg_list.length) {
                 throw Report(List(
                   "eval_apply fail, ValueFnCase arity mismatch\n"
                 ))
@@ -136,7 +136,7 @@ object eval {
         }
 
       case ValueCl(defined, telescope: Telescope) =>
-        if (telescope.type_map.size < arg_list.length) {
+        if (telescope.size < arg_list.length) {
           throw Report(List(
             s"eval_apply fail\n" +
               s"too many arguments\n"
