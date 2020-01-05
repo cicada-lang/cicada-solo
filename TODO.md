@@ -1,5 +1,4 @@
 # unified-env
-- [unified-env] `check` -- `FnCase`
 - [unified-env] `infer`
 - [unified-env] `readback`
 - [unified-env] `subtype`

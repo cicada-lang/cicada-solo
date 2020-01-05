@@ -110,7 +110,7 @@ object check {
                   val fn_arg_type_value = eval(local_env, fn_arg_type)
                   subtype(fn_arg_type_value, pi_arg_type_value)
                   val fresh_var = util.fresh_var_from(
-                    s"check:${pi_arg_name}:${fn_arg_name}")
+                    s"check:Fn:${pi_arg_name}:${fn_arg_name}")
                   local_env = local_env.ext(fn_arg_name, fn_arg_type_value, fresh_var)
                   telescope_env = telescope_env.ext(pi_arg_name, pi_arg_type_value, fresh_var)
               }
@@ -122,34 +122,38 @@ object check {
               ))
           }
 
-//         case FnCase(cases) =>
-//           cases.foreach {
-//             case (type_map, body) =>
-//               t match {
-//                 case pi: ValuePi =>
-//                   val (t_map, return_type_value) =
-//                     util.telescope_force_with_return(
-//                       pi.telescope,
-//                       pi.telescope.name_list,
-//                       pi.return_type)
-//                   var local_ctx = ctx
-//                   type_map.zipWithIndex.foreach {
-//                     case ((name, exp), index) =>
-//                       check(env, local_ctx, exp, ValueType())
-//                       val s = eval(env, exp)
-//                       val (_name, t) = t_map.toList(index)
-//                       subtype(s, t)
-//                       local_ctx = local_ctx.ext(name, s)
-//                   }
-//                   check(env, local_ctx, body, return_type_value)
+        case FnCase(cases) =>
+          t match {
+            case ValuePi(telescope, return_type) =>
+              cases.foreach {
+                case (type_map, body) =>
+                  if (type_map.size != telescope.size) {
+                    throw Report(List(
+                      s"FnCase and pi type arity mismatch\n" +
+                        s"arity of fn: ${type_map.size}\n" +
+                        s"arity of pi: ${telescope.size}\n"
+                    ))
+                  }
+                  var local_env = env
+                  var telescope_env = telescope.env
+                  telescope.type_map.zip(type_map).foreach {
+                    case ((pi_arg_name, pi_arg_type), (fn_arg_name, fn_arg_type)) =>
+                      val pi_arg_type_value = eval(telescope_env, pi_arg_type)
+                      val fn_arg_type_value = eval(local_env, fn_arg_type)
+                      subtype(fn_arg_type_value, pi_arg_type_value)
+                      val fresh_var = util.fresh_var_from(
+                        s"check:FnCase:${pi_arg_name}:${fn_arg_name}")
+                      local_env = local_env.ext(fn_arg_name, fn_arg_type_value, fresh_var)
+                      telescope_env = telescope_env.ext(pi_arg_name, pi_arg_type_value, fresh_var)
+                  }
+              }
 
-//                 case _ =>
-//                   throw Report(List(
-//                     s"expecting pi type\n" +
-//                       s"but found: ${pretty_value(t)}\n"
-//                   ))
-//               }
-//           }
+            case _ =>
+              throw Report(List(
+                s"expecting pi type\n" +
+                  s"but found: ${pretty_value(t)}\n"
+              ))
+          }
 
         case _ =>
           subtype(infer(env, exp), t)
