@@ -3,36 +3,33 @@ package xieyuheng.cicada
 import collection.immutable.ListMap
 import scala.util.{ Try, Success, Failure }
 
-import eval._
-// import check._
-// import readback._
 import pretty._
+import eval._
+import check._
+import readback._
 
 object infer {
 
   def infer(env: Env, exp: Exp): Value = {
-    ???
-//     try {
-//       exp match {
-//         // ------
-//         // [infer] env, ctx |- x : ctx.lookup_type(x)
-//         case Var(name: String) =>
-//           ctx.lookup_type(name) match {
-//             case Some(t) => t
-//             case None =>
-//               throw Report(List(
-//                 s"can not find var: ${name} in ctx\n"
-//               ))
-//           }
+    try {
+      exp match {
+        case Var(name: String) =>
+          env.lookup_type(name) match {
+            case Some(t) => t
+            case None =>
+              throw Report(List(
+                s"can not find var: ${name} in env\n"
+              ))
+          }
 
-//         case Type() =>
-//           ValueType()
+        case Type() =>
+          ValueType()
 
-//         case StrType() =>
-//           ValueType()
+        case StrType() =>
+          ValueType()
 
-//         case Str(str: String) =>
-//           ValueStrType()
+        case Str(str: String) =>
+          ValueStrType()
 
 //         case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
 //           var local_ctx = ctx
@@ -190,19 +187,16 @@ object infer {
 //           }
 //           infer(env, local_ctx, body)
 
-//         case The(t, value) =>
-//           val t_value = eval(env, t)
-//           check(env, ctx, value, t_value)
-//           t_value
-//       }
-//     }
-//     catch {
-//       case report: Report =>
-//         report.throw_prepend(
-//           s"infer fail\n" +
-//             s"exp: ${pretty_exp(exp)}\n"
-//         )
-//     }
+        case _ =>
+          ???
+      }
+    } catch {
+      case report: Report =>
+        report.throw_prepend(
+          s"infer fail\n" +
+            s"exp: ${pretty_exp(exp)}\n"
+        )
+    }
 
   }
 
