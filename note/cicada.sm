@@ -17,10 +17,3 @@ CASE with defined
     [equal] ...
     ------------
     [check] env |- { x1 = a1, x2 = a2, ... } : { x1 = d1 : A1, x2 = d2 : A2, ... }
-    [check] env |- { x1 = a1, x2 = a2, ... } :
-    { x1 = d1 : A1
-      x2 = d2 : A2
-      ...
-      y1 : A1
-      y2 : A2
-      ... } @ env1

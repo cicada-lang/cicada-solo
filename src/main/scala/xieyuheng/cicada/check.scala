@@ -17,38 +17,55 @@ object check {
       exp match {
         case Obj(value_map: ListMap[String, Exp]) =>
           t match {
-            case cl: ValueCl =>
-              // TODO should combine the following rules
-              // CASE without defined
-              // [check] env |- a1 : eval(env1, A1)
-              // [check] env + (x1 = a1 : A1) |- a2 : eval(env1 + (x1 = a1 : A1), A2)
-              // [check] ...
+            case ValueCl(defined, telescope) =>
+              // [check] local_env |- a1 : A1
+              // a1_value = eval(local_env, a1)
+              // [equal] a1_value = d1
+              // local_env = local_env.ext(x1, A1, a1_value)
+              // ...
               // ------------
-              // [check] env |- { x1 = a1, x2 = a2, ... } : { x1 : A1, x2 : A2, ... } @ env1
-              // NOTE env1 + (x1 = a1 : A1)
-              //   should be
-              //      env1 + (x1 = eval(env, a1) : env1(env1, A1))
-              // CASE with defined
-              // [check] env |- a1 : A1
-              // [equal] eval(env, a1) = d1
-              // [check] env + (x1 = a1 : A1) |- a2 : A2
-              // [equal] eval(env + (x1 = a1 : A1), a2) = d2
-              // [check] ...
-              // [equal] ...
+              // [check] local_env |- { x1 = a1, x2 = a2, ... }
+              //                    : { x1 = d1 : A1, x2 = d2 : A2, ... }
+              var local_env = env
+              defined.foreach {
+                case (name, (d_value, t_value)) =>
+                  value_map.get(name) match {
+                    case Some(v) =>
+                      check(local_env, v, t_value)
+                      val v_value = eval(local_env, v)
+                      equivalent(v_value, d_value)
+                      local_env = local_env.ext(name, t_value, v_value)
+                    case None =>
+                      throw Report(List(
+                        s"object does not have the field of defined: ${name}\n"
+                      ))
+                  }
+              }
+              // A1_value = eval(telescope_env, A1)
+              // [check] local_env |- a1 : A1_value
+              // a1_value = eval(local_env, a1)
+              // local_env = local_env.ext(x1, a1_value, A1_value)
+              // telescope_env = telescope_env.ext(x1, a1_value, A1_value)
+              // ...
               // ------------
-              // [check] env |- { x1 = a1, x2 = a2, ... } : { x1 = d1 : A1, x2 = d2 : A2, ... }
-              // [check] env |- { x1 = a1, x2 = a2, ... }
-              //              : { x1 = d1 : A1
-              //                  x2 = d2 : A2
-              //                  ...
-              //                  y1 : A1, y2 : A2, ... } @ env1
-              ???
-//               val v_map = value_map.map {
-//                 case (name, exp) => (name, eval(env, exp))
-//               }
-//               defined_check(env, ctx, v_map, cl.defined)
-//               // TODO the following ctx should use defined_check
-//               telescope_check(ctx, v_map, cl.telescope)
+              // [check] local_env |- { x1 = a1, x2 = a2, ... }
+              //                    : { x1 : A1, x2 : A2, ... } @ telescope_env
+              var telescope_env = telescope.env
+              telescope.type_map.foreach {
+                case (name, t) =>
+                  value_map.get(name) match {
+                    case Some(v) =>
+                      val t_value = eval(telescope_env, t)
+                      check(local_env, v, t_value)
+                      val v_value = eval(local_env, v)
+                      local_env = local_env.ext(name, t_value, v_value)
+                      telescope_env = telescope_env.ext(name, t_value, v_value)
+                    case None =>
+                      throw Report(List(
+                        s"object does not have the field of telescope: ${name}\n"
+                      ))
+                  }
+              }
 
             case _ =>
               throw Report(List(
@@ -135,54 +152,5 @@ object check {
         )
     }
   }
-
-//   def telescope_check(
-//     ctx: Ctx,
-//     value_map: ListMap[String, Value],
-//     telescope: Telescope,
-//   ): Unit = {
-//     var local_env = telescope.env
-//     var local_ctx = ctx
-//     telescope.type_map.foreach {
-//       case (name, t_exp) =>
-//         val t_value = eval(local_env, t_exp)
-//         val v_value = value_map.get(name) match {
-//           case Some(v_value) => v_value
-//           case None =>
-//             throw Report(List(
-//               s"telescope_check fail\n" +
-//                 s"can not find a field of class in object\n" +
-//                 s"field: ${name}\n"
-//             ))
-//         }
-//         val v_exp = readback(v_value)
-//         check(local_env, local_ctx, v_exp, t_value)
-//         local_env = local_env.ext(name, v_value)
-//         local_ctx = local_ctx.ext(name, t_value)
-//     }
-//   }
-
-//   def defined_check(
-//     env: Env,
-//     ctx: Ctx,
-//     value_map: ListMap[String, Value],
-//     defined: ListMap[String, (Value, Value)],
-//   ): Unit = {
-//     defined.foreach {
-//       case (name, (t_value, defined_value)) =>
-//         val v_value = value_map.get(name) match {
-//           case Some(v_value) => v_value
-//           case None =>
-//             throw Report(List(
-//               s"define_check fail\n" +
-//                 s"can not find a field of class in object\n" +
-//                 s"field: ${name}\n"
-//             ))
-//         }
-//         val v_exp = readback(v_value)
-//         check(env, ctx, v_exp, t_value)
-//         equivalent(v_value, defined_value)
-//     }
-//   }
 
 }
