@@ -31,17 +31,26 @@ object infer {
         case Str(str: String) =>
           ValueStrType()
 
-//         case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
-//           var local_ctx = ctx
-//           type_map.foreach {
-//             case (name, exp) =>
-//               check(env, local_ctx, exp, ValueType())
-//               local_ctx = local_ctx.ext(name, eval(env, exp))
-//           }
-//           check(env, local_ctx, return_type, ValueType())
-//           ValueType()
+        // check(local_env, A1, type)
+        // fresh_var = fresh_var_from(x1)
+        // local_env = local_env.ext(x1, eval(local_env, A1), fresh_var)
+        // ...
+        // check(local_env, R, type)
+        // ------------
+        // infer(local_env, { x1 : A1, x2 : A2, ... -> R }) = type
+        case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
+          var local_env = env
+          type_map.foreach {
+            case (name, t) =>
+              check(local_env, t, ValueType())
+              val fresh_var = util.fresh_var_from(s"infer:Pi:${name}")
+              local_env = local_env.ext(name, eval(local_env, t), fresh_var)
+          }
+          check(local_env, return_type, ValueType())
+          ValueType()
 
-//         case Fn(type_map: ListMap[String, Exp], body: Exp) =>
+        case Fn(type_map: ListMap[String, Exp], body: Exp) =>
+          ???
 //           var local_ctx = ctx
 //           type_map.foreach {
 //             case (name, exp) =>
@@ -52,15 +61,16 @@ object infer {
 //           val return_type = readback(return_type_value)
 //           ValuePi(Telescope(type_map, env), return_type)
 
-//         case FnCase(cases) =>
-//           val type_list = cases.map {
-//             case (type_map, body) =>
-//               val exp = Fn(type_map, body)
-//               infer(env, ctx, exp)
-//           }
-//           ValueUnion(type_list)
+        case FnCase(cases) =>
+          throw Report(List(
+            s"the language is not designed to infer the type of FnCase: ${exp}\n"
+          ))
 
-//         case Cl(defined, type_map: ListMap[String, Exp]) =>
+        // TODO
+        // ------------
+        // infer(local_env, { x1 = d1 : A1, x2 = d2 : A2, ..., y1 : B1, y2 : B2, ... }) = type
+        case Cl(defined, type_map: ListMap[String, Exp]) =>
+          ???
 //           var local_env = env
 //           var local_ctx = ctx
 //           defined.foreach {
@@ -79,23 +89,22 @@ object infer {
 //           }
 //           ValueType()
 
-//         case Obj(value_map: ListMap[String, Exp]) =>
+        case Obj(value_map: ListMap[String, Exp]) =>
+          ???
 //           ValueClInferedFromObj(value_map.map {
 //             case (name, exp) =>
 //               val value = eval(env, exp)
 //               (name, infer(env, ctx, readback(value)))
 //           })
 
-//         // NOTE env1 + (x1 = a1 : A1)
-//         //   should be
-//         //      env1 + (x1 = eval(env, a1) : env1(env1, A1))
-//         // [infer] env |- f : { x1 : A1, x2 : A2, ... -> T } @ env1
-//         // [check] env |- a1 : eval(env1, A1)
-//         // [check] env |- a2 : eval(env1 + (x1 = a1 : A1), A2)
-//         // [check] ...
-//         // ------------
-//         // [infer] env |- f(a1, a2, ...) : eval(env1 + (x1 = A1), T)
-//         case Ap(target: Exp, arg_list: List[Exp]) =>
+        // { x1 : A1, x2 : A2, ... -> R } @ telescope_env = infer(env, f)
+        // check(env, a1, eval(telescope_env, A1))
+        // telescope_env = telescope_env.ext(x1, eval(env, a1), eval(telescope_env, A1))
+        // ...
+        // ------------
+        // infer(env, f(a1, a2, ...)) = eval(telescope_env, R)
+        case Ap(target: Exp, arg_list: List[Exp]) =>
+          ???
 //           infer(env, ctx, target) match {
 //             case ValuePi(telescope: Telescope, return_type: Exp) =>
 //               val value_list = arg_list.map { eval(env, _) }
@@ -127,7 +136,8 @@ object infer {
 //         // ------------
 //         // [infer] env |- e.m : T
 //         // CASE `ValueCl` TODO
-//         case Dot(target: Exp, field: String) =>
+        case Dot(target: Exp, field: String) =>
+          ???
 //           val t_infered = infer(env, ctx, target)
 
 //           t_infered match {
@@ -170,14 +180,8 @@ object infer {
 //               ))
 //           }
 
-//         case Union(type_list: List[Exp]) =>
-//           type_list.foreach {
-//             case (exp) =>
-//               check(env, ctx, exp, ValueType())
-//           }
-//           ValueType()
-
-//         case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
+        case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
+          ???
 //           var local_ctx = ctx
 //           block_entry_map.foreach {
 //             case (name, BlockEntryLet(exp)) =>
@@ -187,8 +191,6 @@ object infer {
 //           }
 //           infer(env, local_ctx, body)
 
-        case _ =>
-          ???
       }
     } catch {
       case report: Report =>

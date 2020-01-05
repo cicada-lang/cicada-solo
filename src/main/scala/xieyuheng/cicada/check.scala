@@ -43,17 +43,17 @@ object check {
                       ))
                   }
               }
-              // A1_value = eval(telescope_env, A1)
-              // check(local_env, a1, A1_value)
-              // a1_value = eval(local_env, a1)
-              // local_env = local_env.ext(x1, a1_value, A1_value)
-              // telescope_env = telescope_env.ext(x1, a1_value, A1_value)
+              // B1_value = eval(telescope_env, B1)
+              // check(local_env, b1, A1_value)
+              // b1_value = eval(local_env, b1)
+              // local_env = local_env.ext(y1, b1_value, B1_value)
+              // telescope_env = telescope_env.ext(y1, b1_value, B1_value)
               // ...
               // ------
               // check(
               //   local_env,
-              //   { x1 = a1, x2 = a2, ... },
-              //   { x1 : A1, x2 : A2, ... } @ telescope_env)
+              //   { y1 = b1, y2 = b2, ... },
+              //   { y1 : B1, y2 : B2, ... } @ telescope_env)
               var telescope_env = telescope.env
               telescope.type_map.foreach {
                 case (name, t) =>

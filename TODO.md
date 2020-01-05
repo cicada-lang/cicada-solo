@@ -1,5 +1,8 @@
 # unified-env
-- [unified-env] `infer`
+- [unified-env] `infer` -- `Cl`
+- [unified-env] `infer` -- `Fn`
+- [unified-env] `infer` -- `Obj`
+- [unified-env] `infer` -- `Ap`
 - [unified-env] `readback`
 - [unified-env] `subtype`
 - [unified-env] `equivalent`
