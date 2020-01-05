@@ -1,4 +1,4 @@
-package xieyuheng.cicada
+package xieyuheng.cicada_backup
 
 import collection.immutable.ListMap
 
@@ -13,11 +13,17 @@ final case class ValueStr(str: String) extends Value
 final case class ValuePi(telescope: Telescope, return_type: Exp) extends Value
 final case class ValueFn(telescope: Telescope, body: Exp) extends Value
 final case class ValueFnCase(cases: List[(Telescope, Exp)]) extends Value
-final case class ValueCl(defined: ListMap[String, (Value, Value)], telescope: Telescope) extends Value
+final case class ValueCl(
+  defined: ListMap[String, (Value, Value)],
+  telescope: Telescope,
+) extends Value
 final case class ValueClInferedFromObj(type_map: ListMap[String, Value]) extends Value
 final case class ValueObj(value_map: ListMap[String, Value]) extends Value
+final case class ValueUnion(type_list: List[Value]) extends Value
+final case class ValueThe(t: Value, value: Value) extends Value
 
 sealed trait Neutral extends Value
 final case class NeutralVar(name: String) extends Neutral
 final case class NeutralAp(target: Neutral, arg_list: List[Value]) extends Neutral
 final case class NeutralDot(target: Neutral, field: String) extends Neutral
+final case class NeutralThe(t: Value, value: Neutral) extends Neutral

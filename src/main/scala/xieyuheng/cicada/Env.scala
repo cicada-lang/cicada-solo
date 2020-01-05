@@ -3,68 +3,41 @@ package xieyuheng.cicada
 import collection.immutable.ListMap
 
 import eval._
-import infer._
-import readback._
 
 sealed trait EnvEntry
 final case class EnvEntryRecursiveDefine(t: Exp, exp: Exp, env: Env) extends EnvEntry
-final case class EnvEntryValue(value: Value) extends EnvEntry
+final case class EnvEntryDefine(t: Value, value: Value) extends EnvEntry
 
 case class Env(entry_map: ListMap[String, EnvEntry] = ListMap()) {
 
-  def lookup_value(name: String): Option[Value] = {
-    entry_map.get(name) match {
-      case Some(entry) =>
-        entry match {
-          case EnvEntryRecursiveDefine(t: Exp, exp: Exp, env: Env) =>
-            Some(eval(env.ext_recursive(name, t, exp, env), exp))
-          case EnvEntryValue(value: Value) =>
-            Some(value)
-        }
-      case None =>
-        None
+  def lookup_type_and_value(name: String): Option[(Value, Value)] = {
+    entry_map.get(name).map {
+      case EnvEntryRecursiveDefine(t: Exp, exp: Exp, env: Env) =>
+        (eval(env.ext_recursive(name, t, exp, env), t),
+          eval(env.ext_recursive(name, t, exp, env), exp))
+      case EnvEntryDefine(t: Value, value: Value) =>
+        (t, value)
     }
   }
 
-  def ext(name: String, value: Value): Env = {
-    Env(this.entry_map + (name -> EnvEntryValue(value)))
+  def lookup_type(name: String): Option[Value] = {
+    lookup_type_and_value(name).map {
+      case (t, _value) => t
+    }
+  }
+
+  def lookup_value(name: String): Option[Value] = {
+    lookup_type_and_value(name).map {
+      case (_t, value) => value
+    }
+  }
+
+  def ext(name: String, t: Value, value: Value): Env = {
+    Env(this.entry_map + (name -> EnvEntryDefine(t, value)))
   }
 
   def ext_recursive(name: String, t: Exp, exp: Exp, env: Env): Env = {
     Env(this.entry_map + (name -> EnvEntryRecursiveDefine(t, exp, env)))
-  }
-
-  def ext_map(map: Map[String, Value]): Env = {
-    val new_entry_map = ListMap(map.map {
-      case (name, value) => (name, EnvEntryValue(value))
-    }.toList: _*)
-    Env(this.entry_map ++ new_entry_map)
-  }
-
-  def to_ctx(): Ctx = {
-    try {
-      var type_map: ListMap[String, Value] = ListMap()
-      this.entry_map.toList.zipWithIndex.foreach {
-        case ((name, entry), index) =>
-          entry match {
-            case EnvEntryRecursiveDefine(t: Exp, exp: Exp, env: Env) =>
-              val env = Env(this.entry_map.take(index))
-              val ctx = Ctx(type_map)
-              type_map = type_map + (name -> eval(env, t))
-            case EnvEntryValue(value: Value) =>
-              val env = Env(this.entry_map.take(index))
-              val ctx = Ctx(type_map)
-              val t = infer(env, ctx, readback(value))
-              type_map = type_map + (name -> t)
-          }
-      }
-      Ctx(type_map)
-    } catch {
-      case report: Report =>
-        report.throw_prepend(
-          s"env.to_ctx fail\n"
-        )
-    }
   }
 
 }

@@ -1,8 +1,8 @@
 # unified-env
-- use unified env
-- without `the`
-- without `union`
-- without factoring out telescope
+- [unified-env] `check`
+- [unified-env] `infer`
+- [unified-env] `subtype`
+- [unified-env] `equivalent`
 # sm
 - use .sm
 - combine CASE without defined and CASE with defined

@@ -1,4 +1,4 @@
-package xieyuheng.cicada
+package xieyuheng.cicada_backup
 
 import collection.immutable.ListMap
 
@@ -7,9 +7,9 @@ import xieyuheng.partech.Parser
 import xieyuheng.partech.Earley
 import xieyuheng.partech.ErrorDuringParsing
 
-object cicada extends Interpreter {
+object cicada_backup extends Interpreter {
 
-  val name = "cicada"
+  val name = "cicada_backup"
   val version = "0.0.1"
 
   val config_declaration = ListMap(

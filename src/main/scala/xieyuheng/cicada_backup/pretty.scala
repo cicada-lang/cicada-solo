@@ -1,4 +1,4 @@
-package xieyuheng.cicada
+package xieyuheng.cicada_backup
 
 import collection.immutable.ListMap
 
@@ -69,6 +69,12 @@ object pretty {
       case Dot(target: Exp, field: String) =>
         s"${pretty_exp(target)}.${field}"
 
+      case Union(type_list: List[Exp]) =>
+        val s = type_list.map {
+          case t => s"case ${pretty_exp(t)}\n"
+        }.mkString("")
+        s"union {${maybe_ln(s)}}"
+
       case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
         var s = block_entry_map.map {
           case (name, BlockEntryLet(exp)) => s"${name} = ${pretty_exp(exp)}\n"
@@ -77,6 +83,8 @@ object pretty {
         s = s + s"${pretty_exp(body)}\n"
         s"{${maybe_ln(s)}}"
 
+      case The(t, value) =>
+        s"the(${pretty_exp(t)}, ${pretty_exp(value)})"
     }
   }
 
@@ -140,6 +148,15 @@ object pretty {
         }.mkString("")
         s"object {${maybe_ln(s)}}"
 
+      case ValueUnion(type_list: List[Value]) =>
+        val s = type_list.map {
+          case t => s"case ${pretty_value(t)}\n"
+        }.mkString("")
+        s"union {${maybe_ln(s)}}"
+
+      case ValueThe(t, value) =>
+        s"the(${pretty_value(t)}, ${pretty_value(value)})"
+
       case neutral: Neutral =>
         pretty_neutral(neutral)
     }
@@ -158,6 +175,9 @@ object pretty {
 
       case NeutralDot(target: Neutral, field: String) =>
         s"${pretty_neutral(target)}.${field}"
+
+      case NeutralThe(t, value) =>
+        s"the(${pretty_value(t)}, ${pretty_neutral(value)})"
     }
   }
 
