@@ -1,5 +1,4 @@
 # unified-env
-- [unified-env] `infer` -- `Cl`
 - [unified-env] `infer` -- `Fn`
 - [unified-env] `infer` -- `Obj`
 - [unified-env] `infer` -- `Ap`

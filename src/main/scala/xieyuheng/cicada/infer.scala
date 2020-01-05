@@ -36,7 +36,7 @@ object infer {
         // local_env = local_env.ext(x1, eval(local_env, A1), fresh_var)
         // ...
         // check(local_env, R, type)
-        // ------------
+        // ------
         // infer(local_env, { x1 : A1, x2 : A2, ... -> R }) = type
         case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
           var local_env = env
@@ -66,28 +66,37 @@ object infer {
             s"the language is not designed to infer the type of FnCase: ${exp}\n"
           ))
 
-        // TODO
-        // ------------
+        // check(local_env, A1, type)
+        // A1_value = eval(local_env, A1)
+        // check(local_env, d1, A1_value)
+        // d1_value = eval(local_env, d1)
+        // local_env = local_env.ext(x1, A1_value, d1_value)
+        // ...
+        // check(local_env, B1, type)
+        // B1_value = eval(local_env, B1)
+        // fresh_var = fresh_var_from(y1)
+        // local_env = local_env.ext(y1, B1_value, fresh_var)
+        // ...
+        // ------
         // infer(local_env, { x1 = d1 : A1, x2 = d2 : A2, ..., y1 : B1, y2 : B2, ... }) = type
         case Cl(defined, type_map: ListMap[String, Exp]) =>
-          ???
-//           var local_env = env
-//           var local_ctx = ctx
-//           defined.foreach {
-//             case (name, (t, v)) =>
-//               check(local_env, local_ctx, t, ValueType())
-//               val t_value = eval(local_env, t)
-//               check(local_env, local_ctx, v, t_value)
-//               val v_value = eval(local_env, v)
-//               local_ctx = local_ctx.ext(name, t_value)
-//               local_env = local_env.ext(name, v_value)
-//           }
-//           type_map.foreach {
-//             case (name, t) =>
-//               check(local_env, local_ctx, t, ValueType())
-//               local_ctx = local_ctx.ext(name, eval(env, t))
-//           }
-//           ValueType()
+          var local_env = env
+          defined.foreach {
+            case (name, (t, d)) =>
+              check(local_env, t, ValueType())
+              val t_value = eval(local_env, t)
+              check(local_env, d, t_value)
+              val d_value = eval(local_env, d)
+              local_env = local_env.ext(name, t_value, d_value)
+          }
+          type_map.foreach {
+            case (name, t) =>
+              check(local_env, t, ValueType())
+              val t_value = eval(local_env, t)
+              val fresh_var = util.fresh_var_from(s"infer:Cl:${name}")
+              local_env = local_env.ext(name, t_value, fresh_var)
+          }
+          ValueType()
 
         case Obj(value_map: ListMap[String, Exp]) =>
           ???
@@ -101,7 +110,7 @@ object infer {
         // check(env, a1, eval(telescope_env, A1))
         // telescope_env = telescope_env.ext(x1, eval(env, a1), eval(telescope_env, A1))
         // ...
-        // ------------
+        // ------
         // infer(env, f(a1, a2, ...)) = eval(telescope_env, R)
         case Ap(target: Exp, arg_list: List[Exp]) =>
           ???
@@ -133,7 +142,7 @@ object infer {
 //         // CASE `ValueClInferedFromObj`
 //         // TODO maybe we should not use `ValueClInferedFromObj`
 //         // [infer] env |- e : ValueClInferedFromObj { ..., m : T, ... }
-//         // ------------
+//         // ------
 //         // [infer] env |- e.m : T
 //         // CASE `ValueCl` TODO
         case Dot(target: Exp, field: String) =>

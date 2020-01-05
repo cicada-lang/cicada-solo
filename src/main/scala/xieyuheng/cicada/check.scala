@@ -46,8 +46,8 @@ object check {
               // B1_value = eval(telescope_env, B1)
               // check(local_env, b1, A1_value)
               // b1_value = eval(local_env, b1)
-              // local_env = local_env.ext(y1, b1_value, B1_value)
-              // telescope_env = telescope_env.ext(y1, b1_value, B1_value)
+              // local_env = local_env.ext(y1, B1_value, b1_value)
+              // telescope_env = telescope_env.ext(y1, B1_value, b1_value)
               // ...
               // ------
               // check(
