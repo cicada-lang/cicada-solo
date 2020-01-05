@@ -1,3 +1,10 @@
+# [NOTE] about the DSL for writing inference rules
+- what should we say about this DSL?
+- is it sequent calculus or natural deduction?
+- is it declarative?
+  - just as the `(syntax-rules)` of scheme?
+- just like the DSL for specifying grammar by grammar rules?
+- how to handle common collection like list and map?
 # unified-env
 - [unified-env] `check` -- `Fn`
 - [unified-env] `check` -- `FnCase`
@@ -5,14 +12,6 @@
 - [unified-env] `readback`
 - [unified-env] `subtype`
 - [unified-env] `equivalent`
-# sm
-- use .sm
-- combine CASE without defined and CASE with defined
-- the [infer] of dot
-# impl
-- maybe we should not re-factor out telescope at the first place
-- use `the` to help `env.to_ctx()`
-- use unified env
 # Problem
 - Problem: fail to check
   ``` cicada
@@ -28,14 +27,7 @@
   fail to form NeutralSwitch
 - Solution:
   - use case-lambda instead of switch
-  - use `the` to help `env.to_ctx()`
-# sm
-- declarative DSL for writing inference rules
-- the traditional way of specifying semantics by inference rules,
-  as a DSL, just like the DSL for specifying grammar by grammar rules,
-  it should be declarative.
-- how to handle common collection like list and map?
-- should we use sequent calculus or natural deduction?
+  - use unified-env
 # cicada
 - [example] vector_append
 - [equality] we can implementation equality by built-in equality

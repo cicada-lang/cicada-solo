@@ -18,14 +18,16 @@ object check {
         case Obj(value_map: ListMap[String, Exp]) =>
           t match {
             case ValueCl(defined, telescope) =>
-              // [check] local_env |- a1 : A1
+              // check(local_env, a1, A1)
               // a1_value = eval(local_env, a1)
-              // [equal] a1_value = d1
+              // equivalent(a1_value, d1)
               // local_env = local_env.ext(x1, A1, a1_value)
               // ...
-              // ------------
-              // [check] local_env |- { x1 = a1, x2 = a2, ... }
-              //                    : { x1 = d1 : A1, x2 = d2 : A2, ... }
+              // ------
+              // check(
+              //   local_env,
+              //   { x1 = a1, x2 = a2, ... },
+              //   { x1 = d1 : A1, x2 = d2 : A2, ... })
               var local_env = env
               defined.foreach {
                 case (name, (d_value, t_value)) =>
@@ -42,14 +44,16 @@ object check {
                   }
               }
               // A1_value = eval(telescope_env, A1)
-              // [check] local_env |- a1 : A1_value
+              // check(local_env, a1, A1_value)
               // a1_value = eval(local_env, a1)
               // local_env = local_env.ext(x1, a1_value, A1_value)
               // telescope_env = telescope_env.ext(x1, a1_value, A1_value)
               // ...
-              // ------------
-              // [check] local_env |- { x1 = a1, x2 = a2, ... }
-              //                    : { x1 : A1, x2 : A2, ... } @ telescope_env
+              // ------
+              // check(
+              //   local_env,
+              //   { x1 = a1, x2 = a2, ... },
+              //   { x1 : A1, x2 : A2, ... } @ telescope_env)
               var telescope_env = telescope.env
               telescope.type_map.foreach {
                 case (name, t) =>
@@ -82,7 +86,7 @@ object check {
 //         // [subtype] ...
 //         // [check] env + (x1 : A1, x2 : A2, ...), ctx |-
 //         //   r : eval(env1 + (y1 : A1, y2 : A2, ...), R)
-//         // ------------
+//         // ------
 //         // [check] env |- { x1 : A1, x2 : A2, ... => r }
 //         //              : { y1 : B1, y2 : B2, ... -> R } @ env1
 //         case Fn(type_map: ListMap[String, Exp], body: Exp) =>
