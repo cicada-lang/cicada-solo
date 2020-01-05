@@ -85,9 +85,9 @@ object check {
               //   because in `(x1 : A1)`, `x1` is a free variable
               //   it only have type but does not have value
               // subtype(eval(local_env, A1), eval(telescope_env, B1))
-              // fresh_var = fresh_var_from(x1, y1)
-              // local_env = local_env.ext(x1, eval(local_env, A1), fresh_var)
-              // telescope_env = telescope_env.ext(y1, eval(local_env, A1), fresh_var)
+              // unique_var = unique_var_from(x1, y1)
+              // local_env = local_env.ext(x1, eval(local_env, A1), unique_var)
+              // telescope_env = telescope_env.ext(y1, eval(local_env, A1), unique_var)
               // ...
               // check(local_env, r, eval(telescope_env, R))
               // ------
@@ -109,10 +109,10 @@ object check {
                   val pi_arg_type_value = eval(telescope_env, pi_arg_type)
                   val fn_arg_type_value = eval(local_env, fn_arg_type)
                   subtype(fn_arg_type_value, pi_arg_type_value)
-                  val fresh_var = util.fresh_var_from(
+                  val unique_var = util.unique_var_from(
                     s"check:Fn:${pi_arg_name}:${fn_arg_name}")
-                  local_env = local_env.ext(fn_arg_name, fn_arg_type_value, fresh_var)
-                  telescope_env = telescope_env.ext(pi_arg_name, pi_arg_type_value, fresh_var)
+                  local_env = local_env.ext(fn_arg_name, fn_arg_type_value, unique_var)
+                  telescope_env = telescope_env.ext(pi_arg_name, pi_arg_type_value, unique_var)
               }
 
             case _ =>
@@ -141,10 +141,10 @@ object check {
                       val pi_arg_type_value = eval(telescope_env, pi_arg_type)
                       val fn_arg_type_value = eval(local_env, fn_arg_type)
                       subtype(fn_arg_type_value, pi_arg_type_value)
-                      val fresh_var = util.fresh_var_from(
+                      val unique_var = util.unique_var_from(
                         s"check:FnCase:${pi_arg_name}:${fn_arg_name}")
-                      local_env = local_env.ext(fn_arg_name, fn_arg_type_value, fresh_var)
-                      telescope_env = telescope_env.ext(pi_arg_name, pi_arg_type_value, fresh_var)
+                      local_env = local_env.ext(fn_arg_name, fn_arg_type_value, unique_var)
+                      telescope_env = telescope_env.ext(pi_arg_name, pi_arg_type_value, unique_var)
                   }
               }
 

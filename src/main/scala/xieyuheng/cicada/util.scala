@@ -8,9 +8,9 @@ import pretty._
 
 object util {
 
-  def fresh_var_from(name: String): NeutralVar = {
+  def unique_var_from(base: String): NeutralVar = {
     val uuid: UUID = UUID.randomUUID()
-    NeutralVar(s"${name}#${uuid}")
+    NeutralVar(s"${base}#${uuid}")
   }
 
 }

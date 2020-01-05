@@ -32,8 +32,7 @@ object infer {
           ValueStrType()
 
         // check(local_env, A1, type)
-        // fresh_var = fresh_var_from(x1)
-        // local_env = local_env.ext(x1, eval(local_env, A1), fresh_var)
+        // local_env = local_env.ext(x1, eval(local_env, A1), NeutralVar(x1))
         // ...
         // check(local_env, R, type)
         // ------
@@ -43,23 +42,31 @@ object infer {
           type_map.foreach {
             case (name, t) =>
               check(local_env, t, ValueType())
-              val fresh_var = util.fresh_var_from(s"infer:Pi:${name}")
-              local_env = local_env.ext(name, eval(local_env, t), fresh_var)
+              local_env = local_env.ext(name, eval(local_env, t), NeutralVar(name))
           }
           check(local_env, return_type, ValueType())
           ValueType()
 
+        // local_env = env
+        // check(local_env, A1, type)
+        // local_env = local_env.ext(x1, eval(local_env, A1), NeutralVar(x1))
+        // ...
+        // R_value = infer(local_env, r)
+        // R = readback(R_value)
+        // ------
+        // infer(
+        //   env,
+        //   { x1 : A1, x2 : A2, ... => r }) = { x1 : A1, x2 : A2, ... => R } @ env
         case Fn(type_map: ListMap[String, Exp], body: Exp) =>
-          ???
-//           var local_ctx = ctx
-//           type_map.foreach {
-//             case (name, exp) =>
-//               check(env, local_ctx, exp, ValueType())
-//               local_ctx = local_ctx.ext(name, eval(env, exp))
-//           }
-//           val return_type_value = infer(env, local_ctx, body)
-//           val return_type = readback(return_type_value)
-//           ValuePi(Telescope(type_map, env), return_type)
+          var local_env = env
+          type_map.foreach {
+            case (name, t) =>
+              check(local_env, t, ValueType())
+              local_env = local_env.ext(name, eval(local_env, t), NeutralVar(name))
+          }
+          val return_type_value = infer(local_env, body)
+          val return_type = readback(return_type_value)
+          ValuePi(Telescope(type_map, env), return_type)
 
         case FnCase(cases) =>
           throw Report(List(
@@ -74,11 +81,12 @@ object infer {
         // ...
         // check(local_env, B1, type)
         // B1_value = eval(local_env, B1)
-        // fresh_var = fresh_var_from(y1)
-        // local_env = local_env.ext(y1, B1_value, fresh_var)
+        // local_env = local_env.ext(y1, B1_value, NeutralVar(y1))
         // ...
         // ------
-        // infer(local_env, { x1 = d1 : A1, x2 = d2 : A2, ..., y1 : B1, y2 : B2, ... }) = type
+        // infer(
+        //   local_env,
+        //   { x1 = d1 : A1, x2 = d2 : A2, ..., y1 : B1, y2 : B2, ... }) = type
         case Cl(defined, type_map: ListMap[String, Exp]) =>
           var local_env = env
           defined.foreach {
@@ -93,8 +101,7 @@ object infer {
             case (name, t) =>
               check(local_env, t, ValueType())
               val t_value = eval(local_env, t)
-              val fresh_var = util.fresh_var_from(s"infer:Cl:${name}")
-              local_env = local_env.ext(name, t_value, fresh_var)
+              local_env = local_env.ext(name, t_value, NeutralVar(name))
           }
           ValueType()
 
