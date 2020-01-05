@@ -60,6 +60,8 @@
 # js backend
 - a simple compiler to translate the semantics of `eval` to js
 # partech
+- tree collection 
+- fix span in collected tree?
 - fix the use of `Error("TODO")`
 - handle top list by simple parser first
 # note
