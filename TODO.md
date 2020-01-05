@@ -66,6 +66,7 @@
 # js backend
 - a simple compiler to translate the semantics of `eval` to js
 # partech
+- fix the use of `Error("TODO")`
 - handle top list by simple parser first
 # note
 - [maybe] [top] we need a framework for adding new keywords

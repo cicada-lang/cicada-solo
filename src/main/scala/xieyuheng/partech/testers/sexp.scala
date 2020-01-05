@@ -48,17 +48,17 @@ object sexp extends PartechTester {
       ))
 
   sealed trait Sexp
-  final case object NullSexp extends Sexp
+  final case class NullSexp() extends Sexp
   final case class AtomSexp(str: String) extends Sexp
   final case class ConsSexp(car: Sexp, cdr: Sexp) extends Sexp
 
   val sexp_matcher: Tree => Sexp =
     Tree.matcher[Sexp](
       "sexp", Map(
-        "null" -> { case _ => NullSexp },
+        "null" -> { case _ => NullSexp() },
         "atom" -> { case List(Leaf(token)) => AtomSexp(token.word) },
         "sexp_list" -> { case List(_, list, _) =>
-          val init: Sexp = NullSexp
+          val init: Sexp = NullSexp()
           non_empty_list_matcher(sexp_matcher)(list)
             .foldRight(init) { case (car, sexp) => ConsSexp(car, sexp) } }
       ))

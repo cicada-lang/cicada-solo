@@ -266,8 +266,10 @@ case class Earley() extends Partech {
       val children: List[Tree] =
         item.symbols
           .slice(item.dot - n, item.dot)
+          .zipWithIndex
           .map {
-            case SymbolWord(word) =>
+            case (SymbolWord(word), i) =>
+              // TODO fix the following span
               Leaf(Token(word, Span(0, 0)))
             case _ =>
               throw new Error("TODO")

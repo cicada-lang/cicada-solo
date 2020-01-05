@@ -8,7 +8,7 @@ object tdh extends PartechTester {
 
   val description =
     """
-    tdh -- left regular grammar
+    tdh -- regular grammar
     """
 
   val lexer = common_lexer

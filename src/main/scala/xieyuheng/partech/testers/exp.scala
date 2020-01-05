@@ -96,9 +96,9 @@ object exp extends PartechTester {
     () => Rule(
       "arg", Map(
         "value" -> List(identifier, "=", exp),
-        "type" ->  List(identifier, ":", exp),
+        "type" -> List(identifier, ":", exp),
         "value_comma" -> List(identifier, "=", exp, ","),
-        "type_comma" ->  List(identifier, ":", exp, ","),
+        "type_comma" -> List(identifier, ":", exp, ","),
       ))
 
   val start = exp()
