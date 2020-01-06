@@ -105,13 +105,20 @@ object infer {
           }
           ValueType()
 
+        // A1 = infer(local_env, a1)
+        // ...
+        // ------
+        // infer(
+        //   local_env,
+        //   { x1 = a1, x2 = a2, ... }) = { x1 = A1, x2 = A2, ... }
         case Obj(value_map: ListMap[String, Exp]) =>
-          ???
-//           ValueClInferedFromObj(value_map.map {
-//             case (name, exp) =>
-//               val value = eval(env, exp)
-//               (name, infer(env, ctx, readback(value)))
-//           })
+          ValueClInferedFromObj(value_map.map {
+            case (name, exp) =>
+              // TODO why I did this?
+              // val value = eval(env, exp)
+              // (name, infer(env, readback(value)))
+              (name, infer(env, exp))
+          })
 
         // { x1 : A1, x2 : A2, ... -> R } @ telescope_env = infer(env, f)
         // check(env, a1, eval(telescope_env, A1))
@@ -197,15 +204,14 @@ object infer {
 //           }
 
         case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
-          ???
-//           var local_ctx = ctx
-//           block_entry_map.foreach {
-//             case (name, BlockEntryLet(exp)) =>
-//               local_ctx = local_ctx.ext(name, eval(env, exp))
-//             case (name, BlockEntryDefine(_t, exp)) =>
-//               local_ctx = local_ctx.ext(name, eval(env, exp))
-//           }
-//           infer(env, local_ctx, body)
+          var local_env = env
+          block_entry_map.foreach {
+            case (name, BlockEntryLet(exp)) =>
+              local_env = local_env.ext(name, infer(local_env, exp), eval(local_env, exp))
+            case (name, BlockEntryDefine(t, exp)) =>
+              local_env = local_env.ext(name, eval(local_env, t), eval(local_env, exp))
+          }
+          infer(local_env, body)
 
       }
     } catch {
