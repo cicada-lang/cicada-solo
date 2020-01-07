@@ -114,9 +114,6 @@ object infer {
         case Obj(value_map: ListMap[String, Exp]) =>
           ValueClInferedFromObj(value_map.map {
             case (name, exp) =>
-              // TODO why I did this?
-              // val value = eval(env, exp)
-              // (name, infer(env, readback(value)))
               (name, infer(env, exp))
           })
 
@@ -153,55 +150,71 @@ object infer {
 //               ))
 //           }
 
-//         // CASE `ValueClInferedFromObj`
-//         // TODO maybe we should not use `ValueClInferedFromObj`
-//         // [infer] env |- e : ValueClInferedFromObj { ..., m : T, ... }
-//         // ------
-//         // [infer] env |- e.m : T
-//         // CASE `ValueCl` TODO
         case Dot(target: Exp, field: String) =>
-          ???
-//           val t_infered = infer(env, ctx, target)
+          val t_infered = infer(env, target)
+          t_infered match {
+            case ValueClInferedFromObj(type_map: ListMap[String, Value]) =>
+              // { ..., m : T, ... } = infer(env, e)
+              // ------
+              // infer(env, e.m) = T
+              type_map.get(field) match {
+                case Some(t) => t
+                case None =>
+                  throw Report(List(
+                    s"infer fail\n" +
+                      s"on ValueClInferedFromObj\n" +
+                      s"target exp: ${pretty_exp(target)}\n" +
+                      s"infered target type: ${pretty_value(t_infered)}\n" +
+                      s"can not find field for dot: ${field}\n"
+                  ))
+              }
 
-//           t_infered match {
-//             case ValueClInferedFromObj(type_map: ListMap[String, Value]) =>
-//               type_map.get(field) match {
-//                 case Some(t) => t
-//                 case None =>
-//                   throw Report(List(
-//                     s"infer fail\n" +
-//                       s"on ValueClInferedFromObj\n" +
-//                       s"target exp: ${pretty_exp(target)}\n" +
-//                       s"infered target type: ${pretty_value(t_infered)}\n" +
-//                       s"can not find field for dot: ${field}\n"
-//                   ))
-//               }
+            // CASE found `m` in `defined`
+            // { ..., m = d : T, ... } @ telescope_env = infer(env, e)
+            // ------
+            // infer(env, e.m) = T
+            // CASE found `m` in `telescope`
+            // { x1 : A1,
+            //   x2 : A2, ...
+            //   m : T, ... } @ telescope_env = infer(env, e)
+            // telescope_env = telescope_env.ext(x1, eval(telescope_env, T), NeutralVar(x1))
+            // ...
+            // T_value = eval(telescope_env, T)
+            // ------
+            // infer(env, e.m) = T_value
+            case ValueCl(defined, telescope) =>
+              defined.get(field) match {
+                case Some((t, _v)) => t
+                case None =>
+                  var result: Option[Value] = None
+                  var telescope_env = telescope.env
+                  telescope.type_map.foreach {
+                    case (name, t) =>
+                      if (name == field) {
+                        result = Some(eval(telescope_env, t))
+                      }
+                      telescope_env = telescope_env.ext(name, eval(telescope_env, t), NeutralVar(name))
+                  }
+                  result match {
+                    case Some(t) => t
+                    case None =>
+                      throw Report(List(
+                        s"infer fail\n" +
+                          s"on ValueCl\n" +
+                          s"target exp: ${pretty_exp(target)}\n" +
+                          s"infered target type: ${pretty_value(t_infered)}\n" +
+                          s"can not find field for dot: ${field}\n"
+                      ))
+                  }
+              }
 
-//             case ValueCl(defined, telescope) =>
-//               defined.get(field) match {
-//                 case Some((t, v)) =>
-//                   infer(env, ctx, readback(v))
-//                 case None =>
-//                   util.telescope_force(telescope, telescope.name_list).get(field) match {
-//                     case Some(t) => t
-//                     case None =>
-//                       throw Report(List(
-//                         s"infer fail\n" +
-//                           s"on ValueCl\n" +
-//                           s"target exp: ${pretty_exp(target)}\n" +
-//                           s"infered target type: ${pretty_value(t_infered)}\n" +
-//                           s"can not find field for dot: ${field}\n"
-//                       ))
-//                   }
-//               }
-
-//             case t =>
-//               throw Report(List(
-//                 s"expecting class\n" +
-//                   s"found type: ${pretty_value(t)}\n" +
-//                   s"target: ${pretty_exp(target)}\n"
-//               ))
-//           }
+            case t =>
+              throw Report(List(
+                s"expecting class\n" +
+                  s"found type: ${pretty_value(t)}\n" +
+                  s"target: ${pretty_exp(target)}\n"
+              ))
+          }
 
         case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
           var local_env = env
