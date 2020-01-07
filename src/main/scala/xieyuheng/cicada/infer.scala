@@ -117,38 +117,62 @@ object infer {
               (name, infer(env, exp))
           })
 
-        // { x1 : A1, x2 : A2, ... -> R } @ telescope_env = infer(env, f)
-        // check(env, a1, eval(telescope_env, A1))
-        // telescope_env = telescope_env.ext(x1, eval(env, a1), eval(telescope_env, A1))
-        // ...
-        // ------
-        // infer(env, f(a1, a2, ...)) = eval(telescope_env, R)
         case Ap(target: Exp, arg_list: List[Exp]) =>
-          ???
-//           infer(env, ctx, target) match {
-//             case ValuePi(telescope: Telescope, return_type: Exp) =>
-//               val value_list = arg_list.map { eval(env, _) }
-//               val (new_defined, new_telescope) = telescope_apply(telescope, value_list)
-//               eval(new_telescope.env, return_type)
+          infer(env, target) match {
+            // { x1 : A1, x2 : A2, ... -> R } @ telescope_env = infer(env, f)
+            // A1_value = eval(telescope_env, A1)
+            // check(env, a1, A1_value)
+            // telescope_env = telescope_env.ext(x1, eval(env, a1), A1_value)
+            // ...
+            // ------
+            // infer(env, f(a1, a2, ...)) = eval(telescope_env, R)
+            case ValuePi(telescope: Telescope, return_type: Exp) =>
+              if (arg_list.length != telescope.size) {
+                throw Report(List(
+                  s"arg_list and pi type arity mismatch\n" +
+                    s"arity of arg_list: ${arg_list.length}\n" +
+                    s"arity of pi: ${telescope.size}\n"
+                ))
+              }
+              var telescope_env = telescope.env
+              telescope.type_map.zip(arg_list).foreach {
+                case ((name, t), arg) =>
+                  val t_value = eval(telescope_env, t)
+                  check(env, arg, t_value)
+                  telescope_env = telescope_env.ext(name, eval(env, arg), t_value)
+              }
+              eval(telescope_env, return_type)
 
-//             case ValueType() =>
-//               eval(env, target) match {
-//                 case ValueCl(defined, telescope) =>
-//                   val value_list = arg_list.map { eval(env, _) }
-//                   val (new_defined, new_telescope) = telescope_apply(telescope, value_list)
-//                   ValueType()
+            case ValueType() =>
+              eval(env, target) match {
+                case ValueCl(defined, telescope) =>
+                  if (arg_list.length > telescope.size) {
+                    throw Report(List(
+                      s"too many arguments to apply class\n" +
+                        s"length of arg_list: ${arg_list.length}\n" +
+                        s"arity of cl: ${telescope.size}\n"
+                    ))
+                  }
+                  var telescope_env = telescope.env
+                  telescope.type_map.zip(arg_list).foreach {
+                    case ((name, t), arg) =>
+                      val t_value = eval(telescope_env, t)
+                      check(env, arg, t_value)
+                      telescope_env = telescope_env.ext(name, eval(env, arg), t_value)
+                  }
+                  ValueType()
 
-//                 case t =>
-//                   throw Report(List(
-//                     s"expecting ValueCl but found: ${t}\n"
-//                   ))
-//               }
+                case t =>
+                  throw Report(List(
+                    s"expecting ValueCl but found: ${t}\n"
+                  ))
+              }
 
-//             case t =>
-//               throw Report(List(
-//                 s"expecting ValuePi type but found: ${t}\n"
-//               ))
-//           }
+            case t =>
+              throw Report(List(
+                s"expecting ValuePi type but found: ${t}\n"
+              ))
+          }
 
         case Dot(target: Exp, field: String) =>
           val t_infered = infer(env, target)
