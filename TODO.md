@@ -2,6 +2,8 @@
 - [unified-env] `readback`
 - [unified-env] `subtype`
 - [unified-env] `equivalent`
+- [unified-env] api
+- [unified-env] test
 # Problem
 - Problem: fail to check
   ``` cicada
