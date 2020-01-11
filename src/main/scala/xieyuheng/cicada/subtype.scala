@@ -76,8 +76,8 @@ object subtype {
                 case None =>
                   throw Report(List(
                     s"subtype fail between ValueCl and ValueCl\n" +
-                      s"missing name in the subtype class" +
-                      s"name: ${name}"
+                      s"missing name in the subtype class\n" +
+                      s"name: ${name}\n"
                   ))
               }
           }
@@ -101,8 +101,8 @@ object subtype {
                     case None =>
                       throw Report(List(
                         s"subtype fail between ValueCl and ValueCl\n" +
-                          s"missing name in the subtype class" +
-                          s"name: ${name}"
+                          s"missing name in the subtype class\n" +
+                          s"name: ${name}\n"
                       ))
                   }
               }
@@ -117,28 +117,59 @@ object subtype {
                 case None =>
                   throw Report(List(
                     s"subtype fail between ValueClInferedFromObj and ValueClInferedFromObj\n" +
-                      s"missing name in the subtype class" +
-                      s"name: ${name}"
+                      s"missing name in the subtype class\n" +
+                      s"name: ${name}\n"
                   ))
               }
           }
 
         case (s: ValueCl, t: ValueClInferedFromObj) =>
-          ???
-          // subtype_defined_list_map(
-          //   s.defined, util.telescope_force(s.telescope, s.telescope.name_list),
-          //   ListMap(), t.type_map)
+          var s_telescope_env = s.telescope.env
+          t.type_map.foreach {
+            case (name, t_type_value) =>
+              s.defined.get(name) match {
+                case Some((s_type_value, _s_value)) =>
+                  subtype(s_type_value, t_type_value)
+                case None =>
+                  s.telescope.type_map.get(name) match {
+                    case Some(s_type) =>
+                      val s_type_value = eval(s_telescope_env, s_type)
+                      subtype(s_type_value, t_type_value)
+                      s_telescope_env = s_telescope_env.ext(name, s_type_value, NeutralVar(name))
+                    case None =>
+                      throw Report(List(
+                        s"subtype fail between ValueCl and ValueClInferedFromObj\n" +
+                          s"missing name in the subtype class\n" +
+                          s"name: ${name}\n"
+                      ))
+                  }
+              }
+          }
 
         case (s: ValueClInferedFromObj, t: ValueCl) =>
-          ???
-          // if (t.defined.size != 0) {
-          //   throw Report(List(
-          //     s"a free variable proof is required for ValueClInferedFromObj <: ValueCl\n"
-          //   ))
-          // }
-          // subtype_list_map(
-          //   s.type_map,
-          //   util.telescope_force(t.telescope, t.telescope.name_list))
+          if (t.defined.size != 0) {
+            throw Report(List(
+              s"subtype fail between ValueClInferedFromObj and ValueCl\n" +
+                s"ValueCl's defined must be empty\n" +
+                s"because this must be a free variable proof\n"
+            ))
+          }
+          var t_telescope_env = t.telescope.env
+          t.telescope.type_map.foreach {
+            case (name, t_type) =>
+              s.type_map.get(name) match {
+                case Some(s_type_value) =>
+                  val t_type_value = eval(t_telescope_env, t_type)
+                  subtype(s_type_value, t_type_value)
+                  t_telescope_env = t_telescope_env.ext(name, s_type_value, NeutralVar(name))
+                case None =>
+                  throw Report(List(
+                    s"subtype fail between ValueCl and ValueClInferedFromObj\n" +
+                      s"missing name in the subtype class\n" +
+                      s"name: ${name}\n"
+                  ))
+              }
+          }
 
         case (s, t) =>
           equivalent(s, t)

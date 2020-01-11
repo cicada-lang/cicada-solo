@@ -1,6 +1,4 @@
 # unified-env
-- [unified-env] `subtype` between `ValueCl` and `ValueClInferedFromObj`
-- [unified-env] `subtype` between `ValueClInferedFromObj` and `ValueCl`
 - [unified-env] `equivalent`
 - [unified-env] `Top`
 - [unified-env] grammar
