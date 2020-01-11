@@ -30,7 +30,7 @@ object subtype {
           //   { y1 : B1, y2 : B2, ... -> R } @ t_telescope_env)
           if (s.telescope.size != t.telescope.size) {
             throw Report(List(
-              s"subtype fail on ValuePi, size mismatch\n"
+              s"subtype fail between ValuePi and ValuePi, size mismatch\n"
             ))
           }
           var s_telescope_env = s.telescope.env
@@ -75,7 +75,7 @@ object subtype {
                   equivalent(s_value, t_value)
                 case None =>
                   throw Report(List(
-                    s"subtype fail on ValuePi\n" +
+                    s"subtype fail between ValueCl and ValueCl\n" +
                       s"missing name in the subtype class" +
                       s"name: ${name}"
                   ))
@@ -100,7 +100,7 @@ object subtype {
                       t_telescope_env = t_telescope_env.ext(name, s_type_value, NeutralVar(name))
                     case None =>
                       throw Report(List(
-                        s"subtype fail on ValuePi\n" +
+                        s"subtype fail between ValueCl and ValueCl\n" +
                           s"missing name in the subtype class" +
                           s"name: ${name}"
                       ))
@@ -109,8 +109,19 @@ object subtype {
           }
 
         case (s: ValueClInferedFromObj, t: ValueClInferedFromObj) =>
-          ???
-          // subtype_list_map(s.type_map, t.type_map)
+          t.type_map.foreach {
+            case (name, t_type_value) =>
+              s.type_map.get(name) match {
+                case Some(s_type_value) =>
+                  subtype(s_type_value, t_type_value)
+                case None =>
+                  throw Report(List(
+                    s"subtype fail between ValueClInferedFromObj and ValueClInferedFromObj\n" +
+                      s"missing name in the subtype class" +
+                      s"name: ${name}"
+                  ))
+              }
+          }
 
         case (s: ValueCl, t: ValueClInferedFromObj) =>
           ???
