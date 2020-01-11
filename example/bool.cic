@@ -14,17 +14,9 @@ true = {
   tag = "true"
 }
 
-false = {
+false : false_t = {
   tag = "false"
 }
-
-// true : true_t = {
-//   tag = "true"
-// }
-
-// false : false_t = {
-//   tag = "false"
-// }
 
 @refuse true : false_t
 
@@ -42,9 +34,5 @@ not : { x : bool_t -> bool_t } = {
 @eq not(true) = false
 @eq not(false) = true
 
-@refuse true : union { case false_t }
-@refuse false : union { case true_t }
-@accept true : union { case true_t case false_t }
-@accept false : union { case true_t case false_t }
 @accept true : bool_t
 @accept false : bool_t

@@ -93,8 +93,9 @@ object eval {
         eval(local_env, body)
 
       case ValueFnCase(cases) =>
-        cases.find { // NOTE find the first checked case
+        cases.find {
           case (telescope, _body) =>
+            // NOTE find the first checked case
             Try {
               if (telescope.size != arg_list.length) {
                 throw Report(List(
@@ -112,6 +113,12 @@ object eval {
             } match {
               case Success(_ok) => true
               case Failure(_error) => false
+              // case Failure(report: Report) =>
+              //   println(s"report: ${report}")
+              //   false
+              // case Failure(error) =>
+              //   println(s"error: ${error}")
+              //   false
             }
         } match {
           case Some((telescope, body)) =>

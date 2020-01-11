@@ -29,7 +29,7 @@ object check {
               //   { x1 = d1 : A1, x2 = d2 : A2, ... })
               var local_env = env
               defined.foreach {
-                case (name, (d_value, t_value)) =>
+                case (name, (t_value, d_value)) =>
                   value_map.get(name) match {
                     case Some(v) =>
                       check(local_env, v, t_value)
