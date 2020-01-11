@@ -18,6 +18,9 @@ four = succ(three)
 five = succ(four)
 six = succ(five)
 
+@accept one : succ_t
+@refuse zero : succ_t
+
 nat_add : { x : nat_t, y : nat_t -> nat_t } = {
   case x : succ_t, y : nat_t => succ(nat_add(x.prev, y))
   case x : zero_t, y : nat_t => y
@@ -28,17 +31,11 @@ nat_mul : { x : nat_t, y : nat_t -> nat_t } = {
   case x : zero_t, y : nat_t => zero
 }
 
+@eq nat_add(zero, zero) = zero
+@eq nat_add(one, zero) = one
+@eq nat_add(zero, one) = one
+@eq nat_add(one, two) = three
 // TODO
-// @accept one : succ_t(zero)
-// @refuse zero : succ_t(zero)
-// @refuse zero : succ_t(zero)
-// @refuse zero : succ_t
-// @refuse zero : succ_t
-
-// @eq nat_add(zero, zero) = zero
-// @eq nat_add(one, zero) = one
-// @eq nat_add(zero, one) = one
-// @eq nat_add(one, two) = three
 // @eq nat_add(two, one) = three
 // @eq nat_add(two, two) = four
 // @eq nat_add(two, three) = five
