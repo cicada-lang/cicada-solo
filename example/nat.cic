@@ -28,7 +28,8 @@ nat_mul : { x : nat_t, y : nat_t -> nat_t } = {
   case x : zero_t, y : nat_t => zero
 }
 
-@accept one : succ_t(zero)
+// TODO
+// @accept one : succ_t(zero)
 // @refuse zero : succ_t(zero)
 // @refuse zero : succ_t(zero)
 // @refuse zero : succ_t
