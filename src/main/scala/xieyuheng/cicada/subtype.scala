@@ -11,181 +11,134 @@ import pretty._
 object subtype {
 
   def subtype(s: Value, t: Value): Unit = {
-    ???
-//     try {
-//       (s, t) match {
-//         case (s: ValueUnion, t) =>
-//           s.type_list.foreach { subtype(_, t) }
+    try {
+      (s, t) match {
+        case (s: ValuePi, t: ValuePi) =>
+          // A1_value = eval(s_telescope_env, A1)
+          // B1_value = eval(t_telescope_env, B1)
+          // subtype(B1_value, A1_value) // NOTE contravariant
+          // unique_var = unique_var_from(x1, y1)
+          // s_telescope_env = s_telescope_env.ext(x1, A1_value, unique_var)
+          // t_telescope_env = t_telescope_env.ext(y1, B1_value, unique_var)
+          // ...
+          // S_value = eval(s_telescope_env, S)
+          // R_value = eval(t_telescope_env, R)
+          // subtype(S_value, R_value)
+          // ------
+          // subtype(
+          //   { x1 : A1, x2 : A2, ... -> S } @ s_telescope_env,
+          //   { y1 : B1, y2 : B2, ... -> R } @ t_telescope_env)
+          if (s.telescope.size != t.telescope.size) {
+            throw Report(List(
+              s"subtype fail on ValuePi, size mismatch\n"
+            ))
+          }
+          var s_telescope_env = s.telescope.env
+          var t_telescope_env = t.telescope.env
+          s.telescope.type_map.zip(t.telescope.type_map).foreach {
+            case ((s_name, s), (t_name, t)) =>
+              val s_value = eval(s_telescope_env, s)
+              val t_value = eval(t_telescope_env, t)
+              subtype(t_value, s_value) // NOTE contravariant
+              val unique_var = util.unique_var_from(
+                s"subtype:ValuePi:ValuePi:${s_name}:${t_name}")
+              s_telescope_env = s_telescope_env.ext(s_name, s_value, unique_var)
+              t_telescope_env = t_telescope_env.ext(t_name, t_value, unique_var)
+          }
+          val s_return_type_value = eval(s_telescope_env, s.return_type)
+          val t_return_type_value = eval(t_telescope_env, t.return_type)
+          subtype(s_return_type_value, t_return_type_value)
 
-//         case (s, t: ValueUnion) =>
-//           val exists_p = t.type_list.exists {
-//             case t =>
-//               Try {
-//                 subtype(s, t)
-//               } match {
-//                 case Success(()) => true
-//                 case Failure(_error) => false
-//               }
-//           }
-//           if (!exists_p) {
-//             throw Report(List(
-//               s"subtype fail on ValueUnion\n"
-//             ))
-//           }
+        case (s: ValueCl, t: ValueCl) =>
+          // subtype(s_A1, t_A1)
+          // equivalent(s_a1, t_a1)
+          // ...
+          // t_B1_value = eval(t_telescope_env, t_B1)
+          // subtype(s_B1, t_B1_value)
+          // t_telescope_env = t_telescope_env.ext(y1, s_B1, s_b1)
+          // ...
+          // s_C1_value = eval(s_telescope_env, s_C1)
+          // t_C1_value = eval(t_telescope_env, t_C1)
+          // subtype(s_C1_value, t_C1_value)
+          // s_telescope_env = s_telescope_env.ext(z1, s_C1_value, NeutralVar(z1))
+          // t_telescope_env = t_telescope_env.ext(z1, s_C1_value, NeutralVar(z1))
+          // ...
+          // ------
+          // subtype(
+          //   { x1 = s_a1 : s_A1, ..., y1 = s_b1 : s_B1, ..., z1 : s_C1, ...} @ s_telescope_env,
+          //   { x1 = t_a1 : t_A1, ..., y1        : t_B1, ..., z1 : t_C1, ...} @ t_telescope_env)
+          t.defined.foreach {
+            case (name, (t_type_value, t_value)) =>
+              s.defined.get(name) match {
+                case Some((s_type_value, s_value)) =>
+                  subtype(s_type_value, t_type_value)
+                  equivalent(s_value, t_value)
+                case None =>
+                  throw Report(List(
+                    s"subtype fail on ValuePi\n" +
+                      s"missing name in the subtype class" +
+                      s"name: ${name}"
+                  ))
+              }
+          }
+          var s_telescope_env = s.telescope.env
+          var t_telescope_env = t.telescope.env
+          t.telescope.type_map.foreach {
+            case (name, t_type) =>
+              s.defined.get(name) match {
+                case Some((s_type_value, s_value)) =>
+                  val t_type_value = eval(t_telescope_env, t_type)
+                  subtype(s_type_value, t_type_value)
+                  t_telescope_env = t_telescope_env.ext(name, s_type_value, s_value)
+                case None =>
+                  s.telescope.type_map.get(name) match {
+                    case Some(s_type) =>
+                      val s_type_value = eval(s_telescope_env, s_type)
+                      val t_type_value = eval(t_telescope_env, t_type)
+                      subtype(s_type_value, t_type_value)
+                      s_telescope_env = s_telescope_env.ext(name, s_type_value, NeutralVar(name))
+                      t_telescope_env = t_telescope_env.ext(name, s_type_value, NeutralVar(name))
+                    case None =>
+                      throw Report(List(
+                        s"subtype fail on ValuePi\n" +
+                          s"missing name in the subtype class" +
+                          s"name: ${name}"
+                      ))
+                  }
+              }
+          }
 
-//         case (s: ValuePi, t: ValuePi) =>
-//           if (s.telescope.type_map.size != t.telescope.type_map.size) {
-//             throw Report(List(
-//               s"subtype fail on ValuePi, arity mismatch\n"
-//             ))
-//           } else {
-//             val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {
-//               case (s_name, t_name) =>
-//                 val uuid: UUID = UUID.randomUUID()
-//                 s"#subtype-pi-type:${s_name}:${t_name}:${uuid}"
-//             }.toList
-//             val (s_type_map, s_return_type) =
-//               util.telescope_force_with_return(s.telescope, name_list, s.return_type)
-//             val (t_type_map, t_return_type) =
-//               util.telescope_force_with_return(t.telescope, name_list, t.return_type)
-//             subtype_list_map(t_type_map, s_type_map)
-//             subtype(s_return_type, t_return_type)
-//           }
+        case (s: ValueClInferedFromObj, t: ValueClInferedFromObj) =>
+          ???
+          // subtype_list_map(s.type_map, t.type_map)
 
-//         case (s: ValueCl, t: ValueCl) =>
-//           subtype_class(
-//             s.defined, s.telescope.type_map, s.telescope.env,
-//             t.defined, t.telescope.type_map, t.telescope.env)
+        case (s: ValueCl, t: ValueClInferedFromObj) =>
+          ???
+          // subtype_defined_list_map(
+          //   s.defined, util.telescope_force(s.telescope, s.telescope.name_list),
+          //   ListMap(), t.type_map)
 
-//         case (s: ValueClInferedFromObj, t: ValueClInferedFromObj) =>
-//           subtype_list_map(s.type_map, t.type_map)
+        case (s: ValueClInferedFromObj, t: ValueCl) =>
+          ???
+          // if (t.defined.size != 0) {
+          //   throw Report(List(
+          //     s"a free variable proof is required for ValueClInferedFromObj <: ValueCl\n"
+          //   ))
+          // }
+          // subtype_list_map(
+          //   s.type_map,
+          //   util.telescope_force(t.telescope, t.telescope.name_list))
 
-//         case (s: ValueCl, t: ValueClInferedFromObj) =>
-//           subtype_defined_list_map(
-//             s.defined, util.telescope_force(s.telescope, s.telescope.name_list),
-//             ListMap(), t.type_map)
-
-//         case (s: ValueClInferedFromObj, t: ValueCl) =>
-//           if (t.defined.size != 0) {
-//             throw Report(List(
-//               s"a free variable proof is required for ValueClInferedFromObj <: ValueCl\n"
-//             ))
-//           }
-//           subtype_list_map(
-//             s.type_map,
-//             util.telescope_force(t.telescope, t.telescope.name_list))
-
-//         case (s: ValueThe, t: ValueThe) =>
-//           if (s.t != ValueType()) {
-//             throw Report(List(
-//               s"type of the s is not type: ${pretty_value(s.t)}\n"
-//             ))
-//           }
-//           if (t.t != ValueType()) {
-//             throw Report(List(
-//               s"type of the t is not type: ${pretty_value(t.t)}\n"
-//             ))
-//           }
-//           subtype(s.value, t.value)
-
-//         case (s, t) =>
-//           equivalent(s, t)
-//       }
-//     } catch {
-//       case report: Report =>
-//         report.throw_prepend(
-//           s"subtype fail\n" +
-//             s"s: ${pretty_value(s)}\n" +
-//             s"t: ${pretty_value(t)}\n")
-//     }
+        case (s, t) =>
+          equivalent(s, t)
+      }
+    } catch {
+      case report: Report =>
+        report.throw_prepend(
+          s"subtype fail\n" +
+            s"s: ${pretty_value(s)}\n" +
+            s"t: ${pretty_value(t)}\n")
+    }
   }
-
-//   def subtype_list_map(
-//     s_map: ListMap[String, Value],
-//     t_map: ListMap[String, Value],
-//   ): Unit = {
-//     t_map.foreach {
-//       case (name, t) =>
-//         s_map.get(name) match {
-//           case Some(s) =>
-//             subtype(s, t)
-//           case None =>
-//             throw Report(List(
-//               s"subtype_list_map can not find field: ${name}\n"
-//             ))
-//         }
-//     }
-//   }
-
-//   def subtype_defined_list_map(
-//     s_defined: ListMap[String, (Value, Value)], s_map: ListMap[String, Value],
-//     t_defined: ListMap[String, (Value, Value)], t_map: ListMap[String, Value],
-//   ): Unit = {
-//     t_defined.foreach {
-//       case (name, (t, v)) =>
-//         s_defined.get(name) match {
-//           case Some((s, u)) =>
-//             subtype(s, t)
-//             equivalent(u, v)
-//           case None =>
-//             throw Report(List(
-//               s"subtype_defined can not find field: ${name}\n"
-//             ))
-//         }
-//     }
-//     t_map.foreach {
-//       case (name, t) =>
-//         s_map.get(name) match {
-//           case Some(s) =>
-//             subtype(s, t)
-//           case None =>
-//             s_defined.get(name) match {
-//               case Some((s, _u)) =>
-//                 subtype(s, t)
-//               case None =>
-//                 throw Report(List(
-//                   s"subtype_defined_list_map can not find field: ${name}\n"
-//                 ))
-//             }
-//         }
-//     }
-//   }
-
-//   def subtype_class(
-//     s_defined: ListMap[String, (Value, Value)], s_map: ListMap[String, Exp], s_env: Env,
-//     t_defined: ListMap[String, (Value, Value)], t_map: ListMap[String, Exp], t_env: Env,
-//   ): Unit = {
-//     var local_env = t_env
-//     t_defined.foreach {
-//       case (name, (t, v)) =>
-//         s_defined.get(name) match {
-//           case Some((s, u)) =>
-//             subtype(s, t)
-//             equivalent(u, v)
-//           case None =>
-//           case _ =>
-//             throw Report(List(
-//               s"subtype_class can not find field in defined: ${name}\n"
-//             ))
-//         }
-//     }
-//     t_map.foreach {
-//       case (name, t) =>
-//         s_map.get(name) match {
-//           case Some(s) =>
-//             subtype(eval(s_env, s), eval(local_env, t))
-//           case None =>
-//             s_defined.get(name) match {
-//               case Some((s, u)) =>
-//                 local_env = local_env.ext(name, u)
-//                 subtype(s, eval(local_env, t))
-//               case None =>
-//                 throw Report(List(
-//                   s"subtype_class can not find field in telescope: ${name}\n"
-//                 ))
-//             }
-//         }
-//     }
-//   }
 
 }

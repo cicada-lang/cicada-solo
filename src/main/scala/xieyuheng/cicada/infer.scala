@@ -31,13 +31,13 @@ object infer {
         case Str(str: String) =>
           ValueStrType()
 
-        // check(local_env, A1, type)
-        // local_env = local_env.ext(x1, eval(local_env, A1), NeutralVar(x1))
-        // ...
-        // check(local_env, R, type)
-        // ------
-        // infer(local_env, { x1 : A1, x2 : A2, ... -> R }) = type
         case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
+          // check(local_env, A1, type)
+          // local_env = local_env.ext(x1, eval(local_env, A1), NeutralVar(x1))
+          // ...
+          // check(local_env, R, type)
+          // ------
+          // infer(local_env, { x1 : A1, x2 : A2, ... -> R }) = type
           var local_env = env
           type_map.foreach {
             case (name, t) =>
@@ -47,17 +47,17 @@ object infer {
           check(local_env, return_type, ValueType())
           ValueType()
 
-        // local_env = env
-        // check(local_env, A1, type)
-        // local_env = local_env.ext(x1, eval(local_env, A1), NeutralVar(x1))
-        // ...
-        // R_value = infer(local_env, r)
-        // R = readback(R_value)
-        // ------
-        // infer(
-        //   env,
-        //   { x1 : A1, x2 : A2, ... => r }) = { x1 : A1, x2 : A2, ... => R } @ env
         case Fn(type_map: ListMap[String, Exp], body: Exp) =>
+          // local_env = env
+          // check(local_env, A1, type)
+          // local_env = local_env.ext(x1, eval(local_env, A1), NeutralVar(x1))
+          // ...
+          // R_value = infer(local_env, r)
+          // R = readback(R_value)
+          // ------
+          // infer(
+          //   env,
+          //   { x1 : A1, x2 : A2, ... => r }) = { x1 : A1, x2 : A2, ... => R } @ env
           var local_env = env
           type_map.foreach {
             case (name, t) =>
@@ -73,21 +73,21 @@ object infer {
             s"the language is not designed to infer the type of FnCase: ${exp}\n"
           ))
 
-        // check(local_env, A1, type)
-        // A1_value = eval(local_env, A1)
-        // check(local_env, d1, A1_value)
-        // d1_value = eval(local_env, d1)
-        // local_env = local_env.ext(x1, A1_value, d1_value)
-        // ...
-        // check(local_env, B1, type)
-        // B1_value = eval(local_env, B1)
-        // local_env = local_env.ext(y1, B1_value, NeutralVar(y1))
-        // ...
-        // ------
-        // infer(
-        //   local_env,
-        //   { x1 = d1 : A1, x2 = d2 : A2, ..., y1 : B1, y2 : B2, ... }) = type
         case Cl(defined, type_map: ListMap[String, Exp]) =>
+          // check(local_env, A1, type)
+          // A1_value = eval(local_env, A1)
+          // check(local_env, d1, A1_value)
+          // d1_value = eval(local_env, d1)
+          // local_env = local_env.ext(x1, A1_value, d1_value)
+          // ...
+          // check(local_env, B1, type)
+          // B1_value = eval(local_env, B1)
+          // local_env = local_env.ext(y1, B1_value, NeutralVar(y1))
+          // ...
+          // ------
+          // infer(
+          //   local_env,
+          //   { x1 = d1 : A1, x2 = d2 : A2, ..., y1 : B1, y2 : B2, ... }) = type
           var local_env = env
           defined.foreach {
             case (name, (t, d)) =>
@@ -105,13 +105,13 @@ object infer {
           }
           ValueType()
 
-        // A1 = infer(local_env, a1)
-        // ...
-        // ------
-        // infer(
-        //   local_env,
-        //   { x1 = a1, x2 = a2, ... }) = { x1 = A1, x2 = A2, ... }
         case Obj(value_map: ListMap[String, Exp]) =>
+          // A1 = infer(local_env, a1)
+          // ...
+          // ------
+          // infer(
+          //   local_env,
+          //   { x1 = a1, x2 = a2, ... }) = { x1 = A1, x2 = A2, ... }
           ValueClInferedFromObj(value_map.map {
             case (name, exp) =>
               (name, infer(env, exp))
@@ -193,20 +193,20 @@ object infer {
                   ))
               }
 
-            // CASE found `m` in `defined`
-            // { ..., m = d : T, ... } @ telescope_env = infer(env, e)
-            // ------
-            // infer(env, e.m) = T
-            // CASE found `m` in `telescope`
-            // { x1 : A1,
-            //   x2 : A2, ...
-            //   m : T, ... } @ telescope_env = infer(env, e)
-            // telescope_env = telescope_env.ext(x1, eval(telescope_env, T), NeutralVar(x1))
-            // ...
-            // T_value = eval(telescope_env, T)
-            // ------
-            // infer(env, e.m) = T_value
             case ValueCl(defined, telescope) =>
+              // CASE found `m` in `defined`
+              // { ..., m = d : T, ... } @ telescope_env = infer(env, e)
+              // ------
+              // infer(env, e.m) = T
+              // CASE found `m` in `telescope`
+              // { x1 : A1,
+              //   x2 : A2, ...
+              //   m : T, ... } @ telescope_env = infer(env, e)
+              // telescope_env = telescope_env.ext(x1, eval(telescope_env, T), NeutralVar(x1))
+              // ...
+              // T_value = eval(telescope_env, T)
+              // ------
+              // infer(env, e.m) = T_value
               defined.get(field) match {
                 case Some((t, _v)) => t
                 case None =>
