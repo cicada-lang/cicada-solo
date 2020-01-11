@@ -1,5 +1,4 @@
 # unified-env
-- [unified-env] `equivalent`
 - [unified-env] `Top`
 - [unified-env] grammar
 - [unified-env] api

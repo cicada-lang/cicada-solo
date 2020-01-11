@@ -5,6 +5,7 @@ import java.util.UUID
 import collection.immutable.ListMap
 
 import pretty._
+import eval._
 import subtype._
 
 object equivalent {
@@ -23,70 +24,99 @@ object equivalent {
             ))
           }
 
-        // case (s: ValuePi, t: ValuePi) =>
-        //   if (s.telescope.type_map.size != t.telescope.type_map.size) {
-        //     throw Report(List(
-        //       s"equivalent fail between ValuePi and ValuePi, arity mismatch\n"
-        //     ))
-        //   }
-        //   val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {
-        //     case (s_name, t_name) =>
-        //       val uuid: UUID = UUID.randomUUID()
-        //       s"#equivalent-pi-type:${s_name}:${t_name}:${uuid}"
-        //   }.toList
-        //   val (s_type_map, s_return_type) =
-        //     util.telescope_force_with_return(s.telescope, name_list, s.return_type)
-        //   val (t_type_map, t_return_type) =
-        //     util.telescope_force_with_return(t.telescope, name_list, t.return_type)
-        //   equivalent_list_map(t_type_map, s_type_map)
-        //   equivalent(s_return_type, t_return_type)
+        case (s: ValuePi, t: ValuePi) =>
+          if (s.telescope.size != t.telescope.size) {
+            throw Report(List(
+              s"equivalent fail between ValuePi and ValuePi\n" +
+                s"telescope size mismatch\n" +
+                s"s.telescope.size = ${s.telescope.size}\n" +
+                s"t.telescope.size = ${t.telescope.size}\n"
+            ))
+          }
+          var t_telescope_env = t.telescope.env
+          var s_telescope_env = s.telescope.env
+          t.telescope.type_map.zip(s.telescope.type_map).foreach {
+            case ((t_name, t_type), (s_name, s_type)) =>
+              val t_type_value = eval(t_telescope_env, t_type)
+              val s_type_value = eval(s_telescope_env, s_type)
+              equivalent(s_type_value, t_type_value)
+              val unique_var = util.unique_var_from(
+                s"equivalent:ValuePi:ValuePi:${s_name}${t_name}")
+              t_telescope_env = t_telescope_env.ext(unique_var.name, t_type_value, unique_var)
+              s_telescope_env = s_telescope_env.ext(unique_var.name, s_type_value, unique_var)
+          }
+          val t_return_type_value = eval(t_telescope_env, t.return_type)
+          val s_return_type_value = eval(s_telescope_env, s.return_type)
+          equivalent(s_return_type_value, t_return_type_value)
 
-        // case (s: ValueFn, t: ValueFn) =>
-        //   if (s.telescope.type_map.size != t.telescope.type_map.size) {
-        //     throw Report(List(
-        //       s"equivalent fail between ValueFn and ValueFn, arity mismatch\n"
-        //     ))
-        //   }
-        //   val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {
-        //     case (s_name, t_name) =>
-        //       val uuid: UUID = UUID.randomUUID()
-        //       s"#equivalent-function:${s_name}:${t_name}:${uuid}"
-        //   }.toList
-        //   val (s_type_map, s_body) =
-        //     util.telescope_force_with_return(s.telescope, name_list, s.body)
-        //   val (t_type_map, t_body) =
-        //     util.telescope_force_with_return(t.telescope, name_list, t.body)
-        //   equivalent_list_map(t_type_map, s_type_map)
-        //   equivalent(s_body, t_body)
+        case (s: ValueFn, t: ValueFn) =>
+          if (s.telescope.size != t.telescope.size) {
+            throw Report(List(
+              s"equivalent fail between ValueFn and ValueFn\n" +
+                s"telescope size mismatch\n" +
+                s"s.telescope.size = ${s.telescope.size}\n" +
+                s"t.telescope.size = ${t.telescope.size}\n"
+            ))
+          }
+          var t_telescope_env = t.telescope.env
+          var s_telescope_env = s.telescope.env
+          t.telescope.type_map.zip(s.telescope.type_map).foreach {
+            case ((t_name, t_type), (s_name, s_type)) =>
+              val t_type_value = eval(t_telescope_env, t_type)
+              val s_type_value = eval(s_telescope_env, s_type)
+              equivalent(s_type_value, t_type_value)
+              val unique_var = util.unique_var_from(
+                s"equivalent:ValuePi:ValuePi:${s_name}${t_name}")
+              t_telescope_env = t_telescope_env.ext(unique_var.name, t_type_value, unique_var)
+              s_telescope_env = s_telescope_env.ext(unique_var.name, s_type_value, unique_var)
+          }
+          val t_body_value = eval(t_telescope_env, t.body)
+          val s_body_value = eval(s_telescope_env, s.body)
+          equivalent(s_body_value, t_body_value)
 
-        // case (s: ValueFnCase, t: ValueFnCase) =>
-        //   if (s.cases.length != t.cases.length) {
-        //     throw Report(List(
-        //       s"equivalent fail between ValueFnCase and ValueFnCase, length mismatch\n"
-        //     ))
-        //   }
-        //   s.cases.zip(t.cases).foreach {
-        //     case ((s_telescope, s_body), (t_telescope, t_body)) =>
-        //       equivalent(ValueFn(s_telescope, s_body), ValueFn(t_telescope, t_body))
-        //   }
+        case (s: ValueFnCase, t: ValueFnCase) =>
+          if (s.cases.length != t.cases.length) {
+            throw Report(List(
+              s"equivalent fail between ValueFnCase and ValueFnCase\n" +
+                s"cases length mismatch\n" +
+                s"s.cases.length = ${s.cases.length}\n" +
+                s"t.cases.length = ${t.cases.length}\n"
+            ))
+          }
+          s.cases.zip(t.cases).foreach {
+            case ((s_telescope, s_body), (t_telescope, t_body)) =>
+              equivalent(ValueFn(s_telescope, s_body), ValueFn(t_telescope, t_body))
+          }
 
-        // case (s: ValueCl, t: ValueCl) =>
-        //   if (s.telescope.type_map.size != t.telescope.type_map.size) {
-        //     throw Report(List(
-        //       s"equivalent fail between ValueCl and ValueCl, arity mismatch\n"
-        //     ))
-        //   }
-        //   equivalent_defined(s.defined, t.defined)
-        //   // NOTE in the following implementation
-        //   //   the order matters
-        //   val name_list = s.telescope.type_map.keys.zip(t.telescope.type_map.keys).map {
-        //     case (s_name, t_name) =>
-        //       val uuid: UUID = UUID.randomUUID()
-        //       s"#equivalent-class:${s_name}:${t_name}:${uuid}"
-        //   }.toList
-        //   val s_type_map = util.telescope_force(s.telescope, name_list)
-        //   val t_type_map = util.telescope_force(t.telescope, name_list)
-        //   equivalent_list_map(t_type_map, s_type_map)
+        case (s: ValueCl, t: ValueCl) =>
+          equivalent_defined(s.defined, t.defined)
+          if (s.telescope.size != t.telescope.size) {
+            throw Report(List(
+              s"equivalent fail between ValueCl and ValueCl\n" +
+                s"telescope size mismatch\n" +
+                s"s.telescope.size = ${s.telescope.size}\n" +
+                s"t.telescope.size = ${t.telescope.size}\n"
+            ))
+          }
+          var t_telescope_env = t.telescope.env
+          var s_telescope_env = s.telescope.env
+          t.telescope.type_map.foreach {
+            case (name, t_type) =>
+              s.telescope.type_map.get(name) match {
+                case Some(s_type) =>
+                  val t_type_value = eval(t_telescope_env, t_type)
+                  val s_type_value = eval(s_telescope_env, s_type)
+                  equivalent(s_type_value, t_type_value)
+                  t_telescope_env = t_telescope_env.ext(name, t_type_value, NeutralVar(name))
+                  s_telescope_env = s_telescope_env.ext(name, s_type_value, NeutralVar(name))
+                case None =>
+                  throw Report(List(
+                    s"equivalent_telescope fail\n" +
+                      s"can not find field of t_telescope in s_telescope\n" +
+                      s"field = ${name}\n"
+                  ))
+              }
+          }
 
         case (s: ValueClInferedFromObj, t: ValueClInferedFromObj) =>
           equivalent_list_map(s.type_map, t.type_map)
@@ -182,6 +212,34 @@ object equivalent {
             throw Report(List(
               s"equivalent_list_map fail\n" +
                 s"can not find field of t_list_map in s_type_map\n" +
+                s"field = ${name}\n"
+            ))
+        }
+    }
+  }
+
+  def equivalent_defined(
+    s_defined: ListMap[String, (Value, Value)],
+    t_defined: ListMap[String, (Value, Value)],
+  ): Unit = {
+    if (s_defined.size != t_defined.size) {
+      throw Report(List(
+        s"equivalent_defined fail\n" +
+          s"defined size mismatch\n" +
+          s"s_defined.size = ${s_defined.size}\n" +
+          s"t_defined.size = ${t_defined.size}\n"
+      ))
+    }
+    t_defined.foreach {
+      case (name, (t_type_value, t_value)) =>
+        s_defined.get(name) match {
+          case Some((s_type_value, s_value)) =>
+            equivalent(s_type_value, t_type_value)
+            equivalent(s_value, t_value)
+          case None =>
+            throw Report(List(
+              s"equivalent_defined fail\n" +
+                s"can not find field of t_defined in s_defined\n" +
                 s"field = ${name}\n"
             ))
         }
