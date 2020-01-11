@@ -14,7 +14,7 @@ true = {
   tag = "true"
 }
 
-false : false_t = {
+false = {
   tag = "false"
 }
 

@@ -1,4 +1,4 @@
-- try no `ValueClInferedFromObj` again
+- fix tests
 # Problem
 - Problem: fail to check
   ``` cicada

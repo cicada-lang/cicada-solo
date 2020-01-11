@@ -128,12 +128,6 @@ object pretty {
         }.mkString("")
         s"class {${maybe_ln(d)}${maybe_ln(s)}}"
 
-      case ValueClInferedFromObj(type_map: ListMap[String, Value]) =>
-        var s = type_map.map {
-          case (name, value) => s"${name} : ${pretty_value(value)}\n"
-        }.mkString("")
-        s"class {${maybe_ln(s)}}"
-
       case ValueObj(value_map: ListMap[String, Value]) =>
         var s = value_map.map {
           case (name, value) => s"${name} = ${pretty_value(value)}\n"

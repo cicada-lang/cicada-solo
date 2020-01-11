@@ -118,21 +118,6 @@ object equivalent {
               }
           }
 
-        case (s: ValueClInferedFromObj, t: ValueClInferedFromObj) =>
-          equivalent_list_map(s.type_map, t.type_map)
-
-        case (s: ValueCl, t: ValueClInferedFromObj) =>
-          throw Report(List(
-            s"equivalent fail between ValueCl and ValueClInferedFromObj\n" +
-              s"this case is not handled\n"
-          ))
-
-        case (s: ValueClInferedFromObj, t: ValueCl) =>
-          throw Report(List(
-            s"equivalent fail between ValueClInferedFromObj and ValueCl\n" +
-              s"this case is not handled\n"
-          ))
-
         case (s: ValueObj, t: ValueObj) =>
           equivalent_list_map(s.value_map, t.value_map)
 

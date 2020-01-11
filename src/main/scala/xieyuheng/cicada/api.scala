@@ -60,10 +60,6 @@ object api {
         }
         val t = infer(local_env, exp)
         val value = eval(local_env, exp)
-        if (name == "true") {
-          println(s"t: ${pretty_value(t)}")
-          println(s"v: ${pretty_value(value)}")
-        }
         local_env = local_env.ext(name, t, value)
         if (config.get("--verbose") != None) {
           println(s"let ${name} = ${pretty_exp(exp)}")

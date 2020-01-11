@@ -107,15 +107,22 @@ object infer {
 
         case Obj(value_map: ListMap[String, Exp]) =>
           // A1 = infer(local_env, a1)
+          // a1_value = eval(local_env, a1)
+          // local_env = local_env.ext(x1, a1_value, A1)
           // ...
           // ------
-          // infer(
-          //   local_env,
-          //   { x1 = a1, x2 = a2, ... }) = { x1 = A1, x2 = A2, ... }
-          ValueClInferedFromObj(value_map.map {
-            case (name, exp) =>
-              (name, infer(env, exp))
-          })
+          // infer(local_env, { x1 = a1, x2 = a2, ... }) =
+          //   { x1 = a1_value : A1, x2 = a2_value : A2, ... } @ local_env
+          var local_env = env
+          var defined: ListMap[String, (Value, Value)] = ListMap()
+          value_map.foreach {
+            case (name, v) =>
+              val t_value = infer(local_env, v)
+              val v_value = eval(local_env, v)
+              local_env = local_env.ext(name, t_value, v_value)
+              defined = defined + (name -> (t_value, v_value))
+          }
+          ValueCl(defined, Telescope(ListMap(), local_env))
 
         case Ap(target: Exp, arg_list: List[Exp]) =>
           infer(env, target) match {
@@ -177,22 +184,6 @@ object infer {
         case Dot(target: Exp, field: String) =>
           val t_infered = infer(env, target)
           t_infered match {
-            case ValueClInferedFromObj(type_map: ListMap[String, Value]) =>
-              // { ..., m : T, ... } = infer(env, e)
-              // ------
-              // infer(env, e.m) = T
-              type_map.get(field) match {
-                case Some(t) => t
-                case None =>
-                  throw Report(List(
-                    s"infer fail\n" +
-                      s"on ValueClInferedFromObj\n" +
-                      s"target exp: ${pretty_exp(target)}\n" +
-                      s"infered target type: ${pretty_value(t_infered)}\n" +
-                      s"can not find field for dot: ${field}\n"
-                  ))
-              }
-
             case ValueCl(defined, telescope) =>
               // CASE found `m` in `defined`
               // { ..., m = d : T, ... } @ telescope_env = infer(env, e)

@@ -6,6 +6,8 @@ import collection.immutable.ListMap
 import pretty._
 import check._
 import infer._
+import subtype._
+import readback._
 
 object eval {
 
@@ -113,12 +115,6 @@ object eval {
             } match {
               case Success(_ok) => true
               case Failure(_error) => false
-              // case Failure(report: Report) =>
-              //   println(s"report: ${report}")
-              //   false
-              // case Failure(error) =>
-              //   println(s"error: ${error}")
-              //   false
             }
         } match {
           case Some((telescope, body)) =>

@@ -15,7 +15,6 @@ final case class ValuePi(telescope: Telescope, return_type: Exp) extends Value
 final case class ValueFn(telescope: Telescope, body: Exp) extends Value
 final case class ValueFnCase(cases: List[(Telescope, Exp)]) extends Value
 final case class ValueCl(defined: ListMap[String, (Value, Value)], telescope: Telescope) extends Value
-final case class ValueClInferedFromObj(type_map: ListMap[String, Value]) extends Value
 final case class ValueObj(value_map: ListMap[String, Value]) extends Value
 
 sealed trait Neutral extends Value
