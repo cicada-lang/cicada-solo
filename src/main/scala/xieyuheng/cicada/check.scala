@@ -7,7 +7,6 @@ import pretty._
 import eval._
 import infer._
 import subtype._
-import readback._
 import equivalent._
 
 object check {
