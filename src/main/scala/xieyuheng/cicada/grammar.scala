@@ -13,9 +13,8 @@ object grammar {
   val preserved =
     List(
       "type", "class",
-      "union", "case",
+      "case",
       "string_t",
-      "the",
     )
 
   val identifier = identifier_with_preserved("identifier", preserved)
@@ -81,7 +80,6 @@ object grammar {
         "obj_empty" -> List("object", "{", "}"),
         "obj_naked_empty" -> List("{", "}"),
         "dot" -> List(exp, ".", identifier),
-        "union" -> List("union", "{", $(non_empty_list, union_entry), "}"),
         "block" -> List("{", $(non_empty_list, block_entry), exp, "}"),
         "the" -> List("the", "(", exp, ",", exp, ")"),
       ))
@@ -137,20 +135,6 @@ object grammar {
         "block" -> { case List(_, block_entry_list, body, _) =>
           val block_entry_map = ListMap(non_empty_list_matcher(block_entry_matcher)(block_entry_list): _*)
           Block(block_entry_map, exp_matcher(body)) },
-      ))
-
-  val union_entry: () => Rule =
-    () => Rule(
-      "union_entry", Map(
-        "case" -> List("case", exp),
-      ))
-
-  def union_entry_matcher =
-    Tree.matcher[Exp](
-      "union_entry", Map(
-        "case" -> { case List(_, t) =>
-          exp_matcher(t)
-        },
       ))
 
   val fn_case_clause: () => Rule =
