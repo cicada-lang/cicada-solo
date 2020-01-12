@@ -162,7 +162,8 @@ object check {
         report.throw_prepend(
           s"check fail\n" +
             s"exp: ${pretty_exp(exp)}\n" +
-            s"t: ${pretty_value(t)}\n"
+            s"value: ${pretty_value(eval(env, exp))}\n" +
+            s"type: ${pretty_value(t)}\n"
         )
     }
   }

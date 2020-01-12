@@ -3,7 +3,7 @@ class zero_t {}
 class succ_t { prev : nat_t }
 
 succ : {
-  x : nat_t -> succ_t
+  x : nat_t -> succ_t(x)
 } = {
   x : nat_t => {
     prev = x
@@ -19,6 +19,7 @@ five = succ(four)
 six = succ(five)
 
 @accept one : succ_t
+@accept one : succ_t(zero)
 @refuse zero : succ_t
 
 nat_add : { x : nat_t, y : nat_t -> nat_t } = {

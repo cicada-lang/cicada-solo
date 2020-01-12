@@ -74,7 +74,7 @@ object subtype {
                   subtype(s_type_value, t_type_value)
                   equivalent(s_value, t_value)
                 case None =>
-                  // TODO type with only one possible element must be handled specially here.
+                  // NOTE maybe type with only one possible element should be handled specially here.
                   throw Report(List(
                     s"subtype fail between ValueCl and ValueCl\n" +
                       s"missing name in the subtype class's defined\n" +
@@ -82,8 +82,9 @@ object subtype {
                   ))
               }
           }
-          var s_telescope_env = s.telescope.env
           var t_telescope_env = t.telescope.env
+          import collection.mutable.Set
+          val name_set: Set[String] = Set()
           t.telescope.type_map.foreach {
             case (name, t_type) =>
               s.defined.get(name) match {
@@ -92,21 +93,29 @@ object subtype {
                   subtype(s_type_value, t_type_value)
                   t_telescope_env = t_telescope_env.ext(name, s_type_value, s_value)
                 case None =>
-                  s.telescope.type_map.get(name) match {
-                    case Some(s_type) =>
-                      val s_type_value = eval(s_telescope_env, s_type)
-                      val t_type_value = eval(t_telescope_env, t_type)
-                      subtype(s_type_value, t_type_value)
-                      s_telescope_env = s_telescope_env.ext(name, s_type_value, NeutralVar(name))
-                      t_telescope_env = t_telescope_env.ext(name, s_type_value, NeutralVar(name))
-                    case None =>
-                      throw Report(List(
-                        s"subtype fail between ValueCl and ValueCl\n" +
-                          s"missing name in the subtype class\n" +
-                          s"name: ${name}\n"
-                      ))
-                  }
+                  name_set.add(name)
               }
+          }
+          var s_telescope_env = s.telescope.env
+          s.telescope.type_map.foreach {
+            case (name, s_type) =>
+              val s_type_value = eval(s_telescope_env, s_type)
+              s_telescope_env = s_telescope_env.ext(name, s_type_value, NeutralVar(name))
+              if (name_set.contains(name)) {
+                val t_type = t.telescope.type_map.get(name).get
+                name_set.remove(name)
+                val t_type_value = eval(t_telescope_env, t_type)
+                t_telescope_env = t_telescope_env.ext(name, s_type_value, NeutralVar(name))
+                subtype(s_type_value, t_type_value)
+              }
+          }
+          if (!name_set.isEmpty) {
+            val s = name_set.mkString(", ")
+            throw Report(List(
+              s"subtype fail between ValueCl and ValueCl\n" +
+                s"missing names in the subtype class\n" +
+                s"names: ${s}\n"
+            ))
           }
 
         case (s, t) =>

@@ -126,7 +126,7 @@ object pretty {
         var s = type_map.map {
           case (name, exp) => s"${name} : ${pretty_exp(exp)}\n"
         }.mkString("")
-        s"class {${maybe_ln(d)}${maybe_ln(s)}}"
+        s"class {${maybe_ln(d+s)}}"
 
       case ValueObj(value_map: ListMap[String, Value]) =>
         var s = value_map.map {

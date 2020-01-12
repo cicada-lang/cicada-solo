@@ -15,7 +15,7 @@ class succ_t {
 }
 
 succ : {
-  x : nat_t -> succ_t
+  x : nat_t -> succ_t(x)
 } = {
   x : nat_t => {
     __club_name__ = "nat_t"
@@ -36,6 +36,7 @@ five = succ(four)
 six = succ(five)
 
 @accept one : succ_t
+@accept one : succ_t(zero)
 @refuse zero : succ_t
 
 nat_add : { x : nat_t, y : nat_t -> nat_t } = {
