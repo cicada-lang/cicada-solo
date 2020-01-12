@@ -63,26 +63,26 @@ vector_length : { vector : vector_t -> nat_t } = {
 @eq one_zeros.length
   = vector_length(one_zeros)
 
-vector_append : {
-  A : type
-  m : nat_t
-  n : nat_t
-  x : vector_t(A, m)
-  y : vector_t(A, n)
-  -> vector_t(A, nat_add(m, n))
-} = {
+// vector_append : {
+//   A : type
+//   m : nat_t
+//   n : nat_t
+//   x : vector_t(A, m)
+//   y : vector_t(A, n)
+//   -> vector_t(A, nat_add(m, n))
+// } = {
+// //   case
+// //       A : type
+// //       m : succ_t
+// //       n : nat_t
+// //       x : vector_cons_t(A, m.prev)
+// //       y : vector_t(A, n)
+// //       => vector_append(A, x.prev, n, x.tail, y)
 //   case
 //       A : type
-//       m : succ_t
+//       m : zero_t
 //       n : nat_t
-//       x : vector_cons_t(A, m.prev)
+//       x : vector_null_t(A, zero)
 //       y : vector_t(A, n)
-//       => vector_append(A, x.prev, n, x.tail, y)
-  case
-      A : type
-      m : zero_t
-      n : nat_t
-      x : vector_null_t(A, zero)
-      y : vector_t(A, n)
-      => y
-}
+//       => y
+// }

@@ -74,7 +74,6 @@ object subtype {
                   subtype(s_type_value, t_type_value)
                   equivalent(s_value, t_value)
                 case None =>
-                  // NOTE maybe type with only one possible element should be handled specially here.
                   throw Report(List(
                     s"subtype fail between ValueCl and ValueCl\n" +
                       s"missing name in the subtype class's defined\n" +
