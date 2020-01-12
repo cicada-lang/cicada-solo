@@ -39,12 +39,12 @@ class vector_cons_t {
   tail : vector_t(A, prev)
 }
 
-// TODO
+zero_zeros : vector_t = {
+  A = nat_t
+  length = zero
+}
 
-// zero_zeros : vector_t = {
-//   A = nat_t
-//   length = zero
-// }
+// TODO
 
 // one_zeros : vector_cons_t = {
 //   A = nat_t

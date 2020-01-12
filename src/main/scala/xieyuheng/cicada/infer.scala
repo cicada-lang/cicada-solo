@@ -129,7 +129,7 @@ object infer {
             // { x1 : A1, x2 : A2, ... -> R } @ telescope_env = infer(env, f)
             // A1_value = eval(telescope_env, A1)
             // check(env, a1, A1_value)
-            // telescope_env = telescope_env.ext(x1, eval(env, a1), A1_value)
+            // telescope_env = telescope_env.ext(x1, A1_value, eval(env, a1))
             // ...
             // ------
             // infer(env, f(a1, a2, ...)) = eval(telescope_env, R)
@@ -146,7 +146,7 @@ object infer {
                 case ((name, t), arg) =>
                   val t_value = eval(telescope_env, t)
                   check(env, arg, t_value)
-                  telescope_env = telescope_env.ext(name, eval(env, arg), t_value)
+                  telescope_env = telescope_env.ext(name, t_value, eval(env, arg))
               }
               eval(telescope_env, return_type)
 

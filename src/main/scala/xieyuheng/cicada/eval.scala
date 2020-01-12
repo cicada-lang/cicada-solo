@@ -108,8 +108,9 @@ object eval {
               telescope.type_map.zip(arg_list).foreach {
                 case ((name, t), arg) =>
                   val t_value = eval(telescope_env, t)
-                  check(env, arg, t_value) // NOTE use the original `env`
                   val arg_value = eval(env, arg)
+                  val arg_norm = readback(arg_value)
+                  check(env, arg_norm, t_value) // NOTE use the original `env`
                   telescope_env = telescope_env.ext(name, t_value, arg_value)
               }
             } match {
@@ -123,7 +124,6 @@ object eval {
             telescope.type_map.zip(arg_list).foreach {
               case ((name, t), arg) =>
                 val t_value = eval(telescope_env, t)
-                check(env, arg, t_value) // NOTE use the original `env`
                 val arg_value = eval(env, arg)
                 local_env = local_env.ext(name, t_value, arg_value)
                 telescope_env = telescope_env.ext(name, t_value, arg_value)

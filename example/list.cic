@@ -45,49 +45,45 @@ list_length : { x : list_t -> nat_t } = {
 
 @eq list_length(null_unit) = zero
 @eq list_length(list_cons_unit(null_unit)) = one
-@show list_cons_unit(null_unit)
-@show list_cons_unit(list_cons_unit(null_unit))
-@show list_length(list_cons_unit(list_cons_unit(null_unit)))
-// TODO
-// @eq list_length(list_cons_unit(list_cons_unit(null_unit))) = two
+@eq list_length(list_cons_unit(list_cons_unit(null_unit))) = two
 
-// list_append : { A : type, x : list_t(A), y : list_t(A) -> list_t(A) } = {
-//   case A : type, x : cons_t(A), y : list_t(A) => {
-//     A = A
-//     car = x.car
-//     cdr = list_append(A, x.cdr, y)
-//   }
-//   case A : type, x : null_t(A), y : list_t(A) => y
-// }
+list_append : { A : type, x : list_t(A), y : list_t(A) -> list_t(A) } = {
+  case A : type, x : cons_t(A), y : list_t(A) => {
+    A = A
+    car = x.car
+    cdr = list_append(A, x.cdr, y)
+  }
+  case A : type, x : null_t(A), y : list_t(A) => y
+}
 
-// @eq list_append(unit_t, null_unit, null_unit) = null_unit
-// @eq list_append(unit_t, list_cons_unit(null_unit), null_unit) = list_cons_unit(null_unit)
-// @eq list_append(unit_t, null_unit, list_cons_unit(null_unit)) = list_cons_unit(null_unit)
-// @eq list_append(unit_t, list_cons_unit(null_unit), list_cons_unit(null_unit))
-//   = list_cons_unit(list_cons_unit(null_unit))
+@eq list_append(unit_t, null_unit, null_unit) = null_unit
+@eq list_append(unit_t, list_cons_unit(null_unit), null_unit) = list_cons_unit(null_unit)
+@eq list_append(unit_t, null_unit, list_cons_unit(null_unit)) = list_cons_unit(null_unit)
+@eq list_append(unit_t, list_cons_unit(null_unit), list_cons_unit(null_unit))
+  = list_cons_unit(list_cons_unit(null_unit))
 
-// null_one : null_t(succ_t) = { A = succ_t }
+null_one : null_t(succ_t) = { A = succ_t }
 
-// list_cons_one : {
-//   one_list : list_t(succ_t)
-//   -> list_t(succ_t)
-// } = {
-//   one_list : list_t(succ_t)
-//   => {
-//     A = succ_t
-//     car = one
-//     cdr = one_list
-//   }
-// }
+list_cons_one : {
+  one_list : list_t(succ_t)
+  -> list_t(succ_t)
+} = {
+  one_list : list_t(succ_t)
+  => {
+    A = succ_t
+    car = one
+    cdr = one_list
+  }
+}
 
-// @eq list_append(succ_t, null_one, null_one) = null_one
-// @eq list_append(succ_t, list_cons_one(null_one), null_one) = list_cons_one(null_one)
-// @eq list_append(succ_t, null_one, list_cons_one(null_one)) = list_cons_one(null_one)
-// @eq list_append(succ_t, list_cons_one(null_one), list_cons_one(null_one))
-//   = list_cons_one(list_cons_one(null_one))
+@eq list_append(succ_t, null_one, null_one) = null_one
+@eq list_append(succ_t, list_cons_one(null_one), null_one) = list_cons_one(null_one)
+@eq list_append(succ_t, null_one, list_cons_one(null_one)) = list_cons_one(null_one)
+@eq list_append(succ_t, list_cons_one(null_one), list_cons_one(null_one))
+  = list_cons_one(list_cons_one(null_one))
 
-// @accept list_append(
-//   succ_t,
-//   list_cons_one(null_one),
-//   list_cons_one(null_one))
-// : list_t(succ_t)
+@accept list_append(
+  succ_t,
+  list_cons_one(null_one),
+  list_cons_one(null_one))
+: list_t(succ_t)
