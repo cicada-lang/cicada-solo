@@ -1,6 +1,6 @@
-# `vector_append`
+# fail to check `case vector_null_t` of `vector_append`
 
-fail to check
+## case
 
 ``` scala
 vector_append : {
@@ -11,13 +11,6 @@ vector_append : {
   y : vector_t(A, n)
   -> vector_t(A, nat_add(m, n))
 } = {
-//   case
-//       A : type
-//       m : succ_t
-//       n : nat_t
-//       x : vector_cons_t(A, m.prev)
-//       y : vector_t(A, n)
-//       => vector_append(A, x.prev, n, x.tail, y)
   case
       A : type
       m : zero_t
@@ -28,7 +21,7 @@ vector_append : {
 }
 ```
 
-error:
+## error
 
 ``` scala
 ------
@@ -67,13 +60,120 @@ meet unhandled case
 ------
 ```
 
+## solution
+
+the problem is due to,
 fail to check equivalent between `m : zero_t` and `zero`
 
-Solution:
-- maybe type with only one possible element
+- [solution 0] we can write
+  ``` scala
+  case
+      A : type
+      m : zero_t
+      n : nat_t
+      x : vector_null_t(A, m)
+      y : vector_t(A, n)
+      => y
+  ```
+  instead of
+  ``` scala
+  case
+      A : type
+      m : zero_t
+      n : nat_t
+      x : vector_null_t(A, zero)
+      y : vector_t(A, n)
+      => y
+  ```
+- [solution 1] maybe allow value in pattern of case lambda.
+- [solution 2] maybe type with only one possible element
   should be handled specially.
 
-# `vector_cons_t`
+# fail to check `case vector_cons_t` of `vector_append`
+
+## case
+
+``` scala
+vector_append : {
+  A : type
+  m : nat_t
+  n : nat_t
+  x : vector_t(A, m)
+  y : vector_t(A, n)
+  -> vector_t(A, nat_add(m, n))
+} = {
+  case
+      A : type
+      m : succ_t
+      n : nat_t
+      x : vector_cons_t(A, m.prev)
+      y : vector_t(A, n)
+      => {
+        A = A
+        prev = nat_add(m, n).prev
+        head = x.head
+        length = nat_add(m, n)
+        tail = vector_append(A, x.prev, n, x.tail, y)
+      }
+}
+```
+
+## error
+
+``` scala
+------
+check fail
+exp: {
+  case A : type, m : succ_t, n : nat_t, x : vector_cons_t(A, m.prev), y : vector_t(A, n) => object {
+    A = A
+    prev = nat_add(m, n).prev
+    head = x.head
+    length = nat_add(m, n)
+    tail = vector_append(A, x.prev, n, x.tail, y)
+  }
+  case A : type, m : zero_t, n : nat_t, x : vector_null_t(A, m), y : vector_t(A, n) => y
+}
+value: {
+  case A : type, m : succ_t, n : nat_t, x : vector_cons_t(A, m.prev), y : vector_t(A, n) => object {
+    A = A
+    prev = nat_add(m, n).prev
+    head = x.head
+    length = nat_add(m, n)
+    tail = vector_append(A, x.prev, n, x.tail, y)
+  }
+  case A : type, m : zero_t, n : nat_t, x : vector_null_t(A, m), y : vector_t(A, n) => y
+}
+type: {
+  A : type
+  m : nat_t
+  n : nat_t
+  x : vector_t(A, m)
+  y : vector_t(A, n)
+  -> vector_t(A, nat_add(m, n))
+}
+------
+subtype fail
+s: class {
+  A : type = check:FnCase:A:A#71640196-2070-4d3c-86d9-cc60f56e43bd
+  prev : class {} = check:FnCase:m:m#78febad0-977a-475c-994e-4e27b4431ece.prev
+  head : A
+  length : succ_t(prev)
+  tail : vector_t(A, prev)
+}
+t: class {
+  A : type = check:FnCase:A:A#71640196-2070-4d3c-86d9-cc60f56e43bd
+  length : class {} = check:FnCase:m:m#78febad0-977a-475c-994e-4e27b4431ece
+}
+------
+subtype fail between ValueCl and ValueCl
+missing name in the subtype class's defined
+name: length
+------
+```
+
+## solution
+
+maybe the problem is about `vector_cons_t`
 
 ``` scala
 class vector_cons_t {
@@ -85,9 +185,9 @@ class vector_cons_t {
 }
 ```
 
-we need to use `let` and `define` in class,
-in any order,
-not just `given` after `define`.
+- [solution 0] we need to use `let` and `define` in class,
+  in any order,
+  not just `given` after `define`.
 
 ``` scala
 class vector_cons_t {
