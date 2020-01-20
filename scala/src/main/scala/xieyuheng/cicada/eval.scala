@@ -6,7 +6,6 @@ import collection.immutable.ListMap
 import pretty._
 import check._
 import infer._
-import subtype._
 import readback._
 
 object eval {

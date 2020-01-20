@@ -1,3 +1,7 @@
+# in ts
+- exp
+- value
+- evaluate
 # cicada
 - [example] vector_append
 - [equality] we can implementation equality by built-in equality
