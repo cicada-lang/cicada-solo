@@ -6,6 +6,10 @@
 - infer
 - subtype
 - equivalent
+- api
+- command line interface
+- test
+- remove scala code
 # cicada
 - [example] vector_append
 - [equality] we can implementation equality by built-in equality
