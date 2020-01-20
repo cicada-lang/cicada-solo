@@ -2,7 +2,7 @@ import { Exp } from "./exp"
 
 export class Scope {
   constructor(
-    public named_entry_list: Array<[string, ScopeEntry]>,
+    public named_entry_list: Array<[string, ScopeEntry]> = [],
   ) {}
 
   get length(): number {

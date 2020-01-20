@@ -2,7 +2,7 @@ import { Exp } from "./exp";
 import { Value } from "./value";
 export declare class Env {
     entry_map: Map<string, EnvEntry>;
-    constructor(entry_map: Map<string, EnvEntry>);
+    constructor(entry_map?: Map<string, EnvEntry>);
 }
 export declare abstract class EnvEntry {
 }

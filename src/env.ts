@@ -3,7 +3,7 @@ import { Value } from "./value"
 
 export class Env {
   constructor(
-    public entry_map: Map<string, EnvEntry>,
+    public entry_map: Map<string, EnvEntry> = new Map(),
   ) {}
 }
 

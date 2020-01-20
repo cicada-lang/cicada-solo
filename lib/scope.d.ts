@@ -1,7 +1,7 @@
 import { Exp } from "./exp";
 export declare class Scope {
     named_entry_list: Array<[string, ScopeEntry]>;
-    constructor(named_entry_list: Array<[string, ScopeEntry]>);
+    constructor(named_entry_list?: Array<[string, ScopeEntry]>);
     get length(): number;
 }
 export declare abstract class ScopeEntry {
