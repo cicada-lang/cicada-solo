@@ -6,7 +6,3 @@ import { check } from "./check"
 export function evaluate(env: Env, exp: Exp): Value {
   throw new Error("TODO")
 }
-
-function evaluate_apply(env: Env, exp: Exp): Value {
-  throw new Error("TODO")
-}
