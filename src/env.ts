@@ -7,45 +7,61 @@ export class Env {
     public entry_map: Map<string, EnvEntry> = new Map(),
   ) {}
 
-  lookup_type_and_value(name: string): [ Value, Value ] | undefined {
+  lookup_type_and_value(name: string): { t: Value, value: Value } | undefined {
     let entry = this.entry_map.get(name)
     if (entry !== undefined) {
       if (entry instanceof EnvEntryRecursiveDefine) {
         let { t, value, env } = entry
-        return [ evaluate(env.ext_recursive(name, t, value, env), t),
-                 evaluate(env.ext_recursive(name, t, value, env), value) ]
-        throw new Error("TODO")
+        return {
+          t: evaluate(env.ext_recursive(name, t, value, env), t),
+          value: evaluate(env.ext_recursive(name, t, value, env), value),
+        }
       } else if (entry instanceof EnvEntryDefine) {
-        return [ entry.t, entry.value ]
+        let { t, value } = entry
+        return { t, value }
       } else {
-        throw new Error("TODO")
+        throw new Error(
+          "Env.lookup_type_and_value fail" +
+            `unhandled class of EnvEntry: ${entry.constructor.name}`)
       }
     } else {
       return undefined
     }
   }
 
-  //   def lookup_type(name: string): Option[Value] {
-  //     lookup_type_and_value(name).map {
-  //       case (t, _value) => t
-  //     }
-  //   }
-
-  //   def lookup_value(name: string): Option[Value] {
-  //     lookup_type_and_value(name).map {
-  //       case (_t, value) => value
-  //     }
-  //   }
-
-  //   def ext(name: string, t: Value, value: Value): Env {
-  //     Env(this.entry_map + (name -> EnvEntryDefine(t, value)))
-  //   }
-
-  ext_recursive(name: string, t: Exp, value: Exp, env: Env): Env {
-    throw new Error("TODO")
-    // return new Env(this.entry_map + (name -> EnvEntryRecursiveDefine(t, value, env)))
+  lookup_type(name: string): Value | undefined {
+    let result = this.lookup_type_and_value(name)
+    if (result !== undefined) {
+      let { t } = result
+      return t
+    } else {
+      return undefined
+    }
   }
 
+  lookup_value(name: string): Value | undefined {
+    let result = this.lookup_type_and_value(name)
+    if (result !== undefined) {
+      let { value } = result
+      return value
+    } else {
+      return undefined
+    }
+  }
+
+  ext(name: string, t: Value, value: Value): Env {
+    return new Env(new Map([
+      ...this.entry_map,
+      [name, new EnvEntryDefine(t, value)],
+    ]))
+  }
+
+  ext_recursive(name: string, t: Exp, value: Exp, env: Env): Env {
+    return new Env(new Map([
+      ...this.entry_map,
+      [name, new EnvEntryRecursiveDefine(t, value, env)],
+    ]))
+  }
 }
 
 export abstract class EnvEntry {}

@@ -1,5 +1,4 @@
 # in ts
-- env
 - value
 - evaluate
 - check
