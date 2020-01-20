@@ -29,8 +29,8 @@ export declare class FnCase extends Exp {
 }
 export declare class Ap extends Exp {
     target: Exp;
-    arg_list: Array<Exp>;
-    constructor(target: Exp, arg_list: Array<Exp>);
+    args: Array<Exp>;
+    constructor(target: Exp, args: Array<Exp>);
 }
 export declare class Cl extends Exp {
     scope: Scope;

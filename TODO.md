@@ -1,5 +1,4 @@
 # in ts
-- value
 - evaluate
 - check
 - infer
@@ -9,6 +8,7 @@
 - command line interface
 - test
 - remove scala code
+- add span to `Exp`
 # cicada
 - [example] vector_append
 - [equality] we can implementation equality by built-in equality

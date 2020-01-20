@@ -41,7 +41,7 @@ export class FnCase extends Exp {
 export class Ap extends Exp {
   constructor(
     public target: Exp,
-    public arg_list: Array<Exp>,
+    public args: Array<Exp>,
   ) { super() }
 }
 
