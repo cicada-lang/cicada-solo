@@ -2,6 +2,7 @@
 - evaluate
 - check
 - infer
+- readback
 - subtype
 - equivalent
 - api
