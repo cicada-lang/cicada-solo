@@ -1,36 +1,72 @@
-// sealed trait Exp
-// final case class Var(name: String) extends Exp
-// final case class Type() extends Exp
-// final case class StrType() extends Exp
-// final case class Str(str: String) extends Exp
-// final case class Pi(type_map: ListMap[String, Exp], return_type: Exp) extends Exp
-// final case class Fn(type_map: ListMap[String, Exp], body: Exp) extends Exp
-// final case class FnCase(cases: List[(ListMap[String, Exp], Exp)]) extends Exp
-// final case class Ap(target: Exp, arg_list: List[Exp]) extends Exp
-// final case class Cl(defined: ListMap[String, (Exp, Exp)], type_map: ListMap[String, Exp]) extends Exp
-// final case class Obj(value_map: ListMap[String, Exp]) extends Exp
-// final case class Dot(target: Exp, field: String) extends Exp
-// final case class Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) extends Exp
-
-// sealed trait BlockEntry
-// final case class BlockEntryLet(value: Exp) extends BlockEntry
-// final case class BlockEntryDefine(t: Exp, value: Exp) extends BlockEntry
+import { Scope } from "./scope"
 
 export abstract class Exp {}
+
 export class Var extends Exp {
   constructor(
     public name: string,
   ) { super() }
 }
+
 export class Type extends Exp {}
-// final case class Type() extends Exp
-// final case class StrType() extends Exp
-// final case class Str(str: String) extends Exp
-// final case class Pi(type_map: ListMap[String, Exp], return_type: Exp) extends Exp
-// final case class Fn(type_map: ListMap[String, Exp], body: Exp) extends Exp
-// final case class FnCase(cases: List[(ListMap[String, Exp], Exp)]) extends Exp
-// final case class Ap(target: Exp, arg_list: List[Exp]) extends Exp
-// final case class Cl(defined: ListMap[String, (Exp, Exp)], type_map: ListMap[String, Exp]) extends Exp
-// final case class Obj(value_map: ListMap[String, Exp]) extends Exp
-// final case class Dot(target: Exp, field: String) extends Exp
-// final case class Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) extends Exp
+
+export class StrType extends Exp {}
+
+export class Str extends Exp {
+  constructor(
+    public str: string,
+  ) { super() }
+}
+
+export class Pi extends Exp {
+  constructor(
+    public scope: Scope,
+    public return_type: Exp,
+  ) { super() }
+}
+
+export class Fn extends Exp {
+  constructor(
+    public scope: Scope,
+    public return_value: Exp,
+  ) { super() }
+}
+
+export class FnCase extends Exp {
+  constructor(
+    public cases: Array<Fn>,
+  ) { super() }
+}
+
+export class Ap extends Exp {
+  constructor(
+    public target: Exp,
+    public arg_list: Array<Exp>,
+  ) { super() }
+}
+
+export class Cl extends Exp {
+  constructor(
+    public scope: Scope,
+  ) { super() }
+}
+
+export class Obj extends Exp {
+  constructor(
+    public scope: Scope,
+  ) { super() }
+}
+
+export class Dot extends Exp {
+  constructor(
+    public target: Exp,
+    public field: string,
+  ) { super() }
+}
+
+export class Block extends Exp {
+  constructor(
+    public scope: Scope,
+    public return_value: Exp,
+  ) { super() }
+}

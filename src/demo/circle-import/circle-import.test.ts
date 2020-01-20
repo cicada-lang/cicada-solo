@@ -3,8 +3,8 @@ import { b } from "./b"
 
 {
   console.log("[demo] circle import")
-  console.log("a(10)")
-  a(10)
-  console.log("b(10)")
-  b(10)
+  console.log("a(6)")
+  a(6)
+  console.log("b(6)")
+  b(6)
 }

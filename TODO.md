@@ -1,7 +1,11 @@
 # in ts
-- exp
+- env
 - value
 - evaluate
+- check
+- infer
+- subtype
+- equivalent
 # cicada
 - [example] vector_append
 - [equality] we can implementation equality by built-in equality
