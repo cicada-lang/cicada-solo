@@ -1,4 +1,4 @@
-import { Exp } from "./exp"
+import * as Exp from "./exp"
 
 export class Scope {
   constructor(
@@ -14,19 +14,19 @@ export abstract class ScopeEntry {}
 
 export class ScopeEntryLet extends ScopeEntry {
   constructor(
-    public value: Exp,
+    public value: Exp.Exp,
   ) { super() }
 }
 
 export class ScopeEntryGiven extends ScopeEntry {
   constructor(
-    public t: Exp,
+    public t: Exp.Exp,
   ) { super() }
 }
 
 export class ScopeEntryDefine extends ScopeEntry {
   constructor(
-    public t: Exp,
-    public value: Exp,
+    public t: Exp.Exp,
+    public value: Exp.Exp,
   ) { super() }
 }

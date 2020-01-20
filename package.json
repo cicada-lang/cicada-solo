@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@types/assert": "^1.4.3",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.5"
   },
   "dependencies": {
     "@forchange/basic": "file:deps/basic",

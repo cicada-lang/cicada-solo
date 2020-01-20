@@ -1,4 +1,4 @@
-import { Exp } from "./exp";
+import * as Exp from "./exp";
 export declare class Scope {
     named_entry_list: Array<[string, ScopeEntry]>;
     constructor(named_entry_list?: Array<[string, ScopeEntry]>);
@@ -7,15 +7,15 @@ export declare class Scope {
 export declare abstract class ScopeEntry {
 }
 export declare class ScopeEntryLet extends ScopeEntry {
-    value: Exp;
-    constructor(value: Exp);
+    value: Exp.Exp;
+    constructor(value: Exp.Exp);
 }
 export declare class ScopeEntryGiven extends ScopeEntry {
-    t: Exp;
-    constructor(t: Exp);
+    t: Exp.Exp;
+    constructor(t: Exp.Exp);
 }
 export declare class ScopeEntryDefine extends ScopeEntry {
-    t: Exp;
-    value: Exp;
-    constructor(t: Exp, value: Exp);
+    t: Exp.Exp;
+    value: Exp.Exp;
+    constructor(t: Exp.Exp, value: Exp.Exp);
 }

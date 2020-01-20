@@ -1,6 +1,6 @@
+import * as Exp from "./exp";
+import * as Value from "./value";
 import { Env } from "./env";
-import { Exp } from "./exp";
-import { Value } from "./value";
-export declare function evaluate(env: Env, exp: Exp): Value;
-export declare function evaluate_ap(env: Env, exp: Exp): Value;
-export declare function evaluate_dot(env: Env, exp: Exp): Value;
+export declare function evaluate(env: Env, exp: Exp.Exp): Value.Value;
+export declare function evaluate_ap(env: Env, target: Exp.Exp, args: Array<Exp.Exp>): Value.Value;
+export declare function evaluate_dot(env: Env, target: Exp.Exp, field: string): Value.Value;

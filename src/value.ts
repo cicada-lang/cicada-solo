@@ -1,72 +1,76 @@
 import { Env } from "./env"
-import { Exp } from "./exp"
+import * as Exp from "./exp"
 import { Scope } from "./scope"
 
 export abstract class Value {}
 
-export class ValueType extends Value {}
+export class Type extends Value {}
 
-export class ValueStrType extends Value {}
+export class StrType extends Value {}
 
-export class ValueStr extends Value {
+export class Str extends Value {
   constructor(
     public str: string,
   ) { super() }
 }
 
-export class ValuePi extends Value {
+export class Pi extends Value {
   constructor(
     public scope: Scope,
-    public return_type: Exp,
+    public return_type: Exp.Exp,
     public env: Env,
   ) { super() }
 }
 
-export class ValueFn extends Value {
+export class Fn extends Value {
   constructor(
     public scope: Scope,
-    public return_value: Exp,
+    public return_value: Exp.Exp,
     public env: Env,
   ) { super() }
 }
 
-export class ValueFnCase extends Value {
+export class FnCase extends Value {
   constructor(
-    public cases: Array<ValueFn>,
+    public cases: Array<Fn>,
   ) { super() }
 }
 
-export class ValueCl extends Value {
+export class Cl extends Value {
   constructor(
     public scope: Scope,
     public env: Env,
   ) { super() }
 }
 
-export class ValueObj extends Value {
+export class Obj extends Value {
   constructor(
     public value_map: Map<string, Value>
   ) { super() }
 }
 
-export abstract class Neutral extends Value {}
+export namespace Neutral {
 
-export class NeutralVar extends Neutral {
-  constructor(
-    public name: string,
-  ) { super() }
-}
+  export abstract class Neutral extends Value {}
 
-export class NeutralAp extends Neutral {
-  constructor(
-    public target: Neutral,
-    public args: Array<Value>,
-  ) { super() }
-}
+  export class Var extends Neutral {
+    constructor(
+      public name: string,
+    ) { super() }
+  }
 
-export class NeutralDot extends Neutral {
-  constructor(
-    public target: Neutral,
-    public field: string,
-  ) { super() }
+  export class Ap extends Neutral {
+    constructor(
+      public target: Neutral,
+      public args: Array<Value>,
+    ) { super() }
+  }
+
+  export class Dot extends Neutral {
+    constructor(
+      public target: Neutral,
+      public field: string,
+    ) { super() }
+  }
+
 }

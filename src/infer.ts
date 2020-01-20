@@ -1,8 +1,8 @@
+import * as Exp from "./exp"
+import * as Value from "./value"
 import { Env } from "./env"
-import { Exp } from "./exp"
-import { Value } from "./value"
 import { evaluate } from "./evaluate"
 
-export function infer(env: Env, exp: Exp): Value {
+export function infer(env: Env, exp: Exp.Exp): Value.Value {
   throw new Error("TODO")
 }

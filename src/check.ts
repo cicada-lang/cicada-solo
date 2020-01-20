@@ -1,8 +1,8 @@
+import * as Exp from "./exp"
+import * as Value from "./value"
 import { Env } from "./env"
-import { Exp } from "./exp"
-import { Value } from "./value"
 import { evaluate } from "./evaluate"
 
-export function check(env: Env, exp: Exp, t: Value): void {
+export function check(env: Env, exp: Exp.Exp, t: Value.Value): void {
   throw new Error("TODO")
 }
