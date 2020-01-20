@@ -101,8 +101,8 @@ object grammar {
         "fn_case" -> { case List(_, fn_case_clause_list, _) =>
           FnCase(non_empty_list_matcher(fn_case_clause_matcher)(fn_case_clause_list)) },
         "ap" -> { case List(target, _, arg_entry_list, _) =>
-          val arg_list = non_empty_list_matcher(arg_entry_matcher)(arg_entry_list)
-          Ap(exp_matcher(target), arg_list) },
+          val args = non_empty_list_matcher(arg_entry_matcher)(arg_entry_list)
+          Ap(exp_matcher(target), args) },
         "cl" -> { case List(_, _, given_entry_list, _) =>
           val type_map = ListMap(non_empty_list_matcher(given_entry_matcher)(given_entry_list): _*)
           Cl(ListMap.empty, type_map) },

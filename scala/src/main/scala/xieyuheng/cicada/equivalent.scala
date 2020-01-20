@@ -131,7 +131,7 @@ object equivalent {
 
         case (s: NeutralAp, t: NeutralAp) =>
           equivalent(s.target, t.target)
-          equivalent_list(s.arg_list, t.arg_list)
+          equivalent_list(s.args, t.args)
 
         case (s: NeutralDot, t: NeutralDot) =>
           if (s.field != t.field) {

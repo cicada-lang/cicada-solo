@@ -124,7 +124,7 @@ object infer {
           }
           ValueCl(defined, Telescope(ListMap(), local_env))
 
-        case Ap(target: Exp, arg_list: List[Exp]) =>
+        case Ap(target: Exp, args: List[Exp]) =>
           infer(env, target) match {
             // { x1 : A1, x2 : A2, ... -> R } @ telescope_env = infer(env, f)
             // A1_value = evaluate(telescope_env, A1)
@@ -134,15 +134,15 @@ object infer {
             // ------
             // infer(env, f(a1, a2, ...)) = evaluate(telescope_env, R)
             case ValuePi(telescope: Telescope, return_type: Exp) =>
-              if (arg_list.length != telescope.size) {
+              if (args.length != telescope.size) {
                 throw Report(List(
-                  s"arg_list and pi type arity mismatch\n" +
-                    s"arity of arg_list: ${arg_list.length}\n" +
+                  s"args and pi type arity mismatch\n" +
+                    s"arity of args: ${args.length}\n" +
                     s"arity of pi: ${telescope.size}\n"
                 ))
               }
               var telescope_env = telescope.env
-              telescope.type_map.zip(arg_list).foreach {
+              telescope.type_map.zip(args).foreach {
                 case ((name, t), arg) =>
                   val t_value = evaluate(telescope_env, t)
                   check(env, arg, t_value)
@@ -153,15 +153,15 @@ object infer {
             case ValueType() =>
               evaluate(env, target) match {
                 case ValueCl(defined, telescope) =>
-                  if (arg_list.length > telescope.size) {
+                  if (args.length > telescope.size) {
                     throw Report(List(
                       s"too many arguments to apply class\n" +
-                        s"length of arg_list: ${arg_list.length}\n" +
+                        s"length of args: ${args.length}\n" +
                         s"arity of cl: ${telescope.size}\n"
                     ))
                   }
                   var telescope_env = telescope.env
-                  telescope.type_map.zip(arg_list).foreach {
+                  telescope.type_map.zip(args).foreach {
                     case ((name, t), arg) =>
                       val t_value = evaluate(telescope_env, t)
                       check(env, arg, t_value)

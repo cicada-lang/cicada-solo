@@ -45,11 +45,11 @@ object pretty {
         }.mkString("")
         s"{${maybe_ln(s)}}"
 
-      case Ap(target: Exp, arg_list: List[Exp]) =>
-        val args = arg_list.map {
+      case Ap(target: Exp, args: List[Exp]) =>
+        val s = args.map {
           case exp => pretty_exp(exp)
         }.mkString(", ")
-        s"${pretty_exp(target)}(${args})"
+        s"${pretty_exp(target)}(${s})"
 
       case Cl(defined, type_map: ListMap[String, Exp]) =>
         var d = defined.map {
@@ -144,11 +144,11 @@ object pretty {
       case NeutralVar(name: String) =>
         s"${name}"
 
-      case NeutralAp(target: Neutral, arg_list: List[Value]) =>
-        val args = arg_list.map {
+      case NeutralAp(target: Neutral, args: List[Value]) =>
+        val s = args.map {
           case value => pretty_value(value)
         }.mkString(", ")
-        s"${pretty_neutral(target)}(${args})"
+        s"${pretty_neutral(target)}(${s})"
 
       case NeutralDot(target: Neutral, field: String) =>
         s"${pretty_neutral(target)}.${field}"
