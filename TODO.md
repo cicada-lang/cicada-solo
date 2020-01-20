@@ -1,5 +1,8 @@
 # in ts
+- scope util
 - evaluate
+- evaluate_ap
+- evaluate_dot
 - check
 - infer
 - readback

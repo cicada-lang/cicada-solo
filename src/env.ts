@@ -21,8 +21,8 @@ export class Env {
         return { t, value }
       } else {
         throw new Error(
-          "Env.lookup_type_and_value fail" +
-            `unhandled class of EnvEntry: ${entry.constructor.name}`)
+          "Env.lookup_type_and_value fail\n" +
+            `unhandled class of EnvEntry: ${entry.constructor.name}\n`)
       }
     } else {
       return undefined
