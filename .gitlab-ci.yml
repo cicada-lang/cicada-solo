@@ -1,0 +1,27 @@
+image: node:latest
+
+before_script:
+  - git submodule sync --recursive
+  - git submodule update --init --recursive
+
+stages:
+  - build
+  - test
+
+cache:
+  paths:
+    - node_modules/
+
+build:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+  artifacts:
+    paths:
+      - node_modules/
+
+test:
+  stage: test
+  script:
+    - npm run test
