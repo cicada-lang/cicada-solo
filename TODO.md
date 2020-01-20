@@ -36,7 +36,7 @@
 # learn from gradual type system
 - how they refine type in a `if` block?
 # js backend
-- a simple compiler to translate the semantics of `eval` to js
+- a simple compiler to translate the semantics of `evaluate` to js
 # partech
 - notes about tree collection
 - fix span in collected tree?

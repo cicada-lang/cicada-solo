@@ -3,7 +3,7 @@ package xieyuheng.cicada
 import java.util.UUID
 import collection.immutable.ListMap
 
-import eval._
+import evaluate._
 import pretty._
 
 object util {

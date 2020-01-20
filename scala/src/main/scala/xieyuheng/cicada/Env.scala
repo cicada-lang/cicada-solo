@@ -2,7 +2,7 @@ package xieyuheng.cicada
 
 import collection.immutable.ListMap
 
-import eval._
+import evaluate._
 
 sealed trait EnvEntry
 final case class EnvEntryRecursiveDefine(t: Exp, value: Exp, env: Env) extends EnvEntry
@@ -13,8 +13,8 @@ case class Env(entry_map: ListMap[String, EnvEntry] = ListMap()) {
   def lookup_type_and_value(name: String): Option[(Value, Value)] = {
     entry_map.get(name).map {
       case EnvEntryRecursiveDefine(t: Exp, value: Exp, env: Env) =>
-        (eval(env.ext_recursive(name, t, value, env), t),
-          eval(env.ext_recursive(name, t, value, env), value))
+        (evaluate(env.ext_recursive(name, t, value, env), t),
+          evaluate(env.ext_recursive(name, t, value, env), value))
       case EnvEntryDefine(t: Value, value: Value) =>
         (t, value)
     }

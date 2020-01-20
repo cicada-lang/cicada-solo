@@ -8,9 +8,9 @@ import check._
 import infer._
 import readback._
 
-object eval {
+object evaluate {
 
-  def eval(env: Env, exp: Exp): Value = {
+  def evaluate(env: Env, exp: Exp): Value = {
     exp match {
       case Var(name: String) =>
         env.lookup_value(name) match {
@@ -41,57 +41,57 @@ object eval {
         })
 
       case Ap(target: Exp, arg_list: List[Exp]) =>
-        eval_apply(env, target, arg_list)
+        evaluate_apply(env, target, arg_list)
 
       case Cl(defined, type_map: ListMap[String, Exp]) =>
         ValueCl(
-          defined.map { case (name, (t, exp)) => (name, (eval(env, t), eval(env, exp)))},
+          defined.map { case (name, (t, exp)) => (name, (evaluate(env, t), evaluate(env, exp)))},
           Telescope(type_map: ListMap[String, Exp], env: Env))
 
       case Obj(value_map: ListMap[String, Exp]) =>
         ValueObj(value_map.map {
-          case (name, exp) => (name, eval(env, exp))
+          case (name, exp) => (name, evaluate(env, exp))
         })
 
       case Dot(target: Exp, field: String) =>
-        eval_dot(env, target, field)
+        evaluate_dot(env, target, field)
 
       case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
         var local_env = env
         block_entry_map.foreach {
           case (name, BlockEntryLet(exp)) =>
-            local_env = local_env.ext(name, infer(local_env, exp), eval(local_env, exp))
+            local_env = local_env.ext(name, infer(local_env, exp), evaluate(local_env, exp))
           case (name, BlockEntryDefine(t, exp)) =>
-            local_env = local_env.ext(name, eval(local_env, t), eval(local_env, exp))
+            local_env = local_env.ext(name, evaluate(local_env, t), evaluate(local_env, exp))
         }
-        eval(local_env, body)
+        evaluate(local_env, body)
 
     }
   }
 
-  def eval_apply(env: Env, target: Exp, arg_list: List[Exp]): Value = {
-    val target_value = eval(env, target)
+  def evaluate_apply(env: Env, target: Exp, arg_list: List[Exp]): Value = {
+    val target_value = evaluate(env, target)
     target_value match {
       case neutral: Neutral =>
-        NeutralAp(neutral, arg_list.map { eval(env, _) })
+        NeutralAp(neutral, arg_list.map { evaluate(env, _) })
 
       case ValueFn(telescope: Telescope, body: Exp) =>
         if (telescope.size != arg_list.length) {
           throw Report(List(
-            "eval_apply fail, ValueFn arity mismatch\n"
+            "evaluate_apply fail, ValueFn arity mismatch\n"
           ))
         }
         var local_env = env
         var telescope_env = telescope.env
         telescope.type_map.zip(arg_list).foreach {
           case ((name, t), arg) =>
-            val t_value = eval(telescope_env, t)
+            val t_value = evaluate(telescope_env, t)
             check(env, arg, t_value)
-            val arg_value = eval(env, arg) // NOTE use the original `env`
+            val arg_value = evaluate(env, arg) // NOTE use the original `env`
             local_env = local_env.ext(name, t_value, arg_value)
             telescope_env = telescope_env.ext(name, t_value, arg_value)
         }
-        eval(local_env, body)
+        evaluate(local_env, body)
 
       case ValueFnCase(cases) =>
         cases.find {
@@ -100,14 +100,14 @@ object eval {
             Try {
               if (telescope.size != arg_list.length) {
                 throw Report(List(
-                  "eval_apply fail, ValueFnCase arity mismatch\n"
+                  "evaluate_apply fail, ValueFnCase arity mismatch\n"
                 ))
               }
               var telescope_env = telescope.env
               telescope.type_map.zip(arg_list).foreach {
                 case ((name, t), arg) =>
-                  val t_value = eval(telescope_env, t)
-                  val arg_value = eval(env, arg)
+                  val t_value = evaluate(telescope_env, t)
+                  val arg_value = evaluate(env, arg)
                   val arg_norm = readback(arg_value)
                   check(env, arg_norm, t_value) // NOTE use the original `env`
                   telescope_env = telescope_env.ext(name, t_value, arg_value)
@@ -122,16 +122,16 @@ object eval {
             var telescope_env = telescope.env
             telescope.type_map.zip(arg_list).foreach {
               case ((name, t), arg) =>
-                val t_value = eval(telescope_env, t)
-                val arg_value = eval(env, arg)
+                val t_value = evaluate(telescope_env, t)
+                val arg_value = evaluate(env, arg)
                 local_env = local_env.ext(name, t_value, arg_value)
                 telescope_env = telescope_env.ext(name, t_value, arg_value)
             }
-            eval(local_env, body)
+            evaluate(local_env, body)
           case None =>
             val arg_list_repr = arg_list.map { pretty_exp }.mkString(", ")
             throw Report(List(
-              "eval_apply fail, ValueFnCase mismatch\n" +
+              "evaluate_apply fail, ValueFnCase mismatch\n" +
                 s"target_value: ${pretty_value(target_value)}\n" +
                 s"arg_list: (${arg_list_repr})\n"
             ))
@@ -140,7 +140,7 @@ object eval {
       case ValueCl(defined, telescope: Telescope) =>
         if (telescope.size < arg_list.length) {
           throw Report(List(
-            s"eval_apply fail\n" +
+            s"evaluate_apply fail\n" +
               s"too many arguments\n"
           ))
         }
@@ -149,9 +149,9 @@ object eval {
         var new_type_map = telescope.type_map
         telescope.type_map.zip(arg_list).foreach {
           case ((name, t), arg) =>
-            val t_value = eval(telescope_env, t)
+            val t_value = evaluate(telescope_env, t)
             check(env, arg, t_value)
-            val arg_value = eval(env, arg)
+            val arg_value = evaluate(env, arg)
             new_defined = new_defined + (name -> (t_value, arg_value))
             telescope_env = telescope_env.ext(name, t_value, arg_value)
             new_type_map = new_type_map.tail
@@ -160,14 +160,14 @@ object eval {
 
       case _ =>
         throw Report(List(
-          "eval_apply fail, expecting ValueFn or ValueCl\n" +
+          "evaluate_apply fail, expecting ValueFn or ValueCl\n" +
             s"target_value: ${pretty_value(target_value)}\n"
         ))
     }
   }
 
-  def eval_dot(env: Env, target: Exp, field: String): Value = {
-    val target_value = eval(env, target)
+  def evaluate_dot(env: Env, target: Exp, field: String): Value = {
+    val target_value = evaluate(env, target)
     target_value match {
       case neutral: Neutral =>
         NeutralDot(neutral, field)
@@ -184,7 +184,7 @@ object eval {
 
       case _ =>
         throw Report(List(
-          "eval_dot fail, expecting ValueObj\n"
+          "evaluate_dot fail, expecting ValueObj\n"
         ))
     }
   }

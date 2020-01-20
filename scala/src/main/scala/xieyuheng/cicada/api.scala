@@ -5,7 +5,7 @@ import collection.immutable.ListMap
 
 import xieyuheng.util.console._
 
-import eval._
+import evaluate._
 import check._
 import infer._
 import pretty._
@@ -18,7 +18,7 @@ object api {
     config: ListMap[String, List[String]],
   ): Unit = {
     try {
-      top_list_check_and_eval(top_list, config)
+      top_list_check_and_evaluate(top_list, config)
     } catch {
       case report: Report =>
         report_print(report, config)
@@ -43,7 +43,7 @@ object api {
     }
   }
 
-  def top_list_check_and_eval(
+  def top_list_check_and_evaluate(
     top_list: List[Top],
     config: ListMap[String, List[String]],
   ): Unit = {
@@ -59,7 +59,7 @@ object api {
           case None => ()
         }
         val t = infer(local_env, exp)
-        val value = eval(local_env, exp)
+        val value = evaluate(local_env, exp)
         local_env = local_env.ext(name, t, value)
         if (config.get("--verbose") != None) {
           println(s"let ${name} = ${pretty_exp(exp)}")
@@ -80,10 +80,10 @@ object api {
             ))
           case None => ()
         }
-        val t_expected = eval(local_env, t_exp)
+        val t_expected = evaluate(local_env, t_exp)
         check(local_env, exp, t_expected)
         local_env = local_env.ext_recursive(name, t_exp, exp, local_env)
-        val value = eval(local_env, exp)
+        val value = evaluate(local_env, exp)
         if (config.get("--verbose") != None) {
           println(s"define ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}")
           console_print_with_color_when {
@@ -96,14 +96,14 @@ object api {
         }
 
       case TopKeywordRefuse(exp, t_exp) =>
-        val t_expected = eval(local_env, t_exp)
+        val t_expected = evaluate(local_env, t_exp)
         Try {
           check(local_env, exp, t_expected)
           println("@refuse")
-          println(s"v: ${pretty_value(eval(local_env, exp))}")
+          println(s"v: ${pretty_value(evaluate(local_env, exp))}")
           println(s"t_expected: ${pretty_value(t_expected)}")
           println("@refuse raw Value")
-          println(s"v: ${eval(local_env, exp)}")
+          println(s"v: ${evaluate(local_env, exp)}")
           println(s"t_expected: ${t_expected}")
         } match {
           case Success(()) =>
@@ -120,7 +120,7 @@ object api {
         }
 
       case TopKeywordAccept(exp, t_exp) =>
-        val t_expected = eval(local_env, t_exp)
+        val t_expected = evaluate(local_env, t_exp)
         Try {
           check(local_env, exp, t_expected)
         } match {
@@ -140,7 +140,7 @@ object api {
 
       case TopKeywordShow(exp) =>
         val t = infer(local_env, exp)
-        val value = eval(local_env, exp)
+        val value = evaluate(local_env, exp)
         println(s"@show ${pretty_exp(exp)}")
         console_print_with_color_when {
           config.get("--nocolor") == None
@@ -154,7 +154,7 @@ object api {
         infer(local_env, rhs)
         infer(local_env, lhs)
         Try {
-          equivalent(eval(local_env, rhs), eval(local_env, lhs))
+          equivalent(evaluate(local_env, rhs), evaluate(local_env, lhs))
         } match {
           case Success(()) =>
             if (config.get("--verbose") != None) {

@@ -1,8 +1,8 @@
+import { Exp } from "./exp"
+import { Env } from "./env"
+import { Value } from "./value"
 import { check } from "./check"
 
-export function evaluate(n: number): void {
-  if (n > 0) {
-    console.log("evaluate:", n)
-    check(n-1)
-  }
+export function evaluate(env: Env, exp: Exp): Value {
+  throw new Error("TODO")
 }

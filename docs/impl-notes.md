@@ -25,10 +25,10 @@ the value in defined fields might be `Neutral`
 (specially when infering the type of `Switch`),
 
 When infer `Fn` we need a readback to get the `return_type` of `ValuePi`,
-but if we readback neutral, and eval a neutral value
+but if we readback neutral, and evaluate a neutral value
 in the env extended during inferring `Ap`,
 for example, `nat_add(zero, zero)`, env will be extended by `x = zero`,
-but when eval `x.prev`, there is no field `prev` in `zero`.
+but when evaluate `x.prev`, there is no field `prev` in `zero`.
 
 Thus, object should infer to `ValueClInferedFromObj` instead of `ValueCl`,
 which means infer need to strip off the object level information of object.

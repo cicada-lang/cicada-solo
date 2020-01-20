@@ -3,6 +3,8 @@ import { Value } from "./value";
 export declare class Env {
     entry_map: Map<string, EnvEntry>;
     constructor(entry_map?: Map<string, EnvEntry>);
+    lookup_type_and_value(name: string): [Value, Value] | undefined;
+    ext_recursive(name: string, t: Exp, value: Exp, env: Env): Env;
 }
 export declare abstract class EnvEntry {
 }

@@ -5,7 +5,7 @@ import java.util.UUID
 import collection.immutable.ListMap
 
 import pretty._
-import eval._
+import evaluate._
 import subtype._
 
 object equivalent {
@@ -37,16 +37,16 @@ object equivalent {
           var s_telescope_env = s.telescope.env
           t.telescope.type_map.zip(s.telescope.type_map).foreach {
             case ((t_name, t_type), (s_name, s_type)) =>
-              val t_type_value = eval(t_telescope_env, t_type)
-              val s_type_value = eval(s_telescope_env, s_type)
+              val t_type_value = evaluate(t_telescope_env, t_type)
+              val s_type_value = evaluate(s_telescope_env, s_type)
               equivalent(s_type_value, t_type_value)
               val unique_var = util.unique_var_from(
                 s"equivalent:ValuePi:ValuePi:${s_name}${t_name}")
               t_telescope_env = t_telescope_env.ext(unique_var.name, t_type_value, unique_var)
               s_telescope_env = s_telescope_env.ext(unique_var.name, s_type_value, unique_var)
           }
-          val t_return_type_value = eval(t_telescope_env, t.return_type)
-          val s_return_type_value = eval(s_telescope_env, s.return_type)
+          val t_return_type_value = evaluate(t_telescope_env, t.return_type)
+          val s_return_type_value = evaluate(s_telescope_env, s.return_type)
           equivalent(s_return_type_value, t_return_type_value)
 
         case (s: ValueFn, t: ValueFn) =>
@@ -62,16 +62,16 @@ object equivalent {
           var s_telescope_env = s.telescope.env
           t.telescope.type_map.zip(s.telescope.type_map).foreach {
             case ((t_name, t_type), (s_name, s_type)) =>
-              val t_type_value = eval(t_telescope_env, t_type)
-              val s_type_value = eval(s_telescope_env, s_type)
+              val t_type_value = evaluate(t_telescope_env, t_type)
+              val s_type_value = evaluate(s_telescope_env, s_type)
               equivalent(s_type_value, t_type_value)
               val unique_var = util.unique_var_from(
                 s"equivalent:ValuePi:ValuePi:${s_name}${t_name}")
               t_telescope_env = t_telescope_env.ext(unique_var.name, t_type_value, unique_var)
               s_telescope_env = s_telescope_env.ext(unique_var.name, s_type_value, unique_var)
           }
-          val t_body_value = eval(t_telescope_env, t.body)
-          val s_body_value = eval(s_telescope_env, s.body)
+          val t_body_value = evaluate(t_telescope_env, t.body)
+          val s_body_value = evaluate(s_telescope_env, s.body)
           equivalent(s_body_value, t_body_value)
 
         case (s: ValueFnCase, t: ValueFnCase) =>
@@ -104,8 +104,8 @@ object equivalent {
             case (name, t_type) =>
               s.telescope.type_map.get(name) match {
                 case Some(s_type) =>
-                  val t_type_value = eval(t_telescope_env, t_type)
-                  val s_type_value = eval(s_telescope_env, s_type)
+                  val t_type_value = evaluate(t_telescope_env, t_type)
+                  val s_type_value = evaluate(s_telescope_env, s_type)
                   equivalent(s_type_value, t_type_value)
                   t_telescope_env = t_telescope_env.ext(name, t_type_value, NeutralVar(name))
                   s_telescope_env = s_telescope_env.ext(name, s_type_value, NeutralVar(name))
