@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+function t {
+    test_prog_ext node js && \
+        test_prog_ext bash sh
+}
+
+function test_prog_ext {
+    prog=$1
+    ext=$2
+
+    for file in $(find . | grep "^\./lib/" | grep "\.test.*$" | grep "\.${ext}$")
+    do
+        echo ""
+        echo "[test] $file"
+        if ! time $prog $file
+        then
+            exit 1
+        fi
+    done
+}
+
+function main {
+    for TASK in $@
+    do
+        $TASK
+    done
+}
+
+main $@

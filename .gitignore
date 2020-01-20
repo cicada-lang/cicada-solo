@@ -1,6 +1,9 @@
 # scala
 target
 
+# npm
+node_modules
+
 # parcel
 .cache
 

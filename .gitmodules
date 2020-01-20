@@ -1,0 +1,6 @@
+[submodule "deps/basic"]
+	path = deps/basic
+	url = git@git.forchange.cn:cleword/explore/basic.git
+[submodule "deps/partech"]
+	path = deps/partech
+	url = git@git.forchange.cn:cleword/explore/partech.git

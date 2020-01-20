@@ -1,0 +1,20 @@
+{
+  "name": "cicada",
+  "files": [
+    "lib"
+  ],
+  "version": "0.0.1",
+  "scripts": {
+    "build": "npx tsc",
+    "watch": "npx tsc --watch",
+    "test": "./dev t"
+  },
+  "devDependencies": {
+    "@types/assert": "^1.4.3",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "@forchange/basic": "file:deps/basic",
+    "@forchange/partech": "file:deps/partech"
+  }
+}
