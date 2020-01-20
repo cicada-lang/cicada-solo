@@ -1,0 +1,10 @@
+# scala
+target
+
+# parcel
+.cache
+
+# emacs
+*~
+*#*
+.#*
