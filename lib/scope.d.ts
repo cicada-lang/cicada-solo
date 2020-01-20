@@ -6,15 +6,15 @@ export declare class Scope {
 }
 export declare abstract class ScopeEntry {
 }
-export declare class ScopeLet extends ScopeEntry {
+export declare class ScopeEntryLet extends ScopeEntry {
     value: Exp;
     constructor(value: Exp);
 }
-export declare class ScopeGiven extends ScopeEntry {
+export declare class ScopeEntryGiven extends ScopeEntry {
     t: Exp;
     constructor(t: Exp);
 }
-export declare class ScopeDefine extends ScopeEntry {
+export declare class ScopeEntryDefine extends ScopeEntry {
     t: Exp;
     value: Exp;
     constructor(t: Exp, value: Exp);

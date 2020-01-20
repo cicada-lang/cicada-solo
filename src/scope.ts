@@ -12,19 +12,19 @@ export class Scope {
 
 export abstract class ScopeEntry {}
 
-export class ScopeLet extends ScopeEntry {
+export class ScopeEntryLet extends ScopeEntry {
   constructor(
     public value: Exp,
   ) { super() }
 }
 
-export class ScopeGiven extends ScopeEntry {
+export class ScopeEntryGiven extends ScopeEntry {
   constructor(
     public t: Exp,
   ) { super() }
 }
 
-export class ScopeDefine extends ScopeEntry {
+export class ScopeEntryDefine extends ScopeEntry {
   constructor(
     public t: Exp,
     public value: Exp,

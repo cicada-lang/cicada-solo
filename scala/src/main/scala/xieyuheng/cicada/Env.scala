@@ -5,16 +5,16 @@ import collection.immutable.ListMap
 import eval._
 
 sealed trait EnvEntry
-final case class EnvEntryRecursiveDefine(t: Exp, exp: Exp, env: Env) extends EnvEntry
+final case class EnvEntryRecursiveDefine(t: Exp, value: Exp, env: Env) extends EnvEntry
 final case class EnvEntryDefine(t: Value, value: Value) extends EnvEntry
 
 case class Env(entry_map: ListMap[String, EnvEntry] = ListMap()) {
 
   def lookup_type_and_value(name: String): Option[(Value, Value)] = {
     entry_map.get(name).map {
-      case EnvEntryRecursiveDefine(t: Exp, exp: Exp, env: Env) =>
-        (eval(env.ext_recursive(name, t, exp, env), t),
-          eval(env.ext_recursive(name, t, exp, env), exp))
+      case EnvEntryRecursiveDefine(t: Exp, value: Exp, env: Env) =>
+        (eval(env.ext_recursive(name, t, value, env), t),
+          eval(env.ext_recursive(name, t, value, env), value))
       case EnvEntryDefine(t: Value, value: Value) =>
         (t, value)
     }
@@ -36,8 +36,8 @@ case class Env(entry_map: ListMap[String, EnvEntry] = ListMap()) {
     Env(this.entry_map + (name -> EnvEntryDefine(t, value)))
   }
 
-  def ext_recursive(name: String, t: Exp, exp: Exp, env: Env): Env = {
-    Env(this.entry_map + (name -> EnvEntryRecursiveDefine(t, exp, env)))
+  def ext_recursive(name: String, t: Exp, value: Exp, env: Env): Env = {
+    Env(this.entry_map + (name -> EnvEntryRecursiveDefine(t, value, env)))
   }
 
 }
