@@ -41,7 +41,7 @@ object evaluate {
         })
 
       case Ap(target: Exp, args: List[Exp]) =>
-        evaluate_apply(env, target, args)
+        evaluate_ap(env, target, args)
 
       case Cl(defined, type_map: ListMap[String, Exp]) =>
         ValueCl(
@@ -69,7 +69,7 @@ object evaluate {
     }
   }
 
-  def evaluate_apply(env: Env, target: Exp, args: List[Exp]): Value = {
+  def evaluate_ap(env: Env, target: Exp, args: List[Exp]): Value = {
     val target_value = evaluate(env, target)
     target_value match {
       case neutral: Neutral =>
@@ -78,7 +78,7 @@ object evaluate {
       case ValueFn(telescope: Telescope, body: Exp) =>
         if (telescope.size != args.length) {
           throw Report(List(
-            "evaluate_apply fail, ValueFn arity mismatch\n"
+            "evaluate_ap fail, ValueFn arity mismatch\n"
           ))
         }
         var local_env = env
@@ -100,7 +100,7 @@ object evaluate {
             Try {
               if (telescope.size != args.length) {
                 throw Report(List(
-                  "evaluate_apply fail, ValueFnCase arity mismatch\n"
+                  "evaluate_ap fail, ValueFnCase arity mismatch\n"
                 ))
               }
               var telescope_env = telescope.env
@@ -131,7 +131,7 @@ object evaluate {
           case None =>
             val args_repr = args.map { pretty_exp }.mkString(", ")
             throw Report(List(
-              "evaluate_apply fail, ValueFnCase mismatch\n" +
+              "evaluate_ap fail, ValueFnCase mismatch\n" +
                 s"target_value: ${pretty_value(target_value)}\n" +
                 s"args: (${args_repr})\n"
             ))
@@ -140,7 +140,7 @@ object evaluate {
       case ValueCl(defined, telescope: Telescope) =>
         if (telescope.size < args.length) {
           throw Report(List(
-            s"evaluate_apply fail\n" +
+            s"evaluate_ap fail\n" +
               s"too many arguments\n"
           ))
         }
@@ -160,7 +160,7 @@ object evaluate {
 
       case _ =>
         throw Report(List(
-          "evaluate_apply fail, expecting ValueFn or ValueCl\n" +
+          "evaluate_ap fail, expecting ValueFn or ValueCl\n" +
             s"target_value: ${pretty_value(target_value)}\n"
         ))
     }
