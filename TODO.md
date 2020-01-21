@@ -1,10 +1,12 @@
 # in ts
-- pretty
+- pretty_exp
+- pretty_value
 - check
 - infer
 - readback
 - subtype
 - equivalent
+- grammar
 - api
 - command line interface
 - test
