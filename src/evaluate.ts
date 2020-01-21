@@ -1,16 +1,15 @@
 import * as Exp from "./exp"
 import * as Value from "./value"
-import { Env } from "./env"
+import * as Env from "./env"
+import * as Scope from "./scope"
 import { check } from "./check"
 
-export function evaluate(env: Env, exp: Exp.Exp): Value.Value {
+export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
 
   if (exp instanceof Exp.Var) {
     let { name } = exp
     let value = env.lookup_value(name)
-    return value !== undefined
-      ? value
-      : new Value.Neutral.Var(name)
+    return value ? value : new Value.Neutral.Var(name)
   }
 
   if (exp instanceof Exp.Type) {
@@ -52,11 +51,16 @@ export function evaluate(env: Env, exp: Exp.Exp): Value.Value {
   }
 
   if (exp instanceof Exp.Obj) {
-    // TODO
+    let { scope } = exp
+    let value_map: Map<string, Value.Value> = new Map()
+    for (let [name, entry] of scope.named_entries) {
+
+    }
     // case Obj(value_map: ListMap[String, Exp]) =>
     //   ValueObj(value_map.map {
     //     case (name, exp) => (name, evaluate(env, exp))
     //   })
+    return new Value.Obj(value_map)
   }
 
   if (exp instanceof Exp.Dot) {
@@ -83,10 +87,10 @@ export function evaluate(env: Env, exp: Exp.Exp): Value.Value {
 
 }
 
-export function evaluate_ap(env: Env, target: Exp.Exp, args: Array<Exp.Exp>): Value.Value {
+export function evaluate_ap(env: Env.Env, target: Exp.Exp, args: Array<Exp.Exp>): Value.Value {
   throw new Error("TODO")
 }
 
-export function evaluate_dot(env: Env, target: Exp.Exp, field: string): Value.Value {
+export function evaluate_dot(env: Env.Env, target: Exp.Exp, field: string): Value.Value {
   throw new Error("TODO")
 }

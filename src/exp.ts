@@ -1,4 +1,4 @@
-import { Scope } from "./scope"
+import * as Scope from "./scope"
 
 export abstract class Exp {}
 
@@ -20,14 +20,14 @@ export class Str extends Exp {
 
 export class Pi extends Exp {
   constructor(
-    public scope: Scope,
+    public scope: Scope.Scope,
     public return_type: Exp,
   ) { super() }
 }
 
 export class Fn extends Exp {
   constructor(
-    public scope: Scope,
+    public scope: Scope.Scope,
     public return_value: Exp,
   ) { super() }
 }
@@ -47,13 +47,13 @@ export class Ap extends Exp {
 
 export class Cl extends Exp {
   constructor(
-    public scope: Scope,
+    public scope: Scope.Scope,
   ) { super() }
 }
 
 export class Obj extends Exp {
   constructor(
-    public scope: Scope,
+    public scope: Scope.Scope,
   ) { super() }
 }
 
@@ -66,7 +66,7 @@ export class Dot extends Exp {
 
 export class Block extends Exp {
   constructor(
-    public scope: Scope,
+    public scope: Scope.Scope,
     public return_value: Exp,
   ) { super() }
 }

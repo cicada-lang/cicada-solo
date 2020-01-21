@@ -4,25 +4,25 @@ import { evaluate } from "./evaluate"
 
 export class Env {
   constructor(
-    public entry_map: Map<string, EnvEntry> = new Map(),
+    public entry_map: Map<string, Entry.Entry> = new Map(),
   ) {}
 
   lookup_type_and_value(name: string): { t: Value.Value, value: Value.Value } | undefined {
     let entry = this.entry_map.get(name)
     if (entry !== undefined) {
-      if (entry instanceof EnvEntryRecursiveDefine) {
+      if (entry instanceof Entry.RecursiveDefine) {
         let { t, value, env } = entry
         return {
           t: evaluate(env.ext_recursive(name, t, value, env), t),
           value: evaluate(env.ext_recursive(name, t, value, env), value),
         }
-      } else if (entry instanceof EnvEntryDefine) {
+      } else if (entry instanceof Entry.Define) {
         let { t, value } = entry
         return { t, value }
       } else {
         throw new Error(
           "Env.lookup_type_and_value fail\n" +
-            `unhandled class of EnvEntry: ${entry.constructor.name}\n`)
+            `unhandled class of Entry: ${entry.constructor.name}\n`)
       }
     } else {
       return undefined
@@ -52,31 +52,35 @@ export class Env {
   ext(name: string, t: Value.Value, value: Value.Value): Env {
     return new Env(new Map([
       ...this.entry_map,
-      [name, new EnvEntryDefine(t, value)],
+      [name, new Entry.Define(t, value)],
     ]))
   }
 
   ext_recursive(name: string, t: Exp.Exp, value: Exp.Exp, env: Env): Env {
     return new Env(new Map([
       ...this.entry_map,
-      [name, new EnvEntryRecursiveDefine(t, value, env)],
+      [name, new Entry.RecursiveDefine(t, value, env)],
     ]))
   }
 }
 
-export abstract class EnvEntry {}
+export namespace Entry {
 
-export class EnvEntryRecursiveDefine extends EnvEntry {
-  constructor(
-    public t: Exp.Exp,
-    public value: Exp.Exp,
-    public env: Env,
-  ) { super() }
-}
+  export abstract class Entry {}
 
-export class EnvEntryDefine extends EnvEntry {
-  constructor(
-    public t: Value.Value,
-    public value: Value.Value,
-  ) { super() }
+  export class RecursiveDefine extends Entry {
+    constructor(
+      public t: Exp.Exp,
+      public value: Exp.Exp,
+      public env: Env,
+    ) { super() }
+  }
+
+  export class Define extends Entry {
+    constructor(
+      public t: Value.Value,
+      public value: Value.Value,
+    ) { super() }
+  }
+
 }

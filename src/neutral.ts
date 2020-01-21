@@ -1,7 +1,4 @@
-import * as Exp from "./exp"
 import * as Value from "./value"
-import { Env } from "./env"
-import { Scope } from "./scope"
 
 export abstract class Neutral extends Value.Value {}
 

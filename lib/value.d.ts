@@ -1,6 +1,6 @@
-import { Env } from "./env";
 import * as Exp from "./exp";
-import { Scope } from "./scope";
+import * as Env from "./env";
+import * as Scope from "./scope";
 export declare abstract class Value {
 }
 export declare class Type extends Value {
@@ -12,25 +12,25 @@ export declare class Str extends Value {
     constructor(str: string);
 }
 export declare class Pi extends Value {
-    scope: Scope;
+    scope: Scope.Scope;
     return_type: Exp.Exp;
-    env: Env;
-    constructor(scope: Scope, return_type: Exp.Exp, env: Env);
+    env: Env.Env;
+    constructor(scope: Scope.Scope, return_type: Exp.Exp, env: Env.Env);
 }
 export declare class Fn extends Value {
-    scope: Scope;
+    scope: Scope.Scope;
     return_value: Exp.Exp;
-    env: Env;
-    constructor(scope: Scope, return_value: Exp.Exp, env: Env);
+    env: Env.Env;
+    constructor(scope: Scope.Scope, return_value: Exp.Exp, env: Env.Env);
 }
 export declare class FnCase extends Value {
     cases: Array<Fn>;
     constructor(cases: Array<Fn>);
 }
 export declare class Cl extends Value {
-    scope: Scope;
-    env: Env;
-    constructor(scope: Scope, env: Env);
+    scope: Scope.Scope;
+    env: Env.Env;
+    constructor(scope: Scope.Scope, env: Env.Env);
 }
 export declare class Obj extends Value {
     value_map: Map<string, Value>;

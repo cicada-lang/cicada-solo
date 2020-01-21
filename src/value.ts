@@ -1,6 +1,6 @@
-import { Env } from "./env"
 import * as Exp from "./exp"
-import { Scope } from "./scope"
+import * as Env from "./env"
+import * as Scope from "./scope"
 
 export abstract class Value {}
 
@@ -16,17 +16,17 @@ export class Str extends Value {
 
 export class Pi extends Value {
   constructor(
-    public scope: Scope,
+    public scope: Scope.Scope,
     public return_type: Exp.Exp,
-    public env: Env,
+    public env: Env.Env,
   ) { super() }
 }
 
 export class Fn extends Value {
   constructor(
-    public scope: Scope,
+    public scope: Scope.Scope,
     public return_value: Exp.Exp,
-    public env: Env,
+    public env: Env.Env,
   ) { super() }
 }
 
@@ -38,14 +38,14 @@ export class FnCase extends Value {
 
 export class Cl extends Value {
   constructor(
-    public scope: Scope,
-    public env: Env,
+    public scope: Scope.Scope,
+    public env: Env.Env,
   ) { super() }
 }
 
 export class Obj extends Value {
   constructor(
-    public value_map: Map<string, Value>
+    public value_map: Map<string, Value>,
   ) { super() }
 }
 
