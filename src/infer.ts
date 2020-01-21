@@ -12,15 +12,15 @@ export function infer(
 ): Value.Value {
   try {
     if (exp instanceof Exp.Var) {
-      // case Var(name: String) =>
-      //   env.lookup_type(name) match {
-      //     case Some(t) => t
-      //     case None =>
-      //       throw Report(List(
-      //         s"can not find var: ${name} in env\n"
-      //       ))
-      //   }
-      throw new Error("TODO")
+      let { name } = exp
+      let t = env.lookup_type(name)
+      if (t === undefined) {
+        throw new Report([
+          `can not find var: ${name} in env\n`])
+      }
+      else {
+        return t
+      }
     }
 
     else if (exp instanceof Exp.Type) {
@@ -31,8 +31,9 @@ export function infer(
       return new Value.Type()
     }
 
-    // case Str(str: String) =>
-    //   ValueStrType()
+    else if (exp instanceof Exp.Str) {
+      return new Value.StrType()
+    }
 
     // case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
     //   // check(local_env, A1, type)
@@ -71,10 +72,10 @@ export function infer(
     //   val return_type = readback(return_type_value)
     //   ValuePi(Telescope(type_map, env), return_type)
 
-    // case FnCase(cases) =>
-    //   throw Report(List(
-    //     s"the language is not designed to infer the type of FnCase: ${exp}\n"
-    //   ))
+    if (exp instanceof Exp.FnCase) {
+      throw new Report([
+        `the language is not designed to infer the type of Exp.FnCase: ${exp}\n`])
+    }
 
     // case Cl(defined, type_map: ListMap[String, Exp]) =>
     //   // check(local_env, A1, type)
