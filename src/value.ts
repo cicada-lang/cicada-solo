@@ -38,6 +38,7 @@ export class FnCase extends Value {
 
 export class Cl extends Value {
   constructor(
+    public defined: Map<string, { t: Value, value: Value }>,
     public scope: Scope.Scope,
     public env: Env.Env,
   ) { super() }
@@ -45,7 +46,7 @@ export class Cl extends Value {
 
 export class Obj extends Value {
   constructor(
-    public value_map: Map<string, Value>,
+    public defined: Map<string, { t: Value, value: Value }>,
   ) { super() }
 }
 

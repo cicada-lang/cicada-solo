@@ -82,7 +82,7 @@ object api {
         }
         val t_expected = evaluate(local_env, t_exp)
         check(local_env, exp, t_expected)
-        local_env = local_env.ext_recursive(name, t_exp, exp, local_env)
+        local_env = local_env.ext_rec(name, t_exp, exp, local_env)
         val value = evaluate(local_env, exp)
         if (config.get("--verbose") != None) {
           println(s"define ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}")

@@ -10,11 +10,11 @@ export class Env {
   lookup_type_and_value(name: string): { t: Value.Value, value: Value.Value } | undefined {
     let entry = this.entry_map.get(name)
     if (entry !== undefined) {
-      if (entry instanceof Entry.RecursiveDefine) {
+      if (entry instanceof Entry.DefineRec) {
         let { t, value, env } = entry
         return {
-          t: evaluate(env.ext_recursive(name, t, value, env), t),
-          value: evaluate(env.ext_recursive(name, t, value, env), value),
+          t: evaluate(env.ext_rec(name, { t, value, env }), t),
+          value: evaluate(env.ext_rec(name, { t, value, env }), value),
         }
       } else if (entry instanceof Entry.Define) {
         let { t, value } = entry
@@ -49,17 +49,30 @@ export class Env {
     }
   }
 
-  ext(name: string, t: Value.Value, value: Value.Value): Env {
+  ext(
+    name: string,
+    the: {
+      t: Value.Value,
+      value: Value.Value,
+    },
+  ): Env {
     return new Env(new Map([
       ...this.entry_map,
-      [name, new Entry.Define(t, value)],
+      [name, new Entry.Define(the.t, the.value)],
     ]))
   }
 
-  ext_recursive(name: string, t: Exp.Exp, value: Exp.Exp, env: Env): Env {
+  ext_rec(
+    name: string,
+    the: {
+      t: Exp.Exp,
+      value: Exp.Exp
+      env: Env,
+    },
+  ): Env {
     return new Env(new Map([
       ...this.entry_map,
-      [name, new Entry.RecursiveDefine(t, value, env)],
+      [name, new Entry.DefineRec(the.t, the.value, the.env)],
     ]))
   }
 }
@@ -68,7 +81,7 @@ export namespace Entry {
 
   export abstract class Entry {}
 
-  export class RecursiveDefine extends Entry {
+  export class DefineRec extends Entry {
     constructor(
       public t: Exp.Exp,
       public value: Exp.Exp,

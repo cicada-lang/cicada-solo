@@ -28,13 +28,26 @@ export declare class FnCase extends Value {
     constructor(cases: Array<Fn>);
 }
 export declare class Cl extends Value {
+    defined: Map<string, {
+        t: Value;
+        value: Value;
+    }>;
     scope: Scope.Scope;
     env: Env.Env;
-    constructor(scope: Scope.Scope, env: Env.Env);
+    constructor(defined: Map<string, {
+        t: Value;
+        value: Value;
+    }>, scope: Scope.Scope, env: Env.Env);
 }
 export declare class Obj extends Value {
-    value_map: Map<string, Value>;
-    constructor(value_map: Map<string, Value>);
+    defined: Map<string, {
+        t: Value;
+        value: Value;
+    }>;
+    constructor(defined: Map<string, {
+        t: Value;
+        value: Value;
+    }>);
 }
 export declare namespace Neutral {
     abstract class Neutral extends Value {

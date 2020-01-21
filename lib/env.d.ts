@@ -9,13 +9,20 @@ export declare class Env {
     } | undefined;
     lookup_type(name: string): Value.Value | undefined;
     lookup_value(name: string): Value.Value | undefined;
-    ext(name: string, t: Value.Value, value: Value.Value): Env;
-    ext_recursive(name: string, t: Exp.Exp, value: Exp.Exp, env: Env): Env;
+    ext(name: string, the: {
+        t: Value.Value;
+        value: Value.Value;
+    }): Env;
+    ext_rec(name: string, the: {
+        t: Exp.Exp;
+        value: Exp.Exp;
+        env: Env;
+    }): Env;
 }
 export declare namespace Entry {
     abstract class Entry {
     }
-    class RecursiveDefine extends Entry {
+    class DefineRec extends Entry {
         t: Exp.Exp;
         value: Exp.Exp;
         env: Env;
