@@ -1,12 +1,12 @@
 # in ts
-- pretty_exp
-- pretty_value
 - check
 - infer
 - readback
 - subtype
 - equivalent
 - grammar
+- pretty_exp
+- pretty_value
 - api
 - command line interface
 - test
@@ -43,16 +43,10 @@
 - how they refine type in a `if` block?
 # js backend
 - a simple compiler to translate the semantics of `evaluate` to js
-# partech
-- notes about tree collection
-- fix span in collected tree?
-- fix the use of `Error("TODO")`
-- handle top list by simple parser first
 # note
 - [maybe] [top] we need a framework for adding new keywords
   - a little bit early to do this now
 - [note] we can also use `new` to construct object from class
   - but I choose to use `{}` syntax to construct all objects for now
-- [maybe] `Exp`
 - [maybe] should we handle `A : type` specially?
   - I think no.
