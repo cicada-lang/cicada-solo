@@ -1,4 +1,6 @@
 import * as Exp from "./exp";
+import * as Value from "./value";
+import * as Env from "./env";
 export declare class Scope {
     named_entries: Array<[string, Entry.Entry]>;
     constructor(named_entries?: Array<[string, Entry.Entry]>);
@@ -22,3 +24,4 @@ export declare namespace Entry {
         constructor(t: Exp.Exp, value: Exp.Exp);
     }
 }
+export declare function entry_to_type(env: Env.Env, entry: Entry.Entry): Value.Value;

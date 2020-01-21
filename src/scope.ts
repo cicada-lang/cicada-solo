@@ -1,4 +1,8 @@
 import * as Exp from "./exp"
+import * as Value from "./value"
+import * as Env from "./env"
+import { evaluate } from "./evaluate"
+import { infer } from "./infer"
 
 export class Scope {
   constructor(
@@ -68,5 +72,27 @@ export namespace Entry {
       public value: Exp.Exp,
     ) { super() }
   }
+}
 
+export function entry_to_type(env: Env.Env, entry: Entry.Entry): Value.Value {
+  if (entry instanceof Entry.Let) {
+    let { value } = entry
+    return infer(env, value)
+  }
+
+  else if (entry instanceof Entry.Given) {
+    let { t } = entry
+    return evaluate(env, t)
+  }
+
+  else if (entry instanceof Entry.Define) {
+    let { t } = entry
+    return evaluate(env, t)
+  }
+
+  else {
+    throw new Error(
+      "entry_to_type fail\n" +
+        `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+  }
 }
