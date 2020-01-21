@@ -14,14 +14,14 @@ export declare class Str extends Value {
 export declare class Pi extends Value {
     scope: Scope.Scope;
     return_type: Exp.Exp;
-    env: Env.Env;
-    constructor(scope: Scope.Scope, return_type: Exp.Exp, env: Env.Env);
+    scope_env: Env.Env;
+    constructor(scope: Scope.Scope, return_type: Exp.Exp, scope_env: Env.Env);
 }
 export declare class Fn extends Value {
     scope: Scope.Scope;
     body: Exp.Exp;
-    env: Env.Env;
-    constructor(scope: Scope.Scope, body: Exp.Exp, env: Env.Env);
+    scope_env: Env.Env;
+    constructor(scope: Scope.Scope, body: Exp.Exp, scope_env: Env.Env);
 }
 export declare class FnCase extends Value {
     cases: Array<Fn>;
@@ -33,11 +33,11 @@ export declare class Cl extends Value {
         value: Value;
     }>;
     scope: Scope.Scope;
-    env: Env.Env;
+    scope_env: Env.Env;
     constructor(defined: Map<string, {
         t: Value;
         value: Value;
-    }>, scope: Scope.Scope, env: Env.Env);
+    }>, scope: Scope.Scope, scope_env: Env.Env);
 }
 export declare class Obj extends Value {
     defined: Map<string, {

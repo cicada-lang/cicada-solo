@@ -58,7 +58,7 @@ export function check_obj(
   t: Value.Value,
 ): void {
   if (t instanceof Value.Cl) {
-    let { defined, scope } = t
+    let { defined, scope, scope_env } = t
     // // check(local_env, a1, A1)
     // // a1_value = evaluate(local_env, a1)
     // // equivalent(a1_value, d1)

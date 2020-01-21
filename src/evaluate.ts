@@ -81,17 +81,19 @@ export function evaluate_obj(
   env: Env.Env,
   scope: Scope.Scope,
 ): Value.Value {
-  let local_env = env
+  // NOTE no telescope semantics here
+  //   no `local_env`
+  //   just use `env`
+
   let defined = new Map()
 
   for (let [name, entry] of scope.named_entries) {
     if (entry instanceof Scope.Entry.Let) {
       let { value } = entry
       let the = {
-        t: infer(local_env, value),
-        value: evaluate(local_env, value),
+        t: infer(env, value),
+        value: evaluate(env, value),
       }
-      local_env = local_env.ext(name, the)
       defined.set(name, the)
     }
 
@@ -104,10 +106,9 @@ export function evaluate_obj(
     else if (entry instanceof Scope.Entry.Define) {
       let { t, value } = entry
       let the = {
-        t: evaluate(local_env, t),
-        value: evaluate(local_env, value),
+        t: evaluate(env, t),
+        value: evaluate(env, value),
       }
-      local_env = local_env.ext(name, the)
       defined.set(name, the)
     }
 
@@ -125,7 +126,7 @@ export function evaluate_cl(
   env: Env.Env,
   scope: Scope.Scope,
 ): Value.Value {
-  let local_env = env
+  let scope_env = env
   let defined = new Map()
   let named_entries: Array<[string, Scope.Entry.Entry]> = []
   let init_definition_finished_p = false
@@ -139,10 +140,10 @@ export function evaluate_cl(
       if (entry instanceof Scope.Entry.Let) {
         let { value } = entry
         let the = {
-          t: infer(local_env, value),
-          value: evaluate(local_env, value),
+          t: infer(scope_env, value),
+          value: evaluate(scope_env, value),
         }
-        local_env = local_env.ext(name, the)
+        scope_env = scope_env.ext(name, the)
         defined.set(name, the)
       }
 
@@ -154,10 +155,10 @@ export function evaluate_cl(
       else if (entry instanceof Scope.Entry.Define) {
         let { t, value } = entry
         let the = {
-          t: evaluate(local_env, t),
-          value: evaluate(local_env, value),
+          t: evaluate(scope_env, t),
+          value: evaluate(scope_env, value),
         }
-        local_env = local_env.ext(name, the)
+        scope_env = scope_env.ext(name, the)
         defined.set(name, the)
       }
 
@@ -169,7 +170,7 @@ export function evaluate_cl(
     }
   }
 
-  return new Value.Cl(defined, new Scope.Scope(named_entries), local_env)
+  return new Value.Cl(defined, new Scope.Scope(named_entries), scope_env)
 }
 
 export function evaluate_block(
@@ -287,7 +288,7 @@ export function evaluate_ap(
   }
 
   else if (target_value instanceof Value.Fn) {
-    let { scope, body, env: scope_env } = target_value
+    let { scope, body, scope_env } = target_value
 
     if (scope.arity !== args.length) {
       throw new Report([
@@ -307,7 +308,7 @@ export function evaluate_ap(
 
     // NOTE find the first checked case
     let fn = cases.find(fn => {
-      let { scope, env: scope_env } = fn
+      let { scope, scope_env } = fn
       try {
         if (scope.arity !== args.length) {
           throw new Report([
@@ -347,7 +348,7 @@ export function evaluate_ap(
   }
 
   else if (target_value instanceof Value.Cl) {
-    let { defined, scope, env: scope_env } = target_value
+    let { defined, scope, scope_env } = target_value
 
     if (scope.arity < args.length) {
       throw new Report([

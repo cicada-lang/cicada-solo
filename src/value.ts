@@ -18,7 +18,7 @@ export class Pi extends Value {
   constructor(
     public scope: Scope.Scope,
     public return_type: Exp.Exp,
-    public env: Env.Env,
+    public scope_env: Env.Env,
   ) { super() }
 }
 
@@ -26,7 +26,7 @@ export class Fn extends Value {
   constructor(
     public scope: Scope.Scope,
     public body: Exp.Exp,
-    public env: Env.Env,
+    public scope_env: Env.Env,
   ) { super() }
 }
 
@@ -40,7 +40,7 @@ export class Cl extends Value {
   constructor(
     public defined: Map<string, { t: Value, value: Value }>,
     public scope: Scope.Scope,
-    public env: Env.Env,
+    public scope_env: Env.Env,
   ) { super() }
 }
 
