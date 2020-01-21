@@ -14,6 +14,36 @@ export class Scope {
     }
     return n
   }
+
+  lookup_value(name: string): undefined | Exp.Exp  {
+    let named_entry = this.named_entries.find(([entry_name, _entry]) => name === entry_name)
+
+    if (named_entry === undefined) {
+      return undefined
+    }
+
+    let [ _name, entry ] = named_entry
+
+    if (entry instanceof Entry.Let) {
+      let { value } = entry
+      return value
+    }
+
+    else if (entry instanceof Entry.Given) {
+      return undefined
+    }
+
+    else if (entry instanceof Entry.Define) {
+      let { value } = entry
+      return value
+    }
+
+    else {
+      throw new Error(
+        "Scope.lookup_value fail\n" +
+          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+    }
+  }
 }
 
 export namespace Entry {

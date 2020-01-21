@@ -59,26 +59,23 @@ export function check_obj(
 ): void {
   if (t instanceof Value.Cl) {
     let { defined, scope, scope_env } = t
-    // // check(local_env, a1, A1)
-    // // a1_value = evaluate(local_env, a1)
+    // // check(env, a1, A1)
+    // // a1_value = evaluate(env, a1)
     // // equivalent(a1_value, d1)
-    // // local_env = local_env.ext(x1, A1, a1_value)
     // // ...
     // // ------
     // // check(
-    // //   local_env,
+    // //   env,
     // //   { x1 = a1, x2 = a2, ... },
     // //   { x1 = d1 : A1, x2 = d2 : A2, ... })
 
-    // var local_env = env
     // defined.foreach {
     //   case (name, (t_value, d_value)) =>
     //     value_map.get(name) match {
     //       case Some(v) =>
-    //         check(local_env, v, t_value)
-    //         val v_value = evaluate(local_env, v)
+    //         check(env, v, t_value)
+    //         val v_value = evaluate(env, v)
     //         equivalent(v_value, d_value)
-    //         local_env = local_env.ext(name, t_value, v_value)
     //       case None =>
     //         throw Report(List(
     //           s"object does not have the field_name of defined: ${name}\n"
@@ -87,14 +84,13 @@ export function check_obj(
     // }
 
     // // B1_value = evaluate(scope_env, B1)
-    // // check(local_env, b1, A1_value)
-    // // b1_value = evaluate(local_env, b1)
-    // // local_env = local_env.ext(y1, B1_value, b1_value)
+    // // check(env, b1, A1_value)
+    // // b1_value = evaluate(env, b1)
     // // scope_env = scope_env.ext(y1, B1_value, b1_value)
     // // ...
     // // ------
     // // check(
-    // //   local_env,
+    // //   env,
     // //   { y1 = b1, y2 = b2, ... },
     // //   { y1 : B1, y2 : B2, ... } @ scope_env)
 
@@ -104,9 +100,8 @@ export function check_obj(
     //     value_map.get(name) match {
     //       case Some(v) =>
     //         val t_value = evaluate(scope_env, t)
-    //         check(local_env, v, t_value)
-    //         val v_value = evaluate(local_env, v)
-    //         local_env = local_env.ext(name, t_value, v_value)
+    //         check(env, v, t_value)
+    //         val v_value = evaluate(env, v)
     //         scope_env = scope_env.ext(name, t_value, v_value)
     //       case None =>
     //         throw Report(List(

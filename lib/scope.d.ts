@@ -3,6 +3,7 @@ export declare class Scope {
     named_entries: Array<[string, Entry.Entry]>;
     constructor(named_entries?: Array<[string, Entry.Entry]>);
     get arity(): number;
+    lookup_value(name: string): undefined | Exp.Exp;
 }
 export declare namespace Entry {
     abstract class Entry {
