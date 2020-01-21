@@ -135,9 +135,47 @@ export function evaluate_cl(
 ): Value.Value {
   let local_env = env
   let defined = new Map()
-  // TODO need initial evaluate
-  //   defined might not be empty
-  return new Value.Cl(defined, scope, env)
+  let named_entries: Array<[string, Scope.Entry.Entry]> = []
+  let init_definition_finished_p = false
+
+  for (let [name, entry] of scope.named_entries) {
+    if (init_definition_finished_p) {
+      named_entries.push([name, entry])
+    } else {
+      if (entry instanceof Scope.Entry.Let) {
+        let { value } = entry
+        let the = {
+          t: infer(local_env, value),
+          value: evaluate(local_env, value),
+        }
+        local_env.ext(name, the)
+        defined.set(name, the)
+      }
+
+      else if (entry instanceof Scope.Entry.Given) {
+        named_entries.push([name, entry])
+        init_definition_finished_p = true
+      }
+
+      else if (entry instanceof Scope.Entry.Define) {
+        let { t, value } = entry
+        let the = {
+          t: evaluate(local_env, t),
+          value: evaluate(local_env, value),
+        }
+        local_env.ext(name, the)
+        defined.set(name, the)
+      }
+
+      else {
+        throw new Report([
+          "evaluate_cl fail\n" +
+            `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
+      }
+    }
+  }
+
+  return new Value.Cl(defined, new Scope.Scope(named_entries), local_env)
 }
 
 export function evaluate_block(
