@@ -5,7 +5,10 @@ import * as Scope from "./scope"
 import { check } from "./check"
 import { infer } from "./infer"
 
-export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
+export function evaluate(
+  env: Env.Env,
+  exp: Exp.Exp,
+): Value.Value {
   if (exp instanceof Exp.Var) {
     let { name } = exp
     let value = env.lookup_value(name)
@@ -47,10 +50,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
 
   else if (exp instanceof Exp.Cl) {
     let { scope } = exp
-    // TODO need initial evaluate
-    //   defined might not be empty
-    let defined = new Map()
-    return new Value.Cl(defined, scope, env)
+    return evaluate_cl(env, scope)
   }
 
   else if (exp instanceof Exp.Obj) {
@@ -64,17 +64,8 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
   }
 
   else if (exp instanceof Exp.Block) {
-    // TODO
-    // case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
-    //   var local_env = env
-    //   block_entry_map.foreach {
-    //     case (name, BlockEntryLet(exp)) =>
-    //       local_env = local_env.ext(name, infer(local_env, exp), evaluate(local_env, exp))
-    //     case (name, BlockEntryDefine(t, exp)) =>
-    //       local_env = local_env.ext(name, evaluate(local_env, t), evaluate(local_env, exp))
-    //   }
-    //   evaluate(local_env, body)
-    throw new Error("TODO")
+    let { scope, return_value } = exp
+    return evaluate_block(env, scope, return_value)
   }
 
   else {
@@ -84,11 +75,18 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
   }
 }
 
-export function evaluate_ap(env: Env.Env, target: Exp.Exp, args: Array<Exp.Exp>): Value.Value {
+export function evaluate_ap(
+  env: Env.Env,
+  target: Exp.Exp,
+  args: Array<Exp.Exp>,
+): Value.Value {
   throw new Error("TODO")
 }
 
-export function evaluate_obj(env: Env.Env, scope: Scope.Scope): Value.Value {
+export function evaluate_obj(
+  env: Env.Env,
+  scope: Scope.Scope,
+): Value.Value {
   let local_env = env
   let defined = new Map()
 
@@ -129,6 +127,63 @@ export function evaluate_obj(env: Env.Env, scope: Scope.Scope): Value.Value {
   return new Value.Obj(defined)
 }
 
-export function evaluate_dot(env: Env.Env, target: Exp.Exp, field: string): Value.Value {
+export function evaluate_cl(
+  env: Env.Env,
+  scope: Scope.Scope,
+): Value.Value {
+  let local_env = env
+  let defined = new Map()
+  // TODO need initial evaluate
+  //   defined might not be empty
+  return new Value.Cl(defined, scope, env)
+}
+
+export function evaluate_block(
+  env: Env.Env,
+  scope: Scope.Scope,
+  return_value: Exp.Exp,
+): Value.Value {
+  let local_env = env
+
+  for (let [name, entry] of scope.named_entries) {
+    if (entry instanceof Scope.Entry.Let) {
+      let { value } = entry
+      let the = {
+        t: infer(local_env, value),
+        value: evaluate(local_env, value),
+      }
+      local_env.ext(name, the)
+    }
+
+    else if (entry instanceof Scope.Entry.Given) {
+      throw new Error(
+        "evaluate_block fail\n" +
+          `scope of Exp.Obj should not contain Entry.Given\n`)
+    }
+
+    else if (entry instanceof Scope.Entry.Define) {
+      let { t, value } = entry
+      let the = {
+        t: evaluate(local_env, t),
+        value: evaluate(local_env, value),
+      }
+      local_env.ext(name, the)
+    }
+
+    else {
+      throw new Error(
+        "evaluate_block fail\n" +
+          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+    }
+  }
+
+  return evaluate(local_env, return_value)
+}
+
+export function evaluate_dot(
+  env: Env.Env,
+  target: Exp.Exp,
+  field: string,
+): Value.Value {
   throw new Error("TODO")
 }
