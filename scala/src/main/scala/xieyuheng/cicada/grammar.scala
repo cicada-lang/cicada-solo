@@ -130,8 +130,8 @@ object grammar {
           Obj(ListMap.empty) },
         "obj_naked_empty" -> { case List(_, _) =>
           Obj(ListMap()) },
-        "dot" -> { case List(target, _, Leaf(field)) =>
-          Dot(exp_matcher(target), field.word) },
+        "dot" -> { case List(target, _, Leaf(field_name)) =>
+          Dot(exp_matcher(target), field_name.word) },
         "block" -> { case List(_, block_entry_list, body, _) =>
           val block_entry_map = ListMap(non_empty_list_matcher(block_entry_matcher)(block_entry_list): _*)
           Block(block_entry_map, exp_matcher(body)) },

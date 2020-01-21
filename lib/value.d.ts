@@ -63,7 +63,7 @@ export declare namespace Neutral {
     }
     class Dot extends Neutral {
         target: Neutral;
-        field: string;
-        constructor(target: Neutral, field: string);
+        field_name: string;
+        constructor(target: Neutral, field_name: string);
     }
 }

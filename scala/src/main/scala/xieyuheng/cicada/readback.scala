@@ -77,8 +77,8 @@ object readback {
       case NeutralAp(target: Neutral, args: List[Value]) =>
         Ap(readback(target), args.map(readback))
 
-      case NeutralDot(target: Neutral, field: String) =>
-        Dot(readback(target), field)
+      case NeutralDot(target: Neutral, field_name: String) =>
+        Dot(readback(target), field_name)
     }
   }
 

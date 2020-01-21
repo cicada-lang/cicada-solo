@@ -61,8 +61,8 @@ export function evaluate(
   }
 
   else if (exp instanceof Exp.Dot) {
-    let { target, field } = exp
-    return evaluate_dot(env, target, field)
+    let { target, field_name } = exp
+    return evaluate_dot(env, target, field_name)
   }
 
   else if (exp instanceof Exp.Block) {
@@ -384,22 +384,22 @@ export function evaluate_ap(
 export function evaluate_dot(
   env: Env.Env,
   target: Exp.Exp,
-  field: string,
+  field_name: string,
 ): Value.Value {
   let target_value = evaluate(env, target)
 
   if (target_value instanceof Value.Neutral.Neutral) {
-    return new Value.Neutral.Dot(target_value, field)
+    return new Value.Neutral.Dot(target_value, field_name)
   }
 
   else if (target_value instanceof Value.Obj) {
     let { defined } = target_value
-    let the = defined.get(field)
+    let the = defined.get(field_name)
 
     if (the === undefined) {
       throw new Report([
         "evaluate_dot fail\n" +
-          `missing field: ${field}\n` +
+          `missing field_name: ${field_name}\n` +
           `target_value: ${pretty.pretty_value(target_value)}\n`])
     }
 

@@ -20,4 +20,4 @@ final case class ValueObj(value_map: ListMap[String, Value]) extends Value
 sealed trait Neutral extends Value
 final case class NeutralVar(name: String) extends Neutral
 final case class NeutralAp(target: Neutral, args: List[Value]) extends Neutral
-final case class NeutralDot(target: Neutral, field: String) extends Neutral
+final case class NeutralDot(target: Neutral, field_name: String) extends Neutral

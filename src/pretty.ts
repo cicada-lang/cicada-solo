@@ -66,8 +66,8 @@ export function pretty_exp(exp: Exp.Exp): string {
   //   }.mkString("")
   //   s"object {${maybe_ln(s)}}"
 
-  // case Dot(target: Exp, field: String) =>
-  //   s"${pretty_exp(target)}.${field}"
+  // case Dot(target: Exp, field_name: String) =>
+  //   s"${pretty_exp(target)}.${field_name}"
 
   // case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
   //   var s = block_entry_map.map {

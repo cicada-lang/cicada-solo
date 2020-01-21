@@ -60,7 +60,7 @@ export class Obj extends Exp {
 export class Dot extends Exp {
   constructor(
     public target: Exp,
-    public field: string,
+    public field_name: string,
   ) { super() }
 }
 

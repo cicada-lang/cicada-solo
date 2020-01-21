@@ -181,7 +181,7 @@ object infer {
               ))
           }
 
-        case Dot(target: Exp, field: String) =>
+        case Dot(target: Exp, field_name: String) =>
           val t_infered = infer(env, target)
           t_infered match {
             case ValueCl(defined, telescope) =>
@@ -198,14 +198,14 @@ object infer {
               // T_value = evaluate(telescope_env, T)
               // ------
               // infer(env, e.m) = T_value
-              defined.get(field) match {
+              defined.get(field_name) match {
                 case Some((t, _v)) => t
                 case None =>
                   var result: Option[Value] = None
                   var telescope_env = telescope.env
                   telescope.type_map.foreach {
                     case (name, t) =>
-                      if (name == field) {
+                      if (name == field_name) {
                         result = Some(evaluate(telescope_env, t))
                       }
                       telescope_env = telescope_env.ext(name, evaluate(telescope_env, t), NeutralVar(name))
@@ -218,7 +218,7 @@ object infer {
                           s"on ValueCl\n" +
                           s"target exp: ${pretty_exp(target)}\n" +
                           s"infered target type: ${pretty_value(t_infered)}\n" +
-                          s"can not find field for dot: ${field}\n"
+                          s"can not find field_name for dot: ${field_name}\n"
                       ))
                   }
               }

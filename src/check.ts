@@ -81,7 +81,7 @@ export function check_obj(
     //         local_env = local_env.ext(name, t_value, v_value)
     //       case None =>
     //         throw Report(List(
-    //           s"object does not have the field of defined: ${name}\n"
+    //           s"object does not have the field_name of defined: ${name}\n"
     //         ))
     //     }
     // }
@@ -110,7 +110,7 @@ export function check_obj(
     //         scope_env = scope_env.ext(name, t_value, v_value)
     //       case None =>
     //         throw Report(List(
-    //           s"object does not have the field of scope: ${name}\n"
+    //           s"object does not have the field_name of scope: ${name}\n"
     //         ))
     //     }
     // }

@@ -12,6 +12,6 @@ export declare class Ap extends Neutral {
 }
 export declare class Dot extends Neutral {
     target: Neutral;
-    field: string;
-    constructor(target: Neutral, field: string);
+    field_name: string;
+    constructor(target: Neutral, field_name: string);
 }

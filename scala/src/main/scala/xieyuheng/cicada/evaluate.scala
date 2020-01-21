@@ -53,8 +53,8 @@ object evaluate {
           case (name, exp) => (name, evaluate(env, exp))
         })
 
-      case Dot(target: Exp, field: String) =>
-        evaluate_dot(env, target, field)
+      case Dot(target: Exp, field_name: String) =>
+        evaluate_dot(env, target, field_name)
 
       case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
         var local_env = env
@@ -166,18 +166,18 @@ object evaluate {
     }
   }
 
-  def evaluate_dot(env: Env, target: Exp, field: String): Value = {
+  def evaluate_dot(env: Env, target: Exp, field_name: String): Value = {
     val target_value = evaluate(env, target)
     target_value match {
       case neutral: Neutral =>
-        NeutralDot(neutral, field)
+        NeutralDot(neutral, field_name)
 
       case ValueObj(value_map: ListMap[String, Value]) =>
-        value_map.get(field) match {
+        value_map.get(field_name) match {
           case Some(value) => value
           case None =>
             throw Report(List(
-              s"missing field: ${field}\n" +
+              s"missing field_name: ${field_name}\n" +
                 s"target_value: ${pretty_value(target_value)}\n"
             ))
         }

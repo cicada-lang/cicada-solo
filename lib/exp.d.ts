@@ -42,8 +42,8 @@ export declare class Obj extends Exp {
 }
 export declare class Dot extends Exp {
     target: Exp;
-    field: string;
-    constructor(target: Exp, field: string);
+    field_name: string;
+    constructor(target: Exp, field_name: string);
 }
 export declare class Block extends Exp {
     scope: Scope.Scope;

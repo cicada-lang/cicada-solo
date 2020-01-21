@@ -112,8 +112,8 @@ object equivalent {
                 case None =>
                   throw Report(List(
                     s"equivalent_telescope fail\n" +
-                      s"can not find field of t_telescope in s_telescope\n" +
-                      s"field = ${name}\n"
+                      s"can not find field_name of t_telescope in s_telescope\n" +
+                      s"field_name = ${name}\n"
                   ))
               }
           }
@@ -134,11 +134,11 @@ object equivalent {
           equivalent_list(s.args, t.args)
 
         case (s: NeutralDot, t: NeutralDot) =>
-          if (s.field != t.field) {
+          if (s.field_name != t.field_name) {
             throw Report(List(
               s"equivalent fail between NeutralDot and NeutralDot\n" +
-                s"field name mismatch\n" +
-                s"${s.field} != ${t.field}\n"
+                s"field_name name mismatch\n" +
+                s"${s.field_name} != ${t.field_name}\n"
             ))
           } else {
             equivalent(s.target, t.target)
@@ -196,8 +196,8 @@ object equivalent {
           case None =>
             throw Report(List(
               s"equivalent_list_map fail\n" +
-                s"can not find field of t_list_map in s_type_map\n" +
-                s"field = ${name}\n"
+                s"can not find field_name of t_list_map in s_type_map\n" +
+                s"field_name = ${name}\n"
             ))
         }
     }
@@ -224,8 +224,8 @@ object equivalent {
           case None =>
             throw Report(List(
               s"equivalent_defined fail\n" +
-                s"can not find field of t_defined in s_defined\n" +
-                s"field = ${name}\n"
+                s"can not find field_name of t_defined in s_defined\n" +
+                s"field_name = ${name}\n"
             ))
         }
     }

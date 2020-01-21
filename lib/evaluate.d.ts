@@ -7,4 +7,4 @@ export declare function evaluate_obj(env: Env.Env, scope: Scope.Scope): Value.Va
 export declare function evaluate_cl(env: Env.Env, scope: Scope.Scope): Value.Value;
 export declare function evaluate_block(env: Env.Env, scope: Scope.Scope, body: Exp.Exp): Value.Value;
 export declare function evaluate_ap(env: Env.Env, target: Exp.Exp, args: Array<Exp.Exp>): Value.Value;
-export declare function evaluate_dot(env: Env.Env, target: Exp.Exp, field: string): Value.Value;
+export declare function evaluate_dot(env: Env.Env, target: Exp.Exp, field_name: string): Value.Value;

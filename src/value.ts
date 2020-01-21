@@ -70,7 +70,7 @@ export namespace Neutral {
   export class Dot extends Neutral {
     constructor(
       public target: Neutral,
-      public field: string,
+      public field_name: string,
     ) { super() }
   }
 

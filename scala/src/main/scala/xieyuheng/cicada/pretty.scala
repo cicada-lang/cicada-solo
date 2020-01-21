@@ -66,8 +66,8 @@ object pretty {
         }.mkString("")
         s"object {${maybe_ln(s)}}"
 
-      case Dot(target: Exp, field: String) =>
-        s"${pretty_exp(target)}.${field}"
+      case Dot(target: Exp, field_name: String) =>
+        s"${pretty_exp(target)}.${field_name}"
 
       case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
         var s = block_entry_map.map {
@@ -150,8 +150,8 @@ object pretty {
         }.mkString(", ")
         s"${pretty_neutral(target)}(${s})"
 
-      case NeutralDot(target: Neutral, field: String) =>
-        s"${pretty_neutral(target)}.${field}"
+      case NeutralDot(target: Neutral, field_name: String) =>
+        s"${pretty_neutral(target)}.${field_name}"
     }
   }
 
