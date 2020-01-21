@@ -1,14 +1,14 @@
 import * as Exp from "./exp"
 import * as Value from "./value"
-import { evaluate } from "./evaluate"
 import { Report } from "./report"
+import { evaluate } from "./evaluate"
 
 export class Env {
   constructor(
     public entry_map: Map<string, Entry.Entry> = new Map(),
   ) {}
 
-  lookup_type_and_value(name: string): { t: Value.Value, value: Value.Value } | undefined {
+  lookup_type_and_value(name: string): undefined | { t: Value.Value, value: Value.Value } {
     let entry = this.entry_map.get(name)
 
     if (entry === undefined) {
@@ -35,7 +35,7 @@ export class Env {
     }
   }
 
-  lookup_type(name: string): Value.Value | undefined {
+  lookup_type(name: string): undefined | Value.Value {
     let result = this.lookup_type_and_value(name)
 
     if (result === undefined) {
@@ -48,7 +48,7 @@ export class Env {
     }
   }
 
-  lookup_value(name: string): Value.Value | undefined {
+  lookup_value(name: string): undefined | Value.Value {
     let result = this.lookup_type_and_value(name)
 
     if (result === undefined) {

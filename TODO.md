@@ -1,4 +1,5 @@
 # in ts
+- pretty
 - evaluate_dot
 - evaluate_ap
 - evaluate_cl

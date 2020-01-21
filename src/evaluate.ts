@@ -2,6 +2,7 @@ import * as Exp from "./exp"
 import * as Value from "./value"
 import * as Env from "./env"
 import * as Scope from "./scope"
+import { Report } from "./report"
 import { check } from "./check"
 import { infer } from "./infer"
 
@@ -69,9 +70,9 @@ export function evaluate(
   }
 
   else {
-    throw new Error(
+    throw new Report([
       "evaluate fail\n" +
-        `unhandled class of Exp: ${exp.constructor.name}\n`)
+        `unhandled class of Exp: ${exp.constructor.name}\n`])
   }
 }
 
@@ -102,9 +103,9 @@ export function evaluate_obj(
     }
 
     else if (entry instanceof Scope.Entry.Given) {
-      throw new Error(
+      throw new Report([
         "evaluate_obj fail\n" +
-          `scope of Exp.Obj should not contain Entry.Given\n`)
+          `scope of Exp.Obj should not contain Entry.Given\n`])
     }
 
     else if (entry instanceof Scope.Entry.Define) {
@@ -118,9 +119,9 @@ export function evaluate_obj(
     }
 
     else {
-      throw new Error(
+      throw new Report([
         "evaluate_obj fail\n" +
-          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
     }
   }
 
@@ -156,9 +157,9 @@ export function evaluate_block(
     }
 
     else if (entry instanceof Scope.Entry.Given) {
-      throw new Error(
+      throw new Report([
         "evaluate_block fail\n" +
-          `scope of Exp.Obj should not contain Entry.Given\n`)
+          `scope of Exp.Obj should not contain Entry.Given\n`])
     }
 
     else if (entry instanceof Scope.Entry.Define) {
@@ -171,9 +172,9 @@ export function evaluate_block(
     }
 
     else {
-      throw new Error(
+      throw new Report([
         "evaluate_block fail\n" +
-          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
     }
   }
 

@@ -3,12 +3,12 @@ import * as Value from "./value";
 export declare class Env {
     entry_map: Map<string, Entry.Entry>;
     constructor(entry_map?: Map<string, Entry.Entry>);
-    lookup_type_and_value(name: string): {
+    lookup_type_and_value(name: string): undefined | {
         t: Value.Value;
         value: Value.Value;
-    } | undefined;
-    lookup_type(name: string): Value.Value | undefined;
-    lookup_value(name: string): Value.Value | undefined;
+    };
+    lookup_type(name: string): undefined | Value.Value;
+    lookup_value(name: string): undefined | Value.Value;
     ext(name: string, the: {
         t: Value.Value;
         value: Value.Value;
