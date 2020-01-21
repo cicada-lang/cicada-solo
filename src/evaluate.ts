@@ -239,6 +239,9 @@ function scope_check_args(
 
     else if (entry instanceof Scope.Entry.Given) {
       let arg = args[arg_index]
+      if (arg === undefined) {
+        break
+      }
       arg_index += 1
       let { t } = entry
       let t_value = evaluate(scope_env, t)
