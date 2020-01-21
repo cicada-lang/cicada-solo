@@ -5,6 +5,7 @@ import * as Scope from "./scope"
 import { Report } from "./report"
 import { check } from "./check"
 import { infer } from "./infer"
+import * as pretty from "./pretty"
 
 export function evaluate(
   env: Env.Env,
@@ -189,14 +190,29 @@ export function evaluate_dot(
   let target_value = evaluate(env, target)
 
   if (target_value instanceof Value.Neutral.Neutral) {
-    throw new Error("TODO")
+    return new Value.Neutral.Dot(target_value, field)
   }
 
   else if (target_value instanceof Value.Obj) {
-    throw new Error("TODO")
+    let { defined } = target_value
+    let the = defined.get(field)
+
+    if (the === undefined) {
+      throw new Report([
+        "evaluate_dot fail\n" +
+          `missing field: ${field}\n` +
+          `target_value: ${pretty.pretty_value(target_value)}\n`])
+    }
+
+    else {
+      return the.value
+    }
   }
 
   else {
-    throw new Error("TODO")
+    throw new Report([
+      "evaluate_dot fail\n" +
+        "expecting Value.Obj\n" +
+        `while found Value of class: ${target_value.constructor.name}\n`])
   }
 }
