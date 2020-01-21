@@ -1,5 +1,4 @@
 # in ts
-- evaluate_ap
 - pretty
 - check
 - infer

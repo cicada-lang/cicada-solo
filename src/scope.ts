@@ -4,6 +4,16 @@ export class Scope {
   constructor(
     public named_entries: Array<[string, Entry.Entry]> = [],
   ) {}
+
+  get arity(): number {
+    let n = 0
+    for (let [_name, entry] of this.named_entries) {
+      if (entry instanceof Entry.Given) {
+        n += 1
+      }
+    }
+    return n
+  }
 }
 
 export namespace Entry {

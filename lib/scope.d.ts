@@ -2,6 +2,7 @@ import * as Exp from "./exp";
 export declare class Scope {
     named_entries: Array<[string, Entry.Entry]>;
     constructor(named_entries?: Array<[string, Entry.Entry]>);
+    get arity(): number;
 }
 export declare namespace Entry {
     abstract class Entry {
