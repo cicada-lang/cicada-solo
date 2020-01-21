@@ -19,9 +19,9 @@ export declare class Pi extends Value {
 }
 export declare class Fn extends Value {
     scope: Scope.Scope;
-    return_value: Exp.Exp;
+    body: Exp.Exp;
     env: Env.Env;
-    constructor(scope: Scope.Scope, return_value: Exp.Exp, env: Env.Env);
+    constructor(scope: Scope.Scope, body: Exp.Exp, env: Env.Env);
 }
 export declare class FnCase extends Value {
     cases: Array<Fn>;

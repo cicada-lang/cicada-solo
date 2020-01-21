@@ -20,8 +20,8 @@ export declare class Pi extends Exp {
 }
 export declare class Fn extends Exp {
     scope: Scope.Scope;
-    return_value: Exp;
-    constructor(scope: Scope.Scope, return_value: Exp);
+    body: Exp;
+    constructor(scope: Scope.Scope, body: Exp);
 }
 export declare class FnCase extends Exp {
     cases: Array<Fn>;
@@ -47,6 +47,6 @@ export declare class Dot extends Exp {
 }
 export declare class Block extends Exp {
     scope: Scope.Scope;
-    return_value: Exp;
-    constructor(scope: Scope.Scope, return_value: Exp);
+    body: Exp;
+    constructor(scope: Scope.Scope, body: Exp);
 }

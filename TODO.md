@@ -1,6 +1,6 @@
 # in ts
-- pretty
 - evaluate_ap
+- pretty
 - check
 - infer
 - readback

@@ -36,13 +36,13 @@ export function evaluate(
   }
 
   else if (exp instanceof Exp.Fn) {
-    let { scope, return_value } = exp
-    return new Value.Fn(scope, return_value, env)
+    let { scope, body } = exp
+    return new Value.Fn(scope, body, env)
   }
 
   else if (exp instanceof Exp.FnCase) {
     let { cases } = exp
-    return new Value.FnCase(cases.map(fn => new Value.Fn(fn.scope, fn.return_value, env)))
+    return new Value.FnCase(cases.map(fn => new Value.Fn(fn.scope, fn.body, env)))
   }
 
   else if (exp instanceof Exp.Ap) {
@@ -66,8 +66,8 @@ export function evaluate(
   }
 
   else if (exp instanceof Exp.Block) {
-    let { scope, return_value } = exp
-    return evaluate_block(env, scope, return_value)
+    let { scope, body } = exp
+    return evaluate_block(env, scope, body)
   }
 
   else {
@@ -75,14 +75,6 @@ export function evaluate(
       "evaluate fail\n" +
         `unhandled class of Exp: ${exp.constructor.name}\n`])
   }
-}
-
-export function evaluate_ap(
-  env: Env.Env,
-  target: Exp.Exp,
-  args: Array<Exp.Exp>,
-): Value.Value {
-  throw new Error("TODO")
 }
 
 export function evaluate_obj(
@@ -181,7 +173,7 @@ export function evaluate_cl(
 export function evaluate_block(
   env: Env.Env,
   scope: Scope.Scope,
-  return_value: Exp.Exp,
+  body: Exp.Exp,
 ): Value.Value {
   let local_env = env
 
@@ -217,7 +209,119 @@ export function evaluate_block(
     }
   }
 
-  return evaluate(local_env, return_value)
+  return evaluate(local_env, body)
+}
+
+export function evaluate_ap(
+  env: Env.Env,
+  target: Exp.Exp,
+  args: Array<Exp.Exp>,
+): Value.Value {
+  let target_value = evaluate(env, target)
+
+  if (target_value instanceof Value.Neutral.Neutral) {
+    return new Value.Neutral.Ap(target_value, args.map(arg => evaluate(env, arg)))
+  }
+
+  else if (target_value instanceof Value.Fn) {
+    // case ValueFn(telescope: Telescope, body: Exp) =>
+    //   if (telescope.size != args.length) {
+    //     throw Report(List(
+    //       "evaluate_ap fail, ValueFn arity mismatch\n"
+    //     ))
+    //   }
+    //   var local_env = env
+    //   var telescope_env = telescope.env
+    //   telescope.type_map.zip(args).foreach {
+    //     case ((name, t), arg) =>
+    //       val t_value = evaluate(telescope_env, t)
+    //       check(env, arg, t_value)
+    //       val arg_value = evaluate(env, arg) // NOTE use the original `env`
+    //       local_env = local_env.ext(name, t_value, arg_value)
+    //       telescope_env = telescope_env.ext(name, t_value, arg_value)
+    //   }
+    //   evaluate(local_env, body)
+    throw new Error("TODO")
+  }
+
+  else if (target_value instanceof Value.FnCase) {
+    // case ValueFnCase(cases) =>
+    //   cases.find {
+    //     case (telescope, _body) =>
+    //       // NOTE find the first checked case
+    //       Try {
+    //         if (telescope.size != args.length) {
+    //           throw Report(List(
+    //             "evaluate_ap fail, ValueFnCase arity mismatch\n"
+    //           ))
+    //         }
+    //         var telescope_env = telescope.env
+    //         telescope.type_map.zip(args).foreach {
+    //           case ((name, t), arg) =>
+    //             val t_value = evaluate(telescope_env, t)
+    //             val arg_value = evaluate(env, arg)
+    //             val arg_norm = readback(arg_value)
+    //             check(env, arg_norm, t_value) // NOTE use the original `env`
+    //             telescope_env = telescope_env.ext(name, t_value, arg_value)
+    //         }
+    //       } match {
+    //         case Success(_ok) => true
+    //         case Failure(_error) => false
+    //       }
+    //   } match {
+    //     case Some((telescope, body)) =>
+    //       var local_env = env
+    //       var telescope_env = telescope.env
+    //       telescope.type_map.zip(args).foreach {
+    //         case ((name, t), arg) =>
+    //           val t_value = evaluate(telescope_env, t)
+    //           val arg_value = evaluate(env, arg)
+    //           local_env = local_env.ext(name, t_value, arg_value)
+    //           telescope_env = telescope_env.ext(name, t_value, arg_value)
+    //       }
+    //       evaluate(local_env, body)
+    //     case None =>
+    //       val args_repr = args.map { pretty_exp }.mkString(", ")
+    //       throw Report(List(
+    //         "evaluate_ap fail, ValueFnCase mismatch\n" +
+    //           s"target_value: ${pretty_value(target_value)}\n" +
+    //           s"args: (${args_repr})\n"
+    //       ))
+    //   }
+    throw new Error("TODO")
+  }
+
+  else if (target_value instanceof Value.Cl) {
+    // case ValueCl(defined, telescope: Telescope) =>
+    //   if (telescope.size < args.length) {
+    //     throw Report(List(
+    //       s"evaluate_ap fail\n" +
+    //         s"too many arguments\n"
+    //     ))
+    //   }
+    //   var telescope_env = telescope.env
+    //   var new_defined: ListMap[String, (Value, Value)] = ListMap()
+    //   var new_type_map = telescope.type_map
+    //   telescope.type_map.zip(args).foreach {
+    //     case ((name, t), arg) =>
+    //       val t_value = evaluate(telescope_env, t)
+    //       check(env, arg, t_value)
+    //       val arg_value = evaluate(env, arg)
+    //       new_defined = new_defined + (name -> (t_value, arg_value))
+    //       telescope_env = telescope_env.ext(name, t_value, arg_value)
+    //       new_type_map = new_type_map.tail
+    //   }
+    //   ValueCl(defined ++ new_defined, Telescope(new_type_map, telescope_env))
+    throw new Error("TODO")
+  }
+
+
+  else {
+    throw new Report([
+      "evaluate_ap fail\n" +
+        "expecting a Value class that can be applied as function\n" +
+        `while found Value of class: ${target_value.constructor.name}\n`])
+  }
 }
 
 export function evaluate_dot(

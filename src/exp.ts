@@ -28,7 +28,7 @@ export class Pi extends Exp {
 export class Fn extends Exp {
   constructor(
     public scope: Scope.Scope,
-    public return_value: Exp,
+    public body: Exp,
   ) { super() }
 }
 
@@ -67,6 +67,6 @@ export class Dot extends Exp {
 export class Block extends Exp {
   constructor(
     public scope: Scope.Scope,
-    public return_value: Exp,
+    public body: Exp,
   ) { super() }
 }

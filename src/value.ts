@@ -25,7 +25,7 @@ export class Pi extends Value {
 export class Fn extends Value {
   constructor(
     public scope: Scope.Scope,
-    public return_value: Exp.Exp,
+    public body: Exp.Exp,
     public env: Env.Env,
   ) { super() }
 }
