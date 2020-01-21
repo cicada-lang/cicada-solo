@@ -1,6 +1,7 @@
 import * as Exp from "./exp"
 import * as Value from "./value"
 import { evaluate } from "./evaluate"
+import { Report } from "./report"
 
 export class Env {
   constructor(
@@ -9,43 +10,54 @@ export class Env {
 
   lookup_type_and_value(name: string): { t: Value.Value, value: Value.Value } | undefined {
     let entry = this.entry_map.get(name)
-    if (entry !== undefined) {
-      if (entry instanceof Entry.DefineRec) {
-        let { t, value, env } = entry
-        return {
-          t: evaluate(env.ext_rec(name, { t, value, env }), t),
-          value: evaluate(env.ext_rec(name, { t, value, env }), value),
-        }
-      } else if (entry instanceof Entry.Define) {
-        let { t, value } = entry
-        return { t, value }
-      } else {
-        throw new Error(
-          "Env.lookup_type_and_value fail\n" +
-            `unhandled class of Entry: ${entry.constructor.name}\n`)
-      }
-    } else {
+
+    if (entry === undefined) {
       return undefined
+    }
+
+    else if (entry instanceof Entry.DefineRec) {
+      let { t, value, env } = entry
+      return {
+        t: evaluate(env.ext_rec(name, { t, value, env }), t),
+        value: evaluate(env.ext_rec(name, { t, value, env }), value),
+      }
+    }
+
+    else if (entry instanceof Entry.Define) {
+      let { t, value } = entry
+      return { t, value }
+    }
+
+    else {
+      throw new Report([
+        "Env.lookup_type_and_value fail\n" +
+          `unhandled class of Entry: ${entry.constructor.name}\n`])
     }
   }
 
   lookup_type(name: string): Value.Value | undefined {
     let result = this.lookup_type_and_value(name)
-    if (result !== undefined) {
+
+    if (result === undefined) {
+      return undefined
+    }
+
+    else {
       let { t } = result
       return t
-    } else {
-      return undefined
     }
   }
 
   lookup_value(name: string): Value.Value | undefined {
     let result = this.lookup_type_and_value(name)
-    if (result !== undefined) {
+
+    if (result === undefined) {
+      return undefined
+    }
+
+    else {
       let { value } = result
       return value
-    } else {
-      return undefined
     }
   }
 

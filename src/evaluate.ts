@@ -185,5 +185,17 @@ export function evaluate_dot(
   target: Exp.Exp,
   field: string,
 ): Value.Value {
-  throw new Error("TODO")
+  let target_value = evaluate(env, target)
+
+  if (target_value instanceof Value.Neutral.Neutral) {
+    throw new Error("TODO")
+  }
+
+  else if (target_value instanceof Value.Obj) {
+    throw new Error("TODO")
+  }
+
+  else {
+    throw new Error("TODO")
+  }
 }
