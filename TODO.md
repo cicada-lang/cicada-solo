@@ -1,5 +1,6 @@
 # in ts
-- check
+- check_obj
+- check_fn
 - infer
 - readback
 - subtype

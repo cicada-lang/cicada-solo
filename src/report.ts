@@ -5,15 +5,15 @@ export class Report extends Error {
     super(merge_message_list(message_list))
   }
 
-  throw_append(message: string) {
-    throw new Report([
+  append(message: string) {
+    new Report([
       ...this.message_list,
       message,
     ])
   }
 
-  throw_prepend(message: string) {
-    throw new Report([
+  prepend(message: string) {
+    new Report([
       message,
       ...this.message_list,
     ])
