@@ -214,119 +214,126 @@ export function infer_ap(
   target: Exp.Exp,
   args: Array<Exp.Exp>,
 ): Value.Value {
-  // infer(env, target) match {
-  //   // { x1 : A1, x2 : A2, ... -> R } @ telescope_env = infer(env, f)
-  //   // A1_value = evaluate(telescope_env, A1)
-  //   // check(env, a1, A1_value)
-  //   // telescope_env = telescope_env.ext(x1, A1_value, evaluate(env, a1))
-  //   // ...
-  //   // ------
-  //   // infer(env, f(a1, a2, ...)) = evaluate(telescope_env, R)
-  //   case ValuePi(telescope: Telescope, return_type: Exp) =>
-  //     if (args.length != telescope.size) {
-  //       throw Report(List(
-  //         s"args and pi type arity mismatch\n" +
-  //           s"arity of args: ${args.length}\n" +
-  //           s"arity of pi: ${telescope.size}\n"
-  //       ))
-  //     }
-  //     var telescope_env = telescope.env
-  //     telescope.type_map.zip(args).foreach {
-  //       case ((name, t), arg) =>
-  //         val t_value = evaluate(telescope_env, t)
-  //         check(env, arg, t_value)
-  //         telescope_env = telescope_env.ext(name, t_value, evaluate(env, arg))
-  //     }
-  //     evaluate(telescope_env, return_type)
+  let t_infered = infer(env, target)
 
-  //   case ValueType() =>
-  //     evaluate(env, target) match {
-  //       case ValueCl(defined, telescope) =>
-  //         if (args.length > telescope.size) {
-  //           throw Report(List(
-  //             s"too many arguments to apply class\n" +
-  //               s"length of args: ${args.length}\n" +
-  //               s"arity of cl: ${telescope.size}\n"
-  //           ))
-  //         }
-  //         var telescope_env = telescope.env
-  //         telescope.type_map.zip(args).foreach {
-  //           case ((name, t), arg) =>
-  //             val t_value = evaluate(telescope_env, t)
-  //             check(env, arg, t_value)
-  //             telescope_env = telescope_env.ext(name, evaluate(env, arg), t_value)
-  //         }
-  //         ValueType()
+  if (t_infered instanceof Value.Pi) {
+    // infer(env, target) match {
+    //   // { x1 : A1, x2 : A2, ... -> R } @ scope_env = infer(env, f)
+    //   // A1_value = evaluate(scope_env, A1)
+    //   // check(env, a1, A1_value)
+    //   // scope_env = scope_env.ext(x1, A1_value, evaluate(env, a1))
+    //   // ...
+    //   // ------
+    //   // infer(env, f(a1, a2, ...)) = evaluate(scope_env, R)
 
-  //       case t =>
-  //         throw Report(List(
-  //           s"expecting ValueCl but found: ${t}\n"
-  //         ))
-  //     }
+    //   case ValuePi(scope: scope, return_type: Exp) =>
+    //     if (args.length != scope.size) {
+    //       throw Report(List(
+    //         s"args and pi type arity mismatch\n" +
+    //           s"arity of args: ${args.length}\n" +
+    //           s"arity of pi: ${scope.size}\n"
+    //       ))
+    //     }
+    //     var scope_env = scope.env
+    //     scope.type_map.zip(args).foreach {
+    //       case ((name, t), arg) =>
+    //         val t_value = evaluate(scope_env, t)
+    //         check(env, arg, t_value)
+    //         scope_env = scope_env.ext(name, t_value, evaluate(env, arg))
+    //     }
+    //     evaluate(scope_env, return_type)
 
-  //   case t =>
-  //     throw Report(List(
-  //       s"expecting ValuePi type but found: ${t}\n"
-  //     ))
-  // }
+    //   case ValueType() =>
+    //     evaluate(env, target) match {
+    //       case ValueCl(defined, scope) =>
+    //         if (args.length > scope.size) {
+    //           throw Report(List(
+    //             s"too many arguments to apply class\n" +
+    //               s"length of args: ${args.length}\n" +
+    //               s"arity of cl: ${scope.size}\n"
+    //           ))
+    //         }
+    //         var scope_env = scope.env
+    //         scope.type_map.zip(args).foreach {
+    //           case ((name, t), arg) =>
+    //             val t_value = evaluate(scope_env, t)
+    //             check(env, arg, t_value)
+    //             scope_env = scope_env.ext(name, evaluate(env, arg), t_value)
+    //         }
+    //         ValueType()
 
-  throw new Error("TODO")
+    //       case t =>
+    //         throw Report(List(
+    //           s"expecting ValueCl but found: ${t}\n"
+    //         ))
+    //     }
+
+    throw new Error("TODO")
+  }
+
+  else {
+    throw new Report([
+      `expecting type of function-like value, but found type: ${pretty.pretty_value(t_infered)}\n`])
+  }
 }
-
 
 export function infer_dot(
   env: Env.Env,
   target: Exp.Exp,
   field_name: string,
 ): Value.Value {
-  // val t_infered = infer(env, target)
-  // t_infered match {
-  //   case ValueCl(defined, telescope) =>
-  //     // CASE found `m` in `defined`
-  //     // { ..., m = d : T, ... } @ telescope_env = infer(env, e)
-  //     // ------
-  //     // infer(env, e.m) = T
-  //     // CASE found `m` in `telescope`
-  //     // { x1 : A1,
-  //     //   x2 : A2, ...
-  //     //   m : T, ... } @ telescope_env = infer(env, e)
-  //     // telescope_env = telescope_env.ext(x1, evaluate(telescope_env, T), NeutralVar(x1))
-  //     // ...
-  //     // T_value = evaluate(telescope_env, T)
-  //     // ------
-  //     // infer(env, e.m) = T_value
-  //     defined.get(field_name) match {
-  //       case Some((t, _v)) => t
-  //       case None =>
-  //         var result: Option[Value] = None
-  //         var telescope_env = telescope.env
-  //         telescope.type_map.foreach {
-  //           case (name, t) =>
-  //             if (name == field_name) {
-  //               result = Some(evaluate(telescope_env, t))
-  //             }
-  //             telescope_env = telescope_env.ext(name, evaluate(telescope_env, t), NeutralVar(name))
-  //         }
-  //         result match {
-  //           case Some(t) => t
-  //           case None =>
-  //             throw Report(List(
-  //               s"infer fail\n" +
-  //                 s"on ValueCl\n" +
-  //                 s"target exp: ${pretty_exp(target)}\n" +
-  //                 s"infered target type: ${pretty_value(t_infered)}\n" +
-  //                 s"can not find field_name for dot: ${field_name}\n"
-  //             ))
-  //         }
-  //     }
+  let t_infered = infer(env, target)
 
-  //   case t =>
-  //     throw Report(List(
-  //       s"expecting class\n" +
-  //         s"found type: ${pretty_value(t)}\n" +
-  //         s"target: ${pretty_exp(target)}\n"
-  //     ))
-  // }
+  if (t_infered instanceof Value.Cl) {
+    let cl = t_infered
 
-  throw new Error("TODO")
+    // CASE found `m` in `defined`
+    // { ..., m = d : T, ... } @ scope_env = infer(env, e)
+    // ------
+    // infer(env, e.m) = T
+
+    // CASE found `m` in `scope`
+    // { x1 : A1,
+    //   x2 : A2, ...
+    //   m : T, ... } @ scope_env = infer(env, e)
+    // scope_env = scope_env.ext(x1, evaluate(scope_env, T), NeutralVar(x1))
+    // ...
+    // T_value = evaluate(scope_env, T)
+    // ------
+    // infer(env, e.m) = T_value
+
+    // defined.get(field_name) match {
+    //   case Some((t, _v)) => t
+    //   case None =>
+    //     var result: Option[Value] = None
+    //   var scope_env = scope.env
+    //   scope.type_map.foreach {
+    //     case (name, t) =>
+    //       if (name == field_name) {
+    //         result = Some(evaluate(scope_env, t))
+    //       }
+    //     scope_env = scope_env.ext(name, evaluate(scope_env, t), NeutralVar(name))
+    //   }
+    //   result match {
+    //     case Some(t) => t
+    //     case None =>
+    //       throw Report(List(
+    //         s"infer fail\n" +
+    //           s"on ValueCl\n" +
+    //           s"target exp: ${pretty_exp(target)}\n" +
+    //           s"infered target type: ${pretty_value(t_infered)}\n" +
+    //           s"can not find field_name for dot: ${field_name}\n"
+    //       ))
+    //   }
+    // }
+
+    throw new Error("TODO")
+  }
+
+  else {
+    throw new Report([
+      "expecting class\n" +
+        `found type: ${pretty.pretty_value(t_infered)}\n` +
+        `target: ${pretty.pretty_exp(target)}\n`])
+  }
 }
