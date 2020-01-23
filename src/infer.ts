@@ -4,6 +4,8 @@ import * as Env from "./env"
 import * as Scope from "./scope"
 import { Report } from "./report"
 import { evaluate } from "./evaluate"
+import { check } from "./check"
+import { readback } from "./readback"
 import * as pretty from "./pretty"
 
 export function infer(
@@ -35,42 +37,15 @@ export function infer(
       return new Value.StrType()
     }
 
-    // case Pi(type_map: ListMap[String, Exp], return_type: Exp) =>
-    //   // check(local_env, A1, type)
-    //   // local_env = local_env.ext(x1, evaluate(local_env, A1), NeutralVar(x1))
-    //   // ...
-    //   // check(local_env, R, type)
-    //   // ------
-    //   // infer(local_env, { x1 : A1, x2 : A2, ... -> R }) = type
-    //   var local_env = env
-    //   type_map.foreach {
-    //     case (name, t) =>
-    //       check(local_env, t, ValueType())
-    //       local_env = local_env.ext(name, evaluate(local_env, t), NeutralVar(name))
-    //   }
-    //   check(local_env, return_type, ValueType())
-    //   ValueType()
+    else if (exp instanceof Exp.Pi) {
+      let { scope, return_type } = exp
+      return infer_pi(env, scope, return_type)
+    }
 
-    // case Fn(type_map: ListMap[String, Exp], body: Exp) =>
-    //   // local_env = env
-    //   // check(local_env, A1, type)
-    //   // local_env = local_env.ext(x1, evaluate(local_env, A1), NeutralVar(x1))
-    //   // ...
-    //   // R_value = infer(local_env, r)
-    //   // R = readback(R_value)
-    //   // ------
-    //   // infer(
-    //   //   env,
-    //   //   { x1 : A1, x2 : A2, ... => r }) = { x1 : A1, x2 : A2, ... => R } @ env
-    //   var local_env = env
-    //   type_map.foreach {
-    //     case (name, t) =>
-    //       check(local_env, t, ValueType())
-    //       local_env = local_env.ext(name, evaluate(local_env, t), NeutralVar(name))
-    //   }
-    //   val return_type_value = infer(local_env, body)
-    //   val return_type = readback(return_type_value)
-    //   ValuePi(Telescope(type_map, env), return_type)
+    else if (exp instanceof Exp.Fn) {
+      let { scope, body } = exp
+      return infer_fn(env, scope, body)
+    }
 
     if (exp instanceof Exp.FnCase) {
       throw new Report([
@@ -264,4 +239,119 @@ export function infer(
       throw error
     }
   }
+}
+
+export function infer_pi(
+  env: Env.Env,
+  scope: Scope.Scope,
+  return_type: Exp.Exp,
+): Value.Value {
+
+  // check(local_env, A1, type)
+  // local_env = local_env.ext(x1, evaluate(local_env, A1), NeutralVar(x1))
+  // ...
+  // check(local_env, R, type)
+  // ------
+  // infer(local_env, { x1 : A1, x2 : A2, ... -> R }) = type
+
+  var local_env = env
+  for (let [name, entry] of scope.named_entries) {
+    if (entry instanceof Scope.Entry.Let) {
+      let { value } = entry
+      let t_value = infer(local_env, value)
+      local_env = local_env.ext(name, {
+        t: t_value,
+        value: evaluate(local_env, value),
+      })
+    }
+
+    else if (entry instanceof Scope.Entry.Given) {
+      let { t } = entry
+      check(local_env, t, new Value.Type())
+      local_env = local_env.ext(name, {
+        t: evaluate(local_env, t),
+        value: new Value.Neutral.Var(name),
+      })
+    }
+
+    else if (entry instanceof Scope.Entry.Define) {
+      let { t, value } = entry
+      check(local_env, t, new Value.Type())
+      let t_value = evaluate(local_env, t)
+      check(local_env, value, t_value)
+      local_env = local_env.ext(name, {
+        t: t_value,
+        value: evaluate(local_env, value),
+      })
+    }
+
+    else {
+      throw new Error(
+        "infer_pi fail\n" +
+          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+    }
+  }
+
+  check(local_env, return_type, new Value.Type())
+  return new Value.Type()
+}
+
+export function infer_fn(
+  env: Env.Env,
+  scope: Scope.Scope,
+  body: Exp.Exp,
+): Value.Value {
+
+  // local_env = env
+  // check(local_env, A1, type)
+  // local_env = local_env.ext(x1, evaluate(local_env, A1), NeutralVar(x1))
+  // ...
+  // R_value = infer(local_env, r)
+  // R = readback(R_value)
+  // ------
+  // infer(
+  //   env,
+  //   { x1 : A1, x2 : A2, ... => r }) = { x1 : A1, x2 : A2, ... => R } @ env
+
+  let local_env = env
+  for (let [name, entry] of scope.named_entries) {
+    if (entry instanceof Scope.Entry.Let) {
+      let { value } = entry
+      let t_value = infer(local_env, value)
+      local_env = local_env.ext(name, {
+        t: t_value,
+        value: evaluate(local_env, value),
+      })
+    }
+
+    else if (entry instanceof Scope.Entry.Given) {
+      let { t } = entry
+      check(local_env, t, new Value.Type())
+      local_env = local_env.ext(name, {
+        t: evaluate(local_env, t),
+        value: new Value.Neutral.Var(name),
+      })
+    }
+
+    else if (entry instanceof Scope.Entry.Define) {
+      let { t, value } = entry
+      check(local_env, t, new Value.Type())
+      let t_value = evaluate(local_env, t)
+      check(local_env, value, t_value)
+      local_env = local_env.ext(name, {
+        t: t_value,
+        value: evaluate(local_env, value),
+      })
+    }
+
+    else {
+      throw new Error(
+        "infer_fn fail\n" +
+          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+    }
+  }
+
+  let return_type_value = infer(local_env, body)
+  let return_type = readback(return_type_value)
+  return new Value.Pi(scope, return_type, env) // NOTE use `env` instead of `local_env`
 }
