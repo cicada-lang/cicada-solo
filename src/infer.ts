@@ -39,159 +39,99 @@ export function infer(
 
     else if (exp instanceof Exp.Pi) {
       let { scope, return_type } = exp
-      return infer_pi(env, scope, return_type)
+
+      // check(local_env, A1, type)
+      // local_env = local_env.ext(x1, evaluate(local_env, A1), NeutralVar(x1))
+      // ...
+      // check(local_env, R, type)
+      // ------
+      // infer(local_env, { x1 : A1, x2 : A2, ... -> R }) = type
+
+      let local_env = scope_check(env, scope)
+      check(local_env, return_type, new Value.Type())
+      return new Value.Type()
     }
 
     else if (exp instanceof Exp.Fn) {
       let { scope, body } = exp
-      return infer_fn(env, scope, body)
+
+      // local_env = env
+      // check(local_env, A1, type)
+      // local_env = local_env.ext(x1, evaluate(local_env, A1), NeutralVar(x1))
+      // ...
+      // R_value = infer(local_env, r)
+      // R = readback(R_value)
+      // ------
+      // infer(
+      //   env,
+      //   { x1 : A1, x2 : A2, ... => r }) = { x1 : A1, x2 : A2, ... => R } @ env
+
+      let local_env = scope_check(env, scope)
+      let return_type_value = infer(local_env, body)
+      let return_type = readback(return_type_value)
+      return new Value.Pi(scope, return_type, env) // NOTE use `env` instead of `local_env`
     }
 
-    if (exp instanceof Exp.FnCase) {
+    else if (exp instanceof Exp.FnCase) {
       throw new Report([
         `the language is not designed to infer the type of Exp.FnCase: ${exp}\n`])
     }
 
-    if (exp instanceof Exp.Cl) {
+    else if (exp instanceof Exp.Cl) {
       let { scope } = exp
-      return infer_cl(env, scope)
+
+      // check(local_env, A1, type)
+      // A1_value = evaluate(local_env, A1)
+      // check(local_env, d1, A1_value)
+      // d1_value = evaluate(local_env, d1)
+      // local_env = local_env.ext(x1, A1_value, d1_value)
+      // ...
+      // check(local_env, B1, type)
+      // B1_value = evaluate(local_env, B1)
+      // local_env = local_env.ext(y1, B1_value, NeutralVar(y1))
+      // ...
+      // ------
+      // infer(
+      //   local_env,
+      //   { x1 = d1 : A1, x2 = d2 : A2, ..., y1 : B1, y2 : B2, ... }) = type
+
+      scope_check(env, scope)
+      return new Value.Type()
     }
 
-    // case Obj(value_map: ListMap[String, Exp]) =>
-    //   // A1 = infer(local_env, a1)
-    //   // a1_value = evaluate(local_env, a1)
-    //   // local_env = local_env.ext(x1, a1_value, A1)
-    //   // ...
-    //   // ------
-    //   // infer(local_env, { x1 = a1, x2 = a2, ... }) =
-    //   //   { x1 = a1_value : A1, x2 = a2_value : A2, ... } @ local_env
-    //   var local_env = env
-    //   var defined: ListMap[String, (Value, Value)] = ListMap()
-    //   value_map.foreach {
-    //     case (name, v) =>
-    //       val t_value = infer(local_env, v)
-    //       val v_value = evaluate(local_env, v)
-    //       local_env = local_env.ext(name, t_value, v_value)
-    //       defined = defined + (name -> (t_value, v_value))
-    //   }
-    //   ValueCl(defined, Telescope(ListMap(), local_env))
+    else if (exp instanceof Exp.Obj) {
+      let { scope } = exp
 
-    // case Ap(target: Exp, args: List[Exp]) =>
-    //   infer(env, target) match {
-    //     // { x1 : A1, x2 : A2, ... -> R } @ telescope_env = infer(env, f)
-    //     // A1_value = evaluate(telescope_env, A1)
-    //     // check(env, a1, A1_value)
-    //     // telescope_env = telescope_env.ext(x1, A1_value, evaluate(env, a1))
-    //     // ...
-    //     // ------
-    //     // infer(env, f(a1, a2, ...)) = evaluate(telescope_env, R)
-    //     case ValuePi(telescope: Telescope, return_type: Exp) =>
-    //       if (args.length != telescope.size) {
-    //         throw Report(List(
-    //           s"args and pi type arity mismatch\n" +
-    //             s"arity of args: ${args.length}\n" +
-    //             s"arity of pi: ${telescope.size}\n"
-    //         ))
-    //       }
-    //       var telescope_env = telescope.env
-    //       telescope.type_map.zip(args).foreach {
-    //         case ((name, t), arg) =>
-    //           val t_value = evaluate(telescope_env, t)
-    //           check(env, arg, t_value)
-    //           telescope_env = telescope_env.ext(name, t_value, evaluate(env, arg))
-    //       }
-    //       evaluate(telescope_env, return_type)
+      // A1 = infer(local_env, a1)
+      // a1_value = evaluate(local_env, a1)
+      // local_env = local_env.ext(x1, a1_value, A1)
+      // ...
+      // ------
+      // infer(local_env, { x1 = a1, x2 = a2, ... }) =
+      //   { x1 = a1_value : A1, x2 = a2_value : A2, ... } @ local_env
 
-    //     case ValueType() =>
-    //       evaluate(env, target) match {
-    //         case ValueCl(defined, telescope) =>
-    //           if (args.length > telescope.size) {
-    //             throw Report(List(
-    //               s"too many arguments to apply class\n" +
-    //                 s"length of args: ${args.length}\n" +
-    //                 s"arity of cl: ${telescope.size}\n"
-    //             ))
-    //           }
-    //           var telescope_env = telescope.env
-    //           telescope.type_map.zip(args).foreach {
-    //             case ((name, t), arg) =>
-    //               val t_value = evaluate(telescope_env, t)
-    //               check(env, arg, t_value)
-    //               telescope_env = telescope_env.ext(name, evaluate(env, arg), t_value)
-    //           }
-    //           ValueType()
+      let defined = new Map()
+      let local_env = scope_check(env, scope, (name, the) => {
+        defined.set(name, the)
+      })
+      return new Value.Cl(defined, new Scope.Scope([]), local_env)
+    }
 
-    //         case t =>
-    //           throw Report(List(
-    //             s"expecting ValueCl but found: ${t}\n"
-    //           ))
-    //       }
+    else if (exp instanceof Exp.Ap) {
+      let { target, args } = exp
+      return infer_ap(env, target, args)
+    }
 
-    //     case t =>
-    //       throw Report(List(
-    //         s"expecting ValuePi type but found: ${t}\n"
-    //       ))
-    //   }
+    else if (exp instanceof Exp.Dot) {
+      let { target, field_name } = exp
+      return infer_dot(env, target, field_name)
+    }
 
-    // case Dot(target: Exp, field_name: String) =>
-    //   val t_infered = infer(env, target)
-    //   t_infered match {
-    //     case ValueCl(defined, telescope) =>
-    //       // CASE found `m` in `defined`
-    //       // { ..., m = d : T, ... } @ telescope_env = infer(env, e)
-    //       // ------
-    //       // infer(env, e.m) = T
-    //       // CASE found `m` in `telescope`
-    //       // { x1 : A1,
-    //       //   x2 : A2, ...
-    //       //   m : T, ... } @ telescope_env = infer(env, e)
-    //       // telescope_env = telescope_env.ext(x1, evaluate(telescope_env, T), NeutralVar(x1))
-    //       // ...
-    //       // T_value = evaluate(telescope_env, T)
-    //       // ------
-    //       // infer(env, e.m) = T_value
-    //       defined.get(field_name) match {
-    //         case Some((t, _v)) => t
-    //         case None =>
-    //           var result: Option[Value] = None
-    //           var telescope_env = telescope.env
-    //           telescope.type_map.foreach {
-    //             case (name, t) =>
-    //               if (name == field_name) {
-    //                 result = Some(evaluate(telescope_env, t))
-    //               }
-    //               telescope_env = telescope_env.ext(name, evaluate(telescope_env, t), NeutralVar(name))
-    //           }
-    //           result match {
-    //             case Some(t) => t
-    //             case None =>
-    //               throw Report(List(
-    //                 s"infer fail\n" +
-    //                   s"on ValueCl\n" +
-    //                   s"target exp: ${pretty_exp(target)}\n" +
-    //                   s"infered target type: ${pretty_value(t_infered)}\n" +
-    //                   s"can not find field_name for dot: ${field_name}\n"
-    //               ))
-    //           }
-    //       }
-
-    //     case t =>
-    //       throw Report(List(
-    //         s"expecting class\n" +
-    //           s"found type: ${pretty_value(t)}\n" +
-    //           s"target: ${pretty_exp(target)}\n"
-    //       ))
-    //   }
-
-    // case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
-    //   var local_env = env
-    //   block_entry_map.foreach {
-    //     case (name, BlockEntryLet(exp)) =>
-    //       local_env = local_env.ext(name, infer(local_env, exp), evaluate(local_env, exp))
-    //     case (name, BlockEntryDefine(t, exp)) =>
-    //       local_env = local_env.ext(name, evaluate(local_env, t), evaluate(local_env, exp))
-    //   }
-    //   infer(local_env, body)
+    else if (exp instanceof Exp.Block) {
+      let { scope, body } = exp
+      let local_env = scope_check(env, scope)
+      return infer(local_env, body)
+    }
 
     else {
       throw new Report([
@@ -217,25 +157,33 @@ export function infer(
 function scope_check(
   env: Env.Env,
   scope: Scope.Scope,
+  effect: (name: string, the: {
+    t: Value.Value,
+    value: Value.Value,
+  }) => void = (name, the) => {},
 ): Env.Env {
   var local_env = env
   for (let [name, entry] of scope.named_entries) {
     if (entry instanceof Scope.Entry.Let) {
       let { value } = entry
       let t_value = infer(local_env, value)
-      local_env = local_env.ext(name, {
+      let the = {
         t: t_value,
         value: evaluate(local_env, value),
-      })
+      }
+      local_env = local_env.ext(name, the)
+      effect(name, the)
     }
 
     else if (entry instanceof Scope.Entry.Given) {
       let { t } = entry
       check(local_env, t, new Value.Type())
-      local_env = local_env.ext(name, {
+      let the = {
         t: evaluate(local_env, t),
         value: new Value.Neutral.Var(name),
-      })
+      }
+      local_env = local_env.ext(name, the)
+      effect(name, the)
     }
 
     else if (entry instanceof Scope.Entry.Define) {
@@ -243,10 +191,12 @@ function scope_check(
       check(local_env, t, new Value.Type())
       let t_value = evaluate(local_env, t)
       check(local_env, value, t_value)
-      local_env = local_env.ext(name, {
+      let the = {
         t: t_value,
         value: evaluate(local_env, value),
-      })
+      }
+      local_env = local_env.ext(name, the)
+      effect(name, the)
     }
 
     else {
@@ -259,67 +209,124 @@ function scope_check(
   return local_env
 }
 
-export function infer_pi(
+export function infer_ap(
   env: Env.Env,
-  scope: Scope.Scope,
-  return_type: Exp.Exp,
+  target: Exp.Exp,
+  args: Array<Exp.Exp>,
 ): Value.Value {
+  // infer(env, target) match {
+  //   // { x1 : A1, x2 : A2, ... -> R } @ telescope_env = infer(env, f)
+  //   // A1_value = evaluate(telescope_env, A1)
+  //   // check(env, a1, A1_value)
+  //   // telescope_env = telescope_env.ext(x1, A1_value, evaluate(env, a1))
+  //   // ...
+  //   // ------
+  //   // infer(env, f(a1, a2, ...)) = evaluate(telescope_env, R)
+  //   case ValuePi(telescope: Telescope, return_type: Exp) =>
+  //     if (args.length != telescope.size) {
+  //       throw Report(List(
+  //         s"args and pi type arity mismatch\n" +
+  //           s"arity of args: ${args.length}\n" +
+  //           s"arity of pi: ${telescope.size}\n"
+  //       ))
+  //     }
+  //     var telescope_env = telescope.env
+  //     telescope.type_map.zip(args).foreach {
+  //       case ((name, t), arg) =>
+  //         val t_value = evaluate(telescope_env, t)
+  //         check(env, arg, t_value)
+  //         telescope_env = telescope_env.ext(name, t_value, evaluate(env, arg))
+  //     }
+  //     evaluate(telescope_env, return_type)
 
-  // check(local_env, A1, type)
-  // local_env = local_env.ext(x1, evaluate(local_env, A1), NeutralVar(x1))
-  // ...
-  // check(local_env, R, type)
-  // ------
-  // infer(local_env, { x1 : A1, x2 : A2, ... -> R }) = type
+  //   case ValueType() =>
+  //     evaluate(env, target) match {
+  //       case ValueCl(defined, telescope) =>
+  //         if (args.length > telescope.size) {
+  //           throw Report(List(
+  //             s"too many arguments to apply class\n" +
+  //               s"length of args: ${args.length}\n" +
+  //               s"arity of cl: ${telescope.size}\n"
+  //           ))
+  //         }
+  //         var telescope_env = telescope.env
+  //         telescope.type_map.zip(args).foreach {
+  //           case ((name, t), arg) =>
+  //             val t_value = evaluate(telescope_env, t)
+  //             check(env, arg, t_value)
+  //             telescope_env = telescope_env.ext(name, evaluate(env, arg), t_value)
+  //         }
+  //         ValueType()
 
-  let local_env = scope_check(env, scope)
-  check(local_env, return_type, new Value.Type())
-  return new Value.Type()
+  //       case t =>
+  //         throw Report(List(
+  //           s"expecting ValueCl but found: ${t}\n"
+  //         ))
+  //     }
+
+  //   case t =>
+  //     throw Report(List(
+  //       s"expecting ValuePi type but found: ${t}\n"
+  //     ))
+  // }
+
+  throw new Error("TODO")
 }
 
-export function infer_cl(
+
+export function infer_dot(
   env: Env.Env,
-  scope: Scope.Scope,
+  target: Exp.Exp,
+  field_name: string,
 ): Value.Value {
+  // val t_infered = infer(env, target)
+  // t_infered match {
+  //   case ValueCl(defined, telescope) =>
+  //     // CASE found `m` in `defined`
+  //     // { ..., m = d : T, ... } @ telescope_env = infer(env, e)
+  //     // ------
+  //     // infer(env, e.m) = T
+  //     // CASE found `m` in `telescope`
+  //     // { x1 : A1,
+  //     //   x2 : A2, ...
+  //     //   m : T, ... } @ telescope_env = infer(env, e)
+  //     // telescope_env = telescope_env.ext(x1, evaluate(telescope_env, T), NeutralVar(x1))
+  //     // ...
+  //     // T_value = evaluate(telescope_env, T)
+  //     // ------
+  //     // infer(env, e.m) = T_value
+  //     defined.get(field_name) match {
+  //       case Some((t, _v)) => t
+  //       case None =>
+  //         var result: Option[Value] = None
+  //         var telescope_env = telescope.env
+  //         telescope.type_map.foreach {
+  //           case (name, t) =>
+  //             if (name == field_name) {
+  //               result = Some(evaluate(telescope_env, t))
+  //             }
+  //             telescope_env = telescope_env.ext(name, evaluate(telescope_env, t), NeutralVar(name))
+  //         }
+  //         result match {
+  //           case Some(t) => t
+  //           case None =>
+  //             throw Report(List(
+  //               s"infer fail\n" +
+  //                 s"on ValueCl\n" +
+  //                 s"target exp: ${pretty_exp(target)}\n" +
+  //                 s"infered target type: ${pretty_value(t_infered)}\n" +
+  //                 s"can not find field_name for dot: ${field_name}\n"
+  //             ))
+  //         }
+  //     }
 
-  // check(local_env, A1, type)
-  // A1_value = evaluate(local_env, A1)
-  // check(local_env, d1, A1_value)
-  // d1_value = evaluate(local_env, d1)
-  // local_env = local_env.ext(x1, A1_value, d1_value)
-  // ...
-  // check(local_env, B1, type)
-  // B1_value = evaluate(local_env, B1)
-  // local_env = local_env.ext(y1, B1_value, NeutralVar(y1))
-  // ...
-  // ------
-  // infer(
-  //   local_env,
-  //   { x1 = d1 : A1, x2 = d2 : A2, ..., y1 : B1, y2 : B2, ... }) = type
+  //   case t =>
+  //     throw Report(List(
+  //       s"expecting class\n" +
+  //         s"found type: ${pretty_value(t)}\n" +
+  //         s"target: ${pretty_exp(target)}\n"
+  //     ))
+  // }
 
-  scope_check(env, scope)
-  return new Value.Type()
-}
-
-export function infer_fn(
-  env: Env.Env,
-  scope: Scope.Scope,
-  body: Exp.Exp,
-): Value.Value {
-
-  // local_env = env
-  // check(local_env, A1, type)
-  // local_env = local_env.ext(x1, evaluate(local_env, A1), NeutralVar(x1))
-  // ...
-  // R_value = infer(local_env, r)
-  // R = readback(R_value)
-  // ------
-  // infer(
-  //   env,
-  //   { x1 : A1, x2 : A2, ... => r }) = { x1 : A1, x2 : A2, ... => R } @ env
-
-  let local_env = scope_check(env, scope)
-  let return_type_value = infer(local_env, body)
-  let return_type = readback(return_type_value)
-  return new Value.Pi(scope, return_type, env) // NOTE use `env` instead of `local_env`
+  throw new Error("TODO")
 }

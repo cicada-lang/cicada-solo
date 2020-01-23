@@ -360,12 +360,10 @@ export function evaluate_ap(
 
     let new_defined = new Map([...defined])
     let new_named_entries = Array.from(scope.named_entries)
-    let new_scope_env = scope_check_args(
-      scope, scope_env, args, env,
-      (name, the) => {
-        new_defined.set(name, the)
-        new_named_entries.shift()
-      })
+    let new_scope_env = scope_check_args(scope, scope_env, args, env, (name, the) => {
+      new_defined.set(name, the)
+      new_named_entries.shift()
+    })
 
     return new Value.Cl(
       new_defined,
