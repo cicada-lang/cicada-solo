@@ -215,67 +215,6 @@ export function evaluate_block(
   return evaluate(local_env, body)
 }
 
-function scope_check_args(
-  scope: Scope.Scope,
-  scope_env: Env.Env,
-  args: Array<Exp.Exp>,
-  env: Env.Env,
-  effect: (name: string, the: {
-    t: Value.Value,
-    value: Value.Value,
-  }) => void = (name, the) => {},
-): Env.Env {
-  let arg_index = 0
-
-  for (let [name, entry] of scope.named_entries) {
-    if (entry instanceof Scope.Entry.Let) {
-      let { value } = entry
-      let the = {
-        t: infer(scope_env, value),
-        value: evaluate(scope_env, value),
-      }
-      scope_env = scope_env.ext(name, the)
-      effect(name, the)
-    }
-
-    else if (entry instanceof Scope.Entry.Given) {
-      let arg = args[arg_index]
-      if (arg === undefined) {
-        break
-      }
-      arg_index += 1
-      let { t } = entry
-      let t_value = evaluate(scope_env, t)
-      check(env, arg, t_value)
-      let arg_value = evaluate(env, arg) // NOTE use the original `env`
-      let the = {
-        t: t_value,
-        value: arg_value,
-      }
-      scope_env = scope_env.ext(name, the)
-      effect(name, the)
-    }
-
-    else if (entry instanceof Scope.Entry.Define) {
-      let { t, value } = entry
-      let the = {
-        t: evaluate(scope_env, t),
-        value: evaluate(scope_env, value),
-      }
-      scope_env = scope_env.ext(name, the)
-      effect(name, the)
-    }
-
-    else {
-      throw new Report([
-        "scope_check_args fail\n" +
-          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
-    }
-  }
-
-  return scope_env
-}
-
 export function evaluate_ap(
   env: Env.Env,
   target: Exp.Exp,
@@ -298,7 +237,7 @@ export function evaluate_ap(
           `args.length: ${args.length}\n`])
     }
 
-    let new_scope_env = scope_check_args(scope, scope_env, args, env)
+    let new_scope_env = Scope.scope_check_args(scope, scope_env, args, env)
 
     return evaluate(new_scope_env, body)
   }
@@ -318,7 +257,7 @@ export function evaluate_ap(
               `args.length: ${args.length}\n`])
         }
 
-        scope_check_args(scope, scope_env, args, env)
+        Scope.scope_check_args(scope, scope_env, args, env)
 
         return true
       }
@@ -360,7 +299,7 @@ export function evaluate_ap(
 
     let new_defined = new Map([...defined])
     let new_named_entries = Array.from(scope.named_entries)
-    let new_scope_env = scope_check_args(scope, scope_env, args, env, (name, the) => {
+    let new_scope_env = Scope.scope_check_args(scope, scope_env, args, env, (name, the) => {
       new_defined.set(name, the)
       new_named_entries.shift()
     })

@@ -2,7 +2,9 @@ import * as Exp from "./exp"
 import * as Value from "./value"
 import * as Env from "./env"
 import { evaluate } from "./evaluate"
+import { check } from "./check"
 import { infer } from "./infer"
+import { Report } from "./report"
 
 export class Scope {
   constructor(
@@ -95,4 +97,120 @@ export function entry_to_type(env: Env.Env, entry: Entry.Entry): Value.Value {
       "entry_to_type fail\n" +
         `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
   }
+}
+
+export function scope_check_args(
+  scope: Scope,
+  scope_env: Env.Env,
+  args: Array<Exp.Exp>,
+  env: Env.Env,
+  effect: (name: string, the: {
+    t: Value.Value,
+    value: Value.Value,
+  }) => void = (name, the) => {},
+): Env.Env {
+  let arg_index = 0
+
+  for (let [name, entry] of scope.named_entries) {
+    if (entry instanceof Entry.Let) {
+      let { value } = entry
+      let the = {
+        t: infer(scope_env, value),
+        value: evaluate(scope_env, value),
+      }
+      scope_env = scope_env.ext(name, the)
+      effect(name, the)
+    }
+
+    else if (entry instanceof Entry.Given) {
+      let arg = args[arg_index]
+      if (arg === undefined) {
+        break
+      }
+      arg_index += 1
+      let { t } = entry
+      let t_value = evaluate(scope_env, t)
+      check(env, arg, t_value)
+      let arg_value = evaluate(env, arg) // NOTE use the original `env`
+      let the = {
+        t: t_value,
+        value: arg_value,
+      }
+      scope_env = scope_env.ext(name, the)
+      effect(name, the)
+    }
+
+    else if (entry instanceof Entry.Define) {
+      let { t, value } = entry
+      let the = {
+        t: evaluate(scope_env, t),
+        value: evaluate(scope_env, value),
+      }
+      scope_env = scope_env.ext(name, the)
+      effect(name, the)
+    }
+
+    else {
+      throw new Report([
+        "scope_check_args fail\n" +
+          `unhandled class of Entry: ${entry.constructor.name}\n`])
+    }
+  }
+
+  return scope_env
+}
+
+export function scope_check(
+  scope: Scope,
+  env: Env.Env,
+  effect: (name: string, the: {
+    t: Value.Value,
+    value: Value.Value,
+  }) => void = (name, the) => {},
+): Env.Env {
+  var local_env = env
+  for (let [name, entry] of scope.named_entries) {
+    if (entry instanceof Entry.Let) {
+      let { value } = entry
+      let t_value = infer(local_env, value)
+      let the = {
+        t: t_value,
+        value: evaluate(local_env, value),
+      }
+      local_env = local_env.ext(name, the)
+      effect(name, the)
+    }
+
+    else if (entry instanceof Entry.Given) {
+      let { t } = entry
+      check(local_env, t, new Value.Type())
+      let the = {
+        t: evaluate(local_env, t),
+        value: new Value.Neutral.Var(name),
+      }
+      local_env = local_env.ext(name, the)
+      effect(name, the)
+    }
+
+    else if (entry instanceof Entry.Define) {
+      let { t, value } = entry
+      check(local_env, t, new Value.Type())
+      let t_value = evaluate(local_env, t)
+      check(local_env, value, t_value)
+      let the = {
+        t: t_value,
+        value: evaluate(local_env, value),
+      }
+      local_env = local_env.ext(name, the)
+      effect(name, the)
+    }
+
+    else {
+      throw new Error(
+        "scope_check fail\n" +
+          `unhandled class of Entry: ${entry.constructor.name}\n`)
+    }
+  }
+
+  return local_env
 }

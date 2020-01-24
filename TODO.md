@@ -1,5 +1,4 @@
 # in ts
-- infer_ap
 - readback
 - subtype
 - equivalent

@@ -25,3 +25,11 @@ export declare namespace Entry {
     }
 }
 export declare function entry_to_type(env: Env.Env, entry: Entry.Entry): Value.Value;
+export declare function scope_check_args(scope: Scope, scope_env: Env.Env, args: Array<Exp.Exp>, env: Env.Env, effect?: (name: string, the: {
+    t: Value.Value;
+    value: Value.Value;
+}) => void): Env.Env;
+export declare function scope_check(scope: Scope, env: Env.Env, effect?: (name: string, the: {
+    t: Value.Value;
+    value: Value.Value;
+}) => void): Env.Env;

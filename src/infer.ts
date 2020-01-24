@@ -47,7 +47,7 @@ export function infer(
       // ------
       // infer(local_env, { x1 : A1, x2 : A2, ... -> R }) = type
 
-      let local_env = scope_check(env, scope)
+      let local_env = Scope.scope_check(scope, env)
       check(local_env, return_type, new Value.Type())
       return new Value.Type()
     }
@@ -66,7 +66,7 @@ export function infer(
       //   env,
       //   { x1 : A1, x2 : A2, ... => r }) = { x1 : A1, x2 : A2, ... => R } @ env
 
-      let local_env = scope_check(env, scope)
+      let local_env = Scope.scope_check(scope, env)
       let return_type_value = infer(local_env, body)
       let return_type = readback(return_type_value)
       return new Value.Pi(scope, return_type, env) // NOTE use `env` instead of `local_env`
@@ -95,7 +95,7 @@ export function infer(
       //   local_env,
       //   { x1 = d1 : A1, x2 = d2 : A2, ..., y1 : B1, y2 : B2, ... }) = type
 
-      scope_check(env, scope)
+      Scope.scope_check(scope, env)
       return new Value.Type()
     }
 
@@ -111,7 +111,7 @@ export function infer(
       //   { x1 = a1_value : A1, x2 = a2_value : A2, ... } @ local_env
 
       let defined = new Map()
-      let local_env = scope_check(env, scope, (name, the) => {
+      let local_env = Scope.scope_check(scope, env, (name, the) => {
         defined.set(name, the)
       })
       return new Value.Cl(defined, new Scope.Scope([]), local_env)
@@ -129,7 +129,7 @@ export function infer(
 
     else if (exp instanceof Exp.Block) {
       let { scope, body } = exp
-      let local_env = scope_check(env, scope)
+      let local_env = Scope.scope_check(scope, env)
       return infer(local_env, body)
     }
 
@@ -154,61 +154,6 @@ export function infer(
   }
 }
 
-function scope_check(
-  env: Env.Env,
-  scope: Scope.Scope,
-  effect: (name: string, the: {
-    t: Value.Value,
-    value: Value.Value,
-  }) => void = (name, the) => {},
-): Env.Env {
-  var local_env = env
-  for (let [name, entry] of scope.named_entries) {
-    if (entry instanceof Scope.Entry.Let) {
-      let { value } = entry
-      let t_value = infer(local_env, value)
-      let the = {
-        t: t_value,
-        value: evaluate(local_env, value),
-      }
-      local_env = local_env.ext(name, the)
-      effect(name, the)
-    }
-
-    else if (entry instanceof Scope.Entry.Given) {
-      let { t } = entry
-      check(local_env, t, new Value.Type())
-      let the = {
-        t: evaluate(local_env, t),
-        value: new Value.Neutral.Var(name),
-      }
-      local_env = local_env.ext(name, the)
-      effect(name, the)
-    }
-
-    else if (entry instanceof Scope.Entry.Define) {
-      let { t, value } = entry
-      check(local_env, t, new Value.Type())
-      let t_value = evaluate(local_env, t)
-      check(local_env, value, t_value)
-      let the = {
-        t: t_value,
-        value: evaluate(local_env, value),
-      }
-      local_env = local_env.ext(name, the)
-      effect(name, the)
-    }
-
-    else {
-      throw new Error(
-        "scope_check fail\n" +
-          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
-    }
-  }
-
-  return local_env
-}
-
 export function infer_ap(
   env: Env.Env,
   target: Exp.Exp,
@@ -217,63 +162,54 @@ export function infer_ap(
   let t_infered = infer(env, target)
 
   if (t_infered instanceof Value.Pi) {
-    // infer(env, target) match {
-    //   // { x1 : A1, x2 : A2, ... -> R } @ scope_env = infer(env, f)
-    //   // A1_value = evaluate(scope_env, A1)
-    //   // check(env, a1, A1_value)
-    //   // scope_env = scope_env.ext(x1, A1_value, evaluate(env, a1))
-    //   // ...
-    //   // ------
-    //   // infer(env, f(a1, a2, ...)) = evaluate(scope_env, R)
 
-    //   case ValuePi(scope: scope, return_type: Exp) =>
-    //     if (args.length != scope.size) {
-    //       throw Report(List(
-    //         s"args and pi type arity mismatch\n" +
-    //           s"arity of args: ${args.length}\n" +
-    //           s"arity of pi: ${scope.size}\n"
-    //       ))
-    //     }
-    //     var scope_env = scope.env
-    //     scope.type_map.zip(args).foreach {
-    //       case ((name, t), arg) =>
-    //         val t_value = evaluate(scope_env, t)
-    //         check(env, arg, t_value)
-    //         scope_env = scope_env.ext(name, t_value, evaluate(env, arg))
-    //     }
-    //     evaluate(scope_env, return_type)
+    // { x1 : A1, x2 : A2, ... -> R } @ scope_env = infer(env, f)
+    // A1_value = evaluate(scope_env, A1)
+    // check(env, a1, A1_value)
+    // scope_env = scope_env.ext(x1, A1_value, evaluate(env, a1))
+    // ...
+    // ------
+    // infer(env, f(a1, a2, ...)) = evaluate(scope_env, R)
 
-    //   case ValueType() =>
-    //     evaluate(env, target) match {
-    //       case ValueCl(defined, scope) =>
-    //         if (args.length > scope.size) {
-    //           throw Report(List(
-    //             s"too many arguments to apply class\n" +
-    //               s"length of args: ${args.length}\n" +
-    //               s"arity of cl: ${scope.size}\n"
-    //           ))
-    //         }
-    //         var scope_env = scope.env
-    //         scope.type_map.zip(args).foreach {
-    //           case ((name, t), arg) =>
-    //             val t_value = evaluate(scope_env, t)
-    //             check(env, arg, t_value)
-    //             scope_env = scope_env.ext(name, evaluate(env, arg), t_value)
-    //         }
-    //         ValueType()
+    let { scope, return_type, scope_env } = t_infered
 
-    //       case t =>
-    //         throw Report(List(
-    //           s"expecting ValueCl but found: ${t}\n"
-    //         ))
-    //     }
+    if (args.length !-= scope.arity) {
+      throw new Report([
+        "args and pi type arity mismatch\n" +
+          `arity of args: ${args.length}\n` +
+          `arity of pi: ${scope.arity}\n`])
+    }
 
-    throw new Error("TODO")
+    scope_env = Scope.scope_check_args(scope, scope_env, args, env)
+    return evaluate(scope_env, return_type)
+  }
+
+  else if (t_infered instanceof Value.Type) {
+    let target_value = evaluate(env, target)
+
+    if (target_value instanceof Value.Cl) {
+      let { defined, scope, scope_env } = target_value
+      if (args.length > scope.arity) {
+        throw new Report([
+          "too many arguments to apply class\n" +
+            `length of args: ${args.length}\n` +
+            `arity of cl: ${scope.arity}\n`])
+      }
+
+      Scope.scope_check_args(scope, scope_env, args, env)
+      return new Value.Type()
+    }
+
+    else {
+      throw new Report([
+        `expecting Value.Cl but found: ${pretty.pretty_value(t_infered)}\n`])
+    }
   }
 
   else {
     throw new Report([
-      `expecting type of function-like value, but found type: ${pretty.pretty_value(t_infered)}\n`])
+      `expecting type of function-like value\n` +
+        `but found type: ${pretty.pretty_value(t_infered)}\n`])
   }
 }
 
@@ -310,7 +246,7 @@ export function infer_dot(
 
     let result: undefined | Value.Value = undefined
 
-    scope_check(scope_env, scope, (name, the) => {
+    Scope.scope_check(scope, scope_env, (name, the) => {
       // NOTE the last one will be the result
       if (name === field_name) {
         result = the.t
