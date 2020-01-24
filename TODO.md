@@ -1,6 +1,5 @@
 # in ts
 - infer_ap
-- infer_dot
 - readback
 - subtype
 - equivalent

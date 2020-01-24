@@ -285,12 +285,18 @@ export function infer_dot(
   let t_infered = infer(env, target)
 
   if (t_infered instanceof Value.Cl) {
-    let cl = t_infered
+    let { defined, scope, scope_env } = t_infered
 
     // CASE found `m` in `defined`
     // { ..., m = d : T, ... } @ scope_env = infer(env, e)
     // ------
     // infer(env, e.m) = T
+
+    let the = defined.get(field_name)
+
+    if (the !== undefined) {
+      return the.t
+    }
 
     // CASE found `m` in `scope`
     // { x1 : A1,
@@ -302,32 +308,27 @@ export function infer_dot(
     // ------
     // infer(env, e.m) = T_value
 
-    // defined.get(field_name) match {
-    //   case Some((t, _v)) => t
-    //   case None =>
-    //     var result: Option[Value] = None
-    //   var scope_env = scope.env
-    //   scope.type_map.foreach {
-    //     case (name, t) =>
-    //       if (name == field_name) {
-    //         result = Some(evaluate(scope_env, t))
-    //       }
-    //     scope_env = scope_env.ext(name, evaluate(scope_env, t), NeutralVar(name))
-    //   }
-    //   result match {
-    //     case Some(t) => t
-    //     case None =>
-    //       throw Report(List(
-    //         s"infer fail\n" +
-    //           s"on ValueCl\n" +
-    //           s"target exp: ${pretty_exp(target)}\n" +
-    //           s"infered target type: ${pretty_value(t_infered)}\n" +
-    //           s"can not find field_name for dot: ${field_name}\n"
-    //       ))
-    //   }
-    // }
+    let result: undefined | Value.Value = undefined
 
-    throw new Error("TODO")
+    scope_check(scope_env, scope, (name, the) => {
+      // NOTE the last one will be the result
+      if (name === field_name) {
+        result = the.t
+      }
+    })
+
+    if (result !== undefined) {
+      return result
+    }
+
+    else {
+      throw new Report([
+        "infer_dot fail\n" +
+          "on Value.Cl\n" +
+          `target exp: ${pretty.pretty_exp(target)}\n` +
+          `infered target type: ${pretty.pretty_value(t_infered)}\n` +
+          `can not find field_name for dot: ${field_name}\n`])
+    }
   }
 
   else {
