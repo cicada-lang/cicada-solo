@@ -1,5 +1,4 @@
 # in ts
-- readback
 - subtype
 - equivalent
 - grammar
