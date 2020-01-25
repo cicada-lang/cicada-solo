@@ -34,7 +34,15 @@ export function subtype(s: Value.Value, t: Value.Value): void {
       let s_scope_env = s.scope_env
       let t_scope_env = t.scope_env
 
-      // TODO
+      let s_named_entry_iter = s.scope.named_entries.values()
+      let t_named_entry_iter = t.scope.named_entries.values()
+
+      let s_current_type: undefined | Value.Value = undefined
+      let t_current_type: undefined | Value.Value = undefined
+
+      function next_type(): void {
+        // TODO
+      }
 
       // s.scope.type_map.zip(t.scope.type_map).foreach {
       //   case ((s_name, s), (t_name, t)) =>
