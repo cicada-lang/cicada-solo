@@ -141,7 +141,7 @@ export function equivalent(s: Value.Value, t: Value.Value): void {
     else {
       throw new ErrorReport([
         "equivalent fail\n" +
-          `unhandled class of Values\n` +
+          "unhandled class of Value pair\n" +
           `s class name: ${s.constructor.name}\n` +
           `t class name: ${t.constructor.name}\n`])
     }
