@@ -2,7 +2,7 @@ import * as Exp from "./exp"
 import * as Value from "./value"
 import * as Env from "./env"
 import * as Scope from "./scope"
-import { Report } from "./report"
+import { ErrorReport } from "./error"
 import { evaluate } from "./evaluate"
 import { infer } from "./infer"
 import { subtype } from "./subtype"
@@ -39,8 +39,8 @@ export function check(
     }
   }
 
-  catch(error) {
-    if (error instanceof Report) {
+  catch (error) {
+    if (error instanceof ErrorReport) {
       throw error.prepend(
         "check fail\n" +
           `exp: ${pretty.pretty_exp(exp)}\n` +
@@ -75,7 +75,7 @@ export function check_obj(
     for (let [name, the] of cl.defined) {
       let v = scope.lookup_value(name)
       if (v === undefined) {
-        throw new Report([
+        throw new ErrorReport([
           `object does not have the field_name of defined: ${name}\n`
         ])
       }
@@ -100,7 +100,7 @@ export function check_obj(
     for (let [name, entry] of cl.scope.named_entries) {
       let v = scope.lookup_value(name)
       if (v === undefined) {
-        throw new Report([
+        throw new ErrorReport([
           `object does not have the field_name of defined: ${name}\n`
         ])
       }
@@ -141,7 +141,7 @@ export function check_obj(
   }
 
   else {
-    throw new Report([
+    throw new ErrorReport([
       "expecting class type\n" +
         `but found type: ${pretty.pretty_value(t)}\n`])
   }
@@ -172,7 +172,7 @@ export function check_fn(
     //   { y1 : B1, y2 : B2, ... -> R } @ scope_env)
 
     if (scope.arity !== pi.scope.arity) {
-      throw new Report([
+      throw new ErrorReport([
         "function and pi type arity mismatch\n" +
           `arity of function: ${scope.arity}\n` +
           `arity of pi type: ${pi.scope.arity}\n`])
@@ -194,7 +194,7 @@ export function check_fn(
   }
 
   else {
-    throw new Report([
+    throw new ErrorReport([
       "expecting pi type\n" +
         `but found type: ${pretty.pretty_value(t)}\n`])
   }

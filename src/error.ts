@@ -1,4 +1,4 @@
-export class Report extends Error {
+export class ErrorReport extends Error {
   constructor(
     public message_list: Array<string>,
   ) {
@@ -6,14 +6,14 @@ export class Report extends Error {
   }
 
   append(message: string) {
-    new Report([
+    new ErrorReport([
       ...this.message_list,
       message,
     ])
   }
 
   prepend(message: string) {
-    new Report([
+    new ErrorReport([
       message,
       ...this.message_list,
     ])

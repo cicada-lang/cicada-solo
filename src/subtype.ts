@@ -6,7 +6,7 @@ import * as Scope from "./scope"
 import { equivalent } from "./equivalent"
 import { evaluate } from "./evaluate"
 import { infer } from "./infer"
-import { Report } from "./report"
+import { ErrorReport } from "./error"
 
 export function subtype(s: Value.Value, t: Value.Value): void {
   try {
@@ -30,7 +30,7 @@ export function subtype(s: Value.Value, t: Value.Value): void {
       // NOTE only compare `given` in scope
 
       if (s.scope.arity != t.scope.arity) {
-        throw new Report([
+        throw new ErrorReport([
           "subtype fail between Value.Pi and Value.Pi, arity mismatch\n" +
             `left scope arity: ${s.scope.arity}\n` +
             `right scope arity: ${t.scope.arity}\n`])
@@ -75,7 +75,7 @@ export function subtype(s: Value.Value, t: Value.Value): void {
             }
 
             else {
-              throw new Report([
+              throw new ErrorReport([
                 "subtype fail to step left scope\n" +
                   `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
             }
@@ -111,7 +111,7 @@ export function subtype(s: Value.Value, t: Value.Value): void {
             }
 
             else {
-              throw new Report([
+              throw new ErrorReport([
                 "subtype fail to step right scope\n" +
                   `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
             }
@@ -187,7 +187,7 @@ export function subtype(s: Value.Value, t: Value.Value): void {
         }
 
         else {
-          throw new Report([
+          throw new ErrorReport([
             "subtype fail between ValueCl and Value.Cl\n" +
               `missing name in the subtype class's defined\n` +
               `name: ${name}\n`])
@@ -219,14 +219,14 @@ export function subtype(s: Value.Value, t: Value.Value): void {
           }
 
           else {
-            throw new Report([
+            throw new ErrorReport([
               "subtype fail\n" +
                 `unhandled class of Scope.Entry: ${entry.constructor.name}`])
           }
         }
 
         else {
-          throw new Report([
+          throw new ErrorReport([
             "subtype fail\n" +
               `missing field: ${name}`])
         }
@@ -238,8 +238,8 @@ export function subtype(s: Value.Value, t: Value.Value): void {
     }
   }
 
-  catch(error) {
-    if (error instanceof Report) {
+  catch (error) {
+    if (error instanceof ErrorReport) {
       throw error.prepend(
         "subtype fail\n" +
           `s: ${pretty.pretty_value(s)}\n` +

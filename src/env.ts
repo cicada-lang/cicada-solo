@@ -1,6 +1,6 @@
 import * as Exp from "./exp"
 import * as Value from "./value"
-import { Report } from "./report"
+import { ErrorReport } from "./error"
 import { evaluate } from "./evaluate"
 
 export class Env {
@@ -29,7 +29,7 @@ export class Env {
     }
 
     else {
-      throw new Report([
+      throw new ErrorReport([
         "Env.lookup_type_and_value fail\n" +
           `unhandled class of Entry: ${entry.constructor.name}\n`])
     }

@@ -4,7 +4,7 @@ import * as Env from "./env"
 import { evaluate } from "./evaluate"
 import { check } from "./check"
 import { infer } from "./infer"
-import { Report } from "./report"
+import { ErrorReport } from "./error"
 
 export class Scope {
   constructor(
@@ -154,7 +154,7 @@ export function scope_check_args(
     }
 
     else {
-      throw new Report([
+      throw new ErrorReport([
         "scope_check_args fail\n" +
           `unhandled class of Entry: ${entry.constructor.name}\n`])
     }

@@ -2,7 +2,7 @@ import * as Exp from "./exp"
 import * as Value from "./value"
 import * as Env from "./env"
 import * as Scope from "./scope"
-import { Report } from "./report"
+import { ErrorReport } from "./error"
 import { check } from "./check"
 import { infer } from "./infer"
 import * as pretty from "./pretty"
@@ -71,7 +71,7 @@ export function evaluate(
   }
 
   else {
-    throw new Report([
+    throw new ErrorReport([
       "evaluate fail\n" +
         `unhandled class of Exp: ${exp.constructor.name}\n`])
   }
@@ -98,7 +98,7 @@ export function evaluate_obj(
     }
 
     else if (entry instanceof Scope.Entry.Given) {
-      throw new Report([
+      throw new ErrorReport([
         "evaluate_obj fail\n" +
           `scope of Exp.Obj should not contain Entry.Given\n`])
     }
@@ -113,7 +113,7 @@ export function evaluate_obj(
     }
 
     else {
-      throw new Report([
+      throw new ErrorReport([
         "evaluate_obj fail\n" +
           `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
     }
@@ -163,7 +163,7 @@ export function evaluate_cl(
       }
 
       else {
-        throw new Report([
+        throw new ErrorReport([
           "evaluate_cl fail\n" +
             `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
       }
@@ -191,7 +191,7 @@ export function evaluate_block(
     }
 
     else if (entry instanceof Scope.Entry.Given) {
-      throw new Report([
+      throw new ErrorReport([
         "evaluate_block fail\n" +
           `scope of Exp.Obj should not contain Entry.Given\n`])
     }
@@ -206,7 +206,7 @@ export function evaluate_block(
     }
 
     else {
-      throw new Report([
+      throw new ErrorReport([
         "evaluate_block fail\n" +
           `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
     }
@@ -230,7 +230,7 @@ export function evaluate_ap(
     let { scope, body, scope_env } = target_value
 
     if (scope.arity !== args.length) {
-      throw new Report([
+      throw new ErrorReport([
         "evaluate_ap fail\n" +
           "Value.Fn arity mismatch\n" +
           `scope.arity: ${scope.arity}\n` +
@@ -250,7 +250,7 @@ export function evaluate_ap(
       let { scope, scope_env } = fn
       try {
         if (scope.arity !== args.length) {
-          throw new Report([
+          throw new ErrorReport([
             "evaluate_ap fail\n" +
               "Value.FnCase arity mismatch\n" +
               `scope.arity: ${scope.arity}\n` +
@@ -262,8 +262,8 @@ export function evaluate_ap(
         return true
       }
 
-      catch(error) {
-        if (error instanceof Report) {
+      catch (error) {
+        if (error instanceof ErrorReport) {
           return false
         }
         else {
@@ -274,7 +274,7 @@ export function evaluate_ap(
 
     if (fn === undefined) {
       let s = args.map(pretty.pretty_exp).join(", ")
-      throw new Report([
+      throw new ErrorReport([
         "evaluate_ap fail\n" +
           "Value.FnCase mismatch\n" +
           `target_value: ${pretty.pretty_value(target_value)}\n` +
@@ -290,7 +290,7 @@ export function evaluate_ap(
     let { defined, scope, scope_env } = target_value
 
     if (scope.arity < args.length) {
-      throw new Report([
+      throw new ErrorReport([
         "evaluate_ap fail\n" +
           "too many arguments\n" +
           `scope.arity: ${scope.arity}\n` +
@@ -311,7 +311,7 @@ export function evaluate_ap(
   }
 
   else {
-    throw new Report([
+    throw new ErrorReport([
       "evaluate_ap fail\n" +
         "expecting a Value class that can be applied as function\n" +
         `while found Value of class: ${target_value.constructor.name}\n`])
@@ -334,7 +334,7 @@ export function evaluate_dot(
     let the = defined.get(field_name)
 
     if (the === undefined) {
-      throw new Report([
+      throw new ErrorReport([
         "evaluate_dot fail\n" +
           `missing field_name: ${field_name}\n` +
           `target_value: ${pretty.pretty_value(target_value)}\n`])
@@ -346,7 +346,7 @@ export function evaluate_dot(
   }
 
   else {
-    throw new Report([
+    throw new ErrorReport([
       "evaluate_dot fail\n" +
         "expecting Value.Obj\n" +
         `while found Value of class: ${target_value.constructor.name}\n`])

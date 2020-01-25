@@ -2,7 +2,7 @@ import * as Exp from "./exp"
 import * as Value from "./value"
 import * as Env from "./env"
 import * as Scope from "./scope"
-import { Report } from "./report"
+import { ErrorReport } from "./error"
 import { evaluate } from "./evaluate"
 import { check } from "./check"
 import { readback } from "./readback"
@@ -17,7 +17,7 @@ export function infer(
       let { name } = exp
       let t = env.lookup_type(name)
       if (t === undefined) {
-        throw new Report([
+        throw new ErrorReport([
           `can not find var: ${name} in env\n`])
       }
       else {
@@ -73,7 +73,7 @@ export function infer(
     }
 
     else if (exp instanceof Exp.FnCase) {
-      throw new Report([
+      throw new ErrorReport([
         `the language is not designed to infer the type of Exp.FnCase: ${exp}\n`])
     }
 
@@ -134,14 +134,14 @@ export function infer(
     }
 
     else {
-      throw new Report([
+      throw new ErrorReport([
         "infer fail\n" +
           `unhandled class of Exp: ${exp.constructor.name}\n`])
     }
   }
 
-  catch(error) {
-    if (error instanceof Report) {
+  catch (error) {
+    if (error instanceof ErrorReport) {
       throw error.prepend(
         "infer fail\n" +
           `exp: ${pretty.pretty_exp(exp)}\n` +
@@ -174,7 +174,7 @@ export function infer_ap(
     let { scope, return_type, scope_env } = t_infered
 
     if (args.length !-= scope.arity) {
-      throw new Report([
+      throw new ErrorReport([
         "args and pi type arity mismatch\n" +
           `arity of args: ${args.length}\n` +
           `arity of pi: ${scope.arity}\n`])
@@ -190,7 +190,7 @@ export function infer_ap(
     if (target_value instanceof Value.Cl) {
       let { defined, scope, scope_env } = target_value
       if (args.length > scope.arity) {
-        throw new Report([
+        throw new ErrorReport([
           "too many arguments to apply class\n" +
             `length of args: ${args.length}\n` +
             `arity of cl: ${scope.arity}\n`])
@@ -201,13 +201,13 @@ export function infer_ap(
     }
 
     else {
-      throw new Report([
+      throw new ErrorReport([
         `expecting Value.Cl but found: ${pretty.pretty_value(t_infered)}\n`])
     }
   }
 
   else {
-    throw new Report([
+    throw new ErrorReport([
       `expecting type of function-like value\n` +
         `but found type: ${pretty.pretty_value(t_infered)}\n`])
   }
@@ -258,7 +258,7 @@ export function infer_dot(
     }
 
     else {
-      throw new Report([
+      throw new ErrorReport([
         "infer_dot fail\n" +
           "on Value.Cl\n" +
           `target exp: ${pretty.pretty_exp(target)}\n` +
@@ -268,7 +268,7 @@ export function infer_dot(
   }
 
   else {
-    throw new Report([
+    throw new ErrorReport([
       "expecting class\n" +
         `found type: ${pretty.pretty_value(t_infered)}\n` +
         `target: ${pretty.pretty_exp(target)}\n`])
