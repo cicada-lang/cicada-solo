@@ -20,14 +20,14 @@ object api {
     try {
       top_list_check_and_evaluate(top_list, config)
     } catch {
-      case report: Report =>
+      case report: ErrorReport =>
         report_print(report, config)
         System.exit(1)
     }
   }
 
   def report_print(
-    report: Report,
+    report: ErrorReport,
     config: ListMap[String, List[String]],
   ): Unit = {
     console_print_with_color_when {
@@ -53,7 +53,7 @@ object api {
       case TopLet(name, exp) =>
         local_env.lookup_value(name) match {
           case Some(value) =>
-            throw Report(List(
+            throw ErrorReport(List(
               s"name: ${name} is already defined to value: ${pretty_value(value)}\n"
             ))
           case None => ()
@@ -75,7 +75,7 @@ object api {
       case TopDefine(name, t_exp, exp) =>
         local_env.lookup_value(name) match {
           case Some(value) =>
-            throw Report(List(
+            throw ErrorReport(List(
               s"name: ${name} is already defined to value: ${pretty_value(value)}\n"
             ))
           case None => ()
@@ -107,11 +107,11 @@ object api {
           println(s"t_expected: ${t_expected}")
         } match {
           case Success(()) =>
-            throw Report(List(
+            throw ErrorReport(List(
               s"should refuse the following type membership assertion\n" +
                 s"@refuse ${pretty_exp(exp)} : ${pretty_exp(t_exp)}\n"
             ))
-          case Failure(_report: Report) =>
+          case Failure(_report: ErrorReport) =>
             if (config.get("--verbose") != None) {
               println(s"@refuse ${pretty_exp(exp)} : ${pretty_exp(t_exp)}")
             }
@@ -128,9 +128,9 @@ object api {
             if (config.get("--verbose") != None) {
               println(s"@accept ${pretty_exp(exp)} : ${pretty_exp(t_exp)}")
             }
-          case Failure(report: Report) =>
+          case Failure(report: ErrorReport) =>
             report_print(report, config)
-            throw Report(List(
+            throw ErrorReport(List(
               s"should accept the following type membership assertion\n" +
                 s"@accept ${pretty_exp(exp)} : ${pretty_exp(t_exp)}\n"
             ))
@@ -160,9 +160,9 @@ object api {
             if (config.get("--verbose") != None) {
               println(s"@eq ${pretty_exp(rhs)} = ${pretty_exp(lhs)}")
             }
-          case Failure(report: Report) =>
+          case Failure(report: ErrorReport) =>
             report_print(report, config)
-            throw Report(List(
+            throw ErrorReport(List(
               s"should accept the following equivalent assertion\n" +
                 s"@eq ${pretty_exp(rhs)} = ${pretty_exp(lhs)}\n"
             ))

@@ -29,7 +29,7 @@ object subtype {
           //   { x1 : A1, x2 : A2, ... -> S } @ s_telescope_env,
           //   { y1 : B1, y2 : B2, ... -> R } @ t_telescope_env)
           if (s.telescope.size != t.telescope.size) {
-            throw Report(List(
+            throw ErrorReport(List(
               s"subtype fail between ValuePi and ValuePi, size mismatch\n"
             ))
           }
@@ -74,7 +74,7 @@ object subtype {
                   subtype(s_type_value, t_type_value)
                   equivalent(s_value, t_value)
                 case None =>
-                  throw Report(List(
+                  throw ErrorReport(List(
                     s"subtype fail between ValueCl and ValueCl\n" +
                       s"missing name in the subtype class's defined\n" +
                       s"name: ${name}\n"
@@ -110,7 +110,7 @@ object subtype {
           }
           if (!name_set.isEmpty) {
             val s = name_set.mkString(", ")
-            throw Report(List(
+            throw ErrorReport(List(
               s"subtype fail between ValueCl and ValueCl\n" +
                 s"missing names in the subtype class\n" +
                 s"names: ${s}\n"
@@ -121,7 +121,7 @@ object subtype {
           equivalent(s, t)
       }
     } catch {
-      case report: Report =>
+      case report: ErrorReport =>
         report.throw_prepend(
           s"subtype fail\n" +
             s"s: ${pretty_value(s)}\n" +

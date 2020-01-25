@@ -77,7 +77,7 @@ object evaluate {
 
       case ValueFn(telescope: Telescope, body: Exp) =>
         if (telescope.size != args.length) {
-          throw Report(List(
+          throw ErrorReport(List(
             "evaluate_ap fail, ValueFn arity mismatch\n"
           ))
         }
@@ -99,7 +99,7 @@ object evaluate {
             // NOTE find the first checked case
             Try {
               if (telescope.size != args.length) {
-                throw Report(List(
+                throw ErrorReport(List(
                   "evaluate_ap fail, ValueFnCase arity mismatch\n"
                 ))
               }
@@ -130,7 +130,7 @@ object evaluate {
             evaluate(local_env, body)
           case None =>
             val args_repr = args.map { pretty_exp }.mkString(", ")
-            throw Report(List(
+            throw ErrorReport(List(
               "evaluate_ap fail, ValueFnCase mismatch\n" +
                 s"target_value: ${pretty_value(target_value)}\n" +
                 s"args: (${args_repr})\n"
@@ -139,7 +139,7 @@ object evaluate {
 
       case ValueCl(defined, telescope: Telescope) =>
         if (telescope.size < args.length) {
-          throw Report(List(
+          throw ErrorReport(List(
             s"evaluate_ap fail\n" +
               s"too many arguments\n"
           ))
@@ -159,7 +159,7 @@ object evaluate {
         ValueCl(defined ++ new_defined, Telescope(new_type_map, telescope_env))
 
       case _ =>
-        throw Report(List(
+        throw ErrorReport(List(
           "evaluate_ap fail, expecting ValueFn or ValueCl\n" +
             s"target_value: ${pretty_value(target_value)}\n"
         ))
@@ -176,14 +176,14 @@ object evaluate {
         value_map.get(field_name) match {
           case Some(value) => value
           case None =>
-            throw Report(List(
+            throw ErrorReport(List(
               s"missing field_name: ${field_name}\n" +
                 s"target_value: ${pretty_value(target_value)}\n"
             ))
         }
 
       case _ =>
-        throw Report(List(
+        throw ErrorReport(List(
           "evaluate_dot fail, expecting ValueObj\n"
         ))
     }

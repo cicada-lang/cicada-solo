@@ -37,7 +37,7 @@ import equivalent._
 //                       equivalent(v_value, d_value)
 //                       local_env = local_env.ext(name, t_value, v_value)
 //                     case None =>
-//                       throw Report(List(
+//                       throw ErrorReport(List(
 //                         s"object does not have the field_name of defined: ${name}\n"
 //                       ))
 //                   }
@@ -64,14 +64,14 @@ import equivalent._
 //                       local_env = local_env.ext(name, t_value, v_value)
 //                       telescope_env = telescope_env.ext(name, t_value, v_value)
 //                     case None =>
-//                       throw Report(List(
+//                       throw ErrorReport(List(
 //                         s"object does not have the field_name of telescope: ${name}\n"
 //                       ))
 //                   }
 //               }
 
 //             case _ =>
-//               throw Report(List(
+//               throw ErrorReport(List(
 //                 s"expecting class type\n" +
 //                   s"but found: ${pretty_value(t)}\n"
 //               ))
@@ -95,7 +95,7 @@ import equivalent._
 //               //   { x1 : A1, x2 : A2, ... => r },
 //               //   { y1 : B1, y2 : B2, ... -> R } @ telescope_env)
 //               if (type_map.size != telescope.size) {
-//                 throw Report(List(
+//                 throw ErrorReport(List(
 //                   s"Fn and pi type arity mismatch\n" +
 //                     s"arity of fn: ${type_map.size}\n" +
 //                     s"arity of pi: ${telescope.size}\n"
@@ -115,7 +115,7 @@ import equivalent._
 //               }
 
 //             case _ =>
-//               throw Report(List(
+//               throw ErrorReport(List(
 //                 s"expecting pi type\n" +
 //                   s"but found: ${pretty_value(t)}\n"
 //               ))
@@ -127,7 +127,7 @@ import equivalent._
 //               cases.foreach {
 //                 case (type_map, body) =>
 //                   if (type_map.size != telescope.size) {
-//                     throw Report(List(
+//                     throw ErrorReport(List(
 //                       s"FnCase and pi type arity mismatch\n" +
 //                         s"arity of fn: ${type_map.size}\n" +
 //                         s"arity of pi: ${telescope.size}\n"
@@ -148,7 +148,7 @@ import equivalent._
 //               }
 
 //             case _ =>
-//               throw Report(List(
+//               throw ErrorReport(List(
 //                 s"expecting pi type\n" +
 //                   s"but found: ${pretty_value(t)}\n"
 //               ))
@@ -158,7 +158,7 @@ import equivalent._
 //           subtype(infer(env, exp), t)
 //       }
 //     } catch {
-//       case report: Report =>
+//       case report: ErrorReport =>
 //         report.throw_prepend(
 //           s"check fail\n" +
 //             s"exp: ${pretty_exp(exp)}\n" +
@@ -195,7 +195,7 @@ object check {
                       val v_value = evaluate(env, v)
                       equivalent(v_value, d_value)
                     case None =>
-                      throw Report(List(
+                      throw ErrorReport(List(
                         s"object does not have the field_name of defined: ${name}\n"
                       ))
                   }
@@ -220,14 +220,14 @@ object check {
                       val v_value = evaluate(env, v)
                       telescope_env = telescope_env.ext(name, t_value, v_value)
                     case None =>
-                      throw Report(List(
+                      throw ErrorReport(List(
                         s"object does not have the field_name of telescope: ${name}\n"
                       ))
                   }
               }
 
             case _ =>
-              throw Report(List(
+              throw ErrorReport(List(
                 s"expecting class type\n" +
                   s"but found: ${pretty_value(t)}\n"
               ))
@@ -251,7 +251,7 @@ object check {
               //   { x1 : A1, x2 : A2, ... => r },
               //   { y1 : B1, y2 : B2, ... -> R } @ telescope_env)
               if (type_map.size != telescope.size) {
-                throw Report(List(
+                throw ErrorReport(List(
                   s"Fn and pi type arity mismatch\n" +
                     s"arity of fn: ${type_map.size}\n" +
                     s"arity of pi: ${telescope.size}\n"
@@ -271,7 +271,7 @@ object check {
               }
 
             case _ =>
-              throw Report(List(
+              throw ErrorReport(List(
                 s"expecting pi type\n" +
                   s"but found: ${pretty_value(t)}\n"
               ))
@@ -283,7 +283,7 @@ object check {
               cases.foreach {
                 case (type_map, body) =>
                   if (type_map.size != telescope.size) {
-                    throw Report(List(
+                    throw ErrorReport(List(
                       s"FnCase and pi type arity mismatch\n" +
                         s"arity of fn: ${type_map.size}\n" +
                         s"arity of pi: ${telescope.size}\n"
@@ -304,7 +304,7 @@ object check {
               }
 
             case _ =>
-              throw Report(List(
+              throw ErrorReport(List(
                 s"expecting pi type\n" +
                   s"but found: ${pretty_value(t)}\n"
               ))
@@ -314,7 +314,7 @@ object check {
           subtype(infer(env, exp), t)
       }
     } catch {
-      case report: Report =>
+      case report: ErrorReport =>
         report.throw_prepend(
           s"check fail\n" +
             s"exp: ${pretty_exp(exp)}\n" +

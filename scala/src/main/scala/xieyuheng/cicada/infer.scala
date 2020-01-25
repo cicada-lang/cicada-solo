@@ -17,7 +17,7 @@ object infer {
           env.lookup_type(name) match {
             case Some(t) => t
             case None =>
-              throw Report(List(
+              throw ErrorReport(List(
                 s"can not find var: ${name} in env\n"
               ))
           }
@@ -69,7 +69,7 @@ object infer {
           ValuePi(Telescope(type_map, env), return_type)
 
         case FnCase(cases) =>
-          throw Report(List(
+          throw ErrorReport(List(
             s"the language is not designed to infer the type of FnCase: ${exp}\n"
           ))
 
@@ -135,7 +135,7 @@ object infer {
             // infer(env, f(a1, a2, ...)) = evaluate(telescope_env, R)
             case ValuePi(telescope: Telescope, return_type: Exp) =>
               if (args.length != telescope.size) {
-                throw Report(List(
+                throw ErrorReport(List(
                   s"args and pi type arity mismatch\n" +
                     s"arity of args: ${args.length}\n" +
                     s"arity of pi: ${telescope.size}\n"
@@ -154,7 +154,7 @@ object infer {
               evaluate(env, target) match {
                 case ValueCl(defined, telescope) =>
                   if (args.length > telescope.size) {
-                    throw Report(List(
+                    throw ErrorReport(List(
                       s"too many arguments to apply class\n" +
                         s"length of args: ${args.length}\n" +
                         s"arity of cl: ${telescope.size}\n"
@@ -170,13 +170,13 @@ object infer {
                   ValueType()
 
                 case t =>
-                  throw Report(List(
+                  throw ErrorReport(List(
                     s"expecting ValueCl but found: ${t}\n"
                   ))
               }
 
             case t =>
-              throw Report(List(
+              throw ErrorReport(List(
                 s"expecting ValuePi type but found: ${t}\n"
               ))
           }
@@ -213,7 +213,7 @@ object infer {
                   result match {
                     case Some(t) => t
                     case None =>
-                      throw Report(List(
+                      throw ErrorReport(List(
                         s"infer fail\n" +
                           s"on ValueCl\n" +
                           s"target exp: ${pretty_exp(target)}\n" +
@@ -224,7 +224,7 @@ object infer {
               }
 
             case t =>
-              throw Report(List(
+              throw ErrorReport(List(
                 s"expecting class\n" +
                   s"found type: ${pretty_value(t)}\n" +
                   s"target: ${pretty_exp(target)}\n"
@@ -243,7 +243,7 @@ object infer {
 
       }
     } catch {
-      case report: Report =>
+      case report: ErrorReport =>
         report.throw_prepend(
           s"infer fail\n" +
             s"exp: ${pretty_exp(exp)}\n"

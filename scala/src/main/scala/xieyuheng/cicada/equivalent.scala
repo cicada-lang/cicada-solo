@@ -19,14 +19,14 @@ object equivalent {
 
         case (ValueStr(s), ValueStr(t)) =>
           if (s != t) {
-            throw Report(List(
+            throw ErrorReport(List(
               s"equivalent fail between ValueStr and ValueStr\n"
             ))
           }
 
         case (s: ValuePi, t: ValuePi) =>
           if (s.telescope.size != t.telescope.size) {
-            throw Report(List(
+            throw ErrorReport(List(
               s"equivalent fail between ValuePi and ValuePi\n" +
                 s"telescope size mismatch\n" +
                 s"s.telescope.size = ${s.telescope.size}\n" +
@@ -51,7 +51,7 @@ object equivalent {
 
         case (s: ValueFn, t: ValueFn) =>
           if (s.telescope.size != t.telescope.size) {
-            throw Report(List(
+            throw ErrorReport(List(
               s"equivalent fail between ValueFn and ValueFn\n" +
                 s"telescope size mismatch\n" +
                 s"s.telescope.size = ${s.telescope.size}\n" +
@@ -76,7 +76,7 @@ object equivalent {
 
         case (s: ValueFnCase, t: ValueFnCase) =>
           if (s.cases.length != t.cases.length) {
-            throw Report(List(
+            throw ErrorReport(List(
               s"equivalent fail between ValueFnCase and ValueFnCase\n" +
                 s"cases length mismatch\n" +
                 s"s.cases.length = ${s.cases.length}\n" +
@@ -91,7 +91,7 @@ object equivalent {
         case (s: ValueCl, t: ValueCl) =>
           equivalent_defined(s.defined, t.defined)
           if (s.telescope.size != t.telescope.size) {
-            throw Report(List(
+            throw ErrorReport(List(
               s"equivalent fail between ValueCl and ValueCl\n" +
                 s"telescope size mismatch\n" +
                 s"s.telescope.size = ${s.telescope.size}\n" +
@@ -110,7 +110,7 @@ object equivalent {
                   t_telescope_env = t_telescope_env.ext(name, t_type_value, NeutralVar(name))
                   s_telescope_env = s_telescope_env.ext(name, s_type_value, NeutralVar(name))
                 case None =>
-                  throw Report(List(
+                  throw ErrorReport(List(
                     s"equivalent_telescope fail\n" +
                       s"can not find field_name of t_telescope in s_telescope\n" +
                       s"field_name = ${name}\n"
@@ -123,7 +123,7 @@ object equivalent {
 
         case (s: NeutralVar, t: NeutralVar) =>
           if (s.name != t.name) {
-            throw Report(List(
+            throw ErrorReport(List(
               s"equivalent fail between NeutralVar and NeutralVar\n" +
                 s"${s.name} != ${t.name}\n"
             ))
@@ -135,7 +135,7 @@ object equivalent {
 
         case (s: NeutralDot, t: NeutralDot) =>
           if (s.field_name != t.field_name) {
-            throw Report(List(
+            throw ErrorReport(List(
               s"equivalent fail between NeutralDot and NeutralDot\n" +
                 s"field_name name mismatch\n" +
                 s"${s.field_name} != ${t.field_name}\n"
@@ -145,13 +145,13 @@ object equivalent {
           }
 
         case _ =>
-          throw Report(List(
+          throw ErrorReport(List(
             s"equivalent fail\n" +
               s"meet unhandled case\n"
           ))
       }
     } catch {
-      case report: Report =>
+      case report: ErrorReport =>
         report.throw_prepend(
           s"equivalent fail\n" +
             s"s: ${pretty_value(s)}\n" +
@@ -164,7 +164,7 @@ object equivalent {
     t_list: List[Value],
   ): Unit = {
     if (s_list.length != t_list.length) {
-      throw Report(List(
+      throw ErrorReport(List(
         s"equivalent_list fail\n" +
           s"list length mismatch\n" +
           s"s_list.length = ${s_list.length}\n" +
@@ -181,7 +181,7 @@ object equivalent {
     t_list_map: ListMap[String, Value],
   ): Unit = {
     if (s_list_map.size != s_list_map.size) {
-      throw Report(List(
+      throw ErrorReport(List(
         s"equivalent_list_map fail\n" +
           s"list_map size mismatch\n" +
           s"s_list_map.size = ${s_list_map.size}\n" +
@@ -194,7 +194,7 @@ object equivalent {
           case Some(s_value) =>
             equivalent(s_value, t_value)
           case None =>
-            throw Report(List(
+            throw ErrorReport(List(
               s"equivalent_list_map fail\n" +
                 s"can not find field_name of t_list_map in s_type_map\n" +
                 s"field_name = ${name}\n"
@@ -208,7 +208,7 @@ object equivalent {
     t_defined: ListMap[String, (Value, Value)],
   ): Unit = {
     if (s_defined.size != t_defined.size) {
-      throw Report(List(
+      throw ErrorReport(List(
         s"equivalent_defined fail\n" +
           s"defined size mismatch\n" +
           s"s_defined.size = ${s_defined.size}\n" +
@@ -222,7 +222,7 @@ object equivalent {
             equivalent(s_type_value, t_type_value)
             equivalent(s_value, t_value)
           case None =>
-            throw Report(List(
+            throw ErrorReport(List(
               s"equivalent_defined fail\n" +
                 s"can not find field_name of t_defined in s_defined\n" +
                 s"field_name = ${name}\n"
