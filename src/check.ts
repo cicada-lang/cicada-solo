@@ -183,8 +183,8 @@ export function check_fn(
     for (let i = 0; i < scope.arity; i++) {
       let [pi_arg_name, pi_arg_entry] = pi.scope.named_entries[i]
       let [fn_arg_name, fn_arg_entry] = scope.named_entries[i]
-      let pi_arg_type_value = Scope.entry_to_type(scope_env, pi_arg_entry)
-      let fn_arg_type_value = Scope.entry_to_type(local_env, fn_arg_entry)
+      let pi_arg_type_value = Scope.entry_to_type(pi_arg_entry, scope_env)
+      let fn_arg_type_value = Scope.entry_to_type(fn_arg_entry, local_env)
       subtype(fn_arg_type_value, pi_arg_type_value)
       let unique_var = util.unique_var_from(
         `check:Fn:${pi_arg_name}:${fn_arg_name}`)

@@ -76,7 +76,10 @@ export namespace Entry {
   }
 }
 
-export function entry_to_type(env: Env.Env, entry: Entry.Entry): Value.Value {
+export function entry_to_type(
+  entry: Entry.Entry,
+  env: Env.Env,
+): Value.Value {
   if (entry instanceof Entry.Let) {
     let { value } = entry
     return infer(env, value)
@@ -162,46 +165,45 @@ export function scope_check_args(
 
 export function scope_check(
   scope: Scope,
-  env: Env.Env,
+  scope_env: Env.Env,
   effect: (name: string, the: {
     t: Value.Value,
     value: Value.Value,
   }) => void = (name, the) => {},
 ): Env.Env {
-  var local_env = env
   for (let [name, entry] of scope.named_entries) {
     if (entry instanceof Entry.Let) {
       let { value } = entry
-      let t_value = infer(local_env, value)
+      let t_value = infer(scope_env, value)
       let the = {
         t: t_value,
-        value: evaluate(local_env, value),
+        value: evaluate(scope_env, value),
       }
-      local_env = local_env.ext(name, the)
+      scope_env = scope_env.ext(name, the)
       effect(name, the)
     }
 
     else if (entry instanceof Entry.Given) {
       let { t } = entry
-      check(local_env, t, new Value.Type())
+      check(scope_env, t, new Value.Type())
       let the = {
-        t: evaluate(local_env, t),
+        t: evaluate(scope_env, t),
         value: new Value.Neutral.Var(name),
       }
-      local_env = local_env.ext(name, the)
+      scope_env = scope_env.ext(name, the)
       effect(name, the)
     }
 
     else if (entry instanceof Entry.Define) {
       let { t, value } = entry
-      check(local_env, t, new Value.Type())
-      let t_value = evaluate(local_env, t)
-      check(local_env, value, t_value)
+      check(scope_env, t, new Value.Type())
+      let t_value = evaluate(scope_env, t)
+      check(scope_env, value, t_value)
       let the = {
         t: t_value,
-        value: evaluate(local_env, value),
+        value: evaluate(scope_env, value),
       }
-      local_env = local_env.ext(name, the)
+      scope_env = scope_env.ext(name, the)
       effect(name, the)
     }
 
@@ -212,5 +214,5 @@ export function scope_check(
     }
   }
 
-  return local_env
+  return scope_env
 }
