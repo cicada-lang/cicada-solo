@@ -1,5 +1,4 @@
 # in ts
-- top
 - grammar matchers
 - api
 - command line interface
