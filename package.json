@@ -10,13 +10,13 @@
     "test": "./dev t"
   },
   "devDependencies": {
-    "@types/assert": "^1.4.3",
+    "@types/assert": "^1.4.4",
     "@types/nanoid": "^2.1.0",
     "typescript": "^3.7.5"
   },
   "dependencies": {
     "@forchange/basic": "file:deps/basic",
     "@forchange/partech": "file:deps/partech",
-    "nanoid": "^2.1.9"
+    "nanoid": "^2.1.10"
   }
 }
