@@ -3,6 +3,7 @@ import * as Value from "./value"
 import * as Scope from "./scope"
 
 export function pretty_exp(exp: Exp.Exp): string {
+
   if (exp instanceof Exp.Var) {
     let { name } = exp
     return name
@@ -74,7 +75,11 @@ export function pretty_exp(exp: Exp.Exp): string {
 
   else if (exp instanceof Exp.Dot) {
     let { target, field_name } = exp
-    return `${pretty_exp(target)}.${field_name}`
+    let s = ""
+    s += pretty_exp(target)
+    s += "."
+    s += field_name
+    return s
   }
 
   else if (exp instanceof Exp.Block) {
@@ -93,12 +98,99 @@ export function pretty_exp(exp: Exp.Exp): string {
 }
 
 export function pretty_value(value: Value.Value): string {
-  throw new Error("TODO")
+
+  if (value instanceof Value.Type) {
+    return "type"
+  }
+
+  else if (value instanceof Value.StrType) {
+    return "string_t"
+  }
+
+  else if (value instanceof Value.Str) {
+    let { str } = value
+    return `"${str}"`
+  }
+
+  else if (value instanceof Value.Pi) {
+    let { scope, return_type } = value
+    let s = ""
+    s += pretty_scope(scope, "\n")
+    s += `-> ${pretty_value(return_type)}\n`
+    return pretty_flower_block(s)
+  }
+
+  else if (value instanceof Value.Fn) {
+    let { scope, body } = value
+    let s = ""
+    s += pretty_scope(scope, "\n")
+    s += `=> ${pretty_value(body)}\n`
+    return pretty_flower_block(s)
+  }
+
+  else if (value instanceof Value.FnCase) {
+    let { cases } = value
+    let s = ""
+    for (let fn of cases) {
+      let { scope, body } = fn
+      s += pretty_scope(scope, "\n")
+      s += `=> ${pretty_value(body)}\n`
+    }
+    return pretty_flower_block(s)
+  }
+
+  else if (value instanceof Value.Cl) {
+    let { defined, scope } = value
+    let s = ""
+    s += pretty_defined(defined, "\n")
+    s += pretty_scope(scope, "\n")
+    return pretty_flower_block(s)
+  }
+
+  else if (value instanceof Value.Obj) {
+    let { defined } = value
+    let s = ""
+    s += pretty_defined(defined, "\n")
+    return pretty_flower_block(s)
+  }
+
+  else if (value instanceof Value.Neutral.Var) {
+    let { name } = value
+    return name
+  }
+
+  else if (value instanceof Value.Neutral.Ap) {
+    let { target, args } = value
+    let s = ""
+    s += pretty_value(target)
+    s += "("
+    s += args.map(pretty_value).join(", ")
+    s += ")"
+    return s
+  }
+
+  else if (value instanceof Value.Neutral.Dot) {
+    let { target, field_name } = value
+    let s = ""
+    s += pretty_value(target)
+    s += "."
+    s += field_name
+    return s
+  }
+
+  else {
+    throw new Error(
+      "pretty_value fail\n" +
+        `unhandled class of Value: ${value.constructor.name}`)
+  }
 }
 
-export function pretty_scope(scope: Scope.Scope, delimiter: string): string {
+export function pretty_scope(
+  scope: Scope.Scope,
+  delimiter: string,
+): string {
   let list: Array<string> = []
-  
+
   for (let [name, entry] of scope.named_entries) {
     if (entry instanceof Scope.Entry.Let) {
       let { value } = entry
@@ -121,6 +213,21 @@ export function pretty_scope(scope: Scope.Scope, delimiter: string): string {
           `unhandled class of Scope.Entry: ${entry.constructor.name}`)
     }
   }
+
+  return list.join(delimiter)
+}
+
+export function pretty_defined(
+  defined: Map<string, { t: Value.Value, value: Value.Value }>,
+  delimiter: string,
+): string {
+   let list: Array<string> = []
+
+  for (let [name, the] of defined) {
+    let { t, value } = the
+    list.push(`${name} : ${pretty_value(t)} = ${pretty_value(value)}`)
+  }
+
   return list.join(delimiter)
 }
 

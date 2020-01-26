@@ -1,5 +1,4 @@
 # in ts
-- pretty_value
 - grammar
 - api
 - command line interface
