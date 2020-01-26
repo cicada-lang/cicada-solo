@@ -23,59 +23,67 @@ export function pretty_exp(exp: Exp.Exp): string {
 
   else if (exp instanceof Exp.Pi) {
     let { scope, return_type } = exp
-    let s = pretty_scope(scope, "\n")
+    let s = ""
+    s += pretty_scope(scope, "\n")
     s += `-> ${pretty_exp(return_type)}\n`
     return pretty_flower_block(s)
   }
 
-  // case Fn(type_map: ListMap[String, Exp], body: Exp) =>
-  //   var s = type_map.map {
-  //     case (name, exp) => s"${name} : ${pretty_exp(exp)}\n"
-  //   }.mkString("")
-  //   s = s + s"=> ${pretty_exp(body)}\n"
-  //   s"{${maybe_ln(s)}}"
+  else if (exp instanceof Exp.Fn) {
+    let { scope, body } = exp
+    let s = ""
+    s += pretty_scope(scope, "\n")
+    s += `=> ${pretty_exp(body)}\n`
+    return pretty_flower_block(s)
+  }
 
-  // case FnCase(cases) =>
-  //   var s = cases.map {
-  //     case (type_map, body) =>
-  //       var s = type_map.map {
-  //         case (name, exp) => s"${name} : ${pretty_exp(exp)}"
-  //       }.mkString(", ")
-  //       s"case ${s} => ${pretty_exp(body)}\n"
-  //   }.mkString("")
-  //   s"{${maybe_ln(s)}}"
+  else if (exp instanceof Exp.FnCase) {
+    let { cases } = exp
+    let s = ""
+    for (let fn of cases) {
+      let { scope, body } = fn
+      s += pretty_scope(scope, "\n")
+      s += `=> ${pretty_exp(body)}\n`
+    }
+    return pretty_flower_block(s)
+  }
 
-  // case Ap(target: Exp, args: List[Exp]) =>
-  //   val s = args.map {
-  //     case exp => pretty_exp(exp)
-  //   }.mkString(", ")
-  //   s"${pretty_exp(target)}(${s})"
+  else if (exp instanceof Exp.Ap) {
+    let { target, args } = exp
+    let s = ""
+    s += pretty_exp(target)
+    s += "("
+    s += args.map(pretty_exp).join(", ")
+    s += ")"
+    return s
+  }
 
-  // case Cl(defined, type_map: ListMap[String, Exp]) =>
-  //   var d = defined.map {
-  //     case (name, (t, exp)) => s"${name} : ${pretty_exp(t)} = ${pretty_exp(exp)}\n"
-  //   }.mkString("")
-  //   var s = type_map.map {
-  //     case (name, exp) => s"${name} : ${pretty_exp(exp)}\n"
-  //   }.mkString("")
-  //   s"class {${maybe_ln(d)}${maybe_ln(s)}}"
+  else if (exp instanceof Exp.Cl) {
+    let { scope } = exp
+    let s = ""
+    s += pretty_scope(scope, "\n")
+    return pretty_flower_block(s)
+  }
 
-  // case Obj(value_map: ListMap[String, Exp]) =>
-  //   var s = value_map.map {
-  //     case (name, exp) => s"${name} = ${pretty_exp(exp)}\n"
-  //   }.mkString("")
-  //   s"object {${maybe_ln(s)}}"
+  else if (exp instanceof Exp.Obj) {
+    let { scope } = exp
+    let s = ""
+    s += pretty_scope(scope, "\n")
+    return pretty_flower_block(s)
+  }
 
-  // case Dot(target: Exp, field_name: String) =>
-  //   s"${pretty_exp(target)}.${field_name}"
+  else if (exp instanceof Exp.Dot) {
+    let { target, field_name } = exp
+    return `${pretty_exp(target)}.${field_name}`
+  }
 
-  // case Block(block_entry_map: ListMap[String, BlockEntry], body: Exp) =>
-  //   var s = block_entry_map.map {
-  //     case (name, BlockEntryLet(exp)) => s"${name} = ${pretty_exp(exp)}\n"
-  //     case (name, BlockEntryDefine(t, exp)) => s"${name} : ${pretty_exp(t)} = ${pretty_exp(exp)}\n"
-  //   }.mkString("")
-  //   s = s + s"${pretty_exp(body)}\n"
-  //   s"{${maybe_ln(s)}}"
+  else if (exp instanceof Exp.Block) {
+    let { scope, body } = exp
+    let s = ""
+    s += pretty_scope(scope, "\n")
+    s += `${pretty_exp(body)}\n`
+    return `class ${pretty_flower_block(s)}`
+  }
 
   else {
     throw new Error(
@@ -90,6 +98,7 @@ export function pretty_value(value: Value.Value): string {
 
 export function pretty_scope(scope: Scope.Scope, delimiter: string): string {
   let list: Array<string> = []
+  
   for (let [name, entry] of scope.named_entries) {
     if (entry instanceof Scope.Entry.Let) {
       let { value } = entry

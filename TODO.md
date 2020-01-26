@@ -1,7 +1,6 @@
 # in ts
-- grammar
-- pretty_exp
 - pretty_value
+- grammar
 - api
 - command line interface
 - test
