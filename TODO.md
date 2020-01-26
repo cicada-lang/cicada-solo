@@ -1,5 +1,4 @@
 # in ts
-- equivalent
 - grammar
 - pretty_exp
 - pretty_value

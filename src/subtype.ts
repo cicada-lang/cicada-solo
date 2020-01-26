@@ -36,17 +36,17 @@ export function subtype(s: Value.Value, t: Value.Value): void {
             `right scope arity: ${t.scope.arity}\n`])
       }
 
-      let [s_scope_env, t_scope_env] = Scope.scope_compare_given(
-        s.scope, s.scope_env,
-        t.scope, t.scope_env,
-        (name, s_given, t_given) => {
-          subtype(t_given, s_given) // NOTE contravariant
-        })
+      let [s_scope_env, t_scope_env] =
+        Scope.scope_compare_given(
+          s.scope, s.scope_env,
+          t.scope, t.scope_env,
+          (name, s_given, t_given) => {
+            subtype(t_given, s_given) // NOTE contravariant
+          })
 
-      let s_return_type_value = evaluate(s_scope_env, s.return_type)
-      let t_return_type_value = evaluate(t_scope_env, t.return_type)
-
-      subtype(s_return_type_value, t_return_type_value)
+      subtype(
+        evaluate(s_scope_env, s.return_type),
+        evaluate(t_scope_env, t.return_type))
     }
 
     else if (s instanceof Value.Cl && t instanceof Value.Cl) {

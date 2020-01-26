@@ -1,6 +1,7 @@
 import * as Exp from "./exp"
 import * as Value from "./value"
 import * as pretty from "./pretty"
+import * as Scope from "./scope"
 import { evaluate } from "./evaluate"
 import { ErrorReport } from "./error"
 
@@ -26,23 +27,17 @@ export function equivalent(s: Value.Value, t: Value.Value): void {
             `t.scope.arity = ${t.scope.arity}\n`])
       }
 
-      let t_scope_env = t.scope_env
-      let s_scope_env = s.scope_env
+      let [s_scope_env, t_scope_env] =
+        Scope.scope_compare_given(
+          s.scope, s.scope_env,
+          t.scope, t.scope_env,
+          (name, s_given, t_given) => {
+            equivalent(s_given, t_given)
+          })
 
-      // t.scope.type_map.zip(s.scope.type_map).foreach {
-      //   case ((t_name, t_type), (s_name, s_type)) =>
-      //     let t_type_value = evaluate(t_scope_env, t_type)
-      //   let s_type_value = evaluate(s_scope_env, s_type)
-      //   equivalent(s_type_value, t_type_value)
-      //   let unique_var = util.unique_var_from(
-      //     s"equivalent:ValuePi:ValuePi:${s_name}${t_name}")
-      //   t_scope_env = t_scope_env.ext(unique_var.name, t_type_value, unique_var)
-      //   s_scope_env = s_scope_env.ext(unique_var.name, s_type_value, unique_var)
-      // }
-
-      let t_return_type_value = evaluate(t_scope_env, t.return_type)
-      let s_return_type_value = evaluate(s_scope_env, s.return_type)
-      equivalent(s_return_type_value, t_return_type_value)
+      equivalent(
+        evaluate(s_scope_env, s.return_type),
+        evaluate(t_scope_env, t.return_type))
     }
 
     else if (s instanceof Value.Fn && t instanceof Value.Fn) {
@@ -54,23 +49,17 @@ export function equivalent(s: Value.Value, t: Value.Value): void {
             `t.scope.arity = ${t.scope.arity}\n`])
       }
 
-      let t_scope_env = t.scope_env
-      let s_scope_env = s.scope_env
+      let [s_scope_env, t_scope_env] =
+        Scope.scope_compare_given(
+          s.scope, s.scope_env,
+          t.scope, t.scope_env,
+          (name, s_given, t_given) => {
+            equivalent(s_given, t_given)
+          })
 
-      // t.scope.type_map.zip(s.scope.type_map).foreach {
-      //   case ((t_name, t_type), (s_name, s_type)) =>
-      //     let t_type_value = evaluate(t_scope_env, t_type)
-      //   let s_type_value = evaluate(s_scope_env, s_type)
-      //   equivalent(s_type_value, t_type_value)
-      //   let unique_var = util.unique_var_from(
-      //     s"equivalent:ValuePi:ValuePi:${s_name}${t_name}")
-      //   t_scope_env = t_scope_env.ext(unique_var.name, t_type_value, unique_var)
-      //   s_scope_env = s_scope_env.ext(unique_var.name, s_type_value, unique_var)
-      // }
-
-      let t_body_value = evaluate(t_scope_env, t.body)
-      let s_body_value = evaluate(s_scope_env, s.body)
-      equivalent(s_body_value, t_body_value)
+      equivalent(
+        evaluate(s_scope_env, s.body),
+        evaluate(t_scope_env, t.body))
     }
 
     else if (s instanceof Value.FnCase && t instanceof Value.FnCase) {
@@ -88,7 +77,6 @@ export function equivalent(s: Value.Value, t: Value.Value): void {
     }
 
     else if (s instanceof Value.Cl && t instanceof Value.Cl) {
-      equivalent_defined(s.defined, t.defined)
       if (s.scope.arity !== t.scope.arity) {
         throw new ErrorReport([
           "equivalent fail between ValueCl and ValueCl\n" +
@@ -97,26 +85,64 @@ export function equivalent(s: Value.Value, t: Value.Value): void {
             `t.scope.arity = ${t.scope.arity}\n`])
       }
 
-      let t_scope_env = t.scope_env
-      let s_scope_env = s.scope_env
+      let s_defined = new Map([...s.defined])
 
-      // t.scope.type_map.foreach {
-      //   case (name, t_type) =>
-      //     s.scope.type_map.get(name) match {
-      //       case Some(s_type) =>
-      //         let t_type_value = evaluate(t_scope_env, t_type)
-      //       let s_type_value = evaluate(s_scope_env, s_type)
-      //       equivalent(s_type_value, t_type_value)
-      //       t_scope_env = t_scope_env.ext(name, t_type_value, NeutralVar(name))
-      //       s_scope_env = s_scope_env.ext(name, s_type_value, NeutralVar(name))
-      //       case None =>
-      //         throw ErrorReport(List(
-      //           s"equivalent_scope fail\n" +
-      //             s"can not find field_name of t_scope in s_scope\n" +
-      //             s"field_name = ${name}\n"
-      //         ))
-      //     }
-      // }
+      Scope.scope_check(s.scope, s.scope_env, (name, the) => {
+        s_defined.set(name, the)
+      })
+
+      for (let [name, the] of t.defined) {
+        let res = s_defined.get(name)
+        if (res !== undefined) {
+          equivalent(res.t, the.t)
+          equivalent(res.value, the.value)
+        }
+
+        else {
+          throw new ErrorReport([
+            "equivalent fail between ValueCl and Value.Cl\n" +
+              `missing name in the subtype class's defined\n` +
+              `name: ${name}\n`])
+        }
+      }
+
+      let t_scope_env = t.scope_env
+
+      for (let [name, entry] of t.scope.named_entries) {
+        let res = s_defined.get(name)
+        if (res !== undefined) {
+          if (entry instanceof Scope.Entry.Let) {
+            let { value } = entry
+            equivalent(res.value, evaluate(t_scope_env, value))
+            t_scope_env = t_scope_env.ext(name, res)
+          }
+
+          else if (entry instanceof Scope.Entry.Given) {
+            let { t } = entry
+            equivalent(res.t, evaluate(t_scope_env, t))
+            t_scope_env = t_scope_env.ext(name, res)
+          }
+
+          else if (entry instanceof Scope.Entry.Define) {
+            let { t, value } = entry
+            equivalent(res.t, evaluate(t_scope_env, t))
+            equivalent(res.value, evaluate(t_scope_env, value))
+            t_scope_env = t_scope_env.ext(name, res)
+          }
+
+          else {
+            throw new ErrorReport([
+              "equivalent fail\n" +
+                `unhandled class of Scope.Entry: ${entry.constructor.name}`])
+          }
+        }
+
+        else {
+          throw new ErrorReport([
+            "equivalent fail\n" +
+              `missing field: ${name}`])
+        }
+      }
     }
 
     else if (s instanceof Value.Obj && t instanceof Value.Obj) {
