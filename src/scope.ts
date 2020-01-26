@@ -1,6 +1,7 @@
 import * as Exp from "./exp"
 import * as Value from "./value"
 import * as Env from "./env"
+import * as util from "./util"
 import { evaluate } from "./evaluate"
 import { check } from "./check"
 import { infer } from "./infer"
@@ -102,7 +103,7 @@ export function entry_to_type(
   }
 }
 
-export function scope_check_args(
+export function scope_check_with_args(
   scope: Scope,
   scope_env: Env.Env,
   args: Array<Exp.Exp>,
@@ -110,7 +111,7 @@ export function scope_check_args(
   effect: (name: string, the: {
     t: Value.Value,
     value: Value.Value,
-  }) => void = (name, the) => {},
+  }) => void = _ => {},
 ): Env.Env {
   let arg_index = 0
 
@@ -155,7 +156,7 @@ export function scope_check_args(
 
     else {
       throw new ErrorReport([
-        "scope_check_args fail\n" +
+        "scope_check_with_args fail\n" +
           `unhandled class of Entry: ${entry.constructor.name}\n`])
     }
   }
@@ -169,7 +170,7 @@ export function scope_check(
   effect: (name: string, the: {
     t: Value.Value,
     value: Value.Value,
-  }) => void = (name, the) => {},
+  }) => void = _ => {},
 ): Env.Env {
   for (let [name, entry] of scope.named_entries) {
     if (entry instanceof Entry.Let) {
@@ -215,4 +216,130 @@ export function scope_check(
   }
 
   return scope_env
+}
+
+export function scope_compare_given(
+  s_scope: Scope,
+  s_scope_env: Env.Env,
+  t_scope: Scope,
+  t_scope_env: Env.Env,
+  effect: (
+    name: string,
+    s_given: Value.Value,
+    t_given: Value.Value,
+  ) => void = _ => {},
+): [Env.Env, Env.Env] {
+  let s_named_entry_iter = s_scope.named_entries.values()
+  let t_named_entry_iter = t_scope.named_entries.values()
+
+  let s_current: undefined | [string, Exp.Exp] = undefined
+  let t_current: undefined | [string, Exp.Exp] = undefined
+
+  function step(): boolean {
+    if (s_current === undefined) {
+      let result = s_named_entry_iter.next()
+      if (result.value !== undefined) {
+        let [name, entry] = result.value
+
+        if (entry instanceof Entry.Let) {
+          let { value } = entry
+          let the = {
+            t: infer(s_scope_env, value),
+            value: evaluate(s_scope_env, value),
+          }
+          s_scope_env = s_scope_env.ext(name, the)
+        }
+
+        else if (entry instanceof Entry.Given) {
+          let { t } = entry
+          s_current = [name, t]
+        }
+
+        else if (entry instanceof Entry.Define) {
+          let { t, value } = entry
+          let the = {
+            t: evaluate(s_scope_env, t),
+            value: evaluate(s_scope_env, value),
+          }
+          s_scope_env = s_scope_env.ext(name, the)
+        }
+
+        else {
+          throw new ErrorReport([
+            "scope_compare_given fail to step left scope\n" +
+              `unhandled class of Entry: ${entry.constructor.name}\n`])
+        }
+      }
+    }
+
+    if (t_current === undefined) {
+      let result = t_named_entry_iter.next()
+      if (result.value !== undefined) {
+        let [name, entry] = result.value
+
+        if (entry instanceof Entry.Let) {
+          let { value } = entry
+          let the = {
+            t: infer(t_scope_env, value),
+            value: evaluate(t_scope_env, value),
+          }
+          t_scope_env = t_scope_env.ext(name, the)
+        }
+
+        else if (entry instanceof Entry.Given) {
+          let { t } = entry
+          t_current = [name, t]
+        }
+
+        else if (entry instanceof Entry.Define) {
+          let { t, value } = entry
+          let the = {
+            t: evaluate(t_scope_env, t),
+            value: evaluate(t_scope_env, value),
+          }
+          t_scope_env = t_scope_env.ext(name, the)
+        }
+
+        else {
+          throw new ErrorReport([
+            "scope_compare_given fail to step right scope\n" +
+              `unhandled class of Entry: ${entry.constructor.name}\n`])
+        }
+      }
+    }
+
+    if (s_current === undefined &&
+        t_current === undefined) {
+      return false
+    }
+
+    else if (s_current !== undefined &&
+             t_current !== undefined) {
+      let [[s_name, s], [t_name, t]] = [s_current, t_current]
+      let s_value = evaluate(s_scope_env, s)
+      let t_value = evaluate(t_scope_env, t)
+
+
+      effect(name, s_value, t_value)
+
+      let unique_var = util.unique_var_from(
+        `${s_name}:${t_name}`)
+      s_scope_env = s_scope_env.ext(s_name, { t: s_value, value: unique_var })
+      t_scope_env = t_scope_env.ext(t_name, { t: t_value, value: unique_var })
+      s_current = undefined
+      t_current = undefined
+      return true
+    }
+
+    else {
+      return true
+    }
+  }
+
+  let continue_p = true
+  while (continue_p) {
+    continue_p = step()
+  }
+
+  return [s_scope_env, t_scope_env]
 }

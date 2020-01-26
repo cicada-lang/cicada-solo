@@ -25,7 +25,7 @@ export declare namespace Entry {
     }
 }
 export declare function entry_to_type(entry: Entry.Entry, env: Env.Env): Value.Value;
-export declare function scope_check_args(scope: Scope, scope_env: Env.Env, args: Array<Exp.Exp>, env: Env.Env, effect?: (name: string, the: {
+export declare function scope_check_with_args(scope: Scope, scope_env: Env.Env, args: Array<Exp.Exp>, env: Env.Env, effect?: (name: string, the: {
     t: Value.Value;
     value: Value.Value;
 }) => void): Env.Env;
@@ -33,3 +33,4 @@ export declare function scope_check(scope: Scope, scope_env: Env.Env, effect?: (
     t: Value.Value;
     value: Value.Value;
 }) => void): Env.Env;
+export declare function scope_compare_given(s_scope: Scope, s_scope_env: Env.Env, t_scope: Scope, t_scope_env: Env.Env, effect?: (name: string, s_given: Value.Value, t_given: Value.Value) => void): [Env.Env, Env.Env];

@@ -36,120 +36,16 @@ export function subtype(s: Value.Value, t: Value.Value): void {
             `right scope arity: ${t.scope.arity}\n`])
       }
 
-      let s_scope_env = s.scope_env
-      let t_scope_env = t.scope_env
-
-      let s_named_entry_iter = s.scope.named_entries.values()
-      let t_named_entry_iter = t.scope.named_entries.values()
-
-      let s_current: undefined | [string, Exp.Exp] = undefined
-      let t_current: undefined | [string, Exp.Exp] = undefined
-
-      function step(): boolean {
-        if (s_current === undefined) {
-          let result = s_named_entry_iter.next()
-          if (result.value !== undefined) {
-            let [name, entry] = result.value
-
-            if (entry instanceof Scope.Entry.Let) {
-              let { value } = entry
-              let the = {
-                t: infer(s_scope_env, t),
-                value: evaluate(s_scope_env, value),
-              }
-              s_scope_env = s_scope_env.ext(name, the)
-            }
-
-            else if (entry instanceof Scope.Entry.Given) {
-              let { t } = entry
-              s_current = [name, t]
-            }
-
-            else if (entry instanceof Scope.Entry.Define) {
-              let { t, value } = entry
-              let the = {
-                t: evaluate(s_scope_env, t),
-                value: evaluate(s_scope_env, value),
-              }
-              s_scope_env = s_scope_env.ext(name, the)
-            }
-
-            else {
-              throw new ErrorReport([
-                "subtype fail to step left scope\n" +
-                  `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
-            }
-          }
-        }
-
-        if (t_current === undefined) {
-          let result = t_named_entry_iter.next()
-          if (result.value !== undefined) {
-            let [name, entry] = result.value
-
-            if (entry instanceof Scope.Entry.Let) {
-              let { value } = entry
-              let the = {
-                t: infer(t_scope_env, t),
-                value: evaluate(t_scope_env, value),
-              }
-              t_scope_env = t_scope_env.ext(name, the)
-            }
-
-            else if (entry instanceof Scope.Entry.Given) {
-              let { t } = entry
-              t_current = [name, t]
-            }
-
-            else if (entry instanceof Scope.Entry.Define) {
-              let { t, value } = entry
-              let the = {
-                t: evaluate(t_scope_env, t),
-                value: evaluate(t_scope_env, value),
-              }
-              t_scope_env = t_scope_env.ext(name, the)
-            }
-
-            else {
-              throw new ErrorReport([
-                "subtype fail to step right scope\n" +
-                  `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
-            }
-          }
-        }
-
-        if (s_current === undefined &&
-            t_current === undefined) {
-          return false
-        }
-
-        else if (s_current !== undefined &&
-                 t_current !== undefined) {
-          let [[s_name, s], [t_name, t]] = [s_current, t_current]
-          let s_value = evaluate(s_scope_env, s)
-          let t_value = evaluate(t_scope_env, t)
-          subtype(t_value, s_value) // NOTE contravariant
-          let unique_var = util.unique_var_from(
-            `subtype:ValuePi:ValuePi:${s_name}:${t_name}`)
-          s_scope_env = s_scope_env.ext(s_name, { t: s_value, value: unique_var })
-          t_scope_env = t_scope_env.ext(t_name, { t: t_value, value: unique_var })
-          s_current = undefined
-          t_current = undefined
-          return true
-        }
-
-        else {
-          return true
-        }
-      }
-
-      let continue_p = true
-      while (continue_p) {
-        continue_p = step()
-      }
+      let [s_scope_env, t_scope_env] = Scope.scope_compare_given(
+        s.scope, s.scope_env,
+        t.scope, t.scope_env,
+        (name, s_given, t_given) => {
+          subtype(t_given, s_given) // NOTE contravariant
+        })
 
       let s_return_type_value = evaluate(s_scope_env, s.return_type)
       let t_return_type_value = evaluate(t_scope_env, t.return_type)
+
       subtype(s_return_type_value, t_return_type_value)
     }
 

@@ -237,7 +237,7 @@ export function evaluate_ap(
           `args.length: ${args.length}\n`])
     }
 
-    let new_scope_env = Scope.scope_check_args(scope, scope_env, args, env)
+    let new_scope_env = Scope.scope_check_with_args(scope, scope_env, args, env)
 
     return evaluate(new_scope_env, body)
   }
@@ -257,7 +257,7 @@ export function evaluate_ap(
               `args.length: ${args.length}\n`])
         }
 
-        Scope.scope_check_args(scope, scope_env, args, env)
+        Scope.scope_check_with_args(scope, scope_env, args, env)
 
         return true
       }
@@ -299,7 +299,7 @@ export function evaluate_ap(
 
     let new_defined = new Map([...defined])
     let new_named_entries = Array.from(scope.named_entries)
-    let new_scope_env = Scope.scope_check_args(scope, scope_env, args, env, (name, the) => {
+    let new_scope_env = Scope.scope_check_with_args(scope, scope_env, args, env, (name, the) => {
       new_defined.set(name, the)
       new_named_entries.shift()
     })

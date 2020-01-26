@@ -180,7 +180,7 @@ export function infer_ap(
           `arity of pi: ${scope.arity}\n`])
     }
 
-    scope_env = Scope.scope_check_args(scope, scope_env, args, env)
+    scope_env = Scope.scope_check_with_args(scope, scope_env, args, env)
     return evaluate(scope_env, return_type)
   }
 
@@ -196,7 +196,7 @@ export function infer_ap(
             `arity of cl: ${scope.arity}\n`])
       }
 
-      Scope.scope_check_args(scope, scope_env, args, env)
+      Scope.scope_check_with_args(scope, scope_env, args, env)
       return new Value.Type()
     }
 
