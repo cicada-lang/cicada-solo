@@ -1,4 +1,4 @@
 class unit_t {}
-object unit {}
+unit = {}
 k = { x : type, y : type => x }
 @show k(type, unit_t)

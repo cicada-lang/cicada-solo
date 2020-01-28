@@ -46,6 +46,7 @@ export function pretty_exp(exp: Exp.Exp): string {
       s += pretty_scope(scope, "\n")
       s += `=> ${pretty_exp(body)}\n`
     }
+    s += "choice "
     return pretty_flower_block(s)
   }
 
@@ -136,6 +137,7 @@ export function pretty_value(value: Value.Value): string {
       s += pretty_scope(scope, "\n")
       s += `=> ${pretty_value(body)}\n`
     }
+    s += "choice "
     return pretty_flower_block(s)
   }
 
@@ -221,7 +223,7 @@ export function pretty_defined(
   defined: Map<string, { t: Value.Value, value: Value.Value }>,
   delimiter: string,
 ): string {
-   let list: Array<string> = []
+  let list: Array<string> = []
 
   for (let [name, the] of defined) {
     let { t, value } = the

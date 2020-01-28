@@ -1,5 +1,4 @@
 # in ts
-- grammar for old `block_entry`
 - api
 - test
 - remove scala code

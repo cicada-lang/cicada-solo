@@ -1,5 +1,5 @@
 class unit_t {}
-object unit {}
+unit = {}
 
 class nat_t {}
 class zero_t {}

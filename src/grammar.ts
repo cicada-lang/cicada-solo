@@ -15,7 +15,7 @@ import * as Scope from "./scope"
 
 const preserved = [
   "type", "class",
-  "case",
+  "choice", "case",
   "string_t",
 ]
 
@@ -91,37 +91,10 @@ function named_entry(): Rule {
       "given_comma": [identifier, ":", exp, ","],
       "define": [identifier, ":", exp, "=", exp],
       "define_comma": [identifier, ":", exp, "=", exp, ","],
+      "cl": ["class", identifier, "{", scope, "}"],
+      "cl_empty": ["class", identifier, "{", "}"],
     })
 }
-
-// TODO
-// function block_entry(): Rule {
-//   return new Rule(
-//     "block_entry", {
-//       "let": [identifier, "=", exp],
-//       "let_cl": [
-//         "class", identifier, "{",
-//         $(ptc.non_empty_list, given_entry),
-//         "}"],
-//       "let_cl_predefined": [
-//         "class", identifier, "{",
-//         $(ptc.non_empty_list, define_entry),
-//         $(ptc.non_empty_list, given_entry),
-//         "}"],
-//       "let_cl_predefined_empty_given": [
-//         "class", identifier, "{",
-//         $(ptc.non_empty_list, define_entry),
-//         "}"],
-//       "let_cl_empty": [
-//         "class", identifier, "{", "}"],
-//       "let_obj": [
-//         "object", identifier, "{",
-//         $(ptc.non_empty_list, let_entry),
-//         "}"],
-//       "let_obj_empty": ["object", identifier, "{", "}"],
-//       "define": [identifier, ":", exp, "=", exp],
-//     })
-// }
 
 const named_entry_matcher : (tree: AST.Tree) => [string, Scope.Entry.Entry] =
   AST.Node.matcher_with_span<[string, Scope.Entry.Entry]>(
@@ -139,6 +112,10 @@ const named_entry_matcher : (tree: AST.Tree) => [string, Scope.Entry.Entry] =
           [AST.Leaf.word(name), new Scope.Entry.Define(exp_matcher(t), exp_matcher(exp))],
         "define_comma": ([name, , t, , exp, ]) =>
           [AST.Leaf.word(name), new Scope.Entry.Define(exp_matcher(t), exp_matcher(exp))],
+        "cl": ([ , name, , scope, ]) =>
+          [AST.Leaf.word(name), new Scope.Entry.Define(new Exp.Type(), new Exp.Cl(scope_matcher(scope)))],
+        "cl_empty": ([ , name, , ]) =>
+          [AST.Leaf.word(name), new Scope.Entry.Define(new Exp.Type(), new Exp.Cl(new Scope.Scope()))],
       }
     ])
 
@@ -151,7 +128,7 @@ function exp(): Rule {
       "string": [ptc.double_quoted_string],
       "pi": ["{", scope, "-", ">", exp, "}"],
       "fn": ["{", scope, "=", ">", exp, "}"],
-      "fn_case": ["{", $(ptc.non_empty_list, fn_case_clause), "}"],
+      "fn_case": ["choice", "{", $(ptc.non_empty_list, fn_case_clause), "}"],
       "ap": [exp, "(", $(ptc.non_empty_list, arg_entry), ")"],
       "cl": [ "class", "{", scope, "}"],
       "cl_empty": ["class", "{", "}"],
@@ -177,7 +154,7 @@ const exp_matcher: (tree: AST.Tree) => Exp.Exp =
           new Exp.Pi(scope_matcher(scope), exp_matcher(return_type)),
         "fn": ([, scope, , , body, _]) =>
         new Exp.Fn(scope_matcher(scope), exp_matcher(body)) ,
-        "fn_case": ([, fn_case_clause_list, _]) =>
+        "fn_case": ([, , fn_case_clause_list, _]) =>
           new Exp.FnCase(ptc.non_empty_list_matcher(fn_case_clause_matcher)(fn_case_clause_list)),
         "ap": ([target, , arg_entry_list, _]) =>
           new Exp.Ap(

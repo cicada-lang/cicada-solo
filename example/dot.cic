@@ -4,7 +4,7 @@ and_t = class {
   fst : type
   snd : type
 }
-unit_and_unit_t = object {
+unit_and_unit_t = {
   fst = unit_t
   snd = unit_t
 }

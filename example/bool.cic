@@ -20,7 +20,7 @@ false = {
 
 @refuse true : false_t
 
-not : { x : bool_t -> bool_t } = {
+not : { x : bool_t -> bool_t } = choice {
   case x : false_t => true
   case x : true_t => false
 }

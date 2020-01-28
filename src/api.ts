@@ -1,6 +1,7 @@
 import * as Env from "./env"
 import * as Top from "./top"
 import * as Err from "./err"
+import * as pretty_value Err from "./err"
 
 export function run(
   top_list: Array<Top.Top>,
