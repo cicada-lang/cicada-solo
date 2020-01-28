@@ -144,6 +144,9 @@ export function pretty_value(value: Value.Value): string {
     let { defined, scope } = value
     let s = ""
     s += pretty_defined(defined, "\n")
+    if (pretty_defined(defined, "\n") !== "") {
+      s += "\n"
+    }
     s += pretty_scope(scope, "\n")
     return pretty_flower_block(s)
   }

@@ -18,6 +18,7 @@ export function run(
   catch (error) {
     if (error instanceof Err.Report) {
       report_print(error, config)
+      process.exit(1)
     }
 
     else {

@@ -198,3 +198,23 @@ class vector_cons_t {
   tail : vector_t(A, prev)
 }
 ```
+
+
+# fail to check `case vector_cons_t` of `vector_append`
+
+## error
+
+``` scala
+------
+equivalent fail
+s: {
+  prev : {} = check:Fn:m:m#Hw3B_IfwxBAzg8ewuyoTP.prev
+}
+t: check:Fn:m:m#Hw3B_IfwxBAzg8ewuyoTP
+------
+equivalent fail
+unhandled class of Value pair
+s class name: Obj
+t class name: Var
+------
+```

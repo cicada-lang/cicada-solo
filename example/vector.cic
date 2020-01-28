@@ -80,7 +80,6 @@ vector_append : {
 //       A = A
 //       prev = nat_add(m, n).prev
 //       head = x.head
-//       length = nat_add(m, n)
 //       tail = vector_append(A, x.prev, n, x.tail, y)
 //     }
   case

@@ -35,6 +35,7 @@ export class CicadaCommandLine extends CMD.CommandLine {
         console.log(`parsing error, at ${error.span.repr()}`)
         error.span.report_in_context(code)
         console.log(`${error.message}`)
+        process.exit(1)
       }
 
       else {
