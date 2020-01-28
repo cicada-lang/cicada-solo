@@ -1,19 +1,12 @@
 import * as Exp from "./exp"
+import * as Scope from "./scope"
 
 export abstract class Top {}
 
-export class TopLet extends Top {
+export class TopNamedScopeEntry extends Top {
   constructor(
     public name: string,
-    public exp: Exp.Exp,
-  ) { super() }
-}
-
-export class TopDefine extends Top {
-  constructor(
-    public name: string,
-    public t: Exp.Exp,
-    public exp: Exp.Exp,
+    public entry: Scope.Entry.Entry,
   ) { super() }
 }
 

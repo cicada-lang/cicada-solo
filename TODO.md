@@ -1,5 +1,5 @@
 # in ts
-- grammar matchers
+- grammar for old `block_entry`
 - api
 - command line interface
 - test

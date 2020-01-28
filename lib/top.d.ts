@@ -1,16 +1,11 @@
 import * as Exp from "./exp";
+import * as Scope from "./scope";
 export declare abstract class Top {
 }
-export declare class TopLet extends Top {
+export declare class TopNamedScopeEntry extends Top {
     name: string;
-    exp: Exp.Exp;
-    constructor(name: string, exp: Exp.Exp);
-}
-export declare class TopDefine extends Top {
-    name: string;
-    t: Exp.Exp;
-    exp: Exp.Exp;
-    constructor(name: string, t: Exp.Exp, exp: Exp.Exp);
+    entry: Scope.Entry.Entry;
+    constructor(name: string, entry: Scope.Entry.Entry);
 }
 export declare class TopKeywordRefuse extends Top {
     exp: Exp.Exp;
