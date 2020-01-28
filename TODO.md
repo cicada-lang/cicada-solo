@@ -3,7 +3,6 @@
 - test
 - remove scala code
 - add span to `Exp`
-- check `case vector_cons_t` of `vector_append`
 # cicada
 - [equality] we can implementation equality by built-in equality
   maybe we need to built-in (make it an axiom) the following function

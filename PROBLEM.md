@@ -202,6 +202,57 @@ class vector_cons_t {
 
 # fail to check `case vector_cons_t` of `vector_append`
 
+## case
+
+``` scala
+class vector_cons_t {
+  A : type
+  prev : nat_t
+  head : A
+  length = succ(prev)
+  tail : vector_t(A, prev)
+}
+
+one_zeros : vector_cons_t = {
+  A = nat_t
+  prev = zero
+  head = zero
+  length = one
+  tail = {
+    A = nat_t
+    length = zero
+  }
+}
+
+vector_append : {
+  A : type
+  m : nat_t
+  n : nat_t
+  x : vector_t(A, m)
+  y : vector_t(A, n)
+  -> vector_t(A, nat_add(m, n))
+} = choice {
+  case
+    A : type
+    m : succ_t
+    n : nat_t
+    x : vector_cons_t(A, m.prev)
+    y : vector_t(A, n) => {
+      A = A
+      prev = nat_add(m, n).prev
+      head = x.head
+      tail = vector_append(A, x.prev, n, x.tail, y)
+    }
+  case
+    A : type
+    m : zero_t
+    n : nat_t
+    x : vector_null_t(A, m)
+    y : vector_t(A, n)
+      => y
+}
+```
+
 ## error
 
 ``` scala
@@ -217,4 +268,60 @@ unhandled class of Value pair
 s class name: Obj
 t class name: Var
 ------
+```
+
+## solution
+
+It is always true that `succ(x.prev) == x`,
+but is it always true that `{ prev: x.prev } == x`?
+
+Maybe not.
+
+``` scala
+class vector_cons_t {
+  A : type
+  length : succ_t
+  prev = length.prev
+  head : A
+  tail : vector_t(A, prev)
+}
+
+one_zeros : vector_cons_t = {
+  A = nat_t
+  head = zero
+  prev = zero
+  length = one
+  tail = {
+    A = nat_t
+    length = zero
+  }
+}
+
+vector_append : {
+  A : type
+  m : nat_t
+  n : nat_t
+  x : vector_t(A, m)
+  y : vector_t(A, n)
+  -> vector_t(A, nat_add(m, n))
+} = choice {
+  case
+    A : type
+    m : succ_t
+    n : nat_t
+    x : vector_cons_t(A, m)
+    y : vector_t(A, n) => {
+      A = A
+      length = nat_add(m, n)
+      head = x.head
+      tail = vector_append(A, x.prev, n, x.tail, y)
+    }
+  case
+    A : type
+    m : zero_t
+    n : nat_t
+    x : vector_null_t(A, m)
+    y : vector_t(A, n)
+      => y
+}
 ```

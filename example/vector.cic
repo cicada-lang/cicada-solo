@@ -39,16 +39,16 @@ class vector_null_t {
 
 class vector_cons_t {
   A : type
-  prev : nat_t
+  length : succ_t
+  prev = length.prev
   head : A
-  length = succ(prev)
   tail : vector_t(A, prev)
 }
 
 one_zeros : vector_cons_t = {
   A = nat_t
-  prev = zero
   head = zero
+  prev = zero
   length = one
   tail = {
     A = nat_t
@@ -71,17 +71,17 @@ vector_append : {
   y : vector_t(A, n)
   -> vector_t(A, nat_add(m, n))
 } = choice {
-//   case
-//     A : type
-//     m : succ_t
-//     n : nat_t
-//     x : vector_cons_t(A, m.prev)
-//     y : vector_t(A, n) => {
-//       A = A
-//       prev = nat_add(m, n).prev
-//       head = x.head
-//       tail = vector_append(A, x.prev, n, x.tail, y)
-//     }
+  case
+    A : type
+    m : succ_t
+    n : nat_t
+    x : vector_cons_t(A, m)
+    y : vector_t(A, n) => {
+      A = A
+      length = nat_add(m, n)
+      head = x.head
+      tail = vector_append(A, x.prev, n, x.tail, y)
+    }
   case
     A : type
     m : zero_t
