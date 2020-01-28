@@ -1,5 +1,3 @@
-# in ts
-- remove scala code
 - api -- finish
 - add span to `Exp`
 # cicada
