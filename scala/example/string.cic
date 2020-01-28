@@ -1,2 +1,0 @@
-s : string_t = "abc"
-@show s
