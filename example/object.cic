@@ -1,0 +1,6 @@
+obj = {
+  x = type
+  y = type
+}
+
+@show obj

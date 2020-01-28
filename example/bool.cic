@@ -1,0 +1,38 @@
+class bool_t {
+  tag : string_t
+}
+
+class true_t {
+  tag : string_t = "true"
+}
+
+class false_t {
+  tag : string_t = "false"
+}
+
+true = {
+  tag = "true"
+}
+
+false = {
+  tag = "false"
+}
+
+@refuse true : false_t
+
+not : { x : bool_t -> bool_t } = {
+  case x : false_t => true
+  case x : true_t => false
+}
+
+@show bool_t
+@show true_t
+
+@show true
+@show false
+
+@eq not(true) = false
+@eq not(false) = true
+
+@accept true : bool_t
+@accept false : bool_t

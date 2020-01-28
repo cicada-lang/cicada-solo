@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+let { CicadaCommandLine } = require("../lib/cicada")
+let cicada = new CicadaCommandLine()
+cicada.run()

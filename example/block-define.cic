@@ -1,0 +1,4 @@
+unit_t = class {}
+unit : unit_t = {}
+type_id = { A : type => A }
+@show type_id(unit_t)

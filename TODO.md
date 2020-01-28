@@ -1,7 +1,6 @@
 # in ts
 - grammar for old `block_entry`
 - api
-- command line interface
 - test
 - remove scala code
 - add span to `Exp`

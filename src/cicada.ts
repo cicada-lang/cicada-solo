@@ -10,7 +10,7 @@ import * as grammar from "./grammar"
 
 const pkg: any = require("../package.json")
 
-class CicadaCommandLine extends CMD.CommandLine {
+export class CicadaCommandLine extends CMD.CommandLine {
   name(): string {
     return pkg.name
   }
@@ -20,7 +20,7 @@ class CicadaCommandLine extends CMD.CommandLine {
   }
 
   run_code(code: string): void {
-    const lexer = ptc.common_lexer_with_indentation
+    const lexer = ptc.common_lexer
     const partech = new Earley()
     const parser = new Parser(lexer, partech, grammar.top_list())
 
@@ -43,7 +43,3 @@ class CicadaCommandLine extends CMD.CommandLine {
     }
   }
 }
-
-let cicada = new CicadaCommandLine()
-
-cicada.run()

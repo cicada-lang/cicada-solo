@@ -1,0 +1,9 @@
+x = {
+  x : type => x
+}({
+  x : type => x
+}({
+  x : type => x
+}(type)))
+
+@show x

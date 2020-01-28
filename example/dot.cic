@@ -1,0 +1,13 @@
+unit_t = class {}
+unit = {}
+and_t = class {
+  fst : type
+  snd : type
+}
+unit_and_unit_t = object {
+  fst = unit_t
+  snd = unit_t
+}
+fst_unit_t = unit_and_unit_t.fst
+snd_unit_t = unit_and_unit_t.snd
+@show fst_unit_t

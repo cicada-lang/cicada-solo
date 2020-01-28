@@ -2,7 +2,22 @@
 
 function t {
     test_prog_ext node js && \
-        test_prog_ext bash sh
+        test_prog_ext bash sh && \
+        test_cicada
+}
+
+function test_cicada {
+    prog=./bin/cicada
+
+    for file in $(find . | grep "^\./example/" | grep "\.cic$")
+    do
+        echo ""
+        echo "[cicada] $file"
+        if ! time $prog --eval $file
+        then
+            exit 1
+        fi
+    done
 }
 
 function test_prog_ext {

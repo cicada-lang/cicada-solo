@@ -52,12 +52,19 @@ const top_entry_matcher =
 export function top_list(): Rule {
   return new Rule(
     "top_list", {
-      "top_list": [$(ptc.non_empty_list, top_entry)],
+      "top_entry_list": [$(ptc.non_empty_list, top_entry)],
     }
   )
 }
 
-export const top_list_matcher = ptc.non_empty_list_matcher(top_entry_matcher)
+export const top_list_matcher =
+  AST.Node.matcher_with_span<Array<Top.Top>>(
+    span => [
+      "top_list", {
+        "top_entry_list": ([top_entry_list]) =>
+          ptc.non_empty_list_matcher(top_entry_matcher)(top_entry_list),
+      }
+    ])
 
 function scope(): Rule {
   return new Rule(

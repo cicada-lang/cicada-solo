@@ -1,3 +1,4 @@
+import * as Env from "./env"
 import * as Top from "./top"
 import * as Err from "./err"
 
@@ -24,26 +25,16 @@ function report_print(
   report: Err.Report,
   config: Map<string, Array<string>>,
 ): void {
-//   console_print_with_color_when {
-//     config.get("--nocolor") == None
-//   } (Console.RED) {
-//     case () =>
-//       Console.println("------")
-//     report.message_list.foreach {
-//       case message =>
-//         Console.print(s"${message}")
-//       Console.println("------")
-//     }
-//   }
+  console.log(report.message)
 }
 
 function top_list_check_and_evaluate(
   top_list: Array<Top.Top>,
   config: Map<string, Array<string>>,
 ): void {
-//   var local_env = Env(ArrayMap())
+  let local_env = new Env.Env()
 
-//   top_list.foreach {
+  for (let top of top_list) {
 //     case TopLet(name, exp) =>
 //       local_env.lookup_value(name) match {
 //         case Some(value) =>
@@ -164,5 +155,5 @@ function top_list_check_and_evaluate(
 //         throw error
 //     }
 
-//   }
+  }
 }
