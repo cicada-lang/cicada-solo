@@ -2,7 +2,7 @@ import * as Exp from "./exp"
 import * as Value from "./value"
 import * as Env from "./env"
 import * as Scope from "./scope"
-import { ErrorReport } from "./error"
+import * as Err from "./err"
 import { evaluate } from "./evaluate"
 import { infer } from "./infer"
 
@@ -81,7 +81,7 @@ export function readback(value: Value.Value): Exp.Exp {
   }
 
   else {
-    throw new ErrorReport([
+    throw new Err.Report([
       "readback fail\n" +
         `unhandled class of Value: ${value.constructor.name}\n`])
   }
@@ -125,7 +125,7 @@ function scope_readback(
     }
 
     else {
-      throw new ErrorReport([
+      throw new Err.Report([
         "scope_readback fail\n" +
           `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
     }

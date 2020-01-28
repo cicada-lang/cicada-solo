@@ -12,11 +12,13 @@
   "devDependencies": {
     "@types/assert": "^1.4.4",
     "@types/nanoid": "^2.1.0",
+    "@types/node": "^13.5.0",
     "typescript": "^3.7.5"
   },
   "dependencies": {
     "@forchange/basic": "file:deps/basic",
     "@forchange/partech": "file:deps/partech",
+    "commander": "^4.1.0",
     "nanoid": "^2.1.10"
   }
 }

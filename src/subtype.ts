@@ -6,7 +6,7 @@ import * as Scope from "./scope"
 import { equivalent } from "./equivalent"
 import { evaluate } from "./evaluate"
 import { infer } from "./infer"
-import { ErrorReport } from "./error"
+import * as Err from "./err"
 
 export function subtype(s: Value.Value, t: Value.Value): void {
   try {
@@ -30,7 +30,7 @@ export function subtype(s: Value.Value, t: Value.Value): void {
       // NOTE only compare `given` in scope
 
       if (s.scope.arity != t.scope.arity) {
-        throw new ErrorReport([
+        throw new Err.Report([
           "subtype fail between Value.Pi and Value.Pi, arity mismatch\n" +
             `left scope arity: ${s.scope.arity}\n` +
             `right scope arity: ${t.scope.arity}\n`])
@@ -83,7 +83,7 @@ export function subtype(s: Value.Value, t: Value.Value): void {
         }
 
         else {
-          throw new ErrorReport([
+          throw new Err.Report([
             "subtype fail between ValueCl and Value.Cl\n" +
               `missing name in the subtype class's defined\n` +
               `name: ${name}\n`])
@@ -115,14 +115,14 @@ export function subtype(s: Value.Value, t: Value.Value): void {
           }
 
           else {
-            throw new ErrorReport([
+            throw new Err.Report([
               "subtype fail\n" +
                 `unhandled class of Scope.Entry: ${entry.constructor.name}`])
           }
         }
 
         else {
-          throw new ErrorReport([
+          throw new Err.Report([
             "subtype fail\n" +
               `missing field: ${name}`])
         }
@@ -135,7 +135,7 @@ export function subtype(s: Value.Value, t: Value.Value): void {
   }
 
   catch (error) {
-    if (error instanceof ErrorReport) {
+    if (error instanceof Err.Report) {
       throw error.prepend(
         "subtype fail\n" +
           `s: ${pretty.pretty_value(s)}\n` +

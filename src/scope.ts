@@ -5,7 +5,7 @@ import * as util from "./util"
 import { evaluate } from "./evaluate"
 import { check } from "./check"
 import { infer } from "./infer"
-import { ErrorReport } from "./error"
+import * as Err from "./err"
 
 export class Scope {
   constructor(
@@ -155,7 +155,7 @@ export function scope_check_with_args(
     }
 
     else {
-      throw new ErrorReport([
+      throw new Err.Report([
         "scope_check_with_args fail\n" +
           `unhandled class of Entry: ${entry.constructor.name}\n`])
     }
@@ -265,7 +265,7 @@ export function scope_compare_given(
         }
 
         else {
-          throw new ErrorReport([
+          throw new Err.Report([
             "scope_compare_given fail to step left scope\n" +
               `unhandled class of Entry: ${entry.constructor.name}\n`])
         }
@@ -301,7 +301,7 @@ export function scope_compare_given(
         }
 
         else {
-          throw new ErrorReport([
+          throw new Err.Report([
             "scope_compare_given fail to step right scope\n" +
               `unhandled class of Entry: ${entry.constructor.name}\n`])
         }

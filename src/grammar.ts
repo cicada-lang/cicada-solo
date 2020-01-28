@@ -49,9 +49,15 @@ const top_entry_matcher =
       }
     ])
 
-export const top_list: Sym = $(ptc.non_empty_list, top_entry)
+export function top_list(): Rule {
+  return new Rule(
+    "top_list", {
+      "top_list": [$(ptc.non_empty_list, top_entry)],
+    }
+  )
+}
 
-const top_list_matcher = ptc.non_empty_list_matcher(top_entry_matcher)
+export const top_list_matcher = ptc.non_empty_list_matcher(top_entry_matcher)
 
 function scope(): Rule {
   return new Rule(
