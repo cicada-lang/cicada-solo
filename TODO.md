@@ -1,7 +1,6 @@
 # in ts
-- api -- finish
-- test
 - remove scala code
+- api -- finish
 - add span to `Exp`
 # cicada
 - [equality] we can implementation equality by built-in equality

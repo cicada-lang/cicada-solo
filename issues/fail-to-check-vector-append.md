@@ -199,7 +199,6 @@ class vector_cons_t {
 }
 ```
 
-
 # fail to check `case vector_cons_t` of `vector_append`
 
 ## case
