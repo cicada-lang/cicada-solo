@@ -32,7 +32,8 @@ class CicadaCommandLine extends CMD.CommandLine {
 
     catch (error) {
       if (error instanceof ErrorDuringParsing) {
-        console.log(`parsing error, at span: (${error.span.lo}, ${error.span.hi})`)
+        console.log(`parsing error, at ${error.span.repr()}`)
+        error.span.report_in_context(code)
         console.log(`${error.message}`)
       }
 
