@@ -1,11 +1,15 @@
 import * as Env from "./env"
 import * as Top from "./top"
 import * as Err from "./err"
+import * as Scope from "./scope"
+import { evaluate } from "./evaluate"
+import { infer } from "./infer"
+import { check } from "./check"
 import * as pretty from "./pretty"
 
 export function run(
   top_list: Array<Top.Top>,
-  config: Map<string, Array<string>> = new Map(),
+  config: { [key: string]: any },
 ): void {
   try {
     top_list_check_and_evaluate(top_list, config)
@@ -24,137 +28,145 @@ export function run(
 
 function report_print(
   report: Err.Report,
-  config: Map<string, Array<string>>,
+  config: { [key: string]: any },
 ): void {
   console.log(report.message)
 }
 
 function top_list_check_and_evaluate(
   top_list: Array<Top.Top>,
-  config: Map<string, Array<string>>,
+  config: { [key: string]: any },
 ): void {
   let local_env = new Env.Env()
 
   for (let top of top_list) {
-//     case TopLet(name, exp) =>
-//       local_env.lookup_value(name) match {
-//         case Some(value) =>
-//           throw Report(Array(
-//             s"name: ${name} is already defined to value: ${pretty_value(value)}\n"
-//           ))
-//         case None => ()
-//       }
-//     val t = infer(local_env, exp)
-//     val value = evaluate(local_env, exp)
-//     local_env = local_env.ext(name, t, value)
-//     if (config.get("--verbose") != None) {
-//       println(s"let ${name} = ${pretty_exp(exp)}")
-//       console_print_with_color_when {
-//         config.get("--nocolor") == None
-//       } (Console.CYAN) {
-//         case () =>
-//           println(s"let ${name} = ${pretty_value(value)} : ${pretty_value(t)}")
-//         println()
-//       }
-//     }
+    if (top instanceof Top.TopNamedScopeEntry) {
+      let { name, entry } = top
 
-//     case TopDefine(name, t_exp, exp) =>
-//       local_env.lookup_value(name) match {
-//         case Some(value) =>
-//           throw Report(Array(
-//             s"name: ${name} is already defined to value: ${pretty_value(value)}\n"
-//           ))
-//         case None => ()
-//       }
-//     val t_expected = evaluate(local_env, t_exp)
-//     check(local_env, exp, t_expected)
-//     local_env = local_env.ext_rec(name, t_exp, exp, local_env)
-//     val value = evaluate(local_env, exp)
-//     if (config.get("--verbose") != None) {
-//       println(s"define ${name} : ${pretty_exp(t_exp)} = ${pretty_exp(exp)}")
-//       console_print_with_color_when {
-//         config.get("--nocolor") == None
-//       } (Console.CYAN) {
-//         case () =>
-//           println(s"define ${name} : ${pretty_exp(t_exp)} = ${pretty_value(value)}")
-//         println()
-//       }
-//     }
+      if (entry instanceof Scope.Entry.Let) {
+        let exp = entry.value
 
-//     case TopKeywordRefuse(exp, t_exp) =>
-//       val t_expected = evaluate(local_env, t_exp)
-//     Try {
-//       check(local_env, exp, t_expected)
-//       println("@refuse")
-//       println(s"v: ${pretty_value(evaluate(local_env, exp))}")
-//       println(s"t_expected: ${pretty_value(t_expected)}")
-//       println("@refuse raw Value")
-//       println(s"v: ${evaluate(local_env, exp)}")
-//       println(s"t_expected: ${t_expected}")
-//     } match {
-//       case Success(()) =>
-//         throw Report(Array(
-//           s"should refuse the following type membership assertion\n" +
-//             s"@refuse ${pretty_exp(exp)} : ${pretty_exp(t_exp)}\n"
-//         ))
-//       case Failure(_report: Report) =>
-//         if (config.get("--verbose") != None) {
-//           println(s"@refuse ${pretty_exp(exp)} : ${pretty_exp(t_exp)}")
-//         }
-//       case Failure(error) =>
-//         throw error
-//     }
+        let found = local_env.lookup_value(name)
+        if (found !== undefined) {
+          throw new Err.Report([
+            `name: ${name} is already defined to value: ${pretty.pretty_value(found)}\n`])
+        }
+        let t = infer(local_env, exp)
+        let value = evaluate(local_env, exp)
+        local_env = local_env.ext(name, { t, value })
+        if (config["verbose"] !== undefined) {
+          console.log(`${name} = ${pretty.pretty_exp(exp)}`)
+          console.log(`${name} = ${pretty.pretty_value(value)} : ${pretty.pretty_value(t)}`)
+          console.log()
+        }
+      }
 
-//     case TopKeywordAccept(exp, t_exp) =>
-//       val t_expected = evaluate(local_env, t_exp)
-//     Try {
-//       check(local_env, exp, t_expected)
-//     } match {
-//       case Success(()) =>
-//         if (config.get("--verbose") != None) {
-//           println(s"@accept ${pretty_exp(exp)} : ${pretty_exp(t_exp)}")
-//         }
-//       case Failure(report: Report) =>
-//         report_print(report, config)
-//       throw Report(Array(
-//         s"should accept the following type membership assertion\n" +
-//           s"@accept ${pretty_exp(exp)} : ${pretty_exp(t_exp)}\n"
-//       ))
-//       case Failure(error) =>
-//         throw error
-//     }
+      else if (entry instanceof Scope.Entry.Given) {
+        throw new Error(
+          "run fail\n" +
+            `can not handle top level Entry.Given\n`)
+      }
 
-//     case TopKeywordShow(exp) =>
-//       val t = infer(local_env, exp)
-//     val value = evaluate(local_env, exp)
-//     println(s"@show ${pretty_exp(exp)}")
-//     console_print_with_color_when {
-//       config.get("--nocolor") == None
-//     } (Console.CYAN) {
-//       case () =>
-//         println(s"@show ${pretty_value(value)} : ${pretty_value(t)}")
-//       println()
-//     }
+      else if (entry instanceof Scope.Entry.Define) {
+        let t_exp = entry.t
+        let exp = entry.value
+        let found = local_env.lookup_value(name)
+        if (found !== undefined) {
+          throw new Err.Report([
+            `name: ${name} is already defined to value: ${pretty.pretty_value(found)}\n`])
+        }
+        let t_expected = evaluate(local_env, t_exp)
+        check(local_env, exp, t_expected)
+        local_env = local_env.ext_rec(name, { t: t_exp, value: exp, env: local_env })
+        let value = evaluate(local_env, exp)
+        if (config["verbose"] !== undefined) {
+          console.log(`${name} : ${pretty.pretty_exp(t_exp)} = ${pretty.pretty_exp(exp)}`)
+          console.log(`${name} : ${pretty.pretty_exp(t_exp)} = ${pretty.pretty_value(value)}`)
+          console.log()
+        }
+      }
 
-//     case TopKeywordEq(rhs: Exp, lhs: Exp) =>
-//       infer(local_env, rhs)
-//     infer(local_env, lhs)
-//     Try {
-//       equivalent(evaluate(local_env, rhs), evaluate(local_env, lhs))
-//     } match {
-//       case Success(()) =>
-//         if (config.get("--verbose") != None) {
-//           println(s"@eq ${pretty_exp(rhs)} = ${pretty_exp(lhs)}")
-//         }
-//       case Failure(report: Report) =>
-//         report_print(report, config)
-//       throw Report(Array(
-//         s"should accept the following equivalent assertion\n" +
-//           s"@eq ${pretty_exp(rhs)} = ${pretty_exp(lhs)}\n"
-//       ))
-//       case Failure(error) =>
-//         throw error
-//     }
+      else {
+        throw new Error(
+          "run fail\n" +
+            `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+      }
+    }
+
+    //     case TopKeywordRefuse(exp, t_exp) =>
+    //       let t_expected = evaluate(local_env, t_exp)
+    //     Try {
+    //       check(local_env, exp, t_expected)
+    //       console.log("@refuse")
+    //       console.log("v: ${pretty.pretty_value(evaluate(local_env, exp))}")
+    //       console.log("t_expected: ${pretty.pretty_value(t_expected)}")
+    //       console.log("@refuse raw Value")
+    //       console.log("v: ${evaluate(local_env, exp)}")
+    //       console.log("t_expected: ${t_expected}")
+    //     } match {
+    //       case Success(()) =>
+    //         throw Report(Array(
+    //           "should refuse the following type membership assertion\n" +
+    //             "@refuse ${pretty.pretty_exp(exp)} : ${pretty.pretty_exp(t_exp)}\n"
+    //         ))
+    //       case Failure(_report: Report) =>
+    //         if (config.get("--verbose") !== undefined) {
+    //           console.log("@refuse ${pretty.pretty_exp(exp)} : ${pretty.pretty_exp(t_exp)}")
+    //         }
+    //       case Failure(error) =>
+    //         throw error
+    //     }
+
+    //     case TopKeywordAccept(exp, t_exp) =>
+    //       let t_expected = evaluate(local_env, t_exp)
+    //     Try {
+    //       check(local_env, exp, t_expected)
+    //     } match {
+    //       case Success(()) =>
+    //         if (config.get("--verbose") !== undefined) {
+    //           console.log("@accept ${pretty.pretty_exp(exp)} : ${pretty.pretty_exp(t_exp)}")
+    //         }
+    //       case Failure(report: Report) =>
+    //         report_print(report, config)
+    //       throw Report(Array(
+    //         "should accept the following type membership assertion\n" +
+    //           "@accept ${pretty.pretty_exp(exp)} : ${pretty.pretty_exp(t_exp)}\n"
+    //       ))
+    //       case Failure(error) =>
+    //         throw error
+    //     }
+
+    //     case TopKeywordShow(exp) =>
+    //       let t = infer(local_env, exp)
+    //     let value = evaluate(local_env, exp)
+    //     console.log("@show ${pretty.pretty_exp(exp)}")
+    //     console_print_with_color_when {
+    //       config.get("--nocolor") == None
+    //     } (Console.CYAN) {
+    //       case () =>
+    //         console.log("@show ${pretty.pretty_value(value)} : ${pretty.pretty_value(t)}")
+    //       console.log()
+    //     }
+
+    //     case TopKeywordEq(rhs: Exp, lhs: Exp) =>
+    //       infer(local_env, rhs)
+    //     infer(local_env, lhs)
+    //     Try {
+    //       equivalent(evaluate(local_env, rhs), evaluate(local_env, lhs))
+    //     } match {
+    //       case Success(()) =>
+    //         if (config.get("--verbose") !== undefined) {
+    //           console.log("@eq ${pretty.pretty_exp(rhs)} = ${pretty.pretty_exp(lhs)}")
+    //         }
+    //       case Failure(report: Report) =>
+    //         report_print(report, config)
+    //       throw Report(Array(
+    //         "should accept the following equivalent assertion\n" +
+    //           "@eq ${pretty.pretty_exp(rhs)} = ${pretty.pretty_exp(lhs)}\n"
+    //       ))
+    //       case Failure(error) =>
+    //         throw error
+    //     }
 
   }
 }

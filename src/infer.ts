@@ -173,7 +173,7 @@ export function infer_ap(
 
     let { scope, return_type, scope_env } = t_infered
 
-    if (args.length !-= scope.arity) {
+    if (args.length !== scope.arity) {
       throw new Err.Report([
         "args and pi type arity mismatch\n" +
           `arity of args: ${args.length}\n` +

@@ -6,18 +6,13 @@ import commander from "commander"
 export abstract class CommandLine {
   abstract name(): string
   abstract version(): string
-  abstract run_code(code: string): void
+  abstract run_code(code: string, config: { [key: string]: any }): void
 
-  run_file(file_path: string): void {
+  run_file(file_path: string, config: { [key: string]: any }): void {
     file_path = path.join(process.cwd(), file_path)
 
-    fs.readFile(file_path, { encoding: "utf-8" }, (error, code) => {
-      if (!error) {
-        this.run_code(code)
-      } else {
-        console.log(error)
-      }
-    })
+    let code = fs.readFileSync(file_path, { encoding: "utf-8" })
+    this.run_code(code, config)
   }
 
   run(): void {
@@ -25,7 +20,8 @@ export abstract class CommandLine {
 
     program
       .name(this.name())
-      .version(this.version())
+      .version(this.version(), "-v, --version", "output the current version")
+      .option("--verbose", "print more during eval")
       .option(
         "-e, --eval <file>", "file to eval",
         (file: string, files: Array<string>) => files.concat([file]),
@@ -35,7 +31,7 @@ export abstract class CommandLine {
     let opts = program.opts()
 
     for (let file of opts.eval) {
-      this.run_file(file)
+      this.run_file(file, opts)
     }
   }
 

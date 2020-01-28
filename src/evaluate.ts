@@ -230,11 +230,15 @@ export function evaluate_ap(
     let { scope, body, scope_env } = target_value
 
     if (scope.arity !== args.length) {
+      let args_str = args.map(pretty.pretty_exp).join(", ")
       throw new Err.Report([
         "evaluate_ap fail\n" +
           "Value.Fn arity mismatch\n" +
           `scope.arity: ${scope.arity}\n` +
-          `args.length: ${args.length}\n`])
+          `args.length: ${args.length}\n` +
+          `target: ${pretty.pretty_exp(target)}\n` +
+          `target_value: ${pretty.pretty_value(target_value)}\n` +
+          `args: (${args_str})\n`])
     }
 
     let new_scope_env = Scope.scope_check_with_args(scope, scope_env, args, env)

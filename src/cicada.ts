@@ -19,7 +19,7 @@ export class CicadaCommandLine extends CMD.CommandLine {
     return pkg.version
   }
 
-  run_code(code: string): void {
+  run_code(code: string, config: { [key: string]: any }): void {
     const lexer = ptc.common_lexer
     const partech = new Earley()
     const parser = new Parser(lexer, partech, grammar.top_list())
@@ -27,7 +27,7 @@ export class CicadaCommandLine extends CMD.CommandLine {
     try {
       let tree = parser.parse(code)
       let top_list: Array<Top.Top> = grammar.top_list_matcher(tree)
-      API.run(top_list)
+      API.run(top_list, config)
     }
 
     catch (error) {

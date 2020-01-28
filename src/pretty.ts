@@ -1,3 +1,4 @@
+import assert from "assert"
 import * as Exp from "./exp"
 import * as Value from "./value"
 import * as Scope from "./scope"
@@ -26,7 +27,7 @@ export function pretty_exp(exp: Exp.Exp): string {
     let { scope, return_type } = exp
     let s = ""
     s += pretty_scope(scope, "\n")
-    s += `-> ${pretty_exp(return_type)}\n`
+    s += ` -> ${pretty_exp(return_type)}`
     return pretty_flower_block(s)
   }
 
@@ -34,20 +35,19 @@ export function pretty_exp(exp: Exp.Exp): string {
     let { scope, body } = exp
     let s = ""
     s += pretty_scope(scope, "\n")
-    s += `=> ${pretty_exp(body)}\n`
+    s += ` => ${pretty_exp(body)}`
     return pretty_flower_block(s)
   }
 
   else if (exp instanceof Exp.FnCase) {
     let { cases } = exp
     let s = ""
-    for (let fn of cases) {
+    s += cases.map(fn => {
       let { scope, body } = fn
-      s += pretty_scope(scope, "\n")
-      s += `=> ${pretty_exp(body)}\n`
-    }
-    s += "choice "
-    return pretty_flower_block(s)
+      let scope_str = pretty_scope(scope, "\n")
+      return `case ${scope_str} => ${pretty_exp(body)}`
+    }).join("\n")
+    return `choice ${pretty_flower_block(s)}`
   }
 
   else if (exp instanceof Exp.Ap) {
@@ -117,7 +117,7 @@ export function pretty_value(value: Value.Value): string {
     let { scope, return_type } = value
     let s = ""
     s += pretty_scope(scope, "\n")
-    s += `-> ${pretty_value(return_type)}\n`
+    s += ` -> ${pretty_exp(return_type)}`
     return pretty_flower_block(s)
   }
 
@@ -125,20 +125,19 @@ export function pretty_value(value: Value.Value): string {
     let { scope, body } = value
     let s = ""
     s += pretty_scope(scope, "\n")
-    s += `=> ${pretty_value(body)}\n`
+    s += ` => ${pretty_exp(body)}`
     return pretty_flower_block(s)
   }
 
   else if (value instanceof Value.FnCase) {
     let { cases } = value
     let s = ""
-    for (let fn of cases) {
+    s += cases.map(fn => {
       let { scope, body } = fn
-      s += pretty_scope(scope, "\n")
-      s += `=> ${pretty_value(body)}\n`
-    }
-    s += "choice "
-    return pretty_flower_block(s)
+      let scope_str = pretty_scope(scope, "\n")
+      return `case ${scope_str} => ${pretty_exp(body)}`
+    }).join("\n")
+    return `choice ${pretty_flower_block(s)}`
   }
 
   else if (value instanceof Value.Cl) {
@@ -183,7 +182,8 @@ export function pretty_value(value: Value.Value): string {
   else {
     throw new Error(
       "pretty_value fail\n" +
-        `unhandled class of Value: ${value.constructor.name}`)
+        `unhandled class of Value: ${value.constructor.name}\n` +
+        `value: ${JSON.stringify(value, null, 2)}\n`)
   }
 }
 

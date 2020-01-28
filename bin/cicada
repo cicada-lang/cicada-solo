@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/node --trace-uncaught
 
 let { CicadaCommandLine } = require("../lib/cicada")
 let cicada = new CicadaCommandLine()

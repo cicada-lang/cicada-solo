@@ -1,5 +1,4 @@
 # in ts
-- api
 - test
 - remove scala code
 - add span to `Exp`

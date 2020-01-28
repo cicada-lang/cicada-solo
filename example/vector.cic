@@ -41,7 +41,7 @@ class vector_cons_t {
   A : type
   prev : nat_t
   head : A
-  length : succ_t(prev)
+  length = succ(prev)
   tail : vector_t(A, prev)
 }
 
@@ -71,18 +71,18 @@ vector_append : {
   y : vector_t(A, n)
   -> vector_t(A, nat_add(m, n))
 } = choice {
-  case
-    A : type
-    m : succ_t
-    n : nat_t
-    x : vector_cons_t(A, m.prev)
-    y : vector_t(A, n) => {
-      A = A
-      prev = nat_add(m, n).prev
-      head = x.head
-      length = nat_add(m, n)
-      tail = vector_append(A, x.prev, n, x.tail, y)
-    }
+//   case
+//     A : type
+//     m : succ_t
+//     n : nat_t
+//     x : vector_cons_t(A, m.prev)
+//     y : vector_t(A, n) => {
+//       A = A
+//       prev = nat_add(m, n).prev
+//       head = x.head
+//       length = nat_add(m, n)
+//       tail = vector_append(A, x.prev, n, x.tail, y)
+//     }
   case
     A : type
     m : zero_t
