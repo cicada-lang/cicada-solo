@@ -35,6 +35,10 @@ four = succ(three)
 five = succ(four)
 six = succ(five)
 
+@accept zero : nat_t
+@accept zero : zero_t
+@accept one : nat_t
+
 @accept one : succ_t
 @accept one : succ_t(zero)
 @refuse zero : succ_t

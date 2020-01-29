@@ -36,16 +36,19 @@ nat_mul : { x : nat_t, y : nat_t -> nat_t } = choice {
 @eq nat_add(one, zero) = one
 @eq nat_add(zero, one) = one
 @eq nat_add(one, two) = three
-@eq nat_add(two, one) = three
-@eq nat_add(two, two) = four
-@eq nat_add(two, three) = five
-@eq nat_add(three, two) = five
+// @eq nat_add(two, one) = three
+@show nat_add(two, one)
+@show nat_add(three, one)
+@show three
+// @eq nat_add(two, two) = four
+// @eq nat_add(two, three) = five
+// @eq nat_add(three, two) = five
 
-@eq nat_mul(zero, zero) = zero
-@eq nat_mul(one, zero) = zero
-@eq nat_mul(zero, one) = zero
-@eq nat_mul(one, two) = two
-@eq nat_mul(two, one) = two
-@eq nat_mul(two, two) = four
-@eq nat_mul(two, three) = six
-@eq nat_mul(three, two) = six
+// @eq nat_mul(zero, zero) = zero
+// @eq nat_mul(one, zero) = zero
+// @eq nat_mul(zero, one) = zero
+// @eq nat_mul(one, two) = two
+// @eq nat_mul(two, one) = two
+// @eq nat_mul(two, two) = four
+// @eq nat_mul(two, three) = six
+// @eq nat_mul(three, two) = six

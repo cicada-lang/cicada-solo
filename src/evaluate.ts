@@ -1,3 +1,4 @@
+import assert from "assert"
 import * as Exp from "./exp"
 import * as Value from "./value"
 import * as Env from "./env"
@@ -47,7 +48,7 @@ export function evaluate(
 
   else if (exp instanceof Exp.Ap) {
     let { target, args } = exp
-    return evaluate_ap(env, target, args)
+    return eliminate_ap(env, evaluate(env, target), args)
   }
 
   else if (exp instanceof Exp.Cl) {
@@ -73,7 +74,8 @@ export function evaluate(
   else {
     throw new Err.Report([
       "evaluate fail\n" +
-        `unhandled class of Exp: ${exp.constructor.name}\n`])
+        `unhandled class of Exp: ${exp.constructor.name}\n` +
+        `exp: ${JSON.stringify(exp, null, 2)}\n`])
   }
 }
 
@@ -215,29 +217,26 @@ export function evaluate_block(
   return evaluate(local_env, body)
 }
 
-export function evaluate_ap(
+export function eliminate_ap(
   env: Env.Env,
-  target: Exp.Exp,
+  target: Value.Value,
   args: Array<Exp.Exp>,
 ): Value.Value {
-  let target_value = evaluate(env, target)
-
-  if (target_value instanceof Value.Neutral.Neutral) {
-    return new Value.Neutral.Ap(target_value, args.map(arg => evaluate(env, arg)))
+  if (target instanceof Value.Neutral.Neutral) {
+    return new Value.Neutral.Ap(target, args.map(arg => evaluate(env, arg)))
   }
 
-  else if (target_value instanceof Value.Fn) {
-    let { scope, body, scope_env } = target_value
+  else if (target instanceof Value.Fn) {
+    let { scope, body, scope_env } = target
 
     if (scope.arity !== args.length) {
       let args_str = args.map(pretty.pretty_exp).join(", ")
       throw new Err.Report([
-        "evaluate_ap fail\n" +
+        "eliminate_ap fail\n" +
           "Value.Fn arity mismatch\n" +
           `scope.arity: ${scope.arity}\n` +
           `args.length: ${args.length}\n` +
-          `target: ${pretty.pretty_exp(target)}\n` +
-          `target_value: ${pretty.pretty_value(target_value)}\n` +
+          `target: ${pretty.pretty_value(target)}\n` +
           `args: (${args_str})\n`])
     }
 
@@ -246,8 +245,8 @@ export function evaluate_ap(
     return evaluate(new_scope_env, body)
   }
 
-  else if (target_value instanceof Value.FnCase) {
-    let { cases } = target_value
+  else if (target instanceof Value.FnCase) {
+    let { cases } = target
 
     // NOTE find the first checked case
     let fn = cases.find(fn => {
@@ -255,7 +254,7 @@ export function evaluate_ap(
       try {
         if (scope.arity !== args.length) {
           throw new Err.Report([
-            "evaluate_ap fail\n" +
+            "eliminate_ap fail\n" +
               "Value.FnCase arity mismatch\n" +
               `scope.arity: ${scope.arity}\n` +
               `args.length: ${args.length}\n`])
@@ -278,24 +277,26 @@ export function evaluate_ap(
 
     if (fn === undefined) {
       let s = args.map(pretty.pretty_exp).join(", ")
+      let v = args.map(arg => pretty.pretty_value(evaluate(env, arg))).join(", ")
       throw new Err.Report([
-        "evaluate_ap fail\n" +
+        "eliminate_ap fail\n" +
           "Value.FnCase mismatch\n" +
-          `target_value: ${pretty.pretty_value(target_value)}\n` +
-          `args: (${s})\n`])
+          `target: ${pretty.pretty_value(target)}\n` +
+          `args: (${s})\n` +
+          `arg values: (${v})\n`])
     }
 
     else {
-      return evaluate_ap(env, fn, args)
+      return eliminate_ap(env, fn, args)
     }
   }
 
-  else if (target_value instanceof Value.Cl) {
-    let { defined, scope, scope_env } = target_value
+  else if (target instanceof Value.Cl) {
+    let { defined, scope, scope_env } = target
 
     if (scope.arity < args.length) {
       throw new Err.Report([
-        "evaluate_ap fail\n" +
+        "eliminate_ap fail\n" +
           "too many arguments\n" +
           `scope.arity: ${scope.arity}\n` +
           `args.length: ${args.length}\n`])
@@ -316,9 +317,9 @@ export function evaluate_ap(
 
   else {
     throw new Err.Report([
-      "evaluate_ap fail\n" +
+      "eliminate_ap fail\n" +
         "expecting a Value class that can be applied as function\n" +
-        `while found Value of class: ${target_value.constructor.name}\n`])
+        `while found Value of class: ${target.constructor.name}\n`])
   }
 }
 

@@ -22,7 +22,7 @@ export declare class TopKeywordShow extends Top {
     constructor(exp: Exp.Exp);
 }
 export declare class TopKeywordEq extends Top {
-    rhs: Exp.Exp;
     lhs: Exp.Exp;
-    constructor(rhs: Exp.Exp, lhs: Exp.Exp);
+    rhs: Exp.Exp;
+    constructor(lhs: Exp.Exp, rhs: Exp.Exp);
 }

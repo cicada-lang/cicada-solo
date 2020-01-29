@@ -44,7 +44,7 @@ export function pretty_exp(exp: Exp.Exp): string {
     let s = ""
     s += cases.map(fn => {
       let { scope, body } = fn
-      let scope_str = pretty_scope(scope, "\n")
+      let scope_str = pretty_scope(scope, ", ")
       return `case ${scope_str} => ${pretty_exp(body)}`
     }).join("\n")
     return `choice ${pretty_flower_block(s)}`
@@ -134,7 +134,7 @@ export function pretty_value(value: Value.Value): string {
     let s = ""
     s += cases.map(fn => {
       let { scope, body } = fn
-      let scope_str = pretty_scope(scope, "\n")
+      let scope_str = pretty_scope(scope, ", ")
       return `case ${scope_str} => ${pretty_exp(body)}`
     }).join("\n")
     return `choice ${pretty_flower_block(s)}`

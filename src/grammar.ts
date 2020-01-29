@@ -44,8 +44,8 @@ const top_entry_matcher =
           new Top.TopKeywordAccept(exp_matcher(exp), exp_matcher(t)),
         "@show": ([, , exp]) =>
           new Top.TopKeywordShow(exp_matcher(exp)),
-        "@eq": ([, , rhs, , lhs]) =>
-          new Top.TopKeywordEq(exp_matcher(rhs), exp_matcher(lhs)),
+        "@eq": ([, , lhs, , rhs]) =>
+          new Top.TopKeywordEq(exp_matcher(lhs), exp_matcher(rhs)),
       }
     ])
 

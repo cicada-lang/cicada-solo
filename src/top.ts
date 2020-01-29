@@ -32,7 +32,7 @@ export class TopKeywordShow extends Top {
 
 export class TopKeywordEq extends Top {
   constructor(
-    public rhs: Exp.Exp,
     public lhs: Exp.Exp,
+    public rhs: Exp.Exp,
   ) { super() }
 }
