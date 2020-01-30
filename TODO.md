@@ -1,4 +1,3 @@
-- use `The` in `scope` and `check`
 # cicada
 - [equality] we can implementation equality by built-in equality
   maybe we need to built-in (make it an axiom) the following function

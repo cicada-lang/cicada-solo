@@ -63,7 +63,7 @@ export function evaluate(
 
   else if (exp instanceof Exp.Dot) {
     let { target, field_name } = exp
-    return evaluate_dot(env, target, field_name)
+    return eliminate_dot(env, evaluate(env, target), field_name)
   }
 
   else if (exp instanceof Exp.Block) {
@@ -107,7 +107,9 @@ export function evaluate_obj(
     else if (entry instanceof Scope.Entry.Given) {
       throw new Err.Report([
         "evaluate_obj fail\n" +
-          `scope of Exp.Obj should not contain Entry.Given\n`])
+          `scope of Exp.Obj should not contain Entry.Given\n` +
+          `scope: ${pretty.pretty_scope(scope, ", ")}\n` +
+          `name: ${name}\n`])
     }
 
     else if (entry instanceof Scope.Entry.Define) {
@@ -200,7 +202,7 @@ export function evaluate_block(
     else if (entry instanceof Scope.Entry.Given) {
       throw new Err.Report([
         "evaluate_block fail\n" +
-          `scope of Exp.Obj should not contain Entry.Given\n`])
+          `scope of block should not contain Entry.Given\n`])
     }
 
     else if (entry instanceof Scope.Entry.Define) {
@@ -227,6 +229,11 @@ export function eliminate_ap(
   target: Value.Value,
   args: Array<Exp.Exp>,
 ): Value.Value {
+  if (target instanceof Value.The) {
+    let the = target
+    return eliminate_ap(env, the.value, args)
+  }
+
   if (target instanceof Value.Neutral.Neutral) {
     return new Value.Neutral.Ap(target, args.map(arg => evaluate(env, arg)))
   }
@@ -277,9 +284,9 @@ export function eliminate_ap(
             console.log("case:", pretty.pretty_value(fn))
             console.log(error.message)
             console.log("env:", env)
-            console.log("<env>")
-            console.log(pretty.pretty_env(env, "\n"))
-            console.log("</env>")
+//             console.log("<env>")
+//             console.log(pretty.pretty_env(env, "\n"))
+//             console.log("</env>")
             console.log("</error>")
           }
           return false
@@ -342,37 +349,112 @@ export function eliminate_ap(
   }
 }
 
-export function evaluate_dot(
+export function eliminate_dot(
   env: Env.Env,
-  target: Exp.Exp,
+  target: Value.Value,
   field_name: string,
 ): Value.Value {
-  let target_value = evaluate(env, target)
-
-  if (target_value instanceof Value.Neutral.Neutral) {
-    return new Value.Neutral.Dot(target_value, field_name)
+  if (target instanceof Value.The) {
+    let the = target
+    return new Value.The(
+      eliminate_dot(env, the.t, field_name),
+      eliminate_dot(env, the.value, field_name))
   }
 
-  else if (target_value instanceof Value.Obj) {
-    let { defined } = target_value
+  if (target instanceof Value.Neutral.Neutral) {
+    return new Value.Neutral.Dot(target, field_name)
+  }
+
+  else if (target instanceof Value.Obj) {
+    let { defined } = target
     let the = defined.get(field_name)
 
-    if (the === undefined) {
-      throw new Err.Report([
-        "evaluate_dot fail\n" +
-          `missing field_name: ${field_name}\n` +
-          `target_value: ${pretty.pretty_value(target_value)}\n`])
+    if (the !== undefined) {
+      return the.value
     }
 
     else {
-      return the.value
+      throw new Err.Report([
+        "eliminate_dot fail\n" +
+          "on Value.Obj\n" +
+          `missing field_name: ${field_name}\n` +
+          `target: ${pretty.pretty_value(target)}\n`])
     }
+  }
+
+  else if (target instanceof Value.Cl) {
+    let { scope, defined, scope_env } = target
+
+    let the = defined.get(field_name)
+    if (the !== undefined) {
+      return the.t
+    }
+
+    let type_map = scope_to_type_map(scope, scope_env)
+    let t = type_map.get(field_name)
+    if (t !== undefined) {
+      return t
+    }
+
+    throw new Err.Report([
+      "eliminate_dot fail\n" +
+        "on Value.Cl\n" +
+        `missing field_name: ${field_name}\n` +
+        `target: ${pretty.pretty_value(target)}\n`])
   }
 
   else {
     throw new Err.Report([
-      "evaluate_dot fail\n" +
+      "eliminate_dot fail\n" +
         "expecting Value.Obj\n" +
-        `while found Value of class: ${target_value.constructor.name}\n`])
+        `while found Value of class: ${target.constructor.name}\n`])
   }
+}
+
+export function scope_to_type_map(
+  scope: Scope.Scope,
+  scope_env: Env.Env,
+): Map<string, Value.Value> {
+  let type_map = new Map()
+
+  for (let [name, entry] of scope.named_entries) {
+    if (entry instanceof Scope.Entry.Let) {
+      let { value } = entry
+      let the = {
+        t: infer(scope_env, value),
+        value: evaluate(scope_env, value),
+      }
+      type_map.set(name, the.t)
+      scope_env = scope_env.ext(name, the)
+    }
+
+    else if (entry instanceof Scope.Entry.Given) {
+      let { t } = entry
+      let t_value = evaluate(scope_env, t)
+      let the = {
+        t: t_value,
+        value: new Value.The(t_value, new Value.Neutral.Var(name)),
+      }
+      type_map.set(name, the.t)
+      scope_env = scope_env.ext(name, the)
+    }
+
+    else if (entry instanceof Scope.Entry.Define) {
+      let { t, value } = entry
+      let the = {
+        t: evaluate(scope_env, t),
+        value: evaluate(scope_env, value),
+      }
+      type_map.set(name, the.t)
+      scope_env = scope_env.ext(name, the)
+    }
+
+    else {
+      throw new Error(
+        "scope_to_type_map fail\n" +
+          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+    }
+  }
+
+  return type_map
 }

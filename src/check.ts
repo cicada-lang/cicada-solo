@@ -181,6 +181,8 @@ export function check_fn(
     let local_env = env
     let scope_env = pi.scope_env
     for (let i = 0; i < scope.arity; i++) {
+      // TODO scope of pi should also be able to contain let and define
+      //   we should not use Scope.entry_to_type
       let [pi_arg_name, pi_arg_entry] = pi.scope.named_entries[i]
       let [fn_arg_name, fn_arg_entry] = scope.named_entries[i]
       let pi_arg_type_value = Scope.entry_to_type(pi_arg_entry, scope_env)
@@ -189,14 +191,17 @@ export function check_fn(
 
       local_env = local_env.ext(fn_arg_name, {
         t: fn_arg_type_value,
-        value: new Value.Neutral.Var(fn_arg_name),
+        value: new Value.The(fn_arg_type_value, new Value.Neutral.Var(fn_arg_name)),
       })
 
       scope_env = scope_env.ext(pi_arg_name, {
         t: fn_arg_type_value,
-        value: new Value.Neutral.Var(pi_arg_name),
+        value: new Value.The(fn_arg_type_value, new Value.Neutral.Var(pi_arg_name)),
       })
 
+      // NOTE we need to use unique_var as unification here
+
+      // TODO
       // let unique_var = util.unique_var_from(
       //   `check:Fn:${pi_arg_name}:${fn_arg_name}`)
       // local_env = local_env.ext(fn_arg_name, { t: fn_arg_type_value, value: unique_var })

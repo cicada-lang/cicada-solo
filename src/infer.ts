@@ -17,9 +17,11 @@ export function infer(
       let { name } = exp
       let t = env.lookup_type(name)
       if (t === undefined) {
+        // throw new Err.Report([
+        //   `can not find var: ${name} in env:\n` +
+        //   `<env>${pretty.pretty_env(env, "\n")}</env>\n`])
         throw new Err.Report([
-          `can not find var: ${name} in env:\n` +
-          `<env>${pretty.pretty_env(env, "\n")}</env>\n`])
+          `can not find var: ${name} in env:\n`])
       }
       else {
         return t
@@ -137,7 +139,7 @@ export function infer(
     else if (exp instanceof Exp.The) {
       let { t, value } = exp
       let t_value = evaluate(env, t)
-      check(env, value, t_value)
+      // check(env, value, t_value) // TODO why fail
       return t_value
     }
 
@@ -187,8 +189,23 @@ export function infer_ap(
           `arity of pi: ${scope.arity}\n`])
     }
 
-    scope_env = Scope.scope_check_with_args(scope, scope_env, args, env)
-    return evaluate(scope_env, return_type)
+    try {
+      scope_env = Scope.scope_check_with_args(scope, scope_env, args, env)
+      return evaluate(scope_env, return_type)
+    }
+
+    catch (error) {
+      if (error instanceof Err.Report) {
+      throw error.prepend(
+        "infer_ap fail on Value.Pi\n" +
+          `target: ${pretty.pretty_exp(target)}\n` +
+          `infered type: ${pretty.pretty_value(t_infered)}\n` +
+          `args: ${args.map(pretty.pretty_exp).join(", ")}\n`)
+      }
+      else {
+        throw error
+      }
+    }
   }
 
   else if (t_infered instanceof Value.Type) {

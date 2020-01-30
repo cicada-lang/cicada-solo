@@ -201,11 +201,8 @@ export function scope_check_with_args_for_fn(
       let { t } = entry
       let t_value = evaluate(scope_env, t)
 
+      // check(env, arg, t_value)
       let arg_value = evaluate(env, arg) // NOTE use the original `env`
-      // NOTE we need to readback value here
-      //   maybe we need `the`
-      //   given x : nat_t
-      //   readback x will loss the type
       check(env, readback(arg_value), t_value)
 
       let the = {
@@ -259,10 +256,12 @@ export function scope_check(
     else if (entry instanceof Entry.Given) {
       let { t } = entry
       check(scope_env, t, new Value.Type())
+      let t_value = evaluate(scope_env, t)
       let the = {
-        t: evaluate(scope_env, t),
+        t: t_value,
         // NOTE maybe not enough to use `new Value.Neutral.Var(name)`
-        value: new Value.Neutral.Var(name),
+        // value: new Value.Neutral.Var(name),
+        value: new Value.The(t_value, new Value.Neutral.Var(name)),
       }
       scope_env = scope_env.ext(name, the)
       effect(name, the)
