@@ -4,3 +4,4 @@ export declare class Report extends Error {
     append(message: string): Report;
     prepend(message: string): Report;
 }
+export declare function merge_message_list(message_list: Array<string>): string;

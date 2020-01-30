@@ -140,7 +140,7 @@ export function equivalent(s: Value.Value, t: Value.Value): void {
         else {
           throw new Err.Report([
             "equivalent fail\n" +
-              `missing field: ${name}`])
+              `missing field: ${name}\n`])
         }
       }
     }

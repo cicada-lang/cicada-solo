@@ -240,7 +240,7 @@ export function eliminate_ap(
           `args: (${args_str})\n`])
     }
 
-    let new_scope_env = Scope.scope_check_with_args(scope, scope_env, args, env)
+    let new_scope_env = Scope.scope_check_with_args_for_fn(scope, scope_env, args, env)
 
     return evaluate(new_scope_env, body)
   }
@@ -260,7 +260,7 @@ export function eliminate_ap(
               `args.length: ${args.length}\n`])
         }
 
-        Scope.scope_check_with_args(scope, scope_env, args, env)
+        Scope.scope_check_with_args_for_fn(scope, scope_env, args, env)
 
         return true
       }

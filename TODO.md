@@ -1,6 +1,3 @@
-- fix evaluate on `Exp.FnCase`
-  - maybe more report on `scope_check_with_args` about why fail
-- finish "api.ts"
 - add span to `Exp`
 - color output
 # cicada

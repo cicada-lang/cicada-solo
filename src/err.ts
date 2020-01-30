@@ -20,7 +20,7 @@ export class Report extends Error {
   }
 }
 
-function merge_message_list(message_list: Array<string>): string {
+export function merge_message_list(message_list: Array<string>): string {
   let s = ""
   s += "------\n"
   for (let message of message_list) {

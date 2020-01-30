@@ -26,7 +26,7 @@ export function pretty_exp(exp: Exp.Exp): string {
   else if (exp instanceof Exp.Pi) {
     let { scope, return_type } = exp
     let s = ""
-    s += pretty_scope(scope, "\n")
+    s += pretty_scope(scope, ", ")
     s += ` -> ${pretty_exp(return_type)}`
     return pretty_flower_block(s)
   }
@@ -34,7 +34,7 @@ export function pretty_exp(exp: Exp.Exp): string {
   else if (exp instanceof Exp.Fn) {
     let { scope, body } = exp
     let s = ""
-    s += pretty_scope(scope, "\n")
+    s += pretty_scope(scope, ", ")
     s += ` => ${pretty_exp(body)}`
     return pretty_flower_block(s)
   }
@@ -116,7 +116,7 @@ export function pretty_value(value: Value.Value): string {
   else if (value instanceof Value.Pi) {
     let { scope, return_type } = value
     let s = ""
-    s += pretty_scope(scope, "\n")
+    s += pretty_scope(scope, ", ")
     s += ` -> ${pretty_exp(return_type)}`
     return pretty_flower_block(s)
   }
@@ -124,7 +124,7 @@ export function pretty_value(value: Value.Value): string {
   else if (value instanceof Value.Fn) {
     let { scope, body } = value
     let s = ""
-    s += pretty_scope(scope, "\n")
+    s += pretty_scope(scope, ", ")
     s += ` => ${pretty_exp(body)}`
     return pretty_flower_block(s)
   }

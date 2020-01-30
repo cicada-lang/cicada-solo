@@ -29,6 +29,10 @@ export declare function scope_check_with_args(scope: Scope, scope_env: Env.Env, 
     t: Value.Value;
     value: Value.Value;
 }) => void): Env.Env;
+export declare function scope_check_with_args_for_fn(scope: Scope, scope_env: Env.Env, args: Array<Exp.Exp>, env: Env.Env, effect?: (name: string, the: {
+    t: Value.Value;
+    value: Value.Value;
+}) => void): Env.Env;
 export declare function scope_check(scope: Scope, scope_env: Env.Env, effect?: (name: string, the: {
     t: Value.Value;
     value: Value.Value;

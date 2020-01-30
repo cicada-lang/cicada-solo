@@ -5,7 +5,9 @@ import * as util from "./util"
 import { evaluate } from "./evaluate"
 import { check } from "./check"
 import { infer } from "./infer"
+import { readback } from "./readback"
 import * as Err from "./err"
+import * as pretty from "./pretty"
 
 export class Scope {
   constructor(
@@ -134,8 +136,10 @@ export function scope_check_with_args(
       arg_index += 1
       let { t } = entry
       let t_value = evaluate(scope_env, t)
+
       check(env, arg, t_value)
       let arg_value = evaluate(env, arg) // NOTE use the original `env`
+
       let the = {
         t: t_value,
         value: arg_value,
@@ -157,6 +161,69 @@ export function scope_check_with_args(
     else {
       throw new Err.Report([
         "scope_check_with_args fail\n" +
+          `unhandled class of Entry: ${entry.constructor.name}\n`])
+    }
+  }
+
+  return scope_env
+}
+
+export function scope_check_with_args_for_fn(
+  scope: Scope,
+  scope_env: Env.Env,
+  args: Array<Exp.Exp>,
+  env: Env.Env,
+  effect: (name: string, the: {
+    t: Value.Value,
+    value: Value.Value,
+  }) => void = _ => {},
+): Env.Env {
+  let arg_index = 0
+
+  for (let [name, entry] of scope.named_entries) {
+    if (entry instanceof Entry.Let) {
+      let { value } = entry
+      let the = {
+        t: infer(scope_env, value),
+        value: evaluate(scope_env, value),
+      }
+      scope_env = scope_env.ext(name, the)
+      effect(name, the)
+    }
+
+    else if (entry instanceof Entry.Given) {
+      let arg = args[arg_index]
+      if (arg === undefined) {
+        break
+      }
+      arg_index += 1
+      let { t } = entry
+      let t_value = evaluate(scope_env, t)
+
+      let arg_value = evaluate(env, arg) // NOTE use the original `env`
+      check(env, readback(arg_value), t_value)
+
+      let the = {
+        t: t_value,
+        value: arg_value,
+      }
+      scope_env = scope_env.ext(name, the)
+      effect(name, the)
+    }
+
+    else if (entry instanceof Entry.Define) {
+      let { t, value } = entry
+      let the = {
+        t: evaluate(scope_env, t),
+        value: evaluate(scope_env, value),
+      }
+      scope_env = scope_env.ext(name, the)
+      effect(name, the)
+    }
+
+    else {
+      throw new Err.Report([
+        "scope_check_with_args_for_fn fail\n" +
           `unhandled class of Entry: ${entry.constructor.name}\n`])
     }
   }
