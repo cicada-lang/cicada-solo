@@ -71,6 +71,11 @@ export function evaluate(
     return evaluate_block(env, scope, body)
   }
 
+  else if (exp instanceof Exp.The) {
+    let { t, value } = exp
+    return new Value.The(evaluate(env, t), evaluate(env, value))
+  }
+
   else {
     throw new Err.Report([
       "evaluate fail\n" +

@@ -49,6 +49,11 @@ export declare class Obj extends Value {
         value: Value;
     }>);
 }
+export declare class The extends Value {
+    t: Value;
+    value: Value;
+    constructor(t: Value, value: Value);
+}
 export declare namespace Neutral {
     abstract class Neutral extends Value {
     }

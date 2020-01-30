@@ -50,6 +50,13 @@ export class Obj extends Value {
   ) { super() }
 }
 
+export class The extends Value {
+  constructor(
+    public t: Value,
+    public value: Value,
+  ) { super() }
+}
+
 export namespace Neutral {
 
   export abstract class Neutral extends Value {}

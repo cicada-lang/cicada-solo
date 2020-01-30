@@ -50,6 +50,11 @@ export declare class Block extends Exp {
     body: Exp;
     constructor(scope: Scope.Scope, body: Exp);
 }
+export declare class The extends Exp {
+    t: Exp;
+    value: Exp;
+    constructor(t: Exp, value: Exp);
+}
 export declare class Equation extends Exp {
     t: Exp;
     lhs: Exp;

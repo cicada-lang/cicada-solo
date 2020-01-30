@@ -1,3 +1,9 @@
+- check `Exp.The`
+- infer `Exp.The`
+- pretty `Exp.The` and `Value.The`
+- readback `Value.The`
+- subtype `Value.The`
+- equivalent `Value.The`
 # cicada
 - [equality] we can implementation equality by built-in equality
   maybe we need to built-in (make it an axiom) the following function

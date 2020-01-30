@@ -71,6 +71,13 @@ export class Block extends Exp {
   ) { super() }
 }
 
+export class The extends Exp {
+  constructor(
+    public t: Exp,
+    public value: Exp,
+  ) { super() }
+}
+
 export class Equation extends Exp {
   constructor(
     public t: Exp,
