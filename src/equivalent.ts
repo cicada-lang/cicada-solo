@@ -7,6 +7,16 @@ import * as Err from "./err"
 
 export function equivalent(s: Value.Value, t: Value.Value): void {
   try {
+    if (s instanceof Value.The) {
+      let the = s
+      return equivalent(the.value, t)
+    }
+
+    if (t instanceof Value.The) {
+      let the = t
+      return equivalent(s, the.value)
+    }
+
     if (s instanceof Value.Type && t instanceof Value.Type) {}
 
     else if (s instanceof Value.StrType && t instanceof Value.StrType) {}

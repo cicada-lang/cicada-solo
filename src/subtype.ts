@@ -10,6 +10,16 @@ import * as Err from "./err"
 
 export function subtype(s: Value.Value, t: Value.Value): void {
   try {
+    if (s instanceof Value.The) {
+      let the = s
+      return subtype(the.value, t)
+    }
+
+    if (t instanceof Value.The) {
+      let the = t
+      return subtype(s, the.value)
+    }
+
     if (s instanceof Value.Pi && t instanceof Value.Pi) {
 
       // A1_value = evaluate(s_scope_env, A1)
