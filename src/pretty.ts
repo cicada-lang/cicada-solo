@@ -92,6 +92,11 @@ export function pretty_exp(exp: Exp.Exp): string {
     return `class ${pretty_flower_block(s)}`
   }
 
+  else if (exp instanceof Exp.The) {
+    let { t, value } = exp
+    return `the(${pretty_exp(t)}, ${pretty_exp(value)})`
+  }
+
   else {
     throw new Error(
       "pretty_exp fail\n" +
@@ -158,6 +163,11 @@ export function pretty_value(value: Value.Value): string {
     let s = ""
     s += pretty_defined(defined, "\n")
     return pretty_flower_block(s)
+  }
+
+  else if (value instanceof Value.The) {
+    let the = value
+    return `the(${pretty_value(the.t)}, ${pretty_value(the.value)})`
   }
 
   else if (value instanceof Value.Neutral.Var) {

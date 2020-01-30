@@ -66,8 +66,8 @@ export function readback(value: Value.Value): Exp.Exp {
   }
 
   else if (value instanceof Value.The) {
-    let { t, value } = value
-    return new Exp.The(readback(t), readback(value))
+    let the = value
+    return new Exp.The(readback(the.t), readback(the.value))
   }
 
   else if (value instanceof Value.Neutral.Var) {
