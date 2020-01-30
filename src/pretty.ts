@@ -1,5 +1,6 @@
 import assert from "assert"
 import * as Exp from "./exp"
+import * as Env from "./env"
 import * as Value from "./value"
 import * as Scope from "./scope"
 
@@ -189,6 +190,33 @@ export function pretty_value(value: Value.Value): string {
         `unhandled class of Value: ${value.constructor.name}\n` +
         `value: ${JSON.stringify(value, null, 2)}\n`)
   }
+}
+
+export function pretty_env(
+  env: Env.Env,
+  delimiter: string,
+): string {
+  let list: Array<string> = []
+
+  for (let [name, entry] of env.entry_map) {
+    if (entry instanceof Env.Entry.Define) {
+      let { t, value } = entry
+      list.push(`${name} : ${pretty_value(t)} = ${pretty_value(value)}`)
+    }
+
+    else if (entry instanceof Env.Entry.DefineRec) {
+      let { t, value } = entry
+      list.push(`${name} : ${pretty_exp(t)} = ${pretty_exp(value)}`)
+    }
+
+    else {
+      throw new Error(
+        "pretty_env fail\n" +
+          `unhandled class of Env.Entry: ${entry.constructor.name}`)
+    }
+  }
+
+  return list.join(delimiter)
 }
 
 export function pretty_scope(

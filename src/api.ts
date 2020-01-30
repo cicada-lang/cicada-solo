@@ -79,8 +79,8 @@ function top_list_check_and_evaluate(
             `name: ${name} is already defined to value: ${pretty.pretty_value(found)}\n`)
         }
         let t_expected = evaluate(local_env, t_exp)
-        check(local_env, exp, t_expected)
         local_env = local_env.ext_rec(name, { t: t_exp, value: exp, env: local_env })
+        check(local_env, exp, t_expected)
         let value = evaluate(local_env, exp)
         if (config["verbose"] !== undefined) {
           console.log(`${name} : ${pretty.pretty_exp(t_exp)} = ${pretty.pretty_exp(exp)}`)

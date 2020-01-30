@@ -4,6 +4,7 @@ import * as Env from "./env"
 import * as util from "./util"
 import { evaluate } from "./evaluate"
 import { check } from "./check"
+import { subtype } from "./subtype"
 import { infer } from "./infer"
 import { readback } from "./readback"
 import * as Err from "./err"
@@ -201,6 +202,10 @@ export function scope_check_with_args_for_fn(
       let t_value = evaluate(scope_env, t)
 
       let arg_value = evaluate(env, arg) // NOTE use the original `env`
+      // NOTE we need to readback value here
+      //   maybe we need `the`
+      //   given x : nat_t
+      //   readback x will loss the type
       check(env, readback(arg_value), t_value)
 
       let the = {
@@ -256,6 +261,7 @@ export function scope_check(
       check(scope_env, t, new Value.Type())
       let the = {
         t: evaluate(scope_env, t),
+        // NOTE maybe not enough to use `new Value.Neutral.Var(name)`
         value: new Value.Neutral.Var(name),
       }
       scope_env = scope_env.ext(name, the)
@@ -386,13 +392,13 @@ export function scope_compare_given(
       let s_value = evaluate(s_scope_env, s)
       let t_value = evaluate(t_scope_env, t)
 
-
       effect(name, s_value, t_value)
 
       let unique_var = util.unique_var_from(
         `${s_name}:${t_name}`)
       s_scope_env = s_scope_env.ext(s_name, { t: s_value, value: unique_var })
       t_scope_env = t_scope_env.ext(t_name, { t: t_value, value: unique_var })
+
       s_current = undefined
       t_current = undefined
       return true

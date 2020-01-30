@@ -7,6 +7,7 @@ import { evaluate } from "./evaluate"
 import { infer } from "./infer"
 import { subtype } from "./subtype"
 import { equivalent } from "./equivalent"
+import { readback } from "./readback"
 import * as pretty from "./pretty"
 import * as util from "./util"
 
@@ -44,7 +45,6 @@ export function check(
       throw error.prepend(
         "check fail\n" +
           `exp: ${pretty.pretty_exp(exp)}\n` +
-          `value: ${pretty.pretty_value(evaluate(env, exp))}\n` +
           `type: ${pretty.pretty_value(t)}\n`)
     }
 
@@ -186,11 +186,25 @@ export function check_fn(
       let pi_arg_type_value = Scope.entry_to_type(pi_arg_entry, scope_env)
       let fn_arg_type_value = Scope.entry_to_type(fn_arg_entry, local_env)
       subtype(fn_arg_type_value, pi_arg_type_value)
-      let unique_var = util.unique_var_from(
-        `check:Fn:${pi_arg_name}:${fn_arg_name}`)
-      local_env = local_env.ext(fn_arg_name, { t: fn_arg_type_value, value: unique_var })
-      scope_env = scope_env.ext(pi_arg_name, { t: pi_arg_type_value, value: unique_var })
+
+      local_env = local_env.ext(fn_arg_name, {
+        t: fn_arg_type_value,
+        value: new Value.Neutral.Var(fn_arg_name),
+      })
+
+      scope_env = scope_env.ext(pi_arg_name, {
+        t: fn_arg_type_value,
+        value: new Value.Neutral.Var(pi_arg_name),
+      })
+
+      // let unique_var = util.unique_var_from(
+      //   `check:Fn:${pi_arg_name}:${fn_arg_name}`)
+      // local_env = local_env.ext(fn_arg_name, { t: fn_arg_type_value, value: unique_var })
+      // scope_env = scope_env.ext(pi_arg_name, { t: fn_arg_type_value, value: unique_var })
+      // local_env = local_env.ext(unique_var.name, { t: fn_arg_type_value, value: unique_var })
+      // scope_env = scope_env.ext(unique_var.name, { t: fn_arg_type_value, value: unique_var })
     }
+    check(local_env, body, evaluate(scope_env, pi.return_type))
   }
 
   else {

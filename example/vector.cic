@@ -69,7 +69,7 @@ vector_append : {
   n : nat_t
   x : vector_t(A, m)
   y : vector_t(A, n)
-  -> vector_t(A, nat_add(m, n))
+    -> vector_t(A, nat_add(m, n))
 } = choice {
   case
     A : type
@@ -80,7 +80,7 @@ vector_append : {
       A = A
       length = nat_add(m, n)
       head = x.head
-      tail = vector_append(A, x.prev, n, x.tail, y)
+      tail = vector_append(A, m.prev, n, x.tail, y)
     }
   case
     A : type

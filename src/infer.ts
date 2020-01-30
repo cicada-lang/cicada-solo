@@ -18,7 +18,8 @@ export function infer(
       let t = env.lookup_type(name)
       if (t === undefined) {
         throw new Err.Report([
-          `can not find var: ${name} in env\n`])
+          `can not find var: ${name} in env:\n` +
+          `<env>${pretty.pretty_env(env, "\n")}</env>\n`])
       }
       else {
         return t
@@ -74,7 +75,7 @@ export function infer(
 
     else if (exp instanceof Exp.FnCase) {
       throw new Err.Report([
-        `the language is not designed to infer the type of Exp.FnCase: ${exp}\n`])
+        `the language is not designed to infer the type of Exp.FnCase: ${pretty.pretty_exp(exp)}\n`])
     }
 
     else if (exp instanceof Exp.Cl) {
@@ -144,8 +145,7 @@ export function infer(
     if (error instanceof Err.Report) {
       throw error.prepend(
         "infer fail\n" +
-          `exp: ${pretty.pretty_exp(exp)}\n` +
-          `value: ${pretty.pretty_value(evaluate(env, exp))}\n`)
+          `exp: ${pretty.pretty_exp(exp)}\n`)
     }
 
     else {

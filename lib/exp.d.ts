@@ -50,3 +50,23 @@ export declare class Block extends Exp {
     body: Exp;
     constructor(scope: Scope.Scope, body: Exp);
 }
+export declare class Equation extends Exp {
+    t: Exp;
+    lhs: Exp;
+    rhs: Exp;
+    constructor(t: Exp, lhs: Exp, rhs: Exp);
+}
+export declare class Same extends Exp {
+    t: Exp;
+    value: Exp;
+    constructor(t: Exp, value: Exp);
+}
+export declare class Transport extends Exp {
+    t: Exp;
+    lhs: Exp;
+    rhs: Exp;
+    equation: Exp;
+    motive: Exp;
+    value: Exp;
+    constructor(t: Exp, lhs: Exp, rhs: Exp, equation: Exp, motive: Exp, value: Exp);
+}

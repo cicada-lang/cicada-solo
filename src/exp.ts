@@ -70,3 +70,29 @@ export class Block extends Exp {
     public body: Exp,
   ) { super() }
 }
+
+export class Equation extends Exp {
+  constructor(
+    public t: Exp,
+    public lhs: Exp,
+    public rhs: Exp,
+  ) { super() }
+}
+
+export class Same extends Exp {
+  constructor(
+    public t: Exp,
+    public value: Exp,
+  ) { super() }
+}
+
+export class Transport extends Exp {
+  constructor(
+    public t: Exp,
+    public lhs : Exp,
+    public rhs : Exp,
+    public equation : Exp,
+    public motive : Exp,
+    public value : Exp,
+  ) { super() }
+}
