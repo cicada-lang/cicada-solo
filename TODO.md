@@ -1,5 +1,3 @@
-- add span to `Exp`
-- color output
 # cicada
 - [equality] we can implementation equality by built-in equality
   maybe we need to built-in (make it an axiom) the following function
@@ -26,6 +24,9 @@
 - [test] define  `contextual_pre_category_t` as algebraic structure
 - mutual recursive definition only at top level
 - [module system] not so hurry, after the core is stable
+# error report
+- add span to `Exp`
+- color output
 # learn from gradual type system
 - how they refine type in a `if` block?
 # js backend
