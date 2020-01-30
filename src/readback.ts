@@ -65,6 +65,11 @@ export function readback(value: Value.Value): Exp.Exp {
     return new Exp.Obj(new Scope.Scope(named_entries))
   }
 
+  else if (value instanceof Value.The) {
+    let { t, value } = value
+    return new Exp.The(readback(t), readback(value))
+  }
+
   else if (value instanceof Value.Neutral.Var) {
     let { name } = value
     return new Exp.Var(name)

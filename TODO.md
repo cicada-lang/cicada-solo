@@ -1,7 +1,6 @@
 - check `Exp.The`
 - infer `Exp.The`
 - pretty `Exp.The` and `Value.The`
-- readback `Value.The`
 - subtype `Value.The`
 - equivalent `Value.The`
 # cicada
