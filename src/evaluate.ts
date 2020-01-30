@@ -277,18 +277,6 @@ export function eliminate_ap(
 
       catch (error) {
         if (error instanceof Err.Report) {
-          {
-            console.log("<error>")
-            console.log("args:", args.map(pretty.pretty_exp).join(", "))
-            console.log("arg values:", args.map(arg => pretty.pretty_value(evaluate(env, arg))).join(", "))
-            console.log("case:", pretty.pretty_value(fn))
-            console.log(error.message)
-            console.log("env:", env)
-//             console.log("<env>")
-//             console.log(pretty.pretty_env(env, "\n"))
-//             console.log("</env>")
-            console.log("</error>")
-          }
           return false
         }
         else {

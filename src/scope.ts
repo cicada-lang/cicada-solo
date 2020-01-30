@@ -201,7 +201,6 @@ export function scope_check_with_args_for_fn(
       let { t } = entry
       let t_value = evaluate(scope_env, t)
 
-      // check(env, arg, t_value)
       let arg_value = evaluate(env, arg) // NOTE use the original `env`
       check(env, readback(arg_value), t_value)
 
@@ -259,8 +258,6 @@ export function scope_check(
       let t_value = evaluate(scope_env, t)
       let the = {
         t: t_value,
-        // NOTE maybe not enough to use `new Value.Neutral.Var(name)`
-        // value: new Value.Neutral.Var(name),
         value: new Value.The(t_value, new Value.Neutral.Var(name)),
       }
       scope_env = scope_env.ext(name, the)
