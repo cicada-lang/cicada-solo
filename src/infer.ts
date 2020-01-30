@@ -134,6 +134,13 @@ export function infer(
       return infer(local_env, body)
     }
 
+    else if (exp instanceof Exp.The) {
+      let { t, value } = exp
+      let t_value = evaluate(env, t)
+      check(env, value, t_value)
+      return t_value
+    }
+
     else {
       throw new Err.Report([
         "infer fail\n" +
