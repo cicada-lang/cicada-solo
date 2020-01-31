@@ -57,6 +57,21 @@ export class The extends Value {
   ) { super() }
 }
 
+export class Equation extends Value {
+  constructor(
+    public t: Value,
+    public lhs: Value,
+    public rhs: Value,
+  ) { super() }
+}
+
+export class Same extends Value {
+  constructor(
+    public t: Value,
+    public value: Value,
+  ) { super() }
+}
+
 export namespace Neutral {
 
   export abstract class Neutral extends Value {}
@@ -78,6 +93,14 @@ export namespace Neutral {
     constructor(
       public target: Neutral,
       public field_name: string,
+    ) { super() }
+  }
+
+  export class Transport extends Neutral {
+    constructor(
+      public equation : Neutral,
+      public motive : Value,
+      public base : Value,
     ) { super() }
   }
 

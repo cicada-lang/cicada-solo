@@ -1,23 +1,25 @@
+- `Same` `Equation` `Transport` eval
+- `Same` `Equation` `Transport` check
+- `Same` `Equation` `Transport` infer
+- `Same` `Equation` `Transport` readback
+- `Same` `Equation` `Transport` subtype
+- `Same` `Equation` `Transport` equivalent
+- `Same` `Equation` `Transport` pretty
+- `Same` `Equation` `Transport` grammar
 # cicada
 - [equality] we can implementation equality by built-in equality
   maybe we need to built-in (make it an axiom) the following function
   ``` cicada
   transport : {
-    A : type
-    x : A
-    y : A
     equation : equation_t(A, x, y)
     motive : { x : A -> type }
-    value : motive(x)
+    base : motive(x)
     -> motive(y)
   } = {
-    A : type
-    x : A
-    y : A
     equation : equation_t(A, x, y)
     motive : { x : A -> type }
-    value : motive(x)
-    => value
+    base : motive(x)
+    => base
   }
   ```
 - [test] define `category_t` as algebraic structure

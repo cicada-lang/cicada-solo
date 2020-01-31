@@ -54,6 +54,17 @@ export declare class The extends Value {
     value: Value;
     constructor(t: Value, value: Value);
 }
+export declare class Equation extends Value {
+    t: Value;
+    lhs: Value;
+    rhs: Value;
+    constructor(t: Value, lhs: Value, rhs: Value);
+}
+export declare class Same extends Value {
+    t: Value;
+    value: Value;
+    constructor(t: Value, value: Value);
+}
 export declare namespace Neutral {
     abstract class Neutral extends Value {
     }
@@ -70,5 +81,11 @@ export declare namespace Neutral {
         target: Neutral;
         field_name: string;
         constructor(target: Neutral, field_name: string);
+    }
+    class Transport extends Neutral {
+        equation: Neutral;
+        motive: Value;
+        base: Value;
+        constructor(equation: Neutral, motive: Value, base: Value);
     }
 }

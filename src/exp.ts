@@ -95,11 +95,8 @@ export class Same extends Exp {
 
 export class Transport extends Exp {
   constructor(
-    public t: Exp,
-    public lhs : Exp,
-    public rhs : Exp,
     public equation : Exp,
     public motive : Exp,
-    public value : Exp,
+    public base : Exp,
   ) { super() }
 }

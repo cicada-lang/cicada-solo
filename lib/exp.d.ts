@@ -67,11 +67,8 @@ export declare class Same extends Exp {
     constructor(t: Exp, value: Exp);
 }
 export declare class Transport extends Exp {
-    t: Exp;
-    lhs: Exp;
-    rhs: Exp;
     equation: Exp;
     motive: Exp;
-    value: Exp;
-    constructor(t: Exp, lhs: Exp, rhs: Exp, equation: Exp, motive: Exp, value: Exp);
+    base: Exp;
+    constructor(equation: Exp, motive: Exp, base: Exp);
 }
