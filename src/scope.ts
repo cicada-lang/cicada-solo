@@ -412,8 +412,8 @@ export function scope_compare_given(
 
       effect(name, s_value, t_value)
 
-      let unique_var = util.unique_var_from(
-        `${s_name}:${t_name}`)
+      let unique_name = util.unique_name(`${s_name}:${t_name}`)
+      let unique_var = new Neutral.Var(unique_name)
       s_scope_env = s_scope_env.ext(s_name, { t: s_value, value: unique_var })
       t_scope_env = t_scope_env.ext(t_name, { t: t_value, value: unique_var })
 

@@ -1,8 +1,6 @@
 import nanoid from "nanoid"
-import * as Value from "./value"
-import * as Neutral from "./neutral"
 
-export function unique_var_from(base: string): Neutral.Var {
+export function unique_name(base: string): string {
   let uuid: string = nanoid()
-  return new Neutral.Var(`${base}#${uuid}`)
+  return `${base}#${uuid}`
 }

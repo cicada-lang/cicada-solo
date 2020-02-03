@@ -193,8 +193,8 @@ export function check_fn(
       // NOTE we need to use unique_var as unification here,
       //   because equivalent between `Neutral.Var` will only compare name.
 
-      let unique_var = util.unique_var_from(
-        `check:Fn:${pi_arg_name}:${fn_arg_name}`)
+      let unique_name = util.unique_name(`check:Fn:${pi_arg_name}:${fn_arg_name}`)
+      let unique_var = new Neutral.Var(unique_name)
 
       let the = {
         t: fn_arg_type_value,
