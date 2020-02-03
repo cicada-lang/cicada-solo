@@ -381,17 +381,9 @@ export function eliminate_transport(
   motive: Exp.Exp,
   base: Exp.Exp,
 ): Value.Value {
+  // TODO
+
   throw new Error()
-
-  // if (target instanceof Value.The) {
-  //   let the = target
-  //   // NOTE maybe structural `The` like `eliminate_dot`
-  //   return eliminate_transport(env, the.value, motive, base)
-  // }
-
-  // if (target instanceof Value.) {
-  //   TODO
-  // }
 
   // else {
   //   throw new Err.Report([
