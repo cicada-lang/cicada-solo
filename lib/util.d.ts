@@ -1,2 +1,2 @@
-import * as Value from "./value";
-export declare function unique_var_from(base: string): Value.Neutral.Var;
+import * as Neutral from "./neutral";
+export declare function unique_var_from(base: string): Neutral.Var;

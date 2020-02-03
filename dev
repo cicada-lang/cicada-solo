@@ -9,7 +9,7 @@ function t {
 function test_cicada {
     prog=./bin/cicada
 
-    for file in $(find . | grep "^\./example/" | grep "\.cic$")
+    for file in $(find . | grep "^\./examples/" | grep "\.cic$")
     do
         echo ""
         echo "[cicada] $file"

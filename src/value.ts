@@ -2,6 +2,8 @@ import * as Exp from "./exp"
 import * as Env from "./env"
 import * as Scope from "./scope"
 
+import * as Neutral from "./neutral"
+
 export abstract class Value {}
 
 export class Type extends Value {}
@@ -65,43 +67,9 @@ export class Same extends Value {
   ) { super() }
 }
 
-export namespace Neutral {
-
-  export abstract class Neutral extends Value {}
-
-  export class The extends Value {
-    constructor(
-      public t: Value,
-      public value: Neutral,
-    ) { super() }
-  }
-
-  export class Var extends Neutral {
-    constructor(
-      public name: string,
-    ) { super() }
-  }
-
-  export class Ap extends Neutral {
-    constructor(
-      public target: Neutral,
-      public args: Array<Value>,
-    ) { super() }
-  }
-
-  export class Dot extends Neutral {
-    constructor(
-      public target: Neutral,
-      public field_name: string,
-    ) { super() }
-  }
-
-  export class Transport extends Neutral {
-    constructor(
-      public equation: Neutral,
-      public motive: Value,
-      public base: Value,
-    ) { super() }
-  }
-
+export class TheNeutral extends Value {
+  constructor(
+    public t: Value,
+    public value: Neutral.Neutral,
+  ) { super() }
 }

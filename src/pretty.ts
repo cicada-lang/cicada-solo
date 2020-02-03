@@ -2,6 +2,7 @@ import assert from "assert"
 import * as Exp from "./exp"
 import * as Env from "./env"
 import * as Value from "./value"
+import * as Neutral from "./neutral"
 import * as Scope from "./scope"
 
 export function pretty_exp(exp: Exp.Exp): string {
@@ -165,17 +166,17 @@ export function pretty_value(value: Value.Value): string {
     return pretty_flower_block(s)
   }
 
-  else if (value instanceof Value.Neutral.The) {
+  else if (value instanceof Value.TheNeutral) {
     let the = value
     return `the(${pretty_value(the.t)}, ${pretty_value(the.value)})`
   }
 
-  else if (value instanceof Value.Neutral.Var) {
+  else if (value instanceof Neutral.Var) {
     let { name } = value
     return name
   }
 
-  else if (value instanceof Value.Neutral.Ap) {
+  else if (value instanceof Neutral.Ap) {
     let { target, args } = value
     let s = ""
     s += pretty_value(target)
@@ -185,7 +186,7 @@ export function pretty_value(value: Value.Value): string {
     return s
   }
 
-  else if (value instanceof Value.Neutral.Dot) {
+  else if (value instanceof Neutral.Dot) {
     let { target, field_name } = value
     let s = ""
     s += pretty_value(target)

@@ -1,5 +1,6 @@
 import * as Exp from "./exp"
 import * as Value from "./value"
+import * as Neutral from "./neutral"
 import * as pretty from "./pretty"
 import * as Scope from "./scope"
 import { evaluate } from "./evaluate"
@@ -7,12 +8,12 @@ import * as Err from "./err"
 
 export function equivalent(s: Value.Value, t: Value.Value): void {
   try {
-    if (s instanceof Value.Neutral.The) {
+    if (s instanceof Value.TheNeutral) {
       let the = s
       return equivalent(the.value, t)
     }
 
-    if (t instanceof Value.Neutral.The) {
+    if (t instanceof Value.TheNeutral) {
       let the = t
       return equivalent(s, the.value)
     }
@@ -159,23 +160,23 @@ export function equivalent(s: Value.Value, t: Value.Value): void {
       equivalent_defined(s.defined, t.defined)
     }
 
-    else if (s instanceof Value.Neutral.Var && t instanceof Value.Neutral.Var) {
+    else if (s instanceof Neutral.Var && t instanceof Neutral.Var) {
       if (s.name !== t.name) {
         throw new Err.Report([
-          "equivalent fail between Value.Neutral.Var and Value.Neutral.Var\n" +
+          "equivalent fail between Neutral.Var and Neutral.Var\n" +
             `${s.name} !== ${t.name}\n`])
       }
     }
 
-    else if (s instanceof Value.Neutral.Ap && t instanceof Value.Neutral.Ap) {
+    else if (s instanceof Neutral.Ap && t instanceof Neutral.Ap) {
       equivalent(s.target, t.target)
       equivalent_list(s.args, t.args)
     }
 
-    else if (s instanceof Value.Neutral.Dot && t instanceof Value.Neutral.Dot) {
+    else if (s instanceof Neutral.Dot && t instanceof Neutral.Dot) {
       if (s.field_name !== t.field_name) {
         throw new Err.Report([
-          "equivalent fail between Value.Neutral.Dot and Value.Neutral.Dot\n" +
+          "equivalent fail between Neutral.Dot and Neutral.Dot\n" +
             `field_name name mismatch\n` +
             `${s.field_name} !== ${t.field_name}\n`])
       } else {

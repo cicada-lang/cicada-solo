@@ -21,3 +21,11 @@ export class Dot extends Neutral {
     public field_name: string,
   ) { super() }
 }
+
+export class Transport extends Neutral {
+  constructor(
+    public equation: Neutral,
+    public motive: Value.Value,
+    public base: Value.Value,
+  ) { super() }
+}

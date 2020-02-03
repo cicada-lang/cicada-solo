@@ -1,5 +1,6 @@
 import * as Exp from "./exp"
 import * as Value from "./value"
+import * as Neutral from "./neutral"
 import * as Env from "./env"
 import * as Scope from "./scope"
 import * as Err from "./err"
@@ -190,14 +191,14 @@ export function check_fn(
       subtype(fn_arg_type_value, pi_arg_type_value)
 
       // NOTE we need to use unique_var as unification here,
-      //   because equivalent between `Value.Neutral.Var` will only compare name.
+      //   because equivalent between `Neutral.Var` will only compare name.
 
       let unique_var = util.unique_var_from(
         `check:Fn:${pi_arg_name}:${fn_arg_name}`)
 
       let the = {
         t: fn_arg_type_value,
-        value: new Value.Neutral.The(fn_arg_type_value, unique_var),
+        value: new Value.TheNeutral(fn_arg_type_value, unique_var),
       }
 
       local_env = local_env.ext(fn_arg_name, the)

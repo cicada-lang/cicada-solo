@@ -15,3 +15,9 @@ export declare class Dot extends Neutral {
     field_name: string;
     constructor(target: Neutral, field_name: string);
 }
+export declare class Transport extends Neutral {
+    equation: Neutral;
+    motive: Value.Value;
+    base: Value.Value;
+    constructor(equation: Neutral, motive: Value.Value, base: Value.Value);
+}

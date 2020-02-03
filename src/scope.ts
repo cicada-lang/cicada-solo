@@ -1,5 +1,6 @@
 import * as Exp from "./exp"
 import * as Value from "./value"
+import * as Neutral from "./neutral"
 import * as Env from "./env"
 import * as util from "./util"
 import { evaluate } from "./evaluate"
@@ -279,7 +280,7 @@ export function scope_check(
       let t_value = evaluate(scope_env, t)
       let the = {
         t: t_value,
-        value: new Value.Neutral.The(t_value, new Value.Neutral.Var(name)),
+        value: new Value.TheNeutral(t_value, new Neutral.Var(name)),
       }
       scope_env = scope_env.ext(name, the)
       effect(name, the)

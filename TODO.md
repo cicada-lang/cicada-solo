@@ -1,5 +1,5 @@
-- simplify the api of `unique_var_from`
 - `Neutral` should not extend `Value`, only `Value.TheNeutral` is value
+- simplify the api of `unique_var_from`
 - note about `Neutral.The` and the value
 - [maybe] we should learn from pie again
 - `Same` `Equation` `Transport` eval

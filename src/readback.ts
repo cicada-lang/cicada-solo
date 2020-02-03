@@ -1,5 +1,6 @@
 import * as Exp from "./exp"
 import * as Value from "./value"
+import * as Neutral from "./neutral"
 import * as Env from "./env"
 import * as Scope from "./scope"
 import * as Err from "./err"
@@ -65,22 +66,22 @@ export function readback(value: Value.Value): Exp.Exp {
     return new Exp.Obj(new Scope.Scope(named_entries))
   }
 
-  else if (value instanceof Value.Neutral.The) {
+  else if (value instanceof Value.TheNeutral) {
     let the = value
     return new Exp.The(readback(the.t), readback(the.value))
   }
 
-  else if (value instanceof Value.Neutral.Var) {
+  else if (value instanceof Neutral.Var) {
     let { name } = value
     return new Exp.Var(name)
   }
 
-  else if (value instanceof Value.Neutral.Ap) {
+  else if (value instanceof Neutral.Ap) {
     let { target, args } = value
     return new Exp.Ap(readback(target), args.map(arg => readback(arg)))
   }
 
-  else if (value instanceof Value.Neutral.Dot) {
+  else if (value instanceof Neutral.Dot) {
     let { target, field_name } = value
     return new Exp.Dot(readback(target), field_name)
   }
@@ -114,7 +115,7 @@ function scope_readback(
       let t_value = evaluate(scope_env, t)
       let the = {
         t: t_value,
-        value: new Value.Neutral.The(t_value, new Value.Neutral.Var(name)),
+        value: new Value.TheNeutral(t_value, new Neutral.Var(name)),
       }
       scope_env = scope_env.ext(name, the)
       named_entries.push([name, new Scope.Entry.Given(readback(the.t))])

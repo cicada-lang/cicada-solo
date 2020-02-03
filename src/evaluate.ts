@@ -1,6 +1,7 @@
 import assert from "assert"
 import * as Exp from "./exp"
 import * as Value from "./value"
+import * as Neutral from "./neutral"
 import * as Env from "./env"
 import * as Scope from "./scope"
 import * as Err from "./err"
@@ -253,15 +254,15 @@ export function eliminate_ap(
   target: Value.Value,
   args: Array<Exp.Exp>,
 ): Value.Value {
-  if (target instanceof Value.Neutral.The) {
+  if (target instanceof Value.TheNeutral) {
     let the = target
 
     if (the.t instanceof Value.Pi) {
       let pi = the.t
       let scope_env = Scope.scope_check_with_args(pi.scope, pi.scope_env, args, env)
-      return new Value.Neutral.The(
+      return new Value.TheNeutral(
         evaluate(scope_env, pi.return_type),
-        new Value.Neutral.Ap(the.value, args.map(arg => evaluate(env, arg))))
+        new Neutral.Ap(the.value, args.map(arg => evaluate(env, arg))))
     }
 
     else {
@@ -398,11 +399,11 @@ export function eliminate_dot(
   target: Value.Value,
   field_name: string,
 ): Value.Value {
-  if (target instanceof Value.Neutral.The) {
+  if (target instanceof Value.TheNeutral) {
     let the = target
-    return new Value.Neutral.The(
+    return new Value.TheNeutral(
       eliminate_dot(env, the.t, field_name),
-      new Value.Neutral.Dot(the.value, field_name))
+      new Neutral.Dot(the.value, field_name))
   }
 
   if (target instanceof Value.Obj) {
@@ -474,7 +475,7 @@ export function scope_to_type_map(
       let t_value = evaluate(scope_env, t)
       let the = {
         t: t_value,
-        value: new Value.Neutral.The(t_value, new Value.Neutral.Var(name)),
+        value: new Value.TheNeutral(t_value, new Neutral.Var(name)),
       }
       type_map.set(name, the.t)
       scope_env = scope_env.ext(name, the)
