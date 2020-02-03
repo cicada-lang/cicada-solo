@@ -47,16 +47,16 @@ list_length : { A : type, x : list_t(A) -> nat_t } = choice {
 @eq list_length(unit_t, list_cons_unit(null_unit)) = one
 @eq list_length(unit_t, list_cons_unit(list_cons_unit(null_unit))) = two
 
-// TODO handle the following simple version of `list_length`
+// NOTE The following is a simple version of `list_length`.
 
-// list_length : { x : list_t -> nat_t } = choice {
-//   case x : cons_t => succ(list_length(x.cdr))
-//   case x : null_t => zero
-// }
+list_length_simple : { x : list_t -> nat_t } = choice {
+  case x : cons_t => succ(list_length_simple(x.cdr))
+  case x : null_t => zero
+}
 
-// @eq list_length(null_unit) = zero
-// @eq list_length(list_cons_unit(null_unit)) = one
-// @eq list_length(list_cons_unit(list_cons_unit(null_unit))) = two
+@eq list_length_simple(null_unit) = zero
+@eq list_length_simple(list_cons_unit(null_unit)) = one
+@eq list_length_simple(list_cons_unit(list_cons_unit(null_unit))) = two
 
 list_append : { A : type, x : list_t(A), y : list_t(A) -> list_t(A) } = choice {
   case A : type, x : cons_t(A), y : list_t(A) => {

@@ -111,9 +111,10 @@ function scope_readback(
 
     else if (entry instanceof Scope.Entry.Given) {
       let { t } = entry
+      let t_value = evaluate(scope_env, t)
       let the = {
-        t: evaluate(scope_env, t),
-        value: new Value.Neutral.Var(name),
+        t: t_value,
+        value: new Value.Neutral.The(t_value, new Value.Neutral.Var(name)),
       }
       scope_env = scope_env.ext(name, the)
       named_entries.push([name, new Scope.Entry.Given(readback(the.t))])

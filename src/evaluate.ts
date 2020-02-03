@@ -255,9 +255,21 @@ export function eliminate_ap(
 ): Value.Value {
   if (target instanceof Value.Neutral.The) {
     let the = target
-    return new Value.Neutral.The(
-      the.t,
-      new Value.Neutral.Ap(the.value, args.map(arg => evaluate(env, arg))))
+
+    if (the.t instanceof Value.Pi) {
+      let pi = the.t
+      let scope_env = Scope.scope_check_with_args(pi.scope, pi.scope_env, args, env)
+      return new Value.Neutral.The(
+        evaluate(scope_env, pi.return_type),
+        new Value.Neutral.Ap(the.value, args.map(arg => evaluate(env, arg))))
+    }
+
+    else {
+      return new Err.Report([
+        "eliminate_ap fail\n" +
+          "target type is not Value.Pi\n" +
+          `target: ${pretty.pretty_value(target)}\n`])
+    }
   }
 
   else if (target instanceof Value.Fn) {
@@ -299,11 +311,11 @@ export function eliminate_ap(
 
       catch (error) {
         if (error instanceof Err.Report) {
-          {
-            console.log("<eliminate_ap:Value.FnCase>")
-            console.log(error.message, "</eliminate_ap:Value.FnCase>")
-            console.log()
-          }
+          // {
+          //   console.log("<eliminate_ap:Value.FnCase>")
+          //   console.log(error.message, "</eliminate_ap:Value.FnCase>")
+          //   console.log()
+          // }
           return false
         }
         else {

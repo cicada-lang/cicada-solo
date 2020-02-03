@@ -201,18 +201,36 @@ export function scope_check_with_args_for_fn(
       let { t } = entry
       let t_value = evaluate(scope_env, t)
 
-      let arg_value = evaluate(env, arg) // NOTE use the original `env`
-      // NOTE we need to use `The` in given, because of the following readback,
-      //   otherwise readback a free variable will lose,
-      //   we need to add `The` and type on `Neutral.Var` to solve this.
-      check(env, readback(arg_value), t_value)
+      try {
+        check(env, arg, t_value)
+        let arg_value = evaluate(env, arg) // NOTE use the original `env`
+        let the = {
+          t: t_value,
+          value: arg_value,
+        }
+        scope_env = scope_env.ext(name, the)
+        effect(name, the)
+      } catch (error) {
+        if (error instanceof Err.Report) {
+          // NOTE if fail on `arg` give it another chance on `readback(arg_value)`.
+          // NOTE we need to use `The` in given, because of the following readback,
+          //   otherwise readback a free variable will lose,
+          //   we need to add `The` and type on `Neutral.Var` to solve this.
+          // NOTE this might be a bad solution.
+          let arg_value = evaluate(env, arg) // NOTE use the original `env`
+          check(env, readback(arg_value), t_value)
+          let the = {
+            t: t_value,
+            value: arg_value,
+          }
+          scope_env = scope_env.ext(name, the)
+          effect(name, the)
+        }
 
-      let the = {
-        t: t_value,
-        value: arg_value,
+        else {
+          throw error
+        }
       }
-      scope_env = scope_env.ext(name, the)
-      effect(name, the)
     }
 
     else if (entry instanceof Entry.Define) {
