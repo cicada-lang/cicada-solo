@@ -7,12 +7,12 @@ import * as Err from "./err"
 
 export function equivalent(s: Value.Value, t: Value.Value): void {
   try {
-    if (s instanceof Value.The) {
+    if (s instanceof Value.Neutral.The) {
       let the = s
       return equivalent(the.value, t)
     }
 
-    if (t instanceof Value.The) {
+    if (t instanceof Value.Neutral.The) {
       let the = t
       return equivalent(s, the.value)
     }

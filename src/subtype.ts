@@ -10,12 +10,12 @@ import * as Err from "./err"
 
 export function subtype(s: Value.Value, t: Value.Value): void {
   try {
-    if (s instanceof Value.The) {
+    if (s instanceof Value.Neutral.The) {
       let the = s
       return subtype(the.value, t)
     }
 
-    if (t instanceof Value.The) {
+    if (t instanceof Value.Neutral.The) {
       let the = t
       return subtype(s, the.value)
     }

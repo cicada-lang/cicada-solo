@@ -50,13 +50,6 @@ export class Obj extends Value {
   ) { super() }
 }
 
-export class The extends Value {
-  constructor(
-    public t: Value,
-    public value: Value,
-  ) { super() }
-}
-
 export class Equation extends Value {
   constructor(
     public t: Value,
@@ -75,6 +68,13 @@ export class Same extends Value {
 export namespace Neutral {
 
   export abstract class Neutral extends Value {}
+
+  export class The extends Value {
+    constructor(
+      public t: Value,
+      public value: Neutral,
+    ) { super() }
+  }
 
   export class Var extends Neutral {
     constructor(
@@ -98,9 +98,9 @@ export namespace Neutral {
 
   export class Transport extends Neutral {
     constructor(
-      public equation : Neutral,
-      public motive : Value,
-      public base : Value,
+      public equation: Neutral,
+      public motive: Value,
+      public base: Value,
     ) { super() }
   }
 

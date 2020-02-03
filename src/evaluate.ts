@@ -15,7 +15,16 @@ export function evaluate(
   if (exp instanceof Exp.Var) {
     let { name } = exp
     let value = env.lookup_value(name)
-    return value ? value : new Value.Neutral.Var(name)
+
+    if (value !== undefined) {
+      return value
+    }
+
+    else {
+      throw new Err.Report([
+        "evaluate fail\n" +
+          `undefined name: ${name}\n`])
+    }
   }
 
   else if (exp instanceof Exp.Type) {
@@ -72,8 +81,23 @@ export function evaluate(
   }
 
   else if (exp instanceof Exp.The) {
+    let { value } = exp
+    return evaluate(env, value)
+  }
+
+  else if (exp instanceof Exp.Equation) {
+    let { t, lhs, rhs } = exp
+    return new Value.Equation(evaluate(env, t), evaluate(env, lhs), evaluate(env, rhs))
+  }
+
+  else if (exp instanceof Exp.Same) {
     let { t, value } = exp
-    return new Value.The(evaluate(env, t), evaluate(env, value))
+    return new Value.Same(evaluate(env, t), evaluate(env, value))
+  }
+
+  else if (exp instanceof Exp.Transport) {
+    let { equation, motive, base } = exp
+    return eliminate_transport(env, evaluate(env, equation), motive, base)
   }
 
   else {
@@ -229,13 +253,11 @@ export function eliminate_ap(
   target: Value.Value,
   args: Array<Exp.Exp>,
 ): Value.Value {
-  if (target instanceof Value.The) {
+  if (target instanceof Value.Neutral.The) {
     let the = target
-    return eliminate_ap(env, the.value, args)
-  }
-
-  if (target instanceof Value.Neutral.Neutral) {
-    return new Value.Neutral.Ap(target, args.map(arg => evaluate(env, arg)))
+    return new Value.Neutral.The(
+      the.t,
+      new Value.Neutral.Ap(the.value, args.map(arg => evaluate(env, arg))))
   }
 
   else if (target instanceof Value.Fn) {
@@ -277,6 +299,11 @@ export function eliminate_ap(
 
       catch (error) {
         if (error instanceof Err.Report) {
+          {
+            console.log("<eliminate_ap:Value.FnCase>")
+            console.log(error.message, "</eliminate_ap:Value.FnCase>")
+            console.log()
+          }
           return false
         }
         else {
@@ -289,12 +316,11 @@ export function eliminate_ap(
       let s = args.map(pretty.pretty_exp).join(", ")
       let v = args.map(arg => pretty.pretty_value(evaluate(env, arg))).join(", ")
 
-      // NOTE the args are not specific enough to match a case
-      // return new Value.Neutral.Ap(target, args.map(arg => evaluate(env, arg)))
+      // NOTE instead of error, should we return Neutral here?
 
       throw new Err.Report([
         "eliminate_ap fail\n" +
-          "Value.FnCase mismatch\n" +
+          "Value.FnCase args mismatch\n" +
           `target: ${pretty.pretty_value(target)}\n` +
           `args: (${s})\n` +
           `arg values: (${v})\n`])
@@ -337,23 +363,45 @@ export function eliminate_ap(
   }
 }
 
+export function eliminate_transport(
+  env: Env.Env,
+  target: Value.Value,
+  motive: Exp.Exp,
+  base: Exp.Exp,
+): Value.Value {
+  throw new Error()
+
+  // if (target instanceof Value.The) {
+  //   let the = target
+  //   // NOTE maybe structural `The` like `eliminate_dot`
+  //   return eliminate_transport(env, the.value, motive, base)
+  // }
+
+  // if (target instanceof Value.) {
+  //   TODO
+  // }
+
+  // else {
+  //   throw new Err.Report([
+  //     "eliminate_transport fail\n" +
+  //       "expecting Value.Obj\n" +
+  //       `while found Value of class: ${target.constructor.name}\n`])
+  // }
+}
+
 export function eliminate_dot(
   env: Env.Env,
   target: Value.Value,
   field_name: string,
 ): Value.Value {
-  if (target instanceof Value.The) {
+  if (target instanceof Value.Neutral.The) {
     let the = target
-    return new Value.The(
+    return new Value.Neutral.The(
       eliminate_dot(env, the.t, field_name),
-      eliminate_dot(env, the.value, field_name))
+      new Value.Neutral.Dot(the.value, field_name))
   }
 
-  if (target instanceof Value.Neutral.Neutral) {
-    return new Value.Neutral.Dot(target, field_name)
-  }
-
-  else if (target instanceof Value.Obj) {
+  if (target instanceof Value.Obj) {
     let { defined } = target
     let the = defined.get(field_name)
 
@@ -394,8 +442,9 @@ export function eliminate_dot(
   else {
     throw new Err.Report([
       "eliminate_dot fail\n" +
-        "expecting Value.Obj\n" +
-        `while found Value of class: ${target.constructor.name}\n`])
+        "expecting object or class\n" +
+        `while found Value of class: ${target.constructor.name}\n` +
+        `target: ${pretty.pretty_value(target)}\n`])
   }
 }
 
@@ -421,7 +470,7 @@ export function scope_to_type_map(
       let t_value = evaluate(scope_env, t)
       let the = {
         t: t_value,
-        value: new Value.The(t_value, new Value.Neutral.Var(name)),
+        value: new Value.Neutral.The(t_value, new Value.Neutral.Var(name)),
       }
       type_map.set(name, the.t)
       scope_env = scope_env.ext(name, the)

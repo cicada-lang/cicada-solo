@@ -49,11 +49,6 @@ export declare class Obj extends Value {
         value: Value;
     }>);
 }
-export declare class The extends Value {
-    t: Value;
-    value: Value;
-    constructor(t: Value, value: Value);
-}
 export declare class Equation extends Value {
     t: Value;
     lhs: Value;
@@ -67,6 +62,11 @@ export declare class Same extends Value {
 }
 export declare namespace Neutral {
     abstract class Neutral extends Value {
+    }
+    class The extends Value {
+        t: Value;
+        value: Neutral;
+        constructor(t: Value, value: Neutral);
     }
     class Var extends Neutral {
         name: string;

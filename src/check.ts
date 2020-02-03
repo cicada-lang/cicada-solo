@@ -197,7 +197,7 @@ export function check_fn(
 
       let the = {
         t: fn_arg_type_value,
-        value: new Value.The(fn_arg_type_value, unique_var),
+        value: new Value.Neutral.The(fn_arg_type_value, unique_var),
       }
 
       local_env = local_env.ext(fn_arg_name, the)

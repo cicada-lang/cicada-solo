@@ -165,7 +165,7 @@ export function pretty_value(value: Value.Value): string {
     return pretty_flower_block(s)
   }
 
-  else if (value instanceof Value.The) {
+  else if (value instanceof Value.Neutral.The) {
     let the = value
     return `the(${pretty_value(the.t)}, ${pretty_value(the.value)})`
   }
