@@ -1,4 +1,3 @@
-- `Neutral` should not extend `Value`, only `Value.TheNeutral` is value
 - fix comments about inference rules
 - note about `Neutral.The` and the value
 - [maybe] we should learn from pie again
