@@ -4,7 +4,9 @@ import * as Scope from "./scope"
 
 import * as Neutral from "./neutral"
 
-export abstract class Value {}
+export abstract class Value {
+  abstract_class_name: "Value" = "Value"
+}
 
 export class Type extends Value {}
 

@@ -1,6 +1,5 @@
 import fs from "fs"
 import path from "path"
-
 import commander from "commander"
 
 export abstract class CommandLine {

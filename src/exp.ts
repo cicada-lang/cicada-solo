@@ -1,6 +1,8 @@
 import * as Scope from "./scope"
 
-export abstract class Exp {}
+export abstract class Exp {
+  abstract_class_name: "Exp" = "Exp"
+}
 
 export class Var extends Exp {
   constructor(

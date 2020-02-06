@@ -266,7 +266,7 @@ export function eliminate_ap(
     }
 
     else {
-      return new Err.Report([
+      throw new Err.Report([
         "eliminate_ap fail\n" +
           "target type is not Value.Pi\n" +
           `target: ${pretty.pretty_value(target)}\n`])

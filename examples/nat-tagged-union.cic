@@ -1,16 +1,16 @@
 class nat_t {
-  __club_name__ : string_t = "nat_t"
-  __member_name__ : string_t
+  __club__ : string_t = "nat_t"
+  __member__ : string_t
 }
 
 class zero_t {
-  __club_name__ : string_t = "nat_t"
-  __member_name__ : string_t = "zero_t"
+  __club__ : string_t = "nat_t"
+  __member__ : string_t = "zero_t"
 }
 
 class succ_t {
-  __club_name__ : string_t = "nat_t"
-  __member_name__ : string_t = "succ_t"
+  __club__ : string_t = "nat_t"
+  __member__ : string_t = "succ_t"
   prev : nat_t
 }
 
@@ -18,15 +18,15 @@ succ : {
   x : nat_t -> succ_t(x)
 } = {
   x : nat_t => {
-    __club_name__ = "nat_t"
-    __member_name__ = "succ_t"
+    __club__ = "nat_t"
+    __member__ = "succ_t"
     prev = x
   }
 }
 
 zero = {
-  __club_name__ = "nat_t"
-  __member_name__ = "zero_t"
+  __club__ = "nat_t"
+  __member__ = "zero_t"
 }
 one = succ(zero)
 two = succ(one)

@@ -3,6 +3,7 @@ import * as Env from "./env";
 import * as Scope from "./scope";
 import * as Neutral from "./neutral";
 export declare abstract class Value {
+    abstract_class_name: "Value";
 }
 export declare class Type extends Value {
 }

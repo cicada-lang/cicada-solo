@@ -1,5 +1,6 @@
 import * as Scope from "./scope";
 export declare abstract class Exp {
+    abstract_class_name: "Exp";
 }
 export declare class Var extends Exp {
     name: string;
