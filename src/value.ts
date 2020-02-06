@@ -1,7 +1,6 @@
 import * as Exp from "./exp"
 import * as Env from "./env"
 import * as Scope from "./scope"
-
 import * as Neutral from "./neutral"
 
 export abstract class Value {
