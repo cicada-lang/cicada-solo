@@ -1,5 +1,7 @@
 import * as Value from "./value"
 
+// NOTE maybe `Neutral` should not extends `Value`.
+
 export abstract class Neutral extends Value.Value {}
 
 export class Var extends Neutral {

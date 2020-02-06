@@ -9,6 +9,7 @@ export declare class Scope {
 }
 export declare namespace Entry {
     abstract class Entry {
+        abstract_class_name: "Scope.Entry";
     }
     class Let extends Entry {
         value: Exp.Exp;

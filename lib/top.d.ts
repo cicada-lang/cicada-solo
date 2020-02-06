@@ -1,6 +1,7 @@
 import * as Exp from "./exp";
 import * as Scope from "./scope";
 export declare abstract class Top {
+    abstract_class_name: "Top";
 }
 export declare class TopNamedScopeEntry extends Top {
     name: string;

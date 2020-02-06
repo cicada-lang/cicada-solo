@@ -1,7 +1,9 @@
 import * as Exp from "./exp"
 import * as Scope from "./scope"
 
-export abstract class Top {}
+export abstract class Top {
+  abstract_class_name: "Top" = "Top"
+}
 
 export class TopNamedScopeEntry extends Top {
   constructor(

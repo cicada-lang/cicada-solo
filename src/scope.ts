@@ -59,7 +59,9 @@ export class Scope {
 
 export namespace Entry {
 
-  export abstract class Entry {}
+  export abstract class Entry {
+    abstract_class_name: "Scope.Entry" = "Scope.Entry"
+  }
 
   export class Let extends Entry {
     constructor(

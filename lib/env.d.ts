@@ -21,6 +21,7 @@ export declare class Env {
 }
 export declare namespace Entry {
     abstract class Entry {
+        abstract_class_name: "Env.Entry";
     }
     class DefineRec extends Entry {
         t: Exp.Exp;

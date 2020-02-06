@@ -91,7 +91,9 @@ export class Env {
 
 export namespace Entry {
 
-  export abstract class Entry {}
+  export abstract class Entry {
+    abstract_class_name: "Env.Entry" = "Env.Entry"
+  }
 
   export class DefineRec extends Entry {
     constructor(
