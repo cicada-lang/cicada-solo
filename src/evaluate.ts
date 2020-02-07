@@ -371,7 +371,7 @@ export function eliminate_ap(
   else {
     throw new Err.Report([
       "eliminate_ap fail\n" +
-        "expecting a value class that can be applied as function\n" +
+        "expecting a value that can be applied as function\n" +
         `while found value of class: ${target.constructor.name}\n`])
   }
 }
