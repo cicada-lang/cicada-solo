@@ -4,13 +4,13 @@ import { Parser } from "@forchange/partech/lib/parser"
 import * as ptc from "@forchange/partech/lib/predefined"
 
 import * as Top from "./top"
-import * as CMD from "./cmd"
+import * as CLI from "./cli"
 import * as API from "./api"
 import * as grammar from "./grammar"
 
 const pkg: any = require("../package.json")
 
-export class CicadaCommandLine extends CMD.CommandLine {
+export class CicadaCommandLineInterface extends CLI.CommandLineInterface {
   name(): string {
     return pkg.name
   }

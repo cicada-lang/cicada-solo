@@ -2,7 +2,7 @@ import fs from "fs"
 import path from "path"
 import commander from "commander"
 
-export abstract class CommandLine {
+export abstract class CommandLineInterface {
   abstract name(): string
   abstract version(): string
   abstract run_code(code: string, config: { [key: string]: any }): void
