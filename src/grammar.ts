@@ -129,7 +129,7 @@ function exp(): Rule {
       "pi": ["{", scope, "-", ">", exp, "}"],
       "fn": ["{", scope, "=", ">", exp, "}"],
       "fn_case": ["choice", "{", $(ptc.non_empty_list, fn_case_clause), "}"],
-      "ap": [exp, "(", $(ptc.non_empty_list, arg_entry), ")"],
+      "ap": [exp, "(", $(ptc.non_empty_list, arg), ")"],
       "cl": [ "class", "{", scope, "}"],
       "cl_empty": ["class", "{", "}"],
       "obj": ["{", scope, "}"],
@@ -156,10 +156,10 @@ const exp_matcher: (tree: AST.Tree) => Exp.Exp =
         new Exp.Fn(scope_matcher(scope), exp_matcher(body)) ,
         "fn_case": ([, , fn_case_clause_list, _]) =>
           new Exp.FnCase(ptc.non_empty_list_matcher(fn_case_clause_matcher)(fn_case_clause_list)),
-        "ap": ([target, , arg_entry_list, _]) =>
+        "ap": ([target, , arg_list, _]) =>
           new Exp.Ap(
             exp_matcher(target),
-            ptc.non_empty_list_matcher(arg_entry_matcher)(arg_entry_list)),
+            ptc.non_empty_list_matcher(arg_matcher)(arg_list)),
         "cl": ([, , scope, _]) =>
           new Exp.Cl(scope_matcher(scope)),
         "cl_empty": _ =>
@@ -191,18 +191,18 @@ const fn_case_clause_matcher =
       }
     ])
 
-function arg_entry(): Rule {
+function arg(): Rule {
   return new Rule(
-    "arg_entry", {
+    "arg", {
       "arg": [exp],
       "arg_comma": [exp, ","],
     })
 }
 
-const arg_entry_matcher =
+const arg_matcher =
   AST.Node.matcher_with_span<Exp.Exp>(
     span => [
-      "arg_entry", {
+      "arg", {
         "arg": ([exp]) => exp_matcher(exp),
         "arg_comma": ([exp, _]) => exp_matcher(exp),
       }
