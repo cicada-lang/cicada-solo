@@ -2,10 +2,12 @@ import fs from "fs"
 import path from "path"
 import commander from "commander"
 
-export abstract class CommandLineInterface {
-  abstract name(): string
-  abstract version(): string
-  abstract run_code(code: string, config: { [key: string]: any }): void
+export class CommandLineInterface {
+  constructor(
+    public name: string,
+    public version: string,
+    public run_code: (code: string, config: { [key: string]: any }) => void,
+  ) {}
 
   run_file(file_path: string, config: { [key: string]: any }): void {
     file_path = path.join(process.cwd(), file_path)
@@ -18,8 +20,8 @@ export abstract class CommandLineInterface {
     const program = new commander.Command()
 
     program
-      .name(this.name())
-      .version(this.version(), "-v, --version", "output the current version")
+      .name(this.name)
+      .version(this.version, "-v, --version", "output the current version")
       .option("--verbose", "print more during eval")
       .option(
         "-e, --eval <file>", "file to eval",
