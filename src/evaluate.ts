@@ -102,10 +102,7 @@ export function evaluate(
   }
 
   else {
-    throw new Err.Report([
-      "evaluate fail\n" +
-        `unhandled class of Exp: ${exp.constructor.name}\n` +
-        `exp: ${JSON.stringify(exp, null, 2)}\n`])
+    throw new Err.Unhandled(exp)
   }
 }
 
@@ -147,9 +144,7 @@ export function evaluate_obj(
     }
 
     else {
-      throw new Err.Report([
-        "evaluate_obj fail\n" +
-          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
+      throw new Err.Unhandled(entry)
     }
   }
 
@@ -197,9 +192,7 @@ export function evaluate_cl(
       }
 
       else {
-        throw new Err.Report([
-          "evaluate_cl fail\n" +
-            `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
+        throw new Err.Unhandled(entry)
       }
     }
   }
@@ -240,9 +233,7 @@ export function evaluate_block(
     }
 
     else {
-      throw new Err.Report([
-        "evaluate_block fail\n" +
-          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
+      throw new Err.Unhandled(entry)
     }
   }
 
@@ -492,9 +483,7 @@ export function scope_to_type_map(
     }
 
     else {
-      throw new Error(
-        "scope_to_type_map fail\n" +
-          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+      throw new Err.Unhandled(entry)
     }
   }
 

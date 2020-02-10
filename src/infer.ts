@@ -145,9 +145,7 @@ export function infer(
     }
 
     else {
-      throw new Err.Report([
-        "infer fail\n" +
-          `unhandled class of Exp: ${exp.constructor.name}\n`])
+      throw new Err.Unhandled(exp)
     }
   }
 

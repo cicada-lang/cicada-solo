@@ -1,12 +1,11 @@
-import assert from "assert"
 import * as Exp from "./exp"
 import * as Env from "./env"
 import * as Value from "./value"
 import * as Neutral from "./neutral"
 import * as Scope from "./scope"
+import * as Err from "./err"
 
 export function pretty_exp(exp: Exp.Exp): string {
-
   if (exp instanceof Exp.Var) {
     let { name } = exp
     return name
@@ -99,14 +98,11 @@ export function pretty_exp(exp: Exp.Exp): string {
   }
 
   else {
-    throw new Error(
-      "pretty_exp fail\n" +
-        `unhandled class of Exp: ${exp.constructor.name}`)
+    throw new Err.Unhandled(exp)
   }
 }
 
 export function pretty_value(value: Value.Value): string {
-
   if (value instanceof Value.Type) {
     return "type"
   }
@@ -196,10 +192,7 @@ export function pretty_value(value: Value.Value): string {
   }
 
   else {
-    throw new Error(
-      "pretty_value fail\n" +
-        `unhandled class of Value: ${value.constructor.name}\n` +
-        `value: ${JSON.stringify(value, null, 2)}\n`)
+    throw new Err.Unhandled(value)
   }
 }
 
@@ -221,9 +214,7 @@ export function pretty_env(
     }
 
     else {
-      throw new Error(
-        "pretty_env fail\n" +
-          `unhandled class of Env.Entry: ${entry.constructor.name}`)
+      throw new Err.Unhandled(entry)
     }
   }
 
@@ -253,9 +244,7 @@ export function pretty_scope(
     }
 
     else {
-      throw new Error(
-        "pretty_scope fail\n" +
-          `unhandled class of Scope.Entry: ${entry.constructor.name}`)
+      throw new Err.Unhandled(entry)
     }
   }
 

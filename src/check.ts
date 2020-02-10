@@ -134,9 +134,7 @@ export function check_obj(
       }
 
       else {
-        throw new Error(
-          "check_obj fail\n" +
-            `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+        throw new Err.Unhandled(entry)
       }
     }
   }

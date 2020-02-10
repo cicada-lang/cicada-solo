@@ -90,9 +90,7 @@ function top_list_check_and_evaluate(
       }
 
       else {
-        throw new Error(
-          "run fail\n" +
-            `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+        throw new Err.Unhandled(entry)
       }
     }
 
@@ -195,9 +193,7 @@ function top_list_check_and_evaluate(
     }
 
     else {
-      throw new Error(
-        "top_list_check_and_evaluate fail\n" +
-          `unhandled class of Top: ${top.constructor.name}\n`)
+      throw new Err.Unhandled(top)
     }
   }
 }

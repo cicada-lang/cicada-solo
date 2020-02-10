@@ -87,9 +87,7 @@ export function readback(value: Value.Value): Exp.Exp {
   }
 
   else {
-    throw new Err.Report([
-      "readback fail\n" +
-        `unhandled class of Value: ${value.constructor.name}\n`])
+    throw new Err.Unhandled(value)
   }
 }
 
@@ -132,9 +130,7 @@ function scope_readback(
     }
 
     else {
-      throw new Err.Report([
-        "scope_readback fail\n" +
-          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`])
+      throw new Err.Unhandled(entry)
     }
   }
 

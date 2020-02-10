@@ -5,3 +5,7 @@ export declare class Report extends Error {
     prepend(message: string): Report;
 }
 export declare function merge_message_list(message_list: Array<string>): string;
+export declare class Unhandled extends Error {
+    value: any;
+    constructor(value: any);
+}

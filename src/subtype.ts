@@ -125,9 +125,7 @@ export function subtype(s: Value.Value, t: Value.Value): void {
           }
 
           else {
-            throw new Err.Report([
-              "subtype fail\n" +
-                `unhandled class of Scope.Entry: ${entry.constructor.name}`])
+            throw new Err.Unhandled(entry)
           }
         }
 

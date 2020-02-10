@@ -50,9 +50,7 @@ export class Scope {
     }
 
     else {
-      throw new Error(
-        "Scope.lookup_value fail\n" +
-          `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+      throw new Err.Unhandled(entry)
     }
   }
 }
@@ -103,9 +101,7 @@ export function entry_to_type(
   }
 
   else {
-    throw new Error(
-      "entry_to_type fail\n" +
-        `unhandled class of Scope.Entry: ${entry.constructor.name}\n`)
+    throw new Err.Unhandled(entry)
   }
 }
 
@@ -163,9 +159,7 @@ export function scope_check_with_args(
     }
 
     else {
-      throw new Err.Report([
-        "scope_check_with_args fail\n" +
-          `unhandled class of Entry: ${entry.constructor.name}\n`])
+      throw new Err.Unhandled(entry)
     }
   }
 
@@ -247,9 +241,7 @@ export function scope_check_with_args_for_fn(
     }
 
     else {
-      throw new Err.Report([
-        "scope_check_with_args_for_fn fail\n" +
-          `unhandled class of Entry: ${entry.constructor.name}\n`])
+      throw new Err.Unhandled(entry)
     }
   }
 
@@ -302,9 +294,7 @@ export function scope_check(
     }
 
     else {
-      throw new Error(
-        "scope_check fail\n" +
-          `unhandled class of Entry: ${entry.constructor.name}\n`)
+      throw new Err.Unhandled(entry)
     }
   }
 
@@ -358,9 +348,7 @@ export function scope_compare_given(
         }
 
         else {
-          throw new Err.Report([
-            "scope_compare_given fail to step left scope\n" +
-              `unhandled class of Entry: ${entry.constructor.name}\n`])
+          throw new Err.Unhandled(entry)
         }
       }
     }
@@ -394,9 +382,7 @@ export function scope_compare_given(
         }
 
         else {
-          throw new Err.Report([
-            "scope_compare_given fail to step right scope\n" +
-              `unhandled class of Entry: ${entry.constructor.name}\n`])
+          throw new Err.Unhandled(entry)
         }
       }
     }

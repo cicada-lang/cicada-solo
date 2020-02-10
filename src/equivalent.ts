@@ -142,9 +142,7 @@ export function equivalent(s: Value.Value, t: Value.Value): void {
           }
 
           else {
-            throw new Err.Report([
-              "equivalent fail\n" +
-                `unhandled class of Scope.Entry: ${entry.constructor.name}`])
+            throw new Err.Unhandled(entry)
           }
         }
 

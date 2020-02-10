@@ -29,9 +29,7 @@ export class Env {
     }
 
     else {
-      throw new Err.Report([
-        "Env.lookup_type_and_value fail\n" +
-          `unhandled class of Entry: ${entry.constructor.name}\n`])
+      throw new Err.Unhandled(entry)
     }
   }
 
