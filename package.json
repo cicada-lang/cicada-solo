@@ -19,7 +19,6 @@
     "typescript": "^3.7.5"
   },
   "dependencies": {
-    "@forchange/basic": "file:deps/basic",
     "@forchange/partech": "file:deps/partech",
     "commander": "^4.1.1",
     "nanoid": "^2.1.11"

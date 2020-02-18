@@ -1,6 +1,3 @@
-[submodule "deps/basic"]
-        path = deps/basic
-        url = ../../cleword/explore/basic.git
 [submodule "deps/partech"]
         path = deps/partech
         url = ../../cleword/explore/partech.git
