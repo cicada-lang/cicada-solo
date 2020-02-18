@@ -4,7 +4,7 @@ import * as Neutral from "./neutral"
 import * as Env from "./env"
 import * as Scope from "./scope"
 import * as Err from "./err"
-import { evaluate } from "./evaluate"
+import { evaluate, eliminate_ap } from "./evaluate"
 import { check } from "./check"
 import { readback } from "./readback"
 import * as pretty from "./pretty"
@@ -129,6 +129,50 @@ export function infer(
     else if (exp instanceof Exp.Dot) {
       let { target, field_name } = exp
       return infer_dot(env, target, field_name)
+    }
+
+    else if (exp instanceof Exp.Equation) {
+      let { t, lhs, rhs } = exp
+      let t_value = evaluate(env, t)
+      check(env, lhs, t_value)
+      check(env, rhs, t_value)
+      return new Value.Type()
+    }
+
+    else if (exp instanceof Exp.Same) {
+      let { t, value } = exp
+      return new Value.Equation(evaluate(env, t), value, value, env)
+    }
+
+    else if (exp instanceof Exp.Transport) {
+      let { equation, motive, base } = exp
+      let equation_value = evaluate(env, equation)
+      if (equation_value instanceof Value.Equation) {
+        let { lhs, rhs, equation_env } = equation_value
+        let motive_type = infer(env, motive)
+        if (motive_type instanceof Value.Pi) {
+          let pi = motive_type
+          Scope.scope_check_with_args(pi.scope, pi.scope_env, [lhs], equation_env)
+          Scope.scope_check_with_args(pi.scope, pi.scope_env, [rhs], equation_env)
+          let motive_value = evaluate(env, motive)
+          check(env, base, eliminate_ap(equation_env, motive_value, [lhs]))
+          return eliminate_ap(equation_env, motive_value, [rhs])
+        }
+
+        else {
+          throw new Err.Report([
+            "infer_transport fail\n" +
+              "motive_type type is not Value.Pi\n" +
+              `target: ${pretty.pretty_value(motive_type)}\n`])
+        }
+      }
+
+      else {
+        throw new Err.Report([
+          "infer_transport fail\n" +
+            "expecting Value.Equation\n" +
+            `found: ${pretty.pretty_value(equation_value)}\n`])
+      }
     }
 
     else if (exp instanceof Exp.Block) {
