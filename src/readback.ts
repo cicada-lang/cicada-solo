@@ -66,6 +66,18 @@ export function readback(value: Value.Value): Exp.Exp {
     return new Exp.Obj(new Scope.Scope(named_entries))
   }
 
+  else if (value instanceof Value.Equation) {
+    let { t, lhs, rhs, equation_env } = value
+    let lhs_value = evaluate(equation_env, lhs)
+    let rhs_value = evaluate(equation_env, rhs)
+    return new Exp.Equation(readback(t), readback(lhs_value), readback(rhs_value))
+  }
+
+  else if (value instanceof Value.Same) {
+    let same = value
+    return new Exp.Same(readback(same.t), readback(same.value))
+  }
+
   else if (value instanceof Value.TheNeutral) {
     let the = value
     return new Exp.The(readback(the.t), readback(the.value))
@@ -84,6 +96,11 @@ export function readback(value: Value.Value): Exp.Exp {
   else if (value instanceof Neutral.Dot) {
     let { target, field_name } = value
     return new Exp.Dot(readback(target), field_name)
+  }
+
+  else if (value instanceof Neutral.Transport) {
+    let { equation, motive, base } = value
+    return new Exp.Transport(readback(equation), readback(motive), readback(base))
   }
 
   else {
