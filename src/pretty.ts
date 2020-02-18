@@ -48,7 +48,7 @@ export function pretty_exp(exp: Exp.Exp): string {
       let scope_str = pretty_scope(scope, ", ")
       return `case ${scope_str} => ${pretty_exp(body)}`
     }).join("\n")
-    return `choice ${pretty_flower_block(s)}`
+    return `${pretty_flower_block(s)}`
   }
 
   else if (exp instanceof Exp.Ap) {
@@ -140,7 +140,7 @@ export function pretty_value(value: Value.Value): string {
       let scope_str = pretty_scope(scope, ", ")
       return `case ${scope_str} => ${pretty_exp(body)}`
     }).join("\n")
-    return `choice ${pretty_flower_block(s)}`
+    return `${pretty_flower_block(s)}`
   }
 
   else if (value instanceof Value.Cl) {

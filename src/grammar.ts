@@ -15,14 +15,30 @@ import * as Scope from "./scope"
 
 const preserved = [
   "type", "class",
-  "choice", "case",
+  "case",
   "string_t",
 ]
 
 const identifier = ptc.identifier_with_preserved("identifier", preserved)
 
-function top_entry(): Rule {
-  return new Rule(
+const arg_entry =
+  new Rule(
+    "arg_entry", {
+      "arg": [exp],
+      "arg_comma": [exp, ","],
+    })
+
+const arg_entry_matcher =
+  AST.Node.matcher_with_span<Exp.Exp>(
+    span => [
+      "arg_entry", {
+        "arg": ([exp]) => exp_matcher(exp),
+        "arg_comma": ([exp, _]) => exp_matcher(exp),
+      }
+    ])
+
+const top_entry =
+  new Rule(
     "top_entry", {
       "named_entry": [named_entry],
       "@refuse": ["@", "refuse", exp, ":", exp],
@@ -30,7 +46,6 @@ function top_entry(): Rule {
       "@show": ["@", "show", exp],
       "@eq": ["@", "eq", exp, "=", exp],
     })
-}
 
 const top_entry_matcher =
   AST.Node.matcher_with_span<Top.Top>(
@@ -49,13 +64,12 @@ const top_entry_matcher =
       }
     ])
 
-export function top_list(): Rule {
-  return new Rule(
+export const top_list =
+  new Rule(
     "top_list", {
       "top_entry_list": [$(ptc.non_empty_list, top_entry)],
-    }
-  )
-}
+    })
+
 
 export const top_list_matcher =
   AST.Node.matcher_with_span<Array<Top.Top>>(
@@ -66,12 +80,11 @@ export const top_list_matcher =
       }
     ])
 
-function scope(): Rule {
-  return new Rule(
+const scope =
+  new Rule(
     "scope", {
       "named_entries": [$(ptc.non_empty_list, named_entry)],
     })
-}
 
 const scope_matcher : (tree: AST.Tree) => Scope.Scope =
   AST.Node.matcher_with_span<Scope.Scope>(
@@ -128,7 +141,7 @@ function exp(): Rule {
       "string": [ptc.double_quoted_string],
       "pi": ["{", scope, "-", ">", exp, "}"],
       "fn": ["{", scope, "=", ">", exp, "}"],
-      "fn_case": ["choice", "{", $(ptc.non_empty_list, fn_case_clause), "}"],
+      "fn_case": ["{", $(ptc.non_empty_list, fn_case_clause), "}"],
       "ap": [exp, "(", $(ptc.non_empty_list, arg_entry), ")"],
       "cl": [ "class", "{", scope, "}"],
       "cl_empty": ["class", "{", "}"],
@@ -154,7 +167,7 @@ const exp_matcher: (tree: AST.Tree) => Exp.Exp =
           new Exp.Pi(scope_matcher(scope), exp_matcher(return_type)),
         "fn": ([, scope, , , body, _]) =>
         new Exp.Fn(scope_matcher(scope), exp_matcher(body)) ,
-        "fn_case": ([, , fn_case_clause_list, _]) =>
+        "fn_case": ([, fn_case_clause_list, _]) =>
           new Exp.FnCase(ptc.non_empty_list_matcher(fn_case_clause_matcher)(fn_case_clause_list)),
         "ap": ([target, , arg_entry_list, _]) =>
           new Exp.Ap(
@@ -175,12 +188,11 @@ const exp_matcher: (tree: AST.Tree) => Exp.Exp =
       }
     ])
 
-function fn_case_clause(): Rule {
-  return new Rule(
+const fn_case_clause =
+  new Rule(
     "fn_case_clause", {
       "case": ["case", scope, "=", ">", exp],
     })
-}
 
 const fn_case_clause_matcher =
   AST.Node.matcher_with_span<Exp.Fn>(
@@ -188,22 +200,5 @@ const fn_case_clause_matcher =
       "fn_case_clause", {
         "case": ([, scope, , , body]) =>
           new Exp.Fn(scope_matcher(scope), exp_matcher(body)) ,
-      }
-    ])
-
-function arg_entry(): Rule {
-  return new Rule(
-    "arg_entry", {
-      "arg": [exp],
-      "arg_comma": [exp, ","],
-    })
-}
-
-const arg_entry_matcher =
-  AST.Node.matcher_with_span<Exp.Exp>(
-    span => [
-      "arg_entry", {
-        "arg": ([exp]) => exp_matcher(exp),
-        "arg_comma": ([exp, _]) => exp_matcher(exp),
       }
     ])

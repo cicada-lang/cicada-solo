@@ -38,7 +38,7 @@ list_cons_unit : {
   }
 }
 
-list_length : { A : type, x : list_t(A) -> nat_t } = choice {
+list_length : { A : type, x : list_t(A) -> nat_t } = {
   case A : type, x : cons_t(A) => succ(list_length(A, x.cdr))
   case A : type, x : null_t(A) => zero
 }
@@ -49,7 +49,7 @@ list_length : { A : type, x : list_t(A) -> nat_t } = choice {
 
 // NOTE The following is a simple version of `list_length`.
 
-list_length_simple : { x : list_t -> nat_t } = choice {
+list_length_simple : { x : list_t -> nat_t } = {
   case x : cons_t => succ(list_length_simple(x.cdr))
   case x : null_t => zero
 }
@@ -58,7 +58,7 @@ list_length_simple : { x : list_t -> nat_t } = choice {
 @eq list_length_simple(list_cons_unit(null_unit)) = one
 @eq list_length_simple(list_cons_unit(list_cons_unit(null_unit))) = two
 
-list_append : { A : type, x : list_t(A), y : list_t(A) -> list_t(A) } = choice {
+list_append : { A : type, x : list_t(A), y : list_t(A) -> list_t(A) } = {
   case A : type, x : cons_t(A), y : list_t(A) => {
     A = A
     car = x.car

@@ -1,4 +1,3 @@
-- no `choice { case ... }` just `{ case ... }`
 - fix comments about inference rules
 - note about `Neutral.The` and the value
 - [maybe] we should learn from pie again

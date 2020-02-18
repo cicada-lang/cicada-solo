@@ -22,7 +22,7 @@ six = succ(five)
 @accept one : succ_t(zero)
 @refuse zero : succ_t
 
-nat_add : { x : nat_t, y : nat_t -> nat_t } = choice {
+nat_add : { x : nat_t, y : nat_t -> nat_t } = {
   case x : succ_t, y : nat_t => succ(nat_add(x.prev, y))
   case x : zero_t, y : nat_t => y
 }
@@ -70,7 +70,7 @@ vector_append : {
   x : vector_t(A, m)
   y : vector_t(A, n)
     -> vector_t(A, nat_add(m, n))
-} = choice {
+} = {
   case
     A : type
     m : succ_t

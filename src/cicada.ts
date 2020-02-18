@@ -13,7 +13,7 @@ const pkg: any = require("../package.json")
 function run_code(code: string, config: { [key: string]: any }): void {
   const lexer = ptc.common_lexer
   const partech = new Earley()
-  const parser = new Parser(lexer, partech, grammar.top_list())
+  const parser = new Parser(lexer, partech, grammar.top_list)
 
   try {
     let tree = parser.parse(code)

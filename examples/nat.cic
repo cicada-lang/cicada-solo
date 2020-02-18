@@ -22,7 +22,7 @@ six = succ(five)
 @accept one : succ_t(zero)
 @refuse zero : succ_t
 
-nat_add : { x : nat_t, y : nat_t -> nat_t } = choice {
+nat_add : { x : nat_t, y : nat_t -> nat_t } = {
   case x : succ_t, y : nat_t => succ(nat_add(x.prev, y))
   case x : zero_t, y : nat_t => y
 }
@@ -36,7 +36,7 @@ nat_add : { x : nat_t, y : nat_t -> nat_t } = choice {
 @eq nat_add(two, three) = five
 @eq nat_add(three, two) = five
 
-nat_mul : { x : nat_t, y : nat_t -> nat_t } = choice {
+nat_mul : { x : nat_t, y : nat_t -> nat_t } = {
   case x : succ_t, y : nat_t => nat_add(y, nat_mul(x.prev, y))
   case x : zero_t, y : nat_t => zero
 }
