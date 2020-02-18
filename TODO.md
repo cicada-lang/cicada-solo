@@ -1,5 +1,4 @@
 - `Same` `Equation` `Transport` readback
-- `Same` `Equation` `Transport` subtype
 - `Same` `Equation` `Transport` equivalent
 - `Same` `Equation` `Transport` pretty
 - `Same` `Equation` `Transport` grammar

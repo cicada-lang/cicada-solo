@@ -137,6 +137,10 @@ export function subtype(s: Value.Value, t: Value.Value): void {
       }
     }
 
+    else if (s instanceof Value.Equation && t instanceof Value.Equation) {
+      subtype(s.t, t.t)
+    }
+
     else {
       equivalent(s, t)
     }
