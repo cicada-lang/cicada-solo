@@ -1,6 +1,6 @@
-- `Same` `Equation` `Transport` equivalent
 - `Same` `Equation` `Transport` pretty
 - `Same` `Equation` `Transport` grammar
+- equation test
 - fix comments about inference rules
 - note about `Neutral.The` and the value
 - [maybe] we should learn from pie again

@@ -158,6 +158,17 @@ export function equivalent(s: Value.Value, t: Value.Value): void {
       equivalent_defined(s.defined, t.defined)
     }
 
+    else if (s instanceof Value.Equation && t instanceof Value.Equation) {
+      equivalent(s.t, t.t)
+      equivalent(evaluate(s.equation_env, s.lhs), evaluate(t.equation_env, t.lhs))
+      equivalent(evaluate(s.equation_env, s.rhs), evaluate(t.equation_env, t.rhs))
+    }
+
+    else if (s instanceof Value.Same && t instanceof Value.Same) {
+      equivalent(s.t, t.t)
+      equivalent(s.value, t.value)
+    }
+
     else if (s instanceof Neutral.Var && t instanceof Neutral.Var) {
       if (s.name !== t.name) {
         throw new Err.Report([
@@ -180,6 +191,12 @@ export function equivalent(s: Value.Value, t: Value.Value): void {
       } else {
         equivalent(s.target, t.target)
       }
+    }
+
+    else if (s instanceof Neutral.Transport && t instanceof Neutral.Transport) {
+      equivalent(s.equation, t.equation)
+      equivalent(s.motive, t.motive)
+      equivalent(s.base, t.base)
     }
 
     else {
