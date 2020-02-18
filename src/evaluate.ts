@@ -88,7 +88,7 @@ export function evaluate(
 
   else if (exp instanceof Exp.Equation) {
     let { t, lhs, rhs } = exp
-    return new Value.Equation(evaluate(env, t), evaluate(env, lhs), evaluate(env, rhs))
+    return new Value.Equation(evaluate(env, t), lhs, rhs, env)
   }
 
   else if (exp instanceof Exp.Same) {
@@ -373,16 +373,39 @@ export function eliminate_transport(
   motive: Exp.Exp,
   base: Exp.Exp,
 ): Value.Value {
-  // TODO
+  if (target instanceof Value.TheNeutral) {
+    let the = target
 
-  throw new Error()
+    if (the.t instanceof Value.Equation) {
+      let { t, lhs, rhs, equation_env } = the.t
+      let base_value = evaluate(env, base)
+      let motive_value = evaluate(env, motive)
+      return new Value.TheNeutral(
+        eliminate_ap(equation_env, motive_value, [rhs]),
+        new Neutral.Transport(
+          the.value,
+          motive_value,
+          base_value))
+    }
 
-  // else {
-  //   throw new Err.Report([
-  //     "eliminate_transport fail\n" +
-  //       "expecting Value.Obj\n" +
-  //       `while found Value of class: ${target.constructor.name}\n`])
-  // }
+    else {
+      throw new Err.Report([
+        "eliminate_transport fail\n" +
+          "target type is not Value.Equation\n" +
+          `target: ${pretty.pretty_value(target)}\n`])
+    }
+  }
+
+  else if (target instanceof Value.Same) {
+    return evaluate(env, base)
+  }
+
+  else {
+    throw new Err.Report([
+      "eliminate_transport fail\n" +
+        "expecting target to be Value.Equation\n" +
+        `while found Value of class: ${target.constructor.name}\n`])
+  }
 }
 
 export function eliminate_dot(

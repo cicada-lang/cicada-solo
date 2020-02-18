@@ -53,9 +53,10 @@ export declare class Obj extends Value {
 }
 export declare class Equation extends Value {
     t: Value;
-    lhs: Value;
-    rhs: Value;
-    constructor(t: Value, lhs: Value, rhs: Value);
+    lhs: Exp.Exp;
+    rhs: Exp.Exp;
+    equation_env: Env.Env;
+    constructor(t: Value, lhs: Exp.Exp, rhs: Exp.Exp, equation_env: Env.Env);
 }
 export declare class Same extends Value {
     t: Value;

@@ -1,7 +1,3 @@
-- fix comments about inference rules
-- note about `Neutral.The` and the value
-- [maybe] we should learn from pie again
-- `Same` `Equation` `Transport` eval
 - `Same` `Equation` `Transport` check
 - `Same` `Equation` `Transport` infer
 - `Same` `Equation` `Transport` readback
@@ -9,6 +5,10 @@
 - `Same` `Equation` `Transport` equivalent
 - `Same` `Equation` `Transport` pretty
 - `Same` `Equation` `Transport` grammar
+- fix comments about inference rules
+- note about `Neutral.The` and the value
+- [maybe] we should learn from pie again
+  - make tartlet a pie and test by the little typer
 # cicada
 - [equality] we can implementation equality by built-in equality
   maybe we need to built-in (make it an axiom) the following function

@@ -56,8 +56,9 @@ export class Obj extends Value {
 export class Equation extends Value {
   constructor(
     public t: Value,
-    public lhs: Value,
-    public rhs: Value,
+    public lhs: Exp.Exp,
+    public rhs: Exp.Exp,
+    public equation_env: Env.Env,
   ) { super() }
 }
 
