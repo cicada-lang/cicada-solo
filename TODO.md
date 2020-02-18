@@ -1,4 +1,3 @@
-- `Same` `Equation` `Transport` check
 - `Same` `Equation` `Transport` infer
 - `Same` `Equation` `Transport` readback
 - `Same` `Equation` `Transport` subtype

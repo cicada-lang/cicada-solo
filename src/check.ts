@@ -36,6 +36,11 @@ export function check(
       }
     }
 
+    else if (exp instanceof Exp.Same) {
+      let same = exp
+      check_same(env, same.t, same.value, t)
+    }
+
     else {
       subtype(infer(env, exp), t)
     }
@@ -142,6 +147,32 @@ export function check_obj(
   else {
     throw new Err.Report([
       "expecting class type\n" +
+        `but found type: ${pretty.pretty_value(t)}\n`])
+  }
+}
+
+export function check_same(
+  env: Env.Env,
+  same_type: Exp.Exp,
+  same_value: Exp.Exp,
+  t: Value.Value,
+): void {
+  if (t instanceof Value.Equation) {
+    let { t: equation_type_value, lhs, rhs, equation_env } = t
+    check(env, same_type, new Value.Type())
+    let same_type_value = evaluate(env, same_type)
+    check(env, same_value, same_type_value)
+    let same_value_value = evaluate(env, same_value)
+    equivalent(same_type_value, equation_type_value)
+    let lhs_value = evaluate(equation_env, lhs)
+    let rhs_value = evaluate(equation_env, rhs)
+    equivalent(same_value_value, lhs_value)
+    equivalent(same_value_value, rhs_value)
+  }
+
+  else {
+    throw new Err.Report([
+      "expecting equation type\n" +
         `but found type: ${pretty.pretty_value(t)}\n`])
   }
 }

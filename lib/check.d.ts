@@ -4,4 +4,5 @@ import * as Env from "./env";
 import * as Scope from "./scope";
 export declare function check(env: Env.Env, exp: Exp.Exp, t: Value.Value): void;
 export declare function check_obj(env: Env.Env, scope: Scope.Scope, t: Value.Value): void;
+export declare function check_same(env: Env.Env, same_type: Exp.Exp, same_value: Exp.Exp, t: Value.Value): void;
 export declare function check_fn(env: Env.Env, scope: Scope.Scope, body: Exp.Exp, t: Value.Value): void;
