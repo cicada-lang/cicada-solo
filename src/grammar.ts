@@ -15,8 +15,7 @@ import * as Scope from "./scope"
 
 const preserved = [
   "type", "class",
-  "case",
-  "string_t",
+  "case", "string_t",
 ]
 
 const identifier = ptc.identifier_with_preserved("identifier", preserved)
@@ -149,6 +148,9 @@ function exp(): Rule {
       "obj_empty": ["{", "}"],
       "dot": [exp, ".", identifier],
       "block": ["{", scope, exp, "}"],
+      "equation": ["equation", "(", exp, exp, exp, ")"],
+      "same": ["same", "(", exp, exp, ")"],
+      "transport": ["transport", "(", exp, exp, exp, ")"],
     })
 }
 
@@ -185,6 +187,12 @@ const exp_matcher: (tree: AST.Tree) => Exp.Exp =
           new Exp.Dot(exp_matcher(target), AST.Leaf.word(field_name)),
         "block": ([, scope, body, _]) =>
           new Exp.Block(scope_matcher(scope), exp_matcher(body)),
+        "equation": ([, , t, lhs, rhs, ]) =>
+          new Exp.Equation(exp_matcher(t), exp_matcher(lhs), exp_matcher(rhs)),
+        "same": ([, , t, value, ]) =>
+          new Exp.Same(exp_matcher(t), exp_matcher(value)),
+        "transport": ([, , equation, motive, base, ]) =>
+          new Exp.Transport(exp_matcher(equation), exp_matcher(motive), exp_matcher(base)),
       }
     ])
 
