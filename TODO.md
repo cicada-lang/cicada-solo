@@ -1,4 +1,7 @@
-- use `transport` to define `equation_apply`
+- note about we need nominal typing
+# note
+- we need nominal typing
+# todo
 - equation test
 - fix comments about inference rules
 - note about `Neutral.The` and the value

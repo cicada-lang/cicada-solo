@@ -146,9 +146,9 @@ export function infer(
 
     else if (exp instanceof Exp.Transport) {
       let { equation, motive, base } = exp
-      let equation_value = evaluate(env, equation)
-      if (equation_value instanceof Value.Equation) {
-        let { lhs, rhs, equation_env } = equation_value
+      let equation_type = infer(env, equation)
+      if (equation_type instanceof Value.Equation) {
+        let { lhs, rhs, equation_env } = equation_type
         let motive_type = infer(env, motive)
         if (motive_type instanceof Value.Pi) {
           let pi = motive_type
@@ -170,8 +170,8 @@ export function infer(
       else {
         throw new Err.Report([
           "infer_transport fail\n" +
-            "expecting Value.Equation\n" +
-            `found: ${pretty.pretty_value(equation_value)}\n`])
+            "expecting equation_type to be Value.Equation\n" +
+            `found: ${pretty.pretty_value(equation_type)}\n`])
       }
     }
 

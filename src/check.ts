@@ -169,19 +169,6 @@ export function check_same(
 
     equivalent(same_value_value, lhs_value)
     equivalent(same_value_value, rhs_value)
-
-    // TODO we need unification instead of the following.
-
-    // try {
-    //   equivalent(same_value_value, lhs_value)
-    //   return
-    // } catch (error) {
-    //   if (error instanceof Err.Report) {
-    //     equivalent(same_value_value, rhs_value)
-    //   } else {
-    //     throw error
-    //   }
-    // }
   }
 
   else {
@@ -231,6 +218,7 @@ export function check_fn(
       let [fn_arg_name, fn_arg_entry] = scope.named_entries[i]
       let pi_arg_type_value = Scope.entry_to_type(pi_arg_entry, scope_env)
       let fn_arg_type_value = Scope.entry_to_type(fn_arg_entry, local_env)
+
       subtype(fn_arg_type_value, pi_arg_type_value)
 
       // NOTE we need to use unique_var as unification here,

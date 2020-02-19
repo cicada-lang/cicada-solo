@@ -180,7 +180,9 @@ export function pretty_value(value: Value.Value): string {
 
   else if (value instanceof Value.TheNeutral) {
     let the = value
-    return `the(${pretty_value(the.t)}, ${pretty_value(the.value)})`
+    return `${pretty_value(the.value)} : ${pretty_value(the.t)}`
+    // return `the(${pretty_value(the.t)}, ${pretty_value(the.value)})`
+    // return pretty_value(the.value)
   }
 
   else if (value instanceof Value.Equation) {

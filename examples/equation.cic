@@ -29,15 +29,6 @@ nat_add : { x : nat_t, y : nat_t -> nat_t } = {
   case x : zero_t, y : nat_t => y
 }
 
-@eq nat_add(zero, zero) = zero
-@eq nat_add(one, zero) = one
-@eq nat_add(zero, one) = one
-@eq nat_add(one, two) = three
-@eq nat_add(two, one) = three
-@eq nat_add(two, two) = four
-@eq nat_add(two, three) = five
-@eq nat_add(three, two) = five
-
 same_two : equation_t(nat_t, two, nat_add(one, one)) = same(nat_t, two)
 
 // eqv-apply :
@@ -45,21 +36,22 @@ same_two : equation_t(nat_t, two, nat_add(one, one)) = same(nat_t, two)
 //   (f : A -> B) -> eqv-t x y -> eqv-t (f x) (f y)
 // eqv-apply f refl = refl
 
-// TODO we need unification to handle the following.
-
-// equation_apply : {
-//   A : type, B : type,
-//   x : A, y : A,
-//   f : { x : A -> B },
-//   same_A : equation_t(A, x, y)
-//     -> equation_t(B, f(x), f(y))
-// } = {
-//   A : type, B : type,
-//   x : A, y : A,
-//   f : { x : A -> B },
-//   same_A : equation_t(A, x, y)
-//     => same(B, f(x))
-// }
+equation_apply : {
+  A : type, B : type,
+  x : A, y : A,
+  f : { x : A -> B },
+  x_equal_y : equation_t(A, x, y)
+    -> equation_t(B, f(x), f(y))
+} = {
+  A : type, B : type,
+  x : A, y : A,
+  f : { x : A -> B },
+  x_equal_y : equation_t(A, x, y)
+    => transport(
+      x_equal_y,
+      { z : A => equation_t(B, f(x), f(z)) },
+      same(B, f(x)))
+}
 
 // eqv-compose :
 //   {A : type} {x y z : A} ->
@@ -84,6 +76,7 @@ same_two : equation_t(nat_t, two, nat_add(one, one)) = same(nat_t, two)
 // nat-add-associate (succ x) y z =
 //   eqv-apply succ (nat-add-associate x y z)
 
+// NOTE we need nominal typing
 // nat_add_associate : {
 //   x : nat_t, y : nat_t, z : nat_t ->
 //     equation_t(
@@ -96,7 +89,7 @@ same_two : equation_t(nat_t, two, nat_add(one, one)) = same(nat_t, two)
 // //       nat_t,
 // //       nat_add(x, nat_add(y, z)),
 // //       nat_add(nat_add(x, y), z))
-//   case x : zero_t, y : nat_t, z : nat_t => same(nat_t, zero)
+//   case x : zero_t, y : nat_t, z : nat_t => same(nat_t, x)
 // }
 
 // nat-add-zero-commute :
