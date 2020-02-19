@@ -397,13 +397,14 @@ export function scope_compare_given(
       let [[s_name, s], [t_name, t]] = [s_current, t_current]
       let s_value = evaluate(s_scope_env, s)
       let t_value = evaluate(t_scope_env, t)
-
-      effect(name, s_value, t_value)
-
       let unique_name = util.unique_name(`${s_name}:${t_name}`)
+      effect(unique_name, s_value, t_value)
       let unique_var = new Neutral.Var(unique_name)
       s_scope_env = s_scope_env.ext(s_name, { t: s_value, value: unique_var })
       t_scope_env = t_scope_env.ext(t_name, { t: t_value, value: unique_var })
+
+      s_scope_env = s_scope_env.ext(unique_name, { t: s_value, value: unique_var })
+      t_scope_env = t_scope_env.ext(unique_name, { t: t_value, value: unique_var })
 
       s_current = undefined
       t_current = undefined

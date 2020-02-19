@@ -166,8 +166,22 @@ export function check_same(
     equivalent(same_type_value, equation_type_value)
     let lhs_value = evaluate(equation_env, lhs)
     let rhs_value = evaluate(equation_env, rhs)
+
     equivalent(same_value_value, lhs_value)
     equivalent(same_value_value, rhs_value)
+
+    // TODO we need unification instead of the following.
+
+    // try {
+    //   equivalent(same_value_value, lhs_value)
+    //   return
+    // } catch (error) {
+    //   if (error instanceof Err.Report) {
+    //     equivalent(same_value_value, rhs_value)
+    //   } else {
+    //     throw error
+    //   }
+    // }
   }
 
   else {

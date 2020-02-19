@@ -1,5 +1,4 @@
 import fs from "fs"
-import path from "path"
 import commander from "commander"
 
 export class CommandLineInterface {
@@ -10,8 +9,6 @@ export class CommandLineInterface {
   ) {}
 
   run_file(file_path: string, config: { [key: string]: any }): void {
-    file_path = path.join(process.cwd(), file_path)
-
     let code = fs.readFileSync(file_path, { encoding: "utf-8" })
     this.run_code(code, config)
   }

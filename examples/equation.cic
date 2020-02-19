@@ -1,0 +1,139 @@
+same_abc : equation_t(string_t, "abc", "abc") = same(string_t, "abc")
+
+class nat_t {}
+class zero_t {}
+class succ_t { prev : nat_t }
+
+succ : {
+  x : nat_t -> succ_t(x)
+} = {
+  x : nat_t => {
+    prev = x
+  }
+}
+
+zero = {}
+one = succ(zero)
+two = succ(one)
+three = succ(two)
+four = succ(three)
+five = succ(four)
+six = succ(five)
+
+@accept one : succ_t
+@accept one : succ_t(zero)
+@refuse zero : succ_t
+
+nat_add : { x : nat_t, y : nat_t -> nat_t } = {
+  case x : succ_t, y : nat_t => succ(nat_add(x.prev, y))
+  case x : zero_t, y : nat_t => y
+}
+
+@eq nat_add(zero, zero) = zero
+@eq nat_add(one, zero) = one
+@eq nat_add(zero, one) = one
+@eq nat_add(one, two) = three
+@eq nat_add(two, one) = three
+@eq nat_add(two, two) = four
+@eq nat_add(two, three) = five
+@eq nat_add(three, two) = five
+
+same_two : equation_t(nat_t, two, nat_add(one, one)) = same(nat_t, two)
+
+// eqv-apply :
+//   {A B : type} {x y : A} ->
+//   (f : A -> B) -> eqv-t x y -> eqv-t (f x) (f y)
+// eqv-apply f refl = refl
+
+// TODO we need unification to handle the following.
+
+// equation_apply : {
+//   A : type, B : type,
+//   x : A, y : A,
+//   f : { x : A -> B },
+//   same_A : equation_t(A, x, y)
+//     -> equation_t(B, f(x), f(y))
+// } = {
+//   A : type, B : type,
+//   x : A, y : A,
+//   f : { x : A -> B },
+//   same_A : equation_t(A, x, y)
+//     => same(B, f(x))
+// }
+
+// eqv-compose :
+//   {A : type} {x y z : A} ->
+//   eqv-t x y -> eqv-t y z -> eqv-t x z
+// eqv-compose refl refl = refl
+
+// equation_compose
+
+// eqv-swap :
+//   {A : type} {x y : A} ->
+//   eqv-t x y -> eqv-t y x
+// eqv-swap refl = refl
+
+// equation_swap
+
+// nat-add-associate :
+//   (x y z : nat-t) ->
+//   eqv-t
+//     (nat-add x (nat-add y z))
+//     (nat-add (nat-add x y) z)
+// nat-add-associate zero y z = refl
+// nat-add-associate (succ x) y z =
+//   eqv-apply succ (nat-add-associate x y z)
+
+// nat_add_associate : {
+//   x : nat_t, y : nat_t, z : nat_t ->
+//     equation_t(
+//       nat_t,
+//       nat_add(x, nat_add(y, z)),
+//       nat_add(nat_add(x, y), z))
+// } = {
+// //   case x : succ_t, y : nat_t, z : nat_t =>
+// //     equation_t(
+// //       nat_t,
+// //       nat_add(x, nat_add(y, z)),
+// //       nat_add(nat_add(x, y), z))
+//   case x : zero_t, y : nat_t, z : nat_t => same(nat_t, zero)
+// }
+
+// nat-add-zero-commute :
+//   (x : nat-t) ->
+//   eqv-t
+//     (nat-add zero x)
+//     (nat-add x zero)
+// nat-add-zero-commute zero = refl
+// nat-add-zero-commute (succ x) =
+//   eqv-apply succ (nat-add-zero-commute x)
+
+// nat-add-succ-commute-1 :
+//   (x y : nat-t) ->
+//   eqv-t
+//     (nat-add (succ x) y)
+//     (succ (nat-add x y))
+// nat-add-succ-commute-1 zero y = refl
+// nat-add-succ-commute-1 (succ x) y =
+//   eqv-apply succ (nat-add-succ-commute-1 x y)
+
+// nat-add-succ-commute-2 :
+//   (x y : nat-t) ->
+//   eqv-t
+//     (nat-add x (succ y))
+//     (succ (nat-add x y))
+// nat-add-succ-commute-2 zero y = refl
+// nat-add-succ-commute-2 (succ x) y =
+//   eqv-apply succ (nat-add-succ-commute-2 x y)
+
+// nat-add-commute :
+//   (x y : nat-t) ->
+//   eqv-t
+//     (nat-add x y)
+//     (nat-add y x)
+// nat-add-commute zero y =
+//   nat-add-zero-commute y
+// nat-add-commute (succ x) y =
+//   eqv-compose
+//     (eqv-apply succ (nat-add-commute x y))
+//     (eqv-swap (nat-add-succ-commute-2 y x))
