@@ -46,6 +46,8 @@ six = succ(five)
 nat_add : { x : nat_t, y : nat_t -> nat_t } = {
   case x : succ_t, y : nat_t => succ(nat_add(x.prev, y))
   // NOTE we can not use `case x : zero_t, y : nat_t => y`
+  //   using `x : zero_t` is the right definition.
+  //   we need to return Neutral when args are Neutral and can not match.
   case x : nat_t, y : nat_t => y
 }
 

@@ -1,4 +1,3 @@
-- note about we need nominal typing
 # note
 - we need nominal typing
 # todo

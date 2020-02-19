@@ -77,6 +77,9 @@ equation_apply : {
 //   eqv-apply succ (nat-add-associate x y z)
 
 // NOTE we need nominal typing
+//   nat_add applied to Neutral variable of type nat_t
+//   will eval to the zero_t case, because as value nat_t === zero_t.
+
 // nat_add_associate : {
 //   x : nat_t, y : nat_t, z : nat_t ->
 //     equation_t(
