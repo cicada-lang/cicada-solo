@@ -1,3 +1,4 @@
+- use `transport` to define `equation_apply`
 - equation test
 - fix comments about inference rules
 - note about `Neutral.The` and the value
