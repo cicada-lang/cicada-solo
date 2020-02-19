@@ -4,6 +4,7 @@ import * as Value from "./value"
 import * as Neutral from "./neutral"
 import * as Scope from "./scope"
 import * as Err from "./err"
+import { evaluate } from "./evaluate"
 
 export function pretty_exp(exp: Exp.Exp): string {
   if (exp instanceof Exp.Var) {
@@ -97,6 +98,21 @@ export function pretty_exp(exp: Exp.Exp): string {
     return `the(${pretty_exp(t)}, ${pretty_exp(value)})`
   }
 
+  else if (exp instanceof Exp.Equation) {
+    let { t, lhs, rhs } = exp
+    return `equation(${pretty_exp(t)}, ${pretty_exp(lhs)}, ${pretty_exp(rhs)})`
+  }
+
+  else if (exp instanceof Exp.Same) {
+    let { t, value } = exp
+    return `same(${pretty_exp(t)}, ${pretty_exp(value)})`
+  }
+
+  else if (exp instanceof Exp.Transport) {
+    let { equation, motive, base } = exp
+    return `transport(${pretty_exp(equation)}, ${pretty_exp(motive)}, ${pretty_exp(base)})`
+  }
+
   else {
     throw new Err.Unhandled(exp)
   }
@@ -167,6 +183,18 @@ export function pretty_value(value: Value.Value): string {
     return `the(${pretty_value(the.t)}, ${pretty_value(the.value)})`
   }
 
+  else if (value instanceof Value.Equation) {
+    let { t, lhs, rhs, equation_env } = value
+    let lhs_value = evaluate(equation_env, lhs)
+    let rhs_value = evaluate(equation_env, rhs)
+    return `equation(${pretty_value(t)}, ${pretty_value(lhs_value)}, ${pretty_value(rhs_value)})`
+  }
+
+  else if (value instanceof Value.Same) {
+    let same = value
+    return `same(${pretty_value(same.t)}, ${pretty_value(same.value)})`
+  }
+
   else if (value instanceof Neutral.Var) {
     let { name } = value
     return name
@@ -189,6 +217,11 @@ export function pretty_value(value: Value.Value): string {
     s += "."
     s += field_name
     return s
+  }
+
+  else if (value instanceof Neutral.Transport) {
+    let { equation, motive, base } = value
+    return `transport(${pretty_value(equation)}, ${pretty_value(motive)}, ${pretty_value(base)})`
   }
 
   else {

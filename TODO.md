@@ -1,4 +1,3 @@
-- `Same` `Equation` `Transport` pretty
 - `Same` `Equation` `Transport` grammar
 - equation test
 - fix comments about inference rules
