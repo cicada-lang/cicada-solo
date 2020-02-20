@@ -1,5 +1,4 @@
-import { Rule } from "@forchange/partech/lib/rule";
-import * as AST from "@forchange/partech/lib/tree";
+import * as ptc from "@forchange/partech";
 import * as Top from "./top";
-export declare const top_list: Rule;
-export declare const top_list_matcher: (tree: AST.Tree) => Top.Top[];
+export declare const top_list: ptc.Rule;
+export declare const top_list_matcher: (tree: ptc.Tree) => Top.Top[];

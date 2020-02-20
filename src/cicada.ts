@@ -1,8 +1,4 @@
-import { ErrorDuringParsing } from "@forchange/partech/lib/error"
-import { Earley } from "@forchange/partech/lib/earley"
-import { Parser } from "@forchange/partech/lib/parser"
-import * as ptc from "@forchange/partech/lib/predefined"
-
+import * as ptc from "@forchange/partech"
 import * as Top from "./top"
 import * as CLI from "./cli"
 import * as API from "./api"
@@ -12,8 +8,8 @@ const pkg: any = require("../package.json")
 
 function run_code(code: string, config: { [key: string]: any }): void {
   const lexer = ptc.common_lexer
-  const partech = new Earley()
-  const parser = new Parser(lexer, partech, grammar.top_list)
+  const partech = ptc.earley
+  const parser = new ptc.Parser(lexer, partech, grammar.top_list)
 
   try {
     let tree = parser.parse(code)
@@ -22,7 +18,7 @@ function run_code(code: string, config: { [key: string]: any }): void {
   }
 
   catch (error) {
-    if (error instanceof ErrorDuringParsing) {
+    if (error instanceof ptc.ErrorDuringParsing) {
       console.log(`parsing error, at ${error.span.repr()}`)
       error.span.report_in_context(code)
       console.log(`${error.message}`)

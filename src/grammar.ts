@@ -1,14 +1,4 @@
-import { ErrorDuringParsing } from "@forchange/partech/lib/error"
-import { Rule, Sym } from "@forchange/partech/lib/rule"
-import { Token } from "@forchange/partech/lib/token"
-import { Lexer } from "@forchange/partech/lib/lexer"
-import { Parser } from "@forchange/partech/lib/parser"
-import { Partech } from "@forchange/partech/lib/partech"
-import * as AST from "@forchange/partech/lib/tree"
-import { Earley } from "@forchange/partech/lib/earley"
-import * as ptc from "@forchange/partech/lib/predefined"
-import { ap as $ } from "@forchange/partech/lib/predefined"
-
+import * as ptc from "@forchange/partech"
 import * as Top from "./top"
 import * as Exp from "./exp"
 import * as Scope from "./scope"
@@ -23,14 +13,14 @@ const preserved = [
 const identifier = ptc.identifier_with_preserved("identifier", preserved)
 
 const arg_entry =
-  new Rule(
+  new ptc.Rule(
     "arg_entry", {
       "arg": [exp],
       "arg_comma": [exp, ","],
     })
 
 const arg_entry_matcher =
-  AST.Node.matcher_with_span<Exp.Exp>(
+  ptc.Node.matcher_with_span<Exp.Exp>(
     span => [
       "arg_entry", {
         "arg": ([exp]) => exp_matcher(exp),
@@ -39,7 +29,7 @@ const arg_entry_matcher =
     ])
 
 const top_entry =
-  new Rule(
+  new ptc.Rule(
     "top_entry", {
       "named_entry": [named_entry],
       "@refuse": ["@", "refuse", exp, ":", exp],
@@ -49,7 +39,7 @@ const top_entry =
     })
 
 const top_entry_matcher =
-  AST.Node.matcher_with_span<Top.Top>(
+  ptc.Node.matcher_with_span<Top.Top>(
     span => [
       "top_entry", {
         "named_entry": ([named_entry]) =>
@@ -66,14 +56,14 @@ const top_entry_matcher =
     ])
 
 export const top_list =
-  new Rule(
+  new ptc.Rule(
     "top_list", {
-      "top_entry_list": [$(ptc.non_empty_list, top_entry)],
+      "top_entry_list": [ptc.ap(ptc.non_empty_list, top_entry)],
     })
 
 
 export const top_list_matcher =
-  AST.Node.matcher_with_span<Array<Top.Top>>(
+  ptc.Node.matcher_with_span<Array<Top.Top>>(
     span => [
       "top_list", {
         "top_entry_list": ([top_entry_list]) =>
@@ -82,13 +72,13 @@ export const top_list_matcher =
     ])
 
 const scope =
-  new Rule(
+  new ptc.Rule(
     "scope", {
-      "named_entries": [$(ptc.non_empty_list, named_entry)],
+      "named_entries": [ptc.ap(ptc.non_empty_list, named_entry)],
     })
 
-const scope_matcher : (tree: AST.Tree) => Scope.Scope =
-  AST.Node.matcher_with_span<Scope.Scope>(
+const scope_matcher : (tree: ptc.Tree) => Scope.Scope =
+  ptc.Node.matcher_with_span<Scope.Scope>(
     span => [
       "scope", {
         "named_entries": ([named_entries]) =>
@@ -96,8 +86,8 @@ const scope_matcher : (tree: AST.Tree) => Scope.Scope =
       }
     ])
 
-function named_entry(): Rule {
-  return new Rule(
+function named_entry(): ptc.Rule {
+  return new ptc.Rule(
     "named_entry", {
       "let": [identifier, "=", exp],
       "let_comma": [identifier, "=", exp, ","],
@@ -110,31 +100,31 @@ function named_entry(): Rule {
     })
 }
 
-const named_entry_matcher : (tree: AST.Tree) => [string, Scope.Entry.Entry] =
-  AST.Node.matcher_with_span<[string, Scope.Entry.Entry]>(
+const named_entry_matcher : (tree: ptc.Tree) => [string, Scope.Entry.Entry] =
+  ptc.Node.matcher_with_span<[string, Scope.Entry.Entry]>(
     span => [
       "named_entry", {
         "let": ([name, , exp]) =>
-          [AST.Leaf.word(name), new Scope.Entry.Let(exp_matcher(exp))],
+          [ptc.Leaf.word(name), new Scope.Entry.Let(exp_matcher(exp))],
         "let_comma": ([name, , exp, ]) =>
-          [AST.Leaf.word(name), new Scope.Entry.Let(exp_matcher(exp))],
+          [ptc.Leaf.word(name), new Scope.Entry.Let(exp_matcher(exp))],
         "given": ([name, , t]) =>
-          [AST.Leaf.word(name), new Scope.Entry.Given(exp_matcher(t))],
+          [ptc.Leaf.word(name), new Scope.Entry.Given(exp_matcher(t))],
         "given_comma": ([name, , t, ]) =>
-          [AST.Leaf.word(name), new Scope.Entry.Given(exp_matcher(t))],
+          [ptc.Leaf.word(name), new Scope.Entry.Given(exp_matcher(t))],
         "define": ([name, , t, , exp]) =>
-          [AST.Leaf.word(name), new Scope.Entry.Define(exp_matcher(t), exp_matcher(exp))],
+          [ptc.Leaf.word(name), new Scope.Entry.Define(exp_matcher(t), exp_matcher(exp))],
         "define_comma": ([name, , t, , exp, ]) =>
-          [AST.Leaf.word(name), new Scope.Entry.Define(exp_matcher(t), exp_matcher(exp))],
+          [ptc.Leaf.word(name), new Scope.Entry.Define(exp_matcher(t), exp_matcher(exp))],
         "cl": ([ , name, , scope, ]) =>
-          [AST.Leaf.word(name), new Scope.Entry.Define(new Exp.Type(), new Exp.Cl(scope_matcher(scope)))],
+          [ptc.Leaf.word(name), new Scope.Entry.Define(new Exp.Type(), new Exp.Cl(scope_matcher(scope)))],
         "cl_empty": ([ , name, , ]) =>
-          [AST.Leaf.word(name), new Scope.Entry.Define(new Exp.Type(), new Exp.Cl(new Scope.Scope()))],
+          [ptc.Leaf.word(name), new Scope.Entry.Define(new Exp.Type(), new Exp.Cl(new Scope.Scope()))],
       }
     ])
 
-function exp(): Rule {
-  return new Rule(
+function exp(): ptc.Rule {
+  return new ptc.Rule(
     "exp", {
       "var": [identifier],
       "type": ["type"],
@@ -142,8 +132,8 @@ function exp(): Rule {
       "string": [ptc.double_quoted_string],
       "pi": ["{", scope, "-", ">", exp, "}"],
       "fn": ["{", scope, "=", ">", exp, "}"],
-      "fn_case": ["{", $(ptc.non_empty_list, fn_case_clause), "}"],
-      "ap": [exp, "(", $(ptc.non_empty_list, arg_entry), ")"],
+      "fn_case": ["{", ptc.ap(ptc.non_empty_list, fn_case_clause), "}"],
+      "ap": [exp, "(", ptc.ap(ptc.non_empty_list, arg_entry), ")"],
       "cl": [ "class", "{", scope, "}"],
       "cl_empty": ["class", "{", "}"],
       "obj": ["{", scope, "}"],
@@ -156,15 +146,15 @@ function exp(): Rule {
     })
 }
 
-const exp_matcher: (tree: AST.Tree) => Exp.Exp =
-  AST.Node.matcher_with_span<Exp.Exp>(
+const exp_matcher: (tree: ptc.Tree) => Exp.Exp =
+  ptc.Node.matcher_with_span<Exp.Exp>(
     span => [
       "exp", {
-        "var": ([name]) => new Exp.Var(AST.Leaf.word(name)),
+        "var": ([name]) => new Exp.Var(ptc.Leaf.word(name)),
         "type": _ =>  new Exp.Type(),
         "string_t": _ =>  new Exp.StrType(),
         "string": ([str]) => {
-          let s = AST.Leaf.word(str)
+          let s = ptc.Leaf.word(str)
           return new Exp.Str(s.slice(1, s.length - 1))
         },
         "pi": ([, scope, , , return_type, _]) =>
@@ -186,7 +176,7 @@ const exp_matcher: (tree: AST.Tree) => Exp.Exp =
         "obj_empty": _ =>
           new Exp.Obj(new Scope.Scope()),
         "dot": ([target, , field_name]) =>
-          new Exp.Dot(exp_matcher(target), AST.Leaf.word(field_name)),
+          new Exp.Dot(exp_matcher(target), ptc.Leaf.word(field_name)),
         "block": ([, scope, body, _]) =>
           new Exp.Block(scope_matcher(scope), exp_matcher(body)),
         "equation": ([, , t, , lhs, , rhs, ]) =>
@@ -199,13 +189,13 @@ const exp_matcher: (tree: AST.Tree) => Exp.Exp =
     ])
 
 const fn_case_clause =
-  new Rule(
+  new ptc.Rule(
     "fn_case_clause", {
       "case": ["case", scope, "=", ">", exp],
     })
 
 const fn_case_clause_matcher =
-  AST.Node.matcher_with_span<Exp.Fn>(
+  ptc.Node.matcher_with_span<Exp.Fn>(
     span => [
       "fn_case_clause", {
         "case": ([, scope, , , body]) =>
