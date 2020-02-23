@@ -154,8 +154,8 @@ const exp_matcher: (tree: ptc.Tree) => Exp.Exp =
         "type": _ =>  new Exp.Type(),
         "string_t": _ =>  new Exp.StrType(),
         "string": ([str]) => {
-          let s = ptc.Leaf.word(str)
-          return new Exp.Str(s.slice(1, s.length - 1))
+          let s = ptc.Leaf.quoted_string_token(str).value
+          return new Exp.Str(s)
         },
         "pi": ([, scope, , , return_type, _]) =>
           new Exp.Pi(scope_matcher(scope), exp_matcher(return_type)),
