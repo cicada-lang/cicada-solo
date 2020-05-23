@@ -1,11 +1,8 @@
-# scala
-target
+# typescript
+lib
 
 # npm
 node_modules
-
-# parcel
-.cache
 
 # emacs
 *~

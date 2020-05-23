@@ -13,14 +13,14 @@
     "test": "./dev t"
   },
   "devDependencies": {
-    "@types/assert": "^1.4.6",
+    "@types/assert": "^1.4.7",
     "@types/nanoid": "^2.1.0",
-    "@types/node": "^13.7.0",
-    "typescript": "^3.7.5"
+    "@types/node": "^14.0.5",
+    "typescript": "^3.9.3"
   },
   "dependencies": {
     "@forchange/partech": "file:deps/partech",
-    "commander": "^4.1.1",
-    "nanoid": "^2.1.11"
+    "commander": "^5.1.0",
+    "nanoid": "^3.1.9"
   }
 }
