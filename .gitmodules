@@ -1,3 +1,0 @@
-[submodule "deps/partech"]
-        path = deps/partech
-        url = ../../cleword/explore/partech.git
