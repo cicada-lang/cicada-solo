@@ -7,7 +7,6 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "declaration": true,
-    "sourceMap": true,
     "strict": true,
     "outDir": "lib",
     "baseUrl": ".",
