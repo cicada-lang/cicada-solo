@@ -1,4 +1,4 @@
-import * as ptc from "@forchange/partech"
+import * as ptc from "partech"
 import * as Top from "./top"
 import * as Exp from "./exp"
 import * as Scope from "./scope"
