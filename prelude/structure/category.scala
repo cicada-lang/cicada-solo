@@ -1,5 +1,6 @@
 class Category {
-  Object : type; Morphism : { dom, cod : Object -> type }
+  Object : Type
+  Morphism : { dom, cod : Object -> Type }
   id : { a : Object -> Morphism(a, a) }
   compose : {
     suppose a, b, c : Object
@@ -25,6 +26,9 @@ class Category {
     -> Equation(compose(f, compose(g, h)), compose(compose(f, g), h))
   }
 }
+
+// mono(cat).morphism()
+// mono(cat).cancel_right(f, g, equation)
 
 Mono(cat : Category) = record {
   morphism : {
