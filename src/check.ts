@@ -12,49 +12,34 @@ import { readback } from "./readback"
 import * as pretty from "./pretty"
 import * as util from "./util"
 
-export function check(
-  env: Env.Env,
-  exp: Exp.Exp,
-  t: Value.Value,
-): void {
+export function check(env: Env.Env, exp: Exp.Exp, t: Value.Value): void {
   try {
     if (exp instanceof Exp.Obj) {
       let { scope } = exp
       check_obj(env, scope, t)
-    }
-
-    else if (exp instanceof Exp.Fn) {
+    } else if (exp instanceof Exp.Fn) {
       let { scope, body } = exp
       check_fn(env, scope, body, t)
-    }
-
-    else if (exp instanceof Exp.FnCase) {
+    } else if (exp instanceof Exp.FnCase) {
       let { cases } = exp
       for (let fn of cases) {
         let { scope, body } = fn
         check_fn(env, scope, body, t)
       }
-    }
-
-    else if (exp instanceof Exp.Same) {
+    } else if (exp instanceof Exp.Same) {
       let same = exp
       check_same(env, same.t, same.value, t)
-    }
-
-    else {
+    } else {
       subtype(infer(env, exp), t)
     }
-  }
-
-  catch (error) {
+  } catch (error) {
     if (error instanceof Err.Report) {
       throw error.prepend(
         "check fail\n" +
           `exp: ${pretty.pretty_exp(exp)}\n` +
-          `type: ${pretty.pretty_value(t)}\n`)
-    }
-
-    else {
+          `type: ${pretty.pretty_value(t)}\n`
+      )
+    } else {
       throw error
     }
   }
@@ -63,7 +48,7 @@ export function check(
 export function check_obj(
   env: Env.Env,
   scope: Scope.Scope,
-  t: Value.Value,
+  t: Value.Value
 ): void {
   if (t instanceof Value.Cl) {
     let cl = t
@@ -82,7 +67,7 @@ export function check_obj(
       let v = scope.lookup_value(name)
       if (v === undefined) {
         throw new Err.Report([
-          `object does not have the field_name of defined: ${name}\n`
+          `object does not have the field_name of defined: ${name}\n`,
         ])
       }
 
@@ -107,7 +92,7 @@ export function check_obj(
       let v = scope.lookup_value(name)
       if (v === undefined) {
         throw new Err.Report([
-          `object does not have the field_name of defined: ${name}\n`
+          `object does not have the field_name of defined: ${name}\n`,
         ])
       }
 
@@ -118,17 +103,13 @@ export function check_obj(
         let d_value = evaluate(scope_env, d)
         equivalent(d_value, v_value)
         scope_env = scope_env.ext(name, { t: t_value, value: v_value })
-      }
-
-      else if (entry instanceof Scope.Entry.Given) {
+      } else if (entry instanceof Scope.Entry.Given) {
         let { t } = entry
         let t_value = evaluate(scope_env, t)
         check(env, v, t_value)
         let v_value = evaluate(env, v)
         scope_env = scope_env.ext(name, { t: t_value, value: v_value })
-      }
-
-      else if (entry instanceof Scope.Entry.Define) {
+      } else if (entry instanceof Scope.Entry.Define) {
         let { value: d, t } = entry
         let t_value = evaluate(scope_env, t)
         check(env, v, t_value)
@@ -136,18 +117,14 @@ export function check_obj(
         let d_value = evaluate(scope_env, d)
         equivalent(d_value, v_value)
         scope_env = scope_env.ext(name, { t: t_value, value: v_value })
-      }
-
-      else {
+      } else {
         throw new Err.Unhandled(entry)
       }
     }
-  }
-
-  else {
+  } else {
     throw new Err.Report([
-      "expecting class type\n" +
-        `but found type: ${pretty.pretty_value(t)}\n`])
+      "expecting class type\n" + `but found type: ${pretty.pretty_value(t)}\n`,
+    ])
   }
 }
 
@@ -155,7 +132,7 @@ export function check_same(
   env: Env.Env,
   same_type: Exp.Exp,
   same_value: Exp.Exp,
-  t: Value.Value,
+  t: Value.Value
 ): void {
   if (t instanceof Value.Equation) {
     let { t: equation_type_value, lhs, rhs, equation_env } = t
@@ -169,12 +146,11 @@ export function check_same(
 
     equivalent(same_value_value, lhs_value)
     equivalent(same_value_value, rhs_value)
-  }
-
-  else {
+  } else {
     throw new Err.Report([
       "expecting equation type\n" +
-        `but found type: ${pretty.pretty_value(t)}\n`])
+        `but found type: ${pretty.pretty_value(t)}\n`,
+    ])
   }
 }
 
@@ -182,7 +158,7 @@ export function check_fn(
   env: Env.Env,
   scope: Scope.Scope,
   body: Exp.Exp,
-  t: Value.Value,
+  t: Value.Value
 ): void {
   if (t instanceof Value.Pi) {
     let pi = t
@@ -206,7 +182,8 @@ export function check_fn(
       throw new Err.Report([
         "function and pi type arity mismatch\n" +
           `arity of function: ${scope.arity}\n` +
-          `arity of pi type: ${pi.scope.arity}\n`])
+          `arity of pi type: ${pi.scope.arity}\n`,
+      ])
     }
 
     let local_env = env
@@ -224,7 +201,9 @@ export function check_fn(
       // NOTE we need to use unique_var as unification here,
       //   because equivalent between `Neutral.Var` will only compare name.
 
-      let unique_name = util.unique_name(`check:Fn:${pi_arg_name}:${fn_arg_name}`)
+      let unique_name = util.unique_name(
+        `check:Fn:${pi_arg_name}:${fn_arg_name}`
+      )
       let unique_var = new Neutral.Var(unique_name)
 
       let the = {
@@ -238,11 +217,9 @@ export function check_fn(
       scope_env = scope_env.ext(unique_var.name, the)
     }
     check(local_env, body, evaluate(scope_env, pi.return_type))
-  }
-
-  else {
+  } else {
     throw new Err.Report([
-      "expecting pi type\n" +
-        `but found type: ${pretty.pretty_value(t)}\n`])
+      "expecting pi type\n" + `but found type: ${pretty.pretty_value(t)}\n`,
+    ])
   }
 }

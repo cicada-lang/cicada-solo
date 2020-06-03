@@ -21,7 +21,6 @@ export function subtype(s: Value.Value, t: Value.Value): void {
     }
 
     if (s instanceof Value.Pi && t instanceof Value.Pi) {
-
       // A1_value = evaluate(s_scope_env, A1)
       // B1_value = evaluate(t_scope_env, B1)
       // subtype(B1_value, A1_value) // NOTE contravariant
@@ -43,24 +42,25 @@ export function subtype(s: Value.Value, t: Value.Value): void {
         throw new Err.Report([
           "subtype fail between Value.Pi and Value.Pi, arity mismatch\n" +
             `left scope arity: ${s.scope.arity}\n` +
-            `right scope arity: ${t.scope.arity}\n`])
+            `right scope arity: ${t.scope.arity}\n`,
+        ])
       }
 
-      let [s_scope_env, t_scope_env] =
-        Scope.scope_compare_given(
-          s.scope, s.scope_env,
-          t.scope, t.scope_env,
-          (name, s_given, t_given) => {
-            subtype(t_given, s_given) // NOTE contravariant
-          })
+      let [s_scope_env, t_scope_env] = Scope.scope_compare_given(
+        s.scope,
+        s.scope_env,
+        t.scope,
+        t.scope_env,
+        (name, s_given, t_given) => {
+          subtype(t_given, s_given) // NOTE contravariant
+        }
+      )
 
       subtype(
         evaluate(s_scope_env, s.return_type),
-        evaluate(t_scope_env, t.return_type))
-    }
-
-    else if (s instanceof Value.Cl && t instanceof Value.Cl) {
-
+        evaluate(t_scope_env, t.return_type)
+      )
+    } else if (s instanceof Value.Cl && t instanceof Value.Cl) {
       // subtype(s_A1, t_A1)
       // equivalent(s_a1, t_a1)
       // ...
@@ -90,13 +90,12 @@ export function subtype(s: Value.Value, t: Value.Value): void {
         if (res !== undefined) {
           subtype(res.t, the.t)
           equivalent(res.value, the.value)
-        }
-
-        else {
+        } else {
           throw new Err.Report([
             "subtype fail between ValueCl and Value.Cl\n" +
               `missing name in the subtype class's defined\n` +
-              `name: ${name}\n`])
+              `name: ${name}\n`,
+          ])
         }
       }
 
@@ -109,52 +108,35 @@ export function subtype(s: Value.Value, t: Value.Value): void {
             let { value } = entry
             equivalent(res.value, evaluate(t_scope_env, value))
             t_scope_env = t_scope_env.ext(name, res)
-          }
-
-          else if (entry instanceof Scope.Entry.Given) {
+          } else if (entry instanceof Scope.Entry.Given) {
             let { t } = entry
             subtype(res.t, evaluate(t_scope_env, t))
             t_scope_env = t_scope_env.ext(name, res)
-          }
-
-          else if (entry instanceof Scope.Entry.Define) {
+          } else if (entry instanceof Scope.Entry.Define) {
             let { t, value } = entry
             subtype(res.t, evaluate(t_scope_env, t))
             equivalent(res.value, evaluate(t_scope_env, value))
             t_scope_env = t_scope_env.ext(name, res)
-          }
-
-          else {
+          } else {
             throw new Err.Unhandled(entry)
           }
-        }
-
-        else {
-          throw new Err.Report([
-            "subtype fail\n" +
-              `missing field: ${name}\n`])
+        } else {
+          throw new Err.Report(["subtype fail\n" + `missing field: ${name}\n`])
         }
       }
-    }
-
-    else if (s instanceof Value.Equation && t instanceof Value.Equation) {
+    } else if (s instanceof Value.Equation && t instanceof Value.Equation) {
       subtype(s.t, t.t)
-    }
-
-    else {
+    } else {
       equivalent(s, t)
     }
-  }
-
-  catch (error) {
+  } catch (error) {
     if (error instanceof Err.Report) {
       throw error.prepend(
         "subtype fail\n" +
           `s: ${pretty.pretty_value(s)}\n` +
-          `t: ${pretty.pretty_value(t)}\n`)
-    }
-
-    else {
+          `t: ${pretty.pretty_value(t)}\n`
+      )
+    } else {
       throw error
     }
   }

@@ -11,19 +11,15 @@ import * as pretty from "./pretty"
 
 export function run(
   top_list: Array<Top.Top>,
-  config: { [key: string]: any },
+  config: { [key: string]: any }
 ): void {
   try {
     top_list_check_and_evaluate(top_list, config)
-  }
-
-  catch (error) {
+  } catch (error) {
     if (error instanceof Err.Report) {
       report_print(error, config)
       process.exit(1)
-    }
-
-    else {
+    } else {
       throw error
     }
   }
@@ -31,14 +27,14 @@ export function run(
 
 function report_print(
   report: Err.Report,
-  config: { [key: string]: any },
+  config: { [key: string]: any }
 ): void {
   console.log(report.message)
 }
 
 function top_list_check_and_evaluate(
   top_list: Array<Top.Top>,
-  config: { [key: string]: any },
+  config: { [key: string]: any }
 ): void {
   let local_env = new Env.Env()
 
@@ -52,49 +48,59 @@ function top_list_check_and_evaluate(
         let found = local_env.lookup_value(name)
         if (found !== undefined) {
           throw new Error(
-            `name: ${name} is already defined to value: ${pretty.pretty_value(found)}\n`)
+            `name: ${name} is already defined to value: ${pretty.pretty_value(
+              found
+            )}\n`
+          )
         }
         let t = infer(local_env, exp)
         let value = evaluate(local_env, exp)
         local_env = local_env.ext(name, { t, value })
         if (config["verbose"] !== undefined) {
           console.log(`${name} = ${pretty.pretty_exp(exp)}`)
-          console.log(`${name} = ${pretty.pretty_value(value)} : ${pretty.pretty_value(t)}`)
+          console.log(
+            `${name} = ${pretty.pretty_value(value)} : ${pretty.pretty_value(
+              t
+            )}`
+          )
           console.log()
         }
-      }
-
-      else if (entry instanceof Scope.Entry.Given) {
-        throw new Error(
-          "run fail\n" +
-            `can not handle top level Entry.Given\n`)
-      }
-
-      else if (entry instanceof Scope.Entry.Define) {
+      } else if (entry instanceof Scope.Entry.Given) {
+        throw new Error("run fail\n" + `can not handle top level Entry.Given\n`)
+      } else if (entry instanceof Scope.Entry.Define) {
         let t_exp = entry.t
         let exp = entry.value
         let found = local_env.lookup_value(name)
         if (found !== undefined) {
           throw new Error(
-            `name: ${name} is already defined to value: ${pretty.pretty_value(found)}\n`)
+            `name: ${name} is already defined to value: ${pretty.pretty_value(
+              found
+            )}\n`
+          )
         }
         let t_expected = evaluate(local_env, t_exp)
-        local_env = local_env.ext_rec(name, { t: t_exp, value: exp, env: local_env })
+        local_env = local_env.ext_rec(name, {
+          t: t_exp,
+          value: exp,
+          env: local_env,
+        })
         check(local_env, exp, t_expected)
         let value = evaluate(local_env, exp)
         if (config["verbose"] !== undefined) {
-          console.log(`${name} : ${pretty.pretty_exp(t_exp)} = ${pretty.pretty_exp(exp)}`)
-          console.log(`${name} : ${pretty.pretty_exp(t_exp)} = ${pretty.pretty_value(value)}`)
+          console.log(
+            `${name} : ${pretty.pretty_exp(t_exp)} = ${pretty.pretty_exp(exp)}`
+          )
+          console.log(
+            `${name} : ${pretty.pretty_exp(t_exp)} = ${pretty.pretty_value(
+              value
+            )}`
+          )
           console.log()
         }
-      }
-
-      else {
+      } else {
         throw new Err.Unhandled(entry)
       }
-    }
-
-    else if (top instanceof Top.TopKeywordRefuse) {
+    } else if (top instanceof Top.TopKeywordRefuse) {
       let exp = top.exp
       let t_exp = top.t
 
@@ -111,23 +117,20 @@ function top_list_check_and_evaluate(
 
         throw new Error(
           "should refuse the following type membership assertion\n" +
-            `@refuse ${pretty.pretty_exp(exp)} : ${pretty.pretty_exp(t_exp)}\n`)
-      }
-
-      catch (error) {
+            `@refuse ${pretty.pretty_exp(exp)} : ${pretty.pretty_exp(t_exp)}\n`
+        )
+      } catch (error) {
         if (error instanceof Err.Report) {
           if (config["verbose"] !== undefined) {
-            console.log(`@refuse ${pretty.pretty_exp(exp)} : ${pretty.pretty_exp(t_exp)}`)
+            console.log(
+              `@refuse ${pretty.pretty_exp(exp)} : ${pretty.pretty_exp(t_exp)}`
+            )
           }
-        }
-
-        else {
+        } else {
           throw error
         }
       }
-    }
-
-    else if (top instanceof Top.TopKeywordAccept) {
+    } else if (top instanceof Top.TopKeywordAccept) {
       let exp = top.exp
       let t_exp = top.t
 
@@ -137,34 +140,33 @@ function top_list_check_and_evaluate(
         check(local_env, exp, t_expected)
 
         if (config["verbose"] !== undefined) {
-          console.log(`@accept ${pretty.pretty_exp(exp)} : ${pretty.pretty_exp(t_exp)}`)
+          console.log(
+            `@accept ${pretty.pretty_exp(exp)} : ${pretty.pretty_exp(t_exp)}`
+          )
         }
-      }
-
-      catch (error) {
+      } catch (error) {
         if (error instanceof Err.Report) {
           report_print(error, config)
           throw new Error(
             "should accept the following type membership assertion\n" +
-              `@accept ${pretty.pretty_exp(exp)} : ${pretty.pretty_exp(t_exp)}\n`)
-        }
-
-        else {
+              `@accept ${pretty.pretty_exp(exp)} : ${pretty.pretty_exp(
+                t_exp
+              )}\n`
+          )
+        } else {
           throw error
         }
       }
-    }
-
-    else if (top instanceof Top.TopKeywordShow) {
+    } else if (top instanceof Top.TopKeywordShow) {
       let { exp } = top
       let t = infer(local_env, exp)
       let value = evaluate(local_env, exp)
       console.log(`@show ${pretty.pretty_exp(exp)}`)
-      console.log(`@show ${pretty.pretty_value(value)} : ${pretty.pretty_value(t)}`)
+      console.log(
+        `@show ${pretty.pretty_value(value)} : ${pretty.pretty_value(t)}`
+      )
       console.log()
-    }
-
-    else if (top instanceof Top.TopKeywordEq) {
+    } else if (top instanceof Top.TopKeywordEq) {
       let { lhs, rhs } = top
 
       infer(local_env, rhs)
@@ -174,25 +176,22 @@ function top_list_check_and_evaluate(
         equivalent(evaluate(local_env, rhs), evaluate(local_env, lhs))
 
         if (config["verbose"] !== undefined) {
-          console.log(`@eq ${pretty.pretty_exp(rhs)} = ${pretty.pretty_exp(lhs)}`)
+          console.log(
+            `@eq ${pretty.pretty_exp(rhs)} = ${pretty.pretty_exp(lhs)}`
+          )
         }
-      }
-
-      catch (error) {
+      } catch (error) {
         if (error instanceof Err.Report) {
           report_print(error, config)
           throw new Error(
             "should accept the following equivalent assertion\n" +
-              `@eq ${pretty.pretty_exp(rhs)} = ${pretty.pretty_exp(lhs)}\n`)
-        }
-
-        else {
+              `@eq ${pretty.pretty_exp(rhs)} = ${pretty.pretty_exp(lhs)}\n`
+          )
+        } else {
           throw error
         }
       }
-    }
-
-    else {
+    } else {
       throw new Err.Unhandled(top)
     }
   }

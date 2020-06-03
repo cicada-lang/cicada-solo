@@ -1,22 +1,14 @@
 export class Report extends Error {
-  constructor(
-    public message_list: Array<string>,
-  ) {
+  constructor(public message_list: Array<string>) {
     super(merge_message_list(message_list))
   }
 
   append(message: string): Report {
-    return new Report([
-      ...this.message_list,
-      message,
-    ])
+    return new Report([...this.message_list, message])
   }
 
   prepend(message: string): Report {
-    return new Report([
-      message,
-      ...this.message_list,
-    ])
+    return new Report([message, ...this.message_list])
   }
 }
 
@@ -31,9 +23,7 @@ export function merge_message_list(message_list: Array<string>): string {
 }
 
 export class Unhandled extends Error {
-  constructor(
-    public value: any,
-  ) {
+  constructor(public value: any) {
     super(message_for_unhandled(value))
   }
 }
@@ -44,9 +34,7 @@ function message_for_unhandled(value: any) {
       `unhandled class of abstract class ${value.abstract_class_name}: ${value.constructor.name}\n` +
       `value: ${JSON.stringify(value, null, 2)}\n`
     return message
-  }
-
-  else {
+  } else {
     let message =
       `unhandled class (no abstract_class_name): ${value.constructor.name}\n` +
       `value: ${JSON.stringify(value, null, 2)}\n`

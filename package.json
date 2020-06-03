@@ -10,12 +10,13 @@
   "scripts": {
     "build": "npx tsc",
     "watch": "npx tsc --watch",
-    "test": "./dev t"
+    "format": "npx prettier src --write"
   },
   "devDependencies": {
     "@types/assert": "^1.4.7",
     "@types/nanoid": "^2.1.0",
     "@types/node": "^14.0.5",
+    "prettier": "^2.0.5",
     "typescript": "^3.9.3"
   },
   "dependencies": {

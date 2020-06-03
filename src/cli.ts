@@ -5,7 +5,7 @@ export class CommandLineInterface {
   constructor(
     public name: string,
     public version: string,
-    public run_code: (code: string, config: { [key: string]: any }) => void,
+    public run_code: (code: string, config: { [key: string]: any }) => void
   ) {}
 
   run_file(file_path: string, config: { [key: string]: any }): void {
@@ -21,9 +21,11 @@ export class CommandLineInterface {
       .version(this.version, "-v, --version", "output the current version")
       .option("--verbose", "print more during eval")
       .option(
-        "-e, --eval <file>", "file to eval",
+        "-e, --eval <file>",
+        "file to eval",
         (file: string, files: Array<string>) => files.concat([file]),
-        [])
+        []
+      )
       .parse(process.argv)
 
     let opts = program.opts()
@@ -32,5 +34,4 @@ export class CommandLineInterface {
       this.run_file(file, opts)
     }
   }
-
 }
