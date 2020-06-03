@@ -10,7 +10,7 @@ import { subtype } from "./subtype"
 import { equivalent } from "./equivalent"
 import { readback } from "./readback"
 import * as pretty from "./pretty"
-import * as util from "./util"
+import * as ut from "./ut"
 
 export function check(env: Env.Env, exp: Exp.Exp, t: Value.Value): void {
   try {
@@ -201,7 +201,7 @@ export function check_fn(
       // NOTE we need to use unique_var as unification here,
       //   because equivalent between `Neutral.Var` will only compare name.
 
-      let unique_name = util.unique_name(
+      let unique_name = ut.unique_name(
         `check:Fn:${pi_arg_name}:${fn_arg_name}`
       )
       let unique_var = new Neutral.Var(unique_name)

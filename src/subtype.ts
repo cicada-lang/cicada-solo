@@ -1,7 +1,7 @@
 import * as Exp from "./exp"
 import * as Value from "./value"
 import * as pretty from "./pretty"
-import * as util from "./util"
+import * as ut from "./ut"
 import * as Scope from "./scope"
 import { equivalent } from "./equivalent"
 import { evaluate } from "./evaluate"

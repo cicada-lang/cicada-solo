@@ -2,7 +2,7 @@ import * as Exp from "./exp"
 import * as Value from "./value"
 import * as Neutral from "./neutral"
 import * as Env from "./env"
-import * as util from "./util"
+import * as ut from "./ut"
 import { evaluate } from "./evaluate"
 import { check } from "./check"
 import { subtype } from "./subtype"
@@ -351,7 +351,7 @@ export function scope_compare_given(
       let [[s_name, s], [t_name, t]] = [s_current, t_current]
       let s_value = evaluate(s_scope_env, s)
       let t_value = evaluate(t_scope_env, t)
-      let unique_name = util.unique_name(`${s_name}:${t_name}`)
+      let unique_name = ut.unique_name(`${s_name}:${t_name}`)
       effect(unique_name, s_value, t_value)
       let unique_var = new Neutral.Var(unique_name)
       s_scope_env = s_scope_env.ext(s_name, { t: s_value, value: unique_var })
