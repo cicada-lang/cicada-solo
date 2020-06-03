@@ -3,6 +3,7 @@
   - because of zero and null and so on
   - we need nominal typing to express our intension
 - we can have both fulfilling type system and nominal typing
+  - use fulfilling type only for class, keep data simple
 - we can have both nominal typing and record (like object of js)
   - `Class { ... }` as object constructor
   - `{ ... }` as record like object
