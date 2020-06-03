@@ -1,5 +1,11 @@
 # note
 - we need nominal typing
+  - because of zero and null and so on
+  - we need nominal typing to express our intension
+- we can have both fulfilling type system and nominal typing
+- we can have both nominal typing and record (like object of js)
+  - `Class { ... }` as object constructor
+  - `{ ... }` as record like object
 # todo
 - equation test
 - fix comments about inference rules

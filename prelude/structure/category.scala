@@ -27,42 +27,10 @@ class Category {
   }
 }
 
-// mono(cat).morphism()
-// mono(cat).cancel_right(f, g, equation)
-
-Mono(cat : Category) = record {
-  morphism : {
-    suppose a, b : cat.Object
-    -> cat.Morphism(a, b)
-  }
-  cancel_right : {
-    suppose c : cat.Object
-    f : cat.Morphism(c, a)
-    g : cat.Morphism(c, a)
-    Equation(cat.compose(f, morphism), cat.compose(g, morphism))
-    -> Equation(f, g)
-  }
-}
 
 Mono = {
   cat : Category
-  ------
-  morphism : {
-    suppose a, b : cat.Object
-    -> cat.Morphism(a, b)
-  }
-  cancel_right : {
-    suppose c : cat.Object
-    f : cat.Morphism(c, a)
-    g : cat.Morphism(c, a)
-    Equation(cat.compose(f, morphism), cat.compose(g, morphism))
-    -> Equation(f, g)
-  }
-}
-
-Mono = {
-  cat : Category
-  ------
+  ======
   record {
     morphism : {
       suppose a, b : cat.Object
@@ -77,6 +45,9 @@ Mono = {
     }
   }
 }
+
+mono : Mono(cat)
+mono.morphism(a, b) : cat.Morphism(a, b)
 
 develop Category {
   class Mono {
@@ -119,4 +90,25 @@ develop Category {
     inverse_left : Equation(compose(morphism, inverse), id(a))
     inverse_right : Equation(compose(inverse, morphism), id(b))
   }
+}
+
+
+class Isomorphism {
+  cat : Category
+  morphism : {
+    suppose a, b : cat.Object
+    -> cat.Morphism(a, b)
+  }
+  inverse : {
+    suppose a, b : cat.Object
+    -> cat.Morphism(b, a)
+  }
+  inverse_left : Equation(cat.compose(morphism, inverse), cat.id(a))
+  inverse_right : Equation(cat.compose(inverse, morphism), cat.id(b))
+}
+
+// NOTE partly fulfilled object construction is a type: Isomorphism(this, f, inv(f))
+class Groupoid extends Category {
+  inv : { suppose a, b : Object; f : Morphism(a, b) -> Morphism(b, a) }
+  inv_iso : { suppose a, b : Object; f : Morphism(a, b) -> Isomorphism(this, f, inv(f)) }
 }
