@@ -2,10 +2,32 @@
 # yarn lockfile v1
 
 
+"@forchange/partech@^1.0.9":
+  version "1.0.9"
+  resolved "https://nexus.forchange.cn/repository/npm-group/@forchange/partech/-/partech-1.0.9.tgz#a83f12cf7d6c6dd570727324e46e86fd4b2fe18f"
+  integrity sha512-1iVjYqqb9nys6/e4pd5VZitqB5YwVL1ZT3YoOmarBqSSp0DnUFkkmjpajbFJu2zQKoSNapvAKABDWOz7fP67LQ==
+  dependencies:
+    "@forchange/readable-regular-expression" "^0.0.10"
+    chalk "^4.0.0"
+    fast-deep-equal "^3.1.1"
+    glob "^7.1.6"
+
+"@forchange/readable-regular-expression@^0.0.10":
+  version "0.0.10"
+  resolved "https://nexus.forchange.cn/repository/npm-group/@forchange/readable-regular-expression/-/readable-regular-expression-0.0.10.tgz#e267a1fc08672f56a3fc6fc1831bec1150472d75"
+  integrity sha512-kQA7IE/jcj+5Da9VykhOEB+M/c2RJhQah4FamP1JRMP3wUxELZ7cb1Ckp33Sba0QbN/78mrA6O+e/9WTBsvF3w==
+  dependencies:
+    fast-deep-equal "^3.1.1"
+
 "@types/assert@^1.4.7":
   version "1.4.7"
   resolved "https://nexus.forchange.cn/repository/npm-group/@types/assert/-/assert-1.4.7.tgz#8add0d031e16e7ad87282f1b55c30813b4632cbd"
   integrity sha1-it0NAx4W562HKC8bVcMIE7RjLL0=
+
+"@types/color-name@^1.1.1":
+  version "1.1.1"
+  resolved "https://nexus.forchange.cn/repository/npm-group/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
+  integrity sha1-HBJhu+qhCoBVu8XYq4S3sq/IRqA=
 
 "@types/nanoid@^2.1.0":
   version "2.1.0"
@@ -19,22 +41,139 @@
   resolved "https://nexus.forchange.cn/repository/npm-group/@types/node/-/node-14.0.9.tgz#43896ab87fc82bda1dfd600cdf44a0c8a64e11d2"
   integrity sha1-Q4lquH/IK9od/WAM30SgyKZOEdI=
 
+ansi-styles@^4.1.0:
+  version "4.2.1"
+  resolved "https://nexus.forchange.cn/repository/npm-group/ansi-styles/-/ansi-styles-4.2.1.tgz#90ae75c424d008d2624c5bf29ead3177ebfcf359"
+  integrity sha1-kK51xCTQCNJiTFvynq0xd+v881k=
+  dependencies:
+    "@types/color-name" "^1.1.1"
+    color-convert "^2.0.1"
+
+balanced-match@^1.0.0:
+  version "1.0.0"
+  resolved "https://nexus.forchange.cn/repository/npm-group/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
+  integrity sha1-ibTRmasr7kneFk6gK4nORi1xt2c=
+
+brace-expansion@^1.1.7:
+  version "1.1.11"
+  resolved "https://nexus.forchange.cn/repository/npm-group/brace-expansion/-/brace-expansion-1.1.11.tgz#3c7fcbf529d87226f3d2f52b966ff5271eb441dd"
+  integrity sha1-PH/L9SnYcibz0vUrlm/1Jx60Qd0=
+  dependencies:
+    balanced-match "^1.0.0"
+    concat-map "0.0.1"
+
+chalk@^4.0.0:
+  version "4.0.0"
+  resolved "https://nexus.forchange.cn/repository/npm-group/chalk/-/chalk-4.0.0.tgz#6e98081ed2d17faab615eb52ac66ec1fe6209e72"
+  integrity sha1-bpgIHtLRf6q2FetSrGbsH+YgnnI=
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
+
+color-convert@^2.0.1:
+  version "2.0.1"
+  resolved "https://nexus.forchange.cn/repository/npm-group/color-convert/-/color-convert-2.0.1.tgz#72d3a68d598c9bdb3af2ad1e84f21d896abd4de3"
+  integrity sha1-ctOmjVmMm9s68q0ehPIdiWq9TeM=
+  dependencies:
+    color-name "~1.1.4"
+
+color-name@~1.1.4:
+  version "1.1.4"
+  resolved "https://nexus.forchange.cn/repository/npm-group/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
+  integrity sha1-wqCah6y95pVD3m9j+jmVyCbFNqI=
+
 commander@^5.1.0:
   version "5.1.0"
   resolved "https://nexus.forchange.cn/repository/npm-group/commander/-/commander-5.1.0.tgz#46abbd1652f8e059bddaef99bbdcb2ad9cf179ae"
   integrity sha1-Rqu9FlL44Fm92u+Zu9yyrZzxea4=
+
+concat-map@0.0.1:
+  version "0.0.1"
+  resolved "https://nexus.forchange.cn/repository/npm-group/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
+  integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
+
+fast-deep-equal@^3.1.1:
+  version "3.1.1"
+  resolved "https://nexus.forchange.cn/repository/npm-group/fast-deep-equal/-/fast-deep-equal-3.1.1.tgz#545145077c501491e33b15ec408c294376e94ae4"
+  integrity sha1-VFFFB3xQFJHjOxXsQIwpQ3bpSuQ=
+
+fs.realpath@^1.0.0:
+  version "1.0.0"
+  resolved "https://nexus.forchange.cn/repository/npm-group/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
+  integrity sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
+
+glob@^7.1.6:
+  version "7.1.6"
+  resolved "https://nexus.forchange.cn/repository/npm-group/glob/-/glob-7.1.6.tgz#141f33b81a7c2492e125594307480c46679278a6"
+  integrity sha1-FB8zuBp8JJLhJVlDB0gMRmeSeKY=
+  dependencies:
+    fs.realpath "^1.0.0"
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "^3.0.4"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
+
+has-flag@^4.0.0:
+  version "4.0.0"
+  resolved "https://nexus.forchange.cn/repository/npm-group/has-flag/-/has-flag-4.0.0.tgz#944771fd9c81c81265c4d6941860da06bb59479b"
+  integrity sha1-lEdx/ZyByBJlxNaUGGDaBrtZR5s=
+
+inflight@^1.0.4:
+  version "1.0.6"
+  resolved "https://nexus.forchange.cn/repository/npm-group/inflight/-/inflight-1.0.6.tgz#49bd6331d7d02d0c09bc910a1075ba8165b56df9"
+  integrity sha1-Sb1jMdfQLQwJvJEKEHW6gWW1bfk=
+  dependencies:
+    once "^1.3.0"
+    wrappy "1"
+
+inherits@2:
+  version "2.0.4"
+  resolved "https://nexus.forchange.cn/repository/npm-group/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
+  integrity sha1-D6LGT5MpF8NDOg3tVTY6rjdBa3w=
+
+minimatch@^3.0.4:
+  version "3.0.4"
+  resolved "https://nexus.forchange.cn/repository/npm-group/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
+  integrity sha1-UWbihkV/AzBgZL5Ul+jbsMPTIIM=
+  dependencies:
+    brace-expansion "^1.1.7"
 
 nanoid@^3.1.9:
   version "3.1.9"
   resolved "https://nexus.forchange.cn/repository/npm-group/nanoid/-/nanoid-3.1.9.tgz#1f148669c70bb2072dc5af0666e46edb6cd31fb2"
   integrity sha1-HxSGaccLsgctxa8GZuRu22zTH7I=
 
+once@^1.3.0:
+  version "1.4.0"
+  resolved "https://nexus.forchange.cn/repository/npm-group/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
+  integrity sha1-WDsap3WWHUsROsF9nFC6753Xa9E=
+  dependencies:
+    wrappy "1"
+
+path-is-absolute@^1.0.0:
+  version "1.0.1"
+  resolved "https://nexus.forchange.cn/repository/npm-group/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
+  integrity sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
+
 prettier@^2.0.5:
   version "2.0.5"
   resolved "https://nexus.forchange.cn/repository/npm-group/prettier/-/prettier-2.0.5.tgz#d6d56282455243f2f92cc1716692c08aa31522d4"
   integrity sha1-1tVigkVSQ/L5LMFxZpLAiqMVItQ=
 
+supports-color@^7.1.0:
+  version "7.1.0"
+  resolved "https://nexus.forchange.cn/repository/npm-group/supports-color/-/supports-color-7.1.0.tgz#68e32591df73e25ad1c4b49108a2ec507962bfd1"
+  integrity sha1-aOMlkd9z4lrRxLSRCKLsUHliv9E=
+  dependencies:
+    has-flag "^4.0.0"
+
 typescript@^3.9.3:
   version "3.9.3"
   resolved "https://nexus.forchange.cn/repository/npm-group/typescript/-/typescript-3.9.3.tgz#d3ac8883a97c26139e42df5e93eeece33d610b8a"
   integrity sha1-06yIg6l8JhOeQt9ek+7s4z1hC4o=
+
+wrappy@1:
+  version "1.0.2"
+  resolved "https://nexus.forchange.cn/repository/npm-group/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
+  integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=

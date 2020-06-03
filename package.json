@@ -20,6 +20,8 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
+    "@forchange/partech": "^1.0.9",
+    "@forchange/readable-regular-expression": "^0.0.10",
     "commander": "^5.1.0",
     "nanoid": "^3.1.9"
   }

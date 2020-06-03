@@ -27,71 +27,38 @@ class Category {
   }
 }
 
-
-Mono = {
+class Monomorphism {
   cat : Category
-  ======
-  record {
-    morphism : {
-      suppose a, b : cat.Object
-      -> cat.Morphism(a, b)
-    }
-    cancel_right : {
-      suppose c : cat.Object
-      f : cat.Morphism(c, a)
-      g : cat.Morphism(c, a)
-      Equation(cat.compose(f, morphism), cat.compose(g, morphism))
-      -> Equation(f, g)
-    }
+  morphism : {
+    suppose a, b : cat.Object
+    -> cat.Morphism(a, b)
+  }
+  cancel_right : {
+    suppose c : cat.Object
+    f : cat.Morphism(c, a)
+    g : cat.Morphism(c, a)
+    Equation(cat.compose(f, morphism), cat.compose(g, morphism))
+    -> Equation(f, g)
   }
 }
 
-mono : Mono(cat)
-mono.morphism(a, b) : cat.Morphism(a, b)
+// mono : Mono(cat)
+// mono.morphism(a, b) : cat.Morphism(a, b)
 
-develop Category {
-  class Mono {
-    morphism : {
-      suppose a, b : Object
-      -> Morphism(a, b)
-    }
-    cancel_right : {
-      suppose c : Object
-      f : Morphism(c, a)
-      g : Morphism(c, a)
-      Equation(compose(f, morphism), compose(g, morphism))
-      -> Equation(f, g)
-    }
+class Epimorphism {
+  cat: Category
+  morphism : {
+    suppose a, b : cat.Object
+    -> cat.Morphism(a, b)
   }
-
-  class Epi {
-    morphism : {
-      suppose a, b : Object
-      -> Morphism(a, b)
-    }
-    cancel_left : {
-      suppose c : Object
-      f : Morphism(b, c)
-      g : Morphism(b, c)
-      Equation(compose(morphism, f), compose(morphism, g))
-      -> Equation(f, g)
-    }
-  }
-
-  class Iso {
-    morphism : {
-      suppose a, b : Object
-      -> Morphism(a, b)
-    }
-    inverse : {
-      suppose a, b : Object
-      -> Morphism(b, a)
-    }
-    inverse_left : Equation(compose(morphism, inverse), id(a))
-    inverse_right : Equation(compose(inverse, morphism), id(b))
+  cancel_left : {
+    suppose c : cat.Object
+    f : cat.Morphism(b, c)
+    g : cat.Morphism(b, c)
+    Equation(cat.compose(morphism, f), cat.compose(morphism, g))
+    -> Equation(f, g)
   }
 }
-
 
 class Isomorphism {
   cat : Category
