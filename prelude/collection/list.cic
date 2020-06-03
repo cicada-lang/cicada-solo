@@ -6,6 +6,11 @@ list_t : { A : type -> type } = {
   case cons(head : A, tail : list_t(A)) : list_t(A)
 }
 
+data List(A: Type) {
+  Null: List(A)
+  Cons(head: A, tail: List(A)): List(A)
+}
+
 list_length : { x : list_t -> nat_t } = {
   switch x {
     case null => zero
