@@ -36,7 +36,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@^14.0.5":
+"@types/node@*", "@types/node@^14.0.9":
   version "14.0.9"
   resolved "https://nexus.forchange.cn/repository/npm-group/@types/node/-/node-14.0.9.tgz#43896ab87fc82bda1dfd600cdf44a0c8a64e11d2"
   integrity sha1-Q4lquH/IK9od/WAM30SgyKZOEdI=
@@ -87,6 +87,11 @@ commander@^5.1.0:
   resolved "https://nexus.forchange.cn/repository/npm-group/commander/-/commander-5.1.0.tgz#46abbd1652f8e059bddaef99bbdcb2ad9cf179ae"
   integrity sha1-Rqu9FlL44Fm92u+Zu9yyrZzxea4=
 
+commander@~2.20.3:
+  version "2.20.3"
+  resolved "https://nexus.forchange.cn/repository/npm-group/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"
+  integrity sha1-/UhehMA+tIgcIHIrpIA16FMa6zM=
+
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://nexus.forchange.cn/repository/npm-group/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
@@ -97,12 +102,21 @@ fast-deep-equal@^3.1.1:
   resolved "https://nexus.forchange.cn/repository/npm-group/fast-deep-equal/-/fast-deep-equal-3.1.1.tgz#545145077c501491e33b15ec408c294376e94ae4"
   integrity sha1-VFFFB3xQFJHjOxXsQIwpQ3bpSuQ=
 
+fs-extra@^8.1.0:
+  version "8.1.0"
+  resolved "https://nexus.forchange.cn/repository/npm-group/fs-extra/-/fs-extra-8.1.0.tgz#49d43c45a88cd9677668cb7be1b46efdb8d2e1c0"
+  integrity sha1-SdQ8RaiM2Wd2aMt74bRu/bjS4cA=
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^4.0.0"
+    universalify "^0.1.0"
+
 fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://nexus.forchange.cn/repository/npm-group/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
   integrity sha1-FQStJSMVjKpA20onh8sBQRmU6k8=
 
-glob@^7.1.6:
+glob@^7.0.0, glob@^7.1.6:
   version "7.1.6"
   resolved "https://nexus.forchange.cn/repository/npm-group/glob/-/glob-7.1.6.tgz#141f33b81a7c2492e125594307480c46679278a6"
   integrity sha1-FB8zuBp8JJLhJVlDB0gMRmeSeKY=
@@ -114,10 +128,32 @@ glob@^7.1.6:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
+graceful-fs@^4.1.6, graceful-fs@^4.2.0:
+  version "4.2.4"
+  resolved "https://nexus.forchange.cn/repository/npm-group/graceful-fs/-/graceful-fs-4.2.4.tgz#2256bde14d3632958c465ebc96dc467ca07a29fb"
+  integrity sha1-Ila94U02MpWMRl68ltxGfKB6Kfs=
+
+handlebars@^4.7.6:
+  version "4.7.6"
+  resolved "https://nexus.forchange.cn/repository/npm-group/handlebars/-/handlebars-4.7.6.tgz#d4c05c1baf90e9945f77aa68a7a219aa4a7df74e"
+  integrity sha1-1MBcG6+Q6ZRfd6pop6IZqkp9904=
+  dependencies:
+    minimist "^1.2.5"
+    neo-async "^2.6.0"
+    source-map "^0.6.1"
+    wordwrap "^1.0.0"
+  optionalDependencies:
+    uglify-js "^3.1.4"
+
 has-flag@^4.0.0:
   version "4.0.0"
   resolved "https://nexus.forchange.cn/repository/npm-group/has-flag/-/has-flag-4.0.0.tgz#944771fd9c81c81265c4d6941860da06bb59479b"
   integrity sha1-lEdx/ZyByBJlxNaUGGDaBrtZR5s=
+
+highlight.js@^10.0.0:
+  version "10.0.3"
+  resolved "https://nexus.forchange.cn/repository/npm-group/highlight.js/-/highlight.js-10.0.3.tgz#5effcc58420f113f279a0badb8ac50c4be06e63b"
+  integrity sha1-Xv/MWEIPET8nmgutuKxQxL4G5js=
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -132,17 +168,54 @@ inherits@2:
   resolved "https://nexus.forchange.cn/repository/npm-group/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha1-D6LGT5MpF8NDOg3tVTY6rjdBa3w=
 
-minimatch@^3.0.4:
+interpret@^1.0.0:
+  version "1.4.0"
+  resolved "https://nexus.forchange.cn/repository/npm-group/interpret/-/interpret-1.4.0.tgz#665ab8bc4da27a774a40584e812e3e0fa45b1a1e"
+  integrity sha1-Zlq4vE2iendKQFhOgS4+D6RbGh4=
+
+jsonfile@^4.0.0:
+  version "4.0.0"
+  resolved "https://nexus.forchange.cn/repository/npm-group/jsonfile/-/jsonfile-4.0.0.tgz#8771aae0799b64076b76640fca058f9c10e33ecb"
+  integrity sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=
+  optionalDependencies:
+    graceful-fs "^4.1.6"
+
+lodash@^4.17.15:
+  version "4.17.15"
+  resolved "https://nexus.forchange.cn/repository/npm-group/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha1-tEf2ZwoEVbv+7dETku/zMOoJdUg=
+
+lunr@^2.3.8:
+  version "2.3.8"
+  resolved "https://nexus.forchange.cn/repository/npm-group/lunr/-/lunr-2.3.8.tgz#a8b89c31f30b5a044b97d2d28e2da191b6ba2072"
+  integrity sha1-qLicMfMLWgRLl9LSji2hkba6IHI=
+
+marked@1.0.0:
+  version "1.0.0"
+  resolved "https://nexus.forchange.cn/repository/npm-group/marked/-/marked-1.0.0.tgz#d35784245a04871e5988a491e28867362e941693"
+  integrity sha1-01eEJFoEhx5ZiKSR4ohnNi6UFpM=
+
+minimatch@^3.0.0, minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://nexus.forchange.cn/repository/npm-group/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   integrity sha1-UWbihkV/AzBgZL5Ul+jbsMPTIIM=
   dependencies:
     brace-expansion "^1.1.7"
 
+minimist@^1.2.5:
+  version "1.2.5"
+  resolved "https://nexus.forchange.cn/repository/npm-group/minimist/-/minimist-1.2.5.tgz#67d66014b66a6a8aaa0c083c5fd58df4e4e97602"
+  integrity sha1-Z9ZgFLZqaoqqDAg8X9WN9OTpdgI=
+
 nanoid@^3.1.9:
   version "3.1.9"
   resolved "https://nexus.forchange.cn/repository/npm-group/nanoid/-/nanoid-3.1.9.tgz#1f148669c70bb2072dc5af0666e46edb6cd31fb2"
   integrity sha1-HxSGaccLsgctxa8GZuRu22zTH7I=
+
+neo-async@^2.6.0:
+  version "2.6.1"
+  resolved "https://nexus.forchange.cn/repository/npm-group/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
+  integrity sha1-rCetpmFn+ohJpq3dg39rGJrSCBw=
 
 once@^1.3.0:
   version "1.4.0"
@@ -156,10 +229,48 @@ path-is-absolute@^1.0.0:
   resolved "https://nexus.forchange.cn/repository/npm-group/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
   integrity sha1-F0uSaHNVNP+8es5r9TpanhtcX18=
 
+path-parse@^1.0.6:
+  version "1.0.6"
+  resolved "https://nexus.forchange.cn/repository/npm-group/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
+  integrity sha1-1i27VnlAXXLEc37FhgDp3c8G0kw=
+
 prettier@^2.0.5:
   version "2.0.5"
   resolved "https://nexus.forchange.cn/repository/npm-group/prettier/-/prettier-2.0.5.tgz#d6d56282455243f2f92cc1716692c08aa31522d4"
   integrity sha1-1tVigkVSQ/L5LMFxZpLAiqMVItQ=
+
+progress@^2.0.3:
+  version "2.0.3"
+  resolved "https://nexus.forchange.cn/repository/npm-group/progress/-/progress-2.0.3.tgz#7e8cf8d8f5b8f239c1bc68beb4eb78567d572ef8"
+  integrity sha1-foz42PW48jnBvGi+tOt4Vn1XLvg=
+
+rechoir@^0.6.2:
+  version "0.6.2"
+  resolved "https://nexus.forchange.cn/repository/npm-group/rechoir/-/rechoir-0.6.2.tgz#85204b54dba82d5742e28c96756ef43af50e3384"
+  integrity sha1-hSBLVNuoLVdC4oyWdW70OvUOM4Q=
+  dependencies:
+    resolve "^1.1.6"
+
+resolve@^1.1.6:
+  version "1.17.0"
+  resolved "https://nexus.forchange.cn/repository/npm-group/resolve/-/resolve-1.17.0.tgz#b25941b54968231cc2d1bb76a79cb7f2c0bf8444"
+  integrity sha1-sllBtUloIxzC0bt2p5y38sC/hEQ=
+  dependencies:
+    path-parse "^1.0.6"
+
+shelljs@^0.8.4:
+  version "0.8.4"
+  resolved "https://nexus.forchange.cn/repository/npm-group/shelljs/-/shelljs-0.8.4.tgz#de7684feeb767f8716b326078a8a00875890e3c2"
+  integrity sha1-3naE/ut2f4cWsyYHiooAh1iQ48I=
+  dependencies:
+    glob "^7.0.0"
+    interpret "^1.0.0"
+    rechoir "^0.6.2"
+
+source-map@^0.6.1:
+  version "0.6.1"
+  resolved "https://nexus.forchange.cn/repository/npm-group/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
+  integrity sha1-dHIq8y6WFOnCh6jQu95IteLxomM=
 
 supports-color@^7.1.0:
   version "7.1.0"
@@ -168,10 +279,50 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+typedoc-default-themes@^0.10.1:
+  version "0.10.1"
+  resolved "https://nexus.forchange.cn/repository/npm-group/typedoc-default-themes/-/typedoc-default-themes-0.10.1.tgz#eb27b7d689457c7ec843e47ec0d3e500581296a7"
+  integrity sha1-6ye31olFfH7IQ+R+wNPlAFgSlqc=
+  dependencies:
+    lunr "^2.3.8"
+
+typedoc@^0.17.7:
+  version "0.17.7"
+  resolved "https://nexus.forchange.cn/repository/npm-group/typedoc/-/typedoc-0.17.7.tgz#70797401140403a5f91589ed3f4f24c03841bf7a"
+  integrity sha1-cHl0ARQEA6X5FYntP08kwDhBv3o=
+  dependencies:
+    fs-extra "^8.1.0"
+    handlebars "^4.7.6"
+    highlight.js "^10.0.0"
+    lodash "^4.17.15"
+    lunr "^2.3.8"
+    marked "1.0.0"
+    minimatch "^3.0.0"
+    progress "^2.0.3"
+    shelljs "^0.8.4"
+    typedoc-default-themes "^0.10.1"
+
 typescript@^3.9.3:
   version "3.9.3"
   resolved "https://nexus.forchange.cn/repository/npm-group/typescript/-/typescript-3.9.3.tgz#d3ac8883a97c26139e42df5e93eeece33d610b8a"
   integrity sha1-06yIg6l8JhOeQt9ek+7s4z1hC4o=
+
+uglify-js@^3.1.4:
+  version "3.9.4"
+  resolved "https://nexus.forchange.cn/repository/npm-group/uglify-js/-/uglify-js-3.9.4.tgz#867402377e043c1fc7b102253a22b64e5862401b"
+  integrity sha1-hnQCN34EPB/HsQIlOiK2TlhiQBs=
+  dependencies:
+    commander "~2.20.3"
+
+universalify@^0.1.0:
+  version "0.1.2"
+  resolved "https://nexus.forchange.cn/repository/npm-group/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"
+  integrity sha1-tkb2m+OULavOzJ1mOcgNwQXvqmY=
+
+wordwrap@^1.0.0:
+  version "1.0.0"
+  resolved "https://nexus.forchange.cn/repository/npm-group/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
+  integrity sha1-J1hIEIkUVqQXHI0CJkQa3pDLyus=
 
 wrappy@1:
   version "1.0.2"

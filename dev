@@ -1,11 +1,24 @@
 #!/usr/bin/env bash
 
 function install {
-    yarn
+    yarn install
 }
 
 function build {
     yarn run build
+}
+
+function watch {
+    yarn run watch
+}
+
+function format {
+    yarn run format
+}
+
+function docs {
+    mkdir -p docs/api &&
+        npx typedoc src --out docs/api --mode modules --ignoreCompilerErrors
 }
 
 function t {

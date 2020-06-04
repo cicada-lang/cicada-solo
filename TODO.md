@@ -1,3 +1,5 @@
+- be able to run again
+- archive the structural typing version
 # note
 - we need nominal typing
   - because of zero and null and so on
