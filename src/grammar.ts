@@ -142,7 +142,7 @@ function named_entry_matcher(tree: pt.Tree.Tree): [string, Scope.Entry.Entry] {
 
 function exp(): pt.Sym.Rule {
   return pt.Sym.create_rule("exp", {
-    "var": [identifier],
+    var: [identifier],
     type: ["type"],
     string_t: ["string_t"],
     string: [str],
@@ -164,7 +164,7 @@ function exp(): pt.Sym.Rule {
 
 function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher("exp", {
-    "var": ([name]) => new Exp.Var(pt.Tree.token(name).value),
+    var: ([name]) => new Exp.Var(pt.Tree.token(name).value),
     type: (_) => new Exp.Type(),
     string_t: (_) => new Exp.StrType(),
     string: ([str]) => {
