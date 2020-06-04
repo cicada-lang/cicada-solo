@@ -1,4 +1,4 @@
-- be able to run again
+- be able to run again -- use parser combinator
 - archive the structural typing version
 # note
 - we need nominal typing
