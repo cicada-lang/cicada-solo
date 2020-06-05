@@ -1,7 +1,7 @@
 import * from "../simple/bool.cic"
 import * from "../simple/nat.cic"
 
-List : { A : type -> type } = {
+List : { A : Type -> Type } = {
   case null : List(A)
   case cons(head : A, tail : List(A)) : List(A)
 }
@@ -19,7 +19,7 @@ list_length : { x : List -> Nat } = {
 }
 
 list_append : {
-  [ A : type ]
+  [ A : Type ]
   x, y : List(A)
   ---------
   List(A)
@@ -31,7 +31,7 @@ list_append : {
 }
 
 list_map : {
-  [ A, B : type ]
+  [ A, B : Type ]
   f : { A -> B }
   x : List(A)
   ---------

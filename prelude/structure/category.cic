@@ -74,7 +74,7 @@ class Isomorphism {
   inverse_right : Equation(cat.compose(inverse, morphism), cat.id(b))
 }
 
-// NOTE partly fulfilled object construction is a type: Isomorphism(this, f, inv(f))
+// NOTE partly fulfilled object construction is a Type: Isomorphism(this, f, inv(f))
 class Groupoid extends Category {
   inv : { suppose a, b : Object; f : Morphism(a, b) -> Morphism(b, a) }
   inv_iso : { suppose a, b : Object; f : Morphism(a, b) -> Isomorphism(this, f, inv(f)) }

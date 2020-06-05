@@ -1,6 +1,6 @@
 import * from "../simple/nat.cic"
 
-Vec : { A : type; length : Nat -> type } = {
+Vec : { A : Type; length : Nat -> Type } = {
   case vec_null : Vec(A, zero)
   case vec_cons : {
     [ n : Nat ]
@@ -12,7 +12,7 @@ Vec : { A : type; length : Nat -> type } = {
 }
 
 Vec = class {
-  A : type
+  A : Type
   length : Nat
 }
 
@@ -28,7 +28,7 @@ VecCons = class extends Vec {
 }
 
 class Vec {
-  A : type
+  A : Type
   length : Nat
 }
 
@@ -44,7 +44,7 @@ class VecCons extends Vec {
 }
 
 vec_append : {
-  [ A : type
+  [ A : Type
     m, n : Nat ]
   x : Vec(A, m)
   y : Vec(A, n)
@@ -58,7 +58,7 @@ vec_append : {
 }
 
 vec_map : {
-  [ A, B : type
+  [ A, B : Type
     n : Nat ]
   f : { A -> B }
   x : Vec(A, n)

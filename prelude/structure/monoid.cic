@@ -5,7 +5,7 @@ class Monoid extends Semigroup {
 }
 
 class Monoid {
-  Elem : type
+  Elem : Type
   id : Elem
   mul : { List(Elem) -> Elem }
   mul_id_left : { x : List(Elem) -> Equation(mul(append([id], x)), x) }

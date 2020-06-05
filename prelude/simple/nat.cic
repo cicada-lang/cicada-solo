@@ -1,6 +1,6 @@
 import * from "./bool.cic"
 
-Nat : type = {
+Nat : Type = {
   case zero
   case succ(prev : Nat)
 }

@@ -1,4 +1,4 @@
-Bool : type = {
+Bool : Type = {
   case true
   case false
 }

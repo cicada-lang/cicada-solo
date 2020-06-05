@@ -8,7 +8,7 @@ class PartialOrder extends PreOrder {
 }
 
 develop PartialOrder {
-  cover : { a, b : Elem -> type } = {
+  cover : { a, b : Elem -> Type } = {
     StrictPre(a, b) &
       { x : Elem
         Pre(a, x)

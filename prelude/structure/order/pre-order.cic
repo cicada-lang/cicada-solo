@@ -1,12 +1,12 @@
 class PreOrder {
-  Elem : type
-  Pre : { Elem; Elem -> type }
+  Elem : Type
+  Pre : { Elem; Elem -> Type }
   reflexive : { a : Elem -> Pre(a, a) }
   transitive : { Pre(a, b); Pre(b, c) -> Pre(a, c) }
 }
 
 develop PreOrder {
-  StrictPre : { a, b : Elem -> type } = {
+  StrictPre : { a, b : Elem -> Type } = {
     Pre(a, b) & NonEquation(Elem, a, b)
   }
 }
