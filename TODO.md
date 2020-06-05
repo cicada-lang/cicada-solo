@@ -1,5 +1,5 @@
 - make the syntax more closer to programming language
-- [note] rule about fulfilling type system
+- [note] inference rules -- specially fulfilling type system
 - [note] class and data as both constructor and namespace
 - [impl] pie
   ``` pie
