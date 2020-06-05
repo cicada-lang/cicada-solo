@@ -3,7 +3,7 @@ class Functor {
   cod : Category
   map : { a : dom.Object -> cod.Object }
   fmap : {
-    suppose a, b : dom.Object
+    # a, b : dom.Object
     f : dom.Morphism(a, b)
     -> cod.Morphism(map(a), map(b))
   }

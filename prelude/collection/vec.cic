@@ -1,9 +1,9 @@
 import * from "../simple/nat.cic"
 
-Vec : { A : Type; length : Nat -> Type } = {
-  case vec_null : Vec(A, zero)
-  case vec_cons : {
-    [ n : Nat ]
+data Vec(A : Type, length : Nat) = {
+  VecNull : Vec(A, zero)
+  VecCons : {
+    # n : Nat
     head : A
     tail : Vec(A, n)
     ---------

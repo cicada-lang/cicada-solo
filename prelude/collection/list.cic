@@ -1,14 +1,9 @@
 import * from "../simple/bool.cic"
 import * from "../simple/nat.cic"
 
-List : { A : Type -> Type } = {
-  case null : List(A)
-  case cons(head : A, tail : List(A)) : List(A)
-}
-
-data List(A: Type) {
-  Null: List(A)
-  Cons(head: A, tail: List(A)): List(A)
+data List(A : Type) {
+  Null : List(A)
+  Cons(head: A, tail: List(A)) : List(A)
 }
 
 list_length : { x : List -> Nat } = {

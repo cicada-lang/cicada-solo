@@ -1,5 +1,3 @@
 class Unit {}
 
 unit : Unit = new Unit
-
-@assert_eq unit Unit
