@@ -1,8 +1,8 @@
 import * from "./bool.cic"
 
-Nat : Type = {
-  case zero
-  case succ(prev : Nat)
+data Nat {
+  zero : Nat
+  succ(prev : Nat) : Nat
 }
 
 nat_add : { x, y : Nat -> Nat } = {

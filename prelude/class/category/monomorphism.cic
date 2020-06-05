@@ -1,0 +1,18 @@
+class Monomorphism {
+  cat : Category
+  morphism : {
+    # a, b : cat.Object
+    -> cat.Morphism(a, b)
+  }
+  cancel_right : {
+    # c : cat.Object
+    f : cat.Morphism(c, a)
+    g : cat.Morphism(c, a)
+    Equation(cat.compose(f, morphism), cat.compose(g, morphism))
+    -> Equation(f, g)
+  }
+}
+
+// NOTE example
+// mono : Monomorphism(cat)
+// mono.morphism(a, b) : cat.Morphism(a, b)

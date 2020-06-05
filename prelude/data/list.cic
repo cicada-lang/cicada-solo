@@ -3,7 +3,7 @@ import * from "../simple/nat.cic"
 
 data List(A : Type) {
   Null : List(A)
-  Cons(head: A, tail: List(A)) : List(A)
+  Cons : { head : A; tail : List(A) -> List(A) }
 }
 
 list_length : { x : List -> Nat } = {
@@ -14,7 +14,7 @@ list_length : { x : List -> Nat } = {
 }
 
 list_append : {
-  [ A : Type ]
+  # A : Type
   x, y : List(A)
   ---------
   List(A)
@@ -26,7 +26,7 @@ list_append : {
 }
 
 list_map : {
-  [ A, B : Type ]
+  # A, B : Type
   f : { A -> B }
   x : List(A)
   ---------

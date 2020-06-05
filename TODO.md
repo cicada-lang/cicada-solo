@@ -1,4 +1,5 @@
-- class as both constructor and namespace
+- [note] rule about fulfilling type system
+- [note] class and data as both constructor and namespace
 # note
 - we need nominal typing
   - because of zero and null and so on

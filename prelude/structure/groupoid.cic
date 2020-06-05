@@ -1,4 +1,0 @@
-class Groupoid extends Category {
-  inv : { f : Morphism(a, b) -> Morphism(b, a) }
-  inv_iso : { f : Morphism(a, b) -> Isomorphism(f, inv(f)) }
-}
