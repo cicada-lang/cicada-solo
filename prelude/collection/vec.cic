@@ -16,11 +16,11 @@ Vec = class {
   length : Nat
 }
 
-vec_null_t = class extends Vec {
+VecNull = class extends Vec {
   length = zero
 }
 
-vec_cons_t = class extends Vec {
+VecCons = class extends Vec {
   n : Nat
   length = succ(n)
   head : A
@@ -32,11 +32,11 @@ class Vec {
   length : Nat
 }
 
-class vec_null_t extends Vec {
+class VecNull extends Vec {
   length = zero
 }
 
-class vec_cons_t extends Vec {
+class VecCons extends Vec {
   n : Nat
   length = succ(n)
   head : A

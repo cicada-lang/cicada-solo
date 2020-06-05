@@ -2,7 +2,7 @@ class TotalOrder extends PartialOrder {
   connective : {
     a, b : Elem
     ---------
-    either_t(Pre(a, b), Pre(b, a))
+    Either(Pre(a, b), Pre(b, a))
   }
 }
 
