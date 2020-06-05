@@ -1,0 +1,11 @@
+* make the syntax more closer to programming language
+- start: <2020-06-05 Fri>
+* [note] inference rules -- specially fulfilling type system
+* [note] class and data as both constructor and namespace
+* [impl] pie
+  #+begin_src scala
+  concat(E: U, List(E), List(E)): List(E) =
+    List.rec(reverse(E, y), x, step_reverse(E))
+  #+end_src
+* [learn] how to implement inductive type definition
+* Lattice

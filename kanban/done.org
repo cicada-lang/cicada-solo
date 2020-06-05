@@ -1,0 +1,4 @@
+* plan and project management
+- done: <2020-06-05 Fri>
+Use a kanban dir in the project,
+and give each stage in process a file.
