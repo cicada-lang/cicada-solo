@@ -1,5 +1,11 @@
-- [note] rule about fulfilling type system -- update the paper
+- [note] rule about fulfilling type system
 - [note] class and data as both constructor and namespace
+- [impl] pie
+  ``` pie
+  concat : { E : U List(E) List(E) -> List(E) }
+  concat(E, x, y) = List.rec(reverse(E, y), x, step_reverse(E))
+  ```
+- [learn] how to implement inductive type definition
 - `Lattice`
 # note
 - we need nominal typing
@@ -10,43 +16,17 @@
 - we can have both nominal typing and record (like object of js)
   - `Class { ... }` as object constructor
   - `{ ... }` as record like object
-# todo
-- equation test
-- fix comments about inference rules
-- note about `Neutral.The` and the value
-- [maybe] we should learn from pie again
-  - make tartlet a pie and test by the little typer
+- [note] we can also use `new` to construct object from class
+  - but I choose to use `{}` syntax to construct all objects for now
+- mutual recursive definition at least at top level
 # cicada
 - [equality] we can implementation equality by built-in equality
   maybe we need to built-in (make it an axiom) the following function
-  ``` cicada
+  ``` scala
   transport : {
-    equation : equation_t(A, x, y)
-    motive : { x : A -> type }
+    equation : Equal(A, x, y)
+    motive : { x : A -> Type }
     base : motive(x)
     -> motive(y)
-  } = {
-    equation : equation_t(A, x, y)
-    motive : { x : A -> type }
-    base : motive(x)
-    => base
-  }
+  } = base
   ```
-- [test] define `category_t` as algebraic structure
-- [test] define  `contextual_pre_category_t` as algebraic structure
-- mutual recursive definition only at top level
-- [module system] not so hurry, after the core is stable
-# error report
-- add span to `Exp`
-- color output
-# learn from gradual type system
-- how they refine type in a `if` block?
-# js backend
-- a simple compiler to translate the semantics of `evaluate` to js
-# note
-- [maybe] [top] we need a framework for adding new keywords
-  - a little bit early to do this now
-- [note] we can also use `new` to construct object from class
-  - but I choose to use `{}` syntax to construct all objects for now
-- [maybe] should we handle `A : type` specially?
-  - I think no.

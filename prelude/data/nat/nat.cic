@@ -15,16 +15,16 @@ add : { x, y : Nat -> Nat } = x match {
 }
 
 mul : { x, y : Nat -> Nat } = {
-  switch x {
-    case zero => zero
-    case succ => add(y, mul(x.prev, y))
+  x match {
+    zero => zero
+    succ => add(y, mul(x.prev, y))
   }
 }
 
 factorial : { x : Nat -> Nat } = {
-  switch x {
-    case zero => succ(zero)
-    case succ => mul(x, factorial(x.prev))
+  x match {
+    zero => succ(zero)
+    succ => mul(x, factorial(x.prev))
   }
 }
 
@@ -52,11 +52,11 @@ ten : Nat = succ(nine)
 @assert_eq factorial(three) six
 
 even_p : { x : Nat -> Bool } = {
-  switch x {
-    case zero => true
-    case succ => x.prev switch {
-      case zero => false
-      case succ => even_p(x.prev.prev)
+  x match {
+    zero => true
+    succ => x.prev match {
+      zero => false
+      succ => even_p(x.prev.prev)
     }
   }
 }

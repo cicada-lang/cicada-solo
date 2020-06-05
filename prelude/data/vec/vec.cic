@@ -56,9 +56,9 @@ vec_append : {
   ---------
   Vec(A, nat_add(m, n))
 } = {
-  switch x {
-    case vec_null => y
-    case vec_cons => vec_cons(x.head, vec_append(x.tail, y))
+  x match {
+    vec_null => y
+    vec_cons => vec_cons(x.head, vec_append(x.tail, y))
   }
 }
 
@@ -70,9 +70,9 @@ vec_map : {
   ---------
   Vec(B, n)
 } = {
-  switch x {
-    case vec_null => x
-    case vec_cons => vec_cons(f(x.head), vec_map(f, x.tail))
+  x match {
+    vec_null => x
+    vec_cons => vec_cons(f(x.head), vec_map(f, x.tail))
   }
 }
 

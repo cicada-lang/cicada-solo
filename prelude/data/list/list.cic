@@ -6,42 +6,40 @@ data List(A : Type) {
   Cons : { head : A; tail : List(A) -> List(A) }
 }
 
-list_length : { x : List -> Nat } = {
-  switch x {
-    case null => zero
-    case cons => succ(list_length(x.tail))
-  }
+length : { x : List -> Nat }
+length(Null) = Zero
+length(Cons(_head, tail)) = Succ(length(tail))
+
+length : { x : List -> Nat } = x match {
+  Null => Zero
+  Cons(_head, tail) => Succ(length(tail))
 }
 
-list_append : {
+append : {
   # A : Type
   x, y : List(A)
   ---------
   List(A)
-} = {
-  switch x {
-    case null => y
-    case cons => cons(x.head, list_append(x.tail, y))
-  }
+} = x match {
+  Null => y
+  Cons(head, tail) => Cons(head, append(tail, y))
 }
 
-list_map : {
+
+map : {
   # A, B : Type
   f : { A -> B }
   x : List(A)
   ---------
   List(B)
-} = {
-  switch x {
-    case null => null
-    case cons => cons(f(x.head), list_map(f, x.tail))
-  }
+} = x match {
+  Null => Null
+  Cons(head, tail) => Cons(f(head), map(f, tail))
 }
 
-three_zeros : List(Nat) = {
-  cons(zero, cons(zero, cons(zero, null)))
-}
+three_Zeros : List(Nat) =
+  Cons(Zero, Cons(Zero, Cons(Zero, Null)))
 
-three_ones : List(Nat) = {
-  cons(one, cons(one, cons(one, null)))
-}
+
+three_ones : List(Nat) =
+  Cons(one, Cons(one, Cons(one, Null)))

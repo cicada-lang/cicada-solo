@@ -1,31 +1,31 @@
 Bool : Type = {
-  case true
-  case false
+  true
+  false
 }
 
 bool_not : { x : Bool -> Bool } = {
-  switch x {
-    case true => false
-    case false => true
+  x match {
+    true => false
+    false => true
   }
 }
 
 bool_and : { x, y : Bool -> Bool } = {
-  switch x {
-    case true => switch y {
-      case true => true
-      case false => false
+  x match {
+    true => y match {
+      true => true
+      false => false
     }
-    case false => false
+    false => false
   }
 }
 
 bool_or : { x, y : Bool -> Bool } = {
-  switch x {
-    case true => true
-    case false => switch y {
-      case true => true
-      case false => false
+  x match {
+    true => true
+    false => y match {
+      true => true
+      false => false
     }
   }
 }
