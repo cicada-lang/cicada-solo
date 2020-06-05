@@ -1,4 +1,4 @@
-- [note] rule about fulfilling type system
+- [note] rule about fulfilling type system -- update the paper
 - [note] class and data as both constructor and namespace
 # note
 - we need nominal typing
