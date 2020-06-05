@@ -3,14 +3,14 @@ Bool : Type = {
   false
 }
 
-bool_not : { x : Bool -> Bool } = {
+not : { x : Bool -> Bool } = {
   x match {
     true => false
     false => true
   }
 }
 
-bool_and : { x, y : Bool -> Bool } = {
+and : { x, y : Bool -> Bool } = {
   x match {
     true => y match {
       true => true
@@ -20,7 +20,7 @@ bool_and : { x, y : Bool -> Bool } = {
   }
 }
 
-bool_or : { x, y : Bool -> Bool } = {
+or : { x, y : Bool -> Bool } = {
   x match {
     true => true
     false => y match {
@@ -30,15 +30,15 @@ bool_or : { x, y : Bool -> Bool } = {
   }
 }
 
-@assert_eq bool_not(true) false
-@assert_eq bool_not(false) true
+@assert_eq not(true) false
+@assert_eq not(false) true
 
-@assert_eq bool_and(true, true) true
-@assert_eq bool_and(true, false) false
-@assert_eq bool_and(false, true) false
-@assert_eq bool_and(false, false) false
+@assert_eq and(true, true) true
+@assert_eq and(true, false) false
+@assert_eq and(false, true) false
+@assert_eq and(false, false) false
 
-@assert_eq bool_or(true, true) true
-@assert_eq bool_or(true, false) true
-@assert_eq bool_or(false, true) true
-@assert_eq bool_or(false, false) false
+@assert_eq or(true, true) true
+@assert_eq or(true, false) true
+@assert_eq or(false, true) true
+@assert_eq or(false, false) false
