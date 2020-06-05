@@ -2,22 +2,55 @@
 
 ## Function
 
-**application**
+Function definition:
 
+``` scala
+f(x: A, y: B): C = k(g(x), h(y))
+```
+
+Function application:
+
+``` scala
 f(a, b)
+```
 
-**abstraction**
+Function abstraction:
 
-(x, y) => f(g(x), h(y))
+``` scala
+(x, y) => k(g(x), h(y))
+```
 
-**pi type**
+Pi type:
 
-{ x : A, y: B -> C }
-
-## Data
-
-TODO
+``` scala
+(x: A, y: B) -> C
+```
 
 ## Class
 
-TODO
+Class definition:
+
+``` scala
+class C {
+  a: A
+  f(x: A, y: B): C
+}
+```
+
+Class fulfill:
+
+``` scala
+```
+
+Use class as to construct instance:
+
+``` scala
+```
+
+## Data
+
+Data definition:
+
+Data pattern matching:
+
+Data dot field:

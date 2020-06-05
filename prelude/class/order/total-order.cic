@@ -1,6 +1,6 @@
 class TotalOrder extends PartialOrder {
-  connective : {
-    a, b : Elem
+  connective: {
+    a, b: Elem
     ---------
     Either(Pre(a, b), Pre(b, a))
   }

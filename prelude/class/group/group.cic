@@ -1,41 +1,57 @@
 class Group extends Monoid {
-  inv(x : Elem) : Elem
-  left_inv(x : Elem) : TheEqual(Elem, mul(inv(x), x), id)
-  right_inv(x : Elem) : TheEqual(Elem, mul(x, inv(x)), id)
+  inv(x: Elem): Elem
+  left_inv(x: Elem): TheEqual(Elem, mul(inv(x), x), id)
+  right_inv(x: Elem): TheEqual(Elem, mul(x, inv(x)), id)
 }
 
 develop Group {
-  div(x : Elem, y : Elem) : Elem = mul(x, inv(y))
+  div(x: Elem, y: Elem): Elem = mul(x, inv(y))
 }
 
 // TODO
 
-class GroupHom(dom : Group, cod : Group) {
-  hom(dom.Elem) : cod.Elem
-  hom_respect_mul(x : dom.Elem, y : dom.Elem) : TheEqual(
+class GroupHom(dom: Group, cod: Group) {
+  hom(dom.Elem): cod.Elem
+  hom_respect_mul(x: dom.Elem, y: dom.Elem): TheEqual(
     cod.Elem,
     hom(dom.mul(x, y)),
     cod.mul(hom(x), hom(y)))
 }
 
-id_group_hom(dom : Group) : GroupHom(dom, dom) = new GroupHom(dom, dom) {
+id_group_hom(dom: Group): GroupHom(dom, dom) = new GroupHom(dom, dom) {
   dom, dom,
-  (x : dom.Elem) : dom.Elem => x,
-  (x : dom.Elem, y : dom.Elem) => same(dom.mul(x, y)),
+  (x: dom.Elem): dom.Elem => x,
+  (x: dom.Elem, y: dom.Elem) => same(dom.mul(x, y)),
 }
 
-group_category : Category = new Category(
+group_category: Category = new Category(
+  Object = Group,
+  Morphism = GroupHom,
+  id = id_group_hom,
+
+  compose = (f: GroupHom(a, b), g: GroupHom(b, c)) => new GroupHom(a, c) {
+    (x: a.Elem) => { g.hom(f.hom(x)) },
+    (x: a.Elem, y: a.Elem) => same(g.hom(b.mul(f.hom(x), f.hom(y))))
+  },
+
+  id_left = (f: GroupHom(a, b)) => same(f),
+  id_right = (f: GroupHom(a, b)) => same(f),
+
+  compose_associative = (f: GroupHom(a, b), g: GroupHom(b, c), h: GroupHom(c, d)) => refl
+)
+
+group_category: Category = new Category(
   Group,
   GroupHom,
   id_group_hom,
 
-  (f : GroupHom(a, b), g : GroupHom(b, c)) => new GroupHom(a, c) {
-    (x : a.Elem) => { g.hom(f.hom(x)) },
-    (x : a.Elem, y : a.Elem) => same(g.hom(b.mul(f.hom(x), f.hom(y))))
+  (f: GroupHom(a, b), g: GroupHom(b, c)) => new GroupHom(a, c) {
+    (x: a.Elem) => { g.hom(f.hom(x)) },
+    (x: a.Elem, y: a.Elem) => same(g.hom(b.mul(f.hom(x), f.hom(y))))
   },
 
-  (f : GroupHom(a, b)) => same(f),
-  (f : GroupHom(a, b)) => same(f),
+  (f: GroupHom(a, b)) => same(f),
+  (f: GroupHom(a, b)) => same(f),
 
-  (f : GroupHom(a, b), g : GroupHom(b, c), h : GroupHom(c, d)) => refl
+  (f: GroupHom(a, b), g: GroupHom(b, c), h: GroupHom(c, d)) => refl
 )

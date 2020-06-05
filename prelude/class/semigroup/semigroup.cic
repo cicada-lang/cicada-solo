@@ -1,14 +1,14 @@
 class Semigroup {
-  Elem : Type
-  mul : { x, y : Elem -> Elem }
-  mul_associative : {
-    x, y, z : Elem
+  Elem: Type
+  mul: { x, y: Elem -> Elem }
+  mul_associative: {
+    x, y, z: Elem
     ---------
     Equal(mul(x, mul(y, z)), mul(mul(x, y), z))
   }
 }
 
 class Semigroup {
-  Elem : Type
-  mul : { List(Elem) -> Elem }
+  Elem: Type
+  mul: { List(Elem) -> Elem }
 }

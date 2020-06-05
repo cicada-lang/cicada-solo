@@ -1,5 +1,5 @@
 // NOTE partly fulfilled object construction is a Type: Isomorphism(this, f, inv(f))
 class Groupoid extends Category {
-  inv : { # a, b : Object; f : Morphism(a, b) -> Morphism(b, a) }
-  inv_iso : { # a, b : Object; f : Morphism(a, b) -> Isomorphism(this, f, inv(f)) }
+  inv: { # a, b: Object; f: Morphism(a, b) -> Morphism(b, a) }
+  inv_iso: { # a, b: Object; f: Morphism(a, b) -> Isomorphism(this, f, inv(f)) }
 }

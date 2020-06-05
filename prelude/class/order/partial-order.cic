@@ -1,5 +1,5 @@
 class PartialOrder extends PreOrder {
-  antisymmetric : {
+  antisymmetric: {
     Pre(a, b)
     Pre(b, a)
     ---------
@@ -8,9 +8,9 @@ class PartialOrder extends PreOrder {
 }
 
 develop PartialOrder {
-  cover : { a, b : Elem -> Type } = {
+  cover: { a, b: Elem -> Type } = {
     StrictPre(a, b) &
-      { x : Elem
+      { x: Elem
         Pre(a, x)
         StrictPre(x, b)
         ---------

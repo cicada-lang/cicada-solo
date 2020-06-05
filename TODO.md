@@ -1,9 +1,10 @@
+- make the syntax more closer to programming language
 - [note] rule about fulfilling type system
 - [note] class and data as both constructor and namespace
 - [impl] pie
   ``` pie
-  concat : { E : U List(E) List(E) -> List(E) }
-  concat(E, x, y) = List.rec(reverse(E, y), x, step_reverse(E))
+  concat(E: U, List(E), List(E)): List(E) =
+    List.rec(reverse(E, y), x, step_reverse(E))
   ```
 - [learn] how to implement inductive type definition
 - `Lattice`
@@ -13,11 +14,6 @@
   - we need nominal typing to express our intension
 - we can have both fulfilling type system and nominal typing
   - use fulfilling type only for class, keep data simple
-- we can have both nominal typing and record (like object of js)
-  - `Class { ... }` as object constructor
-  - `{ ... }` as record like object
-- [note] we can also use `new` to construct object from class
-  - but I choose to use `{}` syntax to construct all objects for now
 - mutual recursive definition at least at top level
 # cicada
 - [equality] we can implementation equality by built-in equality

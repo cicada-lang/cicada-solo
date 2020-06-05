@@ -1,18 +1,18 @@
 class Monomorphism {
-  cat : Category
-  morphism : {
-    # a, b : cat.Object
+  cat: Category
+  morphism: {
+    # a, b: cat.Object
     -> cat.Morphism(a, b)
   }
-  cancel_right : {
-    # c : cat.Object
-    f : cat.Morphism(c, a)
-    g : cat.Morphism(c, a)
+  cancel_right: {
+    # c: cat.Object
+    f: cat.Morphism(c, a)
+    g: cat.Morphism(c, a)
     Equal(cat.compose(f, morphism), cat.compose(g, morphism))
     -> Equal(f, g)
   }
 }
 
 // NOTE example
-// mono : Monomorphism(cat)
-// mono.morphism(a, b) : cat.Morphism(a, b)
+// mono: Monomorphism(cat)
+// mono.morphism(a, b): cat.Morphism(a, b)

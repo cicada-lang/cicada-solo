@@ -1,13 +1,13 @@
 class Isomorphism {
-  cat : Category
-  morphism : {
-    # a, b : cat.Object
+  cat: Category
+  morphism: {
+    # a, b: cat.Object
     -> cat.Morphism(a, b)
   }
-  inverse : {
-    # a, b : cat.Object
+  inverse: {
+    # a, b: cat.Object
     -> cat.Morphism(b, a)
   }
-  inverse_left : Equal(cat.compose(morphism, inverse), cat.id(a))
-  inverse_right : Equal(cat.compose(inverse, morphism), cat.id(b))
+  inverse_left: Equal(cat.compose(morphism, inverse), cat.id(a))
+  inverse_right: Equal(cat.compose(inverse, morphism), cat.id(b))
 }
