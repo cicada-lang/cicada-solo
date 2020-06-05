@@ -1,0 +1,68 @@
+import * from "./bool.cic"
+
+data Nat {
+  Zero : Nat
+  Succ : { prev : Nat -> Nat }
+}
+
+add : { x, y : Nat -> Nat }
+add(Zero, y) = y
+add(Succ(prev), y) = Succ(add(prev, y))
+
+add : { x, y : Nat -> Nat } = x match {
+  Zero => y
+  Succ(prev) => Succ(add(prev, y))
+}
+
+mul : { x, y : Nat -> Nat } = {
+  switch x {
+    case zero => zero
+    case succ => add(y, mul(x.prev, y))
+  }
+}
+
+factorial : { x : Nat -> Nat } = {
+  switch x {
+    case zero => succ(zero)
+    case succ => mul(x, factorial(x.prev))
+  }
+}
+
+one : Nat = succ(zero)
+two : Nat = succ(one)
+three : Nat = succ(two)
+four : Nat = succ(three)
+five : Nat = succ(four)
+six : Nat = succ(five)
+seven : Nat = succ(six)
+eight : Nat = succ(seven)
+nine : Nat = succ(eight)
+ten : Nat = succ(nine)
+
+@assert_eq add(one, one) two
+@assert_eq add(two, two) four
+@assert_eq add(three, three) six
+
+@assert_eq mul(one, one) one
+@assert_eq mul(two, two) four
+@assert_eq mul(three, three) nine
+
+@assert_eq factorial(one) one
+@assert_eq factorial(two) two
+@assert_eq factorial(three) six
+
+even_p : { x : Nat -> Bool } = {
+  switch x {
+    case zero => true
+    case succ => x.prev switch {
+      case zero => false
+      case succ => even_p(x.prev.prev)
+    }
+  }
+}
+
+@assert_eq even_p(one) false
+@assert_eq even_p(two) true
+@assert_eq even_p(three) false
+@assert_eq even_p(four) true
+@assert_eq even_p(five) false

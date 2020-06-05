@@ -11,6 +11,11 @@ data Vec(A : Type, length : Nat) {
   }
 }
 
+data Vec(A : Type, length : Nat) {
+  VecNull : Vec(A, zero)
+  VecCons : (# n : Nat, head : A, tail : Vec(A, n)) -> Vec(A, succ(n))
+}
+
 Vec = class {
   A : Type
   length : Nat

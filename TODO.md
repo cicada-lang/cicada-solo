@@ -1,5 +1,6 @@
 - [note] rule about fulfilling type system -- update the paper
 - [note] class and data as both constructor and namespace
+- `Lattice`
 # note
 - we need nominal typing
   - because of zero and null and so on
