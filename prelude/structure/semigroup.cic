@@ -1,14 +1,14 @@
-class semigroup_t {
-  elem_t : type
-  mul : { x, y : elem_t -> elem_t }
+class Semigroup {
+  Elem : type
+  mul : { x, y : Elem -> Elem }
   mul_associative : {
-    x, y, z : elem_t
+    x, y, z : Elem
     ---------
-    equation_t(mul(x, mul(y, z)), mul(mul(x, y), z))
+    Equation(mul(x, mul(y, z)), mul(mul(x, y), z))
   }
 }
 
-class semigroup_t {
-  elem_t : type
-  mul : { list_t(elem_t) -> elem_t }
+class Semigroup {
+  Elem : type
+  mul : { List(Elem) -> Elem }
 }

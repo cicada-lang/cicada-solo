@@ -1,9 +1,9 @@
 import * from "../simple/bool.cic"
 import * from "../simple/nat.cic"
 
-list_t : { A : type -> type } = {
-  case null : list_t(A)
-  case cons(head : A, tail : list_t(A)) : list_t(A)
+List : { A : type -> type } = {
+  case null : List(A)
+  case cons(head : A, tail : List(A)) : List(A)
 }
 
 data List(A: Type) {
@@ -11,7 +11,7 @@ data List(A: Type) {
   Cons(head: A, tail: List(A)): List(A)
 }
 
-list_length : { x : list_t -> nat_t } = {
+list_length : { x : List -> Nat } = {
   switch x {
     case null => zero
     case cons => succ(list_length(x.tail))
@@ -20,9 +20,9 @@ list_length : { x : list_t -> nat_t } = {
 
 list_append : {
   [ A : type ]
-  x, y : list_t(A)
+  x, y : List(A)
   ---------
-  list_t(A)
+  List(A)
 } = {
   switch x {
     case null => y
@@ -33,9 +33,9 @@ list_append : {
 list_map : {
   [ A, B : type ]
   f : { A -> B }
-  x : list_t(A)
+  x : List(A)
   ---------
-  list_t(B)
+  List(B)
 } = {
   switch x {
     case null => null
@@ -43,10 +43,10 @@ list_map : {
   }
 }
 
-three_zeros : list_t(nat_t) = {
+three_zeros : List(Nat) = {
   cons(zero, cons(zero, cons(zero, null)))
 }
 
-three_ones : list_t(nat_t) = {
+three_ones : List(Nat) = {
   cons(one, cons(one, cons(one, null)))
 }

@@ -1,22 +1,22 @@
-class monoid_t extends semigroup_t {
-  id : elem_t
-  id_left : { x : elem_t -> the_equation_t(elem_t, mul(id, x), x) }
-  id_right : { x : elem_t -> the_equation_t(elem_t, mul(x, id), x) }
+class Monoid extends Semigroup {
+  id : Elem
+  id_left : { x : Elem -> TheEquation(Elem, mul(id, x), x) }
+  id_right : { x : Elem -> TheEquation(Elem, mul(x, id), x) }
 }
 
-class monoid_t {
-  elem_t : type
-  id : elem_t
-  mul : { list_t(elem_t) -> elem_t }
-  mul_id_left : { x : list_t(elem_t) -> equation_t(mul(append([id], x)), x) }
-  mul_id_right : { x : list_t(elem_t) -> equation_t(mul(append(x, [id])), x) }
+class Monoid {
+  Elem : type
+  id : Elem
+  mul : { List(Elem) -> Elem }
+  mul_id_left : { x : List(Elem) -> Equation(mul(append([id], x)), x) }
+  mul_id_right : { x : List(Elem) -> Equation(mul(append(x, [id])), x) }
 }
 
-develop monoid_t {
-  as_category : category_t = category_t(
-    unit_t,
-    (_ : unit_t, _ : unit_t) : unit_t => elem_t,
-    (_ : unit_t) : elem_t => id,
+develop Monoid {
+  as_category : Category = Category(
+    Unit,
+    (_ : Unit, _ : Unit) : Unit => Elem,
+    (_ : Unit) : Elem => id,
     mul,
     id_left,
     id_left,

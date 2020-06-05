@@ -1,55 +1,55 @@
 import * from "../simple/nat.cic"
 
-vec_t : { A : type; length : nat_t -> type } = {
-  case vec_null : vec_t(A, zero)
+Vec : { A : type; length : Nat -> type } = {
+  case vec_null : Vec(A, zero)
   case vec_cons : {
-    [ n : nat_t ]
+    [ n : Nat ]
     head : A
-    tail : vec_t(A, n)
+    tail : Vec(A, n)
     ---------
-    vec_t(A, succ(n))
+    Vec(A, succ(n))
   }
 }
 
-vec_t = class {
+Vec = class {
   A : type
-  length : nat_t
+  length : Nat
 }
 
-vec_null_t = class extends vec_t {
+vec_null_t = class extends Vec {
   length = zero
 }
 
-vec_cons_t = class extends vec_t {
-  n : nat_t
+vec_cons_t = class extends Vec {
+  n : Nat
   length = succ(n)
   head : A
-  tail : vec_t(A, n)
+  tail : Vec(A, n)
 }
 
-class vec_t {
+class Vec {
   A : type
-  length : nat_t
+  length : Nat
 }
 
-class vec_null_t extends vec_t {
+class vec_null_t extends Vec {
   length = zero
 }
 
-class vec_cons_t extends vec_t {
-  n : nat_t
+class vec_cons_t extends Vec {
+  n : Nat
   length = succ(n)
   head : A
-  tail : vec_t(A, n)
+  tail : Vec(A, n)
 }
 
 vec_append : {
   [ A : type
-    m, n : nat_t ]
-  x : vec_t(A, m)
-  y : vec_t(A, n)
+    m, n : Nat ]
+  x : Vec(A, m)
+  y : Vec(A, n)
   ---------
-  vec_t(A, nat_add(m, n))
+  Vec(A, nat_add(m, n))
 } = {
   switch x {
     case vec_null => y
@@ -59,11 +59,11 @@ vec_append : {
 
 vec_map : {
   [ A, B : type
-    n : nat_t ]
+    n : Nat ]
   f : { A -> B }
-  x : vec_t(A, n)
+  x : Vec(A, n)
   ---------
-  vec_t(B, n)
+  Vec(B, n)
 } = {
   switch x {
     case vec_null => x
@@ -71,10 +71,10 @@ vec_map : {
   }
 }
 
-three_zeros : vec_t(nat_t, three) = {
+three_zeros : Vec(Nat, three) = {
   vec_cons(zero, vec_cons(zero, vec_cons(zero, vec_null)))
 }
 
-three_ones : vec_t(nat_t, three) = {
+three_ones : Vec(Nat, three) = {
   vec_cons(one, vec_cons(one, vec_cons(one, vec_null)))
 }

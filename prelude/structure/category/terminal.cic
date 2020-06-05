@@ -1,22 +1,22 @@
-develop category_t {
-  class terminal_t {
-    object : object_t
-    morphism : { x : object_t -> morphism_t(x, object) }
+develop Category {
+  class Terminal {
+    object : Object
+    morphism : { x : Object -> Morphism(x, object) }
     morphism_unique : {
-      suppose x : object_t
-      f : morphism_t(x, object)
-      g : morphism_t(x, object)
-      -> the_equation_t(morphism_t(x, object), f, g)
+      suppose x : Object
+      f : Morphism(x, object)
+      g : Morphism(x, object)
+      -> TheEquation(Morphism(x, object), f, g)
     }
   }
 
   terminal_iso : {
-    x, y : terminal_t
-    -> iso_t(x.object, y.object)
+    x, y : Terminal
+    -> Isomorphism(x.object, y.object)
   } = {
     f = x.morphism(y.object)
     g = y.morphism(x.object)
-    => iso_t(x.object, y.object) {
+    => Isomorphism(x.object, y.object) {
       morphism = f
       inverse = g
       inverse_left = x.morphism_unique(compose(f, g), id(x.object))
@@ -25,12 +25,12 @@ develop category_t {
   }
 
   terminal_iso_unique : {
-    suppose x, y : terminal_t
-    f : iso_t(x.object, y.object)
-    g : iso_t(x.object, y.object)
-    -> the_equation_t(iso_t(x.object, y.object), f, g)
+    suppose x, y : Terminal
+    f : Isomorphism(x.object, y.object)
+    g : Isomorphism(x.object, y.object)
+    -> TheEquation(Isomorphism(x.object, y.object), f, g)
   } = {
-    iso = iso_t(x.object, y.object) {
+    iso = Isomorphism(x.object, y.object) {
       morphism = y.morphism_unique(f, g)
       inverse = y.morphism_unique(f, g)
     }

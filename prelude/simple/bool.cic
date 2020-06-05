@@ -1,16 +1,16 @@
-bool_t : type = {
+Bool : type = {
   case true
   case false
 }
 
-bool_not : { x : bool_t -> bool_t } = {
+bool_not : { x : Bool -> Bool } = {
   switch x {
     case true => false
     case false => true
   }
 }
 
-bool_and : { x, y : bool_t -> bool_t } = {
+bool_and : { x, y : Bool -> Bool } = {
   switch x {
     case true => switch y {
       case true => true
@@ -20,7 +20,7 @@ bool_and : { x, y : bool_t -> bool_t } = {
   }
 }
 
-bool_or : { x, y : bool_t -> bool_t } = {
+bool_or : { x, y : Bool -> Bool } = {
   switch x {
     case true => true
     case false => switch y {

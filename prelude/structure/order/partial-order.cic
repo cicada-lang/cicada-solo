@@ -1,20 +1,20 @@
-class partial_order_t extends pre_order_t {
+class PartialOrder extends PreOrder {
   antisymmetric : {
-    pre_t(a, b)
-    pre_t(b, a)
+    Pre(a, b)
+    Pre(b, a)
     ---------
-    equation_t(a, b)
+    Equation(a, b)
   }
 }
 
-develop partial_order_t {
-  cover_t : { a, b : elem_t -> type } = {
-    strict_pre_t(a, b) &
-      { x : elem_t
-        pre_t(a, x)
-        strict_pre_t(x, b)
+develop PartialOrder {
+  cover : { a, b : Elem -> type } = {
+    StrictPre(a, b) &
+      { x : Elem
+        Pre(a, x)
+        StrictPre(x, b)
         ---------
-        equation_t(elem_t, x, a) }
+        Equation(Elem, x, a) }
   }
 }
 

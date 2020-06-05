@@ -1,24 +1,24 @@
-class functor_t {
-  dom : category_t
-  cod : category_t
-  map : { a : dom.object_t -> cod.object_t }
+class Functor {
+  dom : Category
+  cod : Category
+  map : { a : dom.Object -> cod.Object }
   fmap : {
-    suppose a, b : dom.object_t
-    f : dom.morphism_t(a, b)
-    -> cod.morphism_t(map(a), map(b))
+    suppose a, b : dom.Object
+    f : dom.Morphism(a, b)
+    -> cod.Morphism(map(a), map(b))
   }
   fmap_respect_compose : {
-    f : dom.morphism_t(a, b)
-    g : dom.morphism_t(b, c)
-    -> the_equation_t(
-      cod.morphism_t(map(a), map(c)),
+    f : dom.Morphism(a, b)
+    g : dom.Morphism(b, c)
+    -> TheEquation(
+      cod.Morphism(map(a), map(c)),
       fmap(dom.compose(f, g)),
       cod.compose(fmap(f), fmap(g)))
   }
   fmap_respect_id : {
-    a : dom.object_t
-    -> the_equation_t(
-      cod.morphism_t(map(a), map(a)),
+    a : dom.Object
+    -> TheEquation(
+      cod.Morphism(map(a), map(a)),
       fmap(dom.id(a)),
       cod.id(map(a)))
   }

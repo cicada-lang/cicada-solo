@@ -1,8 +1,8 @@
-class total_order_t extends partial_order_t {
+class TotalOrder extends PartialOrder {
   connective : {
-    a, b : elem_t
+    a, b : Elem
     ---------
-    either_t(pre_t(a, b), pre_t(b, a))
+    either_t(Pre(a, b), Pre(b, a))
   }
 }
 
