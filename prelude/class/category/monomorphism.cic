@@ -8,8 +8,8 @@ class Monomorphism {
     # c : cat.Object
     f : cat.Morphism(c, a)
     g : cat.Morphism(c, a)
-    Equation(cat.compose(f, morphism), cat.compose(g, morphism))
-    -> Equation(f, g)
+    Equal(cat.compose(f, morphism), cat.compose(g, morphism))
+    -> Equal(f, g)
   }
 }
 

@@ -1,7 +1,7 @@
 class Group extends Monoid {
   inv(x : Elem) : Elem
-  left_inv(x : Elem) : TheEquation(Elem, mul(inv(x), x), id)
-  right_inv(x : Elem) : TheEquation(Elem, mul(x, inv(x)), id)
+  left_inv(x : Elem) : TheEqual(Elem, mul(inv(x), x), id)
+  right_inv(x : Elem) : TheEqual(Elem, mul(x, inv(x)), id)
 }
 
 develop Group {
@@ -12,7 +12,7 @@ develop Group {
 
 class GroupHom(dom : Group, cod : Group) {
   hom(dom.Elem) : cod.Elem
-  hom_respect_mul(x : dom.Elem, y : dom.Elem) : TheEquation(
+  hom_respect_mul(x : dom.Elem, y : dom.Elem) : TheEqual(
     cod.Elem,
     hom(dom.mul(x, y)),
     cod.mul(hom(x), hom(y)))

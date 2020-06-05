@@ -10,14 +10,14 @@ class Functor {
   fmap_respect_compose : {
     f : dom.Morphism(a, b)
     g : dom.Morphism(b, c)
-    -> TheEquation(
+    -> TheEqual(
       cod.Morphism(map(a), map(c)),
       fmap(dom.compose(f, g)),
       cod.compose(fmap(f), fmap(g)))
   }
   fmap_respect_id : {
     a : dom.Object
-    -> TheEquation(
+    -> TheEqual(
       cod.Morphism(map(a), map(a)),
       fmap(dom.id(a)),
       cod.id(map(a)))

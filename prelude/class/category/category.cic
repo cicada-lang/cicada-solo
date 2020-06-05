@@ -11,18 +11,18 @@ class Category {
   id_left : {
     # a, b : Object
     f : Morphism(a, b)
-    -> Equation(compose(id(a), f), f)
+    -> Equal(compose(id(a), f), f)
   }
   id_right : {
     # a, b : Object
     f : Morphism(a, b)
-    -> Equation(compose(f, id(b)), f)
+    -> Equal(compose(f, id(b)), f)
   }
   compose_associative : {
     # a, b, c, d : Object
     f : Morphism(a, b)
     g : Morphism(b, c)
     h : Morphism(c, d)
-    -> Equation(compose(f, compose(g, h)), compose(compose(f, g), h))
+    -> Equal(compose(f, compose(g, h)), compose(compose(f, g), h))
   }
 }

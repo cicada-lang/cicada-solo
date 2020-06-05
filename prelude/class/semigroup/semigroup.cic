@@ -4,7 +4,7 @@ class Semigroup {
   mul_associative : {
     x, y, z : Elem
     ---------
-    Equation(mul(x, mul(y, z)), mul(mul(x, y), z))
+    Equal(mul(x, mul(y, z)), mul(mul(x, y), z))
   }
 }
 

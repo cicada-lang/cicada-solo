@@ -8,6 +8,6 @@ class Isomorphism {
     # a, b : cat.Object
     -> cat.Morphism(b, a)
   }
-  inverse_left : Equation(cat.compose(morphism, inverse), cat.id(a))
-  inverse_right : Equation(cat.compose(inverse, morphism), cat.id(b))
+  inverse_left : Equal(cat.compose(morphism, inverse), cat.id(a))
+  inverse_right : Equal(cat.compose(inverse, morphism), cat.id(b))
 }

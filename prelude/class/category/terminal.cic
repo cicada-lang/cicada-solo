@@ -6,7 +6,7 @@ develop Category {
       # x : Object
       f : Morphism(x, object)
       g : Morphism(x, object)
-      -> TheEquation(Morphism(x, object), f, g)
+      -> TheEqual(Morphism(x, object), f, g)
     }
   }
 
@@ -28,7 +28,7 @@ develop Category {
     # x, y : Terminal
     f : Isomorphism(x.object, y.object)
     g : Isomorphism(x.object, y.object)
-    -> TheEquation(Isomorphism(x.object, y.object), f, g)
+    -> TheEqual(Isomorphism(x.object, y.object), f, g)
   } = {
     iso = Isomorphism(x.object, y.object) {
       morphism = y.morphism_unique(f, g)

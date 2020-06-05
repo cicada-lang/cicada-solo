@@ -1,15 +1,15 @@
 class Monoid extends Semigroup {
   id : Elem
-  id_left : { x : Elem -> TheEquation(Elem, mul(id, x), x) }
-  id_right : { x : Elem -> TheEquation(Elem, mul(x, id), x) }
+  id_left : { x : Elem -> TheEqual(Elem, mul(id, x), x) }
+  id_right : { x : Elem -> TheEqual(Elem, mul(x, id), x) }
 }
 
 class Monoid {
   Elem : Type
   id : Elem
   mul : { List(Elem) -> Elem }
-  mul_id_left : { x : List(Elem) -> Equation(mul(append([id], x)), x) }
-  mul_id_right : { x : List(Elem) -> Equation(mul(append(x, [id])), x) }
+  mul_id_left : { x : List(Elem) -> Equal(mul(append([id], x)), x) }
+  mul_id_right : { x : List(Elem) -> Equal(mul(append(x, [id])), x) }
 }
 
 develop Monoid {

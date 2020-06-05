@@ -13,7 +13,7 @@ class NaturalTransformation {
     check tar.fmap(f)  : cod.Morphism(tar.map(a), tar.map(b))
     check src.fmap(f)  : cod.Morphism(src.map(a), src.map(b))
     check component(b) : cod.Morphism(src.map(b), tar.map(b))
-    -> TheEquation(
+    -> TheEqual(
       cod.Morphism(src.map(a), tar.map(b)),
       cod.compose(component(a), tar.fmap(f)),
       cod.compose(src.fmap(f), component(b)))

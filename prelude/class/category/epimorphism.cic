@@ -8,7 +8,7 @@ class Epimorphism {
     # c : cat.Object
     f : cat.Morphism(b, c)
     g : cat.Morphism(b, c)
-    Equation(cat.compose(morphism, f), cat.compose(morphism, g))
-    -> Equation(f, g)
+    Equal(cat.compose(morphism, f), cat.compose(morphism, g))
+    -> Equal(f, g)
   }
 }

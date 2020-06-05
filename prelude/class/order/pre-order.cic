@@ -7,7 +7,7 @@ class PreOrder {
 
 develop PreOrder {
   StrictPre : { a, b : Elem -> Type } = {
-    Pre(a, b) & NonEquation(Elem, a, b)
+    Pre(a, b) & NonEqual(Elem, a, b)
   }
 }
 

@@ -3,7 +3,7 @@ class PartialOrder extends PreOrder {
     Pre(a, b)
     Pre(b, a)
     ---------
-    Equation(a, b)
+    Equal(a, b)
   }
 }
 
@@ -14,7 +14,7 @@ develop PartialOrder {
         Pre(a, x)
         StrictPre(x, b)
         ---------
-        Equation(Elem, x, a) }
+        Equal(Elem, x, a) }
   }
 }
 
