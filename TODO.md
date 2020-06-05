@@ -1,3 +1,5 @@
+- use the pop naming convention in examples
+- class as both constructor and namespace
 # note
 - we need nominal typing
   - because of zero and null and so on
