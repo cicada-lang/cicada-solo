@@ -1,4 +1,4 @@
 * 项目规划与项目管理。
-完成：<2020-06-05 Fri>
-在 project 的路径中添加一个 kanban 路径，
-并指定一个文件，给项目管理过程中的每一个阶段（each stage in the process）。
+- 完成：<2020-06-05 Fri>
+- 在 project 的路径中添加一个 kanban 路径，
+  并指定一个文件，给项目管理过程中的每一个阶段（each stage in the process）。

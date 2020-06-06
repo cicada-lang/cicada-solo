@@ -1,7 +1,7 @@
 * 实现 pie，并用《The Litte Typer》来做测试。
 - 将 scheme 语法翻译为我所设计的语法。
-代码举例：
-#+begin_src scala
-concat(E: U, List(E), List(E)): List(E) =
-  List.rec(reverse(E, y), x, step_reverse(E))
-#+end_src
+- 代码举例：
+  #+begin_src scala
+  concat(E: U, List(E), List(E)): List(E) =
+    List.rec(reverse(E, y), x, step_reverse(E))
+  #+end_src

@@ -6,11 +6,11 @@
 * 我们可以同时实现带名类型与填充类型。
 - 填充类型只用于 Class，保持基础数据类型简单。
 * 用内置（built-in）的方式来实现基本等词（equality）。
-也许需要内置如下函数：
-#+begin_src scala
-transport(
-  equation: Equal(A, x, y),
-  motive(x: A): Type,
-  base: motive(x),
-): motive(y) = base
-#+end_src
+- 也许需要内置如下函数：
+  #+begin_src scala
+  transport(
+    equation: Equal(A, x, y),
+    motive(x: A): Type,
+    base: motive(x),
+  ): motive(y) = base
+  #+end_src
