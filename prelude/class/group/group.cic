@@ -2,9 +2,7 @@ class Group extends Monoid {
   inv(x: Elem): Elem
   left_inv(x: Elem): TheEqual(Elem, mul(inv(x), x), id)
   right_inv(x: Elem): TheEqual(Elem, mul(x, inv(x)), id)
-}
 
-develop Group {
   div(x: Elem, y: Elem): Elem = mul(x, inv(y))
 }
 

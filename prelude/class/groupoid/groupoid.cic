@@ -1,5 +1,8 @@
-// NOTE partly fulfilled object construction is a Type: Isomorphism(this, f, inv(f))
+import prelude.class.Category
+
+// NOTE the following use of `Category.Isomorphism(this, f, inv(f))`
+//   is an example of partly fulfilled object construction
 class Groupoid extends Category {
-  inv: { # a, b: Object; f: Morphism(a, b) -> Morphism(b, a) }
-  inv_iso: { # a, b: Object; f: Morphism(a, b) -> Isomorphism(this, f, inv(f)) }
+  inv(# a, b: Object, f: Morphism(a, b)): Morphism(b, a)
+  inv_iso(# a, b: Object, f: Morphism(a, b)): Category.Isomorphism(this, f, inv(f))
 }

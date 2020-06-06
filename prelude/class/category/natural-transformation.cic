@@ -3,19 +3,16 @@ class NaturalTransformation {
   cod: Category
   src: Functor(dom, cod)
   tar: Functor(dom, cod)
-  component: {
-    a: dom.Object
-    -> cod.Morphism(src.map(a), tar.map(a))
-  }
-  naturality: {
-    f: dom.Morphism(a, b)
-    check component(a): cod.Morphism(src.map(a), tar.map(a))
-    check tar.fmap(f) : cod.Morphism(tar.map(a), tar.map(b))
-    check src.fmap(f) : cod.Morphism(src.map(a), src.map(b))
-    check component(b): cod.Morphism(src.map(b), tar.map(b))
-    -> TheEqual(
-      cod.Morphism(src.map(a), tar.map(b)),
-      cod.compose(component(a), tar.fmap(f)),
-      cod.compose(src.fmap(f), component(b)))
-  }
+  component(a: dom.Object): cod.Morphism(src.map(a), tar.map(a))
+
+  naturality(
+    f: dom.Morphism(a, b),
+    check component(a): cod.Morphism(src.map(a), tar.map(a)),
+    check tar.fmap(f): cod.Morphism(tar.map(a), tar.map(b)),
+    check src.fmap(f): cod.Morphism(src.map(a), src.map(b)),
+    check component(b): cod.Morphism(src.map(b), tar.map(b)),
+  ): TheEqual(
+    cod.Morphism(src.map(a), tar.map(b)),
+    cod.compose(component(a), tar.fmap(f)),
+    cod.compose(src.fmap(f), component(b)))
 }

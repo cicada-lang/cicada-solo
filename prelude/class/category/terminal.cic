@@ -1,39 +1,36 @@
-develop Category {
-  class Terminal {
-    object: Object
-    morphism: { x: Object -> Morphism(x, object) }
-    morphism_unique: {
-      # x: Object
-      f: Morphism(x, object)
-      g: Morphism(x, object)
-      -> TheEqual(Morphism(x, object), f, g)
-    }
-  }
+class Terminal {
+  cat: Category
+  object: cat.Object
+  morphism(x: cat.Object): cat.Morphism(x, object)
 
-  terminal_iso: {
-    x, y: Terminal
-    -> Isomorphism(x.object, y.object)
-  } = {
-    f = x.morphism(y.object)
-    g = y.morphism(x.object)
-    => Isomorphism(x.object, y.object) {
-      morphism = f
-      inverse = g
-      inverse_left = x.morphism_unique(compose(f, g), id(x.object))
-      inverse_right = y.morphism_unique(compose(g, f), id(y.object))
-    }
-  }
+  morphism_unique(
+    # x: cat.Object,
+    f g: cat.Morphism(x, object),
+  ): TheEqual(cat.Morphism(x, object), f, g)
+}
 
-  terminal_iso_unique: {
-    # x, y: Terminal
-    f: Isomorphism(x.object, y.object)
-    g: Isomorphism(x.object, y.object)
-    -> TheEqual(Isomorphism(x.object, y.object), f, g)
-  } = {
-    iso = Isomorphism(x.object, y.object) {
-      morphism = y.morphism_unique(f, g)
-      inverse = y.morphism_unique(f, g)
-    }
-    => same(iso)
-  }
+// TODO
+
+terminal_iso(
+  # cat: Category,
+  x y: Terminal(cat),
+): Category.Isomorphism(cat, x.object, y.object) = {
+  f = x.morphism(y.object)
+  g = y.morphism(x.object)
+  new Category.Isomorphism(
+    morphism = f,
+    inverse = g,
+    inverse_left = x.morphism_unique(cat.compose(f, g), cat.id(x.object)),
+    inverse_right = y.morphism_unique(cat.compose(g, f), cat.id(y.object)))
+}
+
+terminal_iso_unique(
+  # cat: Category,
+  # x y: Terminal(cat),
+  f g: Category.Isomorphism(cat, x.object, y.object),
+): TheEqual(Isomorphism(cat, x.object, y.object), f, g) {
+  iso = new Isomorphism(
+    morphism = y.morphism_unique(f, g),
+    inverse = y.morphism_unique(f, g))
+  same(iso)
 }
