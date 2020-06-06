@@ -2,6 +2,7 @@
 - 即 C 语言家族的语法。
 * 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
 * 形式化 Lattice theory。
+* 形式化 Closure system。
 - 帮助学习 FCA。
 * 形式化 Topology theory。
 * 形式化 Category theory。
