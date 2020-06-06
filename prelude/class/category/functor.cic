@@ -3,10 +3,8 @@ class Functor {
   cod: Category
   map(a: dom.Object): cod.Object
 
-  fmap(
-    # a b: dom.Object,
-    f: dom.Morphism(a, b),
-  ): cod.Morphism(map(a), map(b))
+  @given(a: dom.Object, b: dom.Object)
+  fmap(f: dom.Morphism(a, b)): cod.Morphism(map(a), map(b))
 
   fmap_respect_compose(
     f: dom.Morphism(a, b),

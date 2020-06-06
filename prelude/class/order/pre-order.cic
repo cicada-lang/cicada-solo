@@ -1,14 +1,12 @@
 class PreOrder {
   Elem: Type
-  Pre: { Elem; Elem -> Type }
-  reflexive: { a: Elem -> Pre(a, a) }
-  transitive: { Pre(a, b); Pre(b, c) -> Pre(a, c) }
-}
+  Pre(Elem, Elem): Type
 
-develop PreOrder {
-  StrictPre: { a, b: Elem -> Type } = {
-    Pre(a, b) & NonEqual(Elem, a, b)
-  }
+  reflexive(a: Elem): Pre(a, a)
+
+  transitive(# a b c: Elem, Pre(a, b), Pre(b, c)): Pre(a, c)
+
+  StrictPre(a, b: Elem): Type = Pre(a, b) & NonEqual(Elem, a, b)
 }
 
 // NOTE

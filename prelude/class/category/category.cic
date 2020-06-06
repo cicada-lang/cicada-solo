@@ -1,15 +1,19 @@
 class Category {
   Object: Type
-  Morphism(dom cod: Object): Type
+  Morphism(dom: Object, cod: Object): Type
   id(a: Object): Morphism(a, a)
-  compose(# a b c: Object, f: Morphism(a, b), g: Morphism(b, c)): Morphism(a, c)
 
-  id_left(# a b: Object, f: Morphism(a, b)): Equal(compose(id(a), f), f)
+  @given(a: Object, b: Object, c: Object)
+  compose(f: Morphism(a, b), g: Morphism(b, c)): Morphism(a, c)
 
-  id_right(# a b: Object, f: Morphism(a, b)): Equal(compose(f, id(b)), f)
+  @given(a: Object, b: Object)
+  id_left(f: Morphism(a, b)): Equal(compose(id(a), f), f)
 
+  @given(a: Object, b: Object)
+  id_right(f: Morphism(a, b)): Equal(compose(f, id(b)), f)
+
+  @given(a: Object, b: Object, c: Object, d: Object)
   compose_associative(
-    # a b c d: Object,
     f: Morphism(a, b),
     g: Morphism(b, c),
     h: Morphism(c, d),

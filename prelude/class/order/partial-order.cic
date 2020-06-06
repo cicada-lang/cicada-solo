@@ -1,22 +1,10 @@
 class PartialOrder extends PreOrder {
-  antisymmetric: {
-    Pre(a, b)
-    Pre(b, a)
-    ---------
-    Equal(a, b)
-  }
+  antisymmetric(# a b: Elem, Pre(a, b), Pre(b, a)): Equal(a, b)
+
+  cover(a b: Elem): Type =
+    StrictPre(a, b) & (x: Elem, Pre(a, x), StrictPre(x, b)) -> Equal(Elem, x, a)
 }
 
-develop PartialOrder {
-  cover: { a, b: Elem -> Type } = {
-    StrictPre(a, b) &
-      { x: Elem
-        Pre(a, x)
-        StrictPre(x, b)
-        ---------
-        Equal(Elem, x, a) }
-  }
-}
 
 // NOTE
 // no cycle

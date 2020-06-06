@@ -1,7 +1,11 @@
 class Isomorphism {
   cat: Category
-  morphism(# a b: cat.Object): cat.Morphism(a, b)
-  inverse(# a b: cat.Object): cat.Morphism(b, a)
+
+  @given(a: cat.Object, b: cat.Object)
+  morphism(): cat.Morphism(a, b)
+
+  @given(a: cat.Object, b: cat.Object)
+  inverse(): cat.Morphism(b, a)
 
   inverse_left: Equal(cat.compose(morphism, inverse), cat.id(a))
 

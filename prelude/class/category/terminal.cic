@@ -3,17 +3,19 @@ class Terminal {
   object: cat.Object
   morphism(x: cat.Object): cat.Morphism(x, object)
 
+  @given(x: cat.Object)
   morphism_unique(
-    # x: cat.Object,
-    f g: cat.Morphism(x, object),
+    f: cat.Morphism(x, object),
+    g: cat.Morphism(x, object),
   ): TheEqual(cat.Morphism(x, object), f, g)
 }
 
 // TODO
 
+@given(cat: cat.Object)
 terminal_iso(
-  # cat: Category,
-  x y: Terminal(cat),
+  x: Terminal(cat),
+  y: Terminal(cat),
 ): Category.Isomorphism(cat, x.object, y.object) = {
   f = x.morphism(y.object)
   g = y.morphism(x.object)
@@ -24,13 +26,12 @@ terminal_iso(
     inverse_right = y.morphism_unique(cat.compose(g, f), cat.id(y.object)))
 }
 
+@given(cat: Category)
+@given(x: Terminal(cat), y: Terminal(cat))
 terminal_iso_unique(
-  # cat: Category,
-  # x y: Terminal(cat),
-  f g: Category.Isomorphism(cat, x.object, y.object),
-): TheEqual(Isomorphism(cat, x.object, y.object), f, g) {
-  iso = new Isomorphism(
+  f: Category.Isomorphism(cat, x.object, y.object),
+  g: Category.Isomorphism(cat, x.object, y.object),
+): TheEqual(Isomorphism(cat, x.object, y.object), f, g) =
+  same(new Category.Isomorphism(
     morphism = y.morphism_unique(f, g),
-    inverse = y.morphism_unique(f, g))
-  same(iso)
-}
+    inverse = y.morphism_unique(f, g)))

@@ -1,14 +1,12 @@
 class Semigroup {
   Elem: Type
-  mul: { x, y: Elem -> Elem }
-  mul_associative: {
-    x, y, z: Elem
-    ---------
-    Equal(mul(x, mul(y, z)), mul(mul(x, y), z))
-  }
+  mul(x y: Elem): Elem
+
+  mul_associative(x y z: Elem): Equal(mul(x, mul(y, z)), mul(mul(x, y), z))
 }
 
-class Semigroup {
-  Elem: Type
-  mul: { List(Elem) -> Elem }
-}
+// NOTE How about the following definition with built-in associative?
+// class Semigroup {
+//   Elem: Type
+//   mul(List(Elem)): Elem
+// }

@@ -1,19 +1,10 @@
 class Monoid extends Semigroup {
   id: Elem
-  id_left: { x: Elem -> TheEqual(Elem, mul(id, x), x) }
-  id_right: { x: Elem -> TheEqual(Elem, mul(x, id), x) }
-}
 
-class Monoid {
-  Elem: Type
-  id: Elem
-  mul: { List(Elem) -> Elem }
-  mul_id_left: { x: List(Elem) -> Equal(mul(append([id], x)), x) }
-  mul_id_right: { x: List(Elem) -> Equal(mul(append(x, [id])), x) }
-}
+  id_left(x: Elem): TheEqual(Elem, mul(id, x), x)
+  id_right(x: Elem): TheEqual(Elem, mul(x, id), x)
 
-develop Monoid {
-  as_category: Category = Category(
+  as_small_category = new Category(
     Unit,
     (_: Unit, _: Unit): Unit => Elem,
     (_: Unit): Elem => id,
@@ -22,3 +13,12 @@ develop Monoid {
     id_left,
     associative)
 }
+
+// NOTE How about the following definition with built-in associative?
+// class Monoid {
+//   Elem: Type
+//   id: Elem
+//   mul(List(Elem)): Elem
+//   mul_id_left(x: List(Elem)): Equal(mul(List.append([id], x)), x)
+//   mul_id_right(x: List(Elem)): Equal(mul(List.append(x, [id])), x)
+// }

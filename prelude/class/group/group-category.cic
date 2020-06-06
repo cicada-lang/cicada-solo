@@ -1,33 +1,40 @@
-import prelude.class.category
+import prelude.class.Category
 
-// TODO
+// NOTE Example of big category.
 
-class GroupHom(dom: Group, cod: Group) {
+class GroupHom {
+  dom cod: Group
   hom(dom.Elem): cod.Elem
+
   hom_respect_mul(x: dom.Elem, y: dom.Elem): TheEqual(
     cod.Elem,
     hom(dom.mul(x, y)),
     cod.mul(hom(x), hom(y)))
 }
 
-id_group_hom(dom: Group): GroupHom(dom, dom) = new GroupHom(dom, dom) {
-  dom, dom,
-  (x: dom.Elem): dom.Elem => x,
-  (x: dom.Elem, y: dom.Elem) => same(dom.mul(x, y)),
-}
+id_group_hom(dom: Group): GroupHom(dom, dom) =
+  new GroupHom(
+    dom = dom,
+    cod = dom,
+    hom(x: dom.Elem): dom.Elem = x,
+    hom_respect_mul(x: dom.Elem, y: dom.Elem) = same(dom.mul(x, y)),
+  )
 
-group_category: Category = new Category(
+group_category = new Category(
   Object = Group,
   Morphism = GroupHom,
   id = id_group_hom,
 
-  compose = (f: GroupHom(a, b), g: GroupHom(b, c)) => new GroupHom(a, c) {
-    (x: a.Elem) => { g.hom(f.hom(x)) },
-    (x: a.Elem, y: a.Elem) => same(g.hom(b.mul(f.hom(x), f.hom(y))))
-  },
+  compose(f: GroupHom(a, b), g: GroupHom(b, c)) =
+    new GroupHom(
+      dom = a,
+      cod = c,
+      hom(x: a.Elem) = g.hom(f.hom(x)),
+      hom_respect_mul(x: a.Elem, y: a.Elem) = same(g.hom(b.mul(f.hom(x), f.hom(y))))
+    ),
 
-  id_left = (f: GroupHom(a, b)) => same(f),
-  id_right = (f: GroupHom(a, b)) => same(f),
+  id_left(f: GroupHom(a, b)) = same(f),
+  id_right(f: GroupHom(a, b)) = same(f),
 
-  compose_associative = (f: GroupHom(a, b), g: GroupHom(b, c), h: GroupHom(c, d)) => refl
+  compose_associative(f: GroupHom(a, b), g: GroupHom(b, c), h: GroupHom(c, d)) = refl,
 )

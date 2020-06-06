@@ -1,24 +1,13 @@
-import * from "../simple/nat.cic"
+import prelude.data.Nat
 
-data Vec(A : Type, length : Nat) {
-  VecNull : Vec(A, zero)
-  VecCons : {
-    # n : Nat
-    head : A
-    tail : Vec(A, n)
-    ---------
-    Vec(A, succ(n))
-  }
-}
-
-data Vec(A : Type, length : Nat) {
-  VecNull : Vec(A, zero)
-  VecCons : (# n : Nat, head : A, tail : Vec(A, n)) -> Vec(A, succ(n))
+data Vec(A: Type, length: Nat) {
+  VecNull: Vec(A, zero)
+  VecCons(# n: Nat, head: A, tail: Vec(A, n)): Vec(A, Nat.Succ(n))
 }
 
 Vec = class {
-  A : Type
-  length : Nat
+  A: Type
+  length: Nat
 }
 
 VecNull = class extends Vec {
@@ -26,15 +15,15 @@ VecNull = class extends Vec {
 }
 
 VecCons = class extends Vec {
-  n : Nat
+  n: Nat
   length = succ(n)
-  head : A
-  tail : Vec(A, n)
+  head: A
+  tail: Vec(A, n)
 }
 
 class Vec {
-  A : Type
-  length : Nat
+  A: Type
+  length: Nat
 }
 
 class VecNull extends Vec {
@@ -42,17 +31,17 @@ class VecNull extends Vec {
 }
 
 class VecCons extends Vec {
-  n : Nat
+  n: Nat
   length = succ(n)
-  head : A
-  tail : Vec(A, n)
+  head: A
+  tail: Vec(A, n)
 }
 
-vec_append : {
-  # A : Type
-  # m, n : Nat
-  x : Vec(A, m)
-  y : Vec(A, n)
+vec_append: {
+  # A: Type
+  # m, n: Nat
+  x: Vec(A, m)
+  y: Vec(A, n)
   ---------
   Vec(A, nat_add(m, n))
 } = {
@@ -62,11 +51,11 @@ vec_append : {
   }
 }
 
-vec_map : {
-  # A, B : Type
-  # n : Nat
-  f : { A -> B }
-  x : Vec(A, n)
+vec_map: {
+  # A, B: Type
+  # n: Nat
+  f: { A -> B }
+  x: Vec(A, n)
   ---------
   Vec(B, n)
 } = {
@@ -76,10 +65,10 @@ vec_map : {
   }
 }
 
-three_zeros : Vec(Nat, three) = {
+three_zeros: Vec(Nat, three) = {
   vec_cons(zero, vec_cons(zero, vec_cons(zero, vec_null)))
 }
 
-three_ones : Vec(Nat, three) = {
+three_ones: Vec(Nat, three) = {
   vec_cons(one, vec_cons(one, vec_cons(one, vec_null)))
 }

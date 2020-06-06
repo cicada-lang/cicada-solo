@@ -1,10 +1,15 @@
 class Epimorphism {
   cat: Category
-  morphism(# a b: cat.Object): cat.Morphism(a, b)
-  
+
+  @given(a: cat.Object, b: cat.Object)
+  morphism(): cat.Morphism(a, b)
+
+  @given(b: cat.Object, c: cat.Object)
   cancel_left(
-    # c: cat.Object,
-    f g: cat.Morphism(b, c),
-    Equal(cat.compose(morphism, f), cat.compose(morphism, g))
+    f: cat.Morphism(b, c),
+    g: cat.Morphism(b, c),
+    Equal(
+      cat.compose(morphism, f),
+      cat.compose(morphism, g)),
   ): Equal(f, g)
 }

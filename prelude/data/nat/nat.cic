@@ -1,43 +1,43 @@
 import * from "./bool.cic"
 
 data Nat {
-  Zero : Nat
-  Succ : { prev : Nat -> Nat }
+  Zero: Nat
+  Succ: { prev: Nat -> Nat }
 }
 
-add : { x, y : Nat -> Nat }
+add: { x, y: Nat -> Nat }
 add(Zero, y) = y
 add(Succ(prev), y) = Succ(add(prev, y))
 
-add : { x, y : Nat -> Nat } = x match {
+add: { x, y: Nat -> Nat } = x match {
   Zero => y
   Succ(prev) => Succ(add(prev, y))
 }
 
-mul : { x, y : Nat -> Nat } = {
+mul: { x, y: Nat -> Nat } = {
   x match {
     zero => zero
     succ => add(y, mul(x.prev, y))
   }
 }
 
-factorial : { x : Nat -> Nat } = {
+factorial: { x: Nat -> Nat } = {
   x match {
     zero => succ(zero)
     succ => mul(x, factorial(x.prev))
   }
 }
 
-one : Nat = succ(zero)
-two : Nat = succ(one)
-three : Nat = succ(two)
-four : Nat = succ(three)
-five : Nat = succ(four)
-six : Nat = succ(five)
-seven : Nat = succ(six)
-eight : Nat = succ(seven)
-nine : Nat = succ(eight)
-ten : Nat = succ(nine)
+one: Nat = succ(zero)
+two: Nat = succ(one)
+three: Nat = succ(two)
+four: Nat = succ(three)
+five: Nat = succ(four)
+six: Nat = succ(five)
+seven: Nat = succ(six)
+eight: Nat = succ(seven)
+nine: Nat = succ(eight)
+ten: Nat = succ(nine)
 
 @assert_eq add(one, one) two
 @assert_eq add(two, two) four
@@ -51,18 +51,18 @@ ten : Nat = succ(nine)
 @assert_eq factorial(two) two
 @assert_eq factorial(three) six
 
-even_p : { x : Nat -> Bool } = {
+even_p: { x: Nat -> Bool } = {
   x match {
-    zero => true
+    zero => True
     succ => x.prev match {
-      zero => false
+      zero => False
       succ => even_p(x.prev.prev)
     }
   }
 }
 
-@assert_eq even_p(one) false
-@assert_eq even_p(two) true
-@assert_eq even_p(three) false
-@assert_eq even_p(four) true
-@assert_eq even_p(five) false
+@assert_eq even_p(one) False
+@assert_eq even_p(two) True
+@assert_eq even_p(three) False
+@assert_eq even_p(four) True
+@assert_eq even_p(five) False

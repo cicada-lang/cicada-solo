@@ -1,23 +1,23 @@
 import * from "../simple/bool.cic"
 import * from "../simple/nat.cic"
 
-data List(A : Type) {
-  Null : List(A)
-  Cons : { head : A; tail : List(A) -> List(A) }
+data List(A: Type) {
+  Null: List(A)
+  Cons: { head: A; tail: List(A) -> List(A) }
 }
 
-length : { x : List -> Nat }
+length: { x: List -> Nat }
 length(Null) = Zero
 length(Cons(_head, tail)) = Succ(length(tail))
 
-length : { x : List -> Nat } = x match {
+length: { x: List -> Nat } = x match {
   Null => Zero
   Cons(_head, tail) => Succ(length(tail))
 }
 
-append : {
-  # A : Type
-  x, y : List(A)
+append: {
+  # A: Type
+  x, y: List(A)
   ---------
   List(A)
 } = x match {
@@ -26,10 +26,10 @@ append : {
 }
 
 
-map : {
-  # A, B : Type
-  f : { A -> B }
-  x : List(A)
+map: {
+  # A, B: Type
+  f: { A -> B }
+  x: List(A)
   ---------
   List(B)
 } = x match {
@@ -37,9 +37,9 @@ map : {
   Cons(head, tail) => Cons(f(head), map(f, tail))
 }
 
-three_Zeros : List(Nat) =
+three_Zeros: List(Nat) =
   Cons(Zero, Cons(Zero, Cons(Zero, Null)))
 
 
-three_ones : List(Nat) =
+three_ones: List(Nat) =
   Cons(one, Cons(one, Cons(one, Null)))

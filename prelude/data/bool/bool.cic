@@ -1,44 +1,20 @@
-Bool : Type = {
-  true
-  false
+data Bool {
+  True: Bool
+  False: Bool
 }
 
-not : { x : Bool -> Bool } = {
-  x match {
-    true => false
-    false => true
-  }
-}
+not(x: Bool): Bool
+not(True) = False
+not(False) = True
 
-and : { x, y : Bool -> Bool } = {
-  x match {
-    true => y match {
-      true => true
-      false => false
-    }
-    false => false
-  }
-}
+and(x: Bool, y: Bool): Bool
+and(True, True) = True
+and(True, False) = False
+and(False, True) = False
+and(False, False) = False
 
-or : { x, y : Bool -> Bool } = {
-  x match {
-    true => true
-    false => y match {
-      true => true
-      false => false
-    }
-  }
-}
-
-@assert_eq not(true) false
-@assert_eq not(false) true
-
-@assert_eq and(true, true) true
-@assert_eq and(true, false) false
-@assert_eq and(false, true) false
-@assert_eq and(false, false) false
-
-@assert_eq or(true, true) true
-@assert_eq or(true, false) true
-@assert_eq or(false, true) true
-@assert_eq or(false, false) false
+or(x: Bool, y: Bool): Bool
+or(True, True) = True
+or(True, False) = True
+or(False, True) = True
+or(False, False) = False
