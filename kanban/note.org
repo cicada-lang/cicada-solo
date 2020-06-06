@@ -1,16 +1,14 @@
-* we need nominal typing
+* we must have nominal typing
 - because of zero and null and so on
 - we need nominal typing to express our intension
 * we can have both fulfilling type system and nominal typing
 - use fulfilling type only for class, keep data simple
-* mutual recursive definition at least at top level
-* [equality] we can implementation equality by built-in equality
+* we can implementation equality by built-in equality
 Maybe we need to built-in (make it an axiom) the following function.
 #+begin_src scala
-transport : {
-  equation : Equal(A, x, y)
-  motive : { x : A -> Type }
-  base : motive(x)
-  -> motive(y)
-} = base
+transport(
+  equation: Equal(A, x, y),
+  motive(x: A): Type,
+  base: motive(x),
+): motive(y) = base
 #+end_src

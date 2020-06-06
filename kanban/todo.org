@@ -1,11 +1,13 @@
-* make the syntax more closer to programming language
-- start: <2020-06-05 Fri>
-* [note] inference rules -- specially fulfilling type system
+* 使用更接近目前正在流行的程序语言的语法。
+- 即 C 语言家族的语法。
+* 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
+* 有清晰的推演规则（inference rules），要能向众人把语言的类型系统的设计讲清楚。
+- 有其是关于填充类型（fulfilling type）的推演规则。
 * [note] class and data as both constructor and namespace
 * [impl] pie
-  #+begin_src scala
-  concat(E: U, List(E), List(E)): List(E) =
-    List.rec(reverse(E, y), x, step_reverse(E))
-  #+end_src
+#+begin_src scala
+concat(E: U, List(E), List(E)): List(E) =
+  List.rec(reverse(E, y), x, step_reverse(E))
+#+end_src
 * [learn] how to implement inductive type definition
 * Lattice
