@@ -1,4 +1,8 @@
-package prelude.structure.Lattice
+package prelude.structure.lattice.Lattice
 
-// TODO
-class Lattic extends JoinSemilattice, MeetSemilattice {}
+import prelude.structure.order.PartialOrder
+
+class Lattic extends PartialOrder {
+  // Join
+  // Meet
+}

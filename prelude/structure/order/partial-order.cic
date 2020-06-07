@@ -1,13 +1,20 @@
+package prelude.structure.order.PartialOrder
+
+import prelude.structure.order.PreOrder
+
+// NOTE
+// - no cycle
+// - can implement:
+//   - topological sort
 class PartialOrder extends PreOrder {
   @given(a: Elem, b: Elem)
   antisymmetric(Under(a, b), Under(b, a)): Equal(a, b)
-
-  cover(a b: Elem): Type =
-    StrictUnder(a, b) & (x: Elem, Under(a, x), StrictUnder(x, b)) -> Equal(Elem, x, a)
 }
 
-
-// NOTE
-// no cycle
-// can implement
-// - topological sort
+class Beneath {
+  order: PartialOrder
+  x: order.Elem
+  y: order.Elem
+  strict_under: PreOrder.StrictUnder(order, x, y)
+  nothing_in_between(z: Elem, order.Under(x, z), PreOrder.StrictUnder(z, y)): Equal(Elem, z, x)
+}

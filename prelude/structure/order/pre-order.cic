@@ -1,3 +1,8 @@
+package prelude.structure.order.PreOrder
+
+// NOTE
+// - thin category
+// - hom_set(A, B).size <= 1
 class PreOrder {
   Elem: Type
   Under(Elem, Elem): Type
@@ -6,10 +11,12 @@ class PreOrder {
 
   @given(a: Elem, b: Elem, c: Elem)
   transitive(Under(a, b), Under(b, c)): Under(a, c)
-
-  StrictUnder(a: Elem, b: Elem): Type = Under(a, b) & NonEqual(a, b)
 }
 
-// NOTE
-// thin category
-// hom_set(A, B).size <= 1
+class StrictUnder {
+  order: PreOrder
+  x: order.Elem
+  y: order.Elem
+  strict: NonEqual(x, y)
+  under: order.Under(x, y)
+}
