@@ -7,7 +7,7 @@ class PreOrder {
   @given(a: Elem, b: Elem, c: Elem)
   transitive(Under(a, b), Under(b, c)): Under(a, c)
 
-  StrictUnder(a: Elem, b: Elem): Type = Under(a, b) & NonEqual(Elem, a, b)
+  StrictUnder(a: Elem, b: Elem): Type = Under(a, b) & NonEqual(a, b)
 }
 
 // NOTE

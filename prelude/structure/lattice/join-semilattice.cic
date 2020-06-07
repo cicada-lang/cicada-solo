@@ -1,3 +1,5 @@
+package prelude.structure.Lattice
+
 class JoinSemilattice extends PartialOrder {
   // TODO
 }

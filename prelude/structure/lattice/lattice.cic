@@ -1,1 +1,4 @@
+package prelude.structure.Lattice
+
+// TODO
 class Lattic extends JoinSemilattice, MeetSemilattice {}

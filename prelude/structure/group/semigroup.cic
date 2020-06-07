@@ -1,3 +1,5 @@
+package prelude.structure.group.Semigroup
+
 class Semigroup {
   Elem: Type
   mul(x: Elem, y: Elem): Elem

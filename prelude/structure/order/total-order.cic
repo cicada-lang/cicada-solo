@@ -1,3 +1,7 @@
+package prelude.structure.order.TotalOrder
+
+import prelude.structure.order.PartialOrder
+
 class TotalOrder extends PartialOrder {
   connective(a, b: Elem): Either(Under(a, b), Under(b, a))
 }

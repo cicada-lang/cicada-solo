@@ -1,4 +1,6 @@
-import prelude.data.Nat
+package prelude.data.list.List
+
+import prelude.data.nat.Nat
 
 data List(A: Type) {
   Null: List(A)

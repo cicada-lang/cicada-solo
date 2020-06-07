@@ -1,3 +1,5 @@
+package prelude.structure.category.Category
+
 class NaturalTransformation {
   dom: Category
   cod: Category

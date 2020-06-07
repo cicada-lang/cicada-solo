@@ -1,3 +1,8 @@
+package prelude.structure.group.Monoid
+
+import prelude.structure.group.Semigroup
+import prelude.data.trivial.Trivial
+
 class Monoid extends Semigroup {
   id: Elem
 

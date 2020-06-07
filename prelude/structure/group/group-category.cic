@@ -1,4 +1,6 @@
-import prelude.class.Category
+package prelude.structure.group.Group
+
+import prelude.structure.category.Category
 
 // NOTE Example of big category.
 
@@ -20,7 +22,7 @@ id_group_hom(dom: Group): GroupHom(dom, dom) =
     hom_respect_mul(x: dom.Elem, y: dom.Elem) = same(dom.mul(x, y)),
   )
 
-group_category = new Category(
+category = new Category(
   Object = Group,
   Morphism = GroupHom,
   id = id_group_hom,

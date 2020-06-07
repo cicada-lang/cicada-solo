@@ -1,4 +1,6 @@
-import prelude.class.Category
+package prelude.structure.category.Groupoid
+
+import prelude.structure.category.Category
 
 // NOTE the following use of `Category.Isomorphism(this, f, inv(f))`
 //   is an example of partly fulfilled object construction

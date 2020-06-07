@@ -1,3 +1,5 @@
+package prelude.structure.category.Category
+
 class Isomorphism {
   cat: Category
 

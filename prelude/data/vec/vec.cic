@@ -1,4 +1,6 @@
-import prelude.data.Nat
+package prelude.data.vec.Vec
+
+import prelude.data.nat.Nat
 
 data Vec(A: Type, length: Nat) {
   Null: Vec(A, zero)

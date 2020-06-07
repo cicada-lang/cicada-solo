@@ -1,4 +1,6 @@
-import prelude.data.Bool
+package prelude.data.nat.Nat
+
+import prelude.data.bool.Bool
 
 data Nat {
   Zero: Nat

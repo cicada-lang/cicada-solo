@@ -1,3 +1,5 @@
+package prelude.data.trivial.Trivial
+
 data Trivial {
   Sole: Trivial
 }

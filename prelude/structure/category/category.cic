@@ -1,3 +1,5 @@
+package prelude.structure.category.Category
+
 class Category {
   Object: Type
   Morphism(dom: Object, cod: Object): Type
