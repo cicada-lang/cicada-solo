@@ -21,11 +21,12 @@ terminal_iso(
 ): Category.Isomorphism(cat, x.object, y.object) = {
   f = x.morphism(y.object)
   g = y.morphism(x.object)
-  new Category.Isomorphism(
-    morphism = f,
-    inverse = g,
-    inverse_left = x.morphism_unique(cat.compose(f, g), cat.id(x.object)),
-    inverse_right = y.morphism_unique(cat.compose(g, f), cat.id(y.object)))
+  new Category.Isomorphism {
+    morphism = f
+    inverse = g
+    inverse_left = x.morphism_unique(cat.compose(f, g), cat.id(x.object))
+    inverse_right = y.morphism_unique(cat.compose(g, f), cat.id(y.object))
+  }
 }
 
 @given(cat: Category)
@@ -34,6 +35,7 @@ terminal_iso_unique(
   f: Category.Isomorphism(cat, x.object, y.object),
   g: Category.Isomorphism(cat, x.object, y.object),
 ): TheEqual(Isomorphism(cat, x.object, y.object), f, g) =
-  same(new Category.Isomorphism(
-    morphism = y.morphism_unique(f, g),
-    inverse = y.morphism_unique(f, g)))
+  Same(new Category.Isomorphism {
+    morphism = y.morphism_unique(f, g)
+    inverse = y.morphism_unique(f, g)
+  })

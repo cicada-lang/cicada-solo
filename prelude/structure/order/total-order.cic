@@ -8,5 +8,5 @@ import prelude.structure.order.PartialOrder
 //   - bubble sort
 //   - merge sort
 class TotalOrder extends PartialOrder {
-  connective(a, b: Elem): Either(Under(a, b), Under(b, a))
+  connective(x: Elem, y: Elem): Either(Under(x, y), Under(y, x))
 }

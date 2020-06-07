@@ -3,17 +3,17 @@ package prelude.structure.category.Category
 class Monomorphism {
   cat: Category
 
-  @given(a: cat.Object, b: cat.Object)
-  morphism(): cat.Morphism(a, b)
+  @given(x: cat.Object, y: cat.Object)
+  morphism(): cat.Morphism(x, y)
 
-  @given(a: cat.Object, c: cat.Object)
+  @given(x: cat.Object, z: cat.Object)
   cancel_right(
-    f: cat.Morphism(c, a),
-    g: cat.Morphism(c, a),
+    f: cat.Morphism(z, x),
+    g: cat.Morphism(z, x),
     Equal(cat.compose(f, morphism), cat.compose(g, morphism))
   ): Equal(f, g)
 }
 
 // NOTE Example:
 //   mono: Monomorphism(cat)
-//   mono.morphism(a, b): cat.Morphism(a, b)
+//   mono.morphism(x, y): cat.Morphism(x, y)

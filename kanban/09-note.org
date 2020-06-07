@@ -8,8 +8,9 @@
 * 用内置（built-in）的方式来实现基本等词（equality）。
 - 也许需要内置如下函数：
   #+begin_src scala
+  @given(A: Type)
   transport(
-    equation: Equal(A, x, y),
+    equation: Equal(x, y),
     motive(x: A): Type,
     base: motive(x),
   ): motive(y) = base

@@ -5,9 +5,9 @@ import prelude.structure.category.Category
 // NOTE the following use of `Category.Isomorphism(this, f, inv(f))`
 //   is an example of partly fulfilled object construction
 class Groupoid extends Category {
-  @given(a: Object, b: Object)
-  inv(f: Morphism(a, b)): Morphism(b, a)
+  @given(x: Object, y: Object)
+  inv(f: Morphism(x, y)): Morphism(y, x)
 
-  @given(a: Object, b: Object)
-  inv_iso(f: Morphism(a, b)): Category.Isomorphism(this, f, inv(f))
+  @given(x: Object, y: Object)
+  inv_iso(f: Morphism(x, y)): Category.Isomorphism(this, f, inv(f))
 }

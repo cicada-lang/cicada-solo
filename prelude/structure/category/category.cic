@@ -3,21 +3,21 @@ package prelude.structure.category.Category
 class Category {
   Object: Type
   Morphism(dom: Object, cod: Object): Type
-  id(a: Object): Morphism(a, a)
+  id(x: Object): Morphism(x, x)
 
-  @given(a: Object, b: Object, c: Object)
-  compose(f: Morphism(a, b), g: Morphism(b, c)): Morphism(a, c)
+  @given(x: Object, y: Object, z: Object)
+  compose(f: Morphism(x, y), g: Morphism(y, z)): Morphism(x, z)
 
-  @given(a: Object, b: Object)
-  id_left(f: Morphism(a, b)): Equal(compose(id(a), f), f)
+  @given(x: Object, y: Object)
+  id_left(f: Morphism(x, y)): Equal(compose(id(x), f), f)
 
-  @given(a: Object, b: Object)
-  id_right(f: Morphism(a, b)): Equal(compose(f, id(b)), f)
+  @given(x: Object, y: Object)
+  id_right(f: Morphism(x, y)): Equal(compose(f, id(y)), f)
 
-  @given(a: Object, b: Object, c: Object, d: Object)
+  @given(x: Object, y: Object, z: Object, w: Object)
   compose_associative(
-    f: Morphism(a, b),
-    g: Morphism(b, c),
-    h: Morphism(c, d),
+    f: Morphism(x, y),
+    g: Morphism(y, z),
+    h: Morphism(z, w),
   ): Equal(compose(f, compose(g, h)), compose(compose(f, g), h))
 }

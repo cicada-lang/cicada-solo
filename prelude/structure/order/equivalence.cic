@@ -1,4 +1,8 @@
+package prelude.structure.order.Equivalence
+
+import prelude.structure.order.PreOrder
+
 class Equivalence extends PreOrder {
-  @given(a: Elem, b: Elem)
-  symmetric(Under(a, b)): Under(b, a)
+  @given(x: Elem, y: Elem)
+  symmetric(Under(x, y)): Under(y, x)
 }

@@ -3,13 +3,13 @@ package prelude.structure.category.Category
 class Epimorphism {
   cat: Category
 
-  @given(a: cat.Object, b: cat.Object)
-  morphism(): cat.Morphism(a, b)
+  @given(x: cat.Object, y: cat.Object)
+  morphism(): cat.Morphism(x, y)
 
-  @given(b: cat.Object, c: cat.Object)
+  @given(y: cat.Object, z: cat.Object)
   cancel_left(
-    f: cat.Morphism(b, c),
-    g: cat.Morphism(b, c),
+    f: cat.Morphism(y, z),
+    g: cat.Morphism(y, z),
     Equal(
       cat.compose(morphism, f),
       cat.compose(morphism, g)),

@@ -7,8 +7,8 @@ import prelude.structure.order.PreOrder
 // - can implement:
 //   - topological sort
 class PartialOrder extends PreOrder {
-  @given(a: Elem, b: Elem)
-  antisymmetric(Under(a, b), Under(b, a)): Equal(a, b)
+  @given(x: Elem, y: Elem)
+  antisymmetric(Under(x, y), Under(y, x)): Equal(x, y)
 }
 
 class Beneath {
@@ -16,5 +16,9 @@ class Beneath {
   x: order.Elem
   y: order.Elem
   strict_under: PreOrder.StrictUnder(order, x, y)
-  nothing_in_between(z: Elem, order.Under(x, z), PreOrder.StrictUnder(z, y)): Equal(Elem, z, x)
+  nothing_in_between(
+    z: Elem,
+    order.Under(x, z),
+    PreOrder.StrictUnder(z, y),
+  ): Equal(Elem, z, x)
 }
