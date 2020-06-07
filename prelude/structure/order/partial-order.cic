@@ -21,6 +21,9 @@ class PartialOrder extends PreOrder {
   // NOTE The advantage of the above axiom is that it is the reverse of antisymmetric
   // antisymmetric(Under(x, y), Under(y, x)): Equal(x, y)
   // Thus in PartialOrder, to prove Equal is equal to prove two Under's.
+
+  // TODO relation between PartialOrder and Lattice
+  (z: Elem) -> (Under(w, z) <-> (Under(x, z), Under(y, z)))
 }
 
 class Beneath {

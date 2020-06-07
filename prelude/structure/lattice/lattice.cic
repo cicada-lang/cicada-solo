@@ -1,8 +1,6 @@
 package prelude.structure.lattice.Lattice
 
-import prelude.structure.order.PartialOrder
-
-class Lattic extends PartialOrder {
+class Lattic {
   // Join
   // Meet
 }

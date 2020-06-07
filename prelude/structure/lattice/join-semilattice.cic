@@ -1,5 +1,5 @@
 package prelude.structure.lattice.Lattice
 
-class JoinSemilattice extends PartialOrder {
+class JoinSemilattice {
   // TODO
 }

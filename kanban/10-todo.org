@@ -1,4 +1,7 @@
 * 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
+- [formalize] [EWD1240a] A little bit of lattice theory.
+  - relation between PartialOrder and Lattice.
+  - learn from the story line.
 - Algebraic structures：https://en.wikipedia.org/wiki/Algebraic_structure
 - number theroy：https://en.wikipedia.org/wiki/Number_theory
 - 形式化 Lattice theory。
