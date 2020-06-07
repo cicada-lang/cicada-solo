@@ -20,6 +20,7 @@ class PartialOrder extends PreOrder {
 
   // NOTE The advantage of the above axiom is that it is the reverse of antisymmetric
   // antisymmetric(Under(x, y), Under(y, x)): Equal(x, y)
+  // Thus in PartialOrder, to prove Equal is equal to prove two Under's.
 }
 
 class Beneath {
