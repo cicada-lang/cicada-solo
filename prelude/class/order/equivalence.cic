@@ -1,4 +1,4 @@
 class Equivalence extends PreOrder {
   @given(a: Elem, b: Elem)
-  symmetric(Pre(a, b)): Pre(b, a)
+  symmetric(Under(a, b)): Under(b, a)
 }

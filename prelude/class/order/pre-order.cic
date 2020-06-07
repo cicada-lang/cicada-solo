@@ -1,13 +1,13 @@
 class PreOrder {
   Elem: Type
-  Pre(Elem, Elem): Type
+  Under(Elem, Elem): Type
 
-  reflexive(a: Elem): Pre(a, a)
+  reflexive(a: Elem): Under(a, a)
 
   @given(a: Elem, b: Elem, c: Elem)
-  transitive(Pre(a, b), Pre(b, c)): Pre(a, c)
+  transitive(Under(a, b), Under(b, c)): Under(a, c)
 
-  StrictPre(a: Elem, b: Elem): Type = Pre(a, b) & NonEqual(Elem, a, b)
+  StrictUnder(a: Elem, b: Elem): Type = Under(a, b) & NonEqual(Elem, a, b)
 }
 
 // NOTE
