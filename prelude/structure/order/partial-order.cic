@@ -2,13 +2,24 @@ package prelude.structure.order.PartialOrder
 
 import prelude.structure.order.PreOrder
 
-// NOTE
-// - no cycle
-// - can implement:
-//   - topological sort
+// NOTE No cycle.
+// NOTE Can implement:
+// - topological sort
 class PartialOrder extends PreOrder {
   @given(x: Elem, y: Elem)
   antisymmetric(Under(x, y), Under(y, x)): Equal(x, y)
+
+  // NOTE An alternative axiom for reflexive.
+  // - Maybe easier to use.
+  // - Maybe other axiom with one argument can have similar alternative.
+  @given(x: Elem, y: Elem)
+  reflexive_alt(equation: Equal(x, y)): (Under(x, y), Under(y, x)) = {
+    (transport(equation, (z: Elem) => Under(x, z), reflexive(x)),
+      transport(Equal.swap(equation), (z: Elem) => Under(y, z), reflexive(y)))
+  }
+
+  // NOTE The advantage of the above axiom is that it is the reverse of antisymmetric
+  // antisymmetric(Under(x, y), Under(y, x)): Equal(x, y)
 }
 
 class Beneath {

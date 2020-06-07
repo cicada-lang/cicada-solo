@@ -1,8 +1,7 @@
 package prelude.structure.order.PreOrder
 
-// NOTE
-// - thin category
-// - hom_set(A, B).size <= 1
+// NOTE Thin category.
+// NOTE hom_set(A, B).size <= 1
 class PreOrder {
   Elem: Type
   Under(Elem, Elem): Type
@@ -11,15 +10,6 @@ class PreOrder {
 
   @given(x: Elem, y: Elem, z: Elem)
   transitive(Under(x, y), Under(y, z)): Under(x, z)
-
-  // NOTE An alternative axiom for reflexive.
-  // - Maybe easier to use.
-  // - Maybe other axiom with one argument can have similar alternative。
-  @given(x: Elem, y: Elem)
-  reflexive_alt(equation: Equal(x, y)): Under(x, y) & Under(y, x) = {
-    transport(equation, (z: Elem) => Under(x, z), reflexive(x)) &
-    transport(Equal.swap(equation), (z: Elem) => Under(y, z), reflexive(y))
-  }
 }
 
 class StrictUnder {

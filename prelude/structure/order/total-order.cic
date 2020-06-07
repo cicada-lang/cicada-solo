@@ -2,11 +2,10 @@ package prelude.structure.order.TotalOrder
 
 import prelude.structure.order.PartialOrder
 
-// NOTE
-// - can implement:
-//   - quick sort
-//   - bubble sort
-//   - merge sort
+// NOTE Can implement:
+// - quick sort
+// - bubble sort
+// - merge sort
 class TotalOrder extends PartialOrder {
   connective(x: Elem, y: Elem): Either(Under(x, y), Under(y, x))
 }

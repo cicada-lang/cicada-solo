@@ -8,7 +8,7 @@ class Semigroup {
 }
 
 // NOTE How about the following definition with built-in associative?
-// class Semigroup {
-//   Elem: Type
-//   mul(List(Elem)): Elem
-// }
+class Semigroup {
+  Elem: Type
+  mul(List(Elem)): Elem
+}
