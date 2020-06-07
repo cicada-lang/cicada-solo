@@ -1,3 +1,0 @@
-class Unit {}
-
-unit: Unit = new Unit

@@ -4,9 +4,10 @@ class PreOrder {
 
   reflexive(a: Elem): Pre(a, a)
 
-  transitive(# a b c: Elem, Pre(a, b), Pre(b, c)): Pre(a, c)
+  @given(a: Elem, b: Elem, c: Elem)
+  transitive(Pre(a, b), Pre(b, c)): Pre(a, c)
 
-  StrictPre(a, b: Elem): Type = Pre(a, b) & NonEqual(Elem, a, b)
+  StrictPre(a: Elem, b: Elem): Type = Pre(a, b) & NonEqual(Elem, a, b)
 }
 
 // NOTE

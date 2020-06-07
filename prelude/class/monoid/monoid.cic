@@ -3,16 +3,17 @@ class Monoid extends Semigroup {
 
   id_left(x: Elem): TheEqual(Elem, mul(id, x), x)
   id_right(x: Elem): TheEqual(Elem, mul(x, id), x)
-
-  as_small_category = new Category(
-    Unit,
-    (_: Unit, _: Unit): Unit => Elem,
-    (_: Unit): Elem => id,
-    mul,
-    id_left,
-    id_left,
-    associative)
 }
+
+as_small_category(monoid: Monoid) =
+  new Category(
+    Trivial.Sole,
+    (_: Trivial, _: Trivial): Trivial => Elem,
+    (_: Trivial): Elem => monoid.id,
+    monoid.mul,
+    monoid.id_left,
+    monoid.id_left,
+    monoid.associative)
 
 // NOTE How about the following definition with built-in associative?
 // class Monoid {

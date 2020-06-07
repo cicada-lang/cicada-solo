@@ -1,8 +1,8 @@
 class Semigroup {
   Elem: Type
-  mul(x y: Elem): Elem
+  mul(x: Elem, y: Elem): Elem
 
-  mul_associative(x y z: Elem): Equal(mul(x, mul(y, z)), mul(mul(x, y), z))
+  mul_associative(x: Elem, y: Elem, z: Elem): Equal(mul(x, mul(y, z)), mul(mul(x, y), z))
 }
 
 // NOTE How about the following definition with built-in associative?

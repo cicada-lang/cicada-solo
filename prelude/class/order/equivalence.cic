@@ -1,3 +1,4 @@
 class Equivalence extends PreOrder {
-  symmetric(# a b: Elem, Pre(a, b)): Pre(b, a) 
+  @given(a: Elem, b: Elem)
+  symmetric(Pre(a, b)): Pre(b, a)
 }

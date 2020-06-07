@@ -1,5 +1,6 @@
 class PartialOrder extends PreOrder {
-  antisymmetric(# a b: Elem, Pre(a, b), Pre(b, a)): Equal(a, b)
+  @given(a: Elem, b: Elem)
+  antisymmetric(Pre(a, b), Pre(b, a)): Equal(a, b)
 
   cover(a b: Elem): Type =
     StrictPre(a, b) & (x: Elem, Pre(a, x), StrictPre(x, b)) -> Equal(Elem, x, a)

@@ -1,74 +1,24 @@
 import prelude.data.Nat
 
 data Vec(A: Type, length: Nat) {
-  VecNull: Vec(A, zero)
-  VecCons(# n: Nat, head: A, tail: Vec(A, n)): Vec(A, Nat.Succ(n))
+  Null: Vec(A, zero)
+  @given(n: Nat) VecCons(head: A, tail: Vec(A, n)): Vec(A, Nat.Succ(n))
 }
 
-Vec = class {
-  A: Type
-  length: Nat
-}
+@given(A: Type)
+@given(m: Nat, n: Nat)
+append(x: Vec(A, m), y: Vec(A, n)): Vec(A, Nat.add(m, n))
+append(Null, y) = y
+append(Cons(head, tail), y) = Cons(head, append(tail, y))
 
-VecNull = class extends Vec {
-  length = zero
-}
+@given(A: Type, B: Type)
+@given(n: Nat)
+map(x: Vec(A, n), f(A): B): Vec(B, n)
+map(Null) = Null
+map(Cons(head, tail)) = Cons(f(head), map(tail, f))
 
-VecCons = class extends Vec {
-  n: Nat
-  length = succ(n)
-  head: A
-  tail: Vec(A, n)
-}
+three_zeros: Vec(Nat, Nat.three) =
+  Cons(Nat.zero, Cons(Nat.zero, Cons(Nat.zero, Null)))
 
-class Vec {
-  A: Type
-  length: Nat
-}
-
-class VecNull extends Vec {
-  length = zero
-}
-
-class VecCons extends Vec {
-  n: Nat
-  length = succ(n)
-  head: A
-  tail: Vec(A, n)
-}
-
-vec_append: {
-  # A: Type
-  # m, n: Nat
-  x: Vec(A, m)
-  y: Vec(A, n)
-  ---------
-  Vec(A, nat_add(m, n))
-} = {
-  x match {
-    vec_null => y
-    vec_cons => vec_cons(x.head, vec_append(x.tail, y))
-  }
-}
-
-vec_map: {
-  # A, B: Type
-  # n: Nat
-  f: { A -> B }
-  x: Vec(A, n)
-  ---------
-  Vec(B, n)
-} = {
-  x match {
-    vec_null => x
-    vec_cons => vec_cons(f(x.head), vec_map(f, x.tail))
-  }
-}
-
-three_zeros: Vec(Nat, three) = {
-  vec_cons(zero, vec_cons(zero, vec_cons(zero, vec_null)))
-}
-
-three_ones: Vec(Nat, three) = {
-  vec_cons(one, vec_cons(one, vec_cons(one, vec_null)))
-}
+three_ones: Vec(Nat, Nat.three) =
+  Cons(Nat.one, Cons(Nat.one, Cons(Nat.one, Null)))
