@@ -18,7 +18,8 @@ develop PartialOrder {
   // - Maybe easier to use.
   // - Maybe other axiom with one argument can have similar alternative.
   @given(x: Elem, y: Elem)
-  reflexive_alt(equation: Equal(x, y)): (Under(x, y), Under(y, x)) =
+  reflexive_alt(Equal(x, y)): (Under(x, y), Under(y, x))
+  reflexive_alt(equation) =
     (transport(equation, (z: Elem) => Under(x, z), reflexive(x)),
       transport(Equal.swap(equation), (z: Elem) => Under(y, z), reflexive(y)))
 
@@ -27,16 +28,19 @@ develop PartialOrder {
   // known as the laws of "indirect order".
   indirect_order_under(
     x: Elem, y: Elem,
-    indirect_under: (z: Elem) -> Under(z, x) -> Under(z, y),
-  ): Under(x, y) = indirect_under(x)(reflexive(x))
+    (z: Elem) -> Under(z, x) -> Under(z, y),
+  ): Under(x, y)
+  indirect_order_under = indirect_under(x, reflexive(x))
 
   indirect_order_above(
     x: Elem, y: Elem,
-    indirect_above: (z: Elem) -> Under(y, z) -> Under(x, z),
-  ): Under(x, y) = indirect_above(y)(reflexive(y))
+    (z: Elem) -> Under(y, z) -> Under(x, z),
+  ): Under(x, y)
+  indirect_order_above(x, y, indirect_above) = indirect_above(y, reflexive(y))
 
   // TODO relation between PartialOrder and Lattice
   // (z: Elem) -> (Under(w, z) <-> (Under(x, z), Under(y, z)))
+
 }
 
 class Beneath {

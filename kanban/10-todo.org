@@ -1,3 +1,14 @@
+* 实现 pie，并用《The Litte Typer》来做测试。
+* 将 pie 的 scheme 语法，改为我所设计的语法。
+- 代码举例：
+  #+begin_src scheme
+  (claim concat (Pi ([E U]) (-> (List E) (List E) (List E))))
+  (define concat (lambda (E) (lambda (x y) (rec-List (reverse E y) x (step-reverse E)))))
+  #+end_src
+  #+begin_src scala
+  concat(E: U, List(E), List(E)): List(E)
+  concat(E, x, y) = List.rec(reverse(E, y), x, step_reverse(E))
+  #+end_src
 * 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
 - 尤其是关于填充类型（Fulfilling type）的推演规则。
 - 尤其是关于归纳类型（Inductive type）的推演规则。
