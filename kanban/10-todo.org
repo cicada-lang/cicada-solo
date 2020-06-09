@@ -1,4 +1,6 @@
 * 实现 pie，并用《The Litte Typer》来做测试。
+- 首先尝试改 pie 的语法，看看效果。
+- 以 tartlet 为基础实现 pie。
 * 将 pie 的 scheme 语法，改为我所设计的语法。
 - 代码举例：
   #+begin_src scheme
