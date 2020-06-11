@@ -1,3 +1,14 @@
+* 首先尝试改 pie 的语法，看看效果。
+- 完成：<2020-06-11 Thu>
+- 代码举例：
+  #+begin_src scheme
+  (claim concat (Pi ([E U]) (-> (List E) (List E) (List E))))
+  (define concat (lambda (E) (lambda (x y) (rec-List (reverse E y) x (step-reverse E)))))
+  #+end_src
+  #+begin_src scala
+  concat(E: U, List(E), List(E)): List(E)
+  concat(E, x, y) = List.rec(reverse(E, y), x, step_reverse(E))
+  #+end_src
 * 明确模块系统的使用方式。
 - 完成：<2020-06-07 Sun>
 - 使用类似 Java 和 Scala 的模块系统。

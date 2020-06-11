@@ -1,32 +1,18 @@
-* 实现 pie，并用《The Litte Typer》来做测试。
-- 首先尝试改 pie 的语法，看看效果。
-- 以 tartlet 为基础实现 pie。
+* 以 tartlet 为基础实现 pie。
 * 将 pie 的 scheme 语法，改为我所设计的语法。
-- 代码举例：
-  #+begin_src scheme
-  (claim concat (Pi ([E U]) (-> (List E) (List E) (List E))))
-  (define concat (lambda (E) (lambda (x y) (rec-List (reverse E y) x (step-reverse E)))))
-  #+end_src
-  #+begin_src scala
-  concat(E: U, List(E), List(E)): List(E)
-  concat(E, x, y) = List.rec(reverse(E, y), x, step_reverse(E))
-  #+end_src
-* 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
-- 尤其是关于填充类型（Fulfilling type）的推演规则。
-- 尤其是关于归纳类型（Inductive type）的推演规则。
+* 填充类型（Fulfilling type）的推演规则。
+* 归纳类型（Inductive type）的推演规则。
 * 我们需要 develop 这个关键词，来在证明时，把更多的信息包含在语境中。
 - 明确 develop 这个关键词的语义。
 * [formalization] [EWD1240a] A little bit of lattice theory
 - 形式化这篇文章，以检验这样形式化是否真的好。
 - This paper is about the relation between PartialOrder and Lattice.
 - Learn from the story line.
-* 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
-- Algebraic structures：https://en.wikipedia.org/wiki/Algebraic_structure
-  - 形式化 Lattice theory。
-  - 形式化 Closure system。
-    - 帮助学习 FCA。
-  - 形式化 Topology theory。
-  - 形式化 Category theory。
-  - 形式化 Group theory。
-  - 形式化 Category of Groups。
-- Number theroy：https://en.wikipedia.org/wiki/Number_theory
+* 形式化 Algebraic structures：https://en.wikipedia.org/wiki/Algebraic_structure
+* 形式化 Lattice theory。
+* 形式化 Closure system。-- 帮助学习 FCA。
+* 形式化 Topology theory。
+* 形式化 Category theory。
+* 形式化 Group theory。
+* 形式化 Category of Groups。
+* 形式化 Number theroy：https://en.wikipedia.org/wiki/Number_theory
