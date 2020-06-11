@@ -1,4 +1,7 @@
-* 再次实现 tartlet （用 sexp 语法）。
+* sexp 的语法解析，用 js 的 string -- string expression。
+* 为 pie 的语言结构建模。回忆其 Exp 与 Value。
+* 再次实现 tartlet（用 sexp 语法）。
+- 可以有两个语法前端，没必要在开始的时候重新设计语法。
 * 以 tartlet 为基础实现 pie。
 * 将 pie 的 scheme 语法，改为我所设计的语法。
 * 填充类型（Fulfilling type）的推演规则。
