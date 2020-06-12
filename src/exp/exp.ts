@@ -6,12 +6,12 @@ export const enum Kind {
 }
 
 export interface Var {
-  kind: Kind.Var,
-  name: string,
+  kind: Kind.Var
+  name: string
 }
 
 export interface Fn {
-  kind: Kind.Fn,
-  name: string,
-  body: Exp,
+  kind: Kind.Fn
+  name: string
+  body: Exp
 }

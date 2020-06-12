@@ -6,7 +6,7 @@ const fn: Exp.Fn = {
   body: {
     kind: Exp.Kind.Var,
     name: "x",
-  }
+  },
 }
 
 console.log(Exp.repr(fn))
