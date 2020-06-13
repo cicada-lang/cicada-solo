@@ -1,7 +1,6 @@
 // namespace
 export * as Exp from "./exp"
 // export * as Value from "./value"
-export * as Sexp from "./sexp"
 // about error
 export * as Err from "./err"
 // project util
