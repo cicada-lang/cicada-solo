@@ -9,7 +9,7 @@ export function repr(exp: Exp.Exp): string {
       return `(${exp.name}) => ${repr(exp.body)}`
     }
     case Exp.Kind.Ap: {
-      return `${repr(exp.f)}(${repr(exp.body)})`
+      return `${repr(exp.rator)}(${repr(exp.rand)})`
     }
   }
 }
