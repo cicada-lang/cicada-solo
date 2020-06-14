@@ -6,7 +6,10 @@ export function repr(exp: Exp.Exp): string {
       return exp.name
     }
     case Exp.Kind.Fn: {
-      return `(lambda (${exp.name}) ${repr(exp.body)})`
+      return `(${exp.name}) => ${repr(exp.body)}`
+    }
+    case Exp.Kind.Ap: {
+      return `${repr(exp.f)}(${repr(exp.body)})`
     }
   }
 }

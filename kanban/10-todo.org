@@ -1,4 +1,12 @@
 * 为 pie 的语言结构建模。回忆其 Exp 与 Value。
+- use `elim` as prefix in evaluate
+- we need type in normal form,
+  because each type can have its own equality (such as eta equivalence of function type),
+  and normal form is defined as,
+  the canonical representative of the equivalence class
+  induced by the equality judgment,
+  such that comparing normal forms for alpha-equivalence
+  is sufficient to decide whether two expressions are equal.
 * 再次实现 tartlet。
 * 以 tartlet 为基础实现 pie。
 * 填充类型（Fulfilling type）的推演规则。
