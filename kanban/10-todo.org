@@ -1,10 +1,11 @@
-* untyped
+* 实现 NbE 教程中的 untyped 语言。要求有完备的命令行工具与测试框架。
+- 开始：<2020-06-15 Mon>
 - Env
 - Value
 - grammars/exp
 - Exp.evaluate
   - use `elim` as prefix in evaluate
-* cli and test framework
+- cli and test framework
 * systemt
 - we need type in normal form,
   because each type can have its own equality (such as eta equivalence of function type),
