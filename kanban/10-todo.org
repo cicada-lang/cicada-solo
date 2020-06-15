@@ -1,5 +1,6 @@
 * 实现 NbE 教程中的 untyped 语言。要求有完备的命令行工具与测试框架。
-- Value
+- Neutral
+- Normal
 - grammars/exp
 - Exp.evaluate
   - use `elim` as prefix in evaluate
