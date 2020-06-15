@@ -1,3 +1,20 @@
+* untyped
+- grammars/exp
+- Value
+- Exp.evaluate
+- use `elim` as prefix in evaluate
+* cli and test framework
+* systemt
+- we need type in normal form,
+  because each type can have its own equality (such as eta equivalence of function type),
+  and normal form is defined as,
+  the canonical representative of the equivalence class
+  induced by the equality judgment,
+  such that comparing normal forms for alpha-equivalence
+  is sufficient to decide whether two expressions are equal.
+* tartlet
+* pie
+* typer
 * 填充类型（Fulfilling type）的推演规则。
 * 归纳类型（Inductive type）的推演规则。
 * 我们需要 develop 这个关键词，来在证明时，把更多的信息包含在语境中。
