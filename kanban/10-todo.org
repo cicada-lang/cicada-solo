@@ -1,8 +1,9 @@
 * untyped
-- grammars/exp
+- Env
 - Value
+- grammars/exp
 - Exp.evaluate
-- use `elim` as prefix in evaluate
+  - use `elim` as prefix in evaluate
 * cli and test framework
 * systemt
 - we need type in normal form,
