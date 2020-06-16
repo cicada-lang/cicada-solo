@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@forchange/parc@^0.1.6":
-  version "0.1.6"
-  resolved "https://nexus.forchange.cn/repository/npm-group/@forchange/parc/-/parc-0.1.6.tgz#336c41ead92bb378a70d4a2be8bc59b422a4eb35"
-  integrity sha512-NFXX0JANkQJN2dheTJ2PnLFzGkh54mf1TOnWPnPIbjHjQWmSYEr7rANVHZxOfB06ngxUXaZgBgxM6VBRYkLryg==
+"@forchange/parc@^0.1.7":
+  version "0.1.7"
+  resolved "https://nexus.forchange.cn/repository/npm-group/@forchange/parc/-/parc-0.1.7.tgz#f775f620afdda46d345e68ef20f909dfa951d8e2"
+  integrity sha512-knsfNQeMauzMXL16wMDe+KJXlrBhjOJPWnHVWztqlJ8h94KP3J6jT+YUniVIhNOm3aicNwugGNIEfKVW5QCwGw==
 
 "@forchange/partech@^1.0.11":
   version "1.0.11"
