@@ -20,7 +20,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       }
     }
     case Exp.Kind.Ap: {
-      return Exp.elim_ap(env, evaluate(env, exp.rator), evaluate(env, exp.rand))
+      return Exp.elim_ap(evaluate(env, exp.rator), evaluate(env, exp.rand))
     }
   }
 }

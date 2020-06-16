@@ -3,7 +3,6 @@ import * as Env from "../env"
 import * as Value from "../value"
 
 export function elim_ap(
-  env: Env.Env,
   rator: Value.Value,
   rand: Value.Value
 ): Value.Value {
