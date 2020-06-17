@@ -1,4 +1,0 @@
-#!/usr/bin/env node
-
-let cicada = require("../lib/cicada")
-cicada.cli.run()

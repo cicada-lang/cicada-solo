@@ -15,9 +15,6 @@
     "@types/nanoid": "^2.1.0"
   },
   "dependencies": {
-    "@forchange/parc": "^0.1.7",
-    "@forchange/partech": "^1.0.11",
-    "@forchange/readable-regular-expression": "^0.0.10",
     "chalk": "^4.1.0",
     "commander": "^5.1.0",
     "fast-deep-equal": "^3.1.3",
