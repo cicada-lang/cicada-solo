@@ -5,9 +5,7 @@ export function run(config: any): void {
 
   program.name("untyped").version(config.version, "-v, --version")
 
-  program
-    .command("eval <input-file>")
-    .action(require("./cli-eval").run)
+  program.command("eval <input-file>").action(require("./cli-eval").run)
 
   program.parse(process.argv)
 }
