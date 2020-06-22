@@ -8,6 +8,7 @@
     - var: identifier
     - fn: "(" identifier ")" "=>" exp
     - ap: identifier ("(" exp ")")*
+    // or ("(" exp ")") must be named? like exp_in_paren
 - try examples in peg paper in parser generator
 - change earley to use ordered choice
 - x in x test
