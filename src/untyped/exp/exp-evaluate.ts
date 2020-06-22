@@ -23,6 +23,12 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       case Exp.Kind.Ap: {
         return Exp.elim_ap(evaluate(env, exp.rator), evaluate(env, exp.rand))
       }
+      case Exp.Kind.Suite: {
+        for (const def of exp.defs) {
+          env = Env.extend(Env.clone(env), def.name, evaluate(env, def.exp))
+        }
+        return evaluate(env, exp.body)
+      }
     }
   } catch (error) {
     if (error instanceof Exp.Trace.Trace) {

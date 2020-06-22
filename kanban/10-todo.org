@@ -1,3 +1,14 @@
+* 实现 NbE 教程中的 untyped 语言。要求有完备的命令行工具与测试框架。
+- grammars.suite
+- Neutral
+- Normal
+- Value.readback
+- Value.equivalent
+- test framework for equivalent
+- play with Church numeral
+- 直接用 Church numeral 来实现 Nat，而不用 ADT。
+  其语义是迭代函数，也许有有趣的应用
+  多了一个关于迭代函数的 API。
 * pt -- parsing techniques
 - /home/xyh/Downloads/kkk/for-and-against-pegs-why-we-need-multi-ordered-grammars.pdf
 - theory of CFG
@@ -14,19 +25,6 @@
 - x in x test
   - S <- "x" S "x" | "x"
 - a version of partech that use env
-* 实现 NbE 教程中的 untyped 语言。要求有完备的命令行工具与测试框架。
-- test framework
-- Stmt
-- Stmt.execute
-- grammars.stmt
-- Neutral
-- Normal
-- readback
-- equivalent
-- play with Church numeral
-- 直接用 Church numeral 来实现 Nat，而不用 ADT。
-  其语义是迭代函数，也许有有趣的应用
-  多了一个关于迭代函数的 API。
 * systemt
 - we need type in normal form,
   because each type can have its own equality (such as eta equivalence of function type),

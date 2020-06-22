@@ -6,6 +6,9 @@
     "watch": "npx tsc --watch",
     "format": "npx prettier src --write"
   },
+  "bin": {
+    "untyped": "./bin/untyped.js"
+  },
   "devDependencies": {
     "@types/assert": "^1.4.7",
     "@types/fs-readdir-recursive": "^1.0.0",
