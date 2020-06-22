@@ -13,14 +13,9 @@ export function repr(exp: Exp.Exp): string {
       return `${repr(exp.rator)}(${repr(exp.rand)})`
     }
     case Exp.Kind.Suite: {
-      let s = exp.defs
-        .map((def) => `${def.name} = ${repr(def.exp)}`)
-        .join("\n")
-      s += "\n"
-      s += repr(exp.body)
-      s += "\n"
-      s += ut.indent(s, "  ")
-      return `{\n${s}}`
-    }
+      const def_reprs = exp.defs.map((def) => `${def.name} = ${repr(def.exp)}`)
+      const suite_repr = [...def_reprs, repr(exp.body)].join("\n")
+      return `{\n${ut.indent(suite_repr, "  ")}\n}`
+      }
   }
 }

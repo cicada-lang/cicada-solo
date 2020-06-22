@@ -9,6 +9,7 @@ export function exp(): pt.Sym.Rule {
     var: [identifier],
     fn: ["(", identifier, ")", "=", ">", exp],
     ap: [identifier, pt.one_or_more(exp_in_paren)],
+    suite: ["{", pt.zero_or_more(def), exp, "}"],
   })
 }
 
@@ -44,6 +45,13 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
       return exp
     },
+    suite: ([, defs, body]) => {
+      return {
+        kind: Exp.Kind.Suite,
+        defs: pt.zero_or_more_matcher(def_matcher)(defs),
+        body: exp_matcher(body),
+      }
+    },
   })(tree)
 }
 
@@ -56,5 +64,24 @@ function exp_in_paren(): pt.Sym.Rule {
 export function exp_in_paren_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>("exp_in_paren", {
     exp_in_paren: ([, exp]) => exp_matcher(exp),
+  })(tree)
+}
+
+function def(): pt.Sym.Rule {
+  return pt.Sym.create_rule("def", {
+    def: [identifier, "=", exp],
+  })
+}
+
+export function def_matcher(
+  tree: pt.Tree.Tree
+): { name: string; exp: Exp.Exp } {
+  return pt.Tree.matcher("def", {
+    def: ([name, , exp]) => {
+      return {
+        name: pt.Tree.token(name).value,
+        exp: exp_matcher(exp),
+      }
+    },
   })(tree)
 }

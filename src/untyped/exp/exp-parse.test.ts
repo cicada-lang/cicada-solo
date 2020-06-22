@@ -10,6 +10,11 @@ const sentences = [
   "(f) => (x) => f(f(x))",
   "(f) => (x) => f(f(f(x)))",
   "(f) => (x) => f(f(f(f(x))))",
+  "(f) => (x) => f(x)(x)(x)",
+  `(f) => (x) => {
+  y = x
+  f(y)
+}`,
 ]
 
 for (const sentence of sentences) {
