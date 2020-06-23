@@ -1,31 +1,24 @@
 export type Exp = Var | Fn | Ap | Suite
 
-export const enum Kind {
-  Var = "Var",
-  Fn = "Fn",
-  Ap = "Ap",
-  Suite = "Suite",
-}
-
 export interface Var {
-  kind: Kind.Var
+  kind: "Exp.Var"
   name: string
 }
 
 export interface Fn {
-  kind: Kind.Fn
+  kind: "Exp.Fn"
   name: string
   body: Exp
 }
 
 export interface Ap {
-  kind: Kind.Ap
+  kind: "Exp.Ap"
   rator: Exp
   rand: Exp
 }
 
 export interface Suite {
-  kind: Kind.Suite
+  kind: "Exp.Suite"
   defs: Array<{ name: string, exp: Exp }>
   body: Exp
 }

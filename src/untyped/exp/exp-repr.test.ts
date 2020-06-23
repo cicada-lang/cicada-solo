@@ -3,7 +3,7 @@ import * as ut from "../../ut"
 
 {
   const x: Exp.Var = {
-    kind: Exp.Kind.Var,
+    kind: "Exp.Var",
     name: "x",
   }
 
@@ -12,10 +12,10 @@ import * as ut from "../../ut"
 
 {
   const fn: Exp.Fn = {
-    kind: Exp.Kind.Fn,
+    kind: "Exp.Fn",
     name: "x",
     body: {
-      kind: Exp.Kind.Var,
+      kind: "Exp.Var",
       name: "x",
     },
   }
@@ -25,13 +25,13 @@ import * as ut from "../../ut"
 
 {
   const ap: Exp.Ap = {
-    kind: Exp.Kind.Ap,
+    kind: "Exp.Ap",
     rator: {
-      kind: Exp.Kind.Var,
+      kind: "Exp.Var",
       name: "f",
     },
     rand: {
-      kind: Exp.Kind.Var,
+      kind: "Exp.Var",
       name: "x",
     },
   }
