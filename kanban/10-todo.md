@@ -1,6 +1,4 @@
-# support comment in parser
-
-# 实现 NbE 教程中的 systemt 语言，要求有完备的命令行工具与测试框架。
+# 实现 NbE 教程中的 systemt 语言。
 
 - we need type in normal form,
   because each type can have its own equality (such as eta equivalence of function type),
@@ -10,8 +8,11 @@
   such that comparing normal forms for alpha-equivalence
   is sufficient to decide whether two expressions are equal.
 
+# 为所实现的简单几个语言设计实用的命令行工具与测试框架。
+
 # church-encoding
 
+- support comment in parser
 - church-boolean.cic
 - church-numeral-predicates.cle
 - church-pair.cic
