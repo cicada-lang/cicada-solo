@@ -22,14 +22,30 @@ function docs {
 }
 
 function t {
-    test_prog_ext node test.js
+    test_prog_ext node test.js &&
+        test_untyped &&
+        true
+}
+
+function test_untyped {
+    untyped="./bin/untyped.js"
+
+    for file in $(find . | grep "^\./examples/untyped" | grep "\.cic$")
+    do
+        echo ""
+        echo "[test untyped] $file"
+        if ! time $untyped eval $file
+        then
+            exit 1
+        fi
+    done
 }
 
 function test_prog_ext {
     prog=$1
     ext=$2
 
-    for file in $(find . | grep "^\./lib/" | grep "\.${ext}$")
+    for file in $(find . | grep "^\./lib" | grep "\.${ext}$")
     do
         echo ""
         echo "[test] $file"

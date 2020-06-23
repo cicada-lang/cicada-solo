@@ -1,5 +1,5 @@
 * 实现 NbE 教程中的 untyped 语言。要求有完备的命令行工具与测试框架。
-- Value.readback
+- Exp.normalize
 - Value.equivalent
 - test framework for equivalent
 - play with Church numeral
