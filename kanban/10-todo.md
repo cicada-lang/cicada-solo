@@ -1,7 +1,9 @@
 # 实现 NbE 教程中的 systemt 语言。
 
 - we need type in normal form,
-  because each type can have its own equality (such as eta equivalence of function type),
+  because each type can have its own equality
+  (such as eta equivalence of function type),
+
   and normal form is defined as,
   the canonical representative of the equivalence class
   induced by the equality judgment,
