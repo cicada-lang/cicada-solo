@@ -56,11 +56,20 @@ function test_prog_ext {
     done
 }
 
-function main {
+function h {
+    echo "commands:"
+    for subcommand in $(declare -F | sed 's/declare -f//g')
+    do
+        echo "  $subcommand"
+    done
+}
+
+if [ $# == 0 ]
+then
+    h
+else
     for TASK in $@
     do
         $TASK
     done
-}
-
-main $@
+fi
