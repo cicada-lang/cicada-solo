@@ -3,7 +3,8 @@
 ## Traditional type theory semantics
 
 This kind of semantics is description of implementation.
-Just like pseudocode of algorithm, the description do not use specific programming language.
+Just like pseudocode of algorithm,
+the description do not use specific programming language.
 And the description always ignore error report in a real implementation.
 
 To assert the judgement `A : type`,
