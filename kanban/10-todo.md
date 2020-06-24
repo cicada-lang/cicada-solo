@@ -1,9 +1,20 @@
+- note about type subsumption
+
 # 实现 NbE 教程中的 systemt 语言。
+
+- Exp.check -- before value
+- value
+- Env
+- Ctx
+- grammars.exp
+- Exp.evaluate
+- Value.readback
+- cli
+- play with systemt
 
 - we need type in normal form,
   because each type can have its own equality
   (such as eta equivalence of function type),
-
   and normal form is defined as,
   the canonical representative of the equivalence class
   induced by the equality judgment,
@@ -24,7 +35,7 @@
 
 # pt -- parsing techniques
 
-- /home/xyh/Downloads/kkk/for-and-against-pegs-why-we-need-multi-ordered-grammars.pdf
+- for-and-against-pegs-why-we-need-multi-ordered-grammars.pdf
 - theory of CFG
 - intersection grammar
 - pt framework
