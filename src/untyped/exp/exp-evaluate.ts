@@ -21,7 +21,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         }
 
       case "Exp.Ap":
-        return Exp.elim_ap(evaluate(env, exp.rator), evaluate(env, exp.rand))
+        return Exp.do_ap(evaluate(env, exp.rator), evaluate(env, exp.rand))
 
       case "Exp.Suite":
         for (const def of exp.defs) {

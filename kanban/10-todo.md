@@ -1,8 +1,10 @@
-- note about type subsumption
+- search wikipedia about type subsumption
+  - https://homepage.cs.uiowa.edu/~jgmorrs/eecs662s19/notes/Notes-on-subsumption.html
+  - https://en.wikipedia.org/wiki/Subtyping#Subsumption
 
 # 实现 NbE 教程中的 systemt 语言。
 
-- Exp.check -- before value
+- Exp.check & Exp.infer -- before value
 - value
 - Env
 - Ctx

@@ -10,7 +10,7 @@ export function readback(used: Set<string>, value: Value.Value): Exp.Exp {
 
     case "Value.Fn":
       const name = freshen(used, value.name)
-      const body = Exp.elim_ap(value, {
+      const body = Exp.do_ap(value, {
         kind: "Value.Neutral",
         neutral: {
           kind: "Neutral.Var",
