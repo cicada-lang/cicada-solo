@@ -1,0 +1,4 @@
+{
+  zero = the[Nat](Zero)
+  zero
+}

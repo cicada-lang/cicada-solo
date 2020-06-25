@@ -1,11 +1,12 @@
 import commander from "commander"
+import * as cle_check from "./cli-check"
 
 export function run(config: any): void {
   const program = new commander.Command()
 
-  program.name("").version(config.version, "-v, --version")
+  program.name("lang1").version(config.version, "-v, --version")
 
-  program.command("eval <input-file>").action(require("./cli-eval").run)
+  program.command("check <input-file>").action(cle_check.run)
 
   program.parse(process.argv)
 }

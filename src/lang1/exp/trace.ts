@@ -5,3 +5,5 @@ export class Trace {
 
   constructor(public last: Exp.Exp, public message: string) {}
 }
+
+export * from "./trace-repr"

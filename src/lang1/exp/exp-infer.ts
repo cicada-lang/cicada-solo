@@ -63,7 +63,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
         for (const def of defs) {
           Ctx.extend(ctx, def.name, Exp.infer(ctx, def.exp))
         }
-        return Exp.infer(ctx, exp)
+        return Exp.infer(ctx, body)
       }
       case "Exp.Rec": {
         // ctx |- n => Nat

@@ -6,7 +6,7 @@ export function repr(t: Ty.Ty): string {
       return "Nat"
     }
     case "Ty.Arrow": {
-      return `(${t.arg}) -> ${t.ret}`
+      return `(${repr(t.arg)}) -> ${repr(t.ret)}`
     }
   }
 }

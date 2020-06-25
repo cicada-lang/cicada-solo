@@ -4,7 +4,6 @@
 
 # lang1 -- 实现 NbE 教程中的 systemt 语言。
 
-- cli
 - test the type checker
 - value
 - Env
