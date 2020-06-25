@@ -4,12 +4,13 @@
 
 # 实现 NbE 教程中的 systemt 语言。
 
+- grammars.exp
+- cli
+- test the type checker
 - value
 - Env
-- grammars.exp
 - Exp.evaluate
 - Value.readback
-- cli
 - play with systemt
 
 - we need type in normal form,
