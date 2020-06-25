@@ -30,7 +30,7 @@ export interface Succ {
 
 export interface NatRec {
   kind: "Exp.NatRec"
-  ty: Ty.Ty
+  t: Ty.Ty
   target: Exp
   base: Exp
   step: Exp
@@ -44,6 +44,6 @@ export interface Suite {
 
 export interface The {
   kind: "Exp.The"
-  ty: Ty.Ty
+  t: Ty.Ty
   exp: Exp
 }

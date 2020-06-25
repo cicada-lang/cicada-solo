@@ -4,7 +4,12 @@
 
 # 实现 NbE 教程中的 systemt 语言。
 
-- Exp.check & Exp.infer -- before value
+- fix the style of switch
+- Exp.Trace and error report
+- use complete sentence as error message -- and trace message
+- Ty.repr
+- Exp.infer
+- Exp.check
 - value
 - Env
 - grammars.exp
