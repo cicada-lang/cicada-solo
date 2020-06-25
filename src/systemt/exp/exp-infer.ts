@@ -46,12 +46,31 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
           }
         }
       }
-      case "Exp.NatRec": {
+      case "Exp.Suite": {
+        // ctx |- e1 => t1
+        // ctx, x1: t1 |- e2 => t2
+        // ctx, x1: t1, x2: t2 |- ...
+        // ...
+        // ctx, x1: t1, x2: t2, ... |- e => t
+        // ---------------------
+        // ctx |- { x1 = e1
+        //          x2 = e2
+        //          ...
+        //          e
+        //        } => t
+        const { defs, body } = exp
+        ctx = Ctx.clone(ctx)
+        for (const def of defs) {
+          Ctx.extend(ctx, def.name, Exp.infer(ctx, def.exp))
+        }
+        return Exp.infer(ctx, exp)
+      }
+      case "Exp.Rec": {
         // ctx |- n => Nat
         // ctx |- b <= t
         // ctx |- s <= Arrow(Nat, Arrow(t, t))
         // ------------------------------
-        // ctx |- NatRec(t, n, b, s) => t
+        // ctx |- Rec(t, n, b, s) => t
         const { t, target, base, step } = exp
         const target_t = Exp.infer(ctx, target)
         switch (target_t.kind) {
@@ -82,25 +101,6 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
         const the = exp
         Exp.check(ctx, the.exp, the.t)
         return the.t
-      }
-      case "Exp.Suite": {
-        // ctx |- e1 => t1
-        // ctx, x1: t1 |- e2 => t2
-        // ctx, x1: t1, x2: t2 |- ...
-        // ...
-        // ctx, x1: t1, x2: t2, ... |- e => t
-        // ---------------------
-        // ctx |- { x1 = e1
-        //          x2 = e2
-        //          ...
-        //          e
-        //        } => t
-        const { defs, body } = exp
-        ctx = Ctx.clone(ctx)
-        for (const def of defs) {
-          Ctx.extend(ctx, def.name, Exp.infer(ctx, def.exp))
-        }
-        return Exp.infer(ctx, exp)
       }
       case "Exp.Fn":
       case "Exp.Zero":

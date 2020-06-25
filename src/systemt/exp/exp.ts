@@ -1,6 +1,6 @@
 import * as Ty from "../ty"
 
-export type Exp = Var | Fn | Ap | Zero | Succ | NatRec | Suite | The
+export type Exp = Var | Fn | Ap | Zero | Succ | Rec | Suite | The
 
 export interface Var {
   kind: "Exp.Var"
@@ -19,6 +19,12 @@ export interface Ap {
   rand: Exp
 }
 
+export interface Suite {
+  kind: "Exp.Suite"
+  defs: Array<{ name: string; exp: Exp }>
+  body: Exp
+}
+
 export interface Zero {
   kind: "Exp.Zero"
 }
@@ -28,18 +34,12 @@ export interface Succ {
   prev: Exp
 }
 
-export interface NatRec {
-  kind: "Exp.NatRec"
+export interface Rec {
+  kind: "Exp.Rec"
   t: Ty.Ty
   target: Exp
   base: Exp
   step: Exp
-}
-
-export interface Suite {
-  kind: "Exp.Suite"
-  defs: Array<{ name: string; exp: Exp }>
-  body: Exp
 }
 
 export interface The {
