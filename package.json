@@ -7,7 +7,7 @@
     "format": "npx prettier src --write"
   },
   "bin": {
-    "untyped": "./bin/untyped.js"
+    "lang0": "./bin/lang0.js"
   },
   "devDependencies": {
     "@types/assert": "^1.4.7",

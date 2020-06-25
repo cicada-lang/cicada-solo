@@ -23,18 +23,18 @@ function docs {
 
 function t {
     test_prog_ext node test.js &&
-        test_untyped &&
+        test_lang0 &&
         true
 }
 
-function test_untyped {
-    untyped="./bin/untyped.js"
+function test_lang0 {
+    lang0="./bin/lang0.js"
 
-    for file in $(find . | grep "^\./examples/untyped" | grep "\.cic$")
+    for file in $(find . | grep "^\./examples/lang0" | grep "\.cic$")
     do
         echo ""
-        echo "[test untyped] $file"
-        if ! time $untyped eval $file
+        echo "[test lang0] $file"
+        if ! time $lang0 eval $file
         then
             exit 1
         fi

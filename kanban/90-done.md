@@ -1,4 +1,4 @@
-# 实现 NbE 教程中的 untyped 语言。
+# lang0 -- 实现 NbE 教程中的 Untyped lambda calculus 语言。
 
 - 完成：2020-06-23
 
