@@ -7,7 +7,6 @@
 - Exp.check & Exp.infer -- before value
 - value
 - Env
-- Ctx
 - grammars.exp
 - Exp.evaluate
 - Value.readback
