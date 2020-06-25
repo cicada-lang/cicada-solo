@@ -18,7 +18,7 @@ a = lookup(x, ctx)
 ---------------------
 ctx |- x => a
 
-Cons(ctx, Pair(x, a)) |- e <= b
+ctx, x: a |- e <= b
 ---------------------
 ctx |- Fn(x, e) <= Arrow(a, b)
 

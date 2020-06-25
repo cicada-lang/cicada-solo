@@ -81,7 +81,6 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
               arg: { kind: "Ty.Nat" },
               ret: { kind: "Ty.Arrow", arg: t, ret: t },
             })
-            return t
           }
           default: {
             throw new Exp.Trace.Trace(
@@ -104,14 +103,15 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       }
       case "Exp.Fn":
       case "Exp.Zero":
-      case "Exp.Succ":
+      case "Exp.Succ": {
         throw new Exp.Trace.Trace(
           exp,
           ut.aline(`
-            |I can not infer the type of ${exp}. // TODO
+            |I can not infer the type of ${Exp.repr(exp)}.
             |I suggest you add a type annotation to the expression.
             |`)
         )
+      }
     }
   } catch (error) {
     if (error instanceof Exp.Trace.Trace) {
