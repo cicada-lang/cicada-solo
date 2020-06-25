@@ -4,7 +4,6 @@
 
 # 实现 NbE 教程中的 systemt 语言。
 
-- fix the style of switch
 - Exp.Trace and error report
 - use complete sentence as error message -- and trace message
 - Ty.repr

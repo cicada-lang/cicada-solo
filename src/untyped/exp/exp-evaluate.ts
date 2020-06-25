@@ -5,29 +5,30 @@ import * as Value from "../value"
 export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
   try {
     switch (exp.kind) {
-      case "Exp.Var":
+      case "Exp.Var": {
         const result = Env.lookup(env, exp.name)
         if (result !== undefined) {
           return result
         } else {
           throw new Exp.Trace.Trace(exp, `unknown variable name: ${exp.name}`)
         }
-
-      case "Exp.Fn":
+      }
+      case "Exp.Fn": {
         return {
           ...exp,
           kind: "Value.Fn",
           env,
         }
-
-      case "Exp.Ap":
+      }
+      case "Exp.Ap": {
         return Exp.do_ap(evaluate(env, exp.rator), evaluate(env, exp.rand))
-
-      case "Exp.Suite":
+      }
+      case "Exp.Suite": {
         for (const def of exp.defs) {
           env = Env.extend(Env.clone(env), def.name, evaluate(env, def.exp))
         }
         return evaluate(env, exp.body)
+      }
     }
   } catch (error) {
     if (error instanceof Exp.Trace.Trace) {
