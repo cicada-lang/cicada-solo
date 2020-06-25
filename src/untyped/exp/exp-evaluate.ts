@@ -10,7 +10,10 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         if (result !== undefined) {
           return result
         } else {
-          throw new Exp.Trace.Trace(exp, `unknown variable name: ${exp.name}`)
+          throw new Exp.Trace.Trace(
+            exp,
+            `Unknown variable name: ${exp.name}.\n`
+          )
         }
       }
       case "Exp.Fn": {

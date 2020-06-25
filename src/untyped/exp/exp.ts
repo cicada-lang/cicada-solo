@@ -19,6 +19,6 @@ export interface Ap {
 
 export interface Suite {
   kind: "Exp.Suite"
-  defs: Array<{ name: string, exp: Exp }>
+  defs: Array<{ name: string; exp: Exp }>
   body: Exp
 }

@@ -10,7 +10,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ctx |- x => a
       const t = Ctx.lookup(ctx, exp.name)
       if (t === undefined) {
-        throw new Error(`unknown variable name: ${exp.name}\n`)
+        throw new Exp.Trace.Trace(exp, `Unknown variable name: ${exp.name}.\n`)
       } else {
         return t
       }
