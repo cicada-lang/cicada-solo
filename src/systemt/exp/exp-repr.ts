@@ -26,11 +26,11 @@ export function repr(exp: Exp.Exp): string {
     }
     case "Exp.Rec": {
       const { t, target, base, step } = exp
-      return `Rec(${Ty.repr(t)}, ${repr(target)}, ${repr(base)}, ${repr(step)})`
+      return `rec[${Ty.repr(t)}](${repr(target)}, ${repr(base)}, ${repr(step)})`
     }
     case "Exp.The": {
       const the = exp
-      return `The(${Ty.repr(the.t)}, ${repr(the.exp)})`
+      return `the[${Ty.repr(the.t)}](${repr(the.exp)})`
     }
   }
 }
