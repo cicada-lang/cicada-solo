@@ -1,6 +1,7 @@
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as Ty from "../ty"
+import * as ut from "../../ut"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
   switch (exp.kind) {
@@ -10,7 +11,13 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ctx |- x => a
       const t = Ctx.lookup(ctx, exp.name)
       if (t === undefined) {
-        throw new Exp.Trace.Trace(exp, `Unknown variable name: ${exp.name}.\n`)
+        throw new Exp.Trace.Trace(
+          exp,
+          ut.aline(`
+              |I see variable ${exp.name} during infer,
+              |but I can not find it in the environment.
+              |`)
+        )
       } else {
         return t
       }
@@ -29,9 +36,13 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
           return rator_t.ret
         }
         default: {
-          throw new Error(
-            `expecting rator_t to be Ty.Arrow instead of: ${rator_t}\n`
-          ) // TODO
+          throw new Exp.Trace.Trace(
+            exp,
+            ut.aline(`
+              |I am expecting the rator_t to be Ty.Arrow,
+              |but it is ${Ty.repr(rator_t)}.
+              |`)
+          )
         }
       }
     }
@@ -55,9 +66,13 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
           return t
         }
         default: {
-          throw new Error(
-            `expecting target_t to be Ty.Nat instead of: ${target_t}\n`
-          ) // TODO
+          throw new Exp.Trace.Trace(
+            exp,
+            ut.aline(`
+              |I am expecting target_t to be Ty.Nat,
+              |but it is ${Ty.repr(target_t)}.
+              |`)
+          )
         }
       }
     }

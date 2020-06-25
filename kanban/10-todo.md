@@ -4,7 +4,6 @@
 
 # 实现 NbE 教程中的 systemt 语言。
 
-- Ty.repr
 - Exp.infer
 - Exp.check
 - value

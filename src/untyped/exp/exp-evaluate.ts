@@ -1,6 +1,7 @@
 import * as Exp from "../exp"
 import * as Env from "../env"
 import * as Value from "../value"
+import * as ut from "../../ut"
 
 export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
   try {
@@ -12,7 +13,10 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         } else {
           throw new Exp.Trace.Trace(
             exp,
-            `Unknown variable name: ${exp.name}.\n`
+            ut.aline(`
+              |I see variable ${exp.name} during evaluate,
+              |but I can not find it in the environment.
+              |`)
           )
         }
       }
