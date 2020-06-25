@@ -4,7 +4,7 @@
 
 # 实现 NbE 教程中的 systemt 语言。
 
-- Exp.infer
+- Exp.repr
 - Exp.check
 - value
 - Env
