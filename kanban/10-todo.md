@@ -7,7 +7,6 @@
 - test the type checker
 - value
 - neutral
-- normal
 - Exp.evaluate
 - Value.readback
 - play with systemt
