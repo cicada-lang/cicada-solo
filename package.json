@@ -10,11 +10,11 @@
     "lang0": "./bin/lang0.js"
   },
   "devDependencies": {
-    "@types/assert": "^1.4.7",
+    "@types/assert": "^1.5.1",
     "@types/fs-readdir-recursive": "^1.0.0",
     "@types/glob": "^7.1.2",
     "@types/nanoid": "^2.1.0",
-    "@types/node": "^14.0.13",
+    "@types/node": "^14.0.14",
     "typescript": "^3.9.5"
   },
   "dependencies": {

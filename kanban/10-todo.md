@@ -56,9 +56,11 @@
 
 # typer
 
-# 填充类型（Fulfilling type）的推演规则。
-
 # 归纳类型（Inductive type）的推演规则。
+
+- Only one abstraction away.
+
+# 填充类型（Fulfilling type）的推演规则。
 
 # 我们需要 develop 这个关键词，来在证明时，把更多的信息包含在语境中。
 
