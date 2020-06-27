@@ -4,27 +4,21 @@
 
 # lang1 -- 实现 NbE 教程中的 systemt 语言。
 
-- test the type checker
 - value
 - neutral
-- Exp.evaluate
 - Value.readback
+- Exp.evaluate
 - play with systemt
 
-- we need type in normal form,
-  because each type can have its own equality
-  (such as eta equivalence of function type),
-  and normal form is defined as,
-  the canonical representative of the equivalence class
-  induced by the equality judgment,
-  such that comparing normal forms for alpha-equivalence
-  is sufficient to decide whether two expressions are equal.
-
-- normal form require equality,
-  equality require type,
-  thus normal form require type.
+- Can we transform the mutual recursive definition of
+  Value Neutral Normal into single recursive definition of Value?
+  - by the technique of "The seasoned schemer"?
 
 # 为所实现的简单几个语言设计实用的命令行工具与测试框架。
+
+- for type checker
+- for NbE
+- for evaluator
 
 # church-encoding
 
