@@ -6,7 +6,8 @@
 
 - test the type checker
 - value
-- Env
+- neutral
+- normal
 - Exp.evaluate
 - Value.readback
 - play with systemt
@@ -19,6 +20,10 @@
   induced by the equality judgment,
   such that comparing normal forms for alpha-equivalence
   is sufficient to decide whether two expressions are equal.
+
+- normal form require equality,
+  equality require type,
+  thus normal form require type.
 
 # 为所实现的简单几个语言设计实用的命令行工具与测试框架。
 
