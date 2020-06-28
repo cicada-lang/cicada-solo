@@ -3,5 +3,5 @@
   one = the[Nat](Succ(zero))
   two = the[Nat](Succ(one))
   id = the[(Nat) -> Nat]((x) => x)
-  the[(Nat) -> Nat]((_) => id(two))
+  the[(Nat) -> Nat]((_) => id(id(id(id(two)))))
 }
