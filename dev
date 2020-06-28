@@ -49,7 +49,7 @@ function test_lang1 {
     do
         echo ""
         echo "[test lang1] $file"
-        if ! time $lang1 check $file
+        if ! time $lang1 eval $file
         then
             exit 1
         fi

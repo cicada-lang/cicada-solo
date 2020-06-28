@@ -13,7 +13,7 @@ export function run(file: string, opts: any): void {
     const ctx = Ctx.init()
     const t = Exp.infer(ctx, exp)
     const env = Env.init()
-    console.log(`${Exp.repr(exp)}: ${Ty.repr(t)}`)
+    console.log(`${Exp.repr(Exp.normalize(exp))}: ${Ty.repr(t)}`)
   } catch (error) {
     if (error instanceof Exp.Trace.Trace) {
       const trace = error
