@@ -12,7 +12,6 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           return result
         } else {
           throw new Exp.Trace.Trace(
-            exp,
             ut.aline(`
               |I see variable ${exp.name} during evaluate,
               |but I can not find it in the environment.

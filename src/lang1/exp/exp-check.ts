@@ -19,7 +19,6 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
           }
           default: {
             throw new Exp.Trace.Trace(
-              exp,
               ut.aline(`
                 |When checking ${Exp.repr(exp)},
                 |I am expecting the type to be Ty.Arrow,
@@ -38,7 +37,6 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
           }
           default: {
             throw new Exp.Trace.Trace(
-              exp,
               ut.aline(`
                 |When checking ${Exp.repr(exp)},
                 |I am expecting the type to be Ty.Nat,
@@ -59,7 +57,6 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
           }
           default: {
             throw new Exp.Trace.Trace(
-              exp,
               ut.aline(`
                 |When checking ${Exp.repr(exp)},
                 |I am expecting the type to be Ty.Nat,
@@ -79,7 +76,6 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
           return
         } else {
           throw new Exp.Trace.Trace(
-            exp,
             ut.aline(`
               |When checking ${Exp.repr(exp)},
               |I infer the type to be ${Ty.repr(u)},

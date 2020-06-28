@@ -13,7 +13,6 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
         const t = Ctx.lookup(ctx, exp.name)
         if (t === undefined) {
           throw new Exp.Trace.Trace(
-            exp,
             ut.aline(`
               |I see variable ${exp.name} during infer,
               |but I can not find it in the environment.
@@ -37,7 +36,6 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
           }
           default: {
             throw new Exp.Trace.Trace(
-              exp,
               ut.aline(`
                 |I am expecting the rator_t to be Ty.Arrow,
                 |but it is ${Ty.repr(rator_t)}.
@@ -84,7 +82,6 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
           }
           default: {
             throw new Exp.Trace.Trace(
-              exp,
               ut.aline(`
               |I am expecting target_t to be Ty.Nat,
               |but it is ${Ty.repr(target_t)}.
@@ -105,7 +102,6 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       case "Exp.Zero":
       case "Exp.Succ": {
         throw new Exp.Trace.Trace(
-          exp,
           ut.aline(`
             |I can not infer the type of ${Exp.repr(exp)}.
             |I suggest you add a type annotation to the expression.

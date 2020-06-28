@@ -4,7 +4,6 @@
 
 # lang1 -- 实现 NbE 教程中的 systemt 语言。
 
-- Exp.do_rec
 - Value.readback
   the typed version of the readback procedure
   takes the types into account to perform eta-expansion.

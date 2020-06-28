@@ -13,7 +13,6 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           return result
         } else {
           throw new Exp.Trace.Trace(
-            exp,
             ut.aline(`
               |I see variable ${exp.name} during evaluate,
               |but I can not find it in the environment.
@@ -30,7 +29,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       }
       case "Exp.Ap": {
         const { rator, rand } = exp
-        return Exp.do_ap(exp, evaluate(env, rator), evaluate(env, rand))
+        return Exp.do_ap(evaluate(env, rator), evaluate(env, rand))
       }
       case "Exp.Suite": {
         for (const def of exp.defs) {
@@ -50,13 +49,11 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         }
       }
       case "Exp.Rec": {
-        const { t, target, base, step } = exp
         return Exp.do_rec(
-          exp,
-          t,
-          evaluate(env, target),
-          evaluate(env, base),
-          evaluate(env, step)
+          exp.t,
+          evaluate(env, exp.target),
+          evaluate(env, exp.base),
+          evaluate(env, exp.step)
         )
       }
       case "Exp.The": {
