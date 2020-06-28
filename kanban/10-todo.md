@@ -4,8 +4,10 @@
 
 # lang1 -- 实现 NbE 教程中的 systemt 语言。
 
-- Value.readback
 - Exp.evaluate
+- Value.readback
+  the typed version of the readback procedure
+  takes the types into account to perform eta-expansion.
 - play with systemt
 
 # 为所实现的简单几个语言设计实用的命令行工具与测试框架。
