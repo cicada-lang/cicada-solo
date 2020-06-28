@@ -59,10 +59,10 @@ export function readback(
 function value_arg_name(value: Value.Value): string {
   switch (value.kind) {
     case "Value.Fn": {
-      // NOTE handle eta-expansion.
       return value.name
     }
     default: {
+      // NOTE handle eta-expansion.
       return "x"
     }
   }
