@@ -26,15 +26,15 @@ export function do_rec(
         case "Ty.Nat": {
           const step_t: Ty.Arrow = {
             kind: "Ty.Arrow",
-            arg: { kind: "Ty.Nat" },
-            ret: { kind: "Ty.Arrow", arg: t, ret: t },
+            arg_t: { kind: "Ty.Nat" },
+            ret_t: { kind: "Ty.Arrow", arg_t: t, ret_t: t },
           }
           return {
             kind: "Value.Reflection",
             t: t,
             neutral: {
               kind: "Neutral.Rec",
-              t: t,
+              ret_t: t,
               target: target.neutral,
               base: new Normal.Normal(t, base),
               step: new Normal.Normal(step_t, step),

@@ -6,6 +6,6 @@ export interface Nat {
 
 export interface Arrow {
   kind: "Ty.Arrow"
-  arg: Ty
-  ret: Ty
+  arg_t: Ty
+  ret_t: Ty
 }

@@ -20,7 +20,7 @@ export function readback(used: Set<string>, neutral: Neutral.Neutral): Exp.Exp {
     case "Neutral.Rec": {
       return {
         kind: "Exp.Rec",
-        t: neutral.t,
+        t: neutral.ret_t,
         target: Neutral.readback(used, neutral.target),
         base: Normal.readback(used, neutral.base),
         step: Normal.readback(used, neutral.step),

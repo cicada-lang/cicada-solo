@@ -31,8 +31,8 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
         const rator_t = Exp.infer(ctx, rator)
         switch (rator_t.kind) {
           case "Ty.Arrow": {
-            Exp.check(ctx, rand, rator_t.arg)
-            return rator_t.ret
+            Exp.check(ctx, rand, rator_t.arg_t)
+            return rator_t.ret_t
           }
           default: {
             throw new Exp.Trace.Trace(
@@ -76,8 +76,8 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
             Exp.check(ctx, base, t)
             Exp.check(ctx, step, {
               kind: "Ty.Arrow",
-              arg: { kind: "Ty.Nat" },
-              ret: { kind: "Ty.Arrow", arg: t, ret: t },
+              arg_t: { kind: "Ty.Nat" },
+              ret_t: { kind: "Ty.Arrow", arg_t: t, ret_t: t },
             })
           }
           default: {

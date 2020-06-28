@@ -32,11 +32,11 @@ export function readback(
       const name = freshen(used, value_arg_name(value))
       const v: Value.Reflection = {
         kind: "Value.Reflection",
-        t: t.arg,
+        t: t.arg_t,
         neutral: { kind: "Neutral.Var", name },
       }
       const ret = Exp.do_ap(value, v)
-      const body = Value.readback(new Set([...used, name]), t.ret, ret)
+      const body = Value.readback(new Set([...used, name]), t.ret_t, ret)
       return { kind: "Exp.Fn", name, body }
     }
     default: {

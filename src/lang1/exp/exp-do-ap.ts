@@ -15,11 +15,11 @@ export function do_ap(rator: Value.Value, rand: Value.Value): Value.Value {
         case "Ty.Arrow": {
           return {
             kind: "Value.Reflection",
-            t: rator.t.ret,
+            t: rator.t.ret_t,
             neutral: {
               kind: "Neutral.Ap",
               rator: rator.neutral,
-              rand: new Normal.Normal(rator.t.arg, rand),
+              rand: new Normal.Normal(rator.t.arg_t, rand),
             },
           }
         }

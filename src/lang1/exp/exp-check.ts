@@ -13,8 +13,8 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
         switch (t.kind) {
           case "Ty.Arrow": {
             ctx = Ctx.clone(ctx)
-            Ctx.extend(ctx, exp.name, t.arg)
-            Exp.check(ctx, exp.body, t.ret)
+            Ctx.extend(ctx, exp.name, t.arg_t)
+            Exp.check(ctx, exp.body, t.ret_t)
             return
           }
           default: {

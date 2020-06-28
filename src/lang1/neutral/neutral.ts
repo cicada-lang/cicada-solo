@@ -16,7 +16,7 @@ export interface Ap {
 
 export interface Rec {
   kind: "Neutral.Rec"
-  t: Ty.Ty
+  ret_t: Ty.Ty
   target: Neutral
   base: Normal.Normal
   step: Normal.Normal

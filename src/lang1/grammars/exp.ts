@@ -29,8 +29,8 @@ export function ty_matcher(tree: pt.Tree.Tree): Ty.Ty {
     arrow: ([, arg, , , , ret]) => {
       return {
         kind: "Ty.Arrow",
-        arg: ty_matcher(arg),
-        ret: ty_matcher(ret),
+        arg_t: ty_matcher(arg),
+        ret_t: ty_matcher(ret),
       }
     },
   })(tree)
