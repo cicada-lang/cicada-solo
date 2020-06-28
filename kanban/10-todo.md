@@ -1,3 +1,9 @@
+# tartlet
+
+# pie
+
+# typer
+
 # learn
 
 - search wikipedia about type subsumption
@@ -41,12 +47,6 @@
 - x in x test
   - S <- "x" S "x" | "x"
 - a version of partech that use env
-
-# tartlet
-
-# pie
-
-# typer
 
 # 归纳类型（Inductive type）的推演规则。
 
