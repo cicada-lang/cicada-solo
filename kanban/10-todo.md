@@ -1,8 +1,24 @@
 # tartlet
 
+- Value
+- Ty
+- Exp.alpha_equal
+- Exp.evaluate
+- Normal
+- Neutral
+- Value.readback
+- Normal.readback
+- Neutral.readback
+- Ctx
+- Exp.infer
+- Exp.check
+- helper function for error reporting
+
 # pie
 
 # typer
+
+- 设计实用的命令行工具与测试框架。
 
 # learn
 
@@ -13,12 +29,6 @@
 - learn more about type directed partial evaluation.
 
 # Play with systemt
-
-# 为所实现的简单几个语言设计实用的命令行工具与测试框架。
-
-- for type checker
-- for NbE
-- for evaluator
 
 # church-encoding
 
