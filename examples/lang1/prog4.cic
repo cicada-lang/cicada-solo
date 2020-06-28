@@ -1,0 +1,7 @@
+{
+  zero = the[Nat](Zero)
+  one = the[Nat](Succ(zero))
+  two = the[Nat](Succ(one))
+  id = the[(Nat) -> Nat]((x) => x)
+  the[(Nat) -> Nat]((_) => id(two))
+}

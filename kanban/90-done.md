@@ -1,4 +1,8 @@
-# lang0 -- 实现 NbE 教程中的 Untyped lambda calculus 语言。
+# lang1 -- 实现 NbE 教程中的 System T。
+
+- 完成：2020-06-28
+
+# lang0 -- 实现 NbE 教程中的 Untyped lambda calculus。
 
 - 完成：2020-06-23
 
