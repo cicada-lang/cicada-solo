@@ -4,12 +4,15 @@
 
 # lang1 -- 实现 NbE 教程中的 systemt 语言。
 
-- Exp.do_ap
 - Exp.do_rec
 - Value.readback
   the typed version of the readback procedure
   takes the types into account to perform eta-expansion.
-- play with systemt
+
+- Why we do not put type in all Neutral?
+  but put a type in front of a Neutral when it is viewed as a Value?
+
+# Play with systemt
 
 # 为所实现的简单几个语言设计实用的命令行工具与测试框架。
 
