@@ -21,7 +21,7 @@ export function do_rec(
         Exp.do_rec(t, target.prev, base, step)
       )
     }
-    case "Value.Neutral": {
+    case "Value.Reflection": {
       switch (target.t.kind) {
         case "Ty.Nat": {
           const step_t: Ty.Arrow = {
@@ -30,7 +30,7 @@ export function do_rec(
             ret: { kind: "Ty.Arrow", arg: t, ret: t },
           }
           return {
-            kind: "Value.Neutral",
+            kind: "Value.Reflection",
             t: t,
             neutral: {
               kind: "Neutral.Rec",
@@ -45,7 +45,7 @@ export function do_rec(
           throw new Exp.Trace.Trace(
             ut.aline(`
               |This is a internal error.
-              |During do_rec, I found the target.kind is Value.Neutral,
+              |During do_rec, I found the target.kind is Value.Reflection,
               |then I expect the target.t.kind to be Ty.Nat,
               |but it is ${target.t.kind}.
               |`)
@@ -58,7 +58,7 @@ export function do_rec(
         ut.aline(`
           |This is a internal error.
           |During do_rec, I expect the target.kind to be
-          |  Value.Zero or Value.Succ or Value.Neutral,
+          |  Value.Zero or Value.Succ or Value.Reflection,
           |but the target.kind is ${target.kind}.
           |`)
       )

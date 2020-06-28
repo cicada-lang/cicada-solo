@@ -10,11 +10,11 @@ export function do_ap(rator: Value.Value, rand: Value.Value): Value.Value {
       const new_env = Env.extend(Env.clone(rator.env), rator.name, rand)
       return Exp.evaluate(new_env, rator.body)
     }
-    case "Value.Neutral": {
+    case "Value.Reflection": {
       switch (rator.t.kind) {
         case "Ty.Arrow": {
           return {
-            kind: "Value.Neutral",
+            kind: "Value.Reflection",
             t: rator.t.ret,
             neutral: {
               kind: "Neutral.Ap",
@@ -27,7 +27,7 @@ export function do_ap(rator: Value.Value, rand: Value.Value): Value.Value {
           throw new Exp.Trace.Trace(
             ut.aline(`
               |This is a internal error.
-              |During do_ap, I found the rator.kind is Value.Neutral,
+              |During do_ap, I found the rator.kind is Value.Reflection,
               |then I expect the rator.t.kind to be Ty.Arrow,
               |but it is ${rator.t.kind}.
               |`)
@@ -39,7 +39,7 @@ export function do_ap(rator: Value.Value, rand: Value.Value): Value.Value {
       throw new Exp.Trace.Trace(
         ut.aline(`
           |This is a internal error.
-          |During do_ap, I expect the rator.kind to be Value.Fn or Value.Neutral,
+          |During do_ap, I expect the rator.kind to be Value.Fn or Value.Reflection,
           |but the rator.kind is ${rator.kind}.
           |`)
       )

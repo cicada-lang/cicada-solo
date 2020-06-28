@@ -1,14 +1,14 @@
 import * as Ty from "../ty"
 import * as Exp from "../exp"
 import * as Env from "../env"
-import * as Neu from "../neutral"
+import * as Neutral from "../neutral"
 
-export type Value = Neutral | Fn | Zero | Succ
+export type Value = Reflection | Fn | Zero | Succ
 
-export interface Neutral {
-  kind: "Value.Neutral"
+export interface Reflection {
+  kind: "Value.Reflection"
   t: Ty.Ty
-  neutral: Neu.Neutral
+  neutral: Neutral.Neutral
 }
 
 export interface Fn {

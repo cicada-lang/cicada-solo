@@ -8,9 +8,9 @@ export function do_ap(rator: Value.Value, rand: Value.Value): Value.Value {
       const new_env = Env.extend(Env.clone(rator.env), rator.name, rand)
       return Exp.evaluate(new_env, rator.body)
     }
-    case "Value.Neutral": {
+    case "Value.Reflection": {
       return {
-        kind: "Value.Neutral",
+        kind: "Value.Reflection",
         neutral: {
           kind: "Neutral.Ap",
           rator: rator.neutral,
