@@ -4,15 +4,9 @@
 
 # lang1 -- 实现 NbE 教程中的 systemt 语言。
 
-- value
-- neutral
 - Value.readback
 - Exp.evaluate
 - play with systemt
-
-- Can we transform the mutual recursive definition of
-  Value Neutral Normal into single recursive definition of Value?
-  - by the technique of "The seasoned schemer"?
 
 # 为所实现的简单几个语言设计实用的命令行工具与测试框架。
 

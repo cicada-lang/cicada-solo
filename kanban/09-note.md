@@ -1,3 +1,12 @@
+# Value, Neutral and Normal
+
+- Can we transform the mutual recursive definition of
+  Value Neutral Normal into single recursive definition of Value?
+  - by the technique of "The seasoned schemer"?
+
+- We can not, because Neutral is part of Value,
+  and Neutral recur on Neutral.
+
 # 带名类型（Nominal type）与结构类型（Structural type）。
 
 - 与带名类型相对的是结构类型（Structural type），
