@@ -3,5 +3,8 @@ export * from "./exp-repr"
 export * from "./exp-parse"
 export * from "./exp-check"
 export * from "./exp-infer"
+export * from "./exp-evaluate"
+export * from "./exp-do-ap"
+export * from "./exp-do-rec"
 
 export * as Trace from "./trace"
