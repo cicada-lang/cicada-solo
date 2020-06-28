@@ -25,6 +25,7 @@ function t {
     test_prog_ext node test.js &&
         test_lang0 &&
         test_lang1 &&
+        test_lang1.1 &&
         true
 }
 
@@ -49,6 +50,20 @@ function test_lang1 {
     do
         echo ""
         echo "[test lang1] $file"
+        if ! time $lang1 eval $file
+        then
+            exit 1
+        fi
+    done
+}
+
+function test_lang1.1 {
+    lang1="./bin/lang1.1.js"
+
+    for file in $(find . | grep "^\./examples/lang1" | grep "\.cic$")
+    do
+        echo ""
+        echo "[test lang1.1] $file"
         if ! time $lang1 eval $file
         then
             exit 1

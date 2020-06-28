@@ -4,9 +4,6 @@
   - https://homepage.cs.uiowa.edu/~jgmorrs/eecs662s19/notes/Notes-on-subsumption.html
   - https://en.wikipedia.org/wiki/Subtyping#Subsumption
 
-- Why we do not put type in all Neutral?
-  but put a type in front of a Neutral when it is viewed as a Value?
-
 - learn more about type directed partial evaluation.
 
 # Play with systemt
