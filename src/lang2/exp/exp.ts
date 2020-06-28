@@ -1,7 +1,7 @@
 export type Exp =
   | Var
-  | Fn
   | Pi
+  | Fn
   | Ap
   | Sigma
   | Cons
