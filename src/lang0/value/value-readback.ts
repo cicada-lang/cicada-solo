@@ -10,15 +10,13 @@ export function readback(used: Set<string>, value: Value.Value): Exp.Exp {
     }
     case "Value.Fn": {
       const name = freshen(used, value.name)
-      const body = Exp.do_ap(value, {
+      const v: Value.Reflection = {
         kind: "Value.Reflection",
         neutral: { kind: "Neutral.Var", name },
-      })
-      return {
-        kind: "Exp.Fn",
-        name,
-        body: readback(new Set([...used, name]), body),
       }
+      const ret = Exp.do_ap(value, v)
+      const body = readback(new Set([...used, name]), ret)
+      return { kind: "Exp.Fn", name, body }
     }
   }
 }
