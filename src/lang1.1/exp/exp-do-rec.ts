@@ -1,6 +1,7 @@
 import * as Exp from "../exp"
 import * as Ty from "../ty"
 import * as Env from "../env"
+import * as Trace from "../trace"
 import * as Value from "../value"
 import * as Normal from "../normal"
 import * as ut from "../../ut"
@@ -42,7 +43,7 @@ export function do_rec(
           }
         }
         default: {
-          throw new Exp.Trace.Trace(
+          throw new Trace.Trace(
             ut.aline(`
               |This is a internal error.
               |During do_rec, I found the target.kind is Value.Reflection,
@@ -54,7 +55,7 @@ export function do_rec(
       }
     }
     default: {
-      throw new Exp.Trace.Trace(
+      throw new Trace.Trace(
         ut.aline(`
           |This is a internal error.
           |During do_rec, I expect the target.kind to be

@@ -1,5 +1,6 @@
 import * as Exp from "../exp"
 import * as Env from "../env"
+import * as Trace from "../trace"
 import * as Value from "../value"
 import * as Normal from "../normal"
 import * as ut from "../../ut"
@@ -24,7 +25,7 @@ export function do_ap(rator: Value.Value, rand: Value.Value): Value.Value {
           }
         }
         default: {
-          throw new Exp.Trace.Trace(
+          throw new Trace.Trace(
             ut.aline(`
               |This is a internal error.
               |During do_ap, I found the rator.kind is Value.Reflection,
@@ -36,7 +37,7 @@ export function do_ap(rator: Value.Value, rand: Value.Value): Value.Value {
       }
     }
     default: {
-      throw new Exp.Trace.Trace(
+      throw new Trace.Trace(
         ut.aline(`
           |This is a internal error.
           |During do_ap, I expect the rator.kind to be Value.Fn or Value.Reflection,

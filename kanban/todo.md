@@ -1,6 +1,5 @@
 # tartlet
 
-- generic Trace for lang1.1
 - generic Trace for lang2
 - snapshot test -- also output to console
 - snapshot test -- type checker error report output
