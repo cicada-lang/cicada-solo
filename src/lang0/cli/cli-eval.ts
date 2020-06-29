@@ -1,4 +1,5 @@
 import * as Exp from "../exp"
+import * as Trace from "../trace"
 import process from "process"
 import fs from "fs"
 
@@ -8,9 +9,9 @@ export function run(file: string, opts: any): void {
   try {
     console.log(Exp.repr(Exp.normalize(exp)))
   } catch (error) {
-    if (error instanceof Exp.Trace.Trace) {
+    if (error instanceof Trace.Trace) {
       const trace = error
-      console.log(Exp.Trace.repr(trace))
+      console.log(Trace.repr(trace, Exp.repr))
       process.exit(1)
     } else {
       throw error

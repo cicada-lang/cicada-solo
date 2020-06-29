@@ -1,7 +1,12 @@
+- support comment in parser
+
 # tartlet
 
-- no lang1.1
-- generic Trace for lang0
+- snapshot test
+  - eval output
+  - check succ output
+  - check fail output
+- generic Trace for lang1.1
 - generic Trace for lang2
 - Exp.evaluate
 - Exp.alpha_equal
@@ -33,7 +38,6 @@
 
 # church-encoding
 
-- support comment in parser
 - church-boolean.cic
 - church-numeral-predicates.cle
 - church-pair.cic
