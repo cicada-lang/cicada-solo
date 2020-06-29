@@ -22,7 +22,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
               ut.aline(`
                 |When checking ${Exp.repr(exp)},
                 |I am expecting the type to be Ty.Arrow,
-                |but the expected type is ${Ty.repr(t)}.
+                |but the given type is ${Ty.repr(t)}.
                 |`)
             )
           }
@@ -40,7 +40,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
               ut.aline(`
                 |When checking ${Exp.repr(exp)},
                 |I am expecting the type to be Ty.Nat,
-                |but the expected type is ${Ty.repr(t)}.
+                |but the given type is ${Ty.repr(t)}.
                 |`)
             )
           }
@@ -60,7 +60,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
               ut.aline(`
                 |When checking ${Exp.repr(exp)},
                 |I am expecting the type to be Ty.Nat,
-                |but the expected type is ${Ty.repr(t)}.
+                |but the given type is ${Ty.repr(t)}.
                 |`)
             )
           }
@@ -79,7 +79,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
             ut.aline(`
               |When checking ${Exp.repr(exp)},
               |I infer the type to be ${Ty.repr(u)},
-              |but the expected type is ${Ty.repr(t)}.
+              |but the given type is ${Ty.repr(t)}.
               |`)
           )
         }
