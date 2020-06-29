@@ -1,10 +1,14 @@
 # tartlet
 
-- Exp.alpha_equal
+- generic Trace instead of Exp.Trace
+  - take a repr function as argument
 - Exp.evaluate
+- Exp.alpha_equal
+  - use exception todo error report
 - Value.readback
 - Normal.readback
 - Neutral.readback
+- Value.convert
 - Ctx
 - Exp.infer
 - Exp.check
