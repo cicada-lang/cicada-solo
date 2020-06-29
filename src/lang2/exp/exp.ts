@@ -134,6 +134,7 @@ export interface Str {
 
 export interface Quote {
   kind: "Exp.Quote"
+  str: string
 }
 
 export interface Type {
