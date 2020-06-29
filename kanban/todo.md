@@ -1,5 +1,3 @@
-- support comment in parser
-
 # tartlet
 
 - snapshot test
