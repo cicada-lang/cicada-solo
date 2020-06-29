@@ -1,7 +1,6 @@
 # tartlet
 
 - Value
-- Closure
 - Exp.alpha_equal
 - Exp.evaluate
 - Normal

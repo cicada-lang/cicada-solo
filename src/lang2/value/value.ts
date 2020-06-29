@@ -1,7 +1,6 @@
 import * as Ty from "../ty"
 
-export type Value =
-  "TODO"
+export type Value = "TODO"
 // | Fn
 // | Pi
 // | Sigma
