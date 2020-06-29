@@ -1,9 +1,6 @@
 # tartlet
 
-- snapshot test
-  - eval output
-  - check succ output
-  - check fail output
+- snapshot test -- type checker error report output
 - generic Trace for lang1.1
 - generic Trace for lang2
 - Exp.evaluate

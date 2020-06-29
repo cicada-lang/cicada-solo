@@ -36,7 +36,7 @@ function test_lang0 {
     do
         echo ""
         echo "[test lang0] $file"
-        if ! time $lang0 eval $file
+        if ! time $lang0 eval $file > $file.out
         then
             exit 1
         fi
@@ -50,7 +50,7 @@ function test_lang1 {
     do
         echo ""
         echo "[test lang1] $file"
-        if ! time $lang1 eval $file
+        if ! time $lang1 eval $file > $file.out
         then
             exit 1
         fi
@@ -64,7 +64,7 @@ function test_lang1.1 {
     do
         echo ""
         echo "[test lang1.1] $file"
-        if ! time $lang1 eval $file
+        if ! time $lang1 eval $file > $file.out.1
         then
             exit 1
         fi
