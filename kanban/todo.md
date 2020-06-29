@@ -1,8 +1,9 @@
 # tartlet
 
-- snapshot test -- type checker error report output
 - generic Trace for lang1.1
 - generic Trace for lang2
+- snapshot test -- also output to console
+- snapshot test -- type checker error report output
 - Exp.evaluate
 - Exp.alpha_equal
   - use exception todo error report
