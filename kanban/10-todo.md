@@ -1,6 +1,5 @@
 # tartlet
 
-- Neutral
 - Exp.alpha_equal
 - Exp.evaluate
 - Value.readback
