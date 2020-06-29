@@ -2,6 +2,7 @@ import * as Ty from "../ty"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Env from "../env"
+import * as Trace from "../trace"
 import * as ut from "../../ut"
 
 export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
@@ -12,7 +13,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         if (result !== undefined) {
           return result
         } else {
-          throw new Exp.Trace.Trace(
+          throw new Trace.Trace(
             ut.aline(`
               |I see variable ${exp.name} during evaluate,
               |but I can not find it in the environment.
@@ -61,7 +62,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       }
     }
   } catch (error) {
-    if (error instanceof Exp.Trace.Trace) {
+    if (error instanceof Trace.Trace) {
       const trace = error
       trace.previous.push(exp)
       throw trace

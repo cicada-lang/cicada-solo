@@ -1,6 +1,7 @@
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as Ty from "../ty"
+import * as Trace from "../trace"
 import * as ut from "../../ut"
 
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
@@ -18,7 +19,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
             return
           }
           default: {
-            throw new Exp.Trace.Trace(
+            throw new Trace.Trace(
               ut.aline(`
                 |When checking ${Exp.repr(exp)},
                 |I am expecting the type to be Ty.Arrow,
@@ -36,7 +37,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
             return
           }
           default: {
-            throw new Exp.Trace.Trace(
+            throw new Trace.Trace(
               ut.aline(`
                 |When checking ${Exp.repr(exp)},
                 |I am expecting the type to be Ty.Nat,
@@ -56,7 +57,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
             return
           }
           default: {
-            throw new Exp.Trace.Trace(
+            throw new Trace.Trace(
               ut.aline(`
                 |When checking ${Exp.repr(exp)},
                 |I am expecting the type to be Ty.Nat,
@@ -75,7 +76,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
         if (ut.equal(t, u)) {
           return
         } else {
-          throw new Exp.Trace.Trace(
+          throw new Trace.Trace(
             ut.aline(`
               |When checking ${Exp.repr(exp)},
               |I infer the type to be ${Ty.repr(u)},
@@ -86,7 +87,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       }
     }
   } catch (error) {
-    if (error instanceof Exp.Trace.Trace) {
+    if (error instanceof Trace.Trace) {
       const trace = error
       trace.previous.push(exp)
       throw trace

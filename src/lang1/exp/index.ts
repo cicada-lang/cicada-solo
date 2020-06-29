@@ -7,5 +7,3 @@ export * from "./exp-evaluate"
 export * from "./exp-do-ap"
 export * from "./exp-do-rec"
 export * from "./exp-normalize"
-
-export * as Trace from "./trace"

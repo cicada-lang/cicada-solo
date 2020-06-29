@@ -1,7 +1,8 @@
 # tartlet
 
-- generic Trace instead of Exp.Trace
-  - Trace.repr take a repr function as argument
+- no lang1.1
+- generic Trace for lang0
+- generic Trace for lang2
 - Exp.evaluate
 - Exp.alpha_equal
   - use exception todo error report
@@ -89,3 +90,18 @@
 # 形式化 Category of Groups。
 
 # 形式化 Number theroy：https://en.wikipedia.org/wiki/Number_theory
+
+# 我们需要支持相互递归函数。
+
+- 可以通过使用副作用的 Env API 来实现。
+- 需要的时候可以 clone Env。
+
+# 我们需要支持 Inductive type（为 Class 的语义）。
+
+# 我们需要支持 Fulfilling type（为 Data 的语义）。
+
+# 实现 pie，并用《The Litte Typer》来做测试。再次练习实现技术。
+
+# 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
+
+# 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
