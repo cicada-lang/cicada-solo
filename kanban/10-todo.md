@@ -1,7 +1,7 @@
 # tartlet
 
 - generic Trace instead of Exp.Trace
-  - take a repr function as argument
+  - Trace.repr take a repr function as argument
 - Exp.evaluate
 - Exp.alpha_equal
   - use exception todo error report
