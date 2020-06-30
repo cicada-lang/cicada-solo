@@ -1,7 +1,7 @@
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as Ty from "../ty"
-import * as Trace from "../trace"
+import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {

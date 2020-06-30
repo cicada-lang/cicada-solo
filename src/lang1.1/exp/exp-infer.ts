@@ -1,6 +1,6 @@
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
-import * as Trace from "../trace"
+import * as Trace from "../../trace"
 import * as Ty from "../ty"
 import * as ut from "../../ut"
 

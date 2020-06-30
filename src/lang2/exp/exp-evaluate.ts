@@ -1,6 +1,6 @@
-import * as Ty from "../ty"
 import * as Exp from "../exp"
 import * as Value from "../value"
+import * as Closure from "../closure"
 import * as Env from "../env"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
@@ -21,53 +21,47 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           )
         }
       }
+      case "Exp.Pi": {
+        return {
+          kind: "Value.Pi",
+          arg_t: Exp.evaluate(env, exp.arg_t),
+          closure: new Closure.Closure(env, exp.name, exp.ret_t),
+        }
+      }
       case "Exp.Fn": {
         return {
-          ...exp,
           kind: "Value.Fn",
-          env,
+          closure: new Closure.Closure(env, exp.name, exp.body),
         }
       }
       case "Exp.Ap": {
         const { rator, rand } = exp
         return Exp.do_ap(evaluate(env, rator), evaluate(env, rand))
       }
-      case "Exp.Suite": {
-        for (const def of exp.defs) {
-          env = Env.extend(Env.clone(env), def.name, evaluate(env, def.exp))
-        }
-        return evaluate(env, exp.body)
-      }
-      case "Exp.Zero": {
-        return {
-          kind: "Value.Zero",
-        }
-      }
-      case "Exp.Succ": {
-        return {
-          kind: "Value.Succ",
-          prev: evaluate(env, exp.prev),
-        }
-      }
-      case "Exp.Rec": {
-        return Exp.do_rec(
-          exp.t,
-          evaluate(env, exp.target),
-          evaluate(env, exp.base),
-          evaluate(env, exp.step)
-        )
-      }
+      case "Exp.Sigma":
+      case "Exp.Cons":
+      case "Exp.Car":
+      case "Exp.Cdr":
+      case "Exp.Nat":
+      case "Exp.Zero":
+      case "Exp.Succ":
+      case "Exp.NatInd":
+      case "Exp.Equal":
+      case "Exp.Same":
+      case "Exp.Replace":
+      case "Exp.Trivial":
+      case "Exp.Sole":
+      case "Exp.Absurd":
+      case "Exp.AbsurdInd":
+      case "Exp.Str":
+      case "Exp.Quote":
+      case "Exp.Type":
+      case "Exp.Suite":
       case "Exp.The": {
-        return evaluate(env, exp.exp)
+        throw new Error("TODO")
       }
     }
   } catch (error) {
-    if (error instanceof Trace.Trace) {
-      const trace = error
-      trace.previous.push(exp)
-      throw trace
-    } else {
-      throw error
-    }
+    Trace.maybe_push(error, exp)
   }
 }

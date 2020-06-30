@@ -1,5 +1,5 @@
 import * as Exp from "../exp"
-import * as Trace from "../trace"
+import * as Trace from "../../trace"
 import process from "process"
 import fs from "fs"
 

@@ -1,9 +1,5 @@
 # tartlet
 
-- use nodejs to write ./dev -- instead of bash
-- generic Trace for lang2
-- snapshot test -- also output to console
-- snapshot test -- type checker error report output
 - Exp.evaluate
 - Exp.alpha_equal
   - use exception todo error report
@@ -16,9 +12,15 @@
 - Exp.check
 - helper function for error reporting
 
+# testing
+
+- use nodejs to write ./dev -- instead of bash
+- snapshot test -- also output to console
+- snapshot test -- type checker error report output
+
 # pie
 
-# typer
+# the little typer
 
 - 设计实用的命令行工具与测试框架。
 

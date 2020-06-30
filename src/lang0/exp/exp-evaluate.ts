@@ -1,7 +1,7 @@
 import * as Exp from "../exp"
 import * as Env from "../env"
 import * as Value from "../value"
-import * as Trace from "../trace"
+import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
 export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
