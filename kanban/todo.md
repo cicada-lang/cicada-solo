@@ -2,7 +2,7 @@
 
 - Exp.evaluate
 - Exp.alpha_equal
-  - use exception todo error report
+  - use exception -- try and catch is part of the API
 - Value.readback
 - Normal.readback
 - Neutral.readback
@@ -11,6 +11,7 @@
 - Exp.infer
 - Exp.check
 - helper function for error reporting
+  - like the tutorial
 
 # testing
 
