@@ -4,7 +4,6 @@ import * as Ctx from "../ctx"
 import * as Env from "../env"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
-import process from "process"
 import fs from "fs"
 
 export function run(file: string, opts: any): void {
@@ -16,12 +15,6 @@ export function run(file: string, opts: any): void {
     const env = Env.init()
     console.log(`${Exp.repr(Exp.normalize(exp))}: ${Ty.repr(t)}`)
   } catch (error) {
-    if (error instanceof Trace.Trace) {
-      const trace = error
-      console.log(Exp.Trace.repr(trace))
-      process.exit(1)
-    } else {
-      throw error
-    }
+    Trace.maybe_report(error, Exp.repr)
   }
 }
