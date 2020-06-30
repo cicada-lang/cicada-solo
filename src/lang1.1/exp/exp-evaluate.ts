@@ -62,12 +62,6 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       }
     }
   } catch (error) {
-    if (error instanceof Trace.Trace) {
-      const trace = error
-      trace.previous.push(exp)
-      throw trace
-    } else {
-      throw error
-    }
+    Trace.maybe_push(error, exp)
   }
 }

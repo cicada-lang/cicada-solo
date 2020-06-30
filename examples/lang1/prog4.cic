@@ -3,6 +3,6 @@
   one = the[Nat](Succ(zero))
   two = the[Nat](Succ(one))
   id = the[(Nat) -> Nat]((x) => x)
-  // the[(Nat) -> Nat]((_) => (_) => id(id(id(id(two)))))
-  the[(Nat) -> (Nat) -> Nat]((_) => (_) => id(id(id(id(two)))))
+  the[(Nat) -> Nat]((_) => (_) => id(id(id(id(two)))))
+  // the[(Nat) -> (Nat) -> Nat]((_) => (_) => id(id(id(id(two)))))
 }

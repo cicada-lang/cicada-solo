@@ -87,12 +87,6 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       }
     }
   } catch (error) {
-    if (error instanceof Trace.Trace) {
-      const trace = error
-      trace.previous.push(exp)
-      throw trace
-    } else {
-      throw error
-    }
+    Trace.maybe_push(error, exp)
   }
 }

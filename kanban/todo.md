@@ -1,5 +1,6 @@
 # tartlet
 
+- Trace.maybe_report
 - Exp.evaluate
 - Exp.alpha_equal
   - use exception todo error report
