@@ -1,105 +1,90 @@
-#!/usr/bin/env bash
+#!/usr/bin/env node
 
-function install {
-    npm install
+const util = require("util")
+const child_process = require("child_process")
+const exec = util.promisify(child_process.exec)
+const process = require("process")
+const path = require("path")
+const fs = require("fs")
+const glob = require("glob")
+const Promise = require("bluebird")
+
+let dev = {}
+
+function print(the) {
+  const { stdout, stderr } = the
+  if (stdout) {
+    console.log(`${stdout}`)
+  }
+  if (stderr) {
+    console.error(`${stderr}`)
+  }
+  return the
 }
 
-function build {
-    npm run build
+dev["install"] = () => exec("npm install").then(print)
+
+dev["build"] = () => exec("npm run build").then(print)
+
+dev["format"] = () => exec("npm run format").then(print)
+
+function test_prog(prog, pattern, ext, opts) {
+  const results = glob
+    .sync(pattern)
+    .filter((file) => file.endsWith(ext))
+    .map((file) =>
+      exec(`${prog} ${file}`).then((the) => {
+        return { ...the, file }
+      })
+    )
+
+  return Promise.all(results).then((results) => {
+    for (const the of results) {
+      console.log(`test_prog:`)
+      console.log(`  prog: ${prog}`)
+      console.log(`  file: ${the.file}`)
+      if (opts && opts.snapshot && opts.snapshot.stdout) {
+        console.log(`  snapshot.stdout: ${the.file}${opts.snapshot.stdout}`)
+        fs.promises.writeFile(`${the.file}${opts.snapshot.stdout}`, the.stdout)
+      }
+      print(the)
+    }
+  })
 }
 
-function watch {
-    npm run watch
+dev["test_lang0"] = () =>
+  test_prog("./bin/lang0.js eval", "examples/lang0/**", ".cic", {
+    snapshot: { stdout: ".out" },
+  })
+
+dev["test_lang1"] = () =>
+  test_prog("./bin/lang1.js eval", "examples/lang1/**", ".cic", {
+    snapshot: { stdout: ".out" },
+  })
+
+dev["test_lang1.1"] = () =>
+  test_prog("./bin/lang1.1.js eval", "examples/lang1/**", ".cic", {
+    snapshot: { stdout: ".out.1" },
+  })
+
+dev["test_lib"] = () => test_prog("node", "lib/**", ".test.js")
+
+dev["t"] = () => {
+  dev["test_lib"]()
+  dev["test_lang0"]()
+  dev["test_lang1"]()
+  dev["test_lang1.1"]()
 }
 
-function format {
-    npm run format
+async function main() {
+  if (process.argv.length <= 2) {
+    for (const name of Object.keys(dev)) {
+      console.log(name)
+    }
+  }
+
+  const commands = process.argv.slice(2)
+  Promise.each(commands, (command) => dev[command]())
 }
 
-function docs {
-    mkdir -p docs/api &&
-        npx typedoc src --out docs/api --mode modules --ignoreCompilerErrors
-}
-
-function t {
-    test_prog_ext node test.js &&
-        test_lang0 &&
-        test_lang1 &&
-        test_lang1.1 &&
-        true
-}
-
-function test_lang0 {
-    lang0="./bin/lang0.js"
-
-    for file in $(find . | grep "^\./examples/lang0" | grep "\.cic$")
-    do
-        echo ""
-        echo "[test lang0] $file"
-        if ! time $lang0 eval $file > $file.out
-        then
-            exit 1
-        fi
-    done
-}
-
-function test_lang1 {
-    lang1="./bin/lang1.js"
-
-    for file in $(find . | grep "^\./examples/lang1" | grep "\.cic$")
-    do
-        echo ""
-        echo "[test lang1] $file"
-        if ! time $lang1 eval $file > $file.out
-        then
-            exit 1
-        fi
-    done
-}
-
-function test_lang1.1 {
-    lang1="./bin/lang1.1.js"
-
-    for file in $(find . | grep "^\./examples/lang1" | grep "\.cic$")
-    do
-        echo ""
-        echo "[test lang1.1] $file"
-        if ! time $lang1 eval $file > $file.out.1
-        then
-            exit 1
-        fi
-    done
-}
-
-function test_prog_ext {
-    prog=$1
-    ext=$2
-
-    for file in $(find . | grep "^\./lib" | grep "\.${ext}$")
-    do
-        echo ""
-        echo "[test] $file"
-        if ! time $prog $file
-        then
-            exit 1
-        fi
-    done
-}
-
-function h {
-    echo "commands:"
-    for subcommand in $(declare -F | sed 's/declare -f//g')
-    do
-        echo "  $subcommand"
-    done
-}
-
-if [ $# == 0 ]
-then
-    h
-else
-    for TASK in $@
-    do
-        $TASK
-    done
-fi
+main()

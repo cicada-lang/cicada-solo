@@ -21,6 +21,7 @@
     "@forchange/partech": "^1.0.12",
     "@forchange/readable-regular-expression": "^0.0.10",
     "@types/deep-diff": "^1.0.0",
+    "bluebird": "^3.7.2",
     "chalk": "^4.1.0",
     "commander": "^5.1.0",
     "deep-diff": "^1.0.2",

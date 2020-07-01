@@ -1,6 +1,9 @@
 import * as Trace from "../trace"
 
-export function repr<T>(trace: Trace.Trace<T>, formater: (x: T) => string): string {
+export function repr<T>(
+  trace: Trace.Trace<T>,
+  formater: (x: T) => string
+): string {
   let s = ""
   s += trace.message
   s += `previous:\n`

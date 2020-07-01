@@ -1,5 +1,3 @@
-- use elvish to write ./dev -- instead of bash
-- snapshot test -- also output to console
 - snapshot test -- type checker error report output
 
 # tartlet
