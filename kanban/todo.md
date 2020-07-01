@@ -1,3 +1,7 @@
+- use elvish to write ./dev -- instead of bash
+- snapshot test -- also output to console
+- snapshot test -- type checker error report output
+
 # tartlet
 
 - Exp.evaluate
@@ -12,12 +16,6 @@
 - Exp.check
 - helper function for error reporting
   - like the tutorial
-
-# testing
-
-- use nodejs to write ./dev -- instead of bash
-- snapshot test -- also output to console
-- snapshot test -- type checker error report output
 
 # pie
 
