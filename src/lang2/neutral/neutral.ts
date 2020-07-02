@@ -9,18 +9,18 @@ export interface Var {
 
 export interface Ap {
   kind: "Neutral.Ap"
-  rator: Neutral
-  rand: Normal.Normal
+  target: Neutral
+  arg: Normal.Normal
 }
 
 export interface Car {
   kind: "Neutral.Car"
-  cons: Neutral
+  target: Neutral
 }
 
 export interface Cdr {
   kind: "Neutral.Cdr"
-  cons: Neutral
+  target: Neutral
 }
 
 export interface NatInd {

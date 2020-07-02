@@ -2,20 +2,20 @@ import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Closure from "../closure"
 
-export function do_cdr(cons: Value.Value): Value.Value {
-  switch (cons.kind) {
+export function do_cdr(target: Value.Value): Value.Value {
+  switch (target.kind) {
     case "Value.Cons": {
-      return cons.cdr
+      return target.cdr
     }
     case "Value.Reflection": {
-      switch (cons.t.kind) {
+      switch (target.t.kind) {
         case "Value.Sigma": {
           return {
             kind: "Value.Reflection",
-            t: Closure.apply(cons.t.closure, Exp.do_car(cons)),
+            t: Closure.apply(target.t.closure, Exp.do_car(target)),
             neutral: {
               kind: "Neutral.Cdr",
-              cons: cons.neutral,
+              target: target.neutral,
             },
           }
         }

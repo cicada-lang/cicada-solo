@@ -44,8 +44,8 @@ export interface Fn {
 
 export interface Ap {
   kind: "Exp.Ap"
-  rator: Exp
-  rand: Exp
+  target: Exp
+  arg: Exp
 }
 
 export interface Sigma {
@@ -63,12 +63,12 @@ export interface Cons {
 
 export interface Car {
   kind: "Exp.Car"
-  cons: Exp
+  target: Exp
 }
 
 export interface Cdr {
   kind: "Exp.Cdr"
-  cons: Exp
+  target: Exp
 }
 
 export interface Nat {

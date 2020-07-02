@@ -3,18 +3,21 @@ import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as Trace from "../../trace"
 
-export function do_car(cons: Value.Value): Value.Value {
-  switch (cons.kind) {
+export function do_car(target: Value.Value): Value.Value {
+  switch (target.kind) {
     case "Value.Cons": {
-      return cons.car
+      return target.car
     }
     case "Value.Reflection": {
-      switch (cons.t.kind) {
+      switch (target.t.kind) {
         case "Value.Sigma": {
           return {
             kind: "Value.Reflection",
-            t: cons.t.car_t,
-            neutral: { kind: "Neutral.Car", cons: cons.neutral },
+            t: target.t.car_t,
+            neutral: {
+              kind: "Neutral.Car",
+              target: target.neutral,
+            },
           }
         }
         default: {

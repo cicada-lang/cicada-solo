@@ -3,21 +3,21 @@ import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Closure from "../closure"
 
-export function do_ap(rator: Value.Value, rand: Value.Value): Value.Value {
-  switch (rator.kind) {
+export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
+  switch (target.kind) {
     case "Value.Fn": {
-      return Closure.apply(rator.closure, rand)
+      return Closure.apply(target.closure, arg)
     }
     case "Value.Reflection": {
-      switch (rator.t.kind) {
+      switch (target.t.kind) {
         case "Value.Pi": {
           return {
             kind: "Value.Reflection",
-            t: Closure.apply(rator.t.closure, rand),
+            t: Closure.apply(target.t.closure, arg),
             neutral: {
               kind: "Neutral.Ap",
-              rator: rator.neutral,
-              rand: new Normal.Normal(rator.t.arg_t, rand),
+              target: target.neutral,
+              arg: new Normal.Normal(target.t.arg_t, arg),
             },
           }
         }

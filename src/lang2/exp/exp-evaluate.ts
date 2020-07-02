@@ -35,7 +35,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         }
       }
       case "Exp.Ap": {
-        return Exp.do_ap(evaluate(env, exp.rator), evaluate(env, exp.rand))
+        return Exp.do_ap(evaluate(env, exp.target), evaluate(env, exp.arg))
       }
       case "Exp.Sigma": {
         return {
@@ -52,10 +52,10 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         }
       }
       case "Exp.Car": {
-        return Exp.do_car(evaluate(env, exp.cons))
+        return Exp.do_car(evaluate(env, exp.target))
       }
       case "Exp.Cdr": {
-        return Exp.do_cdr(evaluate(env, exp.cons))
+        return Exp.do_cdr(evaluate(env, exp.target))
       }
       case "Exp.Nat": {
         return {
