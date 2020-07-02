@@ -22,12 +22,6 @@ function print(the) {
   return the
 }
 
-dev["install"] = () => exec("npm install").then(print)
-
-dev["build"] = () => exec("npm run build").then(print)
-
-dev["format"] = () => exec("npm run format").then(print)
-
 function test_prog(prog, pattern, ext, opts) {
   const results = glob
     .sync(pattern)
