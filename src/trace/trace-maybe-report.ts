@@ -7,7 +7,7 @@ export function maybe_report<T>(
 ): never {
   if (error instanceof Trace.Trace) {
     const trace = error
-    console.log(Trace.repr(trace, formater))
+    console.error(Trace.repr(trace, formater))
     process.exit(1)
   } else {
     throw error

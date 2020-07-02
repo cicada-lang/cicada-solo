@@ -1,5 +1,3 @@
-- snapshot test -- type checker error report output
-
 # tartlet
 
 - exp-do-car.ts

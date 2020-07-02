@@ -1,0 +1,16 @@
+When checking (_) => id(id(id(id(two)))),
+I am expecting the type to be Ty.Arrow,
+but the given type is Nat.
+
+previous:
+- (_) => id(id(id(id(two))))
+- (_) => (_) => id(id(id(id(two))))
+- the[(Nat) -> Nat]((_) => (_) => id(id(id(id(two)))))
+- {
+  zero = the[Nat](Zero)
+  one = the[Nat](Succ(zero))
+  two = the[Nat](Succ(one))
+  id = the[(Nat) -> Nat]((x) => x)
+  the[(Nat) -> Nat]((_) => (_) => id(id(id(id(two)))))
+}
+

@@ -15,23 +15,73 @@ function test_prog(prog, pattern, ext, opts) {
   const results = glob
     .sync(pattern)
     .filter((file) => file.endsWith(ext))
-    .map((file) =>
-      exec(`${prog} ${file}`).then((the) => {
-        return { ...the, file }
-      })
-    )
+    .map((file) => exec(`${prog} ${file}`).then((the) => ({ ...the, file })))
 
   return Promise.all(results).then((results) => {
     for (const the of results) {
       console.log(`test_prog:`)
       console.log(`  prog: ${prog}`)
       console.log(`  file: ${the.file}`)
-      if (opts && opts.snapshot && opts.snapshot.stdout) {
-        console.log(`  snapshot.stdout: ${the.file}${opts.snapshot.stdout}`)
-        fs.promises.writeFile(`${the.file}${opts.snapshot.stdout}`, the.stdout)
+
+      if (the.stdout) {
+        if (opts && opts.snapshot && opts.snapshot.stdout) {
+          console.log(`  snapshot.stdout: ${the.file}${opts.snapshot.stdout}`)
+          fs.promises.writeFile(
+            `${the.file}${opts.snapshot.stdout}`,
+            the.stdout
+          )
+        }
+        console.log()
+        console.log(the.stdout)
       }
-      if (the.stdout) console.log(the.stdout)
-      if (the.stderr) console.error(the.stderr)
+
+      if (the.stderr) {
+        console.error()
+        console.error(the.stderr)
+      }
+    }
+  })
+}
+
+function test_prog_error(prog, pattern, ext, opts) {
+  const results = glob
+    .sync(pattern)
+    .filter((file) => file.endsWith(ext))
+    .map((file) =>
+      exec(`${prog} ${file}`)
+        .then((the) => ({ ...the, file }))
+        .catch((error) => ({ ...error, file }))
+    )
+
+  return Promise.all(results).then((results) => {
+    for (const the of results) {
+      console.log(`test_prog_error:`)
+      console.log(`  prog: ${prog}`)
+      console.log(`  file: ${the.file}`)
+
+      if (the.stdout) {
+        if (opts && opts.snapshot && opts.snapshot.stdout) {
+          console.log(`  snapshot.stdout: ${the.file}${opts.snapshot.stdout}`)
+          fs.promises.writeFile(
+            `${the.file}${opts.snapshot.stdout}`,
+            the.stdout
+          )
+        }
+        console.log()
+        console.log(the.stdout)
+      }
+
+      if (the.stderr) {
+        if (opts && opts.snapshot && opts.snapshot.stderr) {
+          console.error(`  snapshot.stderr: ${the.file}${opts.snapshot.stderr}`)
+          fs.promises.writeFile(
+            `${the.file}${opts.snapshot.stderr}`,
+            the.stderr
+          )
+        }
+        console.error()
+        console.error(the.stderr)
+      }
     }
   })
 }
@@ -46,9 +96,19 @@ dev["test_lang1"] = () =>
     snapshot: { stdout: ".out" },
   })
 
+dev["test_lang1_error"] = () =>
+  test_prog_error("./bin/lang1.js eval", "examples/lang1-error/**", ".cic", {
+    snapshot: { stdout: ".out", stderr: ".err" },
+  })
+
 dev["test_lang1.1"] = () =>
   test_prog("./bin/lang1.1.js eval", "examples/lang1/**", ".cic", {
     snapshot: { stdout: ".out.1" },
+  })
+
+dev["test_lang1.1_error"] = () =>
+  test_prog_error("./bin/lang1.1.js eval", "examples/lang1-error/**", ".cic", {
+    snapshot: { stdout: ".out.1", stderr: ".err.1" },
   })
 
 dev["test_lib"] = () => test_prog("node", "lib/**", ".test.js")
@@ -57,7 +117,9 @@ dev["t"] = () => {
   dev["test_lib"]()
   dev["test_lang0"]()
   dev["test_lang1"]()
+  dev["test_lang1_error"]()
   dev["test_lang1.1"]()
+  dev["test_lang1.1_error"]()
 }
 
 async function main() {

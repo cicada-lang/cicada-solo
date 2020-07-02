@@ -78,7 +78,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           Exp.evaluate(env, exp.target),
           Exp.evaluate(env, exp.motive),
           Exp.evaluate(env, exp.base),
-          Exp.evaluate(env, exp.step),
+          Exp.evaluate(env, exp.step)
         )
       }
       case "Exp.Equal": {
@@ -98,7 +98,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return Exp.do_replace(
           Exp.evaluate(env, exp.target),
           Exp.evaluate(env, exp.motive),
-          Exp.evaluate(env, exp.base),
+          Exp.evaluate(env, exp.base)
         )
       }
       case "Exp.Trivial": {
@@ -119,7 +119,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       case "Exp.AbsurdInd": {
         return Exp.do_absurd_ind(
           Exp.evaluate(env, exp.target),
-          Exp.evaluate(env, exp.motive),
+          Exp.evaluate(env, exp.motive)
         )
       }
       case "Exp.Str": {
