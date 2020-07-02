@@ -35,8 +35,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         }
       }
       case "Exp.Ap": {
-        const { rator, rand } = exp
-        return Exp.do_ap(evaluate(env, rator), evaluate(env, rand))
+        return Exp.do_ap(evaluate(env, exp.rator), evaluate(env, exp.rand))
       }
       case "Exp.Sigma": {
         return {
@@ -52,8 +51,12 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           cdr: Exp.evaluate(env, exp.cdr),
         }
       }
-      case "Exp.Car":
-      case "Exp.Cdr":
+      case "Exp.Car": {
+        return Exp.do_car(evaluate(env, exp.cons))
+      }
+      case "Exp.Cdr": {
+        return Exp.do_cdr(evaluate(env, exp.cons))
+      }
       case "Exp.Nat": {
         return {
           kind: "Value.Nat",
@@ -70,14 +73,34 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           prev: Exp.evaluate(env, exp.prev),
         }
       }
-      case "Exp.NatInd":
-      case "Exp.Equal":
+      case "Exp.NatInd": {
+        return Exp.do_nat_ind(
+          Exp.evaluate(env, exp.target),
+          Exp.evaluate(env, exp.motive),
+          Exp.evaluate(env, exp.base),
+          Exp.evaluate(env, exp.step),
+        )
+      }
+      case "Exp.Equal": {
+        return {
+          kind: "Value.Equal",
+          t: Exp.evaluate(env, exp.t),
+          from: Exp.evaluate(env, exp.from),
+          to: Exp.evaluate(env, exp.to),
+        }
+      }
       case "Exp.Same": {
         return {
           kind: "Value.Same",
         }
       }
-      case "Exp.Replace":
+      case "Exp.Replace": {
+        return Exp.do_replace(
+          Exp.evaluate(env, exp.target),
+          Exp.evaluate(env, exp.motive),
+          Exp.evaluate(env, exp.base),
+        )
+      }
       case "Exp.Trivial": {
         return {
           kind: "Value.Trivial",
@@ -93,7 +116,12 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           kind: "Value.Absurd",
         }
       }
-      case "Exp.AbsurdInd":
+      case "Exp.AbsurdInd": {
+        return Exp.do_absurd_ind(
+          Exp.evaluate(env, exp.target),
+          Exp.evaluate(env, exp.motive),
+        )
+      }
       case "Exp.Str": {
         return {
           kind: "Value.Str",
@@ -110,9 +138,14 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           kind: "Value.Type",
         }
       }
-      case "Exp.Suite":
+      case "Exp.Suite": {
+        for (const def of exp.defs) {
+          env = Env.extend(Env.clone(env), def.name, evaluate(env, def.exp))
+        }
+        return evaluate(env, exp.body)
+      }
       case "Exp.The": {
-        throw new Error("TODO")
+        return Exp.evaluate(env, exp.exp)
       }
     }
   } catch (error) {

@@ -2,7 +2,11 @@
 
 # tartlet
 
-- Exp.evaluate
+- exp-do-car.ts
+- exp-do-cdr.ts
+- exp-do-absurd-ind.ts
+- exp-do-nat-ind.ts
+- exp-do-replace.ts
 - Exp.alpha_equal
   - use exception -- try and catch is part of the API
 - Value.readback
