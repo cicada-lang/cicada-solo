@@ -3,7 +3,6 @@ import * as Value from "../value"
 import * as Closure from "../closure"
 import * as Env from "../env"
 import * as Trace from "../../trace"
-import * as ut from "../../ut"
 
 export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
   try {
@@ -14,10 +13,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           return result
         } else {
           throw new Trace.Trace(
-            ut.aline(`
-              |I see variable ${exp.name} during evaluate,
-              |but I can not find it in the environment.
-              |`)
+            Exp.explain_env_name_undefined({ name: exp.name, env })
           )
         }
       }

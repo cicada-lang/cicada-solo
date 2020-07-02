@@ -28,7 +28,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
             Exp.explain_elim_target_type_mismatch({
               elim: "ap",
               expecting: ["Ty.Arrow"],
-              reality: target.t.kind
+              reality: target.t.kind,
             })
           )
         }

@@ -46,7 +46,7 @@ export function do_rec(
             Exp.explain_elim_target_type_mismatch({
               elim: "rec",
               expecting: ["Ty.Nat"],
-              reality: target.t.kind
+              reality: target.t.kind,
             })
           )
         }

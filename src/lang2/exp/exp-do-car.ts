@@ -21,12 +21,24 @@ export function do_car(target: Value.Value): Value.Value {
           }
         }
         default: {
-          throw new Error("TODO")
+          throw new Trace.Trace(
+            Exp.explain_elim_target_type_mismatch({
+              elim: "car",
+              expecting: ["Value.Sigma"],
+              reality: target.t.kind,
+            })
+          )
         }
       }
     }
     default: {
-      throw new Error("TODO")
+      throw new Trace.Trace(
+        Exp.explain_elim_target_mismatch({
+          elim: "car",
+          expecting: ["Value.Cons", "Value.Reflection"],
+          reality: target.kind,
+        })
+      )
     }
   }
 }

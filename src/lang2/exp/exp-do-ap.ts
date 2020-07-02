@@ -2,6 +2,7 @@ import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Closure from "../closure"
+import * as Trace from "../../trace"
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   switch (target.kind) {
@@ -22,12 +23,24 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
           }
         }
         default: {
-          throw new Error("TODO")
+          throw new Trace.Trace(
+            Exp.explain_elim_target_type_mismatch({
+              elim: "ap",
+              expecting: ["Value.Pi"],
+              reality: target.t.kind,
+            })
+          )
         }
       }
     }
     default: {
-      throw new Error("TODO")
+      throw new Trace.Trace(
+        Exp.explain_elim_target_mismatch({
+          elim: "ap",
+          expecting: ["Value.Fn", "Value.Reflection"],
+          reality: target.kind,
+        })
+      )
     }
   }
 }
