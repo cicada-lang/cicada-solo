@@ -1,3 +1,7 @@
+- note about Exp Value Neutral Normal
+- a better way to encode error
+  - abstraction over the common pattern of report
+
 # tartlet
 
 - exp-do-car.ts

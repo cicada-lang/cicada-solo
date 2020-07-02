@@ -1,4 +1,5 @@
 import * as Ty from "../ty"
+import * as Neutral from "../neutral"
 import * as Closure from "../closure"
 
 export type Value =
@@ -94,5 +95,5 @@ export interface Type {
 export interface Reflection {
   kind: "Value.Reflection"
   t: Ty.Ty
-  value: Value
+  neutral: Neutral.Neutral
 }
