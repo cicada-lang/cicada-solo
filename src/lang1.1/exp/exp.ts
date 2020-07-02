@@ -15,8 +15,8 @@ export interface Fn {
 
 export interface Ap {
   kind: "Exp.Ap"
-  rator: Exp
-  rand: Exp
+  target: Exp
+  arg: Exp
 }
 
 export interface Suite {

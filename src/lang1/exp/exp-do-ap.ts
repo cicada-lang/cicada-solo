@@ -5,22 +5,22 @@ import * as Value from "../value"
 import * as Normal from "../normal"
 import * as ut from "../../ut"
 
-export function do_ap(rator: Value.Value, rand: Value.Value): Value.Value {
-  switch (rator.kind) {
+export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
+  switch (target.kind) {
     case "Value.Fn": {
-      const new_env = Env.extend(Env.clone(rator.env), rator.name, rand)
-      return Exp.evaluate(new_env, rator.body)
+      const new_env = Env.extend(Env.clone(target.env), target.name, arg)
+      return Exp.evaluate(new_env, target.body)
     }
     case "Value.Reflection": {
-      switch (rator.t.kind) {
+      switch (target.t.kind) {
         case "Ty.Arrow": {
           return {
             kind: "Value.Reflection",
-            t: rator.t.ret_t,
+            t: target.t.ret_t,
             neutral: {
               kind: "Neutral.Ap",
-              rator: rator.neutral,
-              rand: new Normal.Normal(rator.t.arg_t, rand),
+              target: target.neutral,
+              arg: new Normal.Normal(target.t.arg_t, arg),
             },
           }
         }
@@ -28,9 +28,9 @@ export function do_ap(rator: Value.Value, rand: Value.Value): Value.Value {
           throw new Trace.Trace(
             ut.aline(`
               |This is a internal error.
-              |During do_ap, I found the rator.kind is Value.Reflection,
-              |then I expect the rator.t.kind to be Ty.Arrow,
-              |but it is ${rator.t.kind}.
+              |During do_ap, I found the target.kind is Value.Reflection,
+              |then I expect the target.t.kind to be Ty.Arrow,
+              |but it is ${target.t.kind}.
               |`)
           )
         }
@@ -38,11 +38,11 @@ export function do_ap(rator: Value.Value, rand: Value.Value): Value.Value {
     }
     default: {
       throw new Trace.Trace(
-        ut.aline(`
-          |This is a internal error.
-          |During do_ap, I expect the rator.kind to be Value.Fn or Value.Reflection,
-          |but the rator.kind is ${rator.kind}.
-          |`)
+        Exp.explain_elim_target_mismatch({
+          elim: "ap",
+          expecting: ["Value.Fn", "Value.Reflection"],
+          reality: target.kind,
+        })
       )
     }
   }

@@ -1,12 +1,8 @@
-- note about Exp Value Neutral Normal
-  - the terms are developed in the theory of partial evaluation
-  - Value is about intro (constructor)
-  - Neutral is about elim
-  - Neutral & Normal are viewed as Exp
-    instead of not really Value
+- a better way to do error report
 
-- a better way to encode error
   - abstraction over the common pattern of report
+  - `Exp.explain_elim_target_mismatch`
+  - `Exp.explain_elim_target_type_mismatch`
 
 # tartlet
 

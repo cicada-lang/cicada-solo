@@ -9,6 +9,6 @@ export interface Var {
 
 export interface Ap {
   kind: "Neutral.Ap"
-  rator: Neutral
-  rand: Value.Value
+  target: Neutral
+  arg: Value.Value
 }

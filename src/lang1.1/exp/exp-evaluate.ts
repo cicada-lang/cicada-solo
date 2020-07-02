@@ -29,8 +29,8 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         }
       }
       case "Exp.Ap": {
-        const { rator, rand } = exp
-        return Exp.do_ap(evaluate(env, rator), evaluate(env, rand))
+        const { target, arg } = exp
+        return Exp.do_ap(evaluate(env, target), evaluate(env, arg))
       }
       case "Exp.Suite": {
         for (const def of exp.defs) {

@@ -26,11 +26,11 @@ import * as ut from "../../ut"
 {
   const ap: Exp.Ap = {
     kind: "Exp.Ap",
-    rator: {
+    target: {
       kind: "Exp.Var",
       name: "f",
     },
-    rand: {
+    arg: {
       kind: "Exp.Var",
       name: "x",
     },

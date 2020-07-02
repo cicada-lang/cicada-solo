@@ -11,7 +11,7 @@ export function repr(exp: Exp.Exp): string {
       return `(${exp.name}) => ${repr(exp.body)}`
     }
     case "Exp.Ap": {
-      return `${repr(exp.rator)}(${repr(exp.rand)})`
+      return `${repr(exp.target)}(${repr(exp.arg)})`
     }
     case "Exp.Suite": {
       const def_reprs = exp.defs.map((def) => `${def.name} = ${repr(def.exp)}`)

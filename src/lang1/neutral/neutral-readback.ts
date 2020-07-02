@@ -13,8 +13,8 @@ export function readback(used: Set<string>, neutral: Neutral.Neutral): Exp.Exp {
     case "Neutral.Ap": {
       return {
         kind: "Exp.Ap",
-        rator: Neutral.readback(used, neutral.rator),
-        rand: Normal.readback(used, neutral.rand),
+        target: Neutral.readback(used, neutral.target),
+        arg: Normal.readback(used, neutral.arg),
       }
     }
     case "Neutral.Rec": {

@@ -12,8 +12,8 @@ export interface Var {
 export interface Ap {
   kind: "Neutral.Ap"
   t: Ty.Ty
-  rator: Neutral
-  rand: Normal.Normal
+  target: Neutral
+  arg: Normal.Normal
 }
 
 export interface Rec {

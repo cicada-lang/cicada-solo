@@ -28,18 +28,18 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
         // ctx |- e <= a
         // ---------------------
         // ctx |- Ap(f, e) => b
-        const { rator, rand } = exp
-        const rator_t = Exp.infer(ctx, rator)
-        switch (rator_t.kind) {
+        const { target, arg } = exp
+        const target_t = Exp.infer(ctx, target)
+        switch (target_t.kind) {
           case "Ty.Arrow": {
-            Exp.check(ctx, rand, rator_t.arg_t)
-            return rator_t.ret_t
+            Exp.check(ctx, arg, target_t.arg_t)
+            return target_t.ret_t
           }
           default: {
             throw new Trace.Trace(
               ut.aline(`
-                |I am expecting the rator_t to be Ty.Arrow,
-                |but it is ${Ty.repr(rator_t)}.
+                |I am expecting the target_t to be Ty.Arrow,
+                |but it is ${Ty.repr(target_t)}.
                 |`)
             )
           }

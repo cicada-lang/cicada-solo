@@ -75,8 +75,8 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       for (const arg of args) {
         exp = {
           kind: "Exp.Ap",
-          rator: exp,
-          rand: arg,
+          target: exp,
+          arg: arg,
         }
       }
       return exp
