@@ -42,18 +42,20 @@
 
 # pt -- parsing techniques
 
-- for-and-against-pegs-why-we-need-multi-ordered-grammars.pdf
 - theory of CFG
 - intersection grammar
 - pt framework
   - example grammar
+    ``` js
     exp:
-    - var: identifier
-    - fn: "(" identifier ")" "=>" exp
-    - ap: identifier ("(" exp ")")*
-    // or ("(" exp ")") must be named? like exp_in_paren
+      var: identifier
+      fn: "(" identifier ")" "=>" exp
+      ap: identifier ("(" exp ")")*
+      // or ("(" exp ")") must be named? like exp_in_paren
+    ```
 - try examples in peg paper in parser generator
 - change earley to use ordered choice
+- change earley to use intersection
 - x in x test
   - S <- "x" S "x" | "x"
 - a version of partech that use env
