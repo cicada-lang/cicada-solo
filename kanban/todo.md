@@ -1,11 +1,15 @@
 - note about Exp Value Neutral Normal
+  - the terms are developed in the theory of partial evaluation
+  - Value is about intro (constructor)
+  - Neutral is about elim
+  - Neutral & Normal are viewed as Exp
+    instead of not really Value
+
 - a better way to encode error
   - abstraction over the common pattern of report
 
 # tartlet
 
-- exp-do-car.ts
-- exp-do-cdr.ts
 - exp-do-absurd-ind.ts
 - exp-do-nat-ind.ts
 - exp-do-replace.ts
