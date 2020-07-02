@@ -11,17 +11,6 @@ const Promise = require("bluebird")
 
 let dev = {}
 
-function print(the) {
-  const { stdout, stderr } = the
-  if (stdout) {
-    console.log(`${stdout}`)
-  }
-  if (stderr) {
-    console.error(`${stderr}`)
-  }
-  return the
-}
-
 function test_prog(prog, pattern, ext, opts) {
   const results = glob
     .sync(pattern)
@@ -41,7 +30,8 @@ function test_prog(prog, pattern, ext, opts) {
         console.log(`  snapshot.stdout: ${the.file}${opts.snapshot.stdout}`)
         fs.promises.writeFile(`${the.file}${opts.snapshot.stdout}`, the.stdout)
       }
-      print(the)
+      if (the.stdout) console.log(the.stdout)
+      if (the.stderr) console.error(the.stderr)
     }
   })
 }
