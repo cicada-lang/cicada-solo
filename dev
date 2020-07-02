@@ -23,19 +23,17 @@ function test_prog(prog, pattern, ext, opts) {
       console.log(`  prog: ${prog}`)
       console.log(`  file: ${the.file}`)
 
-      if (the.stdout) {
-        if (opts && opts.snapshot && opts.snapshot.stdout) {
-          console.log(`  snapshot.stdout: ${the.file}${opts.snapshot.stdout}`)
-          fs.promises.writeFile(
-            `${the.file}${opts.snapshot.stdout}`,
-            the.stdout
-          )
-        }
+      if (the.stdout && opts && opts.snapshot && opts.snapshot.stdout) {
+        console.log(`  snapshot.stdout: ${the.file}${opts.snapshot.stdout}`)
+        fs.promises.writeFile(`${the.file}${opts.snapshot.stdout}`, the.stdout)
+      }
+
+      if (the.stdout && opts && opts.echo && opts.echo.stdout) {
         console.log()
         console.log(the.stdout)
       }
 
-      if (the.stderr) {
+      if (the.stderr && opts && opts.echo && opts.echo.stderr) {
         console.error()
         console.error(the.stderr)
       }
@@ -59,26 +57,22 @@ function test_prog_error(prog, pattern, ext, opts) {
       console.log(`  prog: ${prog}`)
       console.log(`  file: ${the.file}`)
 
-      if (the.stdout) {
-        if (opts && opts.snapshot && opts.snapshot.stdout) {
-          console.log(`  snapshot.stdout: ${the.file}${opts.snapshot.stdout}`)
-          fs.promises.writeFile(
-            `${the.file}${opts.snapshot.stdout}`,
-            the.stdout
-          )
-        }
+      if (the.stdout && opts && opts.snapshot && opts.snapshot.stdout) {
+        console.log(`  snapshot.stdout: ${the.file}${opts.snapshot.stdout}`)
+        fs.promises.writeFile(`${the.file}${opts.snapshot.stdout}`, the.stdout)
+      }
+
+      if (the.stdout && opts && opts.echo && opts.echo.stdout) {
         console.log()
         console.log(the.stdout)
       }
 
-      if (the.stderr) {
-        if (opts && opts.snapshot && opts.snapshot.stderr) {
-          console.error(`  snapshot.stderr: ${the.file}${opts.snapshot.stderr}`)
-          fs.promises.writeFile(
-            `${the.file}${opts.snapshot.stderr}`,
-            the.stderr
-          )
-        }
+      if (the.stderr && opts && opts.snapshot && opts.snapshot.stderr) {
+        console.error(`  snapshot.stderr: ${the.file}${opts.snapshot.stderr}`)
+        fs.promises.writeFile(`${the.file}${opts.snapshot.stderr}`, the.stderr)
+      }
+
+      if (the.stderr && opts && opts.echo && opts.echo.stderr) {
         console.error()
         console.error(the.stderr)
       }
