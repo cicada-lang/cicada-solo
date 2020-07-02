@@ -14,10 +14,7 @@ export function do_car(cons: Value.Value): Value.Value {
           return {
             kind: "Value.Reflection",
             t: cons.t.car_t,
-            neutral: {
-              kind: "Neutral.Car",
-              cons: cons.neutral,
-            },
+            neutral: { kind: "Neutral.Car", cons: cons.neutral },
           }
         }
         default: {
