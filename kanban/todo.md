@@ -1,9 +1,3 @@
-- a better way to do error report
-
-  - abstraction over the common pattern of report
-  - `Exp.explain_elim_target_mismatch`
-  - `Exp.explain_elim_target_type_mismatch`
-
 # tartlet
 
 - exp-do-absurd-ind.ts

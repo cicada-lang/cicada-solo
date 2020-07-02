@@ -3,7 +3,6 @@ import * as Env from "../env"
 import * as Trace from "../../trace"
 import * as Value from "../value"
 import * as Normal from "../normal"
-import * as ut from "../../ut"
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   switch (target.kind) {
@@ -26,12 +25,11 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
         }
         default: {
           throw new Trace.Trace(
-            ut.aline(`
-              |This is a internal error.
-              |During do_ap, I found the target.kind is Value.Reflection,
-              |then I expect the target.t.kind to be Ty.Arrow,
-              |but it is ${target.t.kind}.
-              |`)
+            Exp.explain_elim_target_type_mismatch({
+              elim: "ap",
+              expecting: ["Ty.Arrow"],
+              reality: target.t.kind
+            })
           )
         }
       }

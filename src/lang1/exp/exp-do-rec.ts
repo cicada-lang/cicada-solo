@@ -4,7 +4,6 @@ import * as Env from "../env"
 import * as Trace from "../../trace"
 import * as Value from "../value"
 import * as Normal from "../normal"
-import * as ut from "../../ut"
 
 export function do_rec(
   t: Ty.Ty,
@@ -44,24 +43,22 @@ export function do_rec(
         }
         default: {
           throw new Trace.Trace(
-            ut.aline(`
-              |This is a internal error.
-              |During do_rec, I found the target.kind is Value.Reflection,
-              |then I expect the target.t.kind to be Ty.Nat,
-              |but it is ${target.t.kind}.
-              |`)
+            Exp.explain_elim_target_type_mismatch({
+              elim: "rec",
+              expecting: ["Ty.Nat"],
+              reality: target.t.kind
+            })
           )
         }
       }
     }
     default: {
       throw new Trace.Trace(
-        ut.aline(`
-          |This is a internal error.
-          |During do_rec, I expect the target.kind to be
-          |  Value.Zero or Value.Succ or Value.Reflection,
-          |but the target.kind is ${target.kind}.
-          |`)
+        Exp.explain_elim_target_mismatch({
+          elim: "rec",
+          expecting: ["Value.Zero", "Value.Succ", "Value.Reflection"],
+          reality: target.kind,
+        })
       )
     }
   }
