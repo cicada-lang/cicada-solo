@@ -1,6 +1,5 @@
 # tartlet
 
-- Value.convert
 - Exp.infer
 - Exp.check
 - helper function for error reporting
