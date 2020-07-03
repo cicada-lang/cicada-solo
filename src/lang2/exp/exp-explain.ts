@@ -6,7 +6,7 @@ export function explain_env_name_undefined(the: {
   env: Env.Env
 }): string {
   const explanation = `
-    |I see variable ${the.name} during evaluate,
+    |I see variable ${the.name},
     |but I found that, it is undefined in the environment.
     |`
   return ut.aline(explanation)

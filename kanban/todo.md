@@ -1,7 +1,7 @@
-- lang0 no switch
-- lang1 no switch
-- lang1.1 no switch
-- lang2 no switch
+- lang0 switch only when full cover
+- lang1 switch only when full cover
+- lang1.1 switch only when full cover
+- lang2 switch only when full cover
 
 # tartlet
 

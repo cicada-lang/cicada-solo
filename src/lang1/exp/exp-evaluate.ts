@@ -15,7 +15,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         } else {
           throw new Trace.Trace(
             ut.aline(`
-              |I see variable ${exp.name} during evaluate,
+              |I see variable ${exp.name},
               |but I can not find it in the environment.
               |`)
           )
