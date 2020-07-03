@@ -1,8 +1,7 @@
 # tartlet
 
-- Value.readback
-- Normal.readback
 - Neutral.readback
+- Value.readback
 - Value.convert
 - Exp.infer
 - Exp.check
