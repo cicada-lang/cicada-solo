@@ -1,6 +1,5 @@
 # tartlet
 
-- exp-do-absurd-ind.ts
 - exp-do-nat-ind.ts
 - exp-do-replace.ts
 - Exp.alpha_equal
