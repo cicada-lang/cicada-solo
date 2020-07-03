@@ -24,7 +24,7 @@ export function do_absurd_ind(
         default: {
           throw new Trace.Trace(
             Exp.explain_elim_target_type_mismatch({
-              elim: "absurd",
+              elim: "absurd_ind",
               expecting: ["Value.Absurd"],
               reality: target.t.kind,
             })
@@ -35,7 +35,7 @@ export function do_absurd_ind(
     default: {
       throw new Trace.Trace(
         Exp.explain_elim_target_mismatch({
-          elim: "absurd",
+          elim: "absurd_ind",
           expecting: ["Value.Reflection"],
           reality: target.kind,
         })
