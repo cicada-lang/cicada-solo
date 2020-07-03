@@ -95,16 +95,6 @@ dev["test_lang1_error"] = () =>
     snapshot: { stdout: ".out", stderr: ".err" },
   })
 
-dev["test_lang1.1"] = () =>
-  test_prog("./bin/lang1.1.js eval", "examples/lang1/**", ".cic", {
-    snapshot: { stdout: ".out.1" },
-  })
-
-dev["test_lang1.1_error"] = () =>
-  test_prog_error("./bin/lang1.1.js eval", "examples/lang1-error/**", ".cic", {
-    snapshot: { stdout: ".out.1", stderr: ".err.1" },
-  })
-
 dev["test_lib"] = () => test_prog("node", "lib/**", ".test.js")
 
 dev["t"] = () => {
@@ -112,8 +102,6 @@ dev["t"] = () => {
   dev["test_lang0"]()
   dev["test_lang1"]()
   dev["test_lang1_error"]()
-  dev["test_lang1.1"]()
-  dev["test_lang1.1_error"]()
 }
 
 async function main() {

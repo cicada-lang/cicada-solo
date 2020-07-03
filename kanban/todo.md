@@ -1,5 +1,4 @@
 - lang1 value-readback.ts -- no switch
-- no lang1.1
 - lang2 switch only when full cover
 
 # tartlet
