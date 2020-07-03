@@ -1,7 +1,7 @@
-- lang0 switch only when full cover
-- lang1 switch only when full cover
+- lang1 value-readback.ts -- no switch
 - lang1.1 switch only when full cover
 - lang2 switch only when full cover
+- explain_name_undefined instead of explain_env_name_undefined
 
 # tartlet
 

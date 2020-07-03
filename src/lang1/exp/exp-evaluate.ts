@@ -14,19 +14,12 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           return result
         } else {
           throw new Trace.Trace(
-            ut.aline(`
-              |I see variable ${exp.name},
-              |but I can not find it in the environment.
-              |`)
+            Exp.explain_env_name_undefined({ name: exp.name, env })
           )
         }
       }
       case "Exp.Fn": {
-        return {
-          ...exp,
-          kind: "Value.Fn",
-          env,
-        }
+        return { ...exp, kind: "Value.Fn", env }
       }
       case "Exp.Ap": {
         const { target, arg } = exp
