@@ -1,9 +1,12 @@
+- lang0 no switch
+- lang1 no switch
+- lang1.1 no switch
+- lang2 no switch
+
 # tartlet
 
 - Exp.infer
 - Exp.check
-- helper function for error reporting
-  - like the tutorial
 
 # pie
 
