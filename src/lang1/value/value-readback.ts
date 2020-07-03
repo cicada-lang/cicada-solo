@@ -37,6 +37,9 @@ export function readback(
       }
       const ret = Exp.do_ap(value, v)
       const body = Value.readback(new Set([...used, name]), t.ret_t, ret)
+      // NOTE everything with a function type
+      //   is immediately read back as having a Lambda on top.
+      //   This implements the η-rule for functions.
       return { kind: "Exp.Fn", name, body }
     }
     default: {

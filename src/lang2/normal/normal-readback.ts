@@ -1,6 +1,5 @@
 import * as Normal from "../normal"
 import * as Value from "../value"
-import * as Ty from "../ty"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 
