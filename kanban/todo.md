@@ -1,7 +1,5 @@
 # tartlet
 
-- Exp.alpha_equal
-  - use exception -- try and catch is part of the API
 - Value.readback
 - Normal.readback
 - Neutral.readback
