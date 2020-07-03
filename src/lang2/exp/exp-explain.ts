@@ -1,13 +1,9 @@
 import * as ut from "../../ut"
 import * as Env from "../env"
 
-export function explain_env_name_undefined(the: {
-  name: string
-  env: Env.Env
-}): string {
+export function explain_name_undefined(name: string): string {
   const explanation = `
-    |I see variable ${the.name},
-    |but I found that, it is undefined in the environment.
+    |The name ${name} is undefined.
     |`
   return ut.aline(explanation)
 }

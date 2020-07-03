@@ -13,7 +13,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           return result
         } else {
           throw new Trace.Trace(
-            Exp.explain_env_name_undefined({ name: exp.name, env })
+            Exp.explain_name_undefined(exp.name)
           )
         }
       }
