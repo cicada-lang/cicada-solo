@@ -1,7 +1,6 @@
 # tartlet
 
 - exp-do-nat-ind.ts
-- exp-do-replace.ts
 - Exp.alpha_equal
   - use exception -- try and catch is part of the API
 - Value.readback
