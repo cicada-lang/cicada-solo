@@ -12,12 +12,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ctx |- x => a
       const t = Ctx.lookup(ctx, exp.name)
       if (t === undefined) {
-        throw new Trace.Trace(
-          ut.aline(`
-            |I see variable ${exp.name} during infer,
-            |but I can not find it in the environment.
-            |`)
-        )
+        throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
       } else {
         return t
       }
