@@ -1,5 +1,3 @@
-- lang2 switch only when full cover
-
 # tartlet
 
 - Exp.infer

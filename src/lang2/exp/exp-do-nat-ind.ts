@@ -11,65 +11,57 @@ export function do_nat_ind(
   base: Value.Value,
   step: Value.Value
 ): Value.Value {
-  switch (target.kind) {
-    case "Value.Zero": {
-      return base
-    }
-    case "Value.Succ": {
-      return Exp.do_ap(
-        Exp.do_ap(step, target.prev),
-        Exp.do_nat_ind(target.prev, motive, base, step)
-      )
-    }
-    case "Value.Reflection": {
-      switch (target.t.kind) {
-        case "Value.Nat": {
-          const motive_t: Value.Pi = {
-            kind: "Value.Pi",
-            arg_t: { kind: "Value.Nat" },
-            closure: new Closure.Closure(Env.init(), "k", { kind: "Exp.Type" }),
-          }
-          const base_t = Exp.do_ap(motive, { kind: "Value.Zero" })
-          const step_t = Exp.nat_ind_step_type(motive)
-          return {
-            kind: "Value.Reflection",
-            t: Exp.do_ap(motive, target),
-            neutral: {
-              kind: "Neutral.NatInd",
-              target: target.neutral,
-              motive: new Normal.Normal(motive_t, motive),
-              base: new Normal.Normal(base_t, base),
-              step: new Normal.Normal(step_t, step),
-            },
-          }
-        }
-        default: {
-          throw new Trace.Trace(
-            Exp.explain_elim_target_type_mismatch({
-              elim: "nat_ind",
-              expecting: ["Value.Nat"],
-              reality: target.t.kind,
-            })
-          )
-        }
+  if (target.kind === "Value.Zero") {
+    return base
+  } else if (target.kind === "Value.Succ") {
+    return Exp.do_ap(
+      Exp.do_ap(step, target.prev),
+      Exp.do_nat_ind(target.prev, motive, base, step)
+    )
+  } else if (target.kind === "Value.Reflection") {
+    if (target.t.kind === "Value.Nat") {
+      const motive_t: Value.Pi = {
+        kind: "Value.Pi",
+        arg_t: { kind: "Value.Nat" },
+        closure: new Closure.Closure(Env.init(), "k", { kind: "Exp.Type" }),
       }
-    }
-    default: {
+      const base_t = Exp.do_ap(motive, { kind: "Value.Zero" })
+      const step_t = Exp.nat_ind_step_t(motive)
+      return {
+        kind: "Value.Reflection",
+        t: Exp.do_ap(motive, target),
+        neutral: {
+          kind: "Neutral.NatInd",
+          target: target.neutral,
+          motive: new Normal.Normal(motive_t, motive),
+          base: new Normal.Normal(base_t, base),
+          step: new Normal.Normal(step_t, step),
+        },
+      }
+    } else {
       throw new Trace.Trace(
-        Exp.explain_elim_target_mismatch({
+        Exp.explain_elim_target_type_mismatch({
           elim: "nat_ind",
-          expecting: ["Value.Zero", "Value.Succ", "Value.Reflection"],
-          reality: target.kind,
+          expecting: ["Value.Nat"],
+          reality: target.t.kind,
         })
       )
     }
+  } else {
+    throw new Trace.Trace(
+      Exp.explain_elim_target_mismatch({
+        elim: "nat_ind",
+        expecting: ["Value.Zero", "Value.Succ", "Value.Reflection"],
+        reality: target.kind,
+      })
+    )
   }
 }
 
-export function nat_ind_step_type(motive: Value.Value): Value.Value {
+export function nat_ind_step_t(motive: Value.Value): Value.Value {
   const env = Env.extend(Env.init(), "motive", motive)
 
-  const exp: Exp.Pi = {
+  const step_t: Exp.Pi = {
     kind: "Exp.Pi",
     name: "prev",
     arg_t: { kind: "Exp.Nat" },
@@ -88,6 +80,6 @@ export function nat_ind_step_type(motive: Value.Value): Value.Value {
       },
     },
   }
-  const t = Exp.evaluate(env, exp)
-  return t
+
+  return Exp.evaluate(env, step_t)
 }
