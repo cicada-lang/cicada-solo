@@ -1,5 +1,7 @@
 # tartlet
 
+- Exp.repr
+- Exp.infer use try and catch
 - Exp.infer
 - Exp.check
 

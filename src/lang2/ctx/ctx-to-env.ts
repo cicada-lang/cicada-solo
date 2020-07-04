@@ -2,7 +2,7 @@ import * as Ctx from "../ctx"
 import * as Env from "../env"
 import * as Ty from "../ty"
 
-export function make_env(ctx: Ctx.Ctx): Env.Env {
+export function to_env(ctx: Ctx.Ctx): Env.Env {
   const env = Env.init()
   for (const [name, { t, value }] of ctx) {
     if (value !== undefined) {
