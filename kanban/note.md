@@ -4,7 +4,8 @@
   see if the way we write inference rule
   will be much more natural in ABC.
   - https://homepages.cwi.nl/~steven/abc
-  - Note that, the language of inference rule does not use closure.
+  
+- Note that, the language of inference rule does not use closure.
 
 # Arithmetic level and Church encoding
 
