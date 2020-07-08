@@ -26,17 +26,17 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ctx |- Pi(name, arg_t, ret_t) => Type
       Exp.check(ctx, exp.arg_t, { kind: "Value.Type" })
       const arg_t = Exp.evaluate(Ctx.to_env(ctx), exp.arg_t)
-      Exp.check(Ctx.extend(Ctx.clone(ctx), exp.name, arg_t), exp.ret_t, {
-        kind: "Value.Type",
-      })
+      ctx = Ctx.extend(Ctx.clone(ctx), exp.name, arg_t)
+      Exp.check(ctx, exp.ret_t, { kind: "Value.Type" })
       return { kind: "Value.Type" }
     } else if (exp.kind === "Exp.Ap") {
       // ctx |- target => Pi(name, arg_t, ret_t)
       // ctx |- arg <= arg_t
       // ------------------------
       // ctx |- Ap(target, arg) => ret_t[arg/name]
-      // TODO Value.is_pi
-      // const pi: Value.Pi = Value.is_pi(Exp.infer(ctx, exp.target))
+      const target_t = Exp.infer(ctx, exp.target)
+      // TODO Value.isPi
+      // const pi: Value.Pi = Value.isPi(target_t)
       throw new Error("TODO")
     } else {
       throw new Trace.Trace(

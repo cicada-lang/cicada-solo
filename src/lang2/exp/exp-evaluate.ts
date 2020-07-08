@@ -12,9 +12,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         if (result !== undefined) {
           return result
         } else {
-          throw new Trace.Trace(
-            Exp.explain_name_undefined(exp.name)
-          )
+          throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
         }
       }
       case "Exp.Pi": {

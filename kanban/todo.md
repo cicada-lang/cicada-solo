@@ -1,5 +1,6 @@
 # tartlet
 
+- value-is.ts -- Value.is*
 - Exp.infer
 - Exp.check
 
