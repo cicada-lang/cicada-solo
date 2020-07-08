@@ -75,6 +75,9 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       const target = Exp.evaluate(Ctx.to_env(ctx), exp.target)
       const car = Exp.do_car(target)
       return Closure.apply(sigma.closure, car)
+    } else if (exp.kind === "Exp.Nat") {
+      return { kind: "Value.Type" }
+      // TODO
     } else {
       throw new Trace.Trace(
         ut.aline(`
