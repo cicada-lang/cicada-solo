@@ -5,6 +5,7 @@ import * as Closure from "../closure"
 import * as Env from "../env"
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
+import * as ut from "../../ut"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
   try {
@@ -38,7 +39,12 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // const pi: Value.Pi = Value.is_pi(Exp.infer(ctx, exp.target))
       throw new Error("TODO")
     } else {
-      throw new Error("TODO")
+      throw new Trace.Trace(
+        ut.aline(`
+          |I can not infer the type of ${Exp.repr(exp)}.
+          |I suggest you add a type annotation to the expression.
+          |`)
+      )
     }
   } catch (error) {
     Trace.maybe_push(error, exp)
