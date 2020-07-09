@@ -148,6 +148,24 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       return { kind: "Value.Type" }
     } else if (exp.kind === "Exp.Type") {
       return { kind: "Value.Type" }
+    } else if (exp.kind === "Exp.Suite") {
+      // ctx |- e1 => t1
+      // ctx, x1: t1 |- e2 => t2
+      // ctx, x1: t1, x2: t2 |- ...
+      // ...
+      // ctx, x1: t1, x2: t2, ... |- e => t
+      // ---------------------
+      // ctx |- { x1 = e1
+      //          x2 = e2
+      //          ...
+      //          e
+      //        } => t
+      const { defs, body } = exp
+      ctx = Ctx.clone(ctx)
+      for (const def of defs) {
+        Ctx.extend(ctx, def.name, Exp.infer(ctx, def.exp))
+      }
+      return Exp.infer(ctx, body)
     } else if (exp.kind === "Exp.The") {
       // ctx |- t <= Type
       // ctx |- exp <= t
