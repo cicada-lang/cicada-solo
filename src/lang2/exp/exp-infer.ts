@@ -77,7 +77,27 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       return Closure.apply(sigma.closure, car)
     } else if (exp.kind === "Exp.Nat") {
       return { kind: "Value.Type" }
-      // TODO
+    } else if (exp.kind === "Exp.NatInd") {
+      // ctx |- target => Nat
+      // ctx |- motive <= (x: Nat) -> Type
+      // ctx |- base <= motive(Zero)
+      // ctx |- step <= (prev: Nat) -> (almost: motive(prev)) -> motive(Succ(prev))
+      // ----------------------
+      // ctx |- Nat.ind(target, motive, base, step) => motive(target)
+      const target_t = Exp.infer(ctx, exp.target)
+      Value.isNat(ctx, target_t)
+      const motive_t = Exp.evaluate(Env.init(), {
+        kind: "Exp.Pi",
+        name: "x",
+        arg_t: { kind: "Exp.Nat" },
+        ret_t: { kind: "Exp.Type" },
+      })
+      Exp.check(ctx, exp.motive, motive_t)
+      const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
+      Exp.check(ctx, exp.base, Exp.do_ap(motive, { kind: "Value.Zero" }))
+      Exp.check(ctx, exp.step, Exp.nat_ind_step_t(motive))
+      const target = Exp.evaluate(Ctx.to_env(ctx), exp.target)
+      return Exp.do_ap(motive, target)
     } else {
       throw new Trace.Trace(
         ut.aline(`
