@@ -1,6 +1,5 @@
 # tartlet
 
-- Exp.infer
 - Exp.check
 
 # pie

@@ -60,7 +60,8 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ctx |- target => Sigma(name, car_t, cdr_t)
       // ------------------------
       // ctx |- car(target) => car_t
-      const sigma = Value.isSigma(ctx, Exp.infer(ctx, exp.target))
+      const target_t = Exp.infer(ctx, exp.target)
+      const sigma = Value.isSigma(ctx, target_t)
       return sigma.car_t
     } else if (exp.kind === "Exp.Cdr") {
       // ctx |- target => Sigma(name, car_t, cdr_t)
@@ -98,6 +99,64 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       Exp.check(ctx, exp.step, Exp.nat_ind_step_t(motive))
       const target = Exp.evaluate(Ctx.to_env(ctx), exp.target)
       return Exp.do_ap(motive, target)
+    } else if (exp.kind === "Exp.Equal") {
+      // ctx |- t <= Type
+      // ctx |- from <= t
+      // ctx |- to <= t
+      // ---------------------
+      // ctx |- Equal(t, from, to) => Type
+      Exp.check(ctx, exp.t, { kind: "Value.Type" })
+      const t = Exp.evaluate(Ctx.to_env(ctx), exp.t)
+      Exp.check(ctx, exp.from, t)
+      Exp.check(ctx, exp.to, t)
+      return { kind: "Value.Type" }
+    } else if (exp.kind === "Exp.Replace") {
+      // ctx |- target => Equal(t, from, to)
+      // ctx |- motive <= (x: t) -> Type
+      // ctx |- base <= motive(from)
+      // ----------------------
+      // ctx |- replace(target, motive, base) => motive(to)
+      const target_t = Exp.infer(ctx, exp.target)
+      const equal = Value.isEqual(ctx, target_t)
+      const motive_t = Exp.evaluate(Env.extend(Env.init(), "t", equal.t), {
+        kind: "Exp.Pi",
+        name: "x",
+        arg_t: { kind: "Exp.Var", name: "t" },
+        ret_t: { kind: "Exp.Type" },
+      })
+      const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
+      Exp.check(ctx, exp.motive, motive_t)
+      Exp.check(ctx, exp.base, Exp.do_ap(motive, equal.from))
+      return Exp.do_ap(motive, equal.to)
+    } else if (exp.kind === "Exp.Trivial") {
+      return { kind: "Value.Type" }
+    } else if (exp.kind === "Exp.Absurd") {
+      return { kind: "Value.Type" }
+    } else if (exp.kind === "Exp.AbsurdInd") {
+      // NOTE the `motive` here is not a function from target_t to Type,
+      //   but a element of Type.
+      // ctx |- target => Absurd
+      // ctx |- motive <= Type
+      // ----------------------------
+      // ctx |- Absurd.ind(target, motive): motive
+      const target_t = Exp.infer(ctx, exp.target)
+      const absurd = Value.isAbsurd(ctx, target_t)
+      Exp.check(ctx, exp.motive, { kind: "Value.Type" })
+      const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
+      return motive
+    } else if (exp.kind === "Exp.Str") {
+      return { kind: "Value.Type" }
+    } else if (exp.kind === "Exp.Type") {
+      return { kind: "Value.Type" }
+    } else if (exp.kind === "Exp.The") {
+      // ctx |- t <= Type
+      // ctx |- exp <= t
+      // -----------------------------
+      // ctx |- The(t, exp) => t
+      Exp.check(ctx, exp.t, { kind: "Value.Type" })
+      const t = Exp.evaluate(Ctx.to_env(ctx), exp.exp)
+      Exp.check(ctx, exp.exp, t)
+      return t
     } else {
       throw new Trace.Trace(
         ut.aline(`
