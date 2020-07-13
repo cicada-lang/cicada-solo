@@ -37,7 +37,7 @@ export function repr(exp: Exp.Exp): string {
       return `Succ(${Exp.repr(exp.prev)})`
     }
     case "Exp.NatInd": {
-      return `NatInd(${Exp.repr(exp.target)}, ${Exp.repr(
+      return `Nat.ind(${Exp.repr(exp.target)}, ${Exp.repr(
         exp.motive
       )}, ${Exp.repr(exp.base)}, ${Exp.repr(exp.step)})`
     }
@@ -50,7 +50,7 @@ export function repr(exp: Exp.Exp): string {
       return "Same"
     }
     case "Exp.Replace": {
-      return `Replace(${Exp.repr(exp.target)}, ${Exp.repr(
+      return `replace(${Exp.repr(exp.target)}, ${Exp.repr(
         exp.motive
       )}, ${Exp.repr(exp.base)})`
     }
@@ -64,7 +64,7 @@ export function repr(exp: Exp.Exp): string {
       return "Absurd"
     }
     case "Exp.AbsurdInd": {
-      return `AbsurdInd(${Exp.repr(exp.target)}, ${Exp.repr(exp.motive)})`
+      return `Absurd.ind(${Exp.repr(exp.target)}, ${Exp.repr(exp.motive)})`
     }
     case "Exp.Str": {
       return "String"

@@ -1,9 +1,7 @@
 # tartlet
 
-- grammars/exp.ts
 - cli/cli-check.ts
 - cli/cli-eval.ts
-- better syntax
 
 # pie
 
