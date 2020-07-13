@@ -1,5 +1,6 @@
 # tartlet
 
+- exp/exp-parse.ts
 - cli/cli-check.ts
 - cli/cli-eval.ts
 
