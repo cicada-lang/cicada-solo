@@ -112,8 +112,6 @@ export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
     //  maybe use them to debug.
     return Neutral.readback(ctx, value.neutral)
   } else {
-    console.log(value.kind)
-    console.log(t.kind)
     throw new Error(
       ut.aline(`
       |I can not readback value: ${ut.inspect(value)},

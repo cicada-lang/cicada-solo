@@ -1,7 +1,8 @@
-# tartlet
-
-- fix lang2 TODO
-- fix lang1 TODO
+- test lang2 about Nat
+- test lang2 about Equal
+- test lang2 about Pi
+- test lang2 about Sigma
+- test lang2 about Absurd
 
 # pie
 
