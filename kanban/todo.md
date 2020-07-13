@@ -1,6 +1,5 @@
 # tartlet
 
-- test lang2
 - fix lang2 TODO
 - fix lang1 TODO
 
