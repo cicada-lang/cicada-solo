@@ -7,7 +7,9 @@
     "format": "npx prettier src --write"
   },
   "bin": {
-    "lang0": "./bin/lang0.js"
+    "lang0": "./bin/lang0.js",
+    "lang1": "./bin/lang1.js",
+    "lang2": "./bin/lang2.js"
   },
   "devDependencies": {
     "@types/assert": "^1.5.1",

@@ -13,10 +13,9 @@ export function run(file: string, opts: any): void {
   try {
     const ctx = Ctx.init()
     const t = Exp.infer(ctx, exp)
-    const env = Env.init()
-    const value = Exp.evaluate(env, exp)
-    const value_repr = Value.readback(ctx, { kind: "Value.Type" }, value)
-    const t_repr = Value.readback(ctx, { kind: "Value.Type" }, t)
+    const value = Exp.evaluate(Ctx.to_env(ctx), exp)
+    const value_repr = Exp.repr(Value.readback(ctx, t, value))
+    const t_repr = Exp.repr(Value.readback(ctx, { kind: "Value.Type" }, t))
     console.log(`${value_repr}: ${t_repr}`)
   } catch (error) {
     Trace.maybe_report(error, Exp.repr)

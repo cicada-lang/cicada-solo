@@ -5,6 +5,7 @@ import * as Ty from "../ty"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import { freshen } from "./freshen"
+import * as ut from "../../ut"
 
 export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
   if (t.kind === "Value.Nat" && value.kind === "Value.Zero") {
@@ -111,6 +112,13 @@ export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
     //  maybe use them to debug.
     return Neutral.readback(ctx, value.neutral)
   } else {
-    throw new Error("TODO")
+    console.log(value.kind)
+    console.log(t.kind)
+    throw new Error(
+      ut.aline(`
+      |I can not readback value: ${ut.inspect(value)},
+      |of type: ${ut.inspect(t)}.
+      |`)
+    )
   }
 }

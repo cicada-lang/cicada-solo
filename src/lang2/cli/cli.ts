@@ -1,5 +1,4 @@
 import commander from "commander"
-import * as cle_check from "./cli-check"
 import * as cle_eval from "./cli-eval"
 
 export function run(config: any): void {
@@ -7,7 +6,6 @@ export function run(config: any): void {
 
   program.name("lang2").version(config.version, "-v, --version")
 
-  program.command("check <input-file>").action(cle_check.run)
   program.command("eval <input-file>").action(cle_eval.run)
 
   program.parse(process.argv)

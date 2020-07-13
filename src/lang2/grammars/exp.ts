@@ -104,6 +104,9 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
       return exp
     },
+    nat: (_) => {
+      return { kind: "Exp.Nat" }
+    },
     zero: (_) => {
       return { kind: "Exp.Zero" }
     },

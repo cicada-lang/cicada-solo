@@ -172,7 +172,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // -----------------------------
       // ctx |- The(t, exp) => t
       Exp.check(ctx, exp.t, { kind: "Value.Type" })
-      const t = Exp.evaluate(Ctx.to_env(ctx), exp.exp)
+      const t = Exp.evaluate(Ctx.to_env(ctx), exp.t)
       Exp.check(ctx, exp.exp, t)
       return t
     } else {

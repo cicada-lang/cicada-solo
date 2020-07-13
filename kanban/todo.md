@@ -1,6 +1,8 @@
 # tartlet
 
-- examples/lang2 & test
+- test lang2
+- fix lang2 TODO
+- fix lang1 TODO
 
 # pie
 
