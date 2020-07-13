@@ -170,7 +170,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
         body: exp_matcher(body),
       }
     },
-    the: ([t, , exp]) => {
+    the: ([exp, , t]) => {
       return {
         kind: "Exp.The",
         t: exp_matcher(t),
