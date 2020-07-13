@@ -1,7 +1,6 @@
 # tartlet
 
-- cli/cli-check.ts
-- cli/cli-eval.ts
+- examples/lang2 & test
 
 # pie
 
