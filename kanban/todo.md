@@ -1,3 +1,5 @@
+- note about inference rule
+
 # pie
 
 - List

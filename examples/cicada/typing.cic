@@ -1,0 +1,39 @@
+// How to understand inference rule?
+// =================================
+
+// - Split type judgment to two judgments -- check and infer.
+// - Judgments should be viewed as proposition (type).
+// - The language of inference rule does not use closure.
+
+data Exp {
+  Var(name: String): Exp
+  Fn(name: String, body: Exp): Exp
+  Ap(target: Exp, arg: Exp): Exp
+}
+
+data Value {
+  // TODO
+}
+
+Env = Dic(Value)
+
+data Ty {
+  Atom(name: String): Ty
+  Arrow(arg_t: Ty, ret_t: Ty): Ty
+}
+
+Ctx = Dic(Ty)
+
+
+data Typing(ctx: Ctx, exp: Exp, t: Ty) {
+  // NOTE data constructors does not take arguments of type constructor again.
+  //   just like Null does not take the argument of List
+  LookupVar(name: String, lookup: Lookup(ctx, name, t)): Typing(ctx, Exp.Var(name), t)
+  // TODO
+  ArrowIntro(name: String, body: Exp): Typing(ctx, Exp.Fn(name, body), t)
+  ArrowElim(): Typing(ctx, Exp.Ap(), Ty.Arrow())
+}
+
+// TODO
+// Check
+// Infer
