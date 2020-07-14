@@ -1,0 +1,17 @@
+image: node:latest
+
+stages:
+  - test
+
+cache:
+  paths:
+    - node_modules/
+
+test:
+  stage: test
+  script:
+    - pwd
+    - ls -l
+    - npm install
+    - npm run build
+    - ./dev t
