@@ -1,13 +1,12 @@
-- test lang2 about Nat
-- test lang2 about Equal
-- test lang2 about Pi
-- test lang2 about Sigma
-- test lang2 about Absurd
-
 # pie
 
 - List
 - Vector
+
+- test Equal
+- test Pi
+- test Sigma
+- test Absurd
 
 # the little typer
 

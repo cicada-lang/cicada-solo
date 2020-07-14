@@ -1,0 +1,9 @@
+{
+  add_step = (prev) => (almost) => Succ(almost) : (prev: Nat) -> (almost: Nat) -> Nat
+  add = (x) => (y) => Nat.ind(x, (_) => Nat, y, add_step) : (x: Nat) -> (y: Nat) -> Nat
+  zero = Zero : Nat
+  one = Succ(zero) : Nat
+  two = Succ(one) : Nat
+  eight = add(add(two)(two))(add(two)(two))
+  eight
+}
