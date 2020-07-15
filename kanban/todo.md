@@ -1,7 +1,12 @@
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
 
 - simple arrow type
+  (x: Nat) -> (y: Nat) -> Nat
+  (Nat) -> (Nat) -> Nat
+
 - simple pair type
+  (x: Nat) * (y: Nat) * Nat
+  (Nat) * (Nat) * Nat
 
 - List
 - Vector

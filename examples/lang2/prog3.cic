@@ -3,18 +3,17 @@
   two = succ(one) : Nat
   three = succ(two) : Nat
 
-  // (x: Nat) -> (y: Nat) -> Nat
-  // (Nat) -> (Nat) -> Nat
-  // (Nat, Nat) -> Nat
-
   add = (x) => (y) => Nat.ind(x, (_) => Nat, y, (prev) => (almost) => succ(almost))
       : (x: Nat) -> (y: Nat) -> Nat
+
   mul = (x) => (y) => Nat.ind(x, (_) => Nat, one, (prev) => (almost) => add(almost)(y))
       : (x: Nat) -> (y: Nat) -> Nat
+
   eight = {
     four = add(two)(two)
     add(four)(four)
   }
+
   a_big_number = mul(eight)(eight)
   a_big_number
 }
