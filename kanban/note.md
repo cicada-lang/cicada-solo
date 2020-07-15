@@ -1,10 +1,10 @@
-# About knowledge, logic, formal inference rule and algorithm
+# About knowledge, logic, formal inference rule and computation
 
 - knowledge := fixation of belief
 - belief := that upon which a man is prepared to act
 - logic := belief system
 - inference rule := formal definition of judgment (belief)
-- algorithm := directed changes (simulation of action)
+- computation := directed changes (simulation of action)
 
 # About type subsumption
 
