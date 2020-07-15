@@ -3,6 +3,11 @@
   one = Succ(zero) : Nat
   two = Succ(one) : Nat
   three = Succ(two) : Nat
+
+  // (x: Nat) -> (y: Nat) -> Nat
+  // (Nat) -> (Nat) -> Nat
+  // (Nat, Nat) -> Nat
+
   add = (x) => (y) => Nat.ind(x, (_) => Nat, y, (prev) => (almost) => Succ(almost))
       : (x: Nat) -> (y: Nat) -> Nat
   mul = (x) => (y) => Nat.ind(x, (_) => Nat, one, (prev) => (almost) => add(almost)(y))
@@ -14,3 +19,20 @@
   a_big_number = mul(eight)(eight)
   a_big_number
 }
+
+// {
+//   zero = Zero : Nat
+//   one = Succ(zero) : Nat
+//   two = Succ(one) : Nat
+//   three = Succ(two) : Nat
+//   add = (x, y) => Nat.ind(x, (_) => Nat, y, (prev, almost) => Succ(almost))
+//       : (Nat, Nat) -> Nat
+//   mul = (x, y) => Nat.ind(x, (_) => Nat, one, (prev, almost) => add(almost)(y))
+//       : (Nat, Nat) -> Nat
+//   eight = {
+//     four = add(two)(two)
+//     add(four)(four)
+//   }
+//   a_big_number = mul(eight)(eight)
+//   a_big_number
+// }

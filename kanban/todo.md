@@ -1,3 +1,7 @@
+- lower case naming
+- simple arrow type
+- simple pair type
+
 # pie
 
 - List
