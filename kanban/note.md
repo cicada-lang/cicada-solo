@@ -1,10 +1,19 @@
+# About type subsumption
+
+- https://homepage.cs.uiowa.edu/~jgmorrs/eecs662s19/notes/Notes-on-subsumption.html
+- https://en.wikipedia.org/wiki/Subtyping#Subsumption
+
+# About type directed partial evaluation
+
+TODO
+
 # ABC's function naming and inference rule
 
 - Learn about ABC's function naming,
   see if the way we write inference rule
   will be much more natural in ABC.
   - https://homepages.cwi.nl/~steven/abc
-  
+
 - Note that, the language of inference rule does not use closure.
 
 # Arithmetic level and Church encoding

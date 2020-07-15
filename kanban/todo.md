@@ -1,7 +1,7 @@
+# lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
+
 - simple arrow type
 - simple pair type
-
-# pie
 
 - List
 - Vector
@@ -12,17 +12,9 @@
 - test Pi
 - test Absurd
 
-# the little typer
+# 用 The Little Typer 作为 Pie 的测试。
 
 - 设计实用的命令行工具与测试框架。
-
-# learn
-
-- search wikipedia about type subsumption
-  - https://homepage.cs.uiowa.edu/~jgmorrs/eecs662s19/notes/Notes-on-subsumption.html
-  - https://en.wikipedia.org/wiki/Subtyping#Subsumption
-
-- learn more about type directed partial evaluation.
 
 # Play with systemt
 
