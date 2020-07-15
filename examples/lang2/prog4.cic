@@ -1,0 +1,8 @@
+{
+  zero = Zero : Nat
+  one = Succ(zero) : Nat
+  two = Succ(one) : Nat
+  three = Succ(two) : Nat
+  one_two = Cons(one, two) : (_: Nat) * Nat
+  cdr(one_two)
+}

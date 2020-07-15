@@ -7,7 +7,6 @@
 
 - test Equal
 - test Pi
-- test Sigma
 - test Absurd
 
 # the little typer

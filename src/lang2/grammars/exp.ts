@@ -104,6 +104,33 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
       return exp
     },
+    sigma: ([, name, , car_t, , , cdr_t]) => {
+      return {
+        kind: "Exp.Sigma",
+        name: pt.Tree.token(name).value,
+        car_t: exp_matcher(car_t),
+        cdr_t: exp_matcher(cdr_t),
+      }
+    },
+    cons: ([, , car, , cdr, ]) => {
+      return {
+        kind: "Exp.Cons",
+        car: exp_matcher(car),
+        cdr: exp_matcher(cdr),
+      }
+    },
+    car: ([, , target, ]) => {
+      return {
+        kind: "Exp.Car",
+        target: exp_matcher(target),
+      }
+    },
+    cdr: ([, , target, ]) => {
+      return {
+        kind: "Exp.Cdr",
+        target: exp_matcher(target),
+      }
+    },
     nat: (_) => {
       return { kind: "Exp.Nat" }
     },
