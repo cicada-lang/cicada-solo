@@ -1,0 +1,45 @@
+@data Exp {
+  var(name: String): Exp
+  fn(name: String, ret: Exp): Exp
+  ap(target: Exp, arg: Exp): Exp
+}
+
+@data Ty {
+  atom(name: String): Ty
+  arrow(arg_t: Ty, ret_t: Ty): Ty
+}
+
+Ctx = Map(String, Ty)
+
+@data Typing(ctx: Ctx, exp: Exp, t: Ty) {
+  @given name: String
+  lookup: Lookup(ctx, name, t)
+  ----------------------------- lookup_var
+  Typing(ctx, Exp.var(name), t)
+
+  @given name: String, ret: Exp
+  @given arg_t: Ty, ret_t: Ty
+  ret_typing: Typing(Map.extend(ctx, name, arg_t), ret, ret_t)
+  ------------------------------------------------------ arrow_intro
+  Typing(ctx, Exp.fn(name, ret), Ty.arrow(arg_t, ret_t))
+
+  @given target: Exp
+  @given arg: Exp
+  @given arg_t: Ty
+  @given ret_t: Ty
+  target_typing: Typing(ctx, target, Ty.arrow(arg_t, ret_t))
+  arg_typing: Typing(ctx, arg, arg_t)
+  --------------------------------------- arrow_elim
+  Typing(ctx, Exp.ap(target, arg), ret_t)
+}
+
+// example proofs:
+
+// |- (x) => x : (A) -> A
+// ----- arrow_intro
+// x: A |- x: A
+// ------ lookup_var
+// QED
+
+_ : Typing(Map.empty, Exp.fn("x", Exp.var("x")), Ty.arrow(Ty.atom("A"), Ty.atom("A")))
+_ = Typing.arrow_intro(Typing.lookup_var(Lookup.here))
