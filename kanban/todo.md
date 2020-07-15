@@ -4,6 +4,17 @@
   - learn from List and Vec.
   - learn from scala2.
 
+# About inference rule
+
+- should we use inference rule syntax in datatype definition?
+  - instead of function application syntax.
+
+# About knowledge, logic, formal inference rule and algorithm
+
+# 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
+
+# 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
+
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
 
 - simple arrow type
@@ -16,8 +27,6 @@
 
 - List
 - Vector
-
-- note about inference rule
 
 - test Equal
 - test Pi
@@ -98,9 +107,3 @@
 # 我们需要支持 Inductive type（为 Class 的语义）。
 
 # 我们需要支持 Fulfilling type（为 Data 的语义）。
-
-# 实现 pie，并用《The Litte Typer》来做测试。再次练习实现技术。
-
-# 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
-
-# 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。

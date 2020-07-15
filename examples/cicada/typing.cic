@@ -52,6 +52,33 @@ Ctx = Map(String, Ty)
   ): Typing(ctx, Exp.ap(target, arg), ret_t)
 }
 
+// inference rule syntax:
+
+@data Typing(ctx: Ctx, exp: Exp, t: Ty) {
+
+  name: String
+  lookup: Lookup(ctx, name, t)
+  ----------------------------- lookup_var
+  Typing(ctx, Exp.var(name), t)
+
+  name: String
+  ret: Exp
+  arg_t: Ty
+  ret_t: Ty
+  ret_typing: Typing(Map.extend(ctx, name, arg_t), ret, ret_t)
+  ------------------------------ arrow_intro
+  Typing(ctx, Exp.fn(name, ret), Ty.arrow(arg_t, ret_t))
+
+  target: Exp
+  arg: Exp
+  arg_t: Ty
+  ret_t: Ty
+  target_typing: Typing(ctx, target, Ty.arrow(arg_t, ret_t))
+  arg_typing: Typing(ctx, arg, arg_t)
+  --------------------------------------- arrow_elim
+  Typing(ctx, Exp.ap(target, arg), ret_t)
+}
+
 @data Map(K: Type, V: Type) {
   empty: Map(K, V)
   extend(rest: Map(K, V), key: K, value: V): Map(K, V)
@@ -93,3 +120,57 @@ Typing.arrow_intro(
   Exp.fn("x", Exp.var("x")),
   Ty.arrow(Ty.atom("A"), Ty.atom("A")),
 )
+
+// inference rule syntax
+
+ret_typing = Typing.lookup_var(
+  Map.extend(Map.empty, "x", Ty.atom("A")),
+  "x", Ty.atom("A"),
+  Lookup.here,
+)
+
+Typing.arrow_intro(
+  Map.empty,
+  "x",
+  Exp.var("x"),
+  Ty.atom("A"),
+  Ty.atom("A"),
+  ret_typing
+)
+------------------
+Typing(
+  Map.empty,
+  Exp.fn("x", Exp.var("x")),
+  Ty.arrow(Ty.atom("A"), Ty.atom("A")),
+)
+
+// NOTE in the Typing above,
+//   it is not clear what is input and what is output.
+//   let us try Check and Infer,
+//   about which we already know what is input and what is output.
+
+@data Infer(ctx: Ctx, exp: Exp, t: Ty) {
+  name: String
+  lookup: Lookup(ctx, name, t)
+  ----------------------------- lookup_var
+  Infer(ctx, Exp.var(name), t)
+
+  target: Exp
+  arg: Exp
+  arg_t: Ty
+  ret_t: Ty
+  Typing(ctx, target, Ty.arrow(arg_t, ret_t))
+  Typing(ctx, arg, arg_t)
+  -------------------------------------- arrow_elim
+  Infer(ctx, Exp.ap(target, arg), ret_t)
+}
+
+@data Check(ctx: Ctx, exp: Exp, t: Ty) {
+  name: String
+  ret: Exp
+  arg_t: Ty
+  ret_t: Ty
+  Typing(Map.extend(ctx, name, arg_t), ret, ret_t)
+  ------------------------------------ arrow_intro
+  Check(ctx, Exp.fn(name, ret), Ty.arrow(arg_t, ret_t))
+}
