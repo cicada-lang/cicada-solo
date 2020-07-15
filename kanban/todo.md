@@ -1,9 +1,9 @@
-- note about inference rule
-
 # pie
 
 - List
 - Vector
+
+- note about inference rule
 
 - test Equal
 - test Pi

@@ -1,9 +1,16 @@
 {
-  add_step = (prev) => (almost) => Succ(almost) : (prev: Nat) -> (almost: Nat) -> Nat
-  add = (x) => (y) => Nat.ind(x, (_) => Nat, y, add_step) : (x: Nat) -> (y: Nat) -> Nat
   zero = Zero : Nat
   one = Succ(zero) : Nat
   two = Succ(one) : Nat
-  eight = add(add(two)(two))(add(two)(two))
-  eight
+  three = Succ(two) : Nat
+  add = (x) => (y) => Nat.ind(x, (_) => Nat, y, (prev) => (almost) => Succ(almost))
+      : (x: Nat) -> (y: Nat) -> Nat
+  mul = (x) => (y) => Nat.ind(x, (_) => Nat, one, (prev) => (almost) => add(almost)(y))
+      : (x: Nat) -> (y: Nat) -> Nat
+  eight = {
+    four = add(two)(two)
+    add(four)(four)
+  }
+  a_big_number = mul(eight)(eight)
+  a_big_number
 }
