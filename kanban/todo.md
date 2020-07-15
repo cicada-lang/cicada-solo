@@ -1,3 +1,9 @@
+# About implicit arguments
+
+- How should we use implicit arguments? (What should be `@given`?)
+  - learn from List and Vec.
+  - learn from scala2.
+
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
 
 - simple arrow type

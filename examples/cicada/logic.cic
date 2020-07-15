@@ -1,0 +1,38 @@
+// in prolog:
+// append([], Z, Z).
+// append([H | X], Y, [H | Z]):-
+//    append(X, Y, Z).
+
+// in inference rule:
+
+@given(z: List(A))
+----------------------- null
+Append(List.null, z, z)
+
+@given(head: A, x: List(A), y: List(A), z: List(A))
+Append(x, y, z)
+------------------------------------------------- cons
+Append(List.cons(head, x), y, List.cons(head, z))
+
+// in cicada
+
+@given(A: Type)
+@data Append(x: List(A), y: List(A), z: List(A)) {
+  null: Append(List.null, z, z)
+  @given(head: A)
+  cons(Append(x, y, z)): Append(List.cons(head, x), y, List.cons(head, z))
+}
+
+// in cicada with inference syntax:
+
+@given(A: Type)
+@data Append(x: List(A), y: List(A), z: List(A)) {
+
+  ----------------------- null
+  Append(List.null, z, z)
+
+  @given(head: A)
+  Append(x, y, z)
+  ------------------------------------------------- cons
+  Append(List.cons(head, x), y, List.cons(head, z))
+}
