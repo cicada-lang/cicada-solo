@@ -1,1 +1,1 @@
-Succ(Succ(Succ(Zero))): Nat
+succ(succ(succ(zero))): Nat

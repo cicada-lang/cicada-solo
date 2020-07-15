@@ -3,7 +3,7 @@ import * as Ty from "../ty"
 import pt from "@forchange/partech"
 import rr from "@forchange/readable-regular-expression"
 
-const preserved_identifiers = ["Zero", "Succ", "the", "rec"]
+const preserved_identifiers = ["zero", "succ", "the", "rec"]
 
 const identifier = new pt.Sym.Pat(
   /^identifier/,
@@ -42,8 +42,8 @@ export function exp(): pt.Sym.Rule {
     fn: ["(", identifier, ")", "=", ">", exp],
     ap: [identifier, pt.one_or_more(exp_in_paren)],
     suite: ["{", pt.zero_or_more(def), exp, "}"],
-    zero: ["Zero"],
-    succ: ["Succ", "(", exp, ")"],
+    zero: ["zero"],
+    succ: ["succ", "(", exp, ")"],
     rec: ["rec", "[", ty, "]", "(", exp, ",", exp, ",", exp, ")"],
     the: ["the", "[", ty, "]", "(", exp, ")"],
   })

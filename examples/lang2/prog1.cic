@@ -1,4 +1,4 @@
 {
-  n = Zero : Nat
-  Succ(n) : Nat
+  n = zero : Nat
+  succ(n) : Nat
 }

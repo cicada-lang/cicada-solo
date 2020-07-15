@@ -1,1 +1,1 @@
-the[Nat](Succ(Succ(Succ(Zero))))
+the[Nat](succ(succ(succ(zero))))

@@ -1,14 +1,13 @@
 {
-  zero = Zero : Nat
-  one = Succ(zero) : Nat
-  two = Succ(one) : Nat
-  three = Succ(two) : Nat
+  one = succ(zero) : Nat
+  two = succ(one) : Nat
+  three = succ(two) : Nat
 
   // (x: Nat) -> (y: Nat) -> Nat
   // (Nat) -> (Nat) -> Nat
   // (Nat, Nat) -> Nat
 
-  add = (x) => (y) => Nat.ind(x, (_) => Nat, y, (prev) => (almost) => Succ(almost))
+  add = (x) => (y) => Nat.ind(x, (_) => Nat, y, (prev) => (almost) => succ(almost))
       : (x: Nat) -> (y: Nat) -> Nat
   mul = (x) => (y) => Nat.ind(x, (_) => Nat, one, (prev) => (almost) => add(almost)(y))
       : (x: Nat) -> (y: Nat) -> Nat
@@ -21,11 +20,11 @@
 }
 
 // {
-//   zero = Zero : Nat
-//   one = Succ(zero) : Nat
-//   two = Succ(one) : Nat
-//   three = Succ(two) : Nat
-//   add = (x, y) => Nat.ind(x, (_) => Nat, y, (prev, almost) => Succ(almost))
+//   zero = zero : Nat
+//   one = succ(zero) : Nat
+//   two = succ(one) : Nat
+//   three = succ(two) : Nat
+//   add = (x, y) => Nat.ind(x, (_) => Nat, y, (prev, almost) => succ(almost))
 //       : (Nat, Nat) -> Nat
 //   mul = (x, y) => Nat.ind(x, (_) => Nat, one, (prev, almost) => add(almost)(y))
 //       : (Nat, Nat) -> Nat

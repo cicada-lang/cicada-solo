@@ -1,16 +1,20 @@
-When checking (_) => id(id(id(id(two)))),
-I am expecting the type to be Ty.Arrow,
-but the given type is Nat.
+/home/xyh/cicada/node_modules/@forchange/partech/lib/parsers/earley/machine-collect.js:52
+    throw Machine.parsing_error(machine, rule, start, end);
+    ^
 
-previous:
-- (_) => id(id(id(id(two))))
-- (_) => (_) => id(id(id(id(two))))
-- the[(Nat) -> Nat]((_) => (_) => id(id(id(id(two)))))
-- {
-  zero = the[Nat](Zero)
-  one = the[Nat](Succ(zero))
-  two = the[Nat](Succ(one))
-  id = the[(Nat) -> Nat]((x) => x)
-  the[(Nat) -> Nat]((_) => (_) => id(id(id(id(two)))))
+Parsing [Error]: found token: "#token(symbol, =, (9, 10))", while expecting:
+ "}" according to:
+     exp:suite@0 -> "{"@1 zero_or_more:zero@1 exp:zero@2 » "}" 
+
+    at Object.parsing_error (/home/xyh/cicada/node_modules/@forchange/partech/lib/parsers/earley/machine-parsing-error.js:73:16)
+    at Object.collect_node (/home/xyh/cicada/node_modules/@forchange/partech/lib/parsers/earley/machine-collect.js:52:19)
+    at Object.collect (/home/xyh/cicada/node_modules/@forchange/partech/lib/parsers/earley/machine-collect.js:40:20)
+    at Parser.parse (/home/xyh/cicada/node_modules/@forchange/partech/lib/parsers/earley/earley.js:29:20)
+    at Object.parse (/home/xyh/cicada/lib/lang1/exp/exp-parse.js:32:25)
+    at Command.run (/home/xyh/cicada/lib/lang1/cli/cli-eval.js:34:21)
+    at Command.listener [as _actionHandler] (/home/xyh/cicada/node_modules/commander/index.js:413:31)
+    at Command._parseCommand (/home/xyh/cicada/node_modules/commander/index.js:914:14)
+    at Command._dispatchSubcommand (/home/xyh/cicada/node_modules/commander/index.js:865:18)
+    at Command._parseCommand (/home/xyh/cicada/node_modules/commander/index.js:882:12) {
+  span: Span { lo: 9, hi: 10 }
 }
-

@@ -1,1 +1,1 @@
-(_) => (__1) => Succ(Succ(Zero)): (Nat) -> (Nat) -> Nat
+(_) => (__1) => succ(succ(zero)): (Nat) -> (Nat) -> Nat

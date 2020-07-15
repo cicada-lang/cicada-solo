@@ -19,10 +19,10 @@ export function repr(exp: Exp.Exp): string {
       return `{\n${ut.indent(suite_repr, "  ")}\n}`
     }
     case "Exp.Zero": {
-      return `Zero`
+      return `zero`
     }
     case "Exp.Succ": {
-      return `Succ(${repr(exp.prev)})`
+      return `succ(${repr(exp.prev)})`
     }
     case "Exp.Rec": {
       const { t, target, base, step } = exp

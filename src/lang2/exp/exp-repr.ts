@@ -19,7 +19,7 @@ export function repr(exp: Exp.Exp): string {
       return `(${exp.name}: ${Exp.repr(exp.car_t)}) * ${Exp.repr(exp.cdr_t)}`
     }
     case "Exp.Cons": {
-      return `Cons(${Exp.repr(exp.car)}, ${Exp.repr(exp.cdr)})`
+      return `cons(${Exp.repr(exp.car)}, ${Exp.repr(exp.cdr)})`
     }
     case "Exp.Car": {
       return `car(${Exp.repr(exp.target)})`
@@ -31,10 +31,10 @@ export function repr(exp: Exp.Exp): string {
       return "Nat"
     }
     case "Exp.Zero": {
-      return "Zero"
+      return "zero"
     }
     case "Exp.Succ": {
-      return `Succ(${Exp.repr(exp.prev)})`
+      return `succ(${Exp.repr(exp.prev)})`
     }
     case "Exp.NatInd": {
       return `Nat.ind(${Exp.repr(exp.target)}, ${Exp.repr(
@@ -58,7 +58,7 @@ export function repr(exp: Exp.Exp): string {
       return "Trivial"
     }
     case "Exp.Sole": {
-      return "Sole"
+      return "sole"
     }
     case "Exp.Absurd": {
       return "Absurd"

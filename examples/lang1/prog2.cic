@@ -1,4 +1,4 @@
 {
-  zero = the[Nat](Zero)
-  zero
+  z = the[Nat](zero)
+  z
 }
