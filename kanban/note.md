@@ -8,6 +8,7 @@
     which is the same as type checking algorithm.
   - use a group of data constructors to define a type constructor,
     is one way of doing this.
+  - this is introduction, how about elimination?
 - computation := directed changes (simulation of action)
 
 # About type subsumption
