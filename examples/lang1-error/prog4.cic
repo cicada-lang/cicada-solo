@@ -1,8 +1,8 @@
 {
-  zero = the[Nat](zero)
-  one = the[Nat](succ(zero))
-  two = the[Nat](succ(one))
-  id = the[(Nat) -> Nat]((x) => x)
-  the[(Nat) -> Nat]((_) => (_) => id(id(id(id(two)))))
-  // the[(Nat) -> (Nat) -> Nat]((_) => (_) => id(id(id(id(two)))))
+  one = succ(zero) : Nat
+  two = succ(one) : Nat
+  id = (x) => x : (Nat) -> Nat
+  (_) => (_) => id(id(id(id(two)))) : (Nat) -> Nat
+  // NOTE should be:
+  //   (_) => (_) => id(id(id(id(two)))) : (Nat) -> (Nat) -> Nat
 }
