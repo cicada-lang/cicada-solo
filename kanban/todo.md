@@ -4,6 +4,8 @@
   - learn from List and Vec.
   - learn from scala2.
 
+# Run datatype definition as logic programs.
+
 # 为古典逻辑设计形式语言。
 
 # 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。

@@ -3,7 +3,11 @@
 - knowledge := fixation of belief
 - belief := that upon which a man is prepared to act
 - logic := belief system
-- inference rule := formal definition of judgment (belief)
+- inference rule := definition of judgment (belief)
+  - by giving algorithm to check whether a group of data is evidence of the judgment,
+    which is the same as type checking algorithm.
+  - use a group of data constructors to define a type constructor,
+    is one way of doing this.
 - computation := directed changes (simulation of action)
 
 # About type subsumption
