@@ -4,12 +4,7 @@
   - learn from List and Vec.
   - learn from scala2.
 
-# About inference rule
-
-- should we use inference rule syntax in datatype definition?
-  - instead of function application syntax.
-
-# About knowledge, logic, formal inference rule and algorithm
+# 为古典逻辑设计形式语言。
 
 # 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
 
