@@ -5,6 +5,8 @@
 Parsing [Error]: found token: "#token(symbol, =, (9, 10))", while expecting:
  "}" according to:
      exp:suite@0 -> "{"@1 zero_or_more:zero@1 exp:zero@2 » "}" 
+ ":" according to:
+     exp:the@1 -> exp:zero@2 » ":" ty 
 
     at Object.parsing_error (/home/xyh/cicada/node_modules/@forchange/partech/lib/parsers/earley/machine-parsing-error.js:73:16)
     at Object.collect_node (/home/xyh/cicada/node_modules/@forchange/partech/lib/parsers/earley/machine-collect.js:52:19)

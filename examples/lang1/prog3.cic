@@ -1,6 +1,6 @@
 {
-  one = the[Nat](succ(zero))
-  two = the[Nat](succ(one))
-  id = the[(Nat) -> Nat]((x) => x)
+  one = succ(zero) : Nat
+  two = succ(one) : Nat
+  id = (x) => x : (Nat) -> Nat
   id(two)
 }

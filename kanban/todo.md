@@ -1,4 +1,3 @@
-- lang1 use `:` instead of `the`
 - simple arrow type
 - simple pair type
 
