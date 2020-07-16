@@ -1,43 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>cicada.md</title>
-</head>
-<body>
-<pre style="white-space: pre-wrap;"># Cicada
+# Cicada
 
 ## Function
 
 Function definition:
 
-``` scala
+```
 f(x: A, y: B): C = k(g(x), h(y))
 ```
 
 Function application:
 
-``` scala
+```
 f(a, b)
 ```
 
 Function abstraction:
 
-``` scala
-(x, y) =&gt; k(g(x), h(y))
+```
+(x, y) => k(g(x), h(y))
 ```
 
 Pi type:
 
-``` scala
-(x: A, y: B) -&gt; C
+```
+(x: A, y: B) -> C
 ```
 
 ## Class
 
 Class definition:
 
-``` scala
+```
 class C {
   a: A
   f(x: A, y: B): C
@@ -46,13 +39,7 @@ class C {
 
 Class fulfill:
 
-``` scala
-```
-
 Use class as to construct instance:
-
-``` scala
-```
 
 ## Data
 
@@ -61,6 +48,3 @@ Data definition:
 Data pattern matching:
 
 Data dot field:
-</pre>
-</body>
-</html>

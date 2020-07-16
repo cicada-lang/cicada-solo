@@ -2,7 +2,7 @@ Cicada
 
 link:abduction-for-double.txt
 link:bidirectional-type-checking.md
-link:cicada.md
+link:cicada-syntax.md
 link:dsl-for-writing-inference-rules.md
 link:index
 link:knowledge-logic-computation.txt
