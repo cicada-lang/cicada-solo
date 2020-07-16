@@ -1,3 +1,19 @@
+# Abduction can be used to support double negation.
+
+|- ((A) -> Absurd) -> Absurd
+---------------------------- double_negation
+|- A
+
+Reason with me:
+
+|- f: ((A) -> Absurd) -> Absurd
+------------------------------------------ eta_expansion
+|- (h) => f(h) : ((A) -> Absurd) -> Absurd
+------------------------------------------- Typing.arrow_intro
+h: (A) -> Absurd |- f(h) : Absurd
+------------------------------------ Abduction
+|- abduct(h, f(h)): A
+
 # About implicit arguments
 
 - How should we use implicit arguments? (What should be `@given`?)
