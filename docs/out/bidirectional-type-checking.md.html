@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>bidirectional-type-checking.md</title>
+</head>
+<body>
+<pre style="white-space: pre-wrap;"># a prolog-like DSL for bidirectional type checking
+
+where uppercase letters are data constructors
+and lowercase letters at argument position are meta variables
+and lowercase letters at function position are relation
+for example: `UpperCase(lower_case)`
+
+ctx |- e &lt;= t
+---------------------
+ctx |- The(t, e) =&gt; t
+
+ctx |- e &lt;= t2
+t1 == t2
+---------------------
+ctx |- e &lt;= t1
+
+a = lookup(x, ctx)
+---------------------
+ctx |- x =&gt; a
+
+ctx, x: a |- e &lt;= b
+---------------------
+ctx |- Fn(x, e) &lt;= Arrow(a, b)
+
+ctx |- f =&gt; Arrow(a, b)
+ctx |- e &lt;= a
+---------------------
+ctx |- Ap(f, e) =&gt; b
+
+a prolog-like DSL for bidirectional type checking,
+would be wrong.
+
+because the aim of split one judgment `:`
+to two judgments `=&gt;` and `&lt;=`
+is to avoid searching
+and making the group of inference rules deterministic.
+</pre>
+</body>
+</html>
