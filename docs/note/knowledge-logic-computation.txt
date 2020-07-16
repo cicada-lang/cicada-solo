@@ -1,0 +1,23 @@
+About knowledge, logic, formal inference rule and computation
+
+- knowledge := fixation of belief.
+
+- belief := that upon which a man is prepared to act.
+
+- logic := the system we use to express beliefs.
+
+- inference rule := definition of judgment (belief).
+  - by giving algorithm to check whether a group of data is evidence of the judgment,
+    which is the same as type checking algorithm.
+  - use a group of data constructors to define a type constructor,
+    is one way of doing this.
+  - this is introduction, how about elimination?
+    - we need elimination rule about arrow elimination
+      to do computation by substitution.
+    - although we have general pattern matching and recursion
+      to do computation for all other algebraic data type,
+      we still can use elimination rule to
+      1. make sure all cases are covered;
+      2. avoid recursion.
+
+- computation := directed changes (simulation of action).

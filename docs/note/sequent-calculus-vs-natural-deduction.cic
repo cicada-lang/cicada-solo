@@ -1,0 +1,90 @@
+// Why it is easier to prove the existence of normal forms in sequent calculus than natural deduction.
+
+// Every elimination rule in natural deduction are synthetic,
+// i.e. reading from bottom to up there are information lost.
+
+// In sequent calculus only the cut rule is synthetic, all other rules are analytic.
+
+// in natural deduction:
+
+@data Either(A: Type, B: Type) {
+
+  l: A
+  ------------ intro_l
+  Either(A, B)
+
+  r: B
+  ------------ intro_r
+  Either(A, B)
+
+  @given C: Type
+  target: Either(A, B)
+  lf: (A) -> C
+  rf: (B) -> C
+  ------------ elim
+  C
+
+  elim(Either.intro_l(l), lf, rf) = lf(l)
+  elim(Either.intro_r(r), lf, rf) = rf(r)
+}
+
+// in sequent calculus:
+
+@data Either(A: Type, B: Type) {
+
+  l: A
+  ------------ right_l
+  Either(A, B)
+
+  r: B
+  ------------ right_r
+  Either(A, B)
+
+  @given C: Type
+
+  lf: (A) -> C
+  rf: (B) -> C
+  ----------------- left
+  Either(A, B) -> C
+
+  left(lf, rf) = {
+    case (Either.right_l(l)) => lf(l)
+    case (Either.right_r(r)) => rf(r)
+  }
+}
+
+// in natural deduction:
+
+@data Pair(A: Type, B: Type) {
+
+  fst: A
+  snd: B
+  ---------- intro
+  Pair(A, B)
+
+  target: Pair(A, B)
+  ------------------ elim_fst
+  A
+
+  target: Pair(A, B)
+  ------------------ elim_snd
+  B
+}
+
+// in sequent calculus:
+
+@data Pair(A: Type, B: Type) {
+
+  fst: A
+  snd: B
+  ---------- right
+  Pair(A, B)
+
+  fst_f: A -> C
+  --------------- left_fst
+  Pair(A, B) -> C
+
+  snd_f: B -> C
+  --------------- left_snd
+  Pair(A, B) -> C
+}
