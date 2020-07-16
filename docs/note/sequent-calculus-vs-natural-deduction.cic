@@ -5,6 +5,8 @@
 
 // In sequent calculus only the cut rule is synthetic, all other rules are analytic.
 
+// - https://en.wikipedia.org/wiki/Analytic-synthetic_distinction
+
 // in natural deduction:
 
 @data Either(A: Type, B: Type) {

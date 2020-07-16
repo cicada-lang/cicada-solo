@@ -2,7 +2,9 @@ link:abduction-for-double.txt
 link:bidirectional-type-checking.md
 link:cicada.md
 link:dsl-for-writing-inference-rules.md
+link:index
 link:knowledge-logic-computation.txt
 link:scientific-method.md
 link:sequent-calculus-vs-natural-deduction.cic
+link:toc
 link:traditional-semantics-vs-algebraic-semantics.md
