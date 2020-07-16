@@ -6,7 +6,7 @@
 
 // NOTE Give name to each clause in prolog,
 //   is equivalent to datatype definition in language with dependent type.
-// When doing so, there will be no computation in the resulting type (only pattern matching)
+//   When doing so, there will be no computation in the resulting type (only pattern matching)
 //   while dependent type systemt can do more than this.
 
 // in cicada:

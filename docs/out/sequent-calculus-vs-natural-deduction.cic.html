@@ -12,91 +12,100 @@
 
 // In sequent calculus only the cut rule is synthetic, all other rules are analytic.
 
+// Natural deduction and sequent calculus will always have the same introduction rule,
+//   which is called the right rule in sequent calculus.
+// And the left rule of sequent calculus
+//   is just the currying version of the elimination rule of natural deduction.
+
 // - <a href="https://en.wikipedia.org/wiki/Analytic-synthetic_distinction">https://en.wikipedia.org/wiki/Analytic-synthetic_distinction</a>
 
-// in natural deduction:
-
 @data Either(A: Type, B: Type) {
 
-  l: A
-  ------------ intro_l
-  Either(A, B)
+  // l: A
+  // ------------ intro_l
+  // Either(A, B)
 
-  r: B
-  ------------ intro_r
-  Either(A, B)
+  intro_l(l: A): Either(A, B)
 
-  @given C: Type
-  target: Either(A, B)
-  lf: (A) -&gt; C
-  rf: (B) -&gt; C
-  ------------ elim
-  C
+  // r: B
+  // ------------ intro_r
+  // Either(A, B)
 
-  elim(Either.intro_l(l), lf, rf) = lf(l)
-  elim(Either.intro_r(r), lf, rf) = rf(r)
+  intro_r(r: B): Either(A, B)
 }
+
+// in natural deduction:
+
+// @given A: Type, B: Type, C: Type
+// target: Either(A, B)
+// lf: (A) -&gt; C
+// rf: (B) -&gt; C
+// ------------ Either.elim
+// C
+
+Either.elim(Either(A, B), (A) -&gt; C, (B) -&gt; C): C
+Either.elim(Either.intro_l(l), lf, rf) = lf(l)
+Either.elim(Either.intro_r(r), lf, rf) = rf(r)
 
 // in sequent calculus:
 
-@data Either(A: Type, B: Type) {
+// @given A: Type, B: Type, C: Type
+// lf: (A) -&gt; C
+// rf: (B) -&gt; C
+// ----------------- Either.left
+// Either(A, B) -&gt; C
 
-  l: A
-  ------------ right_l
-  Either(A, B)
-
-  r: B
-  ------------ right_r
-  Either(A, B)
-
-  @given C: Type
-
-  lf: (A) -&gt; C
-  rf: (B) -&gt; C
-  ----------------- left
-  Either(A, B) -&gt; C
-
-  left(lf, rf) = {
-    case (Either.right_l(l)) =&gt; lf(l)
-    case (Either.right_r(r)) =&gt; rf(r)
-  }
+Either.left((A) -&gt; C, (B) -&gt; C): Either(A, B) -&gt; C
+Either.left(lf, rf) = {
+  case (Either.intro_l(l)) =&gt; lf(l)
+  case (Either.intro_r(r)) =&gt; rf(r)
 }
 
 // in natural deduction:
 
 @data Pair(A: Type, B: Type) {
 
-  fst: A
-  snd: B
-  ---------- intro
-  Pair(A, B)
+  // fst: A
+  // snd: B
+  // ---------- intro
+  // Pair(A, B)
 
-  target: Pair(A, B)
-  ------------------ elim_fst
-  A
-
-  target: Pair(A, B)
-  ------------------ elim_snd
-  B
+  intro(fst: A, snd: B): Pair(A, B)
 }
+
+// @given A: Type, B: Type
+// target: Pair(A, B)
+// ------------------ Pair.elim_fst
+// A
+
+Pair.elim_fst(Pair(A, B)): A
+Pair.elim_fst(Pair.intro(fst, snd)) = fst
+
+// @given A: Type, B: Type
+// target: Pair(A, B)
+// ------------------ Pair.elim_snd
+// B
+
+Pair.elim_snd(Pair(A, B)): B
+Pair.elim_snd(Pair.intro(fst, snd)) = snd
 
 // in sequent calculus:
 
-@data Pair(A: Type, B: Type) {
+// @given A: Type, B: Type
+// fst_f: A -&gt; C
+// --------------- Pair.left_fst
+// Pair(A, B) -&gt; C
 
-  fst: A
-  snd: B
-  ---------- right
-  Pair(A, B)
+Pair.left_fst(A -&gt; C): Pair(A, B) -&gt; C
+Pair.left_fst(fst_f) = (Pair.intro(fst, snd)) =&gt; fst_f(fst)
 
-  fst_f: A -&gt; C
-  --------------- left_fst
-  Pair(A, B) -&gt; C
+// @given A: Type, B: Type
+// snd_f: B -&gt; C
+// --------------- Pair.left_snd
+// Pair(A, B) -&gt; C
 
-  snd_f: B -&gt; C
-  --------------- left_snd
-  Pair(A, B) -&gt; C
-}
+Pair.left_snd(B -&gt; C): Pair(A, B) -&gt; C
+Pair.left_snd(snd_f) = (Pair.intro(fst, snd)) =&gt; snd_f(snd)
 </pre>
 </body>
 </html>
