@@ -25,21 +25,10 @@ Ctx = Map(String, Ty)
 
   @given target: Exp
   @given arg: Exp
-  @given arg_t: Ty
   @given ret_t: Ty
+  arg_t: Ty
   target_typing: Typing(ctx, target, Ty.arrow(arg_t, ret_t))
   arg_typing: Typing(ctx, arg, arg_t)
   --------------------------------------- arrow_elim
   Typing(ctx, Exp.ap(target, arg), ret_t)
 }
-
-// example proofs:
-
-// |- (x) => x : (A) -> A
-// ----- arrow_intro
-// x: A |- x: A
-// ------ lookup_var
-// QED
-
-_ : Typing(Map.empty, Exp.fn("x", Exp.var("x")), Ty.arrow(Ty.atom("A"), Ty.atom("A")))
-_ = Typing.arrow_intro(Typing.lookup_var(Lookup.here))
