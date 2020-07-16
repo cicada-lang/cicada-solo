@@ -1,3 +1,9 @@
+# About implicit arguments
+
+- How should we use implicit arguments? (What should be `@given`?)
+  - learn from List and Vec.
+  - learn from scala2.
+
 # About knowledge, logic, formal inference rule and computation
 
 - knowledge := fixation of belief.
@@ -9,6 +15,13 @@
   - use a group of data constructors to define a type constructor,
     is one way of doing this.
   - this is introduction, how about elimination?
+    - we need elimination rule about arrow elimination
+      to do computation by substitution.
+    - although we have general pattern matching and recursion
+      to do computation for all other algebraic data type,
+      we still can use elimination rule to
+      1. make sure all cases are covered;
+      2. avoid recursion.
 - computation := directed changes (simulation of action).
 
 # About type subsumption

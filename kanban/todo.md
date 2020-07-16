@@ -1,10 +1,6 @@
-# About implicit arguments
-
-- How should we use implicit arguments? (What should be `@given`?)
-  - learn from List and Vec.
-  - learn from scala2.
-
 # Run datatype definition as logic programs.
+
+# Why it is easier to prove the existence of normal forms in sequent calculus than natural deduction.
 
 # 为古典逻辑设计形式语言。
 
