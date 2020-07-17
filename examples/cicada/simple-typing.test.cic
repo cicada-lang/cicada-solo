@@ -8,11 +8,19 @@
 
 {
   ctx = Map.empty
-  e = Exp.fn("x", Exp.var("x"))
-  t = Ty.arrow(Ty.atom("A"), Ty.atom("A"))
+  x = Exp.var("x")
+  A = Ty.atom("A")
 
   Typing.arrow_intro(
-    Typing.lookup_var(Lookup.here)): Typing(ctx, e, t)
+    Typing.lookup_var(Lookup.here)
+  ): Typing(ctx, Exp.fn("x", x), Ty.arrow(A, A))
+
+  Typing(ctx, Exp.fn("x", x), Ty.arrow(A, A))
+  ------------------------------------------- Typing.arrow_intro
+  Typing(Map.extend(ctx, "x", A), x, A)
+  ------------------------------------------- Typing.lookup_var
+  Lookup(Map.extend(ctx, "x", A), "x", A)
+  ------------------------------------------- Lookup.here
 }
 
 // |- (x) => (y) => x : (A) -> (B) -> A
@@ -25,12 +33,25 @@
 
 {
   ctx = Map.empty
-  e = Exp.fn("x", Exp.fn("y", Exp.var("x")))
-  t = Ty.arrow(Ty.atom("A"), Ty.arrow(Ty.atom("B"), Ty.atom("A")))
+  x = Exp.var("x")
+  A = Ty.atom("A")
+  B = Ty.atom("B")
 
   Typing.arrow_intro(
     Typing.arrow_intro(
-      Typing.lookup_var(Lookup.there(Lookup.here)))): Typing(ctx, e, t)
+      Typing.lookup_var(Lookup.there(Lookup.here)))
+  ): Typing(ctx, Exp.fn("x", Exp.fn("y", x)), Ty.arrow(A, Ty.arrow(B, A)))
+
+  Typing(ctx, Exp.fn("x", Exp.fn("y", x)), Ty.arrow(A, Ty.arrow(B, A)))
+  ------------------------------- Typing.arrow_intro
+  Typing(Map.extend(ctx, "x", A), Exp.fn("y", x), Ty.arrow(B, A))
+  ------------------------------- Typing.arrow_intro
+  Typing(Map.extend(Map.extend(ctx, "x", A), "y", B), x, A)
+  ------------------------------- Typing.lookup_var
+  Lookup(Map.extend(Map.extend(ctx, "x", A), "y", B), "x", A)
+  ------------------------------- Lookup.there
+  Lookup(Map.extend(ctx, "x", A), "x", A)
+  ------------------------------- Lookup.here
 }
 
 // y: A |- {(x) => x}(y) : A
@@ -47,53 +68,22 @@
 
 {
   ctx = Map.extend(Map.empty, "y", Ty.atom("A"))
-  e = Exp.ap(Exp.fn("x", Exp.var("x")), Exp.var("y"))
-  t = Ty.atom("A")
+  x = Exp.var("x")
+  y = Exp.var("y")
+  id = Exp.fn("x", x)
+  A = Ty.atom("A")
 
   Typing.arrow_elim(
-    Ty.atom("A"),
+    A,
     Typing.arrow_intro(Typing.lookup_var(Lookup.here)),
-    Typing.lookup_var(Lookup.here)): Typing(ctx, e, t)
-}
+    Typing.lookup_var(Lookup.here)): Typing(ctx, Exp.ap(id, y), A)
 
-// NOTE The above proof again,
-//   using inference rule syntax for function application.
-
-{
-  ctx = Map.extend(Map.empty, "y", Ty.atom("A"))
-  x = Exp.var("x")
-  y = Exp.var("y")
-  id = Exp.fn("x", x)
-  A = Ty.atom("A")
+  // NOTE The above proof again,
+  //   using inference rule syntax for function application.
 
   Typing(ctx, Exp.ap(id, y), A)
   ---------------------------- Typing.arrow_elim
-  { Ty -- Ty.atom("A") }
-  { Typing(ctx, id, Ty.arrow(A, A))
-    ---------------------------- Typing.arrow_intro
-    { Typing(Map.extend(ctx, "x", A), x, A)
-      ---------------------------- Typing.lookup_var
-      { Lookup(Map.extend(ctx, "x", A), "x", A) } }
-    ---------------------------- Lookup.here }
-  { Typing(ctx, y, A)
-    ---------------------------- Typing.lookup_var
-    { Lookup(ctx, "y", A)
-      ---------------------------- Lookup.here } }
-}
-
-// NOTE special syntax for single argument application
-//   associate to right -- f g x == f (g (x)) -- not like haskell
-
-{
-  ctx = Map.extend(Map.empty, "y", Ty.atom("A"))
-  x = Exp.var("x")
-  y = Exp.var("y")
-  id = Exp.fn("x", x)
-  A = Ty.atom("A")
-
-  Typing(ctx, Exp.ap(id, y), A)
-  ---------------------------- Typing.arrow_elim
-  { Ty -- Ty.atom("A") }
+  { Ty -- A }
   { Typing(ctx, id, Ty.arrow(A, A))
     ---------------------------- Typing.arrow_intro
     Typing(Map.extend(ctx, "x", A), x, A)
@@ -104,4 +94,21 @@
     ---------------------------- Typing.lookup_var
     Lookup(ctx, "y", A)
     ---------------------------- Lookup.here  }
+
+  // NOTE special syntax for single argument application
+  //   associate to right -- f g x == f (g (x)) -- not like haskell
+
+  // Typing(ctx, Exp.ap(id, y), A)
+  // ---------------------------- Typing.arrow_elim
+  // { Ty -- Ty.atom("A") }
+  // { Typing(ctx, id, Ty.arrow(A, A))
+  //   ---------------------------- Typing.arrow_intro
+  //   { Typing(Map.extend(ctx, "x", A), x, A)
+  //     ---------------------------- Typing.lookup_var
+  //     { Lookup(Map.extend(ctx, "x", A), "x", A) } }
+  //   ---------------------------- Lookup.here }
+  // { Typing(ctx, y, A)
+  //   ---------------------------- Typing.lookup_var
+  //   { Lookup(ctx, "y", A)
+  //     ---------------------------- Lookup.here } }
 }
