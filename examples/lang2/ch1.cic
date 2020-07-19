@@ -2,5 +2,6 @@
 
 {
   _ = "ratatouille": String
+  _ = cons("ratatouille", "baguette"): (_: String) * String
   _
 }

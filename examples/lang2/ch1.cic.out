@@ -1,1 +1,1 @@
-"ratatouille": String
+cons("ratatouille", "baguette"): (_: String) * String
