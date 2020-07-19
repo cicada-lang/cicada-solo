@@ -11,6 +11,8 @@
 
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
 
+- use cicada to write inference rule as docs.
+
 - java like module system.
 
 - simple arrow type
