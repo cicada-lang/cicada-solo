@@ -1,6 +1,6 @@
-@package prelude.structure.group.Semigroup
+package prelude.structure.group.Semigroup
 
-@class Semigroup {
+class Semigroup {
   Elem: Type
   mul(x: Elem, y: Elem): Elem
 
@@ -8,7 +8,7 @@
 }
 
 // NOTE How about the following definition with built-in associative?
-@class Semigroup {
+class Semigroup {
   Elem: Type
   mul(List(Elem)): Elem
 }

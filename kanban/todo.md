@@ -1,14 +1,21 @@
-# Be able to define algebraic data type lang1
+# lang1: Be able to define algebraic data type
 
-# Run datatype definition as logic programs.
+# lang3: "Computation and Deduction" and Logic framework
 
-# 为古典逻辑设计形式语言。
+- Run datatype definition as logic programs.
+- 为古典逻辑设计形式语言。
 
 # 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
 
 # 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
 
+# cicada
+
+- simple module system for cicada
+
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
+
+- simple module system
 
 - simple arrow type
   (x: Nat) -> (y: Nat) -> Nat

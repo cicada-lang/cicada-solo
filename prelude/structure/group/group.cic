@@ -1,8 +1,8 @@
-@package prelude.structure.group.Group
+package prelude.structure.group.Group
 
-@import prelude.structure.group.Monoid
+import prelude.structure.group.Monoid
 
-@class Group extends Monoid {
+class Group extends Monoid {
   inv(x: Elem): Elem
   left_inv(x: Elem): TheEqual(Elem, mul(inv(x), x), id)
   right_inv(x: Elem): TheEqual(Elem, mul(x, inv(x)), id)

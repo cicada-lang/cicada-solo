@@ -1,6 +1,6 @@
-@package prelude.structure.category.Category
+package prelude.structure.category.Category
 
-@class Category {
+class Category {
   Object: Type
   Morphism(dom: Object, cod: Object): Type
   id(x: Object): Morphism(x, x)

@@ -1,5 +1,5 @@
-@package prelude.structure.lattice.Lattice
+package prelude.structure.lattice.Lattice
 
-@class JoinSemilattice {
+class JoinSemilattice {
   // TODO
 }

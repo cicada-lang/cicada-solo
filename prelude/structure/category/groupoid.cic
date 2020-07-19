@@ -1,10 +1,10 @@
-@package prelude.structure.category.Groupoid
+package prelude.structure.category.Groupoid
 
-@import prelude.structure.category.Category
+import prelude.structure.category.Category
 
 // NOTE the following use of `Category.Isomorphism(this, f, inv(f))`
 //   is an example of partly fulfilled object construction
-@class Groupoid extends Category {
+class Groupoid extends Category {
   @given x: Object, y: Object
   inv(f: Morphism(x, y)): Morphism(y, x)
 

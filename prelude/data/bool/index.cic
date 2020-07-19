@@ -1,0 +1,20 @@
+datatype Bool {
+  true: Bool
+  false: Bool
+}
+
+not(x: Bool): Bool
+not(true) = false
+not(false) = true
+
+and(x: Bool, y: Bool): Bool
+and(true, true) = true
+and(true, false) = false
+and(false, true) = false
+and(false, false) = false
+
+or(x: Bool, y: Bool): Bool
+or(true, true) = true
+or(true, false) = true
+or(false, true) = true
+or(false, false) = false

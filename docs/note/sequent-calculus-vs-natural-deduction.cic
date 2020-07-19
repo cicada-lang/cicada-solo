@@ -50,8 +50,8 @@ Either.elim(Either.intro_r(r), lf, rf) = rf(r)
 
 Either.left((A) -> C, (B) -> C): Either(A, B) -> C
 Either.left(lf, rf) = {
-  case (Either.intro_l(l)) => lf(l)
-  case (Either.intro_r(r)) => rf(r)
+  case Either.intro_l(l) => lf(l)
+  case Either.intro_r(r) => rf(r)
 }
 
 // in natural deduction:

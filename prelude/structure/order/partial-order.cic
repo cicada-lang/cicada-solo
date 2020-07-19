@@ -1,11 +1,11 @@
-@package prelude.structure.order.PartialOrder
+package prelude.structure.order.PartialOrder
 
-@import prelude.structure.order.PreOrder
+import prelude.structure.order.PreOrder
 
 // NOTE No cycle.
 // NOTE Can implement:
 // - topological sort
-@class PartialOrder extends PreOrder {
+class PartialOrder extends PreOrder {
   @given x: Elem, y: Elem
   antisymmetric(Under(x, y), Under(y, x)): Equal(x, y)
 }
@@ -43,7 +43,7 @@ develop PartialOrder {
 
 }
 
-@class Beneath {
+class Beneath {
   order: PartialOrder
   x: order.Elem
   y: order.Elem

@@ -1,6 +1,6 @@
-@package prelude.structure.lattice.Lattice
+package prelude.structure.lattice.Lattice
 
-@class Lattic {
+class Lattic {
   // Join
   // Meet
 }
