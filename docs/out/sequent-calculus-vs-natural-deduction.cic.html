@@ -19,7 +19,7 @@
 
 // - <a href="https://en.wikipedia.org/wiki/Analytic-synthetic_distinction">https://en.wikipedia.org/wiki/Analytic-synthetic_distinction</a>
 
-@data Either(A: Type, B: Type) {
+datatype Either(A: Type, B: Type) {
 
   // l: A
   // ------------ intro_l
@@ -57,13 +57,13 @@ Either.elim(Either.intro_r(r), lf, rf) = rf(r)
 
 Either.left((A) -&gt; C, (B) -&gt; C): Either(A, B) -&gt; C
 Either.left(lf, rf) = {
-  case (Either.intro_l(l)) =&gt; lf(l)
-  case (Either.intro_r(r)) =&gt; rf(r)
+  case Either.intro_l(l) =&gt; lf(l)
+  case Either.intro_r(r) =&gt; rf(r)
 }
 
 // in natural deduction:
 
-@data Pair(A: Type, B: Type) {
+datatype Pair(A: Type, B: Type) {
 
   // fst: A
   // snd: B
