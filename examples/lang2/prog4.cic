@@ -1,7 +1,7 @@
 {
-  one = succ(zero) : Nat
-  two = succ(one) : Nat
-  three = succ(two) : Nat
+  one = succ(zero)
+  two = succ(one)
+  three = succ(two)
   one_two = cons(one, two) : (_: Nat) * Nat
   cdr(one_two)
 }

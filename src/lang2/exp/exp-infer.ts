@@ -78,6 +78,11 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       return Closure.apply(sigma.closure, car)
     } else if (exp.kind === "Exp.Nat") {
       return { kind: "Value.Type" }
+    } else if (exp.kind === "Exp.Zero") {
+      return { kind: "Value.Nat" }
+    } else if (exp.kind === "Exp.Succ") {
+      Exp.check(ctx, exp.prev, { kind: "Value.Nat" })
+      return { kind: "Value.Nat" }
     } else if (exp.kind === "Exp.NatInd") {
       // ctx |- target => Nat
       // ctx |- motive <= (x: Nat) -> Type
@@ -130,6 +135,8 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       return Exp.do_ap(motive, equal.to)
     } else if (exp.kind === "Exp.Trivial") {
       return { kind: "Value.Type" }
+    } else if (exp.kind === "Exp.Sole") {
+      return { kind: "Value.Trivial" }
     } else if (exp.kind === "Exp.Absurd") {
       return { kind: "Value.Type" }
     } else if (exp.kind === "Exp.AbsurdInd") {
@@ -146,6 +153,8 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       return motive
     } else if (exp.kind === "Exp.Str") {
       return { kind: "Value.Type" }
+    } else if (exp.kind === "Exp.Quote") {
+      return { kind: "Value.Str" }
     } else if (exp.kind === "Exp.Type") {
       return { kind: "Value.Type" }
     } else if (exp.kind === "Exp.Suite") {

@@ -31,21 +31,12 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       const cdr_t = Closure.apply(sigma.closure, car)
       Exp.check(ctx, exp.car, sigma.car_t)
       Exp.check(ctx, exp.cdr, cdr_t)
-    } else if (exp.kind === "Exp.Zero") {
-      Value.isNat(ctx, t)
-    } else if (exp.kind === "Exp.Succ") {
-      Value.isNat(ctx, t)
-      Exp.check(ctx, exp.prev, t)
     } else if (exp.kind === "Exp.Same") {
       // ctx |- from == to : t
       // ------------------------
       // ctx |- Same <= Equal(t, from, to)
       const equal = Value.isEqual(ctx, t)
       Value.convert(ctx, equal.t, equal.from, equal.to)
-    } else if (exp.kind === "Exp.Sole") {
-      Value.isTrivial(ctx, t)
-    } else if (exp.kind === "Exp.Quote") {
-      Value.isStr(ctx, t)
     } else {
       // ctx |- exp => u
       // ctx |- t == u : Type

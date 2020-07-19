@@ -11,7 +11,7 @@
 
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
 
-- java like module system
+- java like module system.
 
 - simple arrow type
   (x: Nat) -> (y: Nat) -> Nat
