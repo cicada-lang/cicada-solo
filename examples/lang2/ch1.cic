@@ -1,1 +1,6 @@
-"ratatouille"
+// 1. The More Things Change, the More They Stay the Same
+
+{
+  _ = "ratatouille": String
+  _
+}

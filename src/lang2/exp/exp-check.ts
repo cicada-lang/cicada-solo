@@ -4,6 +4,7 @@ import * as Ty from "../ty"
 import * as Closure from "../closure"
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
+import * as ut from "../../ut"
 
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
   try {
@@ -42,7 +43,15 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       // ----------------------
       // ctx |- exp <= t
       const u = Exp.infer(ctx, exp)
-      Value.convert(ctx, { kind: "Value.Type" }, t, u)
+      const success = Value.convert(ctx, { kind: "Value.Type" }, t, u)
+      if (!success) {
+        throw new Trace.Trace(
+          ut.aline(`
+          |I infer the type of ${Exp.repr(exp)} to be ${Exp.repr(Value.readback(ctx, { kind: "Value.Type" }, u))}.
+          |But the given type is ${Exp.repr(Value.readback(ctx, { kind: "Value.Type" }, t))}.
+          |`)
+        )
+      }
     }
   } catch (error) {
     Trace.maybe_push(error, exp)
