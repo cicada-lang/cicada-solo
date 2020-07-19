@@ -1,5 +1,5 @@
-package prelude.data.trivial.Trivial
+@package prelude.data.trivial.Trivial
 
-data Trivial {
+@datatype Trivial {
   Sole: Trivial
 }

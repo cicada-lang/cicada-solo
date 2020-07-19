@@ -1,12 +1,12 @@
-package prelude.structure.category.Category
+@package prelude.structure.category.Category
 
-class Monomorphism {
+@class Monomorphism {
   cat: Category
 
-  @given(x: cat.Object, y: cat.Object)
+  @given x: cat.Object, y: cat.Object
   morphism(): cat.Morphism(x, y)
 
-  @given(x: cat.Object, z: cat.Object)
+  @given x: cat.Object, z: cat.Object
   cancel_right(
     f: cat.Morphism(z, x),
     g: cat.Morphism(z, x),

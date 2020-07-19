@@ -1,9 +1,9 @@
-package prelude.structure.group.Monoid
+@package prelude.structure.group.Monoid
 
-import prelude.structure.group.Semigroup
-import prelude.data.trivial.Trivial
+@import prelude.structure.group.Semigroup
+@import prelude.data.trivial.Trivial
 
-class Monoid extends Semigroup {
+@class Monoid extends Semigroup {
   id: Elem
 
   id_left(x: Elem): TheEqual(Elem, mul(id, x), x)
@@ -11,7 +11,7 @@ class Monoid extends Semigroup {
 }
 
 // NOTE How about the following definition with built-in associative?
-class Monoid {
+@class Monoid {
   Elem: Type
   id: Elem
   mul(List(Elem)): Elem

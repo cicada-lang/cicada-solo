@@ -1,11 +1,11 @@
-package prelude.structure.category.Category
+@package prelude.structure.category.Category
 
-class Terminal {
+@class Terminal {
   cat: Category
   object: cat.Object
   morphism(x: cat.Object): cat.Morphism(x, object)
 
-  @given(x: cat.Object)
+  @given x: cat.Object
   morphism_unique(
     f: cat.Morphism(x, object),
     g: cat.Morphism(x, object),
@@ -14,7 +14,7 @@ class Terminal {
 
 // TODO
 
-@given(cat: cat.Object)
+@given cat: cat.Object
 terminal_iso(
   x: Terminal(cat),
   y: Terminal(cat),
@@ -29,8 +29,8 @@ terminal_iso(
   }
 }
 
-@given(cat: Category)
-@given(x: Terminal(cat), y: Terminal(cat))
+@given cat: Category
+@given x: Terminal(cat), y: Terminal(cat)
 terminal_iso_unique(
   f: Category.Isomorphism(cat, x.object, y.object),
   g: Category.Isomorphism(cat, x.object, y.object),

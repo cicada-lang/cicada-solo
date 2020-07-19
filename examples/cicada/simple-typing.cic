@@ -1,17 +1,17 @@
-@data Exp {
+@datatype Exp {
   var(name: String): Exp
   fn(name: String, ret: Exp): Exp
   ap(target: Exp, arg: Exp): Exp
 }
 
-@data Ty {
+@datatype Ty {
   atom(name: String): Ty
   arrow(arg_t: Ty, ret_t: Ty): Ty
 }
 
 Ctx = Map(String, Ty)
 
-@data Typing(ctx: Ctx, exp: Exp, t: Ty) {
+@datatype Typing(ctx: Ctx, exp: Exp, t: Ty) {
   @given name: String
   lookup: Lookup(ctx, name, t)
   ----------------------------- lookup_var

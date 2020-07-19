@@ -1,20 +1,21 @@
-package prelude.data.vec.Vec
+@package prelude.data.vec.Vec
 
-import prelude.data.nat.Nat
+@import prelude.data.nat.Nat
 
-data Vec(A: Type, length: Nat) {
+@datatype Vec(A: Type, length: Nat) {
   Null: Vec(A, zero)
-  @given(n: Nat) VecCons(head: A, tail: Vec(A, n)): Vec(A, Nat.Succ(n))
+  @given n: Nat
+  VecCons(head: A, tail: Vec(A, n)): Vec(A, Nat.Succ(n))
 }
 
-@given(A: Type)
-@given(m: Nat, n: Nat)
+@given A: Type
+@given m: Nat, n: Nat
 append(x: Vec(A, m), y: Vec(A, n)): Vec(A, Nat.add(m, n))
 append(Null, y) = y
 append(Cons(head, tail), y) = Cons(head, append(tail, y))
 
-@given(A: Type, B: Type)
-@given(n: Nat)
+@given A: Type, B: Type
+@given n: Nat
 map(x: Vec(A, n), f(A): B): Vec(B, n)
 map(Null) = Null
 map(Cons(head, tail)) = Cons(f(head), map(tail, f))

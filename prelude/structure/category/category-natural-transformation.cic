@@ -1,6 +1,6 @@
-package prelude.structure.category.Category
+@package prelude.structure.category.Category
 
-class NaturalTransformation {
+@class NaturalTransformation {
   dom: Category
   cod: Category
   src: Functor(dom, cod)

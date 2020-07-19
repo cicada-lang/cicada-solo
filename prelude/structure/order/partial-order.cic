@@ -1,12 +1,12 @@
-package prelude.structure.order.PartialOrder
+@package prelude.structure.order.PartialOrder
 
-import prelude.structure.order.PreOrder
+@import prelude.structure.order.PreOrder
 
 // NOTE No cycle.
 // NOTE Can implement:
 // - topological sort
-class PartialOrder extends PreOrder {
-  @given(x: Elem, y: Elem)
+@class PartialOrder extends PreOrder {
+  @given x: Elem, y: Elem
   antisymmetric(Under(x, y), Under(y, x)): Equal(x, y)
 }
 
@@ -17,7 +17,7 @@ develop PartialOrder {
   // Thus in PartialOrder, to prove Equal is equal to prove two Under's.
   // - Maybe easier to use.
   // - Maybe other axiom with one argument can have similar alternative.
-  @given(x: Elem, y: Elem)
+  @given x: Elem, y: Elem
   reflexive_alt(Equal(x, y)): (Under(x, y), Under(y, x))
   reflexive_alt(equation) =
     (transport(equation, (z: Elem) => Under(x, z), reflexive(x)),
@@ -43,7 +43,7 @@ develop PartialOrder {
 
 }
 
-class Beneath {
+@class Beneath {
   order: PartialOrder
   x: order.Elem
   y: order.Elem

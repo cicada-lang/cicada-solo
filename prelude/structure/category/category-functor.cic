@@ -1,11 +1,11 @@
-package prelude.structure.category.Category
+@package prelude.structure.category.Category
 
-class Functor {
+@class Functor {
   dom: Category
   cod: Category
   map(x: dom.Object): cod.Object
 
-  @given(x: dom.Object, y: dom.Object)
+  @given x: dom.Object, y: dom.Object
   fmap(f: dom.Morphism(x, y)): cod.Morphism(map(x), map(y))
 
   fmap_respect_compose(

@@ -1,8 +1,8 @@
-package prelude.data.list.List
+@package prelude.data.list.List
 
-import prelude.data.nat.Nat
+@import prelude.data.nat.Nat
 
-data List(A: Type) {
+@datatype List(A: Type) {
   Null: List(A)
   Cons(head: A, tail: List(A)): List(A)
 }
@@ -11,12 +11,12 @@ length(x: List): Nat
 length(Null) = Zero
 length(Cons(_head, tail)) = Succ(length(tail))
 
-@given(A: Type)
+@given A: Type
 append(x: List(A), y: List(A)): List(A)
 append(Null, y) = y
 append(Cons(head, tail), y) = Cons(head, append(tail, y))
 
-@given(A: Type, B: Type)
+@given A: Type, B: Type
 map(x: List(A), f(A): B): List(B)
 map(Null, f) = Null
 map(Cons(head, tail), f) = Cons(f(head), map(tail, f))

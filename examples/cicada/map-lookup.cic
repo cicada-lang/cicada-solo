@@ -1,10 +1,10 @@
-@data Map(K: Type, V: Type) {
+@datatype Map(K: Type, V: Type) {
   empty: Map(K, V)
   extend(rest: Map(K, V), key: K, value: V): Map(K, V)
 }
 
 @given K: Type, V: Type
-@data Lookup(map: Map(K, V), key: K, value: V) {
+@datatype Lookup(map: Map(K, V), key: K, value: V) {
   ----------------------------------------------- here
   Lookup(Map.extend(map, key, value), key, value)
 

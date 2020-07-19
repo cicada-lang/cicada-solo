@@ -1,12 +1,12 @@
-package prelude.structure.category.Category
+@package prelude.structure.category.Category
 
-class Epimorphism {
+@class Epimorphism {
   cat: Category
 
-  @given(x: cat.Object, y: cat.Object)
+  @given x: cat.Object, y: cat.Object
   morphism(): cat.Morphism(x, y)
 
-  @given(y: cat.Object, z: cat.Object)
+  @given y: cat.Object, z: cat.Object
   cancel_left(
     f: cat.Morphism(y, z),
     g: cat.Morphism(y, z),

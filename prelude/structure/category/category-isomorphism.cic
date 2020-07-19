@@ -1,12 +1,12 @@
-package prelude.structure.category.Category
+@package prelude.structure.category.Category
 
-class Isomorphism {
+@class Isomorphism {
   cat: Category
 
-  @given(x: cat.Object, y: cat.Object)
+  @given x: cat.Object, y: cat.Object
   morphism(): cat.Morphism(x, y)
 
-  @given(x: cat.Object, y: cat.Object)
+  @given x: cat.Object, y: cat.Object
   inverse(): cat.Morphism(y, x)
 
   inverse_left: Equal(cat.compose(morphism, inverse), cat.id(x))

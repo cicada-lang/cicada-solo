@@ -1,6 +1,6 @@
-package prelude.data.bool.Bool
+@package prelude.data.bool.Bool
 
-data Bool {
+@datatype Bool {
   True: Bool
   False: Bool
 }

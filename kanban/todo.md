@@ -1,3 +1,5 @@
+# Be able to define algebraic data type lang1
+
 # Run datatype definition as logic programs.
 
 # 为古典逻辑设计形式语言。
