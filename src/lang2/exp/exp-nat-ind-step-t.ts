@@ -1,9 +1,6 @@
 import * as Exp from "../exp"
 import * as Env from "../env"
 import * as Value from "../value"
-import * as Normal from "../normal"
-import * as Closure from "../closure"
-import * as Trace from "../../trace"
 
 export function nat_ind_step_t(motive: Value.Value): Value.Value {
   const env = Env.extend(Env.init(), "motive", motive)

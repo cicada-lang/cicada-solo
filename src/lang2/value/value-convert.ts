@@ -1,6 +1,4 @@
 import * as Value from "../value"
-import * as Closure from "../closure"
-import * as Neutral from "../neutral"
 import * as Ty from "../ty"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"

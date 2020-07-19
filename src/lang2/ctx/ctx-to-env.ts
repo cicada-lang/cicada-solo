@@ -1,6 +1,5 @@
 import * as Ctx from "../ctx"
 import * as Env from "../env"
-import * as Ty from "../ty"
 
 export function to_env(ctx: Ctx.Ctx): Env.Env {
   const env = Env.init()
