@@ -1,4 +1,6 @@
-import Bool from "../bool"
+package prelude.datatype.nat.Nat
+
+import prelude.datatype.bool.Bool
 
 datatype Nat {
   zero: Nat

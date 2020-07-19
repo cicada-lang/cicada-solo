@@ -1,0 +1,5 @@
+import prelude.datatype.trivial.Trivial
+
+datatype Trivial {
+  sole: Trivial
+}

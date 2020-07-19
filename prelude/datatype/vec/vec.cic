@@ -1,0 +1,27 @@
+package prelude.datatype.vec.Vec
+
+import prelude.datatype.nat.Nat
+
+datatype Vec(A: Type, length: Nat) {
+  null: Vec(A, Nat.zero)
+  @given n: Nat
+  cons(head: A, tail: Vec(A, n)): Vec(A, Nat.succ(n))
+}
+
+@given A: Type
+@given m: Nat, n: Nat
+Vec.append(x: Vec(A, m), y: Vec(A, n)): Vec(A, Nat.add(m, n))
+Vec.append(Vec.null, y) = y
+Vec.append(Vec.cons(head, tail), y) = Vec.cons(head, Vec.append(tail, y))
+
+@given A: Type, B: Type
+@given n: Nat
+Vec.map(x: Vec(A, n), f(A): B): Vec(B, n)
+Vec.map(Vec.null) = Vec.null
+Vec.map(Vec.cons(head, tail)) = Vec.cons(f(head), Vec.map(tail, f))
+
+Vec.three_zeros: Vec(Nat, Nat.three) =
+  Vec.cons(Nat.zero, Vec.cons(Nat.zero, Vec.cons(Nat.zero, Vec.null)))
+
+Vec.three_ones: Vec(Nat, Nat.three) =
+  Vec.cons(Nat.one, Vec.cons(Nat.one, Vec.cons(Nat.one, Vec.null)))
