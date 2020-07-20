@@ -1,8 +1,8 @@
-package prelude.datatype.list.List
+@package prelude.datatype.list.List
 
-import prelude.datatype.nat.Nat
+@import prelude.datatype.nat.Nat
 
-datatype List(A: Type) {
+@datatype List(A: Type) {
   null: List(A)
   cons(head: A, tail: List(A)): List(A)
 }

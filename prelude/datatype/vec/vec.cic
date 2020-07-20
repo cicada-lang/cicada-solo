@@ -1,8 +1,8 @@
-package prelude.datatype.vec.Vec
+@package prelude.datatype.vec.Vec
 
-import prelude.datatype.nat.Nat
+@import prelude.datatype.nat.Nat
 
-datatype Vec(A: Type, length: Nat) {
+@datatype Vec(A: Type, length: Nat) {
   null: Vec(A, Nat.zero)
   @given n: Nat
   cons(head: A, tail: Vec(A, n)): Vec(A, Nat.succ(n))

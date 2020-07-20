@@ -1,6 +1,6 @@
-package prelude.structure.category.Category
+@package prelude.structure.category.Category
 
-class Terminal {
+@class Terminal {
   cat: Category
   object: cat.Object
   morphism(x: cat.Object): cat.Morphism(x, object)

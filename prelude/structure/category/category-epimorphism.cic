@@ -1,6 +1,6 @@
-package prelude.structure.category.Category
+@package prelude.structure.category.Category
 
-class Epimorphism {
+@class Epimorphism {
   cat: Category
 
   @given x: cat.Object, y: cat.Object

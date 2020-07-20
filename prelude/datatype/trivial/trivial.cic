@@ -1,5 +1,5 @@
-import prelude.datatype.trivial.Trivial
+@import prelude.datatype.trivial.Trivial
 
-datatype Trivial {
+@datatype Trivial {
   sole: Trivial
 }

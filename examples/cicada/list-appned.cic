@@ -12,7 +12,7 @@
 // in cicada:
 
 @given A: Type
-datatype Append(x: List(A), y: List(A), z: List(A)) {
+@datatype Append(x: List(A), y: List(A), z: List(A)) {
   null: Append(List.null, z, z)
   @given head: A
   cons(prev: Append(x, y, z)): Append(List.cons(head, x), y, List.cons(head, z))
@@ -21,7 +21,7 @@ datatype Append(x: List(A), y: List(A), z: List(A)) {
 // in cicada with inference syntax:
 
 @given A: Type
-datatype Append(x: List(A), y: List(A), z: List(A)) {
+@datatype Append(x: List(A), y: List(A), z: List(A)) {
   ----------------------- null
   Append(List.null, z, z)
 

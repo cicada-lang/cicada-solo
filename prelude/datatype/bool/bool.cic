@@ -1,4 +1,4 @@
-datatype Bool {
+@datatype Bool {
   true: Bool
   false: Bool
 }

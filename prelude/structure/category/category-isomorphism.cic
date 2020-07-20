@@ -1,6 +1,6 @@
-package prelude.structure.category.Category
+@package prelude.structure.category.Category
 
-class Isomorphism {
+@class Isomorphism {
   cat: Category
 
   @given x: cat.Object, y: cat.Object

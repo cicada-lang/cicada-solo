@@ -1,8 +1,8 @@
-package prelude.structure.group.Group
+@package prelude.structure.group.Group
 
-import prelude.structure.category.Category
+@import prelude.structure.category.Category
 
-class GroupHom {
+@class GroupHom {
   dom: Group
   cod: Group
   hom(dom.Elem): cod.Elem

@@ -1,8 +1,8 @@
-package prelude.datatype.nat.Nat
+@package prelude.datatype.nat.Nat
 
-import prelude.datatype.bool.Bool
+@import prelude.datatype.bool.Bool
 
-datatype Nat {
+@datatype Nat {
   zero: Nat
   succ(prev: Nat): Nat
 }
