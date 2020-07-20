@@ -20,7 +20,8 @@ TODO
   will be much more natural in ABC.
   - https://homepages.cwi.nl/~steven/abc
 
-- Note that, the language of inference rule does not use closure.
+- can we have a c style syntax + extendable keyword
+  - to teach like scheme and lisp language family
 
 # Arithmetic level and Church encoding
 

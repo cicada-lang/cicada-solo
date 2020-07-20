@@ -13,6 +13,8 @@
 
 - use cicada to write inference rule as docs.
 
+  - Note that, the language of inference rule does not use closure.
+
 - java like module system.
 
 - simple arrow type
