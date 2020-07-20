@@ -1,1 +1,1 @@
-cons("ratatouille", "baguette"): (_: String) * String
+Same: Equal(String, "ratatouille", "ratatouille")

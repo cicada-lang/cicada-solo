@@ -3,5 +3,6 @@
 {
   _ = "ratatouille": String
   _ = cons("ratatouille", "baguette"): (_: String) * String
+  _ = same: Equal(String, "ratatouille", "ratatouille")
   _
 }

@@ -1,0 +1,11 @@
+I am expecting the following two values to be the same String.
+But they are not.
+from:
+  "ratatouille"
+to:
+  "baguette"
+
+previous:
+- Same
+- Same: Equal(String, "ratatouille", "baguette")
+

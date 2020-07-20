@@ -36,15 +36,25 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       // ------------------------
       // ctx |- Same <= Equal(t, from, to)
       const equal = Value.isEqual(ctx, t)
-      Value.convert(ctx, equal.t, equal.from, equal.to)
+      if (!Value.convert(ctx, equal.t, equal.from, equal.to)) {
+        throw new Trace.Trace(
+          ut.aline(`
+          |I am expecting the following two values to be the same ${Exp.repr(Value.readback(ctx, { kind: "Value.Type" }, equal.t))}.
+          |But they are not.
+          |from:
+          |  ${Exp.repr(Value.readback(ctx, equal.t, equal.from))}
+          |to:
+          |  ${Exp.repr(Value.readback(ctx, equal.t, equal.to))}
+          |`)
+        )
+      }
     } else {
       // ctx |- exp => u
       // ctx |- t == u : Type
       // ----------------------
       // ctx |- exp <= t
       const u = Exp.infer(ctx, exp)
-      const success = Value.convert(ctx, { kind: "Value.Type" }, t, u)
-      if (!success) {
+      if (!Value.convert(ctx, { kind: "Value.Type" }, t, u)) {
         throw new Trace.Trace(
           ut.aline(`
           |I infer the type of ${Exp.repr(exp)} to be ${Exp.repr(Value.readback(ctx, { kind: "Value.Type" }, u))}.
