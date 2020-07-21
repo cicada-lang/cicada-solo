@@ -41,7 +41,7 @@ export function exp(): pt.Sym.Rule {
     var: [identifier],
     pi: ["(", identifier, ":", exp, ")", "-", ">", exp],
     arrow: ["(", exp, ")", "-", ">", exp],
-    fn: ["(", identifier, ")", "=", ">", exp],
+    fn: ["(", comma_separated_names, ")", "=", ">", exp],
     ap: [identifier, pt.one_or_more(exp_in_paren)],
     sigma: ["(", identifier, ":", exp, ")", "*", exp],
     pair: ["Pair", "(", exp, ",", exp, ")"],
@@ -91,12 +91,17 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
         ret_t: exp_matcher(ret_t),
       }
     },
-    fn: ([, name, , , , body]) => {
-      return {
-        kind: "Exp.Fn",
-        name: pt.Tree.token(name).value,
-        body: exp_matcher(body),
+    fn: ([, comma_separated_names, , , , body]) => {
+      const names = comma_separated_names_matcher(comma_separated_names)
+      let exp = exp_matcher(body)
+      for (let i = names.length - 1; i >= 0; i--) {
+        exp = {
+          kind: "Exp.Fn",
+          name: names[i],
+          body: exp,
+        }
       }
+      return exp
     },
     ap: ([name, exp_in_paren_list]) => {
       let exp: Exp.Exp = {
@@ -123,7 +128,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
         cdr_t: exp_matcher(cdr_t),
       }
     },
-    pair: ([, , car_t, , cdr_t, ]) => {
+    pair: ([, , car_t, , cdr_t]) => {
       return {
         kind: "Exp.Sigma",
         name: "_",
@@ -131,20 +136,20 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
         cdr_t: exp_matcher(cdr_t),
       }
     },
-    cons: ([, , car, , cdr, ]) => {
+    cons: ([, , car, , cdr]) => {
       return {
         kind: "Exp.Cons",
         car: exp_matcher(car),
         cdr: exp_matcher(cdr),
       }
     },
-    car: ([, , target, ]) => {
+    car: ([, , target]) => {
       return {
         kind: "Exp.Car",
         target: exp_matcher(target),
       }
     },
-    cdr: ([, , target, ]) => {
+    cdr: ([, , target]) => {
       return {
         kind: "Exp.Cdr",
         target: exp_matcher(target),
@@ -226,6 +231,33 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
         exp: exp_matcher(exp),
       }
     },
+  })(tree)
+}
+
+function comma_name(): pt.Sym.Rule {
+  return pt.Sym.create_rule("comma_name", {
+    comma_name: [identifier, ","],
+  })
+}
+
+export function comma_name_matcher(tree: pt.Tree.Tree): string {
+  return pt.Tree.matcher("comma_name", {
+    comma_name: ([name]) => pt.Tree.token(name).value,
+  })(tree)
+}
+
+function comma_separated_names(): pt.Sym.Rule {
+  return pt.Sym.create_rule("comma_separated_names", {
+    comma_separated_names: [pt.zero_or_more(comma_name), identifier],
+  })
+}
+
+function comma_separated_names_matcher(tree: pt.Tree.Tree): Array<string> {
+  return pt.Tree.matcher("comma_separated_names", {
+    comma_separated_names: ([comma_names, last_name]) => [
+      ...pt.zero_or_more_matcher(comma_name_matcher)(comma_names),
+      pt.Tree.token(last_name).value,
+    ],
   })(tree)
 }
 

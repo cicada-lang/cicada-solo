@@ -2,6 +2,6 @@
   one = succ(zero)
   two = succ(one)
   three = succ(two)
-  one_two = cons(one, two) : (_: Nat) * Nat
+  one_two = cons(one, two) : Pair(Nat, Nat)
   cdr(one_two)
 }

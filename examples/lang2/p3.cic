@@ -3,10 +3,10 @@
   two = succ(one)
   three = succ(two)
 
-  add = (x) => (y) => Nat.ind(x, (_) => Nat, y, (prev) => (almost) => succ(almost))
+  add = (x, y) => Nat.ind(x, (_) => Nat, y, (prev, almost) => succ(almost))
       : (Nat) -> (Nat) -> Nat
 
-  mul = (x) => (y) => Nat.ind(x, (_) => Nat, one, (prev) => (almost) => add(almost)(y))
+  mul = (x, y) => Nat.ind(x, (_) => Nat, one, (prev, almost) => add(almost)(y))
       : (Nat) -> (Nat) -> Nat
 
   eight = {

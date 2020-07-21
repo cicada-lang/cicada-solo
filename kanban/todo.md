@@ -1,6 +1,6 @@
-# lang1: Be able to define algebraic data type
+# lang1 -- Be able to define algebraic data type
 
-# lang3: "Computation and Deduction" and Logic framework
+# lang3 -- "Computation and Deduction" and Logic framework
 
 - Run datatype definition as logic programs.
 - 为古典逻辑设计形式语言。
@@ -12,12 +12,12 @@
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
 
 - use cicada to write inference rule as docs.
-
   - Note that, the language of inference rule does not use closure.
 
 - java like module system.
 
 - multi pi and arrow type
+  (_: Nat, _: Nat) -> Nat
   (Nat, Nat) -> Nat
 
 - multi function application
