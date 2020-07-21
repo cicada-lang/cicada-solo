@@ -1,1 +1,1 @@
-succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(succ(zero))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))): Nat
+Same: Equal(Nat, succ(succ(succ(succ(succ(succ(succ(succ(zero)))))))), succ(succ(succ(succ(succ(succ(succ(succ(zero)))))))))

@@ -2,14 +2,16 @@
   one = succ(zero)
   two = succ(one)
   three = succ(two)
-  add = (x, y) => Nat.ind(x, (_) => Nat, y, (prev, almost) => succ(almost))
+  add = (x, y) => Nat.ind(y, (_) => Nat, x, (prev, almost) => succ(almost))
       : (Nat) -> (Nat) -> Nat
-  mul = (x, y) => Nat.ind(x, (_) => Nat, one, (prev, almost) => add(almost, y))
+  mul = (x, y) => Nat.ind(y, (_) => Nat, zero, (prev, almost) => add(almost, x))
+      : (Nat) -> (Nat) -> Nat
+  pow = (x, y) => Nat.ind(y, (_) => Nat, one, (prev, almost) => mul(almost, x))
       : (Nat) -> (Nat) -> Nat
   eight = {
     four = add(two, two)
     add(four, four)
   }
-  a_big_number = mul(eight, eight)
-  a_big_number
+  _ = same : Equal(Nat, eight, pow(two, three))
+  _
 }

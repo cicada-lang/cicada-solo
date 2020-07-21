@@ -11,6 +11,8 @@
 
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
 
+- syntax suger for natural number
+
 - use cicada to write inference rule as docs.
   - Note that, the language of inference rule does not use closure.
 
