@@ -40,6 +40,7 @@ export function exp(): pt.Sym.Rule {
   return pt.Sym.create_rule("exp", {
     var: [identifier],
     pi: ["(", identifier, ":", exp, ")", "-", ">", exp],
+    arrow: ["(", exp, ")", "-", ">", exp],
     fn: ["(", identifier, ")", "=", ">", exp],
     ap: [identifier, pt.one_or_more(exp_in_paren)],
     sigma: ["(", identifier, ":", exp, ")", "*", exp],
@@ -78,6 +79,14 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       return {
         kind: "Exp.Pi",
         name: pt.Tree.token(name).value,
+        arg_t: exp_matcher(arg_t),
+        ret_t: exp_matcher(ret_t),
+      }
+    },
+    arrow: ([, arg_t, , , , ret_t]) => {
+      return {
+        kind: "Exp.Pi",
+        name: "_",
         arg_t: exp_matcher(arg_t),
         ret_t: exp_matcher(ret_t),
       }

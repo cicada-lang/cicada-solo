@@ -17,10 +17,11 @@
 
 - java like module system.
 
-- simple arrow type
-  (x: Nat) -> (y: Nat) -> Nat
-  (Nat) -> (Nat) -> Nat
+- multi pi and arrow type
   (Nat, Nat) -> Nat
+
+- multi function application
+  f(x, y)
 
 - List
 - Vector
