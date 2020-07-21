@@ -10,10 +10,10 @@
       : (Nat) -> (Nat) -> Nat
 
   eight = {
-    four = add(two)(two)
-    add(four)(four)
+    four = add(two, two)
+    add(four, four)
   }
 
-  a_big_number = mul(eight)(eight)
+  a_big_number = mul(eight, eight)
   a_big_number
 }

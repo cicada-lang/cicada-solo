@@ -36,13 +36,21 @@ function str_match(tree: pt.Tree.Tree): string {
   return s.slice(1, s.length - 1)
 }
 
+// formal_arg
+// comma_formal_arg
+// comma_separated_formal_args
+
 export function exp(): pt.Sym.Rule {
   return pt.Sym.create_rule("exp", {
     var: [identifier],
     pi: ["(", identifier, ":", exp, ")", "-", ">", exp],
     arrow: ["(", exp, ")", "-", ">", exp],
-    fn: ["(", comma_separated_names, ")", "=", ">", exp],
-    ap: [identifier, pt.one_or_more(exp_in_paren)],
+    fn: ["(", comma_separated(identifier), ")", "=", ">", exp],
+    // ap: [identifier, pt.one_or_more(in_between("(", exp, ")"))],
+    ap: [
+      identifier,
+      pt.one_or_more(in_between("(", comma_separated(exp), ")")),
+    ],
     sigma: ["(", identifier, ":", exp, ")", "*", exp],
     pair: ["Pair", "(", exp, ",", exp, ")"],
     cons: ["cons", "(", exp, ",", exp, ")"],
@@ -92,7 +100,9 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
     },
     fn: ([, comma_separated_names, , , , body]) => {
-      const names = comma_separated_names_matcher(comma_separated_names)
+      const names = comma_separated_matcher(
+        (name) => pt.Tree.token(name).value
+      )(comma_separated_names)
       let exp = exp_matcher(body)
       for (let i = names.length - 1; i >= 0; i--) {
         exp = {
@@ -108,14 +118,16 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
         kind: "Exp.Var",
         name: pt.Tree.token(name).value,
       }
-      const args = pt.one_or_more_matcher(exp_in_paren_matcher)(
-        exp_in_paren_list
-      )
-      for (const arg of args) {
-        exp = {
-          kind: "Exp.Ap",
-          target: exp,
-          arg: arg,
+      const args_list = pt.one_or_more_matcher(
+        in_between_matcher(comma_separated_matcher(exp_matcher))
+      )(exp_in_paren_list)
+      for (const args of args_list) {
+        for (const arg of args) {
+          exp = {
+            kind: "Exp.Ap",
+            target: exp,
+            arg: arg,
+          }
         }
       }
       return exp
@@ -234,43 +246,53 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   })(tree)
 }
 
-function comma_name(): pt.Sym.Rule {
-  return pt.Sym.create_rule("comma_name", {
-    comma_name: [identifier, ","],
+function comma_after(x: pt.Sym.Exp): pt.Sym.Rule {
+  return pt.Sym.create_rule("comma_after", {
+    comma_after: [x, ","],
   })
 }
 
-export function comma_name_matcher(tree: pt.Tree.Tree): string {
-  return pt.Tree.matcher("comma_name", {
-    comma_name: ([name]) => pt.Tree.token(name).value,
-  })(tree)
-}
-
-function comma_separated_names(): pt.Sym.Rule {
-  return pt.Sym.create_rule("comma_separated_names", {
-    comma_separated_names: [pt.zero_or_more(comma_name), identifier],
+function comma_after_matcher<A>(
+  matcher: (tree: pt.Tree.Tree) => A
+): (tree: pt.Tree.Tree) => A {
+  return pt.Tree.matcher("comma_after", {
+    comma_after: ([x]) => matcher(x),
   })
 }
 
-function comma_separated_names_matcher(tree: pt.Tree.Tree): Array<string> {
-  return pt.Tree.matcher("comma_separated_names", {
-    comma_separated_names: ([comma_names, last_name]) => [
-      ...pt.zero_or_more_matcher(comma_name_matcher)(comma_names),
-      pt.Tree.token(last_name).value,
-    ],
-  })(tree)
-}
-
-function exp_in_paren(): pt.Sym.Rule {
-  return pt.Sym.create_rule("exp_in_paren", {
-    exp_in_paren: ["(", exp, ")"],
+function comma_separated(x: pt.Sym.Exp): pt.Sym.Rule {
+  return pt.Sym.create_rule("comma_separated", {
+    comma_separated: [pt.zero_or_more(comma_after(x)), x],
   })
 }
 
-export function exp_in_paren_matcher(tree: pt.Tree.Tree): Exp.Exp {
-  return pt.Tree.matcher<Exp.Exp>("exp_in_paren", {
-    exp_in_paren: ([, exp]) => exp_matcher(exp),
-  })(tree)
+function comma_separated_matcher<A>(
+  matcher: (tree: pt.Tree.Tree) => A
+): (tree: pt.Tree.Tree) => Array<A> {
+  return pt.Tree.matcher("comma_separated", {
+    comma_separated: ([comma_separated, x]) => {
+      return [
+        ...pt.zero_or_more_matcher(comma_after_matcher(matcher))(
+          comma_separated
+        ),
+        matcher(x),
+      ]
+    },
+  })
+}
+
+function in_between(before: string, x: pt.Sym.Exp, after: string): pt.Sym.Rule {
+  return pt.Sym.create_rule("in_between", {
+    in_between: [before, x, after],
+  })
+}
+
+function in_between_matcher<A>(
+  matcher: (tree: pt.Tree.Tree) => A
+): (tree: pt.Tree.Tree) => A {
+  return pt.Tree.matcher("in_between", {
+    in_between: ([, x]) => matcher(x),
+  })
 }
 
 function def(): pt.Sym.Rule {
@@ -279,9 +301,7 @@ function def(): pt.Sym.Rule {
   })
 }
 
-export function def_matcher(
-  tree: pt.Tree.Tree
-): { name: string; exp: Exp.Exp } {
+function def_matcher(tree: pt.Tree.Tree): { name: string; exp: Exp.Exp } {
   return pt.Tree.matcher("def", {
     def: ([name, , exp]) => {
       return {

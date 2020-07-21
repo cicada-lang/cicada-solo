@@ -20,9 +20,6 @@
   (_: Nat, _: Nat) -> Nat
   (Nat, Nat) -> Nat
 
-- multi function application
-  f(x, y)
-
 - List
 - Vector
 
