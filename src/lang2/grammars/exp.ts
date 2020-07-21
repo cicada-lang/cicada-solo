@@ -36,17 +36,40 @@ function str_match(tree: pt.Tree.Tree): string {
   return s.slice(1, s.length - 1)
 }
 
-// formal_arg
-// comma_formal_arg
-// comma_separated_formal_args
+function type_assignment(): pt.Sym.Rule {
+  return pt.Sym.create_rule("type_assignment", {
+    named: [identifier, ":", exp],
+    unnamed: [exp],
+  })
+}
+
+function type_assignment_matcher(
+  tree: pt.Tree.Tree
+): { name: string; t: Exp.Exp } {
+  return pt.Tree.matcher("type_assignment", {
+    named: ([name, , t]) => {
+      return {
+        name: pt.Tree.token(name).value,
+        t: exp_matcher(t),
+      }
+    },
+    unnamed: ([t]) => {
+      return {
+        name: "_",
+        t: exp_matcher(t),
+      }
+    },
+  })(tree)
+}
 
 export function exp(): pt.Sym.Rule {
   return pt.Sym.create_rule("exp", {
     var: [identifier],
-    pi: ["(", identifier, ":", exp, ")", "-", ">", exp],
-    arrow: ["(", exp, ")", "-", ">", exp],
+    // TODO can not use the following,
+    //   low level partech bug.
+    // pi: ["(", comma_separated(type_assignment), ")", "-", ">", exp],
+    pi: ["(", type_assignment, ")", "-", ">", exp],
     fn: ["(", comma_separated(identifier), ")", "=", ">", exp],
-    // ap: [identifier, pt.one_or_more(in_between("(", exp, ")"))],
     ap: [
       identifier,
       pt.one_or_more(in_between("(", comma_separated(exp), ")")),
@@ -83,19 +106,27 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
         name: pt.Tree.token(name).value,
       }
     },
-    pi: ([, name, , arg_t, , , , ret_t]) => {
+    // pi: ([, comma_separated_type_assignments, , , , ret_t]) => {
+    //   const type_assignments = comma_separated_matcher(type_assignment_matcher)(
+    //     comma_separated_type_assignments
+    //   )
+    //   let exp = exp_matcher(ret_t)
+    //   for (let i = type_assignments.length - 1; i >= 0; i--) {
+    //     exp = {
+    //       kind: "Exp.Pi",
+    //       name: type_assignments[i].name,
+    //       arg_t: type_assignments[i].t,
+    //       ret_t: exp,
+    //     }
+    //   }
+    //   return exp
+    // },
+    pi: ([, type_assignment, , , , ret_t]) => {
+      const { name, t } = type_assignment_matcher(type_assignment)
       return {
         kind: "Exp.Pi",
-        name: pt.Tree.token(name).value,
-        arg_t: exp_matcher(arg_t),
-        ret_t: exp_matcher(ret_t),
-      }
-    },
-    arrow: ([, arg_t, , , , ret_t]) => {
-      return {
-        kind: "Exp.Pi",
-        name: "_",
-        arg_t: exp_matcher(arg_t),
+        name: name,
+        arg_t: t,
         ret_t: exp_matcher(ret_t),
       }
     },
