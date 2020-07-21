@@ -4,5 +4,13 @@
   _ = "ratatouille": String
   _ = cons("ratatouille", "baguette"): Pair(String, String)
   _ = same: Equal(String, "ratatouille", "ratatouille")
+  _ = same: Equal(
+    Pair(String, String),
+    cons("ratatouille", "baguette"),
+    cons("ratatouille", "baguette"))
+  _ = same: Equal(
+    String,
+    "ratatouille",
+    car(cons("ratatouille", "baguette"): Pair(String, String)))
   _
 }
