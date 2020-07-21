@@ -17,5 +17,6 @@
   _ = Pair(String, String): Type
   _ = String: Type
   _ = Type: Type
+  _ = same: Equal(Type, String, String)
   _
 }
