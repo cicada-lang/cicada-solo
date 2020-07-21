@@ -2,7 +2,7 @@
 
 {
   _ = "ratatouille": String
-  _ = cons("ratatouille", "baguette"): (_: String) * String
+  _ = cons("ratatouille", "baguette"): Pair(String, String)
   _ = same: Equal(String, "ratatouille", "ratatouille")
   _
 }

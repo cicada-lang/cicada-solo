@@ -22,11 +22,6 @@
   (Nat) -> (Nat) -> Nat
   (Nat, Nat) -> Nat
 
-- simple pair type
-  (x: Nat) * (y: Nat) * Nat
-  (Nat) * (Nat) * Nat
-  (Nat, Nat) * Nat -- is not good -- what syntax should we use for this?
-
 - List
 - Vector
 

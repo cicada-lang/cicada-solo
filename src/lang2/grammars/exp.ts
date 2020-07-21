@@ -3,6 +3,7 @@ import pt from "@forchange/partech"
 import rr from "@forchange/readable-regular-expression"
 
 const preserved_identifiers = [
+  "Pair",
   "cons",
   "car",
   "cdr",
@@ -42,6 +43,7 @@ export function exp(): pt.Sym.Rule {
     fn: ["(", identifier, ")", "=", ">", exp],
     ap: [identifier, pt.one_or_more(exp_in_paren)],
     sigma: ["(", identifier, ":", exp, ")", "*", exp],
+    pair: ["Pair", "(", exp, ",", exp, ")"],
     cons: ["cons", "(", exp, ",", exp, ")"],
     car: ["car", "(", exp, ")"],
     cdr: ["cdr", "(", exp, ")"],
@@ -108,6 +110,14 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       return {
         kind: "Exp.Sigma",
         name: pt.Tree.token(name).value,
+        car_t: exp_matcher(car_t),
+        cdr_t: exp_matcher(cdr_t),
+      }
+    },
+    pair: ([, , car_t, , cdr_t, ]) => {
+      return {
+        kind: "Exp.Sigma",
+        name: "_",
         car_t: exp_matcher(car_t),
         cdr_t: exp_matcher(cdr_t),
       }
