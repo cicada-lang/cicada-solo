@@ -1,0 +1,11 @@
+I am expecting the following two values to be the same (_: String) * String.
+But they are not.
+from:
+  cons("ratatouille", "baguette")
+to:
+  cons("baguette", "ratatouille")
+
+previous:
+- Same
+- Same: Equal((_: String) * String, cons("ratatouille", "baguette"), cons("baguette", "ratatouille"))
+
