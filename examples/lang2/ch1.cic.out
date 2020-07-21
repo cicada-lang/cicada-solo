@@ -1,1 +1,1 @@
-Same: Equal(String, "ratatouille", "ratatouille")
+(_: String) * String: Type
