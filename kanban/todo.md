@@ -16,8 +16,6 @@
 
 - java like module system.
 
-- be able to infer the type of `cons(x, y)`.
-
 - multi pi and arrow type
   (_: Nat, _: Nat) -> Nat
   (Nat, Nat) -> Nat
