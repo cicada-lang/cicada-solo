@@ -8,6 +8,7 @@
     Pair(String, String),
     cons("ratatouille", "baguette"),
     cons("ratatouille", "baguette"))
+  _ = car(cons("ratatouille", "baguette"): Pair(String, String))
   _ = same: Equal(
     String,
     "ratatouille",
