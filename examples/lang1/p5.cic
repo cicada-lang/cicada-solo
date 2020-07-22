@@ -1,0 +1,4 @@
+{
+  id = (x) => x : (Nat) -> Nat
+  (_) => (_) => id(id(id(id(100)))) : (Nat) -> (Nat) -> Nat
+}

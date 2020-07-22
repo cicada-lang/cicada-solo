@@ -14,6 +14,13 @@ const identifier = new pt.Sym.Pat(
   { name: "identifier" }
 )
 
+const num = pt.Sym.create_par_from_kind("number", { name: "number" })
+
+function num_matcher(tree: pt.Tree.Tree): number {
+  const s = pt.Tree.token(tree).value
+  return Number.parseInt(s)
+}
+
 export function ty(): pt.Sym.Rule {
   return pt.Sym.create_rule("ty", {
     nat: ["Nat"],
@@ -44,6 +51,7 @@ export function exp(): pt.Sym.Rule {
     suite: ["{", pt.zero_or_more(def), exp, "}"],
     zero: ["zero"],
     add1: ["add1", "(", exp, ")"],
+    number: [num],
     rec: ["rec", "[", ty, "]", "(", exp, ",", exp, ",", exp, ")"],
     the: [exp, ":", ty],
   })
@@ -93,6 +101,10 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     },
     add1: ([, , prev]) => {
       return { kind: "Exp.Add1", prev: exp_matcher(prev) }
+    },
+    number: ([num]) => {
+      const n = num_matcher(num)
+      return Exp.nat_from_number(n)
     },
     rec: ([, , t, , , target, , base, , step]) => {
       return {

@@ -1,5 +1,3 @@
-- lang1 -- syntax suger for natural number.
-
 # lang1 -- Be able to define algebraic data type
 
 # lang3 -- "Computation and Deduction" and Logic framework

@@ -1,1 +1,1 @@
-(_) => (__1) => add1(add1(zero)): (Nat) -> (Nat) -> Nat
+(_) => (__1) => 2: (Nat) -> (Nat) -> Nat

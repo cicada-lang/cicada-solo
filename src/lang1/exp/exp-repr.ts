@@ -19,10 +19,15 @@ export function repr(exp: Exp.Exp): string {
       return `{\n${ut.indent(suite_repr, "  ")}\n}`
     }
     case "Exp.Zero": {
-      return `zero`
+      return "0"
     }
     case "Exp.Add1": {
-      return `add1(${repr(exp.prev)})`
+      const n = Exp.nat_to_number(exp)
+      if (n !== undefined) {
+        return n.toString()
+      } else {
+        return `add1(${Exp.repr(exp.prev)})`
+      }
     }
     case "Exp.Rec": {
       const { t, target, base, step } = exp

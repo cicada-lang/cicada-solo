@@ -30,12 +30,13 @@ const identifier = new pt.Sym.Pat(
 )
 
 const str = pt.Sym.create_par_from_kind("string", { name: "string" })
-const num = pt.Sym.create_par_from_kind("number", { name: "number" })
 
 function str_matcher(tree: pt.Tree.Tree): string {
   const s = pt.Tree.token(tree).value
   return s.slice(1, s.length - 1)
 }
+
+const num = pt.Sym.create_par_from_kind("number", { name: "number" })
 
 function num_matcher(tree: pt.Tree.Tree): number {
   const s = pt.Tree.token(tree).value
