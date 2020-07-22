@@ -1,9 +1,3 @@
-# About the little books
-
-- little book 好像在于给每部分实现代码写测试用例
-  - 并且用到了某个解释范式
-  - 我们需要好好研究一下
-
 # About three levels of function programming
 
 - 有些人说他用到 function programming 只用到 algebraic datatype
