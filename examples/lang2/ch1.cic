@@ -13,7 +13,6 @@
     String,
     "ratatouille",
     car(cons("ratatouille", "baguette"): Pair(String, String)))
-
   _ = Pair(String, String): Type
   _ = String: Type
   _ = Type: Type
