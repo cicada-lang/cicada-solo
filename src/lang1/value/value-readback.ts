@@ -19,17 +19,17 @@ export function readback(
   } else if (t.kind === "Ty.Nat" && value.kind === "Value.Add1") {
     return { kind: "Exp.Add1", prev: Value.readback(used, t, value.prev) }
   } else if (t.kind === "Ty.Arrow") {
+    // NOTE everything with a function type
+    //   is immediately read back as having a Lambda on top.
+    //   This implements the η-rule for functions.
     const name = freshen(used, value_arg_name(value))
-    const v: Value.Reflection = {
+    const variable: Value.Reflection = {
       kind: "Value.Reflection",
       t: t.arg_t,
       neutral: { kind: "Neutral.Var", name },
     }
-    const ret = Exp.do_ap(value, v)
+    const ret = Exp.do_ap(value, variable)
     const body = Value.readback(new Set([...used, name]), t.ret_t, ret)
-    // NOTE everything with a function type
-    //   is immediately read back as having a Lambda on top.
-    //   This implements the η-rule for functions.
     return { kind: "Exp.Fn", name, body }
   } else if (value.kind === "Value.Reflection") {
     if (ut.equal(t, value.t)) {
