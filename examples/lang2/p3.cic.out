@@ -1,1 +1,1 @@
-Same: Equal(Nat, add1(add1(add1(add1(add1(add1(add1(add1(zero)))))))), add1(add1(add1(add1(add1(add1(add1(add1(zero)))))))))
+Same: Equal(Nat, 8, 8)

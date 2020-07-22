@@ -1,3 +1,5 @@
+- lang1 -- syntax suger for natural number.
+
 # lang1 -- Be able to define algebraic data type
 
 # lang3 -- "Computation and Deduction" and Logic framework
@@ -10,8 +12,6 @@
 # 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
 
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
-
-- syntax suger for natural number
 
 - use cicada to write inference rule as docs.
   - Note that, the language of inference rule does not use closure.

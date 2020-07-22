@@ -30,10 +30,16 @@ const identifier = new pt.Sym.Pat(
 )
 
 const str = pt.Sym.create_par_from_kind("string", { name: "string" })
+const num = pt.Sym.create_par_from_kind("number", { name: "number" })
 
-function str_match(tree: pt.Tree.Tree): string {
+function str_matcher(tree: pt.Tree.Tree): string {
   const s = pt.Tree.token(tree).value
   return s.slice(1, s.length - 1)
+}
+
+function num_matcher(tree: pt.Tree.Tree): number {
+  const s = pt.Tree.token(tree).value
+  return Number.parseInt(s)
 }
 
 function type_assignment(): pt.Sym.Rule {
@@ -82,6 +88,7 @@ export function exp(): pt.Sym.Rule {
     nat: ["Nat"],
     zero: ["zero"],
     add1: ["add1", "(", exp, ")"],
+    number: [num],
     nat_ind: ["Nat", ".", "ind", "(", exp, ",", exp, ",", exp, ",", exp, ")"],
     equal: ["Equal", "(", exp, ",", exp, ",", exp, ")"],
     same: ["same"],
@@ -207,6 +214,10 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     add1: ([, , prev]) => {
       return { kind: "Exp.Add1", prev: exp_matcher(prev) }
     },
+    number: ([num]) => {
+      const n = num_matcher(num)
+      return Exp.nat_from_number(n)
+    },
     nat_ind: ([, , , , target, , motive, , base, , step]) => {
       return {
         kind: "Exp.NatInd",
@@ -255,7 +266,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       return { kind: "Exp.Str" }
     },
     quote: ([str]) => {
-      return { kind: "Exp.Quote", str: str_match(str) }
+      return { kind: "Exp.Quote", str: str_matcher(str) }
     },
     type: (_) => {
       return { kind: "Exp.Type" }
