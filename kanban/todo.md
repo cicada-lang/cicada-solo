@@ -29,8 +29,6 @@
 
 # 用 The Little Typer 作为 Pie 的测试。
 
-- 设计实用的命令行工具与测试框架。
-
 # Play with systemt
 
 # church-encoding
