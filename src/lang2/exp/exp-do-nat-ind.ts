@@ -13,7 +13,7 @@ export function do_nat_ind(
 ): Value.Value {
   if (target.kind === "Value.Zero") {
     return base
-  } else if (target.kind === "Value.Succ") {
+  } else if (target.kind === "Value.Add1") {
     return Exp.do_ap(
       Exp.do_ap(step, target.prev),
       Exp.do_nat_ind(target.prev, motive, base, step)
@@ -51,7 +51,7 @@ export function do_nat_ind(
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "nat_ind",
-        expecting: ["Value.Zero", "Value.Succ", "Value.Reflection"],
+        expecting: ["Value.Zero", "Value.Add1", "Value.Reflection"],
         reality: target.kind,
       })
     )

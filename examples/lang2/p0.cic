@@ -1,1 +1,1 @@
-succ(succ(zero))
+add1(add1(zero))

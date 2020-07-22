@@ -9,7 +9,7 @@ export type Exp =
   | Cdr
   | Nat
   | Zero
-  | Succ
+  | Add1
   | NatInd
   | Equal
   | Same
@@ -79,8 +79,8 @@ export interface Zero {
   kind: "Exp.Zero"
 }
 
-export interface Succ {
-  kind: "Exp.Succ"
+export interface Add1 {
+  kind: "Exp.Add1"
   prev: Exp
 }
 

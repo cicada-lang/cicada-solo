@@ -9,7 +9,7 @@ const preserved_identifiers = [
   "cdr",
   "Nat",
   "zero",
-  "succ",
+  "add1",
   "Equal",
   "same",
   "replace",
@@ -81,7 +81,7 @@ export function exp(): pt.Sym.Rule {
     cdr: ["cdr", "(", exp, ")"],
     nat: ["Nat"],
     zero: ["zero"],
-    succ: ["succ", "(", exp, ")"],
+    add1: ["add1", "(", exp, ")"],
     nat_ind: ["Nat", ".", "ind", "(", exp, ",", exp, ",", exp, ",", exp, ")"],
     equal: ["Equal", "(", exp, ",", exp, ",", exp, ")"],
     same: ["same"],
@@ -204,8 +204,8 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     zero: (_) => {
       return { kind: "Exp.Zero" }
     },
-    succ: ([, , prev]) => {
-      return { kind: "Exp.Succ", prev: exp_matcher(prev) }
+    add1: ([, , prev]) => {
+      return { kind: "Exp.Add1", prev: exp_matcher(prev) }
     },
     nat_ind: ([, , , , target, , motive, , base, , step]) => {
       return {

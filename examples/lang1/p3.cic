@@ -1,6 +1,6 @@
 {
-  one = succ(zero) : Nat
-  two = succ(one) : Nat
+  one = add1(zero) : Nat
+  two = add1(one) : Nat
   id = (x) => x : (Nat) -> Nat
   id(two)
 }

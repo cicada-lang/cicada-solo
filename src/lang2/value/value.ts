@@ -9,7 +9,7 @@ export type Value =
   | Cons
   | Nat
   | Zero
-  | Succ
+  | Add1
   | Equal
   | Same
   | Trivial
@@ -51,8 +51,8 @@ export interface Zero {
   kind: "Value.Zero"
 }
 
-export interface Succ {
-  kind: "Value.Succ"
+export interface Add1 {
+  kind: "Value.Add1"
   prev: Value
 }
 

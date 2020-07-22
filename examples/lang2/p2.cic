@@ -1,5 +1,5 @@
 {
   t = Nat : Type
   n = zero : t
-  succ(n) : Nat
+  add1(n) : Nat
 }

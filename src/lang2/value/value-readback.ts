@@ -10,8 +10,8 @@ import * as ut from "../../ut"
 export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
   if (t.kind === "Value.Nat" && value.kind === "Value.Zero") {
     return { kind: "Exp.Zero" }
-  } else if (t.kind === "Value.Nat" && value.kind === "Value.Succ") {
-    return { kind: "Exp.Succ", prev: Value.readback(ctx, t, value.prev) }
+  } else if (t.kind === "Value.Nat" && value.kind === "Value.Add1") {
+    return { kind: "Exp.Add1", prev: Value.readback(ctx, t, value.prev) }
   } else if (t.kind === "Value.Pi") {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.

@@ -1,1 +1,1 @@
-succ(zero): Nat
+add1(zero): Nat

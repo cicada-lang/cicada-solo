@@ -38,10 +38,10 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
             |`)
         )
       }
-    } else if (exp.kind === "Exp.Succ") {
+    } else if (exp.kind === "Exp.Add1") {
       // ctx |- prev <= Nat
       // ------------------------
-      // ctx |- Succ(prev) <= Nat
+      // ctx |- Add1(prev) <= Nat
       if (t.kind === "Ty.Nat") {
         Exp.check(ctx, exp.prev, t)
         return

@@ -1,4 +1,4 @@
 {
   n = zero
-  succ(n)
+  add1(n)
 }

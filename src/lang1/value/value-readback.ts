@@ -16,8 +16,8 @@ export function readback(
 ): Exp.Exp {
   if (t.kind === "Ty.Nat" && value.kind === "Value.Zero") {
     return { kind: "Exp.Zero" }
-  } else if (t.kind === "Ty.Nat" && value.kind === "Value.Succ") {
-    return { kind: "Exp.Succ", prev: Value.readback(used, t, value.prev) }
+  } else if (t.kind === "Ty.Nat" && value.kind === "Value.Add1") {
+    return { kind: "Exp.Add1", prev: Value.readback(used, t, value.prev) }
   } else if (t.kind === "Ty.Arrow") {
     const name = freshen(used, value_arg_name(value))
     const v: Value.Reflection = {

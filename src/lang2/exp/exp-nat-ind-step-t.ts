@@ -20,7 +20,7 @@ export function nat_ind_step_t(motive: Value.Value): Value.Value {
       ret_t: {
         kind: "Exp.Ap",
         target: { kind: "Exp.Var", name: "motive" },
-        arg: { kind: "Exp.Succ", prev: { kind: "Exp.Var", name: "prev" } },
+        arg: { kind: "Exp.Add1", prev: { kind: "Exp.Var", name: "prev" } },
       },
     },
   }

@@ -21,8 +21,8 @@ export function repr(exp: Exp.Exp): string {
     case "Exp.Zero": {
       return `zero`
     }
-    case "Exp.Succ": {
-      return `succ(${repr(exp.prev)})`
+    case "Exp.Add1": {
+      return `add1(${repr(exp.prev)})`
     }
     case "Exp.Rec": {
       const { t, target, base, step } = exp

@@ -34,9 +34,9 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           kind: "Value.Zero",
         }
       }
-      case "Exp.Succ": {
+      case "Exp.Add1": {
         return {
-          kind: "Value.Succ",
+          kind: "Value.Add1",
           prev: evaluate(env, exp.prev),
         }
       }

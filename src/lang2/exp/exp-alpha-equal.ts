@@ -77,7 +77,7 @@ function alpha(the: {
     return true
   } else if (left.kind === "Exp.Zero" && right.kind === "Exp.Zero") {
     return true
-  } else if (left.kind === "Exp.Succ" && right.kind === "Exp.Succ") {
+  } else if (left.kind === "Exp.Add1" && right.kind === "Exp.Add1") {
     return alpha({ ...the, left: left.prev, right: right.prev })
   } else if (left.kind === "Exp.NatInd" && right.kind === "Exp.NatInd") {
     return (

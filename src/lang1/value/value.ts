@@ -3,7 +3,7 @@ import * as Exp from "../exp"
 import * as Env from "../env"
 import * as Neutral from "../neutral"
 
-export type Value = Reflection | Fn | Zero | Succ
+export type Value = Reflection | Fn | Zero | Add1
 
 export interface Reflection {
   kind: "Value.Reflection"
@@ -22,7 +22,7 @@ export interface Zero {
   kind: "Value.Zero"
 }
 
-export interface Succ {
-  kind: "Value.Succ"
+export interface Add1 {
+  kind: "Value.Add1"
   prev: Value
 }

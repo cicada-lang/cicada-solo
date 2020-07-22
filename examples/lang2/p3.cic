@@ -1,8 +1,8 @@
 {
-  one = succ(zero)
-  two = succ(one)
-  three = succ(two)
-  add = (x, y) => Nat.ind(y, (_) => Nat, x, (prev, almost) => succ(almost))
+  one = add1(zero)
+  two = add1(one)
+  three = add1(two)
+  add = (x, y) => Nat.ind(y, (_) => Nat, x, (prev, almost) => add1(almost))
       : (Nat) -> (Nat) -> Nat
   mul = (x, y) => Nat.ind(y, (_) => Nat, zero, (prev, almost) => add(almost, x))
       : (Nat) -> (Nat) -> Nat

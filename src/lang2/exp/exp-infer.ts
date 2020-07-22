@@ -79,14 +79,14 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       return { kind: "Value.Type" }
     } else if (exp.kind === "Exp.Zero") {
       return { kind: "Value.Nat" }
-    } else if (exp.kind === "Exp.Succ") {
+    } else if (exp.kind === "Exp.Add1") {
       Exp.check(ctx, exp.prev, { kind: "Value.Nat" })
       return { kind: "Value.Nat" }
     } else if (exp.kind === "Exp.NatInd") {
       // ctx |- target => Nat
       // ctx |- motive <= (x: Nat) -> Type
       // ctx |- base <= motive(Zero)
-      // ctx |- step <= (prev: Nat) -> (almost: motive(prev)) -> motive(Succ(prev))
+      // ctx |- step <= (prev: Nat) -> (almost: motive(prev)) -> motive(Add1(prev))
       // ----------------------
       // ctx |- Nat.ind(target, motive, base, step) => motive(target)
       const target_t = Exp.infer(ctx, exp.target)

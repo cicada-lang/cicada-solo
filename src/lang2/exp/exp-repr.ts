@@ -33,8 +33,8 @@ export function repr(exp: Exp.Exp): string {
     case "Exp.Zero": {
       return "zero"
     }
-    case "Exp.Succ": {
-      return `succ(${Exp.repr(exp.prev)})`
+    case "Exp.Add1": {
+      return `add1(${Exp.repr(exp.prev)})`
     }
     case "Exp.NatInd": {
       return `Nat.ind(${Exp.repr(exp.target)}, ${Exp.repr(

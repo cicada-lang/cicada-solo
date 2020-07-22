@@ -13,7 +13,7 @@ export function do_rec(
 ): Value.Value {
   if (target.kind === "Value.Zero") {
     return base
-  } else if (target.kind === "Value.Succ") {
+  } else if (target.kind === "Value.Add1") {
     return Exp.do_ap(
       Exp.do_ap(step, target.prev),
       Exp.do_rec(t, target.prev, base, step)
@@ -49,7 +49,7 @@ export function do_rec(
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "rec",
-        expecting: ["Value.Zero", "Value.Succ", "Value.Reflection"],
+        expecting: ["Value.Zero", "Value.Add1", "Value.Reflection"],
         reality: target.kind,
       })
     )

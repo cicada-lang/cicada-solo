@@ -1,6 +1,6 @@
 import * as Ty from "../ty"
 
-export type Exp = Var | Fn | Ap | Zero | Succ | Rec | Suite | The
+export type Exp = Var | Fn | Ap | Zero | Add1 | Rec | Suite | The
 
 export interface Var {
   kind: "Exp.Var"
@@ -29,8 +29,8 @@ export interface Zero {
   kind: "Exp.Zero"
 }
 
-export interface Succ {
-  kind: "Exp.Succ"
+export interface Add1 {
+  kind: "Exp.Add1"
   prev: Exp
 }
 
