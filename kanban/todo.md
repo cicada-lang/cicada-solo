@@ -14,8 +14,6 @@
 - use cicada to write inference rule as docs.
   - Note that, the language of inference rule does not use closure.
 
-- java like module system.
-
 - multi pi and arrow type
   (_: Nat, _: Nat) -> Nat
   (Nat, Nat) -> Nat
@@ -26,6 +24,8 @@
 - test Equal
 - test Pi
 - test Absurd
+
+# java like module system.
 
 # 用 The Little Typer 作为 Pie 的测试。
 
