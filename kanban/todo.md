@@ -1,3 +1,4 @@
+- use same name constructor for ADT -- instead of object with kind.
 - fix the bug of partech -- for cicada lang2
 
 # lang1 -- Be able to define algebraic data type
