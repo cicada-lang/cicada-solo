@@ -17,5 +17,14 @@
   _ = String: Type
   _ = Type: Type
   _ = same: Equal(Type, String, String)
+  _ = Pair(
+    car(cons(String, "olive"): Pair(Type, String)),
+    cdr(cons("oil", String): Pair(String, Type))): Type
+  _ = cons(
+    cdr(cons(String, "olive"): Pair(Type, String)),
+    car(cons("oil", String): Pair(String, Type))
+  ): Pair(
+    car(cons(String, "olive"): Pair(Type, String)),
+    cdr(cons("oil", String): Pair(String, Type)))
   _
 }

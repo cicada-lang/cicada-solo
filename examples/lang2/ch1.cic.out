@@ -1,1 +1,1 @@
-Same: Equal(Type, String, String)
+cons("olive", "oil"): (_: String) * String
