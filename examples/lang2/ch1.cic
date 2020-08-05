@@ -26,5 +26,10 @@
   ): Pair(
     car(cons(String, "olive"): Pair(Type, String)),
     cdr(cons("oil", String): Pair(String, Type)))
+  _ = 172: Nat
+  _ = 0: Nat
+  _ = zero: Nat
+  _ = same: Equal(Nat, 0, zero)
+  _ = same: Equal(Nat, zero, 0)
   _
 }
