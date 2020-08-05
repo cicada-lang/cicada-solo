@@ -1,5 +1,23 @@
-- use same name constructor for ADT -- instead of object with kind.
-- fix the bug of partech -- for cicada lang2
+- [lang2] use same name constructor for ADT -- instead of object with kind
+- [lang2] fix the bug of partech
+
+- use cicada to write inference rule as docs.
+  - Note that, the language of inference rule does not use closure.
+
+# lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
+
+- multi pi and arrow type
+  (_: Nat, _: Nat) -> Nat
+  (Nat, Nat) -> Nat
+
+- List
+- Vector
+
+- test Equal
+- test Pi
+- test Absurd
+
+# 用 The Little Typer 作为 Pie 的测试。
 
 # lang1 -- Be able to define algebraic data type
 
@@ -13,25 +31,7 @@
 
 # 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
 
-# lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
-
-- use cicada to write inference rule as docs.
-  - Note that, the language of inference rule does not use closure.
-
-- multi pi and arrow type
-  (_: Nat, _: Nat) -> Nat
-  (Nat, Nat) -> Nat
-
-- List
-- Vector
-
-- test Equal
-- test Pi
-- test Absurd
-
 # java like module system.
-
-# 用 The Little Typer 作为 Pie 的测试。
 
 # Play with systemt
 
