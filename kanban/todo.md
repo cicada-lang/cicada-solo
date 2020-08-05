@@ -3,9 +3,10 @@
 
 # lang1 -- Be able to define algebraic data type
 
-# lang3 -- "Computation and Deduction" and Logic framework
+# lang3 -- wissen
 
 - Run datatype definition as logic programs.
+- learn from "Computation and Deduction" and Logic framework
 - 为古典逻辑设计形式语言。
 
 # 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
