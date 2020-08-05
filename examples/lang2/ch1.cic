@@ -31,5 +31,11 @@
   _ = zero: Nat
   _ = same: Equal(Nat, 0, zero)
   _ = same: Equal(Nat, zero, 0)
+  // NOTE
+  // in the implementation the concept of Value seems not used,
+  // but it is used, because Non Value is Neutral.
+  // This definition of Value is different from the implementation.
+  // Not only this definition can be used to define Neutral later,
+  // it can also provide us a handle to talk and think about Exp.
   _
 }
