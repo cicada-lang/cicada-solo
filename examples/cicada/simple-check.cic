@@ -11,24 +11,24 @@
 
 Ctx = Map(String, Ty)
 
-@datatype Typing(ctx: Ctx, exp: Exp, t: Ty) {
+@datatype Check(ctx: Ctx, exp: Exp, t: Ty) {
   @given name: String
   lookup: Lookup(ctx, name, t)
   ----------------------------- lookup_var
-  Typing(ctx, Exp.var(name), t)
+  Check(ctx, Exp.var(name), t)
 
   @given name: String, ret: Exp
   @given arg_t: Ty, ret_t: Ty
-  ret_typing: Typing(Map.extend(ctx, name, arg_t), ret, ret_t)
+  ret_ck: Check(Map.extend(ctx, name, arg_t), ret, ret_t)
   ------------------------------------------------------ arrow_intro
-  Typing(ctx, Exp.fn(name, ret), Ty.arrow(arg_t, ret_t))
+  Check(ctx, Exp.fn(name, ret), Ty.arrow(arg_t, ret_t))
 
   @given target: Exp
   @given arg: Exp
   @given ret_t: Ty
   arg_t: Ty
-  target_typing: Typing(ctx, target, Ty.arrow(arg_t, ret_t))
-  arg_typing: Typing(ctx, arg, arg_t)
+  target_ck: Check(ctx, target, Ty.arrow(arg_t, ret_t))
+  arg_ck: Check(ctx, arg, arg_t)
   --------------------------------------- arrow_elim
-  Typing(ctx, Exp.ap(target, arg), ret_t)
+  Check(ctx, Exp.ap(target, arg), ret_t)
 }
