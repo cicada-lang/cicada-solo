@@ -10,6 +10,19 @@
   - 这样可以做到，怎么定义就怎么用。
   - 定义 `@datatype` 与 `@judgment` 时，不用在其内部给构造子加 module 前缀。
 
+- reversed-inference-rule style function application syntax.
+  - normal:
+    ```
+    f(x: A): B
+    ```
+  - reversed-inference-rule style:
+    ```
+    B
+    ~~~~ f
+    A
+    ~~~~ x
+    ```
+
 ## 模块系统
 
 - 只能 `@import` 数据类型。不能 `@import` 函数。

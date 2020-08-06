@@ -4,9 +4,9 @@
 
 {
   // |- (x) => x : (A) -> A
-  // ----- arrow_intro
+  // ~~~~~~ arrow_intro
   // x: A |- x: A
-  // ------ lookup_var
+  // ~~~~~~ lookup_var
   // QED
 
   ctx = Map.empty
@@ -18,20 +18,20 @@
   ): Check(ctx, Exp.fn("x", x), Ty.arrow(A, A))
 
   Check(ctx, Exp.fn("x", x), Ty.arrow(A, A))
-  ------------------------------------------- Check.arrow_intro
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.arrow_intro
   Check(Map.extend(ctx, "x", A), x, A)
-  ------------------------------------------- Check.lookup_var
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.lookup_var
   Map.Lookup(Map.extend(ctx, "x", A), "x", A)
-  ------------------------------------------- Map.Lookup.here
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Map.Lookup.here
 }
 
 {
   // |- (x) => (y) => x : (A) -> (B) -> A
-  // ------ arrow_intro
+  // ~~~~~~ arrow_intro
   // x: A |- (y) => x : (B) -> A
-  // ------ arrow_intro
+  // ~~~~~~ arrow_intro
   // x: A, y: B |- x: A
-  // ------ lookup_var
+  // ~~~~~~ lookup_var
   // QED
 
   ctx = Map.empty
@@ -45,27 +45,27 @@
   ): Check(ctx, Exp.fn("x", Exp.fn("y", x)), Ty.arrow(A, Ty.arrow(B, A)))
 
   Check(ctx, Exp.fn("x", Exp.fn("y", x)), Ty.arrow(A, Ty.arrow(B, A)))
-  ------------------------------- Check.arrow_intro
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.arrow_intro
   Check(Map.extend(ctx, "x", A), Exp.fn("y", x), Ty.arrow(B, A))
-  ------------------------------- Check.arrow_intro
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.arrow_intro
   Check(Map.extend(Map.extend(ctx, "x", A), "y", B), x, A)
-  ------------------------------- Check.lookup_var
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.lookup_var
   Map.Lookup(Map.extend(Map.extend(ctx, "x", A), "y", B), "x", A)
-  ------------------------------- Map.Lookup.there
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Map.Lookup.there
   Map.Lookup(Map.extend(ctx, "x", A), "x", A)
-  ------------------------------- Map.Lookup.here
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Map.Lookup.here
 }
 
 {
   // y: A |- {(x) => x}(y) : A
-  // ----- arrow_elim
+  // ~~~~~~ arrow_elim
   // { y: A |- (x) => x : (A) -> A
-  //   ------ arrow_intro
+  //   ~~~~~~ arrow_intro
   //   y: A, x: A |- x : A
-  //   ------ lookup_var
+  //   ~~~~~~ lookup_var
   //   QED }
   // { y: A |- y: A
-  //   ------ lookup_var
+  //   ~~~~~~ lookup_var
   //   QED }
   // QED
 
@@ -81,16 +81,16 @@
     Check.lookup_var(Lookup.here)): Check(ctx, Exp.ap(id, y), A)
 
   Check(ctx, Exp.ap(id, y), A)
-  ---------------------------- Check.arrow_elim
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.arrow_elim
   { A: Ty }
   { Check(ctx, id, Ty.arrow(A, A))
-    ---------------------------- Check.arrow_intro
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.arrow_intro
     Check(Map.extend(ctx, "x", A), x, A)
-    ---------------------------- Check.lookup_var
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.lookup_var
     Map.Lookup(Map.extend(ctx, "x", A), "x", A)
-    ---------------------------- Map.Lookup.here }
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Map.Lookup.here }
   { Check(ctx, y, A)
-    ---------------------------- Check.lookup_var
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.lookup_var
     Map.Lookup(ctx, "y", A)
-    ---------------------------- Map.Lookup.here  }
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Map.Lookup.here  }
 }
