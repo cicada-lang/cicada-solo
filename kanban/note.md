@@ -1,9 +1,3 @@
-# cicada 语法总结。
-
-- 定义 函数 与 类型 的时候也加上 package 前缀。
-  - 这样可以做到，怎么定义就怎么用。
-  - 定义 `@datatype` 与 `@judgment` 时，不用在其内部给构造子加 package 前缀。
-
 # About three levels of function programming
 
 - 有些人说他用到 function programming 只用到 algebraic datatype

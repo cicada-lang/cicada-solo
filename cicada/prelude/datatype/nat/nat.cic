@@ -1,0 +1,36 @@
+@module prelude.datatype.nat.Nat
+
+@import prelude.datatype.bool.Bool
+
+@datatype Nat {
+  zero: Nat
+  succ(prev: Nat): Nat
+}
+
+Nat.add(x: Nat, y: Nat): Nat
+Nat.add(Nat.zero, y) = y
+Nat.add(Nat.succ(prev), y) = Nat.succ(Nat.add(prev, y))
+
+Nat.mul(x: Nat, y: Nat): Nat
+Nat.mul(Nat.zero, y) = Nat.zero
+Nat.mul(Nat.succ(prev), y) = Nat.add(y, Nat.mul(prev, y))
+
+Nat.factorial(x: Nat): Nat
+Nat.factorial(Nat.zero) = Nat.succ(Nat.zero)
+Nat.factorial(Nat.succ(prev), y) = Nat.mul(x, Nat.factorial(prev))
+
+Nat.one: Nat = Nat.succ(Nat.zero)
+Nat.two: Nat = Nat.succ(Nat.one)
+Nat.three: Nat = Nat.succ(Nat.two)
+Nat.four: Nat = Nat.succ(Nat.three)
+Nat.five: Nat = Nat.succ(Nat.four)
+Nat.six: Nat = Nat.succ(Nat.five)
+Nat.seven: Nat = Nat.succ(Nat.six)
+Nat.eight: Nat = Nat.succ(Nat.seven)
+Nat.nine: Nat = Nat.succ(Nat.eight)
+Nat.ten: Nat = Nat.succ(Nat.nine)
+
+Nat.even_p(x: Nat): Bool
+Nat.even_p(Nat.zero) = Bool.true
+Nat.even_p(Nat.succ(Nat.zero)) = Bool.false
+Nat.even_p(Nat.succ(Nat.succ(prev))) = Nat.even_p(prev)

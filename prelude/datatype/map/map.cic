@@ -1,6 +1,0 @@
-@package prelude.datatype.map.Map
-
-@datatype Map(K: Type, V: Type) {
-  empty: Map(K, V)
-  extend(rest: Map(K, V), key: K, value: V): Map(K, V)
-}

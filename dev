@@ -92,27 +92,27 @@ function test_prog_error(prog, pattern, ext, opts) {
 dev["test_lib"] = () => test_prog("node", "lib/**", ".test.js")
 
 dev["test_lang0"] = () =>
-  test_prog("./bin/lang0.js eval", "examples/lang0/**", ".cic", {
+  test_prog("./bin/lang0.js eval", "tests/lang0/**", ".cic", {
     snapshot: { stdout: ".out" },
   })
 
 dev["test_lang1"] = () =>
-  test_prog("./bin/lang1.js eval", "examples/lang1/**", ".cic", {
+  test_prog("./bin/lang1.js eval", "tests/lang1/**", ".cic", {
     snapshot: { stdout: ".out" },
   })
 
 dev["test_lang1_error"] = () =>
-  test_prog_error("./bin/lang1.js eval", "examples/lang1-error/**", ".cic", {
+  test_prog_error("./bin/lang1.js eval", "tests/lang1-error/**", ".cic", {
     snapshot: { stdout: ".out", stderr: ".err" },
   })
 
 dev["test_lang2"] = () =>
-  test_prog("./bin/lang2.js eval", "examples/lang2/**", ".cic", {
+  test_prog("./bin/lang2.js eval", "tests/lang2/**", ".cic", {
     snapshot: { stdout: ".out" },
   })
 
 dev["test_lang2_error"] = () =>
-  test_prog_error("./bin/lang2.js eval", "examples/lang2-error/**", ".cic", {
+  test_prog_error("./bin/lang2.js eval", "tests/lang2-error/**", ".cic", {
     snapshot: { stdout: ".out", stderr: ".err" },
   })
 
