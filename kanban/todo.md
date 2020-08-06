@@ -7,6 +7,7 @@
     and making the group of inference rules deterministic.
   - how can we use our inference rule syntax to express bidirectional type checking?
 - [lang2] [inference rule]
+  - formalize judgments of "The Little Typer"
 - [lang2] List
 - [lang2] Vector
 - [lang2 test] Equal
