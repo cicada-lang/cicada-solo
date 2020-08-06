@@ -1,16 +1,14 @@
-- [lang2] use same name constructor for ADT -- instead of object with kind
-
-- use cicada to write inference rule as docs.
-  - Note that, the language of inference rule does not use closure.
+- [cicada example] inference rule for lang1
+  - note that, the language of inference rule does not use closure.
+- [cicada example] inference rule for lang2
+  - note that, the language of inference rule does not use closure.
+- [lang2] List
+- [lang2] Vector
+- [lang2 test] Equal
+- [lang2 test] Pi
+- [lang2 test] Absurd
 
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
-
-- List
-- Vector
-
-- test Equal
-- test Pi
-- test Absurd
 
 # 用 The Little Typer 作为 Pie 的测试。
 

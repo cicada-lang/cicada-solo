@@ -1,3 +1,5 @@
+@import prelude.datatype.map.Map
+
 @datatype Exp {
   var(name: String): Exp
   fn(name: String, ret: Exp): Exp
@@ -11,9 +13,9 @@
 
 Ctx = Map(String, Ty)
 
-@datatype Check(ctx: Ctx, exp: Exp, t: Ty) {
+@judgment Check(ctx: Ctx, exp: Exp, t: Ty) {
   @given name: String
-  lookup: Lookup(ctx, name, t)
+  lookup: Map.Lookup(ctx, name, t)
   ----------------------------- lookup_var
   Check(ctx, Exp.var(name), t)
 
