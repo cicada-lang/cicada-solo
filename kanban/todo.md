@@ -1,14 +1,9 @@
 - [lang2] use same name constructor for ADT -- instead of object with kind
-- [lang2] fix the bug of partech
 
 - use cicada to write inference rule as docs.
   - Note that, the language of inference rule does not use closure.
 
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
-
-- multi pi and arrow type
-  (_: Nat, _: Nat) -> Nat
-  (Nat, Nat) -> Nat
 
 - List
 - Vector

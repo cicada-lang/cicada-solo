@@ -72,10 +72,7 @@ function type_assignment_matcher(
 export function exp(): pt.Sym.Rule {
   return pt.Sym.create_rule("exp", {
     var: [identifier],
-    // TODO can not use the following,
-    //   low level partech bug.
-    // pi: ["(", comma_separated(type_assignment), ")", "-", ">", exp],
-    pi: ["(", type_assignment, ")", "-", ">", exp],
+    pi: ["(", comma_separated(type_assignment), ")", "-", ">", exp],
     fn: ["(", comma_separated(identifier), ")", "=", ">", exp],
     ap: [
       identifier,
@@ -114,29 +111,20 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
         name: pt.Tree.token(name).value,
       }
     },
-    // pi: ([, comma_separated_type_assignments, , , , ret_t]) => {
-    //   const type_assignments = comma_separated_matcher(type_assignment_matcher)(
-    //     comma_separated_type_assignments
-    //   )
-    //   let exp = exp_matcher(ret_t)
-    //   for (let i = type_assignments.length - 1; i >= 0; i--) {
-    //     exp = {
-    //       kind: "Exp.Pi",
-    //       name: type_assignments[i].name,
-    //       arg_t: type_assignments[i].t,
-    //       ret_t: exp,
-    //     }
-    //   }
-    //   return exp
-    // },
-    pi: ([, type_assignment, , , , ret_t]) => {
-      const { name, t } = type_assignment_matcher(type_assignment)
-      return {
-        kind: "Exp.Pi",
-        name: name,
-        arg_t: t,
-        ret_t: exp_matcher(ret_t),
+    pi: ([, comma_separated_type_assignments, , , , ret_t]) => {
+      const type_assignments = comma_separated_matcher(type_assignment_matcher)(
+        comma_separated_type_assignments
+      )
+      let exp = exp_matcher(ret_t)
+      for (let i = type_assignments.length - 1; i >= 0; i--) {
+        exp = {
+          kind: "Exp.Pi",
+          name: type_assignments[i].name,
+          arg_t: type_assignments[i].t,
+          ret_t: exp,
+        }
       }
+      return exp
     },
     fn: ([, comma_separated_names, , , , body]) => {
       const names = comma_separated_matcher(
