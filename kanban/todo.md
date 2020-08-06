@@ -1,4 +1,4 @@
-- [cicada example] [inference rule for lang1]
+- [lang1] [inference rule]
   - use Nat instead of Atom in Ty -- like in lang1.
   - note that, a prolog-like DSL for bidirectional type checking, would be wrong.
     because the aim of split one judgment `:`
@@ -6,7 +6,7 @@
     is to avoid searching
     and making the group of inference rules deterministic.
   - how can we use our inference rule syntax to express bidirectional type checking?
-- [cicada example] [inference rule for lang2]
+- [lang2] [inference rule]
 - [lang2] List
 - [lang2] Vector
 - [lang2 test] Equal
