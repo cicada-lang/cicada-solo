@@ -1,3 +1,5 @@
+@module simple.Check
+
 @import prelude.datatype.map.Map
 
 {
