@@ -7,11 +7,13 @@ About knowledge, logic, formal inference rule and computation
 - logic := the system we use to express beliefs.
 
 - inference rule := definition of judgment (belief).
-  - by giving algorithm to check whether a group of data is evidence of the judgment,
+  - by giving algorithm to check whether a group of data
+    can be viewed as evidence of the judgment,
     which is the same as type checking algorithm.
   - use a group of data constructors to define a type constructor,
     is one way of doing this.
-  - this is introduction, how about elimination?
+  - this is using introduction rules to define type.
+    how about elimination?
     - we need elimination rule about arrow elimination
       to do computation by substitution.
     - although we have general pattern matching and recursion
