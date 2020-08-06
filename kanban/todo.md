@@ -4,6 +4,7 @@
     to two judgments `=>` and `<=`
     is to avoid searching
     and making the group of inference rules deterministic.
+  - how can we use our inference rule syntax to express bidirectional type checking?
 - [cicada example] inference rule for lang2
 - [lang2] List
 - [lang2] Vector
