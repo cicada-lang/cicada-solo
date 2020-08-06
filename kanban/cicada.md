@@ -12,15 +12,25 @@
 
 - reversed-inference-rule style function application syntax.
   - normal:
-    ```
-    f(x: A): B
+    ``` cicada
+    f(a: A): T
+    g(f(a: A): T, b: B): R
     ```
   - reversed-inference-rule style:
-    ```
-    B
+    ``` cicada
+    T
     ~~~~ f
     A
-    ~~~~ x
+    ~~~~ a
+
+    R
+    ~~~~ g
+    { T
+      ~~~~ f
+      A
+      ~~~~ a }
+    { B
+      ~~~~ b }
     ```
 
 ## 模块系统
