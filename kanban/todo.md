@@ -1,5 +1,10 @@
 - [cicada example] inference rule for lang1
   - note that, the language of inference rule does not use closure.
+  - note that, a prolog-like DSL for bidirectional type checking, would be wrong.
+    because the aim of split one judgment `:`
+    to two judgments `=>` and `<=`
+    is to avoid searching
+    and making the group of inference rules deterministic.
 - [cicada example] inference rule for lang2
   - note that, the language of inference rule does not use closure.
 - [lang2] List

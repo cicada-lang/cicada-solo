@@ -6,4 +6,4 @@
   - to express common collection like list and map.
 - it use mutable variables.
 - it is not purely declarative.
-  - like the DSL for specifying grammar by grammar rules.
+- it is like the DSL for specifying grammar by grammar rules.
