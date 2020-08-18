@@ -1,6 +1,6 @@
 @module simple.Check
 
-@import prelude.datatype.map.Map
+@import datatype.Map
 
 @datatype Exp {
   var(name: String): Exp

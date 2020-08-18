@@ -1,0 +1,5 @@
+@module structure.lattice.Lattice
+
+@class JoinSemilattice {
+  // TODO
+}

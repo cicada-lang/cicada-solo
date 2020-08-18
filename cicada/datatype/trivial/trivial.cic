@@ -1,0 +1,5 @@
+@import datatype.Trivial
+
+@datatype Trivial {
+  sole: Trivial
+}

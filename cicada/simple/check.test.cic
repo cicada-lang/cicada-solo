@@ -1,6 +1,6 @@
 @module simple.Check
 
-@import prelude.datatype.map.Map
+@import datatype.Map
 
 {
   // |- (x) => x : (A) -> A

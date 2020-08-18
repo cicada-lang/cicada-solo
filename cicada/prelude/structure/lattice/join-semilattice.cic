@@ -1,5 +1,0 @@
-@module prelude.structure.lattice.Lattice
-
-@class JoinSemilattice {
-  // TODO
-}

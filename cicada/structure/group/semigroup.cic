@@ -1,0 +1,14 @@
+@module structure.group.Semigroup
+
+@class Semigroup {
+  Elem: Type
+  mul(x: Elem, y: Elem): Elem
+
+  mul_associative(x: Elem, y: Elem, z: Elem): Equal(mul(x, mul(y, z)), mul(mul(x, y), z))
+}
+
+// NOTE How about the following definition with built-in associative?
+@class Semigroup {
+  Elem: Type
+  mul(List(Elem)): Elem
+}
