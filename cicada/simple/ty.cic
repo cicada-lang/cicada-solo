@@ -1,0 +1,6 @@
+@module simple.Ty
+
+@datatype Ty {
+  nat: Ty
+  arrow(arg_t: Ty, ret_t: Ty): Ty
+}

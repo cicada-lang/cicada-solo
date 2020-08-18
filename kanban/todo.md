@@ -1,4 +1,5 @@
-- [lang1] [inference rule]
+- lang1 use cicada style ADT.
+- use cicada to specify the inference rules of lang1.
   - use Nat instead of Atom in Ty -- like in lang1.
   - note that, a prolog-like DSL for bidirectional type checking, would be wrong.
     because the aim of split one judgment `:`
@@ -6,13 +7,13 @@
     is to avoid searching
     and making the group of inference rules deterministic.
   - how can we use our inference rule syntax to express bidirectional type checking?
-- [lang2] [inference rule]
-  - formalize judgments of "The Little Typer"
-- [lang2] List
-- [lang2] Vector
-- [lang2 test] Equal
-- [lang2 test] Pi
-- [lang2 test] Absurd
+- use cicada to specify the inference rules of lang2.
+  - formalize judgments of "The Little Typer".
+- implement List for lang2.
+- implement Vector for lang2.
+- test Equal of lang2.
+- test Pi of lang2.
+- test Absurd of lang2.
 
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
 

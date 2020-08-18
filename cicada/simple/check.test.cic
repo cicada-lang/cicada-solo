@@ -1,5 +1,7 @@
 @module simple.Check
 
+@import simple.Exp
+@import simple.Ty
 @import datatype.Map
 
 {

@@ -1,30 +1,24 @@
 @module simple.Check
 
+@import simple.Exp
+@import simple.Ty
 @import datatype.Map
 
-@datatype Exp {
-  var(name: String): Exp
-  fn(name: String, ret: Exp): Exp
-  ap(target: Exp, arg: Exp): Exp
-}
+@judgment Check(ctx: Map(String, Ty), exp: Exp, t: Ty) {
+  // NOTE Formal arguments of type constructor are considered as given to data constructors.
+  // - For examples, the above `ctx`, `exp`, `t` can be viewed as given.
 
-@datatype Ty {
-  atom(name: String): Ty
-  arrow(arg_t: Ty, ret_t: Ty): Ty
-}
-
-Ctx = Map(String, Ty)
-
-@judgment Check(ctx: Ctx, exp: Exp, t: Ty) {
+  // NOTE What ever occurs in return type of data constructor, can be given by unification.
+  // - Such as the following given `name`.
   @given name: String
   lookup: Map.Lookup(ctx, name, t)
-  ----------------------------- lookup_var
+  -------------------------------- lookup_var
   Check(ctx, Exp.var(name), t)
 
   @given name: String, ret: Exp
   @given arg_t: Ty, ret_t: Ty
   ret_ck: Check(Map.extend(ctx, name, arg_t), ret, ret_t)
-  ------------------------------------------------------ arrow_intro
+  ------------------------------------------------------- fn
   Check(ctx, Exp.fn(name, ret), Ty.arrow(arg_t, ret_t))
 
   @given target: Exp
@@ -33,6 +27,15 @@ Ctx = Map(String, Ty)
   arg_t: Ty
   target_ck: Check(ctx, target, Ty.arrow(arg_t, ret_t))
   arg_ck: Check(ctx, arg, arg_t)
-  --------------------------------------- arrow_elim
+  -------------------------------------- ap
   Check(ctx, Exp.ap(target, arg), ret_t)
+
+  ---------------------------- zero
+  Check(ctx, Exp.zero, Ty.nat)
+
+  @given prev: Exp
+  prev_ck: Check(ctx, prev, Ty.nat)
+  ---------------------------------- add1
+  Check(ctx, Exp.add1(prev), Ty.nat)
+
 }
