@@ -1,11 +1,11 @@
-export type Ty = Nat | Arrow
+export type Ty = nat | arrow
 
-export interface Nat {
-  kind: "Ty.Nat"
+export interface nat {
+  kind: "Ty.nat"
 }
 
-export interface Arrow {
-  kind: "Ty.Arrow"
+export interface arrow {
+  kind: "Ty.arrow"
   arg_t: Ty
   ret_t: Ty
 }

@@ -6,7 +6,7 @@ import * as ut from "../../ut"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
   try {
-    if (exp.kind === "Exp.Var") {
+    if (exp.kind === "Exp.v") {
       // a = lookup(x, ctx)
       // ---------------------
       // ctx |- x => a
@@ -16,25 +16,25 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       } else {
         return t
       }
-    } else if (exp.kind === "Exp.Ap") {
-      // ctx |- f => Arrow(a, b)
+    } else if (exp.kind === "Exp.ap") {
+      // ctx |- f => arrow(a, b)
       // ctx |- e <= a
       // ---------------------
-      // ctx |- Ap(f, e) => b
+      // ctx |- ap(f, e) => b
       const { target, arg } = exp
       const target_t = Exp.infer(ctx, target)
-      if (target_t.kind === "Ty.Arrow") {
+      if (target_t.kind === "Ty.arrow") {
         Exp.check(ctx, arg, target_t.arg_t)
         return target_t.ret_t
       } else {
         throw new Trace.Trace(
           ut.aline(`
-            |I am expecting the target_t to be Ty.Arrow,
+            |I am expecting the target_t to be Ty.arrow,
             |but it is ${Ty.repr(target_t)}.
             |`)
         )
       }
-    } else if (exp.kind === "Exp.Suite") {
+    } else if (exp.kind === "Exp.suite") {
       // ctx |- e1 => t1
       // ctx, x1: t1 |- e2 => t2
       // ctx, x1: t1, x2: t2 |- ...
@@ -52,34 +52,34 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
         Ctx.extend(ctx, def.name, Exp.infer(ctx, def.exp))
       }
       return Exp.infer(ctx, body)
-    } else if (exp.kind === "Exp.Rec") {
-      // ctx |- n => Nat
+    } else if (exp.kind === "Exp.rec") {
+      // ctx |- n => nat
       // ctx |- b <= t
-      // ctx |- s <= Arrow(Nat, Arrow(t, t))
+      // ctx |- s <= arrow(nat, arrow(t, t))
       // ------------------------------
-      // ctx |- Rec(t, n, b, s) => t
+      // ctx |- rec(t, n, b, s) => t
       const { t, target, base, step } = exp
       const target_t = Exp.infer(ctx, target)
-      if (target_t.kind === "Ty.Nat") {
+      if (target_t.kind === "Ty.nat") {
         Exp.check(ctx, base, t)
         Exp.check(ctx, step, {
-          kind: "Ty.Arrow",
-          arg_t: { kind: "Ty.Nat" },
-          ret_t: { kind: "Ty.Arrow", arg_t: t, ret_t: t },
+          kind: "Ty.arrow",
+          arg_t: { kind: "Ty.nat" },
+          ret_t: { kind: "Ty.arrow", arg_t: t, ret_t: t },
         })
       } else {
         throw new Trace.Trace(
           ut.aline(`
-            |I am expecting target_t to be Ty.Nat,
+            |I am expecting target_t to be Ty.nat,
             |but it is ${Ty.repr(target_t)}.
             |`)
         )
       }
       return t
-    } else if (exp.kind === "Exp.The") {
+    } else if (exp.kind === "Exp.the") {
       // ctx |- e <= t
       // ---------------------
-      // ctx |- The(t, e) => t
+      // ctx |- the(t, e) => t
       const the = exp
       Exp.check(ctx, the.exp, the.t)
       return the.t

@@ -14,24 +14,24 @@ export function readback(
   t: Ty.Ty,
   value: Value.Value
 ): Exp.Exp {
-  if (t.kind === "Ty.Nat" && value.kind === "Value.Zero") {
-    return { kind: "Exp.Zero" }
-  } else if (t.kind === "Ty.Nat" && value.kind === "Value.Add1") {
-    return { kind: "Exp.Add1", prev: Value.readback(used, t, value.prev) }
-  } else if (t.kind === "Ty.Arrow") {
+  if (t.kind === "Ty.nat" && value.kind === "Value.zero") {
+    return { kind: "Exp.zero" }
+  } else if (t.kind === "Ty.nat" && value.kind === "Value.add1") {
+    return { kind: "Exp.add1", prev: Value.readback(used, t, value.prev) }
+  } else if (t.kind === "Ty.arrow") {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
     const name = freshen(used, value_arg_name(value))
-    const variable: Value.Reflection = {
-      kind: "Value.Reflection",
+    const variable: Value.reflection = {
+      kind: "Value.reflection",
       t: t.arg_t,
-      neutral: { kind: "Neutral.Var", name },
+      neutral: { kind: "Neutral.v", name },
     }
     const ret = Exp.do_ap(value, variable)
     const body = Value.readback(new Set([...used, name]), t.ret_t, ret)
-    return { kind: "Exp.Fn", name, body }
-  } else if (value.kind === "Value.Reflection") {
+    return { kind: "Exp.fn", name, body }
+  } else if (value.kind === "Value.reflection") {
     if (ut.equal(t, value.t)) {
       return Neutral.readback(used, value.neutral)
     } else {
@@ -54,5 +54,5 @@ export function readback(
 }
 
 function value_arg_name(value: Value.Value): string {
-  return value.kind === "Value.Fn" ? value.name : "x"
+  return value.kind === "Value.fn" ? value.name : "x"
 }

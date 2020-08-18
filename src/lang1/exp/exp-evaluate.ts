@@ -8,7 +8,7 @@ import * as ut from "../../ut"
 export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
   try {
     switch (exp.kind) {
-      case "Exp.Var": {
+      case "Exp.v": {
         const result = Env.lookup(env, exp.name)
         if (result !== undefined) {
           return result
@@ -16,31 +16,31 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
         }
       }
-      case "Exp.Fn": {
-        return { ...exp, kind: "Value.Fn", env }
+      case "Exp.fn": {
+        return { ...exp, kind: "Value.fn", env }
       }
-      case "Exp.Ap": {
+      case "Exp.ap": {
         const { target, arg } = exp
         return Exp.do_ap(evaluate(env, target), evaluate(env, arg))
       }
-      case "Exp.Suite": {
+      case "Exp.suite": {
         for (const def of exp.defs) {
           env = Env.extend(Env.clone(env), def.name, evaluate(env, def.exp))
         }
         return evaluate(env, exp.body)
       }
-      case "Exp.Zero": {
+      case "Exp.zero": {
         return {
-          kind: "Value.Zero",
+          kind: "Value.zero",
         }
       }
-      case "Exp.Add1": {
+      case "Exp.add1": {
         return {
-          kind: "Value.Add1",
+          kind: "Value.add1",
           prev: evaluate(env, exp.prev),
         }
       }
-      case "Exp.Rec": {
+      case "Exp.rec": {
         return Exp.do_rec(
           exp.t,
           evaluate(env, exp.target),
@@ -48,7 +48,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           evaluate(env, exp.step)
         )
       }
-      case "Exp.The": {
+      case "Exp.the": {
         return evaluate(env, exp.exp)
       }
     }

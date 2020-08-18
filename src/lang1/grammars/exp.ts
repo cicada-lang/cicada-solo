@@ -31,11 +31,11 @@ export function ty(): pt.Sym.Rule {
 export function ty_matcher(tree: pt.Tree.Tree): Ty.Ty {
   return pt.Tree.matcher<Ty.Ty>("ty", {
     nat: (_) => {
-      return { kind: "Ty.Nat" }
+      return { kind: "Ty.nat" }
     },
     arrow: ([, arg, , , , ret]) => {
       return {
-        kind: "Ty.Arrow",
+        kind: "Ty.arrow",
         arg_t: ty_matcher(arg),
         ret_t: ty_matcher(ret),
       }
@@ -61,20 +61,20 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>("exp", {
     var: ([name]) => {
       return {
-        kind: "Exp.Var",
+        kind: "Exp.v",
         name: pt.Tree.token(name).value,
       }
     },
     fn: ([, name, , , , body]) => {
       return {
-        kind: "Exp.Fn",
+        kind: "Exp.fn",
         name: pt.Tree.token(name).value,
         body: exp_matcher(body),
       }
     },
     ap: ([name, exp_in_paren_list]) => {
       let exp: Exp.Exp = {
-        kind: "Exp.Var",
+        kind: "Exp.v",
         name: pt.Tree.token(name).value,
       }
       const args = pt.one_or_more_matcher(exp_in_paren_matcher)(
@@ -82,7 +82,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       )
       for (const arg of args) {
         exp = {
-          kind: "Exp.Ap",
+          kind: "Exp.ap",
           target: exp,
           arg: arg,
         }
@@ -91,16 +91,16 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     },
     suite: ([, defs, body]) => {
       return {
-        kind: "Exp.Suite",
+        kind: "Exp.suite",
         defs: pt.zero_or_more_matcher(def_matcher)(defs),
         body: exp_matcher(body),
       }
     },
     zero: (_) => {
-      return { kind: "Exp.Zero" }
+      return { kind: "Exp.zero" }
     },
     add1: ([, , prev]) => {
-      return { kind: "Exp.Add1", prev: exp_matcher(prev) }
+      return { kind: "Exp.add1", prev: exp_matcher(prev) }
     },
     number: ([num]) => {
       const n = num_matcher(num)
@@ -108,7 +108,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     },
     rec: ([, , t, , , target, , base, , step]) => {
       return {
-        kind: "Exp.Rec",
+        kind: "Exp.rec",
         t: ty_matcher(t),
         target: exp_matcher(target),
         base: exp_matcher(base),
@@ -117,7 +117,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     },
     the: ([exp, , t]) => {
       return {
-        kind: "Exp.The",
+        kind: "Exp.the",
         t: ty_matcher(t),
         exp: exp_matcher(exp),
       }

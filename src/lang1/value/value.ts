@@ -3,26 +3,26 @@ import * as Exp from "../exp"
 import * as Env from "../env"
 import * as Neutral from "../neutral"
 
-export type Value = Reflection | Fn | Zero | Add1
+export type Value = reflection | fn | zero | add1
 
-export interface Reflection {
-  kind: "Value.Reflection"
+export interface reflection {
+  kind: "Value.reflection"
   t: Ty.Ty
   neutral: Neutral.Neutral
 }
 
-export interface Fn {
-  kind: "Value.Fn"
+export interface fn {
+  kind: "Value.fn"
   name: string
   body: Exp.Exp
   env: Env.Env
 }
 
-export interface Zero {
-  kind: "Value.Zero"
+export interface zero {
+  kind: "Value.zero"
 }
 
-export interface Add1 {
-  kind: "Value.Add1"
+export interface add1 {
+  kind: "Value.add1"
   prev: Value
 }

@@ -11,25 +11,25 @@ export function do_rec(
   base: Value.Value,
   step: Value.Value
 ): Value.Value {
-  if (target.kind === "Value.Zero") {
+  if (target.kind === "Value.zero") {
     return base
-  } else if (target.kind === "Value.Add1") {
+  } else if (target.kind === "Value.add1") {
     return Exp.do_ap(
       Exp.do_ap(step, target.prev),
       Exp.do_rec(t, target.prev, base, step)
     )
-  } else if (target.kind === "Value.Reflection") {
-    if (target.t.kind === "Ty.Nat") {
-      const step_t: Ty.Arrow = {
-        kind: "Ty.Arrow",
-        arg_t: { kind: "Ty.Nat" },
-        ret_t: { kind: "Ty.Arrow", arg_t: t, ret_t: t },
+  } else if (target.kind === "Value.reflection") {
+    if (target.t.kind === "Ty.nat") {
+      const step_t: Ty.arrow = {
+        kind: "Ty.arrow",
+        arg_t: { kind: "Ty.nat" },
+        ret_t: { kind: "Ty.arrow", arg_t: t, ret_t: t },
       }
       return {
-        kind: "Value.Reflection",
+        kind: "Value.reflection",
         t: t,
         neutral: {
-          kind: "Neutral.Rec",
+          kind: "Neutral.rec",
           ret_t: t,
           target: target.neutral,
           base: new Normal.Normal(t, base),
@@ -40,7 +40,7 @@ export function do_rec(
       throw new Trace.Trace(
         Exp.explain_elim_target_type_mismatch({
           elim: "rec",
-          expecting: ["Ty.Nat"],
+          expecting: ["Ty.nat"],
           reality: target.t.kind,
         })
       )
@@ -49,7 +49,7 @@ export function do_rec(
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "rec",
-        expecting: ["Value.Zero", "Value.Add1", "Value.Reflection"],
+        expecting: ["Value.zero", "Value.add1", "Value.reflection"],
         reality: target.kind,
       })
     )

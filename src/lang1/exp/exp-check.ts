@@ -6,11 +6,11 @@ import * as ut from "../../ut"
 
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
   try {
-    if (exp.kind === "Exp.Fn") {
+    if (exp.kind === "Exp.fn") {
       // ctx, x: a |- e <= b
       // ------------------------------
-      // ctx |- Fn(x, e) <= Arrow(a, b)
-      if (t.kind === "Ty.Arrow") {
+      // ctx |- fn(x, e) <= arrow(a, b)
+      if (t.kind === "Ty.arrow") {
         ctx = Ctx.clone(ctx)
         Ctx.extend(ctx, exp.name, t.arg_t)
         Exp.check(ctx, exp.body, t.ret_t)
@@ -19,37 +19,37 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
         throw new Trace.Trace(
           ut.aline(`
             |When checking ${Exp.repr(exp)},
-            |I am expecting the type to be Ty.Arrow,
+            |I am expecting the type to be Ty.arrow,
             |but the given type is ${Ty.repr(t)}.
             |`)
         )
       }
-    } else if (exp.kind === "Exp.Zero") {
+    } else if (exp.kind === "Exp.zero") {
       // ------------------
-      // ctx |- Zero <= Nat
-      if (t.kind === "Ty.Nat") {
+      // ctx |- zero <= nat
+      if (t.kind === "Ty.nat") {
         return
       } else {
         throw new Trace.Trace(
           ut.aline(`
             |When checking ${Exp.repr(exp)},
-            |I am expecting the type to be Ty.Nat,
+            |I am expecting the type to be Ty.nat,
             |but the given type is ${Ty.repr(t)}.
             |`)
         )
       }
-    } else if (exp.kind === "Exp.Add1") {
-      // ctx |- prev <= Nat
+    } else if (exp.kind === "Exp.add1") {
+      // ctx |- prev <= nat
       // ------------------------
-      // ctx |- Add1(prev) <= Nat
-      if (t.kind === "Ty.Nat") {
+      // ctx |- add1(prev) <= nat
+      if (t.kind === "Ty.nat") {
         Exp.check(ctx, exp.prev, t)
         return
       } else {
         throw new Trace.Trace(
           ut.aline(`
             |When checking ${Exp.repr(exp)},
-            |I am expecting the type to be Ty.Nat,
+            |I am expecting the type to be Ty.nat,
             |but the given type is ${Ty.repr(t)}.
             |`)
         )

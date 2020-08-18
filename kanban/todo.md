@@ -1,4 +1,8 @@
-- lang1 use cicada style ADT.
+- lang1 ADT constructers.
+- lang0 use cicada style ADT.
+- lang0 ADT constructers.
+- lang2 use cicada style ADT.
+- lang2 ADT constructers.
 - use cicada to specify the inference rules of lang1.
   - use Nat instead of Atom in Ty -- like in lang1.
   - note that, a prolog-like DSL for bidirectional type checking, would be wrong.

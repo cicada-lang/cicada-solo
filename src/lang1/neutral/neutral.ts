@@ -1,21 +1,21 @@
 import * as Ty from "../ty"
 import * as Normal from "../normal"
 
-export type Neutral = Var | Ap | Rec
+export type Neutral = v | ap | rec
 
-export interface Var {
-  kind: "Neutral.Var"
+export interface v {
+  kind: "Neutral.v"
   name: string
 }
 
-export interface Ap {
-  kind: "Neutral.Ap"
+export interface ap {
+  kind: "Neutral.ap"
   target: Neutral
   arg: Normal.Normal
 }
 
-export interface Rec {
-  kind: "Neutral.Rec"
+export interface rec {
+  kind: "Neutral.rec"
   ret_t: Ty.Ty
   target: Neutral
   base: Normal.Normal
