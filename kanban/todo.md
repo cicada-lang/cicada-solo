@@ -1,4 +1,3 @@
-- lang2 use cicada style ADT.
 - lang2 ADT constructers.
 - use cicada to specify the inference rules of lang1.
   - use Nat instead of Atom in Ty -- like in lang1.

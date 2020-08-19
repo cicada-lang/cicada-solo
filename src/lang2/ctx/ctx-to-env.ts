@@ -8,9 +8,9 @@ export function to_env(ctx: Ctx.Ctx): Env.Env {
       Env.extend(env, name, value)
     } else {
       Env.extend(env, name, {
-        kind: "Value.Reflection",
+        kind: "Value.reflection",
         t,
-        neutral: { kind: "Neutral.Var", name },
+        neutral: { kind: "Neutral.v", name },
       })
     }
   }

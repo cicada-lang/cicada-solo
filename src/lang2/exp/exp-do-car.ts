@@ -3,20 +3,20 @@ import * as Value from "../value"
 import * as Trace from "../../trace"
 
 export function do_car(target: Value.Value): Value.Value {
-  if (target.kind === "Value.Cons") {
+  if (target.kind === "Value.cons") {
     return target.car
-  } else if (target.kind === "Value.Reflection") {
-    if (target.t.kind === "Value.Sigma") {
+  } else if (target.kind === "Value.reflection") {
+    if (target.t.kind === "Value.sigma") {
       return {
-        kind: "Value.Reflection",
+        kind: "Value.reflection",
         t: target.t.car_t,
-        neutral: { kind: "Neutral.Car", target: target.neutral },
+        neutral: { kind: "Neutral.car", target: target.neutral },
       }
     } else {
       throw new Trace.Trace(
         Exp.explain_elim_target_type_mismatch({
           elim: "car",
-          expecting: ["Value.Sigma"],
+          expecting: ["Value.sigma"],
           reality: target.t.kind,
         })
       )
@@ -25,7 +25,7 @@ export function do_car(target: Value.Value): Value.Value {
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "car",
-        expecting: ["Value.Cons", "Value.Reflection"],
+        expecting: ["Value.cons", "Value.reflection"],
         reality: target.kind,
       })
     )

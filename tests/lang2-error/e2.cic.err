@@ -6,6 +6,6 @@ to:
   "baguette"
 
 previous:
-- Same
-- Same: Equal(String, "ratatouille", "baguette")
+- same
+- same: Equal(String, "ratatouille", "baguette")
 

@@ -5,22 +5,22 @@ import * as Value from "../value"
 export function nat_ind_step_t(motive: Value.Value): Value.Value {
   const env = Env.extend(Env.init(), "motive", motive)
 
-  const step_t: Exp.Pi = {
-    kind: "Exp.Pi",
+  const step_t: Exp.pi = {
+    kind: "Exp.pi",
     name: "prev",
-    arg_t: { kind: "Exp.Nat" },
+    arg_t: { kind: "Exp.nat" },
     ret_t: {
-      kind: "Exp.Pi",
+      kind: "Exp.pi",
       name: "almost",
       arg_t: {
-        kind: "Exp.Ap",
-        target: { kind: "Exp.Var", name: "motive" },
-        arg: { kind: "Exp.Var", name: "prev" },
+        kind: "Exp.ap",
+        target: { kind: "Exp.v", name: "motive" },
+        arg: { kind: "Exp.v", name: "prev" },
       },
       ret_t: {
-        kind: "Exp.Ap",
-        target: { kind: "Exp.Var", name: "motive" },
-        arg: { kind: "Exp.Add1", prev: { kind: "Exp.Var", name: "prev" } },
+        kind: "Exp.ap",
+        target: { kind: "Exp.v", name: "motive" },
+        arg: { kind: "Exp.add1", prev: { kind: "Exp.v", name: "prev" } },
       },
     },
   }

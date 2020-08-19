@@ -1,154 +1,154 @@
 export type Exp =
-  | Var
-  | Pi
-  | Fn
-  | Ap
-  | Sigma
-  | Cons
-  | Car
-  | Cdr
-  | Nat
-  | Zero
-  | Add1
-  | NatInd
-  | Equal
-  | Same
-  | Replace
-  | Trivial
-  | Sole
-  | Absurd
-  | AbsurdInd
-  | Str
-  | Quote
-  | Type
-  | Suite
-  | The
+  | v
+  | pi
+  | fn
+  | ap
+  | sigma
+  | cons
+  | car
+  | cdr
+  | nat
+  | zero
+  | add1
+  | nat_ind
+  | equal
+  | same
+  | replace
+  | trivial
+  | sole
+  | absurd
+  | absurd_ind
+  | str
+  | quote
+  | type
+  | suite
+  | the
 
-export interface Var {
-  kind: "Exp.Var"
+export interface v {
+  kind: "Exp.v"
   name: string
 }
 
-export interface Pi {
-  kind: "Exp.Pi"
+export interface pi {
+  kind: "Exp.pi"
   name: string
   arg_t: Exp
   ret_t: Exp
 }
 
-export interface Fn {
-  kind: "Exp.Fn"
+export interface fn {
+  kind: "Exp.fn"
   name: string
   body: Exp
 }
 
-export interface Ap {
-  kind: "Exp.Ap"
+export interface ap {
+  kind: "Exp.ap"
   target: Exp
   arg: Exp
 }
 
-export interface Sigma {
-  kind: "Exp.Sigma"
+export interface sigma {
+  kind: "Exp.sigma"
   name: string
   car_t: Exp
   cdr_t: Exp
 }
 
-export interface Cons {
-  kind: "Exp.Cons"
+export interface cons {
+  kind: "Exp.cons"
   car: Exp
   cdr: Exp
 }
 
-export interface Car {
-  kind: "Exp.Car"
+export interface car {
+  kind: "Exp.car"
   target: Exp
 }
 
-export interface Cdr {
-  kind: "Exp.Cdr"
+export interface cdr {
+  kind: "Exp.cdr"
   target: Exp
 }
 
-export interface Nat {
-  kind: "Exp.Nat"
+export interface nat {
+  kind: "Exp.nat"
 }
 
-export interface Zero {
-  kind: "Exp.Zero"
+export interface zero {
+  kind: "Exp.zero"
 }
 
-export interface Add1 {
-  kind: "Exp.Add1"
+export interface add1 {
+  kind: "Exp.add1"
   prev: Exp
 }
 
-export interface NatInd {
-  kind: "Exp.NatInd"
+export interface nat_ind {
+  kind: "Exp.nat_ind"
   target: Exp
   motive: Exp
   base: Exp
   step: Exp
 }
 
-export interface Equal {
-  kind: "Exp.Equal"
+export interface equal {
+  kind: "Exp.equal"
   t: Exp
   from: Exp
   to: Exp
 }
 
-export interface Same {
-  kind: "Exp.Same"
+export interface same {
+  kind: "Exp.same"
 }
 
-export interface Replace {
-  kind: "Exp.Replace"
+export interface replace {
+  kind: "Exp.replace"
   target: Exp
   motive: Exp
   base: Exp
 }
 
-export interface Trivial {
-  kind: "Exp.Trivial"
+export interface trivial {
+  kind: "Exp.trivial"
 }
 
-export interface Sole {
-  kind: "Exp.Sole"
+export interface sole {
+  kind: "Exp.sole"
 }
 
-export interface Absurd {
-  kind: "Exp.Absurd"
+export interface absurd {
+  kind: "Exp.absurd"
 }
 
-export interface AbsurdInd {
-  kind: "Exp.AbsurdInd"
+export interface absurd_ind {
+  kind: "Exp.absurd_ind"
   target: Exp
   motive: Exp
 }
 
-export interface Str {
-  kind: "Exp.Str"
+export interface str {
+  kind: "Exp.str"
 }
 
-export interface Quote {
-  kind: "Exp.Quote"
+export interface quote {
+  kind: "Exp.quote"
   str: string
 }
 
-export interface Type {
-  kind: "Exp.Type"
+export interface type {
+  kind: "Exp.type"
 }
 
-export interface Suite {
-  kind: "Exp.Suite"
+export interface suite {
+  kind: "Exp.suite"
   defs: Array<{ name: string; exp: Exp }>
   body: Exp
 }
 
-export interface The {
-  kind: "Exp.The"
+export interface the {
+  kind: "Exp.the"
   t: Exp
   exp: Exp
 }

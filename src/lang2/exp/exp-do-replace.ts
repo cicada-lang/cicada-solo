@@ -10,24 +10,24 @@ export function do_replace(
   motive: Value.Value,
   base: Value.Value
 ): Value.Value {
-  if (target.kind === "Value.Same") {
+  if (target.kind === "Value.same") {
     return base
-  } else if (target.kind === "Value.Reflection") {
-    if (target.t.kind === "Value.Equal") {
+  } else if (target.kind === "Value.reflection") {
+    if (target.t.kind === "Value.equal") {
       const base_t = Exp.do_ap(motive, target.t.from)
       const closure = new Closure.Closure(Env.init(), "x", {
-        kind: "Exp.Type",
+        kind: "Exp.type",
       })
-      const motive_t: Value.Pi = {
-        kind: "Value.Pi",
+      const motive_t: Value.pi = {
+        kind: "Value.pi",
         arg_t: target.t.t,
         closure,
       }
       return {
-        kind: "Value.Reflection",
+        kind: "Value.reflection",
         t: Exp.do_ap(motive, target.t.to),
         neutral: {
-          kind: "Neutral.Replace",
+          kind: "Neutral.replace",
           target: target.neutral,
           motive: new Normal.Normal(motive_t, motive),
           base: new Normal.Normal(base_t, base),
@@ -37,7 +37,7 @@ export function do_replace(
       throw new Trace.Trace(
         Exp.explain_elim_target_type_mismatch({
           elim: "replace",
-          expecting: ["Value.Equal"],
+          expecting: ["Value.equal"],
           reality: target.t.kind,
         })
       )
@@ -46,7 +46,7 @@ export function do_replace(
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "replace",
-        expecting: ["Value.Same", "Value.Reflection"],
+        expecting: ["Value.same", "Value.reflection"],
         reality: target.kind,
       })
     )

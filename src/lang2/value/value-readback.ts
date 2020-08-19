@@ -8,22 +8,22 @@ import { freshen } from "./freshen"
 import * as ut from "../../ut"
 
 export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
-  if (t.kind === "Value.Nat" && value.kind === "Value.Zero") {
-    return { kind: "Exp.Zero" }
-  } else if (t.kind === "Value.Nat" && value.kind === "Value.Add1") {
-    return { kind: "Exp.Add1", prev: Value.readback(ctx, t, value.prev) }
-  } else if (t.kind === "Value.Pi") {
+  if (t.kind === "Value.nat" && value.kind === "Value.zero") {
+    return { kind: "Exp.zero" }
+  } else if (t.kind === "Value.nat" && value.kind === "Value.add1") {
+    return { kind: "Exp.add1", prev: Value.readback(ctx, t, value.prev) }
+  } else if (t.kind === "Value.pi") {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
     const fresh_name = freshen(new Set(ctx.keys()), t.closure.name)
-    const variable: Value.Reflection = {
-      kind: "Value.Reflection",
+    const variable: Value.reflection = {
+      kind: "Value.reflection",
       t: t.arg_t,
-      neutral: { kind: "Neutral.Var", name: fresh_name },
+      neutral: { kind: "Neutral.v", name: fresh_name },
     }
     return {
-      kind: "Exp.Fn",
+      kind: "Exp.fn",
       name: fresh_name,
       body: Value.readback(
         Ctx.extend(Ctx.clone(ctx), fresh_name, t.arg_t),
@@ -31,83 +31,83 @@ export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
         Exp.do_ap(value, variable)
       ),
     }
-  } else if (t.kind === "Value.Sigma") {
+  } else if (t.kind === "Value.sigma") {
     // NOTE Pairs are also η-expanded.
     //   Every value with a pair type,
     //   whether it is neutral or not,
-    //   is read back with Cons at the top.
+    //   is read back with cons at the top.
     const car = Exp.do_car(value)
     const cdr = Exp.do_cdr(value)
     return {
-      kind: "Exp.Cons",
+      kind: "Exp.cons",
       car: Value.readback(ctx, t.car_t, car),
       cdr: Value.readback(ctx, Closure.apply(t.closure, car), cdr),
     }
-  } else if (t.kind === "Value.Trivial") {
-    // NOTE The η-rule for Trivial states that
+  } else if (t.kind === "Value.trivial") {
+    // NOTE the η-rule for trivial states that
     //   all of its inhabitants are the same as sole.
     //   This is implemented by reading the all back as sole.
-    return { kind: "Exp.Sole" }
+    return { kind: "Exp.sole" }
   } else if (
-    t.kind === "Value.Absurd" &&
-    value.kind === "Value.Reflection" &&
-    value.t.kind === "Value.Absurd"
+    t.kind === "Value.absurd" &&
+    value.kind === "Value.reflection" &&
+    value.t.kind === "Value.absurd"
   ) {
     return {
-      kind: "Exp.The",
-      t: { kind: "Exp.Absurd" },
+      kind: "Exp.the",
+      t: { kind: "Exp.absurd" },
       exp: Neutral.readback(ctx, value.neutral),
     }
-  } else if (t.kind === "Value.Equal" && value.kind === "Value.Same") {
-    return { kind: "Exp.Same" }
-  } else if (t.kind === "Value.Str" && value.kind === "Value.Quote") {
-    return { kind: "Exp.Quote", str: value.str }
-  } else if (t.kind === "Value.Type" && value.kind === "Value.Nat") {
-    return { kind: "Exp.Nat" }
-  } else if (t.kind === "Value.Type" && value.kind === "Value.Str") {
-    return { kind: "Exp.Str" }
-  } else if (t.kind === "Value.Type" && value.kind === "Value.Trivial") {
-    return { kind: "Exp.Trivial" }
-  } else if (t.kind === "Value.Type" && value.kind === "Value.Absurd") {
-    return { kind: "Exp.Absurd" }
-  } else if (t.kind === "Value.Type" && value.kind === "Value.Equal") {
+  } else if (t.kind === "Value.equal" && value.kind === "Value.same") {
+    return { kind: "Exp.same" }
+  } else if (t.kind === "Value.str" && value.kind === "Value.quote") {
+    return { kind: "Exp.quote", str: value.str }
+  } else if (t.kind === "Value.type" && value.kind === "Value.nat") {
+    return { kind: "Exp.nat" }
+  } else if (t.kind === "Value.type" && value.kind === "Value.str") {
+    return { kind: "Exp.str" }
+  } else if (t.kind === "Value.type" && value.kind === "Value.trivial") {
+    return { kind: "Exp.trivial" }
+  } else if (t.kind === "Value.type" && value.kind === "Value.absurd") {
+    return { kind: "Exp.absurd" }
+  } else if (t.kind === "Value.type" && value.kind === "Value.equal") {
     return {
-      kind: "Exp.Equal",
-      t: Value.readback(ctx, { kind: "Value.Type" }, value.t),
+      kind: "Exp.equal",
+      t: Value.readback(ctx, { kind: "Value.type" }, value.t),
       from: Value.readback(ctx, value.t, value.from),
       to: Value.readback(ctx, value.t, value.to),
     }
-  } else if (t.kind === "Value.Type" && value.kind === "Value.Sigma") {
+  } else if (t.kind === "Value.type" && value.kind === "Value.sigma") {
     const fresh_name = freshen(new Set(ctx.keys()), value.closure.name)
-    const variable: Value.Reflection = {
-      kind: "Value.Reflection",
+    const variable: Value.reflection = {
+      kind: "Value.reflection",
       t: value.car_t,
-      neutral: { kind: "Neutral.Var", name: fresh_name },
+      neutral: { kind: "Neutral.v", name: fresh_name },
     }
-    const car_t = Value.readback(ctx, { kind: "Value.Type" }, value.car_t)
+    const car_t = Value.readback(ctx, { kind: "Value.type" }, value.car_t)
     const cdr_t = Value.readback(
       Ctx.extend(Ctx.clone(ctx), fresh_name, value.car_t),
-      { kind: "Value.Type" },
+      { kind: "Value.type" },
       Closure.apply(value.closure, variable)
     )
-    return { kind: "Exp.Sigma", name: fresh_name, car_t, cdr_t }
-  } else if (t.kind === "Value.Type" && value.kind === "Value.Pi") {
+    return { kind: "Exp.sigma", name: fresh_name, car_t, cdr_t }
+  } else if (t.kind === "Value.type" && value.kind === "Value.pi") {
     const fresh_name = freshen(new Set(ctx.keys()), value.closure.name)
-    const variable: Value.Reflection = {
-      kind: "Value.Reflection",
+    const variable: Value.reflection = {
+      kind: "Value.reflection",
       t: value.arg_t,
-      neutral: { kind: "Neutral.Var", name: fresh_name },
+      neutral: { kind: "Neutral.v", name: fresh_name },
     }
-    const arg_t = Value.readback(ctx, { kind: "Value.Type" }, value.arg_t)
+    const arg_t = Value.readback(ctx, { kind: "Value.type" }, value.arg_t)
     const ret_t = Value.readback(
       Ctx.extend(Ctx.clone(ctx), fresh_name, value.arg_t),
-      { kind: "Value.Type" },
+      { kind: "Value.type" },
       Closure.apply(value.closure, variable)
     )
-    return { kind: "Exp.Pi", name: fresh_name, arg_t, ret_t }
-  } else if (t.kind === "Value.Type" && value.kind === "Value.Type") {
-    return { kind: "Exp.Type" }
-  } else if (value.kind === "Value.Reflection") {
+    return { kind: "Exp.pi", name: fresh_name, arg_t, ret_t }
+  } else if (t.kind === "Value.type" && value.kind === "Value.type") {
+    return { kind: "Exp.type" }
+  } else if (value.kind === "Value.reflection") {
     // NOTE  t and value.t are ignored here,
     //  maybe use them to debug.
     return Neutral.readback(ctx, value.neutral)

@@ -7,22 +7,22 @@ export function do_absurd_ind(
   target: Value.Value,
   motive: Value.Value
 ): Value.Value {
-  if (target.kind === "Value.Reflection") {
-    if (target.t.kind === "Value.Absurd") {
+  if (target.kind === "Value.reflection") {
+    if (target.t.kind === "Value.absurd") {
       return {
-        kind: "Value.Reflection",
+        kind: "Value.reflection",
         t: motive,
         neutral: {
-          kind: "Neutral.AbsurdInd",
+          kind: "Neutral.absurd_ind",
           target: target.neutral,
-          motive: new Normal.Normal({ kind: "Value.Type" }, motive),
+          motive: new Normal.Normal({ kind: "Value.type" }, motive),
         },
       }
     } else {
       throw new Trace.Trace(
         Exp.explain_elim_target_type_mismatch({
           elim: "absurd_ind",
-          expecting: ["Value.Absurd"],
+          expecting: ["Value.absurd"],
           reality: target.t.kind,
         })
       )
@@ -31,7 +31,7 @@ export function do_absurd_ind(
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "absurd_ind",
-        expecting: ["Value.Reflection"],
+        expecting: ["Value.reflection"],
         reality: target.kind,
       })
     )

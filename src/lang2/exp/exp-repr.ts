@@ -3,37 +3,37 @@ import * as ut from "../../ut"
 
 export function repr(exp: Exp.Exp): string {
   switch (exp.kind) {
-    case "Exp.Var": {
+    case "Exp.v": {
       return exp.name
     }
-    case "Exp.Pi": {
+    case "Exp.pi": {
       return `(${exp.name}: ${Exp.repr(exp.arg_t)}) -> ${Exp.repr(exp.ret_t)}`
     }
-    case "Exp.Fn": {
+    case "Exp.fn": {
       return `(${exp.name}) => ${Exp.repr(exp.body)}`
     }
-    case "Exp.Ap": {
+    case "Exp.ap": {
       return `${Exp.repr(exp.target)}(${Exp.repr(exp.arg)})`
     }
-    case "Exp.Sigma": {
+    case "Exp.sigma": {
       return `(${exp.name}: ${Exp.repr(exp.car_t)}) * ${Exp.repr(exp.cdr_t)}`
     }
-    case "Exp.Cons": {
+    case "Exp.cons": {
       return `cons(${Exp.repr(exp.car)}, ${Exp.repr(exp.cdr)})`
     }
-    case "Exp.Car": {
+    case "Exp.car": {
       return `car(${Exp.repr(exp.target)})`
     }
-    case "Exp.Cdr": {
+    case "Exp.cdr": {
       return `cdr(${Exp.repr(exp.target)})`
     }
-    case "Exp.Nat": {
+    case "Exp.nat": {
       return "Nat"
     }
-    case "Exp.Zero": {
+    case "Exp.zero": {
       return "0"
     }
-    case "Exp.Add1": {
+    case "Exp.add1": {
       const n = Exp.nat_to_number(exp)
       if (n !== undefined) {
         return n.toString()
@@ -41,51 +41,51 @@ export function repr(exp: Exp.Exp): string {
         return `add1(${Exp.repr(exp.prev)})`
       }
     }
-    case "Exp.NatInd": {
+    case "Exp.nat_ind": {
       return `Nat.ind(${Exp.repr(exp.target)}, ${Exp.repr(
         exp.motive
       )}, ${Exp.repr(exp.base)}, ${Exp.repr(exp.step)})`
     }
-    case "Exp.Equal": {
+    case "Exp.equal": {
       return `Equal(${Exp.repr(exp.t)}, ${Exp.repr(exp.from)}, ${Exp.repr(
         exp.to
       )})`
     }
-    case "Exp.Same": {
-      return "Same"
+    case "Exp.same": {
+      return "same"
     }
-    case "Exp.Replace": {
+    case "Exp.replace": {
       return `replace(${Exp.repr(exp.target)}, ${Exp.repr(
         exp.motive
       )}, ${Exp.repr(exp.base)})`
     }
-    case "Exp.Trivial": {
+    case "Exp.trivial": {
       return "Trivial"
     }
-    case "Exp.Sole": {
+    case "Exp.sole": {
       return "sole"
     }
-    case "Exp.Absurd": {
+    case "Exp.absurd": {
       return "Absurd"
     }
-    case "Exp.AbsurdInd": {
+    case "Exp.absurd_ind": {
       return `Absurd.ind(${Exp.repr(exp.target)}, ${Exp.repr(exp.motive)})`
     }
-    case "Exp.Str": {
+    case "Exp.str": {
       return "String"
     }
-    case "Exp.Quote": {
+    case "Exp.quote": {
       return `"${exp.str}"`
     }
-    case "Exp.Type": {
+    case "Exp.type": {
       return "Type"
     }
-    case "Exp.Suite": {
+    case "Exp.suite": {
       const def_reprs = exp.defs.map((def) => `${def.name} = ${repr(def.exp)}`)
       const suite_repr = [...def_reprs, repr(exp.body)].join("\n")
       return `{\n${ut.indent(suite_repr, "  ")}\n}`
     }
-    case "Exp.The": {
+    case "Exp.the": {
       return `${Exp.repr(exp.exp)}: ${Exp.repr(exp.t)}`
     }
   }

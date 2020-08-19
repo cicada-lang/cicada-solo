@@ -18,7 +18,7 @@ function alpha(the: {
   right: Exp.Exp
 }): boolean {
   const { depth, left_names, left, right_names, right } = the
-  if (left.kind === "Exp.Var" && right.kind === "Exp.Var") {
+  if (left.kind === "Exp.v" && right.kind === "Exp.v") {
     const left_depth = left_names.get(left.name)
     const right_depth = right_names.get(right.name)
     return (
@@ -29,7 +29,7 @@ function alpha(the: {
         typeof right_depth === "number" &&
         left_depth === right_depth)
     )
-  } else if (left.kind === "Exp.Pi" && right.kind === "Exp.Pi") {
+  } else if (left.kind === "Exp.pi" && right.kind === "Exp.pi") {
     return (
       alpha({ ...the, left: left.arg_t, right: right.arg_t }) &&
       alpha({
@@ -40,7 +40,7 @@ function alpha(the: {
         right: right.ret_t,
       })
     )
-  } else if (left.kind === "Exp.Fn" && right.kind === "Exp.Fn") {
+  } else if (left.kind === "Exp.fn" && right.kind === "Exp.fn") {
     return alpha({
       depth: depth + 1,
       left_names: left_names.set(left.name, depth),
@@ -48,12 +48,12 @@ function alpha(the: {
       right_names: right_names.set(right.name, depth),
       right: right.body,
     })
-  } else if (left.kind === "Exp.Ap" && right.kind === "Exp.Ap") {
+  } else if (left.kind === "Exp.ap" && right.kind === "Exp.ap") {
     return (
       alpha({ ...the, left: left.target, right: right.target }) &&
       alpha({ ...the, left: left.arg, right: right.arg })
     )
-  } else if (left.kind === "Exp.Sigma" && right.kind === "Exp.Sigma") {
+  } else if (left.kind === "Exp.sigma" && right.kind === "Exp.sigma") {
     return (
       alpha({ ...the, left: left.car_t, right: right.car_t }) &&
       alpha({
@@ -64,67 +64,67 @@ function alpha(the: {
         right: right.cdr_t,
       })
     )
-  } else if (left.kind === "Exp.Cons" && right.kind === "Exp.Cons") {
+  } else if (left.kind === "Exp.cons" && right.kind === "Exp.cons") {
     return (
       alpha({ ...the, left: left.car, right: right.car }) &&
       alpha({ ...the, left: left.cdr, right: right.cdr })
     )
-  } else if (left.kind === "Exp.Car" && right.kind === "Exp.Car") {
+  } else if (left.kind === "Exp.car" && right.kind === "Exp.car") {
     return alpha({ ...the, left: left.target, right: right.target })
-  } else if (left.kind === "Exp.Cdr" && right.kind === "Exp.Cdr") {
+  } else if (left.kind === "Exp.cdr" && right.kind === "Exp.cdr") {
     return alpha({ ...the, left: left.target, right: right.target })
-  } else if (left.kind === "Exp.Nat" && right.kind === "Exp.Nat") {
+  } else if (left.kind === "Exp.nat" && right.kind === "Exp.nat") {
     return true
-  } else if (left.kind === "Exp.Zero" && right.kind === "Exp.Zero") {
+  } else if (left.kind === "Exp.zero" && right.kind === "Exp.zero") {
     return true
-  } else if (left.kind === "Exp.Add1" && right.kind === "Exp.Add1") {
+  } else if (left.kind === "Exp.add1" && right.kind === "Exp.add1") {
     return alpha({ ...the, left: left.prev, right: right.prev })
-  } else if (left.kind === "Exp.NatInd" && right.kind === "Exp.NatInd") {
+  } else if (left.kind === "Exp.nat_ind" && right.kind === "Exp.nat_ind") {
     return (
       alpha({ ...the, left: left.target, right: right.target }) &&
       alpha({ ...the, left: left.motive, right: right.motive }) &&
       alpha({ ...the, left: left.base, right: right.base }) &&
       alpha({ ...the, left: left.step, right: right.step })
     )
-  } else if (left.kind === "Exp.Equal" && right.kind === "Exp.Equal") {
+  } else if (left.kind === "Exp.equal" && right.kind === "Exp.equal") {
     return (
       alpha({ ...the, left: left.t, right: right.t }) &&
       alpha({ ...the, left: left.from, right: right.from }) &&
       alpha({ ...the, left: left.to, right: right.to })
     )
-  } else if (left.kind === "Exp.Same" && right.kind === "Exp.Same") {
+  } else if (left.kind === "Exp.same" && right.kind === "Exp.same") {
     return true
-  } else if (left.kind === "Exp.Replace" && right.kind === "Exp.Replace") {
+  } else if (left.kind === "Exp.replace" && right.kind === "Exp.replace") {
     return (
       alpha({ ...the, left: left.target, right: right.target }) &&
       alpha({ ...the, left: left.motive, right: right.motive }) &&
       alpha({ ...the, left: left.base, right: right.base })
     )
-  } else if (left.kind === "Exp.Trivial" && right.kind === "Exp.Trivial") {
+  } else if (left.kind === "Exp.trivial" && right.kind === "Exp.trivial") {
     return true
-  } else if (left.kind === "Exp.Sole" && right.kind === "Exp.Sole") {
+  } else if (left.kind === "Exp.sole" && right.kind === "Exp.sole") {
     return true
-  } else if (left.kind === "Exp.Absurd" && right.kind === "Exp.Absurd") {
+  } else if (left.kind === "Exp.absurd" && right.kind === "Exp.absurd") {
     return true
-  } else if (left.kind === "Exp.AbsurdInd" && right.kind === "Exp.AbsurdInd") {
+  } else if (left.kind === "Exp.absurd_ind" && right.kind === "Exp.absurd_ind") {
     return (
       alpha({ ...the, left: left.target, right: right.target }) &&
       alpha({ ...the, left: left.motive, right: right.motive })
     )
-  } else if (left.kind === "Exp.Str" && right.kind === "Exp.Str") {
+  } else if (left.kind === "Exp.str" && right.kind === "Exp.str") {
     return true
-  } else if (left.kind === "Exp.Quote" && right.kind === "Exp.Quote") {
+  } else if (left.kind === "Exp.quote" && right.kind === "Exp.quote") {
     return left.str === right.str
-  } else if (left.kind === "Exp.Type" && right.kind === "Exp.Type") {
+  } else if (left.kind === "Exp.type" && right.kind === "Exp.type") {
     return true
   } else if (
-    left.kind === "Exp.The" &&
-    left.t.kind === "Exp.Absurd" &&
-    right.kind === "Exp.The" &&
-    right.t.kind === "Exp.Absurd"
+    left.kind === "Exp.the" &&
+    left.t.kind === "Exp.absurd" &&
+    right.kind === "Exp.the" &&
+    right.t.kind === "Exp.absurd"
   ) {
     return true
-  } else if (left.kind === "Exp.The" && right.kind === "Exp.The") {
+  } else if (left.kind === "Exp.the" && right.kind === "Exp.the") {
     return (
       alpha({ ...the, left: left.t, right: right.t }) &&
       alpha({ ...the, left: left.exp, right: right.exp })

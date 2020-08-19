@@ -5,51 +5,51 @@ import * as Ctx from "../ctx"
 
 export function readback(ctx: Ctx.Ctx, neutral: Neutral.Neutral): Exp.Exp {
   switch (neutral.kind) {
-    case "Neutral.Var": {
+    case "Neutral.v": {
       return {
-        kind: "Exp.Var",
+        kind: "Exp.v",
         name: neutral.name,
       }
     }
-    case "Neutral.Ap": {
+    case "Neutral.ap": {
       return {
-        kind: "Exp.Ap",
+        kind: "Exp.ap",
         target: Neutral.readback(ctx, neutral.target),
         arg: Normal.readback(ctx, neutral.arg),
       }
     }
-    case "Neutral.Car": {
+    case "Neutral.car": {
       return {
-        kind: "Exp.Car",
+        kind: "Exp.car",
         target: Neutral.readback(ctx, neutral.target),
       }
     }
-    case "Neutral.Cdr": {
+    case "Neutral.cdr": {
       return {
-        kind: "Exp.Cdr",
+        kind: "Exp.cdr",
         target: Neutral.readback(ctx, neutral.target),
       }
     }
-    case "Neutral.NatInd": {
+    case "Neutral.nat_ind": {
       return {
-        kind: "Exp.NatInd",
+        kind: "Exp.nat_ind",
         target: Neutral.readback(ctx, neutral.target),
         motive: Normal.readback(ctx, neutral.motive),
         base: Normal.readback(ctx, neutral.base),
         step: Normal.readback(ctx, neutral.step),
       }
     }
-    case "Neutral.Replace": {
+    case "Neutral.replace": {
       return {
-        kind: "Exp.Replace",
+        kind: "Exp.replace",
         target: Neutral.readback(ctx, neutral.target),
         motive: Normal.readback(ctx, neutral.motive),
         base: Normal.readback(ctx, neutral.base),
       }
     }
-    case "Neutral.AbsurdInd": {
+    case "Neutral.absurd_ind": {
       return {
-        kind: "Exp.AbsurdInd",
+        kind: "Exp.absurd_ind",
         target: Neutral.readback(ctx, neutral.target),
         motive: Normal.readback(ctx, neutral.motive),
       }

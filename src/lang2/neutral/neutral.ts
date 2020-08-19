@@ -1,45 +1,45 @@
 import * as Normal from "../normal"
 
-export type Neutral = Var | Ap | Car | Cdr | NatInd | Replace | AbsurdInd
+export type Neutral = v | ap | car | cdr | nat_ind | replace | absurd_ind
 
-export interface Var {
-  kind: "Neutral.Var"
+export interface v {
+  kind: "Neutral.v"
   name: string
 }
 
-export interface Ap {
-  kind: "Neutral.Ap"
+export interface ap {
+  kind: "Neutral.ap"
   target: Neutral
   arg: Normal.Normal
 }
 
-export interface Car {
-  kind: "Neutral.Car"
+export interface car {
+  kind: "Neutral.car"
   target: Neutral
 }
 
-export interface Cdr {
-  kind: "Neutral.Cdr"
+export interface cdr {
+  kind: "Neutral.cdr"
   target: Neutral
 }
 
-export interface NatInd {
-  kind: "Neutral.NatInd"
+export interface nat_ind {
+  kind: "Neutral.nat_ind"
   target: Neutral
   motive: Normal.Normal
   base: Normal.Normal
   step: Normal.Normal
 }
 
-export interface Replace {
-  kind: "Neutral.Replace"
+export interface replace {
+  kind: "Neutral.replace"
   target: Neutral
   motive: Normal.Normal
   base: Normal.Normal
 }
 
-export interface AbsurdInd {
-  kind: "Neutral.AbsurdInd"
+export interface absurd_ind {
+  kind: "Neutral.absurd_ind"
   target: Neutral
   motive: Normal.Normal
 }

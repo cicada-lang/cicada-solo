@@ -3,97 +3,97 @@ import * as Neutral from "../neutral"
 import * as Closure from "../closure"
 
 export type Value =
-  | Pi
-  | Fn
-  | Sigma
-  | Cons
-  | Nat
-  | Zero
-  | Add1
-  | Equal
-  | Same
-  | Trivial
-  | Sole
-  | Absurd
-  | Str
-  | Quote
-  | Type
-  | Reflection
+  | pi
+  | fn
+  | sigma
+  | cons
+  | nat
+  | zero
+  | add1
+  | equal
+  | same
+  | trivial
+  | sole
+  | absurd
+  | str
+  | quote
+  | type
+  | reflection
 
-export interface Pi {
-  kind: "Value.Pi"
+export interface pi {
+  kind: "Value.pi"
   arg_t: Value
   closure: Closure.Closure
 }
 
-export interface Fn {
-  kind: "Value.Fn"
+export interface fn {
+  kind: "Value.fn"
   closure: Closure.Closure
 }
 
-export interface Sigma {
-  kind: "Value.Sigma"
+export interface sigma {
+  kind: "Value.sigma"
   car_t: Value
   closure: Closure.Closure
 }
 
-export interface Cons {
-  kind: "Value.Cons"
+export interface cons {
+  kind: "Value.cons"
   car: Value
   cdr: Value
 }
 
-export interface Nat {
-  kind: "Value.Nat"
+export interface nat {
+  kind: "Value.nat"
 }
 
-export interface Zero {
-  kind: "Value.Zero"
+export interface zero {
+  kind: "Value.zero"
 }
 
-export interface Add1 {
-  kind: "Value.Add1"
+export interface add1 {
+  kind: "Value.add1"
   prev: Value
 }
 
-export interface Equal {
-  kind: "Value.Equal"
+export interface equal {
+  kind: "Value.equal"
   t: Ty.Ty
   from: Value
   to: Value
 }
 
-export interface Same {
-  kind: "Value.Same"
+export interface same {
+  kind: "Value.same"
 }
 
-export interface Trivial {
-  kind: "Value.Trivial"
+export interface trivial {
+  kind: "Value.trivial"
 }
 
-export interface Sole {
-  kind: "Value.Sole"
+export interface sole {
+  kind: "Value.sole"
 }
 
-export interface Absurd {
-  kind: "Value.Absurd"
+export interface absurd {
+  kind: "Value.absurd"
 }
 
-export interface Str {
-  kind: "Value.Str"
+export interface str {
+  kind: "Value.str"
 }
 
-export interface Quote {
-  kind: "Value.Quote"
+export interface quote {
+  kind: "Value.quote"
   str: string
 }
 
-export interface Type {
-  kind: "Value.Type"
+export interface type {
+  kind: "Value.type"
 }
 
-export interface Reflection {
-  kind: "Value.Reflection"
+export interface reflection {
+  kind: "Value.reflection"
   t: Ty.Ty
   neutral: Neutral.Neutral
 }

@@ -6,6 +6,6 @@ to:
   cons("baguette", "ratatouille")
 
 previous:
-- Same
-- Same: Equal((_: String) * String, cons("ratatouille", "baguette"), cons("baguette", "ratatouille"))
+- same
+- same: Equal((_: String) * String, cons("ratatouille", "baguette"), cons("baguette", "ratatouille"))
 

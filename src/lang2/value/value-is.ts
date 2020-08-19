@@ -2,83 +2,83 @@ import * as Value from "../value"
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 
-export function isPi(ctx: Ctx.Ctx, value: Value.Value): Value.Pi {
-  if (value.kind === "Value.Pi") {
+export function ispi(ctx: Ctx.Ctx, value: Value.Value): Value.pi {
+  if (value.kind === "Value.pi") {
     return value
   } else {
     throw new Trace.Trace(
-      Value.unexpected(ctx, value, { message: `I am expecting the Type Pi.` })
+      Value.unexpected(ctx, value, { message: `I am expecting the type pi.` })
     )
   }
 }
 
-export function isSigma(ctx: Ctx.Ctx, value: Value.Value): Value.Sigma {
-  if (value.kind === "Value.Sigma") {
+export function issigma(ctx: Ctx.Ctx, value: Value.Value): Value.sigma {
+  if (value.kind === "Value.sigma") {
     return value
   } else {
     throw new Trace.Trace(
       Value.unexpected(ctx, value, {
-        message: `I am expecting the Type Sigma.`,
+        message: `I am expecting the type sigma.`,
       })
     )
   }
 }
 
-export function isNat(ctx: Ctx.Ctx, value: Value.Value): Value.Nat {
-  if (value.kind === "Value.Nat") {
+export function isnat(ctx: Ctx.Ctx, value: Value.Value): Value.nat {
+  if (value.kind === "Value.nat") {
     return value
   } else {
     throw new Trace.Trace(
       Value.unexpected(ctx, value, {
-        message: `I am expecting the Type Nat.`,
+        message: `I am expecting the type nat.`,
       })
     )
   }
 }
 
-export function isEqual(ctx: Ctx.Ctx, value: Value.Value): Value.Equal {
-  if (value.kind === "Value.Equal") {
+export function isequal(ctx: Ctx.Ctx, value: Value.Value): Value.equal {
+  if (value.kind === "Value.equal") {
     return value
   } else {
     throw new Trace.Trace(
       Value.unexpected(ctx, value, {
-        message: `I am expecting the Type Equal.`,
+        message: `I am expecting the type equal.`,
       })
     )
   }
 }
 
-export function isAbsurd(ctx: Ctx.Ctx, value: Value.Value): Value.Absurd {
-  if (value.kind === "Value.Absurd") {
+export function isabsurd(ctx: Ctx.Ctx, value: Value.Value): Value.absurd {
+  if (value.kind === "Value.absurd") {
     return value
   } else {
     throw new Trace.Trace(
       Value.unexpected(ctx, value, {
-        message: `I am expecting the Type Absurd.`,
+        message: `I am expecting the type absurd.`,
       })
     )
   }
 }
 
-export function isTrivial(ctx: Ctx.Ctx, value: Value.Value): Value.Trivial {
-  if (value.kind === "Value.Trivial") {
+export function istrivial(ctx: Ctx.Ctx, value: Value.Value): Value.trivial {
+  if (value.kind === "Value.trivial") {
     return value
   } else {
     throw new Trace.Trace(
       Value.unexpected(ctx, value, {
-        message: `I am expecting the Type Trivial.`,
+        message: `I am expecting the type trivial.`,
       })
     )
   }
 }
 
-export function isStr(ctx: Ctx.Ctx, value: Value.Value): Value.Str {
-  if (value.kind === "Value.Str") {
+export function isstr(ctx: Ctx.Ctx, value: Value.Value): Value.str {
+  if (value.kind === "Value.str") {
     return value
   } else {
     throw new Trace.Trace(
       Value.unexpected(ctx, value, {
-        message: `I am expecting the Type String.`,
+        message: `I am expecting the type string.`,
       })
     )
   }

@@ -4,20 +4,20 @@ import * as Closure from "../closure"
 import * as Trace from "../../trace"
 
 export function do_cdr(target: Value.Value): Value.Value {
-  if (target.kind === "Value.Cons") {
+  if (target.kind === "Value.cons") {
     return target.cdr
-  } else if (target.kind === "Value.Reflection") {
-    if (target.t.kind === "Value.Sigma") {
+  } else if (target.kind === "Value.reflection") {
+    if (target.t.kind === "Value.sigma") {
       return {
-        kind: "Value.Reflection",
+        kind: "Value.reflection",
         t: Closure.apply(target.t.closure, Exp.do_car(target)),
-        neutral: { kind: "Neutral.Cdr", target: target.neutral },
+        neutral: { kind: "Neutral.cdr", target: target.neutral },
       }
     } else {
       throw new Trace.Trace(
         Exp.explain_elim_target_type_mismatch({
           elim: "cdr",
-          expecting: ["Value.Sigma"],
+          expecting: ["Value.sigma"],
           reality: target.t.kind,
         })
       )
@@ -26,7 +26,7 @@ export function do_cdr(target: Value.Value): Value.Value {
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "cdr",
-        expecting: ["Value.Cons", "Value.Reflection"],
+        expecting: ["Value.cons", "Value.reflection"],
         reality: target.kind,
       })
     )
