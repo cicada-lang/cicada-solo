@@ -51,7 +51,7 @@
 
 # pt -- parsing techniques
 
-- earley parse not in js.
+- standalone pt with earley parser not in js.
 - theory of CFG
 - intersection grammar
 - pt framework
