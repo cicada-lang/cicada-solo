@@ -1,6 +1,4 @@
-@module datatype.Vec
-
-@import datatype.Nat
+@module datatype
 
 @datatype Vec(A: Type, length: Nat) {
   null: Vec(A, Nat.zero)

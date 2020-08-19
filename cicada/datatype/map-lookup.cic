@@ -1,4 +1,4 @@
-@module datatype.Map
+@module datatype
 
 @given K: Type, V: Type
 @judgment Map.Lookup(map: Map(K, V), key: K, value: V) {

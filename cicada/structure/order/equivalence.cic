@@ -1,6 +1,4 @@
-@module structure.order.Equivalence
-
-@import structure.order.PreOrder
+@module structure.order
 
 @class Equivalence extends PreOrder {
   @given x: Elem, y: Elem

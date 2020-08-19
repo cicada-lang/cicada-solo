@@ -1,4 +1,4 @@
-@module structure.order.PreOrder
+@module structure.order
 
 // NOTE Thin category.
 // NOTE hom_set(A, B).size <= 1

@@ -1,6 +1,4 @@
-@module datatype.Nat
-
-@import datatype.Bool
+@module datatype
 
 @datatype Nat {
   zero: Nat

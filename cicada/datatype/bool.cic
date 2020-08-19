@@ -1,3 +1,5 @@
+@module datatype
+
 @datatype Bool {
   true: Bool
   false: Bool

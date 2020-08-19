@@ -1,4 +1,4 @@
-@module structure.lattice.Lattice
+@module structure.lattice
 
 @class JoinSemilattice {
   // TODO

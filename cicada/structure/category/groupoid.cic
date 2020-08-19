@@ -1,6 +1,4 @@
-@module structure.category.Groupoid
-
-@import structure.category.Category
+@module structure.category
 
 // NOTE the following use of `Category.Isomorphism(this, f, inv(f))`
 //   is an example of partly fulfilled object construction

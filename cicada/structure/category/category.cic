@@ -1,4 +1,4 @@
-@module structure.category.Category
+@module structure.category
 
 @class Category {
   Object: Type

@@ -1,7 +1,6 @@
-@module structure.group.Monoid
+@module structure.group
 
-@import structure.group.Semigroup
-@import prelude.data.trivial.Trivial
+@import datatype.Trivial
 
 @class Monoid extends Semigroup {
   id: Elem

@@ -1,3 +1,5 @@
+@module datatype
+
 // in prolog:
 
 // append([], Z, Z).
@@ -12,21 +14,21 @@
 // in cicada:
 
 @given A: Type
-@datatype Append(x: List(A), y: List(A), z: List(A)) {
-  null: Append(List.null, z, z)
+@datatype List.Append(x: List(A), y: List(A), z: List(A)) {
+  null: List.Append(List.null, z, z)
   @given head: A
-  cons(prev: Append(x, y, z)): Append(List.cons(head, x), y, List.cons(head, z))
+  cons(prev: List.Append(x, y, z)): List.Append(List.cons(head, x), y, List.cons(head, z))
 }
 
 // in cicada with inference syntax:
 
 @given A: Type
-@datatype Append(x: List(A), y: List(A), z: List(A)) {
+@judgment List.Append(x: List(A), y: List(A), z: List(A)) {
   ----------------------- null
-  Append(List.null, z, z)
+  List.Append(List.null, z, z)
 
   @given head: A
-  prev: Append(x, y, z)
+  prev: List.Append(x, y, z)
   ------------------------------------------------- cons
-  Append(List.cons(head, x), y, List.cons(head, z))
+  List.Append(List.cons(head, x), y, List.cons(head, z))
 }

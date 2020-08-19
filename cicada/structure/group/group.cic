@@ -1,6 +1,4 @@
-@module structure.group.Group
-
-@import structure.group.Monoid
+@module structure.group
 
 @class Group extends Monoid {
   inv(x: Elem): Elem

@@ -1,6 +1,5 @@
-@module structure.order.TotalOrder
+@module structure.order
 
-@import structure.order.PartialOrder
 
 // NOTE Can implement:
 // - quick sort

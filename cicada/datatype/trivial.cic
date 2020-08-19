@@ -1,4 +1,4 @@
-@import datatype.Trivial
+@import datatype
 
 @datatype Trivial {
   sole: Trivial

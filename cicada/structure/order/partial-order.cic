@@ -1,6 +1,4 @@
-@module structure.order.PartialOrder
-
-@import structure.order.PreOrder
+@module structure.order
 
 // NOTE No cycle.
 // NOTE Can implement:

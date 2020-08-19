@@ -1,4 +1,4 @@
-@module structure.group.Semigroup
+@module structure.group
 
 @class Semigroup {
   Elem: Type

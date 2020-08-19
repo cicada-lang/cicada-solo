@@ -1,4 +1,4 @@
-@module structure.group.Group
+@module structure.group
 
 @import structure.category.Category
 
