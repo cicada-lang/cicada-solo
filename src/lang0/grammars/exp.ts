@@ -16,41 +16,26 @@ export function exp(): pt.Sym.Rule {
 export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>("exp", {
     var: ([name]) => {
-      return {
-        kind: "Exp.v",
-        name: pt.Tree.token(name).value,
-      }
+      return Exp.v(pt.Tree.token(name).value)
     },
     fn: ([, name, , , , body]) => {
-      return {
-        kind: "Exp.fn",
-        name: pt.Tree.token(name).value,
-        body: exp_matcher(body),
-      }
+      return Exp.fn(pt.Tree.token(name).value, exp_matcher(body))
     },
     ap: ([name, exp_in_paren_list]) => {
-      let exp: Exp.Exp = {
-        kind: "Exp.v",
-        name: pt.Tree.token(name).value,
-      }
+      let exp: Exp.Exp = Exp.v(pt.Tree.token(name).value)
       const args = pt.one_or_more_matcher(exp_in_paren_matcher)(
         exp_in_paren_list
       )
       for (const arg of args) {
-        exp = {
-          kind: "Exp.ap",
-          target: exp,
-          arg: arg,
-        }
+        exp = Exp.ap(exp, arg)
       }
       return exp
     },
     suite: ([, defs, body]) => {
-      return {
-        kind: "Exp.suite",
-        defs: pt.zero_or_more_matcher(def_matcher)(defs),
-        body: exp_matcher(body),
-      }
+      return Exp.suite(
+        pt.zero_or_more_matcher(def_matcher)(defs),
+        exp_matcher(body)
+      )
     },
   })(tree)
 }

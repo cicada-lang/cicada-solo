@@ -1,6 +1,7 @@
 import * as Exp from "../exp"
 import * as Env from "../env"
 import * as Value from "../value"
+import * as Neutral from "../neutral"
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   switch (target.kind) {
@@ -9,14 +10,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
       return Exp.evaluate(new_env, target.body)
     }
     case "Value.reflection": {
-      return {
-        kind: "Value.reflection",
-        neutral: {
-          kind: "Neutral.ap",
-          target: target.neutral,
-          arg: arg,
-        },
-      }
+      return Value.reflection(Neutral.ap(target.neutral, arg))
     }
   }
 }

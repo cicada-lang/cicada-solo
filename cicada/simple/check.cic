@@ -12,8 +12,8 @@
   // - Such as the following given `name`.
   @given name: String
   lookup: Map.Lookup(ctx, name, t)
-  -------------------------------- lookup_var
-  Check(ctx, Exp.var(name), t)
+  -------------------------------- v
+  Check(ctx, Exp.v(name), t)
 
   @given name: String, ret: Exp
   @given arg_t: Ty, ret_t: Ty

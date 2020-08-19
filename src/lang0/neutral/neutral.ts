@@ -2,13 +2,21 @@ import * as Value from "../value"
 
 export type Neutral = v | ap
 
-export interface v {
+interface v {
   kind: "Neutral.v"
   name: string
 }
 
-export interface ap {
+export const v = (name: string): v => ({ kind: "Neutral.v", name })
+
+interface ap {
   kind: "Neutral.ap"
   target: Neutral
   arg: Value.Value
 }
+
+export const ap = (target: Neutral, arg: Value.Value): ap => ({
+  kind: "Neutral.ap",
+  target,
+  arg,
+})

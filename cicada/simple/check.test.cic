@@ -8,21 +8,21 @@
   // |- (x) => x : (A) -> A
   // ~~~~~~ arrow_intro
   // x: A |- x: A
-  // ~~~~~~ lookup_var
+  // ~~~~~~ v
   // QED
 
   ctx = Map.empty
-  x = Exp.var("x")
+  x = Exp.v("x")
   A = Ty.atom("A")
 
   Check.arrow_intro(
-    Check.lookup_var(Map.Lookup.here)
+    Check.v(Map.Lookup.here)
   ): Check(ctx, Exp.fn("x", x), Ty.arrow(A, A))
 
   Check(ctx, Exp.fn("x", x), Ty.arrow(A, A))
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.arrow_intro
   Check(Map.extend(ctx, "x", A), x, A)
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.lookup_var
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.v
   Map.Lookup(Map.extend(ctx, "x", A), "x", A)
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Map.Lookup.here
 }
@@ -33,17 +33,17 @@
   // x: A |- (y) => x : (B) -> A
   // ~~~~~~ arrow_intro
   // x: A, y: B |- x: A
-  // ~~~~~~ lookup_var
+  // ~~~~~~ v
   // QED
 
   ctx = Map.empty
-  x = Exp.var("x")
+  x = Exp.v("x")
   A = Ty.atom("A")
   B = Ty.atom("B")
 
   Check.arrow_intro(
     Check.arrow_intro(
-      Check.lookup_var(Map.Lookup.there(Map.Lookup.here)))
+      Check.v(Map.Lookup.there(Map.Lookup.here)))
   ): Check(ctx, Exp.fn("x", Exp.fn("y", x)), Ty.arrow(A, Ty.arrow(B, A)))
 
   Check(ctx, Exp.fn("x", Exp.fn("y", x)), Ty.arrow(A, Ty.arrow(B, A)))
@@ -51,7 +51,7 @@
   Check(Map.extend(ctx, "x", A), Exp.fn("y", x), Ty.arrow(B, A))
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.arrow_intro
   Check(Map.extend(Map.extend(ctx, "x", A), "y", B), x, A)
-  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.lookup_var
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.v
   Map.Lookup(Map.extend(Map.extend(ctx, "x", A), "y", B), "x", A)
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Map.Lookup.there
   Map.Lookup(Map.extend(ctx, "x", A), "x", A)
@@ -64,23 +64,23 @@
   // { y: A |- (x) => x : (A) -> A
   //   ~~~~~~ arrow_intro
   //   y: A, x: A |- x : A
-  //   ~~~~~~ lookup_var
+  //   ~~~~~~ v
   //   QED }
   // { y: A |- y: A
-  //   ~~~~~~ lookup_var
+  //   ~~~~~~ v
   //   QED }
   // QED
 
   ctx = Map.extend(Map.empty, "y", Ty.atom("A"))
-  x = Exp.var("x")
-  y = Exp.var("y")
+  x = Exp.v("x")
+  y = Exp.v("y")
   id = Exp.fn("x", x)
   A = Ty.atom("A")
 
   Check.arrow_elim(
     A,
-    Check.arrow_intro(Check.lookup_var(Map.Lookup.here)),
-    Check.lookup_var(Lookup.here)): Check(ctx, Exp.ap(id, y), A)
+    Check.arrow_intro(Check.v(Map.Lookup.here)),
+    Check.v(Lookup.here)): Check(ctx, Exp.ap(id, y), A)
 
   Check(ctx, Exp.ap(id, y), A)
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.arrow_elim
@@ -88,11 +88,11 @@
   { Check(ctx, id, Ty.arrow(A, A))
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.arrow_intro
     Check(Map.extend(ctx, "x", A), x, A)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.lookup_var
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.v
     Map.Lookup(Map.extend(ctx, "x", A), "x", A)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Map.Lookup.here }
   { Check(ctx, y, A)
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.lookup_var
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Check.v
     Map.Lookup(ctx, "y", A)
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Map.Lookup.here  }
 }

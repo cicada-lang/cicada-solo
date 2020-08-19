@@ -1,7 +1,7 @@
 @module simple.Exp
 
 @datatype Exp {
-  var(name: String): Exp
+  v(name: String): Exp
   fn(name: String, ret: Exp): Exp
   ap(target: Exp, arg: Exp): Exp
   // suite: Exp

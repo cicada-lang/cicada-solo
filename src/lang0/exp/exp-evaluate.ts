@@ -15,11 +15,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         }
       }
       case "Exp.fn": {
-        return {
-          ...exp,
-          kind: "Value.fn",
-          env,
-        }
+        return Value.fn(exp.name, exp.body, env)
       }
       case "Exp.ap": {
         return Exp.do_ap(evaluate(env, exp.target), evaluate(env, exp.arg))
