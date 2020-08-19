@@ -106,7 +106,10 @@ function alpha(the: {
     return true
   } else if (left.kind === "Exp.absurd" && right.kind === "Exp.absurd") {
     return true
-  } else if (left.kind === "Exp.absurd_ind" && right.kind === "Exp.absurd_ind") {
+  } else if (
+    left.kind === "Exp.absurd_ind" &&
+    right.kind === "Exp.absurd_ind"
+  ) {
     return (
       alpha({ ...the, left: left.target, right: right.target }) &&
       alpha({ ...the, left: left.motive, right: right.motive })
