@@ -1,4 +1,4 @@
-@module simple.Exp
+@module lang1
 
 @datatype Exp {
   v(name: String): Exp

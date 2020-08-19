@@ -1,6 +1,4 @@
-@module datatype.List
-
-@import datatype.Nat
+@module datatype
 
 @datatype List(A: Type) {
   null: List(A)

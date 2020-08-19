@@ -44,9 +44,23 @@
 
 ## 模块系统
 
-- 只能 `@import` 数据类型。不能 `@import` 函数。
-
 - module 并非 first class value。
-  - 因此 module 名数据类型名字相同时，可以两用。
+  - 运行时没有 module 的概念。
 
-- `.` 中缀，只用来取 module 中的名字，不用来取 object 的 field。
+- 每个文件开头要有 `@module <module-path>`。
+  - 其中 `<module-path>` 是 `<part>.<part>.<part>` 的结构，
+    比如 `structure.category`。
+  - module 的树装结构与文件在文件系统中的位置无关。
+    构建过程会搜索所有文件，然后根据 `@module` 组装 module 的树装结构。
+  - 引用 module 之后，
+    `.` 中缀，只用来取 module 中的名字，
+    不用来取 object 的 field。
+
+- 只能 `@import` 数据类型。不能 `@import` 函数。
+  - 同时由于我们还规定了，定义 binding 的时候要以数据类型为前缀，
+    所以某个文件的 `@module` 可以只写前缀而不需要写数据类型。
+    - 比如 `datatype/map/map.cic` 可以只写 `@module datatype`，
+      而不需要写 `@module datatype.Map`。
+  - 并且同一个 module 中的 binding，
+    即使被分散到了不同文件中，
+    也可以相互递归引用。

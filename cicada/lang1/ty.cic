@@ -1,4 +1,4 @@
-@module simple.Ty
+@module lang1
 
 @datatype Ty {
   nat: Ty

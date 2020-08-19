@@ -1,7 +1,5 @@
-@module simple.Check
+@module lang1
 
-@import simple.Exp
-@import simple.Ty
 @import datatype.Map
 
 @judgment Check(ctx: Map(String, Ty), exp: Exp, t: Ty) {
