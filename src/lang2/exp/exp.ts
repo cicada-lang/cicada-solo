@@ -24,67 +24,123 @@ export type Exp =
   | suite
   | the
 
-export interface v {
+interface v {
   kind: "Exp.v"
   name: string
 }
 
-export interface pi {
+export const v = (name: string): v => ({
+  kind: "Exp.v",
+  name,
+})
+
+interface pi {
   kind: "Exp.pi"
   name: string
   arg_t: Exp
   ret_t: Exp
 }
 
-export interface fn {
+export const pi = (name: string, arg_t: Exp, ret_t: Exp): pi => ({
+  kind: "Exp.pi",
+  name,
+  arg_t,
+  ret_t,
+})
+
+interface fn {
   kind: "Exp.fn"
   name: string
   body: Exp
 }
 
-export interface ap {
+export const fn = (name: string, body: Exp): fn => ({
+  kind: "Exp.fn",
+  name,
+  body,
+})
+
+interface ap {
   kind: "Exp.ap"
   target: Exp
   arg: Exp
 }
 
-export interface sigma {
+export const ap = (target: Exp, arg: Exp): ap => ({
+  kind: "Exp.ap",
+  target,
+  arg,
+})
+
+interface sigma {
   kind: "Exp.sigma"
   name: string
   car_t: Exp
   cdr_t: Exp
 }
 
-export interface cons {
+export const sigma = (name: string, car_t: Exp, cdr_t: Exp): sigma => ({
+  kind: "Exp.sigma",
+  name,
+  car_t,
+  cdr_t,
+})
+
+interface cons {
   kind: "Exp.cons"
   car: Exp
   cdr: Exp
 }
 
-export interface car {
+export const cons = (car: Exp, cdr: Exp): cons => ({
+  kind: "Exp.cons",
+  car,
+  cdr,
+})
+
+interface car {
   kind: "Exp.car"
   target: Exp
 }
 
-export interface cdr {
+export const car = (target: Exp): car => ({
+  kind: "Exp.car",
+  target,
+})
+
+interface cdr {
   kind: "Exp.cdr"
   target: Exp
 }
 
-export interface nat {
+export const cdr = (target: Exp): cdr => ({
+  kind: "Exp.cdr",
+  target,
+})
+
+interface nat {
   kind: "Exp.nat"
 }
 
-export interface zero {
+export const nat: nat = { kind: "Exp.nat" }
+
+interface zero {
   kind: "Exp.zero"
 }
 
-export interface add1 {
+export const zero: zero = { kind: "Exp.zero" }
+
+interface add1 {
   kind: "Exp.add1"
   prev: Exp
 }
 
-export interface nat_ind {
+export const add1 = (prev: Exp): add1 => ({
+  kind: "Exp.add1",
+  prev,
+})
+
+interface nat_ind {
   kind: "Exp.nat_ind"
   target: Exp
   motive: Exp
@@ -92,63 +148,140 @@ export interface nat_ind {
   step: Exp
 }
 
-export interface equal {
+export const nat_ind = (
+  target: Exp,
+  motive: Exp,
+  base: Exp,
+  step: Exp
+): nat_ind => ({
+  kind: "Exp.nat_ind",
+  target,
+  motive,
+  base,
+  step,
+})
+
+interface equal {
   kind: "Exp.equal"
   t: Exp
   from: Exp
   to: Exp
 }
 
-export interface same {
+export const equal = (t: Exp, from: Exp, to: Exp): equal => ({
+  kind: "Exp.equal",
+  t,
+  from,
+  to,
+})
+
+interface same {
   kind: "Exp.same"
 }
 
-export interface replace {
+export const same: same = {
+  kind: "Exp.same",
+}
+
+interface replace {
   kind: "Exp.replace"
   target: Exp
   motive: Exp
   base: Exp
 }
 
-export interface trivial {
+export const replace = (target: Exp, motive: Exp, base: Exp): replace => ({
+  kind: "Exp.replace",
+  target,
+  motive,
+  base,
+})
+
+interface trivial {
   kind: "Exp.trivial"
 }
 
-export interface sole {
+export const trivial: trivial = {
+  kind: "Exp.trivial",
+}
+
+interface sole {
   kind: "Exp.sole"
 }
 
-export interface absurd {
+export const sole: sole = {
+  kind: "Exp.sole",
+}
+
+interface absurd {
   kind: "Exp.absurd"
 }
 
-export interface absurd_ind {
+export const absurd: absurd = {
+  kind: "Exp.absurd",
+}
+
+interface absurd_ind {
   kind: "Exp.absurd_ind"
   target: Exp
   motive: Exp
 }
 
-export interface str {
+export const absurd_ind = (target: Exp, motive: Exp): absurd_ind => ({
+  kind: "Exp.absurd_ind",
+  target,
+  motive,
+})
+
+interface str {
   kind: "Exp.str"
 }
 
-export interface quote {
+export const str: str = {
+  kind: "Exp.str",
+}
+
+interface quote {
   kind: "Exp.quote"
   str: string
 }
 
-export interface type {
+export const quote = (str: string): quote => ({
+  kind: "Exp.quote",
+  str,
+})
+
+interface type {
   kind: "Exp.type"
 }
 
-export interface suite {
+export const type: type = {
+  kind: "Exp.type",
+}
+
+interface suite {
   kind: "Exp.suite"
   defs: Array<{ name: string; exp: Exp }>
   body: Exp
 }
 
-export interface the {
+export const suite = (
+  defs: Array<{ name: string; exp: Exp }>,
+  body: Exp
+): suite => ({
+  kind: "Exp.suite",
+  defs,
+  body,
+})
+
+interface the {
   kind: "Exp.the"
   t: Exp
   exp: Exp
 }
+
+export const the = (t: Exp, exp: Exp): the => ({
+  kind: "Exp.the",
+  t,
+  exp,
+})

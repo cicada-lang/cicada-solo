@@ -2,28 +2,49 @@ import * as Normal from "../normal"
 
 export type Neutral = v | ap | car | cdr | nat_ind | replace | absurd_ind
 
-export interface v {
+interface v {
   kind: "Neutral.v"
   name: string
 }
 
-export interface ap {
+export const v = (name: string): v => ({
+  kind: "Neutral.v",
+  name,
+})
+
+interface ap {
   kind: "Neutral.ap"
   target: Neutral
   arg: Normal.Normal
 }
 
-export interface car {
+export const ap = (target: Neutral, arg: Normal.Normal): ap => ({
+  kind: "Neutral.ap",
+  target,
+  arg,
+})
+
+interface car {
   kind: "Neutral.car"
   target: Neutral
 }
 
-export interface cdr {
+export const car = (target: Neutral): car => ({
+  kind: "Neutral.car",
+  target,
+})
+
+interface cdr {
   kind: "Neutral.cdr"
   target: Neutral
 }
 
-export interface nat_ind {
+export const cdr = (target: Neutral): cdr => ({
+  kind: "Neutral.cdr",
+  target,
+})
+
+interface nat_ind {
   kind: "Neutral.nat_ind"
   target: Neutral
   motive: Normal.Normal
@@ -31,15 +52,48 @@ export interface nat_ind {
   step: Normal.Normal
 }
 
-export interface replace {
+export const nat_ind = (
+  target: Neutral,
+  motive: Normal.Normal,
+  base: Normal.Normal,
+  step: Normal.Normal
+): nat_ind => ({
+  kind: "Neutral.nat_ind",
+  target,
+  motive,
+  base,
+  step,
+})
+
+interface replace {
   kind: "Neutral.replace"
   target: Neutral
   motive: Normal.Normal
   base: Normal.Normal
 }
 
-export interface absurd_ind {
+export const replace = (
+  target: Neutral,
+  motive: Normal.Normal,
+  base: Normal.Normal
+): replace => ({
+  kind: "Neutral.replace",
+  target,
+  motive,
+  base,
+})
+
+interface absurd_ind {
   kind: "Neutral.absurd_ind"
   target: Neutral
   motive: Normal.Normal
 }
+
+export const absurd_ind = (
+  target: Neutral,
+  motive: Normal.Normal
+): absurd_ind => ({
+  kind: "Neutral.absurd_ind",
+  target,
+  motive,
+})

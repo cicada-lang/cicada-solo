@@ -106,10 +106,7 @@ export function exp(): pt.Sym.Rule {
 export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>("exp", {
     var: ([name]) => {
-      return {
-        kind: "Exp.v",
-        name: pt.Tree.token(name).value,
-      }
+      return Exp.v(pt.Tree.token(name).value)
     },
     pi: ([, comma_separated_type_assignments, , , , ret_t]) => {
       const type_assignments = comma_separated_matcher(type_assignment_matcher)(
@@ -117,12 +114,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       )
       let exp = exp_matcher(ret_t)
       for (let i = type_assignments.length - 1; i >= 0; i--) {
-        exp = {
-          kind: "Exp.pi",
-          name: type_assignments[i].name,
-          arg_t: type_assignments[i].t,
-          ret_t: exp,
-        }
+        exp = Exp.pi(type_assignments[i].name, type_assignments[i].t, exp)
       }
       return exp
     },
@@ -132,147 +124,104 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       )(comma_separated_names)
       let exp = exp_matcher(body)
       for (let i = names.length - 1; i >= 0; i--) {
-        exp = {
-          kind: "Exp.fn",
-          name: names[i],
-          body: exp,
-        }
+        exp = Exp.fn(names[i], exp)
       }
       return exp
     },
     ap: ([name, exp_in_paren_list]) => {
-      let exp: Exp.Exp = {
-        kind: "Exp.v",
-        name: pt.Tree.token(name).value,
-      }
+      let exp: Exp.Exp = Exp.v(pt.Tree.token(name).value)
       const args_list = pt.one_or_more_matcher(
         in_between_matcher(comma_separated_matcher(exp_matcher))
       )(exp_in_paren_list)
       for (const args of args_list) {
         for (const arg of args) {
-          exp = {
-            kind: "Exp.ap",
-            target: exp,
-            arg: arg,
-          }
+          exp = Exp.ap(exp, arg)
         }
       }
       return exp
     },
     sigma: ([, name, , car_t, , , cdr_t]) => {
-      return {
-        kind: "Exp.sigma",
-        name: pt.Tree.token(name).value,
-        car_t: exp_matcher(car_t),
-        cdr_t: exp_matcher(cdr_t),
-      }
+      return Exp.sigma(
+        pt.Tree.token(name).value,
+        exp_matcher(car_t),
+        exp_matcher(cdr_t)
+      )
     },
     pair: ([, , car_t, , cdr_t]) => {
-      return {
-        kind: "Exp.sigma",
-        name: "_",
-        car_t: exp_matcher(car_t),
-        cdr_t: exp_matcher(cdr_t),
-      }
+      return Exp.sigma("_", exp_matcher(car_t), exp_matcher(cdr_t))
     },
     cons: ([, , car, , cdr]) => {
-      return {
-        kind: "Exp.cons",
-        car: exp_matcher(car),
-        cdr: exp_matcher(cdr),
-      }
+      return Exp.cons(exp_matcher(car), exp_matcher(cdr))
     },
     car: ([, , target]) => {
-      return {
-        kind: "Exp.car",
-        target: exp_matcher(target),
-      }
+      return Exp.car(exp_matcher(target))
     },
     cdr: ([, , target]) => {
-      return {
-        kind: "Exp.cdr",
-        target: exp_matcher(target),
-      }
+      return Exp.cdr(exp_matcher(target))
     },
     nat: (_) => {
-      return { kind: "Exp.nat" }
+      return Exp.nat
     },
     zero: (_) => {
-      return { kind: "Exp.zero" }
+      return Exp.zero
     },
     add1: ([, , prev]) => {
-      return { kind: "Exp.add1", prev: exp_matcher(prev) }
+      return Exp.add1(exp_matcher(prev))
     },
     number: ([num]) => {
       const n = num_matcher(num)
       return Exp.nat_from_number(n)
     },
     nat_ind: ([, , , , target, , motive, , base, , step]) => {
-      return {
-        kind: "Exp.nat_ind",
-        target: exp_matcher(target),
-        motive: exp_matcher(motive),
-        base: exp_matcher(base),
-        step: exp_matcher(step),
-      }
+      return Exp.nat_ind(
+        exp_matcher(target),
+        exp_matcher(motive),
+        exp_matcher(base),
+        exp_matcher(step)
+      )
     },
     equal: ([, , t, , from, , to]) => {
-      return {
-        kind: "Exp.equal",
-        t: exp_matcher(t),
-        from: exp_matcher(from),
-        to: exp_matcher(to),
-      }
+      return Exp.equal(exp_matcher(t), exp_matcher(from), exp_matcher(to))
     },
     same: (_) => {
-      return { kind: "Exp.same" }
+      return Exp.same
     },
     replace: ([, , target, , motive, , base]) => {
-      return {
-        kind: "Exp.replace",
-        target: exp_matcher(target),
-        motive: exp_matcher(motive),
-        base: exp_matcher(base),
-      }
+      return Exp.replace(
+        exp_matcher(target),
+        exp_matcher(motive),
+        exp_matcher(base)
+      )
     },
     trivial: (_) => {
-      return { kind: "Exp.trivial" }
+      return Exp.trivial
     },
     sole: (_) => {
-      return { kind: "Exp.sole" }
+      return Exp.sole
     },
     absurd: (_) => {
-      return { kind: "Exp.absurd" }
+      return Exp.absurd
     },
     absurd_ind: ([, , , , target, , motive]) => {
-      return {
-        kind: "Exp.absurd_ind",
-        target: exp_matcher(target),
-        motive: exp_matcher(motive),
-      }
+      return Exp.absurd_ind(exp_matcher(target), exp_matcher(motive))
     },
     str: (_) => {
-      return { kind: "Exp.str" }
+      return Exp.str
     },
     quote: ([str]) => {
-      return { kind: "Exp.quote", str: str_matcher(str) }
+      return Exp.quote(str_matcher(str))
     },
     type: (_) => {
-      return { kind: "Exp.type" }
+      return Exp.type
     },
     suite: ([, defs, body]) => {
-      return {
-        kind: "Exp.suite",
-        defs: pt.zero_or_more_matcher(def_matcher)(defs),
-        body: exp_matcher(body),
-      }
+      return Exp.suite(
+        pt.zero_or_more_matcher(def_matcher)(defs),
+        exp_matcher(body)
+      )
     },
     the: ([exp, , t]) => {
-      return {
-        kind: "Exp.the",
-        t: exp_matcher(t),
-        exp: exp_matcher(exp),
-      }
+      return Exp.the(exp_matcher(t), exp_matcher(exp))
     },
   })(tree)
 }

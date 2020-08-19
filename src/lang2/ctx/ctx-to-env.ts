@@ -1,5 +1,7 @@
 import * as Ctx from "../ctx"
 import * as Env from "../env"
+import * as Value from "../value"
+import * as Neutral from "../neutral"
 
 export function to_env(ctx: Ctx.Ctx): Env.Env {
   const env = Env.init()
@@ -7,11 +9,7 @@ export function to_env(ctx: Ctx.Ctx): Env.Env {
     if (value !== undefined) {
       Env.extend(env, name, value)
     } else {
-      Env.extend(env, name, {
-        kind: "Value.reflection",
-        t,
-        neutral: { kind: "Neutral.v", name },
-      })
+      Env.extend(env, name, Value.reflection(t, Neutral.v(name)))
     }
   }
   return env

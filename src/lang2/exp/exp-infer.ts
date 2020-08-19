@@ -24,11 +24,11 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ctx, name: arg_t |- ret_t <= type
       // ------------------------
       // ctx |- pi(name, arg_t, ret_t) => type
-      Exp.check(ctx, exp.arg_t, { kind: "Value.type" })
+      Exp.check(ctx, exp.arg_t, Value.type)
       const arg_t = Exp.evaluate(Ctx.to_env(ctx), exp.arg_t)
       ctx = Ctx.extend(Ctx.clone(ctx), exp.name, arg_t)
-      Exp.check(ctx, exp.ret_t, { kind: "Value.type" })
-      return { kind: "Value.type" }
+      Exp.check(ctx, exp.ret_t, Value.type)
+      return Value.type
     } else if (exp.kind === "Exp.ap") {
       // ctx |- target => pi(name, arg_t, ret_t)
       // ctx |- arg <= arg_t
@@ -41,7 +41,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ------------------------
       // ctx |- ap(target, arg) => closure(arg)
       const target_t = Exp.infer(ctx, exp.target)
-      const pi = Value.ispi(ctx, target_t)
+      const pi = Value.is_pi(ctx, target_t)
       Exp.check(ctx, exp.arg, pi.arg_t)
       const arg = Exp.evaluate(Ctx.to_env(ctx), exp.arg)
       return Closure.apply(pi.closure, arg)
@@ -50,17 +50,17 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ctx, name: car_t |- cdr_t <= type
       // ------------------------
       // ctx |- sigma(name, car, cdr_t) => type
-      Exp.check(ctx, exp.car_t, { kind: "Value.type" })
+      Exp.check(ctx, exp.car_t, Value.type)
       const car_t = Exp.evaluate(Ctx.to_env(ctx), exp.car_t)
       ctx = Ctx.extend(Ctx.clone(ctx), exp.name, car_t)
-      Exp.check(ctx, exp.cdr_t, { kind: "Value.type" })
-      return { kind: "Value.type" }
+      Exp.check(ctx, exp.cdr_t, Value.type)
+      return Value.type
     } else if (exp.kind === "Exp.car") {
       // ctx |- target => sigma(name, car_t, cdr_t)
       // ------------------------
       // ctx |- car(target) => car_t
       const target_t = Exp.infer(ctx, exp.target)
-      const sigma = Value.issigma(ctx, target_t)
+      const sigma = Value.is_sigma(ctx, target_t)
       return sigma.car_t
     } else if (exp.kind === "Exp.cdr") {
       // ctx |- target => sigma(name, car_t, cdr_t)
@@ -71,17 +71,17 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ------------------------
       // ctx |- cdr(target) => apply(closure, car(target))
       const target_t = Exp.infer(ctx, exp.target)
-      const sigma = Value.issigma(ctx, target_t)
+      const sigma = Value.is_sigma(ctx, target_t)
       const target = Exp.evaluate(Ctx.to_env(ctx), exp.target)
       const car = Exp.do_car(target)
       return Closure.apply(sigma.closure, car)
     } else if (exp.kind === "Exp.nat") {
-      return { kind: "Value.type" }
+      return Value.type
     } else if (exp.kind === "Exp.zero") {
-      return { kind: "Value.nat" }
+      return Value.nat
     } else if (exp.kind === "Exp.add1") {
-      Exp.check(ctx, exp.prev, { kind: "Value.nat" })
-      return { kind: "Value.nat" }
+      Exp.check(ctx, exp.prev, Value.nat)
+      return Value.nat
     } else if (exp.kind === "Exp.nat_ind") {
       // ctx |- target => nat
       // ctx |- motive <= (x: nat) -> type
@@ -90,16 +90,11 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ----------------------
       // ctx |- nat.ind(target, motive, base, step) => motive(target)
       const target_t = Exp.infer(ctx, exp.target)
-      Value.isnat(ctx, target_t)
-      const motive_t = Exp.evaluate(Env.init(), {
-        kind: "Exp.pi",
-        name: "x",
-        arg_t: { kind: "Exp.nat" },
-        ret_t: { kind: "Exp.type" },
-      })
+      Value.is_nat(ctx, target_t)
+      const motive_t = Exp.evaluate(Env.init(), Exp.pi("x", Exp.nat, Exp.type))
       Exp.check(ctx, exp.motive, motive_t)
       const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
-      Exp.check(ctx, exp.base, Exp.do_ap(motive, { kind: "Value.zero" }))
+      Exp.check(ctx, exp.base, Exp.do_ap(motive, Value.zero))
       Exp.check(ctx, exp.step, Exp.nat_ind_step_t(motive))
       const target = Exp.evaluate(Ctx.to_env(ctx), exp.target)
       return Exp.do_ap(motive, target)
@@ -109,11 +104,11 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ctx |- to <= t
       // ---------------------
       // ctx |- equal(t, from, to) => type
-      Exp.check(ctx, exp.t, { kind: "Value.type" })
+      Exp.check(ctx, exp.t, Value.type)
       const t = Exp.evaluate(Ctx.to_env(ctx), exp.t)
       Exp.check(ctx, exp.from, t)
       Exp.check(ctx, exp.to, t)
-      return { kind: "Value.type" }
+      return Value.type
     } else if (exp.kind === "Exp.replace") {
       // ctx |- target => equal(t, from, to)
       // ctx |- motive <= (x: t) -> type
@@ -121,23 +116,21 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ----------------------
       // ctx |- replace(target, motive, base) => motive(to)
       const target_t = Exp.infer(ctx, exp.target)
-      const equal = Value.isequal(ctx, target_t)
-      const motive_t = Exp.evaluate(Env.extend(Env.init(), "t", equal.t), {
-        kind: "Exp.pi",
-        name: "x",
-        arg_t: { kind: "Exp.v", name: "t" },
-        ret_t: { kind: "Exp.type" },
-      })
+      const equal = Value.is_equal(ctx, target_t)
+      const motive_t = Exp.evaluate(
+        Env.extend(Env.init(), "t", equal.t),
+        Exp.pi("x", Exp.v("t"), Exp.type)
+      )
       const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
       Exp.check(ctx, exp.motive, motive_t)
       Exp.check(ctx, exp.base, Exp.do_ap(motive, equal.from))
       return Exp.do_ap(motive, equal.to)
     } else if (exp.kind === "Exp.trivial") {
-      return { kind: "Value.type" }
+      return Value.type
     } else if (exp.kind === "Exp.sole") {
-      return { kind: "Value.trivial" }
+      return Value.trivial
     } else if (exp.kind === "Exp.absurd") {
-      return { kind: "Value.type" }
+      return Value.type
     } else if (exp.kind === "Exp.absurd_ind") {
       // NOTE the `motive` here is not a function from target_t to type,
       //   but a element of type.
@@ -146,16 +139,16 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ----------------------------
       // ctx |- absurd.ind(target, motive): motive
       const target_t = Exp.infer(ctx, exp.target)
-      const absurd = Value.isabsurd(ctx, target_t)
-      Exp.check(ctx, exp.motive, { kind: "Value.type" })
+      const absurd = Value.is_absurd(ctx, target_t)
+      Exp.check(ctx, exp.motive, Value.type)
       const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
       return motive
     } else if (exp.kind === "Exp.str") {
-      return { kind: "Value.type" }
+      return Value.type
     } else if (exp.kind === "Exp.quote") {
-      return { kind: "Value.str" }
+      return Value.str
     } else if (exp.kind === "Exp.type") {
-      return { kind: "Value.type" }
+      return Value.type
     } else if (exp.kind === "Exp.suite") {
       // ctx |- e1 => t1
       // ctx, x1: t1 |- e2 => t2
@@ -181,7 +174,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ctx |- exp <= t
       // -----------------------------
       // ctx |- the(t, exp) => t
-      Exp.check(ctx, exp.t, { kind: "Value.type" })
+      Exp.check(ctx, exp.t, Value.type)
       const t = Exp.evaluate(Ctx.to_env(ctx), exp.t)
       Exp.check(ctx, exp.exp, t)
       return t

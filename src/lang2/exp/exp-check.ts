@@ -1,5 +1,6 @@
 import * as Exp from "../exp"
 import * as Value from "../value"
+import * as Neutral from "../neutral"
 import * as Ty from "../ty"
 import * as Closure from "../closure"
 import * as Ctx from "../ctx"
@@ -12,12 +13,11 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       // ctx, x: arg_t |- body <= ret_t
       // ---------------------------
       // ctx |- (x) => body  <=  (x: arg_t) -> ret_t
-      const pi = Value.ispi(ctx, t)
-      const ret_t = Closure.apply(pi.closure, {
-        kind: "Value.reflection",
-        t: pi.arg_t,
-        neutral: { kind: "Neutral.v", name: exp.name },
-      })
+      const pi = Value.is_pi(ctx, t)
+      const ret_t = Closure.apply(
+        pi.closure,
+        Value.reflection(pi.arg_t, Neutral.v(exp.name))
+      )
       ctx = Ctx.clone(ctx)
       ctx = Ctx.extend(ctx, exp.name, pi.arg_t)
       Exp.check(ctx, exp.body, ret_t)
@@ -26,7 +26,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       // ctx |- cdr <= cdr_t[car/x]
       // -------------------------
       // ctx |- cons(car, cdr) <= (x: car_t) * cdr_t
-      const sigma = Value.issigma(ctx, t)
+      const sigma = Value.is_sigma(ctx, t)
       const car = Exp.evaluate(Ctx.to_env(ctx), exp.car)
       const cdr_t = Closure.apply(sigma.closure, car)
       Exp.check(ctx, exp.car, sigma.car_t)
@@ -35,12 +35,12 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       // ctx |- from == to : t
       // ------------------------
       // ctx |- same <= equal(t, from, to)
-      const equal = Value.isequal(ctx, t)
+      const equal = Value.is_equal(ctx, t)
       if (!Value.convert(ctx, equal.t, equal.from, equal.to)) {
         throw new Trace.Trace(
           ut.aline(`
           |I am expecting the following two values to be the same ${Exp.repr(
-            Value.readback(ctx, { kind: "Value.type" }, equal.t)
+            Value.readback(ctx, Value.type, equal.t)
           )}.
           |But they are not.
           |from:
@@ -56,14 +56,14 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       // ----------------------
       // ctx |- exp <= t
       const u = Exp.infer(ctx, exp)
-      if (!Value.convert(ctx, { kind: "Value.type" }, t, u)) {
+      if (!Value.convert(ctx, Value.type, t, u)) {
         throw new Trace.Trace(
           ut.aline(`
           |I infer the type of ${Exp.repr(exp)} to be ${Exp.repr(
-            Value.readback(ctx, { kind: "Value.type" }, u)
+            Value.readback(ctx, Value.type, u)
           )}.
           |But the given type is ${Exp.repr(
-            Value.readback(ctx, { kind: "Value.type" }, t)
+            Value.readback(ctx, Value.type, t)
           )}.
           |`)
         )

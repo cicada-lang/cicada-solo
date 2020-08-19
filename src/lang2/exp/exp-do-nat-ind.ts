@@ -2,6 +2,7 @@ import * as Exp from "../exp"
 import * as Env from "../env"
 import * as Value from "../value"
 import * as Normal from "../normal"
+import * as Neutral from "../neutral"
 import * as Closure from "../closure"
 import * as Trace from "../../trace"
 
@@ -20,24 +21,21 @@ export function do_nat_ind(
     )
   } else if (target.kind === "Value.reflection") {
     if (target.t.kind === "Value.nat") {
-      const motive_t: Value.pi = {
-        kind: "Value.pi",
-        arg_t: { kind: "Value.nat" },
-        closure: new Closure.Closure(Env.init(), "k", { kind: "Exp.type" }),
-      }
-      const base_t = Exp.do_ap(motive, { kind: "Value.zero" })
+      const motive_t = Value.pi(
+        Value.nat,
+        new Closure.Closure(Env.init(), "k", Exp.type)
+      )
+      const base_t = Exp.do_ap(motive, Value.zero)
       const step_t = Exp.nat_ind_step_t(motive)
-      return {
-        kind: "Value.reflection",
-        t: Exp.do_ap(motive, target),
-        neutral: {
-          kind: "Neutral.nat_ind",
-          target: target.neutral,
-          motive: new Normal.Normal(motive_t, motive),
-          base: new Normal.Normal(base_t, base),
-          step: new Normal.Normal(step_t, step),
-        },
-      }
+      return Value.reflection(
+        Exp.do_ap(motive, target),
+        Neutral.nat_ind(
+          target.neutral,
+          new Normal.Normal(motive_t, motive),
+          new Normal.Normal(base_t, base),
+          new Normal.Normal(step_t, step)
+        )
+      )
     } else {
       throw new Trace.Trace(
         Exp.explain_elim_target_type_mismatch({
