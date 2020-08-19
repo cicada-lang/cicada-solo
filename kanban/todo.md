@@ -41,8 +41,17 @@
   其语义是迭代函数，也许有有趣的应用
   多了一个关于迭代函数的 API。
 
+# syntax
+
+- (claim) and (define) as two part of a code block.
+  ```
+  f : A
+  f = a
+  ```
+
 # pt -- parsing techniques
 
+- earley parse not in js.
 - theory of CFG
 - intersection grammar
 - pt framework
