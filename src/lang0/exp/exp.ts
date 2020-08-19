@@ -1,24 +1,24 @@
-export type Exp = Var | Fn | Ap | Suite
+export type Exp = v | fn | ap | suite
 
-export interface Var {
-  kind: "Exp.Var"
+export interface v {
+  kind: "Exp.v"
   name: string
 }
 
-export interface Fn {
-  kind: "Exp.Fn"
+export interface fn {
+  kind: "Exp.fn"
   name: string
   body: Exp
 }
 
-export interface Ap {
-  kind: "Exp.Ap"
+export interface ap {
+  kind: "Exp.ap"
   target: Exp
   arg: Exp
 }
 
-export interface Suite {
-  kind: "Exp.Suite"
+export interface suite {
+  kind: "Exp.suite"
   defs: Array<{ name: string; exp: Exp }>
   body: Exp
 }

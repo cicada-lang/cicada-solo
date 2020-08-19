@@ -5,18 +5,18 @@ import * as Exp from "../exp"
 
 export function readback(used: Set<string>, value: Value.Value): Exp.Exp {
   switch (value.kind) {
-    case "Value.Reflection": {
+    case "Value.reflection": {
       return Neutral.readback(used, value.neutral)
     }
-    case "Value.Fn": {
+    case "Value.fn": {
       const name = freshen(used, value.name)
-      const v: Value.Reflection = {
-        kind: "Value.Reflection",
-        neutral: { kind: "Neutral.Var", name },
+      const v: Value.reflection = {
+        kind: "Value.reflection",
+        neutral: { kind: "Neutral.v", name },
       }
       const ret = Exp.do_ap(value, v)
       const body = readback(new Set([...used, name]), ret)
-      return { kind: "Exp.Fn", name, body }
+      return { kind: "Exp.fn", name, body }
     }
   }
 }

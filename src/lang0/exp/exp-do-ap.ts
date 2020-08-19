@@ -4,15 +4,15 @@ import * as Value from "../value"
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   switch (target.kind) {
-    case "Value.Fn": {
+    case "Value.fn": {
       const new_env = Env.extend(Env.clone(target.env), target.name, arg)
       return Exp.evaluate(new_env, target.body)
     }
-    case "Value.Reflection": {
+    case "Value.reflection": {
       return {
-        kind: "Value.Reflection",
+        kind: "Value.reflection",
         neutral: {
-          kind: "Neutral.Ap",
+          kind: "Neutral.ap",
           target: target.neutral,
           arg: arg,
         },

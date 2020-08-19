@@ -4,15 +4,15 @@ import * as Exp from "../exp"
 
 export function readback(used: Set<string>, neutral: Neutral.Neutral): Exp.Exp {
   switch (neutral.kind) {
-    case "Neutral.Var": {
+    case "Neutral.v": {
       return {
-        kind: "Exp.Var",
+        kind: "Exp.v",
         name: neutral.name,
       }
     }
-    case "Neutral.Ap": {
+    case "Neutral.ap": {
       return {
-        kind: "Exp.Ap",
+        kind: "Exp.ap",
         target: readback(used, neutral.target),
         arg: Value.readback(used, neutral.arg),
       }

@@ -6,7 +6,7 @@ import * as Trace from "../../trace"
 export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
   try {
     switch (exp.kind) {
-      case "Exp.Var": {
+      case "Exp.v": {
         const result = Env.lookup(env, exp.name)
         if (result !== undefined) {
           return result
@@ -14,17 +14,17 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
         }
       }
-      case "Exp.Fn": {
+      case "Exp.fn": {
         return {
           ...exp,
-          kind: "Value.Fn",
+          kind: "Value.fn",
           env,
         }
       }
-      case "Exp.Ap": {
+      case "Exp.ap": {
         return Exp.do_ap(evaluate(env, exp.target), evaluate(env, exp.arg))
       }
-      case "Exp.Suite": {
+      case "Exp.suite": {
         for (const def of exp.defs) {
           env = Env.extend(Env.clone(env), def.name, evaluate(env, def.exp))
         }

@@ -1,14 +1,14 @@
 import * as Value from "../value"
 
-export type Neutral = Var | Ap
+export type Neutral = v | ap
 
-export interface Var {
-  kind: "Neutral.Var"
+export interface v {
+  kind: "Neutral.v"
   name: string
 }
 
-export interface Ap {
-  kind: "Neutral.Ap"
+export interface ap {
+  kind: "Neutral.ap"
   target: Neutral
   arg: Value.Value
 }

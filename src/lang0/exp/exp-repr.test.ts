@@ -2,8 +2,8 @@ import * as Exp from "../exp"
 import * as ut from "../../ut"
 
 {
-  const x: Exp.Var = {
-    kind: "Exp.Var",
+  const x: Exp.v = {
+    kind: "Exp.v",
     name: "x",
   }
 
@@ -11,11 +11,11 @@ import * as ut from "../../ut"
 }
 
 {
-  const fn: Exp.Fn = {
-    kind: "Exp.Fn",
+  const fn: Exp.fn = {
+    kind: "Exp.fn",
     name: "x",
     body: {
-      kind: "Exp.Var",
+      kind: "Exp.v",
       name: "x",
     },
   }
@@ -24,14 +24,14 @@ import * as ut from "../../ut"
 }
 
 {
-  const ap: Exp.Ap = {
-    kind: "Exp.Ap",
+  const ap: Exp.ap = {
+    kind: "Exp.ap",
     target: {
-      kind: "Exp.Var",
+      kind: "Exp.v",
       name: "f",
     },
     arg: {
-      kind: "Exp.Var",
+      kind: "Exp.v",
       name: "x",
     },
   }
