@@ -5,26 +5,21 @@ import * as Neutral from "../neutral"
 export function readback(used: Set<string>, neutral: Neutral.Neutral): Exp.Exp {
   switch (neutral.kind) {
     case "Neutral.v": {
-      return {
-        kind: "Exp.v",
-        name: neutral.name,
-      }
+      return Exp.v(neutral.name)
     }
     case "Neutral.ap": {
-      return {
-        kind: "Exp.ap",
-        target: Neutral.readback(used, neutral.target),
-        arg: Normal.readback(used, neutral.arg),
-      }
+      return Exp.ap(
+        Neutral.readback(used, neutral.target),
+        Normal.readback(used, neutral.arg)
+      )
     }
     case "Neutral.rec": {
-      return {
-        kind: "Exp.rec",
-        t: neutral.ret_t,
-        target: Neutral.readback(used, neutral.target),
-        base: Normal.readback(used, neutral.base),
-        step: Normal.readback(used, neutral.step),
-      }
+      return Exp.rec(
+        neutral.ret_t,
+        Neutral.readback(used, neutral.target),
+        Normal.readback(used, neutral.base),
+        Normal.readback(used, neutral.step)
+      )
     }
   }
 }

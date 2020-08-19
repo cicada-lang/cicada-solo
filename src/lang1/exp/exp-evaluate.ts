@@ -17,7 +17,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         }
       }
       case "Exp.fn": {
-        return { ...exp, kind: "Value.fn", env }
+        return Value.fn(exp.name, exp.body, env)
       }
       case "Exp.ap": {
         const { target, arg } = exp
@@ -30,15 +30,10 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return evaluate(env, exp.body)
       }
       case "Exp.zero": {
-        return {
-          kind: "Value.zero",
-        }
+        return Value.zero
       }
       case "Exp.add1": {
-        return {
-          kind: "Value.add1",
-          prev: evaluate(env, exp.prev),
-        }
+        return Value.add1(evaluate(env, exp.prev))
       }
       case "Exp.rec": {
         return Exp.do_rec(

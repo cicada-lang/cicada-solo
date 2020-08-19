@@ -62,11 +62,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       const target_t = Exp.infer(ctx, target)
       if (target_t.kind === "Ty.nat") {
         Exp.check(ctx, base, t)
-        Exp.check(ctx, step, {
-          kind: "Ty.arrow",
-          arg_t: { kind: "Ty.nat" },
-          ret_t: { kind: "Ty.arrow", arg_t: t, ret_t: t },
-        })
+        Exp.check(ctx, step, Ty.arrow(Ty.nat, Ty.arrow(t, t)))
       } else {
         throw new Trace.Trace(
           ut.aline(`

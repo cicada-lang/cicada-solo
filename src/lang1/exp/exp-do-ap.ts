@@ -3,6 +3,7 @@ import * as Env from "../env"
 import * as Trace from "../../trace"
 import * as Value from "../value"
 import * as Normal from "../normal"
+import * as Neutral from "../neutral"
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   if (target.kind === "Value.fn") {
@@ -10,15 +11,10 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
     return Exp.evaluate(new_env, target.body)
   } else if (target.kind === "Value.reflection") {
     if (target.t.kind === "Ty.arrow") {
-      return {
-        kind: "Value.reflection",
-        t: target.t.ret_t,
-        neutral: {
-          kind: "Neutral.ap",
-          target: target.neutral,
-          arg: new Normal.Normal(target.t.arg_t, arg),
-        },
-      }
+      return Value.reflection(
+        target.t.ret_t,
+        Neutral.ap(target.neutral, new Normal.Normal(target.t.arg_t, arg))
+      )
     } else {
       throw new Trace.Trace(
         Exp.explain_elim_target_type_mismatch({

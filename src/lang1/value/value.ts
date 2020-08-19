@@ -5,24 +5,46 @@ import * as Neutral from "../neutral"
 
 export type Value = reflection | fn | zero | add1
 
-export interface reflection {
+interface reflection {
   kind: "Value.reflection"
   t: Ty.Ty
   neutral: Neutral.Neutral
 }
 
-export interface fn {
+export const reflection = (t: Ty.Ty, neutral: Neutral.Neutral): reflection => ({
+  kind: "Value.reflection",
+  t,
+  neutral,
+})
+
+interface fn {
   kind: "Value.fn"
   name: string
   body: Exp.Exp
   env: Env.Env
 }
 
-export interface zero {
+export const fn = (name: string, body: Exp.Exp, env: Env.Env): fn => ({
+  kind: "Value.fn",
+  name,
+  body,
+  env,
+})
+
+interface zero {
   kind: "Value.zero"
 }
 
-export interface add1 {
+export const zero: zero = {
+  kind: "Value.zero",
+}
+
+interface add1 {
   kind: "Value.add1"
   prev: Value
 }
+
+export const add1 = (prev: Value): add1 => ({
+  kind: "Value.add1",
+  prev,
+})

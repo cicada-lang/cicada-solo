@@ -4,6 +4,7 @@ import * as Env from "../env"
 import * as Trace from "../../trace"
 import * as Value from "../value"
 import * as Normal from "../normal"
+import * as Neutral from "../neutral"
 
 export function do_rec(
   t: Ty.Ty,
@@ -20,22 +21,16 @@ export function do_rec(
     )
   } else if (target.kind === "Value.reflection") {
     if (target.t.kind === "Ty.nat") {
-      const step_t: Ty.arrow = {
-        kind: "Ty.arrow",
-        arg_t: { kind: "Ty.nat" },
-        ret_t: { kind: "Ty.arrow", arg_t: t, ret_t: t },
-      }
-      return {
-        kind: "Value.reflection",
-        t: t,
-        neutral: {
-          kind: "Neutral.rec",
-          ret_t: t,
-          target: target.neutral,
-          base: new Normal.Normal(t, base),
-          step: new Normal.Normal(step_t, step),
-        },
-      }
+      const step_t = Ty.arrow(Ty.nat, Ty.arrow(t, t))
+      return Value.reflection(
+        t,
+        Neutral.rec(
+          t,
+          target.neutral,
+          new Normal.Normal(t, base),
+          new Normal.Normal(step_t, step)
+        )
+      )
     } else {
       throw new Trace.Trace(
         Exp.explain_elim_target_type_mismatch({

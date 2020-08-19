@@ -1,4 +1,3 @@
-- lang1 ADT constructers.
 - lang0 use cicada style ADT.
 - lang0 ADT constructers.
 - lang2 use cicada style ADT.
