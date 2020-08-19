@@ -28,6 +28,10 @@
   -------------------------------------- ap
   Check(ctx, Exp.ap(target, arg), ret_t)
 
+  TODO
+  ----------------------------------- suite
+  TODO
+
   ---------------------------- zero
   Check(ctx, Exp.zero, Ty.nat)
 
@@ -36,4 +40,7 @@
   ---------------------------------- add1
   Check(ctx, Exp.add1(prev), Ty.nat)
 
+  TODO
+  ----------------------------------- rec
+  TODO
 }

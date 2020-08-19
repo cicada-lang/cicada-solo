@@ -1,5 +1,6 @@
 - use cicada to specify the inference rules of lang1.
-  - use Nat instead of Atom in Ty -- like in lang1.
+  - Check.rec
+  - Check.suite
   - note that, a prolog-like DSL for bidirectional type checking, would be wrong.
     because the aim of split one judgment `:`
     to two judgments `=>` and `<=`
