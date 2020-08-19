@@ -1,41 +1,38 @@
+# lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
+
 - use cicada to specify the inference rules of lang1.
   - Check.rec
   - Check.suite
-  - note that, a prolog-like DSL for bidirectional type checking, would be wrong.
-    because the aim of split one judgment `:`
-    to two judgments `=>` and `<=`
-    is to avoid searching
-    and making the group of inference rules deterministic.
-  - how can we use our inference rule syntax to express bidirectional type checking?
 - use cicada to specify the inference rules of lang2.
+  - how can we use our inference rule syntax to express bidirectional type checking?
   - formalize judgments of "The Little Typer".
 - implement List for lang2.
 - implement Vector for lang2.
 - test Equal of lang2.
 - test Pi of lang2.
 - test Absurd of lang2.
+- 用 The Little Typer 作为 Pie 的测试。
 
-# lang2 -- 将 NbE 教程中的 tartlet 升级为 pie。
+# lang3 -- lang1 + algebraic data type
 
-# 用 The Little Typer 作为 Pie 的测试。
+# lang4 -- wissen
 
-# lang1 -- Be able to define algebraic data type
-
-# lang3 -- wissen
-
-- Run datatype definition as logic programs.
 - learn from "Computation and Deduction" and Logic framework
-- 为古典逻辑设计形式语言。
+  - Run datatype definition as logic programs.
+  - 为古典逻辑设计形式语言。
 
-# 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
+- Note that, a prolog-like DSL for bidirectional type checking, would be wrong.
+  because the aim of split one judgment `:` to two judgments `=>` and `<=`,
+  is to avoid searching, and making the group of inference rules deterministic.
 
-# 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
+# lang5 -- lang2 + inductive data type
 
-# java like module system.
+- 归纳类型（Inductive type）的推演规则。
+  - Only one abstraction away.
 
-# Play with systemt
+# lang1 -- Play with systemt
 
-# church-encoding
+# lang0 -- church-encoding
 
 - church-boolean.cic
 - church-numeral-predicates.cle
@@ -64,43 +61,28 @@
   - S <- "x" S "x" | "x"
 - a version of partech that use env
 
-# 归纳类型（Inductive type）的推演规则。
+# cicada -- fulfilling type
 
-- Only one abstraction away.
-
-# 填充类型（Fulfilling type）的推演规则。
-
-# 我们需要 develop 这个关键词，来在证明时，把更多的信息包含在语境中。
-
-- 明确 develop 这个关键词的语义。
-
-# [formalization] [EWD1240a] A little bit of lattice theory
-
-- 形式化这篇文章，以检验这样形式化是否真的好。
-- This paper is about the relation between PartialOrder and Lattice.
-- Learn from the story line.
-
-# 形式化 Algebraic structures：https://en.wikipedia.org/wiki/Algebraic_structure
-
-# 形式化 Lattice theory。
-
-# 形式化 Closure system。-- 帮助学习 FCA。
-
-# 形式化 Topology theory。
-
-# 形式化 Category theory。
-
-# 形式化 Group theory。
-
-# 形式化 Category of Groups。
-
-# 形式化 Number theroy：https://en.wikipedia.org/wiki/Number_theory
-
-# 我们需要支持相互递归函数。
-
-- 可以通过使用副作用的 Env API 来实现。
-- 需要的时候可以 clone Env。
-
-# 我们需要支持 Inductive type（为 Class 的语义）。
-
-# 我们需要支持 Fulfilling type（为 Data 的语义）。
+- user story
+  - 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
+  - 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
+- 填充类型（Fulfilling type）的推演规则。
+- 我们需要 develop 这个关键词，来在证明时，把更多的信息包含在语境中。
+  - 明确 develop 这个关键词的语义。
+- [formalization] [EWD1240a] A little bit of lattice theory
+  - 形式化这篇文章，以检验这样形式化是否真的好。
+  - This paper is about the relation between PartialOrder and Lattice.
+  - Learn from the story line.
+- 形式化 Algebraic structures：https://en.wikipedia.org/wiki/Algebraic_structure
+- 形式化 Lattice theory。
+- 形式化 Closure system。-- 帮助学习 FCA。
+- 形式化 Topology theory。
+- 形式化 Category theory。
+- 形式化 Group theory。
+- 形式化 Category of Groups。
+- 形式化 Number theroy：https://en.wikipedia.org/wiki/Number_theory
+- 我们需要支持相互递归函数。
+  - 可以通过使用副作用的 Env API 来实现。
+  - 需要的时候可以 clone Env。
+- 我们需要支持 Inductive type（为 Class 的语义）。
+- 我们需要支持 Fulfilling type（为 Data 的语义）。
