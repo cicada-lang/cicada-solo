@@ -118,11 +118,11 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
       return exp
     },
-    fn: ([, comma_separated_names, , , , body]) => {
+    fn: ([, comma_separated_names, , , , ret]) => {
       const names = comma_separated_matcher(
         (name) => pt.Tree.token(name).value
       )(comma_separated_names)
-      let exp = exp_matcher(body)
+      let exp = exp_matcher(ret)
       for (let i = names.length - 1; i >= 0; i--) {
         exp = Exp.fn(names[i], exp)
       }
@@ -214,10 +214,10 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     type: (_) => {
       return Exp.type
     },
-    suite: ([, defs, body]) => {
+    suite: ([, defs, ret]) => {
       return Exp.suite(
         pt.zero_or_more_matcher(def_matcher)(defs),
-        exp_matcher(body)
+        exp_matcher(ret)
       )
     },
     the: ([exp, , t]) => {

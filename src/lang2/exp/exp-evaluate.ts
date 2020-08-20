@@ -22,7 +22,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         )
       }
       case "Exp.fn": {
-        return Value.fn(new Closure.Closure(env, exp.name, exp.body))
+        return Value.fn(new Closure.Closure(env, exp.name, exp.ret))
       }
       case "Exp.ap": {
         return Exp.do_ap(evaluate(env, exp.target), evaluate(env, exp.arg))
@@ -107,7 +107,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         for (const def of exp.defs) {
           env = Env.extend(Env.clone(env), def.name, evaluate(env, def.exp))
         }
-        return evaluate(env, exp.body)
+        return evaluate(env, exp.ret)
       }
       case "Exp.the": {
         return Exp.evaluate(env, exp.exp)

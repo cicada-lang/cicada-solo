@@ -14,7 +14,7 @@
 // 首先要知道 Check 对第三个参数 t 的单值性，将给出函数 infer。
 // 假设我想实现函数 check 来自动生成关系 Check 的证明。
 // 一、我发现只有当我能 infer ap 的 target，才能 check ap，
-// 二、当我能 infer ap 的 target，我就不光能 check ap，并且也能 infer ap，
+// 二、而且，额外地，当我能 infer ap 的 target，我就不光能 check ap，并且也能 infer ap，
 // 三、为了 infer ap 的 target 我必须能够 infer fn，
 // 四、fn 的 Check 对其第三个参数 t 不具有单值性，因此无法实现 infer，
 // 五、为了 fn 而加 annotation 这个新 Exp，并且把类型检查 judgment 分为两个方向的 infer 与 check。
@@ -39,8 +39,7 @@
   @given target: Exp
   @given arg: Exp
   @given ret_t: Ty
-  // NOTE By inductive step we can search element of `Check`,
-  arg_t: Ty // but we can not search this `arg_t`.
+  arg_t: Ty
   target_ck: Check(ctx, target, Ty.arrow(arg_t, ret_t))
   arg_ck: Check(ctx, arg, arg_t)
   -------------------------------------- ap

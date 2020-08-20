@@ -12,8 +12,7 @@ export function readback(used: Set<string>, value: Value.Value): Exp.Exp {
       const name = freshen(used, value.name)
       const v = Value.reflection(Neutral.v(name))
       const ret = Exp.do_ap(value, v)
-      const body = readback(new Set([...used, name]), ret)
-      return Exp.fn(name, body)
+      return Exp.fn(name, readback(new Set([...used, name]), ret))
     }
   }
 }

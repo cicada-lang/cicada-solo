@@ -44,9 +44,9 @@ function alpha(the: {
     return alpha({
       depth: depth + 1,
       left_names: left_names.set(left.name, depth),
-      left: left.body,
+      left: left.ret,
       right_names: right_names.set(right.name, depth),
-      right: right.body,
+      right: right.ret,
     })
   } else if (left.kind === "Exp.ap" && right.kind === "Exp.ap") {
     return (

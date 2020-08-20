@@ -8,14 +8,14 @@ export function repr(exp: Exp.Exp): string {
       return exp.name
     }
     case "Exp.fn": {
-      return `(${exp.name}) => ${repr(exp.body)}`
+      return `(${exp.name}) => ${repr(exp.ret)}`
     }
     case "Exp.ap": {
       return `${repr(exp.target)}(${repr(exp.arg)})`
     }
     case "Exp.suite": {
       const def_reprs = exp.defs.map((def) => `${def.name} = ${repr(def.exp)}`)
-      const suite_repr = [...def_reprs, repr(exp.body)].join("\n")
+      const suite_repr = [...def_reprs, repr(exp.ret)].join("\n")
       return `{\n${ut.indent(suite_repr, "  ")}\n}`
     }
     case "Exp.zero": {

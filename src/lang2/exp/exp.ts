@@ -51,13 +51,13 @@ export const pi = (name: string, arg_t: Exp, ret_t: Exp): pi => ({
 interface fn {
   kind: "Exp.fn"
   name: string
-  body: Exp
+  ret: Exp
 }
 
-export const fn = (name: string, body: Exp): fn => ({
+export const fn = (name: string, ret: Exp): fn => ({
   kind: "Exp.fn",
   name,
-  body,
+  ret,
 })
 
 interface ap {
@@ -262,16 +262,16 @@ export const type: type = {
 interface suite {
   kind: "Exp.suite"
   defs: Array<{ name: string; exp: Exp }>
-  body: Exp
+  ret: Exp
 }
 
 export const suite = (
   defs: Array<{ name: string; exp: Exp }>,
-  body: Exp
+  ret: Exp
 ): suite => ({
   kind: "Exp.suite",
   defs,
-  body,
+  ret,
 })
 
 interface the {

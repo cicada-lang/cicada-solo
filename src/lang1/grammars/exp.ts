@@ -58,8 +58,8 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     var: ([name]) => {
       return Exp.v(pt.Tree.token(name).value)
     },
-    fn: ([, name, , , , body]) => {
-      return Exp.fn(pt.Tree.token(name).value, exp_matcher(body))
+    fn: ([, name, , , , ret]) => {
+      return Exp.fn(pt.Tree.token(name).value, exp_matcher(ret))
     },
     ap: ([name, exp_in_paren_list]) => {
       let exp: Exp.Exp = Exp.v(pt.Tree.token(name).value)
@@ -71,10 +71,10 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
       return exp
     },
-    suite: ([, defs, body]) => {
+    suite: ([, defs, ret]) => {
       return Exp.suite(
         pt.zero_or_more_matcher(def_matcher)(defs),
-        exp_matcher(body)
+        exp_matcher(ret)
       )
     },
     zero: (_) => {

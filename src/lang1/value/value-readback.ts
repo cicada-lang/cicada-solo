@@ -25,8 +25,7 @@ export function readback(
     const name = freshen(used, value_arg_name(value))
     const variable = Value.reflection(t.arg_t, Neutral.v(name))
     const ret = Exp.do_ap(value, variable)
-    const body = Value.readback(new Set([...used, name]), t.ret_t, ret)
-    return Exp.fn(name, body)
+    return Exp.fn(name, Value.readback(new Set([...used, name]), t.ret_t, ret))
   } else if (value.kind === "Value.reflection") {
     if (ut.equal(t, value.t)) {
       return Neutral.readback(used, value.neutral)

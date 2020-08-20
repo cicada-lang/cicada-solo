@@ -7,14 +7,14 @@ export type Value = fn | reflection
 interface fn {
   kind: "Value.fn"
   name: string
-  body: Exp.Exp
+  ret: Exp.Exp
   env: Env.Env
 }
 
-export const fn = (name: string, body: Exp.Exp, env: Env.Env): fn => ({
+export const fn = (name: string, ret: Exp.Exp, env: Env.Env): fn => ({
   kind: "Value.fn",
   name,
-  body,
+  ret,
   env,
 })
 

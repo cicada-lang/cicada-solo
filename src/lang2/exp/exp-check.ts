@@ -10,9 +10,9 @@ import * as ut from "../../ut"
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
   try {
     if (exp.kind === "Exp.fn") {
-      // ctx, x: arg_t |- body <= ret_t
+      // ctx, x: arg_t |- ret <= ret_t
       // ---------------------------
-      // ctx |- (x) => body  <=  (x: arg_t) -> ret_t
+      // ctx |- (x) => ret  <=  (x: arg_t) -> ret_t
       const pi = Value.is_pi(ctx, t)
       const ret_t = Closure.apply(
         pi.closure,
@@ -20,7 +20,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       )
       ctx = Ctx.clone(ctx)
       ctx = Ctx.extend(ctx, exp.name, pi.arg_t)
-      Exp.check(ctx, exp.body, ret_t)
+      Exp.check(ctx, exp.ret, ret_t)
     } else if (exp.kind === "Exp.cons") {
       // ctx |- car <= car_t
       // ctx |- cdr <= cdr_t[car/x]

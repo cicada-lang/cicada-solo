@@ -161,14 +161,14 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       //          ...
       //          e
       //        } => t
-      const { defs, body } = exp
+      const { defs, ret } = exp
       ctx = Ctx.clone(ctx)
       for (const def of defs) {
         const t = Exp.infer(ctx, def.exp)
         const value = Exp.evaluate(Ctx.to_env(ctx), def.exp)
         Ctx.define(ctx, def.name, t, value)
       }
-      return Exp.infer(ctx, body)
+      return Exp.infer(ctx, ret)
     } else if (exp.kind === "Exp.the") {
       // ctx |- t <= type
       // ctx |- exp <= t

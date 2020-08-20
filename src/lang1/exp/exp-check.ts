@@ -7,13 +7,10 @@ import * as ut from "../../ut"
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
   try {
     if (exp.kind === "Exp.fn") {
-      // ctx, x: a |- e <= b
-      // ------------------------------
-      // ctx |- fn(x, e) <= arrow(a, b)
       if (t.kind === "Ty.arrow") {
         ctx = Ctx.clone(ctx)
         Ctx.extend(ctx, exp.name, t.arg_t)
-        Exp.check(ctx, exp.body, t.ret_t)
+        Exp.check(ctx, exp.ret, t.ret_t)
         return
       } else {
         throw new Trace.Trace(

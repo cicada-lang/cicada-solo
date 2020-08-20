@@ -17,7 +17,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         }
       }
       case "Exp.fn": {
-        return Value.fn(exp.name, exp.body, env)
+        return Value.fn(exp.name, exp.ret, env)
       }
       case "Exp.ap": {
         const { target, arg } = exp
@@ -27,7 +27,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         for (const def of exp.defs) {
           env = Env.extend(Env.clone(env), def.name, evaluate(env, def.exp))
         }
-        return evaluate(env, exp.body)
+        return evaluate(env, exp.ret)
       }
       case "Exp.zero": {
         return Value.zero
