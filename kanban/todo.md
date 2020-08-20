@@ -1,11 +1,15 @@
+# use cicada to specify the inference rules of lang1
+
+- Check.rec
+- Check.suite
+
+# use cicada to specify the inference rules of lang2
+
+- how can we use our inference rule syntax to express bidirectional type checking?
+- formalize judgments of "The Little Typer".
+
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
 
-- use cicada to specify the inference rules of lang1.
-  - Check.rec
-  - Check.suite
-- use cicada to specify the inference rules of lang2.
-  - how can we use our inference rule syntax to express bidirectional type checking?
-  - formalize judgments of "The Little Typer".
 - implement List for lang2.
 - implement Vector for lang2.
 - test Equal of lang2.
