@@ -39,7 +39,8 @@
   @given target: Exp
   @given arg: Exp
   @given ret_t: Ty
-  arg_t: Ty
+  // NOTE By inductive step we can search element of `Check`,
+  arg_t: Ty // but we can not search this `arg_t`.
   target_ck: Check(ctx, target, Ty.arrow(arg_t, ret_t))
   arg_ck: Check(ctx, arg, arg_t)
   -------------------------------------- ap
