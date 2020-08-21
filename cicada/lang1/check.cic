@@ -1,6 +1,6 @@
 @module lang1
 
-@import datatype.Map
+@export datatype.Map
 
 // 假设在 datatype 中定义数据构造子时，
 // 其类型所代表的是纯逻辑式编程。

@@ -1,0 +1,12 @@
+@module lang1
+
+Exp.check(Map(String, Ty), Exp, Ty): Trivial
+Exp.check(ctx, Exp.fn(name, ret), Ty.arrow(arg_t, ret_t)) =
+  Exp.check(Map.extend(ctx, name, arg_t), ret, ret_t)
+
+Exp.infer(Map(String, Ty), Exp): Ty
+Exp.infer(ctx, Exp.v(name)) = Map.lookup(ctx, name)
+Exp.infer(ctx, Exp.ap(target, arg)) = ret_t @where {
+  Ty.arrow(arg_t, ret_t) = Exp.infer(ctx, target)
+  Exp.check(ctx, arg, arg_t)
+}

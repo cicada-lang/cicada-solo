@@ -1,7 +1,5 @@
 @module lang1
 
-@import datatype.Map
-
 {
   // |- (x) => x : (A) -> A
   // ~~~~~~ fn

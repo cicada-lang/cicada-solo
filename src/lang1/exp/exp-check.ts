@@ -7,6 +7,9 @@ import * as ut from "../../ut"
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
   try {
     if (exp.kind === "Exp.fn") {
+      // ctx, x: a |- e <= b
+      // ------------------------------
+      // ctx |- fn(x, e) <= arrow(a, b)
       if (t.kind === "Ty.arrow") {
         ctx = Ctx.clone(ctx)
         Ctx.extend(ctx, exp.name, t.arg_t)
