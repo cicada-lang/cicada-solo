@@ -1,13 +1,7 @@
 # use cicada to specify the inference rules of lang1
 
-- Exp.check rec
-- Exp.check suite
-- Exp.check about nat
-
-- Check.rec
+- Check.the
 - Check.suite
-
-- how to handle the infer of bidirectional type checking?
 
 # use cicada to specify the inference rules of lang2
 

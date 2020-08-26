@@ -19,45 +19,46 @@
 // 四、fn 的 Check 对其第三个参数 t 不具有单值性，因此无法实现 infer，
 // 五、为了 fn 而加 annotation 这个新 Exp，并且把类型检查 judgment 分为两个方向的 infer 与 check。
 
+// 为什么说「fn 的 Check 对其第三个参数 t 不具有单值性」？
+// 通过把逻辑式转写成函数式，并且用到对变量的赋值，
+// 可以自动检测一组 judgment 对某一个参数位置的单值性。
+
+// we can use lower case letters as logic
+// variable, because const are in namespaces.
+
 @judgment Check(ctx: Map(String, Ty), exp: Exp, t: Ty) {
   // NOTE Formal arguments of type constructor are considered as given to data constructors.
   // - For examples, the above `ctx`, `exp`, `t` can be viewed as given.
 
   // NOTE What ever occurs in return type of data constructor, can be given by unification.
   // - Such as the following given `name`.
-  @given name: String
-  lookup: Map.Lookup(ctx, name, t)
-  -------------------------------- v
   Check(ctx, Exp.v(name), t)
+  -------------------------------- v
+  lookup: Map.Lookup(ctx, name, t)
 
-  @given name: String, ret: Exp
-  @given arg_t: Ty, ret_t: Ty
-  ret_ck: Check(Map.extend(ctx, name, arg_t), ret, ret_t)
-  ------------------------------------------------------- fn
   Check(ctx, Exp.fn(name, ret), Ty.arrow(arg_t, ret_t))
+  ------------------------------------------------------- fn
+  ret_ck: Check(Map.extend(ctx, name, arg_t), ret, ret_t)
 
-  @given target: Exp
-  @given arg: Exp
-  @given ret_t: Ty
-  arg_t: Ty
+  Check(ctx, Exp.ap(target, arg), ret_t)
+  -------------------------------------- ap
   target_ck: Check(ctx, target, Ty.arrow(arg_t, ret_t))
   arg_ck: Check(ctx, arg, arg_t)
-  -------------------------------------- ap
-  Check(ctx, Exp.ap(target, arg), ret_t)
 
   TODO
   ----------------------------------- suite
   TODO
 
-  ---------------------------- zero
   Check(ctx, Exp.zero, Ty.nat)
+  ---------------------------- zero
 
-  @given prev: Exp
-  prev_ck: Check(ctx, prev, Ty.nat)
-  ---------------------------------- add1
   Check(ctx, Exp.add1(prev), Ty.nat)
+  ---------------------------------- add1
+  prev_ck: Check(ctx, prev, Ty.nat)
 
-  TODO
-  ----------------------------------- rec
-  TODO
+  Check(ctx, Exp.rec(t, target, base, step), t)
+  --------------------------------------------- rec
+  target_ck: Check(ctx, target, Ty.nat)
+  base_ck: Check(ctx, base, t)
+  step_ck: Check(ctx, base, Ty.arrow(Ty.nat, Ty.arrow(t, t)))
 }
