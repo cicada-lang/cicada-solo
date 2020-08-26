@@ -61,4 +61,9 @@
   target_ck: Check(ctx, target, Ty.nat)
   base_ck: Check(ctx, base, t)
   step_ck: Check(ctx, base, Ty.arrow(Ty.nat, Ty.arrow(t, t)))
+
+  Check(ctx, Exp.the(t, exp), t)
+  ------------------------------ the
+  Check(ctx, exp, t)
+
 }

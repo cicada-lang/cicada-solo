@@ -1,6 +1,5 @@
 # use cicada to specify the inference rules of lang1
 
-- Check.the
 - Check.suite
 
 # use cicada to specify the inference rules of lang2
