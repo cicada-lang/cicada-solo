@@ -45,7 +45,7 @@
   target_ck: Check(ctx, target, Ty.arrow(arg_t, ret_t))
   arg_ck: Check(ctx, arg, arg_t)
 
-  TODO
+  Check(ctx, suite(defs, body), t)
   ----------------------------------- suite
   TODO
 
