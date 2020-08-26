@@ -3,6 +3,11 @@
 - how can we use our inference rule syntax to express bidirectional type checking?
 - formalize judgments of "The Little Typer".
 
+# 自动检查参数位置的单值性
+
+- 通过把逻辑式转写成函数式，并且用到对变量的赋值，
+  可以自动检测一组 judgment 对某一个参数位置的单值性。
+
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
 
 - implement List for lang2.
