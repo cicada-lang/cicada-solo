@@ -1,3 +1,7 @@
+# use cicada to specify the inference rules of lang1
+
+- 完成：2020-08-26
+
 # lang2 -- 实现 NbE 教程中的 tartlet。
 
 - 完成：2020-07-13

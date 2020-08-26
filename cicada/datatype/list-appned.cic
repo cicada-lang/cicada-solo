@@ -24,11 +24,10 @@
 
 @given A: Type
 @judgment List.Append(x: List(A), y: List(A), z: List(A)) {
-  ----------------------- null
   List.Append(List.null, z, z)
+  ---------------------------- null
 
-  @given head: A
-  prev: List.Append(x, y, z)
-  ------------------------------------------------- cons
   List.Append(List.cons(head, x), y, List.cons(head, z))
+  ------------------------------------------------------ cons
+  prev: List.Append(x, y, z)
 }

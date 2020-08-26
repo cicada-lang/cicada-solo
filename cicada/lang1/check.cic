@@ -45,9 +45,10 @@
   target_ck: Check(ctx, target, Ty.arrow(arg_t, ret_t))
   arg_ck: Check(ctx, arg, arg_t)
 
-  Check(ctx, suite(defs, body), t)
-  ----------------------------------- suite
-  TODO
+  Check(ctx, Exp.let(name, exp, body), t)
+  --------------------------------------- let
+  exp_ck: Check(ctx, exp, exp_t)
+  body_ck: Check(Map.extend(ctx, name, exp_t), body, t)
 
   Check(ctx, Exp.zero, Ty.nat)
   ---------------------------- zero
@@ -65,5 +66,4 @@
   Check(ctx, Exp.the(t, exp), t)
   ------------------------------ the
   Check(ctx, exp, t)
-
 }
