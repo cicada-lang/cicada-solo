@@ -14,7 +14,6 @@
 }
 
 {
-
   ctx = Map.empty
   x = Exp.v("x")
   A = Ty.nat
@@ -33,7 +32,6 @@
 }
 
 {
-
   ctx = Map.extend(Map.empty, "y", Ty.nat)
   x = Exp.v("x")
   y = Exp.v("y")
