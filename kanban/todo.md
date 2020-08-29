@@ -1,3 +1,5 @@
+- learn AST from js parsers.
+
 # use cicada to specify the inference rules of lang2
 
 - how can we use our inference rule syntax to express bidirectional type checking?
