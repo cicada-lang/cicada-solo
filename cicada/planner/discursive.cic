@@ -1,0 +1,38 @@
+```
+  Turing is a human
+  All humans are fallible
+so
+  Turing is a fallible.
+```
+
+``` planner
+(ASSERT (HUMAN TURING))
+(DEFINE THEOREM
+  (CONSEQUENT (X) (FALLIBLE ?X)
+    (GOAL (HUMAN ?X))))
+```
+
+@judgment Human(String) {
+  Human("turing")
+  --------------- turing_is_a_human
+}
+
+@judgment Fallible(String) {
+  Fallible(x)
+  ----------- all_humans_are_fallible
+  Human(x)
+}
+
+```
+To solve the goal Fallible("turing"),
+is to search for a value of type Fallible("turing").
+
+  Fallible.all_humans_are_fallible(Human.turing_is_a_human)
+
+is such a value. and the following is another way of writing it:
+
+  Fallible("turing")
+  ------------------ Fallible.all_humans_are_fallible
+  Human("turing")
+  ------------------ Human.turing_is_a_human
+```
