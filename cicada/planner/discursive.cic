@@ -7,7 +7,7 @@ so
 
 ``` planner
 (ASSERT (HUMAN TURING))
-(DEFINE THEOREM
+(DEFINE THEOREM1
   (CONSEQUENT (X) (FALLIBLE ?X)
     (GOAL (HUMAN ?X))))
 ```
