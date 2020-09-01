@@ -1,0 +1,28 @@
+@module lang2
+
+@datatype Exp {
+  v(name: String): Exp
+  pi(name: String, arg_t: Exp, ret_t: Exp): Exp
+  fn(name: String, ret: Exp): Exp
+  ap(target: Exp, arg: Exp): Exp
+  // | sigma
+  // | cons
+  // | car
+  // | cdr
+  // | nat
+  // | zero
+  // | add1
+  // | nat_ind
+  // | equal
+  // | same
+  // | replace
+  // | trivial
+  // | sole
+  // | absurd
+  // | absurd_ind
+  // | str
+  // | quote
+  type: Exp
+  let(name: String, exp: Exp, ret: Exp): Exp
+  the(t: Exp, exp: Exp): Exp
+}

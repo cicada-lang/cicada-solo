@@ -1,0 +1,21 @@
+@module lang2
+
+// TODO
+@datatype Value {
+  | pi
+  | fn
+  // | sigma
+  // | cons
+  // | nat
+  // | zero
+  // | add1
+  // | equal
+  // | same
+  // | trivial
+  // | sole
+  // | absurd
+  // | str
+  // | quote
+  | type
+  | reflection
+}

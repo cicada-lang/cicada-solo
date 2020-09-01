@@ -21,10 +21,10 @@
   target_ck: Check(ctx, target, Ty.arrow(arg_t, ret_t))
   arg_ck: Check(ctx, arg, arg_t)
 
-  Check(ctx, Exp.let(name, exp, body), t)
+  Check(ctx, Exp.let(name, exp, ret), t)
   --------------------------------------- let
   exp_ck: Check(ctx, exp, exp_t)
-  body_ck: Check(Map.extend(ctx, name, exp_t), body, t)
+  ret_ck: Check(Map.extend(ctx, name, exp_t), ret, t)
 
   Check(ctx, Exp.zero, Ty.nat)
   ---------------------------- zero
