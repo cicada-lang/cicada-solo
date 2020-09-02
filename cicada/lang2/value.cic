@@ -1,9 +1,12 @@
 @module lang2
 
-// TODO
+@datatype Closure {
+  closure(env: Map(String, Value), name: String, ret: Exp): Closure
+}
+
 @datatype Value {
-  | pi
-  | fn
+  pi(arg_t: Value, closure: Closure): Value
+  fn(closure: Closure): Value
   // | sigma
   // | cons
   // | nat
@@ -16,6 +19,16 @@
   // | absurd
   // | str
   // | quote
-  | type
-  | reflection
+  type: Value
+  reflection(t: Value, neutral: Neutral): Value
+}
+
+@datatype Neutral {
+  v(name: String): Neutral
+  ap(target: Neutral, arg: Normal): Neutral
+  // | car | cdr | nat_ind | replace | absurd_ind
+}
+
+@datatype Normal {
+  normal(t: Value, value: Value): Normal
 }
