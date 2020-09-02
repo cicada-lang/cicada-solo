@@ -1,9 +1,3 @@
-- learn AST from js parsers.
-
-# use cicada to specify the inference rules of lang2
-
-- formalize judgments of "The Little Typer".
-
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
 
 - implement List for lang2.

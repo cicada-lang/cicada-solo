@@ -1,3 +1,7 @@
+# use cicada to specify the inference rules of lang2
+
+- 完成：2020-09-02
+
 # use cicada to specify the inference rules of lang1
 
 - 完成：2020-08-26
