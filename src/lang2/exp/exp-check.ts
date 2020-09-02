@@ -14,10 +14,8 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       // ---------------------------
       // ctx |- (x) => ret  <=  (x: arg_t) -> ret_t
       const pi = Value.is_pi(ctx, t)
-      const ret_t = Closure.apply(
-        pi.closure,
-        Value.reflection(pi.arg_t, Neutral.v(exp.name))
-      )
+      const arg = Value.reflection(pi.arg_t, Neutral.v(exp.name))
+      const ret_t = Closure.apply(pi.closure, arg)
       ctx = Ctx.clone(ctx)
       ctx = Ctx.extend(ctx, exp.name, pi.arg_t)
       Exp.check(ctx, exp.ret, ret_t)
