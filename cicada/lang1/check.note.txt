@@ -16,12 +16,26 @@
 五、为了 fn 而加 annotation 这个新 Exp，并且把类型检查 judgment 分为两个方向的 infer 与 check。
 
 为什么说「fn 的 Check 对其第三个参数 t 不具有单值性」？
-通过把逻辑式转写成函数式，并且用到对变量的赋值，
-可以自动检测一组 judgment 对某一个参数位置的单值性。
-
-如果有检测关系就某一个参数，是否具有单值性的算法，
-我们就可以用我们的 inference rule syntax
-来表达 bidirectional type checking 相关的知识。
+通过把逻辑式转写成函数式，并且用到对变量的赋值，可以自动检验一组 judgment 对某一个参数位置的单值性。
 
 we can use lower case letters as logic
 variable, because const are in namespaces.
+
+如果有检验关系就某一个参数，是否具有单值性的算法，
+我们就可以用我们的 inference rule syntax
+来表达 bidirectional type checking 相关的知识。
+
+通过把逻辑式转写成函数式，并且用到对变量的赋值，
+可以自动检验一组 judgment 对某一个参数位置的单值性。
+
+以 Check.fn 这一个 inference rule 为例，检验其就第三个参数的单值性。
+
+Check(ctx, Exp.fn(name, ret), Ty.arrow(arg_t, ret_t))
+------------------------------------------------------- fn
+ret_ck: Check(Map.extend(ctx, name, arg_t), ret, ret_t)
+
+假设 Ty.arrow(arg_t, ret_t) 是未知的，
+因此 arg_t 是未知的，
+因此 arg_t 不应在 ret_ck 的类型的
+第一个参数 Map.extend(ctx, name, arg_t) 中出现，
+因此单值性检验失败。
