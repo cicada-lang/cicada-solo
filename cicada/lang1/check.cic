@@ -1,7 +1,5 @@
 @module lang1
 
-@export datatype.Map
-
 @judgment Check(ctx: Map(String, Ty), exp: Exp, t: Ty) {
   // NOTE Formal arguments of type constructor are considered as given to data constructors.
   // - For examples, the above `ctx`, `exp`, `t` can be viewed as given.
