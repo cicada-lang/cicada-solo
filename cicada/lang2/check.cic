@@ -8,7 +8,7 @@
   Check(ctx, Exp.pi(name, arg_t, ret_t), Value.type)
   -------------------------------------------------- pi
   arg_ck: Check(ctx, arg_t, Value.type)
-  ret_ck: Check(Map.extend(ctx, name, Exp.evaluate(Ctx.to_env(), arg_t)), ret_t, Value.type)
+  ret_ck: Check(Map.extend(ctx, name, Exp.evaluate(Ctx.to_env(ctx), arg_t)), ret_t, Value.type)
 
   Check(ctx, Exp.fn(name, ret), Value.pi(arg_t, ret_t_cl))
   ------------------------------------------------------- fn
@@ -19,7 +19,7 @@
 
   // NOTE We can not match inside the computation Closure.apply.
   // - Maybe we should match what we can, and use Value.equal for what we can not match.
-  Check(ctx, Exp.ap(target, arg), Closure.apply(ret_t_cl, Exp.evaluate(Ctx.to_env(), arg)))
+  Check(ctx, Exp.ap(target, arg), Closure.apply(ret_t_cl, Exp.evaluate(Ctx.to_env(ctx), arg)))
   -------------------------------------- ap
   target_ck: Check(ctx, target, Value.pi(arg_t, ret_t_cl))
   arg_ck: Check(ctx, arg, arg_t)
