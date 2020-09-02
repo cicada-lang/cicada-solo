@@ -2,7 +2,6 @@
 
 # use cicada to specify the inference rules of lang2
 
-- how can we use our inference rule syntax to express bidirectional type checking?
 - formalize judgments of "The Little Typer".
 
 # 自动检查参数位置的单值性

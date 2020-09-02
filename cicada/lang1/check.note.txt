@@ -19,5 +19,9 @@
 通过把逻辑式转写成函数式，并且用到对变量的赋值，
 可以自动检测一组 judgment 对某一个参数位置的单值性。
 
+如果有检测关系就某一个参数，是否具有单值性的算法，
+我们就可以用我们的 inference rule syntax
+来表达 bidirectional type checking 相关的知识。
+
 we can use lower case letters as logic
 variable, because const are in namespaces.
