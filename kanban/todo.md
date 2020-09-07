@@ -1,6 +1,8 @@
 # pc -- parser combinator
 
-- learn from `parc` -- about the use of intersection type in ts.
+- learn from `parc`.
+  - about the use of intersection type in ts.
+  - use closure instead of class.
 - https://en.wikipedia.org/wiki/Parser_combinator
 
 # pt -- parsing techniques
