@@ -1,3 +1,29 @@
+# pc -- parser combinator
+
+- learn from `parc` -- about the use of intersection type in ts.
+- https://en.wikipedia.org/wiki/Parser_combinator
+
+# pt -- parsing techniques
+
+- theory of CFG
+  - https://en.wikipedia.org/wiki/Context-free_grammar
+  - ~/watching/computer-science/automata
+- change earley to use ordered choice
+- change earley to use intersection
+- a version of partech that use env
+- pt framework
+  - example grammar
+    ``` js
+    exp:
+      var: identifier
+      fn: "(" identifier ")" "=>" exp
+      ap: identifier ("(" exp ")")*
+      // or ("(" exp ")") must be named? like exp_in_paren
+    ```
+- try examples in peg paper in parser generator
+- x in x test
+  - S <- "x" S "x" | "x"
+
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
 
 - implement List for lang2.
@@ -42,27 +68,6 @@
   f : A
   f = a
   ```
-
-# pt -- parsing techniques
-
-- standalone pt with earley parser not in js.
-- theory of CFG
-- intersection grammar
-- pt framework
-  - example grammar
-    ``` js
-    exp:
-      var: identifier
-      fn: "(" identifier ")" "=>" exp
-      ap: identifier ("(" exp ")")*
-      // or ("(" exp ")") must be named? like exp_in_paren
-    ```
-- try examples in peg paper in parser generator
-- change earley to use ordered choice
-- change earley to use intersection
-- x in x test
-  - S <- "x" S "x" | "x"
-- a version of partech that use env
 
 # cicada -- fulfilling type
 
