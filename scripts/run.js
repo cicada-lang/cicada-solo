@@ -12,4 +12,9 @@ async function run(dev) {
   }
 }
 
+process.on("unhandledRejection", (error) => {
+  console.error(error)
+  process.exit(1)
+})
+
 module.exports = run
