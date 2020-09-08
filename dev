@@ -5,14 +5,19 @@ const snapshot = require("./scripts/snapshot")
 
 let dev = {}
 
-dev.lib = () => snapshot.out("node", "lib/**.test.js")
+dev.lib = () => {
+  snapshot.out("node", "lib/**/*.test.js")
+}
+
 dev.lang0 = () => {
   snapshot.out("./bin/lang0.js", "tests/lang0/**.cic")
 }
+
 dev.lang1 = () => {
   snapshot.out("./bin/lang1.js", "tests/lang1/**.cic")
   snapshot.err("./bin/lang1.js", "tests/lang1-error/**.cic")
 }
+
 dev.lang2 = () => {
   snapshot.out("./bin/lang2.js", "tests/lang2/**.cic")
   snapshot.err("./bin/lang2.js", "tests/lang2-error/**.cic")

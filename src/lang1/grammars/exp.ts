@@ -1,7 +1,7 @@
 import * as Exp from "../exp"
 import * as Ty from "../ty"
 import pt from "@forchange/partech"
-import rr from "@forchange/readable-regular-expression"
+import * as rr from "../../rr"
 
 const preserved_identifiers = ["zero", "add1", "rec"]
 

@@ -1,6 +1,6 @@
 import * as Exp from "../exp"
 import pt from "@forchange/partech"
-import rr from "@forchange/readable-regular-expression"
+import * as rr from "../../rr"
 
 const identifier = pt.Sym.create_par_from_kind("identifier")
 
