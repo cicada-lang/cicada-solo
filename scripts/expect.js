@@ -2,7 +2,7 @@ const exec = require("./exec")
 const glob = require("glob")
 const fs = require("fs")
 
-function ok(prog, { files, echo, snapshot }) {
+function ok(prog, files, { echo, snapshot } = {}) {
   const results = glob
     .sync(files)
     .map((file) => exec(`${prog} ${file}`).then((the) => ({ ...the, file })))
@@ -38,7 +38,7 @@ function ok(prog, { files, echo, snapshot }) {
     })
 }
 
-function fail(prog, { files, echo, snapshot }) {
+function fail(prog, files, { echo, snapshot } = {}) {
   const results = glob.sync(files).map((file) =>
     exec(`${prog} ${file}`)
       .then((the) => ({ ...the, file }))

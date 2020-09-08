@@ -5,48 +5,40 @@ const expect = require("./scripts/expect")
 
 let dev = {}
 
-dev["test_lib"] = () =>
-  expect.ok("node", {
-    files: "lib/**.test.js",
-  })
+dev.test_lib = () => expect.ok("node", "lib/**.test.js")
 
-dev["test_lang0"] = () =>
-  expect.ok("./bin/lang0.js eval", {
-    files: "tests/lang0/**.cic",
+dev.test_lang0 = () =>
+  expect.ok("./bin/lang0.js eval", "tests/lang0/**.cic", {
     snapshot: { stdout: ".out" },
   })
 
-dev["test_lang1"] = () =>
-  expect.ok("./bin/lang1.js eval", {
-    files: "tests/lang1/**.cic",
+dev.test_lang1 = () =>
+  expect.ok("./bin/lang1.js eval", "tests/lang1/**.cic", {
     snapshot: { stdout: ".out" },
   })
 
-dev["test_lang1_error"] = () =>
-  expect.fail("./bin/lang1.js eval", {
-    files: "tests/lang1-error/**.cic",
+dev.test_lang1_error = () =>
+  expect.fail("./bin/lang1.js eval", "tests/lang1-error/**.cic", {
     snapshot: { stdout: ".out", stderr: ".err" },
   })
 
-dev["test_lang2"] = () =>
-  expect.ok("./bin/lang2.js eval", {
-    files: "tests/lang2/**.cic",
+dev.test_lang2 = () =>
+  expect.ok("./bin/lang2.js eval", "tests/lang2/**.cic", {
     snapshot: { stdout: ".out" },
   })
 
-dev["test_lang2_error"] = () =>
-  expect.fail("./bin/lang2.js eval", {
-    files: "tests/lang2-error/**.cic",
+dev.test_lang2_error = () =>
+  expect.fail("./bin/lang2.js eval", "tests/lang2-error/**.cic", {
     snapshot: { stdout: ".out", stderr: ".err" },
   })
 
-dev["t"] = () => {
-  dev["test_lib"]()
-  dev["test_lang0"]()
-  dev["test_lang1"]()
-  dev["test_lang1_error"]()
-  dev["test_lang2"]()
-  dev["test_lang2_error"]()
+dev.t = () => {
+  dev.test_lib()
+  dev.test_lang0()
+  dev.test_lang1()
+  dev.test_lang1_error()
+  dev.test_lang2()
+  dev.test_lang2_error()
 }
 
 run(dev)
