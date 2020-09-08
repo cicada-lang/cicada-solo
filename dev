@@ -1,33 +1,42 @@
 #!/usr/bin/env node
 
-const { test_prog, test_prog_error } = require("./scripts/test-prog")
+const run = require("./scripts/run")
+const prog = require("./scripts/prog")
 
 let dev = {}
 
-dev["test_lib"] = () => test_prog("node", "lib/**", ".test.js")
+dev["test_lib"] = () =>
+  prog.test("node", {
+    files: "lib/**.test.js",
+  })
 
 dev["test_lang0"] = () =>
-  test_prog("./bin/lang0.js eval", "tests/lang0/**", ".cic", {
+  prog.test("./bin/lang0.js eval", {
+    files: "tests/lang0/**.cic",
     snapshot: { stdout: ".out" },
   })
 
 dev["test_lang1"] = () =>
-  test_prog("./bin/lang1.js eval", "tests/lang1/**", ".cic", {
+  prog.test("./bin/lang1.js eval", {
+    files: "tests/lang1/**.cic",
     snapshot: { stdout: ".out" },
   })
 
 dev["test_lang1_error"] = () =>
-  test_prog_error("./bin/lang1.js eval", "tests/lang1-error/**", ".cic", {
+  prog.test_error("./bin/lang1.js eval", {
+    files: "tests/lang1-error/**.cic",
     snapshot: { stdout: ".out", stderr: ".err" },
   })
 
 dev["test_lang2"] = () =>
-  test_prog("./bin/lang2.js eval", "tests/lang2/**", ".cic", {
+  prog.test("./bin/lang2.js eval", {
+    files: "tests/lang2/**.cic",
     snapshot: { stdout: ".out" },
   })
 
 dev["test_lang2_error"] = () =>
-  test_prog_error("./bin/lang2.js eval", "tests/lang2-error/**", ".cic", {
+  prog.test_error("./bin/lang2.js eval", {
+    files: "tests/lang2-error/**.cic",
     snapshot: { stdout: ".out", stderr: ".err" },
   })
 
@@ -40,18 +49,4 @@ dev["t"] = () => {
   dev["test_lang2_error"]()
 }
 
-async function main() {
-  if (process.argv.length <= 2) {
-    console.log("commands:")
-    for (const name of Object.keys(dev)) {
-      console.log(`  ${name}`)
-    }
-  }
-
-  const commands = process.argv.slice(2)
-  for (const command of commands) {
-    await dev[command]()
-  }
-}
-
-main()
+run(dev)
