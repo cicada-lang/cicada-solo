@@ -1,11 +1,13 @@
 const execute = require("./execute")
+const chalk = require("chalk")
 const glob = require("glob")
 const fs = require("fs")
 
-function out(prog, files, { echo, snapshot } = {}) {
-  glob.sync(files).map((file) => {
+async function out(prog, files, { echo, snapshot } = {}) {
+  for (const file of glob.sync(files)) {
     execute(`${prog} ${file}`).then(({ stdout, stderr, error }) => {
-      console.log(`[snapshot.out] ${prog} ${file}`)
+      const head = chalk.bold.blue("[snapshot.out]")
+      console.log(`${head} ${prog} ${file}`)
       if (stdout) fs.promises.writeFile(`${file}.out`, stdout)
       if (stderr) fs.promises.writeFile(`${file}.err`, stderr)
       if (stdout && echo) console.log(stdout)
@@ -15,19 +17,20 @@ function out(prog, files, { echo, snapshot } = {}) {
         process.exit(1)
       }
     })
-  })
+  }
 }
 
-function err(prog, files, { echo, snapshot } = {}) {
-  glob.sync(files).map((file) =>
-    execute(`${prog} ${file}`).then(({ stdout, stderr, error }) => {
-      console.log(`[snapshot.err] ${prog} ${file}`)
+async function err(prog, files, { echo, snapshot } = {}) {
+  for (const file of glob.sync(files)) {
+    execute(`${prog} ${file}`).then(({ stdout, stderr }) => {
+      const head = chalk.bold.red("[snapshot.err]")
+      console.log(`${head} ${prog} ${file}`)
       if (stdout) fs.promises.writeFile(`${file}.out`, stdout)
       if (stderr) fs.promises.writeFile(`${file}.err`, stderr)
       if (stdout && echo) console.log(stdout)
       if (stderr && echo) console.error(stderr)
     })
-  )
+  }
 }
 
 module.exports = { out, err }

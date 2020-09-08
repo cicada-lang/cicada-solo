@@ -1,1 +1,1 @@
-export declare function run(config: any): void;
+export declare function run(): void;

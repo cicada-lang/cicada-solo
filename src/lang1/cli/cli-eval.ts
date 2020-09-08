@@ -6,7 +6,7 @@ import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import fs from "fs"
 
-export function run(file: string, opts: any): void {
+export function run(file: string): void {
   const text = fs.readFileSync(file, { encoding: "utf-8" })
   const exp = Exp.parse(text)
   try {
