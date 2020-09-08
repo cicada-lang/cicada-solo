@@ -27,10 +27,15 @@ one_or_more {
   more -> "(" (head: x) ")" (tail: one_or_more("(" x ")"))
 }
 
+// A parse tree is a graph that shows
+// how a sentence is derived by some CFG.
 
-// Example tree, in which
+// Example parse tree, in which
 // `name` and `kind` properties
-// give us ATD-like data.
+// give us ADT-like data.
+
+// Our syntax for CFG can be viewed as decorated ADT,
+// ADT decorated by terminals and ignored non-terminals.
 
 {
   name: one_or_more
