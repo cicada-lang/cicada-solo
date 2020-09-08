@@ -1,5 +1,6 @@
 # pt -- parsing techniques
 
+- start pt in cicada
 - theory of CFG
   - https://en.wikipedia.org/wiki/Context-free_grammar
   - ~/watching/computer-science/automata
