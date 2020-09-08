@@ -10,7 +10,7 @@ export function one_or_more(re: RegExp | string): RegExp {
   return new RegExp(re.source + "+")
 }
 
-export function option(re: RegExp | string): RegExp {
+export function optional(re: RegExp | string): RegExp {
   re = create_regexp(re)
   return new RegExp(re.source + "?")
 }
