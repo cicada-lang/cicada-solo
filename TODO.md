@@ -1,23 +1,14 @@
 # pt -- parsing techniques
 
 - start pt in cicada
+  - a version of partech that use env -- still embedded in js
 - theory of CFG
   - https://en.wikipedia.org/wiki/Context-free_grammar
   - ~/watching/computer-science/automata
-- change earley to use ordered choice
-- change earley to use intersection
-- a version of partech that use env
-- pt framework
-  - example grammar
-    ``` js
-    exp:
-      var: identifier
-      fn: "(" identifier ")" "=>" exp
-      ap: identifier ("(" exp ")")*
-      // or ("(" exp ")") must be named? like exp_in_paren
-    ```
-- try examples in peg paper in parser generator
-- x in x test
+- [parsing machine] change earley to use ordered choice
+- [parsing machine] change earley to use intersection
+- [test] try examples in peg paper in parser generator
+- [test] x in x test
   - S <- "x" S "x" | "x"
 
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
