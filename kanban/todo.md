@@ -1,3 +1,5 @@
+- use yargs
+
 # pc -- parser combinator
 
 - learn from `parc`.

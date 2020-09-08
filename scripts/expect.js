@@ -1,10 +1,8 @@
-const util = require("util")
-const child_process = require("child_process")
-const exec = util.promisify(child_process.exec)
-const fs = require("fs")
+const exec = require("./exec")
 const glob = require("glob")
+const fs = require("fs")
 
-function test(prog, { files, echo, snapshot }) {
+function ok(prog, { files, echo, snapshot }) {
   const results = glob
     .sync(files)
     .map((file) => exec(`${prog} ${file}`).then((the) => ({ ...the, file })))
@@ -13,7 +11,7 @@ function test(prog, { files, echo, snapshot }) {
     .then((results) => {
       for (const the of results) {
         console.log()
-        console.log(`[test]`)
+        console.log(`[expect.ok]`)
         console.log(`prog: ${prog}`)
         console.log(`file: ${the.file}`)
 
@@ -40,7 +38,7 @@ function test(prog, { files, echo, snapshot }) {
     })
 }
 
-function test_error(prog, { files, echo, snapshot }) {
+function fail(prog, { files, echo, snapshot }) {
   const results = glob.sync(files).map((file) =>
     exec(`${prog} ${file}`)
       .then((the) => ({ ...the, file }))
@@ -50,7 +48,7 @@ function test_error(prog, { files, echo, snapshot }) {
   return Promise.all(results).then((results) => {
     for (const the of results) {
       console.log()
-      console.log(`[test_error]`)
+      console.log(`[expect.fail]`)
       console.log(`prog: ${prog}`)
       console.log(`file: ${the.file}`)
 
@@ -77,7 +75,4 @@ function test_error(prog, { files, echo, snapshot }) {
   })
 }
 
-module.exports = {
-  test,
-  test_error,
-}
+module.exports = { ok, fail }
