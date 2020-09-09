@@ -1,5 +1,5 @@
 import * as cle_eval from "./cli-eval"
-import yargs from "yargs"
+const yargs = require("yargs")
 
 export function run(): void {
   const argv = yargs.parse()
