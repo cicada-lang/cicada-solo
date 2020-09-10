@@ -2,6 +2,7 @@
 
 const run = require("./scripts/run")
 const snapshot = require("./scripts/snapshot")
+require("./scripts/exit-on-unhandled-rejection")
 
 let dev = {}
 

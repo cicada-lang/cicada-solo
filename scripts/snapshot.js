@@ -1,10 +1,10 @@
 const execute = require("./execute")
+const files_unfold = require("./files-unfold")
 const chalk = require("chalk")
-const fg = require("fast-glob")
 const fs = require("fs")
 
 async function out(prog, files, { echo, snapshot } = {}) {
-  for (const file of fg.sync(files)) {
+  for (const file of await files_unfold(files)) {
     execute(`${prog} ${file}`).then(({ stdout, stderr, error }) => {
       const head = chalk.bold.blue("[snapshot.out]")
       console.log(`${head} ${prog} ${file}`)
@@ -21,7 +21,7 @@ async function out(prog, files, { echo, snapshot } = {}) {
 }
 
 async function err(prog, files, { echo, snapshot } = {}) {
-  for (const file of fg.sync(files)) {
+  for (const file of await files_unfold(files)) {
     execute(`${prog} ${file}`).then(({ stdout, stderr }) => {
       const head = chalk.bold.red("[snapshot.err]")
       console.log(`${head} ${prog} ${file}`)
