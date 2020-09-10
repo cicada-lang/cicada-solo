@@ -1,13 +1,17 @@
 #!/usr/bin/env node
 
+const fg = require("fast-glob")
 const run = require("./scripts/run")
+const expect = require("./scripts/expect")
 const snapshot = require("./scripts/snapshot")
 require("./scripts/exit-on-unhandled-rejection")
 
 let dev = {}
 
 dev.lib = () => {
-  snapshot.out("node", "lib/**/*.test.js")
+  for (const file of fg.sync("lib/**/*.test.js")) {
+    expect.ok(`node ${file}`)
+  }
 }
 
 dev.lang0 = () => {
