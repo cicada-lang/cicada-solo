@@ -8,31 +8,31 @@ require("./scripts/exit-on-unhandled-rejection")
 
 let dev = {}
 
-dev.lib = () => {
+dev.t = () => {
+  dev.test_lib()
+  dev.test_lang0()
+  dev.test_lang1()
+  dev.test_lang2()
+}
+
+dev.test_lib = () => {
   for (const file of fg.sync("lib/**/*.test.js")) {
     expect.ok(`node ${file}`)
   }
 }
 
-dev.lang0 = () => {
+dev.test_lang0 = () => {
   snapshot.out("./bin/lang0.js", "tests/lang0/**.cic")
 }
 
-dev.lang1 = () => {
+dev.test_lang1 = () => {
   snapshot.out("./bin/lang1.js", "tests/lang1/**.cic")
   snapshot.err("./bin/lang1.js", "tests/lang1-error/**.cic")
 }
 
-dev.lang2 = () => {
+dev.test_lang2 = () => {
   snapshot.out("./bin/lang2.js", "tests/lang2/**.cic")
   snapshot.err("./bin/lang2.js", "tests/lang2-error/**.cic")
-}
-
-dev.t = () => {
-  dev.lib()
-  dev.lang0()
-  dev.lang1()
-  dev.lang2()
 }
 
 run(dev)
