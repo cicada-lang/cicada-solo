@@ -1,3 +1,12 @@
+# lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
+
+- 用 The Little Typer 作为 Pie 的测试。
+- implement List for lang2.
+- implement Vector for lang2.
+- test Equal of lang2.
+- test Pi of lang2.
+- test Absurd of lang2.
+
 # pt -- parsing techniques
 
 - start pt in cicada
@@ -12,15 +21,6 @@
 - [test] try examples in peg paper in parser generator
 - [test] x in x test
   - S <- "x" S "x" | "x"
-
-# lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
-
-- implement List for lang2.
-- implement Vector for lang2.
-- test Equal of lang2.
-- test Pi of lang2.
-- test Absurd of lang2.
-- 用 The Little Typer 作为 Pie 的测试。
 
 # lang3 -- lang1 + algebraic data type
 
