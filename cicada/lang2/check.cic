@@ -3,16 +3,16 @@
 @judgment Check(ctx: Map(String, Value), exp: Exp, t: Value) {
   Check(ctx, Exp.v(name), t)
   -------------------------------- v
-  lookup: Map.Lookup(ctx, name, t)
+  Map.Lookup(ctx, name, t)
 
   Check(ctx, Exp.pi(name, arg_t, ret_t), Value.type)
   -------------------------------------------------- pi
-  arg_ck: Check(ctx, arg_t, Value.type)
-  ret_ck: Check(Map.extend(ctx, name, Exp.evaluate(Ctx.to_env(ctx), arg_t)), ret_t, Value.type)
+  Check(ctx, arg_t, Value.type)
+  Check(Map.extend(ctx, name, Exp.evaluate(Ctx.to_env(ctx), arg_t)), ret_t, Value.type)
 
   Check(ctx, Exp.fn(name, ret), Value.pi(arg_t, ret_t_cl))
   ------------------------------------------------------- fn
-  ret_ck: Check(Map.extend(ctx, name, arg_t), ret, ret_t) @where {
+  Check(Map.extend(ctx, name, arg_t), ret, ret_t) @where {
     arg = Value.reflection(arg_t, Neutral.v(name))
     ret_t = Closure.apply(ret_t_cl, arg)
   }
@@ -21,6 +21,6 @@
   // - Maybe we should match what we can, and use Value.equal for what we can not match.
   Check(ctx, Exp.ap(target, arg), Closure.apply(ret_t_cl, Exp.evaluate(Ctx.to_env(ctx), arg)))
   -------------------------------------- ap
-  target_ck: Check(ctx, target, Value.pi(arg_t, ret_t_cl))
-  arg_ck: Check(ctx, arg, arg_t)
+  Check(ctx, target, Value.pi(arg_t, ret_t_cl))
+  Check(ctx, arg, arg_t)
 }
