@@ -99,11 +99,6 @@ const sentence = "A ticket to 大阪 costs ¥2000 👌."
   )
 
   assert(
-    ut.equal(chinese_text.match(/\p{Punctuation}+/gu), [
-      "，",
-      "，",
-      "，",
-      "。",
-    ])
+    ut.equal(chinese_text.match(/\p{Punctuation}+/gu), ["，", "，", "，", "。"])
   )
 }

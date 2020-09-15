@@ -60,7 +60,7 @@
 
 # cicada -- fulfilling type
 
-- user story
+- user story -- 这里描述的其实是需求，而不是 story
   - 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
   - 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
 - 填充类型（Fulfilling type）的推演规则。

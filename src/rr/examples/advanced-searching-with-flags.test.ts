@@ -17,10 +17,16 @@ assert(ut.equal(results, ["fee ", "fi ", "fo "]))
 
 {
   let results: null | RegExpExecArray = null
-  console.log("// IMPRESSION `re.exec` will do side effect on `re.lastIndex`")
+  let indexes = []
+
+  // NOTE `re.exec` will do side effect on `re.lastIndex`
+
   do {
     results = re.exec(str)
-    console.log("results   :", results)
-    console.log("lastIndex :", re.lastIndex)
+    if (results) {
+      indexes.push(re.lastIndex)
+    }
   } while (results)
+
+  ut.assert_equal(indexes, [4, 8, 12])
 }

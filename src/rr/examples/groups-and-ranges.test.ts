@@ -59,14 +59,19 @@ import * as ut from "../../ut"
     rr.flags.global + rr.flags.multiline
   )
 
-  let results = null
+  {
+    const results = names.exec(persons)
+    if (results === null) throw new Error()
+    const [_, first_name, last_name] = results
+    ut.assert_equal([first_name, last_name], ["John", "Doe"])
+  }
 
-  console.log("// IMPRESSION Using groups")
-
-  do {
-    results = names.exec(persons)
-    console.log(results && `Hello ${results[1]} ${results[2]}`)
-  } while (results)
+  {
+    const results = names.exec(persons)
+    if (results === null) throw new Error()
+    const [_, first_name, last_name] = results
+    ut.assert_equal([first_name, last_name], ["Jane", "Smith"])
+  }
 }
 
 {
@@ -87,16 +92,23 @@ import * as ut from "../../ut"
     rr.flags.global + rr.flags.multiline
   )
 
-  let results = null
+  {
+    const results = names.exec(persons)
+    if (results && results.groups) {
+      ut.assert_equal(results.groups.first_name, "John")
+      ut.assert_equal(results.groups.last_name, "Doe")
+    } else {
+      throw new Error()
+    }
+  }
 
-  console.log("// IMPRESSION Using named groups")
-
-  do {
-    results = names.exec(persons)
-    console.log(
-      results &&
-        results.groups &&
-        `Hello ${results.groups.first_name} ${results.groups.last_name}`
-    )
-  } while (results)
+  {
+    const results = names.exec(persons)
+    if (results && results.groups) {
+      ut.assert_equal(results.groups.first_name, "Jane")
+      ut.assert_equal(results.groups.last_name, "Smith")
+    } else {
+      throw new Error()
+    }
+  }
 }
