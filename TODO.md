@@ -1,4 +1,3 @@
-- [TLT] 1. The More Things Change, the More They Stay the Same
 - [TLT] 2. Doin' What Comes Naturally
 - [TLT] 3. Eliminate All Natural Numbers!
 - [TLT] 4. Easy as Pie

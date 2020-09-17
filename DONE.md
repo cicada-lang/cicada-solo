@@ -1,3 +1,7 @@
+# [TLT] 1. The More Things Change, the More They Stay the Same
+
+- 完成：2020-09-17
+
 # use cicada to specify the inference rules of lang2
 
 - 完成：2020-09-02
