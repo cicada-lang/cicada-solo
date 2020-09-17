@@ -31,5 +31,6 @@
   _ = zero: Nat
   _ = same: Equal(Nat, 0, zero)
   _ = same: Equal(Nat, zero, 0)
-  _
+  one = add1(0)
+  one
 }
