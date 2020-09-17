@@ -18,15 +18,6 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
-# lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
-
-- implement List for lang2.
-- implement Vector for lang2.
-
-- test Equal of lang2.
-- test Pi of lang2.
-- test Absurd of lang2.
-
 # pt -- parsing techniques
 
 - start pt in cicada
@@ -41,6 +32,25 @@
 - [test] try examples in peg paper in parser generator
 - [test] x in x test
   - S <- "x" S "x" | "x"
+
+# lang0 -- church-encoding
+
+- church-boolean.cic
+- church-numeral-predicates.cle
+- church-pair.cic
+- 直接用 Church numeral 来实现 Nat，而不用 ADT。
+  其语义是迭代函数，也许有有趣的应用
+  多了一个关于迭代函数的 API。
+
+# lang1 -- Play with systemt
+# lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
+
+- implement List for lang2.
+- implement Vector for lang2.
+
+- test Equal of lang2.
+- test Pi of lang2.
+- test Absurd of lang2.
 
 # lang3 -- lang1 + algebraic data type
 
@@ -59,17 +69,7 @@
 - 归纳类型（Inductive type）的推演规则。
   - Only one abstraction away.
 
-# lang1 -- Play with systemt
-
-# lang0 -- church-encoding
-
-- church-boolean.cic
-- church-numeral-predicates.cle
-- church-pair.cic
-- 直接用 Church numeral 来实现 Nat，而不用 ADT。
-  其语义是迭代函数，也许有有趣的应用
-  多了一个关于迭代函数的 API。
-
+# lang6 -- 重新实现 cicada-structural-typing
 # syntax
 
 - (claim) and (define) as two part of a code block.
