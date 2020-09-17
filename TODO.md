@@ -1,8 +1,24 @@
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
 
-- a REPL for lang2
-
-- 用 The Little Typer 作为 Pie 的测试。
+- [TLT] 1. The More Things Change, the More They Stay the Same
+- [TLT] 2. Doin' What Comes Naturally
+- [TLT] 3. Eliminate All Natural Numbers!
+- [TLT] 4. Easy as Pie
+- [TLT] 5. Lists, Lists, and More Lists
+- [TLT] 6. Precisely How Many?
+- [TLT] 7. It All Depends On the Motive
+- [TLT] Recess: One Piece at a Time
+- [TLT] 8. Pick a Number, Any Number
+- [TLT] 9. Double Your Money, Get Twice as Much
+- [TLT] 10. It Also Depends On the List
+- [TLT] 11. All Lists Are Created Equal
+- [TLT] 12. Even Numbers Can Be Odd
+- [TLT] 13. Even Haf a Baker's Dozen
+- [TLT] 14. There's Safety in Numbers
+- [TLT] 15. Imagine That ...
+- [TLT] 16. If It's All the Same to You
+- [TLT] A. The Way Forward
+- [TLT] B. Rules Are Made to Be Spoken
 
 - implement List for lang2.
 - implement Vector for lang2.
