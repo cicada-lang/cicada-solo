@@ -4,9 +4,9 @@ A nascent programming language as formal deduction system for the foundations of
 
 ## References
 
-- [How I became interested in foundations of mathematics](https://xyheme.gitee.io/inner/person/vladimir-voevodsky/how-i-became-interested-in-foundations-of-mathematics.md.html)
+- [How I became interested in foundations of mathematics](https://inner.xieyuheng.vercel.app/person/vladimir-voevodsky/how-i-became-interested-in-foundations-of-mathematics.md.html)
   - by Vladimir Voevodsky, at the 9th Asian Science Camp, Thailand, 2015
-- [Lecture about Univalent Foundations at the Institut Henri Poincaré](https://xyheme.gitee.io/inner/person/vladimir-voevodsky/lecture-about-univalent-foundations-at-the-institut-henri-poincar%C3%A9.md.html)
+- [Lecture about Univalent Foundations at the Institut Henri Poincaré](https://inner.xieyuheng.vercel.app/person/vladimir-voevodsky/lecture-about-univalent-foundations-at-the-institut-henri-poincar%C3%A9.md.html)
   - by Vladimir Voevodsky, at the Institut Henri Poincaré, 2014
 
 ## Community
