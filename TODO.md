@@ -1,8 +1,12 @@
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
 
+- a REPL for lang2
+
 - 用 The Little Typer 作为 Pie 的测试。
+
 - implement List for lang2.
 - implement Vector for lang2.
+
 - test Equal of lang2.
 - test Pi of lang2.
 - test Absurd of lang2.
