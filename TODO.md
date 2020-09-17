@@ -1,4 +1,5 @@
 - [TLT] 1. The More Things Change, the More They Stay the Same
+- use native `number` as `Nat`.
 - [TLT] 2. Doin' What Comes Naturally
 - [TLT] 3. Eliminate All Natural Numbers!
 - [TLT] 4. Easy as Pie
@@ -20,7 +21,7 @@
 
 # pt -- parsing techniques
 
-- start pt in cicada
+- pt in cicada
   - a version of partech that use env -- still embedded in js
 - theory of CFG
   - parsing machine v.s. CFG derivation v.s. recursive descent
@@ -33,6 +34,20 @@
 - [test] x in x test
   - S <- "x" S "x" | "x"
 
+# pc -- parser combinator
+
+- to write fast parsers -- like write parser by hand.
+
+# re-design the syntax
+
+- always use `@` keywords.
+
+- two part of a code block.
+  ``` cicada
+  @affirm f : A
+  @define f = a
+  ```
+
 # lang0 -- church-encoding
 
 - church-boolean.cic
@@ -43,6 +58,7 @@
   多了一个关于迭代函数的 API。
 
 # lang1 -- Play with systemt
+
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
 
 - implement List for lang2.
@@ -52,9 +68,11 @@
 - test Pi of lang2.
 - test Absurd of lang2.
 
-# lang3 -- lang1 + algebraic data type
+# lang3 -- 重新实现 cicada-structural-typing
 
-# lang4 -- wissen
+# langx -- lang1 + algebraic data type
+
+# langx -- wissen
 
 - learn from "Computation and Deduction" and Logic framework
   - Run datatype definition as logic programs.
@@ -64,23 +82,14 @@
   because the aim of split one judgment `:` to two judgments `=>` and `<=`,
   is to avoid searching, and making the group of inference rules deterministic.
 
-# lang5 -- lang2 + inductive data type
+# langx -- lang2 + inductive data type
 
 - 归纳类型（Inductive type）的推演规则。
   - Only one abstraction away.
 
-# lang6 -- 重新实现 cicada-structural-typing
-# syntax
-
-- (claim) and (define) as two part of a code block.
-  ```
-  f : A
-  f = a
-  ```
-
 # cicada -- fulfilling type
 
-- user story -- 这里描述的其实是需求，而不是 story
+- 需求：
   - 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
   - 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
 - 填充类型（Fulfilling type）的推演规则。
