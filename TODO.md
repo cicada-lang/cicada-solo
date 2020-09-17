@@ -1,5 +1,3 @@
-# lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
-
 - [TLT] 1. The More Things Change, the More They Stay the Same
 - [TLT] 2. Doin' What Comes Naturally
 - [TLT] 3. Eliminate All Natural Numbers!
@@ -19,6 +17,8 @@
 - [TLT] 16. If It's All the Same to You
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
+
+# lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
 
 - implement List for lang2.
 - implement Vector for lang2.
