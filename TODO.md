@@ -1,5 +1,4 @@
 - [TLT] 1. The More Things Change, the More They Stay the Same
-- use native `number` as `Nat`.
 - [TLT] 2. Doin' What Comes Naturally
 - [TLT] 3. Eliminate All Natural Numbers!
 - [TLT] 4. Easy as Pie
@@ -64,9 +63,13 @@
 - implement List for lang2.
 - implement Vector for lang2.
 
+- 如何对某一个类型以及相关的 Exp 作出充分的测试？
+
 - test Equal of lang2.
 - test Pi of lang2.
 - test Absurd of lang2.
+
+- use native `number` as `Nat`.
 
 # lang3 -- 重新实现 cicada-structural-typing
 
