@@ -22,8 +22,10 @@
 
 # pt -- parsing techniques
 
+- `pt/den` instead of `pt/stmt`
 - `pt/env`
-- `pt/stmt/stmt-execute.ts`
+- `pt/exp/exp-present`
+- `pt/exp/exp-create` -- from `present`
 - `pt/tree`
 - [parsing machine] change earley to use ordered choice
 - [parsing machine] change earley to use intersection
