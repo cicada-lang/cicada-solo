@@ -22,9 +22,8 @@
 
 # pt -- parsing techniques
 
-- fix `pt/den`
-- `pt/env`
 - `pt/mod` -- for top level recursive binding
+- pattern as `Exp` and `Value`
 - `pt/exp-evaluate`
 - `pt/exp/exp-present`
 - `pt/exp/exp-create` -- from `present`

@@ -1,3 +1,3 @@
-import * as Den from "../den"
+import * as Value from "../value"
 
-export type Env = Map<string, Den.Den>
+export type Env = Map<string, Value.Value>

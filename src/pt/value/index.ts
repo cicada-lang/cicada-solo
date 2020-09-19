@@ -1,1 +1,1 @@
-export * as Value from "./value"
+export * from "./value"
