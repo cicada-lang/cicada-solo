@@ -22,10 +22,30 @@
 
 # pt -- parsing techniques
 
-- pattern as `Exp` and `Value`
+- function application should always bind name to array of args.
+  ```
+  // fn
+  one_or_more = (x) => {
+    one_or_more:one -> (value: x)
+    one_or_more:more -> (head: x) (tail: one_or_more(x))
+  }
+
+  // ap
+  one_or_more("(" x ")")
+
+  // result
+  {
+    one_or_more:one -> "(" (value: x) ")"
+    one_or_more:more -> "(" (head: x) ")" (tail: one_or_more("(" x ")"))
+  }
+  ```
+
 - `pt/exp-evaluate`
+- pattern as `Exp` and `Value`
+
+- `pt/exp/exp-create` -- from `present` -- to avoid a parse
 - `pt/exp/exp-present`
-- `pt/exp/exp-create` -- from `present`
+
 - [parsing machine] change earley to use ordered choice
 - [parsing machine] change earley to use intersection
 - [test] try examples in peg paper in parser generator
