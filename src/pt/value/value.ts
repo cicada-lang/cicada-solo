@@ -36,31 +36,8 @@ export const gr = (name: string, choices: Array<Choice>): gr => ({
 
 interface Choice {
   name: string
-  parts: Array<Part>
-}
-
-type Part = drop | pick
-
-interface drop {
-  kind: "Part.drop"
-  value: Value
-}
-
-interface pick {
-  kind: "Part.pick"
-  name: string
-  value: Value
-}
-
-export const part = {
-  drop: (value: Value): drop => ({
-    kind: "Part.drop",
-    value,
-  }),
-
-  pick: (name: string, value: Value): pick => ({
-    kind: "Part.pick",
-    name,
-    value,
-  }),
+  parts: Array<{
+    name?: string
+    value: Value
+  }>
 }
