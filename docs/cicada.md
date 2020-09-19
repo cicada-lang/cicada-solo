@@ -64,3 +64,7 @@
   - 并且同一个 module 中的 binding，
     即使被分散到了不同文件中，
     也可以相互递归引用。
+
+- 同一个模块中的不同文件之间可以相互调用，不再需要 import，比如 `@module lang2`。
+  因此可以用带有 `@module lang2` 的 `dependencies.cic` 文件，
+  来集中 import （用 `@export` 来 re-export）所有依赖。

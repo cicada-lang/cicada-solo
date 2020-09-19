@@ -1,1 +1,3 @@
+@module lang2
+
 @export datatype.Map

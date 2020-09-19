@@ -1,3 +1,5 @@
+@module datatype
+
 // in natural deduction:
 
 @datatype Pair(A: Type, B: Type) {

@@ -1,3 +1,5 @@
+@module datatype
+
 // Why it is easier to prove the existence of normal forms in sequent calculus than natural deduction.
 
 // Every elimination rule in natural deduction are synthetic,

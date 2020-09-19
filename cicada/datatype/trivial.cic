@@ -1,4 +1,4 @@
-@import datatype
+@module datatype
 
 @datatype Trivial {
   sole: Trivial
