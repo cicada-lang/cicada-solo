@@ -16,10 +16,10 @@ interface ap {
   kind: "Sym.ap"
   target: Sym
   args: Array<Sym>
-  main: Sym
+  main: NonTerminal
 }
 
-export const ap = (target: Sym, args: Array<Sym>, main: Sym): ap => ({
+export const ap = (target: Sym, args: Array<Sym>, main: NonTerminal): ap => ({
   kind: "Sym.ap",
   target,
   args,
