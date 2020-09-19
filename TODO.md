@@ -22,6 +22,7 @@
 
 # pt -- parsing techniques
 
+- `pt/mod` -- for top level recursive binding
 - `pt/env`
 - `pt/value`
 - `pt/exp/exp-present`

@@ -13,7 +13,7 @@ export function repr(sym: Sym.Sym): string {
       const body = args.map(repr).join(" ")
         return head + "(" + body + ")"
     }
-    case "Sym.lit": {
+    case "Sym.str": {
       const { value } = sym
       return JSON.stringify(value)
     }

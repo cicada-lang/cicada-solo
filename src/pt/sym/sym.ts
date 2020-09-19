@@ -1,5 +1,5 @@
 export type Sym = Terminal | NonTerminal
-export type Terminal = lit
+export type Terminal = str
 export type NonTerminal = v | ap
 
 interface v {
@@ -26,12 +26,12 @@ export const ap = (target: Sym, args: Array<Sym>, main: NonTerminal): ap => ({
   main,
 })
 
-interface lit {
-  kind: "Sym.lit"
+interface str {
+  kind: "Sym.str"
   value: string
 }
 
-export const lit = (value: string): lit => ({
-  kind: "Sym.lit",
+export const str = (value: string): str => ({
+  kind: "Sym.str",
   value,
 })
