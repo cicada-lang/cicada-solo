@@ -22,13 +22,9 @@
 
 # pt -- parsing techniques
 
-- pt in cicada
-  - a version of partech that use env -- still embedded in js
-- theory of CFG
-  - parsing machine v.s. CFG derivation v.s. recursive descent
-    - ixml: https://homepages.cwi.nl/~steven/ixml/
-    - CFG: https://en.wikipedia.org/wiki/Context-free_grammar
-    - ~/watching/computer-science/automata
+- `pt/env`
+- `pt/stmt/stmt-execute.ts`
+- `pt/sym/sym-repr.ts`
 - [parsing machine] change earley to use ordered choice
 - [parsing machine] change earley to use intersection
 - [test] try examples in peg paper in parser generator

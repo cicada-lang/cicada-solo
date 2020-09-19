@@ -1,27 +1,35 @@
-import * as Sym from "./sym"
+import * as Choice from "./choice"
 
 export type Stmt = gr | fn | token
 
 interface gr {
   kind: "Stmt.gr"
   name: string
-  // TODO
+  choices: Array<Choice.Choice>
 }
 
-export const gr = (name: string): gr => ({
+export const gr = (name: string, choices: Array<Choice.Choice>): gr => ({
   kind: "Stmt.gr",
   name,
+  choices,
 })
 
 interface fn {
   kind: "Stmt.fn"
   name: string
-  // TODO
+  arg_name: string
+  choices: Array<Choice.Choice>
 }
 
-export const fn = (name: string): fn => ({
+export const fn = (
+  name: string,
+  arg_name: string,
+  choices: Array<Choice.Choice>
+): fn => ({
   kind: "Stmt.fn",
   name,
+  arg_name,
+  choices,
 })
 
 interface token {
