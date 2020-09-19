@@ -22,7 +22,6 @@
 
 # pt -- parsing techniques
 
-- fix `Exp.fn`
 - `pt/env`
 - `pt/value`
 - `pt/exp/exp-present`
