@@ -22,11 +22,11 @@
 
 # pt -- parsing techniques
 
+- fix `Exp.fn`
 - `pt/env`
-- 
+- `pt/value`
 - `pt/exp/exp-present`
 - `pt/exp/exp-create` -- from `present`
-- `pt/tree`
 - [parsing machine] change earley to use ordered choice
 - [parsing machine] change earley to use intersection
 - [test] try examples in peg paper in parser generator
