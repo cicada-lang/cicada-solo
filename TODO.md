@@ -22,7 +22,6 @@
 
 # pt -- parsing techniques
 
-- `pt/den` instead of `pt/stmt`
 - `pt/env`
 - `pt/exp/exp-present`
 - `pt/exp/exp-create` -- from `present`
