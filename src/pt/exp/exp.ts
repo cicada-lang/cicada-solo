@@ -1,6 +1,6 @@
-export type Exp = Terminal | NonTerminal
-export type Terminal = str
-export type NonTerminal = v | ap
+import * as Choice from "./choice"
+
+export type Exp = str | v | ap | gr
 
 interface v {
   kind: "Exp.v"
@@ -16,14 +16,12 @@ interface ap {
   kind: "Exp.ap"
   target: Exp
   args: Array<Exp>
-  main: NonTerminal
 }
 
-export const ap = (target: Exp, args: Array<Exp>, main: NonTerminal): ap => ({
+export const ap = (target: Exp, args: Array<Exp>): ap => ({
   kind: "Exp.ap",
   target,
   args,
-  main,
 })
 
 interface str {
@@ -34,4 +32,16 @@ interface str {
 export const str = (value: string): str => ({
   kind: "Exp.str",
   value,
+})
+
+interface gr {
+  kind: "Exp.gr"
+  name: string
+  choices: Array<Choice.Choice>
+}
+
+export const gr = (name: string, choices: Array<Choice.Choice>): gr => ({
+  kind: "Exp.gr",
+  name,
+  choices,
 })

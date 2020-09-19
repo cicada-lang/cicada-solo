@@ -22,9 +22,11 @@
 
 # pt -- parsing techniques
 
+- `pt/value`
+- `pt/exp-evaluate`
 - `pt/mod` -- for top level recursive binding
 - `pt/env`
-- `pt/value`
+- no `pt/exp/exp-repr`
 - `pt/exp/exp-present`
 - `pt/exp/exp-create` -- from `present`
 - [parsing machine] change earley to use ordered choice

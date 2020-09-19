@@ -11,11 +11,15 @@ export function repr(exp: Exp.Exp): string {
       const { target, args } = exp
       const head = repr(target)
       const body = args.map(repr).join(" ")
-        return head + "(" + body + ")"
+      return head + "(" + body + ")"
     }
     case "Exp.str": {
       const { value } = exp
       return JSON.stringify(value)
+    }
+    case "Exp.gr": {
+      const { name, choices } = exp
+      return name + ""
     }
   }
 }

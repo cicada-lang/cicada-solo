@@ -7,7 +7,7 @@ and ignore other parts during collection.
 The named parts will be pick up into the resulting object.
 
 ```
-exp = {
+exp = @grammar exp {
   var -> (name: identifier)
   fn -> "(" (name: identifier) ")" "=>" (body: exp)
   ap -> (head: identifier) (tail: one_or_more("(" x ")"))
@@ -17,7 +17,7 @@ exp = {
 ## fn
 
 ```
-one_or_more = (x) => {
+one_or_more = (x) => @grammar one_or_more {
   one -> (value: x)
   more -> (head: x) (tail: one_or_more(x))
 }
