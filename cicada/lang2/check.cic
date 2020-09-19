@@ -23,4 +23,22 @@
   -------------------------------------- ap
   Check(ctx, target, Value.pi(arg_t, ret_t_cl))
   Check(ctx, arg, arg_t)
+
+  Check(ctx, Exp.sigma(name, car_t, cdr_t), Value.type)
+  -------------------------------------------------- sigma
+  Check(ctx, car_t, Value.type)
+  Check(Map.extend(ctx, name, Exp.evaluate(Ctx.to_env(ctx), car_t)), cdr_t, Value.type)
+
+  Check(ctx, Exp.cons(car, cdr), Value.sigma(car_t, cdr_t_cl))
+  ------------------------------------------------------- cons
+  Check(ctx, car, car_t)
+  Check(ctx, cdr, Closure.apply(cdr_t_cl, Exp.evaluate(Ctx.to_env(ctx), car)))
+
+  TODO
+  ------------------------------ car
+  TODO
+
+  TODO
+  ------------------------------ cdr
+  TODO
 }

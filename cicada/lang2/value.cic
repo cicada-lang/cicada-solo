@@ -7,8 +7,10 @@
 @datatype Value {
   pi(arg_t: Value, closure: Closure): Value
   fn(closure: Closure): Value
-  // | sigma
-  // | cons
+
+  sigma(car_t: Value, closure: Closure): Value
+  cons(car: Value, cdr: Value): Value
+
   // | nat
   // | zero
   // | add1
@@ -19,14 +21,21 @@
   // | absurd
   // | str
   // | quote
+
   type: Value
+
   reflection(t: Value, neutral: Neutral): Value
 }
 
 @datatype Neutral {
   v(name: String): Neutral
+
   ap(target: Neutral, arg: Normal): Neutral
-  // | car | cdr | nat_ind | replace | absurd_ind
+
+  car(target: Neutral): Neutral
+  cdr(target: Neutral): Neutral
+
+  // | nat_ind | replace | absurd_ind
 }
 
 @datatype Normal {

@@ -1,4 +1,6 @@
 - [TLT] 2. Doin' What Comes Naturally
+- [lang2] check car and cdr
+- [lang3] draft check and infer
 - [TLT] 3. Eliminate All Natural Numbers!
 - [TLT] 4. Easy as Pie
 - [TLT] 5. Lists, Lists, and More Lists
