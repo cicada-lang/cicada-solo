@@ -1,6 +1,7 @@
 import * as Exp from "../exp"
 import pt from "@forchange/partech"
 import * as rr from "../../rr"
+import { nanoid } from "nanoid"
 
 const preserved_identifiers = [
   "Pair",
@@ -72,8 +73,8 @@ function type_assignment_matcher(
 export function exp(): pt.Sym.Rule {
   return pt.Sym.create_rule("exp", {
     var: [identifier],
-    pi: ["(", comma_separated(type_assignment), ")", "-", ">", exp],
-    fn: ["(", comma_separated(identifier), ")", "=", ">", exp],
+    pi: ["(", type_assignment, ")", "-", ">", exp],
+    fn: ["(", identifier, ")", "=", ">", exp],
     ap: [
       identifier,
       pt.one_or_more(in_between("(", comma_separated(exp), ")")),
@@ -108,26 +109,16 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     var: ([name]) => {
       return Exp.v(pt.Tree.token(name).value)
     },
-    pi: ([, comma_separated_type_assignments, , , , ret_t]) => {
-      const type_assignments = comma_separated_matcher(type_assignment_matcher)(
-        comma_separated_type_assignments
-      )
-      let exp = exp_matcher(ret_t)
-      for (let i = type_assignments.length - 1; i >= 0; i--) {
-        exp = Exp.pi(type_assignments[i].name, type_assignments[i].t, exp)
-      }
-      return exp
+    pi: ([, type_assignment, , , , ret_t]) => {
+      const { name, t } = type_assignment_matcher(type_assignment)
+      return Exp.pi(name, t, exp_matcher(ret_t))
     },
-    fn: ([, comma_separated_names, , , , ret]) => {
-      const names = comma_separated_matcher(
-        (name) => pt.Tree.token(name).value
-      )(comma_separated_names)
-      let exp = exp_matcher(ret)
-      for (let i = names.length - 1; i >= 0; i--) {
-        exp = Exp.fn(names[i], exp)
-      }
-      return exp
+    fn: ([, name, , , , ret]) => {
+      return Exp.fn(pt.Tree.token(name).value, exp_matcher(ret))
     },
+    // ap: ([name, , exp]) => {
+    //   return Exp.ap(Exp.v(pt.Tree.token(name).value), exp_matcher(exp))
+    // },
     ap: ([name, exp_in_paren_list]) => {
       let exp: Exp.Exp = Exp.v(pt.Tree.token(name).value)
       const args_list = pt.one_or_more_matcher(

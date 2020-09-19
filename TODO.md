@@ -1,3 +1,4 @@
+- [lang2] implement `Pair` and `Arrow` directly
 - [TLT] 2. Doin' What Comes Naturally
 - [lang2] check car and cdr
 - [lang3] draft check and infer
