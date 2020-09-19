@@ -24,7 +24,7 @@
 
 - `pt/env`
 - `pt/stmt/stmt-execute.ts`
-- `pt/sym/sym-repr.ts`
+- `pt/tree`
 - [parsing machine] change earley to use ordered choice
 - [parsing machine] change earley to use intersection
 - [test] try examples in peg paper in parser generator

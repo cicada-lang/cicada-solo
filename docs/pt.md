@@ -54,23 +54,31 @@ ADT decorated by terminals and ignored non-terminals.
 
 ```
 {
-  $name: one_or_more,
-  $kind: one,
-  value: "f"
+  name: one_or_more,
+  kind: one,
+  body: {
+    value: "f"
+  }
 }
 
 {
-  $name: one_or_more,
-  $kind: more,
-  head: "f",
-  tail: {
-    $name: one_or_more,
-    $kind: more,
+  name: one_or_more,
+  kind: more,
+  body: {
     head: "f",
     tail: {
-      $name: one_or_more,
-      $kind: one,
-      value: "f"
+      name: one_or_more,
+      kind: more,
+      body: {
+        head: "f",
+        tail: {
+          name: one_or_more,
+          kind: one,
+          body: {
+            value: "f"
+          }
+        }
+      }
     }
   }
 }
