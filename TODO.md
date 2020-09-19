@@ -35,10 +35,6 @@
 - [test] x in x test
   - S <- "x" S "x" | "x"
 
-# pc -- parser combinator
-
-- to write fast parsers -- like write parser by hand.
-
 # re-design the syntax
 
 - always use `@` keywords.
