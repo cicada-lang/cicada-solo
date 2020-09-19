@@ -1,13 +1,13 @@
-import * as Sym from "../sym"
+import * as Exp from "../exp"
 
 export type Part = drop | pick
 
 interface drop {
   kind: "Part.drop"
-  value: Sym.Sym
+  value: Exp.Exp
 }
 
-export const drop = (value: Sym.Sym): drop => ({
+export const drop = (value: Exp.Exp): drop => ({
   kind: "Part.drop",
   value,
 })
@@ -15,10 +15,10 @@ export const drop = (value: Sym.Sym): drop => ({
 interface pick {
   kind: "Part.pick"
   name: string
-  value: Sym.Sym
+  value: Exp.Exp
 }
 
-export const pick = (name: string, value: Sym.Sym): pick => ({
+export const pick = (name: string, value: Exp.Exp): pick => ({
   kind: "Part.pick",
   name,
   value,
