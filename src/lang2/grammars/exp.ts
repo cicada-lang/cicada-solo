@@ -1,7 +1,6 @@
 import * as Exp from "../exp"
 import pt from "@forchange/partech"
 import * as rr from "../../rr"
-import { nanoid } from "nanoid"
 
 const preserved_identifiers = [
   "Pair",
