@@ -1,25 +1,25 @@
 import * as Exp from "../exp"
 
-export type Part = exp | bind
+export type Part = drop | pick
 
-interface exp {
-  kind: "Part.exp"
+interface drop {
+  kind: "Part.drop"
   value: Exp.Exp
 }
 
-export const exp = (value: Exp.Exp): exp => ({
-  kind: "Part.exp",
+export const drop = (value: Exp.Exp): drop => ({
+  kind: "Part.drop",
   value,
 })
 
-interface bind {
-  kind: "Part.bind"
+interface pick {
+  kind: "Part.pick"
   name: string
   value: Exp.Exp
 }
 
-export const bind = (name: string, value: Exp.Exp): bind => ({
-  kind: "Part.bind",
+export const pick = (name: string, value: Exp.Exp): pick => ({
+  kind: "Part.pick",
   name,
   value,
 })
