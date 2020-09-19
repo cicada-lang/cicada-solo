@@ -22,10 +22,10 @@
 
 # pt -- parsing techniques
 
-- `pt/value`
-- `pt/exp-evaluate`
-- `pt/mod` -- for top level recursive binding
+- fix `pt/den`
 - `pt/env`
+- `pt/mod` -- for top level recursive binding
+- `pt/exp-evaluate`
 - `pt/exp/exp-present`
 - `pt/exp/exp-create` -- from `present`
 - [parsing machine] change earley to use ordered choice
