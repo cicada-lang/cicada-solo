@@ -1,5 +1,3 @@
-import * as Choice from "./choice"
-
 export type Exp = str | v | ap | gr
 
 interface v {
@@ -37,11 +35,42 @@ export const str = (value: string): str => ({
 interface gr {
   kind: "Exp.gr"
   name: string
-  choices: Array<Choice.Choice>
+  choices: Array<Choice>
 }
 
-export const gr = (name: string, choices: Array<Choice.Choice>): gr => ({
+export const gr = (name: string, choices: Array<Choice>): gr => ({
   kind: "Exp.gr",
   name,
   choices,
 })
+
+interface Choice {
+  name: string
+  parts: Array<Part>
+}
+
+type Part = drop | pick
+
+interface drop {
+  kind: "Part.drop"
+  value: Exp
+}
+
+interface pick {
+  kind: "Part.pick"
+  name: string
+  value: Exp
+}
+
+export const part = {
+  drop: (value: Exp): drop => ({
+    kind: "Part.drop",
+    value,
+  }),
+
+  pick: (name: string, value: Exp): pick => ({
+    kind: "Part.pick",
+    name,
+    value,
+  }),
+}
