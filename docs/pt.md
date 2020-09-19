@@ -7,19 +7,19 @@ and ignore other parts during collection.
 The named parts will be pick up into the resulting object.
 
 ```
-exp = @grammar exp {
-  var -> (name: identifier)
-  fn -> "(" (name: identifier) ")" "=>" (body: exp)
-  ap -> (head: identifier) (tail: one_or_more("(" x ")"))
+exp = {
+  exp:var -> (name: identifier)
+  exp:fn -> "(" (name: identifier) ")" "=>" (body: exp)
+  exp:ap -> (head: identifier) (tail: one_or_more("(" x ")"))
 }
 ```
 
 ## fn
 
 ```
-one_or_more = (x) => @grammar one_or_more {
-  one -> (value: x)
-  more -> (head: x) (tail: one_or_more(x))
+one_or_more = (x) => {
+  one_or_more:one -> (value: x)
+  one_or_more:more -> (head: x) (tail: one_or_more(x))
 }
 ```
 
@@ -38,8 +38,8 @@ one_or_more("(" x ")")
 
 ```
 {
-  one -> "(" (value: x) ")"
-  more -> "(" (head: x) ")" (tail: one_or_more("(" x ")"))
+  one_or_more:one -> "(" (value: x) ")"
+  one_or_more:more -> "(" (head: x) ")" (tail: one_or_more("(" x ")"))
 }
 ```
 
