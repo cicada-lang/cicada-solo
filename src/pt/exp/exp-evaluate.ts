@@ -25,6 +25,10 @@ export function evaluate(
       const { value } = exp
       return new Array(Value.str(value))
     }
+    case "Exp.pattern": {
+      const { label, value } = exp
+      return new Array(Value.pattern(label, value))
+    }
     case "Exp.gr": {
       throw new Error()
     }

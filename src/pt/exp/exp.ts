@@ -1,4 +1,4 @@
-export type Exp = v | fn | ap | str | gr
+export type Exp = v | fn | ap | str | pattern | gr
 
 interface v {
   kind: "Exp.v"
@@ -41,6 +41,18 @@ interface str {
 
 export const str = (value: string): str => ({
   kind: "Exp.str",
+  value,
+})
+
+interface pattern {
+  kind: "Exp.pattern"
+  label: string
+  value: RegExp
+}
+
+export const pattern = (label: string, value: RegExp): pattern => ({
+  kind: "Exp.pattern",
+  label,
   value,
 })
 
