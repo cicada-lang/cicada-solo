@@ -47,19 +47,16 @@ export const str = (value: string): str => ({
 interface gr {
   kind: "Exp.gr"
   name: string
-  choices: Array<Choice>
+  choices: Map<string, Array<Part>>
 }
 
-export const gr = (name: string, choices: Array<Choice>): gr => ({
+type Part = {
+  name?: string
+  value: Exp
+}
+
+export const gr = (name: string, choices: Map<string, Array<Part>>): gr => ({
   kind: "Exp.gr",
   name,
   choices,
 })
-
-interface Choice {
-  name: string
-  parts: Array<{
-    name?: string
-    value: Exp
-  }>
-}

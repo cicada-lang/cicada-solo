@@ -1,6 +1,6 @@
 - [TLT] 2. Doin' What Comes Naturally
 - [lang2] implement `Pair` and `Arrow` directly
-- [lang2] check car and cdr
+- [lang2] draft check car and cdr
 - [lang3] draft check and infer
 - [TLT] 3. Eliminate All Natural Numbers!
 - [TLT] 4. Easy as Pie
@@ -22,26 +22,8 @@
 
 # pt -- parsing techniques
 
-- function application should always bind name to array of args.
-  ```
-  // fn
-  one_or_more = (x) => {
-    one_or_more:one -> (value: x)
-    one_or_more:more -> (head: x) (tail: one_or_more(x))
-  }
-
-  // ap
-  one_or_more("(" x ")")
-
-  // result
-  {
-    one_or_more:one -> "(" (value: x) ")"
-    one_or_more:more -> "(" (head: x) ")" (tail: one_or_more("(" x ")"))
-  }
-  ```
-
 - `pt/exp-evaluate`
-- pattern as `Exp` and `Value`
+- pattern (regexp pattern of token) as `Exp` and `Value`
 
 - `pt/exp/exp-create` -- from `present` -- to avoid a parse
 - `pt/exp/exp-present`
