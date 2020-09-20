@@ -11,7 +11,12 @@ export function evaluate(
 ): Array<Value.Value> {
   switch (exp.kind) {
     case "Exp.v": {
-      throw new Error()
+      const { name } = exp
+      return lookup(mod, env, name, {
+        on_not_found: () => {
+          throw new Error(`undefined name: ${name}`)
+        },
+      })
     }
     case "Exp.fn": {
       const { name, ret } = exp
@@ -30,7 +35,47 @@ export function evaluate(
       return new Array(Value.pattern(label, value))
     }
     case "Exp.gr": {
-      throw new Error()
+      const choices = new Map()
+      for (const [name, parts] of exp.choices) {
+        type Part = { name?: string; value: Value.Value }
+        const new_parts: Array<Part> = new Array()
+        for (const part of parts) {
+          if (part.name) {
+            for (const value of evaluate(mod, env, part.value)) {
+              if (pickup_p(value)) {
+                new_parts.push({ name: part.name, value })
+              } else {
+                new_parts.push({ value })
+              }
+            }
+          } else {
+            for (const value of evaluate(mod, env, part.value)) {
+              new_parts.push({ value })
+            }
+          }
+        }
+        choices.set(name, new_parts)
+      }
+      return new Array(Value.gr(exp.name, choices))
     }
   }
+}
+
+function pickup_p(value: Value.Value): boolean {
+  return value.kind === "Value.gr" || value.kind === "Value.pattern"
+}
+
+function lookup(
+  mod: Mod.Mod,
+  env: Env.Env,
+  name: string,
+  opts: {
+    on_not_found: () => never
+  }
+): Array<Value.Value> {
+  const values = env.get(name)
+  if (values) return values
+  const exp = mod.get(name)
+  if (exp) return evaluate(mod, env, exp)
+  opts.on_not_found()
 }
