@@ -3,6 +3,7 @@ import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Closure from "../closure"
+import * as ut from "../../ut"
 
 export function evaluate(
   mod: Mod.Mod,
@@ -24,7 +25,15 @@ export function evaluate(
       return new Array(Value.fn(ret_cl))
     }
     case "Exp.ap": {
-      throw new Error()
+      const result = evaluate(mod, env, exp.target)
+      if (result.length !== 1)
+        throw new Error(
+          `target of Exp.ap should evaluates only one value.\n` +
+            `target: ${ut.inspect(exp.target)}\n`
+        )
+      const target = result[0]
+      const args = exp.args.flatMap((arg) => evaluate(mod, env, arg))
+      return do_ap(target, args)
     }
     case "Exp.str": {
       const { value } = exp
@@ -72,4 +81,14 @@ function lookup(
   const exp = mod.get(name)
   if (exp) return evaluate(mod, env, exp)
   opts.on_not_found()
+}
+
+function do_ap(target: Value.Value, args: Array<Value.Value>): Array<Value.Value> {
+  if (target.kind === "Value.fn") {
+    return Closure.apply(target.ret_cl, args)
+  } else {
+    throw new Error(
+      `expecting target to be Value.fn\n` + `target: ${ut.inspect(target)}\n`
+    )
+  }
 }
