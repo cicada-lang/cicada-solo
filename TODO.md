@@ -22,7 +22,6 @@
 
 # pt -- parsing techniques
 
-- `pt/exp/exp-evaluate` -- gr -- refactor
 - `pt/exp/exp-evaluate` -- ap
 - `pt/exp/exp-create` -- from `present` -- to avoid a parse
 - `pt/exp/exp-present`

@@ -35,35 +35,29 @@ export function evaluate(
       return new Array(Value.pattern(label, value))
     }
     case "Exp.gr": {
-      const choices = new Map()
+      const new_choices = new Map()
       for (const [name, parts] of exp.choices) {
-        type Part = { name?: string; value: Value.Value }
-        const new_parts: Array<Part> = new Array()
-        for (const part of parts) {
-          if (part.name) {
-            for (const value of evaluate(mod, env, part.value)) {
-              if (pickup_p(value)) {
-                new_parts.push({ name: part.name, value })
-              } else {
-                new_parts.push({ value })
-              }
-            }
-          } else {
-            for (const value of evaluate(mod, env, part.value)) {
-              new_parts.push({ value })
-            }
-          }
-        }
-        choices.set(name, new_parts)
+        new_choices.set(
+          name,
+          parts.flatMap((part) => evaluate_part(mod, env, part))
+        )
       }
-      return new Array(Value.gr(exp.name, choices))
+      return new Array(Value.gr(exp.name, new_choices))
     }
   }
 }
 
-function pickup_p(value: Value.Value): boolean {
-  return value.kind === "Value.gr" || value.kind === "Value.pattern"
-}
+const evaluate_part = (
+  mod: Mod.Mod,
+  env: Env.Env,
+  part: { name?: string; value: Exp.Exp }
+) =>
+  evaluate(mod, env, part.value).map((value) =>
+    part.name && pickup_p(value) ? { value, name: part.name } : { value }
+  )
+
+const pickup_p = (value: Value.Value) =>
+  value.kind === "Value.gr" || value.kind === "Value.pattern"
 
 function lookup(
   mod: Mod.Mod,
