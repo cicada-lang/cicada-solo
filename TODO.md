@@ -22,9 +22,8 @@
 
 # pt -- parsing techniques
 
-- `pt/exp-evaluate`
 - pattern (regexp pattern of token) as `Exp` and `Value`
-
+- `pt/exp/exp-evaluate` -- v, gr, ap
 - `pt/exp/exp-create` -- from `present` -- to avoid a parse
 - `pt/exp/exp-present`
 
