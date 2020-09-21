@@ -22,7 +22,7 @@
 
 # pt -- parsing techniques
 
-- `pt/exp/exp-present` -- design the `present`
+- `pt/exp/exp-present`
 - `pt/exp/exp-create` -- from `present` -- to avoid a parse
 
 - `parsers/earley` -- parsing machine -- to use `Exp` to build CFG
