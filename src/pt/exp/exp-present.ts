@@ -46,7 +46,7 @@ function choice_present(
     `${grammar_name}:${choice_name}`,
     parts.map((part) => {
       const { name, value } = part
-      return name ? { name: strip(present(value)) } : present(value)
+      return name ? { [name]: strip(present(value)) } : present(value)
     }),
   ]
 }

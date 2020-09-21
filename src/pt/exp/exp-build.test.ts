@@ -1,4 +1,9 @@
 import * as Exp from "../exp"
+import * as ut from "../../ut"
+
+function test(present: Exp.Present): void {
+  ut.assert_equal(present, Exp.present(Exp.build(present)))
+}
 
 {
   const mod = {
@@ -20,4 +25,7 @@ import * as Exp from "../exp"
       ],
     },
   }
+
+  test(mod.exp)
+  test(mod.one_or_more)
 }
