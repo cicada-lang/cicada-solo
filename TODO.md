@@ -22,8 +22,6 @@
 
 # pt -- parsing techniques
 
-- `pt/mod/mod-build.test.ts`
-
 - re-factor `build_gr`
   - maybe the structure of the code will be better, if we handle all errors.
 
