@@ -10,18 +10,6 @@ export const v = (name: string): v => ({
   name,
 })
 
-interface ap {
-  kind: "Exp.ap"
-  target: Exp
-  args: Array<Exp>
-}
-
-export const ap = (target: Exp, args: Array<Exp>): ap => ({
-  kind: "Exp.ap",
-  target,
-  args,
-})
-
 interface fn {
   kind: "Exp.fn"
   name: string
@@ -32,6 +20,18 @@ export const fn = (name: string, ret: Exp): fn => ({
   kind: "Exp.fn",
   name,
   ret,
+})
+
+interface ap {
+  kind: "Exp.ap"
+  target: Exp
+  args: Array<Exp>
+}
+
+export const ap = (target: Exp, args: Array<Exp>): ap => ({
+  kind: "Exp.ap",
+  target,
+  args,
 })
 
 interface str {

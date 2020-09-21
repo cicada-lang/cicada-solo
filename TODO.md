@@ -22,12 +22,12 @@
 
 # pt -- parsing techniques
 
-- `pt/exp/exp-present`
-- `pt/exp/exp-create` -- from `present` -- to avoid a parse
+- `pt/exp/exp-build` -- from `present` -- to avoid a parse
+- `pt/exp/exp-build.test`
 - `pt/exp/mod-present`
-- `pt/exp/mod-create`
+- `pt/exp/mod-build`
 
-- `parsers/earley` -- parsing machine -- to use `Exp` to build CFG
+- `parsers/earley` -- migrate parsing machine -- to use `Exp` to build CFG
 
 - [parsing machine] change earley to use ordered choice
 - [parsing machine] change earley to use intersection
