@@ -22,8 +22,8 @@
 
 # pt -- parsing techniques
 
-- `pt/exp/exp-build` -- from `present` -- to avoid a parse
 - `pt/exp/exp-build.test`
+- re-factor `build_gr`
 - `pt/exp/mod-present`
 - `pt/exp/mod-build`
 

@@ -6,8 +6,8 @@ export type Present = Obj<any> | Array<any> | string
 export function present(exp: Exp.Exp): Present {
   switch (exp.kind) {
     case "Exp.v": {
-      const { name } = exp
       // NOTE use extra [] to distinguish v from str in some cases.
+      const { name } = exp
       return [name]
     }
     case "Exp.fn": {
@@ -41,7 +41,7 @@ function choice_present(
   grammar_name: string,
   choice_name: string,
   parts: Array<{ name?: string; value: Exp.Exp }>
-): [string, Present] {
+): [string, Array<Present>] {
   return [
     `${grammar_name}:${choice_name}`,
     parts.map((part) => {
