@@ -22,7 +22,6 @@
 
 # pt -- parsing techniques
 
-- `pt/mod/mod-build.ts`
 - `pt/mod/mod-build.test.ts`
 
 - re-factor `build_gr`
