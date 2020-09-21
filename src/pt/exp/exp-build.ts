@@ -45,17 +45,6 @@ function from_object(obj: Obj<any>): Exp.Exp {
   }
 }
 
-function parse_bind(present: Exp.Present): null | [string, Exp.Present] {
-  if (typeof present === "string") return null
-  if (present instanceof Array) return null
-  const keys = Object.keys(present)
-  if (keys.length !== 1) return null
-  const key = keys[0]
-  if (key.startsWith("$")) return null
-  if (key.includes(":")) return null
-  return [key, present[key]]
-}
-
 function build_gr(obj: Obj<any>): Exp.Exp {
   let name: string | undefined = undefined
   let choices = new Map()
@@ -73,19 +62,7 @@ function build_gr(obj: Obj<any>): Exp.Exp {
       name = grammar_name
     }
 
-    const new_parts = parts.map((part: any) => {
-      const result = parse_bind(part)
-      if (result) {
-        const [name, present] = result
-        const value =
-          typeof present === "string" ? Exp.v(present) : build(present)
-        return { name, value }
-      } else {
-        return { value: build(part) }
-      }
-    })
-
-    choices.set(choice_name, new_parts)
+    choices.set(choice_name, parts.map(build_part))
   }
 
   if (name) {
@@ -93,4 +70,27 @@ function build_gr(obj: Obj<any>): Exp.Exp {
   } else {
     throw new Error(`can not find grammar name from obj: ${ut.inspect(obj)}`)
   }
+}
+
+function build_part(part: any): { name?: string; value: Exp.Exp } {
+  const result = parse_bind(part)
+  if (result) {
+    const [name, present] = result
+    // NOTE a string in bind is special, it is always Exp.v -- instead of Exp.str.
+    const value = typeof present === "string" ? Exp.v(present) : build(present)
+    return { name, value }
+  } else {
+    return { value: build(part) }
+  }
+}
+
+function parse_bind(present: Exp.Present): null | [string, Exp.Present] {
+  if (typeof present === "string") return null
+  if (present instanceof Array) return null
+  const keys = Object.keys(present)
+  if (keys.length !== 1) return null
+  const key = keys[0]
+  if (key.startsWith("$")) return null
+  if (key.includes(":")) return null
+  return [key, present[key]]
 }

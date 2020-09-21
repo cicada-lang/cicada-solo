@@ -22,9 +22,6 @@
 
 # pt -- parsing techniques
 
-- re-factor `build_gr`
-  - maybe the structure of the code will be better, if we handle all errors.
-
 - `pt/parsers/earley` -- migrate parsing machine -- to use `Exp` to build CFG
 
 - [parsing machine] change earley to use ordered choice
