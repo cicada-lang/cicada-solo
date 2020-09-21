@@ -22,9 +22,10 @@
 
 # pt -- parsing techniques
 
+- `pt/mod/mod-present`
+- `pt/mod/mod-build`
+
 - re-factor `build_gr`
-- `pt/exp/mod-present`
-- `pt/exp/mod-build`
 
 - `parsers/earley` -- migrate parsing machine -- to use `Exp` to build CFG
 
