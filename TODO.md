@@ -24,6 +24,9 @@
 
 - `pt/exp/exp-present`
 - `pt/exp/exp-create` -- from `present` -- to avoid a parse
+- note about create from present pattern -- to avoid parsing
+- `pt/exp/mod-present`
+- `pt/exp/mod-create`
 
 - `parsers/earley` -- parsing machine -- to use `Exp` to build CFG
 
