@@ -1,6 +1,6 @@
 import * as Closure from "../closure"
 
-export type Value = fn | str | pattern| gr
+export type Value = fn | str | pattern | gr
 
 interface fn {
   kind: "Value.fn"

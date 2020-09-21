@@ -83,7 +83,10 @@ function lookup(
   opts.on_not_found()
 }
 
-function do_ap(target: Value.Value, args: Array<Value.Value>): Array<Value.Value> {
+function do_ap(
+  target: Value.Value,
+  args: Array<Value.Value>
+): Array<Value.Value> {
   if (target.kind === "Value.fn") {
     return Closure.apply(target.ret_cl, args)
   } else {
