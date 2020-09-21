@@ -22,13 +22,13 @@
 
 # pt -- parsing techniques
 
-- `pt/mod/mod-present`
-- `pt/mod/mod-build`
+- `pt/mod/mod-build.ts`
+- `pt/mod/mod-build.test.ts`
 
 - re-factor `build_gr`
   - maybe the structure of the code will be better, if we handle all errors.
 
-- `parsers/earley` -- migrate parsing machine -- to use `Exp` to build CFG
+- `pt/parsers/earley` -- migrate parsing machine -- to use `Exp` to build CFG
 
 - [parsing machine] change earley to use ordered choice
 - [parsing machine] change earley to use intersection
