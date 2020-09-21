@@ -26,6 +26,7 @@
 - `pt/mod/mod-build`
 
 - re-factor `build_gr`
+  - maybe the structure of the code will be better, if we handle all errors.
 
 - `parsers/earley` -- migrate parsing machine -- to use `Exp` to build CFG
 
