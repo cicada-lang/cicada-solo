@@ -3,16 +3,16 @@ import * as Mod from "../mod"
 import * as Exp from "../exp"
 import * as Value from "../value"
 
-export interface ChoicesThunk {
+export interface DelaiedChoices {
   choices: Map<string, Array<{ name?: string; value: Exp.Exp }>>
   mod: Mod.Mod
   env: Env.Env
 }
 
-export function reify(
-  choices_thunk: ChoicesThunk
+export function force(
+  delaied_choices: DelaiedChoices
 ): Map<string, Array<{ name?: string; value: Value.Value }>> {
-  const { choices, mod, env } = choices_thunk
+  const { choices, mod, env } = delaied_choices
   return new Map(
     Array.from(choices, ([name, parts]) => [
       name,

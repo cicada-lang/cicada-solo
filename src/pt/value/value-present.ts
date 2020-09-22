@@ -2,7 +2,7 @@ import * as Env from "../env"
 import * as Mod from "../mod"
 import * as Exp from "../exp"
 import * as Value from "../value"
-import * as ChoicesThunk from "../value/choices-thunk"
+import * as DelaiedChoices from "../value/delaied-choices"
 import { Obj } from "../../ut"
 
 export type Present = Obj<any> | Array<any> | string
@@ -26,8 +26,8 @@ export function present(
       return { $pattern: `${value.label}#${value.value.source}` }
     }
     case "Value.grammar": {
-      const { name, choices_thunk } = value
-      const { choices } = choices_thunk
+      const { name, delaied_choices } = value
+      const { choices } = delaied_choices
       return Array.from(choices, ([choice_name, parts]) =>
         Exp.choice_present(name, choice_name, parts)
       ).reduce((result, choice) => Object.assign(result, choice), {})
