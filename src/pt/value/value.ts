@@ -1,4 +1,5 @@
 import * as Closure from "./closure"
+import * as GrammarThunk from "./grammar-thunk"
 
 export type Value = fn | str | pattern | grammar
 
@@ -36,17 +37,10 @@ export const pattern = (label: string, value: RegExp): pattern => ({
 
 interface grammar {
   kind: "Value.grammar"
-  name: string
-  choices: Map<string, Array<Part>>
+  grammar_thunk: GrammarThunk.GrammarThunk
 }
 
-type Part = {
-  name?: string
-  value: Value
-}
-
-export const grammar = (name: string, choices: Map<string, Array<Part>>): grammar => ({
+export const grammar = (grammar_thunk: GrammarThunk.GrammarThunk): grammar => ({
   kind: "Value.grammar",
-  name,
-  choices,
+  grammar_thunk,
 })

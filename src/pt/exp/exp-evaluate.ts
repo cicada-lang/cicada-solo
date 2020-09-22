@@ -3,6 +3,7 @@ import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Closure from "../value/closure"
+import * as GrammarThunk from "../value/grammar-thunk"
 import * as ut from "../../ut"
 
 export function evaluate(
@@ -21,8 +22,7 @@ export function evaluate(
     }
     case "Exp.fn": {
       const { name, ret } = exp
-      const ret_cl = { name, exp: ret, env, mod }
-      return new Array(Value.fn(ret_cl))
+      return new Array(Value.fn({ name, exp: ret, env, mod }))
     }
     case "Exp.ap": {
       const result = evaluate(mod, env, exp.target)
@@ -44,29 +44,11 @@ export function evaluate(
       return new Array(Value.pattern(label, value))
     }
     case "Exp.grammar": {
-      const new_choices = new Map()
-      for (const [name, parts] of exp.choices) {
-        new_choices.set(
-          name,
-          parts.flatMap((part) => evaluate_part(mod, env, part))
-        )
-      }
-      return new Array(Value.grammar(exp.name, new_choices))
+      const { name, choices } = exp
+      return new Array(Value.grammar({ name, choices, mod, env }))
     }
   }
 }
-
-const evaluate_part = (
-  mod: Mod.Mod,
-  env: Env.Env,
-  part: { name?: string; value: Exp.Exp }
-) =>
-  evaluate(mod, env, part.value).map((value) =>
-    part.name && pickup_p(value) ? { value, name: part.name } : { value }
-  )
-
-const pickup_p = (value: Value.Value) =>
-  value.kind === "Value.grammar" || value.kind === "Value.pattern"
 
 function lookup(
   mod: Mod.Mod,

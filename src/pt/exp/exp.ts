@@ -59,15 +59,13 @@ export const pattern = (label: string, value: RegExp): pattern => ({
 interface grammar {
   kind: "Exp.grammar"
   name: string
-  choices: Map<string, Array<GrammarPart>>
+  choices: Map<string, Array<{ name?: string; value: Exp }>>
 }
 
-export interface GrammarPart {
-  name?: string
-  value: Exp
-}
-
-export const grammar = (name: string, choices: Map<string, Array<GrammarPart>>): grammar => ({
+export const grammar = (
+  name: string,
+  choices: Map<string, Array<{ name?: string; value: Exp }>>
+): grammar => ({
   kind: "Exp.grammar",
   name,
   choices,

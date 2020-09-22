@@ -22,8 +22,7 @@
 
 # pt -- parsing techniques
 
-- `Value.grammar` contains `GrammarThunk`
-- [maybe] `grammar_parts_reify` ?
+- `GrammarThunk.reify_choices`
 - `exp-evaluate.test.ts`
 - `pt/parsers/earley`
   - migrate parsing machine
