@@ -6,7 +6,7 @@ import * as GrammarThunk from "../value/grammar-thunk"
 import * as ut from "../../ut"
 
 {
-  const identifier = { $pattern: "identifier:.S*" }
+  const identifier = { $pattern: "identifier#.S*" }
 
   const exp = {
     "exp:var": [{ name: "identifier" }],

@@ -24,7 +24,7 @@ export function present(exp: Exp.Exp): Present {
     }
     case "Exp.pattern": {
       const { label, value } = exp
-      return { $pattern: `${label}:${value.toString()}` }
+      return { $pattern: `${label}#${value.toString()}` }
     }
     case "Exp.grammar":
       const { name, choices } = exp

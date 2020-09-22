@@ -22,7 +22,6 @@
 
 # pt -- parsing techniques
 
-- pattern use `#` instead of `:`
 - avoid using `exp` or `value` as name property
 - `pt/value/value-present.ts` -- `opts: concise`
   - improve `pt/exp/exp-evaluate.test.ts`

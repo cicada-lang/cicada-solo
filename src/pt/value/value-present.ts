@@ -18,7 +18,7 @@ export function present(value: Value.Value): Present {
       return value.value
     }
     case "Value.pattern": {
-      return { $pattern: `${value.label}:${value.value.toString()}` }
+      return { $pattern: `${value.label}#${value.value.toString()}` }
     }
     case "Value.grammar": {
       throw new Error()
