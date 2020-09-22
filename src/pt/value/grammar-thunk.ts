@@ -15,7 +15,7 @@ export function reify_choices(
 ): Map<string, Array<{ name?: string; value: Value.Value }>> {
   const { choices, mod, env } = grammar_thunk
   return new Map(
-    [...choices].map(([name, parts]) => [
+    Array.from(choices, ([name, parts]) => [
       name,
       parts.flatMap((part) => evaluate_part(mod, env, part)),
     ])
