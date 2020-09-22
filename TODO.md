@@ -22,9 +22,11 @@
 
 # pt -- parsing techniques
 
+- `Task`
 - `pt/parsers/earley`
   - migrate parsing machine
   - to use `Exp` to build CFG
+- `pt/parsers/earley/gen`
 - [parsing machine] change earley to use ordered choice
 - [parsing machine] change earley to use intersection
 - [test] try examples in peg paper in parser generator
