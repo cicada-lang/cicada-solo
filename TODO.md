@@ -22,7 +22,7 @@
 
 # pt -- parsing techniques
 
-- `Task`
+- `schedule`
 - `pt/parsers/earley`
   - migrate parsing machine
   - to use `Exp` to build CFG
