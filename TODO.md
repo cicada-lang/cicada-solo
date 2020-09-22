@@ -22,7 +22,6 @@
 
 # pt -- parsing techniques
 
-- `pt/exp/exp-evaluate.test.ts`
 - `pt/value/value-present.test.ts` -- `opts: concise`
   - improve `pt/exp/exp-evaluate.test.ts`
 - `pt/parsers/earley`

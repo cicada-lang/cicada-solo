@@ -37,7 +37,13 @@ import * as ut from "../../ut"
       console.log("name:", name)
       console.log("parts:")
       for (const part of parts) {
-        console.log(part)
+        const { value } = part
+        if (value.kind === "Value.grammar") {
+          const choices = GrammarThunk.reify_choices(value.grammar_thunk)
+          for (const [name, parts] of choices) {
+            console.log(parts)
+          }
+        }
       }
       console.log()
     }
