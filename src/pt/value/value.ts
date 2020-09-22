@@ -35,7 +35,7 @@ export const pattern = (label: string, value: RegExp): pattern => ({
   value,
 })
 
-export interface grammar {
+interface grammar {
   kind: "Value.grammar"
   name: string
   delayed: DelayedChoices.DelayedChoices
