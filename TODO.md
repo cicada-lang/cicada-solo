@@ -22,8 +22,6 @@
 
 # pt -- parsing techniques
 
-- `pt/value/value-present.ts`
-  - improve `pt/exp/exp-evaluate.test.ts`
 - `pt/parsers/earley`
   - migrate parsing machine
   - to use `Exp` to build CFG

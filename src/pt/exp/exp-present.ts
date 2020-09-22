@@ -28,9 +28,11 @@ export function present(exp: Exp.Exp): Present {
     }
     case "Exp.grammar":
       const { name, choices } = exp
-      return Array.from(choices, ([choice_name, parts]) =>
-        choice_present(name, choice_name, parts)
-      ).reduce((result, choice) => Object.assign(result, choice), {})
+      const result = {}
+      for (const [choice_name, parts] of choices) {
+        Object.assign(result, choice_present(name, choice_name, parts))
+      }
+      return result
   }
 }
 

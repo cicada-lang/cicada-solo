@@ -3,22 +3,25 @@ import * as Mod from "../mod"
 import * as Exp from "../exp"
 import * as Value from "../value"
 
-export interface DelaiedChoices {
+export interface DelayedChoices {
   choices: Map<string, Array<{ name?: string; value: Exp.Exp }>>
+  cache?: Map<string, Array<{ name?: string; value: Value.Value }>>
   mod: Mod.Mod
   env: Env.Env
 }
 
 export function force(
-  delaied_choices: DelaiedChoices
+  delayed: DelayedChoices
 ): Map<string, Array<{ name?: string; value: Value.Value }>> {
-  const { choices, mod, env } = delaied_choices
-  return new Map(
+  const { choices, mod, env } = delayed
+  if (delayed.cache) return delayed.cache
+  delayed.cache = new Map(
     Array.from(choices, ([name, parts]) => [
       name,
       parts.flatMap((part) => evaluate_part(mod, env, part)),
     ])
   )
+  return delayed.cache
 }
 
 function evaluate_part(

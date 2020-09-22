@@ -1,5 +1,5 @@
 import * as Closure from "./closure"
-import * as DelaiedChoices from "./delaied-choices"
+import * as DelayedChoices from "./delayed-choices"
 
 export type Value = fn | str | pattern | grammar
 
@@ -38,14 +38,14 @@ export const pattern = (label: string, value: RegExp): pattern => ({
 interface grammar {
   kind: "Value.grammar"
   name: string
-  delaied_choices: DelaiedChoices.DelaiedChoices
+  delayed: DelayedChoices.DelayedChoices
 }
 
 export const grammar = (
   name: string,
-  delaied_choices: DelaiedChoices.DelaiedChoices
+  delayed: DelayedChoices.DelayedChoices
 ): grammar => ({
   kind: "Value.grammar",
   name,
-  delaied_choices,
+  delayed,
 })
