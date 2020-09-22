@@ -22,7 +22,6 @@
 
 # pt -- parsing techniques
 
-- `GrammarThunk.reify_choices`
 - `exp-evaluate.test.ts`
 - `pt/parsers/earley`
   - migrate parsing machine

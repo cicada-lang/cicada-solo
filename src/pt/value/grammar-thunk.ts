@@ -10,16 +10,17 @@ export interface GrammarThunk {
   env: Env.Env
 }
 
-// export function choices(
-//   grammar_thunk: GrammarThunk,
-//   choice_name: string,
-// ): Array<Value.Value> {
-//   const { name, exp, mod, env } = cl
-//   return Exp.evaluate(mod, Env.extend(env, name, args), exp)
-// }
-
-
-// parts.flatMap((part) => evaluate_part(mod, env, part))
+export function reify_choices(
+  grammar_thunk: GrammarThunk
+): Map<string, Array<{ name?: string; value: Value.Value }>> {
+  const { choices, mod, env } = grammar_thunk
+  return new Map(
+    [...choices].map(([name, parts]) => [
+      name,
+      parts.flatMap((part) => evaluate_part(mod, env, part)),
+    ])
+  )
+}
 
 function evaluate_part(
   mod: Mod.Mod,
