@@ -43,7 +43,7 @@ export function evaluate(
       const { label, value } = exp
       return new Array(Value.pattern(label, value))
     }
-    case "Exp.gr": {
+    case "Exp.grammar": {
       const new_choices = new Map()
       for (const [name, parts] of exp.choices) {
         new_choices.set(
@@ -51,7 +51,7 @@ export function evaluate(
           parts.flatMap((part) => evaluate_part(mod, env, part))
         )
       }
-      return new Array(Value.gr(exp.name, new_choices))
+      return new Array(Value.grammar(exp.name, new_choices))
     }
   }
 }
@@ -66,7 +66,7 @@ const evaluate_part = (
   )
 
 const pickup_p = (value: Value.Value) =>
-  value.kind === "Value.gr" || value.kind === "Value.pattern"
+  value.kind === "Value.grammar" || value.kind === "Value.pattern"
 
 function lookup(
   mod: Mod.Mod,

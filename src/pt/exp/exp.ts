@@ -1,4 +1,4 @@
-export type Exp = v | fn | ap | str | pattern | gr
+export type Exp = v | fn | ap | str | pattern | grammar
 
 interface v {
   kind: "Exp.v"
@@ -56,8 +56,8 @@ export const pattern = (label: string, value: RegExp): pattern => ({
   value,
 })
 
-interface gr {
-  kind: "Exp.gr"
+interface grammar {
+  kind: "Exp.grammar"
   name: string
   choices: Map<string, Array<GrammarPart>>
 }
@@ -67,8 +67,8 @@ export interface GrammarPart {
   value: Exp
 }
 
-export const gr = (name: string, choices: Map<string, Array<GrammarPart>>): gr => ({
-  kind: "Exp.gr",
+export const grammar = (name: string, choices: Map<string, Array<GrammarPart>>): grammar => ({
+  kind: "Exp.grammar",
   name,
   choices,
 })

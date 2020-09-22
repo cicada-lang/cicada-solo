@@ -1,6 +1,6 @@
 # pt -- parsing technique
 
-## gr
+## grammar
 
 We are able to use markup to pick up parts,
 and ignore other parts during collection.

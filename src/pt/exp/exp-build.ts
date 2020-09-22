@@ -40,12 +40,12 @@ function from_object(obj: Obj<any>): Exp.Exp {
     const [label, value] = obj["$pattern"].split(":")
     return Exp.pattern(label, new RegExp(value))
   } else {
-    return build_gr(obj)
+    return build_grammar(obj)
     throw new Error()
   }
 }
 
-function build_gr(obj: Obj<any>): Exp.Exp {
+function build_grammar(obj: Obj<any>): Exp.Exp {
   let name: string | undefined = undefined
   let choices = new Map()
 
@@ -66,7 +66,7 @@ function build_gr(obj: Obj<any>): Exp.Exp {
   }
 
   if (name) {
-    return Exp.gr(name, choices)
+    return Exp.grammar(name, choices)
   } else {
     throw new Error(`can not find grammar name from obj: ${ut.inspect(obj)}`)
   }

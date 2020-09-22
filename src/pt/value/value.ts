@@ -1,6 +1,6 @@
 import * as Closure from "../closure"
 
-export type Value = fn | str | pattern | gr
+export type Value = fn | str | pattern | grammar
 
 interface fn {
   kind: "Value.fn"
@@ -34,8 +34,8 @@ export const pattern = (label: string, value: RegExp): pattern => ({
   value,
 })
 
-interface gr {
-  kind: "Value.gr"
+interface grammar {
+  kind: "Value.grammar"
   name: string
   choices: Map<string, Array<Part>>
 }
@@ -45,8 +45,8 @@ type Part = {
   value: Value
 }
 
-export const gr = (name: string, choices: Map<string, Array<Part>>): gr => ({
-  kind: "Value.gr",
+export const grammar = (name: string, choices: Map<string, Array<Part>>): grammar => ({
+  kind: "Value.grammar",
   name,
   choices,
 })

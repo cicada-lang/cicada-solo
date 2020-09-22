@@ -22,13 +22,16 @@
 
 # pt -- parsing techniques
 
-- Grammar
-interface Grammar {
-  name: string
-  choices: Map<string, >
-}
-- `Value.gr` contains `Mod` and `Env`
-- `grammar_parts_reify`
+- `ClosedFn` instead of `Closure`
+- `ClosedGrammar`
+  ``` typescript
+  interface ClosedGrammar {
+    name: string
+    choices: Map<string, >
+  }
+  ```
+- [maybe] `grammar_parts_reify` ?
+- `Value.grammar` contains `Mod` and `Env`
 - `exp-evaluate.test.ts`
 - `pt/parsers/earley`
   - migrate parsing machine

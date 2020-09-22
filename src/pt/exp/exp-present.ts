@@ -26,7 +26,7 @@ export function present(exp: Exp.Exp): Present {
       const { label, value } = exp
       return { $pattern: `${label}:${value.toString()}` }
     }
-    case "Exp.gr":
+    case "Exp.grammar":
       const { name, choices } = exp
       let result: Obj<any> = {}
       for (const [choice_name, parts] of choices) {
