@@ -24,31 +24,27 @@ export function present(exp: Exp.Exp): Present {
     }
     case "Exp.pattern": {
       const { label, value } = exp
-      return { $pattern: `${label}#${value.toString()}` }
+      return { $pattern: `${label}#${value.source}` }
     }
     case "Exp.grammar":
       const { name, choices } = exp
-      let result: Obj<any> = {}
-      for (const [choice_name, parts] of choices) {
-        const [key, present] = choice_present(name, choice_name, parts)
-        result[key] = present
-      }
-      return result
+      return Array.from(choices, ([choice_name, parts]) =>
+        choice_present(name, choice_name, parts)
+      ).reduce((result, choice) => Object.assign(result, choice), {})
   }
 }
 
-function choice_present(
+export function choice_present(
   grammar_name: string,
   choice_name: string,
   parts: Array<{ name?: string; value: Exp.Exp }>
-): [string, Array<Present>] {
-  return [
-    `${grammar_name}:${choice_name}`,
-    parts.map((part) => {
+): { [key: string]: Array<Present> } {
+  return {
+    [`${grammar_name}:${choice_name}`]: parts.map((part) => {
       const { name, value } = part
       return name ? { [name]: strip(present(value)) } : present(value)
     }),
-  ]
+  }
 }
 
 function strip(present: Present): Present {

@@ -3,17 +3,16 @@ import * as Mod from "../mod"
 import * as Exp from "../exp"
 import * as Value from "../value"
 
-export interface GrammarThunk {
-  name: string
+export interface ChoicesThunk {
   choices: Map<string, Array<{ name?: string; value: Exp.Exp }>>
   mod: Mod.Mod
   env: Env.Env
 }
 
 export function reify_choices(
-  grammar_thunk: GrammarThunk
+  choices_thunk: ChoicesThunk
 ): Map<string, Array<{ name?: string; value: Value.Value }>> {
-  const { choices, mod, env } = grammar_thunk
+  const { choices, mod, env } = choices_thunk
   return new Map(
     Array.from(choices, ([name, parts]) => [
       name,

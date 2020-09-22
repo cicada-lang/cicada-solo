@@ -3,7 +3,6 @@ import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Closure from "../value/closure"
-import * as GrammarThunk from "../value/grammar-thunk"
 import * as ut from "../../ut"
 
 export function evaluate(
@@ -45,7 +44,7 @@ export function evaluate(
     }
     case "Exp.grammar": {
       const { name, choices } = exp
-      return Array.of(Value.grammar({ name, choices, mod, env }))
+      return Array.of(Value.grammar(name, { choices, mod, env }))
     }
   }
 }

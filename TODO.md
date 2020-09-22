@@ -22,8 +22,7 @@
 
 # pt -- parsing techniques
 
-- avoid using `exp` or `value` as name property
-- `pt/value/value-present.ts` -- `opts: concise`
+- `pt/value/value-present.ts`
   - improve `pt/exp/exp-evaluate.test.ts`
 - `pt/parsers/earley`
   - migrate parsing machine
