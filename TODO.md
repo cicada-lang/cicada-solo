@@ -22,8 +22,17 @@
 
 # pt -- parsing techniques
 
-- `pt/parsers/earley` -- migrate parsing machine -- to use `Exp` to build CFG
-
+- Grammar
+interface Grammar {
+  name: string
+  choices: Map<string, >
+}
+- `Value.gr` contains `Mod` and `Env`
+- `grammar_parts_reify`
+- `exp-evaluate.test.ts`
+- `pt/parsers/earley`
+  - migrate parsing machine
+  - to use `Exp` to build CFG
 - [parsing machine] change earley to use ordered choice
 - [parsing machine] change earley to use intersection
 - [test] try examples in peg paper in parser generator
