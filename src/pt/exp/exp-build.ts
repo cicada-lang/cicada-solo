@@ -12,19 +12,23 @@ function from_string(str: string): Exp.Exp {
   return Exp.str(str)
 }
 
+// NOTE array is like function application syntax in common lisp.
+// - the head is in function space.
+// - when the head is a string, it is viewed as a variable.
+function build_head(head: Exp.Present): Exp.Exp {
+  if (typeof head === "string") {
+    return Exp.v(head)
+  } else {
+    return build(head)
+  }
+}
+
 function from_array(array: Array<any>): Exp.Exp {
   if (array.length === 1) {
-    if (typeof array[0] === "string") {
-      return Exp.v(array[0])
-    } else {
-      throw new Error(
-        `expecting array[0] to be a string\n.` +
-          `array[0]: ${ut.inspect(array[0])}\n`
-      )
-    }
+    return build_head(array[0])
   } else if (array.length > 1) {
     const [target, ...args] = array
-    return Exp.ap(build(target), args.map(build))
+    return Exp.ap(build_head(target), args.map(build))
   } else {
     throw new Error(
       `array.length must be >= 1.\n` + `array.length: ${array.length}\n`

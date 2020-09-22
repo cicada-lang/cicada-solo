@@ -22,7 +22,9 @@
 
 # pt -- parsing techniques
 
-- `exp-evaluate.test.ts`
+- `pt/exp/exp-evaluate.test.ts`
+- `pt/value/value-present.test.ts` -- `opts: concise`
+  - improve `pt/exp/exp-evaluate.test.ts`
 - `pt/parsers/earley`
   - migrate parsing machine
   - to use `Exp` to build CFG

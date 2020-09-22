@@ -16,7 +16,7 @@ export function present(exp: Exp.Exp): Present {
     }
     case "Exp.ap": {
       const { target, args } = exp
-      return [present(target), ...args.map(present)]
+      return [strip(present(target)), ...args.map(present)]
     }
     case "Exp.str": {
       const { value } = exp
