@@ -22,8 +22,7 @@
 
 # pt -- parsing techniques
 
-- `ClosedFn` instead of `Closure`
-- `ClosedGrammar`
+- `ClosedGrammar` closed-grammar.ts
   ``` typescript
   interface ClosedGrammar {
     name: string
