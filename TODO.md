@@ -22,15 +22,8 @@
 
 # pt -- parsing techniques
 
-- `ClosedGrammar` closed-grammar.ts
-  ``` typescript
-  interface ClosedGrammar {
-    name: string
-    choices: Map<string, >
-  }
-  ```
+- `Value.grammar` contains `GrammarThunk`
 - [maybe] `grammar_parts_reify` ?
-- `Value.grammar` contains `Mod` and `Env`
 - `exp-evaluate.test.ts`
 - `pt/parsers/earley`
   - migrate parsing machine

@@ -1,13 +1,13 @@
-import * as ClosedFn from "./closed-fn"
+import * as Closure from "./closure"
 
 export type Value = fn | str | pattern | grammar
 
 interface fn {
   kind: "Value.fn"
-  ret_cl: ClosedFn.ClosedFn
+  ret_cl: Closure.Closure
 }
 
-export const fn = (ret_cl: ClosedFn.ClosedFn): fn => ({
+export const fn = (ret_cl: Closure.Closure): fn => ({
   kind: "Value.fn",
   ret_cl,
 })
