@@ -1,7 +1,7 @@
 import * as Exp from "../exp"
 
 export class Trace {
-  previous: Array<Exp.Exp> = new Array()
+  previous: Array<Exp.Exp> = Array.of()
 
   constructor(public message: string) {}
 }

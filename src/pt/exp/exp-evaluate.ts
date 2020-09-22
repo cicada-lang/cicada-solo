@@ -22,7 +22,7 @@ export function evaluate(
     }
     case "Exp.fn": {
       const { name, ret } = exp
-      return new Array(Value.fn({ name, exp: ret, env, mod }))
+      return Array.of(Value.fn({ name, exp: ret, env, mod }))
     }
     case "Exp.ap": {
       const result = evaluate(mod, env, exp.target)
@@ -37,15 +37,15 @@ export function evaluate(
     }
     case "Exp.str": {
       const { value } = exp
-      return new Array(Value.str(value))
+      return Array.of(Value.str(value))
     }
     case "Exp.pattern": {
       const { label, value } = exp
-      return new Array(Value.pattern(label, value))
+      return Array.of(Value.pattern(label, value))
     }
     case "Exp.grammar": {
       const { name, choices } = exp
-      return new Array(Value.grammar({ name, choices, mod, env }))
+      return Array.of(Value.grammar({ name, choices, mod, env }))
     }
   }
 }
