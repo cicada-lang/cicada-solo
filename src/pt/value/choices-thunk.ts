@@ -9,7 +9,7 @@ export interface ChoicesThunk {
   env: Env.Env
 }
 
-export function reify_choices(
+export function reify(
   choices_thunk: ChoicesThunk
 ): Map<string, Array<{ name?: string; value: Value.Value }>> {
   const { choices, mod, env } = choices_thunk
