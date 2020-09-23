@@ -22,7 +22,6 @@
 
 # pt -- parsing techniques
 
-- `Machine.resume`
 - `pt/parsers/earley/gen`
 - `pt/parsers/earley/gen.test.ts`
 - `pt/parsers/earley/index`
