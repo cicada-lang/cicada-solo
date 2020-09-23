@@ -20,10 +20,17 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
+# pc
+
+- use pc to implement `pt/exp/exp-parse`
+
 # pt -- parsing techniques
 
-- `Machine.run` use `opts` to support printing task at each iteration
-- `Machine.run` use `opts` to support printing schedule at each iteration
+- merge `Machine` into `Schedule`
+- `Schedule` should be an `interface` (pure) data -- instead of class
+- `Task` should be an `interface` (pure) data -- instead of class
+- `Schedule.run` use `opts` to support printing task at each iteration
+- `Schedule.run` use `opts` to support printing schedule at each iteration
 - redesign `task-repr.ts` and `task-id.ts`
 - `schedule-repr.ts`
 - split `Task`'s methods into files.
@@ -31,8 +38,8 @@
 - `pt/parsers/earley/parse.test.ts`
 - simple `Schedule.add_task` -- no `task_id` arg
 - `pt/parsers/earley/index`
-- [parsing machine] change earley to use ordered choice
-- [parsing machine] change earley to use intersection
+- [earley] change earley to use ordered choice
+- [earley] change earley to use intersection
 - [test] try examples in peg paper in parser generator
 - [test] x in x test
   - S <- "x" S "x" | "x"
