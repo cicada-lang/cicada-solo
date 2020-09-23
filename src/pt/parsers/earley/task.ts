@@ -30,7 +30,6 @@ export class Task {
     }
   }
 
-
   // NOTE index into parts (instructions)
   get program_counter(): number {
     return this.matched_indexes.length
