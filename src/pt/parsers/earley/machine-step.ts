@@ -6,7 +6,7 @@ import * as Value from "../../value"
 
 export function step(machine: Machine.Machine, task: Task.Task): void {
   // TODO handle name in part
-  const { value } = task.parts[task.program_counter]
+  const { value } = task.current_part
 
   switch (value.kind) {
     case "Value.fn": {

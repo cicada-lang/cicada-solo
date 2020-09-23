@@ -30,9 +30,14 @@ export class Task {
     }
   }
 
+
   // NOTE index into parts (instructions)
   get program_counter(): number {
     return this.matched_indexes.length
+  }
+
+  get current_part(): { name?: string; value: Value.Value } {
+    return this.parts[this.program_counter]
   }
 
   get finished_p(): boolean {
