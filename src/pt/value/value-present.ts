@@ -38,7 +38,9 @@ export function present(
       switch (opts.on_grammar) {
         case "force_one_step": {
           const result = {}
-          for (const [choice_name, parts] of Value.DelayedChoices.force(delayed)) {
+          for (const [choice_name, parts] of Value.DelayedChoices.force(
+            delayed
+          )) {
             Object.assign(
               result,
               Value.choice_present(name, choice_name, parts)
