@@ -36,7 +36,15 @@ export class Task {
   }
 
   get current_part(): { name?: string; value: Value.Value } {
-    return this.parts[this.program_counter]
+    const part = this.parts[this.program_counter]
+    if (part !== undefined) {
+      return part
+    } else {
+      throw new Error(
+        `current_part is undefined.\n` +
+          `program_counter: ${this.program_counter}\n`
+      )
+    }
   }
 
   get finished_p(): boolean {
@@ -46,13 +54,11 @@ export class Task {
   get id(): string {
     let s = this.grammar_name + ":" + this.choice_name + "@" + this.index
     for (let i = 0; i < this.matched_indexes.length; i++) {
-      if (i < this.program_counter) {
-        const { index, choice_name } = this.matched_indexes[i]
-        if (choice_name) {
-          s += `(${index}:${choice_name})`
-        } else {
-          s += `(${index})`
-        }
+      const { index, choice_name } = this.matched_indexes[i]
+      if (choice_name) {
+        s += `(${index}:${choice_name})`
+      } else {
+        s += `(${index})`
       }
     }
     return s

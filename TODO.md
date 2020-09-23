@@ -22,8 +22,12 @@
 
 # pt -- parsing techniques
 
-- `pt/parsers/earley/gen`
-- `pt/parsers/earley/gen.test.ts`
+- `Machine.run` use `opts` to support printing task at each iteration
+- `Machine.run` use `opts` to support printing schedule at each iteration
+- split `Task`'s methods into files.
+- `pt/parsers/earley/parse`
+- `pt/parsers/earley/parse.test.ts`
+- simple `Schedule.add_task` -- no `task_id` arg
 - `pt/parsers/earley/index`
 - [parsing machine] change earley to use ordered choice
 - [parsing machine] change earley to use intersection
