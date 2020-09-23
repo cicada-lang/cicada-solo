@@ -22,9 +22,8 @@
 
 # pt -- parsing techniques
 
-- `Machine.run`
+- `Machine.step`
 - `Machine.continue_upstream_tasks`
-- `Machine.???`
 - `pt/parsers/earley/gen`
 - [parsing machine] change earley to use ordered choice
 - [parsing machine] change earley to use intersection

@@ -12,3 +12,5 @@ export class Machine {
 
 export * from "./machine-init"
 export * from "./machine-run"
+export * from "./machine-step"
+export * from "./machine-continue-upstream-tasks"

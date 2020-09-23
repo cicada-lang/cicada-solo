@@ -4,5 +4,8 @@ import * as Token from "../../token"
 import * as Value from "../../value"
 
 export function run(machine: Machine.Machine): void {
-  // TODO
+  const task = machine.schedule.queue.shift()
+  if (task === undefined) return
+  else if (task.finished_p) Machine.continue_upstream_tasks(machine, task)
+  else Machine.step(machine, task)
 }
