@@ -7,7 +7,7 @@ export function run(machine: Machine.Machine): void {
   while (true) {
     const task = machine.schedule.queue.shift()
     if (task === undefined) return
-    else if (task.finished_p) Machine.continue_upstream_tasks(machine, task)
+    else if (task.finished_p) Machine.resume(machine, task)
     else Machine.step(machine, task)
   }
 }

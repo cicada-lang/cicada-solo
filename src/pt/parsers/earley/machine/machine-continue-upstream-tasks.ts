@@ -4,7 +4,7 @@ import * as Task from "../task"
 import * as Token from "../../../token"
 import * as Value from "../../../value"
 
-export function continue_upstream_tasks(
+export function resume(
   machine: Machine.Machine,
   task: Task.Task
 ): void {
