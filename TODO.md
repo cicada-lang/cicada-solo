@@ -22,7 +22,6 @@
 
 # pt -- parsing techniques
 
-- split methods to files
 - `Machine.run`
 - `Machine.continue_upstream_tasks`
 - `Machine.???`

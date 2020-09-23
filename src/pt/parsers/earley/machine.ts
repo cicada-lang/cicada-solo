@@ -10,13 +10,5 @@ export class Machine {
   ) {}
 }
 
-export function init(
-  tokens: Array<Token.Token>,
-  grammar: Value.Value
-): Machine {
-  return new Machine(tokens, grammar, Schedule.init(tokens, grammar))
-}
-
-export function run(machine: Machine): void {
-  // TODO
-}
+export * from "./machine-init"
+export * from "./machine-run"
