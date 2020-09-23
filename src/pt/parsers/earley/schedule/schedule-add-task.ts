@@ -1,5 +1,5 @@
-import * as Schedule from "./schedule"
-import * as Task from "./task"
+import * as Schedule from "../schedule"
+import * as Task from "../task"
 
 export function add_task(
   schedule: Schedule.Schedule,

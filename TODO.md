@@ -22,7 +22,6 @@
 
 # pt -- parsing techniques
 
-- normalize file structure -- one noun one 
 - `Machine.continue_upstream_tasks`
 - `pt/parsers/earley/gen`
 - `pt/parsers/earley/gen.test.ts`
