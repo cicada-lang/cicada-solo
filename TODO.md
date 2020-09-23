@@ -21,7 +21,7 @@
 - [TLT] B. Rules Are Made to Be Spoken
 
 # pt -- parsing techniques
-- `task.current_part`
+
 - `Machine.continue_upstream_tasks`
 - `pt/parsers/earley/gen`
 - `pt/parsers/earley/gen.test.ts`

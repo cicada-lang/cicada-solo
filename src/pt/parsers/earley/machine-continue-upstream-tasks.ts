@@ -28,3 +28,21 @@ export function continue_upstream_tasks(
     }
   }
 }
+
+// export function matched_terminal(task: Task.Task): Task.Task {
+//   return new Task.Task(task.rule, task.choice_name, task.start, [
+//     ...task.matches,
+//     new Matched.Terminal(task.current + 1),
+//   ])
+// }
+
+// export function matched_non_terminal(
+//   task: Task.Task,
+//   n: number,
+//   choice_name: string
+// ): Task.Task {
+//   return new Task.Task(task.rule, task.choice_name, task.start, [
+//     ...task.matches,
+//     new Matched.NonTerminal(task.current + n, choice_name),
+//   ])
+// }
