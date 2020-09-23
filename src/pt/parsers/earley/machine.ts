@@ -9,3 +9,10 @@ export class Machine {
     public schedule: Schedule.Schedule
   ) {}
 }
+
+export function init(
+  tokens: Array<Token.Token>,
+  grammar: Value.Value,
+): Machine {
+  return new Machine(tokens, grammar, Schedule.init(tokens, grammar))
+}

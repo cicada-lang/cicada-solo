@@ -22,7 +22,6 @@
 
 # pt -- parsing techniques
 
-- `Machine.init`
 - `Machine.run`
 - `Machine.continue_upstream_tasks`
 - `pt/parsers/earley/gen`

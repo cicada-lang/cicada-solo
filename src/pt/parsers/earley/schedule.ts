@@ -1,5 +1,6 @@
 import * as Task from "./task"
 import * as Value from "../../value"
+import * as Token from "../../token"
 import * as ut from "../../../ut"
 
 export class Schedule {
@@ -32,4 +33,19 @@ export class Schedule {
       throw new Error(`expecting Value.grammar but got: ${ut.inspect(grammar)}`)
     }
   }
+}
+
+export function init(
+  tokens: Array<Token.Token>,
+  grammar: Value.Value
+): Schedule {
+  const queue = new Array()
+  // NOTE chart.length === tokens.length + 1
+  const chart = new Array()
+  for (let i = 0; i < tokens.length + 1; i++) {
+    chart.push(new Map())
+  }
+  const schedule = new Schedule(queue, chart)
+  schedule.add_grammar(grammar, 0)
+  return schedule
 }
