@@ -22,9 +22,9 @@
 
 # pt -- parsing techniques
 
-- `pt/parsers/earley`
-  - migrate parsing machine
-  - to use `Exp` to build CFG
+- `Machine.init`
+- `Machine.run`
+- `Machine.continue_upstream_tasks`
 - `pt/parsers/earley/gen`
 - [parsing machine] change earley to use ordered choice
 - [parsing machine] change earley to use intersection

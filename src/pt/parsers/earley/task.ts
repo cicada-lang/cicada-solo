@@ -34,19 +34,23 @@ export class Task {
   get program_counter(): number {
     return this.matched_indexes.length
   }
-}
 
-export function id(task: Task): string {
-  let s = task.grammar_name + ":" + task.choice_name + "@" + task.index
-  for (let i = 0; i < task.matched_indexes.length; i++) {
-    if (i < task.program_counter) {
-      const { index, choice_name } = task.matched_indexes[i]
-      if (choice_name) {
-        s += `(${index}:${choice_name})`
-      } else {
-        s += `(${index})`
+  get finished_p(): boolean {
+    return this.program_counter === this.parts.length
+  }
+
+  get id(): string {
+    let s = this.grammar_name + ":" + this.choice_name + "@" + this.index
+    for (let i = 0; i < this.matched_indexes.length; i++) {
+      if (i < this.program_counter) {
+        const { index, choice_name } = this.matched_indexes[i]
+        if (choice_name) {
+          s += `(${index}:${choice_name})`
+        } else {
+          s += `(${index})`
+        }
       }
     }
+    return s
   }
-  return s
 }

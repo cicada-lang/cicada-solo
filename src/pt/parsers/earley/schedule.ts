@@ -26,7 +26,7 @@ export class Schedule {
           index,
           matched_indexes: Array.of(),
         })
-        this.add_task(Task.id(task), task)
+        this.add_task(task.id, task)
       }
     } else {
       throw new Error(`expecting Value.grammar but got: ${ut.inspect(grammar)}`)
