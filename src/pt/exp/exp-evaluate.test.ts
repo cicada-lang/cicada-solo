@@ -2,7 +2,6 @@ import * as Exp from "../exp"
 import * as Mod from "../mod"
 import * as Env from "../env"
 import * as Value from "../value"
-import * as DelayedChoices from "../value/delayed-choices"
 import * as ut from "../../ut"
 
 function test(

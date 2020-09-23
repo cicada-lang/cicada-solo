@@ -2,7 +2,6 @@ import * as Mod from "../mod"
 import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Value from "../value"
-import * as Closure from "../value/closure"
 import * as ut from "../../ut"
 
 export function evaluate(
@@ -69,7 +68,7 @@ function do_ap(
   args: Array<Value.Value>
 ): Array<Value.Value> {
   if (target.kind === "Value.fn") {
-    return Closure.apply(target.ret_cl, args)
+    return Value.Closure.apply(target.ret_cl, args)
   } else {
     throw new Error(
       `expecting target to be Value.fn\n` + `target: ${ut.inspect(target)}\n`

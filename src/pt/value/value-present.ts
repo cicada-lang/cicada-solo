@@ -2,7 +2,6 @@ import * as Env from "../env"
 import * as Mod from "../mod"
 import * as Exp from "../exp"
 import * as Value from "../value"
-import * as DelayedChoices from "../value/delayed-choices"
 import { Obj } from "../../ut"
 
 export type Present = Obj<any> | Array<any> | string
@@ -39,7 +38,7 @@ export function present(
       switch (opts.on_grammar) {
         case "force_one_step": {
           const result = {}
-          for (const [choice_name, parts] of DelayedChoices.force(delayed)) {
+          for (const [choice_name, parts] of Value.DelayedChoices.force(delayed)) {
             Object.assign(
               result,
               Value.choice_present(name, choice_name, parts)

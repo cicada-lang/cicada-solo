@@ -35,3 +35,18 @@ export class Task {
     return this.matched_indexes.length
   }
 }
+
+export function id(task: Task): string {
+  let s = task.grammar_name + ":" + task.choice_name + "@" + task.index
+  for (let i = 0; i < task.matched_indexes.length; i++) {
+    if (i < task.program_counter) {
+      const { index, choice_name } = task.matched_indexes[i]
+      if (choice_name) {
+        s += `(${index}:${choice_name})`
+      } else {
+        s += `(${index})`
+      }
+    }
+  }
+  return s
+}
