@@ -1,7 +1,7 @@
 import * as Span from "../span"
 
 export interface Token {
-  kind: string
+  label: string
   value: string
   span: Span.Span
 }

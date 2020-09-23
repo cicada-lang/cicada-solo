@@ -22,9 +22,9 @@
 
 # pt -- parsing techniques
 
-- `Machine.step`
 - `Machine.continue_upstream_tasks`
 - `pt/parsers/earley/gen`
+- `pt/parsers/earley/index`
 - [parsing machine] change earley to use ordered choice
 - [parsing machine] change earley to use intersection
 - [test] try examples in peg paper in parser generator
