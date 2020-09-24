@@ -3,27 +3,32 @@ import * as Value from "../../../value"
 import chalk from "chalk"
 
 export function repr(task: Task.Task): string {
-  let s = ""
-  s += task.grammar_name + ":" + task.choice_name
-  s += "@" + task.index
-  s += " -> "
+  let s = task.grammar_name + ":" + task.choice_name + "@" + task.index + " -> "
   for (let i = 0; i < task.parts.length; i++) {
     if (i === task.progress.length) {
       s += chalk.bold(chalk.red("» "))
     }
-    const { name, value } = task.parts[i]
-    s += Value.present(value, {
-      on_grammar: "only_show_name",
-    })
+    s += repr_part(task.parts[i])
     if (i < task.progress.length) {
-      const { choice_name, index } = task.progress[i]
-      if (choice_name) {
-        s += `:${choice_name}@${index}`
-      } else {
-        s += `@${index}`
-      }
+      s += repr_progress_entry(task.progress[i])
     }
     s += " "
   }
   return s
+}
+
+export function repr_progress_entry(entry: { choice_name?: string; index: number }): string {
+  const { choice_name, index } = entry
+  if (choice_name) {
+    return `:${choice_name}@${index}`
+  } else {
+    return `@${index}`
+  }
+}
+
+export function repr_part(part: { name?: string; value: Value.Value }): string {
+  // TODO use name in part.
+  const { name, value } = part
+  const present = Value.present(value, { on_grammar: "only_show_name" })
+  return present.toString()
 }

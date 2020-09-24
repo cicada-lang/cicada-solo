@@ -26,7 +26,6 @@
 
 # pt -- parsing techniques
 
-- redesign `task-repr.ts` and `task-id.ts`
 - `schedule-repr.ts`
 - `Schedule.run` use `opts` to support printing schedule at each iteration
 - `pt/parsers/earley/parse`
