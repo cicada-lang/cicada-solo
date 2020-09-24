@@ -1,10 +1,9 @@
-import * as Machine from "../machine"
 import * as Schedule from "../schedule"
 import * as Task from "../task"
 import * as Value from "../../../value"
 
-export function resume(machine: Machine.Machine, task: Task.Task): void {
-  const upsteam = machine.schedule.chart[task.index]
+export function resume(schedule: Schedule.Schedule, task: Task.Task): void {
+  const upsteam = schedule.chart[task.index]
   for (const upsteam_task of upsteam.values()) {
     // TODO handle name in part.
     if (!upsteam_task.finished_p) {
@@ -23,7 +22,7 @@ export function resume(machine: Machine.Machine, task: Task.Task): void {
               },
             ],
           })
-          Schedule.add_task(machine.schedule, resumed_task.id, resumed_task)
+          Schedule.add_task(schedule, resumed_task.id, resumed_task)
         }
       }
     }

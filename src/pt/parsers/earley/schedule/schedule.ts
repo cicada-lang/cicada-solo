@@ -3,9 +3,9 @@ import * as Value from "../../../value"
 import * as Token from "../../../token"
 import * as ut from "../../../../ut"
 
-export class Schedule {
-  constructor(
-    public queue: Array<Task.Task>,
-    public chart: Array<Map<string, Task.Task>>
-  ) {}
+export interface Schedule {
+  tokens: Array<Token.Token>
+  grammar: Value.Value
+  queue: Array<Task.Task>
+  chart: Array<Map<string, Task.Task>>
 }

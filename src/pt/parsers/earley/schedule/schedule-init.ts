@@ -21,7 +21,7 @@ export function init(
     )
   }
 
-  const schedule = new Schedule.Schedule(queue, chart)
+  const schedule = { tokens, grammar, queue, chart }
   Schedule.add_grammar(schedule, grammar, 0)
   return schedule
 }

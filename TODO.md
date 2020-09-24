@@ -26,8 +26,6 @@
 
 # pt -- parsing techniques
 
-- merge `Machine` into `Schedule`
-- `Schedule` should be an `interface` (pure) data -- instead of class
 - `Task` should be an `interface` (pure) data -- instead of class
 - `Schedule.run` use `opts` to support printing task at each iteration
 - `Schedule.run` use `opts` to support printing schedule at each iteration

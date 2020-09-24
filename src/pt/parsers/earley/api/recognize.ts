@@ -1,4 +1,4 @@
-import * as Machine from "../machine"
+import * as Schedule from "../schedule"
 import * as Token from "../../../token"
 import * as Value from "../../../value"
 import * as ut from "../../../../ut"
@@ -8,9 +8,9 @@ export function recognize(
   grammar: Value.Value
 ): boolean {
   if (grammar.kind === "Value.grammar") {
-    const machine = Machine.init(tokens, grammar)
-    Machine.run(machine)
-    const end = machine.schedule.chart[machine.schedule.chart.length - 1]
+    const schedule = Schedule.init(tokens, grammar)
+    Schedule.run(schedule)
+    const end = schedule.chart[schedule.chart.length - 1]
     for (const task of end.values()) {
       if (
         grammar.name === task.grammar_name &&
