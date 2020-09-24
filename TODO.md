@@ -28,7 +28,6 @@
 
 - `pt/parsers/earley/parse`
 - `pt/parsers/earley/parse.test.ts`
-- `pt/parsers/earley/index`
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
 - [test] try examples in peg paper in parser generator
