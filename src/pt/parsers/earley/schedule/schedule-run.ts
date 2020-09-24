@@ -3,7 +3,20 @@ import * as Task from "../task"
 import * as Token from "../../../token"
 import * as Value from "../../../value"
 
-export function run(schedule: Schedule.Schedule): void {
+export interface Opts {
+  task?: { verbose?: boolean }
+  schedule?: { verbose?: boolean }
+}
+
+export const DEFAULT_OPTS = {
+  task: { verbose: false },
+  schedule: { verbose: false },
+}
+
+export function run(
+  schedule: Schedule.Schedule,
+  opts: Opts = DEFAULT_OPTS
+): void {
   while (true) {
     // NOTE About searching.
     // push & shift -- Breadth-first search
@@ -12,10 +25,14 @@ export function run(schedule: Schedule.Schedule): void {
     if (task === undefined) {
       return
     } else if (Task.finished_p(task)) {
-      // console.log("[resume from]:", Task.repr(task))
+      if (opts.task?.verbose) {
+        console.log("[resume from]:", Task.repr(task))
+      }
       Schedule.resume(schedule, task)
     } else {
-      // console.log("   [stepping]:", Task.repr(task))
+      if (opts.task?.verbose) {
+        console.log("   [stepping]:", Task.repr(task))
+      }
       Schedule.step(schedule, task)
     }
   }

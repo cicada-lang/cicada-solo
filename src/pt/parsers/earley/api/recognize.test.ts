@@ -37,6 +37,6 @@ function lex(text: string): Array<Token.Token> {
 
 assert(recognize(lex("a"), grammar))
 assert(recognize(lex("a-a"), grammar))
-assert(recognize(lex("a-a+a"), grammar))
+assert(recognize(lex("a-a+a"), grammar, { task: { verbose: true } }))
 assert(!recognize(lex("a-a+b"), grammar))
 assert(!recognize(lex("a-a++"), grammar))

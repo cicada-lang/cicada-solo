@@ -6,11 +6,12 @@ import * as ut from "../../../../ut"
 
 export function recognize(
   tokens: Array<Token.Token>,
-  grammar: Value.Value
+  grammar: Value.Value,
+  opts: Schedule.Opts = Schedule.DEFAULT_OPTS
 ): boolean {
   if (grammar.kind === "Value.grammar") {
     const schedule = Schedule.init(tokens, grammar)
-    Schedule.run(schedule)
+    Schedule.run(schedule, opts)
     const end = schedule.chart[schedule.chart.length - 1]
     for (const task of end.values()) {
       if (
