@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
+const path = require("path")
 const fg = require("fast-glob")
+const changeCase = require("change-case")
 const run = require("./scripts/run")
 const expect = require("./scripts/expect")
 const snapshot = require("./scripts/snapshot")
@@ -10,6 +12,7 @@ let dev = {}
 
 dev.t = () => {
   dev.test_lib()
+  dev.test_impression()
   dev.test_lang0()
   dev.test_lang1()
   dev.test_lang2()
@@ -18,6 +21,16 @@ dev.t = () => {
 dev.test_lib = () => {
   for (const file of fg.sync("lib/**/*.test.js")) {
     expect.ok(`node ${file}`)
+  }
+}
+
+dev.test_impression = () => {
+  for (const file of fg.sync("lib/**/*.impression.js")) {
+    snapshot.out(`node`, file, {
+      snapshot: {
+        out: path.resolve("snapshot", changeCase.paramCase(file) + ".out"),
+      },
+    })
   }
 }
 

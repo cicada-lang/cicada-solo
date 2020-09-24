@@ -26,6 +26,7 @@
     "@forchange/partech": "^1.0.15",
     "@types/deep-diff": "^1.0.0",
     "chalk": "^4.1.0",
+    "change-case": "^4.1.1",
     "deep-diff": "^1.0.2",
     "fast-deep-equal": "^3.1.3",
     "fast-glob": "^3.2.4",

@@ -8,8 +8,8 @@ async function out(prog, files, { echo, snapshot } = {}) {
     execute(`${prog} ${file}`).then(({ stdout, stderr, error }) => {
       const head = chalk.bold.blue("[snapshot.out]")
       console.log(`${head} ${prog} ${file}`)
-      if (stdout) fs.promises.writeFile(`${file}.out`, stdout)
-      if (stderr) fs.promises.writeFile(`${file}.err`, stderr)
+      if (stdout) fs.promises.writeFile(snapshot?.out || `${file}.out`, stdout)
+      if (stderr) fs.promises.writeFile(snapshot?.err || `${file}.err`, stderr)
       if (stdout && echo) console.log(stdout)
       if (stderr && echo) console.error(stderr)
       if (error) {
@@ -25,8 +25,8 @@ async function err(prog, files, { echo, snapshot } = {}) {
     execute(`${prog} ${file}`).then(({ stdout, stderr }) => {
       const head = chalk.bold.red("[snapshot.err]")
       console.log(`${head} ${prog} ${file}`)
-      if (stdout) fs.promises.writeFile(`${file}.out`, stdout)
-      if (stderr) fs.promises.writeFile(`${file}.err`, stderr)
+      if (stdout) fs.promises.writeFile(snapshot?.out || `${file}.out`, stdout)
+      if (stderr) fs.promises.writeFile(snapshot?.err || `${file}.err`, stderr)
       if (stdout && echo) console.log(stdout)
       if (stderr && echo) console.error(stderr)
     })
