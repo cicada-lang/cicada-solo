@@ -1,2 +1,6 @@
 export * from "./task"
+export * from "./task-id"
 export * from "./task-repr"
+export * from "./task-finished-p"
+export * from "./task-current-index"
+export * from "./task-current-part"

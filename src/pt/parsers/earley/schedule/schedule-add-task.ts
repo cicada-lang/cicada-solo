@@ -6,8 +6,8 @@ export function add_task(
   task_id: string,
   task: Task.Task
 ): void {
-  if (!schedule.chart[task.current_index].has(task_id)) {
-    schedule.chart[task.current_index].set(task_id, task)
+  if (!schedule.chart[Task.current_index(task)].has(task_id)) {
+    schedule.chart[Task.current_index(task)].set(task_id, task)
     schedule.queue.push(task)
   }
 }

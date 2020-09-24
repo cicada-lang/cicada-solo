@@ -3,7 +3,7 @@ import * as Task from "../task"
 import * as Token from "../../../token"
 import * as Value from "../../../value"
 
-export function run(schedule: Schedule.Schedule) : void {
+export function run(schedule: Schedule.Schedule): void {
   while (true) {
     // NOTE About searching.
     // push & shift -- Breadth-first search
@@ -11,7 +11,7 @@ export function run(schedule: Schedule.Schedule) : void {
     const task = schedule.queue.shift()
     if (task === undefined) {
       return
-    } else if (task.finished_p) {
+    } else if (Task.finished_p(task)) {
       // console.log("[resume from]:", Task.repr(task))
       Schedule.resume(schedule, task)
     } else {

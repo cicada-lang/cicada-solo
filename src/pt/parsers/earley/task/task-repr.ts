@@ -8,15 +8,15 @@ export function repr(task: Task.Task): string {
   s += "@" + task.index
   s += " -> "
   for (let i = 0; i < task.parts.length; i++) {
-    if (i === task.program_counter) {
+    if (i === task.progress.length) {
       s += chalk.bold(chalk.red("» "))
     }
     const { name, value } = task.parts[i]
     s += Value.present(value, {
       on_grammar: "only_show_name",
     })
-    if (i < task.program_counter) {
-      const { choice_name, index } = task.matched_indexes[i]
+    if (i < task.progress.length) {
+      const { choice_name, index } = task.progress[i]
       if (choice_name) {
         s += `:${choice_name}@${index}`
       } else {

@@ -16,9 +16,9 @@ export function add_grammar(
         choice_name,
         parts,
         index,
-        matched_indexes: new Array(),
+        progress: new Array(),
       })
-      Schedule.add_task(schedule, task.id, task)
+      Schedule.add_task(schedule, Task.id(task), task)
     }
   } else {
     throw new Error(`expecting Value.grammar but got: ${ut.inspect(grammar)}`)

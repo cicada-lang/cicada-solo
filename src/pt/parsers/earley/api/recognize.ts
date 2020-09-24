@@ -1,4 +1,5 @@
 import * as Schedule from "../schedule"
+import * as Task from "../task"
 import * as Token from "../../../token"
 import * as Value from "../../../value"
 import * as ut from "../../../../ut"
@@ -14,7 +15,7 @@ export function recognize(
     for (const task of end.values()) {
       if (
         grammar.name === task.grammar_name &&
-        task.current_index === tokens.length
+        Task.current_index(task) === tokens.length
       ) {
         return true
       }
