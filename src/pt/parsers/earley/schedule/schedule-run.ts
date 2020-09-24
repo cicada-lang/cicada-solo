@@ -18,6 +18,10 @@ export function run(
   opts: Opts = DEFAULT_OPTS
 ): void {
   while (true) {
+    if (opts.schedule?.verbose) {
+      console.log(Schedule.repr(schedule))
+    }
+
     // NOTE About searching.
     // push & shift -- Breadth-first search
     // push & pop   --   Depth-first search

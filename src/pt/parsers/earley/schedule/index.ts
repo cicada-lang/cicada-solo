@@ -1,5 +1,6 @@
 export * from "./schedule"
 export * from "./schedule-init"
+export * from "./schedule-repr"
 export * from "./schedule-add-task"
 export * from "./schedule-add-grammar"
 export * from "./schedule-run"
