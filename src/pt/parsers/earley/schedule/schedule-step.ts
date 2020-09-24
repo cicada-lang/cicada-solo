@@ -22,7 +22,7 @@ export function step(schedule: Schedule.Schedule, task: Task.Task): void {
               { index: Task.current_index(task) + 1 },
             ],
           }
-          Schedule.add_task(schedule, Task.id(new_task), new_task)
+          Schedule.add_task(schedule, new_task)
         }
       }
       break
@@ -38,7 +38,7 @@ export function step(schedule: Schedule.Schedule, task: Task.Task): void {
               { index: Task.current_index(task) + 1 },
             ],
           }
-          Schedule.add_task(schedule, Task.id(new_task), new_task)
+          Schedule.add_task(schedule, new_task)
         }
       }
       break

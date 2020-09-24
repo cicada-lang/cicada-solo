@@ -22,7 +22,7 @@ export function resume(schedule: Schedule.Schedule, task: Task.Task): void {
               },
             ],
           }
-          Schedule.add_task(schedule, Task.id(resumed_task), resumed_task)
+          Schedule.add_task(schedule, resumed_task)
         }
       }
     }

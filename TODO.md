@@ -28,7 +28,6 @@
 
 - `pt/parsers/earley/parse`
 - `pt/parsers/earley/parse.test.ts`
-- simple `Schedule.add_task` -- no `task_id` arg
 - `pt/parsers/earley/index`
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
