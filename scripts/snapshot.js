@@ -1,5 +1,6 @@
 const execute = require("./execute")
 const files_unfold = require("./files-unfold")
+const line_report = require("./line-report")
 const chalk = require("chalk")
 const fs = require("fs")
 
@@ -13,8 +14,8 @@ function report(output, quiet) {
 async function out(prog, files, { echo, snapshot, quiet } = {}) {
   for (const file of await files_unfold(files)) {
     const command = `${prog} ${file}`
-    execute(command).then(({ stdout, stderr, error }) => {
-      console.log(OUT, command)
+    execute(command).then(({ stdout, stderr, elapse, error }) => {
+      line_report(OUT, { elapse, command })
       if (stdout)
         fs.promises.writeFile(
           report(snapshot?.out || `${file}.out`, quiet),
@@ -29,13 +30,13 @@ async function out(prog, files, { echo, snapshot, quiet } = {}) {
   }
 }
 
-const ERR = chalk.bold.red("[snapshot.err]")
+const ERR = chalk.bold.yellow("[snapshot.err]")
 
 async function err(prog, files, { echo, snapshot, quiet } = {}) {
   for (const file of await files_unfold(files)) {
     const command = `${prog} ${file}`
-    execute(command).then(({ stdout, stderr }) => {
-      console.log(ERR, command)
+    execute(command).then(({ stdout, stderr, elapse }) => {
+      line_report(ERR, { elapse, command })
       if (stdout)
         fs.promises.writeFile(
           report(snapshot?.out || `${file}.out`, quiet),
