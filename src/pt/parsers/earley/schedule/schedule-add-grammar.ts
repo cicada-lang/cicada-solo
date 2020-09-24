@@ -11,13 +11,13 @@ export function add_grammar(
   if (grammar.kind === "Value.grammar") {
     const choices = Value.DelayedChoices.force(grammar.delayed)
     for (const [choice_name, parts] of choices) {
-      const task = new Task.Task({
+      const task = {
         grammar_name: grammar.name,
         choice_name,
         parts,
         index,
         progress: new Array(),
-      })
+      }
       Schedule.add_task(schedule, Task.id(task), task)
     }
   } else {

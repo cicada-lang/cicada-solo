@@ -12,7 +12,7 @@ export function resume(schedule: Schedule.Schedule, task: Task.Task): void {
         const grammar = value
         if (grammar.name === task.grammar_name) {
           const forward_steps = Task.current_index(task) - task.index
-          const resumed_task = new Task.Task({
+          const resumed_task = {
             ...upsteam_task,
             progress: [
               ...upsteam_task.progress,
@@ -21,7 +21,7 @@ export function resume(schedule: Schedule.Schedule, task: Task.Task): void {
                 choice_name: task.choice_name,
               },
             ],
-          })
+          }
           Schedule.add_task(schedule, Task.id(resumed_task), resumed_task)
         }
       }

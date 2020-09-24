@@ -15,13 +15,13 @@ export function step(schedule: Schedule.Schedule, task: Task.Task): void {
       if (Task.current_index(task) < schedule.tokens.length) {
         const token = schedule.tokens[Task.current_index(task)]
         if (value.value === token.value) {
-          const new_task = new Task.Task({
+          const new_task = {
             ...task,
             progress: [
               ...task.progress,
               { index: Task.current_index(task) + 1 },
             ],
-          })
+          }
           Schedule.add_task(schedule, Task.id(new_task), new_task)
         }
       }
@@ -31,13 +31,13 @@ export function step(schedule: Schedule.Schedule, task: Task.Task): void {
       if (Task.current_index(task) < schedule.tokens.length) {
         const token = schedule.tokens[Task.current_index(task)]
         if (value.label === token.label && value.value.exec(token.value)) {
-          const new_task = new Task.Task({
+          const new_task = {
             ...task,
             progress: [
               ...task.progress,
               { index: Task.current_index(task) + 1 },
             ],
-          })
+          }
           Schedule.add_task(schedule, Task.id(new_task), new_task)
         }
       }
