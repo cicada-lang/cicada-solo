@@ -1,10 +1,11 @@
 const execute = require("./execute")
 const chalk = require("chalk")
 
-async function ok(prog) {
-  execute(prog).then(({ stdout, stderr, error }) => {
-    const head = chalk.bold.blue("[expect.ok]")
-    console.log(`${head} ${prog}`)
+const OK = chalk.bold.blue("[expect.ok]")
+
+async function ok(command) {
+  execute(command).then(({ stdout, stderr, error }) => {
+    console.log(`${OK} ${command}`)
     if (stdout) console.log(stdout)
     if (stderr) console.error(stderr)
     if (error) {
@@ -13,10 +14,11 @@ async function ok(prog) {
   })
 }
 
-async function fail(prog) {
-  execute(prog).then(({ stdout, stderr }) => {
-    const head = chalk.bold.red("[expect.fail]")
-    console.log(`${head} ${prog}`)
+const FAIL = chalk.bold.red("[expect.fail]")
+
+async function fail(command) {
+  execute(command).then(({ stdout, stderr }) => {
+    console.log(`${FAIL} ${command}`)
     console.log(stdout)
     console.error(stderr)
   })

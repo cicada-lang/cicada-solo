@@ -3,15 +3,24 @@ const files_unfold = require("./files-unfold")
 const chalk = require("chalk")
 const fs = require("fs")
 
-async function out(prog, files, { echo, snapshot } = {}) {
+const OUT = chalk.bold.blue("[snapshot.out]")
+
+function report(output, quiet) {
+  if (!quiet) console.log(chalk.bold("  >>>"), output)
+  return output
+}
+
+async function out(prog, files, { echo, snapshot, quiet } = {}) {
   for (const file of await files_unfold(files)) {
-    execute(`${prog} ${file}`).then(({ stdout, stderr, error }) => {
-      const head = chalk.bold.blue("[snapshot.out]")
-      console.log(`${head} ${prog} ${file}`)
-      if (stdout) fs.promises.writeFile(snapshot?.out || `${file}.out`, stdout)
-      if (stderr) fs.promises.writeFile(snapshot?.err || `${file}.err`, stderr)
+    const command = `${prog} ${file}`
+    execute(command).then(({ stdout, stderr, error }) => {
+      console.log(OUT, command)
+      if (stdout)
+        fs.promises.writeFile(
+          report(snapshot?.out || `${file}.out`, quiet),
+          stdout
+        )
       if (stdout && echo) console.log(stdout)
-      if (stderr && echo) console.error(stderr)
       if (error) {
         console.error(error.message)
         process.exit(1)
@@ -20,13 +29,23 @@ async function out(prog, files, { echo, snapshot } = {}) {
   }
 }
 
-async function err(prog, files, { echo, snapshot } = {}) {
+const ERR = chalk.bold.red("[snapshot.err]")
+
+async function err(prog, files, { echo, snapshot, quiet } = {}) {
   for (const file of await files_unfold(files)) {
-    execute(`${prog} ${file}`).then(({ stdout, stderr }) => {
-      const head = chalk.bold.red("[snapshot.err]")
-      console.log(`${head} ${prog} ${file}`)
-      if (stdout) fs.promises.writeFile(snapshot?.out || `${file}.out`, stdout)
-      if (stderr) fs.promises.writeFile(snapshot?.err || `${file}.err`, stderr)
+    const command = `${prog} ${file}`
+    execute(command).then(({ stdout, stderr }) => {
+      console.log(ERR, command)
+      if (stdout)
+        fs.promises.writeFile(
+          report(snapshot?.out || `${file}.out`, quiet),
+          stdout
+        )
+      if (stderr)
+        fs.promises.writeFile(
+          report(snapshot?.err || `${file}.err`, quiet),
+          stderr
+        )
       if (stdout && echo) console.log(stdout)
       if (stderr && echo) console.error(stderr)
     })
