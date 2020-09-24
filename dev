@@ -3,10 +3,7 @@
 const path = require("path")
 const fg = require("fast-glob")
 const changeCase = require("change-case")
-const run = require("./scripts/run")
-const expect = require("./scripts/expect")
-const snapshot = require("./scripts/snapshot")
-require("./scripts/exit-on-unhandled-rejection")
+const { run, expect, snapshot } = require("@xieyuheng/test-runner")
 
 let commands = {}
 
