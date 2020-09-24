@@ -26,6 +26,7 @@
 
 # pt -- parsing techniques
 
+- move test runner scripts to `@xieyuheng/test-runner`
 - `pt/parsers/earley/parse`
 - `pt/parsers/earley/parse.test.ts`
 - [earley] change earley to use ordered choice

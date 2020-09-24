@@ -8,23 +8,23 @@ const expect = require("./scripts/expect")
 const snapshot = require("./scripts/snapshot")
 require("./scripts/exit-on-unhandled-rejection")
 
-let dev = {}
+let commands = {}
 
-dev.t = () => {
-  dev.test_lib()
-  dev.test_impression()
-  dev.test_lang0()
-  dev.test_lang1()
-  dev.test_lang2()
+commands.t = () => {
+  commands.test_lib()
+  commands.test_impression()
+  commands.test_lang0()
+  commands.test_lang1()
+  commands.test_lang2()
 }
 
-dev.test_lib = () => {
+commands.test_lib = () => {
   for (const file of fg.sync("lib/**/*.test.js")) {
     expect.ok(`node ${file}`)
   }
 }
 
-dev.test_impression = () => {
+commands.test_impression = () => {
   for (const file of fg.sync("lib/**/*.impression.js")) {
     const out = path.resolve("snapshot", changeCase.paramCase(file) + ".out")
     snapshot.out(`node`, file, {
@@ -33,18 +33,18 @@ dev.test_impression = () => {
   }
 }
 
-dev.test_lang0 = () => {
+commands.test_lang0 = () => {
   snapshot.out("./bin/lang0.js", "tests/lang0/**.cic")
 }
 
-dev.test_lang1 = () => {
+commands.test_lang1 = () => {
   snapshot.out("./bin/lang1.js", "tests/lang1/**.cic")
   snapshot.err("./bin/lang1.js", "tests/lang1-error/**.cic")
 }
 
-dev.test_lang2 = () => {
+commands.test_lang2 = () => {
   snapshot.out("./bin/lang2.js", "tests/lang2/**.cic")
   snapshot.err("./bin/lang2.js", "tests/lang2-error/**.cic")
 }
 
-run(dev)
+run(commands)
