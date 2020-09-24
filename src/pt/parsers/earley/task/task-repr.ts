@@ -2,11 +2,17 @@ import * as Task from "../task"
 import * as Value from "../../../value"
 import chalk from "chalk"
 
+// NOTE The format of repr:
+// <task> = <grammar>:<choice>@<index> -> <part> ...
+// <part> = <grammar>:<choice>@<index> | <grammar>@<index>
+
+const POINTER = chalk.bold(chalk.red("» "))
+
 export function repr(task: Task.Task): string {
   let s = task.grammar_name + ":" + task.choice_name + "@" + task.index + " -> "
   for (let i = 0; i < task.parts.length; i++) {
     if (i === task.progress.length) {
-      s += chalk.bold(chalk.red("» "))
+      s += POINTER
     }
     s += repr_part(task.parts[i])
     if (i < task.progress.length) {
