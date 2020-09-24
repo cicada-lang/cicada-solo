@@ -26,10 +26,9 @@ dev.test_lib = () => {
 
 dev.test_impression = () => {
   for (const file of fg.sync("lib/**/*.impression.js")) {
+    const out = path.resolve("snapshot", changeCase.paramCase(file) + ".out")
     snapshot.out(`node`, file, {
-      snapshot: {
-        out: path.resolve("snapshot", changeCase.paramCase(file) + ".out"),
-      },
+      snapshot: { out },
     })
   }
 }
