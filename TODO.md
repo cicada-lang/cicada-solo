@@ -26,7 +26,6 @@
 
 # pt -- parsing techniques
 
-- `Value.equal_parts`
 - `Value.equal`
 - `Exp.equal`
 - `Schedule.collect`
