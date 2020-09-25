@@ -30,8 +30,8 @@ function collect_node(
   for (const task of schedule.chart[end].values()) {
     if (
       start === task.index &&
-        end === Task.current_index(task) &&
-        task.progress.length === task.parts.length
+      end === Task.current_index(task) &&
+      task.progress.length === task.parts.length
     ) {
       if (Task.match_grammar_p(task, grammar)) {
         const head = { name: grammar.name, kind: task.choice_name }
@@ -64,21 +64,25 @@ function collect_body(
   for (let i = 0; i < parts.length; i++) {
     const entry = progress[i]
     const part = parts[i]
-    if (part.name === undefined) continue
-    const name = part.name as string
     if (entry.choice_name) {
       if (part.value.kind === "Value.grammar") {
-        const grammar = part.value
-        const node = collect_node(schedule, grammar, index, entry.index)
-        body[name] = node
+        if (part.name) {
+          const grammar = part.value
+          const node = collect_node(schedule, grammar, index, entry.index)
+          body[part.name] = node
+        }
         index = entry.index
       } else {
-        throw new Error(`expecting Value.grammar instead of: ${part.value.kind}`)
+        throw new Error(
+          `expecting Value.grammar instead of: ${part.value.kind}`
+        )
       }
     } else {
-      const token = schedule.tokens[entry.index - 1]
-      const leaf = Tree.leaf(token)
-      body[name] = leaf
+      if (part.name) {
+        const token = schedule.tokens[entry.index - 1]
+        const leaf = Tree.leaf(token)
+        body[part.name] = leaf
+      }
       index = entry.index
     }
   }

@@ -26,9 +26,10 @@
 
 # pt -- parsing techniques
 
-- `pt/parsers/earley/api/parse`
-- `pt/parsers/earley/api/parse.test.ts`
-- `Span` in `Tree`
+- factor the knowledge about `tokens.length + 1 === chart.length`
+- refactor `Schedule.collect_body`
+- improve `pt/parsers/earley/api/parse.test.ts`
+- `Span` in `Tree.node`
 - `pt/parsers/earley` -- error report
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
