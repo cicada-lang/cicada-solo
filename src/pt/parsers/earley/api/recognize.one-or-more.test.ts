@@ -6,17 +6,17 @@ import * as Token from "../../../token"
 import assert from "assert"
 
 const E = {
-  "E:EQF": [["E"], ["Q"], ["F"]],
-  "E:F": [["F"]],
+  "E:EQF": ["E", "Q", "F"],
+  "E:F": ["F"],
 }
 
 const F = {
-  "F:a": ["a"],
+  "F:a": ['"a"'],
 }
 
 const Q = {
-  "Q:+": ["+"],
-  "Q:-": ["-"],
+  "Q:+": ['"+"'],
+  "Q:-": ['"-"'],
 }
 
 const one_or_more = {
@@ -24,13 +24,16 @@ const one_or_more = {
     "x",
     {
       "one_or_more:one": [{ value: "x" }],
-      "one_or_more:more": [{ head: "x" }, { tail: ["one_or_more", ["x"]] }],
+      "one_or_more:more": [
+        { head: "x" },
+        { tail: { $ap: ["one_or_more", "x"] } },
+      ],
     },
   ],
 }
 
 const S = {
-  "S:S": [["one_or_more", "(", ["E"], ")"]],
+  "S:S": [{ $ap: ["one_or_more", '"("', "E", '")"'] }],
 }
 
 const mod = Mod.build({ E, F, Q, one_or_more, S })

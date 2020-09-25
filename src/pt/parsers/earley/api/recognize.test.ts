@@ -6,17 +6,17 @@ import * as Token from "../../../token"
 import assert from "assert"
 
 const E = {
-  "E:EQF": [["E"], ["Q"], ["F"]],
-  "E:F": [["F"]],
+  "E:EQF": ["E", "Q", "F"],
+  "E:F": ["F"],
 }
 
 const F = {
-  "F:a": ["a"],
+  "F:a": ['"a"'],
 }
 
 const Q = {
-  "Q:+": ["+"],
-  "Q:-": ["-"],
+  "Q:+": ['"+"'],
+  "Q:-": ['"-"'],
 }
 
 const mod = Mod.build({ E, F, Q })

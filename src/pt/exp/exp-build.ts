@@ -4,35 +4,14 @@ import * as ut from "../../ut"
 
 export function build(present: Exp.Present): Exp.Exp {
   if (typeof present === "string") return from_string(present)
-  else if (present instanceof Array) return from_array(present)
   else return from_object(present)
 }
 
 function from_string(str: string): Exp.Exp {
-  return Exp.str(str)
-}
-
-// NOTE array is like function application syntax in common lisp.
-// - the head is in function space.
-// - when the head is a string, it is viewed as a variable.
-function build_head(head: Exp.Present): Exp.Exp {
-  if (typeof head === "string") {
-    return Exp.v(head)
+  if (str.startsWith('"') && str.endsWith('"')) {
+    return Exp.str(JSON.parse(str))
   } else {
-    return build(head)
-  }
-}
-
-function from_array(array: Array<any>): Exp.Exp {
-  if (array.length === 1) {
-    return build_head(array[0])
-  } else if (array.length > 1) {
-    const [target, ...args] = array
-    return Exp.ap(build_head(target), args.map(build))
-  } else {
-    throw new Error(
-      `array.length must be >= 1.\n` + `array.length: ${array.length}\n`
-    )
+    return Exp.v(str)
   }
 }
 
@@ -40,6 +19,9 @@ function from_object(obj: Obj<any>): Exp.Exp {
   if (obj.hasOwnProperty("$fn")) {
     const [name, ret] = obj["$fn"]
     return Exp.fn(name, build(ret))
+  } else if (obj.hasOwnProperty("$ap")) {
+    const [target, ...args] = obj["$ap"]
+    return Exp.ap(build(target), args.map(build))
   } else if (obj.hasOwnProperty("$pattern")) {
     const [label, value] = obj["$pattern"].split("#")
     return Exp.pattern(label, new RegExp(value))

@@ -26,8 +26,6 @@
 
 # pt -- parsing techniques
 
-- current design of present is error prone
-  - using `[]` as function call syntax is error prone
 - `Task.match_grammar_p`
 - `Schedule.collect`
 - `pt/parsers/earley/api/parse`

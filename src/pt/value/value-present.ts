@@ -10,7 +10,7 @@ export type PresentOpts = {
   on_grammar: on_grammar_t
 }
 
-const default_present_opts: PresentOpts = {
+const DEFAULT_PRESENT_OPTS: PresentOpts = {
   on_grammar: "as_exp",
 }
 
@@ -18,7 +18,7 @@ type on_grammar_t = "force_one_step" | "only_show_name" | "as_exp"
 
 export function present(
   value: Value.Value,
-  opts: PresentOpts = default_present_opts
+  opts: PresentOpts = DEFAULT_PRESENT_OPTS
 ): Present {
   switch (value.kind) {
     case "Value.fn": {
@@ -28,7 +28,7 @@ export function present(
       return { $fn: [name, Exp.present(exp)] }
     }
     case "Value.str": {
-      return value.value
+      return JSON.stringify(value.value)
     }
     case "Value.pattern": {
       return { $pattern: `${value.label}#${value.value.source}` }
@@ -72,16 +72,8 @@ export function choice_present(
     [`${grammar_name}:${choice_name}`]: parts.map((part) => {
       const { name, value } = part
       return name
-        ? { [name]: strip(present(value, { on_grammar: "only_show_name" })) }
+        ? { [name]: present(value, { on_grammar: "only_show_name" }) }
         : present(value, { on_grammar: "only_show_name" })
     }),
-  }
-}
-
-function strip(present: Present): Present {
-  if (present instanceof Array && present.length === 1) {
-    return present[0]
-  } else {
-    return present
   }
 }
