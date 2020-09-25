@@ -19,5 +19,5 @@ export function parse(
 
   const schedule = Schedule.init(tokens, grammar)
   Schedule.run(schedule, opts)
-  return Schedule.collect(schedule)
+  return Schedule.harvest(schedule)
 }

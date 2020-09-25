@@ -27,7 +27,7 @@
 # pt -- parsing techniques
 
 - factor the knowledge about `tokens.length + 1 === chart.length`
-- refactor `Schedule.collect_body`
+- refactor `Schedule.harvest_body`
 - improve `pt/parsers/earley/api/parse.test.ts`
 - `Span` in `Tree.node`
 - `pt/parsers/earley` -- error report

@@ -7,7 +7,7 @@ import * as Tree from "../../../tree"
 import { Obj } from "../../../../ut"
 import * as ut from "../../../../ut"
 
-export function collect(schedule: Schedule.Schedule): Tree.Tree {
+export function harvest(schedule: Schedule.Schedule): Tree.Tree {
   // NOTE
   //   since
   //     tokens.length + 1 === chart.length
@@ -18,10 +18,10 @@ export function collect(schedule: Schedule.Schedule): Tree.Tree {
   //     tokens.length - 1
   const start = 0
   const end = schedule.tokens.length
-  return collect_node(schedule, schedule.grammar, start, end)
+  return harvest_node(schedule, schedule.grammar, start, end)
 }
 
-function collect_node(
+function harvest_node(
   schedule: Schedule.Schedule,
   grammar: Value.grammar,
   start: number,
@@ -39,7 +39,7 @@ function collect_node(
         const parts = choices.get(task.choice_name)
         if (parts === undefined)
           throw new Error(`can not find choice: ${task.choice_name}`)
-        const body = collect_body(schedule, parts, task.progress, start)
+        const body = harvest_body(schedule, parts, task.progress, start)
         return Tree.node(head, body)
       }
     }
@@ -48,7 +48,7 @@ function collect_node(
   throw new Error("PARSING_ERROR")
 }
 
-function collect_body(
+function harvest_body(
   schedule: Schedule.Schedule,
   parts: Array<{ name?: string; value: Value.Value }>,
   progress: Array<{ index: number; choice_name?: string }>,
@@ -68,7 +68,7 @@ function collect_body(
       if (part.value.kind === "Value.grammar") {
         if (part.name) {
           const grammar = part.value
-          const node = collect_node(schedule, grammar, index, entry.index)
+          const node = harvest_node(schedule, grammar, index, entry.index)
           body[part.name] = node
         }
         index = entry.index
