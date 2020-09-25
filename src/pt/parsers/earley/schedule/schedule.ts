@@ -1,7 +1,6 @@
 import * as Task from "../task"
 import * as Value from "../../../value"
 import * as Token from "../../../token"
-import * as ut from "../../../../ut"
 
 export interface Schedule {
   tokens: Array<Token.Token>

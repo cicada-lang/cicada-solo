@@ -1,6 +1,5 @@
 import * as Schedule from "../schedule"
 import * as Task from "../task"
-import * as Value from "../../../value"
 
 export function resume(schedule: Schedule.Schedule, task: Task.Task): void {
   const upsteam = schedule.chart[task.index]

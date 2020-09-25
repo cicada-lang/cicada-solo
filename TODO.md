@@ -30,7 +30,7 @@
 - `pt/parsers/earley/api/parse`
 - `pt/parsers/earley/api/parse.test.ts`
 - `Span` in `Tree`
-- error report
+- `pt/parsers/earley` -- error report
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
 - [test] try examples in peg paper in parser generator

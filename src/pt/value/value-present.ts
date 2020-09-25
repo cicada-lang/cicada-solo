@@ -1,6 +1,4 @@
 import * as Value from "../value"
-import * as Env from "../env"
-import * as Mod from "../mod"
 import * as Exp from "../exp"
 import { Obj } from "../../ut"
 
