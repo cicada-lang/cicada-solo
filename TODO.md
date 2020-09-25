@@ -26,10 +26,10 @@
 
 # pt -- parsing techniques
 
+- test by length in `parse.impression.ts`
 - factor the knowledge about `tokens.length + 1 === chart.length`
 - refactor `Schedule.harvest_body`
-- improve `pt/parsers/earley/api/parse.test.ts` -- use more meaningful example grammar
-- snapshot `pt/parsers/earley/api/parse.impression.ts` -- instead of `parse.test.ts`
+- improve `pt/parsers/earley/api/parse.impression.ts` -- use more meaningful example grammar
 - `Span` in `Tree.node`
 - `pt/parsers/earley` -- error report
 - [earley] change earley to use ordered choice

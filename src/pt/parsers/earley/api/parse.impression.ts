@@ -7,8 +7,8 @@ import * as ut from "../../../../ut"
 import assert from "assert"
 
 const E = {
-  "E:EQF": ["E", "Q", { a: "F" }],
-  "E:F": [{ a: "F" }],
+  "E:EQF": ["E", "Q", "F"],
+  "E:F": ["F"],
 }
 
 const F = {
@@ -53,10 +53,17 @@ export function lex(text: string): Array<Token.Token> {
   return tokens
 }
 
-console.log(ut.inspect(parse(lex("(a)"), grammar)))
-console.log(ut.inspect(parse(lex("(a-a)"), grammar)))
-console.log(ut.inspect(parse(lex("(a-a+a)"), grammar)))
-console.log(ut.inspect(parse(lex("(a)(a)(a)"), grammar)))
-console.log(ut.inspect(parse(lex("(a-a)(a-a)(a-a)"), grammar)))
-console.log(ut.inspect(parse(lex("(a-a+a)(a-a+a)(a-a+a)"), grammar)))
-console.log(ut.inspect(parse(lex("(a)(a-a)(a-a+a)"), grammar)))
+function impression(text: string): void {
+  const tree = parse(lex(text), grammar)
+  console.log(JSON.stringify(tree, null, 2))
+}
+
+impression("(a)")
+impression("(a)(a)")
+impression("(a)(a)(a)")
+impression("(a-a)")
+impression("(a-a+a)")
+impression("(a)(a)(a)(a)(a)(a)(a)(a)")
+impression("(a-a)(a-a)(a-a)")
+impression("(a-a+a)(a-a+a)(a-a+a)")
+impression("(a)(a-a)(a-a+a)")
