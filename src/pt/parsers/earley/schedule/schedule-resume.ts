@@ -10,8 +10,7 @@ export function resume(schedule: Schedule.Schedule, task: Task.Task): void {
       const { value } = Task.current_part(upsteam_task)
       if (value.kind === "Value.grammar") {
         const grammar = value
-        // TODO it is not enough to only compare grammar_name
-        if (grammar.name === task.grammar_name) {
+        if (Task.match_grammar_p(task, grammar)) {
           const forward_steps = Task.current_index(task) - task.index
           const resumed_task = {
             ...upsteam_task,

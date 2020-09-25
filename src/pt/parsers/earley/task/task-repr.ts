@@ -23,7 +23,10 @@ export function repr(task: Task.Task): string {
   return s
 }
 
-export function repr_progress_entry(entry: { choice_name?: string; index: number }): string {
+export function repr_progress_entry(entry: {
+  choice_name?: string
+  index: number
+}): string {
   const { choice_name, index } = entry
   if (choice_name) {
     return `:${choice_name}@${index}`

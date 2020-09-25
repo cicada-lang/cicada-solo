@@ -27,6 +27,8 @@
 # pt -- parsing techniques
 
 - `Task.match_grammar_p`
+- `Value.equal`
+- `Exp.equal`
 - `Schedule.collect`
 - `pt/parsers/earley/api/parse`
 - `pt/parsers/earley/api/parse.test.ts`

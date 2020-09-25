@@ -29,10 +29,7 @@ function collect_node(
       end === Task.current_index(task) &&
       task.progress.length === task.parts.length
     ) {
-      if (
-        grammar.name === task.grammar_name
-        // TODO it is not enough to only compare grammar_name
-      ) {
+      if (Task.match_grammar_p(task, grammar)) {
         const head = {
           name: grammar.name,
           kind: task.choice_name,

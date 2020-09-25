@@ -1,5 +1,5 @@
 import * as Task from "../task"
-import { repr_progress_entry } from "../task"
+import { repr_progress_entry } from "./task-repr"
 import * as Value from "../../../value"
 
 export function id(task: Task.Task): string {
