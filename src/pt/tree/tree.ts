@@ -1,15 +1,16 @@
 import { Obj } from "../../ut"
+import * as Token from "../token"
 
 export type Tree = node | leaf
 
-interface Head {
+export interface Head {
   name: string
   kind: string
 }
 
-type Body = Obj<Tree>
+export type Body = Obj<Tree>
 
-interface node {
+export interface node {
   kind: "Tree.node"
   head: Head
   body: Body
@@ -21,17 +22,12 @@ export const node = (head: Head, body: Body): node => ({
   body,
 })
 
-interface Token {
-  kind: string
-  value: string
-}
-
-interface leaf {
+export interface leaf {
   kind: "Tree.leaf"
-  token: Token
+  token: Token.Token
 }
 
-export const leaf = (token: Token): leaf => ({
+export const leaf = (token: Token.Token): leaf => ({
   kind: "Tree.leaf",
   token,
 })
