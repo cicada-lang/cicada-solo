@@ -26,7 +26,8 @@
 
 # pt -- parsing techniques
 
-- `Value.equal`
+- `Closure.equal`
+- `DelayedChoices.equal`
 - `Exp.equal`
 - `Schedule.collect`
 - `pt/parsers/earley/api/parse`

@@ -23,6 +23,8 @@ function test(
   const mod = Mod.build(mods.exp)
   const env = new Map()
 
+  // Exp.v
+
   test(
     mod,
     env,
@@ -37,6 +39,8 @@ function test(
     },
     { on_grammar: "as_exp" }
   )
+
+  // Exp.ap
 
   test(
     mod,
