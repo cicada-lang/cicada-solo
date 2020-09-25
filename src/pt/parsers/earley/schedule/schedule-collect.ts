@@ -19,7 +19,7 @@ export function collect(schedule: Schedule.Schedule): Tree.Tree {
 
 function collect_node(
   schedule: Schedule.Schedule,
-  grammar: Value.Value,
+  grammar: Value.grammar,
   start: number,
   end: number
 ): Tree.Tree {
@@ -30,7 +30,6 @@ function collect_node(
       task.progress.length === task.parts.length
     ) {
       if (
-        grammar.kind === "Value.grammar" &&
         grammar.name === task.grammar_name
         // TODO it is not enough to only compare grammar_name
       ) {

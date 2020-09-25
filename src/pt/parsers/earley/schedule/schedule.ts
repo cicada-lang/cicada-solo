@@ -5,7 +5,7 @@ import * as ut from "../../../../ut"
 
 export interface Schedule {
   tokens: Array<Token.Token>
-  grammar: Value.Value
+  grammar: Value.grammar
   queue: Array<Task.Task>
   chart: Array<Map<string, Task.Task>>
 }

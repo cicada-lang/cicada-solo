@@ -4,7 +4,7 @@ import * as Token from "../../../token"
 
 export function init(
   tokens: Array<Token.Token>,
-  grammar: Value.Value
+  grammar: Value.grammar
 ): Schedule.Schedule {
   const queue = new Array()
   const chart = new Array()
