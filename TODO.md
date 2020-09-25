@@ -26,7 +26,6 @@
 
 # pt -- parsing techniques
 
-- `Env.equal`
 - `Exp.equal`
 - `Schedule.collect`
 - `pt/parsers/earley/api/parse`
