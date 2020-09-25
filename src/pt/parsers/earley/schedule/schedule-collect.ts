@@ -26,7 +26,7 @@ function collect_node(
   grammar: Value.grammar,
   start: number,
   end: number
-): Tree.Tree {
+): Tree.node {
   for (const task of schedule.chart[end].values()) {
     if (
       start === task.index &&
@@ -34,13 +34,11 @@ function collect_node(
         task.progress.length === task.parts.length
     ) {
       if (Task.match_grammar_p(task, grammar)) {
-        const head = {
-          name: grammar.name,
-          kind: task.choice_name,
-        }
+        const head = { name: grammar.name, kind: task.choice_name }
         const choices = Value.DelayedChoices.force(grammar.delayed)
         const parts = choices.get(task.choice_name)
-        if (parts === undefined) throw new Error(`can not find choice: ${task.choice_name}`)
+        if (parts === undefined)
+          throw new Error(`can not find choice: ${task.choice_name}`)
         const body = collect_body(schedule, parts, task.progress, start)
         return Tree.node(head, body)
       }
@@ -56,34 +54,34 @@ function collect_body(
   progress: Array<{ index: number; choice_name?: string }>,
   start: number
 ): Obj<Tree.Tree> {
-  throw new Error()
+  if (parts.length !== progress.length) {
+    throw new Error("parts.length !== progress.length")
+  }
 
-  // if (parts.length !== progress.length) {
-  //   throw new Error("parts.length !== progress.length")
-  // }
+  const body: Obj<Tree.Tree> = {}
+  let index = start
 
-  // const children = new Array()
+  for (let i = 0; i < parts.length; i++) {
+    const entry = progress[i]
+    const part = parts[i]
+    if (part.name === undefined) continue
+    const name = part.name as string
+    if (entry.choice_name) {
+      if (part.value.kind === "Value.grammar") {
+        const grammar = part.value
+        const node = collect_node(schedule, grammar, index, entry.index)
+        body[name] = node
+        index = entry.index
+      } else {
+        throw new Error(`expecting Value.grammar instead of: ${part.value.kind}`)
+      }
+    } else {
+      const token = schedule.tokens[entry.index - 1]
+      const leaf = Tree.leaf(token)
+      body[name] = leaf
+      index = entry.index
+    }
+  }
 
-  // let index = start
-  // for (let i = 0; i < parts.length; i++) {
-  //   const matched = progress[i]
-  //   if (matched instanceof Matched.Terminal) {
-  //     const token = schedule.tokens[matched.index - 1]
-  //     const leaf = new Tree.Leaf(token)
-  //     children.push(leaf)
-  //     index = matched.index
-  //   } else if (matched instanceof Matched.NonTerminal) {
-  //     const sym = parts[i]
-  //     if (sym instanceof Sym.NonTerminal) {
-  //       const rule = Sym.create_rule_from_non_terminal(sym)
-  //       const node = collect_node(schedule, rule, index, matched.index)
-  //       children.push(node)
-  //       index = matched.index
-  //     } else {
-  //       throw new Err.Unhandled(sym)
-  //     }
-  //   }
-  // }
-
-  // return children
+  return body
 }
