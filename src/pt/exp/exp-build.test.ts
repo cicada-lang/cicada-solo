@@ -22,7 +22,7 @@ function test(present: Exp.Present): void {
       "x",
       {
         "one_or_more:one": [{ value: "x" }],
-        "one_or_more:more": [{ head: "x" }, { tail: ["one_or_more", "x"] }],
+        "one_or_more:more": [{ head: "x" }, { tail: ["one_or_more", ["x"]] }],
       },
     ],
   }

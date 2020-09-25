@@ -35,7 +35,7 @@ function test(
       "x",
       {
         "one_or_more:one": [{ value: "x" }],
-        "one_or_more:more": [{ head: "x" }, { tail: ["one_or_more", "x"] }],
+        "one_or_more:more": [{ head: "x" }, { tail: ["one_or_more", ["x"]] }],
       },
     ],
   }
@@ -64,7 +64,7 @@ function test(
     ["one_or_more", "(", ["exp"], ")"],
     {
       "one_or_more:one": [{ value: "x" }],
-      "one_or_more:more": [{ head: "x" }, { tail: ["one_or_more", "x"] }],
+      "one_or_more:more": [{ head: "x" }, { tail: ["one_or_more", ["x"]] }],
     },
     { on_grammar: "as_exp" }
   )
