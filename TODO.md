@@ -26,7 +26,7 @@
 
 # pt -- parsing techniques
 
-- `Task.match_grammar_p`
+- `Value.equal_parts`
 - `Value.equal`
 - `Exp.equal`
 - `Schedule.collect`
