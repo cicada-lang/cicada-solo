@@ -26,8 +26,10 @@
 
 # pt -- parsing techniques
 
-- `pt/parsers/earley/parse`
-- `pt/parsers/earley/parse.test.ts`
+- `Schedule.collect`
+- `pt/parsers/earley/api/parse`
+- `pt/parsers/earley/api/parse.test.ts`
+- error report
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
 - [test] try examples in peg paper in parser generator
