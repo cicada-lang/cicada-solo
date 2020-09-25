@@ -26,7 +26,7 @@
 
 # pt -- parsing techniques
 
-- `DelayedChoices.equal`
+- `DelayedChoices.equal_choices`
 - `Env.equal`
 - `Exp.equal`
 - `Schedule.collect`
