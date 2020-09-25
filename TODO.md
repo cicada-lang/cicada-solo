@@ -26,9 +26,14 @@
 
 # pt -- parsing techniques
 
+- current design of present is error prone 
+  - using `[]` as function call syntax is error prone
+- `Schedule` use `Value.grammar` instead of `Value.Value`
+- `Task.match_grammar_p`
 - `Schedule.collect`
 - `pt/parsers/earley/api/parse`
 - `pt/parsers/earley/api/parse.test.ts`
+- `Span` in `Tree`
 - error report
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
