@@ -14,7 +14,7 @@ export function equal(x: Env.Env, y: Env.Env): boolean {
 function equal_values(x: Array<Value.Value>, y: Array<Value.Value>): boolean {
   if (x.length !== y.length) return false
   for (let i = 0; i < x.length; i++) {
-    if (Value.equal(x[i], y[i])) return false
+    if (!Value.equal(x[i], y[i])) return false
   }
   return true
 }

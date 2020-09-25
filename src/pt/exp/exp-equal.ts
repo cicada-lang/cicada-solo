@@ -21,7 +21,7 @@ export function equal(x: Exp.Exp, y: Exp.Exp): boolean {
 function equal_exps(x: Array<Exp.Exp>, y: Array<Exp.Exp>): boolean {
   if (x.length !== y.length) return false
   for (let i = 0; i < x.length; i++) {
-    if (equal(x[i], y[i])) return false
+    if (!equal(x[i], y[i])) return false
   }
   return true
 }
