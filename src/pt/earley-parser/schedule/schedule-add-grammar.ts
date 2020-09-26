@@ -1,6 +1,6 @@
 import * as Schedule from "../schedule"
-import * as Value from "../../../value"
-import * as ut from "../../../../ut"
+import * as Value from "../../value"
+import * as ut from "../../../ut"
 
 export function add_grammar(
   schedule: Schedule.Schedule,

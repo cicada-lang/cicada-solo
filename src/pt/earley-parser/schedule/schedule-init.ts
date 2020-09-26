@@ -1,6 +1,6 @@
 import * as Schedule from "../schedule"
-import * as Value from "../../../value"
-import * as Token from "../../../token"
+import * as Value from "../../value"
+import * as Token from "../../token"
 
 export function init(
   tokens: Array<Token.Token>,

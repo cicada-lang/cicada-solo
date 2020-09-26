@@ -1,11 +1,11 @@
 import * as Schedule from "../schedule"
 import * as Task from "../task"
-import * as Value from "../../../value"
-import * as Token from "../../../token"
-import * as Span from "../../../span"
-import * as Tree from "../../../tree"
-import { Obj } from "../../../../ut"
-import * as ut from "../../../../ut"
+import * as Value from "../../value"
+import * as Token from "../../token"
+import * as Span from "../../span"
+import * as Tree from "../../tree"
+import { Obj } from "../../../ut"
+import * as ut from "../../../ut"
 
 export function harvest(schedule: Schedule.Schedule): Tree.Tree {
   // NOTE

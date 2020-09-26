@@ -1,4 +1,4 @@
-import * as Value from "../../../value"
+import * as Value from "../../value"
 
 export interface Task {
   grammar_name: string

@@ -1,9 +1,9 @@
 import * as Schedule from "../schedule"
 import * as Task from "../task"
-import * as Token from "../../../token"
-import * as Value from "../../../value"
-import * as Tree from "../../../tree"
-import * as ut from "../../../../ut"
+import * as Token from "../../token"
+import * as Value from "../../value"
+import * as Tree from "../../tree"
+import * as ut from "../../../ut"
 
 export function parse(
   tokens: Array<Token.Token>,

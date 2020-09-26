@@ -26,7 +26,6 @@
 
 # pt -- parsing techniques
 
-- `earley-parser` instead of `parsers/earley`
 - `EarleyParser` as interface
 - `Lexer` as interface
 - `TableLexer` as interface

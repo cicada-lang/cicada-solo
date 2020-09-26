@@ -1,9 +1,9 @@
 import { parse } from "./parse"
-import * as Mod from "../../../mod"
-import * as Env from "../../../env"
-import * as Exp from "../../../exp"
-import * as Token from "../../../token"
-import * as ut from "../../../../ut"
+import * as Mod from "../../mod"
+import * as Env from "../../env"
+import * as Exp from "../../exp"
+import * as Token from "../../token"
+import * as ut from "../../../ut"
 import assert from "assert"
 
 const E = {

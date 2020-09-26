@@ -1,8 +1,8 @@
 import * as Schedule from "../schedule"
 import * as Task from "../task"
-import * as Token from "../../../token"
-import * as Value from "../../../value"
-import * as ut from "../../../../ut"
+import * as Token from "../../token"
+import * as Value from "../../value"
+import * as ut from "../../../ut"
 
 export function recognize(
   tokens: Array<Token.Token>,

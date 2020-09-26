@@ -1,5 +1,5 @@
 import * as Task from "../task"
-import * as Value from "../../../value"
+import * as Value from "../../value"
 
 export function current_part(
   task: Task.Task

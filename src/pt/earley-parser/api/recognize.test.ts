@@ -1,7 +1,7 @@
 import { recognize } from "./recognize"
-import * as Mod from "../../../mod"
-import * as Exp from "../../../exp"
-import * as Token from "../../../token"
+import * as Mod from "../../mod"
+import * as Exp from "../../exp"
+import * as Token from "../../token"
 import assert from "assert"
 
 const E = {
