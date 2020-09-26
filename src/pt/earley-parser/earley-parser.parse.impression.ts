@@ -4,44 +4,10 @@ import * as Mod from "../mod"
 import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Token from "../token"
+import * as Tree from "../tree"
 import * as ut from "../../ut"
 import assert from "assert"
-
-const E = {
-  "E:EQF": ["E", "Q", "F"],
-  "E:F": ["F"],
-}
-
-const F = {
-  "F:a": ['"a"'],
-}
-
-const Q = {
-  "Q:+": ['"+"'],
-  "Q:-": ['"-"'],
-}
-
-const one_or_more = {
-  $fn: [
-    "x",
-    {
-      "one_or_more:one": [{ value: "x" }],
-      "one_or_more:more": [
-        { head: "x" },
-        { tail: { $ap: ["one_or_more", "x"] } },
-      ],
-    },
-  ],
-}
-
-const S = {
-  "S:S": [{ start: { $ap: ["one_or_more", '"("', "E", '")"'] } }],
-}
-
-const mod = Mod.build({ E, F, Q, one_or_more, S })
-export const grammar = Mod.dot(mod, "S")
-export const parser = EarleyParser.create(grammar)
-export const lexer = TableLexer.create([["char", /(.)/]])
+import { parser, lexer } from "./earley-parser.parse.test"
 
 function show(text: string): void {
   const tree = parser.parse(lexer.lex(text))

@@ -1,7 +1,6 @@
 import * as TableLexer from "../table-lexer"
 import * as Token from "../token"
 import * as Span from "../span"
-
 // NOTE https://github.com/tc39/proposal-regexp-match-indices
 import execWithIndices from "regexp-match-indices"
 

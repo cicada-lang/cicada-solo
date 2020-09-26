@@ -31,7 +31,6 @@
 
 this list should be sorted by: necessity use `pt` in `lang`s.
 
-- test by length in `earley-parser.parse.impression.ts`
 - `Span` in `Tree.node`
 - migrate partech langs
 - [refactor] the knowledge about `tokens.length + 1 === chart.length`
