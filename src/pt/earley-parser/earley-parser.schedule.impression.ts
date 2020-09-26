@@ -1,5 +1,5 @@
 import * as EarleyParser from "../earley-parser"
-import { grammar, lex } from "./earley-parser.recognize.test"
+import { grammar, lexer } from "./earley-parser.recognize.test"
 
 const parser = EarleyParser.create(grammar, {
   schedule: {
@@ -9,7 +9,7 @@ const parser = EarleyParser.create(grammar, {
 
 function show(text: string): void {
   console.log(">>>", text)
-  parser.recognize(lex(text))
+  parser.recognize(lexer.lex(text))
   console.log()
 }
 

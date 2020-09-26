@@ -26,29 +26,37 @@ export function create(table: Array<[string, RegExp]>): TableLexer.TableLexer {
       while (i < text.length) {
         const remain = text.slice(i)
 
-        for (const [label, regexp] of table) {
-          const result = execWithIndices(regexp, remain)
-          if (result !== null) {
-            // NOTE The first capture is viewed as the value of the token.
-            const value = result[1]
-            if (value !== undefined) {
-              const main = result[0]
-              const [lo, hi] = result.indices[1]
-              const span = { lo: i + lo, hi: i + hi }
-              i += main.length
-              const token = { label, value, span }
-              tokens.push(token)
-              break
+        function match(
+          table: Array<[string, RegExp]>
+        ): undefined | Token.Token {
+          for (const [label, regexp] of table) {
+            const result = execWithIndices(regexp, remain)
+            if (result !== null) {
+              // NOTE The first capture is viewed as the value of the token.
+              const value = result[1]
+              if (value !== undefined) {
+                const main = result[0]
+                const [lo, hi] = result.indices[1]
+                const span = { lo: i + lo, hi: i + hi }
+                i += main.length
+                return { label, value, span }
+              }
             }
           }
         }
 
-        throw new Error(
-          "All regexp in table fail to match remaining input.\n" +
-            `index: ${i}\n` +
-            `remain: ${remain.slice(0, 200)} ...\n` +
-            `labels: ${table.map(([label]) => label).join(", ")}\n`
-        )
+        const token = match(table)
+
+        if (token !== undefined) {
+          tokens.push(token)
+        } else {
+          throw new Error(
+            "All regexp in table fail to match remaining input.\n" +
+              `index: ${i}\n` +
+              `remain: ${remain.slice(0, 200)} ...\n` +
+              `labels: ${table.map(([label]) => label).join(", ")}\n`
+          )
+        }
       }
 
       return tokens

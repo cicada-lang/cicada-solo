@@ -29,10 +29,6 @@
 
 # pt -- parsing techniques
 
-- use `TableLexer.create` in earley-parser's tests
-- `BaseError`
-- `ParsingError`
-- `LexingError`
 - test by length in `earley-parser.parse.impression.ts`
 - factor the knowledge about `tokens.length + 1 === chart.length`
 - refactor `Schedule.harvest_body`
@@ -41,6 +37,9 @@
 - `Span` in `Tree.node`
 - `pt/earley-parser` -- error report
 - `pt/exp/exp-parse`
+- `BaseError`
+- `ParsingError`
+- `LexingError`
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
 - [test] try examples in peg paper in parser generator

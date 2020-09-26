@@ -8,6 +8,7 @@ export * as Tree from "./tree"
 export * as Token from "./token"
 
 export * as Lexer from "./lexer"
+export * as TableLexer from "./table-lexer"
 
 export * as Parser from "./parser"
 export * as EarleyParser from "./earley-parser"

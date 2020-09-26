@@ -1,4 +1,5 @@
 import * as EarleyParser from "../earley-parser"
+import * as TableLexer from "../table-lexer"
 import * as Mod from "../mod"
 import * as Env from "../env"
 import * as Exp from "../exp"
@@ -45,18 +46,10 @@ export const grammar = values[0]
 
 const parser = EarleyParser.create(grammar)
 
-export function lex(text: string): Array<Token.Token> {
-  const tokens: Array<Token.Token> = new Array()
-  for (let i = 0; i < text.length; i++) {
-    const span = { lo: i, hi: i + 1 }
-    const value = text[i]
-    tokens.push({ label: "char", value, span })
-  }
-  return tokens
-}
+const lexer = TableLexer.create([["char", /(.)/]])
 
 function show(text: string): void {
-  const tree = parser.parse(lex(text))
+  const tree = parser.parse(lexer.lex(text))
   console.log(JSON.stringify(tree, null, 2))
 }
 
