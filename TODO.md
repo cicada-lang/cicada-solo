@@ -35,11 +35,11 @@
 - improve `earley-parser.parse.impression.ts`
   - use more meaningful example grammar
 - `Span` in `Tree.node`
-- `pt/earley-parser` -- error report
-- `pt/exp/exp-parse`
 - `BaseError`
 - `ParsingError`
 - `LexingError`
+- `pt/earley-parser` -- error report
+- `pt/exp/exp-parse`
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
 - [test] try examples in peg paper in parser generator
