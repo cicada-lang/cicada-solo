@@ -29,6 +29,7 @@
 # pt -- parsing techniques
 
 - `earley-parser.parse.impression.ts`
+- remove `api/parse`
 - `Lexer` as interface
 - `TableLexer` as interface
 - replace `lex` in earley-parser's tests
