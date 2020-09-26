@@ -2,7 +2,7 @@
 
 const path = require("path")
 const changeCase = require("change-case")
-const { run, expect, snapshot } = require("@xieyuheng/test-runner")
+const { run, test, expect, snapshot } = require("@xieyuheng/test-runner")
 
 let commands = {}
 
@@ -15,56 +15,50 @@ commands.t = () => {
 }
 
 commands.test_lib = () => {
-  expect.ok("node $file", { file: "lib/**/*.test.js" })
+  test("node $file", { file: "lib/**/*.test.js" }, expect.ok)
 }
 
 commands.test_impression = () => {
-  snapshot.out(
+  test(
     "node $file",
     { file: "lib/**/*.impression.js" },
-    {
-      out: ({ file }) =>
-        path.resolve("snapshot", changeCase.paramCase(file) + ".out"),
-    }
+    snapshot.out(({ file }) =>
+      path.resolve("snapshot", changeCase.paramCase(file) + ".out")
+    )
   )
 }
 
-const FILE_DOT = {
-  out: ({ file }) => file + ".out",
-  err: ({ file }) => file + ".err",
-}
-
 commands.test_lang0 = () => {
-  snapshot.out(
+  test(
     "./bin/lang0.js $file",
     { file: "tests/lang0/**.cic" },
-    FILE_DOT
+    snapshot.out(({ file }) => file + ".out")
   )
 }
 
 commands.test_lang1 = () => {
-  snapshot.out(
+  test(
     "./bin/lang1.js $file",
     { file: "tests/lang1/**.cic" },
-    FILE_DOT
+    snapshot.out(({ file }) => file + ".out")
   )
-  snapshot.err(
+  test(
     "./bin/lang1.js $file",
     { file: "tests/lang1-error/**.cic" },
-    FILE_DOT
+    snapshot.err(({ file }) => file + ".err")
   )
 }
 
 commands.test_lang2 = () => {
-  snapshot.out(
+  test(
     "./bin/lang2.js $file",
     { file: "tests/lang2/**.cic" },
-    FILE_DOT
+    snapshot.out(({ file }) => file + ".out")
   )
-  snapshot.err(
+  test(
     "./bin/lang2.js $file",
     { file: "tests/lang2-error/**.cic" },
-    FILE_DOT
+    snapshot.err(({ file }) => file + ".err")
   )
 }
 
