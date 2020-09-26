@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const path = require("path")
-const fg = require("fast-glob")
 const changeCase = require("change-case")
 const { run, expect, snapshot } = require("@xieyuheng/test-runner")
 
@@ -16,32 +15,57 @@ commands.t = () => {
 }
 
 commands.test_lib = () => {
-  for (const file of fg.sync("lib/**/*.test.js")) {
-    expect.ok(`node ${file}`)
-  }
+  expect.ok("node $file", { file: "lib/**/*.test.js" })
 }
 
 commands.test_impression = () => {
-  for (const file of fg.sync("lib/**/*.impression.js")) {
-    const out = path.resolve("snapshot", changeCase.paramCase(file) + ".out")
-    snapshot.out(`node`, file, {
-      snapshot: { out },
-    })
-  }
+  snapshot.out(
+    "node $file",
+    { file: "lib/**/*.impression.js" },
+    {
+      out: ({ file }) =>
+        path.resolve("snapshot", changeCase.paramCase(file) + ".out"),
+    }
+  )
+}
+
+const FILE_DOT = {
+  out: ({ file }) => file + ".out",
+  err: ({ file }) => file + ".err",
 }
 
 commands.test_lang0 = () => {
-  snapshot.out("./bin/lang0.js", "tests/lang0/**.cic")
+  snapshot.out(
+    "./bin/lang0.js $file",
+    { file: "tests/lang0/**.cic" },
+    FILE_DOT
+  )
 }
 
 commands.test_lang1 = () => {
-  snapshot.out("./bin/lang1.js", "tests/lang1/**.cic")
-  snapshot.err("./bin/lang1.js", "tests/lang1-error/**.cic")
+  snapshot.out(
+    "./bin/lang1.js $file",
+    { file: "tests/lang1/**.cic" },
+    FILE_DOT
+  )
+  snapshot.err(
+    "./bin/lang1.js $file",
+    { file: "tests/lang1-error/**.cic" },
+    FILE_DOT
+  )
 }
 
 commands.test_lang2 = () => {
-  snapshot.out("./bin/lang2.js", "tests/lang2/**.cic")
-  snapshot.err("./bin/lang2.js", "tests/lang2-error/**.cic")
+  snapshot.out(
+    "./bin/lang2.js $file",
+    { file: "tests/lang2/**.cic" },
+    FILE_DOT
+  )
+  snapshot.err(
+    "./bin/lang2.js $file",
+    { file: "tests/lang2-error/**.cic" },
+    FILE_DOT
+  )
 }
 
 run(commands)
