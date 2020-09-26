@@ -24,12 +24,15 @@
 
 # pc
 
-- use pc to implement `pt/exp/exp-parse`
+- pc -- to implement `pt/exp/exp-parse`
+- like handle written parser
 
 # pt -- parsing techniques
 
-- `TableLexer.create`
 - use `TableLexer.create` in earley-parser's tests
+- `BaseError`
+- `ParsingError`
+- `LexingError`
 - test by length in `earley-parser.parse.impression.ts`
 - factor the knowledge about `tokens.length + 1 === chart.length`
 - refactor `Schedule.harvest_body`
@@ -37,6 +40,7 @@
   - use more meaningful example grammar
 - `Span` in `Tree.node`
 - `pt/earley-parser` -- error report
+- `pt/exp/exp-parse`
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
 - [test] try examples in peg paper in parser generator
