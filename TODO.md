@@ -1,3 +1,5 @@
+# TLT
+
 - [TLT] 2. Doin' What Comes Naturally
 - [lang2] implement `Pair` and `Arrow` directly
 - [lang2] draft check car and cdr
@@ -26,7 +28,7 @@
 
 # pt -- parsing techniques
 
-- `EarleyParser` as interface
+- `earley-parser-create.ts`
 - `Lexer` as interface
 - `TableLexer` as interface
 - test by length in `parse.impression.ts`
