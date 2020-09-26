@@ -26,12 +26,16 @@
 
 # pt -- parsing techniques
 
+- `earley-parser` instead of `parsers/earley`
+- `EarleyParser` as interface
+- `Lexer` as interface
+- `TableLexer` as interface
 - test by length in `parse.impression.ts`
 - factor the knowledge about `tokens.length + 1 === chart.length`
 - refactor `Schedule.harvest_body`
-- improve `pt/parsers/earley/api/parse.impression.ts` -- use more meaningful example grammar
+- improve `pt/earley-parser/api/parse.impression.ts` -- use more meaningful example grammar
 - `Span` in `Tree.node`
-- `pt/parsers/earley` -- error report
+- `pt/earley-parser` -- error report
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
 - [test] try examples in peg paper in parser generator
