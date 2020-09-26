@@ -1,5 +1,6 @@
 import * as TableLexer from "../table-lexer"
 import * as Token from "../token"
+import * as Span from "../span"
 
 // NOTE https://github.com/tc39/proposal-regexp-match-indices
 import execWithIndices from "regexp-match-indices"
@@ -26,29 +27,15 @@ export function create(table: Array<[string, RegExp]>): TableLexer.TableLexer {
       while (i < text.length) {
         const remain = text.slice(i)
 
-        function match(
-          table: Array<[string, RegExp]>
-        ): undefined | Token.Token {
-          for (const [label, regexp] of table) {
-            const result = execWithIndices(regexp, remain)
-            if (result !== null) {
-              // NOTE The first capture is viewed as the value of the token.
-              const value = result[1]
-              if (value !== undefined) {
-                const main = result[0]
-                const [lo, hi] = result.indices[1]
-                const span = { lo: i + lo, hi: i + hi }
-                i += main.length
-                return { label, value, span }
-              }
-            }
-          }
-        }
-
-        const token = match(table)
-
-        if (token !== undefined) {
-          tokens.push(token)
+        const result = match_table(remain, table)
+        if (result !== undefined) {
+          const { label, value, span, forword } = result
+          i += forword
+          tokens.push({
+            label,
+            value,
+            span: Span.shift(span, i),
+          })
         } else {
           throw new Error(
             "All regexp in table fail to match remaining input.\n" +
@@ -61,5 +48,25 @@ export function create(table: Array<[string, RegExp]>): TableLexer.TableLexer {
 
       return tokens
     },
+  }
+}
+
+function match_table(
+  text: string,
+  table: Array<[string, RegExp]>
+): undefined | (Token.Token & { forword: number }) {
+  for (const [label, regexp] of table) {
+    const result = execWithIndices(regexp, text)
+    if (result !== null) {
+      // NOTE The first capture is viewed as the value of the token.
+      const value = result[1]
+      if (value !== undefined) {
+        const main = result[0]
+        const forword = main.length
+        const [lo, hi] = result.indices[1]
+        const span = { lo, hi }
+        return { label, value, span, forword }
+      }
+    }
   }
 }
