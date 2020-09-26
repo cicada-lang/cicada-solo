@@ -53,20 +53,28 @@ export function lex(text: string): Array<Token.Token> {
   return tokens
 }
 
-assert(parser.recognize(lex("(a)")))
-assert(parser.recognize(lex("(a-a)")))
-assert(parser.recognize(lex("(a-a+a)")))
-assert(parser.recognize(lex("(a)(a)(a)")))
-assert(parser.recognize(lex("(a-a)(a-a)(a-a)")))
-assert(parser.recognize(lex("(a-a+a)(a-a+a)(a-a+a)")))
-assert(parser.recognize(lex("(a)(a-a)(a-a+a)")))
+function ok(test: string): void {
+  assert(parser.recognize(lex(test)))
+}
 
-assert(!parser.recognize(lex("a")))
-assert(!parser.recognize(lex("a-a")))
-assert(!parser.recognize(lex("a-a+a")))
-assert(!parser.recognize(lex("(a-a+a")))
+function no(test: string): void {
+  assert(!parser.recognize(lex(test)))
+}
 
-assert(!parser.recognize(lex("(a-a+b)")))
-assert(!parser.recognize(lex("(a-a++)")))
-assert(!parser.recognize(lex("a-a+b")))
-assert(!parser.recognize(lex("a-a++")))
+ok("(a)")
+ok("(a-a)")
+ok("(a-a+a)")
+ok("(a)(a)(a)")
+ok("(a-a)(a-a)(a-a)")
+ok("(a-a+a)(a-a+a)(a-a+a)")
+ok("(a)(a-a)(a-a+a)")
+
+no("a")
+no("a-a")
+no("a-a+a")
+no("(a-a+a")
+
+no("(a-a+b)")
+no("(a-a++)")
+no("a-a+b")
+no("a-a++")

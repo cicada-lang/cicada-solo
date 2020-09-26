@@ -7,12 +7,12 @@ const parser = EarleyParser.create(grammar, {
   },
 })
 
-function impression(text: string): void {
+function show(text: string): void {
   console.log(">>>", text)
   parser.recognize(lex(text))
   console.log()
 }
 
-impression("a")
-impression("a-a")
-impression("a-a+a")
+show("a")
+show("a-a")
+show("a-a+a")

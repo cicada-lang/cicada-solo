@@ -55,17 +55,17 @@ export function lex(text: string): Array<Token.Token> {
   return tokens
 }
 
-function impression(text: string): void {
+function show(text: string): void {
   const tree = parser.parse(lex(text))
   console.log(JSON.stringify(tree, null, 2))
 }
 
-impression("(a)")
-impression("(a)(a)")
-impression("(a)(a)(a)")
-impression("(a-a)")
-impression("(a-a+a)")
-impression("(a)(a)(a)(a)(a)(a)(a)(a)")
-impression("(a-a)(a-a)(a-a)")
-impression("(a-a+a)(a-a+a)(a-a+a)")
-impression("(a)(a-a)(a-a+a)")
+show("(a)")
+show("(a)(a)")
+show("(a)(a)(a)")
+show("(a-a)")
+show("(a-a+a)")
+show("(a)(a)(a)(a)(a)(a)(a)(a)")
+show("(a-a)(a-a)(a-a)")
+show("(a-a+a)(a-a+a)(a-a+a)")
+show("(a)(a-a)(a-a+a)")

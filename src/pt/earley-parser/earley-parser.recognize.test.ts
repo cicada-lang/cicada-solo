@@ -36,8 +36,17 @@ export function lex(text: string): Array<Token.Token> {
   return tokens
 }
 
-assert(parser.recognize(lex("a")))
-assert(parser.recognize(lex("a-a")))
-assert(parser.recognize(lex("a-a+a")))
-assert(!parser.recognize(lex("a-a+b")))
-assert(!parser.recognize(lex("a-a++")))
+function ok(test: string): void {
+  assert(parser.recognize(lex(test)))
+}
+
+function no(test: string): void {
+  assert(!parser.recognize(lex(test)))
+}
+
+ok("a")
+ok("a-a")
+ok("a-a+a")
+
+no("a-a+b")
+no("a-a++")
