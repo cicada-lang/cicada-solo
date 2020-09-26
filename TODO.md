@@ -28,8 +28,6 @@
 
 # pt -- parsing techniques
 
-- `earley-parser.task.impression.ts`
-- `earley-parser.schedule.impression.ts`
 - `earley-parser.parse.impression.ts`
 - `Lexer` as interface
 - `TableLexer` as interface
