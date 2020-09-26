@@ -28,7 +28,6 @@
 
 # pt -- parsing techniques
 
-- `Lexer` as interface
 - `TableLexer` as interface
 - replace `lex` in earley-parser's tests
 - test by length in `earley-parser.parse.impression.ts`
