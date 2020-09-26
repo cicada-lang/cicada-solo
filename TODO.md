@@ -28,7 +28,10 @@
 
 # pt -- parsing techniques
 
-- `earley-parser-create.ts`
+- `earley-parser.recognize.test.ts`
+- `earley-parser.task.impression.ts`
+- `earley-parser.schedule.impression.ts`
+- `earley-parser.parse.impression.ts`
 - `Lexer` as interface
 - `TableLexer` as interface
 - test by length in `parse.impression.ts`

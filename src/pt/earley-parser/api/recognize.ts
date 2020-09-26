@@ -19,15 +19,8 @@ export function recognize(
   const schedule = Schedule.init(tokens, grammar)
   Schedule.run(schedule, opts)
   const end = schedule.chart[schedule.chart.length - 1]
-
-  for (const task of end.values()) {
-    if (
-      grammar.name === task.grammar_name &&
-      Task.current_index(task) === tokens.length
-    ) {
-      return true
-    }
-  }
-
-  return false
+  const ending_task_p = (task: Task.Task): boolean =>
+    Task.match_grammar_p(task, grammar) &&
+    Task.current_index(task) === tokens.length
+  return Array.from(end.values()).some(ending_task_p)
 }
