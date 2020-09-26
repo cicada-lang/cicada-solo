@@ -28,7 +28,6 @@
 
 # pt -- parsing techniques
 
-- remove `api/parse`
 - `Lexer` as interface
 - `TableLexer` as interface
 - replace `lex` in earley-parser's tests
