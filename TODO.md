@@ -28,15 +28,15 @@
 
 # pt -- parsing techniques
 
-- `earley-parser.parse.impression.ts`
 - remove `api/parse`
 - `Lexer` as interface
 - `TableLexer` as interface
 - replace `lex` in earley-parser's tests
-- test by length in `parse.impression.ts`
+- test by length in `earley-parser.parse.impression.ts`
 - factor the knowledge about `tokens.length + 1 === chart.length`
 - refactor `Schedule.harvest_body`
-- improve `pt/earley-parser/api/parse.impression.ts` -- use more meaningful example grammar
+- improve `earley-parser.parse.impression.ts`
+  - use more meaningful example grammar
 - `Span` in `Tree.node`
 - `pt/earley-parser` -- error report
 - [earley] change earley to use ordered choice

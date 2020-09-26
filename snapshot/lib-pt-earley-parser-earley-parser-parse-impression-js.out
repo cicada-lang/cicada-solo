@@ -1,0 +1,506 @@
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "S",
+    "kind": "S"
+  },
+  "body": {
+    "start": {
+      "kind": "Tree.node",
+      "head": {
+        "name": "one_or_more",
+        "kind": "one"
+      },
+      "body": {
+        "value": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "E",
+            "kind": "F"
+          },
+          "body": {}
+        }
+      }
+    }
+  }
+}
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "S",
+    "kind": "S"
+  },
+  "body": {
+    "start": {
+      "kind": "Tree.node",
+      "head": {
+        "name": "one_or_more",
+        "kind": "more"
+      },
+      "body": {
+        "head": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "E",
+            "kind": "F"
+          },
+          "body": {}
+        },
+        "tail": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "one_or_more",
+            "kind": "one"
+          },
+          "body": {
+            "value": {
+              "kind": "Tree.node",
+              "head": {
+                "name": "E",
+                "kind": "F"
+              },
+              "body": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "S",
+    "kind": "S"
+  },
+  "body": {
+    "start": {
+      "kind": "Tree.node",
+      "head": {
+        "name": "one_or_more",
+        "kind": "more"
+      },
+      "body": {
+        "head": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "E",
+            "kind": "F"
+          },
+          "body": {}
+        },
+        "tail": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "one_or_more",
+            "kind": "more"
+          },
+          "body": {
+            "head": {
+              "kind": "Tree.node",
+              "head": {
+                "name": "E",
+                "kind": "F"
+              },
+              "body": {}
+            },
+            "tail": {
+              "kind": "Tree.node",
+              "head": {
+                "name": "one_or_more",
+                "kind": "one"
+              },
+              "body": {
+                "value": {
+                  "kind": "Tree.node",
+                  "head": {
+                    "name": "E",
+                    "kind": "F"
+                  },
+                  "body": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "S",
+    "kind": "S"
+  },
+  "body": {
+    "start": {
+      "kind": "Tree.node",
+      "head": {
+        "name": "one_or_more",
+        "kind": "one"
+      },
+      "body": {
+        "value": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "E",
+            "kind": "EQF"
+          },
+          "body": {}
+        }
+      }
+    }
+  }
+}
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "S",
+    "kind": "S"
+  },
+  "body": {
+    "start": {
+      "kind": "Tree.node",
+      "head": {
+        "name": "one_or_more",
+        "kind": "one"
+      },
+      "body": {
+        "value": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "E",
+            "kind": "EQF"
+          },
+          "body": {}
+        }
+      }
+    }
+  }
+}
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "S",
+    "kind": "S"
+  },
+  "body": {
+    "start": {
+      "kind": "Tree.node",
+      "head": {
+        "name": "one_or_more",
+        "kind": "more"
+      },
+      "body": {
+        "head": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "E",
+            "kind": "F"
+          },
+          "body": {}
+        },
+        "tail": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "one_or_more",
+            "kind": "more"
+          },
+          "body": {
+            "head": {
+              "kind": "Tree.node",
+              "head": {
+                "name": "E",
+                "kind": "F"
+              },
+              "body": {}
+            },
+            "tail": {
+              "kind": "Tree.node",
+              "head": {
+                "name": "one_or_more",
+                "kind": "more"
+              },
+              "body": {
+                "head": {
+                  "kind": "Tree.node",
+                  "head": {
+                    "name": "E",
+                    "kind": "F"
+                  },
+                  "body": {}
+                },
+                "tail": {
+                  "kind": "Tree.node",
+                  "head": {
+                    "name": "one_or_more",
+                    "kind": "more"
+                  },
+                  "body": {
+                    "head": {
+                      "kind": "Tree.node",
+                      "head": {
+                        "name": "E",
+                        "kind": "F"
+                      },
+                      "body": {}
+                    },
+                    "tail": {
+                      "kind": "Tree.node",
+                      "head": {
+                        "name": "one_or_more",
+                        "kind": "more"
+                      },
+                      "body": {
+                        "head": {
+                          "kind": "Tree.node",
+                          "head": {
+                            "name": "E",
+                            "kind": "F"
+                          },
+                          "body": {}
+                        },
+                        "tail": {
+                          "kind": "Tree.node",
+                          "head": {
+                            "name": "one_or_more",
+                            "kind": "more"
+                          },
+                          "body": {
+                            "head": {
+                              "kind": "Tree.node",
+                              "head": {
+                                "name": "E",
+                                "kind": "F"
+                              },
+                              "body": {}
+                            },
+                            "tail": {
+                              "kind": "Tree.node",
+                              "head": {
+                                "name": "one_or_more",
+                                "kind": "more"
+                              },
+                              "body": {
+                                "head": {
+                                  "kind": "Tree.node",
+                                  "head": {
+                                    "name": "E",
+                                    "kind": "F"
+                                  },
+                                  "body": {}
+                                },
+                                "tail": {
+                                  "kind": "Tree.node",
+                                  "head": {
+                                    "name": "one_or_more",
+                                    "kind": "one"
+                                  },
+                                  "body": {
+                                    "value": {
+                                      "kind": "Tree.node",
+                                      "head": {
+                                        "name": "E",
+                                        "kind": "F"
+                                      },
+                                      "body": {}
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "S",
+    "kind": "S"
+  },
+  "body": {
+    "start": {
+      "kind": "Tree.node",
+      "head": {
+        "name": "one_or_more",
+        "kind": "more"
+      },
+      "body": {
+        "head": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "E",
+            "kind": "EQF"
+          },
+          "body": {}
+        },
+        "tail": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "one_or_more",
+            "kind": "more"
+          },
+          "body": {
+            "head": {
+              "kind": "Tree.node",
+              "head": {
+                "name": "E",
+                "kind": "EQF"
+              },
+              "body": {}
+            },
+            "tail": {
+              "kind": "Tree.node",
+              "head": {
+                "name": "one_or_more",
+                "kind": "one"
+              },
+              "body": {
+                "value": {
+                  "kind": "Tree.node",
+                  "head": {
+                    "name": "E",
+                    "kind": "EQF"
+                  },
+                  "body": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "S",
+    "kind": "S"
+  },
+  "body": {
+    "start": {
+      "kind": "Tree.node",
+      "head": {
+        "name": "one_or_more",
+        "kind": "more"
+      },
+      "body": {
+        "head": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "E",
+            "kind": "EQF"
+          },
+          "body": {}
+        },
+        "tail": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "one_or_more",
+            "kind": "more"
+          },
+          "body": {
+            "head": {
+              "kind": "Tree.node",
+              "head": {
+                "name": "E",
+                "kind": "EQF"
+              },
+              "body": {}
+            },
+            "tail": {
+              "kind": "Tree.node",
+              "head": {
+                "name": "one_or_more",
+                "kind": "one"
+              },
+              "body": {
+                "value": {
+                  "kind": "Tree.node",
+                  "head": {
+                    "name": "E",
+                    "kind": "EQF"
+                  },
+                  "body": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "S",
+    "kind": "S"
+  },
+  "body": {
+    "start": {
+      "kind": "Tree.node",
+      "head": {
+        "name": "one_or_more",
+        "kind": "more"
+      },
+      "body": {
+        "head": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "E",
+            "kind": "F"
+          },
+          "body": {}
+        },
+        "tail": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "one_or_more",
+            "kind": "more"
+          },
+          "body": {
+            "head": {
+              "kind": "Tree.node",
+              "head": {
+                "name": "E",
+                "kind": "EQF"
+              },
+              "body": {}
+            },
+            "tail": {
+              "kind": "Tree.node",
+              "head": {
+                "name": "one_or_more",
+                "kind": "one"
+              },
+              "body": {
+                "value": {
+                  "kind": "Tree.node",
+                  "head": {
+                    "name": "E",
+                    "kind": "EQF"
+                  },
+                  "body": {}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
