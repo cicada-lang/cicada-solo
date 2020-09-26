@@ -29,12 +29,13 @@
 
 # pt -- parsing techniques
 
+this list should be sorted by: necessity use `pt` in `lang`s.
+
 - test by length in `earley-parser.parse.impression.ts`
-- factor the knowledge about `tokens.length + 1 === chart.length`
-- refactor `Schedule.harvest_body`
-- improve `earley-parser.parse.impression.ts`
-  - use more meaningful example grammar
 - `Span` in `Tree.node`
+- migrate partech langs
+- [refactor] the knowledge about `tokens.length + 1 === chart.length`
+- [refactor] `Schedule.harvest_body`
 - `BaseError`
 - `ParsingError`
 - `LexingError`

@@ -19,14 +19,9 @@ const Q = {
   "Q:-": ['"-"'],
 }
 
-const mod = Mod.build({ E, F, Q })
-const env = new Map()
-
-const values = Exp.evaluate(mod, env, Exp.build(E))
-export const grammar = values[0]
-
-const parser = EarleyParser.create(grammar)
-
+export const mod = Mod.build({ E, F, Q })
+export const grammar = Mod.dot(mod, "E")
+export const parser = EarleyParser.create(grammar)
 export const lexer = TableLexer.create([["char", /(.)/]])
 
 function ok(test: string): void {

@@ -39,14 +39,9 @@ const S = {
 }
 
 const mod = Mod.build({ E, F, Q, one_or_more, S })
-const env = new Map()
-
-const values = Exp.evaluate(mod, env, Exp.build(S))
-export const grammar = values[0]
-
-const parser = EarleyParser.create(grammar)
-
-const lexer = TableLexer.create([["char", /(.)/]])
+export const grammar = Mod.dot(mod, "S")
+export const parser = EarleyParser.create(grammar)
+export const lexer = TableLexer.create([["char", /(.)/]])
 
 function show(text: string): void {
   const tree = parser.parse(lexer.lex(text))
