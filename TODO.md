@@ -28,8 +28,8 @@
 
 # pt -- parsing techniques
 
-- `TableLexer` as interface
-- replace `lex` in earley-parser's tests
+- `TableLexer.create`
+- use `TableLexer.create` in earley-parser's tests
 - test by length in `earley-parser.parse.impression.ts`
 - factor the knowledge about `tokens.length + 1 === chart.length`
 - refactor `Schedule.harvest_body`
