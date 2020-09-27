@@ -4,9 +4,7 @@ import * as TaskQueue from "../task-queue"
 import * as Task from "../task"
 
 export function repr(schedule: Schedule.Schedule): string {
-  return (
-    repr_queue(schedule.queue) + repr_chart(schedule.chart)
-  )
+  return repr_queue(schedule.queue) + repr_chart(schedule.chart)
 }
 
 function repr_queue(queue: TaskQueue.TaskQueue): string {
@@ -28,7 +26,7 @@ function repr_chart(chart: TaskChart.TaskChart): string {
       s += i
     }
     s += "\n"
-    for (const task of chart[i].values()) {
+    for (const task of TaskChart.tasks_at(chart, i)) {
       s += "  " + Task.repr(task)
       s += "\n"
     }

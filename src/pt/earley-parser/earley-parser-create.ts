@@ -1,5 +1,6 @@
 import * as EarleyParser from "../earley-parser"
 import * as Schedule from "./schedule"
+import * as TaskChart from "./task-chart"
 import * as Task from "./task"
 import * as Value from "../value"
 import * as Token from "../token"
@@ -30,11 +31,11 @@ export function create(
     recognize(tokens: Array<Token.Token>): boolean {
       const schedule = Schedule.create(tokens, grammar)
       Schedule.run(schedule, opts)
-      const end = schedule.chart[schedule.chart.length - 1]
+      const tasks = TaskChart.tasks_at_end(schedule.chart)
       const ending_task_p = (task: Task.Task): boolean =>
         Task.match_grammar_p(task, grammar) &&
         Task.current_index(task) === tokens.length
-      return Array.from(end.values()).some(ending_task_p)
+      return Array.from(tasks).some(ending_task_p)
     },
   }
 }

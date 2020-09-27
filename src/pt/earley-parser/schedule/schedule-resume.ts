@@ -1,9 +1,9 @@
 import * as Schedule from "../schedule"
+import * as TaskChart from "../task-chart"
 import * as Task from "../task"
 
 export function resume(schedule: Schedule.Schedule, task: Task.Task): void {
-  const upsteam = schedule.chart[task.index]
-  for (const upsteam_task of upsteam.values()) {
+  for (const upsteam_task of TaskChart.tasks_at(schedule.chart, task.index)) {
     // TODO handle name in part.
     if (!Task.finished_p(upsteam_task)) {
       const { value } = Task.current_part(upsteam_task)
