@@ -32,6 +32,7 @@
 **Sorted by: necessity to use `pt` in `lang`s.**
 
 - `TaskChart`
+
   - [refactor] the knowledge about `tokens.length + 1 === chart.length`
 - `Span` in `Tree.node`
 - migrate partech langs

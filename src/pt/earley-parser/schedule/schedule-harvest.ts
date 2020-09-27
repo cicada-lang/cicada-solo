@@ -1,20 +1,13 @@
 import * as Schedule from "../schedule"
+import * as TaskChart from "../task-chart"
 import * as Task from "../task"
 import * as Value from "../../value"
 import * as Tree from "../../tree"
 import { Obj } from "../../../ut"
 
 export function harvest(schedule: Schedule.Schedule): Tree.Tree {
-  // NOTE
-  //   since
-  //     tokens.length + 1 === chart.length
-  //   we need to use
-  //     tokens.length
-  //   as the end index
-  //   instead of
-  //     tokens.length - 1
   const start = 0
-  const end = schedule.tokens.length
+  const end = schedule.chart.length - 1
   return harvest_node(schedule, schedule.grammar, start, end)
 }
 
@@ -24,7 +17,7 @@ function harvest_node(
   start: number,
   end: number
 ): Tree.node {
-  for (const task of schedule.chart[end].values()) {
+  for (const task of TaskChart.tasks_at(schedule.chart, end)) {
     if (
       start === task.index &&
       end === Task.current_index(task) &&
