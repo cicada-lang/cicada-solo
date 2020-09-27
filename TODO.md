@@ -26,6 +26,9 @@
 
 - pc -- to implement `pt/exp/exp-parse`
 - like handle written parser
+- [test] try examples in peg paper in parser generator
+- [test] x in x test
+  - S <- "x" S "x" | "x"
 
 # pt -- parsing techniques
 
@@ -34,6 +37,9 @@
 - be sure about the literal syntax of regexp
   - note about `/.../` vs `new RegExp("...")`
 - [migrate] partech langs tests
+- [test] x in x test
+  - S <- "x" S "x" | "x"
+- [test] try examples in peg paper in parser generator
 - [refactor] `Schedule.harvest_body`
   - progress also contain `name`
     - this is what we mean by "handle name in part"
@@ -44,9 +50,6 @@
 - `pt/exp/exp-parse`
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
-- [test] try examples in peg paper in parser generator
-- [test] x in x test
-  - S <- "x" S "x" | "x"
 
 # re-design the syntax
 
