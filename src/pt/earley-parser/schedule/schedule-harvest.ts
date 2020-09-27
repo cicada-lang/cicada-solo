@@ -2,7 +2,9 @@ import * as Schedule from "../schedule"
 import * as TaskChart from "../task-chart"
 import * as Task from "../task"
 import * as Value from "../../value"
+import * as Token from "../../token"
 import * as Tree from "../../tree"
+import * as Span from "../../span"
 import { Obj } from "../../../ut"
 
 export function harvest(schedule: Schedule.Schedule): Tree.Tree {
@@ -30,12 +32,30 @@ function harvest_node(
         if (parts === undefined)
           throw new Error(`can not find choice: ${task.choice_name}`)
         const body = harvest_body(schedule, parts, task.progress, start)
-        return Tree.node(head, body)
+        const span = span_from_tokens(schedule.tokens, start, end)
+        return Tree.node(head, body, span)
       }
     }
   }
 
   throw new Error("PARSING_ERROR")
+}
+
+function span_from_tokens(
+  tokens: Array<Token.Token>,
+  token_lo: number,
+  token_hi: number
+): Span.Span {
+  if (tokens.length === 0) return { lo: 0, hi: 0 }
+
+  if (token_lo === token_hi) {
+    const token = tokens[token_lo] || tokens[tokens.length - 1]
+    return token.span
+  } else {
+    const lo = tokens[token_lo].span.lo
+    const hi = tokens[token_hi - 1].span.hi
+    return { lo, hi }
+  }
 }
 
 function harvest_body(

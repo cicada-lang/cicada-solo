@@ -1,5 +1,6 @@
 import { Obj } from "../../ut"
 import * as Token from "../token"
+import * as Span from "../span"
 
 export type Tree = node | leaf
 
@@ -14,12 +15,14 @@ export interface node {
   kind: "Tree.node"
   head: Head
   body: Body
+  span: Span.Span
 }
 
-export const node = (head: Head, body: Body): node => ({
+export const node = (head: Head, body: Body, span: Span.Span): node => ({
   kind: "Tree.node",
   head,
   body,
+  span,
 })
 
 export interface leaf {

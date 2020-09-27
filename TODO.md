@@ -31,12 +31,14 @@
 
 **Sorted by: necessity to use `pt` in `lang`s.**
 
-- `Span` in `Tree.node`
-- migrate partech langs
-- [refactor] `Schedule.harvest_body`
-- `pt/earley-parser` -- error report
+- `Tree.span`
 - be sure about the literal syntax of regexp
   - note about `/.../` vs `new RegExp("...")`
+- [migrate] partech langs tests
+- [refactor] `Schedule.harvest_body`
+  - progress also contain `name`
+    - this is what we mean by "handle name in part"
+- `pt/earley-parser` -- error report
 - `BaseError`
 - `ParsingError`
 - `LexingError`
