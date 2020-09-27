@@ -31,17 +31,18 @@
 
 This list should be sorted by: necessity to use `pt` in `lang`s.
 
-- `TaskQueue`
 - `TaskSet`
 - `TaskChart`
   - [refactor] the knowledge about `tokens.length + 1 === chart.length`
 - `Span` in `Tree.node`
 - migrate partech langs
 - [refactor] `Schedule.harvest_body`
+- `pt/earley-parser` -- error report
+- be sure about the literal syntax of regexp
+  - note about `/.../` vs `new RegExp("...")`
 - `BaseError`
 - `ParsingError`
 - `LexingError`
-- `pt/earley-parser` -- error report
 - `pt/exp/exp-parse`
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
