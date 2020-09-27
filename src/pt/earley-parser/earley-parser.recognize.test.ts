@@ -1,8 +1,6 @@
 import * as EarleyParser from "../earley-parser"
 import * as TableLexer from "../table-lexer"
 import * as Mod from "../mod"
-import * as Exp from "../exp"
-import * as Token from "../token"
 import assert from "assert"
 
 const E = {

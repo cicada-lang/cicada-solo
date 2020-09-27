@@ -29,11 +29,14 @@
 
 # pt -- parsing techniques
 
-this list should be sorted by: necessity use `pt` in `lang`s.
+This list should be sorted by: necessity to use `pt` in `lang`s.
 
+- `TaskQueue`
+- `TaskSet`
+- `TaskChart`
+  - [refactor] the knowledge about `tokens.length + 1 === chart.length`
 - `Span` in `Tree.node`
 - migrate partech langs
-- [refactor] the knowledge about `tokens.length + 1 === chart.length`
 - [refactor] `Schedule.harvest_body`
 - `BaseError`
 - `ParsingError`

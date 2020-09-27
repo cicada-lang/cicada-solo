@@ -1,12 +1,8 @@
 import * as EarleyParser from "../earley-parser"
 import * as TableLexer from "../table-lexer"
 import * as Mod from "../mod"
-import * as Env from "../env"
-import * as Exp from "../exp"
-import * as Token from "../token"
 import * as Tree from "../tree"
 import * as ut from "../../ut"
-import assert from "assert"
 
 const E = {
   "E:EQF": ["E", "Q", "F"],

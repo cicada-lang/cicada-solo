@@ -1,7 +1,6 @@
 import * as Closure from "../closure"
 import * as Env from "../../env"
 import * as Exp from "../../exp"
-import * as Value from "../../value"
 
 // NOTE conservative equivalent:
 // - name must be the same.
