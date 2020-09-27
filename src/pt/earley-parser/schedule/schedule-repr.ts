@@ -11,8 +11,7 @@ function repr_queue(queue: TaskQueue.TaskQueue): string {
   let s = ""
   s += "QUEUE:\n"
   for (const task of queue) {
-    s += "  " + Task.repr(task)
-    s += "\n"
+    s += "  " + Task.repr(task) + "\n"
   }
   return s
 }
@@ -20,15 +19,9 @@ function repr_queue(queue: TaskQueue.TaskQueue): string {
 function repr_chart(chart: TaskChart.TaskChart): string {
   let s = ""
   for (let i = 0; i < chart.length; i++) {
-    if (i === chart.length - 1) {
-      s += i + " // END"
-    } else {
-      s += i
-    }
-    s += "\n"
+    s += i + (i === chart.length - 1 ? " // END" : "") + "\n"
     for (const task of TaskChart.tasks_at(chart, i)) {
-      s += "  " + Task.repr(task)
-      s += "\n"
+      s += "  " + Task.repr(task) + "\n"
     }
   }
   return s
