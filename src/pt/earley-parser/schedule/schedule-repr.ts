@@ -1,13 +1,15 @@
 import * as Schedule from "../schedule"
+import * as TaskChart from "../task-chart"
+import * as TaskQueue from "../task-queue"
 import * as Task from "../task"
 
 export function repr(schedule: Schedule.Schedule): string {
   return (
-    Schedule.repr_queue(schedule.queue) + Schedule.repr_chart(schedule.chart)
+    repr_queue(schedule.queue) + repr_chart(schedule.chart)
   )
 }
 
-export function repr_queue(queue: Array<Task.Task>): string {
+function repr_queue(queue: TaskQueue.TaskQueue): string {
   let s = ""
   s += "QUEUE:\n"
   for (const task of queue) {
@@ -17,7 +19,7 @@ export function repr_queue(queue: Array<Task.Task>): string {
   return s
 }
 
-export function repr_chart(chart: Array<Map<string, Task.Task>>): string {
+function repr_chart(chart: TaskChart.TaskChart): string {
   let s = ""
   for (let i = 0; i < chart.length; i++) {
     if (i === chart.length - 1) {

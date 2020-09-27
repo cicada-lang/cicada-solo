@@ -31,7 +31,6 @@
 
 This list should be sorted by: necessity to use `pt` in `lang`s.
 
-- `TaskSet`
 - `TaskChart`
   - [refactor] the knowledge about `tokens.length + 1 === chart.length`
 - `Span` in `Tree.node`

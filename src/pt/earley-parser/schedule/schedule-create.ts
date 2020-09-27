@@ -2,7 +2,7 @@ import * as Schedule from "../schedule"
 import * as Value from "../../value"
 import * as Token from "../../token"
 
-export function init(
+export function create(
   tokens: Array<Token.Token>,
   grammar: Value.grammar
 ): Schedule.Schedule {

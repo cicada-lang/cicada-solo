@@ -22,13 +22,13 @@ export function create(
     opts,
 
     parse(tokens: Array<Token.Token>): Tree.Tree {
-      const schedule = Schedule.init(tokens, grammar)
+      const schedule = Schedule.create(tokens, grammar)
       Schedule.run(schedule, opts)
       return Schedule.harvest(schedule)
     },
 
     recognize(tokens: Array<Token.Token>): boolean {
-      const schedule = Schedule.init(tokens, grammar)
+      const schedule = Schedule.create(tokens, grammar)
       Schedule.run(schedule, opts)
       const end = schedule.chart[schedule.chart.length - 1]
       const ending_task_p = (task: Task.Task): boolean =>
