@@ -18,10 +18,22 @@
             "name": "E",
             "kind": "F"
           },
-          "body": {}
+          "body": {},
+          "span": {
+            "lo": 2,
+            "hi": 3
+          }
         }
+      },
+      "span": {
+        "lo": 1,
+        "hi": 4
       }
     }
+  },
+  "span": {
+    "lo": 1,
+    "hi": 4
   }
 }
 {
@@ -44,7 +56,11 @@
             "name": "E",
             "kind": "F"
           },
-          "body": {}
+          "body": {},
+          "span": {
+            "lo": 2,
+            "hi": 3
+          }
         },
         "tail": {
           "kind": "Tree.node",
@@ -59,12 +75,28 @@
                 "name": "E",
                 "kind": "F"
               },
-              "body": {}
+              "body": {},
+              "span": {
+                "lo": 5,
+                "hi": 6
+              }
             }
+          },
+          "span": {
+            "lo": 4,
+            "hi": 7
           }
         }
+      },
+      "span": {
+        "lo": 1,
+        "hi": 7
       }
     }
+  },
+  "span": {
+    "lo": 1,
+    "hi": 7
   }
 }
 {
@@ -87,7 +119,11 @@
             "name": "E",
             "kind": "F"
           },
-          "body": {}
+          "body": {},
+          "span": {
+            "lo": 2,
+            "hi": 3
+          }
         },
         "tail": {
           "kind": "Tree.node",
@@ -102,7 +138,11 @@
                 "name": "E",
                 "kind": "F"
               },
-              "body": {}
+              "body": {},
+              "span": {
+                "lo": 5,
+                "hi": 6
+              }
             },
             "tail": {
               "kind": "Tree.node",
@@ -117,14 +157,34 @@
                     "name": "E",
                     "kind": "F"
                   },
-                  "body": {}
+                  "body": {},
+                  "span": {
+                    "lo": 8,
+                    "hi": 9
+                  }
                 }
+              },
+              "span": {
+                "lo": 7,
+                "hi": 10
               }
             }
+          },
+          "span": {
+            "lo": 4,
+            "hi": 10
           }
         }
+      },
+      "span": {
+        "lo": 1,
+        "hi": 10
       }
     }
+  },
+  "span": {
+    "lo": 1,
+    "hi": 10
   }
 }
 {
@@ -147,10 +207,22 @@
             "name": "E",
             "kind": "EQF"
           },
-          "body": {}
+          "body": {},
+          "span": {
+            "lo": 2,
+            "hi": 5
+          }
         }
+      },
+      "span": {
+        "lo": 1,
+        "hi": 6
       }
     }
+  },
+  "span": {
+    "lo": 1,
+    "hi": 6
   }
 }
 {
@@ -173,10 +245,22 @@
             "name": "E",
             "kind": "EQF"
           },
-          "body": {}
+          "body": {},
+          "span": {
+            "lo": 2,
+            "hi": 7
+          }
         }
+      },
+      "span": {
+        "lo": 1,
+        "hi": 8
       }
     }
+  },
+  "span": {
+    "lo": 1,
+    "hi": 8
   }
 }
 {
@@ -199,7 +283,11 @@
             "name": "E",
             "kind": "F"
           },
-          "body": {}
+          "body": {},
+          "span": {
+            "lo": 2,
+            "hi": 3
+          }
         },
         "tail": {
           "kind": "Tree.node",
@@ -214,7 +302,11 @@
                 "name": "E",
                 "kind": "F"
               },
-              "body": {}
+              "body": {},
+              "span": {
+                "lo": 5,
+                "hi": 6
+              }
             },
             "tail": {
               "kind": "Tree.node",
@@ -229,7 +321,11 @@
                     "name": "E",
                     "kind": "F"
                   },
-                  "body": {}
+                  "body": {},
+                  "span": {
+                    "lo": 8,
+                    "hi": 9
+                  }
                 },
                 "tail": {
                   "kind": "Tree.node",
@@ -244,7 +340,11 @@
                         "name": "E",
                         "kind": "F"
                       },
-                      "body": {}
+                      "body": {},
+                      "span": {
+                        "lo": 11,
+                        "hi": 12
+                      }
                     },
                     "tail": {
                       "kind": "Tree.node",
@@ -259,7 +359,11 @@
                             "name": "E",
                             "kind": "F"
                           },
-                          "body": {}
+                          "body": {},
+                          "span": {
+                            "lo": 14,
+                            "hi": 15
+                          }
                         },
                         "tail": {
                           "kind": "Tree.node",
@@ -274,7 +378,11 @@
                                 "name": "E",
                                 "kind": "F"
                               },
-                              "body": {}
+                              "body": {},
+                              "span": {
+                                "lo": 17,
+                                "hi": 18
+                              }
                             },
                             "tail": {
                               "kind": "Tree.node",
@@ -289,7 +397,11 @@
                                     "name": "E",
                                     "kind": "F"
                                   },
-                                  "body": {}
+                                  "body": {},
+                                  "span": {
+                                    "lo": 20,
+                                    "hi": 21
+                                  }
                                 },
                                 "tail": {
                                   "kind": "Tree.node",
@@ -304,24 +416,64 @@
                                         "name": "E",
                                         "kind": "F"
                                       },
-                                      "body": {}
+                                      "body": {},
+                                      "span": {
+                                        "lo": 23,
+                                        "hi": 24
+                                      }
                                     }
+                                  },
+                                  "span": {
+                                    "lo": 22,
+                                    "hi": 25
                                   }
                                 }
+                              },
+                              "span": {
+                                "lo": 19,
+                                "hi": 25
                               }
                             }
+                          },
+                          "span": {
+                            "lo": 16,
+                            "hi": 25
                           }
                         }
+                      },
+                      "span": {
+                        "lo": 13,
+                        "hi": 25
                       }
                     }
+                  },
+                  "span": {
+                    "lo": 10,
+                    "hi": 25
                   }
                 }
+              },
+              "span": {
+                "lo": 7,
+                "hi": 25
               }
             }
+          },
+          "span": {
+            "lo": 4,
+            "hi": 25
           }
         }
+      },
+      "span": {
+        "lo": 1,
+        "hi": 25
       }
     }
+  },
+  "span": {
+    "lo": 1,
+    "hi": 25
   }
 }
 {
@@ -344,7 +496,11 @@
             "name": "E",
             "kind": "EQF"
           },
-          "body": {}
+          "body": {},
+          "span": {
+            "lo": 2,
+            "hi": 5
+          }
         },
         "tail": {
           "kind": "Tree.node",
@@ -359,7 +515,11 @@
                 "name": "E",
                 "kind": "EQF"
               },
-              "body": {}
+              "body": {},
+              "span": {
+                "lo": 7,
+                "hi": 10
+              }
             },
             "tail": {
               "kind": "Tree.node",
@@ -374,14 +534,34 @@
                     "name": "E",
                     "kind": "EQF"
                   },
-                  "body": {}
+                  "body": {},
+                  "span": {
+                    "lo": 12,
+                    "hi": 15
+                  }
                 }
+              },
+              "span": {
+                "lo": 11,
+                "hi": 16
               }
             }
+          },
+          "span": {
+            "lo": 6,
+            "hi": 16
           }
         }
+      },
+      "span": {
+        "lo": 1,
+        "hi": 16
       }
     }
+  },
+  "span": {
+    "lo": 1,
+    "hi": 16
   }
 }
 {
@@ -404,7 +584,11 @@
             "name": "E",
             "kind": "EQF"
           },
-          "body": {}
+          "body": {},
+          "span": {
+            "lo": 2,
+            "hi": 7
+          }
         },
         "tail": {
           "kind": "Tree.node",
@@ -419,7 +603,11 @@
                 "name": "E",
                 "kind": "EQF"
               },
-              "body": {}
+              "body": {},
+              "span": {
+                "lo": 9,
+                "hi": 14
+              }
             },
             "tail": {
               "kind": "Tree.node",
@@ -434,14 +622,34 @@
                     "name": "E",
                     "kind": "EQF"
                   },
-                  "body": {}
+                  "body": {},
+                  "span": {
+                    "lo": 16,
+                    "hi": 21
+                  }
                 }
+              },
+              "span": {
+                "lo": 15,
+                "hi": 22
               }
             }
+          },
+          "span": {
+            "lo": 8,
+            "hi": 22
           }
         }
+      },
+      "span": {
+        "lo": 1,
+        "hi": 22
       }
     }
+  },
+  "span": {
+    "lo": 1,
+    "hi": 22
   }
 }
 {
@@ -464,7 +672,11 @@
             "name": "E",
             "kind": "F"
           },
-          "body": {}
+          "body": {},
+          "span": {
+            "lo": 2,
+            "hi": 3
+          }
         },
         "tail": {
           "kind": "Tree.node",
@@ -479,7 +691,11 @@
                 "name": "E",
                 "kind": "EQF"
               },
-              "body": {}
+              "body": {},
+              "span": {
+                "lo": 5,
+                "hi": 8
+              }
             },
             "tail": {
               "kind": "Tree.node",
@@ -494,13 +710,33 @@
                     "name": "E",
                     "kind": "EQF"
                   },
-                  "body": {}
+                  "body": {},
+                  "span": {
+                    "lo": 10,
+                    "hi": 15
+                  }
                 }
+              },
+              "span": {
+                "lo": 9,
+                "hi": 16
               }
             }
+          },
+          "span": {
+            "lo": 4,
+            "hi": 16
           }
         }
+      },
+      "span": {
+        "lo": 1,
+        "hi": 16
       }
     }
+  },
+  "span": {
+    "lo": 1,
+    "hi": 16
   }
 }

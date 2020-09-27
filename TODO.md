@@ -31,7 +31,6 @@
 
 **Sorted by: necessity to use `pt` in `lang`s.**
 
-- `Tree.span`
 - be sure about the literal syntax of regexp
   - note about `/.../` vs `new RegExp("...")`
 - [migrate] partech langs tests
