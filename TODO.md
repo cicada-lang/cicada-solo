@@ -29,9 +29,8 @@
 
 # pt -- parsing techniques
 
-This list should be sorted by: necessity to use `pt` in `lang`s.
+**Sorted by: necessity to use `pt` in `lang`s.**
 
-- use `insert` instead of `add` in method name
 - `TaskChart`
   - [refactor] the knowledge about `tokens.length + 1 === chart.length`
 - `Span` in `Tree.node`

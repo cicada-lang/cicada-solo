@@ -11,6 +11,6 @@ export function create(
   const queue = TaskQueue.create()
   const chart = TaskChart.create(tokens)
   const schedule = { tokens, grammar, queue, chart }
-  Schedule.add_grammar(schedule, grammar, 0)
+  Schedule.insert_grammar(schedule, grammar, 0)
   return schedule
 }

@@ -20,7 +20,7 @@ export function step(schedule: Schedule.Schedule, task: Task.Task): void {
               { index: Task.current_index(task) + 1 },
             ],
           }
-          Schedule.add_task(schedule, new_task)
+          Schedule.insert_task(schedule, new_task)
         }
       }
       break
@@ -36,13 +36,13 @@ export function step(schedule: Schedule.Schedule, task: Task.Task): void {
               { index: Task.current_index(task) + 1 },
             ],
           }
-          Schedule.add_task(schedule, new_task)
+          Schedule.insert_task(schedule, new_task)
         }
       }
       break
     }
     case "Value.grammar": {
-      Schedule.add_grammar(schedule, value, Task.current_index(task))
+      Schedule.insert_grammar(schedule, value, Task.current_index(task))
       break
     }
   }

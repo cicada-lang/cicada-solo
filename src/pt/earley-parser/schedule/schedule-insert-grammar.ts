@@ -2,7 +2,7 @@ import * as Schedule from "../schedule"
 import * as Value from "../../value"
 import * as ut from "../../../ut"
 
-export function add_grammar(
+export function insert_grammar(
   schedule: Schedule.Schedule,
   grammar: Value.Value,
   index: number
@@ -17,7 +17,7 @@ export function add_grammar(
         index,
         progress: new Array(),
       }
-      Schedule.add_task(schedule, task)
+      Schedule.insert_task(schedule, task)
     }
   } else {
     throw new Error(`expecting Value.grammar but got: ${ut.inspect(grammar)}`)

@@ -21,7 +21,7 @@ export function resume(schedule: Schedule.Schedule, task: Task.Task): void {
               },
             ],
           }
-          Schedule.add_task(schedule, resumed_task)
+          Schedule.insert_task(schedule, resumed_task)
         }
       }
     }
