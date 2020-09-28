@@ -22,6 +22,9 @@ export function create(
     grammar,
     opts,
 
+    // NOTE The phases of schedule:
+    // create -> [init] -> run -> [finished]
+
     parse(tokens: Array<Token.Token>): Tree.Tree {
       const schedule = Schedule.create(tokens, grammar)
       Schedule.run(schedule, opts)
@@ -31,11 +34,7 @@ export function create(
     recognize(tokens: Array<Token.Token>): boolean {
       const schedule = Schedule.create(tokens, grammar)
       Schedule.run(schedule, opts)
-      const tasks = TaskChart.tasks_at_end(schedule.chart)
-      const ending_task_p = (task: Task.Task): boolean =>
-        Task.match_grammar_p(task, grammar) &&
-        Task.current_index(task) === tokens.length
-      return Array.from(tasks).some(ending_task_p)
+      return Schedule.well_done_p(schedule)
     },
   }
 }

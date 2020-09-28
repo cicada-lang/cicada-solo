@@ -37,7 +37,7 @@
 - be sure about the literal syntax of regexp
   - note about `/.../` vs `new RegExp("...")`
   - use array instead of formated string.
-- [refactor] `Schedule.harvest_body`
+- [re-factor] `Schedule.harvest_body`
   - progress also contain `name`
     - this is what we mean by "handle name in part"
 - `pt/earley-parser` -- error report
