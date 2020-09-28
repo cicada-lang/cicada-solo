@@ -36,10 +36,7 @@
 
 - be sure about the literal syntax of regexp
   - note about `/.../` vs `new RegExp("...")`
-- [migrate] partech langs tests
-- [test] x in x test
-  - S <- "x" S "x" | "x"
-- [test] try examples in peg paper in parser generator
+  - use array instead of formated string.
 - [refactor] `Schedule.harvest_body`
   - progress also contain `name`
     - this is what we mean by "handle name in part"
@@ -47,6 +44,10 @@
 - `BaseError`
 - `ParsingError`
 - `LexingError`
+- [migrate] partech langs tests
+- [test] x in x test
+  - S <- "x" S "x" | "x"
+- [test] try examples in peg paper in parser generator
 - `pt/exp/exp-parse`
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
