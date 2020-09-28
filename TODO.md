@@ -34,10 +34,10 @@
 
 **Sorted by: necessity to use `pt` in `lang`s.**
 
+- use `LexingError`
+- use `ParsingError`
 - `pt/earley-parser` -- error report
-- `BaseError`
-- `ParsingError`
-- `LexingError`
+- `Span` report in context
 - [migrate] partech langs tests
 - [test] x in x test
   - S <- "x" S "x" | "x"
