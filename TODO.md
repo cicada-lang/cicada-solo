@@ -34,8 +34,6 @@
 
 **Sorted by: necessity to use `pt` in `lang`s.**
 
-- [re-factor] `Schedule.harvest_body`
-- desicde no `name` in progress
 - `pt/earley-parser` -- error report
 - `BaseError`
 - `ParsingError`

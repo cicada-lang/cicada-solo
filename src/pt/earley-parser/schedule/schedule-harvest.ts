@@ -69,33 +69,34 @@ function harvest_body(
   }
 
   const body: Obj<Tree.Tree> = {}
-  let index = start
 
+  let index = start
   for (let i = 0; i < parts.length; i++) {
     const entry = progress[i]
     const part = parts[i]
-    if (entry.choice_name) {
-      if (part.value.kind === "Value.grammar") {
-        if (part.name) {
-          const grammar = part.value
-          const node = harvest_node(schedule, grammar, index, entry.index)
-          body[part.name] = node
-        }
-        index = entry.index
-      } else {
-        throw new Error(
-          `expecting Value.grammar instead of: ${part.value.kind}`
-        )
-      }
-    } else {
-      if (part.name) {
-        const token = schedule.tokens[entry.index - 1]
-        const leaf = Tree.leaf(token)
-        body[part.name] = leaf
-      }
-      index = entry.index
+    if (part.name) {
+      body[part.name] = harvest_value(schedule, part.value, entry, index)
     }
+    index = entry.index
   }
 
   return body
+}
+
+function harvest_value(
+  schedule: Schedule.Schedule,
+  value: Value.Value,
+  entry: { index: number; choice_name?: string },
+  index: number
+): Tree.Tree {
+  if (entry.choice_name) {
+    if (value.kind === "Value.grammar") {
+      return harvest_node(schedule, value, index, entry.index)
+    } else {
+      throw new Error(`expecting Value.grammar instead of: ${value.kind}`)
+    }
+  } else {
+    const token = schedule.tokens[entry.index - 1]
+    return Tree.leaf(token)
+  }
 }
