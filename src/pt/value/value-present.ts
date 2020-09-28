@@ -29,7 +29,9 @@ export function present(
       return JSON.stringify(value.value)
     }
     case "Value.pattern": {
-      return { $pattern: `${value.label}#${value.value.source}` }
+      return value.value.flags
+        ? { $pattern: [value.label, value.value.source, value.value.flags] }
+        : { $pattern: [value.label, value.value.source] }
     }
     case "Value.grammar": {
       const { name, delayed } = value

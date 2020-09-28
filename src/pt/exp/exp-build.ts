@@ -23,8 +23,8 @@ function from_object(obj: Obj<any>): Exp.Exp {
     const [target, ...args] = obj["$ap"]
     return Exp.ap(build(target), args.map(build))
   } else if (obj.hasOwnProperty("$pattern")) {
-    const [label, value] = obj["$pattern"].split("#")
-    return Exp.pattern(label, new RegExp(value))
+    const [label, pattern, flags] = obj["$pattern"]
+    return Exp.pattern(label, new RegExp(pattern, flags))
   } else {
     return build_grammar(obj)
     throw new Error()
