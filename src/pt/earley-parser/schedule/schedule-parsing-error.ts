@@ -5,6 +5,7 @@ import * as Token from "../../token"
 import * as Span from "../../span"
 import * as Value from "../../value"
 import { ParsingError } from "../../errors"
+import * as ut from "../../../ut"
 
 // NOTE three kinds of errors in the following function:
 //   "(a b c"    --  "found END_OF_TOKENS, while expecting: ..."
@@ -16,47 +17,50 @@ export function parsing_error(
   start: number,
   end: number
 ): ParsingError {
-  throw new Error()
-  // const i = find_last_index(schedule, start, end)
-  // if (index_still_can_scan(schedule, i)) {
-  //   if (i === schedule.tokens.length - 1) {
-  //     let s = ""
-  //     s += `found END_OF_TOKENS, `
-  //     s += "while expecting:\n"
-  //     for (const task of schedule.chart[i].values()) {
-  //       if (task_terminal_p(task)) {
-  //         s += " "
-  //         s += Sym.repr(task.parts[task.progress.length])
-  //         s += " according to:\n"
-  //         s += "     "
-  //         s += Task.repr(task)
-  //         s += "\n"
-  //       }
-  //     }
-  //     const span = schedule.tokens[i].span
-  //     return new ParsingError(s, new Span.Span(span.hi, span.hi))
-  //   } else {
-  //     let s = ""
-  //     s += `found token: "${Token.repr(schedule.tokens[i])}", `
-  //     s += "while expecting END_OF_TOKENS.\n"
-  //     return new ParsingError(s, schedule.tokens[i].span)
-  //   }
-  // } else {
-  //   let s = ""
-  //   s += `found token: "${Token.repr(schedule.tokens[i])}", `
-  //   s += "while expecting:\n"
-  //   for (const task of schedule.chart[i].values()) {
-  //     if (task_terminal_p(task)) {
-  //       s += " "
-  //       s += Sym.repr(task.parts[task.progress.length])
-  //       s += " according to:\n"
-  //       s += "     "
-  //       s += Task.repr(task)
-  //       s += "\n"
-  //     }
-  //   }
-  //   return new ParsingError(s, schedule.tokens[i].span)
-  // }
+  const i = find_last_index(schedule, start, end)
+  if (index_still_can_scan(schedule, i)) {
+    if (i === schedule.tokens.length - 1) {
+      let s = ""
+      s += `found END_OF_TOKENS, `
+      s += "while expecting:\n"
+      for (const task of schedule.chart[i].values()) {
+        if (task_terminal_p(task)) {
+          s += " "
+          const { value } = task.parts[task.progress.length]
+          s += ut.inspect(Value.present(value))
+          s += " according to:\n"
+          s += "     "
+          s += Task.repr(task)
+          s += "\n"
+        }
+      }
+      const span = schedule.tokens[i].span
+      return new ParsingError(s, { span: { lo: span.hi, hi: span.hi } })
+    } else {
+      let s = ""
+      s += `found token: "${JSON.stringify(schedule.tokens[i])}", `
+      s += "while expecting END_OF_TOKENS.\n"
+      const span = schedule.tokens[i].span
+      return new ParsingError(s, { span })
+    }
+  } else {
+    let s = ""
+    s += `found token: "${JSON.stringify(schedule.tokens[i])}", `
+    s += "while expecting:\n"
+    for (const task of schedule.chart[i].values()) {
+      if (task_terminal_p(task)) {
+        s += " "
+        const { value } = task.parts[task.progress.length]
+        s += ut.inspect(Value.present(value))
+        s += " according to:\n"
+        s += "     "
+        s += Task.repr(task)
+        s += "\n"
+      }
+    }
+    const span = schedule.tokens[i].span
+    return new ParsingError(s, { span })
+  }
 }
 
 function find_last_index(

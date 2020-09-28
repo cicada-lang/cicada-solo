@@ -34,7 +34,6 @@
 
 **Sorted by: necessity to use `pt` in `lang`s.**
 
-- `pt/earley-parser` -- error report
 - `Span` report in context
 - [migrate] partech langs tests
 - [test] x in x test

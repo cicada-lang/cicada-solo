@@ -46,7 +46,7 @@ function harvest_node(
     }
   }
 
-  throw new Error("PARSING_ERROR")
+  throw Schedule.parsing_error(schedule, grammar, start, end)
 }
 
 function harvest_body(
