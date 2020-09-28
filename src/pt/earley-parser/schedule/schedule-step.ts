@@ -1,11 +1,21 @@
 import * as Schedule from "../schedule"
+import { ParsingError } from "../../errors"
+import * as Value from "../../value"
 import * as Task from "../task"
+import * as ut from "../../../ut"
 
 export function step(schedule: Schedule.Schedule, task: Task.Task): void {
   const { value } = Task.current_part(task)
   switch (value.kind) {
     case "Value.fn": {
-      throw new Error(`step should not meet Value.fn`)
+      const index = Task.current_index(task)
+      const token = schedule.tokens[index]
+      const span = token.span
+      throw new ParsingError(
+        "Schedule.step should not meet Value.fn\n" +
+          `value: ${ut.inspect(Value.present(value))}`,
+        { span }
+      )
     }
     case "Value.str": {
       return match_str(schedule, task, value.value)

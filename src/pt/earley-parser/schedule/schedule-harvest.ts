@@ -1,11 +1,13 @@
 import * as Schedule from "../schedule"
 import * as TaskChart from "../task-chart"
 import * as Task from "../task"
+import { ParsingError } from "../../errors"
 import * as Value from "../../value"
 import * as Token from "../../token"
 import * as Tree from "../../tree"
 import * as Span from "../../span"
 import { Obj } from "../../../ut"
+import * as ut from "../../../ut"
 
 export function harvest(schedule: Schedule.Schedule): Tree.Tree {
   const start = 0
@@ -29,8 +31,14 @@ function harvest_node(
         const head = { name: grammar.name, kind: task.choice_name }
         const choices = Value.DelayedChoices.force(grammar.delayed)
         const parts = choices.get(task.choice_name)
-        if (parts === undefined)
-          throw new Error(`can not find choice: ${task.choice_name}`)
+        if (parts === undefined) {
+          const span = span_from_tokens(schedule.tokens, start, end)
+          throw new ParsingError(
+            `Can not find choice: ${task.choice_name}\n` +
+              `grammar: ${ut.inspect(Value.present(grammar))}\n`,
+            { span }
+          )
+        }
         const body = harvest_body(schedule, parts, task.progress, start)
         const span = span_from_tokens(schedule.tokens, start, end)
         return Tree.node(head, body, span)
@@ -41,23 +49,6 @@ function harvest_node(
   throw new Error("PARSING_ERROR")
 }
 
-function span_from_tokens(
-  tokens: Array<Token.Token>,
-  token_lo: number,
-  token_hi: number
-): Span.Span {
-  if (tokens.length === 0) return { lo: 0, hi: 0 }
-
-  if (token_lo === token_hi) {
-    const token = tokens[token_lo] || tokens[tokens.length - 1]
-    return token.span
-  } else {
-    const lo = tokens[token_lo].span.lo
-    const hi = tokens[token_hi - 1].span.hi
-    return { lo, hi }
-  }
-}
-
 function harvest_body(
   schedule: Schedule.Schedule,
   parts: Array<{ name?: string; value: Value.Value }>,
@@ -65,7 +56,14 @@ function harvest_body(
   start: number
 ): Obj<Tree.Tree> {
   if (parts.length !== progress.length) {
-    throw new Error("parts.length !== progress.length")
+    const span = span_from_tokens(schedule.tokens, start, start)
+    throw new ParsingError(
+      "[Schedule.harvest_body] Internal error\n" +
+        "parts.length !== progress.length\n" +
+        `parts.length: ${parts.length}\n` +
+        `progress.length: ${progress.length}\n`,
+      { span }
+    )
   }
 
   const body: Obj<Tree.Tree> = {}
@@ -93,10 +91,32 @@ function harvest_value(
     if (value.kind === "Value.grammar") {
       return harvest_node(schedule, value, index, entry.index)
     } else {
-      throw new Error(`expecting Value.grammar instead of: ${value.kind}`)
+      const span = span_from_tokens(schedule.tokens, index, entry.index)
+      throw new ParsingError(
+        "The value should be Value.grammar.\n" +
+          `value: ${ut.inspect(Value.present(value))}\n`,
+        { span }
+      )
     }
   } else {
     const token = schedule.tokens[entry.index - 1]
     return Tree.leaf(token)
+  }
+}
+
+function span_from_tokens(
+  tokens: Array<Token.Token>,
+  start: number,
+  end: number
+): Span.Span {
+  if (tokens.length === 0) return { lo: 0, hi: 0 }
+
+  if (start === end) {
+    const token = tokens[start] || tokens[tokens.length - 1]
+    return token.span
+  } else {
+    const lo = tokens[start].span.lo
+    const hi = tokens[end - 1].span.hi
+    return { lo, hi }
   }
 }
