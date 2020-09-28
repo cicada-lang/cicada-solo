@@ -17,11 +17,9 @@ export function step(schedule: Schedule.Schedule, task: Task.Task): void {
         { span }
       )
     }
-    case "Value.str": {
-      return match_str(schedule, task, value.value)
-    }
+    case "Value.str":
     case "Value.pattern": {
-      return match_pattern(schedule, task, value.label, value.value)
+      return match_terminal(schedule, task, value)
     }
     case "Value.grammar": {
       return Schedule.insert_grammar(schedule, value, Task.current_index(task))
@@ -29,30 +27,14 @@ export function step(schedule: Schedule.Schedule, task: Task.Task): void {
   }
 }
 
-function match_str(
+function match_terminal(
   schedule: Schedule.Schedule,
   task: Task.Task,
-  str: string
+  value: Value.Value
 ): void {
   if (Task.current_index(task) < schedule.tokens.length) {
     const token = schedule.tokens[Task.current_index(task)]
-    if (str === token.value) {
-      const entry = { index: Task.current_index(task) + 1 }
-      const progress = [...task.progress, entry]
-      Schedule.insert_task(schedule, { ...task, progress })
-    }
-  }
-}
-
-function match_pattern(
-  schedule: Schedule.Schedule,
-  task: Task.Task,
-  label: string,
-  pattern: RegExp
-): void {
-  if (Task.current_index(task) < schedule.tokens.length) {
-    const token = schedule.tokens[Task.current_index(task)]
-    if (label === token.label && pattern.exec(token.value)) {
+    if (Value.terminal_match(value, token)) {
       const entry = { index: Task.current_index(task) + 1 }
       const progress = [...task.progress, entry]
       Schedule.insert_task(schedule, { ...task, progress })

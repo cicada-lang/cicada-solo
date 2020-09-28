@@ -95,10 +95,9 @@ function index_still_can_scan(schedule: Schedule.Schedule, i: number): boolean {
       const { value } = task.parts[index]
       if (Value.terminal_p(value)) {
         const token = schedule.tokens[i]
-        // TODO
-        // if (Value.terminal_match(value, token)) {
-        //   return true
-        // }
+        if (Value.terminal_match(value, token)) {
+          return true
+        }
       }
     }
   }

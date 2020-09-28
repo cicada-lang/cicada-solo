@@ -34,7 +34,6 @@
 
 **Sorted by: necessity to use `pt` in `lang`s.**
 
-- `Value.terminal_match`
 - `pt/earley-parser` -- error report
 - `Span` report in context
 - [migrate] partech langs tests
