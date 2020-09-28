@@ -38,9 +38,8 @@ export function repr_progress_entry(entry: {
 function repr_part(part: { name?: string; value: Value.Value }): string {
   const { name, value } = part
   const present = Value.present(value, { on_grammar: "only_show_name" })
-  const s = typeof present === "string"
-    ? present.toString()
-    : JSON.stringify(present)
+  const s =
+    typeof present === "string" ? present.toString() : JSON.stringify(present)
   return name ? repr_named(name, s) : s
 }
 
