@@ -4,7 +4,6 @@ import * as Task from "../task"
 
 export function resume(schedule: Schedule.Schedule, task: Task.Task): void {
   for (const upsteam_task of TaskChart.tasks_at(schedule.chart, task.index)) {
-    // TODO handle name in part.
     if (!Task.finished_p(upsteam_task)) {
       const { value } = Task.current_part(upsteam_task)
       if (value.kind === "Value.grammar") {

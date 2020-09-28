@@ -35,8 +35,7 @@
 **Sorted by: necessity to use `pt` in `lang`s.**
 
 - [re-factor] `Schedule.harvest_body`
-  - progress also contain `name`
-    - this is what we mean by "handle name in part"
+- desicde no `name` in progress
 - `pt/earley-parser` -- error report
 - `BaseError`
 - `ParsingError`
