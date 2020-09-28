@@ -34,11 +34,11 @@
 
 **Sorted by: necessity to use `pt` in `lang`s.**
 
-- `Span` report in context
 - [migrate] partech langs tests
 - [test] x in x test
   - S <- "x" S "x" | "x"
 - [test] try examples in peg paper in parser generator
+- `Span` report in context
 - `pt/exp/exp-parse`
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection

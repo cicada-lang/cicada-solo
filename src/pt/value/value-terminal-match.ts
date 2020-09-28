@@ -12,7 +12,7 @@ export function terminal_match(
     }
     case "Value.pattern": {
       return (
-        value.label === token.label && new Boolean(value.value.exec(token.value))
+        value.label === token.label && Boolean(value.value.exec(token.value))
       )
     }
     default: {
