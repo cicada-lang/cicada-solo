@@ -34,7 +34,6 @@
 
 **Sorted by: necessity to use `pt` in `lang`s.**
 
-- use `LexingError`
 - use `ParsingError`
 - `pt/earley-parser` -- error report
 - `Span` report in context

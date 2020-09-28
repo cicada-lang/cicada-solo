@@ -1,4 +1,5 @@
 import * as TableLexer from "../table-lexer"
+import { LexingError } from "../errors"
 import * as Token from "../token"
 import * as Span from "../span"
 // NOTE https://github.com/tc39/proposal-regexp-match-indices
@@ -36,7 +37,7 @@ export function create(table: Array<[string, RegExp]>): TableLexer.TableLexer {
             span: Span.shift(span, i),
           })
         } else {
-          throw new Error(
+          throw new LexingError(
             "All regexp in table fail to match remaining input.\n" +
               `index: ${i}\n` +
               `remain: ${remain.slice(0, 200)} ...\n` +

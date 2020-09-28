@@ -1,13 +1,10 @@
 import { BaseError } from "./base-error"
-import * as Span from "../span"
 
 export class LexingError extends BaseError {
   message: string
-  span: Span.Span
 
-  constructor(message: string, opts: { span: Span.Span }) {
+  constructor(message: string) {
     super(message)
     this.message = message
-    this.span = opts.span
   }
 }
