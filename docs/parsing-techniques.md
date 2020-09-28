@@ -1,4 +1,4 @@
-# pt -- parsing technique
+# Parsing Techniques
 
 ## grammar
 

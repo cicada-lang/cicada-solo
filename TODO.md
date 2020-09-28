@@ -35,7 +35,6 @@
 **Sorted by: necessity to use `pt` in `lang`s.**
 
 - be sure about the literal syntax of regexp
-  - note about `/.../` vs `new RegExp("...")`
   - use array instead of formated string.
 - [re-factor] `Schedule.harvest_body`
   - progress also contain `name`
