@@ -23,8 +23,8 @@
   - computation that are not simply data constructor application.
   - examples: `Exp.evaluate`, `Closure.apply`
   and, they must be placed in `@where` block,
-  with extra definitional equvalent relation.
-  - equvalent relation in the language -- `=`,
+  with extra definitional equivalent relation.
+  - equivalent relation in the language -- `=`,
     must always be pure pattern matching.
     - how about syntax for record?
       should we use json syntax, instead of `=`?
