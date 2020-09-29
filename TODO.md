@@ -1,4 +1,12 @@
+# lang3 -- 重新实现 cicada-structural-typing
+
+> 由于，重新理解了 Value Neutral Normal 的结构，
+> 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
+
 # TLT
+
+> 强化对类型系统的理解与实现技术，
+> 为 cicada-structural-typing 做准备。
 
 - [TLT] 2. Doin' What Comes Naturally
 - [lang2] implement `Pair` and `Arrow` directly
@@ -32,7 +40,7 @@
 
 # pt -- parsing techniques
 
-**Sorted by: necessity to use `pt` in `lang`s.**
+> Using `pt` to replace the use of `partech` in `lang`s.
 
 - [migrate] partech langs tests
 - [test] x in x test
@@ -77,7 +85,6 @@
 
 - use native `number` as `Nat`.
 
-# lang3 -- 重新实现 cicada-structural-typing
 
 # langx -- lang1 + algebraic data type
 
