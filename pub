@@ -2,4 +2,4 @@
 
 npx plaintext toc docs -o docs/toc --verbose
 cat docs/README.txt <(echo) docs/toc > docs/index
-npx plaintext dir docs -o out/docs --verbose
+npx plaintext dir docs -o out --verbose
