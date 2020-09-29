@@ -1,0 +1,46 @@
+$description: Old familiar JSON
+
+$start: value
+
+value:
+  value:object: [object]
+  value:array: [array]
+  value:boolean: [boolean]
+  value:null: [null]
+  value:string: [string]
+  value:number: [number]
+
+object:
+  object:empty: ['"{"', '"}"']
+  object:one: ['"{"', string, '":"', value, '"}"']
+  object:more:
+    ['"{"', { $ap: [one_or_more, object_entry] }, string, '":"', value, '"}"']
+
+object_entry:
+  object:key_value_comma: [string, '":"', value, '","']
+
+array:
+  object:empty: ['"["', '"]"']
+  object:one: ['"["', value, '"]"']
+  object:more: ['"["', { $ap: [one_or_more, array_entry] }, value, '"]"']
+
+array_entry:
+  object:value_comma: [value, '","']
+
+boolean:
+  object:true: ['"true"']
+  object:false: ['"false"']
+
+null:
+  object:null: ['"null"']
+
+string:
+  object:string: [str]
+
+number:
+  object:number: [num]
+
+one_or_more:
+  $arg: x
+  one_or_more:one: [{ value: x }]
+  one_or_more:more: [{ head: x }, { tail: { $ap: [one_or_more, x] } }]
