@@ -44,6 +44,8 @@
 
 - `partech/cli/index.ts`
 - `bin/partech.js`
+- `partech parse`
+- `partech lex`
 - module system
 - tests/partech/tom-dick-and-harry.grammar.yaml
 - tests/partech/sexp-by-one-or-more.grammar.yaml
