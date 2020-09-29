@@ -1,15 +1,6 @@
 @module lang1
 
 @judgment Check(ctx: Map(String, Ty), exp: Exp, t: Ty) {
-  // NOTE The semantic of judgment.
-  // - A return type (above the line) can introduce new logic variables.
-  //   and argument types can use them.
-  //   - Although during application of data constructor,
-  //     the direction of data flow is reversed.
-  //     - i.e. argument types match pattern variables,
-  //       and return value use them.
-  // - We must always be able to infer the type of logic variable.
-
   Check(ctx, Exp.v(name), t)
   -------------------------- v
   Map.Lookup(ctx, name, t)
@@ -39,7 +30,7 @@
   --------------------------------------------- rec
   Check(ctx, target, Ty.nat)
   Check(ctx, base, t)
-  Check(ctx, base, Ty.arrow(Ty.nat, Ty.arrow(t, t)))
+  Check(ctx, step, Ty.arrow(Ty.nat, Ty.arrow(t, t)))
 
   Check(ctx, Exp.the(t, exp), t)
   ------------------------------ the

@@ -1,4 +1,4 @@
-# cicada
+# Cicada Design
 
 ## 语法
 
