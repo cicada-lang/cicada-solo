@@ -38,19 +38,20 @@
 - [test] x in x test
   - S <- "x" S "x" | "x"
 
-# pt -- parsing techniques
+# partech -- parsing techniques
 
-> Using `pt` to replace the use of `partech` in `lang`s.
+> Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- use cli to do test
+- `pt/cli/index.ts`
+- `bin/partech.js`
 - module system
-- tests/pt/tom-dick-and-harry.grammar.yaml
-- tests/pt/sexp-by-one-or-more.grammar.yaml
-- tests/pt/sexp-by-zero-or-more.grammar.yaml
-- tests/pt/exp-with-dot-and-case.grammar.yaml
-- tests/pt/block.grammar.yaml
-- tests/pt/args.grammar.yaml
-- tests/pt/lang2.grammar.yaml
+- tests/partech/tom-dick-and-harry.grammar.yaml
+- tests/partech/sexp-by-one-or-more.grammar.yaml
+- tests/partech/sexp-by-zero-or-more.grammar.yaml
+- tests/partech/exp-with-dot-and-case.grammar.yaml
+- tests/partech/block.grammar.yaml
+- tests/partech/args.grammar.yaml
+- tests/partech/lang2.grammar.yaml
 - [migrate] partech langs tests
 - `lexers/common-lexer`
 - [test] x in x test
