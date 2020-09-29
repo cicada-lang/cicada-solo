@@ -43,6 +43,7 @@
 > Using `pt` to replace the use of `partech` in `lang`s.
 
 - [migrate] partech langs tests
+- `langs/...`
 - [test] x in x test
   - S <- "x" S "x" | "x"
 - [test] try examples in peg paper in parser generator

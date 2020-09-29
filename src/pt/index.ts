@@ -13,4 +13,6 @@ export * as TableLexer from "./table-lexer"
 export * as Parser from "./parser"
 export * as EarleyParser from "./earley-parser"
 
+export * as Lang from "./lang"
+
 export * from "./errors"
