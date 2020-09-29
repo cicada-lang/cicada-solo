@@ -42,8 +42,21 @@
 
 > Using `pt` to replace the use of `partech` in `lang`s.
 
+- use cli to do test
 - [migrate] partech langs tests
-- `langs/...`
+- tests/pt/xs.grammar.yaml
+- tests/pt/list-of-a.grammar.yaml
+- tests/pt/tdh.grammar.yaml
+- tests/pt/tdh-left.grammar.yaml
+- tests/pt/tom-dick-and-harry.grammar.yaml
+- tests/pt/sexp-by-one-or-more.grammar.yaml
+- tests/pt/sexp-by-zero-or-more.grammar.yaml
+- tests/pt/json.grammar.yaml
+- tests/pt/exp-with-dot-and-case.grammar.yaml
+- tests/pt/block.grammar.yaml
+- tests/pt/args.grammar.yaml
+- tests/pt/lang2.grammar.yaml
+- `lexers/common-lexer`
 - [test] x in x test
   - S <- "x" S "x" | "x"
 - [test] try examples in peg paper in parser generator
