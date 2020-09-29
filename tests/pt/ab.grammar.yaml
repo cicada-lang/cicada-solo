@@ -1,3 +1,7 @@
+$description: equal number of "a" "b"
+
+$start: ab
+
 ab:
   ab:head_a: ['"a"', b]
   ab:head_b: ['"b"', a]
