@@ -1,4 +1,3 @@
-- be clear about current semantic of `@judgment`
 # lang3 -- 重新实现 cicada-structural-typing
 
 > 由于，重新理解了 Value Neutral Normal 的结构，
