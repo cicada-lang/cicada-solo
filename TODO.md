@@ -44,7 +44,6 @@
 
 - use cli to do test
 - [migrate] partech langs tests
-- tests/pt/tdh-left.grammar.yaml
 - tests/pt/tom-dick-and-harry.grammar.yaml
 - tests/pt/sexp-by-one-or-more.grammar.yaml
 - tests/pt/sexp-by-zero-or-more.grammar.yaml

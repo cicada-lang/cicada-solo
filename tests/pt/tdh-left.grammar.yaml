@@ -1,0 +1,22 @@
+$description: tdh_left -- left regular grammar
+
+$start: tdh_left
+
+tdh_left:
+  tdh_left:t: ['"t"']
+  tdh_left:d: ['"d"']
+  tdh_left:h: ['"h"']
+  tdh_left:list: [tdh_left_list]
+
+tdh_left_list:
+  tdh_left_list:t: [tdh_left_list_head, '"&"', '"t"']
+  tdh_left_list:d: [tdh_left_list_head, '"&"', '"d"']
+  tdh_left_list:h: [tdh_left_list_head, '"&"', '"h"']
+
+tdh_left_list_head:
+  tdh_left_list_head:t: ['"t"']
+  tdh_left_list_head:d: ['"d"']
+  tdh_left_list_head:h: ['"h"']
+  tdh_left_list_head:before_t: [tdh_left_list_head, '","', '"t"']
+  tdh_left_list_head:before_d: [tdh_left_list_head, '","', '"d"']
+  tdh_left_list_head:before_h: [tdh_left_list_head, '","', '"h"']
