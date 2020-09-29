@@ -30,9 +30,9 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
-# pc
+# parc
 
-- pc -- to implement `pt/exp/exp-parse`
+- parc -- to implement `pt/exp/exp-parse`
 - like handle written parser
 - [test] try examples in peg paper in parser generator
 - [test] x in x test
@@ -42,7 +42,7 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- `pt/cli/index.ts`
+- `partech/cli/index.ts`
 - `bin/partech.js`
 - module system
 - tests/partech/tom-dick-and-harry.grammar.yaml
@@ -58,7 +58,7 @@
   - S <- "x" S "x" | "x"
 - [test] try examples in peg paper in parser generator
 - `Span` report in context
-- `pt/exp/exp-parse`
+- `partech/exp/exp-parse`
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
 
