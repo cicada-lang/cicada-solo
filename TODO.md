@@ -44,7 +44,6 @@
 
 - use cli to do test
 - module system
-- [migrate] partech langs tests
 - tests/pt/tom-dick-and-harry.grammar.yaml
 - tests/pt/sexp-by-one-or-more.grammar.yaml
 - tests/pt/sexp-by-zero-or-more.grammar.yaml
@@ -52,6 +51,7 @@
 - tests/pt/block.grammar.yaml
 - tests/pt/args.grammar.yaml
 - tests/pt/lang2.grammar.yaml
+- [migrate] partech langs tests
 - `lexers/common-lexer`
 - [test] x in x test
   - S <- "x" S "x" | "x"

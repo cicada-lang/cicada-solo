@@ -6,7 +6,7 @@ tdh:
   tdh:t: ['"t"']
   tdh:d: ['"d"']
   tdh:h: ['"h"']
-  tdh:tdh_list: [tdh_list]
+  tdh:list: [tdh_list]
 
 tdh_list:
   tdh_list:t: ['"t"', tdh_list_tail]
