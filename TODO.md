@@ -43,9 +43,8 @@
 > Using `pt` to replace the use of `partech` in `lang`s.
 
 - use cli to do test
-
+- module system
 - [migrate] partech langs tests
-- use `$arg` as meta property to define `fn`
 - tests/pt/tom-dick-and-harry.grammar.yaml
 - tests/pt/sexp-by-one-or-more.grammar.yaml
 - tests/pt/sexp-by-zero-or-more.grammar.yaml

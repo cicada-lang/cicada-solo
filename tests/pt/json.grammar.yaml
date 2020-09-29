@@ -41,6 +41,7 @@ number:
   object:number: [num]
 
 one_or_more:
-  $arg: x
-  one_or_more:one: [{ value: x }]
-  one_or_more:more: [{ head: x }, { tail: { $ap: [one_or_more, x] } }]
+  $fn:
+    - x
+    - one_or_more:one: [{ value: x }]
+      one_or_more:more: [{ head: x }, { tail: { $ap: [one_or_more, x] } }]
