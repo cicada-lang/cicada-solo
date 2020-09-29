@@ -1,4 +1,4 @@
-# Cicada
+# Cicada Language
 
 A nascent programming language
   as formal deduction system
