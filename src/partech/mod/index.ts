@@ -1,6 +1,6 @@
 export * from "./mod"
 export * from "./mod-present"
 export * from "./mod-build"
-export * from "./mod-get"
+export * from "./mod-lookup"
 export * from "./mod-set"
 export * from "./mod-dot"

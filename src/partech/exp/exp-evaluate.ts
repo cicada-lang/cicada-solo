@@ -58,7 +58,7 @@ function lookup(
 ): Array<Value.Value> {
   const values = Env.lookup(env, name)
   if (values) return values
-  const exp = Mod.get(mod, name)
+  const exp = Mod.lookup(mod, name)
   if (exp) return evaluate(mod, env, exp)
   opts.on_not_found(name)
 }
