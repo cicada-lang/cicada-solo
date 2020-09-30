@@ -1,4 +1,4 @@
-found token: ["identifier","a",[0,1]], while expecting:
+found token ["identifier","a",[0,1]], while expecting:
  "[" according to:
      list_of_a:list@0 -> » "[" aaa "]" 
 

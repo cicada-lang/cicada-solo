@@ -34,6 +34,7 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
+- `Token.report` -- the ... "..." at (lo, hi).
 - examples for json
 - sexp-by-one-or-more.grammar.yaml
 - sexp-by-zero-or-more.grammar.yaml

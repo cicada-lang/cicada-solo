@@ -1,4 +1,4 @@
-found token: ["identifier","y",[2,3]], while expecting:
+found token ["identifier","y",[2,3]], while expecting:
  "x" according to:
      xs:more@1 -> » "x" xs 
 
