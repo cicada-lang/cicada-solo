@@ -42,6 +42,7 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
+- `common.table.yaml`
 - `partech lex`
 - `partech parse-tokens`
 - `partech parse`
