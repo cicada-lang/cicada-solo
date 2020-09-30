@@ -1,4 +1,4 @@
-🇨​​​​​🇮​​​​​🇨​​​​​🇦​​​​​🇩​​​​​🇦​​​​​ 🇱​​​​​🇦​​​​​🇳​​​​​🇬​​​​​🇺​​​​​🇦​​​​​🇬​​​​​🇪​​​​​
+CICADA LANGUAGE
 
 A nascent programming language
   as formal deduction system
