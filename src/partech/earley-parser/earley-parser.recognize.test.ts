@@ -26,7 +26,7 @@ function ok(test: string): void {
   assert(parser.recognize(lexer.lex(test)))
 }
 
-function no(test: string): void {
+function oh(test: string): void {
   assert(!parser.recognize(lexer.lex(test)))
 }
 
@@ -34,5 +34,5 @@ ok("a")
 ok("a-a")
 ok("a-a+a")
 
-no("a-a+b")
-no("a-a++")
+oh("a-a+b")
+oh("a-a++")

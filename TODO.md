@@ -42,18 +42,16 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
+- `Span` report in context
 - sexp-by-one-or-more.grammar.yaml
 - sexp-by-zero-or-more.grammar.yaml
 - exp-with-dot-and-case.grammar.yaml
 - args.grammar.yaml
 - lang2.grammar.yaml
-- module system
-- [migrate] partech langs tests
-- `lexers/common-lexer`
+- handle `$import` in `Mod.build` -- always use qualified name
 - [test] x in x test
   - S <- "x" S "x" | "x"
 - [test] try examples in peg paper in parser generator
-- `Span` report in context
 - `partech/exp/exp-parse`
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection

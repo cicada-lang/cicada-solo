@@ -97,8 +97,13 @@ commands.test_partech_parse = async () => {
       const grammar = path.resolve(base, name, name + ".grammar.yaml")
       test(
         `./bin/partech.js parse $file --grammar ${grammar}`,
-        { file: `${base}/${name}/**.ok.txt` },
+        { file: `${base}/${name}/**.ok` },
         snapshot.out(({ file }) => file + ".tree")
+      )
+      test(
+        `./bin/partech.js parse $file --grammar ${grammar}`,
+        { file: `${base}/${name}/**.oh` },
+        snapshot.err(({ file }) => file + ".error")
       )
     }
   }
