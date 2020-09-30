@@ -2,6 +2,7 @@ import * as TableLexer from "../table-lexer"
 import { LexingError } from "../errors"
 import * as Token from "../token"
 import * as Span from "../span"
+import * as ut from "../../ut"
 // NOTE https://github.com/tc39/proposal-regexp-match-indices
 import execWithIndices from "regexp-match-indices"
 
@@ -26,10 +27,16 @@ export function create(table: Array<[string, RegExp]>): TableLexer.TableLexer {
 
       while (i < text.length) {
         const remain = text.slice(i)
-
         const result = match_table(remain, table)
         if (result !== undefined) {
           const { label, value, span, forword } = result
+          if (forword === 0) {
+            throw new LexingError(
+              `No progress during at: ${i}\n` +
+                `remain: ${report_remain(remain)}\n` +
+                `label: ${result.label}\n`
+            )
+          }
           i += forword
           tokens.push({
             label,
@@ -40,7 +47,7 @@ export function create(table: Array<[string, RegExp]>): TableLexer.TableLexer {
           throw new LexingError(
             "All regexp in table fail to match remaining input.\n" +
               `index: ${i}\n` +
-              `remain: ${remain.slice(0, 200)} ...\n` +
+              `remain: ${report_remain(remain)}\n` +
               `labels: ${table.map(([label]) => label).join(", ")}\n`
           )
         }
@@ -49,6 +56,13 @@ export function create(table: Array<[string, RegExp]>): TableLexer.TableLexer {
       return tokens
     },
   }
+}
+
+function report_remain(remain: string): string {
+  let s = ""
+  s += remain.slice(0, 20).replace(/\n/g, "\\n")
+  s += " ..."
+  return s
 }
 
 function match_table(

@@ -42,7 +42,8 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- `partech lex`
+- `partech lex` default to common lexer
+- `partech lex` test in `./dev`
 - `partech parse-tokens`
 - `partech parse`
 - module system
