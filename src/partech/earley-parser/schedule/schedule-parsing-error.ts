@@ -27,7 +27,7 @@ export function parsing_error(
         if (task_terminal_p(task)) {
           s += " "
           const { value } = task.parts[task.progress.length]
-          s += ut.inspect(Value.present(value))
+          s += Value.repr(value)
           s += " according to:\n"
           s += "     "
           s += Task.repr(task)
@@ -51,7 +51,7 @@ export function parsing_error(
       if (task_terminal_p(task)) {
         s += " "
         const { value } = task.parts[task.progress.length]
-        s += ut.inspect(Value.present(value))
+        s += Value.repr(value)
         s += " according to:\n"
         s += "     "
         s += Task.repr(task)

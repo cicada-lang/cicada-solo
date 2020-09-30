@@ -1,9 +1,9 @@
 found END_OF_TOKENS, while expecting:
- '"b"' according to:
+ "b" according to:
      b:one_b@2 -> » "b" 
- '"b"' according to:
+ "b" according to:
      b:more_b@2 -> » "b" ab 
- '"a"' according to:
+ "a" according to:
      b:after_a@2 -> » "a" b b 
 
  0 |a a b

@@ -1,7 +1,7 @@
 found token: ["identifier","b",[3,4]], while expecting:
- '"a"' according to:
+ "a" according to:
      aaa:more@2 -> » "a" aaa 
- '"]"' according to:
+ "]" according to:
      list_of_a:list@0 -> "["@1 aaa:more@2 » "]" 
 
  0 |[a b a a]

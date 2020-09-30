@@ -1,5 +1,5 @@
 found token: ["identifier","a",[0,1]], while expecting:
- '"["' according to:
+ "[" according to:
      list_of_a:list@0 -> » "[" aaa "]" 
 
  0 |a a a a

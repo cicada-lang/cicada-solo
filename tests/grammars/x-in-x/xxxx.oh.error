@@ -1,9 +1,9 @@
 found END_OF_TOKENS, while expecting:
- '"x"' according to:
+ "x" according to:
      s:x_in_x@1 -> "x"@2 s:x@3 » "x" 
- '"x"' according to:
+ "x" according to:
      s:x@3 -> » "x" 
- '"x"' according to:
+ "x" according to:
      s:x_in_x@3 -> » "x" s "x" 
 
  0 |x x x x 
