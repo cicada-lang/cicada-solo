@@ -12,6 +12,7 @@ commands.t = () => {
   commands.test_lang0()
   commands.test_lang1()
   commands.test_lang2()
+  commands.test_partech()
 }
 
 commands.test_lib = () => {
@@ -59,6 +60,25 @@ commands.test_lang2 = () => {
     "./bin/lang2.js $file",
     { file: "tests/lang2-error/**.cic" },
     snapshot.err(({ file }) => file + ".err")
+  )
+}
+
+commands.test_partech = () => {
+  commands.test_partech_lex()
+}
+
+commands.test_partech_lex = () => {
+  test(
+    "./bin/partech.js lex $file --table $file",
+    { file: "tests/tables/common.table.yaml" },
+    snapshot.out((_) => "tests/tables/common.tokens.json")
+  )
+
+  test(
+    "./bin/partech.js lex $file --table $file --output $output",
+    { file: "tests/tables/common.table.yaml",
+      output: "tests/tables/common.tokens.yaml" },
+    expect.ok
   )
 }
 
