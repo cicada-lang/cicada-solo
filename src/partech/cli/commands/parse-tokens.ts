@@ -7,7 +7,7 @@ export const description = "Parse tokens to tree by grammar"
 
 export const builder = {
   output: { type: "string", alias: "o" },
-  grammar: { type: "string" },
+  grammar: { type: "string", demandOption: true },
 }
 
 interface Argv {

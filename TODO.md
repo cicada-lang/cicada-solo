@@ -42,6 +42,9 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
+- `Env.get` & `Env.set`
+- `Mod.metadata` -- collect `$` metadata in `Mod.build`
+- `Mod.start`
 - `partech lex` default to common lexer
 - `partech lex` test in `./dev`
 - `partech parse-tokens`

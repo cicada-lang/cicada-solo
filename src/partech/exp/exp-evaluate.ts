@@ -13,7 +13,7 @@ export function evaluate(
     case "Exp.v": {
       const { name } = exp
       return lookup(mod, env, name, {
-        on_not_found: () => {
+        on_not_found: (name) => {
           throw new Error(`undefined name: ${name}`)
         },
       })
@@ -53,14 +53,14 @@ function lookup(
   env: Env.Env,
   name: string,
   opts: {
-    on_not_found: () => never
+    on_not_found: (name: string) => never
   }
 ): Array<Value.Value> {
   const values = env.get(name)
   if (values) return values
-  const exp = mod.get(name)
+  const exp = Mod.get(mod, name)
   if (exp) return evaluate(mod, env, exp)
-  opts.on_not_found()
+  opts.on_not_found(name)
 }
 
 function do_ap(
