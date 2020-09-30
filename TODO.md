@@ -42,10 +42,9 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- `partech/cli/index.ts`
-- `bin/partech.js`
-- `partech parse`
 - `partech lex`
+- `partech parse-tokens`
+- `partech parse`
 - module system
 - tests/partech/tom-dick-and-harry.grammar.yaml
 - tests/partech/sexp-by-one-or-more.grammar.yaml

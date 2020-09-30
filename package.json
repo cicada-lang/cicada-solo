@@ -13,7 +13,8 @@
   "bin": {
     "lang0": "./bin/lang0.js",
     "lang1": "./bin/lang1.js",
-    "lang2": "./bin/lang2.js"
+    "lang2": "./bin/lang2.js",
+    "partech": "./bin/partech.js"
   },
   "devDependencies": {
     "@types/assert": "^1.5.2",
