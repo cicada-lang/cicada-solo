@@ -42,17 +42,16 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- `common.table.yaml`
 - `partech lex`
 - `partech parse-tokens`
 - `partech parse`
 - module system
-- tests/grammars/sexp-by-one-or-more.grammar.yaml
-- tests/grammars/sexp-by-zero-or-more.grammar.yaml
-- tests/grammars/exp-with-dot-and-case.grammar.yaml
-- tests/grammars/block.grammar.yaml
-- tests/grammars/args.grammar.yaml
-- tests/grammars/lang2.grammar.yaml
+- sexp-by-one-or-more.grammar.yaml
+- sexp-by-zero-or-more.grammar.yaml
+- exp-with-dot-and-case.grammar.yaml
+- block.grammar.yaml
+- args.grammar.yaml
+- lang2.grammar.yaml
 - [migrate] partech langs tests
 - `lexers/common-lexer`
 - [test] x in x test
