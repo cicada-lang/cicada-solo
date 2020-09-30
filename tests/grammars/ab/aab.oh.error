@@ -6,3 +6,6 @@ found END_OF_TOKENS, while expecting:
  '"a"' according to:
      b:after_a@2 -> » "a" b b 
 
+ 0 |a a b
+ 1 |
+

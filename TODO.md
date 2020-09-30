@@ -34,7 +34,6 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- `Span` report in context
 - examples for list-of-a
 - examples for tdh
 - examples for tdh-left

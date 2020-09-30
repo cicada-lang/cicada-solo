@@ -6,7 +6,10 @@ import * as ut from "../../ut"
 
 export function build(present: any): TableLexer.TableLexer {
   if (present instanceof Array) {
-    const table: Array<[string, RegExp]> = present.map(([label, pattern, flags]) => [
+    const table: Array<[
+      string,
+      RegExp
+    ]> = present.map(([label, pattern, flags]) => [
       label,
       new RegExp(pattern, flags),
     ])

@@ -2,9 +2,9 @@ import * as Mod from "../../mod"
 import * as EarleyParser from "../../earley-parser"
 import { ParsingError } from "../../errors"
 import * as TableLexer from "../../table-lexer"
+import * as Span from "../../span"
 import * as lexers from "../../lexers"
 import * as ut from "../../../ut"
-import path from "path"
 import fs from "fs"
 import strip_ansi from "strip-ansi"
 
@@ -44,6 +44,7 @@ export const handler = async (argv: Argv) => {
       if (error instanceof ParsingError) {
         const message = argv.nocolor ? strip_ansi(error.message) : error.message
         console.error(message)
+        console.error(Span.report(error.span, text))
         process.exit(1)
       } else {
         throw error

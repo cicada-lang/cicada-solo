@@ -4,3 +4,5 @@ found END_OF_TOKENS, while expecting:
  '"x"' according to:
      s:x_in_x@1 -> » "x" s "x" 
 
+ 0 |x x 
+

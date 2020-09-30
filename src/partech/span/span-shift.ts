@@ -1,4 +1,4 @@
-import * as Span from "./span"
+import * as Span from "../span"
 
 export function shift(span: Span.Span, offset: number): Span.Span {
   return {

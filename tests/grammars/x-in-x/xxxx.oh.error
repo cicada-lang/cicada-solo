@@ -6,3 +6,5 @@ found END_OF_TOKENS, while expecting:
  '"x"' according to:
      s:x_in_x@3 -> » "x" s "x" 
 
+ 0 |x x x x 
+
