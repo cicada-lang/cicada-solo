@@ -42,7 +42,6 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- `Mod` as interface
 - `Mod.metadata` -- collect `$` metadata in `Mod.build`
 - `Mod.start`
 - `partech parse-tokens`
