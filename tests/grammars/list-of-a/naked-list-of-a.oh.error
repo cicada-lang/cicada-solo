@@ -1,0 +1,6 @@
+found token: "{"label":"identifier","value":"a","span":{"lo":0,"hi":1}}", while expecting:
+ '"["' according to:
+     list_of_a:list@0 -> » "[" aaa "]" 
+
+ 0 |a a a a
+
