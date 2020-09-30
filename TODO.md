@@ -34,8 +34,6 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- examples for tdh
-- examples for tdh-left
 - examples for tom-dick-and-harry
 - examples for xs
 - examples for json
