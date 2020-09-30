@@ -1,9 +1,3 @@
-{
-  lexer: {
-    table: [ [Array], [Array], [Array], [Array] ],
-    lex: [Function: lex]
-  }
-}
 [
   {
     "label": "symbol",

@@ -65,6 +65,7 @@ commands.test_lang2 = () => {
 
 commands.test_partech = () => {
   commands.test_partech_lex()
+  commands.test_partech_parse()
 }
 
 commands.test_partech_lex = () => {
@@ -79,6 +80,15 @@ commands.test_partech_lex = () => {
     { file: "tests/tables/example.table.yaml" },
     snapshot.out((_) => "tests/tables/default.tokens.json")
   )
+}
+
+commands.test_partech_parse = () => {
+  // TODO "tests/grammars/*.grammar.yaml"
+  // test(
+  //   "./bin/partech.js parse $file",
+  //   { file: TODO },
+  //   snapshot.out((_) => TODO)
+  // )
 }
 
 run(commands)

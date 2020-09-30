@@ -23,7 +23,6 @@ export const handler = async (argv: Argv) => {
   const lexer = argv.table
     ? TableLexer.build(await ut.read_object(argv.table))
     : lexers.common
-  console.log({lexer})
   const text = await fs.promises.readFile(argv.input, "utf8")
   const tokens = lexer.lex(text)
   ut.write_object(tokens, argv.output)
