@@ -45,6 +45,8 @@ export const handler = async (argv: Argv) => {
         const message = argv.nocolor ? strip_ansi(error.message) : error.message
         console.error(message)
         process.exit(1)
+      } else {
+        throw error
       }
     }
   } else {

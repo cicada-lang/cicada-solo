@@ -88,8 +88,9 @@ function index_with_terminal_p(
 
 function task_terminal_p(task: Task.Task): boolean {
   const index = task.progress.length
+  if (index >= task.parts.length) return false
   const { value } = task.parts[index]
-  return index < task.parts.length && Value.terminal_p(value)
+  return Value.terminal_p(value)
 }
 
 function index_still_can_scan(schedule: Schedule.Schedule, i: number): boolean {

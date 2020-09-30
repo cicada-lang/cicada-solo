@@ -41,8 +41,6 @@
 - args.grammar.yaml
 - lang2.grammar.yaml
 - handle `$import` in `Mod.build` -- always use qualified name
-- [test] x in x test
-  - S <- "x" S "x" | "x"
 - [test] try examples in peg paper in parser generator
 - `partech/exp/exp-parse`
 - [earley] change earley to use ordered choice
