@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-npx plaintext toc tests -o test/toc --verbose
+npx plaintext toc tests -o tests/index --verbose
 npx plaintext dir tests -o out/tests --verbose
 
 npx plaintext toc docs -o docs/toc --verbose

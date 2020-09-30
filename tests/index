@@ -44,6 +44,7 @@ link:grammars/x-in-x/xxxx.oh.error
 link:grammars/x-in-x/xxxxx.ok
 link:grammars/x-in-x/xxxxx.ok.tree
 link:grammars/xs/epsilon.ok
+link:grammars/xs/epsilon.ok.tree
 link:grammars/xs/xs.grammar.yaml
 link:lang0/church-encoding/church-numeral.cic
 link:lang0/church-encoding/church-numeral.cic.out
