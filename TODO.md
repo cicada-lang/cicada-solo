@@ -42,7 +42,6 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- test `partech parse` in `./dev`
 - sexp-by-one-or-more.grammar.yaml
 - sexp-by-zero-or-more.grammar.yaml
 - exp-with-dot-and-case.grammar.yaml
