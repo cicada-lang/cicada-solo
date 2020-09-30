@@ -70,14 +70,14 @@ commands.test_partech = () => {
 commands.test_partech_lex = () => {
   test(
     "./bin/partech.js lex $file --table $file",
-    { file: "tests/tables/common.table.yaml" },
-    snapshot.out((_) => "tests/tables/common.tokens.json")
+    { file: "tests/tables/example.table.yaml" },
+    snapshot.out((_) => "tests/tables/example.tokens.json")
   )
 
   test(
     "./bin/partech.js lex $file --table $file --output $output",
-    { file: "tests/tables/common.table.yaml",
-      output: "tests/tables/common.tokens.yaml" },
+    { file: "tests/tables/example.table.yaml",
+      output: "tests/tables/example.tokens.yaml" },
     expect.ok
   )
 }
