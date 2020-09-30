@@ -34,7 +34,6 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- examples for xs
 - examples for json
 - sexp-by-one-or-more.grammar.yaml
 - sexp-by-zero-or-more.grammar.yaml

@@ -1,0 +1,6 @@
+found token: ["identifier","y",[2,3]], while expecting:
+ "x" according to:
+     xs:more@1 -> » "x" xs 
+
+ 0 |x y x y
+
