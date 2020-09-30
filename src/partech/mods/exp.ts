@@ -21,3 +21,5 @@ export const one_or_more = {
     },
   ],
 }
+
+export const $start = exp
