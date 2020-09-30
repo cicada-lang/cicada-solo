@@ -30,14 +30,6 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
-# parc
-
-- parc -- to implement `pt/exp/exp-parse`
-- like handle written parser
-- [test] try examples in peg paper in parser generator
-- [test] x in x test
-  - S <- "x" S "x" | "x"
-
 # partech -- parsing techniques
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
@@ -55,6 +47,14 @@
 - `partech/exp/exp-parse`
 - [earley] change earley to use ordered choice
 - [earley] change earley to use intersection
+
+# parc
+
+- parc -- to implement `pt/exp/exp-parse`
+- like handle written parser
+- [test] try examples in peg paper in parser generator
+- [test] x in x test
+  - S <- "x" S "x" | "x"
 
 # re-design the syntax
 
