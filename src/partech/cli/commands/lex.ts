@@ -3,7 +3,7 @@ import path from "path"
 
 export const command = "lex <input>"
 
-export const description = "Lex a text file to tokens by a table-lexer"
+export const description = "Lex text to tokens by table-lexer"
 
 export const builder = {
   output: { type: "string", alias: "o" },

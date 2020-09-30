@@ -3,7 +3,7 @@ import path from "path"
 
 export const command = "parse <input>"
 
-export const description = "Parse a text file to tree by a grammar"
+export const description = "Parse text to tree by grammar"
 
 export const builder = {
   output: { type: "string", alias: "o" },
