@@ -21,7 +21,7 @@ export function parsing_error(
   if (index_still_can_scan(schedule, i)) {
     if (i === schedule.tokens.length - 1) {
       let s = ""
-      s += `found END_OF_TOKENS, `
+      s += "found END_OF_TOKENS, "
       s += "while expecting:\n"
       for (const task of TaskChart.tasks_at(schedule.chart, i - 1)) {
         if (task_terminal_p(task)) {
