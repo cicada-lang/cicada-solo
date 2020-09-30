@@ -1,10 +1,16 @@
 found END_OF_TOKENS, while expecting:
- "t" according to:
-     tdh_list_head:before_t@0 -> tdh_list_head:before_d@3 ","@4 » "t" 
- "d" according to:
-     tdh_list_head:before_d@0 -> tdh_list_head:before_d@3 ","@4 » "d" 
- "h" according to:
-     tdh_list_head:before_h@0 -> tdh_list_head:before_d@3 ","@4 » "h" 
+ "&" according to:
+     tdh_list:t@0 -> tdh_list_head:before_d@3 » "&" "t" 
+ "&" according to:
+     tdh_list:d@0 -> tdh_list_head:before_d@3 » "&" "d" 
+ "&" according to:
+     tdh_list:h@0 -> tdh_list_head:before_d@3 » "&" "h" 
+ "," according to:
+     tdh_list_head:before_t@0 -> tdh_list_head:before_d@3 » "," "t" 
+ "," according to:
+     tdh_list_head:before_d@0 -> tdh_list_head:before_d@3 » "," "d" 
+ "," according to:
+     tdh_list_head:before_h@0 -> tdh_list_head:before_d@3 » "," "h" 
 
  0 |t,d,h 
 

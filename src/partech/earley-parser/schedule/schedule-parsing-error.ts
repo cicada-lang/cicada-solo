@@ -23,7 +23,7 @@ export function parsing_error(
       let s = ""
       s += `found END_OF_TOKENS, `
       s += "while expecting:\n"
-      for (const task of schedule.chart[i].values()) {
+      for (const task of TaskChart.tasks_at(schedule.chart, i - 1)) {
         if (task_terminal_p(task)) {
           s += " "
           const { value } = task.parts[task.progress.length]
@@ -47,7 +47,7 @@ export function parsing_error(
     let s = ""
     s += `found token: ${Token.repr(schedule.tokens[i])}, `
     s += "while expecting:\n"
-    for (const task of schedule.chart[i].values()) {
+    for (const task of TaskChart.tasks_at(schedule.chart, i)) {
       if (task_terminal_p(task)) {
         s += " "
         const { value } = task.parts[task.progress.length]
@@ -82,8 +82,8 @@ function index_with_terminal_p(
   schedule: Schedule.Schedule,
   i: number
 ): boolean {
-  const tasks = schedule.chart[i]
-  return tasks.size !== 0 && Array.from(tasks.values()).some(task_terminal_p)
+  const tasks = Array.from(TaskChart.tasks_at(schedule.chart, i))
+  return tasks.length !== 0 && tasks.some(task_terminal_p)
 }
 
 function task_terminal_p(task: Task.Task): boolean {
