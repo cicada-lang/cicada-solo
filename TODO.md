@@ -47,13 +47,12 @@
 - `partech parse-tokens`
 - `partech parse`
 - module system
-- tests/partech/tom-dick-and-harry.grammar.yaml
-- tests/partech/sexp-by-one-or-more.grammar.yaml
-- tests/partech/sexp-by-zero-or-more.grammar.yaml
-- tests/partech/exp-with-dot-and-case.grammar.yaml
-- tests/partech/block.grammar.yaml
-- tests/partech/args.grammar.yaml
-- tests/partech/lang2.grammar.yaml
+- tests/grammars/sexp-by-one-or-more.grammar.yaml
+- tests/grammars/sexp-by-zero-or-more.grammar.yaml
+- tests/grammars/exp-with-dot-and-case.grammar.yaml
+- tests/grammars/block.grammar.yaml
+- tests/grammars/args.grammar.yaml
+- tests/grammars/lang2.grammar.yaml
 - [migrate] partech langs tests
 - `lexers/common-lexer`
 - [test] x in x test
