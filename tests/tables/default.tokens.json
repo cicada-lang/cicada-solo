@@ -3,53 +3,61 @@
     "label": "symbol",
     "value": "-",
     "span": {
-      "lo": 2,
-      "hi": 3
+      "lo": 0,
+      "hi": 1
     }
   },
   {
     "label": "symbol",
     "value": "[",
     "span": {
-      "lo": 3,
-      "hi": 4
+      "lo": 2,
+      "hi": 3
     }
   },
   {
     "label": "identifier",
     "value": "identifier",
     "span": {
-      "lo": 13,
-      "hi": 23
+      "lo": 3,
+      "hi": 13
     }
   },
   {
     "label": "symbol",
     "value": ",",
     "span": {
-      "lo": 15,
-      "hi": 16
+      "lo": 13,
+      "hi": 14
     }
   },
   {
     "label": "string",
     "value": "\"^\\\\s*([_\\\\p{Letter}][_\\\\p{Letter}0-9]*)\\\\s*\"",
     "span": {
-      "lo": 60,
-      "hi": 105
+      "lo": 15,
+      "hi": 60
     }
   },
   {
     "label": "symbol",
     "value": ",",
     "span": {
-      "lo": 62,
-      "hi": 63
+      "lo": 60,
+      "hi": 61
     }
   },
   {
     "label": "identifier",
     "value": "u",
+    "span": {
+      "lo": 62,
+      "hi": 63
+    }
+  },
+  {
+    "label": "symbol",
+    "value": "]",
     "span": {
       "lo": 63,
       "hi": 64
@@ -57,7 +65,7 @@
   },
   {
     "label": "symbol",
-    "value": "]",
+    "value": "-",
     "span": {
       "lo": 65,
       "hi": 66
@@ -65,47 +73,47 @@
   },
   {
     "label": "symbol",
-    "value": "-",
+    "value": "[",
     "span": {
       "lo": 67,
       "hi": 68
     }
   },
   {
-    "label": "symbol",
-    "value": "[",
-    "span": {
-      "lo": 68,
-      "hi": 69
-    }
-  },
-  {
     "label": "identifier",
     "value": "string",
     "span": {
-      "lo": 74,
-      "hi": 80
+      "lo": 68,
+      "hi": 74
     }
   },
   {
     "label": "symbol",
     "value": ",",
     "span": {
-      "lo": 76,
-      "hi": 77
+      "lo": 74,
+      "hi": 75
     }
   },
   {
     "label": "string",
     "value": "\"^\\\\s*(\\\"(\\\\\\\\.|[^\\\"])*\\\")\\\\s*\"",
     "span": {
-      "lo": 107,
-      "hi": 138
+      "lo": 76,
+      "hi": 107
     }
   },
   {
     "label": "symbol",
     "value": "]",
+    "span": {
+      "lo": 107,
+      "hi": 108
+    }
+  },
+  {
+    "label": "symbol",
+    "value": "-",
     "span": {
       "lo": 109,
       "hi": 110
@@ -113,47 +121,47 @@
   },
   {
     "label": "symbol",
-    "value": "-",
+    "value": "[",
     "span": {
       "lo": 111,
       "hi": 112
     }
   },
   {
-    "label": "symbol",
-    "value": "[",
-    "span": {
-      "lo": 112,
-      "hi": 113
-    }
-  },
-  {
     "label": "identifier",
     "value": "number",
     "span": {
-      "lo": 118,
-      "hi": 124
+      "lo": 112,
+      "hi": 118
     }
   },
   {
     "label": "symbol",
     "value": ",",
     "span": {
-      "lo": 120,
-      "hi": 121
+      "lo": 118,
+      "hi": 119
     }
   },
   {
     "label": "string",
     "value": "\"^\\\\s*(\\\\d+|\\\\d+\\\\.\\\\d+|-\\\\d+|-\\\\d+\\\\.\\\\d+)\\\\s*\"",
     "span": {
-      "lo": 168,
-      "hi": 216
+      "lo": 120,
+      "hi": 168
     }
   },
   {
     "label": "symbol",
     "value": "]",
+    "span": {
+      "lo": 168,
+      "hi": 169
+    }
+  },
+  {
+    "label": "symbol",
+    "value": "-",
     "span": {
       "lo": 170,
       "hi": 171
@@ -161,66 +169,58 @@
   },
   {
     "label": "symbol",
-    "value": "-",
+    "value": "[",
     "span": {
       "lo": 172,
       "hi": 173
     }
   },
   {
-    "label": "symbol",
-    "value": "[",
-    "span": {
-      "lo": 173,
-      "hi": 174
-    }
-  },
-  {
     "label": "identifier",
     "value": "symbol",
     "span": {
-      "lo": 179,
-      "hi": 185
+      "lo": 173,
+      "hi": 179
     }
   },
   {
     "label": "symbol",
     "value": ",",
     "span": {
-      "lo": 181,
-      "hi": 182
+      "lo": 179,
+      "hi": 180
     }
   },
   {
     "label": "string",
     "value": "\"^\\\\s*([^_\\\\p{Letter}0-9\\\\s]+)\\\\s*\"",
     "span": {
-      "lo": 216,
-      "hi": 251
+      "lo": 181,
+      "hi": 216
     }
   },
   {
     "label": "symbol",
     "value": ",",
     "span": {
-      "lo": 218,
-      "hi": 219
+      "lo": 216,
+      "hi": 217
     }
   },
   {
     "label": "identifier",
     "value": "u",
     "span": {
-      "lo": 219,
-      "hi": 220
+      "lo": 218,
+      "hi": 219
     }
   },
   {
     "label": "symbol",
     "value": "]",
     "span": {
-      "lo": 221,
-      "hi": 222
+      "lo": 219,
+      "hi": 220
     }
   }
 ]

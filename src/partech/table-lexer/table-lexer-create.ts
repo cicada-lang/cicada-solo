@@ -30,6 +30,7 @@ export function create(table: Array<[string, RegExp]>): TableLexer.TableLexer {
         const result = match_table(remain, table)
         if (result !== undefined) {
           const { label, value, span, forword } = result
+
           if (forword === 0) {
             throw new LexingError(
               `No progress during at: ${i}\n` +
@@ -37,12 +38,14 @@ export function create(table: Array<[string, RegExp]>): TableLexer.TableLexer {
                 `label: ${result.label}\n`
             )
           }
-          i += forword
+
           tokens.push({
             label,
             value,
             span: Span.shift(span, i),
           })
+
+          i += forword
         } else {
           throw new LexingError(
             "All regexp in table fail to match remaining input.\n" +

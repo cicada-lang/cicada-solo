@@ -20,20 +20,20 @@
           },
           "body": {},
           "span": {
-            "lo": 2,
-            "hi": 3
+            "lo": 1,
+            "hi": 2
           }
         }
       },
       "span": {
-        "lo": 1,
-        "hi": 4
+        "lo": 0,
+        "hi": 3
       }
     }
   },
   "span": {
-    "lo": 1,
-    "hi": 4
+    "lo": 0,
+    "hi": 3
   }
 }
 {
@@ -58,8 +58,8 @@
           },
           "body": {},
           "span": {
-            "lo": 2,
-            "hi": 3
+            "lo": 1,
+            "hi": 2
           }
         },
         "tail": {
@@ -77,25 +77,189 @@
               },
               "body": {},
               "span": {
-                "lo": 5,
-                "hi": 6
+                "lo": 4,
+                "hi": 5
               }
             }
           },
           "span": {
-            "lo": 4,
-            "hi": 7
+            "lo": 3,
+            "hi": 6
           }
         }
       },
       "span": {
-        "lo": 1,
+        "lo": 0,
+        "hi": 6
+      }
+    }
+  },
+  "span": {
+    "lo": 0,
+    "hi": 6
+  }
+}
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "S",
+    "kind": "S"
+  },
+  "body": {
+    "start": {
+      "kind": "Tree.node",
+      "head": {
+        "name": "one_or_more",
+        "kind": "more"
+      },
+      "body": {
+        "head": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "E",
+            "kind": "F"
+          },
+          "body": {},
+          "span": {
+            "lo": 1,
+            "hi": 2
+          }
+        },
+        "tail": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "one_or_more",
+            "kind": "more"
+          },
+          "body": {
+            "head": {
+              "kind": "Tree.node",
+              "head": {
+                "name": "E",
+                "kind": "F"
+              },
+              "body": {},
+              "span": {
+                "lo": 4,
+                "hi": 5
+              }
+            },
+            "tail": {
+              "kind": "Tree.node",
+              "head": {
+                "name": "one_or_more",
+                "kind": "one"
+              },
+              "body": {
+                "value": {
+                  "kind": "Tree.node",
+                  "head": {
+                    "name": "E",
+                    "kind": "F"
+                  },
+                  "body": {},
+                  "span": {
+                    "lo": 7,
+                    "hi": 8
+                  }
+                }
+              },
+              "span": {
+                "lo": 6,
+                "hi": 9
+              }
+            }
+          },
+          "span": {
+            "lo": 3,
+            "hi": 9
+          }
+        }
+      },
+      "span": {
+        "lo": 0,
+        "hi": 9
+      }
+    }
+  },
+  "span": {
+    "lo": 0,
+    "hi": 9
+  }
+}
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "S",
+    "kind": "S"
+  },
+  "body": {
+    "start": {
+      "kind": "Tree.node",
+      "head": {
+        "name": "one_or_more",
+        "kind": "one"
+      },
+      "body": {
+        "value": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "E",
+            "kind": "EQF"
+          },
+          "body": {},
+          "span": {
+            "lo": 1,
+            "hi": 4
+          }
+        }
+      },
+      "span": {
+        "lo": 0,
+        "hi": 5
+      }
+    }
+  },
+  "span": {
+    "lo": 0,
+    "hi": 5
+  }
+}
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "S",
+    "kind": "S"
+  },
+  "body": {
+    "start": {
+      "kind": "Tree.node",
+      "head": {
+        "name": "one_or_more",
+        "kind": "one"
+      },
+      "body": {
+        "value": {
+          "kind": "Tree.node",
+          "head": {
+            "name": "E",
+            "kind": "EQF"
+          },
+          "body": {},
+          "span": {
+            "lo": 1,
+            "hi": 6
+          }
+        }
+      },
+      "span": {
+        "lo": 0,
         "hi": 7
       }
     }
   },
   "span": {
-    "lo": 1,
+    "lo": 0,
     "hi": 7
   }
 }
@@ -121,8 +285,8 @@
           },
           "body": {},
           "span": {
-            "lo": 2,
-            "hi": 3
+            "lo": 1,
+            "hi": 2
           }
         },
         "tail": {
@@ -140,172 +304,8 @@
               },
               "body": {},
               "span": {
-                "lo": 5,
-                "hi": 6
-              }
-            },
-            "tail": {
-              "kind": "Tree.node",
-              "head": {
-                "name": "one_or_more",
-                "kind": "one"
-              },
-              "body": {
-                "value": {
-                  "kind": "Tree.node",
-                  "head": {
-                    "name": "E",
-                    "kind": "F"
-                  },
-                  "body": {},
-                  "span": {
-                    "lo": 8,
-                    "hi": 9
-                  }
-                }
-              },
-              "span": {
-                "lo": 7,
-                "hi": 10
-              }
-            }
-          },
-          "span": {
-            "lo": 4,
-            "hi": 10
-          }
-        }
-      },
-      "span": {
-        "lo": 1,
-        "hi": 10
-      }
-    }
-  },
-  "span": {
-    "lo": 1,
-    "hi": 10
-  }
-}
-{
-  "kind": "Tree.node",
-  "head": {
-    "name": "S",
-    "kind": "S"
-  },
-  "body": {
-    "start": {
-      "kind": "Tree.node",
-      "head": {
-        "name": "one_or_more",
-        "kind": "one"
-      },
-      "body": {
-        "value": {
-          "kind": "Tree.node",
-          "head": {
-            "name": "E",
-            "kind": "EQF"
-          },
-          "body": {},
-          "span": {
-            "lo": 2,
-            "hi": 5
-          }
-        }
-      },
-      "span": {
-        "lo": 1,
-        "hi": 6
-      }
-    }
-  },
-  "span": {
-    "lo": 1,
-    "hi": 6
-  }
-}
-{
-  "kind": "Tree.node",
-  "head": {
-    "name": "S",
-    "kind": "S"
-  },
-  "body": {
-    "start": {
-      "kind": "Tree.node",
-      "head": {
-        "name": "one_or_more",
-        "kind": "one"
-      },
-      "body": {
-        "value": {
-          "kind": "Tree.node",
-          "head": {
-            "name": "E",
-            "kind": "EQF"
-          },
-          "body": {},
-          "span": {
-            "lo": 2,
-            "hi": 7
-          }
-        }
-      },
-      "span": {
-        "lo": 1,
-        "hi": 8
-      }
-    }
-  },
-  "span": {
-    "lo": 1,
-    "hi": 8
-  }
-}
-{
-  "kind": "Tree.node",
-  "head": {
-    "name": "S",
-    "kind": "S"
-  },
-  "body": {
-    "start": {
-      "kind": "Tree.node",
-      "head": {
-        "name": "one_or_more",
-        "kind": "more"
-      },
-      "body": {
-        "head": {
-          "kind": "Tree.node",
-          "head": {
-            "name": "E",
-            "kind": "F"
-          },
-          "body": {},
-          "span": {
-            "lo": 2,
-            "hi": 3
-          }
-        },
-        "tail": {
-          "kind": "Tree.node",
-          "head": {
-            "name": "one_or_more",
-            "kind": "more"
-          },
-          "body": {
-            "head": {
-              "kind": "Tree.node",
-              "head": {
-                "name": "E",
-                "kind": "F"
-              },
-              "body": {},
-              "span": {
-                "lo": 5,
-                "hi": 6
+                "lo": 4,
+                "hi": 5
               }
             },
             "tail": {
@@ -323,8 +323,8 @@
                   },
                   "body": {},
                   "span": {
-                    "lo": 8,
-                    "hi": 9
+                    "lo": 7,
+                    "hi": 8
                   }
                 },
                 "tail": {
@@ -342,8 +342,8 @@
                       },
                       "body": {},
                       "span": {
-                        "lo": 11,
-                        "hi": 12
+                        "lo": 10,
+                        "hi": 11
                       }
                     },
                     "tail": {
@@ -361,8 +361,8 @@
                           },
                           "body": {},
                           "span": {
-                            "lo": 14,
-                            "hi": 15
+                            "lo": 13,
+                            "hi": 14
                           }
                         },
                         "tail": {
@@ -380,8 +380,8 @@
                               },
                               "body": {},
                               "span": {
-                                "lo": 17,
-                                "hi": 18
+                                "lo": 16,
+                                "hi": 17
                               }
                             },
                             "tail": {
@@ -399,8 +399,8 @@
                                   },
                                   "body": {},
                                   "span": {
-                                    "lo": 20,
-                                    "hi": 21
+                                    "lo": 19,
+                                    "hi": 20
                                   }
                                 },
                                 "tail": {
@@ -418,62 +418,62 @@
                                       },
                                       "body": {},
                                       "span": {
-                                        "lo": 23,
-                                        "hi": 24
+                                        "lo": 22,
+                                        "hi": 23
                                       }
                                     }
                                   },
                                   "span": {
-                                    "lo": 22,
-                                    "hi": 25
+                                    "lo": 21,
+                                    "hi": 24
                                   }
                                 }
                               },
                               "span": {
-                                "lo": 19,
-                                "hi": 25
+                                "lo": 18,
+                                "hi": 24
                               }
                             }
                           },
                           "span": {
-                            "lo": 16,
-                            "hi": 25
+                            "lo": 15,
+                            "hi": 24
                           }
                         }
                       },
                       "span": {
-                        "lo": 13,
-                        "hi": 25
+                        "lo": 12,
+                        "hi": 24
                       }
                     }
                   },
                   "span": {
-                    "lo": 10,
-                    "hi": 25
+                    "lo": 9,
+                    "hi": 24
                   }
                 }
               },
               "span": {
-                "lo": 7,
-                "hi": 25
+                "lo": 6,
+                "hi": 24
               }
             }
           },
           "span": {
-            "lo": 4,
-            "hi": 25
+            "lo": 3,
+            "hi": 24
           }
         }
       },
       "span": {
-        "lo": 1,
-        "hi": 25
+        "lo": 0,
+        "hi": 24
       }
     }
   },
   "span": {
-    "lo": 1,
-    "hi": 25
+    "lo": 0,
+    "hi": 24
   }
 }
 {
@@ -498,8 +498,8 @@
           },
           "body": {},
           "span": {
-            "lo": 2,
-            "hi": 5
+            "lo": 1,
+            "hi": 4
           }
         },
         "tail": {
@@ -517,8 +517,8 @@
               },
               "body": {},
               "span": {
-                "lo": 7,
-                "hi": 10
+                "lo": 6,
+                "hi": 9
               }
             },
             "tail": {
@@ -536,32 +536,32 @@
                   },
                   "body": {},
                   "span": {
-                    "lo": 12,
-                    "hi": 15
+                    "lo": 11,
+                    "hi": 14
                   }
                 }
               },
               "span": {
-                "lo": 11,
-                "hi": 16
+                "lo": 10,
+                "hi": 15
               }
             }
           },
           "span": {
-            "lo": 6,
-            "hi": 16
+            "lo": 5,
+            "hi": 15
           }
         }
       },
       "span": {
-        "lo": 1,
-        "hi": 16
+        "lo": 0,
+        "hi": 15
       }
     }
   },
   "span": {
-    "lo": 1,
-    "hi": 16
+    "lo": 0,
+    "hi": 15
   }
 }
 {
@@ -586,8 +586,8 @@
           },
           "body": {},
           "span": {
-            "lo": 2,
-            "hi": 7
+            "lo": 1,
+            "hi": 6
           }
         },
         "tail": {
@@ -605,8 +605,8 @@
               },
               "body": {},
               "span": {
-                "lo": 9,
-                "hi": 14
+                "lo": 8,
+                "hi": 13
               }
             },
             "tail": {
@@ -624,32 +624,32 @@
                   },
                   "body": {},
                   "span": {
-                    "lo": 16,
-                    "hi": 21
+                    "lo": 15,
+                    "hi": 20
                   }
                 }
               },
               "span": {
-                "lo": 15,
-                "hi": 22
+                "lo": 14,
+                "hi": 21
               }
             }
           },
           "span": {
-            "lo": 8,
-            "hi": 22
+            "lo": 7,
+            "hi": 21
           }
         }
       },
       "span": {
-        "lo": 1,
-        "hi": 22
+        "lo": 0,
+        "hi": 21
       }
     }
   },
   "span": {
-    "lo": 1,
-    "hi": 22
+    "lo": 0,
+    "hi": 21
   }
 }
 {
@@ -674,8 +674,8 @@
           },
           "body": {},
           "span": {
-            "lo": 2,
-            "hi": 3
+            "lo": 1,
+            "hi": 2
           }
         },
         "tail": {
@@ -693,8 +693,8 @@
               },
               "body": {},
               "span": {
-                "lo": 5,
-                "hi": 8
+                "lo": 4,
+                "hi": 7
               }
             },
             "tail": {
@@ -712,31 +712,31 @@
                   },
                   "body": {},
                   "span": {
-                    "lo": 10,
-                    "hi": 15
+                    "lo": 9,
+                    "hi": 14
                   }
                 }
               },
               "span": {
-                "lo": 9,
-                "hi": 16
+                "lo": 8,
+                "hi": 15
               }
             }
           },
           "span": {
-            "lo": 4,
-            "hi": 16
+            "lo": 3,
+            "hi": 15
           }
         }
       },
       "span": {
-        "lo": 1,
-        "hi": 16
+        "lo": 0,
+        "hi": 15
       }
     }
   },
   "span": {
-    "lo": 1,
-    "hi": 16
+    "lo": 0,
+    "hi": 15
   }
 }
