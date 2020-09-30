@@ -35,6 +35,12 @@
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
 - `Span` report in context
+- examples for list-of-a
+- examples for tdh
+- examples for tdh-left
+- examples for tom-dick-and-harry
+- examples for xs
+- examples for json
 - sexp-by-one-or-more.grammar.yaml
 - sexp-by-zero-or-more.grammar.yaml
 - exp-with-dot-and-case.grammar.yaml
