@@ -1,8 +1,8 @@
 found END_OF_TOKENS, while expecting:
- [32m'"b"'[39m according to:
+ '"b"' according to:
      b:one_b@2 -> » "b" 
- [32m'"b"'[39m according to:
+ '"b"' according to:
      b:more_b@2 -> » "b" ab 
- [32m'"a"'[39m according to:
+ '"a"' according to:
      b:after_a@2 -> » "a" b b 
 

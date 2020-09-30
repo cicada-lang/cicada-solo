@@ -6,6 +6,7 @@ import * as lexers from "../../lexers"
 import * as ut from "../../../ut"
 import path from "path"
 import fs from "fs"
+import strip_ansi from "strip-ansi"
 
 export const command = "parse <input>"
 
@@ -15,6 +16,7 @@ export const builder = {
   output: { type: "string", alias: "o" },
   grammar: { type: "string", demandOption: true },
   table: { type: "string" },
+  nocolor: { type: "boolean", default: false },
 }
 
 interface Argv {
@@ -22,6 +24,7 @@ interface Argv {
   output: string | undefined
   grammar: string
   table: string | undefined
+  nocolor: boolean
 }
 
 export const handler = async (argv: Argv) => {
@@ -39,7 +42,8 @@ export const handler = async (argv: Argv) => {
       ut.write_object(tree, argv.output)
     } catch (error) {
       if (error instanceof ParsingError) {
-        console.error(error.message)
+        const message = argv.nocolor ? strip_ansi(error.message) : error.message
+        console.error(message)
         process.exit(1)
       }
     }

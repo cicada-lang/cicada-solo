@@ -39,6 +39,7 @@
     "plaintext": "^0.2.5",
     "portfinder": "^1.0.28",
     "regexp-match-indices": "^1.0.2",
+    "strip-ansi": "^6.0.0",
     "yargs": "^16.0.3"
   },
   "license": "GPL-3.0-or-later"
