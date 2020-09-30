@@ -45,7 +45,6 @@
 - `Mod` as interface
 - `Mod.metadata` -- collect `$` metadata in `Mod.build`
 - `Mod.start`
-- `partech lex` default to common lexer
 - `partech parse-tokens`
 - `partech parse`
 - module system

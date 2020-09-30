@@ -75,10 +75,9 @@ commands.test_partech_lex = () => {
   )
 
   test(
-    "./bin/partech.js lex $file --table $file --output $output",
-    { file: "tests/tables/example.table.yaml",
-      output: "tests/tables/example.tokens.yaml" },
-    expect.ok
+    "./bin/partech.js lex $file",
+    { file: "tests/tables/example.table.yaml" },
+    snapshot.out((_) => "tests/tables/default.tokens.json")
   )
 }
 
