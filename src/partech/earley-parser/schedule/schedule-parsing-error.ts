@@ -38,14 +38,14 @@ export function parsing_error(
       return new ParsingError(s, { span: { lo: span.hi, hi: span.hi } })
     } else {
       let s = ""
-      s += `found token: "${JSON.stringify(schedule.tokens[i])}", `
+      s += `found token: ${Token.repr(schedule.tokens[i])}, `
       s += "while expecting END_OF_TOKENS.\n"
       const span = schedule.tokens[i].span
       return new ParsingError(s, { span })
     }
   } else {
     let s = ""
-    s += `found token: "${JSON.stringify(schedule.tokens[i])}", `
+    s += `found token: ${Token.repr(schedule.tokens[i])}, `
     s += "while expecting:\n"
     for (const task of schedule.chart[i].values()) {
       if (task_terminal_p(task)) {

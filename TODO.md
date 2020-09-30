@@ -34,7 +34,6 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- `Token.repr`
 - examples for tdh
 - examples for tdh-left
 - examples for tom-dick-and-harry
