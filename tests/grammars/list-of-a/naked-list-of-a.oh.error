@@ -1,4 +1,4 @@
-Found the identifier "a" at (0, 1), while expecting:
+Found the identifier "a" in [0, 1], while expecting:
  "[" according to:
      list_of_a:list@0 -> » "[" aaa "]" 
 
