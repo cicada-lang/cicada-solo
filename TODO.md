@@ -36,12 +36,15 @@
 
 - [lang0] exp-from-tree
 - [lang0] exp-parse
+
 - [lang1] exp-grammars
 - [lang1] exp-from-tree
 - [lang1] exp-parse
+
 - [lang2] exp-grammars
 - [lang2] exp-from-tree
 - [lang2] exp-parse
+
 - remove old partech dependance
 - handle `$import` in `Mod.build` -- always use qualified name
 - [earley] support intersection -- for negation
