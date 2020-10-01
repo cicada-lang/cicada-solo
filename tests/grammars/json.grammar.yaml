@@ -35,10 +35,10 @@ null:
   null:null: ['"null"']
 
 string:
-  string:string: [{ $pattern: [string, ".*"]}]
+  string:string: [{ $pattern: [string]}]
 
 number:
-  number:number: [{ $pattern: [number, ".*"]}]
+  number:number: [{ $pattern: [number]}]
 
 one_or_more:
   $fn:

@@ -3,7 +3,7 @@ $description: Symbol expression (a.k.a. sexp) -- implemented by zero_or_more
 $start: sexp
 
 sexp:
-  sexp:symbol: [{ $pattern: [identifier, ".*"] }]
+  sexp:symbol: [{ $pattern: [identifier] }]
   sexp:list: ['"("', { $ap: [zero_or_more, sexp] }, '")"']
 
 zero_or_more:
