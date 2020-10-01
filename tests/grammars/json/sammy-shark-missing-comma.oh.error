@@ -1,0 +1,12 @@
+Found the string "\"location\"" in [54, 64], while expecting:
+ "}" according to:
+     object:more@0 -> "{"@1 one_or_more:one@5 string:string@6 ":"@7 value:string@8 » "}" 
+ "," according to:
+     object_entry:key_value_comma@5 -> string:string@6 ":"@7 value:string@8 » "," 
+
+ 0 |{
+ 1 |  "first_name" : "Sammy",
+ 2 |  "last_name" : "Shark"
+ 3 |  "location" : "Ocean",
+ 4 |  "online" : true,
+ 5 |  "followers" : 987

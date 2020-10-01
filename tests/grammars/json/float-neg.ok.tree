@@ -1,0 +1,12 @@
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "value",
+    "kind": "number"
+  },
+  "body": {},
+  "span": {
+    "lo": 0,
+    "hi": 10
+  }
+}

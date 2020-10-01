@@ -1,0 +1,10 @@
+Found the symbol "}" in [255, 256], while expecting:
+ ["string",".*",""] according to:
+     string:string@41 -> » {"$pattern":["string",".*"]} 
+
+ 10 |    "212 555-1234",
+ 11 |    "646 555-4567"
+ 12 |  ],
+ 13 |  "wage": 1000.5,
+ 14 |}
+
