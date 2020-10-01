@@ -9,7 +9,7 @@ The named parts will be pick up into the resulting object.
 ```
 exp = {
   exp:var -> (name: identifier)
-  exp:fn -> "(" (name: identifier) ")" "=>" (body: exp)
+  exp:fn -> "(" (name: identifier) ")" "=" ">" (body: exp)
   exp:ap -> (head: identifier) (tail: one_or_more("(" exp ")"))
 }
 ```

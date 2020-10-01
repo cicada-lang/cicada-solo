@@ -34,14 +34,12 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- exp-with-dot-and-case.grammar.yaml
-- args.grammar.yaml
-- lang2.grammar.yaml
+- replace old partech in lang0
+- replace old partech in lang1
+- replace old partech in lang2
+- remove old partech dependance
 - handle `$import` in `Mod.build` -- always use qualified name
-- [test] try examples in peg paper in parser generator
-- `partech/exp/exp-parse`
-- [earley] change earley to use ordered choice
-- [earley] change earley to use intersection
+- [earley] support intersection -- for negation
 
 # parc
 
