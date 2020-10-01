@@ -1,4 +1,4 @@
-export const identifier = { $pattern: ["identifier", ".*"] }
+export const identifier = { $pattern: ["identifier", "\S*"] }
 
 export const exp = {
   "exp:var": [{ name: "identifier" }],

@@ -27,7 +27,6 @@ function from_object(obj: Obj<any>): Exp.Exp {
     return Exp.pattern(label, new RegExp(pattern, flags))
   } else {
     return build_grammar(obj)
-    throw new Error()
   }
 }
 
