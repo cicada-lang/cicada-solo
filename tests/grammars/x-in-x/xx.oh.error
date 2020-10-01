@@ -1,4 +1,4 @@
-found END_OF_TOKENS, while expecting:
+Found END_OF_TOKENS, while expecting:
  "x" according to:
      s:x@0 -> » "x" 
  "x" according to:

@@ -1,4 +1,4 @@
-found token ["identifier","y",[0,1]], while expecting:
+Found the identifier "y" at (0, 1), while expecting:
  "x" according to:
      xs:more@0 -> » "x" xs 
 

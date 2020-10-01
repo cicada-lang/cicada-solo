@@ -8,9 +8,9 @@ import { ParsingError } from "../../errors"
 import * as ut from "../../../ut"
 
 // NOTE three kinds of errors in the following function:
-//   "(a b c"    --  "found END_OF_TOKENS, while expecting: ..."
-//   "(a b c))"  --  "found token ..., while expecting END_OF_TOKENS."
-//   "(a ? c)"   --  "found token ..., while expecting: ..."
+//   "(a b c"    --  "Found END_OF_TOKENS, while expecting: ..."
+//   "(a b c))"  --  "Found ..., while expecting END_OF_TOKENS."
+//   "(a ? c)"   --  "Found ..., while expecting: ..."
 export function parsing_error(
   schedule: Schedule.Schedule,
   grammar: Value.grammar,
@@ -21,7 +21,7 @@ export function parsing_error(
   if (index_still_can_scan(schedule, i)) {
     if (i === schedule.tokens.length - 1) {
       let s = ""
-      s += "found END_OF_TOKENS, "
+      s += "Found END_OF_TOKENS, "
       s += "while expecting:\n"
       for (const task of TaskChart.tasks_at(schedule.chart, i - 1)) {
         if (task_terminal_p(task)) {
@@ -38,14 +38,14 @@ export function parsing_error(
       return new ParsingError(s, { span: { lo: span.hi, hi: span.hi } })
     } else {
       let s = ""
-      s += `found token ${Token.repr(schedule.tokens[i])}, `
+      s += `Found ${Token.report(schedule.tokens[i])}, `
       s += "while expecting END_OF_TOKENS.\n"
       const span = schedule.tokens[i].span
       return new ParsingError(s, { span })
     }
   } else {
     let s = ""
-    s += `found token ${Token.repr(schedule.tokens[i])}, `
+    s += `Found ${Token.report(schedule.tokens[i])}, `
     s += "while expecting:\n"
     for (const task of TaskChart.tasks_at(schedule.chart, i)) {
       if (task_terminal_p(task)) {

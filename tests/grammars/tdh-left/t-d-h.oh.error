@@ -1,4 +1,4 @@
-found END_OF_TOKENS, while expecting:
+Found END_OF_TOKENS, while expecting:
  "&" according to:
      tdh_list:t@0 -> tdh_list_head:before_d@3 » "&" "t" 
  "&" according to:

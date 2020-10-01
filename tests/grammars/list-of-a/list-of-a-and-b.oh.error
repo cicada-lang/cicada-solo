@@ -1,4 +1,4 @@
-found token ["identifier","b",[3,4]], while expecting:
+Found the identifier "b" at (3, 4), while expecting:
  "a" according to:
      aaa:more@2 -> » "a" aaa 
  "]" according to:
