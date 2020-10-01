@@ -94,7 +94,7 @@ commands.test_partech_parse = async () => {
   for (const dirent of dirents) {
     if (dirent.isDirectory()) {
       const name = dirent.name
-      const grammar = path.resolve(base, name, name + ".grammar.yaml")
+      const grammar = path.resolve(base, name + ".grammar.yaml")
       test(
         `./bin/partech.js parse $file --grammar ${grammar}`,
         { file: `${base}/${name}/**.ok` },

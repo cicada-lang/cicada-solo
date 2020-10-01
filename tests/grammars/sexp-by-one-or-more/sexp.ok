@@ -1,0 +1,15 @@
+(
+  ()
+  ( )
+  (a)
+  (a b c)
+  n
+  (a b (c))
+  (((a)) b (c))
+  (true false)
+  (true false true)
+  (true ((((false)))))
+  ( true false)
+  (true false true )
+  (true ((( (false)))))
+)

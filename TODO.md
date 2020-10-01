@@ -34,8 +34,6 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- sexp-by-one-or-more.grammar.yaml
-- sexp-by-zero-or-more.grammar.yaml
 - exp-with-dot-and-case.grammar.yaml
 - args.grammar.yaml
 - lang2.grammar.yaml

@@ -1,0 +1,14 @@
+$description: Symbol expression (a.k.a. sexp) -- implemented by one_or_more
+
+$start: sexp
+
+sexp:
+  sexp:symbol: [{ $pattern: [identifier, ".*"] }]
+  sexp:null: ['"("', '")"']
+  sexp:list: ['"("', { $ap: [one_or_more, sexp] }, '")"']
+
+one_or_more:
+  $fn:
+    - x
+    - one_or_more:one: [{ value: x }]
+      one_or_more:more: [{ head: x }, { tail: { $ap: [one_or_more, x] } }]

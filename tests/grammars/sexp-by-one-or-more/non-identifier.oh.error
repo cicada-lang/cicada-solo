@@ -1,0 +1,12 @@
+Found the symbol "?" in [3, 4], while expecting:
+ ")" according to:
+     sexp:list@0 -> "("@1 one_or_more:one@2 » ")" 
+ ["identifier",".*",""] according to:
+     sexp:symbol@2 -> » {"$pattern":["identifier",".*"]} 
+ "(" according to:
+     sexp:null@2 -> » "(" ")" 
+ "(" according to:
+     sexp:list@2 -> » "(" one_or_more ")" 
+
+ 0 |(a ? c)
+
