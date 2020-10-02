@@ -1,7 +1,7 @@
 export * from "./exp"
 export * from "./exp-repr"
 export * from "./exp-grammars"
-export * from "./exp-from-tree"
+export * as matchers from "./exp-matchers"
 export * from "./exp-parse"
 export * from "./exp-evaluate"
 export * from "./exp-do-ap"

@@ -1,4 +1,9 @@
+import * as pt from "../../partech"
+
 export const grammars = {
+  zero_or_more: pt.grammars.zero_or_more,
+  one_or_more: pt.grammars.one_or_more,
+
   $start: "exp",
 
   identifier: { $pattern: ["identifier"] },
@@ -26,32 +31,6 @@ export const grammars = {
   },
 
   def: {
-    "def:def": ["identifier", '"="', "exp"],
-  },
-
-  zero_or_more: {
-    $fn: [
-      "x",
-      {
-        "zero_or_more:null": [],
-        "zero_or_more:more": [
-          { head: "x" },
-          { tail: { $ap: ["zero_or_more", "x"] } },
-        ],
-      },
-    ],
-  },
-
-  one_or_more: {
-    $fn: [
-      "x",
-      {
-        "one_or_more:one": [{ value: "x" }],
-        "one_or_more:more": [
-          { head: "x" },
-          { tail: { $ap: ["one_or_more", "x"] } },
-        ],
-      },
-    ],
+    "def:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
   },
 }

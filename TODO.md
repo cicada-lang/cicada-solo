@@ -34,15 +34,12 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- [lang0] exp-from-tree
-- [lang0] exp-parse
-
 - [lang1] exp-grammars
-- [lang1] exp-from-tree
+- [lang1] exp-matchers
 - [lang1] exp-parse
 
 - [lang2] exp-grammars
-- [lang2] exp-from-tree
+- [lang2] exp-matchers
 - [lang2] exp-parse
 
 - remove old partech dependance

@@ -15,4 +15,7 @@ export * as lexers from "./lexers"
 export * as Parser from "./parser"
 export * as EarleyParser from "./earley-parser"
 
+export * as grammars from "./grammars"
+export * as matchers from "./matchers"
+
 export * from "./errors"

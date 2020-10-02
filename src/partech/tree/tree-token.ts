@@ -9,8 +9,8 @@ export function token(tree: Tree.Tree): Token.Token {
     return token
   } else {
     throw new Error(
-      "Expecting Tree.leaf\n" +
-        `but found node: ${ut.inspect(tree)}\n`
+      "Expecting Tree.leaf.\n" +
+        `- tree: ${ut.inspect(tree)}\n`
     )
   }
 }

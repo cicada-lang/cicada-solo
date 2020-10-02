@@ -17,13 +17,16 @@ export function matcher<A>(choices: {
       if (f) {
         return f(body, { head, span })
       } else {
-        throw new Error("Tree.matcher fail\n" + `key mismatch: ${key}\n`)
+        throw new Error(
+          "Key mismatch.\n" +
+            `- key: ${key}\n` +
+            `- keys of choices: ${Object.keys(choices).join(", ")}\n`)
       }
     } else {
       throw new Error(
-        "Expecting Tree.node\n" +
-          `Tree.matcher can only match on node\n` +
-          `but found leaf: ${ut.inspect(tree)}\n`
+        "Expecting Tree.node.\n" +
+          `Tree.matcher can only match on node.\n` +
+          `- tree: ${ut.inspect(tree)}\n`
       )
     }
   }
