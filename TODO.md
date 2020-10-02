@@ -34,6 +34,11 @@
 
 > Be the most easy to use parsing tool for programming language prototyping.
 
+- `TaskChart.length`
+- optimize `TaskChart` searching by `rule_name_index`
+
+- optimize `TaskQueue`
+
 - handle `$import` in `Mod.build`
   - built-in `zero_or_more` and `one_or_more` and `optional`
   - always import name for simplicity
