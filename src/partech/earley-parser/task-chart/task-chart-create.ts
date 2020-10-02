@@ -1,12 +1,26 @@
 import * as TaskChart from "../task-chart"
 import * as Token from "../../token"
 
-// NOTE The length of chart is one greater then the length of tokens.
-
 export function create(tokens: Array<Token.Token>): TaskChart.TaskChart {
-  const tasksets = new Array()
-  for (let i = 0; i < tokens.length + 1; i++) {
-    tasksets.push(new Map())
+  const length = chart_length_from_tokens_length(tokens.length)
+
+  const task_sets = new Array()
+  for (let i = 0; i < length; i++) {
+    task_sets.push(new Map())
   }
-  return { tasksets }
+
+  const resumable_task_indexing_sets = new Array()
+  for (let i = 0; i < length; i++) {
+    resumable_task_indexing_sets.push(new Map())
+  }
+
+  return {
+    task_sets,
+    resumable_task_indexing_sets,
+  }
+}
+
+function chart_length_from_tokens_length(tokens_length: number): number {
+  // NOTE The length of chart is one greater then the length of tokens.
+  return tokens_length + 1
 }

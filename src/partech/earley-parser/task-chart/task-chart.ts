@@ -1,9 +1,9 @@
 import * as Task from "../task"
 
-// export type TaskChart = Array<Map<string, Task.Task>>
+export type TaskId = string
+export type GrammarName = string
 
 export interface TaskChart {
-  tasksets: Array<Map<string, Task.Task>>
+  task_sets: Array<Map<TaskId, Task.Task>>
+  resumable_task_indexing_sets: Array<Map<GrammarName, Map<TaskId, Task.Task>>>
 }
-
-// resumable_task_table

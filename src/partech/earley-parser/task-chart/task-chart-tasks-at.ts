@@ -5,6 +5,6 @@ export function tasks_at(
   chart: TaskChart.TaskChart,
   index: number
 ): IterableIterator<Task.Task> {
-  const taskset = chart.tasksets[index]
-  return taskset.values()
+  const task_set = chart.task_sets[index]
+  return task_set.values()
 }
