@@ -8,9 +8,6 @@ export function token(tree: Tree.Tree): Token.Token {
     const { token } = tree
     return token
   } else {
-    throw new Error(
-      "Expecting Tree.leaf.\n" +
-        `- tree: ${ut.inspect(tree)}\n`
-    )
+    throw new Error("Expecting Tree.leaf.\n" + `- tree: ${ut.inspect(tree)}\n`)
   }
 }

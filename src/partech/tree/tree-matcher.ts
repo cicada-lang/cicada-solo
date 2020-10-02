@@ -20,7 +20,8 @@ export function matcher<A>(choices: {
         throw new Error(
           "Key mismatch.\n" +
             `- key: ${key}\n` +
-            `- keys of choices: ${Object.keys(choices).join(", ")}\n`)
+            `- keys of choices: ${Object.keys(choices).join(", ")}\n`
+        )
       }
     } else {
       throw new Error(
