@@ -34,9 +34,11 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- [lang2] exp-parse
-
 - remove old partech dependance
+
+- support `//` line comment in common lexer
+  // 2. Doin' What Comes Naturally
+  // 1. The More Things Change, the More They Stay the Same
 
 - handle `$import` in `Mod.build`
   - built-in `zero_or_more` and `one_or_more` and `optional`

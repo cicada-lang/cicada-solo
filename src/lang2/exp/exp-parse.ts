@@ -1,12 +1,14 @@
 import * as Exp from "../exp"
-import * as grammars from "../grammars"
-import pt from "@forchange/partech"
-
-const lexer = pt.lexers.common.lexer
-const parser = pt.parsers.earley.parser
+import * as pt from "../../partech"
+import * as ut from "../../ut"
 
 export function parse(text: string): Exp.Exp {
+  const mod = pt.Mod.build(Exp.grammars)
+  const grammar = pt.Mod.dot(mod, "exp")
+  const parser = pt.EarleyParser.create(grammar)
+  const lexer = pt.lexers.common
   const tokens = lexer.lex(text)
-  const tree = parser.parse(tokens, grammars.exp(), {})
-  return grammars.exp_matcher(tree)
+  const tree = parser.parse(tokens)
+  const exp = Exp.matchers.exp_matcher(tree)
+  return exp
 }

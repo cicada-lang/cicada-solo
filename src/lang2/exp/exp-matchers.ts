@@ -58,7 +58,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     "exp:str": () => Exp.str,
     "exp:quote": ({ value }) => {
       const str = pt.Tree.str(value)
-      return Exp.quote(str.slice(1, str.length))
+      return Exp.quote(str.slice(1, str.length - 1))
     },
     "exp:type": () => Exp.type,
     "exp:suite": ({ defs, ret }) =>
