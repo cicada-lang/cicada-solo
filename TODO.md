@@ -8,10 +8,10 @@
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
-- [TLT] 2. Doin' What Comes Naturally
 - [lang2] implement `Pair` and `Arrow` directly
 - [lang2] draft check car and cdr
 - [lang3] draft check and infer
+- [TLT] 2. Doin' What Comes Naturally
 - [TLT] 3. Eliminate All Natural Numbers!
 - [TLT] 4. Easy as Pie
 - [TLT] 5. Lists, Lists, and More Lists
@@ -34,7 +34,6 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- [lang2] exp-grammars
 - [lang2] exp-matchers
 - [lang2] exp-parse
 

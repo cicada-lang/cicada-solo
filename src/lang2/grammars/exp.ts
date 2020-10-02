@@ -43,41 +43,13 @@ function num_matcher(tree: pt.Tree.Tree): number {
   return Number.parseInt(s)
 }
 
-function type_assignment(): pt.Sym.Rule {
-  return pt.Sym.create_rule("type_assignment", {
-    named: [identifier, ":", exp],
-    unnamed: [exp],
-  })
-}
-
-function type_assignment_matcher(
-  tree: pt.Tree.Tree
-): { name: string; t: Exp.Exp } {
-  return pt.Tree.matcher("type_assignment", {
-    named: ([name, , t]) => {
-      return {
-        name: pt.Tree.token(name).value,
-        t: exp_matcher(t),
-      }
-    },
-    unnamed: ([t]) => {
-      return {
-        name: "_",
-        t: exp_matcher(t),
-      }
-    },
-  })(tree)
-}
-
 export function exp(): pt.Sym.Rule {
   return pt.Sym.create_rule("exp", {
     var: [identifier],
-    pi: ["(", type_assignment, ")", "-", ">", exp],
+    pi: ["(", identifier, ":", exp, ")", "-", ">", exp],
+    arrow: ["(", exp, ")", "-", ">", exp],
     fn: ["(", identifier, ")", "=", ">", exp],
-    ap: [
-      identifier,
-      pt.one_or_more(in_between("(", comma_separated(exp), ")")),
-    ],
+    ap: [identifier, pt.one_or_more(in_between("(", exp, ")"))],
     sigma: ["(", identifier, ":", exp, ")", "*", exp],
     pair: ["Pair", "(", exp, ",", exp, ")"],
     cons: ["cons", "(", exp, ",", exp, ")"],
@@ -108,25 +80,26 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     var: ([name]) => {
       return Exp.v(pt.Tree.token(name).value)
     },
-    pi: ([, type_assignment, , , , ret_t]) => {
-      const { name, t } = type_assignment_matcher(type_assignment)
-      return Exp.pi(name, t, exp_matcher(ret_t))
+    pi: ([, name, , arg_t, , , , ret_t]) => {
+      return Exp.pi(
+        pt.Tree.token(name).value,
+        exp_matcher(arg_t),
+        exp_matcher(ret_t)
+      )
+    },
+    arrow: ([, arg_t, , , , ret_t]) => {
+      return Exp.pi("_", exp_matcher(arg_t), exp_matcher(ret_t))
     },
     fn: ([, name, , , , ret]) => {
       return Exp.fn(pt.Tree.token(name).value, exp_matcher(ret))
     },
-    // ap: ([name, , exp]) => {
-    //   return Exp.ap(Exp.v(pt.Tree.token(name).value), exp_matcher(exp))
-    // },
     ap: ([name, exp_in_paren_list]) => {
       let exp: Exp.Exp = Exp.v(pt.Tree.token(name).value)
-      const args_list = pt.one_or_more_matcher(
-        in_between_matcher(comma_separated_matcher(exp_matcher))
-      )(exp_in_paren_list)
-      for (const args of args_list) {
-        for (const arg of args) {
-          exp = Exp.ap(exp, arg)
-        }
+      const args = pt.one_or_more_matcher(in_between_matcher(exp_matcher))(
+        exp_in_paren_list
+      )
+      for (const arg of args) {
+        exp = Exp.ap(exp, arg)
       }
       return exp
     },
@@ -214,41 +187,6 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       return Exp.the(exp_matcher(t), exp_matcher(exp))
     },
   })(tree)
-}
-
-function comma_after(x: pt.Sym.Exp): pt.Sym.Rule {
-  return pt.Sym.create_rule("comma_after", {
-    comma_after: [x, ","],
-  })
-}
-
-function comma_after_matcher<A>(
-  matcher: (tree: pt.Tree.Tree) => A
-): (tree: pt.Tree.Tree) => A {
-  return pt.Tree.matcher("comma_after", {
-    comma_after: ([x]) => matcher(x),
-  })
-}
-
-function comma_separated(x: pt.Sym.Exp): pt.Sym.Rule {
-  return pt.Sym.create_rule("comma_separated", {
-    comma_separated: [pt.zero_or_more(comma_after(x)), x],
-  })
-}
-
-function comma_separated_matcher<A>(
-  matcher: (tree: pt.Tree.Tree) => A
-): (tree: pt.Tree.Tree) => Array<A> {
-  return pt.Tree.matcher("comma_separated", {
-    comma_separated: ([comma_separated, x]) => {
-      return [
-        ...pt.zero_or_more_matcher(comma_after_matcher(matcher))(
-          comma_separated
-        ),
-        matcher(x),
-      ]
-    },
-  })
 }
 
 function in_between(before: string, x: pt.Sym.Exp, after: string): pt.Sym.Rule {

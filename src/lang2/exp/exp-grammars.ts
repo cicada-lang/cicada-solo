@@ -1,0 +1,110 @@
+import * as pt from "../../partech"
+
+const preserved = [
+  "Pair",
+  "cons",
+  "car",
+  "cdr",
+  "Nat",
+  "zero",
+  "add1",
+  "Equal",
+  "same",
+  "replace",
+  "Trivial",
+  "sole",
+  "Absurd",
+  "String",
+  "Type",
+]
+
+const identifier = { $pattern: ["identifier", `^(?!(${preserved.join("|")}))`] }
+
+const exp = {
+  "exp:var": [{ name: "identifier" }],
+  "exp:pi": [
+    '"("',
+    { name: "identifier" },
+    '":"',
+    { arg_t: "exp" },
+    '")"',
+    '"-"',
+    '">"',
+    "exp",
+  ],
+  "exp:arrow": ['"("', { arg_t: "exp" }, '")"', '"-"', '">"', "exp"],
+  "exp:fn": [
+    '"("',
+    { name: "identifier" },
+    '")"',
+    '"="',
+    '">"',
+    { body: "exp" },
+  ],
+  "exp:ap": [
+    { target: "identifier" },
+    { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
+  ],
+  "exp:sigma": ['"("', "identifier", '":"', "exp", '")"', '"*"', "exp"],
+  "exp:pair": ['"Pair"', '"("', "exp", '","', "exp", '")"'],
+  "exp:cons": ['"cons"', '"("', "exp", '","', "exp", '")"'],
+  "exp:car": ['"car"', '"("', "exp", '")"'],
+  "exp:cdr": ['"cdr"', '"("', "exp", '")"'],
+  "exp:nat": ['"Nat"'],
+  "exp:zero": ['"zero"'],
+  "exp:add1": ['"add1"', '"("', { prev: "exp" }, '")"'],
+  "exp:number": [{ value: { $pattern: ["number"] } }],
+  "exp:nat_ind": [
+    '"Nat"',
+    '"."',
+    '"ind"',
+    '"("',
+    "exp",
+    '","',
+    "exp",
+    '","',
+    "exp",
+    '","',
+    "exp",
+    '")"',
+  ],
+  "exp:equal": ['"Equal"', '"("', "exp", '","', "exp", '","', "exp", '")"'],
+  "exp:same": ['"same"'],
+  "exp:replace": ['"replace"', '"("', "exp", '","', "exp", '","', "exp", '")"'],
+  "exp:trivial": ['"Trivial"'],
+  "exp:sole": ['"sole"'],
+  "exp:absurd": ['"Absurd"'],
+  "exp:absurd_ind": [
+    '"Absurd"',
+    '"."',
+    '"ind"',
+    '"("',
+    "exp",
+    '","',
+    "exp",
+    '")"',
+  ],
+  "exp:str": ['"String"'],
+  "exp:quote": [{ value: { $pattern: ["string"] } }],
+  "exp:type": ['"Type"'],
+  "exp:suite": [
+    '"{"',
+    { defs: { $ap: ["zero_or_more", "def"] } },
+    { ret: "exp" },
+    '"}"',
+  ],
+  "exp:the": [{ exp: "exp" }, '":"', { t: "ty" }],
+}
+
+const def = {
+  "def:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
+}
+
+export const grammars = {
+  zero_or_more: pt.grammars.zero_or_more,
+  one_or_more: pt.grammars.one_or_more,
+  $start: "exp",
+  identifier,
+  exp,
+  def,
+}
