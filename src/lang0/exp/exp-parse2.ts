@@ -9,9 +9,6 @@ export function parse(text: string): Exp.Exp {
   const lexer = pt.lexers.common
   const tokens = lexer.lex(text)
   const tree = parser.parse(tokens)
-  console.log(ut.inspect(tree))
-  throw new Error("TODO")
-  // const tokens = lexer.lex(text)
-  // const tree = parser.parse(tokens, grammars.exp(), {})
-  // return grammars.exp_matcher(tree)
+  const exp = Exp.from_tree(tree)
+  return exp
 }

@@ -34,6 +34,7 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
+- `Tree.get_token`
 - [lang0] exp-from-tree
 - [lang0] exp-parse
 
