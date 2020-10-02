@@ -43,8 +43,10 @@
 - [lang2] exp-parse
 
 - remove old partech dependance
-- handle `$import` in `Mod.build` -- always use qualified name
-- [earley] support intersection -- for negation
+
+- handle `$import` in `Mod.build`
+  - built-in `zero_or_more` and `one_or_more` and `optional`
+  - always import name for simplicity
 
 # parc
 
@@ -53,6 +55,8 @@
 - [test] try examples in peg paper in parser generator
 - [test] x in x test
   - S <- "x" S "x" | "x"
+
+# partech -- intersection grammar
 
 # re-design the syntax
 
