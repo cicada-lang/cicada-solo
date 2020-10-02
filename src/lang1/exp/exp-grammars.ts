@@ -26,9 +26,8 @@ const exp = {
   ],
   "exp:zero": ['"zero"'],
   "exp:add1": ['"add1"', '"("', { prev: "exp" }, '")"'],
-  // TODO
-  // number: [num],
-  rec: [
+  "exp:number": [{ value: { $pattern: ["number"] } }],
+  "exp:rec": [
     '"rec"',
     '"["',
     { t: "ty" },
@@ -41,7 +40,7 @@ const exp = {
     { step: "exp" },
     '")"',
   ],
-  the: [{ exp: "exp" }, '":"', { t: "ty" }],
+  "exp:the": [{ exp: "exp" }, '":"', { t: "ty" }],
 }
 
 const ty = {

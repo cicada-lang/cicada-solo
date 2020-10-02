@@ -34,7 +34,6 @@
 
 > Using new `partech` to replace the use of old `partech` in `lang`s.
 
-- [lang1] exp-matchers
 - [lang1] exp-parse
 
 - [lang2] exp-grammars
