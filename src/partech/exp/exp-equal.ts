@@ -1,6 +1,7 @@
 import * as Exp from "../exp"
 
 export function equal(x: Exp.Exp, y: Exp.Exp): boolean {
+  if (x === y) return true
   if (x.kind === "Exp.v" && y.kind === "Exp.v") {
     return x.name === y.name
   } else if (x.kind === "Exp.fn" && y.kind === "Exp.fn") {
@@ -19,6 +20,7 @@ export function equal(x: Exp.Exp, y: Exp.Exp): boolean {
 }
 
 function equal_exps(x: Array<Exp.Exp>, y: Array<Exp.Exp>): boolean {
+  if (x === y) return true
   if (x.length !== y.length) return false
   for (let i = 0; i < x.length; i++) {
     if (!equal(x[i], y[i])) return false
@@ -30,6 +32,7 @@ export function equal_choices(
   x: Map<string, Array<{ name?: string; value: Exp.Exp }>>,
   y: Map<string, Array<{ name?: string; value: Exp.Exp }>>
 ): boolean {
+  if (x === y) return true
   if (x.size !== y.size) return false
   for (const [key, x_part] of x.entries()) {
     const y_part = y.get(key)
@@ -43,6 +46,7 @@ function equal_parts(
   x: Array<{ name?: string; value: Exp.Exp }>,
   y: Array<{ name?: string; value: Exp.Exp }>
 ): boolean {
+  if (x === y) return true
   if (x.length !== y.length) return false
   for (let i = 0; i < x.length; i++) {
     if (x[i].name !== y[i].name) return false

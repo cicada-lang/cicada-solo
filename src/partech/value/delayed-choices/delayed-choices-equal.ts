@@ -6,6 +6,7 @@ export function equal(
   x: DelayedChoices.DelayedChoices,
   y: DelayedChoices.DelayedChoices
 ): boolean {
+  if (x === y) return true
   return (
     Exp.equal_choices(x.choices, y.choices) &&
     x.mod === y.mod &&
