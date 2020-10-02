@@ -59,3 +59,5 @@ function def_matcher(tree: pt.Tree.Tree): { name: string; exp: Exp.Exp } {
     }),
   })(tree)
 }
+
+export const matchers = { exp_matcher }

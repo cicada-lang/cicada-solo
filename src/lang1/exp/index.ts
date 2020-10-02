@@ -1,5 +1,7 @@
 export * from "./exp"
 export * from "./exp-repr"
+export * from "./exp-grammars"
+export * from "./exp-matchers"
 export * from "./exp-parse"
 export * from "./exp-check"
 export * from "./exp-infer"

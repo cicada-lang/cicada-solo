@@ -1,7 +1,7 @@
 import * as Exp from "../exp"
 import * as pt from "../../partech"
 
-export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
+function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>({
     "exp:var": ({ name }) => Exp.v(pt.Tree.str(name)),
     "exp:fn": ({ name, body }) => Exp.fn(pt.Tree.str(name), exp_matcher(body)),
@@ -28,3 +28,5 @@ function def_matcher(tree: pt.Tree.Tree): { name: string; exp: Exp.Exp } {
     }),
   })(tree)
 }
+
+export const matchers = { exp_matcher }

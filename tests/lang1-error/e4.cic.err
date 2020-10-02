@@ -1,15 +1,32 @@
-When checking (_) => id(id(id(id(two)))),
-I am expecting the type to be Ty.arrow,
-but the given type is Nat.
+/home/xyh/cicada/lib/partech/earley-parser/schedule/schedule-harvest.js:56
+    throw Schedule.parsing_error(schedule, grammar, start, end);
+    ^
 
-previous:
-- (_) => id(id(id(id(two))))
-- (_) => (_) => id(id(id(id(two))))
-- (_) => (_) => id(id(id(id(two)))): (Nat) -> Nat
-- {
-  one = 1: Nat
-  two = add1(one): Nat
-  id = (x) => x: (Nat) -> Nat
-  (_) => (_) => id(id(id(id(two)))): (Nat) -> Nat
+ParsingError: Found the symbol "/" in [135, 136], while expecting:
+ ":" according to:
+     exp:the@42 -> (exp: exp):the@62 » ":" (t: ty) 
+ ":" according to:
+     exp:the@37 -> (exp: exp):the@62 » ":" (t: ty) 
+ "}" according to:
+     exp:suite@0 -> "{"@1 (defs: zero_or_more):more@32 (ret: exp):the@62 » "}" 
+ ":" according to:
+     exp:the@32 -> (exp: exp):the@62 » ":" (t: ty) 
+ ":" according to:
+     exp:the@37 -> (exp: exp):fn@62 » ":" (t: ty) 
+ "}" according to:
+     exp:suite@0 -> "{"@1 (defs: zero_or_more):more@32 (ret: exp):fn@62 » "}" 
+ ":" according to:
+     exp:the@32 -> (exp: exp):fn@62 » ":" (t: ty) 
+
+    at Object.parsing_error (/home/xyh/cicada/lib/partech/earley-parser/schedule/schedule-parsing-error.js:77:16)
+    at harvest_node (/home/xyh/cicada/lib/partech/earley-parser/schedule/schedule-harvest.js:56:20)
+    at Object.harvest (/home/xyh/cicada/lib/partech/earley-parser/schedule/schedule-harvest.js:33:12)
+    at Object.parse (/home/xyh/cicada/lib/partech/earley-parser/earley-parser-create.js:39:29)
+    at Object.parse (/home/xyh/cicada/lib/lang1/exp/exp-parse.js:31:25)
+    at Object.run (/home/xyh/cicada/lib/lang1/cli/cli-eval.js:34:21)
+    at Object.run (/home/xyh/cicada/lib/lang1/cli/index.js:28:18)
+    at Object.<anonymous> (/home/xyh/cicada/bin/lang1.js:4:5)
+    at Module._compile (internal/modules/cjs/loader.js:1085:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10) {
+  span: { lo: 135, hi: 136 }
 }
-
