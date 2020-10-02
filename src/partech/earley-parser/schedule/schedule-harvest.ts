@@ -11,7 +11,7 @@ import * as ut from "../../../ut"
 
 export function harvest(schedule: Schedule.Schedule): Tree.Tree {
   const start = 0
-  const end = schedule.chart.length - 1
+  const end = TaskChart.length(schedule.chart) - 1
   return harvest_node(schedule, schedule.grammar, start, end)
 }
 
