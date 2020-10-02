@@ -4,10 +4,8 @@ import * as TaskChart from "../task-chart"
 import * as Task from "../task"
 
 export function resume(schedule: Schedule.Schedule, task: Task.Task): void {
-  for (const upsteam_task of TaskChart.upsteam_tasks(schedule.chart, task)) {
-    const { value } = Task.current_part(upsteam_task)
-    // TODO also save grammar in indexing -- to avoid type casting
-    const grammar = value as Value.grammar
+  for (const entry of TaskChart.resumable_entries(schedule.chart, task)) {
+    const { task: upsteam_task, grammar } = entry
     if (Task.match_grammar_p(task, grammar)) {
       const forward_steps = Task.current_index(task) - task.index
       const resumed_task = {

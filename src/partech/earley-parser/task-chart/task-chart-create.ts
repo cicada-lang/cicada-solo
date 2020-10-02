@@ -9,14 +9,14 @@ export function create(tokens: Array<Token.Token>): TaskChart.TaskChart {
     task_sets.push(new Map())
   }
 
-  const resumable_task_indexing_sets = new Array()
+  const resumable_indexing_sets = new Array()
   for (let i = 0; i < length; i++) {
-    resumable_task_indexing_sets.push(new Map())
+    resumable_indexing_sets.push(new Map())
   }
 
   return {
     task_sets,
-    resumable_task_indexing_sets,
+    resumable_indexing_sets,
   }
 }
 

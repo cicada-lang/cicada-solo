@@ -15,8 +15,8 @@ export function insert(
   if (!task_set.has(id)) {
     task_set.set(id, task)
 
-    const indexing_set = chart.resumable_task_indexing_sets[index]
-    extend_resumable_task_indexing_set(indexing_set, id, task)
+    const indexing_set = chart.resumable_indexing_sets[index]
+    extend_resumable_indexing_set(indexing_set, id, task)
 
     if (opts.on_new_task) {
       opts.on_new_task(task)
@@ -27,10 +27,10 @@ export function insert(
   }
 }
 
-function extend_resumable_task_indexing_set(
-  task_indexing_set: Map<
+function extend_resumable_indexing_set(
+  indexing_set: Map<
     TaskChart.GrammarName,
-    Map<TaskChart.TaskId, Task.Task>
+    Map<TaskChart.TaskId, TaskChart.ResumableEntry>
   >,
   task_id: TaskChart.TaskId,
   task: Task.Task
@@ -40,15 +40,15 @@ function extend_resumable_task_indexing_set(
   const { value } = Task.current_part(task)
   if (value.kind === "Value.grammar") {
     const grammar = value
-    const task_set = task_indexing_set.get(grammar.name)
+    const task_set = indexing_set.get(grammar.name)
     if (task_set !== undefined) {
       if (!task_set.has(task_id)) {
-        task_set.set(task_id, task)
+        task_set.set(task_id, { task, grammar })
       }
     } else {
       const new_task_set = new Map()
-      new_task_set.set(task_id, task)
-      task_indexing_set.set(grammar.name, new_task_set)
+      new_task_set.set(task_id, { task, grammar })
+      indexing_set.set(grammar.name, new_task_set)
     }
   }
 }
