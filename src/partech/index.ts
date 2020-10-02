@@ -18,4 +18,6 @@ export * as EarleyParser from "./earley-parser"
 export * as grammars from "./grammars"
 export * as matchers from "./matchers"
 
+export * as preprocess from "./preprocess"
+
 export * from "./errors"

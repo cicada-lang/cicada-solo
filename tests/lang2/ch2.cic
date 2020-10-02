@@ -1,3 +1,5 @@
+// 2. Doin' What Comes Naturally
+
 {
   flavored_lentils = (flavor) => cons(flavor, "lentils"): (String) -> Pair(String, String)
   garlic_flavored_lentils = flavored_lentils("garlic"): Pair(String, String)
