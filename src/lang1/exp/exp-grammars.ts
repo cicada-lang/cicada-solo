@@ -1,6 +1,8 @@
 import * as pt from "../../partech"
 
-const identifier = { $pattern: ["identifier"] }
+const preserved = ["zero", "add1", "rec"]
+
+const identifier = { $pattern: ["identifier", `^(?!(${preserved.join("|")}))`] }
 
 const exp = {
   "exp:var": [{ name: "identifier" }],
@@ -22,6 +24,29 @@ const exp = {
     { ret: "exp" },
     '"}"',
   ],
+  "exp:zero": ['"zero"'],
+  "exp:add1": ['"add1"', '"("', { prev: "exp" }, '")"'],
+  // TODO
+  // number: [num],
+  rec: [
+    '"rec"',
+    '"["',
+    { t: "ty" },
+    '"]"',
+    '"("',
+    { target: "exp" },
+    '","',
+    { base: "exp" },
+    '","',
+    { step: "exp" },
+    '")"',
+  ],
+  the: [{ exp: "exp" }, '":"', { t: "ty" }],
+}
+
+const ty = {
+  "ty:nat": ['"Nat"'],
+  "ty:arrow": ['"("', { arg_t: "ty" }, '")"', '"-"', '">"', { ret_t: "ty" }],
 }
 
 const def = {
@@ -34,5 +59,6 @@ export const grammars = {
   $start: "exp",
   identifier,
   exp,
+  ty,
   def,
 }
