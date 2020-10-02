@@ -34,7 +34,7 @@
 
 > Be the most easy to use parsing tool for programming language prototyping.
 
-- optimize `TaskChart` searching by `rule_name_index`
+- optimize `TaskChart` searching by `resumable_task_table`
 
 - handle `$import` in `Mod.build`
   - built-in `zero_or_more` and `one_or_more` and `optional`

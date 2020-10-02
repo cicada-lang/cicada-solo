@@ -1,12 +1,12 @@
 import * as TaskChart from "../task-chart"
 import * as Token from "../../token"
 
-// NOTE `tokens.length + 1 === chart.length`
+// NOTE The length of chart is one greater then the length of tokens.
 
 export function create(tokens: Array<Token.Token>): TaskChart.TaskChart {
-  const chart = new Array()
+  const tasksets = new Array()
   for (let i = 0; i < tokens.length + 1; i++) {
-    chart.push(new Map())
+    tasksets.push(new Map())
   }
-  return chart
+  return { tasksets }
 }

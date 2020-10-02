@@ -10,9 +10,9 @@ export function insert(
   } = {}
 ): boolean {
   const id = Task.id(task)
-  const task_map = chart[index]
-  if (!task_map.has(id)) {
-    task_map.set(id, task)
+  const taskset = chart.tasksets[index]
+  if (!taskset.has(id)) {
+    taskset.set(id, task)
     if (opts.on_new_task) {
       opts.on_new_task(task)
     }
