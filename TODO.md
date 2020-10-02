@@ -44,6 +44,8 @@
   - built-in `zero_or_more` and `one_or_more` and `optional`
   - always import name for simplicity
 
+- intersection grammar
+
 # parc
 
 - parc -- to implement `pt/exp/exp-parse`
@@ -51,8 +53,6 @@
 - [test] try examples in peg paper in parser generator
 - [test] x in x test
   - S <- "x" S "x" | "x"
-
-# partech -- intersection grammar
 
 # re-design the syntax
 
