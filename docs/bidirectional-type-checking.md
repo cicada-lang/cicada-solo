@@ -3,8 +3,8 @@
 2020-09-29
 
 - Examples:
-  link:cicada/lang1/check.cic
-  link:cicada/lang2/check.cic
+  link:../cicada/lang1/check.cic
+  link:../cicada/lang2/check.cic
 
 假设在 datatype 中定义数据构造子时，
 其类型所代表的是纯逻辑式编程。

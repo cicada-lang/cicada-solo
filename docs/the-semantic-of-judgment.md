@@ -3,8 +3,8 @@
 2020-09-29
 
 - Examples:
-  link:cicada/lang1/check.cic
-  link:cicada/lang2/check.cic
+  link:../cicada/lang1/check.cic
+  link:../cicada/lang2/check.cic
 
 - We must always be able to infer the type of logic variable.
 
