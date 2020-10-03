@@ -23,13 +23,13 @@ export type Value =
 export interface pi {
   kind: "Value.pi"
   arg_t: Value
-  closure: Closure.Closure
+  ret_t_cl: Closure.Closure
 }
 
-export const pi = (arg_t: Value, closure: Closure.Closure): pi => ({
+export const pi = (arg_t: Value, ret_t_cl: Closure.Closure): pi => ({
   kind: "Value.pi",
   arg_t,
-  closure,
+  ret_t_cl,
 })
 
 interface fn {

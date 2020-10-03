@@ -15,13 +15,13 @@ export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
-    const fresh_name = ut.freshen_name(new Set(ctx.keys()), t.closure.name)
+    const fresh_name = ut.freshen_name(new Set(ctx.keys()), t.ret_t_cl.name)
     const variable = Value.reflection(t.arg_t, Neutral.v(fresh_name))
     return Exp.fn(
       fresh_name,
       Value.readback(
         Ctx.update(Ctx.clone(ctx), fresh_name, t.arg_t),
-        Closure.apply(t.closure, variable),
+        Closure.apply(t.ret_t_cl, variable),
         Exp.do_ap(value, variable)
       )
     )
@@ -76,13 +76,13 @@ export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
     )
     return Exp.sigma(fresh_name, car_t, cdr_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.pi") {
-    const fresh_name = ut.freshen_name(new Set(ctx.keys()), value.closure.name)
+    const fresh_name = ut.freshen_name(new Set(ctx.keys()), value.ret_t_cl.name)
     const variable = Value.reflection(value.arg_t, Neutral.v(fresh_name))
     const arg_t = Value.readback(ctx, Value.type, value.arg_t)
     const ret_t = Value.readback(
       Ctx.update(Ctx.clone(ctx), fresh_name, value.arg_t),
       Value.type,
-      Closure.apply(value.closure, variable)
+      Closure.apply(value.ret_t_cl, variable)
     )
     return Exp.pi(fresh_name, arg_t, ret_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.type") {

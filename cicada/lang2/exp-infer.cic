@@ -3,3 +3,25 @@
 Exp.infer(Map(String, Value), Exp): Value
 
 Exp.infer(ctx, Exp.v(name)) = Map.lookup(ctx, name)
+
+// 下面几个类型做为值，其类型都是 type 本身，因此都用 infer 了。
+
+Exp.infer(ctx, Exp.pi(name, arg_t, ret_t)) = {
+  Exp.check(ctx, arg_t, Value.type)
+  arg_t_value = Exp.evaluate(Ctx.to_env(ctx), arg_t)
+  Exp.check(Ctx.extend(ctx, name, arg_t_value), ret_t, Value.type)
+  Value.type
+}
+
+Exp.infer(ctx, Exp.sigma(name, car_t, cdr_t)) = {
+  Exp.check(ctx, car_t, Value.type)
+  car_t_value = Exp.evaluate(Ctx.to_env(ctx), car_t)
+  Exp.check(Ctx.extend(ctx, name, car_t_value), cdr_t, Value.type)
+  Value.type
+}
+
+// 下面开始是真正的 Eliminator。
+
+Exp.infer(ctx, Exp.ap(target, arg)) = {
+  Value.pi(name, arg_t, ret_t_cl) = Exp.infer(ctx, target)
+}

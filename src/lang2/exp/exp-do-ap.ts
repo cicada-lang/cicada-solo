@@ -11,7 +11,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   } else if (target.kind === "Value.reflection") {
     if (target.t.kind === "Value.pi") {
       return Value.reflection(
-        Closure.apply(target.t.closure, arg),
+        Closure.apply(target.t.ret_t_cl, arg),
         Neutral.ap(target.neutral, new Normal.Normal(target.t.arg_t, arg))
       )
     } else {

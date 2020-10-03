@@ -17,14 +17,16 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
         return t
       }
     } else if (exp.kind === "Exp.pi") {
-      // ctx |- arg_t <= type
-      // ctx, name: arg_t |- ret_t <= type
-      // ------------------------
-      // ctx |- pi(name, arg_t, ret_t) => type
       Exp.check(ctx, exp.arg_t, Value.type)
       const arg_t = Exp.evaluate(Ctx.to_env(ctx), exp.arg_t)
       ctx = Ctx.update(Ctx.clone(ctx), exp.name, arg_t)
       Exp.check(ctx, exp.ret_t, Value.type)
+      return Value.type
+    } else if (exp.kind === "Exp.sigma") {
+      Exp.check(ctx, exp.car_t, Value.type)
+      const car_t = Exp.evaluate(Ctx.to_env(ctx), exp.car_t)
+      ctx = Ctx.update(Ctx.clone(ctx), exp.name, car_t)
+      Exp.check(ctx, exp.cdr_t, Value.type)
       return Value.type
     } else if (exp.kind === "Exp.ap") {
       // ctx |- target => pi(name, arg_t, ret_t)
@@ -41,17 +43,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       const pi = Value.is_pi(ctx, target_t)
       Exp.check(ctx, exp.arg, pi.arg_t)
       const arg = Exp.evaluate(Ctx.to_env(ctx), exp.arg)
-      return Closure.apply(pi.closure, arg)
-    } else if (exp.kind === "Exp.sigma") {
-      // ctx |- car_t <= type
-      // ctx, name: car_t |- cdr_t <= type
-      // ------------------------
-      // ctx |- sigma(name, car, cdr_t) => type
-      Exp.check(ctx, exp.car_t, Value.type)
-      const car_t = Exp.evaluate(Ctx.to_env(ctx), exp.car_t)
-      ctx = Ctx.update(Ctx.clone(ctx), exp.name, car_t)
-      Exp.check(ctx, exp.cdr_t, Value.type)
-      return Value.type
+      return Closure.apply(pi.ret_t_cl, arg)
     } else if (exp.kind === "Exp.car") {
       // ctx |- target => sigma(name, car_t, cdr_t)
       // ------------------------

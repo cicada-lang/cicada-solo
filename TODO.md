@@ -3,16 +3,20 @@
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
-- [lang2] [draft] exp-check
+- `cdr_t_cl` instead of `closure`
+- `ret_t` instead of `closure`
+
 - [lang2] [draft] exp-infer
 
-- [lang2] [draft] implement `Pair` and `Arrow`
+- [lang2] [draft] exp-check
 
 - [lang2] [draft] check -- about nat
 - [lang2] [draft] check -- about equal
 - [lang2] [draft] check -- about absurd
 - [lang2] [draft] check -- about str
 - [lang2] [draft] check -- about trivial
+
+- [lang2] [draft] implement `Pair` and `Arrow`
 
 - [lang2] no line comments about inference rules -- use cicada.
 - [lang2] implement `Pair` and `Arrow` directly
