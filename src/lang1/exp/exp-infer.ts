@@ -7,9 +7,6 @@ import * as ut from "../../ut"
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
   try {
     if (exp.kind === "Exp.v") {
-      // a = lookup(x, ctx)
-      // ---------------------
-      // ctx |- x => a
       const t = Ctx.lookup(ctx, exp.name)
       if (t === undefined) {
         throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
@@ -17,10 +14,6 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
         return t
       }
     } else if (exp.kind === "Exp.ap") {
-      // ctx |- f => arrow(a, b)
-      // ctx |- e <= a
-      // ---------------------
-      // ctx |- ap(f, e) => b
       const { target, arg } = exp
       const target_t = Exp.infer(ctx, target)
       if (target_t.kind === "Ty.arrow") {
@@ -35,17 +28,6 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
         )
       }
     } else if (exp.kind === "Exp.suite") {
-      // ctx |- e1 => t1
-      // ctx, x1: t1 |- e2 => t2
-      // ctx, x1: t1, x2: t2 |- ...
-      // ...
-      // ctx, x1: t1, x2: t2, ... |- e => t
-      // ---------------------
-      // ctx |- { x1 = e1
-      //          x2 = e2
-      //          ...
-      //          e
-      //        } => t
       const { defs, ret } = exp
       ctx = Ctx.clone(ctx)
       for (const def of defs) {
@@ -53,11 +35,6 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       }
       return Exp.infer(ctx, ret)
     } else if (exp.kind === "Exp.rec") {
-      // ctx |- n => nat
-      // ctx |- b <= t
-      // ctx |- s <= arrow(nat, arrow(t, t))
-      // ------------------------------
-      // ctx |- rec(t, n, b, s) => t
       const { t, target, base, step } = exp
       const target_t = Exp.infer(ctx, target)
       if (target_t.kind === "Ty.nat") {
@@ -73,9 +50,6 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       }
       return t
     } else if (exp.kind === "Exp.the") {
-      // ctx |- e <= t
-      // ---------------------
-      // ctx |- the(t, e) => t
       const the = exp
       Exp.check(ctx, the.exp, the.t)
       return the.t

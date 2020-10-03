@@ -56,7 +56,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
         const value = Exp.evaluate(Ctx.to_env(ctx), def.exp)
         Ctx.define(ctx, def.name, t, value)
       }
-      return Exp.check(ctx, ret, t)
+      Exp.check(ctx, ret, t)
     } else {
       // ctx |- exp => u
       // ctx |- t == u : type

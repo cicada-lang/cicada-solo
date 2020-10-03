@@ -7,9 +7,6 @@ import * as ut from "../../ut"
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
   try {
     if (exp.kind === "Exp.fn") {
-      // ctx, x: a |- e <= b
-      // ------------------------------
-      // ctx |- fn(x, e) <= arrow(a, b)
       if (t.kind === "Ty.arrow") {
         ctx = Ctx.clone(ctx)
         Ctx.update(ctx, exp.name, t.arg_t)
@@ -25,10 +22,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
         )
       }
     } else if (exp.kind === "Exp.zero") {
-      // ------------------
-      // ctx |- zero <= nat
       if (t.kind === "Ty.nat") {
-        return
       } else {
         throw new Trace.Trace(
           ut.aline(`
@@ -39,12 +33,8 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
         )
       }
     } else if (exp.kind === "Exp.add1") {
-      // ctx |- prev <= nat
-      // ------------------------
-      // ctx |- add1(prev) <= nat
       if (t.kind === "Ty.nat") {
         Exp.check(ctx, exp.prev, t)
-        return
       } else {
         throw new Trace.Trace(
           ut.aline(`
@@ -61,11 +51,9 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
         Ctx.update(ctx, def.name, Exp.infer(ctx, def.exp))
       }
       Exp.check(ctx, ret, t)
-      return
     } else {
       const u = Exp.infer(ctx, exp)
       if (ut.equal(t, u)) {
-        return
       } else {
         throw new Trace.Trace(
           ut.aline(`

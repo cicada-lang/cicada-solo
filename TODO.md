@@ -1,19 +1,7 @@
-# lang3 -- 重新实现 cicada-structural-typing
-
-> 由于，重新理解了 Value Neutral Normal 的结构，
-> 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
-
-- 尝试实现 `@judgment` 中的 `@where` 语法关键词。
-- 尝试使用 js 的 record (object) 与 Array 语法（包括 pattern matching）。
-
 # TLT
 
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
-
-- no line comments about inference rules -- use cicada.
-
-  - cicada is a better lang to write inference rules.
 
 - [lang0] add syntax for `Exp.let` -- along with `Exp.suite`.
 - [lang1] add syntax for `Exp.let` -- along with `Exp.suite`.
@@ -30,6 +18,8 @@
 - [lang2] [draft] implement `Pair` and `Arrow`
 
 - [lang2] implement `Pair` and `Arrow` directly
+
+- [lang2] no line comments about inference rules -- use cicada.
 
 - [lang3] [draft] check and infer
 
@@ -52,6 +42,14 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
+# lang3 -- 重新实现 cicada-structural-typing
+
+> 由于，重新理解了 Value Neutral Normal 的结构，
+> 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
+
+- 尝试实现 `@judgment` 中的 `@where` 语法关键词。
+- 尝试使用 js 的 record (object) 与 Array 语法（包括 pattern matching）。
+
 # partech -- parsing techniques
 
 > Be the most easy to use parsing tool for programming language prototyping.
@@ -63,6 +61,9 @@
 - intersection grammar
 
 # parc
+
+> 严格确保线性时间的 parser combinator。
+> 对于 parser 而言，只有线性时间才是可以接受的复杂度。
 
 - parc -- to implement `pt/exp/exp-parse`
 - like handle written parser
