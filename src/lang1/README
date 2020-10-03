@@ -1,8 +1,0 @@
-lang1
-=====
-
-Simply typed lambda calculus
-with natural number and primitve recursion.
-
-- https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus
-- System T: https://en.wikipedia.org/wiki/Dialectica_interpretation
