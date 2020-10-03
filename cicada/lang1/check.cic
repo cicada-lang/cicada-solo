@@ -14,6 +14,7 @@
   Check(ctx, target, Ty.arrow(arg_t, ret_t))
   Check(ctx, arg, arg_t)
 
+
   // We can use Exp.let instead of Exp.suite,
   // compile Exp.suite to Exp.let before check.
 
@@ -21,22 +22,23 @@
   // is not given by the return type.
 
   Check(ctx, Exp.let(name, exp, ret), t)
-  --------------------------------------- let
-  Check(ctx, exp, exp_t)
+  ------------------------------------------- let
   Check(Map.extend(ctx, name, exp_t), ret, t)
+  Check(ctx, exp, exp_t)
 
   // We can also handle Exp.suite directly,
   // where the branching of List will be distributed out here,
   // to form two cases of judgments.
 
   Check(ctx, Exp.suite(List.null, ret), t)
-  --------------------------------------- suite_defs_null
+  --------------------------------------- suite_null
   Check(ctx, ret, t)
 
-  Check(ctx, Exp.suite(List.cons({name, exp}, defs), ret), t)
-  --------------------------------------- suite_defs_cons
-  Check(ctx, exp, exp_t)
+  Check(ctx, Exp.suite(List.cons({ name, exp }, defs), ret), t)
+  -------------------------------------------------- suite_cons
   Check(Map.extend(ctx, name, exp_t), Exp.suite(defs, ret), t)
+  Check(ctx, exp, exp_t)
+
 
   Check(ctx, Exp.zero, Ty.nat)
   ---------------------------- zero
