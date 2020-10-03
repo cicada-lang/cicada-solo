@@ -3,7 +3,7 @@ import * as Env from "../env"
 import * as Value from "../value"
 
 export function nat_ind_step_t(motive: Value.Value): Value.Value {
-  const env = Env.extend(Env.init(), "motive", motive)
+  const env = Env.update(Env.init(), "motive", motive)
 
   const step_t = Exp.pi(
     "prev",

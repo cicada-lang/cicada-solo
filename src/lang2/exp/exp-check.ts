@@ -17,7 +17,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       const arg = Value.reflection(pi.arg_t, Neutral.v(exp.name))
       const ret_t = Closure.apply(pi.closure, arg)
       ctx = Ctx.clone(ctx)
-      ctx = Ctx.extend(ctx, exp.name, pi.arg_t)
+      ctx = Ctx.update(ctx, exp.name, pi.arg_t)
       Exp.check(ctx, exp.ret, ret_t)
     } else if (exp.kind === "Exp.cons") {
       // ctx |- car <= car_t

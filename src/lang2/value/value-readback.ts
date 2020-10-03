@@ -21,7 +21,7 @@ export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
     return Exp.fn(
       fresh_name,
       Value.readback(
-        Ctx.extend(Ctx.clone(ctx), fresh_name, t.arg_t),
+        Ctx.update(Ctx.clone(ctx), fresh_name, t.arg_t),
         Closure.apply(t.closure, variable),
         Exp.do_ap(value, variable)
       )
@@ -71,7 +71,7 @@ export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
     const variable = Value.reflection(value.car_t, Neutral.v(fresh_name))
     const car_t = Value.readback(ctx, Value.type, value.car_t)
     const cdr_t = Value.readback(
-      Ctx.extend(Ctx.clone(ctx), fresh_name, value.car_t),
+      Ctx.update(Ctx.clone(ctx), fresh_name, value.car_t),
       Value.type,
       Closure.apply(value.closure, variable)
     )
@@ -81,7 +81,7 @@ export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
     const variable = Value.reflection(value.arg_t, Neutral.v(fresh_name))
     const arg_t = Value.readback(ctx, Value.type, value.arg_t)
     const ret_t = Value.readback(
-      Ctx.extend(Ctx.clone(ctx), fresh_name, value.arg_t),
+      Ctx.update(Ctx.clone(ctx), fresh_name, value.arg_t),
       Value.type,
       Closure.apply(value.closure, variable)
     )

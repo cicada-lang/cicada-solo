@@ -26,7 +26,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ctx |- pi(name, arg_t, ret_t) => type
       Exp.check(ctx, exp.arg_t, Value.type)
       const arg_t = Exp.evaluate(Ctx.to_env(ctx), exp.arg_t)
-      ctx = Ctx.extend(Ctx.clone(ctx), exp.name, arg_t)
+      ctx = Ctx.update(Ctx.clone(ctx), exp.name, arg_t)
       Exp.check(ctx, exp.ret_t, Value.type)
       return Value.type
     } else if (exp.kind === "Exp.ap") {
@@ -52,7 +52,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ctx |- sigma(name, car, cdr_t) => type
       Exp.check(ctx, exp.car_t, Value.type)
       const car_t = Exp.evaluate(Ctx.to_env(ctx), exp.car_t)
-      ctx = Ctx.extend(Ctx.clone(ctx), exp.name, car_t)
+      ctx = Ctx.update(Ctx.clone(ctx), exp.name, car_t)
       Exp.check(ctx, exp.cdr_t, Value.type)
       return Value.type
     } else if (exp.kind === "Exp.car") {
@@ -118,7 +118,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       const target_t = Exp.infer(ctx, exp.target)
       const equal = Value.is_equal(ctx, target_t)
       const motive_t = Exp.evaluate(
-        Env.extend(Env.init(), "t", equal.t),
+        Env.update(Env.init(), "t", equal.t),
         Exp.pi("x", Exp.v("t"), Exp.type)
       )
       const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)

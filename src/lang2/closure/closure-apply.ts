@@ -7,6 +7,6 @@ export function apply(
   closure: Closure.Closure,
   value: Value.Value
 ): Value.Value {
-  const new_env = Env.extend(Env.clone(closure.env), closure.name, value)
+  const new_env = Env.update(Env.clone(closure.env), closure.name, value)
   return Exp.evaluate(new_env, closure.ret)
 }

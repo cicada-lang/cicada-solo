@@ -1,7 +1,7 @@
 export type Exp =
   | v
   | pi
-// | arrow
+  // | arrow
   | fn
   | ap
   | sigma
