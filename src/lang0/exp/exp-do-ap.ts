@@ -6,7 +6,7 @@ import * as Neutral from "../neutral"
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   switch (target.kind) {
     case "Value.fn": {
-      const new_env = Env.extend(Env.clone(target.env), target.name, arg)
+      const new_env = Env.update(Env.clone(target.env), target.name, arg)
       return Exp.evaluate(new_env, target.ret)
     }
     case "Value.reflection": {
