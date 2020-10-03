@@ -11,9 +11,12 @@
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
-- [lang1] add syntax for `Exp.let` -- along with `Exp.suite`.
+- no line comments about inference rules -- use cicada.
 
-- [lang2] `Exp.suite` should be both checked and infered.
+  - cicada is a better lang to write inference rules.
+
+- [lang0] add syntax for `Exp.let` -- along with `Exp.suite`.
+- [lang1] add syntax for `Exp.let` -- along with `Exp.suite`.
 - [lang2] add syntax for `Exp.let` -- along with `Exp.suite`.
 
 - [lang1] [draft] exp-check

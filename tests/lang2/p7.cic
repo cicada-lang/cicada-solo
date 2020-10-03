@@ -1,0 +1,6 @@
+{
+  one = add1(zero)
+  two = add1(one)
+  three = add1(two)
+  cons(one, two)
+} : Pair(Nat, Nat)
