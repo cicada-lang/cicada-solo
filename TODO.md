@@ -4,7 +4,6 @@
 > 为 cicada-structural-typing 做准备。
 
 - [lang2] [draft] exp-check
-- [lang2] [draft] exp-evaluate
 - [lang2] [draft] check -- for car and cdr
 
 - [lang2] [draft] implement `Pair` and `Arrow`

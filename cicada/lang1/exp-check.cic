@@ -1,7 +1,5 @@
 @module lang1
 
-// -- CHECK CONSTRUCTORS --
-
 Exp.check(Map(String, Ty), Exp, Ty): Trivial
 
 Exp.check(ctx, Exp.fn(name, ret), Ty.arrow(arg_t, ret_t)) =
@@ -38,32 +36,4 @@ Exp.check(ctx, Exp.add1(prev), Ty.nat) =
 Exp.check(ctx, exp, t) = {
   Exp.infer(ctx, exp) >>> u
   Ty.equal(t, u)
-}
-
-// -- INFER VARIABLE AND ELIMINATORS --
-
-Exp.infer(Map(String, Ty), Exp): Ty
-
-Exp.infer(ctx, Exp.v(name)) = Map.lookup(ctx, name)
-
-// 为 eliminator 实现 infer 的模式是：
-// - target 通常要 infer；
-// - 而其他元素要 check。
-
-Exp.infer(ctx, Exp.ap(target, arg)) = {
-  Exp.infer(ctx, target) >>> Ty.arrow(arg_t, ret_t)
-  Exp.check(ctx, arg, arg_t)
-  ret_t
-}
-
-Exp.infer(ctx, Exp.rec(t, target, base, step)) = {
-  Exp.infer(ctx, target, Ty.nat)
-  Exp.infer(ctx, base, t)
-  Exp.infer(ctx, step, Ty.arrow(Ty.nat, Ty.arrow(t, t)))
-  t
-}
-
-Exp.infer(ctx, Exp.the(t, exp)) = {
-  Exp.check(ctx, exp, t)
-  t
 }
