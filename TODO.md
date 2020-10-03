@@ -3,13 +3,20 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
+- 尝试实现 `@judgment` 中的 `@where` 语法关键词。
+
 # TLT
 
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
-- [lang2] implement `Pair` and `Arrow` directly
+- [lang*] `Ctx.update` and `Env.update`
+- [lang1] draft check
+- [lang1] draft evaluate
+- [lang2] draft evaluate
 - [lang2] draft check car and cdr
+- [lang2] implement `Pair` and `Arrow` in draft
+- [lang2] implement `Pair` and `Arrow` directly
 - [lang3] draft check and infer
 - [TLT] 2. Doin' What Comes Naturally
 - [TLT] 3. Eliminate All Natural Numbers!

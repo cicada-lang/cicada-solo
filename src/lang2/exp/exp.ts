@@ -1,6 +1,7 @@
 export type Exp =
   | v
   | pi
+// | arrow
   | fn
   | ap
   | sigma
@@ -47,6 +48,18 @@ export const pi = (name: string, arg_t: Exp, ret_t: Exp): pi => ({
   arg_t,
   ret_t,
 })
+
+// interface arrow {
+//   kind: "Exp.arrow"
+//   arg_t: Exp
+//   ret_t: Exp
+// }
+
+// export const arrow = (arg_t: Exp, ret_t: Exp): arrow => ({
+//   kind: "Exp.arrow",
+//   arg_t,
+//   ret_t,
+// })
 
 interface fn {
   kind: "Exp.fn"
