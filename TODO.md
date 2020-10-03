@@ -4,6 +4,7 @@
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
+- 尝试使用 js 的 record (object) 与 Array 语法（包括 pattern matching）。
 
 # TLT
 
