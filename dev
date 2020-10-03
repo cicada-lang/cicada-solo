@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { run, test, expect, snapshot } = require("@xieyuheng/test-runner")
+const { run, test, expect, snapshot, info } = require("@xieyuheng/test-runner")
 const changeCase = require("change-case")
 const path = require("path")
 const fs = require("fs")
@@ -108,5 +108,7 @@ commands.test_partech_parse = async () => {
     }
   }
 }
+
+info()
 
 run(commands)

@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@types/deep-diff": "^1.0.0",
-    "@xieyuheng/test-runner": "^0.1.16",
+    "@xieyuheng/test-runner": "^0.1.17",
     "chalk": "^4.1.0",
     "change-case": "^4.1.1",
     "deep-diff": "^1.0.2",
