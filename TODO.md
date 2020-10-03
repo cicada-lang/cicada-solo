@@ -3,14 +3,13 @@
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
-- [lang2] [draft] exp-check
-
-- [lang2] [draft] implement `Pair` and `Arrow`
-
-- [lang2] no line comments about inference rules -- use cicada.
 - [lang2] implement `Pair` and `Arrow` directly
 
-- [lang3] [draft] check and infer
+- [lang2] [draft] check
+  - no line comments about inference rules.
+
+- [lang3] [draft] exp, value, neutral & normal
+- [lang3] [draft] check
 
 - [TLT] 2. Doin' What Comes Naturally
 - [TLT] 3. Eliminate All Natural Numbers!

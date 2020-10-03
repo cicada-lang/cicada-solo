@@ -1,3 +1,16 @@
 @module lang2
 
 Exp.check(Map(String, Value), Exp, Value): Trivial
+
+Exp.check(ctx, Exp.fn(name, ret), Value.pi(arg_t, ret_t_cl)) = {
+  arg_value = Value.reflection(arg_t, Neutral.v(name))
+  ret_t = Closure.apply(ret_t_cl, arg_value)
+  Exp.check(Ctx.extend(ctx, name, arg_t), ret, ret_t)
+}
+
+Exp.check(ctx, Exp.cons(car, cdr), Value.sigma(car_t, cdr_t_cl)) = {
+  car_value = Exp.evaluate(Ctx.to_env(ctx), car)
+  cdr_t = Closure.apply(cdr_t_cl, car_value)
+  Exp.check(ctx, car, car_t)
+  Exp.check(ctx, ret, ret_t)
+}
