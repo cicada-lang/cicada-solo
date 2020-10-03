@@ -47,11 +47,15 @@
     cdr_t = Closure.apply(cdr_t_cl, car_value)
   }
 
-  TODO
-  ------------------------------ car
-  TODO
+  Check(ctx, Exp.car(target), car_t)
+  --------------------------------- car
+  Check(ctx, target, Value.sigma(car_t, ret_t_cl))
 
-  TODO
-  ------------------------------ cdr
-  TODO
+  Check(ctx, Exp.cdr(target), ret_t)
+  --------------------------------- cdr
+  Check(ctx, target, Value.sigma(car_t, ret_t_cl))
+  @where {
+    car = Value.reflection(car_t, Neutral.v(name))
+    ret_t = Closure.apply(ret_t_cl, car)
+  }
 }

@@ -3,17 +3,16 @@
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
-- [lang2] [draft] check -- for car and cdr
-- [lang2] [draft] check -- about Nat
-- [lang2] [draft] check -- about Equal
-- [lang2] [draft] check -- about Absurd
 - [lang2] [draft] exp-check
 - [lang2] [draft] exp-infer
 
-- [lang2] no line comments about inference rules -- use cicada.
-
 - [lang2] [draft] implement `Pair` and `Arrow`
 
+- [lang2] [draft] check -- about Nat
+- [lang2] [draft] check -- about Equal
+- [lang2] [draft] check -- about Absurd
+
+- [lang2] no line comments about inference rules -- use cicada.
 - [lang2] implement `Pair` and `Arrow` directly
 
 - [lang3] [draft] check and infer

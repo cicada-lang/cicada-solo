@@ -5,20 +5,24 @@
 }
 
 @datatype Value {
-  pi(arg_t: Value, closure: Closure): Value
+  pi(arg_t: Value, ret_t_cl: Closure): Value
   fn(closure: Closure): Value
 
-  sigma(car_t: Value, closure: Closure): Value
+  sigma(car_t: Value, cdr_t_cl: Closure): Value
   cons(car: Value, cdr: Value): Value
 
   // | nat
   // | zero
   // | add1
+
   // | equal
   // | same
+
   // | trivial
   // | sole
+
   // | absurd
+
   // | str
   // | quote
 
