@@ -2,6 +2,5 @@
   one = add1(zero) : Nat
   two = add1(one) : Nat
   id = (x) => x : (Nat) -> Nat
-  // (_) => (_) => id(id(id(id(two))))
-  (_) => (_) => id(id(id(id(two)))) : (Nat) -> (Nat) -> Nat
+  (_) => (_) => id(id(id(id(two))))
 } : (Nat) -> (Nat) -> Nat

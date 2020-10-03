@@ -54,6 +54,14 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
             |`)
         )
       }
+    } else if (exp.kind === "Exp.suite") {
+      const { defs, ret } = exp
+      ctx = Ctx.clone(ctx)
+      for (const def of defs) {
+        Ctx.update(ctx, def.name, Exp.infer(ctx, def.exp))
+      }
+      Exp.check(ctx, ret, t)
+      return
     } else {
       const u = Exp.infer(ctx, exp)
       if (ut.equal(t, u)) {
