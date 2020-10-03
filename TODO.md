@@ -12,8 +12,10 @@
 > 为 cicada-structural-typing 做准备。
 
 - [lang1] `Exp.suite` should be checked instead of infered.
-
 - [lang1] add syntax for `Exp.let` -- along with `Exp.suite`.
+
+- [lang2] `Exp.suite` should be checked instead of infered.
+- [lang2] add syntax for `Exp.let` -- along with `Exp.suite`.
 
 - [lang1] [draft] exp-check
 - [lang1] [draft] exp-evaluate
