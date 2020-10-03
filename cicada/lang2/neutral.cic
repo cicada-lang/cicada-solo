@@ -8,7 +8,9 @@
   car(target: Neutral): Neutral
   cdr(target: Neutral): Neutral
 
-  // nat_ind
-  // replace
-  // absurd_ind
+  nat_ind(target: Neutral, motive: Normal, base: Normal, step: Normal): Neutral
+
+  replace(target: Neutral, motive: Normal, base: Normal): Neutral
+
+  absurd_ind(target: Neutral, motive: Normal): Neutral
 }

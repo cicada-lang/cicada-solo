@@ -3,8 +3,6 @@
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
-- [lang2] [draft] `neutral.cic`
-
 - [lang2] [draft] exp-check
 - [lang2] [draft] exp-infer
 
