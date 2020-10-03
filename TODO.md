@@ -11,13 +11,17 @@
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
-- [lang1] draft check
-- [lang1] draft evaluate
-- [lang2] draft evaluate
-- [lang2] draft check car and cdr
-- [lang2] implement `Pair` and `Arrow` in draft
+- [lang1] [draft] check
+- [lang1] [draft] evaluate
+
+- [lang2] [draft] evaluate
+- [lang2] [draft] check car and cdr
+- [lang2] [draft] implement `Pair` and `Arrow`
+
 - [lang2] implement `Pair` and `Arrow` directly
-- [lang3] draft check and infer
+
+- [lang3] [draft] check and infer
+
 - [TLT] 2. Doin' What Comes Naturally
 - [TLT] 3. Eliminate All Natural Numbers!
 - [TLT] 4. Easy as Pie
