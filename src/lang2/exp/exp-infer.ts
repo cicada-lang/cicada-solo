@@ -10,9 +10,6 @@ import * as ut from "../../ut"
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
   try {
     if (exp.kind === "Exp.v") {
-      // a = lookup(x, ctx)
-      // ---------------------
-      // ctx |- x => a
       const t = Ctx.lookup(ctx, exp.name)
       if (t === undefined) {
         throw new Trace.Trace(Exp.explain_name_undefined(exp.name))

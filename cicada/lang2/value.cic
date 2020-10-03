@@ -1,9 +1,5 @@
 @module lang2
 
-@datatype Closure {
-  closure(env: Map(String, Value), name: String, ret: Exp): Closure
-}
-
 @datatype Value {
   pi(arg_t: Value, ret_t_cl: Closure): Value
   fn(closure: Closure): Value
@@ -11,37 +7,22 @@
   sigma(car_t: Value, cdr_t_cl: Closure): Value
   cons(car: Value, cdr: Value): Value
 
-  // | nat
-  // | zero
-  // | add1
+  nat: Value
+  zero: Value
+  add1(prev: Value): Value
 
-  // | equal
-  // | same
+  equal(t: Value, from: Value, to: Value): Value
+  same: Value
 
-  // | trivial
-  // | sole
+  trivial: Value
+  sole: Value
 
-  // | absurd
+  absurd: Value
 
-  // | str
-  // | quote
+  str: Value
+  quote(str: String): Value
 
   type: Value
 
   reflection(t: Value, neutral: Neutral): Value
-}
-
-@datatype Neutral {
-  v(name: String): Neutral
-
-  ap(target: Neutral, arg: Normal): Neutral
-
-  car(target: Neutral): Neutral
-  cdr(target: Neutral): Neutral
-
-  // | nat_ind | replace | absurd_ind
-}
-
-@datatype Normal {
-  normal(t: Value, value: Value): Normal
 }

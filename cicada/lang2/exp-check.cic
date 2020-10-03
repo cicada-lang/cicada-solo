@@ -1,0 +1,3 @@
+@module lang2
+
+Exp.check(Map(String, Value), Exp, Value): Trivial

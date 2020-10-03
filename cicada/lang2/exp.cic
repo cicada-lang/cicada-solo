@@ -12,23 +12,23 @@
   car(target: Exp): Exp
   cdr(target: Exp): Exp
 
-  // | nat
-  // | zero
-  // | add1
-  // | nat_ind
+  nat: Exp
+  zero: Exp
+  add1(prev: Exp): Exp
+  nat_ind(target: Exp, motive: Exp, base: Exp, step: Exp): Exp
 
-  // | equal
-  // | same
-  // | replace
+  equal(t: Exp, from: Exp, to: Exp): Exp
+  same: Exp
+  replace(target: Exp, motive: Exp, base: Exp): Exp
 
-  // | trivial
-  // | sole
+  trivial: Exp
+  sole: Exp
 
-  // | absurd
-  // | absurd_ind
+  absurd: Exp
+  absurd_ind(target: Exp, motive: Exp): Exp
 
-  // | str
-  // | quote
+  str: Exp
+  quote(str: String): Exp
 
   type: Exp
   let(name: String, exp: Exp, ret: Exp): Exp

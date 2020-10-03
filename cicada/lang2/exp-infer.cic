@@ -1,0 +1,5 @@
+@module lang2
+
+Exp.infer(Map(String, Value), Exp): Value
+
+Exp.infer(ctx, Exp.v(name)) = Map.lookup(ctx, name)
