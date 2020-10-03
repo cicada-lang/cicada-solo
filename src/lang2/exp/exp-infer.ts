@@ -29,25 +29,12 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       Exp.check(ctx, exp.cdr_t, Value.type)
       return Value.type
     } else if (exp.kind === "Exp.ap") {
-      // ctx |- target => pi(name, arg_t, ret_t)
-      // ctx |- arg <= arg_t
-      // ------------------------
-      // ctx |- ap(target, arg) => ret_t[arg/name]
-      // NOTE the language of inference rule does not use closure,
-      //   while we can also use closure:
-      // ctx |- target => pi(arg_t, closure)
-      // ctx |- arg <= arg_t
-      // ------------------------
-      // ctx |- ap(target, arg) => closure(arg)
       const target_t = Exp.infer(ctx, exp.target)
       const pi = Value.is_pi(ctx, target_t)
       Exp.check(ctx, exp.arg, pi.arg_t)
       const arg = Exp.evaluate(Ctx.to_env(ctx), exp.arg)
       return Closure.apply(pi.ret_t_cl, arg)
     } else if (exp.kind === "Exp.car") {
-      // ctx |- target => sigma(name, car_t, cdr_t)
-      // ------------------------
-      // ctx |- car(target) => car_t
       const target_t = Exp.infer(ctx, exp.target)
       const sigma = Value.is_sigma(ctx, target_t)
       return sigma.car_t
