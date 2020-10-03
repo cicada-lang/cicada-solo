@@ -25,7 +25,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       }
       case "Exp.suite": {
         for (const def of exp.defs) {
-          env = Env.extend(Env.clone(env), def.name, evaluate(env, def.exp))
+          env = Env.update(Env.clone(env), def.name, evaluate(env, def.exp))
         }
         return evaluate(env, exp.ret)
       }

@@ -3,7 +3,7 @@ import * as Value from "../value"
 
 // NOTE side effect API,
 //   one needs to clone the env as needed.
-export function extend(
+export function update(
   env: Env.Env,
   name: string,
   value: Value.Value

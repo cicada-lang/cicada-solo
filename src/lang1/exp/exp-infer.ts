@@ -49,7 +49,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       const { defs, ret } = exp
       ctx = Ctx.clone(ctx)
       for (const def of defs) {
-        Ctx.extend(ctx, def.name, Exp.infer(ctx, def.exp))
+        Ctx.update(ctx, def.name, Exp.infer(ctx, def.exp))
       }
       return Exp.infer(ctx, ret)
     } else if (exp.kind === "Exp.rec") {

@@ -12,7 +12,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       // ctx |- fn(x, e) <= arrow(a, b)
       if (t.kind === "Ty.arrow") {
         ctx = Ctx.clone(ctx)
-        Ctx.extend(ctx, exp.name, t.arg_t)
+        Ctx.update(ctx, exp.name, t.arg_t)
         Exp.check(ctx, exp.ret, t.ret_t)
         return
       } else {
