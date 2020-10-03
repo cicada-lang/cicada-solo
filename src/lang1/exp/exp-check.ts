@@ -53,6 +53,8 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       Exp.check(ctx, ret, t)
     } else {
       const u = Exp.infer(ctx, exp)
+      // NOTE Comparing equivalent between `Ty` is simple.
+      // - For dependent type, we will need to use `Value.convert`.
       if (ut.equal(t, u)) {
       } else {
         throw new Trace.Trace(

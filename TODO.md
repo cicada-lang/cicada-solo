@@ -3,11 +3,6 @@
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
-- [lang0] add syntax for `Exp.let` -- along with `Exp.suite`.
-- [lang1] add syntax for `Exp.let` -- along with `Exp.suite`.
-- [lang2] add syntax for `Exp.let` -- along with `Exp.suite`.
-
-- [lang1] [draft] exp-check
 - [lang1] [draft] exp-evaluate
 - [lang1] [draft] check
 

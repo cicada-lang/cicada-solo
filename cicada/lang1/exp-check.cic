@@ -22,6 +22,24 @@ Exp.check(ctx, Exp.let(name, exp, ret), t) = {
   Exp.check(Map.extend(ctx, name, exp_t), ret, t)
 }
 
+Exp.check(ctx, Exp.suite(List.null, ret), t) =
+  Exp.check(ctx, ret, t)
+
+Exp.check(ctx, Exp.suite(List.cons({ name, exp }, defs), ret), t) = {
+  Exp.infer(ctx, exp) >>> exp_t
+  Exp.check(Map.extend(ctx, name, exp_t), Exp.suite(defs, ret), t)
+}
+
+Exp.check(ctx, Exp.zero, Ty.nat) = Trivial.sole
+
+Exp.check(ctx, Exp.add1(prev), Ty.nat) =
+  Exp.check(ctx, prev, Ty.nat)
+
+Exp.check(ctx, exp, t) = {
+  Exp.infer(ctx, exp) >>> u
+  Ty.equal(t, u)
+}
+
 // -- INFER VARIABLE AND ELIMINATORS --
 
 Exp.infer(Map(String, Ty), Exp): Ty
@@ -36,4 +54,16 @@ Exp.infer(ctx, Exp.ap(target, arg)) = {
   Exp.infer(ctx, target) >>> Ty.arrow(arg_t, ret_t)
   Exp.check(ctx, arg, arg_t)
   ret_t
+}
+
+Exp.infer(ctx, Exp.rec(t, target, base, step)) = {
+  Exp.infer(ctx, target, Ty.nat)
+  Exp.infer(ctx, base, t)
+  Exp.infer(ctx, step, Ty.arrow(Ty.nat, Ty.arrow(t, t)))
+  t
+}
+
+Exp.infer(ctx, Exp.the(t, exp)) = {
+  Exp.check(ctx, exp, t)
+  t
 }

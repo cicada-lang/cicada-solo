@@ -36,18 +36,12 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       return Exp.infer(ctx, ret)
     } else if (exp.kind === "Exp.rec") {
       const { t, target, base, step } = exp
-      const target_t = Exp.infer(ctx, target)
-      if (target_t.kind === "Ty.nat") {
-        Exp.check(ctx, base, t)
-        Exp.check(ctx, step, Ty.arrow(Ty.nat, Ty.arrow(t, t)))
-      } else {
-        throw new Trace.Trace(
-          ut.aline(`
-            |I am expecting target_t to be Ty.nat,
-            |but it is ${Ty.repr(target_t)}.
-            |`)
-        )
-      }
+      // NOTE target should always be infered,
+      // but it is simple to just check it here,
+      // because we already know it should be `Ty.nat`.
+      Exp.check(ctx, target, Ty.nat)
+      Exp.check(ctx, base, t)
+      Exp.check(ctx, step, Ty.arrow(Ty.nat, Ty.arrow(t, t)))
       return t
     } else if (exp.kind === "Exp.the") {
       const the = exp

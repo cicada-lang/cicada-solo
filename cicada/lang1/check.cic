@@ -14,7 +14,6 @@
   Check(ctx, target, Ty.arrow(arg_t, ret_t))
   Check(ctx, arg, arg_t)
 
-
   // We can use Exp.let instead of Exp.suite,
   // compile Exp.suite to Exp.let before check.
 
@@ -38,7 +37,6 @@
   -------------------------------------------------- suite_cons
   Check(Map.extend(ctx, name, exp_t), Exp.suite(defs, ret), t)
   Check(ctx, exp, exp_t)
-
 
   Check(ctx, Exp.zero, Ty.nat)
   ---------------------------- zero
