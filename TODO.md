@@ -10,7 +10,6 @@
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
-- [lang1] `Ctx.update` and `Env.update`
 - [lang2] `Ctx.update` and `Env.update`
 
 - [lang1] draft check
