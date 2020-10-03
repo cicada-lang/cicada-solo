@@ -45,13 +45,13 @@ export const fn = (ret_cl: Closure.Closure): fn => ({
 export interface sigma {
   kind: "Value.sigma"
   car_t: Value
-  closure: Closure.Closure
+  cdr_t_cl: Closure.Closure
 }
 
-export const sigma = (car_t: Value, closure: Closure.Closure): sigma => ({
+export const sigma = (car_t: Value, cdr_t_cl: Closure.Closure): sigma => ({
   kind: "Value.sigma",
   car_t,
-  closure,
+  cdr_t_cl,
 })
 
 interface cons {

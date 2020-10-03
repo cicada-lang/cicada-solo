@@ -63,7 +63,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       const sigma = Value.is_sigma(ctx, target_t)
       const target = Exp.evaluate(Ctx.to_env(ctx), exp.target)
       const car = Exp.do_car(target)
-      return Closure.apply(sigma.closure, car)
+      return Closure.apply(sigma.cdr_t_cl, car)
     } else if (exp.kind === "Exp.nat") {
       return Value.type
     } else if (exp.kind === "Exp.zero") {

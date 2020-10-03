@@ -26,7 +26,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       // ctx |- cons(car, cdr) <= (x: car_t) * cdr_t
       const sigma = Value.is_sigma(ctx, t)
       const car = Exp.evaluate(Ctx.to_env(ctx), exp.car)
-      const cdr_t = Closure.apply(sigma.closure, car)
+      const cdr_t = Closure.apply(sigma.cdr_t_cl, car)
       Exp.check(ctx, exp.car, sigma.car_t)
       Exp.check(ctx, exp.cdr, cdr_t)
     } else if (exp.kind === "Exp.same") {

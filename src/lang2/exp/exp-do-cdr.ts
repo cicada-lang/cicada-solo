@@ -10,7 +10,7 @@ export function do_cdr(target: Value.Value): Value.Value {
   } else if (target.kind === "Value.reflection") {
     if (target.t.kind === "Value.sigma") {
       return Value.reflection(
-        Closure.apply(target.t.closure, Exp.do_car(target)),
+        Closure.apply(target.t.cdr_t_cl, Exp.do_car(target)),
         Neutral.cdr(target.neutral)
       )
     } else {

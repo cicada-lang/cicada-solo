@@ -3,8 +3,6 @@
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
-- `cdr_t_cl` instead of `closure`
-
 - [lang2] [draft] exp-infer
 
 - [lang2] [draft] exp-check
