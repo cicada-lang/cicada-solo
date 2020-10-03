@@ -7,7 +7,7 @@ import * as Trace from "../../trace"
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   if (target.kind === "Value.fn") {
-    return Closure.apply(target.closure, arg)
+    return Closure.apply(target.ret_cl, arg)
   } else if (target.kind === "Value.reflection") {
     if (target.t.kind === "Value.pi") {
       return Value.reflection(

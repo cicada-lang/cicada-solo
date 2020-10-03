@@ -4,7 +4,6 @@
 > 为 cicada-structural-typing 做准备。
 
 - `cdr_t_cl` instead of `closure`
-- `ret_t` instead of `closure`
 
 - [lang2] [draft] exp-infer
 

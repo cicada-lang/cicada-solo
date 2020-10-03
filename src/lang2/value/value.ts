@@ -34,12 +34,12 @@ export const pi = (arg_t: Value, ret_t_cl: Closure.Closure): pi => ({
 
 interface fn {
   kind: "Value.fn"
-  closure: Closure.Closure
+  ret_cl: Closure.Closure
 }
 
-export const fn = (closure: Closure.Closure): fn => ({
+export const fn = (ret_cl: Closure.Closure): fn => ({
   kind: "Value.fn",
-  closure,
+  ret_cl,
 })
 
 export interface sigma {
