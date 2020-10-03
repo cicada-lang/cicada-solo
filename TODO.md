@@ -11,11 +11,14 @@
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
+- [lang1] [draft] exp-check
+- [lang1] [draft] exp-evaluate
 - [lang1] [draft] check
-- [lang1] [draft] evaluate
 
-- [lang2] [draft] evaluate
-- [lang2] [draft] check car and cdr
+- [lang2] [draft] exp-check
+- [lang2] [draft] exp-evaluate
+- [lang2] [draft] check -- for car and cdr
+
 - [lang2] [draft] implement `Pair` and `Arrow`
 
 - [lang2] implement `Pair` and `Arrow` directly
