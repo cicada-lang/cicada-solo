@@ -7,7 +7,7 @@ A nascent programming language as formal deduction system for the foundations of
 **partech**: Parsing Techniques, with DSL for CFG and general CFG parsers.
 - CFG: https://en.wikipedia.org/wiki/Context-free_grammar
 - Earley parser: https://en.wikipedia.org/wiki/Earley_parser
-- ixml: https://homepages.cwi.nl/~steven/ixml
+- IXML: https://homepages.cwi.nl/~steven/ixml
 
 **lang0**: Untyped lambda calculus.
 - https://en.wikipedia.org/wiki/Lambda_calculus
@@ -17,8 +17,8 @@ A nascent programming language as formal deduction system for the foundations of
 - System T: https://en.wikipedia.org/wiki/Dialectica_interpretation
 
 **lang2**: Tartlet, pie and "The Little typer".
-- racket: https://davidchristiansen.dk/tutorials/nbe
-- haskell: https://davidchristiansen.dk/tutorials/implementing-types-hs.pdf
+- Racket implementation: https://davidchristiansen.dk/tutorials/nbe
+- Haskell implementation: https://davidchristiansen.dk/tutorials/implementing-types-hs.pdf
 
 ## References
 
