@@ -17,6 +17,9 @@
   // We can use Exp.let instead of Exp.suite,
   // compile Exp.suite to Exp.let before check.
 
+  // Note that the exp_t in the first argument type,
+  // is not given by the return type.
+
   Check(ctx, Exp.let(name, exp, ret), t)
   --------------------------------------- let
   Check(ctx, exp, exp_t)
