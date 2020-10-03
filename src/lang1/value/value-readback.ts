@@ -1,4 +1,3 @@
-import { freshen } from "./freshen"
 import * as Ty from "../ty"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -22,7 +21,7 @@ export function readback(
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
-    const name = freshen(used, value_arg_name(value))
+    const name = ut.freshen_name(used, value_arg_name(value))
     const variable = Value.reflection(t.arg_t, Neutral.v(name))
     const ret = Exp.do_ap(value, variable)
     return Exp.fn(name, Value.readback(new Set([...used, name]), t.ret_t, ret))

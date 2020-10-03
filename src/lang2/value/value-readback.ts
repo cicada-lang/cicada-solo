@@ -4,7 +4,6 @@ import * as Neutral from "../neutral"
 import * as Ty from "../ty"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
-import { freshen } from "./freshen"
 import * as ut from "../../ut"
 
 export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
@@ -16,7 +15,7 @@ export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
-    const fresh_name = freshen(new Set(ctx.keys()), t.closure.name)
+    const fresh_name = ut.freshen_name(new Set(ctx.keys()), t.closure.name)
     const variable = Value.reflection(t.arg_t, Neutral.v(fresh_name))
     return Exp.fn(
       fresh_name,
@@ -67,7 +66,7 @@ export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
       Value.readback(ctx, value.t, value.to)
     )
   } else if (t.kind === "Value.type" && value.kind === "Value.sigma") {
-    const fresh_name = freshen(new Set(ctx.keys()), value.closure.name)
+    const fresh_name = ut.freshen_name(new Set(ctx.keys()), value.closure.name)
     const variable = Value.reflection(value.car_t, Neutral.v(fresh_name))
     const car_t = Value.readback(ctx, Value.type, value.car_t)
     const cdr_t = Value.readback(
@@ -77,7 +76,7 @@ export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
     )
     return Exp.sigma(fresh_name, car_t, cdr_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.pi") {
-    const fresh_name = freshen(new Set(ctx.keys()), value.closure.name)
+    const fresh_name = ut.freshen_name(new Set(ctx.keys()), value.closure.name)
     const variable = Value.reflection(value.arg_t, Neutral.v(fresh_name))
     const arg_t = Value.readback(ctx, Value.type, value.arg_t)
     const ret_t = Value.readback(
