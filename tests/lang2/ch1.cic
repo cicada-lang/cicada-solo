@@ -1,37 +1,71 @@
 // 1. The More Things Change, the More They Stay the Same
 
 {
-  _ = "ratatouille": String
-  _ = cons("ratatouille", "baguette"): Pair(String, String)
-  _ = same: Equal(String, "ratatouille", "ratatouille")
-  _ = same: Equal(
-    Pair(String, String),
+  _ : String
+  _ = "ratatouille"
+
+  _ : Pair(String, String)
+  _ = cons("ratatouille", "baguette")
+
+  _ : Equal(String, "ratatouille", "ratatouille")
+  _ = same
+
+  _ : Equal(Pair(String, String),
     cons("ratatouille", "baguette"),
     cons("ratatouille", "baguette"))
+  _ = same
+
+
+  _ : String
   _ = car(cons("ratatouille", "baguette"): Pair(String, String))
-  _ = same: Equal(
-    String,
+
+  _ : Equal(String,
     "ratatouille",
     car(cons("ratatouille", "baguette"): Pair(String, String)))
-  _ = Pair(String, String): Type
-  _ = String: Type
-  _ = Type: Type
-  _ = same: Equal(Type, String, String)
+  _ = same
+
+  _ : Type
+  _ = Pair(String, String)
+
+  _ : Type
+  _ = String
+
+  _ : Type
+  _ = Type
+
+  _ : Equal(Type, String, String)
+  _ = same
+
+  _ : Type
   _ = Pair(
     car(cons(String, "olive"): Pair(Type, String)),
-    cdr(cons("oil", String): Pair(String, Type))): Type
-  _ = cons(
-    cdr(cons(String, "olive"): Pair(Type, String)),
-    car(cons("oil", String): Pair(String, Type))
-  ): Pair(
+    cdr(cons("oil", String): Pair(String, Type)))
+
+  _ : Pair(
     car(cons(String, "olive"): Pair(Type, String)),
     cdr(cons("oil", String): Pair(String, Type)))
-  _ = 172: Nat
-  _ = 0: Nat
-  _ = zero: Nat
-  _ = same: Equal(Nat, 0, zero)
-  _ = same: Equal(Nat, zero, 0)
+  _ = cons(
+    cdr(cons(String, "olive"): Pair(Type, String)),
+    car(cons("oil", String): Pair(String, Type)))
+
+  _ : Nat
+  _ = 172
+
+  _ : Nat
+  _ = 0
+
+  _ : Nat
+  _ = zero
+
+  _ : Equal(Nat, 0, zero)
+  _ = same
+
+  _ : Equal(Nat, zero, 0)
+  _ = same
+
   one = add1(zero)
+
   two = add1(one)
+
   two
 }

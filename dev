@@ -7,7 +7,16 @@ const fs = require("fs")
 
 let commands = {}
 
-commands.t = () => {
+commands.t = async () => {
+  await commands.test_lib()
+  await commands.test_impression()
+  await commands.test_lang0()
+  await commands.test_lang1()
+  await commands.test_lang2()
+  await commands.test_partech()
+}
+
+commands.f = async () => {
   commands.test_lib()
   commands.test_impression()
   commands.test_lang0()
@@ -16,12 +25,12 @@ commands.t = () => {
   commands.test_partech()
 }
 
-commands.test_lib = () => {
-  test("node $file", { file: "lib/**/*.test.js" }, expect.ok)
+commands.test_lib = async () => {
+  await test("node $file", { file: "lib/**/*.test.js" }, expect.ok)
 }
 
-commands.test_impression = () => {
-  test(
+commands.test_impression = async () => {
+  await test(
     "node $file",
     { file: "lib/**/*.impression.js" },
     snapshot.out(({ file }) =>
@@ -30,53 +39,55 @@ commands.test_impression = () => {
   )
 }
 
-commands.test_lang0 = () => {
-  test(
+commands.test_lang0 = async () => {
+  await test(
     "./bin/lang0.js $file",
     { file: "tests/lang0/**.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
 }
 
-commands.test_lang1 = () => {
-  test(
+commands.test_lang1 = async () => {
+  await test(
     "./bin/lang1.js $file",
     { file: "tests/lang1/**.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
-  test(
+
+  await test(
     "./bin/lang1.js $file",
     { file: "tests/lang1-error/**.cic" },
     snapshot.err(({ file }) => file + ".err")
   )
 }
 
-commands.test_lang2 = () => {
-  test(
+commands.test_lang2 = async () => {
+  await test(
     "./bin/lang2.js $file",
     { file: "tests/lang2/**.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
-  test(
+
+  await test(
     "./bin/lang2.js $file",
     { file: "tests/lang2-error/**.cic" },
     snapshot.err(({ file }) => file + ".err")
   )
 }
 
-commands.test_partech = () => {
-  commands.test_partech_lex()
-  commands.test_partech_parse()
+commands.test_partech = async () => {
+  await commands.test_partech_lex()
+  await commands.test_partech_parse()
 }
 
-commands.test_partech_lex = () => {
-  test(
+commands.test_partech_lex = async () => {
+  await test(
     "./bin/partech.js lex $file --table $file",
     { file: "tests/tables/example.table.yaml" },
     snapshot.out((_) => "tests/tables/example.tokens.json")
   )
 
-  test(
+  await test(
     "./bin/partech.js lex $file",
     { file: "tests/tables/example.table.yaml" },
     snapshot.out((_) => "tests/tables/default.tokens.json")
@@ -95,12 +106,14 @@ commands.test_partech_parse = async () => {
     if (dirent.isDirectory()) {
       const name = dirent.name
       const grammar = path.resolve(base, name + ".grammar.yaml")
-      test(
+
+      await test(
         `./bin/partech.js parse $file --grammar ${grammar}`,
         { file: `${base}/${name}/**.ok` },
         snapshot.out(({ file }) => file + ".tree")
       )
-      test(
+
+      await test(
         `./bin/partech.js parse $file --grammar ${grammar} --nocolor`,
         { file: `${base}/${name}/**.oh` },
         snapshot.err(({ file }) => file + ".error")

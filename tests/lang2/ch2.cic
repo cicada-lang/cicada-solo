@@ -1,12 +1,26 @@
 // 2. Doin' What Comes Naturally
 
 {
-  flavored_lentils = (flavor) => cons(flavor, "lentils"): (String) -> Pair(String, String)
-  garlic_flavored_lentils = flavored_lentils("garlic"): Pair(String, String)
-  id = (x) => x : (String) -> String
-  T = Pair(String, (String) -> String) : Type
-  id_in_pair = (x) => cons(x, (x) => x) : (x: String) -> T
-  _ = id_in_pair("x"): T
-  _ = same: Equal(T, id_in_pair("x"), cons("x", (y) => y))
+  flavored_lentils : (String) -> Pair(String, String)
+  flavored_lentils = (flavor) => cons(flavor, "lentils")
+
+  garlic_flavored_lentils : Pair(String, String)
+  garlic_flavored_lentils = flavored_lentils("garlic")
+
+  id : (String) -> String
+  id = (x) => x
+
+  T : Type
+  T = Pair(String, (String) -> String)
+
+  id_in_pair : (x: String) -> T
+  id_in_pair = (x) => cons(x, (x) => x)
+
+  _ : T
+  _ = id_in_pair("x")
+
+  _ : Equal(T, id_in_pair("x"), cons("x", (y) => y))
+  _ = same
+
   _
 }

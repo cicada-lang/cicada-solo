@@ -131,6 +131,14 @@ const exp = {
 
 const def = {
   "def:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
+  "def:claim": [
+    { claim: "identifier" },
+    '":"',
+    { t: "exp" },
+    { define: "identifier" },
+    '"="',
+    { exp: "exp" },
+  ],
 }
 
 export const grammars = {

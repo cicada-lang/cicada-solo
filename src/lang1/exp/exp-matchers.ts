@@ -59,17 +59,17 @@ function def_matcher(tree: pt.Tree.Tree): { name: string; exp: Exp.Exp } {
         exp: exp_matcher(exp),
       }
     },
-    "def:claim": ({ name_to_claim, t, name_to_define, exp }, { span }) => {
-      if (pt.Tree.str(name_to_claim) !== pt.Tree.str(name_to_define)) {
+    "def:claim": ({ claim, t, define, exp }, { span }) => {
+      if (pt.Tree.str(claim) !== pt.Tree.str(define)) {
         throw new pt.ParsingError(
           "Name mismatch.\n" +
-            `- name to claim  : ${pt.Tree.str(name_to_claim)}\n` +
-            `- name to define : ${pt.Tree.str(name_to_define)}\n`,
+            `- name to claim  : ${pt.Tree.str(claim)}\n` +
+            `- name to define : ${pt.Tree.str(define)}\n`,
           { span }
         )
       }
 
-      const name = name_to_claim
+      const name = claim
       return {
         name: pt.Tree.str(name),
         exp: Exp.the(ty_matcher(t), exp_matcher(exp)),

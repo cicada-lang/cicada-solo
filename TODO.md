@@ -1,6 +1,4 @@
-# re-design the syntax
-
-- [lang2] two part `claim_and_define` syntax.
+- good error report in span's context
 
 # TLT
 
