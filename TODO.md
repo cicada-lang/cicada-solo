@@ -1,7 +1,8 @@
+- [lang*] top level `defs` -- instead one exp.
+
 # TLT
 
-> 强化对类型系统的理解与实现技术，
-> 为 cicada-structural-typing 做准备。
+> 强化对类型系统的理解与实现技术，为 cicada-structural-typing 做准备。
 
 - [TLT] 2. Doin' What Comes Naturally
 - [TLT] 3. Eliminate All Natural Numbers!
