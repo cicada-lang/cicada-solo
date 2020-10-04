@@ -3,8 +3,6 @@
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
-- [lang2] `pair` & `arrow`
-
 - [TLT] 2. Doin' What Comes Naturally
 - [TLT] 3. Eliminate All Natural Numbers!
 - [TLT] 4. Easy as Pie

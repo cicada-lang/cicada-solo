@@ -13,10 +13,22 @@ Exp.infer(ctx, Exp.pi(name, arg_t, ret_t)) = {
   Value.type
 }
 
+Exp.infer(ctx, Exp.arrow(name, arg_t, ret_t)) = {
+  Exp.check(ctx, arg_t, Value.type)
+  Exp.check(ctx, ret_t, Value.type)
+  Value.type
+}
+
 Exp.infer(ctx, Exp.sigma(name, car_t, cdr_t)) = {
   Exp.check(ctx, car_t, Value.type)
   car_t_value = Exp.evaluate(Ctx.to_env(ctx), car_t)
   Exp.check(Ctx.extend(ctx, name, car_t_value), cdr_t, Value.type)
+  Value.type
+}
+
+Exp.infer(ctx, Exp.pair(name, car_t, cdr_t)) = {
+  Exp.check(ctx, car_t, Value.type)
+  Exp.check(ctx, cdr_t, Value.type)
   Value.type
 }
 
