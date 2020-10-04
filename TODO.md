@@ -5,8 +5,6 @@
 
 - [lang2] implement `Pair` and `Arrow` directly
 
-- [lang2] [draft] check -- absurd
-
 - [lang3] [draft] exp, value, neutral & normal
 - [lang3] [draft] check
 

@@ -107,12 +107,14 @@
     t = Exp.do_ap(motive_value, to)
   }
 
-  // absurd: Exp
-  // absurd_ind(target: Exp, motive: Exp): Exp
+  Check(ctx, Exp.absurd, Value.type)
+  ---------------------------------- absurd
 
-      // ctx |- target => absurd
-      // ctx |- motive <= type
-      // ----------------------------
-      // ctx |- absurd.ind(target, motive): motive
-
+  Check(ctx, Exp.absurd_ind(target, motive), motive_value)
+  -------------------------------------------------- absurd_ind
+  Check(ctx, target, Value.absurd)
+  Check(ctx, motive, Value.type)
+  @where {
+    motive_value = Exp.evaluate(ctx, motive)
+  }
 }
