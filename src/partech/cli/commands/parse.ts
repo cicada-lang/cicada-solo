@@ -10,6 +10,8 @@ import strip_ansi from "strip-ansi"
 
 export const command = "parse <input>"
 
+export const aliases = ["$0"]
+
 export const description = "Parse text to tree by grammar"
 
 export const builder = {
