@@ -19,8 +19,9 @@
   _ : T
   _ = id_in_pair("x")
 
-  // The (x) => x in the pair should not be effected by the substitution of outer x,
-  // and (x) => x is equivalent to (y) => y,
+  // The x occur in `(x) => x` should not be
+  // effected by the substitution of outer `x`,
+  // and `(x) => x` is equivalent to `(y) => y`,
 
   _ : Equal(T, id_in_pair("x"), cons("x", (y) => y))
   _ = same
