@@ -13,13 +13,22 @@
     arg_t_value = Exp.evaluate(Ctx.to_env(ctx), arg_t)
   }
 
+  Check(ctx, Exp.arrow(arg_t, ret_t), Value.type)
+  ----------------------------------------------- arrow
+  Check(ctx, arg_t, Value.type)
+  Check(ctx, ret_t, Value.type)
+
   Check(ctx, Exp.fn(name, ret), Value.pi(arg_t, ret_t_cl))
-  ------------------------------------------------------- fn
+  ------------------------------------------------------- fn_pi
   Check(Map.extend(ctx, name, arg_t), ret, ret_t)
   @where {
     arg = Value.reflection(arg_t, Neutral.v(name))
     ret_t = Closure.apply(ret_t_cl, arg)
   }
+
+  Check(ctx, Exp.fn(name, ret), Value.arrow(arg_t, ret_t))
+  ------------------------------------------------------- fn_arrow
+  Check(Map.extend(ctx, name, arg_t), ret, ret_t)
 
   Check(ctx, Exp.ap(target, arg), ret_t)
   -------------------------------------- ap
@@ -38,14 +47,24 @@
     car_t_value = Exp.evaluate(Ctx.to_env(ctx), car_t)
   }
 
+  Check(ctx, Exp.pair(car_t, cdr_t), Value.type)
+  -------------------------------------------------- pair
+  Check(ctx, car_t, Value.type)
+  Check(ctx, cdr_t, Value.type)
+
   Check(ctx, Exp.cons(car, cdr), Value.sigma(car_t, cdr_t_cl))
-  ------------------------------------------------------- cons
+  ------------------------------------------------------- cons_sigma
   Check(ctx, car, car_t)
   Check(ctx, cdr, cdr_t)
   @where {
     car_value = Exp.evaluate(Ctx.to_env(ctx), car)
     cdr_t = Closure.apply(cdr_t_cl, car_value)
   }
+
+  Check(ctx, Exp.cons(car, cdr), Value.pair(car_t, cdr_t))
+  ------------------------------------------------------- cons_pair
+  Check(ctx, car, car_t)
+  Check(ctx, cdr, cdr_t)
 
   Check(ctx, Exp.car(target), car_t)
   --------------------------------- car

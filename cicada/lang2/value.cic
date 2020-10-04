@@ -2,9 +2,11 @@
 
 @datatype Value {
   pi(arg_t: Value, ret_t_cl: Closure): Value
+  arrow(arg_t: Value, ret_t: Value): Value
   fn(ret_cl: Closure): Value
 
   sigma(car_t: Value, cdr_t_cl: Closure): Value
+  pair(car_t: Value, cdr_t: Value): Value
   cons(car: Value, cdr: Value): Value
 
   nat: Value

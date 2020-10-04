@@ -3,10 +3,7 @@
 > 强化对类型系统的理解与实现技术，
 > 为 cicada-structural-typing 做准备。
 
-- [lang2] implement `Pair` and `Arrow` directly
-
-- [lang3] [draft] exp, value, neutral & normal
-- [lang3] [draft] check
+- [lang2] `pair` & `arrow`
 
 - [TLT] 2. Doin' What Comes Naturally
 - [TLT] 3. Eliminate All Natural Numbers!
@@ -31,6 +28,9 @@
 
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
+
+- [lang3] [draft] exp, value, neutral & normal
+- [lang3] [draft] check
 
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
 - 尝试使用 js 的 record (object) 与 Array 语法（包括 pattern matching）。

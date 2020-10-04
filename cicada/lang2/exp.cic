@@ -4,10 +4,12 @@
   v(name: String): Exp
 
   pi(name: String, arg_t: Exp, ret_t: Exp): Exp
+  arrow(arg_t: Exp, ret_t: Exp): Exp
   fn(name: String, ret: Exp): Exp
   ap(target: Exp, arg: Exp): Exp
 
   sigma(name: String, car_t: Exp, cdr_t: Exp): Exp
+  pair(car_t: Exp, cdr_t: Exp): Exp
   cons(car: Exp, cdr: Exp): Exp
   car(target: Exp): Exp
   cdr(target: Exp): Exp
