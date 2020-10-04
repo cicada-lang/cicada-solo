@@ -1,12 +1,21 @@
 # re-design the syntax
 
-- always use `@` keywords.
+- [lang1] type annotation should not use `:` syntax.
+  - learn from scala and typescript
 
-- two part of a code block.
-  ``` cicada
-  f : A
-  f = a
-  ```
+- [lang2] type annotation should not use `:` syntax.
+
+- [lang1] two part `def` syntax.
+- [lang2] two part `def` syntax.
+
+- two part `def` syntax.
+
+  - example:
+
+    ``` cicada
+    f : A
+    f = a
+    ```
 
 # TLT
 

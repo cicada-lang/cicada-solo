@@ -2,3 +2,9 @@
   z = zero : Nat
   z
 }
+
+// {
+//   z : Nat
+//   z = zero
+//   z
+// }
