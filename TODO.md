@@ -1,8 +1,6 @@
-- [lang*] `pt.ParsingError`
-- [lang1] `pt.ParsingError`
-- [lang0] `pt.ParsingError`
+- [lang*] improve cli interface
 
-- [lang*] improve cli interface.
+  - use `commands` dir with default command
 
 # TLT
 

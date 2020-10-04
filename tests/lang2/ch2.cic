@@ -20,7 +20,7 @@
   _ = id_in_pair("x")
 
   _ : Equal(T, id_in_pair("x"), cons("x", (y) => y))
-  _ = same
+  _1 = same
 
   _
 }
