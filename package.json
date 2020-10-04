@@ -1,6 +1,6 @@
 {
-  "name": "cicada",
-  "version": "0.0.4",
+  "name": "@xieyuheng/cicada",
+  "version": "0.0.1",
   "repository": "github:xieyuheng/cicada",
   "scripts": {
     "build": "npx tsc",
