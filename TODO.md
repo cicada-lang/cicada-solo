@@ -1,5 +1,3 @@
-- [lang*] improve cli interface -- use `commands` dir with default command
-
 # TLT
 
 > 强化对类型系统的理解与实现技术，

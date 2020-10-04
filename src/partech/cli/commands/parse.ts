@@ -44,9 +44,10 @@ export const handler = async (argv: Argv) => {
       ut.write_object(tree, argv.output)
     } catch (error) {
       if (error instanceof ParsingError) {
-        const message = argv.nocolor ? strip_ansi(error.message) : error.message
-        console.error(message)
-        console.error(Span.report(error.span, text))
+        let message = error.message
+        message += "\n"
+        message += Span.report(error.span, text)
+        console.error(argv.nocolor ? strip_ansi(message) : message)
         process.exit(1)
       } else {
         throw error
