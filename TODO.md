@@ -1,3 +1,13 @@
+# re-design the syntax
+
+- always use `@` keywords.
+
+- two part of a code block.
+  ``` cicada
+  f : A
+  f = a
+  ```
+
 # TLT
 
 > 强化对类型系统的理解与实现技术，
@@ -54,16 +64,6 @@
 - [test] try examples in peg paper in parser generator
 - [test] x in x test
   - S <- "x" S "x" | "x"
-
-# re-design the syntax
-
-- always use `@` keywords.
-
-- two part of a code block.
-  ``` cicada
-  @affirm f : A
-  @define f = a
-  ```
 
 # lang0 -- church-encoding
 

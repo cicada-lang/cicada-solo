@@ -1,1 +1,1 @@
-same: Equal((x2: String) * (x3: String) -> String, cons("x", (x3) => x3), cons("x", (x3) => x3))
+same: Equal((_: String) * (_1: String) -> String, cons("x", (_) => _), cons("x", (_) => _))

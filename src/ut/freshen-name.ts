@@ -1,8 +1,12 @@
 export function freshen_name(used: Set<string>, name: string): string {
   let counter = 1
-  const base = name
-  while (used.has(name)) {
-    name = `${base}_${counter}`
+  let new_name = name
+  while (true) {
+    if (used.has(new_name)) {
+      new_name = `${name}${counter}`
+      counter++
+    } else {
+      return new_name
+    }
   }
-  return name
 }
