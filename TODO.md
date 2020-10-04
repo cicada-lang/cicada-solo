@@ -1,6 +1,4 @@
-- [lang*] improve cli interface
-
-  - use `commands` dir with default command
+- [lang*] improve cli interface -- use `commands` dir with default command
 
 # TLT
 
