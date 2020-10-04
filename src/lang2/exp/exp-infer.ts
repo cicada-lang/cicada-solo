@@ -70,11 +70,6 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       Exp.check(ctx, exp.to, t)
       return Value.type
     } else if (exp.kind === "Exp.replace") {
-      // ctx |- target => equal(t, from, to)
-      // ctx |- motive <= (x: t) -> type
-      // ctx |- base <= motive(from)
-      // ----------------------
-      // ctx |- replace(target, motive, base) => motive(to)
       const target_t = Exp.infer(ctx, exp.target)
       const equal = Value.is_equal(ctx, target_t)
       const motive_t = Exp.evaluate(

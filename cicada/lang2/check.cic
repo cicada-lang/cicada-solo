@@ -83,14 +83,30 @@
     t = Exp.do_ap(motive_value, target_value)
   }
 
-  // equal(t: Exp, from: Exp, to: Exp): Exp
-  // same: Exp
-  // replace(target: Exp, motive: Exp, base: Exp): Exp
+  Check(ctx, Exp.equal(t, from, to), Value.type)
+  ---------------------------------------------- equal
+  Check(ctx, t, Value.type)
+  Check(ctx, from, t_value)
+  Check(ctx, to, t_value)
+  @where {
+    t_value = Exp.evaluate(Ctx.to_env(ctx), t)
+  }
 
-  // trivial: Exp
-  // sole: Exp
+  Check(ctx, same, Value.equal(t, from, to))
+  ------------------------------------------ same
+  Value.equivalent(ctx, t, from, to)
+
+  Check(ctx, Value.replace(target, motive, base), t)
+  -------------------------------------------------- replace
+  Check(ctx, target, Value.equal(t, from, to))
+  Check(ctx, motive, Value.arrow(t, Value.type))
+  Check(ctx, base, base_t)
+  @where {
+    motive_value = Exp.evaluate(Ctx.to_env(ctx), motive)
+    base_t = Exp.do_ap(motive_value, from)
+    t = Exp.do_ap(motive_value, to)
+  }
 
   // absurd: Exp
   // absurd_ind(target: Exp, motive: Exp): Exp
-
 }

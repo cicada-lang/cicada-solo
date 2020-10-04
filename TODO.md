@@ -5,7 +5,6 @@
 
 - [lang2] implement `Pair` and `Arrow` directly
 
-- [lang2] [draft] check -- equal
 - [lang2] [draft] check -- absurd
 
 - [lang2] no line comments about inference rules

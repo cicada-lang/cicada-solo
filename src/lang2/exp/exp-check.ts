@@ -15,19 +15,12 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       const ret_t = Closure.apply(pi.ret_t_cl, arg)
       Exp.check(Ctx.update(Ctx.clone(ctx), exp.name, pi.arg_t), exp.ret, ret_t)
     } else if (exp.kind === "Exp.cons") {
-      // ctx |- car <= car_t
-      // ctx |- cdr <= cdr_t[car/x]
-      // -------------------------
-      // ctx |- cons(car, cdr) <= (x: car_t) * cdr_t
       const sigma = Value.is_sigma(ctx, t)
       const car = Exp.evaluate(Ctx.to_env(ctx), exp.car)
       const cdr_t = Closure.apply(sigma.cdr_t_cl, car)
       Exp.check(ctx, exp.car, sigma.car_t)
       Exp.check(ctx, exp.cdr, cdr_t)
     } else if (exp.kind === "Exp.same") {
-      // ctx |- from == to : t
-      // ------------------------
-      // ctx |- same <= equal(t, from, to)
       const equal = Value.is_equal(ctx, t)
       if (!Value.convert(ctx, equal.t, equal.from, equal.to)) {
         throw new Trace.Trace(
@@ -53,10 +46,6 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       }
       Exp.check(ctx, ret, t)
     } else {
-      // ctx |- exp => u
-      // ctx |- t == u : type
-      // ----------------------
-      // ctx |- exp <= t
       const u = Exp.infer(ctx, exp)
       if (!Value.convert(ctx, Value.type, t, u)) {
         throw new Trace.Trace(
