@@ -22,10 +22,12 @@ function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
 
 function def_matcher(tree: pt.Tree.Tree): { name: string; exp: Exp.Exp } {
   return pt.Tree.matcher<{ name: string; exp: Exp.Exp }>({
-    "def:def": ({ name, exp }) => ({
-      name: pt.Tree.str(name),
-      exp: exp_matcher(exp),
-    }),
+    "def:def": ({ name, exp }) => {
+      return {
+        name: pt.Tree.str(name),
+        exp: exp_matcher(exp),
+      }
+    },
   })(tree)
 }
 

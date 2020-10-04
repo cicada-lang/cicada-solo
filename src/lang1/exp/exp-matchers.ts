@@ -53,10 +53,28 @@ function ty_matcher(tree: pt.Tree.Tree): Ty.Ty {
 
 function def_matcher(tree: pt.Tree.Tree): { name: string; exp: Exp.Exp } {
   return pt.Tree.matcher<{ name: string; exp: Exp.Exp }>({
-    "def:def": ({ name, exp }) => ({
-      name: pt.Tree.str(name),
-      exp: exp_matcher(exp),
-    }),
+    "def:def": ({ name, exp }) => {
+      return {
+        name: pt.Tree.str(name),
+        exp: exp_matcher(exp),
+      }
+    },
+    "def:claim": ({ name_to_claim, t, name_to_define, exp }, { span }) => {
+      if (pt.Tree.str(name_to_claim) !== pt.Tree.str(name_to_define)) {
+        throw new pt.ParsingError(
+          "Name mismatch.\n" +
+            `- name to claim  : ${pt.Tree.str(name_to_claim)}\n` +
+            `- name to define : ${pt.Tree.str(name_to_define)}\n`,
+          { span }
+        )
+      }
+
+      const name = name_to_claim
+      return {
+        name: pt.Tree.str(name),
+        exp: Exp.the(ty_matcher(t), exp_matcher(exp)),
+      }
+    },
   })(tree)
 }
 

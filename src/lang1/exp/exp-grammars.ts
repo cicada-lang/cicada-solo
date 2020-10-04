@@ -50,6 +50,14 @@ const ty = {
 
 const def = {
   "def:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
+  "def:claim": [
+    { name_to_claim: "identifier" },
+    '":"',
+    { t: "ty" },
+    { name_to_define: "identifier" },
+    '"="',
+    { exp: "exp" },
+  ]
 }
 
 export const grammars = {

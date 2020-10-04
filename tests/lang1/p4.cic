@@ -1,6 +1,13 @@
 {
-  one = add1(zero) : Nat
-  two = add1(one) : Nat
-  id = (x) => x : (Nat) -> Nat
+  one : Nat
+  one = add1(zero)
+
+  two : Nat
+  two = add1(one)
+
+  id : (Nat) -> Nat
+  id = (x) => x
+
   (_) => (_) => id(id(id(id(two))))
+
 } : (Nat) -> (Nat) -> Nat
