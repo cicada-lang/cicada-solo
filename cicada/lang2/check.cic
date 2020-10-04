@@ -109,4 +109,10 @@
 
   // absurd: Exp
   // absurd_ind(target: Exp, motive: Exp): Exp
+
+      // ctx |- target => absurd
+      // ctx |- motive <= type
+      // ----------------------------
+      // ctx |- absurd.ind(target, motive): motive
+
 }
