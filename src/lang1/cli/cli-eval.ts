@@ -15,6 +15,12 @@ export function run(file: string): void {
     const env = Env.init()
     console.log(`${Exp.repr(Exp.normalize(exp))}: ${Ty.repr(t)}`)
   } catch (error) {
-    Trace.maybe_report(error, Exp.repr)
+    if (error instanceof Trace.Trace) {
+      const trace = error
+      console.error(Trace.repr(trace, Exp.repr))
+      process.exit(1)
+    } else {
+      throw error
+    }
   }
 }

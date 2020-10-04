@@ -16,6 +16,12 @@ export function run(file: string): void {
     const t_repr = Exp.repr(Value.readback(ctx, Value.type, t))
     console.log(`${value_repr}: ${t_repr}`)
   } catch (error) {
-    Trace.maybe_report(error, Exp.repr)
+    if (error instanceof Trace.Trace) {
+      const trace = error
+      console.error(Trace.repr(trace, Exp.repr))
+      process.exit(1)
+    } else {
+      throw error
+    }
   }
 }

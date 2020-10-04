@@ -1,4 +1,8 @@
-- good error report in span's context
+- [lang*] `pt.ParsingError`
+- [lang1] `pt.ParsingError`
+- [lang0] `pt.ParsingError`
+
+- [lang*] improve cli interface.
 
 # TLT
 
