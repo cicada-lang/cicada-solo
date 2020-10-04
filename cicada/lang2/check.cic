@@ -58,4 +58,39 @@
     car = Value.reflection(car_t, Neutral.v(name))
     ret_t = Closure.apply(ret_t_cl, car)
   }
+
+  Check(ctx, Exp.nat, Value.type)
+  ------------------------------- nat
+
+  Check(ctx, Exp.zero, Value.nat)
+  ------------------------------- zero
+
+  Check(ctx, Exp.add1(prev), Value.nat)
+  ------------------------------------- prev
+  Check(ctx, prev, Value.nat)
+
+  Check(ctx, Exp.nat_ind(target, motive, base, step), t)
+  ------------------------------------------------------ nat_ind
+  Check(ctx, target, Value.nat)
+  Check(ctx, motive, Value.arrow(Value.nat, Value.type))
+  Check(ctx, base, base_t)
+  Check(ctx, step, step_t)
+  @where {
+    motive_value = Exp.evaluate(Ctx.to_env(ctx), motive)
+    base_t = Exp.do_ap(motive_value, Value.zero)
+    step_t = Exp.nat_ind_step_t(motive_value)
+    target_value = Exp.evaluate(Ctx.to_env(ctx), target)
+    t = Exp.do_ap(motive_value, target_value)
+  }
+
+  // equal(t: Exp, from: Exp, to: Exp): Exp
+  // same: Exp
+  // replace(target: Exp, motive: Exp, base: Exp): Exp
+
+  // trivial: Exp
+  // sole: Exp
+
+  // absurd: Exp
+  // absurd_ind(target: Exp, motive: Exp): Exp
+
 }

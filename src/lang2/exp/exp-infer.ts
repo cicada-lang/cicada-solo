@@ -52,8 +52,10 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       Exp.check(ctx, exp.prev, Value.nat)
       return Value.nat
     } else if (exp.kind === "Exp.nat_ind") {
-      const target_t = Exp.infer(ctx, exp.target)
-      Value.is_nat(ctx, target_t)
+      // NOTE We should always infer target,
+      // but we do a simple check for the simple nat.
+      Exp.check(ctx, exp.target, Value.nat)
+      // TODO should use `Value.arrow` instead of evaluate a `Value.pi`
       const motive_t = Exp.evaluate(Env.init(), Exp.pi("x", Exp.nat, Exp.type))
       Exp.check(ctx, exp.motive, motive_t)
       const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
@@ -96,8 +98,10 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       // ctx |- motive <= type
       // ----------------------------
       // ctx |- absurd.ind(target, motive): motive
-      const target_t = Exp.infer(ctx, exp.target)
-      const absurd = Value.is_absurd(ctx, target_t)
+
+      // NOTE We should always infer target,
+      // but we do a simple check for the simple absurd.
+      Exp.check(ctx, exp.target, Value.absurd)
       Exp.check(ctx, exp.motive, Value.type)
       const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
       return motive
