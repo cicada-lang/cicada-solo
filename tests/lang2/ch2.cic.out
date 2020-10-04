@@ -1,1 +1,1 @@
-same: Equal((_: String) * (_1: String) -> String, cons("x", (_) => _), cons("x", (_) => _))
+same: Equal((_: Nat) -> (_1: Nat) * Nat, (_) => cons(_, _), (_) => cons(_, _))

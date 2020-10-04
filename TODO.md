@@ -33,7 +33,6 @@
 
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
 - 尝试使用 js 的 record (object) 与 Array 语法（包括 pattern matching）。
-- 尝试作为一个 js 的扩展语言类似 ts。
 
 # partech -- parsing techniques
 

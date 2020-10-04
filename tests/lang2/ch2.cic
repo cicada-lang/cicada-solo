@@ -26,5 +26,8 @@
   _ : Equal(T, id_in_pair("x"), cons("x", (y) => y))
   _ = same
 
+  _ : Equal((Nat) -> Pair(Nat, Nat), (x) => cons(x, x), (y) => cons(y, y))
+  _ = same
+
   _
 }
