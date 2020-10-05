@@ -1,4 +1,3 @@
-- [lang1] `Stmt.top`
 - [lang1] `Exp.suite` use `stmts` instead of `defs`
 - [lang1] `@show`
 
