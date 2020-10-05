@@ -1,1 +1,1 @@
-cons(String, String): (_: Type) * Type
+cons(1, 2): (_: Nat) * Nat
