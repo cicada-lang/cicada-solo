@@ -18,9 +18,17 @@ const preserved = [
   "Type",
 ]
 
-const identifier = { $pattern: ["identifier", `^(?!(${preserved.join("|")}))`] }
+export const zero_or_more = pt.grammars.zero_or_more
 
-const exp = {
+export const one_or_more = pt.grammars.one_or_more
+
+export const $start = "exp"
+
+export const identifier = {
+  $pattern: ["identifier", `^(?!(${preserved.join("|")}))`],
+}
+
+export const exp = {
   "exp:var": [{ name: "identifier" }],
   "exp:pi": [
     '"("',
@@ -120,16 +128,15 @@ const exp = {
   "exp:str": ['"String"'],
   "exp:quote": [{ value: { $pattern: ["string"] } }],
   "exp:type": ['"Type"'],
-  "exp:suite": [
-    '"{"',
-    { stmts: { $ap: ["zero_or_more", "stmt"] } },
-    { ret: "exp" },
-    '"}"',
-  ],
+  "exp:suite": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
   "exp:the": [{ exp: "exp" }, '":"', { t: "exp" }],
 }
 
-const stmt = {
+export const stmts = {
+  "stmts:stmts": [{ stmts: { $ap: ["zero_or_more", "stmt"] } }],
+}
+
+export const stmt = {
   "stmt:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
   "stmt:claim": [
     { claim: "identifier" },
@@ -139,13 +146,4 @@ const stmt = {
     '"="',
     { exp: "exp" },
   ],
-}
-
-export const grammars = {
-  zero_or_more: pt.grammars.zero_or_more,
-  one_or_more: pt.grammars.one_or_more,
-  $start: "exp",
-  identifier,
-  exp,
-  stmt,
 }
