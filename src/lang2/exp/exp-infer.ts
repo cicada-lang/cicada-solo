@@ -14,9 +14,8 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       const t = Ctx.lookup(ctx, exp.name)
       if (t === undefined) {
         throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
-      } else {
-        return t
       }
+      return t
     } else if (exp.kind === "Exp.pi") {
       Exp.check(ctx, exp.arg_t, Value.type)
       const arg_t = Exp.evaluate(Ctx.to_env(ctx), exp.arg_t)

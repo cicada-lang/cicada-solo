@@ -1,8 +1,6 @@
 - [lang0] `Exp.suite` use `stmts` instead of `defs`
 - [lang0] `commands/eval` use `parse_stmts` -- instead of `parse_exp`
 
-- [lang2] improve `exp-infer` and `exp-evaluate` on `Exp.v`
-
 # TLT
 
 > 强化对类型系统的理解与实现技术，为 cicada-structural-typing 做准备。
