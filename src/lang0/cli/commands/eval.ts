@@ -1,4 +1,5 @@
 import * as Exp from "../../exp"
+import * as frontend from "../../frontend"
 import * as Trace from "../../../trace"
 import * as pt from "../../../partech"
 import fs from "fs"
@@ -22,7 +23,7 @@ export const handler = async (argv: Argv) => {
   const text = fs.readFileSync(argv.input, { encoding: "utf-8" })
 
   try {
-    const exp = Exp.parse(text)
+    const exp = frontend.parse_exp(text)
     console.log(Exp.repr(Exp.normalize(exp)))
   } catch (error) {
     if (error instanceof Trace.Trace) {
