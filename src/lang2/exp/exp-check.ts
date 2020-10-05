@@ -1,4 +1,5 @@
 import * as Exp from "../exp"
+import * as Stmt from "../stmt"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as Ty from "../ty"
@@ -40,9 +41,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       const { stmts, ret } = exp
       ctx = Ctx.clone(ctx)
       for (const stmt of stmts) {
-        const t = Exp.infer(ctx, stmt.exp)
-        const value = Exp.evaluate(Ctx.to_env(ctx), stmt.exp)
-        Ctx.update(ctx, stmt.name, t, value)
+        Stmt.declare(ctx, stmt)
       }
       Exp.check(ctx, ret, t)
     } else {

@@ -1,4 +1,5 @@
 import * as Exp from "../exp"
+import * as Stmt from "../stmt"
 import * as Value from "../value"
 import * as Ty from "../ty"
 import * as Closure from "../closure"
@@ -105,9 +106,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       const { stmts, ret } = exp
       ctx = Ctx.clone(ctx)
       for (const stmt of stmts) {
-        const t = Exp.infer(ctx, stmt.exp)
-        const value = Exp.evaluate(Ctx.to_env(ctx), stmt.exp)
-        Ctx.update(ctx, stmt.name, t, value)
+        Stmt.declare(ctx, stmt)
       }
       return Exp.infer(ctx, ret)
     } else if (exp.kind === "Exp.the") {

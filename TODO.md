@@ -1,6 +1,5 @@
-- [lang2] `Stmt.declare`
 - [lang2] top level syntax use `stmts` -- instead `exp`
-- [lang2] `@show` as special `Stmt`
+- [lang2] `>` as syntax for `Stmt.show`
 
 - [lang1] use `Stmt`
 - [lang0] use `Stmt`

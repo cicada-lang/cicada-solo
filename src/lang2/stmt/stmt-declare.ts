@@ -6,7 +6,12 @@ export function declare(ctx: Ctx.Ctx, stmt: Stmt.Stmt): void {
   switch (stmt.kind) {
     case "Stmt.def": {
       const { name, exp } = stmt
-      // Env.update(env, name, Exp.evaluate(env, exp))
+      Ctx.update(
+        ctx,
+        name,
+        Exp.infer(ctx, exp),
+        Exp.evaluate(Ctx.to_env(ctx), exp)
+      )
     }
   }
 }
