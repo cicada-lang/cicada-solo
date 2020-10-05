@@ -1,4 +1,3 @@
-- [lang1] `Exp.suite` use `stmts` instead of `defs`
 - [lang1] `commands/eval` use `parse_stmts` -- instead of `parse_exp`
 
 - [lang0] `Exp.suite` use `stmts` instead of `defs`
