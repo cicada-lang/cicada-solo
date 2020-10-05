@@ -1,4 +1,5 @@
 import * as Exp from "../exp"
+import * as Stmt from "../stmt"
 import * as pt from "../../partech"
 
 export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
@@ -12,23 +13,22 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
       return exp
     },
-    "exp:suite": ({ defs, ret }) =>
-      Exp.suite(
-        pt.matchers.zero_or_more_matcher(defs).map(def_matcher),
-        exp_matcher(ret)
-      ),
+    "exp:suite": ({ stmts, ret }) =>
+      Exp.suite(stmts_matcher(stmts), exp_matcher(ret)),
   })(tree)
 }
 
-export function def_matcher(
-  tree: pt.Tree.Tree
-): { name: string; exp: Exp.Exp } {
-  return pt.Tree.matcher<{ name: string; exp: Exp.Exp }>({
-    "def:def": ({ name, exp }) => {
-      return {
-        name: pt.Tree.str(name),
-        exp: exp_matcher(exp),
-      }
-    },
+export function stmts_matcher(tree: pt.Tree.Tree): Array<Stmt.Stmt> {
+  return pt.Tree.matcher<Array<Stmt.Stmt>>({
+    "stmts:stmts": ({ stmts }) =>
+      pt.matchers.zero_or_more_matcher(stmts).map(stmt_matcher),
+  })(tree)
+}
+
+export function stmt_matcher(tree: pt.Tree.Tree): Stmt.Stmt {
+  return pt.Tree.matcher<Stmt.Stmt>({
+    "stmt:def": ({ name, exp }) =>
+      Stmt.def(pt.Tree.str(name), exp_matcher(exp)),
+    "stmt:show": ({ exp }) => Stmt.show(exp_matcher(exp)),
   })(tree)
 }

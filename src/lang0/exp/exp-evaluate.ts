@@ -1,4 +1,5 @@
 import * as Exp from "../exp"
+import * as Stmt from "../stmt"
 import * as Env from "../env"
 import * as Value from "../value"
 import * as Trace from "../../trace"
@@ -20,8 +21,9 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return Exp.do_ap(evaluate(env, exp.target), evaluate(env, exp.arg))
       }
       case "Exp.suite": {
-        for (const def of exp.defs) {
-          env = Env.update(Env.clone(env), def.name, evaluate(env, def.exp))
+        env = Env.clone(env)
+        for (const stmt of exp.stmts) {
+          Stmt.execute(env, stmt)
         }
         return evaluate(env, exp.ret)
       }

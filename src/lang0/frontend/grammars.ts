@@ -22,14 +22,14 @@ export const exp = {
     { target: "identifier" },
     { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
   ],
-  "exp:suite": [
-    '"{"',
-    { defs: { $ap: ["zero_or_more", "def"] } },
-    { ret: "exp" },
-    '"}"',
-  ],
+  "exp:suite": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
 }
 
-export const def = {
-  "def:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
+export const stmts = {
+  "stmts:stmts": [{ stmts: { $ap: ["zero_or_more", "stmt"] } }],
+}
+
+export const stmt = {
+  "stmt:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
+  "stmt:show": ['"@"', '"show"', { exp: "exp" }],
 }
