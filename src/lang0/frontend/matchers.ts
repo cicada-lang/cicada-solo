@@ -20,7 +20,9 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   })(tree)
 }
 
-export function def_matcher(tree: pt.Tree.Tree): { name: string; exp: Exp.Exp } {
+export function def_matcher(
+  tree: pt.Tree.Tree
+): { name: string; exp: Exp.Exp } {
   return pt.Tree.matcher<{ name: string; exp: Exp.Exp }>({
     "def:def": ({ name, exp }) => {
       return {

@@ -58,7 +58,8 @@ export function stmts_matcher(tree: pt.Tree.Tree): Array<Stmt.Stmt> {
 
 export function stmt_matcher(tree: pt.Tree.Tree): Stmt.Stmt {
   return pt.Tree.matcher<Stmt.Stmt>({
-    "stmt:def": ({ name, exp }) => Stmt.def(pt.Tree.str(name), exp_matcher(exp)),
+    "stmt:def": ({ name, exp }) =>
+      Stmt.def(pt.Tree.str(name), exp_matcher(exp)),
     "stmt:claim": ({ claim, t, define, exp }, { span }) => {
       if (pt.Tree.str(claim) !== pt.Tree.str(define)) {
         throw new pt.ParsingError(

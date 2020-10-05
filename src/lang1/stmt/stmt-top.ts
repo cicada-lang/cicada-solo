@@ -15,7 +15,9 @@ export function top(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): void {
       const t = Exp.infer(ctx, exp)
       const value = Exp.evaluate(env, exp)
       const norm = Value.readback(new Set(ctx.keys()), t, value)
-      console.log(`${Exp.repr(norm)}: ${Ty.repr(t)}`)
+      const value_repr = Exp.repr(norm)
+      const t_repr = Ty.repr(t)
+      console.log(`${value_repr}: ${t_repr}`)
     }
   }
 }

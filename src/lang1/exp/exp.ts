@@ -40,10 +40,7 @@ interface suite {
   ret: Exp
 }
 
-export const suite = (
-  stmts: Array<Stmt.Stmt>,
-  ret: Exp
-): suite => ({
+export const suite = (stmts: Array<Stmt.Stmt>, ret: Exp): suite => ({
   kind: "Exp.suite",
   stmts,
   ret,
