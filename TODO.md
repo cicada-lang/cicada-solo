@@ -1,4 +1,4 @@
-- [lang2] `Stmt` -- instead of simple `defs`
+- [lang2] replace `defs` with `stmts`
 - [lang2] top level syntax use `stmts` -- instead `exp`
 - [lang2] `@show` as special `Stmt`
 
