@@ -1,4 +1,5 @@
 import * as Exp from "../../exp"
+import * as frontend from "../../frontend"
 import * as Ty from "../../ty"
 import * as Ctx from "../../ctx"
 import * as Env from "../../env"
@@ -27,7 +28,7 @@ export const handler = async (argv: Argv) => {
   const text = fs.readFileSync(argv.input, { encoding: "utf-8" })
 
   try {
-    const exp = Exp.parse(text)
+    const exp = frontend.parse_exp(text)
     const ctx = Ctx.init()
     const t = Exp.infer(ctx, exp)
     const env = Env.init()

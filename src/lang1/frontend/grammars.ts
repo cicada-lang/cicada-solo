@@ -2,9 +2,17 @@ import * as pt from "../../partech"
 
 const preserved = ["zero", "add1", "rec"]
 
-const identifier = { $pattern: ["identifier", `^(?!(${preserved.join("|")}))`] }
+export const identifier = {
+  $pattern: ["identifier", `^(?!(${preserved.join("|")}))`],
+}
 
-const exp = {
+export const zero_or_more = pt.grammars.zero_or_more
+
+export const one_or_more = pt.grammars.one_or_more
+
+export const $start = "exp"
+
+export const exp = {
   "exp:var": [{ name: "identifier" }],
   "exp:fn": [
     '"("',
@@ -43,12 +51,12 @@ const exp = {
   "exp:the": [{ exp: "exp" }, '":"', { t: "ty" }],
 }
 
-const ty = {
+export const ty = {
   "ty:nat": ['"Nat"'],
   "ty:arrow": ['"("', { arg_t: "ty" }, '")"', '"-"', '">"', { ret_t: "ty" }],
 }
 
-const def = {
+export const def = {
   "def:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
   "def:claim": [
     { claim: "identifier" },
@@ -58,14 +66,4 @@ const def = {
     '"="',
     { exp: "exp" },
   ],
-}
-
-export const grammars = {
-  zero_or_more: pt.grammars.zero_or_more,
-  one_or_more: pt.grammars.one_or_more,
-  $start: "exp",
-  identifier,
-  exp,
-  ty,
-  def,
 }

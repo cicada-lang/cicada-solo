@@ -43,7 +43,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   })(tree)
 }
 
-function ty_matcher(tree: pt.Tree.Tree): Ty.Ty {
+export function ty_matcher(tree: pt.Tree.Tree): Ty.Ty {
   return pt.Tree.matcher<Ty.Ty>({
     "ty:nat": () => Ty.nat,
     "ty:arrow": ({ arg_t, ret_t }) =>
@@ -51,7 +51,7 @@ function ty_matcher(tree: pt.Tree.Tree): Ty.Ty {
   })(tree)
 }
 
-function def_matcher(tree: pt.Tree.Tree): { name: string; exp: Exp.Exp } {
+export function def_matcher(tree: pt.Tree.Tree): { name: string; exp: Exp.Exp } {
   return pt.Tree.matcher<{ name: string; exp: Exp.Exp }>({
     "def:def": ({ name, exp }) => {
       return {
@@ -77,5 +77,3 @@ function def_matcher(tree: pt.Tree.Tree): { name: string; exp: Exp.Exp } {
     },
   })(tree)
 }
-
-export const matchers = { exp_matcher }
