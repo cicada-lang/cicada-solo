@@ -102,12 +102,12 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
     } else if (exp.kind === "Exp.type") {
       return Value.type
     } else if (exp.kind === "Exp.suite") {
-      const { defs, ret } = exp
+      const { stmts, ret } = exp
       ctx = Ctx.clone(ctx)
-      for (const def of defs) {
-        const t = Exp.infer(ctx, def.exp)
-        const value = Exp.evaluate(Ctx.to_env(ctx), def.exp)
-        Ctx.define(ctx, def.name, t, value)
+      for (const stmt of stmts) {
+        const t = Exp.infer(ctx, stmt.exp)
+        const value = Exp.evaluate(Ctx.to_env(ctx), stmt.exp)
+        Ctx.define(ctx, stmt.name, t, value)
       }
       return Exp.infer(ctx, ret)
     } else if (exp.kind === "Exp.the") {

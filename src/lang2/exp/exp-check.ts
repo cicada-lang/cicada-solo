@@ -37,12 +37,12 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
         )
       }
     } else if (exp.kind === "Exp.suite") {
-      const { defs, ret } = exp
+      const { stmts, ret } = exp
       ctx = Ctx.clone(ctx)
-      for (const def of defs) {
-        const t = Exp.infer(ctx, def.exp)
-        const value = Exp.evaluate(Ctx.to_env(ctx), def.exp)
-        Ctx.define(ctx, def.name, t, value)
+      for (const stmt of stmts) {
+        const t = Exp.infer(ctx, stmt.exp)
+        const value = Exp.evaluate(Ctx.to_env(ctx), stmt.exp)
+        Ctx.define(ctx, stmt.name, t, value)
       }
       Exp.check(ctx, ret, t)
     } else {

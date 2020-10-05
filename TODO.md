@@ -1,4 +1,6 @@
-- [lang2] replace `defs` with `stmts`
+- [lang2] `Env.extend`
+- [lang2] merge `Ctx.define` and `Ctx.update`
+- [lang2] `Stmt.execute`
 - [lang2] top level syntax use `stmts` -- instead `exp`
 - [lang2] `@show` as special `Stmt`
 

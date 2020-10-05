@@ -122,16 +122,16 @@ const exp = {
   "exp:type": ['"Type"'],
   "exp:suite": [
     '"{"',
-    { defs: { $ap: ["zero_or_more", "def"] } },
+    { stmts: { $ap: ["zero_or_more", "stmt"] } },
     { ret: "exp" },
     '"}"',
   ],
   "exp:the": [{ exp: "exp" }, '":"', { t: "exp" }],
 }
 
-const def = {
-  "def:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
-  "def:claim": [
+const stmt = {
+  "stmt:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
+  "stmt:claim": [
     { claim: "identifier" },
     '":"',
     { t: "exp" },
@@ -147,5 +147,5 @@ export const grammars = {
   $start: "exp",
   identifier,
   exp,
-  def,
+  stmt,
 }

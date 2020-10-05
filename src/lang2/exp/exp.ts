@@ -1,3 +1,5 @@
+import * as Stmt from "../stmt"
+
 export type Exp =
   | v
   | pi
@@ -261,16 +263,13 @@ export const type: type = {
 
 interface suite {
   kind: "Exp.suite"
-  defs: Array<{ name: string; exp: Exp }>
+  stmts: Array<Stmt.Stmt>
   ret: Exp
 }
 
-export const suite = (
-  defs: Array<{ name: string; exp: Exp }>,
-  ret: Exp
-): suite => ({
+export const suite = (stmts: Array<Stmt.Stmt>, ret: Exp): suite => ({
   kind: "Exp.suite",
-  defs,
+  stmts,
   ret,
 })
 

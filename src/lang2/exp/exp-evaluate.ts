@@ -1,4 +1,5 @@
 import * as Exp from "../exp"
+import * as Stmt from "../stmt"
 import * as Value from "../value"
 import * as Closure from "../closure"
 import * as Env from "../env"
@@ -104,8 +105,8 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return Value.type
       }
       case "Exp.suite": {
-        for (const def of exp.defs) {
-          env = Env.update(Env.clone(env), def.name, evaluate(env, def.exp))
+        for (const stmt of exp.stmts) {
+          env = Env.update(Env.clone(env), stmt.name, evaluate(env, stmt.exp))
         }
         return evaluate(env, exp.ret)
       }
