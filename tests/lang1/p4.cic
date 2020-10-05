@@ -1,13 +1,13 @@
-{
-  one : Nat
-  one = add1(zero)
+one : Nat
+one = add1(zero)
 
-  two : Nat
-  two = add1(one)
+two : Nat
+two = add1(one)
 
-  id : (Nat) -> Nat
-  id = (x) => x
+id : (Nat) -> Nat
+id = (x) => x
 
-  (_) => (_) => id(id(id(id(two))))
+_ : (Nat) -> (Nat) -> Nat
+_ = (_) => (_) => id(id(id(id(two))))
 
-} : (Nat) -> (Nat) -> Nat
+@show _

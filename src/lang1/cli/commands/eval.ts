@@ -1,4 +1,5 @@
 import * as Exp from "../../exp"
+import * as Stmt from "../../stmt"
 import * as frontend from "../../frontend"
 import * as Ty from "../../ty"
 import * as Ctx from "../../ctx"
@@ -28,11 +29,12 @@ export const handler = async (argv: Argv) => {
   const text = fs.readFileSync(argv.input, { encoding: "utf-8" })
 
   try {
-    const exp = frontend.parse_exp(text)
+    const stmts = frontend.parse_stmts(text)
     const ctx = Ctx.init()
-    const t = Exp.infer(ctx, exp)
     const env = Env.init()
-    console.log(`${Exp.repr(Exp.normalize(exp))}: ${Ty.repr(t)}`)
+    for (const stmt of stmts) {
+      Stmt.top(ctx, env, stmt)
+    }
   } catch (error) {
     if (error instanceof Trace.Trace) {
       const trace = error

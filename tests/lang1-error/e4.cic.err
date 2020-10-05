@@ -6,10 +6,4 @@ previous:
 - (_) => id(id(id(id(two))))
 - (_) => (_) => id(id(id(id(two))))
 - (_) => (_) => id(id(id(id(two)))): (Nat) -> Nat
-- {
-  one = 1: Nat
-  two = add1(one): Nat
-  id = (x) => x: (Nat) -> Nat
-  (_) => (_) => id(id(id(id(two)))): (Nat) -> Nat
-}
 

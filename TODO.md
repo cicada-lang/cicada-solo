@@ -1,7 +1,8 @@
-- [lang1] `commands/eval` use `parse_stmts` -- instead of `parse_exp`
-
 - [lang0] `Exp.suite` use `stmts` instead of `defs`
 - [lang0] `commands/eval` use `parse_stmts` -- instead of `parse_exp`
+
+- [lang0] improve `exp-infer` and `exp-evaluate` on `Exp.v`
+- [lang2] improve `exp-infer` and `exp-evaluate` on `Exp.v`
 
 # TLT
 

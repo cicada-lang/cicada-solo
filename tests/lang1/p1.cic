@@ -1,1 +1,4 @@
-add1(add1(add1(zero))): Nat
+_ : Nat
+_ = add1(add1(add1(zero)))
+
+@show _

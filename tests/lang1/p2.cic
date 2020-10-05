@@ -1,4 +1,3 @@
-{
-  z = zero : Nat
-  z
-}
+z = zero : Nat
+
+@show z

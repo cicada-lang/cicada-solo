@@ -1,6 +1,4 @@
-{
-  one = add1(zero) : Nat
-  two = add1(one) : Nat
-  id = (x) => x : (Nat) -> Nat
-  id(two)
-}
+one = add1(zero) : Nat
+two = add1(one) : Nat
+id = (x) => x : (Nat) -> Nat
+@show id(two)

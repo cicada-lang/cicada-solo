@@ -11,9 +11,8 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       const t = Ctx.lookup(ctx, exp.name)
       if (t === undefined) {
         throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
-      } else {
-        return t
       }
+      return t
     } else if (exp.kind === "Exp.ap") {
       const { target, arg } = exp
       const target_t = Exp.infer(ctx, target)

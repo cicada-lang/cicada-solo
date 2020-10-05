@@ -11,11 +11,11 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
     switch (exp.kind) {
       case "Exp.v": {
         const result = Env.lookup(env, exp.name)
-        if (result !== undefined) {
-          return result
-        } else {
+        if (result === undefined) {
+          console.log({env, exp})
           throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
         }
+        return result
       }
       case "Exp.fn": {
         return Value.fn(exp.name, exp.ret, env)

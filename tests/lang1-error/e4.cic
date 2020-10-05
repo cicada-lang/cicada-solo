@@ -1,8 +1,10 @@
-{
-  one = add1(zero) : Nat
-  two = add1(one) : Nat
-  id = (x) => x : (Nat) -> Nat
-  (_) => (_) => id(id(id(id(two)))) : (Nat) -> Nat
-  // NOTE should be:
-  //   (_) => (_) => id(id(id(id(two)))) : (Nat) -> (Nat) -> Nat
-}
+one = add1(zero) : Nat
+two = add1(one) : Nat
+id = (x) => x : (Nat) -> Nat
+
+// NOTE should be:
+//  (Nat) -> (Nat) -> Nat
+_ : (Nat) -> Nat
+_ = (_) => (_) => id(id(id(id(two))))
+
+@show _

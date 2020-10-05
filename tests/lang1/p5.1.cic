@@ -1,5 +1,7 @@
-{
-  id : (Nat) -> Nat
-  id = (x) => x
-  (_) => (_) => id(id(id(id(100))))
-} : (Nat) -> (Nat) -> Nat
+id : (Nat) -> Nat
+id = (x) => x
+
+_ : (Nat) -> (Nat) -> Nat
+_ = (_) => (_) => id(id(id(id(100))))
+
+@show _
