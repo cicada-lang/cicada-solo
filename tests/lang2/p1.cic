@@ -1,4 +1,2 @@
-{
-  n = zero
-  add1(n)
-}
+n = zero
+one = add1(n)

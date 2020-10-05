@@ -4,8 +4,4 @@ But the given type is Nat.
 previous:
 - "ratatouille"
 - "ratatouille": Nat
-- {
-  _ = "ratatouille": Nat
-  _
-}
 

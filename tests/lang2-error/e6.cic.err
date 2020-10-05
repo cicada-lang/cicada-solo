@@ -8,8 +8,4 @@ to:
 previous:
 - same
 - same: Equal((_: String) -> (_: String) -> (_: String) * String, (x) => (y) => cons(x, y), (y) => (x) => cons(x, y))
-- {
-  _ = same: Equal((_: String) -> (_: String) -> (_: String) * String, (x) => (y) => cons(x, y), (y) => (x) => cons(x, y))
-  _
-}
 

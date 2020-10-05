@@ -1,71 +1,66 @@
 // 1. The More Things Change, the More They Stay the Same
 
-{
-  _ : String
-  _ = "ratatouille"
+_ : String
+_ = "ratatouille"
 
-  _ : Pair(String, String)
-  _ = cons("ratatouille", "baguette")
+_ : Pair(String, String)
+_ = cons("ratatouille", "baguette")
 
-  _ : Equal(String, "ratatouille", "ratatouille")
-  _ = same
+_ : Equal(String, "ratatouille", "ratatouille")
+_ = same
 
-  _ : Equal(Pair(String, String),
-    cons("ratatouille", "baguette"),
-    cons("ratatouille", "baguette"))
-  _ = same
+_ : Equal(Pair(String, String),
+  cons("ratatouille", "baguette"),
+  cons("ratatouille", "baguette"))
+_ = same
 
+_ : String
+_ = car(cons("ratatouille", "baguette"): Pair(String, String))
 
-  _ : String
-  _ = car(cons("ratatouille", "baguette"): Pair(String, String))
+_ : Equal(String,
+  "ratatouille",
+  car(cons("ratatouille", "baguette"): Pair(String, String)))
+_ = same
 
-  _ : Equal(String,
-    "ratatouille",
-    car(cons("ratatouille", "baguette"): Pair(String, String)))
-  _ = same
+_ : Type
+_ = Pair(String, String)
 
-  _ : Type
-  _ = Pair(String, String)
+_ : Type
+_ = String
 
-  _ : Type
-  _ = String
+_ : Type
+_ = Type
 
-  _ : Type
-  _ = Type
+_ : Equal(Type, String, String)
+_ = same
 
-  _ : Equal(Type, String, String)
-  _ = same
+_ : Type
+_ = Pair(
+  car(cons(String, "olive"): Pair(Type, String)),
+  cdr(cons("oil", String): Pair(String, Type)))
 
-  _ : Type
-  _ = Pair(
-    car(cons(String, "olive"): Pair(Type, String)),
-    cdr(cons("oil", String): Pair(String, Type)))
+_ : Pair(
+  car(cons(String, "olive"): Pair(Type, String)),
+  cdr(cons("oil", String): Pair(String, Type)))
+_ = cons(
+  cdr(cons(String, "olive"): Pair(Type, String)),
+  car(cons("oil", String): Pair(String, Type)))
 
-  _ : Pair(
-    car(cons(String, "olive"): Pair(Type, String)),
-    cdr(cons("oil", String): Pair(String, Type)))
-  _ = cons(
-    cdr(cons(String, "olive"): Pair(Type, String)),
-    car(cons("oil", String): Pair(String, Type)))
+_ : Nat
+_ = 172
 
-  _ : Nat
-  _ = 172
+_ : Nat
+_ = 0
 
-  _ : Nat
-  _ = 0
+_ : Nat
+_ = zero
 
-  _ : Nat
-  _ = zero
+_ : Equal(Nat, 0, zero)
+_ = same
 
-  _ : Equal(Nat, 0, zero)
-  _ = same
+_ : Equal(Nat, zero, 0)
+_ = same
 
-  _ : Equal(Nat, zero, 0)
-  _ = same
+one = add1(zero)
 
-  one = add1(zero)
-
-  two = add1(one)
-
-  two
-}
+two = add1(one)

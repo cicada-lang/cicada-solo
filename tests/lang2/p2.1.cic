@@ -1,9 +1,7 @@
-{
-  t : Type
-  t = Nat
+t : Type
+t = Nat
 
-  n : t
-  n = zero
+n : t
+n = zero
 
-  add1(n)
-}
+one = add1(n)

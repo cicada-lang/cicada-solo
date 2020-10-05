@@ -1,1 +1,2 @@
-same: Equal(String, "ratatouille", "baguette")
+_ : Equal(String, "ratatouille", "baguette")
+_ = same

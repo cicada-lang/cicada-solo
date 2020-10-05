@@ -1,4 +1,1 @@
-{
-  _ = "ratatouille": Nat
-  _
-}
+_ = "ratatouille": Nat

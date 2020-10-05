@@ -1,4 +1,3 @@
-- [lang2] top level syntax use `stmts` -- instead `exp`
 - [lang2] `>` as syntax for `Stmt.show`
 
 - [lang1] use `Stmt`

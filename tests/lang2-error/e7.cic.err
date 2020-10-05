@@ -4,8 +4,4 @@ I am expecting the type sigma.
 previous:
 - cons(String, String)
 - cons(String, String): Type
-- {
-  _ = cons(String, String): Type
-  _
-}
 

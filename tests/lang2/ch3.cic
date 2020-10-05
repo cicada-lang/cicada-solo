@@ -1,5 +1,4 @@
 // 3. Eliminate All Natural Numbers!
 
-{
-  "TODO"
-}
+_ : String
+_ = "TODO"

@@ -1,12 +1,8 @@
-{
-  add : (Nat) -> (Nat) -> Nat
-  add = (x) => (y) => Nat.ind(y, (_) => Nat, x, (prev) => (almost) => add1(almost))
+add : (Nat) -> (Nat) -> Nat
+add = (x) => (y) => Nat.ind(y, (_) => Nat, x, (prev) => (almost) => add1(almost))
 
-  which_Nat : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> T) -> T
-  which_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
+which_Nat : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> T) -> T
+which_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
 
-  gauss : (Nat) -> Nat
-  gauss = (n) => which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))
-
-  gauss
-}
+gauss : (Nat) -> Nat
+gauss = (n) => which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))

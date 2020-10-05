@@ -1,1 +1,2 @@
-add1(add1(zero))
+_ : Nat
+_ = add1(add1(zero))

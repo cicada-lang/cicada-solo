@@ -1,7 +1,5 @@
-{
-  one = add1(zero)
-  two = add1(one)
-  three = add1(two)
-  one_two = cons(one, two) : Pair(Nat, Nat)
-  cdr(one_two)
-}
+one = add1(zero)
+two = add1(one)
+three = add1(two)
+one_two = cons(one, two) : Pair(Nat, Nat)
+_ = cdr(one_two)

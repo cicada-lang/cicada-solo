@@ -1,4 +1,5 @@
-same: Equal(
+_ : Equal(
   Pair(String, String),
   cons("ratatouille", "baguette"),
   cons("baguette", "ratatouille"))
+_ = same

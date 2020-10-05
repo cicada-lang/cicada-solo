@@ -1,72 +1,68 @@
 // 2. Doin' What Comes Naturally
 
-{
-  flavored_lentils : (String) -> Pair(String, String)
-  flavored_lentils = (flavor) => cons(flavor, "lentils")
+flavored_lentils : (String) -> Pair(String, String)
+flavored_lentils = (flavor) => cons(flavor, "lentils")
 
-  garlic_flavored_lentils : Pair(String, String)
-  garlic_flavored_lentils = flavored_lentils("garlic")
+garlic_flavored_lentils : Pair(String, String)
+garlic_flavored_lentils = flavored_lentils("garlic")
 
-  id : (String) -> String
-  id = (x) => x
+id : (String) -> String
+id = (x) => x
 
-  T : Type
-  T = Pair(String, (String) -> String)
+T : Type
+T = Pair(String, (String) -> String)
 
-  id_in_pair : (x: String) -> T
-  id_in_pair = (x) => cons(x, (x) => x)
+id_in_pair : (x: String) -> T
+id_in_pair = (x) => cons(x, (x) => x)
 
-  _ : T
-  _ = id_in_pair("x")
+_ : T
+_ = id_in_pair("x")
 
-  // The x occur in `(x) => x` should not be
-  // effected by the substitution of outer `x`,
-  // and `(x) => x` is equivalent to `(y) => y`,
+// The x occur in `(x) => x` should not be
+// effected by the substitution of outer `x`,
+// and `(x) => x` is equivalent to `(y) => y`,
 
-  _ : Equal(T, id_in_pair("x"), cons("x", (y) => y))
-  _ = same
+_ : Equal(T, id_in_pair("x"), cons("x", (y) => y))
+_ = same
 
-  _ : Equal((Nat) -> Pair(Nat, Nat), (x) => cons(x, x), (y) => cons(y, y))
-  _ = same
+_ : Equal((Nat) -> Pair(Nat, Nat), (x) => cons(x, x), (y) => cons(y, y))
+_ = same
 
-  _ : Equal((Nat) -> Nat, (y) => car(cons(y, y): Pair(Nat, Nat)), (x) => x)
-  _ = same
+_ : Equal((Nat) -> Nat, (y) => car(cons(y, y): Pair(Nat, Nat)), (x) => x)
+_ = same
 
-  _ : Equal((Pair(Nat, Nat)) -> Nat, (y) => car(y), (x) => car(x))
-  _ = same
+_ : Equal((Pair(Nat, Nat)) -> Nat, (y) => car(y), (x) => car(x))
+_ = same
 
-  vegetables : Pair(String, String)
-  vegetables = cons("celery", "carrot")
+vegetables : Pair(String, String)
+vegetables = cons("celery", "carrot")
 
-  _ : Equal(Pair(String, String), vegetables, cons(car(vegetables), cdr(vegetables)))
-  _ = same
+_ : Equal(Pair(String, String), vegetables, cons(car(vegetables), cdr(vegetables)))
+_ = same
 
-  rec_Nat : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
-  rec_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, step)
+rec_Nat : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
+rec_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, step)
 
-  which_Nat : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> T) -> T
-  which_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
+which_Nat : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> T) -> T
+which_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
 
-  naught_or_more : (Nat) -> String
-  naught_or_more = (n) => which_Nat(String)(n)("naught")((_prev) => "more")
+naught_or_more : (Nat) -> String
+naught_or_more = (n) => which_Nat(String)(n)("naught")((_prev) => "more")
 
-  _ : Equal(String, naught_or_more(0), "naught")
-  _ = same
+_ : Equal(String, naught_or_more(0), "naught")
+_ = same
 
-  _ : Equal(String, naught_or_more(1), "more")
-  _ = same
+_ : Equal(String, naught_or_more(1), "more")
+_ = same
 
-  _ : Equal(String, naught_or_more(4), "more")
-  _ = same
+_ : Equal(String, naught_or_more(4), "more")
+_ = same
 
-  _ : Pair(Type, Type)
-  _ = cons(String, String)
+_ : Pair(Type, Type)
+_ = cons(String, String)
 
-  Pear : Type
-  Pear = Pair(Nat, Nat)
+Pear : Type
+Pear = Pair(Nat, Nat)
 
-  _ : Pear
-  _ = cons(1, 2)
-
-  _
-}
+_ : Pear
+_ = cons(1, 2)

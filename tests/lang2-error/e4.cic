@@ -1,1 +1,2 @@
-"courgette": Type
+_ : Type
+_ = "courgette"
