@@ -107,7 +107,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       for (const stmt of stmts) {
         const t = Exp.infer(ctx, stmt.exp)
         const value = Exp.evaluate(Ctx.to_env(ctx), stmt.exp)
-        Ctx.define(ctx, stmt.name, t, value)
+        Ctx.update(ctx, stmt.name, t, value)
       }
       return Exp.infer(ctx, ret)
     } else if (exp.kind === "Exp.the") {

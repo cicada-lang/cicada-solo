@@ -42,7 +42,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       for (const stmt of stmts) {
         const t = Exp.infer(ctx, stmt.exp)
         const value = Exp.evaluate(Ctx.to_env(ctx), stmt.exp)
-        Ctx.define(ctx, stmt.name, t, value)
+        Ctx.update(ctx, stmt.name, t, value)
       }
       Exp.check(ctx, ret, t)
     } else {
