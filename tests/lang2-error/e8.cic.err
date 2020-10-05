@@ -1,0 +1,20 @@
+the name gauss is undefined.
+
+previous:
+- gauss
+- gauss(prev)
+- gauss(prev)
+- add(add1(prev))(gauss(prev))
+- add(add1(prev))(gauss(prev))
+- (prev) => add(add1(prev))(gauss(prev))
+- which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))
+- which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))
+- (n) => which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))
+- (n) => which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev))): (_: Nat) -> Nat
+- {
+  add = (x) => (y) => Nat.ind(y, (_) => Nat, x, (prev) => (almost) => add1(almost)): (_: Nat) -> (_: Nat) -> Nat
+  which_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, (prev) => (_almost) => step(prev)): (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> T) -> T
+  gauss = (n) => which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev))): (_: Nat) -> Nat
+  gauss
+}
+

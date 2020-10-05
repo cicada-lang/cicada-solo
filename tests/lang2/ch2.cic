@@ -59,5 +59,14 @@
   _ : Equal(String, naught_or_more(4), "more")
   _ = same
 
+  _ : Pair(Type, Type)
+  _ = cons(String, String)
+
+  Pear : Type
+  Pear = Pair(Nat, Nat)
+
+  _ : Pear
+  _ = cons(1, 2)
+
   _
 }

@@ -1,0 +1,6 @@
+{
+  _ : Type
+  _ = cons(String, String)
+
+  _
+}
