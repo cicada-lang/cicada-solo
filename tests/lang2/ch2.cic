@@ -45,10 +45,10 @@
   rec_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, step)
 
   which_Nat : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> T) -> T
-  which_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, (prev) => (almost) => step(prev))
+  which_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
 
   _ : String
-  _ = which_Nat(String)(0)("naught")((prev) => "more")
+  _ = which_Nat(String)(0)("naught")((_prev) => "more")
 
   _
 }

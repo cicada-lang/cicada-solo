@@ -1,1 +1,1 @@
-same: Equal((_: Nat) -> (_1: Nat) * Nat, (_) => cons(_, _), (_) => cons(_, _))
+"naught": String
