@@ -26,12 +26,7 @@ export const exp = {
     { target: "identifier" },
     { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
   ],
-  "exp:suite": [
-    '"{"',
-    { defs: { $ap: ["zero_or_more", "def"] } },
-    { ret: "exp" },
-    '"}"',
-  ],
+  "exp:suite": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
   "exp:zero": ['"zero"'],
   "exp:add1": ['"add1"', '"("', { prev: "exp" }, '")"'],
   "exp:number": [{ value: { $pattern: ["number"] } }],
@@ -56,9 +51,13 @@ export const ty = {
   "ty:arrow": ['"("', { arg_t: "ty" }, '")"', '"-"', '">"', { ret_t: "ty" }],
 }
 
-export const def = {
-  "def:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
-  "def:claim": [
+export const stmts = {
+  "stmts:stmts": [{ stmts: { $ap: ["zero_or_more", "stmt"] } }],
+}
+
+export const stmt = {
+  "stmt:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
+  "stmt:claim": [
     { claim: "identifier" },
     '":"',
     { t: "ty" },
@@ -66,4 +65,5 @@ export const def = {
     '"="',
     { exp: "exp" },
   ],
+  "stmt:show": ['"@"', '"show"', { exp: "exp" }],
 }

@@ -1,4 +1,5 @@
 import * as Exp from "../exp"
+import * as Stmt from "../stmt"
 import * as Ty from "../ty"
 import * as pt from "../../partech"
 import * as ut from "../../ut"
@@ -14,11 +15,8 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
       return exp
     },
-    "exp:suite": ({ defs, ret }) =>
-      Exp.suite(
-        pt.matchers.zero_or_more_matcher(defs).map(def_matcher),
-        exp_matcher(ret)
-      ),
+    "exp:suite": ({ stmts, ret }) =>
+      Exp.suite(stmts_matcher(stmts), exp_matcher(ret)),
     "exp:zero": () => Exp.zero,
     "exp:add1": ({ prev }) => Exp.add1(exp_matcher(prev)),
     "exp:number": ({ value }, { span }) => {
@@ -51,15 +49,17 @@ export function ty_matcher(tree: pt.Tree.Tree): Ty.Ty {
   })(tree)
 }
 
-export function def_matcher(tree: pt.Tree.Tree): { name: string; exp: Exp.Exp } {
-  return pt.Tree.matcher<{ name: string; exp: Exp.Exp }>({
-    "def:def": ({ name, exp }) => {
-      return {
-        name: pt.Tree.str(name),
-        exp: exp_matcher(exp),
-      }
-    },
-    "def:claim": ({ claim, t, define, exp }, { span }) => {
+export function stmts_matcher(tree: pt.Tree.Tree): Array<Stmt.Stmt> {
+  return pt.Tree.matcher<Array<Stmt.Stmt>>({
+    "stmts:stmts": ({ stmts }) =>
+      pt.matchers.zero_or_more_matcher(stmts).map(stmt_matcher),
+  })(tree)
+}
+
+export function stmt_matcher(tree: pt.Tree.Tree): Stmt.Stmt {
+  return pt.Tree.matcher<Stmt.Stmt>({
+    "stmt:def": ({ name, exp }) => Stmt.def(pt.Tree.str(name), exp_matcher(exp)),
+    "stmt:claim": ({ claim, t, define, exp }, { span }) => {
       if (pt.Tree.str(claim) !== pt.Tree.str(define)) {
         throw new pt.ParsingError(
           "Name mismatch.\n" +
@@ -70,10 +70,11 @@ export function def_matcher(tree: pt.Tree.Tree): { name: string; exp: Exp.Exp } 
       }
 
       const name = claim
-      return {
-        name: pt.Tree.str(name),
-        exp: Exp.the(ty_matcher(t), exp_matcher(exp)),
-      }
+      return Stmt.def(
+        pt.Tree.str(name),
+        Exp.the(ty_matcher(t), exp_matcher(exp))
+      )
     },
+    "stmt:show": ({ exp }) => Stmt.show(exp_matcher(exp)),
   })(tree)
 }

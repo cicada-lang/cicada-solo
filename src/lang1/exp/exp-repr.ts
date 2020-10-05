@@ -1,4 +1,5 @@
 import * as Exp from "../exp"
+import * as Stmt from "../stmt"
 import * as Ty from "../ty"
 import * as ut from "../../ut"
 
@@ -14,9 +15,8 @@ export function repr(exp: Exp.Exp): string {
       return `${repr(exp.target)}(${repr(exp.arg)})`
     }
     case "Exp.suite": {
-      const def_reprs = exp.defs.map((def) => `${def.name} = ${repr(def.exp)}`)
-      const suite_repr = [...def_reprs, repr(exp.ret)].join("\n")
-      return `{\n${ut.indent(suite_repr, "  ")}\n}`
+      const s = [...exp.stmts.map(Stmt.repr), repr(exp.ret)].join("\n")
+      return `{\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.zero": {
       return "0"

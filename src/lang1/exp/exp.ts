@@ -1,3 +1,4 @@
+import * as Stmt from "../stmt"
 import * as Ty from "../ty"
 
 export type Exp = v | fn | ap | zero | add1 | rec | suite | the
@@ -35,16 +36,16 @@ export const ap = (target: Exp, arg: Exp): ap => ({
 
 interface suite {
   kind: "Exp.suite"
-  defs: Array<{ name: string; exp: Exp }>
+  stmts: Array<Stmt.Stmt>
   ret: Exp
 }
 
 export const suite = (
-  defs: Array<{ name: string; exp: Exp }>,
+  stmts: Array<Stmt.Stmt>,
   ret: Exp
 ): suite => ({
   kind: "Exp.suite",
-  defs,
+  stmts,
   ret,
 })
 

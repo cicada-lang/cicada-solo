@@ -93,7 +93,6 @@ export function stmt_matcher(tree: pt.Tree.Tree): Stmt.Stmt {
         Exp.the(exp_matcher(t), exp_matcher(exp))
       )
     },
-    "stmt:show": ({ exp }) =>
-      Stmt.show(exp_matcher(exp)),
+    "stmt:show": ({ exp }) => Stmt.show(exp_matcher(exp)),
   })(tree)
 }

@@ -1,4 +1,5 @@
 import * as Exp from "../exp"
+import * as Stmt from "../stmt"
 import * as Ctx from "../ctx"
 import * as Ty from "../ty"
 import * as Trace from "../../trace"
@@ -28,10 +29,10 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
         )
       }
     } else if (exp.kind === "Exp.suite") {
-      const { defs, ret } = exp
+      const { stmts, ret } = exp
       ctx = Ctx.clone(ctx)
-      for (const def of defs) {
-        Ctx.update(ctx, def.name, Exp.infer(ctx, def.exp))
+      for (const stmt of stmts) {
+        Stmt.declare(ctx, stmt)
       }
       return Exp.infer(ctx, ret)
     } else if (exp.kind === "Exp.rec") {

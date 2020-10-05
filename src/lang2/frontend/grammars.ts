@@ -18,15 +18,15 @@ const preserved = [
   "Type",
 ]
 
+export const identifier = {
+  $pattern: ["identifier", `^(?!(${preserved.join("|")}))`],
+}
+
 export const zero_or_more = pt.grammars.zero_or_more
 
 export const one_or_more = pt.grammars.one_or_more
 
 export const $start = "exp"
-
-export const identifier = {
-  $pattern: ["identifier", `^(?!(${preserved.join("|")}))`],
-}
 
 export const exp = {
   "exp:var": [{ name: "identifier" }],
