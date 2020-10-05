@@ -13,7 +13,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       const pi = Value.is_pi(ctx, t)
       const arg = Value.reflection(pi.arg_t, Neutral.v(exp.name))
       const ret_t = Closure.apply(pi.ret_t_cl, arg)
-      Exp.check(Ctx.update(Ctx.clone(ctx), exp.name, pi.arg_t), exp.ret, ret_t)
+      Exp.check(Ctx.extend(ctx, exp.name, pi.arg_t), exp.ret, ret_t)
     } else if (exp.kind === "Exp.cons") {
       const sigma = Value.is_sigma(ctx, t)
       const car = Exp.evaluate(Ctx.to_env(ctx), exp.car)
