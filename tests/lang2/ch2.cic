@@ -47,8 +47,17 @@
   which_Nat : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> T) -> T
   which_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
 
-  _ : String
-  _ = which_Nat(String)(0)("naught")((_prev) => "more")
+  naught_or_more : (Nat) -> String
+  naught_or_more = (n) => which_Nat(String)(n)("naught")((_prev) => "more")
+
+  _ : Equal(String, naught_or_more(0), "naught")
+  _ = same
+
+  _ : Equal(String, naught_or_more(1), "more")
+  _ = same
+
+  _ : Equal(String, naught_or_more(4), "more")
+  _ = same
 
   _
 }
