@@ -29,5 +29,11 @@
   _ : Equal((Nat) -> Pair(Nat, Nat), (x) => cons(x, x), (y) => cons(y, y))
   _ = same
 
+  _ : Equal((Nat) -> Nat, (y) => car(cons(y, y): Pair(Nat, Nat)), (x) => x)
+  _ = same
+
+  _ : Equal((Pair(Nat, Nat)) -> Nat, (y) => car(y), (x) => car(x))
+  _ = same
+
   _
 }

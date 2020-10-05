@@ -1,4 +1,6 @@
-- [lang*] top level `defs` -- instead one exp.
+- [lang2] top level `defs` -- instead one exp.
+- [lang2] `Stmt`
+- [lang2] `@show` as special `Stmt`
 
 # TLT
 
