@@ -1,15 +1,14 @@
-- [lang1] `Stmt`
+- [lang1] `Stmt.repr`
 - [lang1] `stmts` instead of `defs`
 - [lang1] `Stmt.execute`
 - [lang1] `Stmt.declare`
 - [lang1] `Stmt.top`
-- [lang1] `Stmt.show`
 
 - [lang0] `Stmt`
+- [lang1] `Stmt.repr`
 - [lang0] `stmts` instead of `defs`
 - [lang1] `Stmt.execute`
 - [lang1] `Stmt.top`
-- [lang1] `Stmt.show`
 
 # TLT
 
