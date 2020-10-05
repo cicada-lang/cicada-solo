@@ -31,7 +31,6 @@ export const handler = async (argv: Argv) => {
     const t = Exp.infer(ctx, exp)
     const value = Exp.evaluate(Ctx.to_env(ctx), exp)
     const value_repr = Exp.repr(Value.readback(ctx, t, value))
-    const _ = Value.readback(ctx, Value.type, t)
     const t_repr = Exp.repr(Value.readback(ctx, Value.type, t))
     console.log(`${value_repr}: ${t_repr}`)
 
