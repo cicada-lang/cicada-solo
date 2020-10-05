@@ -64,3 +64,5 @@ _ = same
 one = add1(zero)
 
 two = add1(one)
+
+@show two

@@ -14,3 +14,5 @@ eight = {
 
 _ : Equal(Nat, eight, pow(2)(3))
 _ = same
+
+@show _

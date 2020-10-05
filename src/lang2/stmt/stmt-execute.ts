@@ -10,3 +10,11 @@ export function execute(env: Env.Env, stmt: Stmt.Stmt): void {
     }
   }
 }
+
+// const exp = frontend.parse_exp(text)
+// const ctx = Ctx.init()
+// const t = Exp.infer(ctx, exp)
+// const value = Exp.evaluate(Ctx.to_env(ctx), exp)
+// const value_repr = Exp.repr(Value.readback(ctx, t, value))
+// const t_repr = Exp.repr(Value.readback(ctx, Value.type, t))
+// console.log(`${value_repr}: ${t_repr}`)

@@ -2,3 +2,5 @@
 
 _ : String
 _ = "TODO"
+
+@show _

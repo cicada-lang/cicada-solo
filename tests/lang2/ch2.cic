@@ -64,5 +64,4 @@ _ = cons(String, String)
 Pear : Type
 Pear = Pair(Nat, Nat)
 
-_ : Pear
-_ = cons(1, 2)
+@show cons(1, 2) : Pear

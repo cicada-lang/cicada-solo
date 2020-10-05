@@ -1,3 +1,5 @@
 t = Nat : Type
 n = zero : t
 one = add1(n) : Nat
+
+@show one

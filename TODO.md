@@ -1,5 +1,3 @@
-- [lang2] `>` as syntax for `Stmt.show`
-
 - [lang1] use `Stmt`
 - [lang0] use `Stmt`
 

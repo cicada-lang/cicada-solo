@@ -7,5 +7,9 @@ export function repr(stmt: Stmt.Stmt): string {
       const { name, exp } = stmt
       return `${name} = ${Exp.repr(exp)}`
     }
+    case "Stmt.show": {
+      const { exp } = stmt
+      return `@show ${Exp.repr(exp)}`
+    }
   }
 }

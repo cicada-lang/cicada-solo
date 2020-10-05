@@ -4,3 +4,5 @@ x = {
   three = add1(two)
   cons(one, two)
 } : Pair(Nat, Nat)
+
+@show x
