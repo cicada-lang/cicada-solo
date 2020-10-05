@@ -1,4 +1,4 @@
-- [lang0] `commands/eval` use `parse_stmts` -- instead of `parse_exp`
+- [lang0] no `Exp.normalize`
 
 # TLT
 

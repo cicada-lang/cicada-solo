@@ -1,4 +1,2 @@
-{
-  id = (x) => x
-  id(id)
-}
+id = (x) => x
+@show id(id)

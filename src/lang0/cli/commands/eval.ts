@@ -1,4 +1,6 @@
 import * as Exp from "../../exp"
+import * as Env from "../../env"
+import * as Stmt from "../../stmt"
 import * as frontend from "../../frontend"
 import * as Trace from "../../../trace"
 import * as pt from "../../../partech"
@@ -23,8 +25,11 @@ export const handler = async (argv: Argv) => {
   const text = fs.readFileSync(argv.input, { encoding: "utf-8" })
 
   try {
-    const exp = frontend.parse_exp(text)
-    console.log(Exp.repr(Exp.normalize(exp)))
+    const stmts = frontend.parse_stmts(text)
+    const env = Env.init()
+    for (const stmt of stmts) {
+      Stmt.top(env, stmt)
+    }
   } catch (error) {
     if (error instanceof Trace.Trace) {
       const trace = error

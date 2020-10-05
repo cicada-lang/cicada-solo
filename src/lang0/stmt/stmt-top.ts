@@ -9,7 +9,9 @@ export function top(env: Env.Env, stmt: Stmt.Stmt): void {
   switch (stmt.kind) {
     case "Stmt.show": {
       const { exp } = stmt
-      console.log(Exp.repr(Exp.normalize(exp)))
+      const value = Exp.evaluate(env, exp)
+      const norm = Value.readback(new Set(env.keys()), value)
+      console.log(Exp.repr(norm))
     }
   }
 }
