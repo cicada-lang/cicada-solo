@@ -3,12 +3,13 @@
 - [lang1] `Stmt.execute`
 - [lang1] `Stmt.declare`
 - [lang1] `Stmt.top`
+- [lang1] `@show`
 
-- [lang0] `Stmt`
-- [lang1] `Stmt.repr`
+- [lang0] `Stmt.repr`
 - [lang0] `stmts` instead of `defs`
-- [lang1] `Stmt.execute`
-- [lang1] `Stmt.top`
+- [lang0] `Stmt.execute`
+- [lang0] `Stmt.top`
+- [lang0] `@show`
 
 # TLT
 
