@@ -1,4 +1,3 @@
-- [lang1] `Stmt.repr`
 - [lang1] `stmts` instead of `defs`
 - [lang1] `Stmt.execute`
 - [lang1] `Stmt.declare`
