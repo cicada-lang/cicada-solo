@@ -35,5 +35,20 @@
   _ : Equal((Pair(Nat, Nat)) -> Nat, (y) => car(y), (x) => car(x))
   _ = same
 
+  vegetables : Pair(String, String)
+  vegetables = cons("celery", "carrot")
+
+  _ : Equal(Pair(String, String), vegetables, cons(car(vegetables), cdr(vegetables)))
+  _ = same
+
+  rec_Nat : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
+  rec_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, step)
+
+  which_Nat : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> T) -> T
+  which_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, (prev) => (almost) => step(prev))
+
+  _ : String
+  _ = which_Nat(String)(0)("naught")((prev) => "more")
+
   _
 }

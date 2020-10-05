@@ -1,0 +1,23 @@
+{
+  rec_Nat : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
+  rec_Nat = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, step)
+
+  add : (Nat) -> (Nat) -> Nat
+  add = (x) => (y) => rec_Nat(Nat)(y)(x)((prev) => (almost) => add1(almost))
+
+  mul : (Nat) -> (Nat) -> Nat
+  mul = (x) => (y) => rec_Nat(Nat)(y)(0)((prev) => (almost) => add(almost)(x))
+
+  pow : (Nat) -> (Nat) -> Nat
+  pow = (x) => (y) => rec_Nat(Nat)(y)(1)((prev) => (almost) => mul(almost)(x))
+
+  eight = {
+    four = add(2)(2)
+    add(four)(four)
+  }
+
+  _ : Equal(Nat, eight, pow(2)(3))
+  _ = same
+
+  _
+}
