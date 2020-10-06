@@ -1,4 +1,4 @@
-// import * as Stmt from "../stmt"
+import * as Stmt from "../stmt"
 
 export type Exp =
   | v
@@ -16,7 +16,7 @@ export type Exp =
   | str
   | quote
   | type
-  // | suite
+  | suite
   | the
 
 interface v {
@@ -183,17 +183,17 @@ export const type: type = {
   kind: "Exp.type",
 }
 
-// interface suite {
-//   kind: "Exp.suite"
-//   stmts: Array<Stmt.Stmt>
-//   ret: Exp
-// }
+interface suite {
+  kind: "Exp.suite"
+  stmts: Array<Stmt.Stmt>
+  ret: Exp
+}
 
-// export const suite = (stmts: Array<Stmt.Stmt>, ret: Exp): suite => ({
-//   kind: "Exp.suite",
-//   stmts,
-//   ret,
-// })
+export const suite = (stmts: Array<Stmt.Stmt>, ret: Exp): suite => ({
+  kind: "Exp.suite",
+  stmts,
+  ret,
+})
 
 interface the {
   kind: "Exp.the"
