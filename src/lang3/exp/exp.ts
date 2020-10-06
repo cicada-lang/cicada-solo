@@ -69,12 +69,12 @@ export const ap = (target: Exp, arg: Exp): ap => ({
 
 interface obj {
   kind: "Exp.obj"
-  map: Map<string, Exp>
+  properties: Map<string, Exp>
 }
 
-export const obj = (map: Map<string, Exp>): obj => ({
+export const obj = (properties: Map<string, Exp>): obj => ({
   kind: "Exp.obj",
-  map,
+  properties,
 })
 
 interface fill {

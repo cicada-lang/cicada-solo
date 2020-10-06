@@ -4,23 +4,23 @@
   Check(ctx, Exp.obj(Map.empty), Value.type)
   ----------------------------------------- obj_type_empty
 
-  Check(ctx, Exp.obj(Map.extend(exps, name, exp)), Value.type)
+  Check(ctx, Exp.obj(Map.extend(properties, name, exp)), Value.type)
   ------------------------------------------------------------ obj_type_extend
   Check(ctx, exp, Value.type)
-  Check(ctx, Exp.obj(exps), Value.type)
+  Check(ctx, Exp.obj(properties), Value.type)
 
-  Check(ctx, Exp.obj(Map.empty), Value.obj(tel))
-  ---------------------------------------------- obj_empty
+  Check(ctx, Exp.obj(properties), Value.obj({ next: null }))
+  ---------------------------------------------- obj_end
 
-  Check(ctx, Exp.obj(exps), Value.obj(tel))
-  ---------------------------------------------------------------- obj_extend
-  Map.Lookup(exps, name, exp)
+  Check(ctx, Exp.obj(properties), Value.obj(tel))
+  ---------------------------------------------------------------- obj_next
+  Map.Lookup(properties, name, exp)
   Check(ctx, name, exp, t)
-  Check(ctx, Exp.obj(less_exps), Value.obj(filled_tel))
+  Check(ctx, Exp.obj(less_properties), Value.obj(filled_tel))
   @where {
-    { name, t } = Tel.next(tel)
-    less_exps = Map.delete(exps, name)
+    { name, t } = tel.next
+    less_properties = Map.delete(properties, name)
     value = Exp.evaluate(Ctx.to_env(ctx), exp)
-    filled_tel = Tel.fill(tel, name, value)
+    filled_tel = Telescope.fill(tel, value)
   }
 }
