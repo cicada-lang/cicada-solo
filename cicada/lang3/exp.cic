@@ -8,6 +8,7 @@
   ap(target: Exp, arg: Exp): Exp
 
   obj(map: Map(String, Exp)): Exp
+  fill(target: Exp, arg: Exp): Exp
   dot(target: Exp, name: String): Exp
 
   type: Exp
