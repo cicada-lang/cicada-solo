@@ -29,7 +29,6 @@
 - [lang3] [draft] check
 
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
-- 尝试使用 js 的 record (object) 与 Array 语法（包括 pattern matching）。
 
 # partech -- parsing techniques
 
