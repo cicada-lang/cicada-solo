@@ -3,16 +3,16 @@ import * as Exp from "../exp"
 import * as Env from "../env"
 import * as Neutral from "../neutral"
 
-export type Value = reflection | fn | zero | add1
+export type Value = not_yet | fn | zero | add1
 
-interface reflection {
-  kind: "Value.reflection"
+interface not_yet {
+  kind: "Value.not_yet"
   t: Ty.Ty
   neutral: Neutral.Neutral
 }
 
-export const reflection = (t: Ty.Ty, neutral: Neutral.Neutral): reflection => ({
-  kind: "Value.reflection",
+export const not_yet = (t: Ty.Ty, neutral: Neutral.Neutral): not_yet => ({
+  kind: "Value.not_yet",
   t,
   neutral,
 })

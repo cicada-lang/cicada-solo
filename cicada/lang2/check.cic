@@ -22,7 +22,7 @@
   ------------------------------------------------------- fn_pi
   Check(Map.extend(ctx, name, arg_t), ret, ret_t)
   @where {
-    arg = Value.reflection(arg_t, Neutral.v(name))
+    arg = Value.not_yet(arg_t, Neutral.v(name))
     ret_t = Closure.apply(ret_t_cl, arg)
   }
 
@@ -74,7 +74,7 @@
   --------------------------------- cdr
   Check(ctx, target, Value.sigma(car_t, ret_t_cl))
   @where {
-    car = Value.reflection(car_t, Neutral.v(name))
+    car = Value.not_yet(car_t, Neutral.v(name))
     ret_t = Closure.apply(ret_t_cl, car)
   }
 

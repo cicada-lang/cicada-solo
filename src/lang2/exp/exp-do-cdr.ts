@@ -7,9 +7,9 @@ import * as Trace from "../../trace"
 export function do_cdr(target: Value.Value): Value.Value {
   if (target.kind === "Value.cons") {
     return target.cdr
-  } else if (target.kind === "Value.reflection") {
+  } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.sigma") {
-      return Value.reflection(
+      return Value.not_yet(
         Closure.apply(target.t.cdr_t_cl, Exp.do_car(target)),
         Neutral.cdr(target.neutral)
       )
@@ -26,7 +26,7 @@ export function do_cdr(target: Value.Value): Value.Value {
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "cdr",
-        expecting: ["Value.cons", "Value.reflection"],
+        expecting: ["Value.cons", "Value.not_yet"],
         reality: target.kind,
       })
     )

@@ -22,10 +22,10 @@ export function readback(
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
     const name = ut.freshen_name(used, value_arg_name(value))
-    const variable = Value.reflection(t.arg_t, Neutral.v(name))
+    const variable = Value.not_yet(t.arg_t, Neutral.v(name))
     const ret = Exp.do_ap(value, variable)
     return Exp.fn(name, Value.readback(new Set([...used, name]), t.ret_t, ret))
-  } else if (value.kind === "Value.reflection") {
+  } else if (value.kind === "Value.not_yet") {
     if (ut.equal(t, value.t)) {
       return Neutral.readback(used, value.neutral)
     } else {

@@ -8,9 +8,9 @@ export function do_absurd_ind(
   target: Value.Value,
   motive: Value.Value
 ): Value.Value {
-  if (target.kind === "Value.reflection") {
+  if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.absurd") {
-      return Value.reflection(
+      return Value.not_yet(
         motive,
         Neutral.absurd_ind(
           target.neutral,
@@ -30,7 +30,7 @@ export function do_absurd_ind(
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "absurd_ind",
-        expecting: ["Value.reflection"],
+        expecting: ["Value.not_yet"],
         reality: target.kind,
       })
     )

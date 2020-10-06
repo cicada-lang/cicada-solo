@@ -6,9 +6,9 @@ import * as Trace from "../../trace"
 export function do_car(target: Value.Value): Value.Value {
   if (target.kind === "Value.cons") {
     return target.car
-  } else if (target.kind === "Value.reflection") {
+  } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.sigma") {
-      return Value.reflection(target.t.car_t, Neutral.car(target.neutral))
+      return Value.not_yet(target.t.car_t, Neutral.car(target.neutral))
     } else {
       throw new Trace.Trace(
         Exp.explain_elim_target_type_mismatch({
@@ -22,7 +22,7 @@ export function do_car(target: Value.Value): Value.Value {
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "car",
-        expecting: ["Value.cons", "Value.reflection"],
+        expecting: ["Value.cons", "Value.not_yet"],
         reality: target.kind,
       })
     )

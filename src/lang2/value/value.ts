@@ -18,7 +18,7 @@ export type Value =
   | str
   | quote
   | type
-  | reflection
+  | not_yet
 
 export interface pi {
   kind: "Value.pi"
@@ -164,14 +164,14 @@ export const type: type = {
   kind: "Value.type",
 }
 
-interface reflection {
-  kind: "Value.reflection"
+interface not_yet {
+  kind: "Value.not_yet"
   t: Ty.Ty
   neutral: Neutral.Neutral
 }
 
-export const reflection = (t: Ty.Ty, neutral: Neutral.Neutral): reflection => ({
-  kind: "Value.reflection",
+export const not_yet = (t: Ty.Ty, neutral: Neutral.Neutral): not_yet => ({
+  kind: "Value.not_yet",
   t,
   neutral,
 })

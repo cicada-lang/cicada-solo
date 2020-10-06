@@ -9,7 +9,7 @@ export function to_env(ctx: Ctx.Ctx): Env.Env {
     if (value !== undefined) {
       Env.update(env, name, value)
     } else {
-      Env.update(env, name, Value.reflection(t, Neutral.v(name)))
+      Env.update(env, name, Value.not_yet(t, Neutral.v(name)))
     }
   }
   return env

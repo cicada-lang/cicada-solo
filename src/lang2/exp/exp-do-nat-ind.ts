@@ -19,7 +19,7 @@ export function do_nat_ind(
       Exp.do_ap(step, target.prev),
       Exp.do_nat_ind(target.prev, motive, base, step)
     )
-  } else if (target.kind === "Value.reflection") {
+  } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.nat") {
       const motive_t = Value.pi(
         Value.nat,
@@ -27,7 +27,7 @@ export function do_nat_ind(
       )
       const base_t = Exp.do_ap(motive, Value.zero)
       const step_t = Exp.nat_ind_step_t(motive)
-      return Value.reflection(
+      return Value.not_yet(
         Exp.do_ap(motive, target),
         Neutral.nat_ind(
           target.neutral,
@@ -49,7 +49,7 @@ export function do_nat_ind(
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "nat_ind",
-        expecting: ["Value.zero", "Value.add1", "Value.reflection"],
+        expecting: ["Value.zero", "Value.add1", "Value.not_yet"],
         reality: target.kind,
       })
     )

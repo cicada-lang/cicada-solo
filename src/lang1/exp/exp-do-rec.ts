@@ -19,10 +19,10 @@ export function do_rec(
       Exp.do_ap(step, target.prev),
       Exp.do_rec(t, target.prev, base, step)
     )
-  } else if (target.kind === "Value.reflection") {
+  } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Ty.nat") {
       const step_t = Ty.arrow(Ty.nat, Ty.arrow(t, t))
-      return Value.reflection(
+      return Value.not_yet(
         t,
         Neutral.rec(
           t,
@@ -44,7 +44,7 @@ export function do_rec(
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "rec",
-        expecting: ["Value.zero", "Value.add1", "Value.reflection"],
+        expecting: ["Value.zero", "Value.add1", "Value.not_yet"],
         reality: target.kind,
       })
     )

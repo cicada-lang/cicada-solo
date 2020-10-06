@@ -8,5 +8,5 @@
 
   type: Value
 
-  reflection(t: Value, neutral: Neutral): Value
+  not_yet(t: Value, neutral: Neutral): Value
 }

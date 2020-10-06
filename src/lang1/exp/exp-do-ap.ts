@@ -9,9 +9,9 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   if (target.kind === "Value.fn") {
     const new_env = Env.update(Env.clone(target.env), target.name, arg)
     return Exp.evaluate(new_env, target.ret)
-  } else if (target.kind === "Value.reflection") {
+  } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Ty.arrow") {
-      return Value.reflection(
+      return Value.not_yet(
         target.t.ret_t,
         Neutral.ap(target.neutral, new Normal.Normal(target.t.arg_t, arg))
       )
@@ -28,7 +28,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "ap",
-        expecting: ["Value.fn", "Value.reflection"],
+        expecting: ["Value.fn", "Value.not_yet"],
         reality: target.kind,
       })
     )
