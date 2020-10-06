@@ -3,7 +3,7 @@ import * as Ty from "../ty"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 
-export function convert(
+export function conversion(
   ctx: Ctx.Ctx,
   t: Ty.Ty,
   x: Value.Value,

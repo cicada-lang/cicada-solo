@@ -23,7 +23,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       Exp.check(ctx, exp.cdr, cdr_t)
     } else if (exp.kind === "Exp.same") {
       const equal = Value.is_equal(ctx, t)
-      if (!Value.convert(ctx, equal.t, equal.from, equal.to)) {
+      if (!Value.conversion(ctx, equal.t, equal.from, equal.to)) {
         throw new Trace.Trace(
           ut.aline(`
           |I am expecting the following two values to be the same ${Exp.repr(
@@ -46,7 +46,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       Exp.check(ctx, ret, t)
     } else {
       const u = Exp.infer(ctx, exp)
-      if (!Value.convert(ctx, Value.type, t, u)) {
+      if (!Value.conversion(ctx, Value.type, t, u)) {
         throw new Trace.Trace(
           ut.aline(`
           |I infer the type of ${Exp.repr(exp)} to be ${Exp.repr(
