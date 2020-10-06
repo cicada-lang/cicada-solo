@@ -35,8 +35,8 @@
 
   Check(ctx, Exp.suite(List.cons({ name, exp }, defs), ret), t)
   -------------------------------------------------- suite_cons
-  Check(Map.extend(ctx, name, exp_t), Exp.suite(defs, ret), t)
   Check(ctx, exp, exp_t)
+  Check(Map.extend(ctx, name, exp_t), Exp.suite(defs, ret), t)
 
   Check(ctx, Exp.zero, Ty.nat)
   ---------------------------- zero

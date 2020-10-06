@@ -5,7 +5,6 @@
   Map.Lookup(Map.extend(map, key, value), key, value)
   --------------------------------------------------- here
 
-
   Map.Lookup(Map.extend(rest, any_key, any_value), key, value)
   ------------------------------------------------------------ there
   prev: Map.Lookup(rest, key, value)

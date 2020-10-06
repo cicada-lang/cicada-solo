@@ -1,0 +1,26 @@
+@module lang3
+
+@judgment Check(ctx: Map(String, Value), exp: Exp, t: Value) {
+  Check(ctx, Exp.obj(Map.empty), Value.type)
+  ----------------------------------------- obj_type_empty
+
+  Check(ctx, Exp.obj(Map.extend(exps, name, exp)), Value.type)
+  ------------------------------------------------------------ obj_type_extend
+  Check(ctx, exp, Value.type)
+  Check(ctx, Exp.obj(exps), Value.type)
+
+  Check(ctx, Exp.obj(Map.empty), Value.obj(tel))
+  ---------------------------------------------- obj_empty
+
+  Check(ctx, Exp.obj(exps), Value.obj(tel))
+  ---------------------------------------------------------------- obj_extend
+  Map.Lookup(exps, name, exp)
+  Check(ctx, name, exp, t)
+  Check(ctx, Exp.obj(less_exps), Value.obj(filled_tel))
+  @where {
+    { name, t } = Tel.next(tel)
+    less_exps = Map.delete(exps, name)
+    value = Exp.evaluate(Ctx.to_env(ctx), exp)
+    filled_tel = Tel.fill(tel, name, value)
+  }
+}

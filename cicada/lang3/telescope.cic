@@ -1,5 +1,10 @@
 @module lang3
 
 @datatype Telescope {
-  tel(env: Map(String, Value), values: Map(String, Value), exps: Map(String, Exp)): Telescope
+  tel(
+    env: Map(String, Value),
+    values: Map(String, Value),
+    next: { name: String, t: Value },
+    exps: Map(String, Exp),
+  ): Telescope
 }
