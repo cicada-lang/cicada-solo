@@ -1,0 +1,5 @@
+@module lang3
+
+@datatype Telescope {
+  tel(env: Map(String, Value), values: Map(String, Value), exps: Map(String, Exp)): Telescope
+}

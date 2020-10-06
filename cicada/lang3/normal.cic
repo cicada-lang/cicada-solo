@@ -1,0 +1,5 @@
+@module lang3
+
+@datatype Normal {
+  normal(t: Value, value: Value): Normal
+}

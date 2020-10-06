@@ -1,0 +1,9 @@
+@module lang3
+
+@datatype Neutral {
+  v(name: String): Neutral
+
+  ap(target: Neutral, arg: Normal): Neutral
+
+  dot(target: Neutral, name: String): Neutral
+}

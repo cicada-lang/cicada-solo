@@ -1,0 +1,5 @@
+@module lang3
+
+@datatype Closure {
+  cl(env: Map(String, Value), name: String, exp: Exp): Closure
+}

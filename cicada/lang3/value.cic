@@ -1,39 +1,12 @@
 @module lang3
 
-@datatype Closure {
-  cl(env: Map(String, Value), name: String, exp: Exp): Closure
-}
-
-@datatype Telescope {
-  tl(env: Map(String, Value), map: Map(String, Exp)): Telescope
-}
-
 @datatype Value {
   pi(arg_t: Value, ret_t_cl: Closure): Value
   fn(ret_cl: Closure): Value
 
-  sigma(car_t: Value, cdr_t_cl: Closure): Value
-  cons(car: Value, cdr: Value): Value
-
-  cls(t_map: Map(String, Value), t_map_tl: Telescope): Value
-  obj(map: Map(String, Value)): Value
+  obj(tel: Telescope): Value
 
   type: Value
 
   reflection(t: Value, neutral: Neutral): Value
-}
-
-@datatype Neutral {
-  v(name: String): Neutral
-
-  ap(target: Neutral, arg: Normal): Neutral
-
-  car(target: Neutral): Neutral
-  cdr(target: Neutral): Neutral
-
-  dot(target: Neutral, name: String): Neutral
-}
-
-@datatype Normal {
-  normal(t: Value, value: Value): Normal
 }

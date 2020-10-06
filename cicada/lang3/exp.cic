@@ -7,18 +7,10 @@
   fn(name: String, ret: Exp): Exp
   ap(target: Exp, arg: Exp): Exp
 
-  sigma(name: String, car_t: Exp, cdr_t: Exp): Exp
-  cons(car: Exp, cdr: Exp): Exp
-  car(target: Exp): Exp
-  cdr(target: Exp): Exp
-
-  cls(t_map: Map(String, Exp)): Exp
   obj(map: Map(String, Exp)): Exp
   dot(target: Exp, name: String): Exp
 
   type: Exp
-
-  let(name: String, exp: Exp, ret: Exp): Exp
 
   the(t: Exp, exp: Exp): Exp
 }
