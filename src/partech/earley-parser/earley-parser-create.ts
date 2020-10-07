@@ -1,7 +1,5 @@
 import * as EarleyParser from "../earley-parser"
 import * as Schedule from "./schedule"
-import * as TaskChart from "./task-chart"
-import * as Task from "./task"
 import * as Value from "../value"
 import * as Token from "../token"
 import * as Tree from "../tree"
@@ -14,7 +12,7 @@ export function create(
   if (grammar.kind !== "Value.grammar") {
     throw new Error(
       `expecting grammar to be Value.grammar.\n` +
-        `grammar: ${ut.inspect(Value.present(grammar))}\n`
+      `grammar: ${ut.inspect(Value.present(grammar))}\n`
     )
   }
 

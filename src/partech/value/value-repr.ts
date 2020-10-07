@@ -1,6 +1,4 @@
 import * as Value from "../value"
-import * as Exp from "../exp"
-import { Obj } from "../../ut"
 
 export function repr(value: Value.Value): string {
   switch (value.kind) {

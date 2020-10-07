@@ -2,10 +2,8 @@ import * as Schedule from "../schedule"
 import * as TaskChart from "../task-chart"
 import * as Task from "../task"
 import * as Token from "../../token"
-import * as Span from "../../span"
 import * as Value from "../../value"
 import { ParsingError } from "../../errors"
-import * as ut from "../../../ut"
 
 // NOTE three kinds of errors in the following function:
 //   "(a b c"    --  "Found END_OF_TOKENS, while expecting: ..."
