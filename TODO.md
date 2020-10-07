@@ -25,9 +25,10 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
-- [lang3] telescope-fill.ts
 - [lang3] exp-evaluate.ts
-- [lang3] closure-apply.ts
+- [lang3] stmt-execute.ts
+- [lang3] exp-evaluate.ts -- obj
+- [lang3] telescope-fill.ts
 - [lang3] exp-check.ts
 - [lang3] exp-infer.ts
 
