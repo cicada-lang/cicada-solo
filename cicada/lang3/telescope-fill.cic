@@ -1,10 +1,10 @@
 @module lang3
 
 Telescope.fill(Telescope, Value): Telescope
-Telescope.fill(Telescope.tel(env, satisfied, next, scope), value) = {
+Telescope.fill(Telescope.tel(env, satisfied, next, queue), value) = {
   env = Env.extend(env, next.name, value)
   satisfied = Map.extend(env, next.name, { t: next.t, value })
-  { { name, exp }, rest } = Queue.break(scope)
+  { { name, exp }, rest } = Queue.break(queue)
   t = Exp.evaluate(env, entry.exp)
   Telescope.tel(env, satisfied, { name, t }, rest)
 }
