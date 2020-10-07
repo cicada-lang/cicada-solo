@@ -27,7 +27,8 @@
 
 - [lang3] value & neutral
 - [lang3] ctx-to-env.ts
-- [lang3] closure
+- [lang3] env-evaluate.ts
+- [lang3] closure-apply.ts
 - [lang3] telescope
 - [lang3] value -- obj
 
