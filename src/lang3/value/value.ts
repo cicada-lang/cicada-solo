@@ -4,12 +4,14 @@
 export type Value =
   // | pi
   // | fn
+  // | obj
+  // | fill
   // | equal
   // | same
   // | absurd
   // | str
   // | quote
-  type
+  | type
 // | not_yet
 
 export interface type {

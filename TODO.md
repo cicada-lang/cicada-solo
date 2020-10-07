@@ -28,7 +28,6 @@
 - [lang3] value
 - [lang3] closure
 - [lang3] neutral
-- [lang3] normal
 - [lang3] telescope
 - [lang3] value -- obj
 
