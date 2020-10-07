@@ -25,8 +25,9 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
-- [lang3] [draft] check -- 区分 obj 与 cls
-- [lang3] [draft] telescope-fill -- 区分 obj 与 cls
+- [lang3] exp -- 区分 obj 与 cls
+- [lang3] value -- 区分 obj 与 cls
+- [lang3] exp-evaluate.ts -- 区分 obj 与 cls
 - [lang3] telescope-fill.ts
 - [lang3] exp-evaluate.ts -- fill
 - [lang3] exp-check.ts

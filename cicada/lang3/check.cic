@@ -1,25 +1,25 @@
 @module lang3
 
 @judgment Check(ctx: Map(String, Value), exp: Exp, t: Value) {
-  Check(ctx, Exp.obj(Map.empty), Value.type)
-  ----------------------------------------- obj_type_empty
+  Check(ctx, Exp.cls(List.null), Value.type)
+  ----------------------------------------- cls_null
 
-  Check(ctx, Exp.obj(Map.extend(properties, name, exp)), Value.type)
-  ------------------------------------------------------------ obj_type_extend
-  Check(ctx, exp, Value.type)
-  Check(Map.extend(ctx, name, value), Exp.obj(properties), Value.type)
+  Check(ctx, Exp.cls(List.cons({ name, t }, tail)), Value.type)
+  ------------------------------------------------------------ cls_cons
+  Check(ctx, t, Value.type)
+  Check(Map.extend(ctx, name, t_value), Exp.cls(tail), Value.type)
   @where {
-    value = Exp.evaluate(Ctx.to_env(ctx), exp)
+    t_value = Exp.evaluate(Ctx.to_env(ctx), t)
   }
 
-  Check(ctx, Exp.obj(properties), Value.obj({ next: null }))
+  Check(ctx, Exp.obj(properties), Value.cls({ next: null }))
   ---------------------------------------------- obj_end
 
-  Check(ctx, Exp.obj(properties), Value.obj(tel))
+  Check(ctx, Exp.obj(properties), Value.cls(tel))
   ---------------------------------------------------------------- obj_next
   Map.Lookup(properties, name, exp)
   Check(ctx, name, exp, t)
-  Check(ctx, Exp.obj(less_properties), Value.obj(filled_tel))
+  Check(ctx, Exp.obj(less_properties), Value.cls(filled_tel))
   @where {
     { name, t } = tel.next
     less_properties = Map.remove(properties, name)
@@ -28,8 +28,8 @@
   }
 
   Check(ctx, Exp.dot(target, name), t)
-  ------------------------------------ dot_over_next
-  Check(ctx, target, Value.obj(tel))
+  ------------------------------------ dot
+  Check(ctx, target, Value.cls(tel))
   @where {
     t = @loop {
       next = tel.next
