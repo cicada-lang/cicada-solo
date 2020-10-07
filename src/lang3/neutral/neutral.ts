@@ -1,11 +1,6 @@
 import * as Normal from "../normal"
 
-export type Neutral =
-  | v
-  | ap
-  // | dot
-  | replace
-  | absurd_ind
+export type Neutral = v | ap | dot | replace | absurd_ind
 
 interface v {
   kind: "Neutral.v"
@@ -27,6 +22,18 @@ export const ap = (target: Neutral, arg: Normal.Normal): ap => ({
   kind: "Neutral.ap",
   target,
   arg,
+})
+
+interface dot {
+  kind: "Neutral.dot"
+  target: Neutral
+  name: string
+}
+
+export const dot = (target: Neutral, name: string): dot => ({
+  kind: "Neutral.dot",
+  target,
+  name,
 })
 
 interface replace {

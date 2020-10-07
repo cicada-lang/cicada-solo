@@ -51,7 +51,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         throw new Error()
       }
       case "Exp.dot": {
-        throw new Error()
+        return Exp.do_dot(Exp.evaluate(env, exp.target), exp.name)
       }
       case "Exp.equal": {
         return Value.equal(
