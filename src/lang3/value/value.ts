@@ -1,4 +1,4 @@
-// import * as Neutral from "../neutral"
+import * as Neutral from "../neutral"
 import * as Closure from "../closure"
 
 export type Value =
@@ -12,8 +12,7 @@ export type Value =
   | str
   | quote
   | type
-// | not_yet
-
+  | not_yet
 
 export interface pi {
   kind: "Value.pi"
@@ -93,14 +92,14 @@ export const type: type = {
   kind: "Value.type",
 }
 
-// interface not_yet {
-//   kind: "Value.not_yet"
-//   t: Ty.Ty
-//   neutral: Neutral.Neutral
-// }
+interface not_yet {
+  kind: "Value.not_yet"
+  t: Value
+  neutral: Neutral.Neutral
+}
 
-// export const not_yet = (t: Ty.Ty, neutral: Neutral.Neutral): not_yet => ({
-//   kind: "Value.not_yet",
-//   t,
-//   neutral,
-// })
+export const not_yet = (t: Value, neutral: Neutral.Neutral): not_yet => ({
+  kind: "Value.not_yet",
+  t,
+  neutral,
+})
