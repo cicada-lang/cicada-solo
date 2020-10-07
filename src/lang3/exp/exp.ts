@@ -5,8 +5,9 @@ export type Exp =
   | pi
   | fn
   | ap
-  | obj
+  | cls
   | fill
+  | obj
   | dot
   | equal
   | same
@@ -67,14 +68,14 @@ export const ap = (target: Exp, arg: Exp): ap => ({
   arg,
 })
 
-interface obj {
-  kind: "Exp.obj"
-  properties: Map<string, Exp>
+interface cls {
+  kind: "Exp.cls"
+  scope: Array<{name: string, t: Exp}>
 }
 
-export const obj = (properties: Map<string, Exp>): obj => ({
-  kind: "Exp.obj",
-  properties,
+export const cls = (scope: Array<{name: string, t: Exp}>): cls => ({
+  kind: "Exp.cls",
+  scope,
 })
 
 interface fill {
@@ -87,6 +88,16 @@ export const fill = (target: Exp, arg: Exp): fill => ({
   kind: "Exp.fill",
   target,
   arg,
+})
+
+interface obj {
+  kind: "Exp.obj"
+  properties: Map<string, Exp>
+}
+
+export const obj = (properties: Map<string, Exp>): obj => ({
+  kind: "Exp.obj",
+  properties,
 })
 
 interface dot {

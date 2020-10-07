@@ -5,6 +5,7 @@ import * as Telescope from "../telescope"
 export type Value =
   | pi
   | fn
+  | cls
   | obj
   | equal
   | same
@@ -36,14 +37,24 @@ export const fn = (ret_cl: Closure.Closure): fn => ({
   ret_cl,
 })
 
-interface obj {
-  kind: "Value.obj"
+interface cls {
+  kind: "Value.cls"
   tel: Telescope.Telescope
 }
 
-export const obj = (tel: Telescope.Telescope): obj => ({
-  kind: "Value.obj",
+export const cls = (tel: Telescope.Telescope): cls => ({
+  kind: "Value.cls",
   tel,
+})
+
+interface obj {
+  kind: "Value.obj"
+  properties: Map<string, Value>
+}
+
+export const obj = (properties: Map<string, Value>): obj => ({
+  kind: "Value.obj",
+  properties,
 })
 
 export interface equal {

@@ -28,27 +28,30 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       case "Exp.ap": {
         return Exp.do_ap(evaluate(env, exp.target), evaluate(env, exp.arg))
       }
-      case "Exp.obj": {
-        const { properties } = exp
-        if (properties.size === 0) {
+      case "Exp.cls": {
+        const { scope } = exp
+        if (scope.length === 0) {
           const queue = new Array()
           const next = undefined
           const tel = Telescope.create(env, new Array(), next, queue)
-          return Value.obj(tel)
+          return Value.cls(tel)
         } else {
           const queue = new Array()
-          for (const [name, exp] of properties) {
-            queue.push({ name, exp })
+          for (const { name, t } of scope) {
+            queue.push({ name, t })
           }
           const { name, exp } = queue.pop()
           const t = Exp.evaluate(env, exp)
           const next = { name, t }
           const tel = Telescope.create(env, new Array(), next, queue)
-          return Value.obj(tel)
+          return Value.cls(tel)
         }
       }
       case "Exp.fill": {
-        throw new Error()
+        throw new Error("TODO")
+      }
+      case "Exp.obj": {
+        throw new Error("TODO")
       }
       case "Exp.dot": {
         return Exp.do_dot(Exp.evaluate(env, exp.target), exp.name)

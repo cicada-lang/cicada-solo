@@ -33,7 +33,7 @@ export function dot(tel: Telescope.Telescope, name: string): Value.Value {
 function loop(
   env: Env.Env,
   next: undefined | { name: string; t: Value.Value },
-  queue: Array<{ name: string; exp: Exp.Exp }>,
+  queue: Array<{ name: string; t: Exp.Exp }>,
   name: string
 ): undefined | Value.Value {
   if (next === undefined) {
@@ -48,7 +48,7 @@ function loop(
   env = Env.update(env, next.name, next_value)
 
   const [entry, ...rest] = queue
-  const t = Exp.evaluate(env, entry.exp)
+  const t = Exp.evaluate(env, entry.t)
   next = { name: entry.name, t }
 
   return loop(env, next, rest, name)
