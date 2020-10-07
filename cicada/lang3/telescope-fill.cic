@@ -4,7 +4,7 @@ Telescope.fill(Telescope, Value): Telescope
 Telescope.fill(Telescope.tel(env, sat, next, queue), value) = {
   env = Env.extend(env, next.name, value)
   sat = [...sat, { name: next.name, t: next.t, value }]
-  [{ name, exp }, rest] = queue[0]
+  [{ name, exp }, ...rest] = queue[0]
   t = Exp.evaluate(env, entry.exp)
   Telescope.tel(env, sat, { name, t }, rest)
 }
