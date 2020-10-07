@@ -1,12 +1,16 @@
 import * as Value from "../value"
 import * as Closure from "../closure"
 import * as Neutral from "../neutral"
-import * as Ty from "../ty"
+
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as ut from "../../ut"
 
-export function readback(ctx: Ctx.Ctx, t: Ty.Ty, value: Value.Value): Exp.Exp {
+export function readback(
+  ctx: Ctx.Ctx,
+  t: Value.Value,
+  value: Value.Value
+): Exp.Exp {
   if (t.kind === "Value.nat" && value.kind === "Value.zero") {
     return Exp.zero
   } else if (t.kind === "Value.nat" && value.kind === "Value.add1") {

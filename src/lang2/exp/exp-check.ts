@@ -2,13 +2,13 @@ import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
-import * as Ty from "../ty"
+
 import * as Closure from "../closure"
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
-export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
+export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
   try {
     if (exp.kind === "Exp.fn") {
       const pi = Value.is_pi(ctx, t)

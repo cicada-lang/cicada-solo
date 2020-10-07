@@ -1,4 +1,3 @@
-import * as Ty from "../ty"
 import * as Value from "../value"
 
 // NOTE side effect API,
@@ -6,7 +5,7 @@ import * as Value from "../value"
 export type Ctx = Map<
   string,
   {
-    t: Ty.Ty
+    t: Value.Value
     value?: Value.Value
   }
 >

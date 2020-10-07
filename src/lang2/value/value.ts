@@ -1,4 +1,3 @@
-import * as Ty from "../ty"
 import * as Neutral from "../neutral"
 import * as Closure from "../closure"
 
@@ -94,12 +93,12 @@ export const add1 = (prev: Value): add1 => ({
 
 export interface equal {
   kind: "Value.equal"
-  t: Ty.Ty
+  t: Value
   from: Value
   to: Value
 }
 
-export const equal = (t: Ty.Ty, from: Value, to: Value): equal => ({
+export const equal = (t: Value, from: Value, to: Value): equal => ({
   kind: "Value.equal",
   t,
   from,
@@ -166,11 +165,11 @@ export const type: type = {
 
 interface not_yet {
   kind: "Value.not_yet"
-  t: Ty.Ty
+  t: Value
   neutral: Neutral.Neutral
 }
 
-export const not_yet = (t: Ty.Ty, neutral: Neutral.Neutral): not_yet => ({
+export const not_yet = (t: Value, neutral: Neutral.Neutral): not_yet => ({
   kind: "Value.not_yet",
   t,
   neutral,

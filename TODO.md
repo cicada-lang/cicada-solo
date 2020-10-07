@@ -30,6 +30,7 @@
 - [lang3] neutral
 - [lang3] normal
 - [lang3] telescope
+- [lang3] value -- obj
 
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
 

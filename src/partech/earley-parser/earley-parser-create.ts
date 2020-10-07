@@ -12,7 +12,7 @@ export function create(
   if (grammar.kind !== "Value.grammar") {
     throw new Error(
       `expecting grammar to be Value.grammar.\n` +
-      `grammar: ${ut.inspect(Value.present(grammar))}\n`
+        `grammar: ${ut.inspect(Value.present(grammar))}\n`
     )
   }
 

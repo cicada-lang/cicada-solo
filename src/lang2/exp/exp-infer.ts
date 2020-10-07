@@ -1,14 +1,14 @@
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
-import * as Ty from "../ty"
+
 import * as Closure from "../closure"
 import * as Env from "../env"
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
-export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
+export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
     if (exp.kind === "Exp.v") {
       const t = Ctx.lookup(ctx, exp.name)
