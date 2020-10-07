@@ -51,7 +51,12 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         throw new Error("TODO")
       }
       case "Exp.obj": {
-        throw new Error("TODO")
+        const { properties } = exp
+        return Value.obj(
+          new Map(
+            Array.from(properties, ([name, exp]) => [name, evaluate(env, exp)])
+          )
+        )
       }
       case "Exp.dot": {
         return Exp.do_dot(Exp.evaluate(env, exp.target), exp.name)
