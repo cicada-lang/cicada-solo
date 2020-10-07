@@ -7,8 +7,9 @@
   fn(name: String, ret: Exp): Exp
   ap(target: Exp, arg: Exp): Exp
 
-  obj(properties: Map(String, Exp)): Exp
+  cls(scope: Array({ name: String, t: Exp })): Exp
   fill(target: Exp, arg: Exp): Exp
+  obj(properties: Map(String, Exp)): Exp
   dot(target: Exp, name: String): Exp
 
   type: Exp
