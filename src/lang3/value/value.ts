@@ -4,8 +4,7 @@ import * as Closure from "../closure"
 export type Value =
   | pi
   | fn
-// | obj
-// | fill
+  // | obj
   | equal
   | same
   | absurd
