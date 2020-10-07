@@ -25,9 +25,15 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
+- [lang3] exp-check.ts -- stub
+- [lang3] exp-infer.ts -- stub
+- [lang3] stmt-declare.ts
 - [lang3] exp-check.ts
 - [lang3] exp-infer.ts
-- [lang3] stmt-declare.ts
+- [lang3] exp-check.ts -- obj
+- [lang3] exp-infer.ts -- cls as type
+- [lang3] exp-infer.ts -- fill as type
+- [lang3] exp-infer.ts -- dot
 
 - fix the use of `Trace`
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
