@@ -1,10 +1,11 @@
 import * as Neutral from "../neutral"
 import * as Closure from "../closure"
+import * as Telescope from "../telescope"
 
 export type Value =
   | pi
   | fn
-  // | obj
+  | obj
   | equal
   | same
   | absurd
@@ -33,6 +34,16 @@ interface fn {
 export const fn = (ret_cl: Closure.Closure): fn => ({
   kind: "Value.fn",
   ret_cl,
+})
+
+interface obj {
+  kind: "Value.obj"
+  tel: Telescope.Telescope
+}
+
+export const obj = (tel: Telescope.Telescope): obj => ({
+  kind: "Value.obj",
+  tel,
 })
 
 export interface equal {

@@ -26,7 +26,6 @@
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
 - [lang3] telescope-fill.ts
-- [lang3] value -- obj
 - [lang3] exp-evaluate.ts
 - [lang3] closure-apply.ts
 - [lang3] exp-check.ts
