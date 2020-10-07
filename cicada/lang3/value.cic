@@ -4,7 +4,8 @@
   pi(arg_t: Value, ret_t_cl: Closure): Value
   fn(ret_cl: Closure): Value
 
-  obj(tel: Telescope): Value
+  obj(tel: Telescope): Value  
+  obj(Precisely: Telescope): Value
 
   type: Value
 
