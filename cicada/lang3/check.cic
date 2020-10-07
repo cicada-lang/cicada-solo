@@ -7,7 +7,10 @@
   Check(ctx, Exp.obj(Map.extend(properties, name, exp)), Value.type)
   ------------------------------------------------------------ obj_type_extend
   Check(ctx, exp, Value.type)
-  Check(ctx, Exp.obj(properties), Value.type)
+  Check(Map.extend(ctx, name, value), Exp.obj(properties), Value.type)
+  @where {
+    value = Exp.evaluate(Ctx.to_env(ctx), exp)
+  }
 
   Check(ctx, Exp.obj(properties), Value.obj({ next: null }))
   ---------------------------------------------- obj_end
@@ -19,8 +22,20 @@
   Check(ctx, Exp.obj(less_properties), Value.obj(filled_tel))
   @where {
     { name, t } = tel.next
-    less_properties = Map.delete(properties, name)
+    less_properties = Map.remove(properties, name)
     value = Exp.evaluate(Ctx.to_env(ctx), exp)
     filled_tel = Telescope.fill(tel, value)
+  }
+
+  Check(ctx, Exp.dot(target, name), t)
+  ------------------------------------ dot_over_next
+  Check(ctx, target, Value.obj(tel))
+  @where {
+    t = @loop {
+      next = tel.next
+      if (next.name == name) return next.t
+      next_value = Value.not_yet(next.t, Neutral.v(next.name))
+      tel = Telescope.fill(tel, next_value)
+    }
   }
 }

@@ -26,8 +26,10 @@
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
 - [lang3] value
+- [lang3] closure
 - [lang3] neutral
 - [lang3] normal
+- [lang3] telescope
 
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
 
