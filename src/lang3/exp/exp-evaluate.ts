@@ -2,6 +2,7 @@ import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
 import * as Closure from "../closure"
+import * as Telescope from "../telescope"
 import * as Env from "../env"
 import * as Trace from "../../trace"
 
@@ -28,7 +29,23 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return Exp.do_ap(evaluate(env, exp.target), evaluate(env, exp.arg))
       }
       case "Exp.obj": {
-        throw new Error()
+        const { properties } = exp
+        if (properties.size === 0) {
+          const queue = new Array()
+          const next = undefined
+          const tel = Telescope.create(env, new Array(), next, queue)
+          return Value.obj(tel)
+        } else {
+          const queue = new Array()
+          for (const [name, exp] of properties) {
+            queue.push({ name, exp })
+          }
+          const { name, exp } = queue.pop()
+          const t = Exp.evaluate(env, exp)
+          const next = { name, t }
+          const tel = Telescope.create(env, new Array(), next, queue)
+          return Value.obj(tel)
+        }
       }
       case "Exp.fill": {
         throw new Error()

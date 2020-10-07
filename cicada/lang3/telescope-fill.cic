@@ -3,9 +3,8 @@
 Telescope.fill(Telescope, Value): Telescope
 Telescope.fill(Telescope.tel(env, satisfied, next, queue), value) = {
   env = Env.extend(env, next.name, value)
-  satisfied = Map.extend(env, next.name, { t: next.t, value })
-  { name, exp } = queue[0]
-  rest = Array.slice(queue, 1)
+  satisfied = [...satisfied, { name: next.name, t: next.t, value }]
+  [{ name, exp }, rest] = queue[0]
   t = Exp.evaluate(env, entry.exp)
   Telescope.tel(env, satisfied, { name, t }, rest)
 }

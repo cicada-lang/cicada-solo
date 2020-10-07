@@ -3,7 +3,7 @@
 @datatype Telescope {
   tel(
     env: Map(String, Value),
-    satisfied: Map(String, { t: Value, value: Value }),
+    satisfied: Array({ name: String, t: Value, value: Value }),
     next?: { name: String, t: Value },
     queue: Array({ name: String, exp: Exp }),
   ): Telescope
