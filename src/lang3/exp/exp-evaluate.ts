@@ -74,8 +74,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       case "Exp.suite": {
         env = Env.clone(env)
         for (const stmt of exp.stmts) {
-          // TODO
-          // Stmt.execute(env, stmt)
+          Stmt.execute(env, stmt)
         }
         return evaluate(env, exp.ret)
       }
