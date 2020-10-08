@@ -3,6 +3,7 @@ import * as Closure from "../closure"
 import * as Neutral from "../neutral"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
+import * as Env from "../env"
 import * as ut from "../../ut"
 
 export function readback(
@@ -25,18 +26,32 @@ export function readback(
       )
     )
   } else if (t.kind === "Value.cls") {
-    throw new Error("TODO")
-    // } else if (t.kind === "Value.sigma") {
-    //   // NOTE Pairs are also η-expanded.
-    //   //   Every value with a pair type,
-    //   //   whether it is neutral or not,
-    //   //   is read back with cons at the top.
-    //   const car = Exp.do_car(value)
-    //   const cdr = Exp.do_cdr(value)
-    //   return Exp.cons(
-    //     Value.readback(ctx, t.car_t, car),
-    //     Value.readback(ctx, Closure.apply(t.cdr_t_cl, car), cdr)
-    //   )
+    // NOTE η-expanded every value with cls type to obj.
+    const properties = new Map()
+    const { sat, next, scope } = t.tel
+    let { env } = t.tel
+    env = Env.clone(env)
+    for (const entry of sat) {
+      const property_value = Exp.do_dot(value, entry.name)
+      const property_t = entry.t
+      const property_exp = Value.readback(ctx, property_t, property_value)
+      properties.set(entry.name, property_exp)
+    }
+    if (next !== undefined) {
+      const property_value = Exp.do_dot(value, next.name)
+      const property_t = next.t
+      const property_exp = Value.readback(ctx, property_t, property_value)
+      properties.set(next.name, property_exp)
+      Env.update(env, next.name, property_value)
+    }
+    for (const entry of scope) {
+      const property_value = Exp.do_dot(value, entry.name)
+      const property_t = Exp.evaluate(env, entry.t)
+      const property_exp = Value.readback(ctx, property_t, property_value)
+      properties.set(entry.name, property_exp)
+      Env.update(env, entry.name, property_value)
+    }
+    return Exp.obj(properties)
   } else if (
     t.kind === "Value.absurd" &&
     value.kind === "Value.not_yet" &&
