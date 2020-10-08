@@ -30,7 +30,6 @@
 - [lang3] frontend
 - [lang3] cli
 - [lang3] tests/lang3
-- [lang3] exp-do-dot -- be able to dot `cls`
 
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
 

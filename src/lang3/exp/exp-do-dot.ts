@@ -16,6 +16,8 @@ export function do_dot(target: Value.Value, name: string): Value.Value {
       )
     }
     return value
+  } else if (target.kind === "Value.cls") {
+    return Telescope.dot(target.tel, name)
   } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.cls") {
       return Value.not_yet(
@@ -35,7 +37,7 @@ export function do_dot(target: Value.Value, name: string): Value.Value {
     throw new Trace.Trace(
       Exp.explain_elim_target_mismatch({
         elim: "dot",
-        expecting: ["Value.obj", "Value.not_yet"],
+        expecting: ["Value.obj", "Value.cls", "Value.not_yet"],
         reality: target.kind,
       })
     )
