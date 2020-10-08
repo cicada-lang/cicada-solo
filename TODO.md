@@ -28,7 +28,7 @@
 - [lang3] frontend/grammars.ts
 - [lang3] frontend/matchers.ts
 - [lang3] frontend/parse-stmts.ts
-- [lang3] cli
+- [lang3] cli/
 - [lang3] stmt-top.ts
 - [lang3] cli/commands/eval.ts
 - [lang3] tests/lang3
