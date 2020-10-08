@@ -29,8 +29,10 @@
 - [lang3] exp-infer.ts -- dot
 - [lang3] value-readback.ts
 - [lang3] exp-alpha-equivalent.ts
+- [lang3] frontend
+- [lang3] cli
+- [lang3] tests/lang3
 
-- fix the use of `Trace`
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
 
 # partech -- parsing techniques

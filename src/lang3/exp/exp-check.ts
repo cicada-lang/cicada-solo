@@ -16,7 +16,12 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       Exp.check(Ctx.extend(ctx, exp.name, pi.arg_t), exp.ret, ret_t)
     } else if (exp.kind === "Exp.obj") {
       const cls = Value.is_cls(ctx, t)
-      throw new Error("TODO")
+      const { env, sat, next, queue } = cls.tel
+      if (next === undefined) {
+        return
+      } else {
+        throw new Error("TODO")
+      }
     } else if (exp.kind === "Exp.same") {
       const equal = Value.is_equal(ctx, t)
       if (!Value.conversion(ctx, equal.t, equal.from, equal.to)) {
