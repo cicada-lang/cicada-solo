@@ -3,6 +3,7 @@ import * as Stmt from "../stmt"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as Closure from "../closure"
+import * as Telescope from "../telescope"
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
@@ -19,9 +20,21 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       const { env, sat, next, queue } = cls.tel
       if (next === undefined) {
         return
-      } else {
-        throw new Error("TODO")
       }
+      const found = exp.properties.get(next.name)
+      if (found === undefined) {
+        throw new Trace.Trace(
+          ut.aline(`
+            |Can no found next name: ${next.name}
+            |`)
+        )
+      }
+      Exp.check(ctx, found, next.t)
+      const less_properties = new Map(exp.properties)
+      less_properties.delete(next.name)
+      const value = Exp.evaluate(Ctx.to_env(ctx), found)
+      const filled_tel = Telescope.fill(cls.tel, value)
+      Exp.check(ctx, Exp.obj(less_properties), Value.cls(filled_tel))
     } else if (exp.kind === "Exp.same") {
       const equal = Value.is_equal(ctx, t)
       if (!Value.conversion(ctx, equal.t, equal.from, equal.to)) {
