@@ -4,4 +4,13 @@ _ = "abc"
 _ : { x : String }
 _ = { x = "abc" }
 
+_ : { x : { x : String } }
+_ = { x = { x = "abc" } }
+
+_ : { x : { x : String } }
+_ = { x = { x = "abc" } y = "123" }
+
+_ : { x : { x : String } y : String }
+_ = { x = { x = "abc" } y = "123" }
+
 @show _
