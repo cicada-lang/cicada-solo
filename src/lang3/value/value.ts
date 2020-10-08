@@ -37,7 +37,7 @@ export const fn = (ret_cl: Closure.Closure): fn => ({
   ret_cl,
 })
 
-interface cls {
+export interface cls {
   kind: "Value.cls"
   tel: Telescope.Telescope
 }

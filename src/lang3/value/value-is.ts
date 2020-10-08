@@ -12,6 +12,16 @@ export function is_pi(ctx: Ctx.Ctx, value: Value.Value): Value.pi {
   }
 }
 
+export function is_cls(ctx: Ctx.Ctx, value: Value.Value): Value.cls {
+  if (value.kind === "Value.cls") {
+    return value
+  } else {
+    throw new Trace.Trace(
+      Value.unexpected(ctx, value, { message: `I am expecting the type cls.` })
+    )
+  }
+}
+
 export function is_equal(ctx: Ctx.Ctx, value: Value.Value): Value.equal {
   if (value.kind === "Value.equal") {
     return value

@@ -40,24 +40,17 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.fill") {
       Exp.check(ctx, exp.target, Value.type)
       const target_value = Exp.evaluate(Ctx.to_env(ctx), exp.target)
-      if (target_value.kind === "Value.cls") {
-        const { next } = target_value.tel
-        if (next === undefined) {
-          throw new Trace.Trace(
-            ut.aline(`
-              |The telescope of the cls is full.
-              |`)
-          )
-        }
-        Exp.check(ctx, exp.arg, next.t)
-        return Value.type
-      } else {
+      const cls = Value.is_cls(ctx, target_value)
+      const { next } = cls.tel
+      if (next === undefined) {
         throw new Trace.Trace(
-          Value.unexpected(ctx, target_value, {
-            message: `I am expecting the value of target ot be cls.`,
-          })
+          ut.aline(`
+            |The telescope of the cls is full.
+            |`)
         )
       }
+      Exp.check(ctx, exp.arg, next.t)
+      return Value.type
     } else if (exp.kind === "Exp.dot") {
       throw new Error("TOOD")
     } else if (exp.kind === "Exp.equal") {
