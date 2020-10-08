@@ -18,6 +18,15 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
       return exp
     },
+    // "exp:cls"
+    "exp:fill": ({ target, args }) => {
+      let exp: Exp.Exp = Exp.v(pt.Tree.str(target))
+      for (const arg of pt.matchers.one_or_more_matcher(args)) {
+        exp = Exp.fill(exp, exp_matcher(arg))
+      }
+      return exp
+    },
+    // "exp:obj"
     "exp:dot": ({ target, name }) =>
       Exp.dot(exp_matcher(target), pt.Tree.str(name)),
     "exp:equal": ({ t, from, to }) =>
