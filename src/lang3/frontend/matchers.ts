@@ -18,6 +18,8 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
       return exp
     },
+    "exp:dot": ({ target, name }) =>
+      Exp.dot(exp_matcher(target), pt.Tree.str(name)),
     "exp:equal": ({ t, from, to }) =>
       Exp.equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
     "exp:same": () => Exp.same,
