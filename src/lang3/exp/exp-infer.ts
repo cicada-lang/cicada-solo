@@ -27,6 +27,12 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       Exp.check(ctx, exp.arg, pi.arg_t)
       const arg = Exp.evaluate(Ctx.to_env(ctx), exp.arg)
       return Closure.apply(pi.ret_t_cl, arg)
+    } else if (exp.kind === "Exp.cls") {
+      throw new Error("TOOD")
+    } else if (exp.kind === "Exp.fill") {
+      throw new Error("TOOD")
+    } else if (exp.kind === "Exp.dot") {
+      throw new Error("TOOD")
     } else if (exp.kind === "Exp.equal") {
       Exp.check(ctx, exp.t, Value.type)
       const t = Exp.evaluate(Ctx.to_env(ctx), exp.t)
@@ -75,11 +81,10 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       return t
     } else {
       throw new Trace.Trace(
-        "TODO"
-        // ut.aline(`
-        //   |I can not infer the type of ${Exp.repr(exp)}.
-        //   |I suggest you add a type annotation to the expression.
-        //   |`)
+        ut.aline(`
+          |I can not infer the type of ${Exp.repr(exp)}.
+          |I suggest you add a type annotation to the expression.
+          |`)
       )
     }
   } catch (error) {
