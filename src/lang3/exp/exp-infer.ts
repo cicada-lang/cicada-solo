@@ -28,7 +28,15 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       const arg = Exp.evaluate(Ctx.to_env(ctx), exp.arg)
       return Closure.apply(pi.ret_t_cl, arg)
     } else if (exp.kind === "Exp.cls") {
-      throw new Error("TOOD")
+      if (exp.scope.length === 0) {
+        return Value.type
+      } else {
+        const [{ name, t }, ...tail] = exp.scope
+        Exp.check(ctx, t, Value.type)
+        const t_value = Exp.evaluate(Ctx.to_env(ctx), t)
+        Exp.check(Ctx.extend(ctx, name, t_value), Exp.cls(tail), Value.type)
+        return Value.type
+      }
     } else if (exp.kind === "Exp.fill") {
       throw new Error("TOOD")
     } else if (exp.kind === "Exp.dot") {
