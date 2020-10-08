@@ -42,7 +42,7 @@ export const exp = {
     { target: "identifier" },
     { args: { $ap: ["one_or_more", '"["', "exp", '"]"'] } },
   ],
-  // "exp:obj": ['"{"', { properties: "properties" }, '"}"'],
+  "exp:obj": ['"{"', { properties: "properties" }, '"}"'],
   "exp:dot": [{ target: "exp" }, '"."', { name: "identifier" }],
   "exp:equal": [
     '"Equal"',
@@ -98,4 +98,12 @@ export const stmt = {
     { exp: "exp" },
   ],
   "stmt:show": ['"@"', '"show"', { exp: "exp" }],
+}
+
+export const properties = {
+  "properties:properties": [{ properties: { $ap: ["zero_or_more", "property"] } }],
+}
+
+export const property = {
+  "property:property": [{ name: "identifier" }, '"="', { exp: "exp" }],
 }
