@@ -25,8 +25,11 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
-- [lang3] value-readback.ts
 - [lang3] neutral-readback.ts
+- [lang3] `Exp.cls` entry can have `sat` -- otherwise we can not implement value-readback.ts for cls
+- [lang3] value-readback.ts -- obj
+- [lang3] value-readback.ts -- cls
+- [lang3] neutral-readback.ts -- dot
 - [lang3] frontend/grammars.ts
 - [lang3] frontend/matchers.ts
 - [lang3] frontend/parse-stmts.ts
