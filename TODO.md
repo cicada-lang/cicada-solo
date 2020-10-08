@@ -25,10 +25,16 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
-- [lang3] value-readback.ts
 - [lang3] exp-alpha-equivalent.ts
-- [lang3] frontend
+- [lang3] normal-readback.ts
+- [lang3] neutral-readback.ts
+- [lang3] value-readback.ts
+- [lang3] frontend/grammars.ts
+- [lang3] frontend/matchers.ts
+- [lang3] frontend/parse-stmts.ts
 - [lang3] cli
+- [lang3] stmt-top.ts
+- [lang3] cli/commands/eval.ts
 - [lang3] tests/lang3
 
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
