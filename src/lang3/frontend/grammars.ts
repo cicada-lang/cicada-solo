@@ -1,13 +1,6 @@
 import * as pt from "../../partech"
 
-const preserved = [
-  "Equal",
-  "same",
-  "replace",
-  "Absurd",
-  "String",
-  "Type",
-]
+const preserved = ["Equal", "same", "replace", "Absurd", "String", "Type"]
 
 export const identifier = {
   $pattern: ["identifier", `^(?!(${preserved.join("|")}))`],
@@ -44,11 +37,13 @@ export const exp = {
     { target: "identifier" },
     { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
   ],
-  "exp:dot": [
-    { target: "exp" },
-    '"."',
-    { name: "identifier" },
+  // "exp:cls": ['"{"', { sat: "sat" }, { scope: "scope" }, '"}"'],
+  "exp:fill": [
+    { target: "identifier" },
+    { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
   ],
+  // "exp:obj": ['"{"', { properties: "properties" }, '"}"'],
+  "exp:dot": [{ target: "exp" }, '"."', { name: "identifier" }],
   "exp:equal": [
     '"Equal"',
     '"("',
