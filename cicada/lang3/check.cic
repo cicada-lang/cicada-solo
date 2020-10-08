@@ -31,11 +31,6 @@
   ------------------------------------ dot
   Check(ctx, target, Value.cls(tel))
   @where {
-    t = @loop {
-      next = tel.next
-      if (next.name == name) return next.t
-      next_value = Value.not_yet(next.t, Neutral.v(next.name))
-      tel = Telescope.fill(tel, next_value)
-    }
+    t = Telescope.dot(tel, name)
   }
 }

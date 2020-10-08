@@ -18,7 +18,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       }
       case "Exp.pi": {
         return Value.pi(
-          evaluate(env, exp.arg_t),
+          Exp.evaluate(env, exp.arg_t),
           new Closure.Closure(env, exp.name, exp.ret_t)
         )
       }
@@ -26,7 +26,10 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return Value.fn(new Closure.Closure(env, exp.name, exp.ret))
       }
       case "Exp.ap": {
-        return Exp.do_ap(evaluate(env, exp.target), evaluate(env, exp.arg))
+        return Exp.do_ap(
+          Exp.evaluate(env, exp.target),
+          Exp.evaluate(env, exp.arg)
+        )
       }
       case "Exp.cls": {
         const { scope } = exp
@@ -41,7 +44,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
             queue.push({ name, t })
           }
           const { name, exp } = queue.pop()
-          const t = evaluate(env, exp)
+          const t = Exp.evaluate(env, exp)
           const next = { name, t }
           const tel = Telescope.create(env, new Array(), next, queue)
           return Value.cls(tel)
@@ -49,24 +52,27 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       }
       case "Exp.fill": {
         const { target, arg } = exp
-        return Exp.do_fill(evaluate(env, target), evaluate(env, arg))
+        return Exp.do_fill(Exp.evaluate(env, target), Exp.evaluate(env, arg))
       }
       case "Exp.obj": {
         const { properties } = exp
         return Value.obj(
           new Map(
-            Array.from(properties, ([name, exp]) => [name, evaluate(env, exp)])
+            Array.from(properties, ([name, exp]) => [
+              name,
+              Exp.evaluate(env, exp),
+            ])
           )
         )
       }
       case "Exp.dot": {
-        return Exp.do_dot(evaluate(env, exp.target), exp.name)
+        return Exp.do_dot(Exp.evaluate(env, exp.target), exp.name)
       }
       case "Exp.equal": {
         return Value.equal(
-          evaluate(env, exp.t),
-          evaluate(env, exp.from),
-          evaluate(env, exp.to)
+          Exp.evaluate(env, exp.t),
+          Exp.evaluate(env, exp.from),
+          Exp.evaluate(env, exp.to)
         )
       }
       case "Exp.same": {
@@ -74,9 +80,9 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       }
       case "Exp.replace": {
         return Exp.do_replace(
-          evaluate(env, exp.target),
-          evaluate(env, exp.motive),
-          evaluate(env, exp.base)
+          Exp.evaluate(env, exp.target),
+          Exp.evaluate(env, exp.motive),
+          Exp.evaluate(env, exp.base)
         )
       }
       case "Exp.absurd": {
@@ -84,8 +90,8 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       }
       case "Exp.absurd_ind": {
         return Exp.do_absurd_ind(
-          evaluate(env, exp.target),
-          evaluate(env, exp.motive)
+          Exp.evaluate(env, exp.target),
+          Exp.evaluate(env, exp.motive)
         )
       }
       case "Exp.str": {
@@ -102,10 +108,10 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         for (const stmt of exp.stmts) {
           Stmt.execute(env, stmt)
         }
-        return evaluate(env, exp.ret)
+        return Exp.evaluate(env, exp.ret)
       }
       case "Exp.the": {
-        return evaluate(env, exp.exp)
+        return Exp.evaluate(env, exp.exp)
       }
     }
   } catch (error) {

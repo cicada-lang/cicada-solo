@@ -2,6 +2,7 @@ import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
 import * as Closure from "../closure"
+import * as Telescope from "../telescope"
 import * as Env from "../env"
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
@@ -52,7 +53,9 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       Exp.check(ctx, exp.arg, next.t)
       return Value.type
     } else if (exp.kind === "Exp.dot") {
-      throw new Error("TOOD")
+      const target_t = Exp.infer(ctx, exp.target)
+      const cls = Value.is_cls(ctx, target_t)
+      return Telescope.dot(cls.tel, exp.name)
     } else if (exp.kind === "Exp.equal") {
       Exp.check(ctx, exp.t, Value.type)
       const t = Exp.evaluate(Ctx.to_env(ctx), exp.t)

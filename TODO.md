@@ -25,12 +25,12 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
-- [lang3] exp-infer.ts -- dot
 - [lang3] value-readback.ts
 - [lang3] exp-alpha-equivalent.ts
 - [lang3] frontend
 - [lang3] cli
 - [lang3] tests/lang3
+- [lang3] exp-do-dot -- be able to dot `cls`
 
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
 
