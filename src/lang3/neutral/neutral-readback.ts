@@ -15,7 +15,7 @@ export function readback(ctx: Ctx.Ctx, neutral: Neutral.Neutral): Exp.Exp {
       )
     }
     case "Neutral.dot": {
-      throw new Error("TODO")
+      return Exp.dot(Neutral.readback(ctx, neutral.target), neutral.name)
     }
     case "Neutral.replace": {
       return Exp.replace(

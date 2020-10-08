@@ -27,7 +27,6 @@
 
 - [lang3] value-readback.ts -- obj
 - [lang3] value-readback.ts -- cls
-- [lang3] neutral-readback.ts -- dot
 - [lang3] frontend/grammars.ts
 - [lang3] frontend/matchers.ts
 - [lang3] frontend/parse-stmts.ts

@@ -67,6 +67,8 @@ export function readback(
     //     Closure.apply(value.cdr_t_cl, variable)
     //   )
     //   return Exp.sigma(fresh_name, car_t, cdr_t)
+  } else if (t.kind === "Value.type" && value.kind === "Value.cls") {
+    throw new Error("TODO")
   } else if (t.kind === "Value.type" && value.kind === "Value.pi") {
     const fresh_name = ut.freshen_name(new Set(ctx.keys()), value.ret_t_cl.name)
     const variable = Value.not_yet(value.arg_t, Neutral.v(fresh_name))
@@ -77,8 +79,6 @@ export function readback(
       Closure.apply(value.ret_t_cl, variable)
     )
     return Exp.pi(fresh_name, arg_t, ret_t)
-  } else if (t.kind === "Value.type" && value.kind === "Value.cls") {
-    throw new Error("TODO")
   } else if (t.kind === "Value.type" && value.kind === "Value.type") {
     return Exp.type
   } else if (value.kind === "Value.not_yet") {
