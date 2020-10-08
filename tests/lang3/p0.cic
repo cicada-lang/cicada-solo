@@ -1,0 +1,7 @@
+_ : String
+_ = "abc"
+
+_ : { x : String }
+_ = { x = "abc" }
+
+@show _

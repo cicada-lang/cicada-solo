@@ -44,7 +44,8 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       }
       Exp.check(ctx, found, next.t)
       const less_properties = new Map(exp.properties)
-      less_properties.delete(next.name)
+      // TODO can not delete name because in recursive call the `sat` is still there.
+      // less_properties.delete(next.name)
       const value = Exp.evaluate(Ctx.to_env(ctx), found)
       const filled_tel = Telescope.fill(cls.tel, value)
       Exp.check(ctx, Exp.obj(less_properties), Value.cls(filled_tel))

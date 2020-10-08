@@ -1,6 +1,6 @@
 import * as pt from "../../partech"
 
-const preserved = ["Equal", "same", "replace", "Absurd", "String", "Type"]
+const preserved = ["Equal", "same", "replace", "Absurd", "String", "Type", "return"]
 
 export const identifier = {
   $pattern: ["identifier", `^(?!(${preserved.join("|")}))`],
@@ -37,7 +37,9 @@ export const exp = {
     { target: "identifier" },
     { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
   ],
-  "exp:cls": ['"{"', { sat: "sat" }, { scope: "scope" }, '"}"'],
+  // TODO partech can not handle this.
+  // "exp:cls_sat": ['"{"', { sat: "sat" }, { scope: "scope" }, '"}"'],
+  "exp:cls": ['"{"', { scope: "scope" }, '"}"'],
   "exp:fill": [
     { target: "identifier" },
     { args: { $ap: ["one_or_more", '"["', "exp", '"]"'] } },
@@ -79,7 +81,7 @@ export const exp = {
   "exp:str": ['"String"'],
   "exp:quote": [{ value: { $pattern: ["string"] } }],
   "exp:type": ['"Type"'],
-  "exp:suite": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
+  "exp:suite": ['"{"', { stmts: "stmts" }, '"return"', { ret: "exp" }, '"}"'],
   "exp:the": [{ exp: "exp" }, '":"', { t: "exp" }],
 }
 
@@ -102,7 +104,7 @@ export const stmt = {
 
 export const properties = {
   "properties:properties": [
-    { properties: { $ap: ["zero_or_more", "property"] } },
+    { properties: { $ap: ["one_or_more", "property"] } },
   ],
 }
 

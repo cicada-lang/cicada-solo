@@ -13,6 +13,7 @@ commands.t = async () => {
   await commands.test_lang0()
   await commands.test_lang1()
   await commands.test_lang2()
+  await commands.test_lang3()
   await commands.test_partech()
 }
 
@@ -22,6 +23,7 @@ commands.f = async () => {
   commands.test_lang0()
   commands.test_lang1()
   commands.test_lang2()
+  commands.test_lang3()
   commands.test_partech()
 }
 
@@ -71,6 +73,20 @@ commands.test_lang2 = async () => {
   await test(
     "./bin/lang2.js $file",
     { file: "tests/lang2-error/**.cic" },
+    snapshot.err(({ file }) => file + ".err")
+  )
+}
+
+commands.test_lang3 = async () => {
+  await test(
+    "./bin/lang3.js $file",
+    { file: "tests/lang3/**.cic" },
+    snapshot.out(({ file }) => file + ".out")
+  )
+
+  await test(
+    "./bin/lang3.js $file",
+    { file: "tests/lang3-error/**.cic" },
     snapshot.err(({ file }) => file + ".err")
   )
 }

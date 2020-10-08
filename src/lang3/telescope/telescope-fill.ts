@@ -23,6 +23,10 @@ export function fill(
   env = Env.extend(env, next.name, value)
   sat = [...sat, { name: next.name, t: next.t, value }]
   const [entry, ...rest] = scope
-  const t = Exp.evaluate(env, entry.t)
-  return Telescope.create(env, sat, { name: entry.name, t }, rest)
+  if (entry === undefined) {
+    return Telescope.create(env, sat, undefined, rest)
+  } else {
+    const t = Exp.evaluate(env, entry.t)
+    return Telescope.create(env, sat, { name: entry.name, t }, rest)
+  }
 }

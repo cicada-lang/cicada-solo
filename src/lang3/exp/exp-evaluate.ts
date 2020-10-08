@@ -5,6 +5,7 @@ import * as Closure from "../closure"
 import * as Telescope from "../telescope"
 import * as Env from "../env"
 import * as Trace from "../../trace"
+import * as ut from "../../ut"
 
 export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
   try {
@@ -41,19 +42,19 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           sat.push({ name, t, v })
           Env.update(env, name, v)
         }
-        const { scope } = exp
-        if (scope.length === 0) {
+        if (exp.scope.length === 0) {
           const scope = new Array()
           const next = undefined
           const tel = Telescope.create(env, sat, next, scope)
           return Value.cls(tel)
         } else {
-          const scope = new Array()
-          for (const { name, t } of scope) {
-            scope.push({ name, t })
+          const scope = Array.from(exp.scope)
+          const entry = scope.pop()
+          if (entry === undefined) {
+            throw new Trace.Trace("Exp.cle -- entry is undefined")
           }
-          const { name, exp } = scope.pop()
-          const t = Exp.evaluate(env, exp)
+          const name = entry.name
+          const t = Exp.evaluate(env, entry.t)
           const next = { name, t }
           const tel = Telescope.create(env, sat, next, scope)
           return Value.cls(tel)

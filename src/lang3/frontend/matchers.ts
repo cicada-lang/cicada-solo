@@ -18,8 +18,11 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
       return exp
     },
-    "exp:cls": ({ sat, scope }) =>
-      Exp.cls(sat_matcher(sat), scope_matcher(scope)),
+    // TODO partech can not handle this.
+    // "exp:cls_sat": ({ sat, scope }) =>
+    //   Exp.cls(sat_matcher(sat), scope_matcher(scope)),
+    "exp:cls": ({ scope }) =>
+      Exp.cls(new Array(), scope_matcher(scope)),
     "exp:fill": ({ target, args }) => {
       let exp: Exp.Exp = Exp.v(pt.Tree.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
@@ -83,7 +86,7 @@ export function properties_matcher(tree: pt.Tree.Tree): Map<string, Exp.Exp> {
   return pt.Tree.matcher<Map<string, Exp.Exp>>({
     "properties:properties": ({ properties }) =>
       new Map(
-        pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
+        pt.matchers.one_or_more_matcher(properties).map(property_matcher)
       ),
   })(tree)
 }

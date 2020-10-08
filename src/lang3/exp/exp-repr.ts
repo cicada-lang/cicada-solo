@@ -17,7 +17,10 @@ export function repr(exp: Exp.Exp): string {
       return `${Exp.repr(exp.target)}(${Exp.repr(exp.arg)})`
     }
     case "Exp.cls": {
-      const s = exp.scope
+      let s = exp.sat
+        .map(({ name, t, exp }) => `${name} : ${Exp.repr(t)} = ${Exp.repr(exp)}`)
+        .join("\n")
+      s += exp.scope
         .map(({ name, t }) => `${name} : ${Exp.repr(t)}`)
         .join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`

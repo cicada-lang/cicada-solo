@@ -1,4 +1,5 @@
 import * as Trace from "../trace"
+import * as ut from "../ut"
 
 export function repr<T>(
   trace: Trace.Trace<T>,
@@ -9,6 +10,7 @@ export function repr<T>(
   s += `previous:\n`
   for (const x of trace.previous) {
     s += `- ${formater(x)}\n`
+    // s += `> ${ut.inspect(x)}\n`
   }
   return s
 }
