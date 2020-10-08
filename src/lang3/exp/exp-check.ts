@@ -15,7 +15,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       const ret_t = Closure.apply(pi.ret_t_cl, arg)
       Exp.check(Ctx.extend(ctx, exp.name, pi.arg_t), exp.ret, ret_t)
     } else if (exp.kind === "Exp.obj") {
-      throw new Error("TODO)
+      throw new Error("TODO")
     } else if (exp.kind === "Exp.same") {
       const equal = Value.is_equal(ctx, t)
       if (!Value.conversion(ctx, equal.t, equal.from, equal.to)) {

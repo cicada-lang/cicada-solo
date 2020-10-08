@@ -1,6 +1,6 @@
 import * as Exp from "../exp"
 
-export function alpha_equal(x: Exp.Exp, y: Exp.Exp): boolean {
+export function alpha_equivalent(x: Exp.Exp, y: Exp.Exp): boolean {
   return alpha({
     depth: 0,
     left_names: new Map(),

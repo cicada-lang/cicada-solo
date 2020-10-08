@@ -30,7 +30,7 @@
 - [lang3] exp-infer.ts -- fill as type
 - [lang3] exp-infer.ts -- dot
 - [lang3] value-readback.ts
-- [lang3] exp-alpha-equal.ts
+- [lang3] exp-alpha-equivalent.ts
 
 - fix the use of `Trace`
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
