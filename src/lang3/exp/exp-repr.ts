@@ -17,13 +17,19 @@ export function repr(exp: Exp.Exp): string {
       return `${Exp.repr(exp.target)}(${Exp.repr(exp.arg)})`
     }
     case "Exp.cls": {
-      throw new Error("TODO")
+      const s = exp.scope
+        .map(({ name, t }) => `${name} : ${Exp.repr(t)}`)
+        .join("\n")
+      return `{\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.fill": {
-      throw new Error("TODO")
+      return `${Exp.repr(exp.target)}[${Exp.repr(exp.arg)}]`
     }
     case "Exp.obj": {
-      throw new Error("TODO")
+      const s = Array.from(exp.properties)
+        .map(([ name, exp ]) => `${name} = ${Exp.repr(exp)}`)
+        .join("\n")
+      return `{\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.dot": {
       throw new Error("TODO")
@@ -57,9 +63,8 @@ export function repr(exp: Exp.Exp): string {
       return "Type"
     }
     case "Exp.suite": {
-      throw new Error()
-      // const s = [...exp.stmts.map(Stmt.repr), repr(exp.ret)].join("\n")
-      // return `{\n${ut.indent(s, "  ")}\n}`
+      const s = [...exp.stmts.map(Stmt.repr), repr(exp.ret)].join("\n")
+      return `{\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.the": {
       return `${Exp.repr(exp.exp)}: ${Exp.repr(exp.t)}`
