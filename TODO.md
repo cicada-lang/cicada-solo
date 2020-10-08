@@ -35,8 +35,6 @@
 - [lang3] frontend/matchers.ts -- obj
 - [lang3] frontend/matchers.ts -- dot
 
-- [lang3] cli/commands/eval.ts
-
 - [lang3] tests/lang3
 
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
