@@ -8,6 +8,5 @@ export function conversion(
   x: Value.Value,
   y: Value.Value
 ): boolean {
-  throw new Error("TODO")
-  // return Exp.alpha_equal(Value.readback(ctx, t, x), Value.readback(ctx, t, y))
+  return Exp.alpha_equal(Value.readback(ctx, t, x), Value.readback(ctx, t, y))
 }
