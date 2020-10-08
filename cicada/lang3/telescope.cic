@@ -5,6 +5,6 @@
     env: Map(String, Value),
     sat: Array({ name: String, t: Value, value: Value }),
     next?: { name: String, t: Value },
-    queue: Array({ name: String, exp: Exp }),
+    scope: Array({ name: String, exp: Exp }),
   ): Telescope
 }

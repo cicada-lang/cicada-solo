@@ -17,7 +17,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       Exp.check(Ctx.extend(ctx, exp.name, pi.arg_t), exp.ret, ret_t)
     } else if (exp.kind === "Exp.obj") {
       const cls = Value.is_cls(ctx, t)
-      const { env, sat, next, queue } = cls.tel
+      const { env, sat, next, scope } = cls.tel
       if (next === undefined) {
         return
       }

@@ -7,7 +7,7 @@ import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
 export function dot(tel: Telescope.Telescope, name: string): Value.Value {
-  const { sat, next, queue } = tel
+  const { sat, next, scope } = tel
   let { env } = tel
   for (const entry of sat) {
     if (entry.name === name) {
@@ -16,7 +16,7 @@ export function dot(tel: Telescope.Telescope, name: string): Value.Value {
   }
 
   env = Env.clone(env)
-  const value = loop(env, next, queue, name)
+  const value = loop(env, next, scope, name)
   if (value === undefined) {
     throw new Trace.Trace(
       ut.aline(`
@@ -33,7 +33,7 @@ export function dot(tel: Telescope.Telescope, name: string): Value.Value {
 function loop(
   env: Env.Env,
   next: undefined | { name: string; t: Value.Value },
-  queue: Array<{ name: string; t: Exp.Exp }>,
+  scope: Array<{ name: string; t: Exp.Exp }>,
   name: string
 ): undefined | Value.Value {
   if (next === undefined) {
@@ -47,7 +47,7 @@ function loop(
   const next_value = Value.not_yet(next.t, Neutral.v(next.name))
   env = Env.update(env, next.name, next_value)
 
-  const [entry, ...rest] = queue
+  const [entry, ...rest] = scope
   const t = Exp.evaluate(env, entry.t)
   next = { name: entry.name, t }
 

@@ -34,19 +34,19 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       case "Exp.cls": {
         const { scope } = exp
         if (scope.length === 0) {
-          const queue = new Array()
+          const scope = new Array()
           const next = undefined
-          const tel = Telescope.create(env, new Array(), next, queue)
+          const tel = Telescope.create(env, new Array(), next, scope)
           return Value.cls(tel)
         } else {
-          const queue = new Array()
+          const scope = new Array()
           for (const { name, t } of scope) {
-            queue.push({ name, t })
+            scope.push({ name, t })
           }
-          const { name, exp } = queue.pop()
+          const { name, exp } = scope.pop()
           const t = Exp.evaluate(env, exp)
           const next = { name, t }
-          const tel = Telescope.create(env, new Array(), next, queue)
+          const tel = Telescope.create(env, new Array(), next, scope)
           return Value.cls(tel)
         }
       }

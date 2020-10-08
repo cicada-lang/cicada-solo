@@ -10,7 +10,7 @@ export function fill(
   tel: Telescope.Telescope,
   value: Value.Value
 ): Telescope.Telescope {
-  let { env, sat, next, queue } = tel
+  let { env, sat, next, scope } = tel
   if (next === undefined)
     throw new Trace.Trace(
       ut.aline(`
@@ -22,7 +22,7 @@ export function fill(
 
   env = Env.extend(env, next.name, value)
   sat = [...sat, { name: next.name, t: next.t, value }]
-  const [entry, ...rest] = queue
+  const [entry, ...rest] = scope
   const t = Exp.evaluate(env, entry.t)
   return Telescope.create(env, sat, { name: entry.name, t }, rest)
 }
