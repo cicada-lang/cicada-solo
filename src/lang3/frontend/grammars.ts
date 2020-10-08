@@ -44,6 +44,11 @@ export const exp = {
     { target: "identifier" },
     { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
   ],
+  "exp:dot": [
+    { target: "exp" },
+    '"."',
+    { name: "identifier" },
+  ],
   "exp:equal": [
     '"Equal"',
     '"("',

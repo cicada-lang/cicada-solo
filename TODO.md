@@ -28,7 +28,6 @@
 - [lang3] frontend/grammars.ts -- cls
 - [lang3] frontend/grammars.ts -- fill
 - [lang3] frontend/grammars.ts -- obj
-- [lang3] frontend/grammars.ts -- dot
 
 - [lang3] frontend/matchers.ts -- cls
 - [lang3] frontend/matchers.ts -- fill
