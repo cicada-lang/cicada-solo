@@ -26,17 +26,17 @@ export function readback(
     )
   } else if (t.kind === "Value.cls") {
     throw new Error("TODO")
-  // } else if (t.kind === "Value.sigma") {
-  //   // NOTE Pairs are also η-expanded.
-  //   //   Every value with a pair type,
-  //   //   whether it is neutral or not,
-  //   //   is read back with cons at the top.
-  //   const car = Exp.do_car(value)
-  //   const cdr = Exp.do_cdr(value)
-  //   return Exp.cons(
-  //     Value.readback(ctx, t.car_t, car),
-  //     Value.readback(ctx, Closure.apply(t.cdr_t_cl, car), cdr)
-  //   )
+    // } else if (t.kind === "Value.sigma") {
+    //   // NOTE Pairs are also η-expanded.
+    //   //   Every value with a pair type,
+    //   //   whether it is neutral or not,
+    //   //   is read back with cons at the top.
+    //   const car = Exp.do_car(value)
+    //   const cdr = Exp.do_cdr(value)
+    //   return Exp.cons(
+    //     Value.readback(ctx, t.car_t, car),
+    //     Value.readback(ctx, Closure.apply(t.cdr_t_cl, car), cdr)
+    //   )
   } else if (
     t.kind === "Value.absurd" &&
     value.kind === "Value.not_yet" &&
@@ -57,16 +57,16 @@ export function readback(
       Value.readback(ctx, value.t, value.from),
       Value.readback(ctx, value.t, value.to)
     )
-  // } else if (t.kind === "Value.type" && value.kind === "Value.sigma") {
-  //   const fresh_name = ut.freshen_name(new Set(ctx.keys()), value.cdr_t_cl.name)
-  //   const variable = Value.not_yet(value.car_t, Neutral.v(fresh_name))
-  //   const car_t = Value.readback(ctx, Value.type, value.car_t)
-  //   const cdr_t = Value.readback(
-  //     Ctx.extend(ctx, fresh_name, value.car_t),
-  //     Value.type,
-  //     Closure.apply(value.cdr_t_cl, variable)
-  //   )
-  //   return Exp.sigma(fresh_name, car_t, cdr_t)
+    // } else if (t.kind === "Value.type" && value.kind === "Value.sigma") {
+    //   const fresh_name = ut.freshen_name(new Set(ctx.keys()), value.cdr_t_cl.name)
+    //   const variable = Value.not_yet(value.car_t, Neutral.v(fresh_name))
+    //   const car_t = Value.readback(ctx, Value.type, value.car_t)
+    //   const cdr_t = Value.readback(
+    //     Ctx.extend(ctx, fresh_name, value.car_t),
+    //     Value.type,
+    //     Closure.apply(value.cdr_t_cl, variable)
+    //   )
+    //   return Exp.sigma(fresh_name, car_t, cdr_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.pi") {
     const fresh_name = ut.freshen_name(new Set(ctx.keys()), value.ret_t_cl.name)
     const variable = Value.not_yet(value.arg_t, Neutral.v(fresh_name))

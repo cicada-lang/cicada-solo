@@ -42,7 +42,11 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       const [{ name, t }, ...tail] = exp.scope
       Exp.check(ctx, t, Value.type)
       const t_value = Exp.evaluate(Ctx.to_env(ctx), t)
-      Exp.check(Ctx.extend(ctx, name, t_value), Exp.cls(new Array(), tail), Value.type)
+      Exp.check(
+        Ctx.extend(ctx, name, t_value),
+        Exp.cls(new Array(), tail),
+        Value.type
+      )
       return Value.type
     } else if (exp.kind === "Exp.fill") {
       Exp.check(ctx, exp.target, Value.type)

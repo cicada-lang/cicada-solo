@@ -54,6 +54,18 @@ function alpha(the: {
       alpha({ ...the, left: left.arg, right: right.arg })
     )
   } else if (left.kind === "Exp.cls" && right.kind === "Exp.cls") {
+    if (left.sat.length !== right.sat.length) {
+      return false
+    }
+    for (let i = 0; i < left.sat.length; i++) {
+      const left_entry = left.sat[i]
+      const right_entry = right.sat[i]
+      if (left_entry.name !== right_entry.name) return false
+      if (!alpha({ ...the, left: left_entry.t, right: right_entry.t }))
+        return false
+      if (!alpha({ ...the, left: left_entry.exp, right: right_entry.exp }))
+        return false
+    }
     if (left.scope.length !== right.scope.length) {
       return false
     }
@@ -61,7 +73,8 @@ function alpha(the: {
       const left_entry = left.scope[i]
       const right_entry = right.scope[i]
       if (left_entry.name !== right_entry.name) return false
-      if (!alpha({ ...the, left: left_entry.t, right: right_entry.t })) return false
+      if (!alpha({ ...the, left: left_entry.t, right: right_entry.t }))
+        return false
     }
     return true
   } else if (left.kind === "Exp.fill" && right.kind === "Exp.fill") {
