@@ -32,24 +32,29 @@ export function readback(
     let { env } = t.tel
     env = Env.clone(env)
     for (const entry of sat) {
-      const property_value = Exp.do_dot(value, entry.name)
+      const name = entry.name
       const property_t = entry.t
+      const property_value = Exp.do_dot(value, name)
       const property_exp = Value.readback(ctx, property_t, property_value)
-      properties.set(entry.name, property_exp)
+      properties.set(name, property_exp)
+      // NOTE no env update here, use the name already in env
+      //   Env.update(env, name, property_value)
     }
     if (next !== undefined) {
-      const property_value = Exp.do_dot(value, next.name)
+      const name = next.name
       const property_t = next.t
+      const property_value = Exp.do_dot(value, name)
       const property_exp = Value.readback(ctx, property_t, property_value)
-      properties.set(next.name, property_exp)
-      Env.update(env, next.name, property_value)
+      properties.set(name, property_exp)
+      Env.update(env, name, property_value)
     }
     for (const entry of scope) {
-      const property_value = Exp.do_dot(value, entry.name)
+      const name = entry.name
       const property_t = Exp.evaluate(env, entry.t)
+      const property_value = Exp.do_dot(value, name)
       const property_exp = Value.readback(ctx, property_t, property_value)
-      properties.set(entry.name, property_exp)
-      Env.update(env, entry.name, property_value)
+      properties.set(name, property_exp)
+      Env.update(env, name, property_value)
     }
     return Exp.obj(properties)
   } else if (
@@ -83,7 +88,35 @@ export function readback(
     //   )
     //   return Exp.sigma(fresh_name, car_t, cdr_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.cls") {
-    throw new Error("TODO")
+    const { sat, next, scope } = value.tel
+    let { env } = value.tel
+    env = Env.clone(env)
+    ctx = Ctx.clone(ctx)
+    const norm_sat = new Array()
+    const norm_scope = new Array()
+    for (const entry of sat) {
+      const name = entry.name
+      const t = Value.readback(ctx, Value.type, entry.t)
+      const exp = Value.readback(ctx, entry.t, entry.value)
+      norm_sat.push({ name, t, exp })
+      Ctx.update(ctx, name, entry.t, entry.value)
+    }
+    if (next !== undefined) {
+      const name = next.name
+      const t = Value.readback(ctx, Value.type, next.t)
+      norm_scope.push({ name, t })
+      Ctx.update(ctx, name, next.t)
+      Env.update(env, name, Value.not_yet(next.t, Neutral.v(name)))
+    }
+    for (const entry of scope) {
+      const name = entry.name
+      const t_value = Exp.evaluate(env, entry.t)
+      const t = Value.readback(ctx, Value.type, t_value)
+      norm_scope.push({ name, t })
+      Ctx.update(ctx, name, t_value)
+      Env.update(env, name, Value.not_yet(t_value, Neutral.v(name)))
+    }
+    return Exp.cls(norm_sat, norm_scope)
   } else if (t.kind === "Value.type" && value.kind === "Value.pi") {
     const fresh_name = ut.freshen_name(new Set(ctx.keys()), value.ret_t_cl.name)
     const variable = Value.not_yet(value.arg_t, Neutral.v(fresh_name))
