@@ -29,15 +29,21 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       const arg = Exp.evaluate(Ctx.to_env(ctx), exp.arg)
       return Closure.apply(pi.ret_t_cl, arg)
     } else if (exp.kind === "Exp.cls") {
+      ctx = Ctx.clone(ctx)
+      for (const entry of exp.sat) {
+        Exp.check(ctx, entry.t, Value.type)
+        const t = Exp.evaluate(Ctx.to_env(ctx), entry.t)
+        Exp.check(ctx, entry.exp, t)
+        Ctx.update(ctx, entry.name, t)
+      }
       if (exp.scope.length === 0) {
         return Value.type
-      } else {
-        const [{ name, t }, ...tail] = exp.scope
-        Exp.check(ctx, t, Value.type)
-        const t_value = Exp.evaluate(Ctx.to_env(ctx), t)
-        Exp.check(Ctx.extend(ctx, name, t_value), Exp.cls(tail), Value.type)
-        return Value.type
       }
+      const [{ name, t }, ...tail] = exp.scope
+      Exp.check(ctx, t, Value.type)
+      const t_value = Exp.evaluate(Ctx.to_env(ctx), t)
+      Exp.check(Ctx.extend(ctx, name, t_value), Exp.cls(new Array(), tail), Value.type)
+      return Value.type
     } else if (exp.kind === "Exp.fill") {
       Exp.check(ctx, exp.target, Value.type)
       const target_value = Exp.evaluate(Ctx.to_env(ctx), exp.target)

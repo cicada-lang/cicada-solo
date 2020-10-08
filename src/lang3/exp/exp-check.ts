@@ -18,6 +18,19 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
     } else if (exp.kind === "Exp.obj") {
       const cls = Value.is_cls(ctx, t)
       const { env, sat, next, scope } = cls.tel
+      for (const entry of sat) {
+        const found = exp.properties.get(entry.name)
+        if (found === undefined) {
+          throw new Trace.Trace(
+            ut.aline(`
+              |Can no found satisfied entry name: ${entry.name}
+              |`)
+          )
+        }
+        Exp.check(ctx, found, entry.t)
+        const value = Exp.evaluate(Ctx.to_env(ctx), found)
+        Value.conversion(ctx, entry.t, value, entry.value)
+      }
       if (next === undefined) {
         return
       }

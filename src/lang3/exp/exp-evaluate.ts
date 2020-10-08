@@ -32,11 +32,20 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         )
       }
       case "Exp.cls": {
+        env = Env.clone(env)
+        const sat = new Array()
+        for (const entry of exp.sat) {
+          const name = entry.name
+          const t = Exp.evaluate(env, entry.t)
+          const v = Exp.evaluate(env, entry.exp)
+          sat.push({ name, t, v })
+          Env.update(env, name, v)
+        }
         const { scope } = exp
         if (scope.length === 0) {
           const scope = new Array()
           const next = undefined
-          const tel = Telescope.create(env, new Array(), next, scope)
+          const tel = Telescope.create(env, sat, next, scope)
           return Value.cls(tel)
         } else {
           const scope = new Array()
@@ -46,7 +55,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           const { name, exp } = scope.pop()
           const t = Exp.evaluate(env, exp)
           const next = { name, t }
-          const tel = Telescope.create(env, new Array(), next, scope)
+          const tel = Telescope.create(env, sat, next, scope)
           return Value.cls(tel)
         }
       }

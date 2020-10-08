@@ -70,12 +70,16 @@ export const ap = (target: Exp, arg: Exp): ap => ({
 
 interface cls {
   kind: "Exp.cls"
-  // sat: Array<{ name: string; t: Exp, exp: Exp }>
+  sat: Array<{ name: string; t: Exp; exp: Exp }>
   scope: Array<{ name: string; t: Exp }>
 }
 
-export const cls = (scope: Array<{ name: string; t: Exp }>): cls => ({
+export const cls = (
+  sat: Array<{ name: string; t: Exp; exp: Exp }>,
+  scope: Array<{ name: string; t: Exp }>
+): cls => ({
   kind: "Exp.cls",
+  sat,
   scope,
 })
 
