@@ -27,7 +27,7 @@ export function repr(exp: Exp.Exp): string {
     }
     case "Exp.obj": {
       const s = Array.from(exp.properties)
-        .map(([ name, exp ]) => `${name} = ${Exp.repr(exp)}`)
+        .map(([name, exp]) => `${name} = ${Exp.repr(exp)}`)
         .join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     }
