@@ -18,7 +18,8 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
       return exp
     },
-    // "exp:cls"
+    "exp:cls": ({ sat, scope }) =>
+      Exp.cls(sat_matcher(sat), scope_matcher(scope)),
     "exp:fill": ({ target, args }) => {
       let exp: Exp.Exp = Exp.v(pt.Tree.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
@@ -93,5 +94,46 @@ export function property_matcher(tree: pt.Tree.Tree): [string, Exp.Exp] {
       pt.Tree.str(name),
       exp_matcher(exp),
     ],
+  })(tree)
+}
+
+export function sat_matcher(
+  tree: pt.Tree.Tree
+): Array<{ name: string; t: Exp.Exp; exp: Exp.Exp }> {
+  return pt.Tree.matcher<Array<{ name: string; t: Exp.Exp; exp: Exp.Exp }>>({
+    "sat:sat": ({ entries }) =>
+      pt.matchers.zero_or_more_matcher(entries).map(sat_entry_matcher),
+  })(tree)
+}
+
+export function sat_entry_matcher(
+  tree: pt.Tree.Tree
+): { name: string; t: Exp.Exp; exp: Exp.Exp } {
+  return pt.Tree.matcher<{ name: string; t: Exp.Exp; exp: Exp.Exp }>({
+    "sat_entry:sat_entry": ({ name, t, exp }) => ({
+      name: pt.Tree.str(name),
+      t: exp_matcher(t),
+      exp: exp_matcher(exp),
+    }),
+  })(tree)
+}
+
+export function scope_matcher(
+  tree: pt.Tree.Tree
+): Array<{ name: string; t: Exp.Exp }> {
+  return pt.Tree.matcher<Array<{ name: string; t: Exp.Exp }>>({
+    "scope:scope": ({ entries }) =>
+      pt.matchers.one_or_more_matcher(entries).map(scope_entry_matcher),
+  })(tree)
+}
+
+export function scope_entry_matcher(
+  tree: pt.Tree.Tree
+): { name: string; t: Exp.Exp } {
+  return pt.Tree.matcher<{ name: string; t: Exp.Exp }>({
+    "scope_entry:scope_entry": ({ name, t }) => ({
+      name: pt.Tree.str(name),
+      t: exp_matcher(t),
+    }),
   })(tree)
 }

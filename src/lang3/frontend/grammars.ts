@@ -37,7 +37,7 @@ export const exp = {
     { target: "identifier" },
     { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
   ],
-  // "exp:cls": ['"{"', { sat: "sat" }, { scope: "scope" }, '"}"'],
+  "exp:cls": ['"{"', { sat: "sat" }, { scope: "scope" }, '"}"'],
   "exp:fill": [
     { target: "identifier" },
     { args: { $ap: ["one_or_more", '"["', "exp", '"]"'] } },
@@ -101,9 +101,33 @@ export const stmt = {
 }
 
 export const properties = {
-  "properties:properties": [{ properties: { $ap: ["zero_or_more", "property"] } }],
+  "properties:properties": [
+    { properties: { $ap: ["zero_or_more", "property"] } },
+  ],
 }
 
 export const property = {
   "property:property": [{ name: "identifier" }, '"="', { exp: "exp" }],
+}
+
+export const sat = {
+  "sat:sat": [{ entries: { $ap: ["zero_or_more", "sat_entry"] } }],
+}
+
+export const sat_entry = {
+  "sat_entry:sat_entry": [
+    { name: "identifier" },
+    '":"',
+    { t: "exp" },
+    '"="',
+    { exp: "exp" },
+  ],
+}
+
+export const scope = {
+  "scope:scope": [{ entries: { $ap: ["one_or_more", "scope_entry"] } }],
+}
+
+export const scope_entry = {
+  "scope_entry:scope_entry": [{ name: "identifier" }, '":"', { t: "exp" }],
 }
