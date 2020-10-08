@@ -65,8 +65,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       const { stmts, ret } = exp
       ctx = Ctx.clone(ctx)
       for (const stmt of stmts) {
-        // TODO
-        // Stmt.declare(ctx, stmt)
+        Stmt.declare(ctx, stmt)
       }
       return Exp.infer(ctx, ret)
     } else if (exp.kind === "Exp.the") {
