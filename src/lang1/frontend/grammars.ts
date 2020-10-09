@@ -10,6 +10,8 @@ export const zero_or_more = pt.grammars.zero_or_more
 
 export const one_or_more = pt.grammars.one_or_more
 
+export const dashline = pt.grammars.dashline
+
 export const $start = "exp"
 
 export const exp = {
@@ -43,7 +45,7 @@ export const exp = {
     { step: "exp" },
     '")"',
   ],
-  "exp:the": [{ exp: "exp" }, '":"', { t: "ty" }],
+  "exp:the": [{ t: "ty" }, , "dashline", { exp: "exp" }],
 }
 
 export const ty = {

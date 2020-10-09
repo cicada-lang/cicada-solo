@@ -1,4 +1,4 @@
 z : Nat
-z = zero : Nat
+z = Nat -- zero
 
 @show z

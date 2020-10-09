@@ -1,6 +1,6 @@
-one = add1(zero) : Nat
-two = add1(one) : Nat
-id = (x) => x : (Nat) -> Nat
+one = Nat -- add1(zero)
+two = Nat -- add1(one)
+id = (Nat) -> Nat -- (x) => x
 
 // NOTE should be:
 //  (Nat) -> (Nat) -> Nat
