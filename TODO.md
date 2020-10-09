@@ -47,7 +47,6 @@
 
 > Be the most easy to use parsing tool for programming language prototyping.
 
-- `ResumableChart.insert`
 - `FinishedChart` -- to optimise `Schedule.leap`
 - `leap` should not call `resume`
 
