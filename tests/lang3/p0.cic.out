@@ -1,5 +1,11 @@
 {
-  x = "abc"
+  y = "123"
+  x = {
+    x = "abc"
+  }
 }: {
-  x : String
+  y : String
+  x : {
+    x : String
+  }
 }
