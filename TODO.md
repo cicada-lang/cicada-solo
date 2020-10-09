@@ -53,6 +53,9 @@
 - [lang3] tests/lang3/ch1.cic
 - [lang3] tests/lang3/ch2.cic
 
+- [lang3] literal string type
+- [lang3] literal `{}` type
+
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
 
 # partech -- parsing techniques
