@@ -25,9 +25,19 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
-- [lang3] fix syntax for `Exp.the`
-- [lang2] fix syntax for `Exp.the`
-- [lang1] fix syntax for `Exp.the`
+
+- [lang1] `--` as syntax for `Exp.the`
+  - handle list directly, otherwise
+    the binary infix operator will lead to ambiguity.
+- [lang2] `--` as syntax for `Exp.the`
+- [lang3] `--` as syntax for `Exp.the`
+
+- `Exp.begin` instead of `Exp.suite`
+
+- [lang0] `@begin` as syntax for `Exp.begin`
+- [lang1] `@begin` as syntax for `Exp.begin`
+- [lang2] `@begin` as syntax for `Exp.begin`
+- [lang3] `@begin` as syntax for `Exp.begin`
 
 - [lang3] tests/lang3/p1.cic -- about method in object
   - try to use contract to specify functions' API,
