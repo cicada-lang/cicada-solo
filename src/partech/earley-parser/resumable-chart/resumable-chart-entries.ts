@@ -1,7 +1,7 @@
 import * as ResumableChart from "../resumable-chart"
 import * as Task from "../task"
 
-export function resumable_entries(
+export function entries(
   resumable_chart: ResumableChart.ResumableChart,
   task: Task.Task
 ): IterableIterator<ResumableChart.ResumableEntry> {
