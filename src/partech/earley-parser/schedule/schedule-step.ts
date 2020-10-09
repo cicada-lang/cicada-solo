@@ -1,4 +1,5 @@
 import * as Schedule from "../schedule"
+import * as TaskChart from "../task-chart"
 import { ParsingError } from "../../errors"
 import * as Value from "../../value"
 import * as Task from "../task"
@@ -19,10 +20,33 @@ export function step(schedule: Schedule.Schedule, task: Task.Task): void {
     }
     case "Value.str":
     case "Value.pattern": {
-      return match_terminal(schedule, task, value)
+      match_terminal(schedule, task, value)
+      return
     }
     case "Value.grammar": {
-      return Schedule.insert_grammar(schedule, value, Task.progress_index(task))
+      Schedule.insert_grammar(schedule, value, Task.progress_index(task))
+      leap(schedule, task, value)
+      return
+    }
+  }
+}
+
+function leap(
+  schedule: Schedule.Schedule,
+  task: Task.Task,
+  grammar: Value.grammar
+): void {
+  const progress_index = Task.progress_index(task)
+  const length = TaskChart.length(schedule.chart)
+  for (let i = progress_index + 1; i < length; i++) {
+    for (const leading_task of TaskChart.tasks_at(schedule.chart, i)) {
+      if (
+        leading_task.index === progress_index &&
+        leading_task.grammar_name === grammar.name &&
+        Task.finished_p(leading_task)
+      ) {
+        Schedule.resume(schedule, leading_task)
+      }
     }
   }
 }

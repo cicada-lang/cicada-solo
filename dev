@@ -13,7 +13,7 @@ commands.t = async () => {
   await commands.test_lang0()
   await commands.test_lang1()
   await commands.test_lang2()
-  // await commands.test_lang3()
+  await commands.test_lang3()
   await commands.test_partech()
 }
 
