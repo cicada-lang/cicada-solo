@@ -30,6 +30,8 @@
   - handle list directly, otherwise
     the binary infix operator will lead to ambiguity.
 
+  - optional `{ -- }` to avoid ambiguity
+
 - [lang3] `--` as syntax for `Exp.the`
 
 - simple arrow syntax -- `A -> B` instead of `(A) -> B`
