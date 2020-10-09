@@ -27,7 +27,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
             |`)
         )
       }
-    } else if (exp.kind === "Exp.suite") {
+    } else if (exp.kind === "Exp.begin") {
       const { stmts, ret } = exp
       ctx = Ctx.clone(ctx)
       for (const stmt of stmts) {

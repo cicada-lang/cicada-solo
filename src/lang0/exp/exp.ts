@@ -1,6 +1,6 @@
 import * as Stmt from "../stmt"
 
-export type Exp = v | fn | ap | suite
+export type Exp = v | fn | ap | begin
 
 interface v {
   kind: "Exp.v"
@@ -33,14 +33,14 @@ export const ap = (target: Exp, arg: Exp): ap => ({
   arg,
 })
 
-interface suite {
-  kind: "Exp.suite"
+interface begin {
+  kind: "Exp.begin"
   stmts: Array<Stmt.Stmt>
   ret: Exp
 }
 
-export const suite = (stmts: Array<Stmt.Stmt>, ret: Exp): suite => ({
-  kind: "Exp.suite",
+export const begin = (stmts: Array<Stmt.Stmt>, ret: Exp): begin => ({
+  kind: "Exp.begin",
   stmts,
   ret,
 })

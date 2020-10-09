@@ -20,7 +20,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       case "Exp.ap": {
         return Exp.do_ap(evaluate(env, exp.target), evaluate(env, exp.arg))
       }
-      case "Exp.suite": {
+      case "Exp.begin": {
         env = Env.clone(env)
         for (const stmt of exp.stmts) {
           Stmt.execute(env, stmt)

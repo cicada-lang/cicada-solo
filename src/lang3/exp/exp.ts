@@ -17,7 +17,7 @@ export type Exp =
   | str
   | quote
   | type
-  | suite
+  | begin
   | the
 
 interface v {
@@ -199,14 +199,14 @@ export const type: type = {
   kind: "Exp.type",
 }
 
-interface suite {
-  kind: "Exp.suite"
+interface begin {
+  kind: "Exp.begin"
   stmts: Array<Stmt.Stmt>
   ret: Exp
 }
 
-export const suite = (stmts: Array<Stmt.Stmt>, ret: Exp): suite => ({
-  kind: "Exp.suite",
+export const begin = (stmts: Array<Stmt.Stmt>, ret: Exp): begin => ({
+  kind: "Exp.begin",
   stmts,
   ret,
 })

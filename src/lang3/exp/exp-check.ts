@@ -65,7 +65,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
           |`)
         )
       }
-    } else if (exp.kind === "Exp.suite") {
+    } else if (exp.kind === "Exp.begin") {
       const { stmts, ret } = exp
       ctx = Ctx.clone(ctx)
       for (const stmt of stmts) {

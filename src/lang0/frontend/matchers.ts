@@ -13,8 +13,8 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
       return exp
     },
-    "exp:suite": ({ stmts, ret }) =>
-      Exp.suite(stmts_matcher(stmts), exp_matcher(ret)),
+    "exp:begin": ({ stmts, ret }) =>
+      Exp.begin(stmts_matcher(stmts), exp_matcher(ret)),
   })(tree)
 }
 

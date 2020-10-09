@@ -28,7 +28,7 @@ export const exp = {
     { target: "identifier" },
     { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
   ],
-  "exp:suite": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
+  "exp:begin": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
   "exp:zero": ['"zero"'],
   "exp:add1": ['"add1"', '"("', { prev: "exp" }, '")"'],
   "exp:number": [{ value: { $pattern: ["number"] } }],

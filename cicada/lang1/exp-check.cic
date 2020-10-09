@@ -20,12 +20,12 @@ Exp.check(ctx, Exp.let(name, exp, ret), t) = {
   Exp.check(Map.extend(ctx, name, exp_t), ret, t)
 }
 
-Exp.check(ctx, Exp.suite(List.null, ret), t) =
+Exp.check(ctx, Exp.begin(List.null, ret), t) =
   Exp.check(ctx, ret, t)
 
-Exp.check(ctx, Exp.suite(List.cons({ name, exp }, defs), ret), t) = {
+Exp.check(ctx, Exp.begin(List.cons({ name, exp }, defs), ret), t) = {
   Exp.infer(ctx, exp) >>> exp_t
-  Exp.check(Map.extend(ctx, name, exp_t), Exp.suite(defs, ret), t)
+  Exp.check(Map.extend(ctx, name, exp_t), Exp.begin(defs, ret), t)
 }
 
 Exp.check(ctx, Exp.zero, Ty.nat) = Trivial.sole

@@ -62,8 +62,8 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       return Exp.quote(str.slice(1, str.length - 1))
     },
     "exp:type": () => Exp.type,
-    "exp:suite": ({ stmts, ret }) =>
-      Exp.suite(stmts_matcher(stmts), exp_matcher(ret)),
+    "exp:begin": ({ stmts, ret }) =>
+      Exp.begin(stmts_matcher(stmts), exp_matcher(ret)),
     "exp:the": ({ exp, t }) => Exp.the(exp_matcher(t), exp_matcher(exp)),
   })(tree)
 }

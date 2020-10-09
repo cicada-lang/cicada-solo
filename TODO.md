@@ -38,7 +38,6 @@
     the binary infix operator will lead to ambiguity.
 
 - `Exp.???` instead of `Exp.the`
-- `Exp.begin` instead of `Exp.suite`
 
 - [lang0] `@begin` as syntax for `Exp.begin`
 - [lang1] `@begin` as syntax for `Exp.begin`

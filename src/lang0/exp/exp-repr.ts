@@ -13,7 +13,7 @@ export function repr(exp: Exp.Exp): string {
     case "Exp.ap": {
       return `${repr(exp.target)}(${repr(exp.arg)})`
     }
-    case "Exp.suite": {
+    case "Exp.begin": {
       const s = [...exp.stmts.map(Stmt.repr), repr(exp.ret)].join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     }

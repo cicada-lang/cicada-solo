@@ -87,7 +87,7 @@ export const exp = {
   "exp:str": ['"String"'],
   "exp:quote": [{ value: { $pattern: ["string"] } }],
   "exp:type": ['"Type"'],
-  "exp:suite": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
+  "exp:begin": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
   // TODO
   "exp:the": [{ exp: "exp" }, '"is"', { t: "exp" }],
 }

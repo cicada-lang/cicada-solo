@@ -100,7 +100,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       return Value.str
     } else if (exp.kind === "Exp.type") {
       return Value.type
-    } else if (exp.kind === "Exp.suite") {
+    } else if (exp.kind === "Exp.begin") {
       const { stmts, ret } = exp
       ctx = Ctx.clone(ctx)
       for (const stmt of stmts) {

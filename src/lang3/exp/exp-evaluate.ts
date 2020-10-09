@@ -113,7 +113,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       case "Exp.type": {
         return Value.type
       }
-      case "Exp.suite": {
+      case "Exp.begin": {
         env = Env.clone(env)
         for (const stmt of exp.stmts) {
           Stmt.execute(env, stmt)
