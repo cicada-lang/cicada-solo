@@ -10,7 +10,8 @@ _ = { x = { x = "abc" } }
 _ : { x : { x : String } }
 _ = { x = { x = "abc" } y = "123" }
 
-_ : { x : { x : String } y : String }
-_ = { x = { x = "abc" } y = "123" }
+z : { x : { x : String } y : String }
+z = { x = { x = "abc" } y = "123" }
 
-@show _
+@show z.x
+@show z.y

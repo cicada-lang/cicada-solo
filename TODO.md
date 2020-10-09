@@ -25,6 +25,12 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
+- [lang3] `Exp.repr` -- `Exp.dot`
+
+- [lang3] fix syntax for `Exp.the`
+- [lang2] fix syntax for `Exp.the`
+- [lang1] fix syntax for `Exp.the`
+
 - [lang3] refactor functions about `Telescope`
 - [lang3] tests/lang3/p1.cic
 - [lang3] tests/lang3/ch1.cic
@@ -35,6 +41,10 @@
 # partech -- parsing techniques
 
 > Be the most easy to use parsing tool for programming language prototyping.
+
+- improve `Task.id`
+
+- cache for `leap`
 
 - handle `$import` in `Mod.build`
   - built-in `zero_or_more` and `one_or_more` and `optional`

@@ -55,7 +55,6 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       // NOTE We should always infer target,
       //   but we do a simple check for the simple nat.
       Exp.check(ctx, exp.target, Value.nat)
-      // TODO should use `Value.arrow` instead of evaluate a `Value.pi`
       const motive_t = Exp.evaluate(Env.init(), Exp.pi("x", Exp.nat, Exp.type))
       Exp.check(ctx, exp.motive, motive_t)
       const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
