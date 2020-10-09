@@ -7,7 +7,7 @@ export function insert_task(
   schedule: Schedule.Schedule,
   task: Task.Task
 ): void {
-  const index = Task.current_index(task)
+  const index = Task.next_index(task)
   TaskChart.insert(schedule.chart, index, task, {
     on_new_task: (task) => {
       TaskQueue.enqueue(schedule.queue, task)

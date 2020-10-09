@@ -38,7 +38,7 @@ function extend_resumable_indexing_set(
 ): void {
   if (Task.finished_p(task)) return
 
-  const { value } = Task.current_part(task)
+  const { value } = Task.next_part(task)
   if (value.kind === "Value.grammar") {
     const grammar = value
     const task_set = indexing_set.get(grammar.name)
