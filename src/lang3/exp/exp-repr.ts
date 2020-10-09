@@ -35,7 +35,8 @@ export function repr(exp: Exp.Exp): string {
       return `{\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.dot": {
-      throw new Error("TODO")
+      const { target, name } = exp
+      return `${Exp.repr(target)}.${name}`
     }
     case "Exp.equal": {
       return `Equal(${Exp.repr(exp.t)}, ${Exp.repr(exp.from)}, ${Exp.repr(
