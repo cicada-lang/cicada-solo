@@ -32,6 +32,8 @@
 - [lang1] fix syntax for `Exp.the`
 
 - [lang3] tests/lang3/p1.cic -- about method in object
+  - try to use contract to specify functions' API,
+    if the API is too complex, factor it.
 
 - [lang3] refactor functions about `Telescope`
 
