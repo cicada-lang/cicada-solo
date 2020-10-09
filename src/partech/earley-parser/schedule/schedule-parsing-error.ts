@@ -26,7 +26,7 @@ export function parsing_error(
           s += " "
           const { value } = task.parts[task.progress.length]
           s += Value.repr(value)
-          s += " according to:\n"
+          s += ":\n"
           s += "     "
           s += Task.repr(task)
           s += "\n"
@@ -50,7 +50,7 @@ export function parsing_error(
         s += " "
         const { value } = task.parts[task.progress.length]
         s += Value.repr(value)
-        s += " according to:\n"
+        s += ":\n"
         s += "     "
         s += Task.repr(task)
         s += "\n"

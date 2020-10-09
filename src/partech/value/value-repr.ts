@@ -10,8 +10,8 @@ export function repr(value: Value.Value): string {
     case "Value.pattern": {
       return JSON.stringify([
         value.label,
-        value.value.source,
-        value.value.flags,
+        // value.value.source,
+        // value.value.flags,
       ])
     }
     case "Value.grammar":

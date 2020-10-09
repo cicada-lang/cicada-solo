@@ -1,6 +1,6 @@
 Found the identifier "y" in [2, 3], while expecting:
- "x" according to:
-     xs:more@1 -> » "x" xs 
+ "x":
+     xs:more@1 -> > "x" xs 
 
  0 |x y x y
 

@@ -1,26 +1,26 @@
 Found the symbol "-" in [0, 1], while expecting:
- "{" according to:
-     object:empty@0 -> » "{" "}" 
- "{" according to:
-     object:one@0 -> » "{" string ":" value "}" 
- "{" according to:
-     object:more@0 -> » "{" one_or_more string ":" value "}" 
- "[" according to:
-     array:empty@0 -> » "[" "]" 
- "[" according to:
-     array:one@0 -> » "[" value "]" 
- "[" according to:
-     array:more@0 -> » "[" one_or_more value "]" 
- "true" according to:
-     boolean:true@0 -> » "true" 
- "false" according to:
-     boolean:false@0 -> » "false" 
- "null" according to:
-     null:null@0 -> » "null" 
- ["string",".*",""] according to:
-     string:string@0 -> » {"$pattern":["string",".*"]} 
- ["number",".*",""] according to:
-     number:number@0 -> » {"$pattern":["number",".*"]} 
+ "{":
+     object:empty@0 -> > "{" "}" 
+ "{":
+     object:one@0 -> > "{" string ":" value "}" 
+ "{":
+     object:more@0 -> > "{" one_or_more string ":" value "}" 
+ "[":
+     array:empty@0 -> > "[" "]" 
+ "[":
+     array:one@0 -> > "[" value "]" 
+ "[":
+     array:more@0 -> > "[" one_or_more value "]" 
+ "true":
+     boolean:true@0 -> > "true" 
+ "false":
+     boolean:false@0 -> > "false" 
+ "null":
+     null:null@0 -> > "null" 
+ ["string"]:
+     string:string@0 -> > string 
+ ["number"]:
+     number:number@0 -> > number 
 
  0 |- []
 

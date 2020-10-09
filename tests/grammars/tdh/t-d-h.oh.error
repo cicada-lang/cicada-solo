@@ -1,12 +1,12 @@
 Found END_OF_TOKENS, while expecting:
- "," according to:
-     tdh_list_tail:list@3 -> » "," tdh_list 
- "&" according to:
-     tdh_list_tail:t@3 -> » "&" "t" 
- "&" according to:
-     tdh_list_tail:d@3 -> » "&" "d" 
- "&" according to:
-     tdh_list_tail:h@3 -> » "&" "h" 
+ ",":
+     tdh_list_tail:list@3 -> > "," tdh_list 
+ "&":
+     tdh_list_tail:t@3 -> > "&" "t" 
+ "&":
+     tdh_list_tail:d@3 -> > "&" "d" 
+ "&":
+     tdh_list_tail:h@3 -> > "&" "h" 
 
  0 |t,d,h 
 

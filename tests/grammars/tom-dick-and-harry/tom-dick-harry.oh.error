@@ -1,14 +1,14 @@
 Found END_OF_TOKENS, while expecting:
- "," according to:
-     name_entry:name_comma@2 -> name:dick@3 » "," 
- "and" according to:
-     tom_dick_and_harry:list@0 -> one_or_more:more@3 » "and" name 
- "tom" according to:
-     name:tom@3 -> » "tom" 
- "dick" according to:
-     name:dick@3 -> » "dick" 
- "harry" according to:
-     name:harry@3 -> » "harry" 
+ ",":
+     name_entry:name_comma@2 -> name:dick@3 > "," 
+ "and":
+     tom_dick_and_harry:list@0 -> one_or_more:more@3 > "and" name 
+ "tom":
+     name:tom@3 -> > "tom" 
+ "dick":
+     name:dick@3 -> > "dick" 
+ "harry":
+     name:harry@3 -> > "harry" 
 
  0 |tom, dick, harry
  1 |

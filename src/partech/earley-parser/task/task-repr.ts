@@ -6,7 +6,7 @@ import chalk from "chalk"
 // <task> = <grammar>:<choice>@<index> -> <part> ...
 // <part> = <grammar>:<choice>@<index> | <grammar>@<index>
 
-const POINTER = chalk.bold(chalk.red("» "))
+const POINTER = chalk.bold(chalk.red("> "))
 
 export function repr(task: Task.Task): string {
   let s = task.grammar_name + ":" + task.choice_name + "@" + task.index + " -> "
@@ -38,8 +38,18 @@ export function repr_progress_entry(entry: {
 function repr_part(part: { name?: string; value: Value.Value }): string {
   const { name, value } = part
   const present = Value.present(value, { on_grammar: "only_show_name" })
-  const s =
-    typeof present === "string" ? present.toString() : JSON.stringify(present)
+
+  let s = ""
+  if (typeof present === "string") {
+    s += present.toString()
+  } else if (present instanceof Array) {
+    s += JSON.stringify(present)
+  } else if (present.hasOwnProperty("$pattern")) {
+    const [pattern_name] = present["$pattern"]
+    s += pattern_name
+  } else {
+    s += JSON.stringify(present)
+  }
   return name ? repr_named(name, s) : s
 }
 
