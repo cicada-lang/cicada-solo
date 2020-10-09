@@ -1,0 +1,19 @@
+partech.js parse <input>
+
+Parse text to tree by grammar
+
+Options:
+      --help     Show help                                             [boolean]
+      --version  Show version number                                   [boolean]
+  -o, --output                                                          [string]
+      --grammar                                              [string] [required]
+      --table                                                           [string]
+      --nocolor                                       [boolean] [default: false]
+
+TypeError: Cannot read property 'values' of undefined
+    at Object.tasks_at (/home/xyh/cicada/lib/partech/earley-parser/task-chart/task-chart-tasks-at.js:6:21)
+    at Object.parsing_error (/home/xyh/cicada/lib/partech/earley-parser/schedule/schedule-parsing-error.js:39:42)
+    at harvest_node (/home/xyh/cicada/lib/partech/earley-parser/schedule/schedule-harvest.js:56:20)
+    at Object.harvest (/home/xyh/cicada/lib/partech/earley-parser/schedule/schedule-harvest.js:33:12)
+    at Object.parse (/home/xyh/cicada/lib/partech/earley-parser/earley-parser-create.js:39:29)
+    at Object.exports.handler (/home/xyh/cicada/lib/partech/cli/commands/parse.js:55:33)

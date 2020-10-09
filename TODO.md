@@ -26,7 +26,6 @@
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
 - [lang1] `--` as syntax for `Exp.the`
-  - grammar for `dashline`
   - handle list directly, otherwise
     the binary infix operator will lead to ambiguity.
   - the same way should be used to handle the syntax of arrow,

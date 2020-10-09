@@ -1,0 +1,12 @@
+{
+  "kind": "Tree.node",
+  "head": {
+    "name": "dashline",
+    "kind": "dashline"
+  },
+  "body": {},
+  "span": {
+    "lo": 0,
+    "hi": 2
+  }
+}
