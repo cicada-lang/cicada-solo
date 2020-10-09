@@ -86,7 +86,7 @@ export function repr(exp: Exp.Exp): string {
       return `{\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.the": {
-      return `${Exp.repr(exp.exp)}: ${Exp.repr(exp.t)}`
+      return `{ ${Exp.repr(exp.t)} -- ${Exp.repr(exp.exp)} }`
     }
   }
 }
