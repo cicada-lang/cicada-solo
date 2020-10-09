@@ -44,7 +44,6 @@ export const exp = {
   ],
   "exp:obj": ['"{"', { properties: "properties" }, '"}"'],
   "exp:dot": [{ target: "exp" }, '"."', { name: "identifier" }],
-  "exp:method_call": [{ target: "exp" }, '"."', { name: "identifier" }],
   "exp:equal": [
     '"Equal"',
     '"("',
