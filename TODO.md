@@ -25,6 +25,7 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
+- [lang3] fix syntax for method call
 - [lang3] tests/lang3/p1.cic -- about method in object
 
 - [lang3] refactor functions about `Telescope`

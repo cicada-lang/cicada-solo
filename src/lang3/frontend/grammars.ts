@@ -6,7 +6,7 @@ export const dashline = pt.grammars.dashline
 
 export const $start = "exp"
 
-const preserved = ["Equal", "same", "replace", "Absurd", "String", "Type", "is"]
+const preserved = ["Equal", "same", "replace", "Absurd", "String", "Type"]
 
 export const identifier = {
   $pattern: ["identifier", `^(?!(${preserved.join("|")}))`],
@@ -44,6 +44,7 @@ export const exp = {
   ],
   "exp:obj": ['"{"', { properties: "properties" }, '"}"'],
   "exp:dot": [{ target: "exp" }, '"."', { name: "identifier" }],
+  "exp:method_call": [{ target: "exp" }, '"."', { name: "identifier" }],
   "exp:equal": [
     '"Equal"',
     '"("',

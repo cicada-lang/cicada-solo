@@ -1,0 +1,16 @@
+{
+  id = (_) => _
+  x = {
+    x = "abc"
+  }
+  y = "123"
+}: {
+  id : (_: String) -> String
+  x : {
+    x : String
+  }
+  y : String
+}
+(_) => _: (_: String) -> String
+(_) => _: (_: String) -> String
+(_) => _: (_: String) -> String

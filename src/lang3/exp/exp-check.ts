@@ -23,7 +23,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
         if (found === undefined) {
           throw new Trace.Trace(
             ut.aline(`
-              |Can no found satisfied entry name: ${entry.name}
+              |Can not found satisfied entry name: ${entry.name}
               |`)
           )
         }
@@ -38,7 +38,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       if (found === undefined) {
         throw new Trace.Trace(
           ut.aline(`
-            |Can no found next name: ${next.name}
+            |Can not found next name: ${next.name}
             |`)
         )
       }
