@@ -8,7 +8,7 @@ export function insert(
   task: Task.Task
 ): boolean {
   const id = Task.id(task)
-  const task_map = chart.task_maps[index]
+  const task_map = chart[index]
   if (!task_map.has(id)) {
     task_map.set(id, task)
     return true

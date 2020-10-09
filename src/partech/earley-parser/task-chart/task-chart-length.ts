@@ -1,5 +1,5 @@
 import * as TaskChart from "../task-chart"
 
 export function length(chart: TaskChart.TaskChart): number {
-  return chart.task_maps.length
+  return chart.length
 }
