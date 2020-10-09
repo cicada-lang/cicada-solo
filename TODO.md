@@ -47,7 +47,6 @@
 
 > Be the most easy to use parsing tool for programming language prototyping.
 
-- `Task.start`
 - cache for `Task.id`
 - improve `Task.id`
 - cache for `leap`

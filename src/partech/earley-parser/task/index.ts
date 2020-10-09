@@ -1,4 +1,5 @@
 export * from "./task"
+export * from "./task-start"
 export * from "./task-advance"
 export * from "./task-id"
 export * from "./task-repr"

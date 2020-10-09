@@ -1,4 +1,5 @@
 import * as Schedule from "../schedule"
+import * as Task from "../task"
 import { ParsingError } from "../../errors"
 import * as Value from "../../value"
 import * as ut from "../../../ut"
@@ -11,10 +12,10 @@ export function insert_grammar(
   if (grammar.kind === "Value.grammar") {
     const choices = Value.DelayedChoices.force(grammar.delayed)
     for (const [choice_name, parts] of choices) {
-      const grammar_name = grammar.name
-      const progress = new Array()
-      const task = { grammar_name, choice_name, parts, index, progress }
-      Schedule.insert_task(schedule, task)
+      Schedule.insert_task(
+        schedule,
+        Task.start(grammar.name, choice_name, parts, index)
+      )
     }
   } else {
     const token = schedule.tokens[index]
