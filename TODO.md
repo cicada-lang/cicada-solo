@@ -31,8 +31,10 @@
 - [lang2] fix syntax for `Exp.the`
 - [lang1] fix syntax for `Exp.the`
 
+- [lang3] tests/lang3/p1.cic -- about method in object
+
 - [lang3] refactor functions about `Telescope`
-- [lang3] tests/lang3/p1.cic
+
 - [lang3] tests/lang3/ch1.cic
 - [lang3] tests/lang3/ch2.cic
 
