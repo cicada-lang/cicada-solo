@@ -15,11 +15,11 @@ _ : Equal(Pair(String, String),
 _ = same
 
 _ : String
-_ = car(cons("ratatouille", "baguette"): Pair(String, String))
+_ = car({ Pair(String, String) -- cons("ratatouille", "baguette") })
 
 _ : Equal(String,
   "ratatouille",
-  car(cons("ratatouille", "baguette"): Pair(String, String)))
+  car({ Pair(String, String) -- cons("ratatouille", "baguette") }))
 _ = same
 
 _ : Type
@@ -36,15 +36,15 @@ _ = same
 
 _ : Type
 _ = Pair(
-  car(cons(String, "olive"): Pair(Type, String)),
-  cdr(cons("oil", String): Pair(String, Type)))
+  car({ Pair(Type, String) -- cons(String, "olive") }),
+  cdr({ Pair(String, Type) -- cons("oil", String) }))
 
 _ : Pair(
-  car(cons(String, "olive"): Pair(Type, String)),
-  cdr(cons("oil", String): Pair(String, Type)))
+  car({ Pair(Type, String) -- cons(String, "olive") }),
+  cdr({ Pair(String, Type) -- cons("oil", String) }))
 _ = cons(
-  cdr(cons(String, "olive"): Pair(Type, String)),
-  car(cons("oil", String): Pair(String, Type)))
+  cdr({ Pair(Type, String) -- cons(String, "olive") }),
+  car({ Pair(String, Type) -- cons("oil", String) }))
 
 _ : Nat
 _ = 172

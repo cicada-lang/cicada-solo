@@ -25,7 +25,9 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
-- [lang2] `{ -- }` as syntax for `Exp.the`
+- [lang2] fix `Exp.repr` for `Exp.the`
+- [lang3] fix `Exp.repr` for `Exp.the`
+
 - [lang3] `{ -- }` as syntax for `Exp.the`
 
 - simple arrow syntax -- `A -> B` instead of `(A) -> B`
@@ -50,6 +52,8 @@
 # partech -- parsing techniques
 
 > Be the most easy to use parsing tool for programming language prototyping.
+
+- cache for `Task.id`
 
 - improve `Task.id`
 
