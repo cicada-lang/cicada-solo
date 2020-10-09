@@ -4,7 +4,8 @@ export interface Task {
   grammar_name: string
   choice_name: string
   parts: Array<{ name?: string; value: Value.Value }>
-  index: number // NOTE into token
+  index: number
   progress: Array<{ index: number; choice_name?: string }>
-  id_cache?: string
+  id_head: string
+  id_body: string
 }
