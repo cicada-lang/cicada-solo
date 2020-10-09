@@ -8,9 +8,7 @@ export function insert_task(
   task: Task.Task
 ): void {
   const index = Task.progress_index(task)
-  TaskChart.insert(schedule.chart, index, task, {
-    on_new_task: (task) => {
-      TaskQueue.enqueue(schedule.queue, task)
-    },
-  })
+  if (TaskChart.insert(schedule.chart, index, task)) {
+    TaskQueue.enqueue(schedule.queue, task)
+  }
 }

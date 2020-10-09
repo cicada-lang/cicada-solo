@@ -47,13 +47,16 @@
 
 > Be the most easy to use parsing tool for programming language prototyping.
 
+- move `extend_resumable_indexing_set` to `Schedule.insert_task`
 - move `resumable_indexing_sets` from `TaskChart` to `Schedule`
 - `ResumableTaskChart` -- to optimise `Schedule.resume`
 - `FinishedTaskChart` -- to optimise `Schedule.leap`
 - `leap` should not call `resume`
+
 - handle `$import` in `Mod.build`
   - built-in `zero_or_more` and `one_or_more` and `optional`
   - always import name for simplicity
+
 - intersection grammar
 
 # parc

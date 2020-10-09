@@ -6,22 +6,13 @@ export function insert(
   chart: TaskChart.TaskChart,
   index: number,
   task: Task.Task,
-  opts: {
-    on_new_task?: (task: Task.Task) => void
-  } = {}
 ): boolean {
   const id = Task.id(task)
   const task_map = chart.task_maps[index]
-
   if (!task_map.has(id)) {
     task_map.set(id, task)
-
     const indexing_set = chart.resumable_indexing_sets[index]
     extend_resumable_indexing_set(indexing_set, id, task)
-
-    if (opts.on_new_task) {
-      opts.on_new_task(task)
-    }
     return true
   } else {
     return false
