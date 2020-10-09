@@ -6,6 +6,6 @@ export type GrammarName = string
 export type ResumableEntry = { grammar: Value.grammar; task: Task.Task }
 
 export interface TaskChart {
-  task_sets: Array<Map<TaskId, Task.Task>>
+  task_maps: Array<Map<TaskId, Task.Task>>
   resumable_indexing_sets: Array<Map<GrammarName, Map<TaskId, ResumableEntry>>>
 }

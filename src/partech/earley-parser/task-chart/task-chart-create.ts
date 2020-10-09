@@ -4,9 +4,9 @@ import * as Token from "../../token"
 export function create(tokens: Array<Token.Token>): TaskChart.TaskChart {
   const length = chart_length_from_tokens_length(tokens.length)
 
-  const task_sets = new Array()
+  const task_maps = new Array()
   for (let i = 0; i < length; i++) {
-    task_sets.push(new Map())
+    task_maps.push(new Map())
   }
 
   const resumable_indexing_sets = new Array()
@@ -15,7 +15,7 @@ export function create(tokens: Array<Token.Token>): TaskChart.TaskChart {
   }
 
   return {
-    task_sets,
+    task_maps,
     resumable_indexing_sets,
   }
 }

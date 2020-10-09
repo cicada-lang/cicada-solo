@@ -6,9 +6,9 @@ export function resumable_entries(
   task: Task.Task
 ): IterableIterator<TaskChart.ResumableEntry> {
   const indexing_set = chart.resumable_indexing_sets[task.index]
-  const task_set = indexing_set.get(task.grammar_name)
-  if (task_set !== undefined) {
-    return task_set.values()
+  const task_map = indexing_set.get(task.grammar_name)
+  if (task_map !== undefined) {
+    return task_map.values()
   } else {
     const empty_map = new Map()
     return empty_map.values()

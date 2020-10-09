@@ -11,10 +11,10 @@ export function insert(
   } = {}
 ): boolean {
   const id = Task.id(task)
-  const task_set = chart.task_sets[index]
+  const task_map = chart.task_maps[index]
 
-  if (!task_set.has(id)) {
-    task_set.set(id, task)
+  if (!task_map.has(id)) {
+    task_map.set(id, task)
 
     const indexing_set = chart.resumable_indexing_sets[index]
     extend_resumable_indexing_set(indexing_set, id, task)
@@ -41,15 +41,15 @@ function extend_resumable_indexing_set(
   const { value } = Task.next_part(task)
   if (value.kind === "Value.grammar") {
     const grammar = value
-    const task_set = indexing_set.get(grammar.name)
-    if (task_set !== undefined) {
-      if (!task_set.has(task_id)) {
-        task_set.set(task_id, { task, grammar })
+    const task_map = indexing_set.get(grammar.name)
+    if (task_map !== undefined) {
+      if (!task_map.has(task_id)) {
+        task_map.set(task_id, { task, grammar })
       }
     } else {
-      const new_task_set = new Map()
-      new_task_set.set(task_id, { task, grammar })
-      indexing_set.set(grammar.name, new_task_set)
+      const new_task_map = new Map()
+      new_task_map.set(task_id, { task, grammar })
+      indexing_set.set(grammar.name, new_task_map)
     }
   }
 }
