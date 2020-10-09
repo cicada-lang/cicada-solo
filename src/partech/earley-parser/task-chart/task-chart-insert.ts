@@ -11,7 +11,7 @@ export function insert(
   const task_map = chart.task_maps[index]
   if (!task_map.has(id)) {
     task_map.set(id, task)
-    const indexing_set = chart.resumable_task_chart[index]
+    const indexing_set = chart.resumable_chart[index]
     extend_resumable_indexing_set(indexing_set, id, task)
     return true
   } else {

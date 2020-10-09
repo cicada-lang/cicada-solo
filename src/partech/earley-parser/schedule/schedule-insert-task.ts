@@ -9,7 +9,7 @@ export function insert_task(
 ): void {
   const index = Task.progress_index(task)
   if (TaskChart.insert(schedule.chart, index, task)) {
-    const indexing_set = schedule.chart.resumable_task_chart[index]
+    const indexing_set = schedule.chart.resumable_chart[index]
     extend_resumable_indexing_set(indexing_set, task)
     TaskQueue.enqueue(schedule.queue, task)
   }

@@ -5,7 +5,8 @@ export type TaskId = string
 export type GrammarName = string
 export type ResumableEntry = { grammar: Value.grammar; task: Task.Task }
 
-export interface TaskChart {
-  task_maps: Array<Map<TaskId, Task.Task>>
-  resumable_chart: Array<Map<GrammarName, Map<TaskId, ResumableEntry>>>
-}
+ // NOTE to optimise `Schedule.resume`
+
+export type ResumableChart = Array<
+  Map<GrammarName, Map<TaskId, ResumableEntry>>
+>
