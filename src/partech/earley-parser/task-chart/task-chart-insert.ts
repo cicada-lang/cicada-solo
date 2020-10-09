@@ -5,13 +5,13 @@ import * as ut from "../../../ut"
 export function insert(
   chart: TaskChart.TaskChart,
   index: number,
-  task: Task.Task,
+  task: Task.Task
 ): boolean {
   const id = Task.id(task)
   const task_map = chart.task_maps[index]
   if (!task_map.has(id)) {
     task_map.set(id, task)
-    const indexing_set = chart.resumable_indexing_sets[index]
+    const indexing_set = chart.resumable_task_chart[index]
     extend_resumable_indexing_set(indexing_set, id, task)
     return true
   } else {

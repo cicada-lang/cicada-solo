@@ -9,7 +9,7 @@ export function insert_task(
 ): void {
   const index = Task.progress_index(task)
   if (TaskChart.insert(schedule.chart, index, task)) {
-    const indexing_set = schedule.chart.resumable_indexing_sets[index]
+    const indexing_set = schedule.chart.resumable_task_chart[index]
     extend_resumable_indexing_set(indexing_set, task)
     TaskQueue.enqueue(schedule.queue, task)
   }
@@ -27,14 +27,14 @@ function extend_resumable_indexing_set(
   if (value.kind === "Value.grammar") {
     const grammar = value
     const task_map = indexing_set.get(grammar.name)
-    const task_id = Task.id(task)
+    const id = Task.id(task)
     if (task_map !== undefined) {
-      if (!task_map.has(task_id)) {
-        task_map.set(task_id, { task, grammar })
+      if (!task_map.has(id)) {
+        task_map.set(id, { task, grammar })
       }
     } else {
       const new_task_map = new Map()
-      new_task_map.set(task_id, { task, grammar })
+      new_task_map.set(id, { task, grammar })
       indexing_set.set(grammar.name, new_task_map)
     }
   }

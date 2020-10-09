@@ -47,7 +47,7 @@
 
 > Be the most easy to use parsing tool for programming language prototyping.
 
-- move `resumable_indexing_sets` from `TaskChart` to `Schedule`
+- move `resumable_task_chart` from `TaskChart` to `Schedule`
 - `ResumableTaskChart` -- to optimise `Schedule.resume`
 - `FinishedTaskChart` -- to optimise `Schedule.leap`
 - `leap` should not call `resume`
