@@ -1,6 +1,7 @@
 import * as Schedule from "../schedule"
 import * as TaskQueue from "../task-queue"
 import * as TaskChart from "../task-chart"
+import * as ResumableChart from "../resumable-chart"
 import * as Task from "../task"
 
 export function insert_task(
@@ -17,8 +18,8 @@ export function insert_task(
 
 function extend_resumable_resumable_map(
   resumable_map: Map<
-    TaskChart.GrammarName,
-    Map<TaskChart.TaskId, TaskChart.ResumableEntry>
+    ResumableChart.GrammarName,
+    Map<ResumableChart.TaskId, ResumableChart.ResumableEntry>
   >,
   task: Task.Task
 ): void {
