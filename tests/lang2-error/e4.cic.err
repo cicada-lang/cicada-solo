@@ -3,5 +3,5 @@ But the given type is Type.
 
 previous:
 - "courgette"
-- "courgette": Type
+- { Type -- "courgette" }
 

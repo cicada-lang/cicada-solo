@@ -7,5 +7,5 @@ to:
 
 previous:
 - same
-- same: Equal(String, "ratatouille", "baguette")
+- { Equal(String, "ratatouille", "baguette") -- same }
 

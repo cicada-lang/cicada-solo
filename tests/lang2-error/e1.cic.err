@@ -3,5 +3,5 @@ But the given type is Nat.
 
 previous:
 - "ratatouille"
-- "ratatouille": Nat
+- { Nat -- "ratatouille" }
 

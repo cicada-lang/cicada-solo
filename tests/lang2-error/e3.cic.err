@@ -7,5 +7,5 @@ to:
 
 previous:
 - same
-- same: Equal((_: String) * String, cons("ratatouille", "baguette"), cons("baguette", "ratatouille"))
+- { Equal((_: String) * String, cons("ratatouille", "baguette"), cons("baguette", "ratatouille")) -- same }
 

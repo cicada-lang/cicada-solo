@@ -80,8 +80,16 @@ export const exp = {
   "exp:quote": [{ value: { $pattern: ["string"] } }],
   "exp:type": ['"Type"'],
   "exp:begin": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
-  // TODO
-  "exp:the": [{ exp: "exp" }, '"is"', { t: "exp" }],
+  "exp:deduction": [
+    '"{"',
+    { deduction_entries: { $ap: ["one_or_more", "deduction_entry"] } },
+    { deduction_args: { $ap: ["zero_or_more", "exp"] } },
+    '"}"',
+  ],
+}
+
+export const deduction_entry = {
+  "deduction_entry:deduction_entry": [{ t: "exp" }, "dashline", { exp: "exp" }],
 }
 
 export const stmts = {

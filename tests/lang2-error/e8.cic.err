@@ -10,5 +10,5 @@ previous:
 - which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))
 - which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))
 - (n) => which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))
-- (n) => which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev))): (_: Nat) -> Nat
+- { (_: Nat) -> Nat -- (n) => which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev))) }
 
