@@ -13,5 +13,6 @@ _ = { x = { x = "abc" } y = "123" }
 z : { x : { x : String } y : String }
 z = { x = { x = "abc" } y = "123" }
 
+@show z
 @show z.x
 @show z.y

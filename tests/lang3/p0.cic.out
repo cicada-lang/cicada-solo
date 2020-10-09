@@ -9,3 +9,9 @@
     x : String
   }
 }
+{
+  x = "abc"
+}: {
+  x : String
+}
+"123": String
