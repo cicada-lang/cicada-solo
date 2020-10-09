@@ -37,7 +37,44 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
         exp_matcher(base),
         exp_matcher(step)
       ),
-    "exp:the": ({ exp, t }) => Exp.the(ty_matcher(t), exp_matcher(exp)),
+    "exp:deduction": ({ deduction_entries, deduction_args }) => {
+      const entries = pt.matchers
+        .one_or_more_matcher(deduction_entries)
+        .map(deduction_entry_matcher)
+      const args = pt.matchers
+        .zero_or_more_matcher(deduction_args)
+        .map(exp_matcher)
+      return deduction_aux(entries, args)
+    },
+  })(tree)
+}
+
+function deduction_aux(
+  entries: Array<{ t: Ty.Ty; exp: Exp.Exp }>,
+  args: Array<Exp.Exp>
+): Exp.Exp {
+  if (entries.length === 0) {
+    throw new Error("entries.length === 0")
+  } else if (entries.length === 1) {
+    let [{ t, exp }] = entries
+    if (args.length === 0) return Exp.the(t, exp)
+    for (const arg of args) exp = Exp.ap(exp, arg)
+    return Exp.the(t, exp)
+  } else {
+    const [{ t, exp }, ...rest] = entries
+    const arg = deduction_aux(entries.slice(1), args)
+    return Exp.the(t, Exp.ap(exp, arg))
+  }
+}
+
+export function deduction_entry_matcher(
+  tree: pt.Tree.Tree
+): { t: Ty.Ty; exp: Exp.Exp } {
+  return pt.Tree.matcher<{ t: Ty.Ty; exp: Exp.Exp }>({
+    "deduction_entry:deduction_entry": ({ t, exp }) => ({
+      t: ty_matcher(t),
+      exp: exp_matcher(exp),
+    }),
   })(tree)
 }
 
@@ -69,7 +106,6 @@ export function stmt_matcher(tree: pt.Tree.Tree): Stmt.Stmt {
           { span }
         )
       }
-
       const name = claim
       return Stmt.def(
         pt.Tree.str(name),

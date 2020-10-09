@@ -45,7 +45,16 @@ export const exp = {
     { step: "exp" },
     '")"',
   ],
-  "exp:the": [{ t: "ty" }, , "dashline", { exp: "exp" }],
+  "exp:deduction": [
+    '"{"',
+    { deduction_entries: { $ap: ["one_or_more", "deduction_entry"] } },
+    { deduction_args: { $ap: ["zero_or_more", "exp"] } },
+    '"}"',
+  ],
+}
+
+export const deduction_entry = {
+  "deduction_entry:deduction_entry": [{ t: "ty" }, "dashline", { exp: "exp" }],
 }
 
 export const ty = {

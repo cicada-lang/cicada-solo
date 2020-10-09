@@ -5,12 +5,12 @@
   x = Exp.v("x")
   A = Ty.nat
 
-  Check(ctx, Exp.fn("x", x), Ty.arrow(A, A))
-  ------------------------------------------- Check.fn
-  Check(Map.extend(ctx, "x", A), x, A)
-  ------------------------------------------- Check.v
-  Map.Lookup(Map.extend(ctx, "x", A), "x", A)
-  ------------------------------------------- Map.Lookup.here
+  { Check(ctx, Exp.fn("x", x), Ty.arrow(A, A))
+    ------------------------------------------- Check.fn
+    Check(Map.extend(ctx, "x", A), x, A)
+    ------------------------------------------- Check.v
+    Map.Lookup(Map.extend(ctx, "x", A), "x", A)
+    ------------------------------------------- Map.Lookup.here }
 }
 
 {
@@ -19,16 +19,16 @@
   A = Ty.nat
   B = Ty.arrow(Ty.nat, Ty.nat)
 
-  Check(ctx, Exp.fn("x", Exp.fn("y", x)), Ty.arrow(A, Ty.arrow(B, A)))
-  --------------------------------------------------------------------- Check.fn
-  Check(Map.extend(ctx, "x", A), Exp.fn("y", x), Ty.arrow(B, A))
-  ------------------------------------------------------------------ Check.fn
-  Check(Map.extend(Map.extend(ctx, "x", A), "y", B), x, A)
-  ---------------------------------------------------------------- Check.v
-  Map.Lookup(Map.extend(Map.extend(ctx, "x", A), "y", B), "x", A)
-  ----------------------------------------------------------------- Map.Lookup.there
-  Map.Lookup(Map.extend(ctx, "x", A), "x", A)
-  ------------------------------------------- Map.Lookup.here
+  { Check(ctx, Exp.fn("x", Exp.fn("y", x)), Ty.arrow(A, Ty.arrow(B, A)))
+    --------------------------------------------------------------------- Check.fn
+    Check(Map.extend(ctx, "x", A), Exp.fn("y", x), Ty.arrow(B, A))
+    ------------------------------------------------------------------ Check.fn
+    Check(Map.extend(Map.extend(ctx, "x", A), "y", B), x, A)
+    ---------------------------------------------------------------- Check.v
+    Map.Lookup(Map.extend(Map.extend(ctx, "x", A), "y", B), "x", A)
+    ----------------------------------------------------------------- Map.Lookup.there
+    Map.Lookup(Map.extend(ctx, "x", A), "x", A)
+    ------------------------------------------- Map.Lookup.here }
 }
 
 {
@@ -38,16 +38,16 @@
   id = Exp.fn("x", x)
   A = Ty.nat
 
-  Check(ctx, Exp.ap(id, y), A)
-  ---------------------------------------- Check.ap
-  { Check(ctx, id, Ty.arrow(A, A))
-    ---------------------------------------- Check.fn
-    Check(Map.extend(ctx, "x", A), x, A)
-    ----------------------------------------------- Check.v
-    Map.Lookup(Map.extend(ctx, "x", A), "x", A)
-    ---------------------------------------------- Map.Lookup.here }
-  { Check(ctx, y, A)
-    ---------------------------------------- Check.v
-    Map.Lookup(ctx, "y", A)
-    ---------------------------------------- Map.Lookup.here }
+  { Check(ctx, Exp.ap(id, y), A)
+    ---------------------------------------- Check.ap
+    { Check(ctx, id, Ty.arrow(A, A))
+      ---------------------------------------- Check.fn
+      Check(Map.extend(ctx, "x", A), x, A)
+      ----------------------------------------------- Check.v
+      Map.Lookup(Map.extend(ctx, "x", A), "x", A)
+      ---------------------------------------------- Map.Lookup.here }
+    { Check(ctx, y, A)
+      ---------------------------------------- Check.v
+      Map.Lookup(ctx, "y", A)
+      ---------------------------------------- Map.Lookup.here } }
 }

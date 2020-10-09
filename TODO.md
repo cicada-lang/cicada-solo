@@ -25,20 +25,19 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
-- [lang2] `--` as syntax for `Exp.the`
+- [lang2] `{ -- }` as syntax for `Exp.the`
 
   - handle list directly, otherwise
     the binary infix operator will lead to ambiguity.
 
-  - optional `{ -- }` to avoid ambiguity
-
-- [lang3] `--` as syntax for `Exp.the`
+- [lang3] `{ -- }` as syntax for `Exp.the`
 
 - simple arrow syntax -- `A -> B` instead of `(A) -> B`
 
   - handle list directly, otherwise
     the binary infix operator will lead to ambiguity.
 
+- `Exp.???` instead of `Exp.the`
 - `Exp.begin` instead of `Exp.suite`
 
 - [lang0] `@begin` as syntax for `Exp.begin`
