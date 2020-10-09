@@ -7,17 +7,13 @@ export function resume(schedule: Schedule.Schedule, task: Task.Task): void {
     const { task: upsteam_task, grammar } = entry
     if (Task.match_grammar_p(task, grammar)) {
       const forward_steps = Task.progress_index(task) - task.index
-      const resumed_task = {
-        ...upsteam_task,
-        progress: [
-          ...upsteam_task.progress,
-          {
-            index: Task.progress_index(upsteam_task) + forward_steps,
-            choice_name: task.choice_name,
-          },
-        ],
-      }
-      Schedule.insert_task(schedule, resumed_task)
+      Schedule.insert_task(
+        schedule,
+        Task.advance(upsteam_task, {
+          index: Task.progress_index(upsteam_task) + forward_steps,
+          choice_name: task.choice_name,
+        })
+      )
     }
   }
 }

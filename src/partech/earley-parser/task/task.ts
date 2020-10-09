@@ -6,4 +6,5 @@ export interface Task {
   parts: Array<{ name?: string; value: Value.Value }>
   index: number // NOTE into token
   progress: Array<{ index: number; choice_name?: string }>
+  id_cache?: string
 }

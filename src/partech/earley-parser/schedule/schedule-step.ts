@@ -59,9 +59,10 @@ function match_terminal(
   if (Task.progress_index(task) < schedule.tokens.length) {
     const token = schedule.tokens[Task.progress_index(task)]
     if (Value.terminal_match(value, token)) {
-      const entry = { index: Task.progress_index(task) + 1 }
-      const progress = [...task.progress, entry]
-      Schedule.insert_task(schedule, { ...task, progress })
+      Schedule.insert_task(
+        schedule,
+        Task.advance(task, { index: Task.progress_index(task) + 1 })
+      )
     }
   }
 }
