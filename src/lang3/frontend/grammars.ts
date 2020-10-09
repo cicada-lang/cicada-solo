@@ -1,24 +1,16 @@
 import * as pt from "../../partech"
 
-const preserved = [
-  "Equal",
-  "same",
-  "replace",
-  "Absurd",
-  "String",
-  "Type",
-  "is",
-]
+export const zero_or_more = pt.grammars.zero_or_more
+export const one_or_more = pt.grammars.one_or_more
+export const dashline = pt.grammars.dashline
+
+export const $start = "exp"
+
+const preserved = ["Equal", "same", "replace", "Absurd", "String", "Type", "is"]
 
 export const identifier = {
   $pattern: ["identifier", `^(?!(${preserved.join("|")}))`],
 }
-
-export const zero_or_more = pt.grammars.zero_or_more
-
-export const one_or_more = pt.grammars.one_or_more
-
-export const $start = "exp"
 
 export const exp = {
   "exp:var": [{ name: "identifier" }],

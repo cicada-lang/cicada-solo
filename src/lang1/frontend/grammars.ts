@@ -1,18 +1,14 @@
 import * as pt from "../../partech"
 
+export const zero_or_more = pt.grammars.zero_or_more
+export const one_or_more = pt.grammars.one_or_more
+export const dashline = pt.grammars.dashline
+
 const preserved = ["zero", "add1", "rec"]
 
 export const identifier = {
   $pattern: ["identifier", `^(?!(${preserved.join("|")}))`],
 }
-
-export const zero_or_more = pt.grammars.zero_or_more
-
-export const one_or_more = pt.grammars.one_or_more
-
-export const dashline = pt.grammars.dashline
-
-export const $start = "exp"
 
 export const exp = {
   "exp:var": [{ name: "identifier" }],
