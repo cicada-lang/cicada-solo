@@ -18,11 +18,11 @@ export function repr(exp: Exp.Exp): string {
     }
     case "Exp.cls": {
       let s = exp.sat
-        .map(({ name, t, exp }) => `${name} : ${Exp.repr(t)} = ${Exp.repr(exp)}`)
+        .map(
+          ({ name, t, exp }) => `${name} : ${Exp.repr(t)} = ${Exp.repr(exp)}`
+        )
         .join("\n")
-      s += exp.scope
-        .map(({ name, t }) => `${name} : ${Exp.repr(t)}`)
-        .join("\n")
+      s += exp.scope.map(({ name, t }) => `${name} : ${Exp.repr(t)}`).join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.fill": {

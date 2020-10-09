@@ -1,6 +1,15 @@
 import * as pt from "../../partech"
 
-const preserved = ["Equal", "same", "replace", "Absurd", "String", "Type", "return", "is"]
+const preserved = [
+  "Equal",
+  "same",
+  "replace",
+  "Absurd",
+  "String",
+  "Type",
+  "return",
+  "is",
+]
 
 export const identifier = {
   $pattern: ["identifier", `^(?!(${preserved.join("|")}))`],
