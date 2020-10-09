@@ -1,6 +1,6 @@
 import * as Task from "../task"
 
-export function next_index(task: Task.Task): number {
+export function progress_index(task: Task.Task): number {
   if (task.progress.length === 0) {
     return task.index
   } else {

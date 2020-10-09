@@ -24,7 +24,7 @@ function harvest_node(
   for (const task of TaskChart.tasks_at(schedule.chart, end)) {
     if (
       start === task.index &&
-      end === Task.next_index(task) &&
+      end === Task.progress_index(task) &&
       task.progress.length === task.parts.length
     ) {
       if (Task.match_grammar_p(task, grammar)) {
