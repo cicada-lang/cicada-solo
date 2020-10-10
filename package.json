@@ -2,9 +2,6 @@
   "name": "@xieyuheng/cicada",
   "version": "0.0.3",
   "repository": "github:xieyuheng/cicada",
-  "engines": {
-    "node": "14.x"
-  },
   "scripts": {
     "build": "npx tsc",
     "watch": "npx tsc --watch",
