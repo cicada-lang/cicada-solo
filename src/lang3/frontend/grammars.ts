@@ -43,7 +43,13 @@ export const exp = {
     { args: { $ap: ["one_or_more", '"["', "exp", '"]"'] } },
   ],
   "exp:obj": ['"{"', { properties: "properties" }, '"}"'],
-  "exp:dot": [{ target: "exp" }, '"."', { name: "identifier" }],
+  "exp:field": [{ target: "exp" }, '"."', { name: "identifier" }],
+  "exp:method": [
+    { target: "exp" },
+    '"."',
+    { name: "identifier" },
+    { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
+  ],
   "exp:equal": [
     '"Equal"',
     '"("',

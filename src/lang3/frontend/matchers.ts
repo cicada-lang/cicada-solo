@@ -28,8 +28,15 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       return exp
     },
     "exp:obj": ({ properties }) => Exp.obj(properties_matcher(properties)),
-    "exp:dot": ({ target, name }) =>
+    "exp:field": ({ target, name }) =>
       Exp.dot(exp_matcher(target), pt.Tree.str(name)),
+    "exp:method": ({ target, name, args }) => {
+      let exp: Exp.Exp = Exp.dot(exp_matcher(target), pt.Tree.str(name))
+      for (const arg of pt.matchers.one_or_more_matcher(args)) {
+        exp = Exp.ap(exp, exp_matcher(arg))
+      }
+      return exp
+    },
     "exp:equal": ({ t, from, to }) =>
       Exp.equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
     "exp:same": () => Exp.same,
