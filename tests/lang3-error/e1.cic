@@ -1,0 +1,16 @@
+z : {
+  x : { x : String }
+  y : String
+  id : (String) -> String
+}
+
+z = {
+  x = { x = "abc" }
+  y = "123"
+  id = (x) => x
+}
+
+// NOTE should be z.id(z.x.x)
+_ = z.id(z.x)
+
+@show _
