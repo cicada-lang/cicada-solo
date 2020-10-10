@@ -76,6 +76,35 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
         Stmt.declare(ctx, stmt)
       }
       Exp.check(ctx, ret, t)
+    } else if (exp.kind === "Exp.quote") {
+      if (t.kind === "Value.type") {
+        // NOTE literal string type
+        return
+      } else if (t.kind === "Value.str") {
+        return
+      } else if (t.kind === "Value.quote") {
+        if (exp.str === t.str) {
+          return
+        } else {
+          throw new Trace.Trace(
+            ut.aline(`
+          |The given value is string: ${Exp.repr(exp)},
+          |But the given type is ${Exp.repr(
+            Value.readback(ctx, Value.type, t)
+          )}.
+          |`)
+          )
+        }
+      } else {
+        throw new Trace.Trace(
+          ut.aline(`
+          |The given value is string: ${Exp.repr(exp)},
+          |But the given type is ${Exp.repr(
+            Value.readback(ctx, Value.type, t)
+          )}.
+          |`)
+        )
+      }
     } else {
       const u = Exp.infer(ctx, exp)
       if (!Value.conversion(ctx, Value.type, t, u)) {

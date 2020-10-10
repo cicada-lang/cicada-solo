@@ -70,6 +70,10 @@ export function readback(
     return Exp.quote(value.str)
   } else if (t.kind === "Value.type" && value.kind === "Value.str") {
     return Exp.str
+  } else if (t.kind === "Value.type" && value.kind === "Value.quote") {
+    return Exp.quote(value.str)
+  } else if (t.kind === "Value.quote" && value.kind === "Value.quote") {
+    return Exp.quote(value.str)
   } else if (t.kind === "Value.type" && value.kind === "Value.absurd") {
     return Exp.absurd
   } else if (t.kind === "Value.type" && value.kind === "Value.equal") {
