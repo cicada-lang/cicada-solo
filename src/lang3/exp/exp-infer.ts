@@ -38,13 +38,13 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       }
       if (exp.scope.length === 0) {
         return Value.type
+      } else {
+        const [entry, ...tail] = exp.scope
+        Exp.check(ctx, entry.t, Value.type)
+        const t = Exp.evaluate(Ctx.to_env(ctx), entry.t)
+        Ctx.update(ctx, entry.name, t)
+        return Exp.infer(ctx, Exp.cls(new Array(), tail))
       }
-      const [entry, ...tail] = exp.scope
-      Exp.check(ctx, entry.t, Value.type)
-      const t = Exp.evaluate(Ctx.to_env(ctx), entry.t)
-      Ctx.update(ctx, entry.name, t)
-      Exp.check(ctx, Exp.cls(new Array(), tail), Value.type)
-      return Value.type
     } else if (exp.kind === "Exp.fill") {
       Exp.check(ctx, exp.target, Value.type)
       const target = Exp.evaluate(Ctx.to_env(ctx), exp.target)
