@@ -35,6 +35,9 @@
 - [lang3] literal string type
 - [lang3] literal `{}` type
 
+- [lang3] use `Mod` to design module system
+- [lang3] use `Mod` to implement module-level mutual recursion
+
 - 尝试实现 `@judgment` 中的 `@where` 语法关键词。
 
 # partech -- parsing techniques

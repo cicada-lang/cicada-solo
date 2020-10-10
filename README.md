@@ -9,16 +9,18 @@ A nascent programming language as formal deduction system for the foundations of
 - Earley parser: https://en.wikipedia.org/wiki/Earley_parser
 - IXML: https://homepages.cwi.nl/~steven/ixml
 
-**lang0**: Untyped lambda calculus.
+**lang0**: untyped lambda calculus.
 - https://en.wikipedia.org/wiki/Lambda_calculus
 
-**lang1**: Simply typed lambda calculus, with natural number and primitve recursion.
+**lang1**: simply typed lambda calculus, natural number, primitve recursive combinator.
 - https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus
 - System T: https://en.wikipedia.org/wiki/Dialectica_interpretation
 
-**lang2**: Tartlet, pie and "The Little typer".
+**lang2**: Pie and "The Little typer", "Type in Type", no recursion.
 - Racket implementation: https://davidchristiansen.dk/tutorials/nbe
 - Haskell implementation: https://davidchristiansen.dk/tutorials/implementing-types-hs.pdf
+
+**lang3**: dependent type, structural type, fulfilling type, "Type in Type", module system, arbitrary module-level recursion.
 
 ## References
 
