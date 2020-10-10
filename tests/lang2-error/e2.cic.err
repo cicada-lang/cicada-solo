@@ -1,3 +1,4 @@
+
 I am expecting the following two values to be the same String.
 But they are not.
 from:
@@ -8,4 +9,5 @@ to:
 previous:
 - same
 - { Equal(String, "ratatouille", "baguette") -- same }
+
 

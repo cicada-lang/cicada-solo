@@ -117,7 +117,7 @@ export const stmt = {
 
 export const properties = {
   "properties:properties": [
-    { properties: { $ap: ["one_or_more", "property"] } },
+    { properties: { $ap: ["zero_or_more", "property"] } },
   ],
 }
 

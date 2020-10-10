@@ -1,7 +1,9 @@
+
 I see unexpected Type.
 I am expecting the type sigma.
 
 previous:
 - cons(String, String)
 - { Type -- cons(String, String) }
+
 

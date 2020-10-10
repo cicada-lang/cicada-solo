@@ -1,7 +1,9 @@
+
 I infer the type of "courgette" to be String.
 But the given type is Type.
 
 previous:
 - "courgette"
 - { Type -- "courgette" }
+
 

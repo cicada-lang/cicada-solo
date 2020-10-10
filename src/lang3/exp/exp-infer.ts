@@ -112,9 +112,11 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       Exp.check(ctx, exp.exp, t)
       return t
     } else {
+      let exp_repr = Exp.repr(exp)
+      exp_repr = exp_repr.replace(/\s+/g, " ")
       throw new Trace.Trace(
         ut.aline(`
-          |I can not infer the type of ${Exp.repr(exp)}.
+          |I can not infer the type of ${exp_repr}.
           |I suggest you add a type annotation to the expression.
           |`)
       )

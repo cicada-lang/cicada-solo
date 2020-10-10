@@ -1,3 +1,4 @@
+
 I am expecting the following two values to be the same (_: String) -> (_1: String) -> (_2: String) * String.
 But they are not.
 from:
@@ -8,4 +9,5 @@ to:
 previous:
 - same
 - { Equal((_: String) -> (_: String) -> (_: String) * String, (x) => (y) => cons(x, y), (y) => (x) => cons(x, y)) -- same }
+
 

@@ -7,10 +7,11 @@ export function repr<T>(
 ): string {
   let s = ""
   s += trace.message
-  s += `previous:\n`
+  s += "\n"
+  s += "previous:\n"
   for (const x of trace.previous) {
     s += `- ${formater(x)}\n`
-    // s += `> ${ut.inspect(x)}\n`
   }
+  s += "\n"
   return s
 }

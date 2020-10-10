@@ -1,3 +1,4 @@
+
 When checking (_) => id(id(id(id(two)))),
 I am expecting the type to be Ty.arrow,
 but the given type is Nat.
@@ -6,4 +7,5 @@ previous:
 - (_) => id(id(id(id(two))))
 - (_) => (_) => id(id(id(id(two))))
 - { (Nat) -> Nat -- (_) => (_) => id(id(id(id(two)))) }
+
 

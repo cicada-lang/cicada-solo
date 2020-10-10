@@ -1,7 +1,9 @@
+
 I infer the type of "oil" to be String.
 But the given type is Type.
 
 previous:
 - "oil"
 - (_: "oil") * String
+
 

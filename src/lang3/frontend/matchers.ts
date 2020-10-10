@@ -127,7 +127,7 @@ export function properties_matcher(tree: pt.Tree.Tree): Map<string, Exp.Exp> {
   return pt.Tree.matcher<Map<string, Exp.Exp>>({
     "properties:properties": ({ properties }) =>
       new Map(
-        pt.matchers.one_or_more_matcher(properties).map(property_matcher)
+        pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
       ),
   })(tree)
 }

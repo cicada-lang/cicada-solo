@@ -9,7 +9,9 @@ export function parse_stmts(text: string): Array<Stmt.Stmt> {
   const grammar = pt.Mod.dot(mod, "stmts")
   const parser = pt.EarleyParser.create(grammar)
   const lexer = pt.lexers.common
-  const tokens = lexer.lex(pt.preprocess.erase_comment(text))
+  const processed_text = pt.preprocess.erase_comment(text)
+  const tokens =
+    processed_text.trim().length === 0 ? [] : lexer.lex(processed_text)
   const tree = parser.parse(tokens)
   const stmts = matchers.stmts_matcher(tree)
   return stmts
