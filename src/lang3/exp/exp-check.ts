@@ -107,7 +107,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       }
     } else {
       const u = Exp.infer(ctx, exp)
-      if (!Value.conversion(ctx, Value.type, t, u)) {
+      if (!Value.subtype(ctx, u, t)) {
         let u_repr = Exp.repr(Value.readback(ctx, Value.type, u))
         u_repr = u_repr.replace(/\s+/g, " ")
         throw new Trace.Trace(

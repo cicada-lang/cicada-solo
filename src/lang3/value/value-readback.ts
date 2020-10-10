@@ -126,7 +126,7 @@ export function readback(
   } else if (t.kind === "Value.type" && value.kind === "Value.type") {
     return Exp.type
   } else if (value.kind === "Value.not_yet") {
-    // NOTE  t and value.t are ignored here,
+    // NOTE t and value.t are ignored here,
     //  maybe use them to debug.
     return Neutral.readback(ctx, value.neutral)
   } else {
