@@ -1,4 +1,4 @@
-// _ : Literal({})
-// _ = {}
+_ : Object
+_ = {}
 
-// @show _
+@show _

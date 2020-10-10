@@ -51,6 +51,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       return Exp.quote(str.slice(1, str.length - 1))
     },
     "exp:type": () => Exp.type,
+    "exp:object": () => Exp.cls([], []),
     "exp:begin": ({ stmts, ret }) =>
       Exp.begin(stmts_matcher(stmts), exp_matcher(ret)),
     "exp:deduction": ({ deduction_entries, deduction_args }) => {

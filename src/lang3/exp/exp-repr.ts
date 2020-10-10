@@ -17,6 +17,10 @@ export function repr(exp: Exp.Exp): string {
       return `${Exp.repr(exp.target)}(${Exp.repr(exp.arg)})`
     }
     case "Exp.cls": {
+      if (exp.sat.length === 0 && exp.scope.length === 0) {
+        return "Object"
+      }
+
       let s = exp.sat
         .map(
           ({ name, t, exp }) => `${name} : ${Exp.repr(t)} = ${Exp.repr(exp)}`
