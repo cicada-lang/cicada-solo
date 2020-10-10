@@ -1,0 +1,10 @@
+{
+  x = "abc"
+  y = "123"
+}: {
+  x : String
+  y : String
+}
+"abc": String
+"123": String
+"www": String
