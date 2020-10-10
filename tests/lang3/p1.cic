@@ -10,6 +10,5 @@ z = {
 }
 
 @show z
-@show z.id//(z.x) // NOTE should be z.id(z.x.x)
-@show z.id//(z.x.x)
-@show z.id//(z.y)
+@show z.id(z.x.x)
+@show z.id(z.y)

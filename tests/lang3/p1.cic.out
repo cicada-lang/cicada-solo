@@ -11,6 +11,5 @@
   }
   y : String
 }
-(_) => _: (_: String) -> String
-(_) => _: (_: String) -> String
-(_) => _: (_: String) -> String
+"abc": String
+"123": String
