@@ -98,9 +98,8 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.str") {
       return Value.type
     } else if (exp.kind === "Exp.quote") {
-      // TODO
-      // return Value.quote(exp.str)
-      return Value.str
+      return Value.quote(exp.str)
+      // return Value.str
     } else if (exp.kind === "Exp.type") {
       return Value.type
     } else if (exp.kind === "Exp.begin") {
