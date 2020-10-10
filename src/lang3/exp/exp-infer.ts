@@ -29,6 +29,8 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       const arg = Exp.evaluate(Ctx.to_env(ctx), exp.arg)
       return Closure.apply(pi.ret_t_cl, arg)
     } else if (exp.kind === "Exp.cls") {
+      // NOTE We DO need to update the `ctx` as we go along.
+      // - just like inferring `Exp.sigma`.
       ctx = Ctx.clone(ctx)
       for (const entry of exp.sat) {
         Exp.check(ctx, entry.t, Value.type)
@@ -43,7 +45,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
         Exp.check(ctx, entry.t, Value.type)
         const t = Exp.evaluate(Ctx.to_env(ctx), entry.t)
         Ctx.update(ctx, entry.name, t)
-        return Exp.infer(ctx, Exp.cls(new Array(), tail))
+        return Exp.infer(ctx, Exp.cls([], tail))
       }
     } else if (exp.kind === "Exp.fill") {
       Exp.check(ctx, exp.target, Value.type)

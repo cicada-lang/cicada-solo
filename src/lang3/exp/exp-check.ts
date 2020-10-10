@@ -16,11 +16,14 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       const ret_t = Closure.apply(pi.ret_t_cl, arg)
       Exp.check(Ctx.extend(ctx, exp.name, pi.arg_t), exp.ret, ret_t)
     } else if (exp.kind === "Exp.obj") {
+      // NOTE We DO NOT need to update the `ctx` as we go along.
+      // - just like checking `Exp.cons`.
       const cls = Value.is_cls(ctx, t)
       const { sat, tel } = cls
       const { env, next, scope } = tel
+      const properties = new Map(exp.properties)
       for (const entry of sat) {
-        const found = exp.properties.get(entry.name)
+        const found = properties.get(entry.name)
         if (found === undefined) {
           throw new Trace.Trace(
             ut.aline(`
@@ -31,11 +34,10 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
         Exp.check(ctx, found, entry.t)
         const value = Exp.evaluate(Ctx.to_env(ctx), found)
         Value.conversion(ctx, entry.t, value, entry.value)
+        properties.delete(entry.name)
       }
-      if (next === undefined) {
-        return
-      }
-      const found = exp.properties.get(next.name)
+      if (next === undefined) return
+      const found = properties.get(next.name)
       if (found === undefined) {
         throw new Trace.Trace(
           ut.aline(`
@@ -44,15 +46,12 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
         )
       }
       Exp.check(ctx, found, next.t)
-      const less_properties = new Map(exp.properties)
-      // TODO can not delete name because in recursive call the `sat` is still there.
-      // less_properties.delete(next.name)
+      properties.delete(next.name)
       const value = Exp.evaluate(Ctx.to_env(ctx), found)
-      const filled_tel = Telescope.fill(tel, value)
       Exp.check(
         ctx,
-        Exp.obj(less_properties),
-        Value.cls([...sat, { name: next.name, t: next.t, value }], filled_tel)
+        Exp.obj(properties),
+        Value.cls([], Telescope.fill(tel, value))
       )
     } else if (exp.kind === "Exp.same") {
       const equal = Value.is_equal(ctx, t)
