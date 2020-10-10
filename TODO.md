@@ -26,6 +26,9 @@
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
 - [lang3] refactor functions about `Telescope`
+  - for `Exp.evaluate` on `cls`
+  - for `Exp.check` on `obj` and `cls`
+  - for `Exp.infer` on `cls`
 
 - [lang3] tests/lang3/ch1.cic
 - [lang3] tests/lang3/ch2.cic
