@@ -39,6 +39,8 @@
 
 > Be the most easy to use parsing tool for programming language prototyping.
 
+- [partech] use `Mod` to design module system
+
 - handle `$import` in `Mod.build`
   - built-in `zero_or_more` and `one_or_more` and `optional`
   - always import name for simplicity
