@@ -65,7 +65,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.dot") {
       const target_t = Exp.infer(ctx, exp.target)
       const cls = Value.is_cls(ctx, target_t)
-      return Telescope.dot(cls.tel, exp.name)
+      return Exp.do_dot(cls, exp.name)
     } else if (exp.kind === "Exp.equal") {
       Exp.check(ctx, exp.t, Value.type)
       const t = Exp.evaluate(Ctx.to_env(ctx), exp.t)

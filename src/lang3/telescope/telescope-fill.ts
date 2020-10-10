@@ -10,8 +10,8 @@ export function fill(
   tel: Telescope.Telescope,
   value: Value.Value
 ): Telescope.Telescope {
-  let { env, sat, next, scope } = tel
-  if (next === undefined)
+  let { env, next, scope } = tel
+  if (next === undefined) {
     throw new Trace.Trace(
       ut.aline(`
         |Filling fulled telescope.
@@ -19,14 +19,14 @@ export function fill(
         |- value: ${ut.inspect(value)}
         |`)
     )
+  }
 
   env = Env.extend(env, next.name, value)
-  sat = [...sat, { name: next.name, t: next.t, value }]
   const [entry, ...rest] = scope
   if (entry === undefined) {
-    return Telescope.create(env, sat, undefined, rest)
+    return Telescope.create(env, undefined, rest)
   } else {
     const t = Exp.evaluate(env, entry.t)
-    return Telescope.create(env, sat, { name: entry.name, t }, rest)
+    return Telescope.create(env, { name: entry.name, t }, rest)
   }
 }

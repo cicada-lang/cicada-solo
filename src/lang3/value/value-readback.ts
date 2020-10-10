@@ -28,7 +28,8 @@ export function readback(
   } else if (t.kind === "Value.cls") {
     // NOTE η-expanded every value with cls type to obj.
     const properties = new Map()
-    const { sat, next, scope } = t.tel
+    const { sat, tel } = t
+    const { next, scope } = tel
     let { env } = t.tel
     env = Env.clone(env)
     for (const entry of sat) {
@@ -78,7 +79,8 @@ export function readback(
       Value.readback(ctx, value.t, value.to)
     )
   } else if (t.kind === "Value.type" && value.kind === "Value.cls") {
-    const { sat, next, scope } = value.tel
+    const { sat, tel } = value
+    const { next, scope } = tel
     let { env } = value.tel
     env = Env.clone(env)
     ctx = Ctx.clone(ctx)

@@ -26,8 +26,6 @@
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
 - [lang3] refactor functions about `Telescope`
-  - try to use contract to specify functions' API,
-    if the API is too complex, factor it.
 
 - [lang3] tests/lang3/ch1.cic
 - [lang3] tests/lang3/ch2.cic

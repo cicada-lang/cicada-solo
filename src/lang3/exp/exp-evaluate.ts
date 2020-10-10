@@ -45,8 +45,8 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         if (exp.scope.length === 0) {
           const scope = new Array()
           const next = undefined
-          const tel = Telescope.create(env, sat, next, scope)
-          return Value.cls(tel)
+          const tel = Telescope.create(env, next, scope)
+          return Value.cls(sat, tel)
         } else {
           const scope = Array.from(exp.scope)
           const entry = scope.pop()
@@ -56,8 +56,8 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
           const name = entry.name
           const t = Exp.evaluate(env, entry.t)
           const next = { name, t }
-          const tel = Telescope.create(env, sat, next, scope)
-          return Value.cls(tel)
+          const tel = Telescope.create(env, next, scope)
+          return Value.cls(sat, tel)
         }
       }
       case "Exp.fill": {

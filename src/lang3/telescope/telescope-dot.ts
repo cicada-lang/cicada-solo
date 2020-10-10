@@ -7,13 +7,8 @@ import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
 export function dot(tel: Telescope.Telescope, name: string): Value.Value {
-  const { sat, next, scope } = tel
+  const { next, scope } = tel
   let { env } = tel
-  for (const entry of sat) {
-    if (entry.name === name) {
-      return entry.t
-    }
-  }
 
   env = Env.clone(env)
   const value = loop(env, next, scope, name)

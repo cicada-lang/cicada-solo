@@ -39,11 +39,16 @@ export const fn = (ret_cl: Closure.Closure): fn => ({
 
 export interface cls {
   kind: "Value.cls"
+  sat: Array<{ name: string; t: Value; value: Value }>
   tel: Telescope.Telescope
 }
 
-export const cls = (tel: Telescope.Telescope): cls => ({
+export const cls = (
+  sat: Array<{ name: string; t: Value; value: Value }>,
+  tel: Telescope.Telescope
+): cls => ({
   kind: "Value.cls",
+  sat,
   tel,
 })
 

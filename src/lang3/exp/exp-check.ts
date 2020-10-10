@@ -17,7 +17,8 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       Exp.check(Ctx.extend(ctx, exp.name, pi.arg_t), exp.ret, ret_t)
     } else if (exp.kind === "Exp.obj") {
       const cls = Value.is_cls(ctx, t)
-      const { env, sat, next, scope } = cls.tel
+      const { sat, tel } = cls
+      const { env, next, scope } = tel
       for (const entry of sat) {
         const found = exp.properties.get(entry.name)
         if (found === undefined) {
@@ -47,8 +48,12 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       // TODO can not delete name because in recursive call the `sat` is still there.
       // less_properties.delete(next.name)
       const value = Exp.evaluate(Ctx.to_env(ctx), found)
-      const filled_tel = Telescope.fill(cls.tel, value)
-      Exp.check(ctx, Exp.obj(less_properties), Value.cls(filled_tel))
+      const filled_tel = Telescope.fill(tel, value)
+      Exp.check(
+        ctx,
+        Exp.obj(less_properties),
+        Value.cls([...sat, { name: next.name, t: next.t, value }], filled_tel)
+      )
     } else if (exp.kind === "Exp.same") {
       const equal = Value.is_equal(ctx, t)
       if (!Value.conversion(ctx, equal.t, equal.from, equal.to)) {
