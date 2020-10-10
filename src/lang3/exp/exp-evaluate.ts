@@ -38,26 +38,17 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         for (const entry of exp.sat) {
           const name = entry.name
           const t = Exp.evaluate(env, entry.t)
-          const v = Exp.evaluate(env, entry.exp)
-          sat.push({ name, t, v })
-          Env.update(env, name, v)
+          const value = Exp.evaluate(env, entry.exp)
+          sat.push({ name, t, value })
+          Env.update(env, name, value)
         }
         if (exp.scope.length === 0) {
-          const scope = new Array()
-          const next = undefined
-          const tel = Telescope.create(env, next, scope)
-          return Value.cls(sat, tel)
+          return Value.cls(sat, Telescope.create(env, undefined, new Array()))
         } else {
-          const scope = Array.from(exp.scope)
-          const entry = scope.pop()
-          if (entry === undefined) {
-            throw new Trace.Trace("Exp.cle -- entry is undefined")
-          }
+          const [entry, ...rest] = exp.scope
           const name = entry.name
           const t = Exp.evaluate(env, entry.t)
-          const next = { name, t }
-          const tel = Telescope.create(env, next, scope)
-          return Value.cls(sat, tel)
+          return Value.cls(sat, Telescope.create(env, { name, t }, rest))
         }
       }
       case "Exp.fill": {

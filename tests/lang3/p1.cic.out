@@ -1,15 +1,15 @@
 {
-  id = (_) => _
   x = {
     x = "abc"
   }
   y = "123"
+  id = (_) => _
 }: {
-  id : (_: String) -> String
   x : {
     x : String
   }
   y : String
+  id : (_: String) -> String
 }
 "abc": String
 "123": String

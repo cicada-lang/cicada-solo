@@ -1,13 +1,13 @@
 {
-  y = "123"
   x = {
     x = "abc"
   }
+  y = "123"
 }: {
-  y : String
   x : {
     x : String
   }
+  y : String
 }
 {
   x = "abc"
