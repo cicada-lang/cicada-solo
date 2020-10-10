@@ -11,6 +11,6 @@ export function insert_task(
   const index = Task.progress_index(task)
   if (TaskChart.insert(schedule.chart, index, task)) {
     TaskQueue.enqueue(schedule.queue, task)
-    ResumableChart.insert(schedule.resumable_chart, index, task)
+    ResumableChart.insert(schedule.resumable_chart, task)
   }
 }

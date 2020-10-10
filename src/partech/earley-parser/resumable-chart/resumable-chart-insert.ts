@@ -3,9 +3,9 @@ import * as Task from "../task"
 
 export function insert(
   resumable_chart: ResumableChart.ResumableChart,
-  index: number,
   task: Task.Task
 ): void {
+  const index = Task.progress_index(task)
   const resumable_map = resumable_chart[index]
   if (Task.finished_p(task)) return
   const { value } = Task.next_part(task)
