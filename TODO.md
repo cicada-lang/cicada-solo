@@ -39,8 +39,6 @@
 
 > Be the most easy to use parsing tool for programming language prototyping.
 
-- [partech] `leap` out of `step`
-
 - [partech] use `Mod` to design module system
 
 - handle `$import` in `Mod.build`

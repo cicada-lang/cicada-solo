@@ -34,6 +34,7 @@ export function run(
         console.log("   [stepping]:", Task.repr(task))
       }
       Schedule.step(schedule, task)
+      Schedule.leap(schedule, task)
     }
   }
 }
