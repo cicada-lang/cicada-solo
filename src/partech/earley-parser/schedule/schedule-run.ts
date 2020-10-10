@@ -1,5 +1,6 @@
 import * as Schedule from "../schedule"
 import * as TaskQueue from "../task-queue"
+import * as FinishedChart from "../finished-chart"
 import * as Task from "../task"
 
 export interface Opts {
@@ -20,16 +21,14 @@ export function run(
     if (opts.schedule?.verbose) {
       console.log(Schedule.repr(schedule))
     }
-
     const task = TaskQueue.dequeue(schedule.queue)
-
     if (task === undefined) return
-
     if (Task.finished_p(task)) {
       if (opts.task?.verbose) {
         console.log("[resume from]:", Task.repr(task))
       }
       Schedule.resume(schedule, task)
+      FinishedChart.insert(schedule.finished_chart, task)
     } else {
       if (opts.task?.verbose) {
         console.log("   [stepping]:", Task.repr(task))

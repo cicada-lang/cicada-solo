@@ -1,8 +1,8 @@
 Found the string "\"location\"" in [54, 64], while expecting:
- "}":
-     object:more@0 -> "{"@1 one_or_more:one@5 string:string@6 ":"@7 value:string@8 > "}" 
  ",":
      object_entry:key_value_comma@5 -> string:string@6 ":"@7 value:string@8 > "," 
+ "}":
+     object:more@0 -> "{"@1 one_or_more:one@5 string:string@6 ":"@7 value:string@8 > "}" 
 
  0 |{
  1 |  "first_name" : "Sammy",

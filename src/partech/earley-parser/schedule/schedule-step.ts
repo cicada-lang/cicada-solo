@@ -1,5 +1,6 @@
 import * as Schedule from "../schedule"
 import * as TaskChart from "../task-chart"
+import * as FinishedChart from "../finished-chart"
 import { ParsingError } from "../../errors"
 import * as Value from "../../value"
 import * as Task from "../task"
@@ -33,21 +34,18 @@ export function step(schedule: Schedule.Schedule, task: Task.Task): void {
 
 function leap(
   schedule: Schedule.Schedule,
-  task: Task.Task,
+  upsteam_task: Task.Task,
   grammar: Value.grammar
 ): void {
-  const progress_index = Task.progress_index(task)
+  const progress_index = Task.progress_index(upsteam_task)
   const length = TaskChart.length(schedule.chart)
-  for (let i = progress_index + 1; i < length; i++) {
-    for (const leading_task of TaskChart.tasks_at(schedule.chart, i)) {
-      if (
-        leading_task.index === progress_index &&
-        leading_task.grammar_name === grammar.name &&
-        Task.finished_p(leading_task)
-      ) {
-        Schedule.resume(schedule, leading_task)
-      }
-    }
+
+  for (const task of FinishedChart.entries(
+    schedule.finished_chart,
+    progress_index,
+    grammar.name
+  )) {
+    Schedule.resume(schedule, task)
   }
 }
 

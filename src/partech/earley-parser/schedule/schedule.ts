@@ -1,6 +1,7 @@
 import * as TaskQueue from "../task-queue"
 import * as TaskChart from "../task-chart"
 import * as ResumableChart from "../resumable-chart"
+import * as FinishedChart from "../finished-chart"
 import * as Value from "../../value"
 import * as Token from "../../token"
 
@@ -10,4 +11,5 @@ export interface Schedule {
   queue: TaskQueue.TaskQueue
   chart: TaskChart.TaskChart
   resumable_chart: ResumableChart.ResumableChart
+  finished_chart: FinishedChart.FinishedChart
 }
