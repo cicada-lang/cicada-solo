@@ -39,19 +39,16 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       if (exp.scope.length === 0) {
         return Value.type
       }
-      const [{ name, t }, ...tail] = exp.scope
-      Exp.check(ctx, t, Value.type)
-      const t_value = Exp.evaluate(Ctx.to_env(ctx), t)
-      Exp.check(
-        Ctx.extend(ctx, name, t_value),
-        Exp.cls(new Array(), tail),
-        Value.type
-      )
+      const [entry, ...tail] = exp.scope
+      Exp.check(ctx, entry.t, Value.type)
+      const t = Exp.evaluate(Ctx.to_env(ctx), entry.t)
+      Ctx.update(ctx, entry.name, t)
+      Exp.check(ctx, Exp.cls(new Array(), tail), Value.type)
       return Value.type
     } else if (exp.kind === "Exp.fill") {
       Exp.check(ctx, exp.target, Value.type)
-      const target_value = Exp.evaluate(Ctx.to_env(ctx), exp.target)
-      const cls = Value.is_cls(ctx, target_value)
+      const target = Exp.evaluate(Ctx.to_env(ctx), exp.target)
+      const cls = Value.is_cls(ctx, target)
       const { next } = cls.tel
       if (next === undefined) {
         throw new Trace.Trace(
