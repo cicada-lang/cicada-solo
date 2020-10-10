@@ -5,7 +5,7 @@ export function insert(
   finished_chart: FinishedChart.FinishedChart,
   task: Task.Task
 ): void {
-  const index = Task.progress_index(task)
+  const index = task.index
   const finished_map = finished_chart[index]
   const task_map = finished_map.get(task.grammar_name)
   const id = Task.id(task)

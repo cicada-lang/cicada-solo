@@ -39,13 +39,21 @@ function leap(
 ): void {
   const progress_index = Task.progress_index(upsteam_task)
   const length = TaskChart.length(schedule.chart)
-
   for (const task of FinishedChart.entries(
     schedule.finished_chart,
     progress_index,
     grammar.name
   )) {
-    Schedule.resume(schedule, task)
+    if (Task.match_grammar_p(task, grammar)) {
+      const forward_steps = Task.progress_index(task) - task.index
+      Schedule.insert_task(
+        schedule,
+        Task.advance(upsteam_task, {
+          index: Task.progress_index(upsteam_task) + forward_steps,
+          choice_name: task.choice_name,
+        })
+      )
+    }
   }
 }
 
