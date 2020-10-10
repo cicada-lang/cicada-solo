@@ -16,7 +16,7 @@ A nascent programming language as formal deduction system for the foundations of
 - https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus
 - System T: https://en.wikipedia.org/wiki/Dialectica_interpretation
 
-**lang2**: Pie and "The Little typer", "Type in Type", no recursion.
+**lang2**: "The Little typer", "Type in Type", no recursion.
 - Racket implementation: https://davidchristiansen.dk/tutorials/nbe
 - Haskell implementation: https://davidchristiansen.dk/tutorials/implementing-types-hs.pdf
 
