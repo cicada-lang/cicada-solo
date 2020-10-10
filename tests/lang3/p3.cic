@@ -1,4 +1,8 @@
-_ : Object
-_ = {}
+x : Object
+x = {}
 
-@show _
+@show x
+
+y = {}
+
+@show y

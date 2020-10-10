@@ -61,6 +61,8 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       }
       Exp.check(ctx, exp.arg, next.t)
       return Value.type
+    } else if (exp.kind === "Exp.obj" && exp.properties.size === 0) {
+      return Value.cls([], Telescope.create(Ctx.to_env(ctx), undefined, []))
     } else if (exp.kind === "Exp.dot") {
       const target_t = Exp.infer(ctx, exp.target)
       const cls = Value.is_cls(ctx, target_t)
