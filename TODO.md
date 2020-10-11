@@ -36,8 +36,12 @@
 - [lang3] top level different from `Exp.begin`
 - [lang3] `@begin` as syntax for `Exp.begin`
 
+> 以 TLT 为例子来测试 lang3 的能力。
+
 - [lang3] tests/lang3/ch1.cic
 - [lang3] tests/lang3/ch2.cic
+
+> 更完整的 dependent + structural type 语言。
 
 - [lang3] `Value.subtype` -- structural cls
 - [lang3] `Value.subtype` -- function type
