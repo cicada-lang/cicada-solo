@@ -25,6 +25,8 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
+- [lang3] split `Exp.infer`
+
 > use `Mod` to implement module-level mutual recursion
 
 - [lang3] `Mod`
