@@ -9,6 +9,7 @@ import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { check_by_infer } from "./exp-check-by-infer"
 import { check_quote } from "./exp-check-quote"
+import { check_union_type } from "./exp-check-union-type"
 
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
   try {
@@ -105,39 +106,4 @@ function check_obj(ctx: Ctx.Ctx, obj: Exp.obj, cls: Value.cls): void {
   properties.delete(next.name)
   const value = Exp.evaluate(Ctx.to_env(ctx), found)
   Exp.check(ctx, Exp.obj(properties), Value.cls([], Telescope.fill(tel, value)))
-}
-
-function check_union_type(ctx: Ctx.Ctx, exp: Exp.Exp, union: Value.union): void {
-  const { left, right } = union
-  try {
-    check_by_infer(ctx, exp, union)
-  } catch (error) {
-    if (error instanceof Trace.Trace) {
-      try {
-        check(ctx, exp, left)
-      } catch (error_left) {
-        if (error_left instanceof Trace.Trace) {
-          try {
-            check(ctx, exp, right)
-          } catch (error_right) {
-            if (error_right instanceof Trace.Trace) {
-              throw new Trace.Trace(
-                ut.aline(`
-              |Check of both part of union type failed.
-              |
-              |left: ${ut.indent(error_left.message, "  ")}
-              |right: ${ut.indent(error_right.message, "  ")}`)
-              )
-            } else {
-              throw error_right
-            }
-          }
-        } else {
-          throw error_left
-        }
-      }
-    } else {
-      throw error
-    }
-  }
 }
