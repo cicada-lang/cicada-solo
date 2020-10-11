@@ -8,6 +8,7 @@ import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { check_by_infer } from "./exp-check-by-infer"
+import { check_quote } from "./exp-check-quote"
 
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
   try {
@@ -57,37 +58,6 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
     } else {
       throw error
     }
-  }
-}
-
-function check_quote(ctx: Ctx.Ctx, quote: Exp.quote, t: Value.Value): void {
-  if (t.kind === "Value.type") {
-    // NOTE literal string type
-    return
-  } else if (t.kind === "Value.str") {
-    return
-  } else if (t.kind === "Value.quote") {
-    if (quote.str === t.str) {
-      return
-    } else {
-      throw new Trace.Trace(
-        ut.aline(`
-          |The given value is string: ${Exp.repr(quote)},
-          |But the given type is ${Exp.repr(
-            Value.readback(ctx, Value.type, t)
-          )}.
-          |`)
-      )
-    }
-  } else {
-    throw new Trace.Trace(
-      ut.aline(`
-        |The given value is string: ${Exp.repr(quote)},
-        |But the given type is ${Exp.repr(
-          Value.readback(ctx, Value.type, t)
-        )}.
-        |`)
-    )
   }
 }
 

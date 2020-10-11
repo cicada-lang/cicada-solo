@@ -27,7 +27,6 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] check-quote.ts
 - [lang3] check-union-type.ts
 - [lang3] check-obj.ts
 - [lang3] check-fn.ts
