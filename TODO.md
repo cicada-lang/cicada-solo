@@ -30,7 +30,8 @@
 - [lang3] tests/lang3/ch1.cic
 - [lang3] tests/lang3/ch2.cic
 
-- [lang3] `Value.subtype`
+- [lang3] `Value.subtype` -- structural cls
+- [lang3] `Value.subtype` -- function type
 
 - [lang3] use `Mod` to design module system
 
