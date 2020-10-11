@@ -1,1 +1,1 @@
-same: Equal(Nat, 8, 8)
+Equal(Nat, 8, 8) -- same

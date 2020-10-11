@@ -1,1 +1,1 @@
-cons(1, 2): (_1: Nat) * Nat
+(_1: Nat) * Nat -- cons(1, 2)

@@ -15,7 +15,7 @@ export function top(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): void {
       const value = Exp.evaluate(env, exp)
       const value_repr = Exp.repr(Value.readback(ctx, t, value))
       const t_repr = Exp.repr(Value.readback(ctx, Value.type, t))
-      console.log(`${value_repr}: ${t_repr}`)
+      console.log(`${t_repr} -- ${value_repr}`)
     }
   }
 }

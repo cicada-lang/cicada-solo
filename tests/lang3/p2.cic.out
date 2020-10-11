@@ -1,10 +1,10 @@
 {
-  x = "abc"
-  y = "123"
-}: {
   x : String
   y : String
+} -- {
+  x = "abc"
+  y = "123"
 }
-"abc": String
-"123": String
-"www": String
+String -- "abc"
+String -- "123"
+String -- "www"
