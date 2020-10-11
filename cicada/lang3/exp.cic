@@ -7,7 +7,7 @@
   fn(name: String, ret: Exp): Exp
   ap(target: Exp, arg: Exp): Exp
 
-  cls(scope: List({ name: String, t: Exp })): Exp
+  cls(sat: { name: string, t: Exp, exp: Exp }, scope: List({ name: String, t: Exp })): Exp
   fill(target: Exp, arg: Exp): Exp
   obj(properties: Map(String, Exp)): Exp
   dot(target: Exp, name: String): Exp

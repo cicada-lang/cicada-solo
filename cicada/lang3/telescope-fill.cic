@@ -1,10 +1,9 @@
 @module lang3
 
 Telescope.fill(Telescope, Value): Telescope
-Telescope.fill(Telescope.tel(env, sat, next, scope), value) = {
+Telescope.fill(Telescope.tel(env, next, scope), value) = {
   env = Env.extend(env, next.name, value)
-  sat = [...sat, { name: next.name, t: next.t, value }]
   [entry, ...rest] = scope
   t = Exp.evaluate(env, entry.t)
-  Telescope.tel(env, sat, { name: entry.name, t }, rest)
+  Telescope.tel(env, { name: entry.name, t }, rest)
 }
