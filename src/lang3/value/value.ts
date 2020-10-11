@@ -28,7 +28,7 @@ export const pi = (arg_t: Value, ret_t_cl: Closure.Closure): pi => ({
   ret_t_cl,
 })
 
-interface fn {
+export interface fn {
   kind: "Value.fn"
   ret_cl: Closure.Closure
 }
@@ -53,7 +53,7 @@ export const cls = (
   tel,
 })
 
-interface obj {
+export interface obj {
   kind: "Value.obj"
   properties: Map<string, Value>
 }
@@ -77,7 +77,7 @@ export const equal = (t: Value, from: Value, to: Value): equal => ({
   to,
 })
 
-interface same {
+export interface same {
   kind: "Value.same"
 }
 
@@ -101,7 +101,7 @@ export const str: str = {
   kind: "Value.str",
 }
 
-interface quote {
+export interface quote {
   kind: "Value.quote"
   str: string
 }
@@ -111,7 +111,7 @@ export const quote = (str: string): quote => ({
   str,
 })
 
-interface union {
+export interface union {
   kind: "Value.union"
   left: Value
   right: Value
@@ -131,7 +131,7 @@ export const type: type = {
   kind: "Value.type",
 }
 
-interface not_yet {
+export interface not_yet {
   kind: "Value.not_yet"
   t: Value
   neutral: Neutral.Neutral

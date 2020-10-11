@@ -21,7 +21,7 @@ export type Exp =
   | begin
   | the
 
-interface v {
+export interface v {
   kind: "Exp.v"
   name: string
 }
@@ -31,7 +31,7 @@ export const v = (name: string): v => ({
   name,
 })
 
-interface pi {
+export interface pi {
   kind: "Exp.pi"
   name: string
   arg_t: Exp
@@ -45,7 +45,7 @@ export const pi = (name: string, arg_t: Exp, ret_t: Exp): pi => ({
   ret_t,
 })
 
-interface fn {
+export interface fn {
   kind: "Exp.fn"
   name: string
   ret: Exp
@@ -57,7 +57,7 @@ export const fn = (name: string, ret: Exp): fn => ({
   ret,
 })
 
-interface ap {
+export interface ap {
   kind: "Exp.ap"
   target: Exp
   arg: Exp
@@ -69,7 +69,7 @@ export const ap = (target: Exp, arg: Exp): ap => ({
   arg,
 })
 
-interface cls {
+export interface cls {
   kind: "Exp.cls"
   sat: Array<{ name: string; t: Exp; exp: Exp }>
   scope: Array<{ name: string; t: Exp }>
@@ -84,7 +84,7 @@ export const cls = (
   scope,
 })
 
-interface fill {
+export interface fill {
   kind: "Exp.fill"
   target: Exp
   arg: Exp
@@ -96,7 +96,7 @@ export const fill = (target: Exp, arg: Exp): fill => ({
   arg,
 })
 
-interface obj {
+export interface obj {
   kind: "Exp.obj"
   properties: Map<string, Exp>
 }
@@ -106,7 +106,7 @@ export const obj = (properties: Map<string, Exp>): obj => ({
   properties,
 })
 
-interface dot {
+export interface dot {
   kind: "Exp.dot"
   target: Exp
   name: string
@@ -118,7 +118,7 @@ export const dot = (target: Exp, name: string): dot => ({
   name,
 })
 
-interface equal {
+export interface equal {
   kind: "Exp.equal"
   t: Exp
   from: Exp
@@ -132,7 +132,7 @@ export const equal = (t: Exp, from: Exp, to: Exp): equal => ({
   to,
 })
 
-interface same {
+export interface same {
   kind: "Exp.same"
 }
 
@@ -140,7 +140,7 @@ export const same: same = {
   kind: "Exp.same",
 }
 
-interface replace {
+export interface replace {
   kind: "Exp.replace"
   target: Exp
   motive: Exp
@@ -154,7 +154,7 @@ export const replace = (target: Exp, motive: Exp, base: Exp): replace => ({
   base,
 })
 
-interface absurd {
+export interface absurd {
   kind: "Exp.absurd"
 }
 
@@ -162,7 +162,7 @@ export const absurd: absurd = {
   kind: "Exp.absurd",
 }
 
-interface absurd_ind {
+export interface absurd_ind {
   kind: "Exp.absurd_ind"
   target: Exp
   motive: Exp
@@ -174,7 +174,7 @@ export const absurd_ind = (target: Exp, motive: Exp): absurd_ind => ({
   motive,
 })
 
-interface str {
+export interface str {
   kind: "Exp.str"
 }
 
@@ -182,7 +182,7 @@ export const str: str = {
   kind: "Exp.str",
 }
 
-interface quote {
+export interface quote {
   kind: "Exp.quote"
   str: string
 }
@@ -204,7 +204,7 @@ export const union = (left: Exp, right: Exp): union => ({
   right,
 })
 
-interface type {
+export interface type {
   kind: "Exp.type"
 }
 
@@ -212,7 +212,7 @@ export const type: type = {
   kind: "Exp.type",
 }
 
-interface begin {
+export interface begin {
   kind: "Exp.begin"
   stmts: Array<Stmt.Stmt>
   ret: Exp
@@ -224,7 +224,7 @@ export const begin = (stmts: Array<Stmt.Stmt>, ret: Exp): begin => ({
   ret,
 })
 
-interface the {
+export interface the {
   kind: "Exp.the"
   t: Exp
   exp: Exp
