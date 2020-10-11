@@ -123,6 +123,12 @@ export function readback(
       Closure.apply(value.ret_t_cl, variable)
     )
     return Exp.pi(fresh_name, arg_t, ret_t)
+  } else if (t.kind === "Value.type" && value.kind === "Value.union") {
+    const { left, right } = value
+    return Exp.union(
+      Value.readback(ctx, Value.type, left),
+      Value.readback(ctx, Value.type, right)
+    )
   } else if (t.kind === "Value.type" && value.kind === "Value.type") {
     return Exp.type
   } else if (value.kind === "Value.not_yet") {

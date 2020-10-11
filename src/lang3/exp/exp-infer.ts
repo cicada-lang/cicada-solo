@@ -99,7 +99,11 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       return Value.type
     } else if (exp.kind === "Exp.quote") {
       return Value.quote(exp.str)
-      // return Value.str
+    } else if (exp.kind === "Exp.union") {
+      const { left, right } = exp
+      Exp.check(ctx, left, Value.type)
+      Exp.check(ctx, right, Value.type)
+      return Value.type
     } else if (exp.kind === "Exp.type") {
       return Value.type
     } else if (exp.kind === "Exp.begin") {

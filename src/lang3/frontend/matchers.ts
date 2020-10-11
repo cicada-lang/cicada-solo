@@ -50,6 +50,13 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       const str = pt.Tree.str(value)
       return Exp.quote(str.slice(1, str.length - 1))
     },
+    "exp:union": ({ head, tail }) => {
+      let exp: Exp.Exp = exp_matcher(head)
+      for (const right of pt.matchers.zero_or_more_matcher(tail)) {
+        exp = Exp.union(exp, exp_matcher(right))
+      }
+      return exp
+    },
     "exp:type": () => Exp.type,
     "exp:object": () => Exp.cls([], []),
     "exp:begin": ({ stmts, ret }) =>
