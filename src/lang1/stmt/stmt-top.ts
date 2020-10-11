@@ -17,7 +17,7 @@ export function top(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): void {
       const norm = Value.readback(new Set(ctx.keys()), t, value)
       const value_repr = Exp.repr(norm)
       const t_repr = Ty.repr(t)
-      console.log(`${value_repr}: ${t_repr}`)
+      console.log(`${t_repr} -- ${value_repr}`)
     }
   }
 }
