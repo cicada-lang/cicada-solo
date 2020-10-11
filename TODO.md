@@ -26,6 +26,8 @@
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
 - [lang3] `Exp.check` for `Value.union`
+- [lang3] `Value.conversion` for `Value.union`
+- [lang3] `Value.subtype` for `Value.union`
 
 - [lang3] use `Mod` to implement module-level mutual recursion
 
