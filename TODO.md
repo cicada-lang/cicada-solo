@@ -27,8 +27,6 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] exp-check-begin.ts
-
 - [lang3] `Mod`
 - [lang3] `Mod` in `evaluate`, `check` & `infer`
 - [lang3] `Mod` in `Closure` and `Telescope`

@@ -7,11 +7,12 @@ import * as Telescope from "../telescope"
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
+import { check_union_type } from "./exp-check-union-type"
 import { check_fn } from "./exp-check-fn"
 import { check_obj } from "./exp-check-obj"
 import { check_same } from "./exp-check-same"
 import { check_quote } from "./exp-check-quote"
-import { check_union_type } from "./exp-check-union-type"
+import { check_begin } from "./exp-check-begin"
 import { check_by_infer } from "./exp-check-by-infer"
 
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
@@ -25,12 +26,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
     } else if (exp.kind === "Exp.same") {
       check_same(ctx, exp, Value.is_equal(ctx, t))
     } else if (exp.kind === "Exp.begin") {
-      const { stmts, ret } = exp
-      ctx = Ctx.clone(ctx)
-      for (const stmt of stmts) {
-        Stmt.declare(ctx, stmt)
-      }
-      Exp.check(ctx, ret, t)
+      check_begin(ctx, exp, t)
     } else if (exp.kind === "Exp.quote") {
       check_quote(ctx, exp, t)
     } else {
