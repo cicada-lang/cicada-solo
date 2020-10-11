@@ -13,8 +13,27 @@ Type -- {
   y = "123"
 }
 {
-  T : Type = Stringx : String
+  T : Type = String
+  x : String
   y : String
+} -- {
+  T = String
+  x = "abc"
+  y = "123"
+}
+{
+  T : Type = String
+  x : String = "abc"
+  y : String
+} -- {
+  T = String
+  x = "abc"
+  y = "123"
+}
+{
+  T : Type = String
+  x : String = "abc"
+  y : String = "123"
 } -- {
   T = String
   x = "abc"

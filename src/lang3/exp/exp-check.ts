@@ -33,7 +33,20 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
         }
         Exp.check(ctx, found, entry.t)
         const value = Exp.evaluate(Ctx.to_env(ctx), found)
-        Value.conversion(ctx, entry.t, value, entry.value)
+        if (!Value.conversion(ctx, entry.t, value, entry.value)) {
+          throw new Trace.Trace(
+            ut.aline(`
+          |I am expecting the following two values to be the same ${Exp.repr(
+            Value.readback(ctx, Value.type, entry.t)
+          )}.
+          |But they are not.
+          |The value in object:
+          |  ${Exp.repr(Value.readback(ctx, entry.t, value))}
+          |The value in partially filled class:
+          |  ${Exp.repr(Value.readback(ctx, entry.t, entry.value))}
+          |`)
+          )
+        }
         properties.delete(entry.name)
       }
       if (next === undefined) return

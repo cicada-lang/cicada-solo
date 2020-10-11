@@ -1,0 +1,21 @@
+
+I am expecting the following two values to be the same String.
+But they are not.
+The value in object:
+  "ab"
+The value in partially filled class:
+  "abc"
+
+previous:
+- {
+  T = String
+  x = "ab"
+  y = "123"
+}
+- { Dup[String]["abc"] -- {
+  T = String
+  x = "ab"
+  y = "123"
+} }
+
+

@@ -21,12 +21,13 @@ export function repr(exp: Exp.Exp): string {
         return "Object"
       }
 
-      let s = exp.sat
-        .map(
+      const parts = [
+        ...exp.sat.map(
           ({ name, t, exp }) => `${name} : ${Exp.repr(t)} = ${Exp.repr(exp)}`
-        )
-        .join("\n")
-      s += exp.scope.map(({ name, t }) => `${name} : ${Exp.repr(t)}`).join("\n")
+        ),
+        ...exp.scope.map(({ name, t }) => `${name} : ${Exp.repr(t)}`),
+      ]
+      let s = parts.join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.fill": {

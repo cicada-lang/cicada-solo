@@ -1,0 +1,15 @@
+Dup : Type
+Dup = {
+  T: Type
+  x: T
+  y: T
+}
+
+_ : Dup[String]["abc"]
+_ = {
+  T = String
+  x = "ab"
+  y = "123"
+}
+
+@show _
