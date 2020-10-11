@@ -25,7 +25,16 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
-- [lang3] use `Mod` to implement module-level mutual recursion
+> use `Mod` to implement module-level mutual recursion
+
+- [lang3] `Mod`
+- [lang3] `Mod` in `evaluate`, `check` & `infer`
+- [lang3] `Mod` in `Closure` and `Telescope`
+
+- [lang3] `Top`
+
+- [lang3] top level different from `Exp.begin`
+- [lang3] `@begin` as syntax for `Exp.begin`
 
 - [lang3] tests/lang3/ch1.cic
 - [lang3] tests/lang3/ch2.cic
