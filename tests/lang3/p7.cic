@@ -1,13 +1,8 @@
 Color : Type
 Color = { "red" | "green" | "blue" }
 
-red : Color
 red = "red"
-
-green : Color
 green = "green"
-
-blue : Color
 blue = "blue"
 
 @show { Color -- red }
@@ -21,6 +16,19 @@ _ : {
   red : Color
   green : Color
   blue : Color
+}
+_ = {
+  red = red
+  green = green
+  blue = blue
+}
+
+@show _
+
+_ : {
+  red : "red"
+  green : "green"
+  blue : "blue"
 }
 _ = {
   red = red
