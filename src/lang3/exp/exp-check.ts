@@ -156,8 +156,27 @@ function check_union(
 ): void {
   try {
     check(ctx, exp, left)
-  } catch (error) {
-    // TODO
-    // if (error instanceof )
+  } catch (error_left) {
+    if (error_left instanceof Trace.Trace) {
+      try {
+        check(ctx, exp, right)
+      } catch (error_right) {
+        if (error_right instanceof Trace.Trace) {
+          throw new Trace.Trace(
+            ut.aline(`
+              |Check of both part of union type failed.
+              |left:
+              |  ${error_left.message}
+              |right:
+              |  ${error_right.message}
+              |`)
+          )
+        } else {
+          throw error_right
+        }
+      }
+    } else {
+      throw error_left
+    }
   }
 }
