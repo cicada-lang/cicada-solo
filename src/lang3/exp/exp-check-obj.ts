@@ -26,8 +26,8 @@ export function check_obj(ctx: Ctx.Ctx, obj: Exp.obj, cls: Value.cls): void {
       throw new Trace.Trace(
         ut.aline(`
           |I am expecting the following two values to be the same ${Exp.repr(
-          Value.readback(ctx, Value.type, entry.t)
-        )}.
+            Value.readback(ctx, Value.type, entry.t)
+          )}.
           |But they are not.
           |The value in object:
           |  ${Exp.repr(Value.readback(ctx, entry.t, value))}

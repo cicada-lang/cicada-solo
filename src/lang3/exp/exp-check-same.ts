@@ -13,8 +13,8 @@ export function check_same(
     throw new Trace.Trace(
       ut.aline(`
           |I am expecting the following two values to be the same ${Exp.repr(
-        Value.readback(ctx, Value.type, equal.t)
-      )}.
+            Value.readback(ctx, Value.type, equal.t)
+          )}.
           |But they are not.
           |from:
           |  ${Exp.repr(Value.readback(ctx, equal.t, equal.from))}
