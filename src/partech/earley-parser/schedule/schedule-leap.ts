@@ -8,7 +8,7 @@ import * as ut from "../../../ut"
 
 export function leap(
   schedule: Schedule.Schedule,
-  upsteam_task: Task.Task,
+  upsteam_task: Task.Task
 ): void {
   const { value } = Task.next_part(upsteam_task)
   if (value.kind === "Value.grammar") {

@@ -10,6 +10,12 @@ import * as ut from "../../ut"
 
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
   try {
+    if (t.kind === "Value.union") {
+      const { left, right } = t
+      check_union(ctx, exp, left, right)
+      return
+    }
+
     if (exp.kind === "Exp.fn") {
       const pi = Value.is_pi(ctx, t)
       const arg = Value.not_yet(pi.arg_t, Neutral.v(exp.name))
@@ -134,6 +140,24 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       }
     }
   } catch (error) {
-    Trace.maybe_push(error, exp)
+    if (error instanceof Trace.Trace) {
+      throw Trace.trail(error, exp)
+    } else {
+      throw error
+    }
+  }
+}
+
+function check_union(
+  ctx: Ctx.Ctx,
+  exp: Exp.Exp,
+  left: Value.Value,
+  right: Value.Value
+): void {
+  try {
+    check(ctx, exp, left)
+  } catch (error) {
+    // TODO
+    // if (error instanceof )
   }
 }

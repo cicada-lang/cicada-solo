@@ -121,6 +121,10 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       )
     }
   } catch (error) {
-    Trace.maybe_push(error, exp)
+    if (error instanceof Trace.Trace) {
+      throw Trace.trail(error, exp)
+    } else {
+      throw error
+    }
   }
 }
