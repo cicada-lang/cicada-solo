@@ -7,6 +7,7 @@ import * as Telescope from "../telescope"
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
+import { check_fn } from "./exp-check-fn"
 import { check_obj } from "./exp-check-obj"
 import { check_quote } from "./exp-check-quote"
 import { check_union_type } from "./exp-check-union-type"
@@ -17,14 +18,8 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
     if (t.kind === "Value.union") {
       check_union_type(ctx, exp, t)
     } else if (exp.kind === "Exp.fn") {
-      // check_fn(ctx, exp, Value.is_pi(ctx, t))
-      const pi = Value.is_pi(ctx, t)
-      const arg = Value.not_yet(pi.arg_t, Neutral.v(exp.name))
-      const ret_t = Closure.apply(pi.ret_t_cl, arg)
-      Exp.check(Ctx.extend(ctx, exp.name, pi.arg_t), exp.ret, ret_t)
+      check_fn(ctx, exp, Value.is_pi(ctx, t))
     } else if (exp.kind === "Exp.obj") {
-      // NOTE We DO NOT need to update the `ctx` as we go along.
-      // - just like checking `Exp.cons`.
       check_obj(ctx, exp, Value.is_cls(ctx, t))
     } else if (exp.kind === "Exp.same") {
       const equal = Value.is_equal(ctx, t)

@@ -9,6 +9,8 @@ import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
 export function check_obj(ctx: Ctx.Ctx, obj: Exp.obj, cls: Value.cls): void {
+  // NOTE We DO NOT need to update the `ctx` as we go along.
+  // - just like checking `Exp.cons`.
   const { sat, tel } = cls
   const { env, next, scope } = tel
   const properties = new Map(obj.properties)
