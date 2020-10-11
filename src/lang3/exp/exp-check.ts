@@ -7,12 +7,14 @@ import * as Telescope from "../telescope"
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
+import { check_by_infer } from "./exp-check-by-infer"
 
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
   try {
     if (t.kind === "Value.union") {
-      check_union(ctx, exp, t)
+      check_union_type(ctx, exp, t)
     } else if (exp.kind === "Exp.fn") {
+      // check_fn(ctx, exp, Value.is_pi(ctx, t))
       const pi = Value.is_pi(ctx, t)
       const arg = Value.not_yet(pi.arg_t, Neutral.v(exp.name))
       const ret_t = Closure.apply(pi.ret_t_cl, arg)
@@ -135,21 +137,7 @@ function check_obj(ctx: Ctx.Ctx, obj: Exp.obj, cls: Value.cls): void {
   Exp.check(ctx, Exp.obj(properties), Value.cls([], Telescope.fill(tel, value)))
 }
 
-function check_by_infer(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
-  const u = Exp.infer(ctx, exp)
-  if (!Value.subtype(ctx, u, t)) {
-    let u_repr = Exp.repr(Value.readback(ctx, Value.type, u))
-    u_repr = u_repr.replace(/\s+/g, " ")
-    throw new Trace.Trace(
-      ut.aline(`
-        |I infer the type of ${Exp.repr(exp)} to be ${u_repr}.
-        |But the given type is ${Exp.repr(Value.readback(ctx, Value.type, t))}.
-        |`)
-    )
-  }
-}
-
-function check_union(ctx: Ctx.Ctx, exp: Exp.Exp, union: Value.union): void {
+function check_union_type(ctx: Ctx.Ctx, exp: Exp.Exp, union: Value.union): void {
   const { left, right } = union
   try {
     check_by_infer(ctx, exp, union)
