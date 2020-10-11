@@ -5,7 +5,6 @@ import * as Closure from "../closure"
 import * as Telescope from "../telescope"
 import * as Env from "../env"
 import * as Trace from "../../trace"
-import * as ut from "../../ut"
 
 export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
   try {
