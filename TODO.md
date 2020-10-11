@@ -27,7 +27,6 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] exp-check-obj.ts
 - [lang3] exp-check-fn.ts
 - [lang3] exp-check-same.ts
 - [lang3] exp-check-begin.ts
