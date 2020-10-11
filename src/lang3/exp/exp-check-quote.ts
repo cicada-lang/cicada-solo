@@ -8,7 +8,11 @@ import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
-export function check_quote(ctx: Ctx.Ctx, quote: Exp.quote, t: Value.Value): void {
+export function check_quote(
+  ctx: Ctx.Ctx,
+  quote: Exp.quote,
+  t: Value.Value
+): void {
   if (t.kind === "Value.type") {
     // NOTE literal string type
     return
@@ -31,9 +35,7 @@ export function check_quote(ctx: Ctx.Ctx, quote: Exp.quote, t: Value.Value): voi
     throw new Trace.Trace(
       ut.aline(`
         |The given value is string: ${Exp.repr(quote)},
-        |But the given type is ${Exp.repr(
-          Value.readback(ctx, Value.type, t)
-        )}.
+        |But the given type is ${Exp.repr(Value.readback(ctx, Value.type, t))}.
         |`)
     )
   }

@@ -8,7 +8,11 @@ import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
-export function check_begin(ctx: Ctx.Ctx, begin: Exp.begin, t: Value.Value): void {
+export function check_begin(
+  ctx: Ctx.Ctx,
+  begin: Exp.begin,
+  t: Value.Value
+): void {
   const { stmts, ret } = begin
   ctx = Ctx.clone(ctx)
   for (const stmt of stmts) {

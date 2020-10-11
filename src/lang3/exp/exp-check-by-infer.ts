@@ -8,7 +8,11 @@ import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
-export function check_by_infer(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
+export function check_by_infer(
+  ctx: Ctx.Ctx,
+  exp: Exp.Exp,
+  t: Value.Value
+): void {
   const u = Exp.infer(ctx, exp)
   if (!Value.subtype(ctx, u, t)) {
     let u_repr = Exp.repr(Value.readback(ctx, Value.type, u))

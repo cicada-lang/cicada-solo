@@ -8,7 +8,11 @@ import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
-export function check_same(ctx: Ctx.Ctx, same: Exp.same, equal: Value.equal): void {
+export function check_same(
+  ctx: Ctx.Ctx,
+  same: Exp.same,
+  equal: Value.equal
+): void {
   if (!Value.conversion(ctx, equal.t, equal.from, equal.to)) {
     throw new Trace.Trace(
       ut.aline(`
