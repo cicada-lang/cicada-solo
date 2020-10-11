@@ -16,6 +16,7 @@ export type Exp =
   | absurd_ind
   | str
   | quote
+  | union
   | type
   | begin
   | the
@@ -189,6 +190,18 @@ interface quote {
 export const quote = (str: string): quote => ({
   kind: "Exp.quote",
   str,
+})
+
+interface union {
+  kind: "Exp.union"
+  left: Exp
+  right: Exp
+}
+
+export const union = (left: Exp, right: Exp): union => ({
+  kind: "Exp.union",
+  left,
+  right,
 })
 
 interface type {

@@ -68,6 +68,10 @@ export function repr(exp: Exp.Exp): string {
     case "Exp.quote": {
       return `"${exp.str}"`
     }
+    case "Exp.union": {
+      const { left, right } = exp
+      return `{ ${Exp.repr(left)} | ${Exp.repr(right)} }`
+    }
     case "Exp.type": {
       return "Type"
     }

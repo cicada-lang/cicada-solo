@@ -12,6 +12,7 @@ export type Value =
   | absurd
   | str
   | quote
+  | union
   | type
   | not_yet
 
@@ -108,6 +109,18 @@ interface quote {
 export const quote = (str: string): quote => ({
   kind: "Value.quote",
   str,
+})
+
+interface union {
+  kind: "Value.union"
+  left: Value
+  right: Value
+}
+
+export const union = (left: Value, right: Value): union => ({
+  kind: "Value.union",
+  left,
+  right,
 })
 
 export interface type {

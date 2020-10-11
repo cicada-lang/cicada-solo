@@ -101,6 +101,10 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       case "Exp.quote": {
         return Value.quote(exp.str)
       }
+      case "Exp.union": {
+        const { left, right } = exp
+        return Value.union(Exp.evaluate(env, left), Exp.evaluate(env, right))
+      }
       case "Exp.type": {
         return Value.type
       }
