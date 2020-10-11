@@ -192,7 +192,7 @@ export const quote = (str: string): quote => ({
   str,
 })
 
-interface union {
+export interface union {
   kind: "Exp.union"
   left: Exp
   right: Exp

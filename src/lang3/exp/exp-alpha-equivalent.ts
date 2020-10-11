@@ -122,6 +122,22 @@ function alpha(the: {
     return true
   } else if (left.kind === "Exp.quote" && right.kind === "Exp.quote") {
     return left.str === right.str
+  } else if (left.kind === "Exp.union" && right.kind === "Exp.union") {
+    // NOTE handle associativity and commutative of union
+    const left_types = union_flatten(left)
+    const right_types = union_flatten(right)
+    return (
+      left_types.every((left_t) =>
+        right_types.some((right_t) =>
+          alpha({ ...the, left: left_t, right: right_t })
+        )
+      ) &&
+      right_types.every((right_t) =>
+        left_types.some((left_t) =>
+          alpha({ ...the, left: left_t, right: right_t })
+        )
+      )
+    )
   } else if (left.kind === "Exp.type" && right.kind === "Exp.type") {
     return true
   } else if (
@@ -139,4 +155,12 @@ function alpha(the: {
   } else {
     return false
   }
+}
+
+function union_flatten(union: Exp.union): Array<Exp.Exp> {
+  const { left, right } = union
+  const left_parts = left.kind === "Exp.union" ? union_flatten(left) : [left]
+  const right_parts =
+    right.kind === "Exp.union" ? union_flatten(right) : [right]
+  return [...left_parts, ...right_parts]
 }
