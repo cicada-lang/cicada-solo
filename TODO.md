@@ -31,6 +31,12 @@
 - [lang3] `Mod` in `evaluate`, `check` & `infer`
 - [lang3] `Mod` in `Closure` and `Telescope`
 
+- [lang3] `Mod` in `Value.readback`
+
+- [lang3] `Exp.evaluate` lookup both `mod` and `env`
+- [lang3] `Exp.check` lookup both `mod` and `ctx`
+- [lang3] `Exp.infer` lookup both `mod` and `ctx`
+
 - [lang3] `Top`
 
 - [lang3] top level different from `Exp.begin`
