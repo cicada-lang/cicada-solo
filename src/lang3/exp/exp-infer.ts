@@ -7,6 +7,7 @@ import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
+import { infer_v } from "./exp-infer-v"
 import { infer_cls } from "./exp-infer-cls"
 import { infer_pi } from "./exp-infer-pi"
 import { infer_ap } from "./exp-infer-ap"
@@ -21,13 +22,7 @@ import { infer_the } from "./exp-infer-the"
 
 export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
-    if (exp.kind === "Exp.v") {
-      const t = Ctx.lookup(ctx, exp.name)
-      if (t === undefined) {
-        throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
-      }
-      return t
-    }
+    if (exp.kind === "Exp.v") return infer_v(mod, ctx, exp)
     if (exp.kind === "Exp.pi") return infer_pi(mod, ctx, exp)
     if (exp.kind === "Exp.ap") return infer_ap(mod, ctx, exp)
     if (exp.kind === "Exp.cls") return infer_cls(mod, ctx, exp)
