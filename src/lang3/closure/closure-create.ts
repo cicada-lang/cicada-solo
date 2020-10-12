@@ -9,5 +9,5 @@ export function create(
   name: string,
   ret: Exp.Exp
 ): Closure.Closure {
-  return new Closure.Closure(mod, env, name, ret)
+  return { mod, env, name, ret }
 }

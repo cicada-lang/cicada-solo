@@ -32,8 +32,6 @@
 - [lang3] top level different from `Exp.begin`
 - [lang3] `@begin` as syntax for `Exp.begin`
 
-- [lang3] `Closure` as interface -- instead of class
-
 > 以 TLT 为例子来测试 lang3 的能力。
 
 - [lang3] tests/lang3/ch1.cic
