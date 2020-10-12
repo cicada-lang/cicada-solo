@@ -48,5 +48,9 @@ export function check_obj(ctx: Ctx.Ctx, obj: Exp.obj, cls: Value.cls): void {
   Exp.check(ctx, found, cls.tel.next.t)
   properties.delete(cls.tel.next.name)
   const value = Exp.evaluate(Ctx.to_env(ctx), found)
-  Exp.check(ctx, Exp.obj(properties), Value.cls([], Telescope.fill(cls.tel, value)))
+  Exp.check(
+    ctx,
+    Exp.obj(properties),
+    Value.cls([], Telescope.fill(cls.tel, value))
+  )
 }
