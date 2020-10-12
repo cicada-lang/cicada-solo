@@ -1,0 +1,59 @@
+List : (Type) -> Type
+List = (T) => { Null(T) | Cons(T) }
+
+Null : (Type) -> Type
+Null = (T) => Object
+
+Cons : (Type) -> Type
+Cons = (T) => {
+  head: T
+  tail: List(T)
+}
+
+@show List
+
+_ : Null(String)
+_ = {}
+
+@show _
+
+// _ : List(String)
+// _ = {}
+
+// @show _
+
+// _ : Dup
+// _ = {
+//   T = String
+//   x = "abc"
+//   y = "123"
+// }
+
+// @show _
+
+// _ : Dup[String]
+// _ = {
+//   T = String
+//   x = "abc"
+//   y = "123"
+// }
+
+// @show _
+
+// _ : Dup[String]["abc"]
+// _ = {
+//   T = String
+//   x = "abc"
+//   y = "123"
+// }
+
+// @show _
+
+// _ : Dup[String]["abc"]["123"]
+// _ = {
+//   T = String
+//   x = "abc"
+//   y = "123"
+// }
+
+// @show _

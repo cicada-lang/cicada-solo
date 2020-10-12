@@ -1,14 +1,14 @@
 _ : String
 _ = "abc"
 
-_ : { x : String }
-_ = { x = "abc" }
+_1 : { x : String }
+_1 = { x = "abc" }
 
-_ : { x : { x : String } }
-_ = { x = { x = "abc" } }
+_2 : { x : { x : String } }
+_2 = { x = { x = "abc" } }
 
-_ : { x : { x : String } }
-_ = { x = { x = "abc" } y = "123" }
+_3 : { x : { x : String } }
+_3 = { x = { x = "abc" } y = "123" }
 
 z : { x : { x : String } y : String }
 z = { x = { x = "abc" } y = "123" }

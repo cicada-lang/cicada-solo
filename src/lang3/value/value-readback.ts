@@ -99,7 +99,6 @@ export function readback(
     env = Env.clone(env)
     ctx = Ctx.clone(ctx)
     const norm_sat = new Array()
-    const norm_scope = new Array()
     for (const entry of sat) {
       const name = entry.name
       const t = Value.readback(mod, ctx, Value.type, entry.t)
@@ -107,6 +106,7 @@ export function readback(
       norm_sat.push({ name, t, exp })
       Ctx.update(ctx, name, entry.t, entry.value)
     }
+    const norm_scope = new Array()
     if (next !== undefined) {
       const name = next.name
       const t = Value.readback(mod, ctx, Value.type, next.t)

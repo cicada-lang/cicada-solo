@@ -7,7 +7,7 @@ export function lookup(mod: Mod.Mod, name: string): undefined | Value.Value {
   const exp = mod.map.get(name)
   if (exp === undefined) return undefined
   const env = Env.init()
-  // NOTE maybe use try and Trace for `Exp.evaluate`
+  // NOTE maybe use try and Trace
   const value = Exp.evaluate(mod, env, exp)
   return value
 }

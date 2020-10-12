@@ -31,9 +31,7 @@ export const handler = async (argv: Argv) => {
   try {
     const tops = frontend.parse_tops(text)
     const mod = Mod.init()
-    for (const top of tops) {
-      Top.run(mod, top)
-    }
+    Top.run(mod, tops)
   } catch (error) {
     if (error instanceof Trace.Trace) {
       const trace = error
