@@ -49,14 +49,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       Exp.check(ctx, exp.exp, t)
       return t
     }
-    let exp_repr = Exp.repr(exp)
-    exp_repr = exp_repr.replace(/\s+/g, " ")
-    throw new Trace.Trace(
-      ut.aline(`
-          |I can not infer the type of ${exp_repr}.
-          |I suggest you add a type annotation to the expression.
-          |`)
-    )
+    throw infer_error(exp)
   } catch (error) {
     if (error instanceof Trace.Trace) {
       throw Trace.trail(error, exp)
@@ -64,4 +57,15 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       throw error
     }
   }
+}
+
+function infer_error<T>(exp: Exp.Exp): Trace.Trace<T> {
+  let exp_repr = Exp.repr(exp)
+  exp_repr = exp_repr.replace(/\s+/g, " ")
+  return new Trace.Trace(
+    ut.aline(`
+       |I can not infer the type of ${exp_repr}.
+       |I suggest you add a type annotation to the expression.
+       |`)
+  )
 }
