@@ -27,9 +27,6 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] `Mod` in `Value.unexpected`
-- [lang3] `Mod` in `Neutral.readback`
-- [lang3] `Mod` in `Normal.readback`
 - [lang3] `Mod` in `Value.conversion`
 - [lang3] `Mod` in `Value.subtype`
 - [lang3] `Mod` in `Value.is_*`
