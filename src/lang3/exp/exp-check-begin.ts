@@ -8,10 +8,9 @@ export function check_begin(
   begin: Exp.begin,
   t: Value.Value
 ): void {
-  const { stmts, ret } = begin
   ctx = Ctx.clone(ctx)
-  for (const stmt of stmts) {
+  for (const stmt of begin.stmts) {
     Stmt.declare(ctx, stmt)
   }
-  Exp.check(ctx, ret, t)
+  Exp.check(ctx, begin.ret, t)
 }
