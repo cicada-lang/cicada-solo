@@ -27,8 +27,6 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] `Exp.infer_cls` -- extract `infer_through_sat`
-
 - [lang3] `Mod`
 - [lang3] `Mod` in `evaluate`, `check` & `infer`
 - [lang3] `Mod` in `Closure` and `Telescope`
