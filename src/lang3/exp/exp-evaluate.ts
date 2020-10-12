@@ -115,7 +115,7 @@ export function evaluate(
       case "Exp.begin": {
         env = Env.clone(env)
         for (const stmt of exp.stmts) {
-          Stmt.execute(env, stmt)
+          Stmt.execute(mod, env, stmt)
         }
         return Exp.evaluate(mod, env, exp.ret)
       }

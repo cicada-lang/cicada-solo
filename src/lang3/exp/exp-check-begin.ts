@@ -12,7 +12,7 @@ export function check_begin(
 ): void {
   ctx = Ctx.clone(ctx)
   for (const stmt of begin.stmts) {
-    Stmt.declare(ctx, stmt)
+    Stmt.declare(mod, ctx, stmt)
   }
   Exp.check(mod, ctx, begin.ret, t)
 }

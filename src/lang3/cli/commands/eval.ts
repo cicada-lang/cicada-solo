@@ -4,6 +4,7 @@ import * as Stmt from "../../stmt"
 import * as Exp from "../../exp"
 import * as Ctx from "../../ctx"
 import * as Env from "../../env"
+import * as Mod from "../../mod"
 import * as Trace from "../../../trace"
 import * as pt from "../../../partech"
 import fs from "fs"
@@ -29,10 +30,11 @@ export const handler = async (argv: Argv) => {
 
   try {
     const stmts = frontend.parse_stmts(text)
+    const mod = Mod.init()
     const ctx = Ctx.init()
     const env = Env.init()
     for (const stmt of stmts) {
-      Stmt.top(ctx, env, stmt)
+      Stmt.top(mod, ctx, env, stmt)
     }
   } catch (error) {
     if (error instanceof Trace.Trace) {

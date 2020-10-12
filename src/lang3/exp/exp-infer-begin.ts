@@ -7,7 +7,7 @@ import * as Mod from "../mod"
 export function infer_begin(mod: Mod.Mod, ctx: Ctx.Ctx, begin: Exp.begin): Value.Value {
   ctx = Ctx.clone(ctx)
   for (const stmt of begin.stmts) {
-    Stmt.declare(ctx, stmt)
+    Stmt.declare(mod, ctx, stmt)
   }
   return Exp.infer(mod, ctx, begin.ret)
 }
