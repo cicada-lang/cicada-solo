@@ -14,6 +14,7 @@ import { infer_dot } from "./exp-infer-dot"
 import { infer_equal } from "./exp-infer-equal"
 import { infer_replace } from "./exp-infer-replace"
 import { infer_absurd_ind } from "./exp-infer-absurd-ind"
+import { infer_union } from "./exp-infer-union"
 import { infer_begin } from "./exp-infer-begin"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
@@ -39,12 +40,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     if (exp.kind === "Exp.absurd_ind") return infer_absurd_ind(ctx, exp)
     if (exp.kind === "Exp.str") return Value.type
     if (exp.kind === "Exp.quote") return Value.quote(exp.str)
-    if (exp.kind === "Exp.union") {
-      const { left, right } = exp
-      Exp.check(ctx, left, Value.type)
-      Exp.check(ctx, right, Value.type)
-      return Value.type
-    }
+    if (exp.kind === "Exp.union") return infer_union(ctx, exp)
     if (exp.kind === "Exp.type") return Value.type
     if (exp.kind === "Exp.begin") return infer_begin(ctx, exp)
     if (exp.kind === "Exp.the") {
