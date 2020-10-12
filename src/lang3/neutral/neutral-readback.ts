@@ -4,7 +4,11 @@ import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 
-export function readback(mod: Mod.Mod, ctx: Ctx.Ctx, neutral: Neutral.Neutral): Exp.Exp {
+export function readback(
+  mod: Mod.Mod,
+  ctx: Ctx.Ctx,
+  neutral: Neutral.Neutral
+): Exp.Exp {
   switch (neutral.kind) {
     case "Neutral.v": {
       return Exp.v(neutral.name)

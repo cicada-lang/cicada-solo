@@ -4,7 +4,7 @@ import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 
 export function conversion(
-mod: Mod.Mod,
+  mod: Mod.Mod,
   ctx: Ctx.Ctx,
   t: Value.Value,
   x: Value.Value,

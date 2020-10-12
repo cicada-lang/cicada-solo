@@ -11,11 +11,18 @@ import { check_quote } from "./exp-check-quote"
 import { check_begin } from "./exp-check-begin"
 import { check_by_infer } from "./exp-check-by-infer"
 
-export function check(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
+export function check(
+  mod: Mod.Mod,
+  ctx: Ctx.Ctx,
+  exp: Exp.Exp,
+  t: Value.Value
+): void {
   try {
     if (t.kind === "Value.union") return check_union_type(mod, ctx, exp, t)
-    if (exp.kind === "Exp.fn") return check_fn(mod, ctx, exp, Value.is_pi(mod, ctx, t))
-    if (exp.kind === "Exp.obj") return check_obj(mod, ctx, exp, Value.is_cls(mod, ctx, t))
+    if (exp.kind === "Exp.fn")
+      return check_fn(mod, ctx, exp, Value.is_pi(mod, ctx, t))
+    if (exp.kind === "Exp.obj")
+      return check_obj(mod, ctx, exp, Value.is_cls(mod, ctx, t))
     if (exp.kind === "Exp.same")
       return check_same(mod, ctx, exp, Value.is_equal(mod, ctx, t))
     if (exp.kind === "Exp.begin") return check_begin(mod, ctx, exp, t)

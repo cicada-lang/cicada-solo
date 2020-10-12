@@ -15,11 +15,9 @@ export function evaluate(
   try {
     switch (exp.kind) {
       case "Exp.v": {
-        let value = Env.lookup(env, exp.name) || Mod.lookup(mod, exp.name)
-        if (value === undefined) {
-          throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
-        }
-        return value
+        const value = Env.lookup(env, exp.name) || Mod.lookup(mod, exp.name)
+        if (value !== undefined) return value
+        throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
       }
       case "Exp.pi": {
         return Value.pi(
@@ -47,7 +45,10 @@ export function evaluate(
           Env.update(env, name, value)
         }
         if (exp.scope.length === 0) {
-          return Value.cls(sat, Telescope.create(mod, env, undefined, new Array()))
+          return Value.cls(
+            sat,
+            Telescope.create(mod, env, undefined, new Array())
+          )
         } else {
           const [entry, ...tail] = exp.scope
           const name = entry.name
@@ -57,7 +58,10 @@ export function evaluate(
       }
       case "Exp.fill": {
         const { target, arg } = exp
-        return Exp.do_fill(Exp.evaluate(mod, env, target), Exp.evaluate(mod, env, arg))
+        return Exp.do_fill(
+          Exp.evaluate(mod, env, target),
+          Exp.evaluate(mod, env, arg)
+        )
       }
       case "Exp.obj": {
         const { properties } = exp
@@ -107,7 +111,10 @@ export function evaluate(
       }
       case "Exp.union": {
         const { left, right } = exp
-        return Value.union(Exp.evaluate(mod, env, left), Exp.evaluate(mod, env, right))
+        return Value.union(
+          Exp.evaluate(mod, env, left),
+          Exp.evaluate(mod, env, right)
+        )
       }
       case "Exp.type": {
         return Value.type

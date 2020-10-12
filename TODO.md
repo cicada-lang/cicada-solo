@@ -27,8 +27,6 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] `Exp.infer` lookup both `mod` and `ctx`
-
 - [lang3] `freshen_name` handle mod
 
 - [lang3] `Top`

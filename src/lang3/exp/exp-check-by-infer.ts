@@ -18,7 +18,9 @@ export function check_by_infer(
     throw new Trace.Trace(
       ut.aline(`
         |I infer the type of ${Exp.repr(exp)} to be ${u_repr}.
-        |But the given type is ${Exp.repr(Value.readback(mod, ctx, Value.type, t))}.
+        |But the given type is ${Exp.repr(
+          Value.readback(mod, ctx, Value.type, t)
+        )}.
         |`)
     )
   }

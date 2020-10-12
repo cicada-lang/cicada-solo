@@ -1,8 +1,6 @@
 import * as Exp from "../exp"
-import * as Stmt from "../stmt"
 import * as Value from "../value"
 import * as Telescope from "../telescope"
-import * as Env from "../env"
 import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
@@ -28,7 +26,10 @@ export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     if (exp.kind === "Exp.cls") return infer_cls(mod, ctx, exp)
     if (exp.kind === "Exp.fill") return infer_fill(mod, ctx, exp)
     if (exp.kind === "Exp.obj" && exp.properties.size === 0) {
-      return Value.cls([], Telescope.create(mod, Ctx.to_env(ctx), undefined, []))
+      return Value.cls(
+        [],
+        Telescope.create(mod, Ctx.to_env(ctx), undefined, [])
+      )
     }
     if (exp.kind === "Exp.dot") return infer_dot(mod, ctx, exp)
     if (exp.kind === "Exp.equal") return infer_equal(mod, ctx, exp)

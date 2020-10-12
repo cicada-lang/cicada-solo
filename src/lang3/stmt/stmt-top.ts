@@ -5,7 +5,12 @@ import * as Env from "../env"
 import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 
-export function top(mod: Mod.Mod, ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): void {
+export function top(
+  mod: Mod.Mod,
+  ctx: Ctx.Ctx,
+  env: Env.Env,
+  stmt: Stmt.Stmt
+): void {
   Stmt.declare(mod, ctx, stmt)
   Stmt.execute(mod, env, stmt)
 

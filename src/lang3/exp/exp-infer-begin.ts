@@ -4,7 +4,11 @@ import * as Value from "../value"
 import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 
-export function infer_begin(mod: Mod.Mod, ctx: Ctx.Ctx, begin: Exp.begin): Value.Value {
+export function infer_begin(
+  mod: Mod.Mod,
+  ctx: Ctx.Ctx,
+  begin: Exp.begin
+): Value.Value {
   ctx = Ctx.clone(ctx)
   for (const stmt of begin.stmts) {
     Stmt.declare(mod, ctx, stmt)
