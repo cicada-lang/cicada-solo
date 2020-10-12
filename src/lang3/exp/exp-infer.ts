@@ -14,6 +14,7 @@ import { infer_dot } from "./exp-infer-dot"
 import { infer_equal } from "./exp-infer-equal"
 import { infer_replace } from "./exp-infer-replace"
 import { infer_absurd_ind } from "./exp-infer-absurd-ind"
+import { infer_begin } from "./exp-infer-begin"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -45,14 +46,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       return Value.type
     }
     if (exp.kind === "Exp.type") return Value.type
-    if (exp.kind === "Exp.begin") {
-      const { stmts, ret } = exp
-      ctx = Ctx.clone(ctx)
-      for (const stmt of stmts) {
-        Stmt.declare(ctx, stmt)
-      }
-      return Exp.infer(ctx, ret)
-    }
+    if (exp.kind === "Exp.begin") return infer_begin(ctx, exp)
     if (exp.kind === "Exp.the") {
       Exp.check(ctx, exp.t, Value.type)
       const t = Exp.evaluate(Ctx.to_env(ctx), exp.t)
