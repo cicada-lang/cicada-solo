@@ -29,6 +29,10 @@
 
 - [lang3] `Top`
 
+- [lang3] `Top.execute`
+- [lang3] `Top.declare`
+- [lang3] `Top.run`
+
 - [lang3] top level different from `Exp.begin`
 - [lang3] `@begin` as syntax for `Exp.begin`
 

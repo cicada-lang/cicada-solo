@@ -3,7 +3,7 @@ import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Env from "../env"
 
-export function top(env: Env.Env, stmt: Stmt.Stmt): void {
+export function run(env: Env.Env, stmt: Stmt.Stmt): void {
   Stmt.execute(env, stmt)
 
   switch (stmt.kind) {

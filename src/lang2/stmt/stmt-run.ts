@@ -4,7 +4,7 @@ import * as Value from "../value"
 import * as Env from "../env"
 import * as Ctx from "../ctx"
 
-export function top(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): void {
+export function run(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): void {
   Stmt.declare(ctx, stmt)
   Stmt.execute(env, stmt)
 

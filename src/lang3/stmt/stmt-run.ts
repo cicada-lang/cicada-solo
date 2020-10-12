@@ -5,7 +5,7 @@ import * as Env from "../env"
 import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 
-export function top(
+export function run(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   env: Env.Env,
