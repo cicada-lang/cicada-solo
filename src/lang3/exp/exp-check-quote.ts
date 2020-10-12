@@ -16,7 +16,7 @@ export function check_quote(
   throw new Trace.Trace(
     ut.aline(`
       |The given value is string: ${Exp.repr(quote)},
-      |But the given type is ${Exp.repr(Value.readback(ctx, Value.type, t))}.
+      |But the given type is ${Exp.repr(Value.readback(mod, ctx, Value.type, t))}.
       |`)
   )
 }

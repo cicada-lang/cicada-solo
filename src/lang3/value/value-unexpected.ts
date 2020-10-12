@@ -1,15 +1,17 @@
 import * as Value from "../value"
 import * as Exp from "../exp"
+import * as Mod from "../mod"
 import * as Ctx from "../ctx"
 import * as ut from "../../ut"
 
 export function unexpected(
+  mod: Mod.Mod,
   ctx: Ctx.Ctx,
   value: Value.Value,
   opts: { message?: string } = {}
 ): string {
   throw new Error()
-  const exp_repr = Exp.repr(Value.readback(ctx, Value.type, value))
+  const exp_repr = Exp.repr(Value.readback(mod, ctx, Value.type, value))
   if (opts.message !== undefined) {
     return ut.aline(`
         |I see unexpected ${exp_repr}.

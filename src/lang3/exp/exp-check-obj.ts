@@ -43,13 +43,13 @@ function aganst_sat(
       throw new Trace.Trace(
         ut.aline(`
           |I am expecting the following two values to be the same ${Exp.repr(
-            Value.readback(ctx, Value.type, entry.t)
+            Value.readback(mod, ctx, Value.type, entry.t)
           )}.
           |But they are not.
           |The value in object:
-          |  ${Exp.repr(Value.readback(ctx, entry.t, value))}
+          |  ${Exp.repr(Value.readback(mod, ctx, entry.t, value))}
           |The value in partially filled class:
-          |  ${Exp.repr(Value.readback(ctx, entry.t, entry.value))}
+          |  ${Exp.repr(Value.readback(mod, ctx, entry.t, entry.value))}
           |`)
       )
     }

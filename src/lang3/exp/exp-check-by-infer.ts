@@ -13,12 +13,12 @@ export function check_by_infer(
 ): void {
   const u = Exp.infer(mod, ctx, exp)
   if (!Value.subtype(ctx, u, t)) {
-    let u_repr = Exp.repr(Value.readback(ctx, Value.type, u))
+    let u_repr = Exp.repr(Value.readback(mod, ctx, Value.type, u))
     u_repr = u_repr.replace(/\s+/g, " ")
     throw new Trace.Trace(
       ut.aline(`
         |I infer the type of ${Exp.repr(exp)} to be ${u_repr}.
-        |But the given type is ${Exp.repr(Value.readback(ctx, Value.type, t))}.
+        |But the given type is ${Exp.repr(Value.readback(mod, ctx, Value.type, t))}.
         |`)
     )
   }

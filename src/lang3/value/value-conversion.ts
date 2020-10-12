@@ -9,7 +9,7 @@ export function conversion(
   y: Value.Value
 ): boolean {
   return Exp.alpha_equivalent(
-    Value.readback(ctx, t, x),
-    Value.readback(ctx, t, y)
+    Value.readback(mod, ctx, t, x),
+    Value.readback(mod, ctx, t, y)
   )
 }

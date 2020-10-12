@@ -7,7 +7,7 @@ export function is_pi(ctx: Ctx.Ctx, value: Value.Value): Value.pi {
     return value
   } else {
     throw new Trace.Trace(
-      Value.unexpected(ctx, value, { message: `I am expecting the type pi.` })
+      Value.unexpected(mod, ctx, value, { message: `I am expecting the type pi.` })
     )
   }
 }
@@ -17,7 +17,7 @@ export function is_cls(ctx: Ctx.Ctx, value: Value.Value): Value.cls {
     return value
   } else {
     throw new Trace.Trace(
-      Value.unexpected(ctx, value, { message: `I am expecting the type cls.` })
+      Value.unexpected(mod, ctx, value, { message: `I am expecting the type cls.` })
     )
   }
 }
@@ -27,7 +27,7 @@ export function is_equal(ctx: Ctx.Ctx, value: Value.Value): Value.equal {
     return value
   } else {
     throw new Trace.Trace(
-      Value.unexpected(ctx, value, {
+      Value.unexpected(mod, ctx, value, {
         message: `I am expecting the type equal.`,
       })
     )
@@ -39,7 +39,7 @@ export function is_absurd(ctx: Ctx.Ctx, value: Value.Value): Value.absurd {
     return value
   } else {
     throw new Trace.Trace(
-      Value.unexpected(ctx, value, {
+      Value.unexpected(mod, ctx, value, {
         message: `I am expecting the type absurd.`,
       })
     )
@@ -51,7 +51,7 @@ export function is_str(ctx: Ctx.Ctx, value: Value.Value): Value.str {
     return value
   } else {
     throw new Trace.Trace(
-      Value.unexpected(ctx, value, {
+      Value.unexpected(mod, ctx, value, {
         message: `I am expecting the type string.`,
       })
     )

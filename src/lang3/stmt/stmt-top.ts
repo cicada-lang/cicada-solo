@@ -14,8 +14,8 @@ export function top(mod: Mod.Mod, ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): 
       const { exp } = stmt
       const t = Exp.infer(mod, ctx, exp)
       const value = Exp.evaluate(mod, env, exp)
-      const value_repr = Exp.repr(Value.readback(ctx, t, value))
-      const t_repr = Exp.repr(Value.readback(ctx, Value.type, t))
+      const value_repr = Exp.repr(Value.readback(mod, ctx, t, value))
+      const t_repr = Exp.repr(Value.readback(mod, ctx, Value.type, t))
       console.log(`${t_repr} -- ${value_repr}`)
     }
   }

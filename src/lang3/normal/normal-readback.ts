@@ -4,5 +4,5 @@ import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 
 export function readback(ctx: Ctx.Ctx, normal: Normal.Normal): Exp.Exp {
-  return Value.readback(ctx, normal.t, normal.value)
+  return Value.readback(mod, ctx, normal.t, normal.value)
 }
