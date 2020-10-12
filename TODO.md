@@ -29,7 +29,6 @@
 
 - [lang3] `Mod` in `Value.conversion`
 - [lang3] `Mod` in `Value.subtype`
-- [lang3] `Mod` in `Value.is_*`
 
 - [lang3] `Exp.evaluate` lookup both `mod` and `env`
 - [lang3] `Exp.check` lookup both `mod` and `ctx`

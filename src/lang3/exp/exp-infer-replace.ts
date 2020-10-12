@@ -10,7 +10,7 @@ export function infer_replace(
   replace: Exp.replace
 ): Value.Value {
   const target_t = Exp.infer(mod, ctx, replace.target)
-  const equal = Value.is_equal(ctx, target_t)
+  const equal = Value.is_equal(mod, ctx, target_t)
   const motive_t = Exp.evaluate(
     mod,
     Env.update(Env.init(), "t", equal.t),

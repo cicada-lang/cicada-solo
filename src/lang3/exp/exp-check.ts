@@ -14,10 +14,10 @@ import { check_by_infer } from "./exp-check-by-infer"
 export function check(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
   try {
     if (t.kind === "Value.union") return check_union_type(mod, ctx, exp, t)
-    if (exp.kind === "Exp.fn") return check_fn(mod, ctx, exp, Value.is_pi(ctx, t))
-    if (exp.kind === "Exp.obj") return check_obj(mod, ctx, exp, Value.is_cls(ctx, t))
+    if (exp.kind === "Exp.fn") return check_fn(mod, ctx, exp, Value.is_pi(mod, ctx, t))
+    if (exp.kind === "Exp.obj") return check_obj(mod, ctx, exp, Value.is_cls(mod, ctx, t))
     if (exp.kind === "Exp.same")
-      return check_same(mod, ctx, exp, Value.is_equal(ctx, t))
+      return check_same(mod, ctx, exp, Value.is_equal(mod, ctx, t))
     if (exp.kind === "Exp.begin") return check_begin(mod, ctx, exp, t)
     if (exp.kind === "Exp.quote") return check_quote(mod, ctx, exp, t)
     return check_by_infer(mod, ctx, exp, t)
