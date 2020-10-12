@@ -16,6 +16,7 @@ import { infer_replace } from "./exp-infer-replace"
 import { infer_absurd_ind } from "./exp-infer-absurd-ind"
 import { infer_union } from "./exp-infer-union"
 import { infer_begin } from "./exp-infer-begin"
+import { infer_the } from "./exp-infer-the"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -43,12 +44,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     if (exp.kind === "Exp.union") return infer_union(ctx, exp)
     if (exp.kind === "Exp.type") return Value.type
     if (exp.kind === "Exp.begin") return infer_begin(ctx, exp)
-    if (exp.kind === "Exp.the") {
-      Exp.check(ctx, exp.t, Value.type)
-      const t = Exp.evaluate(Ctx.to_env(ctx), exp.t)
-      Exp.check(ctx, exp.exp, t)
-      return t
-    }
+    if (exp.kind === "Exp.the") return infer_the(ctx, exp)
     throw infer_error(exp)
   } catch (error) {
     if (error instanceof Trace.Trace) {
