@@ -113,6 +113,23 @@ export const deduction_entry = {
   "deduction_entry:deduction_entry": [{ t: "exp" }, "dashline", { exp: "exp" }],
 }
 
+export const tops = {
+  "tops:tops": [{ tops: { $ap: ["zero_or_more", "top"] } }],
+}
+
+export const top = {
+  "top:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
+  "top:claim": [
+    { claim: "identifier" },
+    '":"',
+    { t: "exp" },
+    { define: "identifier" },
+    '"="',
+    { exp: "exp" },
+  ],
+  "top:show": ['"@"', '"show"', { exp: "exp" }],
+}
+
 export const stmts = {
   "stmts:stmts": [{ stmts: { $ap: ["zero_or_more", "stmt"] } }],
 }
