@@ -9,6 +9,7 @@ import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { infer_cls } from "./exp-infer-cls"
 import { infer_pi } from "./exp-infer-pi"
+import { infer_ap } from "./exp-infer-ap"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -21,11 +22,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.pi") {
       return infer_pi(ctx, exp)
     } else if (exp.kind === "Exp.ap") {
-      const target_t = Exp.infer(ctx, exp.target)
-      const pi = Value.is_pi(ctx, target_t)
-      Exp.check(ctx, exp.arg, pi.arg_t)
-      const arg = Exp.evaluate(Ctx.to_env(ctx), exp.arg)
-      return Closure.apply(pi.ret_t_cl, arg)
+      return infer_ap(ctx, exp)
     } else if (exp.kind === "Exp.cls") {
       return infer_cls(ctx, exp)
     } else if (exp.kind === "Exp.fill") {
