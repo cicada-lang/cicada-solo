@@ -6,8 +6,5 @@ export function repr(stmt: Stmt.Stmt): string {
     case "Stmt.def": {
       return `${stmt.name} = ${Exp.repr(stmt.exp)}`
     }
-    case "Stmt.show": {
-      return `@show ${Exp.repr(stmt.exp)}`
-    }
   }
 }

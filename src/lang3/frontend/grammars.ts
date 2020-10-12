@@ -144,7 +144,6 @@ export const stmt = {
     '"="',
     { exp: "exp" },
   ],
-  "stmt:show": ['"@"', '"show"', { exp: "exp" }],
 }
 
 export const properties = {
