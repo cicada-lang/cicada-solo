@@ -11,6 +11,7 @@ import { infer_pi } from "./exp-infer-pi"
 import { infer_ap } from "./exp-infer-ap"
 import { infer_fill } from "./exp-infer-fill"
 import { infer_dot } from "./exp-infer-dot"
+import { infer_equal } from "./exp-infer-equal"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -33,11 +34,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.dot") {
       return infer_dot(ctx, exp)
     } else if (exp.kind === "Exp.equal") {
-      Exp.check(ctx, exp.t, Value.type)
-      const t = Exp.evaluate(Ctx.to_env(ctx), exp.t)
-      Exp.check(ctx, exp.from, t)
-      Exp.check(ctx, exp.to, t)
-      return Value.type
+      return infer_equal(ctx, exp)
     } else if (exp.kind === "Exp.replace") {
       const target_t = Exp.infer(ctx, exp.target)
       const equal = Value.is_equal(ctx, target_t)
