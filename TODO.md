@@ -27,7 +27,6 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] frontend/parse-tops
 - [lang3] cli/commands/eval -- use `Top` instead of `Stmt`
 - [lang3] `@begin` as syntax for `Exp.begin`
 - [lang3] `@show` only for Top
