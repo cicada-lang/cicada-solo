@@ -27,11 +27,15 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] `Mod` in `check`
 - [lang3] `Mod` in `infer`
-- [lang3] `Mod` in `Closure` and `Telescope`
+
+- [lang3] `Mod` in `Closure`
+- [lang3] `Mod` in `Telescope`
 
 - [lang3] `Mod` in `Value.readback`
+- [lang3] `Mod` in `Value.is_*`
+
+- [lang3] `Mod` in `Stmt.*`
 
 - [lang3] `Exp.evaluate` lookup both `mod` and `env`
 - [lang3] `Exp.check` lookup both `mod` and `ctx`

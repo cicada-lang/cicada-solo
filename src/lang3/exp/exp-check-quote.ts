@@ -1,10 +1,12 @@
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Ctx from "../ctx"
+import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
 export function check_quote(
+  mod: Mod.Mod,
   ctx: Ctx.Ctx,
   quote: Exp.quote,
   t: Value.Value
