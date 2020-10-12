@@ -1,5 +1,6 @@
 import * as Exp from "../exp"
 import * as Env from "../env"
+import * as Mod from "../mod"
 import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
@@ -16,7 +17,7 @@ export function do_replace(
   } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.equal") {
       const base_t = Exp.do_ap(motive, target.t.from)
-      const closure = new Closure.Closure(Env.init(), "x", Exp.type)
+      const closure = new Closure.Closure(Mod.init(), Env.init(), "x", Exp.type)
       const motive_t = Value.pi(target.t.t, closure)
       return Value.not_yet(
         Exp.do_ap(motive, target.t.to),

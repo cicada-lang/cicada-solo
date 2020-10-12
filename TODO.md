@@ -27,7 +27,6 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] `Mod` in `Closure`
 - [lang3] `Mod` in `Telescope`
 
 - [lang3] `Mod` in `Value.readback`
