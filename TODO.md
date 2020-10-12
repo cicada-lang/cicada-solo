@@ -26,8 +26,8 @@
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
 - [lang3] exp-infer-begin.ts
-
-- [lang3] exp-infer.ts -- guard instead of nested conditions
+- [lang3] exp-infer-union.ts
+- [lang3] exp-infer-the.ts
 
 - [lang3] add `next` to `Exp.cls`
 
