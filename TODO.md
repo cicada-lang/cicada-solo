@@ -31,8 +31,6 @@
 - [lang3] exp-infer-absurd-ind.ts
 - [lang3] exp-infer-begin.ts
 
-- [lang3] extract function for `Exp.check_obj`
-
 > use `Mod` to implement module-level mutual recursion
 
 - [lang3] `Mod`

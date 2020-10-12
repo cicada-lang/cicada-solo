@@ -9,7 +9,19 @@ export function check_obj(ctx: Ctx.Ctx, obj: Exp.obj, cls: Value.cls): void {
   // NOTE We DO NOT need to update the `ctx` as we go along.
   // - just like checking `Exp.cons`.
   const properties = new Map(obj.properties)
-  for (const entry of cls.sat) {
+  check_properties_aganst_sat(ctx, properties, cls.sat)
+  if (cls.tel.next === undefined) return
+  const value = check_properties_aganst_next(ctx, properties, cls.tel.next)
+  const filled_tel = Telescope.fill(cls.tel, value)
+  Exp.check(ctx, Exp.obj(properties), Value.cls([], filled_tel))
+}
+
+function check_properties_aganst_sat(
+  ctx: Ctx.Ctx,
+  properties: Map<string, Exp.Exp>,
+  sat: Array<{ name: string; t: Value.Value; value: Value.Value }>
+): void {
+  for (const entry of sat) {
     const found = properties.get(entry.name)
     if (found === undefined) {
       throw new Trace.Trace(
@@ -36,21 +48,22 @@ export function check_obj(ctx: Ctx.Ctx, obj: Exp.obj, cls: Value.cls): void {
     }
     properties.delete(entry.name)
   }
-  if (cls.tel.next === undefined) return
-  const found = properties.get(cls.tel.next.name)
+}
+
+function check_properties_aganst_next(
+  ctx: Ctx.Ctx,
+  properties: Map<string, Exp.Exp>,
+  next: { name: string; t: Value.Value }
+): Value.Value {
+  const found = properties.get(next.name)
   if (found === undefined) {
     throw new Trace.Trace(
       ut.aline(`
-            |Can not found next name: ${cls.tel.next.name}
-            |`)
+        |Can not found next name: ${next.name}
+        |`)
     )
   }
-  Exp.check(ctx, found, cls.tel.next.t)
-  properties.delete(cls.tel.next.name)
-  const value = Exp.evaluate(Ctx.to_env(ctx), found)
-  Exp.check(
-    ctx,
-    Exp.obj(properties),
-    Value.cls([], Telescope.fill(cls.tel, value))
-  )
+  Exp.check(ctx, found, next.t)
+  properties.delete(next.name)
+  return Exp.evaluate(Ctx.to_env(ctx), found)
 }
