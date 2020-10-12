@@ -27,8 +27,6 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] `Mod` in `Telescope`
-
 - [lang3] `Mod` in `Value.readback`
 - [lang3] `Mod` in `Value.is_*`
 
@@ -40,6 +38,8 @@
 
 - [lang3] top level different from `Exp.begin`
 - [lang3] `@begin` as syntax for `Exp.begin`
+
+- [lang3] `Closure.create`
 
 > 以 TLT 为例子来测试 lang3 的能力。
 

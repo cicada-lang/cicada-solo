@@ -1,5 +1,6 @@
 import * as Telescope from "../telescope"
 import * as Env from "../env"
+import * as Mod from "../mod"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
@@ -8,10 +9,10 @@ import * as ut from "../../ut"
 
 export function dot(tel: Telescope.Telescope, name: string): Value.Value {
   const { next, scope } = tel
-  let { env } = tel
+  let { mod, env } = tel
 
   env = Env.clone(env)
-  const value = loop(env, next, scope, name)
+  const value = loop(mod, env, next, scope, name)
   if (value === undefined) {
     throw new Trace.Trace(
       ut.aline(`
@@ -26,6 +27,7 @@ export function dot(tel: Telescope.Telescope, name: string): Value.Value {
 }
 
 function loop(
+  mod: Mod.Mod,
   env: Env.Env,
   next: undefined | { name: string; t: Value.Value },
   scope: Array<{ name: string; t: Exp.Exp }>,
@@ -43,8 +45,8 @@ function loop(
   env = Env.update(env, next.name, next_value)
 
   const [entry, ...rest] = scope
-  const t = Exp.evaluate(env, entry.t)
+  const t = Exp.evaluate(mod, env, entry.t)
   next = { name: entry.name, t }
 
-  return loop(env, next, rest, name)
+  return loop(mod, env, next, rest, name)
 }

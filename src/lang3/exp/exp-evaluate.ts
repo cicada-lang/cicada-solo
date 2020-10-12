@@ -47,12 +47,12 @@ export function evaluate(
           Env.update(env, name, value)
         }
         if (exp.scope.length === 0) {
-          return Value.cls(sat, Telescope.create(env, undefined, new Array()))
+          return Value.cls(sat, Telescope.create(mod, env, undefined, new Array()))
         } else {
           const [entry, ...tail] = exp.scope
           const name = entry.name
           const t = Exp.evaluate(mod, env, entry.t)
-          return Value.cls(sat, Telescope.create(env, { name, t }, tail))
+          return Value.cls(sat, Telescope.create(mod, env, { name, t }, tail))
         }
       }
       case "Exp.fill": {
