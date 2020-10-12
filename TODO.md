@@ -27,7 +27,6 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] `Mod.clone`
 - [lang3] `Mod.update`
 - [lang3] `Mod.lookup`
 
