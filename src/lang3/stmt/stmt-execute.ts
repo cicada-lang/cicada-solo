@@ -6,8 +6,7 @@ import * as Exp from "../exp"
 export function execute(mod: Mod.Mod, env: Env.Env, stmt: Stmt.Stmt): void {
   switch (stmt.kind) {
     case "Stmt.def": {
-      const { name, exp } = stmt
-      Env.update(env, name, Exp.evaluate(mod, env, exp))
+      Env.update(env, stmt.name, Exp.evaluate(mod, env, stmt.exp))
     }
   }
 }

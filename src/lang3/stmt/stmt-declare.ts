@@ -6,12 +6,11 @@ import * as Exp from "../exp"
 export function declare(mod: Mod.Mod, ctx: Ctx.Ctx, stmt: Stmt.Stmt): void {
   switch (stmt.kind) {
     case "Stmt.def": {
-      const { name, exp } = stmt
       Ctx.update(
         ctx,
-        name,
-        Exp.infer(mod, ctx, exp),
-        Exp.evaluate(mod, Ctx.to_env(ctx), exp)
+        stmt.name,
+        Exp.infer(mod, ctx, stmt.exp),
+        Exp.evaluate(mod, Ctx.to_env(ctx), stmt.exp)
       )
     }
   }
