@@ -8,6 +8,7 @@ import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { infer_cls } from "./exp-infer-cls"
+import { infer_pi } from "./exp-infer-pi"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -18,11 +19,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       }
       return t
     } else if (exp.kind === "Exp.pi") {
-      Exp.check(ctx, exp.arg_t, Value.type)
-      const arg_t = Exp.evaluate(Ctx.to_env(ctx), exp.arg_t)
-      ctx = Ctx.extend(ctx, exp.name, arg_t)
-      Exp.check(ctx, exp.ret_t, Value.type)
-      return Value.type
+      return infer_pi(ctx, exp)
     } else if (exp.kind === "Exp.ap") {
       const target_t = Exp.infer(ctx, exp.target)
       const pi = Value.is_pi(ctx, target_t)
