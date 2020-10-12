@@ -27,12 +27,11 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] `Top.run`
-
-- [lang3] `@show` only for Top
-
-- [lang3] top level different from `Exp.begin`
+- [lang3] frontend/grammar -- grammar for `Top`
+- [lang3] frontend/parse-tops
+- [lang3] cli/commands/eval -- use `Top` instead of `Stmt`
 - [lang3] `@begin` as syntax for `Exp.begin`
+- [lang3] `@show` only for Top
 
 > 以 TLT 为例子来测试 lang3 的能力。
 

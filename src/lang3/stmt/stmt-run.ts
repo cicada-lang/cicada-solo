@@ -16,9 +16,8 @@ export function run(
 
   switch (stmt.kind) {
     case "Stmt.show": {
-      const { exp } = stmt
-      const t = Exp.infer(mod, ctx, exp)
-      const value = Exp.evaluate(mod, env, exp)
+      const t = Exp.infer(mod, ctx, stmt.exp)
+      const value = Exp.evaluate(mod, env, stmt.exp)
       const value_repr = Exp.repr(Value.readback(mod, ctx, t, value))
       const t_repr = Exp.repr(Value.readback(mod, ctx, Value.type, t))
       console.log(`${t_repr} -- ${value_repr}`)
