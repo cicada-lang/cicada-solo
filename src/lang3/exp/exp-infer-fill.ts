@@ -4,7 +4,7 @@ import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
-export function infer_fill(ctx: Ctx.Ctx, fill: Exp.fill): Value.Value {
+export function infer_fill(ctx: Ctx.Ctx, fill: Exp.fill): Value.type {
   Exp.check(ctx, fill.target, Value.type)
   const target = Exp.evaluate(Ctx.to_env(ctx), fill.target)
   const cls = Value.is_cls(ctx, target)
