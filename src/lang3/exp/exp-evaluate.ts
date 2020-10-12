@@ -22,11 +22,11 @@ export function evaluate(
       case "Exp.pi": {
         return Value.pi(
           Exp.evaluate(mod, env, exp.arg_t),
-          new Closure.Closure(mod, env, exp.name, exp.ret_t)
+          Closure.create(mod, env, exp.name, exp.ret_t)
         )
       }
       case "Exp.fn": {
-        return Value.fn(new Closure.Closure(mod, env, exp.name, exp.ret))
+        return Value.fn(Closure.create(mod, env, exp.name, exp.ret))
       }
       case "Exp.ap": {
         return Exp.do_ap(
