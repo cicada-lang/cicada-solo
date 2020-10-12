@@ -15,11 +15,11 @@ export function evaluate(
   try {
     switch (exp.kind) {
       case "Exp.v": {
-        const result = Env.lookup(env, exp.name)
-        if (result === undefined) {
+        let value = Env.lookup(env, exp.name) || Mod.lookup(mod, exp.name)
+        if (value === undefined) {
           throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
         }
-        return result
+        return value
       }
       case "Exp.pi": {
         return Value.pi(
