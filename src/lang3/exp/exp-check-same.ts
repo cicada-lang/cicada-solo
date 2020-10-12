@@ -11,7 +11,7 @@ export function check_same(
   same: Exp.same,
   equal: Value.equal
 ): void {
-  if (!Value.conversion(ctx, equal.t, equal.from, equal.to)) {
+  if (!Value.conversion(mod, ctx, equal.t, equal.from, equal.to)) {
     throw new Trace.Trace(
       ut.aline(`
           |I am expecting the following two values to be the same ${Exp.repr(

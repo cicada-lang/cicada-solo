@@ -27,9 +27,6 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] `Mod` in `Value.conversion`
-- [lang3] `Mod` in `Value.subtype`
-
 - [lang3] `Exp.evaluate` lookup both `mod` and `env`
 - [lang3] `Exp.check` lookup both `mod` and `ctx`
 - [lang3] `Exp.infer` lookup both `mod` and `ctx`

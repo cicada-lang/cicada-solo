@@ -12,7 +12,7 @@ export function check_by_infer(
   t: Value.Value
 ): void {
   const u = Exp.infer(mod, ctx, exp)
-  if (!Value.subtype(ctx, u, t)) {
+  if (!Value.subtype(mod, ctx, u, t)) {
     let u_repr = Exp.repr(Value.readback(mod, ctx, Value.type, u))
     u_repr = u_repr.replace(/\s+/g, " ")
     throw new Trace.Trace(

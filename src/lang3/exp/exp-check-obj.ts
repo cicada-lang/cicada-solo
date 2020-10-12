@@ -39,7 +39,7 @@ function aganst_sat(
     }
     Exp.check(mod, ctx, found, entry.t)
     const value = Exp.evaluate(mod, Ctx.to_env(ctx), found)
-    if (!Value.conversion(ctx, entry.t, value, entry.value)) {
+    if (!Value.conversion(mod, ctx, entry.t, value, entry.value)) {
       throw new Trace.Trace(
         ut.aline(`
           |I am expecting the following two values to be the same ${Exp.repr(
