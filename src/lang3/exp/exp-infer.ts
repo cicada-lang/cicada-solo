@@ -7,6 +7,7 @@ import * as Env from "../env"
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
+import { infer_cls } from "./exp-infer-cls"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -29,24 +30,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       const arg = Exp.evaluate(Ctx.to_env(ctx), exp.arg)
       return Closure.apply(pi.ret_t_cl, arg)
     } else if (exp.kind === "Exp.cls") {
-      // NOTE We DO need to update the `ctx` as we go along.
-      // - just like inferring `Exp.sigma`.
-      ctx = Ctx.clone(ctx)
-      for (const entry of exp.sat) {
-        Exp.check(ctx, entry.t, Value.type)
-        const t = Exp.evaluate(Ctx.to_env(ctx), entry.t)
-        Exp.check(ctx, entry.exp, t)
-        Ctx.update(ctx, entry.name, t)
-      }
-      if (exp.scope.length === 0) {
-        return Value.type
-      } else {
-        const [entry, ...tail] = exp.scope
-        Exp.check(ctx, entry.t, Value.type)
-        const t = Exp.evaluate(Ctx.to_env(ctx), entry.t)
-        Ctx.update(ctx, entry.name, t)
-        return Exp.infer(ctx, Exp.cls([], tail))
-      }
+      return infer_cls(ctx, exp)
     } else if (exp.kind === "Exp.fill") {
       Exp.check(ctx, exp.target, Value.type)
       const target = Exp.evaluate(Ctx.to_env(ctx), exp.target)

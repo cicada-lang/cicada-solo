@@ -25,9 +25,9 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
-- [lang3] extract function for `Exp.check_obj`
+- [lang3] extract function -- `infer_pi`
 
-- [lang3] split `Exp.infer`
+- [lang3] extract function for `Exp.check_obj`
 
 > use `Mod` to implement module-level mutual recursion
 
@@ -63,6 +63,8 @@
 # partech -- parsing techniques
 
 > Be the most easy to use parsing tool for programming language prototyping.
+
+- [partech] extract conditions to function for `Schedule`
 
 - [partech] use `Mod` to design module system
 
