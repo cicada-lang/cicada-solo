@@ -27,10 +27,6 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] `Mod.names`
-
-- [lang3] `freshen_name` handle mod
-
 - [lang3] `Top`
 
 - [lang3] top level different from `Exp.begin`

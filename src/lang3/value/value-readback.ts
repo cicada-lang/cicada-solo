@@ -21,7 +21,10 @@ export function readback(
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
-    const fresh_name = ut.freshen_name(new Set(Ctx.names(ctx)), t.ret_t_cl.name)
+    const fresh_name = ut.freshen_name(
+      new Set([...Mod.names(mod), ...Ctx.names(ctx)]),
+      t.ret_t_cl.name
+    )
     const variable = Value.not_yet(t.arg_t, Neutral.v(fresh_name))
     return Exp.fn(
       fresh_name,
@@ -122,7 +125,10 @@ export function readback(
     }
     return Exp.cls(norm_sat, norm_scope)
   } else if (t.kind === "Value.type" && value.kind === "Value.pi") {
-    const fresh_name = ut.freshen_name(new Set(Ctx.names(ctx)), value.ret_t_cl.name)
+    const fresh_name = ut.freshen_name(
+      new Set([...Mod.names(mod), ...Ctx.names(ctx)]),
+      value.ret_t_cl.name
+    )
     const variable = Value.not_yet(value.arg_t, Neutral.v(fresh_name))
     const arg_t = Value.readback(mod, ctx, Value.type, value.arg_t)
     const ret_t = Value.readback(
