@@ -13,6 +13,7 @@ import { infer_fill } from "./exp-infer-fill"
 import { infer_dot } from "./exp-infer-dot"
 import { infer_equal } from "./exp-infer-equal"
 import { infer_replace } from "./exp-infer-replace"
+import { infer_absurd_ind } from "./exp-infer-absurd-ind"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -41,14 +42,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.absurd") {
       return Value.type
     } else if (exp.kind === "Exp.absurd_ind") {
-      // NOTE the `motive` here is not a function from target_t to type,
-      //   but a element of type.
-      // NOTE We should always infer target,
-      //   but we do a simple check for the simple absurd.
-      Exp.check(ctx, exp.target, Value.absurd)
-      Exp.check(ctx, exp.motive, Value.type)
-      const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
-      return motive
+      return infer_absurd_ind(ctx, exp)
     } else if (exp.kind === "Exp.str") {
       return Value.type
     } else if (exp.kind === "Exp.quote") {
