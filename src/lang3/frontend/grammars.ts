@@ -100,7 +100,14 @@ export const exp = {
   ],
   "exp:type": ['"Type"'],
   "exp:object": ['"Object"'],
-  "exp:begin": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
+  "exp:begin": [
+    '"@"',
+    '"begin"',
+    '"{"',
+    { stmts: "stmts" },
+    { ret: "exp" },
+    '"}"',
+  ],
   "exp:deduction": [
     '"{"',
     { deduction_entries: { $ap: ["one_or_more", "deduction_entry"] } },

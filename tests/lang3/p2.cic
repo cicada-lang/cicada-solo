@@ -1,5 +1,5 @@
 z : { x: String y: String }
-z = {
+z = @begin {
   x = "abc"
   y = "123"
   { x = x
@@ -11,7 +11,7 @@ z = {
 @show z.y
 
 w : String
-w = {
+w = @begin {
   s = "www"
   s
 }

@@ -27,7 +27,7 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] `@begin` as syntax for `Exp.begin`
+- [lang3] test module-level mutual recursion
 
 > 以 TLT 为例子来测试 lang3 的能力。
 
