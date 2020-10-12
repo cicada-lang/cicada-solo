@@ -10,6 +10,7 @@ import { infer_cls } from "./exp-infer-cls"
 import { infer_pi } from "./exp-infer-pi"
 import { infer_ap } from "./exp-infer-ap"
 import { infer_fill } from "./exp-infer-fill"
+import { infer_dot } from "./exp-infer-dot"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -30,9 +31,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.obj" && exp.properties.size === 0) {
       return Value.cls([], Telescope.create(Ctx.to_env(ctx), undefined, []))
     } else if (exp.kind === "Exp.dot") {
-      const target_t = Exp.infer(ctx, exp.target)
-      const cls = Value.is_cls(ctx, target_t)
-      return Exp.do_dot(cls, exp.name)
+      return infer_dot(ctx, exp)
     } else if (exp.kind === "Exp.equal") {
       Exp.check(ctx, exp.t, Value.type)
       const t = Exp.evaluate(Ctx.to_env(ctx), exp.t)
