@@ -12,6 +12,7 @@ import { infer_ap } from "./exp-infer-ap"
 import { infer_fill } from "./exp-infer-fill"
 import { infer_dot } from "./exp-infer-dot"
 import { infer_equal } from "./exp-infer-equal"
+import { infer_replace } from "./exp-infer-replace"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -36,16 +37,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.equal") {
       return infer_equal(ctx, exp)
     } else if (exp.kind === "Exp.replace") {
-      const target_t = Exp.infer(ctx, exp.target)
-      const equal = Value.is_equal(ctx, target_t)
-      const motive_t = Exp.evaluate(
-        Env.update(Env.init(), "t", equal.t),
-        Exp.pi("x", Exp.v("t"), Exp.type)
-      )
-      Exp.check(ctx, exp.motive, motive_t)
-      const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
-      Exp.check(ctx, exp.base, Exp.do_ap(motive, equal.from))
-      return Exp.do_ap(motive, equal.to)
+      return infer_replace(ctx, exp)
     } else if (exp.kind === "Exp.absurd") {
       return Value.type
     } else if (exp.kind === "Exp.absurd_ind") {
