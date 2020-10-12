@@ -11,7 +11,7 @@ export function check_by_infer(
   exp: Exp.Exp,
   t: Value.Value
 ): void {
-  const u = Exp.infer(ctx, exp)
+  const u = Exp.infer(mod, ctx, exp)
   if (!Value.subtype(ctx, u, t)) {
     let u_repr = Exp.repr(Value.readback(ctx, Value.type, u))
     u_repr = u_repr.replace(/\s+/g, " ")

@@ -8,6 +8,6 @@ export function lookup(mod: Mod.Mod, name: string): undefined | Value.Value {
   if (exp === undefined) return undefined
   const env = Env.init()
   // NOTE maybe use try and Trace for `Exp.evaluate`
-  const value = Exp.evaluate(env, exp)
+  const value = Exp.evaluate(mod, env, exp)
   return value
 }

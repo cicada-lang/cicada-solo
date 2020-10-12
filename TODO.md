@@ -27,8 +27,6 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] `Mod` in `infer`
-
 - [lang3] `Mod` in `Closure`
 - [lang3] `Mod` in `Telescope`
 

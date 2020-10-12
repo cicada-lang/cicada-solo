@@ -4,6 +4,7 @@ import * as Value from "../value"
 import * as Telescope from "../telescope"
 import * as Env from "../env"
 import * as Ctx from "../ctx"
+import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { infer_cls } from "./exp-infer-cls"
@@ -18,7 +19,7 @@ import { infer_union } from "./exp-infer-union"
 import { infer_begin } from "./exp-infer-begin"
 import { infer_the } from "./exp-infer-the"
 
-export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
+export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
     if (exp.kind === "Exp.v") {
       const t = Ctx.lookup(ctx, exp.name)
@@ -27,24 +28,24 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       }
       return t
     }
-    if (exp.kind === "Exp.pi") return infer_pi(ctx, exp)
-    if (exp.kind === "Exp.ap") return infer_ap(ctx, exp)
-    if (exp.kind === "Exp.cls") return infer_cls(ctx, exp)
-    if (exp.kind === "Exp.fill") return infer_fill(ctx, exp)
+    if (exp.kind === "Exp.pi") return infer_pi(mod, ctx, exp)
+    if (exp.kind === "Exp.ap") return infer_ap(mod, ctx, exp)
+    if (exp.kind === "Exp.cls") return infer_cls(mod, ctx, exp)
+    if (exp.kind === "Exp.fill") return infer_fill(mod, ctx, exp)
     if (exp.kind === "Exp.obj" && exp.properties.size === 0) {
       return Value.cls([], Telescope.create(Ctx.to_env(ctx), undefined, []))
     }
-    if (exp.kind === "Exp.dot") return infer_dot(ctx, exp)
-    if (exp.kind === "Exp.equal") return infer_equal(ctx, exp)
-    if (exp.kind === "Exp.replace") return infer_replace(ctx, exp)
+    if (exp.kind === "Exp.dot") return infer_dot(mod, ctx, exp)
+    if (exp.kind === "Exp.equal") return infer_equal(mod, ctx, exp)
+    if (exp.kind === "Exp.replace") return infer_replace(mod, ctx, exp)
     if (exp.kind === "Exp.absurd") return Value.type
-    if (exp.kind === "Exp.absurd_ind") return infer_absurd_ind(ctx, exp)
+    if (exp.kind === "Exp.absurd_ind") return infer_absurd_ind(mod, ctx, exp)
     if (exp.kind === "Exp.str") return Value.type
     if (exp.kind === "Exp.quote") return Value.quote(exp.str)
-    if (exp.kind === "Exp.union") return infer_union(ctx, exp)
+    if (exp.kind === "Exp.union") return infer_union(mod, ctx, exp)
     if (exp.kind === "Exp.type") return Value.type
-    if (exp.kind === "Exp.begin") return infer_begin(ctx, exp)
-    if (exp.kind === "Exp.the") return infer_the(ctx, exp)
+    if (exp.kind === "Exp.begin") return infer_begin(mod, ctx, exp)
+    if (exp.kind === "Exp.the") return infer_the(mod, ctx, exp)
     throw infer_error(exp)
   } catch (error) {
     if (error instanceof Trace.Trace) {
