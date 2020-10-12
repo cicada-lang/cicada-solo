@@ -1,6 +1,6 @@
 import * as frontend from "../../frontend"
 import * as Value from "../../value"
-import * as Stmt from "../../stmt"
+import * as Top from "../../top"
 import * as Exp from "../../exp"
 import * as Ctx from "../../ctx"
 import * as Env from "../../env"
@@ -29,12 +29,10 @@ export const handler = async (argv: Argv) => {
   const text = fs.readFileSync(argv.input, { encoding: "utf-8" })
 
   try {
-    const stmts = frontend.parse_stmts(text)
+    const tops = frontend.parse_tops(text)
     const mod = Mod.init()
-    const ctx = Ctx.init()
-    const env = Env.init()
-    for (const stmt of stmts) {
-      Stmt.run(mod, ctx, env, stmt)
+    for (const top of tops) {
+      Top.run(mod, top)
     }
   } catch (error) {
     if (error instanceof Trace.Trace) {
