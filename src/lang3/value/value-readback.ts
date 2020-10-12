@@ -111,6 +111,7 @@ export function readback(
         Ctx.update(ctx, name, next.t)
         Env.update(env, name, Value.not_yet(next.t, Neutral.v(name)))
       }
+      // NOTE the `tel.mod` is used in the following, instead of `mod`
       for (const entry of scope) {
         const name = entry.name
         const t_value = Exp.evaluate(tel.mod, env, entry.t)
