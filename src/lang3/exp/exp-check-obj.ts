@@ -8,10 +8,8 @@ import * as ut from "../../ut"
 export function check_obj(ctx: Ctx.Ctx, obj: Exp.obj, cls: Value.cls): void {
   // NOTE We DO NOT need to update the `ctx` as we go along.
   // - just like checking `Exp.cons`.
-  const { sat, tel } = cls
-  const { env, next, scope } = tel
   const properties = new Map(obj.properties)
-  for (const entry of sat) {
+  for (const entry of cls.sat) {
     const found = properties.get(entry.name)
     if (found === undefined) {
       throw new Trace.Trace(
@@ -38,17 +36,17 @@ export function check_obj(ctx: Ctx.Ctx, obj: Exp.obj, cls: Value.cls): void {
     }
     properties.delete(entry.name)
   }
-  if (next === undefined) return
-  const found = properties.get(next.name)
+  if (cls.tel.next === undefined) return
+  const found = properties.get(cls.tel.next.name)
   if (found === undefined) {
     throw new Trace.Trace(
       ut.aline(`
-            |Can not found next name: ${next.name}
+            |Can not found next name: ${cls.tel.next.name}
             |`)
     )
   }
-  Exp.check(ctx, found, next.t)
-  properties.delete(next.name)
+  Exp.check(ctx, found, cls.tel.next.t)
+  properties.delete(cls.tel.next.name)
   const value = Exp.evaluate(Ctx.to_env(ctx), found)
-  Exp.check(ctx, Exp.obj(properties), Value.cls([], Telescope.fill(tel, value)))
+  Exp.check(ctx, Exp.obj(properties), Value.cls([], Telescope.fill(cls.tel, value)))
 }
