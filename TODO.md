@@ -25,10 +25,11 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
-- [lang3] exp-infer-fill.ts
 - [lang3] exp-infer-dot.ts
 - [lang3] exp-infer-equal.ts
 - [lang3] exp-infer-replace.ts
+- [lang3] exp-infer-absurd-ind.ts
+- [lang3] exp-infer-begin.ts
 
 - [lang3] extract function for `Exp.check_obj`
 

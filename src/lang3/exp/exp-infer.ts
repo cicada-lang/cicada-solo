@@ -1,7 +1,6 @@
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
-import * as Closure from "../closure"
 import * as Telescope from "../telescope"
 import * as Env from "../env"
 import * as Ctx from "../ctx"
@@ -10,6 +9,7 @@ import * as ut from "../../ut"
 import { infer_cls } from "./exp-infer-cls"
 import { infer_pi } from "./exp-infer-pi"
 import { infer_ap } from "./exp-infer-ap"
+import { infer_fill } from "./exp-infer-fill"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -26,19 +26,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.cls") {
       return infer_cls(ctx, exp)
     } else if (exp.kind === "Exp.fill") {
-      Exp.check(ctx, exp.target, Value.type)
-      const target = Exp.evaluate(Ctx.to_env(ctx), exp.target)
-      const cls = Value.is_cls(ctx, target)
-      const { next } = cls.tel
-      if (next === undefined) {
-        throw new Trace.Trace(
-          ut.aline(`
-            |The telescope of the cls is full.
-            |`)
-        )
-      }
-      Exp.check(ctx, exp.arg, next.t)
-      return Value.type
+      return infer_fill(ctx, exp)
     } else if (exp.kind === "Exp.obj" && exp.properties.size === 0) {
       return Value.cls([], Telescope.create(Ctx.to_env(ctx), undefined, []))
     } else if (exp.kind === "Exp.dot") {
