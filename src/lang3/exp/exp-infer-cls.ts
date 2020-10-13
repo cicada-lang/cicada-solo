@@ -12,7 +12,8 @@ export function infer_cls(
   // - just like inferring `Exp.sigma`.
   ctx = Ctx.clone(ctx)
   go_through_sat(mod, ctx, cls.sat)
-  return infer_scope(mod, ctx, cls.scope)
+  go_through_scope(mod, ctx, cls.scope)
+  return Value.type
 }
 
 function go_through_sat(
@@ -28,16 +29,15 @@ function go_through_sat(
   }
 }
 
-function infer_scope(
+function go_through_scope(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   scope: Array<{ name: string; t: Exp.Exp }>
-): Value.type {
-  if (scope.length === 0) return Value.type
-
+): void {
+  if (scope.length === 0) return
   const [entry, ...tail] = scope
   Exp.check(mod, ctx, entry.t, Value.type)
   const t = Exp.evaluate(mod, Ctx.to_env(ctx), entry.t)
   Ctx.update(ctx, entry.name, t)
-  return infer_scope(mod, ctx, tail)
+  go_through_scope(mod, ctx, tail)
 }

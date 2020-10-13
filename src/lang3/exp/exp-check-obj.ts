@@ -15,14 +15,11 @@ export function check_obj(
   // NOTE We DO NOT need to update the `ctx` as we go along.
   // - just like checking `Exp.cons`.
   const properties = new Map(obj.properties)
-  aganst_sat(mod, ctx, properties, cls.sat)
-  if (cls.tel.next === undefined) return
-  const next_value = aganst_next(mod, ctx, properties, cls.tel.next)
-  const filled_tel = Telescope.fill(cls.tel, next_value)
-  Exp.check(mod, ctx, Exp.obj(properties), Value.cls([], filled_tel))
+  check_properties_aganst_sat(mod, ctx, properties, cls.sat)
+  check_properties_aganst_tel(mod, ctx, properties, cls.tel)
 }
 
-function aganst_sat(
+function check_properties_aganst_sat(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   properties: Map<string, Exp.Exp>,
@@ -57,7 +54,24 @@ function aganst_sat(
   }
 }
 
-function aganst_next(
+function check_properties_aganst_tel(
+  mod: Mod.Mod,
+  ctx: Ctx.Ctx,
+  properties: Map<string, Exp.Exp>,
+  tel: Telescope.Telescope
+): void {
+  if (tel.next === undefined) return
+  const next_value = check_properties_aganst_next(
+    mod,
+    ctx,
+    properties,
+    tel.next
+  )
+  const filled_tel = Telescope.fill(tel, next_value)
+  Exp.check(mod, ctx, Exp.obj(properties), Value.cls([], filled_tel))
+}
+
+function check_properties_aganst_next(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   properties: Map<string, Exp.Exp>,
