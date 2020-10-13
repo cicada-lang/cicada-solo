@@ -17,7 +17,7 @@ _0 = {}
 
 @show _0
 
-// _1 : List(String)
-// _1 = {}
+_1 : List(String)
+_1 = {}
 
-// @show _1
+@show _1

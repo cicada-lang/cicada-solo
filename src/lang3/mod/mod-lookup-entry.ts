@@ -5,7 +5,7 @@ import * as Exp from "../exp"
 export function lookup_entry(
   mod: Mod.Mod,
   name: string
-): undefined | { t?: Exp.Exp; exp: Exp.Exp } {
+): undefined | Mod.Entry {
   const entry = mod.map.get(name)
   return entry
 }

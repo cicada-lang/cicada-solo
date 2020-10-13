@@ -4,10 +4,7 @@ import * as Exp from "../exp"
 export function update(
   mod: Mod.Mod,
   name: string,
-  entry: {
-    t?: Exp.Exp
-    exp: Exp.Exp
-  }
+  entry: Mod.Entry
 ): Mod.Mod {
   mod.map.set(name, entry)
   return mod
