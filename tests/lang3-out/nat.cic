@@ -1,0 +1,38 @@
+Nat : Type
+Nat = { Zero | Succ }
+
+Zero : Type
+Zero = {
+  kind : "Zero"
+}
+
+Succ : Type
+Succ = {
+  kind : "Succ"
+  prev : Nat
+}
+
+zero : Nat
+zero = {
+  kind = "Zero"
+}
+
+succ : (Nat) -> Nat
+succ = (prev) => {
+  kind = "Succ"
+  prev = prev
+}
+
+@show zero
+@show succ(zero)
+@show succ(succ(zero))
+
+// @show {
+//   Nat -- {
+//     kind = "Succ"
+//     prev = {
+//       kind = "Succ"
+//       prev = zero
+//     }
+//   }
+// }

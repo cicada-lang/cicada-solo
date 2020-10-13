@@ -18,7 +18,6 @@ export function readback_cls(
   // NOTE η-expanded every value with cls type to obj.
   const properties = new Map()
   readback_properties_from_sat(mod, ctx, properties, cls.sat, value)
-  if (cls.tel.next === undefined) return Exp.obj(properties)
   readback_properties_from_tel(mod, ctx, properties, cls.tel, value)
   return Exp.obj(properties)
 }
@@ -34,6 +33,9 @@ function readback_properties_from_sat(
     const name = entry.name
     const property_t = entry.t
     const property_value = Exp.do_dot(value, name)
+    if (!Value.conversion(mod, ctx, property_t, property_value, entry.value)) {
+      throw new Trace.Trace("property_value not equivalent to entry.value")
+    }
     const property_exp = Value.readback(mod, ctx, property_t, property_value)
     properties.set(name, property_exp)
     // NOTE no env update here, use the name already in env

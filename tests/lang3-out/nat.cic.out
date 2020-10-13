@@ -1,0 +1,48 @@
+{ {
+  kind : "Zero"
+} | {
+  kind : "Succ"
+  prev : { {
+    kind : "Zero"
+  } | {
+    kind : "Succ"
+    prev : Nat
+  } }
+} } -- {
+  kind = "Zero"
+}
+{ {
+  kind : "Zero"
+} | {
+  kind : "Succ"
+  prev : { {
+    kind : "Zero"
+  } | {
+    kind : "Succ"
+    prev : Nat
+  } }
+} } -- {
+  kind = "Succ"
+  prev = {
+    kind = "Zero"
+  }
+}
+{ {
+  kind : "Zero"
+} | {
+  kind : "Succ"
+  prev : { {
+    kind : "Zero"
+  } | {
+    kind : "Succ"
+    prev : Nat
+  } }
+} } -- {
+  kind = "Succ"
+  prev = {
+    kind = "Succ"
+    prev = {
+      kind = "Zero"
+    }
+  }
+}
