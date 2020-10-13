@@ -39,9 +39,9 @@
 - [lang3] `Value.subtype` -- structural cls
 - [lang3] `Value.subtype` -- function type
 
-- [lang3] use `Mod` to design module system
+> module system
 
-- 尝试实现 `@judgment` 中的 `@where` 语法关键词。
+- [lang3] use `Mod` to design module system
 
 # partech -- parsing techniques
 
