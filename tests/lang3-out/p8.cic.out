@@ -17,3 +17,12 @@ Object -- {
 } } -- {
   
 }
+{ Object | {
+  head : String
+  tail : { Object | {
+    head : String
+    tail : List(String)
+  } }
+} } -- {
+  
+}

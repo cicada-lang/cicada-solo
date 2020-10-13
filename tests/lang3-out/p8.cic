@@ -21,3 +21,11 @@ _1 : List(String)
 _1 = {}
 
 @show _1
+
+_2 : List(String)
+_2 = {
+  head = "abc"
+  tail = {}
+}
+
+@show _2
