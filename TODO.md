@@ -35,6 +35,7 @@
   - how to define normal form of recursive exp?
   - can we solve this by view global defined type as special value?
     - without recursive evaluation during readback.
+  - study fixpoint theory.
 
 - [lang3] test module-level mutual recursion
 
