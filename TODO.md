@@ -92,7 +92,12 @@
 
 - use native `number` as `Nat`.
 
-# langx -- lang1 + algebraic data type
+# lang1 + algebraic data type
+
+# lang2 + inductive data type
+
+- 归纳类型（Inductive type）的推演规则。
+  - Only one abstraction away.
 
 # langx -- wissen
 
@@ -103,11 +108,6 @@
 - Note that, a prolog-like DSL for bidirectional type checking, would be wrong.
   because the aim of split one judgment `:` to two judgments `=>` and `<=`,
   is to avoid searching, and making the group of inference rules deterministic.
-
-# langx -- lang2 + inductive data type
-
-- 归纳类型（Inductive type）的推演规则。
-  - Only one abstraction away.
 
 # cicada -- fulfilling type
 
