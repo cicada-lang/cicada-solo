@@ -8,6 +8,7 @@ import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { readback_union } from "./value-readback-union"
+import { readback_obj } from "./value-readback-obj"
 
 export function readback(
   mod: Mod.Mod,
@@ -36,38 +37,7 @@ export function readback(
       )
     )
   } else if (t.kind === "Value.cls") {
-    // NOTE η-expanded every value with cls type to obj.
-    const properties = new Map()
-    const { sat, tel } = t
-    const { next, scope } = tel
-    let { env } = t.tel
-    env = Env.clone(env)
-    for (const entry of sat) {
-      const name = entry.name
-      const property_t = entry.t
-      const property_value = Exp.do_dot(value, name)
-      const property_exp = Value.readback(mod, ctx, property_t, property_value)
-      properties.set(name, property_exp)
-      // NOTE no env update here, use the name already in env
-      //   Env.update(env, name, property_value)
-    }
-    if (next !== undefined) {
-      const name = next.name
-      const property_t = next.t
-      const property_value = Exp.do_dot(value, name)
-      const property_exp = Value.readback(mod, ctx, property_t, property_value)
-      properties.set(name, property_exp)
-      Env.update(env, name, property_value)
-    }
-    for (const entry of scope) {
-      const name = entry.name
-      const property_t = Exp.evaluate(mod, env, entry.t)
-      const property_value = Exp.do_dot(value, name)
-      const property_exp = Value.readback(mod, ctx, property_t, property_value)
-      properties.set(name, property_exp)
-      Env.update(env, name, property_value)
-    }
-    return Exp.obj(properties)
+    return readback_obj(mod, ctx, t, value)
   } else if (
     t.kind === "Value.absurd" &&
     value.kind === "Value.not_yet" &&
