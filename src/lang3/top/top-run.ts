@@ -15,7 +15,11 @@ function define(mod: Mod.Mod, tops: Array<Top.Top>): void {
   for (const top of tops) {
     switch (top.kind) {
       case "Top.def": {
-        Mod.update(mod, top.name, top.exp)
+        if (top.exp.kind === "Exp.the") {
+          Mod.update(mod, top.name, top)
+        } else {
+          Mod.update(mod, top.name, { exp: top.exp })
+        }
       }
     }
   }
