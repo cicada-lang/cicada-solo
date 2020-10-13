@@ -48,6 +48,8 @@
 - [thought] how to define normal form of recursive exp?
   - this is about normalizing graph instead of tree.
   - maybe we can use special linearization to linearize graph to tree?
+  - maybe on the first time a global name occur, we eval it,
+    and on the second time the same name occur, we view it as variable.
 
 - [thought] learn from "Diagonalization and Self-Reference" by Raymond Smullyan
 
