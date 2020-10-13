@@ -26,13 +26,3 @@ succ = (prev) => {
 @show zero
 @show succ(zero)
 @show succ(succ(zero))
-
-// @show {
-//   Nat -- {
-//     kind = "Succ"
-//     prev = {
-//       kind = "Succ"
-//       prev = zero
-//     }
-//   }
-// }

@@ -10,6 +10,7 @@ import * as ut from "../../ut"
 import { readback_union } from "./value-readback-union"
 import { readback_pi } from "./value-readback-pi"
 import { readback_cls } from "./value-readback-cls"
+import { readback_absurd } from "./value-readback-absurd"
 import { readback_quote } from "./value-readback-quote"
 import { readback_type_cls } from "./value-readback-type-cls"
 import { readback_type_pi } from "./value-readback-type-pi"
@@ -23,15 +24,9 @@ export function readback(
   if (t.kind === "Value.union") return readback_union(mod, ctx, t, value)
   if (t.kind === "Value.pi") return readback_pi(mod, ctx, t, value)
   if (t.kind === "Value.cls") return readback_cls(mod, ctx, t, value)
-  if (
-    t.kind === "Value.absurd" &&
-    value.kind === "Value.not_yet" &&
-    value.t.kind === "Value.absurd"
-  )
-    return Exp.the(Exp.absurd, Neutral.readback(mod, ctx, value.neutral))
+  if (t.kind === "Value.absurd") return readback_absurd(mod, ctx, t, value)
   if (t.kind === "Value.equal" && value.kind === "Value.same") return Exp.same
-  if (t.kind === "Value.str" && value.kind === "Value.quote")
-    return Exp.quote(value.str)
+  if (t.kind === "Value.str" && value.kind === "Value.quote") return Exp.quote(value.str)
   if (t.kind === "Value.quote") return readback_quote(mod, ctx, t, value)
   if (t.kind === "Value.type" && value.kind === "Value.str") return Exp.str
   if (t.kind === "Value.type" && value.kind === "Value.quote")

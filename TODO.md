@@ -36,6 +36,8 @@
 
 - [lang3] value-readback-type.ts
 
+- [lang3] better output
+
 - [lang3] tests/lang3-out/ch1.cic
 - [lang3] tests/lang3-out/ch2.cic
 
