@@ -1,13 +1,10 @@
 import * as Value from "../value"
-import * as Closure from "../closure"
 import * as Telescope from "../telescope"
 import * as Neutral from "../neutral"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as Env from "../env"
 import * as Mod from "../mod"
-import * as Trace from "../../trace"
-import * as ut from "../../ut"
 
 export function readback_type_cls(
   mod: Mod.Mod,

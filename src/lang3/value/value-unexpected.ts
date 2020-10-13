@@ -10,7 +10,6 @@ export function unexpected(
   value: Value.Value,
   opts: { message?: string } = {}
 ): string {
-  throw new Error()
   const exp_repr = Exp.repr(Value.readback(mod, ctx, Value.type, value))
   if (opts.message !== undefined) {
     return ut.aline(`
