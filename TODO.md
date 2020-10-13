@@ -20,10 +20,6 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
-# lang4 -- minitt
-
-> to learn about how to implement mutual recursion.
-
 # lang3 -- 重新实现 cicada-structural-typing
 
 > 由于，重新理解了 Value Neutral Normal 的结构，
@@ -31,13 +27,31 @@
 
 > use `Mod` to implement module-level mutual recursion
 
-- [lang3] [bug] can not readback recursive exp.
-  - how to define normal form of recursive exp?
-  - can we solve this by view global defined type as special value?
-    - without recursive evaluation during readback.
-  - study fixpoint theory.
+- [lang3] [problem] we can not readback recursive exp.
 
-- [lang3] test module-level mutual recursion
+  - [thought] learn from minitt.
+    - minitt do not handle this well.
+      in minitt, recursive exp occurs in sum.
+      but normalization of sum is implemented by readback env,
+      which is what the authors meant by,
+      "our way of comparing functions defined by case is less refined than the one in [10].
+      Though less refined, we think that our approach is simpler to implement at a machine level."
+      where [10] is "A compiled implementation of strong reduction."
+      by Benjamin Grégoire and Xavier Leroy.
+
+  - [thought] can we solve this by view global defined type as special value?
+    - without recursive evaluation during readback.
+
+  - [thought] learn from "A compiled implementation of strong reduction."
+    - the authors use "guarded fixpoints" to handle recursion.
+      the authors can handle the problem because they have general knowledge about recursion.
+      we plan to learn the same from Raymond Smullyan.
+
+  - [thought] how to define normal form of recursive exp?
+    - this is about normalizing graph instead of tree.
+    - maybe we can use special linearization to linearize graph to tree?
+
+  - [thought] learn from "Diagonalization and Self-Reference" by Raymond Smullyan
 
 > 以 TLT 为例子来测试 lang3 的能力。
 
