@@ -16,9 +16,8 @@ export function readback(
   t: Value.Value,
   value: Value.Value
 ): Exp.Exp {
-  if (t.kind === "Value.union") {
-    return readback_union(mod, ctx, t, value)
-  } else if (t.kind === "Value.pi") {
+  if (t.kind === "Value.union") return readback_union(mod, ctx, t, value)
+  if (t.kind === "Value.pi") {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
@@ -36,33 +35,33 @@ export function readback(
         Exp.do_ap(value, variable)
       )
     )
-  } else if (t.kind === "Value.cls") {
-    return readback_obj(mod, ctx, t, value)
-  } else if (
+  }
+  if (t.kind === "Value.cls") return readback_obj(mod, ctx, t, value)
+  if (
     t.kind === "Value.absurd" &&
     value.kind === "Value.not_yet" &&
     value.t.kind === "Value.absurd"
-  ) {
+  )
     return Exp.the(Exp.absurd, Neutral.readback(mod, ctx, value.neutral))
-  } else if (t.kind === "Value.equal" && value.kind === "Value.same") {
+  if (t.kind === "Value.equal" && value.kind === "Value.same")
     return Exp.same
-  } else if (t.kind === "Value.str" && value.kind === "Value.quote") {
+  if (t.kind === "Value.str" && value.kind === "Value.quote")
     return Exp.quote(value.str)
-  } else if (t.kind === "Value.type" && value.kind === "Value.str") {
+  if (t.kind === "Value.type" && value.kind === "Value.str")
     return Exp.str
-  } else if (t.kind === "Value.type" && value.kind === "Value.quote") {
+  if (t.kind === "Value.type" && value.kind === "Value.quote")
     return Exp.quote(value.str)
-  } else if (t.kind === "Value.quote" && value.kind === "Value.quote") {
+  if (t.kind === "Value.quote" && value.kind === "Value.quote")
     return Exp.quote(value.str)
-  } else if (t.kind === "Value.type" && value.kind === "Value.absurd") {
+  if (t.kind === "Value.type" && value.kind === "Value.absurd")
     return Exp.absurd
-  } else if (t.kind === "Value.type" && value.kind === "Value.equal") {
+  if (t.kind === "Value.type" && value.kind === "Value.equal")
     return Exp.equal(
       Value.readback(mod, ctx, Value.type, value.t),
       Value.readback(mod, ctx, value.t, value.from),
       Value.readback(mod, ctx, value.t, value.to)
     )
-  } else if (t.kind === "Value.type" && value.kind === "Value.cls") {
+  if (t.kind === "Value.type" && value.kind === "Value.cls") {
     const { sat, tel } = value
     const { next, scope } = tel
     let { env } = value.tel
@@ -94,7 +93,8 @@ export function readback(
       Env.update(env, name, Value.not_yet(t_value, Neutral.v(name)))
     }
     return Exp.cls(norm_sat, norm_scope)
-  } else if (t.kind === "Value.type" && value.kind === "Value.pi") {
+  }
+  if (t.kind === "Value.type" && value.kind === "Value.pi") {
     const fresh_name = ut.freshen_name(
       new Set([...Mod.names(mod), ...Ctx.names(ctx)]),
       value.ret_t_cl.name
@@ -108,24 +108,21 @@ export function readback(
       Closure.apply(value.ret_t_cl, variable)
     )
     return Exp.pi(fresh_name, arg_t, ret_t)
-  } else if (t.kind === "Value.type" && value.kind === "Value.union") {
-    const { left, right } = value
+  }
+  if (t.kind === "Value.type" && value.kind === "Value.union")
     return Exp.union(
-      Value.readback(mod, ctx, Value.type, left),
-      Value.readback(mod, ctx, Value.type, right)
+      Value.readback(mod, ctx, Value.type, value.left),
+      Value.readback(mod, ctx, Value.type, value.right)
     )
-  } else if (t.kind === "Value.type" && value.kind === "Value.type") {
-    return Exp.type
-  } else if (value.kind === "Value.not_yet") {
+  if (t.kind === "Value.type" && value.kind === "Value.type") return Exp.type
+  if (value.kind === "Value.not_yet")
     // NOTE t and value.t are ignored here,
     //  maybe use them to debug.
     return Neutral.readback(mod, ctx, value.neutral)
-  } else {
-    throw new Trace.Trace(
-      ut.aline(`
+  throw new Trace.Trace(
+    ut.aline(`
       |I can not readback value: ${ut.inspect(value)},
       |of type: ${ut.inspect(t)}.
       |`)
-    )
-  }
+  )
 }
