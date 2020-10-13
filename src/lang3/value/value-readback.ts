@@ -9,6 +9,7 @@ import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { readback_union } from "./value-readback-union"
 import { readback_obj } from "./value-readback-obj"
+import { readback_cls } from "./value-readback-cls"
 
 export function readback(
   mod: Mod.Mod,
@@ -43,12 +44,10 @@ export function readback(
     value.t.kind === "Value.absurd"
   )
     return Exp.the(Exp.absurd, Neutral.readback(mod, ctx, value.neutral))
-  if (t.kind === "Value.equal" && value.kind === "Value.same")
-    return Exp.same
+  if (t.kind === "Value.equal" && value.kind === "Value.same") return Exp.same
   if (t.kind === "Value.str" && value.kind === "Value.quote")
     return Exp.quote(value.str)
-  if (t.kind === "Value.type" && value.kind === "Value.str")
-    return Exp.str
+  if (t.kind === "Value.type" && value.kind === "Value.str") return Exp.str
   if (t.kind === "Value.type" && value.kind === "Value.quote")
     return Exp.quote(value.str)
   if (t.kind === "Value.quote" && value.kind === "Value.quote")
@@ -61,39 +60,8 @@ export function readback(
       Value.readback(mod, ctx, value.t, value.from),
       Value.readback(mod, ctx, value.t, value.to)
     )
-  if (t.kind === "Value.type" && value.kind === "Value.cls") {
-    const { sat, tel } = value
-    const { next, scope } = tel
-    let { env } = value.tel
-    env = Env.clone(env)
-    ctx = Ctx.clone(ctx)
-    const norm_sat = new Array()
-    for (const entry of sat) {
-      const name = entry.name
-      const t = Value.readback(mod, ctx, Value.type, entry.t)
-      const exp = Value.readback(mod, ctx, entry.t, entry.value)
-      norm_sat.push({ name, t, exp })
-      Ctx.update(ctx, name, entry.t, entry.value)
-    }
-    const norm_scope = new Array()
-    if (next !== undefined) {
-      const name = next.name
-      const t = Value.readback(mod, ctx, Value.type, next.t)
-      norm_scope.push({ name, t })
-      Ctx.update(ctx, name, next.t)
-      Env.update(env, name, Value.not_yet(next.t, Neutral.v(name)))
-    }
-    // NOTE the `tel.mod` is used in the following, instead of `mod`
-    for (const entry of scope) {
-      const name = entry.name
-      const t_value = Exp.evaluate(tel.mod, env, entry.t)
-      const t = Value.readback(tel.mod, ctx, Value.type, t_value)
-      norm_scope.push({ name, t })
-      Ctx.update(ctx, name, t_value)
-      Env.update(env, name, Value.not_yet(t_value, Neutral.v(name)))
-    }
-    return Exp.cls(norm_sat, norm_scope)
-  }
+  if (t.kind === "Value.type" && value.kind === "Value.cls")
+    return readback_cls(mod, ctx, t, value)
   if (t.kind === "Value.type" && value.kind === "Value.pi") {
     const fresh_name = ut.freshen_name(
       new Set([...Mod.names(mod), ...Ctx.names(ctx)]),
