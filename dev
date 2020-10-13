@@ -34,7 +34,7 @@ commands.test_impression = async () => {
 commands.test_lang0 = async () => {
   await test(
     "./bin/lang0.js $file",
-    { file: "tests/lang0/**.cic" },
+    { file: "tests/lang0-out/**.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
 }
@@ -42,7 +42,7 @@ commands.test_lang0 = async () => {
 commands.test_lang1 = async () => {
   await test(
     "./bin/lang1.js $file",
-    { file: "tests/lang1/**.cic" },
+    { file: "tests/lang1-out/**.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
 
@@ -56,7 +56,7 @@ commands.test_lang1 = async () => {
 commands.test_lang2 = async () => {
   await test(
     "./bin/lang2.js $file",
-    { file: "tests/lang2/**.cic" },
+    { file: "tests/lang2-out/**.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
 
@@ -70,7 +70,7 @@ commands.test_lang2 = async () => {
 commands.test_lang3 = async () => {
   await test(
     "./bin/lang3.js $file",
-    { file: "tests/lang3/**.cic" },
+    { file: "tests/lang3-out/**.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
 
