@@ -33,6 +33,8 @@
 
 - [lang3] [bug] can not readback recursive exp.
   - how to define normal form of recursive exp?
+  - can we solve this by view global defined type as special value?
+    - without recursive evaluation during readback.
 
 - [lang3] test module-level mutual recursion
 
