@@ -7,8 +7,8 @@ import * as Env from "../env"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
-import { readback_union } from "./value-readback-union"
-import { readback_obj } from "./value-readback-obj"
+import { readback_type_union } from "./value-readback-type-union"
+import { readback_type_cls } from "./value-readback-type-cls"
 import { readback_cls } from "./value-readback-cls"
 
 export function readback(
@@ -17,7 +17,7 @@ export function readback(
   t: Value.Value,
   value: Value.Value
 ): Exp.Exp {
-  if (t.kind === "Value.union") return readback_union(mod, ctx, t, value)
+  if (t.kind === "Value.union") return readback_type_union(mod, ctx, t, value)
   if (t.kind === "Value.pi") {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
@@ -37,7 +37,7 @@ export function readback(
       )
     )
   }
-  if (t.kind === "Value.cls") return readback_obj(mod, ctx, t, value)
+  if (t.kind === "Value.cls") return readback_cls(mod, ctx, t, value)
   if (
     t.kind === "Value.absurd" &&
     value.kind === "Value.not_yet" &&
@@ -61,7 +61,7 @@ export function readback(
       Value.readback(mod, ctx, value.t, value.to)
     )
   if (t.kind === "Value.type" && value.kind === "Value.cls")
-    return readback_cls(mod, ctx, t, value)
+    return readback_type_cls(mod, ctx, t, value)
   if (t.kind === "Value.type" && value.kind === "Value.pi") {
     const fresh_name = ut.freshen_name(
       new Set([...Mod.names(mod), ...Ctx.names(ctx)]),

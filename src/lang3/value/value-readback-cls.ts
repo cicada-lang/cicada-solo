@@ -11,38 +11,36 @@ import * as ut from "../../ut"
 export function readback_cls(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
-  _t: Value.type,
-  cls: Value.cls
+  cls: Value.cls,
+  value: Value.Value
 ): Exp.Exp {
-  const { sat, tel } = cls
-  const { next, scope } = tel
-  let { env } = cls.tel
-  env = Env.clone(env)
-  ctx = Ctx.clone(ctx)
-  const norm_sat = new Array()
-  for (const entry of sat) {
+  // NOTE η-expanded every value with cls type to obj.
+  const properties = new Map()
+  let env = Env.clone(cls.tel.env)
+  for (const entry of cls.sat) {
     const name = entry.name
-    const t = Value.readback(mod, ctx, Value.type, entry.t)
-    const exp = Value.readback(mod, ctx, entry.t, entry.value)
-    norm_sat.push({ name, t, exp })
-    Ctx.update(ctx, name, entry.t, entry.value)
+    const property_t = entry.t
+    const property_value = Exp.do_dot(value, name)
+    const property_exp = Value.readback(mod, ctx, property_t, property_value)
+    properties.set(name, property_exp)
+    // NOTE no env update here, use the name already in env
+    //   Env.update(env, name, property_value)
   }
-  const norm_scope = new Array()
-  if (next !== undefined) {
-    const name = next.name
-    const t = Value.readback(mod, ctx, Value.type, next.t)
-    norm_scope.push({ name, t })
-    Ctx.update(ctx, name, next.t)
-    Env.update(env, name, Value.not_yet(next.t, Neutral.v(name)))
+  if (cls.tel.next !== undefined) {
+    const name = cls.tel.next.name
+    const property_t = cls.tel.next.t
+    const property_value = Exp.do_dot(value, name)
+    const property_exp = Value.readback(mod, ctx, property_t, property_value)
+    properties.set(name, property_exp)
+    Env.update(env, name, property_value)
   }
-  // NOTE the `tel.mod` is used in the following, instead of `mod`
-  for (const entry of scope) {
+  for (const entry of cls.tel.scope) {
     const name = entry.name
-    const t_value = Exp.evaluate(tel.mod, env, entry.t)
-    const t = Value.readback(tel.mod, ctx, Value.type, t_value)
-    norm_scope.push({ name, t })
-    Ctx.update(ctx, name, t_value)
-    Env.update(env, name, Value.not_yet(t_value, Neutral.v(name)))
+    const property_t = Exp.evaluate(mod, env, entry.t)
+    const property_value = Exp.do_dot(value, name)
+    const property_exp = Value.readback(mod, ctx, property_t, property_value)
+    properties.set(name, property_exp)
+    Env.update(env, name, property_value)
   }
-  return Exp.cls(norm_sat, norm_scope)
+  return Exp.obj(properties)
 }

@@ -30,11 +30,11 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
-- [lang3] extract function `Value.readback_fn`
 - [lang3] extract function `Value.readback_pi`
+- [lang3] extract function `Value.readback_type_pi`
 
-- [lang3] extract function from loop `Value.readback_obj`
 - [lang3] extract function from loop `Value.readback_cls`
+- [lang3] extract function from loop `Value.readback_type_cls`
 
 - [lang3] add `opts.shadow_mod_p` to `Exp.evaluate`
 
