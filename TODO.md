@@ -30,8 +30,12 @@
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
+- [lang3] fix structure of `Mod` entry -- should be `t` and `exp`
+
 - [lang3] add `opts.shadow_mod_p` to `Exp.evaluate`
-- [lang3] use `opts.shadow_mod_p` in `Exp.evaluate` of `Value.readback_cls` on scope
+
+- [lang3] use `opts.shadow_mod_p` in `Exp.evaluate` of `Value.readback_type_cls` during `readback_scope`
+
   - to implement:
     - on the first time a global name occur, we eval it,
       and on the second time the same name occur, we view it as variable.

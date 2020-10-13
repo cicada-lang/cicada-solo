@@ -17,7 +17,8 @@ export function readback_type_cls(
   ctx = Ctx.clone(ctx)
   // NOTE side-effect on ctx
   const norm_sat = readback_sat(mod, ctx, cls.sat)
-  const norm_scope = readback_scope(mod, ctx, cls.tel)
+  // NOTE `tel` has its own `tel.mod`
+  const norm_scope = readback_scope(ctx, cls.tel)
   return Exp.cls(norm_sat, norm_scope)
 }
 
@@ -38,10 +39,10 @@ function readback_sat(
 }
 
 function readback_scope(
-  mod: Mod.Mod,
   ctx: Ctx.Ctx,
   tel: Telescope.Telescope
 ): Array<{ name: string; t: Exp.Exp }> {
+  const mod = Mod.clone(tel.mod)
   const norm_scope = new Array()
   const env = Env.clone(tel.env)
   if (tel.next !== undefined) {
@@ -51,11 +52,11 @@ function readback_scope(
     Ctx.update(ctx, name, tel.next.t)
     Env.update(env, name, Value.not_yet(tel.next.t, Neutral.v(name)))
   }
-  // NOTE the `tel.mod` is used in the following, instead of `mod`
+
   for (const entry of tel.scope) {
     const name = entry.name
-    const t_value = Exp.evaluate(tel.mod, env, entry.t)
-    const t = Value.readback(tel.mod, ctx, Value.type, t_value)
+    const t_value = Exp.evaluate(mod, env, entry.t)
+    const t = Value.readback(mod, ctx, Value.type, t_value)
     norm_scope.push({ name, t })
     Ctx.update(ctx, name, t_value)
     Env.update(env, name, Value.not_yet(t_value, Neutral.v(name)))

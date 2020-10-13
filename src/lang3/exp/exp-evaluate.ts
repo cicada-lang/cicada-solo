@@ -10,13 +10,25 @@ import * as Trace from "../../trace"
 export function evaluate(
   mod: Mod.Mod,
   env: Env.Env,
-  exp: Exp.Exp
+  exp: Exp.Exp,
+  opts: {
+    shadow_mod_value_p?: boolean
+  } = {
+    shadow_mod_value_p: false,
+  }
 ): Value.Value {
   try {
     switch (exp.kind) {
       case "Exp.v": {
-        const value = Env.lookup(env, exp.name) || Mod.lookup(mod, exp.name)
+        const value = Env.lookup(env, exp.name)
         if (value !== undefined) return value
+        const mod_value = Mod.lookup(mod, exp.name)
+        if (mod_value !== undefined) {
+          // if (opts.shadow_mod_value_p) {
+          //   TODO
+          // }
+          return mod_value
+        }
         throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
       }
       case "Exp.pi": {
