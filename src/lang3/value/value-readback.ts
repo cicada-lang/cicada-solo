@@ -10,8 +10,7 @@ import * as ut from "../../ut"
 import { readback_union } from "./value-readback-union"
 import { readback_pi } from "./value-readback-pi"
 import { readback_cls } from "./value-readback-cls"
-import { readback_type_cls } from "./value-readback-type-cls"
-import { readback_type_pi } from "./value-readback-type-pi"
+import { readback_type } from "./value-readback-type"
 
 export function readback(
   mod: Mod.Mod,
@@ -19,6 +18,7 @@ export function readback(
   t: Value.Value,
   value: Value.Value
 ): Exp.Exp {
+
   if (t.kind === "Value.union") return readback_union(mod, ctx, t, value)
   if (t.kind === "Value.pi") return readback_pi(mod, ctx, t, value)
   if (t.kind === "Value.cls") return readback_cls(mod, ctx, t, value)
@@ -37,27 +37,7 @@ export function readback(
     value.str === t.str
   )
     return Exp.quote(value.str)
-  if (t.kind === "Value.type" && value.kind === "Value.str") return Exp.str
-  if (t.kind === "Value.type" && value.kind === "Value.quote")
-    return Exp.quote(value.str)
-  if (t.kind === "Value.type" && value.kind === "Value.absurd")
-    return Exp.absurd
-  if (t.kind === "Value.type" && value.kind === "Value.equal")
-    return Exp.equal(
-      Value.readback(mod, ctx, Value.type, value.t),
-      Value.readback(mod, ctx, value.t, value.from),
-      Value.readback(mod, ctx, value.t, value.to)
-    )
-  if (t.kind === "Value.type" && value.kind === "Value.cls")
-    return readback_type_cls(mod, ctx, value)
-  if (t.kind === "Value.type" && value.kind === "Value.pi")
-    return readback_type_pi(mod, ctx, value)
-  if (t.kind === "Value.type" && value.kind === "Value.union")
-    return Exp.union(
-      Value.readback(mod, ctx, Value.type, value.left),
-      Value.readback(mod, ctx, Value.type, value.right)
-    )
-  if (t.kind === "Value.type" && value.kind === "Value.type") return Exp.type
+  if (t.kind === "Value.type") return readback_type(mod, ctx, value)
   if (value.kind === "Value.not_yet")
     // NOTE t and value.t are ignored here,
     //  maybe use them to debug.
