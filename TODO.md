@@ -25,54 +25,18 @@
 > To study normal form and recursion.
 > Can be used to play with "Diagonalization and Self-Reference"
 
+- [lang4] be clear about the semantic of "Diagonalization and Self-Reference"
+
 # lang3 -- 重新实现 cicada-structural-typing
 
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
-- [lang3] maybe `opts.shadow_mod_value_p` in:
-  - Closure.apply
-  - Telescope.fill
-  - and so on
-
-> [problem] We can not `readback` recursive exp.
-
-- [thought] learn from "A simple type-theoretic language: Mini-TT".
-  - minitt do not handle this well.
-    in minitt, recursive exp occurs in sum.
-    but normalization of sum is implemented by readback env,
-    which is what the authors meant by,
-    "our way of comparing functions defined by case is less refined than the one in [10].
-    Though less refined, we think that our approach is simpler to implement at a machine level."
-    where [10] is "A compiled implementation of strong reduction."
-    by Benjamin Grégoire and Xavier Leroy.
-
-- [thought] can we solve this by view global defined type as special value?
-  - without recursive evaluation during readback.
-
-- [thought] learn from "A compiled implementation of strong reduction."
-  - the authors use "guarded fixpoints" to handle recursion.
-    the authors can handle the problem because they have general knowledge about recursion.
-    we plan to learn the same from Raymond Smullyan.
-
-- [thought] how to define normal form of recursive exp?
-  - this is about normalizing graph instead of tree.
-  - maybe we can use special linearization to linearize graph to tree?
-  - maybe on the first time a global name occur, we eval it,
-    and on the second time the same name occur, we view it as variable.
-    - this might be not better than minitt's approach.
-    - we need to construct counterexample of this.
-    - name is part of this equivalent relation.
-      - for example `List` and `Lizt` will be not equivalent.
-        but if we generate variable name from type,
-        they will be viewed as equivalent.
-
-- [thought] learn from "Diagonalization and Self-Reference" by Raymond Smullyan
-
 > 以 TLT 为例子来测试 lang3 的能力。
 
-- [lang3] tests/lang3/ch1.cic
-- [lang3] tests/lang3/ch2.cic
+- [lang3] tests/lang3-out/list.cic
+- [lang3] tests/lang3-out/ch1.cic
+- [lang3] tests/lang3-out/ch2.cic
 
 > 更完整的 dependent + structural type 语言。
 
