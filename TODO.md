@@ -36,6 +36,14 @@
 - [lang3] extract function from loop `Value.readback_obj`
 - [lang3] extract function from loop `Value.readback_cls`
 
+- [lang3] add `opts.consume_p` to `Exp.evaluate`
+
+- [lang3] use `opts.consume_p` in `Exp.evaluate` of `Value.readback_cls` on scope
+
+  - to implement:
+    - on the first time a global name occur, we eval it,
+      and on the second time the same name occur, we view it as variable.
+
 > [problem] We can not `readback` recursive exp.
 
 - [thought] learn from "A simple type-theoretic language: Mini-TT".
