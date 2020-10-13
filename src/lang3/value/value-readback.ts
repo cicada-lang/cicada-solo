@@ -7,6 +7,7 @@ import * as Env from "../env"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
+import { readback_union } from "./value-readback-union"
 
 export function readback(
   mod: Mod.Mod,
@@ -157,37 +158,5 @@ export function readback(
       |of type: ${ut.inspect(t)}.
       |`)
     )
-  }
-}
-
-function readback_union(
-  mod: Mod.Mod,
-  ctx: Ctx.Ctx,
-  left: Value.Value,
-  right: Value.Value,
-  value: Value.Value
-): Exp.Exp {
-  try {
-    return readback(mod, ctx, left, value)
-  } catch (left_error) {
-    if (left_error instanceof Trace.Trace) {
-      try {
-        return readback(mod, ctx, right, value)
-      } catch (right_error) {
-        if (right_error instanceof Trace.Trace) {
-          throw new Trace.Trace(
-            ut.aline(`
-         |I can not readback value: ${ut.inspect(value)},
-         |union type left: ${ut.inspect(left)}.
-         |union type right: ${ut.inspect(right)}.
-         |`)
-          )
-        } else {
-          throw right_error
-        }
-      }
-    } else {
-      throw left_error
-    }
   }
 }

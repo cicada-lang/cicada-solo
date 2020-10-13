@@ -20,12 +20,15 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
+# lang4 -- jojo
+
+> To study normal form and recursion.
+> Can be used to play with "Diagonalization and Self-Reference"
+
 # lang3 -- 重新实现 cicada-structural-typing
 
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
-
-- [lang3] extract function `Value.readback_union`
 
 - [lang3] extract function `Value.readback_obj`
 - [lang3] extract function `Value.readback_cls`
@@ -36,9 +39,9 @@
 - [lang3] extract function from loop `Value.readback_obj`
 - [lang3] extract function from loop `Value.readback_cls`
 
-- [lang3] add `opts.consume_p` to `Exp.evaluate`
+- [lang3] add `opts.shadow_mod_p` to `Exp.evaluate`
 
-- [lang3] use `opts.consume_p` in `Exp.evaluate` of `Value.readback_cls` on scope
+- [lang3] use `opts.shadow_mod_p` in `Exp.evaluate` of `Value.readback_cls` on scope
 
   - to implement:
     - on the first time a global name occur, we eval it,
