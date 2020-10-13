@@ -12,10 +12,5 @@ previous:
   x = "ab"
   y = "123"
 }
-- { Dup[String]["abc"] -- {
-  T = String
-  x = "ab"
-  y = "123"
-} }
 
 

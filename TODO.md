@@ -38,8 +38,6 @@
     - on the first time a global name occur, we eval it,
       and on the second time the same name occur, we view it as variable.
 
-- [lang3] fix structure of `Top.def` -- should be `t` and `exp`
-
 > [problem] We can not `readback` recursive exp.
 
 - [thought] learn from "A simple type-theoretic language: Mini-TT".

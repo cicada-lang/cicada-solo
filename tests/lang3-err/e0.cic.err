@@ -5,10 +5,5 @@ previous:
 - {
   y = "abc"
 }
-- { {
-  x : String
-} -- {
-  y = "abc"
-} }
 
 

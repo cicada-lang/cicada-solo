@@ -112,7 +112,8 @@ export function tops_matcher(tree: pt.Tree.Tree): Array<Top.Top> {
 
 export function top_matcher(tree: pt.Tree.Tree): Top.Top {
   return pt.Tree.matcher<Top.Top>({
-    "top:def": ({ name, exp }) => Top.def(pt.Tree.str(name), exp_matcher(exp)),
+    "top:def": ({ name, exp }) =>
+      Top.def(pt.Tree.str(name), undefined, exp_matcher(exp)),
     "top:claim": ({ claim, t, define, exp }, { span }) => {
       if (pt.Tree.str(claim) !== pt.Tree.str(define)) {
         throw new pt.ParsingError(
@@ -122,10 +123,7 @@ export function top_matcher(tree: pt.Tree.Tree): Top.Top {
           { span }
         )
       }
-      return Top.def(
-        pt.Tree.str(claim),
-        Exp.the(exp_matcher(t), exp_matcher(exp))
-      )
+      return Top.def(pt.Tree.str(claim), exp_matcher(t), exp_matcher(exp))
     },
     "top:show": ({ exp }) => Top.show(exp_matcher(exp)),
   })(tree)

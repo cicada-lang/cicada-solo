@@ -5,12 +5,18 @@ export type Top = def | show
 interface def {
   kind: "Top.def"
   name: string
+  t?: Exp.Exp
   exp: Exp.Exp
 }
 
-export const def = (name: string, exp: Exp.Exp): def => ({
+export const def = (
+  name: string,
+  t: undefined | Exp.Exp,
+  exp: Exp.Exp
+): def => ({
   kind: "Top.def",
   name,
+  t,
   exp,
 })
 
