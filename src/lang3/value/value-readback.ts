@@ -18,7 +18,6 @@ export function readback(
   t: Value.Value,
   value: Value.Value
 ): Exp.Exp {
-
   if (t.kind === "Value.union") return readback_union(mod, ctx, t, value)
   if (t.kind === "Value.pi") return readback_pi(mod, ctx, t, value)
   if (t.kind === "Value.cls") return readback_cls(mod, ctx, t, value)
