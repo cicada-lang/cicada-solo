@@ -1,19 +1,11 @@
-{ { "red" | "green" } | "blue" } -- "red"
-{ { "red" | "green" } | "blue" } -- "red"
+"red"
+"red"
 {
-  red : { { "red" | "green" } | "blue" }
-  green : { { "red" | "green" } | "blue" }
-  blue : { { "red" | "green" } | "blue" }
-} -- {
   red = "red"
   green = "green"
   blue = "blue"
 }
 {
-  red : "red"
-  green : "green"
-  blue : "blue"
-} -- {
   red = "red"
   green = "green"
   blue = "blue"

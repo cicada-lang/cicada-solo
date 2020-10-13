@@ -1,40 +1,8 @@
-{ {
-  kind : "Null" = "Null"
-  T : Type = String
-} | {
-  kind : "Cons" = "Cons"
-  T : Type = String
-  head : String
-  tail : { {
-    kind : "Null" = "Null"
-    T : Type = String
-  } | {
-    kind : "Cons" = "Cons"
-    T : Type = String
-    head : String
-    tail : List(String)
-  } }
-} } -- {
+{
   kind = "Null"
   T = String
 }
-{ {
-  kind : "Null" = "Null"
-  T : Type = String
-} | {
-  kind : "Cons" = "Cons"
-  T : Type = String
-  head : String
-  tail : { {
-    kind : "Null" = "Null"
-    T : Type = String
-  } | {
-    kind : "Cons" = "Cons"
-    T : Type = String
-    head : String
-    tail : List(String)
-  } }
-} } -- {
+{
   kind = "Cons"
   T = String
   head = "123"

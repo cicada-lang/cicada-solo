@@ -1,10 +1,7 @@
 {
-  x : String
-  y : String
-} -- {
   x = "abc"
   y = "123"
 }
-String -- "abc"
-String -- "123"
-String -- "www"
+"abc"
+"123"
+"www"

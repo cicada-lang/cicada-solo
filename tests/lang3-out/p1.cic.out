@@ -1,15 +1,9 @@
 {
-  x : {
-    x : String
-  }
-  y : String
-  id : (_: String) -> String
-} -- {
   x = {
     x = "abc"
   }
   y = "123"
   id = (_) => _
 }
-String -- "abc"
-String -- "123"
+"abc"
+"123"

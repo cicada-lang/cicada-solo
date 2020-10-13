@@ -1,28 +1,16 @@
-(_: Type) -> Type -- (_) => { Object | {
+(_) => { Object | {
   head : _
   tail : { Object | {
     head : _
     tail : List(_)
   } }
 } }
-Object -- {
+{
   
 }
-{ Object | {
-  head : String
-  tail : { Object | {
-    head : String
-    tail : List(String)
-  } }
-} } -- {
+{
   
 }
-{ Object | {
-  head : String
-  tail : { Object | {
-    head : String
-    tail : List(String)
-  } }
-} } -- {
+{
   
 }

@@ -43,8 +43,7 @@ function show(mod: Mod.Mod, tops: Array<Top.Top>): void {
         const t = Exp.infer(mod, ctx, top.exp)
         const value = Exp.evaluate(mod, env, top.exp)
         const value_repr = Exp.repr(Value.readback(mod, ctx, t, value))
-        const t_repr = Exp.repr(Value.readback(mod, ctx, Value.type, t))
-        console.log(`${t_repr} -- ${value_repr}`)
+        console.log(`${value_repr}`)
       }
     }
   }

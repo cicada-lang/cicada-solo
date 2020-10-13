@@ -34,9 +34,10 @@
 
 > 以 TLT 为例子来测试 lang3 的能力。
 
-- [lang3] value-readback-type.ts
+- [lang3] value-readback-equal.ts
+- [lang3] value-readback-str.ts
 
-- [lang3] better output
+- [lang3] value-readback-type.ts
 
 - [lang3] tests/lang3-out/ch1.cic
 - [lang3] tests/lang3-out/ch2.cic

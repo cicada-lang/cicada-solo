@@ -1,17 +1,10 @@
 {
-  x : {
-    x : String
-  }
-  y : String
-} -- {
   x = {
     x = "abc"
   }
   y = "123"
 }
 {
-  x : String
-} -- {
   x = "abc"
 }
-String -- "123"
+"123"
