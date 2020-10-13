@@ -16,8 +16,7 @@ export function readback(
   value: Value.Value
 ): Exp.Exp {
   if (t.kind === "Value.union") {
-    const { left, right } = t
-    return readback_union(mod, ctx, left, right, value)
+    return readback_union(mod, ctx, t, value)
   } else if (t.kind === "Value.pi") {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.

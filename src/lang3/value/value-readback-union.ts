@@ -11,23 +11,22 @@ import * as ut from "../../ut"
 export function readback_union(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
-  left: Value.Value,
-  right: Value.Value,
+  union: Value.union,
   value: Value.Value
 ): Exp.Exp {
   try {
-    return Value.readback(mod, ctx, left, value)
+    return Value.readback(mod, ctx, union.left, value)
   } catch (left_error) {
     if (left_error instanceof Trace.Trace) {
       try {
-        return Value.readback(mod, ctx, right, value)
+        return Value.readback(mod, ctx, union.right, value)
       } catch (right_error) {
         if (right_error instanceof Trace.Trace) {
           throw new Trace.Trace(
             ut.aline(`
          |I can not readback value: ${ut.inspect(value)},
-         |union type left: ${ut.inspect(left)}.
-         |union type right: ${ut.inspect(right)}.
+         |union type left: ${ut.inspect(union.left)}.
+         |union type right: ${ut.inspect(union.right)}.
          |`)
           )
         } else {
