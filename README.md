@@ -4,23 +4,23 @@ A nascent programming language as formal deduction system for the foundations of
 
 ## Contents
 
-**partech**: Parsing Techniques, with DSL for CFG and general CFG parsers.
+**partech**: Parsing Techniques, DSL for CFG, General CFG parsers.
 - CFG: https://en.wikipedia.org/wiki/Context-free_grammar
 - Earley parser: https://en.wikipedia.org/wiki/Earley_parser
 - IXML: https://homepages.cwi.nl/~steven/ixml
 
-**lang0**: untyped lambda calculus.
+**lang0**: Untyped lambda calculus.
 - https://en.wikipedia.org/wiki/Lambda_calculus
 
-**lang1**: simply typed lambda calculus, natural number, primitve recursive combinator.
+**lang1**: Simply typed lambda calculus, Natural number, Primitve recursive combinator.
 - https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus
 - System T: https://en.wikipedia.org/wiki/Dialectica_interpretation
 
-**lang2**: "The Little typer", "Type in Type", no recursion.
+**lang2**: "The Little typer", "Type in Type", No recursion.
 - Racket implementation: https://davidchristiansen.dk/tutorials/nbe
 - Haskell implementation: https://davidchristiansen.dk/tutorials/implementing-types-hs.pdf
 
-**lang3**: dependent type, structural type, fulfilling type, "Type in Type", module system, arbitrary module-level recursion.
+**lang3**: Dependent type, Structural type, Fulfilling type, "Type in Type", Arbitrary top-level recursion.
 
 ## References
 
