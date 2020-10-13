@@ -7,8 +7,8 @@ A nascent programming language as formal deduction system for the foundations of
 - **partech**: Parsing Techniques, DSL for CFG, General CFG parsers.
 - **lang0**: Untyped lambda calculus.
 - **lang1**: Simply typed lambda calculus, Natural number, Primitve recursive combinator.
-- **lang2**: "The Little typer", "Type in Type", No recursion.
-- **lang3**: Dependent type, Structural type, Fulfilling type, "Type in Type", Arbitrary top-level recursion.
+- **lang2**: The Little Typer, Type in Type, No recursion.
+- **lang3**: Dependent type, Structural type, Fulfilling type, Type in Type, Arbitrary top-level recursion.
 
 ## References
 
