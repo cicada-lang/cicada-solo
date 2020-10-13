@@ -8,7 +8,7 @@ import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
-export function readback_type_union(
+export function readback_union(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   union: Value.union,

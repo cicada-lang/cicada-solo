@@ -11,7 +11,6 @@ import * as ut from "../../ut"
 export function readback_type_cls(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
-  _t: Value.type,
   cls: Value.cls
 ): Exp.Exp {
   const { sat, tel } = cls

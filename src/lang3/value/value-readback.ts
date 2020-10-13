@@ -7,10 +7,11 @@ import * as Env from "../env"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
-import { readback_type_union } from "./value-readback-type-union"
-import { readback_type_pi } from "./value-readback-type-pi"
-import { readback_type_cls } from "./value-readback-type-cls"
+import { readback_union } from "./value-readback-union"
+import { readback_pi } from "./value-readback-pi"
 import { readback_cls } from "./value-readback-cls"
+import { readback_type_cls } from "./value-readback-type-cls"
+import { readback_type_pi } from "./value-readback-type-pi"
 
 export function readback(
   mod: Mod.Mod,
@@ -18,8 +19,8 @@ export function readback(
   t: Value.Value,
   value: Value.Value
 ): Exp.Exp {
-  if (t.kind === "Value.union") return readback_type_union(mod, ctx, t, value)
-  if (t.kind === "Value.pi") return readback_type_pi(mod, ctx, t, value)
+  if (t.kind === "Value.union") return readback_union(mod, ctx, t, value)
+  if (t.kind === "Value.pi") return readback_pi(mod, ctx, t, value)
   if (t.kind === "Value.cls") return readback_cls(mod, ctx, t, value)
   if (
     t.kind === "Value.absurd" &&
@@ -44,22 +45,9 @@ export function readback(
       Value.readback(mod, ctx, value.t, value.to)
     )
   if (t.kind === "Value.type" && value.kind === "Value.cls")
-    return readback_type_cls(mod, ctx, t, value)
-  if (t.kind === "Value.type" && value.kind === "Value.pi") {
-    const fresh_name = ut.freshen_name(
-      new Set([...Mod.names(mod), ...Ctx.names(ctx)]),
-      value.ret_t_cl.name
-    )
-    const variable = Value.not_yet(value.arg_t, Neutral.v(fresh_name))
-    const arg_t = Value.readback(mod, ctx, Value.type, value.arg_t)
-    const ret_t = Value.readback(
-      mod,
-      Ctx.extend(ctx, fresh_name, value.arg_t),
-      Value.type,
-      Closure.apply(value.ret_t_cl, variable)
-    )
-    return Exp.pi(fresh_name, arg_t, ret_t)
-  }
+    return readback_type_cls(mod, ctx, value)
+  if (t.kind === "Value.type" && value.kind === "Value.pi")
+    return readback_type_pi(mod, ctx, value)
   if (t.kind === "Value.type" && value.kind === "Value.union")
     return Exp.union(
       Value.readback(mod, ctx, Value.type, value.left),
