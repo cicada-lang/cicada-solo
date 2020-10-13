@@ -34,9 +34,7 @@
 - [lang3] extract function from loop `Value.readback_type_cls`
 
 - [lang3] add `opts.shadow_mod_p` to `Exp.evaluate`
-
 - [lang3] use `opts.shadow_mod_p` in `Exp.evaluate` of `Value.readback_cls` on scope
-
   - to implement:
     - on the first time a global name occur, we eval it,
       and on the second time the same name occur, we view it as variable.

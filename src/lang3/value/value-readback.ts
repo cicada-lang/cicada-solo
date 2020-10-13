@@ -29,13 +29,14 @@ export function readback(
   )
     return Exp.the(Exp.absurd, Neutral.readback(mod, ctx, value.neutral))
   if (t.kind === "Value.equal" && value.kind === "Value.same") return Exp.same
-  if (t.kind === "Value.str" && value.kind === "Value.quote")
+  if (
+    (t.kind === "Value.quote" ||
+      t.kind === "Value.str" ||
+      t.kind === "Value.type") &&
+    value.kind === "Value.quote"
+  )
     return Exp.quote(value.str)
   if (t.kind === "Value.type" && value.kind === "Value.str") return Exp.str
-  if (t.kind === "Value.type" && value.kind === "Value.quote")
-    return Exp.quote(value.str)
-  if (t.kind === "Value.quote" && value.kind === "Value.quote")
-    return Exp.quote(value.str)
   if (t.kind === "Value.type" && value.kind === "Value.absurd")
     return Exp.absurd
   if (t.kind === "Value.type" && value.kind === "Value.equal")
@@ -58,7 +59,11 @@ export function readback(
     // NOTE t and value.t are ignored here,
     //  maybe use them to debug.
     return Neutral.readback(mod, ctx, value.neutral)
-  throw new Trace.Trace(
+  throw readback_error(t, value)
+}
+
+function readback_error<T>(t: Value.Value, value: Value.Value): Trace.Trace<T> {
+  return new Trace.Trace(
     ut.aline(`
       |I can not readback value: ${ut.inspect(value)},
       |of type: ${ut.inspect(t)}.
