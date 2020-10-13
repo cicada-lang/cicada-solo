@@ -69,6 +69,8 @@
   - maybe we can use special linearization to linearize graph to tree?
   - maybe on the first time a global name occur, we eval it,
     and on the second time the same name occur, we view it as variable.
+    - we need to construct counterexample of this.
+    - this might be not better than minitt's approach.
 
 - [thought] learn from "Diagonalization and Self-Reference" by Raymond Smullyan
 
