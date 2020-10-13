@@ -48,7 +48,7 @@ commands.test_lang1 = async () => {
 
   await test(
     "./bin/lang1.js $file",
-    { file: "tests/lang1-error/**.cic" },
+    { file: "tests/lang1-err/**.cic" },
     snapshot.err(({ file }) => file + ".err")
   )
 }
@@ -62,7 +62,7 @@ commands.test_lang2 = async () => {
 
   await test(
     "./bin/lang2.js $file",
-    { file: "tests/lang2-error/**.cic" },
+    { file: "tests/lang2-err/**.cic" },
     snapshot.err(({ file }) => file + ".err")
   )
 }
@@ -76,7 +76,7 @@ commands.test_lang3 = async () => {
 
   await test(
     "./bin/lang3.js $file",
-    { file: "tests/lang3-error/**.cic" },
+    { file: "tests/lang3-err/**.cic" },
     snapshot.err(({ file }) => file + ".err")
   )
 }
@@ -122,7 +122,7 @@ commands.test_partech_parse = async () => {
       await test(
         `./bin/partech.js parse $file --grammar ${grammar} --nocolor`,
         { file: `${base}/${name}/**.oh` },
-        snapshot.err(({ file }) => file + ".error")
+        snapshot.err(({ file }) => file + ".err")
       )
     }
   }

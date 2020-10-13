@@ -7,33 +7,33 @@ blue = "blue"
 
 @show { Color -- red }
 
-_ : Color
-_ = red
+_1 : Color
+_1 = red
 
-@show _
+@show _1
 
-_ : {
+_2 : {
   red : Color
   green : Color
   blue : Color
 }
-_ = {
+_2 = {
   red = red
   green = green
   blue = blue
 }
 
-@show _
+@show _2
 
-_ : {
+_3 : {
   red : "red"
   green : "green"
   blue : "blue"
 }
-_ = {
+_3 = {
   red = red
   green = green
   blue = blue
 }
 
-@show _
+@show _3

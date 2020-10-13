@@ -20,12 +20,19 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
+# lang4 -- minitt
+
+> to learn about how to implement mutual recursion.
+
 # lang3 -- 重新实现 cicada-structural-typing
 
 > 由于，重新理解了 Value Neutral Normal 的结构，
 > 并且简化了语言的功能，因此有很大机会重新做出一个成功的实现。
 
 > use `Mod` to implement module-level mutual recursion
+
+- [lang3] [bug] can not readback recursive exp.
+  - how to define normal form of recursive exp?
 
 - [lang3] test module-level mutual recursion
 
