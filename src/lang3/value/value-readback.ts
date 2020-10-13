@@ -8,6 +8,7 @@ import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { readback_type_union } from "./value-readback-type-union"
+import { readback_type_pi } from "./value-readback-type-pi"
 import { readback_type_cls } from "./value-readback-type-cls"
 import { readback_cls } from "./value-readback-cls"
 
@@ -18,25 +19,7 @@ export function readback(
   value: Value.Value
 ): Exp.Exp {
   if (t.kind === "Value.union") return readback_type_union(mod, ctx, t, value)
-  if (t.kind === "Value.pi") {
-    // NOTE everything with a function type
-    //   is immediately read back as having a Lambda on top.
-    //   This implements the η-rule for functions.
-    const fresh_name = ut.freshen_name(
-      new Set([...Mod.names(mod), ...Ctx.names(ctx)]),
-      t.ret_t_cl.name
-    )
-    const variable = Value.not_yet(t.arg_t, Neutral.v(fresh_name))
-    return Exp.fn(
-      fresh_name,
-      Value.readback(
-        mod,
-        Ctx.extend(ctx, fresh_name, t.arg_t),
-        Closure.apply(t.ret_t_cl, variable),
-        Exp.do_ap(value, variable)
-      )
-    )
-  }
+  if (t.kind === "Value.pi") return readback_type_pi(mod, ctx, t, value)
   if (t.kind === "Value.cls") return readback_cls(mod, ctx, t, value)
   if (
     t.kind === "Value.absurd" &&
