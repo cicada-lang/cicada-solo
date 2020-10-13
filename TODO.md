@@ -29,7 +29,7 @@
 
 - [lang3] [problem] we can not readback recursive exp.
 
-  - [thought] learn from minitt.
+  - [thought] learn from "A simple type-theoretic language: Mini-TT".
     - minitt do not handle this well.
       in minitt, recursive exp occurs in sum.
       but normalization of sum is implemented by readback env,
