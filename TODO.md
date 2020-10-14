@@ -28,7 +28,7 @@
 - [lang4] be clear about the semantic of "Diagonalization and Self-Reference"
 - [lang4] design a normalization algorithm
 
-# lang3 -- 重新实现 cicada-structural-typing
+# lang3
 
 > 以 TLT 为例子来测试 lang3 的能力。
 
@@ -44,7 +44,7 @@
 
 - [lang3] use `Mod` to design module system
 
-# partech -- parsing techniques
+# partech
 
 > Be the most easy to use parsing tool for programming language prototyping.
 
@@ -80,6 +80,8 @@
 
 # lang1 -- Play with systemt
 
+# lang1 -- + algebraic data type
+
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
 
 - implement List for lang2.
@@ -93,9 +95,7 @@
 
 - use native `number` as `Nat`.
 
-# lang1 + algebraic data type
-
-# lang2 + inductive data type
+# lang2 -- + inductive data type
 
 - 归纳类型（Inductive type）的推演规则。
   - Only one abstraction away.
@@ -110,18 +110,14 @@
   because the aim of split one judgment `:` to two judgments `=>` and `<=`,
   is to avoid searching, and making the group of inference rules deterministic.
 
-# cicada -- fulfilling type
+# cicada
 
-- 需求：
-  - 有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
-  - 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
-- 填充类型（Fulfilling type）的推演规则。
-- 我们需要 develop 这个关键词，来在证明时，把更多的信息包含在语境中。
-  - 明确 develop 这个关键词的语义。
+> 有完整的例子来表明语言的设计有效，即使没有语言实现，也可用作形式化数学结构的伪代码。
+
 - [formalization] [EWD1240a] A little bit of lattice theory
   - 形式化这篇文章，以检验这样形式化是否真的好。
   - This paper is about the relation between PartialOrder and Lattice.
-  - Learn from the story line.
+  - Learn from the story line for teaching.
 - 形式化 Algebraic structures：https://en.wikipedia.org/wiki/Algebraic_structure
 - 形式化 Lattice theory。
 - 形式化 Closure system。-- 帮助学习 FCA。
@@ -130,8 +126,5 @@
 - 形式化 Group theory。
 - 形式化 Category of Groups。
 - 形式化 Number theroy：https://en.wikipedia.org/wiki/Number_theory
-- 我们需要支持相互递归函数。
-  - 可以通过使用副作用的 Env API 来实现。
-  - 需要的时候可以 clone Env。
-- 我们需要支持 Inductive type（为 Class 的语义）。
-- 我们需要支持 Fulfilling type（为 Data 的语义）。
+- 我们需要支持 Inductive type（为 Data 的语义）。
+- 我们需要支持 Fulfilling type（为 Class 的语义）。

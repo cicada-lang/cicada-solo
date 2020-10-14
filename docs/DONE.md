@@ -1,3 +1,19 @@
+# lang3 -- 重新实现 cicada-structural-typing
+
+- 完成：2020-10-14
+
+有清晰的推演规则（Inference rules），要能向众人把语言的类型系统的设计讲清楚。
+
+填充类型（Fulfilling type）的推演规则。
+
+支持相互递归函数。
+- 通过使用副作用的 Mod API 来实现。
+- 需要的时候可以 clone Mod。
+
+# partech -- 将嵌入在 js 中的设计 改为有自己 namespace 的设计
+
+- 完成：2020-10-02
+
 # [TLT] 1. The More Things Change, the More They Stay the Same
 
 - 完成：2020-09-17
