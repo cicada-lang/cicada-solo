@@ -2,6 +2,9 @@
   "name": "@xieyuheng/cicada",
   "version": "0.0.4",
   "repository": "github:xieyuheng/cicada",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "npx tsc",
     "watch": "npx tsc --watch",
