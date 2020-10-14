@@ -27,6 +27,7 @@
 
 - [lang4] be clear about the semantic of "Diagonalization and Self-Reference"
 - [lang4] design a normalization algorithm
+  - 也比可以用 NbE，也许比一般的 NbE 更复杂。
 
 # lang3
 
