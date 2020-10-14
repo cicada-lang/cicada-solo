@@ -80,7 +80,7 @@
 
 # lang1 -- Play with systemt
 
-# lang1 -- + algebraic data type
+# lang1 -- 添加 algebraic data type
 
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
 
@@ -95,7 +95,7 @@
 
 - use native `number` as `Nat`.
 
-# lang2 -- + inductive data type
+# lang2 -- 添加 inductive data type
 
 - 归纳类型（Inductive type）的推演规则。
   - Only one abstraction away.
