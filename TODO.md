@@ -26,6 +26,7 @@
 > Can be used to play with "Diagonalization and Self-Reference"
 
 - [lang4] be clear about the semantic of "Diagonalization and Self-Reference"
+- [lang4] design a normalization algorithm
 
 # lang3 -- 重新实现 cicada-structural-typing
 
