@@ -1,5 +1,6 @@
 import * as Value from "../value"
 
-export class Normal {
-  constructor(public t: Value.Value, public value: Value.Value) {}
+export interface Normal {
+  t: Value.Value
+  value: Value.Value
 }

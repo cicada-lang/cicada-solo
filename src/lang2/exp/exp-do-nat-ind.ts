@@ -31,9 +31,9 @@ export function do_nat_ind(
         Exp.do_ap(motive, target),
         Neutral.nat_ind(
           target.neutral,
-          new Normal.Normal(motive_t, motive),
-          new Normal.Normal(base_t, base),
-          new Normal.Normal(step_t, step)
+          Normal.create(motive_t, motive),
+          Normal.create(base_t, base),
+          Normal.create(step_t, step)
         )
       )
     } else {

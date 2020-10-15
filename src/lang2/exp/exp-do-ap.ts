@@ -12,7 +12,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
     if (target.t.kind === "Value.pi") {
       return Value.not_yet(
         Closure.apply(target.t.ret_t_cl, arg),
-        Neutral.ap(target.neutral, new Normal.Normal(target.t.arg_t, arg))
+        Neutral.ap(target.neutral, Normal.create(target.t.arg_t, arg))
       )
     } else {
       throw new Trace.Trace(
