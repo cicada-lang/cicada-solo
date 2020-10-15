@@ -33,29 +33,38 @@
 
 > 实现 condition 的语义。
 
-- [lang3] hide `Exp.evaluate` in `Telescope` -- just like `Closure.apply`
+- [lang3] `Exp.datatype` -- `infer`
+- [lang3] `Exp.datatype` -- `repr`
+- [lang3] `Exp.datatype` -- `alpha_equivalent`
 
-- [lang3] `Exp.datatype`
-  - `infer`
-  - `repr`
-  - `alpha_equivalent`
-
-- [lang3] `Value.datatype`
-  - `readback`
-  - `is_datatype`
-
-- [lang3] `Exp.data`
-
-- [lang3] `Value.data`
-
-- [lang3] `Exp.case_fn`
-
-- [lang3] `Value.case_fn`
-  - `Exp.do_ap`
+- [lang3] `Value.datatype` -- `readback`
+- [lang3] `Value.datatype` -- `is_datatype`
 
 - [lang3] `Top.datatype`
-- [lang3] grammars -- `@data` & `@match`
-- [lang3] matchers -- `@data` & `@match`
+
+- [lang3] grammars -- `@datatype` & `@match`
+- [lang3] matchers -- `@datatype` & `@match`
+
+- [lang3] `Exp.data`
+- [lang3] `Exp.data` -- `evaluate`
+- [lang3] `Exp.data` -- `infer`
+- [lang3] `Exp.data` -- `repr`
+- [lang3] `Exp.data` -- `alpha_equivalent`
+
+- [lang3] `Value.data`
+- [lang3] `Value.data` -- `readback`
+- [lang3] `Value.data` -- `is_datatype`
+
+- [lang3] `Exp.case_fn`
+- [lang3] `Exp.case_fn` -- `evaluate`
+- [lang3] `Exp.case_fn` -- `infer`
+- [lang3] `Exp.case_fn` -- `repr`
+- [lang3] `Exp.case_fn` -- `alpha_equivalent`
+
+- [lang3] `Value.case_fn`
+- [lang3] `Value.case_fn` -- `Exp.do_ap`
+- [lang3] `Value.case_fn` -- `readback`
+- [lang3] `Value.case_fn` -- `is_datatype`
 
 > 以 TLT 为例子来测试 lang3 的能力。
 
