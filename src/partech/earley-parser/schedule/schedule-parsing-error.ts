@@ -16,7 +16,7 @@ export function parsing_error(
   end: number
 ): ParsingError {
   const i = find_last_index(schedule, start, end)
-  if (index_still_can_scan(schedule, i)) {
+  if (index_still_can_scan_p(schedule, i)) {
     if (i === schedule.tokens.length - 1) {
       let s = ""
       s += "Found END_OF_TOKENS, "
@@ -85,25 +85,25 @@ function index_with_terminal_p(
 }
 
 function task_terminal_p(task: Task.Task): boolean {
-  const index = task.progress.length
-  if (index >= task.parts.length) return false
-  const { value } = task.parts[index]
-  return Value.terminal_p(value)
+  if (task.progress.length >= task.parts.length) return false
+  return Value.terminal_p(task.parts[task.progress.length].value)
 }
 
-function index_still_can_scan(schedule: Schedule.Schedule, i: number): boolean {
+function index_still_can_scan_p(
+  schedule: Schedule.Schedule,
+  i: number
+): boolean {
   for (const task of TaskChart.tasks_at(schedule.chart, i)) {
-    if (task.progress.length < task.parts.length) {
-      if (
-        Value.terminal_p(task.parts[task.progress.length].value) &&
-        Value.terminal_match(
-          task.parts[task.progress.length].value,
-          schedule.tokens[i]
-        )
-      ) {
-        return true
-      }
-    }
+    if (task_still_match_p(task, schedule.tokens[i])) return true
   }
+
   return false
+
+  function task_still_match_p(task: Task.Task, token: Token.Token): boolean {
+    return (
+      task.progress.length < task.parts.length &&
+      Value.terminal_p(Task.next_part(task).value) &&
+      Value.terminal_match(task.parts[task.progress.length].value, token)
+    )
+  }
 }
