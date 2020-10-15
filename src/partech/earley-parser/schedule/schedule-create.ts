@@ -10,17 +10,13 @@ export function create(
   tokens: Array<Token.Token>,
   grammar: Value.grammar
 ): Schedule.Schedule {
-  const queue = TaskQueue.create()
-  const chart = TaskChart.create(tokens)
-  const resumable_chart = ResumableChart.create(tokens)
-  const finished_chart = FinishedChart.create(tokens)
   const schedule = {
     tokens,
     grammar,
-    queue,
-    chart,
-    resumable_chart,
-    finished_chart,
+    queue: TaskQueue.create(),
+    chart: TaskChart.create(tokens),
+    resumable_chart: ResumableChart.create(tokens),
+    finished_chart: FinishedChart.create(tokens),
   }
   Schedule.insert_grammar(schedule, grammar, 0)
   return schedule
