@@ -33,8 +33,6 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `Telescope` in `value/`
-
 - [lang2] `Closure` as interface
 - [lang2] `Closure` in `value/`
 

@@ -1,4 +1,5 @@
 export * as Closure from "./closure"
+export * as Telescope from "./telescope"
 
 export * from "./value"
 export * from "./value-is"

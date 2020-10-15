@@ -1,5 +1,4 @@
 import * as Value from "../value"
-import * as Telescope from "../telescope"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as Env from "../env"
@@ -43,7 +42,7 @@ function readback_properties_from_tel(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   properties: Map<string, Exp.Exp>,
-  tel: Telescope.Telescope,
+  tel: Value.Telescope.Telescope,
   value: Value.Value
 ): void {
   const env = Env.clone(tel.env)

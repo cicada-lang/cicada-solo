@@ -2,7 +2,7 @@ import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
-import * as Telescope from "../telescope"
+
 import * as Mod from "../mod"
 import * as Env from "../env"
 import * as Trace from "../../trace"
@@ -70,13 +70,13 @@ export function evaluate(
         if (exp.scope.length === 0) {
           return Value.cls(
             sat,
-            Telescope.create(mod, env, undefined, new Array())
+            Value.Telescope.create(mod, env, undefined, new Array())
           )
         } else {
           const [entry, ...tail] = exp.scope
           const name = entry.name
           const t = Exp.evaluate(mod, env, entry.t, opts)
-          return Value.cls(sat, Telescope.create(mod, env, { name, t }, tail))
+          return Value.cls(sat, Value.Telescope.create(mod, env, { name, t }, tail))
         }
       }
       case "Exp.obj": {

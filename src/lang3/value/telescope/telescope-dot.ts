@@ -1,11 +1,11 @@
 import * as Telescope from "../telescope"
-import * as Env from "../env"
-import * as Mod from "../mod"
-import * as Exp from "../exp"
-import * as Value from "../value"
-import * as Neutral from "../neutral"
-import * as Trace from "../../trace"
-import * as ut from "../../ut"
+import * as Env from "../../env"
+import * as Mod from "../../mod"
+import * as Exp from "../../exp"
+import * as Value from "../../value"
+import * as Neutral from "../../neutral"
+import * as Trace from "../../../trace"
+import * as ut from "../../../ut"
 
 export function dot(tel: Telescope.Telescope, name: string): Value.Value {
   const { next, scope } = tel

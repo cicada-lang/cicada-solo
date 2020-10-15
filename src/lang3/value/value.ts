@@ -1,5 +1,5 @@
 import * as Closure from "./closure"
-import * as Telescope from "../telescope"
+import * as Telescope from "./telescope"
 import * as Neutral from "../neutral"
 import * as Exp from "../exp"
 import * as Mod from "../mod"

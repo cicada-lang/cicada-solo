@@ -1,6 +1,6 @@
 import * as Exp from "../exp"
 import * as Value from "../value"
-import * as Telescope from "../telescope"
+
 import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
@@ -58,7 +58,7 @@ function check_properties_aganst_tel(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   properties: Map<string, Exp.Exp>,
-  tel: Telescope.Telescope
+  tel: Value.Telescope.Telescope
 ): void {
   if (tel.next === undefined) return
   const next_value = check_properties_aganst_next(
@@ -67,7 +67,7 @@ function check_properties_aganst_tel(
     properties,
     tel.next
   )
-  const filled_tel = Telescope.fill(tel, next_value)
+  const filled_tel = Value.Telescope.fill(tel, next_value)
   Exp.check(mod, ctx, Exp.obj(properties), Value.cls([], filled_tel))
 }
 

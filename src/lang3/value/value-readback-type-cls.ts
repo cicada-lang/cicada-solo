@@ -1,5 +1,4 @@
 import * as Value from "../value"
-import * as Telescope from "../telescope"
 import * as Neutral from "../neutral"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
@@ -37,7 +36,7 @@ function readback_sat(
 
 function readback_scope(
   ctx: Ctx.Ctx,
-  tel: Telescope.Telescope
+  tel: Value.Telescope.Telescope
 ): Array<{ name: string; t: Exp.Exp }> {
   const norm_scope = new Array()
   const env = Env.clone(tel.env)

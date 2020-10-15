@@ -2,7 +2,7 @@ import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
-import * as Telescope from "../telescope"
+
 import * as Trace from "../../trace"
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
@@ -21,7 +21,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
           value: arg,
         },
       ],
-      Telescope.fill(target.tel, arg)
+      Value.Telescope.fill(target.tel, arg)
     )
   } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.pi") {
