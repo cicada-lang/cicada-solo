@@ -21,18 +21,20 @@ export function run(
     if (opts.schedule?.verbose) {
       console.log(Schedule.repr(schedule))
     }
+
     const task = TaskQueue.dequeue(schedule.queue)
+
     if (task === undefined) return
+
+    if (opts.task?.verbose) {
+      const header = Task.finished_p(task) ? "[resume from]:" : "   [stepping]:"
+      console.log(header, Task.repr(task))
+    }
+
     if (Task.finished_p(task)) {
-      if (opts.task?.verbose) {
-        console.log("[resume from]:", Task.repr(task))
-      }
       Schedule.resume(schedule, task)
       FinishedChart.insert(schedule.finished_chart, task)
     } else {
-      if (opts.task?.verbose) {
-        console.log("   [stepping]:", Task.repr(task))
-      }
       Schedule.step(schedule, task)
       Schedule.leap(schedule, task)
     }

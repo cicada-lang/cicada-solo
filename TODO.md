@@ -55,8 +55,6 @@
 
 > Be the most easy to use parsing tool for programming language prototyping.
 
-- [partech] improve `Schedule.run`
-
 - [partech] use `Mod` to design module system
 
 - handle `$import` in `Mod.build`
