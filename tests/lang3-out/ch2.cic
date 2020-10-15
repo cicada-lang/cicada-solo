@@ -1,0 +1,22 @@
+Pair = {
+  A : Type
+  B : Type
+  first: A
+  second: B
+}
+
+pair : (A: Type) -> (B: Type) -> (A) -> (B) -> Pair[A][B]
+pair = (A) => (B) => (first) => (second) => {
+  A = A
+  B = B
+  first = first
+  second = second
+}
+
+flavored_lentils : (String) -> Pair[String][String]
+flavored_lentils = (flavor) => pair(String)(String)(flavor)("lentils")
+
+garlic_flavored_lentils : Pair[String][String]
+garlic_flavored_lentils = flavored_lentils("garlic")
+
+@show garlic_flavored_lentils
