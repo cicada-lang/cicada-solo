@@ -13,14 +13,11 @@ export function leap(
   const { value } = Task.next_part(upsteam_task)
   if (value.kind === "Value.grammar") {
     const grammar = value
-    const progress_index = Task.progress_index(upsteam_task)
-    const length = TaskChart.length(schedule.chart)
-    const tasks = FinishedChart.tasks(
+    for (const task of FinishedChart.tasks(
       schedule.finished_chart,
-      progress_index,
+      Task.progress_index(upsteam_task),
       grammar.name
-    )
-    for (const task of tasks) {
+    )) {
       if (Task.match_grammar_p(task, grammar)) {
         const forward_steps = Task.progress_index(task) - task.index
         Schedule.insert_task(
