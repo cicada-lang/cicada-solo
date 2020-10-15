@@ -16,6 +16,7 @@ export type Exp =
   | str
   | quote
   | union
+  // | datatype
   | type
   | begin
   | the
@@ -189,6 +190,35 @@ export const union = (left: Exp, right: Exp): union => ({
   kind: "Exp.union",
   left,
   right,
+})
+
+export interface FormalArg {
+  name?: string,
+  t: Exp
+}
+
+export interface SumEntry {
+  tag: string
+  args: Array<FormalArg>
+  ret_args: Array<FormalArg>
+}
+
+export interface datatype {
+  kind: "Exp.datatype"
+  name: string
+  args: Array<FormalArg>
+  sums: Array<SumEntry>
+}
+
+export const datatype = (
+  name: string,
+  args: Array<FormalArg>,
+  sums: Array<SumEntry>
+): datatype => ({
+  kind: "Exp.datatype",
+  name,
+  args,
+  sums,
 })
 
 export interface type {

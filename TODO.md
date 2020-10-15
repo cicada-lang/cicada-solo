@@ -33,8 +33,20 @@
 
 > 实现 condition 的语义。
 
+- [lang3] `Exp.evaluate` -- `Exp.datatype`
+- [lang3] `Exp.repr` -- `Exp.datatype`
+
+- [lang3] `Value.datatype` -- `Argscope`
+
 - [lang3] `Exp.data` & `Value.data`
 - [lang3] `Exp.case_fn` & `Value.case_fn`
+- [lang3] `Exp.evaluate` -- `Exp.data`
+- [lang3] `Exp.check` -- `Exp.data`
+- [lang3] `Exp.evaluate` -- `Exp.case_fn`
+- [lang3] `Exp.check` -- `Exp.case_fn`
+- [lang3] `Exp.do_ap` -- `Value.case_fn`
+- [lang3] `Value.readback` -- `Value.data`
+- [lang3] `Value.readback` -- `Value.case_fn`
 - [lang3] `Top.datatype`
 - [lang3] grammars -- `@data` & `@match`
 - [lang3] matchers -- `@data` & `@match`
