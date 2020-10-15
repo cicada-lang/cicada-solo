@@ -70,6 +70,7 @@ export function repr(exp: Exp.Exp): string {
       return `{ ${Exp.repr(left)} | ${Exp.repr(right)} }`
     }
     case "Exp.datatype": {
+      // TODO
       // return `@datatype {\n${ut.indent(s, "  ")}\n}`
       return `@datatype ${ut.inspect(exp)}`
     }
