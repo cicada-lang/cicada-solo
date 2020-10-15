@@ -27,8 +27,10 @@ export function run(
     if (task === undefined) return
 
     if (opts.task?.verbose) {
-      const header = Task.finished_p(task) ? "[resume from]:" : "   [stepping]:"
-      console.log(header, Task.repr(task))
+      console.log(
+        Task.finished_p(task) ? "[resume from]:" : "   [stepping]:",
+        Task.repr(task)
+      )
     }
 
     if (Task.finished_p(task)) {
