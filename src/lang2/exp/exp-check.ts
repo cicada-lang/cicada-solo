@@ -2,7 +2,7 @@ import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
-import * as Closure from "../closure"
+
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
@@ -12,12 +12,12 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
     if (exp.kind === "Exp.fn") {
       const pi = Value.is_pi(ctx, t)
       const arg = Value.not_yet(pi.arg_t, Neutral.v(exp.name))
-      const ret_t = Closure.apply(pi.ret_t_cl, arg)
+      const ret_t = Value.Closure.apply(pi.ret_t_cl, arg)
       Exp.check(Ctx.extend(ctx, exp.name, pi.arg_t), exp.ret, ret_t)
     } else if (exp.kind === "Exp.cons") {
       const sigma = Value.is_sigma(ctx, t)
       const car = Exp.evaluate(Ctx.to_env(ctx), exp.car)
-      const cdr_t = Closure.apply(sigma.cdr_t_cl, car)
+      const cdr_t = Value.Closure.apply(sigma.cdr_t_cl, car)
       Exp.check(ctx, exp.car, sigma.car_t)
       Exp.check(ctx, exp.cdr, cdr_t)
     } else if (exp.kind === "Exp.same") {

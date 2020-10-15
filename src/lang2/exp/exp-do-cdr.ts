@@ -1,7 +1,7 @@
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
-import * as Closure from "../closure"
+
 import * as Trace from "../../trace"
 
 export function do_cdr(target: Value.Value): Value.Value {
@@ -10,7 +10,7 @@ export function do_cdr(target: Value.Value): Value.Value {
   } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.sigma") {
       return Value.not_yet(
-        Closure.apply(target.t.cdr_t_cl, Exp.do_car(target)),
+        Value.Closure.apply(target.t.cdr_t_cl, Exp.do_car(target)),
         Neutral.cdr(target.neutral)
       )
     } else {

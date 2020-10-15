@@ -1,7 +1,7 @@
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
-import * as Closure from "../closure"
+
 import * as Env from "../env"
 import * as Trace from "../../trace"
 
@@ -18,11 +18,11 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       case "Exp.pi": {
         return Value.pi(
           Exp.evaluate(env, exp.arg_t),
-          Closure.create(env, exp.name, exp.ret_t)
+          Value.Closure.create(env, exp.name, exp.ret_t)
         )
       }
       case "Exp.fn": {
-        return Value.fn(Closure.create(env, exp.name, exp.ret))
+        return Value.fn(Value.Closure.create(env, exp.name, exp.ret))
       }
       case "Exp.ap": {
         return Exp.do_ap(evaluate(env, exp.target), evaluate(env, exp.arg))
@@ -30,7 +30,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       case "Exp.sigma": {
         return Value.sigma(
           Exp.evaluate(env, exp.car_t),
-          Closure.create(env, exp.name, exp.cdr_t)
+          Value.Closure.create(env, exp.name, exp.cdr_t)
         )
       }
       case "Exp.cons": {

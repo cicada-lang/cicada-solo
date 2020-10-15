@@ -1,7 +1,5 @@
 import * as Value from "../value"
-import * as Closure from "../closure"
 import * as Neutral from "../neutral"
-
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as ut from "../../ut"
@@ -25,7 +23,7 @@ export function readback(
       fresh_name,
       Value.readback(
         Ctx.extend(ctx, fresh_name, t.arg_t),
-        Closure.apply(t.ret_t_cl, variable),
+        Value.Closure.apply(t.ret_t_cl, variable),
         Exp.do_ap(value, variable)
       )
     )
@@ -38,7 +36,7 @@ export function readback(
     const cdr = Exp.do_cdr(value)
     return Exp.cons(
       Value.readback(ctx, t.car_t, car),
-      Value.readback(ctx, Closure.apply(t.cdr_t_cl, car), cdr)
+      Value.readback(ctx, Value.Closure.apply(t.cdr_t_cl, car), cdr)
     )
   } else if (t.kind === "Value.trivial") {
     // NOTE the η-rule for trivial states that
@@ -76,7 +74,7 @@ export function readback(
     const cdr_t = Value.readback(
       Ctx.extend(ctx, fresh_name, value.car_t),
       Value.type,
-      Closure.apply(value.cdr_t_cl, variable)
+      Value.Closure.apply(value.cdr_t_cl, variable)
     )
     return Exp.sigma(fresh_name, car_t, cdr_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.pi") {
@@ -86,7 +84,7 @@ export function readback(
     const ret_t = Value.readback(
       Ctx.extend(ctx, fresh_name, value.arg_t),
       Value.type,
-      Closure.apply(value.ret_t_cl, variable)
+      Value.Closure.apply(value.ret_t_cl, variable)
     )
     return Exp.pi(fresh_name, arg_t, ret_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.type") {

@@ -1,5 +1,5 @@
-import * as Exp from "../exp"
-import * as Env from "../env"
+import * as Exp from "../../exp"
+import * as Env from "../../env"
 
 export interface Closure {
   env: Env.Env

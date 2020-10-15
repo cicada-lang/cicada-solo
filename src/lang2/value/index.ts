@@ -1,3 +1,5 @@
+export * as Closure from "./closure"
+
 export * from "./value"
 export * from "./value-readback"
 export * from "./value-conversion"

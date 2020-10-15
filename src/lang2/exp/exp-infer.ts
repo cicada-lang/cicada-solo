@@ -2,7 +2,7 @@ import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
 
-import * as Closure from "../closure"
+
 import * as Env from "../env"
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
@@ -33,7 +33,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       const pi = Value.is_pi(ctx, target_t)
       Exp.check(ctx, exp.arg, pi.arg_t)
       const arg = Exp.evaluate(Ctx.to_env(ctx), exp.arg)
-      return Closure.apply(pi.ret_t_cl, arg)
+      return Value.Closure.apply(pi.ret_t_cl, arg)
     } else if (exp.kind === "Exp.car") {
       const target_t = Exp.infer(ctx, exp.target)
       const sigma = Value.is_sigma(ctx, target_t)
@@ -43,7 +43,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       const sigma = Value.is_sigma(ctx, target_t)
       const target = Exp.evaluate(Ctx.to_env(ctx), exp.target)
       const car = Exp.do_car(target)
-      return Closure.apply(sigma.cdr_t_cl, car)
+      return Value.Closure.apply(sigma.cdr_t_cl, car)
     } else if (exp.kind === "Exp.nat") {
       return Value.type
     } else if (exp.kind === "Exp.zero") {

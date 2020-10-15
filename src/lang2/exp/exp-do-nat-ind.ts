@@ -3,7 +3,7 @@ import * as Env from "../env"
 import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
-import * as Closure from "../closure"
+
 import * as Trace from "../../trace"
 
 export function do_nat_ind(
@@ -23,7 +23,7 @@ export function do_nat_ind(
     if (target.t.kind === "Value.nat") {
       const motive_t = Value.pi(
         Value.nat,
-        Closure.create(Env.init(), "k", Exp.type)
+        Value.Closure.create(Env.init(), "k", Exp.type)
       )
       const base_t = Exp.do_ap(motive, Value.zero)
       const step_t = Exp.nat_ind_step_t(motive)
