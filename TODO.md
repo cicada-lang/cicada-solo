@@ -33,7 +33,7 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `Exp.datatype` -- `infer`
+- [lang3] `Exp.datatype` -- `Exp.infer_ap`
 - [lang3] `Exp.datatype` -- `repr`
 - [lang3] `Exp.datatype` -- `alpha_equivalent`
 
