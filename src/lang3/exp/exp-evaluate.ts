@@ -76,7 +76,10 @@ export function evaluate(
           const [entry, ...tail] = exp.scope
           const name = entry.name
           const t = Exp.evaluate(mod, env, entry.t, opts)
-          return Value.cls(sat, Value.Telescope.create(mod, env, { name, t }, tail))
+          return Value.cls(
+            sat,
+            Value.Telescope.create(mod, env, { name, t }, tail)
+          )
         }
       }
       case "Exp.obj": {
@@ -136,9 +139,7 @@ export function evaluate(
         return Value.datatype(
           exp.name,
           Exp.evaluate(mod, env, exp.t, opts),
-          exp.sums,
-          mod,
-          env
+          Value.DelayedSums.create(exp.sums, mod, env)
         )
       }
       case "Exp.type": {

@@ -1,5 +1,6 @@
 export * as Closure from "./closure"
 export * as Telescope from "./telescope"
+export * as DelayedSums from "./delayed-sums"
 
 export * from "./value"
 export * from "./value-is"

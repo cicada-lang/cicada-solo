@@ -1,5 +1,6 @@
 import * as Closure from "./closure"
 import * as Telescope from "./telescope"
+import * as DelayedSums from "./delayed-sums"
 import * as Neutral from "../neutral"
 import * as Exp from "../exp"
 import * as Mod from "../mod"
@@ -131,25 +132,18 @@ export interface datatype {
   kind: "Value.datatype"
   name: string
   t: Value
-
-  sums: Array<{ tag: string; t: Exp.Exp }>
-  mod: Mod.Mod
-  env: Env.Env
+  delayed: DelayedSums.DelayedSums
 }
 
 export const datatype = (
   name: string,
   t: Value,
-  sums: Array<{ tag: string; t: Exp.Exp }>,
-  mod: Mod.Mod,
-  env: Env.Env
+  delayed: DelayedSums.DelayedSums
 ): datatype => ({
   kind: "Value.datatype",
   name,
   t,
-  sums,
-  mod,
-  env,
+  delayed,
 })
 
 export interface type {
