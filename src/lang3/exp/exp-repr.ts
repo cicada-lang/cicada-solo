@@ -69,6 +69,10 @@ export function repr(exp: Exp.Exp): string {
       const { left, right } = exp
       return `{ ${Exp.repr(left)} | ${Exp.repr(right)} }`
     }
+    case "Exp.datatype": {
+      // return `@datatype {\n${ut.indent(s, "  ")}\n}`
+      return `@datatype ${ut.inspect(exp)}`
+    }
     case "Exp.type": {
       return "Type"
     }

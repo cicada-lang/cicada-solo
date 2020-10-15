@@ -133,6 +133,10 @@ export function evaluate(
           Exp.evaluate(mod, env, right, opts)
         )
       }
+      case "Exp.datatype": {
+        throw new Error("TODO")
+        // return Value.datatype()
+      }
       case "Exp.type": {
         return Value.type
       }

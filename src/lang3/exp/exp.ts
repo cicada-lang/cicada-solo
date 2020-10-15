@@ -16,7 +16,7 @@ export type Exp =
   | str
   | quote
   | union
-  // | datatype
+  | datatype
   | type
   | begin
   | the
