@@ -131,6 +131,7 @@ export interface datatype {
   kind: "Value.datatype"
   name: string
   t: Value
+  
   sums: Array<{ tag: string; t: Exp.Exp }>
   mod: Mod.Mod
   env: Env.Env

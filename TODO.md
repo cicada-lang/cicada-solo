@@ -33,7 +33,14 @@
 
 > 实现 condition 的语义。
 
+- [lang3] `Closure` in `value/`
+- [lang2] `Closure` in `value/`
+
+- [lang2] `Telescope` in `value/`
+
 - [lang3] `Value.datatype` -- use `DelayedSums`
+
+- [lang3] hide `Exp.evaluate` in `Telescope`
 
 - [lang3] `Exp.datatype`
   - `infer`
