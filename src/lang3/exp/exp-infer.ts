@@ -9,7 +9,6 @@ import { infer_v } from "./exp-infer-v"
 import { infer_cls } from "./exp-infer-cls"
 import { infer_pi } from "./exp-infer-pi"
 import { infer_ap } from "./exp-infer-ap"
-import { infer_fill } from "./exp-infer-fill"
 import { infer_dot } from "./exp-infer-dot"
 import { infer_equal } from "./exp-infer-equal"
 import { infer_replace } from "./exp-infer-replace"
@@ -24,7 +23,6 @@ export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     if (exp.kind === "Exp.pi") return infer_pi(mod, ctx, exp)
     if (exp.kind === "Exp.ap") return infer_ap(mod, ctx, exp)
     if (exp.kind === "Exp.cls") return infer_cls(mod, ctx, exp)
-    if (exp.kind === "Exp.fill") return infer_fill(mod, ctx, exp)
     if (exp.kind === "Exp.obj" && exp.properties.size === 0) {
       return Value.cls(
         [],

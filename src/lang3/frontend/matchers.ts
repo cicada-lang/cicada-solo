@@ -21,13 +21,6 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     },
     "exp:cls": ({ sat, scope }) =>
       Exp.cls(sat_matcher(sat), scope_matcher(scope)),
-    "exp:fill": ({ target, args }) => {
-      let exp: Exp.Exp = Exp.v(pt.Tree.str(target))
-      for (const arg of pt.matchers.one_or_more_matcher(args)) {
-        exp = Exp.fill(exp, exp_matcher(arg))
-      }
-      return exp
-    },
     "exp:obj": ({ properties }) => Exp.obj(properties_matcher(properties)),
     "exp:field": ({ target, name }) =>
       Exp.dot(exp_matcher(target), pt.Tree.str(name)),

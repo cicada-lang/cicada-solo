@@ -1,5 +1,5 @@
 List : (Type) -> Type
-List = (T) => { Null[T] | Cons[T] }
+List = (T) => { Null(T) | Cons(T) }
 
 Null : Type
 Null = {

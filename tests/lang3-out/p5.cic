@@ -16,7 +16,7 @@ _1 = {
 
 @show _1
 
-_2 : Dup[String]
+_2 : Dup(String)
 _2 = {
   T = String
   x = "abc"
@@ -25,7 +25,7 @@ _2 = {
 
 @show _2
 
-_3 : Dup[String]["abc"]
+_3 : Dup(String)("abc")
 _3 = {
   T = String
   x = "abc"
@@ -34,7 +34,7 @@ _3 = {
 
 @show _3
 
-_4 : Dup[String]["abc"]["123"]
+_4 : Dup(String)("abc")("123")
 _4 = {
   T = String
   x = "abc"

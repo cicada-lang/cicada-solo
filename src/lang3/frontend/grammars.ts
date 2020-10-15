@@ -46,10 +46,6 @@ export const exp = {
     { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
   ],
   "exp:cls": ['"{"', { sat: "sat" }, { scope: "scope" }, '"}"'],
-  "exp:fill": [
-    { target: "identifier" },
-    { args: { $ap: ["one_or_more", '"["', "exp", '"]"'] } },
-  ],
   "exp:obj": ['"{"', { properties: "properties" }, '"}"'],
   "exp:field": [{ target: "exp" }, '"."', { name: "identifier" }],
   "exp:method": [

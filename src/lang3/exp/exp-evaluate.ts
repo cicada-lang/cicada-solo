@@ -80,13 +80,6 @@ export function evaluate(
           return Value.cls(sat, Telescope.create(mod, env, { name, t }, tail))
         }
       }
-      case "Exp.fill": {
-        const { target, arg } = exp
-        return Exp.do_fill(
-          Exp.evaluate(mod, env, target, opts),
-          Exp.evaluate(mod, env, arg, opts)
-        )
-      }
       case "Exp.obj": {
         const { properties } = exp
         return Value.obj(

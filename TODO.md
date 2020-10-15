@@ -33,7 +33,6 @@
 
 > 实现 condition 的语义。
 
-- [lang3] unify `Exp.fill` & `Exp.ap`
 - [lang3] `Exp.data` & `Value.data`
 - [lang3] `Exp.case_fn` & `Value.case_fn`
 - [lang3] `Top.datatype`

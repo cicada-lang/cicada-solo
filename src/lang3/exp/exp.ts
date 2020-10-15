@@ -6,7 +6,6 @@ export type Exp =
   | fn
   | ap
   | cls
-  | fill
   | obj
   | dot
   | equal
@@ -82,18 +81,6 @@ export const cls = (
   kind: "Exp.cls",
   sat,
   scope,
-})
-
-export interface fill {
-  kind: "Exp.fill"
-  target: Exp
-  arg: Exp
-}
-
-export const fill = (target: Exp, arg: Exp): fill => ({
-  kind: "Exp.fill",
-  target,
-  arg,
 })
 
 export interface obj {

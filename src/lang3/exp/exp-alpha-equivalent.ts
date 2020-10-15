@@ -77,11 +77,6 @@ function alpha(the: {
         return false
     }
     return true
-  } else if (left.kind === "Exp.fill" && right.kind === "Exp.fill") {
-    return (
-      alpha({ ...the, left: left.target, right: right.target }) &&
-      alpha({ ...the, left: left.arg, right: right.arg })
-    )
   } else if (left.kind === "Exp.obj" && right.kind === "Exp.obj") {
     if (left.properties.size !== right.properties.size) {
       return false

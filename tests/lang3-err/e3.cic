@@ -5,7 +5,7 @@ Dup = {
   y: T
 }
 
-_ : Dup[String]["abc"]
+_ : Dup(String)("abc")
 _ = {
   T = String
   x = "ab"
