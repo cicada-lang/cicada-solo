@@ -6,5 +6,10 @@ export function tasks_at(
   index: number
 ): IterableIterator<Task.Task> {
   const task_map = chart[index]
+
+  if (task_map === undefined) {
+    console.log(index, chart)
+  }
+
   return task_map.values()
 }

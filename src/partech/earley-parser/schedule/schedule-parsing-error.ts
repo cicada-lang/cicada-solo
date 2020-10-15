@@ -21,7 +21,7 @@ export function parsing_error(
       let s = ""
       s += "Found END_OF_TOKENS, "
       s += "while expecting:\n"
-      for (const task of TaskChart.tasks_at(schedule.chart, i - 1)) {
+      for (const task of TaskChart.tasks_at(schedule.chart, Math.max(0, i - 1))) {
         if (task_terminal_p(task)) {
           s += " "
           const { value } = task.parts[task.progress.length]
