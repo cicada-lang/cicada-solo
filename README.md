@@ -8,7 +8,7 @@ A nascent programming language as formal deduction system for the foundations of
 - **lang0**: Untyped lambda calculus.
 - **lang1**: Simply typed lambda calculus, Natural number, Primitve recursive combinator.
 - **lang2**: The Little Typer, Type in Type, No recursion.
-- **lang3**: Dependent type, Structural type, Fulfilling type, Type in Type, Arbitrary top-level recursion.
+- **lang3**: Dependent type, Nominal algebraic datatype, Structural record type, Fulfilling type, Type in Type, Arbitrary recursion.
 
 ## References
 

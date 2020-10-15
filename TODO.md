@@ -31,10 +31,16 @@
 
 # lang3
 
-> 以 TLT 为例子来测试 lang3 的能力。
-> - 能力有限因为没有 condition 的语义。
+> 实现 condition 的语义。
 
-- [lang3] `@data` & `@match`
+- [lang3] unify `Exp.fill` & `Exp.ap` syntax
+- [lang3] `Exp.data` & `Value.data`
+- [lang3] `Exp.case_fn` & `Value.case_fn`
+- [lang3] `Top.datatype`
+- [lang3] grammars -- `@data` & `@match`
+- [lang3] matchers -- `@data` & `@match`
+
+> 以 TLT 为例子来测试 lang3 的能力。
 
 > 更完整的 dependent + structural type 语言。
 
@@ -50,6 +56,7 @@
 > Be the most easy to use parsing tool for programming language prototyping.
 
 - [partech] extract conditions to function for `Schedule`
+- [partech] extract conditions to function `harvest_node`
 
 - [partech] use `Mod` to design module system
 
