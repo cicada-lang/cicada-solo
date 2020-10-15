@@ -1,5 +1,4 @@
 import * as Value from "../value"
-import * as Closure from "../closure"
 import * as Neutral from "../neutral"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
@@ -21,7 +20,7 @@ export function readback_type_pi(
     mod,
     Ctx.extend(ctx, fresh_name, pi.arg_t),
     Value.type,
-    Closure.apply(pi.ret_t_cl, variable)
+    Value.Closure.apply(pi.ret_t_cl, variable)
   )
   return Exp.pi(fresh_name, arg_t, ret_t)
 }

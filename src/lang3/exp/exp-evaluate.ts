@@ -2,7 +2,6 @@ import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
-import * as Closure from "../closure"
 import * as Telescope from "../telescope"
 import * as Mod from "../mod"
 import * as Env from "../env"
@@ -46,11 +45,11 @@ export function evaluate(
       case "Exp.pi": {
         return Value.pi(
           Exp.evaluate(mod, env, exp.arg_t, opts),
-          Closure.create(mod, env, exp.name, exp.ret_t)
+          Value.Closure.create(mod, env, exp.name, exp.ret_t)
         )
       }
       case "Exp.fn": {
-        return Value.fn(Closure.create(mod, env, exp.name, exp.ret))
+        return Value.fn(Value.Closure.create(mod, env, exp.name, exp.ret))
       }
       case "Exp.ap": {
         return Exp.do_ap(

@@ -1,6 +1,6 @@
-import * as Neutral from "../neutral"
-import * as Closure from "../closure"
+import * as Closure from "./closure"
 import * as Telescope from "../telescope"
+import * as Neutral from "../neutral"
 import * as Exp from "../exp"
 import * as Mod from "../mod"
 import * as Env from "../env"
@@ -131,7 +131,7 @@ export interface datatype {
   kind: "Value.datatype"
   name: string
   t: Value
-  
+
   sums: Array<{ tag: string; t: Exp.Exp }>
   mod: Mod.Mod
   env: Env.Env

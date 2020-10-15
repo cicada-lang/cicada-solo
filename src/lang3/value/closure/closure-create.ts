@@ -1,7 +1,7 @@
 import * as Closure from "../closure"
-import * as Exp from "../exp"
-import * as Mod from "../mod"
-import * as Env from "../env"
+import * as Exp from "../../exp"
+import * as Mod from "../../mod"
+import * as Env from "../../env"
 
 export function create(
   mod: Mod.Mod,
