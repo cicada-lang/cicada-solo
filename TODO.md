@@ -33,6 +33,10 @@
 
 > 实现 condition 的语义。
 
+- [lang3] the `t` of `entry` of `datatype.sums` need to be `Pattern`.
+  - we can infer the type of every (nested) pattern variables.
+  - we also need to use unification here.
+
 - [lang3] `Exp.datatype` -- `Exp.infer_ap`
 - [lang3] `Exp.datatype` -- `repr`
 - [lang3] `Exp.datatype` -- `alpha_equivalent`
@@ -42,8 +46,14 @@
 
 - [lang3] `Top.datatype`
 
-- [lang3] grammars -- `@datatype` & `@match`
-- [lang3] matchers -- `@datatype` & `@match`
+- [lang3] grammars -- `@datatype`
+- [lang3] matchers -- `@datatype`
+
+- [lang3] test `@datatype`
+
+- [lang3] be able to add type annotation to `Exp.fn`
+  - we will be able to infer such `fn`
+  - which might be needed by `@match`
 
 - [lang3] `Exp.data`
 - [lang3] `Exp.data` -- `evaluate`
@@ -65,6 +75,11 @@
 - [lang3] `Value.case_fn` -- `Exp.do_ap`
 - [lang3] `Value.case_fn` -- `readback`
 - [lang3] `Value.case_fn` -- `is_datatype`
+
+- [lang3] syntax for `Exp.case_fn`
+
+- [lang3] there might be `@match`
+  - which will be direct application of `Exp.case_fn`
 
 > 以 TLT 为例子来测试 lang3 的能力。
 
