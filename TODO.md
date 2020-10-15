@@ -33,7 +33,6 @@
 
 > 实现 condition 的语义。
 
-- [lang2] `Closure` as interface
 - [lang2] `Closure` in `value/`
 
 - [lang3] `Value.datatype` -- use `DelayedSums`

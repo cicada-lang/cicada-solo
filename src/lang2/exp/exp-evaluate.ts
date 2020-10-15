@@ -18,11 +18,11 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       case "Exp.pi": {
         return Value.pi(
           Exp.evaluate(env, exp.arg_t),
-          new Closure.Closure(env, exp.name, exp.ret_t)
+          Closure.create(env, exp.name, exp.ret_t)
         )
       }
       case "Exp.fn": {
-        return Value.fn(new Closure.Closure(env, exp.name, exp.ret))
+        return Value.fn(Closure.create(env, exp.name, exp.ret))
       }
       case "Exp.ap": {
         return Exp.do_ap(evaluate(env, exp.target), evaluate(env, exp.arg))
@@ -30,7 +30,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       case "Exp.sigma": {
         return Value.sigma(
           Exp.evaluate(env, exp.car_t),
-          new Closure.Closure(env, exp.name, exp.cdr_t)
+          Closure.create(env, exp.name, exp.cdr_t)
         )
       }
       case "Exp.cons": {

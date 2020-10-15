@@ -23,7 +23,7 @@ export function do_nat_ind(
     if (target.t.kind === "Value.nat") {
       const motive_t = Value.pi(
         Value.nat,
-        new Closure.Closure(Env.init(), "k", Exp.type)
+        Closure.create(Env.init(), "k", Exp.type)
       )
       const base_t = Exp.do_ap(motive, Value.zero)
       const step_t = Exp.nat_ind_step_t(motive)

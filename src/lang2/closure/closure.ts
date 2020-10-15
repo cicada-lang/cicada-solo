@@ -1,6 +1,8 @@
 import * as Exp from "../exp"
 import * as Env from "../env"
 
-export class Closure {
-  constructor(public env: Env.Env, public name: string, public ret: Exp.Exp) {}
+export interface Closure {
+  env: Env.Env
+  name: string
+  ret: Exp.Exp
 }

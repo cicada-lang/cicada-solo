@@ -16,7 +16,7 @@ export function do_replace(
   } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.equal") {
       const base_t = Exp.do_ap(motive, target.t.from)
-      const closure = new Closure.Closure(Env.init(), "x", Exp.type)
+      const closure = Closure.create(Env.init(), "x", Exp.type)
       const motive_t = Value.pi(target.t.t, closure)
       return Value.not_yet(
         Exp.do_ap(motive, target.t.to),
