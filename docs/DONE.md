@@ -10,19 +10,6 @@
 - 通过使用副作用的 Mod API 来实现。
 - 需要的时候可以 clone Mod。
 
-> 以 TLT 为例子来测试 lang3 的能力。
-
-- 能力有限因为没有 condition 的语义。
-
-> 更完整的 dependent + structural type 语言。
-
-- [lang3] `Value.subtype` -- structural cls
-- [lang3] `Value.subtype` -- function type
-
-> module system
-
-- [lang3] use `Mod` to design module system
-
 # partech -- 将嵌入在 js 中的设计 改为有自己 namespace 的设计
 
 - 完成：2020-10-02

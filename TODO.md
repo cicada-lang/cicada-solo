@@ -29,6 +29,22 @@
 - [lang4] design a normalization algorithm
   - 也比可以用 NbE，也许比一般的 NbE 更复杂。
 
+# lang3
+
+> 以 TLT 为例子来测试 lang3 的能力。
+> - 能力有限因为没有 condition 的语义。
+
+- [lang3] `@data` & `@match`
+
+> 更完整的 dependent + structural type 语言。
+
+- [lang3] `Value.subtype` -- structural cls
+- [lang3] `Value.subtype` -- function type
+
+> module system
+
+- [lang3] use `Mod` to design module system
+
 # partech
 
 > Be the most easy to use parsing tool for programming language prototyping.
