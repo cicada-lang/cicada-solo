@@ -1,6 +1,8 @@
 import * as Neutral from "../neutral"
 import * as Closure from "../closure"
 import * as Telescope from "../telescope"
+import * as Mod from "../mod"
+import * as Exp from "../exp"
 
 export type Value =
   | pi
@@ -13,6 +15,7 @@ export type Value =
   | str
   | quote
   | union
+  | datatype
   | type
   | not_yet
 
@@ -121,6 +124,27 @@ export const union = (left: Value, right: Value): union => ({
   kind: "Value.union",
   left,
   right,
+})
+
+export interface datatype {
+  kind: "Value.datatype"
+  name: string
+  t: Value
+  sums: Array<{ tag: string; t: Exp.Exp }>
+  mod: Mod.Mod
+}
+
+export const datatype = (
+  name: string,
+  t: Value,
+  sums: Array<{ tag: string; t: Exp.Exp }>,
+  mod: Mod.Mod
+): datatype => ({
+  kind: "Value.datatype",
+  name,
+  t,
+  sums,
+  mod,
 })
 
 export interface type {

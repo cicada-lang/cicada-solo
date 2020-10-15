@@ -33,7 +33,6 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `Value.datatype` -- `Argscope`
 - [lang3] `Exp.evaluate` -- `Exp.datatype`
 - [lang3] `Exp.infer` -- `Exp.datatype`
 
