@@ -55,9 +55,9 @@
 
 > Be the most easy to use parsing tool for programming language prototyping.
 
-- [partech] extract conditions to function for `Schedule`
-- [partech] extract conditions to function `harvest_node`
-
+- [partech] extract conditions to function `index_still_can_scan`
+- [partech] extract conditions to function `match_terminal`
+- [partech] improve `Schedule.run`
 - [partech] use `Mod` to design module system
 
 - handle `$import` in `Mod.build`

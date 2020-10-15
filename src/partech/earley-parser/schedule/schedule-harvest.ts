@@ -22,31 +22,47 @@ function harvest_node(
   end: number
 ): Tree.node {
   for (const task of TaskChart.tasks_at(schedule.chart, end)) {
-    if (
-      start === task.index &&
-      end === Task.progress_index(task) &&
-      task.progress.length === task.parts.length
-    ) {
-      if (Task.match_grammar_p(task, grammar)) {
-        const head = { name: grammar.name, kind: task.choice_name }
-        const choices = Value.DelayedChoices.force(grammar.delayed)
-        const parts = choices.get(task.choice_name)
-        if (parts === undefined) {
-          const span = span_from_tokens(schedule.tokens, start, end)
-          throw new ParsingError(
-            `Can not find choice: ${task.choice_name}\n` +
-              `grammar: ${ut.inspect(Value.present(grammar))}\n`,
-            { span }
-          )
-        }
-        const body = harvest_body(schedule, parts, task.progress, start)
-        const span = span_from_tokens(schedule.tokens, start, end)
-        return Tree.node(head, body, span)
-      }
+    if (task_ripe_p(task)) {
+      return Tree.node(
+        { name: grammar.name, kind: task.choice_name },
+        harvest_body(
+          schedule,
+          get_parts(grammar, task.choice_name),
+          task.progress,
+          start
+        ),
+        span_from_tokens(schedule.tokens, start, end)
+      )
     }
   }
 
   throw Schedule.parsing_error(schedule, grammar, start, end)
+
+  function task_ripe_p(task: Task.Task): boolean {
+    return (
+      start === task.index &&
+      end === Task.progress_index(task) &&
+      task.progress.length === task.parts.length &&
+      Task.match_grammar_p(task, grammar)
+    )
+  }
+
+  function get_parts(
+    grammar: Value.grammar,
+    choice_name: string
+  ): Array<{ name?: string; value: Value.Value }> {
+    const choices = Value.DelayedChoices.force(grammar.delayed)
+    const parts = choices.get(choice_name)
+    if (parts === undefined) {
+      const span = span_from_tokens(schedule.tokens, start, end)
+      throw new ParsingError(
+        `Can not find choice: ${choice_name}\n` +
+          `grammar: ${ut.inspect(Value.present(grammar))}\n`,
+        { span }
+      )
+    }
+    return parts
+  }
 }
 
 function harvest_body(

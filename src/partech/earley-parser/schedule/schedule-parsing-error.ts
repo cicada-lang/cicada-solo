@@ -93,14 +93,15 @@ function task_terminal_p(task: Task.Task): boolean {
 
 function index_still_can_scan(schedule: Schedule.Schedule, i: number): boolean {
   for (const task of TaskChart.tasks_at(schedule.chart, i)) {
-    const index = task.progress.length
-    if (index < task.parts.length) {
-      const { value } = task.parts[index]
-      if (Value.terminal_p(value)) {
-        const token = schedule.tokens[i]
-        if (Value.terminal_match(value, token)) {
-          return true
-        }
+    if (task.progress.length < task.parts.length) {
+      if (
+        Value.terminal_p(task.parts[task.progress.length].value) &&
+        Value.terminal_match(
+          task.parts[task.progress.length].value,
+          schedule.tokens[i]
+        )
+      ) {
+        return true
       }
     }
   }
