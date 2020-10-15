@@ -1,8 +1,9 @@
 import * as Neutral from "../neutral"
 import * as Closure from "../closure"
 import * as Telescope from "../telescope"
-import * as Mod from "../mod"
 import * as Exp from "../exp"
+import * as Mod from "../mod"
+import * as Env from "../env"
 
 export type Value =
   | pi
@@ -132,19 +133,22 @@ export interface datatype {
   t: Value
   sums: Array<{ tag: string; t: Exp.Exp }>
   mod: Mod.Mod
+  env: Env.Env
 }
 
 export const datatype = (
   name: string,
   t: Value,
   sums: Array<{ tag: string; t: Exp.Exp }>,
-  mod: Mod.Mod
+  mod: Mod.Mod,
+  env: Env.Env
 ): datatype => ({
   kind: "Value.datatype",
   name,
   t,
   sums,
   mod,
+  env,
 })
 
 export interface type {
