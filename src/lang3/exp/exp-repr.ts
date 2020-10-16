@@ -70,9 +70,8 @@ export function repr(exp: Exp.Exp): string {
       return `{ ${Exp.repr(left)} | ${Exp.repr(right)} }`
     }
     case "Exp.datatype": {
-      // TODO
-      // return `@datatype {\n${ut.indent(s, "  ")}\n}`
-      return `@datatype ${ut.inspect(exp)}`
+      const s = exp.sums.map((sum) => `${sum.tag} : ${Exp.repr(sum.t)}` ).join("\n")
+      return `@datatype ${exp.name} : ${Exp.repr(exp.t)} {\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.type": {
       return "Type"

@@ -33,8 +33,6 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `Exp.datatype` -- `repr`
-
 - [lang3] `Value.datatype` -- `readback`
 
 - [lang3] `Top.datatype`
