@@ -33,7 +33,9 @@
 
 > 实现 condition 的语义。
 
-- [lang3] test `@datatype` -- `List` -- debug `@show`
+- [lang3] `Datatype`
+
+- [lang3] be able to apply `Value.type_constructor` to get `Datatype`
 
 - [lang3] test `@datatype` -- `Vec`
 
