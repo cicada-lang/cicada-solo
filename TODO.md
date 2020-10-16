@@ -33,12 +33,11 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `Top.run` -- `Top.datatype`
-
 - [lang3] grammars -- `@datatype`
 - [lang3] matchers -- `@datatype`
 
-- [lang3] test `@datatype`
+- [lang3] test `@datatype` -- `List`
+- [lang3] test `@datatype` -- `Vec`
 
 - [lang3] [draft] checking about `Pattern` in the `arg` of `fn`
 
