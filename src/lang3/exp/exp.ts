@@ -196,19 +196,13 @@ export interface datatype {
   kind: "Exp.datatype"
   name: string
   t: Exp
-  sums: Array<{
-    tag: string
-    t: Exp
-  }>
+  sums: Array<{ tag: string; t: Exp }>
 }
 
 export const datatype = (
   name: string,
   t: Exp,
-  sums: Array<{
-    tag: string
-    t: Exp
-  }>
+  sums: Array<{ tag: string; t: Exp }>
 ): datatype => ({
   kind: "Exp.datatype",
   name,
