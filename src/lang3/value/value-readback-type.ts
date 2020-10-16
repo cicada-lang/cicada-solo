@@ -7,7 +7,6 @@ import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { readback_type_cls } from "./value-readback-type-cls"
 import { readback_type_pi } from "./value-readback-type-pi"
-import { readback_type_datatype } from "./value-readback-type-datatype"
 
 export function readback_type(
   mod: Mod.Mod,
@@ -30,8 +29,6 @@ export function readback_type(
       Value.readback(mod, ctx, Value.type, value.left),
       Value.readback(mod, ctx, Value.type, value.right)
     )
-  if (value.kind === "Value.datatype")
-    return readback_type_datatype(mod, ctx, value)
   if (value.kind === "Value.type") return Exp.type
   if (value.kind === "Value.not_yet")
     // NOTE t and value.t are ignored here,

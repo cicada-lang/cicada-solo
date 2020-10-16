@@ -17,7 +17,7 @@ export type Value =
   | str
   | quote
   | union
-  | datatype
+  | type_constructor
   | type
   | not_yet
 
@@ -128,19 +128,19 @@ export const union = (left: Value, right: Value): union => ({
   right,
 })
 
-export interface datatype {
-  kind: "Value.datatype"
+export interface type_constructor {
+  kind: "Value.type_constructor"
   name: string
   t: Value
   delayed: DelayedSums.DelayedSums
 }
 
-export const datatype = (
+export const type_constructor = (
   name: string,
   t: Value,
   delayed: DelayedSums.DelayedSums
-): datatype => ({
-  kind: "Value.datatype",
+): type_constructor => ({
+  kind: "Value.type_constructor",
   name,
   t,
   delayed,

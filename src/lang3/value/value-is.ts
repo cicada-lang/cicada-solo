@@ -39,8 +39,8 @@ export function is_datatype(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   value: Value.Value
-): Value.datatype {
-  if (value.kind === "Value.datatype") {
+): Value.type_constructor {
+  if (value.kind === "Value.type_constructor") {
     return value
   } else {
     throw new Trace.Trace(

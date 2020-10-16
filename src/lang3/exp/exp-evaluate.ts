@@ -134,7 +134,7 @@ export function evaluate(
         )
       }
       case "Exp.type_constructor": {
-        return Value.datatype(
+        return Value.type_constructor(
           exp.name,
           Exp.evaluate(mod, env, exp.t, opts),
           Value.DelayedSums.create(exp.sums, mod, env)
