@@ -33,7 +33,8 @@
 
 > 实现 condition 的语义。
 
-- [lang3] test `@datatype` -- `List`
+- [lang3] test `@datatype` -- `List` -- debug `@show`
+
 - [lang3] test `@datatype` -- `Vec`
 
 - [lang3] [draft] checking about `Pattern` in the `arg` of `fn`

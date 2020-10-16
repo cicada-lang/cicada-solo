@@ -135,8 +135,11 @@ export const top = {
     '"@"',
     '"datatype"',
     { name: "identifier" },
+    '":"',
     { t: "exp" },
+    '"{"',
     { sums: "sums" },
+    '"}"',
   ],
 }
 
