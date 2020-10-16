@@ -18,7 +18,7 @@ function define(mod: Mod.Mod, tops: Array<Top.Top>): void {
     }
     if (top.kind === "Top.type_constructor") {
       Mod.update(mod, top.type_constructor.name, {
-        den: Mod.Den.datatype(top.type_constructor),
+        den: Mod.Den.type_constructor(top.type_constructor),
       })
     }
   }

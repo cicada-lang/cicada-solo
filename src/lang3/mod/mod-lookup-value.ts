@@ -14,8 +14,8 @@ export function lookup_value(
     case "Mod.Den.def": {
       return Exp.evaluate(mod, Env.init(), entry.den.exp)
     }
-    case "Mod.Den.datatype": {
-      return Exp.evaluate(mod, Env.init(), entry.den.datatype)
+    case "Mod.Den.type_constructor": {
+      return Exp.evaluate(mod, Env.init(), entry.den.type_constructor)
     }
   }
 }

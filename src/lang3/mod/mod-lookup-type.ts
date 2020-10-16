@@ -16,8 +16,8 @@ export function lookup_type(
         return Exp.infer(mod, Ctx.init(), entry.den.exp)
       return Exp.evaluate(mod, Env.init(), entry.den.t)
     }
-    case "Mod.Den.datatype": {
-      return Exp.evaluate(mod, Env.init(), entry.den.datatype.t)
+    case "Mod.Den.type_constructor": {
+      return Exp.evaluate(mod, Env.init(), entry.den.type_constructor.t)
     }
   }
 }

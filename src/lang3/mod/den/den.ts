@@ -1,7 +1,7 @@
 import * as Exp from "../../exp"
 import * as Value from "../../value"
 
-export type Den = def | datatype
+export type Den = def | type_constructor
 
 export interface def {
   kind: "Mod.Den.def"
@@ -21,12 +21,14 @@ export const def = (
   cached_value,
 })
 
-export interface datatype {
-  kind: "Mod.Den.datatype"
-  datatype: Exp.type_constructor
+export interface type_constructor {
+  kind: "Mod.Den.type_constructor"
+  type_constructor: Exp.type_constructor
 }
 
-export const datatype = (datatype: Exp.type_constructor): datatype => ({
-  kind: "Mod.Den.datatype",
-  datatype,
+export const type_constructor = (
+  type_constructor: Exp.type_constructor
+): type_constructor => ({
+  kind: "Mod.Den.type_constructor",
+  type_constructor,
 })
