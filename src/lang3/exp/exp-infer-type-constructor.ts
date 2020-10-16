@@ -4,16 +4,16 @@ import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
 
-export function infer_datatype(
+export function infer_type_constructor(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   datatype: Exp.type_constructor
-): Value.type {
+): Value.Value {
   check_type_constructor_t(mod, ctx, datatype.t)
   for (const entry of datatype.sums) {
     check_data_constructor_t(mod, ctx, entry.t, datatype.name)
   }
-  return Value.type
+  return Exp.evaluate(mod, Ctx.to_env(ctx), datatype.t)
 }
 
 function check_data_constructor_t(

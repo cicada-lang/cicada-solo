@@ -3,4 +3,4 @@
   cons: (T: Type) -> (head: T) -> (tail: List(T)) -> List(T)
 }
 
-@show List
+// @show List

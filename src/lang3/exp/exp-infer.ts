@@ -13,7 +13,7 @@ import { infer_equal } from "./exp-infer-equal"
 import { infer_replace } from "./exp-infer-replace"
 import { infer_absurd_ind } from "./exp-infer-absurd-ind"
 import { infer_union } from "./exp-infer-union"
-import { infer_datatype } from "./exp-infer-datatype"
+import { infer_type_constructor } from "./exp-infer-type-constructor"
 import { infer_begin } from "./exp-infer-begin"
 import { infer_the } from "./exp-infer-the"
 
@@ -36,7 +36,8 @@ export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     if (exp.kind === "Exp.str") return Value.type
     if (exp.kind === "Exp.quote") return Value.quote(exp.str)
     if (exp.kind === "Exp.union") return infer_union(mod, ctx, exp)
-    if (exp.kind === "Exp.type_constructor") return infer_datatype(mod, ctx, exp)
+    if (exp.kind === "Exp.type_constructor")
+      return infer_type_constructor(mod, ctx, exp)
     if (exp.kind === "Exp.type") return Value.type
     if (exp.kind === "Exp.begin") return infer_begin(mod, ctx, exp)
     if (exp.kind === "Exp.the") return infer_the(mod, ctx, exp)

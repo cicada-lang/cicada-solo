@@ -34,7 +34,7 @@ function check(mod: Mod.Mod, tops: Array<Top.Top>): void {
     if (top.kind === "Top.datatype") {
       const t = Mod.lookup_type(mod, top.datatype.name) as Value.Value
       const ctx = Ctx.extend(Ctx.init(), top.datatype.name, t)
-      Exp.check(mod, ctx, top.datatype, Value.type)
+      Exp.infer(mod, ctx, top.datatype)
     }
   }
 }
