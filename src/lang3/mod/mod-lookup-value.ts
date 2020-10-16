@@ -9,7 +9,13 @@ export function lookup_value(
 ): undefined | Value.Value {
   const entry = Mod.lookup_entry(mod, name)
   if (entry === undefined) return undefined
-  if (entry.value_cache !== undefined) return entry.value_cache
-  // NOTE maybe use try and Trace
-  return Exp.evaluate(mod, Env.init(), entry.exp)
+  if (entry.cached_value !== undefined) return entry.cached_value
+  switch (entry.den.kind) {
+    case "Mod.Den.def": {
+      return Exp.evaluate(mod, Env.init(), entry.den.exp)
+    }
+    case "Mod.Den.datatype": {
+      return Exp.evaluate(mod, Env.init(), entry.den.datatype)
+    }
+  }
 }

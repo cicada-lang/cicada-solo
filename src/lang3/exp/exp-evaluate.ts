@@ -25,22 +25,18 @@ export function evaluate(
         const value = Env.lookup(env, exp.name)
         if (value !== undefined) return value
         const mod_value = Mod.lookup_value(mod, exp.name)
-        if (mod_value !== undefined) {
-          if (opts.shadow_mod_value_p) {
-            const entry = Mod.lookup_entry(mod, exp.name)
-            if (entry === undefined) throw new Error("IMPOSSIBLE")
-            const t = Mod.lookup_type(mod, exp.name)
-            if (t === undefined) throw new Error("IMPOSSIBLE")
-            if (entry.t !== undefined) {
-              Mod.update(mod, exp.name, {
-                ...entry,
-                value_cache: Value.not_yet(t, Neutral.v(exp.name)),
-              })
-            }
-          }
-          return mod_value
+        if (mod_value === undefined)
+          throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
+        if (opts.shadow_mod_value_p) {
+          // TODO we SHOULD NOT do this for non recursive Den
+          const entry = Mod.lookup_entry(mod, exp.name) as Mod.Entry
+          const t = Mod.lookup_type(mod, exp.name) as Value.Value
+          Mod.update(mod, exp.name, {
+            ...entry,
+            cached_value: Value.not_yet(t, Neutral.v(exp.name)),
+          })
         }
-        throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
+        return mod_value
       }
       case "Exp.pi": {
         return Value.pi(

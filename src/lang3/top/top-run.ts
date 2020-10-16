@@ -15,7 +15,7 @@ function define(mod: Mod.Mod, tops: Array<Top.Top>): void {
   for (const top of tops) {
     switch (top.kind) {
       case "Top.def": {
-        Mod.update(mod, top.name, { t: top.t, exp: top.exp })
+        Mod.update(mod, top.name, { den: Mod.Den.def(top.exp, top.t) })
       }
     }
   }

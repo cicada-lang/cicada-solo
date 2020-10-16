@@ -33,7 +33,8 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `Mod` use `Den`
+- [lang3] `mode: "shadow mod value"` instead of `opts.shadow_mod_value_p`
+
 - [lang3] `Top.run` -- `Top.datatype`
 
 - [lang3] grammars -- `@datatype`
@@ -97,6 +98,10 @@
 - [lang3] [note] `Exp.datatype` -- `Exp.infer_ap`
   - as `ap`, `lookup_type` a name denoting datatype
     will give us the `datatype.t`
+
+> Improve the readback of recursive expression.
+
+- [lang3] We SHOULD NOT `shadow mod value` for non recursive `Den`
 
 > 以 TLT 为例子来测试 lang3 的能力。
 

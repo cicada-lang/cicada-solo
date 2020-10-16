@@ -1,10 +1,10 @@
+import * as Den from "./den"
 import * as Exp from "../exp"
 import * as Value from "../value"
 
 export interface Entry {
-  t?: Exp.Exp
-  exp: Exp.Exp
-  value_cache?: Value.Value
+  den: Den.Den
+  cached_value?: Value.Value
 }
 
 export interface Mod {

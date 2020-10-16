@@ -4,13 +4,29 @@ import * as Value from "../../value"
 export type Den = def | datatype
 
 export interface def {
-  kind: "Den.def"
-  t?: Exp.Exp
+  kind: "Mod.Den.def"
   exp: Exp.Exp
-  value_cache?: Value.Value
+  t?: Exp.Exp
+  cached_value?: Value.Value
 }
 
+export const def = (
+  exp: Exp.Exp,
+  t?: Exp.Exp,
+  cached_value?: Value.Value
+): def => ({
+  kind: "Mod.Den.def",
+  exp,
+  t,
+  cached_value,
+})
+
 export interface datatype {
-  kind: "Den.datatype"
+  kind: "Mod.Den.datatype"
   datatype: Exp.datatype
 }
+
+export const datatype = (datatype: Exp.datatype): datatype => ({
+  kind: "Mod.Den.datatype",
+  datatype,
+})
