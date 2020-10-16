@@ -33,7 +33,23 @@
 
 > 实现 condition 的语义。
 
+- [lang3] `Exp.datatype` -- `repr`
+- [lang3] `Exp.datatype` -- `alpha_equivalent`
+
+- [lang3] `Value.datatype` -- `readback`
+- [lang3] `Value.datatype` -- `is_datatype`
+
+- [lang3] `Top.datatype`
+
+- [lang3] grammars -- `@datatype`
+- [lang3] matchers -- `@datatype`
+
+- [lang3] test `@datatype`
+
 - [lang3] [draft] checking about `Pattern` in the `arg` of `fn`
+
+- [lang3] `Pattern` in the `arg` of `fn`
+
 - [lang3] [draft] checking about `Pattern` in the `arg_t` and `ret_t` of `pi`
 
 - [lang3] `Pattern`
@@ -49,25 +65,13 @@
       and when `force` a `Delayed`,
       we need to consistently generate pattern variables.
 
+- [lang3] move `env` and `ctx` to `the`
+
 - [lang3] be able to add type annotation to `Exp.fn`
   - we will be able to infer such `fn`
   - which might be needed by `@match`
 
 - [lang2] be able to add type annotation to `Exp.fn`
-
-- [lang3] `Exp.datatype` -- `Exp.infer_ap`
-- [lang3] `Exp.datatype` -- `repr`
-- [lang3] `Exp.datatype` -- `alpha_equivalent`
-
-- [lang3] `Value.datatype` -- `readback`
-- [lang3] `Value.datatype` -- `is_datatype`
-
-- [lang3] `Top.datatype`
-
-- [lang3] grammars -- `@datatype`
-- [lang3] matchers -- `@datatype`
-
-- [lang3] test `@datatype`
 
 - [lang3] `Exp.data`
 - [lang3] `Exp.data` -- `evaluate`
@@ -94,6 +98,10 @@
 
 - [lang3] there might be `@match`
   - which will be direct application of `Exp.case_fn`
+
+- [lang3] [note] `Exp.datatype` -- `Exp.infer_ap`
+  - as `ap`, `lookup_type` a name denoting datatype
+    will give get the `datatype.t`
 
 > 以 TLT 为例子来测试 lang3 的能力。
 
