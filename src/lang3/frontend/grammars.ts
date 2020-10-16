@@ -131,6 +131,21 @@ export const top = {
     { exp: "exp" },
   ],
   "top:show": ['"@"', '"show"', { exp: "exp" }],
+  "top:datatype": [
+    '"@"',
+    '"datatype"',
+    { name: "identifier" },
+    { t: "exp" },
+    { sums: "sums" },
+  ],
+}
+
+export const sums = {
+  "sums:sums": [{ sums: { $ap: ["zero_or_more", "sum_entry"] } }],
+}
+
+export const sum_entry = {
+  "sum_entry:sum_entry": [{ tag: "identifier" }, '":"', { t: "exp" }],
 }
 
 export const stmts = {
