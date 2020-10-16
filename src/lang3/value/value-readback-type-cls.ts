@@ -52,7 +52,7 @@ function readback_scope(
     const name = entry.name
     const mod = Mod.clone(tel.mod)
     const t_value = Exp.evaluate(mod, env, entry.t, {
-      shadow_mod_value_p: true,
+      mode: Exp.EvaluationMode.mute_recursive_exp_in_mod,
     })
     const t = Value.readback(mod, ctx, Value.type, t_value)
     norm_scope.push({ name, t })

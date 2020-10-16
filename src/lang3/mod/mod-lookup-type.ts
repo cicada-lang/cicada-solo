@@ -12,7 +12,8 @@ export function lookup_type(
   if (entry === undefined) return undefined
   switch (entry.den.kind) {
     case "Mod.Den.def": {
-      if (entry.den.t === undefined) return Exp.infer(mod, Ctx.init(), entry.den.exp)
+      if (entry.den.t === undefined)
+        return Exp.infer(mod, Ctx.init(), entry.den.exp)
       return Exp.evaluate(mod, Env.init(), entry.den.t)
     }
     case "Mod.Den.datatype": {

@@ -8,16 +8,18 @@ import * as Env from "../env"
 import * as Trace from "../../trace"
 
 export interface EvaluationOpts {
-  shadow_mod_value_p?: boolean
+  mode?: EvaluationMode
+}
+
+export enum EvaluationMode {
+  mute_recursive_exp_in_mod = "mute_recursive_exp_in_mod",
 }
 
 export function evaluate(
   mod: Mod.Mod,
   env: Env.Env,
   exp: Exp.Exp,
-  opts: EvaluationOpts = {
-    shadow_mod_value_p: false,
-  }
+  opts: EvaluationOpts = {}
 ): Value.Value {
   try {
     switch (exp.kind) {
@@ -27,8 +29,8 @@ export function evaluate(
         const mod_value = Mod.lookup_value(mod, exp.name)
         if (mod_value === undefined)
           throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
-        if (opts.shadow_mod_value_p) {
-          // TODO we SHOULD NOT do this for non recursive Den
+        if (opts.mode === EvaluationMode.mute_recursive_exp_in_mod) {
+          // TODO We SHOULD NOT do this for non recursive `Den`.
           const entry = Mod.lookup_entry(mod, exp.name) as Mod.Entry
           const t = Mod.lookup_type(mod, exp.name) as Value.Value
           Mod.update(mod, exp.name, {

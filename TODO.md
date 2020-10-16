@@ -33,8 +33,6 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `mode: "shadow mod value"` instead of `opts.shadow_mod_value_p`
-
 - [lang3] `Top.run` -- `Top.datatype`
 
 - [lang3] grammars -- `@datatype`
