@@ -133,6 +133,9 @@ function alpha(the: {
         )
       )
     )
+  } else if (left.kind === "Exp.datatype" && right.kind === "Exp.datatype") {
+    // NOTE datatype can only be at top level.
+    return left.name === right.name
   } else if (left.kind === "Exp.type" && right.kind === "Exp.type") {
     return true
   } else if (
