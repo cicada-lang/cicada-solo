@@ -69,7 +69,7 @@ export function repr(exp: Exp.Exp): string {
       const { left, right } = exp
       return `{ ${Exp.repr(left)} | ${Exp.repr(right)} }`
     }
-    case "Exp.datatype": {
+    case "Exp.type_constructor": {
       const s = exp.sums
         .map((sum) => `${sum.tag} : ${Exp.repr(sum.t)}`)
         .join("\n")

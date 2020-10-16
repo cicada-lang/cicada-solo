@@ -33,6 +33,10 @@
 
 > 实现 condition 的语义。
 
+- `Value.type_constructor` instead of `Value.datatype`
+- `Top.type_constructor` instead of `Top.datatype`
+- `Den.type_constructor` instead of `Den.datatype`
+
 - [lang3] test `@datatype` -- `List` -- debug `@show`
 
 - [lang3] test `@datatype` -- `Vec`

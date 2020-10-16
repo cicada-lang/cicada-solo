@@ -133,7 +133,7 @@ export function evaluate(
           Exp.evaluate(mod, env, right, opts)
         )
       }
-      case "Exp.datatype": {
+      case "Exp.type_constructor": {
         return Value.datatype(
           exp.name,
           Exp.evaluate(mod, env, exp.t, opts),

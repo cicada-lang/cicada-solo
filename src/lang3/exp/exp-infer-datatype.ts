@@ -7,7 +7,7 @@ import * as Trace from "../../trace"
 export function infer_datatype(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
-  datatype: Exp.datatype
+  datatype: Exp.type_constructor
 ): Value.type {
   check_type_constructor_t(mod, ctx, datatype.t)
   for (const entry of datatype.sums) {

@@ -16,7 +16,7 @@ export type Exp =
   | str
   | quote
   | union
-  | datatype
+  | type_constructor
   | type
   | begin
   | the
@@ -192,19 +192,19 @@ export const union = (left: Exp, right: Exp): union => ({
   right,
 })
 
-export interface datatype {
-  kind: "Exp.datatype"
+export interface type_constructor {
+  kind: "Exp.type_constructor"
   name: string
   t: Exp
   sums: Array<{ tag: string; t: Exp }>
 }
 
-export const datatype = (
+export const type_constructor = (
   name: string,
   t: Exp,
   sums: Array<{ tag: string; t: Exp }>
-): datatype => ({
-  kind: "Exp.datatype",
+): type_constructor => ({
+  kind: "Exp.type_constructor",
   name,
   t,
   sums,

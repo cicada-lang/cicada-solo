@@ -121,7 +121,7 @@ export function top_matcher(tree: pt.Tree.Tree): Top.Top {
     "top:show": ({ exp }) => Top.show(exp_matcher(exp)),
     "top:datatype": ({ name, t, sums }) =>
       Top.datatype(
-        Exp.datatype(pt.Tree.str(name), exp_matcher(t), sums_matcher(sums))
+        Exp.type_constructor(pt.Tree.str(name), exp_matcher(t), sums_matcher(sums))
       ),
   })(tree)
 }

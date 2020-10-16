@@ -23,10 +23,10 @@ export const def = (
 
 export interface datatype {
   kind: "Mod.Den.datatype"
-  datatype: Exp.datatype
+  datatype: Exp.type_constructor
 }
 
-export const datatype = (datatype: Exp.datatype): datatype => ({
+export const datatype = (datatype: Exp.type_constructor): datatype => ({
   kind: "Mod.Den.datatype",
   datatype,
 })

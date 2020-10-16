@@ -10,7 +10,7 @@ export function readback_type_datatype(
   ctx: Ctx.Ctx,
   datatype: Value.datatype
 ): Exp.Exp {
-  return Exp.datatype(
+  return Exp.type_constructor(
     datatype.name,
     Value.readback(mod, ctx, Value.type, datatype.t),
     readback_delayed_sums(mod, ctx, datatype.delayed)
