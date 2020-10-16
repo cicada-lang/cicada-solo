@@ -1,6 +1,6 @@
 import * as Exp from "../exp"
 
-export type Top = def | show
+export type Top = def | datatype | show
 
 interface def {
   kind: "Top.def"
@@ -18,6 +18,16 @@ export const def = (
   name,
   t,
   exp,
+})
+
+interface datatype {
+  kind: "Top.datatype"
+  datatype: Exp.datatype
+}
+
+export const datatype = (datatype: Exp.datatype): datatype => ({
+  kind: "Top.datatype",
+  datatype,
 })
 
 interface show {
