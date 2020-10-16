@@ -37,6 +37,22 @@
   - we can infer the type of every (nested) pattern variables.
   - we also need to use unification here.
 
+- [lang3] [draft] checking about `Pattern`
+
+- [lang3] `Pattern`
+  - the `arg_t` and `ret_t` of `pi` can be `Pattern`
+  - the `arg` of `fn` can be `Pattern`
+  - name in argument position that not in `Mod`
+    will be viewed as pattern variable.
+  - we can use `ctx` and `Value.not_yet`
+    to handle pattern variable during type check.
+  - we can use a special mode of evaluate to view `Exp` as pattern,
+    instead of define new type `Pattern`.
+
+- [lang3] be able to add type annotation to `Exp.fn`
+  - we will be able to infer such `fn`
+  - which might be needed by `@match`
+
 - [lang3] `Exp.datatype` -- `Exp.infer_ap`
 - [lang3] `Exp.datatype` -- `repr`
 - [lang3] `Exp.datatype` -- `alpha_equivalent`
@@ -50,10 +66,6 @@
 - [lang3] matchers -- `@datatype`
 
 - [lang3] test `@datatype`
-
-- [lang3] be able to add type annotation to `Exp.fn`
-  - we will be able to infer such `fn`
-  - which might be needed by `@match`
 
 - [lang3] `Exp.data`
 - [lang3] `Exp.data` -- `evaluate`
