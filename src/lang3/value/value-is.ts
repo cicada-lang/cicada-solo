@@ -35,6 +35,22 @@ export function is_cls(
   }
 }
 
+export function is_datatype(
+  mod: Mod.Mod,
+  ctx: Ctx.Ctx,
+  value: Value.Value
+): Value.datatype {
+  if (value.kind === "Value.datatype") {
+    return value
+  } else {
+    throw new Trace.Trace(
+      Value.unexpected(mod, ctx, value, {
+        message: `I am expecting the type datatype.`,
+      })
+    )
+  }
+}
+
 export function is_equal(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,

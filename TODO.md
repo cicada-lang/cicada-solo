@@ -37,7 +37,6 @@
 - [lang3] `Exp.datatype` -- `alpha_equivalent`
 
 - [lang3] `Value.datatype` -- `readback`
-- [lang3] `Value.datatype` -- `is_datatype`
 
 - [lang3] `Top.datatype`
 
