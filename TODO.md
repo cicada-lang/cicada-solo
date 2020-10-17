@@ -33,7 +33,7 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `do_ap` -- `ap_type_constructor` -- to get `Value.datatype`
+- [lang3] `Exp.do_ap` -- `ap_datatype` -- to get `Value.datatype`
 
 - [lang3] test `@datatype` -- `Vec`
 

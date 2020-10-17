@@ -15,11 +15,12 @@ export function readback_datatype(
   if (!Value.conversion(mod, ctx, Value.type, t, datatype.t))
     throw new Trace.Trace("t is not equivalent to datatype.t")
 
-  let exp: Exp.Exp = Exp.v(datatype.name)
+  let exp: Exp.Exp = Exp.v(datatype.type_constructor.name)
+  let remain_t = datatype.type_constructor.t
   for (const arg of datatype.args) {
-    const pi = Value.is_pi(mod, ctx, t)
+    const pi = Value.is_pi(mod, ctx, remain_t)
     exp = Exp.ap(exp, Value.readback(mod, ctx, pi.arg_t, arg))
-    t = Value.Closure.apply(pi.ret_t_cl, arg)
+    remain_t = Value.Closure.apply(pi.ret_t_cl, arg)
   }
 
   return exp

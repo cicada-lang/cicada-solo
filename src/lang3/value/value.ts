@@ -149,18 +149,18 @@ export const type_constructor = (
 
 export interface datatype {
   kind: "Value.datatype"
-  name: string
+  type_constructor: type_constructor
   args: Array<Value>
   t: Value
 }
 
 export const datatype = (
-  name: string,
+  type_constructor: type_constructor,
   args: Array<Value>,
   t: Value
 ): datatype => ({
   kind: "Value.datatype",
-  name,
+  type_constructor,
   args,
   t,
 })
