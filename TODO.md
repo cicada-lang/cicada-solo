@@ -33,7 +33,15 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `Datatype`
+- [lang3] `Exp.datatype`
+- [lang3] `Exp.datatype` -- `evaluate`
+- [lang3] `Exp.datatype` -- `infer`
+- [lang3] `Exp.datatype` -- `repr`
+- [lang3] `Exp.datatype` -- `alpha_equivalent`
+
+- [lang3] `Value.datatype`
+- [lang3] `Value.datatype` -- `readback`
+- [lang3] `Value.datatype` -- `is_datatype`
 
 - [lang3] be able to apply `Value.type_constructor` to get `Datatype`
 
@@ -74,7 +82,6 @@
 
 - [lang3] `Value.data`
 - [lang3] `Value.data` -- `readback`
-- [lang3] `Value.data` -- `is_datatype`
 
 - [lang3] `Exp.case_fn`
 - [lang3] `Exp.case_fn` -- `evaluate`
