@@ -9,6 +9,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   if (target.kind === "Value.cls") return ap_cls(target, arg)
   if (target.kind === "Value.type_constructor")
     return ap_type_constructor(target, arg)
+  if (target.kind === "Value.datatype") return ap_datatype(target, arg)
   if (target.kind === "Value.not_yet") return ap_not_yet(target, arg)
 
   throw new Trace.Trace(
@@ -44,6 +45,23 @@ function ap_type_constructor(
     const pi = type_constructor.t
     const remain_t = Value.Closure.apply(pi.ret_t_cl, arg)
     return Value.datatype(type_constructor, [arg], remain_t)
+  }
+
+  throw new Trace.Trace("expecting type_constructor.t to be Value.pi")
+}
+
+function ap_datatype(
+  datatype: Value.datatype,
+  arg: Value.Value
+): Value.datatype {
+  if (datatype.t.kind === "Value.pi") {
+    const pi = datatype.t
+    const remain_t = Value.Closure.apply(pi.ret_t_cl, arg)
+    return Value.datatype(
+      datatype.type_constructor,
+      [...datatype.args, arg],
+      remain_t
+    )
   }
 
   throw new Trace.Trace("expecting type_constructor.t to be Value.pi")
