@@ -6,9 +6,10 @@ import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { readback_union } from "./value-readback-union"
-import { readback_pi } from "./value-readback-pi"
+import { readback_as_pi } from "./value-readback-as-pi"
 import { readback_cls } from "./value-readback-cls"
 import { readback_type_constructor } from "./value-readback-type-constructor"
+import { readback_datatype } from "./value-readback-datatype"
 import { readback_type } from "./value-readback-type"
 
 export function readback(
@@ -19,8 +20,10 @@ export function readback(
 ): Exp.Exp {
   if (value.kind === "Value.type_constructor")
     return readback_type_constructor(mod, ctx, t, value)
+  if (value.kind === "Value.datatype")
+    return readback_datatype(mod, ctx, t, value)
   if (t.kind === "Value.union") return readback_union(mod, ctx, t, value)
-  if (t.kind === "Value.pi") return readback_pi(mod, ctx, t, value)
+  if (t.kind === "Value.pi") return readback_as_pi(mod, ctx, t, value)
   if (t.kind === "Value.cls") return readback_cls(mod, ctx, t, value)
   if (
     t.kind === "Value.absurd" &&

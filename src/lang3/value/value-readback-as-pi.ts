@@ -5,7 +5,7 @@ import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as ut from "../../ut"
 
-export function readback_pi(
+export function readback_as_pi(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   pi: Value.pi,
