@@ -1,0 +1,29 @@
+@datatype Vec : (_: Type) -> (_1: { {
+  kind : "Zero"
+} | {
+  kind : "Succ"
+  prev : { {
+    kind : "Zero"
+  } | {
+    kind : "Succ"
+    prev : Nat
+  } }
+} }) -> Type {
+  null : (T: Type) -> Vec(T)({
+    kind = "Zero"
+  })
+  cons : (T: Type) -> (prev: { {
+    kind : "Zero"
+  } | {
+    kind : "Succ"
+    prev : { {
+      kind : "Zero"
+    } | {
+      kind : "Succ"
+      prev : Nat
+    } }
+  } }) -> (head: T) -> (tail: Vec(T)(prev)) -> Vec(T)({
+    kind = "Succ"
+    prev = prev
+  })
+}

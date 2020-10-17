@@ -32,9 +32,7 @@ function check(mod: Mod.Mod, tops: Array<Top.Top>): void {
       Exp.check(mod, ctx, top.exp, t)
     }
     if (top.kind === "Top.type_constructor") {
-      const t = Mod.lookup_type(mod, top.type_constructor.name) as Value.Value
-      const ctx = Ctx.extend(Ctx.init(), top.type_constructor.name, t)
-      Exp.infer(mod, ctx, top.type_constructor)
+      Exp.infer(mod, Ctx.init(), top.type_constructor)
     }
   }
 }

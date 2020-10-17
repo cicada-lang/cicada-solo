@@ -23,10 +23,9 @@ succ = (prev) => {
   prev = prev
 }
 
-// TODO
-// @datatype Vec : (Type) -> (Nat) -> Type {
-//   null: (T: Type) -> Vec(T)(zero)
-//   cons: (T: Type) -> (prev: Nat) -> (head: T) -> (tail: Vec(T)(prev)) -> Vec(T)(succ(prev))
-// }
+@datatype Vec : (Type) -> (Nat) -> Type {
+  null: (T: Type) -> Vec(T)(zero)
+  cons: (T: Type) -> (prev: Nat) -> (head: T) -> (tail: Vec(T)(prev)) -> Vec(T)(succ(prev))
+}
 
-// @show Vec
+@show Vec

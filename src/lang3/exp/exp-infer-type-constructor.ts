@@ -46,15 +46,6 @@ function check_data_constructor_t(
     return
   }
 
-  if (
-    t_value.kind === "Value.not_yet" &&
-      t_value.neutral.kind === "Neutral.ap"
-  ) {
-    console.log(mod)
-    console.log(Exp.evaluate(mod, Ctx.to_env(ctx), Exp.v(name)))
-    throw new Error("TODO")
-  }
-
   throw new Trace.Trace("the t should be pi or ap of type constructor")
 }
 

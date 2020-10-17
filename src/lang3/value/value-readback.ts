@@ -22,7 +22,8 @@ export function readback(
     return readback_type_constructor(mod, ctx, t, value)
   if (value.kind === "Value.datatype")
     return readback_datatype(mod, ctx, t, value)
-  if (t.kind === "Value.union") return readback_union(mod, ctx, t, value)
+  if (t.kind === "Value.union" && value.kind !== "Value.not_yet")
+    return readback_union(mod, ctx, t, value)
   if (t.kind === "Value.pi") return readback_as_pi(mod, ctx, t, value)
   if (t.kind === "Value.cls") return readback_as_cls(mod, ctx, t, value)
   if (
