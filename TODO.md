@@ -33,7 +33,6 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `Value.datatype`
 - [lang3] `Value.datatype` -- `readback`
 - [lang3] `Value.datatype` -- `is_datatype`
 

@@ -18,6 +18,7 @@ export type Value =
   | quote
   | union
   | type_constructor
+  | datatype
   | type
   | not_yet
 
@@ -144,6 +145,24 @@ export const type_constructor = (
   name,
   t,
   delayed,
+})
+
+export interface datatype {
+  kind: "Value.datatype"
+  name: string
+  args: Array<Value>
+  t: Value
+}
+
+export const datatype = (
+  name: string,
+  args: Array<Value>,
+  t: Value
+): datatype => ({
+  kind: "Value.datatype",
+  name,
+  args,
+  t,
 })
 
 export interface type {
