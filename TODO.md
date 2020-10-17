@@ -33,17 +33,13 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `Exp.datatype`
-- [lang3] `Exp.datatype` -- `evaluate`
-- [lang3] `Exp.datatype` -- `infer`
-- [lang3] `Exp.datatype` -- `repr`
-- [lang3] `Exp.datatype` -- `alpha_equivalent`
+- [lang3] `do_ap` -- `ap_not_yet`
 
 - [lang3] `Value.datatype`
 - [lang3] `Value.datatype` -- `readback`
 - [lang3] `Value.datatype` -- `is_datatype`
 
-- [lang3] be able to apply `Value.type_constructor` to get `Datatype`
+- [lang3] be able to apply `Value.type_constructor` to get `Value.datatype`
 
 - [lang3] test `@datatype` -- `Vec`
 

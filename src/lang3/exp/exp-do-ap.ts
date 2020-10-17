@@ -2,27 +2,13 @@ import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
-
 import * as Trace from "../../trace"
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   if (target.kind === "Value.fn") {
     return Value.Closure.apply(target.ret_cl, arg)
   } else if (target.kind === "Value.cls") {
-    if (target.tel.next === undefined) {
-      throw new Trace.Trace("target cls is full")
-    }
-    return Value.cls(
-      [
-        ...target.sat,
-        {
-          name: target.tel.next.name,
-          t: target.tel.next.t,
-          value: arg,
-        },
-      ],
-      Value.Telescope.fill(target.tel, arg)
-    )
+    return ap_cls(target, arg)
   } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.pi") {
       return Value.not_yet(
@@ -47,4 +33,20 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
       })
     )
   }
+}
+
+function ap_cls(cls: Value.cls, arg: Value.Value): Value.Value {
+  if (cls.tel.next === undefined) throw new Trace.Trace("cls is full")
+
+  return Value.cls(
+    [
+      ...cls.sat,
+      {
+        name: cls.tel.next.name,
+        t: cls.tel.next.t,
+        value: arg,
+      },
+    ],
+    Value.Telescope.fill(cls.tel, arg)
+  )
 }
