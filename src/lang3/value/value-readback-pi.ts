@@ -5,11 +5,7 @@ import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as ut from "../../ut"
 
-export function readback_pi(
-  mod: Mod.Mod,
-  ctx: Ctx.Ctx,
-  pi: Value.pi
-): Exp.Exp {
+export function readback_pi(mod: Mod.Mod, ctx: Ctx.Ctx, pi: Value.pi): Exp.Exp {
   const fresh_name = ut.freshen_name(
     new Set([...Mod.names(mod), ...Ctx.names(ctx)]),
     pi.ret_t_cl.name

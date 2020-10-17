@@ -33,9 +33,6 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `Value.datatype` -- `readback`
-- [lang3] `Value.datatype` -- `is_datatype`
-
 - [lang3] `do_ap` -- `ap_type_constructor` -- to get `Value.datatype`
 
 - [lang3] test `@datatype` -- `Vec`

@@ -10,15 +10,15 @@ export function readback_type_constructor(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   t: Value.Value,
-  datatype: Value.type_constructor
+  type_constructor: Value.type_constructor
 ): Exp.Exp {
-  if (!Value.conversion(mod, ctx, Value.type, t, datatype.t))
-    throw new Trace.Trace("t is not equivalent to datatype.t")
+  if (!Value.conversion(mod, ctx, Value.type, t, type_constructor.t))
+    throw new Trace.Trace("t is not equivalent to type_constructor.t")
 
   return Exp.type_constructor(
-    datatype.name,
-    Value.readback(mod, ctx, Value.type, datatype.t),
-    readback_delayed_sums(mod, ctx, datatype.delayed)
+    type_constructor.name,
+    Value.readback(mod, ctx, Value.type, type_constructor.t),
+    readback_delayed_sums(mod, ctx, type_constructor.delayed)
   )
 }
 
