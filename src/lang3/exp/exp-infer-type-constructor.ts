@@ -3,6 +3,7 @@ import * as Value from "../value"
 import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
+import * as ut from "../../ut"
 
 export function infer_type_constructor(
   mod: Mod.Mod,
@@ -34,13 +35,24 @@ function check_data_constructor_t(
     return
   }
 
+  Exp.check(mod, ctx, t, Value.type)
+  const t_value = Exp.evaluate(mod, Ctx.to_env(ctx), t)
+
   if (
-    t.kind === "Exp.ap" &&
-    t.target.kind === "Exp.v" &&
-    t.target.name === name
+    (t_value.kind === "Value.type_constructor" && t_value.name === name) ||
+    (t_value.kind === "Value.datatype" &&
+      t_value.type_constructor.name === name)
   ) {
-    Exp.check(mod, ctx, t, Value.type)
     return
+  }
+
+  if (
+    t_value.kind === "Value.not_yet" &&
+      t_value.neutral.kind === "Neutral.ap"
+  ) {
+    console.log(mod)
+    console.log(Exp.evaluate(mod, Ctx.to_env(ctx), Exp.v(name)))
+    throw new Error("TODO")
   }
 
   throw new Trace.Trace("the t should be pi or ap of type constructor")

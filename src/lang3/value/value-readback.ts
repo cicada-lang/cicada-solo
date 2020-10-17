@@ -51,8 +51,8 @@ export function readback(
 function readback_error<T>(t: Value.Value, value: Value.Value): Trace.Trace<T> {
   return new Trace.Trace(
     ut.aline(`
-      |I can not readback value: ${ut.inspect(value)},
-      |of type: ${ut.inspect(t)}.
+      |I can not readback value: ${ut.inspect(value.kind)},
+      |of type: ${ut.inspect(t.kind)}.
       |`)
   )
 }

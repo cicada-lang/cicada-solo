@@ -40,7 +40,7 @@ export function readback_type(
 function readback_type_error<T>(value: Value.Value): Trace.Trace<T> {
   return new Trace.Trace(
     ut.aline(`
-      |I can not readback type value: ${ut.inspect(value)},
+      |I can not readback type value: ${ut.inspect(value.kind)},
       |`)
   )
 }

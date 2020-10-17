@@ -1,0 +1,32 @@
+Nat : Type
+Nat = { Zero | Succ }
+
+Zero : Type
+Zero = {
+  kind : "Zero"
+}
+
+Succ : Type
+Succ = {
+  kind : "Succ"
+  prev : Nat
+}
+
+zero : Nat
+zero = {
+  kind = "Zero"
+}
+
+succ : (Nat) -> Nat
+succ = (prev) => {
+  kind = "Succ"
+  prev = prev
+}
+
+// TODO
+// @datatype Vec : (Type) -> (Nat) -> Type {
+//   null: (T: Type) -> Vec(T)(zero)
+//   cons: (T: Type) -> (prev: Nat) -> (head: T) -> (tail: Vec(T)(prev)) -> Vec(T)(succ(prev))
+// }
+
+// @show Vec

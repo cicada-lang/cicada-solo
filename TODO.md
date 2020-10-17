@@ -33,7 +33,16 @@
 
 > 实现 condition 的语义。
 
-- [lang3] test `@datatype` -- `Vec`
+- [lang3] [bug] `@datatype` -- `Vec`
+  - relates to `Exp.infer_type_constructor`
+  - because of `EvaluationMode.mute_recursive_exp_in_mod`
+    we can not readback both `Vec` of:
+    ```
+    @datatype Vec : (_: Type) -> (_: Nat) -> Type {
+      null : (T: Type) -> Vec(T)(zero)
+      cons : (T: Type) -> (prev: Nat) -> (head: T) -> (tail: Vec(T)(prev)) -> Vec(T)(succ(prev))
+    }
+    ```
 
 - [lang3] [draft] checking about `Pattern` in the `arg` of `fn`
 

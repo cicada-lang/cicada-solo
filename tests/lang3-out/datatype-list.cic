@@ -1,6 +1,8 @@
-@datatype List : (Type) -> Type {
-  null: (T: Type) -> List(T)
-  cons: (T: Type) -> (head: T) -> (tail: List(T)) -> List(T)
-}
+// TODO
+
+// @datatype List : (Type) -> Type {
+//   null: (T: Type) -> List(T)
+//   cons: (T: Type) -> (head: T) -> (tail: List(T)) -> List(T)
+// }
 
 // @show List
