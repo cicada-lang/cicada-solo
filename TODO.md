@@ -33,32 +33,10 @@
 
 > 实现 condition 的语义。
 
-- [lang3] [draft] checking about `Pattern` in the `arg` of `fn`
+- [lang3] `Pattern`
+  - we can infer the type of every (nested) pattern variables.
 
 - [lang3] `Pattern` in the `arg` of `fn`
-
-- [lang3] [draft] checking about `Pattern` in the `arg_t` and `ret_t` of `pi`
-
-- [lang3] `Pattern`
-  - the `t` of `entry` of `datatype.sums` which is `pi` -- need to be `Pattern`.
-  - the `arg_t` and `ret_t` of `pi` can be `Pattern`
-  - the `arg` of `fn` can be `Pattern`
-  - name in argument position that not in `Mod`
-    will be viewed as pattern variable.
-  - we can infer the type of every (nested) pattern variables.
-  - we also need to use unification here.
-    - the `Value` can contain pattern variables.
-    - the `arg_t` and `ret_t` of `pi` must be delayed.
-      and when `force` a `Delayed`,
-      we need to consistently generate pattern variables.
-
-- [lang3] move `env` and `ctx` to `the`
-
-- [lang3] be able to add type annotation to `Exp.fn`
-  - we will be able to infer such `fn`
-  - which might be needed by `@match`
-
-- [lang2] be able to add type annotation to `Exp.fn`
 
 - [lang3] `Exp.data`
 - [lang3] `Exp.data` -- `evaluate`
@@ -78,16 +56,22 @@
 - [lang3] `Value.case_fn`
 - [lang3] `Value.case_fn` -- `Exp.do_ap`
 - [lang3] `Value.case_fn` -- `readback`
-- [lang3] `Value.case_fn` -- `is_datatype`
 
 - [lang3] syntax for `Exp.case_fn`
+
+- [lang3] be able to add type annotation to `Exp.fn`
+  - we will be able to infer such `fn`
+  - which might be needed by `@match`
+
+- [lang2] be able to add type annotation to `Exp.fn`
 
 - [lang3] there might be `@match`
   - which will be direct application of `Exp.case_fn`
 
-- [lang3] [note] `Exp.datatype` -- `Exp.infer_ap`
-  - as `ap`, `lookup_type` a name denoting datatype
-    will give us the `datatype.t`
+- [lang3] [draft] checking about `Pattern` in the `arg_t` and `ret_t` of `pi`
+  - we also need to use unification here.
+    - we will need a new ctx-like argument for equations -- `Equ`.
+      - maybe merge `env` `ctx` `equ` into `the`.
 
 > Improve the readback of recursive expression.
 
