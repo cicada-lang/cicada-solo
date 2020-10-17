@@ -33,9 +33,6 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `value-readback-cls.ts` instead of `value-readback-type-cls.ts`
-- [lang3] `value-readback-pi.ts` instead of `value-readback-type-pi.ts`
-
 - [lang3] `Value.datatype` -- `readback`
 - [lang3] `Value.datatype` -- `is_datatype`
 

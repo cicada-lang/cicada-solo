@@ -5,7 +5,7 @@ import * as Ctx from "../ctx"
 import * as Env from "../env"
 import * as Mod from "../mod"
 
-export function readback_type_cls(
+export function readback_cls(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   cls: Value.cls
