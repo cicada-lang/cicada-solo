@@ -33,7 +33,6 @@
 
 > condition semantic.
 
-- [lang3] `Exp.case_fn`
 - [lang3] `Exp.case_fn` -- `Exp.repr`
 - [lang3] `Exp.case_fn` -- `Exp.evaluate`
 - [lang3] `Exp.case_fn` -- `Exp.check`

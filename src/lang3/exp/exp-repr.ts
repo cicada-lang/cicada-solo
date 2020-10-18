@@ -14,6 +14,9 @@ export function repr(exp: Exp.Exp): string {
     case "Exp.fn": {
       return `(${Pattern.repr(exp.pattern)}) => ${Exp.repr(exp.ret)}`
     }
+    case "Exp.case_fn": {
+      return `TODO`
+    }
     case "Exp.ap": {
       return `${Exp.repr(exp.target)}(${Exp.repr(exp.arg)})`
     }

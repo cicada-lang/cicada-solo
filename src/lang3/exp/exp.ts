@@ -5,6 +5,7 @@ export type Exp =
   | v
   | pi
   | fn
+  | case_fn
   | ap
   | cls
   | obj
@@ -56,6 +57,21 @@ export const fn = (pattern: Pattern.Pattern, ret: Exp): fn => ({
   kind: "Exp.fn",
   pattern,
   ret,
+})
+
+export interface Case {
+  pattern: Pattern.Pattern
+  ret: Exp
+}
+
+export interface case_fn {
+  kind: "Exp.case_fn"
+  cases: Array<Case>
+}
+
+export const case_fn = (cases: Array<Case>): case_fn => ({
+  kind: "Exp.case_fn",
+  cases,
 })
 
 export interface ap {

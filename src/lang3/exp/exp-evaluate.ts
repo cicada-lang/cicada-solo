@@ -49,6 +49,9 @@ export function evaluate(
       case "Exp.fn": {
         return Value.fn(Value.Closure.create(mod, env, exp.pattern, exp.ret))
       }
+      case "Exp.case_fn": {
+        throw new Error("TODO")
+      }
       case "Exp.ap": {
         return Exp.do_ap(
           Exp.evaluate(mod, env, exp.target, opts),
