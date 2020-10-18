@@ -2,7 +2,7 @@ import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
-
+import * as Pattern from "../pattern"
 import * as Mod from "../mod"
 import * as Env from "../env"
 import * as Trace from "../../trace"

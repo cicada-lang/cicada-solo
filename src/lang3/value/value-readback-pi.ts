@@ -8,7 +8,7 @@ import * as ut from "../../ut"
 export function readback_pi(mod: Mod.Mod, ctx: Ctx.Ctx, pi: Value.pi): Exp.pi {
   const fresh_name = ut.freshen_name(
     new Set([...Mod.names(mod), ...Ctx.names(ctx)]),
-    pi.ret_t_cl.name
+    Value.pi_arg_name(pi)
   )
   const variable = Value.not_yet(pi.arg_t, Neutral.v(fresh_name))
   const arg_t = Value.readback(mod, ctx, Value.type, pi.arg_t)
