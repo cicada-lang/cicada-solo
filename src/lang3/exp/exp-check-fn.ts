@@ -94,10 +94,11 @@ function match_pattern(
           data_constructor.t,
           matched
         )
+        if (result_ctx === undefined) return undefined
         // NOTE
         // - We simply do a check after the `match_patterns`,
         //   the type will not be used to constrain pattern variables.
-        // Exp.check(mod, result_ctx, Pattern.to_exp(pattern), t)
+        Exp.check(mod, result_ctx, Pattern.to_exp(pattern), t)
         return result_ctx
       }
       return undefined
@@ -113,6 +114,16 @@ function match_patterns(
   t: Value.Value,
   matched: Map<string, Value.Value>
 ): undefined | Ctx.Ctx {
-  // TODO
-  return undefined
+  if (patterns.length === 0) return ctx
+  let result_ctx: undefined | Ctx.Ctx = ctx
+  for (const pattern of patterns) {
+    if (t.kind !== "Value.pi") return undefined
+    result_ctx = match_pattern(mod, result_ctx, pattern, t.arg_t, matched)
+    if (result_ctx === undefined) return undefined
+    t = Value.Closure.apply(
+      t.ret_t_cl,
+      Exp.evaluate(mod, Ctx.to_env(result_ctx), Pattern.to_exp(pattern))
+    )
+  }
+  return result_ctx
 }

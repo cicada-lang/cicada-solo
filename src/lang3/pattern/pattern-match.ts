@@ -59,12 +59,10 @@ function match_patterns(
   matched: Map<string, Value.Value>
 ): undefined | Env.Env {
   if (patterns.length !== values.length) return undefined
-  let result: undefined | Env.Env = env
+  let result_env: undefined | Env.Env = env
   for (let i = 0; i < patterns.length; i++) {
-    const pattern = patterns[i]
-    const value = values[i]
-    result = match_pattern(result, pattern, value, matched)
-    if (result === undefined) return undefined
+    result_env = match_pattern(result_env, patterns[i], values[i], matched)
+    if (result_env === undefined) return undefined
   }
-  return result
+  return result_env
 }
