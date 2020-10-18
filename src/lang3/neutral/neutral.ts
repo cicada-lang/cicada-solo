@@ -35,7 +35,7 @@ interface match {
 export const match = (
   case_fn: Value.case_fn,
   pi: Value.pi,
-  arg: Neutral,
+  arg: Neutral
 ): match => ({
   kind: "Neutral.match",
   case_fn,

@@ -33,10 +33,7 @@ export function do_ap_case_fn(
     if (arg.t.kind === "Value.pi")
       return Value.not_yet(
         Value.Closure.apply(arg.t.ret_t_cl, arg),
-        Neutral.match(
-          case_fn,
-          arg.t,
-          arg.neutral)
+        Neutral.match(case_fn, arg.t, arg.neutral)
       )
 
     throw new Trace.Trace(

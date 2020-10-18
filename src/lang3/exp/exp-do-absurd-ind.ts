@@ -12,10 +12,7 @@ export function do_absurd_ind(
     if (target.t.kind === "Value.absurd") {
       return Value.not_yet(
         motive,
-        Neutral.absurd_ind(
-          target.neutral,
-          Normal.create(Value.type, motive)
-        )
+        Neutral.absurd_ind(target.neutral, Normal.create(Value.type, motive))
       )
     } else {
       throw new Trace.Trace(
