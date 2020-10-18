@@ -45,6 +45,9 @@ function alpha(left: Exp.Exp, right: Exp.Exp, the: AlphaCtx): boolean {
     return alpha(left.ret, right.ret, new_alpha_ctx)
   }
 
+  if (left.kind === "Exp.case_fn" && right.kind === "Exp.case_fn")
+    return alpha_case_fn(left, right, the)
+
   if (left.kind === "Exp.ap" && right.kind === "Exp.ap")
     return (
       alpha(left.target, right.target, the) && alpha(left.arg, right.arg, the)
@@ -125,10 +128,33 @@ function alpha(left: Exp.Exp, right: Exp.Exp, the: AlphaCtx): boolean {
   return false
 }
 
-function alpha_cls(left: Exp.cls, right: Exp.cls, the: AlphaCtx): boolean {
-  if (left.sat.length !== right.sat.length) {
-    return false
+function alpha_case_fn(
+  left: Exp.case_fn,
+  right: Exp.case_fn,
+  the: AlphaCtx
+): boolean {
+  // NOTE the order matters.
+  if (left.cases.length !== right.cases.length) return false
+
+  for (let i = 0; i < left.cases.length; i++) {
+    const left_fn = left.cases[i]
+    const right_fn = right.cases[i]
+    if (
+      !alpha(
+        Exp.fn(left_fn.pattern, left_fn.ret),
+        Exp.fn(right_fn.pattern, right_fn.ret),
+        the
+      )
+    )
+      return false
   }
+
+  return true
+}
+
+function alpha_cls(left: Exp.cls, right: Exp.cls, the: AlphaCtx): boolean {
+  if (left.sat.length !== right.sat.length) return false
+
   for (let i = 0; i < left.sat.length; i++) {
     const left_entry = left.sat[i]
     const right_entry = right.sat[i]
