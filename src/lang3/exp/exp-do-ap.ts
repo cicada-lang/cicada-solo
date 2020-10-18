@@ -10,6 +10,9 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   if (target.kind === "Value.type_constructor")
     return do_ap_type_constructor(target, arg)
   if (target.kind === "Value.datatype") return do_ap_datatype(target, arg)
+  if (target.kind === "Value.data_constructor")
+    return do_ap_data_constructor(target, arg)
+  if (target.kind === "Value.data") return do_ap_data(target, arg)
   if (target.kind === "Value.not_yet") return do_ap_not_yet(target, arg)
 
   throw new Trace.Trace(
@@ -64,7 +67,30 @@ export function do_ap_datatype(
     )
   }
 
-  throw new Trace.Trace("expecting type_constructor.t to be Value.pi")
+  throw new Trace.Trace("expecting datatype.t to be Value.pi")
+}
+
+export function do_ap_data_constructor(
+  data_constructor: Value.data_constructor,
+  arg: Value.Value
+): Value.data {
+  if (data_constructor.t.kind === "Value.pi") {
+    const pi = data_constructor.t
+    const remain_t = Value.Closure.apply(pi.ret_t_cl, arg)
+    return Value.data(data_constructor, [arg], remain_t)
+  }
+
+  throw new Trace.Trace("expecting data_constructor.t to be Value.pi")
+}
+
+export function do_ap_data(data: Value.data, arg: Value.Value): Value.data {
+  if (data.t.kind === "Value.pi") {
+    const pi = data.t
+    const remain_t = Value.Closure.apply(pi.ret_t_cl, arg)
+    return Value.data(data.data_constructor, [...data.args, arg], remain_t)
+  }
+
+  throw new Trace.Trace("expecting data.t to be Value.pi")
 }
 
 export function do_ap_not_yet(
