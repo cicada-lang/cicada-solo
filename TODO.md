@@ -36,8 +36,6 @@
 - [lang3] change function declaration -- `alpha`
 - [lang2] change function declaration -- `alpha`
 
-- [lang2] `exp-equivalent.ts` instead of `exp-alpha-equivalent.ts`
-
 - [lang3] `Pattern`
   - we can infer the type of every (nested) pattern variables.
 - [lang3] `Pattern` in the `arg` of `fn`

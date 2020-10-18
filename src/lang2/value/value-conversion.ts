@@ -8,7 +8,7 @@ export function conversion(
   x: Value.Value,
   y: Value.Value
 ): boolean {
-  return Exp.alpha_equivalent(
+  return Exp.equivalent(
     Value.readback(ctx, t, x),
     Value.readback(ctx, t, y)
   )
