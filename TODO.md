@@ -33,7 +33,7 @@
 
 > condition semantic.
 
-- [lang3] syntax for `Exp.case_fn` -- `{ (<pattern> => <exp>)+ }`
+- [lang3] matchers for `Exp.case_fn`
 
 > nested match.
 

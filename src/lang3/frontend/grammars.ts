@@ -41,6 +41,7 @@ export const exp = {
     '">"',
     { body: "exp" },
   ],
+  "exp:case_fn": ['"{"', { cases: "cases" }, '"}"'],
   "exp:ap": [
     { target: "identifier" },
     { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
@@ -124,6 +125,21 @@ export const head = {
     '"."',
     { name: "identifier" },
     { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
+  ],
+}
+
+export const cases = {
+  "cases:cases": [{ cases: { $ap: ["one_or_more", "case_entry"] } }],
+}
+
+export const case_entry = {
+  "case_entry:case_entry": [
+    '"("',
+    { pattern: "pattern" },
+    '")"',
+    '"="',
+    '">"',
+    { body: "exp" },
   ],
 }
 
