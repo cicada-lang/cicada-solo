@@ -33,8 +33,6 @@
 
 > 实现 condition 的语义。
 
-- [lang3] extra functions from `alpha_equivalent`
-
 - [lang3] `Pattern`
   - we can infer the type of every (nested) pattern variables.
 - [lang3] `Pattern` in the `arg` of `fn`

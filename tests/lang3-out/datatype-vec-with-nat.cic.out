@@ -1,0 +1,7 @@
+Vec(String)
+Vec(String)(Nat.zero)
+null(String)
+cons(String)
+cons(String)(Nat.zero)
+cons(String)(Nat.zero)("abc")(null(String))
+cons(String)(succ(Nat.zero))("abc")(cons(String)(Nat.zero)("abc")(null(String)))

@@ -4,3 +4,5 @@
 }
 List.null
 List.cons
+null(String)
+cons(String)("abc")(null(String))

@@ -1,0 +1,13 @@
+@datatype Nat : Type {
+  zero : @datatype Nat : Type {
+    zero : Nat
+    succ : (prev: Nat) -> Nat
+  }
+  succ : (prev: @datatype Nat : Type {
+    zero : Nat
+    succ : (prev: Nat) -> Nat
+  }) -> Nat
+}
+Nat.zero
+Nat.succ
+succ(Nat.zero)

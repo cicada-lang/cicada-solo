@@ -64,45 +64,11 @@ function alpha(the: {
       left.name === right.name
     )
 
-  if (left.kind === "Exp.cls" && right.kind === "Exp.cls") {
-    if (left.sat.length !== right.sat.length) {
-      return false
-    }
-    for (let i = 0; i < left.sat.length; i++) {
-      const left_entry = left.sat[i]
-      const right_entry = right.sat[i]
-      if (left_entry.name !== right_entry.name) return false
-      if (!alpha({ ...the, left: left_entry.t, right: right_entry.t }))
-        return false
-      if (!alpha({ ...the, left: left_entry.exp, right: right_entry.exp }))
-        return false
-    }
-    if (left.scope.length !== right.scope.length) {
-      return false
-    }
-    for (let i = 0; i < left.scope.length; i++) {
-      const left_entry = left.scope[i]
-      const right_entry = right.scope[i]
-      if (left_entry.name !== right_entry.name) return false
-      if (!alpha({ ...the, left: left_entry.t, right: right_entry.t }))
-        return false
-    }
-    return true
-  }
+  if (left.kind === "Exp.cls" && right.kind === "Exp.cls")
+    return alpha_cls(the, left, right)
 
-  if (left.kind === "Exp.obj" && right.kind === "Exp.obj") {
-    if (left.properties.size !== right.properties.size) {
-      return false
-    }
-    for (const name of left.properties.keys()) {
-      const left_exp = left.properties.get(name)
-      const right_exp = right.properties.get(name)
-      if (left_exp === undefined) return false
-      if (right_exp === undefined) return false
-      if (!alpha({ ...the, left: left_exp, right: right_exp })) return false
-    }
-    return true
-  }
+  if (left.kind === "Exp.obj" && right.kind === "Exp.obj")
+    return alpha_obj(the, left, right)
 
   if (left.kind === "Exp.equal" && right.kind === "Exp.equal")
     return (
@@ -175,6 +141,62 @@ function alpha(the: {
     )
 
   return false
+}
+
+function alpha_cls(
+  the: {
+    depth: number
+    left_names: Map<string, number>
+    right_names: Map<string, number>
+  },
+  left: Exp.cls,
+  right: Exp.cls
+): boolean {
+  if (left.sat.length !== right.sat.length) {
+    return false
+  }
+  for (let i = 0; i < left.sat.length; i++) {
+    const left_entry = left.sat[i]
+    const right_entry = right.sat[i]
+    if (left_entry.name !== right_entry.name) return false
+    if (!alpha({ ...the, left: left_entry.t, right: right_entry.t }))
+      return false
+    if (!alpha({ ...the, left: left_entry.exp, right: right_entry.exp }))
+      return false
+  }
+  if (left.scope.length !== right.scope.length) {
+    return false
+  }
+  for (let i = 0; i < left.scope.length; i++) {
+    const left_entry = left.scope[i]
+    const right_entry = right.scope[i]
+    if (left_entry.name !== right_entry.name) return false
+    if (!alpha({ ...the, left: left_entry.t, right: right_entry.t }))
+      return false
+  }
+  return true
+}
+
+function alpha_obj(
+  the: {
+    depth: number
+    left_names: Map<string, number>
+    right_names: Map<string, number>
+  },
+  left: Exp.obj,
+  right: Exp.obj
+): boolean {
+  if (left.properties.size !== right.properties.size) {
+    return false
+  }
+  for (const name of left.properties.keys()) {
+    const left_exp = left.properties.get(name)
+    const right_exp = right.properties.get(name)
+    if (left_exp === undefined) return false
+    if (right_exp === undefined) return false
+    if (!alpha({ ...the, left: left_exp, right: right_exp })) return false
+  }
+  return true
 }
 
 function union_flatten(union: Exp.union): Array<Exp.Exp> {
