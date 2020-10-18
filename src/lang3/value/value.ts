@@ -183,23 +183,23 @@ export const data_constructor = (
   t,
 })
 
-// export interface data {
-//   kind: "Value.data"
-//   type_constructor: type_constructor
-//   args: Array<Value>
-//   t: Value
-// }
+export interface data {
+  kind: "Value.data"
+  data_constructor: data_constructor
+  args: Array<Value>
+  t: Value
+}
 
-// export const data = (
-//   type_constructor: type_constructor,
-//   args: Array<Value>,
-//   t: Value
-// ): data => ({
-//   kind: "Value.data",
-//   type_constructor,
-//   args,
-//   t,
-// })
+export const data = (
+  data_constructor: data_constructor,
+  args: Array<Value>,
+  t: Value
+): data => ({
+  kind: "Value.data",
+  data_constructor,
+  args,
+  t,
+})
 
 export interface type {
   kind: "Value.type"

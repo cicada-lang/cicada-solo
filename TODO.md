@@ -36,7 +36,6 @@
 - [lang3] no `Exp.data_constructor` -- overload `Exp.dot`
 - [lang3] `Value.data_constructor` -- `readback`
 
-- [lang3] `Value.data`
 - [lang3] no `Exp.data` -- overload `Exp.ap`
 - [lang3] `Value.data` -- `readback`
 
