@@ -7,6 +7,8 @@ import * as ut from "../../ut"
 export function do_dot(target: Value.Value, name: string): Value.Value {
   if (target.kind === "Value.obj") return do_obj(target, name)
   if (target.kind === "Value.cls") return do_cls(target, name)
+  if (target.kind === "Value.type_constructor")
+    return do_type_constructor(target, name)
   if (target.kind === "Value.not_yet") return do_not_yet(target, name)
   throw new Trace.Trace(
     Exp.explain_elim_target_mismatch({
@@ -33,6 +35,25 @@ function do_cls(cls: Value.cls, name: string): Value.Value {
   }
 
   return Value.Telescope.dot(cls.tel, name)
+}
+
+function do_type_constructor(
+  type_constructor: Value.type_constructor,
+  name: string
+): Value.data_constructor {
+  const entry = type_constructor.delayed.sums.find(({ tag }) => tag === name)
+  if (entry === undefined)
+    throw new Trace.Trace(`can not find tag in type_constructor: ${name}`)
+
+  return Value.data_constructor(
+    type_constructor,
+    name,
+    Exp.evaluate(
+      type_constructor.delayed.mod,
+      type_constructor.delayed.env,
+      entry.t
+    )
+  )
 }
 
 function do_not_yet(not_yet: Value.not_yet, name: string): Value.not_yet {

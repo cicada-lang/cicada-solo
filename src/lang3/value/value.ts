@@ -19,6 +19,8 @@ export type Value =
   | union
   | type_constructor
   | datatype
+  | data_constructor
+//  | data
   | type
   | not_yet
 
