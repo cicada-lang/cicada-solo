@@ -1,5 +1,6 @@
 import * as Value from "../value"
 import * as Neutral from "../neutral"
+import * as Pattern from "../pattern"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as Mod from "../mod"
@@ -16,11 +17,11 @@ export function readback_as_pi(
   //   This implements the η-rule for functions.
   const fresh_name = ut.freshen_name(
     new Set([...Mod.names(mod), ...Ctx.names(ctx)]),
-    pi.ret_t_cl.name
+    Value.pi_arg_name(pi)
   )
   const variable = Value.not_yet(pi.arg_t, Neutral.v(fresh_name))
   return Exp.fn(
-    fresh_name,
+    Pattern.v(fresh_name),
     Value.readback(
       mod,
       Ctx.extend(ctx, fresh_name, pi.arg_t),
