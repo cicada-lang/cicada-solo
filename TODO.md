@@ -53,8 +53,6 @@
 
 - [lang3] We SHOULD NOT `shadow mod value` for non recursive `Den`
 
-> 以 TLT 为例子来测试 lang3 的能力。
-
 > 更完整的 dependent + structural type 语言。
 
 - [lang3] `Value.subtype` -- structural cls
