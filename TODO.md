@@ -33,12 +33,12 @@
 
 > condition semantic.
 
-- [lang3] `Exp.case_fn` -- `Exp.repr`
+- [lang3] `Value.case_fn`
+
 - [lang3] `Exp.case_fn` -- `Exp.evaluate`
 - [lang3] `Exp.case_fn` -- `Exp.check`
 - [lang3] `Exp.case_fn` -- `Exp.equivalent`
 
-- [lang3] `Value.case_fn`
 - [lang3] `Value.case_fn` -- `Exp.do_ap`
 - [lang3] `Value.case_fn` -- `Value.readback`
 

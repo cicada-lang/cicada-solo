@@ -15,7 +15,12 @@ export function repr(exp: Exp.Exp): string {
       return `(${Pattern.repr(exp.pattern)}) => ${Exp.repr(exp.ret)}`
     }
     case "Exp.case_fn": {
-      return `TODO`
+      let s = exp.cases
+        .map(
+          ({ pattern, ret }) => `(${Pattern.repr(pattern)}) => ${Exp.repr(ret)}`
+        )
+        .join("\n")
+      return `{\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.ap": {
       return `${Exp.repr(exp.target)}(${Exp.repr(exp.arg)})`
