@@ -43,11 +43,11 @@ export function evaluate(
       case "Exp.pi": {
         return Value.pi(
           Exp.evaluate(mod, env, exp.arg_t, opts),
-          Value.Closure.create(mod, env, exp.name, exp.ret_t)
+          Value.Closure.create(mod, env, Pattern.v(exp.name), exp.ret_t)
         )
       }
       case "Exp.fn": {
-        return Value.fn(Value.Closure.create(mod, env, exp.name, exp.ret))
+        return Value.fn(Value.Closure.create(mod, env, exp.pattern, exp.ret))
       }
       case "Exp.ap": {
         return Exp.do_ap(
