@@ -1,5 +1,6 @@
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
+import * as Pattern from "../pattern"
 import * as ut from "../../ut"
 
 export function repr(exp: Exp.Exp): string {
@@ -11,15 +12,13 @@ export function repr(exp: Exp.Exp): string {
       return `(${exp.name}: ${Exp.repr(exp.arg_t)}) -> ${Exp.repr(exp.ret_t)}`
     }
     case "Exp.fn": {
-      return `(${exp.name}) => ${Exp.repr(exp.ret)}`
+      return `(${Pattern.repr(exp.pattern)}) => ${Exp.repr(exp.ret)}`
     }
     case "Exp.ap": {
       return `${Exp.repr(exp.target)}(${Exp.repr(exp.arg)})`
     }
     case "Exp.cls": {
-      if (exp.sat.length === 0 && exp.scope.length === 0) {
-        return "Object"
-      }
+      if (exp.sat.length === 0 && exp.scope.length === 0) return "Object"
 
       const parts = [
         ...exp.sat.map(
