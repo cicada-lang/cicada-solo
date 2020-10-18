@@ -1,26 +1,25 @@
 import * as Exp from "../exp"
 
 export function equivalent(x: Exp.Exp, y: Exp.Exp): boolean {
-  return alpha({
+  return alpha(x, y, {
     depth: 0,
     left_names: new Map(),
-    left: x,
     right_names: new Map(),
-    right: y,
   })
 }
 
-function alpha(the: {
-  depth: number
-  left_names: Map<string, number>
-  left: Exp.Exp
-  right_names: Map<string, number>
-  right: Exp.Exp
-}): boolean {
-  const { depth, left_names, left, right_names, right } = the
+function alpha(
+  left: Exp.Exp,
+  right: Exp.Exp,
+  the: {
+    depth: number
+    left_names: Map<string, number>
+    right_names: Map<string, number>
+  }
+): boolean {
   if (left.kind === "Exp.v" && right.kind === "Exp.v") {
-    const left_depth = left_names.get(left.name)
-    const right_depth = right_names.get(right.name)
+    const left_depth = the.left_names.get(left.name)
+    const right_depth = the.right_names.get(right.name)
     return (
       (left_depth === undefined &&
         right_depth === undefined &&
@@ -33,65 +32,57 @@ function alpha(the: {
 
   if (left.kind === "Exp.pi" && right.kind === "Exp.pi")
     return (
-      alpha({ ...the, left: left.arg_t, right: right.arg_t }) &&
-      alpha({
-        depth: depth + 1,
-        left_names: left_names.set(left.name, depth),
-        left: left.ret_t,
-        right_names: right_names.set(right.name, depth),
-        right: right.ret_t,
+      alpha(left.arg_t, right.arg_t, the) &&
+      alpha(left.ret_t, right.ret_t, {
+        depth: the.depth + 1,
+        left_names: the.left_names.set(left.name, the.depth),
+        right_names: the.right_names.set(right.name, the.depth),
       })
     )
 
   if (left.kind === "Exp.fn" && right.kind === "Exp.fn")
-    return alpha({
-      depth: depth + 1,
-      left_names: left_names.set(left.name, depth),
-      left: left.ret,
-      right_names: right_names.set(right.name, depth),
-      right: right.ret,
+    return alpha(left.ret, right.ret, {
+      depth: the.depth + 1,
+      left_names: the.left_names.set(left.name, the.depth),
+      right_names: the.right_names.set(right.name, the.depth),
     })
 
   if (left.kind === "Exp.ap" && right.kind === "Exp.ap")
     return (
-      alpha({ ...the, left: left.target, right: right.target }) &&
-      alpha({ ...the, left: left.arg, right: right.arg })
+      alpha(left.target, right.target, the) && alpha(left.arg, right.arg, the)
     )
 
   if (left.kind === "Exp.dot" && right.kind === "Exp.dot")
-    return (
-      alpha({ ...the, left: left.target, right: right.target }) &&
-      left.name === right.name
-    )
+    return alpha(left.target, right.target, the) && left.name === right.name
 
   if (left.kind === "Exp.cls" && right.kind === "Exp.cls")
-    return alpha_cls(the, left, right)
+    return alpha_cls(left, right, the)
 
   if (left.kind === "Exp.obj" && right.kind === "Exp.obj")
-    return alpha_obj(the, left, right)
+    return alpha_obj(left, right, the)
 
   if (left.kind === "Exp.equal" && right.kind === "Exp.equal")
     return (
-      alpha({ ...the, left: left.t, right: right.t }) &&
-      alpha({ ...the, left: left.from, right: right.from }) &&
-      alpha({ ...the, left: left.to, right: right.to })
+      alpha(left.t, right.t, the) &&
+      alpha(left.from, right.from, the) &&
+      alpha(left.to, right.to, the)
     )
 
   if (left.kind === "Exp.same" && right.kind === "Exp.same") return true
 
   if (left.kind === "Exp.replace" && right.kind === "Exp.replace")
     return (
-      alpha({ ...the, left: left.target, right: right.target }) &&
-      alpha({ ...the, left: left.motive, right: right.motive }) &&
-      alpha({ ...the, left: left.base, right: right.base })
+      alpha(left.target, right.target, the) &&
+      alpha(left.motive, right.motive, the) &&
+      alpha(left.base, right.base, the)
     )
 
   if (left.kind === "Exp.absurd" && right.kind === "Exp.absurd") return true
 
   if (left.kind === "Exp.absurd_ind" && right.kind === "Exp.absurd_ind")
     return (
-      alpha({ ...the, left: left.target, right: right.target }) &&
-      alpha({ ...the, left: left.motive, right: right.motive })
+      alpha(left.target, right.target, the) &&
+      alpha(left.motive, right.motive, the)
     )
 
   if (left.kind === "Exp.str" && right.kind === "Exp.str") return true
@@ -105,14 +96,10 @@ function alpha(the: {
     const right_types = union_flatten(right)
     return (
       left_types.every((left_t) =>
-        right_types.some((right_t) =>
-          alpha({ ...the, left: left_t, right: right_t })
-        )
+        right_types.some((right_t) => alpha(left_t, right_t, the))
       ) &&
       right_types.every((right_t) =>
-        left_types.some((left_t) =>
-          alpha({ ...the, left: left_t, right: right_t })
-        )
+        left_types.some((left_t) => alpha(left_t, right_t, the))
       )
     )
   }
@@ -135,22 +122,19 @@ function alpha(the: {
     return true
 
   if (left.kind === "Exp.the" && right.kind === "Exp.the")
-    return (
-      alpha({ ...the, left: left.t, right: right.t }) &&
-      alpha({ ...the, left: left.exp, right: right.exp })
-    )
+    return alpha(left.t, right.t, the) && alpha(left.exp, right.exp, the)
 
   return false
 }
 
 function alpha_cls(
+  left: Exp.cls,
+  right: Exp.cls,
   the: {
     depth: number
     left_names: Map<string, number>
     right_names: Map<string, number>
-  },
-  left: Exp.cls,
-  right: Exp.cls
+  }
 ): boolean {
   if (left.sat.length !== right.sat.length) {
     return false
@@ -159,10 +143,8 @@ function alpha_cls(
     const left_entry = left.sat[i]
     const right_entry = right.sat[i]
     if (left_entry.name !== right_entry.name) return false
-    if (!alpha({ ...the, left: left_entry.t, right: right_entry.t }))
-      return false
-    if (!alpha({ ...the, left: left_entry.exp, right: right_entry.exp }))
-      return false
+    if (!alpha(left_entry.t, right_entry.t, the)) return false
+    if (!alpha(left_entry.exp, right_entry.exp, the)) return false
   }
   if (left.scope.length !== right.scope.length) {
     return false
@@ -171,20 +153,19 @@ function alpha_cls(
     const left_entry = left.scope[i]
     const right_entry = right.scope[i]
     if (left_entry.name !== right_entry.name) return false
-    if (!alpha({ ...the, left: left_entry.t, right: right_entry.t }))
-      return false
+    if (!alpha(left_entry.t, right_entry.t, the)) return false
   }
   return true
 }
 
 function alpha_obj(
+  left: Exp.obj,
+  right: Exp.obj,
   the: {
     depth: number
     left_names: Map<string, number>
     right_names: Map<string, number>
-  },
-  left: Exp.obj,
-  right: Exp.obj
+  }
 ): boolean {
   if (left.properties.size !== right.properties.size) {
     return false
@@ -194,7 +175,7 @@ function alpha_obj(
     const right_exp = right.properties.get(name)
     if (left_exp === undefined) return false
     if (right_exp === undefined) return false
-    if (!alpha({ ...the, left: left_exp, right: right_exp })) return false
+    if (!alpha(left_exp, right_exp, the)) return false
   }
   return true
 }

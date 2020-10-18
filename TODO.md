@@ -33,7 +33,6 @@
 
 > condition semantic.
 
-- [lang3] change function declaration -- `alpha`
 - [lang2] change function declaration -- `alpha`
 
 - [lang3] `Pattern`
