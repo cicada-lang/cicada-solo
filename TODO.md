@@ -31,10 +31,6 @@
 
 # lang3
 
-> condition semantic.
-
-- [lang3] test `Exp.case_fn`
-
 > nested match.
 
 - [lang3] be able to add type annotation to `Exp.fn`
