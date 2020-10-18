@@ -5,11 +5,11 @@ import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
 export function do_dot(target: Value.Value, name: string): Value.Value {
-  if (target.kind === "Value.obj") return do_obj(target, name)
-  if (target.kind === "Value.cls") return do_cls(target, name)
+  if (target.kind === "Value.obj") return do_dot_obj(target, name)
+  if (target.kind === "Value.cls") return do_dot_cls(target, name)
   if (target.kind === "Value.type_constructor")
-    return do_type_constructor(target, name)
-  if (target.kind === "Value.not_yet") return do_not_yet(target, name)
+    return do_dot_type_constructor(target, name)
+  if (target.kind === "Value.not_yet") return do_dot_not_yet(target, name)
   throw new Trace.Trace(
     Exp.explain_elim_target_mismatch({
       elim: "dot",
@@ -19,7 +19,7 @@ export function do_dot(target: Value.Value, name: string): Value.Value {
   )
 }
 
-function do_obj(obj: Value.obj, name: string): Value.Value {
+export function do_dot_obj(obj: Value.obj, name: string): Value.Value {
   const value = obj.properties.get(name)
   if (value === undefined)
     throw new Trace.Trace(`the property name ${name} is undefined.`)
@@ -27,7 +27,7 @@ function do_obj(obj: Value.obj, name: string): Value.Value {
   return value
 }
 
-function do_cls(cls: Value.cls, name: string): Value.Value {
+export function do_dot_cls(cls: Value.cls, name: string): Value.Value {
   for (const entry of cls.sat) {
     if (entry.name === name) {
       return entry.t
@@ -37,7 +37,7 @@ function do_cls(cls: Value.cls, name: string): Value.Value {
   return Value.Telescope.dot(cls.tel, name)
 }
 
-function do_type_constructor(
+export function do_dot_type_constructor(
   type_constructor: Value.type_constructor,
   name: string
 ): Value.data_constructor {
@@ -56,7 +56,7 @@ function do_type_constructor(
   )
 }
 
-function do_not_yet(not_yet: Value.not_yet, name: string): Value.not_yet {
+export function do_dot_not_yet(not_yet: Value.not_yet, name: string): Value.not_yet {
   if (not_yet.t.kind === "Value.cls")
     return Value.not_yet(
       Value.Telescope.dot(not_yet.t.tel, name),

@@ -2,3 +2,5 @@
   null : (T: Type) -> List(T)
   cons : (T: Type) -> (head: T) -> (tail: List(T)) -> List(T)
 }
+List.null
+List.cons

@@ -34,6 +34,7 @@
 > 实现 condition 的语义。
 
 - [lang3] no `Exp.data` -- overload `Exp.ap`
+- [lang3] no `Exp.data` -- overload `Exp.infer_dot`
 - [lang3] `Value.data` -- `readback`
 
 - [lang3] `Pattern`
