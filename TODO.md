@@ -37,7 +37,6 @@
 > - we will infer the type of every (nested) pattern variables.
 > - `pi` is also using `Closure`
 
-- [lang3] `Pattern.to_exp`
 - [lang3] `Exp.fn` -- `Exp.check_fn` -- `match_patterns`
 - [lang3] `Exp.fn` -- `Exp.equivalent`
 - [lang3] matchers -- `Exp.fn`
