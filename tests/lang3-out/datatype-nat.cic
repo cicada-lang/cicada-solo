@@ -21,6 +21,6 @@ true : Bool
 true = Bool.true
 
 zero_p : (Nat) -> Bool
-zero_p = (Nat.zero) => true
+zero_p = (Nat.zero) => Bool.true
 
 @show zero_p(Nat.zero)

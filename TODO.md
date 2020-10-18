@@ -31,11 +31,11 @@
 
 # lang3
 
-> condition semantic.
+- [lang3] [bug] `(Nat.zero) => Bool.true`
+  - will be viewed as `[ (Nat.zero) => Bool ] .true`
+    but it should be viewed as `(Nat.zero) => [ Bool.true ]`
 
-> `Pattern` in the `arg` of `fn`
-> - we will infer the type of every (nested) pattern variables.
-> - `pi` is also using `Closure`
+> condition semantic.
 
 - [lang3] `Exp.case_fn`
 - [lang3] `Exp.case_fn` -- `evaluate`
