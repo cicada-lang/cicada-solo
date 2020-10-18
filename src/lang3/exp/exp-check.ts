@@ -5,6 +5,7 @@ import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import { check_union_type } from "./exp-check-union-type"
 import { check_fn } from "./exp-check-fn"
+import { check_case_fn } from "./exp-check-case-fn"
 import { check_obj } from "./exp-check-obj"
 import { check_same } from "./exp-check-same"
 import { check_quote } from "./exp-check-quote"
@@ -21,6 +22,8 @@ export function check(
     if (t.kind === "Value.union") return check_union_type(mod, ctx, exp, t)
     if (exp.kind === "Exp.fn")
       return check_fn(mod, ctx, exp, Value.is_pi(mod, ctx, t))
+    if (exp.kind === "Exp.case_fn")
+      return check_case_fn(mod, ctx, exp, Value.is_pi(mod, ctx, t))
     if (exp.kind === "Exp.obj")
       return check_obj(mod, ctx, exp, Value.is_cls(mod, ctx, t))
     if (exp.kind === "Exp.same")
