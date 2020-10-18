@@ -181,10 +181,29 @@ function match_pattern(
       left_names: the.left_names.set(left.name, the.depth),
       right_names: the.right_names.set(right.name, the.depth),
     }
-  // TODO
-  if (left.kind === "Pattern.datatype" && right.kind === "Pattern.datatype" )
-    return
-  // TODO
-  if (left.kind === "Pattern.data" && right.kind === "Pattern.data") return
+  if (
+    left.kind === "Pattern.datatype" &&
+    right.kind === "Pattern.datatype" &&
+    left.name === right.name
+  )
+    return match_patterns(left.args, right.args, the)
+  if (
+    left.kind === "Pattern.data" &&
+    right.kind === "Pattern.data" &&
+    left.name === right.name &&
+    left.tag === right.tag
+  )
+    return match_patterns(left.args, right.args, the)
   return undefined
+}
+
+function match_patterns(
+  left: Array<Pattern.Pattern>,
+  right: Array<Pattern.Pattern>,
+  the: AlphaCtx
+): undefined | AlphaCtx {
+  if (left.length !== right.length) return undefined
+  const new_alpha_ctx = match_pattern(left[0], right[0], the)
+  if (new_alpha_ctx === undefined) return undefined
+  return match_patterns(left.slice(1), right.slice(1), new_alpha_ctx)
 }
