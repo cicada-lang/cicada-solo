@@ -33,9 +33,8 @@
 
 > condition semantic.
 
-- [lang3] `Pattern`
-  - we can infer the type of every (nested) pattern variables.
 - [lang3] `Pattern` in the `arg` of `fn`
+  - we will infer the type of every (nested) pattern variables.
 
 - [lang3] `Exp.case_fn`
 - [lang3] `Exp.case_fn` -- `evaluate`
