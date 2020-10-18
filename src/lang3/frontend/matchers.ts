@@ -1,4 +1,5 @@
 import * as Exp from "../exp"
+import * as Pattern from "../pattern"
 import * as Top from "../top"
 import * as Stmt from "../stmt"
 import * as pt from "../../partech"
@@ -11,7 +12,8 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       Exp.pi(pt.Tree.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:arrow": ({ arg_t, ret_t }) =>
       Exp.pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
-    "exp:fn": ({ name, body }) => Exp.fn(pt.Tree.str(name), exp_matcher(body)),
+    "exp:fn": ({ pattern, body }) =>
+      Exp.fn(pattern_matcher(pattern), exp_matcher(body)),
     "exp:ap": ({ target, args }) => {
       let exp: Exp.Exp = Exp.v(pt.Tree.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
@@ -64,6 +66,24 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
         .map(exp_matcher)
       return deduction_aux(entries, args)
     },
+  })(tree)
+}
+
+function pattern_matcher(tree: pt.Tree.Tree): Pattern.Pattern {
+  return pt.Tree.matcher<Pattern.Pattern>({
+    // NOTE The rule is "if OneCap must be ALL_CAPS"
+    "pattern:v": ({ name }) => Pattern.v(pt.Tree.str(name)),
+    "pattern:datatype": ({ name, args }) =>
+      Pattern.datatype(
+        pt.Tree.str(name),
+        pt.matchers.one_or_more_matcher(args).map(pattern_matcher)
+      ),
+    "pattern:data": ({ name, tag, args }) =>
+      Pattern.data(
+        pt.Tree.str(name),
+        pt.Tree.str(tag),
+        pt.matchers.one_or_more_matcher(args).map(pattern_matcher)
+      ),
   })(tree)
 }
 

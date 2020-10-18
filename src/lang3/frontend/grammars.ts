@@ -116,13 +116,13 @@ export const pattern = {
   "pattern:v": [{ name: "identifier" }],
   "pattern:datatype": [
     { name: "identifier" },
-    { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
+    { args: { $ap: ["one_or_more", '"("', "pattern", '")"'] } },
   ],
   "pattern:data": [
     { name: "identifier" },
     '"."',
     { tag: "identifier" },
-    { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
+    { args: { $ap: ["one_or_more", '"("', "pattern", '")"'] } },
   ],
 }
 
