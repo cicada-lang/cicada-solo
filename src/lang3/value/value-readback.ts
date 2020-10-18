@@ -6,7 +6,7 @@ import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { readback_union } from "./value-readback-union"
-import { readback_as_pi } from "./value-readback-as-pi"
+import { readback_fn } from "./value-readback-fn"
 import { readback_as_cls } from "./value-readback-as-cls"
 import { readback_type_constructor } from "./value-readback-type-constructor"
 import { readback_datatype } from "./value-readback-datatype"
@@ -29,7 +29,7 @@ export function readback(
   if (value.kind === "Value.data") return readback_data(mod, ctx, t, value)
   if (t.kind === "Value.union" && value.kind !== "Value.not_yet")
     return readback_union(mod, ctx, t, value)
-  if (t.kind === "Value.pi") return readback_as_pi(mod, ctx, t, value)
+  if (t.kind === "Value.pi") return readback_fn(mod, ctx, t, value)
   if (t.kind === "Value.cls") return readback_as_cls(mod, ctx, t, value)
   if (
     t.kind === "Value.absurd" &&

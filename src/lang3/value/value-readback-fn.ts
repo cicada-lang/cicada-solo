@@ -6,12 +6,12 @@ import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as ut from "../../ut"
 
-export function readback_as_pi(
+export function readback_fn(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   pi: Value.pi,
   value: Value.Value
-): Exp.Exp {
+): Exp.fn {
   // NOTE everything with a function type
   //   is immediately read back as having a Lambda on top.
   //   This implements the η-rule for functions.
