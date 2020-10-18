@@ -42,6 +42,7 @@
 - [lang3] `Exp.fn` -- `Exp.evaluate`
 - [lang3] `Exp.fn` -- `Exp.check_fn`
 - [lang3] `Exp.fn` -- `Exp.equivalent`
+- [lang3] matchers -- `Exp.fn`
 
 - [lang3] `Exp.fn` eval
 
