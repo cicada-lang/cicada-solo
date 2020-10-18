@@ -50,6 +50,7 @@ function match_pattern(
     t.kind === "Value.type_constructor" &&
     t.name === pattern.name
   )
+    // TODO Why we can not normalize `type_constructor` to `datatype`?
     return match_data(mod, ctx, pattern, t, t, matched)
 
   if (
