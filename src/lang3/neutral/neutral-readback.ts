@@ -22,7 +22,7 @@ export function readback(
     case "Neutral.match": {
       return Exp.ap(
         Normal.readback(mod, ctx, { t: neutral.pi, value: neutral.case_fn }),
-        Neutral.readback(mod, ctx, neutral.target)
+        Neutral.readback(mod, ctx, neutral.arg)
       )
     }
     case "Neutral.dot": {

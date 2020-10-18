@@ -33,8 +33,6 @@
 
 > condition semantic.
 
-- [lang3] fix `do_ap_case_fn` by `Neutral.match`
-
 - [lang3] syntax for `Exp.case_fn` -- `{ (<pattern> => <exp>)+ }`
 
 > nested match.

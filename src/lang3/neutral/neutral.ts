@@ -27,20 +27,20 @@ export const ap = (target: Neutral, arg: Normal.Normal): ap => ({
 
 interface match {
   kind: "Neutral.match"
-  target: Neutral
   case_fn: Value.case_fn
   pi: Value.pi
+  arg: Neutral
 }
 
 export const match = (
-  target: Neutral,
   case_fn: Value.case_fn,
-  pi: Value.pi
+  pi: Value.pi,
+  arg: Neutral,
 ): match => ({
   kind: "Neutral.match",
-  target,
   case_fn,
   pi,
+  arg,
 })
 
 interface dot {

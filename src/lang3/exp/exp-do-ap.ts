@@ -25,7 +25,29 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   )
 }
 
-export function do_ap_case_fn(case_fn: Value.case_fn, arg: Value.Value): Value.Value {
+export function do_ap_case_fn(
+  case_fn: Value.case_fn,
+  arg: Value.Value
+): Value.Value {
+  if (arg.kind === "Value.not_yet") {
+    if (arg.t.kind === "Value.pi")
+      return Value.not_yet(
+        Value.Closure.apply(arg.t.ret_t_cl, arg),
+        Neutral.match(
+          case_fn,
+          arg.t,
+          arg.neutral)
+      )
+
+    throw new Trace.Trace(
+      Exp.explain_elim_target_type_mismatch({
+        elim: "match",
+        expecting: ["Value.pi"],
+        reality: arg.t.kind,
+      })
+    )
+  }
+
   for (const ret_cl of case_fn.ret_cls) {
     try {
       return Value.Closure.apply(ret_cl, arg)
