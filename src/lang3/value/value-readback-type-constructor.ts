@@ -11,7 +11,7 @@ export function readback_type_constructor(
   ctx: Ctx.Ctx,
   t: Value.Value,
   type_constructor: Value.type_constructor
-): Exp.Exp {
+): Exp.type_constructor {
   if (!Value.conversion(mod, ctx, Value.type, t, type_constructor.t))
     throw new Trace.Trace("t is not equivalent to type_constructor.t")
 

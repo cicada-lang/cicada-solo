@@ -9,8 +9,7 @@ export function readback_cls(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   cls: Value.cls
-): Exp.Exp {
-
+): Exp.cls {
   ctx = Ctx.clone(ctx)
   // NOTE side-effect on ctx
   const norm_sat = readback_sat(mod, ctx, cls.sat)

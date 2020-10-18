@@ -10,6 +10,7 @@ import { readback_as_pi } from "./value-readback-as-pi"
 import { readback_as_cls } from "./value-readback-as-cls"
 import { readback_type_constructor } from "./value-readback-type-constructor"
 import { readback_datatype } from "./value-readback-datatype"
+import { readback_data_constructor } from "./value-readback-data-constructor"
 import { readback_type } from "./value-readback-type"
 
 export function readback(
@@ -22,6 +23,8 @@ export function readback(
     return readback_type_constructor(mod, ctx, t, value)
   if (value.kind === "Value.datatype")
     return readback_datatype(mod, ctx, t, value)
+  if (value.kind === "Value.data_constructor")
+    return readback_data_constructor(mod, ctx, t, value)
   if (t.kind === "Value.union" && value.kind !== "Value.not_yet")
     return readback_union(mod, ctx, t, value)
   if (t.kind === "Value.pi") return readback_as_pi(mod, ctx, t, value)

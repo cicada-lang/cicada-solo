@@ -20,7 +20,7 @@ export type Value =
   | type_constructor
   | datatype
   | data_constructor
-//  | data
+  | data
   | type
   | not_yet
 
