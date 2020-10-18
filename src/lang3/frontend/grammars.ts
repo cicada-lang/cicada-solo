@@ -35,7 +35,7 @@ export const exp = {
   "exp:arrow": ['"("', { arg_t: "exp" }, '")"', '"-"', '">"', { ret_t: "exp" }],
   "exp:fn": [
     '"("',
-    { name: "identifier" },
+    { pattern: "pattern" },
     '")"',
     '"="',
     '">"',
@@ -109,6 +109,20 @@ export const exp = {
     { deduction_entries: { $ap: ["one_or_more", "deduction_entry"] } },
     { deduction_args: { $ap: ["zero_or_more", "exp"] } },
     '"}"',
+  ],
+}
+
+export const pattern = {
+  "pattern:v": [{ name: "identifier" }],
+  "pattern:datatype": [
+    { name: "identifier" },
+    { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
+  ],
+  "pattern:data": [
+    { name: "identifier" },
+    '"."',
+    { tag: "identifier" },
+    { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
   ],
 }
 
