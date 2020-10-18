@@ -33,8 +33,6 @@
 
 > condition semantic.
 
-- [lang2] change function declaration -- `alpha`
-
 - [lang3] `Pattern`
   - we can infer the type of every (nested) pattern variables.
 - [lang3] `Pattern` in the `arg` of `fn`

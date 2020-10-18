@@ -56,7 +56,10 @@ export function do_dot_type_constructor(
   )
 }
 
-export function do_dot_not_yet(not_yet: Value.not_yet, name: string): Value.not_yet {
+export function do_dot_not_yet(
+  not_yet: Value.not_yet,
+  name: string
+): Value.not_yet {
   if (not_yet.t.kind === "Value.cls")
     return Value.not_yet(
       Value.Telescope.dot(not_yet.t.tel, name),

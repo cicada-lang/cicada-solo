@@ -16,10 +16,11 @@ export function infer_dot(
 
   const target = Exp.evaluate(mod, Ctx.to_env(ctx), dot.target)
   if (target.kind === "Value.type_constructor") {
-    const data_constructor =  Exp.do_dot_type_constructor(target, dot.name)
+    const data_constructor = Exp.do_dot_type_constructor(target, dot.name)
     return data_constructor.t
   }
 
-  throw new Trace.Trace("expecting target to be of type Value.cls, or to be a type_constructor.")
-
+  throw new Trace.Trace(
+    "expecting target to be of type Value.cls, or to be a type_constructor."
+  )
 }

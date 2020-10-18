@@ -8,8 +8,5 @@ export function conversion(
   x: Value.Value,
   y: Value.Value
 ): boolean {
-  return Exp.equivalent(
-    Value.readback(ctx, t, x),
-    Value.readback(ctx, t, y)
-  )
+  return Exp.equivalent(Value.readback(ctx, t, x), Value.readback(ctx, t, y))
 }
