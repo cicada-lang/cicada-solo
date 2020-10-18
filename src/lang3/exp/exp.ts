@@ -1,4 +1,5 @@
 import * as Stmt from "../stmt"
+import * as Pattern from "../pattern"
 
 export type Exp =
   | v
@@ -47,13 +48,13 @@ export const pi = (name: string, arg_t: Exp, ret_t: Exp): pi => ({
 
 export interface fn {
   kind: "Exp.fn"
-  name: string
+  pattern: Pattern.Pattern
   ret: Exp
 }
 
-export const fn = (name: string, ret: Exp): fn => ({
+export const fn = (pattern: Pattern.Pattern, ret: Exp): fn => ({
   kind: "Exp.fn",
-  name,
+  pattern,
   ret,
 })
 
