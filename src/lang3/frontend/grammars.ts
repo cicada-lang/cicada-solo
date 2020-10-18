@@ -47,9 +47,9 @@ export const exp = {
   ],
   "exp:cls": ['"{"', { sat: "sat" }, { scope: "scope" }, '"}"'],
   "exp:obj": ['"{"', { properties: "properties" }, '"}"'],
-  "exp:field": [{ target: "exp" }, '"."', { name: "identifier" }],
+  "exp:field": [{ target: "head" }, '"."', { name: "identifier" }],
   "exp:method": [
-    { target: "exp" },
+    { target: "head" },
     '"."',
     { name: "identifier" },
     { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
@@ -109,6 +109,21 @@ export const exp = {
     { deduction_entries: { $ap: ["one_or_more", "deduction_entry"] } },
     { deduction_args: { $ap: ["zero_or_more", "exp"] } },
     '"}"',
+  ],
+}
+
+export const head = {
+  "head:var": [{ name: "identifier" }],
+  "head:ap": [
+    { target: "identifier" },
+    { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
+  ],
+  "head:field": [{ target: "head" }, '"."', { name: "identifier" }],
+  "head:method": [
+    { target: "head" },
+    '"."',
+    { name: "identifier" },
+    { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
   ],
 }
 

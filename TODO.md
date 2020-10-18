@@ -31,10 +31,6 @@
 
 # lang3
 
-- [lang3] [bug] `(Nat.zero) => Bool.true`
-  - will be viewed as `[ (Nat.zero) => Bool ] .true`
-    but it should be viewed as `(Nat.zero) => [ Bool.true ]`
-
 > condition semantic.
 
 - [lang3] `Exp.case_fn`

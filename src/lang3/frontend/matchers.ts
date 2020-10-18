@@ -25,9 +25,9 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       Exp.cls(sat_matcher(sat), scope_matcher(scope)),
     "exp:obj": ({ properties }) => Exp.obj(properties_matcher(properties)),
     "exp:field": ({ target, name }) =>
-      Exp.dot(exp_matcher(target), pt.Tree.str(name)),
+      Exp.dot(head_matcher(target), pt.Tree.str(name)),
     "exp:method": ({ target, name, args }) => {
-      let exp: Exp.Exp = Exp.dot(exp_matcher(target), pt.Tree.str(name))
+      let exp: Exp.Exp = Exp.dot(head_matcher(target), pt.Tree.str(name))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
         exp = Exp.ap(exp, exp_matcher(arg))
       }
@@ -65,6 +65,28 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
         .zero_or_more_matcher(deduction_args)
         .map(exp_matcher)
       return deduction_aux(entries, args)
+    },
+  })(tree)
+}
+
+export function head_matcher(tree: pt.Tree.Tree): Exp.Exp {
+  return pt.Tree.matcher<Exp.Exp>({
+    "head:var": ({ name }) => Exp.v(pt.Tree.str(name)),
+    "head:ap": ({ target, args }) => {
+      let exp: Exp.Exp = Exp.v(pt.Tree.str(target))
+      for (const arg of pt.matchers.one_or_more_matcher(args)) {
+        exp = Exp.ap(exp, exp_matcher(arg))
+      }
+      return exp
+    },
+    "head:field": ({ target, name }) =>
+      Exp.dot(head_matcher(target), pt.Tree.str(name)),
+    "head:method": ({ target, name, args }) => {
+      let exp: Exp.Exp = Exp.dot(head_matcher(target), pt.Tree.str(name))
+      for (const arg of pt.matchers.one_or_more_matcher(args)) {
+        exp = Exp.ap(exp, exp_matcher(arg))
+      }
+      return exp
     },
   })(tree)
 }
