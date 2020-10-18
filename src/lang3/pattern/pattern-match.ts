@@ -8,11 +8,11 @@ export function match(
   pattern: Pattern.Pattern,
   value: Value.Value
 ): undefined | Env.Env {
-  return match_with(env, pattern, value, new Map())
+  return match_pattern(env, pattern, value, new Map())
 }
 
 // NOTE side effect on `matched`
-function match_with(
+function match_pattern(
   env: Env.Env,
   pattern: Pattern.Pattern,
   value: Value.Value,
@@ -34,7 +34,7 @@ function match_with(
         value.kind === "Value.datatype" &&
         value.type_constructor.name === pattern.name
       ) {
-        return match_args_with(env, pattern.args, value.args, matched)
+        return match_patterns(env, pattern.args, value.args, matched)
       }
       return undefined
     }
@@ -44,7 +44,7 @@ function match_with(
         value.data_constructor.type_constructor.name === pattern.name &&
         value.data_constructor.tag === pattern.tag
       ) {
-        return match_args_with(env, pattern.args, value.args, matched)
+        return match_patterns(env, pattern.args, value.args, matched)
       }
       return undefined
     }
@@ -52,18 +52,18 @@ function match_with(
 }
 
 // NOTE side effect on `matched`
-function match_args_with(
+function match_patterns(
   env: Env.Env,
   patterns: Array<Pattern.Pattern>,
-  args: Array<Value.Value>,
+  values: Array<Value.Value>,
   matched: Map<string, Value.Value>
 ): undefined | Env.Env {
-  if (patterns.length !== args.length) return undefined
+  if (patterns.length !== values.length) return undefined
   let result: undefined | Env.Env = env
   for (let i = 0; i < patterns.length; i++) {
     const pattern = patterns[i]
-    const arg = args[i]
-    result = match_with(result, pattern, arg, matched)
+    const value = values[i]
+    result = match_pattern(result, pattern, value, matched)
     if (result === undefined) return undefined
   }
   return result

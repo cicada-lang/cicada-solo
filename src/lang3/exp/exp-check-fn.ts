@@ -31,11 +31,11 @@ function check_match(
   pattern: Pattern.Pattern,
   t: Value.Value
 ): undefined | Ctx.Ctx {
-  return match_with(mod, ctx, pattern, t, new Map())
+  return match_pattern(mod, ctx, pattern, t, new Map())
 }
 
 // NOTE side effect on `matched`
-function match_with(
+function match_pattern(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   pattern: Pattern.Pattern,
@@ -45,30 +45,74 @@ function match_with(
   switch (pattern.kind) {
     case "Pattern.v": {
       const found = matched.get(pattern.name)
-      if (found === undefined)
-        return Ctx.extend(ctx, pattern.name, t)
-      if (Value.conversion(mod, ctx, Value.type, found, t))
-        return ctx
+      if (found === undefined) return Ctx.extend(ctx, pattern.name, t)
+      if (Value.conversion(mod, ctx, Value.type, found, t)) return ctx
       return undefined
     }
     case "Pattern.datatype": {
-      // if (
-      //   value.kind === "Value.datatype" &&
-      //   value.type_constructor.name === pattern.name
-      // ) {
-      //   return match_args_with(env, pattern.args, value.args, matched)
-      // }
+      // NOTE
+      // - Examples:
+      //   - List(T): Type
+      if (t.kind === "Value.type") {
+        const type_constructor = Exp.evaluate(
+          mod,
+          Ctx.to_env(ctx),
+          Exp.v(pattern.name)
+        )
+        if (type_constructor.kind !== "Value.type_constructor")
+          throw new Trace.Trace("expecting type_constructor")
+        return match_patterns(
+          mod,
+          ctx,
+          pattern.args,
+          type_constructor.t,
+          matched
+        )
+      }
       return undefined
     }
     case "Pattern.data": {
-      // if (
-      //   value.kind === "Value.data" &&
-      //   value.data_constructor.type_constructor.name === pattern.name &&
-      //   value.data_constructor.tag === pattern.tag
-      // ) {
-      //   return match_args_with(env, pattern.args, value.args, matched)
-      // }
+      // NOTE
+      // - Examples:
+      //   - List.null(T): List(T)
+      //   - List.cons(T)(head)(tail): List(T)
+      //   - Vec.null(T): Vec(T)(Nat.zero)
+      //   - Vec.cons(T)(prev)(head)(tail): Vec(T)(Nat.succ(prev))
+      // NOTE
+      // - We will infer the type of every (nested) pattern variables.
+      if (
+        t.kind === "Value.datatype" &&
+        t.type_constructor.name === pattern.name
+      ) {
+        const data_constructor = Exp.do_dot(t.type_constructor, pattern.tag)
+        if (data_constructor.kind !== "Value.data_constructor")
+          throw new Trace.Trace("expecting data_constructor")
+        const result_ctx = match_patterns(
+          mod,
+          ctx,
+          pattern.args,
+          data_constructor.t,
+          matched
+        )
+        // NOTE
+        // - We simply do a check after the `match_patterns`,
+        //   the type will not be used to constrain pattern variables.
+        // Exp.check(mod, result_ctx, Pattern.to_exp(pattern), t)
+        return result_ctx
+      }
       return undefined
     }
   }
+}
+
+// NOTE side effect on `matched`
+function match_patterns(
+  mod: Mod.Mod,
+  ctx: Ctx.Ctx,
+  patterns: Array<Pattern.Pattern>,
+  t: Value.Value,
+  matched: Map<string, Value.Value>
+): undefined | Ctx.Ctx {
+  // TODO
+  return undefined
 }
