@@ -39,7 +39,7 @@ export const exp = {
     '")"',
     '"="',
     '">"',
-    { body: "exp" },
+    { ret: "exp" },
   ],
   "exp:case_fn": ['"{"', { cases: "cases" }, '"}"'],
   "exp:ap": [
@@ -139,7 +139,7 @@ export const case_entry = {
     '")"',
     '"="',
     '">"',
-    { body: "exp" },
+    { ret: "exp" },
   ],
 }
 

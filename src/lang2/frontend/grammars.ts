@@ -45,7 +45,7 @@ export const exp = {
     '")"',
     '"="',
     '">"',
-    { body: "exp" },
+    { ret: "exp" },
   ],
   "exp:ap": [
     { target: "identifier" },

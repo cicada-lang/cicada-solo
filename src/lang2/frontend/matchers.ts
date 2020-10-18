@@ -10,7 +10,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       Exp.pi(pt.Tree.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:arrow": ({ arg_t, ret_t }) =>
       Exp.pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
-    "exp:fn": ({ name, body }) => Exp.fn(pt.Tree.str(name), exp_matcher(body)),
+    "exp:fn": ({ name, ret }) => Exp.fn(pt.Tree.str(name), exp_matcher(ret)),
     "exp:ap": ({ target, args }) => {
       let exp: Exp.Exp = Exp.v(pt.Tree.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {

@@ -33,7 +33,7 @@
 
 > condition semantic.
 
-- [lang3] matchers for `Exp.case_fn`
+- [lang3] test `Exp.case_fn`
 
 > nested match.
 

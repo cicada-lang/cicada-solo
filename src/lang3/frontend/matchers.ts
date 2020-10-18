@@ -12,8 +12,9 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       Exp.pi(pt.Tree.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:arrow": ({ arg_t, ret_t }) =>
       Exp.pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
-    "exp:fn": ({ pattern, body }) =>
-      Exp.fn(pattern_matcher(pattern), exp_matcher(body)),
+    "exp:fn": ({ pattern, ret }) =>
+      Exp.fn(pattern_matcher(pattern), exp_matcher(ret)),
+    "exp:case_fn": ({ cases }) => Exp.case_fn(cases_matcher(cases)),
     "exp:ap": ({ target, args }) => {
       let exp: Exp.Exp = Exp.v(pt.Tree.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
@@ -66,6 +67,22 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
         .map(exp_matcher)
       return deduction_aux(entries, args)
     },
+  })(tree)
+}
+
+export function cases_matcher(tree: pt.Tree.Tree): Array<Exp.Case> {
+  return pt.Tree.matcher<Array<Exp.Case>>({
+    "cases:cases": ({ cases }) =>
+      pt.matchers.one_or_more_matcher(cases).map(case_entry_matcher),
+  })(tree)
+}
+
+export function case_entry_matcher(tree: pt.Tree.Tree): Exp.Case {
+  return pt.Tree.matcher<Exp.Case>({
+    "case_entry:case_entry": ({ pattern, ret }) => ({
+      pattern: pattern_matcher(pattern),
+      ret: exp_matcher(ret),
+    }),
   })(tree)
 }
 
