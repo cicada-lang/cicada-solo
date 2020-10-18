@@ -1,6 +1,7 @@
 import * as Normal from "../normal"
+import * as Value from "../value"
 
-export type Neutral = v | ap | dot | replace | absurd_ind
+export type Neutral = v | ap | match | dot | replace | absurd_ind
 
 interface v {
   kind: "Neutral.v"
@@ -22,6 +23,24 @@ export const ap = (target: Neutral, arg: Normal.Normal): ap => ({
   kind: "Neutral.ap",
   target,
   arg,
+})
+
+interface match {
+  kind: "Neutral.match"
+  target: Neutral
+  case_fn: Value.case_fn
+  pi: Value.pi
+}
+
+export const match = (
+  target: Neutral,
+  case_fn: Value.case_fn,
+  pi: Value.pi
+): match => ({
+  kind: "Neutral.match",
+  target,
+  case_fn,
+  pi,
 })
 
 interface dot {

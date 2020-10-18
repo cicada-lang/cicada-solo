@@ -19,6 +19,13 @@ export function readback(
         Normal.readback(mod, ctx, neutral.arg)
       )
     }
+    case "Neutral.match": {
+      throw new Error("TODO")
+      // return Exp.ap(
+      //   Neutral.readback(mod, ctx, neutral.target),
+      //   Normal.readback(mod, ctx, neutral.arg)
+      // )
+    }
     case "Neutral.dot": {
       return Exp.dot(Neutral.readback(mod, ctx, neutral.target), neutral.name)
     }

@@ -117,7 +117,7 @@ export function do_ap_not_yet(
   if (not_yet.t.kind === "Value.pi")
     return Value.not_yet(
       Value.Closure.apply(not_yet.t.ret_t_cl, arg),
-      Neutral.ap(not_yet.neutral, new Normal.Normal(not_yet.t.arg_t, arg))
+      Neutral.ap(not_yet.neutral, Normal.create(not_yet.t.arg_t, arg))
     )
 
   throw new Trace.Trace(

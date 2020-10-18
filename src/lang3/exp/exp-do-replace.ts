@@ -28,8 +28,8 @@ export function do_replace(
         Exp.do_ap(motive, target.t.to),
         Neutral.replace(
           target.neutral,
-          new Normal.Normal(motive_t, motive),
-          new Normal.Normal(base_t, base)
+          Normal.create(motive_t, motive),
+          Normal.create(base_t, base)
         )
       )
     } else {
