@@ -2,6 +2,7 @@ import * as Exp from "../exp"
 import * as Env from "../env"
 import * as Mod from "../mod"
 import * as Value from "../value"
+import * as Pattern from "../pattern"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../../trace"
@@ -19,7 +20,7 @@ export function do_replace(
       const closure = Value.Closure.create(
         Mod.init(),
         Env.init(),
-        "x",
+        Pattern.v("x"),
         Exp.type
       )
       const motive_t = Value.pi(target.t.t, closure)
