@@ -6,6 +6,7 @@ import * as Trace from "../../trace"
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   if (target.kind === "Value.fn") return Value.Closure.apply(target.ret_cl, arg)
+  if (target.kind === "Value.case_fn") return do_ap_case_fn(target, arg)
   if (target.kind === "Value.cls") return do_ap_cls(target, arg)
   if (target.kind === "Value.type_constructor")
     return do_ap_type_constructor(target, arg)
@@ -22,6 +23,22 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
       reality: target.kind,
     })
   )
+}
+
+export function do_ap_case_fn(case_fn: Value.case_fn, arg: Value.Value): Value.Value {
+  for (const ret_cl of case_fn.ret_cls) {
+    try {
+      return Value.Closure.apply(ret_cl, arg)
+    } catch (error) {
+      if (error instanceof Trace.Trace) {
+        // NOTE pass
+      } else {
+        throw error
+      }
+    }
+  }
+
+  throw new Trace.Trace("case_fn mismatch")
 }
 
 export function do_ap_cls(cls: Value.cls, arg: Value.Value): Value.cls {

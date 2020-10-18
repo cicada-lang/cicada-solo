@@ -33,7 +33,6 @@
 
 > condition semantic.
 
-- [lang3] `Value.case_fn` -- `Exp.do_ap`
 - [lang3] `Value.case_fn` -- `Value.readback`
 
 - [lang3] syntax for `Exp.case_fn` -- `{ (<pattern> => <exp>)+ }`
