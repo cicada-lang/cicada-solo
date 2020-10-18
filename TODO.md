@@ -37,13 +37,12 @@
 > - we will infer the type of every (nested) pattern variables.
 
 - [lang3] `Value.fn` in `Value.readback_as_pi`
-- [lang3] `Pattern.match`
 - [lang3] `pi` is also using `Closure`
 - [lang3] `Exp.fn` -- `Exp.check_fn`
 - [lang3] `Exp.fn` -- `Exp.equivalent`
 - [lang3] matchers -- `Exp.fn`
 
-- [lang3] `Exp.fn` eval
+- [lang3] test `Pattern` in `arg` of `fn`
 
 - [lang3] `Exp.case_fn`
 - [lang3] `Exp.case_fn` -- `evaluate`
