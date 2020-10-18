@@ -33,7 +33,6 @@
 
 > condition semantic.
 
-- [lang3] `readback_obj` instead of `readback_as_cls`
 - [lang3] `Neutral.match`
 - [lang3] fix `do_ap_case_fn` by `Neutral.match`
 - [lang3] `Value.case_fn` -- `Value.readback`

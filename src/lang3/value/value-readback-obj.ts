@@ -5,7 +5,7 @@ import * as Env from "../env"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
 
-export function readback_as_cls(
+export function readback_obj(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   cls: Value.cls,
