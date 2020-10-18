@@ -34,16 +34,16 @@
 > condition semantic.
 
 - [lang3] `Exp.case_fn`
-- [lang3] `Exp.case_fn` -- `evaluate`
-- [lang3] `Exp.case_fn` -- `infer`
-- [lang3] `Exp.case_fn` -- `repr`
-- [lang3] `Exp.case_fn` -- `alpha_equivalent`
+- [lang3] `Exp.case_fn` -- `Exp.repr`
+- [lang3] `Exp.case_fn` -- `Exp.evaluate`
+- [lang3] `Exp.case_fn` -- `Exp.check`
+- [lang3] `Exp.case_fn` -- `Exp.equivalent`
 
 - [lang3] `Value.case_fn`
 - [lang3] `Value.case_fn` -- `Exp.do_ap`
-- [lang3] `Value.case_fn` -- `readback`
+- [lang3] `Value.case_fn` -- `Value.readback`
 
-- [lang3] syntax for `Exp.case_fn`
+- [lang3] syntax for `Exp.case_fn` -- `{ (<pattern> => <exp>)+ }`
 
 > nested match.
 
