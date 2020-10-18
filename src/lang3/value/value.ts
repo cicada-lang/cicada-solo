@@ -9,6 +9,7 @@ import * as Env from "../env"
 export type Value =
   | pi
   | fn
+  | case_fn
   | cls
   | obj
   | equal
@@ -44,6 +45,16 @@ export interface fn {
 export const fn = (ret_cl: Closure.Closure): fn => ({
   kind: "Value.fn",
   ret_cl,
+})
+
+export interface case_fn {
+  kind: "Value.case_fn"
+  ret_cls: Array<Closure.Closure>
+}
+
+export const case_fn = (ret_cls: Array<Closure.Closure>): case_fn => ({
+  kind: "Value.case_fn",
+  ret_cls,
 })
 
 export interface cls {
