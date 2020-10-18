@@ -37,7 +37,6 @@
 > - we will infer the type of every (nested) pattern variables.
 > - `pi` is also using `Closure`
 
-- [lang3] `pattern_matcher` -- The rule is "if OneCap must be ALL_CAPS" for `Pattern.v` for `Exp.fn`
 - [lang3] test `Pattern` in `arg` of `fn`
 
 - [lang3] `Exp.case_fn`

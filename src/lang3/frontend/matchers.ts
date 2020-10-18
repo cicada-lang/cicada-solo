@@ -69,10 +69,19 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   })(tree)
 }
 
+function all_caps_p(s: string): boolean {
+  return s === s.toUpperCase()
+}
+
 function pattern_matcher(tree: pt.Tree.Tree): Pattern.Pattern {
   return pt.Tree.matcher<Pattern.Pattern>({
     // NOTE The rule is "if OneCap must be ALL_CAPS"
-    "pattern:v": ({ name }) => Pattern.v(pt.Tree.str(name)),
+    "pattern:v": ({ name }) => {
+      const s = pt.Tree.str(name)
+      return all_caps_p(s)
+        ? Pattern.v(s)
+        : Pattern.datatype(pt.Tree.str(name), [])
+    },
     "pattern:datatype": ({ name, args }) =>
       Pattern.datatype(
         pt.Tree.str(name),
