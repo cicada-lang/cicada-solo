@@ -165,6 +165,42 @@ export const datatype = (
   t,
 })
 
+export interface data_constructor {
+  kind: "Value.data_constructor"
+  name: string
+  tag: string
+  t: Value
+}
+
+export const data_constructor = (
+  name: string,
+  tag: string,
+  t: Value
+): data_constructor => ({
+  kind: "Value.data_constructor",
+  name,
+  tag,
+  t,
+})
+
+// export interface data {
+//   kind: "Value.data"
+//   type_constructor: type_constructor
+//   args: Array<Value>
+//   t: Value
+// }
+
+// export const data = (
+//   type_constructor: type_constructor,
+//   args: Array<Value>,
+//   t: Value
+// ): data => ({
+//   kind: "Value.data",
+//   type_constructor,
+//   args,
+//   t,
+// })
+
 export interface type {
   kind: "Value.type"
 }

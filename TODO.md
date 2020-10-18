@@ -33,19 +33,16 @@
 
 > 实现 condition 的语义。
 
-- [lang3] `Pattern`
-  - we can infer the type of every (nested) pattern variables.
-
-- [lang3] `Pattern` in the `arg` of `fn`
-
-- [lang3] `Exp.data`
-- [lang3] `Exp.data` -- `evaluate`
-- [lang3] `Exp.data` -- `infer`
-- [lang3] `Exp.data` -- `repr`
-- [lang3] `Exp.data` -- `alpha_equivalent`
+- [lang3] no `Exp.data_constructor` -- overload `Exp.dot`
+- [lang3] `Value.data_constructor` -- `readback`
 
 - [lang3] `Value.data`
+- [lang3] no `Exp.data` -- overload `Exp.ap`
 - [lang3] `Value.data` -- `readback`
+
+- [lang3] `Pattern`
+  - we can infer the type of every (nested) pattern variables.
+- [lang3] `Pattern` in the `arg` of `fn`
 
 - [lang3] `Exp.case_fn`
 - [lang3] `Exp.case_fn` -- `evaluate`
