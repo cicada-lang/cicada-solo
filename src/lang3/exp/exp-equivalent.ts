@@ -1,4 +1,5 @@
 import * as Exp from "../exp"
+import * as Pattern from "../pattern"
 
 export function equivalent(x: Exp.Exp, y: Exp.Exp): boolean {
   return alpha(x, y, {
@@ -8,15 +9,13 @@ export function equivalent(x: Exp.Exp, y: Exp.Exp): boolean {
   })
 }
 
-function alpha(
-  left: Exp.Exp,
-  right: Exp.Exp,
-  the: {
-    depth: number
-    left_names: Map<string, number>
-    right_names: Map<string, number>
-  }
-): boolean {
+interface AlphaCtx {
+  depth: number
+  left_names: Map<string, number>
+  right_names: Map<string, number>
+}
+
+function alpha(left: Exp.Exp, right: Exp.Exp, the: AlphaCtx): boolean {
   if (left.kind === "Exp.v" && right.kind === "Exp.v") {
     const left_depth = the.left_names.get(left.name)
     const right_depth = the.right_names.get(right.name)
@@ -40,12 +39,11 @@ function alpha(
       })
     )
 
-  if (left.kind === "Exp.fn" && right.kind === "Exp.fn")
-    return alpha(left.ret, right.ret, {
-      depth: the.depth + 1,
-      left_names: the.left_names.set(left.name, the.depth),
-      right_names: the.right_names.set(right.name, the.depth),
-    })
+  if (left.kind === "Exp.fn" && right.kind === "Exp.fn") {
+    const new_alpha_ctx = match_pattern(left.pattern, right.pattern, the)
+    if (new_alpha_ctx === undefined) return false
+    return alpha(left.ret, right.ret, new_alpha_ctx)
+  }
 
   if (left.kind === "Exp.ap" && right.kind === "Exp.ap")
     return (
@@ -127,15 +125,7 @@ function alpha(
   return false
 }
 
-function alpha_cls(
-  left: Exp.cls,
-  right: Exp.cls,
-  the: {
-    depth: number
-    left_names: Map<string, number>
-    right_names: Map<string, number>
-  }
-): boolean {
+function alpha_cls(left: Exp.cls, right: Exp.cls, the: AlphaCtx): boolean {
   if (left.sat.length !== right.sat.length) {
     return false
   }
@@ -158,15 +148,7 @@ function alpha_cls(
   return true
 }
 
-function alpha_obj(
-  left: Exp.obj,
-  right: Exp.obj,
-  the: {
-    depth: number
-    left_names: Map<string, number>
-    right_names: Map<string, number>
-  }
-): boolean {
+function alpha_obj(left: Exp.obj, right: Exp.obj, the: AlphaCtx): boolean {
   if (left.properties.size !== right.properties.size) {
     return false
   }
@@ -186,4 +168,23 @@ function union_flatten(union: Exp.union): Array<Exp.Exp> {
   const right_parts =
     right.kind === "Exp.union" ? union_flatten(right) : [right]
   return [...left_parts, ...right_parts]
+}
+
+function match_pattern(
+  left: Pattern.Pattern,
+  right: Pattern.Pattern,
+  the: AlphaCtx
+): undefined | AlphaCtx {
+  if (left.kind === "Pattern.v" && right.kind === "Pattern.v")
+    return {
+      depth: the.depth + 1,
+      left_names: the.left_names.set(left.name, the.depth),
+      right_names: the.right_names.set(right.name, the.depth),
+    }
+  // TODO
+  if (left.kind === "Pattern.datatype" && right.kind === "Pattern.datatype" )
+    return
+  // TODO
+  if (left.kind === "Pattern.data" && right.kind === "Pattern.data") return
+  return undefined
 }

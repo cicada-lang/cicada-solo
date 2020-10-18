@@ -42,68 +42,59 @@ function match_pattern(
   t: Value.Value,
   matched: Map<string, Value.Value>
 ): undefined | Ctx.Ctx {
-  switch (pattern.kind) {
-    case "Pattern.v": {
-      const found = matched.get(pattern.name)
-      if (found === undefined) return Ctx.extend(ctx, pattern.name, t)
-      if (Value.conversion(mod, ctx, Value.type, found, t)) return ctx
-      return undefined
-    }
-    case "Pattern.datatype": {
-      // NOTE
-      // - Examples:
-      //   - List(T): Type
-      if (t.kind === "Value.type") {
-        const type_constructor = Exp.evaluate(
-          mod,
-          Ctx.to_env(ctx),
-          Exp.v(pattern.name)
-        )
-        if (type_constructor.kind !== "Value.type_constructor")
-          throw new Trace.Trace("expecting type_constructor")
-        return match_patterns(
-          mod,
-          ctx,
-          pattern.args,
-          type_constructor.t,
-          matched
-        )
-      }
-      return undefined
-    }
-    case "Pattern.data": {
-      // NOTE
-      // - Examples:
-      //   - List.null(T): List(T)
-      //   - List.cons(T)(head)(tail): List(T)
-      //   - Vec.null(T): Vec(T)(Nat.zero)
-      //   - Vec.cons(T)(prev)(head)(tail): Vec(T)(Nat.succ(prev))
-      // NOTE
-      // - We will infer the type of every (nested) pattern variables.
-      if (
-        t.kind === "Value.datatype" &&
-        t.type_constructor.name === pattern.name
-      ) {
-        const data_constructor = Exp.do_dot(t.type_constructor, pattern.tag)
-        if (data_constructor.kind !== "Value.data_constructor")
-          throw new Trace.Trace("expecting data_constructor")
-        const result_ctx = match_patterns(
-          mod,
-          ctx,
-          pattern.args,
-          data_constructor.t,
-          matched
-        )
-        if (result_ctx === undefined) return undefined
-        // NOTE
-        // - We simply do a check after the `match_patterns`,
-        //   the type will not be used to constrain pattern variables.
-        Exp.check(mod, result_ctx, Pattern.to_exp(pattern), t)
-        return result_ctx
-      }
-      return undefined
-    }
+  if (pattern.kind === "Pattern.v") {
+    const found = matched.get(pattern.name)
+    if (found === undefined) return Ctx.extend(ctx, pattern.name, t)
+    if (Value.conversion(mod, ctx, Value.type, found, t)) return ctx
+    return undefined
   }
+
+  if (pattern.kind === "Pattern.datatype" && t.kind === "Value.type") {
+    // NOTE
+    // - Examples:
+    //   - List(T): Type
+    const type_constructor = Exp.evaluate(
+      mod,
+      Ctx.to_env(ctx),
+      Exp.v(pattern.name)
+    )
+    if (type_constructor.kind !== "Value.type_constructor")
+      throw new Trace.Trace("expecting type_constructor")
+    return match_patterns(mod, ctx, pattern.args, type_constructor.t, matched)
+  }
+
+  if (
+    pattern.kind === "Pattern.data" &&
+    t.kind === "Value.datatype" &&
+    t.type_constructor.name === pattern.name
+  ) {
+    // NOTE
+    // - Examples:
+    //   - List.null(T): List(T)
+    //   - List.cons(T)(head)(tail): List(T)
+    //   - Vec.null(T): Vec(T)(Nat.zero)
+    //   - Vec.cons(T)(prev)(head)(tail): Vec(T)(Nat.succ(prev))
+    // NOTE
+    // - We will infer the type of every (nested) pattern variables.
+    const data_constructor = Exp.do_dot(t.type_constructor, pattern.tag)
+    if (data_constructor.kind !== "Value.data_constructor")
+      throw new Trace.Trace("expecting data_constructor")
+    const result_ctx = match_patterns(
+      mod,
+      ctx,
+      pattern.args,
+      data_constructor.t,
+      matched
+    )
+    if (result_ctx === undefined) return undefined
+    // NOTE
+    // - We simply do a check after the `match_patterns`,
+    //   the type will not be used to constrain pattern variables.
+    Exp.check(mod, result_ctx, Pattern.to_exp(pattern), t)
+    return result_ctx
+  }
+
+  return undefined
 }
 
 // NOTE side effect on `matched`

@@ -18,37 +18,35 @@ function match_pattern(
   value: Value.Value,
   matched: Map<string, Value.Value>
 ): undefined | Env.Env {
-  switch (pattern.kind) {
-    case "Pattern.v": {
-      const found = matched.get(pattern.name)
-      if (found === undefined) {
-        matched.set(pattern.name, value)
-        return Env.extend(env, pattern.name, value)
-      }
-      // NOTE not `Value.conversion()` because we do not have `ctx`
-      if (ut.equal(found, value)) return env
-      return undefined
+  if (pattern.kind === "Pattern.v") {
+    const found = matched.get(pattern.name)
+    if (found === undefined) {
+      matched.set(pattern.name, value)
+      return Env.extend(env, pattern.name, value)
     }
-    case "Pattern.datatype": {
-      if (
-        value.kind === "Value.datatype" &&
-        value.type_constructor.name === pattern.name
-      ) {
-        return match_patterns(env, pattern.args, value.args, matched)
-      }
-      return undefined
-    }
-    case "Pattern.data": {
-      if (
-        value.kind === "Value.data" &&
-        value.data_constructor.type_constructor.name === pattern.name &&
-        value.data_constructor.tag === pattern.tag
-      ) {
-        return match_patterns(env, pattern.args, value.args, matched)
-      }
-      return undefined
-    }
+    // NOTE not `Value.conversion()` because we do not have `ctx`
+    if (ut.equal(found, value)) return env
+    return undefined
   }
+
+  if (
+    pattern.kind === "Pattern.datatype" &&
+    value.kind === "Value.datatype" &&
+    value.type_constructor.name === pattern.name
+  ) {
+    return match_patterns(env, pattern.args, value.args, matched)
+  }
+
+  if (
+    pattern.kind === "Pattern.data" &&
+    value.kind === "Value.data" &&
+    value.data_constructor.type_constructor.name === pattern.name &&
+    value.data_constructor.tag === pattern.tag
+  ) {
+    return match_patterns(env, pattern.args, value.args, matched)
+  }
+
+  return undefined
 }
 
 // NOTE side effect on `matched`
