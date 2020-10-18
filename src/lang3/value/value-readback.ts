@@ -7,6 +7,7 @@ import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { readback_union } from "./value-readback-union"
 import { readback_fn } from "./value-readback-fn"
+import { readback_case_fn } from "./value-readback-case-fn"
 import { readback_obj } from "./value-readback-obj"
 import { readback_type_constructor } from "./value-readback-type-constructor"
 import { readback_datatype } from "./value-readback-datatype"
@@ -29,6 +30,8 @@ export function readback(
   if (value.kind === "Value.data") return readback_data(mod, ctx, t, value)
   if (t.kind === "Value.union" && value.kind !== "Value.not_yet")
     return readback_union(mod, ctx, t, value)
+  if (t.kind === "Value.pi" && value.kind === "Value.case_fn")
+    return readback_case_fn(mod, ctx, t, value)
   if (t.kind === "Value.pi") return readback_fn(mod, ctx, t, value)
   if (t.kind === "Value.cls") return readback_obj(mod, ctx, t, value)
   if (

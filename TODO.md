@@ -35,7 +35,6 @@
 
 - [lang3] `Neutral.match`
 - [lang3] fix `do_ap_case_fn` by `Neutral.match`
-- [lang3] `Value.case_fn` -- `Value.readback`
 
 - [lang3] syntax for `Exp.case_fn` -- `{ (<pattern> => <exp>)+ }`
 
