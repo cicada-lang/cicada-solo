@@ -7,3 +7,20 @@
 @show Nat.zero
 @show Nat.succ
 @show Nat.succ(Nat.zero)
+
+@datatype Bool : Type {
+  true: Bool
+  false: Bool
+}
+
+@show Bool
+@show Bool.true
+@show Bool.false
+
+true : Bool
+true = Bool.true
+
+zero_p : (Nat) -> Bool
+zero_p = (Nat.zero) => true
+
+@show zero_p(Nat.zero)

@@ -124,6 +124,11 @@ export const pattern = {
     { tag: "identifier" },
     { args: { $ap: ["one_or_more", '"("', "pattern", '")"'] } },
   ],
+  "pattern:data_nullary": [
+    { name: "identifier" },
+    '"."',
+    { tag: "identifier" },
+  ],
 }
 
 export const deduction_entry = {

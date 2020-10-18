@@ -5,6 +5,7 @@ import * as Neutral from "../neutral"
 import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
+import * as ut from "../../ut"
 
 export function check_fn(
   mod: Mod.Mod,
@@ -13,7 +14,13 @@ export function check_fn(
   pi: Value.pi
 ): void {
   const result_ctx = check_match(mod, ctx, fn.pattern, pi.arg_t)
-  if (result_ctx === undefined) throw new Trace.Trace("pattern mismatch")
+  if (result_ctx === undefined)
+    throw new Trace.Trace(
+      ut.aline(`
+        |Exp.check_fn -- pattern mismatch.
+        |- fn: ${Exp.repr(fn)}
+        |`)
+    )
   Exp.check(
     mod,
     result_ctx,
@@ -61,6 +68,30 @@ function match_pattern(
     if (type_constructor.kind !== "Value.type_constructor")
       throw new Trace.Trace("expecting type_constructor")
     return match_patterns(mod, ctx, pattern.args, type_constructor.t, matched)
+  }
+
+  if (
+    pattern.kind === "Pattern.data" &&
+    t.kind === "Value.type_constructor" &&
+    t.name === pattern.name
+  ) {
+    // TODO the type of type_constructor must be Value.type
+    const data_constructor = Exp.do_dot(t, pattern.tag)
+    if (data_constructor.kind !== "Value.data_constructor")
+      throw new Trace.Trace("expecting data_constructor")
+    const result_ctx = match_patterns(
+      mod,
+      ctx,
+      pattern.args,
+      data_constructor.t,
+      matched
+    )
+    if (result_ctx === undefined) return undefined
+    // NOTE
+    // - We simply do a check after the `match_patterns`,
+    //   the type will not be used to constrain pattern variables.
+    Exp.check(mod, result_ctx, Pattern.to_exp(pattern), t)
+    return result_ctx
   }
 
   if (

@@ -11,3 +11,16 @@
 Nat.zero
 Nat.succ
 succ(Nat.zero)
+@datatype Bool : Type {
+  true : @datatype Bool : Type {
+    true : Bool
+    false : Bool
+  }
+  false : @datatype Bool : Type {
+    true : Bool
+    false : Bool
+  }
+}
+Bool.true
+Bool.false
+Bool.true

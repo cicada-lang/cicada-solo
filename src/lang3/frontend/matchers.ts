@@ -106,6 +106,8 @@ function pattern_matcher(tree: pt.Tree.Tree): Pattern.Pattern {
         pt.Tree.str(tag),
         pt.matchers.one_or_more_matcher(args).map(pattern_matcher)
       ),
+    "pattern:data_nullary": ({ name, tag }) =>
+      Pattern.data(pt.Tree.str(name), pt.Tree.str(tag), []),
   })(tree)
 }
 

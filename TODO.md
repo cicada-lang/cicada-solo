@@ -37,7 +37,8 @@
 > - we will infer the type of every (nested) pattern variables.
 > - `pi` is also using `Closure`
 
-- [lang3] test `Pattern` in `arg` of `fn`
+- [lang3] extract functions from `Exp.check_fn`'s `match_pattern`
+- [lang3] extract functions from `Pattern.match`'s `match_pattern`
 
 - [lang3] `Exp.case_fn`
 - [lang3] `Exp.case_fn` -- `evaluate`

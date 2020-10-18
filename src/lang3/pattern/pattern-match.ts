@@ -46,6 +46,15 @@ function match_pattern(
     return match_patterns(env, pattern.args, value.args, matched)
   }
 
+  if (
+    pattern.kind === "Pattern.data" &&
+    value.kind === "Value.data_constructor" &&
+    value.type_constructor.name === pattern.name &&
+    value.tag === pattern.tag
+  ) {
+    return match_patterns(env, pattern.args, [], matched)
+  }
+
   return undefined
 }
 
