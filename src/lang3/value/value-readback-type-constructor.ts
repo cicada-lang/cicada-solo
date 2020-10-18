@@ -34,7 +34,9 @@ function readback_delayed_sums(
       mod,
       ctx,
       Value.type,
-      Exp.evaluate(delayed.mod, delayed.env, sum.t)
+      Exp.evaluate(Mod.clone(delayed.mod), delayed.env, sum.t, {
+        mode: Exp.EvaluationMode.mute_recursive_exp_in_mod,
+      })
     ),
   }))
 }

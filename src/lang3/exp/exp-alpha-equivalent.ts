@@ -29,7 +29,9 @@ function alpha(the: {
         typeof right_depth === "number" &&
         left_depth === right_depth)
     )
-  } else if (left.kind === "Exp.pi" && right.kind === "Exp.pi") {
+  }
+
+  if (left.kind === "Exp.pi" && right.kind === "Exp.pi")
     return (
       alpha({ ...the, left: left.arg_t, right: right.arg_t }) &&
       alpha({
@@ -40,7 +42,8 @@ function alpha(the: {
         right: right.ret_t,
       })
     )
-  } else if (left.kind === "Exp.fn" && right.kind === "Exp.fn") {
+
+  if (left.kind === "Exp.fn" && right.kind === "Exp.fn")
     return alpha({
       depth: depth + 1,
       left_names: left_names.set(left.name, depth),
@@ -48,12 +51,20 @@ function alpha(the: {
       right_names: right_names.set(right.name, depth),
       right: right.ret,
     })
-  } else if (left.kind === "Exp.ap" && right.kind === "Exp.ap") {
+
+  if (left.kind === "Exp.ap" && right.kind === "Exp.ap")
     return (
       alpha({ ...the, left: left.target, right: right.target }) &&
       alpha({ ...the, left: left.arg, right: right.arg })
     )
-  } else if (left.kind === "Exp.cls" && right.kind === "Exp.cls") {
+
+  if (left.kind === "Exp.dot" && right.kind === "Exp.dot")
+    return (
+      alpha({ ...the, left: left.target, right: right.target }) &&
+      left.name === right.name
+    )
+
+  if (left.kind === "Exp.cls" && right.kind === "Exp.cls") {
     if (left.sat.length !== right.sat.length) {
       return false
     }
@@ -77,7 +88,9 @@ function alpha(the: {
         return false
     }
     return true
-  } else if (left.kind === "Exp.obj" && right.kind === "Exp.obj") {
+  }
+
+  if (left.kind === "Exp.obj" && right.kind === "Exp.obj") {
     if (left.properties.size !== right.properties.size) {
       return false
     }
@@ -89,35 +102,38 @@ function alpha(the: {
       if (!alpha({ ...the, left: left_exp, right: right_exp })) return false
     }
     return true
-  } else if (left.kind === "Exp.equal" && right.kind === "Exp.equal") {
+  }
+
+  if (left.kind === "Exp.equal" && right.kind === "Exp.equal")
     return (
       alpha({ ...the, left: left.t, right: right.t }) &&
       alpha({ ...the, left: left.from, right: right.from }) &&
       alpha({ ...the, left: left.to, right: right.to })
     )
-  } else if (left.kind === "Exp.same" && right.kind === "Exp.same") {
-    return true
-  } else if (left.kind === "Exp.replace" && right.kind === "Exp.replace") {
+
+  if (left.kind === "Exp.same" && right.kind === "Exp.same") return true
+
+  if (left.kind === "Exp.replace" && right.kind === "Exp.replace")
     return (
       alpha({ ...the, left: left.target, right: right.target }) &&
       alpha({ ...the, left: left.motive, right: right.motive }) &&
       alpha({ ...the, left: left.base, right: right.base })
     )
-  } else if (left.kind === "Exp.absurd" && right.kind === "Exp.absurd") {
-    return true
-  } else if (
-    left.kind === "Exp.absurd_ind" &&
-    right.kind === "Exp.absurd_ind"
-  ) {
+
+  if (left.kind === "Exp.absurd" && right.kind === "Exp.absurd") return true
+
+  if (left.kind === "Exp.absurd_ind" && right.kind === "Exp.absurd_ind")
     return (
       alpha({ ...the, left: left.target, right: right.target }) &&
       alpha({ ...the, left: left.motive, right: right.motive })
     )
-  } else if (left.kind === "Exp.str" && right.kind === "Exp.str") {
-    return true
-  } else if (left.kind === "Exp.quote" && right.kind === "Exp.quote") {
+
+  if (left.kind === "Exp.str" && right.kind === "Exp.str") return true
+
+  if (left.kind === "Exp.quote" && right.kind === "Exp.quote")
     return left.str === right.str
-  } else if (left.kind === "Exp.union" && right.kind === "Exp.union") {
+
+  if (left.kind === "Exp.union" && right.kind === "Exp.union") {
     // NOTE handle associativity and commutative of union
     const left_types = union_flatten(left)
     const right_types = union_flatten(right)
@@ -133,29 +149,32 @@ function alpha(the: {
         )
       )
     )
-  } else if (
+  }
+
+  if (
     left.kind === "Exp.type_constructor" &&
     right.kind === "Exp.type_constructor"
-  ) {
+  )
     // NOTE datatype can only be at top level.
     return left.name === right.name
-  } else if (left.kind === "Exp.type" && right.kind === "Exp.type") {
-    return true
-  } else if (
+
+  if (left.kind === "Exp.type" && right.kind === "Exp.type") return true
+
+  if (
     left.kind === "Exp.the" &&
     left.t.kind === "Exp.absurd" &&
     right.kind === "Exp.the" &&
     right.t.kind === "Exp.absurd"
-  ) {
+  )
     return true
-  } else if (left.kind === "Exp.the" && right.kind === "Exp.the") {
+
+  if (left.kind === "Exp.the" && right.kind === "Exp.the")
     return (
       alpha({ ...the, left: left.t, right: right.t }) &&
       alpha({ ...the, left: left.exp, right: right.exp })
     )
-  } else {
-    return false
-  }
+
+  return false
 }
 
 function union_flatten(union: Exp.union): Array<Exp.Exp> {

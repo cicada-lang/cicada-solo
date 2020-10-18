@@ -5,6 +5,7 @@ import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as ut from "../../ut"
 import * as Trace from "../../trace"
+import strip_ansi from "strip-ansi"
 
 export function readback_data(
   mod: Mod.Mod,

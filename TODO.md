@@ -33,7 +33,7 @@
 
 > 实现 condition 的语义。
 
-- [lang3] no `Exp.data` -- overload `Exp.infer_ap`
+- [lang3] extra functions from `alpha_equivalent`
 
 - [lang3] `Pattern`
   - we can infer the type of every (nested) pattern variables.

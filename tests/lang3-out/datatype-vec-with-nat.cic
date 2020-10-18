@@ -1,0 +1,19 @@
+@datatype Nat : Type {
+  zero: Nat
+  succ: (prev: Nat) -> Nat
+}
+
+@datatype Vec : (Type) -> (Nat) -> Type {
+  null: (T: Type) -> Vec(T)(Nat.zero)
+  cons: (T: Type) -> (prev: Nat) -> (head: T) -> (tail: Vec(T)(prev)) -> Vec(T)(Nat.succ(prev))
+}
+
+@show Vec(String)
+@show Vec(String)(Nat.zero)
+
+@show Vec.null(String)
+
+@show Vec.cons(String)
+@show Vec.cons(String)(Nat.zero)
+@show Vec.cons(String)(Nat.zero)("abc")(Vec.null(String))
+@show Vec.cons(String)(Nat.succ(Nat.zero))("abc")(Vec.cons(String)(Nat.zero)("abc")(Vec.null(String)))

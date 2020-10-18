@@ -6,3 +6,5 @@
 @show List
 @show List.null
 @show List.cons
+@show List.null(String)
+@show List.cons(String)("abc")(List.null(String))

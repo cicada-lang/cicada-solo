@@ -1,0 +1,9 @@
+@datatype Nat : Type {
+  zero: Nat
+  succ: (prev: Nat) -> Nat
+}
+
+@show Nat
+@show Nat.zero
+@show Nat.succ
+@show Nat.succ(Nat.zero)

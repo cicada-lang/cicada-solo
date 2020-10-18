@@ -47,7 +47,6 @@ function readback_scope(
     Ctx.update(ctx, name, tel.next.t)
     Env.update(env, name, Value.not_yet(tel.next.t, Neutral.v(name)))
   }
-  const mod = Mod.clone(tel.mod)
   for (const entry of tel.scope) {
     const name = entry.name
     const mod = Mod.clone(tel.mod)

@@ -10,6 +10,7 @@ export function conversion(
   x: Value.Value,
   y: Value.Value
 ): boolean {
+  if (x === y) return true
   return Exp.alpha_equivalent(
     Value.readback(mod, ctx, t, x),
     Value.readback(mod, ctx, t, y)
