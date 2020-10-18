@@ -31,7 +31,12 @@
 
 # lang3
 
-> 实现 condition 的语义。
+> condition semantic.
+
+- [lang3] change function declaration -- `alpha`
+- [lang2] change function declaration -- `alpha`
+
+- [lang2] `exp-equivalent.ts` instead of `exp-alpha-equivalent.ts`
 
 - [lang3] `Pattern`
   - we can infer the type of every (nested) pattern variables.
@@ -49,6 +54,8 @@
 
 - [lang3] syntax for `Exp.case_fn`
 
+> nested match.
+
 - [lang3] be able to add type annotation to `Exp.fn`
   - we will be able to infer such `fn`
   - which might be needed by `@match`
@@ -57,6 +64,8 @@
 
 - [lang3] there might be `@match`
   - which will be direct application of `Exp.case_fn`
+
+> implict arguments.
 
 - [lang3] [draft] checking about `Pattern` in the `arg_t` and `ret_t` of `pi`
   - we also need to use unification here.
