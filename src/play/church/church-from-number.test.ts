@@ -1,5 +1,5 @@
 import * as church from "../church"
-import * as ut from "../ut"
+import * as ut from "../../ut"
 
 const zero = church.from_number(0)
 const one = church.from_number(1)
