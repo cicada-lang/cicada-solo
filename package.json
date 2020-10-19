@@ -2,6 +2,7 @@
   "name": "@xieyuheng/cicada",
   "version": "0.0.10",
   "repository": "github:xieyuheng/cicada",
+  "main": "lib/index.js",
   "files": [
     "lib"
   ],
