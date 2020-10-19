@@ -1,0 +1,8 @@
+@datatype Pair : (Type) -> (Type) -> Type {
+  pair : (A: Type) -> (B: Type) -> (first: A) -> (second: B) -> Pair(A)(B)
+}
+
+greeting : (String) -> Pair(String)(String)
+greeting = (name) => Pair.pair(String)(String)("Welcome")(name)
+
+@show greeting("Raymond")
