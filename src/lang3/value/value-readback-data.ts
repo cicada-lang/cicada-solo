@@ -16,7 +16,10 @@ export function readback_data(
   if (!Value.conversion(mod, ctx, Value.type, t, data.t))
     throw new Trace.Trace("t is not equivalent to data.t")
 
-  let exp: Exp.Exp = Exp.v(data.data_constructor.tag)
+  let exp: Exp.Exp = Exp.dot(
+    Exp.v(data.data_constructor.type_constructor.name),
+    data.data_constructor.tag
+  )
   let remain_t = data.data_constructor.t
   for (const arg of data.args) {
     const pi = Value.is_pi(mod, ctx, remain_t)

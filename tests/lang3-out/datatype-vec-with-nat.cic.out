@@ -1,8 +1,8 @@
 Vec(String)
 Vec(String)(Nat.zero)
-null(String)
-cons(String)
-cons(String)(Nat.zero)
-cons(String)(Nat.zero)("abc")(null(String))
-cons(String)(succ(Nat.zero))("abc")(cons(String)(Nat.zero)("abc")(null(String)))
+Vec.null(String)
+Vec.cons(String)
+Vec.cons(String)(Nat.zero)
+Vec.cons(String)(Nat.zero)("abc")(Vec.null(String))
+Vec.cons(String)(Nat.succ(Nat.zero))("abc")(Vec.cons(String)(Nat.zero)("abc")(Vec.null(String)))
 

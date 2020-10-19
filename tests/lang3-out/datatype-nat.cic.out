@@ -10,7 +10,7 @@
 }
 Nat.zero
 Nat.succ
-succ(Nat.zero)
+Nat.succ(Nat.zero)
 @datatype Bool : Type {
   true : @datatype Bool : Type {
     true : Bool
