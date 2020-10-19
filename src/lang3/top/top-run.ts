@@ -27,7 +27,7 @@ function define(mod: Mod.Mod, tops: Array<Top.Top>): void {
 function check(mod: Mod.Mod, tops: Array<Top.Top>): void {
   for (const top of tops) {
     if (top.kind === "Top.def") {
-      const t = Mod.lookup_type(mod, top.name) as Value.Value
+      const t = Mod.lookup_type(mod, top.name)!
       const ctx = Ctx.extend(Ctx.init(), top.name, t)
       Exp.check(mod, ctx, top.exp, t)
     }
