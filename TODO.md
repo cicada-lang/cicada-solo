@@ -1,7 +1,7 @@
 # API
 
-- we need to design API for `cicada-playground`.
-  - should only use `console` in top level cli code.
+- [lang2] fix `Stmt.run`
+- [lang3] fix `Top.run`
 
 # TLT
 

@@ -3,15 +3,15 @@ import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Env from "../env"
 
-export function run(env: Env.Env, stmt: Stmt.Stmt): void {
+export function run(env: Env.Env, stmt: Stmt.Stmt): string {
   Stmt.execute(env, stmt)
 
-  switch (stmt.kind) {
-    case "Stmt.show": {
-      const { exp } = stmt
-      const value = Exp.evaluate(env, exp)
-      const norm = Value.readback(new Set(env.keys()), value)
-      console.log(Exp.repr(norm))
-    }
+  if (stmt.kind === "Stmt.show") {
+    const { exp } = stmt
+    const value = Exp.evaluate(env, exp)
+    const norm = Value.readback(new Set(env.keys()), value)
+    return Exp.repr(norm)
   }
+
+  return ""
 }
