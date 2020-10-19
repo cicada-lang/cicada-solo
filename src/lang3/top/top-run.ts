@@ -5,10 +5,10 @@ import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Value from "../value"
 
-export function run(mod: Mod.Mod, tops: Array<Top.Top>): void {
+export function run(mod: Mod.Mod, tops: Array<Top.Top>): string {
   define(mod, tops)
   check(mod, tops)
-  show(mod, tops)
+  return show(mod, tops)
 }
 
 function define(mod: Mod.Mod, tops: Array<Top.Top>): void {
@@ -37,7 +37,8 @@ function check(mod: Mod.Mod, tops: Array<Top.Top>): void {
   }
 }
 
-function show(mod: Mod.Mod, tops: Array<Top.Top>): void {
+function show(mod: Mod.Mod, tops: Array<Top.Top>): string {
+  let output = ""
   for (const top of tops) {
     if (top.kind === "Top.show") {
       const env = Env.init()
@@ -45,7 +46,9 @@ function show(mod: Mod.Mod, tops: Array<Top.Top>): void {
       const t = Exp.infer(mod, ctx, top.exp)
       const value = Exp.evaluate(mod, env, top.exp)
       const value_repr = Exp.repr(Value.readback(mod, ctx, t, value))
-      console.log(`${value_repr}`)
+      output += `${value_repr}\n`
     }
   }
+
+  return output
 }

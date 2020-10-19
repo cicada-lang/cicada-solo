@@ -1,7 +1,3 @@
-# API
-
-- [lang3] fix `Top.run`
-
 # TLT
 
 > 强化对类型系统的理解与实现技术，为 cicada-structural-typing 做准备。
