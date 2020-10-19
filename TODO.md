@@ -1,6 +1,5 @@
 # API
 
-- [lang2] fix `Stmt.run`
 - [lang3] fix `Top.run`
 
 # TLT

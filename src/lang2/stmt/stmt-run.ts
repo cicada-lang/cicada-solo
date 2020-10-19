@@ -4,18 +4,20 @@ import * as Value from "../value"
 import * as Env from "../env"
 import * as Ctx from "../ctx"
 
-export function run(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): void {
+export function run(
+  ctx: Ctx.Ctx,
+  env: Env.Env,
+  stmt: Stmt.Stmt
+): undefined | string {
   Stmt.declare(ctx, stmt)
   Stmt.execute(env, stmt)
 
-  switch (stmt.kind) {
-    case "Stmt.show": {
-      const { exp } = stmt
-      const t = Exp.infer(ctx, exp)
-      const value = Exp.evaluate(env, exp)
-      const value_repr = Exp.repr(Value.readback(ctx, t, value))
-      const t_repr = Exp.repr(Value.readback(ctx, Value.type, t))
-      console.log(`${t_repr} -- ${value_repr}`)
-    }
+  if (stmt.kind === "Stmt.show") {
+    const { exp } = stmt
+    const t = Exp.infer(ctx, exp)
+    const value = Exp.evaluate(env, exp)
+    const value_repr = Exp.repr(Value.readback(ctx, t, value))
+    const t_repr = Exp.repr(Value.readback(ctx, Value.type, t))
+    return `${t_repr} -- ${value_repr}`
   }
 }

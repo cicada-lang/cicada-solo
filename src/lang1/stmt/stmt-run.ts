@@ -5,7 +5,11 @@ import * as Value from "../value"
 import * as Env from "../env"
 import * as Ctx from "../ctx"
 
-export function run(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): string {
+export function run(
+  ctx: Ctx.Ctx,
+  env: Env.Env,
+  stmt: Stmt.Stmt
+): undefined | string {
   Stmt.declare(ctx, stmt)
   Stmt.execute(env, stmt)
 
@@ -18,6 +22,4 @@ export function run(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): string {
     const t_repr = Ty.repr(t)
     return `${t_repr} -- ${value_repr}`
   }
-
-  return ""
 }

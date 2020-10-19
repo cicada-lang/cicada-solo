@@ -29,7 +29,7 @@ export const handler = async (argv: Argv) => {
     const env = Env.init()
     for (const stmt of stmts) {
       const output = Stmt.run(env, stmt)
-      if (output.length !== 0) console.log(output)
+      if (output) console.log(output)
     }
   } catch (error) {
     if (error instanceof Trace.Trace) {

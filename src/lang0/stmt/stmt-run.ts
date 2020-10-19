@@ -3,7 +3,7 @@ import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Env from "../env"
 
-export function run(env: Env.Env, stmt: Stmt.Stmt): string {
+export function run(env: Env.Env, stmt: Stmt.Stmt): undefined | string {
   Stmt.execute(env, stmt)
 
   if (stmt.kind === "Stmt.show") {
@@ -12,6 +12,4 @@ export function run(env: Env.Env, stmt: Stmt.Stmt): string {
     const norm = Value.readback(new Set(env.keys()), value)
     return Exp.repr(norm)
   }
-
-  return ""
 }
