@@ -1,3 +1,8 @@
+# API
+
+- we need to design API for `cicada-playground`.
+  - should only use `console` in top level cli code.
+
 # TLT
 
 > 强化对类型系统的理解与实现技术，为 cicada-structural-typing 做准备。
