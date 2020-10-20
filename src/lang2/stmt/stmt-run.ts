@@ -7,11 +7,19 @@ import * as Ctx from "../ctx"
 export function run(
   ctx: Ctx.Ctx,
   env: Env.Env,
-  stmt: Stmt.Stmt
-): undefined | string {
-  Stmt.declare(ctx, stmt)
-  Stmt.execute(env, stmt)
+  stmts: Array<Stmt.Stmt>
+): string {
+  let output = ""
+  for (const stmt of stmts) {
+    Stmt.declare(ctx, stmt)
+    Stmt.execute(env, stmt)
+    output += show(ctx, env, stmt)
+  }
 
+  return output
+}
+
+function show(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): string {
   if (stmt.kind === "Stmt.show") {
     const { exp } = stmt
     const t = Exp.infer(ctx, exp)
@@ -20,4 +28,6 @@ export function run(
     const t_repr = Exp.repr(Value.readback(ctx, Value.type, t))
     return `${t_repr} -- ${value_repr}`
   }
+
+  return ""
 }

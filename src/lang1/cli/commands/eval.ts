@@ -33,7 +33,7 @@ export const handler = async (argv: Argv) => {
     const ctx = Ctx.init()
     const env = Env.init()
     const output = Stmt.run(ctx, env, stmts)
-    console.log(output)
+    if (output) console.log(output)
   } catch (error) {
     if (error instanceof Trace.Trace) {
       const trace = error

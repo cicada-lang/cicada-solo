@@ -31,10 +31,8 @@ export const handler = async (argv: Argv) => {
     const stmts = frontend.parse_stmts(text)
     const ctx = Ctx.init()
     const env = Env.init()
-    for (const stmt of stmts) {
-      const output = Stmt.run(ctx, env, stmt)
-      if (output) console.log(output)
-    }
+    const output = Stmt.run(ctx, env, stmts)
+    if (output) console.log(output)
   } catch (error) {
     if (error instanceof Trace.Trace) {
       const trace = error
