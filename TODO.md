@@ -1,3 +1,8 @@
+# API
+
+- [lang1] `Stmt.run` take `stmts` instead of `stmt`
+- [lang2] `Stmt.run` take `stmts` instead of `stmt`
+
 # TLT
 
 > 强化对类型系统的理解与实现技术，为 cicada-structural-typing 做准备。
