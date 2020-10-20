@@ -1,6 +1,5 @@
 # API
 
-- [lang1] `Stmt.run` take `stmts` instead of `stmt`
 - [lang2] `Stmt.run` take `stmts` instead of `stmt`
 
 # TLT
