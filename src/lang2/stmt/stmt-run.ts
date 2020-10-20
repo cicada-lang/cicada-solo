@@ -26,7 +26,7 @@ function show(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): string {
     const value = Exp.evaluate(env, exp)
     const value_repr = Exp.repr(Value.readback(ctx, t, value))
     const t_repr = Exp.repr(Value.readback(ctx, Value.type, t))
-    return `${t_repr} -- ${value_repr}`
+    return `${t_repr} -- ${value_repr}\n`
   }
 
   return ""

@@ -28,7 +28,7 @@ function show(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): string {
     const norm = Value.readback(new Set(ctx.keys()), t, value)
     const value_repr = Exp.repr(norm)
     const t_repr = Ty.repr(t)
-    return `${t_repr} -- ${value_repr}`
+    return `${t_repr} -- ${value_repr}\n`
   }
 
   return ""

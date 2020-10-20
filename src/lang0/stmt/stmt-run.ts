@@ -18,7 +18,8 @@ function show(env: Env.Env, stmt: Stmt.Stmt): string {
     const { exp } = stmt
     const value = Exp.evaluate(env, exp)
     const norm = Value.readback(new Set(env.keys()), value)
-    return Exp.repr(norm)
+    const norm_repr = Exp.repr(norm)
+    return `${norm_repr}\n`
   }
 
   return ""
