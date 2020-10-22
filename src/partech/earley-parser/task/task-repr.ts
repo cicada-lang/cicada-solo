@@ -6,8 +6,7 @@ import * as ut from "../../../ut"
 // <task> = <grammar>:<choice>@<index> -> <part> ...
 // <part> = <grammar>:<choice>@<index> | <grammar>@<index>
 
-const color_mode: ut.ColorMode =
-  typeof window === "undefined" ? "escape-code" : "html"
+const color_mode: ut.ColorMode = ut.in_browser_p() ? "html" : "escape-code"
 
 const POINTER = ut.color("> ", { mode: color_mode, color: "red" })
 

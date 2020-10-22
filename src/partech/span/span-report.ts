@@ -8,8 +8,7 @@ export function report(span: Span.Span, context: string): string {
   return s
 }
 
-const color_mode: ut.ColorMode =
-  typeof window === "undefined" ? "escape-code" : "html"
+const color_mode: ut.ColorMode = ut.in_browser_p() ? "html" : "escape-code"
 
 function repr_in_context(
   span: Span.Span,
