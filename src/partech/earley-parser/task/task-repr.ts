@@ -1,12 +1,15 @@
 import * as Task from "../task"
 import * as Value from "../../value"
-import chalk from "chalk"
+import * as ut from "../../../ut"
 
 // NOTE The format of repr:
 // <task> = <grammar>:<choice>@<index> -> <part> ...
 // <part> = <grammar>:<choice>@<index> | <grammar>@<index>
 
-const POINTER = chalk.bold(chalk.red("> "))
+const color_mode: ut.ColorMode =
+  typeof window === "undefined" ? "escape-code" : "html"
+
+const POINTER = ut.color("> ", { mode: color_mode, color: "red" })
 
 export function repr(task: Task.Task): string {
   let s = task.grammar_name + ":" + task.choice_name + "@" + task.index + " -> "

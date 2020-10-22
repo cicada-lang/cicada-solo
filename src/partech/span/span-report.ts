@@ -1,6 +1,5 @@
 import * as Span from "../span"
 import * as ut from "../../ut"
-import chalk from "chalk"
 
 export function report(span: Span.Span, context: string): string {
   let s = repr_in_context(span, context)
@@ -9,18 +8,29 @@ export function report(span: Span.Span, context: string): string {
   return s
 }
 
-function repr_in_context(span: Span.Span, context: string): string {
+const color_mode: ut.ColorMode =
+  typeof window === "undefined" ? "escape-code" : "html"
+
+function repr_in_context(
+  span: Span.Span,
+  context: string,
+  opts: {
+    mode: ut.ColorMode
+  } = {
+    mode: color_mode,
+  }
+): string {
   let s = ""
   for (let i = 0; i < context.length; i++) {
     if (span.lo <= i && i < span.hi) {
-      s += chalk.bgRed(context.charAt(i))
+      s += ut.color(context.charAt(i), { ...opts, background: "red" })
     } else {
       s += context.charAt(i)
     }
   }
   // NOTE END_OF_FILE
   if (span.lo === context.length && span.hi === context.length) {
-    s += chalk.bgRed(" ")
+    s += ut.color(" ", { ...opts, background: "red" })
   }
   return s
 }
