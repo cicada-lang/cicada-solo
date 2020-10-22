@@ -34,7 +34,7 @@ commands.test_impression = async () => {
 commands.test_lang0 = async () => {
   await test(
     "./bin/lang0.js $file",
-    { file: "tests/lang0-out/**.cic" },
+    { file: "examples/lang0-out/**.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
 }
@@ -42,13 +42,13 @@ commands.test_lang0 = async () => {
 commands.test_lang1 = async () => {
   await test(
     "./bin/lang1.js $file",
-    { file: "tests/lang1-out/**.cic" },
+    { file: "examples/lang1-out/**.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
 
   await test(
     "./bin/lang1.js $file",
-    { file: "tests/lang1-err/**.cic" },
+    { file: "examples/lang1-err/**.cic" },
     snapshot.err(({ file }) => file + ".err")
   )
 }
@@ -56,13 +56,13 @@ commands.test_lang1 = async () => {
 commands.test_lang2 = async () => {
   await test(
     "./bin/lang2.js $file",
-    { file: "tests/lang2-out/**.cic" },
+    { file: "examples/lang2-out/**.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
 
   await test(
     "./bin/lang2.js $file",
-    { file: "tests/lang2-err/**.cic" },
+    { file: "examples/lang2-err/**.cic" },
     snapshot.err(({ file }) => file + ".err")
   )
 }
@@ -70,13 +70,13 @@ commands.test_lang2 = async () => {
 commands.test_lang3 = async () => {
   await test(
     "./bin/lang3.js $file",
-    { file: "tests/lang3-out/**.cic" },
+    { file: "examples/lang3-out/**.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
 
   await test(
     "./bin/lang3.js $file",
-    { file: "tests/lang3-err/**.cic" },
+    { file: "examples/lang3-err/**.cic" },
     snapshot.err(({ file }) => file + ".err")
   )
 }
@@ -89,19 +89,19 @@ commands.test_partech = async () => {
 commands.test_partech_lex = async () => {
   await test(
     "./bin/partech.js lex $file --table $file",
-    { file: "tests/tables/example.table.yaml" },
-    snapshot.out((_) => "tests/tables/example.tokens.json")
+    { file: "examples/tables/example.table.yaml" },
+    snapshot.out((_) => "examples/tables/example.tokens.json")
   )
 
   await test(
     "./bin/partech.js lex $file",
-    { file: "tests/tables/example.table.yaml" },
-    snapshot.out((_) => "tests/tables/default.tokens.json")
+    { file: "examples/tables/example.table.yaml" },
+    snapshot.out((_) => "examples/tables/default.tokens.json")
   )
 }
 
 commands.test_partech_parse = async () => {
-  const base = "tests/grammars"
+  const base = "examples/grammars"
 
   const dirents = await fs.promises.readdir(base, {
     encoding: "utf8",
