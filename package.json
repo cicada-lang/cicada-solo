@@ -1,6 +1,6 @@
 {
   "name": "@xieyuheng/cicada",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "repository": "github:xieyuheng/cicada",
   "main": "lib/index.js",
   "files": [
