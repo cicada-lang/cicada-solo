@@ -4,5 +4,5 @@ Found the identifier "b" in [3, 4], while expecting:
  "]":
      list_of_a:list@0 -> "["@1 aaa:more@2 > "]" 
 
- 0 |[a b a a]
+ 1 |[a b a a]
 

@@ -2,5 +2,5 @@ Found the identifier "y" in [2, 3], while expecting:
  "x":
      xs:more@1 -> > "x" xs 
 
- 0 |x y x y
+ 1 |x y x y
 

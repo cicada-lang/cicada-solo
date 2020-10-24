@@ -10,6 +10,6 @@ Found END_OF_TOKENS, while expecting:
  "harry":
      name:harry@3 -> > "harry" 
 
- 0 |tom, dick, harry
- 1 |
+ 1 |tom, dick, harry
+ 2 |
 

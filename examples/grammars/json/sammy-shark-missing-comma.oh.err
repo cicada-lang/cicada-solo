@@ -4,9 +4,9 @@ Found the string "\"location\"" in [54, 64], while expecting:
  ",":
      object_entry:key_value_comma@5 -> string:string@6 ":"@7 value:string@8 > "," 
 
- 0 |{
- 1 |  "first_name" : "Sammy",
- 2 |  "last_name" : "Shark"
- 3 |  "location" : "Ocean",
- 4 |  "online" : true,
- 5 |  "followers" : 987
+ 1 |{
+ 2 |  "first_name" : "Sammy",
+ 3 |  "last_name" : "Shark"
+ 4 |  "location" : "Ocean",
+ 5 |  "online" : true,
+ 6 |  "followers" : 987

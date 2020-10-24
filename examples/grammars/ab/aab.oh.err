@@ -6,6 +6,6 @@ Found END_OF_TOKENS, while expecting:
  "a":
      b:after_a@1 -> > "a" b b 
 
- 0 |a a b
- 1 |
+ 1 |a a b
+ 2 |
 

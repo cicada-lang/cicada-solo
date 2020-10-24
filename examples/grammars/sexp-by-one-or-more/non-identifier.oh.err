@@ -8,5 +8,5 @@ Found the symbol "?" in [3, 4], while expecting:
  "(":
      sexp:list@2 -> > "(" one_or_more ")" 
 
- 0 |(a ? c)
+ 1 |(a ? c)
 

@@ -12,5 +12,5 @@ Found END_OF_TOKENS, while expecting:
  ",":
      tdh_list_head:before_h@0 -> tdh_list_head:before_d@3 > "," "h" 
 
- 0 |t,d,h 
+ 1 |t,d,h 
 

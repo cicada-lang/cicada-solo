@@ -8,5 +8,5 @@ Found END_OF_TOKENS, while expecting:
  "&":
      tdh_list_tail:h@3 -> > "&" "h" 
 
- 0 |t,d,h 
+ 1 |t,d,h 
 

@@ -4,5 +4,5 @@ Found END_OF_TOKENS, while expecting:
  "x":
      s:x_in_x@0 -> > "x" s "x" 
 
- 0 |x x 
+ 1 |x x 
 

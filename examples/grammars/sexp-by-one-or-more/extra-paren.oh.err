@@ -1,5 +1,5 @@
 Found the symbol ")" in [6, 7], while expecting END_OF_TOKENS.
 
- 0 |(a b c))
- 1 |
+ 1 |(a b c))
+ 2 |
 

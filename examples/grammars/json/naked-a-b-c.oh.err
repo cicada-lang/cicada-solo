@@ -22,5 +22,5 @@ Found the identifier "a" in [0, 1], while expecting:
  ["number"]:
      number:number@0 -> > number 
 
- 0 |a b c
+ 1 |a b c
 

@@ -39,8 +39,8 @@ function decorate_line_number(text: string): string {
   let max = lines.length + 1
   let width = max.toString().length
   let decorated = ""
-  lines.forEach((line, i) => {
-    let line_number = i // NOTE index from 0 instead of 1
+  for (const [i, line] of lines.entries()) {
+    let line_number = i + 1 // NOTE index from 1 instead of 0
     let line_number_string = line_number.toString()
     line_number_string =
       " ".repeat(width - line_number_string.length) + line_number_string
@@ -49,7 +49,7 @@ function decorate_line_number(text: string): string {
     decorated += " |"
     decorated += line
     decorated += "\n"
-  })
+  }
   return decorated
 }
 

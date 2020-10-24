@@ -6,5 +6,5 @@ Found END_OF_TOKENS, while expecting:
  "x":
      s:x_in_x@2 -> > "x" s "x" 
 
- 0 |x x x x 
+ 1 |x x x x 
 

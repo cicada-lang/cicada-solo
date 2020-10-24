@@ -22,5 +22,5 @@ Found the symbol "(" in [0, 1], while expecting:
  ["number"]:
      number:number@0 -> > number 
 
- 0 |()
+ 1 |()
 

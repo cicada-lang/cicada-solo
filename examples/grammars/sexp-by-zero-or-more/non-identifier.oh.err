@@ -6,5 +6,5 @@ Found the symbol "?" in [3, 4], while expecting:
  ")":
      sexp:list@0 -> "("@1 zero_or_more:more@2 > ")" 
 
- 0 |(a ? c)
+ 1 |(a ? c)
 
