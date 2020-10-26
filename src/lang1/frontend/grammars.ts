@@ -6,9 +6,10 @@ export const dashline = pt.grammars.dashline
 
 const preserved = ["zero", "add1", "rec"]
 
-export const identifier = {
-  $pattern: ["identifier", `^(?!(${preserved.join("|")}))`],
-}
+export const identifier = pt.grammars.pattern_unless_preserved(
+  "identifier",
+  preserved
+)
 
 export const exp = {
   "exp:var": [{ name: "identifier" }],

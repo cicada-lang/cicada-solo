@@ -16,9 +16,10 @@ const preserved = [
   "Object",
 ]
 
-export const identifier = {
-  $pattern: ["identifier", `^(?!(${preserved.join("|")}))`],
-}
+export const identifier = pt.grammars.pattern_unless_preserved(
+  "identifier",
+  preserved
+)
 
 export const exp = {
   "exp:var": [{ name: "identifier" }],

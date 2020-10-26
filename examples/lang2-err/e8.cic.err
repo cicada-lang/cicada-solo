@@ -8,9 +8,9 @@ previous:
 - add(add1(prev))(gauss(prev))
 - add(add1(prev))(gauss(prev))
 - (prev) => add(add1(prev))(gauss(prev))
-- which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))
-- which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))
-- (n) => which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))
-- { (_: Nat) -> Nat -- (n) => which_Nat(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev))) }
+- Nat_which(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))
+- Nat_which(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))
+- (n) => Nat_which(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev)))
+- { (_: Nat) -> Nat -- (n) => Nat_which(Nat)(n)(0)((prev) => add(add1(prev))(gauss(prev))) }
 
 
