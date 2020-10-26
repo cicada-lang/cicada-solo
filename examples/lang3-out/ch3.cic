@@ -1,0 +1,31 @@
+@datatype Nat : Type {
+  zero: Nat
+  add1: (prev: Nat) -> Nat
+}
+
+@datatype Bool : Type {
+  true: Bool
+  false: Bool
+}
+
+add : (Nat) -> (Nat) -> Nat
+add = (x) => {
+  (Nat.zero) => x
+  (Nat.add1(prev)) => Nat.add1(add(x)(prev))
+}
+
+@show add(Nat.zero)(Nat.zero)
+@show add(Nat.zero)(Nat.add1(Nat.zero))
+@show add(Nat.add1(Nat.zero))(Nat.add1(Nat.zero))
+@show add(Nat.add1(Nat.add1(Nat.zero)))(Nat.add1(Nat.add1(Nat.zero)))
+
+gauss : (Nat) -> Nat
+gauss = {
+  (Nat.zero) => Nat.zero
+  (Nat.add1(prev)) => add(Nat.add1(prev))(gauss(prev))
+}
+
+@show gauss(Nat.zero)
+@show gauss(Nat.add1(Nat.zero))
+@show gauss(Nat.add1(Nat.add1(Nat.zero)))
+@show gauss(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))

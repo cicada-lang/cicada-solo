@@ -2,15 +2,15 @@
   kind = "Zero"
 }
 {
-  kind = "Succ"
+  kind = "Add1"
   prev = {
     kind = "Zero"
   }
 }
 {
-  kind = "Succ"
+  kind = "Add1"
   prev = {
-    kind = "Succ"
+    kind = "Add1"
     prev = {
       kind = "Zero"
     }

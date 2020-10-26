@@ -1,14 +1,14 @@
 Nat : Type
-Nat = { Zero | Succ }
+Nat = { Zero | Add1 }
 
 Zero : Type
 Zero = {
   kind : "Zero"
 }
 
-Succ : Type
-Succ = {
-  kind : "Succ"
+Add1 : Type
+Add1 = {
+  kind : "Add1"
   prev : Nat
 }
 
@@ -17,12 +17,12 @@ zero = {
   kind = "Zero"
 }
 
-succ : (Nat) -> Nat
-succ = (prev) => {
-  kind = "Succ"
+add1 : (Nat) -> Nat
+add1 = (prev) => {
+  kind = "Add1"
   prev = prev
 }
 
 @show zero
-@show succ(zero)
-@show succ(succ(zero))
+@show add1(zero)
+@show add1(add1(zero))

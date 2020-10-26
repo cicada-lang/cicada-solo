@@ -1,12 +1,12 @@
 @datatype Nat : Type {
   zero: Nat
-  succ: (prev: Nat) -> Nat
+  add1: (prev: Nat) -> Nat
 }
 
 @show Nat
 @show Nat.zero
-@show Nat.succ
-@show Nat.succ(Nat.zero)
+@show Nat.add1
+@show Nat.add1(Nat.zero)
 
 @datatype Bool : Type {
   true: Bool
@@ -23,28 +23,28 @@ true = Bool.true
 zero_p : (Nat) -> Bool
 zero_p = {
   (Nat.zero) => Bool.true
-  (Nat.succ(prev)) => Bool.false
+  (Nat.add1(prev)) => Bool.false
 }
 
 @show zero_p(Nat.zero)
-@show zero_p(Nat.succ(Nat.zero))
+@show zero_p(Nat.add1(Nat.zero))
 
 even_p : (Nat) -> Bool
 even_p = {
   (Nat.zero) => Bool.true
-  (Nat.succ(prev)) => odd_p(prev)
+  (Nat.add1(prev)) => odd_p(prev)
 }
 
 odd_p : (Nat) -> Bool
 odd_p = {
   (Nat.zero) => Bool.false
-  (Nat.succ(prev)) => even_p(prev)
+  (Nat.add1(prev)) => even_p(prev)
 }
 
 @show even_p(Nat.zero)
-@show even_p(Nat.succ(Nat.zero))
-@show even_p(Nat.succ(Nat.succ(Nat.zero)))
+@show even_p(Nat.add1(Nat.zero))
+@show even_p(Nat.add1(Nat.add1(Nat.zero)))
 
 @show odd_p(Nat.zero)
-@show odd_p(Nat.succ(Nat.zero))
-@show odd_p(Nat.succ(Nat.succ(Nat.zero)))
+@show odd_p(Nat.add1(Nat.zero))
+@show odd_p(Nat.add1(Nat.add1(Nat.zero)))

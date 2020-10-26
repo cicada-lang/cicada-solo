@@ -1,11 +1,11 @@
 @datatype Vec : (_: Type) -> (_1: { {
   kind : "Zero"
 } | {
-  kind : "Succ"
+  kind : "Add1"
   prev : { {
     kind : "Zero"
   } | {
-    kind : "Succ"
+    kind : "Add1"
     prev : Nat
   } }
 } }) -> Type {
@@ -15,15 +15,15 @@
   cons : (T: Type) -> (prev: { {
     kind : "Zero"
   } | {
-    kind : "Succ"
+    kind : "Add1"
     prev : { {
       kind : "Zero"
     } | {
-      kind : "Succ"
+      kind : "Add1"
       prev : Nat
     } }
   } }) -> (head: T) -> (tail: Vec(T)(prev)) -> Vec(T)({
-    kind = "Succ"
+    kind = "Add1"
     prev = prev
   })
 }

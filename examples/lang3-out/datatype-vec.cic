@@ -1,14 +1,14 @@
 Nat : Type
-Nat = { Zero | Succ }
+Nat = { Zero | Add1 }
 
 Zero : Type
 Zero = {
   kind : "Zero"
 }
 
-Succ : Type
-Succ = {
-  kind : "Succ"
+Add1 : Type
+Add1 = {
+  kind : "Add1"
   prev : Nat
 }
 
@@ -17,15 +17,15 @@ zero = {
   kind = "Zero"
 }
 
-succ : (Nat) -> Nat
-succ = (prev) => {
-  kind = "Succ"
+add1 : (Nat) -> Nat
+add1 = (prev) => {
+  kind = "Add1"
   prev = prev
 }
 
 @datatype Vec : (Type) -> (Nat) -> Type {
   null: (T: Type) -> Vec(T)(zero)
-  cons: (T: Type) -> (prev: Nat) -> (head: T) -> (tail: Vec(T)(prev)) -> Vec(T)(succ(prev))
+  cons: (T: Type) -> (prev: Nat) -> (head: T) -> (tail: Vec(T)(prev)) -> Vec(T)(add1(prev))
 }
 
 @show Vec

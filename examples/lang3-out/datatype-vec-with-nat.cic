@@ -1,11 +1,11 @@
 @datatype Nat : Type {
   zero: Nat
-  succ: (prev: Nat) -> Nat
+  add1: (prev: Nat) -> Nat
 }
 
 @datatype Vec : (Type) -> (Nat) -> Type {
   null: (T: Type) -> Vec(T)(Nat.zero)
-  cons: (T: Type) -> (prev: Nat) -> (head: T) -> (tail: Vec(T)(prev)) -> Vec(T)(Nat.succ(prev))
+  cons: (T: Type) -> (prev: Nat) -> (head: T) -> (tail: Vec(T)(prev)) -> Vec(T)(Nat.add1(prev))
 }
 
 @show Vec(String)
@@ -16,4 +16,4 @@
 @show Vec.cons(String)
 @show Vec.cons(String)(Nat.zero)
 @show Vec.cons(String)(Nat.zero)("abc")(Vec.null(String))
-@show Vec.cons(String)(Nat.succ(Nat.zero))("abc")(Vec.cons(String)(Nat.zero)("abc")(Vec.null(String)))
+@show Vec.cons(String)(Nat.add1(Nat.zero))("abc")(Vec.cons(String)(Nat.zero)("abc")(Vec.null(String)))
