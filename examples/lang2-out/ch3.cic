@@ -1,6 +1,31 @@
 // 3. Eliminate All Natural Numbers!
 
-_ : String
-_ = "TODO"
+Nat_rec : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
+Nat_rec = (T) => (target) => (base) => (step) =>
+  Nat.ind(target, (_) => T, base, step)
 
-@show _
+Nat_which : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> T) -> T
+Nat_which = (T) => (target) => (base) => (step) =>
+  Nat_rec(T)(target)(base)((prev) => (_almost) => step(prev))
+
+Nat_iter : (T: Type) -> (target: Nat) -> (base: T) -> (step: (almost: T) -> T) -> T
+Nat_iter = (T) => (target) => (base) => (step) =>
+  Nat_rec(T)(target)(base)((_prev) => (almost) => step(almost))
+
+add : (Nat) -> (Nat) -> Nat
+add = (x) => (y) => Nat_iter(Nat)(y)(x)((almost) => add1(almost))
+
+gauss : (Nat) -> Nat
+gauss = (n) => Nat_rec(Nat)(n)(0)((prev) => (almost) => add(add1(prev))(almost))
+
+@show gauss(0)
+@show gauss(1)
+@show gauss(2)
+@show gauss(3)
+@show gauss(4)
+@show gauss(5)
+@show gauss(6)
+@show gauss(7)
+@show gauss(8)
+@show gauss(9)
+@show gauss(10)
