@@ -1,14 +1,14 @@
-Nat_rec : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
-Nat_rec = (T) => (target) => (base) => (step) => Nat.ind(target, (_) => T, base, step)
+Nat_rec : (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
+Nat_rec = (target) => (T) => (base) => (step) => Nat.ind(target, (_) => T, base, step)
 
 add : (Nat) -> (Nat) -> Nat
-add = (x) => (y) => Nat_rec(Nat)(y)(x)((prev) => (almost) => add1(almost))
+add = (x) => (y) => Nat_rec(y)(Nat)(x)((prev) => (almost) => add1(almost))
 
 mul : (Nat) -> (Nat) -> Nat
-mul = (x) => (y) => Nat_rec(Nat)(y)(0)((prev) => (almost) => add(almost)(x))
+mul = (x) => (y) => Nat_rec(y)(Nat)(0)((prev) => (almost) => add(almost)(x))
 
 pow : (Nat) -> (Nat) -> Nat
-pow = (x) => (y) => Nat_rec(Nat)(y)(1)((prev) => (almost) => mul(almost)(x))
+pow = (x) => (y) => Nat_rec(y)(Nat)(1)((prev) => (almost) => mul(almost)(x))
 
 eight = {
   four = add(2)(2)

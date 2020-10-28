@@ -21,15 +21,9 @@ export function check_fn(
         |- fn: ${Exp.repr(fn)}
         |`)
     )
-  Exp.check(
-    mod,
-    result_ctx,
-    fn.ret,
-    Value.Closure.apply(
-      pi.ret_t_cl,
-      Value.not_yet(pi.arg_t, Neutral.v(Value.pi_arg_name(pi)))
-    )
-  )
+  const arg = Exp.evaluate(mod, Ctx.to_env(result_ctx), Pattern.to_exp(fn.pattern))
+  // const arg = Value.not_yet(pi.arg_t, Neutral.v(Value.pi_arg_name(pi)))
+  Exp.check(mod, result_ctx, fn.ret, Value.Closure.apply(pi.ret_t_cl, arg))
 }
 
 function match_pattern(

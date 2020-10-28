@@ -40,16 +40,16 @@ vegetables = cons("celery", "carrot")
 _ : Equal(Pair(String, String), vegetables, cons(car(vegetables), cdr(vegetables)))
 _ = same
 
-Nat_rec : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
-Nat_rec = (T) => (target) => (base) => (step) =>
+Nat_rec : (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
+Nat_rec = (target) => (T) => (base) => (step) =>
   Nat.ind(target, (_) => T, base, step)
 
-Nat_which : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> T) -> T
-Nat_which = (T) => (target) => (base) => (step) =>
+Nat_which : (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T
+Nat_which = (target) => (T) => (base) => (step) =>
   Nat.ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
 
 naught_or_more : (Nat) -> String
-naught_or_more = (n) => Nat_which(String)(n)("naught")((_prev) => "more")
+naught_or_more = (n) => Nat_which(n)(String)("naught")((_prev) => "more")
 
 _ : Equal(String, naught_or_more(0), "naught")
 _ = same

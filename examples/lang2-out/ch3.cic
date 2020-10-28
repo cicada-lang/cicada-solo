@@ -1,22 +1,28 @@
 // 3. Eliminate All Natural Numbers!
 
-Nat_rec : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
-Nat_rec = (T) => (target) => (base) => (step) =>
+Nat_rec : (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
+Nat_rec = (target) => (T) => (base) => (step) =>
   Nat.ind(target, (_) => T, base, step)
 
-Nat_which : (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> T) -> T
-Nat_which = (T) => (target) => (base) => (step) =>
-  Nat_rec(T)(target)(base)((prev) => (_almost) => step(prev))
+Nat_which : (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T
+Nat_which = (target) => (T) => (base) => (step) =>
+  Nat_rec(target)(T)(base)((prev) => (_almost) => step(prev))
 
-Nat_iter : (T: Type) -> (target: Nat) -> (base: T) -> (step: (almost: T) -> T) -> T
-Nat_iter = (T) => (target) => (base) => (step) =>
-  Nat_rec(T)(target)(base)((_prev) => (almost) => step(almost))
+Nat_iter : (target: Nat) -> (T: Type) -> (base: T) -> (step: (almost: T) -> T) -> T
+Nat_iter = (target) => (T) => (base) => (step) =>
+  Nat_rec(target)(T)(base)((_prev) => (almost) => step(almost))
 
 add : (Nat) -> (Nat) -> Nat
-add = (x) => (y) => Nat_iter(Nat)(y)(x)((almost) => add1(almost))
+add = (x) => (y) => Nat_iter(y)(Nat)(x)((almost) => add1(almost))
+
+// NOTE We want to define `gauss` (without recursion).
+// - We try `Nat_which`, but it does not work;
+// - We have a rest and think to define `gauss` we also need `add`;
+// - We use `Nat_iter` to define `add`;
+// - We use `Nat_rec` and `add` to define `gauss`.
 
 gauss : (Nat) -> Nat
-gauss = (n) => Nat_rec(Nat)(n)(0)((prev) => (almost) => add(add1(prev))(almost))
+gauss = (n) => Nat_rec(n)(Nat)(0)((prev) => (almost) => add(add1(prev))(almost))
 
 @show gauss(0)
 @show gauss(1)
