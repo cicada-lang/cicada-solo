@@ -1,7 +1,7 @@
 # TLT
 
-> 强化对类型系统的理解与实现技术，为 cicada-structural-typing 做准备。
-> - 同时 lang2 与 lang3 来实验。
+> 强化对类型系统的理解与实现技术。
+> - 同时测试 lang2 与 lang3。
 
 - [TLT] [lang2] 3. Eliminate All Natural Numbers!
 - [TLT] [lang3] 3. Eliminate All Natural Numbers!

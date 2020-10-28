@@ -1,0 +1,18 @@
+
+I infer the type of prev to be @datatype Nat : Type { zero : @datatype Nat : Type { zero : Nat add1 : (prev1: Nat) -> Nat } add1 : (prev1: @datatype Nat : Type { zero : Nat add1 : (prev1: Nat) -> Nat }) -> Nat }.
+But the given type is T.
+
+previous:
+- prev
+- step(prev)
+- step(prev)
+- (_almost) => step(prev)
+- (prev) => (_almost) => step(prev)
+- Nat_rec(target)(T)(base)((prev) => (_almost) => step(prev))
+- Nat_rec(target)(T)(base)((prev) => (_almost) => step(prev))
+- (step) => Nat_rec(target)(T)(base)((prev) => (_almost) => step(prev))
+- (base) => (step) => Nat_rec(target)(T)(base)((prev) => (_almost) => step(prev))
+- (T) => (base) => (step) => Nat_rec(target)(T)(base)((prev) => (_almost) => step(prev))
+- (target) => (T) => (base) => (step) => Nat_rec(target)(T)(base)((prev) => (_almost) => step(prev))
+
+
