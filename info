@@ -3,10 +3,5 @@
 echo "[info]"
 echo "- date: $(date)"
 echo "- machine: $(uname -a)"
-echo "- uptime: $(uptime)"
 echo "- nodejs version: $(node --version)"
-echo
-
-echo "[disk usage]"
-df -mh
 echo
