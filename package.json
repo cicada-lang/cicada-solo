@@ -28,8 +28,8 @@
     "@types/fs-readdir-recursive": "^1.0.0",
     "@types/js-yaml": "^3.12.5",
     "@types/nanoid": "^2.1.0",
-    "@types/node": "^14.14.3",
-    "typescript": "^4.0.3"
+    "@types/node": "^14.14.5",
+    "typescript": "^4.0.5"
   },
   "dependencies": {
     "@types/deep-diff": "^1.0.0",
@@ -41,7 +41,7 @@
     "fast-glob": "^3.2.4",
     "fs-readdir-recursive": "^1.1.0",
     "js-yaml": "^3.14.0",
-    "nanoid": "^3.1.15",
+    "nanoid": "^3.1.16",
     "plaintext": "^0.2.5",
     "portfinder": "^1.0.28",
     "regexp-match-indices": "^1.0.2",
