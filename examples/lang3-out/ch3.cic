@@ -15,6 +15,28 @@ eight = Nat.add1(seven)
 nine = Nat.add1(eight)
 ten = Nat.add1(nine)
 
+Nat_repr : (Nat) -> String
+Nat_repr = {
+  (Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(_)))))))) => "big"
+  (Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))))) => "six"
+  (Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))))) => "five"
+  (Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))) => "four"
+  (Nat.add1(Nat.add1(Nat.add1(Nat.zero)))) => "three"
+  (Nat.add1(Nat.add1(Nat.zero))) => "two"
+  (Nat.add1(Nat.zero)) => "one"
+  (Nat.zero) => "zero"
+}
+
+@show Nat_repr(zero)
+@show Nat_repr(one)
+@show Nat_repr(two)
+@show Nat_repr(three)
+@show Nat_repr(four)
+@show Nat_repr(five)
+@show Nat_repr(six)
+@show Nat_repr(seven)
+@show Nat_repr(eight)
+
 @datatype Bool : Type {
   true: Bool
   false: Bool
