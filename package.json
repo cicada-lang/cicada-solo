@@ -7,7 +7,7 @@
     "lib"
   ],
   "scripts": {
-    "vercel-build": "npx tsc && ./dev t && ./pub",
+    "vercel-build": "./info && npx tsc && ./dev t && ./pub",
     "build": "npx tsc",
     "dev": "npx tsc --watch",
     "format": "npx prettier src --write"

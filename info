@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+echo "[info]"
+echo "- node: $(node --version)"
+echo "- date: $(date)"
+echo "- users:" $(w | cut -d ' ' -f 1 | grep -v USER | sort -u)
+echo "- self: $USER"
+echo "- machine: $(uname -s)"
+echo "- processor: $(uname -m)"
+echo "- uptime: $(uptime)"
+echo
+
+echo "[memory usage]"
+free
+echo
+
+echo "[disk usage]"
+df -mh
+echo
