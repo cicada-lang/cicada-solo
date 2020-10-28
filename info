@@ -2,16 +2,9 @@
 
 echo "[info]"
 echo "- date: $(date)"
-echo "- users:" $(w | cut -d ' ' -f 1 | grep -v USER | sort -u)
-echo "- self: $USER"
-echo "- machine: $(uname -s)"
-echo "- processor: $(uname -m)"
+echo "- machine: $(uname -a)"
 echo "- uptime: $(uptime)"
 echo "- nodejs version: $(node --version)"
-echo
-
-echo "[memory usage]"
-free
 echo
 
 echo "[disk usage]"
