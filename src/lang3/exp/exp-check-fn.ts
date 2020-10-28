@@ -21,7 +21,11 @@ export function check_fn(
         |- fn: ${Exp.repr(fn)}
         |`)
     )
-  const arg = Exp.evaluate(mod, Ctx.to_env(result_ctx), Pattern.to_exp(fn.pattern))
+  const arg = Exp.evaluate(
+    mod,
+    Ctx.to_env(result_ctx),
+    Pattern.to_exp(fn.pattern)
+  )
   // NOTE before we introduced `Pattern`, the following `arg` is used:
   //   const arg = Value.not_yet(pi.arg_t, Neutral.v(Value.pi_arg_name(pi)))
   Exp.check(mod, result_ctx, fn.ret, Value.Closure.apply(pi.ret_t_cl, arg))

@@ -7,10 +7,10 @@
     "lib"
   ],
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch",
-    "dev": "tsc --watch",
-    "format": "prettier src --write"
+    "vercel-build": "npx tsc && ./dev t && ./pub",
+    "build": "npx tsc",
+    "dev": "npx tsc --watch",
+    "format": "npx prettier src --write"
   },
   "prettier": {
     "semi": false,
