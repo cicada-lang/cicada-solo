@@ -42,7 +42,7 @@ Nat_iter = (target) => (T) => (base) => (step) =>
   Nat_rec(target)(T)(base)((_prev) => (almost) => step(almost))
 
 add : (Nat) -> (Nat) -> Nat
-add = (x) => (y) => Nat_iter(y)(Nat)(x)((almost) => Nat.add1(almost))
+add = (x) => (y) => Nat_iter(x)(Nat)(y)((almost) => Nat.add1(almost))
 
 @show add(zero)(zero)
 @show add(zero)(one)

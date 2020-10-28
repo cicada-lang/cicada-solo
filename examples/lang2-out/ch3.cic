@@ -13,7 +13,7 @@ Nat_iter = (target) => (T) => (base) => (step) =>
   Nat_rec(target)(T)(base)((_prev) => (almost) => step(almost))
 
 add : (Nat) -> (Nat) -> Nat
-add = (x) => (y) => Nat_iter(y)(Nat)(x)((almost) => add1(almost))
+add = (x) => (y) => Nat_iter(x)(Nat)(y)((almost) => add1(almost))
 
 // NOTE We want to define `gauss` (without recursion).
 // - We try `Nat_which`, but it does not work;
