@@ -64,7 +64,7 @@ Nat_iter = (target) => (T) => (base) => (step) =>
   Nat_rec(target)(T)(base)((_prev) => (almost) => step(almost))
 
 add : (Nat) -> (Nat) -> Nat
-add = (x) => (y) => Nat_iter(x)(Nat)(y)((almost) => Nat.add1(almost))
+add = (x) => (y) => Nat_iter(y)(Nat)(x)((almost) => Nat.add1(almost))
 
 @show add(zero)(zero)
 @show add(zero)(one)
@@ -73,6 +73,27 @@ add = (x) => (y) => Nat_iter(x)(Nat)(y)((almost) => Nat.add1(almost))
 @show add(one)(two)
 @show add(two)(one)
 @show add(two)(two)
+
+mul : (Nat) -> (Nat) -> Nat
+mul = (x) => (y) => Nat_iter(y)(Nat)(zero)((almost) => add(almost)(x))
+
+pow : (Nat) -> (Nat) -> Nat
+pow = (x) => (y) => Nat_iter(y)(Nat)(one)((almost) => mul(almost)(x))
+
+eight_again = @begin {
+  four = add(two)(two)
+  add(four)(four)
+}
+
+@show "eight_again"
+@show eight_again
+
+@show "add(four)(three)"
+@show add(four)(three)
+@show "mul(four)(three)"
+@show mul(four)(three)
+@show "pow(four)(three)"
+@show pow(four)(three)
 
 gauss : (Nat) -> Nat
 gauss = (n) => Nat_rec(n)(Nat)(Nat.zero)((prev) => (almost) => add(Nat.add1(prev))(almost))
