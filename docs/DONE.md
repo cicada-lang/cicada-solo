@@ -1,3 +1,7 @@
+# [TLT] 3. Eliminate All Natural Numbers!
+
+- 完成：2020-10-29
+
 # lang3 -- 重新实现 cicada-structural-typing
 
 - 完成：2020-10-14

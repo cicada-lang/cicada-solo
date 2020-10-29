@@ -12,11 +12,26 @@ Nat_iter : (target: Nat) -> (T: Type) -> (base: T) -> (step: (almost: T) -> T) -
 Nat_iter = (target) => (T) => (base) => (step) =>
   Nat_rec(target)(T)(base)((_prev) => (almost) => step(almost))
 
-add_step : (Nat) -> Nat
-add_step = (almost) => add1(almost)
+// NOTE We use `y` as target, this will make
+//   the definition of `pow` looks more natural.
 
 add : (Nat) -> (Nat) -> Nat
-add = (x) => (y) => Nat_iter(x)(Nat)(y)(add_step)
+add = (x) => (y) => Nat_iter(y)(Nat)(x)((almost) => add1(almost))
+
+mul : (Nat) -> (Nat) -> Nat
+mul = (x) => (y) => Nat_iter(y)(Nat)(0)((almost) => add(almost)(x))
+
+pow : (Nat) -> (Nat) -> Nat
+pow = (x) => (y) => Nat_iter(y)(Nat)(1)((almost) => mul(almost)(x))
+
+eight = {
+  four = add(2)(2)
+  add(four)(four)
+}
+
+@show add(4)(3)
+@show mul(4)(3)
+@show pow(4)(3)
 
 // NOTE We want to define `gauss` (without recursion).
 // - We try `Nat_which`, but it does not work;
