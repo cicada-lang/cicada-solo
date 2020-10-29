@@ -42,6 +42,7 @@ eight = {
 gauss : (Nat) -> Nat
 gauss = (n) => Nat_rec(n)(Nat)(0)((prev) => (almost) => add(add1(prev))(almost))
 
+@show "gauss"
 @show gauss(0)
 @show gauss(1)
 @show gauss(2)
@@ -53,3 +54,15 @@ gauss = (n) => Nat_rec(n)(Nat)(0)((prev) => (almost) => add(add1(prev))(almost))
 @show gauss(8)
 @show gauss(9)
 @show gauss(10)
+
+factorial : (Nat) -> Nat
+factorial = (n) => Nat_rec(n)(Nat)(1)((prev) => (almost) => mul(add1(prev))(almost))
+
+@show "factorial"
+@show factorial(0)
+@show factorial(1)
+@show factorial(2)
+@show factorial(3)
+@show factorial(4)
+@show factorial(5)
+@show factorial(6)
