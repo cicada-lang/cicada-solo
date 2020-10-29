@@ -5,15 +5,18 @@ A nascent programming language
   for the foundations of mathematics.
 
 link:DONE.md
-link:NOTE.md
 link:README.txt
 link:abduction-for-double.txt
 link:about-js-regexp.md
+link:about-three-levels-of-function-programming.md
+link:arithmetic-level-and-church-encoding.md
 link:bidirectional-type-checking.md
+link:built-in-equality.md
 link:cicada-design.md
 link:index
 link:javascript-regexp.md
 link:knowledge-logic-computation.txt
+link:nominal-type-vs-structural-type.md
 link:parsing-techniques.md
 link:readback-recursive-expression.md
 link:scientific-method.md
