@@ -37,17 +37,16 @@
   - we will be able to infer such `fn`
   - which might be needed by `@match`
 
-- [lang2] be able to add type annotation to `Exp.fn`
-
 - [lang3] there might be `@match`
   - which will be direct application of `Exp.case_fn`
 
 > implict arguments.
 
-- [lang3] [draft] checking about `Pattern` in the `arg_t` and `ret_t` of `pi`
+- [lang3] maybe merge `env` `ctx` into `the`.
+
+- [lang3] checking about `Pattern` in the `arg_t` and `ret_t` of `pi`
   - we also need to use unification here.
-    - we will need a new ctx-like argument for equations -- `Equ`.
-      - maybe merge `env` `ctx` `equ` into `the`.
+  - we will need a new ctx-like argument for equations -- `Equ`.
 
 > Improve the readback of recursive expression.
 
@@ -99,6 +98,8 @@
 # lang1 -- 添加 algebraic data type
 
 # lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
+
+- [lang2] be able to add type annotation to `Exp.fn`
 
 - implement List for lang2.
 - implement Vector for lang2.
