@@ -86,6 +86,7 @@
 
 # lang0 -- church-encoding
 
+- [lang0] `Evaluator.evaluate`
 - church-boolean.cic
 - church-numeral-predicates.cle
 - church-pair.cic
