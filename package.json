@@ -9,7 +9,7 @@
   "scripts": {
     "vercel-build": "./info && npx tsc && ./dev t && ./pub",
     "build": "npx tsc",
-    "dev": "npx tsc --watch",
+    "watch": "npx tsc --watch",
     "format": "npx prettier src --write"
   },
   "prettier": {
