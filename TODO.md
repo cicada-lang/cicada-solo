@@ -84,7 +84,7 @@
 - [test] x in x test
   - S <- "x" S "x" | "x"
 
-# lang0 -- church-encoding
+# lang0
 
 - church-boolean.cic
 - church-numeral-predicates.cle
@@ -93,11 +93,18 @@
   其语义是迭代函数，也许有有趣的应用
   多了一个关于迭代函数的 API。
 
-# lang1 -- Play with systemt
+# lang1
 
-# lang1 -- 添加 algebraic data type
+- [lang1] `Evaluator`
+- [lang1] `Checker`
 
-# lang2 -- 将 NbE 教程中的 tartlet 升级为 pie
+> Play with systemt
+
+> 添加 algebraic data type
+
+# lang2
+
+> 将 NbE 教程中的 tartlet 升级为 pie
 
 - [lang2] be able to add type annotation to `Exp.fn`
 
@@ -112,10 +119,9 @@
 
 - use native `number` as `Nat`.
 
-# lang2 -- 添加 inductive data type
-
-- 归纳类型（Inductive type）的推演规则。
-  - Only one abstraction away.
+- 添加 inductive data type
+  - 归纳类型（Inductive type）的推演规则。
+    - Only one abstraction away.
 
 # langx -- wissen
 
