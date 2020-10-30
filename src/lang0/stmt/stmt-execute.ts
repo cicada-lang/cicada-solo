@@ -1,12 +1,12 @@
 import * as Stmt from "../stmt"
 import * as Env from "../env"
 import * as Exp from "../exp"
+import * as Evaluator from "../evaluator"
 
 export function execute(env: Env.Env, stmt: Stmt.Stmt): void {
   switch (stmt.kind) {
     case "Stmt.def": {
-      const { name, exp } = stmt
-      Env.update(env, name, Exp.evaluate(env, exp))
+      Env.update(env, stmt.name, Evaluator.evaluate(Evaluator.create(env), stmt.exp))
     }
   }
 }

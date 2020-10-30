@@ -86,8 +86,6 @@
 
 # lang0 -- church-encoding
 
-- [lang0] `Evaluator` as class instead of interface
-- [lang0] `Evaluator.do_ap`
 - church-boolean.cic
 - church-numeral-predicates.cle
 - church-pair.cic

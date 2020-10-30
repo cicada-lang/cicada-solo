@@ -14,7 +14,7 @@ export function evaluate(
       case "Exp.v": {
         const result = Env.lookup(evaluator.env, exp.name)
         if (result === undefined) {
-          throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
+          throw new Trace.Trace(Evaluator.explain_name_undefined(exp.name))
         }
         return result
       }
@@ -22,7 +22,7 @@ export function evaluate(
         return Value.fn(exp.name, exp.ret, evaluator.env)
       }
       case "Exp.ap": {
-        return Exp.do_ap(
+        return Evaluator.do_ap(
           Evaluator.evaluate(evaluator, exp.target),
           Evaluator.evaluate(evaluator, exp.arg)
         )
