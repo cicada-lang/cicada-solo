@@ -1,5 +1,3 @@
-- [lang1] `Evaluate.evaluate` replace `Exp.evaluate`
-
 - [lang1] `Check`
 - [lang1] `Infer`
 - [lang1] `Readback`

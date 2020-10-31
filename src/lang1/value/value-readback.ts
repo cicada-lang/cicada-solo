@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Ty from "../ty"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -23,7 +24,7 @@ export function readback(
     //   This implements the η-rule for functions.
     const name = ut.freshen_name(used, value_arg_name(value))
     const variable = Value.not_yet(t.arg_t, Neutral.v(name))
-    const ret = Exp.do_ap(value, variable)
+    const ret = Evaluate.do_ap(value, variable)
     return Exp.fn(name, Value.readback(new Set([...used, name]), t.ret_t, ret))
   } else if (value.kind === "Value.not_yet") {
     if (ut.equal(t, value.t)) {
