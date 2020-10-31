@@ -41,6 +41,9 @@
 
 - [lang3] use `Mod` to design module system
   - read module tree first -- separate all io from core
+
+> play.
+
 - [lang3] [note] play with explicit record passing -- instead for implicit `arg_t`
 
 > syntax.
