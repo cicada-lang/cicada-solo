@@ -25,11 +25,11 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         )
       }
       case "Exp.begin": {
-        env = Env.clone(env)
+        const new_env = Env.clone(env)
         for (const stmt of exp.stmts) {
-          Stmt.execute(env, stmt)
+          Stmt.execute(new_env, stmt)
         }
-        return Evaluate.evaluate(env, exp.ret)
+        return Evaluate.evaluate(new_env, exp.ret)
       }
     }
   } catch (error) {
