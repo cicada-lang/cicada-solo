@@ -14,7 +14,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         const result = Env.lookup(env, exp.name)
         if (result === undefined) {
           console.log({ env, exp })
-          throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
+          throw new Trace.Trace(Evaluate.explain_name_undefined(exp.name))
         }
         return result
       }
