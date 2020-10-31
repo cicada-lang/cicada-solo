@@ -1,14 +1,15 @@
-- [lang2] `Readback`
 - [lang2] `Infer`
-
-- [lang2] `Explain` as namespace
-- [lang0] `Explain` as namespace
-- [lang1] `Explain` as namespace
+- [lang2] `Readback`
 
 - [lang3] `Evaluate`
 - [lang3] `Check`
 - [lang3] `Infer`
 - [lang3] `Readback`
+
+- [lang0] `Explain` as namespace
+- [lang1] `Explain` as namespace
+- [lang2] `Explain` as namespace
+- [lang3] `Explain` as namespace
 
 # TLT
 
