@@ -1,7 +1,18 @@
-- [lang2] `Evaluate`
+- [lang2] `evaluate-evaluate`
+- [lang2] `evaluate-do-ap`
+- [lang2] `evaluate-do-car`
+- [lang2] `evaluate-do-cdr`
+- [lang2] `evaluate-do-nat-ind`
+- [lang2] `evaluate-do-absurd-ind`
+- [lang2] `evaluate-do-replace`
+
 - [lang2] `Readback`
 - [lang2] `Check`
 - [lang2] `Infer`
+
+- [lang2] `Explain` as namespace
+- [lang0] `Explain` as namespace
+- [lang1] `Explain` as namespace
 
 - [lang3] `Evaluate`
 - [lang3] `Check`

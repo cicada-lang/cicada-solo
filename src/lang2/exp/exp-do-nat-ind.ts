@@ -3,7 +3,6 @@ import * as Env from "../env"
 import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
-
 import * as Trace from "../../trace"
 
 export function do_nat_ind(

@@ -1,7 +1,6 @@
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
-
 import * as Trace from "../../trace"
 
 export function do_cdr(target: Value.Value): Value.Value {

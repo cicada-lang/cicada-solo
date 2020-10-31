@@ -2,7 +2,6 @@ import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
-
 import * as Trace from "../../trace"
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
