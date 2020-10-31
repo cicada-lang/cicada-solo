@@ -1,6 +1,6 @@
 import * as Exp from "../../exp"
 import * as Stmt from "../../stmt"
-import * as frontend from "../../frontend"
+import * as Syntax from "../../syntax"
 import * as Ty from "../../ty"
 import * as Ctx from "../../ctx"
 import * as Env from "../../env"
@@ -29,7 +29,7 @@ export const handler = async (argv: Argv) => {
   const text = fs.readFileSync(argv.input, { encoding: "utf-8" })
 
   try {
-    const stmts = frontend.parse_stmts(text)
+    const stmts = Syntax.parse_stmts(text)
     const ctx = Ctx.init()
     const env = Env.init()
     const output = Stmt.run(ctx, env, stmts)
