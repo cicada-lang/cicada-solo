@@ -1,3 +1,4 @@
+import * as Check from "../check"
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Ctx from "../ctx"
@@ -11,7 +12,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       if (t.kind === "Ty.arrow") {
         ctx = Ctx.clone(ctx)
         Ctx.update(ctx, exp.name, t.arg_t)
-        Exp.check(ctx, exp.ret, t.ret_t)
+        Check.check(ctx, exp.ret, t.ret_t)
         return
       } else {
         throw new Trace.Trace(
@@ -35,7 +36,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       }
     } else if (exp.kind === "Exp.add1") {
       if (t.kind === "Ty.nat") {
-        Exp.check(ctx, exp.prev, t)
+        Check.check(ctx, exp.prev, t)
       } else {
         throw new Trace.Trace(
           ut.aline(`
@@ -51,7 +52,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       for (const stmt of stmts) {
         Stmt.declare(ctx, stmt)
       }
-      Exp.check(ctx, ret, t)
+      Check.check(ctx, ret, t)
     } else {
       const u = Exp.infer(ctx, exp)
       // NOTE Comparing equivalent between `Ty` is simple.
