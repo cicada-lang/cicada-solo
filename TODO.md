@@ -1,5 +1,3 @@
-- [lang3] `syntax/` instead of `frontend/`
-
 - [lang1] `Evaluate`
 - [lang1] `Check`
 - [lang1] `Readback`

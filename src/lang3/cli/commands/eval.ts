@@ -1,4 +1,4 @@
-import * as frontend from "../../frontend"
+import * as Syntax from "../../syntax"
 import * as Value from "../../value"
 import * as Top from "../../top"
 import * as Exp from "../../exp"
@@ -29,7 +29,7 @@ export const handler = async (argv: Argv) => {
   const text = fs.readFileSync(argv.input, { encoding: "utf-8" })
 
   try {
-    const tops = frontend.parse_tops(text)
+    const tops = Syntax.parse_tops(text)
     const mod = Mod.init()
     const output = Top.run(mod, tops)
     console.log(output)
