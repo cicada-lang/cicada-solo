@@ -1,6 +1,6 @@
+import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
-
 import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
@@ -35,7 +35,7 @@ function check_properties_aganst_sat(
       )
     }
     Exp.check(mod, ctx, found, entry.t)
-    const value = Exp.evaluate(mod, Ctx.to_env(ctx), found)
+    const value = Evaluate.evaluate(mod, Ctx.to_env(ctx), found)
     if (!Value.conversion(mod, ctx, entry.t, value, entry.value)) {
       throw new Trace.Trace(
         ut.aline(`
@@ -87,5 +87,5 @@ function check_properties_aganst_next(
   }
   Exp.check(mod, ctx, found, next.t)
   properties.delete(next.name)
-  return Exp.evaluate(mod, Ctx.to_env(ctx), found)
+  return Evaluate.evaluate(mod, Ctx.to_env(ctx), found)
 }

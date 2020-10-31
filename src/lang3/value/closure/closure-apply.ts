@@ -1,4 +1,5 @@
 import * as Closure from "../closure"
+import * as Evaluate from "../../evaluate"
 import * as Value from "../../value"
 import * as Pattern from "../../pattern"
 import * as Exp from "../../exp"
@@ -19,5 +20,5 @@ export function apply(
         |- value.kind: ${value.kind}
         |`)
     )
-  return Exp.evaluate(closure.mod, env, closure.ret)
+  return Evaluate.evaluate(closure.mod, env, closure.ret)
 }

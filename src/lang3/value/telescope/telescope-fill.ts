@@ -1,4 +1,5 @@
 import * as Telescope from "../telescope"
+import * as Evaluate from "../../evaluate"
 import * as Env from "../../env"
 import * as Exp from "../../exp"
 import * as Value from "../../value"
@@ -26,7 +27,7 @@ export function fill(
   if (entry === undefined) {
     return Telescope.create(mod, env, undefined, rest)
   } else {
-    const t = Exp.evaluate(mod, env, entry.t)
+    const t = Evaluate.evaluate(mod, env, entry.t)
     return Telescope.create(mod, env, { name: entry.name, t }, rest)
   }
 }

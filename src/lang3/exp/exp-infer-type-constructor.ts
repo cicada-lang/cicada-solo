@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Ctx from "../ctx"
@@ -14,7 +15,7 @@ export function infer_type_constructor(
   for (const entry of datatype.sums) {
     check_data_constructor_t(mod, ctx, entry.t, datatype.name)
   }
-  return Exp.evaluate(mod, Ctx.to_env(ctx), datatype.t)
+  return Evaluate.evaluate(mod, Ctx.to_env(ctx), datatype.t)
 }
 
 function check_data_constructor_t(
@@ -28,7 +29,7 @@ function check_data_constructor_t(
     Exp.check(mod, ctx, pi.arg_t, Value.type)
     check_data_constructor_t(
       mod,
-      Ctx.extend(ctx, pi.name, Exp.evaluate(mod, Ctx.to_env(ctx), pi.arg_t)),
+      Ctx.extend(ctx, pi.name, Evaluate.evaluate(mod, Ctx.to_env(ctx), pi.arg_t)),
       pi.ret_t,
       name
     )
@@ -36,7 +37,7 @@ function check_data_constructor_t(
   }
 
   Exp.check(mod, ctx, t, Value.type)
-  const t_value = Exp.evaluate(mod, Ctx.to_env(ctx), t)
+  const t_value = Evaluate.evaluate(mod, Ctx.to_env(ctx), t)
 
   if (
     (t_value.kind === "Value.type_constructor" && t_value.name === name) ||
@@ -59,7 +60,7 @@ function check_type_constructor_t(
     Exp.check(mod, ctx, pi.arg_t, Value.type)
     check_type_constructor_t(
       mod,
-      Ctx.extend(ctx, pi.name, Exp.evaluate(mod, Ctx.to_env(ctx), pi.arg_t)),
+      Ctx.extend(ctx, pi.name, Evaluate.evaluate(mod, Ctx.to_env(ctx), pi.arg_t)),
       pi.ret_t
     )
     return

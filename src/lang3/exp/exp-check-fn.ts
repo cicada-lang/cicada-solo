@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Pattern from "../pattern"
@@ -21,7 +22,7 @@ export function check_fn(
         |- fn: ${Exp.repr(fn)}
         |`)
     )
-  const arg = Exp.evaluate(
+  const arg = Evaluate.evaluate(
     mod,
     Ctx.to_env(result_ctx),
     Pattern.to_exp(fn.pattern)
@@ -84,7 +85,7 @@ function match_datatype(
   // NOTE
   // - Examples:
   //   - List(T): Type
-  const type_constructor = Exp.evaluate(
+  const type_constructor = Evaluate.evaluate(
     mod,
     Ctx.to_env(ctx),
     Exp.v(datatype.name)
@@ -110,7 +111,7 @@ function match_data(
   //   - Vec.cons(T)(prev)(head)(tail): Vec(T)(Nat.succ(prev))
   // NOTE
   // - We will infer the type of every (nested) pattern variables.
-  const data_constructor = Exp.do_dot(type_constructor, data.tag)
+  const data_constructor = Evaluate.do_dot(type_constructor, data.tag)
   if (data_constructor.kind !== "Value.data_constructor")
     throw new Trace.Trace("expecting data_constructor")
   const result_ctx = match_patterns(
@@ -144,7 +145,7 @@ function match_patterns(
     if (result_ctx === undefined) return undefined
     t = Value.Closure.apply(
       t.ret_t_cl,
-      Exp.evaluate(mod, Ctx.to_env(result_ctx), Pattern.to_exp(pattern))
+      Evaluate.evaluate(mod, Ctx.to_env(result_ctx), Pattern.to_exp(pattern))
     )
   }
   return result_ctx

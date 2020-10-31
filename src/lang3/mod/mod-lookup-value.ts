@@ -2,6 +2,7 @@ import * as Mod from "../mod"
 import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Value from "../value"
+import * as Evaluate from "../evaluate"
 
 export function lookup_value(
   mod: Mod.Mod,
@@ -12,10 +13,10 @@ export function lookup_value(
   if (entry.cached_value !== undefined) return entry.cached_value
   switch (entry.den.kind) {
     case "Mod.Den.def": {
-      return Exp.evaluate(mod, Env.init(), entry.den.exp)
+      return Evaluate.evaluate(mod, Env.init(), entry.den.exp)
     }
     case "Mod.Den.type_constructor": {
-      return Exp.evaluate(mod, Env.init(), entry.den.type_constructor)
+      return Evaluate.evaluate(mod, Env.init(), entry.den.type_constructor)
     }
   }
 }

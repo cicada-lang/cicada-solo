@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Ctx from "../ctx"
@@ -7,7 +8,7 @@ export function infer_pi(mod: Mod.Mod, ctx: Ctx.Ctx, pi: Exp.pi): Value.type {
   Exp.check(mod, ctx, pi.arg_t, Value.type)
   Exp.check(
     mod,
-    Ctx.extend(ctx, pi.name, Exp.evaluate(mod, Ctx.to_env(ctx), pi.arg_t)),
+    Ctx.extend(ctx, pi.name, Evaluate.evaluate(mod, Ctx.to_env(ctx), pi.arg_t)),
     pi.ret_t,
     Value.type
   )

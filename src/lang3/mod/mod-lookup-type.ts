@@ -3,7 +3,7 @@ import * as Ctx from "../ctx"
 import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Value from "../value"
-
+import * as Evaluate from "../evaluate"
 export function lookup_type(
   mod: Mod.Mod,
   name: string
@@ -14,10 +14,10 @@ export function lookup_type(
     case "Mod.Den.def": {
       if (entry.den.t === undefined)
         return Exp.infer(mod, Ctx.init(), entry.den.exp)
-      return Exp.evaluate(mod, Env.init(), entry.den.t)
+      return Evaluate.evaluate(mod, Env.init(), entry.den.t)
     }
     case "Mod.Den.type_constructor": {
-      return Exp.evaluate(mod, Env.init(), entry.den.type_constructor.t)
+      return Evaluate.evaluate(mod, Env.init(), entry.den.type_constructor.t)
     }
   }
 }

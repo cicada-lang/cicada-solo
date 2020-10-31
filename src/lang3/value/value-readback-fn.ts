@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as Pattern from "../pattern"
@@ -26,7 +27,7 @@ export function readback_fn(
       mod,
       Ctx.extend(ctx, fresh_name, pi.arg_t),
       Value.Closure.apply(pi.ret_t_cl, variable),
-      Exp.do_ap(value, variable)
+      Evaluate.do_ap(value, variable)
     )
   )
 }

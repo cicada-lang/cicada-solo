@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Ctx from "../ctx"
@@ -14,6 +15,6 @@ export function infer_absurd_ind(
   //   but we do a simple check for the simple absurd.
   Exp.check(mod, ctx, absurd_ind.target, Value.absurd)
   Exp.check(mod, ctx, absurd_ind.motive, Value.type)
-  const motive = Exp.evaluate(mod, Ctx.to_env(ctx), absurd_ind.motive)
+  const motive = Evaluate.evaluate(mod, Ctx.to_env(ctx), absurd_ind.motive)
   return motive
 }

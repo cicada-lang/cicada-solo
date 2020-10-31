@@ -4,6 +4,7 @@ import * as Ctx from "../ctx"
 import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Value from "../value"
+import * as Evaluate from "../evaluate"
 
 export function run(mod: Mod.Mod, tops: Array<Top.Top>): string {
   define(mod, tops)
@@ -44,7 +45,7 @@ function show(mod: Mod.Mod, tops: Array<Top.Top>): string {
       const env = Env.init()
       const ctx = Ctx.init()
       const t = Exp.infer(mod, ctx, top.exp)
-      const value = Exp.evaluate(mod, env, top.exp)
+      const value = Evaluate.evaluate(mod, env, top.exp)
       const value_repr = Exp.repr(Value.readback(mod, ctx, t, value))
       output += `${value_repr}\n`
     }

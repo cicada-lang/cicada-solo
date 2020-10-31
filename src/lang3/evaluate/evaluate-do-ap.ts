@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Normal from "../normal"
@@ -17,7 +18,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   if (target.kind === "Value.not_yet") return do_ap_not_yet(target, arg)
 
   throw new Trace.Trace(
-    Exp.explain_elim_target_mismatch({
+    Evaluate.explain_elim_target_mismatch({
       elim: "ap",
       expecting: ["Value.fn", "Value.cls", "Value.not_yet"],
       reality: target.kind,
@@ -37,7 +38,7 @@ export function do_ap_case_fn(
       )
 
     throw new Trace.Trace(
-      Exp.explain_elim_target_type_mismatch({
+      Evaluate.explain_elim_target_type_mismatch({
         elim: "match",
         expecting: ["Value.pi"],
         reality: arg.t.kind,
@@ -140,7 +141,7 @@ export function do_ap_not_yet(
     )
 
   throw new Trace.Trace(
-    Exp.explain_elim_target_type_mismatch({
+    Evaluate.explain_elim_target_type_mismatch({
       elim: "ap",
       expecting: ["Value.pi"],
       reality: not_yet.t.kind,

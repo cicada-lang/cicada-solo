@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Ctx from "../ctx"
@@ -27,7 +28,7 @@ function when_target_is_pi(
   Exp.check(mod, ctx, ap.arg, pi.arg_t)
   return Value.Closure.apply(
     pi.ret_t_cl,
-    Exp.evaluate(mod, Ctx.to_env(ctx), ap.arg)
+    Evaluate.evaluate(mod, Ctx.to_env(ctx), ap.arg)
   )
 }
 
@@ -36,7 +37,7 @@ function when_target_is_type(
   ctx: Ctx.Ctx,
   ap: Exp.ap
 ): Value.Value {
-  const target = Exp.evaluate(mod, Ctx.to_env(ctx), ap.target)
+  const target = Evaluate.evaluate(mod, Ctx.to_env(ctx), ap.target)
   const cls = Value.is_cls(mod, ctx, target)
   if (cls.tel.next === undefined) {
     throw new Trace.Trace(

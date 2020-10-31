@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Ctx from "../ctx"
@@ -11,12 +12,12 @@ export function infer_dot(
 ): Value.Value {
   const target_t = Exp.infer(mod, ctx, dot.target)
   if (target_t.kind === "Value.cls") {
-    return Exp.do_dot(target_t, dot.name)
+    return Evaluate.do_dot(target_t, dot.name)
   }
 
-  const target = Exp.evaluate(mod, Ctx.to_env(ctx), dot.target)
+  const target = Evaluate.evaluate(mod, Ctx.to_env(ctx), dot.target)
   if (target.kind === "Value.type_constructor") {
-    const data_constructor = Exp.do_dot_type_constructor(target, dot.name)
+    const data_constructor = Evaluate.do_dot_type_constructor(target, dot.name)
     return data_constructor.t
   }
 

@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Ctx from "../ctx"
@@ -9,7 +10,7 @@ export function infer_the(
   the: Exp.the
 ): Value.Value {
   Exp.check(mod, ctx, the.t, Value.type)
-  const t = Exp.evaluate(mod, Ctx.to_env(ctx), the.t)
+  const t = Evaluate.evaluate(mod, Ctx.to_env(ctx), the.t)
   Exp.check(mod, ctx, the.exp, t)
   return t
 }
