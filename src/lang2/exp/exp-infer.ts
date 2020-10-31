@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
@@ -11,18 +12,18 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     if (exp.kind === "Exp.v") {
       const t = Ctx.lookup(ctx, exp.name)
       if (t === undefined) {
-        throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
+        throw new Trace.Trace(Evaluate.explain_name_undefined(exp.name))
       }
       return t
     } else if (exp.kind === "Exp.pi") {
       Exp.check(ctx, exp.arg_t, Value.type)
-      const arg_t = Exp.evaluate(Ctx.to_env(ctx), exp.arg_t)
+      const arg_t = Evaluate.evaluate(Ctx.to_env(ctx), exp.arg_t)
       ctx = Ctx.extend(ctx, exp.name, arg_t)
       Exp.check(ctx, exp.ret_t, Value.type)
       return Value.type
     } else if (exp.kind === "Exp.sigma") {
       Exp.check(ctx, exp.car_t, Value.type)
-      const car_t = Exp.evaluate(Ctx.to_env(ctx), exp.car_t)
+      const car_t = Evaluate.evaluate(Ctx.to_env(ctx), exp.car_t)
       ctx = Ctx.extend(ctx, exp.name, car_t)
       Exp.check(ctx, exp.cdr_t, Value.type)
       return Value.type
@@ -30,7 +31,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       const target_t = Exp.infer(ctx, exp.target)
       const pi = Value.is_pi(ctx, target_t)
       Exp.check(ctx, exp.arg, pi.arg_t)
-      const arg = Exp.evaluate(Ctx.to_env(ctx), exp.arg)
+      const arg = Evaluate.evaluate(Ctx.to_env(ctx), exp.arg)
       return Value.Closure.apply(pi.ret_t_cl, arg)
     } else if (exp.kind === "Exp.car") {
       const target_t = Exp.infer(ctx, exp.target)
@@ -39,8 +40,8 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.cdr") {
       const target_t = Exp.infer(ctx, exp.target)
       const sigma = Value.is_sigma(ctx, target_t)
-      const target = Exp.evaluate(Ctx.to_env(ctx), exp.target)
-      const car = Exp.do_car(target)
+      const target = Evaluate.evaluate(Ctx.to_env(ctx), exp.target)
+      const car = Evaluate.do_car(target)
       return Value.Closure.apply(sigma.cdr_t_cl, car)
     } else if (exp.kind === "Exp.nat") {
       return Value.type
@@ -53,30 +54,30 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       // NOTE We should always infer target,
       //   but we do a simple check for the simple nat.
       Exp.check(ctx, exp.target, Value.nat)
-      const motive_t = Exp.evaluate(Env.init(), Exp.pi("x", Exp.nat, Exp.type))
+      const motive_t = Evaluate.evaluate(Env.init(), Exp.pi("x", Exp.nat, Exp.type))
       Exp.check(ctx, exp.motive, motive_t)
-      const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
-      Exp.check(ctx, exp.base, Exp.do_ap(motive, Value.zero))
+      const motive = Evaluate.evaluate(Ctx.to_env(ctx), exp.motive)
+      Exp.check(ctx, exp.base, Evaluate.do_ap(motive, Value.zero))
       Exp.check(ctx, exp.step, Exp.nat_ind_step_t(motive))
-      const target = Exp.evaluate(Ctx.to_env(ctx), exp.target)
-      return Exp.do_ap(motive, target)
+      const target = Evaluate.evaluate(Ctx.to_env(ctx), exp.target)
+      return Evaluate.do_ap(motive, target)
     } else if (exp.kind === "Exp.equal") {
       Exp.check(ctx, exp.t, Value.type)
-      const t = Exp.evaluate(Ctx.to_env(ctx), exp.t)
+      const t = Evaluate.evaluate(Ctx.to_env(ctx), exp.t)
       Exp.check(ctx, exp.from, t)
       Exp.check(ctx, exp.to, t)
       return Value.type
     } else if (exp.kind === "Exp.replace") {
       const target_t = Exp.infer(ctx, exp.target)
       const equal = Value.is_equal(ctx, target_t)
-      const motive_t = Exp.evaluate(
+      const motive_t = Evaluate.evaluate(
         Env.update(Env.init(), "t", equal.t),
         Exp.pi("x", Exp.v("t"), Exp.type)
       )
       Exp.check(ctx, exp.motive, motive_t)
-      const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
-      Exp.check(ctx, exp.base, Exp.do_ap(motive, equal.from))
-      return Exp.do_ap(motive, equal.to)
+      const motive = Evaluate.evaluate(Ctx.to_env(ctx), exp.motive)
+      Exp.check(ctx, exp.base, Evaluate.do_ap(motive, equal.from))
+      return Evaluate.do_ap(motive, equal.to)
     } else if (exp.kind === "Exp.trivial") {
       return Value.type
     } else if (exp.kind === "Exp.sole") {
@@ -90,7 +91,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       //   but we do a simple check for the simple absurd.
       Exp.check(ctx, exp.target, Value.absurd)
       Exp.check(ctx, exp.motive, Value.type)
-      const motive = Exp.evaluate(Ctx.to_env(ctx), exp.motive)
+      const motive = Evaluate.evaluate(Ctx.to_env(ctx), exp.motive)
       return motive
     } else if (exp.kind === "Exp.str") {
       return Value.type
@@ -107,7 +108,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       return Exp.infer(ctx, ret)
     } else if (exp.kind === "Exp.the") {
       Exp.check(ctx, exp.t, Value.type)
-      const t = Exp.evaluate(Ctx.to_env(ctx), exp.t)
+      const t = Evaluate.evaluate(Ctx.to_env(ctx), exp.t)
       Exp.check(ctx, exp.exp, t)
       return t
     } else {

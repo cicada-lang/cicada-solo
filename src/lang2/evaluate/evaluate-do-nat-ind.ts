@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Env from "../env"
 import * as Value from "../value"
@@ -14,9 +15,9 @@ export function do_nat_ind(
   if (target.kind === "Value.zero") {
     return base
   } else if (target.kind === "Value.add1") {
-    return Exp.do_ap(
-      Exp.do_ap(step, target.prev),
-      Exp.do_nat_ind(target.prev, motive, base, step)
+    return Evaluate.do_ap(
+      Evaluate.do_ap(step, target.prev),
+      Evaluate.do_nat_ind(target.prev, motive, base, step)
     )
   } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.nat") {
@@ -24,10 +25,10 @@ export function do_nat_ind(
         Value.nat,
         Value.Closure.create(Env.init(), "k", Exp.type)
       )
-      const base_t = Exp.do_ap(motive, Value.zero)
+      const base_t = Evaluate.do_ap(motive, Value.zero)
       const step_t = Exp.nat_ind_step_t(motive)
       return Value.not_yet(
-        Exp.do_ap(motive, target),
+        Evaluate.do_ap(motive, target),
         Neutral.nat_ind(
           target.neutral,
           Normal.create(motive_t, motive),
@@ -37,7 +38,7 @@ export function do_nat_ind(
       )
     } else {
       throw new Trace.Trace(
-        Exp.explain_elim_target_type_mismatch({
+        Evaluate.explain_elim_target_type_mismatch({
           elim: "nat_ind",
           expecting: ["Value.nat"],
           reality: target.t.kind,
@@ -46,7 +47,7 @@ export function do_nat_ind(
     }
   } else {
     throw new Trace.Trace(
-      Exp.explain_elim_target_mismatch({
+      Evaluate.explain_elim_target_mismatch({
         elim: "nat_ind",
         expecting: ["Value.zero", "Value.add1", "Value.not_yet"],
         reality: target.kind,

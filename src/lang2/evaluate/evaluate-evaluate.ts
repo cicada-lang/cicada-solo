@@ -11,7 +11,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
       case "Exp.v": {
         const result = Env.lookup(env, exp.name)
         if (result === undefined) {
-          throw new Trace.Trace(Exp.explain_name_undefined(exp.name))
+          throw new Trace.Trace(Evaluate.explain_name_undefined(exp.name))
         }
         return result
       }
@@ -25,7 +25,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return Value.fn(Value.Closure.create(env, exp.name, exp.ret))
       }
       case "Exp.ap": {
-        return Exp.do_ap(
+        return Evaluate.do_ap(
           Evaluate.evaluate(env, exp.target),
           Evaluate.evaluate(env, exp.arg)
         )
@@ -43,10 +43,10 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         )
       }
       case "Exp.car": {
-        return Exp.do_car(Evaluate.evaluate(env, exp.target))
+        return Evaluate.do_car(Evaluate.evaluate(env, exp.target))
       }
       case "Exp.cdr": {
-        return Exp.do_cdr(Evaluate.evaluate(env, exp.target))
+        return Evaluate.do_cdr(Evaluate.evaluate(env, exp.target))
       }
       case "Exp.nat": {
         return Value.nat
@@ -58,7 +58,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return Value.add1(Evaluate.evaluate(env, exp.prev))
       }
       case "Exp.nat_ind": {
-        return Exp.do_nat_ind(
+        return Evaluate.do_nat_ind(
           Evaluate.evaluate(env, exp.target),
           Evaluate.evaluate(env, exp.motive),
           Evaluate.evaluate(env, exp.base),
@@ -76,7 +76,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return Value.same
       }
       case "Exp.replace": {
-        return Exp.do_replace(
+        return Evaluate.do_replace(
           Evaluate.evaluate(env, exp.target),
           Evaluate.evaluate(env, exp.motive),
           Evaluate.evaluate(env, exp.base)
@@ -92,7 +92,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return Value.absurd
       }
       case "Exp.absurd_ind": {
-        return Exp.do_absurd_ind(
+        return Evaluate.do_absurd_ind(
           Evaluate.evaluate(env, exp.target),
           Evaluate.evaluate(env, exp.motive)
         )

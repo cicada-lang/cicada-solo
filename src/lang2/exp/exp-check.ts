@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
@@ -15,7 +16,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       Exp.check(Ctx.extend(ctx, exp.name, pi.arg_t), exp.ret, ret_t)
     } else if (exp.kind === "Exp.cons") {
       const sigma = Value.is_sigma(ctx, t)
-      const car = Exp.evaluate(Ctx.to_env(ctx), exp.car)
+      const car = Evaluate.evaluate(Ctx.to_env(ctx), exp.car)
       const cdr_t = Value.Closure.apply(sigma.cdr_t_cl, car)
       Exp.check(ctx, exp.car, sigma.car_t)
       Exp.check(ctx, exp.cdr, cdr_t)

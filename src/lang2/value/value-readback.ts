@@ -1,3 +1,4 @@
+import * as Evaluate from "../evaluate"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as Exp from "../exp"
@@ -24,7 +25,7 @@ export function readback(
       Value.readback(
         Ctx.extend(ctx, fresh_name, t.arg_t),
         Value.Closure.apply(t.ret_t_cl, variable),
-        Exp.do_ap(value, variable)
+        Evaluate.do_ap(value, variable)
       )
     )
   } else if (t.kind === "Value.sigma") {
@@ -32,8 +33,8 @@ export function readback(
     //   Every value with a pair type,
     //   whether it is neutral or not,
     //   is read back with cons at the top.
-    const car = Exp.do_car(value)
-    const cdr = Exp.do_cdr(value)
+    const car = Evaluate.do_car(value)
+    const cdr = Evaluate.do_cdr(value)
     return Exp.cons(
       Value.readback(ctx, t.car_t, car),
       Value.readback(ctx, Value.Closure.apply(t.cdr_t_cl, car), cdr)
