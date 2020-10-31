@@ -1,5 +1,10 @@
-- [lang1] `Evaluate`
+- [lang1] `Evaluate.do_ap`
+- [lang1] `Evaluate.do_rec`
+- [lang1] `Evaluate.explain*`
+- [lang1] `Evaluate.evaluate` replace `Exp.evaluate`
+
 - [lang1] `Check`
+- [lang1] `Infer`
 - [lang1] `Readback`
 
 - [lang2] `Evaluate`
