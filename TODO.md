@@ -1,4 +1,3 @@
-- [lang2] `syntax/` instead of `frontend/`
 - [lang3] `syntax/` instead of `frontend/`
 
 - [lang1] `Evaluate`
