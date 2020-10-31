@@ -1,5 +1,6 @@
 import * as Check from "../check"
 import * as Infer from "../infer"
+import * as Readback from "../readback"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
@@ -28,13 +29,13 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
         throw new Trace.Trace(
           ut.aline(`
           |I am expecting the following two values to be the same ${Exp.repr(
-            Value.readback(ctx, Value.type, equal.t)
+            Readback.readback(ctx, Value.type, equal.t)
           )}.
           |But they are not.
           |from:
-          |  ${Exp.repr(Value.readback(ctx, equal.t, equal.from))}
+          |  ${Exp.repr(Readback.readback(ctx, equal.t, equal.from))}
           |to:
-          |  ${Exp.repr(Value.readback(ctx, equal.t, equal.to))}
+          |  ${Exp.repr(Readback.readback(ctx, equal.t, equal.to))}
           |`)
         )
       }
@@ -50,10 +51,10 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
         throw new Trace.Trace(
           ut.aline(`
           |I infer the type of ${Exp.repr(exp)} to be ${Exp.repr(
-            Value.readback(ctx, Value.type, u)
+            Readback.readback(ctx, Value.type, u)
           )}.
           |But the given type is ${Exp.repr(
-            Value.readback(ctx, Value.type, t)
+            Readback.readback(ctx, Value.type, t)
           )}.
           |`)
         )
