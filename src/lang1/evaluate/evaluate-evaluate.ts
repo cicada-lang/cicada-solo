@@ -1,11 +1,9 @@
 import * as Evaluate from "../evaluate"
-import * as Ty from "../ty"
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
 import * as Env from "../env"
 import * as Trace from "../../trace"
-import * as ut from "../../ut"
 
 export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
   try {

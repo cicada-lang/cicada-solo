@@ -1,6 +1,6 @@
+- [lang1] `Readback`
 - [lang1] `Check`
 - [lang1] `Infer`
-- [lang1] `Readback`
 
 - [lang2] `Evaluate`
 - [lang2] `Check`

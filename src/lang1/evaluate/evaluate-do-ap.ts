@@ -1,5 +1,4 @@
 import * as Evaluate from "../evaluate"
-import * as Exp from "../exp"
 import * as Env from "../env"
 import * as Trace from "../../trace"
 import * as Value from "../value"
