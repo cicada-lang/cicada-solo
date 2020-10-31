@@ -1,3 +1,4 @@
+import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -18,7 +19,7 @@ export function check_fn(
   if (result_ctx === undefined)
     throw new Trace.Trace(
       ut.aline(`
-        |Exp.check_fn -- pattern mismatch.
+        |Check.check_fn -- pattern mismatch.
         |- fn: ${Exp.repr(fn)}
         |`)
     )
@@ -29,7 +30,7 @@ export function check_fn(
   )
   // NOTE Before we introduced `Pattern`, the following `arg` is used:
   //   const arg = Value.not_yet(pi.arg_t, Neutral.v(Value.pi_arg_name(pi)))
-  Exp.check(mod, result_ctx, fn.ret, Value.Closure.apply(pi.ret_t_cl, arg))
+  Check.check(mod, result_ctx, fn.ret, Value.Closure.apply(pi.ret_t_cl, arg))
 }
 
 function match_pattern(
@@ -125,7 +126,7 @@ function match_data(
   // NOTE
   // - We simply do a check after the `match_patterns`,
   //   the type will not be used to constrain pattern variables.
-  Exp.check(mod, result_ctx, Pattern.to_exp(data), t)
+  Check.check(mod, result_ctx, Pattern.to_exp(data), t)
   return result_ctx
 }
 

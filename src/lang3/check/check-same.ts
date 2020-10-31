@@ -1,3 +1,4 @@
+import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"

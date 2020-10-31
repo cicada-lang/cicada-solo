@@ -1,3 +1,4 @@
+import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -23,9 +24,9 @@ function go_through_sat(
   sat: Array<{ name: string; t: Exp.Exp; exp: Exp.Exp }>
 ): void {
   for (const entry of sat) {
-    Exp.check(mod, ctx, entry.t, Value.type)
+    Check.check(mod, ctx, entry.t, Value.type)
     const t = Evaluate.evaluate(mod, Ctx.to_env(ctx), entry.t)
-    Exp.check(mod, ctx, entry.exp, t)
+    Check.check(mod, ctx, entry.exp, t)
     Ctx.update(ctx, entry.name, t)
   }
 }
@@ -37,7 +38,7 @@ function go_through_scope(
 ): void {
   if (scope.length === 0) return
   const [entry, ...tail] = scope
-  Exp.check(mod, ctx, entry.t, Value.type)
+  Check.check(mod, ctx, entry.t, Value.type)
   const t = Evaluate.evaluate(mod, Ctx.to_env(ctx), entry.t)
   Ctx.update(ctx, entry.name, t)
   go_through_scope(mod, ctx, tail)

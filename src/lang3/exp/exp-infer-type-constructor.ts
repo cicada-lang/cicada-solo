@@ -1,3 +1,4 @@
+import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -26,7 +27,7 @@ function check_data_constructor_t(
 ): void {
   if (t.kind === "Exp.pi") {
     const pi = t
-    Exp.check(mod, ctx, pi.arg_t, Value.type)
+    Check.check(mod, ctx, pi.arg_t, Value.type)
     check_data_constructor_t(
       mod,
       Ctx.extend(ctx, pi.name, Evaluate.evaluate(mod, Ctx.to_env(ctx), pi.arg_t)),
@@ -36,7 +37,7 @@ function check_data_constructor_t(
     return
   }
 
-  Exp.check(mod, ctx, t, Value.type)
+  Check.check(mod, ctx, t, Value.type)
   const t_value = Evaluate.evaluate(mod, Ctx.to_env(ctx), t)
 
   if (
@@ -57,7 +58,7 @@ function check_type_constructor_t(
 ): void {
   if (t.kind === "Exp.pi") {
     const pi = t
-    Exp.check(mod, ctx, pi.arg_t, Value.type)
+    Check.check(mod, ctx, pi.arg_t, Value.type)
     check_type_constructor_t(
       mod,
       Ctx.extend(ctx, pi.name, Evaluate.evaluate(mod, Ctx.to_env(ctx), pi.arg_t)),

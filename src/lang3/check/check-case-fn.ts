@@ -1,3 +1,4 @@
+import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -15,6 +16,6 @@ export function check_case_fn(
   pi: Value.pi
 ): void {
   for (const { pattern, ret } of case_fn.cases) {
-    Exp.check(mod, ctx, Exp.fn(pattern, ret), pi)
+    Check.check(mod, ctx, Exp.fn(pattern, ret), pi)
   }
 }

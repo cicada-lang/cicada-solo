@@ -1,3 +1,4 @@
+import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -34,7 +35,7 @@ function check_properties_aganst_sat(
           |`)
       )
     }
-    Exp.check(mod, ctx, found, entry.t)
+    Check.check(mod, ctx, found, entry.t)
     const value = Evaluate.evaluate(mod, Ctx.to_env(ctx), found)
     if (!Value.conversion(mod, ctx, entry.t, value, entry.value)) {
       throw new Trace.Trace(
@@ -68,7 +69,7 @@ function check_properties_aganst_tel(
     tel.next
   )
   const filled_tel = Value.Telescope.fill(tel, next_value)
-  Exp.check(mod, ctx, Exp.obj(properties), Value.cls([], filled_tel))
+  Check.check(mod, ctx, Exp.obj(properties), Value.cls([], filled_tel))
 }
 
 function check_properties_aganst_next(
@@ -85,7 +86,7 @@ function check_properties_aganst_next(
         |`)
     )
   }
-  Exp.check(mod, ctx, found, next.t)
+  Check.check(mod, ctx, found, next.t)
   properties.delete(next.name)
   return Evaluate.evaluate(mod, Ctx.to_env(ctx), found)
 }

@@ -1,3 +1,4 @@
+import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -5,7 +6,7 @@ import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
-import { check_by_infer } from "./exp-check-by-infer"
+import { check_by_infer } from "./check-by-infer"
 
 export function check_union_type(
   mod: Mod.Mod,
@@ -19,11 +20,11 @@ export function check_union_type(
   } catch (error) {
     if (error instanceof Trace.Trace) {
       try {
-        Exp.check(mod, ctx, exp, left)
+        Check.check(mod, ctx, exp, left)
       } catch (error_left) {
         if (error_left instanceof Trace.Trace) {
           try {
-            Exp.check(mod, ctx, exp, right)
+            Check.check(mod, ctx, exp, right)
           } catch (error_right) {
             if (error_right instanceof Trace.Trace) {
               throw new Trace.Trace(

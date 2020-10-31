@@ -1,3 +1,4 @@
+import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -25,7 +26,7 @@ function when_target_is_pi(
   pi: Value.pi,
   ap: Exp.ap
 ): Value.Value {
-  Exp.check(mod, ctx, ap.arg, pi.arg_t)
+  Check.check(mod, ctx, ap.arg, pi.arg_t)
   return Value.Closure.apply(
     pi.ret_t_cl,
     Evaluate.evaluate(mod, Ctx.to_env(ctx), ap.arg)
@@ -46,6 +47,6 @@ function when_target_is_type(
         |`)
     )
   }
-  Exp.check(mod, ctx, ap.arg, cls.tel.next.t)
+  Check.check(mod, ctx, ap.arg, cls.tel.next.t)
   return Value.type
 }

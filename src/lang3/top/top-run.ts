@@ -5,6 +5,7 @@ import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Evaluate from "../evaluate"
+import * as Check from "../check"
 
 export function run(mod: Mod.Mod, tops: Array<Top.Top>): string {
   define(mod, tops)
@@ -30,7 +31,7 @@ function check(mod: Mod.Mod, tops: Array<Top.Top>): void {
     if (top.kind === "Top.def") {
       const t = Mod.lookup_type(mod, top.name)!
       const ctx = Ctx.extend(Ctx.init(), top.name, t)
-      Exp.check(mod, ctx, top.exp, t)
+      Check.check(mod, ctx, top.exp, t)
     }
     if (top.kind === "Top.type_constructor") {
       Exp.infer(mod, Ctx.init(), top.type_constructor)

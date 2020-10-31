@@ -1,3 +1,4 @@
+import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
@@ -15,5 +16,5 @@ export function check_begin(
   for (const stmt of begin.stmts) {
     Stmt.declare(mod, ctx, stmt)
   }
-  Exp.check(mod, ctx, begin.ret, t)
+  Check.check(mod, ctx, begin.ret, t)
 }

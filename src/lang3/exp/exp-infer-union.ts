@@ -1,3 +1,4 @@
+import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -9,7 +10,7 @@ export function infer_union(
   ctx: Ctx.Ctx,
   union: Exp.union
 ): Value.type {
-  Exp.check(mod, ctx, union.left, Value.type)
-  Exp.check(mod, ctx, union.right, Value.type)
+  Check.check(mod, ctx, union.left, Value.type)
+  Check.check(mod, ctx, union.right, Value.type)
   return Value.type
 }

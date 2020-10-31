@@ -1,3 +1,4 @@
+import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -17,8 +18,8 @@ export function infer_replace(
     Env.update(Env.init(), "t", equal.t),
     Exp.pi("x", Exp.v("t"), Exp.type)
   )
-  Exp.check(mod, ctx, replace.motive, motive_t)
+  Check.check(mod, ctx, replace.motive, motive_t)
   const motive = Evaluate.evaluate(mod, Ctx.to_env(ctx), replace.motive)
-  Exp.check(mod, ctx, replace.base, Evaluate.do_ap(motive, equal.from))
+  Check.check(mod, ctx, replace.base, Evaluate.do_ap(motive, equal.from))
   return Evaluate.do_ap(motive, equal.to)
 }
