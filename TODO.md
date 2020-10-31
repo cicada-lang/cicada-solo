@@ -1,5 +1,3 @@
-- [lang1] `Evaluate.do_rec`
-- [lang1] `Evaluate.explain*`
 - [lang1] `Evaluate.evaluate` replace `Exp.evaluate`
 
 - [lang1] `Check`
