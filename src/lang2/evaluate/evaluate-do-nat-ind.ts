@@ -1,4 +1,5 @@
 import * as Evaluate from "../evaluate"
+import * as Explain from "../explain"
 import * as Exp from "../exp"
 import * as Env from "../env"
 import * as Value from "../value"
@@ -38,7 +39,7 @@ export function do_nat_ind(
       )
     } else {
       throw new Trace.Trace(
-        Evaluate.explain_elim_target_type_mismatch({
+        Explain.explain_elim_target_type_mismatch({
           elim: "nat_ind",
           expecting: ["Value.nat"],
           reality: target.t.kind,
@@ -47,7 +48,7 @@ export function do_nat_ind(
     }
   } else {
     throw new Trace.Trace(
-      Evaluate.explain_elim_target_mismatch({
+      Explain.explain_elim_target_mismatch({
         elim: "nat_ind",
         expecting: ["Value.zero", "Value.add1", "Value.not_yet"],
         reality: target.kind,

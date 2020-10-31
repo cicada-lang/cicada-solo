@@ -1,4 +1,5 @@
 import * as Evaluate from "../evaluate"
+import * as Explain from "../explain"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
@@ -12,7 +13,7 @@ export function do_car(target: Value.Value): Value.Value {
       return Value.not_yet(target.t.car_t, Neutral.car(target.neutral))
     } else {
       throw new Trace.Trace(
-        Evaluate.explain_elim_target_type_mismatch({
+        Explain.explain_elim_target_type_mismatch({
           elim: "car",
           expecting: ["Value.sigma"],
           reality: target.t.kind,
@@ -21,7 +22,7 @@ export function do_car(target: Value.Value): Value.Value {
     }
   } else {
     throw new Trace.Trace(
-      Evaluate.explain_elim_target_mismatch({
+      Explain.explain_elim_target_mismatch({
         elim: "car",
         expecting: ["Value.cons", "Value.not_yet"],
         reality: target.kind,

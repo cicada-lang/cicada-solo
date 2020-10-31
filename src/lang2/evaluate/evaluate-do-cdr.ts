@@ -1,4 +1,5 @@
 import * as Evaluate from "../evaluate"
+import * as Explain from "../explain"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
@@ -15,7 +16,7 @@ export function do_cdr(target: Value.Value): Value.Value {
       )
     } else {
       throw new Trace.Trace(
-        Evaluate.explain_elim_target_type_mismatch({
+        Explain.explain_elim_target_type_mismatch({
           elim: "cdr",
           expecting: ["Value.sigma"],
           reality: target.t.kind,
@@ -24,7 +25,7 @@ export function do_cdr(target: Value.Value): Value.Value {
     }
   } else {
     throw new Trace.Trace(
-      Evaluate.explain_elim_target_mismatch({
+      Explain.explain_elim_target_mismatch({
         elim: "cdr",
         expecting: ["Value.cons", "Value.not_yet"],
         reality: target.kind,

@@ -1,4 +1,5 @@
 import * as Evaluate from "../evaluate"
+import * as Explain from "../explain"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Normal from "../normal"
@@ -17,7 +18,7 @@ export function do_absurd_ind(
       )
     } else {
       throw new Trace.Trace(
-        Evaluate.explain_elim_target_type_mismatch({
+        Explain.explain_elim_target_type_mismatch({
           elim: "absurd_ind",
           expecting: ["Value.absurd"],
           reality: target.t.kind,
@@ -26,7 +27,7 @@ export function do_absurd_ind(
     }
   } else {
     throw new Trace.Trace(
-      Evaluate.explain_elim_target_mismatch({
+      Explain.explain_elim_target_mismatch({
         elim: "absurd_ind",
         expecting: ["Value.not_yet"],
         reality: target.kind,
