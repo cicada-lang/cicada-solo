@@ -1,4 +1,5 @@
 import * as Evaluate from "../evaluate"
+import * as Explain from "../explain"
 import * as Env from "../env"
 import * as Trace from "../../trace"
 import * as Value from "../value"
@@ -17,7 +18,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
       )
     } else {
       throw new Trace.Trace(
-        Evaluate.explain_elim_target_type_mismatch({
+        Explain.explain_elim_target_type_mismatch({
           elim: "ap",
           expecting: ["Ty.arrow"],
           reality: target.t.kind,
@@ -26,7 +27,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
     }
   } else {
     throw new Trace.Trace(
-      Evaluate.explain_elim_target_mismatch({
+      Explain.explain_elim_target_mismatch({
         elim: "ap",
         expecting: ["Value.fn", "Value.not_yet"],
         reality: target.kind,

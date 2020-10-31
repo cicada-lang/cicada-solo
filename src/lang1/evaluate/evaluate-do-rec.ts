@@ -1,4 +1,5 @@
 import * as Evaluate from "../evaluate"
+import * as Explain from "../explain"
 import * as Ty from "../ty"
 import * as Trace from "../../trace"
 import * as Value from "../value"
@@ -32,7 +33,7 @@ export function do_rec(
       )
     } else {
       throw new Trace.Trace(
-        Evaluate.explain_elim_target_type_mismatch({
+        Explain.explain_elim_target_type_mismatch({
           elim: "rec",
           expecting: ["Ty.nat"],
           reality: target.t.kind,
@@ -41,7 +42,7 @@ export function do_rec(
     }
   } else {
     throw new Trace.Trace(
-      Evaluate.explain_elim_target_mismatch({
+      Explain.explain_elim_target_mismatch({
         elim: "rec",
         expecting: ["Value.zero", "Value.add1", "Value.not_yet"],
         reality: target.kind,

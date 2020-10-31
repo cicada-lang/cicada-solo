@@ -1,4 +1,5 @@
 import * as Evaluate from "../evaluate"
+import * as Explain from "../explain"
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
@@ -12,7 +13,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         const result = Env.lookup(env, exp.name)
         if (result === undefined) {
           console.log({ env, exp })
-          throw new Trace.Trace(Evaluate.explain_name_undefined(exp.name))
+          throw new Trace.Trace(Explain.explain_name_undefined(exp.name))
         }
         return result
       }

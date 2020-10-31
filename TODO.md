@@ -1,4 +1,3 @@
-- [lang1] `Explain` as namespace
 - [lang2] `Explain` as namespace
 - [lang3] `Explain` as namespace
 

@@ -1,4 +1,5 @@
 import * as Infer from "../infer"
+import * as Explain from "../explain"
 import * as Evaluate from "../evaluate"
 import * as Check from "../check"
 import * as Exp from "../exp"
@@ -13,7 +14,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
     if (exp.kind === "Exp.v") {
       const t = Ctx.lookup(ctx, exp.name)
       if (t === undefined) {
-        throw new Trace.Trace(Evaluate.explain_name_undefined(exp.name))
+        throw new Trace.Trace(Explain.explain_name_undefined(exp.name))
       }
       return t
     } else if (exp.kind === "Exp.ap") {
