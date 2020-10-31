@@ -1,3 +1,6 @@
+- docs/explicit-record-passing-vs-implicit-type-argument.md
+  - [lang3] play with explicit record passing -- instead for implicit `arg_t`
+
 # TLT
 
 > 强化对类型系统的理解与实现技术。
@@ -41,10 +44,6 @@
 
 - [lang3] use `Mod` to design module system
   - read module tree first -- separate all io from core
-
-> play.
-
-- [lang3] [note] play with explicit record passing -- instead for implicit `arg_t`
 
 > syntax.
 
