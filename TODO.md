@@ -31,13 +31,11 @@
 
 # lang3
 
-> module system.
+> 首先实现 module system 与 syntax。
+> - 让语言更严肃更正式，更易于使用，以鼓励我们写更多的例子。
 
 - [lang3] use `Mod` to design module system
   - read module tree first -- separate all IO from the core
-
-> syntax.
-
 - [lang3] fix syntax about auto currying
 
 > nested match.
