@@ -1,4 +1,5 @@
 import * as Evaluate from "../evaluate"
+import * as Explain from "../explain"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
@@ -12,7 +13,7 @@ export function do_dot(target: Value.Value, name: string): Value.Value {
     return do_dot_type_constructor(target, name)
   if (target.kind === "Value.not_yet") return do_dot_not_yet(target, name)
   throw new Trace.Trace(
-    Evaluate.explain_elim_target_mismatch({
+    Explain.explain_elim_target_mismatch({
       elim: "dot",
       expecting: ["Value.obj", "Value.cls", "Value.not_yet"],
       reality: target.kind,
@@ -68,7 +69,7 @@ export function do_dot_not_yet(
     )
 
   throw new Trace.Trace(
-    Evaluate.explain_elim_target_type_mismatch({
+    Explain.explain_elim_target_type_mismatch({
       elim: "dot",
       expecting: ["Value.cls"],
       reality: not_yet.t.kind,
