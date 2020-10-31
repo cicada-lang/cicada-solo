@@ -2,6 +2,7 @@ import * as Stmt from "../stmt"
 import * as Ctx from "../ctx"
 import * as Exp from "../exp"
 import * as Evaluate from "../evaluate"
+import * as Infer from "../infer"
 
 export function declare(ctx: Ctx.Ctx, stmt: Stmt.Stmt): void {
   switch (stmt.kind) {
@@ -9,7 +10,7 @@ export function declare(ctx: Ctx.Ctx, stmt: Stmt.Stmt): void {
       Ctx.update(
         ctx,
         stmt.name,
-        Exp.infer(ctx, stmt.exp),
+        Infer.infer(ctx, stmt.exp),
         Evaluate.evaluate(Ctx.to_env(ctx), stmt.exp)
       )
     }

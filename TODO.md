@@ -1,4 +1,3 @@
-- [lang2] `Infer`
 - [lang2] `Readback`
 
 - [lang3] `Evaluate`

@@ -1,4 +1,5 @@
 import * as Check from "../check"
+import * as Infer from "../infer"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
@@ -38,14 +39,13 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
         )
       }
     } else if (exp.kind === "Exp.begin") {
-      const { stmts, ret } = exp
-      ctx = Ctx.clone(ctx)
-      for (const stmt of stmts) {
-        Stmt.declare(ctx, stmt)
+      const new_ctx = Ctx.clone(ctx)
+      for (const stmt of exp.stmts) {
+        Stmt.declare(new_ctx, stmt)
       }
-      Check.check(ctx, ret, t)
+      Check.check(new_ctx, exp.ret, t)
     } else {
-      const u = Exp.infer(ctx, exp)
+      const u = Infer.infer(ctx, exp)
       if (!Value.conversion(ctx, Value.type, t, u)) {
         throw new Trace.Trace(
           ut.aline(`
