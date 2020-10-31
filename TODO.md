@@ -1,4 +1,3 @@
-- [lang2] `evaluate-evaluate`
 - [lang2] `evaluate-do-ap`
 - [lang2] `evaluate-do-car`
 - [lang2] `evaluate-do-cdr`
