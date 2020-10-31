@@ -1,3 +1,21 @@
+- [lang1] `syntax/` instead of `frontend/`
+- [lang2] `syntax/` instead of `frontend/`
+- [lang3] `syntax/` instead of `frontend/`
+
+- [lang1] `Evaluate`
+- [lang1] `Check`
+- [lang1] `Readback`
+
+- [lang2] `Evaluate`
+- [lang2] `Check`
+- [lang2] `Infer`
+- [lang2] `Readback`
+
+- [lang3] `Evaluate`
+- [lang3] `Check`
+- [lang3] `Infer`
+- [lang3] `Readback`
+
 # TLT
 
 > 强化对类型系统的理解与实现技术。
@@ -94,9 +112,6 @@
   多了一个关于迭代函数的 API。
 
 # lang1
-
-- [lang1] `Evaluator`
-- [lang1] `Checker`
 
 > Play with systemt
 

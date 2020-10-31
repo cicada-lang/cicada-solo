@@ -1,4 +1,4 @@
-import * as frontend from "../frontend"
+import * as Syntax from "../syntax"
 import * as Exp from "../exp"
 import * as ut from "../../ut"
 
@@ -19,7 +19,7 @@ const sentences = [
 ]
 
 for (const sentence of sentences) {
-  const exp = frontend.parse_exp(sentence)
+  const exp = Syntax.parse_exp(sentence)
   const repr = Exp.repr(exp)
   ut.assert_equal(sentence, repr)
 }
