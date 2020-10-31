@@ -1,3 +1,4 @@
+import * as Infer from "../infer"
 import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
@@ -15,5 +16,5 @@ export function infer_begin(
   for (const stmt of begin.stmts) {
     Stmt.declare(mod, ctx, stmt)
   }
-  return Exp.infer(mod, ctx, begin.ret)
+  return Infer.infer(mod, ctx, begin.ret)
 }

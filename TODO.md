@@ -1,4 +1,3 @@
-- [lang3] `Infer`
 - [lang3] `Readback`
 
 - [lang0] `Explain` as namespace

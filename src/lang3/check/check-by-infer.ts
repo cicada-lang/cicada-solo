@@ -1,4 +1,5 @@
 import * as Check from "../check"
+import * as Infer from "../infer"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -13,7 +14,7 @@ export function check_by_infer(
   exp: Exp.Exp,
   t: Value.Value
 ): void {
-  const u = Exp.infer(mod, ctx, exp)
+  const u = Infer.infer(mod, ctx, exp)
   if (!Value.subtype(mod, ctx, u, t)) {
     let u_repr = Exp.repr(Value.readback(mod, ctx, Value.type, u))
     u_repr = u_repr.replace(/\s+/g, " ")

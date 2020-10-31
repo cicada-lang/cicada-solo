@@ -4,6 +4,8 @@ import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Evaluate from "../evaluate"
+import * as Infer from "../infer"
+
 export function lookup_type(
   mod: Mod.Mod,
   name: string
@@ -13,7 +15,7 @@ export function lookup_type(
   switch (entry.den.kind) {
     case "Mod.Den.def": {
       if (entry.den.t === undefined)
-        return Exp.infer(mod, Ctx.init(), entry.den.exp)
+        return Infer.infer(mod, Ctx.init(), entry.den.exp)
       return Evaluate.evaluate(mod, Env.init(), entry.den.t)
     }
     case "Mod.Den.type_constructor": {

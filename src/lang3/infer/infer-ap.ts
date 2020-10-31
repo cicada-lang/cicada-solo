@@ -1,3 +1,4 @@
+import * as Infer from "../infer"
 import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
@@ -8,7 +9,7 @@ import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
 export function infer_ap(mod: Mod.Mod, ctx: Ctx.Ctx, ap: Exp.ap): Value.Value {
-  const target_t = Exp.infer(mod, ctx, ap.target)
+  const target_t = Infer.infer(mod, ctx, ap.target)
   if (target_t.kind === "Value.pi")
     return when_target_is_pi(mod, ctx, target_t, ap)
   if (target_t.kind === "Value.type") return when_target_is_type(mod, ctx, ap)

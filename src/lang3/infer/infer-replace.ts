@@ -1,3 +1,4 @@
+import * as Infer from "../infer"
 import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
@@ -11,7 +12,7 @@ export function infer_replace(
   ctx: Ctx.Ctx,
   replace: Exp.replace
 ): Value.Value {
-  const target_t = Exp.infer(mod, ctx, replace.target)
+  const target_t = Infer.infer(mod, ctx, replace.target)
   const equal = Value.is_equal(mod, ctx, target_t)
   const motive_t = Evaluate.evaluate(
     mod,

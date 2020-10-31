@@ -6,6 +6,7 @@ import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Evaluate from "../evaluate"
 import * as Check from "../check"
+import * as Infer from "../infer"
 
 export function run(mod: Mod.Mod, tops: Array<Top.Top>): string {
   define(mod, tops)
@@ -34,7 +35,7 @@ function check(mod: Mod.Mod, tops: Array<Top.Top>): void {
       Check.check(mod, ctx, top.exp, t)
     }
     if (top.kind === "Top.type_constructor") {
-      Exp.infer(mod, Ctx.init(), top.type_constructor)
+      Infer.infer(mod, Ctx.init(), top.type_constructor)
     }
   }
 }
@@ -45,7 +46,7 @@ function show(mod: Mod.Mod, tops: Array<Top.Top>): string {
     if (top.kind === "Top.show") {
       const env = Env.init()
       const ctx = Ctx.init()
-      const t = Exp.infer(mod, ctx, top.exp)
+      const t = Infer.infer(mod, ctx, top.exp)
       const value = Evaluate.evaluate(mod, env, top.exp)
       const value_repr = Exp.repr(Value.readback(mod, ctx, t, value))
       output += `${value_repr}\n`
