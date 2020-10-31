@@ -31,16 +31,10 @@
 
 # lang3
 
-> refactoring.
-
-- [lang3] [refactor] `Run` instead of `Top.run`
-- [lang3] [refactor] `Execute` instead of `Stmt.run`
-- [lang3] update client -- `cicada-playground`
-
 > module system.
 
 - [lang3] use `Mod` to design module system
-  - read module tree first -- separate all io from core
+  - read module tree first -- separate all IO from the core
 
 > syntax.
 
