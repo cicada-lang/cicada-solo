@@ -1,6 +1,3 @@
-- docs/explicit-record-passing-vs-implicit-type-argument.md
-  - [lang3] play with explicit record passing -- instead for implicit `arg_t`
-
 # TLT
 
 > 强化对类型系统的理解与实现技术。
@@ -57,14 +54,6 @@
 
 - [lang3] there might be `@match`
   - which will be direct application of `Exp.case_fn`
-
-> implicit arguments.
-
-- [lang3] maybe merge `env` `ctx` into `the`.
-
-- [lang3] checking about `Pattern` in the `arg_t` and `ret_t` of `pi`
-  - we also need to use unification here.
-  - we will need a new ctx-like argument for equations -- `Equ`.
 
 > Improve the readback of recursive expression.
 
