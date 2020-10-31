@@ -1,4 +1,3 @@
-- [lang1] `Readback`
 - [lang1] `Check`
 - [lang1] `Infer`
 

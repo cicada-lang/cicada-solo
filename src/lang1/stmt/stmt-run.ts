@@ -5,6 +5,7 @@ import * as Value from "../value"
 import * as Env from "../env"
 import * as Ctx from "../ctx"
 import * as Evaluate from "../evaluate"
+import * as Readback from "../readback"
 
 export function run(
   ctx: Ctx.Ctx,
@@ -26,7 +27,7 @@ function show(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): string {
     const { exp } = stmt
     const t = Exp.infer(ctx, exp)
     const value = Evaluate.evaluate(env, exp)
-    const norm = Value.readback(new Set(ctx.keys()), t, value)
+    const norm = Readback.readback(new Set(ctx.keys()), t, value)
     const value_repr = Exp.repr(norm)
     const t_repr = Ty.repr(t)
     return `${t_repr} -- ${value_repr}\n`
