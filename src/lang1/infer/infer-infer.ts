@@ -1,3 +1,4 @@
+import * as Infer from "../infer"
 import * as Evaluate from "../evaluate"
 import * as Check from "../check"
 import * as Exp from "../exp"
@@ -17,7 +18,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       return t
     } else if (exp.kind === "Exp.ap") {
       const { target, arg } = exp
-      const target_t = Exp.infer(ctx, target)
+      const target_t = Infer.infer(ctx, target)
       if (target_t.kind === "Ty.arrow") {
         Check.check(ctx, arg, target_t.arg_t)
         return target_t.ret_t
@@ -30,12 +31,11 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
         )
       }
     } else if (exp.kind === "Exp.begin") {
-      const { stmts, ret } = exp
-      ctx = Ctx.clone(ctx)
-      for (const stmt of stmts) {
-        Stmt.declare(ctx, stmt)
+      const new_ctx = Ctx.clone(ctx)
+      for (const stmt of exp.stmts) {
+        Stmt.declare(new_ctx, stmt)
       }
-      return Exp.infer(ctx, ret)
+      return Infer.infer(new_ctx, exp.ret)
     } else if (exp.kind === "Exp.rec") {
       const { t, target, base, step } = exp
       // NOTE target should always be infered,

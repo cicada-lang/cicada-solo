@@ -1,5 +1,3 @@
-- [lang1] `Infer`
-
 - [lang2] `Evaluate`
 - [lang2] `Check`
 - [lang2] `Infer`

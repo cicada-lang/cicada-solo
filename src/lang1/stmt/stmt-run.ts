@@ -6,6 +6,7 @@ import * as Env from "../env"
 import * as Ctx from "../ctx"
 import * as Evaluate from "../evaluate"
 import * as Readback from "../readback"
+import * as Infer from "../infer"
 
 export function run(
   ctx: Ctx.Ctx,
@@ -25,7 +26,7 @@ export function run(
 function show(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): string {
   if (stmt.kind === "Stmt.show") {
     const { exp } = stmt
-    const t = Exp.infer(ctx, exp)
+    const t = Infer.infer(ctx, exp)
     const value = Evaluate.evaluate(env, exp)
     const norm = Readback.readback(new Set(ctx.keys()), t, value)
     const value_repr = Exp.repr(norm)
