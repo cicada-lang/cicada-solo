@@ -11,9 +11,9 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
   try {
     if (exp.kind === "Exp.fn") {
       if (t.kind === "Ty.arrow") {
-        ctx = Ctx.clone(ctx)
-        Ctx.update(ctx, exp.name, t.arg_t)
-        Check.check(ctx, exp.ret, t.ret_t)
+        const ctx_new = Ctx.clone(ctx)
+        Ctx.update(ctx_new, exp.name, t.arg_t)
+        Check.check(ctx_new, exp.ret, t.ret_t)
         return
       } else {
         throw new Trace.Trace(
@@ -49,11 +49,11 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
       }
     } else if (exp.kind === "Exp.begin") {
       const { stmts, ret } = exp
-      ctx = Ctx.clone(ctx)
+      const new_ctx = Ctx.clone(ctx)
       for (const stmt of stmts) {
-        Stmt.declare(ctx, stmt)
+        Stmt.declare(new_ctx, stmt)
       }
-      Check.check(ctx, ret, t)
+      Check.check(new_ctx, ret, t)
     } else {
       const u = Infer.infer(ctx, exp)
       // NOTE Comparing equivalent between `Ty` is simple.

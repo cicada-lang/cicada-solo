@@ -41,6 +41,22 @@
 
 # lang3
 
+> refactoring.
+
+- [lang3] [refactor] `Run` instead of `Top.run`
+- [lang3] [refactor] `Execute` instead of `Stmt.run`
+- [lang3] update client -- `cicada-playground`
+
+> module system.
+
+- [lang3] use `Mod` to design module system
+  - read module tree first -- separate all io from core
+- [lang3] [note] play with explicit record passing -- instead for implicit `arg_t`
+
+> syntax.
+
+- [lang3] fix syntax about auto currying
+
 > nested match.
 
 - [lang3] be able to add type annotation to `Exp.fn`
@@ -50,7 +66,7 @@
 - [lang3] there might be `@match`
   - which will be direct application of `Exp.case_fn`
 
-> implict arguments.
+> implicit arguments.
 
 - [lang3] maybe merge `env` `ctx` into `the`.
 
@@ -66,10 +82,6 @@
 
 - [lang3] `Value.subtype` -- structural cls
 - [lang3] `Value.subtype` -- function type
-
-> module system
-
-- [lang3] use `Mod` to design module system
 
 # partech
 
