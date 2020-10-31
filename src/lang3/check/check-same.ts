@@ -1,4 +1,5 @@
 import * as Check from "../check"
+import * as Readback from "../readback"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -17,13 +18,13 @@ export function check_same(
     throw new Trace.Trace(
       ut.aline(`
           |I am expecting the following two values to be the same ${Exp.repr(
-            Value.readback(mod, ctx, Value.type, equal.t)
+            Readback.readback(mod, ctx, Value.type, equal.t)
           )}.
           |But they are not.
           |from:
-          |  ${Exp.repr(Value.readback(mod, ctx, equal.t, equal.from))}
+          |  ${Exp.repr(Readback.readback(mod, ctx, equal.t, equal.from))}
           |to:
-          |  ${Exp.repr(Value.readback(mod, ctx, equal.t, equal.to))}
+          |  ${Exp.repr(Readback.readback(mod, ctx, equal.t, equal.to))}
           |`)
     )
   }

@@ -1,5 +1,6 @@
 import * as Check from "../check"
 import * as Evaluate from "../evaluate"
+import * as Readback from "../readback"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Ctx from "../ctx"
@@ -41,13 +42,13 @@ function check_properties_aganst_sat(
       throw new Trace.Trace(
         ut.aline(`
           |I am expecting the following two values to be the same ${Exp.repr(
-            Value.readback(mod, ctx, Value.type, entry.t)
+            Readback.readback(mod, ctx, Value.type, entry.t)
           )}.
           |But they are not.
           |The value in object:
-          |  ${Exp.repr(Value.readback(mod, ctx, entry.t, value))}
+          |  ${Exp.repr(Readback.readback(mod, ctx, entry.t, value))}
           |The value in partially filled class:
-          |  ${Exp.repr(Value.readback(mod, ctx, entry.t, entry.value))}
+          |  ${Exp.repr(Readback.readback(mod, ctx, entry.t, entry.value))}
           |`)
       )
     }

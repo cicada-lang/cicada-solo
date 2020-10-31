@@ -7,6 +7,7 @@ import * as Value from "../value"
 import * as Evaluate from "../evaluate"
 import * as Check from "../check"
 import * as Infer from "../infer"
+import * as Readback from "../readback"
 
 export function run(mod: Mod.Mod, tops: Array<Top.Top>): string {
   define(mod, tops)
@@ -48,7 +49,7 @@ function show(mod: Mod.Mod, tops: Array<Top.Top>): string {
       const ctx = Ctx.init()
       const t = Infer.infer(mod, ctx, top.exp)
       const value = Evaluate.evaluate(mod, env, top.exp)
-      const value_repr = Exp.repr(Value.readback(mod, ctx, t, value))
+      const value_repr = Exp.repr(Readback.readback(mod, ctx, t, value))
       output += `${value_repr}\n`
     }
   }

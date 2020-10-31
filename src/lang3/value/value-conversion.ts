@@ -2,6 +2,7 @@ import * as Value from "../value"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as Mod from "../mod"
+import * as Readback from "../readback"
 
 export function conversion(
   mod: Mod.Mod,
@@ -12,7 +13,7 @@ export function conversion(
 ): boolean {
   if (x === y) return true
   return Exp.equivalent(
-    Value.readback(mod, ctx, t, x),
-    Value.readback(mod, ctx, t, y)
+    Readback.readback(mod, ctx, t, x),
+    Readback.readback(mod, ctx, t, y)
   )
 }

@@ -1,3 +1,4 @@
+import * as Readback from "../readback"
 import * as Evaluate from "../evaluate"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
@@ -18,7 +19,7 @@ export function readback_type_constructor(
 
   return Exp.type_constructor(
     type_constructor.name,
-    Value.readback(mod, ctx, Value.type, type_constructor.t),
+    Readback.readback(mod, ctx, Value.type, type_constructor.t),
     readback_delayed_sums(mod, ctx, type_constructor.delayed)
   )
 }
@@ -31,7 +32,7 @@ function readback_delayed_sums(
   // TODO should we use `mod` or `delayed.mod`?
   return delayed.sums.map((sum) => ({
     tag: sum.tag,
-    t: Value.readback(
+    t: Readback.readback(
       mod,
       ctx,
       Value.type,

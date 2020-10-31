@@ -1,3 +1,4 @@
+import * as Readback from "../readback"
 import * as Evaluate from "../evaluate"
 import * as Value from "../value"
 import * as Exp from "../exp"
@@ -33,7 +34,7 @@ function readback_properties_from_sat(
     if (!Value.conversion(mod, ctx, property_t, property_value, entry.value)) {
       throw new Trace.Trace("property_value not equivalent to entry.value")
     }
-    const property_exp = Value.readback(mod, ctx, property_t, property_value)
+    const property_exp = Readback.readback(mod, ctx, property_t, property_value)
     properties.set(name, property_exp)
     // NOTE no env update here, use the name already in env
   }
@@ -51,7 +52,7 @@ function readback_properties_from_tel(
     const name = tel.next.name
     const property_t = tel.next.t
     const property_value = Evaluate.do_dot(value, name)
-    const property_exp = Value.readback(mod, ctx, property_t, property_value)
+    const property_exp = Readback.readback(mod, ctx, property_t, property_value)
     properties.set(name, property_exp)
     Env.update(env, name, property_value)
   }
@@ -59,7 +60,7 @@ function readback_properties_from_tel(
     const name = entry.name
     const property_t = Evaluate.evaluate(mod, env, entry.t)
     const property_value = Evaluate.do_dot(value, name)
-    const property_exp = Value.readback(mod, ctx, property_t, property_value)
+    const property_exp = Readback.readback(mod, ctx, property_t, property_value)
     properties.set(name, property_exp)
     Env.update(env, name, property_value)
   }

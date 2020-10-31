@@ -1,4 +1,5 @@
 import * as Check from "../check"
+import * as Readback from "../readback"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -19,7 +20,7 @@ export function check_quote(
     ut.aline(`
       |The given value is string: ${Exp.repr(quote)},
       |But the given type is ${Exp.repr(
-        Value.readback(mod, ctx, Value.type, t)
+        Readback.readback(mod, ctx, Value.type, t)
       )}.
       |`)
   )

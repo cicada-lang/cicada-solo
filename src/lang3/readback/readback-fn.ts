@@ -1,3 +1,4 @@
+import * as Readback from "../readback"
 import * as Evaluate from "../evaluate"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
@@ -23,7 +24,7 @@ export function readback_fn(
   const variable = Value.not_yet(pi.arg_t, Neutral.v(fresh_name))
   return Exp.fn(
     Pattern.v(fresh_name),
-    Value.readback(
+    Readback.readback(
       mod,
       Ctx.extend(ctx, fresh_name, pi.arg_t),
       Value.Closure.apply(pi.ret_t_cl, variable),

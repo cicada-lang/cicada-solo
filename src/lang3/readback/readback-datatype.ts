@@ -1,3 +1,4 @@
+import * as Readback from "../readback"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as Exp from "../exp"
@@ -19,7 +20,7 @@ export function readback_datatype(
   let remain_t = datatype.type_constructor.t
   for (const arg of datatype.args) {
     const pi = Value.is_pi(mod, ctx, remain_t)
-    exp = Exp.ap(exp, Value.readback(mod, ctx, pi.arg_t, arg))
+    exp = Exp.ap(exp, Readback.readback(mod, ctx, pi.arg_t, arg))
     remain_t = Value.Closure.apply(pi.ret_t_cl, arg)
   }
 

@@ -1,3 +1,4 @@
+import * as Readback from "../readback"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as Pattern from "../pattern"
@@ -14,7 +15,7 @@ export function readback_case_fn(
 ): Exp.case_fn {
   return Exp.case_fn(
     case_fn.ret_cls
-      .map((ret_cl) => Value.readback(mod, ctx, pi, Value.fn(ret_cl)))
+      .map((ret_cl) => Readback.readback(mod, ctx, pi, Value.fn(ret_cl)))
       .map((exp) => {
         const fn = exp as Exp.fn
         return {

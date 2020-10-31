@@ -1,3 +1,4 @@
+import * as Readback from "../readback"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as Exp from "../exp"
@@ -11,8 +12,8 @@ export function readback_pi(mod: Mod.Mod, ctx: Ctx.Ctx, pi: Value.pi): Exp.pi {
     Value.pi_arg_name(pi)
   )
   const variable = Value.not_yet(pi.arg_t, Neutral.v(fresh_name))
-  const arg_t = Value.readback(mod, ctx, Value.type, pi.arg_t)
-  const ret_t = Value.readback(
+  const arg_t = Readback.readback(mod, ctx, Value.type, pi.arg_t)
+  const ret_t = Readback.readback(
     mod,
     Ctx.extend(ctx, fresh_name, pi.arg_t),
     Value.type,

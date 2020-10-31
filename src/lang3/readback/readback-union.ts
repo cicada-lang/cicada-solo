@@ -1,3 +1,4 @@
+import * as Readback from "../readback"
 import * as Value from "../value"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
@@ -12,11 +13,11 @@ export function readback_union(
   value: Value.Value
 ): Exp.Exp {
   try {
-    return Value.readback(mod, ctx, union.left, value)
+    return Readback.readback(mod, ctx, union.left, value)
   } catch (left_error) {
     if (left_error instanceof Trace.Trace) {
       try {
-        return Value.readback(mod, ctx, union.right, value)
+        return Readback.readback(mod, ctx, union.right, value)
       } catch (right_error) {
         if (right_error instanceof Trace.Trace) {
           throw new Trace.Trace(
