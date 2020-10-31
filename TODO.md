@@ -1,5 +1,4 @@
 - [lang2] `Readback`
-- [lang2] `Check`
 - [lang2] `Infer`
 
 - [lang2] `Explain` as namespace
