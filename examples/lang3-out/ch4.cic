@@ -1,10 +1,51 @@
+@datatype Nat : Type {
+  zero: Nat
+  add1: (prev: Nat) -> Nat
+}
+
+zero = Nat.zero
+one = Nat.add1(zero)
+two = Nat.add1(one)
+three = Nat.add1(two)
+four = Nat.add1(three)
+five = Nat.add1(four)
+six = Nat.add1(five)
+seven = Nat.add1(six)
+eight = Nat.add1(seven)
+nine = Nat.add1(eight)
+ten = Nat.add1(nine)
+
+@datatype Pair : (Type) -> (Type) -> Type {
+  pair : (A: Type) -> (B: Type) -> (first: A) -> (second: B) -> Pair(A)(B)
+}
+
+cons : (A: Type) -> (D: Type) -> (car: A) -> (cdr: D) -> Pair(A)(D)
+cons = (A) => (D) => (car) => (cdr) => Pair.pair(A)(D)(car)(cdr)
+
+car : (A: Type) -> (D: Type) -> (pair: Pair(A)(D)) -> A
+car = (A) => (D) => (Pair.pair(A)(D)(car)(_cdr)) => car
+
+cdr : (A: Type) -> (D: Type) -> (pair: Pair(A)(D)) -> D
+cdr = (A) => (D) => (Pair.pair(A)(D)(_car)(cdr)) => cdr
+
+@show car(Nat)(String)(cons(Nat)(String)(zero)("abc"))
+@show cdr(Nat)(String)(cons(Nat)(String)(zero)("abc"))
+
 // Pair_elim : (A: Type) -> (D: Type) -> (X: Type) ->
-//   (pair: Pair(A, D)) ->
+//   (pair: Pair(A)(D)) ->
 //   (maker: (A) -> (D) -> X) ->
 //   X
 // Pair_elim = (A) => (D) => (X) =>
 //   (pair) => (maker) =>
-//   maker(car(pair))(cdr(pair))
+//   maker(car(A)(D)(pair))(cdr(A)(D)(pair))
+
+Pair_elim : (A: Type) -> (D: Type) -> (X: Type) ->
+  (pair: Pair(A)(D)) ->
+  (maker: (A) -> (D) -> X) ->
+  X
+Pair_elim = (A) => (D) => (X) =>
+  (Pair.pair(A)(D)(car)(cdr)) => (maker) =>
+  maker(car)(cdr)
 
 // flip : (A: Type) -> (D: Type) ->
 //   (pair: Pair(A, D)) ->
