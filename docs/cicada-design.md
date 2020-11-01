@@ -49,18 +49,18 @@ Exp.infer(ctx, Exp.ap(target, arg)) = ret_t @where {
 - reversed-inference-rule style:
   ``` cicada
   T
-  ~~~~ f
+  ---- f
   A
-  ~~~~ a
+  ---- a
 
   R
-  ~~~~ g
+  ---- g
   { T
-    ~~~~ f
+    ---- f
     A
-    ~~~~ a }
+    ---- a }
   { B
-    ~~~~ b }
+    ---- b }
   ```
 
 - compare our syntax with the traditional syntax of writing inference rules:
@@ -83,9 +83,7 @@ Exp.infer(ctx, Exp.ap(target, arg)) = ret_t @where {
     比如 `structure.category`。
   - module 的树装结构与文件在文件系统中的位置无关。
     构建过程会搜索所有文件，然后根据 `@module` 组装 module 的树装结构。
-  - 引用 module 之后，
-    `.` 中缀，只用来取 module 中的名字，
-    不用来取 object 的 field。
+  - 引用 module 之后， `.` 中缀，既用来取 module 中的名字，也用来取 object 的 field。
 
 - 只能 `@import` 数据类型。不能 `@import` 函数。
   - 同时由于我们还规定了，定义 binding 的时候要以数据类型为前缀，

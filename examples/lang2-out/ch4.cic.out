@@ -1,0 +1,4 @@
+(_: String) * Nat -- cons("abc", 123)
+(_: Nat) * Nat -- cons(123, 123)
+(_: String) * String -- cons("abc", "abc")
+

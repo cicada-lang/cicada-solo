@@ -3,7 +3,8 @@
 > 强化对类型系统的理解与实现技术。
 > - 同时测试 lang2 与 lang3。
 
-- [TLT] 4. Easy as Pie
+- [TLT] [lang3] 4. Easy as Pie
+
 - [TLT] 5. Lists, Lists, and More Lists
 - [TLT] 6. Precisely How Many?
 - [TLT] 7. It All Depends On the Motive
@@ -36,6 +37,8 @@
 
 - [lang3] use `Mod` to design module system
   - read module tree first -- separate all IO from the core
+  - maybe we should not limit the binding to `Noun.verb`
+    - because `(twin Atom)` is `twin-Atom` not `Atom.twin`
 - [lang3] fix syntax about auto currying
 
 > nested match.
