@@ -23,36 +23,37 @@ cons : (A: Type) -> (D: Type) -> (car: A) -> (cdr: D) -> Pair(A)(D)
 cons = (A) => (D) => (car) => (cdr) => Pair.pair(A)(D)(car)(cdr)
 
 car : (A: Type) -> (D: Type) -> (pair: Pair(A)(D)) -> A
-car = (A) => (D) => (Pair.pair(A)(D)(car)(_cdr)) => car
+car = (A) => (D) => (Pair.pair(A)(D)(car)(cdr)) => car
 
 cdr : (A: Type) -> (D: Type) -> (pair: Pair(A)(D)) -> D
-cdr = (A) => (D) => (Pair.pair(A)(D)(_car)(cdr)) => cdr
+cdr = (A) => (D) => (Pair.pair(A)(D)(car)(cdr)) => cdr
 
 @show car(Nat)(String)(cons(Nat)(String)(zero)("abc"))
 @show cdr(Nat)(String)(cons(Nat)(String)(zero)("abc"))
-
-// Pair_elim : (A: Type) -> (D: Type) -> (X: Type) ->
-//   (pair: Pair(A)(D)) ->
-//   (maker: (A) -> (D) -> X) ->
-//   X
-// Pair_elim = (A) => (D) => (X) =>
-//   (pair) => (maker) =>
-//   maker(car(A)(D)(pair))(cdr(A)(D)(pair))
 
 Pair_elim : (A: Type) -> (D: Type) -> (X: Type) ->
   (pair: Pair(A)(D)) ->
   (maker: (A) -> (D) -> X) ->
   X
 Pair_elim = (A) => (D) => (X) =>
-  (Pair.pair(A)(D)(car)(cdr)) => (maker) =>
-  maker(car)(cdr)
+  (pair) => (maker) =>
+  maker(car(A)(D)(pair))(cdr(A)(D)(pair))
 
-// flip : (A: Type) -> (D: Type) ->
-//   (pair: Pair(A, D)) ->
-//   Pair(D, A)
-// flip = (A) => (D) =>
-//   (pair) =>
-//   cons(cdr(pair), car(pair))
+// Pair_elim : (A: Type) -> (D: Type) -> (X: Type) ->
+//   (pair: Pair(A)(D)) ->
+//   (maker: (A) -> (D) -> X) ->
+//   X
+// Pair_elim = (A) => (D) => (X) =>
+//   (Pair.pair(A)(D)(car)(cdr)) => (maker) =>
+//   maker(car)(cdr)
+
+flip : (A: Type) -> (D: Type) ->
+  (Pair(A)(D)) -> Pair(D)(A)
+flip = (A) => (D) =>
+  (pair) => cons(D)(A)(cdr(A)(D)(pair))(car(A)(D)(pair))
+
+@show flip(Nat)(String)(cons(Nat)(String)(zero)("abc"))
+@show flip(String)(Nat)(flip(Nat)(String)(cons(Nat)(String)(zero)("abc")))
 
 // _1 : Equal(Type,
 //   (A: Type) -> (D: Type) -> (pair: Pair(A, D)) -> Pair(D, A),

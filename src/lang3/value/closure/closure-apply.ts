@@ -12,7 +12,7 @@ export function apply(
   closure: Closure.Closure,
   value: Value.Value
 ): Value.Value {
-  const env = Pattern.match(closure.env, closure.pattern, value)
+  const env = Pattern.match(closure.mod, closure.env, closure.pattern, value)
   if (env === undefined)
     throw new Trace.Trace(
       ut.aline(`

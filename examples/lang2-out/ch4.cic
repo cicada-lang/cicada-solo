@@ -15,6 +15,9 @@ flip = (A) => (D) =>
   (pair) =>
   cons(cdr(pair), car(pair))
 
+@show flip(Nat)(String)(cons(123, "abc"))
+@show flip(String)(Nat)(flip(Nat)(String)(cons(123, "abc")))
+
 _1 : Equal(Type,
   (A: Type) -> (D: Type) -> (pair: Pair(A, D)) -> Pair(D, A),
   (Lemon: Type) -> (Meringue: Type) -> (Pair(Lemon, Meringue)) -> Pair(Meringue, Lemon))
