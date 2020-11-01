@@ -1,3 +1,7 @@
+# [TLT] 4. Easy as Pie
+
+- 完成：2020-11-01
+
 # [TLT] 3. Eliminate All Natural Numbers!
 
 - 完成：2020-10-29

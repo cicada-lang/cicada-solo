@@ -20,4 +20,34 @@ Pair.pair(@datatype Nat : Type {
     add1 : (prev: Nat) -> Nat
   }) -> Nat
 })(String)(Nat.zero)("abc")
+Pair.pair(String)(@datatype Nat : Type {
+  zero : @datatype Nat : Type {
+    zero : Nat
+    add1 : (prev: Nat) -> Nat
+  }
+  add1 : (prev: @datatype Nat : Type {
+    zero : Nat
+    add1 : (prev: Nat) -> Nat
+  }) -> Nat
+})("abc")(Nat.zero)
+Pair.pair(@datatype Nat : Type {
+  zero : @datatype Nat : Type {
+    zero : Nat
+    add1 : (prev: Nat) -> Nat
+  }
+  add1 : (prev: @datatype Nat : Type {
+    zero : Nat
+    add1 : (prev: Nat) -> Nat
+  }) -> Nat
+})(@datatype Nat : Type {
+  zero : @datatype Nat : Type {
+    zero : Nat
+    add1 : (prev: Nat) -> Nat
+  }
+  add1 : (prev: @datatype Nat : Type {
+    zero : Nat
+    add1 : (prev: Nat) -> Nat
+  }) -> Nat
+})(Nat.zero)(Nat.zero)
+Pair.pair(String)(String)("abc")("abc")
 

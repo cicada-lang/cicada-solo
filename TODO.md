@@ -3,8 +3,6 @@
 > 强化对类型系统的理解与实现技术。
 > - 同时测试 lang2 与 lang3。
 
-- [TLT] [lang3] 4. Easy as Pie
-
 - [TLT] 5. Lists, Lists, and More Lists
 - [TLT] 6. Precisely How Many?
 - [TLT] 7. It All Depends On the Motive
