@@ -39,6 +39,8 @@ Pair_elim = (A) => (D) => (X) =>
   (pair) => (maker) =>
   maker(car(A)(D)(pair))(cdr(A)(D)(pair))
 
+// NOTE Use pattern matching:
+
 // Pair_elim : (A: Type) -> (D: Type) -> (X: Type) ->
 //   (pair: Pair(A)(D)) ->
 //   (maker: (A) -> (D) -> X) ->
