@@ -19,10 +19,10 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
-# lang4 -- jojo
+# lang4
 
-> To study normal form and recursion.
-> Can be used to play with "Diagonalization and Self-Reference"
+> jojo -- to study normal form and recursion.
+> - Can be used to play with "Diagonalization and Self-Reference"
 
 - [lang4] be clear about the semantic of "Diagonalization and Self-Reference"
 - [lang4] design a normalization algorithm
@@ -119,7 +119,9 @@
   - 归纳类型（Inductive type）的推演规则。
     - Only one abstraction away.
 
-# langx -- wissen
+# langx
+
+> wissen
 
 - learn from "Computation and Deduction" and Logic framework
   - Run datatype definition as logic programs.
