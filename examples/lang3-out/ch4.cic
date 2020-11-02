@@ -23,10 +23,10 @@ cons : (A: Type) -> (D: Type) -> (car: A) -> (cdr: D) -> Pair(A)(D)
 cons = (A) => (D) => (car) => (cdr) => Pair.pair(A)(D)(car)(cdr)
 
 car : (A: Type) -> (D: Type) -> (pair: Pair(A)(D)) -> A
-car = (A) => (D) => (Pair.pair(A)(D)(car)(cdr)) => car
+car = (A) => (D) => (Pair.pair(A)(D)(car)(_cdr)) => car
 
 cdr : (A: Type) -> (D: Type) -> (pair: Pair(A)(D)) -> D
-cdr = (A) => (D) => (Pair.pair(A)(D)(car)(cdr)) => cdr
+cdr = (A) => (D) => (Pair.pair(A)(D)(_car)(cdr)) => cdr
 
 @show car(Nat)(String)(cons(Nat)(String)(zero)("abc"))
 @show cdr(Nat)(String)(cons(Nat)(String)(zero)("abc"))
