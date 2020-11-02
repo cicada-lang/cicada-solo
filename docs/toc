@@ -7,11 +7,13 @@ link:arithmetic-level-and-church-encoding.md
 link:bidirectional-type-checking.md
 link:built-in-equality.md
 link:cicada-design.md
+link:explicit-record-passing-vs-implicit-type-argument.md
 link:index
 link:javascript-regexp.md
 link:knowledge-logic-computation.txt
 link:nominal-type-vs-structural-type.md
 link:parsing-techniques.md
+link:polish-vs-reverse-polish-notation.md
 link:readback-recursive-expression.md
 link:scientific-method.md
 link:the-semantic-of-judgment.md
