@@ -1,3 +1,5 @@
+- [lang1] try to generate checker from type
+
 # TLT
 
 > 强化对类型系统的理解与实现技术。
