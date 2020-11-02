@@ -37,9 +37,12 @@
   - read module tree first -- separate all IO from the core
   - maybe we should not limit the binding to `Noun.verb`
     - because `(twin Atom)` is `twin-Atom` not `Atom.twin`
+
 - [lang3] fix syntax about auto currying
 
 > nested match.
+
+- [lang3] more simple rule about pattern variable
 
 - [lang3] be able to add type annotation to `Exp.fn`
   - we will be able to infer such `fn`
@@ -50,7 +53,7 @@
 
 > Improve the readback of recursive expression.
 
-- [lang3] We SHOULD NOT `shadow mod value` for non recursive `Den`
+- [lang3] We SHOULD NOT `mute_recursive_exp_in_mod` for non recursive `Den`
 
 > 更完整的 dependent + structural type 语言。
 
