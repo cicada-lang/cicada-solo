@@ -8,7 +8,27 @@
   - 需要区分 public 与 private 元素。
 
 - use graph theory to as model to describe the semantic of module system.
-  - use the tree model of file system as 
+  - use the tree model of file system as warm up.
+    ``` cicada
+    FileSystem.exist_p(fs: FileSystem, path: List(String)): Boolean
+    FileSystem.file_p(fs: FileSystem, path: List(String)): Boolean
+    FileSystem.file_read(fs: FileSystem, path: List(String)): String
+    FileSystem.directory_p(fs: FileSystem, path: List(String)): Boolean
+    FileSystem.directory_list(fs: FileSystem, path: List(String)): List(String)
+    FileSystem.directory_list_deep(fs: FileSystem, path: List(String)): List(List(String))
+    ```
+    only file has `String` as content,
+    directory can not have `String` as content.
+    ``` cicada
+    @datatype Node {
+      file: (content: String) -> Node
+      directory: (children: Map(String, Node)) -> Node
+    }
+    ```
+  - for the design of our module system, we can first do something like `FileSystem`.
+    - module -- file
+    - namespace -- directory
+    可以尝试这种区分 `@module` 与 `@namespace` 的设计，看看能不能满足所有需求。
 
 - 每个文件开头要有 `@module <module-path>`。
   - 其中 `<module-path>` 是 `<part>.<part>.<part>` 的结构，
