@@ -1,0 +1,6 @@
+List
+List.null
+List.cons
+List.null(String)
+List.cons(String)("abc")(List.null(String))
+

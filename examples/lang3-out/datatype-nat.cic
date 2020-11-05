@@ -1,4 +1,4 @@
-@datatype Nat : Type {
+@datatype Nat: Type {
   zero: Nat
   add1: (prev: Nat) -> Nat
 }
@@ -8,7 +8,7 @@
 @show Nat.add1
 @show Nat.add1(Nat.zero)
 
-@datatype Bool : Type {
+@datatype Bool: Type {
   true: Bool
   false: Bool
 }

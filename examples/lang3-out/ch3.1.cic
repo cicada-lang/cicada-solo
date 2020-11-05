@@ -1,4 +1,4 @@
-@datatype Nat : Type {
+@datatype Nat: Type {
   zero: Nat
   add1: (prev: Nat) -> Nat
 }

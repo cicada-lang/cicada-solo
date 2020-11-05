@@ -1,6 +1,3 @@
-- [lang1] try to generate checker from type
-- [lang2] `List`, `List.cons`, `List.null`, `List.rec`
-
 # TLT
 
 > 强化对类型系统的理解与实现技术。
@@ -22,14 +19,69 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
-# lang4
+# partech
 
-> jojo -- to study normal form and recursion.
-> - Can be used to play with "Diagonalization and Self-Reference"
+> Be the most easy to use parsing tool for programming language prototyping.
+> - module system
+> - CLI
 
-- [lang4] be clear about the semantic of "Diagonalization and Self-Reference"
-- [lang4] design a normalization algorithm
-  - 也比可以用 NbE，也许比一般的 NbE 更复杂。
+- [partech] use `Mod` to design module system
+
+- handle `$import` in `Mod.build`
+  - built-in `zero_or_more` and `one_or_more` and `optional`
+  - always import name for simplicity
+
+> intersection grammar
+
+# parc
+
+> 严格确保线性时间的 parser combinator。
+> 对于 parser 而言，只有线性时间才是可以接受的复杂度。
+
+- parc -- to implement `pt/exp/exp-parse`
+- like handle written parser
+- [test] try examples in peg paper in parser generator
+- [test] x in x test
+  - S <- "x" S "x" | "x"
+
+# lang0
+
+> church encoding
+
+- church-boolean.cic
+- church-numeral-predicates.cle
+- church-pair.cic
+- 直接用 Church numeral 来实现 Nat，而不用 ADT。
+  其语义是迭代函数，也许有有趣的应用
+  多了一个关于迭代函数的 API。
+
+# lang1
+
+- [lang1] try to generate checker from type
+
+> Play with systemt
+
+> 添加 algebraic data type
+
+# lang2
+
+> 将 NbE 教程中的 tartlet 升级为 pie
+
+- [lang2] `List`, `List.cons`, `List.null`, `List.rec`
+- [lang2] `Vector`
+- [lang2] be able to add type annotation to `Exp.fn`
+
+- 如何对某一个类型以及相关的 Exp 作出充分的测试？
+
+- test Equal of lang2.
+- test Pi of lang2.
+- test Absurd of lang2.
+
+- use native `number` as `Nat`.
+
+- 添加 inductive data type
+  - 归纳类型（Inductive type）的推演规则。
+    - Only one abstraction away.
 
 # lang3
 
@@ -63,63 +115,14 @@
 - [lang3] `Value.subtype` -- structural cls
 - [lang3] `Value.subtype` -- function type
 
-# partech
+# lang4
 
-> Be the most easy to use parsing tool for programming language prototyping.
+> jojo -- to study normal form and recursion.
+> - Can be used to play with "Diagonalization and Self-Reference"
 
-- [partech] use `Mod` to design module system
-
-- handle `$import` in `Mod.build`
-  - built-in `zero_or_more` and `one_or_more` and `optional`
-  - always import name for simplicity
-
-- intersection grammar
-
-# parc
-
-> 严格确保线性时间的 parser combinator。
-> 对于 parser 而言，只有线性时间才是可以接受的复杂度。
-
-- parc -- to implement `pt/exp/exp-parse`
-- like handle written parser
-- [test] try examples in peg paper in parser generator
-- [test] x in x test
-  - S <- "x" S "x" | "x"
-
-# lang0
-
-- church-boolean.cic
-- church-numeral-predicates.cle
-- church-pair.cic
-- 直接用 Church numeral 来实现 Nat，而不用 ADT。
-  其语义是迭代函数，也许有有趣的应用
-  多了一个关于迭代函数的 API。
-
-# lang1
-
-> Play with systemt
-
-> 添加 algebraic data type
-
-# lang2
-
-> 将 NbE 教程中的 tartlet 升级为 pie
-
-- [lang2] be able to add type annotation to `Exp.fn`
-
-- [lang2] `Vector`
-
-- 如何对某一个类型以及相关的 Exp 作出充分的测试？
-
-- test Equal of lang2.
-- test Pi of lang2.
-- test Absurd of lang2.
-
-- use native `number` as `Nat`.
-
-- 添加 inductive data type
-  - 归纳类型（Inductive type）的推演规则。
-    - Only one abstraction away.
+- [lang4] be clear about the semantic of "Diagonalization and Self-Reference"
+- [lang4] design a normalization algorithm
+  - 也比可以用 NbE，也许比一般的 NbE 更复杂。
 
 # langx
 

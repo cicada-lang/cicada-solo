@@ -1,4 +1,4 @@
-@datatype Nat : Type {
+@datatype Nat: Type {
   zero: Nat
   add1: (prev: Nat) -> Nat
 }
@@ -15,8 +15,8 @@ eight = Nat.add1(seven)
 nine = Nat.add1(eight)
 ten = Nat.add1(nine)
 
-@datatype Pair : (Type) -> (Type) -> Type {
-  pair : (A: Type) -> (B: Type) -> (first: A) -> (second: B) -> Pair(A)(B)
+@datatype Pair: (Type) -> (Type) -> Type {
+  pair: (A: Type) -> (B: Type) -> (first: A) -> (second: B) -> Pair(A)(B)
 }
 
 cons : (A: Type) -> (D: Type) -> (car: A) -> (cdr: D) -> Pair(A)(D)
