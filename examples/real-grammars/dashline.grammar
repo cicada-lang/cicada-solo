@@ -1,0 +1,12 @@
+// line of more then one dashes
+
+start = dashline
+
+dashline = @grammar {
+  dashline:dashline -> "-" one_or_more("-")
+}
+
+one_or_more = (x) => @grammar {
+  one_or_more:one -> (value: x)
+  one_or_more:more -> (head: x) (tail: one_or_more(x))
+}

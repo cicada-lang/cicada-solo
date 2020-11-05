@@ -1,16 +1,16 @@
-// $description: Symbol expression (a.k.a. sexp) -- implemented by one_or_more
+// Symbol expression (a.k.a. sexp) -- implemented by one_or_more
 
-// $start: sexp
+start = sexp
 
-// identifier: { $pattern: [identifier] }
+identifier = @pattern("identifier")
 
-// sexp:
-//   sexp:symbol: [identifier]
-//   sexp:null: ['"("', '")"']
-//   sexp:list: ['"("', { $ap: [one_or_more, sexp] }, '")"']
+sexp = @grammar {
+  sexp:symbol -> identifier
+  sexp:null -> "(" ")"
+  sexp:list -> "(" one_or_more(sexp) ")"
+}
 
-// one_or_more:
-//   $fn:
-//     - x
-//     - one_or_more:one: [{ value: x }]
-//       one_or_more:more: [{ head: x }, { tail: { $ap: [one_or_more, x] } }]
+one_or_more = (x) => @grammar {
+  one_or_more:one -> (value: x)
+  one_or_more:more -> (head: x) (tail: one_or_more(x))
+}

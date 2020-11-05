@@ -1,0 +1,8 @@
+// zero or more "x"s -- grammar with epsilon
+
+start = xs
+
+xs = @grammar {
+  xs:zero ->
+  xs:more -> "x" xs
+}
