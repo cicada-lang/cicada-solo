@@ -21,15 +21,17 @@
 
 # partech
 
-> Be the most easy to use parsing tool for programming language prototyping.
-> - module system
-> - CLI
+> **Be the most easy to use parsing tool for programming language prototyping.**
 
-- [partech] use `Mod` to design module system
+> module system
 
-- handle `$import` in `Mod.build`
+- [partech] design module system
+
+- [partech] handle `$import` in `Mod.build`
   - built-in `zero_or_more` and `one_or_more` and `optional`
   - always import name for simplicity
+
+> CLI
 
 > intersection grammar
 
