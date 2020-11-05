@@ -75,8 +75,12 @@ Exp.infer(ctx, Exp.ap(target, arg)) = ret_t @where {
 
 ## 模块系统
 
-- module 并非 first class value。
-  - 运行时没有 module 的概念。
+- 约束：
+  - 模块与文件系统无关，用 @module 挂载文件到 module tree 中。
+  - 同一个 module 中的元素可以相互引用。
+  - 每个 @datatype 有伴随的 module，在其中可以引用其上级 module 中的元素。
+  - module 为 first class value，用 record type 处理其类型。
+  - 需要区分 public 与 private 元素。
 
 - 每个文件开头要有 `@module <module-path>`。
   - 其中 `<module-path>` 是 `<part>.<part>.<part>` 的结构，
