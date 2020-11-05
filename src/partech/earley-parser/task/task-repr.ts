@@ -47,7 +47,7 @@ function repr_part(part: { name?: string; value: Value.Value }): string {
   } else if (present instanceof Array) {
     s += JSON.stringify(present)
   } else if (present.hasOwnProperty("$pattern")) {
-    const [pattern_name] = present["$pattern"]
+    const [pattern_name] = ut.assert_json_array(present["$pattern"])
     s += pattern_name
   } else {
     s += JSON.stringify(present)
