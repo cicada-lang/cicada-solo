@@ -31,6 +31,10 @@
   - built-in `zero_or_more` and `one_or_more` and `optional`
   - always import name for simplicity
 
+> partech-mode
+
+- [partech] [emacs] learn modern emacs
+
 > CLI
 
 > intersection grammar

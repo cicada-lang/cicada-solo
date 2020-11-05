@@ -1,0 +1,15 @@
+// Symbol expression (a.k.a. sexp) -- implemented by zero_or_more
+
+start = sexp
+
+identifier = @pattern("identifier")
+
+sexp = @grammar {
+  sexp:symbol -> identifier
+  sexp:list -> "(" zero_or_more(sexp) ")"
+}
+
+zero_or_more = (x) => @grammar {
+  zero_or_more:zero ->
+  zero_or_more:more -> (head: x) (tail: zero_or_more(x))
+}
