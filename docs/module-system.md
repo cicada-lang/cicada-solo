@@ -7,6 +7,9 @@
   - module 为 first class value，用 record type 处理其类型。
   - 需要区分 public 与 private 元素。
 
+- use graph theory to as model to describe the semantic of module system.
+  - use the tree model of file system as 
+
 - 每个文件开头要有 `@module <module-path>`。
   - 其中 `<module-path>` 是 `<part>.<part>.<part>` 的结构，
     比如 `structure.category`。
