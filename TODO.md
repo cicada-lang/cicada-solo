@@ -1,4 +1,5 @@
 - [lang1] try to generate checker from type
+- [lang2] `List`, `List.cons`, `List.null`, `List.rec`
 
 # TLT
 
@@ -106,8 +107,7 @@
 
 - [lang2] be able to add type annotation to `Exp.fn`
 
-- implement List for lang2.
-- implement Vector for lang2.
+- [lang2] `Vector`
 
 - 如何对某一个类型以及相关的 Exp 作出充分的测试？
 

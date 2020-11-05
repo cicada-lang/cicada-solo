@@ -1,5 +1,5 @@
 
-I infer the type of prev to be @datatype Nat : Type { zero : @datatype Nat : Type { zero : Nat add1 : (prev1: Nat) -> Nat } add1 : (prev1: @datatype Nat : Type { zero : Nat add1 : (prev1: Nat) -> Nat }) -> Nat }.
+I infer the type of prev to be Nat.
 But the given type is T.
 
 previous:

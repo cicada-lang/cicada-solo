@@ -78,13 +78,14 @@ export function repr(exp: Exp.Exp): string {
       return `{ ${Exp.repr(left)} | ${Exp.repr(right)} }`
     }
     case "Exp.type_constructor": {
-      const s = exp.sums
-        .map((sum) => `${sum.tag} : ${Exp.repr(sum.t)}`)
-        .join("\n")
-      return `@datatype ${exp.name} : ${Exp.repr(exp.t)} {\n${ut.indent(
-        s,
-        "  "
-      )}\n}`
+      // const s = exp.sums
+      //   .map((sum) => `${sum.tag} : ${Exp.repr(sum.t)}`)
+      //   .join("\n")
+      // return `@datatype ${exp.name} : ${Exp.repr(exp.t)} {\n${ut.indent(
+      //   s,
+      //   "  "
+      // )}\n}`
+      return exp.name
     }
     case "Exp.type": {
       return "Type"
