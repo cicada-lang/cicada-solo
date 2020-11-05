@@ -1,8 +1,8 @@
 import * as Value from "../value"
 import * as Exp from "../exp"
-import { Obj } from "../../ut"
+import * as ut from "../../ut"
 
-export type Present = Obj<any> | Array<any> | string
+export type Present = ut.Obj<any> | Array<any> | string
 
 export type PresentOpts = {
   on_grammar: on_grammar_t

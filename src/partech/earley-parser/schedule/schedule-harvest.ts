@@ -6,7 +6,6 @@ import * as Value from "../../value"
 import * as Token from "../../token"
 import * as Tree from "../../tree"
 import * as Span from "../../span"
-import { Obj } from "../../../ut"
 import * as ut from "../../../ut"
 
 export function harvest(schedule: Schedule.Schedule): Tree.Tree {
@@ -70,7 +69,7 @@ function harvest_body(
   parts: Array<{ name?: string; value: Value.Value }>,
   progress: Array<{ index: number; choice_name?: string }>,
   start: number
-): Obj<Tree.Tree> {
+): ut.Obj<Tree.Tree> {
   if (parts.length !== progress.length) {
     const span = span_from_tokens(schedule.tokens, start, start)
     throw new ParsingError(
@@ -82,7 +81,7 @@ function harvest_body(
     )
   }
 
-  const body: Obj<Tree.Tree> = {}
+  const body: ut.Obj<Tree.Tree> = {}
 
   let index = start
   for (let i = 0; i < parts.length; i++) {

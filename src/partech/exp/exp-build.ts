@@ -1,5 +1,4 @@
 import * as Exp from "../exp"
-import { Obj } from "../../ut"
 import * as ut from "../../ut"
 
 export function build(present: Exp.Present): Exp.Exp {
@@ -15,7 +14,7 @@ function from_string(str: string): Exp.Exp {
   }
 }
 
-function from_object(obj: Obj<any>): Exp.Exp {
+function from_object(obj: ut.Obj<any>): Exp.Exp {
   if (obj.hasOwnProperty("$fn")) {
     const [name, ret] = obj["$fn"]
     return Exp.fn(name, build(ret))
@@ -34,7 +33,7 @@ function from_object(obj: Obj<any>): Exp.Exp {
   }
 }
 
-function build_grammar(obj: Obj<any>): Exp.Exp {
+function build_grammar(obj: ut.Obj<any>): Exp.Exp {
   let name: string | undefined = undefined
   let choices = new Map()
 

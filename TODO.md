@@ -1,3 +1,5 @@
+- `ut.Json`
+
 # TLT
 
 > 强化对类型系统的理解与实现技术。
@@ -39,11 +41,11 @@
 
 > 严格确保线性时间的 parser combinator。
 > 对于 parser 而言，只有线性时间才是可以接受的复杂度。
+> - to implement `partech/exp/exp-parse`
+> - like handle written parser
 
-- parc -- to implement `pt/exp/exp-parse`
-- like handle written parser
-- [test] try examples in peg paper in parser generator
-- [test] x in x test
+- [parc] [test] try examples in peg paper in parser generator
+- [parc] [test] x in x test
   - S <- "x" S "x" | "x"
 
 # lang0
