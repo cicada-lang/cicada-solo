@@ -1,5 +1,6 @@
 import * as Task from "../task"
 import * as Value from "../../value"
+import * as ut from "../../../ut"
 
 export function start(
   grammar_name: string,
@@ -42,7 +43,8 @@ function repr_part(part: { name?: string; value: Value.Value }): string {
   } else if (present instanceof Array) {
     s += JSON.stringify(present)
   } else if (present.hasOwnProperty("$pattern")) {
-    const [pattern_name] = present["$pattern"]
+    const pattern = present["$pattern"]
+    const [pattern_name] = ut.assert_json_array(pattern)
     s += pattern_name
   } else {
     s += JSON.stringify(present)

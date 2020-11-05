@@ -2,7 +2,7 @@ import * as Value from "../value"
 import * as Exp from "../exp"
 import * as ut from "../../ut"
 
-export type Present = ut.Obj<any> | Array<any> | string
+export type Present = ut.Obj<ut.Json> | Array<ut.Json> | string
 
 export type PresentOpts = {
   on_grammar: on_grammar_t
