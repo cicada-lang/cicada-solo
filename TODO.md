@@ -90,6 +90,7 @@
 
 - [lang3] use `Mod` to design module system
   - read module tree first -- separate all IO from the core
+    - a unified module system for all our langs
   - maybe we should not limit the binding to `Noun.verb`
     - because `(twin Atom)` is `twin-Atom` not `Atom.twin`
 
