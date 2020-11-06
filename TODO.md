@@ -24,12 +24,13 @@
 > **Be the most easy to use parsing tool for programming language prototyping.**
 
 > module system
+> - Should we really do this?
 
 - [partech] handle `$imports` in `Mod.from_present`
   - always import name for simplicity
   - use `{ ... }` for mimic `@import` syntax
-- [partech] built-in `zero_or_more` and `one_or_more` and `optional`
 - [partech] `Stmt` -- to build module
+- [partech] built-in `zero_or_more` and `one_or_more` and `optional`
 - [partech] `Top`
 - [partech] `Top.from_present`
 

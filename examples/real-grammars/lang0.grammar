@@ -1,0 +1,17 @@
+identifier = @pattern("identifier")
+
+exp = @grammar {
+  exp:var -> (name: "identifier")
+  exp:fn -> "(" (name: "identifier") ")" "=" ">" (body: "exp")
+  exp:ap -> (target: identifier) (args: one_or_more("(" exp ")"))
+  exp:begin -> "{" (stmts: stmts) (ret: exp) "}"
+}
+
+stmts = @grammar {
+  stmts:stmts -> (stmts: zero_or_more(stmt))
+}
+
+stmt = @grammar {
+  stmt:def -> (name: "identifier") "=" (exp: "exp")
+  stmt:show -> "@" "show" (exp: "exp")
+}
