@@ -65,7 +65,8 @@ function build_part(part: any): { name?: string; value: Exp.Exp } {
   if (result) {
     const [name, present] = result
     // NOTE a string in bind is special, it is always Exp.v -- instead of Exp.str.
-    const value = typeof present === "string" ? Exp.v(present) : Exp.from_present(present)
+    const value =
+      typeof present === "string" ? Exp.v(present) : Exp.from_present(present)
     return { name, value }
   } else {
     return { value: Exp.from_present(part) }

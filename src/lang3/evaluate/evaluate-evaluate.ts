@@ -104,7 +104,10 @@ export function evaluate(
         )
       }
       case "Exp.dot": {
-        return Evaluate.do_dot(Evaluate.evaluate(mod, env, exp.target, opts), exp.name)
+        return Evaluate.do_dot(
+          Evaluate.evaluate(mod, env, exp.target, opts),
+          exp.name
+        )
       }
       case "Exp.equal": {
         return Value.equal(

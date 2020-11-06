@@ -22,12 +22,18 @@ export function readback_neutral(
     }
     case "Neutral.match": {
       return Exp.ap(
-        Readback.readback_normal(mod, ctx, { t: neutral.pi, value: neutral.case_fn }),
+        Readback.readback_normal(mod, ctx, {
+          t: neutral.pi,
+          value: neutral.case_fn,
+        }),
         Readback.readback_neutral(mod, ctx, neutral.arg)
       )
     }
     case "Neutral.dot": {
-      return Exp.dot(Readback.readback_neutral(mod, ctx, neutral.target), neutral.name)
+      return Exp.dot(
+        Readback.readback_neutral(mod, ctx, neutral.target),
+        neutral.name
+      )
     }
     case "Neutral.replace": {
       return Exp.replace(

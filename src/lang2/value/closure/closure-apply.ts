@@ -8,5 +8,8 @@ export function apply(
   closure: Closure.Closure,
   value: Value.Value
 ): Value.Value {
-  return Evaluate.evaluate(Env.extend(closure.env, closure.name, value), closure.ret)
+  return Evaluate.evaluate(
+    Env.extend(closure.env, closure.name, value),
+    closure.ret
+  )
 }

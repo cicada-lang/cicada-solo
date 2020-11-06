@@ -31,7 +31,11 @@ function check_data_constructor_t(
     Check.check(mod, ctx, pi.arg_t, Value.type)
     check_data_constructor_t(
       mod,
-      Ctx.extend(ctx, pi.name, Evaluate.evaluate(mod, Ctx.to_env(ctx), pi.arg_t)),
+      Ctx.extend(
+        ctx,
+        pi.name,
+        Evaluate.evaluate(mod, Ctx.to_env(ctx), pi.arg_t)
+      ),
       pi.ret_t,
       name
     )
@@ -62,7 +66,11 @@ function check_type_constructor_t(
     Check.check(mod, ctx, pi.arg_t, Value.type)
     check_type_constructor_t(
       mod,
-      Ctx.extend(ctx, pi.name, Evaluate.evaluate(mod, Ctx.to_env(ctx), pi.arg_t)),
+      Ctx.extend(
+        ctx,
+        pi.name,
+        Evaluate.evaluate(mod, Ctx.to_env(ctx), pi.arg_t)
+      ),
       pi.ret_t
     )
     return

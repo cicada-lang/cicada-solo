@@ -40,7 +40,10 @@ export function readback(
     value.kind === "Value.not_yet" &&
     value.t.kind === "Value.absurd"
   )
-    return Exp.the(Exp.absurd, Readback.readback_neutral(mod, ctx, value.neutral))
+    return Exp.the(
+      Exp.absurd,
+      Readback.readback_neutral(mod, ctx, value.neutral)
+    )
   if (t.kind === "Value.equal" && value.kind === "Value.same") return Exp.same
   if (t.kind === "Value.str" && value.kind === "Value.quote")
     return Exp.quote(value.str)

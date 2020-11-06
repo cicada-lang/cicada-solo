@@ -9,5 +9,8 @@ export function conversion(
   x: Value.Value,
   y: Value.Value
 ): boolean {
-  return Exp.equivalent(Readback.readback(ctx, t, x), Readback.readback(ctx, t, y))
+  return Exp.equivalent(
+    Readback.readback(ctx, t, x),
+    Readback.readback(ctx, t, y)
+  )
 }
