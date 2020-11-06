@@ -5,7 +5,7 @@ import * as pt from "../../partech"
 import * as ut from "../../ut"
 
 export function parse_exp(text: string): Exp.Exp {
-  const mod = pt.Mod.build(grammars)
+  const mod = pt.Mod.from_present(grammars)
   const grammar = pt.Mod.dot(mod, "exp")
   const parser = pt.EarleyParser.create(grammar)
   const lexer = pt.lexers.common

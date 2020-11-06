@@ -35,7 +35,7 @@ const S = {
   "S:S": [{ start: { $ap: ["one_or_more", '"("', "E", '")"'] } }],
 }
 
-export const mod = Mod.build({ E, F, Q, one_or_more, S })
+export const mod = Mod.from_present({ E, F, Q, one_or_more, S })
 export const grammar = Mod.dot(mod, "S")
 export const parser = EarleyParser.create(grammar)
 export const lexer = TableLexer.create([["char", /(.)/]])

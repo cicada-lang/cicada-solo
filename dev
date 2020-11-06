@@ -8,6 +8,10 @@ const fs = require("fs")
 let commands = {}
 
 commands.t = async () => {
+  await commands.test_all()
+}
+
+commands.test_all = async () => {
   await commands.test_lib()
   await commands.test_impression()
   await commands.test_lang0()

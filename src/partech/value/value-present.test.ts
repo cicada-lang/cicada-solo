@@ -12,7 +12,7 @@ function test(
   value_present: any,
   opts: Value.PresentOpts = { on_grammar: "as_exp" }
 ): void {
-  const exp = Exp.build(exp_present)
+  const exp = Exp.from_present(exp_present)
   const values = Exp.evaluate(mod, env, exp)
   ut.assert_equal(values.length, 1)
   const value = values[0]
@@ -20,7 +20,7 @@ function test(
 }
 
 {
-  const mod = Mod.build(mods.exp)
+  const mod = Mod.from_present(mods.exp)
   const env = new Map()
 
   // Exp.v

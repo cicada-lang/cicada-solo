@@ -1,7 +1,7 @@
 import * as Exp from "../exp"
 import * as ut from "../../ut"
 
-export function build(present: Exp.Present): Exp.Exp {
+export function from_present(present: Exp.Present): Exp.Exp {
   if (typeof present === "string") return from_string(present)
   else return from_object(present)
 }
@@ -17,10 +17,10 @@ function from_string(str: string): Exp.Exp {
 function from_object(obj: ut.Obj<any>): Exp.Exp {
   if (obj.hasOwnProperty("$fn")) {
     const [name, ret] = obj["$fn"]
-    return Exp.fn(name, build(ret))
+    return Exp.fn(name, Exp.from_present(ret))
   } else if (obj.hasOwnProperty("$ap")) {
     const [target, ...args] = obj["$ap"]
-    return Exp.ap(build(target), args.map(build))
+    return Exp.ap(Exp.from_present(target), args.map(Exp.from_present))
   } else if (obj.hasOwnProperty("$pattern")) {
     const [label, pattern, flags] = obj["$pattern"]
     if (pattern !== undefined) {
@@ -65,10 +65,10 @@ function build_part(part: any): { name?: string; value: Exp.Exp } {
   if (result) {
     const [name, present] = result
     // NOTE a string in bind is special, it is always Exp.v -- instead of Exp.str.
-    const value = typeof present === "string" ? Exp.v(present) : build(present)
+    const value = typeof present === "string" ? Exp.v(present) : Exp.from_present(present)
     return { name, value }
   } else {
-    return { value: build(part) }
+    return { value: Exp.from_present(part) }
   }
 }
 
