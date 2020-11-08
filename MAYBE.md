@@ -1,3 +1,7 @@
+# partech
+
+> Support intersection grammar -- for negation.
+
 # pac
 
 > 严格确保线性时间的 parser combinator。

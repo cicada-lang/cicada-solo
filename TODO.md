@@ -1,20 +1,3 @@
-# partech
-
-> **Be the most easy to use parsing tool for programming language prototyping.**
-
-> Embed the language in javascript (not just in JSON and YAML).
-
-- [partech] design API -- instead CLI
-- [partech] abstract a framework for embed language in javascript
-  - make it also easy to use concrete syntax
-    - but reuse js module system
-
-- [partech] `Stmt` -- to build module
-- [partech] `Top`
-- [partech] `Top.from_present`
-
-> Support intersection grammar -- for negation.
-
 # TLT
 
 > 强化对类型系统的理解与实现技术。
