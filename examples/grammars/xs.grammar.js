@@ -4,7 +4,9 @@ module.exports = {
   $start: "xs",
 
   xs: {
-    "xs:zero": [],
-    "xs:more": ['"x"', "xs"],
+    $grammar: {
+      "xs:zero": [],
+      "xs:more": ['"x"', "xs"],
+    },
   },
 }

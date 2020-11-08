@@ -4,11 +4,15 @@ module.exports = {
   $start: "list_of_a",
 
   list_of_a: {
-    "list_of_a:list": ['"["', "aaa", '"]"'],
+    $grammar: {
+      "list_of_a:list": ['"["', "aaa", '"]"'],
+    },
   },
 
   aaa: {
-    "aaa:zero": [],
-    "aaa:more": ['"a"', "aaa"],
+    $grammar: {
+      "aaa:zero": [],
+      "aaa:more": ['"a"', "aaa"],
+    },
   },
 }

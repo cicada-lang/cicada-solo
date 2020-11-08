@@ -4,34 +4,44 @@ import * as Mod from "../mod"
 import assert from "assert"
 
 const E = {
-  "E:EQF": ["E", "Q", "F"],
-  "E:F": ["F"],
+  $grammar: {
+    "E:EQF": ["E", "Q", "F"],
+    "E:F": ["F"],
+  },
 }
 
 const F = {
-  "F:a": ['"a"'],
+  $grammar: {
+    "F:a": ['"a"'],
+  },
 }
 
 const Q = {
-  "Q:+": ['"+"'],
-  "Q:-": ['"-"'],
+  $grammar: {
+    "Q:+": ['"+"'],
+    "Q:-": ['"-"'],
+  },
 }
 
 const one_or_more = {
   $fn: [
     "x",
     {
-      "one_or_more:one": [{ value: "x" }],
-      "one_or_more:more": [
-        { head: "x" },
-        { tail: { $ap: ["one_or_more", "x"] } },
-      ],
+      $grammar: {
+        "one_or_more:one": [{ value: "x" }],
+        "one_or_more:more": [
+          { head: "x" },
+          { tail: { $ap: ["one_or_more", "x"] } },
+        ],
+      },
     },
   ],
 }
 
 const S = {
-  "S:S": [{ $ap: ["one_or_more", '"("', "E", '")"'] }],
+  $grammar: {
+    "S:S": [{ $ap: ["one_or_more", '"("', "E", '")"'] }],
+  },
 }
 
 export const mod = Mod.from_present({ E, F, Q, one_or_more, S })

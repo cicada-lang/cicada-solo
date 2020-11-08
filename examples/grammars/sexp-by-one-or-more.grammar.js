@@ -10,8 +10,10 @@ module.exports = {
   identifier: { $pattern: ["identifier"] },
 
   sexp: {
-    "sexp:symbol": ["identifier"],
-    "sexp:null": ['"("', '")"'],
-    "sexp:list": ['"("', { $ap: ["one_or_more", "sexp"] }, '")"'],
+    $grammar: {
+      "sexp:symbol": ["identifier"],
+      "sexp:null": ['"("', '")"'],
+      "sexp:list": ['"("', { $ap: ["one_or_more", "sexp"] }, '")"'],
+    },
   },
 }

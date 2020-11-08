@@ -8,6 +8,8 @@ module.exports = {
   $start: "dashline",
 
   dashline: {
-    "dashline:dashline": ['"-"', { $ap: ["one_or_more", '"-"'] }],
+    $grammar: {
+      "dashline:dashline": ['"-"', { $ap: ["one_or_more", '"-"'] }],
+    },
   },
 }

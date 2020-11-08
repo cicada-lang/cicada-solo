@@ -6,34 +6,28 @@ export type Present = ut.Obj<any> | Array<any> | string
 export function present(exp: Exp.Exp): Present {
   switch (exp.kind) {
     case "Exp.v": {
-      const { name } = exp
-      return name
+      return exp.name
     }
     case "Exp.fn": {
-      const { name, ret } = exp
-      return { $fn: [name, present(ret)] }
+      return { $fn: [exp.name, present(exp.ret)] }
     }
     case "Exp.ap": {
-      const { target, args } = exp
-      return { $ap: [present(target), ...args.map(present)] }
+      return { $ap: [present(exp.target), ...exp.args.map(present)] }
     }
     case "Exp.str": {
-      const { value } = exp
-      return JSON.stringify(value)
+      return JSON.stringify(exp.value)
     }
     case "Exp.pattern": {
-      const { label, value } = exp
-      return value.flags
-        ? { $pattern: [label, value.source, value.flags] }
-        : { $pattern: [label, value.source] }
+      return exp.value.flags
+        ? { $pattern: [exp.label, exp.value.source, exp.value.flags] }
+        : { $pattern: [exp.label, exp.value.source] }
     }
     case "Exp.grammar":
-      const { name, choices } = exp
-      const result = {}
-      for (const [choice_name, parts] of choices) {
-        Object.assign(result, choice_present(name, choice_name, parts))
+      const choices = {}
+      for (const [choice_name, parts] of exp.choices) {
+        Object.assign(choices, choice_present(exp.name, choice_name, parts))
       }
-      return result
+      return { $grammar: choices }
   }
 }
 

@@ -7,27 +7,33 @@ export const dashline = pt.grammars.dashline
 export const identifier = { $pattern: ["identifier"] }
 
 export const exp = {
-  "exp:var": [{ name: "identifier" }],
-  "exp:fn": [
-    '"("',
-    { name: "identifier" },
-    '")"',
-    '"="',
-    '">"',
-    { body: "exp" },
-  ],
-  "exp:ap": [
-    { target: "identifier" },
-    { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
-  ],
-  "exp:begin": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
+  $grammar: {
+    "exp:var": [{ name: "identifier" }],
+    "exp:fn": [
+      '"("',
+      { name: "identifier" },
+      '")"',
+      '"="',
+      '">"',
+      { body: "exp" },
+    ],
+    "exp:ap": [
+      { target: "identifier" },
+      { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
+    ],
+    "exp:begin": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
+  },
 }
 
 export const stmts = {
-  "stmts:stmts": [{ stmts: { $ap: ["zero_or_more", "stmt"] } }],
+  $grammar: {
+    "stmts:stmts": [{ stmts: { $ap: ["zero_or_more", "stmt"] } }],
+  },
 }
 
 export const stmt = {
-  "stmt:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
-  "stmt:show": ['"@"', '"show"', { exp: "exp" }],
+  $grammar: {
+    "stmt:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
+    "stmt:show": ['"@"', '"show"', { exp: "exp" }],
+  },
 }

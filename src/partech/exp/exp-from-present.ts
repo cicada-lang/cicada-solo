@@ -28,8 +28,10 @@ function from_object(obj: ut.Obj<any>): Exp.Exp {
     } else {
       return Exp.pattern(label, new RegExp(".*", flags))
     }
+  } else if (obj.hasOwnProperty("$grammar")) {
+    return build_grammar(obj["$grammar"])
   } else {
-    return build_grammar(obj)
+    throw new Error(`Unknown object: ${ut.inspect(obj)}`)
   }
 }
 
