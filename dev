@@ -93,13 +93,13 @@ commands.test_partech = async () => {
 commands.test_partech_lex = async () => {
   await test(
     "./bin/partech.js lex $file --table $file",
-    { file: "examples/tables/example.table.yaml" },
+    { file: "examples/tables/example.table.js" },
     snapshot.out((_) => "examples/tables/example.tokens.json")
   )
 
   await test(
     "./bin/partech.js lex $file",
-    { file: "examples/tables/example.table.yaml" },
+    { file: "examples/tables/example.table.js" },
     snapshot.out((_) => "examples/tables/default.tokens.json")
   )
 }

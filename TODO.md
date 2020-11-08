@@ -4,7 +4,6 @@
 
 > Embed the language in javascript (not just in JSON and YAML).
 
-- [partech] use `table.js` instead of `table.yaml`
 - [partech] design API -- instead CLI
 - [partech] abstract a framework for embed language in javascript
   - make it also easy to use concrete syntax

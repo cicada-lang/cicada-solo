@@ -2,6 +2,7 @@ import * as TableLexer from "../../table-lexer"
 import * as lexers from "../../lexers"
 import * as ut from "../../../ut"
 import fs from "fs"
+import path from "path"
 
 export const command = "lex <input>"
 
@@ -20,7 +21,7 @@ interface Argv {
 
 export const handler = async (argv: Argv) => {
   const lexer = argv.table
-    ? TableLexer.build(await ut.read_object(argv.table))
+    ? TableLexer.build(require(path.resolve(argv.table)))
     : lexers.common
   const text = await fs.promises.readFile(argv.input, "utf8")
   const tokens = lexer.lex(text)
