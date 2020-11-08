@@ -44,7 +44,9 @@
 > module system
 > - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
-- [lang3] read module tree -- separate all IO from the core
+- [lang3] `ModTree`
+- [lang3] `Project` -- `project.json`
+- [lang3] read module tree from file -- separate all IO from the core
 
 > syntax
 > - 让语言更严易于使用，以鼓励我们写更多的例子。
