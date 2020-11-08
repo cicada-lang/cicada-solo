@@ -5,6 +5,12 @@
   - module 只用来形成表达式，而非 first class value，不处理其类型。
   - binding 只能挂在 namespace 上。
     - @datatype 与 @class 是形成 namespace 的例子。
+    - 类比文件系统：
+      |-----------|-----------|
+      | module    | directory |
+      | namespace | file      |
+      | binding   | content   |
+      |-----------|-----------|
   - 只能 @import module 与 namespace，不能 @import 函数。
   - binding 不区分 public 与 private。
 
