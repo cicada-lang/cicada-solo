@@ -1,6 +1,10 @@
 // Old familiar JSON
 
+const { pt } = require("../..")
+
 module.exports = {
+  one_or_more: pt.grammars.one_or_more,
+
   $start: "value",
 
   value: {
@@ -59,18 +63,5 @@ module.exports = {
 
   number: {
     "number:number": [{ $pattern: ["number"] }],
-  },
-
-  one_or_more: {
-    $fn: [
-      "x",
-      {
-        "one_or_more:one": [{ value: "x" }],
-        "one_or_more:more": [
-          { head: "x" },
-          { tail: { $ap: ["one_or_more", "x"] } },
-        ],
-      },
-    ],
   },
 }

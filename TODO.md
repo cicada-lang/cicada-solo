@@ -4,7 +4,6 @@
 
 > Embed the language in javascript (not just in JSON and YAML).
 
-- [partech] import `zero_or_more` and `one_or_more` in example grammars
 - [partech] use `table.js` instead of `table.yaml`
 - [partech] design API -- instead CLI
 - [partech] abstract a framework for embed language in javascript

@@ -1,6 +1,10 @@
 // Symbol expression (a.k.a. sexp) -- implemented by one_or_more
 
+const { pt } = require("../..")
+
 module.exports = {
+  one_or_more: pt.grammars.one_or_more,
+
   $start: "sexp",
 
   identifier: { $pattern: ["identifier"] },
@@ -9,18 +13,5 @@ module.exports = {
     "sexp:symbol": ["identifier"],
     "sexp:null": ['"("', '")"'],
     "sexp:list": ['"("', { $ap: ["one_or_more", "sexp"] }, '")"'],
-  },
-
-  one_or_more: {
-    $fn: [
-      "x",
-      {
-        "one_or_more:one": [{ value: "x" }],
-        "one_or_more:more": [
-          { head: "x" },
-          { tail: { $ap: ["one_or_more", "x"] } },
-        ],
-      },
-    ],
   },
 }
