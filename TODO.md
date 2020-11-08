@@ -4,10 +4,11 @@
 
 > Embed the language in javascript (not just in JSON and YAML).
 
-- [partech] [note] embed-language-in-javascript.md
 - [partech] use js to do tests instead of yaml
 - [partech] design API -- instead CLI
 - [partech] abstract a framework for embed language in javascript
+  - make it also easy to use concrete syntax
+    - but reuse js module system
 
 - [partech] `Stmt` -- to build module
 - [partech] built-in `zero_or_more` and `one_or_more` and `optional`
