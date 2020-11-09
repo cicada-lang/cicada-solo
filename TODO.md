@@ -44,8 +44,8 @@
 > module system
 > - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
-- [lang3] `Project` -- `mod_map` -- `project.json`
-- [lang3] `Project.load` -- separate IO from the core
+- [lang3] `Piece.from_directory`
+- [lang3] `ModMap.from_pieces`
 - [lang3] [maybe] good view of Project on frontend
 
 > syntax
