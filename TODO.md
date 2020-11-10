@@ -1,5 +1,3 @@
-- [lang3] `syntax/matchers/`
-
 # TLT
 
 > 强化对类型系统的理解与实现技术。
