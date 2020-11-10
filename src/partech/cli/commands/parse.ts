@@ -37,9 +37,8 @@ export const handler = async (argv: Argv) => {
   const text = await fs.promises.readFile(argv.input, "utf8")
   const tokens = lexer.lex(text)
   const mod = Mod.from_present(require(path.resolve(argv.grammar)))
-  if (mod.metadata.start) {
+  if (typeof mod.metadata.start === "string") {
     const grammar = Mod.dot(mod, mod.metadata.start)
-
     const parser = EarleyParser.create(grammar)
     try {
       const tree = parser.parse(tokens)
@@ -56,6 +55,9 @@ export const handler = async (argv: Argv) => {
       }
     }
   } else {
-    throw new Error(`No start mod.metadata: ${ut.inspect(mod.metadata)}`)
+    throw new Error(
+      `Expecting mod.metadata.start to be string.\n` +
+        `mod.metadata: ${ut.inspect(mod.metadata)}\n`
+    )
   }
 }

@@ -11,7 +11,7 @@ export function create(
 ): EarleyParser.EarleyParser {
   if (grammar.kind !== "Value.grammar") {
     throw new Error(
-      `expecting grammar to be Value.grammar.\n` +
+      `Expecting grammar to be Value.grammar.\n` +
         `grammar: ${ut.inspect(Value.present(grammar))}\n`
     )
   }

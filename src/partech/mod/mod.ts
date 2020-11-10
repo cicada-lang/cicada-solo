@@ -1,7 +1,8 @@
 import * as Exp from "../exp"
+import * as ut from "../../ut"
 
 export interface Metadata {
-  [key: string]: any
+  [key: string]: ut.Json
 }
 
 export interface Mod {

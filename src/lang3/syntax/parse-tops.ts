@@ -4,9 +4,8 @@ import * as Top from "../top"
 import * as pt from "../../partech"
 
 export const parse_tops = pt.gen_parse({
-  grammars,
-  start: "tops",
-  lexer: pt.lexers.common,
-  matcher: matchers.tops_matcher,
   preprocess: pt.preprocess.erase_comment,
+  lexer: pt.lexers.common,
+  grammar: pt.grammar_start(grammars, "tops"),
+  matcher: matchers.tops_matcher,
 })
