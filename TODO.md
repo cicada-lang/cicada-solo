@@ -49,7 +49,7 @@
 - [lang3] `Piece.from_file`
 - [lang3] `Piece.pieces_from_directory`
 - [lang3] `Project.from_pieces`
-- [lang3] [maybe] good view of Project on frontend
+- [lang3] [maybe] good view of `Project` on frontend (project insights)
 
 > syntax
 > - 让语言更严易于使用，以鼓励我们写更多的例子。
