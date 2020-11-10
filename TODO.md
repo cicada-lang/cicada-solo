@@ -1,4 +1,3 @@
-- [lang3] `syntax/grammars/`
 - [lang3] `syntax/matchers/`
 
 # TLT

@@ -1,26 +1,3 @@
-import * as pt from "../../partech"
-
-export const zero_or_more = pt.grammars.zero_or_more
-export const one_or_more = pt.grammars.one_or_more
-export const dashline = pt.grammars.dashline
-
-export const $start = "exp"
-
-const preserved = [
-  "Equal",
-  "same",
-  "replace",
-  "Absurd",
-  "String",
-  "Type",
-  "Object",
-]
-
-export const identifier = pt.grammars.pattern_unless_preserved(
-  "identifier",
-  preserved
-)
-
 export const exp = {
   $grammar: {
     "exp:var": [{ name: "identifier" }],
@@ -185,69 +162,6 @@ export const deduction_entry = {
     "deduction_entry:deduction_entry": [
       { t: "exp" },
       "dashline",
-      { exp: "exp" },
-    ],
-  },
-}
-
-export const tops = {
-  $grammar: {
-    "tops:tops": [{ tops: { $ap: ["zero_or_more", "top"] } }],
-  },
-}
-
-export const top = {
-  $grammar: {
-    "top:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
-    "top:claim": [
-      { claim: "identifier" },
-      '":"',
-      { t: "exp" },
-      { define: "identifier" },
-      '"="',
-      { exp: "exp" },
-    ],
-    "top:show": ['"@"', '"show"', { exp: "exp" }],
-    "top:datatype": [
-      '"@"',
-      '"datatype"',
-      { name: "identifier" },
-      '":"',
-      { t: "exp" },
-      '"{"',
-      { sums: "sums" },
-      '"}"',
-    ],
-  },
-}
-
-export const sums = {
-  $grammar: {
-    "sums:sums": [{ sums: { $ap: ["zero_or_more", "sum_entry"] } }],
-  },
-}
-
-export const sum_entry = {
-  $grammar: {
-    "sum_entry:sum_entry": [{ tag: "identifier" }, '":"', { t: "exp" }],
-  },
-}
-
-export const stmts = {
-  $grammar: {
-    "stmts:stmts": [{ stmts: { $ap: ["zero_or_more", "stmt"] } }],
-  },
-}
-
-export const stmt = {
-  $grammar: {
-    "stmt:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
-    "stmt:claim": [
-      { claim: "identifier" },
-      '":"',
-      { t: "exp" },
-      { define: "identifier" },
-      '"="',
       { exp: "exp" },
     ],
   },
