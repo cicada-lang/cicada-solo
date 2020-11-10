@@ -44,10 +44,8 @@
 > module system
 > - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
-- [lang3] grammar for `Piece` -- `modpath` and `imports`
-  - what would be a better word than `import`?
-    there might be other keywords in imports, not just `@import`.
-    should import be a keyword in `Top`? -- maybe.
+- [lang3] grammar for `Piece` -- `modpath` and `Top`
+- [lang3] `@import` in `Top`
 - [lang3] `Piece.from_file`
 - [lang3] `Piece.pieces_from_directory`
 - [lang3] `ModMap.from_pieces`
