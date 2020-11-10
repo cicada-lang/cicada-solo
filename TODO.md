@@ -48,7 +48,7 @@
 - [lang3] grammar for `Piece` -- `modpath` and `Top`
 - [lang3] `Piece.from_file`
 - [lang3] `Piece.pieces_from_directory`
-- [lang3] `ModMap.from_pieces`
+- [lang3] `Project.from_pieces`
 - [lang3] [maybe] good view of Project on frontend
 
 > syntax
