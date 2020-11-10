@@ -18,8 +18,8 @@ export function top_matcher(tree: pt.Tree.Tree): Top.Top {
       if (pt.Tree.str(claim) !== pt.Tree.str(define)) {
         throw new pt.ParsingError(
           "Name mismatch.\n" +
-          `- name to claim  : ${pt.Tree.str(claim)}\n` +
-          `- name to define : ${pt.Tree.str(define)}\n`,
+            `- name to claim  : ${pt.Tree.str(claim)}\n` +
+            `- name to define : ${pt.Tree.str(define)}\n`,
           { span }
         )
       }
