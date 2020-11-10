@@ -1,1 +1,1 @@
-export * from "./infer-infer"
+export * from "./infer"
