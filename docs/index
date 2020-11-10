@@ -18,7 +18,6 @@ link:javascript-regexp.md
 link:knowledge-logic-computation.txt
 link:module-system.md
 link:nominal-type-vs-structural-type.md
-link:parsing-techniques.md
 link:polish-vs-reverse-polish-notation.md
 link:readback-recursive-expression.md
 link:reversed-inference-rule-style.md
@@ -28,3 +27,5 @@ link:the-semantic-of-judgment.md
 link:theory-of-cfg.md
 link:toc
 link:traditional-semantics-vs-algebraic-semantics.md
+link:partech/embed-languages-in-javascript.md
+link:partech/parsing-techniques.md
