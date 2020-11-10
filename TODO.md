@@ -1,5 +1,3 @@
-- [lang2] `syntax/matchers/`
-
 - [lang3] `syntax/grammars/`
 - [lang3] `syntax/matchers/`
 
