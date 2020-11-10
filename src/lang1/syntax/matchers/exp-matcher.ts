@@ -1,8 +1,8 @@
-import * as Exp from "../exp"
-import * as Stmt from "../stmt"
-import * as Ty from "../ty"
-import * as pt from "../../partech"
-import * as ut from "../../ut"
+import * as Exp from "../../exp"
+import * as Ty from "../../ty"
+import * as pt from "../../../partech"
+import * as ut from "../../../ut"
+import { stmts_matcher, ty_matcher } from "../matchers"
 
 export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>({
@@ -75,43 +75,5 @@ export function deduction_entry_matcher(
       t: ty_matcher(t),
       exp: exp_matcher(exp),
     }),
-  })(tree)
-}
-
-export function ty_matcher(tree: pt.Tree.Tree): Ty.Ty {
-  return pt.Tree.matcher<Ty.Ty>({
-    "ty:nat": () => Ty.nat,
-    "ty:arrow": ({ arg_t, ret_t }) =>
-      Ty.arrow(ty_matcher(arg_t), ty_matcher(ret_t)),
-  })(tree)
-}
-
-export function stmts_matcher(tree: pt.Tree.Tree): Array<Stmt.Stmt> {
-  return pt.Tree.matcher<Array<Stmt.Stmt>>({
-    "stmts:stmts": ({ stmts }) =>
-      pt.matchers.zero_or_more_matcher(stmts).map(stmt_matcher),
-  })(tree)
-}
-
-export function stmt_matcher(tree: pt.Tree.Tree): Stmt.Stmt {
-  return pt.Tree.matcher<Stmt.Stmt>({
-    "stmt:def": ({ name, exp }) =>
-      Stmt.def(pt.Tree.str(name), exp_matcher(exp)),
-    "stmt:claim": ({ claim, t, define, exp }, { span }) => {
-      if (pt.Tree.str(claim) !== pt.Tree.str(define)) {
-        throw new pt.ParsingError(
-          "Name mismatch.\n" +
-            `- name to claim  : ${pt.Tree.str(claim)}\n` +
-            `- name to define : ${pt.Tree.str(define)}\n`,
-          { span }
-        )
-      }
-      const name = claim
-      return Stmt.def(
-        pt.Tree.str(name),
-        Exp.the(ty_matcher(t), exp_matcher(exp))
-      )
-    },
-    "stmt:show": ({ exp }) => Stmt.show(exp_matcher(exp)),
   })(tree)
 }
