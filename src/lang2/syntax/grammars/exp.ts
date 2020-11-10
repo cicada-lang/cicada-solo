@@ -1,32 +1,3 @@
-import * as pt from "../../partech"
-
-export const zero_or_more = pt.grammars.zero_or_more
-export const one_or_more = pt.grammars.one_or_more
-export const dashline = pt.grammars.dashline
-
-const preserved = [
-  "Pair",
-  "cons",
-  "car",
-  "cdr",
-  "Nat",
-  "zero",
-  "add1",
-  "Equal",
-  "same",
-  "replace",
-  "Trivial",
-  "sole",
-  "Absurd",
-  "String",
-  "Type",
-]
-
-export const identifier = pt.grammars.pattern_unless_preserved(
-  "identifier",
-  preserved
-)
-
 export const exp = {
   $grammar: {
     "exp:var": [{ name: "identifier" }],
@@ -152,26 +123,5 @@ export const deduction_entry = {
       "dashline",
       { exp: "exp" },
     ],
-  },
-}
-
-export const stmts = {
-  $grammar: {
-    "stmts:stmts": [{ stmts: { $ap: ["zero_or_more", "stmt"] } }],
-  },
-}
-
-export const stmt = {
-  $grammar: {
-    "stmt:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
-    "stmt:claim": [
-      { claim: "identifier" },
-      '":"',
-      { t: "exp" },
-      { define: "identifier" },
-      '"="',
-      { exp: "exp" },
-    ],
-    "stmt:show": ['"@"', '"show"', { exp: "exp" }],
   },
 }

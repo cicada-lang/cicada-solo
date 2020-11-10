@@ -1,8 +1,7 @@
+- [lang2] `syntax/matchers/`
+
 - [lang3] `syntax/grammars/`
 - [lang3] `syntax/matchers/`
-
-- [lang2] `syntax/grammars/`
-- [lang2] `syntax/matchers/`
 
 # TLT
 

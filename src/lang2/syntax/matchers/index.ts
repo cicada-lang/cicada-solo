@@ -1,7 +1,7 @@
-import * as Exp from "../exp"
-import * as Stmt from "../stmt"
-import * as pt from "../../partech"
-import * as ut from "../../ut"
+import * as Exp from "../../exp"
+import * as Stmt from "../../stmt"
+import * as pt from "../../../partech"
+import * as ut from "../../../ut"
 
 export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>({
