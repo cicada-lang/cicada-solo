@@ -1,4 +1,4 @@
-export interface Span {
+export type Span = {
   lo: number
   hi: number
 }

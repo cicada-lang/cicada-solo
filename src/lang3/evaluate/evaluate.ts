@@ -9,7 +9,7 @@ import * as Mod from "../mod"
 import * as Env from "../env"
 import * as Trace from "../../trace"
 
-export interface EvaluationOpts {
+export type EvaluationOpts = {
   mode?: EvaluationMode
 }
 

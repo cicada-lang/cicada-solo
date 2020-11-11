@@ -3,14 +3,14 @@ import * as Normal from "../normal"
 
 export type Neutral = v | ap | rec
 
-interface v {
+type v = {
   kind: "Neutral.v"
   name: string
 }
 
 export const v = (name: string): v => ({ kind: "Neutral.v", name })
 
-interface ap {
+type ap = {
   kind: "Neutral.ap"
   target: Neutral
   arg: Normal.Normal
@@ -22,7 +22,7 @@ export const ap = (target: Neutral, arg: Normal.Normal): ap => ({
   arg,
 })
 
-interface rec {
+type rec = {
   kind: "Neutral.rec"
   ret_t: Ty.Ty
   target: Neutral

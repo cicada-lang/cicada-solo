@@ -3,7 +3,7 @@ import * as Value from "../../value"
 
 export type Den = def | type_constructor
 
-export interface def {
+export type def = {
   kind: "Mod.Den.def"
   exp: Exp.Exp
   t?: Exp.Exp
@@ -21,7 +21,7 @@ export const def = (
   cached_value,
 })
 
-export interface type_constructor {
+export type type_constructor = {
   kind: "Mod.Den.type_constructor"
   type_constructor: Exp.type_constructor
 }

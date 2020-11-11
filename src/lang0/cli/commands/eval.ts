@@ -16,7 +16,7 @@ export const builder = {
   nocolor: { type: "boolean", default: false },
 }
 
-interface Argv {
+type Argv = {
   input: string
   nocolor: boolean
 }

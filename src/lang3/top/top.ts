@@ -2,7 +2,7 @@ import * as Exp from "../exp"
 
 export type Top = def | type_constructor | show
 
-interface def {
+type def = {
   kind: "Top.def"
   name: string
   t?: Exp.Exp
@@ -20,7 +20,7 @@ export const def = (
   exp,
 })
 
-interface type_constructor {
+type type_constructor = {
   kind: "Top.type_constructor"
   type_constructor: Exp.type_constructor
 }
@@ -32,7 +32,7 @@ export const type_constructor = (
   type_constructor,
 })
 
-interface show {
+type show = {
   kind: "Top.show"
   exp: Exp.Exp
 }

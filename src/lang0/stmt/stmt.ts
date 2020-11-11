@@ -2,7 +2,7 @@ import * as Exp from "../exp"
 
 export type Stmt = def | show
 
-interface def {
+type def = {
   kind: "Stmt.def"
   name: string
   exp: Exp.Exp
@@ -14,7 +14,7 @@ export const def = (name: string, exp: Exp.Exp): def => ({
   exp,
 })
 
-interface show {
+type show = {
   kind: "Stmt.show"
   exp: Exp.Exp
 }

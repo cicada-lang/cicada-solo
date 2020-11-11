@@ -2,7 +2,7 @@ import * as Exp from "../exp"
 
 export type Stmt = def
 
-interface def {
+type def = {
   kind: "Stmt.def"
   name: string
   exp: Exp.Exp

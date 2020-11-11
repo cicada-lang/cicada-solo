@@ -3,7 +3,7 @@ import * as Value from "../value"
 
 export type Neutral = v | ap | match | dot | replace | absurd_ind
 
-interface v {
+type v = {
   kind: "Neutral.v"
   name: string
 }
@@ -13,7 +13,7 @@ export const v = (name: string): v => ({
   name,
 })
 
-interface ap {
+type ap = {
   kind: "Neutral.ap"
   target: Neutral
   arg: Normal.Normal
@@ -25,7 +25,7 @@ export const ap = (target: Neutral, arg: Normal.Normal): ap => ({
   arg,
 })
 
-interface match {
+type match = {
   kind: "Neutral.match"
   case_fn: Value.case_fn
   pi: Value.pi
@@ -43,7 +43,7 @@ export const match = (
   arg,
 })
 
-interface dot {
+type dot = {
   kind: "Neutral.dot"
   target: Neutral
   name: string
@@ -55,7 +55,7 @@ export const dot = (target: Neutral, name: string): dot => ({
   name,
 })
 
-interface replace {
+type replace = {
   kind: "Neutral.replace"
   target: Neutral
   motive: Normal.Normal
@@ -73,7 +73,7 @@ export const replace = (
   base,
 })
 
-interface absurd_ind {
+type absurd_ind = {
   kind: "Neutral.absurd_ind"
   target: Neutral
   motive: Normal.Normal

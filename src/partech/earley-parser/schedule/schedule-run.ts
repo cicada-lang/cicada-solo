@@ -3,7 +3,7 @@ import * as TaskQueue from "../task-queue"
 import * as FinishedChart from "../finished-chart"
 import * as Task from "../task"
 
-export interface Opts {
+export type Opts = {
   task?: { verbose?: boolean }
   schedule?: { verbose?: boolean }
 }

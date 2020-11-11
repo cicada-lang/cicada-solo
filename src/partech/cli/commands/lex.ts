@@ -13,7 +13,7 @@ export const builder = {
   table: { type: "string" },
 }
 
-interface Argv {
+type Argv = {
   input: string
   output: string | undefined
   table: string | undefined

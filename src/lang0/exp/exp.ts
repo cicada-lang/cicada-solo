@@ -2,14 +2,14 @@ import * as Stmt from "../stmt"
 
 export type Exp = v | fn | ap | begin
 
-interface v {
+type v = {
   kind: "Exp.v"
   name: string
 }
 
 export const v = (name: string): v => ({ kind: "Exp.v", name })
 
-interface fn {
+type fn = {
   kind: "Exp.fn"
   name: string
   ret: Exp
@@ -21,7 +21,7 @@ export const fn = (name: string, ret: Exp): fn => ({
   ret,
 })
 
-interface ap {
+type ap = {
   kind: "Exp.ap"
   target: Exp
   arg: Exp
@@ -33,7 +33,7 @@ export const ap = (target: Exp, arg: Exp): ap => ({
   arg,
 })
 
-interface begin {
+type begin = {
   kind: "Exp.begin"
   stmts: Array<Stmt.Stmt>
   ret: Exp

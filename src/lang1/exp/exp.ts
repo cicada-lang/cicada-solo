@@ -3,14 +3,14 @@ import * as Ty from "../ty"
 
 export type Exp = v | fn | ap | zero | add1 | rec | begin | the
 
-interface v {
+type v = {
   kind: "Exp.v"
   name: string
 }
 
 export const v = (name: string): v => ({ kind: "Exp.v", name })
 
-interface fn {
+type fn = {
   kind: "Exp.fn"
   name: string
   ret: Exp
@@ -22,7 +22,7 @@ export const fn = (name: string, ret: Exp): fn => ({
   ret,
 })
 
-interface ap {
+type ap = {
   kind: "Exp.ap"
   target: Exp
   arg: Exp
@@ -34,7 +34,7 @@ export const ap = (target: Exp, arg: Exp): ap => ({
   arg,
 })
 
-interface begin {
+type begin = {
   kind: "Exp.begin"
   stmts: Array<Stmt.Stmt>
   ret: Exp
@@ -46,20 +46,20 @@ export const begin = (stmts: Array<Stmt.Stmt>, ret: Exp): begin => ({
   ret,
 })
 
-interface zero {
+type zero = {
   kind: "Exp.zero"
 }
 
 export const zero: zero = { kind: "Exp.zero" }
 
-interface add1 {
+type add1 = {
   kind: "Exp.add1"
   prev: Exp
 }
 
 export const add1 = (prev: Exp): add1 => ({ kind: "Exp.add1", prev })
 
-interface rec {
+type rec = {
   kind: "Exp.rec"
   t: Ty.Ty
   target: Exp
@@ -75,7 +75,7 @@ export const rec = (t: Ty.Ty, target: Exp, base: Exp, step: Exp): rec => ({
   step,
 })
 
-interface the {
+type the = {
   kind: "Exp.the"
   t: Ty.Ty
   exp: Exp

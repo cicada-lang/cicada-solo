@@ -3,7 +3,7 @@ import * as DelayedChoices from "./delayed-choices"
 
 export type Value = fn | str | pattern | grammar
 
-interface fn {
+type fn = {
   kind: "Value.fn"
   ret_cl: Closure.Closure
 }
@@ -13,7 +13,7 @@ export const fn = (ret_cl: Closure.Closure): fn => ({
   ret_cl,
 })
 
-interface str {
+type str = {
   kind: "Value.str"
   value: string
 }
@@ -23,7 +23,7 @@ export const str = (value: string): str => ({
   value,
 })
 
-interface pattern {
+type pattern = {
   kind: "Value.pattern"
   label: string
   value: RegExp
@@ -35,7 +35,7 @@ export const pattern = (label: string, value: RegExp): pattern => ({
   value,
 })
 
-export interface grammar {
+export type grammar = {
   kind: "Value.grammar"
   name: string
   delayed: DelayedChoices.DelayedChoices

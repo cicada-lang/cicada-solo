@@ -1,11 +1,11 @@
 import * as Exp from "../exp"
 import * as ut from "../../ut"
 
-export interface Metadata {
+export type Metadata = {
   [key: string]: ut.Json
 }
 
-export interface Mod {
+export type Mod = {
   map: Map<string, Exp.Exp>
   metadata: Metadata
 }

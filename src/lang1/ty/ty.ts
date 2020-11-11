@@ -1,12 +1,12 @@
 export type Ty = nat | arrow
 
-interface nat {
+type nat = {
   kind: "Ty.nat"
 }
 
 export const nat: nat = { kind: "Ty.nat" }
 
-interface arrow {
+type arrow = {
   kind: "Ty.arrow"
   arg_t: Ty
   ret_t: Ty

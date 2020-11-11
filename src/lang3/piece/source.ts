@@ -1,10 +1,10 @@
-export type Source = file | relp
+export type Source = file | repl
 
-export interface file {
+export type file = {
   kind: "file"
   name: string
 }
 
-export interface relp {
+export type repl = {
   kind: "repl"
 }

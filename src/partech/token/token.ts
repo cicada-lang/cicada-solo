@@ -1,6 +1,6 @@
 import * as Span from "../span"
 
-export interface Token {
+export type Token = {
   label: string
   value: string
   span: Span.Span

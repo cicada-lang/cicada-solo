@@ -1,5 +1,5 @@
 import * as Token from "../token"
 
-export interface Lexer {
+export type Lexer = {
   lex(text: string): Array<Token.Token>
 }

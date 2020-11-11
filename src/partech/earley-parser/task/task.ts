@@ -1,6 +1,6 @@
 import * as Value from "../../value"
 
-export interface Task {
+export type Task = {
   grammar_name: string
   choice_name: string
   parts: Array<{ name?: string; value: Value.Value }>

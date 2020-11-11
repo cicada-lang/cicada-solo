@@ -2,11 +2,11 @@ import * as Den from "./den"
 import * as Exp from "../exp"
 import * as Value from "../value"
 
-export interface Entry {
+export type Entry = {
   den: Den.Den
   cached_value?: Value.Value
 }
 
-export interface Mod {
+export type Mod = {
   map: Map<string, Entry>
 }

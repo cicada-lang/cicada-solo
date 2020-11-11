@@ -1,6 +1,6 @@
 import * as Value from "../value"
 
-export interface Normal {
+export type Normal = {
   t: Value.Value
   value: Value.Value
 }

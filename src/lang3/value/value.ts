@@ -25,7 +25,7 @@ export type Value =
   | type
   | not_yet
 
-export interface pi {
+export type pi = {
   kind: "Value.pi"
   arg_t: Value
   ret_t_cl: Closure.Closure
@@ -37,7 +37,7 @@ export const pi = (arg_t: Value, ret_t_cl: Closure.Closure): pi => ({
   ret_t_cl,
 })
 
-export interface fn {
+export type fn = {
   kind: "Value.fn"
   ret_cl: Closure.Closure
 }
@@ -47,7 +47,7 @@ export const fn = (ret_cl: Closure.Closure): fn => ({
   ret_cl,
 })
 
-export interface case_fn {
+export type case_fn = {
   kind: "Value.case_fn"
   ret_cls: Array<Closure.Closure>
 }
@@ -57,7 +57,7 @@ export const case_fn = (ret_cls: Array<Closure.Closure>): case_fn => ({
   ret_cls,
 })
 
-export interface cls {
+export type cls = {
   kind: "Value.cls"
   sat: Array<{ name: string; t: Value; value: Value }>
   tel: Telescope.Telescope
@@ -72,7 +72,7 @@ export const cls = (
   tel,
 })
 
-export interface obj {
+export type obj = {
   kind: "Value.obj"
   properties: Map<string, Value>
 }
@@ -82,7 +82,7 @@ export const obj = (properties: Map<string, Value>): obj => ({
   properties,
 })
 
-export interface equal {
+export type equal = {
   kind: "Value.equal"
   t: Value
   from: Value
@@ -96,7 +96,7 @@ export const equal = (t: Value, from: Value, to: Value): equal => ({
   to,
 })
 
-export interface same {
+export type same = {
   kind: "Value.same"
 }
 
@@ -104,7 +104,7 @@ export const same: same = {
   kind: "Value.same",
 }
 
-export interface absurd {
+export type absurd = {
   kind: "Value.absurd"
 }
 
@@ -112,7 +112,7 @@ export const absurd: absurd = {
   kind: "Value.absurd",
 }
 
-export interface str {
+export type str = {
   kind: "Value.str"
 }
 
@@ -120,7 +120,7 @@ export const str: str = {
   kind: "Value.str",
 }
 
-export interface quote {
+export type quote = {
   kind: "Value.quote"
   str: string
 }
@@ -130,7 +130,7 @@ export const quote = (str: string): quote => ({
   str,
 })
 
-export interface union {
+export type union = {
   kind: "Value.union"
   left: Value
   right: Value
@@ -142,7 +142,7 @@ export const union = (left: Value, right: Value): union => ({
   right,
 })
 
-export interface type_constructor {
+export type type_constructor = {
   kind: "Value.type_constructor"
   name: string
   t: Value
@@ -160,7 +160,7 @@ export const type_constructor = (
   delayed,
 })
 
-export interface datatype {
+export type datatype = {
   kind: "Value.datatype"
   type_constructor: type_constructor
   args: Array<Value>
@@ -178,7 +178,7 @@ export const datatype = (
   t,
 })
 
-export interface data_constructor {
+export type data_constructor = {
   kind: "Value.data_constructor"
   type_constructor: type_constructor
   tag: string
@@ -196,7 +196,7 @@ export const data_constructor = (
   t,
 })
 
-export interface data {
+export type data = {
   kind: "Value.data"
   data_constructor: data_constructor
   args: Array<Value>
@@ -214,7 +214,7 @@ export const data = (
   t,
 })
 
-export interface type {
+export type type = {
   kind: "Value.type"
 }
 
@@ -222,7 +222,7 @@ export const type: type = {
   kind: "Value.type",
 }
 
-export interface not_yet {
+export type not_yet = {
   kind: "Value.not_yet"
   t: Value
   neutral: Neutral.Neutral

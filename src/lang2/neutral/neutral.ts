@@ -2,7 +2,7 @@ import * as Normal from "../normal"
 
 export type Neutral = v | ap | car | cdr | nat_ind | replace | absurd_ind
 
-interface v {
+type v = {
   kind: "Neutral.v"
   name: string
 }
@@ -12,7 +12,7 @@ export const v = (name: string): v => ({
   name,
 })
 
-interface ap {
+type ap = {
   kind: "Neutral.ap"
   target: Neutral
   arg: Normal.Normal
@@ -24,7 +24,7 @@ export const ap = (target: Neutral, arg: Normal.Normal): ap => ({
   arg,
 })
 
-interface car {
+type car = {
   kind: "Neutral.car"
   target: Neutral
 }
@@ -34,7 +34,7 @@ export const car = (target: Neutral): car => ({
   target,
 })
 
-interface cdr {
+type cdr = {
   kind: "Neutral.cdr"
   target: Neutral
 }
@@ -44,7 +44,7 @@ export const cdr = (target: Neutral): cdr => ({
   target,
 })
 
-interface nat_ind {
+type nat_ind = {
   kind: "Neutral.nat_ind"
   target: Neutral
   motive: Normal.Normal
@@ -65,7 +65,7 @@ export const nat_ind = (
   step,
 })
 
-interface replace {
+type replace = {
   kind: "Neutral.replace"
   target: Neutral
   motive: Normal.Normal
@@ -83,7 +83,7 @@ export const replace = (
   base,
 })
 
-interface absurd_ind {
+type absurd_ind = {
   kind: "Neutral.absurd_ind"
   target: Neutral
   motive: Normal.Normal

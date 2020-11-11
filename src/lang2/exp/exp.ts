@@ -26,7 +26,7 @@ export type Exp =
   | begin
   | the
 
-interface v {
+type v = {
   kind: "Exp.v"
   name: string
 }
@@ -36,7 +36,7 @@ export const v = (name: string): v => ({
   name,
 })
 
-interface pi {
+type pi = {
   kind: "Exp.pi"
   name: string
   arg_t: Exp
@@ -50,7 +50,7 @@ export const pi = (name: string, arg_t: Exp, ret_t: Exp): pi => ({
   ret_t,
 })
 
-interface fn {
+type fn = {
   kind: "Exp.fn"
   name: string
   ret: Exp
@@ -62,7 +62,7 @@ export const fn = (name: string, ret: Exp): fn => ({
   ret,
 })
 
-interface ap {
+type ap = {
   kind: "Exp.ap"
   target: Exp
   arg: Exp
@@ -74,7 +74,7 @@ export const ap = (target: Exp, arg: Exp): ap => ({
   arg,
 })
 
-interface sigma {
+type sigma = {
   kind: "Exp.sigma"
   name: string
   car_t: Exp
@@ -88,7 +88,7 @@ export const sigma = (name: string, car_t: Exp, cdr_t: Exp): sigma => ({
   cdr_t,
 })
 
-interface cons {
+type cons = {
   kind: "Exp.cons"
   car: Exp
   cdr: Exp
@@ -100,7 +100,7 @@ export const cons = (car: Exp, cdr: Exp): cons => ({
   cdr,
 })
 
-interface car {
+type car = {
   kind: "Exp.car"
   target: Exp
 }
@@ -110,7 +110,7 @@ export const car = (target: Exp): car => ({
   target,
 })
 
-interface cdr {
+type cdr = {
   kind: "Exp.cdr"
   target: Exp
 }
@@ -120,19 +120,19 @@ export const cdr = (target: Exp): cdr => ({
   target,
 })
 
-interface nat {
+type nat = {
   kind: "Exp.nat"
 }
 
 export const nat: nat = { kind: "Exp.nat" }
 
-interface zero {
+type zero = {
   kind: "Exp.zero"
 }
 
 export const zero: zero = { kind: "Exp.zero" }
 
-interface add1 {
+type add1 = {
   kind: "Exp.add1"
   prev: Exp
 }
@@ -142,7 +142,7 @@ export const add1 = (prev: Exp): add1 => ({
   prev,
 })
 
-interface nat_ind {
+type nat_ind = {
   kind: "Exp.nat_ind"
   target: Exp
   motive: Exp
@@ -163,7 +163,7 @@ export const nat_ind = (
   step,
 })
 
-interface equal {
+type equal = {
   kind: "Exp.equal"
   t: Exp
   from: Exp
@@ -177,7 +177,7 @@ export const equal = (t: Exp, from: Exp, to: Exp): equal => ({
   to,
 })
 
-interface same {
+type same = {
   kind: "Exp.same"
 }
 
@@ -185,7 +185,7 @@ export const same: same = {
   kind: "Exp.same",
 }
 
-interface replace {
+type replace = {
   kind: "Exp.replace"
   target: Exp
   motive: Exp
@@ -199,7 +199,7 @@ export const replace = (target: Exp, motive: Exp, base: Exp): replace => ({
   base,
 })
 
-interface trivial {
+type trivial = {
   kind: "Exp.trivial"
 }
 
@@ -207,7 +207,7 @@ export const trivial: trivial = {
   kind: "Exp.trivial",
 }
 
-interface sole {
+type sole = {
   kind: "Exp.sole"
 }
 
@@ -215,7 +215,7 @@ export const sole: sole = {
   kind: "Exp.sole",
 }
 
-interface absurd {
+type absurd = {
   kind: "Exp.absurd"
 }
 
@@ -223,7 +223,7 @@ export const absurd: absurd = {
   kind: "Exp.absurd",
 }
 
-interface absurd_ind {
+type absurd_ind = {
   kind: "Exp.absurd_ind"
   target: Exp
   motive: Exp
@@ -235,7 +235,7 @@ export const absurd_ind = (target: Exp, motive: Exp): absurd_ind => ({
   motive,
 })
 
-interface str {
+type str = {
   kind: "Exp.str"
 }
 
@@ -243,7 +243,7 @@ export const str: str = {
   kind: "Exp.str",
 }
 
-interface quote {
+type quote = {
   kind: "Exp.quote"
   str: string
 }
@@ -253,7 +253,7 @@ export const quote = (str: string): quote => ({
   str,
 })
 
-interface type {
+type type = {
   kind: "Exp.type"
 }
 
@@ -261,7 +261,7 @@ export const type: type = {
   kind: "Exp.type",
 }
 
-interface begin {
+type begin = {
   kind: "Exp.begin"
   stmts: Array<Stmt.Stmt>
   ret: Exp
@@ -273,7 +273,7 @@ export const begin = (stmts: Array<Stmt.Stmt>, ret: Exp): begin => ({
   ret,
 })
 
-interface the {
+type the = {
   kind: "Exp.the"
   t: Exp
   exp: Exp

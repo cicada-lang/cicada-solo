@@ -9,7 +9,7 @@ export function equivalent(x: Exp.Exp, y: Exp.Exp): boolean {
   })
 }
 
-interface AlphaCtx {
+type AlphaCtx = {
   depth: number
   left_names: Map<string, number>
   right_names: Map<string, number>

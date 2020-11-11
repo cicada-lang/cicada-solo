@@ -4,7 +4,7 @@ import * as Neutral from "../neutral"
 
 export type Value = fn | not_yet
 
-interface fn {
+type fn = {
   kind: "Value.fn"
   name: string
   ret: Exp.Exp
@@ -18,7 +18,7 @@ export const fn = (name: string, ret: Exp.Exp, env: Env.Env): fn => ({
   env,
 })
 
-interface not_yet {
+type not_yet = {
   kind: "Value.not_yet"
   neutral: Neutral.Neutral
 }

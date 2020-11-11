@@ -19,7 +19,7 @@ export type Value =
   | type
   | not_yet
 
-export interface pi {
+export type pi = {
   kind: "Value.pi"
   arg_t: Value
   ret_t_cl: Closure.Closure
@@ -31,7 +31,7 @@ export const pi = (arg_t: Value, ret_t_cl: Closure.Closure): pi => ({
   ret_t_cl,
 })
 
-interface fn {
+type fn = {
   kind: "Value.fn"
   ret_cl: Closure.Closure
 }
@@ -41,7 +41,7 @@ export const fn = (ret_cl: Closure.Closure): fn => ({
   ret_cl,
 })
 
-export interface sigma {
+export type sigma = {
   kind: "Value.sigma"
   car_t: Value
   cdr_t_cl: Closure.Closure
@@ -53,7 +53,7 @@ export const sigma = (car_t: Value, cdr_t_cl: Closure.Closure): sigma => ({
   cdr_t_cl,
 })
 
-interface cons {
+type cons = {
   kind: "Value.cons"
   car: Value
   cdr: Value
@@ -65,7 +65,7 @@ export const cons = (car: Value, cdr: Value): cons => ({
   cdr,
 })
 
-export interface nat {
+export type nat = {
   kind: "Value.nat"
 }
 
@@ -73,7 +73,7 @@ export const nat: nat = {
   kind: "Value.nat",
 }
 
-interface zero {
+type zero = {
   kind: "Value.zero"
 }
 
@@ -81,7 +81,7 @@ export const zero: zero = {
   kind: "Value.zero",
 }
 
-interface add1 {
+type add1 = {
   kind: "Value.add1"
   prev: Value
 }
@@ -91,7 +91,7 @@ export const add1 = (prev: Value): add1 => ({
   prev,
 })
 
-export interface equal {
+export type equal = {
   kind: "Value.equal"
   t: Value
   from: Value
@@ -105,7 +105,7 @@ export const equal = (t: Value, from: Value, to: Value): equal => ({
   to,
 })
 
-interface same {
+type same = {
   kind: "Value.same"
 }
 
@@ -113,7 +113,7 @@ export const same: same = {
   kind: "Value.same",
 }
 
-export interface trivial {
+export type trivial = {
   kind: "Value.trivial"
 }
 
@@ -121,7 +121,7 @@ export const trivial: trivial = {
   kind: "Value.trivial",
 }
 
-interface sole {
+type sole = {
   kind: "Value.sole"
 }
 
@@ -129,7 +129,7 @@ export const sole: sole = {
   kind: "Value.sole",
 }
 
-export interface absurd {
+export type absurd = {
   kind: "Value.absurd"
 }
 
@@ -137,7 +137,7 @@ export const absurd: absurd = {
   kind: "Value.absurd",
 }
 
-export interface str {
+export type str = {
   kind: "Value.str"
 }
 
@@ -145,7 +145,7 @@ export const str: str = {
   kind: "Value.str",
 }
 
-interface quote {
+type quote = {
   kind: "Value.quote"
   str: string
 }
@@ -155,7 +155,7 @@ export const quote = (str: string): quote => ({
   str,
 })
 
-export interface type {
+export type type = {
   kind: "Value.type"
 }
 
@@ -163,7 +163,7 @@ export const type: type = {
   kind: "Value.type",
 }
 
-interface not_yet {
+type not_yet = {
   kind: "Value.not_yet"
   t: Value
   neutral: Neutral.Neutral

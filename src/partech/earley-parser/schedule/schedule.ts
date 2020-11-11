@@ -5,7 +5,7 @@ import * as FinishedChart from "../finished-chart"
 import * as Value from "../../value"
 import * as Token from "../../token"
 
-export interface Schedule {
+export type Schedule = {
   tokens: Array<Token.Token>
   grammar: Value.grammar
   queue: TaskQueue.TaskQueue

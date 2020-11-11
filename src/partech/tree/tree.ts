@@ -4,14 +4,14 @@ import * as Span from "../span"
 
 export type Tree = node | leaf
 
-export interface Head {
+export type Head = {
   name: string
   kind: string
 }
 
 export type Body = ut.Obj<Tree>
 
-export interface node {
+export type node = {
   kind: "Tree.node"
   head: Head
   body: Body
@@ -25,7 +25,7 @@ export const node = (head: Head, body: Body, span: Span.Span): node => ({
   span,
 })
 
-export interface leaf {
+export type leaf = {
   kind: "Tree.leaf"
   token: Token.Token
 }

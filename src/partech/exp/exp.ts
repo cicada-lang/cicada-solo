@@ -1,6 +1,6 @@
 export type Exp = v | fn | ap | str | pattern | grammar
 
-interface v {
+type v = {
   kind: "Exp.v"
   name: string
 }
@@ -10,7 +10,7 @@ export const v = (name: string): v => ({
   name,
 })
 
-interface fn {
+type fn = {
   kind: "Exp.fn"
   name: string
   ret: Exp
@@ -22,7 +22,7 @@ export const fn = (name: string, ret: Exp): fn => ({
   ret,
 })
 
-interface ap {
+type ap = {
   kind: "Exp.ap"
   target: Exp
   args: Array<Exp>
@@ -34,7 +34,7 @@ export const ap = (target: Exp, args: Array<Exp>): ap => ({
   args,
 })
 
-interface str {
+type str = {
   kind: "Exp.str"
   value: string
 }
@@ -44,7 +44,7 @@ export const str = (value: string): str => ({
   value,
 })
 
-interface pattern {
+type pattern = {
   kind: "Exp.pattern"
   label: string
   value: RegExp
@@ -56,7 +56,7 @@ export const pattern = (label: string, value: RegExp): pattern => ({
   value,
 })
 
-interface grammar {
+type grammar = {
   kind: "Exp.grammar"
   name: string
   choices: Map<string, Array<{ name?: string; value: Exp }>>

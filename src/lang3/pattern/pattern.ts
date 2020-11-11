@@ -1,6 +1,6 @@
 export type Pattern = v | datatype | data
 
-export interface v {
+export type v = {
   kind: "Pattern.v"
   name: string
 }
@@ -10,7 +10,7 @@ export const v = (name: string): v => ({
   name,
 })
 
-export interface datatype {
+export type datatype = {
   kind: "Pattern.datatype"
   name: string
   args: Array<Pattern>
@@ -22,7 +22,7 @@ export const datatype = (name: string, args: Array<Pattern>): datatype => ({
   args,
 })
 
-export interface data {
+export type data = {
   kind: "Pattern.data"
   name: string
   tag: string
