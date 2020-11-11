@@ -35,7 +35,7 @@
 
 - use native `number` as `Nat`.
 
-- 添加 inductive data type
+- 添加 inductive data type -- 根据类型生成 elim。
   - 归纳类型（Inductive type）的推演规则。
     - Only one abstraction away.
 
