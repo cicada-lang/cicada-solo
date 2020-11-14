@@ -54,19 +54,19 @@ function decorate_line_number(text: string): string {
 }
 
 function to_line_span_in_context(span: Span.Span, context: string): Span.Span {
-  let line_index_set = new Set<number>()
+  let line_indexes = new Set<number>()
   let cursor = 0
   let lines = context.split("\n")
   for (let [i, line] of lines.entries()) {
     if (
       ut.interval_overlap_p(span.lo, span.hi, cursor, cursor + line.length + 1)
     ) {
-      line_index_set.add(i)
+      line_indexes.add(i)
     }
     cursor += line.length + 1
   }
-  const lo = Math.min(...line_index_set)
-  const hi = Math.max(...line_index_set)
+  const lo = Math.min(...line_indexes)
+  const hi = Math.max(...line_indexes)
   return { lo, hi }
 }
 

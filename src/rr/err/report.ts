@@ -1,21 +1,21 @@
 export class Report extends Error {
-  constructor(public message_list: Array<string>) {
-    super(merge_message_list(message_list))
+  constructor(public messages: Array<string>) {
+    super(merge_messages(messages))
   }
 
   append(message: string): Report {
-    return new Report([...this.message_list, message])
+    return new Report([...this.messages, message])
   }
 
   prepend(message: string): Report {
-    return new Report([message, ...this.message_list])
+    return new Report([message, ...this.messages])
   }
 }
 
-function merge_message_list(message_list: Array<string>): string {
+function merge_messages(messages: Array<string>): string {
   let s = "\n"
   s += "------\n"
-  for (let message of message_list) {
+  for (let message of messages) {
     s += message
     s += "------\n"
   }
