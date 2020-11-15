@@ -1,7 +1,17 @@
 import * as Exp from "../../exp"
 import * as Value from "../../value"
 
-export type Den = def | type_constructor
+export type Den = mod | def | type_constructor
+
+export type mod = {
+  kind: "Mod.Den.mod"
+  modpath: string
+}
+
+export const mod = (modpath: string): mod => ({
+  kind: "Mod.Den.mod",
+  modpath,
+})
 
 export type def = {
   kind: "Mod.Den.def"

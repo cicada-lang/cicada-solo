@@ -44,9 +44,10 @@
 > module system
 > - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
-- [lang3] `Mod.Den.mod`
 - [lang3] `Top.define` handle `Top.import` by `Mod.Den.mod`
-- [lang3] `Exp.dot` use `Mod.Den.mod` -- `Mod` will not be value, only exp.
+- [lang3] `Value.Mod`
+- [lang3] `Evaluate.do_dot` handle `Value.Mod`
+- [lang3] `cli/commands/eval.ts` construct real project
 
 - [lang3] grammar for `Piece` -- with `modpath` and `Top`
 - [lang3] `Piece.from_file`
