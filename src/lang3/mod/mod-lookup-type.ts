@@ -13,6 +13,17 @@ export function lookup_type(
   const entry = Mod.lookup_entry(mod, name)
   if (entry === undefined) return undefined
   switch (entry.den.kind) {
+    case "Mod.Den.mod": {
+      const den_mod = entry.den.mod
+      return Value.cls(
+        Mod.names(den_mod).map((name) => ({
+          name,
+          t: Mod.lookup_type(den_mod, name)!,
+          value: Mod.lookup_value(den_mod, name)!,
+        })),
+        Value.Telescope.empty
+      )
+    }
     case "Mod.Den.def": {
       if (entry.den.t === undefined)
         return Infer.infer(mod, Ctx.init(), entry.den.exp)
