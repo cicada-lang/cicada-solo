@@ -21,6 +21,7 @@ function define(project: Project.Project, mod: Mod.Mod, tops: Array<Top.Top>): v
     if (top.kind === "Top.import") {
       // TODO
       console.log(top.modpath)
+      // Mod.update(mod, top.name, { den: Mod.Den.mod(top.modpath) })
     }
 
     if (top.kind === "Top.def") {
