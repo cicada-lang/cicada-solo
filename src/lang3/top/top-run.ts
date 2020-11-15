@@ -28,17 +28,19 @@ function define(
 ): void {
   for (const top of tops) {
     if (top.kind === "Top.import") {
-      Mod.update(mod, top.modpath.name, { den: Mod.Den.mod(top.modpath) })
+      Mod.update(mod, top.modpath.name, Mod.Den.mod(top.modpath))
     }
 
     if (top.kind === "Top.def") {
-      Mod.update(mod, top.name, { den: Mod.Den.def(top.exp, top.t) })
+      Mod.update(mod, top.name, Mod.Den.def(top.exp, top.t))
     }
 
     if (top.kind === "Top.type_constructor") {
-      Mod.update(mod, top.type_constructor.name, {
-        den: Mod.Den.type_constructor(top.type_constructor),
-      })
+      Mod.update(
+        mod,
+        top.type_constructor.name,
+        Mod.Den.type_constructor(top.type_constructor)
+      )
     }
   }
 }

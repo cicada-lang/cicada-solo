@@ -35,11 +35,11 @@ export function evaluate(
 
         if (opts.mode === EvaluationMode.mute_recursive_exp_in_mod) {
           // TODO We SHOULD NOT do this for non recursive `Den`.
-          const entry = Mod.lookup_entry(mod, exp.name)!
-          const t = Mod.lookup_type(mod, exp.name)!
-          Mod.update(mod, exp.name, {
-            ...entry,
-            cached_value: Value.not_yet(t, Neutral.v(exp.name)),
+          Mod.update(mod, exp.name, Mod.lookup_den(mod, exp.name)!, {
+            cached_value: Value.not_yet(
+              Mod.lookup_type(mod, exp.name)!,
+              Neutral.v(exp.name)
+            ),
           })
         }
 
