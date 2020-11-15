@@ -19,9 +19,8 @@ export function run(project: Project.Project, mod: Mod.Mod, tops: Array<Top.Top>
 function define(project: Project.Project, mod: Mod.Mod, tops: Array<Top.Top>): void {
   for (const top of tops) {
     if (top.kind === "Top.import") {
-      // TODO
-      console.log(top.modpath)
-      // Mod.update(mod, top.name, { den: Mod.Den.mod(top.modpath) })
+      const result = Project.parse_modpath(top.modpath)
+      Mod.update(mod, result.name, { den: Mod.Den.mod(top.modpath) })
     }
 
     if (top.kind === "Top.def") {
