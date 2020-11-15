@@ -47,7 +47,7 @@ export function do_ap_case_fn(
     )
   }
 
-  for (const ret_cl of case_fn.ret_cls) {
+  for (const ret_cl of case_fn.ret_cl) {
     try {
       return Value.Closure.apply(ret_cl, arg)
     } catch (error) {

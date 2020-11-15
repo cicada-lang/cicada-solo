@@ -50,12 +50,12 @@ export const fn = (ret_cl: Closure.Closure): fn => ({
 
 export type case_fn = {
   kind: "Value.case_fn"
-  ret_cls: Array<Closure.Closure>
+  ret_cl: Array<Closure.Closure>
 }
 
-export const case_fn = (ret_cls: Array<Closure.Closure>): case_fn => ({
+export const case_fn = (ret_cl: Array<Closure.Closure>): case_fn => ({
   kind: "Value.case_fn",
-  ret_cls,
+  ret_cl,
 })
 
 export type cls = {
