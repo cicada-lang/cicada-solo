@@ -45,7 +45,6 @@
 > - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
 - [lang3] `Mod.Den.lookup_type` handle `Value.mod`
-- [lang3] `Mod.Den.lookup_value` handle `Value.mod`
 - [lang3] `Evaluate.do_dot` handle `Value.mod`
 
 - [lang3] grammar for `Piece` -- with `modpath` and `Top`
