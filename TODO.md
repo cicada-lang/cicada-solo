@@ -44,7 +44,6 @@
 > module system
 > - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
-- [lang3] `Value.Mod`
 - [lang3] `Evaluate.do_dot` handle `Value.Mod`
 
 - [lang3] grammar for `Piece` -- with `modpath` and `Top`
