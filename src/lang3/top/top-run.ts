@@ -28,7 +28,9 @@ function define(
 ): void {
   for (const top of tops) {
     if (top.kind === "Top.import") {
-      Mod.update(mod, top.modpath.name, Mod.Den.mod(top.modpath))
+      const imported_mod = Project.lookup_mod(project, top.modpath)
+      if (!imported_mod) throw new Error(`Unknown mod: ${Modpath.repr(top.modpath)}`)
+      Mod.update(mod, top.modpath.name, Mod.Den.mod(imported_mod))
     }
 
     if (top.kind === "Top.def") {

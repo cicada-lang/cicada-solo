@@ -5,7 +5,6 @@ import * as Neutral from "../neutral"
 import * as Exp from "../exp"
 import * as Mod from "../mod"
 import * as Env from "../env"
-import * as Modpath from "../modpath"
 
 export type Value =
   | pi
@@ -218,12 +217,12 @@ export const data = (
 
 export type mod = {
   kind: "Value.mod"
-  modpath: Modpath.Modpath
+  mod: Mod.Mod
 }
 
-export const mod = (modpath: Modpath.Modpath): mod => ({
+export const mod = (mod: Mod.Mod): mod => ({
   kind: "Value.mod",
-  modpath,
+  mod,
 })
 
 export type type = {
