@@ -1,3 +1,5 @@
 export * from "./exp-matcher"
-export * from "./top-matcher"
 export * from "./stmt-matcher"
+export * from "./top-matcher"
+export * from "./sums-matcher"
+export * from "./modpath-matcher"

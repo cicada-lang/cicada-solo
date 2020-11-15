@@ -1,17 +1,13 @@
 import * as Exp from "../../exp"
 import * as Top from "../../top"
+import * as Project from "../../project"
 import * as pt from "../../../partech"
-import { exp_matcher } from "../matchers"
-
-export function tops_matcher(tree: pt.Tree.Tree): Array<Top.Top> {
-  return pt.Tree.matcher<Array<Top.Top>>({
-    "tops:tops": ({ tops }) =>
-      pt.matchers.zero_or_more_matcher(tops).map(top_matcher),
-  })(tree)
-}
+import { exp_matcher, sums_matcher, modpath_matcher } from "../matchers"
 
 export function top_matcher(tree: pt.Tree.Tree): Top.Top {
   return pt.Tree.matcher<Top.Top>({
+    "top:import": ({ modpath }) =>
+      Top.$import(Project.modpath_repr(modpath_matcher(modpath))),
     "top:def": ({ name, exp }) =>
       Top.def(pt.Tree.str(name), undefined, exp_matcher(exp)),
     "top:claim": ({ claim, t, define, exp }, { span }) => {
@@ -37,22 +33,9 @@ export function top_matcher(tree: pt.Tree.Tree): Top.Top {
   })(tree)
 }
 
-export function sums_matcher(
-  tree: pt.Tree.Tree
-): Array<{ tag: string; t: Exp.Exp }> {
-  return pt.Tree.matcher<Array<{ tag: string; t: Exp.Exp }>>({
-    "sums:sums": ({ sums }) =>
-      pt.matchers.zero_or_more_matcher(sums).map(sum_entry_matcher),
-  })(tree)
-}
-
-export function sum_entry_matcher(
-  tree: pt.Tree.Tree
-): { tag: string; t: Exp.Exp } {
-  return pt.Tree.matcher<{ tag: string; t: Exp.Exp }>({
-    "sum_entry:sum_entry": ({ tag, t }) => ({
-      tag: pt.Tree.str(tag),
-      t: exp_matcher(t),
-    }),
+export function tops_matcher(tree: pt.Tree.Tree): Array<Top.Top> {
+  return pt.Tree.matcher<Array<Top.Top>>({
+    "tops:tops": ({ tops }) =>
+      pt.matchers.zero_or_more_matcher(tops).map(top_matcher),
   })(tree)
 }

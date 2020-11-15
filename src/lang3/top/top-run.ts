@@ -10,16 +10,25 @@ import * as Infer from "../infer"
 import * as Evaluate from "../evaluate"
 import * as Readback from "../readback"
 
-export function run(project: Project.Project, mod: Mod.Mod, tops: Array<Top.Top>): string {
+export function run(
+  project: Project.Project,
+  mod: Mod.Mod,
+  tops: Array<Top.Top>
+): string {
   define(project, mod, tops)
   check(mod, tops)
   return show(mod, tops)
 }
 
-function define(project: Project.Project, mod: Mod.Mod, tops: Array<Top.Top>): void {
+function define(
+  project: Project.Project,
+  mod: Mod.Mod,
+  tops: Array<Top.Top>
+): void {
   for (const top of tops) {
     if (top.kind === "Top.import") {
       const result = Project.parse_modpath(top.modpath)
+      console.log({ modpath: top.modpath, result })
       Mod.update(mod, result.name, { den: Mod.Den.mod(top.modpath) })
     }
 
