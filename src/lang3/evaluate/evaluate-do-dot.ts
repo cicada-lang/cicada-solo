@@ -2,6 +2,7 @@ import * as Evaluate from "../evaluate"
 import * as Explain from "../explain"
 import * as Exp from "../exp"
 import * as Mod from "../mod"
+import * as Modpath from "../modpath"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as Trace from "../../trace"
@@ -34,7 +35,10 @@ export function do_dot_obj(obj: Value.obj, name: string): Value.Value {
 export function do_dot_mod(mod: Value.mod, name: string): Value.Value {
   const value = Mod.lookup_value(mod.mod, name)
   if (value === undefined)
-    throw new Trace.Trace(`Can not find the name ${name} in mod: ${ut.inspect(mod)}.`)
+    throw new Trace.Trace(
+      `Can not find the name ${name} in mod: ${Modpath.repr(mod.modpath)}.`
+    )
+
   return value
 }
 

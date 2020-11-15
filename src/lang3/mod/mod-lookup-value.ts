@@ -13,7 +13,7 @@ export function lookup_value(
   if (entry.cached_value !== undefined) return entry.cached_value
   switch (entry.den.kind) {
     case "Mod.Den.mod": {
-      return Value.mod(entry.den.mod)
+      return Value.mod(entry.den.modpath, entry.den.mod)
     }
     case "Mod.Den.def": {
       return Evaluate.evaluate(mod, Env.init(), entry.den.exp)

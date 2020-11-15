@@ -4,6 +4,7 @@ import * as DelayedSums from "./delayed-sums"
 import * as Neutral from "../neutral"
 import * as Exp from "../exp"
 import * as Mod from "../mod"
+import * as Modpath from "../modpath"
 import * as Env from "../env"
 
 export type Value =
@@ -217,11 +218,13 @@ export const data = (
 
 export type mod = {
   kind: "Value.mod"
+  modpath: Modpath.Modpath
   mod: Mod.Mod
 }
 
-export const mod = (mod: Mod.Mod): mod => ({
+export const mod = (modpath: Modpath.Modpath, mod: Mod.Mod): mod => ({
   kind: "Value.mod",
+  modpath,
   mod,
 })
 
