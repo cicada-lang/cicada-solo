@@ -5,6 +5,7 @@ import * as Exp from "../../exp"
 import * as Ctx from "../../ctx"
 import * as Env from "../../env"
 import * as Mod from "../../mod"
+import * as Project from "../../project"
 import * as Trace from "../../../trace"
 import * as pt from "../../../partech"
 import fs from "fs"
@@ -31,7 +32,8 @@ export const handler = async (argv: Argv) => {
   try {
     const tops = Syntax.parse_tops(text)
     const mod = Mod.init()
-    const output = Top.run(mod, tops)
+    const project = Project.create(new Map())
+    const output = Top.run(project, mod, tops)
     console.log(output)
   } catch (error) {
     if (error instanceof Trace.Trace) {
@@ -39,14 +41,15 @@ export const handler = async (argv: Argv) => {
       console.error(Trace.repr(trace, Exp.repr))
       process.exit(1)
     }
+
     if (error instanceof pt.ParsingError) {
       let message = error.message
       message += "\n"
       message += pt.Span.report(error.span, text)
       console.error(argv.nocolor ? strip_ansi(message) : message)
       process.exit(1)
-    } else {
-      throw error
     }
+
+    throw error
   }
 }
