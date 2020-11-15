@@ -1,6 +1,7 @@
 import * as Evaluate from "../evaluate"
 import * as Explain from "../explain"
 import * as Exp from "../exp"
+import * as Mod from "../mod"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as Trace from "../../trace"
@@ -9,6 +10,7 @@ import * as ut from "../../ut"
 export function do_dot(target: Value.Value, name: string): Value.Value {
   if (target.kind === "Value.obj") return do_dot_obj(target, name)
   if (target.kind === "Value.cls") return do_dot_cls(target, name)
+  if (target.kind === "Value.mod") return do_dot_mod(target, name)
   if (target.kind === "Value.type_constructor")
     return do_dot_type_constructor(target, name)
   if (target.kind === "Value.not_yet") return do_dot_not_yet(target, name)
@@ -26,6 +28,13 @@ export function do_dot_obj(obj: Value.obj, name: string): Value.Value {
   if (value === undefined)
     throw new Trace.Trace(`the property name ${name} is undefined.`)
 
+  return value
+}
+
+export function do_dot_mod(mod: Value.mod, name: string): Value.Value {
+  const value = Mod.lookup_value(mod.mod, name)
+  if (value === undefined)
+    throw new Trace.Trace(`Can not find the name ${name} in mod: ${ut.inspect(mod)}.`)
   return value
 }
 
