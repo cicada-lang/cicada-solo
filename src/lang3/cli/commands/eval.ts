@@ -32,6 +32,7 @@ export const handler = async (argv: Argv) => {
   try {
     const tops = Syntax.parse_tops(text)
     const mod = Mod.init()
+    // TODO real project
     const project = Project.create(new Map())
     const output = Top.run(project, mod, tops)
     console.log(output)
