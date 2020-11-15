@@ -47,12 +47,14 @@
 - [lang3] `Top.define` handle `Top.import` by `Mod.Den.mod`
 - [lang3] `Value.Mod`
 - [lang3] `Evaluate.do_dot` handle `Value.Mod`
-- [lang3] `cli/commands/eval.ts` construct real project
 
 - [lang3] grammar for `Piece` -- with `modpath` and `Top`
 - [lang3] `Piece.from_file`
 - [lang3] `Piece.pieces_from_directory`
 - [lang3] `Project.from_pieces`
+
+- [lang3] `cli/commands/eval.ts` construct real project
+
 - [lang3] [maybe] good view of `Project` on frontend (project insights)
 
 > syntax
