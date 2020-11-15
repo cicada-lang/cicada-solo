@@ -1,13 +1,13 @@
 import * as Exp from "../../exp"
 import * as Top from "../../top"
-import * as Project from "../../project"
+import * as Modpath from "../../modpath"
 import * as pt from "../../../partech"
 import { exp_matcher, sums_matcher, modpath_matcher } from "../matchers"
 
 export function top_matcher(tree: pt.Tree.Tree): Top.Top {
   return pt.Tree.matcher<Top.Top>({
     "top:import": ({ modpath }) =>
-      Top.$import(Project.modpath_repr(modpath_matcher(modpath))),
+      Top.$import(Modpath.repr(modpath_matcher(modpath))),
     "top:def": ({ name, exp }) =>
       Top.def(pt.Tree.str(name), undefined, exp_matcher(exp)),
     "top:claim": ({ claim, t, define, exp }, { span }) => {

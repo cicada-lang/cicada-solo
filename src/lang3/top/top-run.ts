@@ -5,6 +5,7 @@ import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Project from "../project"
+import * as Modpath from "../modpath"
 import * as Check from "../check"
 import * as Infer from "../infer"
 import * as Evaluate from "../evaluate"
@@ -27,7 +28,7 @@ function define(
 ): void {
   for (const top of tops) {
     if (top.kind === "Top.import") {
-      const result = Project.parse_modpath(top.modpath)
+      const result = Modpath.parse(top.modpath)
       console.log({ modpath: top.modpath, result })
       Mod.update(mod, result.name, { den: Mod.Den.mod(top.modpath) })
     }

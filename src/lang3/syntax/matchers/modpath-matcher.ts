@@ -1,15 +1,8 @@
+import * as Modpath from "../../modpath"
 import * as pt from "../../../partech"
 
-export function modpath_matcher(
-  tree: pt.Tree.Tree
-): {
-  prefix: Array<string>
-  name: string
-} {
-  return pt.Tree.matcher<{
-    prefix: Array<string>
-    name: string
-  }>({
+export function modpath_matcher(tree: pt.Tree.Tree): Modpath.Modpath {
+  return pt.Tree.matcher<Modpath.Modpath>({
     "modpath:modpath": ({ prefix, name }) => ({
       prefix: pt.matchers
         .zero_or_more_matcher(prefix)
