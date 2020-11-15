@@ -7,7 +7,7 @@ import { exp_matcher, sums_matcher, modpath_matcher } from "../matchers"
 export function top_matcher(tree: pt.Tree.Tree): Top.Top {
   return pt.Tree.matcher<Top.Top>({
     "top:import": ({ modpath }) =>
-      Top.$import(Modpath.repr(modpath_matcher(modpath))),
+      Top.$import(modpath_matcher(modpath)),
     "top:def": ({ name, exp }) =>
       Top.def(pt.Tree.str(name), undefined, exp_matcher(exp)),
     "top:claim": ({ claim, t, define, exp }, { span }) => {

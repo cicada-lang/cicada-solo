@@ -28,9 +28,7 @@ function define(
 ): void {
   for (const top of tops) {
     if (top.kind === "Top.import") {
-      const result = Modpath.parse(top.modpath)
-      console.log({ modpath: top.modpath, result })
-      Mod.update(mod, result.name, { den: Mod.Den.mod(top.modpath) })
+      Mod.update(mod, top.modpath.name, { den: Mod.Den.mod(top.modpath) })
     }
 
     if (top.kind === "Top.def") {

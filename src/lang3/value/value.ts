@@ -23,6 +23,7 @@ export type Value =
   | data_constructor
   | data
   | type
+  // | mod
   | not_yet
 
 export type pi = {
@@ -213,6 +214,14 @@ export const data = (
   args,
   t,
 })
+
+// export type mod = {
+//   kind: "Value.mod"
+// }
+
+// export const mod: mod = {
+//   kind: "Value.mod",
+// }
 
 export type type = {
   kind: "Value.type"

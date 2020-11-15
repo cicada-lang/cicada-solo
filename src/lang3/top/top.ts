@@ -1,13 +1,14 @@
 import * as Exp from "../exp"
+import * as Modpath from "../modpath"
 
 export type Top = $import | def | type_constructor | show
 
 type $import = {
   kind: "Top.import"
-  modpath: string
+  modpath: Modpath.Modpath
 }
 
-export const $import = (modpath: string): $import => ({
+export const $import = (modpath: Modpath.Modpath): $import => ({
   kind: "Top.import",
   modpath,
 })
