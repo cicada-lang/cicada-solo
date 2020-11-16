@@ -1,0 +1,16 @@
+@module cicada.datatype
+
+@datatype List: (Type) -> Type {
+  null: (T: Type) -> List(T)
+  cons: (T: Type) -> (head: T) -> (tail: List(T)) -> List(T)
+}
+
+@show List
+@show List.null
+@show List.cons
+@show List.null(String)
+@show List.cons(String)("abc")(List.null(String))
+
+// TODO
+// List_rec :
+// List_rec =
