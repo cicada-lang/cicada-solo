@@ -1,3 +1,6 @@
 export * from "./project"
+export * from "./project-init"
 export * from "./project-create"
+export * from "./project-call-with-mod"
 export * from "./project-lookup-mod"
+export * from "./project-from-pieces"
