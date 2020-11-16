@@ -44,7 +44,6 @@
 > module system
 > - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
-- [lang3] `Project.piece_by_piece` -- handle error in this function
 - [lang3] `cli/commands/eval.ts` -- build project from pieces
 - [lang3] [maybe] good view of `Project` on frontend (project insights)
 
