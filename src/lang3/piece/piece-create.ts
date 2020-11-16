@@ -5,8 +5,7 @@ import * as Modpath from "../modpath"
 export function create(
   modpath: Modpath.Modpath,
   tops: Array<Top.Top>,
-  code: string,
   source: Piece.Source.Source
 ): Piece.Piece {
-  return { modpath, tops, code, source }
+  return { modpath, tops, source }
 }

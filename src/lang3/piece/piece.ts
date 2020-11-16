@@ -5,6 +5,5 @@ import * as Top from "../top"
 export type Piece = {
   modpath: Modpath.Modpath
   tops: Array<Top.Top>
-  code: string
   source: Source.Source
 }
