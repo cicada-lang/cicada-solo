@@ -10,6 +10,7 @@ import * as Trace from "../../../trace"
 import * as pt from "../../../partech"
 import fs from "fs"
 import strip_ansi from "strip-ansi"
+import findup from "find-up"
 
 export const command = "eval <input>"
 
