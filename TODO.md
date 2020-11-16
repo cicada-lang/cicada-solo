@@ -44,9 +44,7 @@
 > module system
 > - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
-- [lang3] `Piece.pieces_from_directory`
 - [lang3] `Project.from_pieces`
-
 - [lang3] `cli/commands/eval.ts` construct real project
 
 - [lang3] [maybe] good view of `Project` on frontend (project insights)

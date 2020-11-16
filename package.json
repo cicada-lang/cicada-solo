@@ -44,9 +44,10 @@
     "nanoid": "^3.1.16",
     "plaintext": "^0.2.5",
     "portfinder": "^1.0.28",
+    "readdirp": "^3.5.0",
     "regexp-match-indices": "^1.0.2",
     "strip-ansi": "^6.0.0",
-    "yargs": "^16.1.0"
+    "yargs": "^16.1.1"
   },
   "license": "GPL-3.0-or-later"
 }

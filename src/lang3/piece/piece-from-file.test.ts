@@ -3,7 +3,10 @@ import * as ut from "../../ut"
 import path from "path"
 
 async function test(): Promise<void> {
-  const file = path.resolve(__dirname, "../../../examples/lang3/list.cic")
+  const file = path.resolve(
+    __dirname,
+    "../../../examples/lang3/datatype/list.cic"
+  )
   const piece = await Piece.from_file(file)
   ut.assert_equal(piece.modpath, {
     prefix: ["cicada"],
