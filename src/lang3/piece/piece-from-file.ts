@@ -7,5 +7,6 @@ import fs from "fs"
 export async function from_file(file: string): Promise<Piece.Piece> {
   const code = await fs.promises.readFile(file, "utf8")
   const source = Piece.Source.file(file, code)
-  throw new Error("TODO")
+  const parse = Syntax.parse_piece_with_souce(source)
+  return parse(code)
 }

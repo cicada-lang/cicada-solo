@@ -44,7 +44,7 @@
 > module system
 > - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
-- [lang3] `Piece.from_file`
+- [lang3] `piece-from-file.test.ts`
 - [lang3] `Piece.pieces_from_directory`
 - [lang3] `Project.from_pieces`
 
