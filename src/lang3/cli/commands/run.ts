@@ -13,7 +13,7 @@ import fs from "fs"
 import path from "path"
 import strip_ansi from "strip-ansi"
 
-export const command = "eval <input>"
+export const command = "run <input>"
 export const aliases = ["$0"]
 export const description = "Eval a file"
 export const builder = {
@@ -26,30 +26,23 @@ type Argv = {
 }
 
 export const handler = async (argv: Argv) => {
-  const text = await fs.promises.readFile(argv.input, "utf8")
+  const file_stat = await fs.promises.stat(argv.input)
+  const dir = file_stat.isDirectory() ? argv.input : path.dirname(argv.input)
+  const pieces = await Piece.pieces_from_directory(dir)
+  const project = Project.init()
+  for (const piece of pieces) {
+    const output = Project.piece_by_piece(project, piece)
 
-  try {
-    const tops = Syntax.parse_tops(text)
-    const mod = Mod.init()
-    // TODO real project
-    const project = Project.init()
-    const output = Top.run(project, mod, tops)
-    console.log(output)
-  } catch (error) {
-    if (error instanceof Trace.Trace) {
-      const trace = error
-      console.error(Trace.repr(trace, Exp.repr))
-      process.exit(1)
+    if (file_stat.isDirectory()) {
+      console.log(output)
     }
 
-    if (error instanceof pt.ParsingError) {
-      let message = error.message
-      message += "\n"
-      message += pt.Span.report(error.span, text)
-      console.error(argv.nocolor ? strip_ansi(message) : message)
-      process.exit(1)
+    if (
+      file_stat.isFile() &&
+      piece.source.kind === "Piece.Source.file" &&
+      path.resolve(argv.input) === path.resolve(piece.source.file)
+    ) {
+      console.log(output)
     }
-
-    throw error
   }
 }

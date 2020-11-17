@@ -1,6 +1,1 @@
-@module cicada.datatype
-
-@datatype Nat: Type {
-  zero: Nat
-  add1: (prev: Nat) -> Nat
-}
+@show "hi"
