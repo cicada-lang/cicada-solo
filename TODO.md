@@ -52,6 +52,11 @@
 - [lang3] `cli/commands/run.ts` -- extra arg for `project_root` -- `path.dirname` as default
 - [lang3] [maybe] good view of `Project` on frontend (project insights)
 
+> datatype with namespace
+
+- [lang3] add namespace to datatype and friends
+- [lang3] binding only in namespace
+
 > syntax
 > - 让语言更严易于使用，以鼓励我们写更多的例子。
 
