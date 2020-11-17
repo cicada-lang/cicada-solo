@@ -1,0 +1,16 @@
+@import cicada.datatype
+
+@show "hi ^-^/"
+@show datatype
+@show datatype.Nat
+@show datatype.List
+
+@show datatype.List
+@show datatype.List.null
+@show datatype.List.cons
+@show datatype.List.null(String)
+@show datatype.List.cons(String)("abc")(datatype.List.null(String))
+
+@show datatype.Nat
+@show datatype.Nat.zero
+@show datatype.Nat.add1(datatype.Nat.zero)
