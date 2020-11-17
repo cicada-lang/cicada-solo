@@ -44,7 +44,6 @@
 > module system
 > - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
-- [lang3] export helper functions of `Top.run_tops`
 - [lang3] `Project.from_pieces` should not use `Top.run_tops`
   - keep `Project.piece_by_piece` for repl
 - [lang3] test module system

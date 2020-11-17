@@ -1,6 +1,5 @@
 import * as Piece from "../piece"
 import readdirp from "readdirp"
-import fs from "fs"
 
 export async function pieces_from_directory(
   dir: string

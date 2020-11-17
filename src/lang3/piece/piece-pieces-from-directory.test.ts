@@ -1,5 +1,4 @@
 import * as Piece from "../piece"
-import * as ut from "../../ut"
 import path from "path"
 
 async function test(): Promise<void> {

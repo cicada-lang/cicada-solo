@@ -1,6 +1,5 @@
 import * as Project from "../project"
 import * as Piece from "../piece"
-import * as Mod from "../mod"
 import * as Top from "../top"
 import * as Exp from "../exp"
 import * as Trace from "../../trace"
