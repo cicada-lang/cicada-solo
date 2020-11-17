@@ -8,17 +8,16 @@ export function piece_by_piece(
   project: Project.Project,
   piece: Piece.Piece
 ): string {
-  return Project.call_with_mod(project, piece.modpath, (mod) => {
-    try {
-      return Top.run_tops(project, mod, piece.tops)
-    } catch (error) {
-      if (error instanceof Trace.Trace) {
-        const trace = error
-        console.error(Trace.repr(trace, Exp.repr))
-        process.exit(1)
-      }
-
-      throw error
+  try {
+    return Project.call_with_mod(project, piece.modpath, (mod) =>
+      Top.run_tops(project, mod, piece.tops)
+    )
+  } catch (error) {
+    if (error instanceof Trace.Trace) {
+      console.error(Trace.repr(error, Exp.repr))
+      process.exit(1)
     }
-  })
+
+    throw error
+  }
 }

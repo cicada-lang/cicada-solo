@@ -11,6 +11,10 @@
 @show List.null(String)
 @show List.cons(String)("abc")(List.null(String))
 
+@show Nat
+@show Nat.zero
+@show Nat.add1(Nat.zero)
+
 // TODO
 // List_rec :
 // List_rec =

@@ -5,6 +5,7 @@ import * as Exp from "../../exp"
 import * as Ctx from "../../ctx"
 import * as Env from "../../env"
 import * as Mod from "../../mod"
+import * as Modpath from "../../modpath"
 import * as Project from "../../project"
 import * as Piece from "../../piece"
 import * as Trace from "../../../trace"
@@ -14,7 +15,7 @@ import path from "path"
 import strip_ansi from "strip-ansi"
 
 export const command = "run <input>"
-export const description = "Eval a file"
+export const description = "Run a file"
 export const builder = {
   nocolor: { type: "boolean", default: false },
 }
@@ -29,19 +30,21 @@ export const handler = async (argv: Argv) => {
   const dir = file_stat.isDirectory() ? argv.input : path.dirname(argv.input)
   const pieces = await Piece.pieces_from_directory(dir)
   const project = Project.init()
-  for (const piece of pieces) {
-    const output = Project.piece_by_piece(project, piece)
-
-    if (file_stat.isDirectory()) {
-      console.log(output)
+  const results = Project.from_pieces(project, pieces)
+  for (const result of results) {
+    if (result.modpath) {
+      console.log(`// @module ${Modpath.repr(result.modpath)}`)
     }
 
-    if (
-      file_stat.isFile() &&
-      piece.source.kind === "Piece.Source.file" &&
-      path.resolve(argv.input) === path.resolve(piece.source.file)
-    ) {
-      console.log(output)
+    if (result.source.kind === "Piece.Source.file") {
+      console.log(`// @file ${JSON.stringify(result.source.file)}`)
     }
+    if (result.source.kind === "Piece.Source.repl") {
+      console.log(`// @repl`)
+    }
+
+    console.log()
+
+    console.log(result.output)
   }
 }

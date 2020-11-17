@@ -35,8 +35,7 @@ export const handler = async (argv: Argv) => {
     if (output) console.log(output)
   } catch (error) {
     if (error instanceof Trace.Trace) {
-      const trace = error
-      console.error(Trace.repr(trace, Exp.repr))
+      console.error(Trace.repr(error, Exp.repr))
       process.exit(1)
     }
     if (error instanceof pt.ParsingError) {
