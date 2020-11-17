@@ -42,7 +42,6 @@
 # lang3
 
 > module system
-> - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
 - [lang3] `Top.define` on `Top.$import` -- create init mod if not found
 - [lang3] repl -- by `Project.piece_by_piece`
@@ -55,7 +54,6 @@
 - [lang3] binding only in namespace
 
 > syntax
-> - 让语言更严易于使用，以鼓励我们写更多的例子。
 
 - [lang3] fix syntax about auto currying -- `f(x, y)` as sugar of `f(x)(y)`
 

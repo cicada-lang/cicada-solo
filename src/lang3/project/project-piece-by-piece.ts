@@ -1,6 +1,7 @@
 import * as Project from "../project"
 import * as Piece from "../piece"
 import * as Top from "../top"
+import * as Mod from "../mod"
 import * as Exp from "../exp"
 import * as Trace from "../../trace"
 
@@ -9,9 +10,10 @@ export function piece_by_piece(
   piece: Piece.Piece
 ): string {
   try {
-    return Project.call_with_mod(project, piece.modpath, (mod) =>
-      Top.run_tops(project, mod, piece.tops)
-    )
+    const mod = piece.modpath
+      ? Project.lookup_mod_or_init(project, piece.modpath)
+      : Mod.init()
+    return Top.run_tops(project, mod, piece.tops)
   } catch (error) {
     if (error instanceof Trace.Trace) {
       console.error(Trace.repr(error, Exp.repr))

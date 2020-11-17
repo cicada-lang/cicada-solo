@@ -15,25 +15,8 @@ export function from_pieces(
 ): Array<Result> {
   try {
     const results = pieces.map((piece) => ({ ...piece, output: "" }))
-
-    function through_tops(
-      f: (mod: Mod.Mod, top: Top.Top, piece: Result) => void
-    ): void {
-      for (const piece of results) {
-        for (const top of piece.tops) {
-          Project.call_with_mod(project, piece.modpath, (mod) =>
-            f(mod, top, piece)
-          )
-        }
-      }
-    }
-
-    through_tops((mod, top) => Top.define(project, mod, top))
-    through_tops((mod, top) => Top.check(mod, top))
-    through_tops((mod, top, piece) => {
-      piece.output += Top.output(mod, top)
-    })
-
+    loop_through_modpath_piece(project, results)
+    loop_through_unnamed_piece(project, results)
     return results
   } catch (error) {
     if (error instanceof Trace.Trace) {
@@ -42,5 +25,57 @@ export function from_pieces(
     }
 
     throw error
+  }
+}
+
+function loop_through_modpath_piece(
+  project: Project.Project,
+  results: Array<Result>
+): void {
+  for (const piece of results) {
+    if (piece.modpath) {
+      const mod = Project.lookup_mod_or_init(project, piece.modpath)
+      for (const top of piece.tops) {
+        Top.define(project, mod, top)
+      }
+    }
+  }
+
+  for (const piece of results) {
+    if (piece.modpath) {
+      const mod = Project.lookup_mod_or_init(project, piece.modpath)
+      for (const top of piece.tops) {
+        Top.check(mod, top)
+      }
+    }
+  }
+
+  for (const piece of results) {
+    if (piece.modpath) {
+      const mod = Project.lookup_mod_or_init(project, piece.modpath)
+      for (const top of piece.tops) {
+        piece.output += Top.output(mod, top)
+      }
+    }
+  }
+}
+
+function loop_through_unnamed_piece(
+  project: Project.Project,
+  results: Array<Result>
+): void {
+  for (const piece of results) {
+    if (!piece.modpath) {
+      const mod = Mod.init()
+      for (const top of piece.tops) {
+        Top.define(project, mod, top)
+      }
+      for (const top of piece.tops) {
+        Top.check(mod, top)
+      }
+      for (const top of piece.tops) {
+        piece.output += Top.output(mod, top)
+      }
+    }
   }
 }
