@@ -33,7 +33,7 @@ export const handler = async (argv: Argv) => {
     const mod = Mod.init()
     // TODO real project
     const project = Project.init()
-    const output = Top.run(project, mod, tops)
+    const output = Top.run_tops(project, mod, tops)
     console.log(output)
   } catch (error) {
     if (error instanceof Trace.Trace) {

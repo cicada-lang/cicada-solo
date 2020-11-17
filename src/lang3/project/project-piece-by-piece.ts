@@ -11,7 +11,7 @@ export function piece_by_piece(
 ): string {
   return Project.call_with_mod(project, piece.modpath, (mod) => {
     try {
-      return Top.run(project, mod, piece.tops)
+      return Top.run_tops(project, mod, piece.tops)
     } catch (error) {
       if (error instanceof Trace.Trace) {
         const trace = error

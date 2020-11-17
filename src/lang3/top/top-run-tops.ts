@@ -11,7 +11,7 @@ import * as Infer from "../infer"
 import * as Evaluate from "../evaluate"
 import * as Readback from "../readback"
 
-export function run(
+export function run_tops(
   project: Project.Project,
   mod: Mod.Mod,
   tops: Array<Top.Top>
