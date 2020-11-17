@@ -34,27 +34,41 @@ export const handler = async (argv: Argv) => {
   const project = Project.init()
   const results = Project.from_pieces(project, pieces)
 
-  for (const result of results) {
-    if (argv.verbose) {
-      if (result.modpath) {
-        console.log(`// @module ${Modpath.repr(result.modpath)}`)
-      }
-      if (result.source.kind === "Piece.Source.file") {
-        console.log(`// @file ${JSON.stringify(result.source.file)}`)
-      }
-      if (result.source.kind === "Piece.Source.repl") {
-        console.log(`// @repl`)
-      }
-      console.log()
-      console.log(result.output)
-    }
-  }
-
   if (argv.verbose) {
-    console.log(`// Output of the specified file: ${JSON.stringify(file)}`)
+    print_verbose_output(results, file)
+  } else {
+    print_output(results, file)
+  }
+}
+
+function print_verbose_output(
+  results: Array<Piece.Piece & { output: string }>,
+  file: string
+): void {
+  for (const result of results) {
+    if (result.modpath) {
+      console.log(`// @module ${Modpath.repr(result.modpath)}`)
+    }
+    if (result.source.kind === "Piece.Source.file") {
+      console.log(`// @file ${JSON.stringify(result.source.file)}`)
+    }
+    if (result.source.kind === "Piece.Source.repl") {
+      console.log(`// @repl`)
+    }
     console.log()
+    console.log(result.output)
   }
 
+  console.log(`// Output of the specified file: ${JSON.stringify(file)}`)
+  console.log()
+
+  print_output(results, file)
+}
+
+function print_output(
+  results: Array<Piece.Piece & { output: string }>,
+  file: string
+): void {
   for (const result of results) {
     if (
       result.source.kind === "Piece.Source.file" &&
