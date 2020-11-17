@@ -44,12 +44,10 @@
 > module system
 > - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
-- [lang3] `Project.Config`
-- [lang3] `Project` with `Project.Config`
-- [lang3] `Project.Config.from_file`
-- [lang3] `Project.init` from `Project.Config`
-- [lang3] `cli/commands/eval.ts` -- findup project.json for `dirname`
-  - `await findup("project.json", { cwd: "./" })`
+- [lang3] `Piece` grammar -- optional `modpath`
+- [lang3] `cli/commands/eval.ts`
+  - extra arg for `project_root`
+  - `path.dirname` as default
 - [lang3] [maybe] good view of `Project` on frontend (project insights)
 
 > syntax
