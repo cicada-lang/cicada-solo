@@ -3,7 +3,7 @@ import * as Top from "../top"
 import * as Modpath from "../modpath"
 
 export function create(
-  modpath: Modpath.Modpath,
+  modpath: undefined | Modpath.Modpath,
   tops: Array<Top.Top>,
   source: Piece.Source.Source
 ): Piece.Piece {

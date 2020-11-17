@@ -7,7 +7,9 @@ export function piece_matcher_with_source(
   source: Piece.Source.Source
 ): Piece.Piece {
   return pt.Tree.matcher<Piece.Piece>({
-    "piece:piece": ({ modpath, tops }) =>
+    "piece:mod": ({ modpath, tops }) =>
       Piece.create(modpath_matcher(modpath), tops_matcher(tops), source),
+    "piece:repl": ({ tops }) =>
+      Piece.create(undefined, tops_matcher(tops), source),
   })(tree)
 }

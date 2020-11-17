@@ -1,9 +1,12 @@
 export const piece = {
   $grammar: {
-    "piece:piece": [
+    "piece:mod": [
       '"@"',
       '"module"',
       { modpath: "modpath" },
+      { tops: "tops" },
+    ],
+    "piece:repl": [
       { tops: "tops" },
     ],
   },

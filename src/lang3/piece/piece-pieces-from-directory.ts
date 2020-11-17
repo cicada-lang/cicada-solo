@@ -7,7 +7,9 @@ export async function pieces_from_directory(
 ): Promise<Array<Piece.Piece>> {
   const pieces = []
   for await (const entry of readdirp(dir)) {
-    pieces.push(await Piece.from_file(entry.fullPath))
+    if (entry.path.endsWith(".cic")) {
+      pieces.push(await Piece.from_file(entry.fullPath))
+    }
   }
   return pieces
 }

@@ -44,7 +44,6 @@
 > module system
 > - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
-- [lang3] `Piece` grammar -- optional `modpath`
 - [lang3] `cli/commands/eval.ts`
   - extra arg for `project_root`
   - `path.dirname` as default
