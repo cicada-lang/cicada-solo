@@ -4,3 +4,13 @@
   zero: Nat
   add1: (prev: Nat) -> Nat
 }
+
+@show Nat
+@show Nat.zero
+@show Nat.add1(Nat.zero)
+
+@show List
+@show List.null
+@show List.cons
+@show List.null(String)
+@show List.cons(String)("abc")(List.null(String))
