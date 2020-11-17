@@ -14,7 +14,6 @@ import path from "path"
 import strip_ansi from "strip-ansi"
 
 export const command = "run <input>"
-export const aliases = ["$0"]
 export const description = "Eval a file"
 export const builder = {
   nocolor: { type: "boolean", default: false },

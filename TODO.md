@@ -44,6 +44,13 @@
 > module system
 > - 让语言更严肃更正式，以鼓励我们写更多的例子。
 
+- [lang3] refactor helper functions of `Top.run`
+- [lang3] export helper functions of `Top.run`
+- [lang3] `Project.from_pieces` should not use `Top.run`
+  - keep `Project.piece_by_piece` for repl
+- [lang3] refactor `Top.run` for `project-piece-by-piece`
+- [lang3] test module system
+- [lang3] repl -- by `Project.piece_by_piece`
 - [lang3] `cli/commands/run.ts` -- extra arg for `project_root` -- `path.dirname` as default
 - [lang3] [maybe] good view of `Project` on frontend (project insights)
 
