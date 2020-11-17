@@ -43,9 +43,6 @@
 
 > module system
 
-- [lang3] `cli/commands/run.ts` -- can only run file -- filter output by absolute path.
-  - option for `--module-root`, with `path.dirname` as default
-  - with `--verbose` to print all loaded modules
 - [lang3] `cli/commands/run.ts` optionally take `project.json` config file
 - [lang3] `./dev` test `lang3 run`
 
