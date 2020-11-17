@@ -22,14 +22,17 @@ type Argv = {
 
 export const handler = async (argv: Argv) => {
   const file = argv.input
-
-  const stat = await fs.promises.stat(file)
-  if (!stat.isFile()) {
-    console.error(`The input is not file: ${JSON.stringify(file)}`)
+  if (!(await fs.promises.stat(file)).isFile()) {
+    console.error(`The input must be a file: ${JSON.stringify(file)}`)
     process.exit(1)
   }
 
   const dir = argv["module-root"] || path.dirname(file)
+  if (!(await fs.promises.stat(dir)).isDirectory()) {
+    console.error(`The module root must be a directory: ${JSON.stringify(dir)}`)
+    process.exit(1)
+  }
+
   const pieces = await Piece.pieces_from_directory(dir)
   const project = Project.init()
   const results = Project.from_pieces(project, pieces)
