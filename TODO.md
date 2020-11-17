@@ -43,8 +43,16 @@
 
 > module system
 
-- [lang3] repl -- by `Project.piece_by_piece`
-- [lang3] `cli/commands/run.ts` -- extra arg for `project_root` -- `path.dirname` as default
+- [lang3] `cli/commands/run.ts` -- can only run file -- filter output by absolute path.
+  - option for `--module-root`, with `path.dirname` as default
+  - with `--verbose` to print all loaded modules
+- [lang3] `cli/commands/run.ts` optionally take `project.json` config file
+- [lang3] `./dev` test `lang3 run`
+
+- [lang3] `cli/commands/repl.ts` -- by `Project.piece_by_piece`
+- [lang3] `lang3 repl` alias to `lang3`
+- [lang3] `./dev` test `lang3 repl`
+
 - [lang3] [maybe] good view of `Project` on frontend (project insights)
 
 > datatype with namespace
