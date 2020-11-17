@@ -44,7 +44,6 @@
 > module system
 
 - [lang3] `cli/commands/run.ts` optionally take `project.json` config file
-- [lang3] `./dev` test `lang3 run`
 
 - [lang3] `cli/commands/repl.ts` -- by `Project.piece_by_piece`
 - [lang3] `lang3 repl` alias to `lang3`

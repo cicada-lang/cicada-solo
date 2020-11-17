@@ -1,0 +1,16 @@
+"hi ^-^/"
+{
+  List = List
+  Nat = Nat
+}
+Nat
+List
+List
+List.null
+List.cons
+List.null(String)
+List.cons(String)("abc")(List.null(String))
+Nat
+Nat.zero
+Nat.add1(Nat.zero)
+

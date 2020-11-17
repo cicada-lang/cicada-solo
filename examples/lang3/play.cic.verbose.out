@@ -1,0 +1,60 @@
+// @file "/home/xyh/cicada/examples/lang3/play.cic"
+
+"hi ^-^/"
+{
+  List = List
+  Nat = Nat
+}
+Nat
+List
+List
+List.null
+List.cons
+List.null(String)
+List.cons(String)("abc")(List.null(String))
+Nat
+Nat.zero
+Nat.add1(Nat.zero)
+
+// @module cicada.datatype
+// @file "/home/xyh/cicada/examples/lang3/datatype/list.cic"
+
+List
+List.null
+List.cons
+List.null(String)
+List.cons(String)("abc")(List.null(String))
+Nat
+Nat.zero
+Nat.add1(Nat.zero)
+
+// @module cicada.datatype
+// @file "/home/xyh/cicada/examples/lang3/datatype/nat.cic"
+
+Nat
+Nat.zero
+Nat.add1(Nat.zero)
+List
+List.null
+List.cons
+List.null(String)
+List.cons(String)("abc")(List.null(String))
+
+// Output of the specified file: "examples/lang3/play.cic"
+
+"hi ^-^/"
+{
+  List = List
+  Nat = Nat
+}
+Nat
+List
+List
+List.null
+List.cons
+List.null(String)
+List.cons(String)("abc")(List.null(String))
+Nat
+Nat.zero
+Nat.add1(Nat.zero)
+

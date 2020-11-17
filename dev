@@ -83,6 +83,18 @@ commands.test_lang3 = async () => {
     { file: "examples/lang3-err/**.cic" },
     snapshot.err(({ file }) => file + ".err")
   )
+
+  await test(
+    "./bin/lang3.js run $file",
+    { file: "examples/lang3/play.cic" },
+    snapshot.out(({ file }) => file + ".out")
+  )
+
+  await test(
+    "./bin/lang3.js run $file --verbose",
+    { file: "examples/lang3/play.cic" },
+    snapshot.out(({ file }) => file + ".verbose.out")
+  )
 }
 
 commands.test_partech = async () => {
