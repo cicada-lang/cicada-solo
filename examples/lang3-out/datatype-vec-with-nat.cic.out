@@ -1,8 +1,0 @@
-Vec(String)
-Vec(String)(Nat.zero)
-Vec.null(String)
-Vec.cons(String)
-Vec.cons(String)(Nat.zero)
-Vec.cons(String)(Nat.zero)("abc")(Vec.null(String))
-Vec.cons(String)(Nat.add1(Nat.zero))("abc")(Vec.cons(String)(Nat.zero)("abc")(Vec.null(String)))
-

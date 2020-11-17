@@ -1,4 +1,0 @@
-n = zero
-one = add1(n)
-
-@show one

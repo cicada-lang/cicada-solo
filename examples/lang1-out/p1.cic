@@ -1,4 +1,0 @@
-_ : Nat
-_ = add1(add1(add1(zero)))
-
-@show _

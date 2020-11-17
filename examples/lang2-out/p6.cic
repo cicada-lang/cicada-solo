@@ -1,4 +1,0 @@
-x = 100
-
-@show x
-@show x

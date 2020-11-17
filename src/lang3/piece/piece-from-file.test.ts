@@ -5,7 +5,7 @@ import path from "path"
 async function test(): Promise<void> {
   const file = path.resolve(
     __dirname,
-    "../../../examples/lang3/datatype/list.cic"
+    "../../../examples/lang3/example-project/datatype/list.cic"
   )
   const piece = await Piece.from_file(file)
   ut.assert_equal(piece.modpath, {

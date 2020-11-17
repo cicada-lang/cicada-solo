@@ -1,4 +1,0 @@
-_ : Nat
-_ = zero
-
-@show _

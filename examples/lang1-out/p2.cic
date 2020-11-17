@@ -1,3 +1,0 @@
-z = { Nat -- zero }
-
-@show z

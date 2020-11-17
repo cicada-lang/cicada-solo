@@ -1,8 +1,0 @@
-Nat.zero
-"abc"
-Pair.pair(String)(Nat)("abc")(Nat.zero)
-Pair.pair(Nat)(String)(Nat.zero)("abc")
-Pair.pair(String)(Nat)("abc")(Nat.zero)
-Pair.pair(Nat)(Nat)(Nat.zero)(Nat.zero)
-Pair.pair(String)(String)("abc")("abc")
-

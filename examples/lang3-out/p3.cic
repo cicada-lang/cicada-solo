@@ -1,8 +1,0 @@
-x : Object
-x = {}
-
-@show x
-
-y = {}
-
-@show y

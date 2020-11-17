@@ -3,19 +3,16 @@ import * as Project from "../../project"
 import * as Piece from "../../piece"
 import fs from "fs"
 import path from "path"
-import strip_ansi from "strip-ansi"
 
 export const command = "run <input>"
 export const description = "Run a file"
 export const builder = {
-  nocolor: { type: "boolean", default: false },
   verbose: { type: "boolean", default: false },
   "module-root": { type: "string" },
 }
 
 type Argv = {
   input: string
-  nocolor: boolean
   verbose: boolean
   "module-root": string
 }
@@ -34,6 +31,17 @@ export const handler = async (argv: Argv) => {
   }
 
   const pieces = await Piece.pieces_from_directory(dir)
+
+  if (
+    !pieces.find(
+      (piece) =>
+        piece.source.kind === "Piece.Source.file" &&
+        path.resolve(piece.source.file) === path.resolve(file)
+    )
+  ) {
+    pieces.push(await Piece.from_file(file))
+  }
+
   const project = Project.init()
   const results = Project.from_pieces(project, pieces)
 

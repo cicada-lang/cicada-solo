@@ -1,5 +1,0 @@
-t = { Type -- Nat }
-n = { t -- zero }
-one = { Nat -- add1(n) }
-
-@show one

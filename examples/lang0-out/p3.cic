@@ -1,3 +1,0 @@
-id = (x) => x
-f = (x) => id(id)
-@show f

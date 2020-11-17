@@ -40,25 +40,7 @@ List.cons
 List.null(String)
 List.cons(String)("abc")(List.null(String))
 
-// @file "examples/lang3/play.cic"
-
-"hi ^-^/"
-{
-  List = List
-  Nat = Nat
-}
-Nat
-List
-List
-List.null
-List.cons
-List.null(String)
-List.cons(String)("abc")(List.null(String))
-Nat
-Nat.zero
-Nat.add1(Nat.zero)
-
-// Output of the specified file: "examples/lang3/play.cic"
+// Output of the specified file: "examples/lang3/example-project/play.cic"
 
 "hi ^-^/"
 {
