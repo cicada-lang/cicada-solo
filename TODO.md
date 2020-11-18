@@ -57,7 +57,7 @@
 
 - [lang3] fix syntax about auto currying -- `f(x, y)` as sugar of `f(x)(y)`
 
-> nested match.
+> nested match
 
 - [lang3] more simple rule about pattern variable
 
@@ -68,11 +68,11 @@
 - [lang3] there might be `@match`
   - which will be direct application of `Exp.case_fn`
 
-> Improve the readback of recursive expression.
+> improve the readback of recursive expression
 
 - [lang3] We SHOULD NOT `mute_recursive_exp_in_mod` for non recursive `Den`
 
-> 更完整的 dependent + structural type 语言。
+> structural subtyping
 
 - [lang3] `Value.subtype` -- structural cls
 - [lang3] `Value.subtype` -- function type
