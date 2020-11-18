@@ -41,16 +41,6 @@
 
 # lang3
 
-> module system
-
-- [lang3] `cli/commands/run.ts` optionally take `project.json` config file
-
-- [lang3] `cli/commands/repl.ts` -- by `Project.piece_by_piece`
-- [lang3] `lang3 repl` alias to `lang3`
-- [lang3] `./dev` test `lang3 repl`
-
-- [lang3] [maybe] good view of `Project` on frontend (project insights)
-
 > datatype with namespace
 
 - [lang3] add namespace to datatype and friends
