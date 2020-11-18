@@ -21,18 +21,15 @@ export type def = {
   kind: "Mod.Den.def"
   exp: Exp.Exp
   t?: Exp.Exp
-  cached_value?: Value.Value
 }
 
 export const def = (
   exp: Exp.Exp,
   t?: Exp.Exp,
-  cached_value?: Value.Value
 ): def => ({
   kind: "Mod.Den.def",
   exp,
   t,
-  cached_value,
 })
 
 export type type_constructor = {
