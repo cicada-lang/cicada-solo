@@ -77,6 +77,10 @@
 - [lang3] `Value.subtype` -- structural cls
 - [lang3] `Value.subtype` -- function type
 
+> domain-driven design
+
+- in terms of domain-driven design, what is the core domain of cicada language? set theory?
+
 # lang4
 
 > jojo -- to study normal form and recursion.
