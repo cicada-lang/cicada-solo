@@ -41,6 +41,9 @@
 
 # lang3
 
+- [lang3] be able to readback `Value.mod`
+- [lang3] be able to `@import` specific datatype
+
 > datatype with namespace
 
 - [lang3] add namespace to datatype and friends

@@ -1,6 +1,7 @@
 @import cicada.datatype
 
 @show "hi ^-^/"
+
 @show datatype
 @show datatype.Nat
 @show datatype.List
