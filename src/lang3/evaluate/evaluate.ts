@@ -172,8 +172,8 @@ export function evaluate(
   } catch (error) {
     if (error instanceof Trace.Trace) {
       throw Trace.trail(error, exp)
-    } else {
-      throw error
     }
+
+    throw error
   }
 }
