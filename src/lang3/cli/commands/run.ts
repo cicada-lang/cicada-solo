@@ -46,13 +46,13 @@ export const handler = async (argv: Argv) => {
   const results = Project.from_pieces(project, pieces)
 
   if (argv.verbose) {
-    print_verbose_output(results, file)
+    report_verbose(results, file)
   } else {
-    print_output(results, file)
+    report(results, file)
   }
 }
 
-function print_verbose_output(
+function report_verbose(
   results: Array<Piece.Piece & { output: string }>,
   file: string
 ): void {
@@ -73,10 +73,10 @@ function print_verbose_output(
   console.log(`// Output of the specified file: ${JSON.stringify(file)}`)
   console.log()
 
-  print_output(results, file)
+  report(results, file)
 }
 
-function print_output(
+function report(
   results: Array<Piece.Piece & { output: string }>,
   file: string
 ): void {
