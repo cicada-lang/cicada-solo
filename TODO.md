@@ -41,13 +41,17 @@
 
 # lang3
 
-- [lang3] be able to readback `Value.mod`
-- [lang3] be able to `@import` specific datatype
+> namespace
 
-> datatype with namespace
-
-- [lang3] add namespace to datatype and friends
-- [lang3] binding only in namespace
+- [lang3] check and report empty module
+- [lang3] build up parent module when mount a `@module` -- for using first-level module
+- [lang3] be able to use every first-level module without `@import`
+- [lang3] be able to readback `Value.mod` -- to first-level module
+- [lang3] be able to `@import` specific `Den`
+- [lang3] `Mod.Den.namespace` -- transparent -- can use bandings in current module
+- [lang3] syntax for `Mod.Den.namespace` -- `@namespace`
+- [lang3] `Mod.Den.type_constructor` -- with its `namespace`
+- [lang3] syntax for defining bindings in `Mod.Den.type_constructor`
 
 > syntax
 
