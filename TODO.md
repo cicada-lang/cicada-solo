@@ -19,6 +19,10 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
+# lang0
+
+> try tagless style
+
 # lang2
 
 > 将 NbE 教程中的 tartlet 升级为 pie
