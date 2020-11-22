@@ -28,8 +28,7 @@ function de_builders<T>(de: De<T>): ut.Obj<Builder<T>> {
   return {
     $lit: (helper: Builder<T>, data: ut.Json) =>
       de.lit(ut.assert_json_number(data)),
-    $neg: (helper: Builder<T>, data: ut.Json) =>
-      de.neg(helper(helper, data)),
+    $neg: (helper: Builder<T>, data: ut.Json) => de.neg(helper(helper, data)),
     $add: (helper: Builder<T>, data: ut.Json) => {
       const args = ut.assert_json_array(data)
       return de.add(helper(helper, args[0]), helper(helper, args[1]))
@@ -47,6 +46,11 @@ function gen_build<T>(builders: ut.Obj<Builder<T>>): (present: ut.Json) => T {
     }
     throw new Error(`Unknown present: ${ut.inspect(present)}`)
   }
+  // NOTE This application of `the_builder` to itself is the key.
+  // - I do not fully understand this.
+  // - To understand this, we should read:
+  //   - "Diagonalization and Self-Reference"
+  //     by Raymond Smullyan
   return (present) => the_builder(the_builder, present)
 }
 
