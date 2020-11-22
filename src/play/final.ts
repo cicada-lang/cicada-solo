@@ -36,7 +36,7 @@ function de_builders<T>(de: De<T>): ut.Obj<Builder<T>> {
   }
 }
 
-function gen_build<T>(builders: ut.Obj<Builder<T>>): (present: ut.Json) => T {
+function lets_build<T>(builders: ut.Obj<Builder<T>>): (present: ut.Json) => T {
   function the_builder(helper: Builder<T>, present: ut.Json): T {
     present = ut.assert_json_object(present)
     for (const [key, builder] of Object.entries(builders)) {
@@ -59,7 +59,7 @@ function tf1<T>(de: De<T>): T {
   // return from_present(de, {
   //   $add: [{ $lit: 8 }, { $neg: { $add: [{ $lit: 1 }, { $lit: 2 }] } }],
   // })
-  return gen_build(de_builders(de))({
+  return lets_build(de_builders(de))({
     $add: [
       { $lit: 8 },
       {
@@ -108,7 +108,7 @@ function de_mul_builders<T>(de: DeMul<T>): ut.Obj<Builder<T>> {
 
 function tfm1<T>(de: De<T> & DeMul<T>): T {
   // return de.mul(de.lit(7), de.neg(de.mul(de.lit(1), de.lit(2))))
-  return gen_build({
+  return lets_build({
     ...de_builders(de),
     ...de_mul_builders(de),
   })({
