@@ -24,7 +24,7 @@ function from_present<T>(de: De<T>, present: ut.Json): T {
 
 type Parser<T> = (parse: Parser<T>, present: ut.Json) => T
 
-function de_parser_dict<T>(de: De<T>): ut.Obj<Parser<T>> {
+function de_parsers<T>(de: De<T>): ut.Obj<Parser<T>> {
   return {
     $lit: (parse: Parser<T>, data: ut.Json) =>
       de.lit(ut.assert_json_number(data)),
@@ -36,10 +36,10 @@ function de_parser_dict<T>(de: De<T>): ut.Obj<Parser<T>> {
   }
 }
 
-function gen_parse<T>(parser_dict: ut.Obj<Parser<T>>): (present: ut.Json) => T {
+function gen_parse<T>(parsers: ut.Obj<Parser<T>>): (present: ut.Json) => T {
   function the_parser(parser: Parser<T>, present: ut.Json): T {
     present = ut.assert_json_object(present)
-    for (const [key, parser] of Object.entries(parser_dict)) {
+    for (const [key, parser] of Object.entries(parsers)) {
       if (present[key]) {
         return parser(the_parser, present[key])
       }
@@ -54,7 +54,7 @@ function tf1<T>(de: De<T>): T {
   // return from_present(de, {
   //   $add: [{ $lit: 8 }, { $neg: { $add: [{ $lit: 1 }, { $lit: 2 }] } }],
   // })
-  return gen_parse(de_parser_dict(de))({
+  return gen_parse(de_parsers(de))({
     $add: [
       { $lit: 8 },
       {
@@ -92,7 +92,7 @@ export type DeMul<T> = {
   mul: (x: T, y: T) => T
 }
 
-function de_mul_parser_dict<T>(de: DeMul<T>): ut.Obj<Parser<T>> {
+function de_mul_parsers<T>(de: DeMul<T>): ut.Obj<Parser<T>> {
   return {
     $mul: (parse: Parser<T>, data: ut.Json) => {
       const args = ut.assert_json_array(data)
@@ -104,8 +104,8 @@ function de_mul_parser_dict<T>(de: DeMul<T>): ut.Obj<Parser<T>> {
 function tfm1<T>(de: De<T> & DeMul<T>): T {
   // return de.mul(de.lit(7), de.neg(de.mul(de.lit(1), de.lit(2))))
   return gen_parse({
-    ...de_parser_dict(de),
-    ...de_mul_parser_dict(de),
+    ...de_parsers(de),
+    ...de_mul_parsers(de),
   })({
     $mul: [
       { $lit: 7 },
