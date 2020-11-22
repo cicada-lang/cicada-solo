@@ -22,31 +22,32 @@ function from_present<T>(de: De<T>, present: ut.Json): T {
   throw new Error(`Unknown present: ${ut.inspect(present)}`)
 }
 
-type Parser<T> = (parse: Parser<T>, present: ut.Json) => T
+type Builder<T> = (helper: Builder<T>, present: ut.Json) => T
 
-function de_parsers<T>(de: De<T>): ut.Obj<Parser<T>> {
+function de_builders<T>(de: De<T>): ut.Obj<Builder<T>> {
   return {
-    $lit: (parse: Parser<T>, data: ut.Json) =>
+    $lit: (helper: Builder<T>, data: ut.Json) =>
       de.lit(ut.assert_json_number(data)),
-    $neg: (parse: Parser<T>, data: ut.Json) => de.neg(parse(parse, data)),
-    $add: (parse: Parser<T>, data: ut.Json) => {
+    $neg: (helper: Builder<T>, data: ut.Json) =>
+      de.neg(helper(helper, data)),
+    $add: (helper: Builder<T>, data: ut.Json) => {
       const args = ut.assert_json_array(data)
-      return de.add(parse(parse, args[0]), parse(parse, args[1]))
+      return de.add(helper(helper, args[0]), helper(helper, args[1]))
     },
   }
 }
 
-function gen_parse<T>(parsers: ut.Obj<Parser<T>>): (present: ut.Json) => T {
-  function the_parser(parser: Parser<T>, present: ut.Json): T {
+function gen_build<T>(builders: ut.Obj<Builder<T>>): (present: ut.Json) => T {
+  function the_builder(helper: Builder<T>, present: ut.Json): T {
     present = ut.assert_json_object(present)
-    for (const [key, parser] of Object.entries(parsers)) {
+    for (const [key, builder] of Object.entries(builders)) {
       if (present[key]) {
-        return parser(the_parser, present[key])
+        return builder(the_builder, present[key])
       }
     }
     throw new Error(`Unknown present: ${ut.inspect(present)}`)
   }
-  return (present) => the_parser(the_parser, present)
+  return (present) => the_builder(the_builder, present)
 }
 
 function tf1<T>(de: De<T>): T {
@@ -54,7 +55,7 @@ function tf1<T>(de: De<T>): T {
   // return from_present(de, {
   //   $add: [{ $lit: 8 }, { $neg: { $add: [{ $lit: 1 }, { $lit: 2 }] } }],
   // })
-  return gen_parse(de_parsers(de))({
+  return gen_build(de_builders(de))({
     $add: [
       { $lit: 8 },
       {
@@ -92,20 +93,20 @@ export type DeMul<T> = {
   mul: (x: T, y: T) => T
 }
 
-function de_mul_parsers<T>(de: DeMul<T>): ut.Obj<Parser<T>> {
+function de_mul_builders<T>(de: DeMul<T>): ut.Obj<Builder<T>> {
   return {
-    $mul: (parse: Parser<T>, data: ut.Json) => {
+    $mul: (helper: Builder<T>, data: ut.Json) => {
       const args = ut.assert_json_array(data)
-      return de.mul(parse(parse, args[0]), parse(parse, args[1]))
+      return de.mul(helper(helper, args[0]), helper(helper, args[1]))
     },
   }
 }
 
 function tfm1<T>(de: De<T> & DeMul<T>): T {
   // return de.mul(de.lit(7), de.neg(de.mul(de.lit(1), de.lit(2))))
-  return gen_parse({
-    ...de_parsers(de),
-    ...de_mul_parsers(de),
+  return gen_build({
+    ...de_builders(de),
+    ...de_mul_builders(de),
   })({
     $mul: [
       { $lit: 7 },
