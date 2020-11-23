@@ -22,36 +22,38 @@ function from_present<T>(de: De<T>, present: ut.Json): T {
   throw new Error(`Unknown present: ${ut.inspect(present)}`)
 }
 
-type Builder<T> = (helper: Builder<T>, present: ut.Json) => T
+// NOTE Abstraction over recursive application.
+type Builder<T> = (recur: Builder<T>, present: ut.Json) => T
 
 function de_builders<T>(de: De<T>): ut.Obj<Builder<T>> {
   return {
-    $lit: (helper: Builder<T>, data: ut.Json) =>
+    $lit: (recur: Builder<T>, data: ut.Json) =>
       de.lit(ut.assert_json_number(data)),
-    $neg: (helper: Builder<T>, data: ut.Json) => de.neg(helper(helper, data)),
-    $add: (helper: Builder<T>, data: ut.Json) => {
+    $neg: (recur: Builder<T>, data: ut.Json) => de.neg(recur(recur, data)),
+    $add: (recur: Builder<T>, data: ut.Json) => {
       const args = ut.assert_json_array(data)
-      return de.add(helper(helper, args[0]), helper(helper, args[1]))
+      return de.add(recur(recur, args[0]), recur(recur, args[1]))
     },
   }
 }
 
 function lets_build<T>(builders: ut.Obj<Builder<T>>): (present: ut.Json) => T {
-  function the_builder(helper: Builder<T>, present: ut.Json): T {
+  function united(recur: Builder<T>, present: ut.Json): T {
     present = ut.assert_json_object(present)
     for (const [key, builder] of Object.entries(builders)) {
       if (present[key]) {
-        return builder(the_builder, present[key])
+        return builder(united, present[key])
       }
     }
     throw new Error(`Unknown present: ${ut.inspect(present)}`)
   }
-  // NOTE This application of `the_builder` to itself is the key.
+
+  // NOTE This application of `united` to itself is the key.
   // - I do not fully understand this.
   // - To understand this, we should read:
   //   - "Diagonalization and Self-Reference"
   //     by Raymond Smullyan
-  return (present) => the_builder(the_builder, present)
+  return (present) => united(united, present)
 }
 
 function tf1<T>(de: De<T>): T {
@@ -99,9 +101,9 @@ export type DeMul<T> = {
 
 function de_mul_builders<T>(de: DeMul<T>): ut.Obj<Builder<T>> {
   return {
-    $mul: (helper: Builder<T>, data: ut.Json) => {
+    $mul: (recur: Builder<T>, data: ut.Json) => {
       const args = ut.assert_json_array(data)
-      return de.mul(helper(helper, args[0]), helper(helper, args[1]))
+      return de.mul(recur(recur, args[0]), recur(recur, args[1]))
     },
   }
 }
