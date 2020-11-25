@@ -1,4 +1,5 @@
 import * as ut from "../ut"
+import { $, _ } from "../hkts"
 
 export type De<T> = {
   lit: (n: number) => T
