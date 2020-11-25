@@ -21,7 +21,7 @@
 
 # lang0
 
-> try tagless-final-style
+> try tagless final style
 
 # lang2
 
@@ -94,3 +94,11 @@
   - formal systems described in this book can be described as class in cicada
 - [lang4] design a normalization algorithm
   - 也比可以用 NbE，也许比一般的 NbE 更复杂。
+
+> try small object style
+
+- function compose and type cut,
+  if that is all the message expression should know,
+  we can use small object style.
+
+- maybe we can use factory to help double the dispatching in `readback`
