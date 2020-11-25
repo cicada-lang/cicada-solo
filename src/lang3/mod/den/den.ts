@@ -23,10 +23,7 @@ export type def = {
   t?: Exp.Exp
 }
 
-export const def = (
-  exp: Exp.Exp,
-  t?: Exp.Exp,
-): def => ({
+export const def = (exp: Exp.Exp, t?: Exp.Exp): def => ({
   kind: "Mod.Den.def",
   exp,
   t,
