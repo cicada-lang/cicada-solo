@@ -4,5 +4,5 @@ export type Nat<Exp> = {
 }
 
 function add<Exp>(nat: Nat<Exp>): (x: Exp, y: Exp) => Exp {
-  throw new Error()
+  throw new Error("TODO")
 }
