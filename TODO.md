@@ -26,6 +26,10 @@
 - how to name type of denotational semantics?
 - how to name instance of denotational semantics?
 
+- we do not have good a metaphor when using tagless final style
+  - meybe we can learn from OOP, and reuse its metaphor
+  - meybe we should develop a metaphor from denotational semantics textbook
+
 # lang2
 
 > 将 NbE 教程中的 tartlet 升级为 pie
