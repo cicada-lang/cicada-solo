@@ -22,6 +22,7 @@
 # lang0
 
 > try tagless final style
+> - use only the first order part of this style
 
 - how to name type of denotational semantics?
 - how to name instance of denotational semantics?
