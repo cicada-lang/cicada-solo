@@ -1,23 +1,23 @@
 import * as ut from "../../ut"
 
-export type De<T> = {
-  lit: (n: number) => T
-  neg: (x: T) => T
-  add: (x: T, y: T) => T
-}
+export type Lit<T> = { lit: (n: number) => T }
+export type Neg<T> = { neg: (x: T) => T }
+export type Add<T> = { add: (x: T, y: T) => T }
+
+export type Lang0<T> = Lit<T> & Neg<T> & Add<T>
 
 // NOTE This means we can have both initial and final encoding.
 // - just like `from_present` we can define `from_initial`.
 // - to extend this term builder we normalize the present,
 //   and add one more level of abstraction.
 
-function from_present<T>(de: De<T>, present: ut.Json): T {
+function from_present<T>(the: Lang0<T>, present: ut.Json): T {
   present = ut.assert_json_object(present)
-  if (present["$lit"]) return de.lit(ut.assert_json_number(present["$lit"]))
-  if (present["$neg"]) return de.neg(from_present(de, present["$neg"]))
+  if (present["$lit"]) return the.lit(ut.assert_json_number(present["$lit"]))
+  if (present["$neg"]) return the.neg(from_present(the, present["$neg"]))
   if (present["$add"]) {
     const args = ut.assert_json_array(present["$add"])
-    return de.add(from_present(de, args[0]), from_present(de, args[1]))
+    return the.add(from_present(the, args[0]), from_present(the, args[1]))
   }
   throw new Error(`Unknown present: ${ut.inspect(present)}`)
 }
@@ -25,14 +25,14 @@ function from_present<T>(de: De<T>, present: ut.Json): T {
 // NOTE Abstraction over recursive application.
 type Builder<T> = (recur: Builder<T>, present: ut.Json) => T
 
-function de_builders<T>(de: De<T>): ut.Obj<Builder<T>> {
+function lang_builders<T>(the: Lang0<T>): ut.Obj<Builder<T>> {
   return {
     $lit: (recur: Builder<T>, data: ut.Json) =>
-      de.lit(ut.assert_json_number(data)),
-    $neg: (recur: Builder<T>, data: ut.Json) => de.neg(recur(recur, data)),
+      the.lit(ut.assert_json_number(data)),
+    $neg: (recur: Builder<T>, data: ut.Json) => the.neg(recur(recur, data)),
     $add: (recur: Builder<T>, data: ut.Json) => {
       const args = ut.assert_json_array(data)
-      return de.add(recur(recur, args[0]), recur(recur, args[1]))
+      return the.add(recur(recur, args[0]), recur(recur, args[1]))
     },
   }
 }
@@ -56,12 +56,12 @@ function lets_build<T>(builders: ut.Obj<Builder<T>>): (present: ut.Json) => T {
   return (present) => united(united, present)
 }
 
-function tf1<T>(de: De<T>): T {
-  // return de.add(de.lit(8), de.neg(de.add(de.lit(1), de.lit(2))))
-  // return from_present(de, {
+function tf1<T>(the: Lang0<T>): T {
+  // return the.add(the.lit(8), the.neg(the.add(the.lit(1), the.lit(2))))
+  // return from_present(the, {
   //   $add: [{ $lit: 8 }, { $neg: { $add: [{ $lit: 1 }, { $lit: 2 }] } }],
   // })
-  return lets_build(de_builders(de))({
+  return lets_build(lang_builders(the))({
     $add: [
       { $lit: 8 },
       {
@@ -73,46 +73,46 @@ function tf1<T>(de: De<T>): T {
   })
 }
 
-const number_de: De<number> = {
+const number_of_lang0: Lang0<number> = {
   lit: (n: number) => n,
   neg: (x: number) => -x,
   add: (x: number, y: number) => x + y,
 }
 
-const string_de: De<string> = {
+const string_of_lang0: Lang0<string> = {
   lit: (n: number) => `${n}`,
   neg: (x: string) => `(-${x})`,
   add: (x: string, y: string) => `(${x}+${y})`,
 }
 
-console.log(tf1(number_de))
-console.log(tf1(string_de))
+console.log(tf1(number_of_lang0))
+console.log(tf1(string_of_lang0))
 
-function tfl1<T>(de: De<T>): Array<T> {
-  return [de.lit(1), de.add(de.lit(1), de.lit(3))]
+function tfl1<T>(the: Lang0<T>): Array<T> {
+  return [the.lit(1), the.add(the.lit(1), the.lit(3))]
 }
 
-console.log(tfl1(number_de))
-console.log(tfl1(string_de))
+console.log(tfl1(number_of_lang0))
+console.log(tfl1(string_of_lang0))
 
-export type DeMul<T> = {
+export type Mul<T> = {
   mul: (x: T, y: T) => T
 }
 
-function de_mul_builders<T>(de: DeMul<T>): ut.Obj<Builder<T>> {
+function mul_builders<T>(the: Mul<T>): ut.Obj<Builder<T>> {
   return {
     $mul: (recur: Builder<T>, data: ut.Json) => {
       const args = ut.assert_json_array(data)
-      return de.mul(recur(recur, args[0]), recur(recur, args[1]))
+      return the.mul(recur(recur, args[0]), recur(recur, args[1]))
     },
   }
 }
 
-function tfm1<T>(de: De<T> & DeMul<T>): T {
-  // return de.mul(de.lit(7), de.neg(de.mul(de.lit(1), de.lit(2))))
+function tfm1<T>(the: Lang0<T> & Mul<T>): T {
+  // return the.mul(the.lit(7), the.neg(the.mul(the.lit(1), the.lit(2))))
   return lets_build({
-    ...de_builders(de),
-    ...de_mul_builders(de),
+    ...lang_builders(the),
+    ...mul_builders(the),
   })({
     $mul: [
       { $lit: 7 },
@@ -125,20 +125,20 @@ function tfm1<T>(de: De<T> & DeMul<T>): T {
   })
 }
 
-function tfm2<T>(de: De<T> & DeMul<T>): T {
-  return de.mul(de.lit(7), tf1(de))
+function tfm2<T>(the: Lang0<T> & Mul<T>): T {
+  return the.mul(the.lit(7), tf1(the))
 }
 
-const number_de_mul: DeMul<number> = {
+const number_of_mul: Mul<number> = {
   mul: (x: number, y: number) => x * y,
 }
 
-const string_de_mul: DeMul<string> = {
+const string_of_mul: Mul<string> = {
   mul: (x: string, y: string) => `(${x}*${y})`,
 }
 
-console.log(tfm1({ ...number_de, ...number_de_mul }))
-console.log(tfm1({ ...string_de, ...string_de_mul }))
+console.log(tfm1({ ...number_of_lang0, ...number_of_mul }))
+console.log(tfm1({ ...string_of_lang0, ...string_of_mul }))
 
-console.log(tfm2({ ...number_de, ...number_de_mul }))
-console.log(tfm2({ ...string_de, ...string_de_mul }))
+console.log(tfm2({ ...number_of_lang0, ...number_of_mul }))
+console.log(tfm2({ ...string_of_lang0, ...string_of_mul }))

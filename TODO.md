@@ -23,6 +23,9 @@
 
 > try tagless final style
 
+- how to name type of denotational semantics?
+- how to name instance of denotational semantics?
+
 # lang2
 
 > 将 NbE 教程中的 tartlet 升级为 pie
