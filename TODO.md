@@ -29,6 +29,7 @@
 - we do not have good a metaphor when using tagless final style
   - meybe we can learn from OOP, and reuse its metaphor
   - meybe we should develop a metaphor from denotational semantics textbook
+  - meybe we should learn DDD about how to develop a metaphor
 
 # lang2
 
