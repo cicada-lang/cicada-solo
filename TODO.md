@@ -34,6 +34,9 @@
 
 - we do not have good a metaphor when using tagless final style
   - meybe we can learn from OOP, and reuse its metaphor
+    - why should we use monkey-patching,
+      when we can use typeclass?
+      not typeclass, but explicit passing function table
   - meybe we should develop a metaphor from denotational semantics textbook
   - meybe we should learn DDD about how to develop a metaphor
 
