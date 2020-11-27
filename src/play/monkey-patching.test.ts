@@ -1,7 +1,6 @@
 import "./monkey-patching"
+import * as ut from "../ut"
 
 const x: string = "This is an example".toCamelCase()
 
-if (x !== "thisIsAnExample") {
-  throw new Error(`x should be "thisIsAnExample" instead of: ${x}`)
-}
+ut.assert_equal(x, "thisIsAnExample")
