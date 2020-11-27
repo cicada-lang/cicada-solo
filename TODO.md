@@ -1,3 +1,8 @@
+# partech
+
+- move partech out to its own repo
+  - learn more about framework design
+
 # TLT
 
 > 强化对类型系统的理解与实现技术。
