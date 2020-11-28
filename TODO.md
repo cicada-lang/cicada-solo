@@ -43,8 +43,13 @@
     - typeclass is generaic class,
       like collection or container,
       but more sophisticated.
+    - class can be viewed as non generaic typeclass,
+      typeclass without type variable.
     - since we are using explicit typeclass,
       we must know the type, then choose the typeclass.
+    - use record type to understand class and typeclass,
+      class is a record type that can reference to itself,
+      typeclass is a record type that have type variables.
   - meybe we should develop a metaphor from denotational semantics textbook
   - meybe we should learn DDD about how to develop a metaphor
 

@@ -2,7 +2,7 @@ interface String {
   toCamelCase(): string
 }
 
-String.prototype.toCamelCase = function (): string {
+String.prototype.toCamelCase = function () {
   return this.replace(/[^a-z ]/gi, "").replace(
     /(?:^\w|[A-Z]|\b\w|\s+)/g,
     (match: any, index: number) => {

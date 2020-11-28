@@ -1,5 +1,5 @@
-import "./monkey-patching"
-import * as ut from "../ut"
+import "./string-to-camel-case"
+import * as ut from "../../ut"
 
 const x: string = "This is an example".toCamelCase()
 
