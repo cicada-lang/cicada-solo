@@ -37,8 +37,19 @@
     - why should we use monkey-patching,
       when we can use typeclass?
       not typeclass, but explicit passing function table
+    - class is for "same behavior different data"
+      typeclass is for "same behavior different type"
+      and "same type (interface) different behavior"
+    - typeclass is generaic class,
+      like collection or container,
+      but more sophisticated.
+    - since we are using explicit typeclass,
+      we must know the type, then choose the typeclass.
   - meybe we should develop a metaphor from denotational semantics textbook
   - meybe we should learn DDD about how to develop a metaphor
+
+- the note about is not well refactored,
+  how should we refactor note?
 
 # lang2
 
