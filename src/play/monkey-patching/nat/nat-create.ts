@@ -1,4 +1,4 @@
-import { Nat } from "./nat"
+import { Nat } from "."
 
 declare module "./nat" {
   namespace Nat {
