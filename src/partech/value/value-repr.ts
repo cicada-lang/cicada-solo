@@ -8,11 +8,7 @@ export function repr(value: Value.Value): string {
       return JSON.stringify(value.value)
     }
     case "Value.pattern": {
-      return JSON.stringify([
-        value.label,
-        // value.value.source,
-        // value.value.flags,
-      ])
+      return JSON.stringify([value.label])
     }
     case "Value.grammar":
       return value.name
