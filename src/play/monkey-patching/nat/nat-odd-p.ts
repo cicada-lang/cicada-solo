@@ -7,6 +7,7 @@ declare module "./nat" {
 }
 
 Nat.prototype.odd_p = function () {
+  if (this.n === 0) return false
   if (this.n === 1) return true
-  else return Nat.create(this.n - 2).even_p()
+  else return Nat.create(this.n - 1).even_p()
 }
