@@ -2,7 +2,7 @@ import { Nat } from "./nat"
 
 declare module "./nat" {
   interface Nat {
-    even_p: () => boolean
+    even_p(): boolean
   }
 }
 

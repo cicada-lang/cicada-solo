@@ -2,6 +2,7 @@
 
 - move partech out to its own repo
   - learn more about framework design
+  - maybe change style before moving
 
 # TLT
 

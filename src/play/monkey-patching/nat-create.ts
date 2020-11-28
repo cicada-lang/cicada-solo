@@ -6,4 +6,6 @@ declare module "./nat" {
   }
 }
 
-Nat.create = (n) => new Nat(n)
+Nat.create = function (n) {
+  return new Nat(n)
+}
