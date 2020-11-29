@@ -119,6 +119,17 @@
 
 - in terms of domain-driven design, what is the core domain of cicada language? set theory?
 
+> lang3 as cicada
+
+- maybe lang3 can not be cicada,
+  because we can not do object-oriented design in lang3.
+
+  - maybe we do not need object-oriented design,
+    because we can use explicit function table passing style.
+
+  - maybe we can use object-oriented design
+    by record type and higher order functions.
+
 # lang4
 
 > jojo -- to study normal form and recursion.
