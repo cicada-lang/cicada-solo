@@ -7,3 +7,7 @@ export class Nat {
     this.n = n
   }
 }
+
+export * from "./nat-create"
+export * from "./nat-even-p"
+export * from "./nat-odd-p"
