@@ -60,6 +60,13 @@
 - maybe we can use typeclass (function table) factory to do mutli-dispatching.
   the function will return appropriate different function table for input data.
 
+- If OOP is programming by simulanon,
+  and when implementation domain objects
+  have a direct mapping to problem domain objects,
+  the resulting software is far easier to understand and use.
+
+  Should we use game semantics of type system?
+
 # lang2
 
 > 将 NbE 教程中的 tartlet 升级为 pie
