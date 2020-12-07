@@ -142,7 +142,25 @@
 
 # lang3-oop
 
-- [lang3-oop] Evaluable Var
+- [lang3-oop] Evaluable pi
+- [lang3-oop] Evaluable fn
+- [lang3-oop] Evaluable case_fn
+- [lang3-oop] Evaluable ap
+- [lang3-oop] Evaluable cls
+- [lang3-oop] Evaluable obj
+- [lang3-oop] Evaluable dot
+- [lang3-oop] Evaluable equal
+- [lang3-oop] Evaluable same
+- [lang3-oop] Evaluable replace
+- [lang3-oop] Evaluable absurd
+- [lang3-oop] Evaluable absurd_ind
+- [lang3-oop] Evaluable str
+- [lang3-oop] Evaluable quote
+- [lang3-oop] Evaluable union
+- [lang3-oop] Evaluable type_constructor
+- [lang3-oop] Evaluable type
+- [lang3-oop] Evaluable begin
+- [lang3-oop] Evaluable the
 
 # lang4
 

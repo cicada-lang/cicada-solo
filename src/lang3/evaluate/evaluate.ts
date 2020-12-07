@@ -26,24 +26,7 @@ export function evaluate(
   try {
     switch (exp.kind) {
       case "Exp.v": {
-        const value = Env.lookup(env, exp.name)
-        if (value !== undefined) return value
-
-        const mod_value = Mod.lookup_value(mod, exp.name)
-        if (mod_value === undefined)
-          throw new Trace.Trace(Explain.explain_name_undefined(exp.name))
-
-        if (opts.mode === EvaluationMode.mute_recursive_exp_in_mod) {
-          // TODO We SHOULD NOT do this for non recursive `Den`.
-          Mod.update(mod, exp.name, Mod.lookup_den(mod, exp.name)!, {
-            cached_value: Value.not_yet(
-              Mod.lookup_type(mod, exp.name)!,
-              Neutral.v(exp.name)
-            ),
-          })
-        }
-
-        return mod_value
+        return exp.evaluate({ mod, env, mode: opts.mode })
       }
       case "Exp.pi": {
         return Value.pi(

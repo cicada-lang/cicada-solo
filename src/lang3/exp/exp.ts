@@ -1,8 +1,9 @@
 import * as Stmt from "../stmt"
 import * as Pattern from "../pattern"
+import { Var } from "../exps/var"
 
 export type Exp =
-  | v
+  | Var
   | pi
   | fn
   | case_fn
@@ -28,9 +29,7 @@ export type v = {
   name: string
 }
 
-import {Var} from "../exps/var"
-
-export const v = (name: string): v => Var(name)
+export const v = Var
 
 export type pi = {
   kind: "Exp.pi"
