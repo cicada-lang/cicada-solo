@@ -42,10 +42,7 @@ export function evaluate(
         )
       }
       case "Exp.ap": {
-        return Evaluate.do_ap(
-          Evaluate.evaluate(mod, env, exp.target, opts),
-          Evaluate.evaluate(mod, env, exp.arg, opts)
-        )
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.cls": {
         env = Env.clone(env)
