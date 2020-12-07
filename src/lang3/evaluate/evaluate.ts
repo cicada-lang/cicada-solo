@@ -29,10 +29,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.pi": {
-        return Value.pi(
-          Evaluate.evaluate(mod, env, exp.arg_t, opts),
-          Value.Closure.create(mod, env, Pattern.v(exp.name), exp.ret_t)
-        )
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.fn": {
         return Value.fn(Value.Closure.create(mod, env, exp.pattern, exp.ret))
