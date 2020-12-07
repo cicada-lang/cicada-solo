@@ -142,6 +142,8 @@
 
 # lang3-oop
 
+- [lang3-oop] Evaluator
+
 - [lang3-oop] Evaluable pi
 - [lang3-oop] Evaluable fn
 - [lang3-oop] Evaluable case_fn

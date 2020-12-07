@@ -26,7 +26,7 @@ export function evaluate(
   try {
     switch (exp.kind) {
       case "Exp.v": {
-        return exp.evaluate({ mod, env, mode: opts.mode })
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.pi": {
         return Value.pi(

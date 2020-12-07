@@ -12,8 +12,10 @@ export type Var = Evaluable & {
 }
 
 export function Var(name: string): Var {
-  const evaluable = Evaluable({
-    evaluate(the) {
+  return {
+    kind: "Exp.v",
+    name,
+    evaluability(the) {
       const value = Env.lookup(the.env, name)
       if (value !== undefined) return value
 
@@ -33,11 +35,5 @@ export function Var(name: string): Var {
 
       return mod_value
     },
-  })
-
-  return {
-    kind: "Exp.v",
-    name,
-    ...evaluable,
   }
 }
