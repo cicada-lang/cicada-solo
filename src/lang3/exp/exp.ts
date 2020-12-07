@@ -2,6 +2,7 @@ import * as Stmt from "../stmt"
 import * as Pattern from "../pattern"
 import { Var } from "../exps/var"
 import { Pi } from "../exps/pi/pi"
+import { Fn } from "../exps/pi/fn"
 
 export type Exp =
   | Var
@@ -29,18 +30,8 @@ export type v = Var
 export const v = Var
 export type pi = Pi
 export const pi = Pi
-
-export type fn = {
-  kind: "Exp.fn"
-  pattern: Pattern.Pattern
-  ret: Exp
-}
-
-export const fn = (pattern: Pattern.Pattern, ret: Exp): fn => ({
-  kind: "Exp.fn",
-  pattern,
-  ret,
-})
+export type fn = Fn
+export const fn = Fn
 
 export type Case = {
   pattern: Pattern.Pattern

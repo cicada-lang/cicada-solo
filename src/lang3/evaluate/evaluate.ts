@@ -32,7 +32,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.fn": {
-        return Value.fn(Value.Closure.create(mod, env, exp.pattern, exp.ret))
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.case_fn": {
         return Value.case_fn(
