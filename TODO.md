@@ -142,7 +142,6 @@
 
 # lang3-oop
 
-- [lang3-oop] Evaluable case_fn
 - [lang3-oop] Evaluable cls
 - [lang3-oop] Evaluable obj
 - [lang3-oop] Evaluable dot

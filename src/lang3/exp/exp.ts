@@ -3,13 +3,14 @@ import * as Pattern from "../pattern"
 import { Var } from "../exps/var"
 import { Pi } from "../exps/pi/pi"
 import { Fn } from "../exps/pi/fn"
+import { CaseFn } from "../exps/pi/case-fn"
 import { Ap } from "../exps/pi/ap"
 
 export type Exp =
   | Var
   | Pi
   | Fn
-  | case_fn
+  | CaseFn
   | Ap
   | cls
   | obj
@@ -29,8 +30,10 @@ export type Exp =
 
 export type v = Var
 export const v = Var
+
 export type pi = Pi
 export const pi = Pi
+
 export type fn = Fn
 export const fn = Fn
 
@@ -39,15 +42,8 @@ export type Case = {
   ret: Exp
 }
 
-export type case_fn = {
-  kind: "Exp.case_fn"
-  cases: Array<Case>
-}
-
-export const case_fn = (cases: Array<Case>): case_fn => ({
-  kind: "Exp.case_fn",
-  cases,
-})
+export type case_fn = CaseFn
+export const case_fn = CaseFn
 
 export type ap = Ap
 export const ap = Ap
