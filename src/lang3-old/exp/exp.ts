@@ -28,9 +28,10 @@ export type v = {
   name: string
 }
 
-import {Var} from "../exps/var"
-
-export const v = (name: string): v => Var(name)
+export const v = (name: string): v => ({
+  kind: "Exp.v",
+  name,
+})
 
 export type pi = {
   kind: "Exp.pi"

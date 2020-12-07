@@ -1,0 +1,11 @@
+import { Mod } from "./mod"
+import { Env } from "./env"
+import { Value } from "./value"
+
+export enum EvaluationMode {
+  mute_recursive_exp_in_mod = "mute_recursive_exp_in_mod",
+}
+
+export type Evaluable = {
+  evaluate(the: { mod: Mod; env: Env; mode?: EvaluationMode }): Value
+}

@@ -87,7 +87,7 @@
   - 归纳类型（Inductive type）的推演规则。
     - Only one abstraction away.
 
-# lang3
+# lang3-old
 
 > namespace
 
@@ -139,6 +139,10 @@
 
   - maybe we can use object-oriented design
     by record type and higher order functions.
+
+# lang3-oop
+
+- [lang3-oop] Evaluable Var
 
 # lang4
 
