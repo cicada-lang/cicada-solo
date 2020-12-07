@@ -142,8 +142,6 @@
 
 # lang3-oop
 
-- [lang3-oop] Evaluator
-
 - [lang3-oop] Evaluable pi
 - [lang3-oop] Evaluable fn
 - [lang3-oop] Evaluable case_fn
@@ -164,6 +162,8 @@
 - [lang3-oop] Evaluable begin
 - [lang3-oop] Evaluable the
 - [lang3-oop] Evaluable constructor handle trace
+
+- [lang3-oop] Evaluator
 
 # lang4
 
