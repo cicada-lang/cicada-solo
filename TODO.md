@@ -161,6 +161,7 @@
 - [lang3-oop] Evaluable type
 - [lang3-oop] Evaluable begin
 - [lang3-oop] Evaluable the
+- [lang3-oop] Evaluable constructor handle trace
 
 # lang4
 
