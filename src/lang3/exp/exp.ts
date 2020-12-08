@@ -15,6 +15,7 @@ import { Absurd } from "../exps/absurd/absurd"
 import { AbsurdInd } from "../exps/absurd/absurd-ind"
 import { Str } from "../exps/str/str"
 import { Quote } from "../exps/str/quote"
+import { Union } from "../exps/union"
 
 export type Exp =
   | Var
@@ -32,7 +33,7 @@ export type Exp =
   | AbsurdInd
   | Str
   | Quote
-  | union
+  | Union
   | type_constructor
   | type
   | begin
@@ -88,17 +89,8 @@ export const str = Str
 export type quote = Quote
 export const quote = Quote
 
-export type union = {
-  kind: "Exp.union"
-  left: Exp
-  right: Exp
-}
-
-export const union = (left: Exp, right: Exp): union => ({
-  kind: "Exp.union",
-  left,
-  right,
-})
+export type union = Union
+export const union = Union
 
 export type type_constructor = {
   kind: "Exp.type_constructor"

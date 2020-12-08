@@ -71,11 +71,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.union": {
-        const { left, right } = exp
-        return Value.union(
-          Evaluate.evaluate(mod, env, left, opts),
-          Evaluate.evaluate(mod, env, right, opts)
-        )
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.type_constructor": {
         return Value.type_constructor(
