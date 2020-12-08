@@ -68,15 +68,20 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   })(tree)
 }
 
-export function cases_matcher(tree: pt.Tree.Tree): Array<Exp.Case> {
-  return pt.Tree.matcher<Array<Exp.Case>>({
+type Case = {
+  pattern: Pattern.Pattern
+  ret: Exp.Exp
+}
+
+export function cases_matcher(tree: pt.Tree.Tree): Array<Case> {
+  return pt.Tree.matcher({
     "cases:cases": ({ cases }) =>
       pt.matchers.one_or_more_matcher(cases).map(case_entry_matcher),
   })(tree)
 }
 
-export function case_entry_matcher(tree: pt.Tree.Tree): Exp.Case {
-  return pt.Tree.matcher<Exp.Case>({
+export function case_entry_matcher(tree: pt.Tree.Tree): Case {
+  return pt.Tree.matcher({
     "case_entry:case_entry": ({ pattern, ret }) => ({
       pattern: pattern_matcher(pattern),
       ret: exp_matcher(ret),
