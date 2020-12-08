@@ -147,7 +147,6 @@
 - [lang3-oop] `Checkable` -- fn
 - [lang3-oop] `Checkable` -- case_fn
 - [lang3-oop] `Checkable` -- obj
-- [lang3-oop] `Checkable` -- same
 
 - [lang3-oop] `Checker` and `checker`
 
