@@ -21,7 +21,7 @@ export type Value =
   | union
   | typecons
   | datatype
-  | data_constructor
+  | datacons
   | data
   | type
   | mod
@@ -180,19 +180,19 @@ export const datatype = (
   t,
 })
 
-export type data_constructor = {
-  kind: "Value.data_constructor"
+export type datacons = {
+  kind: "Value.datacons"
   typecons: typecons
   tag: string
   t: Value
 }
 
-export const data_constructor = (
+export const datacons = (
   typecons: typecons,
   tag: string,
   t: Value
-): data_constructor => ({
-  kind: "Value.data_constructor",
+): datacons => ({
+  kind: "Value.datacons",
   typecons,
   tag,
   t,
@@ -200,18 +200,18 @@ export const data_constructor = (
 
 export type data = {
   kind: "Value.data"
-  data_constructor: data_constructor
+  datacons: datacons
   args: Array<Value>
   t: Value
 }
 
 export const data = (
-  data_constructor: data_constructor,
+  datacons: datacons,
   args: Array<Value>,
   t: Value
 ): data => ({
   kind: "Value.data",
-  data_constructor,
+  datacons,
   args,
   t,
 })

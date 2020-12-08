@@ -112,14 +112,14 @@ function match_data(
   //   - Vec.cons(T)(prev)(head)(tail): Vec(T)(Nat.succ(prev))
   // NOTE
   // - We will infer the type of every (nested) pattern variables.
-  const data_constructor = Evaluate.do_dot(typecons, data.tag)
-  if (data_constructor.kind !== "Value.data_constructor")
-    throw new Trace.Trace("expecting data_constructor")
+  const datacons = Evaluate.do_dot(typecons, data.tag)
+  if (datacons.kind !== "Value.datacons")
+    throw new Trace.Trace("expecting datacons")
   const result_ctx = match_patterns(
     mod,
     ctx,
     data.args,
-    data_constructor.t,
+    datacons.t,
     matched
   )
   if (result_ctx === undefined) return undefined

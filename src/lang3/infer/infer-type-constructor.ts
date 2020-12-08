@@ -15,12 +15,12 @@ export function infer_typecons(
 ): Value.Value {
   check_typecons_t(mod, ctx, datatype.t)
   for (const entry of datatype.sums) {
-    check_data_constructor_t(mod, ctx, entry.t, datatype.name)
+    check_datacons_t(mod, ctx, entry.t, datatype.name)
   }
   return Evaluate.evaluate(mod, Ctx.to_env(ctx), datatype.t)
 }
 
-function check_data_constructor_t(
+function check_datacons_t(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   t: Exp.Exp,
@@ -29,7 +29,7 @@ function check_data_constructor_t(
   if (t.kind === "Exp.pi") {
     const pi = t
     Check.check(mod, ctx, pi.arg_t, Value.type)
-    check_data_constructor_t(
+    check_datacons_t(
       mod,
       Ctx.extend(
         ctx,

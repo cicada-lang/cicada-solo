@@ -48,7 +48,7 @@ export function to_value(
       )
       for (const arg of pattern.args) {
         if (
-          (oprand.kind === "Value.data_constructor" ||
+          (oprand.kind === "Value.datacons" ||
             oprand.kind === "Value.data") &&
           oprand.t.kind === "Value.pi"
         ) {
@@ -59,7 +59,7 @@ export function to_value(
           )
         } else {
           throw new Trace.Trace(
-            "expecting oprand.kind to be Value.data_constructor or Value.data\n" +
+            "expecting oprand.kind to be Value.datacons or Value.data\n" +
               `- oprand.kind: ${oprand.kind}\n`
           )
         }

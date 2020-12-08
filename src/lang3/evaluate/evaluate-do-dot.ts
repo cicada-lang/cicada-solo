@@ -55,12 +55,12 @@ export function do_dot_cls(cls: Value.cls, name: string): Value.Value {
 export function do_dot_typecons(
   typecons: Value.typecons,
   name: string
-): Value.data_constructor {
+): Value.datacons {
   const entry = typecons.delayed.sums.find(({ tag }) => tag === name)
   if (entry === undefined)
     throw new Trace.Trace(`can not find tag in typecons: ${name}`)
 
-  return Value.data_constructor(
+  return Value.datacons(
     typecons,
     name,
     Evaluate.evaluate(

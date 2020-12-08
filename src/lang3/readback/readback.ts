@@ -12,7 +12,7 @@ import { readback_case_fn } from "./readback-case-fn"
 import { readback_obj } from "./readback-obj"
 import { readback_typecons } from "./readback-type-constructor"
 import { readback_datatype } from "./readback-datatype"
-import { readback_data_constructor } from "./readback-data-constructor"
+import { readback_datacons } from "./readback-data-constructor"
 import { readback_data } from "./readback-data"
 import { readback_type } from "./readback-type"
 
@@ -26,8 +26,8 @@ export function readback(
     return readback_typecons(mod, ctx, t, value)
   if (value.kind === "Value.datatype")
     return readback_datatype(mod, ctx, t, value)
-  if (value.kind === "Value.data_constructor")
-    return readback_data_constructor(mod, ctx, t, value)
+  if (value.kind === "Value.datacons")
+    return readback_datacons(mod, ctx, t, value)
   if (value.kind === "Value.data") return readback_data(mod, ctx, t, value)
   if (t.kind === "Value.union" && value.kind !== "Value.not_yet")
     return readback_union(mod, ctx, t, value)

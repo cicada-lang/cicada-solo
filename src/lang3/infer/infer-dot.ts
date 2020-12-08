@@ -19,8 +19,8 @@ export function infer_dot(
 
   const target = Evaluate.evaluate(mod, Ctx.to_env(ctx), dot.target)
   if (target.kind === "Value.typecons") {
-    const data_constructor = Evaluate.do_dot_typecons(target, dot.name)
-    return data_constructor.t
+    const datacons = Evaluate.do_dot_typecons(target, dot.name)
+    return datacons.t
   }
 
   throw new Trace.Trace(

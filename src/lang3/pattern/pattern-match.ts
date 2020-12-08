@@ -56,15 +56,15 @@ function match_pattern(
   if (
     pattern.kind === "Pattern.data" &&
     value.kind === "Value.data" &&
-    value.data_constructor.typecons.name === pattern.name &&
-    value.data_constructor.tag === pattern.tag
+    value.datacons.typecons.name === pattern.name &&
+    value.datacons.tag === pattern.tag
   ) {
     return match_patterns(mod, env, pattern.args, value.args, matched)
   }
 
   if (
     pattern.kind === "Pattern.data" &&
-    value.kind === "Value.data_constructor" &&
+    value.kind === "Value.datacons" &&
     value.typecons.name === pattern.name &&
     value.tag === pattern.tag
   ) {
