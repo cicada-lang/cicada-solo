@@ -142,7 +142,6 @@
 
 # lang3-oop
 
-- [lang3-oop] Evaluable obj
 - [lang3-oop] Evaluable dot
 - [lang3-oop] Evaluable equal
 - [lang3-oop] Evaluable same
@@ -159,6 +158,7 @@
 - [lang3-oop] Evaluable constructor handle trace
 
 - [lang3-oop] Evaluator
+- [lang3-oop] Evaluator passed to the arg of evaluability
 
 # lang4
 

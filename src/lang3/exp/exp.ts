@@ -6,6 +6,7 @@ import { Fn } from "../exps/pi/fn"
 import { CaseFn } from "../exps/pi/case-fn"
 import { Ap } from "../exps/pi/ap"
 import { Cls } from "../exps/cls/cls"
+import { Obj } from "../exps/cls/obj"
 
 export type Exp =
   | Var
@@ -14,7 +15,7 @@ export type Exp =
   | CaseFn
   | Ap
   | Cls
-  | obj
+  | Obj
   | dot
   | equal
   | same
@@ -52,15 +53,8 @@ export const ap = Ap
 export type cls = Cls
 export const cls = Cls
 
-export type obj = {
-  kind: "Exp.obj"
-  properties: Map<string, Exp>
-}
-
-export const obj = (properties: Map<string, Exp>): obj => ({
-  kind: "Exp.obj",
-  properties,
-})
+export type obj = Obj
+export const obj = Obj
 
 export type dot = {
   kind: "Exp.dot"

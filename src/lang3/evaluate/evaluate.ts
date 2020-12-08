@@ -44,15 +44,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.obj": {
-        const { properties } = exp
-        return Value.obj(
-          new Map(
-            Array.from(properties, ([name, exp]) => [
-              name,
-              Evaluate.evaluate(mod, env, exp, opts),
-            ])
-          )
-        )
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.dot": {
         return Evaluate.do_dot(
