@@ -6,7 +6,6 @@ import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import { check_union_type } from "./check-union-type"
-import { check_fn } from "./check-fn"
 import { check_case_fn } from "./check-case-fn"
 import { check_obj } from "./check-obj"
 import { check_by_infer } from "./check-by-infer"
@@ -19,8 +18,7 @@ export function check(
 ): void {
   try {
     if (t.kind === "Value.union") return check_union_type(mod, ctx, exp, t)
-    if (exp.kind === "Exp.fn")
-      return check_fn(mod, ctx, exp, Value.is_pi(mod, ctx, t))
+    if (exp.kind === "Exp.fn") return exp.checkability(t, { mod, ctx })
     if (exp.kind === "Exp.case_fn")
       return check_case_fn(mod, ctx, exp, Value.is_pi(mod, ctx, t))
     if (exp.kind === "Exp.obj")
