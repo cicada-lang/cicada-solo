@@ -18,6 +18,7 @@ import { Quote } from "../exps/str/quote"
 import { Union } from "../exps/union"
 import { Typecons } from "../exps/typecons"
 import { Type } from "../exps/type"
+import { Begin } from "../exps/begin"
 
 export type Exp =
   | Var
@@ -38,7 +39,7 @@ export type Exp =
   | Union
   | Typecons
   | Type
-  | begin
+  | Begin
   | the
 
 export type v = Var
@@ -100,17 +101,8 @@ export const typecons = Typecons
 export type type = Type
 export const type = Type
 
-export type begin = {
-  kind: "Exp.begin"
-  stmts: Array<Stmt.Stmt>
-  ret: Exp
-}
-
-export const begin = (stmts: Array<Stmt.Stmt>, ret: Exp): begin => ({
-  kind: "Exp.begin",
-  stmts,
-  ret,
-})
+export type begin = Begin
+export const begin = Begin
 
 export type the = {
   kind: "Exp.the"

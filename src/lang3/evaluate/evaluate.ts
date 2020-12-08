@@ -80,11 +80,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.begin": {
-        env = Env.clone(env)
-        for (const stmt of exp.stmts) {
-          Stmt.execute(mod, env, stmt)
-        }
-        return Evaluate.evaluate(mod, env, exp.ret, opts)
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.the": {
         return Evaluate.evaluate(mod, env, exp.exp, opts)

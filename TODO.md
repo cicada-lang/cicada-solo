@@ -142,7 +142,6 @@
 
 # lang3-oop
 
-- [lang3-oop] Evaluable begin
 - [lang3-oop] Evaluable the
 
 - [lang3-oop] Evaluator
