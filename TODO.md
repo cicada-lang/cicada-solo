@@ -144,7 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] `Checkable` -- case_fn
 - [lang3-oop] `Checkable` -- obj
 
 - [lang3-oop] use the `Evaluable` constructor
