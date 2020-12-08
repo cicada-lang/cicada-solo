@@ -17,14 +17,17 @@ export function check_by_infer(
 ): void {
   const u = Infer.infer(mod, ctx, exp)
   if (!Value.subtype(mod, ctx, u, t)) {
-    let u_repr = Exp.repr(Readback.readback(mod, ctx, Value.type, u))
+    let u_repr = Readback.readback(mod, ctx, Value.type, u).repr()
     u_repr = u_repr.replace(/\s+/g, " ")
     throw new Trace.Trace(
       ut.aline(`
-        |I infer the type of ${Exp.repr(exp)} to be ${u_repr}.
-        |But the given type is ${Exp.repr(
-          Readback.readback(mod, ctx, Value.type, t)
-        )}.
+        |I infer the type of ${exp.repr()} to be ${u_repr}.
+        |But the given type is ${Readback.readback(
+          mod,
+          ctx,
+          Value.type,
+          t
+        ).repr()}.
         |`)
     )
   }

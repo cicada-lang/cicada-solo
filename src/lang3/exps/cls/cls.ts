@@ -1,5 +1,5 @@
 import { Evaluable, EvaluationMode } from "../../evaluable"
-import { Exp, repr } from "../../exp"
+import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
@@ -54,8 +54,8 @@ export function Cls(
     repr: () => {
       if (sat.length === 0 && scope.length === 0) return "Object"
       const parts = [
-        ...sat.map(({ name, t, exp }) => `${name} : ${repr(t)} = ${repr(exp)}`),
-        ...scope.map(({ name, t }) => `${name} : ${repr(t)}`),
+        ...sat.map(({ name, t, exp }) => `${name} : ${t.repr()} = ${exp.repr()}`),
+        ...scope.map(({ name, t }) => `${name} : ${t.repr()}`),
       ]
       let s = parts.join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`

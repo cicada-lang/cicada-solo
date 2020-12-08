@@ -17,14 +17,17 @@ export function check_same(
   if (!Value.conversion(mod, ctx, equal.t, equal.from, equal.to)) {
     throw new Trace.Trace(
       ut.aline(`
-          |I am expecting the following two values to be the same ${Exp.repr(
-            Readback.readback(mod, ctx, Value.type, equal.t)
-          )}.
+          |I am expecting the following two values to be the same ${Readback.readback(
+            mod,
+            ctx,
+            Value.type,
+            equal.t
+          ).repr()}.
           |But they are not.
           |from:
-          |  ${Exp.repr(Readback.readback(mod, ctx, equal.t, equal.from))}
+          |  ${Readback.readback(mod, ctx, equal.t, equal.from).repr()}
           |to:
-          |  ${Exp.repr(Readback.readback(mod, ctx, equal.t, equal.to))}
+          |  ${Readback.readback(mod, ctx, equal.t, equal.to).repr()}
           |`)
     )
   }

@@ -18,10 +18,13 @@ export function check_quote(
   if (t.kind === "Value.quote" && quote.str === t.str) return
   throw new Trace.Trace(
     ut.aline(`
-      |The given value is string: ${Exp.repr(quote)},
-      |But the given type is ${Exp.repr(
-        Readback.readback(mod, ctx, Value.type, t)
-      )}.
+      |The given value is string: ${quote.repr()},
+      |But the given type is ${Readback.readback(
+        mod,
+        ctx,
+        Value.type,
+        t
+      ).repr()}.
       |`)
   )
 }

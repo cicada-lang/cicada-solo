@@ -20,7 +20,7 @@ export function from_pieces(
     return results
   } catch (error) {
     if (error instanceof Trace.Trace) {
-      console.error(Trace.repr(error, Exp.repr))
+      console.error(Trace.repr(error, (exp) => exp.repr()))
       process.exit(1)
     }
 

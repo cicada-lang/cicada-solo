@@ -1,5 +1,5 @@
 import { Evaluable, EvaluationMode } from "../../evaluable"
-import { Exp, repr } from "../../exp"
+import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
@@ -27,6 +27,6 @@ export function Ap(target: Exp, arg: Exp): Ap {
         evaluator.evaluate(target, { mod, env, mode }),
         evaluator.evaluate(arg, { mod, env, mode })
       ),
-    repr: () => `${repr(target)}(${repr(arg)})`,
+    repr: () => `${target.repr()}(${arg.repr()})`,
   }
 }

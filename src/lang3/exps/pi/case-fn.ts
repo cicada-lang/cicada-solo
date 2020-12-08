@@ -1,5 +1,5 @@
 import { Evaluable, EvaluationMode } from "../../evaluable"
-import { Exp, repr } from "../../exp"
+import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
@@ -34,7 +34,7 @@ export function CaseFn(cases: Array<Case>): CaseFn {
       ),
     repr: () => {
       let s = cases
-        .map(({ pattern, ret }) => `(${Pattern.repr(pattern)}) => ${repr(ret)}`)
+        .map(({ pattern, ret }) => `(${Pattern.repr(pattern)}) => ${ret.repr()}`)
         .join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     },

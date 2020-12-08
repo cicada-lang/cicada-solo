@@ -1,5 +1,5 @@
 import { Evaluable, EvaluationMode } from "../../evaluable"
-import { Exp, repr } from "../../exp"
+import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
@@ -30,6 +30,6 @@ export function Equal(t: Exp, from: Exp, to: Exp): Equal {
         evaluator.evaluate(from, { mod, env, mode }),
         evaluator.evaluate(to, { mod, env, mode })
       ),
-    repr: () => `Equal(${repr(t)}, ${repr(from)}, ${repr(to)})`,
+    repr: () => `Equal(${t.repr()}, ${from.repr()}, ${to.repr()})`,
   }
 }

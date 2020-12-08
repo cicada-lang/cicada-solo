@@ -1,5 +1,5 @@
 import { Evaluable, EvaluationMode } from "../../evaluable"
-import { Exp, repr } from "../../exp"
+import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
@@ -30,6 +30,6 @@ export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
         evaluator.evaluate(motive, { mod, env, mode }),
         evaluator.evaluate(base, { mod, env, mode })
       ),
-    repr: () => `replace(${repr(target)}, ${repr(motive)}, ${repr(base)})`,
+    repr: () => `replace(${target.repr()}, ${motive.repr()}, ${base.repr()})`,
   }
 }

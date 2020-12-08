@@ -11,7 +11,7 @@ export function unexpected(
   value: Value.Value,
   opts: { message?: string } = {}
 ): string {
-  const exp_repr = Exp.repr(Readback.readback(mod, ctx, Value.type, value))
+  const exp_repr = Readback.readback(mod, ctx, Value.type, value).repr()
   if (opts.message !== undefined) {
     return ut.aline(`
         |I see unexpected ${exp_repr}.

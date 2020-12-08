@@ -1,6 +1,6 @@
 import { Evaluable, EvaluationMode } from "../evaluable"
 import { Repr } from "../repr"
-import { Exp, repr } from "../exp"
+import { Exp } from "../exp"
 import * as Evaluate from "../evaluate"
 import * as Explain from "../explain"
 import * as Value from "../value"
@@ -31,7 +31,7 @@ export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
       return evaluator.evaluate(ret, { mod, env, mode })
     },
     repr: () => {
-      const s = [...stmts.map(Stmt.repr), repr(ret)].join("\n")
+      const s = [...stmts.map(Stmt.repr), ret.repr()].join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     },
   }

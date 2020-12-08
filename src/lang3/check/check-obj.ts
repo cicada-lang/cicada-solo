@@ -42,14 +42,17 @@ function check_properties_aganst_sat(
     if (!Value.conversion(mod, ctx, entry.t, value, entry.value)) {
       throw new Trace.Trace(
         ut.aline(`
-          |I am expecting the following two values to be the same ${Exp.repr(
-            Readback.readback(mod, ctx, Value.type, entry.t)
-          )}.
+          |I am expecting the following two values to be the same ${Readback.readback(
+            mod,
+            ctx,
+            Value.type,
+            entry.t
+          ).repr()}.
           |But they are not.
           |The value in object:
-          |  ${Exp.repr(Readback.readback(mod, ctx, entry.t, value))}
+          |  ${Readback.readback(mod, ctx, entry.t, value).repr()}
           |The value in partially filled class:
-          |  ${Exp.repr(Readback.readback(mod, ctx, entry.t, entry.value))}
+          |  ${Readback.readback(mod, ctx, entry.t, entry.value).repr()}
           |`)
       )
     }

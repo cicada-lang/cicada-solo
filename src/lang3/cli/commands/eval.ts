@@ -32,7 +32,7 @@ export const handler = async (argv: Argv) => {
     console.log(output)
   } catch (error) {
     if (error instanceof Trace.Trace) {
-      console.error(Trace.repr(error, Exp.repr))
+      console.error(Trace.repr(error, (exp) => exp.repr()))
       process.exit(1)
     }
 

@@ -1,6 +1,6 @@
 import { Evaluable, EvaluationMode } from "../evaluable"
 import { Repr } from "../repr"
-import { Exp, repr } from "../exp"
+import { Exp } from "../exp"
 import * as Evaluate from "../evaluate"
 import * as Explain from "../explain"
 import * as Value from "../value"
@@ -26,6 +26,6 @@ export function Union(left: Exp, right: Exp): Union {
         evaluator.evaluate(left, { mod, env, mode }),
         evaluator.evaluate(right, { mod, env, mode })
       ),
-    repr: () => `{ ${repr(left)} | ${repr(right)} }`,
+    repr: () => `{ ${left.repr()} | ${right.repr()} }`,
   }
 }

@@ -21,7 +21,7 @@ export function check_fn(
     throw new Trace.Trace(
       ut.aline(`
         |Check.check_fn -- pattern mismatch.
-        |- fn: ${Exp.repr(fn)}
+        |- fn: ${fn.repr()}
         |`)
     )
   const arg = evaluator.evaluate(Pattern.to_exp(fn.pattern), {

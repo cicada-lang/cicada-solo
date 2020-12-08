@@ -53,7 +53,7 @@ export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
 }
 
 function infer_error<T>(exp: Exp.Exp): Trace.Trace<T> {
-  let exp_repr = Exp.repr(exp)
+  let exp_repr = exp.repr()
   exp_repr = exp_repr.replace(/\s+/g, " ")
   return new Trace.Trace(
     ut.aline(`

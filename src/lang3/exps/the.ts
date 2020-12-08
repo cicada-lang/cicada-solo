@@ -1,6 +1,6 @@
 import { Evaluable, EvaluationMode } from "../evaluable"
 import { Repr } from "../repr"
-import { Exp, repr } from "../exp"
+import { Exp } from "../exp"
 import * as Evaluate from "../evaluate"
 import * as Explain from "../explain"
 import * as Value from "../value"
@@ -24,6 +24,6 @@ export function The(t: Exp, exp: Exp): The {
     exp,
     evaluability: ({ mod, env, mode, evaluator }) =>
       evaluator.evaluate(exp, { mod, env, mode }),
-    repr: () => `{ ${repr(t)} -- ${repr(exp)} }`,
+    repr: () => `{ ${t.repr()} -- ${exp.repr()} }`,
   }
 }

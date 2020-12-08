@@ -1,5 +1,5 @@
 import { Evaluable, EvaluationMode } from "../../evaluable"
-import { Exp, repr } from "../../exp"
+import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
@@ -24,6 +24,6 @@ export function Fn(pattern: Pattern.Pattern, ret: Exp): Fn {
     ret,
     evaluability: ({ mod, env, mode }) =>
       Value.fn(Value.Closure.create(mod, env, pattern, ret)),
-    repr: () => `(${Pattern.repr(pattern)}) => ${repr(ret)}`,
+    repr: () => `(${Pattern.repr(pattern)}) => ${ret.repr()}`,
   }
 }

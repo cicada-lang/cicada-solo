@@ -14,7 +14,7 @@ export function output(mod: Mod.Mod, top: Top.Top): string {
     const ctx = Ctx.init()
     const t = Infer.infer(mod, ctx, top.exp)
     const value = evaluator.evaluate(top.exp, { mod, env })
-    const value_repr = Exp.repr(Readback.readback(mod, ctx, t, value))
+    const value_repr = Readback.readback(mod, ctx, t, value).repr()
     return `${value_repr}\n`
   }
 

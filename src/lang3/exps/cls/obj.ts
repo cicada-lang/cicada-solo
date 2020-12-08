@@ -1,5 +1,5 @@
 import { Evaluable, EvaluationMode } from "../../evaluable"
-import { Exp, repr } from "../../exp"
+import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
@@ -32,7 +32,7 @@ export function Obj(properties: Map<string, Exp>): Obj {
       ),
     repr: () => {
       const s = Array.from(properties)
-        .map(([name, exp]) => `${name} = ${repr(exp)}`)
+        .map(([name, exp]) => `${name} = ${exp.repr()}`)
         .join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     },

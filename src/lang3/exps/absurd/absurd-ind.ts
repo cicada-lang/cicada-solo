@@ -1,5 +1,5 @@
 import { Evaluable, EvaluationMode } from "../../evaluable"
-import { Exp, repr } from "../../exp"
+import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
@@ -27,6 +27,6 @@ export function AbsurdInd(target: Exp, motive: Exp): AbsurdInd {
         evaluator.evaluate(target, { mod, env, mode }),
         evaluator.evaluate(motive, { mod, env, mode })
       ),
-    repr: () => `Absurd.ind(${repr(target)}, ${repr(motive)})`,
+    repr: () => `Absurd.ind(${target.repr()}, ${motive.repr()})`,
   }
 }
