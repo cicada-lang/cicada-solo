@@ -18,15 +18,14 @@ export function Obj(properties: Map<string, Exp>): Obj {
   return {
     kind: "Exp.obj",
     properties,
-    evaluability(the) {
-      return Value.obj(
+    evaluability: ({ mod, env, mode }) =>
+      Value.obj(
         new Map(
           Array.from(properties, ([name, exp]) => [
             name,
-            Evaluate.evaluate(the.mod, the.env, exp, { mode: the.mode }),
+            Evaluate.evaluate(mod, env, exp, { mode }),
           ])
         )
-      )
-    },
+      ),
   }
 }

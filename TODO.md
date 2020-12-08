@@ -154,10 +154,10 @@
 - [lang3-oop] Evaluable type
 - [lang3-oop] Evaluable begin
 - [lang3-oop] Evaluable the
-- [lang3-oop] Evaluable constructor handle trace
+- [lang3-oop] Evaluable -- constructor handle trace
 
 - [lang3-oop] Evaluator
-- [lang3-oop] Evaluator passed to the arg of evaluability
+- [lang3-oop] Evaluator -- passed to the arg of evaluability
 
 # lang4
 

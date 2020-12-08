@@ -20,8 +20,7 @@ export function Fn(pattern: Pattern.Pattern, ret: Exp): Fn {
     kind: "Exp.fn",
     pattern,
     ret,
-    evaluability(the) {
-      return Value.fn(Value.Closure.create(the.mod, the.env, pattern, ret))
-    },
+    evaluability: ({ mod, env, mode }) =>
+      Value.fn(Value.Closure.create(mod, env, pattern, ret)),
   }
 }

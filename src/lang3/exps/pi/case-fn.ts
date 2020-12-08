@@ -23,12 +23,11 @@ export function CaseFn(cases: Array<Case>): CaseFn {
   return {
     kind: "Exp.case_fn",
     cases,
-    evaluability(the) {
-      return Value.case_fn(
+    evaluability: ({ mod, env, mode }) =>
+      Value.case_fn(
         cases.map(({ pattern, ret }) =>
-          Value.Closure.create(the.mod, the.env, pattern, ret)
+          Value.Closure.create(mod, env, pattern, ret)
         )
-      )
-    },
+      ),
   }
 }

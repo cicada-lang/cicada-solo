@@ -15,19 +15,19 @@ export function Var(name: string): Var {
   return {
     kind: "Exp.v",
     name,
-    evaluability(the) {
-      const value = Env.lookup(the.env, name)
+    evaluability: ({ mod, env, mode }) => {
+      const value = Env.lookup(env, name)
       if (value !== undefined) return value
 
-      const mod_value = Mod.lookup_value(the.mod, name)
+      const mod_value = Mod.lookup_value(mod, name)
       if (mod_value === undefined)
         throw new Trace.Trace(Explain.explain_name_undefined(name))
 
-      if (the.mode === EvaluationMode.mute_recursive_exp_in_mod) {
+      if (mode === EvaluationMode.mute_recursive_exp_in_mod) {
         // TODO We SHOULD NOT do this for non recursive `Den`.
-        Mod.update(the.mod, name, Mod.lookup_den(the.mod, name)!, {
+        Mod.update(mod, name, Mod.lookup_den(mod, name)!, {
           cached_value: Value.not_yet(
-            Mod.lookup_type(the.mod, name)!,
+            Mod.lookup_type(mod, name)!,
             Neutral.v(name)
           ),
         })
