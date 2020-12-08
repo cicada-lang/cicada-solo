@@ -144,8 +144,26 @@
 
 > refactoring!
 
+- [lang3-oop] `Checkable` -- begin
+- [lang3-oop] `Checkable` -- the
+- [lang3-oop] `Checkable` -- typecons
+- [lang3-oop] `Checkable` -- type
+- [lang3-oop] `Checkable` -- union
+- [lang3-oop] `Checkable` -- var
+- [lang3-oop] `Checkable` -- simple exps
+- [lang3-oop] `Checkable` -- pi
+- [lang3-oop] `Checkable` -- cls
+- [lang3-oop] `Checkable` -- equal
+- [lang3-oop] `Checkable` -- absurd
+- [lang3-oop] `Checkable` -- str
+
+- [lang3-oop] `Checker` and `checker`
+
+- [lang3-oop] inline `Check.check`
+
 - [lang3-oop] re-place `Evaluate`'s functions
 - [lang3-oop] `Exp` as an intersection of inferfaces
+  - use `MaybeInferable`
 
 # lang4
 
