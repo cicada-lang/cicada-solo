@@ -15,3 +15,7 @@ export type Evaluable = {
     evaluator: Evaluator
   }): Value
 }
+
+export function Evaluable(the: Evaluable): Evaluable {
+  return the
+}
