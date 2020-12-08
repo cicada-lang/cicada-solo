@@ -10,9 +10,10 @@ import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
 
-export type Str = Evaluable & Repr & {
-  kind: "Exp.str"
-}
+export type Str = Evaluable &
+  Repr & {
+    kind: "Exp.str"
+  }
 
 export const Str: Str = {
   kind: "Exp.str",

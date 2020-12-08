@@ -11,11 +11,12 @@ import * as Env from "../env"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
-export type Begin = Evaluable & Repr & {
-  kind: "Exp.begin"
-  stmts: Array<Stmt.Stmt>
-  ret: Exp
-}
+export type Begin = Evaluable &
+  Repr & {
+    kind: "Exp.begin"
+    stmts: Array<Stmt.Stmt>
+    ret: Exp
+  }
 
 export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
   return {
@@ -32,6 +33,6 @@ export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
     repr: () => {
       const s = [...stmts.map(Stmt.repr), repr(ret)].join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
-    }
+    },
   }
 }

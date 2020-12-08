@@ -10,21 +10,16 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.pi": {
-      return `(${exp.name}: ${Exp.repr(exp.arg_t)}) -> ${Exp.repr(exp.ret_t)}`
+      return exp.repr()
     }
     case "Exp.fn": {
-      return `(${Pattern.repr(exp.pattern)}) => ${Exp.repr(exp.ret)}`
+      return exp.repr()
     }
     case "Exp.case_fn": {
-      let s = exp.cases
-        .map(
-          ({ pattern, ret }) => `(${Pattern.repr(pattern)}) => ${Exp.repr(ret)}`
-        )
-        .join("\n")
-      return `{\n${ut.indent(s, "  ")}\n}`
+      return exp.repr()
     }
     case "Exp.ap": {
-      return `${Exp.repr(exp.target)}(${Exp.repr(exp.arg)})`
+      return exp.repr()
     }
     case "Exp.cls": {
       if (exp.sat.length === 0 && exp.scope.length === 0) return "Object"

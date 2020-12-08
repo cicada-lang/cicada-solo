@@ -9,11 +9,12 @@ import * as Mod from "../mod"
 import * as Env from "../env"
 import * as Trace from "../../trace"
 
-export type Union = Evaluable & Repr & {
-  kind: "Exp.union"
-  left: Exp
-  right: Exp
-}
+export type Union = Evaluable &
+  Repr & {
+    kind: "Exp.union"
+    left: Exp
+    right: Exp
+  }
 
 export function Union(left: Exp, right: Exp): Union {
   return {
@@ -25,6 +26,6 @@ export function Union(left: Exp, right: Exp): Union {
         evaluator.evaluate(left, { mod, env, mode }),
         evaluator.evaluate(right, { mod, env, mode })
       ),
-    repr: () => `{ ${repr(left)} | ${repr(right)} }`
+    repr: () => `{ ${repr(left)} | ${repr(right)} }`,
   }
 }

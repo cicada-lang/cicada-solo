@@ -1,4 +1,4 @@
-import { Evaluable, EvaluationMode } from "./evaluable" 
+import { Evaluable, EvaluationMode } from "./evaluable"
 import { Value } from "./value"
 import { Mod } from "./mod"
 import { Env } from "./env"

@@ -10,11 +10,12 @@ import * as Stmt from "../stmt"
 import * as Env from "../env"
 import * as Trace from "../../trace"
 
-export type The = Evaluable & Repr & {
-  kind: "Exp.the"
-  t: Exp
-  exp: Exp
-}
+export type The = Evaluable &
+  Repr & {
+    kind: "Exp.the"
+    t: Exp
+    exp: Exp
+  }
 
 export function The(t: Exp, exp: Exp): The {
   return {
@@ -23,6 +24,6 @@ export function The(t: Exp, exp: Exp): The {
     exp,
     evaluability: ({ mod, env, mode, evaluator }) =>
       evaluator.evaluate(exp, { mod, env, mode }),
-    repr: () => `{ ${repr(t)} -- ${repr(exp)} }`
+    repr: () => `{ ${repr(t)} -- ${repr(exp)} }`,
   }
 }

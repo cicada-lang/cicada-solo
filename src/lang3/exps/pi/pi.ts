@@ -1,5 +1,6 @@
 import { Evaluable, EvaluationMode } from "../../evaluable"
-import { Exp } from "../../exp"
+import { Exp, repr } from "../../exp"
+import { Repr } from "../../repr"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
 import * as Value from "../../value"
@@ -9,12 +10,13 @@ import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
 
-export type Pi = Evaluable & {
-  kind: "Exp.pi"
-  name: string
-  arg_t: Exp
-  ret_t: Exp
-}
+export type Pi = Evaluable &
+  Repr & {
+    kind: "Exp.pi"
+    name: string
+    arg_t: Exp
+    ret_t: Exp
+  }
 
 export function Pi(name: string, arg_t: Exp, ret_t: Exp): Pi {
   return {
@@ -27,5 +29,6 @@ export function Pi(name: string, arg_t: Exp, ret_t: Exp): Pi {
         evaluator.evaluate(arg_t, { mod, env, mode }),
         Value.Closure.create(mod, env, Pattern.v(name), ret_t)
       ),
+    repr: () => `(${name}: ${repr(arg_t)}) -> ${repr(ret_t)}`,
   }
 }
