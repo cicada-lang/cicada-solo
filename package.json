@@ -41,7 +41,7 @@
     "fast-deep-equal": "^3.1.3",
     "fast-glob": "^3.2.4",
     "fs-readdir-recursive": "^1.1.0",
-    "js-yaml": "^3.14.0",
+    "js-yaml": "^3.14.1",
     "nanoid": "^3.1.20",
     "plaintext": "^0.2.5",
     "portfinder": "^1.0.28",
