@@ -53,7 +53,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.same": {
-        return Value.same
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.replace": {
         return Evaluate.do_replace(

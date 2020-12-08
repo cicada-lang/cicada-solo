@@ -9,6 +9,7 @@ import { Cls } from "../exps/cls/cls"
 import { Obj } from "../exps/cls/obj"
 import { Dot } from "../exps/cls/dot"
 import { Equal } from "../exps/equal/equal"
+import { Same } from "../exps/equal/same"
 
 export type Exp =
   | Var
@@ -20,7 +21,7 @@ export type Exp =
   | Obj
   | Dot
   | Equal
-  | same
+  | Same
   | replace
   | absurd
   | absurd_ind
@@ -64,13 +65,8 @@ export const dot = Dot
 export type equal = Equal
 export const equal = Equal
 
-export type same = {
-  kind: "Exp.same"
-}
-
-export const same: same = {
-  kind: "Exp.same",
-}
+export type same = Same
+export const same = Same
 
 export type replace = {
   kind: "Exp.replace"
