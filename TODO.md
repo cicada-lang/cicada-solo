@@ -142,7 +142,6 @@
 
 # lang3-oop
 
-- [lang3-oop] Evaluable replace
 - [lang3-oop] Evaluable absurd
 - [lang3-oop] Evaluable absurd_ind
 - [lang3-oop] Evaluable str

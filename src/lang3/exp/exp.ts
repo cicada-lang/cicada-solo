@@ -10,6 +10,7 @@ import { Obj } from "../exps/cls/obj"
 import { Dot } from "../exps/cls/dot"
 import { Equal } from "../exps/equal/equal"
 import { Same } from "../exps/equal/same"
+import { Replace } from "../exps/equal/replace"
 
 export type Exp =
   | Var
@@ -22,7 +23,7 @@ export type Exp =
   | Dot
   | Equal
   | Same
-  | replace
+  | Replace
   | absurd
   | absurd_ind
   | str
@@ -68,19 +69,8 @@ export const equal = Equal
 export type same = Same
 export const same = Same
 
-export type replace = {
-  kind: "Exp.replace"
-  target: Exp
-  motive: Exp
-  base: Exp
-}
-
-export const replace = (target: Exp, motive: Exp, base: Exp): replace => ({
-  kind: "Exp.replace",
-  target,
-  motive,
-  base,
-})
+export type replace = Replace
+export const replace = Replace
 
 export type absurd = {
   kind: "Exp.absurd"
