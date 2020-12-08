@@ -46,9 +46,10 @@ export function Obj(properties: Map<string, Exp>): Obj {
       const cls = Value.is_cls(mod, ctx, t)
       // NOTE We DO NOT need to update the `ctx` as we go along.
       // - just like checking `Exp.cons`.
-      properties = new Map(properties)
-      check_properties_aganst_sat(mod, ctx, properties, cls.sat)
-      check_properties_aganst_tel(mod, ctx, properties, cls.tel)
+      const new_properties = new Map(properties)
+      // TODO should not use Map.delete
+      check_properties_aganst_sat(mod, ctx, new_properties, cls.sat)
+      check_properties_aganst_tel(mod, ctx, new_properties, cls.tel)
     },
   }
 }
