@@ -68,7 +68,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.quote": {
-        return Value.quote(exp.str)
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.union": {
         const { left, right } = exp
