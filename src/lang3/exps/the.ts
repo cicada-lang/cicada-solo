@@ -20,7 +20,7 @@ export function The(t: Exp, exp: Exp): The {
     kind: "Exp.the",
     t,
     exp,
-    evaluability: ({ mod, env, mode }) =>
-      Evaluate.evaluate(mod, env, exp, { mode }),
+    evaluability: ({ mod, env, mode, evaluator }) =>
+      evaluator.evaluate(exp, { mod, env, mode }),
   }
 }

@@ -20,12 +20,12 @@ export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
     kind: "Exp.begin",
     stmts,
     ret,
-    evaluability: ({ mod, env, mode }) => {
+    evaluability: ({ mod, env, mode, evaluator }) => {
       env = Env.clone(env)
       for (const stmt of stmts) {
         Stmt.execute(mod, env, stmt)
       }
-      return Evaluate.evaluate(mod, env, ret, { mode })
+      return evaluator.evaluate(ret, { mod, env, mode })
     },
   }
 }

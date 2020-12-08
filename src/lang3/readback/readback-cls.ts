@@ -1,3 +1,5 @@
+import { evaluator } from "../evaluator"
+import { EvaluationMode } from "../evaluable"
 import * as Readback from "../readback"
 import * as Evaluate from "../evaluate"
 import * as Value from "../value"
@@ -52,8 +54,10 @@ function readback_scope(
   for (const entry of tel.scope) {
     const name = entry.name
     const mod = Mod.clone(tel.mod)
-    const t_value = Evaluate.evaluate(mod, env, entry.t, {
-      mode: Evaluate.EvaluationMode.mute_recursive_exp_in_mod,
+    const t_value = evaluator.evaluate(entry.t, {
+      mod,
+      env,
+      mode: EvaluationMode.mute_recursive_exp_in_mod,
     })
     const t = Readback.readback(mod, ctx, Value.type, t_value)
     norm_scope.push({ name, t })

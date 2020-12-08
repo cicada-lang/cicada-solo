@@ -20,10 +20,10 @@ export function Ap(target: Exp, arg: Exp): Ap {
     kind: "Exp.ap",
     target,
     arg,
-    evaluability: ({ mod, env, mode }) =>
+    evaluability: ({ mod, env, mode, evaluator }) =>
       Evaluate.do_ap(
-        Evaluate.evaluate(mod, env, target, { mode }),
-        Evaluate.evaluate(mod, env, arg, { mode })
+        evaluator.evaluate(target, { mod, env, mode }),
+        evaluator.evaluate(arg, { mod, env, mode })
       ),
   }
 }

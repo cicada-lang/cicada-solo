@@ -1,3 +1,4 @@
+import { evaluator } from "../evaluator"
 import * as Mod from "../mod"
 import * as Env from "../env"
 import * as Exp from "../exp"
@@ -16,10 +17,10 @@ export function lookup_value(
       return Value.mod(entry.den.modpath, entry.den.mod)
     }
     case "Mod.Den.def": {
-      return Evaluate.evaluate(mod, Env.init(), entry.den.exp)
+      return evaluator.evaluate(entry.den.exp, { mod, env: Env.init() })
     }
     case "Mod.Den.typecons": {
-      return Evaluate.evaluate(mod, Env.init(), entry.den.typecons)
+      return evaluator.evaluate(entry.den.typecons, { mod, env: Env.init() })
     }
   }
 }

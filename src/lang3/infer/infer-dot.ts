@@ -1,3 +1,4 @@
+import { evaluator } from "../evaluator"
 import * as Infer from "../infer"
 import * as Check from "../check"
 import * as Evaluate from "../evaluate"
@@ -17,7 +18,7 @@ export function infer_dot(
     return Evaluate.do_dot(target_t, dot.name)
   }
 
-  const target = Evaluate.evaluate(mod, Ctx.to_env(ctx), dot.target)
+  const target = evaluator.evaluate(dot.target, { mod, env: Ctx.to_env(ctx) })
   if (target.kind === "Value.typecons") {
     const datacons = Evaluate.do_dot_typecons(target, dot.name)
     return datacons.t

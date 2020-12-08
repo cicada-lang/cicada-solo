@@ -1,3 +1,4 @@
+import { evaluator } from "../evaluator"
 import * as Readback from "../readback"
 import * as Evaluate from "../evaluate"
 import * as Value from "../value"
@@ -58,7 +59,7 @@ function readback_properties_from_tel(
   }
   for (const entry of tel.scope) {
     const name = entry.name
-    const property_t = Evaluate.evaluate(mod, env, entry.t)
+    const property_t = evaluator.evaluate(entry.t, { mod, env })
     const property_value = Evaluate.do_dot(value, name)
     const property_exp = Readback.readback(mod, ctx, property_t, property_value)
     properties.set(name, property_exp)

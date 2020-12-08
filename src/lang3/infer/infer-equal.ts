@@ -1,3 +1,4 @@
+import { evaluator } from "../evaluator"
 import * as Infer from "../infer"
 import * as Check from "../check"
 import * as Evaluate from "../evaluate"
@@ -12,7 +13,7 @@ export function infer_equal(
   equal: Exp.equal
 ): Value.type {
   Check.check(mod, ctx, equal.t, Value.type)
-  const t = Evaluate.evaluate(mod, Ctx.to_env(ctx), equal.t)
+  const t = evaluator.evaluate(equal.t, { mod, env: Ctx.to_env(ctx) })
   Check.check(mod, ctx, equal.from, t)
   Check.check(mod, ctx, equal.to, t)
   return Value.type

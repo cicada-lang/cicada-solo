@@ -22,11 +22,11 @@ export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
     target,
     motive,
     base,
-    evaluability: ({ mod, env, mode }) =>
+    evaluability: ({ mod, env, mode, evaluator }) =>
       Evaluate.do_replace(
-        Evaluate.evaluate(mod, env, target, { mode }),
-        Evaluate.evaluate(mod, env, motive, { mode }),
-        Evaluate.evaluate(mod, env, base, { mode })
+        evaluator.evaluate(target, { mod, env, mode }),
+        evaluator.evaluate(motive, { mod, env, mode }),
+        evaluator.evaluate(base, { mod, env, mode })
       ),
   }
 }

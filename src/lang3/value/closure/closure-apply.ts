@@ -1,3 +1,4 @@
+import { evaluator } from "../../evaluator"
 import * as Closure from "../closure"
 import * as Evaluate from "../../evaluate"
 import * as Value from "../../value"
@@ -20,5 +21,5 @@ export function apply(
         |- value.kind: ${value.kind}
         |`)
     )
-  return Evaluate.evaluate(closure.mod, env, closure.ret)
+  return evaluator.evaluate(closure.ret, { mod: closure.mod, env })
 }

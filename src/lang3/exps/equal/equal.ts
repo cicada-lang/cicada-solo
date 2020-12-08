@@ -22,11 +22,11 @@ export function Equal(t: Exp, from: Exp, to: Exp): Equal {
     t,
     from,
     to,
-    evaluability: ({ mod, env, mode }) =>
+    evaluability: ({ mod, env, mode, evaluator }) =>
       Value.equal(
-        Evaluate.evaluate(mod, env, t, { mode }),
-        Evaluate.evaluate(mod, env, from, { mode }),
-        Evaluate.evaluate(mod, env, to, { mode })
+        evaluator.evaluate(t, { mod, env, mode }),
+        evaluator.evaluate(from, { mod, env, mode }),
+        evaluator.evaluate(to, { mod, env, mode })
       ),
   }
 }

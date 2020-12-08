@@ -1,3 +1,4 @@
+import { evaluator } from "../evaluator"
 import * as Top from "../top"
 import * as Mod from "../mod"
 import * as Ctx from "../ctx"
@@ -12,7 +13,7 @@ export function output(mod: Mod.Mod, top: Top.Top): string {
     const env = Env.init()
     const ctx = Ctx.init()
     const t = Infer.infer(mod, ctx, top.exp)
-    const value = Evaluate.evaluate(mod, env, top.exp)
+    const value = evaluator.evaluate(top.exp, {mod, env})
     const value_repr = Exp.repr(Readback.readback(mod, ctx, t, value))
     return `${value_repr}\n`
   }

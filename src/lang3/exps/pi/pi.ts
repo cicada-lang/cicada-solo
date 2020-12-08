@@ -22,9 +22,9 @@ export function Pi(name: string, arg_t: Exp, ret_t: Exp): Pi {
     name,
     arg_t,
     ret_t,
-    evaluability: ({ mod, env, mode }) =>
+    evaluability: ({ mod, env, mode, evaluator }) =>
       Value.pi(
-        Evaluate.evaluate(mod, env, arg_t, { mode }),
+        evaluator.evaluate(arg_t, { mod, env, mode }),
         Value.Closure.create(mod, env, Pattern.v(name), ret_t)
       ),
   }

@@ -20,10 +20,10 @@ export function AbsurdInd(target: Exp, motive: Exp): AbsurdInd {
     kind: "Exp.absurd_ind",
     target,
     motive,
-    evaluability: ({ mod, env, mode }) =>
+    evaluability: ({ mod, env, mode, evaluator }) =>
       Evaluate.do_absurd_ind(
-        Evaluate.evaluate(mod, env, target, { mode }),
-        Evaluate.evaluate(mod, env, motive, { mode })
+        evaluator.evaluate(target, { mod, env, mode }),
+        evaluator.evaluate(motive, { mod, env, mode })
       ),
   }
 }

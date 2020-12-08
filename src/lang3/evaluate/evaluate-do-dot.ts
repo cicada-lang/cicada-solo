@@ -1,4 +1,4 @@
-import * as Evaluate from "../evaluate"
+import { evaluator } from "../evaluator"
 import * as Explain from "../explain"
 import * as Exp from "../exp"
 import * as Mod from "../mod"
@@ -62,7 +62,10 @@ export function do_dot_typecons(
   return Value.datacons(
     typecons,
     name,
-    Evaluate.evaluate(typecons.delayed.mod, typecons.delayed.env, entry.t)
+    evaluator.evaluate(entry.t, {
+      mod: typecons.delayed.mod,
+      env: typecons.delayed.env,
+    })
   )
 }
 

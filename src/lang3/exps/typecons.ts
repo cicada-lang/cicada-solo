@@ -25,10 +25,10 @@ export function Typecons(
     name,
     t,
     sums,
-    evaluability: ({ mod, env, mode }) =>
+    evaluability: ({ mod, env, mode, evaluator }) =>
       Value.typecons(
         name,
-        Evaluate.evaluate(mod, env, t, { mode }),
+        evaluator.evaluate(t, { mod, env, mode }),
         Value.DelayedSums.create(sums, mod, env)
       ),
   }

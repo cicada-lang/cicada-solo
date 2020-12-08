@@ -20,7 +20,7 @@ export function Dot(target: Exp, name: string): Dot {
     kind: "Exp.dot",
     target,
     name,
-    evaluability: ({ mod, env, mode }) =>
-      Evaluate.do_dot(Evaluate.evaluate(mod, env, target, { mode }), name),
+    evaluability: ({ mod, env, mode, evaluator }) =>
+      Evaluate.do_dot(evaluator.evaluate(target, { mod, env, mode }), name),
   }
 }

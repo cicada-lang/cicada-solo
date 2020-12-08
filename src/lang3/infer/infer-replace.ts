@@ -1,3 +1,4 @@
+import { evaluator } from "../evaluator"
 import * as Infer from "../infer"
 import * as Check from "../check"
 import * as Evaluate from "../evaluate"
@@ -14,13 +15,15 @@ export function infer_replace(
 ): Value.Value {
   const target_t = Infer.infer(mod, ctx, replace.target)
   const equal = Value.is_equal(mod, ctx, target_t)
-  const motive_t = Evaluate.evaluate(
+  const motive_t = evaluator.evaluate(Exp.pi("x", Exp.v("t"), Exp.type), {
     mod,
-    Env.update(Env.init(), "t", equal.t),
-    Exp.pi("x", Exp.v("t"), Exp.type)
-  )
+    env: Env.update(Env.init(), "t", equal.t),
+  })
   Check.check(mod, ctx, replace.motive, motive_t)
-  const motive = Evaluate.evaluate(mod, Ctx.to_env(ctx), replace.motive)
+  const motive = evaluator.evaluate(replace.motive, {
+    mod,
+    env: Ctx.to_env(ctx),
+  })
   Check.check(mod, ctx, replace.base, Evaluate.do_ap(motive, equal.from))
   return Evaluate.do_ap(motive, equal.to)
 }

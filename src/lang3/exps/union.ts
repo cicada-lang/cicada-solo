@@ -19,10 +19,10 @@ export function Union(left: Exp, right: Exp): Union {
     kind: "Exp.union",
     left,
     right,
-    evaluability: ({ mod, env, mode }) =>
+    evaluability: ({ mod, env, mode, evaluator }) =>
       Value.union(
-        Evaluate.evaluate(mod, env, left, { mode }),
-        Evaluate.evaluate(mod, env, right, { mode })
+        evaluator.evaluate(left, { mod, env, mode }),
+        evaluator.evaluate(right, { mod, env, mode })
       ),
   }
 }

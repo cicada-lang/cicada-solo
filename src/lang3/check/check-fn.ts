@@ -1,3 +1,4 @@
+import { evaluator } from "../evaluator"
 import * as Check from "../check"
 import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
@@ -23,11 +24,10 @@ export function check_fn(
         |- fn: ${Exp.repr(fn)}
         |`)
     )
-  const arg = Evaluate.evaluate(
+  const arg = evaluator.evaluate(Pattern.to_exp(fn.pattern), {
     mod,
-    Ctx.to_env(result_ctx),
-    Pattern.to_exp(fn.pattern)
-  )
+    env: Ctx.to_env(result_ctx),
+  })
   // NOTE Before we introduced `Pattern`, the following `arg` is used:
   //   const arg = Value.not_yet(pi.arg_t, Neutral.v(Value.pi_arg_name(pi)))
   Check.check(mod, result_ctx, fn.ret, Value.Closure.apply(pi.ret_t_cl, arg))
@@ -86,7 +86,10 @@ function match_datatype(
   // NOTE
   // - Examples:
   //   - List(T): Type
-  const typecons = Evaluate.evaluate(mod, Ctx.to_env(ctx), Exp.v(datatype.name))
+  const typecons = evaluator.evaluate(Exp.v(datatype.name), {
+    mod,
+    env: Ctx.to_env(ctx),
+  })
   if (typecons.kind !== "Value.typecons")
     throw new Trace.Trace("expecting typecons")
   return match_patterns(mod, ctx, datatype.args, typecons.t, matched)
@@ -136,7 +139,10 @@ function match_patterns(
     if (result_ctx === undefined) return undefined
     t = Value.Closure.apply(
       t.ret_t_cl,
-      Evaluate.evaluate(mod, Ctx.to_env(result_ctx), Pattern.to_exp(pattern))
+      evaluator.evaluate(Pattern.to_exp(pattern), {
+        mod,
+        env: Ctx.to_env(result_ctx),
+      })
     )
   }
   return result_ctx
