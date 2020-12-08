@@ -13,8 +13,5 @@ export function readback_datacons(
   t: Value.Value,
   datacons: Value.datacons
 ): Exp.dot {
-  return Exp.dot(
-    Exp.v(datacons.typecons.name),
-    datacons.tag
-  )
+  return Exp.dot(Exp.v(datacons.typecons.name), datacons.tag)
 }

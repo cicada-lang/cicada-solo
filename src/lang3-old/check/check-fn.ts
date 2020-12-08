@@ -86,11 +86,7 @@ function match_datatype(
   // NOTE
   // - Examples:
   //   - List(T): Type
-  const typecons = Evaluate.evaluate(
-    mod,
-    Ctx.to_env(ctx),
-    Exp.v(datatype.name)
-  )
+  const typecons = Evaluate.evaluate(mod, Ctx.to_env(ctx), Exp.v(datatype.name))
   if (typecons.kind !== "Value.typecons")
     throw new Trace.Trace("expecting typecons")
   return match_patterns(mod, ctx, datatype.args, typecons.t, matched)
@@ -115,13 +111,7 @@ function match_data(
   const datacons = Evaluate.do_dot(typecons, data.tag)
   if (datacons.kind !== "Value.datacons")
     throw new Trace.Trace("expecting datacons")
-  const result_ctx = match_patterns(
-    mod,
-    ctx,
-    data.args,
-    datacons.t,
-    matched
-  )
+  const result_ctx = match_patterns(mod, ctx, data.args, datacons.t, matched)
   if (result_ctx === undefined) return undefined
   // NOTE
   // - We simply do a check after the `match_patterns`,

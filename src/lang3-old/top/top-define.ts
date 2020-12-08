@@ -21,10 +21,6 @@ export function define(
   }
 
   if (top.kind === "Top.typecons") {
-    Mod.update(
-      mod,
-      top.typecons.name,
-      Mod.Den.typecons(top.typecons)
-    )
+    Mod.update(mod, top.typecons.name, Mod.Den.typecons(top.typecons))
   }
 }

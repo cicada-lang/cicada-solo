@@ -47,8 +47,7 @@ function check_datacons_t(
 
   if (
     (t_value.kind === "Value.typecons" && t_value.name === name) ||
-    (t_value.kind === "Value.datatype" &&
-      t_value.typecons.name === name)
+    (t_value.kind === "Value.datatype" && t_value.typecons.name === name)
   ) {
     return
   }
@@ -56,11 +55,7 @@ function check_datacons_t(
   throw new Trace.Trace("the t should be pi or ap of type constructor")
 }
 
-function check_typecons_t(
-  mod: Mod.Mod,
-  ctx: Ctx.Ctx,
-  t: Exp.Exp
-): void {
+function check_typecons_t(mod: Mod.Mod, ctx: Ctx.Ctx, t: Exp.Exp): void {
   if (t.kind === "Exp.pi") {
     const pi = t
     Check.check(mod, ctx, pi.arg_t, Value.type)

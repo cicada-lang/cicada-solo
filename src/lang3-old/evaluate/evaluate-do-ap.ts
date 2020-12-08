@@ -10,11 +10,9 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   if (target.kind === "Value.fn") return Value.Closure.apply(target.ret_cl, arg)
   if (target.kind === "Value.case_fn") return do_ap_case_fn(target, arg)
   if (target.kind === "Value.cls") return do_ap_cls(target, arg)
-  if (target.kind === "Value.typecons")
-    return do_ap_typecons(target, arg)
+  if (target.kind === "Value.typecons") return do_ap_typecons(target, arg)
   if (target.kind === "Value.datatype") return do_ap_datatype(target, arg)
-  if (target.kind === "Value.datacons")
-    return do_ap_datacons(target, arg)
+  if (target.kind === "Value.datacons") return do_ap_datacons(target, arg)
   if (target.kind === "Value.data") return do_ap_data(target, arg)
   if (target.kind === "Value.not_yet") return do_ap_not_yet(target, arg)
 
@@ -98,11 +96,7 @@ export function do_ap_datatype(
   if (datatype.t.kind === "Value.pi") {
     const pi = datatype.t
     const remain_t = Value.Closure.apply(pi.ret_t_cl, arg)
-    return Value.datatype(
-      datatype.typecons,
-      [...datatype.args, arg],
-      remain_t
-    )
+    return Value.datatype(datatype.typecons, [...datatype.args, arg], remain_t)
   }
 
   throw new Trace.Trace("expecting datatype.t to be Value.pi")

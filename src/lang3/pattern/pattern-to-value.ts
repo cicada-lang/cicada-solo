@@ -48,8 +48,7 @@ export function to_value(
       )
       for (const arg of pattern.args) {
         if (
-          (oprand.kind === "Value.datacons" ||
-            oprand.kind === "Value.data") &&
+          (oprand.kind === "Value.datacons" || oprand.kind === "Value.data") &&
           oprand.t.kind === "Value.pi"
         ) {
           const pi = oprand.t

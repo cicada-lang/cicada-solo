@@ -105,10 +105,7 @@ function alpha(left: Exp.Exp, right: Exp.Exp, the: AlphaCtx): boolean {
     )
   }
 
-  if (
-    left.kind === "Exp.typecons" &&
-    right.kind === "Exp.typecons"
-  )
+  if (left.kind === "Exp.typecons" && right.kind === "Exp.typecons")
     // NOTE datatype can only be at top level.
     return left.name === right.name
 

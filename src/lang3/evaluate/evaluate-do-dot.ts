@@ -12,8 +12,7 @@ export function do_dot(target: Value.Value, name: string): Value.Value {
   if (target.kind === "Value.obj") return do_dot_obj(target, name)
   if (target.kind === "Value.cls") return do_dot_cls(target, name)
   if (target.kind === "Value.mod") return do_dot_mod(target, name)
-  if (target.kind === "Value.typecons")
-    return do_dot_typecons(target, name)
+  if (target.kind === "Value.typecons") return do_dot_typecons(target, name)
   if (target.kind === "Value.not_yet") return do_dot_not_yet(target, name)
   throw new Trace.Trace(
     Explain.explain_elim_target_mismatch({
@@ -63,11 +62,7 @@ export function do_dot_typecons(
   return Value.datacons(
     typecons,
     name,
-    Evaluate.evaluate(
-      typecons.delayed.mod,
-      typecons.delayed.env,
-      entry.t
-    )
+    Evaluate.evaluate(typecons.delayed.mod, typecons.delayed.env, entry.t)
   )
 }
 

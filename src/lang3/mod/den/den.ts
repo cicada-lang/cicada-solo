@@ -34,9 +34,7 @@ export type typecons = {
   typecons: Exp.typecons
 }
 
-export const typecons = (
-  typecons: Exp.typecons
-): typecons => ({
+export const typecons = (typecons: Exp.typecons): typecons => ({
   kind: "Mod.Den.typecons",
   typecons,
 })
