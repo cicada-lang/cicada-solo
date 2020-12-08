@@ -142,7 +142,6 @@
 
 # lang3-oop
 
-- [lang3-oop] Evaluable str
 - [lang3-oop] Evaluable quote
 - [lang3-oop] Evaluable union
 - [lang3-oop] Evaluable type_constructor

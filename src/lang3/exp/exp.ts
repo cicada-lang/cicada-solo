@@ -13,6 +13,7 @@ import { Same } from "../exps/equal/same"
 import { Replace } from "../exps/equal/replace"
 import { Absurd } from "../exps/absurd/absurd"
 import { AbsurdInd } from "../exps/absurd/absurd-ind"
+import { Str } from "../exps/str/str"
 
 export type Exp =
   | Var
@@ -27,8 +28,8 @@ export type Exp =
   | Same
   | Replace
   | Absurd
-  | absurd_ind
-  | str
+  | AbsurdInd
+  | Str
   | quote
   | union
   | type_constructor
@@ -80,13 +81,8 @@ export const absurd = Absurd
 export type absurd_ind = AbsurdInd
 export const absurd_ind = AbsurdInd
 
-export type str = {
-  kind: "Exp.str"
-}
-
-export const str: str = {
-  kind: "Exp.str",
-}
+export type str = Str
+export const str = Str
 
 export type quote = {
   kind: "Exp.quote"
