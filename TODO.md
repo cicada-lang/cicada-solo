@@ -144,7 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] `Checkable` -- begin
 - [lang3-oop] `Checkable` -- the
 - [lang3-oop] `Checkable` -- typecons
 - [lang3-oop] `Checkable` -- type
