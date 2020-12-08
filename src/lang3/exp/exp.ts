@@ -5,6 +5,7 @@ import { Pi } from "../exps/pi/pi"
 import { Fn } from "../exps/pi/fn"
 import { CaseFn } from "../exps/pi/case-fn"
 import { Ap } from "../exps/pi/ap"
+import { Cls } from "../exps/cls/cls"
 
 export type Exp =
   | Var
@@ -12,7 +13,7 @@ export type Exp =
   | Fn
   | CaseFn
   | Ap
-  | cls
+  | Cls
   | obj
   | dot
   | equal
@@ -48,20 +49,8 @@ export const case_fn = CaseFn
 export type ap = Ap
 export const ap = Ap
 
-export type cls = {
-  kind: "Exp.cls"
-  sat: Array<{ name: string; t: Exp; exp: Exp }>
-  scope: Array<{ name: string; t: Exp }>
-}
-
-export const cls = (
-  sat: Array<{ name: string; t: Exp; exp: Exp }>,
-  scope: Array<{ name: string; t: Exp }>
-): cls => ({
-  kind: "Exp.cls",
-  sat,
-  scope,
-})
+export type cls = Cls
+export const cls = Cls
 
 export type obj = {
   kind: "Exp.obj"

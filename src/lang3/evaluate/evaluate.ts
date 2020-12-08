@@ -41,29 +41,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.cls": {
-        env = Env.clone(env)
-        const sat = new Array()
-        for (const entry of exp.sat) {
-          const name = entry.name
-          const t = Evaluate.evaluate(mod, env, entry.t, opts)
-          const value = Evaluate.evaluate(mod, env, entry.exp, opts)
-          sat.push({ name, t, value })
-          Env.update(env, name, value)
-        }
-        if (exp.scope.length === 0) {
-          return Value.cls(
-            sat,
-            Value.Telescope.create(mod, env, undefined, new Array())
-          )
-        } else {
-          const [entry, ...tail] = exp.scope
-          const name = entry.name
-          const t = Evaluate.evaluate(mod, env, entry.t, opts)
-          return Value.cls(
-            sat,
-            Value.Telescope.create(mod, env, { name, t }, tail)
-          )
-        }
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.obj": {
         const { properties } = exp
