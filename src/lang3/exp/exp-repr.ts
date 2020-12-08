@@ -22,26 +22,13 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.cls": {
-      if (exp.sat.length === 0 && exp.scope.length === 0) return "Object"
-
-      const parts = [
-        ...exp.sat.map(
-          ({ name, t, exp }) => `${name} : ${Exp.repr(t)} = ${Exp.repr(exp)}`
-        ),
-        ...exp.scope.map(({ name, t }) => `${name} : ${Exp.repr(t)}`),
-      ]
-      let s = parts.join("\n")
-      return `{\n${ut.indent(s, "  ")}\n}`
+      return exp.repr()
     }
     case "Exp.obj": {
-      const s = Array.from(exp.properties)
-        .map(([name, exp]) => `${name} = ${Exp.repr(exp)}`)
-        .join("\n")
-      return `{\n${ut.indent(s, "  ")}\n}`
+      return exp.repr()
     }
     case "Exp.dot": {
-      const { target, name } = exp
-      return `${Exp.repr(target)}.${name}`
+      return exp.repr()
     }
     case "Exp.equal": {
       return exp.repr()
@@ -74,8 +61,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.begin": {
-      const s = [...exp.stmts.map(Stmt.repr), repr(exp.ret)].join("\n")
-      return `{\n${ut.indent(s, "  ")}\n}`
+      return exp.repr()
     }
     case "Exp.the": {
       return exp.repr()

@@ -1,5 +1,6 @@
 import { Evaluable, EvaluationMode } from "../../evaluable"
-import { Exp } from "../../exp"
+import { Exp, repr } from "../../exp"
+import { Repr } from "../../repr"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
 import * as Value from "../../value"
@@ -8,11 +9,13 @@ import * as Neutral from "../../neutral"
 import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
+import * as ut from "../../../ut"
 
-export type Obj = Evaluable & {
-  kind: "Exp.obj"
-  properties: Map<string, Exp>
-}
+export type Obj = Evaluable &
+  Repr & {
+    kind: "Exp.obj"
+    properties: Map<string, Exp>
+  }
 
 export function Obj(properties: Map<string, Exp>): Obj {
   return {
@@ -27,5 +30,11 @@ export function Obj(properties: Map<string, Exp>): Obj {
           ])
         )
       ),
+    repr: () => {
+      const s = Array.from(properties)
+        .map(([name, exp]) => `${name} = ${repr(exp)}`)
+        .join("\n")
+      return `{\n${ut.indent(s, "  ")}\n}`
+    },
   }
 }
