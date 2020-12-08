@@ -144,6 +144,9 @@
 
 > refactoring!
 
+- [lang3-oop] replace `Evaluate`'s functions
+- [lang3-oop] interface for `Exp.repr`
+
 # lang4
 
 > jojo -- to study normal form and recursion.
