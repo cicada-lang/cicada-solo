@@ -15,7 +15,7 @@ import { infer_equal } from "./infer-equal"
 import { infer_replace } from "./infer-replace"
 import { infer_absurd_ind } from "./infer-absurd-ind"
 import { infer_union } from "./infer-union"
-import { infer_typecons } from "./infer-type-constructor"
+import { infer_typecons } from "./infer-typecons"
 import { infer_begin } from "./infer-begin"
 import { infer_the } from "./infer-the"
 
