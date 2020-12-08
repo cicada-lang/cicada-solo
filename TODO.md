@@ -144,7 +144,7 @@
 
 > refactoring!
 
-- [lang3-oop] `repr` -- replace `Exp.repr`
+- [lang3-oop] inline `Exp.repr`
 - [lang3-oop] re-place `Evaluate`'s functions
 - [lang3-oop] `Exp` as an intersection of inferfaces
 
