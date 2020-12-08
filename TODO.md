@@ -142,8 +142,6 @@
 
 # lang3-oop
 
-- [lang3-oop] Evaluable the
-
 - [lang3-oop] Evaluator
 - [lang3-oop] Evaluator -- handle trace
 - [lang3-oop] Evaluator -- passed to the arg of evaluability

@@ -19,6 +19,7 @@ import { Union } from "../exps/union"
 import { Typecons } from "../exps/typecons"
 import { Type } from "../exps/type"
 import { Begin } from "../exps/begin"
+import { The } from "../exps/the"
 
 export type Exp =
   | Var
@@ -40,7 +41,7 @@ export type Exp =
   | Typecons
   | Type
   | Begin
-  | the
+  | The
 
 export type v = Var
 export const v = Var
@@ -104,14 +105,5 @@ export const type = Type
 export type begin = Begin
 export const begin = Begin
 
-export type the = {
-  kind: "Exp.the"
-  t: Exp
-  exp: Exp
-}
-
-export const the = (t: Exp, exp: Exp): the => ({
-  kind: "Exp.the",
-  t,
-  exp,
-})
+export type the = The
+export const the = The

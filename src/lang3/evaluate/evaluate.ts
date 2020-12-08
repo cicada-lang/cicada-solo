@@ -83,7 +83,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.the": {
-        return Evaluate.evaluate(mod, env, exp.exp, opts)
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
     }
   } catch (error) {
