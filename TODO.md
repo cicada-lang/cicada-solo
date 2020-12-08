@@ -144,6 +144,12 @@
 
 > refactoring!
 
+<<<<<<< HEAD
+=======
+- [lang3-oop] `Checkable` -- case_fn
+- [lang3-oop] `Checkable` -- obj
+
+>>>>>>> parent of 408805b (- [lang3-oop] `Checkable` -- case_fn)
 - [lang3-oop] use the `Evaluable` constructor
 - [lang3-oop] use the `Checkable` constructor
 
