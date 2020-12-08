@@ -143,6 +143,8 @@
 # lang3-oop
 
 - [lang3-oop] Evaluator
+- [lang3-oop] Evaluator -- default evaluator
+- [lang3-oop] Evaluator -- replace `Evaluate.evaluate`
 - [lang3-oop] Evaluator -- handle trace
 - [lang3-oop] Evaluator -- passed to the arg of evaluability
 
