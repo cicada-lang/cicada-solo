@@ -10,7 +10,6 @@ import { check_fn } from "./check-fn"
 import { check_case_fn } from "./check-case-fn"
 import { check_obj } from "./check-obj"
 import { check_same } from "./check-same"
-import { check_quote } from "./check-quote"
 import { check_by_infer } from "./check-by-infer"
 
 export function check(
@@ -29,14 +28,13 @@ export function check(
       return check_obj(mod, ctx, exp, Value.is_cls(mod, ctx, t))
     if (exp.kind === "Exp.same")
       return check_same(mod, ctx, exp, Value.is_equal(mod, ctx, t))
+    if (exp.kind === "Exp.quote") return exp.checkability(t, { mod, ctx })
     if (exp.kind === "Exp.begin") return exp.checkability(t, { mod, ctx })
-    if (exp.kind === "Exp.quote") return check_quote(mod, ctx, exp, t)
     return check_by_infer(mod, ctx, exp, t)
   } catch (error) {
     if (error instanceof Trace.Trace) {
       throw Trace.trail(error, exp)
-    } else {
-      throw error
     }
+    throw error
   }
 }
