@@ -24,68 +24,7 @@ export function evaluate(
   opts: EvaluationOpts = {}
 ): Value.Value {
   try {
-    switch (exp.kind) {
-      case "Exp.v": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.pi": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.fn": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.case_fn": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.ap": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.cls": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.obj": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.dot": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.equal": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.same": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.replace": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.absurd": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.absurd_ind": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.str": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.quote": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.union": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.typecons": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.type": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.begin": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-      case "Exp.the": {
-        return exp.evaluability({ mod, env, mode: opts.mode })
-      }
-    }
+    return exp.evaluability({ mod, env, mode: opts.mode })
   } catch (error) {
     if (error instanceof Trace.Trace) {
       throw Trace.trail(error, exp)
