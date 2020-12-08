@@ -11,6 +11,7 @@ import { Dot } from "../exps/cls/dot"
 import { Equal } from "../exps/equal/equal"
 import { Same } from "../exps/equal/same"
 import { Replace } from "../exps/equal/replace"
+import { Absurd } from "../exps/absurd/absurd"
 
 export type Exp =
   | Var
@@ -24,7 +25,7 @@ export type Exp =
   | Equal
   | Same
   | Replace
-  | absurd
+  | Absurd
   | absurd_ind
   | str
   | quote
@@ -72,13 +73,8 @@ export const same = Same
 export type replace = Replace
 export const replace = Replace
 
-export type absurd = {
-  kind: "Exp.absurd"
-}
-
-export const absurd: absurd = {
-  kind: "Exp.absurd",
-}
+export type absurd = Absurd
+export const absurd = Absurd
 
 export type absurd_ind = {
   kind: "Exp.absurd_ind"

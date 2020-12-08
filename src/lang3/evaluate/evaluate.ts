@@ -59,7 +59,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.absurd": {
-        return Value.absurd
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.absurd_ind": {
         return Evaluate.do_absurd_ind(
