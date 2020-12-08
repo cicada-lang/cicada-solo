@@ -54,7 +54,9 @@ export function Cls(
     repr: () => {
       if (sat.length === 0 && scope.length === 0) return "Object"
       const parts = [
-        ...sat.map(({ name, t, exp }) => `${name} : ${t.repr()} = ${exp.repr()}`),
+        ...sat.map(
+          ({ name, t, exp }) => `${name} : ${t.repr()} = ${exp.repr()}`
+        ),
         ...scope.map(({ name, t }) => `${name} : ${t.repr()}`),
       ]
       let s = parts.join("\n")
