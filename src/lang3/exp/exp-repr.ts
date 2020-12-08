@@ -44,17 +44,13 @@ export function repr(exp: Exp.Exp): string {
       return `${Exp.repr(target)}.${name}`
     }
     case "Exp.equal": {
-      return `Equal(${Exp.repr(exp.t)}, ${Exp.repr(exp.from)}, ${Exp.repr(
-        exp.to
-      )})`
+      return exp.repr()
     }
     case "Exp.same": {
-      return "same"
+      return exp.repr()
     }
     case "Exp.replace": {
-      return `replace(${Exp.repr(exp.target)}, ${Exp.repr(
-        exp.motive
-      )}, ${Exp.repr(exp.base)})`
+      return exp.repr()
     }
     case "Exp.absurd": {
       return exp.repr()
