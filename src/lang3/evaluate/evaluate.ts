@@ -74,11 +74,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.typecons": {
-        return Value.typecons(
-          exp.name,
-          Evaluate.evaluate(mod, env, exp.t, opts),
-          Value.DelayedSums.create(exp.sums, mod, env)
-        )
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.type": {
         return exp.evaluability({ mod, env, mode: opts.mode })

@@ -16,7 +16,7 @@ import { AbsurdInd } from "../exps/absurd/absurd-ind"
 import { Str } from "../exps/str/str"
 import { Quote } from "../exps/str/quote"
 import { Union } from "../exps/union"
-// import { Typecons } from "../exps/typecons"
+import { Typecons } from "../exps/typecons"
 import { Type } from "../exps/type"
 
 export type Exp =
@@ -36,7 +36,7 @@ export type Exp =
   | Str
   | Quote
   | Union
-  | typecons
+  | Typecons
   | Type
   | begin
   | the
@@ -94,23 +94,8 @@ export const quote = Quote
 export type union = Union
 export const union = Union
 
-export type typecons = {
-  kind: "Exp.typecons"
-  name: string
-  t: Exp
-  sums: Array<{ tag: string; t: Exp }>
-}
-
-export const typecons = (
-  name: string,
-  t: Exp,
-  sums: Array<{ tag: string; t: Exp }>
-): typecons => ({
-  kind: "Exp.typecons",
-  name,
-  t,
-  sums,
-})
+export type typecons = Typecons
+export const typecons = Typecons
 
 export type type = Type
 export const type = Type
