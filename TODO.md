@@ -144,7 +144,7 @@
 
 > refactoring!
 
-- [lang3-oop] replace `Evaluate`'s functions
+- [lang3-oop] re-place `Evaluate`'s functions
 - [lang3-oop] interface for `Exp.repr`
 
 # lang4
