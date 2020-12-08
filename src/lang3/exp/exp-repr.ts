@@ -7,7 +7,7 @@ import * as ut from "../../ut"
 export function repr(exp: Exp.Exp): string {
   switch (exp.kind) {
     case "Exp.v": {
-      return exp.name
+      return exp.repr()
     }
     case "Exp.pi": {
       return `(${exp.name}: ${Exp.repr(exp.arg_t)}) -> ${Exp.repr(exp.ret_t)}`
@@ -74,14 +74,13 @@ export function repr(exp: Exp.Exp): string {
       return `"${exp.str}"`
     }
     case "Exp.union": {
-      const { left, right } = exp
-      return `{ ${Exp.repr(left)} | ${Exp.repr(right)} }`
+      return exp.repr()
     }
     case "Exp.typecons": {
-      return exp.name
+      return exp.repr()
     }
     case "Exp.type": {
-      return "Type"
+      return exp.repr()
     }
     case "Exp.begin": {
       const s = [...exp.stmts.map(Stmt.repr), repr(exp.ret)].join("\n")

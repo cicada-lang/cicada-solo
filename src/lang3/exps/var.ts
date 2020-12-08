@@ -19,15 +19,12 @@ export function Var(name: string): Var {
   return {
     kind: "Exp.v",
     name,
-
     evaluability: ({ mod, env, mode }) => {
       const value = Env.lookup(env, name)
       if (value !== undefined) return value
-
       const mod_value = Mod.lookup_value(mod, name)
       if (mod_value === undefined)
         throw new Trace.Trace(Explain.explain_name_undefined(name))
-
       if (mode === EvaluationMode.mute_recursive_exp_in_mod) {
         // TODO We SHOULD NOT do this for non recursive `Den`.
         Mod.update(mod, name, Mod.lookup_den(mod, name)!, {
@@ -37,10 +34,8 @@ export function Var(name: string): Var {
           ),
         })
       }
-
       return mod_value
     },
-
     repr: () => name,
   }
 }
