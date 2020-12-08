@@ -8,6 +8,7 @@ import { Ap } from "../exps/pi/ap"
 import { Cls } from "../exps/cls/cls"
 import { Obj } from "../exps/cls/obj"
 import { Dot } from "../exps/cls/dot"
+import { Equal } from "../exps/equal/equal"
 
 export type Exp =
   | Var
@@ -18,7 +19,7 @@ export type Exp =
   | Cls
   | Obj
   | Dot
-  | equal
+  | Equal
   | same
   | replace
   | absurd
@@ -60,19 +61,8 @@ export const obj = Obj
 export type dot = Dot
 export const dot = Dot
 
-export type equal = {
-  kind: "Exp.equal"
-  t: Exp
-  from: Exp
-  to: Exp
-}
-
-export const equal = (t: Exp, from: Exp, to: Exp): equal => ({
-  kind: "Exp.equal",
-  t,
-  from,
-  to,
-})
+export type equal = Equal
+export const equal = Equal
 
 export type same = {
   kind: "Exp.same"

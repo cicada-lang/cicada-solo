@@ -50,11 +50,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.equal": {
-        return Value.equal(
-          Evaluate.evaluate(mod, env, exp.t, opts),
-          Evaluate.evaluate(mod, env, exp.from, opts),
-          Evaluate.evaluate(mod, env, exp.to, opts)
-        )
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.same": {
         return Value.same
