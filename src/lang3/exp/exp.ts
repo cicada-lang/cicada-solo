@@ -12,6 +12,7 @@ import { Equal } from "../exps/equal/equal"
 import { Same } from "../exps/equal/same"
 import { Replace } from "../exps/equal/replace"
 import { Absurd } from "../exps/absurd/absurd"
+import { AbsurdInd } from "../exps/absurd/absurd-ind"
 
 export type Exp =
   | Var
@@ -76,17 +77,8 @@ export const replace = Replace
 export type absurd = Absurd
 export const absurd = Absurd
 
-export type absurd_ind = {
-  kind: "Exp.absurd_ind"
-  target: Exp
-  motive: Exp
-}
-
-export const absurd_ind = (target: Exp, motive: Exp): absurd_ind => ({
-  kind: "Exp.absurd_ind",
-  target,
-  motive,
-})
+export type absurd_ind = AbsurdInd
+export const absurd_ind = AbsurdInd
 
 export type str = {
   kind: "Exp.str"

@@ -62,10 +62,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.absurd_ind": {
-        return Evaluate.do_absurd_ind(
-          Evaluate.evaluate(mod, env, exp.target, opts),
-          Evaluate.evaluate(mod, env, exp.motive, opts)
-        )
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.str": {
         return Value.str
