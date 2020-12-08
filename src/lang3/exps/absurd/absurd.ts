@@ -1,4 +1,5 @@
 import { Evaluable, EvaluationMode } from "../../evaluable"
+import { Repr } from "../../repr"
 import { Exp } from "../../exp"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
@@ -9,11 +10,12 @@ import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
 
-export type Absurd = Evaluable & {
+export type Absurd = Evaluable & Repr & {
   kind: "Exp.absurd"
 }
 
 export const Absurd: Absurd = {
   kind: "Exp.absurd",
   evaluability: ({ mod, env, mode }) => Value.absurd,
+  repr: () => "Absurd",
 }

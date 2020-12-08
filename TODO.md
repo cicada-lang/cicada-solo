@@ -144,7 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] `Repr` -- for absurd
 - [lang3-oop] `Repr` -- for str
 - [lang3-oop] `Repr` -- for pi
 - [lang3-oop] `Repr` -- for cls

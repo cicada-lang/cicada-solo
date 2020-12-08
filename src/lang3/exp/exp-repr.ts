@@ -62,10 +62,10 @@ export function repr(exp: Exp.Exp): string {
       )}, ${Exp.repr(exp.base)})`
     }
     case "Exp.absurd": {
-      return "Absurd"
+      return exp.repr()
     }
     case "Exp.absurd_ind": {
-      return `Absurd.ind(${Exp.repr(exp.target)}, ${Exp.repr(exp.motive)})`
+      return exp.repr()
     }
     case "Exp.str": {
       return "String"
@@ -87,7 +87,7 @@ export function repr(exp: Exp.Exp): string {
       return `{\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.the": {
-      return `{ ${Exp.repr(exp.t)} -- ${Exp.repr(exp.exp)} }`
+      return exp.repr()
     }
   }
 }
