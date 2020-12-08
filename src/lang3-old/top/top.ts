@@ -1,7 +1,7 @@
 import * as Exp from "../exp"
 import * as Modpath from "../modpath"
 
-export type Top = $import | def | type_constructor | show
+export type Top = $import | def | typecons | show
 
 type $import = {
   kind: "Top.import"
@@ -31,16 +31,16 @@ export const def = (
   exp,
 })
 
-type type_constructor = {
-  kind: "Top.type_constructor"
-  type_constructor: Exp.type_constructor
+type typecons = {
+  kind: "Top.typecons"
+  typecons: Exp.typecons
 }
 
-export const type_constructor = (
-  type_constructor: Exp.type_constructor
-): type_constructor => ({
-  kind: "Top.type_constructor",
-  type_constructor,
+export const typecons = (
+  typecons: Exp.typecons
+): typecons => ({
+  kind: "Top.typecons",
+  typecons,
 })
 
 type show = {

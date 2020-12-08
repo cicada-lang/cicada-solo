@@ -10,7 +10,7 @@ import { readback_union } from "./readback-union"
 import { readback_fn } from "./readback-fn"
 import { readback_case_fn } from "./readback-case-fn"
 import { readback_obj } from "./readback-obj"
-import { readback_type_constructor } from "./readback-type-constructor"
+import { readback_typecons } from "./readback-type-constructor"
 import { readback_datatype } from "./readback-datatype"
 import { readback_data_constructor } from "./readback-data-constructor"
 import { readback_data } from "./readback-data"
@@ -22,8 +22,8 @@ export function readback(
   t: Value.Value,
   value: Value.Value
 ): Exp.Exp {
-  if (value.kind === "Value.type_constructor")
-    return readback_type_constructor(mod, ctx, t, value)
+  if (value.kind === "Value.typecons")
+    return readback_typecons(mod, ctx, t, value)
   if (value.kind === "Value.datatype")
     return readback_datatype(mod, ctx, t, value)
   if (value.kind === "Value.data_constructor")

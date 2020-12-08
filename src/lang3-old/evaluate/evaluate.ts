@@ -148,8 +148,8 @@ export function evaluate(
           Evaluate.evaluate(mod, env, right, opts)
         )
       }
-      case "Exp.type_constructor": {
-        return Value.type_constructor(
+      case "Exp.typecons": {
+        return Value.typecons(
           exp.name,
           Evaluate.evaluate(mod, env, exp.t, opts),
           Value.DelayedSums.create(exp.sums, mod, env)

@@ -34,7 +34,7 @@ export type Exp =
   | Str
   | Quote
   | Union
-  | type_constructor
+  | typecons
   | type
   | begin
   | the
@@ -92,19 +92,19 @@ export const quote = Quote
 export type union = Union
 export const union = Union
 
-export type type_constructor = {
-  kind: "Exp.type_constructor"
+export type typecons = {
+  kind: "Exp.typecons"
   name: string
   t: Exp
   sums: Array<{ tag: string; t: Exp }>
 }
 
-export const type_constructor = (
+export const typecons = (
   name: string,
   t: Exp,
   sums: Array<{ tag: string; t: Exp }>
-): type_constructor => ({
-  kind: "Exp.type_constructor",
+): typecons => ({
+  kind: "Exp.typecons",
   name,
   t,
   sums,

@@ -10,8 +10,8 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   if (target.kind === "Value.fn") return Value.Closure.apply(target.ret_cl, arg)
   if (target.kind === "Value.case_fn") return do_ap_case_fn(target, arg)
   if (target.kind === "Value.cls") return do_ap_cls(target, arg)
-  if (target.kind === "Value.type_constructor")
-    return do_ap_type_constructor(target, arg)
+  if (target.kind === "Value.typecons")
+    return do_ap_typecons(target, arg)
   if (target.kind === "Value.datatype") return do_ap_datatype(target, arg)
   if (target.kind === "Value.data_constructor")
     return do_ap_data_constructor(target, arg)
@@ -78,17 +78,17 @@ export function do_ap_cls(cls: Value.cls, arg: Value.Value): Value.cls {
   )
 }
 
-export function do_ap_type_constructor(
-  type_constructor: Value.type_constructor,
+export function do_ap_typecons(
+  typecons: Value.typecons,
   arg: Value.Value
 ): Value.datatype {
-  if (type_constructor.t.kind === "Value.pi") {
-    const pi = type_constructor.t
+  if (typecons.t.kind === "Value.pi") {
+    const pi = typecons.t
     const remain_t = Value.Closure.apply(pi.ret_t_cl, arg)
-    return Value.datatype(type_constructor, [arg], remain_t)
+    return Value.datatype(typecons, [arg], remain_t)
   }
 
-  throw new Trace.Trace("expecting type_constructor.t to be Value.pi")
+  throw new Trace.Trace("expecting typecons.t to be Value.pi")
 }
 
 export function do_ap_datatype(
@@ -99,7 +99,7 @@ export function do_ap_datatype(
     const pi = datatype.t
     const remain_t = Value.Closure.apply(pi.ret_t_cl, arg)
     return Value.datatype(
-      datatype.type_constructor,
+      datatype.typecons,
       [...datatype.args, arg],
       remain_t
     )

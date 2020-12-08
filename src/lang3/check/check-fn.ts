@@ -48,18 +48,18 @@ function match_pattern(
 
   if (
     pattern.kind === "Pattern.data" &&
-    t.kind === "Value.type_constructor" &&
+    t.kind === "Value.typecons" &&
     t.name === pattern.name
   )
-    // TODO Why we can not normalize `type_constructor` to `datatype`?
+    // TODO Why we can not normalize `typecons` to `datatype`?
     return match_data(mod, ctx, pattern, t, t, matched)
 
   if (
     pattern.kind === "Pattern.data" &&
     t.kind === "Value.datatype" &&
-    t.type_constructor.name === pattern.name
+    t.typecons.name === pattern.name
   )
-    return match_data(mod, ctx, pattern, t.type_constructor, t, matched)
+    return match_data(mod, ctx, pattern, t.typecons, t, matched)
 
   return undefined
 }
@@ -86,21 +86,21 @@ function match_datatype(
   // NOTE
   // - Examples:
   //   - List(T): Type
-  const type_constructor = Evaluate.evaluate(
+  const typecons = Evaluate.evaluate(
     mod,
     Ctx.to_env(ctx),
     Exp.v(datatype.name)
   )
-  if (type_constructor.kind !== "Value.type_constructor")
-    throw new Trace.Trace("expecting type_constructor")
-  return match_patterns(mod, ctx, datatype.args, type_constructor.t, matched)
+  if (typecons.kind !== "Value.typecons")
+    throw new Trace.Trace("expecting typecons")
+  return match_patterns(mod, ctx, datatype.args, typecons.t, matched)
 }
 
 function match_data(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   data: Pattern.data,
-  type_constructor: Value.type_constructor,
+  typecons: Value.typecons,
   t: Value.Value,
   matched: Map<string, Value.Value>
 ): undefined | Ctx.Ctx {
@@ -112,7 +112,7 @@ function match_data(
   //   - Vec.cons(T)(prev)(head)(tail): Vec(T)(Nat.succ(prev))
   // NOTE
   // - We will infer the type of every (nested) pattern variables.
-  const data_constructor = Evaluate.do_dot(type_constructor, data.tag)
+  const data_constructor = Evaluate.do_dot(typecons, data.tag)
   if (data_constructor.kind !== "Value.data_constructor")
     throw new Trace.Trace("expecting data_constructor")
   const result_ctx = match_patterns(

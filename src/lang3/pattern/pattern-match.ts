@@ -48,7 +48,7 @@ function match_pattern(
   if (
     pattern.kind === "Pattern.datatype" &&
     value.kind === "Value.datatype" &&
-    value.type_constructor.name === pattern.name
+    value.typecons.name === pattern.name
   ) {
     return match_patterns(mod, env, pattern.args, value.args, matched)
   }
@@ -56,7 +56,7 @@ function match_pattern(
   if (
     pattern.kind === "Pattern.data" &&
     value.kind === "Value.data" &&
-    value.data_constructor.type_constructor.name === pattern.name &&
+    value.data_constructor.typecons.name === pattern.name &&
     value.data_constructor.tag === pattern.tag
   ) {
     return match_patterns(mod, env, pattern.args, value.args, matched)
@@ -65,7 +65,7 @@ function match_pattern(
   if (
     pattern.kind === "Pattern.data" &&
     value.kind === "Value.data_constructor" &&
-    value.type_constructor.name === pattern.name &&
+    value.typecons.name === pattern.name &&
     value.tag === pattern.tag
   ) {
     return match_patterns(mod, env, pattern.args, [], matched)

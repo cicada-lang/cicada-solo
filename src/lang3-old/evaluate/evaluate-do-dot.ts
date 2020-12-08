@@ -12,8 +12,8 @@ export function do_dot(target: Value.Value, name: string): Value.Value {
   if (target.kind === "Value.obj") return do_dot_obj(target, name)
   if (target.kind === "Value.cls") return do_dot_cls(target, name)
   if (target.kind === "Value.mod") return do_dot_mod(target, name)
-  if (target.kind === "Value.type_constructor")
-    return do_dot_type_constructor(target, name)
+  if (target.kind === "Value.typecons")
+    return do_dot_typecons(target, name)
   if (target.kind === "Value.not_yet") return do_dot_not_yet(target, name)
   throw new Trace.Trace(
     Explain.explain_elim_target_mismatch({
@@ -52,20 +52,20 @@ export function do_dot_cls(cls: Value.cls, name: string): Value.Value {
   return Value.Telescope.dot(cls.tel, name)
 }
 
-export function do_dot_type_constructor(
-  type_constructor: Value.type_constructor,
+export function do_dot_typecons(
+  typecons: Value.typecons,
   name: string
 ): Value.data_constructor {
-  const entry = type_constructor.delayed.sums.find(({ tag }) => tag === name)
+  const entry = typecons.delayed.sums.find(({ tag }) => tag === name)
   if (entry === undefined)
-    throw new Trace.Trace(`can not find tag in type_constructor: ${name}`)
+    throw new Trace.Trace(`can not find tag in typecons: ${name}`)
 
   return Value.data_constructor(
-    type_constructor,
+    typecons,
     name,
     Evaluate.evaluate(
-      type_constructor.delayed.mod,
-      type_constructor.delayed.env,
+      typecons.delayed.mod,
+      typecons.delayed.env,
       entry.t
     )
   )

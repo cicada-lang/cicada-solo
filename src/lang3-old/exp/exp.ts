@@ -18,7 +18,7 @@ export type Exp =
   | str
   | quote
   | union
-  | type_constructor
+  | typecons
   | type
   | begin
   | the
@@ -209,19 +209,19 @@ export const union = (left: Exp, right: Exp): union => ({
   right,
 })
 
-export type type_constructor = {
-  kind: "Exp.type_constructor"
+export type typecons = {
+  kind: "Exp.typecons"
   name: string
   t: Exp
   sums: Array<{ tag: string; t: Exp }>
 }
 
-export const type_constructor = (
+export const typecons = (
   name: string,
   t: Exp,
   sums: Array<{ tag: string; t: Exp }>
-): type_constructor => ({
-  kind: "Exp.type_constructor",
+): typecons => ({
+  kind: "Exp.typecons",
   name,
   t,
   sums,

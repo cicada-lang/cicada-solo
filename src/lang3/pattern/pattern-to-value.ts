@@ -22,7 +22,7 @@ export function to_value(
       let oprand = Evaluate.evaluate(mod, env, Exp.v(pattern.name))
       for (const arg of pattern.args) {
         if (
-          (oprand.kind === "Value.type_constructor" ||
+          (oprand.kind === "Value.typecons" ||
             oprand.kind === "Value.datatype") &&
           oprand.t.kind === "Value.pi"
         ) {
@@ -33,7 +33,7 @@ export function to_value(
           )
         } else {
           throw new Trace.Trace(
-            "expecting oprand.kind to be Value.type_constructor or Value.datatype\n" +
+            "expecting oprand.kind to be Value.typecons or Value.datatype\n" +
               `- oprand.kind: ${oprand.kind}\n`
           )
         }

@@ -3,7 +3,7 @@ import * as Value from "../../value"
 import * as Mod from "../../mod"
 import * as Modpath from "../../modpath"
 
-export type Den = mod | def | type_constructor
+export type Den = mod | def | typecons
 
 export type mod = {
   kind: "Mod.Den.mod"
@@ -29,14 +29,14 @@ export const def = (exp: Exp.Exp, t?: Exp.Exp): def => ({
   t,
 })
 
-export type type_constructor = {
-  kind: "Mod.Den.type_constructor"
-  type_constructor: Exp.type_constructor
+export type typecons = {
+  kind: "Mod.Den.typecons"
+  typecons: Exp.typecons
 }
 
-export const type_constructor = (
-  type_constructor: Exp.type_constructor
-): type_constructor => ({
-  kind: "Mod.Den.type_constructor",
-  type_constructor,
+export const typecons = (
+  typecons: Exp.typecons
+): typecons => ({
+  kind: "Mod.Den.typecons",
+  typecons,
 })

@@ -77,7 +77,7 @@ export function repr(exp: Exp.Exp): string {
       const { left, right } = exp
       return `{ ${Exp.repr(left)} | ${Exp.repr(right)} }`
     }
-    case "Exp.type_constructor": {
+    case "Exp.typecons": {
       return exp.name
     }
     case "Exp.type": {

@@ -8,19 +8,19 @@ import * as Env from "../env"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
 
-export function readback_type_constructor(
+export function readback_typecons(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,
   t: Value.Value,
-  type_constructor: Value.type_constructor
-): Exp.type_constructor {
-  if (!Value.conversion(mod, ctx, Value.type, t, type_constructor.t))
-    throw new Trace.Trace("t is not equivalent to type_constructor.t")
+  typecons: Value.typecons
+): Exp.typecons {
+  if (!Value.conversion(mod, ctx, Value.type, t, typecons.t))
+    throw new Trace.Trace("t is not equivalent to typecons.t")
 
-  return Exp.type_constructor(
-    type_constructor.name,
-    Readback.readback(mod, ctx, Value.type, type_constructor.t),
-    readback_delayed_sums(mod, ctx, type_constructor.delayed)
+  return Exp.typecons(
+    typecons.name,
+    Readback.readback(mod, ctx, Value.type, typecons.t),
+    readback_delayed_sums(mod, ctx, typecons.delayed)
   )
 }
 

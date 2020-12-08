@@ -19,7 +19,7 @@ export type Value =
   | str
   | quote
   | union
-  | type_constructor
+  | typecons
   | datatype
   | data_constructor
   | data
@@ -144,19 +144,19 @@ export const union = (left: Value, right: Value): union => ({
   right,
 })
 
-export type type_constructor = {
-  kind: "Value.type_constructor"
+export type typecons = {
+  kind: "Value.typecons"
   name: string
   t: Value
   delayed: DelayedSums.DelayedSums
 }
 
-export const type_constructor = (
+export const typecons = (
   name: string,
   t: Value,
   delayed: DelayedSums.DelayedSums
-): type_constructor => ({
-  kind: "Value.type_constructor",
+): typecons => ({
+  kind: "Value.typecons",
   name,
   t,
   delayed,
@@ -164,36 +164,36 @@ export const type_constructor = (
 
 export type datatype = {
   kind: "Value.datatype"
-  type_constructor: type_constructor
+  typecons: typecons
   args: Array<Value>
   t: Value
 }
 
 export const datatype = (
-  type_constructor: type_constructor,
+  typecons: typecons,
   args: Array<Value>,
   t: Value
 ): datatype => ({
   kind: "Value.datatype",
-  type_constructor,
+  typecons,
   args,
   t,
 })
 
 export type data_constructor = {
   kind: "Value.data_constructor"
-  type_constructor: type_constructor
+  typecons: typecons
   tag: string
   t: Value
 }
 
 export const data_constructor = (
-  type_constructor: type_constructor,
+  typecons: typecons,
   tag: string,
   t: Value
 ): data_constructor => ({
   kind: "Value.data_constructor",
-  type_constructor,
+  typecons,
   tag,
   t,
 })

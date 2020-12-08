@@ -18,7 +18,7 @@ export function readback_data(
     throw new Trace.Trace("t is not equivalent to data.t")
 
   let exp: Exp.Exp = Exp.dot(
-    Exp.v(data.data_constructor.type_constructor.name),
+    Exp.v(data.data_constructor.typecons.name),
     data.data_constructor.tag
   )
   let remain_t = data.data_constructor.t

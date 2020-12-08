@@ -20,11 +20,11 @@ export function define(
     Mod.update(mod, top.name, Mod.Den.def(top.exp, top.t))
   }
 
-  if (top.kind === "Top.type_constructor") {
+  if (top.kind === "Top.typecons") {
     Mod.update(
       mod,
-      top.type_constructor.name,
-      Mod.Den.type_constructor(top.type_constructor)
+      top.typecons.name,
+      Mod.Den.typecons(top.typecons)
     )
   }
 }

@@ -14,7 +14,7 @@ export function readback_data_constructor(
   data_constructor: Value.data_constructor
 ): Exp.dot {
   return Exp.dot(
-    Exp.v(data_constructor.type_constructor.name),
+    Exp.v(data_constructor.typecons.name),
     data_constructor.tag
   )
 }

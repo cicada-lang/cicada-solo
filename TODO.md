@@ -98,8 +98,8 @@
 - [lang3] be able to `@import` specific `Den`
 - [lang3] `Mod.Den.namespace` -- transparent -- can use bandings in current module
 - [lang3] syntax for `Mod.Den.namespace` -- `@namespace`
-- [lang3] `Mod.Den.type_constructor` -- with its `namespace`
-- [lang3] syntax for defining bindings in `Mod.Den.type_constructor`
+- [lang3] `Mod.Den.typecons` -- with its `namespace`
+- [lang3] syntax for defining bindings in `Mod.Den.typecons`
 
 > syntax
 
@@ -142,7 +142,7 @@
 
 # lang3-oop
 
-- [lang3-oop] Evaluable type_constructor
+- [lang3-oop] Evaluable typecons
 - [lang3-oop] Evaluable type
 - [lang3-oop] Evaluable begin
 - [lang3-oop] Evaluable the

@@ -15,7 +15,7 @@ export function check(mod: Mod.Mod, top: Top.Top): void {
     Check.check(mod, ctx, top.exp, t)
   }
 
-  if (top.kind === "Top.type_constructor") {
-    Infer.infer(mod, Ctx.init(), top.type_constructor)
+  if (top.kind === "Top.typecons") {
+    Infer.infer(mod, Ctx.init(), top.typecons)
   }
 }
