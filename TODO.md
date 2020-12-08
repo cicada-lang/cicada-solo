@@ -146,6 +146,7 @@
 
 - [lang3-oop] re-place `Evaluate`'s functions
 - [lang3-oop] interface for `Exp.repr`
+- [lang3-oop] `Exp` as an intersection of inferfaces
 
 # lang4
 
