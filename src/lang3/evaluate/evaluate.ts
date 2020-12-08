@@ -81,7 +81,7 @@ export function evaluate(
         )
       }
       case "Exp.type": {
-        return Value.type
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.begin": {
         env = Env.clone(env)

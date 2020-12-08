@@ -143,7 +143,6 @@
 # lang3-oop
 
 - [lang3-oop] Evaluable typecons
-- [lang3-oop] Evaluable type
 - [lang3-oop] Evaluable begin
 - [lang3-oop] Evaluable the
 

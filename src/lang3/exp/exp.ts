@@ -16,6 +16,8 @@ import { AbsurdInd } from "../exps/absurd/absurd-ind"
 import { Str } from "../exps/str/str"
 import { Quote } from "../exps/str/quote"
 import { Union } from "../exps/union"
+// import { Typecons } from "../exps/typecons"
+import { Type } from "../exps/type"
 
 export type Exp =
   | Var
@@ -35,7 +37,7 @@ export type Exp =
   | Quote
   | Union
   | typecons
-  | type
+  | Type
   | begin
   | the
 
@@ -110,13 +112,8 @@ export const typecons = (
   sums,
 })
 
-export type type = {
-  kind: "Exp.type"
-}
-
-export const type: type = {
-  kind: "Exp.type",
-}
+export type type = Type
+export const type = Type
 
 export type begin = {
   kind: "Exp.begin"
