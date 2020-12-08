@@ -7,6 +7,7 @@ import { CaseFn } from "../exps/pi/case-fn"
 import { Ap } from "../exps/pi/ap"
 import { Cls } from "../exps/cls/cls"
 import { Obj } from "../exps/cls/obj"
+import { Dot } from "../exps/cls/dot"
 
 export type Exp =
   | Var
@@ -16,7 +17,7 @@ export type Exp =
   | Ap
   | Cls
   | Obj
-  | dot
+  | Dot
   | equal
   | same
   | replace
@@ -56,17 +57,8 @@ export const cls = Cls
 export type obj = Obj
 export const obj = Obj
 
-export type dot = {
-  kind: "Exp.dot"
-  target: Exp
-  name: string
-}
-
-export const dot = (target: Exp, name: string): dot => ({
-  kind: "Exp.dot",
-  target,
-  name,
-})
+export type dot = Dot
+export const dot = Dot
 
 export type equal = {
   kind: "Exp.equal"

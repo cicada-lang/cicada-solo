@@ -47,10 +47,7 @@ export function evaluate(
         return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.dot": {
-        return Evaluate.do_dot(
-          Evaluate.evaluate(mod, env, exp.target, opts),
-          exp.name
-        )
+        return exp.evaluability({ mod, env, mode: opts.mode })
       }
       case "Exp.equal": {
         return Value.equal(

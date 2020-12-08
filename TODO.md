@@ -142,7 +142,6 @@
 
 # lang3-oop
 
-- [lang3-oop] Evaluable dot
 - [lang3-oop] Evaluable equal
 - [lang3-oop] Evaluable same
 - [lang3-oop] Evaluable replace
