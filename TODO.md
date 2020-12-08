@@ -144,8 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] `Checkable` -- obj
-
 - [lang3-oop] use the `Evaluable` constructor
 - [lang3-oop] use the `Checkable` constructor
 
