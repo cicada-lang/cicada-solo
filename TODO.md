@@ -144,7 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] use the `Evaluable` constructor -- union
 - [lang3-oop] use the `Evaluable` constructor -- typecons
 - [lang3-oop] use the `Evaluable` constructor -- pi
 - [lang3-oop] use the `Evaluable` constructor -- cls
