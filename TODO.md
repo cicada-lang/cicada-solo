@@ -144,8 +144,8 @@
 
 > refactoring!
 
-- [lang3-oop] use the `Evaluable` constructor -- Var -- var-evaluable.ts
 - [lang3-oop] use the `Evaluable` constructor
+- [lang3-oop] clear dependencies in `exps/`
 - [lang3-oop] use the `Checkable` constructor
 
 - [lang3-oop] `Checker` and `checker`
