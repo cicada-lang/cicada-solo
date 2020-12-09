@@ -144,15 +144,19 @@
 
 > refactoring!
 
-- [lang3-oop] use the `Evaluable` constructor -- pi/fn
 - [lang3-oop] use the `Evaluable` constructor -- pi/case-fn
 - [lang3-oop] use the `Evaluable` constructor -- pi/ap
 
 - [lang3-oop] use the `Evaluable` constructor -- cls
+- [lang3-oop] use the `Evaluable` constructor -- cls/obj
+- [lang3-oop] use the `Evaluable` constructor -- cls/dot
 
 - [lang3-oop] use the `Evaluable` constructor -- absurd
+- [lang3-oop] use the `Evaluable` constructor -- absurd/absurd-ind
 
 - [lang3-oop] use the `Evaluable` constructor -- equal
+- [lang3-oop] use the `Evaluable` constructor -- equal/same
+- [lang3-oop] use the `Evaluable` constructor -- equal/replace
 
 - [lang3-oop] use the `Checkable` constructor
 

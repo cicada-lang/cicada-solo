@@ -15,6 +15,7 @@ import * as Ctx from "../../ctx"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
+import { fn_evaluable } from "./fn-evaluable"
 
 export type Fn = Evaluable &
   Checkable &
@@ -27,11 +28,6 @@ export type Fn = Evaluable &
 export function Fn(pattern: Pattern.Pattern, ret: Exp): Fn {
   const repr = () => `(${Pattern.repr(pattern)}) => ${ret.repr()}`
 
-  const evaluable: Evaluable = {
-    evaluability: ({ mod, env, mode }) =>
-      Value.fn(Value.Closure.create(mod, env, pattern, ret)),
-  }
-
   const checkable: Checkable = {
     checkability: (t, { mod, ctx }) => {
       const pi = Value.is_pi(mod, ctx, t)
@@ -39,9 +35,9 @@ export function Fn(pattern: Pattern.Pattern, ret: Exp): Fn {
       if (result_ctx === undefined)
         throw new Trace.Trace(
           ut.aline(`
-        |Check.check_fn -- pattern mismatch.
-        |- fn: ${repr()}
-        |`)
+|Check.check_fn -- pattern mismatch.
+|- fn: ${repr()}
+|`)
         )
       const arg = evaluator.evaluate(Pattern.to_exp(pattern), {
         mod,
@@ -57,7 +53,7 @@ export function Fn(pattern: Pattern.Pattern, ret: Exp): Fn {
     kind: "Exp.fn",
     pattern,
     ret,
-    ...evaluable,
+    ...fn_evaluable(pattern, ret),
     ...checkable,
     repr,
   }
@@ -78,16 +74,16 @@ function match_pattern(
 
   if (
     pattern.kind === "Pattern.data" &&
-    t.kind === "Value.typecons" &&
-    t.name === pattern.name
+      t.kind === "Value.typecons" &&
+      t.name === pattern.name
   )
     // TODO Why we can not normalize `typecons` to `datatype`?
     return match_data(mod, ctx, pattern, t, t, matched)
 
   if (
     pattern.kind === "Pattern.data" &&
-    t.kind === "Value.datatype" &&
-    t.typecons.name === pattern.name
+      t.kind === "Value.datatype" &&
+      t.typecons.name === pattern.name
   )
     return match_data(mod, ctx, pattern, t.typecons, t, matched)
 
