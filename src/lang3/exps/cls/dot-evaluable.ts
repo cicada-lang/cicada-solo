@@ -9,21 +9,10 @@ import * as Neutral from "../../neutral"
 import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
-import { dot_evaluable } from "./dot-evaluable"
 
-export type Dot = Evaluable &
-  Repr & {
-    kind: "Exp.dot"
-    target: Exp
-    name: string
-  }
-
-export function Dot(target: Exp, name: string): Dot {
-  return {
-    kind: "Exp.dot",
-    target,
-    name,
-    ...dot_evaluable(target, name),
-    repr: () => `${target.repr()}.${name}`,
-  }
+export function dot_evaluable(target: Exp, name: string): Evaluable {
+  return Evaluable({
+    evaluability: ({ mod, env, mode, evaluator }) =>
+      Evaluate.do_dot(evaluator.evaluate(target, { mod, env, mode }), name),
+  })
 }

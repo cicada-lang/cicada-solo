@@ -144,8 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] use the `Evaluable` constructor -- cls/dot
-
 - [lang3-oop] use the `Evaluable` constructor -- absurd
 - [lang3-oop] use the `Evaluable` constructor -- absurd/absurd-ind
 
