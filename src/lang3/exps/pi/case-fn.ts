@@ -19,7 +19,8 @@ export type Case = {
   ret: Exp
 }
 
-export type CaseFn = Evaluable & Checkable &
+export type CaseFn = Evaluable &
+  Checkable &
   Repr & {
     kind: "Exp.case_fn"
     cases: Array<Case>
@@ -48,6 +49,6 @@ export function CaseFn(cases: Array<Case>): CaseFn {
       for (const { pattern, ret } of cases) {
         Check.check(mod, ctx, Fn(pattern, ret), pi)
       }
-    }
+    },
   }
 }

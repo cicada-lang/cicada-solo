@@ -74,16 +74,16 @@ function match_pattern(
 
   if (
     pattern.kind === "Pattern.data" &&
-      t.kind === "Value.typecons" &&
-      t.name === pattern.name
+    t.kind === "Value.typecons" &&
+    t.name === pattern.name
   )
     // TODO Why we can not normalize `typecons` to `datatype`?
     return match_data(mod, ctx, pattern, t, t, matched)
 
   if (
     pattern.kind === "Pattern.data" &&
-      t.kind === "Value.datatype" &&
-      t.typecons.name === pattern.name
+    t.kind === "Value.datatype" &&
+    t.typecons.name === pattern.name
   )
     return match_data(mod, ctx, pattern, t.typecons, t, matched)
 
