@@ -14,26 +14,15 @@ import * as Ctx from "../../ctx"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
 import { begin_evaluable } from "./begin-evaluable"
-import { begin_checkable } from "./begin-checkable"
 
-export type Begin = Evaluable &
-  Checkable &
-  Repr & {
-    kind: "Exp.begin"
-    stmts: Array<Stmt.Stmt>
-    ret: Exp
-  }
-
-export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
-  return {
-    kind: "Exp.begin",
-    stmts,
-    ret,
-    ...begin_evaluable(stmts, ret),
-    ...begin_checkable(stmts, ret),
-    repr: () => {
-      const s = [...stmts.map(Stmt.repr), ret.repr()].join("\n")
-      return `{\n${ut.indent(s, "  ")}\n}`
+export function begin_checkable(stmts: Array<Stmt.Stmt>, ret: Exp): Checkable {
+  return Checkable({
+    checkability: (t, { mod, ctx }) => {
+      ctx = Ctx.clone(ctx)
+      for (const stmt of stmts) {
+        Stmt.declare(mod, ctx, stmt)
+      }
+      Check.check(mod, ctx, ret, t)
     },
-  }
+  })
 }

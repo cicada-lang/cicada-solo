@@ -144,7 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] use the `Checkable` constructor -- begin/begin
 - [lang3-oop] use the `Checkable` constructor -- equal/same
 
 - [lang3-oop] clear dependencies in `exps/`
