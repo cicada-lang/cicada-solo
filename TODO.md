@@ -144,7 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] use the `Evaluable` constructor -- cls
 - [lang3-oop] use the `Evaluable` constructor -- cls/obj
 - [lang3-oop] use the `Evaluable` constructor -- cls/dot
 
@@ -154,6 +153,8 @@
 - [lang3-oop] use the `Evaluable` constructor -- equal
 - [lang3-oop] use the `Evaluable` constructor -- equal/same
 - [lang3-oop] use the `Evaluable` constructor -- equal/replace
+
+- [lang3-oop] the `Checkable` constructor
 
 - [lang3-oop] use the `Checkable` constructor
 

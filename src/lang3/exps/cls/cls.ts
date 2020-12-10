@@ -10,6 +10,7 @@ import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
+import { cls_evaluable } from "./cls-evaluable"
 
 export type Cls = Evaluable &
   Repr & {
@@ -26,31 +27,7 @@ export function Cls(
     kind: "Exp.cls",
     sat,
     scope,
-    evaluability: ({ mod, env, mode, evaluator }) => {
-      env = Env.clone(env)
-      const sat = new Array()
-      for (const entry of sat) {
-        const name = entry.name
-        const t = evaluator.evaluate(entry.t, { mod, env, mode })
-        const value = evaluator.evaluate(entry.exp, { mod, env, mode })
-        sat.push({ name, t, value })
-        Env.update(env, name, value)
-      }
-      if (scope.length === 0) {
-        return Value.cls(
-          sat,
-          Value.Telescope.create(mod, env, undefined, new Array())
-        )
-      } else {
-        const [entry, ...tail] = scope
-        const name = entry.name
-        const t = evaluator.evaluate(entry.t, { mod, env, mode })
-        return Value.cls(
-          sat,
-          Value.Telescope.create(mod, env, { name, t }, tail)
-        )
-      }
-    },
+    ...cls_evaluable(sat, scope),
     repr: () => {
       if (sat.length === 0 && scope.length === 0) return "Object"
       const parts = [
