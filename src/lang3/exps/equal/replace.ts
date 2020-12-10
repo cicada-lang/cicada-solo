@@ -9,6 +9,7 @@ import * as Neutral from "../../neutral"
 import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
+import { replace_evaluable } from "./replace-evaluable"
 
 export type Replace = Evaluable &
   Repr & {
@@ -24,12 +25,7 @@ export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
     target,
     motive,
     base,
-    evaluability: ({ mod, env, mode, evaluator }) =>
-      Evaluate.do_replace(
-        evaluator.evaluate(target, { mod, env, mode }),
-        evaluator.evaluate(motive, { mod, env, mode }),
-        evaluator.evaluate(base, { mod, env, mode })
-      ),
+    ...replace_evaluable(target, motive, base),
     repr: () => `replace(${target.repr()}, ${motive.repr()}, ${base.repr()})`,
   }
 }
