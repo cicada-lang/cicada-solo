@@ -1,5 +1,5 @@
 
-I infer the type of z.x to be { x : String }.
+I infer the type to be { x : String }.
 But the given type is String.
 
 previous:

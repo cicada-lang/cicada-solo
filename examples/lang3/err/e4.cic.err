@@ -1,5 +1,5 @@
 
-I infer the type of prev to be Nat.
+I infer the type to be Nat.
 But the given type is T.
 
 previous:
