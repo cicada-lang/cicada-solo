@@ -144,7 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] clear dependencies in `exps/`
 - [lang3-oop] `Checker` and `checker`
 - [lang3-oop] inline `Check.check`
 - [lang3-oop] re-place `Evaluate`'s functions
