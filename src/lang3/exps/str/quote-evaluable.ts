@@ -12,22 +12,9 @@ import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
-import { quote_evaluable } from "./quote-evaluable"
-import { quote_checkable } from "./quote-checkable"
 
-export type Quote = Evaluable &
-  Checkable &
-  Repr & {
-    kind: "Exp.quote"
-    str: string
-  }
-
-export function Quote(str: string): Quote {
-  return {
-    kind: "Exp.quote",
-    str,
-    ...quote_evaluable(str),
-    ...quote_checkable(str),
-    repr: () => `"${str}"`,
-  }
+export function quote_evaluable(str: string): Evaluable{
+  return Evaluable({
+    evaluability: ({ mod, env, mode }) => Value.quote(str),
+  })
 }
