@@ -146,6 +146,7 @@
 
 - [lang3-oop] `Checker` and `checker`
 - [lang3-oop] inline `Check.check`
+
 - [lang3-oop] re-place `Evaluate`'s functions
 
 - [lang3-oop] `Exp` as an intersection of inferfaces
