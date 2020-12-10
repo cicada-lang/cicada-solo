@@ -14,6 +14,7 @@ import * as Env from "../../env"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
 import { case_fn_evaluable } from "./case-fn-evaluable"
+import { case_fn_checkable } from "./case-fn-checkable"
 
 export type Case = {
   pattern: Pattern.Pattern
@@ -32,6 +33,7 @@ export function CaseFn(cases: Array<Case>): CaseFn {
     kind: "Exp.case_fn",
     cases,
     ...case_fn_evaluable(cases),
+    ...case_fn_checkable(cases),
     repr: () => {
       let s = cases
         .map(
@@ -39,12 +41,6 @@ export function CaseFn(cases: Array<Case>): CaseFn {
         )
         .join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
-    },
-    checkability: (t, { mod, ctx }) => {
-      const pi = Value.is_pi(mod, ctx, t)
-      for (const { pattern, ret } of cases) {
-        Check.check(mod, ctx, Fn(pattern, ret), pi)
-      }
     },
   }
 }

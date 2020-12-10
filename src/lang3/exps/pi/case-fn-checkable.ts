@@ -15,13 +15,13 @@ import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
 import { Case } from "./case-fn"
 
-export function case_fn_evaluable(cases: Array<Case>): Evaluable {
-  return Evaluable({
-    evaluability: ({ mod, env, mode }) =>
-      Value.case_fn(
-        cases.map(({ pattern, ret }) =>
-          Value.Closure.create(mod, env, pattern, ret)
-        )
-      ),
+export function case_fn_checkable(cases: Array<Case>): Checkable {
+  return Checkable({
+    checkability: (t, { mod, ctx }) => {
+      const pi = Value.is_pi(mod, ctx, t)
+      for (const { pattern, ret } of cases) {
+        Check.check(mod, ctx, Fn(pattern, ret), pi)
+      }
+    },
   })
 }

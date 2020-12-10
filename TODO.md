@@ -144,7 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] use the `Checkable` constructor -- pi/case-fn
 - [lang3-oop] use the `Checkable` constructor -- begin/begin
 - [lang3-oop] use the `Checkable` constructor -- equal/same
 
