@@ -144,7 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] use the `Evaluable` constructor -- cls/obj
 - [lang3-oop] use the `Evaluable` constructor -- cls/dot
 
 - [lang3-oop] use the `Evaluable` constructor -- absurd

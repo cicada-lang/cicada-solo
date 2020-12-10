@@ -15,6 +15,7 @@ import * as Ctx from "../../ctx"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
+import { obj_evaluable } from "./obj-evaluable"
 
 export type Obj = Evaluable &
   Checkable &
@@ -27,15 +28,7 @@ export function Obj(properties: Map<string, Exp>): Obj {
   return {
     kind: "Exp.obj",
     properties,
-    evaluability: ({ mod, env, mode, evaluator }) =>
-      Value.obj(
-        new Map(
-          Array.from(properties, ([name, exp]) => [
-            name,
-            evaluator.evaluate(exp, { mod, env, mode }),
-          ])
-        )
-      ),
+    ...obj_evaluable(properties),
     repr: () => {
       const s = Array.from(properties)
         .map(([name, exp]) => `${name} = ${exp.repr()}`)
@@ -65,8 +58,8 @@ function check_properties_aganst_sat(
     if (found === undefined) {
       throw new Trace.Trace(
         ut.aline(`
-          |Can not found satisfied entry name: ${entry.name}
-          |`)
+|Can not found satisfied entry name: ${entry.name}
+|`)
       )
     }
     Check.check(mod, ctx, found, entry.t)
@@ -74,18 +67,18 @@ function check_properties_aganst_sat(
     if (!Value.conversion(mod, ctx, entry.t, value, entry.value)) {
       throw new Trace.Trace(
         ut.aline(`
-          |I am expecting the following two values to be the same ${Readback.readback(
-            mod,
-            ctx,
-            Value.type,
-            entry.t
-          ).repr()}.
-          |But they are not.
-          |The value in object:
-          |  ${Readback.readback(mod, ctx, entry.t, value).repr()}
-          |The value in partially filled class:
-          |  ${Readback.readback(mod, ctx, entry.t, entry.value).repr()}
-          |`)
+|I am expecting the following two values to be the same ${Readback.readback(
+          mod,
+          ctx,
+          Value.type,
+          entry.t
+        ).repr()}.
+|But they are not.
+|The value in object:
+|  ${Readback.readback(mod, ctx, entry.t, value).repr()}
+|The value in partially filled class:
+|  ${Readback.readback(mod, ctx, entry.t, entry.value).repr()}
+|`)
       )
     }
     properties.delete(entry.name)
@@ -119,8 +112,8 @@ function check_properties_aganst_next(
   if (found === undefined) {
     throw new Trace.Trace(
       ut.aline(`
-        |Can not found next name: ${next.name}
-        |`)
+|Can not found next name: ${next.name}
+|`)
     )
   }
   Check.check(mod, ctx, found, next.t)
