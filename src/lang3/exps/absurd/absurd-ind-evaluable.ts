@@ -1,6 +1,6 @@
 import { Evaluable, EvaluationMode } from "../../evaluable"
-import { Repr } from "../../repr"
 import { Exp } from "../../exp"
+import { Repr } from "../../repr"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
 import * as Value from "../../value"
@@ -10,17 +10,12 @@ import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
 
-export type Absurd = Evaluable &
-  Repr & {
-    kind: "Exp.absurd"
-  }
-
-export const absurd_evaluable = Evaluable({
-  evaluability: ({ mod, env, mode }) => Value.absurd,
-})
-
-export const Absurd: Absurd = {
-  kind: "Exp.absurd",
-  ...absurd_evaluable,
-  repr: () => "Absurd",
+export function absurd_ind_evaluable(target: Exp, motive: Exp): Evaluable {
+  return Evaluable({
+    evaluability: ({ mod, env, mode, evaluator }) =>
+      Evaluate.do_absurd_ind(
+        evaluator.evaluate(target, { mod, env, mode }),
+        evaluator.evaluate(motive, { mod, env, mode })
+      ),
+  })
 }
