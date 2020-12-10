@@ -9,23 +9,14 @@ import * as Neutral from "../../neutral"
 import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
-import { equal_evaluable } from "./equal-evaluable"
 
-export type Equal = Evaluable &
-  Repr & {
-    kind: "Exp.equal"
-    t: Exp
-    from: Exp
-    to: Exp
-  }
-
-export function Equal(t: Exp, from: Exp, to: Exp): Equal {
-  return {
-    kind: "Exp.equal",
-    t,
-    from,
-    to,
-    ...equal_evaluable(t, from, to),
-    repr: () => `Equal(${t.repr()}, ${from.repr()}, ${to.repr()})`,
-  }
+export function equal_evaluable(t: Exp, from: Exp, to: Exp): Evaluable {
+  return Evaluable({
+    evaluability: ({ mod, env, mode, evaluator }) =>
+      Value.equal(
+        evaluator.evaluate(t, { mod, env, mode }),
+        evaluator.evaluate(from, { mod, env, mode }),
+        evaluator.evaluate(to, { mod, env, mode })
+      ),
+  })
 }
