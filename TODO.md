@@ -144,7 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] use the `Evaluable` constructor -- pi/case-fn
 - [lang3-oop] use the `Evaluable` constructor -- pi/ap
 
 - [lang3-oop] use the `Evaluable` constructor -- cls

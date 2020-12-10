@@ -13,6 +13,7 @@ import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
+import { case_fn_evaluable } from "./case-fn-evaluable"
 
 export type Case = {
   pattern: Pattern.Pattern
@@ -30,12 +31,7 @@ export function CaseFn(cases: Array<Case>): CaseFn {
   return {
     kind: "Exp.case_fn",
     cases,
-    evaluability: ({ mod, env, mode }) =>
-      Value.case_fn(
-        cases.map(({ pattern, ret }) =>
-          Value.Closure.create(mod, env, pattern, ret)
-        )
-      ),
+    ...case_fn_evaluable(cases),
     repr: () => {
       let s = cases
         .map(
