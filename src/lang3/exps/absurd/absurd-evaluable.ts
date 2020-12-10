@@ -9,15 +9,7 @@ import * as Neutral from "../../neutral"
 import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
-import { absurd_evaluable } from "./absurd-evaluable"
 
-export type Absurd = Evaluable &
-  Repr & {
-    kind: "Exp.absurd"
-  }
-
-export const Absurd: Absurd = {
-  kind: "Exp.absurd",
-  ...absurd_evaluable,
-  repr: () => "Absurd",
-}
+export const absurd_evaluable = Evaluable({
+  evaluability: ({ mod, env, mode }) => Value.absurd,
+})
