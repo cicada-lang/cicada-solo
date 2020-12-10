@@ -9,15 +9,7 @@ import * as Neutral from "../../neutral"
 import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
-import { str_evaluable } from "./str-evaluable"
 
-export type Str = Evaluable &
-  Repr & {
-    kind: "Exp.str"
-  }
-
-export const Str: Str = {
-  kind: "Exp.str",
-  ...str_evaluable,
-  repr: () => "String",
-}
+export const str_evaluable = Evaluable({
+  evaluability: ({ mod, env, mode }) => Value.str,
+})
