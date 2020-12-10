@@ -144,7 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] use the `Evaluable` constructor -- equal/same
 - [lang3-oop] use the `Evaluable` constructor -- equal/replace
 
 - [lang3-oop] the `Checkable` constructor

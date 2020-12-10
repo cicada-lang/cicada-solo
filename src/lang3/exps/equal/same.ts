@@ -12,6 +12,7 @@ import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
+import { same_evaluable } from "./same-evaluable"
 
 export type Same = Evaluable &
   Checkable &
@@ -21,7 +22,7 @@ export type Same = Evaluable &
 
 export const Same: Same = {
   kind: "Exp.same",
-  evaluability: ({ mod, env, mode }) => Value.same,
+  ...same_evaluable,
   repr: () => "same",
   checkability: (t, { mod, ctx }) => {
     const equal = Value.is_equal(mod, ctx, t)
