@@ -13,6 +13,7 @@ import * as Env from "../../env"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
 import { same_evaluable } from "./same-evaluable"
+import { same_checkable } from "./same-checkable"
 
 export type Same = Evaluable &
   Checkable &
@@ -23,21 +24,6 @@ export type Same = Evaluable &
 export const Same: Same = {
   kind: "Exp.same",
   ...same_evaluable,
+  ...same_checkable,
   repr: () => "same",
-  checkability: (t, { mod, ctx }) => {
-    const equal = Value.is_equal(mod, ctx, t)
-    const t_repr = Readback.readback(mod, ctx, Value.type, equal.t).repr()
-    if (!Value.conversion(mod, ctx, equal.t, equal.from, equal.to)) {
-      throw new Trace.Trace(
-        ut.aline(`
-          |I am expecting the following two values to be the same ${t_repr}.
-          |But they are not.
-          |from:
-          |  ${Readback.readback(mod, ctx, equal.t, equal.from).repr()}
-          |to:
-          |  ${Readback.readback(mod, ctx, equal.t, equal.to).repr()}
-          |`)
-      )
-    }
-  },
 }
