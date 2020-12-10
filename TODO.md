@@ -144,8 +144,6 @@
 
 > refactoring!
 
-- [lang3-oop] use the `Evaluable` constructor -- pi/ap
-
 - [lang3-oop] use the `Evaluable` constructor -- cls
 - [lang3-oop] use the `Evaluable` constructor -- cls/obj
 - [lang3-oop] use the `Evaluable` constructor -- cls/dot

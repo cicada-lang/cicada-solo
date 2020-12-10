@@ -9,21 +9,13 @@ import * as Neutral from "../../neutral"
 import * as Mod from "../../mod"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
-import { ap_evaluable } from "./ap-evaluable"
 
-export type Ap = Evaluable &
-  Repr & {
-    kind: "Exp.ap"
-    target: Exp
-    arg: Exp
-  }
-
-export function Ap(target: Exp, arg: Exp): Ap {
-  return {
-    kind: "Exp.ap",
-    target,
-    arg,
-    ...ap_evaluable(target, arg),
-    repr: () => `${target.repr()}(${arg.repr()})`,
-  }
+export function ap_evaluable(target: Exp, arg: Exp): Evaluable {
+  return Evaluable({
+    evaluability: ({ mod, env, mode, evaluator }) =>
+      Evaluate.do_ap(
+        evaluator.evaluate(target, { mod, env, mode }),
+        evaluator.evaluate(arg, { mod, env, mode })
+      ),
+  })
 }
