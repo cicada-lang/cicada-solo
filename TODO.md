@@ -146,7 +146,6 @@
 
 - [lang3] `Inferable` str/str
 - [lang3] `Inferable` str/quote
-
 - [lang3] `Inferable` cls/obj
 
 - [lang3] `Checker` and `checker`
