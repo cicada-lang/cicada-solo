@@ -29,7 +29,7 @@ export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     if (exp.kind === "Exp.dot") return infer_dot(mod, ctx, exp)
     if (exp.kind === "Exp.equal") return infer_equal(mod, ctx, exp)
     if (exp.kind === "Exp.replace") return infer_replace(mod, ctx, exp)
-    if (exp.kind === "Exp.absurd") return Value.type
+    if (exp.kind === "Exp.absurd") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.absurd_ind") return infer_absurd_ind(mod, ctx, exp)
     if (exp.kind === "Exp.str") return Value.type
     if (exp.kind === "Exp.quote") return Value.quote(exp.str)

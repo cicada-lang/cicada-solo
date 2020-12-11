@@ -144,11 +144,19 @@
 
 > refactoring Exp
 
-- [lang3] `Inferable` absurd
-- [lang3] `Inferable` cls
-- [lang3] `Inferable` equal
-- [lang3] `Inferable` pi
-- [lang3] `Inferable` str
+- [lang3] `Inferable` absurd/absurd-ind
+
+- [lang3] `Inferable` cls/cls
+- [lang3] `Inferable` cls/dot
+
+- [lang3] `Inferable` equal/equal
+- [lang3] `Inferable` equal/replace
+
+- [lang3] `Inferable` pi/pi
+- [lang3] `Inferable` pi/ap
+
+- [lang3] `Inferable` str/str
+- [lang3] `Inferable` str/quote
 
 - [lang3] `Checker` and `checker`
 - [lang3] inline `Check.check`
