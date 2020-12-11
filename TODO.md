@@ -144,9 +144,6 @@
 
 > refactoring Exp
 
-
-- [lang3] `Inferable` union
-
 - [lang3] `Inferable` absurd
 - [lang3] `Inferable` cls
 - [lang3] `Inferable` equal
