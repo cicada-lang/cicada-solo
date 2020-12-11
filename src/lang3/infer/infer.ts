@@ -27,7 +27,7 @@ export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     if (exp.kind === "Exp.replace") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.absurd") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.absurd_ind") return exp.inferability({ mod, ctx })
-    if (exp.kind === "Exp.str") return Value.type
+    if (exp.kind === "Exp.str") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.quote") return Value.quote(exp.str)
     if (exp.kind === "Exp.union") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.typecons") return exp.inferability({ mod, ctx })
