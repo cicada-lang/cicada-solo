@@ -144,7 +144,6 @@
 
 > refactoring Exp
 
-- [lang3] `Inferable` type
 - [lang3] `Inferable` begin
 - [lang3] `Inferable` the
 - [lang3] `Inferable` typecons

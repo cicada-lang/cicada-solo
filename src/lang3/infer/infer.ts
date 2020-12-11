@@ -39,7 +39,7 @@ export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     if (exp.kind === "Exp.quote") return Value.quote(exp.str)
     if (exp.kind === "Exp.union") return infer_union(mod, ctx, exp)
     if (exp.kind === "Exp.typecons") return infer_typecons(mod, ctx, exp)
-    if (exp.kind === "Exp.type") return Value.type
+    if (exp.kind === "Exp.type") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.begin") return infer_begin(mod, ctx, exp)
     if (exp.kind === "Exp.the") return infer_the(mod, ctx, exp)
     throw infer_error(exp)
