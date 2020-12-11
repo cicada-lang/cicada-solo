@@ -4,8 +4,8 @@ import * as Value from "../../value"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
 
-export function quote_checkable(str: string): Checkable {
-  return Checkable({
+export const quote_checkable = (str: string) =>
+  Checkable({
     checkability: (t, { mod, ctx }) => {
       if (t.kind === "Value.type" || t.kind === "Value.str") return
       if (t.kind === "Value.quote" && str === t.str) return
@@ -13,13 +13,12 @@ export function quote_checkable(str: string): Checkable {
         ut.aline(`
           |The given value is string: "${str}",
           |But the given type is ${Readback.readback(
-        mod,
-        ctx,
-        Value.type,
-        t
-      ).repr()}.
+            mod,
+            ctx,
+            Value.type,
+            t
+          ).repr()}.
       |`)
       )
     },
   })
-}
