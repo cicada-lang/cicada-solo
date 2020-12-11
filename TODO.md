@@ -144,7 +144,6 @@
 
 > refactoring Exp
 
-- [lang3] `Inferable` equal/equal
 - [lang3] `Inferable` equal/replace
 
 - [lang3] `Inferable` pi/pi

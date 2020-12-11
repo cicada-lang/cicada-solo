@@ -9,7 +9,6 @@ import * as ut from "../../ut"
 import { infer_v } from "./infer-v"
 import { infer_pi } from "./infer-pi"
 import { infer_ap } from "./infer-ap"
-import { infer_equal } from "./infer-equal"
 import { infer_replace } from "./infer-replace"
 
 export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
@@ -24,7 +23,7 @@ export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
         Value.Telescope.create(mod, Ctx.to_env(ctx), undefined, [])
       )
     if (exp.kind === "Exp.dot") return exp.inferability({ mod, ctx })
-    if (exp.kind === "Exp.equal") return infer_equal(mod, ctx, exp)
+    if (exp.kind === "Exp.equal") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.replace") return infer_replace(mod, ctx, exp)
     if (exp.kind === "Exp.absurd") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.absurd_ind") return exp.inferability({ mod, ctx })
