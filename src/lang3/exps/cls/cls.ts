@@ -1,10 +1,13 @@
 import { Evaluable } from "../../evaluable"
+import { Inferable } from "../../inferable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import * as ut from "../../../ut"
 import { cls_evaluable } from "./cls-evaluable"
+import { cls_inferable } from "./cls-inferable"
 
 export type Cls = Evaluable &
+  Inferable &
   Repr & {
     kind: "Exp.cls"
     sat: Array<{ name: string; t: Exp; exp: Exp }>
@@ -20,6 +23,7 @@ export function Cls(
     sat,
     scope,
     ...cls_evaluable(sat, scope),
+    ...cls_inferable(sat, scope),
     repr: () => {
       if (sat.length === 0 && scope.length === 0) return "Object"
       const parts = [

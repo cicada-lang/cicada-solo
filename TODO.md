@@ -144,7 +144,6 @@
 
 > refactoring Exp
 
-- [lang3] `Inferable` cls/cls
 - [lang3] `Inferable` cls/dot
 
 - [lang3] `Inferable` equal/equal
