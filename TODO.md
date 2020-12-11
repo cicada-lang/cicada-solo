@@ -144,17 +144,17 @@
 
 > refactoring Exp
 
-- [lang3] `Inferable` absurd
+- [lang3] `Inferable` type
 - [lang3] `Inferable` begin
+- [lang3] `Inferable` the
+- [lang3] `Inferable` typecons
+- [lang3] `Inferable` union
+
+- [lang3] `Inferable` absurd
 - [lang3] `Inferable` cls
 - [lang3] `Inferable` equal
 - [lang3] `Inferable` pi
 - [lang3] `Inferable` str
-- [lang3] `Inferable` the
-- [lang3] `Inferable` type
-- [lang3] `Inferable` typecons
-- [lang3] `Inferable` union
-- [lang3] `Inferable` var
 
 - [lang3] `Checker` and `checker`
 - [lang3] inline `Check.check`

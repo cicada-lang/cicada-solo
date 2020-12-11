@@ -21,7 +21,7 @@ import { infer_the } from "./infer-the"
 
 export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
-    if (exp.kind === "Exp.v") return infer_v(mod, ctx, exp)
+    if (exp.kind === "Exp.v") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.pi") return infer_pi(mod, ctx, exp)
     if (exp.kind === "Exp.ap") return infer_ap(mod, ctx, exp)
     if (exp.kind === "Exp.cls") return infer_cls(mod, ctx, exp)
