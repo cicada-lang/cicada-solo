@@ -144,7 +144,6 @@
 
 > refactoring Exp
 
-- [lang3] `Inferable` pi/pi
 - [lang3] `Inferable` pi/ap
 
 - [lang3] `Inferable` str/str
