@@ -144,7 +144,7 @@
 
 > refactoring Exp
 
-- [lang3] `Inferable` typecons
+
 - [lang3] `Inferable` union
 
 - [lang3] `Inferable` absurd

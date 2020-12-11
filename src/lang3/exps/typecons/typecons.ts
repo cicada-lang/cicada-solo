@@ -1,9 +1,12 @@
 import { Evaluable } from "../../evaluable"
+import { Inferable } from "../../inferable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import { typecons_evaluable } from "./typecons-evaluable"
+import { typecons_inferable } from "./typecons-inferable"
 
 export type Typecons = Evaluable &
+  Inferable &
   Repr & {
     kind: "Exp.typecons"
     name: string
@@ -22,6 +25,7 @@ export function Typecons(
     t,
     sums,
     ...typecons_evaluable(name, t, sums),
+    ...typecons_inferable(name, t, sums),
     repr: () => name,
   }
 }

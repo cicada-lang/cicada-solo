@@ -15,7 +15,6 @@ import { infer_equal } from "./infer-equal"
 import { infer_replace } from "./infer-replace"
 import { infer_absurd_ind } from "./infer-absurd-ind"
 import { infer_union } from "./infer-union"
-import { infer_typecons } from "./infer-typecons"
 
 export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -36,7 +35,7 @@ export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     if (exp.kind === "Exp.str") return Value.type
     if (exp.kind === "Exp.quote") return Value.quote(exp.str)
     if (exp.kind === "Exp.union") return infer_union(mod, ctx, exp)
-    if (exp.kind === "Exp.typecons") return infer_typecons(mod, ctx, exp)
+    if (exp.kind === "Exp.typecons") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.type") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.begin") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.the") return exp.inferability({ mod, ctx })

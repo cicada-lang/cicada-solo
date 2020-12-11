@@ -1,25 +1,29 @@
-import { evaluator } from "../evaluator"
-import * as Infer from "../infer"
-import * as Check from "../check"
-import * as Evaluate from "../evaluate"
-import * as Exp from "../exp"
-import * as Value from "../value"
-import * as Ctx from "../ctx"
-import * as Mod from "../mod"
-import * as Trace from "../../trace"
-import * as ut from "../../ut"
+import { Inferable } from "../../inferable"
+import { evaluator } from "../../evaluator"
+import * as Infer from "../../infer"
+import * as Check from "../../check"
+import * as Evaluate from "../../evaluate"
+import * as Exp from "../../exp"
+import * as Value from "../../value"
+import * as Ctx from "../../ctx"
+import * as Mod from "../../mod"
+import * as Trace from "../../../trace"
+import * as ut from "../../../ut"
 
-export function infer_typecons(
-  mod: Mod.Mod,
-  ctx: Ctx.Ctx,
-  datatype: Exp.typecons
-): Value.Value {
-  check_typecons_t(mod, ctx, datatype.t)
-  for (const entry of datatype.sums) {
-    check_datacons_t(mod, ctx, entry.t, datatype.name)
-  }
-  return evaluator.evaluate(datatype.t, { mod, env: Ctx.to_env(ctx) })
-}
+export const typecons_inferable = (
+  name: string,
+  t: Exp.Exp,
+  sums: Array<{ tag: string; t: Exp.Exp }>
+) =>
+  Inferable({
+    inferability: ({ mod, ctx }) => {
+      check_typecons_t(mod, ctx, t)
+      for (const entry of sums) {
+        check_datacons_t(mod, ctx, entry.t, name)
+      }
+      return evaluator.evaluate(t, { mod, env: Ctx.to_env(ctx) })
+    },
+  })
 
 function check_datacons_t(
   mod: Mod.Mod,
