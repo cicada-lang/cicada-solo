@@ -11,8 +11,8 @@ export function quote_checkable(str: string): Checkable {
       if (t.kind === "Value.quote" && str === t.str) return
       throw new Trace.Trace(
         ut.aline(`
-      |The given value is string: "${str}",
-      |But the given type is ${Readback.readback(
+          |The given value is string: "${str}",
+          |But the given type is ${Readback.readback(
         mod,
         ctx,
         Value.type,
