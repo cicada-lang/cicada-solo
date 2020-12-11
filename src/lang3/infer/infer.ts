@@ -6,13 +6,12 @@ import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
-import { infer_ap } from "./infer-ap"
 
 export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
     if (exp.kind === "Exp.v") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.pi") return exp.inferability({ mod, ctx })
-    if (exp.kind === "Exp.ap") return infer_ap(mod, ctx, exp)
+    if (exp.kind === "Exp.ap") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.cls") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.obj" && exp.properties.size === 0)
       return Value.cls(
