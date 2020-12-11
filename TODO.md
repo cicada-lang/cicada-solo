@@ -144,8 +144,6 @@
 
 > refactoring Exp
 
-- [lang3] `Inferable` absurd/absurd-ind
-
 - [lang3] `Inferable` cls/cls
 - [lang3] `Inferable` cls/dot
 

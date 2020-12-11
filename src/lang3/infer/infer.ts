@@ -13,7 +13,6 @@ import { infer_ap } from "./infer-ap"
 import { infer_dot } from "./infer-dot"
 import { infer_equal } from "./infer-equal"
 import { infer_replace } from "./infer-replace"
-import { infer_absurd_ind } from "./infer-absurd-ind"
 
 export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -30,7 +29,7 @@ export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     if (exp.kind === "Exp.equal") return infer_equal(mod, ctx, exp)
     if (exp.kind === "Exp.replace") return infer_replace(mod, ctx, exp)
     if (exp.kind === "Exp.absurd") return exp.inferability({ mod, ctx })
-    if (exp.kind === "Exp.absurd_ind") return infer_absurd_ind(mod, ctx, exp)
+    if (exp.kind === "Exp.absurd_ind") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.str") return Value.type
     if (exp.kind === "Exp.quote") return Value.quote(exp.str)
     if (exp.kind === "Exp.union") return exp.inferability({ mod, ctx })
