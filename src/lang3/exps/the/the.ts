@@ -1,9 +1,12 @@
 import { Evaluable } from "../../evaluable"
+import { Inferable } from "../../inferable"
 import { Repr } from "../../repr"
 import { Exp } from "../../exp"
 import { the_evaluable } from "./the-evaluable"
+import { the_inferable } from "./the-inferable"
 
 export type The = Evaluable &
+  Inferable &
   Repr & {
     kind: "Exp.the"
     t: Exp
@@ -16,6 +19,7 @@ export function The(t: Exp, exp: Exp): The {
     t,
     exp,
     ...the_evaluable(t, exp),
+    ...the_inferable(t, exp),
     repr: () => `{ ${t.repr()} -- ${exp.repr()} }`,
   }
 }

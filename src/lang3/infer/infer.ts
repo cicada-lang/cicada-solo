@@ -16,8 +16,6 @@ import { infer_replace } from "./infer-replace"
 import { infer_absurd_ind } from "./infer-absurd-ind"
 import { infer_union } from "./infer-union"
 import { infer_typecons } from "./infer-typecons"
-import { infer_begin } from "./infer-begin"
-import { infer_the } from "./infer-the"
 
 export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -41,7 +39,7 @@ export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     if (exp.kind === "Exp.typecons") return infer_typecons(mod, ctx, exp)
     if (exp.kind === "Exp.type") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.begin") return exp.inferability({ mod, ctx })
-    if (exp.kind === "Exp.the") return infer_the(mod, ctx, exp)
+    if (exp.kind === "Exp.the") return exp.inferability({ mod, ctx })
     throw infer_error(exp)
   } catch (error) {
     if (error instanceof Trace.Trace) {
