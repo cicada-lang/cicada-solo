@@ -2,12 +2,8 @@ import { Evaluable } from "../../evaluable"
 import { Exp } from "../../exp"
 import * as Evaluate from "../../evaluate"
 
-export function replace_evaluable(
-  target: Exp,
-  motive: Exp,
-  base: Exp
-): Evaluable {
-  return Evaluable({
+export const replace_evaluable = (target: Exp, motive: Exp, base: Exp) =>
+  Evaluable({
     evaluability: ({ mod, env, mode, evaluator }) =>
       Evaluate.do_replace(
         evaluator.evaluate(target, { mod, env, mode }),
@@ -15,4 +11,3 @@ export function replace_evaluable(
         evaluator.evaluate(base, { mod, env, mode })
       ),
   })
-}
