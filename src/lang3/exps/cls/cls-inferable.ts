@@ -19,7 +19,7 @@ export function cls_inferable(
       go_through_sat(mod, new_ctx, sat)
       go_through_scope(mod, new_ctx, scope)
       return Value.type
-    }
+    },
   })
 }
 
