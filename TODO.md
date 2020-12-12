@@ -144,7 +144,7 @@
 
 > refactoring Exp
 
-- [lang3] no branches in `Check.check`
+- [lang3] refactor `check_union_type`
 
 - [lang3] `Checker` and `checker`
 - [lang3] inline `Check.check`

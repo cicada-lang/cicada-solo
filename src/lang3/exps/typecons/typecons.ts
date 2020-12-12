@@ -1,5 +1,6 @@
 import { Evaluable } from "../../evaluable"
 import { Inferable } from "../../inferable"
+import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import { typecons_evaluable } from "./typecons-evaluable"
@@ -7,6 +8,7 @@ import { typecons_inferable } from "./typecons-inferable"
 
 export type Typecons = Evaluable &
   Inferable &
+  Checkable &
   Repr & {
     kind: "Exp.typecons"
     name: string

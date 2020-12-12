@@ -1,11 +1,13 @@
 import { Evaluable } from "../../evaluable"
 import { Inferable } from "../../inferable"
+import { Checkable } from "../../checkable"
 import { Repr } from "../../repr"
 import { absurd_evaluable } from "./absurd-evaluable"
 import { absurd_inferable } from "./absurd-inferable"
 
 export type Absurd = Evaluable &
   Inferable &
+  Checkable &
   Repr & {
     kind: "Exp.absurd"
   }

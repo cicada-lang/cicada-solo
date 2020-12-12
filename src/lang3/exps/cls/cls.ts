@@ -1,5 +1,6 @@
 import { Evaluable } from "../../evaluable"
 import { Inferable } from "../../inferable"
+import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import * as ut from "../../../ut"
@@ -7,6 +8,7 @@ import { cls_evaluable } from "./cls-evaluable"
 import { cls_inferable } from "./cls-inferable"
 
 export type Cls = Evaluable &
+  Checkable &
   Inferable &
   Repr & {
     kind: "Exp.cls"

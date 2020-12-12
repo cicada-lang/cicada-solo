@@ -1,5 +1,6 @@
 import { Evaluable } from "../../evaluable"
 import { Inferable } from "../../inferable"
+import { Checkable } from "../../checkable"
 import { Repr } from "../../repr"
 import { Exp } from "../../exp"
 import { union_evaluable } from "./union-evaluable"
@@ -7,6 +8,7 @@ import { union_inferable } from "./union-inferable"
 
 export type Union = Evaluable &
   Inferable &
+  Checkable &
   Repr & {
     kind: "Exp.union"
     left: Exp

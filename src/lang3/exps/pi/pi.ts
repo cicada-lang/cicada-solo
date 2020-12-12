@@ -1,5 +1,6 @@
 import { Evaluable } from "../../evaluable"
 import { Inferable } from "../../inferable"
+import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import { pi_evaluable } from "./pi-evaluable"
@@ -7,6 +8,7 @@ import { pi_inferable } from "./pi-inferable"
 
 export type Pi = Evaluable &
   Inferable &
+  Checkable &
   Repr & {
     kind: "Exp.pi"
     name: string

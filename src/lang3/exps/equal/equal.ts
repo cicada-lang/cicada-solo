@@ -1,5 +1,6 @@
 import { Evaluable } from "../../evaluable"
 import { Inferable } from "../../inferable"
+import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import { equal_evaluable } from "./equal-evaluable"
@@ -7,6 +8,7 @@ import { equal_inferable } from "./equal-inferable"
 
 export type Equal = Evaluable &
   Inferable &
+  Checkable &
   Repr & {
     kind: "Exp.equal"
     t: Exp

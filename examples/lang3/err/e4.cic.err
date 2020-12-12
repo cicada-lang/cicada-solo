@@ -5,10 +5,8 @@ But the given type is T.
 previous:
 - prev
 - step(prev)
-- step(prev)
 - (_almost) => step(prev)
 - (prev) => (_almost) => step(prev)
-- Nat_rec(target)(T)(base)((prev) => (_almost) => step(prev))
 - Nat_rec(target)(T)(base)((prev) => (_almost) => step(prev))
 - (step) => Nat_rec(target)(T)(base)((prev) => (_almost) => step(prev))
 - (base) => (step) => Nat_rec(target)(T)(base)((prev) => (_almost) => step(prev))

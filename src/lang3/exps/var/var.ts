@@ -1,11 +1,13 @@
 import { Repr } from "../../repr"
 import { Evaluable } from "../../evaluable"
+import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"
 import { var_evaluable } from "./var-evaluable"
 import { var_inferable } from "./var-inferable"
 
 export type Var = Evaluable &
   Inferable &
+  Checkable &
   Repr & {
     kind: "Exp.v"
     name: string

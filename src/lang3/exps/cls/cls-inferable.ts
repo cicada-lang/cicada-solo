@@ -7,11 +7,11 @@ import * as Value from "../../value"
 import * as Ctx from "../../ctx"
 import * as Mod from "../../mod"
 
-export function cls_inferable(
+export const cls_inferable = (
   sat: Array<{ name: string; t: Exp.Exp; exp: Exp.Exp }>,
   scope: Array<{ name: string; t: Exp.Exp }>
-): Inferable {
-  return Inferable({
+) =>
+  Inferable({
     inferability: ({ mod, ctx }) => {
       // NOTE We DO need to update the `ctx` as we go along.
       // - just like inferring `Exp.sigma`.
@@ -21,7 +21,6 @@ export function cls_inferable(
       return Value.type
     },
   })
-}
 
 function go_through_sat(
   mod: Mod.Mod,
