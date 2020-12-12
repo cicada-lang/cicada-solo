@@ -10,6 +10,7 @@ import { begin_inferable } from "./begin-inferable"
 import { begin_checkable } from "./begin-checkable"
 
 export type Begin = Evaluable &
+  Checkable &
   Inferable &
   Repr & {
     kind: "Exp.begin"

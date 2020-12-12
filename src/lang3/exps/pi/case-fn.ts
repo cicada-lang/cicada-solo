@@ -1,5 +1,6 @@
 import { Evaluable } from "../../evaluable"
 import { Checkable } from "../../checkable"
+import { Inferable, non_inferable } from "../../inferable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import * as Pattern from "../../pattern"
@@ -14,6 +15,7 @@ export type Case = {
 
 export type CaseFn = Evaluable &
   Checkable &
+  Inferable &
   Repr & {
     kind: "Exp.case_fn"
     cases: Array<Case>
@@ -25,6 +27,7 @@ export function CaseFn(cases: Array<Case>): CaseFn {
     cases,
     ...case_fn_evaluable(cases),
     ...case_fn_checkable(cases),
+    ...non_inferable,
     repr: () => {
       let s = cases
         .map(

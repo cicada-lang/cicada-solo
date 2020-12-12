@@ -1,5 +1,6 @@
 import { Evaluable } from "../../evaluable"
 import { Checkable } from "../../checkable"
+import { Inferable, non_inferable } from "../../inferable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import * as Pattern from "../../pattern"
@@ -8,6 +9,7 @@ import { fn_checkable } from "./fn-checkable"
 
 export type Fn = Evaluable &
   Checkable &
+  Inferable &
   Repr & {
     kind: "Exp.fn"
     pattern: Pattern.Pattern
@@ -21,6 +23,7 @@ export function Fn(pattern: Pattern.Pattern, ret: Exp): Fn {
     ret,
     ...fn_evaluable(pattern, ret),
     ...fn_checkable(pattern, ret),
+    ...non_inferable,
     repr: () => `(${Pattern.repr(pattern)}) => ${ret.repr()}`,
   }
 }

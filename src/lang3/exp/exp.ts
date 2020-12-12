@@ -19,6 +19,38 @@ import { Type } from "../exps/type"
 import { Begin } from "../exps/begin"
 import { The } from "../exps/the"
 
+// import { Evaluable } from "../evaluable"
+// import { Checkable } from "../checkable"
+// import { Inferable } from "../inferable"
+// import { Repr } from "../repr"
+
+// export type Exp = Repr &
+//   Evaluable &
+//   Checkable &
+//   Inferable & {
+//     kind:
+//       | "Exp.v"
+//       | "Exp.pi"
+//       | "Exp.fn"
+//       | "Exp.case_fn"
+//       | "Exp.ap"
+//       | "Exp.cls"
+//       | "Exp.obj"
+//       | "Exp.dot"
+//       | "Exp.equal"
+//       | "Exp.same"
+//       | "Exp.replace"
+//       | "Exp.absurd"
+//       | "Exp.absurd_ind"
+//       | "Exp.str"
+//       | "Exp.quote"
+//       | "Exp.union"
+//       | "Exp.typecons"
+//       | "Exp.type"
+//       | "Exp.begin"
+//       | "Exp.the"
+//   }
+
 export type Exp =
   | Var
   | Pi

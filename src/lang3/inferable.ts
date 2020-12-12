@@ -11,11 +11,11 @@ import * as ut from "../ut"
 
 export type Inferable = {
   inferability(the: { mod: Mod; ctx: Ctx }): Value.Value
-} & Checkable
+}
 
 export function Inferable(the: {
   inferability(the: { mod: Mod; ctx: Ctx }): Value.Value
-}): Inferable {
+}): Inferable & Checkable {
   return {
     ...the,
     checkability: (t, { mod, ctx }) => {
@@ -38,4 +38,15 @@ export function Inferable(the: {
       }
     },
   }
+}
+
+export const non_inferable: Inferable = {
+  inferability({ mod, ctx }) {
+    throw new Trace.Trace(
+      ut.aline(`
+        |I can not infer the type.
+        |I suggest you add a type annotation to the expression.
+        |`)
+    )
+  },
 }

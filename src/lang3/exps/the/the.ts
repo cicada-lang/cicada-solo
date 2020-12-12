@@ -1,4 +1,5 @@
 import { Evaluable } from "../../evaluable"
+import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"
 import { Repr } from "../../repr"
 import { Exp } from "../../exp"
@@ -6,6 +7,7 @@ import { the_evaluable } from "./the-evaluable"
 import { the_inferable } from "./the-inferable"
 
 export type The = Evaluable &
+  Checkable &
   Inferable &
   Repr & {
     kind: "Exp.the"
