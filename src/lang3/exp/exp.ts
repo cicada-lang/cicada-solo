@@ -24,6 +24,8 @@ import { Checkable } from "../checkable"
 import { Inferable } from "../inferable"
 import { Repr } from "../repr"
 
+// TODO change sum type into intersection type
+
 // export type Exp = Repr &
 //   Evaluable &
 //   Checkable &
