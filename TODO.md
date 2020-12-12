@@ -27,6 +27,10 @@
 
 # lang0
 
+> implement alpha equivalent by semantic content hash
+
+- Like Gödel numbering?
+
 > try tagless final style
 > - use only the first order part of this style
 
@@ -143,6 +147,8 @@
 # lang3
 
 > refactoring Exp
+
+- [lang3] `Exp` alpha equivalent
 
 - [lang3] `Checker` and `checker`
 - [lang3] inline `Check.check`
