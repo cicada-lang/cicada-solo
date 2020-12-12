@@ -95,7 +95,7 @@
 
 > refactoring Exp
 
-- [lang3] `Exp` alpha equivalent
+- [lang3] `Exp` alpha equivalent by semantic content hash
 
 - [lang3] `Checker` and `checker`
 - [lang3] inline `Check.check`
