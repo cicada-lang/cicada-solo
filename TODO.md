@@ -144,8 +144,6 @@
 
 > refactoring Exp
 
-- [lang3] `Inferable` cls/obj
-
 - [lang3] `Checker` and `checker`
 - [lang3] inline `Check.check`
 

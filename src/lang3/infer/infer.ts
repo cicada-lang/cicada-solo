@@ -13,15 +13,7 @@ export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     if (exp.kind === "Exp.pi") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.ap") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.cls") return exp.inferability({ mod, ctx })
-    if (exp.kind === "Exp.obj") {
-      if (exp.properties.size === 0) {
-        return Value.cls(
-          [],
-          Value.Telescope.create(mod, Ctx.to_env(ctx), undefined, [])
-        )
-      }
-      throw infer_error(exp)
-    }
+    if (exp.kind === "Exp.obj") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.dot") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.equal") return exp.inferability({ mod, ctx })
     if (exp.kind === "Exp.replace") return exp.inferability({ mod, ctx })
