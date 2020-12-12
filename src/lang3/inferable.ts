@@ -19,8 +19,6 @@ export function Inferable(the: {
   return {
     ...the,
     checkability: (t, { mod, ctx }) => {
-      // TODO should use inferer
-      // const u = Infer.infer(mod, ctx, exp)
       const u = the.inferability({ mod, ctx })
       if (!Value.subtype(mod, ctx, u, t)) {
         const u_repr = Readback.readback(mod, ctx, Value.type, u)

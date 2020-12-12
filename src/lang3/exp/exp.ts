@@ -19,10 +19,10 @@ import { Type } from "../exps/type"
 import { Begin } from "../exps/begin"
 import { The } from "../exps/the"
 
-// import { Evaluable } from "../evaluable"
-// import { Checkable } from "../checkable"
-// import { Inferable } from "../inferable"
-// import { Repr } from "../repr"
+import { Evaluable } from "../evaluable"
+import { Checkable } from "../checkable"
+import { Inferable } from "../inferable"
+import { Repr } from "../repr"
 
 // export type Exp = Repr &
 //   Evaluable &

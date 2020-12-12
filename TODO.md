@@ -144,13 +144,13 @@
 
 > refactoring Exp
 
-- [lang3] refactor `check_union_type`
-
 - [lang3] `Checker` and `checker`
 - [lang3] inline `Check.check`
 
 - [lang3] `Inferer` and `inferer`
 - [lang3] inline `Infer.infer`
+
+- [lang3] refactor `check_union_type` & `check_by_infer`
 
 - [lang3] re-place `Evaluate`'s functions
 
