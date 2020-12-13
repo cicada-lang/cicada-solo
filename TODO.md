@@ -91,17 +91,27 @@
 
 > refactoring Exp
 
-- [lang3] `AlphaRepr` -- absurd/absurd-ind
 - [lang3] `AlphaRepr` -- begin
-- [lang3] `AlphaRepr` -- cls
-- [lang3] `AlphaRepr` -- equal
-- [lang3] `AlphaRepr` -- pi
-- [lang3] `AlphaRepr` -- str
+- [lang3] `AlphaRepr` -- cls/cls
+- [lang3] `AlphaRepr` -- cls/obj
+- [lang3] `AlphaRepr` -- cls/dot
+- [lang3] `AlphaRepr` -- equal/equal
+- [lang3] `AlphaRepr` -- equal/same
+- [lang3] `AlphaRepr` -- equal/replace
+- [lang3] `AlphaRepr` -- pi/pi
+- [lang3] `AlphaRepr` -- pi/ap
+- [lang3] `AlphaRepr` -- pi/fn
+- [lang3] `AlphaRepr` -- pi/case-fn
+- [lang3] `AlphaRepr` -- str/str
+- [lang3] `AlphaRepr` -- str/quote
 - [lang3] `AlphaRepr` -- the
 - [lang3] `AlphaRepr` -- type
 - [lang3] `AlphaRepr` -- typecons
 - [lang3] `AlphaRepr` -- union
 - [lang3] `AlphaRepr` -- var
+
+- [lang3] no branches in `exp-alpha-repr.ts`
+- [lang3] inline `exp-alpha-repr.ts`
 
 - [lang3] `Exp` change sum type into intersection type
 

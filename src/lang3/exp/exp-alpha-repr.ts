@@ -107,10 +107,7 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return exp.alpha_repr(opts)
     }
     case "Exp.absurd_ind": {
-      const { target, motive } = exp
-      const target_repr = alpha_repr(target, opts)
-      const motive_repr = alpha_repr(motive, opts)
-      return `absurd_ind(${target_repr}, ${motive_repr})`
+      return exp.alpha_repr(opts)
     }
     case "Exp.str": {
       return "String"
