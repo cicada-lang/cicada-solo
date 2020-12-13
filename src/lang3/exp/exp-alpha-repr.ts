@@ -2,39 +2,39 @@ import * as Exp from "../exp"
 import * as Pattern from "../pattern"
 import * as ut from "../../ut"
 
-type AlphaPrintCtx = {
+type AlphaReprOpts = {
   depth: number
   depths: Map<string, number>
 }
 
-export function alpha_print(exp: Exp.Exp, the: AlphaPrintCtx): string {
+export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
   switch (exp.kind) {
     case "Exp.v": {
       const { name } = exp
-      const depth = the.depths.get(name)
+      const depth = opts.depths.get(name)
       if (depth === undefined) return name
       else return depth.toString()
     }
     case "Exp.pi": {
       const { name, arg_t, ret_t } = exp
-      const arg_t_repr = alpha_print(arg_t, the)
-      const ret_t_repr = alpha_print(arg_t, {
-        depth: the.depth + 1,
-        depths: new Map([...the.depths, [name, the.depth]]),
+      const arg_t_repr = alpha_repr(arg_t, opts)
+      const ret_t_repr = alpha_repr(arg_t, {
+        depth: opts.depth + 1,
+        depths: new Map([...opts.depths, [name, opts.depth]]),
       })
       return `(${arg_t_repr}) -> ${ret_t_repr}`
     }
     case "Exp.fn": {
       const { pattern, ret } = exp
-      const [pattern_repr, next] = alpha_print_pattern(pattern, the)
-      const ret_repr = alpha_print(ret, next)
+      const [pattern_repr, next] = alpha_repr_pattern(pattern, opts)
+      const ret_repr = alpha_repr(ret, next)
       return `(${pattern_repr}) => ${ret_repr}`
     }
     case "Exp.case_fn": {
       const { cases } = exp
       const parts = cases.map(({ pattern, ret }) => {
-        const [pattern_repr, next] = alpha_print_pattern(pattern, the)
-        const ret_repr = alpha_print(ret, next)
+        const [pattern_repr, next] = alpha_repr_pattern(pattern, opts)
+        const ret_repr = alpha_repr(ret, next)
         return `(${pattern_repr}) => ${ret_repr}`
       })
       const s = parts.join("\n")
@@ -42,16 +42,16 @@ export function alpha_print(exp: Exp.Exp, the: AlphaPrintCtx): string {
     }
     case "Exp.ap": {
       const { target, arg } = exp
-      return `${alpha_print(target, the)}(${alpha_print(arg, the)})`
+      return `${alpha_repr(target, opts)}(${alpha_repr(arg, opts)})`
     }
     case "Exp.cls": {
       const { sat, scope } = exp
       if (sat.length === 0 && scope.length === 0) return "Object"
       const parts = []
-      let new_alpha_ctx = the
+      let new_alpha_ctx = opts
       for (const { name, t, exp } of sat) {
-        const t_repr = alpha_print(t, new_alpha_ctx)
-        const exp_repr = alpha_print(exp, new_alpha_ctx)
+        const t_repr = alpha_repr(t, new_alpha_ctx)
+        const exp_repr = alpha_repr(exp, new_alpha_ctx)
         parts.push(`${name} : ${t_repr} = ${exp_repr}`)
         new_alpha_ctx = {
           depth: new_alpha_ctx.depth + 1,
@@ -62,7 +62,7 @@ export function alpha_print(exp: Exp.Exp, the: AlphaPrintCtx): string {
         }
       }
       for (const { name, t } of scope) {
-        const t_repr = alpha_print(t, new_alpha_ctx)
+        const t_repr = alpha_repr(t, new_alpha_ctx)
         parts.push(`${name} : ${t_repr}`)
         new_alpha_ctx = {
           depth: new_alpha_ctx.depth + 1,
@@ -78,19 +78,19 @@ export function alpha_print(exp: Exp.Exp, the: AlphaPrintCtx): string {
     case "Exp.obj": {
       const { properties } = exp
       const s = Array.from(properties)
-        .map(([name, exp]) => `${name} = ${alpha_print(exp, the)}`)
+        .map(([name, exp]) => `${name} = ${alpha_repr(exp, opts)}`)
         .join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.dot": {
       const { target, name } = exp
-      return `${alpha_print(target, the)}.${name}`
+      return `${alpha_repr(target, opts)}.${name}`
     }
     case "Exp.equal": {
       const { t, from, to } = exp
-      const t_repr = alpha_print(t, the)
-      const from_repr = alpha_print(from, the)
-      const to_repr = alpha_print(from, the)
+      const t_repr = alpha_repr(t, opts)
+      const from_repr = alpha_repr(from, opts)
+      const to_repr = alpha_repr(from, opts)
       return `Equal(${t_repr}, ${from_repr}, ${to_repr})`
     }
     case "Exp.same": {
@@ -98,18 +98,18 @@ export function alpha_print(exp: Exp.Exp, the: AlphaPrintCtx): string {
     }
     case "Exp.replace": {
       const { target, motive, base } = exp
-      const target_repr = alpha_print(target, the)
-      const motive_repr = alpha_print(motive, the)
-      const base_repr = alpha_print(base, the)
+      const target_repr = alpha_repr(target, opts)
+      const motive_repr = alpha_repr(motive, opts)
+      const base_repr = alpha_repr(base, opts)
       return `replace(${target_repr}, ${motive_repr}, ${base_repr})`
     }
     case "Exp.absurd": {
-      return "Absurd"
+      return exp.alpha_repr(opts)
     }
     case "Exp.absurd_ind": {
       const { target, motive } = exp
-      const target_repr = alpha_print(target, the)
-      const motive_repr = alpha_print(motive, the)
+      const target_repr = alpha_repr(target, opts)
+      const motive_repr = alpha_repr(motive, opts)
       return `absurd_ind(${target_repr}, ${motive_repr})`
     }
     case "Exp.str": {
@@ -122,7 +122,7 @@ export function alpha_print(exp: Exp.Exp, the: AlphaPrintCtx): string {
     case "Exp.union": {
       // NOTE handle associativity and commutative of union
       const exps = union_flatten(exp)
-      const parts = exps.map((exp) => alpha_print(exp, the)).sort()
+      const parts = exps.map((exp) => alpha_repr(exp, opts)).sort()
       return `{ ${parts.join("\n")} }`
     }
     case "Exp.typecons": {
@@ -137,49 +137,49 @@ export function alpha_print(exp: Exp.Exp, the: AlphaPrintCtx): string {
       throw new Error("TODO")
     }
     case "Exp.the": {
-      const t_repr = alpha_print(exp.t, the)
-      const exp_repr = alpha_print(exp.exp, the)
+      const t_repr = alpha_repr(exp.t, opts)
+      const exp_repr = alpha_repr(exp.exp, opts)
       return `{ ${t_repr} -- ${exp_repr} }`
     }
   }
 }
 
-function alpha_print_pattern(
+function alpha_repr_pattern(
   pattern: Pattern.Pattern,
-  the: AlphaPrintCtx
-): [string, AlphaPrintCtx] {
+  opts: AlphaReprOpts
+): [string, AlphaReprOpts] {
   switch (pattern.kind) {
     case "Pattern.v": {
       const { name } = pattern
       return [
-        the.depth.toString(),
+        opts.depth.toString(),
         {
-          depth: the.depth + 1,
-          depths: new Map([...the.depths, [name, the.depth]]),
+          depth: opts.depth + 1,
+          depths: new Map([...opts.depths, [name, opts.depth]]),
         },
       ]
     }
     case "Pattern.datatype": {
       const { name, args } = pattern
-      const [args_repr, next] = alpha_print_patterns(args, the)
+      const [args_repr, next] = alpha_repr_patterns(args, opts)
       return [`${name}(${args_repr})`, next]
     }
     case "Pattern.data": {
       const { name, tag, args } = pattern
-      const [args_repr, next] = alpha_print_patterns(args, the)
+      const [args_repr, next] = alpha_repr_patterns(args, opts)
       return [`${name}.${tag}(${args_repr})`, next]
     }
   }
 }
 
-function alpha_print_patterns(
+function alpha_repr_patterns(
   patterns: Array<Pattern.Pattern>,
-  the: AlphaPrintCtx
-): [string, AlphaPrintCtx] {
-  let new_alpha_ctx = the
+  opts: AlphaReprOpts
+): [string, AlphaReprOpts] {
+  let new_alpha_ctx = opts
   const parts = []
   for (const pattern of patterns) {
-    const [repr, next] = alpha_print_pattern(pattern, new_alpha_ctx)
+    const [repr, next] = alpha_repr_pattern(pattern, new_alpha_ctx)
     new_alpha_ctx = next
     parts.push(repr)
   }

@@ -91,17 +91,17 @@
 
 > refactoring Exp
 
-- [lang3] `AlphaPrint` -- absurd
-- [lang3] `AlphaPrint` -- begin
-- [lang3] `AlphaPrint` -- cls
-- [lang3] `AlphaPrint` -- equal
-- [lang3] `AlphaPrint` -- pi
-- [lang3] `AlphaPrint` -- str
-- [lang3] `AlphaPrint` -- the
-- [lang3] `AlphaPrint` -- type
-- [lang3] `AlphaPrint` -- typecons
-- [lang3] `AlphaPrint` -- union
-- [lang3] `AlphaPrint` -- var
+- [lang3] `AlphaRepr` -- absurd/absurd-ind
+- [lang3] `AlphaRepr` -- begin
+- [lang3] `AlphaRepr` -- cls
+- [lang3] `AlphaRepr` -- equal
+- [lang3] `AlphaRepr` -- pi
+- [lang3] `AlphaRepr` -- str
+- [lang3] `AlphaRepr` -- the
+- [lang3] `AlphaRepr` -- type
+- [lang3] `AlphaRepr` -- typecons
+- [lang3] `AlphaRepr` -- union
+- [lang3] `AlphaRepr` -- var
 
 - [lang3] `Exp` change sum type into intersection type
 
