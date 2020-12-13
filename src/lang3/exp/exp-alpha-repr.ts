@@ -16,13 +16,7 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       else return depth.toString()
     }
     case "Exp.pi": {
-      const { name, arg_t, ret_t } = exp
-      const arg_t_repr = alpha_repr(arg_t, opts)
-      const ret_t_repr = alpha_repr(arg_t, {
-        depth: opts.depth + 1,
-        depths: new Map([...opts.depths, [name, opts.depth]]),
-      })
-      return `(${arg_t_repr}) -> ${ret_t_repr}`
+      return exp.alpha_repr(opts)
     }
     case "Exp.fn": {
       const { pattern, ret } = exp

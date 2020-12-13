@@ -91,7 +91,7 @@
 
 > refactoring Exp
 
-- [lang3] `AlphaRepr` -- pi/pi
+
 - [lang3] `AlphaRepr` -- pi/ap
 - [lang3] `AlphaRepr` -- pi/fn
 - [lang3] `AlphaRepr` -- pi/case-fn
