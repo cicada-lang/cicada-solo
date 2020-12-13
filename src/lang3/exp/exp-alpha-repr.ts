@@ -2,6 +2,8 @@ import * as Exp from "../exp"
 import * as Pattern from "../pattern"
 import * as ut from "../../ut"
 
+import { Fn } from "../exps/pi/fn"
+
 type AlphaReprOpts = {
   depth: number
   depths: Map<string, number>
@@ -19,19 +21,13 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return exp.alpha_repr(opts)
     }
     case "Exp.fn": {
-      const { pattern, ret } = exp
-      const [pattern_repr, next] = alpha_repr_pattern(pattern, opts)
-      const ret_repr = alpha_repr(ret, next)
-      return `(${pattern_repr}) => ${ret_repr}`
+      return exp.alpha_repr(opts)
     }
     case "Exp.case_fn": {
       const { cases } = exp
-      const parts = cases.map(({ pattern, ret }) => {
-        const [pattern_repr, next] = alpha_repr_pattern(pattern, opts)
-        const ret_repr = alpha_repr(ret, next)
-        return `(${pattern_repr}) => ${ret_repr}`
-      })
-      const s = parts.join("\n")
+      const s = cases
+        .map(({ pattern, ret }) => alpha_repr(Fn(pattern, ret), opts))
+        .join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.ap": {
@@ -92,49 +88,6 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return `{ ${t_repr} -- ${exp_repr} }`
     }
   }
-}
-
-function alpha_repr_pattern(
-  pattern: Pattern.Pattern,
-  opts: AlphaReprOpts
-): [string, AlphaReprOpts] {
-  switch (pattern.kind) {
-    case "Pattern.v": {
-      const { name } = pattern
-      return [
-        opts.depth.toString(),
-        {
-          depth: opts.depth + 1,
-          depths: new Map([...opts.depths, [name, opts.depth]]),
-        },
-      ]
-    }
-    case "Pattern.datatype": {
-      const { name, args } = pattern
-      const [args_repr, next] = alpha_repr_patterns(args, opts)
-      return [`${name}(${args_repr})`, next]
-    }
-    case "Pattern.data": {
-      const { name, tag, args } = pattern
-      const [args_repr, next] = alpha_repr_patterns(args, opts)
-      return [`${name}.${tag}(${args_repr})`, next]
-    }
-  }
-}
-
-function alpha_repr_patterns(
-  patterns: Array<Pattern.Pattern>,
-  opts: AlphaReprOpts
-): [string, AlphaReprOpts] {
-  let new_alpha_ctx = opts
-  const parts = []
-  for (const pattern of patterns) {
-    const [repr, next] = alpha_repr_pattern(pattern, new_alpha_ctx)
-    new_alpha_ctx = next
-    parts.push(repr)
-  }
-
-  return [parts.join(", "), new_alpha_ctx]
 }
 
 function union_flatten(union: Exp.union): Array<Exp.Exp> {
