@@ -91,7 +91,6 @@
 
 > refactoring Exp
 
-- [lang3] `AlphaRepr` -- begin
 - [lang3] `AlphaRepr` -- cls/cls
 - [lang3] `AlphaRepr` -- cls/obj
 - [lang3] `AlphaRepr` -- cls/dot
@@ -112,6 +111,8 @@
 
 - [lang3] no branches in `exp-alpha-repr.ts`
 - [lang3] inline `exp-alpha-repr.ts`
+
+- [lang3] fix `begin`'s `AlphaRepr`
 
 - [lang3] `Exp` change sum type into intersection type
 

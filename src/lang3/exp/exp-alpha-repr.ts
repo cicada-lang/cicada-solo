@@ -131,7 +131,7 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return "Type"
     }
     case "Exp.begin": {
-      throw new Error("TODO")
+      return exp.alpha_repr(opts)
     }
     case "Exp.the": {
       const t_repr = alpha_repr(exp.t, opts)
