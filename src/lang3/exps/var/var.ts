@@ -1,4 +1,6 @@
 import { Repr } from "../../repr"
+import { AlphaRepr } from "../../alpha-repr"
+import { alpha_repr } from "../../exp/exp-alpha-repr"
 import { Evaluable } from "../../evaluable"
 import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"

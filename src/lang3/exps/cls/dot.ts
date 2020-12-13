@@ -3,6 +3,8 @@ import { Inferable } from "../../inferable"
 import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
+import { AlphaRepr } from "../../alpha-repr"
+import { alpha_repr } from "../../exp/exp-alpha-repr"
 import { dot_evaluable } from "./dot-evaluable"
 import { dot_inferable } from "./dot-inferable"
 

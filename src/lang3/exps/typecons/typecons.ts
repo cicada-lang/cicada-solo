@@ -3,6 +3,8 @@ import { Inferable } from "../../inferable"
 import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
+import { AlphaRepr } from "../../alpha-repr"
+import { alpha_repr } from "../../exp/exp-alpha-repr"
 import { typecons_evaluable } from "./typecons-evaluable"
 import { typecons_inferable } from "./typecons-inferable"
 
