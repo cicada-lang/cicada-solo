@@ -91,10 +91,6 @@
 
 > refactoring Exp
 
-- [lang3] `Exp` `prehash` & `alpha_prehash`
-- [lang3] `Exp` `hash` -- content hash
-- [lang3] `Exp` alpha equivalent by content hash
-
 - [lang3] `Checker` and `checker`
 - [lang3] inline `Check.check`
 

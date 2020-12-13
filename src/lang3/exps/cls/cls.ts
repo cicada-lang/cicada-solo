@@ -26,16 +26,21 @@ export function Cls(
     scope,
     ...cls_evaluable(sat, scope),
     ...cls_inferable(sat, scope),
-    repr: () => {
-      if (sat.length === 0 && scope.length === 0) return "Object"
-      const parts = [
-        ...sat.map(
-          ({ name, t, exp }) => `${name} : ${t.repr()} = ${exp.repr()}`
-        ),
-        ...scope.map(({ name, t }) => `${name} : ${t.repr()}`),
-      ]
-      let s = parts.join("\n")
-      return `{\n${ut.indent(s, "  ")}\n}`
-    },
+    ...cls_repr(sat, scope),
   }
 }
+
+const cls_repr = (
+  sat: Array<{ name: string; t: Exp; exp: Exp }>,
+  scope: Array<{ name: string; t: Exp }>
+) => ({
+  repr: () => {
+    if (sat.length === 0 && scope.length === 0) return "Object"
+    const parts = [
+      ...sat.map(({ name, t, exp }) => `${name} : ${t.repr()} = ${exp.repr()}`),
+      ...scope.map(({ name, t }) => `${name} : ${t.repr()}`),
+    ]
+    let s = parts.join("\n")
+    return `{\n${ut.indent(s, "  ")}\n}`
+  },
+})

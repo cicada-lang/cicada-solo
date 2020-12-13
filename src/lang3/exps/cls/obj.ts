@@ -23,11 +23,15 @@ export function Obj(properties: Map<string, Exp>): Obj {
     ...obj_evaluable(properties),
     ...obj_inferable(properties),
     ...obj_checkable(properties),
-    repr: () => {
-      const s = Array.from(properties)
-        .map(([name, exp]) => `${name} = ${exp.repr()}`)
-        .join("\n")
-      return `{\n${ut.indent(s, "  ")}\n}`
-    },
+    ...obj_repr(properties),
   }
 }
+
+const obj_repr = (properties: Map<string, Exp>) => ({
+  repr: () => {
+    const s = Array.from(properties)
+      .map(([name, exp]) => `${name} = ${exp.repr()}`)
+      .join("\n")
+    return `{\n${ut.indent(s, "  ")}\n}`
+  },
+})
