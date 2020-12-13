@@ -9,6 +9,7 @@ import * as Pattern from "../../pattern"
 import * as ut from "../../../ut"
 import { case_fn_evaluable } from "./case-fn-evaluable"
 import { case_fn_checkable } from "./case-fn-checkable"
+import { Fn } from "./fn"
 
 export type Case = {
   pattern: Pattern.Pattern
@@ -18,7 +19,8 @@ export type Case = {
 export type CaseFn = Evaluable &
   Checkable &
   Inferable &
-  Repr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.case_fn"
     cases: Array<Case>
   }
@@ -35,6 +37,12 @@ export function CaseFn(cases: Array<Case>): CaseFn {
         .map(
           ({ pattern, ret }) => `(${Pattern.repr(pattern)}) => ${ret.repr()}`
         )
+        .join("\n")
+      return `{\n${ut.indent(s, "  ")}\n}`
+    },
+    alpha_repr: (opts) => {
+      const s = cases
+        .map(({ pattern, ret }) => alpha_repr(Fn(pattern, ret), opts))
         .join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     },

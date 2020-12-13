@@ -2,8 +2,6 @@ import * as Exp from "../exp"
 import * as Pattern from "../pattern"
 import * as ut from "../../ut"
 
-import { Fn } from "../exps/pi/fn"
-
 type AlphaReprOpts = {
   depth: number
   depths: Map<string, number>
@@ -24,11 +22,7 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return exp.alpha_repr(opts)
     }
     case "Exp.case_fn": {
-      const { cases } = exp
-      const s = cases
-        .map(({ pattern, ret }) => alpha_repr(Fn(pattern, ret), opts))
-        .join("\n")
-      return `{\n${ut.indent(s, "  ")}\n}`
+      return exp.alpha_repr(opts)
     }
     case "Exp.ap": {
       const { target, arg } = exp
