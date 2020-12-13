@@ -11,7 +11,7 @@ import { replace_inferable } from "./replace-inferable"
 export type Replace = Evaluable &
   Inferable &
   Checkable &
-  Repr & {
+  Repr & AlphaRepr & {
     kind: "Exp.replace"
     target: Exp
     motive: Exp
@@ -27,5 +27,11 @@ export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
     ...replace_evaluable(target, motive, base),
     ...replace_inferable(target, motive, base),
     repr: () => `replace(${target.repr()}, ${motive.repr()}, ${base.repr()})`,
+    alpha_repr: (opts) => {
+      const target_repr = alpha_repr(target, opts)
+      const motive_repr = alpha_repr(motive, opts)
+      const base_repr = alpha_repr(base, opts)
+      return `replace(${target_repr}, ${motive_repr}, ${base_repr})`
+    },
   }
 }

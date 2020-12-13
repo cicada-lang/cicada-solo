@@ -60,11 +60,7 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return exp.alpha_repr(opts)
     }
     case "Exp.replace": {
-      const { target, motive, base } = exp
-      const target_repr = alpha_repr(target, opts)
-      const motive_repr = alpha_repr(motive, opts)
-      const base_repr = alpha_repr(base, opts)
-      return `replace(${target_repr}, ${motive_repr}, ${base_repr})`
+      return exp.alpha_repr(opts)
     }
     case "Exp.absurd": {
       return exp.alpha_repr(opts)
