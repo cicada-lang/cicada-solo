@@ -11,7 +11,8 @@ import { dot_inferable } from "./dot-inferable"
 export type Dot = Evaluable &
   Inferable &
   Checkable &
-  Repr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.dot"
     target: Exp
     name: string
@@ -25,5 +26,6 @@ export function Dot(target: Exp, name: string): Dot {
     ...dot_evaluable(target, name),
     ...dot_inferable(target, name),
     repr: () => `${target.repr()}.${name}`,
+    alpha_repr: (opts) => `${alpha_repr(target, opts)}.${name}`,
   }
 }

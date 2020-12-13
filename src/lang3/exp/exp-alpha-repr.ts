@@ -48,15 +48,10 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return exp.alpha_repr(opts)
     }
     case "Exp.obj": {
-      const { properties } = exp
-      const s = Array.from(properties)
-        .map(([name, exp]) => `${name} = ${alpha_repr(exp, opts)}`)
-        .join("\n")
-      return `{\n${ut.indent(s, "  ")}\n}`
+      return exp.alpha_repr(opts)
     }
     case "Exp.dot": {
-      const { target, name } = exp
-      return `${alpha_repr(target, opts)}.${name}`
+      return exp.alpha_repr(opts)
     }
     case "Exp.equal": {
       const { t, from, to } = exp
