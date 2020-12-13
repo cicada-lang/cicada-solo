@@ -36,10 +36,12 @@ export function Union(left: Exp, right: Exp): Union {
 
 function union_flatten(left: Exp, right: Exp): Array<Exp> {
   const left_parts =
-    left.kind === "Exp.union" ? union_flatten(left.left, left.right) : [left]
+    left.kind === "Exp.union"
+      ? union_flatten((left as Union).left, (left as Union).right)
+      : [left]
   const right_parts =
     right.kind === "Exp.union"
-      ? union_flatten(right.left, right.right)
+      ? union_flatten((right as Union).left, (right as Union).right)
       : [right]
   return [...left_parts, ...right_parts]
 }

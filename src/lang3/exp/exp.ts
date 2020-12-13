@@ -1,3 +1,19 @@
+import { Evaluable } from "../evaluable"
+import { Checkable } from "../checkable"
+import { Inferable } from "../inferable"
+import { Repr } from "../repr"
+import { AlphaRepr } from "../alpha-repr"
+
+export type Exp = Evaluable &
+  Checkable &
+  Inferable &
+  Repr &
+  AlphaRepr & {
+    kind: string
+  }
+
+// TODO This module should not be a dependency hub.
+
 import { Var } from "../exps/var"
 import { Pi } from "../exps/pi/pi"
 import { Fn } from "../exps/pi/fn"
@@ -18,62 +34,6 @@ import { Typecons } from "../exps/typecons"
 import { Type } from "../exps/type"
 import { Begin } from "../exps/begin"
 import { The } from "../exps/the"
-
-import { Evaluable } from "../evaluable"
-import { Checkable } from "../checkable"
-import { Inferable } from "../inferable"
-import { Repr } from "../repr"
-
-// TODO change sum type into intersection type
-
-// export type Exp = Repr &
-//   Evaluable &
-//   Checkable &
-//   Inferable & {
-//     kind:
-//       | "Exp.v"
-//       | "Exp.pi"
-//       | "Exp.fn"
-//       | "Exp.case_fn"
-//       | "Exp.ap"
-//       | "Exp.cls"
-//       | "Exp.obj"
-//       | "Exp.dot"
-//       | "Exp.equal"
-//       | "Exp.same"
-//       | "Exp.replace"
-//       | "Exp.absurd"
-//       | "Exp.absurd_ind"
-//       | "Exp.str"
-//       | "Exp.quote"
-//       | "Exp.union"
-//       | "Exp.typecons"
-//       | "Exp.type"
-//       | "Exp.begin"
-//       | "Exp.the"
-//   }
-
-export type Exp =
-  | Var
-  | Pi
-  | Fn
-  | CaseFn
-  | Ap
-  | Cls
-  | Obj
-  | Dot
-  | Equal
-  | Same
-  | Replace
-  | Absurd
-  | AbsurdInd
-  | Str
-  | Quote
-  | Union
-  | Typecons
-  | Type
-  | Begin
-  | The
 
 export type v = Var
 export const v = Var

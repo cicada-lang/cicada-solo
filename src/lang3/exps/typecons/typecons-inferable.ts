@@ -9,6 +9,7 @@ import * as Ctx from "../../ctx"
 import * as Mod from "../../mod"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
+import { Pi } from "../pi/pi"
 
 export const typecons_inferable = (
   name: string,
@@ -32,7 +33,7 @@ function check_datacons_t(
   name: string
 ): void {
   if (t.kind === "Exp.pi") {
-    const pi = t
+    const pi = t as Pi
     Check.check(mod, ctx, pi.arg_t, Value.type)
     check_datacons_t(
       mod,
@@ -62,7 +63,7 @@ function check_datacons_t(
 
 function check_typecons_t(mod: Mod.Mod, ctx: Ctx.Ctx, t: Exp.Exp): void {
   if (t.kind === "Exp.pi") {
-    const pi = t
+    const pi = t as Pi
     Check.check(mod, ctx, pi.arg_t, Value.type)
     check_typecons_t(
       mod,
