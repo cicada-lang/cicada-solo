@@ -67,13 +67,13 @@ function alpha_repr_patterns(
   patterns: Array<Pattern.Pattern>,
   opts: AlphaReprOpts
 ): [string, AlphaReprOpts] {
-  let new_alpha_ctx = opts
+  let new_opts = opts
   const parts = []
   for (const pattern of patterns) {
-    const [repr, next] = alpha_repr_pattern(pattern, new_alpha_ctx)
-    new_alpha_ctx = next
+    const [repr, next] = alpha_repr_pattern(pattern, new_opts)
+    new_opts = next
     parts.push(repr)
   }
 
-  return [parts.join(", "), new_alpha_ctx]
+  return [parts.join(", "), new_opts]
 }

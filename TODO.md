@@ -91,8 +91,6 @@
 
 > refactoring Exp
 
-- [lang3] fix `begin`'s `AlphaRepr`
-
 - [lang3] `Exp` change sum type into intersection type
 
 - [lang3] `Checker` and `checker`
