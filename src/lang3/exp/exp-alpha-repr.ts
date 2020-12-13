@@ -45,35 +45,7 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return `${alpha_repr(target, opts)}(${alpha_repr(arg, opts)})`
     }
     case "Exp.cls": {
-      const { sat, scope } = exp
-      if (sat.length === 0 && scope.length === 0) return "Object"
-      const parts = []
-      let new_alpha_ctx = opts
-      for (const { name, t, exp } of sat) {
-        const t_repr = alpha_repr(t, new_alpha_ctx)
-        const exp_repr = alpha_repr(exp, new_alpha_ctx)
-        parts.push(`${name} : ${t_repr} = ${exp_repr}`)
-        new_alpha_ctx = {
-          depth: new_alpha_ctx.depth + 1,
-          depths: new Map([
-            ...new_alpha_ctx.depths,
-            [name, new_alpha_ctx.depth],
-          ]),
-        }
-      }
-      for (const { name, t } of scope) {
-        const t_repr = alpha_repr(t, new_alpha_ctx)
-        parts.push(`${name} : ${t_repr}`)
-        new_alpha_ctx = {
-          depth: new_alpha_ctx.depth + 1,
-          depths: new Map([
-            ...new_alpha_ctx.depths,
-            [name, new_alpha_ctx.depth],
-          ]),
-        }
-      }
-      let s = parts.join("\n")
-      return `{\n${ut.indent(s, "  ")}\n}`
+      return exp.alpha_repr(opts)
     }
     case "Exp.obj": {
       const { properties } = exp

@@ -91,7 +91,6 @@
 
 > refactoring Exp
 
-- [lang3] `AlphaRepr` -- cls/cls
 - [lang3] `AlphaRepr` -- cls/obj
 - [lang3] `AlphaRepr` -- cls/dot
 - [lang3] `AlphaRepr` -- equal/equal
