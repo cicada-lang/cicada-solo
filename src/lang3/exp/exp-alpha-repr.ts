@@ -55,10 +55,7 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return exp.alpha_repr(opts)
     }
     case "Exp.union": {
-      // NOTE handle associativity and commutative of union
-      const exps = union_flatten(exp)
-      const parts = exps.map((exp) => alpha_repr(exp, opts)).sort()
-      return `{ ${parts.join("\n")} }`
+      return exp.alpha_repr(opts)
     }
     case "Exp.typecons": {
       return exp.alpha_repr(opts)
@@ -73,12 +70,4 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return exp.alpha_repr(opts)
     }
   }
-}
-
-function union_flatten(union: Exp.union): Array<Exp.Exp> {
-  const { left, right } = union
-  const left_parts = left.kind === "Exp.union" ? union_flatten(left) : [left]
-  const right_parts =
-    right.kind === "Exp.union" ? union_flatten(right) : [right]
-  return [...left_parts, ...right_parts]
 }
