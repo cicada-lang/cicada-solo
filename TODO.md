@@ -91,7 +91,6 @@
 
 > refactoring Exp
 
-- [lang3] `AlphaRepr` -- pi/ap
 - [lang3] `AlphaRepr` -- str/str
 - [lang3] `AlphaRepr` -- str/quote
 - [lang3] `AlphaRepr` -- the

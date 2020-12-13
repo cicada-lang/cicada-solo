@@ -25,8 +25,7 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return exp.alpha_repr(opts)
     }
     case "Exp.ap": {
-      const { target, arg } = exp
-      return `${alpha_repr(target, opts)}(${alpha_repr(arg, opts)})`
+      return exp.alpha_repr(opts)
     }
     case "Exp.cls": {
       return exp.alpha_repr(opts)

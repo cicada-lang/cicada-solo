@@ -11,7 +11,8 @@ import { ap_inferable } from "./ap-inferable"
 export type Ap = Evaluable &
   Inferable &
   Checkable &
-  Repr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.ap"
     target: Exp
     arg: Exp
@@ -25,5 +26,6 @@ export function Ap(target: Exp, arg: Exp): Ap {
     ...ap_evaluable(target, arg),
     ...ap_inferable(target, arg),
     repr: () => `${target.repr()}(${arg.repr()})`,
+    alpha_repr: (opts) => `${alpha_repr(target, opts)}(${alpha_repr(arg, opts)})`,    
   }
 }
