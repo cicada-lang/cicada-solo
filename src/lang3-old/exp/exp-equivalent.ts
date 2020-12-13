@@ -4,21 +4,21 @@ import * as Pattern from "../pattern"
 export function equivalent(x: Exp.Exp, y: Exp.Exp): boolean {
   return alpha(x, y, {
     depth: 0,
-    left_names: new Map(),
-    right_names: new Map(),
+    left_depths: new Map(),
+    right_depths: new Map(),
   })
 }
 
 type AlphaCtx = {
   depth: number
-  left_names: Map<string, number>
-  right_names: Map<string, number>
+  left_depths: Map<string, number>
+  right_depths: Map<string, number>
 }
 
 function alpha(left: Exp.Exp, right: Exp.Exp, the: AlphaCtx): boolean {
   if (left.kind === "Exp.v" && right.kind === "Exp.v") {
-    const left_depth = the.left_names.get(left.name)
-    const right_depth = the.right_names.get(right.name)
+    const left_depth = the.left_depths.get(left.name)
+    const right_depth = the.right_depths.get(right.name)
     return (
       (left_depth === undefined &&
         right_depth === undefined &&
@@ -34,8 +34,8 @@ function alpha(left: Exp.Exp, right: Exp.Exp, the: AlphaCtx): boolean {
       alpha(left.arg_t, right.arg_t, the) &&
       alpha(left.ret_t, right.ret_t, {
         depth: the.depth + 1,
-        left_names: the.left_names.set(left.name, the.depth),
-        right_names: the.right_names.set(right.name, the.depth),
+        left_depths: the.left_depths.set(left.name, the.depth),
+        right_depths: the.right_depths.set(right.name, the.depth),
       })
     )
 
@@ -201,8 +201,8 @@ function match_pattern(
   if (left.kind === "Pattern.v" && right.kind === "Pattern.v")
     return {
       depth: the.depth + 1,
-      left_names: the.left_names.set(left.name, the.depth),
-      right_names: the.right_names.set(right.name, the.depth),
+      left_depths: the.left_depths.set(left.name, the.depth),
+      right_depths: the.right_depths.set(right.name, the.depth),
     }
   if (
     left.kind === "Pattern.datatype" &&
