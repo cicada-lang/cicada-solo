@@ -91,7 +91,7 @@
 
 > refactoring Exp
 
-- [lang3] `AlphaRepr` -- the
+
 - [lang3] `AlphaRepr` -- typecons
 - [lang3] `AlphaRepr` -- union
 - [lang3] `AlphaRepr` -- var

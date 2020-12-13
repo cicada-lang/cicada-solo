@@ -11,7 +11,8 @@ import { the_inferable } from "./the-inferable"
 export type The = Evaluable &
   Checkable &
   Inferable &
-  Repr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.the"
     t: Exp
     exp: Exp
@@ -25,5 +26,7 @@ export function The(t: Exp, exp: Exp): The {
     ...the_evaluable(t, exp),
     ...the_inferable(t, exp),
     repr: () => `{ ${t.repr()} -- ${exp.repr()} }`,
+    alpha_repr: (opts) =>
+      `{ ${alpha_repr(t, opts)} -- ${alpha_repr(exp, opts)} }`,
   }
 }
