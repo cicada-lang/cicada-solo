@@ -2,12 +2,12 @@ import * as Exp from "../exp"
 import * as Pattern from "../pattern"
 import * as ut from "../../ut"
 
-type AlphaCtx = {
+type AlphaPrintCtx = {
   depth: number
   depths: Map<string, number>
 }
 
-export function alpha_print(exp: Exp.Exp, the: AlphaCtx): string {
+export function alpha_print(exp: Exp.Exp, the: AlphaPrintCtx): string {
   switch (exp.kind) {
     case "Exp.v": {
       const { name } = exp
@@ -146,8 +146,8 @@ export function alpha_print(exp: Exp.Exp, the: AlphaCtx): string {
 
 function alpha_print_pattern(
   pattern: Pattern.Pattern,
-  the: AlphaCtx
-): [string, AlphaCtx] {
+  the: AlphaPrintCtx
+): [string, AlphaPrintCtx] {
   switch (pattern.kind) {
     case "Pattern.v": {
       const { name } = pattern
@@ -174,8 +174,8 @@ function alpha_print_pattern(
 
 function alpha_print_patterns(
   patterns: Array<Pattern.Pattern>,
-  the: AlphaCtx
-): [string, AlphaCtx] {
+  the: AlphaPrintCtx
+): [string, AlphaPrintCtx] {
   let new_alpha_ctx = the
   const parts = []
   for (const pattern of patterns) {
