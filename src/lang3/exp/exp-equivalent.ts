@@ -34,8 +34,8 @@ function alpha(left: Exp.Exp, right: Exp.Exp, the: AlphaCtx): boolean {
       alpha(left.arg_t, right.arg_t, the) &&
       alpha(left.ret_t, right.ret_t, {
         depth: the.depth + 1,
-        left_depths: the.left_depths.set(left.name, the.depth),
-        right_depths: the.right_depths.set(right.name, the.depth),
+        left_depths: new Map([...the.left_depths, [left.name, the.depth]]),
+        right_depths: new Map([...the.right_depths, [right.name, the.depth]]),
       })
     )
 
@@ -198,26 +198,28 @@ function match_pattern(
   right: Pattern.Pattern,
   the: AlphaCtx
 ): undefined | AlphaCtx {
-  if (left.kind === "Pattern.v" && right.kind === "Pattern.v")
+  if (left.kind === "Pattern.v" && right.kind === "Pattern.v") {
     return {
       depth: the.depth + 1,
-      left_depths: the.left_depths.set(left.name, the.depth),
-      right_depths: the.right_depths.set(right.name, the.depth),
+      left_depths: new Map([...the.left_depths, [left.name, the.depth]]),
+      right_depths: new Map([...the.right_depths, [right.name, the.depth]]),
     }
-  if (
+  } else if (
     left.kind === "Pattern.datatype" &&
     right.kind === "Pattern.datatype" &&
     left.name === right.name
-  )
+  ) {
     return match_patterns(left.args, right.args, the)
-  if (
+  } else if (
     left.kind === "Pattern.data" &&
     right.kind === "Pattern.data" &&
     left.name === right.name &&
     left.tag === right.tag
-  )
+  ) {
     return match_patterns(left.args, right.args, the)
-  return undefined
+  } else {
+    return undefined
+  }
 }
 
 function match_patterns(
@@ -226,7 +228,13 @@ function match_patterns(
   the: AlphaCtx
 ): undefined | AlphaCtx {
   if (left.length !== right.length) return undefined
-  const new_alpha_ctx = match_pattern(left[0], right[0], the)
-  if (new_alpha_ctx === undefined) return undefined
-  return match_patterns(left.slice(1), right.slice(1), new_alpha_ctx)
+
+  let new_alpha_ctx = the
+  for (let i = 0; i < left.length; i++) {
+    const next_alpha_ctx = match_pattern(left[i], right[i], the)
+    if (next_alpha_ctx === undefined) return undefined
+    new_alpha_ctx = next_alpha_ctx
+  }
+
+  return new_alpha_ctx
 }

@@ -23,11 +23,12 @@ export function alpha_prehash(exp: Exp.Exp, the: AlphaCtx): string {
       const arg_t_repr = alpha_prehash(arg_t, the)
       const ret_t_repr = alpha_prehash(arg_t, {
         depth: the.depth + 1,
-        depths: the.depths.set(name, the.depth),
+        depths: new Map([...the.depths, [name, the.depth]]),
       })
       return `(${arg_t_repr}) => ${ret_t_repr}`
     }
     case "Exp.fn": {
+      const { pattern, ret } = exp
       return `TODO`
     }
     case "Exp.case_fn": {
@@ -102,3 +103,22 @@ export function alpha_prehash(exp: Exp.Exp, the: AlphaCtx): string {
     }
   }
 }
+
+// function match_pattern(pattern: Pattern.Pattern, the: AlphaCtx): AlphaCtx {
+//   if (pattern.kind === "Pattern.v")
+//     return {
+//       depth: the.depth + 1,
+//       depths: the.depths.set(pattern.name, the.depth),
+//     }
+//   else if (pattern.kind === "Pattern.datatype")
+//     return match_patterns(pattern.args, the)
+//   else if (pattern.kind === "Pattern.data")
+//     return match_patterns(pattern.args, the)
+// }
+
+// function match_patterns(
+//   patterns: Array<Pattern.Pattern>,
+//   the: AlphaCtx
+// ): AlphaCtx {
+//   return match_patterns(patterns.slice(1), match_pattern(patterns[0], the))
+// }
