@@ -92,7 +92,6 @@
 > refactoring Exp
 
 - [lang3] `AlphaRepr` -- union
-- [lang3] `AlphaRepr` -- var
 
 - [lang3] no branches in `exp-alpha-repr.ts`
 - [lang3] inline `exp-alpha-repr.ts`

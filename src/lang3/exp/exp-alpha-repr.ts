@@ -10,10 +10,7 @@ type AlphaReprOpts = {
 export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
   switch (exp.kind) {
     case "Exp.v": {
-      const { name } = exp
-      const depth = opts.depths.get(name)
-      if (depth === undefined) return name
-      else return depth.toString()
+      return exp.alpha_repr(opts)
     }
     case "Exp.pi": {
       return exp.alpha_repr(opts)
