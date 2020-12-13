@@ -25,11 +25,13 @@ export function alpha_prehash(exp: Exp.Exp, the: AlphaCtx): string {
         depth: the.depth + 1,
         depths: new Map([...the.depths, [name, the.depth]]),
       })
-      return `(${arg_t_repr}) => ${ret_t_repr}`
+      return `(${arg_t_repr}) -> ${ret_t_repr}`
     }
     case "Exp.fn": {
       const { pattern, ret } = exp
-      return `TODO`
+      const [pattern_repr, new_alpha_ctx] = alpha_prehash_pattern(pattern, the)
+      const ret_repr = alpha_prehash(ret, new_alpha_ctx)
+      return `(${pattern_repr}) => ${ret_repr}`
     }
     case "Exp.case_fn": {
       const { cases } = exp
@@ -104,21 +106,37 @@ export function alpha_prehash(exp: Exp.Exp, the: AlphaCtx): string {
   }
 }
 
-// function match_pattern(pattern: Pattern.Pattern, the: AlphaCtx): AlphaCtx {
-//   if (pattern.kind === "Pattern.v")
-//     return {
-//       depth: the.depth + 1,
-//       depths: the.depths.set(pattern.name, the.depth),
-//     }
-//   else if (pattern.kind === "Pattern.datatype")
-//     return match_patterns(pattern.args, the)
-//   else if (pattern.kind === "Pattern.data")
-//     return match_patterns(pattern.args, the)
-// }
+function alpha_prehash_pattern(
+  pattern: Pattern.Pattern,
+  the: AlphaCtx
+): [string, AlphaCtx] {
+  switch (pattern.kind) {
+    case "Pattern.v": {
+      const { name } = pattern
+      return [
+        the.depth.toString(),
+        {
+          depth: the.depth + 1,
+          depths: the.depths.set(name, the.depth),
+        },
+      ]
+    }
+    case "Pattern.datatype": {
+      const { name, args } = pattern
+      const [args_repr, next] = alpha_prehash_patterns(args, the)
+      return [`${name}(${args_repr})`, next]
+    }
+    case "Pattern.data": {
+      const { name, tag, args } = pattern
+      const [args_repr, next] = alpha_prehash_patterns(args, the)
+      return [`${name}.${tag}(${args_repr})`, next]
+    }
+  }
+}
 
-// function match_patterns(
-//   patterns: Array<Pattern.Pattern>,
-//   the: AlphaCtx
-// ): AlphaCtx {
-//   return match_patterns(patterns.slice(1), match_pattern(patterns[0], the))
-// }
+function alpha_prehash_patterns(
+  patterns: Array<Pattern.Pattern>,
+  the: AlphaCtx
+): [string, AlphaCtx] {
+  throw new Error("TODO")
+}

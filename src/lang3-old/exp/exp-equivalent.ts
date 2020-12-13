@@ -40,9 +40,9 @@ function alpha(left: Exp.Exp, right: Exp.Exp, the: AlphaCtx): boolean {
     )
 
   if (left.kind === "Exp.fn" && right.kind === "Exp.fn") {
-    const new_alpha_ctx = match_pattern(left.pattern, right.pattern, the)
-    if (new_alpha_ctx === undefined) return false
-    return alpha(left.ret, right.ret, new_alpha_ctx)
+    const next = match_pattern(left.pattern, right.pattern, the)
+    if (next === undefined) return false
+    return alpha(left.ret, right.ret, next)
   }
 
   if (left.kind === "Exp.case_fn" && right.kind === "Exp.case_fn")
@@ -231,9 +231,9 @@ function match_patterns(
 
   let new_alpha_ctx = the
   for (let i = 0; i < left.length; i++) {
-    const next_alpha_ctx = match_pattern(left[i], right[i], the)
-    if (next_alpha_ctx === undefined) return undefined
-    new_alpha_ctx = next_alpha_ctx
+    const next = match_pattern(left[i], right[i], new_alpha_ctx)
+    if (next === undefined) return undefined
+    new_alpha_ctx = next
   }
 
   return new_alpha_ctx
