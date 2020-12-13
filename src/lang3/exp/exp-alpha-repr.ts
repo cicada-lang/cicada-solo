@@ -52,11 +52,10 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return exp.alpha_repr(opts)
     }
     case "Exp.str": {
-      return "String"
+      return exp.alpha_repr(opts)
     }
     case "Exp.quote": {
-      const { str } = exp
-      return `"${str}"`
+      return exp.alpha_repr(opts)
     }
     case "Exp.union": {
       // NOTE handle associativity and commutative of union
@@ -70,7 +69,7 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return name
     }
     case "Exp.type": {
-      return "Type"
+      return exp.alpha_repr(opts)
     }
     case "Exp.begin": {
       return exp.alpha_repr(opts)
