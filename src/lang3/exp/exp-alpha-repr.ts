@@ -64,9 +64,7 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return `{ ${parts.join("\n")} }`
     }
     case "Exp.typecons": {
-      // NOTE datatype can only be at top level.
-      const { name } = exp
-      return name
+      return exp.alpha_repr(opts)
     }
     case "Exp.type": {
       return exp.alpha_repr(opts)
