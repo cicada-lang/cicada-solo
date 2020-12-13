@@ -12,7 +12,8 @@ import { cls_inferable } from "./cls-inferable"
 export type Cls = Evaluable &
   Checkable &
   Inferable &
-  Repr & AlphaRepr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.cls"
     sat: Array<{ name: string; t: Exp; exp: Exp }>
     scope: Array<{ name: string; t: Exp }>

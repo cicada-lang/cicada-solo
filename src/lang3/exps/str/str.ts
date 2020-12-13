@@ -9,7 +9,8 @@ import { str_inferable } from "./str-inferable"
 export type Str = Evaluable &
   Inferable &
   Checkable &
-  Repr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.str"
   }
 
@@ -18,4 +19,5 @@ export const Str: Str = {
   ...str_evaluable,
   ...str_inferable,
   repr: () => "String",
+  alpha_repr: (opts) => "String",
 }

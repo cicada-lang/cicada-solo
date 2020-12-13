@@ -26,6 +26,7 @@ export function Ap(target: Exp, arg: Exp): Ap {
     ...ap_evaluable(target, arg),
     ...ap_inferable(target, arg),
     repr: () => `${target.repr()}(${arg.repr()})`,
-    alpha_repr: (opts) => `${alpha_repr(target, opts)}(${alpha_repr(arg, opts)})`,    
+    alpha_repr: (opts) =>
+      `${alpha_repr(target, opts)}(${alpha_repr(arg, opts)})`,
   }
 }

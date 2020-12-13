@@ -14,7 +14,8 @@ import { begin_checkable } from "./begin-checkable"
 export type Begin = Evaluable &
   Checkable &
   Inferable &
-  Repr & AlphaRepr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.begin"
     stmts: Array<Stmt.Stmt>
     ret: Exp
@@ -34,6 +35,6 @@ export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
     },
     alpha_repr: (opts) => {
       throw new Error("TODO")
-    }
+    },
   }
 }

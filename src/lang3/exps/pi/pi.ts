@@ -11,7 +11,8 @@ import { pi_inferable } from "./pi-inferable"
 export type Pi = Evaluable &
   Inferable &
   Checkable &
-  Repr & AlphaRepr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.pi"
     name: string
     arg_t: Exp

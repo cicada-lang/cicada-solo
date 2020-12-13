@@ -11,7 +11,8 @@ import { replace_inferable } from "./replace-inferable"
 export type Replace = Evaluable &
   Inferable &
   Checkable &
-  Repr & AlphaRepr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.replace"
     target: Exp
     motive: Exp
