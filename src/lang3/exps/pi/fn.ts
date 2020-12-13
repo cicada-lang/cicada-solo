@@ -4,7 +4,6 @@ import { Inferable, non_inferable } from "../../inferable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import { AlphaRepr, AlphaReprOpts } from "../../alpha-repr"
-import { alpha_repr } from "../../exp/exp-alpha-repr"
 import * as Pattern from "../../pattern"
 import { fn_evaluable } from "./fn-evaluable"
 import { fn_checkable } from "./fn-checkable"
@@ -30,7 +29,7 @@ export function Fn(pattern: Pattern.Pattern, ret: Exp): Fn {
     repr: () => `(${Pattern.repr(pattern)}) => ${ret.repr()}`,
     alpha_repr: (opts) => {
       const [pattern_repr, next] = alpha_repr_pattern(pattern, opts)
-      const ret_repr = alpha_repr(ret, next)
+      const ret_repr = ret.alpha_repr(next)
       return `(${pattern_repr}) => ${ret_repr}`
     },
   }

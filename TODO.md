@@ -91,8 +91,6 @@
 
 > refactoring Exp
 
-- [lang3] inline `exp-alpha-repr.ts`
-
 - [lang3] fix `begin`'s `AlphaRepr`
 
 - [lang3] `Exp` change sum type into intersection type

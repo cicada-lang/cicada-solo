@@ -4,7 +4,6 @@ import { Inferable, non_inferable } from "../../inferable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
-import { alpha_repr } from "../../exp/exp-alpha-repr"
 import * as Pattern from "../../pattern"
 import * as ut from "../../../ut"
 import { case_fn_evaluable } from "./case-fn-evaluable"
@@ -42,7 +41,7 @@ export function CaseFn(cases: Array<Case>): CaseFn {
     },
     alpha_repr: (opts) => {
       const s = cases
-        .map(({ pattern, ret }) => alpha_repr(Fn(pattern, ret), opts))
+        .map(({ pattern, ret }) => Fn(pattern, ret).alpha_repr(opts))
         .join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     },

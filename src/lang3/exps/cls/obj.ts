@@ -4,7 +4,6 @@ import { Inferable } from "../../inferable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
-import { alpha_repr } from "../../exp/exp-alpha-repr"
 import * as ut from "../../../ut"
 import { obj_evaluable } from "./obj-evaluable"
 import { obj_checkable } from "./obj-checkable"
@@ -43,7 +42,7 @@ const obj_repr = (properties: Map<string, Exp>) => ({
 const obj_alpha_repr = (properties: Map<string, Exp>): AlphaRepr => ({
   alpha_repr: (opts) => {
     const s = Array.from(properties)
-      .map(([name, exp]) => `${name} = ${alpha_repr(exp, opts)}`)
+      .map(([name, exp]) => `${name} = ${exp.alpha_repr(opts)}`)
       .join("\n")
     return `{\n${ut.indent(s, "  ")}\n}`
   },

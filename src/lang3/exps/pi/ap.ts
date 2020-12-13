@@ -4,7 +4,6 @@ import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
-import { alpha_repr } from "../../exp/exp-alpha-repr"
 import { ap_evaluable } from "./ap-evaluable"
 import { ap_inferable } from "./ap-inferable"
 
@@ -26,7 +25,6 @@ export function Ap(target: Exp, arg: Exp): Ap {
     ...ap_evaluable(target, arg),
     ...ap_inferable(target, arg),
     repr: () => `${target.repr()}(${arg.repr()})`,
-    alpha_repr: (opts) =>
-      `${alpha_repr(target, opts)}(${alpha_repr(arg, opts)})`,
+    alpha_repr: (opts) => `${target.alpha_repr(opts)}(${arg.alpha_repr(opts)})`,
   }
 }

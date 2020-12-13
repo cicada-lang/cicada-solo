@@ -4,7 +4,6 @@ import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
-import { alpha_repr } from "../../exp/exp-alpha-repr"
 import * as ut from "../../../ut"
 import { cls_evaluable } from "./cls-evaluable"
 import { cls_inferable } from "./cls-inferable"
@@ -58,8 +57,8 @@ const cls_alpha_repr = (
     const parts = []
     let new_alpha_ctx = opts
     for (const { name, t, exp } of sat) {
-      const t_repr = alpha_repr(t, new_alpha_ctx)
-      const exp_repr = alpha_repr(exp, new_alpha_ctx)
+      const t_repr = t.alpha_repr(new_alpha_ctx)
+      const exp_repr = exp.alpha_repr(new_alpha_ctx)
       parts.push(`${name} : ${t_repr} = ${exp_repr}`)
       new_alpha_ctx = {
         depth: new_alpha_ctx.depth + 1,
@@ -67,7 +66,7 @@ const cls_alpha_repr = (
       }
     }
     for (const { name, t } of scope) {
-      const t_repr = alpha_repr(t, new_alpha_ctx)
+      const t_repr = t.alpha_repr(new_alpha_ctx)
       parts.push(`${name} : ${t_repr}`)
       new_alpha_ctx = {
         depth: new_alpha_ctx.depth + 1,

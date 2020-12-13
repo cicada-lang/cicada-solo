@@ -3,7 +3,6 @@ import { Inferable } from "../../inferable"
 import { Checkable } from "../../checkable"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
-import { alpha_repr } from "../../exp/exp-alpha-repr"
 import { Exp } from "../../exp"
 import { union_evaluable } from "./union-evaluable"
 import { union_inferable } from "./union-inferable"
@@ -29,7 +28,7 @@ export function Union(left: Exp, right: Exp): Union {
     alpha_repr: (opts) => {
       // NOTE handle associativity and commutative of union
       const exps = union_flatten(left, right)
-      const parts = exps.map((exp) => alpha_repr(exp, opts)).sort()
+      const parts = exps.map((exp) => exp.alpha_repr(opts)).sort()
       return `{ ${parts.join("\n")} }`
     },
   }

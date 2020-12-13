@@ -3,7 +3,6 @@ import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
-import { alpha_repr } from "../../exp/exp-alpha-repr"
 import { Exp } from "../../exp"
 import { the_evaluable } from "./the-evaluable"
 import { the_inferable } from "./the-inferable"
@@ -27,6 +26,6 @@ export function The(t: Exp, exp: Exp): The {
     ...the_inferable(t, exp),
     repr: () => `{ ${t.repr()} -- ${exp.repr()} }`,
     alpha_repr: (opts) =>
-      `{ ${alpha_repr(t, opts)} -- ${alpha_repr(exp, opts)} }`,
+      `{ ${t.alpha_repr(opts)} -- ${exp.alpha_repr(opts)} }`,
   }
 }
