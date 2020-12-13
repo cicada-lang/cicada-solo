@@ -10,7 +10,7 @@ import { same_checkable } from "./same-checkable"
 export type Same = Evaluable &
   Checkable &
   Inferable &
-  Repr & {
+  Repr & AlphaRepr & {
     kind: "Exp.same"
   }
 
@@ -20,4 +20,5 @@ export const Same: Same = {
   ...same_checkable,
   ...non_inferable,
   repr: () => "same",
+  alpha_repr: (opts) => "same",
 }

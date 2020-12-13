@@ -57,7 +57,7 @@ export function alpha_repr(exp: Exp.Exp, opts: AlphaReprOpts): string {
       return exp.alpha_repr(opts)
     }
     case "Exp.same": {
-      return "same"
+      return exp.alpha_repr(opts)
     }
     case "Exp.replace": {
       const { target, motive, base } = exp
