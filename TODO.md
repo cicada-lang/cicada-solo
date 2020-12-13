@@ -91,8 +91,6 @@
 
 > refactoring Exp
 
-- [lang3] `AlphaPrint`
-
 - [lang3] `AlphaPrint` -- absurd
 - [lang3] `AlphaPrint` -- begin
 - [lang3] `AlphaPrint` -- cls
