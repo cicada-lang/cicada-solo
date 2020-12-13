@@ -91,7 +91,6 @@
 
 > refactoring Exp
 
-- [lang3] no branches in `exp-alpha-repr.ts`
 - [lang3] inline `exp-alpha-repr.ts`
 
 - [lang3] fix `begin`'s `AlphaRepr`
