@@ -1,4 +1,3 @@
-import { non_inferable } from "../../inferable"
 import { Exp } from "../../exp"
 import * as Pattern from "../../pattern"
 import * as ut from "../../../ut"
@@ -22,7 +21,6 @@ export function CaseFn(cases: Array<Case>): CaseFn {
     cases,
     ...case_fn_evaluable(cases),
     ...case_fn_checkable(cases),
-    ...non_inferable,
     repr: () => {
       let s = cases
         .map(

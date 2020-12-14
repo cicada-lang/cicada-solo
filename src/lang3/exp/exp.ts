@@ -6,7 +6,7 @@ import { AlphaRepr } from "../alpha-repr"
 
 export type Exp = Evaluable &
   Checkable &
-  Inferable &
+  Partial<Inferable> &
   Repr &
   AlphaRepr & {
     kind: string

@@ -108,7 +108,15 @@
 
 > refactoring Value
 
+- [lang3] how to design the interface of `Value`?
+  - `TypedReadbacker`
+    - `t.typed_readback(value, { mod, ctx })`
+  - `neutral.readback_neutral({ mod, ctx })`
+  - `t.readback_as_type({ mod, ctx })`
+
 - [lang3] `Value` `Neutral` `Normal`
+- [lang3] `typed_readback` for `Value`
+- [lang3] `readback` for `Neutral` and `Normal`
 
 > namespace
 

@@ -37,14 +37,3 @@ export function Inferable(the: {
     },
   }
 }
-
-export const non_inferable: Inferable = {
-  inferability({ mod, ctx }) {
-    throw new Trace.Trace(
-      ut.aline(`
-        |I can not infer the type.
-        |I suggest you add a type annotation to the expression.
-        |`)
-    )
-  },
-}

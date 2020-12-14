@@ -1,4 +1,3 @@
-import { non_inferable } from "../../inferable"
 import { Exp } from "../../exp"
 import { AlphaReprOpts } from "../../alpha-repr"
 import * as Pattern from "../../pattern"
@@ -18,7 +17,6 @@ export function Fn(pattern: Pattern.Pattern, ret: Exp): Fn {
     ret,
     ...fn_evaluable(pattern, ret),
     ...fn_checkable(pattern, ret),
-    ...non_inferable,
     repr: () => `(${Pattern.repr(pattern)}) => ${ret.repr()}`,
     alpha_repr: (opts) => {
       const [pattern_repr, next] = alpha_repr_pattern(pattern, opts)
