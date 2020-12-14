@@ -1,12 +1,9 @@
 import { Inferable } from "../../inferable"
 import { evaluator } from "../../evaluator"
 import * as Infer from "../../infer"
-import * as Check from "../../check"
 import * as Evaluate from "../../evaluate"
 import * as Exp from "../../exp"
-import * as Value from "../../value"
 import * as Ctx from "../../ctx"
-import * as Mod from "../../mod"
 import * as Trace from "../../../trace"
 
 export const dot_inferable = (target: Exp.Exp, name: string) =>

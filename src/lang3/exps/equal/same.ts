@@ -1,9 +1,5 @@
-import { Evaluable } from "../../evaluable"
-import { Checkable } from "../../checkable"
-import { Inferable, non_inferable } from "../../inferable"
-import { Repr } from "../../repr"
+import { non_inferable } from "../../inferable"
 import { Exp } from "../../exp"
-import { AlphaRepr } from "../../alpha-repr"
 import { same_evaluable } from "./same-evaluable"
 import { same_checkable } from "./same-checkable"
 

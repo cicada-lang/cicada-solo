@@ -3,7 +3,6 @@ import { evaluator } from "../../evaluator"
 import { Exp } from "../../exp"
 import * as Value from "../../value"
 import * as Ctx from "../../ctx"
-import * as Evaluate from "../../evaluate"
 import * as Check from "../../check"
 
 export const absurd_ind_inferable = (target: Exp, motive: Exp) =>

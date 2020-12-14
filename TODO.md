@@ -91,8 +91,6 @@
 
 > refactoring Exp
 
-- [lang3] clear deps for `exps/`
-
 - [lang3] `Checker` and `checker`
 - [lang3] inline `Check.check`
 

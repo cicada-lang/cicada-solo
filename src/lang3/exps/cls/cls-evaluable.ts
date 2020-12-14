@@ -10,17 +10,17 @@ export function cls_evaluable(
   return Evaluable({
     evaluability: ({ mod, env, mode, evaluator }) => {
       env = Env.clone(env)
-      const sat = new Array()
+      const new_sat = new Array()
       for (const entry of sat) {
         const name = entry.name
         const t = evaluator.evaluate(entry.t, { mod, env, mode })
         const value = evaluator.evaluate(entry.exp, { mod, env, mode })
-        sat.push({ name, t, value })
+        new_sat.push({ name, t, value })
         Env.update(env, name, value)
       }
       if (scope.length === 0) {
         return Value.cls(
-          sat,
+          new_sat,
           Value.Telescope.create(mod, env, undefined, new Array())
         )
       } else {
@@ -28,7 +28,7 @@ export function cls_evaluable(
         const name = entry.name
         const t = evaluator.evaluate(entry.t, { mod, env, mode })
         return Value.cls(
-          sat,
+          new_sat,
           Value.Telescope.create(mod, env, { name, t }, tail)
         )
       }

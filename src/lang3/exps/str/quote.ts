@@ -1,8 +1,3 @@
-import { Evaluable } from "../../evaluable"
-import { Inferable } from "../../inferable"
-import { Checkable } from "../../checkable"
-import { Repr } from "../../repr"
-import { AlphaRepr } from "../../alpha-repr"
 import { Exp } from "../../exp"
 import { quote_evaluable } from "./quote-evaluable"
 import { quote_inferable } from "./quote-inferable"
