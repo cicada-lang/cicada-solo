@@ -91,6 +91,9 @@
 
 > refactoring Exp
 
+- [lang3] inline `Exp`
+- [lang3] clear deps for `exps/`
+
 - [lang3] `Checker` and `checker`
 - [lang3] inline `Check.check`
 
@@ -109,8 +112,6 @@
 > refactoring Value
 
 - [lang3] `Value` `Neutral` `Normal`
-
-# lang3-old
 
 > namespace
 
