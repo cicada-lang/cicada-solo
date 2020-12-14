@@ -132,6 +132,9 @@
   - `Typecons`
   - `Datacons`
 
+  They are partition of `Exp`,
+  thus they should not be independent from `Exp`.
+
 - What is the distinct behavior of `Intro`?
 
   - `Intro` is not `Ty`.
