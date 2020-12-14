@@ -7,6 +7,8 @@ import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import { check_union_type } from "./check-union-type"
 
+// NOTE MAYBE use `Checker` and singleton `checker`
+
 export function check(
   mod: Mod.Mod,
   ctx: Ctx.Ctx,

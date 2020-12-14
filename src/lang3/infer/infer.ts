@@ -7,6 +7,8 @@ import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
+// NOTE MAYBE use `Inferer` and singleton `inferer`
+
 export function infer(mod: Mod.Mod, ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
     if (exp.inferability !== undefined) {
