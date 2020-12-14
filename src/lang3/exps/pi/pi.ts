@@ -7,16 +7,12 @@ import { AlphaRepr } from "../../alpha-repr"
 import { pi_evaluable } from "./pi-evaluable"
 import { pi_inferable } from "./pi-inferable"
 
-export type Pi = Evaluable &
-  Inferable &
-  Checkable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.pi"
-    name: string
-    arg_t: Exp
-    ret_t: Exp
-  }
+export type Pi = Exp & {
+  kind: "Exp.pi"
+  name: string
+  arg_t: Exp
+  ret_t: Exp
+}
 
 export function Pi(name: string, arg_t: Exp, ret_t: Exp): Pi {
   return {

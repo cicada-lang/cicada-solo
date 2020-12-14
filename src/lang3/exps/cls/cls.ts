@@ -8,15 +8,11 @@ import * as ut from "../../../ut"
 import { cls_evaluable } from "./cls-evaluable"
 import { cls_inferable } from "./cls-inferable"
 
-export type Cls = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.cls"
-    sat: Array<{ name: string; t: Exp; exp: Exp }>
-    scope: Array<{ name: string; t: Exp }>
-  }
+export type Cls = Exp & {
+  kind: "Exp.cls"
+  sat: Array<{ name: string; t: Exp; exp: Exp }>
+  scope: Array<{ name: string; t: Exp }>
+}
 
 export function Cls(
   sat: Array<{ name: string; t: Exp; exp: Exp }>,

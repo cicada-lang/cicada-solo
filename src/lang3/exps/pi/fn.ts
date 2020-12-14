@@ -8,15 +8,11 @@ import * as Pattern from "../../pattern"
 import { fn_evaluable } from "./fn-evaluable"
 import { fn_checkable } from "./fn-checkable"
 
-export type Fn = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.fn"
-    pattern: Pattern.Pattern
-    ret: Exp
-  }
+export type Fn = Exp & {
+  kind: "Exp.fn"
+  pattern: Pattern.Pattern
+  ret: Exp
+}
 
 export function Fn(pattern: Pattern.Pattern, ret: Exp): Fn {
   return {

@@ -2,18 +2,15 @@ import { Evaluable } from "../../evaluable"
 import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"
 import { Repr } from "../../repr"
+import { Exp } from "../../exp"
 import { AlphaRepr } from "../../alpha-repr"
 import { var_evaluable } from "./var-evaluable"
 import { var_inferable } from "./var-inferable"
 
-export type Var = Evaluable &
-  Inferable &
-  Checkable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.v"
-    name: string
-  }
+export type Var = Exp & {
+  kind: "Exp.v"
+  name: string
+}
 
 export function Var(name: string): Var {
   return {

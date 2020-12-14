@@ -7,15 +7,11 @@ import { AlphaRepr } from "../../alpha-repr"
 import { dot_evaluable } from "./dot-evaluable"
 import { dot_inferable } from "./dot-inferable"
 
-export type Dot = Evaluable &
-  Inferable &
-  Checkable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.dot"
-    target: Exp
-    name: string
-  }
+export type Dot = Exp & {
+  kind: "Exp.dot"
+  target: Exp
+  name: string
+}
 
 export function Dot(target: Exp, name: string): Dot {
   return {

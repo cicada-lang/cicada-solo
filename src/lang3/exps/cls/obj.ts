@@ -9,14 +9,10 @@ import { obj_evaluable } from "./obj-evaluable"
 import { obj_checkable } from "./obj-checkable"
 import { obj_inferable } from "./obj-inferable"
 
-export type Obj = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.obj"
-    properties: Map<string, Exp>
-  }
+export type Obj = Exp & {
+  kind: "Exp.obj"
+  properties: Map<string, Exp>
+}
 
 export function Obj(properties: Map<string, Exp>): Obj {
   return {

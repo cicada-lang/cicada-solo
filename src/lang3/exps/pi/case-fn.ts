@@ -10,19 +10,15 @@ import { case_fn_evaluable } from "./case-fn-evaluable"
 import { case_fn_checkable } from "./case-fn-checkable"
 import { Fn } from "./fn"
 
+export type CaseFn = Exp & {
+  kind: "Exp.case_fn"
+  cases: Array<Case>
+}
+
 export type Case = {
   pattern: Pattern.Pattern
   ret: Exp
 }
-
-export type CaseFn = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.case_fn"
-    cases: Array<Case>
-  }
 
 export function CaseFn(cases: Array<Case>): CaseFn {
   return {

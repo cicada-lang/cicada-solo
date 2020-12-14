@@ -7,16 +7,12 @@ import { AlphaRepr } from "../../alpha-repr"
 import { typecons_evaluable } from "./typecons-evaluable"
 import { typecons_inferable } from "./typecons-inferable"
 
-export type Typecons = Evaluable &
-  Inferable &
-  Checkable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.typecons"
-    name: string
-    t: Exp
-    sums: Array<{ tag: string; t: Exp }>
-  }
+export type Typecons = Exp & {
+  kind: "Exp.typecons"
+  name: string
+  t: Exp
+  sums: Array<{ tag: string; t: Exp }>
+}
 
 export function Typecons(
   name: string,

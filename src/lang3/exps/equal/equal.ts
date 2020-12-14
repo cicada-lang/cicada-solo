@@ -7,16 +7,12 @@ import { AlphaRepr } from "../../alpha-repr"
 import { equal_evaluable } from "./equal-evaluable"
 import { equal_inferable } from "./equal-inferable"
 
-export type Equal = Evaluable &
-  Inferable &
-  Checkable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.equal"
-    t: Exp
-    from: Exp
-    to: Exp
-  }
+export type Equal = Exp & {
+  kind: "Exp.equal"
+  t: Exp
+  from: Exp
+  to: Exp
+}
 
 export function Equal(t: Exp, from: Exp, to: Exp): Equal {
   return {

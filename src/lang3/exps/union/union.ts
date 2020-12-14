@@ -7,15 +7,11 @@ import { Exp } from "../../exp"
 import { union_evaluable } from "./union-evaluable"
 import { union_inferable } from "./union-inferable"
 
-export type Union = Evaluable &
-  Inferable &
-  Checkable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.union"
-    left: Exp
-    right: Exp
-  }
+export type Union = Exp & {
+  kind: "Exp.union"
+  left: Exp
+  right: Exp
+}
 
 export function Union(left: Exp, right: Exp): Union {
   return {

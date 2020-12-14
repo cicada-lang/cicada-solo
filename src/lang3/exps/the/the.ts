@@ -7,15 +7,11 @@ import { Exp } from "../../exp"
 import { the_evaluable } from "./the-evaluable"
 import { the_inferable } from "./the-inferable"
 
-export type The = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.the"
-    t: Exp
-    exp: Exp
-  }
+export type The = Exp & {
+  kind: "Exp.the"
+  t: Exp
+  exp: Exp
+}
 
 export function The(t: Exp, exp: Exp): The {
   return {

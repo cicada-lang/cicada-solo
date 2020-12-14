@@ -7,15 +7,11 @@ import { AlphaRepr } from "../../alpha-repr"
 import { ap_evaluable } from "./ap-evaluable"
 import { ap_inferable } from "./ap-inferable"
 
-export type Ap = Evaluable &
-  Inferable &
-  Checkable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.ap"
-    target: Exp
-    arg: Exp
-  }
+export type Ap = Exp & {
+  kind: "Exp.ap"
+  target: Exp
+  arg: Exp
+}
 
 export function Ap(target: Exp, arg: Exp): Ap {
   return {

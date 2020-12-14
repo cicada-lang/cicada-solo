@@ -7,15 +7,11 @@ import { AlphaRepr } from "../../alpha-repr"
 import { absurd_ind_evaluable } from "./absurd-ind-evaluable"
 import { absurd_ind_inferable } from "./absurd-ind-inferable"
 
-export type AbsurdInd = Evaluable &
-  Inferable &
-  Checkable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.absurd_ind"
-    target: Exp
-    motive: Exp
-  }
+export type AbsurdInd = Exp & {
+  kind: "Exp.absurd_ind"
+  target: Exp
+  motive: Exp
+}
 
 export function AbsurdInd(target: Exp, motive: Exp): AbsurdInd {
   return {

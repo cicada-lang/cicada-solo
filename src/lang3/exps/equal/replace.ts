@@ -7,16 +7,12 @@ import { AlphaRepr } from "../../alpha-repr"
 import { replace_evaluable } from "./replace-evaluable"
 import { replace_inferable } from "./replace-inferable"
 
-export type Replace = Evaluable &
-  Inferable &
-  Checkable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.replace"
-    target: Exp
-    motive: Exp
-    base: Exp
-  }
+export type Replace = Exp & {
+  kind: "Exp.replace"
+  target: Exp
+  motive: Exp
+  base: Exp
+}
 
 export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
   return {
