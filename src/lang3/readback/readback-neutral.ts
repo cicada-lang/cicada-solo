@@ -22,10 +22,11 @@ export function readback_neutral(
     }
     case "Neutral.match": {
       return Exp.ap(
-        Readback.readback_normal(mod, ctx, {
-          t: neutral.pi,
-          value: neutral.case_fn,
-        }),
+        Readback.readback_normal(
+          mod,
+          ctx,
+          Normal.create(neutral.pi, neutral.case_fn)
+        ),
         Readback.readback_neutral(mod, ctx, neutral.arg)
       )
     }
