@@ -9,6 +9,7 @@ import * as Env from "../env"
 
 import { TypeValue } from "../values/type-value"
 import { StrValue } from "../values/str-value"
+import { AbsurdValue } from "../values/absurd-value"
 
 export type Value =
   | pi
@@ -18,7 +19,7 @@ export type Value =
   | obj
   | equal
   | same
-  | absurd
+  | AbsurdValue
   | StrValue
   | quote
   | union
@@ -109,13 +110,8 @@ export const same: same = {
   kind: "Value.same",
 }
 
-export type absurd = {
-  kind: "Value.absurd"
-}
-
-export const absurd: absurd = {
-  kind: "Value.absurd",
-}
+export type absurd = AbsurdValue
+export const absurd = AbsurdValue
 
 export type str = StrValue
 export const str = StrValue

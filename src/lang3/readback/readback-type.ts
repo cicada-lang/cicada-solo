@@ -18,7 +18,9 @@ export function readback_type(
     return value.readback_as_type({ mod, ctx })
   }
   if (value.kind === "Value.quote") return Exp.quote(value.str)
-  if (value.kind === "Value.absurd") return Exp.absurd
+  if (value.kind === "Value.absurd") {
+    return value.readback_as_type({ mod, ctx })
+  }
   if (value.kind === "Value.equal")
     return Exp.equal(
       Readback.readback(mod, ctx, Value.type, value.t),
