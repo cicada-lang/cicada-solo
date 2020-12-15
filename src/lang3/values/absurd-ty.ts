@@ -4,11 +4,11 @@ import * as Ctx from "../ctx"
 import { Absurd } from "../exps/absurd"
 import { readback_type } from "../readback/readback-type"
 
-export type AbsurdValue = Ty & {
+export type AbsurdTy = Ty & {
   kind: "Value.absurd"
 }
 
-export const AbsurdValue: AbsurdValue = {
+export const AbsurdTy: AbsurdTy = {
   kind: "Value.absurd",
   typed_readback(value, { mod, ctx }) {
     throw new Error("TODO")

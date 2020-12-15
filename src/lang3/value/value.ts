@@ -7,9 +7,10 @@ import * as Mod from "../mod"
 import * as Modpath from "../modpath"
 import * as Env from "../env"
 
-import { TypeValue } from "../values/type-value"
-import { StrValue } from "../values/str-value"
-import { AbsurdValue } from "../values/absurd-value"
+import { TypeTy } from "../values/type-ty"
+import { StrTy } from "../values/str-ty"
+import { AbsurdTy } from "../values/absurd-ty"
+import { EqualTy } from "../values/equal-ty"
 
 export type Value =
   | pi
@@ -17,17 +18,17 @@ export type Value =
   | case_fn
   | cls
   | obj
-  | equal
+  | EqualTy
   | same
-  | AbsurdValue
-  | StrValue
+  | AbsurdTy
+  | StrTy
   | quote
   | union
   | typecons
   | datatype
   | datacons
   | data
-  | TypeValue
+  | TypeTy
   | mod
   | not_yet
 
@@ -88,19 +89,8 @@ export const obj = (properties: Map<string, Value>): obj => ({
   properties,
 })
 
-export type equal = {
-  kind: "Value.equal"
-  t: Value
-  from: Value
-  to: Value
-}
-
-export const equal = (t: Value, from: Value, to: Value): equal => ({
-  kind: "Value.equal",
-  t,
-  from,
-  to,
-})
+export type equal = EqualTy
+export const equal = EqualTy
 
 export type same = {
   kind: "Value.same"
@@ -110,11 +100,11 @@ export const same: same = {
   kind: "Value.same",
 }
 
-export type absurd = AbsurdValue
-export const absurd = AbsurdValue
+export type absurd = AbsurdTy
+export const absurd = AbsurdTy
 
-export type str = StrValue
-export const str = StrValue
+export type str = StrTy
+export const str = StrTy
 
 export type quote = {
   kind: "Value.quote"
@@ -222,8 +212,8 @@ export const mod = (modpath: Modpath.Modpath, mod: Mod.Mod): mod => ({
   mod,
 })
 
-export type type = TypeValue
-export const type = TypeValue
+export type type = TypeTy
+export const type = TypeTy
 
 export type not_yet = {
   kind: "Value.not_yet"

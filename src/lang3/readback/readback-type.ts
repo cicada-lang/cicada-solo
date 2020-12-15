@@ -21,12 +21,9 @@ export function readback_type(
   if (value.kind === "Value.absurd") {
     return value.readback_as_type({ mod, ctx })
   }
-  if (value.kind === "Value.equal")
-    return Exp.equal(
-      Readback.readback(mod, ctx, Value.type, value.t),
-      Readback.readback(mod, ctx, value.t, value.from),
-      Readback.readback(mod, ctx, value.t, value.to)
-    )
+  if (value.kind === "Value.equal") {
+    return value.readback_as_type({ mod, ctx })
+  }
   if (value.kind === "Value.cls") return readback_cls(mod, ctx, value)
   if (value.kind === "Value.pi") return readback_pi(mod, ctx, value)
   if (value.kind === "Value.union")
