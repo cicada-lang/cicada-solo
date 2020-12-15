@@ -7,7 +7,8 @@ import * as Mod from "../mod"
 import * as Modpath from "../modpath"
 import * as Env from "../env"
 
-import { TypeTy } from "../tys/type"
+import { TypeValue } from "../values/type-value"
+import { StrValue } from "../values/str-value"
 
 export type Value =
   | pi
@@ -18,14 +19,14 @@ export type Value =
   | equal
   | same
   | absurd
-  | str
+  | StrValue
   | quote
   | union
   | typecons
   | datatype
   | datacons
   | data
-  | type
+  | TypeValue
   | mod
   | not_yet
 
@@ -116,13 +117,8 @@ export const absurd: absurd = {
   kind: "Value.absurd",
 }
 
-export type str = {
-  kind: "Value.str"
-}
-
-export const str: str = {
-  kind: "Value.str",
-}
+export type str = StrValue
+export const str = StrValue
 
 export type quote = {
   kind: "Value.quote"
@@ -230,8 +226,8 @@ export const mod = (modpath: Modpath.Modpath, mod: Mod.Mod): mod => ({
   mod,
 })
 
-export type type = TypeTy
-export const type = TypeTy
+export type type = TypeValue
+export const type = TypeValue
 
 export type not_yet = {
   kind: "Value.not_yet"

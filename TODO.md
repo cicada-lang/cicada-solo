@@ -102,7 +102,6 @@
 
 > refactoring Value
 
-- [lang3] `Ty` for `Value.str` use `readback_as_type` in `readback/readback-type.ts`
 - [lang3] `Ty` for `Value.quote` use `readback_as_type` in `readback/readback-type.ts`
 - [lang3] `Ty` for `Value.asurd` use `readback_as_type` in `readback/readback-type.ts`
 - [lang3] `Ty` for `Value.equal` use `readback_as_type` in `readback/readback-type.ts`
