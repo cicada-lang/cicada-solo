@@ -187,4 +187,11 @@
   if that is all the message expression should know,
   we can use small object style.
 
-- maybe we can use factory to help double the dispatching in `readback`
+- instead of `Exp.evaluate({ mod: Mod, env: Env }): Value`
+  use `Jo.exe: World -> World`
+  where `type World = { mod: Mod, env: Env, data_stack: DataStack, return_stack: ReturnStack }`
+
+- instead of `Exp.check({ mod: Mod, ctx: Ctx }): Void`
+  use `Jo.cut: World -> World`
+
+- What will happen?
