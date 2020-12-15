@@ -137,8 +137,16 @@
 
 - What is the distinct behavior of `Intro`?
 
+  - Evaluation of `Intro` is simply recursion over its structure.
   - `Intro` is not `Ty`.
   - `Intro` is `typed_readback` -able.
+    - Readback is complicated for `Intro`,
+      we need to handle eta expansion.
+
+- What is the distinct behavior of `Elim`?
+
+  - Evaluation of `Elim` might progress the computation.
+  - Readback of `Elim` is simply recursion over its structure.
 
 - What is the distinct behavior of `Ty`?
 
