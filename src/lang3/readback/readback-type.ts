@@ -30,7 +30,9 @@ export function readback_type(
       Readback.readback(mod, ctx, Value.type, value.left),
       Readback.readback(mod, ctx, Value.type, value.right)
     )
-  if (value.kind === "Value.type") return Exp.type
+  if (value.kind === "Value.type") {
+    return value.readback_as_type({ mod, ctx })
+  }
   if (value.kind === "Value.not_yet")
     // NOTE t and value.t are ignored here,
     //  maybe use them to debug.

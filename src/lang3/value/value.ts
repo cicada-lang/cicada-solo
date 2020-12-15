@@ -7,6 +7,8 @@ import * as Mod from "../mod"
 import * as Modpath from "../modpath"
 import * as Env from "../env"
 
+import { TypeTy } from "../tys/type"
+
 export type Value =
   | pi
   | fn
@@ -228,13 +230,8 @@ export const mod = (modpath: Modpath.Modpath, mod: Mod.Mod): mod => ({
   mod,
 })
 
-export type type = {
-  kind: "Value.type"
-}
-
-export const type: type = {
-  kind: "Value.type",
-}
+export type type = TypeTy
+export const type = TypeTy
 
 export type not_yet = {
   kind: "Value.not_yet"

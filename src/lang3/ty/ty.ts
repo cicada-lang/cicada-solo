@@ -11,4 +11,6 @@ import { Mod } from "../mod"
 export type Ty = {
   typed_readback(value: Value, the: { mod: Mod; ctx: Ctx }): Exp
   readback_as_type(the: { mod: Mod; ctx: Ctx }): Exp
+} & {
+  kind: string
 }
