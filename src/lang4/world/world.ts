@@ -7,3 +7,11 @@ export type World = {
   value_stack: ValueStack
   return_stack: ReturnStack
 }
+
+export function World(the: {
+  value_table: ValueTable
+  value_stack: ValueStack
+  return_stack: ReturnStack
+}): World {
+  return the
+}

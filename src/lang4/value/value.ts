@@ -1,5 +1,5 @@
-import { PossibleWorlds } from "../possible-worlds"
+import { World } from "../world"
 
 export type Value = {
-  comeout(worlds: PossibleWorlds): PossibleWorlds
+  comeout: (world: World) => World
 }

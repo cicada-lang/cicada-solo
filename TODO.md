@@ -198,6 +198,5 @@
 - [lang4] `Value` -- `JoJoValue`
 
 - [lang4] `Jo` -- `Apply`
-- [lang4] `Jo` -- `Var`
 
-- [lang4] `ReturnStack`
+- [lang4] `ReturnStack` -- maybe we do not need explicit control
