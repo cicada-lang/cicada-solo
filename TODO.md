@@ -183,7 +183,5 @@
 
 > What will happen?
 
-- [lang4] `Jo` -- `Goin`
 - [lang4] `Jo` -- `Apply`
-
 - [lang4] [maybe] `FrameStack` -- we do need explicit control
