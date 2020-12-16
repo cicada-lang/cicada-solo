@@ -183,8 +183,6 @@
 
 > What will happen?
 
-- [lang4] `Jo` -- `JoJo`
-
 - [lang4] `Jo` -- `Apply`
 
 - [lang4] `Jo` -- `Type`
