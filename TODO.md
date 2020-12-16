@@ -91,6 +91,8 @@
 
 > refactoring Exp
 
+- [lang3] symmetry directory structure
+
 - [lang3] refactor `check_union_type` & `check_by_infer`
 
 - [lang3] re-place `Evaluate`'s functions
@@ -181,17 +183,8 @@
 - [lang4] design a normalization algorithm
   - 也比可以用 NbE，也许比一般的 NbE 更复杂。
 
-> try small object style
+> What will happen?
 
-- function compose and type cut,
-  if that is all the message expression should know,
-  we can use small object style.
-
-- instead of `Exp.evaluate({ mod: Mod, env: Env }): Value`
-  use `Jo.exe: World -> World`
-  where `type World = { mod: Mod, env: Env, data_stack: DataStack, return_stack: ReturnStack }`
-
-- instead of `Exp.check({ mod: Mod, ctx: Ctx }): Void`
-  use `Jo.cut: World -> World`
-
-- What will happen?
+- [lang4] Type TypeValue
+- [lang4] Str StrValue
+- [lang4] Quote QuoteValue

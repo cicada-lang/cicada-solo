@@ -1,4 +1,4 @@
-import { World } from "./world"
+import { World } from "../world"
 
 export type Cuttable = {
   cuttability: (worlds: Array<World>) => Array<World>
