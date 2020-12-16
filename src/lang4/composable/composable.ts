@@ -1,5 +1,5 @@
-import { PossibleWorlds } from "../possible-worlds"
+import { World } from "../world"
 
 export type Composable = {
-  composability: (possible_worlds: PossibleWorlds) => PossibleWorlds
+  composability: (world: World) => World
 }

@@ -193,7 +193,9 @@
 - [lang4] `Value` -- `QuoteValue`
 
 - [lang4] `Jo` -- `JoJo`
-- [lang4] `Value` -- `JoJoValue`
+
+- [lang4] `Value` -- `JoJoComposabilityValue`
+- [lang4] `Value` -- `JoJoCuttabilityValue`
 
 - [lang4] `Jo` -- `Apply`
 

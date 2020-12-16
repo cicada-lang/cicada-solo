@@ -8,8 +8,8 @@ export type Var = Jo & {
 export function Var(name: string): Var {
   return {
     name,
-    composability: (possible_worlds) => possible_worlds.map(var_lookup(name)),
-    cuttability: (possible_worlds) => possible_worlds.map(var_lookup(name)),
+    composability: var_lookup(name),
+    cuttability: var_lookup(name),
   }
 }
 
