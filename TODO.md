@@ -183,15 +183,16 @@
 
 > What will happen?
 
-- [lang4] `Jo` -- `Apply`
+- [lang4] [TDD] how?
+
+- [lang4] `Value` -- `StrValue`
+- [lang4] `Value` -- `TypeValue`
+- [lang4] `Value` -- `QuoteValue`
 
 - [lang4] `Jo` -- `Type`
-- [lang4] `Value` -- `TypeValue`
-
 - [lang4] `Jo` -- `Str`
-- [lang4] `Value` -- `StrValue`
-
 - [lang4] `Jo` -- `Quote`
-- [lang4] `Value` -- `QuoteValue`
+
+- [lang4] `Jo` -- `Apply`
 
 - [lang4] [maybe] `FrameStack` -- we do need explicit control
