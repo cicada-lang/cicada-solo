@@ -11,6 +11,7 @@ import { TypeTy } from "../values/type-ty"
 import { StrTy } from "../values/str-ty"
 import { AbsurdTy } from "../values/absurd-ty"
 import { EqualTy } from "../values/equal-ty"
+import { QuoteValue } from "../values/quote-value"
 
 export type Value =
   | pi
@@ -22,7 +23,7 @@ export type Value =
   | same
   | AbsurdTy
   | StrTy
-  | quote
+  | QuoteValue
   | union
   | typecons
   | datatype
@@ -106,15 +107,8 @@ export const absurd = AbsurdTy
 export type str = StrTy
 export const str = StrTy
 
-export type quote = {
-  kind: "Value.quote"
-  str: string
-}
-
-export const quote = (str: string): quote => ({
-  kind: "Value.quote",
-  str,
-})
+export type quote = QuoteValue
+export const quote = QuoteValue
 
 export type union = {
   kind: "Value.union"
