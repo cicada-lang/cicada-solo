@@ -9,8 +9,9 @@ export type World = {
   mod: Mod
   value_stack: ValueStack
   return_stack: FrameStack
-  value_stack_push: (value: Value) => World
-  value_stack_pop: () => [Value, World]
+  push: (value: Value) => World
+  pop: () => [Value, World]
+  define: (name: string, value: Value) => World
 }
 
 export function World(the: {
@@ -21,17 +22,21 @@ export function World(the: {
 }): World {
   return {
     ...the,
-    value_stack_push: (value) =>
+    push: (value) =>
       World({
         ...the,
         value_stack: the.value_stack.push(value),
       }),
-    value_stack_pop: () => [
+    pop: () => [
       the.value_stack.tos(),
       World({
         ...the,
         value_stack: the.value_stack.drop(),
       }),
     ],
+    define: (name, value) => World({
+      ...the,
+      env: the.env.define(name, value)
+    })
   }
 }

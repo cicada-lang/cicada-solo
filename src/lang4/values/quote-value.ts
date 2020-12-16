@@ -8,6 +8,6 @@ export type QuoteValue = Value & {
 export function QuoteValue(str: string): QuoteValue {
   return {
     str,
-    comeout: (world) => world.value_stack_push(QuoteValue(str)),
+    comeout: (world) => world.push(QuoteValue(str)),
   }
 }

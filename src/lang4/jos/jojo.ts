@@ -11,14 +11,14 @@ export function JoJo(array: Array<Jo>): JoJo {
   return {
     array,
     composability: (world) =>
-      world.value_stack_push(
+      world.push(
         JoJoComposabilityValue(array, {
           env: world.env,
           mod: world.mod,
         })
       ),
     cuttability: (world) =>
-      world.value_stack_push(
+      world.push(
         JoJoCuttabilityValue(array, {
           env: world.env,
           mod: world.mod,
