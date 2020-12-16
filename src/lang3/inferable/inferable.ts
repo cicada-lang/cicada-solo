@@ -1,13 +1,13 @@
-import { Mod } from "./mod"
-import { Env } from "./env"
-import { Ctx } from "./ctx"
-import { Exp } from "./exp"
-import { Checkable } from "./checkable"
-import * as Value from "./value"
-import * as Infer from "./infer"
-import * as Readback from "./readback"
-import * as Trace from "../trace"
-import * as ut from "../ut"
+import { Mod } from "../mod"
+import { Env } from "../env"
+import { Ctx } from "../ctx"
+import { Exp } from "../exp"
+import { Checkable } from "../checkable"
+import * as Value from "../value"
+import * as Infer from "../infer"
+import * as Readback from "../readback"
+import * as Trace from "../../trace"
+import * as ut from "../../ut"
 
 export type Inferable = {
   inferability(the: { mod: Mod; ctx: Ctx }): Value.Value

@@ -1,8 +1,8 @@
-import { Evaluable, EvaluationMode } from "./evaluable"
-import { Value } from "./value"
-import { Mod } from "./mod"
-import { Env } from "./env"
-import * as Trace from "../trace"
+import { Evaluable, EvaluationMode } from "../evaluable"
+import { Value } from "../value"
+import { Mod } from "../mod"
+import { Env } from "../env"
+import * as Trace from "../../trace"
 
 export type Evaluator = {
   evaluate(

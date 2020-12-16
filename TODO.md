@@ -91,8 +91,6 @@
 
 > refactoring Exp
 
-- [lang3] symmetry directory structure
-
 - [lang3] refactor `check_union_type` & `check_by_infer`
 
 - [lang3] re-place `Evaluate`'s functions
@@ -184,6 +182,10 @@
   - 也比可以用 NbE，也许比一般的 NbE 更复杂。
 
 > What will happen?
+
+- [lang4] ValueTable
+- [lang4] ValueStack
+- [lang4] ReturnStack
 
 - [lang4] Type TypeValue
 - [lang4] Str StrValue
