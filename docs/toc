@@ -8,7 +8,6 @@ link:arithmetic-level-and-church-encoding.md
 link:bidirectional-type-checking.md
 link:built-in-equality.md
 link:explicit-record-passing-vs-implicit-type-argument.md
-link:hkts.md
 link:index
 link:interrogation.md
 link:javascript-regexp.md
