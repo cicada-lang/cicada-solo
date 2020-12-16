@@ -7,13 +7,11 @@ export type JoJo = Jo & {
 export function JoJo(array: Array<Jo>): JoJo {
   return {
     array,
-    composability(worlds) {
-      // TODO closure over env
-      return worlds
+    composability(possible_worlds) {
+      return possible_worlds
     },
-    cuttability(worlds) {
-      // TODO closure over ctx
-      return worlds
+    cuttability(possible_worlds) {
+      return possible_worlds
     },
   }
 }

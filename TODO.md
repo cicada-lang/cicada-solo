@@ -183,10 +183,22 @@
 
 > What will happen?
 
-- [lang4] ValueTable
-- [lang4] ValueStack
-- [lang4] ReturnStack
+- [lang4] `ValueTable` -- define lookup
+- [lang4] `ValueStack` -- push pop tos
 
-- [lang4] Type TypeValue
-- [lang4] Str StrValue
-- [lang4] Quote QuoteValue
+- [lang4] `Jo` -- `Type`
+- [lang4] `Value` -- `TypeValue`
+
+- [lang4] `Jo` -- `Str`
+- [lang4] `Value` -- `StrValue`
+
+- [lang4] `Jo` -- `Quote`
+- [lang4] `Value` -- `QuoteValue`
+
+- [lang4] `Jo` -- `JoJo`
+- [lang4] `Value` -- `JoJoValue`
+
+- [lang4] `Jo` -- `Apply`
+- [lang4] `Jo` -- `Var`
+
+- [lang4] `ReturnStack`
