@@ -1,12 +1,6 @@
-export type ValueStack = {}
-
-export type ReturnStack = {}
-
-export type Value = {}
-
-export type ValueTable = {
-  table: Map<string, Value>
-}
+import { ReturnStack } from "../return-stack"
+import { ValueStack } from "../value-stack"
+import { ValueTable } from "../value-table"
 
 export type World = {
   env: ValueTable
