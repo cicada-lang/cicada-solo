@@ -13,7 +13,7 @@ export function Var(name: string): Var {
   }
 }
 
-export const var_lookup = (name: string) => (world: World) => {
+const var_lookup = (name: string) => (world: World) => {
   const value = world.value_table.lookup(name)
   if (value === undefined) throw new Error(`undefined name ${name}`)
   return value.comeout(world)

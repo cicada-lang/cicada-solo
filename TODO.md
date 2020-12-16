@@ -183,8 +183,6 @@
 
 > What will happen?
 
-- [lang4] `ValueStack` -- push tos drop pop
-
 - [lang4] `Jo` -- `Type`
 - [lang4] `Value` -- `TypeValue`
 
@@ -199,4 +197,4 @@
 
 - [lang4] `Jo` -- `Apply`
 
-- [lang4] `ReturnStack` -- maybe we do not need explicit control
+- [lang4] `FrameStack` -- we do need explicit control
