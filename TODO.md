@@ -106,7 +106,6 @@
 - [lang3] `Ty` for `Value.pi` use `readback_as_type` in `readback/readback-type.ts`
 - [lang3] `Ty` for `Value.union` use `readback_as_type` in `readback/readback-type.ts`
 
-- [lang3] `Normal` functional style constructor instead of `Normal.create`
 - [lang3] `Normal` owns `readback`
 
 - [lang3] `Neutral` as intersection instead of union

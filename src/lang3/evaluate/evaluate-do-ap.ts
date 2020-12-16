@@ -2,7 +2,7 @@ import * as Evaluate from "../evaluate"
 import * as Explain from "../explain"
 import * as Exp from "../exp"
 import * as Value from "../value"
-import * as Normal from "../normal"
+import { Normal } from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../../trace"
 
@@ -132,7 +132,7 @@ export function do_ap_not_yet(
   if (not_yet.t.kind === "Value.pi")
     return Value.not_yet(
       Value.Closure.apply(not_yet.t.ret_t_cl, arg),
-      Neutral.ap(not_yet.neutral, Normal.create(not_yet.t.arg_t, arg))
+      Neutral.ap(not_yet.neutral, Normal(not_yet.t.arg_t, arg))
     )
 
   throw new Trace.Trace(

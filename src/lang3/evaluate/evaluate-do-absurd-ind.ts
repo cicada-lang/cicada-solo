@@ -2,7 +2,7 @@ import * as Evaluate from "../evaluate"
 import * as Explain from "../explain"
 import * as Exp from "../exp"
 import * as Value from "../value"
-import * as Normal from "../normal"
+import { Normal } from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../../trace"
 
@@ -14,7 +14,7 @@ export function do_absurd_ind(
     if (target.t.kind === "Value.absurd") {
       return Value.not_yet(
         motive,
-        Neutral.absurd_ind(target.neutral, Normal.create(Value.type, motive))
+        Neutral.absurd_ind(target.neutral, Normal(Value.type, motive))
       )
     } else {
       throw new Trace.Trace(

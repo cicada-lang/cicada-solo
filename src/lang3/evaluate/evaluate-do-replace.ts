@@ -5,7 +5,7 @@ import * as Env from "../env"
 import * as Mod from "../mod"
 import * as Value from "../value"
 import * as Pattern from "../pattern"
-import * as Normal from "../normal"
+import { Normal } from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../../trace"
 
@@ -30,8 +30,8 @@ export function do_replace(
         Evaluate.do_ap(motive, target.t.to),
         Neutral.replace(
           target.neutral,
-          Normal.create(motive_t, motive),
-          Normal.create(base_t, base)
+          Normal(motive_t, motive),
+          Normal(base_t, base)
         )
       )
     } else {

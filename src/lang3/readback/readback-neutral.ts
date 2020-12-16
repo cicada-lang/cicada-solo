@@ -1,6 +1,6 @@
 import * as Readback from "../readback"
 import * as Neutral from "../neutral"
-import * as Normal from "../normal"
+import { Normal } from "../normal"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as Mod from "../mod"
@@ -25,7 +25,7 @@ export function readback_neutral(
         Readback.readback_normal(
           mod,
           ctx,
-          Normal.create(neutral.pi, neutral.case_fn)
+          Normal(neutral.pi, neutral.case_fn)
         ),
         Readback.readback_neutral(mod, ctx, neutral.arg)
       )
