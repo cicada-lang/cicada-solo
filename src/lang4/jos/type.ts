@@ -5,14 +5,6 @@ import { TypeValue } from "../values/type-value"
 export type Type = Jo
 
 export const Type: Type = {
-  composability: (world) =>
-    World({
-      ...world,
-      value_stack: world.value_stack.push(TypeValue),
-    }),
-  cuttability: (world) =>
-    World({
-      ...world,
-      value_stack: world.value_stack.push(TypeValue),
-    }),
+  composability: (world) => world.value_stack_push(TypeValue),
+  cuttability: (world) => world.value_stack_push(TypeValue),
 }
