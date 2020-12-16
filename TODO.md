@@ -106,17 +106,11 @@
 - [lang3] `Ty` for `Value.pi` use `readback_as_type` in `readback/readback-type.ts`
 - [lang3] `Ty` for `Value.union` use `readback_as_type` in `readback/readback-type.ts`
 
-- [lang3] `Normal` owns `readback`
-
-- [lang3] `Neutral` as intersection instead of union
-  - `Neutral`'s distinct behavior is,
-    be able to be returned during elimination (wraped inside a `NotYet`).
-    This behavior is passive, how can we use it to define `Neutral`'s interface?
-- [lang3] `Neutral` owns `readback`
-
-- [lang3] `Value` `Neutral` `Normal`
 - [lang3] `typed_readback` for `Value`
-- [lang3] `readback` for `Neutral` and `Normal`
+
+- [lang3] `readback_neutral` for `Neutral`
+
+- [lang3] `readback_normal` for `Normal`
 
 > namespace
 
