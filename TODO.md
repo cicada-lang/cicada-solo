@@ -183,7 +183,6 @@
 
 > What will happen?
 
-- [lang4] `Value` -- `StrValue`
 - [lang4] `Value` -- `QuoteValue`
 
 - [lang4] `Jo` -- `Str`
