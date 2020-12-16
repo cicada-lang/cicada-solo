@@ -184,10 +184,8 @@
 > What will happen?
 
 - [lang4] `Value` -- `QuoteValue`
-
-- [lang4] `Jo` -- `Str`
 - [lang4] `Jo` -- `Quote`
-
+- [lang4] `Jo` -- `Goin`
 - [lang4] `Jo` -- `Apply`
 
 - [lang4] [maybe] `FrameStack` -- we do need explicit control
