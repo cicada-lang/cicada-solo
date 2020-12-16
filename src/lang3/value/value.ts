@@ -12,12 +12,13 @@ import { StrTy } from "../values/str-ty"
 import { AbsurdTy } from "../values/absurd-ty"
 import { EqualTy } from "../values/equal-ty"
 import { QuoteValue } from "../values/quote-value"
+import { ClsTy } from "../values/cls-ty"
 
 export type Value =
   | pi
   | fn
   | case_fn
-  | cls
+  | ClsTy
   | obj
   | EqualTy
   | same
@@ -65,20 +66,8 @@ export const case_fn = (ret_cl: Array<Closure.Closure>): case_fn => ({
   ret_cl,
 })
 
-export type cls = {
-  kind: "Value.cls"
-  sat: Array<{ name: string; t: Value; value: Value }>
-  tel: Telescope.Telescope
-}
-
-export const cls = (
-  sat: Array<{ name: string; t: Value; value: Value }>,
-  tel: Telescope.Telescope
-): cls => ({
-  kind: "Value.cls",
-  sat,
-  tel,
-})
+export type cls = ClsTy
+export const cls = ClsTy
 
 export type obj = {
   kind: "Value.obj"

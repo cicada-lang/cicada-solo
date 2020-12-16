@@ -6,7 +6,6 @@ import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
-import { readback_cls } from "./readback-cls"
 import { readback_pi } from "./readback-pi"
 
 export function readback_type(
@@ -26,7 +25,9 @@ export function readback_type(
   if (value.kind === "Value.equal") {
     return value.readback_as_type({ mod, ctx })
   }
-  if (value.kind === "Value.cls") return readback_cls(mod, ctx, value)
+  if (value.kind === "Value.cls") {
+    return value.readback_as_type({ mod, ctx })
+  }
   if (value.kind === "Value.pi") return readback_pi(mod, ctx, value)
   if (value.kind === "Value.union")
     return Exp.union(
