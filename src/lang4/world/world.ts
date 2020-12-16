@@ -10,6 +10,7 @@ export type World = {
   value_stack: ValueStack
   return_stack: FrameStack
   value_stack_push: (value: Value) => World
+  value_stack_pop: () => [Value, World]
 }
 
 export function World(the: {
@@ -25,5 +26,12 @@ export function World(the: {
         ...the,
         value_stack: the.value_stack.push(value),
       }),
+    value_stack_pop: () => [
+      the.value_stack.tos(),
+      World({
+        ...the,
+        value_stack: the.value_stack.drop(),
+      }),
+    ],
   }
 }
