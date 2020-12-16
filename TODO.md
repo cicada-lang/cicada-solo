@@ -183,8 +183,6 @@
 
 > What will happen?
 
-- [lang4] `Value` -- `QuoteValue`
-- [lang4] `Jo` -- `Quote`
 - [lang4] `Jo` -- `Goin`
 - [lang4] `Jo` -- `Apply`
 
