@@ -183,6 +183,10 @@
 
 > What will happen?
 
+- [lang4] `Jo` -- `JoJo`
+
+- [lang4] `Jo` -- `Apply`
+
 - [lang4] `Jo` -- `Type`
 - [lang4] `Value` -- `TypeValue`
 
@@ -192,11 +196,4 @@
 - [lang4] `Jo` -- `Quote`
 - [lang4] `Value` -- `QuoteValue`
 
-- [lang4] `Jo` -- `JoJo`
-
-- [lang4] `Value` -- `JoJoComposabilityValue`
-- [lang4] `Value` -- `JoJoCuttabilityValue`
-
-- [lang4] `Jo` -- `Apply`
-
-- [lang4] `FrameStack` -- we do need explicit control
+- [lang4] [maybe] `FrameStack` -- we do need explicit control
