@@ -183,8 +183,7 @@
 
 > What will happen?
 
-- [lang4] `ValueTable` -- define lookup
-- [lang4] `ValueStack` -- push pop tos
+- [lang4] `ValueStack` -- push tos drop pop
 
 - [lang4] `Jo` -- `Type`
 - [lang4] `Value` -- `TypeValue`
