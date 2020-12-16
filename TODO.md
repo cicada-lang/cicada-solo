@@ -170,18 +170,3 @@
 
   - maybe we can use object-oriented design
     by record type and higher order functions.
-
-# lang4
-
-> jojo -- to study normal form and recursion.
-> - Can be used to play with "Diagonalization and Self-Reference"
-
-- [lang4] be clear about the semantic of "Diagonalization and Self-Reference"
-  - formal systems described in this book can be described as class in cicada
-- [lang4] design a normalization algorithm
-  - 也比可以用 NbE，也许比一般的 NbE 更复杂。
-
-> What will happen?
-
-- [lang4] `Jo` -- `Apply`
-- [lang4] [maybe] `FrameStack` -- we do need explicit control
