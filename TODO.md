@@ -102,6 +102,7 @@
 - [lang3] `typed_readback` for `Value`
 - [lang3] `readback_neutral` for `Neutral`
 - [lang3] `readback_normal` for `Normal`
+- [lang3] no branches in `readback-type.ts`
 
 > namespace
 
