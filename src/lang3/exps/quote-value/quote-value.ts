@@ -1,7 +1,7 @@
-import { ReadbackAsType } from "../../readback-as-type"
+import { Readbackable, ReadbackAsType } from "../../readbackable"
 import { Quote } from "../quote"
 
-export type QuoteValue = ReadbackAsType & {
+export type QuoteValue = Readbackable & {
   kind: "Value.quote"
   str: string
 }

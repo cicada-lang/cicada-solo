@@ -1,7 +1,7 @@
 import { Absurd } from "../../exps/absurd"
-import { ReadbackAsType } from "../../readback-as-type"
+import { Readbackable, ReadbackAsType } from "../../readbackable"
 
-export type AbsurdTy = ReadbackAsType & {
+export type AbsurdTy = Readbackable & {
   kind: "Value.absurd"
 }
 

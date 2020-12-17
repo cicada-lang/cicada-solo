@@ -16,3 +16,11 @@ export function Readbackable(the: {
 }): Readbackable {
   return the
 }
+
+export function ReadbackAsType(the: {
+  readback_as_type: (the: { mod: Mod; ctx: Ctx }) => Exp
+}): Readbackable {
+  return {
+    readbackability: (_, { mod, ctx }) => the.readback_as_type({ mod, ctx }),
+  }
+}

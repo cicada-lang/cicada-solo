@@ -1,4 +1,3 @@
-import { ReadbackAsType } from "../../readback-as-type"
 import { Readbackable } from "../../readbackable"
 import { Value } from "../../value"
 import { Union } from "../../exps/union"

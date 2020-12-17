@@ -1,9 +1,9 @@
-import { ReadbackAsType } from "../../readback-as-type"
 import { Value } from "../../value"
 import * as Closure from "../../value/closure"
 import { pi_readback_as_type } from "./pi-readback-as-type"
+import { Readbackable } from "../../readbackable"
 
-export type PiTy = ReadbackAsType & {
+export type PiTy = Readbackable & {
   kind: "Value.pi"
   arg_t: Value
   ret_t_cl: Closure.Closure

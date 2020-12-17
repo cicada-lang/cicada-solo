@@ -6,12 +6,12 @@ import * as Exp from "../../exp"
 import * as Ctx from "../../ctx"
 import * as Mod from "../../mod"
 import * as ut from "../../../ut"
-import { ReadbackAsType } from "../../readback-as-type"
+import { Readbackable, ReadbackAsType } from "../../readbackable"
 
 export function pi_readback_as_type(
   arg_t: Value.Value,
   ret_t_cl: Closure.Closure
-): ReadbackAsType {
+): Readbackable {
   return ReadbackAsType({
     readback_as_type: ({ mod, ctx }) => {
       const fresh_name = ut.freshen_name(
