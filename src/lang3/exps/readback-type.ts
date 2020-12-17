@@ -18,13 +18,13 @@ export function readback_type(
     return value.readback_as_type({ mod, ctx })
   }
   if (value.kind === "Value.absurd") {
-    return value.readback_as_type({ mod, ctx })
+    return value.readback_as(Value.type, { mod, ctx })
   }
   if (value.kind === "Value.equal") {
     return value.readback_as_type({ mod, ctx })
   }
   if (value.kind === "Value.cls") {
-    return value.readback_as_type({ mod, ctx })
+    return value.readback_as(Value.type, { mod, ctx })
   }
   if (value.kind === "Value.pi") {
     return value.readback_as_type({ mod, ctx })

@@ -99,7 +99,7 @@
 
 > refactoring Value
 
-- [lang3] `Ty.typed_readback` for ???
+- [lang3] `readbackability` in `Readbackable` -- instead of `readback_as`
 - [lang3] `readback_neutral` for `Neutral`
 - [lang3] `readback_normal` for `Normal`
 - [lang3] `Value` as intersection type instead of union type

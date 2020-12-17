@@ -1,14 +1,12 @@
 import { Ty } from "../../ty"
+import { Readbackable } from "../../readbackable"
 import { Absurd } from "../../exps/absurd"
 
-export type AbsurdTy = Ty & {
+export type AbsurdTy = Readbackable & {
   kind: "Value.absurd"
 }
 
 export const AbsurdTy: AbsurdTy = {
   kind: "Value.absurd",
-  typed_readback: (value, { mod, ctx }) => {
-    throw new Error("TODO")
-  },
-  readback_as_type: ({ mod, ctx }) => Absurd,
+  readback_as: (t, { mod, ctx }) => Absurd,
 }

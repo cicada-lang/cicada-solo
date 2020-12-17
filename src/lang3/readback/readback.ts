@@ -21,6 +21,14 @@ export function readback(
   t: Value.Value,
   value: Value.Value
 ): Exp.Exp {
+  if (value.kind === "Value.absurd") {
+    return value.readback_as(t, { mod, ctx })
+  }
+  if (value.kind === "Value.cls") {
+    console.log("><><><")
+    return value.readback_as(t, { mod, ctx })
+  }
+  // TODO
   if (
     t.kind === "Value.absurd" &&
     value.kind === "Value.not_yet" &&

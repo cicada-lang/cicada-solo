@@ -1,9 +1,9 @@
-import { Ty } from "../../ty"
+import { Readbackable } from "../../readbackable"
 import { Value } from "../../value"
 import * as Telescope from "../../value/telescope"
-import { cls_readback_as_type } from "./cls-readback-as-type"
+import { cls_readback_as } from "./cls-readback-as"
 
-export type ClsTy = Ty & {
+export type ClsTy = Readbackable & {
   kind: "Value.cls"
   sat: Array<{ name: string; t: Value; value: Value }>
   tel: Telescope.Telescope
@@ -17,9 +17,6 @@ export function ClsTy(
     kind: "Value.cls",
     sat,
     tel,
-    typed_readback: (value, { mod, ctx }) => {
-      throw new Error("TODO")
-    },
-    readback_as_type: cls_readback_as_type(sat, tel),
+    readback_as: cls_readback_as(sat, tel),
   }
 }
