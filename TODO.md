@@ -99,9 +99,14 @@
 
 > refactoring Value
 
-- [lang3] `typed_readback` for `Value`
+- [lang3] `Readbackable`
+  - `readback_as` for `Value` -- second dispatch of a double dispatch
+- [lang3] `Readbackable` -- `same-value.ts`
+- [lang3] `Ty.typed_readback` for `equal-ty.ts`
+- [lang3] `Ty.typed_readback` for ?
 - [lang3] `readback_neutral` for `Neutral`
 - [lang3] `readback_normal` for `Normal`
+- [lang3] `Value` as intersection type instead of union type
 - [lang3] no branches in `readback-type.ts`
 
 > namespace
