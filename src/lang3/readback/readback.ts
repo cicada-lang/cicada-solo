@@ -76,11 +76,7 @@ export function readback(
     //  maybe use them to debug.
     return Readback.readback_neutral(mod, ctx, value.neutral)
   }
-  throw readback_error(t, value)
-}
-
-function readback_error<T>(t: Value.Value, value: Value.Value): Trace.Trace<T> {
-  return new Trace.Trace(
+  throw new Trace.Trace(
     ut.aline(`
       |I can not readback value: ${ut.inspect(value.kind)},
       |of type: ${ut.inspect(t.kind)}.
