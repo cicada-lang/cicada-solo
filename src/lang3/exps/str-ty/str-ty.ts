@@ -1,14 +1,13 @@
-import { Ty } from "../../ty"
+import { ReadbackAsType } from "../../readback-as-type"
 import { Str } from "../../exps/str"
 
-export type StrTy = Ty & {
+export type StrTy = ReadbackAsType & {
   kind: "Value.str"
 }
 
 export const StrTy: StrTy = {
   kind: "Value.str",
-  typed_readback: (value, { mod, ctx }) => {
-    throw new Error("TODO")
-  },
-  readback_as_type: (_) => Str,
+  ...ReadbackAsType({
+    readback_as_type: (_) => Str,
+  }),
 }

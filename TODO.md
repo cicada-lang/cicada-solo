@@ -91,7 +91,6 @@
 
 > refactoring Value
 
-- [lang3] `Readbackable` -- str-ty
 - [lang3] `Readbackable` -- type-ty
 - [lang3] `Readbackable` -- union-ty
 - [lang3] no `Ty`
