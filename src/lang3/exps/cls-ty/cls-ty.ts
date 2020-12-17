@@ -1,7 +1,7 @@
 import { Readbackable } from "../../readbackable"
 import { Value } from "../../value"
 import * as Telescope from "../../value/telescope"
-import { cls_readback_as } from "./cls-readback-as"
+import { cls_readbackable } from "./cls-readbackable"
 
 export type ClsTy = Readbackable & {
   kind: "Value.cls"
@@ -17,6 +17,6 @@ export function ClsTy(
     kind: "Value.cls",
     sat,
     tel,
-    readbackability: cls_readback_as(sat, tel),
+    ...cls_readbackable(sat, tel),
   }
 }

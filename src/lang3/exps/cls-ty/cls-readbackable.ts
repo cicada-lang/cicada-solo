@@ -8,18 +8,21 @@ import * as Exp from "../../exp"
 import * as Ctx from "../../ctx"
 import * as Env from "../../env"
 import * as Mod from "../../mod"
+import { Readbackable } from "../../readbackable"
 
-export function cls_readback_as(
+export function cls_readbackable(
   sat: Array<{ name: string; t: Value.Value; value: Value.Value }>,
   tel: Telescope.Telescope
-): (t: Value.Value, the: { mod: Mod.Mod; ctx: Ctx.Ctx }) => Exp.cls {
-  return (t, { mod, ctx }) => {
-    const new_ctx = Ctx.clone(ctx)
-    // NOTE side-effect on ctx
-    const norm_sat = readback_sat(mod, new_ctx, sat)
-    // NOTE `tel` has its own `tel.mod`
-    const norm_scope = readback_scope(new_ctx, tel)
-    return Exp.cls(norm_sat, norm_scope)
+): Readbackable {
+  return {
+    readbackability: (t, { mod, ctx }) => {
+      const new_ctx = Ctx.clone(ctx)
+      // NOTE side-effect on ctx
+      const norm_sat = readback_sat(mod, new_ctx, sat)
+      // NOTE `tel` has its own `tel.mod`
+      const norm_scope = readback_scope(new_ctx, tel)
+      return Exp.cls(norm_sat, norm_scope)
+    },
   }
 }
 
