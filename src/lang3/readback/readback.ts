@@ -14,6 +14,7 @@ import { readback_typecons } from "./readback-typecons"
 import { readback_datatype } from "./readback-datatype"
 import { readback_datacons } from "./readback-datacons"
 import { readback_data } from "./readback-data"
+import { readback_type } from "../exps/readback-type"
 
 export function readback(
   mod: Mod.Mod,
@@ -81,7 +82,7 @@ export function readback(
     return Exp.quote(value.str)
   }
   if (t.kind === "Value.type") {
-    return t.typed_readback(value, { mod, ctx })
+    return readback_type(mod, ctx, value)
   }
   throw new Trace.Trace(
     ut.aline(`
