@@ -1,6 +1,6 @@
-import { Ty } from "../ty"
-import { Value } from "../value"
-import * as Telescope from "../value/telescope"
+import { Ty } from "../../ty"
+import { Value } from "../../value"
+import * as Telescope from "../../value/telescope"
 import { cls_readback_as_type } from "./cls-readback-as-type"
 
 export type ClsTy = Ty & {

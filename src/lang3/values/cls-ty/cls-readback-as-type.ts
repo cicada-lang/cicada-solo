@@ -1,13 +1,13 @@
-import { evaluator } from "../evaluator"
-import { EvaluationMode } from "../evaluable"
-import * as Telescope from "../value/telescope"
-import * as Readback from "../readback"
-import * as Value from "../value"
-import * as Neutral from "../neutral"
-import * as Exp from "../exp"
-import * as Ctx from "../ctx"
-import * as Env from "../env"
-import * as Mod from "../mod"
+import { evaluator } from "../../evaluator"
+import { EvaluationMode } from "../../evaluable"
+import * as Telescope from "../../value/telescope"
+import * as Readback from "../../readback"
+import * as Value from "../../value"
+import * as Neutral from "../../neutral"
+import * as Exp from "../../exp"
+import * as Ctx from "../../ctx"
+import * as Env from "../../env"
+import * as Mod from "../../mod"
 
 export function cls_readback_as_type(
   sat: Array<{ name: string; t: Value.Value; value: Value.Value }>,

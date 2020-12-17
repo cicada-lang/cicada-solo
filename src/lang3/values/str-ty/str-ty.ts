@@ -1,5 +1,5 @@
-import { Ty } from "../ty"
-import { Str } from "../exps/str"
+import { Ty } from "../../ty"
+import { Str } from "../../exps/str"
 
 export type StrTy = Ty & {
   kind: "Value.str"

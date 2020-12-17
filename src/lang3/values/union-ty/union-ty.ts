@@ -1,7 +1,7 @@
-import { Ty } from "../ty"
-import { Value } from "../value"
-import { Union } from "../exps/union"
-import { readback_type } from "./readback-type"
+import { Ty } from "../../ty"
+import { Value } from "../../value"
+import { Union } from "../../exps/union"
+import { readback_type } from "../readback-type"
 
 export type UnionTy = Ty & {
   kind: "Value.union"

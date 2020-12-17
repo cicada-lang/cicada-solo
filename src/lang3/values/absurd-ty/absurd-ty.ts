@@ -1,5 +1,5 @@
-import { Ty } from "../ty"
-import { Absurd } from "../exps/absurd"
+import { Ty } from "../../ty"
+import { Absurd } from "../../exps/absurd"
 
 export type AbsurdTy = Ty & {
   kind: "Value.absurd"

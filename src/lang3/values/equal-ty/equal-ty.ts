@@ -1,8 +1,8 @@
-import { Ty } from "../ty"
-import { Value } from "../value"
-import { Equal } from "../exps/equal"
-import { readback_type } from "./readback-type"
-import * as Readback from "../readback"
+import { Ty } from "../../ty"
+import { Value } from "../../value"
+import { Equal } from "../../exps/equal"
+import { readback_type } from "../readback-type"
+import * as Readback from "../../readback"
 
 export type EqualTy = Ty & {
   kind: "Value.equal"

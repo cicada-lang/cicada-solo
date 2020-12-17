@@ -21,6 +21,21 @@ export function readback(
   t: Value.Value,
   value: Value.Value
 ): Exp.Exp {
+  if (
+    t.kind === "Value.absurd" &&
+    value.kind === "Value.not_yet" &&
+    value.t.kind === "Value.absurd"
+  ) {
+    return Exp.the(
+      Exp.absurd,
+      Readback.readback_neutral(mod, ctx, value.neutral)
+    )
+  }
+  if (value.kind === "Value.not_yet") {
+    // NOTE t and value.t are ignored here,
+    //  maybe use them to debug.
+    return Readback.readback_neutral(mod, ctx, value.neutral)
+  }
   if (value.kind === "Value.typecons") {
     return readback_typecons(mod, ctx, t, value)
   }
@@ -33,27 +48,17 @@ export function readback(
   if (value.kind === "Value.data") {
     return readback_data(mod, ctx, t, value)
   }
-  if (t.kind === "Value.union" && value.kind !== "Value.not_yet") {
+  if (t.kind === "Value.union") {
     return readback_union(mod, ctx, t, value)
   }
   if (t.kind === "Value.pi" && value.kind === "Value.case_fn") {
     return readback_case_fn(mod, ctx, t, value)
   }
-  if (t.kind === "Value.pi") {
+  if (t.kind === "Value.pi" && value.kind === "Value.fn") {
     return readback_fn(mod, ctx, t, value)
   }
   if (t.kind === "Value.cls") {
     return readback_obj(mod, ctx, t, value)
-  }
-  if (
-    t.kind === "Value.absurd" &&
-    value.kind === "Value.not_yet" &&
-    value.t.kind === "Value.absurd"
-  ) {
-    return Exp.the(
-      Exp.absurd,
-      Readback.readback_neutral(mod, ctx, value.neutral)
-    )
   }
   if (t.kind === "Value.equal" && value.kind === "Value.same") {
     return Exp.same
@@ -70,11 +75,6 @@ export function readback(
   }
   if (t.kind === "Value.type") {
     return t.typed_readback(value, { mod, ctx })
-  }
-  if (value.kind === "Value.not_yet") {
-    // NOTE t and value.t are ignored here,
-    //  maybe use them to debug.
-    return Readback.readback_neutral(mod, ctx, value.neutral)
   }
   throw new Trace.Trace(
     ut.aline(`

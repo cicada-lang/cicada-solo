@@ -1,11 +1,11 @@
-import * as Readback from "../readback"
-import * as Value from "../value"
-import * as Closure from "../value/closure"
-import * as Neutral from "../neutral"
-import * as Exp from "../exp"
-import * as Ctx from "../ctx"
-import * as Mod from "../mod"
-import * as ut from "../../ut"
+import * as Readback from "../../readback"
+import * as Value from "../../value"
+import * as Closure from "../../value/closure"
+import * as Neutral from "../../neutral"
+import * as Exp from "../../exp"
+import * as Ctx from "../../ctx"
+import * as Mod from "../../mod"
+import * as ut from "../../../ut"
 
 export function pi_readback_as_type(
   arg_t: Value.Value,

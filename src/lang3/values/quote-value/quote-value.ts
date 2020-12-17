@@ -1,5 +1,5 @@
-import { Ty } from "../ty"
-import { Quote } from "../exps/str/quote"
+import { Ty } from "../../ty"
+import { Quote } from "../../exps/str/quote"
 
 export type QuoteValue = Ty & {
   kind: "Value.quote"

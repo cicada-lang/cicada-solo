@@ -1,6 +1,6 @@
-import { Ty } from "../ty"
-import { Value } from "../value"
-import * as Closure from "../value/closure"
+import { Ty } from "../../ty"
+import { Value } from "../../value"
+import * as Closure from "../../value/closure"
 import { pi_readback_as_type } from "./pi-readback-as-type"
 
 export type PiTy = Ty & {

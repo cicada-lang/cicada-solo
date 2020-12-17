@@ -1,6 +1,6 @@
-import { Ty } from "../ty"
-import { Type } from "../exps/type"
-import { readback_type } from "./readback-type"
+import { Ty } from "../../ty"
+import { Type } from "../../exps/type"
+import { readback_type } from "../readback-type"
 
 export type TypeTy = Ty & {
   kind: "Value.type"
