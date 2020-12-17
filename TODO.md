@@ -92,20 +92,15 @@
 > refactoring Exp
 
 - [lang3] refactor `check_union_type` & `check_by_infer`
-
 - [lang3] re-place `Evaluate`'s functions
-
 - [lang3] fix the type casting in `src/lang3/exps/typecons/typecons-inferable.ts`
 - [lang3] fix the type casting in `src/lang3/exps/union/union.ts`
-
 - [lang3] fix the problem that `Exp` is a dependency hub.
 
 > refactoring Value
 
 - [lang3] `typed_readback` for `Value`
-
 - [lang3] `readback_neutral` for `Neutral`
-
 - [lang3] `readback_normal` for `Normal`
 
 > namespace
