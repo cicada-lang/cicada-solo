@@ -14,7 +14,7 @@ export function cls_readback_as_type(
   sat: Array<{ name: string; t: Value.Value; value: Value.Value }>,
   tel: Telescope.Telescope
 ): Readbackable {
-  return ReadbackAsType ({
+  return ReadbackAsType({
     readback_as_type: ({ mod, ctx }) => {
       const new_ctx = Ctx.clone(ctx)
       // NOTE side-effect on ctx

@@ -91,6 +91,9 @@
 
 > refactoring Value
 
+- [lang3] `Readbackable` -- fn
+- [lang3] `Readbackable` -- case_fn
+- [lang3] `Readbackable` -- obj
 - [lang3] no branches in `Readback.readback`
 - [lang3] `readback_neutral` for `Neutral`
 - [lang3] `readback_normal` for `Normal`
