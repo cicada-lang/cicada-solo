@@ -10,5 +10,5 @@ export const StrTy: StrTy = {
   typed_readback: (value, { mod, ctx }) => {
     throw new Error("TODO")
   },
-  readback_as_type: ({ mod, ctx }) => Str,
+  readback_as_type: (_) => Str,
 }

@@ -3,6 +3,7 @@ import { Value } from "../../value"
 import { Equal } from "../../exps/equal"
 import { readback_type } from "../readback-type"
 import * as Readback from "../../readback"
+import { Readbackable } from "../../readbackable"
 
 export type EqualTy = Ty & {
   kind: "Value.equal"
@@ -18,10 +19,8 @@ export function EqualTy(t: Value, from: Value, to: Value): EqualTy {
     from,
     to,
     typed_readback(value, { mod, ctx }) {
-      if (value.kind === "Value.same") {
-        return value.readback_as(this, { mod, ctx })
-      }
-      throw new Error("TODO")
+      // TODO
+      return (value as Readbackable).readback_as(this, { mod, ctx })
     },
     readback_as_type: ({ mod, ctx }) =>
       Equal(
