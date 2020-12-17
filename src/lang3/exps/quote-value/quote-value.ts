@@ -1,7 +1,7 @@
-import { Ty } from "../../ty"
+import { ReadbackAsType } from "../../readback-as-type"
 import { Quote } from "../quote"
 
-export type QuoteValue = Ty & {
+export type QuoteValue = ReadbackAsType & {
   kind: "Value.quote"
   str: string
 }
@@ -10,9 +10,8 @@ export function QuoteValue(str: string): QuoteValue {
   return {
     kind: "Value.quote",
     str,
-    typed_readback: (value, { mod, ctx }) => {
-      throw new Error("TODO")
-    },
-    readback_as_type: ({ mod, ctx }) => Quote(str),
+    ...ReadbackAsType({
+      readback_as_type: ({ mod, ctx }) => Quote(str),
+    }),
   }
 }
