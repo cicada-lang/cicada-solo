@@ -7,14 +7,14 @@ import * as Mod from "../mod"
 import * as Modpath from "../modpath"
 import * as Env from "../env"
 
-import { TypeTy } from "../values/type-ty"
-import { StrTy } from "../values/str-ty"
-import { AbsurdTy } from "../values/absurd-ty"
-import { EqualTy } from "../values/equal-ty"
-import { QuoteValue } from "../values/quote-value"
-import { ClsTy } from "../values/cls-ty"
-import { PiTy } from "../values/pi-ty"
-import { UnionTy } from "../values/union-ty"
+import { TypeTy } from "../exps/type-ty"
+import { StrTy } from "../exps/str-ty"
+import { AbsurdTy } from "../exps/absurd-ty"
+import { EqualTy } from "../exps/equal-ty"
+import { QuoteValue } from "../exps/quote-value"
+import { ClsTy } from "../exps/cls-ty"
+import { PiTy } from "../exps/pi-ty"
+import { UnionTy } from "../exps/union-ty"
 
 export type Value =
   | PiTy

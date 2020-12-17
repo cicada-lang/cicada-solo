@@ -3,7 +3,7 @@ import * as Pattern from "../../pattern"
 import * as ut from "../../../ut"
 import { case_fn_evaluable } from "./case-fn-evaluable"
 import { case_fn_checkable } from "./case-fn-checkable"
-import { Fn } from "./fn"
+import { Fn } from "../fn"
 
 export type CaseFn = Exp & {
   kind: "Exp.case_fn"

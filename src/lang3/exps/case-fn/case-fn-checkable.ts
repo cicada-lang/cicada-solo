@@ -1,4 +1,4 @@
-import { Fn } from "./fn"
+import { Fn } from "../fn"
 import { Checkable } from "../../checkable"
 import * as Check from "../../check"
 import * as Value from "../../value"
