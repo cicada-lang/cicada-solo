@@ -97,6 +97,8 @@
   - The same for Cls.
   - This is about eta-expansion,
     which make noraml forms more noraml.
+    - can we make noraml forms even more noraml
+      by using postfix notation?
   - How about CaseFn?
     where the target is the argument
     instead of the funciton.
