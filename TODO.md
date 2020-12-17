@@ -91,7 +91,8 @@
 
 > refactoring Value
 
-- [lang3] `Readbackable` -- pi-ty
+- [lang3] split `ReadbackAsType` from `Readbackable`
+- [lang3] use `ReadbackAsType` instead of `Readbackable` for -ty
 - [lang3] `Readbackable` -- quote-value
 - [lang3] `Readbackable` -- str-ty
 - [lang3] `Readbackable` -- type-ty
