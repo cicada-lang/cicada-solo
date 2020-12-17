@@ -91,10 +91,10 @@
 
 > refactoring Value
 
+- [lang3] inline `readback_type`
 - [lang3] `readback_neutral` for `Neutral`
 - [lang3] `readback_normal` for `Normal`
 - [lang3] `Value` as intersection type instead of union type
-- [lang3] no branches in `readback-type.ts`
 
 > refactoring Exp
 

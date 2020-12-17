@@ -22,13 +22,6 @@ export function readback(
   t: Value.Value,
   value: Value.Value
 ): Exp.Exp {
-  if (value.kind === "Value.absurd") {
-    return value.readbackability(t, { mod, ctx })
-  }
-  if (value.kind === "Value.cls") {
-    return value.readbackability(t, { mod, ctx })
-  }
-  // TODO
   if (
     t.kind === "Value.absurd" &&
     value.kind === "Value.not_yet" &&
