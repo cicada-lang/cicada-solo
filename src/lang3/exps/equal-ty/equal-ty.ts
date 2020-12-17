@@ -20,7 +20,7 @@ export function EqualTy(t: Value, from: Value, to: Value): EqualTy {
     to,
     typed_readback(value, { mod, ctx }) {
       // TODO
-      return (value as Readbackable).readback_as(this, { mod, ctx })
+      return (value as Readbackable).readbackability(this, { mod, ctx })
     },
     readback_as_type: ({ mod, ctx }) =>
       Equal(

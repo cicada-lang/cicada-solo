@@ -99,7 +99,8 @@
 
 > refactoring Value
 
-- [lang3] `readbackability` in `Readbackable` -- instead of `readback_as`
+- [lang3] `cls_readbackability` instead of `cls_readback_as`
+- [lang3] `Readbackable` -- ???
 - [lang3] `readback_neutral` for `Neutral`
 - [lang3] `readback_normal` for `Normal`
 - [lang3] `Value` as intersection type instead of union type

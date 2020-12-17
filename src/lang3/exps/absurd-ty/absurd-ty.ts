@@ -8,5 +8,5 @@ export type AbsurdTy = Readbackable & {
 
 export const AbsurdTy: AbsurdTy = {
   kind: "Value.absurd",
-  readback_as: (t, { mod, ctx }) => Absurd,
+  readbackability: (t, { mod, ctx }) => Absurd,
 }

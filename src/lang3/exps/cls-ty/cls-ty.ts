@@ -17,6 +17,6 @@ export function ClsTy(
     kind: "Value.cls",
     sat,
     tel,
-    readback_as: cls_readback_as(sat, tel),
+    readbackability: cls_readback_as(sat, tel),
   }
 }

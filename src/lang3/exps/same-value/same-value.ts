@@ -7,5 +7,5 @@ export type SameValue = Readbackable & {
 
 export const SameValue: SameValue = {
   kind: "Value.same",
-  readback_as: (_) => Same,
+  readbackability: (_) => Same,
 }

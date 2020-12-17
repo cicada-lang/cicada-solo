@@ -22,11 +22,10 @@ export function readback(
   value: Value.Value
 ): Exp.Exp {
   if (value.kind === "Value.absurd") {
-    return value.readback_as(t, { mod, ctx })
+    return value.readbackability(t, { mod, ctx })
   }
   if (value.kind === "Value.cls") {
-    console.log("><><><")
-    return value.readback_as(t, { mod, ctx })
+    return value.readbackability(t, { mod, ctx })
   }
   // TODO
   if (
