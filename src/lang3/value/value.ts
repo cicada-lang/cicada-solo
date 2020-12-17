@@ -14,6 +14,7 @@ import { EqualTy } from "../values/equal-ty"
 import { QuoteValue } from "../values/quote-value"
 import { ClsTy } from "../values/cls-ty"
 import { PiTy } from "../values/pi-ty"
+import { UnionTy } from "../values/union-ty"
 
 export type Value =
   | PiTy
@@ -26,7 +27,7 @@ export type Value =
   | AbsurdTy
   | StrTy
   | QuoteValue
-  | union
+  | UnionTy
   | typecons
   | datatype
   | datacons
@@ -91,17 +92,8 @@ export const str = StrTy
 export type quote = QuoteValue
 export const quote = QuoteValue
 
-export type union = {
-  kind: "Value.union"
-  left: Value
-  right: Value
-}
-
-export const union = (left: Value, right: Value): union => ({
-  kind: "Value.union",
-  left,
-  right,
-})
+export type union = UnionTy
+export const union = UnionTy
 
 export type typecons = {
   kind: "Value.typecons"

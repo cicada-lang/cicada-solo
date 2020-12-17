@@ -31,10 +31,7 @@ export function readback_type(
     return value.readback_as_type({ mod, ctx })
   }
   if (value.kind === "Value.union") {
-    return Exp.union(
-      Readback.readback(mod, ctx, Value.type, value.left),
-      Readback.readback(mod, ctx, Value.type, value.right)
-    )
+    return value.readback_as_type({ mod, ctx })
   }
   if (value.kind === "Value.type") {
     return value.readback_as_type({ mod, ctx })
