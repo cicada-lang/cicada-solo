@@ -7,7 +7,7 @@ export type StrTy = Ty & {
 
 export const StrTy: StrTy = {
   kind: "Value.str",
-  typed_readback(value, { mod, ctx }) {
+  typed_readback: (value, { mod, ctx }) => {
     throw new Error("TODO")
   },
   readback_as_type: ({ mod, ctx }) => Str,

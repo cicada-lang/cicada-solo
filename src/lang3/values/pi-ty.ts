@@ -14,7 +14,7 @@ export function PiTy(arg_t: Value, ret_t_cl: Closure.Closure): PiTy {
     kind: "Value.pi",
     arg_t,
     ret_t_cl,
-    typed_readback(value, { mod, ctx }) {
+    typed_readback: (value, { mod, ctx }) => {
       throw new Error("TODO")
     },
     readback_as_type: pi_readback_as_type(arg_t, ret_t_cl),

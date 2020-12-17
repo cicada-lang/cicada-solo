@@ -17,7 +17,7 @@ export function ClsTy(
     kind: "Value.cls",
     sat,
     tel,
-    typed_readback(value, { mod, ctx }) {
+    typed_readback: (value, { mod, ctx }) => {
       throw new Error("TODO")
     },
     readback_as_type: cls_readback_as_type(sat, tel),

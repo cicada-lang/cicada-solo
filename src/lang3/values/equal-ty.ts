@@ -17,7 +17,7 @@ export function EqualTy(t: Value, from: Value, to: Value): EqualTy {
     t,
     from,
     to,
-    typed_readback(value, { mod, ctx }) {
+    typed_readback: (value, { mod, ctx }) => {
       throw new Error("TODO")
     },
     readback_as_type: ({ mod, ctx }) =>

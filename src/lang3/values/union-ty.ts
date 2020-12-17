@@ -14,7 +14,7 @@ export function UnionTy(left: Value, right: Value): UnionTy {
     kind: "Value.union",
     left,
     right,
-    typed_readback(value, { mod, ctx }) {
+    typed_readback: (value, { mod, ctx }) => {
       throw new Error("TODO")
     },
     readback_as_type: ({ mod, ctx }) =>

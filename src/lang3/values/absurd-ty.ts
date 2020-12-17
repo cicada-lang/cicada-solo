@@ -7,7 +7,7 @@ export type AbsurdTy = Ty & {
 
 export const AbsurdTy: AbsurdTy = {
   kind: "Value.absurd",
-  typed_readback(value, { mod, ctx }) {
+  typed_readback: (value, { mod, ctx }) => {
     throw new Error("TODO")
   },
   readback_as_type: ({ mod, ctx }) => Absurd,

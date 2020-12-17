@@ -10,7 +10,7 @@ export function QuoteValue(str: string): QuoteValue {
   return {
     kind: "Value.quote",
     str,
-    typed_readback(value, { mod, ctx }) {
+    typed_readback: (value, { mod, ctx }) => {
       throw new Error("TODO")
     },
     readback_as_type: ({ mod, ctx }) => Quote(str),

@@ -8,8 +8,6 @@ export type TypeTy = Ty & {
 
 export const TypeTy: TypeTy = {
   kind: "Value.type",
-  typed_readback(value, { mod, ctx }) {
-    return readback_type(mod, ctx, value)
-  },
+  typed_readback: (value, { mod, ctx }) => readback_type(mod, ctx, value),
   readback_as_type: ({ mod, ctx }) => Type,
 }
