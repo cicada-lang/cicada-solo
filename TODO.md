@@ -99,9 +99,7 @@
 
 > refactoring Value
 
-- [lang3] `Readbackable` -- `same-value.ts`
-- [lang3] `Ty.typed_readback` for `equal-ty.ts`
-- [lang3] `Ty.typed_readback` for ?
+- [lang3] `Ty.typed_readback` for ???
 - [lang3] `readback_neutral` for `Neutral`
 - [lang3] `readback_normal` for `Normal`
 - [lang3] `Value` as intersection type instead of union type

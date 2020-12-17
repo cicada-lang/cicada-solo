@@ -11,6 +11,7 @@ import { TypeTy } from "../exps/type-ty"
 import { StrTy } from "../exps/str-ty"
 import { AbsurdTy } from "../exps/absurd-ty"
 import { EqualTy } from "../exps/equal-ty"
+import { SameValue } from "../exps/same-value"
 import { QuoteValue } from "../exps/quote-value"
 import { ClsTy } from "../exps/cls-ty"
 import { PiTy } from "../exps/pi-ty"
@@ -23,7 +24,7 @@ export type Value =
   | ClsTy
   | obj
   | EqualTy
-  | same
+  | SameValue
   | AbsurdTy
   | StrTy
   | QuoteValue
@@ -75,13 +76,8 @@ export const obj = (properties: Map<string, Value>): obj => ({
 export type equal = EqualTy
 export const equal = EqualTy
 
-export type same = {
-  kind: "Value.same"
-}
-
-export const same: same = {
-  kind: "Value.same",
-}
+export type same = SameValue
+export const same = SameValue
 
 export type absurd = AbsurdTy
 export const absurd = AbsurdTy
