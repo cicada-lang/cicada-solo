@@ -10,7 +10,7 @@ import * as Env from "../../env"
 import * as Mod from "../../mod"
 import { ReadbackAsType } from "../../readback-as-type"
 
-export function cls_readbackable(
+export function cls_readback_as_type(
   sat: Array<{ name: string; t: Value.Value; value: Value.Value }>,
   tel: Telescope.Telescope
 ): ReadbackAsType {

@@ -8,7 +8,7 @@ import * as Mod from "../../mod"
 import * as ut from "../../../ut"
 import { ReadbackAsType } from "../../readback-as-type"
 
-export function pi_readbackable(
+export function pi_readback_as_type(
   arg_t: Value.Value,
   ret_t_cl: Closure.Closure
 ): ReadbackAsType {

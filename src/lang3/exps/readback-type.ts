@@ -18,24 +18,16 @@ export function readback_type(
     return value.readback_as_type({ mod, ctx })
   }
   if (value.kind === "Value.absurd") {
-    return value.readbackability(Value.type, { mod, ctx })
-    // TODO
-    // return value.readback_as_type({ mod, ctx })
+    return value.readback_as_type({ mod, ctx })
   }
   if (value.kind === "Value.equal") {
-    return value.readbackability(Value.type, { mod, ctx })
-    // TODO
-    // return value.readback_as_type({ mod, ctx })
+    return value.readback_as_type({ mod, ctx })
   }
   if (value.kind === "Value.cls") {
-    return value.readbackability(Value.type, { mod, ctx })
-    // TODO
-    // return value.readback_as_type({ mod, ctx })
+    return value.readback_as_type({ mod, ctx })
   }
   if (value.kind === "Value.pi") {
-    return value.readbackability(Value.type, { mod, ctx })
-    // TODO
-    // return value.readback_as_type({ mod, ctx })
+    return value.readback_as_type({ mod, ctx })
   }
   if (value.kind === "Value.union") {
     return value.readback_as_type({ mod, ctx })
