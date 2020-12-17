@@ -99,8 +99,6 @@
 
 > refactoring Value
 
-- [lang3] `Readbackable`
-  - `readback_as` for `Value` -- second dispatch of a double dispatch
 - [lang3] `Readbackable` -- `same-value.ts`
 - [lang3] `Ty.typed_readback` for `equal-ty.ts`
 - [lang3] `Ty.typed_readback` for ?
