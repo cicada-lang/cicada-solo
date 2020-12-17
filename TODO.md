@@ -120,6 +120,7 @@
 
 > refactoring Exp
 
+- [lang3] maybe inline `evaluator` -- just like we use no `checker` or `inferer` or `readbacker`
 - [lang3] refactor `check_union_type` & `check_by_infer`
 - [lang3] re-place `Evaluate`'s functions
 - [lang3] fix the type casting in `src/lang3/exps/typecons/typecons-inferable.ts`
