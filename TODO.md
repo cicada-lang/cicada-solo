@@ -102,7 +102,6 @@
 
 > refactoring Value
 
-- [lang3] `Ty` for `Value.pi` use `readback_as_type` in `readback/readback-type.ts`
 - [lang3] `Ty` for `Value.union` use `readback_as_type` in `readback/readback-type.ts`
 
 - [lang3] `typed_readback` for `Value`

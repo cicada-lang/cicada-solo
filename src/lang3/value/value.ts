@@ -13,9 +13,10 @@ import { AbsurdTy } from "../values/absurd-ty"
 import { EqualTy } from "../values/equal-ty"
 import { QuoteValue } from "../values/quote-value"
 import { ClsTy } from "../values/cls-ty"
+import { PiTy } from "../values/pi-ty"
 
 export type Value =
-  | pi
+  | PiTy
   | fn
   | case_fn
   | ClsTy
@@ -34,17 +35,8 @@ export type Value =
   | mod
   | not_yet
 
-export type pi = {
-  kind: "Value.pi"
-  arg_t: Value
-  ret_t_cl: Closure.Closure
-}
-
-export const pi = (arg_t: Value, ret_t_cl: Closure.Closure): pi => ({
-  kind: "Value.pi",
-  arg_t,
-  ret_t_cl,
-})
+export type pi = PiTy
+export const pi = PiTy
 
 export type fn = {
   kind: "Value.fn"

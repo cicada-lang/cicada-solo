@@ -6,7 +6,6 @@ import * as Ctx from "../ctx"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
-import { readback_pi } from "./readback-pi"
 
 export function readback_type(
   mod: Mod.Mod,
@@ -28,19 +27,23 @@ export function readback_type(
   if (value.kind === "Value.cls") {
     return value.readback_as_type({ mod, ctx })
   }
-  if (value.kind === "Value.pi") return readback_pi(mod, ctx, value)
-  if (value.kind === "Value.union")
+  if (value.kind === "Value.pi") {
+    return value.readback_as_type({ mod, ctx })
+  }
+  if (value.kind === "Value.union") {
     return Exp.union(
       Readback.readback(mod, ctx, Value.type, value.left),
       Readback.readback(mod, ctx, Value.type, value.right)
     )
+  }
   if (value.kind === "Value.type") {
     return value.readback_as_type({ mod, ctx })
   }
-  if (value.kind === "Value.not_yet")
+  if (value.kind === "Value.not_yet") {
     // NOTE t and value.t are ignored here,
     //  maybe use them to debug.
     return Readback.readback_neutral(mod, ctx, value.neutral)
+  }
   throw readback_type_error(value)
 }
 
