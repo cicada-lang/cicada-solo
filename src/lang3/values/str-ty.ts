@@ -1,8 +1,5 @@
 import { Ty } from "../ty"
-import * as Mod from "../mod"
-import * as Ctx from "../ctx"
 import { Str } from "../exps/str"
-import { readback_type } from "./readback-type"
 
 export type StrTy = Ty & {
   kind: "Value.str"

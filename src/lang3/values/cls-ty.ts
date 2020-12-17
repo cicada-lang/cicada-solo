@@ -1,10 +1,6 @@
 import { Ty } from "../ty"
 import { Value } from "../value"
 import * as Telescope from "../value/telescope"
-import * as Mod from "../mod"
-import * as Ctx from "../ctx"
-import { Quote } from "../exps/str/quote"
-import { readback_type } from "./readback-type"
 import { cls_readback_as_type } from "./cls-readback-as-type"
 
 export type ClsTy = Ty & {

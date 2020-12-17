@@ -1,9 +1,5 @@
 import { Ty } from "../ty"
 import { Value } from "../value"
-import * as Closure from "../value/closure"
-import * as Mod from "../mod"
-import * as Ctx from "../ctx"
-import { Quote } from "../exps/str/quote"
 import { Union } from "../exps/union"
 import { readback_type } from "./readback-type"
 
