@@ -4,7 +4,7 @@ import * as Closure from "../value/closure"
 import * as Mod from "../mod"
 import * as Ctx from "../ctx"
 import { Quote } from "../exps/str/quote"
-import { readback_type } from "../readback/readback-type"
+import { readback_type } from "./readback-type"
 import { pi_readback_as_type } from "./pi-readback-as-type"
 
 export type PiTy = Ty & {

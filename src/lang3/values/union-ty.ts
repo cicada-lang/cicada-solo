@@ -5,7 +5,7 @@ import * as Mod from "../mod"
 import * as Ctx from "../ctx"
 import { Quote } from "../exps/str/quote"
 import { Union } from "../exps/union"
-import { readback_type } from "../readback/readback-type"
+import { readback_type } from "./readback-type"
 
 export type UnionTy = Ty & {
   kind: "Value.union"

@@ -2,7 +2,7 @@ import { Ty } from "../ty"
 import * as Mod from "../mod"
 import * as Ctx from "../ctx"
 import { Type } from "../exps/type"
-import { readback_type } from "../readback/readback-type"
+import { readback_type } from "./readback-type"
 
 export type TypeTy = Ty & {
   kind: "Value.type"

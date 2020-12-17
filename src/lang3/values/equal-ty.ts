@@ -3,7 +3,7 @@ import { Value } from "../value"
 import * as Mod from "../mod"
 import * as Ctx from "../ctx"
 import { Equal } from "../exps/equal"
-import { readback_type } from "../readback/readback-type"
+import { readback_type } from "./readback-type"
 import * as Readback from "../readback"
 
 export type EqualTy = Ty & {
