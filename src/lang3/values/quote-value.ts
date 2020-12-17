@@ -16,8 +16,6 @@ export function QuoteValue(str: string): QuoteValue {
     typed_readback(value, { mod, ctx }) {
       throw new Error("TODO")
     },
-    readback_as_type({ mod, ctx }) {
-      return Quote(str)
-    },
+    readback_as_type: ({ mod, ctx }) => Quote(str),
   }
 }

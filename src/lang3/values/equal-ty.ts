@@ -22,12 +22,11 @@ export function EqualTy(t: Value, from: Value, to: Value): EqualTy {
     typed_readback(value, { mod, ctx }) {
       throw new Error("TODO")
     },
-    readback_as_type({ mod, ctx }) {
-      return Equal(
+    readback_as_type: ({ mod, ctx }) =>
+      Equal(
         readback_type(mod, ctx, t),
         Readback.readback(mod, ctx, t, from),
         Readback.readback(mod, ctx, t, to)
-      )
-    },
+      ),
   }
 }

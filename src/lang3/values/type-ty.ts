@@ -13,7 +13,5 @@ export const TypeTy: TypeTy = {
   typed_readback(value, { mod, ctx }) {
     return readback_type(mod, ctx, value)
   },
-  readback_as_type({ mod, ctx }) {
-    return Type
-  },
+  readback_as_type: ({ mod, ctx }) => Type,
 }

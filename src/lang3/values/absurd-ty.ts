@@ -13,7 +13,5 @@ export const AbsurdTy: AbsurdTy = {
   typed_readback(value, { mod, ctx }) {
     throw new Error("TODO")
   },
-  readback_as_type({ mod, ctx }) {
-    return Absurd
-  },
+  readback_as_type: ({ mod, ctx }) => Absurd,
 }
