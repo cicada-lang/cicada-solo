@@ -103,6 +103,8 @@
   - Maybe we do not need to "dispatch over type in the readback",
     but we do need to handle eta-expansion before `NotYetValue` other cases.
   - Absurd is also a special case, which must goes before `NotYetValue`.
+  - When the Pi is the type of datacons or typecons,
+    it is again a special case.
 
 - We do not understand union type well,
   it seems we need to handle it at so many places.
