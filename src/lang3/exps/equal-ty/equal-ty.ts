@@ -1,4 +1,3 @@
-import { Ty } from "../../ty"
 import { Value } from "../../value"
 import { Equal } from "../../exps/equal"
 import { readback_type } from "../readback-type"
