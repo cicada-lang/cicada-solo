@@ -1,9 +1,9 @@
-import { Readbackable } from "../../readbackable"
+import { ReadbackAsType } from "../../readback-as-type"
 import { Value } from "../../value"
 import * as Telescope from "../../value/telescope"
 import { cls_readbackable } from "./cls-readbackable"
 
-export type ClsTy = Readbackable & {
+export type ClsTy = ReadbackAsType & {
   kind: "Value.cls"
   sat: Array<{ name: string; t: Value; value: Value }>
   tel: Telescope.Telescope

@@ -8,12 +8,12 @@ import * as Exp from "../../exp"
 import * as Ctx from "../../ctx"
 import * as Env from "../../env"
 import * as Mod from "../../mod"
-import { Readbackable, ReadbackAsType } from "../../readbackable"
+import { ReadbackAsType } from "../../readback-as-type"
 
 export function cls_readbackable(
   sat: Array<{ name: string; t: Value.Value; value: Value.Value }>,
   tel: Telescope.Telescope
-): Readbackable {
+): ReadbackAsType {
   return ReadbackAsType ({
     readback_as_type: ({ mod, ctx }) => {
       const new_ctx = Ctx.clone(ctx)

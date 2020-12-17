@@ -3,9 +3,9 @@ import { Value } from "../../value"
 import { Equal } from "../../exps/equal"
 import { readback_type } from "../readback-type"
 import * as Readback from "../../readback"
-import { Readbackable, ReadbackAsType } from "../../readbackable"
+import { ReadbackAsType } from "../../readback-as-type"
 
-export type EqualTy = Readbackable & {
+export type EqualTy = ReadbackAsType & {
   kind: "Value.equal"
   t: Value
   from: Value
