@@ -2,7 +2,8 @@ import { ReadbackAsType } from "../../readback-as-type"
 import { Readbackable } from "../../readbackable"
 import { Value } from "../../value"
 import { Union } from "../../exps/union"
-import { readback_type } from "../readback-type"
+import { TypeTy } from "../../exps/type-ty"
+import * as Readback from "../../readback"
 
 export type UnionTy = Readbackable & {
   kind: "Value.union"
@@ -17,8 +18,10 @@ export function UnionTy(left: Value, right: Value): UnionTy {
     right,
     ...Readbackable({
       readbackability: (t, { mod, ctx }) =>
-        Union(readback_type(mod, ctx, left), readback_type(mod, ctx, right)),
-        // Union(left.readbackability(t, { mod, ctx }), right.readbackability(t, { mod, ctx })),
+        Union(
+          Readback.readback(mod, ctx, TypeTy, left),
+          Readback.readback(mod, ctx, TypeTy, right)
+        ),
     }),
   }
 }

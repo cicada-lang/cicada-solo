@@ -14,7 +14,6 @@ import { readback_typecons } from "./readback-typecons"
 import { readback_datatype } from "./readback-datatype"
 import { readback_datacons } from "./readback-datacons"
 import { readback_data } from "./readback-data"
-import { readback_type } from "../exps/readback-type"
 
 export function readback(
   mod: Mod.Mod,
@@ -74,8 +73,29 @@ export function readback(
   ) {
     return Exp.quote(value.str)
   }
-  if (t.kind === "Value.type") {
-    return readback_type(mod, ctx, value)
+  if (t.kind === "Value.type" && value.kind === "Value.str") {
+    return value.readbackability(t, { mod, ctx })
+  }
+  if (t.kind === "Value.type" && value.kind === "Value.quote") {
+    return value.readbackability(t, { mod, ctx })
+  }
+  if (t.kind === "Value.type" && value.kind === "Value.absurd") {
+    return value.readbackability(t, { mod, ctx })
+  }
+  if (t.kind === "Value.type" && value.kind === "Value.equal") {
+    return value.readbackability(t, { mod, ctx })
+  }
+  if (t.kind === "Value.type" && value.kind === "Value.cls") {
+    return value.readbackability(t, { mod, ctx })
+  }
+  if (t.kind === "Value.type" && value.kind === "Value.pi") {
+    return value.readbackability(t, { mod, ctx })
+  }
+  if (t.kind === "Value.type" && value.kind === "Value.union") {
+    return value.readbackability(t, { mod, ctx })
+  }
+  if (t.kind === "Value.type" && value.kind === "Value.type") {
+    return value.readbackability(t, { mod, ctx })
   }
   throw new Trace.Trace(
     ut.aline(`
