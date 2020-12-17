@@ -21,7 +21,7 @@ export function readback_type(
     return value.readbackability(Value.type, { mod, ctx })
   }
   if (value.kind === "Value.equal") {
-    return value.readback_as_type({ mod, ctx })
+    return value.readbackability(Value.type, { mod, ctx })
   }
   if (value.kind === "Value.cls") {
     return value.readbackability(Value.type, { mod, ctx })

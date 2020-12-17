@@ -1,5 +1,5 @@
 import { Ty } from "../../ty"
-import { Readbackable } from "../../readbackable"
+import { Readbackable, ReadbackAsType } from "../../readbackable"
 import { Absurd } from "../../exps/absurd"
 
 export type AbsurdTy = Readbackable & {
@@ -8,5 +8,7 @@ export type AbsurdTy = Readbackable & {
 
 export const AbsurdTy: AbsurdTy = {
   kind: "Value.absurd",
-  readbackability: (t, { mod, ctx }) => Absurd,
+  ...ReadbackAsType({
+    readback_as_type: ({ mod, ctx }) => Absurd,
+  }),
 }

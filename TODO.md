@@ -89,6 +89,19 @@
 
 # lang3
 
+> refactoring Value
+
+- [lang3] `Readbackable` -- pi-ty
+- [lang3] `Readbackable` -- quote-value
+- [lang3] `Readbackable` -- str-ty
+- [lang3] `Readbackable` -- type-ty
+- [lang3] `Readbackable` -- union-ty
+- [lang3] no `Ty`
+- [lang3] `readback_neutral` for `Neutral`
+- [lang3] `readback_normal` for `Normal`
+- [lang3] `Value` as intersection type instead of union type
+- [lang3] no branches in `readback-type.ts`
+
 > refactoring Exp
 
 - [lang3] refactor `check_union_type` & `check_by_infer`
@@ -96,14 +109,6 @@
 - [lang3] fix the type casting in `src/lang3/exps/typecons/typecons-inferable.ts`
 - [lang3] fix the type casting in `src/lang3/exps/union/union.ts`
 - [lang3] fix the problem that `Exp` is a dependency hub.
-
-> refactoring Value
-
-- [lang3] `Readbackable` -- ???
-- [lang3] `readback_neutral` for `Neutral`
-- [lang3] `readback_normal` for `Normal`
-- [lang3] `Value` as intersection type instead of union type
-- [lang3] no branches in `readback-type.ts`
 
 > namespace
 

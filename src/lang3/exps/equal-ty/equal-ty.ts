@@ -3,9 +3,9 @@ import { Value } from "../../value"
 import { Equal } from "../../exps/equal"
 import { readback_type } from "../readback-type"
 import * as Readback from "../../readback"
-import { Readbackable } from "../../readbackable"
+import { Readbackable, ReadbackAsType } from "../../readbackable"
 
-export type EqualTy = Ty & {
+export type EqualTy = Readbackable & {
   kind: "Value.equal"
   t: Value
   from: Value
@@ -18,15 +18,13 @@ export function EqualTy(t: Value, from: Value, to: Value): EqualTy {
     t,
     from,
     to,
-    typed_readback(value, { mod, ctx }) {
-      // TODO
-      return (value as Readbackable).readbackability(this, { mod, ctx })
-    },
-    readback_as_type: ({ mod, ctx }) =>
-      Equal(
-        readback_type(mod, ctx, t),
-        Readback.readback(mod, ctx, t, from),
-        Readback.readback(mod, ctx, t, to)
-      ),
+    ...ReadbackAsType({
+      readback_as_type: ({ mod, ctx }) =>
+        Equal(
+          readback_type(mod, ctx, t),
+          Readback.readback(mod, ctx, t, from),
+          Readback.readback(mod, ctx, t, to)
+        ),
+    }),
   }
 }

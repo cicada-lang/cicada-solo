@@ -68,7 +68,7 @@ export function readback(
     return readback_obj(mod, ctx, t, value)
   }
   if (t.kind === "Value.equal" && value.kind === "Value.same") {
-    return t.typed_readback(value, { mod, ctx })
+    return value.readbackability(t, { mod, ctx })
   }
   if (t.kind === "Value.str" && value.kind === "Value.quote") {
     return Exp.quote(value.str)
