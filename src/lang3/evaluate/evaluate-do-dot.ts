@@ -79,6 +79,8 @@ export function do_dot_not_yet(
       Neutral.dot(not_yet.neutral, name)
     )
 
+  // TODO Handle union type here
+
   throw new Trace.Trace(
     Explain.explain_elim_target_type_mismatch({
       elim: "dot",

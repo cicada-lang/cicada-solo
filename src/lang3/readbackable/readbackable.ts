@@ -2,10 +2,8 @@ import { Exp } from "../exp"
 import { Value } from "../value"
 import { Mod } from "../mod"
 import { Ctx } from "../ctx"
-
-// NOTE We need to do typed readback,
-//   take Pi for example, we can not only readback Fn,
-//   but also NotYetValue value that shall be Fn.
+import * as Trace from "../../trace"
+import * as ut from "../../ut"
 
 export type Readbackable = {
   readbackability: (t: Value, the: { mod: Mod; ctx: Ctx }) => Exp
@@ -21,6 +19,13 @@ export function ReadbackAsType(the: {
   readback_as_type: (the: { mod: Mod; ctx: Ctx }) => Exp
 }): Readbackable {
   return {
-    readbackability: (_, { mod, ctx }) => the.readback_as_type({ mod, ctx }),
+    readbackability: (t, { mod, ctx }) => {
+      if (t.kind === "Value.type") {
+        return the.readback_as_type({ mod, ctx })
+      }
+      throw new Trace.Trace(
+        `Expecting t to be Value.type\n` + `- t: ${ut.inspect(t)}\n`
+      )
+    },
   }
 }

@@ -22,10 +22,12 @@ export function readback_union(
         if (right_error instanceof Trace.Trace) {
           throw new Trace.Trace(
             ut.aline(`
-         |I can not readback value: ${ut.inspect(value.kind)},
-         |union type left: ${ut.inspect(union.left.kind)}.
-         |union type right: ${ut.inspect(union.right.kind)}.
-         |`)
+              |I can not readback value: ${ut.inspect(value.kind)}
+              |union type left: ${ut.inspect(union.left.kind)}
+              |union type right: ${ut.inspect(union.right.kind)}
+              |left_error: ${ut.indent(left_error.message)}
+              |right_error: ${ut.indent(right_error.message)}
+              |`)
           )
         } else {
           throw right_error

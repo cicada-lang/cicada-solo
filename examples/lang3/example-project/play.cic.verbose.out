@@ -2,14 +2,14 @@
 
 "hi ^-^/"
 {
-  List = List
+  List = (_) => List(_)
   Nat = Nat
 }
 Nat
-List
-List
-List.null
-List.cons
+(_) => List(_)
+(_) => List(_)
+(T) => List.null(T)
+(T) => (head) => (tail) => List.cons(T)(head)(tail)
 List.null(String)
 List.cons(String)("abc")(List.null(String))
 Nat
@@ -19,9 +19,9 @@ Nat.add1(Nat.zero)
 // @module cicada.datatype
 // @file "/home/xyh/cicada/examples/lang3/example-project/datatype/list.cic"
 
-List
-List.null
-List.cons
+(_) => List(_)
+(T) => List.null(T)
+(T) => (head) => (tail) => List.cons(T)(head)(tail)
 List.null(String)
 List.cons(String)("abc")(List.null(String))
 Nat
@@ -34,9 +34,9 @@ Nat.add1(Nat.zero)
 Nat
 Nat.zero
 Nat.add1(Nat.zero)
-List
-List.null
-List.cons
+(_) => List(_)
+(T) => List.null(T)
+(T) => (head) => (tail) => List.cons(T)(head)(tail)
 List.null(String)
 List.cons(String)("abc")(List.null(String))
 
@@ -44,14 +44,14 @@ List.cons(String)("abc")(List.null(String))
 
 "hi ^-^/"
 {
-  List = List
+  List = (_) => List(_)
   Nat = Nat
 }
 Nat
-List
-List
-List.null
-List.cons
+(_) => List(_)
+(_) => List(_)
+(T) => List.null(T)
+(T) => (head) => (tail) => List.cons(T)(head)(tail)
 List.null(String)
 List.cons(String)("abc")(List.null(String))
 Nat

@@ -13,7 +13,7 @@ export function readback_obj(
   ctx: Ctx.Ctx,
   cls: Value.cls,
   value: Value.Value
-): Exp.Exp {
+): Exp.obj {
   // NOTE η-expanded every value with cls type to obj.
   const properties = new Map()
   readback_properties_from_sat(mod, ctx, properties, cls.sat, value)

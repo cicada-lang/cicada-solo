@@ -91,6 +91,23 @@
 
 > refactoring Value
 
+- We need to do typed readback,
+  take Pi for example, we can not only readback Fn,
+  but also `NotYetValue` value that shall be Fn.
+  - The same for Cls.
+  - This is about eta-expansion,
+    which make noraml forms more noraml.
+  - How about CaseFn?
+    where the target is the argument
+    instead of the funciton.
+  - Maybe we do not need to "dispatch over type in the readback",
+    but we do need to handle eta-expansion before `NotYetValue` other cases.
+  - Absurd is also a special case, which must goes before `NotYetValue`.
+
+- We do not understand union type well,
+  it seems we need to handle it at so many places.
+  - [bug] examples/lang3/out/datatype-vec.cic
+
 - [lang3] `Readbackable` -- `FnValue` -- fn-value
 - [lang3] `Readbackable` -- `CaseFnValue` -- case-fn-value
 - [lang3] `Readbackable` -- `ObjValue` -- obj-value
