@@ -130,9 +130,18 @@
 
 > refactoring `Exp`
 
-- [lang3] maybe inline `evaluator` -- just like we use no `checker` or `inferer` or `readbacker`
+- [lang3] re-place `do_replace`
+- [lang3] re-place `do_dot`
+- [lang3] re-place `do_ap`
+
+- [lang3] inline `evaluator` -- just like we use no `checker` or `inferer` or `readbacker`
+
+- [lang3] `evaluate` in `evaluable.ts`
+- [lang3] `check` in `checkable.ts`
+- [lang3] `infer` in `inferable.ts`
+
 - [lang3] refactor `check_union_type` & `check_by_infer`
-- [lang3] re-place `Evaluate`'s functions
+
 - [lang3] fix the type casting in `src/lang3/exps/typecons/typecons-inferable.ts`
 - [lang3] fix the type casting in `src/lang3/exps/union/union.ts`
 - [lang3] fix the problem that `Exp` is a dependency hub.
