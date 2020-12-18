@@ -69,6 +69,10 @@
 
 # lang2
 
+> naming convention
+
+- [lang2] maybe we should change the naming convention to go without dot.
+
 > refactoring `Exp`
 
 > refactoring `Value`
