@@ -130,7 +130,6 @@
 
 > refactoring `Exp`
 
-- [lang3] re-place `do_replace`
 - [lang3] re-place `do_dot`
 - [lang3] re-place `do_ap`
 
