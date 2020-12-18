@@ -132,6 +132,7 @@
 
 - [lang3] `check` in `checkable.ts`
 - [lang3] `infer` in `inferable.ts`
+- [lang3] `readback` in `readbackable.ts`
 
 - [lang3] refactor `check_union_type` & `check_by_infer`
 
