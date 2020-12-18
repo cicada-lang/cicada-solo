@@ -2,7 +2,7 @@ import { Evaluable } from "../../evaluable"
 import { Exp } from "../../exp"
 import * as Stmt from "../../stmt"
 import * as Env from "../../env"
-import { evaluate } from "../../evaluable"
+import { evaluate } from "../../evaluate"
 
 export const begin_evaluable = (stmts: Array<Stmt.Stmt>, ret: Exp) =>
   Evaluable({

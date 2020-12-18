@@ -1,4 +1,4 @@
-import { evaluate } from "../evaluable"
+import { evaluate } from "../evaluate"
 import * as Readback from "../readback"
 import * as Value from "../value"
 import * as Exp from "../exp"

@@ -1,4 +1,4 @@
-import { evaluate } from "../../evaluable"
+import { evaluate } from "../../evaluate"
 import * as Telescope from "../telescope"
 import * as Env from "../../env"
 import * as Mod from "../../mod"

@@ -5,7 +5,7 @@ import * as Value from "../../value"
 import { Normal } from "../../normal"
 import * as Neutral from "../../neutral"
 import * as Trace from "../../../trace"
-import { evaluate } from "../../evaluable"
+import { evaluate } from "../../evaluate"
 
 export const absurd_ind_evaluable = (target: Exp, motive: Exp) =>
   Evaluable({

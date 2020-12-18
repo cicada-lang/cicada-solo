@@ -7,7 +7,7 @@ import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { do_ap } from "../exps/ap"
-import { evaluate } from "../evaluable"
+import { evaluate } from "../evaluate"
 
 export function to_value(
   mod: Mod.Mod,

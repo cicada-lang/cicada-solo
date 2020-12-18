@@ -1,4 +1,4 @@
-import { evaluate } from "../../evaluable"
+import { evaluate } from "../../evaluate"
 import * as Closure from "../closure"
 import * as Value from "../../value"
 import * as Pattern from "../../pattern"

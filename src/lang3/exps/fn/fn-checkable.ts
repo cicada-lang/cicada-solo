@@ -1,5 +1,5 @@
 import { Var } from "../var"
-import { evaluate } from "../../evaluable"
+import { evaluate } from "../../evaluate"
 import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 

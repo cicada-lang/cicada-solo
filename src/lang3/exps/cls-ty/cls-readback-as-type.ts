@@ -1,4 +1,4 @@
-import { evaluate } from "../../evaluable"
+import { evaluate } from "../../evaluate"
 import { EvaluationMode } from "../../evaluable"
 import * as Telescope from "../../value/telescope"
 import * as Readback from "../../readback"

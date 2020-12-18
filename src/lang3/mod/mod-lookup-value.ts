@@ -1,4 +1,4 @@
-import { evaluate } from "../evaluable"
+import { evaluate } from "../evaluate"
 import * as Mod from "../mod"
 import * as Env from "../env"
 import * as Exp from "../exp"

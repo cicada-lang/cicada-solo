@@ -1,5 +1,5 @@
 import { Inferable } from "../../inferable"
-import { evaluate } from "../../evaluable"
+import { evaluate } from "../../evaluate"
 import { Exp } from "../../exp"
 import * as Value from "../../value"
 import * as Ctx from "../../ctx"

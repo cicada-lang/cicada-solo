@@ -1,5 +1,5 @@
 import { Evaluable } from "../../evaluable"
-import { evaluate } from "../../evaluable"
+import { evaluate } from "../../evaluate"
 import { Exp } from "../../exp"
 import * as Value from "../../value"
 import * as Env from "../../env"
