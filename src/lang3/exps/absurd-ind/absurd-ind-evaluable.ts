@@ -1,6 +1,6 @@
 import { Evaluable } from "../../evaluable"
 import { Exp } from "../../exp"
-import * as Evaluate from "../../evaluate"
+
 import * as Explain from "../../explain"
 import * as Value from "../../value"
 import { Normal } from "../../normal"

@@ -5,7 +5,7 @@ import * as Ctx from "../ctx"
 import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Infer from "../infer"
-import * as Evaluate from "../evaluate"
+
 import * as Readback from "../readback"
 
 export function output(mod: Mod.Mod, top: Top.Top): string {

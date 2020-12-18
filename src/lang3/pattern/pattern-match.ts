@@ -3,7 +3,6 @@ import * as Value from "../value"
 import * as Env from "../env"
 import * as Mod from "../mod"
 import * as ut from "../../ut"
-import * as Evaluate from "../evaluate"
 
 export function match(
   mod: Mod.Mod,

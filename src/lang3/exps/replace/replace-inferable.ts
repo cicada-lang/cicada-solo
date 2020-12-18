@@ -2,11 +2,11 @@ import { Inferable } from "../../inferable"
 import { evaluator } from "../../evaluator"
 import * as Exp from "../../exp"
 import * as Value from "../../value"
-import * as Evaluate from "../../evaluate"
 import * as Infer from "../../infer"
 import * as Check from "../../check"
 import * as Env from "../../env"
 import * as Ctx from "../../ctx"
+import { do_ap } from "../ap"
 
 export const replace_inferable = (
   target: Exp.Exp,
@@ -26,7 +26,7 @@ export const replace_inferable = (
         mod,
         env: Ctx.to_env(ctx),
       })
-      Check.check(mod, ctx, base, Evaluate.do_ap(motive_value, equal.from))
-      return Evaluate.do_ap(motive_value, equal.to)
+      Check.check(mod, ctx, base, do_ap(motive_value, equal.from))
+      return do_ap(motive_value, equal.to)
     },
   })

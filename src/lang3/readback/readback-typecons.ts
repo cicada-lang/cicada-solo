@@ -1,7 +1,7 @@
 import { evaluator } from "../evaluator"
 import { EvaluationMode } from "../evaluable"
 import * as Readback from "../readback"
-import * as Evaluate from "../evaluate"
+
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as Exp from "../exp"

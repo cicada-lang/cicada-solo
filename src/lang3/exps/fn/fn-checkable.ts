@@ -2,7 +2,7 @@ import { Var } from "../var"
 import { evaluator } from "../../evaluator"
 import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
-import * as Evaluate from "../../evaluate"
+
 import * as Check from "../../check"
 import * as Value from "../../value"
 import * as Pattern from "../../pattern"

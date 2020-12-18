@@ -5,9 +5,9 @@ import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as Env from "../env"
 import * as Mod from "../mod"
-import * as Evaluate from "../evaluate"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
+import { do_ap } from "../exps/ap"
 
 export function to_value(
   mod: Mod.Mod,
@@ -28,10 +28,7 @@ export function to_value(
           oprand.t.kind === "Value.pi"
         ) {
           const pi = oprand.t
-          oprand = Evaluate.do_ap(
-            oprand,
-            Pattern.to_value(mod, env, arg, pi.arg_t)
-          )
+          oprand = do_ap(oprand, Pattern.to_value(mod, env, arg, pi.arg_t))
         } else {
           throw new Trace.Trace(
             "expecting oprand.kind to be Value.typecons or Value.datatype\n" +
@@ -52,10 +49,7 @@ export function to_value(
           oprand.t.kind === "Value.pi"
         ) {
           const pi = oprand.t
-          oprand = Evaluate.do_ap(
-            oprand,
-            Pattern.to_value(mod, env, arg, pi.arg_t)
-          )
+          oprand = do_ap(oprand, Pattern.to_value(mod, env, arg, pi.arg_t))
         } else {
           throw new Trace.Trace(
             "expecting oprand.kind to be Value.datacons or Value.data\n" +

@@ -130,8 +130,6 @@
 
 > refactoring `Exp`
 
-- [lang3] re-place `do_ap`
-
 - [lang3] inline `evaluator` -- just like we use no `checker` or `inferer` or `readbacker`
 
 - [lang3] `evaluate` in `evaluable.ts`

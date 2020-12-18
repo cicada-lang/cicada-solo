@@ -4,7 +4,7 @@ import * as Ctx from "../ctx"
 import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Value from "../value"
-import * as Evaluate from "../evaluate"
+
 import * as Infer from "../infer"
 
 export function lookup_type(

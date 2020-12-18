@@ -1,6 +1,6 @@
 import { evaluator } from "../../evaluator"
 import * as Telescope from "../telescope"
-import * as Evaluate from "../../evaluate"
+
 import * as Env from "../../env"
 import * as Mod from "../../mod"
 import * as Exp from "../../exp"

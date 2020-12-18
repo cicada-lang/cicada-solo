@@ -1,6 +1,6 @@
 import { evaluator } from "../../evaluator"
 import * as Closure from "../closure"
-import * as Evaluate from "../../evaluate"
+
 import * as Value from "../../value"
 import * as Pattern from "../../pattern"
 import * as Exp from "../../exp"
