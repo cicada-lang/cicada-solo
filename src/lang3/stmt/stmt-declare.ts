@@ -1,4 +1,4 @@
-import { evaluator } from "../evaluator"
+import { evaluate } from "../evaluable"
 import * as Stmt from "../stmt"
 import * as Ctx from "../ctx"
 import * as Mod from "../mod"
@@ -13,7 +13,7 @@ export function declare(mod: Mod.Mod, ctx: Ctx.Ctx, stmt: Stmt.Stmt): void {
         ctx,
         stmt.name,
         Infer.infer(mod, ctx, stmt.exp),
-        evaluator.evaluate(stmt.exp, { mod, env: Ctx.to_env(ctx) })
+        evaluate(stmt.exp, { mod, env: Ctx.to_env(ctx) })
       )
     }
   }

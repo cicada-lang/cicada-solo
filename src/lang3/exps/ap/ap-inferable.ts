@@ -1,5 +1,5 @@
 import { Inferable } from "../../inferable"
-import { evaluator } from "../../evaluator"
+import { evaluate } from "../../evaluable"
 import * as Infer from "../../infer"
 import * as Check from "../../check"
 import * as Exp from "../../exp"
@@ -36,7 +36,7 @@ function when_target_is_pi(
   Check.check(mod, ctx, arg, pi.arg_t)
   return Value.Closure.apply(
     pi.ret_t_cl,
-    evaluator.evaluate(arg, { mod, env: Ctx.to_env(ctx) })
+    evaluate(arg, { mod, env: Ctx.to_env(ctx) })
   )
 }
 
@@ -49,7 +49,7 @@ function when_target_is_type(
   const cls = Value.is_cls(
     mod,
     ctx,
-    evaluator.evaluate(target, { mod, env: Ctx.to_env(ctx) })
+    evaluate(target, { mod, env: Ctx.to_env(ctx) })
   )
   if (cls.tel.next === undefined) {
     throw new Trace.Trace(

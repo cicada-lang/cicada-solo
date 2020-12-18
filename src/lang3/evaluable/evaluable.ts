@@ -8,12 +8,7 @@ export enum EvaluationMode {
 }
 
 export type Evaluable = {
-  evaluability(the: {
-    mod: Mod
-    env: Env
-    mode?: EvaluationMode
-    evaluator: Evaluator
-  }): Value
+  evaluability(the: { mod: Mod; env: Env; mode?: EvaluationMode }): Value
 }
 
 export function Evaluable(the: Evaluable): Evaluable {

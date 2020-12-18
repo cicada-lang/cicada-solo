@@ -1,5 +1,5 @@
 import { Var } from "../var"
-import { evaluator } from "../../evaluator"
+import { evaluate } from "../../evaluable"
 import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 
@@ -24,7 +24,7 @@ export function fn_checkable(pattern: Pattern.Pattern, ret: Exp): Checkable {
           |- fn: (${Pattern.repr(pattern)}) => ${ret.repr()}
           |`)
         )
-      const arg = evaluator.evaluate(Pattern.to_exp(pattern), {
+      const arg = evaluate(Pattern.to_exp(pattern), {
         mod,
         env: Ctx.to_env(result_ctx),
       })
@@ -88,7 +88,7 @@ function match_datatype(
   // NOTE
   // - Examples:
   //   - List(T): Type
-  const typecons = evaluator.evaluate(Var(datatype.name), {
+  const typecons = evaluate(Var(datatype.name), {
     mod,
     env: Ctx.to_env(ctx),
   })
@@ -141,7 +141,7 @@ function match_patterns(
     if (result_ctx === undefined) return undefined
     t = Value.Closure.apply(
       t.ret_t_cl,
-      evaluator.evaluate(Pattern.to_exp(pattern), {
+      evaluate(Pattern.to_exp(pattern), {
         mod,
         env: Ctx.to_env(result_ctx),
       })

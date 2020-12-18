@@ -1,7 +1,6 @@
-import { evaluator } from "../evaluator"
+import { evaluate } from "../evaluable"
 import { EvaluationMode } from "../evaluable"
 import * as Readback from "../readback"
-
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as Exp from "../exp"
@@ -38,7 +37,7 @@ function readback_delayed_sums(
       mod,
       ctx,
       Value.type,
-      evaluator.evaluate(sum.t, {
+      evaluate(sum.t, {
         mod: Mod.clone(delayed.mod),
         env: delayed.env,
         mode: EvaluationMode.mute_recursive_exp_in_mod,

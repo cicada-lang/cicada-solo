@@ -1,4 +1,4 @@
-import { evaluator } from "../../evaluator"
+import { evaluate } from "../../evaluable"
 import { EvaluationMode } from "../../evaluable"
 import * as Telescope from "../../value/telescope"
 import * as Readback from "../../readback"
@@ -58,7 +58,7 @@ function readback_scope(
   for (const entry of tel.scope) {
     const name = entry.name
     const mod = Mod.clone(tel.mod)
-    const t_value = evaluator.evaluate(entry.t, {
+    const t_value = evaluate(entry.t, {
       mod,
       env,
       mode: EvaluationMode.mute_recursive_exp_in_mod,

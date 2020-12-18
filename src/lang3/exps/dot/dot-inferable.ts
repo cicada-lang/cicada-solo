@@ -1,5 +1,5 @@
 import { Inferable } from "../../inferable"
-import { evaluator } from "../../evaluator"
+import { evaluate } from "../../evaluable"
 import * as Infer from "../../infer"
 
 import * as Exp from "../../exp"
@@ -15,7 +15,7 @@ export const dot_inferable = (target: Exp.Exp, name: string) =>
         return do_dot(target_t, name)
       }
 
-      const target_value = evaluator.evaluate(target, {
+      const target_value = evaluate(target, {
         mod,
         env: Ctx.to_env(ctx),
       })

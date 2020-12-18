@@ -1,5 +1,5 @@
 import { Inferable } from "../../inferable"
-import { evaluator } from "../../evaluator"
+import { evaluate } from "../../evaluable"
 import { Exp } from "../../exp"
 import * as Value from "../../value"
 import * as Ctx from "../../ctx"
@@ -9,7 +9,7 @@ export const the_inferable = (t: Exp, exp: Exp) =>
   Inferable({
     inferability: ({ mod, ctx }) => {
       Check.check(mod, ctx, t, Value.type)
-      const u = evaluator.evaluate(t, { mod, env: Ctx.to_env(ctx) })
+      const u = evaluate(t, { mod, env: Ctx.to_env(ctx) })
       Check.check(mod, ctx, exp, u)
       return u
     },

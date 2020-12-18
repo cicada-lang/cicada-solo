@@ -1,4 +1,5 @@
 import { Evaluable } from "../../evaluable"
+import { evaluate } from "../../evaluable"
 import { Exp } from "../../exp"
 import * as Value from "../../value"
 
@@ -8,10 +9,10 @@ export const typecons_evaluable = (
   sums: Array<{ tag: string; t: Exp }>
 ) =>
   Evaluable({
-    evaluability: ({ mod, env, mode, evaluator }) =>
+    evaluability: ({ mod, env, mode }) =>
       Value.typecons(
         name,
-        evaluator.evaluate(t, { mod, env, mode }),
+        evaluate(t, { mod, env, mode }),
         Value.DelayedSums.create(sums, mod, env)
       ),
   })

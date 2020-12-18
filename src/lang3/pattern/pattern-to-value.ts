@@ -1,4 +1,3 @@
-import { evaluator } from "../evaluator"
 import * as Pattern from "../pattern"
 import * as Exp from "../exp"
 import * as Value from "../value"
@@ -8,6 +7,7 @@ import * as Mod from "../mod"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { do_ap } from "../exps/ap"
+import { evaluate } from "../evaluable"
 
 export function to_value(
   mod: Mod.Mod,
@@ -20,7 +20,7 @@ export function to_value(
       return Value.not_yet(t, Neutral.v(pattern.name))
     }
     case "Pattern.datatype": {
-      let oprand = evaluator.evaluate(Exp.v(pattern.name), { mod, env })
+      let oprand = evaluate(Exp.v(pattern.name), { mod, env })
       for (const arg of pattern.args) {
         if (
           (oprand.kind === "Value.typecons" ||
@@ -39,10 +39,10 @@ export function to_value(
       return oprand
     }
     case "Pattern.data": {
-      let oprand = evaluator.evaluate(
-        Exp.dot(Exp.v(pattern.name), pattern.tag),
-        { mod, env }
-      )
+      let oprand = evaluate(Exp.dot(Exp.v(pattern.name), pattern.tag), {
+        mod,
+        env,
+      })
       for (const arg of pattern.args) {
         if (
           (oprand.kind === "Value.datacons" || oprand.kind === "Value.data") &&

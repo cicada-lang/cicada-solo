@@ -1,5 +1,5 @@
 import { Inferable } from "../../inferable"
-import { evaluator } from "../../evaluator"
+import { evaluate } from "../../evaluable"
 import * as Infer from "../../infer"
 import * as Check from "../../check"
 
@@ -22,7 +22,7 @@ export const typecons_inferable = (
       for (const entry of sums) {
         check_datacons_t(mod, ctx, entry.t, name)
       }
-      return evaluator.evaluate(t, { mod, env: Ctx.to_env(ctx) })
+      return evaluate(t, { mod, env: Ctx.to_env(ctx) })
     },
   })
 
@@ -40,7 +40,7 @@ function check_datacons_t(
       Ctx.extend(
         ctx,
         pi.name,
-        evaluator.evaluate(pi.arg_t, { mod, env: Ctx.to_env(ctx) })
+        evaluate(pi.arg_t, { mod, env: Ctx.to_env(ctx) })
       ),
       pi.ret_t,
       name
@@ -49,7 +49,7 @@ function check_datacons_t(
   }
 
   Check.check(mod, ctx, t, Value.type)
-  const t_value = evaluator.evaluate(t, { mod, env: Ctx.to_env(ctx) })
+  const t_value = evaluate(t, { mod, env: Ctx.to_env(ctx) })
 
   if (
     (t_value.kind === "Value.typecons" && t_value.name === name) ||
@@ -70,7 +70,7 @@ function check_typecons_t(mod: Mod.Mod, ctx: Ctx.Ctx, t: Exp.Exp): void {
       Ctx.extend(
         ctx,
         pi.name,
-        evaluator.evaluate(pi.arg_t, { mod, env: Ctx.to_env(ctx) })
+        evaluate(pi.arg_t, { mod, env: Ctx.to_env(ctx) })
       ),
       pi.ret_t
     )

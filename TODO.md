@@ -130,9 +130,6 @@
 
 > refactoring `Exp`
 
-- [lang3] inline `evaluator` -- just like we use no `checker` or `inferer` or `readbacker`
-
-- [lang3] `evaluate` in `evaluable.ts`
 - [lang3] `check` in `checkable.ts`
 - [lang3] `infer` in `inferable.ts`
 

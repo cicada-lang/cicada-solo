@@ -1,5 +1,5 @@
 import { Inferable } from "../../inferable"
-import { evaluator } from "../../evaluator"
+import { evaluate } from "../../evaluable"
 import * as Exp from "../../exp"
 import * as Value from "../../value"
 import * as Infer from "../../infer"
@@ -17,12 +17,12 @@ export const replace_inferable = (
     inferability: ({ mod, ctx }) => {
       const target_t = Infer.infer(mod, ctx, target)
       const equal = Value.is_equal(mod, ctx, target_t)
-      const motive_t = evaluator.evaluate(Exp.pi("x", Exp.v("t"), Exp.type), {
+      const motive_t = evaluate(Exp.pi("x", Exp.v("t"), Exp.type), {
         mod,
         env: Env.update(Env.init(), "t", equal.t),
       })
       Check.check(mod, ctx, motive, motive_t)
-      const motive_value = evaluator.evaluate(motive, {
+      const motive_value = evaluate(motive, {
         mod,
         env: Ctx.to_env(ctx),
       })

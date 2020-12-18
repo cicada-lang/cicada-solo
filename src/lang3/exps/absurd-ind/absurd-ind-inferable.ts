@@ -1,5 +1,6 @@
 import { Inferable } from "../../inferable"
-import { evaluator } from "../../evaluator"
+import { evaluate } from "../../evaluable"
+// import { evaluate } from "../../evaluable"
 import { Exp } from "../../exp"
 import * as Value from "../../value"
 import * as Ctx from "../../ctx"
@@ -14,7 +15,7 @@ export const absurd_ind_inferable = (target: Exp, motive: Exp) =>
       //   but we do a simple check for the simple absurd.
       Check.check(mod, ctx, target, Value.absurd)
       Check.check(mod, ctx, motive, Value.type)
-      return evaluator.evaluate(motive, {
+      return evaluate(motive, {
         mod,
         env: Ctx.to_env(ctx),
       })

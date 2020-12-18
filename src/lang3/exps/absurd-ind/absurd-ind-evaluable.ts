@@ -1,18 +1,18 @@
 import { Evaluable } from "../../evaluable"
 import { Exp } from "../../exp"
-
 import * as Explain from "../../explain"
 import * as Value from "../../value"
 import { Normal } from "../../normal"
 import * as Neutral from "../../neutral"
 import * as Trace from "../../../trace"
+import { evaluate } from "../../evaluable"
 
 export const absurd_ind_evaluable = (target: Exp, motive: Exp) =>
   Evaluable({
-    evaluability: ({ mod, env, mode, evaluator }) =>
+    evaluability: ({ mod, env, mode }) =>
       do_absurd_ind(
-        evaluator.evaluate(target, { mod, env, mode }),
-        evaluator.evaluate(motive, { mod, env, mode })
+        evaluate(target, { mod, env, mode }),
+        evaluate(motive, { mod, env, mode })
       ),
   })
 

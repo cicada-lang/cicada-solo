@@ -1,5 +1,5 @@
 import { Inferable } from "../../inferable"
-import { evaluator } from "../../evaluator"
+import { evaluate } from "../../evaluable"
 import * as Check from "../../check"
 import * as Exp from "../../exp"
 import * as Value from "../../value"
@@ -28,7 +28,7 @@ function go_through_sat(
 ): void {
   for (const entry of sat) {
     Check.check(mod, ctx, entry.t, Value.type)
-    const t = evaluator.evaluate(entry.t, { mod, env: Ctx.to_env(ctx) })
+    const t = evaluate(entry.t, { mod, env: Ctx.to_env(ctx) })
     Check.check(mod, ctx, entry.exp, t)
     Ctx.update(ctx, entry.name, t)
   }
@@ -42,7 +42,7 @@ function go_through_scope(
   if (scope.length === 0) return
   const [entry, ...tail] = scope
   Check.check(mod, ctx, entry.t, Value.type)
-  const t = evaluator.evaluate(entry.t, { mod, env: Ctx.to_env(ctx) })
+  const t = evaluate(entry.t, { mod, env: Ctx.to_env(ctx) })
   Ctx.update(ctx, entry.name, t)
   go_through_scope(mod, ctx, tail)
 }

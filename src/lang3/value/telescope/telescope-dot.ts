@@ -1,6 +1,5 @@
-import { evaluator } from "../../evaluator"
+import { evaluate } from "../../evaluable"
 import * as Telescope from "../telescope"
-
 import * as Env from "../../env"
 import * as Mod from "../../mod"
 import * as Exp from "../../exp"
@@ -47,7 +46,7 @@ function loop(
   env = Env.update(env, next.name, next_value)
 
   const [entry, ...rest] = scope
-  const t = evaluator.evaluate(entry.t, { mod, env })
+  const t = evaluate(entry.t, { mod, env })
   next = { name: entry.name, t }
 
   return loop(mod, env, next, rest, name)

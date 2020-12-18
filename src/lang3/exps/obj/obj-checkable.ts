@@ -1,4 +1,4 @@
-import { evaluator } from "../../evaluator"
+import { evaluate } from "../../evaluable"
 import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import * as Readback from "../../readback"
@@ -40,7 +40,7 @@ function check_properties_aganst_sat(
       )
     }
     Check.check(mod, ctx, found, entry.t)
-    const value = evaluator.evaluate(found, { mod, env: Ctx.to_env(ctx) })
+    const value = evaluate(found, { mod, env: Ctx.to_env(ctx) })
     if (!Value.conversion(mod, ctx, entry.t, value, entry.value)) {
       throw new Trace.Trace(
         ut.aline(`
@@ -95,5 +95,5 @@ function check_properties_aganst_next(
   }
   Check.check(mod, ctx, found, next.t)
   properties.delete(next.name)
-  return evaluator.evaluate(found, { mod, env: Ctx.to_env(ctx) })
+  return evaluate(found, { mod, env: Ctx.to_env(ctx) })
 }

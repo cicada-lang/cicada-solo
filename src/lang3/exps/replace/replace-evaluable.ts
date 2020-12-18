@@ -1,4 +1,5 @@
 import { Evaluable } from "../../evaluable"
+import { evaluate } from "../../evaluable"
 import { Exp } from "../../exp"
 import * as Explain from "../../explain"
 import * as Env from "../../env"
@@ -13,11 +14,11 @@ import { do_ap } from "../ap"
 
 export const replace_evaluable = (target: Exp, motive: Exp, base: Exp) =>
   Evaluable({
-    evaluability: ({ mod, env, mode, evaluator }) =>
+    evaluability: ({ mod, env, mode }) =>
       do_replace(
-        evaluator.evaluate(target, { mod, env, mode }),
-        evaluator.evaluate(motive, { mod, env, mode }),
-        evaluator.evaluate(base, { mod, env, mode })
+        evaluate(target, { mod, env, mode }),
+        evaluate(motive, { mod, env, mode }),
+        evaluate(base, { mod, env, mode })
       ),
   })
 

@@ -1,10 +1,9 @@
-import { evaluator } from "../evaluator"
+import { evaluate } from "../evaluable"
 import * as Mod from "../mod"
 import * as Ctx from "../ctx"
 import * as Env from "../env"
 import * as Exp from "../exp"
 import * as Value from "../value"
-
 import * as Infer from "../infer"
 
 export function lookup_type(
@@ -28,10 +27,10 @@ export function lookup_type(
     case "Mod.Den.def": {
       if (entry.den.t === undefined)
         return Infer.infer(mod, Ctx.init(), entry.den.exp)
-      return evaluator.evaluate(entry.den.t, { mod, env: Env.init() })
+      return evaluate(entry.den.t, { mod, env: Env.init() })
     }
     case "Mod.Den.typecons": {
-      return evaluator.evaluate(entry.den.typecons.t, { mod, env: Env.init() })
+      return evaluate(entry.den.typecons.t, { mod, env: Env.init() })
     }
   }
 }

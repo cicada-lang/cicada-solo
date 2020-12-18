@@ -1,6 +1,6 @@
 import { Evaluable } from "../../evaluable"
 import { Exp } from "../../exp"
-
+import { evaluate } from "../../evaluable"
 import * as Explain from "../../explain"
 import * as Value from "../../value"
 import { Normal } from "../../normal"
@@ -9,10 +9,10 @@ import * as Trace from "../../../trace"
 
 export const ap_evaluable = (target: Exp, arg: Exp) =>
   Evaluable({
-    evaluability: ({ mod, env, mode, evaluator }) =>
+    evaluability: ({ mod, env, mode }) =>
       do_ap(
-        evaluator.evaluate(target, { mod, env, mode }),
-        evaluator.evaluate(arg, { mod, env, mode })
+        evaluate(target, { mod, env, mode }),
+        evaluate(arg, { mod, env, mode })
       ),
   })
 

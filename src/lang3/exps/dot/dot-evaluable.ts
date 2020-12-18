@@ -1,7 +1,7 @@
 import { Evaluable } from "../../evaluable"
 import { Exp } from "../../exp"
 
-import { evaluator } from "../../evaluator"
+import { evaluate } from "../../evaluable"
 import * as Explain from "../../explain"
 import * as Mod from "../../mod"
 import * as Modpath from "../../modpath"
@@ -12,8 +12,8 @@ import * as ut from "../../../ut"
 
 export const dot_evaluable = (target: Exp, name: string) =>
   Evaluable({
-    evaluability: ({ mod, env, mode, evaluator }) =>
-      do_dot(evaluator.evaluate(target, { mod, env, mode }), name),
+    evaluability: ({ mod, env, mode }) =>
+      do_dot(evaluate(target, { mod, env, mode }), name),
   })
 
 export function do_dot(target: Value.Value, name: string): Value.Value {
@@ -70,7 +70,7 @@ export function do_dot_typecons(
   return Value.datacons(
     typecons,
     name,
-    evaluator.evaluate(entry.t, {
+    evaluate(entry.t, {
       mod: typecons.delayed.mod,
       env: typecons.delayed.env,
     })
