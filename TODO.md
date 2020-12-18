@@ -69,11 +69,17 @@
 
 # lang2
 
+> refactoring `Exp`
+
+> refactoring `Value`
+
 > 将 NbE 教程中的 tartlet 升级为 pie
 
 - [lang2] `List`, `List.cons`, `List.null`, `List.rec`
 - [lang2] `Vector`
 - [lang2] be able to add type annotation to `Exp.fn`
+
+> 充分测试
 
 - 如何对某一个类型以及相关的 Exp 作出充分的测试？
 
@@ -81,15 +87,13 @@
 - test Pi of lang2.
 - test Absurd of lang2.
 
-- use native `number` as `Nat`.
+> 优化
 
-- 添加 inductive data type -- 根据类型生成 elim。
-  - 归纳类型（Inductive type）的推演规则。
-    - Only one abstraction away.
+- use native `number` as `Nat`.
 
 # lang3
 
-> refactoring Value
+> refactoring `Value`
 
 - We need to do typed readback,
   take Pi for example, we can not only readback Fn,
@@ -120,7 +124,7 @@
 - [lang3] `readback_normal` for `Normal`
 - [lang3] `Value` as intersection type instead of union type
 
-> refactoring Exp
+> refactoring `Exp`
 
 - [lang3] maybe inline `evaluator` -- just like we use no `checker` or `inferer` or `readbacker`
 - [lang3] refactor `check_union_type` & `check_by_infer`
