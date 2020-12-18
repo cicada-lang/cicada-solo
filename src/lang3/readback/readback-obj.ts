@@ -7,6 +7,7 @@ import * as Ctx from "../ctx"
 import * as Env from "../env"
 import * as Mod from "../mod"
 import * as Trace from "../../trace"
+import { do_dot } from "../exps/dot/dot-evaluable"
 
 export function readback_obj(
   mod: Mod.Mod,
@@ -31,7 +32,7 @@ function readback_properties_from_sat(
   for (const entry of sat) {
     const name = entry.name
     const property_t = entry.t
-    const property_value = Evaluate.do_dot(value, name)
+    const property_value = do_dot(value, name)
     if (!Value.conversion(mod, ctx, property_t, property_value, entry.value)) {
       throw new Trace.Trace("property_value not equivalent to entry.value")
     }
@@ -52,7 +53,7 @@ function readback_properties_from_tel(
   if (tel.next !== undefined) {
     const name = tel.next.name
     const property_t = tel.next.t
-    const property_value = Evaluate.do_dot(value, name)
+    const property_value = do_dot(value, name)
     const property_exp = Readback.readback(mod, ctx, property_t, property_value)
     properties.set(name, property_exp)
     Env.update(env, name, property_value)
@@ -60,7 +61,7 @@ function readback_properties_from_tel(
   for (const entry of tel.scope) {
     const name = entry.name
     const property_t = evaluator.evaluate(entry.t, { mod, env })
-    const property_value = Evaluate.do_dot(value, name)
+    const property_value = do_dot(value, name)
     const property_exp = Readback.readback(mod, ctx, property_t, property_value)
     properties.set(name, property_exp)
     Env.update(env, name, property_value)
