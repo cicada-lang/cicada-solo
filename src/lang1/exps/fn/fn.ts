@@ -1,9 +1,12 @@
 import { Evaluable } from "../../evaluable"
+import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import { fn_evaluable } from "./fn-evaluable"
+import { fn_checkable } from "./fn-checkable"
 import { Repr } from "../../repr"
 
 export type Fn = Evaluable &
+  Checkable &
   Repr & {
     kind: "Exp.fn"
     name: string
@@ -16,6 +19,7 @@ export function Fn(name: string, ret: Exp): Fn {
     name,
     ret,
     ...fn_evaluable(name, ret),
+    ...fn_checkable(name, ret),
     repr: () => `(${name}) => ${ret.repr()}`,
   }
 }

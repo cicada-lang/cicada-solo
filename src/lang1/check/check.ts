@@ -10,20 +10,7 @@ import * as ut from "../../ut"
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
   try {
     if (exp.kind === "Exp.fn") {
-      if (t.kind === "Ty.arrow") {
-        const ctx_new = Ctx.clone(ctx)
-        Ctx.update(ctx_new, exp.name, t.arg_t)
-        Check.check(ctx_new, exp.ret, t.ret_t)
-        return
-      } else {
-        throw new Trace.Trace(
-          ut.aline(`
-            |When checking ${exp.repr()},
-            |I am expecting the type to be Ty.arrow,
-            |but the given type is ${Ty.repr(t)}.
-            |`)
-        )
-      }
+      return exp.checkability(t, { ctx })
     } else if (exp.kind === "Exp.zero") {
       if (t.kind === "Ty.nat") {
       } else {
