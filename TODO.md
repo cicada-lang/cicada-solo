@@ -38,8 +38,6 @@
 
 > refactoring `Exp`
 
-- [lang1] `Inferable` -- `Rec`
-
 - [lang1] no branches in `Inferable`
 
 - [lang1] no branches in `Checkable`

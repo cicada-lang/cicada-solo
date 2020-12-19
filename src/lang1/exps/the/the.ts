@@ -6,7 +6,8 @@ import { the_evaluable } from "./the-evaluable"
 import { the_inferable } from "./the-inferable"
 import { Repr } from "../../repr"
 
-export type The = Evaluable & Inferable &
+export type The = Evaluable &
+  Inferable &
   Repr & {
     kind: "Exp.the"
     t: Ty.Ty

@@ -21,14 +21,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       return exp.inferability({ ctx })
     }
     if (exp.kind === "Exp.rec") {
-      const { t, target, base, step } = exp
-      // NOTE target should always be infered,
-      // but it is simple to just check it here,
-      // because we already know it should be `Ty.nat`.
-      Check.check(ctx, target, Ty.nat)
-      Check.check(ctx, base, t)
-      Check.check(ctx, step, Ty.arrow(Ty.nat, Ty.arrow(t, t)))
-      return t
+      return exp.inferability({ ctx })
     }
     if (exp.kind === "Exp.the") {
       return exp.inferability({ ctx })
