@@ -7,7 +7,7 @@ export type EtaExpander = {
   eta_expand: (value: Value, the: { used: Names }) => Exp
 }
 
-export type Names = Set<string>
+type Names = Set<string>
 
 export function EtaExpander(the: {
   eta_expand: (value: Value, the: { used: Names }) => Exp

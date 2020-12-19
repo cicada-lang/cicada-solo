@@ -11,11 +11,9 @@ import { do_ap } from "../exps/ap"
 // The typed version of the readback procedure
 // takes the types into account to perform eta-expansion.
 
-export function readback(
-  used: Set<string>,
-  t: Ty,
-  value: Value.Value
-): Exp.Exp {
+type Names = Set<string>
+
+export function readback(used: Names, t: Ty, value: Value.Value): Exp.Exp {
   if (t.eta_expand) {
     return t.eta_expand(value, { used })
   }
