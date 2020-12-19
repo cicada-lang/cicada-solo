@@ -6,5 +6,5 @@ export type Nat = Repr & {
 
 export const Nat: Nat = {
   kind: "Ty.nat",
-  repr: () => "Nat"
+  repr: () => "Nat",
 }
