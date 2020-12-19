@@ -1,6 +1,6 @@
 import { Ty } from "../../ty"
 import * as Value from "../../value"
-import * as Exp from "../../exp"
+import { Fn } from "../../exps/fn"
 import { EtaExpander } from "../../eta-expander"
 import * as Neutral from "../../neutral"
 import { readback } from "../../readback"
@@ -17,7 +17,7 @@ export const arrow_eta_expander = (arg_t: Ty, ret_t: Ty) =>
       const name = ut.freshen_name(used, value_arg_name(value))
       const variable = Value.not_yet(arg_t, Neutral.v(name))
       const ret = do_ap(value, variable)
-      return Exp.fn(name, readback(new Set([...used, name]), ret_t, ret))
+      return Fn(name, readback(new Set([...used, name]), ret_t, ret))
     },
   })
 
