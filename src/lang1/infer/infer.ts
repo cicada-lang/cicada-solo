@@ -61,8 +61,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
   } catch (error) {
     if (error instanceof Trace.Trace) {
       throw Trace.trail(error, exp)
-    } else {
-      throw error
     }
+    throw error
   }
 }
