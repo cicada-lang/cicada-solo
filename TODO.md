@@ -41,6 +41,13 @@
 
 > refactoring `Ty`
 
+- [lang1] `nat-util/` instead of `nat/`
+
+- [lang1] `Arrow`
+- [lang1] `Nat`
+
+- [lang1]- [lang1] `EtaExpander` -- `Arrow`
+
 > refactoring `Value`
 
 # lang2
