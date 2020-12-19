@@ -8,8 +8,9 @@ import { Zero } from "../exps/zero"
 import { Add1 } from "../exps/add1"
 import { Rec } from "../exps/rec"
 import { Begin } from "../exps/begin"
+import { The } from "../exps/the"
 
-export type Exp = Var | Fn | Ap | Zero | Add1 | Rec | Begin | the
+export type Exp = Var | Fn | Ap | Zero | Add1 | Rec | Begin | The
 
 export type v = Var
 export const v = Var
@@ -32,10 +33,5 @@ export const rec = Rec
 export type begin = Begin
 export const begin = Begin
 
-export type the = {
-  kind: "Exp.the"
-  t: Ty.Ty
-  exp: Exp
-}
-
-export const the = (t: Ty.Ty, exp: Exp): the => ({ kind: "Exp.the", t, exp })
+export type the = The
+export const the = The

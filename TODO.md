@@ -38,8 +38,6 @@
 
 > refactoring `Exp`
 
-- [lang1] `The`
-
 - [lang1] `Evaluable` --  ap
 - [lang1] `Evaluable` --  zero
 - [lang1] `Evaluable` --  add1
