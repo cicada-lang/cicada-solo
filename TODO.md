@@ -40,14 +40,14 @@
 
 - [lang1] `Repr`
 
-- [lang1] `Repr` --  v
-- [lang1] `Repr` --  fn
-- [lang1] `Repr` --  ap
-- [lang1] `Repr` --  zero
-- [lang1] `Repr` --  add1
-- [lang1] `Repr` --  rec
-- [lang1] `Repr` --  begin
-- [lang1] `Repr` --  the
+- [lang1] `Repr` -- v
+- [lang1] `Repr` -- fn
+- [lang1] `Repr` -- ap
+- [lang1] `Repr` -- zero
+- [lang1] `Repr` -- add1
+- [lang1] `Repr` -- rec
+- [lang1] `Repr` -- begin
+- [lang1] `Repr` -- the
 
 - [lang1] `Checkable`
 
