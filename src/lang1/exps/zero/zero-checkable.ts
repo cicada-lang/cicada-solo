@@ -1,5 +1,4 @@
 import { Checkable } from "../../checkable"
-import * as Value from "../../value"
 import * as Ty from "../../ty"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"

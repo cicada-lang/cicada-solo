@@ -1,9 +1,7 @@
 import { Checkable } from "../../checkable"
-import { evaluate } from "../../evaluate"
 import { Exp } from "../../exp"
 import { check } from "../../check"
 import * as Ty from "../../ty"
-import * as Value from "../../value"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
 

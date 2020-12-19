@@ -2,7 +2,6 @@ import { Inferable } from "../../inferable"
 import { Exp } from "../../exp"
 import { infer } from "../../infer"
 import * as Stmt from "../../stmt"
-import * as Env from "../../env"
 import * as Ctx from "../../ctx"
 
 export const begin_inferable = (stmts: Array<Stmt.Stmt>, ret: Exp) =>

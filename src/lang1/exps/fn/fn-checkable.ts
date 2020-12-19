@@ -3,7 +3,6 @@ import { Exp } from "../../exp"
 import * as Ctx from "../../ctx"
 import * as Ty from "../../ty"
 import { check } from "../../check"
-import * as Value from "../../value"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
 

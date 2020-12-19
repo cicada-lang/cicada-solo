@@ -2,7 +2,6 @@ import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import { check } from "../../check"
 import * as Stmt from "../../stmt"
-import * as Env from "../../env"
 import * as Ctx from "../../ctx"
 
 export const begin_checkable = (stmts: Array<Stmt.Stmt>, ret: Exp) =>

@@ -36,10 +36,6 @@
 
 # lang1
 
-> refactoring `Exp`
-
-- [lang1] clear deps
-
 > refactoring `Ty`
 
 > refactoring `Value`
