@@ -10,11 +10,11 @@ import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
 export type Inferable = {
-  inferability(the: { mod: Mod; ctx: Ctx }): Value.Value
+  inferability: (the: { mod: Mod; ctx: Ctx }) => Value.Value
 }
 
 export function Inferable(the: {
-  inferability(the: { mod: Mod; ctx: Ctx }): Value.Value
+  inferability: (the: { mod: Mod; ctx: Ctx }) => Value.Value
 }): Inferable & Checkable {
   return {
     ...the,
