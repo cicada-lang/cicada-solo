@@ -1,7 +1,8 @@
 > To improve the design of our type system framework,
 > we need enough concrete example types.
-> - Changing lang2 to support pie will provide us more examples.
-> - TLT will provide us a suite of tests, and a philosophy of testing.
+
+- Changing lang2 to support pie will provide us more examples.
+- TLT will provide us a suite of tests, and a philosophy of testing.
 
 # partech
 
