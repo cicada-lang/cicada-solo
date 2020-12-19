@@ -1,8 +1,11 @@
 > To improve the design of our type system framework,
 > we need enough concrete example types.
 
+- Changing lang1 to OOP will provide us more examples about readback
+
 - Changing lang2 to support pie will provide us more examples.
   - Before supporting pie, we change the design of lang2 from procedural to OOP.
+  - Changing lang2 to OOP will provide us more examples about readback
 
 - TLT will provide us a suite of tests, and a philosophy of testing.
 
