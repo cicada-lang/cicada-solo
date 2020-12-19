@@ -7,8 +7,9 @@ import { Ap } from "../exps/ap"
 import { Zero } from "../exps/zero"
 import { Add1 } from "../exps/add1"
 import { Rec } from "../exps/rec"
+import { Begin } from "../exps/begin"
 
-export type Exp = Var | Fn | Ap | Zero | Add1 | Rec | begin | the
+export type Exp = Var | Fn | Ap | Zero | Add1 | Rec | Begin | the
 
 export type v = Var
 export const v = Var
@@ -28,17 +29,8 @@ export const add1 = Add1
 export type rec = Rec
 export const rec = Rec
 
-export type begin = {
-  kind: "Exp.begin"
-  stmts: Array<Stmt.Stmt>
-  ret: Exp
-}
-
-export const begin = (stmts: Array<Stmt.Stmt>, ret: Exp): begin => ({
-  kind: "Exp.begin",
-  stmts,
-  ret,
-})
+export type begin = Begin
+export const begin = Begin
 
 export type the = {
   kind: "Exp.the"
