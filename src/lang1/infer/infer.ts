@@ -18,11 +18,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       return exp.inferability({ ctx })
     }
     if (exp.kind === "Exp.begin") {
-      const new_ctx = Ctx.clone(ctx)
-      for (const stmt of exp.stmts) {
-        Stmt.declare(new_ctx, stmt)
-      }
-      return Infer.infer(new_ctx, exp.ret)
+      return exp.inferability({ ctx })
     }
     if (exp.kind === "Exp.rec") {
       const { t, target, base, step } = exp
