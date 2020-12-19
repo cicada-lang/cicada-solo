@@ -38,12 +38,7 @@
 
 > refactoring `Exp`
 
-- [lang1] no branches in `Inferable`
-
-- [lang1] `Exp` as intersection type instead of union type
-
 - [lang1] inline type definition of `Exp`
-
 - [lang1] clear deps
 
 > refactoring `Ty`

@@ -11,19 +11,7 @@ import * as ut from "../../ut"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
   try {
-    if (exp.kind === "Exp.v") {
-      return exp.inferability({ ctx })
-    }
-    if (exp.kind === "Exp.ap") {
-      return exp.inferability({ ctx })
-    }
-    if (exp.kind === "Exp.begin") {
-      return exp.inferability({ ctx })
-    }
-    if (exp.kind === "Exp.rec") {
-      return exp.inferability({ ctx })
-    }
-    if (exp.kind === "Exp.the") {
+    if (exp.inferability) {
       return exp.inferability({ ctx })
     }
     throw new Trace.Trace(
