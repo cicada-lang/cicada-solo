@@ -1,4 +1,4 @@
-// import { Evaluable } from "../../evaluable"
+import { Evaluable } from "../../evaluable"
 import { Exp } from "../../exp"
 
 export type Ap = {
