@@ -34,23 +34,21 @@ export function readback(
   } else if (value.kind === "Value.not_yet") {
     if (ut.equal(t, value.t)) {
       return Readback.readback_neutral(used, value.neutral)
-    } else {
-      throw new Error(
-        ut.aline(`
+    }
+    throw new Error(
+      ut.aline(`
         |When trying to readback a annotated value: ${ut.inspect(value)},
         |the annotated type is: ${Ty.repr(value.t)},
         |but the given type is ${Ty.repr(t)}.
         |`)
-      )
-    }
-  } else {
-    throw new Error(
-      ut.aline(`
+    )
+  }
+  throw new Error(
+    ut.aline(`
       |I can not readback value: ${ut.inspect(value)},
       |of type: ${ut.inspect(t)}.
       |`)
-    )
-  }
+  )
 }
 
 function value_arg_name(value: Value.Value): string {
