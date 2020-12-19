@@ -38,8 +38,6 @@
 
 > refactoring `Exp`
 
-- [lang1] `evaluate` -- no branches
-
 - [lang1] `Repr`
 
 - [lang1] `Repr` --  v
