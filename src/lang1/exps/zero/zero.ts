@@ -1,14 +1,10 @@
-import { Evaluable } from "../../evaluable"
-import { Checkable } from "../../checkable"
+import { Exp } from "../../exp"
 import { zero_evaluable } from "./zero-evaluable"
 import { zero_checkable } from "./zero-checkable"
-import { Repr } from "../../repr"
 
-export type Zero = Evaluable &
-  Checkable &
-  Repr & {
-    kind: "Exp.zero"
-  }
+export type Zero = Exp & {
+  kind: "Exp.zero"
+}
 
 export const Zero: Zero = {
   kind: "Exp.zero",

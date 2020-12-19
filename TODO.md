@@ -38,7 +38,6 @@
 
 > refactoring `Exp`
 
-- [lang1] inline type definition of `Exp`
 - [lang1] clear deps
 
 > refactoring `Ty`

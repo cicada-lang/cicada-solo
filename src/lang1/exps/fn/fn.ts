@@ -1,17 +1,12 @@
-import { Evaluable } from "../../evaluable"
-import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import { fn_evaluable } from "./fn-evaluable"
 import { fn_checkable } from "./fn-checkable"
-import { Repr } from "../../repr"
 
-export type Fn = Evaluable &
-  Checkable &
-  Repr & {
-    kind: "Exp.fn"
-    name: string
-    ret: Exp
-  }
+export type Fn = Exp & {
+  kind: "Exp.fn"
+  name: string
+  ret: Exp
+}
 
 export function Fn(name: string, ret: Exp): Fn {
   return {

@@ -1,20 +1,15 @@
-import { Evaluable } from "../../evaluable"
-import { Inferable } from "../../inferable"
 import { Exp } from "../../exp"
 import * as Ty from "../../ty"
 import { rec_evaluable } from "./rec-evaluable"
 import { rec_inferable } from "./rec-inferable"
-import { Repr } from "../../repr"
 
-export type Rec = Evaluable &
-  Inferable &
-  Repr & {
-    kind: "Exp.rec"
-    t: Ty.Ty
-    target: Exp
-    base: Exp
-    step: Exp
-  }
+export type Rec = Exp & {
+  kind: "Exp.rec"
+  t: Ty.Ty
+  target: Exp
+  base: Exp
+  step: Exp
+}
 
 export function Rec(t: Ty.Ty, target: Exp, base: Exp, step: Exp): Rec {
   return {

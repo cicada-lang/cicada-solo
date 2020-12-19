@@ -1,22 +1,15 @@
-import { Evaluable } from "../../evaluable"
-import { Checkable } from "../../checkable"
-import { Inferable } from "../../inferable"
 import { Exp } from "../../exp"
 import * as Stmt from "../../stmt"
 import { begin_evaluable } from "./begin-evaluable"
 import { begin_checkable } from "./begin-checkable"
 import { begin_inferable } from "./begin-inferable"
-import { Repr } from "../../repr"
 import * as ut from "../../../ut"
 
-export type Begin = Evaluable &
-  Checkable &
-  Inferable &
-  Repr & {
-    kind: "Exp.begin"
-    stmts: Array<Stmt.Stmt>
-    ret: Exp
-  }
+export type Begin = Exp & {
+  kind: "Exp.begin"
+  stmts: Array<Stmt.Stmt>
+  ret: Exp
+}
 
 export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
   return {
