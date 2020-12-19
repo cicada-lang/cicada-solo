@@ -1,12 +1,16 @@
+import { Repr } from "../repr"
+import { EtaExpander } from "../eta-expander"
+
+export type Ty = Repr &
+  Partial<EtaExpander> & {
+    kind: string
+  }
+
 import { Arrow } from "../tys/arrow"
+import { Nat } from "../tys/nat"
 
-export type Ty = nat | Arrow
-
-export type nat = {
-  kind: "Ty.nat"
-}
-
-export const nat: nat = { kind: "Ty.nat" }
+export type nat = Nat
+export const nat = Nat
 
 export type arrow = Arrow
 export const arrow = Arrow

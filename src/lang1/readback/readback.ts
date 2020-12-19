@@ -1,6 +1,6 @@
 import * as Readback from "../readback"
 import * as Evaluate from "../evaluate"
-import * as Ty from "../ty"
+import { Ty } from "../ty"
 import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
@@ -13,19 +13,19 @@ import { do_ap } from "../exps/ap"
 
 export function readback(
   used: Set<string>,
-  t: Ty.Ty,
+  t: Ty,
   value: Value.Value
 ): Exp.Exp {
+  if (t.eta_expand) {
+    return t.eta_expand(value, { used })
+  }
+
   if (t.kind === "Ty.nat" && value.kind === "Value.zero") {
     return Exp.zero
   }
 
   if (t.kind === "Ty.nat" && value.kind === "Value.add1") {
     return Exp.add1(Readback.readback(used, t, value.prev))
-  }
-
-  if (t.kind === "Ty.arrow") {
-    return t.eta_expand(value, { used })
   }
 
   if (value.kind === "Value.not_yet") {
@@ -35,8 +35,8 @@ export function readback(
     throw new Error(
       ut.aline(`
         |When trying to readback a annotated value: ${ut.inspect(value)},
-        |the annotated type is: ${Ty.repr(value.t)},
-        |but the given type is ${Ty.repr(t)}.
+        |the annotated type is: ${value.t.repr()},
+        |but the given type is ${t.repr()}.
         |`)
     )
   }

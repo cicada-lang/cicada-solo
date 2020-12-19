@@ -1,6 +1,6 @@
 import { Inferable } from "../../inferable"
 import { Exp } from "../../exp"
-import * as Ty from "../../ty"
+import { Arrow } from "../../tys/arrow"
 import { infer } from "../../infer"
 import { check } from "../../check"
 import * as Trace from "../../../trace"
@@ -11,13 +11,14 @@ export const ap_inferable = (target: Exp, arg: Exp) =>
     inferability: ({ ctx }) => {
       const target_t = infer(ctx, target)
       if (target_t.kind === "Ty.arrow") {
-        check(ctx, arg, target_t.arg_t)
-        return target_t.ret_t
+        const arrow = target_t as Arrow
+        check(ctx, arg, arrow.arg_t)
+        return arrow.ret_t
       }
       throw new Trace.Trace(
         ut.aline(`
           |I am expecting the target_t to be Ty.arrow,
-          |but it is ${Ty.repr(target_t)}.
+          |but it is ${target_t.repr()}.
           |`)
       )
     },

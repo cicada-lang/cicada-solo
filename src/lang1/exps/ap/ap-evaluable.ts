@@ -1,6 +1,7 @@
 import { Evaluable } from "../../evaluable"
 import { evaluate } from "../../evaluate"
 import { Exp } from "../../exp"
+import { Arrow } from "../../tys/arrow"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
 import * as Env from "../../env"
@@ -20,9 +21,10 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
     return Evaluate.evaluate(new_env, target.ret)
   } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Ty.arrow") {
+      const arrow = target.t as Arrow
       return Value.not_yet(
-        target.t.ret_t,
-        Neutral.ap(target.neutral, new Normal.Normal(target.t.arg_t, arg))
+        arrow.ret_t,
+        Neutral.ap(target.neutral, new Normal.Normal(arrow.arg_t, arg))
       )
     } else {
       throw new Trace.Trace(

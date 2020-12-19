@@ -1,6 +1,5 @@
 import * as Stmt from "../stmt"
 import * as Exp from "../exp"
-import * as Ty from "../ty"
 import * as Value from "../value"
 import * as Env from "../env"
 import * as Ctx from "../ctx"
@@ -29,9 +28,7 @@ function show(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): string {
     const t = Infer.infer(ctx, exp)
     const value = Evaluate.evaluate(env, exp)
     const norm = Readback.readback(new Set(ctx.keys()), t, value)
-    const value_repr = norm.repr()
-    const t_repr = Ty.repr(t)
-    return `${t_repr} -- ${value_repr}\n`
+    return `${t.repr()} -- ${norm.repr()}\n`
   }
 
   return ""

@@ -1,5 +1,4 @@
 import { Checkable } from "../../checkable"
-import * as Ty from "../../ty"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
 
@@ -12,7 +11,7 @@ export const zero_checkable = Checkable({
       ut.aline(`
         |When checking zero,
         |I am expecting the type to be Ty.nat,
-        |but the given type is ${Ty.repr(t)}.
+        |but the given type is ${t.repr()}.
         |`)
     )
   },

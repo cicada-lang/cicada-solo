@@ -1,7 +1,6 @@
 import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import { check } from "../../check"
-import * as Ty from "../../ty"
 import * as Trace from "../../../trace"
 import * as ut from "../../../ut"
 
@@ -16,7 +15,7 @@ export const add1_checkable = (prev: Exp) =>
         ut.aline(`
           |When checking add1,
           |I am expecting the type to be Ty.nat,
-          |but the given type is ${Ty.repr(t)}.
+          |but the given type is ${t.repr()}.
           |`)
       )
     },

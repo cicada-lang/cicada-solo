@@ -39,11 +39,9 @@
 
 # lang1
 
-> refactoring `Ty`
-
-- [lang1] `Nat`
-
 > refactoring `Value`
+
+> refactoring `Stmt`
 
 # lang2
 
