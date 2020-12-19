@@ -25,8 +25,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.rec": {
-      const { t, target, base, step } = exp
-      return `rec[${Ty.repr(t)}](${repr(target)}, ${repr(base)}, ${repr(step)})`
+      return exp.repr()
     }
     case "Exp.the": {
       const the = exp
