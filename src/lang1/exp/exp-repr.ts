@@ -9,7 +9,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.fn": {
-      return `(${exp.name}) => ${repr(exp.ret)}`
+      return exp.repr()
     }
     case "Exp.ap": {
       return `${repr(exp.target)}(${repr(exp.arg)})`
