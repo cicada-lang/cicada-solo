@@ -6,7 +6,7 @@ import * as ut from "../../ut"
 export function repr(exp: Exp.Exp): string {
   switch (exp.kind) {
     case "Exp.v": {
-      return exp.name
+      return exp.repr()
     }
     case "Exp.fn": {
       return `(${exp.name}) => ${repr(exp.ret)}`
