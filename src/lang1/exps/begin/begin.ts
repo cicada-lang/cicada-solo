@@ -3,7 +3,6 @@ import { Exp } from "../../exp"
 import * as Stmt from "../../stmt"
 import { begin_evaluable } from "./begin-evaluable"
 import { Repr } from "../../repr"
-import { repr } from "../../exp"
 import * as ut from "../../../ut"
 
 export type Begin = Evaluable & Repr & {
@@ -19,7 +18,7 @@ export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
     ret,
     ...begin_evaluable(stmts, ret),
     repr: () => {
-      const s = [...stmts.map(Stmt.repr), repr(ret)].join("\n")
+      const s = [...stmts.map(Stmt.repr), ret.repr()].join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     }
   }

@@ -3,7 +3,6 @@ import { Exp } from "../../exp"
 import * as Ty from "../../ty"
 import { rec_evaluable } from "./rec-evaluable"
 import { Repr } from "../../repr"
-import { repr } from "../../exp"
 
 export type Rec = Evaluable &
   Repr & {
@@ -23,6 +22,6 @@ export function Rec(t: Ty.Ty, target: Exp, base: Exp, step: Exp): Rec {
     step,
     ...rec_evaluable(t, target, base, step),
     repr: () =>
-      `rec[${Ty.repr(t)}](${repr(target)}, ${repr(base)}, ${repr(step)})`,
+      `rec[${Ty.repr(t)}](${target.repr()}, ${base.repr()}, ${step.repr()})`,
   }
 }
