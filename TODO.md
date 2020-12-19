@@ -38,9 +38,6 @@
 
 > refactoring `Exp`
 
-- [lang1] `Evaluable`
-
-- [lang1] `Evaluable` --  v
 - [lang1] `Evaluable` --  fn
 - [lang1] `Evaluable` --  ap
 - [lang1] `Evaluable` --  zero
@@ -49,11 +46,20 @@
 - [lang1] `Evaluable` --  begin
 - [lang1] `Evaluable` --  the
 
+- [lang1] `Repr`
+
+- [lang1] `Repr` --  v
+- [lang1] `Repr` --  fn
+- [lang1] `Repr` --  ap
+- [lang1] `Repr` --  zero
+- [lang1] `Repr` --  add1
+- [lang1] `Repr` --  rec
+- [lang1] `Repr` --  begin
+- [lang1] `Repr` --  the
+
 - [lang1] `Checkable`
 
 - [lang1] `Inferable`
-
-- [lang1] `Repr`
 
 - [lang1] `AlphaRepr`
 
