@@ -2,13 +2,16 @@
 > we need enough concrete example types.
 
 - Changing lang2 to support pie will provide us more examples.
+  - Before supporting pie, we change the design of lang2 from procedural to OOP.
+
 - TLT will provide us a suite of tests, and a philosophy of testing.
 
 # partech
 
-- move partech out to its own repo
-  - learn more about framework design
-  - maybe change style before moving
+> prepare moving partech out to its own repo.
+
+- [partech] learn more about framework design
+- [partech] change style from procedural to OOP.
 
 # TLT
 
@@ -30,48 +33,6 @@
 - [TLT] 16. If It's All the Same to You
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
-
-# lang0
-
-> try tagless final style
-> - use only the first order part of this style
-
-- how to name type of denotational semantics?
-- how to name instance of denotational semantics?
-
-- we do not have good a metaphor when using tagless final style
-  - meybe we can learn from OOP, and reuse its metaphor
-    - why should we use monkey-patching,
-      when we can use typeclass?
-      not typeclass, but explicit passing function table
-    - class is for "same behavior different data"
-      typeclass is for "same behavior different type"
-      and "same type (interface) different behavior"
-    - typeclass is generaic class,
-      like collection or container,
-      but more sophisticated.
-    - class can be viewed as non generaic typeclass,
-      typeclass without type variable.
-    - since we are using explicit typeclass,
-      we must know the type, then choose the typeclass.
-    - use record type to understand class and typeclass,
-      class is a record type that can reference to itself,
-      typeclass is a record type that have type variables.
-  - meybe we should develop a metaphor from denotational semantics textbook
-  - meybe we should learn DDD about how to develop a metaphor
-
-- the note about is not well refactored,
-  how should we refactor note?
-
-- maybe we can use typeclass (function table) factory to do mutli-dispatching.
-  the function will return appropriate different function table for input data.
-
-- If OOP is programming by simulanon,
-  and when implementation domain objects
-  have a direct mapping to problem domain objects,
-  the resulting software is far easier to understand and use.
-
-  Should we use game semantics of type system?
 
 # lang2
 
