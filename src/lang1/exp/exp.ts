@@ -6,8 +6,9 @@ import { Fn } from "../exps/fn"
 import { Ap } from "../exps/ap"
 import { Zero } from "../exps/zero"
 import { Add1 } from "../exps/add1"
+import { Rec } from "../exps/rec"
 
-export type Exp = Var | Fn | Ap | Zero | Add1 | rec | begin | the
+export type Exp = Var | Fn | Ap | Zero | Add1 | Rec | begin | the
 
 export type v = Var
 export const v = Var
@@ -24,21 +25,8 @@ export const zero = Zero
 export type add1 = Add1
 export const add1 = Add1
 
-export type rec = {
-  kind: "Exp.rec"
-  t: Ty.Ty
-  target: Exp
-  base: Exp
-  step: Exp
-}
-
-export const rec = (t: Ty.Ty, target: Exp, base: Exp, step: Exp): rec => ({
-  kind: "Exp.rec",
-  t,
-  target,
-  base,
-  step,
-})
+export type rec = Rec
+export const rec = Rec
 
 export type begin = {
   kind: "Exp.begin"
