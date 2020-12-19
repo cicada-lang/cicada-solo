@@ -5,6 +5,7 @@ import * as Trace from "../../trace"
 import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
+import { do_ap } from "../exps/ap"
 
 export function do_rec(
   t: Ty.Ty,
@@ -15,9 +16,9 @@ export function do_rec(
   if (target.kind === "Value.zero") {
     return base
   } else if (target.kind === "Value.add1") {
-    return Evaluate.do_ap(
-      Evaluate.do_ap(step, target.prev),
-      Evaluate.do_rec(t, target.prev, base, step)
+    return do_ap(
+      do_ap(step, target.prev),
+      do_rec(t, target.prev, base, step)
     )
   } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Ty.nat") {

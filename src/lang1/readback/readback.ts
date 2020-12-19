@@ -5,6 +5,7 @@ import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as ut from "../../ut"
+import { do_ap } from "../exps/ap"
 
 // NOTE
 // The typed version of the readback procedure
@@ -25,7 +26,7 @@ export function readback(
     //   This implements the η-rule for functions.
     const name = ut.freshen_name(used, value_arg_name(value))
     const variable = Value.not_yet(t.arg_t, Neutral.v(name))
-    const ret = Evaluate.do_ap(value, variable)
+    const ret = do_ap(value, variable)
     return Exp.fn(
       name,
       Readback.readback(new Set([...used, name]), t.ret_t, ret)

@@ -1,10 +1,18 @@
-import * as Evaluate from "../evaluate"
-import * as Explain from "../explain"
-import * as Env from "../env"
-import * as Trace from "../../trace"
-import * as Value from "../value"
-import * as Normal from "../normal"
-import * as Neutral from "../neutral"
+import { Evaluable } from "../../evaluable"
+import { evaluate } from "../../evaluate"
+import { Exp } from "../../exp"
+import * as Evaluate from "../../evaluate"
+import * as Explain from "../../explain"
+import * as Env from "../../env"
+import * as Trace from "../../../trace"
+import * as Value from "../../value"
+import * as Normal from "../../normal"
+import * as Neutral from "../../neutral"
+
+export const ap_evaluable = (target: Exp, arg: Exp) =>
+  Evaluable({
+    evaluability: ({ env }) => do_ap(evaluate(env, target), evaluate(env, arg)),
+  })
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
   if (target.kind === "Value.fn") {

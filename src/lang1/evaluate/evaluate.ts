@@ -16,11 +16,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.ap": {
-        const { target, arg } = exp
-        return Evaluate.do_ap(
-          Evaluate.evaluate(env, target),
-          Evaluate.evaluate(env, arg)
-        )
+        return exp.evaluability({ env })
       }
       case "Exp.begin": {
         const env_new = Env.clone(env)
