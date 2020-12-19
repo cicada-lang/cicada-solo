@@ -1,7 +1,6 @@
 import * as Check from "../check"
-import * as Infer from "../infer"
+import { infer } from "../infer"
 import * as Exp from "../exp"
-import * as Stmt from "../stmt"
 import * as Ctx from "../ctx"
 import * as Ty from "../ty"
 import * as Trace from "../../trace"
@@ -31,9 +30,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
 }
 
 export function check_by_infer(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
-  const u = Infer.infer(ctx, exp)
-  // NOTE Comparing equivalent between `Ty` is simple.
-  // - For dependent type, we will need to use `Value.conversion`.
+  const u = infer(ctx, exp)
   if (ut.equal(t, u)) {
     return
   }
