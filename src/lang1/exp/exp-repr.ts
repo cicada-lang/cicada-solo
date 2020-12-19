@@ -12,7 +12,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.ap": {
-      return `${repr(exp.target)}(${repr(exp.arg)})`
+      return exp.repr()
     }
     case "Exp.begin": {
       const s = [...exp.stmts.map(Stmt.repr), repr(exp.ret)].join("\n")

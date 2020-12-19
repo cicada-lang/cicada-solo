@@ -1,7 +1,7 @@
 import { Evaluable } from "../../evaluable"
 import { Exp } from "../../exp"
-import { Repr } from "../../repr"
 import { fn_evaluable } from "./fn-evaluable"
+import { Repr } from "../../repr"
 import { repr } from "../../exp"
 
 export type Fn = Evaluable & Repr & {
