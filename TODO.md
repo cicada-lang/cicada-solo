@@ -38,7 +38,6 @@
 
 > refactoring `Exp`
 
-- [lang1] `Inferable` -- `Ap`
 - [lang1] `Inferable` -- `Rec`
 - [lang1] `Inferable` -- `Begin`
 - [lang1] `Inferable` -- `The`

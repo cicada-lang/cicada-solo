@@ -16,19 +16,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
     }
 
     if (exp.kind === "Exp.ap") {
-      const { target, arg } = exp
-      const target_t = Infer.infer(ctx, target)
-      if (target_t.kind === "Ty.arrow") {
-        Check.check(ctx, arg, target_t.arg_t)
-        return target_t.ret_t
-      } else {
-        throw new Trace.Trace(
-          ut.aline(`
-            |I am expecting the target_t to be Ty.arrow,
-            |but it is ${Ty.repr(target_t)}.
-            |`)
-        )
-      }
+      return exp.inferability({ ctx })
     }
 
     if (exp.kind === "Exp.begin") {
