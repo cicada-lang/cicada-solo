@@ -16,18 +16,6 @@ export const fn = Fn
 export type ap = Ap
 export const ap = Ap
 
-export type begin = {
-  kind: "Exp.begin"
-  stmts: Array<Stmt.Stmt>
-  ret: Exp
-}
-
-export const begin = (stmts: Array<Stmt.Stmt>, ret: Exp): begin => ({
-  kind: "Exp.begin",
-  stmts,
-  ret,
-})
-
 export type zero = {
   kind: "Exp.zero"
 }
@@ -55,6 +43,18 @@ export const rec = (t: Ty.Ty, target: Exp, base: Exp, step: Exp): rec => ({
   target,
   base,
   step,
+})
+
+export type begin = {
+  kind: "Exp.begin"
+  stmts: Array<Stmt.Stmt>
+  ret: Exp
+}
+
+export const begin = (stmts: Array<Stmt.Stmt>, ret: Exp): begin => ({
+  kind: "Exp.begin",
+  stmts,
+  ret,
 })
 
 export type the = {
