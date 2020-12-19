@@ -16,12 +16,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
     } else if (exp.kind === "Exp.add1") {
       return exp.checkability(t, { ctx })
     } else if (exp.kind === "Exp.begin") {
-      const { stmts, ret } = exp
-      const new_ctx = Ctx.clone(ctx)
-      for (const stmt of stmts) {
-        Stmt.declare(new_ctx, stmt)
-      }
-      Check.check(new_ctx, ret, t)
+      return exp.checkability(t, { ctx })
     } else {
       const u = Infer.infer(ctx, exp)
       // NOTE Comparing equivalent between `Ty` is simple.
@@ -40,8 +35,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
   } catch (error) {
     if (error instanceof Trace.Trace) {
       throw Trace.trail(error, exp)
-    } else {
-      throw error
     }
+    throw error
   }
 }

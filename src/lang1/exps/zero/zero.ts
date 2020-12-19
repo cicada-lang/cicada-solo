@@ -4,7 +4,8 @@ import { zero_evaluable } from "./zero-evaluable"
 import { zero_checkable } from "./zero-checkable"
 import { Repr } from "../../repr"
 
-export type Zero = Evaluable & Checkable &
+export type Zero = Evaluable &
+  Checkable &
   Repr & {
     kind: "Exp.zero"
   }
