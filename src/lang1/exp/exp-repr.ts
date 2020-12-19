@@ -4,30 +4,5 @@ import * as Ty from "../ty"
 import * as ut from "../../ut"
 
 export function repr(exp: Exp.Exp): string {
-  switch (exp.kind) {
-    case "Exp.v": {
-      return exp.repr()
-    }
-    case "Exp.fn": {
-      return exp.repr()
-    }
-    case "Exp.ap": {
-      return exp.repr()
-    }
-    case "Exp.begin": {
-      return exp.repr()
-    }
-    case "Exp.zero": {
-      return exp.repr()
-    }
-    case "Exp.add1": {
-      return exp.repr()
-    }
-    case "Exp.rec": {
-      return exp.repr()
-    }
-    case "Exp.the": {
-      return exp.repr()
-    }
-  }
+  return exp.repr()
 }
