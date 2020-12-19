@@ -55,6 +55,8 @@
 
 - [lang1] `Exp` as intersection type instead of union type
 
+- [lang1] inline type definition of `Exp`
+
 > refactoring `Ty`
 
 > refactoring `Value`
