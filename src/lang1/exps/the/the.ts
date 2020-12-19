@@ -14,6 +14,6 @@ export function The(t: Ty.Ty, exp: Exp): The {
     kind: "Exp.the",
     t,
     exp,
-    ...the_evaluable(t, exp)
+    ...the_evaluable(t, exp),
   }
 }
