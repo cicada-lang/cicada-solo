@@ -1,3 +1,8 @@
+> To improve the design of our type system framework,
+> we need enough concrete example types.
+> - Changing lang2 to support pie will provide us more examples.
+> - TLT will provide us a suite of tests, and a philosophy of testing.
+
 # partech
 
 - move partech out to its own repo
@@ -69,13 +74,13 @@
 
 # lang2
 
-> naming convention
-
-- [lang2] maybe we should change the naming convention to go without dot.
-
 > refactoring `Exp`
 
 > refactoring `Value`
+
+> naming convention
+
+- [lang2] maybe we should change the naming convention to go without dot.
 
 > 将 NbE 教程中的 tartlet 升级为 pie
 
