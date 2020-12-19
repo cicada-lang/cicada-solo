@@ -38,8 +38,6 @@
 
 > refactoring `Exp`
 
-- [lang1] `check_by_infer`
-
 - [lang1] `Inferable`
 
 - [lang1] `Inferable` -- `Var`
