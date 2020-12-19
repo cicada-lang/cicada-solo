@@ -18,22 +18,24 @@ export function Inferable(the: {
 }): Inferable & Checkable {
   return {
     ...the,
-    checkability: (t, { mod, ctx }) => {
-      const u = the.inferability({ mod, ctx })
-      if (!Value.subtype(mod, ctx, u, t)) {
-        const u_repr = Readback.readback(mod, ctx, Value.type, u)
-          .repr()
-          .replace(/\s+/g, " ")
-        const t_repr = Readback.readback(mod, ctx, Value.type, t)
-          .repr()
-          .replace(/\s+/g, " ")
-        throw new Trace.Trace(
-          ut.aline(`
-        |I infer the type to be ${u_repr}.
-        |But the given type is ${t_repr}.
-        |`)
-        )
-      }
-    },
+    ...Checkable({
+      checkability: (t, { mod, ctx }) => {
+        const u = the.inferability({ mod, ctx })
+        if (!Value.subtype(mod, ctx, u, t)) {
+          const u_repr = Readback.readback(mod, ctx, Value.type, u)
+            .repr()
+            .replace(/\s+/g, " ")
+          const t_repr = Readback.readback(mod, ctx, Value.type, t)
+            .repr()
+            .replace(/\s+/g, " ")
+          throw new Trace.Trace(
+            ut.aline(`
+              |I infer the type to be ${u_repr}.
+              |But the given type is ${t_repr}.
+              |`)
+          )
+        }
+      },
+    }),
   }
 }
