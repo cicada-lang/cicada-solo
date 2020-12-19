@@ -12,16 +12,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Ty.Ty): void {
     if (exp.kind === "Exp.fn") {
       return exp.checkability(t, { ctx })
     } else if (exp.kind === "Exp.zero") {
-      if (t.kind === "Ty.nat") {
-      } else {
-        throw new Trace.Trace(
-          ut.aline(`
-            |When checking ${exp.repr()},
-            |I am expecting the type to be Ty.nat,
-            |but the given type is ${Ty.repr(t)}.
-            |`)
-        )
-      }
+      return exp.checkability(t, { ctx })
     } else if (exp.kind === "Exp.add1") {
       if (t.kind === "Ty.nat") {
         Check.check(ctx, exp.prev, t)

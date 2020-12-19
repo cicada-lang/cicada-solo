@@ -1,5 +1,5 @@
 
-When checking (_) => id(id(id(id(two)))),
+When checking fn,
 I am expecting the type to be Ty.arrow,
 but the given type is Nat.
 
