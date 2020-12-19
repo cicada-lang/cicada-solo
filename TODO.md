@@ -41,8 +41,6 @@
 
 > refactoring `Ty`
 
-- [lang1] `nat-util/` instead of `nat/`
-
 - [lang1] `Arrow`
 - [lang1] `Nat`
 

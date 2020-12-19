@@ -1,7 +1,7 @@
 import { Exp } from "../../exp"
 import { add1_evaluable } from "./add1-evaluable"
 import { add1_checkable } from "./add1-checkable"
-import { nat_to_number } from "../../nat"
+import { nat_to_number } from "../../nat-util"
 
 export type Add1 = Exp & {
   kind: "Exp.add1"
