@@ -19,11 +19,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.begin": {
-        const env_new = Env.clone(env)
-        for (const stmt of exp.stmts) {
-          Stmt.execute(env_new, stmt)
-        }
-        return Evaluate.evaluate(env_new, exp.ret)
+        return exp.evaluability({ env })
       }
       case "Exp.zero": {
         return exp.evaluability({ env })
