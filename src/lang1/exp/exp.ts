@@ -5,8 +5,9 @@ import { Var } from "../exps/var"
 import { Fn } from "../exps/fn"
 import { Ap } from "../exps/ap"
 import { Zero } from "../exps/zero"
+import { Add1 } from "../exps/add1"
 
-export type Exp = Var | Fn | Ap | Zero | add1 | rec | begin | the
+export type Exp = Var | Fn | Ap | Zero | Add1 | rec | begin | the
 
 export type v = Var
 export const v = Var
@@ -20,12 +21,8 @@ export const ap = Ap
 export type zero = Zero
 export const zero = Zero
 
-export type add1 = {
-  kind: "Exp.add1"
-  prev: Exp
-}
-
-export const add1 = (prev: Exp): add1 => ({ kind: "Exp.add1", prev })
+export type add1 = Add1
+export const add1 = Add1
 
 export type rec = {
   kind: "Exp.rec"
