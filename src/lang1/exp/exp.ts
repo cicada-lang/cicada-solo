@@ -3,8 +3,9 @@ import * as Ty from "../ty"
 
 import { Var } from "../exps/var"
 import { Fn } from "../exps/fn"
+import { Ap } from "../exps/ap"
 
-export type Exp = Var | Fn | ap | zero | add1 | rec | begin | the
+export type Exp = Var | Fn | Ap | zero | add1 | rec | begin | the
 
 export type v = Var
 export const v = Var
@@ -12,17 +13,8 @@ export const v = Var
 export type fn = Fn
 export const fn = Fn
 
-export type ap = {
-  kind: "Exp.ap"
-  target: Exp
-  arg: Exp
-}
-
-export const ap = (target: Exp, arg: Exp): ap => ({
-  kind: "Exp.ap",
-  target,
-  arg,
-})
+export type ap = Ap
+export const ap = Ap
 
 export type begin = {
   kind: "Exp.begin"
