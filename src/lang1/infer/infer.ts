@@ -12,12 +12,10 @@ import * as ut from "../../ut"
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
   try {
     if (exp.kind === "Exp.v") {
-      const t = Ctx.lookup(ctx, exp.name)
-      if (t === undefined) {
-        throw new Trace.Trace(Explain.explain_name_undefined(exp.name))
-      }
-      return t
-    } else if (exp.kind === "Exp.ap") {
+      return exp.inferability({ ctx })
+    }
+
+    if (exp.kind === "Exp.ap") {
       const { target, arg } = exp
       const target_t = Infer.infer(ctx, target)
       if (target_t.kind === "Ty.arrow") {
@@ -31,13 +29,17 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
             |`)
         )
       }
-    } else if (exp.kind === "Exp.begin") {
+    }
+
+    if (exp.kind === "Exp.begin") {
       const new_ctx = Ctx.clone(ctx)
       for (const stmt of exp.stmts) {
         Stmt.declare(new_ctx, stmt)
       }
       return Infer.infer(new_ctx, exp.ret)
-    } else if (exp.kind === "Exp.rec") {
+    }
+
+    if (exp.kind === "Exp.rec") {
       const { t, target, base, step } = exp
       // NOTE target should always be infered,
       // but it is simple to just check it here,
@@ -46,18 +48,20 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       Check.check(ctx, base, t)
       Check.check(ctx, step, Ty.arrow(Ty.nat, Ty.arrow(t, t)))
       return t
-    } else if (exp.kind === "Exp.the") {
+    }
+
+    if (exp.kind === "Exp.the") {
       const the = exp
       Check.check(ctx, the.exp, the.t)
       return the.t
-    } else {
-      throw new Trace.Trace(
-        ut.aline(`
-          |I can not infer the type of ${exp.repr()}.
-          |I suggest you add a type annotation to the expression.
-          |`)
-      )
     }
+
+    throw new Trace.Trace(
+      ut.aline(`
+        |I can not infer the type of ${exp.repr()}.
+        |I suggest you add a type annotation to the expression.
+        |`)
+    )
   } catch (error) {
     if (error instanceof Trace.Trace) {
       throw Trace.trail(error, exp)

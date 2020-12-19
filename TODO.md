@@ -38,11 +38,14 @@
 
 > refactoring `Exp`
 
-- [lang1] `Inferable` -- `Var`
 - [lang1] `Inferable` -- `Ap`
 - [lang1] `Inferable` -- `Rec`
 - [lang1] `Inferable` -- `Begin`
 - [lang1] `Inferable` -- `The`
+
+- [lang1] no branches in `Inferable`
+
+- [lang1] no branches in `Checkable`
 
 - [lang1] `Exp` as intersection type instead of union type
 

@@ -6,6 +6,10 @@ import * as Trace from "../../../trace"
 export const var_inferable = (name: string) =>
   Inferable({
     inferability: ({ ctx }) => {
-      throw new Error()
+      const t = Ctx.lookup(ctx, name)
+      if (t === undefined) {
+        throw new Trace.Trace(Explain.explain_name_undefined(name))
+      }
+      return t
     },
   })
