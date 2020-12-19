@@ -1,19 +1,12 @@
-export type Ty = nat | arrow
+import { Arrow } from "../tys/arrow"
 
-type nat = {
+export type Ty = nat | Arrow
+
+export type nat = {
   kind: "Ty.nat"
 }
 
 export const nat: nat = { kind: "Ty.nat" }
 
-type arrow = {
-  kind: "Ty.arrow"
-  arg_t: Ty
-  ret_t: Ty
-}
-
-export const arrow = (arg_t: Ty, ret_t: Ty): arrow => ({
-  kind: "Ty.arrow",
-  arg_t,
-  ret_t,
-})
+export type arrow = Arrow
+export const arrow = Arrow

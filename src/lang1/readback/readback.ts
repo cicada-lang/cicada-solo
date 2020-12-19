@@ -25,19 +25,7 @@ export function readback(
   }
 
   if (t.kind === "Ty.arrow") {
-    // NOTE everything with a function type
-    //   is immediately read back as having a Lambda on top.
-    //   This implements the η-rule for functions.
-    function value_arg_name(value: Value.Value): string {
-      return value.kind === "Value.fn" ? value.name : "x"
-    }
-    const name = ut.freshen_name(used, value_arg_name(value))
-    const variable = Value.not_yet(t.arg_t, Neutral.v(name))
-    const ret = do_ap(value, variable)
-    return Exp.fn(
-      name,
-      Readback.readback(new Set([...used, name]), t.ret_t, ret)
-    )
+    return t.eta_expand(value, { used })
   }
 
   if (value.kind === "Value.not_yet") {
