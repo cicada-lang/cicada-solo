@@ -19,7 +19,7 @@ export function repr(exp: Exp.Exp): string {
       return `{\n${ut.indent(s, "  ")}\n}`
     }
     case "Exp.zero": {
-      return "0"
+      return exp.repr()
     }
     case "Exp.add1": {
       const n = Exp.nat_to_number(exp)
