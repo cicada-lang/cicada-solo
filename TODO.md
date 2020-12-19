@@ -34,9 +34,72 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
+# lang1
+
+> refactoring `Exp`
+
+- [lang1] `Evaluable`
+
+- [lang1] `Evaluable` --  v
+- [lang1] `Evaluable` --  fn
+- [lang1] `Evaluable` --  ap
+- [lang1] `Evaluable` --  zero
+- [lang1] `Evaluable` --  add1
+- [lang1] `Evaluable` --  rec
+- [lang1] `Evaluable` --  begin
+- [lang1] `Evaluable` --  the
+
+- [lang1] `Checkable`
+
+- [lang1] `Inferable`
+
+- [lang1] `Repr`
+
+- [lang1] `AlphaRepr`
+
+- [lang1] `Exp` as intersection type instead of union type
+
+> refactoring `Value`
+
 # lang2
 
 > refactoring `Exp`
+
+- [lang2] `Evaluable`
+- [lang2] `Evaluable` -- v
+- [lang2] `Evaluable` -- pi
+- [lang2] `Evaluable` -- fn
+- [lang2] `Evaluable` -- ap
+- [lang2] `Evaluable` -- sigma
+- [lang2] `Evaluable` -- cons
+- [lang2] `Evaluable` -- car
+- [lang2] `Evaluable` -- cdr
+- [lang2] `Evaluable` -- nat
+- [lang2] `Evaluable` -- zero
+- [lang2] `Evaluable` -- add1
+- [lang2] `Evaluable` -- nat_ind
+- [lang2] `Evaluable` -- equal
+- [lang2] `Evaluable` -- same
+- [lang2] `Evaluable` -- replace
+- [lang2] `Evaluable` -- trivial
+- [lang2] `Evaluable` -- sole
+- [lang2] `Evaluable` -- absurd
+- [lang2] `Evaluable` -- absurd_ind
+- [lang2] `Evaluable` -- str
+- [lang2] `Evaluable` -- quote
+- [lang2] `Evaluable` -- type
+- [lang2] `Evaluable` -- begin
+- [lang2] `Evaluable` -- the
+
+- [lang2] `Checkable`
+
+- [lang2] `Inferable`
+
+- [lang2] `Repr`
+
+- [lang2] `AlphaRepr`
+
+- [lang2] `Exp` as intersection type instead of union type
 
 > refactoring `Value`
 
