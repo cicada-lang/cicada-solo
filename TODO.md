@@ -38,7 +38,6 @@
 
 > refactoring `Exp`
 
-- [lang1] `Checkable` -- `Add1`
 - [lang1] `Checkable` -- `Begin`
 
 - [lang1] `Inferable`
