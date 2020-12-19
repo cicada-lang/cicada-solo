@@ -32,12 +32,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.rec": {
-        return Evaluate.do_rec(
-          exp.t,
-          Evaluate.evaluate(env, exp.target),
-          Evaluate.evaluate(env, exp.base),
-          Evaluate.evaluate(env, exp.step)
-        )
+        return exp.evaluability({ env })
       }
       case "Exp.the": {
         return Evaluate.evaluate(env, exp.exp)

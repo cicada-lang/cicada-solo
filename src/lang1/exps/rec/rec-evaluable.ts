@@ -1,13 +1,26 @@
-import * as Evaluate from "../evaluate"
-import * as Explain from "../explain"
-import * as Ty from "../ty"
-import * as Trace from "../../trace"
-import * as Value from "../value"
-import * as Normal from "../normal"
-import * as Neutral from "../neutral"
-import { do_ap } from "../exps/ap"
+import { Evaluable } from "../../evaluable"
+import { evaluate } from "../../evaluate"
+import { Exp } from "../../exp"
+import * as Explain from "../../explain"
+import * as Ty from "../../ty"
+import * as Trace from "../../../trace"
+import * as Value from "../../value"
+import * as Normal from "../../normal"
+import * as Neutral from "../../neutral"
+import { do_ap } from "../ap"
 
-function do_rec(
+export const rec_evaluable = (t: Ty.Ty, target: Exp, base: Exp, step: Exp) =>
+  Evaluable({
+    evaluability: ({ env }) =>
+      do_rec(
+        t,
+        evaluate(env, target),
+        evaluate(env, base),
+        evaluate(env, step)
+      ),
+  })
+
+export function do_rec(
   t: Ty.Ty,
   target: Value.Value,
   base: Value.Value,
