@@ -38,7 +38,6 @@
 
 > refactoring `Exp`
 
-- [lang1] `Zero`
 - [lang1] `Add1`
 - [lang1] `Rec`
 - [lang1] `Begin`

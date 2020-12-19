@@ -4,8 +4,9 @@ import * as Ty from "../ty"
 import { Var } from "../exps/var"
 import { Fn } from "../exps/fn"
 import { Ap } from "../exps/ap"
+import { Zero } from "../exps/zero"
 
-export type Exp = Var | Fn | Ap | zero | add1 | rec | begin | the
+export type Exp = Var | Fn | Ap | Zero | add1 | rec | begin | the
 
 export type v = Var
 export const v = Var
@@ -16,11 +17,8 @@ export const fn = Fn
 export type ap = Ap
 export const ap = Ap
 
-export type zero = {
-  kind: "Exp.zero"
-}
-
-export const zero: zero = { kind: "Exp.zero" }
+export type zero = Zero
+export const zero = Zero
 
 export type add1 = {
   kind: "Exp.add1"
