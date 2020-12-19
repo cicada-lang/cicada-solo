@@ -22,12 +22,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.add1": {
-      const n = Exp.nat_to_number(exp)
-      if (n !== undefined) {
-        return n.toString()
-      } else {
-        return `add1(${Exp.repr(exp.prev)})`
-      }
+      return exp.repr()
     }
     case "Exp.rec": {
       const { t, target, base, step } = exp
