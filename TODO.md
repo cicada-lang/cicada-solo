@@ -53,9 +53,9 @@
 
 - [lang1] `Inferable`
 
-- [lang1] `AlphaRepr`
-
 - [lang1] `Exp` as intersection type instead of union type
+
+> refactoring `Ty`
 
 > refactoring `Value`
 
