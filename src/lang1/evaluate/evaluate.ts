@@ -13,7 +13,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.fn": {
-        return Value.fn(exp.name, exp.ret, env)
+        return exp.evaluability({ env })
       }
       case "Exp.ap": {
         const { target, arg } = exp
@@ -50,8 +50,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
   } catch (error) {
     if (error instanceof Trace.Trace) {
       throw Trace.trail(error, exp)
-    } else {
-      throw error
     }
+    throw error
   }
 }
