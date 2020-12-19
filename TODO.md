@@ -37,6 +37,12 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
+# lang0
+
+> refactoring `Exp`
+
+> refactoring `Value`
+
 # lang1
 
 - [lang1] remove deps hub for `Exp`
