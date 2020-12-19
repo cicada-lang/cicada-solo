@@ -1,5 +1,10 @@
-import * as Stmt from "../stmt"
-import * as Ty from "../ty"
+import { Evaluable } from "../evaluable"
+import { Repr } from "../repr"
+
+// TODO `Exp` as intersection type instead of union type
+// export type Exp = Evaluable & Repr {}
+
+export type Exp = Var | Fn | Ap | Zero | Add1 | Rec | Begin | The
 
 import { Var } from "../exps/var"
 import { Fn } from "../exps/fn"
@@ -9,8 +14,6 @@ import { Add1 } from "../exps/add1"
 import { Rec } from "../exps/rec"
 import { Begin } from "../exps/begin"
 import { The } from "../exps/the"
-
-export type Exp = Var | Fn | Ap | Zero | Add1 | Rec | Begin | The
 
 export type v = Var
 export const v = Var

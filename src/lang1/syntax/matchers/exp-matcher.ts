@@ -3,6 +3,7 @@ import * as Ty from "../../ty"
 import * as pt from "../../../partech"
 import * as ut from "../../../ut"
 import { stmts_matcher, ty_matcher } from "../matchers"
+import { nat_from_number } from "../../nat"
 
 export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>({
@@ -27,7 +28,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
           { span }
         )
       } else {
-        return Exp.nat_from_number(n)
+        return nat_from_number(n)
       }
     },
     "exp:rec": ({ t, target, base, step }) =>

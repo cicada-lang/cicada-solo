@@ -2,7 +2,7 @@ import { Evaluable } from "../../evaluable"
 import { Exp } from "../../exp"
 import { add1_evaluable } from "./add1-evaluable"
 import { Repr } from "../../repr"
-import { nat_to_number } from "../../exp"
+import { nat_to_number } from "../../nat"
 
 export type Add1 = Evaluable &
   Repr & {

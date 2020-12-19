@@ -38,8 +38,6 @@
 
 > refactoring `Exp`
 
-- [lang1] move `nat_to_number`
-
 - [lang1] `Checkable`
 
 - [lang1] `Inferable`
