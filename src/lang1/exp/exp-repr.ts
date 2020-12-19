@@ -27,8 +27,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.the": {
-      const the = exp
-      return `{ ${Ty.repr(the.t)} -- ${repr(the.exp)} }`
+      return exp.repr()
     }
   }
 }

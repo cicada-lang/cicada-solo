@@ -38,8 +38,6 @@
 
 > refactoring `Exp`
 
-- [lang1] `Repr` -- the
-
 - [lang1] no branches in `Exp.repr`
 - [lang1] inline `Exp.repr`
 
