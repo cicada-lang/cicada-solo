@@ -29,7 +29,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.add1": {
-        return Value.add1(Evaluate.evaluate(env, exp.prev))
+        return exp.evaluability({ env })
       }
       case "Exp.rec": {
         return Evaluate.do_rec(
