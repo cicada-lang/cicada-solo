@@ -14,11 +14,9 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
     if (exp.kind === "Exp.v") {
       return exp.inferability({ ctx })
     }
-
     if (exp.kind === "Exp.ap") {
       return exp.inferability({ ctx })
     }
-
     if (exp.kind === "Exp.begin") {
       const new_ctx = Ctx.clone(ctx)
       for (const stmt of exp.stmts) {
@@ -26,7 +24,6 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       }
       return Infer.infer(new_ctx, exp.ret)
     }
-
     if (exp.kind === "Exp.rec") {
       const { t, target, base, step } = exp
       // NOTE target should always be infered,
@@ -37,13 +34,9 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Ty.Ty {
       Check.check(ctx, step, Ty.arrow(Ty.nat, Ty.arrow(t, t)))
       return t
     }
-
     if (exp.kind === "Exp.the") {
-      const the = exp
-      Check.check(ctx, the.exp, the.t)
-      return the.t
+      return exp.inferability({ ctx })
     }
-
     throw new Trace.Trace(
       ut.aline(`
         |I can not infer the type of ${exp.repr()}.

@@ -40,7 +40,6 @@
 
 - [lang1] `Inferable` -- `Rec`
 - [lang1] `Inferable` -- `Begin`
-- [lang1] `Inferable` -- `The`
 
 - [lang1] no branches in `Inferable`
 
