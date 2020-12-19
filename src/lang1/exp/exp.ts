@@ -4,7 +4,16 @@ import { Repr } from "../repr"
 // TODO `Exp` as intersection type instead of union type
 // export type Exp = Evaluable & Repr {}
 
-export type Exp = Var | Fn | Ap | Zero | Add1 | Rec | Begin | The
+export type Exp =
+  | Var
+  // TODO
+  | Fn
+  | Ap
+  | Zero
+  | Add1
+  | Rec
+  | Begin
+  | The
 
 import { Var } from "../exps/var"
 import { Fn } from "../exps/fn"

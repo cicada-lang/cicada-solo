@@ -38,9 +38,18 @@
 
 > refactoring `Exp`
 
-- [lang1] `Checkable`
+- [lang1] `Checkable` -- `Fn`
+- [lang1] `Checkable` -- `Zero`
+- [lang1] `Checkable` -- `Add1`
+- [lang1] `Checkable` -- `Begin`
 
 - [lang1] `Inferable`
+
+- [lang1] `Inferable` -- `Var`
+- [lang1] `Inferable` -- `Ap`
+- [lang1] `Inferable` -- `Rec`
+- [lang1] `Inferable` -- `Begin`
+- [lang1] `Inferable` -- `The`
 
 - [lang1] `Exp` as intersection type instead of union type
 
