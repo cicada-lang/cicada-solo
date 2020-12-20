@@ -49,7 +49,6 @@
 
 > refactoring `Value`
 
-- [lang1] type guards for value
 - [lang1] clear deps
 
 > refactoring `Neutral`
