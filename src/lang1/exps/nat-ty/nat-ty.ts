@@ -1,10 +1,10 @@
 import { Repr } from "../../repr"
 
-export type NatTy = Repr & {
-  kind: "NatTy"
+export type Nat = Repr & {
+  kind: "Nat"
 }
 
-export const NatTy: NatTy = {
-  kind: "NatTy",
-  repr: () => "NatTy",
+export const Nat: Nat = {
+  kind: "Nat",
+  repr: () => "Nat",
 }

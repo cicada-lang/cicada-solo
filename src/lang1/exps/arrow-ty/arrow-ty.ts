@@ -3,16 +3,16 @@ import { EtaExpander } from "../../eta-expander"
 import { Repr } from "../../repr"
 import { arrow_eta_expander } from "./arrow-eta-expander"
 
-export type ArrowTy = EtaExpander &
+export type Arrow = EtaExpander &
   Repr & {
-    kind: "ArrowTy"
+    kind: "Arrow"
     arg_t: Ty
     ret_t: Ty
   }
 
-export function ArrowTy(arg_t: Ty, ret_t: Ty): ArrowTy {
+export function Arrow(arg_t: Ty, ret_t: Ty): Arrow {
   return {
-    kind: "ArrowTy",
+    kind: "Arrow",
     arg_t,
     ret_t,
     ...arrow_eta_expander(arg_t, ret_t),
