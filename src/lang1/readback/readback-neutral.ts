@@ -14,15 +14,15 @@ export function readback_neutral(
     case "Neutral.ap": {
       return Ap(
         Readback.readback_neutral(used, neutral.target),
-        Readback.readback_normal(used, neutral.arg)
+        neutral.arg.readback_normal(used)
       )
     }
     case "Neutral.rec": {
       return Rec(
         neutral.ret_t,
         Readback.readback_neutral(used, neutral.target),
-        Readback.readback_normal(used, neutral.base),
-        Readback.readback_normal(used, neutral.step)
+        neutral.base.readback_normal(used),
+        neutral.step.readback_normal(used)
       )
     }
   }

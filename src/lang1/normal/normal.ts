@@ -1,5 +1,8 @@
 import { Ty } from "../ty"
 import { Value } from "../value"
+import { Exp } from "../exp"
+import { Names } from "../readbackable"
+import { readback } from "../readback"
 
 // NOTE
 // We need type in normal form,
@@ -19,8 +22,13 @@ import { Value } from "../value"
 export type Normal = {
   t: Ty
   value: Value
+  readback_normal: (used: Names) => Exp
 }
 
 export function Normal(t: Ty, value: Value): Normal {
-  return { t, value }
+  return {
+    t,
+    value,
+    readback_normal: (used) => readback(used, t, value),
+  }
 }

@@ -47,8 +47,6 @@
 
 # lang1
 
-- [lang1] `Normal` own `readback_normal`
-
 > refactoring `Neutral`
 
 - [lang1] `Neutral` own `readback_neutral`
