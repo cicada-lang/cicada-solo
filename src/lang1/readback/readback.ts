@@ -1,12 +1,7 @@
-import * as Readback from "../readback"
-import * as Evaluate from "../evaluate"
 import { Ty } from "../ty"
 import * as Exp from "../exp"
-import { Add1, Zero } from "../exps"
 import * as Value from "../value"
-import * as Neutral from "../neutral"
 import * as ut from "../../ut"
-import { do_ap } from "../exps/ap"
 
 // NOTE
 // The typed version of the readback procedure

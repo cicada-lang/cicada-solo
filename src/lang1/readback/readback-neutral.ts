@@ -1,7 +1,6 @@
 import * as Readback from "../readback"
 import { Exp } from "../exp"
 import { Var, Rec, Ap } from "../exps"
-import * as Normal from "../normal"
 import * as Neutral from "../neutral"
 
 export function readback_neutral(

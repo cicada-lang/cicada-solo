@@ -1,7 +1,6 @@
 import { Checkable } from "../../checkable"
 import { Exp } from "../../exp"
 import * as Ctx from "../../ctx"
-import * as Ty from "../../ty"
 import { ArrowTy } from "../../exps/arrow-ty"
 import { check } from "../../check"
 import * as Trace from "../../../trace"

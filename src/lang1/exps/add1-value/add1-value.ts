@@ -1,6 +1,5 @@
 import { Value } from "../../value"
 import { Readbackable } from "../../readbackable"
-import { Exp } from "../../exp"
 import { readback } from "../../readback"
 import { Add1 } from "../add1"
 import { as_nat_ty } from "../nat-ty"

@@ -47,10 +47,6 @@
 
 # lang1
 
-> refactoring `Value`
-
-- [lang1] clear deps
-
 > refactoring `Neutral`
 
 > refactoring `Normal`

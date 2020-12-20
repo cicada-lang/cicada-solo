@@ -1,6 +1,5 @@
 import { Ty } from "../ty"
 import { Exp } from "../exp"
-import { Ctx } from "../ctx"
 
 export type Names = Set<string>
 

@@ -1,6 +1,5 @@
 import { Exp } from "../exp"
-import { Add1, Zero } from "../exps"
-import * as ut from "../../ut"
+import { Add1 } from "../exps"
 
 export function nat_to_number(exp: Exp): number | undefined {
   if (exp.kind === "Zero") {
