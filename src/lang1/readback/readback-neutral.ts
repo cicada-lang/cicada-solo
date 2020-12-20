@@ -1,24 +1,25 @@
 import * as Readback from "../readback"
-import * as Exp from "../exp"
+import { Exp } from "../exp"
+import { Var, Rec, Ap } from "../exps"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
 
 export function readback_neutral(
   used: Set<string>,
   neutral: Neutral.Neutral
-): Exp.Exp {
+): Exp {
   switch (neutral.kind) {
     case "Neutral.v": {
-      return Exp.v(neutral.name)
+      return Var(neutral.name)
     }
     case "Neutral.ap": {
-      return Exp.ap(
+      return Ap(
         Readback.readback_neutral(used, neutral.target),
         Readback.readback_normal(used, neutral.arg)
       )
     }
     case "Neutral.rec": {
-      return Exp.rec(
+      return Rec(
         neutral.ret_t,
         Readback.readback_neutral(used, neutral.target),
         Readback.readback_normal(used, neutral.base),

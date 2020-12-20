@@ -2,6 +2,7 @@ import * as Readback from "../readback"
 import * as Evaluate from "../evaluate"
 import { Ty } from "../ty"
 import * as Exp from "../exp"
+import { Add1, Zero } from "../exps"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import * as ut from "../../ut"
@@ -19,11 +20,11 @@ export function readback(used: Names, t: Ty, value: Value.Value): Exp.Exp {
   }
 
   if (t.kind === "Ty.nat" && value.kind === "Value.zero") {
-    return Exp.zero
+    return Zero
   }
 
   if (t.kind === "Ty.nat" && value.kind === "Value.add1") {
-    return Exp.add1(Readback.readback(used, t, value.prev))
+    return Add1(Readback.readback(used, t, value.prev))
   }
 
   if (value.kind === "Value.not_yet") {

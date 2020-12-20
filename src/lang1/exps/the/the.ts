@@ -4,14 +4,14 @@ import { the_evaluable } from "./the-evaluable"
 import { the_inferable } from "./the-inferable"
 
 export type The = Exp & {
-  kind: "Exp.the"
+  kind: "The"
   t: Ty
   exp: Exp
 }
 
 export function The(t: Ty, exp: Exp): The {
   return {
-    kind: "Exp.the",
+    kind: "The",
     t,
     exp,
     ...the_evaluable(t, exp),
