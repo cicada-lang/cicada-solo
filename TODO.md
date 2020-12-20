@@ -47,6 +47,15 @@
 
 > refactoring `Value`
 
+- [lang1] `ZeroValue`
+- [lang1] `Add1Value`
+- [lang1] `NotYetValue`
+
+- [lang1] `Readbackable`
+
+- [lang1] `Readbackable` -- `ZeroValue`
+- [lang1] `Readbackable` -- `Add1Value`
+
 > refactoring `Neutral`
 
 > refactoring `Normal`
