@@ -56,6 +56,7 @@
 - [lang1] `Readbackable` -- `NotYetValue`
 
 - [lang1] `Value` as intersection type instead of union type
+- [lang1] no deps hub for `Value`
 
 > refactoring `Neutral`
 
