@@ -5,11 +5,10 @@ import * as Readback from "../../readback"
 import { Names } from "../../readbackable"
 import { Ap } from "../ap"
 
-export type ApNeutral = {
+export type ApNeutral = Neutral & {
   kind: "Neutral.ap"
   target: Neutral
   arg: Normal
-  readback_neutral: (the: { used: Names }) => Exp
 }
 
 export function ApNeutral(target: Neutral, arg: Normal): ApNeutral {

@@ -1,11 +1,11 @@
 import { Exp } from "../../exp"
+import { Neutral } from "../../neutral"
 import { Var } from "../var"
 import { Names } from "../../readbackable"
 
-export type VarNeutral = {
+export type VarNeutral = Neutral & {
   kind: "Neutral.v"
   name: string
-  readback_neutral: (the: { used: Names }) => Exp
 }
 
 export function VarNeutral(name: string): VarNeutral {

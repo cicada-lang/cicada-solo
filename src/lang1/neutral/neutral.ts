@@ -1,17 +1,7 @@
-import * as Ty from "../ty"
-import * as Normal from "../normal"
+import { Names } from "../readbackable"
+import { Exp } from "../exp"
 
-import { VarNeutral } from "../exps/var-neutral"
-import { ApNeutral } from "../exps/ap-neutral"
-import { RecNeutral } from "../exps/rec-neutral"
-
-export type Neutral = VarNeutral | ApNeutral | RecNeutral
-
-export type v = VarNeutral
-export const v = VarNeutral
-
-export type ap = ApNeutral
-export const ap = ApNeutral
-
-export type rec = RecNeutral
-export const rec = RecNeutral
+export type Neutral = {
+  kind: string
+  readback_neutral: (the: { used: Names }) => Exp
+}

@@ -6,13 +6,12 @@ import * as Readback from "../../readback"
 import { Names } from "../../readbackable"
 import { Rec } from "../rec"
 
-export type RecNeutral = {
+export type RecNeutral = Neutral & {
   kind: "Neutral.rec"
   ret_t: Ty
   target: Neutral
   base: Normal
   step: Normal
-  readback_neutral: (the: { used: Names }) => Exp
 }
 
 export function RecNeutral(

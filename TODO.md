@@ -49,9 +49,8 @@
 
 > refactoring `Neutral`
 
-- [lang1] `Neutral` as intersection type
-
 - [lang1] inline `Readback.readback_neutral`
+- [lang1] no deps hub in `Neutral`
 
 > refactoring `Stmt`
 
