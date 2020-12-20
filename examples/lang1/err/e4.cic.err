@@ -1,6 +1,6 @@
 
 When checking fn,
-I am expecting the type to be Ty.arrow,
+I am expecting the type to be Arrow,
 but the given type is Nat.
 
 previous:

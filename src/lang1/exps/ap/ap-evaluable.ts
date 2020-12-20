@@ -1,7 +1,7 @@
 import { Evaluable } from "../../evaluable"
 import { evaluate } from "../../evaluate"
 import { Exp } from "../../exp"
-import { Arrow } from "../../exps/arrow"
+import { ArrowTy } from "../../exps/arrow-ty"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
 import * as Env from "../../env"
@@ -20,8 +20,8 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
     const new_env = Env.update(Env.clone(target.env), target.name, arg)
     return Evaluate.evaluate(new_env, target.ret)
   } else if (target.kind === "Value.not_yet") {
-    if (target.t.kind === "Arrow") {
-      const arrow = target.t as Arrow
+    if (target.t.kind === "ArrowTy") {
+      const arrow = target.t as ArrowTy
       return Value.not_yet(
         arrow.ret_t,
         Neutral.ap(target.neutral, new Normal.Normal(arrow.arg_t, arg))
@@ -30,7 +30,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
       throw new Trace.Trace(
         Explain.explain_elim_target_type_mismatch({
           elim: "ap",
-          expecting: ["Arrow"],
+          expecting: ["ArrowTy"],
           reality: target.t.kind,
         })
       )

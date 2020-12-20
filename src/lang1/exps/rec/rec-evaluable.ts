@@ -8,7 +8,7 @@ import * as Value from "../../value"
 import * as Normal from "../../normal"
 import * as Neutral from "../../neutral"
 import { do_ap } from "../ap"
-import { Arrow, Nat } from "../../exps"
+import { ArrowTy, NatTy } from "../../exps"
 
 export const rec_evaluable = (t: Ty.Ty, target: Exp, base: Exp, step: Exp) =>
   Evaluable({
@@ -32,8 +32,8 @@ export function do_rec(
   } else if (target.kind === "Value.add1") {
     return do_ap(do_ap(step, target.prev), do_rec(t, target.prev, base, step))
   } else if (target.kind === "Value.not_yet") {
-    if (target.t.kind === "Nat") {
-      const step_t = Arrow(Nat, Arrow(t, t))
+    if (target.t.kind === "NatTy") {
+      const step_t = ArrowTy(NatTy, ArrowTy(t, t))
       return Value.not_yet(
         t,
         Neutral.rec(
@@ -47,7 +47,7 @@ export function do_rec(
       throw new Trace.Trace(
         Explain.explain_elim_target_type_mismatch({
           elim: "rec",
-          expecting: ["Nat"],
+          expecting: ["NatTy"],
           reality: target.t.kind,
         })
       )

@@ -7,14 +7,14 @@ import * as ut from "../../../ut"
 export const add1_checkable = (prev: Exp) =>
   Checkable({
     checkability: (t, { ctx }) => {
-      if (t.kind === "Nat") {
+      if (t.kind === "NatTy") {
         check(ctx, prev, t)
         return
       }
       throw new Trace.Trace(
         ut.aline(`
           |When checking add1,
-          |I am expecting the type to be Nat,
+          |I am expecting the type to be NatTy,
           |but the given type is ${t.repr()}.
           |`)
       )

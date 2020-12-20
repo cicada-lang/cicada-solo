@@ -7,5 +7,5 @@ export * from "./rec"
 export * from "./begin"
 export * from "./the"
 
-export * from "./arrow"
-export * from "./nat"
+export * from "./arrow-ty"
+export * from "./nat-ty"

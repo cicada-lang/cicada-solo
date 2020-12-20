@@ -1,6 +1,6 @@
 export const ty = {
   $grammar: {
-    "ty:nat": ['"Nat"'],
+    "ty:nat": ['"NatTy"'],
     "ty:arrow": ['"("', { arg_t: "ty" }, '")"', '"-"', '">"', { ret_t: "ty" }],
   },
 }
