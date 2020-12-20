@@ -49,9 +49,8 @@
 
 > refactoring `Value`
 
-- [lang1] `Readbackable`
+- [lang1] type guard for ty
 
-- [lang1] `Readbackable` -- `ZeroValue`
 - [lang1] `Readbackable` -- `Add1Value`
 - [lang1] `Readbackable` -- `NotYetValue`
 
