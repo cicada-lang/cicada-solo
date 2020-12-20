@@ -28,16 +28,7 @@ export function readback(used: Names, t: Ty, value: Value.Value): Exp.Exp {
   }
 
   if (value.kind === "NotYetValue") {
-    if (ut.equal(t, value.t)) {
-      return Readback.readback_neutral(used, value.neutral)
-    }
-    throw new Error(
-      ut.aline(`
-        |When trying to readback a annotated value: ${ut.inspect(value)},
-        |the annotated type is: ${value.t.repr()},
-        |but the given type is ${t.repr()}.
-        |`)
-    )
+    return value.readbackability(t, { used })
   }
 
   throw new Error(
