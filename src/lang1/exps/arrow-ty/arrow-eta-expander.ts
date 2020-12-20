@@ -6,7 +6,8 @@ import * as Neutral from "../../neutral"
 import { readback } from "../../readback"
 import { do_ap } from "../../exps/ap"
 import * as ut from "../../../ut"
-import { NotYetValue } from "../../exps/not-yet-value"
+import { NotYetValue } from "../not-yet-value"
+import { is_fn_value } from "../fn-value"
 
 // NOTE everything with a function type
 //   is immediately read back as having a Lambda on top.
@@ -23,5 +24,5 @@ export const arrow_eta_expander = (arg_t: Ty, ret_t: Ty) =>
   })
 
 function value_arg_name(value: Value.Value): string {
-  return value.kind === "FnValue" ? value.name : "x"
+  return is_fn_value(value) ? value.name : "x"
 }

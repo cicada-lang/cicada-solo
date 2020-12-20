@@ -49,8 +49,9 @@
 
 > refactoring `Value`
 
-- [lang1] `Value` as intersection type instead of union type
 - [lang1] no deps hub for `Value`
+- [lang1] type guards for value
+- [lang1] clear deps
 
 > refactoring `Neutral`
 

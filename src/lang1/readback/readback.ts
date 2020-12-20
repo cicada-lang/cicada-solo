@@ -19,15 +19,7 @@ export function readback(used: Names, t: Ty, value: Value.Value): Exp.Exp {
     return t.eta_expand(value, { used })
   }
 
-  if (value.kind === "ZeroValue") {
-    return value.readbackability(t, { used })
-  }
-
-  if (value.kind === "Add1Value") {
-    return value.readbackability(t, { used })
-  }
-
-  if (value.kind === "NotYetValue") {
+  if (value.readbackability) {
     return value.readbackability(t, { used })
   }
 

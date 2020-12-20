@@ -9,7 +9,8 @@ import * as Normal from "../../normal"
 import * as Neutral from "../../neutral"
 import { do_ap } from "../ap"
 import { ArrowTy, NatTy } from "../../exps"
-import { NotYetValue } from "../../exps/not-yet-value"
+import { NotYetValue } from "../not-yet-value"
+import { is_add1_value } from "../add1-value"
 
 export const rec_evaluable = (t: Ty.Ty, target: Exp, base: Exp, step: Exp) =>
   Evaluable({
@@ -30,16 +31,16 @@ export function do_rec(
 ): Value.Value {
   if (target.kind === "ZeroValue") {
     return base
-  } else if (target.kind === "Add1Value") {
+  } else if (is_add1_value(target)) {
     return do_ap(do_ap(step, target.prev), do_rec(t, target.prev, base, step))
   } else if (target.kind === "NotYetValue") {
-    if (target.t.kind === "NatTy") {
+    if ((target as NotYetValue).t.kind === "NatTy") {
       const step_t = ArrowTy(NatTy, ArrowTy(t, t))
       return NotYetValue(
         t,
         Neutral.rec(
           t,
-          target.neutral,
+          (target as NotYetValue).neutral,
           new Normal.Normal(t, base),
           new Normal.Normal(step_t, step)
         )
@@ -49,7 +50,7 @@ export function do_rec(
         Explain.explain_elim_target_type_mismatch({
           elim: "rec",
           expecting: ["NatTy"],
-          reality: target.t.kind,
+          reality: (target as NotYetValue).t.kind,
         })
       )
     }
