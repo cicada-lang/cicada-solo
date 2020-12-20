@@ -50,6 +50,7 @@
 > refactoring `Stmt`
 
 - [lang1] `Stmt.def` vs `Stmt.show`
+- [lang1] `Stmt.def` -- `execute` vs `declare`
 
 # lang2
 
