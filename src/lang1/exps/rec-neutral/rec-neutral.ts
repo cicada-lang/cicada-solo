@@ -2,7 +2,6 @@ import { Neutral } from "../../neutral"
 import { Normal } from "../../normal"
 import { Exp } from "../../exp"
 import { Ty } from "../../ty"
-import * as Readback from "../../readback"
 import { Names } from "../../readbackable"
 import { Rec } from "../rec"
 
@@ -29,7 +28,7 @@ export function RecNeutral(
     readback_neutral: ({ used }) =>
       Rec(
         ret_t,
-        Readback.readback_neutral(used, target),
+        target.readback_neutral({ used }),
         base.readback_normal({ used }),
         step.readback_normal({ used })
       ),

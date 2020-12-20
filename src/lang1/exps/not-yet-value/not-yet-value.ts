@@ -2,7 +2,6 @@ import { Ty } from "../../ty"
 import { Value } from "../../value"
 import { Neutral } from "../../neutral"
 import { Readbackable } from "../../readbackable"
-import { readback_neutral } from "../../readback"
 import * as ut from "../../../ut"
 
 export type NotYetValue = Readbackable & {
@@ -19,7 +18,7 @@ export function NotYetValue(t: Ty, neutral: Neutral): NotYetValue {
     ...Readbackable({
       readbackability: (u, { used }) => {
         if (ut.equal(u, t)) {
-          return readback_neutral(used, neutral)
+          return neutral.readback_neutral({ used })
         }
         throw new Error(
           ut.aline(`

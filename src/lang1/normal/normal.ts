@@ -22,7 +22,7 @@ import { readback } from "../readback"
 export type Normal = {
   t: Ty
   value: Value
-  readback_normal: (the: {used: Names}) => Exp
+  readback_normal: (the: { used: Names }) => Exp
 }
 
 export function Normal(t: Ty, value: Value): Normal {

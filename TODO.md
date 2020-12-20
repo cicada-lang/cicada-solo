@@ -49,7 +49,6 @@
 
 > refactoring `Neutral`
 
-- [lang1] inline `Readback.readback_neutral`
 - [lang1] no deps hub in `Neutral`
 
 > refactoring `Stmt`

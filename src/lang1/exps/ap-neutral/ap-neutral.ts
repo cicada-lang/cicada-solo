@@ -17,9 +17,6 @@ export function ApNeutral(target: Neutral, arg: Normal): ApNeutral {
     target,
     arg,
     readback_neutral: ({ used }) =>
-      Ap(
-        Readback.readback_neutral(used, target),
-        arg.readback_normal({ used })
-      ),
+      Ap(target.readback_neutral({ used }), arg.readback_normal({ used })),
   }
 }
