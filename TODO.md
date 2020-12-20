@@ -49,7 +49,6 @@
 
 > refactoring `Value`
 
-- [lang1] `Add1Value`
 - [lang1] `NotYetValue`
 
 - [lang1] `Readbackable`

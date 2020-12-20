@@ -5,8 +5,9 @@ import * as Neutral from "../neutral"
 
 import { FnValue } from "../exps/fn-value"
 import { ZeroValue } from "../exps/zero-value"
+import { Add1Value } from "../exps/add1-value"
 
-export type Value = not_yet | FnValue | ZeroValue | add1
+export type Value = not_yet | FnValue | ZeroValue | Add1Value
 
 export type not_yet = {
   kind: "Value.not_yet"
@@ -26,12 +27,5 @@ export const fn = FnValue
 export type zero = ZeroValue
 export const zero = ZeroValue
 
-export type add1 = {
-  kind: "Value.add1"
-  prev: Value
-}
-
-export const add1 = (prev: Value): add1 => ({
-  kind: "Value.add1",
-  prev,
-})
+export type add1 = Add1Value
+export const add1 = Add1Value
