@@ -4,13 +4,13 @@ import { add1_checkable } from "./add1-checkable"
 import { nat_to_number } from "../../nat-util"
 
 export type Add1 = Exp & {
-  kind: "Exp.add1"
+  kind: "Add1"
   prev: Exp
 }
 
 export function Add1(prev: Exp): Add1 {
   return {
-    kind: "Exp.add1",
+    kind: "Add1",
     prev,
     ...add1_evaluable(prev),
     ...add1_checkable(prev),

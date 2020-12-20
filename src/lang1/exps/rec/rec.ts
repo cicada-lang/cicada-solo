@@ -4,7 +4,7 @@ import { rec_evaluable } from "./rec-evaluable"
 import { rec_inferable } from "./rec-inferable"
 
 export type Rec = Exp & {
-  kind: "Exp.rec"
+  kind: "Rec"
   t: Ty
   target: Exp
   base: Exp
@@ -13,7 +13,7 @@ export type Rec = Exp & {
 
 export function Rec(t: Ty, target: Exp, base: Exp, step: Exp): Rec {
   return {
-    kind: "Exp.rec",
+    kind: "Rec",
     t,
     target,
     base,

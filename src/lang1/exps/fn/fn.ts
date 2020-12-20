@@ -3,14 +3,14 @@ import { fn_evaluable } from "./fn-evaluable"
 import { fn_checkable } from "./fn-checkable"
 
 export type Fn = Exp & {
-  kind: "Exp.fn"
+  kind: "Fn"
   name: string
   ret: Exp
 }
 
 export function Fn(name: string, ret: Exp): Fn {
   return {
-    kind: "Exp.fn",
+    kind: "Fn",
     name,
     ret,
     ...fn_evaluable(name, ret),

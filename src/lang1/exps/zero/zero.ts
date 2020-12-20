@@ -3,11 +3,11 @@ import { zero_evaluable } from "./zero-evaluable"
 import { zero_checkable } from "./zero-checkable"
 
 export type Zero = Exp & {
-  kind: "Exp.zero"
+  kind: "Zero"
 }
 
 export const Zero: Zero = {
-  kind: "Exp.zero",
+  kind: "Zero",
   ...zero_evaluable,
   ...zero_checkable,
   repr: () => "0",
