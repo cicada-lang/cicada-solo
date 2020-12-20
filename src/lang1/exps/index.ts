@@ -9,3 +9,8 @@ export * from "./the"
 
 export * from "./arrow-ty"
 export * from "./nat-ty"
+
+export * from "./fn-value"
+export * from "./zero-value"
+export * from "./add1-value"
+export * from "./not-yet-value"

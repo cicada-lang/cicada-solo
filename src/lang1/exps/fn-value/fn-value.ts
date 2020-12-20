@@ -2,7 +2,7 @@ import { Exp } from "../../exp"
 import { Env } from "../../env"
 
 export type FnValue = {
-  kind: "Value.fn"
+  kind: "FnValue"
   name: string
   ret: Exp
   env: Env
@@ -10,7 +10,7 @@ export type FnValue = {
 
 export function FnValue(name: string, ret: Exp, env: Env): FnValue {
   return {
-    kind: "Value.fn",
+    kind: "FnValue",
     name,
     ret,
     env,

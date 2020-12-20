@@ -19,15 +19,15 @@ export function readback(used: Names, t: Ty, value: Value.Value): Exp.Exp {
     return t.eta_expand(value, { used })
   }
 
-  if (t.kind === "NatTy" && value.kind === "Value.zero") {
+  if (t.kind === "NatTy" && value.kind === "ZeroValue") {
     return Zero
   }
 
-  if (t.kind === "NatTy" && value.kind === "Value.add1") {
+  if (t.kind === "NatTy" && value.kind === "Add1Value") {
     return Add1(Readback.readback(used, t, value.prev))
   }
 
-  if (value.kind === "Value.not_yet") {
+  if (value.kind === "NotYetValue") {
     if (ut.equal(t, value.t)) {
       return Readback.readback_neutral(used, value.neutral)
     }

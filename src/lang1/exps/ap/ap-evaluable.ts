@@ -7,6 +7,7 @@ import * as Explain from "../../explain"
 import * as Env from "../../env"
 import * as Trace from "../../../trace"
 import * as Value from "../../value"
+import { NotYetValue } from "../../exps/not-yet-value"
 import * as Normal from "../../normal"
 import * as Neutral from "../../neutral"
 
@@ -16,13 +17,13 @@ export const ap_evaluable = (target: Exp, arg: Exp) =>
   })
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
-  if (target.kind === "Value.fn") {
+  if (target.kind === "FnValue") {
     const new_env = Env.update(Env.clone(target.env), target.name, arg)
     return Evaluate.evaluate(new_env, target.ret)
-  } else if (target.kind === "Value.not_yet") {
+  } else if (target.kind === "NotYetValue") {
     if (target.t.kind === "ArrowTy") {
       const arrow = target.t as ArrowTy
-      return Value.not_yet(
+      return NotYetValue(
         arrow.ret_t,
         Neutral.ap(target.neutral, new Normal.Normal(arrow.arg_t, arg))
       )
@@ -39,7 +40,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
     throw new Trace.Trace(
       Explain.explain_elim_target_mismatch({
         elim: "ap",
-        expecting: ["Value.fn", "Value.not_yet"],
+        expecting: ["FnValue", "NotYetValue"],
         reality: target.kind,
       })
     )

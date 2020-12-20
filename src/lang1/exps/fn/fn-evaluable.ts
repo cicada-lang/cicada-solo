@@ -1,8 +1,8 @@
 import { Evaluable } from "../../evaluable"
 import { Exp } from "../../exp"
-import * as Value from "../../value"
+import { FnValue } from "../../exps/fn-value"
 
 export const fn_evaluable = (name: string, ret: Exp) =>
   Evaluable({
-    evaluability: ({ env }) => Value.fn(name, ret, env),
+    evaluability: ({ env }) => FnValue(name, ret, env),
   })

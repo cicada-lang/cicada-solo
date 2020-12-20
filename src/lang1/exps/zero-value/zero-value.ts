@@ -1,7 +1,7 @@
 export type ZeroValue = {
-  kind: "Value.zero"
+  kind: "ZeroValue"
 }
 
 export const ZeroValue: ZeroValue = {
-  kind: "Value.zero",
+  kind: "ZeroValue",
 }

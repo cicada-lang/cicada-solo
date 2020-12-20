@@ -1,9 +1,9 @@
 import { Evaluable } from "../../evaluable"
 import { evaluate } from "../../evaluate"
 import { Exp } from "../../exp"
-import * as Value from "../../value"
+import {Add1Value} from "../../exps/add1-value"
 
 export const add1_evaluable = (prev: Exp) =>
   Evaluable({
-    evaluability: ({ env }) => Value.add1(evaluate(env, prev)),
+    evaluability: ({ env }) => Add1Value(evaluate(env, prev)),
   })
