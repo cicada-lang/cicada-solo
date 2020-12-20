@@ -49,7 +49,6 @@
 
 > refactoring `Value`
 
-- [lang1] `FnValue`
 - [lang1] `ZeroValue`
 - [lang1] `Add1Value`
 - [lang1] `NotYetValue`
@@ -143,7 +142,7 @@
       by using postfix notation?
   - How about CaseFn?
     where the target is the argument
-    instead of the funciton.
+    instead of the function.
   - Maybe we do not need to "dispatch over type in the readback",
     but we do need to handle eta-expansion before `NotYetValue` other cases.
   - Absurd is also a special case, which must goes before `NotYetValue`.
