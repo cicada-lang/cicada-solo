@@ -47,10 +47,6 @@
 
 # lang1
 
-> refactoring `Neutral`
-
-- [lang1] no deps hub in `Neutral`
-
 > refactoring `Stmt`
 
 # lang2

@@ -6,14 +6,14 @@ import { Names } from "../../readbackable"
 import { Ap } from "../ap"
 
 export type ApNeutral = Neutral & {
-  kind: "Neutral.ap"
+  kind: "ApNeutral"
   target: Neutral
   arg: Normal
 }
 
 export function ApNeutral(target: Neutral, arg: Normal): ApNeutral {
   return {
-    kind: "Neutral.ap",
+    kind: "ApNeutral",
     target,
     arg,
     readback_neutral: ({ used }) =>

@@ -6,7 +6,7 @@ import { Names } from "../../readbackable"
 import { Rec } from "../rec"
 
 export type RecNeutral = Neutral & {
-  kind: "Neutral.rec"
+  kind: "RecNeutral"
   ret_t: Ty
   target: Neutral
   base: Normal
@@ -20,7 +20,7 @@ export function RecNeutral(
   step: Normal
 ): RecNeutral {
   return {
-    kind: "Neutral.rec",
+    kind: "RecNeutral",
     ret_t,
     target,
     base,

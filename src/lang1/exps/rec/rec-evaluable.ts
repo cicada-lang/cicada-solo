@@ -12,6 +12,7 @@ import { ArrowTy, NatTy } from "../../exps"
 import { NotYetValue, is_not_yet_value } from "../not-yet-value"
 import { is_add1_value } from "../add1-value"
 import { is_zero_value } from "../zero-value"
+import { RecNeutral } from "../rec-neutral"
 
 export const rec_evaluable = (t: Ty.Ty, target: Exp, base: Exp, step: Exp) =>
   Evaluable({
@@ -39,7 +40,7 @@ export function do_rec(
       const step_t = ArrowTy(NatTy, ArrowTy(t, t))
       return NotYetValue(
         t,
-        Neutral.rec(t, target.neutral, Normal(t, base), Normal(step_t, step))
+        RecNeutral(t, target.neutral, Normal(t, base), Normal(step_t, step))
       )
     } else {
       throw new Trace.Trace(
