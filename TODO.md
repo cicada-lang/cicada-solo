@@ -49,7 +49,11 @@
 
 > refactoring `Neutral`
 
-- [lang1] `Neutral` own `readback_neutral`
+- [lang1] `ApNeutral`
+- [lang1] `RecNeutral`
+
+- [lang1] no branches in `Readback.readback_neutral`
+- [lang1] inline `Readback.readback_neutral`
 
 > refactoring `Stmt`
 

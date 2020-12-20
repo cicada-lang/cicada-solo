@@ -1,16 +1,14 @@
 import * as Ty from "../ty"
 import * as Normal from "../normal"
 
-export type Neutral = v | ap | rec
+import { VarNeutral } from "../exps/var-neutral"
 
-type v = {
-  kind: "Neutral.v"
-  name: string
-}
+export type Neutral = VarNeutral | ap | rec
 
-export const v = (name: string): v => ({ kind: "Neutral.v", name })
+export type v = VarNeutral
+export const v = VarNeutral
 
-type ap = {
+export type ap = {
   kind: "Neutral.ap"
   target: Neutral
   arg: Normal.Normal
@@ -22,7 +20,7 @@ export const ap = (target: Neutral, arg: Normal.Normal): ap => ({
   arg,
 })
 
-type rec = {
+export type rec = {
   kind: "Neutral.rec"
   ret_t: Ty.Ty
   target: Neutral
