@@ -34,9 +34,11 @@ export function readback(
       Readback.readback_neutral(mod, ctx, value.neutral)
     )
   }
+
   if (value.kind === "Value.case_fn" && t.kind === "Value.pi") {
     return readback_case_fn(mod, ctx, t, value)
   }
+
   if (t.kind === "Value.pi") {
     return readback_fn(mod, ctx, t, value)
   }

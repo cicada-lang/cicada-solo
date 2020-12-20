@@ -1,3 +1,5 @@
+# main
+
 > To improve the design of our type system framework,
 > we need enough concrete example types.
 
@@ -47,6 +49,7 @@
 
 > refactoring `Value`
 
+- [lang1] `FnValue`
 - [lang1] `ZeroValue`
 - [lang1] `Add1Value`
 - [lang1] `NotYetValue`
