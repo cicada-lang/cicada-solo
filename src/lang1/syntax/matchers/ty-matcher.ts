@@ -1,10 +1,11 @@
-import * as Ty from "../../ty"
+import { Ty } from "../../ty"
+import { Arrow, Nat } from "../../tys"
 import * as pt from "../../../partech"
 
-export function ty_matcher(tree: pt.Tree.Tree): Ty.Ty {
-  return pt.Tree.matcher<Ty.Ty>({
-    "ty:nat": () => Ty.nat,
+export function ty_matcher(tree: pt.Tree.Tree): Ty {
+  return pt.Tree.matcher<Ty>({
+    "ty:nat": () => Nat,
     "ty:arrow": ({ arg_t, ret_t }) =>
-      Ty.arrow(ty_matcher(arg_t), ty_matcher(ret_t)),
+      Arrow(ty_matcher(arg_t), ty_matcher(ret_t)),
   })(tree)
 }

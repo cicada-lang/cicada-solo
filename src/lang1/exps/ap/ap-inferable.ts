@@ -10,14 +10,14 @@ export const ap_inferable = (target: Exp, arg: Exp) =>
   Inferable({
     inferability: ({ ctx }) => {
       const target_t = infer(ctx, target)
-      if (target_t.kind === "Ty.arrow") {
+      if (target_t.kind === "Arrow") {
         const arrow = target_t as Arrow
         check(ctx, arg, arrow.arg_t)
         return arrow.ret_t
       }
       throw new Trace.Trace(
         ut.aline(`
-          |I am expecting the target_t to be Ty.arrow,
+          |I am expecting the target_t to be Arrow,
           |but it is ${target_t.repr()}.
           |`)
       )

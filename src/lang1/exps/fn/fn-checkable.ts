@@ -10,7 +10,7 @@ import * as ut from "../../../ut"
 export const fn_checkable = (name: string, ret: Exp) =>
   Checkable({
     checkability(t, { ctx }) {
-      if (t.kind === "Ty.arrow") {
+      if (t.kind === "Arrow") {
         const arrow = t as Arrow
         const ctx_new = Ctx.clone(ctx)
         Ctx.update(ctx_new, name, arrow.arg_t)
@@ -20,7 +20,7 @@ export const fn_checkable = (name: string, ret: Exp) =>
       throw new Trace.Trace(
         ut.aline(`
           |When checking fn,
-          |I am expecting the type to be Ty.arrow,
+          |I am expecting the type to be Arrow,
           |but the given type is ${t.repr()}.
           |`)
       )

@@ -45,8 +45,6 @@
 
 # lang1
 
-- [lang1] remove deps hub for `Ty`
-
 > refactoring `Value`
 
 > refactoring `Neutral`

@@ -20,7 +20,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
     const new_env = Env.update(Env.clone(target.env), target.name, arg)
     return Evaluate.evaluate(new_env, target.ret)
   } else if (target.kind === "Value.not_yet") {
-    if (target.t.kind === "Ty.arrow") {
+    if (target.t.kind === "Arrow") {
       const arrow = target.t as Arrow
       return Value.not_yet(
         arrow.ret_t,
@@ -30,7 +30,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
       throw new Trace.Trace(
         Explain.explain_elim_target_type_mismatch({
           elim: "ap",
-          expecting: ["Ty.arrow"],
+          expecting: ["Arrow"],
           reality: target.t.kind,
         })
       )
