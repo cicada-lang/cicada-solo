@@ -10,7 +10,6 @@ import * as Value from "../../value"
 import { NotYetValue, is_not_yet_value } from "../not-yet-value"
 import { is_fn_value } from "../fn-value"
 import { Normal } from "../../normal"
-import * as Neutral from "../../neutral"
 import { ApNeutral } from "../ap-neutral"
 
 export const ap_evaluable = (target: Exp, arg: Exp) =>
