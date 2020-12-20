@@ -7,7 +7,7 @@ export type NatTy = Repr & {
 
 export const NatTy: NatTy = {
   kind: "NatTy",
-  repr: () => "NatTy",
+  repr: () => "Nat",
 }
 
 export function is_nat_ty(t: Ty): t is NatTy {

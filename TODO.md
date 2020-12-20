@@ -49,6 +49,8 @@
 
 > refactoring `Stmt`
 
+- [lang1] `Stmt.def` vs `Stmt.show`
+
 # lang2
 
 > refactoring `Exp`

@@ -1,11 +1,11 @@
 
 When checking fn,
 I am expecting the type to be ArrowTy,
-but the given type is NatTy.
+but the given type is Nat.
 
 previous:
 - (_) => id(id(id(id(two))))
 - (_) => (_) => id(id(id(id(two))))
-- { (NatTy) -> NatTy -- (_) => (_) => id(id(id(id(two)))) }
+- { (Nat) -> Nat -- (_) => (_) => id(id(id(id(two)))) }
 
 
