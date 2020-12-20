@@ -25,10 +25,7 @@ export function stmt_matcher(tree: pt.Tree.Tree): Stmt.Stmt {
         )
       }
       const name = claim
-      return Stmt.def(
-        pt.Tree.str(name),
-        The(ty_matcher(t), exp_matcher(exp))
-      )
+      return Stmt.def(pt.Tree.str(name), The(ty_matcher(t), exp_matcher(exp)))
     },
     "stmt:show": ({ exp }) => Stmt.show(exp_matcher(exp)),
   })(tree)

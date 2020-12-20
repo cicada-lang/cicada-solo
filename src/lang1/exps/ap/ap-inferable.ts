@@ -1,6 +1,6 @@
 import { Inferable } from "../../inferable"
 import { Exp } from "../../exp"
-import { Arrow } from "../../tys/arrow"
+import { Arrow } from "../../exps/arrow"
 import { infer } from "../../infer"
 import { check } from "../../check"
 import * as Trace from "../../../trace"

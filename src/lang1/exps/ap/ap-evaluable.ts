@@ -1,7 +1,7 @@
 import { Evaluable } from "../../evaluable"
 import { evaluate } from "../../evaluate"
 import { Exp } from "../../exp"
-import { Arrow } from "../../tys/arrow"
+import { Arrow } from "../../exps/arrow"
 import * as Evaluate from "../../evaluate"
 import * as Explain from "../../explain"
 import * as Env from "../../env"

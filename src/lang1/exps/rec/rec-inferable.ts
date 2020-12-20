@@ -1,7 +1,7 @@
 import { Inferable } from "../../inferable"
 import { check } from "../../check"
 import { Exp } from "../../exp"
-import { Arrow, Nat } from "../../tys"
+import { Arrow, Nat } from "../../exps"
 import * as Ty from "../../ty"
 
 export const rec_inferable = (t: Ty.Ty, target: Exp, base: Exp, step: Exp) =>

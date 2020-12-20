@@ -45,6 +45,8 @@
 
 # lang1
 
+- [lang1] move `tys` into `exps`
+
 > refactoring `Value`
 
 > refactoring `Neutral`

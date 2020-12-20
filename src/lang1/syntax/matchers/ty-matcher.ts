@@ -1,5 +1,5 @@
 import { Ty } from "../../ty"
-import { Arrow, Nat } from "../../tys"
+import { Arrow, Nat } from "../../exps"
 import * as pt from "../../../partech"
 
 export function ty_matcher(tree: pt.Tree.Tree): Ty {

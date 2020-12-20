@@ -6,3 +6,6 @@ export * from "./add1"
 export * from "./rec"
 export * from "./begin"
 export * from "./the"
+
+export * from "./arrow"
+export * from "./nat"

@@ -8,7 +8,7 @@ import * as Value from "../../value"
 import * as Normal from "../../normal"
 import * as Neutral from "../../neutral"
 import { do_ap } from "../ap"
-import { Arrow, Nat } from "../../tys"
+import { Arrow, Nat } from "../../exps"
 
 export const rec_evaluable = (t: Ty.Ty, target: Exp, base: Exp, step: Exp) =>
   Evaluable({
