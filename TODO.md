@@ -49,11 +49,8 @@
 
 > refactoring `Neutral`
 
-- [lang1] `RecNeutral`
-
 - [lang1] `Neutral` as intersection type
 
-- [lang1] no branches in `Readback.readback_neutral`
 - [lang1] inline `Readback.readback_neutral`
 
 > refactoring `Stmt`
