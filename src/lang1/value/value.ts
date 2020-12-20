@@ -6,20 +6,12 @@ import * as Neutral from "../neutral"
 import { FnValue } from "../exps/fn-value"
 import { ZeroValue } from "../exps/zero-value"
 import { Add1Value } from "../exps/add1-value"
+import { NotYetValue } from "../exps/not-yet-value"
 
-export type Value = not_yet | FnValue | ZeroValue | Add1Value
+export type Value = NotYetValue | FnValue | ZeroValue | Add1Value
 
-export type not_yet = {
-  kind: "Value.not_yet"
-  t: Ty.Ty
-  neutral: Neutral.Neutral
-}
-
-export const not_yet = (t: Ty.Ty, neutral: Neutral.Neutral): not_yet => ({
-  kind: "Value.not_yet",
-  t,
-  neutral,
-})
+export type not_yet = NotYetValue
+export const not_yet = NotYetValue
 
 export type fn = FnValue
 export const fn = FnValue

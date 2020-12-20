@@ -49,12 +49,13 @@
 
 > refactoring `Value`
 
-- [lang1] `NotYetValue`
-
 - [lang1] `Readbackable`
 
 - [lang1] `Readbackable` -- `ZeroValue`
 - [lang1] `Readbackable` -- `Add1Value`
+- [lang1] `Readbackable` -- `NotYetValue`
+
+- [lang1] `Value` as intersection type instead of union type
 
 > refactoring `Neutral`
 
