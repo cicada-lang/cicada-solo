@@ -5,7 +5,7 @@ import * as Explain from "../../explain"
 import * as Ty from "../../ty"
 import * as Trace from "../../../trace"
 import * as Value from "../../value"
-import * as Normal from "../../normal"
+import { Normal } from "../../normal"
 import * as Neutral from "../../neutral"
 import { do_ap } from "../ap"
 import { ArrowTy, NatTy } from "../../exps"
@@ -39,12 +39,7 @@ export function do_rec(
       const step_t = ArrowTy(NatTy, ArrowTy(t, t))
       return NotYetValue(
         t,
-        Neutral.rec(
-          t,
-          target.neutral,
-          new Normal.Normal(t, base),
-          new Normal.Normal(step_t, step)
-        )
+        Neutral.rec(t, target.neutral, Normal(t, base), Normal(step_t, step))
       )
     } else {
       throw new Trace.Trace(

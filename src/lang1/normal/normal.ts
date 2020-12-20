@@ -1,5 +1,5 @@
-import * as Ty from "../ty"
-import * as Value from "../value"
+import { Ty } from "../ty"
+import { Value } from "../value"
 
 // NOTE
 // We need type in normal form,
@@ -16,6 +16,11 @@ import * as Value from "../value"
 // equality require type,
 // thus normal form require type.
 
-export class Normal {
-  constructor(public t: Ty.Ty, public value: Value.Value) {}
+export type Normal = {
+  t: Ty
+  value: Value
+}
+
+export function Normal(t: Ty, value: Value): Normal {
+  return { t, value }
 }

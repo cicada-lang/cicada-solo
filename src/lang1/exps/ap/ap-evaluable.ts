@@ -9,7 +9,7 @@ import * as Trace from "../../../trace"
 import * as Value from "../../value"
 import { NotYetValue, is_not_yet_value } from "../not-yet-value"
 import { is_fn_value } from "../fn-value"
-import * as Normal from "../../normal"
+import { Normal } from "../../normal"
 import * as Neutral from "../../neutral"
 
 export const ap_evaluable = (target: Exp, arg: Exp) =>
@@ -26,7 +26,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
       const arrow = target.t as ArrowTy
       return NotYetValue(
         arrow.ret_t,
-        Neutral.ap(target.neutral, new Normal.Normal(arrow.arg_t, arg))
+        Neutral.ap(target.neutral, Normal(arrow.arg_t, arg))
       )
     } else {
       throw new Trace.Trace(
