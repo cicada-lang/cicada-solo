@@ -12,10 +12,7 @@ export function readback_neutral(
       return neutral.readback_neutral({ used })
     }
     case "Neutral.ap": {
-      return Ap(
-        Readback.readback_neutral(used, neutral.target),
-        neutral.arg.readback_normal({ used })
-      )
+      return neutral.readback_neutral({ used })
     }
     case "Neutral.rec": {
       return Rec(

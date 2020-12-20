@@ -49,7 +49,6 @@
 
 > refactoring `Neutral`
 
-- [lang1] `ApNeutral`
 - [lang1] `RecNeutral`
 
 - [lang1] `Neutral` as intersection type
