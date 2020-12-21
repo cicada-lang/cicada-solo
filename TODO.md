@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] no branches in `Evaluate`
 - [lang2] re-placing `Evaluate.do_*`
 
 - [lang2] `Checkable`
