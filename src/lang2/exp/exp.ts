@@ -14,6 +14,7 @@ import { Equal } from "../exps/equal"
 import { Same } from "../exps/same"
 import { Replace } from "../exps/replace"
 import { Trivial } from "../exps/trivial"
+import { Sole } from "../exps/sole"
 
 export type Exp =
   | Var
@@ -32,7 +33,7 @@ export type Exp =
   | Same
   | Replace
   | Trivial
-  | sole
+  | Sole
   | absurd
   | absurd_ind
   | str
@@ -91,13 +92,8 @@ export const replace = Replace
 export type trivial = Trivial
 export const trivial = Trivial
 
-export type sole = {
-  kind: "Exp.sole"
-}
-
-export const sole: sole = {
-  kind: "Exp.sole",
-}
+export type sole = Sole
+export const sole = Sole
 
 export type absurd = {
   kind: "Exp.absurd"
