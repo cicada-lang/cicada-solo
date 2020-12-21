@@ -1,6 +1,8 @@
 import { Exp } from "../../exp"
+import { Evaluable } from "../../evaluable"
+import { evaluate } from "../../evaluate"
 
-export type The = {
+export type The = Evaluable & {
   kind: "Exp.the"
   t: Exp
   exp: Exp
@@ -11,5 +13,6 @@ export function The(t: Exp, exp: Exp): The {
     kind: "Exp.the",
     t,
     exp,
+    evaluability: ({ env }) => evaluate(env, exp),
   }
 }
