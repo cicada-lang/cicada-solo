@@ -55,10 +55,10 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.trivial": {
-        return Value.trivial
+        return exp.evaluability({ env })
       }
       case "Exp.sole": {
-        return Value.sole
+        return exp.evaluability({ env })
       }
       case "Exp.absurd": {
         return Value.absurd
