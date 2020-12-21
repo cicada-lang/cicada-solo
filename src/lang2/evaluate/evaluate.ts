@@ -46,11 +46,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.equal": {
-        return Value.equal(
-          Evaluate.evaluate(env, exp.t),
-          Evaluate.evaluate(env, exp.from),
-          Evaluate.evaluate(env, exp.to)
-        )
+        return exp.evaluability({ env })
       }
       case "Exp.same": {
         return Value.same
