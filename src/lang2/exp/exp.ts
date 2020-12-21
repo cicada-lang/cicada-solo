@@ -17,6 +17,7 @@ import { Trivial } from "../exps/trivial"
 import { Sole } from "../exps/sole"
 import { Absurd } from "../exps/absurd"
 import { AbsurdInd } from "../exps/absurd-ind"
+import { Str } from "../exps/str"
 
 export type Exp =
   | Var
@@ -38,7 +39,7 @@ export type Exp =
   | Sole
   | Absurd
   | AbsurdInd
-  | str
+  | Str
   | quote
   | type
   | begin
@@ -103,13 +104,8 @@ export const absurd = Absurd
 export type absurd_ind = AbsurdInd
 export const absurd_ind = AbsurdInd
 
-export type str = {
-  kind: "Exp.str"
-}
-
-export const str: str = {
-  kind: "Exp.str",
-}
+export type str = Str
+export const str = Str
 
 export type quote = {
   kind: "Exp.quote"
