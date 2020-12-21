@@ -11,7 +11,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.fn": {
-      return `(${exp.name}) => ${Exp.repr(exp.ret)}`
+      return exp.repr()
     }
     case "Exp.ap": {
       return `${Exp.repr(exp.target)}(${Exp.repr(exp.arg)})`

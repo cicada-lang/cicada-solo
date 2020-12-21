@@ -64,7 +64,6 @@
 - [lang2] `Repr` -- cdr
 - [lang2] `Repr` -- cons
 - [lang2] `Repr` -- equal
-- [lang2] `Repr` -- fn
 - [lang2] `Repr` -- nat
 - [lang2] `Repr` -- nat-ind
 - [lang2] `Repr` -- quote
