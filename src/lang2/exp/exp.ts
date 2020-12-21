@@ -9,6 +9,7 @@ import { Cdr } from "../exps/cdr"
 import { Nat } from "../exps/nat"
 import { Zero } from "../exps/zero"
 import { Add1 } from "../exps/add1"
+import { NatInd } from "../exps/nat-ind"
 
 export type Exp =
   | Var
@@ -22,7 +23,7 @@ export type Exp =
   | Nat
   | Zero
   | Add1
-  | nat_ind
+  | NatInd
   | equal
   | same
   | replace
@@ -71,26 +72,8 @@ export const zero = Zero
 export type add1 = Add1
 export const add1 = Add1
 
-export type nat_ind = {
-  kind: "Exp.nat_ind"
-  target: Exp
-  motive: Exp
-  base: Exp
-  step: Exp
-}
-
-export const nat_ind = (
-  target: Exp,
-  motive: Exp,
-  base: Exp,
-  step: Exp
-): nat_ind => ({
-  kind: "Exp.nat_ind",
-  target,
-  motive,
-  base,
-  step,
-})
+export type nat_ind = NatInd
+export const nat_ind = NatInd
 
 export type equal = {
   kind: "Exp.equal"
