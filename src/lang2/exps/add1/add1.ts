@@ -3,7 +3,7 @@ import { Evaluable } from "../../evaluable"
 import { evaluate } from "../../evaluate"
 import * as Value from "../../value"
 import { Repr } from "../../repr"
-import { repr } from "../../exp"
+
 import { nat_to_number } from "../../exp"
 
 export type Add1 = Evaluable &
@@ -21,7 +21,7 @@ export function Add1(prev: Exp): Add1 {
       if (n !== undefined) {
         return n.toString()
       } else {
-        return `add1(${repr(prev)})`
+        return `add1(${prev.repr()})`
       }
     },
     evaluability: ({ env }) => Value.add1(evaluate(env, prev)),

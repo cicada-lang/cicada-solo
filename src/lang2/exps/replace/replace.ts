@@ -10,7 +10,6 @@ import * as Trace from "../../../trace"
 import { do_ap } from "../ap"
 import { Type } from "../type"
 import { Repr } from "../../repr"
-import { repr } from "../../exp"
 
 export type Replace = Evaluable &
   Repr & {
@@ -26,7 +25,7 @@ export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
     target,
     motive,
     base,
-    repr: () => `replace(${repr(target)}, ${repr(motive)}, ${repr(base)})`,
+    repr: () => `replace(${target.repr()}, ${motive.repr()}, ${base.repr()})`,
     evaluability: ({ env }) =>
       do_replace(
         evaluate(env, target),

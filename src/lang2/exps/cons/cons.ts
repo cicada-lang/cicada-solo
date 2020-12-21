@@ -2,7 +2,6 @@ import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
 import { cons_evaluable } from "./cons-evaluable"
 import { Repr } from "../../repr"
-import { repr } from "../../exp"
 
 export type Cons = Evaluable &
   Repr & {
@@ -16,7 +15,7 @@ export function Cons(car: Exp, cdr: Exp): Cons {
     kind: "Exp.cons",
     car,
     cdr,
-    repr: () => `cons(${repr(car)}, ${repr(cdr)})`,
+    repr: () => `cons(${car.repr()}, ${cdr.repr()})`,
     ...cons_evaluable(car, cdr),
   }
 }

@@ -2,7 +2,6 @@ import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
 import { cdr_evaluable } from "./cdr-evaluable"
 import { Repr } from "../../repr"
-import { repr } from "../../exp"
 
 export type Cdr = Evaluable &
   Repr & {
@@ -14,7 +13,7 @@ export function Cdr(target: Exp): Cdr {
   return {
     kind: "Exp.cdr",
     target,
-    repr: () => `cdr(${repr(target)})`,
+    repr: () => `cdr(${target.repr()})`,
     ...cdr_evaluable(target),
   }
 }

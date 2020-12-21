@@ -2,7 +2,6 @@ import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
 import { ap_evaluable } from "./ap-evaluable"
 import { Repr } from "../../repr"
-import { repr } from "../../exp"
 
 export type Ap = Evaluable &
   Repr & {
@@ -16,7 +15,7 @@ export function Ap(target: Exp, arg: Exp): Ap {
     kind: "Exp.ap",
     target,
     arg,
-    repr: () => `${repr(target)}(${repr(arg)})`,
+    repr: () => `${target.repr()}(${arg.repr()})`,
     ...ap_evaluable(target, arg),
   }
 }

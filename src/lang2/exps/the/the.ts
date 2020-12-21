@@ -2,7 +2,6 @@ import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
 import { evaluate } from "../../evaluate"
 import { Repr } from "../../repr"
-import { repr } from "../../exp"
 
 export type The = Evaluable &
   Repr & {
@@ -16,7 +15,7 @@ export function The(t: Exp, exp: Exp): The {
     kind: "Exp.the",
     t,
     exp,
-    repr: () => `{ ${repr(t)} -- ${repr(exp)} }`,
+    repr: () => `{ ${t.repr()} -- ${exp.repr()} }`,
     evaluability: ({ env }) => evaluate(env, exp),
   }
 }

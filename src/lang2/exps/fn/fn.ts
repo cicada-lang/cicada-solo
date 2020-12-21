@@ -2,7 +2,6 @@ import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
 import { fn_evaluable } from "./fn-evaluable"
 import { Repr } from "../../repr"
-import { repr } from "../../exp"
 
 export type Fn = Evaluable &
   Repr & {
@@ -16,7 +15,7 @@ export function Fn(name: string, ret: Exp): Fn {
     kind: "Exp.fn",
     name,
     ret,
-    repr: () => `(${name}) => ${repr(ret)}`,
+    repr: () => `(${name}) => ${ret.repr()}`,
     ...fn_evaluable(name, ret),
   }
 }

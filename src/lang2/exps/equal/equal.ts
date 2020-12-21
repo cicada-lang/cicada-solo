@@ -3,7 +3,6 @@ import { Evaluable } from "../../evaluable"
 import { evaluate } from "../../evaluate"
 import * as Value from "../../value"
 import { Repr } from "../../repr"
-import { repr } from "../../exp"
 
 export type Equal = Evaluable &
   Repr & {
@@ -19,7 +18,7 @@ export function Equal(t: Exp, from: Exp, to: Exp): Equal {
     t,
     from,
     to,
-    repr: () => `Equal(${repr(t)}, ${repr(from)}, ${repr(to)})`,
+    repr: () => `Equal(${t.repr()}, ${from.repr()}, ${to.repr()})`,
     evaluability: ({ env }) =>
       Value.equal(evaluate(env, t), evaluate(env, from), evaluate(env, to)),
   }

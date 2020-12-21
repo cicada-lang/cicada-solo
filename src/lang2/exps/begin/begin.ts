@@ -4,14 +4,15 @@ import * as Env from "../../env"
 import { Evaluable } from "../../evaluable"
 import { evaluate } from "../../evaluate"
 import { Repr } from "../../repr"
-import { repr } from "../../exp"
+
 import * as ut from "../../../ut"
 
-export type Begin = Evaluable & Repr & {
-  kind: "Exp.begin"
-  stmts: Array<Stmt.Stmt>
-  ret: Exp
-}
+export type Begin = Evaluable &
+  Repr & {
+    kind: "Exp.begin"
+    stmts: Array<Stmt.Stmt>
+    ret: Exp
+  }
 
 export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
   return {
@@ -19,7 +20,7 @@ export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
     stmts,
     ret,
     repr: () => {
-      const s = [...stmts.map(Stmt.repr), repr(ret)].join("\n")
+      const s = [...stmts.map(Stmt.repr), ret.repr()].join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     },
     evaluability: ({ env }) => {
