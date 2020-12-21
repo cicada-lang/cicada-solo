@@ -56,6 +56,31 @@
 
 > refactoring `Exp`
 
+- [lang2] `Var`
+- [lang2] `Pi`
+- [lang2] `Fn`
+- [lang2] `Ap`
+- [lang2] `Sigma`
+- [lang2] `Cons`
+- [lang2] `Car`
+- [lang2] `Cdr`
+- [lang2] `Nat`
+- [lang2] `Zero`
+- [lang2] `Add1`
+- [lang2] `NatInd`
+- [lang2] `Equal`
+- [lang2] `Same`
+- [lang2] `Replace`
+- [lang2] `Trivial`
+- [lang2] `Sole`
+- [lang2] `Absurd`
+- [lang2] `AbsurdInd`
+- [lang2] `Str`
+- [lang2] `Quote`
+- [lang2] `Type`
+- [lang2] `Begin`
+- [lang2] `The`
+
 - [lang2] `Evaluable` -- v
 - [lang2] `Evaluable` -- pi
 - [lang2] `Evaluable` -- fn
