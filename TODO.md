@@ -56,13 +56,10 @@
 
 > refactoring `Exp`
 
-- [lang2] `Repr` -- begin
-- [lang2] `Repr` -- quote
-- [lang2] `Repr` -- sole
-- [lang2] `Repr` -- str
-- [lang2] `Repr` -- the
-- [lang2] `Repr` -- trivial
+- [lang2] `Repr` -- str & quote
 - [lang2] `Repr` -- type
+- [lang2] `Repr` -- begin
+- [lang2] `Repr` -- the
 
 - [lang2] `AlphaRepr`
 

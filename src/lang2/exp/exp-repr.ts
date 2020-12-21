@@ -50,10 +50,10 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.trivial": {
-      return "Trivial"
+      return exp.repr()
     }
     case "Exp.sole": {
-      return "sole"
+      return exp.repr()
     }
     case "Exp.absurd": {
       return exp.repr()
