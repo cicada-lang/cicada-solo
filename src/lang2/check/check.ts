@@ -28,14 +28,16 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       if (!Value.conversion(ctx, equal.t, equal.from, equal.to)) {
         throw new Trace.Trace(
           ut.aline(`
-          |I am expecting the following two values to be the same ${Exp.repr(
-            Readback.readback(ctx, Value.type, equal.t)
-          )}.
+          |I am expecting the following two values to be the same ${Readback.readback(
+            ctx,
+            Value.type,
+            equal.t
+          ).repr()}.
           |But they are not.
           |from:
-          |  ${Exp.repr(Readback.readback(ctx, equal.t, equal.from))}
+          |  ${Readback.readback(ctx, equal.t, equal.from).repr()}
           |to:
-          |  ${Exp.repr(Readback.readback(ctx, equal.t, equal.to))}
+          |  ${Readback.readback(ctx, equal.t, equal.to).repr()}
           |`)
         )
       }
@@ -50,12 +52,16 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       if (!Value.conversion(ctx, Value.type, t, u)) {
         throw new Trace.Trace(
           ut.aline(`
-          |I infer the type of ${Exp.repr(exp)} to be ${Exp.repr(
-            Readback.readback(ctx, Value.type, u)
-          )}.
-          |But the given type is ${Exp.repr(
-            Readback.readback(ctx, Value.type, t)
-          )}.
+          |I infer the type of ${exp.repr()} to be ${Readback.readback(
+            ctx,
+            Value.type,
+            u
+          ).repr()}.
+          |But the given type is ${Readback.readback(
+            ctx,
+            Value.type,
+            t
+          ).repr()}.
           |`)
         )
       }
