@@ -56,9 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] re-placing `Evaluate.do_repace`
-- [lang2] re-placing `Evaluate.do_nat_ind`
-
 - [lang2] `Checkable`
 
 - [lang2] `Inferable`
