@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Evaluable` -- pi
 - [lang2] `Evaluable` -- fn
 - [lang2] `Evaluable` -- ap
 - [lang2] `Evaluable` -- sigma

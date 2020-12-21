@@ -13,10 +13,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.pi": {
-        return Value.pi(
-          Evaluate.evaluate(env, exp.arg_t),
-          Value.Closure.create(env, exp.name, exp.ret_t)
-        )
+        return exp.evaluability({ env })
       }
       case "Exp.fn": {
         return Value.fn(Value.Closure.create(env, exp.name, exp.ret))
