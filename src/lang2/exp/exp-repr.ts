@@ -44,7 +44,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.same": {
-      return "same"
+      return exp.repr()
     }
     case "Exp.replace": {
       return `replace(${Exp.repr(exp.target)}, ${Exp.repr(
