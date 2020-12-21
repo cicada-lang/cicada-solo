@@ -59,7 +59,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.absurd_ind": {
-      return `Absurd.ind(${Exp.repr(exp.target)}, ${Exp.repr(exp.motive)})`
+      return exp.repr()
     }
     case "Exp.str": {
       return "String"

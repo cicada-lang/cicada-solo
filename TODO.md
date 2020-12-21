@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Repr` -- absurd-ind
 - [lang2] `Repr` -- begin
 - [lang2] `Repr` -- quote
 - [lang2] `Repr` -- sole
