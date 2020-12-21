@@ -62,10 +62,10 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.str": {
-      return "String"
+      return exp.repr()
     }
     case "Exp.quote": {
-      return `"${exp.str}"`
+      return exp.repr()
     }
     case "Exp.type": {
       return "Type"

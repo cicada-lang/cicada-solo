@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Repr` -- str & quote
 - [lang2] `Repr` -- type
 - [lang2] `Repr` -- begin
 - [lang2] `Repr` -- the
