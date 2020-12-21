@@ -1,4 +1,3 @@
-import * as Evaluate from "../evaluate"
 import * as Explain from "../explain"
 import * as Exp from "../exp"
 import * as Env from "../env"
@@ -6,6 +5,7 @@ import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../../trace"
+import { do_ap } from "../exps/ap"
 
 export function do_nat_ind(
   target: Value.Value,
@@ -16,9 +16,9 @@ export function do_nat_ind(
   if (target.kind === "Value.zero") {
     return base
   } else if (target.kind === "Value.add1") {
-    return Evaluate.do_ap(
-      Evaluate.do_ap(step, target.prev),
-      Evaluate.do_nat_ind(target.prev, motive, base, step)
+    return do_ap(
+      do_ap(step, target.prev),
+      do_nat_ind(target.prev, motive, base, step)
     )
   } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.nat") {
@@ -26,10 +26,10 @@ export function do_nat_ind(
         Value.nat,
         Value.Closure.create(Env.init(), "k", Exp.type)
       )
-      const base_t = Evaluate.do_ap(motive, Value.zero)
+      const base_t = do_ap(motive, Value.zero)
       const step_t = Exp.nat_ind_step_t(motive)
       return Value.not_yet(
-        Evaluate.do_ap(motive, target),
+        do_ap(motive, target),
         Neutral.nat_ind(
           target.neutral,
           Normal.create(motive_t, motive),

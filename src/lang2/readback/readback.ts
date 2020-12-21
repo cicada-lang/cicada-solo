@@ -7,6 +7,7 @@ import * as Ctx from "../ctx"
 import * as ut from "../../ut"
 import { do_car } from "../exps/car"
 import { do_cdr } from "../exps/cdr"
+import { do_ap } from "../exps/ap"
 
 export function readback(
   ctx: Ctx.Ctx,
@@ -28,7 +29,7 @@ export function readback(
       Readback.readback(
         Ctx.extend(ctx, fresh_name, t.arg_t),
         Value.Closure.apply(t.ret_t_cl, variable),
-        Evaluate.do_ap(value, variable)
+        do_ap(value, variable)
       )
     )
   } else if (t.kind === "Value.sigma") {

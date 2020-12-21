@@ -10,6 +10,7 @@ import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 import { do_car } from "../exps/car"
+import { do_ap } from "../exps/ap"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -64,10 +65,10 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       )
       Check.check(ctx, exp.motive, motive_t)
       const motive = Evaluate.evaluate(Ctx.to_env(ctx), exp.motive)
-      Check.check(ctx, exp.base, Evaluate.do_ap(motive, Value.zero))
+      Check.check(ctx, exp.base, do_ap(motive, Value.zero))
       Check.check(ctx, exp.step, Exp.nat_ind_step_t(motive))
       const target = Evaluate.evaluate(Ctx.to_env(ctx), exp.target)
-      return Evaluate.do_ap(motive, target)
+      return do_ap(motive, target)
     } else if (exp.kind === "Exp.equal") {
       Check.check(ctx, exp.t, Value.type)
       const t = Evaluate.evaluate(Ctx.to_env(ctx), exp.t)
@@ -83,8 +84,8 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       )
       Check.check(ctx, exp.motive, motive_t)
       const motive = Evaluate.evaluate(Ctx.to_env(ctx), exp.motive)
-      Check.check(ctx, exp.base, Evaluate.do_ap(motive, equal.from))
-      return Evaluate.do_ap(motive, equal.to)
+      Check.check(ctx, exp.base, do_ap(motive, equal.from))
+      return do_ap(motive, equal.to)
     } else if (exp.kind === "Exp.trivial") {
       return Value.type
     } else if (exp.kind === "Exp.sole") {
