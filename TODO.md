@@ -58,7 +58,6 @@
 
 - [lang2] `Repr`
 
-- [lang2] `Repr` -- absurd
 - [lang2] `Repr` -- absurd-ind
 - [lang2] `Repr` -- add1
 - [lang2] `Repr` -- ap
