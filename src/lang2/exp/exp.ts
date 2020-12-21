@@ -11,6 +11,7 @@ import { Zero } from "../exps/zero"
 import { Add1 } from "../exps/add1"
 import { NatInd } from "../exps/nat-ind"
 import { Equal } from "../exps/equal"
+import { Same } from "../exps/same"
 
 export type Exp =
   | Var
@@ -26,7 +27,7 @@ export type Exp =
   | Add1
   | NatInd
   | Equal
-  | same
+  | Same
   | replace
   | trivial
   | sole
@@ -79,13 +80,8 @@ export const nat_ind = NatInd
 export type equal = Equal
 export const equal = Equal
 
-export type same = {
-  kind: "Exp.same"
-}
-
-export const same: same = {
-  kind: "Exp.same",
-}
+export type same = Same
+export const same = Same
 
 export type replace = {
   kind: "Exp.replace"
