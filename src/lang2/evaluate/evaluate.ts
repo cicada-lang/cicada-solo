@@ -25,10 +25,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.cons": {
-        return Value.cons(
-          Evaluate.evaluate(env, exp.car),
-          Evaluate.evaluate(env, exp.cdr)
-        )
+        return exp.evaluability({ env })
       }
       case "Exp.car": {
         return Evaluate.do_car(Evaluate.evaluate(env, exp.target))
