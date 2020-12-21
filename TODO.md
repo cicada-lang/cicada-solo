@@ -56,7 +56,7 @@
 
 > refactoring `Exp`
 
-- [lang2] no branches in `Repr`
+- [lang2] inline `Exp.repr`
 
 - [lang2] `AlphaRepr`
 
