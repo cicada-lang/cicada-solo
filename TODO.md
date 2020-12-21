@@ -68,7 +68,6 @@
 - [lang2] `Repr` -- quote
 - [lang2] `Repr` -- replace
 - [lang2] `Repr` -- same
-- [lang2] `Repr` -- sigma
 - [lang2] `Repr` -- sole
 - [lang2] `Repr` -- str
 - [lang2] `Repr` -- the
