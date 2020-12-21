@@ -38,9 +38,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.nat_ind": {
-      return `Nat.ind(${Exp.repr(exp.target)}, ${Exp.repr(
-        exp.motive
-      )}, ${Exp.repr(exp.base)}, ${Exp.repr(exp.step)})`
+      return exp.repr()
     }
     case "Exp.equal": {
       return `Equal(${Exp.repr(exp.t)}, ${Exp.repr(exp.from)}, ${Exp.repr(
