@@ -56,13 +56,111 @@
 
 > refactoring `Exp`
 
-- [lang2] `Checkable`
+- [lang2] `Repr`
+
+- [lang2] `Repr` -- absurd
+- [lang2] `Repr` -- absurd-ind
+- [lang2] `Repr` -- add1
+- [lang2] `Repr` -- ap
+- [lang2] `Repr` -- begin
+- [lang2] `Repr` -- car
+- [lang2] `Repr` -- cdr
+- [lang2] `Repr` -- cons
+- [lang2] `Repr` -- equal
+- [lang2] `Repr` -- fn
+- [lang2] `Repr` -- nat
+- [lang2] `Repr` -- nat-ind
+- [lang2] `Repr` -- pi
+- [lang2] `Repr` -- quote
+- [lang2] `Repr` -- replace
+- [lang2] `Repr` -- same
+- [lang2] `Repr` -- sigma
+- [lang2] `Repr` -- sole
+- [lang2] `Repr` -- str
+- [lang2] `Repr` -- the
+- [lang2] `Repr` -- trivial
+- [lang2] `Repr` -- type
+- [lang2] `Repr` -- var
+- [lang2] `Repr` -- zero
+
+- [lang2] `AlphaRepr`
+
+- [lang2] `AlphaRepr` -- absurd
+- [lang2] `AlphaRepr` -- absurd-ind
+- [lang2] `AlphaRepr` -- add1
+- [lang2] `AlphaRepr` -- ap
+- [lang2] `AlphaRepr` -- begin
+- [lang2] `AlphaRepr` -- car
+- [lang2] `AlphaRepr` -- cdr
+- [lang2] `AlphaRepr` -- cons
+- [lang2] `AlphaRepr` -- equal
+- [lang2] `AlphaRepr` -- fn
+- [lang2] `AlphaRepr` -- nat
+- [lang2] `AlphaRepr` -- nat-ind
+- [lang2] `AlphaRepr` -- pi
+- [lang2] `AlphaRepr` -- quote
+- [lang2] `AlphaRepr` -- replace
+- [lang2] `AlphaRepr` -- same
+- [lang2] `AlphaRepr` -- sigma
+- [lang2] `AlphaRepr` -- sole
+- [lang2] `AlphaRepr` -- str
+- [lang2] `AlphaRepr` -- the
+- [lang2] `AlphaRepr` -- trivial
+- [lang2] `AlphaRepr` -- type
+- [lang2] `AlphaRepr` -- var
+- [lang2] `AlphaRepr` -- zero
+
+- [lang2] `Checkable` -- absurd
+- [lang2] `Checkable` -- absurd-ind
+- [lang2] `Checkable` -- add1
+- [lang2] `Checkable` -- ap
+- [lang2] `Checkable` -- begin
+- [lang2] `Checkable` -- car
+- [lang2] `Checkable` -- cdr
+- [lang2] `Checkable` -- cons
+- [lang2] `Checkable` -- equal
+- [lang2] `Checkable` -- fn
+- [lang2] `Checkable` -- nat
+- [lang2] `Checkable` -- nat-ind
+- [lang2] `Checkable` -- pi
+- [lang2] `Checkable` -- quote
+- [lang2] `Checkable` -- replace
+- [lang2] `Checkable` -- same
+- [lang2] `Checkable` -- sigma
+- [lang2] `Checkable` -- sole
+- [lang2] `Checkable` -- str
+- [lang2] `Checkable` -- the
+- [lang2] `Checkable` -- trivial
+- [lang2] `Checkable` -- type
+- [lang2] `Checkable` -- var
+- [lang2] `Checkable` -- zero
 
 - [lang2] `Inferable`
 
-- [lang2] `Repr`
-
-- [lang2] `AlphaRepr`
+- [lang2] `Inferable` -- absurd
+- [lang2] `Inferable` -- absurd-ind
+- [lang2] `Inferable` -- add1
+- [lang2] `Inferable` -- ap
+- [lang2] `Inferable` -- begin
+- [lang2] `Inferable` -- car
+- [lang2] `Inferable` -- cdr
+- [lang2] `Inferable` -- cons
+- [lang2] `Inferable` -- equal
+- [lang2] `Inferable` -- fn
+- [lang2] `Inferable` -- nat
+- [lang2] `Inferable` -- nat-ind
+- [lang2] `Inferable` -- pi
+- [lang2] `Inferable` -- quote
+- [lang2] `Inferable` -- replace
+- [lang2] `Inferable` -- same
+- [lang2] `Inferable` -- sigma
+- [lang2] `Inferable` -- sole
+- [lang2] `Inferable` -- str
+- [lang2] `Inferable` -- the
+- [lang2] `Inferable` -- trivial
+- [lang2] `Inferable` -- type
+- [lang2] `Inferable` -- var
+- [lang2] `Inferable` -- zero
 
 - [lang2] `Exp` as intersection type instead of union type
 
