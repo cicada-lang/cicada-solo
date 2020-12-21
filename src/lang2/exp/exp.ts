@@ -4,6 +4,7 @@ import { Fn } from "../exps/fn"
 import { Ap } from "../exps/ap"
 import { Sigma } from "../exps/sigma"
 import { Cons } from "../exps/cons"
+import { Car } from "../exps/car"
 
 export type Exp =
   | Var
@@ -12,7 +13,7 @@ export type Exp =
   | Ap
   | Sigma
   | Cons
-  | car
+  | Car
   | cdr
   | nat
   | zero
@@ -51,15 +52,8 @@ export const sigma = Sigma
 export type cons = Cons
 export const cons = Cons
 
-export type car = {
-  kind: "Exp.car"
-  target: Exp
-}
-
-export const car = (target: Exp): car => ({
-  kind: "Exp.car",
-  target,
-})
+export type car = Car
+export const car = Car
 
 export type cdr = {
   kind: "Exp.cdr"
