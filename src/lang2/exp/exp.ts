@@ -2,13 +2,14 @@ import { Var } from "../exps/var"
 import { Pi } from "../exps/pi"
 import { Fn } from "../exps/fn"
 import { Ap } from "../exps/ap"
+import { Sigma } from "../exps/sigma"
 
 export type Exp =
   | Var
   | Pi
   | Fn
   | Ap
-  | sigma
+  | Sigma
   | cons
   | car
   | cdr
@@ -43,19 +44,8 @@ export const fn = Fn
 export type ap = Ap
 export const ap = Ap
 
-export type sigma = {
-  kind: "Exp.sigma"
-  name: string
-  car_t: Exp
-  cdr_t: Exp
-}
-
-export const sigma = (name: string, car_t: Exp, cdr_t: Exp): sigma => ({
-  kind: "Exp.sigma",
-  name,
-  car_t,
-  cdr_t,
-})
+export type sigma = Sigma
+export const sigma = Sigma
 
 export type cons = {
   kind: "Exp.cons"
