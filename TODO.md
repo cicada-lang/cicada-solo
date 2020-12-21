@@ -67,7 +67,6 @@
 - [lang2] `Repr` -- fn
 - [lang2] `Repr` -- nat
 - [lang2] `Repr` -- nat-ind
-- [lang2] `Repr` -- pi
 - [lang2] `Repr` -- quote
 - [lang2] `Repr` -- replace
 - [lang2] `Repr` -- same

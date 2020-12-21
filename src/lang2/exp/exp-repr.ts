@@ -8,7 +8,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.pi": {
-      return `(${exp.name}: ${Exp.repr(exp.arg_t)}) -> ${Exp.repr(exp.ret_t)}`
+      return exp.repr()
     }
     case "Exp.fn": {
       return `(${exp.name}) => ${Exp.repr(exp.ret)}`
