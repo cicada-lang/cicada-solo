@@ -1,12 +1,13 @@
 import { Var } from "../exps/var"
 import { Pi } from "../exps/pi"
 import { Fn } from "../exps/fn"
+import { Ap } from "../exps/ap"
 
 export type Exp =
   | Var
   | Pi
   | Fn
-  | ap
+  | Ap
   | sigma
   | cons
   | car
@@ -39,17 +40,8 @@ export const pi = Pi
 export type fn = Fn
 export const fn = Fn
 
-export type ap = {
-  kind: "Exp.ap"
-  target: Exp
-  arg: Exp
-}
-
-export const ap = (target: Exp, arg: Exp): ap => ({
-  kind: "Exp.ap",
-  target,
-  arg,
-})
+export type ap = Ap
+export const ap = Ap
 
 export type sigma = {
   kind: "Exp.sigma"
