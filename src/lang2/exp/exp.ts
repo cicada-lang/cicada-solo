@@ -13,6 +13,7 @@ import { NatInd } from "../exps/nat-ind"
 import { Equal } from "../exps/equal"
 import { Same } from "../exps/same"
 import { Replace } from "../exps/replace"
+import { Trivial } from "../exps/trivial"
 
 export type Exp =
   | Var
@@ -30,7 +31,7 @@ export type Exp =
   | Equal
   | Same
   | Replace
-  | trivial
+  | Trivial
   | sole
   | absurd
   | absurd_ind
@@ -87,13 +88,8 @@ export const same = Same
 export type replace = Replace
 export const replace = Replace
 
-export type trivial = {
-  kind: "Exp.trivial"
-}
-
-export const trivial: trivial = {
-  kind: "Exp.trivial",
-}
+export type trivial = Trivial
+export const trivial = Trivial
 
 export type sole = {
   kind: "Exp.sole"
