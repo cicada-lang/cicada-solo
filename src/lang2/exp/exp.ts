@@ -10,6 +10,7 @@ import { Nat } from "../exps/nat"
 import { Zero } from "../exps/zero"
 import { Add1 } from "../exps/add1"
 import { NatInd } from "../exps/nat-ind"
+import { Equal } from "../exps/equal"
 
 export type Exp =
   | Var
@@ -24,7 +25,7 @@ export type Exp =
   | Zero
   | Add1
   | NatInd
-  | equal
+  | Equal
   | same
   | replace
   | trivial
@@ -75,19 +76,8 @@ export const add1 = Add1
 export type nat_ind = NatInd
 export const nat_ind = NatInd
 
-export type equal = {
-  kind: "Exp.equal"
-  t: Exp
-  from: Exp
-  to: Exp
-}
-
-export const equal = (t: Exp, from: Exp, to: Exp): equal => ({
-  kind: "Exp.equal",
-  t,
-  from,
-  to,
-})
+export type equal = Equal
+export const equal = Equal
 
 export type same = {
   kind: "Exp.same"

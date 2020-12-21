@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Equal`
 - [lang2] `Same`
 - [lang2] `Replace`
 - [lang2] `Trivial`
