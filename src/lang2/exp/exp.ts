@@ -1,7 +1,7 @@
-import * as Stmt from "../stmt"
+import { Var } from "../exps/var"
 
 export type Exp =
-  | v
+  | Var
   | pi
   | fn
   | ap
@@ -26,17 +26,12 @@ export type Exp =
   | begin
   | the
 
-type v = {
-  kind: "Exp.v"
-  name: string
-}
+import * as Stmt from "../stmt"
 
-export const v = (name: string): v => ({
-  kind: "Exp.v",
-  name,
-})
+export type v = Var
+export const v = Var
 
-type pi = {
+export type pi = {
   kind: "Exp.pi"
   name: string
   arg_t: Exp
@@ -50,7 +45,7 @@ export const pi = (name: string, arg_t: Exp, ret_t: Exp): pi => ({
   ret_t,
 })
 
-type fn = {
+export type fn = {
   kind: "Exp.fn"
   name: string
   ret: Exp
@@ -62,7 +57,7 @@ export const fn = (name: string, ret: Exp): fn => ({
   ret,
 })
 
-type ap = {
+export type ap = {
   kind: "Exp.ap"
   target: Exp
   arg: Exp
@@ -74,7 +69,7 @@ export const ap = (target: Exp, arg: Exp): ap => ({
   arg,
 })
 
-type sigma = {
+export type sigma = {
   kind: "Exp.sigma"
   name: string
   car_t: Exp
@@ -88,7 +83,7 @@ export const sigma = (name: string, car_t: Exp, cdr_t: Exp): sigma => ({
   cdr_t,
 })
 
-type cons = {
+export type cons = {
   kind: "Exp.cons"
   car: Exp
   cdr: Exp
@@ -100,7 +95,7 @@ export const cons = (car: Exp, cdr: Exp): cons => ({
   cdr,
 })
 
-type car = {
+export type car = {
   kind: "Exp.car"
   target: Exp
 }
@@ -110,7 +105,7 @@ export const car = (target: Exp): car => ({
   target,
 })
 
-type cdr = {
+export type cdr = {
   kind: "Exp.cdr"
   target: Exp
 }
@@ -120,19 +115,19 @@ export const cdr = (target: Exp): cdr => ({
   target,
 })
 
-type nat = {
+export type nat = {
   kind: "Exp.nat"
 }
 
 export const nat: nat = { kind: "Exp.nat" }
 
-type zero = {
+export type zero = {
   kind: "Exp.zero"
 }
 
 export const zero: zero = { kind: "Exp.zero" }
 
-type add1 = {
+export type add1 = {
   kind: "Exp.add1"
   prev: Exp
 }
@@ -142,7 +137,7 @@ export const add1 = (prev: Exp): add1 => ({
   prev,
 })
 
-type nat_ind = {
+export type nat_ind = {
   kind: "Exp.nat_ind"
   target: Exp
   motive: Exp
@@ -163,7 +158,7 @@ export const nat_ind = (
   step,
 })
 
-type equal = {
+export type equal = {
   kind: "Exp.equal"
   t: Exp
   from: Exp
@@ -177,7 +172,7 @@ export const equal = (t: Exp, from: Exp, to: Exp): equal => ({
   to,
 })
 
-type same = {
+export type same = {
   kind: "Exp.same"
 }
 
@@ -185,7 +180,7 @@ export const same: same = {
   kind: "Exp.same",
 }
 
-type replace = {
+export type replace = {
   kind: "Exp.replace"
   target: Exp
   motive: Exp
@@ -199,7 +194,7 @@ export const replace = (target: Exp, motive: Exp, base: Exp): replace => ({
   base,
 })
 
-type trivial = {
+export type trivial = {
   kind: "Exp.trivial"
 }
 
@@ -207,7 +202,7 @@ export const trivial: trivial = {
   kind: "Exp.trivial",
 }
 
-type sole = {
+export type sole = {
   kind: "Exp.sole"
 }
 
@@ -215,7 +210,7 @@ export const sole: sole = {
   kind: "Exp.sole",
 }
 
-type absurd = {
+export type absurd = {
   kind: "Exp.absurd"
 }
 
@@ -223,7 +218,7 @@ export const absurd: absurd = {
   kind: "Exp.absurd",
 }
 
-type absurd_ind = {
+export type absurd_ind = {
   kind: "Exp.absurd_ind"
   target: Exp
   motive: Exp
@@ -235,7 +230,7 @@ export const absurd_ind = (target: Exp, motive: Exp): absurd_ind => ({
   motive,
 })
 
-type str = {
+export type str = {
   kind: "Exp.str"
 }
 
@@ -243,7 +238,7 @@ export const str: str = {
   kind: "Exp.str",
 }
 
-type quote = {
+export type quote = {
   kind: "Exp.quote"
   str: string
 }
@@ -253,7 +248,7 @@ export const quote = (str: string): quote => ({
   str,
 })
 
-type type = {
+export type type = {
   kind: "Exp.type"
 }
 
@@ -261,7 +256,7 @@ export const type: type = {
   kind: "Exp.type",
 }
 
-type begin = {
+export type begin = {
   kind: "Exp.begin"
   stmts: Array<Stmt.Stmt>
   ret: Exp
@@ -273,7 +268,7 @@ export const begin = (stmts: Array<Stmt.Stmt>, ret: Exp): begin => ({
   ret,
 })
 
-type the = {
+export type the = {
   kind: "Exp.the"
   t: Exp
   exp: Exp

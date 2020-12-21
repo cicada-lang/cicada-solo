@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Var`
 - [lang2] `Pi`
 - [lang2] `Fn`
 - [lang2] `Ap`
