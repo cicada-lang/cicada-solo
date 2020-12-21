@@ -70,7 +70,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.quote": {
-        return Value.quote(exp.str)
+        return exp.evaluability({ env })
       }
       case "Exp.type": {
         return Value.type
