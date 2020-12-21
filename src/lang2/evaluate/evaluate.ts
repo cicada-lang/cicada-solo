@@ -19,10 +19,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.ap": {
-        return Evaluate.do_ap(
-          Evaluate.evaluate(env, exp.target),
-          Evaluate.evaluate(env, exp.arg)
-        )
+        return exp.evaluability({ env })
       }
       case "Exp.sigma": {
         return Value.sigma(

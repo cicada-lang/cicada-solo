@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Evaluable` -- ap
 - [lang2] `Evaluable` -- sigma
 - [lang2] `Evaluable` -- cons
 - [lang2] `Evaluable` -- car
