@@ -10,11 +10,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
   try {
     switch (exp.kind) {
       case "Exp.v": {
-        const result = Env.lookup(env, exp.name)
-        if (result === undefined) {
-          throw new Trace.Trace(Explain.explain_name_undefined(exp.name))
-        }
-        return result
+        return exp.evaluability({ env })
       }
       case "Exp.pi": {
         return Value.pi(
