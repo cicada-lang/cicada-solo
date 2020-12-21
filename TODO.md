@@ -58,7 +58,6 @@
 
 - [lang2] `Repr` -- absurd-ind
 - [lang2] `Repr` -- begin
-- [lang2] `Repr` -- equal
 - [lang2] `Repr` -- quote
 - [lang2] `Repr` -- replace
 - [lang2] `Repr` -- same

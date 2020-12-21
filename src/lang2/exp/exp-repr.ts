@@ -41,9 +41,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.equal": {
-      return `Equal(${Exp.repr(exp.t)}, ${Exp.repr(exp.from)}, ${Exp.repr(
-        exp.to
-      )})`
+      return exp.repr()
     }
     case "Exp.same": {
       return "same"
