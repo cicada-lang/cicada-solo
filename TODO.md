@@ -56,8 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Repr`
-
 - [lang2] `Repr` -- absurd-ind
 - [lang2] `Repr` -- add1
 - [lang2] `Repr` -- ap
@@ -79,7 +77,6 @@
 - [lang2] `Repr` -- the
 - [lang2] `Repr` -- trivial
 - [lang2] `Repr` -- type
-- [lang2] `Repr` -- var
 - [lang2] `Repr` -- zero
 
 - [lang2] `AlphaRepr`
