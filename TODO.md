@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `AbsurdInd`
 - [lang2] `Str`
 - [lang2] `Quote`
 - [lang2] `Type`
