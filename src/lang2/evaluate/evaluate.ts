@@ -61,13 +61,10 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.absurd": {
-        return Value.absurd
+        return exp.evaluability({ env })
       }
       case "Exp.absurd_ind": {
-        return Evaluate.do_absurd_ind(
-          Evaluate.evaluate(env, exp.target),
-          Evaluate.evaluate(env, exp.motive)
-        )
+        return exp.evaluability({ env })
       }
       case "Exp.str": {
         return Value.str

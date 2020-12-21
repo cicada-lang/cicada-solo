@@ -56,8 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Evaluable` -- absurd
-- [lang2] `Evaluable` -- absurd_ind
 - [lang2] `Evaluable` -- str
 - [lang2] `Evaluable` -- quote
 - [lang2] `Evaluable` -- type
