@@ -122,7 +122,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else {
       throw new Trace.Trace(
         ut.aline(`
-          |I can not infer the type of ${Exp.repr(exp)}.
+          |I can not infer the type of ${exp.repr()}.
           |I suggest you add a type annotation to the expression.
           |`)
       )

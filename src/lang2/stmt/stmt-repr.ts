@@ -4,10 +4,10 @@ import * as Exp from "../exp"
 export function repr(stmt: Stmt.Stmt): string {
   switch (stmt.kind) {
     case "Stmt.def": {
-      return `${stmt.name} = ${Exp.repr(stmt.exp)}`
+      return `${stmt.name} = ${stmt.exp.repr()}`
     }
     case "Stmt.show": {
-      return `@show ${Exp.repr(stmt.exp)}`
+      return `@show ${stmt.exp.repr()}`
     }
   }
 }

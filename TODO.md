@@ -56,8 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] inline `Exp.repr`
-
 - [lang2] `AlphaRepr`
 
 - [lang2] `AlphaRepr` -- absurd
