@@ -16,7 +16,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.fn": {
-        return Value.fn(Value.Closure.create(env, exp.name, exp.ret))
+        return exp.evaluability({ env })
       }
       case "Exp.ap": {
         return Evaluate.do_ap(
