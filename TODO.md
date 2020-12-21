@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Evaluable` -- replace
 - [lang2] `Evaluable` -- trivial
 - [lang2] `Evaluable` -- sole
 - [lang2] `Evaluable` -- absurd

@@ -52,11 +52,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.replace": {
-        return Evaluate.do_replace(
-          Evaluate.evaluate(env, exp.target),
-          Evaluate.evaluate(env, exp.motive),
-          Evaluate.evaluate(env, exp.base)
-        )
+        return exp.evaluability({ env })
       }
       case "Exp.trivial": {
         return Value.trivial
