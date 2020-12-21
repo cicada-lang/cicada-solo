@@ -47,9 +47,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.replace": {
-      return `replace(${Exp.repr(exp.target)}, ${Exp.repr(
-        exp.motive
-      )}, ${Exp.repr(exp.base)})`
+      return exp.repr()
     }
     case "Exp.trivial": {
       return "Trivial"

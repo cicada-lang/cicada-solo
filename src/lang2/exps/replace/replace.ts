@@ -9,13 +9,16 @@ import * as Neutral from "../../neutral"
 import * as Trace from "../../../trace"
 import { do_ap } from "../ap"
 import { Type } from "../type"
+import { Repr } from "../../repr"
+import { repr } from "../../exp"
 
-export type Replace = Evaluable & {
-  kind: "Exp.replace"
-  target: Exp
-  motive: Exp
-  base: Exp
-}
+export type Replace = Evaluable &
+  Repr & {
+    kind: "Exp.replace"
+    target: Exp
+    motive: Exp
+    base: Exp
+  }
 
 export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
   return {
@@ -23,6 +26,7 @@ export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
     target,
     motive,
     base,
+    repr: () => `replace(${repr(target)}, ${repr(motive)}, ${repr(base)})`,
     evaluability: ({ env }) =>
       do_replace(
         evaluate(env, target),
