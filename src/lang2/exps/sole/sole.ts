@@ -5,5 +5,5 @@ export type Sole = {
 }
 
 export const Sole: Sole = {
-  kind: "Exp.sole"
+  kind: "Exp.sole",
 }
