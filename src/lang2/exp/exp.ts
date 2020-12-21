@@ -20,6 +20,7 @@ import { AbsurdInd } from "../exps/absurd-ind"
 import { Str } from "../exps/str"
 import { Quote } from "../exps/quote"
 import { Type } from "../exps/type"
+import { Begin } from "../exps/begin"
 
 export type Exp =
   | Var
@@ -115,17 +116,8 @@ export const quote = Quote
 export type type = Type
 export const type = Type
 
-export type begin = {
-  kind: "Exp.begin"
-  stmts: Array<Stmt.Stmt>
-  ret: Exp
-}
-
-export const begin = (stmts: Array<Stmt.Stmt>, ret: Exp): begin => ({
-  kind: "Exp.begin",
-  stmts,
-  ret,
-})
+export type begin = Begin
+export const begin = Begin
 
 export type the = {
   kind: "Exp.the"
