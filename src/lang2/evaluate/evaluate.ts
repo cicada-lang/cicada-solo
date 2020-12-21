@@ -49,7 +49,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.same": {
-        return Value.same
+        return exp.evaluability({ env })
       }
       case "Exp.replace": {
         return Evaluate.do_replace(
