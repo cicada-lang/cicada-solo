@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Type`
 - [lang2] `Begin`
 - [lang2] `The`
 

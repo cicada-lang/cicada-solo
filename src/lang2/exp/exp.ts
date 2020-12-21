@@ -19,6 +19,7 @@ import { Absurd } from "../exps/absurd"
 import { AbsurdInd } from "../exps/absurd-ind"
 import { Str } from "../exps/str"
 import { Quote } from "../exps/quote"
+import { Type } from "../exps/type"
 
 export type Exp =
   | Var
@@ -41,8 +42,8 @@ export type Exp =
   | Absurd
   | AbsurdInd
   | Str
-  | quote
-  | type
+  | Quote
+  | Type
   | begin
   | the
 
@@ -111,13 +112,8 @@ export const str = Str
 export type quote = Quote
 export const quote = Quote
 
-export type type = {
-  kind: "Exp.type"
-}
-
-export const type: type = {
-  kind: "Exp.type",
-}
+export type type = Type
+export const type = Type
 
 export type begin = {
   kind: "Exp.begin"
