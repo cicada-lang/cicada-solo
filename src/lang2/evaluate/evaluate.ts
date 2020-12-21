@@ -22,10 +22,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.sigma": {
-        return Value.sigma(
-          Evaluate.evaluate(env, exp.car_t),
-          Value.Closure.create(env, exp.name, exp.cdr_t)
-        )
+        return exp.evaluability({ env })
       }
       case "Exp.cons": {
         return Value.cons(
