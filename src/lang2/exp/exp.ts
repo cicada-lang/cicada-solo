@@ -18,6 +18,7 @@ import { Sole } from "../exps/sole"
 import { Absurd } from "../exps/absurd"
 import { AbsurdInd } from "../exps/absurd-ind"
 import { Str } from "../exps/str"
+import { Quote } from "../exps/quote"
 
 export type Exp =
   | Var
@@ -107,15 +108,8 @@ export const absurd_ind = AbsurdInd
 export type str = Str
 export const str = Str
 
-export type quote = {
-  kind: "Exp.quote"
-  str: string
-}
-
-export const quote = (str: string): quote => ({
-  kind: "Exp.quote",
-  str,
-})
+export type quote = Quote
+export const quote = Quote
 
 export type type = {
   kind: "Exp.type"
