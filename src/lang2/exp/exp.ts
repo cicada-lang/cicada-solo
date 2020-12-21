@@ -1,8 +1,9 @@
 import { Var } from "../exps/var"
+import { Pi } from "../exps/pi"
 
 export type Exp =
   | Var
-  | pi
+  | Pi
   | fn
   | ap
   | sigma
@@ -31,19 +32,8 @@ import * as Stmt from "../stmt"
 export type v = Var
 export const v = Var
 
-export type pi = {
-  kind: "Exp.pi"
-  name: string
-  arg_t: Exp
-  ret_t: Exp
-}
-
-export const pi = (name: string, arg_t: Exp, ret_t: Exp): pi => ({
-  kind: "Exp.pi",
-  name,
-  arg_t,
-  ret_t,
-})
+export type pi = Pi
+export const pi = Pi
 
 export type fn = {
   kind: "Exp.fn"
