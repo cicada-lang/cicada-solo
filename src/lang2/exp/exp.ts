@@ -8,6 +8,7 @@ import { Car } from "../exps/car"
 import { Cdr } from "../exps/cdr"
 import { Nat } from "../exps/nat"
 import { Zero } from "../exps/zero"
+import { Add1 } from "../exps/add1"
 
 export type Exp =
   | Var
@@ -20,7 +21,7 @@ export type Exp =
   | Cdr
   | Nat
   | Zero
-  | add1
+  | Add1
   | nat_ind
   | equal
   | same
@@ -67,15 +68,8 @@ export const nat = Nat
 export type zero = Zero
 export const zero = Zero
 
-export type add1 = {
-  kind: "Exp.add1"
-  prev: Exp
-}
-
-export const add1 = (prev: Exp): add1 => ({
-  kind: "Exp.add1",
-  prev,
-})
+export type add1 = Add1
+export const add1 = Add1
 
 export type nat_ind = {
   kind: "Exp.nat_ind"
