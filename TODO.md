@@ -57,7 +57,6 @@
 > refactoring `Exp`
 
 - [lang2] `Repr` -- absurd-ind
-- [lang2] `Repr` -- add1
 - [lang2] `Repr` -- begin
 - [lang2] `Repr` -- equal
 - [lang2] `Repr` -- nat-ind
@@ -69,7 +68,6 @@
 - [lang2] `Repr` -- the
 - [lang2] `Repr` -- trivial
 - [lang2] `Repr` -- type
-- [lang2] `Repr` -- zero
 
 - [lang2] `AlphaRepr`
 
