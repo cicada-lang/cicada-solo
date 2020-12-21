@@ -56,9 +56,10 @@
 
 > refactoring `Exp`
 
-- [lang2] `Repr` -- type
 - [lang2] `Repr` -- begin
 - [lang2] `Repr` -- the
+
+- [lang2] no branches in `Repr`
 
 - [lang2] `AlphaRepr`
 

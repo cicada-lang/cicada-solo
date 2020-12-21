@@ -1,12 +1,16 @@
 import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
 import * as Value from "../../value"
+import { Repr } from "../../repr"
+import { repr } from "../../exp"
 
-export type Type = Evaluable & {
-  kind: "Exp.type"
-}
+export type Type = Evaluable &
+  Repr & {
+    kind: "Exp.type"
+  }
 
 export const Type: Type = {
   kind: "Exp.type",
+  repr: () => "Type",
   evaluability: (_) => Value.type,
 }
