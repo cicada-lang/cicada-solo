@@ -14,7 +14,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.ap": {
-      return `${Exp.repr(exp.target)}(${Exp.repr(exp.arg)})`
+      return exp.repr()
     }
     case "Exp.sigma": {
       return `(${exp.name}: ${Exp.repr(exp.car_t)}) * ${Exp.repr(exp.cdr_t)}`
