@@ -59,8 +59,6 @@
 - [lang2] `Repr` -- absurd-ind
 - [lang2] `Repr` -- add1
 - [lang2] `Repr` -- begin
-- [lang2] `Repr` -- car
-- [lang2] `Repr` -- cdr
 - [lang2] `Repr` -- equal
 - [lang2] `Repr` -- nat
 - [lang2] `Repr` -- nat-ind

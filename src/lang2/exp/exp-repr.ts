@@ -23,10 +23,10 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.car": {
-      return `car(${Exp.repr(exp.target)})`
+      return exp.repr()
     }
     case "Exp.cdr": {
-      return `cdr(${Exp.repr(exp.target)})`
+      return exp.repr()
     }
     case "Exp.nat": {
       return "Nat"
