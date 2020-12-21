@@ -5,6 +5,8 @@ import * as Neutral from "../neutral"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as ut from "../../ut"
+import { do_car } from "../exps/car"
+import { do_cdr } from "../exps/cdr"
 
 export function readback(
   ctx: Ctx.Ctx,
@@ -34,8 +36,8 @@ export function readback(
     //   Every value with a pair type,
     //   whether it is neutral or not,
     //   is read back with cons at the top.
-    const car = Evaluate.do_car(value)
-    const cdr = Evaluate.do_cdr(value)
+    const car = do_car(value)
+    const cdr = do_cdr(value)
     return Exp.cons(
       Readback.readback(ctx, t.car_t, car),
       Readback.readback(ctx, Value.Closure.apply(t.cdr_t_cl, car), cdr)

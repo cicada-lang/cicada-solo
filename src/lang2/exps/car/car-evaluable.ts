@@ -11,7 +11,7 @@ export const car_evaluable = (target: Exp) =>
     evaluability: ({ env }) => do_car(evaluate(env, target)),
   })
 
-function do_car(target: Value.Value): Value.Value {
+export function do_car(target: Value.Value): Value.Value {
   if (target.kind === "Value.cons") {
     return target.car
   } else if (target.kind === "Value.not_yet") {

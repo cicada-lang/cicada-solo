@@ -23,7 +23,7 @@ export function AbsurdInd(target: Exp, motive: Exp): AbsurdInd {
   }
 }
 
-function do_absurd_ind(target: Value.Value, motive: Value.Value): Value.Value {
+export function do_absurd_ind(target: Value.Value, motive: Value.Value): Value.Value {
   if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.absurd") {
       return Value.not_yet(

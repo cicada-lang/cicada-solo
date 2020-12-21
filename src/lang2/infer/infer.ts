@@ -9,6 +9,7 @@ import * as Env from "../env"
 import * as Ctx from "../ctx"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
+import { do_car } from "../exps/car"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
@@ -44,7 +45,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       const target_t = Infer.infer(ctx, exp.target)
       const sigma = Value.is_sigma(ctx, target_t)
       const target = Evaluate.evaluate(Ctx.to_env(ctx), exp.target)
-      const car = Evaluate.do_car(target)
+      const car = do_car(target)
       return Value.Closure.apply(sigma.cdr_t_cl, car)
     } else if (exp.kind === "Exp.nat") {
       return Value.type

@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] re-placing `Evaluate.do_cdr`
 - [lang2] re-placing `Evaluate.do_ap`
 - [lang2] re-placing `Evaluate.do_repace`
 - [lang2] re-placing `Evaluate.do_nat_ind`
