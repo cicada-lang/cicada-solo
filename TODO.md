@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Evaluable` -- zero
 - [lang2] `Evaluable` -- add1
 - [lang2] `Evaluable` -- nat_ind
 - [lang2] `Evaluable` -- equal

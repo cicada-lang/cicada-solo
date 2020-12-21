@@ -37,7 +37,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.zero": {
-        return Value.zero
+        return exp.evaluability({ env })
       }
       case "Exp.add1": {
         return Value.add1(Evaluate.evaluate(env, exp.prev))
