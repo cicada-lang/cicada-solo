@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Evaluable` -- type
 - [lang2] `Evaluable` -- begin
 - [lang2] `Evaluable` -- the
 

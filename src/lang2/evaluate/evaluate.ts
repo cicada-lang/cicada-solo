@@ -73,7 +73,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.type": {
-        return Value.type
+        return exp.evaluability({ env })
       }
       case "Exp.begin": {
         const new_env = Env.clone(env)
