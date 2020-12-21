@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Cdr`
 - [lang2] `Nat`
 - [lang2] `Zero`
 - [lang2] `Add1`
