@@ -31,7 +31,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.cdr": {
-        return Evaluate.do_cdr(Evaluate.evaluate(env, exp.target))
+        return exp.evaluability({ env })
       }
       case "Exp.nat": {
         return Value.nat

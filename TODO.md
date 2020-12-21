@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Evaluable` -- cdr
 - [lang2] `Evaluable` -- nat
 - [lang2] `Evaluable` -- zero
 - [lang2] `Evaluable` -- add1
