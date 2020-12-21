@@ -57,7 +57,6 @@
 > refactoring `Exp`
 
 - [lang2] `Repr` -- begin
-- [lang2] `Repr` -- the
 
 - [lang2] no branches in `Repr`
 
