@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Cons`
 - [lang2] `Car`
 - [lang2] `Cdr`
 - [lang2] `Nat`
