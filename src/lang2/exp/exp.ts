@@ -7,6 +7,7 @@ import { Cons } from "../exps/cons"
 import { Car } from "../exps/car"
 import { Cdr } from "../exps/cdr"
 import { Nat } from "../exps/nat"
+import { Zero } from "../exps/zero"
 
 export type Exp =
   | Var
@@ -18,7 +19,7 @@ export type Exp =
   | Car
   | Cdr
   | Nat
-  | zero
+  | Zero
   | add1
   | nat_ind
   | equal
@@ -63,13 +64,8 @@ export const cdr = Cdr
 export type nat = Nat
 export const nat = Nat
 
-export type zero = {
-  kind: "Exp.zero"
-}
-
-export const zero: zero = {
-  kind: "Exp.zero",
-}
+export type zero = Zero
+export const zero = Zero
 
 export type add1 = {
   kind: "Exp.add1"

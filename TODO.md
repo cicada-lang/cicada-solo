@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Zero`
 - [lang2] `Add1`
 - [lang2] `NatInd`
 - [lang2] `Equal`
