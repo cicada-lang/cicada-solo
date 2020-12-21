@@ -6,6 +6,7 @@ import { Sigma } from "../exps/sigma"
 import { Cons } from "../exps/cons"
 import { Car } from "../exps/car"
 import { Cdr } from "../exps/cdr"
+import { Nat } from "../exps/nat"
 
 export type Exp =
   | Var
@@ -16,7 +17,7 @@ export type Exp =
   | Cons
   | Car
   | Cdr
-  | nat
+  | Nat
   | zero
   | add1
   | nat_ind
@@ -59,17 +60,16 @@ export const car = Car
 export type cdr = Cdr
 export const cdr = Cdr
 
-export type nat = {
-  kind: "Exp.nat"
-}
-
-export const nat: nat = { kind: "Exp.nat" }
+export type nat = Nat
+export const nat = Nat
 
 export type zero = {
   kind: "Exp.zero"
 }
 
-export const zero: zero = { kind: "Exp.zero" }
+export const zero: zero = {
+  kind: "Exp.zero",
+}
 
 export type add1 = {
   kind: "Exp.add1"
