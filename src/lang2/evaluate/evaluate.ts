@@ -83,7 +83,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return Evaluate.evaluate(new_env, exp.ret)
       }
       case "Exp.the": {
-        return Evaluate.evaluate(env, exp.exp)
+        return exp.evaluability({ env })
       }
     }
   } catch (error) {
