@@ -1,7 +1,10 @@
-export type Evaluable = {}
+import { Env } from "../env"
+import { Value } from "../value"
 
-// TODO
+export type Evaluable = {
+  evaluability(the: { env: Env }): Value
+}
 
-export function Evaluable(): Evaluable {
-  return {}
+export function Evaluable(the: Evaluable): Evaluable {
+  return the
 }
