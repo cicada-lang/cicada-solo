@@ -8,5 +8,5 @@ export type Zero = Evaluable & {
 
 export const Zero: Zero = {
   kind: "Exp.zero",
-  evaluability: (_) => Value.zero
+  evaluability: (_) => Value.zero,
 }
