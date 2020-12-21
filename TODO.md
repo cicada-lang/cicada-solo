@@ -55,8 +55,7 @@
 # lang2
 
 > refactoring `Exp`
-- [lang2] re-placing `Evaluate.do_absurd_ind`
-- [lang2] re-placing `Evaluate.do_car`
+
 - [lang2] re-placing `Evaluate.do_cdr`
 - [lang2] re-placing `Evaluate.do_ap`
 - [lang2] re-placing `Evaluate.do_repace`
