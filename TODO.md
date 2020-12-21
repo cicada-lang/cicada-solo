@@ -61,7 +61,6 @@
 - [lang2] `Repr` -- begin
 - [lang2] `Repr` -- car
 - [lang2] `Repr` -- cdr
-- [lang2] `Repr` -- cons
 - [lang2] `Repr` -- equal
 - [lang2] `Repr` -- nat
 - [lang2] `Repr` -- nat-ind

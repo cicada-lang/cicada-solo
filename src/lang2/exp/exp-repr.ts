@@ -20,7 +20,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.cons": {
-      return `cons(${Exp.repr(exp.car)}, ${Exp.repr(exp.cdr)})`
+      return exp.repr()
     }
     case "Exp.car": {
       return `car(${Exp.repr(exp.target)})`
