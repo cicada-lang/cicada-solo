@@ -43,12 +43,7 @@ export function evaluate(env: Env.Env, exp: Exp.Exp): Value.Value {
         return exp.evaluability({ env })
       }
       case "Exp.nat_ind": {
-        return Evaluate.do_nat_ind(
-          Evaluate.evaluate(env, exp.target),
-          Evaluate.evaluate(env, exp.motive),
-          Evaluate.evaluate(env, exp.base),
-          Evaluate.evaluate(env, exp.step)
-        )
+        return exp.evaluability({ env })
       }
       case "Exp.equal": {
         return Value.equal(
