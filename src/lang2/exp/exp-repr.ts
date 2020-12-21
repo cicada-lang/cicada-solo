@@ -29,7 +29,7 @@ export function repr(exp: Exp.Exp): string {
       return exp.repr()
     }
     case "Exp.nat": {
-      return "Nat"
+      return exp.repr()
     }
     case "Exp.zero": {
       return "0"
