@@ -56,8 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `AlphaRepr` -- replace
-
 - [lang2] `AlphaRepr` -- begin
 
 - [lang2] `Checkable` -- absurd

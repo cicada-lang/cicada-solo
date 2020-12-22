@@ -10,9 +10,11 @@ import * as Trace from "../../../trace"
 import { do_ap } from "../ap"
 import { Type } from "../type"
 import { Repr } from "../../repr"
+import { AlphaRepr } from "../../alpha-repr"
 
 export type Replace = Evaluable &
-  Repr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.replace"
     target: Exp
     motive: Exp
@@ -25,13 +27,17 @@ export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
     target,
     motive,
     base,
-    repr: () => `replace(${target.repr()}, ${motive.repr()}, ${base.repr()})`,
     evaluability: ({ env }) =>
       do_replace(
         evaluate(env, target),
         evaluate(env, motive),
         evaluate(env, base)
       ),
+    repr: () => `replace(${target.repr()}, ${motive.repr()}, ${base.repr()})`,
+    alpha_repr: (opts) =>
+      `replace(${target.alpha_repr(opts)}, ${motive.alpha_repr(
+        opts
+      )}, ${base.alpha_repr(opts)})`,
   }
 }
 
