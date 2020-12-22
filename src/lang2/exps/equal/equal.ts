@@ -9,11 +9,7 @@ import * as Ctx from "../../ctx"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 
-export type Equal = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
+export type Equal = Exp & {
     kind: "Exp.equal"
     t: Exp
     from: Exp

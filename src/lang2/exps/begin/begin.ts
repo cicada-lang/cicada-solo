@@ -12,11 +12,7 @@ import { AlphaRepr, AlphaReprOpts } from "../../alpha-repr"
 import * as ut from "../../../ut"
 import { begin_checkable } from "./begin-checkable"
 
-export type Begin = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
+export type Begin = Exp & {
     kind: "Exp.begin"
     stmts: Array<Stmt.Stmt>
     ret: Exp

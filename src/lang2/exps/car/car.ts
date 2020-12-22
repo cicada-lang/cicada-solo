@@ -8,11 +8,7 @@ import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 import { car_evaluable } from "./car-evaluable"
 
-export type Car = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
+export type Car = Exp & {
     kind: "Exp.car"
     target: Exp
   }

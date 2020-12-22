@@ -19,11 +19,7 @@ import { Type } from "../type"
 import { Nat } from "../nat"
 import { Pi } from "../pi"
 
-export type NatInd = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
+export type NatInd = Exp & {
     kind: "Exp.nat_ind"
     target: Exp
     motive: Exp

@@ -6,10 +6,7 @@ import { cons_checkable } from "./cons-checkable"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 
-export type Cons = Evaluable &
-  Checkable &
-  Repr &
-  AlphaRepr & {
+export type Cons = Exp & {
     kind: "Exp.cons"
     car: Exp
     cdr: Exp

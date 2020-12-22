@@ -9,11 +9,7 @@ import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 import { nat_to_number } from "../../exp"
 
-export type Add1 = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
+export type Add1 = Exp & {
     kind: "Exp.add1"
     prev: Exp
   }

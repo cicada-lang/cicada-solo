@@ -6,11 +6,7 @@ import * as Value from "../../value"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 
-export type Quote = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
+export type Quote = Exp & {
     kind: "Exp.quote"
     str: string
   }

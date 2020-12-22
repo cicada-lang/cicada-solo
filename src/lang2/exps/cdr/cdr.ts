@@ -11,11 +11,7 @@ import { AlphaRepr } from "../../alpha-repr"
 import { do_car } from "../car"
 import { cdr_evaluable } from "./cdr-evaluable"
 
-export type Cdr = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
+export type Cdr = Exp & {
     kind: "Exp.cdr"
     target: Exp
   }

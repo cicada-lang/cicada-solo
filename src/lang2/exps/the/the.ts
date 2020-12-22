@@ -9,11 +9,7 @@ import { check } from "../../check"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 
-export type The = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
+export type The = Exp & {
     kind: "Exp.the"
     t: Exp
     exp: Exp

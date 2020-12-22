@@ -10,11 +10,7 @@ import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 import { pi_evaluable } from "./pi-evaluable"
 
-export type Pi = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
+export type Pi = Exp & {
     kind: "Exp.pi"
     name: string
     arg_t: Exp

@@ -13,15 +13,11 @@ import * as Trace from "../../../trace"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 
-export type AbsurdInd = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.absurd_ind"
-    target: Exp
-    motive: Exp
-  }
+export type AbsurdInd = Exp & {
+  kind: "Exp.absurd_ind"
+  target: Exp
+  motive: Exp
+}
 
 export function AbsurdInd(target: Exp, motive: Exp): AbsurdInd {
   return {

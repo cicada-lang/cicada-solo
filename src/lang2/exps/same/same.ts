@@ -6,10 +6,7 @@ import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 import { same_checkable } from "./same-checkable"
 
-export type Same = Evaluable &
-  Checkable &
-  Repr &
-  AlphaRepr & {
+export type Same = Exp & {
     kind: "Exp.same"
   }
 

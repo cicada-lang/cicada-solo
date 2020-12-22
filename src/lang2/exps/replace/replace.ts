@@ -19,11 +19,7 @@ import { Pi } from "../pi"
 import { Type } from "../type"
 import { Var } from "../var"
 
-export type Replace = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
+export type Replace = Exp & {
     kind: "Exp.replace"
     target: Exp
     motive: Exp

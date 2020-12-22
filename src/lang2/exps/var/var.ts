@@ -1,3 +1,4 @@
+import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
 import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"
@@ -8,11 +9,7 @@ import * as Explain from "../../explain"
 import * as Trace from "../../../trace"
 import { var_evaluable } from "./var-evaluable"
 
-export type Var = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
+export type Var = Exp & {
     kind: "Exp.v"
     name: string
   }

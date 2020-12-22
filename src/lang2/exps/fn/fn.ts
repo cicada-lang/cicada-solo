@@ -6,10 +6,7 @@ import { fn_checkable } from "./fn-checkable"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 
-export type Fn = Evaluable &
-  Checkable &
-  Repr &
-  AlphaRepr & {
+export type Fn = Exp & {
     kind: "Exp.fn"
     name: string
     ret: Exp

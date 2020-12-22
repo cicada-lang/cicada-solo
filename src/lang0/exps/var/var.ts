@@ -1,3 +1,4 @@
+import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
 import { Repr } from "../../repr"
 import * as Env from "../../env"

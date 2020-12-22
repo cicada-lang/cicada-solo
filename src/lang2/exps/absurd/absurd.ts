@@ -6,13 +6,9 @@ import { Repr } from "../../repr"
 import * as Value from "../../value"
 import { AlphaRepr } from "../../alpha-repr"
 
-export type Absurd = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
-    kind: "Exp.absurd"
-  }
+export type Absurd = Exp & {
+  kind: "Exp.absurd"
+}
 
 export const Absurd: Absurd = {
   kind: "Exp.absurd",

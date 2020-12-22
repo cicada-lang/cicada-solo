@@ -10,11 +10,7 @@ import { sigma_evaluable } from "./sigma-evaluable"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 
-export type Sigma = Evaluable &
-  Checkable &
-  Inferable &
-  Repr &
-  AlphaRepr & {
+export type Sigma = Exp & {
     kind: "Exp.sigma"
     name: string
     car_t: Exp

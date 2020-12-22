@@ -52,7 +52,7 @@
 
 # lang2
 
-- [lang2] inline type definition of `Exp`
+- [lang2] clear deps
 
 > refactoring `Value`
 
