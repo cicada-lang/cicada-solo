@@ -15,29 +15,9 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
     if (exp.kind === "Exp.fn") {
       return exp.checkability(t, { ctx })
     } else if (exp.kind === "Exp.cons") {
-      const sigma = Value.is_sigma(ctx, t)
-      const car = Evaluate.evaluate(Ctx.to_env(ctx), exp.car)
-      const cdr_t = Value.Closure.apply(sigma.cdr_t_cl, car)
-      Check.check(ctx, exp.car, sigma.car_t)
-      Check.check(ctx, exp.cdr, cdr_t)
+      return exp.checkability(t, { ctx })
     } else if (exp.kind === "Exp.same") {
-      const equal = Value.is_equal(ctx, t)
-      if (!Value.conversion(ctx, equal.t, equal.from, equal.to)) {
-        throw new Trace.Trace(
-          ut.aline(`
-          |I am expecting the following two values to be the same ${Readback.readback(
-            ctx,
-            Value.type,
-            equal.t
-          ).repr()}.
-          |But they are not.
-          |from:
-          |  ${Readback.readback(ctx, equal.t, equal.from).repr()}
-          |to:
-          |  ${Readback.readback(ctx, equal.t, equal.to).repr()}
-          |`)
-        )
-      }
+      return exp.checkability(t, { ctx })
     } else if (exp.kind === "Exp.begin") {
       const new_ctx = Ctx.clone(ctx)
       for (const stmt of exp.stmts) {

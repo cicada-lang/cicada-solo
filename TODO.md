@@ -56,8 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Checkable` -- cons
-- [lang2] `Checkable` -- same
 - [lang2] `Checkable` -- begin
 
 - [lang2] `Inferable` -- absurd
