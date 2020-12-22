@@ -1,7 +1,13 @@
-export type Inferable = {}
+import { Env } from "../env"
+import { Ctx } from "../ctx"
+import { Value } from "../value"
 
-// TODO
+export type Inferable = {
+  inferability: (the: { ctx: Ctx }) => Value
+}
 
-export function Inferable(): Inferable {
-  return {}
+export function Inferable(the: {
+  inferability: (the: { ctx: Ctx }) => Value
+}): Inferable {
+  return the
 }

@@ -56,7 +56,7 @@
 
 > refactoring `Exp`
 
-- [lang2] `AlphaRepr`
+- [lang2] fix `AlphaRepr`
 
 - [lang2] `AlphaRepr` -- absurd
 - [lang2] `AlphaRepr` -- absurd-ind
@@ -107,8 +107,6 @@
 - [lang2] `Checkable` -- type
 - [lang2] `Checkable` -- var
 - [lang2] `Checkable` -- zero
-
-- [lang2] `Inferable`
 
 - [lang2] `Inferable` -- absurd
 - [lang2] `Inferable` -- absurd-ind
