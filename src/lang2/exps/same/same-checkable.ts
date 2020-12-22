@@ -11,10 +11,10 @@ export const same_checkable = Checkable({
       throw new Trace.Trace(
         ut.aline(`
           |I am expecting the following two values to be the same ${readback(
-          ctx,
-          Value.type,
-          equal.t
-        ).repr()}.
+            ctx,
+            Value.type,
+            equal.t
+          ).repr()}.
           |But they are not.
           |from:
           |  ${readback(ctx, equal.t, equal.from).repr()}
