@@ -30,7 +30,7 @@ export function Add1(prev: Exp): Add1 {
       if (n !== undefined) {
         return n.toString()
       } else {
-        return `add1(${prev.alpha_repr()})`
+        return `add1(${prev.alpha_repr(opts)})`
       }
     },
   }
