@@ -71,7 +71,6 @@
 - [lang2] `Inferable` -- sigma
 - [lang2] `Inferable` -- str
 - [lang2] `Inferable` -- the
-- [lang2] `Inferable` -- type
 - [lang2] `Inferable` -- var
 
 - [lang2] no branches in `Infer.infer`

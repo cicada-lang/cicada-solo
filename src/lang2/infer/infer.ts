@@ -106,7 +106,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.quote") {
       return Value.str
     } else if (exp.kind === "Exp.type") {
-      return Value.type
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.begin") {
       const { stmts, ret } = exp
       ctx = Ctx.clone(ctx)
