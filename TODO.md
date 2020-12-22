@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Inferable` -- add1
 - [lang2] `Inferable` -- ap
 - [lang2] `Inferable` -- begin
 - [lang2] `Inferable` -- car
