@@ -31,9 +31,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.ap") {
       return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.car") {
-      const target_t = Infer.infer(ctx, exp.target)
-      const sigma = Value.is_sigma(ctx, target_t)
-      return sigma.car_t
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.cdr") {
       const target_t = Infer.infer(ctx, exp.target)
       const sigma = Value.is_sigma(ctx, target_t)
