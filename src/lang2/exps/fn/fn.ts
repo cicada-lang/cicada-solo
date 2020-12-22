@@ -1,10 +1,13 @@
 import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
+import { Checkable } from "../../checkable"
 import { fn_evaluable } from "./fn-evaluable"
+import { fn_checkable } from "./fn-checkable"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 
 export type Fn = Evaluable &
+  Checkable &
   Repr &
   AlphaRepr & {
     kind: "Exp.fn"
@@ -18,6 +21,7 @@ export function Fn(name: string, ret: Exp): Fn {
     name,
     ret,
     ...fn_evaluable(name, ret),
+    ...fn_checkable(name, ret),
     repr: () => `(${name}) => ${ret.repr()}`,
     alpha_repr: (opts) => {
       const ret_repr = ret.alpha_repr({

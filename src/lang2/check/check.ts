@@ -13,10 +13,7 @@ import * as ut from "../../ut"
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
   try {
     if (exp.kind === "Exp.fn") {
-      const pi = Value.is_pi(ctx, t)
-      const arg = Value.not_yet(pi.arg_t, Neutral.v(exp.name))
-      const ret_t = Value.Closure.apply(pi.ret_t_cl, arg)
-      Check.check(Ctx.extend(ctx, exp.name, pi.arg_t), exp.ret, ret_t)
+      return exp.checkability(t, { ctx })
     } else if (exp.kind === "Exp.cons") {
       const sigma = Value.is_sigma(ctx, t)
       const car = Evaluate.evaluate(Ctx.to_env(ctx), exp.car)
