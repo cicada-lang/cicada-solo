@@ -51,7 +51,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.nat") {
       return Value.type
     } else if (exp.kind === "Exp.zero") {
-      return Value.nat
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.add1") {
       Check.check(ctx, exp.prev, Value.nat)
       return Value.nat

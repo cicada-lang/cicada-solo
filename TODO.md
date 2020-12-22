@@ -73,7 +73,6 @@
 - [lang2] `Inferable` -- the
 - [lang2] `Inferable` -- type
 - [lang2] `Inferable` -- var
-- [lang2] `Inferable` -- zero
 
 - [lang2] no branches in `Infer.infer`
 - [lang2] no branches in `Check.check`
