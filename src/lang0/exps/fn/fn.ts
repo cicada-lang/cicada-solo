@@ -4,11 +4,12 @@ import { Repr } from "../../repr"
 import { repr } from "../../exp"
 import * as Value from "../../value"
 
-export type Fn = Evaluable & Repr & {
-  kind: "Exp.fn"
-  name: string
-  ret: Exp
-}
+export type Fn = Evaluable &
+  Repr & {
+    kind: "Exp.fn"
+    name: string
+    ret: Exp
+  }
 
 export function Fn(name: string, ret: Exp): Fn {
   return {
