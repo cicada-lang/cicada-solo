@@ -15,11 +15,7 @@ import { do_ap } from "../exps/ap"
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
     if (exp.kind === "Exp.v") {
-      const t = Ctx.lookup(ctx, exp.name)
-      if (t === undefined) {
-        throw new Trace.Trace(Explain.explain_name_undefined(exp.name))
-      }
-      return t
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.pi") {
       Check.check(ctx, exp.arg_t, Value.type)
       const arg_t = Evaluate.evaluate(Ctx.to_env(ctx), exp.arg_t)
