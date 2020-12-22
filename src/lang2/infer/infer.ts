@@ -29,11 +29,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       Check.check(ctx, exp.cdr_t, Value.type)
       return Value.type
     } else if (exp.kind === "Exp.ap") {
-      const target_t = Infer.infer(ctx, exp.target)
-      const pi = Value.is_pi(ctx, target_t)
-      Check.check(ctx, exp.arg, pi.arg_t)
-      const arg = Evaluate.evaluate(Ctx.to_env(ctx), exp.arg)
-      return Value.Closure.apply(pi.ret_t_cl, arg)
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.car") {
       const target_t = Infer.infer(ctx, exp.target)
       const sigma = Value.is_sigma(ctx, target_t)
@@ -49,8 +45,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.zero") {
       return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.add1") {
-      Check.check(ctx, exp.prev, Value.nat)
-      return Value.nat
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.nat_ind") {
       // NOTE We should always infer target,
       //   but we do a simple check for the simple nat.
