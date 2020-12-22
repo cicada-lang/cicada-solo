@@ -41,10 +41,6 @@
 
 # lang0
 
-> refactoring `Exp`
-
-- [lang0] inline type definition of `Exp`
-
 > refactoring `Value`
 
 # lang1

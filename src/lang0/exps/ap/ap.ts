@@ -4,12 +4,11 @@ import { evaluate, do_ap } from "../../evaluate"
 import { Repr } from "../../repr"
 import * as Value from "../../value"
 
-export type Ap = Evaluable &
-  Repr & {
-    kind: "Exp.ap"
-    target: Exp
-    arg: Exp
-  }
+export type Ap = Exp & {
+  kind: "Exp.ap"
+  target: Exp
+  arg: Exp
+}
 
 export function Ap(target: Exp, arg: Exp): Ap {
   return {

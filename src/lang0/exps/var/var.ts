@@ -5,11 +5,10 @@ import * as Value from "../../value"
 import * as Explain from "../../explain"
 import * as Trace from "../../../trace"
 
-export type Var = Evaluable &
-  Repr & {
-    kind: "Exp.v"
-    name: string
-  }
+export type Var = Exp & {
+  kind: "Exp.v"
+  name: string
+}
 
 export function Var(name: string): Var {
   return {

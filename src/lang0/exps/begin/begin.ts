@@ -7,12 +7,11 @@ import * as Value from "../../value"
 import * as Env from "../../env"
 import * as ut from "../../../ut"
 
-export type Begin = Evaluable &
-  Repr & {
-    kind: "Exp.begin"
-    stmts: Array<Stmt.Stmt>
-    ret: Exp
-  }
+export type Begin = Exp & {
+  kind: "Exp.begin"
+  stmts: Array<Stmt.Stmt>
+  ret: Exp
+}
 
 export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
   return {
