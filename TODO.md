@@ -56,6 +56,10 @@
 
 > refactoring `Value`
 
+> refactoring `Neutral`
+
+> refactoring `Normal`
+
 > naming convention
 
 - [lang2] maybe we should change the naming convention to go without dot.
