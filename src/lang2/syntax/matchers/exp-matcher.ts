@@ -2,7 +2,7 @@ import * as Exp from "../../exp"
 import * as pt from "../../../partech"
 import * as ut from "../../../ut"
 import { stmts_matcher } from "../matchers"
-import { Var, Pi, Fn, Ap, Sigma, The } from "../../exps"
+import { Var, Pi, Fn, Ap, Sigma, Cons, Car, Cdr, The } from "../../exps"
 
 export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>({
@@ -23,9 +23,9 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       Sigma(pt.Tree.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
     "exp:pair": ({ car_t, cdr_t }) =>
       Sigma("_", exp_matcher(car_t), exp_matcher(cdr_t)),
-    "exp:cons": ({ car, cdr }) => Exp.cons(exp_matcher(car), exp_matcher(cdr)),
-    "exp:car": ({ target }) => Exp.car(exp_matcher(target)),
-    "exp:cdr": ({ target }) => Exp.cdr(exp_matcher(target)),
+    "exp:cons": ({ car, cdr }) => Cons(exp_matcher(car), exp_matcher(cdr)),
+    "exp:car": ({ target }) => Car(exp_matcher(target)),
+    "exp:cdr": ({ target }) => Cdr(exp_matcher(target)),
     "exp:nat": () => Exp.nat,
     "exp:zero": () => Exp.zero,
     "exp:add1": ({ prev }) => Exp.add1(exp_matcher(prev)),

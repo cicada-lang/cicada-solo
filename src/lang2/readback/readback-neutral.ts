@@ -3,7 +3,7 @@ import * as Neutral from "../neutral"
 import * as Normal from "../normal"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
-import { Var, Ap } from "../exps"
+import { Var, Ap, Car, Cdr } from "../exps"
 
 export function readback_neutral(
   ctx: Ctx.Ctx,
@@ -20,10 +20,10 @@ export function readback_neutral(
       )
     }
     case "Neutral.car": {
-      return Exp.car(Readback.readback_neutral(ctx, neutral.target))
+      return Car(Readback.readback_neutral(ctx, neutral.target))
     }
     case "Neutral.cdr": {
-      return Exp.cdr(Readback.readback_neutral(ctx, neutral.target))
+      return Cdr(Readback.readback_neutral(ctx, neutral.target))
     }
     case "Neutral.nat_ind": {
       return Exp.nat_ind(

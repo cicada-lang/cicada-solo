@@ -5,13 +5,13 @@ import * as Value from "../../value"
 import { car_evaluable } from "./car-evaluable"
 
 export type Car = Exp & {
-  kind: "Exp.car"
+  kind: "Car"
   target: Exp
 }
 
 export function Car(target: Exp): Car {
   return {
-    kind: "Exp.car",
+    kind: "Car",
     target,
     ...car_evaluable(target),
     ...Inferable({

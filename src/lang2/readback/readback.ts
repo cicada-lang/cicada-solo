@@ -8,7 +8,7 @@ import * as ut from "../../ut"
 import { do_car } from "../exps/car"
 import { do_cdr } from "../exps/cdr"
 import { do_ap } from "../exps/ap"
-import { Var, Pi, Fn, Sigma, The } from "../exps"
+import { Var, Pi, Fn, Sigma, Cons, The } from "../exps"
 
 export function readback(
   ctx: Ctx.Ctx,
@@ -40,7 +40,7 @@ export function readback(
     //   is read back with cons at the top.
     const car = do_car(value)
     const cdr = do_cdr(value)
-    return Exp.cons(
+    return Cons(
       Readback.readback(ctx, t.car_t, car),
       Readback.readback(ctx, Value.Closure.apply(t.cdr_t_cl, car), cdr)
     )

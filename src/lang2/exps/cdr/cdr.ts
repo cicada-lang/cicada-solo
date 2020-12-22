@@ -8,13 +8,13 @@ import { do_car } from "../car"
 import { cdr_evaluable } from "./cdr-evaluable"
 
 export type Cdr = Exp & {
-  kind: "Exp.cdr"
+  kind: "Cdr"
   target: Exp
 }
 
 export function Cdr(target: Exp): Cdr {
   return {
-    kind: "Exp.cdr",
+    kind: "Cdr",
     target,
     ...cdr_evaluable(target),
     ...Inferable({

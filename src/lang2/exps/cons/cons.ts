@@ -3,14 +3,14 @@ import { cons_evaluable } from "./cons-evaluable"
 import { cons_checkable } from "./cons-checkable"
 
 export type Cons = Exp & {
-  kind: "Exp.cons"
+  kind: "Cons"
   car: Exp
   cdr: Exp
 }
 
 export function Cons(car: Exp, cdr: Exp): Cons {
   return {
-    kind: "Exp.cons",
+    kind: "Cons",
     car,
     cdr,
     ...cons_evaluable(car, cdr),
