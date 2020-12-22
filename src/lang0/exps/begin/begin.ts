@@ -2,14 +2,18 @@ import { Exp } from "../../exp"
 import * as Stmt from "../../stmt"
 import { Evaluable } from "../../evaluable"
 import { evaluate } from "../../evaluate"
+import { Repr } from "../../repr"
+import { repr } from "../../exp"
 import * as Value from "../../value"
 import * as Env from "../../env"
+import * as ut from "../../../ut"
 
-export type Begin = Evaluable & {
-  kind: "Exp.begin"
-  stmts: Array<Stmt.Stmt>
-  ret: Exp
-}
+export type Begin = Evaluable &
+  Repr & {
+    kind: "Exp.begin"
+    stmts: Array<Stmt.Stmt>
+    ret: Exp
+  }
 
 export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
   return {
@@ -23,7 +27,11 @@ export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
           Stmt.execute(new_env, stmt)
         }
         return evaluate(new_env, ret)
-      }
+      },
     }),
+    repr: () => {
+      const s = [...stmts.map(Stmt.repr), repr(ret)].join("\n")
+      return `{\n${ut.indent(s, "  ")}\n}`
+    },
   }
 }

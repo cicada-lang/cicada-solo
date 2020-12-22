@@ -43,13 +43,6 @@
 
 > refactoring `Exp`
 
-- [lang0] `Repr`
-
-- [lang0] `Repr` -- `Var`
-- [lang0] `Repr` -- `Fn`
-- [lang0] `Repr` -- `Ap`
-- [lang0] `Repr` -- `Begin`
-
 - [lang0] no branches in `Exp.repr`
 - [lang0] inline `Exp.repr`
 

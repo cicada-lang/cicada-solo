@@ -1,21 +1,18 @@
 import * as Exp from "../exp"
-import * as Stmt from "../stmt"
-import * as ut from "../../ut"
 
 export function repr(exp: Exp.Exp): string {
   switch (exp.kind) {
     case "Exp.v": {
-      return exp.name
+      return exp.repr()
     }
     case "Exp.fn": {
-      return `(${exp.name}) => ${repr(exp.ret)}`
+      return exp.repr()
     }
     case "Exp.ap": {
-      return `${repr(exp.target)}(${repr(exp.arg)})`
+      return exp.repr()
     }
     case "Exp.begin": {
-      const s = [...exp.stmts.map(Stmt.repr), repr(exp.ret)].join("\n")
-      return `{\n${ut.indent(s, "  ")}\n}`
+      return exp.repr()
     }
   }
 }
