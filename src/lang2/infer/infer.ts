@@ -87,9 +87,9 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       Check.check(ctx, exp.base, do_ap(motive, equal.from))
       return do_ap(motive, equal.to)
     } else if (exp.kind === "Exp.trivial") {
-      return Value.type
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.sole") {
-      return Value.trivial
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.absurd") {
       return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.absurd_ind") {
