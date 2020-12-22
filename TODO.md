@@ -56,30 +56,10 @@
 
 > refactoring `Exp`
 
-- [lang2] `Checkable` -- absurd
-- [lang2] `Checkable` -- absurd-ind
-- [lang2] `Checkable` -- add1
-- [lang2] `Checkable` -- ap
-- [lang2] `Checkable` -- begin
-- [lang2] `Checkable` -- car
-- [lang2] `Checkable` -- cdr
-- [lang2] `Checkable` -- cons
-- [lang2] `Checkable` -- equal
 - [lang2] `Checkable` -- fn
-- [lang2] `Checkable` -- nat
-- [lang2] `Checkable` -- nat-ind
-- [lang2] `Checkable` -- pi
-- [lang2] `Checkable` -- quote
-- [lang2] `Checkable` -- replace
+- [lang2] `Checkable` -- cons
 - [lang2] `Checkable` -- same
-- [lang2] `Checkable` -- sigma
-- [lang2] `Checkable` -- sole
-- [lang2] `Checkable` -- str
-- [lang2] `Checkable` -- the
-- [lang2] `Checkable` -- trivial
-- [lang2] `Checkable` -- type
-- [lang2] `Checkable` -- var
-- [lang2] `Checkable` -- zero
+- [lang2] `Checkable` -- begin
 
 - [lang2] `Inferable` -- absurd
 - [lang2] `Inferable` -- absurd-ind
@@ -88,15 +68,12 @@
 - [lang2] `Inferable` -- begin
 - [lang2] `Inferable` -- car
 - [lang2] `Inferable` -- cdr
-- [lang2] `Inferable` -- cons
 - [lang2] `Inferable` -- equal
-- [lang2] `Inferable` -- fn
 - [lang2] `Inferable` -- nat
 - [lang2] `Inferable` -- nat-ind
 - [lang2] `Inferable` -- pi
 - [lang2] `Inferable` -- quote
 - [lang2] `Inferable` -- replace
-- [lang2] `Inferable` -- same
 - [lang2] `Inferable` -- sigma
 - [lang2] `Inferable` -- sole
 - [lang2] `Inferable` -- str
