@@ -7,7 +7,11 @@ import { Pi, Fn, Ap } from "../../exps"
 import { Sigma, Cons, Car, Cdr } from "../../exps"
 import { Nat, Zero, Add1, NatInd } from "../../exps"
 import { Equal, Same, Replace } from "../../exps"
+import { Absurd, AbsurdInd } from "../../exps"
 import { Trivial, Sole } from "../../exps"
+import { Str, Quote } from "../../exps"
+import { Type } from "../../exps"
+import { Begin } from "../../exps"
 import { The } from "../../exps"
 
 export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
@@ -60,17 +64,17 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       Replace(exp_matcher(target), exp_matcher(motive), exp_matcher(base)),
     "exp:trivial": () => Trivial,
     "exp:sole": () => Sole,
-    "exp:absurd": () => Exp.absurd,
+    "exp:absurd": () => Absurd,
     "exp:absurd_ind": ({ target, motive }) =>
-      Exp.absurd_ind(exp_matcher(target), exp_matcher(motive)),
-    "exp:str": () => Exp.str,
+      AbsurdInd(exp_matcher(target), exp_matcher(motive)),
+    "exp:str": () => Str,
     "exp:quote": ({ value }) => {
       const str = pt.Tree.str(value)
-      return Exp.quote(str.slice(1, str.length - 1))
+      return Quote(str.slice(1, str.length - 1))
     },
-    "exp:type": () => Exp.type,
+    "exp:type": () => Type,
     "exp:begin": ({ stmts, ret }) =>
-      Exp.begin(stmts_matcher(stmts), exp_matcher(ret)),
+      Begin(stmts_matcher(stmts), exp_matcher(ret)),
     "exp:deduction": ({ deduction_entries, deduction_args }) => {
       const entries = pt.matchers
         .one_or_more_matcher(deduction_entries)

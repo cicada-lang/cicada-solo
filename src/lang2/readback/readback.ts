@@ -13,7 +13,11 @@ import { Pi, Fn } from "../exps"
 import { Sigma, Cons } from "../exps"
 import { Nat, Zero, Add1 } from "../exps"
 import { Equal, Same } from "../exps"
+import { Absurd } from "../exps"
 import { Trivial, Sole } from "../exps"
+import { Str, Quote } from "../exps"
+import { Type } from "../exps"
+import { Begin } from "../exps"
 import { The } from "../exps"
 
 export function readback(
@@ -60,19 +64,19 @@ export function readback(
     value.kind === "Value.not_yet" &&
     value.t.kind === "Value.absurd"
   ) {
-    return The(Exp.absurd, Readback.readback_neutral(ctx, value.neutral))
+    return The(Absurd, Readback.readback_neutral(ctx, value.neutral))
   } else if (t.kind === "Value.equal" && value.kind === "Value.same") {
     return Same
   } else if (t.kind === "Value.str" && value.kind === "Value.quote") {
-    return Exp.quote(value.str)
+    return Quote(value.str)
   } else if (t.kind === "Value.type" && value.kind === "Value.nat") {
     return Nat
   } else if (t.kind === "Value.type" && value.kind === "Value.str") {
-    return Exp.str
+    return Str
   } else if (t.kind === "Value.type" && value.kind === "Value.trivial") {
     return Trivial
   } else if (t.kind === "Value.type" && value.kind === "Value.absurd") {
-    return Exp.absurd
+    return Absurd
   } else if (t.kind === "Value.type" && value.kind === "Value.equal") {
     return Equal(
       Readback.readback(ctx, Value.type, value.t),
@@ -100,7 +104,7 @@ export function readback(
     )
     return Pi(fresh_name, arg_t, ret_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.type") {
-    return Exp.type
+    return Type
   } else if (value.kind === "Value.not_yet") {
     // NOTE  t and value.t are ignored here,
     //  maybe use them to debug.

@@ -8,6 +8,7 @@ import { Ap } from "../exps"
 import { Car, Cdr } from "../exps"
 import { NatInd } from "../exps"
 import { Replace } from "../exps"
+import { AbsurdInd } from "../exps"
 
 export function readback_neutral(
   ctx: Ctx.Ctx,
@@ -45,7 +46,7 @@ export function readback_neutral(
       )
     }
     case "Neutral.absurd_ind": {
-      return Exp.absurd_ind(
+      return AbsurdInd(
         Readback.readback_neutral(ctx, neutral.target),
         Readback.readback_normal(ctx, neutral.motive)
       )

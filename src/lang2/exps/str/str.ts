@@ -3,11 +3,11 @@ import { Inferable } from "../../inferable"
 import * as Value from "../../value"
 
 export type Str = Exp & {
-  kind: "Exp.str"
+  kind: "Str"
 }
 
 export const Str: Str = {
-  kind: "Exp.str",
+  kind: "Str",
   evaluability: (_) => Value.str,
   ...Inferable({
     inferability: ({ ctx }) => Value.type,

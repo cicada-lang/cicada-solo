@@ -52,8 +52,6 @@
 
 # lang2
 
-- no `Exp` deps hub
-
 > refactoring `Value`
 
 > refactoring `Neutral`

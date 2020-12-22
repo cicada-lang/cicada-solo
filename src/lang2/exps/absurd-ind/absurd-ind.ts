@@ -10,14 +10,14 @@ import * as Neutral from "../../neutral"
 import * as Trace from "../../../trace"
 
 export type AbsurdInd = Exp & {
-  kind: "Exp.absurd_ind"
+  kind: "AbsurdInd"
   target: Exp
   motive: Exp
 }
 
 export function AbsurdInd(target: Exp, motive: Exp): AbsurdInd {
   return {
-    kind: "Exp.absurd_ind",
+    kind: "AbsurdInd",
     target,
     motive,
     evaluability: ({ env }) =>
