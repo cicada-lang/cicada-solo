@@ -66,11 +66,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       const target = Evaluate.evaluate(Ctx.to_env(ctx), exp.target)
       return do_ap(motive, target)
     } else if (exp.kind === "Exp.equal") {
-      Check.check(ctx, exp.t, Value.type)
-      const t = Evaluate.evaluate(Ctx.to_env(ctx), exp.t)
-      Check.check(ctx, exp.from, t)
-      Check.check(ctx, exp.to, t)
-      return Value.type
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.replace") {
       const target_t = Infer.infer(ctx, exp.target)
       const equal = Value.is_equal(ctx, target_t)
