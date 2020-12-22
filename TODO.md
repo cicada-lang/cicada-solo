@@ -58,7 +58,6 @@
 
 - [lang2] `AlphaRepr` -- nat-ind
 - [lang2] `AlphaRepr` -- replace
-- [lang2] `AlphaRepr` -- sigma
 - [lang2] `AlphaRepr` -- begin
 - [lang2] `AlphaRepr` -- the
 
