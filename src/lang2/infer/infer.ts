@@ -15,8 +15,8 @@ import { Inferable } from "../inferable"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
-    if ((exp as any).inferability) {
-      return (exp as Inferable).inferability({ ctx })
+    if (exp.inferability) {
+      return exp.inferability({ ctx })
     }
     throw new Trace.Trace(
       ut.aline(`
