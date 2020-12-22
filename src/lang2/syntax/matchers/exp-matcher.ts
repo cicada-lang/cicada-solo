@@ -2,7 +2,13 @@ import * as Exp from "../../exp"
 import * as pt from "../../../partech"
 import * as ut from "../../../ut"
 import { stmts_matcher } from "../matchers"
-import { Var, Pi, Fn, Ap, Sigma, Cons, Car, Cdr, The } from "../../exps"
+import { Var } from "../../exps"
+import { Pi, Fn, Ap } from "../../exps"
+import { Sigma, Cons, Car, Cdr } from "../../exps"
+import { Nat, Zero, Add1, NatInd } from "../../exps"
+import { Equal, Same, Replace } from "../../exps"
+import { Trivial, Sole } from "../../exps"
+import { The } from "../../exps"
 
 export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>({
@@ -26,9 +32,9 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     "exp:cons": ({ car, cdr }) => Cons(exp_matcher(car), exp_matcher(cdr)),
     "exp:car": ({ target }) => Car(exp_matcher(target)),
     "exp:cdr": ({ target }) => Cdr(exp_matcher(target)),
-    "exp:nat": () => Exp.nat,
-    "exp:zero": () => Exp.zero,
-    "exp:add1": ({ prev }) => Exp.add1(exp_matcher(prev)),
+    "exp:nat": () => Nat,
+    "exp:zero": () => Zero,
+    "exp:add1": ({ prev }) => Add1(exp_matcher(prev)),
     "exp:number": ({ value }, { span }) => {
       const n = Number.parseInt(pt.Tree.str(value))
       if (Number.isNaN(n)) {
@@ -41,19 +47,19 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
     },
     "exp:nat_ind": ({ target, motive, base, step }) =>
-      Exp.nat_ind(
+      NatInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base),
         exp_matcher(step)
       ),
     "exp:equal": ({ t, from, to }) =>
-      Exp.equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
-    "exp:same": () => Exp.same,
+      Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
+    "exp:same": () => Same,
     "exp:replace": ({ target, motive, base }) =>
-      Exp.replace(exp_matcher(target), exp_matcher(motive), exp_matcher(base)),
-    "exp:trivial": () => Exp.trivial,
-    "exp:sole": () => Exp.sole,
+      Replace(exp_matcher(target), exp_matcher(motive), exp_matcher(base)),
+    "exp:trivial": () => Trivial,
+    "exp:sole": () => Sole,
     "exp:absurd": () => Exp.absurd,
     "exp:absurd_ind": ({ target, motive }) =>
       Exp.absurd_ind(exp_matcher(target), exp_matcher(motive)),

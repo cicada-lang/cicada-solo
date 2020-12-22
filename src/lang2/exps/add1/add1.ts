@@ -6,13 +6,13 @@ import * as Value from "../../value"
 import { nat_to_number } from "../../exp"
 
 export type Add1 = Exp & {
-  kind: "Exp.add1"
+  kind: "Add1"
   prev: Exp
 }
 
 export function Add1(prev: Exp): Add1 {
   return {
-    kind: "Exp.add1",
+    kind: "Add1",
     prev,
     evaluability: ({ env }) => Value.add1(evaluate(env, prev)),
     ...Inferable({

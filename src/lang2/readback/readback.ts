@@ -8,7 +8,13 @@ import * as ut from "../../ut"
 import { do_car } from "../exps/car"
 import { do_cdr } from "../exps/cdr"
 import { do_ap } from "../exps/ap"
-import { Var, Pi, Fn, Sigma, Cons, The } from "../exps"
+import { Var } from "../exps"
+import { Pi, Fn } from "../exps"
+import { Sigma, Cons } from "../exps"
+import { Nat, Zero, Add1 } from "../exps"
+import { Equal, Same } from "../exps"
+import { Trivial, Sole } from "../exps"
+import { The } from "../exps"
 
 export function readback(
   ctx: Ctx.Ctx,
@@ -16,9 +22,9 @@ export function readback(
   value: Value.Value
 ): Exp.Exp {
   if (t.kind === "Value.nat" && value.kind === "Value.zero") {
-    return Exp.zero
+    return Zero
   } else if (t.kind === "Value.nat" && value.kind === "Value.add1") {
-    return Exp.add1(Readback.readback(ctx, t, value.prev))
+    return Add1(Readback.readback(ctx, t, value.prev))
   } else if (t.kind === "Value.pi") {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
@@ -48,7 +54,7 @@ export function readback(
     // NOTE the η-rule for trivial states that
     //   all of its inhabitants are the same as sole.
     //   This is implemented by reading the all back as sole.
-    return Exp.sole
+    return Sole
   } else if (
     t.kind === "Value.absurd" &&
     value.kind === "Value.not_yet" &&
@@ -56,19 +62,19 @@ export function readback(
   ) {
     return The(Exp.absurd, Readback.readback_neutral(ctx, value.neutral))
   } else if (t.kind === "Value.equal" && value.kind === "Value.same") {
-    return Exp.same
+    return Same
   } else if (t.kind === "Value.str" && value.kind === "Value.quote") {
     return Exp.quote(value.str)
   } else if (t.kind === "Value.type" && value.kind === "Value.nat") {
-    return Exp.nat
+    return Nat
   } else if (t.kind === "Value.type" && value.kind === "Value.str") {
     return Exp.str
   } else if (t.kind === "Value.type" && value.kind === "Value.trivial") {
-    return Exp.trivial
+    return Trivial
   } else if (t.kind === "Value.type" && value.kind === "Value.absurd") {
     return Exp.absurd
   } else if (t.kind === "Value.type" && value.kind === "Value.equal") {
-    return Exp.equal(
+    return Equal(
       Readback.readback(ctx, Value.type, value.t),
       Readback.readback(ctx, value.t, value.from),
       Readback.readback(ctx, value.t, value.to)

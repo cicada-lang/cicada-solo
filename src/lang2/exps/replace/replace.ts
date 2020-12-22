@@ -16,7 +16,7 @@ import { Type } from "../type"
 import { Var } from "../var"
 
 export type Replace = Exp & {
-  kind: "Exp.replace"
+  kind: "Replace"
   target: Exp
   motive: Exp
   base: Exp
@@ -24,7 +24,7 @@ export type Replace = Exp & {
 
 export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
   return {
-    kind: "Exp.replace",
+    kind: "Replace",
     target,
     motive,
     base,

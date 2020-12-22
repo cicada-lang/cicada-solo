@@ -3,11 +3,11 @@ import * as Value from "../../value"
 import { same_checkable } from "./same-checkable"
 
 export type Same = Exp & {
-  kind: "Exp.same"
+  kind: "Same"
 }
 
 export const Same: Same = {
-  kind: "Exp.same",
+  kind: "Same",
   evaluability: (_) => Value.same,
   ...same_checkable,
   repr: () => "same",

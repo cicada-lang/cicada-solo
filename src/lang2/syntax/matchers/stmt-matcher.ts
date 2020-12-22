@@ -24,10 +24,7 @@ export function stmt_matcher(tree: pt.Tree.Tree): Stmt.Stmt {
           { span }
         )
       }
-      return Stmt.def(
-        pt.Tree.str(claim),
-        The(exp_matcher(t), exp_matcher(exp))
-      )
+      return Stmt.def(pt.Tree.str(claim), The(exp_matcher(t), exp_matcher(exp)))
     },
     "stmt:show": ({ exp }) => Stmt.show(exp_matcher(exp)),
   })(tree)

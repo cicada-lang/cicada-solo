@@ -3,7 +3,11 @@ import * as Neutral from "../neutral"
 import * as Normal from "../normal"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
-import { Var, Ap, Car, Cdr } from "../exps"
+import { Var } from "../exps"
+import { Ap } from "../exps"
+import { Car, Cdr } from "../exps"
+import { NatInd } from "../exps"
+import { Replace } from "../exps"
 
 export function readback_neutral(
   ctx: Ctx.Ctx,
@@ -26,7 +30,7 @@ export function readback_neutral(
       return Cdr(Readback.readback_neutral(ctx, neutral.target))
     }
     case "Neutral.nat_ind": {
-      return Exp.nat_ind(
+      return NatInd(
         Readback.readback_neutral(ctx, neutral.target),
         Readback.readback_normal(ctx, neutral.motive),
         Readback.readback_normal(ctx, neutral.base),
@@ -34,7 +38,7 @@ export function readback_neutral(
       )
     }
     case "Neutral.replace": {
-      return Exp.replace(
+      return Replace(
         Readback.readback_neutral(ctx, neutral.target),
         Readback.readback_normal(ctx, neutral.motive),
         Readback.readback_normal(ctx, neutral.base)

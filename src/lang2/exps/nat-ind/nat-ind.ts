@@ -16,7 +16,7 @@ import { Nat } from "../nat"
 import { Pi } from "../pi"
 
 export type NatInd = Exp & {
-  kind: "Exp.nat_ind"
+  kind: "NatInd"
   target: Exp
   motive: Exp
   base: Exp
@@ -25,7 +25,7 @@ export type NatInd = Exp & {
 
 export function NatInd(target: Exp, motive: Exp, base: Exp, step: Exp): NatInd {
   return {
-    kind: "Exp.nat_ind",
+    kind: "NatInd",
     target,
     motive,
     base,

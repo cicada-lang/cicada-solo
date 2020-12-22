@@ -6,7 +6,7 @@ import * as Value from "../../value"
 import * as Ctx from "../../ctx"
 
 export type Equal = Exp & {
-  kind: "Exp.equal"
+  kind: "Equal"
   t: Exp
   from: Exp
   to: Exp
@@ -14,7 +14,7 @@ export type Equal = Exp & {
 
 export function Equal(t: Exp, from: Exp, to: Exp): Equal {
   return {
-    kind: "Exp.equal",
+    kind: "Equal",
     t,
     from,
     to,
