@@ -26,7 +26,7 @@ export function Sigma(name: string, car_t: Exp, cdr_t: Exp): Sigma {
         depth: opts.depth + 1,
         depths: new Map([...opts.depths, [name, opts.depth]]),
       })
-      return `(${name}: ${car_t.alpha_repr(opts)}) * ${cdr_t_repr}`
+      return `(${car_t.alpha_repr(opts)}) * ${cdr_t_repr}`
     },
   }
 }

@@ -17,7 +17,7 @@ export function Var(name: string): Var {
     alpha_repr: (opts) => {
       const depth = opts.depths.get(name)
       if (depth === undefined) return name
-      return `${depth}`
+      return `[${depth}]`
     },
   }
 }
