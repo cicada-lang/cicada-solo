@@ -33,11 +33,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.car") {
       return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.cdr") {
-      const target_t = Infer.infer(ctx, exp.target)
-      const sigma = Value.is_sigma(ctx, target_t)
-      const target = Evaluate.evaluate(Ctx.to_env(ctx), exp.target)
-      const car = do_car(target)
-      return Value.Closure.apply(sigma.cdr_t_cl, car)
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.nat") {
       return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.zero") {
@@ -91,8 +87,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   } catch (error) {
     if (error instanceof Trace.Trace) {
       throw Trace.trail(error, exp)
-    } else {
-      throw error
     }
+    throw error
   }
 }

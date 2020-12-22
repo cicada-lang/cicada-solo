@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Inferable` -- cdr
 - [lang2] `Inferable` -- nat-ind
 - [lang2] `Inferable` -- pi
 - [lang2] `Inferable` -- sigma
