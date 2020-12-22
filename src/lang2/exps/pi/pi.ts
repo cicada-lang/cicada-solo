@@ -1,10 +1,18 @@
 import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
+import { Checkable } from "../../checkable"
+import { Inferable } from "../../inferable"
+import { check } from "../../check"
+import { evaluate } from "../../evaluate"
+import * as Ctx from "../../ctx"
+import * as Value from "../../value"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 import { pi_evaluable } from "./pi-evaluable"
 
 export type Pi = Evaluable &
+  Checkable &
+  Inferable &
   Repr &
   AlphaRepr & {
     kind: "Exp.pi"
@@ -20,6 +28,14 @@ export function Pi(name: string, arg_t: Exp, ret_t: Exp): Pi {
     arg_t,
     ret_t,
     ...pi_evaluable(name, arg_t, ret_t),
+    ...Inferable({
+      inferability: ({ ctx }) => {
+        check(ctx, arg_t, Value.type)
+        const arg_t_value = evaluate(Ctx.to_env(ctx), arg_t)
+        check(Ctx.extend(ctx, name, arg_t_value), ret_t, Value.type)
+        return Value.type
+      },
+    }),
     repr: () => `(${name}: ${arg_t.repr()}) -> ${ret_t.repr()}`,
     alpha_repr: (opts) => {
       const arg_t_repr = arg_t.alpha_repr(opts)
