@@ -1,6 +1,4 @@
 import { Exp } from "../../exp"
-import { Evaluable } from "../../evaluable"
-import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
@@ -10,8 +8,6 @@ import * as Explain from "../../explain"
 import * as Normal from "../../normal"
 import * as Neutral from "../../neutral"
 import * as Trace from "../../../trace"
-import { Repr } from "../../repr"
-import { AlphaRepr } from "../../alpha-repr"
 
 export type AbsurdInd = Exp & {
   kind: "Exp.absurd_ind"

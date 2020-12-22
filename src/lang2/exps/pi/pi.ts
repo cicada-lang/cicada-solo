@@ -1,21 +1,17 @@
 import { Exp } from "../../exp"
-import { Evaluable } from "../../evaluable"
-import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"
 import { check } from "../../check"
 import { evaluate } from "../../evaluate"
 import * as Ctx from "../../ctx"
 import * as Value from "../../value"
-import { Repr } from "../../repr"
-import { AlphaRepr } from "../../alpha-repr"
 import { pi_evaluable } from "./pi-evaluable"
 
 export type Pi = Exp & {
-    kind: "Exp.pi"
-    name: string
-    arg_t: Exp
-    ret_t: Exp
-  }
+  kind: "Exp.pi"
+  name: string
+  arg_t: Exp
+  ret_t: Exp
+}
 
 export function Pi(name: string, arg_t: Exp, ret_t: Exp): Pi {
   return {

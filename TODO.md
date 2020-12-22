@@ -52,8 +52,6 @@
 
 # lang2
 
-- [lang2] clear deps
-
 > refactoring `Value`
 
 > refactoring `Neutral`

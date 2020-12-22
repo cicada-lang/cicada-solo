@@ -1,21 +1,17 @@
 import { Exp } from "../../exp"
-import { Evaluable } from "../../evaluable"
-import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"
 import { check } from "../../check"
 import { evaluate } from "../../evaluate"
 import * as Ctx from "../../ctx"
 import * as Value from "../../value"
 import { sigma_evaluable } from "./sigma-evaluable"
-import { Repr } from "../../repr"
-import { AlphaRepr } from "../../alpha-repr"
 
 export type Sigma = Exp & {
-    kind: "Exp.sigma"
-    name: string
-    car_t: Exp
-    cdr_t: Exp
-  }
+  kind: "Exp.sigma"
+  name: string
+  car_t: Exp
+  cdr_t: Exp
+}
 
 export function Sigma(name: string, car_t: Exp, cdr_t: Exp): Sigma {
   return {

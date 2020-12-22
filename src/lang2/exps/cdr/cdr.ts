@@ -1,20 +1,16 @@
 import { Exp } from "../../exp"
-import { Evaluable } from "../../evaluable"
-import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"
 import { infer } from "../../infer"
 import { evaluate } from "../../evaluate"
 import * as Value from "../../value"
 import * as Ctx from "../../ctx"
-import { Repr } from "../../repr"
-import { AlphaRepr } from "../../alpha-repr"
 import { do_car } from "../car"
 import { cdr_evaluable } from "./cdr-evaluable"
 
 export type Cdr = Exp & {
-    kind: "Exp.cdr"
-    target: Exp
-  }
+  kind: "Exp.cdr"
+  target: Exp
+}
 
 export function Cdr(target: Exp): Cdr {
   return {

@@ -1,16 +1,12 @@
 import { Exp } from "../../exp"
-import { Evaluable } from "../../evaluable"
-import { Checkable } from "../../checkable"
 import { cons_evaluable } from "./cons-evaluable"
 import { cons_checkable } from "./cons-checkable"
-import { Repr } from "../../repr"
-import { AlphaRepr } from "../../alpha-repr"
 
 export type Cons = Exp & {
-    kind: "Exp.cons"
-    car: Exp
-    cdr: Exp
-  }
+  kind: "Exp.cons"
+  car: Exp
+  cdr: Exp
+}
 
 export function Cons(car: Exp, cdr: Exp): Cons {
   return {

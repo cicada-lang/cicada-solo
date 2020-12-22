@@ -1,6 +1,4 @@
 import { Exp } from "../../exp"
-import { Evaluable } from "../../evaluable"
-import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
@@ -12,20 +10,18 @@ import * as Value from "../../value"
 import * as Normal from "../../normal"
 import * as Neutral from "../../neutral"
 import * as Trace from "../../../trace"
-import { Repr } from "../../repr"
-import { AlphaRepr } from "../../alpha-repr"
 import { do_ap } from "../ap"
 import { Type } from "../type"
 import { Nat } from "../nat"
 import { Pi } from "../pi"
 
 export type NatInd = Exp & {
-    kind: "Exp.nat_ind"
-    target: Exp
-    motive: Exp
-    base: Exp
-    step: Exp
-  }
+  kind: "Exp.nat_ind"
+  target: Exp
+  motive: Exp
+  base: Exp
+  step: Exp
+}
 
 export function NatInd(target: Exp, motive: Exp, base: Exp, step: Exp): NatInd {
   return {

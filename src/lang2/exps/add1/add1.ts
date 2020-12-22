@@ -1,18 +1,14 @@
 import { Exp } from "../../exp"
-import { Evaluable } from "../../evaluable"
-import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import * as Value from "../../value"
-import { Repr } from "../../repr"
-import { AlphaRepr } from "../../alpha-repr"
 import { nat_to_number } from "../../exp"
 
 export type Add1 = Exp & {
-    kind: "Exp.add1"
-    prev: Exp
-  }
+  kind: "Exp.add1"
+  prev: Exp
+}
 
 export function Add1(prev: Exp): Add1 {
   return {

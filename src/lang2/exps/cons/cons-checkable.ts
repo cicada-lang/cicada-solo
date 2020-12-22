@@ -1,6 +1,5 @@
 import { Exp } from "../../exp"
 import * as Value from "../../value"
-import * as Neutral from "../../neutral"
 import * as Ctx from "../../ctx"
 import { Checkable } from "../../checkable"
 import { check } from "../../check"

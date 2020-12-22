@@ -1,6 +1,4 @@
 import { Exp } from "../../exp"
-import { Evaluable } from "../../evaluable"
-import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
@@ -13,18 +11,16 @@ import * as Normal from "../../normal"
 import * as Neutral from "../../neutral"
 import * as Trace from "../../../trace"
 import { do_ap } from "../ap"
-import { Repr } from "../../repr"
-import { AlphaRepr } from "../../alpha-repr"
 import { Pi } from "../pi"
 import { Type } from "../type"
 import { Var } from "../var"
 
 export type Replace = Exp & {
-    kind: "Exp.replace"
-    target: Exp
-    motive: Exp
-    base: Exp
-  }
+  kind: "Exp.replace"
+  target: Exp
+  motive: Exp
+  base: Exp
+}
 
 export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
   return {

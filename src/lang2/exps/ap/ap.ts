@@ -1,14 +1,10 @@
 import { Exp } from "../../exp"
-import { Evaluable } from "../../evaluable"
-import { Checkable } from "../../checkable"
 import { Inferable } from "../../inferable"
 import { evaluate } from "../../evaluate"
 import { infer } from "../../infer"
 import { check } from "../../check"
 import * as Value from "../../value"
 import * as Ctx from "../../ctx"
-import { Repr } from "../../repr"
-import { AlphaRepr } from "../../alpha-repr"
 import { ap_evaluable } from "./ap-evaluable"
 
 export type Ap = Exp & {
