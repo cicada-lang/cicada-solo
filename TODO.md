@@ -56,8 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `AlphaRepr` -- car
-- [lang2] `AlphaRepr` -- cdr
 - [lang2] `AlphaRepr` -- cons
 - [lang2] `AlphaRepr` -- equal
 - [lang2] `AlphaRepr` -- fn
