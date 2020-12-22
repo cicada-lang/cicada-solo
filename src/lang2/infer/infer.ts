@@ -68,16 +68,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.equal") {
       return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.replace") {
-      const target_t = Infer.infer(ctx, exp.target)
-      const equal = Value.is_equal(ctx, target_t)
-      const motive_t = Evaluate.evaluate(
-        Env.update(Env.init(), "t", equal.t),
-        Exp.pi("x", Exp.v("t"), Exp.type)
-      )
-      Check.check(ctx, exp.motive, motive_t)
-      const motive = Evaluate.evaluate(Ctx.to_env(ctx), exp.motive)
-      Check.check(ctx, exp.base, do_ap(motive, equal.from))
-      return do_ap(motive, equal.to)
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.trivial") {
       return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.sole") {

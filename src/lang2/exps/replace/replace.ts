@@ -1,18 +1,27 @@
 import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
+import { Checkable } from "../../checkable"
+import { Inferable } from "../../inferable"
 import { evaluate } from "../../evaluate"
+import { check } from "../../check"
+import { infer } from "../../infer"
 import * as Explain from "../../explain"
 import * as Env from "../../env"
+import * as Ctx from "../../ctx"
 import * as Value from "../../value"
 import * as Normal from "../../normal"
 import * as Neutral from "../../neutral"
 import * as Trace from "../../../trace"
 import { do_ap } from "../ap"
-import { Type } from "../type"
 import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
+import { Pi } from "../pi"
+import { Type } from "../type"
+import { Var } from "../var"
 
 export type Replace = Evaluable &
+  Checkable &
+  Inferable &
   Repr &
   AlphaRepr & {
     kind: "Exp.replace"
@@ -33,6 +42,20 @@ export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
         evaluate(env, motive),
         evaluate(env, base)
       ),
+    ...Inferable({
+      inferability: ({ ctx }) => {
+        const target_t = infer(ctx, target)
+        const equal = Value.is_equal(ctx, target_t)
+        const motive_t = evaluate(
+          Env.update(Env.init(), "t", equal.t),
+          Pi("x", Var("t"), Type)
+        )
+        check(ctx, motive, motive_t)
+        const motive_value = evaluate(Ctx.to_env(ctx), motive)
+        check(ctx, base, do_ap(motive_value, equal.from))
+        return do_ap(motive_value, equal.to)
+      },
+    }),
     repr: () => `replace(${target.repr()}, ${motive.repr()}, ${base.repr()})`,
     alpha_repr: (opts) =>
       `replace(${target.alpha_repr(opts)}, ${motive.alpha_repr(
