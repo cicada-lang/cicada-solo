@@ -59,7 +59,6 @@
 - [lang2] `AlphaRepr` -- nat-ind
 - [lang2] `AlphaRepr` -- replace
 - [lang2] `AlphaRepr` -- begin
-- [lang2] `AlphaRepr` -- the
 
 - [lang2] `Checkable` -- absurd
 - [lang2] `Checkable` -- absurd-ind
