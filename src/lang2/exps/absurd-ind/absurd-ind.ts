@@ -7,9 +7,11 @@ import * as Normal from "../../normal"
 import * as Neutral from "../../neutral"
 import * as Trace from "../../../trace"
 import { Repr } from "../../repr"
+import { AlphaRepr } from "../../alpha-repr"
 
 export type AbsurdInd = Evaluable &
-  Repr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.absurd_ind"
     target: Exp
     motive: Exp
@@ -20,9 +22,11 @@ export function AbsurdInd(target: Exp, motive: Exp): AbsurdInd {
     kind: "Exp.absurd_ind",
     target,
     motive,
-    repr: () => `Absurd.ind(${target.repr()}, ${motive.repr()})`,
     evaluability: ({ env }) =>
       do_absurd_ind(evaluate(env, target), evaluate(env, motive)),
+    repr: () => `Absurd.ind(${target.repr()}, ${motive.repr()})`,
+    alpha_repr: (opts) =>
+      `Absurd.ind(${target.alpha_repr(opts)}, ${motive.alpha_repr(opts)})`,
   }
 }
 
