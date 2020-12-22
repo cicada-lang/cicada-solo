@@ -43,7 +43,6 @@
 
 > refactoring `Exp`
 
-- [lang0] no branches in `Exp.repr`
 - [lang0] inline `Exp.repr`
 
 - [lang0] `Exp` as intersection instead of union
