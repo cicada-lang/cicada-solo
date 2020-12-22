@@ -54,10 +54,6 @@
 
 # lang2
 
-> refactoring `Exp`
-
-- [lang2] no branches in `Check.check`
-
 > refactoring `Value`
 
 > naming convention

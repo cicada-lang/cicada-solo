@@ -1,5 +1,5 @@
 
-I infer the type of "ratatouille" to be String.
+I infer the type to be String.
 But the given type is Nat.
 
 previous:
