@@ -79,12 +79,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.type") {
       return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.begin") {
-      const { stmts, ret } = exp
-      const new_ctx = Ctx.clone(ctx)
-      for (const stmt of stmts) {
-        Stmt.declare(new_ctx, stmt)
-      }
-      return Infer.infer(new_ctx, ret)
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.the") {
       return exp.inferability({ ctx })
     } else {

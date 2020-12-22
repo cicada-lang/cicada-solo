@@ -1,9 +1,12 @@
 import { Exp } from "../../exp"
 import * as Stmt from "../../stmt"
 import * as Env from "../../env"
+import * as Ctx from "../../ctx"
 import { Evaluable } from "../../evaluable"
 import { Checkable } from "../../checkable"
+import { Inferable } from "../../inferable"
 import { evaluate } from "../../evaluate"
+import { infer } from "../../infer"
 import { Repr } from "../../repr"
 import { AlphaRepr, AlphaReprOpts } from "../../alpha-repr"
 import * as ut from "../../../ut"
@@ -11,6 +14,7 @@ import { begin_checkable } from "./begin-checkable"
 
 export type Begin = Evaluable &
   Checkable &
+  Inferable &
   Repr &
   AlphaRepr & {
     kind: "Exp.begin"
@@ -30,6 +34,15 @@ export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
       }
       return evaluate(new_env, ret)
     },
+    ...Inferable({
+      inferability: ({ ctx }) => {
+        const new_ctx = Ctx.clone(ctx)
+        for (const stmt of stmts) {
+          Stmt.declare(new_ctx, stmt)
+        }
+        return infer(new_ctx, ret)
+      },
+    }),
     ...begin_checkable(stmts, ret),
     repr: () => {
       const s = [...stmts.map(Stmt.repr), ret.repr()].join("\n")
