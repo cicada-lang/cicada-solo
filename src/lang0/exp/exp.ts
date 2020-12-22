@@ -1,23 +1,15 @@
 import { Var } from "../exps/var"
+import { Fn } from "../exps/fn"
 
-export type Exp = Var | fn | ap | begin
+export type Exp = Var | Fn | ap | begin
 
 import * as Stmt from "../stmt"
 
 export type v = Var
 export const v = Var
 
-export type fn = {
-  kind: "Exp.fn"
-  name: string
-  ret: Exp
-}
-
-export const fn = (name: string, ret: Exp): fn => ({
-  kind: "Exp.fn",
-  name,
-  ret,
-})
+export type fn = Fn
+export const fn = Fn
 
 export type ap = {
   kind: "Exp.ap"
