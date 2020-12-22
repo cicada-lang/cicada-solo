@@ -56,8 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `AlphaRepr` -- ap
-- [lang2] `AlphaRepr` -- begin
 - [lang2] `AlphaRepr` -- car
 - [lang2] `AlphaRepr` -- cdr
 - [lang2] `AlphaRepr` -- cons
@@ -66,6 +64,7 @@
 - [lang2] `AlphaRepr` -- nat-ind
 - [lang2] `AlphaRepr` -- replace
 - [lang2] `AlphaRepr` -- sigma
+- [lang2] `AlphaRepr` -- begin
 - [lang2] `AlphaRepr` -- the
 
 - [lang2] `Checkable` -- absurd
