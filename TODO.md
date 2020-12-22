@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Exp` as intersection type instead of union type
 - [lang2] type cast in `Infer.infer`
 - [lang2] no branches in `Check.check`
 
