@@ -111,10 +111,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       }
       return Infer.infer(ctx, ret)
     } else if (exp.kind === "Exp.the") {
-      Check.check(ctx, exp.t, Value.type)
-      const t = Evaluate.evaluate(Ctx.to_env(ctx), exp.t)
-      Check.check(ctx, exp.exp, t)
-      return t
+      return exp.inferability({ ctx })
     } else {
       throw new Trace.Trace(
         ut.aline(`

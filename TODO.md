@@ -68,7 +68,6 @@
 - [lang2] `Inferable` -- pi
 - [lang2] `Inferable` -- replace
 - [lang2] `Inferable` -- sigma
-- [lang2] `Inferable` -- the
 
 - [lang2] no branches in `Infer.infer`
 - [lang2] no branches in `Check.check`
