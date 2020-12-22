@@ -57,7 +57,6 @@
 > refactoring `Exp`
 
 - [lang2] `Inferable` -- nat-ind
-- [lang2] `Inferable` -- sigma
 
 - [lang2] no branches in `Infer.infer`
 - [lang2] no branches in `Check.check`

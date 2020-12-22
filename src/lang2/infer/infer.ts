@@ -19,11 +19,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.pi") {
       return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.sigma") {
-      Check.check(ctx, exp.car_t, Value.type)
-      const car_t = Evaluate.evaluate(Ctx.to_env(ctx), exp.car_t)
-      ctx = Ctx.extend(ctx, exp.name, car_t)
-      Check.check(ctx, exp.cdr_t, Value.type)
-      return Value.type
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.ap") {
       return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.car") {
