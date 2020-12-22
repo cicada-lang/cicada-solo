@@ -7,7 +7,8 @@ import { AlphaRepr } from "../../alpha-repr"
 import { nat_to_number } from "../../exp"
 
 export type Add1 = Evaluable &
-  Repr & AlphaRepr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.add1"
     prev: Exp
   }

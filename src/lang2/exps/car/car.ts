@@ -5,7 +5,8 @@ import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 
 export type Car = Evaluable &
-  Repr & AlphaRepr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.car"
     target: Exp
   }

@@ -18,6 +18,7 @@ export function Cons(car: Exp, cdr: Exp): Cons {
     car,
     cdr,
     ...cons_evaluable(car, cdr),
+    repr: () => `cons(${car.repr()}, ${cdr.repr()})`,
     alpha_repr: (opts) =>
       `cons(${car.alpha_repr(opts)}, ${cdr.alpha_repr(opts)})`,
   }
