@@ -1,10 +1,9 @@
 import { Var } from "../exps/var"
 import { Fn } from "../exps/fn"
 import { Ap } from "../exps/ap"
+import { Begin } from "../exps/begin"
 
-export type Exp = Var | Fn | Ap | begin
-
-import * as Stmt from "../stmt"
+export type Exp = Var | Fn | Ap | Begin
 
 export type v = Var
 export const v = Var
@@ -15,14 +14,5 @@ export const fn = Fn
 export type ap = Ap
 export const ap = Ap
 
-export type begin = {
-  kind: "Exp.begin"
-  stmts: Array<Stmt.Stmt>
-  ret: Exp
-}
-
-export const begin = (stmts: Array<Stmt.Stmt>, ret: Exp): begin => ({
-  kind: "Exp.begin",
-  stmts,
-  ret,
-})
+export type begin = Begin
+export const begin = Begin

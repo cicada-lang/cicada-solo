@@ -43,8 +43,6 @@
 
 > refactoring `Exp`
 
-- [lang0] `Begin`
-
 - [lang0] `Evaluable`
 
 - [lang0] `Evaluable` -- `Var`
