@@ -43,12 +43,16 @@
 
 > refactoring `Exp`
 
-- [lang0] `Evaluable`
-
-- [lang0] `Evaluable` -- `Var`
 - [lang0] `Evaluable` -- `Fn`
 - [lang0] `Evaluable` -- `Ap`
 - [lang0] `Evaluable` -- `Begin`
+
+- [lang0] `Repr`
+
+- [lang0] `Repr` -- `Var`
+- [lang0] `Repr` -- `Fn`
+- [lang0] `Repr` -- `Ap`
+- [lang0] `Repr` -- `Begin`
 
 > refactoring `Value`
 
