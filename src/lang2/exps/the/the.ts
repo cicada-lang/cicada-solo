@@ -6,14 +6,14 @@ import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 
 export type The = Exp & {
-  kind: "Exp.the"
+  kind: "The"
   t: Exp
   exp: Exp
 }
 
 export function The(t: Exp, exp: Exp): The {
   return {
-    kind: "Exp.the",
+    kind: "The",
     t,
     exp,
     evaluability: ({ env }) => evaluate(env, exp),

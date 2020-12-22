@@ -6,13 +6,13 @@ import * as Trace from "../../../trace"
 import { var_evaluable } from "./var-evaluable"
 
 export type Var = Exp & {
-  kind: "Exp.v"
+  kind: "Var"
   name: string
 }
 
 export function Var(name: string): Var {
   return {
-    kind: "Exp.v",
+    kind: "Var",
     name,
     ...var_evaluable(name),
     ...Inferable({

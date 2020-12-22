@@ -8,6 +8,7 @@ import * as ut from "../../ut"
 import { do_car } from "../exps/car"
 import { do_cdr } from "../exps/cdr"
 import { do_ap } from "../exps/ap"
+import { Var, Pi, Fn, Sigma, The } from "../exps"
 
 export function readback(
   ctx: Ctx.Ctx,
@@ -24,7 +25,7 @@ export function readback(
     //   This implements the η-rule for functions.
     const fresh_name = ut.freshen_name(new Set(ctx.keys()), t.ret_t_cl.name)
     const variable = Value.not_yet(t.arg_t, Neutral.v(fresh_name))
-    return Exp.fn(
+    return Fn(
       fresh_name,
       Readback.readback(
         Ctx.extend(ctx, fresh_name, t.arg_t),
@@ -53,7 +54,7 @@ export function readback(
     value.kind === "Value.not_yet" &&
     value.t.kind === "Value.absurd"
   ) {
-    return Exp.the(Exp.absurd, Readback.readback_neutral(ctx, value.neutral))
+    return The(Exp.absurd, Readback.readback_neutral(ctx, value.neutral))
   } else if (t.kind === "Value.equal" && value.kind === "Value.same") {
     return Exp.same
   } else if (t.kind === "Value.str" && value.kind === "Value.quote") {
@@ -81,7 +82,7 @@ export function readback(
       Value.type,
       Value.Closure.apply(value.cdr_t_cl, variable)
     )
-    return Exp.sigma(fresh_name, car_t, cdr_t)
+    return Sigma(fresh_name, car_t, cdr_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.pi") {
     const fresh_name = ut.freshen_name(new Set(ctx.keys()), value.ret_t_cl.name)
     const variable = Value.not_yet(value.arg_t, Neutral.v(fresh_name))
@@ -91,7 +92,7 @@ export function readback(
       Value.type,
       Value.Closure.apply(value.ret_t_cl, variable)
     )
-    return Exp.pi(fresh_name, arg_t, ret_t)
+    return Pi(fresh_name, arg_t, ret_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.type") {
     return Exp.type
   } else if (value.kind === "Value.not_yet") {

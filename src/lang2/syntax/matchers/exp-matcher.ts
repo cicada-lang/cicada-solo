@@ -2,26 +2,27 @@ import * as Exp from "../../exp"
 import * as pt from "../../../partech"
 import * as ut from "../../../ut"
 import { stmts_matcher } from "../matchers"
+import { Var, Pi, Fn, Ap, Sigma, The } from "../../exps"
 
 export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>({
-    "exp:var": ({ name }) => Exp.v(pt.Tree.str(name)),
+    "exp:var": ({ name }) => Var(pt.Tree.str(name)),
     "exp:pi": ({ name, arg_t, ret_t }) =>
-      Exp.pi(pt.Tree.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
+      Pi(pt.Tree.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:arrow": ({ arg_t, ret_t }) =>
-      Exp.pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
-    "exp:fn": ({ name, ret }) => Exp.fn(pt.Tree.str(name), exp_matcher(ret)),
+      Pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
+    "exp:fn": ({ name, ret }) => Fn(pt.Tree.str(name), exp_matcher(ret)),
     "exp:ap": ({ target, args }) => {
-      let exp: Exp.Exp = Exp.v(pt.Tree.str(target))
+      let exp: Exp.Exp = Var(pt.Tree.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
-        exp = Exp.ap(exp, exp_matcher(arg))
+        exp = Ap(exp, exp_matcher(arg))
       }
       return exp
     },
     "exp:sigma": ({ name, car_t, cdr_t }) =>
-      Exp.sigma(pt.Tree.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
+      Sigma(pt.Tree.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
     "exp:pair": ({ car_t, cdr_t }) =>
-      Exp.sigma("_", exp_matcher(car_t), exp_matcher(cdr_t)),
+      Sigma("_", exp_matcher(car_t), exp_matcher(cdr_t)),
     "exp:cons": ({ car, cdr }) => Exp.cons(exp_matcher(car), exp_matcher(cdr)),
     "exp:car": ({ target }) => Exp.car(exp_matcher(target)),
     "exp:cdr": ({ target }) => Exp.cdr(exp_matcher(target)),
@@ -84,13 +85,13 @@ function deduction_aux(
     throw new Error("entries.length === 0")
   } else if (entries.length === 1) {
     let [{ t, exp }] = entries
-    if (args.length === 0) return Exp.the(t, exp)
-    for (const arg of args) exp = Exp.ap(exp, arg)
-    return Exp.the(t, exp)
+    if (args.length === 0) return The(t, exp)
+    for (const arg of args) exp = Ap(exp, arg)
+    return The(t, exp)
   } else {
     const [{ t, exp }, ...rest] = entries
     const arg = deduction_aux(entries.slice(1), args)
-    return Exp.the(t, Exp.ap(exp, arg))
+    return The(t, Ap(exp, arg))
   }
 }
 

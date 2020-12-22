@@ -7,7 +7,7 @@ import * as Value from "../../value"
 import { sigma_evaluable } from "./sigma-evaluable"
 
 export type Sigma = Exp & {
-  kind: "Exp.sigma"
+  kind: "Sigma"
   name: string
   car_t: Exp
   cdr_t: Exp
@@ -15,7 +15,7 @@ export type Sigma = Exp & {
 
 export function Sigma(name: string, car_t: Exp, cdr_t: Exp): Sigma {
   return {
-    kind: "Exp.sigma",
+    kind: "Sigma",
     name,
     car_t,
     cdr_t,

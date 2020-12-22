@@ -8,14 +8,14 @@ import * as Ctx from "../../ctx"
 import { ap_evaluable } from "./ap-evaluable"
 
 export type Ap = Exp & {
-  kind: "Exp.ap"
+  kind: "Ap"
   target: Exp
   arg: Exp
 }
 
 export function Ap(target: Exp, arg: Exp): Ap {
   return {
-    kind: "Exp.ap",
+    kind: "Ap",
     target,
     arg,
     ...ap_evaluable(target, arg),

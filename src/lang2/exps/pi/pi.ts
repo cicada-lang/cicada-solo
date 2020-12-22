@@ -7,7 +7,7 @@ import * as Value from "../../value"
 import { pi_evaluable } from "./pi-evaluable"
 
 export type Pi = Exp & {
-  kind: "Exp.pi"
+  kind: "Pi"
   name: string
   arg_t: Exp
   ret_t: Exp
@@ -15,7 +15,7 @@ export type Pi = Exp & {
 
 export function Pi(name: string, arg_t: Exp, ret_t: Exp): Pi {
   return {
-    kind: "Exp.pi",
+    kind: "Pi",
     name,
     arg_t,
     ret_t,

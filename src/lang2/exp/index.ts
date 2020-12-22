@@ -4,11 +4,6 @@ export * from "./exp-equivalent"
 export * from "./exp-nat-from-number"
 export * from "./exp-nat-to-number"
 
-import { Var } from "../exps/var"
-import { Pi } from "../exps/pi"
-import { Fn } from "../exps/fn"
-import { Ap } from "../exps/ap"
-import { Sigma } from "../exps/sigma"
 import { Cons } from "../exps/cons"
 import { Car } from "../exps/car"
 import { Cdr } from "../exps/cdr"
@@ -27,22 +22,6 @@ import { Str } from "../exps/str"
 import { Quote } from "../exps/quote"
 import { Type } from "../exps/type"
 import { Begin } from "../exps/begin"
-import { The } from "../exps/the"
-
-export type v = Var
-export const v = Var
-
-export type pi = Pi
-export const pi = Pi
-
-export type fn = Fn
-export const fn = Fn
-
-export type ap = Ap
-export const ap = Ap
-
-export type sigma = Sigma
-export const sigma = Sigma
 
 export type cons = Cons
 export const cons = Cons
@@ -97,6 +76,3 @@ export const type = Type
 
 export type begin = Begin
 export const begin = Begin
-
-export type the = The
-export const the = The

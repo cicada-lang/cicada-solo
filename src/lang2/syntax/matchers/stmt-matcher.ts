@@ -2,6 +2,7 @@ import * as Exp from "../../exp"
 import * as Stmt from "../../stmt"
 import * as pt from "../../../partech"
 import { exp_matcher } from "../matchers"
+import { The } from "../../exps"
 
 export function stmts_matcher(tree: pt.Tree.Tree): Array<Stmt.Stmt> {
   return pt.Tree.matcher<Array<Stmt.Stmt>>({
@@ -25,7 +26,7 @@ export function stmt_matcher(tree: pt.Tree.Tree): Stmt.Stmt {
       }
       return Stmt.def(
         pt.Tree.str(claim),
-        Exp.the(exp_matcher(t), exp_matcher(exp))
+        The(exp_matcher(t), exp_matcher(exp))
       )
     },
     "stmt:show": ({ exp }) => Stmt.show(exp_matcher(exp)),

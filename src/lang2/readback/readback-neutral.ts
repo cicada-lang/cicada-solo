@@ -3,6 +3,7 @@ import * as Neutral from "../neutral"
 import * as Normal from "../normal"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
+import { Var, Ap } from "../exps"
 
 export function readback_neutral(
   ctx: Ctx.Ctx,
@@ -10,10 +11,10 @@ export function readback_neutral(
 ): Exp.Exp {
   switch (neutral.kind) {
     case "Neutral.v": {
-      return Exp.v(neutral.name)
+      return Var(neutral.name)
     }
     case "Neutral.ap": {
-      return Exp.ap(
+      return Ap(
         Readback.readback_neutral(ctx, neutral.target),
         Readback.readback_normal(ctx, neutral.arg)
       )
