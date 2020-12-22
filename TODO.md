@@ -43,7 +43,6 @@
 
 > refactoring `Exp`
 
-- [lang0] `Evaluable` -- `Ap`
 - [lang0] `Evaluable` -- `Begin`
 
 - [lang0] no branches in `evaluate`
