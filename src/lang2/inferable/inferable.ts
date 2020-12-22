@@ -6,13 +6,13 @@ import { readback } from "../readback"
 import * as Trace from "../../trace"
 import * as ut from "../../ut"
 
-export type Inferable = Checkable & {
+export type Inferable = {
   inferability: (the: { ctx: Ctx }) => Value.Value
 }
 
 export function Inferable(the: {
   inferability: (the: { ctx: Ctx }) => Value.Value
-}): Inferable {
+}): Inferable & Checkable {
   return {
     ...the,
     ...Checkable({

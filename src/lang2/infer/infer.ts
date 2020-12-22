@@ -91,7 +91,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.sole") {
       return Value.trivial
     } else if (exp.kind === "Exp.absurd") {
-      return Value.type
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.absurd_ind") {
       // NOTE the `motive` here is not a function from target_t to type,
       //   but a element of type.

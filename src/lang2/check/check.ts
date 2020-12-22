@@ -42,8 +42,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
   } catch (error) {
     if (error instanceof Trace.Trace) {
       throw Trace.trail(error, exp)
-    } else {
-      throw error
     }
+    throw error
   }
 }

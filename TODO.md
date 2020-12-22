@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `Inferable` -- absurd
 - [lang2] `Inferable` -- absurd-ind
 - [lang2] `Inferable` -- add1
 - [lang2] `Inferable` -- ap
