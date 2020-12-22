@@ -68,7 +68,6 @@
 - [lang2] `AlphaRepr` -- fn
 - [lang2] `AlphaRepr` -- nat
 - [lang2] `AlphaRepr` -- nat-ind
-- [lang2] `AlphaRepr` -- pi
 - [lang2] `AlphaRepr` -- quote
 - [lang2] `AlphaRepr` -- replace
 - [lang2] `AlphaRepr` -- same
