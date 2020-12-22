@@ -43,8 +43,6 @@
 
 > refactoring `Exp`
 
-- [lang0] `Exp` as intersection instead of union
-
 - [lang0] inline type definition of `Exp`
 
 > refactoring `Value`
