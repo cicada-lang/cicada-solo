@@ -78,7 +78,6 @@
 - [lang2] `AlphaRepr` -- the
 - [lang2] `AlphaRepr` -- trivial
 - [lang2] `AlphaRepr` -- type
-- [lang2] `AlphaRepr` -- var
 - [lang2] `AlphaRepr` -- zero
 
 - [lang2] `Checkable` -- absurd
