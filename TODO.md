@@ -43,9 +43,10 @@
 
 > refactoring `Exp`
 
-- [lang0] `Evaluable` -- `Fn`
 - [lang0] `Evaluable` -- `Ap`
 - [lang0] `Evaluable` -- `Begin`
+
+- [lang0] no branches in `evaluate`
 
 - [lang0] `Repr`
 
@@ -53,6 +54,13 @@
 - [lang0] `Repr` -- `Fn`
 - [lang0] `Repr` -- `Ap`
 - [lang0] `Repr` -- `Begin`
+
+- [lang0] no branches in `Exp.repr`
+- [lang0] inline `Exp.repr`
+
+- [lang0] `Exp` as intersection instead of union
+
+- [lang0] inline type definition of `Exp`
 
 > refactoring `Value`
 
@@ -64,6 +72,8 @@
 - [lang1] `Stmt.def` -- `execute` vs `declare`
 
 # lang2
+
+- [lang2] inline type definition of `Exp`
 
 > refactoring `Value`
 
