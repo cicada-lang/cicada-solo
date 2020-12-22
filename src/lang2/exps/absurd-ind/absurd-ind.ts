@@ -1,6 +1,10 @@
 import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
+import { Checkable } from "../../checkable"
+import { Inferable } from "../../inferable"
 import { evaluate } from "../../evaluate"
+import { check } from "../../check"
+import * as Ctx from "../../ctx"
 import * as Value from "../../value"
 import * as Explain from "../../explain"
 import * as Normal from "../../normal"
@@ -10,6 +14,8 @@ import { Repr } from "../../repr"
 import { AlphaRepr } from "../../alpha-repr"
 
 export type AbsurdInd = Evaluable &
+  Checkable &
+  Inferable &
   Repr &
   AlphaRepr & {
     kind: "Exp.absurd_ind"
@@ -24,6 +30,18 @@ export function AbsurdInd(target: Exp, motive: Exp): AbsurdInd {
     motive,
     evaluability: ({ env }) =>
       do_absurd_ind(evaluate(env, target), evaluate(env, motive)),
+    ...Inferable({
+      inferability: ({ ctx }) => {
+        // NOTE the `motive` here is not a function from target_t to type,
+        //   but a element of type.
+        // NOTE We should always infer target,
+        //   but we do a simple check for the simple absurd.
+        check(ctx, target, Value.absurd)
+        check(ctx, motive, Value.type)
+        const motive_value = evaluate(Ctx.to_env(ctx), motive)
+        return motive_value
+      },
+    }),
     repr: () => `Absurd.ind(${target.repr()}, ${motive.repr()})`,
     alpha_repr: (opts) =>
       `Absurd.ind(${target.alpha_repr(opts)}, ${motive.alpha_repr(opts)})`,
