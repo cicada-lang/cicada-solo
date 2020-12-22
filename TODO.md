@@ -56,8 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] fix `AlphaRepr`
-
 - [lang2] `AlphaRepr` -- absurd
 - [lang2] `AlphaRepr` -- absurd-ind
 - [lang2] `AlphaRepr` -- add1
