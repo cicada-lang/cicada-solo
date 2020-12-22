@@ -24,10 +24,10 @@ export function Car(target: Exp): Car {
     ...car_evaluable(target),
     ...Inferable({
       inferability: ({ ctx }) => {
-      const target_t = infer(ctx, target)
-      const sigma = Value.is_sigma(ctx, target_t)
-      return sigma.car_t
-    },
+        const target_t = infer(ctx, target)
+        const sigma = Value.is_sigma(ctx, target_t)
+        return sigma.car_t
+      },
     }),
     repr: () => `car(${target.repr()})`,
     alpha_repr: (opts) => `car(${target.alpha_repr(opts)})`,
