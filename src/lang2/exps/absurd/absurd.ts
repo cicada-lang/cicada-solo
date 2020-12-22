@@ -5,7 +5,8 @@ import * as Value from "../../value"
 import { AlphaRepr } from "../../alpha-repr"
 
 export type Absurd = Evaluable &
-  Repr & AlphaRepr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.absurd"
   }
 

@@ -65,17 +65,10 @@
 - [lang2] `AlphaRepr` -- cons
 - [lang2] `AlphaRepr` -- equal
 - [lang2] `AlphaRepr` -- fn
-- [lang2] `AlphaRepr` -- nat
 - [lang2] `AlphaRepr` -- nat-ind
-- [lang2] `AlphaRepr` -- quote
 - [lang2] `AlphaRepr` -- replace
-- [lang2] `AlphaRepr` -- same
 - [lang2] `AlphaRepr` -- sigma
-- [lang2] `AlphaRepr` -- sole
-- [lang2] `AlphaRepr` -- str
 - [lang2] `AlphaRepr` -- the
-- [lang2] `AlphaRepr` -- trivial
-- [lang2] `AlphaRepr` -- type
 
 - [lang2] `Checkable` -- absurd
 - [lang2] `Checkable` -- absurd-ind
