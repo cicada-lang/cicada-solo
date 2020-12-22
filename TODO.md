@@ -66,7 +66,6 @@
 - [lang2] `Inferable` -- nat
 - [lang2] `Inferable` -- nat-ind
 - [lang2] `Inferable` -- pi
-- [lang2] `Inferable` -- quote
 - [lang2] `Inferable` -- replace
 - [lang2] `Inferable` -- sigma
 - [lang2] `Inferable` -- the
