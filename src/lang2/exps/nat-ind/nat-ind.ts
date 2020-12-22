@@ -11,9 +11,11 @@ import * as Neutral from "../../neutral"
 import * as Trace from "../../../trace"
 import { do_ap } from "../ap"
 import { Repr } from "../../repr"
+import { AlphaRepr } from "../../alpha-repr"
 
 export type NatInd = Evaluable &
-  Repr & {
+  Repr &
+  AlphaRepr & {
     kind: "Exp.nat_ind"
     target: Exp
     motive: Exp
@@ -28,8 +30,6 @@ export function NatInd(target: Exp, motive: Exp, base: Exp, step: Exp): NatInd {
     motive,
     base,
     step,
-    repr: () =>
-      `Nat.ind(${target.repr()}, ${motive.repr()}, ${base.repr()}, ${step.repr()})`,
     evaluability: ({ env }) =>
       do_nat_ind(
         evaluate(env, target),
@@ -37,6 +37,12 @@ export function NatInd(target: Exp, motive: Exp, base: Exp, step: Exp): NatInd {
         evaluate(env, base),
         evaluate(env, step)
       ),
+    repr: () =>
+      `Nat.ind(${target.repr()}, ${motive.repr()}, ${base.repr()}, ${step.repr()})`,
+    alpha_repr: (opts) =>
+      `Nat.ind(${target.alpha_repr(opts)}, ${motive.alpha_repr(
+        opts
+      )}, ${base.alpha_repr(opts)}, ${step.alpha_repr(opts)})`,
   }
 }
 
