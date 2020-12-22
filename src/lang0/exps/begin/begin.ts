@@ -3,7 +3,6 @@ import * as Stmt from "../../stmt"
 import { Evaluable } from "../../evaluable"
 import { evaluate } from "../../evaluate"
 import { Repr } from "../../repr"
-import { repr } from "../../exp"
 import * as Value from "../../value"
 import * as Env from "../../env"
 import * as ut from "../../../ut"
@@ -30,7 +29,7 @@ export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
       },
     }),
     repr: () => {
-      const s = [...stmts.map(Stmt.repr), repr(ret)].join("\n")
+      const s = [...stmts.map(Stmt.repr), ret.repr()].join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`
     },
   }

@@ -20,7 +20,7 @@ function show(env: Env.Env, stmt: Stmt.Stmt): string {
     const { exp } = stmt
     const value = Evaluate.evaluate(env, exp)
     const norm = Readback.readback(new Set(env.keys()), value)
-    const norm_repr = Exp.repr(norm)
+    const norm_repr = norm.repr()
     return `${norm_repr}\n`
   }
 
