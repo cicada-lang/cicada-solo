@@ -2,13 +2,15 @@ import { Exp } from "../../exp"
 import * as Stmt from "../../stmt"
 import * as Env from "../../env"
 import { Evaluable } from "../../evaluable"
+import { Checkable } from "../../checkable"
 import { evaluate } from "../../evaluate"
 import { Repr } from "../../repr"
 import { AlphaRepr, AlphaReprOpts } from "../../alpha-repr"
-
 import * as ut from "../../../ut"
+import { begin_checkable } from "./begin-checkable"
 
 export type Begin = Evaluable &
+  Checkable &
   Repr &
   AlphaRepr & {
     kind: "Exp.begin"
@@ -28,6 +30,7 @@ export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
       }
       return evaluate(new_env, ret)
     },
+    ...begin_checkable(stmts, ret),
     repr: () => {
       const s = [...stmts.map(Stmt.repr), ret.repr()].join("\n")
       return `{\n${ut.indent(s, "  ")}\n}`

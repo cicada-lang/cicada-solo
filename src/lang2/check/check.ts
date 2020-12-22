@@ -19,11 +19,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
     } else if (exp.kind === "Exp.same") {
       return exp.checkability(t, { ctx })
     } else if (exp.kind === "Exp.begin") {
-      const new_ctx = Ctx.clone(ctx)
-      for (const stmt of exp.stmts) {
-        Stmt.declare(new_ctx, stmt)
-      }
-      Check.check(new_ctx, exp.ret, t)
+      return exp.checkability(t, { ctx })
     } else {
       const u = Infer.infer(ctx, exp)
       if (!Value.conversion(ctx, Value.type, t, u)) {
