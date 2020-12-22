@@ -56,7 +56,6 @@
 
 > refactoring `Exp`
 
-- [lang2] `AlphaRepr` -- equal
 - [lang2] `AlphaRepr` -- fn
 - [lang2] `AlphaRepr` -- nat-ind
 - [lang2] `AlphaRepr` -- replace
