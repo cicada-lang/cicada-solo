@@ -4,6 +4,7 @@ import * as Neutral from "../neutral"
 import * as Value from "../value"
 import * as Exp from "../exp"
 import * as ut from "../../ut"
+import { Fn } from "../exps"
 
 export function readback(used: Set<string>, value: Value.Value): Exp.Exp {
   switch (value.kind) {
@@ -14,7 +15,7 @@ export function readback(used: Set<string>, value: Value.Value): Exp.Exp {
       const name = ut.freshen_name(used, value.name)
       const v = Value.not_yet(Neutral.v(name))
       const ret = Evaluate.do_ap(value, v)
-      return Exp.fn(name, Readback.readback(new Set([...used, name]), ret))
+      return Fn(name, Readback.readback(new Set([...used, name]), ret))
     }
   }
 }

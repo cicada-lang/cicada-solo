@@ -1,6 +1,7 @@
 import * as Readback from "../readback"
 import * as Neutral from "../neutral"
 import * as Exp from "../exp"
+import { Var, Ap } from "../exps"
 
 export function readback_neutral(
   used: Set<string>,
@@ -8,10 +9,10 @@ export function readback_neutral(
 ): Exp.Exp {
   switch (neutral.kind) {
     case "Neutral.v": {
-      return Exp.v(neutral.name)
+      return Var(neutral.name)
     }
     case "Neutral.ap": {
-      return Exp.ap(
+      return Ap(
         Readback.readback_neutral(used, neutral.target),
         Readback.readback(used, neutral.arg)
       )

@@ -8,14 +8,14 @@ import * as Env from "../../env"
 import * as ut from "../../../ut"
 
 export type Begin = Exp & {
-  kind: "Exp.begin"
+  kind: "Begin"
   stmts: Array<Stmt.Stmt>
   ret: Exp
 }
 
 export function Begin(stmts: Array<Stmt.Stmt>, ret: Exp): Begin {
   return {
-    kind: "Exp.begin",
+    kind: "Begin",
     stmts,
     ret,
     ...Evaluable({

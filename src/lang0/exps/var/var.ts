@@ -7,13 +7,13 @@ import * as Explain from "../../explain"
 import * as Trace from "../../../trace"
 
 export type Var = Exp & {
-  kind: "Exp.v"
+  kind: "Var"
   name: string
 }
 
 export function Var(name: string): Var {
   return {
-    kind: "Exp.v",
+    kind: "Var",
     name,
     ...Evaluable({
       evaluability: ({ env }) => {

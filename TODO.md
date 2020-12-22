@@ -41,8 +41,6 @@
 
 # lang0
 
-- no `Exp` deps hub
-
 > refactoring `Value`
 
 # lang1
