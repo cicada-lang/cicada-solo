@@ -102,7 +102,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       const motive = Evaluate.evaluate(Ctx.to_env(ctx), exp.motive)
       return motive
     } else if (exp.kind === "Exp.str") {
-      return Value.type
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.quote") {
       return Value.str
     } else if (exp.kind === "Exp.type") {
