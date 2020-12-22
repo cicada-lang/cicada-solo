@@ -62,7 +62,6 @@
 - [lang2] `Inferable` -- car
 - [lang2] `Inferable` -- cdr
 - [lang2] `Inferable` -- equal
-- [lang2] `Inferable` -- nat
 - [lang2] `Inferable` -- nat-ind
 - [lang2] `Inferable` -- pi
 - [lang2] `Inferable` -- replace

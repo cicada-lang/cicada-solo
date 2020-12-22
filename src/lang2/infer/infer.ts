@@ -45,7 +45,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
       const car = do_car(target)
       return Value.Closure.apply(sigma.cdr_t_cl, car)
     } else if (exp.kind === "Exp.nat") {
-      return Value.type
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.zero") {
       return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.add1") {
@@ -89,14 +89,7 @@ export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
     } else if (exp.kind === "Exp.absurd") {
       return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.absurd_ind") {
-      // NOTE the `motive` here is not a function from target_t to type,
-      //   but a element of type.
-      // NOTE We should always infer target,
-      //   but we do a simple check for the simple absurd.
-      Check.check(ctx, exp.target, Value.absurd)
-      Check.check(ctx, exp.motive, Value.type)
-      const motive = Evaluate.evaluate(Ctx.to_env(ctx), exp.motive)
-      return motive
+      return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.str") {
       return exp.inferability({ ctx })
     } else if (exp.kind === "Exp.quote") {
