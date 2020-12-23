@@ -7,17 +7,13 @@ import { FnValue } from "../exps/fn-value"
 import { NotYetValue } from "../exps/not-yet-value"
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
-  if (target.kind === "FnValue") {
-    const new_env = Env.update(
-      Env.clone((target as FnValue).env),
-      (target as FnValue).name,
-      arg
-    )
-    return Evaluate.evaluate(new_env, (target as FnValue).ret)
+  if (FnValue.is(target)) {
+    const new_env = Env.update(Env.clone(target.env), target.name, arg)
+    return Evaluate.evaluate(new_env, target.ret)
   }
 
-  if (target.kind === "NotYetValue") {
-    return NotYetValue(ApNeutral((target as NotYetValue).neutral, arg))
+  if (NotYetValue.is(target)) {
+    return NotYetValue(ApNeutral(target.neutral, arg))
   }
 
   throw new Error("TODO")

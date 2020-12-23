@@ -43,8 +43,7 @@
 
 > refactoring `Value`
 
-- [lang0] type guards for `Value`
-- [lang0] replace `do_ap`
+- [lang0] re-place `do_ap`
 
 > refactoring `Stmt`
 
