@@ -1,3 +1,5 @@
-import { Execute } from "../execute"
+import { World } from "../world"
 
-export type Stmt = Execute
+export type Stmt = {
+  execute: (world: World) => World
+}
