@@ -14,12 +14,14 @@ export function JoJo(array: Array<Jo>): JoJo {
       world.push(
         JoJoComposabilityValue(array, {
           env: world.env,
+          mod: world.mod,
         })
       ),
     cuttability: (world) =>
       world.push(
         JoJoCuttabilityValue(array, {
           env: world.env,
+          mod: world.mod,
         })
       ),
   }
