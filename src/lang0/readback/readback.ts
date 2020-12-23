@@ -13,10 +13,7 @@ export function readback(used: Set<string>, value: Value.Value): Exp.Exp {
       return value.neutral.readback_neutral({ used })
     }
     case "Value.fn": {
-      const name = ut.freshen_name(used, value.name)
-      const v = Value.not_yet(VarNeutral(name))
-      const ret = Evaluate.do_ap(value, v)
-      return Fn(name, Readback.readback(new Set([...used, name]), ret))
+      return value.readbackability({ used })
     }
   }
 }
