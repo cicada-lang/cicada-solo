@@ -44,7 +44,6 @@
 > refactoring `Value`
 
 - [lang0] `Neutral` as intersection type
-- [lang0] no branches in `readback_neutral`
 - [lang0] inline `readback_neutral`
 
 - [lang0] `Readbackable` -- `FnValue`
