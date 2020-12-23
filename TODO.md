@@ -76,9 +76,9 @@
 
 - 如何对某一个类型以及相关的 Exp 作出充分的测试？
 
-- test Equal of lang2.
-- test Pi of lang2.
-- test Absurd of lang2.
+- [lang2] test `Equal`
+- [lang2] test `Pi`
+- [lang2] test `Absurd`
 
 > 优化
 
