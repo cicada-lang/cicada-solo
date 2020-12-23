@@ -1,0 +1,47 @@
+// 4. Easy as Pie
+
+Pair_elim : (A: Type) -> (D: Type) -> (X: Type) ->
+  (pair: Pair(A, D)) ->
+  (maker: (A) -> (D) -> X) ->
+  X
+Pair_elim = (A) => (D) => (X) =>
+  (pair) => (maker) =>
+  maker(car(pair))(cdr(pair))
+
+flip : (A: Type) -> (D: Type) ->
+  (pair: Pair(A, D)) ->
+  Pair(D, A)
+flip = (A) => (D) =>
+  (pair) =>
+  cons(cdr(pair), car(pair))
+
+@show flip(Nat)(String)(cons(123, "abc"))
+@show flip(String)(Nat)(flip(Nat)(String)(cons(123, "abc")))
+
+_1 : Equal(Type,
+  (A: Type) -> (D: Type) -> (pair: Pair(A, D)) -> Pair(D, A),
+  (Lemon: Type) -> (Meringue: Type) -> (Pair(Lemon, Meringue)) -> Pair(Meringue, Lemon))
+_1 = same
+
+_2 : Equal(Type,
+  (A: Type) -> (D: Type) -> (Pair(A, D)) -> Pair(D, A),
+  (A: Type) -> (D: Type) ->
+    (Pair(
+      car({ Pair(Type, Type) -- cons(A, D) }),
+      cdr({ Pair(Type, Type) -- cons(A, D) }))) ->
+    Pair(D, A))
+_2 = same
+
+swap : (Pair(Nat, String)) -> Pair(String, Nat)
+swap = (pair) =>
+  Pair_elim(Nat)(String)(Pair(String, Nat))
+  (pair)
+  ((a) => (d) => cons(d, a))
+
+@show swap(cons(123, "abc"))
+
+twin : (Y: Type) -> (Y) -> Pair(Y, Y)
+twin = (Y) => (x) => cons(x, x)
+
+@show twin(Nat)(123)
+@show twin(String)("abc")

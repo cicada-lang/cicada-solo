@@ -1,0 +1,19 @@
+{
+  kind = "Zero"
+}
+{
+  kind = "Add1"
+  prev = {
+    kind = "Zero"
+  }
+}
+{
+  kind = "Add1"
+  prev = {
+    kind = "Add1"
+    prev = {
+      kind = "Zero"
+    }
+  }
+}
+

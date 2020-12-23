@@ -1,0 +1,50 @@
+@datatype Nat: Type {
+  zero: Nat
+  add1: (prev: Nat) -> Nat
+}
+
+@show Nat
+@show Nat.zero
+@show Nat.add1
+@show Nat.add1(Nat.zero)
+
+@datatype Bool: Type {
+  true: Bool
+  false: Bool
+}
+
+@show Bool
+@show Bool.true
+@show Bool.false
+
+true : Bool
+true = Bool.true
+
+zero_p : (Nat) -> Bool
+zero_p = {
+  (Nat.zero) => Bool.true
+  (Nat.add1(prev)) => Bool.false
+}
+
+@show zero_p(Nat.zero)
+@show zero_p(Nat.add1(Nat.zero))
+
+even_p : (Nat) -> Bool
+even_p = {
+  (Nat.zero) => Bool.true
+  (Nat.add1(prev)) => odd_p(prev)
+}
+
+odd_p : (Nat) -> Bool
+odd_p = {
+  (Nat.zero) => Bool.false
+  (Nat.add1(prev)) => even_p(prev)
+}
+
+@show even_p(Nat.zero)
+@show even_p(Nat.add1(Nat.zero))
+@show even_p(Nat.add1(Nat.add1(Nat.zero)))
+
+@show odd_p(Nat.zero)
+@show odd_p(Nat.add1(Nat.zero))
+@show odd_p(Nat.add1(Nat.add1(Nat.zero)))

@@ -1,0 +1,6 @@
+ch0 = (f) => (x) => x
+ch1 = (f) => (x) => f(x)
+ch2 = (f) => (x) => f(f(x))
+ch3 = (f) => (x) => f(f(f(x)))
+
+@show ch3(ch3)

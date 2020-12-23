@@ -1,0 +1,16 @@
+Nat
+Nat.zero
+(prev) => Nat.add1(prev)
+Nat.add1(Nat.zero)
+Bool
+Bool.true
+Bool.false
+Bool.true
+Bool.false
+Bool.true
+Bool.false
+Bool.true
+Bool.false
+Bool.true
+Bool.false
+

@@ -1,0 +1,18 @@
+_ : String
+_ = "abc"
+
+_1 : { x : String }
+_1 = { x = "abc" }
+
+_2 : { x : { x : String } }
+_2 = { x = { x = "abc" } }
+
+_3 : { x : { x : String } }
+_3 = { x = { x = "abc" } y = "123" }
+
+z : { x : { x : String } y : String }
+z = { x = { x = "abc" } y = "123" }
+
+@show z
+@show z.x
+@show z.y

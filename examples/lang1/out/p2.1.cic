@@ -1,0 +1,4 @@
+z : Nat
+z = zero
+
+@show z

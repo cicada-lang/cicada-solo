@@ -1,0 +1,14 @@
+{
+  kind = "Null"
+  T = String
+}
+{
+  kind = "Cons"
+  T = String
+  head = "123"
+  tail = {
+    kind = "Null"
+    T = String
+  }
+}
+

@@ -1,0 +1,69 @@
+// 2. Doin' What Comes Naturally
+
+flavored_lentils : (String) -> Pair(String, String)
+flavored_lentils = (flavor) => cons(flavor, "lentils")
+
+garlic_flavored_lentils : Pair(String, String)
+garlic_flavored_lentils = flavored_lentils("garlic")
+
+id : (String) -> String
+id = (x) => x
+
+T : Type
+T = Pair(String, (String) -> String)
+
+id_in_pair : (x: String) -> T
+id_in_pair = (x) => cons(x, (x) => x)
+
+_ : T
+_ = id_in_pair("x")
+
+// The x occur in `(x) => x` should not be
+// effected by the substitution of outer `x`,
+// and `(x) => x` is equivalent to `(y) => y`,
+
+_ : Equal(T, id_in_pair("x"), cons("x", (y) => y))
+_ = same
+
+_ : Equal((Nat) -> Pair(Nat, Nat), (x) => cons(x, x), (y) => cons(y, y))
+_ = same
+
+_ : Equal((Nat) -> Nat, (y) => car({ Pair(Nat, Nat) -- cons(y, y) }), (x) => x)
+_ = same
+
+_ : Equal((Pair(Nat, Nat)) -> Nat, (y) => car(y), (x) => car(x))
+_ = same
+
+vegetables : Pair(String, String)
+vegetables = cons("celery", "carrot")
+
+_ : Equal(Pair(String, String), vegetables, cons(car(vegetables), cdr(vegetables)))
+_ = same
+
+Nat_rec : (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
+Nat_rec = (target) => (T) => (base) => (step) =>
+  Nat.ind(target, (_) => T, base, step)
+
+Nat_which : (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T
+Nat_which = (target) => (T) => (base) => (step) =>
+  Nat.ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
+
+naught_or_more : (Nat) -> String
+naught_or_more = (n) => Nat_which(n)(String)("naught")((_prev) => "more")
+
+_ : Equal(String, naught_or_more(0), "naught")
+_ = same
+
+_ : Equal(String, naught_or_more(1), "more")
+_ = same
+
+_ : Equal(String, naught_or_more(4), "more")
+_ = same
+
+_ : Pair(Type, Type)
+_ = cons(String, String)
+
+Pear : Type
+Pear = Pair(Nat, Nat)
+
+@show { Pear -- cons(1, 2) }

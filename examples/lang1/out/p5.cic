@@ -1,0 +1,49 @@
+id = { (Nat) -> Nat -- (x) => x }
+
+k : (Nat) -> (Nat) -> Nat
+k = (x) => (y) => x
+
+_ : (Nat) -> (Nat) -> Nat
+_ = (_) => (_) => {
+  Nat
+  --- id
+  Nat
+  --- id
+  Nat
+  --- id
+  Nat
+  --- id
+  100
+}
+
+_ : (Nat) -> (Nat) -> Nat
+_ = (_) => (_) => {
+  Nat
+  --- id
+  Nat
+  --- id
+  Nat
+  --- id
+  Nat
+  --- k
+  { Nat
+    --- id
+    Nat
+    --- id
+    Nat
+    --- id
+    Nat
+    --- id
+    666 }
+  { Nat
+    --- id
+    Nat
+    --- id
+    Nat
+    --- id
+    Nat
+    --- id
+    100 }
+}
+
+@show _

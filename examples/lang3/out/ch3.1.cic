@@ -1,0 +1,49 @@
+@datatype Nat: Type {
+  zero: Nat
+  add1: (prev: Nat) -> Nat
+}
+
+zero = Nat.zero
+one = Nat.add1(zero)
+two = Nat.add1(one)
+three = Nat.add1(two)
+four = Nat.add1(three)
+five = Nat.add1(four)
+six = Nat.add1(five)
+seven = Nat.add1(six)
+eight = Nat.add1(seven)
+nine = Nat.add1(eight)
+ten = Nat.add1(nine)
+
+@datatype Bool : Type {
+  true: Bool
+  false: Bool
+}
+
+add : (Nat) -> (Nat) -> Nat
+add = (x) => {
+  (Nat.zero) => x
+  (Nat.add1(prev)) => Nat.add1(add(x)(prev))
+}
+
+@show add(zero)(zero)
+@show add(zero)(one)
+@show add(one)(zero)
+@show add(one)(one)
+@show add(one)(two)
+@show add(two)(one)
+@show add(two)(two)
+
+gauss : (Nat) -> Nat
+gauss = {
+  (Nat.zero) => Nat.zero
+  (Nat.add1(prev)) => add(Nat.add1(prev))(gauss(prev))
+}
+
+@show gauss(zero)
+@show gauss(one)
+@show gauss(two)
+@show gauss(three)
+@show gauss(four)
+@show gauss(five)
+@show gauss(six)

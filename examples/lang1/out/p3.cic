@@ -1,0 +1,13 @@
+one = {
+  Nat
+  --- add1(zero)
+}
+
+two = {
+  Nat
+  --- add1(one)
+}
+
+id = { (Nat) -> Nat -- (x) => x }
+
+@show id(two)

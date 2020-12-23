@@ -1,0 +1,33 @@
+List : (Type) -> Type
+List = (T) => { Null(T) | Cons(T) }
+
+Null : Type
+Null = {
+  kind : "Null" = "Null"
+  T : Type
+}
+
+Cons : Type
+Cons = {
+  kind : "Cons" = "Cons"
+  T : Type
+  head : T
+  tail : List(T)
+}
+
+null : (T: Type) -> List(T)
+null = (T) => {
+  kind = "Null"
+  T = T
+}
+
+cons : (T: Type) -> (T) -> (List(T)) -> List(T)
+cons = (T) => (head) => (tail) => {
+  kind = "Cons"
+  T = T
+  head = head
+  tail = tail
+}
+
+@show null(String)
+@show cons(String)("123")(null(String))

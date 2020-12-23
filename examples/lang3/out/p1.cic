@@ -1,0 +1,14 @@
+z : {
+  x : { x : String }
+  y : String
+  id : (String) -> String
+}
+z = {
+  x = { x = "abc" }
+  y = "123"
+  id = (x) => x
+}
+
+@show z
+@show z.id(z.x.x)
+@show z.id(z.y)

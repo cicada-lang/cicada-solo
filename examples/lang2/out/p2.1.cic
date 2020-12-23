@@ -1,0 +1,7 @@
+t : Type
+t = Nat
+
+n : t
+n = zero
+
+one = add1(n)
