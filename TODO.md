@@ -43,7 +43,7 @@
 
 > refactoring `Value`
 
-- [lang0] `Neutral` as intersection type
+- [lang0] no deps hub for `Neutral`
 
 - [lang0] `Readbackable` -- `FnValue`
 - [lang0] `Readbackable` -- `NotYetValue`
@@ -51,8 +51,6 @@
 - [lang0] no branches in `Readback.readback`
 
 - [lang0] no deps hub for `Value`
-
-- [lang0] no deps hub for `Neutral`
 
 # lang1
 
