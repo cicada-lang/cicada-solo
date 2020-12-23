@@ -43,6 +43,17 @@
 
 > refactoring `Value`
 
+- [lang0] `NotYetValue`
+
+- [lang0] `VarNeutral`
+- [lang0] `ApNeutral`
+
+- [lang0] `Readbackable` -- `FnValue`
+- [lang0] `Readbackable` -- `NotYetValue`
+
+- [lang0] `readback_neutral` -- `VarNeutral`
+- [lang0] `readback_neutral` -- `ApNeutral`
+
 # lang1
 
 > refactoring `Stmt`
