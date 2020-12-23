@@ -1,4 +1,3 @@
-import { Exp } from "../../exp"
 import { Neutral } from "../../neutral"
 import { Readbackable } from "../../readbackable"
 

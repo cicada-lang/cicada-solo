@@ -2,8 +2,6 @@ import { Exp } from "../../exp"
 import * as Stmt from "../../stmt"
 import { Evaluable } from "../../evaluable"
 import { evaluate } from "../../evaluate"
-import { Repr } from "../../repr"
-import * as Value from "../../value"
 import * as Env from "../../env"
 import * as ut from "../../../ut"
 

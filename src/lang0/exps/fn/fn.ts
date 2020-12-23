@@ -1,7 +1,5 @@
 import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
-import { Repr } from "../../repr"
-import * as Value from "../../value"
 import { FnValue } from "../fn-value"
 
 export type Fn = Exp & {
