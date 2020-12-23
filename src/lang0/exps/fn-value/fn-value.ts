@@ -2,11 +2,11 @@ import { Exp } from "../../exp"
 import { Env } from "../../env"
 import { Readbackable } from "../../readbackable"
 import { readback } from "../../readback"
-import { do_ap } from "../../evaluate"
 import * as ut from "../../../ut"
 import { Fn } from "../fn"
 import { VarNeutral } from "../var-neutral"
 import { NotYetValue } from "../not-yet-value"
+import { do_ap } from "../ap"
 
 export type FnValue = Readbackable & {
   kind: "FnValue"

@@ -41,10 +41,6 @@
 
 # lang0
 
-> refactoring `Value`
-
-- [lang0] re-place `do_ap`
-
 > refactoring `Stmt`
 
 - [lang0] `Stmt.def` vs `Stmt.show`
