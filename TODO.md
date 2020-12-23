@@ -175,3 +175,19 @@
 
   - maybe we can use object-oriented design
     by record type and higher order functions.
+
+# lang4
+
+``` jojo
+swap : [ 'A 'B ] [ 'B 'A ]
+swap = [ (b) (a) b a ]
+
+dup : [ 'A ] [ 'A 'A ]
+dup = [ (a) a a ]
+
+mul : [ Number Number ] [ Number ]
+mul = ...
+
+square : [ Number ] [ Number ]
+square = [ dup mul ]
+```
