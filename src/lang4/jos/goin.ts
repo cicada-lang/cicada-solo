@@ -15,5 +15,5 @@ export function Goin(name: string): Goin {
 
 const going_in = (name: string) => (world: World) => {
   const [value, next_world] = world.pop()
-  return next_world.define(name, value)
+  return next_world.extend(name, value)
 }

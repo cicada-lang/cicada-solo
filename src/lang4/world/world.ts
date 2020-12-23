@@ -9,7 +9,7 @@ export type World = {
   value_stack: ValueStack
   push: (value: Value) => World
   pop: () => [Value, World]
-  define: (name: string, value: Value) => World
+  extend: (name: string, value: Value) => World
 }
 
 export function World(the: {
@@ -31,9 +31,9 @@ export function World(the: {
         value_stack: the.value_stack.drop(),
       }),
     ],
-    define: (name, value) => World({
+    extend: (name, value) => World({
       ...the,
-      env: the.env.define(name, value)
+      env: the.env.extend(name, value)
     })
   }
 }
