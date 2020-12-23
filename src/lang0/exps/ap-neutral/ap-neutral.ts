@@ -6,7 +6,7 @@ import { readback } from "../../readback"
 import { Ap } from "../ap"
 
 export type ApNeutral = {
-  kind: "Neutral.ap"
+  kind: "ApNeutral"
   target: Neutral
   arg: Value
   readback_neutral: (the: { used: Names }) => Exp
@@ -14,7 +14,7 @@ export type ApNeutral = {
 
 export function ApNeutral(target: Neutral, arg: Value): ApNeutral {
   return {
-    kind: "Neutral.ap",
+    kind: "ApNeutral",
     target,
     arg,
     readback_neutral: ({ used }) =>

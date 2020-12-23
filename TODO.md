@@ -43,8 +43,6 @@
 
 > refactoring `Value`
 
-- [lang0] no deps hub for `Neutral`
-
 - [lang0] `Readbackable` -- `FnValue`
 - [lang0] `Readbackable` -- `NotYetValue`
 
