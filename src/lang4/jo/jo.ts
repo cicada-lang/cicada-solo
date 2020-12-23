@@ -1,4 +1,6 @@
-import { Compose } from "../compose"
-import { Cut } from "../cut"
+import { World } from "../world"
 
-export type Jo = Compose & Cut
+export type Jo = {
+  compose: (world: World) => World
+  cut: (world: World) => World
+}

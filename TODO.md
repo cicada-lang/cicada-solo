@@ -178,6 +178,5 @@
 
 # lang4
 
-- [lang4] inline `Cut` & `Compose`
 - [lang4] `stmts/show.ts`
 - [lang4] `run`
