@@ -31,9 +31,10 @@ export function World(the: {
         value_stack: the.value_stack.drop(),
       }),
     ],
-    extend: (name, value) => World({
-      ...the,
-      env: the.env.extend(name, value)
-    })
+    extend: (name, value) =>
+      World({
+        ...the,
+        env: the.env.extend(name, value),
+      }),
   }
 }

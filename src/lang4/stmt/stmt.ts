@@ -1,5 +1,5 @@
-import { JoJo } from "../jos/jojo"
+import { World } from "../world"
 
 export type Stmt = {
-  // execute: ()
+  execute: (world: World) => World
 }
