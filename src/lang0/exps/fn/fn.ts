@@ -2,6 +2,7 @@ import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
 import { Repr } from "../../repr"
 import * as Value from "../../value"
+import { FnValue } from "../fn-value"
 
 export type Fn = Exp & {
   kind: "Fn"
@@ -15,7 +16,7 @@ export function Fn(name: string, ret: Exp): Fn {
     name,
     ret,
     ...Evaluable({
-      evaluability: ({ env }) => Value.fn(name, ret, env),
+      evaluability: ({ env }) => FnValue(name, ret, env),
     }),
     repr: () => `(${name}) => ${ret.repr()}`,
   }

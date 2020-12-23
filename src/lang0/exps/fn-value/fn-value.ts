@@ -9,7 +9,7 @@ import { VarNeutral } from "../var-neutral"
 import { NotYetValue } from "../not-yet-value"
 
 export type FnValue = Readbackable & {
-  kind: "Value.fn"
+  kind: "FnValue"
   name: string
   ret: Exp
   env: Env
@@ -17,7 +17,7 @@ export type FnValue = Readbackable & {
 
 export function FnValue(name: string, ret: Exp, env: Env): FnValue {
   return {
-    kind: "Value.fn",
+    kind: "FnValue",
     name,
     ret,
     env,

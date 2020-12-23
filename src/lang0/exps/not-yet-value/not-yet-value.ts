@@ -3,13 +3,13 @@ import { Neutral } from "../../neutral"
 import { Readbackable } from "../../readbackable"
 
 export type NotYetValue = Readbackable & {
-  kind: "Value.not_yet"
+  kind: "NotYetValue"
   neutral: Neutral
 }
 
 export function NotYetValue(neutral: Neutral): NotYetValue {
   return {
-    kind: "Value.not_yet",
+    kind: "NotYetValue",
     neutral,
     ...Readbackable({
       readbackability: ({ used }) => neutral.readback_neutral({ used }),
