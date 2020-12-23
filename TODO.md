@@ -43,8 +43,6 @@
 
 > refactoring `Value`
 
-- [lang0] no branches in `Readback.readback`
-
 - [lang0] no deps hub for `Value`
 
 - [lang0] replace `do_ap`
