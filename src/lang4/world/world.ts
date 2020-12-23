@@ -1,11 +1,9 @@
 import { ValueStack } from "../value-stack"
 import { Value } from "../value"
 import { Env } from "../env"
-import { Mod } from "../mod"
 
 export type World = {
   env: Env
-  mod: Mod
   value_stack: ValueStack
   push: (value: Value) => World
   pop: () => [Value, World]
@@ -14,7 +12,6 @@ export type World = {
 
 export function World(the: {
   env: Env
-  mod: Mod
   value_stack: ValueStack
 }): World {
   return {
@@ -31,9 +28,10 @@ export function World(the: {
         value_stack: the.value_stack.drop(),
       }),
     ],
-    define: (name, value) => World({
-      ...the,
-      env: the.env.define(name, value)
-    })
+    define: (name, value) =>
+      World({
+        ...the,
+        env: the.env.define(name, value),
+      }),
   }
 }
