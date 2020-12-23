@@ -43,7 +43,6 @@
 
 > refactoring `Value`
 
-- [lang0] `VarNeutral`
 - [lang0] `ApNeutral`
 
 - [lang0] `Readbackable` -- `FnValue`
