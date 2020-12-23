@@ -1,7 +1,8 @@
 import { ValueStack } from "../value-stack"
 import { Value } from "../value"
+import { JoJo } from "../jos/jojo"
 import { Env } from "../env"
-import { Mod } from "../mod"
+import { Mod, Triplex } from "../mod"
 
 export type World = {
   env: Env
@@ -10,6 +11,7 @@ export type World = {
   push: (value: Value) => World
   pop: () => [Value, World]
   env_extend: (name: string, value: Value) => World
+  mod_extend: (name: string, triplex: Triplex) => World
 }
 
 export function World(the: {
@@ -27,5 +29,7 @@ export function World(the: {
     ],
     env_extend: (name, value) =>
       World({ ...the, env: the.env.extend(name, value) }),
+    mod_extend: (name, triplex) =>
+      World({ ...the, mod: the.mod.extend(name, triplex) }),
   }
 }

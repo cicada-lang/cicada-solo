@@ -1,15 +1,21 @@
 import { JoJo } from "../jos/jojo"
 
-export type Mod = {
-  table: Map<string, JoJo>
-  extend: (name: string, jojo: JoJo) => Mod
-  lookup: (name: string) => undefined | JoJo
+export type Triplex = {
+  pre: JoJo
+  post: JoJo
+  jojo: JoJo
 }
 
-export function Mod(table: Map<string, JoJo>): Mod {
+export type Mod = {
+  table: Map<string, Triplex>
+  extend: (name: string, triplex: Triplex) => Mod
+  lookup: (name: string) => undefined | Triplex
+}
+
+export function Mod(table: Map<string, Triplex>): Mod {
   return {
     table,
-    extend: (name, jojo) => Mod(new Map([...table, [name, jojo]])),
+    extend: (name, triplex) => Mod(new Map([...table, [name, triplex]])),
     lookup: (name) => table.get(name),
   }
 }
