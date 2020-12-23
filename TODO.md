@@ -44,7 +44,7 @@
 > refactoring `Value`
 
 - [lang0] no deps hub for `Value`
-
+- [lang0] type guards for `Value`
 - [lang0] replace `do_ap`
 
 # lang1
