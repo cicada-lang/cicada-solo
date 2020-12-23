@@ -178,5 +178,6 @@
 
 # lang4
 
-- [lang4] `stmts/show.ts`
-- [lang4] `run`
+- [lang4] `stmts/define.ts` -- check
+- [lang4] `stmts/show.ts` -- assemble
+- [lang4] `stmts/show.ts` -- check

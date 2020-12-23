@@ -1,5 +1,7 @@
 import { World } from "../world"
 
 export type Stmt = {
-  execute: (world: World) => World
+  assemble: (world: World) => World
+  check: (world: World) => void
+  output?: (world: World) => string
 }

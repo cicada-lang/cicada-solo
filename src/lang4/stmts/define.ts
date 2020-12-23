@@ -20,6 +20,9 @@ export function Define(
     pre,
     post,
     jojo,
-    execute: (world) => world.mod_extend(name, { pre, post, jojo }),
+    assemble: (world) => world.mod_extend(name, { pre, post, jojo }),
+    check: (world) => {
+      throw new Error("TODO")
+    }
   }
 }
