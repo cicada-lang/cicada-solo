@@ -9,13 +9,10 @@ export function readback_neutral(
 ): Exp.Exp {
   switch (neutral.kind) {
     case "Neutral.v": {
-      return Var(neutral.name)
+      return neutral.readback_neutral({ used })
     }
     case "Neutral.ap": {
-      return Ap(
-        Readback.readback_neutral(used, neutral.target),
-        Readback.readback(used, neutral.arg)
-      )
+      return neutral.readback_neutral({ used })
     }
   }
 }
