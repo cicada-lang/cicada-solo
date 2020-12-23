@@ -178,5 +178,4 @@
 
 # lang4
 
-- [lang4] `Stmt`
-- [lang4] `stmts/define`
+- [lang4] `stmts/define.ts`

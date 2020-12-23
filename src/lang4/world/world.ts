@@ -9,7 +9,7 @@ export type World = {
   value_stack: ValueStack
   push: (value: Value) => World
   pop: () => [Value, World]
-  extend: (name: string, value: Value) => World
+  env_extend: (name: string, value: Value) => World
 }
 
 export function World(the: {
@@ -20,21 +20,12 @@ export function World(the: {
   return {
     ...the,
     push: (value) =>
-      World({
-        ...the,
-        value_stack: the.value_stack.push(value),
-      }),
+      World({ ...the, value_stack: the.value_stack.push(value) }),
     pop: () => [
       the.value_stack.tos(),
-      World({
-        ...the,
-        value_stack: the.value_stack.drop(),
-      }),
+      World({ ...the, value_stack: the.value_stack.drop() }),
     ],
-    extend: (name, value) =>
-      World({
-        ...the,
-        env: the.env.extend(name, value),
-      }),
+    env_extend: (name, value) =>
+      World({ ...the, env: the.env.extend(name, value) }),
   }
 }
