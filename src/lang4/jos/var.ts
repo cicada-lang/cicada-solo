@@ -2,11 +2,13 @@ import { Jo } from "../jo"
 import { World } from "../world"
 
 export type Var = Jo & {
+  kind: "Var"
   name: string
 }
 
 export function Var(name: string): Var {
   return {
+    kind: "Var",
     name,
     compose: var_lookup(name),
     cut: var_lookup(name),
