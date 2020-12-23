@@ -9,7 +9,7 @@ import { Fn } from "../exps"
 export function readback(used: Set<string>, value: Value.Value): Exp.Exp {
   switch (value.kind) {
     case "Value.not_yet": {
-      return Readback.readback_neutral(used, value.neutral)
+      return value.neutral.readback_neutral({ used })
     }
     case "Value.fn": {
       const name = ut.freshen_name(used, value.name)
