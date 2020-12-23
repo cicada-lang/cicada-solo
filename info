@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-echo "[info]"
-echo "- date: $(date)"
-echo "- machine: $(uname -a)"
-echo "- working directory: $(pwd)"
-echo "- nodejs version: $(node --version)"
-echo

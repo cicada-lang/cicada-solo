@@ -1,7 +1,7 @@
 import { Jo } from "../jo"
 import { World } from "../world"
-import { JoJoComposabilityValue } from "../values/jojo-composability-value"
-import { JoJoCuttabilityValue } from "../values/jojo-cuttability-value"
+import { JoJoComposeValue } from "../values/jojo-compose-value"
+import { JoJoCutValue } from "../values/jojo-cut-value"
 
 export type JoJo = Jo & {
   array: Array<Jo>
@@ -10,16 +10,16 @@ export type JoJo = Jo & {
 export function JoJo(array: Array<Jo>): JoJo {
   return {
     array,
-    composability: (world) =>
+    compose: (world) =>
       world.push(
-        JoJoComposabilityValue(array, {
+        JoJoComposeValue(array, {
           env: world.env,
           mod: world.mod,
         })
       ),
-    cuttability: (world) =>
+    cut: (world) =>
       world.push(
-        JoJoCuttabilityValue(array, {
+        JoJoCutValue(array, {
           env: world.env,
           mod: world.mod,
         })

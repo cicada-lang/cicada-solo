@@ -8,8 +8,8 @@ export type Var = Jo & {
 export function Var(name: string): Var {
   return {
     name,
-    composability: var_lookup(name),
-    cuttability: var_lookup(name),
+    compose: var_lookup(name),
+    cut: var_lookup(name),
   }
 }
 

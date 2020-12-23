@@ -8,8 +8,8 @@ export type Goin = Jo & {
 export function Goin(name: string): Goin {
   return {
     name,
-    composability: going_in(name),
-    cuttability: going_in(name),
+    compose: going_in(name),
+    cut: going_in(name),
   }
 }
 

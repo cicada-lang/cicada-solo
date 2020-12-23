@@ -1,4 +1,4 @@
-import { Composable } from "../composable"
-import { Cuttable } from "../cuttable"
+import { Compose } from "../compose"
+import { Cut } from "../cut"
 
-export type Jo = Composable & Cuttable
+export type Jo = Compose & Cut

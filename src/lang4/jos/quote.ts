@@ -10,7 +10,7 @@ export type Quote = Jo & {
 export function Quote(str: string): Quote {
   return {
     str,
-    composability: (world) => world.push(QuoteValue(str)),
-    cuttability: (world) => world.push(StrValue),
+    compose: (world) => world.push(QuoteValue(str)),
+    cut: (world) => world.push(StrValue),
   }
 }

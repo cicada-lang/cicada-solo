@@ -3,26 +3,26 @@ import { Value } from "../value"
 import { Env } from "../env"
 import { Mod } from "../mod"
 
-export type JoJoComposabilityValue = Value & {
+export type JoJoCutValue = Value & {
   array: Array<Jo>
   env: Env
   mod: Mod
 }
 
-export function JoJoComposabilityValue(
+export function JoJoCutValue(
   array: Array<Jo>,
   the: {
     env: Env
     mod: Mod
   }
-): JoJoComposabilityValue {
+): JoJoCutValue {
   return {
     array,
     env: the.env,
     mod: the.mod,
     comeout: (world) => {
       for (const jo of array) {
-        world = jo.composability(world)
+        world = jo.cut(world)
       }
       return world
     },
