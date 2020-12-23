@@ -178,16 +178,4 @@
 
 # lang4
 
-``` jojo
-swap : [ 'A 'B ] [ 'B 'A ]
-swap = [ (b) (a) b a ]
-
-dup : [ 'A ] [ 'A 'A ]
-dup = [ (a) a a ]
-
-mul : [ Number Number ] [ Number ]
-mul = ...
-
-square : [ Number ] [ Number ]
-square = [ dup mul ]
-```
+- [lang4] no `Mod`

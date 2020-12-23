@@ -1,4 +1,3 @@
-import { FrameStack } from "../frame-stack"
 import { ValueStack } from "../value-stack"
 import { Value } from "../value"
 import { Env } from "../env"
@@ -8,7 +7,6 @@ export type World = {
   env: Env
   mod: Mod
   value_stack: ValueStack
-  return_stack: FrameStack
   push: (value: Value) => World
   pop: () => [Value, World]
   define: (name: string, value: Value) => World
@@ -18,7 +16,6 @@ export function World(the: {
   env: Env
   mod: Mod
   value_stack: ValueStack
-  return_stack: FrameStack
 }): World {
   return {
     ...the,
