@@ -177,5 +177,3 @@
     by record type and higher order functions.
 
 # lang4
-
-- [lang4] `stmts/define.ts`

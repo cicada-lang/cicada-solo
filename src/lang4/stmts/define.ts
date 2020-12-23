@@ -9,16 +9,17 @@ export type Define = Stmt & {
   jojo: JoJo
 }
 
-export function Define(the: {
-  name: string
-  pre: JoJo
-  post: JoJo
+export function Define(
+  name: string,
+  pre: JoJo,
+  post: JoJo,
   jojo: JoJo
-}): Define {
+): Define {
   return {
-    ...the,
-    execute: (world) => {
-      throw new Error("TODO")
-    }
+    name,
+    pre,
+    post,
+    jojo,
+    execute: (world) => world.mod_extend(name, { pre, post, jojo }),
   }
 }
