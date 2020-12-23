@@ -1,20 +1,10 @@
 import { FnValue } from "../exps/fn-value"
+import { NotYetValue } from "../exps/not-yet-value"
 
-export type Value = Fn | not_yet
-
-import * as Exp from "../exp"
-import * as Env from "../env"
-import * as Neutral from "../neutral"
+export type Value = FnValue | NotYetValue
 
 export type fn = FnValue
 export const fn = FnValue
 
-export type not_yet = {
-  kind: "Value.not_yet"
-  neutral: Neutral.Neutral
-}
-
-export const not_yet = (neutral: Neutral.Neutral): not_yet => ({
-  kind: "Value.not_yet",
-  neutral,
-})
+export type not_yet = NotYetValue
+export const not_yet = NotYetValue

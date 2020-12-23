@@ -43,8 +43,6 @@
 
 > refactoring `Value`
 
-- [lang0] `NotYetValue`
-
 - [lang0] `VarNeutral`
 - [lang0] `ApNeutral`
 
