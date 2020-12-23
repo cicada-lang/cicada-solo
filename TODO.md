@@ -46,6 +46,10 @@
 - [lang0] type guards for `Value`
 - [lang0] replace `do_ap`
 
+> refactoring `Stmt`
+
+- [lang0] `Stmt.def` vs `Stmt.show`
+
 # lang1
 
 > refactoring `Stmt`
@@ -60,6 +64,8 @@
 > refactoring `Neutral`
 
 > refactoring `Normal`
+
+> refactoring `Stmt`
 
 > naming convention
 
