@@ -178,5 +178,4 @@
 
 # lang4
 
-- [lang4] `stmts/show.ts` -- assemble
-- [lang4] `stmts/show.ts` -- check
+- [lang4] unit test

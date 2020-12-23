@@ -29,8 +29,8 @@ export function Define(
         const message = "Define.check fail"
         console.log({
           message,
-          infered_value_stack: infered.value_stack,
-          expected_value_stack: expected_value_stack,
+          infered: infered.value_stack,
+          expected: expected.value_stack,
         })
         throw new Error(message)
       }
