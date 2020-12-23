@@ -1,12 +1,7 @@
-import * as Readback from "../readback"
-import * as Evaluate from "../evaluate"
-import * as Neutral from "../neutral"
-import * as Value from "../value"
-import * as Exp from "../exp"
-import * as ut from "../../ut"
-import { Fn } from "../exps"
-import { VarNeutral } from "../exps/var-neutral"
+import { Value } from "../value"
+import { Exp } from "../exp"
+import { Names } from "../readbackable"
 
-export function readback(used: Set<string>, value: Value.Value): Exp.Exp {
+export function readback(used: Names, value: Value): Exp {
   return value.readbackability({ used })
 }
