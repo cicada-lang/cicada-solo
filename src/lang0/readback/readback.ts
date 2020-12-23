@@ -10,7 +10,7 @@ import { VarNeutral } from "../exps/var-neutral"
 export function readback(used: Set<string>, value: Value.Value): Exp.Exp {
   switch (value.kind) {
     case "Value.not_yet": {
-      return value.neutral.readback_neutral({ used })
+      return value.readbackability({ used })
     }
     case "Value.fn": {
       return value.readbackability({ used })

@@ -43,8 +43,6 @@
 
 > refactoring `Value`
 
-- [lang0] `Readbackable` -- `NotYetValue`
-
 - [lang0] no branches in `Readback.readback`
 
 - [lang0] no deps hub for `Value`
