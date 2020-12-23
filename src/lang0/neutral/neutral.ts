@@ -1,20 +1,10 @@
 import { VarNeutral } from "../exps/var-neutral"
+import { ApNeutral } from "../exps/ap-neutral"
 
-export type Neutral = VarNeutral | ap
-
-import * as Value from "../value"
+export type Neutral = VarNeutral | ApNeutral
 
 export type v = VarNeutral
 export const v = VarNeutral
 
-type ap = {
-  kind: "Neutral.ap"
-  target: Neutral
-  arg: Value.Value
-}
-
-export const ap = (target: Neutral, arg: Value.Value): ap => ({
-  kind: "Neutral.ap",
-  target,
-  arg,
-})
+export type ap = ApNeutral
+export const ap = ApNeutral
