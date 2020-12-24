@@ -19,7 +19,7 @@ export class World {
     return new World({
       env: Env(new Map()),
       mod: Mod(new Map()),
-      value_stack: ValueStack([]),
+      value_stack: new ValueStack([]),
     })
   }
 
