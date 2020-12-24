@@ -1,1 +1,1 @@
-export * from "../referent" 
+export * from "../referent"

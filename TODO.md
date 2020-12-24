@@ -178,11 +178,12 @@
 
 # lang4
 
-- [lang4] `TypeValue` as class
-- [lang4] `ValueStack` as class
+- [lang4] `StrValue` as class
+- [lang4] `QuoteValue` as class
+- [lang4] `JoJoCutValue` as class
+- [lang4] `JoJoComposeValue` as class
 
-- [lang4] `Value` as interface
-- [lang4] `Jo` as interface
+- [lang4] `ValueStack` as class
 
 - [lang4] primitive functions
 
