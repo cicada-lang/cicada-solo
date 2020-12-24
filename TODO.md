@@ -178,7 +178,6 @@
 
 # lang4
 
-- [lang4] `Env` as class
 - [lang4] `Mod` as class
 
 - [lang4] `jos/` as class
