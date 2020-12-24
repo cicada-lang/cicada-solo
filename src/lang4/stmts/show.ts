@@ -11,9 +11,9 @@ export function Show(jojo: JoJo): Show {
   return {
     jojo,
     assemble: (world) => world,
-    check: (world) => jojo.cut_array(world),
+    check: (world) => jojo.cut_jojo(world),
     output: (world) => {
-      const { value_stack } = jojo.compose_array(world)
+      const { value_stack } = jojo.compose_jojo(world)
       return JSON.stringify(value_stack, null, 2)
     },
   }
