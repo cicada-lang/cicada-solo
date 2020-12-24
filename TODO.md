@@ -178,4 +178,4 @@
 
 # lang4
 
-- [lang4] unit test -- without parser
+- [lang4] syntax

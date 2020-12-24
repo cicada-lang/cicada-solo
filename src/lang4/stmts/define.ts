@@ -25,12 +25,12 @@ export function Define(
     check: (world) => {
       const infered = jojo.cut_jojo(pre.compose_jojo(world))
       const expected = post.compose_jojo(world)
-      if (!ut.equal(infered.value_stack, expected.value_stack)) {
+      if (!ut.equal(infered.value_stack.stack, expected.value_stack.stack)) {
         const message = "Define.check fail"
         console.log({
           message,
-          infered: infered.value_stack,
-          expected: expected.value_stack,
+          infered: infered.value_stack.stack,
+          expected: expected.value_stack.stack,
         })
         throw new Error(message)
       }
