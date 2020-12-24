@@ -178,5 +178,4 @@
 
 # lang4
 
-- [lang4] `Let` instead of `Goin`
 - [lang4] unit test -- without parser
