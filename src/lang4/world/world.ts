@@ -18,7 +18,7 @@ export class World {
   static init(): World {
     return new World({
       env: new Env(new Map()),
-      mod: Mod(new Map()),
+      mod: new Mod(new Map()),
       value_stack: new ValueStack([]),
     })
   }
