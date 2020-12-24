@@ -25,7 +25,7 @@ export function Mod(table: Map<string, Triplex>): Mod {
     lookup_value(name) {
       const triplex = table.get(name)
       if (triplex === undefined) return undefined
-      return JoJoComposeValue(triplex.jojo.array, {
+      return new JoJoComposeValue(triplex.jojo.array, {
         env: Env(new Map()),
         mod: Mod(table),
       })

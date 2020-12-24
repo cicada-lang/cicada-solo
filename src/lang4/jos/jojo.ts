@@ -16,14 +16,14 @@ export function JoJo(array: Array<Jo>): JoJo {
     array,
     compose: (world) =>
       world.push(
-        JoJoComposeValue(array, {
+        new JoJoComposeValue(array, {
           env: world.env,
           mod: world.mod,
         })
       ),
     cut: (world) =>
       world.push(
-        JoJoCutValue(array, {
+        new JoJoCutValue(array, {
           env: world.env,
           mod: world.mod,
         })

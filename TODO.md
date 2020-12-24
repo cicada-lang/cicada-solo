@@ -178,10 +178,11 @@
 
 # lang4
 
-- [lang4] `JoJoCutValue` as class
-- [lang4] `JoJoComposeValue` as class
-
 - [lang4] `ValueStack` as class
+- [lang4] `Env` as class
+- [lang4] `Mod` as class
+
+- [lang4] `jos/` as class
 
 - [lang4] primitive functions
 
