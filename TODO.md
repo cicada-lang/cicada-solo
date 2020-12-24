@@ -178,4 +178,14 @@
 
 # lang4
 
-- [lang4] syntax
+- [lang4] `TypeValue` as class
+- [lang4] `ValueStack` as class
+
+- [lang4] `Value` as interface
+- [lang4] `Jo` as interface
+
+- [lang4] primitive functions
+
+- [lang4] explicit control
+
+- [lang4] concrete syntax
