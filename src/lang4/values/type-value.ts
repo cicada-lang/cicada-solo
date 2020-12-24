@@ -1,8 +1,9 @@
 import { Value } from "../value"
-import { World } from "../world"
 
-export type TypeValue = Value
+export type TypeValue = Value & {
+  kind: "TypeValue"
+}
 
 export const TypeValue: TypeValue = {
-  comeout: (world) => world.push(TypeValue),
+  kind: "TypeValue"
 }

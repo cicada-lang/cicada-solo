@@ -4,6 +4,7 @@ import { Env } from "../env"
 import { Mod } from "../mod"
 
 export type JoJoComposeValue = Value & {
+  kind: "JoJoComposeValue"
   array: Array<Jo>
   env: Env
   mod: Mod
@@ -17,10 +18,11 @@ export function JoJoComposeValue(
   }
 ): JoJoComposeValue {
   return {
+    kind: "JoJoComposeValue",
     array,
     env: the.env,
     mod: the.mod,
-    comeout: (world) => {
+    refer: (world) => {
       for (const jo of array) {
         world = jo.compose(world)
       }

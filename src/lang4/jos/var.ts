@@ -18,5 +18,6 @@ export function Var(name: string): Var {
 const var_lookup = (name: string) => (world: World) => {
   const value = world.env.lookup(name)
   if (value === undefined) throw new Error(`undefined name ${name}`)
-  return value.comeout(world)
+  if (value.refer) return value.refer(world)
+  return world.push(value)
 }

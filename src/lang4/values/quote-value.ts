@@ -1,13 +1,13 @@
 import { Value } from "../value"
-import { World } from "../world"
 
 export type QuoteValue = Value & {
+  kind: "QuoteValue"
   str: string
 }
 
 export function QuoteValue(str: string): QuoteValue {
   return {
+    kind: "QuoteValue",
     str,
-    comeout: (world) => world.push(QuoteValue(str)),
   }
 }
