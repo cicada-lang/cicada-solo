@@ -3,8 +3,8 @@ import { Value } from "../value"
 export class Env {
   table: Map<string, Value>
 
-  constructor(table: Map<string, Value>) {
-    this.table = table
+  constructor(table?: Map<string, Value>) {
+    this.table = table || new Map()
   }
 
   extend(name: string, value: Value): Env {

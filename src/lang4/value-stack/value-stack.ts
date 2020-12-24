@@ -3,8 +3,8 @@ import { Value } from "../value"
 export class ValueStack {
   stack: Array<Value>
 
-  constructor(stack: Array<Value>) {
-    this.stack = stack
+  constructor(stack?: Array<Value>) {
+    this.stack = stack || new Array()
   }
 
   push(value: Value): ValueStack {

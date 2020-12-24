@@ -13,8 +13,8 @@ export type Triplex = {
 export class Mod {
   table: Map<string, Triplex>
 
-  constructor(table: Map<string, Triplex>) {
-    this.table = table
+  constructor(table?: Map<string, Triplex>) {
+    this.table = table || new Map()
   }
 
   extend(name: string, triplex: Triplex): Mod {
@@ -29,7 +29,7 @@ export class Mod {
     const triplex = this.table.get(name)
     if (triplex === undefined) return undefined
     return new JoJoComposeValue(triplex.jojo.array, {
-      env: new Env(new Map()),
+      env: new Env(),
       mod: this,
     })
   }
