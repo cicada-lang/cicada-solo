@@ -8,6 +8,6 @@ import { Type } from "../jos"
 
 {
   const world = World.init()
-  const stmts = [Show(JoJo([Type, Type, Str]))]
+  const stmts = [Show(JoJo([Quote("abc"), Let("x"), Var("x"), Var("x")]))]
   console.log(run(stmts, world))
 }
