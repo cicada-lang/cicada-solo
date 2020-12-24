@@ -6,6 +6,8 @@ import { JoJoCutValue } from "../values/jojo-cut-value"
 export type JoJo = Jo & {
   kind: "JoJo"
   array: Array<Jo>
+  compose_array: (world: World) => World
+  cut_array: (world: World) => World
 }
 
 export function JoJo(array: Array<Jo>): JoJo {
@@ -26,5 +28,8 @@ export function JoJo(array: Array<Jo>): JoJo {
           mod: world.mod,
         })
       ),
+    compose_array: (world) =>
+      array.reduce((world, jo) => jo.compose(world), world),
+    cut_array: (world) => array.reduce((world, jo) => jo.cut(world), world),
   }
 }

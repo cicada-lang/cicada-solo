@@ -23,8 +23,8 @@ export function Define(
     jojo,
     assemble: (world) => world.mod_extend(name, { pre, post, jojo }),
     check: (world) => {
-      const infered = jojo.cut(pre.compose(world))
-      const expected = post.compose(world)
+      const infered = jojo.cut_array(pre.compose_array(world))
+      const expected = post.compose_array(world)
       if (!ut.equal(infered.value_stack, expected.value_stack)) {
         const message = "Define.check fail"
         console.log({
