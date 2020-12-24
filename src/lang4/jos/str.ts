@@ -9,6 +9,6 @@ export type Str = Jo & {
 
 export const Str: Str = {
   kind: "Str",
-  compose: (world) => world.push(StrValue),
+  compose: (world) => world.push(new StrValue()),
   cut: (world) => world.push(new TypeValue()),
 }

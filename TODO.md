@@ -178,8 +178,6 @@
 
 # lang4
 
-- [lang4] `StrValue` as class
-- [lang4] `QuoteValue` as class
 - [lang4] `JoJoCutValue` as class
 - [lang4] `JoJoComposeValue` as class
 

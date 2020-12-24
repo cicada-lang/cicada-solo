@@ -1,13 +1,7 @@
 import { Value } from "../value"
 
-export type QuoteValue = Value & {
-  kind: "QuoteValue"
-  str: string
-}
+export class QuoteValue implements Value {
+  kind = "QuoteValue"
 
-export function QuoteValue(str: string): QuoteValue {
-  return {
-    kind: "QuoteValue",
-    str,
-  }
+  constructor(public ustr: string) {}
 }
