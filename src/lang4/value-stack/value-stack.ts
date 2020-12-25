@@ -1,25 +1,19 @@
 import { Value } from "../value"
 
-export class ValueStack {
+export type ValueStack = {
   stack: Array<Value>
+  push: (value: Value) => ValueStack
+  drop: () => ValueStack
+  tos: () => Value
+  pop: () => [Value, ValueStack]
+}
 
-  constructor(stack?: Array<Value>) {
-    this.stack = stack || new Array()
-  }
-
-  push(value: Value): ValueStack {
-    return new ValueStack([value, ...this.stack])
-  }
-
-  drop(): ValueStack {
-    return new ValueStack(this.stack.slice(1))
-  }
-
-  tos(): Value {
-    return this.stack[0]
-  }
-
-  pop(): [Value, ValueStack] {
-    return [this.stack[0], new ValueStack(this.stack.slice(1))]
+export function ValueStack(stack: Array<Value>): ValueStack {
+  return {
+    stack,
+    push: (value) => ValueStack([value, ...stack]),
+    drop: () => ValueStack(stack.slice(1)),
+    tos: () => stack[0],
+    pop: () => [stack[0], ValueStack(stack.slice(1))],
   }
 }

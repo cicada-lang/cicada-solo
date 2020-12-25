@@ -178,8 +178,8 @@
 
 # lang4
 
-
-- [lang4] `jos/` as class
+- [lang4] `Value` as abstract class default `refer`
+- [lang4] `Value` with `Repr`
 - [lang4] generic `Stack` instead of `ValueStack`
 - [lang4] primitive functions
 - [lang4] explicit control

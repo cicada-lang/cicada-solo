@@ -2,24 +2,31 @@ import { Jo } from "../jo"
 import { Value } from "../value"
 import { Env } from "../env"
 import { Mod } from "../mod"
-import { World } from "../world"
 
-export class JoJoCutValue extends Value {
+export type JoJoCutValue = Value & {
+  kind: "JoJoCutValue"
   array: Array<Jo>
   env: Env
   mod: Mod
+}
 
-  constructor(array: Array<Jo>, the: { env: Env; mod: Mod }) {
-    super()
-    this.array = array
-    this.env = the.env
-    this.mod = the.mod
+export function JoJoCutValue(
+  array: Array<Jo>,
+  the: {
+    env: Env
+    mod: Mod
   }
-
-  refer(world: World): World {
-    for (const jo of this.array) {
-      world = jo.cut(world)
-    }
-    return world
+): JoJoCutValue {
+  return {
+    kind: "JoJoCutValue",
+    array,
+    env: the.env,
+    mod: the.mod,
+    refer: (world) => {
+      for (const jo of array) {
+        world = jo.cut(world)
+      }
+      return world
+    },
   }
 }

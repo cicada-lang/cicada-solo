@@ -12,7 +12,7 @@ export function Quote(str: string): Quote {
   return {
     kind: "Quote",
     str,
-    compose: (world) => world.push(new QuoteValue(str)),
-    cut: (world) => world.push(new StrValue()),
+    compose: (world) => world.push(QuoteValue(str)),
+    cut: (world) => world.push(StrValue),
   }
 }

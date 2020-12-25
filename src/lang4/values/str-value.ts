@@ -1,7 +1,9 @@
 import { Value } from "../value"
 
-export class StrValue extends Value {
-  constructor() {
-    super()
-  }
+export type StrValue = Value & {
+  kind: "StrValue"
+}
+
+export const StrValue: StrValue = {
+  kind: "StrValue"
 }

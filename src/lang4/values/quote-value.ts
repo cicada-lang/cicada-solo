@@ -1,8 +1,13 @@
 import { Value } from "../value"
-import { World } from "../world"
 
-export class QuoteValue extends Value {
-  constructor(public str: string) {
-    super()
+export type QuoteValue = Value & {
+  kind: "QuoteValue"
+  str: string
+}
+
+export function QuoteValue(str: string): QuoteValue {
+  return {
+    kind: "QuoteValue",
+    str,
   }
 }

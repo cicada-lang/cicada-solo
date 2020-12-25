@@ -1,7 +1,9 @@
 import { Value } from "../value"
 
-export class TypeValue extends Value {
-  constructor() {
-    super()
-  }
+export type TypeValue = Value & {
+  kind: "TypeValue"
+}
+
+export const TypeValue: TypeValue = {
+  kind: "TypeValue"
 }
