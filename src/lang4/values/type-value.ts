@@ -5,5 +5,5 @@ export type TypeValue = Value & {
 }
 
 export const TypeValue: TypeValue = {
-  kind: "TypeValue"
+  kind: "TypeValue",
 }

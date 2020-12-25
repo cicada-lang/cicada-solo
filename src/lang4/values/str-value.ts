@@ -5,5 +5,5 @@ export type StrValue = Value & {
 }
 
 export const StrValue: StrValue = {
-  kind: "StrValue"
+  kind: "StrValue",
 }

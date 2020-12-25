@@ -1,8 +1,4 @@
-import { World } from "../world"
-
-export type Referent = {
-  refer: (world: World) => World
-}
+import { Referent } from "../referent"
 
 export type Value = Partial<Referent> & {
   kind: string
