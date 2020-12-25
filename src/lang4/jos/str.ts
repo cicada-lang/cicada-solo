@@ -11,5 +11,5 @@ export const Str: Str = {
   kind: "Str",
   compose: (world) => world.value_stack_push(StrValue),
   cut: (world) => world.value_stack_push(TypeValue),
-  repr: () => "Str",
+  repr: () => "String",
 }
