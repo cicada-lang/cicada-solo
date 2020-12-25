@@ -17,6 +17,12 @@ import { Type } from "../jos"
     ),
     Show(JoJo([Quote("a"), Quote("b")])),
     Show(JoJo([Quote("a"), Quote("b"), Var("swap")])),
+    Show(
+      JoJo([
+        JoJo([Quote("a"), Quote("b"), Var("swap")]),
+        JoJo([Quote("a"), Quote("b"), Var("swap")]),
+      ])
+    ),
   ]
   console.log(run(stmts, world))
 }

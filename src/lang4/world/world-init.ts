@@ -1,5 +1,6 @@
 import { World } from "./world"
-import { ValueStack } from "../value-stack"
+import { Stack } from "../stack"
+import { Value } from "../value"
 import { Env } from "../env"
 import { Mod } from "../mod"
 
@@ -13,5 +14,5 @@ World.init = () =>
   World({
     env: Env(new Map()),
     mod: Mod(new Map()),
-    value_stack: ValueStack([]),
+    value_stack: Stack<Value>([]),
   })
