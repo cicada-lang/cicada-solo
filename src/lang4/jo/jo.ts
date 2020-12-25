@@ -1,4 +1,5 @@
 import { World } from "../world"
+import { Repr } from "../repr"
 
 export type Jo = {
   compose: (world: World) => World

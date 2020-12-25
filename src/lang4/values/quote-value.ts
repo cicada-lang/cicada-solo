@@ -9,5 +9,6 @@ export function QuoteValue(str: string): QuoteValue {
   return {
     kind: "QuoteValue",
     str,
+    repr: () => `"${str}"`,
   }
 }

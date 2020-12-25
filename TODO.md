@@ -178,8 +178,8 @@
 
 # lang4
 
-- [lang4] `Value` as abstract class default `refer`
-- [lang4] `Value` with `Repr`
+- [lang4] `Jo` with `Repr`
+- [lang4] fix `Value` equal check
 - [lang4] generic `Stack` instead of `ValueStack`
 - [lang4] primitive functions
 - [lang4] explicit control

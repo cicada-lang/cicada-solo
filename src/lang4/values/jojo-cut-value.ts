@@ -28,5 +28,6 @@ export function JoJoCutValue(
       }
       return world
     },
+    repr: () => "TODO",
   }
 }

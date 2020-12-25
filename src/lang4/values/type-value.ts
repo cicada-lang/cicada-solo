@@ -6,4 +6,5 @@ export type TypeValue = Value & {
 
 export const TypeValue: TypeValue = {
   kind: "TypeValue",
+  repr: () => "Type",
 }

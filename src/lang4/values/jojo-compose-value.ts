@@ -28,5 +28,6 @@ export function JoJoComposeValue(
       }
       return world
     },
+    repr: () => "TODO",
   }
 }
