@@ -1,23 +1,17 @@
 import { Jo } from "../jo"
 import { World } from "../world"
 
-export type Var = Jo & {
-  kind: "Var"
-  name: string
-}
+export class Var implements Jo {
+  kind = "Var"
 
-export function Var(name: string): Var {
-  return {
-    kind: "Var",
-    name,
-    compose: var_lookup(name),
-    cut: var_lookup(name),
-  }
+  constructor(public name: string) {}
+
+  compose = var_lookup(this.name)
+  cut = var_lookup(this.name)
 }
 
 const var_lookup = (name: string) => (world: World) => {
   const value = world.env.lookup(name) || world.mod.lookup_value(name)
   if (value === undefined) throw new Error(`undefined name ${name}`)
-  if (value.refer) return value.refer(world)
-  return world.push(value)
+  return value.refer(world)
 }

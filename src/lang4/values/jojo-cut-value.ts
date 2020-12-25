@@ -4,12 +4,13 @@ import { Env } from "../env"
 import { Mod } from "../mod"
 import { World } from "../world"
 
-export class JoJoCutValue implements Value {
+export class JoJoCutValue extends Value {
   array: Array<Jo>
   env: Env
   mod: Mod
 
   constructor(array: Array<Jo>, the: { env: Env; mod: Mod }) {
+    super()
     this.array = array
     this.env = the.env
     this.mod = the.mod

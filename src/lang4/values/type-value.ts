@@ -1,3 +1,7 @@
 import { Value } from "../value"
 
-export class TypeValue implements Value {}
+export class TypeValue extends Value {
+    constructor() {
+    super()
+  }
+}

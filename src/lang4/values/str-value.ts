@@ -1,5 +1,7 @@
 import { Value } from "../value"
 
-export class StrValue implements Value {
-  kind = "StrValue"
+export class StrValue extends Value {
+  constructor() {
+    super()
+  }
 }

@@ -13,10 +13,10 @@ import { Type } from "../jos"
       "swap",
       JoJo([Quote("A"), Quote("B")]),
       JoJo([Quote("B"), Quote("A")]),
-      JoJo([Let("b"), Let("a"), Var("b"), Var("a")])
+      JoJo([Let("b"), Let("a"), new Var("b"), new Var("a")])
     ),
     Show(JoJo([Quote("a"), Quote("b")])),
-    Show(JoJo([Quote("a"), Quote("b"), Var("swap")])),
+    Show(JoJo([Quote("a"), Quote("b"), new Var("swap")])),
   ]
   console.log(run(stmts, world))
 }
