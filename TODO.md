@@ -178,8 +178,8 @@
 
 # lang4
 
-- [lang4] fix `Value` equal check
-  - `readback` for `Value` + `AlphaRepr` for `Jo`
+- [lang4] concrete syntax
 - [lang4] primitive functions
 - [lang4] explicit control
-- [lang4] concrete syntax
+- [lang4] fix `Value` equal check
+  - `readback` for `Value` + `AlphaRepr` for `Jo`
