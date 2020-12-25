@@ -5,7 +5,6 @@ import { Mod } from "../mod"
 import { World } from "../world"
 
 export class JoJoCutValue implements Value {
-  kind = "JoJoCutValue"
   array: Array<Jo>
   env: Env
   mod: Mod

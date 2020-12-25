@@ -1,5 +1,3 @@
 import { Value } from "../value"
 
-export class TypeValue implements Value {
-  kind = "TypeValue"
-}
+export class TypeValue implements Value {}
