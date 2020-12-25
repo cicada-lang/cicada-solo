@@ -179,9 +179,6 @@
 # lang4
 
 - [lang4] `jos/` as class
-
 - [lang4] primitive functions
-
 - [lang4] explicit control
-
 - [lang4] concrete syntax
