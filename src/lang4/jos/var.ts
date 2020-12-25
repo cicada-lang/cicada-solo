@@ -20,5 +20,5 @@ const var_lookup = (name: string) => (world: World) => {
   const value = world.env.lookup(name) || world.mod.lookup_value(name)
   if (value === undefined) throw new Error(`undefined name ${name}`)
   if (value.refer) return value.refer(world)
-  return world.push(value)
+  return world.value_stack_push(value)
 }

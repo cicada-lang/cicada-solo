@@ -17,6 +17,6 @@ export function Let(name: string): Let {
 }
 
 const extend = (name: string) => (world: World) => {
-  const [value, next_world] = world.pop()
+  const [value, next_world] = world.value_stack_pop()
   return next_world.env_extend(name, value)
 }

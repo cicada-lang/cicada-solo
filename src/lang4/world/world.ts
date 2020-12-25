@@ -8,8 +8,8 @@ export type World = {
   env: Env
   mod: Mod
   value_stack: Stack<Value>
-  push: (value: Value) => World
-  pop: () => [Value, World]
+  value_stack_push: (value: Value) => World
+  value_stack_pop: () => [Value, World]
   env_extend: (name: string, value: Value) => World
   mod_extend: (name: string, triplex: Triplex) => World
 }
@@ -21,9 +21,9 @@ export function World(the: {
 }): World {
   return {
     ...the,
-    push: (value) =>
+    value_stack_push: (value) =>
       World({ ...the, value_stack: the.value_stack.push(value) }),
-    pop: () => [
+    value_stack_pop: () => [
       the.value_stack.tos(),
       World({ ...the, value_stack: the.value_stack.drop() }),
     ],

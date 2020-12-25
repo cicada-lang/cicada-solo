@@ -15,14 +15,14 @@ export function JoJo(array: Array<Jo>): JoJo {
     kind: "JoJo",
     array,
     compose: (world) =>
-      world.push(
+      world.value_stack_push(
         JoJoComposeValue(array, {
           env: world.env,
           mod: world.mod,
         })
       ),
     cut: (world) =>
-      world.push(
+      world.value_stack_push(
         JoJoCutValue(array, {
           env: world.env,
           mod: world.mod,

@@ -12,8 +12,8 @@ export function Quote(str: string): Quote {
   return {
     kind: "Quote",
     str,
-    compose: (world) => world.push(QuoteValue(str)),
-    cut: (world) => world.push(StrValue),
+    compose: (world) => world.value_stack_push(QuoteValue(str)),
+    cut: (world) => world.value_stack_push(StrValue),
     repr: () => `"${str}"`,
   }
 }
