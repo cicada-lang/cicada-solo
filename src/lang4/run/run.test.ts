@@ -23,6 +23,7 @@ import { Type } from "../jos"
         JoJo([Quote("a"), Quote("b"), Var("swap")]),
       ])
     ),
+    Show(JoJo([JoJo([Let("b"), Let("a"), Var("b"), Var("a")])])),
   ]
   console.log(run(stmts, world))
 }
