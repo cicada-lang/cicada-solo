@@ -14,5 +14,6 @@ export function Quote(str: string): Quote {
     str,
     compose: (world) => world.push(QuoteValue(str)),
     cut: (world) => world.push(StrValue),
+    repr: () => `"${str}"`,
   }
 }

@@ -12,6 +12,7 @@ export function Let(name: string): Let {
     name,
     compose: extend(name),
     cut: extend(name),
+    repr: () => `(${name})`,
   }
 }
 

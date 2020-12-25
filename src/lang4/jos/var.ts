@@ -12,6 +12,7 @@ export function Var(name: string): Var {
     name,
     compose: var_lookup(name),
     cut: var_lookup(name),
+    repr: () => name,
   }
 }
 

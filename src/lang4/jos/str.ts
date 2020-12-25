@@ -11,4 +11,5 @@ export const Str: Str = {
   kind: "Str",
   compose: (world) => world.push(StrValue),
   cut: (world) => world.push(TypeValue),
+  repr: () => "Str",
 }

@@ -28,6 +28,7 @@ export function JoJoComposeValue(
       }
       return world
     },
-    repr: () => "TODO",
+    repr: () =>
+      "#compose" + "[ " + array.map((jo) => jo.repr()).join(" ") + " ]",
   }
 }

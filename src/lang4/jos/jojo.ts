@@ -28,6 +28,7 @@ export function JoJo(array: Array<Jo>): JoJo {
           mod: world.mod,
         })
       ),
+    repr: () => "[ " + array.map((jo) => jo.repr()).join(" ") + "]",
     compose_jojo: (world) =>
       array.reduce((world, jo) => jo.compose(world), world),
     cut_jojo: (world) => array.reduce((world, jo) => jo.cut(world), world),
