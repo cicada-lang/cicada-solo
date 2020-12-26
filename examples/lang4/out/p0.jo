@@ -11,3 +11,20 @@ drop = [ (a) ]
 // apply = [ (f) f ]
 
 @show [ "a" "b" [ dup ] ]
+
+// (claim swap (-> 'A 'B -- 'B 'A))
+// (define swap (let b) (let a) b a)
+
+// (claim dup 'A -- 'A 'A)
+// (define dup (a) a a)
+
+// (claim dup 'A -- 'A 'A)
+// (define dup (a) a a)
+
+// drop : [ 'A ] [ ]
+// drop = [ (a) ]
+
+// // apply : [ 'A ('A -- 'B) ] [ 'B ]
+// // apply = [ (f) f ]
+
+// @show [ "a" "b" [ dup ] ]
