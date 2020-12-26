@@ -28,15 +28,15 @@ export function Define(
       if (
         // TODO fix this equal check
         !ut.equal(
-          JSON.stringify(infered.value_stack.stack),
-          JSON.stringify(expected.value_stack.stack)
+          JSON.stringify(infered.value_stack.values),
+          JSON.stringify(expected.value_stack.values)
         )
       ) {
         const message = "Define.check fail"
         console.log({
           message,
-          infered: infered.value_stack.stack,
-          expected: expected.value_stack.stack,
+          infered: infered.value_stack.values,
+          expected: expected.value_stack.values,
         })
         throw new Error(message)
       }
