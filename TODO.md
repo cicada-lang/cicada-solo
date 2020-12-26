@@ -1,3 +1,6 @@
+- [lang2] use `pt.trim_boundary`
+- [lang3] use `pt.trim_boundary`
+
 # main
 
 > To improve the design of our type system framework,

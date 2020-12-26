@@ -14,10 +14,8 @@ export function jo_matcher(tree: pt.Tree.Tree): Jo {
     "jo:arrow": ({ pre, post }) => Arrow(jojo_matcher(pre), jojo_matcher(post)),
     "jo:jojo": ({ jojo }) => jojo_matcher(jojo),
     "jo:str": (_) => Str,
-    "jo:str_lit": ({ value }) => {
-      const str = pt.Tree.str(value)
-      return StrLit(str.slice(1, str.length - 1))
-    },
+    "jo:str_lit": ({ value }) =>
+      StrLit(pt.trim_boundary(pt.Tree.str(value), 1)),
     "jo:sym": (_) => Sym,
     "jo:sym_lit": ({ value }) => SymLit(pt.Tree.str(value)),
     "jo:num": (_) => Num,
