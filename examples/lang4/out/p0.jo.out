@@ -2,4 +2,5 @@
 [  ]
 [ "a" "a" "a" ]
 [ "a" "a" ]
+[ 'a 'b #compose [ dup ] ]
 
