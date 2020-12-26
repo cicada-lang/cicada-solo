@@ -2,13 +2,13 @@ import { Value } from "../value"
 
 export type SymLitValue = Value & {
   kind: "SymLitValue"
-  str: string
+  sym: string
 }
 
-export function SymLitValue(str: string): SymLitValue {
+export function SymLitValue(sym: string): SymLitValue {
   return {
     kind: "SymLitValue",
-    str,
-    repr: () => `'${str}`,
+    sym,
+    repr: () => `'${sym}`,
   }
 }

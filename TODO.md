@@ -178,8 +178,6 @@
 
 # lang4
 
-- [lang4] `NumValue` & `NumLitValue`
-
 - [lang4] `Num` & `NumLit`
 
 - [lang4] explicit control
