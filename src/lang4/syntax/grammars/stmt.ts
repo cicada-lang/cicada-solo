@@ -9,7 +9,7 @@ export const stmt = {
       '"="',
       { jojo: "jojo" },
     ],
-    "stmt:show": ["@show", { jojo: "jojo" }],
+    "stmt:show": ['"@"', '"show"', { jojo: "jojo" }],
   },
 }
 

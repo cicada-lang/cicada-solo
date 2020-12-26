@@ -1,0 +1,2 @@
+swap : [ 'A 'B ] [ 'A 'B ]
+swap = [ (b) (a) b a ]

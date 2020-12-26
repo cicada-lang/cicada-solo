@@ -15,6 +15,7 @@ export function jo_matcher(tree: pt.Tree.Tree): Jo {
       const str = pt.Tree.str(value)
       return Quote(str.slice(1, str.length - 1))
     },
+    "jo:single_quote": ({ symbol }) => Quote(pt.Tree.str(symbol)),
     "jo:type": (_) => Type,
   })(tree)
 }

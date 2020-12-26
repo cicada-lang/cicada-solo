@@ -18,6 +18,7 @@ commands.test_all = async () => {
   await commands.test_lang1()
   await commands.test_lang2()
   await commands.test_lang3()
+  await commands.test_lang4()
   await commands.test_partech()
 }
 
@@ -106,6 +107,20 @@ commands.test_lang3 = async () => {
     "./bin/lang3.js run $file --module-root examples/lang3/example-project",
     { file: "examples/lang3/play.cic" },
     snapshot.out(({ file }) => file + ".out")
+  )
+}
+
+commands.test_lang4 = async () => {
+  await test(
+    "./bin/lang4.js $file",
+    { file: "examples/lang4/out/**.jo" },
+    snapshot.out(({ file }) => file + ".out")
+  )
+
+  await test(
+    "./bin/lang4.js $file",
+    { file: "examples/lang4/err/**.jo" },
+    snapshot.err(({ file }) => file + ".err")
   )
 }
 
