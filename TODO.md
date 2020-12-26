@@ -178,7 +178,8 @@
 
 # lang4
 
-- [lang4] concrete syntax
+- [lang4] syntax -- matchers
+- [lang4] syntax -- parse-stmt.ts
 - [lang4] primitive functions
 - [lang4] explicit control
 - [lang4] fix `Value` equal check
