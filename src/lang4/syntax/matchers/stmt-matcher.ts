@@ -1,6 +1,7 @@
 import * as pt from "../../../partech"
 import { Stmt } from "../../stmt"
-import { jo_matcher } from "./jo-matcher"
+import { Define, Show } from "../../stmts"
+import { jo_matcher, jojo_matcher } from "./jo-matcher"
 
 export function stmts_matcher(tree: pt.Tree.Tree): Array<Stmt> {
   return pt.Tree.matcher<Array<Stmt>>({
@@ -11,11 +12,22 @@ export function stmts_matcher(tree: pt.Tree.Tree): Array<Stmt> {
 
 export function stmt_matcher(tree: pt.Tree.Tree): Stmt {
   return pt.Tree.matcher<Stmt>({
-    "stmt:define": ({ claimed_name, pre, post, defined_name, jojo }) => {
-      throw new Error()
+    "stmt:define": ({ claimed, pre, post, defined, jojo }) => {
+      const claimed_name = pt.Tree.str(claimed)
+      const defined_name = pt.Tree.str(defined)
+      if (claimed_name !== defined_name) {
+        throw new Error(
+          `Mismatching names, claimed: ${claimed_name}, defined: ${defined_name}\n`
+        )
+      }
+      const name = claimed_name
+      return Define(
+        name,
+        jojo_matcher(pre),
+        jojo_matcher(post),
+        jojo_matcher(jojo)
+      )
     },
-    "stmt:show": ({ jojo }) => {
-      throw new Error()
-    },
+    "stmt:show": ({ jojo }) => Show(jojo_matcher(jojo)),
   })(tree)
 }
