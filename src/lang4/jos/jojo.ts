@@ -1,8 +1,7 @@
 import { Jo } from "../jo"
 import { Value } from "../value"
 import { World } from "../world"
-import { JoJoComposeValue } from "../values/jojo-compose-value"
-import { JoJoCutValue } from "../values/jojo-cut-value"
+import { JoJoComposeValue, JoJoCutValue } from "../values"
 
 export type JoJo = Jo & {
   kind: "JoJo"

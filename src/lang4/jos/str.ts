@@ -1,7 +1,7 @@
 import { Jo } from "../jo"
 import { World } from "../world"
-import { StrValue } from "../values/str-value"
-import { TypeValue } from "../values/type-value"
+import { StrValue } from "../values"
+import { TypeValue } from "../values"
 
 export type Str = Jo & {
   kind: "Str"

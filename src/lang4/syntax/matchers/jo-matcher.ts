@@ -2,7 +2,7 @@ import * as pt from "../../../partech"
 import { Jo } from "../../jo"
 import { Var, Let } from "../../jos"
 import { Arrow, JoJo } from "../../jos"
-import { Str, Quote } from "../../jos"
+import { Str, StrLit } from "../../jos"
 import { Type } from "../../jos"
 
 export function jo_matcher(tree: pt.Tree.Tree): Jo {
@@ -14,9 +14,9 @@ export function jo_matcher(tree: pt.Tree.Tree): Jo {
     "jo:str": (_) => Str,
     "jo:quote": ({ value }) => {
       const str = pt.Tree.str(value)
-      return Quote(str.slice(1, str.length - 1))
+      return StrLit(str.slice(1, str.length - 1))
     },
-    "jo:single_quote": ({ symbol }) => Quote(pt.Tree.str(symbol)),
+    "jo:single_quote": ({ symbol }) => StrLit(pt.Tree.str(symbol)),
     "jo:type": (_) => Type,
   })(tree)
 }

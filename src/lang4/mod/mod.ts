@@ -2,7 +2,7 @@ import { World } from "../world"
 import { JoJo } from "../jos/jojo"
 import { Value } from "../value"
 import { Env } from "../env"
-import { JoJoComposeValue } from "../values/jojo-compose-value"
+import { JoJoComposeValue } from "../values"
 
 export type Triplex = {
   pre: JoJo

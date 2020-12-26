@@ -1,7 +1,7 @@
 import { Jo } from "../jo"
 import { World } from "../world"
-import { TypeValue } from "../values/type-value"
-import { ArrowValue } from "../values/arrow-value"
+import { TypeValue } from "../values"
+import { ArrowValue } from "../values"
 import { JoJo } from "./jojo"
 
 export type Arrow = Jo & {
