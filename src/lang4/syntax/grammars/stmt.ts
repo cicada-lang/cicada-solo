@@ -1,15 +1,19 @@
 export const stmt = {
   $grammar: {
     "stmt:define": [
+      '"("',
+      '"claim"',
       { claimed: "identifier" },
-      '":"',
       { pre: "jojo" },
       { post: "jojo" },
+      '")"',
+      '"("',
+      '"define"',
       { defined: "identifier" },
-      '"="',
       { jojo: "jojo" },
+      '")"',
     ],
-    "stmt:show": ['"@"', '"show"', { jojo: "jojo" }],
+    "stmt:show": ['"("', '"show"', { jojo: "jojo" }, '")"'],
   },
 }
 

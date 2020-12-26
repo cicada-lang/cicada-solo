@@ -178,8 +178,10 @@
 
 # lang4
 
-- [lang4] more easy to design syntax
+- [lang4] fix Repr for Jo and Value
+
 - [lang4] we to be able to put pre & post in arrow type
+
 - [lang4] primitive functions
 - [lang4] explicit control
 - [lang4] fix `Value` equal check
