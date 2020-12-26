@@ -19,3 +19,9 @@
 @show [ 1 2 [ dup ] apply ]
 
 @show [ 3.14 dup ]
+
+// @claim id [ @arrow [ 'A ] [ 'B ] ] [ @arrow [ 'A ] [ 'B ] ]
+// @define id [ (f) [ f ] ]
+
+// @claim id [ 'A ] [ 'A ]
+// @define id [ (f) [ f ] ]
