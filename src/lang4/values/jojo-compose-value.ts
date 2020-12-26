@@ -1,17 +1,17 @@
-import { Jo } from "../jo"
 import { Value } from "../value"
 import { Env } from "../env"
 import { Mod } from "../mod"
+import { JoJo } from "../jos"
 
 export type JoJoComposeValue = Value & {
   kind: "JoJoComposeValue"
-  array: Array<Jo>
+  jojo: JoJo
   env: Env
   mod: Mod
 }
 
 export function JoJoComposeValue(
-  array: Array<Jo>,
+  jojo: JoJo,
   the: {
     env: Env
     mod: Mod
@@ -19,16 +19,10 @@ export function JoJoComposeValue(
 ): JoJoComposeValue {
   return {
     kind: "JoJoComposeValue",
-    array,
+    jojo,
     env: the.env,
     mod: the.mod,
-    refer: (world) => {
-      for (const jo of array) {
-        world = jo.compose(world)
-      }
-      return world
-    },
-    repr: () =>
-      "#compose " + "[ " + array.map((jo) => jo.repr()).join(" ") + " ]",
+    refer: (world) => jojo.jos_compose(world),
+    repr: () => "#compose " + jojo.repr(),
   }
 }

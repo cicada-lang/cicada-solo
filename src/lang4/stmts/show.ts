@@ -11,9 +11,9 @@ export function Show(jojo: JoJo): Show {
   return {
     jojo,
     assemble: (world) => world,
-    check: (world) => jojo.cut_jojo(world),
+    check: (world) => jojo.jos_cut(world),
     output: (world) => {
-      const { value_stack } = jojo.compose_jojo(world)
+      const { value_stack } = jojo.jos_compose(world)
       const values = [...value_stack.stack].reverse()
       return "[ " + values.map((value) => value.repr()).join(" ") + " ]" + "\n"
     },

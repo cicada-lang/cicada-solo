@@ -1,17 +1,17 @@
-import { Jo } from "../jo"
 import { Value } from "../value"
 import { Env } from "../env"
 import { Mod } from "../mod"
+import { JoJo } from "../jos"
 
 export type JoJoCutValue = Value & {
   kind: "JoJoCutValue"
-  array: Array<Jo>
+  jojo: JoJo
   env: Env
   mod: Mod
 }
 
 export function JoJoCutValue(
-  array: Array<Jo>,
+  jojo: JoJo,
   the: {
     env: Env
     mod: Mod
@@ -19,15 +19,10 @@ export function JoJoCutValue(
 ): JoJoCutValue {
   return {
     kind: "JoJoCutValue",
-    array,
+    jojo,
     env: the.env,
     mod: the.mod,
-    refer: (world) => {
-      for (const jo of array) {
-        world = jo.cut(world)
-      }
-      return world
-    },
-    repr: () => "#cut " + "[ " + array.map((jo) => jo.repr()).join(" ") + " ]",
+    refer: (world) => jojo.jos_cut(world),
+    repr: () => "#cut " + jojo.repr(),
   }
 }

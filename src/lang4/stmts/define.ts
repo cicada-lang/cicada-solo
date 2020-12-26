@@ -23,8 +23,8 @@ export function Define(
     jojo,
     assemble: (world) => world.mod_extend(name, { pre, post, jojo }),
     check: (world) => {
-      const infered = jojo.cut_jojo(pre.compose_jojo(world))
-      const expected = post.compose_jojo(world)
+      const infered = jojo.jos_cut(pre.jos_compose(world))
+      const expected = post.jos_compose(world)
       if (
         // TODO fix this equal check
         !ut.equal(
