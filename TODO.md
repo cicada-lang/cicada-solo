@@ -178,7 +178,7 @@
 
 # lang4
 
-- [lang4] fix syntax for arrow type
+- [lang4] `Sym` & `SingleQuote`
 - [lang4] primitive functions
 - [lang4] explicit control
 - [lang4] fix `Value` equal check

@@ -7,8 +7,10 @@
 @claim drop [ 'A ] [ ]
 @define drop [ (a) ]
 
-// @claim apply [ 'A @arrow [ 'A ] [ 'B ] ] [ 'B ]
-// @define apply [ (f) f ]
+@claim apply [ 'A @arrow [ 'A ] [ 'B ] ] [ 'B ]
+@define apply [ (f) f ]
 
 @show [ "a" "b" [ dup ] ]
-@show [ "a" [ (a) dup ] ]
+@show [ "a" [ drop ] apply ]
+@show [ "a" [ dup dup ] apply ]
+@show [ "a" "b" [ (_) dup ] apply ]

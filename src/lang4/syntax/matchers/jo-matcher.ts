@@ -1,7 +1,7 @@
 import * as pt from "../../../partech"
 import { Jo } from "../../jo"
 import { Var, Let } from "../../jos"
-import { JoJo } from "../../jos"
+import { Arrow, JoJo } from "../../jos"
 import { Str, Quote } from "../../jos"
 import { Type } from "../../jos"
 
@@ -9,6 +9,7 @@ export function jo_matcher(tree: pt.Tree.Tree): Jo {
   return pt.Tree.matcher<Jo>({
     "jo:var": ({ name }) => Var(pt.Tree.str(name)),
     "jo:let": ({ name }) => Let(pt.Tree.str(name)),
+    "jo:arrow": ({ pre, post }) => Arrow(jojo_matcher(pre), jojo_matcher(post)),
     "jo:jojo": ({ jojo }) => jojo_matcher(jojo),
     "jo:str": (_) => Str,
     "jo:quote": ({ value }) => {
