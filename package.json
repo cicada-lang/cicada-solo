@@ -20,6 +20,7 @@
     "lang1": "./bin/lang1.js",
     "lang2": "./bin/lang2.js",
     "lang3": "./bin/lang3.js",
+    "lang4": "./bin/lang4.js",
     "partech": "./bin/partech.js"
   },
   "devDependencies": {
