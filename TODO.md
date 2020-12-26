@@ -178,7 +178,7 @@
 
 # lang4
 
-- [lang4] syntax -- parse-stmt.ts
+- [lang4] cli
 - [lang4] primitive functions
 - [lang4] explicit control
 - [lang4] fix `Value` equal check
