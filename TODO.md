@@ -179,10 +179,7 @@
 # lang4
 
 - [lang4] `Value` -- `ArrowValue` -- `refer`
-- [lang4] `Jo` -- `Arrow` -- compose
-
 - [lang4] fix syntax for arrow type
-
 - [lang4] primitive functions
 - [lang4] explicit control
 - [lang4] fix `Value` equal check
