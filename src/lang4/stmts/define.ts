@@ -26,7 +26,7 @@ export function Define(
       const infered = jojo.jos_cut(pre.jos_compose(world))
       const expected = post.jos_compose(world)
       if (
-        // TODO fix this equal check
+        // TODO fix value_equal
         !ut.equal(
           JSON.stringify(infered.value_stack.values),
           JSON.stringify(expected.value_stack.values)

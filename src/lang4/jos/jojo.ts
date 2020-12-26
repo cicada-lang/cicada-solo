@@ -6,16 +6,16 @@ import { JoJoCutValue } from "../values/jojo-cut-value"
 
 export type JoJo = Jo & {
   kind: "JoJo"
-  array: Array<Jo>
+  jos: Array<Jo>
   jos_compose: (world: World) => World
   jos_cut: (world: World) => World
   collect_values: () => Array<Value>
 }
 
-export function JoJo(array: Array<Jo>): JoJo {
+export function JoJo(jos: Array<Jo>): JoJo {
   return {
     kind: "JoJo",
-    array,
+    jos,
     compose(world) {
       return world.value_stack_push(
         JoJoComposeValue(this, {
@@ -32,14 +32,20 @@ export function JoJo(array: Array<Jo>): JoJo {
         })
       )
     },
-    repr: () => "[ " + array.map((jo) => jo.repr()).join(" ") + " ]",
-    jos_compose: (world) =>
-      array.reduce((world, jo) => jo.compose(world), world),
-    jos_cut: (world) => array.reduce((world, jo) => jo.cut(world), world),
+    repr: () => "[ " + jos.map((jo) => jo.repr()).join(" ") + " ]",
+    jos_compose: jos_compose(jos),
+    jos_cut: jos_cut(jos),
     collect_values: () => {
-      const world = World.init()
-      // TODO
-      return []
-    }
+      const world = jos_compose(jos)(World.init())
+      return world.value_stack.values
+    },
   }
+}
+
+function jos_compose(jos: Array<Jo>): (world: World) => World {
+  return (world) => jos.reduce((world, jo) => jo.compose(world), world)
+}
+
+function jos_cut(jos: Array<Jo>): (world: World) => World {
+  return (world) => jos.reduce((world, jo) => jo.cut(world), world)
 }

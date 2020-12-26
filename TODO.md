@@ -178,8 +178,6 @@
 
 # lang4
 
-- [lang4] `JoJo` -- `collect_values`
-- [lang4] `Value` -- `ArrowValue` -- `refer`
 - [lang4] fix syntax for arrow type
 - [lang4] primitive functions
 - [lang4] explicit control
