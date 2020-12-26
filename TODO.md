@@ -178,8 +178,6 @@
 
 # lang4
 
-- [lang4] `Sym` & `SymLit`
-
 - [lang4] `NumValue` & `NumLitValue`
 
 - [lang4] `Num` & `NumLit`

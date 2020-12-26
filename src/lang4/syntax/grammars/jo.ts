@@ -5,8 +5,9 @@ export const jo = {
     "jo:arrow": ['"@"', '"arrow"', { pre: "jojo" }, { post: "jojo" }],
     "jo:jojo": [{ jojo: "jojo" }],
     "jo:str": ['"String"'],
-    "jo:quote": [{ value: { $pattern: ["string"] } }],
-    "jo:single_quote": ['"\'"', { symbol: "identifier" }],
+    "jo:str_lit": [{ value: { $pattern: ["string"] } }],
+    "jo:sym": ['"Symbol"'],
+    "jo:sym_lit": ['"\'"', { symbol: "identifier" }],
     "jo:type": ['"Type"'],
   },
 }

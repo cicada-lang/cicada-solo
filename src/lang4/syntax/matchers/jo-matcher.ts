@@ -3,6 +3,7 @@ import { Jo } from "../../jo"
 import { Var, Let } from "../../jos"
 import { Arrow, JoJo } from "../../jos"
 import { Str, StrLit } from "../../jos"
+import { Sym, SymLit } from "../../jos"
 import { Type } from "../../jos"
 
 export function jo_matcher(tree: pt.Tree.Tree): Jo {
@@ -12,11 +13,12 @@ export function jo_matcher(tree: pt.Tree.Tree): Jo {
     "jo:arrow": ({ pre, post }) => Arrow(jojo_matcher(pre), jojo_matcher(post)),
     "jo:jojo": ({ jojo }) => jojo_matcher(jojo),
     "jo:str": (_) => Str,
-    "jo:quote": ({ value }) => {
+    "jo:str_lit": ({ value }) => {
       const str = pt.Tree.str(value)
       return StrLit(str.slice(1, str.length - 1))
     },
-    "jo:single_quote": ({ symbol }) => StrLit(pt.Tree.str(symbol)),
+    "jo:sym": (_) => Sym,
+    "jo:sym_lit": ({ symbol }) => SymLit(pt.Tree.str(symbol)),
     "jo:type": (_) => Type,
   })(tree)
 }
