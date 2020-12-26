@@ -1,2 +1,3 @@
->>> "a" "b" #compose[ dup ]
+[ "a" "b" #compose [ dup ] ]
+[ "a" #compose [ (a) dup ] ]
 
