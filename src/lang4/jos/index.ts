@@ -1,5 +1,6 @@
 export * from "./var"
 export * from "./let"
+export * from "./arrow"
 export * from "./jojo"
 export * from "./str"
 export * from "./quote"

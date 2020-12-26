@@ -178,7 +178,10 @@
 
 # lang4
 
-- [lang4] we to be able to put pre & post in arrow type
+- [lang4] `Jo` -- `Arrow` -- compose
+- [lang4] `Jo` -- `Arrow` -- cut
+
+- [lang4] `Value` -- `ArrowValue`
 
 - [lang4] fix syntax for arrow type
 
