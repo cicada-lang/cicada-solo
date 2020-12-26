@@ -179,7 +179,6 @@
 # lang4
 
 - [lang4] `Jo` -- `Arrow` -- compose
-- [lang4] `Jo` -- `Arrow` -- cut
 
 - [lang4] `Value` -- `ArrowValue`
 
