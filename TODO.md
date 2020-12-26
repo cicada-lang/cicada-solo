@@ -178,9 +178,8 @@
 
 # lang4
 
+- [lang4] `Value` -- `ArrowValue` -- `refer`
 - [lang4] `Jo` -- `Arrow` -- compose
-
-- [lang4] `Value` -- `ArrowValue`
 
 - [lang4] fix syntax for arrow type
 
