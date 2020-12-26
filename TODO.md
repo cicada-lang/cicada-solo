@@ -178,7 +178,9 @@
 
 # lang4
 
-- [lang4] `Sym` & `SingleQuote`
+- [lang4] `LitStr` isntead of `Quote`
+- [lang4] `Num` & `LitNum`
+- [lang4] `Sym` & `LitSym`
 - [lang4] primitive functions
 - [lang4] explicit control
 - [lang4] fix `Value` equal check
