@@ -178,11 +178,7 @@
 
 # lang4
 
-- [lang4] `Num` & `NumLit`
-
-- [lang4] explicit control
-
-- [lang4] error report -- should not use `Trace`
-
-- [lang4] primitive functions
 - [lang4] fix `value_equal`
+- [lang4] explicit control
+- [lang4] error report -- should not use `Trace`
+- [lang4] primitive functions

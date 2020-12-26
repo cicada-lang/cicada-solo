@@ -7,7 +7,9 @@ export const jo = {
     "jo:str": ['"String"'],
     "jo:str_lit": [{ value: { $pattern: ["string"] } }],
     "jo:sym": ['"Symbol"'],
-    "jo:sym_lit": ['"\'"', { symbol: "identifier" }],
+    "jo:sym_lit": ['"\'"', { value: "identifier" }],
+    "jo:num": ['"Number"'],
+    "jo:num_lit": [{ value: { $pattern: ["number"] } }],
     "jo:type": ['"Type"'],
   },
 }

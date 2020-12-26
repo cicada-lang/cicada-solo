@@ -16,3 +16,6 @@
 @show [ "a" "b" [ (_) dup ] apply ]
 
 @show [ 'a 'b [ dup ] ]
+@show [ 1 2 [ dup ] apply ]
+
+@show [ 3.14 dup ]

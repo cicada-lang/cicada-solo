@@ -4,6 +4,7 @@ import { Var, Let } from "../../jos"
 import { Arrow, JoJo } from "../../jos"
 import { Str, StrLit } from "../../jos"
 import { Sym, SymLit } from "../../jos"
+import { Num, NumLit } from "../../jos"
 import { Type } from "../../jos"
 
 export function jo_matcher(tree: pt.Tree.Tree): Jo {
@@ -18,7 +19,9 @@ export function jo_matcher(tree: pt.Tree.Tree): Jo {
       return StrLit(str.slice(1, str.length - 1))
     },
     "jo:sym": (_) => Sym,
-    "jo:sym_lit": ({ symbol }) => SymLit(pt.Tree.str(symbol)),
+    "jo:sym_lit": ({ value }) => SymLit(pt.Tree.str(value)),
+    "jo:num": (_) => Num,
+    "jo:num_lit": ({ value }) => NumLit(Number.parseFloat(pt.Tree.str(value))),
     "jo:type": (_) => Type,
   })(tree)
 }
