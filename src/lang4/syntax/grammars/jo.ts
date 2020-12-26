@@ -11,6 +11,6 @@ export const jo = {
 
 export const jojo = {
   $grammar: {
-    "jojo:jojo": ["[", { $ap: ["zero_or_more", "jo"] }, "]"],
+    "jojo:jojo": ["[", { jos: { $ap: ["zero_or_more", "jo"] } }, "]"],
   },
 }

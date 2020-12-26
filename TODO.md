@@ -178,7 +178,6 @@
 
 # lang4
 
-- [lang4] syntax -- matchers
 - [lang4] syntax -- parse-stmt.ts
 - [lang4] primitive functions
 - [lang4] explicit control
