@@ -12,3 +12,4 @@
 // (define apply [(let f) f])
 
 (show ["a" "b" [dup]])
+(show ["a" [(let a) dup]])
