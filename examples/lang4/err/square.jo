@@ -1,2 +1,2 @@
-(claim swap ['A 'B] ['A 'B])
-(define swap [(let b) (let a) b a])
+@claim swap [ 'A 'B ] [ 'A 'B ]
+@define swap [ (b) (a) b a ]

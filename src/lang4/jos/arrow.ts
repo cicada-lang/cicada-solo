@@ -21,9 +21,9 @@ export function Arrow(pre: Array<Jo>, post: Array<Jo>): Arrow {
       throw new Error("TODO")
     },
     repr: () => {
-      const pre_repr = "[" + pre.map((jo) => jo.repr()).join(" ") + "]"
-      const post_repr = "[" + post.map((jo) => jo.repr()).join(" ") + "]"
-      return "(-> " + pre_repr + " " + post_repr + ")"
+      const pre_repr = "[ " + pre.map((jo) => jo.repr()).join(" ") + " ]"
+      const post_repr = "[ " + post.map((jo) => jo.repr()).join(" ") + " ]"
+      return "@arrow " + pre_repr + " " + post_repr
     },
   }
 }

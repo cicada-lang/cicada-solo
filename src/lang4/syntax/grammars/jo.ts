@@ -1,7 +1,7 @@
 export const jo = {
   $grammar: {
     "jo:var": [{ name: "identifier" }],
-    "jo:let": ['"("', '"let"', { name: "identifier" }, '")"'],
+    "jo:let": ['"("', { name: "identifier" }, '")"'],
     "jo:jojo": [{ jojo: "jojo" }],
     "jo:str": ['"String"'],
     "jo:quote": [{ value: { $pattern: ["string"] } }],

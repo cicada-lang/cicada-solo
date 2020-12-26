@@ -29,6 +29,6 @@ export function JoJoCutValue(
       return world
     },
     repr: () =>
-      "(#cut " + "[" + array.map((jo) => jo.repr()).join(" ") + "]" + ")",
+      "#cut " + "[ " + array.map((jo) => jo.repr()).join(" ") + " ]",
   }
 }
