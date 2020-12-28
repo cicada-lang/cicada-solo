@@ -29,5 +29,26 @@
 // @claim unit [ T: Type, x: T ] [ T List ]
 // @define unit [ (x) @list [ x ] ]
 
-// @claim map [ A: Type, B: Type, A List, [ A -> B ] -> B List ]
-// @define unit [ (x) @list [ x ] ]
+// @claim map [ 'A List, [ 'A -> 'B ] -> 'B List ]
+// @define map [ (x) @list [ x ] ]
+
+// @datatype List [ A: Type -> Type ] {
+//   null [ A List ]
+//   cons [ A List, A -> A List ]
+// }
+
+// @claim List.append [ A List, A List -> A List ]
+// @define List.append [
+//   (y) @match {
+//     List.null [ y ]
+//     List.cons [ (head) (tail) y tail List.append head List.cons ]
+//   }
+// ]
+
+// @claim List.map [ A List, [ A -> B ] -> B List ]
+// @define List.map [
+//   (f) (x) x @match {
+//     List.null [ x ]
+//     List.cons [ (head) [f] List.map head f List.cons ]
+//   }
+// ]

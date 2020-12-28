@@ -181,7 +181,11 @@
 
 # lang4
 
+- [lang4] local variable need `!` to be applied
+
 - what is dependent type in jojo?
+  - we do not need to infer function type
+
 - why simple type + type as value is not useful?
 
 - [lang4] extract `Value.equal`
