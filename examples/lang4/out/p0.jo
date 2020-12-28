@@ -25,3 +25,9 @@
 
 // @claim id [ 'A ] [ 'A ]
 // @define id [ (f) [ f ] ]
+
+// @claim unit [ T: Type, x: T ] [ T List ]
+// @define unit [ (x) @list [ x ] ]
+
+// @claim map [ A: Type, B: Type, A List, [ A -> B ] -> B List ]
+// @define unit [ (x) @list [ x ] ]

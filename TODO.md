@@ -181,6 +181,9 @@
 
 # lang4
 
+- what is dependent type in jojo?
+- why simple type + type as value is not useful?
+
 - [lang4] extract `Value.equal`
 - [lang4] fix `Value.equal`
 - [lang4] explicit control
