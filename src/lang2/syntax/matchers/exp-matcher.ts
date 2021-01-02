@@ -68,10 +68,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     "exp:absurd_ind": ({ target, motive }) =>
       AbsurdInd(exp_matcher(target), exp_matcher(motive)),
     "exp:str": () => Str,
-    "exp:quote": ({ value }) => {
-      const str = pt.Tree.str(value)
-      return Quote(str.slice(1, str.length - 1))
-    },
+    "exp:quote": ({ value }) => Quote(pt.trim_boundary(pt.Tree.str(value), 1)),
     "exp:type": () => Type,
     "exp:begin": ({ stmts, ret }) =>
       Begin(stmts_matcher(stmts), exp_matcher(ret)),
