@@ -178,7 +178,6 @@
 
 # lang4
 
-- [lang4] syntax for `Execute`
 - [lang4] no `refer` in `Var`
 
 - [lang4] local variable need `!` to be applied

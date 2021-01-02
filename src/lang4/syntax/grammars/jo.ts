@@ -4,6 +4,7 @@ export const jo = {
     "jo:let": ['"("', { name: "identifier" }, '")"'],
     "jo:arrow": ['"@"', '"arrow"', { pre: "jojo" }, { post: "jojo" }],
     "jo:jojo": [{ jojo: "jojo" }],
+    "jo:execute": ['"!"'],
     "jo:str": ['"String"'],
     "jo:str_lit": [{ value: { $pattern: ["string"] } }],
     "jo:sym": ['"Symbol"'],
