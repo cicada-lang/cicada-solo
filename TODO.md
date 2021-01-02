@@ -178,7 +178,11 @@
 
 # lang4
 
+- [lang4] `Execute`
+- [lang4] inline `Referent`
+- [lang4] syntax for Execute
 - [lang4] local variable need `!` to be applied
+- [lang4] [refactoring] renaming `Stmt` to `Decl`
 
 - what is dependent type in jojo?
   - we do not need to infer function type
