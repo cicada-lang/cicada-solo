@@ -27,18 +27,18 @@
 // @claim id [ 'A ] [ 'A ]
 // @define id [ (f) f ]
 
-// @claim unit [ T: Type, x: T ] [ T List ]
+// @claim unit [ T: Type x: T ] [ T List ]
 // @define unit [ (x) @list [ x ] ]
 
-// @claim map [ 'A List, [ 'A -> 'B ] -> 'B List ]
+// @claim map [ 'A List [ 'A -> 'B ] -> 'B List ]
 // @define map [ (x) @list [ x ] ]
 
 // @datatype List [ A: Type -> Type ] {
 //   null [ A List ]
-//   cons [ A List, A -> A List ]
+//   cons [ A List A -> A List ]
 // }
 
-// @claim List.append [ A List, A List -> A List ]
+// @claim List.append [ A List A List -> A List ]
 // @define List.append [
 //   (y) @match {
 //     List.null [ y ]
@@ -46,7 +46,7 @@
 //   }
 // ]
 
-// @claim List.map [ A List, [ A -> B ] -> B List ]
+// @claim List.map [ A List [ A -> B ] -> B List ]
 // @define List.map [
 //   (f) (x) x @match {
 //     List.null [ x ]

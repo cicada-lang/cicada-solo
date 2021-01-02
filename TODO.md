@@ -178,13 +178,17 @@
 
 # lang4
 
-- what is dependent type in jojo?
-  - we do not need to infer function type
-
-- why simple type + type as value is not useful?
-
+- [lang4] improve syntax of arrow
 - [lang4] extract `Value.equal`
 - [lang4] fix `Value.equal`
 - [lang4] explicit control
 - [lang4] error report -- should not use `Trace`
 - [lang4] primitive functions
+
+> questions
+
+- what is dependent type in jojo?
+  - note that, we do not need to infer function type.
+
+- why simple type + type as value is not useful?
+  - maybe it is still useful, just no dependent type at run time.
