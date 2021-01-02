@@ -178,7 +178,6 @@
 
 # lang4
 
-- [lang4] local variable need `!` to be applied
 - [lang4] [refactoring] renaming `Stmt` to `Decl`
 
 - what is dependent type in jojo?
