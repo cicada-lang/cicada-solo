@@ -2,6 +2,6 @@ import { World } from "../world"
 import { Repr } from "../repr"
 
 export type Value = Repr & {
-  refer?: (world: World) => World
+  execute?: (world: World) => World
   kind: string
 }
