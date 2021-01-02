@@ -26,6 +26,11 @@
 
 @show [ [ 'A 'B -> 'A 'B ] ]
 
+@claim one [ -> Number ]
+@define one [ 1 ]
+
+@show [ one ]
+
 // @claim id [ 'A -> 'A ]
 // @define id [ (f) f ]
 
