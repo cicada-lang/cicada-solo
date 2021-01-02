@@ -178,7 +178,7 @@
 
 # lang4
 
-- [lang4] no `refer` in `Var`
+- [lang4] [refactoring] renaming `refer` to `execute`
 
 - [lang4] local variable need `!` to be applied
 - [lang4] [refactoring] renaming `Stmt` to `Decl`

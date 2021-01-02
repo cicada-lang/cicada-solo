@@ -8,11 +8,12 @@
 @define drop [ (a) ]
 
 @claim apply [ 'A @arrow [ 'A ] [ 'B ] ] [ 'B ]
-@define apply [ (f) f ]
+@define apply [ (f) f! ]
 
 @show [ "a" "b" [ dup ] ]
 @show [ "a" [ drop ] apply ]
 @show [ "a" [ dup dup ] apply ]
+@show [ "a" [ dup dup ] ! ]
 @show [ "a" "b" [ (_) dup ] apply ]
 
 @show [ 'a 'b [ dup ] ]
@@ -20,11 +21,11 @@
 
 @show [ 3.14 dup ]
 
-// @claim id [ @arrow [ 'A ] [ 'B ] ] [ @arrow [ 'A ] [ 'B ] ]
-// @define id [ (f) [ f ] ]
+@claim id [ @arrow [ 'A ] [ 'B ] ] [ @arrow [ 'A ] [ 'B ] ]
+@define id [ (f) f ]
 
 // @claim id [ 'A ] [ 'A ]
-// @define id [ (f) [ f ] ]
+// @define id [ (f) f ]
 
 // @claim unit [ T: Type, x: T ] [ T List ]
 // @define unit [ (x) @list [ x ] ]

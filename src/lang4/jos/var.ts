@@ -17,11 +17,12 @@ export function Var(name: string): Var {
 }
 
 const var_lookup = (name: string) => (world: World) => {
-  const value = world.env.lookup(name) || world.mod.lookup_value(name)
-  if (value === undefined) {
+  const local_value = world.env.lookup(name)
+  if (local_value) return world.value_stack_push(local_value)
+  const global_value = world.mod.lookup_value(name)
+  if (global_value === undefined) {
     console.log(world)
     throw new Error(`undefined name ${name}`)
   }
-  if (value.refer) return value.refer(world)
-  return world.value_stack_push(value)
+  return global_value.refer!(world)
 }
