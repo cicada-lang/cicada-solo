@@ -178,8 +178,6 @@
 
 # lang4
 
-- [lang4] [refactoring] renaming `Stmt` to `Decl`
-
 - what is dependent type in jojo?
   - we do not need to infer function type
 

@@ -1,6 +1,6 @@
 import { run } from "../run"
 import { World } from "../world"
-import { Define, Show } from "../stmts"
+import { Define, Show } from "../decls"
 import { Var, Let } from "../jos"
 import { JoJo } from "../jos"
 import { Str, StrLit } from "../jos"
@@ -8,7 +8,7 @@ import { Type } from "../jos"
 
 {
   const world = World.init()
-  const stmts = [
+  const decls = [
     Define(
       "swap",
       JoJo([StrLit("A"), StrLit("B")]),
@@ -25,5 +25,5 @@ import { Type } from "../jos"
     ),
     Show(JoJo([JoJo([Let("b"), Let("a"), Var("b"), Var("a")])])),
   ]
-  console.log(run(stmts, world))
+  console.log(run(decls, world))
 }

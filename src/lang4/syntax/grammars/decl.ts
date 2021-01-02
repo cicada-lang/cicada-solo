@@ -1,6 +1,6 @@
-export const stmt = {
+export const decl = {
   $grammar: {
-    "stmt:define": [
+    "decl:define": [
       '"@"',
       '"claim"',
       { claimed: "identifier" },
@@ -11,12 +11,12 @@ export const stmt = {
       { defined: "identifier" },
       { jojo: "jojo" },
     ],
-    "stmt:show": ['"@"', '"show"', { jojo: "jojo" }],
+    "decl:show": ['"@"', '"show"', { jojo: "jojo" }],
   },
 }
 
-export const stmts = {
+export const decls = {
   $grammar: {
-    "stmts:stmts": [{ stmts: { $ap: ["zero_or_more", "stmt"] } }],
+    "decls:decls": [{ decls: { $ap: ["zero_or_more", "decl"] } }],
   },
 }

@@ -1,9 +1,9 @@
-import { Stmt } from "../stmt"
+import { Decl } from "../decl"
 import { World } from "../world"
 import { JoJo } from "../jos/jojo"
 import * as ut from "../../ut"
 
-export type Show = Stmt & {
+export type Show = Decl & {
   jojo: JoJo
 }
 

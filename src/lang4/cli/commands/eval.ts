@@ -1,5 +1,5 @@
 import * as Syntax from "../../syntax"
-import { Stmt } from "../../stmt"
+import { Decl } from "../../decl"
 import { run } from "../../run"
 import { World } from "../../world"
 import * as Trace from "../../../trace"
@@ -26,9 +26,9 @@ export const handler = async (argv: Argv) => {
   const text = fs.readFileSync(argv.input, { encoding: "utf-8" })
 
   try {
-    const stmts = Syntax.parse_stmts(text)
+    const decls = Syntax.parse_decls(text)
     const world = World.init()
-    const output = run(stmts, world)
+    const output = run(decls, world)
     if (output) console.log(output)
   } catch (error) {
     if (error instanceof pt.ParsingError) {
