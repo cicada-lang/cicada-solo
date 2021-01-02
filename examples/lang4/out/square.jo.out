@@ -1,4 +1,4 @@
 [ "a" "b" ]
-[ "a" "b" #compose [ (b) (a) b a ] ]
-[ "a" "b" #compose [ (b) (a) b a ] #compose [ (a) a a ] #compose [ (a) a a ] #compose [ (a) a a ] ]
+[ "b" "a" ]
+[ "b" "a" "a" "a" "a" ]
 
