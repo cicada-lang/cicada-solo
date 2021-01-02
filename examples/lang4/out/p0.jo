@@ -24,6 +24,8 @@
 @claim id [ [ 'A -> 'B ] -> [ 'A -> 'B ] ]
 @define id [ (f) f ]
 
+@show [ [ 'A 'B -> 'A 'B ] ]
+
 // @claim id [ 'A -> 'A ]
 // @define id [ (f) f ]
 
