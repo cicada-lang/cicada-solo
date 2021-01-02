@@ -2,7 +2,7 @@ export const jo = {
   $grammar: {
     "jo:var": [{ name: "identifier" }],
     "jo:let": ['"("', { name: "identifier" }, '")"'],
-    "jo:arrow": ['"@"', '"arrow"', { pre: "jojo" }, { post: "jojo" }],
+    "jo:arrow": ['"["', { pre: "jos" }, '"-"', '">"', { post: "jos" }, '"]"'],
     "jo:jojo": [{ jojo: "jojo" }],
     "jo:execute": ['"!"'],
     "jo:str": ['"String"'],
@@ -15,8 +15,14 @@ export const jo = {
   },
 }
 
+export const jos = {
+  $grammar: {
+    "jos:jos": [{ jos: { $ap: ["zero_or_more", "jo"] } }],
+  },
+}
+
 export const jojo = {
   $grammar: {
-    "jojo:jojo": ['"["', { jos: { $ap: ["zero_or_more", "jo"] } }, '"]"'],
+    "jojo:jojo": ['"["', { jos: "jos" }, '"]"'],
   },
 }

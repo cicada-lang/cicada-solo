@@ -1,13 +1,13 @@
-@claim swap [ 'A 'B ] [ 'B 'A ]
+@claim swap [ 'A 'B -> 'B 'A ]
 @define swap [ (b) (a) b a ]
 
-@claim dup [ 'A ] [ 'A 'A ]
+@claim dup [ 'A -> 'A 'A ]
 @define dup [ (a) a a ]
 
-@claim drop [ 'A ] [ ]
+@claim drop [ 'A -> ]
 @define drop [ (a) ]
 
-@claim apply [ 'A @arrow [ 'A ] [ 'B ] ] [ 'B ]
+@claim apply [ 'A [ 'A -> 'B ] -> 'B ]
 @define apply [ (f) f! ]
 
 @show [ "a" "b" [ dup ] ]
@@ -21,13 +21,13 @@
 
 @show [ 3.14 dup ]
 
-@claim id [ @arrow [ 'A ] [ 'B ] ] [ @arrow [ 'A ] [ 'B ] ]
+@claim id [ [ 'A -> 'B ] -> [ 'A -> 'B ] ]
 @define id [ (f) f ]
 
-// @claim id [ 'A ] [ 'A ]
+// @claim id [ 'A -> 'A ]
 // @define id [ (f) f ]
 
-// @claim unit [ T: Type x: T ] [ T List ]
+// @claim unit [ T: Type x: T -> T List ]
 // @define unit [ (x) @list [ x ] ]
 
 // @claim map [ 'A List [ 'A -> 'B ] -> 'B List ]

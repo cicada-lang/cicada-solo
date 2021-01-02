@@ -11,7 +11,8 @@ export function jo_matcher(tree: pt.Tree.Tree): Jo {
   return pt.Tree.matcher<Jo>({
     "jo:var": ({ name }) => Var(pt.Tree.str(name)),
     "jo:let": ({ name }) => Let(pt.Tree.str(name)),
-    "jo:arrow": ({ pre, post }) => Arrow(jojo_matcher(pre), jojo_matcher(post)),
+    "jo:arrow": ({ pre, post }) =>
+      Arrow(JoJo(jos_matcher(pre)), JoJo(jos_matcher(post))),
     "jo:jojo": ({ jojo }) => jojo_matcher(jojo),
     "jo:execute": (_) => Execute,
     "jo:str": (_) => Str,
@@ -25,9 +26,15 @@ export function jo_matcher(tree: pt.Tree.Tree): Jo {
   })(tree)
 }
 
+export function jos_matcher(tree: pt.Tree.Tree): Array<Jo> {
+  return pt.Tree.matcher<Array<Jo>>({
+    "jos:jos": ({ jos }) =>
+      pt.matchers.zero_or_more_matcher(jos).map(jo_matcher),
+  })(tree)
+}
+
 export function jojo_matcher(tree: pt.Tree.Tree): JoJo {
   return pt.Tree.matcher<JoJo>({
-    "jojo:jojo": ({ jos }) =>
-      JoJo(pt.matchers.zero_or_more_matcher(jos).map(jo_matcher)),
+    "jojo:jojo": ({ jos }) => JoJo(jos_matcher(jos)),
   })(tree)
 }

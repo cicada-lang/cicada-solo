@@ -23,6 +23,6 @@ export function Arrow(pre: JoJo, post: JoJo): Arrow {
         })
       ),
     cut: (world) => world.value_stack_push(TypeValue),
-    repr: () => "@arrow " + pre.repr() + " " + post.repr(),
+    repr: () => "[ " + pre.repr() + " -> " + post.repr() + " ]",
   }
 }

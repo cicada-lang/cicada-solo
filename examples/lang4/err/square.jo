@@ -1,2 +1,2 @@
-@claim swap [ 'A 'B ] [ 'A 'B ]
+@claim swap [ 'A 'B -> 'A 'B ]
 @define swap [ (b) (a) b a ]

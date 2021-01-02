@@ -1,7 +1,8 @@
 import * as pt from "../../../partech"
 import { Decl } from "../../decl"
 import { Define, Show } from "../../decls"
-import { jo_matcher, jojo_matcher } from "./jo-matcher"
+import { JoJo } from "../../jos"
+import { jo_matcher, jos_matcher, jojo_matcher } from "./jo-matcher"
 
 export function decls_matcher(tree: pt.Tree.Tree): Array<Decl> {
   return pt.Tree.matcher<Array<Decl>>({
@@ -23,8 +24,8 @@ export function decl_matcher(tree: pt.Tree.Tree): Decl {
       const name = claimed_name
       return Define(
         name,
-        jojo_matcher(pre),
-        jojo_matcher(post),
+        JoJo(jos_matcher(pre)),
+        JoJo(jos_matcher(post)),
         jojo_matcher(jojo)
       )
     },
