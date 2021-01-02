@@ -187,6 +187,12 @@
 
 > questions
 
+- lambda calculus has a equational theory,
+  what is the equational the for jojo?
+  - maybe we should not use
+    the classic semantic framework of lambda calculus
+    to understand the semantic of jojo
+
 - what is dependent type in jojo?
   - note that, we do not need to infer function type.
 
