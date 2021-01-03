@@ -7,17 +7,17 @@
 @claim drop [ 'A -> ]
 @define drop [ (a) ]
 
-@claim apply [ 'A [ 'A -> 'B ] -> 'B ]
-@define apply [ (f) f! ]
+@claim execute [ 'A [ 'A -> 'B ] -> 'B ]
+@define execute [ (f) f! ]
 
 @show [ "a" "b" [ dup ] ]
-@show [ "a" [ drop ] apply ]
-@show [ "a" [ dup dup ] apply ]
+@show [ "a" [ drop ] execute ]
+@show [ "a" [ dup dup ] execute ]
 @show [ "a" [ dup dup ] ! ]
-@show [ "a" "b" [ (_) dup ] apply ]
+@show [ "a" "b" [ (_) dup ] execute ]
 
 @show [ 'a 'b [ dup ] ]
-@show [ 1 2 [ dup ] apply ]
+@show [ 1 2 [ dup ] execute ]
 
 @show [ 3.14 dup ]
 
