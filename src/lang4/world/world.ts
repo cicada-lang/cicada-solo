@@ -1,5 +1,5 @@
 import { Stack } from "../stack"
-import { Value } from "../value"
+import { Value, value_equal } from "../value"
 import { JoJo } from "../jos/jojo"
 import { Env } from "../env"
 import { Mod, Triplex } from "../mod"
@@ -33,10 +33,7 @@ export function World(the: {
       World({
         ...the,
         value_stack: [...values].reverse().reduce((value_stack, value) => {
-          if (
-            // TODO fix value_equal
-            !ut.equal(JSON.stringify(value_stack.tos()), JSON.stringify(value))
-          ) {
+          if (!value_equal(value_stack.tos(), value)) {
             const message = "World.value_stack_match_values fail"
             console.log({
               message,

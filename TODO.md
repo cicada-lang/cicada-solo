@@ -178,11 +178,11 @@
 
 # lang4
 
-- [lang4] extract `Value.equal`
-- [lang4] fix `Value.equal`
+- [lang4] extract `array_equal`
 - [lang4] explicit control
 - [lang4] error report -- should not use `Trace`
 - [lang4] primitive functions
+- [lang4] improve `Value.equal`
 
 > questions
 
