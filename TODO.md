@@ -178,7 +178,10 @@
 
 # lang4
 
+> OOP
+
 - [lang4] primitive functions
+- [lang4] `@class`
 - [lang4] `@list [...]`
 
 > maybe
