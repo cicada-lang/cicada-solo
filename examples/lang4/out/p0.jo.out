@@ -1,11 +1,11 @@
-"a" "b" #compose [ dup ]
-
-"a" "a" "a"
-"a" "a" "a"
-"a" "a"
-'a 'b #compose [ dup ]
-1 2 2
-3.14 3.14
-[ [ 'A 'B ] -> [ 'A 'B ] ]
-1
+[ "a" "b" #compose [ dup ] ]
+[  ]
+[ "a" "a" "a" ]
+[ "a" "a" "a" ]
+[ "a" "a" ]
+[ 'a 'b #compose [ dup ] ]
+[ 1 2 2 ]
+[ 3.14 3.14 ]
+[ [ 'A 'B -> 'A 'B ] ]
+[ 1 ]
 
