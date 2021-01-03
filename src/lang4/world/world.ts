@@ -11,6 +11,7 @@ export type World = {
   value_stack_push: (value: Value) => World
   value_stack_pop: () => [Value, World]
   value_stack_match_values: (values: Array<Value>) => World
+  values: Array<Value>
   env_extend: (name: string, value: Value) => World
   mod_extend: (name: string, triplex: Triplex) => World
 }
@@ -44,6 +45,7 @@ export function World(the: {
           return value_stack.drop()
         }, the.value_stack),
       }),
+    values: the.value_stack.values,
     env_extend: (name, value) =>
       World({ ...the, env: the.env.extend(name, value) }),
     mod_extend: (name, triplex) =>

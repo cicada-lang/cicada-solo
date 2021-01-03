@@ -36,7 +36,7 @@ export function JoJo(jos: Array<Jo>): JoJo {
     jos_cut: jos_cut(jos),
     collect_values: () => {
       const world = jos_compose(jos)(World.init())
-      return world.value_stack.values
+      return world.values
     },
   }
 }

@@ -13,8 +13,8 @@ export function Show(jojo: JoJo): Show {
     assemble: (world) => world,
     check: (world) => jojo.jos_cut(world),
     output: (world) => {
-      const { value_stack } = jojo.jos_compose(world)
-      const values = [...value_stack.values].reverse()
+      const next = jojo.jos_compose(world)
+      const values = [...next.values].reverse()
       return "[ " + values.map((value) => value.repr()).join(" ") + " ]" + "\n"
     },
   }
