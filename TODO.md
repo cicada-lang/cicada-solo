@@ -182,6 +182,7 @@
 - [lang4] error report -- should not use `Trace`
 - [lang4] primitive functions
 - [lang4] improve `Value.equal`
+- [lang4] `@list [...]`
 
 > questions
 

@@ -27,18 +27,17 @@ export function Define(
       const infered = jojo.jos_cut(pre.jos_compose(world))
       const expected = post.jos_compose(world)
       if (!ut.array_equal(infered.values, expected.values, value_equal)) {
-        const message = "Define.check fail"
-        console.log(
-          JSON.stringify(
-            {
-              message,
-              infered: infered.values,
-              expected: expected.values,
-            },
-            null,
-            2
-          )
+        const message = "[Define.check] fail"
+        const report = JSON.stringify(
+          {
+            message,
+            infered: infered.values,
+            expected: expected.values,
+          },
+          null,
+          2
         )
+        console.log(report)
         throw new Error(message)
       }
     },
