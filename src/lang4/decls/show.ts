@@ -12,10 +12,13 @@ export function Show(jojo: JoJo): Show {
     jojo,
     assemble: (world) => world,
     check: (world) => jojo.jos_cut(world),
-    output: (world) => {
-      const next = jojo.jos_compose(world)
-      const values = [...next.values].reverse()
-      return "[ " + values.map((value) => value.repr()).join(" ") + " ]" + "\n"
-    },
+    output: (world) =>
+      "[ " +
+      [...jojo.jos_compose(world).values]
+        .reverse()
+        .map((value) => value.repr())
+        .join(" ") +
+      " ]" +
+      "\n",
   }
 }
