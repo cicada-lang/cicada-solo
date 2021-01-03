@@ -27,6 +27,11 @@ export function ArrowValue(
     mod: the.mod,
     execute: (world) =>
       post.jos_compose(world.value_stack_match_values(pre.collect_values())),
-    repr: () => "[ " + pre.repr() + " -> " + post.repr() + " ]",
+    repr: () =>
+      "[ " +
+      pre.jos.map((jo) => jo.repr()).join(" ") +
+      " -> " +
+      post.jos.map((jo) => jo.repr()).join(" ") +
+      " ]",
   }
 }
