@@ -3,7 +3,6 @@ import { Value, value_equal } from "../value"
 import { JoJo } from "../jos/jojo"
 import { Env } from "../env"
 import { Mod, Triplex } from "../mod"
-import * as ut from "../../ut"
 
 export type World = {
   env: Env

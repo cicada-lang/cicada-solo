@@ -1,4 +1,6 @@
 export * from "./equal"
+export * from "./zip"
+export * from "./array-equal"
 export * from "./string-predicate"
 export * from "./inspect"
 export * from "./println"

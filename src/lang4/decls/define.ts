@@ -1,5 +1,6 @@
 import { Decl } from "../decl"
 import { World } from "../world"
+import { value_equal } from "../value"
 import { JoJo } from "../jos/jojo"
 import * as ut from "../../ut"
 
@@ -27,9 +28,10 @@ export function Define(
       const expected = post.jos_compose(world)
       if (
         // TODO fix value_equal
-        !ut.equal(
-          JSON.stringify(infered.value_stack.values),
-          JSON.stringify(expected.value_stack.values)
+        !ut.array_equal(
+          infered.value_stack.values,
+          expected.value_stack.values,
+          value_equal
         )
       ) {
         const message = "Define.check fail"
