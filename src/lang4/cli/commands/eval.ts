@@ -2,6 +2,7 @@ import * as Syntax from "../../syntax"
 import { Decl } from "../../decl"
 import { run } from "../../run"
 import { World } from "../../world"
+import { TypeCheckError } from "../../errors"
 import * as Trace from "../../../trace"
 import * as pt from "../../../partech"
 import fs from "fs"
@@ -31,6 +32,12 @@ export const handler = async (argv: Argv) => {
     const output = run(decls, world)
     if (output) console.log(output)
   } catch (error) {
+    if (error instanceof TypeCheckError) {
+      const message = error.message
+      console.error(argv.nocolor ? strip_ansi(message) : message)
+      process.exit(1)
+    }
+
     if (error instanceof pt.ParsingError) {
       let message = error.message
       message += "\n"
@@ -38,6 +45,7 @@ export const handler = async (argv: Argv) => {
       console.error(argv.nocolor ? strip_ansi(message) : message)
       process.exit(1)
     }
+
     throw error
   }
 }
