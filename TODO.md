@@ -179,9 +179,12 @@
 # lang4
 
 - [lang4] primitive functions
-- [lang4] improve `Value.equal`
 - [lang4] `@list [...]`
+
+> maybe
+
 - [lang4] explicit control
+- [lang4] improve `Value.equal`
 
 > questions
 
