@@ -7,8 +7,8 @@ Options:
   --version  Show version number                                       [boolean]
   --nocolor                                           [boolean] [default: false]
 
-Error: Define.check fail
-    at Object.check (/home/xyh/cicada/lib/lang4/decls/define.js:44:23)
+Error: [Define.check] fail
+    at Object.check (/home/xyh/cicada/lib/lang4/decls/define.js:43:23)
     at /home/xyh/cicada/lib/lang4/run/run.js:6:30
     at Array.map (<anonymous>)
     at Object.run (/home/xyh/cicada/lib/lang4/run/run.js:6:11)
