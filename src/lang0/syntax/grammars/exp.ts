@@ -13,6 +13,14 @@ export const exp = {
       { target: "identifier" },
       { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
     ],
+    "exp:let": [
+      '"@"',
+      '"let"',
+      { name: "identifier" },
+      '"="',
+      { exp: "exp" },
+      { ret: "exp" },
+    ],
     "exp:begin": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
   },
 }
