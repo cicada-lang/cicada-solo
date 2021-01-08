@@ -43,9 +43,9 @@
 
 > refactoring `Stmt`
 
-- [lang0] `DefStmt` for `Stmt.def`
-- [lang0] `ShowStmt` for `Stmt.show`
-- [lang0] `Stmt` as intersection instead of union
+- [lang0] `decls/define.ts` -- `Define` for `Stmt.def`
+- [lang0] `decls/show.ts` -- `Show` for `Stmt.show`
+- [lang0] `Decl` as intersection type
 
 # lang1
 
@@ -185,6 +185,8 @@
     by record type and higher order functions.
 
 # lang4
+
+Decl back to Stmt
 
 > OOP
 
