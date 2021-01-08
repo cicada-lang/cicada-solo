@@ -43,7 +43,9 @@
 
 > refactoring `Stmt`
 
-- [lang0] `Stmt.def` vs `Stmt.show`
+- [lang0] `DefStmt` for `Stmt.def`
+- [lang0] `ShowStmt` for `Stmt.show`
+- [lang0] `Stmt` as intersection instead of union
 
 # lang1
 

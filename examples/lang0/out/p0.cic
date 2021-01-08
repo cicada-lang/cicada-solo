@@ -1,2 +1,2 @@
-_ = (x) => x
+@define _ = (x) => x
 @show _

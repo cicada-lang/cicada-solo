@@ -1,2 +1,2 @@
-id = (x) => x
+@define id = (x) => x
 @show id(id)
