@@ -43,6 +43,7 @@
 
 > refactoring `Stmt`
 
+- [lang0] no `Begin` use `Let` instead -- `Exp` should not depend on `Stmt`
 - [lang0] `Stmt.def` vs `Stmt.show`
 
 # lang1
