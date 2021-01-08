@@ -1,4 +1,0 @@
-@show (f) => (x) =>
-  @let y = x
-  @let z = y
-  f(f(f(f(z))))
