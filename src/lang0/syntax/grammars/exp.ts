@@ -21,6 +21,5 @@ export const exp = {
       { exp: "exp" },
       { ret: "exp" },
     ],
-    "exp:begin": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
   },
 }

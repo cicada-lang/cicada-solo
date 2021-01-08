@@ -1,7 +1,6 @@
 import * as pt from "../../../partech"
 import * as Exp from "../../exp"
-import { Var, Fn, Ap, Let, Begin } from "../../exps"
-import { stmts_matcher } from "../matchers"
+import { Var, Let, Fn, Ap } from "../../exps"
 
 export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>({
@@ -16,7 +15,5 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     },
     "exp:let": ({ name, exp, ret }) =>
       Let(pt.Tree.str(name), exp_matcher(exp), exp_matcher(ret)),
-    "exp:begin": ({ stmts, ret }) =>
-      Begin(stmts_matcher(stmts), exp_matcher(ret)),
   })(tree)
 }
