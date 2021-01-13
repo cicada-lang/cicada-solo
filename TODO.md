@@ -186,9 +186,6 @@
 
 # lang4
 
-- [lang4] ambr apply execute
-  ambr Apply Execute
-
 > OOP
 
 - [lang4] primitive functions
