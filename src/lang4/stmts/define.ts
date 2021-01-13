@@ -1,11 +1,11 @@
-import { Decl } from "../decl"
+import { Stmt } from "../stmt"
 import { World } from "../world"
 import { value_equal } from "../value"
 import { TypeCheckError } from "../errors"
 import { JoJo } from "../jos/jojo"
 import * as ut from "../../ut"
 
-export type Define = Decl & {
+export type Define = Stmt & {
   name: string
   pre: JoJo
   post: JoJo

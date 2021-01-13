@@ -186,8 +186,6 @@
 
 # lang4
 
-Decl back to Stmt
-
 > the difference between lambda calculus and jojo must be understand by topology.
 
 - 也许 lambda calculus 是 topology 而 jojo 是代数？

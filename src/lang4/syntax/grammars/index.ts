@@ -5,4 +5,4 @@ export const one_or_more = pt.grammars.one_or_more
 
 export * from "./identifier"
 export * from "./jo"
-export * from "./decl"
+export * from "./stmt"

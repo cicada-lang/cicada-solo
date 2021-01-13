@@ -1,6 +1,6 @@
 import { World } from "../world"
 
-export type Decl = {
+export type Stmt = {
   assemble: (world: World) => World
   check: (world: World) => void
   output?: (world: World) => string

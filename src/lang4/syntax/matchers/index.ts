@@ -1,2 +1,2 @@
 export * from "./jo-matcher"
-export * from "./decl-matcher"
+export * from "./stmt-matcher"

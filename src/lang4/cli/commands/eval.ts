@@ -1,5 +1,5 @@
 import * as Syntax from "../../syntax"
-import { Decl } from "../../decl"
+import { Stmt } from "../../stmt"
 import { run } from "../../run"
 import { World } from "../../world"
 import { TypeCheckError } from "../../errors"
@@ -27,9 +27,9 @@ export const handler = async (argv: Argv) => {
   const text = fs.readFileSync(argv.input, { encoding: "utf-8" })
 
   try {
-    const decls = Syntax.parse_decls(text)
+    const stmts = Syntax.parse_stmts(text)
     const world = World.init()
-    const output = run(decls, world)
+    const output = run(stmts, world)
     if (output) console.log(output)
   } catch (error) {
     if (error instanceof TypeCheckError) {
