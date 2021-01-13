@@ -22,7 +22,7 @@ export function JoJoCutValue(
     jojo,
     env: the.env,
     mod: the.mod,
-    execute: (world) => jojo.jos_cut(world),
+    apply: (world) => jojo.jos_cut(world),
     repr: () => "#cut " + jojo.repr(),
   }
 }

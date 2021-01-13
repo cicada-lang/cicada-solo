@@ -22,7 +22,7 @@ export function JoJoComposeValue(
     jojo,
     env: the.env,
     mod: the.mod,
-    execute: (world) => jojo.jos_compose(world),
+    apply: (world) => jojo.jos_compose(world),
     repr: () => "#compose " + jojo.repr(),
   }
 }
