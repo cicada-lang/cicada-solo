@@ -25,7 +25,7 @@ export function ArrowValue(
     post,
     env: the.env,
     mod: the.mod,
-    apply: (world) =>
+    execute: (world) =>
       post.jos_compose(world.value_stack_match_values(pre.collect_values())),
     repr: () => "[ " + pre.jos_repr() + " -> " + post.jos_repr() + " ]",
   }

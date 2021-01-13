@@ -216,9 +216,6 @@
 
 # lang5
 
-- [lang5] ambr apply execute
-  ambr Apply Execute
-
 > name lang5 untyped lang4
 
 > untyped jojo calculus
