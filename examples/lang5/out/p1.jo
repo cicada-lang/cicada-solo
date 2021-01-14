@@ -7,5 +7,9 @@
 @show [ drop ]
 @show [ drop drop ]
 @show [ drop drop drop ]
+
 @show [ swap ]
+@show [ swap dup swap drop ]
+
+@show [ ]
 @show [ swap swap ]
