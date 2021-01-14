@@ -11,7 +11,6 @@ export function Show(jojo: JoJo): Show {
   return {
     jojo,
     assemble: (world) => world,
-    check: (world) => jojo.jos_cut(world),
     output: (world) =>
       "[ " +
       [...jojo.jos_compose(world).values]

@@ -2,7 +2,6 @@ import * as Syntax from "../../syntax"
 import { Stmt } from "../../stmt"
 import { run } from "../../run"
 import { World } from "../../world"
-import { TypeCheckError } from "../../errors"
 import * as Trace from "../../../trace"
 import * as pt from "../../../partech"
 import fs from "fs"
@@ -32,12 +31,6 @@ export const handler = async (argv: Argv) => {
     const output = run(stmts, world)
     if (output) console.log(output)
   } catch (error) {
-    if (error instanceof TypeCheckError) {
-      const message = error.message
-      console.error(argv.nocolor ? strip_ansi(message) : message)
-      process.exit(1)
-    }
-
     if (error instanceof pt.ParsingError) {
       let message = error.message
       message += "\n"

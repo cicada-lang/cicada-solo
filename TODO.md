@@ -215,7 +215,6 @@
 
 > make lang5 untyped lang4
 
-- [lang5] disable check
 - [lang5] remove code about cut
 
 > untyped jojo calculus
