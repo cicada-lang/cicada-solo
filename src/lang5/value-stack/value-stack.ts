@@ -1,5 +1,5 @@
 import { Value } from "../value"
-import { PlaceholderValue } from "../values"
+import { PlaceholderValue, isPlaceholderValue } from "../values"
 
 export type ValueStack = {
   depth: () => number
@@ -13,7 +13,12 @@ export type ValueStack = {
 export function ValueStack(values: Array<Value>, mark: number): ValueStack {
   return {
     depth: () => values.length - mark,
-    push: (value) => ValueStack([value, ...values], mark),
+    push: (value) =>
+      values.length === 0 &&
+      isPlaceholderValue(value) &&
+      value.mark === mark - 1
+        ? ValueStack(values, mark - 1)
+        : ValueStack([value, ...values], mark),
     drop: () =>
       values.length === 0
         ? ValueStack(values, mark + 1)

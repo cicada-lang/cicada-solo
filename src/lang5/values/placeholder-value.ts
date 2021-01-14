@@ -2,13 +2,17 @@ import { Value } from "../value"
 
 export type PlaceholderValue = Value & {
   kind: "PlaceholderValue"
-  index: number
+  mark: number
 }
 
-export function PlaceholderValue(index: number): PlaceholderValue {
+export function PlaceholderValue(mark: number): PlaceholderValue {
   return {
     kind: "PlaceholderValue",
-    index,
-    repr: () => `#${index}`,
+    mark,
+    repr: () => `#${mark}`,
   }
+}
+
+export function isPlaceholderValue(value: Value): value is PlaceholderValue {
+  return value.kind === "PlaceholderValue"
 }
