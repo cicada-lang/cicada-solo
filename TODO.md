@@ -218,14 +218,15 @@
 >   equivalence by execution.
 
 - [lang5] implement equivalence by execution
+- [lang5] equivalence handle `!` -- by `execution_record`
 
 > the difference between lambda calculus and jojo must be understand by topology.
 
 - 也许 lambda calculus 是 topology 而 jojo 是代数？
 
 - 只有暂时不考虑 subst 机制，我们才能将拓扑性质从 jojo 中分离出来。
-  - 因此我们先实现 ! [] 列表置换 这三个 jo 之间的等式理论
+  - 因此我们先实现 `! [] 列表置换` 这三个 jo 之间的等式理论
     - 判断等价的时候，可以通过实际作用于列表，然后看结果，来完成
-    - 因为只有 ! [] 列表置换 所以除了某些 ! 都可以作用
-    - 对于不能作用的 ! 可以记录下 ! 的操作，然后比较结果的时候，也比较记录。
+    - 因为只有 `! [] 列表置换` 所以除了某些 ! 都可以作用
+    - 对于不能作用的 `!` 可以记录下 `!` 的操作，然后比较结果的时候，也比较记录。
     - 对于这个等式理论，我们需要证明和 lambda calculus 类似的属性
