@@ -16,7 +16,7 @@ export function ValueStack(values: Array<Value>, mark: number): ValueStack {
     push: (value) => ValueStack([value, ...values], mark),
     drop: () =>
       values.length === 0
-        ? ValueStack(values, mark - 1)
+        ? ValueStack(values, mark + 1)
         : ValueStack(values.slice(1), mark),
     top: () => (values.length === 0 ? PlaceholderValue(mark) : values[0]),
     pop() {

@@ -1,0 +1,11 @@
+@define swap [ (b) (a) b a ]
+
+@define dup [ (a) a a ]
+
+@define drop [ (a) ]
+
+@show [ drop ]
+@show [ drop drop ]
+@show [ drop drop drop ]
+@show [ swap ]
+@show [ swap swap ]
