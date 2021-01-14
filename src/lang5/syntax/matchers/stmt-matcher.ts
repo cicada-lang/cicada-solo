@@ -13,22 +13,8 @@ export function stmts_matcher(tree: pt.Tree.Tree): Array<Stmt> {
 
 export function stmt_matcher(tree: pt.Tree.Tree): Stmt {
   return pt.Tree.matcher<Stmt>({
-    "stmt:define": ({ claimed, pre, post, defined, jojo }) => {
-      const claimed_name = pt.Tree.str(claimed)
-      const defined_name = pt.Tree.str(defined)
-      if (claimed_name !== defined_name) {
-        throw new Error(
-          `Mismatching names, claimed: ${claimed_name}, defined: ${defined_name}\n`
-        )
-      }
-      const name = claimed_name
-      return Define(
-        name,
-        JoJo(jos_matcher(pre)),
-        JoJo(jos_matcher(post)),
-        jojo_matcher(jojo)
-      )
-    },
+    "stmt:define": ({ defined, jojo }) =>
+      Define(pt.Tree.str(defined), jojo_matcher(jojo)),
     "stmt:show": ({ jojo }) => Show(jojo_matcher(jojo)),
   })(tree)
 }

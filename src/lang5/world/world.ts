@@ -2,7 +2,7 @@ import { Stack } from "../stack"
 import { Value, value_equal } from "../value"
 import { JoJo } from "../jos/jojo"
 import { Env } from "../env"
-import { Mod, Triplex } from "../mod"
+import { Mod } from "../mod"
 
 export type World = {
   env: Env
@@ -13,7 +13,7 @@ export type World = {
   value_stack_match_values: (values: Array<Value>) => World
   values: Array<Value>
   env_extend: (name: string, value: Value) => World
-  mod_extend: (name: string, triplex: Triplex) => World
+  mod_extend: (name: string, jojo: JoJo) => World
 }
 
 export function World(the: {
@@ -48,7 +48,7 @@ export function World(the: {
     values: the.value_stack.values,
     env_extend: (name, value) =>
       World({ ...the, env: the.env.extend(name, value) }),
-    mod_extend: (name, triplex) =>
-      World({ ...the, mod: the.mod.extend(name, triplex) }),
+    mod_extend: (name, jojo) =>
+      World({ ...the, mod: the.mod.extend(name, jojo) }),
   }
 }

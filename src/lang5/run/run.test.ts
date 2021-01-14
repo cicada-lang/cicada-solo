@@ -9,12 +9,7 @@ import { Type } from "../jos"
 {
   const world = World.init()
   const stmts = [
-    Define(
-      "swap",
-      JoJo([StrLit("A"), StrLit("B")]),
-      JoJo([StrLit("B"), StrLit("A")]),
-      JoJo([Let("b"), Let("a"), Var("b"), Var("a")])
-    ),
+    Define("swap", JoJo([Let("b"), Let("a"), Var("b"), Var("a")])),
     Show(JoJo([StrLit("a"), StrLit("b")])),
     Show(JoJo([StrLit("a"), StrLit("b"), Var("swap")])),
     Show(

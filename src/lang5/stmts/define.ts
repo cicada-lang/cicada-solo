@@ -6,22 +6,13 @@ import * as ut from "../../ut"
 
 export type Define = Stmt & {
   name: string
-  pre: JoJo
-  post: JoJo
   jojo: JoJo
 }
 
-export function Define(
-  name: string,
-  pre: JoJo,
-  post: JoJo,
-  jojo: JoJo
-): Define {
+export function Define(name: string, jojo: JoJo): Define {
   return {
     name,
-    pre,
-    post,
     jojo,
-    assemble: (world) => world.mod_extend(name, { pre, post, jojo }),
+    assemble: (world) => world.mod_extend(name, jojo),
   }
 }

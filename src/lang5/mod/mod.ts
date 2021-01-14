@@ -4,28 +4,22 @@ import { Value } from "../value"
 import { Env } from "../env"
 import { JoJoComposeValue } from "../values"
 
-export type Triplex = {
-  pre: JoJo
-  post: JoJo
-  jojo: JoJo
-}
-
 export type Mod = {
-  table: Map<string, Triplex>
-  extend: (name: string, triplex: Triplex) => Mod
-  lookup_triplex: (name: string) => undefined | Triplex
+  table: Map<string, JoJo>
+  extend: (name: string, jojo: JoJo) => Mod
+  lookup_jojo: (name: string) => undefined | JoJo
   lookup_value: (name: string) => undefined | Value
 }
 
-export function Mod(table: Map<string, Triplex>): Mod {
+export function Mod(table: Map<string, JoJo>): Mod {
   return {
     table,
-    extend: (name, triplex) => Mod(new Map([...table, [name, triplex]])),
-    lookup_triplex: (name) => table.get(name),
+    extend: (name, jojo) => Mod(new Map([...table, [name, jojo]])),
+    lookup_jojo: (name) => table.get(name),
     lookup_value(name) {
-      const triplex = table.get(name)
-      if (triplex === undefined) return undefined
-      return JoJoComposeValue(triplex.jojo, {
+      const jojo = table.get(name)
+      if (jojo === undefined) return undefined
+      return JoJoComposeValue(jojo, {
         env: Env(new Map()),
         mod: Mod(table),
       })
