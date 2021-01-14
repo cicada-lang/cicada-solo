@@ -3,7 +3,6 @@ import { Jo } from "../../jo"
 import { Var, Let } from "../../jos"
 import { JoJo, Execute } from "../../jos"
 import { StrLit } from "../../jos"
-import { SymLit } from "../../jos"
 import { NumLit } from "../../jos"
 
 export function jo_matcher(tree: pt.Tree.Tree): Jo {
@@ -14,7 +13,6 @@ export function jo_matcher(tree: pt.Tree.Tree): Jo {
     "jo:execute": (_) => Execute,
     "jo:str_lit": ({ value }) =>
       StrLit(pt.trim_boundary(pt.Tree.str(value), 1)),
-    "jo:sym_lit": ({ value }) => SymLit(pt.Tree.str(value)),
     "jo:num_lit": ({ value }) => NumLit(Number.parseFloat(pt.Tree.str(value))),
   })(tree)
 }

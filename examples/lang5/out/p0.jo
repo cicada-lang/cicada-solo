@@ -12,7 +12,6 @@
 @show [ "a" [ dup dup ] ! ]
 @show [ "a" "b" [ (_) dup ] execute ]
 
-@show [ 'a 'b [ dup ] ]
 @show [ 1 2 [ dup ] execute ]
 
 @show [ 3.14 dup ]
