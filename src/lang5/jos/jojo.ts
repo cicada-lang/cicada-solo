@@ -1,7 +1,7 @@
 import { Jo } from "../jo"
 import { Value } from "../value"
 import { World } from "../world"
-import { JoJoComposeValue } from "../values"
+import { JoJoValue } from "../values"
 
 export type JoJo = Jo & {
   kind: "JoJo"
@@ -17,7 +17,7 @@ export function JoJo(jos: Array<Jo>): JoJo {
     jos,
     compose(world) {
       return world.value_stack_push(
-        JoJoComposeValue(this, {
+        JoJoValue(this, {
           env: world.env,
           mod: world.mod,
         })

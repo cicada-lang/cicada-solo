@@ -213,10 +213,6 @@
 
 # lang5
 
-> make lang5 untyped lang4
-
-- [lang5] ambr JoJoComposeValue JoJoValue
-
 > untyped jojo calculus
 > - no normalization, but has directly implemented
 >   equivalence by execution.

@@ -2,7 +2,7 @@ import { World } from "../world"
 import { JoJo } from "../jos/jojo"
 import { Value } from "../value"
 import { Env } from "../env"
-import { JoJoComposeValue } from "../values"
+import { JoJoValue } from "../values"
 
 export type Mod = {
   table: Map<string, JoJo>
@@ -19,7 +19,7 @@ export function Mod(table: Map<string, JoJo>): Mod {
     lookup_value(name) {
       const jojo = table.get(name)
       if (jojo === undefined) return undefined
-      return JoJoComposeValue(jojo, {
+      return JoJoValue(jojo, {
         env: Env(new Map()),
         mod: Mod(table),
       })
