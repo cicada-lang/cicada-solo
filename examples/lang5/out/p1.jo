@@ -13,3 +13,6 @@
 
 @show [ ]
 @show [ swap swap ]
+
+@show [ drop dup ]
+@show [ dup drop ]

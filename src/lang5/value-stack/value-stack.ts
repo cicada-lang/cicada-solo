@@ -14,6 +14,8 @@ export function ValueStack(values: Array<Value>, mark: number): ValueStack {
   return {
     depth: () => values.length - mark,
     push: (value) =>
+      // NOTE Handle normalization.
+      // - for example: [ swap swap ] == []
       values.length === 0 &&
       isPlaceholderValue(value) &&
       value.mark === mark - 1
