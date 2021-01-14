@@ -1,5 +1,5 @@
 export type Stack<A> = {
-  empty_p: () => boolean
+  depth: () => number
   push: (value: A) => Stack<A>
   drop: () => Stack<A>
   top: () => A

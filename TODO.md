@@ -213,7 +213,8 @@
 
 # lang5
 
-- [lang5] `Stack<Value>` > `PlaceholderStack`
+- [lang5] `ValueStack` < `ArrayStack`
+- [lang5] no `repr` in `Stack`
 
 > untyped jojo calculus
 > - no normalization, but has directly implemented

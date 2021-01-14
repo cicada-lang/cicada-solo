@@ -1,10 +1,8 @@
 import { Stack } from "../stack"
 
-export type ArrayStack<A> = Stack<A>
-
-export function ArrayStack<A>(values: Array<A>): ArrayStack<A> {
+export function ArrayStack<A>(values: Array<A>): Stack<A> {
   return {
-    empty_p: () => values.length === 0,
+    depth: () => values.length,
     push: (value) => ArrayStack([value, ...values]),
     drop: () => ArrayStack(values.slice(1)),
     top: () => values[0],
