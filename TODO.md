@@ -213,9 +213,6 @@
 
 # lang5
 
-- [lang5] use `Stack & { repr: () => string }` in world
-- [lang5] no `repr` in `Stack`
-
 > untyped jojo calculus
 > - no normalization, but has directly implemented
 >   equivalence by execution.

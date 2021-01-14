@@ -4,7 +4,7 @@ import { run } from "../../run"
 import { World } from "../../world"
 import { Env } from "../../env"
 import { Mod } from "../../mod"
-import { ArrayStack } from "../../array-stack"
+import { ValueStack } from "../../value-stack"
 import { Value } from "../../value"
 import * as Trace from "../../../trace"
 import * as pt from "../../../partech"
@@ -34,7 +34,7 @@ export const handler = async (argv: Argv) => {
     const world = World({
       env: Env(new Map()),
       mod: Mod(new Map()),
-      value_stack: ArrayStack<Value>([]),
+      value_stack: ValueStack([], 0),
     })
     const output = run(stmts, world)
     if (output) console.log(output)

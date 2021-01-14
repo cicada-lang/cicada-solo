@@ -11,7 +11,6 @@ export function Show(jojo: JoJo): Show {
   return {
     jojo,
     assemble: (world) => world,
-    output: (world) =>
-      jojo.jos_compose(world).value_stack.repr((value) => value.repr()),
+    output: (world) => jojo.jos_compose(world).value_stack.repr(),
   }
 }
