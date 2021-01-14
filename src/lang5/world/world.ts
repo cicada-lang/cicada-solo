@@ -1,4 +1,4 @@
-import { ArrayStack } from "../array-stack"
+import { Stack } from "../stack"
 import { Value, value_equal } from "../value"
 import { JoJo } from "../jos/jojo"
 import { Env } from "../env"
@@ -7,10 +7,9 @@ import { Mod } from "../mod"
 export type World = {
   env: Env
   mod: Mod
-  value_stack: ArrayStack<Value>
+  value_stack: Stack<Value>
   value_stack_push: (value: Value) => World
   value_stack_pop: () => [Value, World]
-  values: Array<Value>
   env_extend: (name: string, value: Value) => World
   mod_extend: (name: string, jojo: JoJo) => World
 }
@@ -18,7 +17,7 @@ export type World = {
 export function World(the: {
   env: Env
   mod: Mod
-  value_stack: ArrayStack<Value>
+  value_stack: Stack<Value>
 }): World {
   return {
     ...the,
@@ -28,8 +27,6 @@ export function World(the: {
       the.value_stack.top(),
       World({ ...the, value_stack: the.value_stack.drop() }),
     ],
-
-    values: the.value_stack.values,
     env_extend: (name, value) =>
       World({ ...the, env: the.env.extend(name, value) }),
     mod_extend: (name, jojo) =>

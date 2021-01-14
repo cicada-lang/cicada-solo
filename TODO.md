@@ -213,10 +213,8 @@
 
 # lang5
 
-- [lang5] `Stack` > `ArrayStack`
-- [lang5] `World` depends on `Stack` instead of `ArrayStack`
 - [lang5] `Value` > `Placeholder`
-- [lang5] `PlaceholderStack`
+- [lang5] `Stack` > `PlaceholderStack`
 
 > untyped jojo calculus
 > - no normalization, but has directly implemented

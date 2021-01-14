@@ -8,7 +8,6 @@ export type JoJo = Jo & {
   jos: Array<Jo>
   jos_compose: (world: World) => World
   jos_repr: () => string
-  collect_values: () => Array<Value>
 }
 
 export function JoJo(jos: Array<Jo>): JoJo {
@@ -26,10 +25,6 @@ export function JoJo(jos: Array<Jo>): JoJo {
     repr: () => "[ " + jos.map((jo) => jo.repr()).join(" ") + " ]",
     jos_compose: jos_compose(jos),
     jos_repr: () => jos.map((jo) => jo.repr()).join(" "),
-    collect_values: () => {
-      const world = jos_compose(jos)(World.init())
-      return world.values
-    },
   }
 }
 

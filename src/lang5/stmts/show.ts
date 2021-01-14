@@ -12,12 +12,6 @@ export function Show(jojo: JoJo): Show {
     jojo,
     assemble: (world) => world,
     output: (world) =>
-      "[ " +
-      [...jojo.jos_compose(world).values]
-        .reverse()
-        .map((value) => value.repr())
-        .join(" ") +
-      " ]" +
-      "\n",
+      jojo.jos_compose(world).value_stack.repr((value) => value.repr()),
   }
 }
