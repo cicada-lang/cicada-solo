@@ -11,7 +11,7 @@ export function ArrayStack<A>(values: Array<A>): ArrayStack<A> {
     pop: () => [values[0], ArrayStack(values.slice(1))],
     repr: (value_repr: (value: A) => string) =>
       "[ " +
-      [...values]
+      values
         .reverse()
         .map((value) => value_repr(value))
         .join(" ") +
