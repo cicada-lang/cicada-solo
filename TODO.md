@@ -213,11 +213,16 @@
 
 # lang5
 
-> name lang5 untyped lang4
+> make lang5 untyped lang4
+
+- [lang5] disable check
+- [lang5] remove code about cut
 
 > untyped jojo calculus
 > - no normalization, but has directly implemented
 >   equivalence by execution.
+
+- [lang5] implement equivalence by execution
 
 > the difference between lambda calculus and jojo must be understand by topology.
 
