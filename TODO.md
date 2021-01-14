@@ -213,6 +213,9 @@
 
 # lang5
 
+- [lang5] interface `Stack`
+- [lang5] `World` depends on `Stack` instead of `ArrayStack`
+
 > untyped jojo calculus
 > - no normalization, but has directly implemented
 >   equivalence by execution.

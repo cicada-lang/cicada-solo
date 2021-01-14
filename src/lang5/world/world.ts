@@ -1,4 +1,4 @@
-import { Stack } from "../stack"
+import { ArrayStack } from "../array-stack"
 import { Value, value_equal } from "../value"
 import { JoJo } from "../jos/jojo"
 import { Env } from "../env"
@@ -7,7 +7,7 @@ import { Mod } from "../mod"
 export type World = {
   env: Env
   mod: Mod
-  value_stack: Stack<Value>
+  value_stack: ArrayStack<Value>
   value_stack_push: (value: Value) => World
   value_stack_pop: () => [Value, World]
   values: Array<Value>
@@ -18,7 +18,7 @@ export type World = {
 export function World(the: {
   env: Env
   mod: Mod
-  value_stack: Stack<Value>
+  value_stack: ArrayStack<Value>
 }): World {
   return {
     ...the,
