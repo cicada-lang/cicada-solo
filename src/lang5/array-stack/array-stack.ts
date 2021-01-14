@@ -2,7 +2,7 @@ export type ArrayStack<A> = {
   values: Array<A>
   push: (value: A) => ArrayStack<A>
   drop: () => ArrayStack<A>
-  tos: () => A
+  top: () => A
   pop: () => [A, ArrayStack<A>]
 }
 
@@ -11,7 +11,7 @@ export function ArrayStack<A>(values: Array<A>): ArrayStack<A> {
     values,
     push: (value) => ArrayStack([value, ...values]),
     drop: () => ArrayStack(values.slice(1)),
-    tos: () => values[0],
+    top: () => values[0],
     pop: () => [values[0], ArrayStack(values.slice(1))],
   }
 }

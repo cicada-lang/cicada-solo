@@ -213,7 +213,6 @@
 
 # lang5
 
-ambr tos top
 - [lang5] `Stack` > `ArrayStack`
 - [lang5] `World` depends on `Stack` instead of `ArrayStack`
 - [lang5] `Value` > `Placeholder`

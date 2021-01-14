@@ -25,7 +25,7 @@ export function World(the: {
     value_stack_push: (value) =>
       World({ ...the, value_stack: the.value_stack.push(value) }),
     value_stack_pop: () => [
-      the.value_stack.tos(),
+      the.value_stack.top(),
       World({ ...the, value_stack: the.value_stack.drop() }),
     ],
 

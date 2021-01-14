@@ -26,18 +26,18 @@ export function World(the: {
     value_stack_push: (value) =>
       World({ ...the, value_stack: the.value_stack.push(value) }),
     value_stack_pop: () => [
-      the.value_stack.tos(),
+      the.value_stack.top(),
       World({ ...the, value_stack: the.value_stack.drop() }),
     ],
     value_stack_match_values: (values) =>
       World({
         ...the,
         value_stack: [...values].reverse().reduce((value_stack, value) => {
-          if (!value_equal(value_stack.tos(), value)) {
+          if (!value_equal(value_stack.top(), value)) {
             const message = "World.value_stack_match_values fail"
             console.log({
               message,
-              top_of_stack_value: value_stack.tos(),
+              top_of_stack_value: value_stack.top(),
               value: value,
             })
             throw new Error(message)
