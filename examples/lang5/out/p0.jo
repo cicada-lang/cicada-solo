@@ -19,8 +19,6 @@
 
 @define id [ (f) f ]
 
-@show [ [ 'A 'B -> 'A 'B ] ]
-
 @define one [ 1 ]
 
 @show [ one ]

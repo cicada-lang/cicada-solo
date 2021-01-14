@@ -1,6 +1,6 @@
 import { Jo } from "../jo"
 import { World } from "../world"
-import { SymValue, SymLitValue } from "../values"
+import { SymLitValue } from "../values"
 
 export type SymLit = Jo & {
   kind: "SymLit"

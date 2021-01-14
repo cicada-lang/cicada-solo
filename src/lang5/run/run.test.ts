@@ -3,8 +3,7 @@ import { World } from "../world"
 import { Define, Show } from "../stmts"
 import { Var, Let } from "../jos"
 import { JoJo } from "../jos"
-import { Str, StrLit } from "../jos"
-import { Type } from "../jos"
+import { StrLit } from "../jos"
 
 {
   const world = World.init()

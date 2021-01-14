@@ -1,6 +1,6 @@
 import { Jo } from "../jo"
 import { World } from "../world"
-import { NumValue, NumLitValue } from "../values"
+import { NumLitValue } from "../values"
 
 export type NumLit = Jo & {
   kind: "NumLit"
