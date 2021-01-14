@@ -8,7 +8,6 @@ export type Execute = Jo & {
 export const Execute: Execute = {
   kind: "Execute",
   compose: execute,
-  cut: execute,
   repr: () => `!`,
 }
 

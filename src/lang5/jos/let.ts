@@ -11,7 +11,6 @@ export function Let(name: string): Let {
     kind: "Let",
     name,
     compose: extend(name),
-    cut: extend(name),
     repr: () => `(${name})`,
   }
 }

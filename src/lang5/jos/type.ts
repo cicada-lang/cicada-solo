@@ -9,6 +9,5 @@ export type Type = Jo & {
 export const Type: Type = {
   kind: "Type",
   compose: (world) => world.value_stack_push(TypeValue),
-  cut: (world) => world.value_stack_push(TypeValue),
   repr: () => "Type",
 }

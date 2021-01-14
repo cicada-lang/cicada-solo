@@ -10,6 +10,5 @@ export type Num = Jo & {
 export const Num: Num = {
   kind: "Num",
   compose: (world) => world.value_stack_push(NumValue),
-  cut: (world) => world.value_stack_push(TypeValue),
   repr: () => "Number",
 }

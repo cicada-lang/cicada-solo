@@ -1,6 +1,5 @@
 export * from "./arrow-value"
 export * from "./jojo-compose-value"
-export * from "./jojo-cut-value"
 export * from "./str-value"
 export * from "./str-lit-value"
 export * from "./sym-value"

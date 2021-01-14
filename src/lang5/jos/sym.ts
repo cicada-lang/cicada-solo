@@ -10,6 +10,5 @@ export type Sym = Jo & {
 export const Sym: Sym = {
   kind: "Sym",
   compose: (world) => world.value_stack_push(SymValue),
-  cut: (world) => world.value_stack_push(TypeValue),
   repr: () => "Symbol",
 }

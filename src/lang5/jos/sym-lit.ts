@@ -12,7 +12,6 @@ export function SymLit(str: string): SymLit {
     kind: "SymLit",
     str,
     compose: (world) => world.value_stack_push(SymLitValue(str)),
-    cut: (world) => world.value_stack_push(SymValue),
     repr: () => `'${str}`,
   }
 }

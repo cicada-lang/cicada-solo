@@ -12,7 +12,6 @@ export function StrLit(str: string): StrLit {
     kind: "StrLit",
     str,
     compose: (world) => world.value_stack_push(StrLitValue(str)),
-    cut: (world) => world.value_stack_push(StrValue),
     repr: () => `"${str}"`,
   }
 }

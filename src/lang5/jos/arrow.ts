@@ -22,7 +22,6 @@ export function Arrow(pre: JoJo, post: JoJo): Arrow {
           mod: world.mod,
         })
       ),
-    cut: (world) => world.value_stack_push(TypeValue),
     repr: () => "[ " + pre.repr() + " -> " + post.repr() + " ]",
   }
 }

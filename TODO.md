@@ -215,7 +215,7 @@
 
 > make lang5 untyped lang4
 
-- [lang5] remove code about cut
+- [lang5] ambr JoJoComposeValue JoJoValue
 
 > untyped jojo calculus
 > - no normalization, but has directly implemented
