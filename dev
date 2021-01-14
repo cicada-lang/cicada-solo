@@ -19,6 +19,7 @@ commands.test_all = async () => {
   await commands.test_lang2()
   await commands.test_lang3()
   await commands.test_lang4()
+  await commands.test_lang5()
   await commands.test_partech()
 }
 
@@ -120,6 +121,20 @@ commands.test_lang4 = async () => {
   await test(
     "./bin/lang4.js $file",
     { file: "examples/lang4/err/**.jo" },
+    snapshot.err(({ file }) => file + ".err")
+  )
+}
+
+commands.test_lang5 = async () => {
+  await test(
+    "./bin/lang5.js $file",
+    { file: "examples/lang5/out/**.jo" },
+    snapshot.out(({ file }) => file + ".out")
+  )
+
+  await test(
+    "./bin/lang5.js $file",
+    { file: "examples/lang5/err/**.jo" },
     snapshot.err(({ file }) => file + ".err")
   )
 }

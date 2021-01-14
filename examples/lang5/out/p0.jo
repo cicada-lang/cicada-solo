@@ -1,0 +1,32 @@
+@define swap [ (b) (a) b a ]
+
+@define dup [ (a) a a ]
+
+@define drop [ (a) ]
+
+@define execute [ (f) f! ]
+
+@show [ "a" "b" [ dup ] ]
+@show [ "a" [ drop ] execute ]
+@show [ "a" [ dup dup ] execute ]
+@show [ "a" [ dup dup ] ! ]
+@show [ "a" "b" [ (_) dup ] execute ]
+
+@show [ 'a 'b [ dup ] ]
+@show [ 1 2 [ dup ] execute ]
+
+@show [ 3.14 dup ]
+
+@define id [ (f) f ]
+
+@show [ [ 'A 'B -> 'A 'B ] ]
+
+@define one [ 1 ]
+
+@show [ one ]
+
+// @define id [ (f) f ]
+
+// @define unit [ (x) @list [ x ] ]
+
+// @define map [ (x) @list [ x ] ]

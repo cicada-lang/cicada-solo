@@ -1,0 +1,7 @@
+@define swap [ (b) (a) b a ]
+
+@define dup [ (a) a a ]
+
+@show [ "a" "b" ]
+@show [ "a" "b" swap ]
+@show [ "a" "b" swap dup dup dup ]
