@@ -213,8 +213,9 @@
 
 # lang5
 
-- [lang5] `Value` > `Placeholder`
-- [lang5] `Stack` > `PlaceholderStack`
+- [lang5] `Stack<Value>` > `PlaceholderStack`
+- [lang5] inline `World.init`
+- [lang5] remove `world-init.ts`
 
 > untyped jojo calculus
 > - no normalization, but has directly implemented
