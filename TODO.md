@@ -213,7 +213,7 @@
 
 # lang5
 
-- [lang5] `ValueStack` < `ArrayStack`
+- [lang5] use `Stack & { repr: () => string }` in world
 - [lang5] no `repr` in `Stack`
 
 > untyped jojo calculus
