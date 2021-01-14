@@ -2,6 +2,10 @@ import * as Syntax from "../../syntax"
 import { Stmt } from "../../stmt"
 import { run } from "../../run"
 import { World } from "../../world"
+import { Env } from "../../env"
+import { Mod } from "../../mod"
+import { ArrayStack } from "../../array-stack"
+import { Value } from "../../value"
 import * as Trace from "../../../trace"
 import * as pt from "../../../partech"
 import fs from "fs"
@@ -27,7 +31,11 @@ export const handler = async (argv: Argv) => {
 
   try {
     const stmts = Syntax.parse_stmts(text)
-    const world = World.init()
+    const world = World({
+      env: Env(new Map()),
+      mod: Mod(new Map()),
+      value_stack: ArrayStack<Value>([]),
+    })
     const output = run(stmts, world)
     if (output) console.log(output)
   } catch (error) {

@@ -213,8 +213,6 @@
 
 # lang5
 
-- [lang5] inline `World.init`
-- [lang5] remove `world-init.ts`
 - [lang5] `Stack<Value>` > `PlaceholderStack`
 
 > untyped jojo calculus
