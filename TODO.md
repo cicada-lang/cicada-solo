@@ -217,9 +217,9 @@
 > - no normalization, but has directly implemented
 >   equivalence by execution.
 
-- [lang5] `@assert_equal`
+- [lang5] [syntax] `@assert_equal` & `@assert_not_equal`
 - [lang5] implement equivalence by execution
-- [lang5] equivalence handle `!` -- by `execution_record`
+- [lang5] equivalence handle `!` -- by `execution_record` in `ValueStack`
 
 > the difference between lambda calculus and jojo must be understand by topology.
 
