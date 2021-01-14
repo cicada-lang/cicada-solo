@@ -219,7 +219,8 @@
 
 - [lang5] [syntax] `@assert_equal` & `@assert_not_equal`
 - [lang5] implement equivalence by execution
-- [lang5] equivalence handle `!` -- by `execution_record` in `ValueStack`
+- [lang5] equivalence handle `!` -- by `execution_trace` in `ValueStack`
+- [lang5] test equivalence of high order jojo
 
 > the difference between lambda calculus and jojo must be understand by topology.
 
