@@ -217,10 +217,7 @@
 > - no normalization, but has directly implemented
 >   equivalence by execution.
 
-<<<<<<< HEAD
 - [lang5] `World.init`
-=======
->>>>>>> f5d141df2bd25dcdb20b487611eac6d20767e2f3
 - [lang5] `AssertEqual` & `AssertNotEqual`
 - [lang5] implement `value_equal` by execution
 - [lang5] `value_equal` handle `!` -- by `execution_trace` in `ValueStack`
