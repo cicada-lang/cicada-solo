@@ -11,7 +11,7 @@ export function NumLit(num: number): NumLit {
   return {
     kind: "NumLit",
     num,
-    compose: (world) => world.value_stack_push(NumLitValue(num)),
+    execute: (world) => world.value_stack_push(NumLitValue(num)),
     repr: () => `${num}`,
   }
 }

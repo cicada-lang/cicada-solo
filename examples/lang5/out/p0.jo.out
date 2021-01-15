@@ -1,4 +1,4 @@
-[ "a" "b" #compose [ dup ] ] 0
+[ "a" "b" #execute [ dup ] ] 0
 [  ] 0
 [ "a" "a" "a" ] 0
 [ "a" "a" "a" ] 0

@@ -3,14 +3,16 @@ import { World } from "../world"
 import { JoJo } from "../jos/jojo"
 import * as ut from "../../ut"
 
-export type Show = Stmt & {
-  jojo: JoJo
+export type AssertNotEqual = Stmt & {
+  left: JoJo
+  right: JoJo
 }
 
-export function Show(jojo: JoJo): Show {
+export function AssertNotEqual(left: JoJo, right: JoJo): AssertNotEqual {
   return {
-    jojo,
+    left,
+    right,
+    // TODO
     execute: (world) => world,
-    output: (world) => jojo.jos_execute(world).value_stack.repr(),
   }
 }

@@ -13,6 +13,6 @@ export function Define(name: string, jojo: JoJo): Define {
   return {
     name,
     jojo,
-    assemble: (world) => world.mod_extend(name, jojo),
+    execute: (world) => world.mod_extend(name, jojo),
   }
 }

@@ -10,7 +10,7 @@ export function Let(name: string): Let {
   return {
     kind: "Let",
     name,
-    compose: extend(name),
+    execute: extend(name),
     repr: () => `(${name})`,
   }
 }

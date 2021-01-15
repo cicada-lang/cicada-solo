@@ -1,6 +1,6 @@
 import { World } from "../world"
 
 export type Stmt = {
-  assemble: (world: World) => World
+  execute: (world: World) => World
   output?: (world: World) => string
 }

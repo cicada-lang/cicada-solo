@@ -10,7 +10,7 @@ export function Var(name: string): Var {
   return {
     kind: "Var",
     name,
-    compose: var_lookup(name),
+    execute: var_lookup(name),
     repr: () => name,
   }
 }
@@ -23,5 +23,5 @@ const var_lookup = (name: string) => (world: World) => {
     console.log(world)
     throw new Error(`undefined name ${name}`)
   }
-  return global_value.execute!(world)
+  return global_value.apply!(world)
 }

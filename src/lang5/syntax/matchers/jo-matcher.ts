@@ -1,7 +1,7 @@
 import * as pt from "../../../partech"
 import { Jo } from "../../jo"
 import { Var, Let } from "../../jos"
-import { JoJo, Execute } from "../../jos"
+import { JoJo, Apply } from "../../jos"
 import { StrLit } from "../../jos"
 import { NumLit } from "../../jos"
 
@@ -10,7 +10,7 @@ export function jo_matcher(tree: pt.Tree.Tree): Jo {
     "jo:var": ({ name }) => Var(pt.Tree.str(name)),
     "jo:let": ({ name }) => Let(pt.Tree.str(name)),
     "jo:jojo": ({ jojo }) => jojo_matcher(jojo),
-    "jo:execute": (_) => Execute,
+    "jo:apply": (_) => Apply,
     "jo:str_lit": ({ value }) =>
       StrLit(pt.trim_boundary(pt.Tree.str(value), 1)),
     "jo:num_lit": ({ value }) => NumLit(Number.parseFloat(pt.Tree.str(value))),

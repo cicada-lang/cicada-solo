@@ -3,7 +3,7 @@ export const jo = {
     "jo:var": [{ name: "identifier" }],
     "jo:let": ['"("', { name: "identifier" }, '")"'],
     "jo:jojo": [{ jojo: "jojo" }],
-    "jo:execute": ['"!"'],
+    "jo:apply": ['"!"'],
     "jo:str_lit": [{ value: { $pattern: ["string"] } }],
     "jo:sym_lit": ['"\'"', { value: "identifier" }],
     "jo:num_lit": [{ value: { $pattern: ["number"] } }],
