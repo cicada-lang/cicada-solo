@@ -22,6 +22,8 @@ export function World(the: {
   value_stack: ValueStack
   output?: string
 }): World {
+  const output = the.output || ""
+
   return {
     ...the,
     value_stack_push: (value) =>
@@ -34,7 +36,7 @@ export function World(the: {
       World({ ...the, env: the.env.extend(name, value) }),
     mod_extend: (name, jojo) =>
       World({ ...the, mod: the.mod.extend(name, jojo) }),
-    output: the.output || "",
-    output_append: (str) => World({ ...the, output: the.output + str }),
+    output,
+    output_append: (str) => World({ ...the, output: output + str }),
   }
 }

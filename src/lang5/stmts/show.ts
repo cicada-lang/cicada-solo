@@ -10,7 +10,7 @@ export type Show = Stmt & {
 export function Show(jojo: JoJo): Show {
   return {
     jojo,
-    execute: (world) => world,
-    output: (world) => jojo.jos_execute(world).value_stack.repr(),
+    execute: (world) =>
+      world.output_append(jojo.jos_execute(world).value_stack.repr()),
   }
 }

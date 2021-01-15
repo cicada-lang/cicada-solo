@@ -217,11 +217,10 @@
 > - no normalization, but has directly implemented
 >   equivalence by execution.
 
-- [lang5] simple `Stmt` interface and simple `run`
-
+- [lang5] `World.init`
 - [lang5] `AssertEqual` & `AssertNotEqual`
-- [lang5] implement equivalence by execution
-- [lang5] equivalence handle `!` -- by `execution_trace` in `ValueStack`
+- [lang5] implement `value_equal` by execution
+- [lang5] `value_equal` handle `!` -- by `execution_trace` in `ValueStack`
 - [lang5] test equivalence of high order jojo
 
 > the difference between lambda calculus and jojo must be understand by topology.
