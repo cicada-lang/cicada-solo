@@ -217,6 +217,8 @@
 > - no normalization, but has directly implemented
 >   equivalence by execution.
 
+- [lang5] simple `Stmt` interface and simple `run`
+
 - [lang5] `AssertEqual` & `AssertNotEqual`
 - [lang5] implement equivalence by execution
 - [lang5] equivalence handle `!` -- by `execution_trace` in `ValueStack`

@@ -12,12 +12,15 @@ export type World = {
   value_stack_pop: () => [Value, World]
   env_extend: (name: string, value: Value) => World
   mod_extend: (name: string, jojo: JoJo) => World
+  output: string
+  output_append: (str: string) => World
 }
 
 export function World(the: {
   env: Env
   mod: Mod
   value_stack: ValueStack
+  output?: string
 }): World {
   return {
     ...the,
@@ -31,5 +34,7 @@ export function World(the: {
       World({ ...the, env: the.env.extend(name, value) }),
     mod_extend: (name, jojo) =>
       World({ ...the, mod: the.mod.extend(name, jojo) }),
+    output: the.output || "",
+    output_append: (str) => World({ ...the, output: the.output + str }),
   }
 }
