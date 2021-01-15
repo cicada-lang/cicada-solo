@@ -23,6 +23,6 @@ export function JoJoValue(
     env: the.env,
     mod: the.mod,
     apply: (world) => jojo.jos_execute(world),
-    repr: () => "#execute " + jojo.repr(),
+    repr: () => jojo.repr(),
   }
 }
