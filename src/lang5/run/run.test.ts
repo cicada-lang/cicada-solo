@@ -27,5 +27,5 @@ import { StrLit } from "../jos"
     ),
     Show(JoJo([JoJo([Let("b"), Let("a"), Var("b"), Var("a")])])),
   ]
-  console.log(run(stmts, world))
+  console.log(run(stmts, world).output)
 }

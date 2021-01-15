@@ -36,8 +36,10 @@ export const handler = async (argv: Argv) => {
       mod: Mod(new Map()),
       value_stack: ValueStack([], 0),
     })
-    const output = run(stmts, world)
-    if (output) console.log(output)
+    const final = run(stmts, world)
+    if (final.output) {
+      console.log(final.output)
+    }
   } catch (error) {
     if (error instanceof pt.ParsingError) {
       let message = error.message
