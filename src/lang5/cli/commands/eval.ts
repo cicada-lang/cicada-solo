@@ -2,9 +2,6 @@ import * as Syntax from "../../syntax"
 import { Stmt } from "../../stmt"
 import { run } from "../../run"
 import { World } from "../../world"
-import { Env } from "../../env"
-import { Mod } from "../../mod"
-import { ValueStack } from "../../value-stack"
 import { Value } from "../../value"
 import * as Trace from "../../../trace"
 import * as pt from "../../../partech"
@@ -31,15 +28,9 @@ export const handler = async (argv: Argv) => {
 
   try {
     const stmts = Syntax.parse_stmts(text)
-    const world = World({
-      env: Env(new Map()),
-      mod: Mod(new Map()),
-      value_stack: ValueStack([], 0),
-    })
+    const world = World.init()
     const final = run(stmts, world)
-    if (final.output) {
-      console.log(final.output)
-    }
+    if (final.output) console.log(final.output)
   } catch (error) {
     if (error instanceof pt.ParsingError) {
       let message = error.message
