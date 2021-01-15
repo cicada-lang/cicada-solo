@@ -23,11 +23,7 @@ export function JoJo(jos: Array<Jo>): JoJo {
       )
     },
     repr: () => "[ " + jos.map((jo) => jo.repr()).join(" ") + " ]",
-    jos_execute: jos_execute(jos),
+    jos_execute: (world) => jos.reduce((world, jo) => jo.execute(world), world),
     jos_repr: () => jos.map((jo) => jo.repr()).join(" "),
   }
-}
-
-function jos_execute(jos: Array<Jo>): (world: World) => World {
-  return (world) => jos.reduce((world, jo) => jo.execute(world), world)
 }

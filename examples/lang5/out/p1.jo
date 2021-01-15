@@ -16,3 +16,9 @@
 
 @show [ drop dup ]
 @show [ dup drop ]
+
+@assert_equal [ swap swap ] [ ]
+@assert_equal [ dup drop ] [ ]
+
+@assert_not_equal [ swap ] [ ]
+@assert_not_equal [ drop dup ] [ ]
