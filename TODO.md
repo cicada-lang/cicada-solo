@@ -217,7 +217,7 @@
 > - no normalization, but has directly implemented
 >   equivalence by execution.
 
-- [lang5] [syntax] `@assert_equal` & `@assert_not_equal`
+- [lang5] `AssertEqual` & `AssertNotEqual`
 - [lang5] implement equivalence by execution
 - [lang5] equivalence handle `!` -- by `execution_trace` in `ValueStack`
 - [lang5] test equivalence of high order jojo

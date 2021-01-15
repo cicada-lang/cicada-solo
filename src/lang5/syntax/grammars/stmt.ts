@@ -7,6 +7,18 @@ export const stmt = {
       { jojo: "jojo" },
     ],
     "stmt:show": ['"@"', '"show"', { jojo: "jojo" }],
+    "stmt:assert_equal": [
+      '"@"',
+      '"assert_equal"',
+      { left: "jojo" },
+      { right: "jojo" },
+    ],
+    "stmt:assert_not_equal": [
+      '"@"',
+      '"assert_not_equal"',
+      { left: "jojo" },
+      { right: "jojo" },
+    ],
   },
 }
 
