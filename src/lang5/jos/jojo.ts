@@ -7,7 +7,6 @@ export type JoJo = Jo & {
   kind: "JoJo"
   jos: Array<Jo>
   jos_execute: (world: World) => World
-  jos_repr: () => string
 }
 
 export function JoJo(jos: Array<Jo>): JoJo {
@@ -24,6 +23,5 @@ export function JoJo(jos: Array<Jo>): JoJo {
     },
     repr: () => "[ " + jos.map((jo) => jo.repr()).join(" ") + " ]",
     jos_execute: (world) => jos.reduce((world, jo) => jo.execute(world), world),
-    jos_repr: () => jos.map((jo) => jo.repr()).join(" "),
   }
 }

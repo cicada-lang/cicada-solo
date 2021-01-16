@@ -1,0 +1,8 @@
+@define swap [ (b) (a) b a ]
+@define dup [ (a) a a ]
+@define drop [ (a) ]
+
+@assert_equal [ swap swap ] [ ]
+@assert_equal [ dup drop ] [ ]
+@assert_equal [ [ ] ] [ [ ] ]
+// @assert_equal [ [ [ swap swap ] ] ] [ [ ] ]

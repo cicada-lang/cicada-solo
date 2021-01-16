@@ -1,4 +1,6 @@
 import { Value } from "../value"
+import { World } from "../world"
+import { ValueStack } from "../value-stack"
 import { Env } from "../env"
 import { Mod } from "../mod"
 import { JoJo } from "../jos"
@@ -24,5 +26,10 @@ export function JoJoValue(
     mod: the.mod,
     apply: (world) => jojo.jos_execute(world),
     repr: () => jojo.repr(),
+    hash_repr: () => {
+      const world = World({ ...the, value_stack: ValueStack([], 0) })
+      console.log(">>> ", jojo.jos_execute(world).value_stack.repr())
+      return jojo.jos_execute(world).value_stack.repr()
+    },
   }
 }

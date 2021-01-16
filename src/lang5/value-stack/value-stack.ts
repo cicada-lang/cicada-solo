@@ -24,21 +24,19 @@ export function ValueStack(values: Array<Value>, mark: number): ValueStack {
       isPlaceholderValue(value) &&
       value.mark === mark - 1
         ? ValueStack(values, mark - 1)
-        : ValueStack([value, ...values], mark),
+        : ValueStack([...values, value], mark),
     drop: () =>
       values.length === 0
         ? ValueStack(values, mark + 1)
-        : ValueStack(values.slice(1), mark),
-    top: () => (values.length === 0 ? PlaceholderValue(mark) : values[0]),
+        : ValueStack(values.slice(0, values.length - 1), mark),
+    top: () =>
+      values.length === 0 ? PlaceholderValue(mark) : values[values.length - 1],
     pop() {
       return [this.top(), this.drop()]
     },
     repr: () =>
       "[ " +
-      values
-        .reverse()
-        .map((value) => value.repr())
-        .join(" ") +
+      values.map((value) => value.repr()).join(" ") +
       " ] " +
       `${mark}` +
       "\n",

@@ -2,5 +2,7 @@ import { Value } from "./value"
 import * as ut from "../../ut"
 
 export function value_equal(x: Value, y: Value): boolean {
-  return ut.equal(JSON.stringify(x), JSON.stringify(y))
+  const x_hash = x.hash_repr ? x.hash_repr() : x.repr()
+  const y_hash = y.hash_repr ? y.hash_repr() : y.repr()
+  return x.kind === y.kind && x_hash === y_hash
 }
