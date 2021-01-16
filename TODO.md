@@ -217,8 +217,10 @@
 > - no normalization, but has directly implemented
 >   equivalence by execution.
 
-- [lang5] `ValueStack.hash_repr` handle `!` -- by `execution_trace` in `ValueStack`
-- [lang5] test equivalence of high order jojo
+- [lang5] `apply` handle `PlaceholderValue`
+- [lang5] `ValueStack.hash_repr` handle `!`
+- [lang5] test equivalence of `!`
+- [lang5] improve `ValueStack` constructor
 
 > the difference between lambda calculus and jojo must be understand by topology.
 

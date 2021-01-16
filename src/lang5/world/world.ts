@@ -4,6 +4,9 @@ import { JoJo } from "../jos/jojo"
 import { Env } from "../env"
 import { Mod } from "../mod"
 
+export type ApplicationTrace = Array<{ mark: number; value_stack: ValueStack }>
+export const empty_application_trace: ApplicationTrace = []
+
 export type World = {
   env: Env
   mod: Mod
@@ -14,6 +17,8 @@ export type World = {
   mod_extend: (name: string, jojo: JoJo) => World
   output: string
   output_append: (str: string) => World
+  application_trace: ApplicationTrace
+  application_trace_capture: (mark: number) => World
 }
 
 export function World(the: {
@@ -21,8 +26,10 @@ export function World(the: {
   mod: Mod
   value_stack: ValueStack
   output?: string
+  application_trace?: ApplicationTrace
 }): World {
   const output = the.output || ""
+  const application_trace = the.application_trace || empty_application_trace
 
   return {
     ...the,
@@ -38,5 +45,15 @@ export function World(the: {
       World({ ...the, mod: the.mod.extend(name, jojo) }),
     output,
     output_append: (str) => World({ ...the, output: output + str }),
+    application_trace,
+    application_trace_capture: (mark) =>
+      World({
+        ...the,
+        value_stack: ValueStack([], 0),
+        application_trace: [
+          ...application_trace,
+          { mark, value_stack: the.value_stack },
+        ],
+      }),
   }
 }
