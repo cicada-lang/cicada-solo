@@ -22,14 +22,21 @@ export function JoJoValue(
   return {
     kind: "JoJoValue",
     jojo,
-    env: the.env,
-    mod: the.mod,
+    ...the,
     apply: (world) => jojo.jos_execute(world),
     repr: () => jojo.repr(),
     hash_repr: () => {
       const world = World({ ...the, value_stack: ValueStack([], 0) })
-      console.log(">>> ", jojo.jos_execute(world).value_stack.repr())
-      return jojo.jos_execute(world).value_stack.repr()
+      const value_stack = jojo.jos_execute(world).value_stack
+      return (
+        "[ " +
+        value_stack.values
+          .map((value) => (value.hash_repr ? value.hash_repr() : value.repr()))
+          .join(" ") +
+        " ] " +
+        `${value_stack.mark}` +
+        "\n"
+      )
     },
   }
 }
