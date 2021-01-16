@@ -12,6 +12,6 @@ export function StrLitValue(str: string): StrLitValue {
     repr: () => `"${str}"`,
     semantic_repr() {
       return this.repr()
-    }
+    },
   }
 }

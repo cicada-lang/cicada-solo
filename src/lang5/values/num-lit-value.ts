@@ -12,6 +12,6 @@ export function NumLitValue(num: number): NumLitValue {
     repr: () => `${num}`,
     semantic_repr() {
       return this.repr()
-    }
+    },
   }
 }

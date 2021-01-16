@@ -12,7 +12,7 @@ export function PlaceholderValue(mark: number): PlaceholderValue {
     repr: () => `#${mark}`,
     semantic_repr() {
       return this.repr()
-    }
+    },
   }
 }
 

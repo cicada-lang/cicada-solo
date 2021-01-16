@@ -28,11 +28,12 @@ export function JoJoValue(
     semantic_repr: () => {
       const world = World({ ...the, value_stack: ValueStack([], 0) })
       const final = jojo.jos_execute(world)
-      const application_trace_repr = final.application_trace
-        .map((value_stack) => "- " + value_stack.semantic_repr())
-        .join("")
-      const value_stack_repr = final.value_stack.semantic_repr()
-      return value_stack_repr + application_trace_repr
+      return (
+        final.value_stack.semantic_repr() +
+        final.application_trace
+          .map((value_stack) => "- " + value_stack.semantic_repr())
+          .join("")
+      )
     },
   }
 }
