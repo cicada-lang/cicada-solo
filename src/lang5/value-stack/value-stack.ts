@@ -37,12 +37,12 @@ export function ValueStack(values: Array<Value>, mark: number): ValueStack {
     },
     repr: () => {
       const value_repr = (value: Value) => value.repr()
-      return "[ " + values.map(value_repr).join(" ") + " ] " + `${mark}` + "\n"
+      return `#${mark} ` + "[ " + values.map(value_repr).join(" ") + " ] " + "\n"
     },
     hash_repr: () => {
       const value_repr = (value: Value) =>
         value.hash_repr ? value.hash_repr() : value.repr()
-      return "[ " + values.map(value_repr).join(" ") + " ] " + `${mark}` + "\n"
+      return `#${mark} ` + "[ " + values.map(value_repr).join(" ") + " ] " + "\n"
     },
   }
 }

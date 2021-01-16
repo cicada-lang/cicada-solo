@@ -218,7 +218,6 @@
 >   equivalence by execution.
 
 - [lang5] fix structure of `application_trace`
-- [lang5] fix `ValueStack.repr`
 - [lang5] `ValueStack.hash_repr` handle `!`
 - [lang5] test equivalence of `!`
 - [lang5] improve `ValueStack` constructor
