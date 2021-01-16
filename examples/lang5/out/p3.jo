@@ -1,0 +1,13 @@
+@define swap [ (b) (a) b a ]
+@define dup [ (a) a a ]
+@define drop [ (a) ]
+
+@assert_equal [ ! ] [ dup drop ! swap swap ]
+
+@semantic_show [ ! ]
+@semantic_show [ dup drop ! swap swap ]
+
+@assert_equal [ ! swap ] [ dup drop ! swap ]
+
+@semantic_show [ ! swap ]
+@semantic_show [ dup drop ! swap ]

@@ -7,7 +7,7 @@ export const stmt = {
       { jojo: "jojo" },
     ],
     "stmt:show": ['"@"', '"show"', { jojo: "jojo" }],
-    "stmt:semantic_show": ['"@"', '"show"', { jojo: "jojo" }],
+    "stmt:semantic_show": ['"@"', '"semantic_show"', { jojo: "jojo" }],
     "stmt:assert_equal": [
       '"@"',
       '"assert_equal"',
