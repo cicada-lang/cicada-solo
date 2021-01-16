@@ -28,7 +28,13 @@ export function JoJoValue(
     semantic_repr: () => {
       const world = World({ ...the, value_stack: ValueStack([], 0) })
       const final = jojo.jos_execute(world)
-      return final.value_stack.alpha_repr(final)
+      const value_repr = (value: Value) => (value.semantic_repr || value.repr)()
+      const application_trace_repr = world.application_trace
+        .map((value_stack) => value_stack.repr_by(value_repr))
+        .join("")
+      const value_stack_repr = final.value_stack.repr_by(value_repr)
+      // console.log(value_stack_repr + application_trace_repr)
+      return value_stack_repr + application_trace_repr
     },
   }
 }

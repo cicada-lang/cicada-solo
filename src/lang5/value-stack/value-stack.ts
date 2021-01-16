@@ -11,7 +11,7 @@ export type ValueStack = {
   top: () => Value
   pop: () => [Value, ValueStack]
   repr: () => string
-  alpha_repr: (world: World) => string
+  repr_by: (value_repr: (value: Value) => string) => string
 }
 
 export function ValueStack(values: Array<Value>, mark: number): ValueStack {
@@ -36,19 +36,10 @@ export function ValueStack(values: Array<Value>, mark: number): ValueStack {
     pop() {
       return [this.top(), this.drop()]
     },
-    repr: () => {
-      const value_repr = (value: Value) => value.repr()
-      return (
-        `#${mark} ` + "[ " + values.map(value_repr).join(" ") + " ] " + "\n"
-      )
-    },
-    alpha_repr: (world) => {
-      // TODO
-      const value_repr = (value: Value) =>
-        value.semantic_repr ? value.semantic_repr() : value.repr()
-      return (
-        `#${mark} ` + "[ " + values.map(value_repr).join(" ") + " ] " + "\n"
-      )
+    repr_by: (value_repr) =>
+      `#${mark} ` + "[ " + values.map(value_repr).join(" ") + " ] " + "\n",
+    repr() {
+      return this.repr_by((value) => value.repr())
     },
   }
 }
