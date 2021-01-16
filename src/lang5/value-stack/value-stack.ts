@@ -1,4 +1,5 @@
 import { Value } from "../value"
+import { World } from "../world"
 import { PlaceholderValue, isPlaceholderValue } from "../values"
 
 export type ValueStack = {
@@ -10,7 +11,7 @@ export type ValueStack = {
   top: () => Value
   pop: () => [Value, ValueStack]
   repr: () => string
-  alpha_repr: () => string
+  alpha_repr: (world: World) => string
 }
 
 export function ValueStack(values: Array<Value>, mark: number): ValueStack {
@@ -41,9 +42,10 @@ export function ValueStack(values: Array<Value>, mark: number): ValueStack {
         `#${mark} ` + "[ " + values.map(value_repr).join(" ") + " ] " + "\n"
       )
     },
-    alpha_repr: () => {
+    alpha_repr: (world) => {
+      // TODO
       const value_repr = (value: Value) =>
-        value.alpha_repr ? value.alpha_repr() : value.repr()
+        value.semantic_repr ? value.semantic_repr() : value.repr()
       return (
         `#${mark} ` + "[ " + values.map(value_repr).join(" ") + " ] " + "\n"
       )

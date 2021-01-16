@@ -25,10 +25,10 @@ export function JoJoValue(
     ...the,
     apply: (world) => jojo.jos_execute(world),
     repr: () => jojo.repr(),
-    alpha_repr: () => {
+    semantic_repr: () => {
       const world = World({ ...the, value_stack: ValueStack([], 0) })
       const final = jojo.jos_execute(world)
-      return final.value_stack.alpha_repr()
+      return final.value_stack.alpha_repr(final)
     },
   }
 }
