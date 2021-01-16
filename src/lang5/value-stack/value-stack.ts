@@ -10,8 +10,9 @@ export type ValueStack = {
   drop: () => ValueStack
   top: () => Value
   pop: () => [Value, ValueStack]
-  repr: () => string
   repr_by: (value_repr: (value: Value) => string) => string
+  repr: () => string
+  semantic_repr: () => string
 }
 
 export function ValueStack(values: Array<Value>, mark: number): ValueStack {
@@ -40,6 +41,9 @@ export function ValueStack(values: Array<Value>, mark: number): ValueStack {
       `#${mark} ` + "[ " + values.map(value_repr).join(" ") + " ] " + "\n",
     repr() {
       return this.repr_by((value) => value.repr())
+    },
+    semantic_repr() {
+      return this.repr_by((value) => value.semantic_repr())
     },
   }
 }

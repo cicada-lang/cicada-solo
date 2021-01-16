@@ -10,5 +10,8 @@ export function StrLitValue(str: string): StrLitValue {
     kind: "StrLitValue",
     str,
     repr: () => `"${str}"`,
+    semantic_repr() {
+      return this.repr()
+    }
   }
 }

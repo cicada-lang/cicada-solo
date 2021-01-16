@@ -23,3 +23,14 @@
 @show [ ! ! ]
 @show [ ! ! ! ]
 @show [ swap ! ]
+
+@assert_not_equal [ ! ] [ ! ! ]
+@assert_not_equal [ ! ] [ swap ! ]
+@assert_equal [ ! ] [ swap swap ! ]
+@assert_equal [ ! ] [ dup drop ! ]
+@assert_equal [ ! ] [ dup swap drop ! ]
+
+@assert_equal [ ! swap ] [ dup drop ! swap ]
+@assert_equal [ ! ] [ dup drop ! swap swap ]
+
+@assert_not_equal [ ! ] [ dup drop ! swap ]

@@ -10,6 +10,9 @@ export function PlaceholderValue(mark: number): PlaceholderValue {
     kind: "PlaceholderValue",
     mark,
     repr: () => `#${mark}`,
+    semantic_repr() {
+      return this.repr()
+    }
   }
 }
 

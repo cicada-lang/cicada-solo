@@ -10,5 +10,8 @@ export function NumLitValue(num: number): NumLitValue {
     kind: "NumLitValue",
     num,
     repr: () => `${num}`,
+    semantic_repr() {
+      return this.repr()
+    }
   }
 }
