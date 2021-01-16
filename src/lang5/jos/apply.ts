@@ -11,11 +11,12 @@ export const Apply: Apply = {
   repr: () => `!`,
 }
 
-function apply(world: World): World {
+export function apply(world: World): World {
   const [value, next] = world.value_stack_pop()
-  if (value.apply) {
-    return value.apply(next)
-  } else {
+
+  if (!value.apply) {
     throw new Error(`Expecting executable value`)
   }
+
+  return value.apply(next)
 }

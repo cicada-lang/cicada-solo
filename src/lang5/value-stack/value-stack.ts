@@ -35,19 +35,14 @@ export function ValueStack(values: Array<Value>, mark: number): ValueStack {
     pop() {
       return [this.top(), this.drop()]
     },
-    repr: () =>
-      "[ " +
-      values.map((value) => value.repr()).join(" ") +
-      " ] " +
-      `${mark}` +
-      "\n",
-    hash_repr: () =>
-      "[ " +
-      values
-        .map((value) => (value.hash_repr ? value.hash_repr() : value.repr()))
-        .join(" ") +
-      " ] " +
-      `${mark}` +
-      "\n",
+    repr: () => {
+      const value_repr = (value: Value) => value.repr()
+      return "[ " + values.map(value_repr).join(" ") + " ] " + `${mark}` + "\n"
+    },
+    hash_repr: () => {
+      const value_repr = (value: Value) =>
+        value.hash_repr ? value.hash_repr() : value.repr()
+      return "[ " + values.map(value_repr).join(" ") + " ] " + `${mark}` + "\n"
+    },
   }
 }
