@@ -14,7 +14,8 @@ export type ValueStack = {
 
 export function ValueStack(values: Array<Value>, mark: number): ValueStack {
   return {
-    mark, values,
+    mark,
+    values,
     depth: () => values.length - mark,
     push: (value) =>
       // NOTE Handle normalization.
