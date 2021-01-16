@@ -10,6 +10,7 @@ export type ValueStack = {
   top: () => Value
   pop: () => [Value, ValueStack]
   repr: () => string
+  hash_repr: () => string
 }
 
 export function ValueStack(values: Array<Value>, mark: number): ValueStack {
@@ -37,6 +38,14 @@ export function ValueStack(values: Array<Value>, mark: number): ValueStack {
     repr: () =>
       "[ " +
       values.map((value) => value.repr()).join(" ") +
+      " ] " +
+      `${mark}` +
+      "\n",
+    hash_repr: () =>
+      "[ " +
+      values
+        .map((value) => (value.hash_repr ? value.hash_repr() : value.repr()))
+        .join(" ") +
       " ] " +
       `${mark}` +
       "\n",
