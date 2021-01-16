@@ -217,8 +217,6 @@
 > - no normalization, but has directly implemented
 >   equivalence by execution.
 
-- [lang5] improve `ValueStack` constructor
-
 > the difference between lambda calculus and jojo must be understand by topology.
 
 - 也许 lambda calculus 是 topology 而 jojo 是代数？
