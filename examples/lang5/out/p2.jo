@@ -18,3 +18,8 @@
 @assert_equal
   [ [ [ swap swap ] ] ]
   [ [ [ dup drop ] ] ]
+
+@show [ ! ]
+@show [ ! ! ]
+@show [ ! ! ! ]
+@show [ swap ! ]
