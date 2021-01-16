@@ -217,15 +217,22 @@
 > - no normalization, but has directly implemented
 >   equivalence by execution.
 
-- [lang5] test the equivalent theory for real
-
 > the difference between lambda calculus and jojo must be understand by topology.
 
 - 也许 lambda calculus 是 topology 而 jojo 是代数？
 
-- 只有暂时不考虑 subst 机制，我们才能将拓扑性质从 jojo 中分离出来。
-  因此我们先实现 `! [] 列表置换` 这三个 jo 之间的等式理论。
+- jojo 的等式理论：
   - 判断等价的时候，可以通过实际作用于列表，然后看结果，来完成。
-  - 因为只有 `! [] 列表置换` 所以除了某些 ! 都可以作用。
-  - 对于不能作用的 `!` 可以记录下 `!` 的操作，然后比较结果的时候，也比较记录。
-  - 对于这个等式理论，我们需要证明和 lambda calculus 类似的属性。
+  - 对于不能作用的值， 可以记录下作用时的栈。
+  - 对于这个等式理论，我们可以证明和 lambda calculus 类似的属性。
+    即只要是在动态型意义上相等的 jojo，我们所实现的等词都可以判断其相等。
+  - jojo 的等式理论好像不需要 lazy eval。
+
+- 我之前认为与 lambda 相比 jojo 中的类型系统更简单，
+  而 jojo 之间的等价关系判断更难。
+  但是现在看来，反而是后者简单，前者难。
+
+> Next?
+
+- 我们可以利用这个语言与 Raymond Smullyan 的书，
+  来研究相互引用与递归的本质。
