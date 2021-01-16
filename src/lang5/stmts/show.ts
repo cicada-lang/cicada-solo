@@ -14,7 +14,7 @@ export function Show(jojo: JoJo): Show {
       const final = jojo.jos_execute(world)
       const value_stack_repr = final.value_stack.repr()
       const application_trace_repr = final.application_trace
-        .map(({ mark, value_stack }) => "- " + `#${mark} @ ` + value_stack.repr())
+        .map((value_stack) => "- " + value_stack.repr())
         .join("")
       return world.output_append(value_stack_repr + application_trace_repr)
     },
