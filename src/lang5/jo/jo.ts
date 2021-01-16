@@ -1,7 +1,7 @@
 import { World } from "../world"
-import { Repr } from "../repr"
 
-export type Jo = Repr & {
+export type Jo = {
   execute: (world: World) => World
   kind: string
+  repr: () => string
 }
