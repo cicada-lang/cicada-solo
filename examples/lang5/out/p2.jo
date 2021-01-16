@@ -4,10 +4,17 @@
 
 @assert_equal [ swap swap ] [ ]
 @assert_equal [ dup drop ] [ ]
+
 @assert_equal [ [ ] ] [ [ ] ]
 
 @assert_equal [ [ swap swap ] ] [ [ ] ]
 @assert_equal [ [ dup drop ] ] [ [ ] ]
+@assert_equal
+  [ [ swap swap ] ]
+  [ [ dup drop ] ]
 
 @assert_equal [ [ [ swap swap ] ] ] [ [ [ ] ] ]
 @assert_equal [ [ [ dup drop ] ] ] [ [ [ ] ] ]
+@assert_equal
+  [ [ [ swap swap ] ] ]
+  [ [ [ dup drop ] ] ]
