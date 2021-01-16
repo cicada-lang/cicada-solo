@@ -5,7 +5,6 @@ import { Env } from "../env"
 import { Mod } from "../mod"
 
 export type ApplicationTrace = Array<ValueStack>
-export const empty_application_trace: ApplicationTrace = []
 
 export type World = {
   env: Env
@@ -29,7 +28,7 @@ export function World(the: {
   application_trace?: ApplicationTrace
 }): World {
   const output = the.output || ""
-  const application_trace = the.application_trace || empty_application_trace
+  const application_trace = the.application_trace || []
 
   return {
     ...the,
@@ -50,7 +49,7 @@ export function World(the: {
       World({
         ...the,
         value_stack: ValueStack([], 0),
-        application_trace: [...application_trace, the.value_stack],
+        application_trace: [the.value_stack, ...application_trace],
       }),
   }
 }
