@@ -62,6 +62,11 @@
 
 # lang2
 
+> syntax
+
+- [lang2] to use `@claim` and `@define`
+- [lang2] stmt and syntax for testing
+
 > refactoring `Value`
 
 > refactoring `Neutral`
@@ -72,7 +77,7 @@
 
 > naming convention
 
-- [lang2] maybe we should change the naming convention to go without dot.
+- [lang2] maybe we should change the naming convention to be without dot.
 
 > 将 NbE 教程中的 tartlet 升级为 pie
 
