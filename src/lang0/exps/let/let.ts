@@ -1,9 +1,7 @@
 import { Exp } from "../../exp"
-import * as Stmt from "../../stmt"
 import { Evaluable } from "../../evaluable"
 import { evaluate } from "../../evaluate"
 import * as Env from "../../env"
-import * as ut from "../../../ut"
 
 export type Let = Exp & {
   kind: "Let"

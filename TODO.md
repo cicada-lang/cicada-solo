@@ -43,9 +43,10 @@
 
 > refactoring `Stmt`
 
-- [lang0] `decls/define.ts` -- `Define` for `Stmt.def`
-- [lang0] `decls/show.ts` -- `Show` for `Stmt.show`
-- [lang0] `Decl` as intersection type
+- [lang0] inline `Stmt.execute`
+- [lang0] `stmts/define.ts` -- `Define` for `Stmt.def`
+- [lang0] `stmts/show.ts` -- `Show` for `Stmt.show`
+- [lang0] `Stmt` as intersection type
 
 # lang1
 
@@ -64,8 +65,17 @@
 
 > syntax
 
+- [lang1] `Let` <: `Exp`
+- [lang1] `Let` syntax
+
+- [lang1] no `Begin` use `Let` instead
+  - `Exp` should not depend on `Stmt`
+
+- [lang2] simplify the interface `Stmt`
+
+- [lang2] add `@check` syntax for testing
+
 - [lang2] to use `@claim` and `@define`
-- [lang2] stmt and syntax for testing
 
 > refactoring `Value`
 
