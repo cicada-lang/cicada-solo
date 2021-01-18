@@ -26,9 +26,8 @@ export function JoJoValue(
     apply: (world) => jojo.jos_execute(world),
     repr: () => jojo.repr(),
     semantic_repr: () => {
-      const world = jojo.jos_execute(
-        World({ ...the, value_stack: ValueStack([], 0) })
-      )
+      const init_world = World({ ...the, value_stack: ValueStack([], 0) })
+      const world = jojo.jos_execute(init_world)
       return (
         world.value_stack.semantic_repr() +
         world.application_trace
