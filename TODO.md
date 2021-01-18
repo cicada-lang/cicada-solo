@@ -44,7 +44,10 @@
 > 加入 Mod 以实现相互递归。
 > - readback 如何处理相互递归？
 
+- [lang0] `Mod`
+- [lang0] `Var` also lookup `Mod`
 - [lang0] use `Mod` to replace `World`
+  - each mod has its own `output`
 
 # lang1
 
