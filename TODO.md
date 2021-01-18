@@ -4,8 +4,10 @@
 > - 递归函数是否可以有效地被化归到一般递归组合子，比如 fix 与 Y？
 > - 递归函数之间的等价问题是否可以被化归到 Graph isomorphism problem？
 > - 同时理解 jojo 与 lambda calculus 中的递归现象。
+> - cell complex 是否可以被划归到 Graph theory 或者 hypergraph theory？
 
-- 研究 Raymond Smullyan 的书。
+- raymond-smullyan
+- stephen-wolfram/a-new-kind-of-science
 
 > To improve the design of our type system framework,
 > we need enough concrete example types.
