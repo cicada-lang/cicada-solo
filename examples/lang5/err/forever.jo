@@ -1,0 +1,3 @@
+@define forever [ forever ]
+
+@semantic_show [ forever ]

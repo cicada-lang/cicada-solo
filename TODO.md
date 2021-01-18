@@ -44,7 +44,7 @@
 > 加入 Mod 以实现相互递归。
 > - 需要针对递归处理 readback
 
-- [lang0] `Mod` in `World` instead of `Env` in `World`
+- [lang0] use `Mod` to replace `World`
 
 # lang1
 

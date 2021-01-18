@@ -1,0 +1,20 @@
+lang5.js eval <input>
+
+Eval a file
+
+Options:
+  --help     Show help                                                 [boolean]
+  --version  Show version number                                       [boolean]
+  --nocolor                                           [boolean] [default: false]
+
+RangeError: Maximum call stack size exceeded
+    at Object.value_stack_pop (/home/xyh/cicada/lib/lang5/world/world.js:10:13)
+    at Object.apply (/home/xyh/cicada/lib/lang5/jos/apply.js:11:33)
+    at Object.execute (/home/xyh/cicada/lib/lang5/jos/var.js:22:20)
+    at /home/xyh/cicada/lib/lang5/jos/jojo.js:16:62
+    at Array.reduce (<anonymous>)
+    at Object.jos_execute (/home/xyh/cicada/lib/lang5/jos/jojo.js:16:37)
+    at Object.apply (/home/xyh/cicada/lib/lang5/values/jojo-value.js:7:100)
+    at Object.apply (/home/xyh/cicada/lib/lang5/jos/apply.js:18:18)
+    at Object.execute (/home/xyh/cicada/lib/lang5/jos/var.js:22:20)
+    at /home/xyh/cicada/lib/lang5/jos/jojo.js:16:62
