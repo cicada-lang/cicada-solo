@@ -1,6 +1,7 @@
 # main
 
-> 理解关于的理论，因为 readback 的难点就是递归。
+> 理解关于递归的理论，因为 readback 的难点就是递归。
+> 我目前唯一知道的实现递归的方式就是用 mod，但是这给 readback 带来了困难。
 > - 递归函数是否可以有效地被化归到一般递归组合子，比如 fix 与 Y？
 > - 递归函数之间的等价问题是否可以被化归到 Graph isomorphism problem？
 > - 同时理解 jojo 与 lambda calculus 中的递归现象。
@@ -269,3 +270,5 @@
 
 - 我们可以利用这个语言与 Raymond Smullyan 的书，
   来研究相互引用与递归的本质。
+
+- 很难想像 jojo 中如何实现 lazy eval。
