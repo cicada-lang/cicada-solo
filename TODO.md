@@ -49,8 +49,7 @@
 - [lang1] no `Begin` use `Let` instead
   - `Exp` should not depend on `Stmt`
 
-- [lang1] `Stmt.def` vs `Stmt.show`
-- [lang1] `Stmt.def` -- `execute` vs `declare`
+- [lang1] `World` for `Stmt.execute`
 
 # lang2
 
