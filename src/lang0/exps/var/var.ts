@@ -1,6 +1,5 @@
 import { Exp } from "../../exp"
 import { Evaluable } from "../../evaluable"
-import * as Env from "../../env"
 import * as Explain from "../../explain"
 import * as Trace from "../../../trace"
 

@@ -1,5 +1,3 @@
-import * as Exp from "../../exp"
-import { Env } from "../../env"
 import { World } from "../../world"
 import * as Syntax from "../../syntax"
 import * as Trace from "../../../trace"
