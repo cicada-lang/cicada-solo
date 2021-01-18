@@ -40,7 +40,7 @@
     "change-case": "^4.1.2",
     "deep-diff": "^1.0.2",
     "fast-deep-equal": "^3.1.3",
-    "fast-glob": "^3.2.4",
+    "fast-glob": "^3.2.5",
     "fs-readdir-recursive": "^1.1.0",
     "js-yaml": "^4.0.0",
     "nanoid": "^3.1.20",
