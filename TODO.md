@@ -42,7 +42,7 @@
 # lang0
 
 > 加入 Mod 以实现相互递归。
-> - 需要针对递归处理 readback
+> - readback 如何处理相互递归？
 
 - [lang0] use `Mod` to replace `World`
 
