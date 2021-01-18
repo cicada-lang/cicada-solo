@@ -39,9 +39,17 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
+# lang0
+
+> 加入 Mod 以实现相互递归。
+> - 需要针对递归处理 readback
+
+- [lang0] `Mod` in `World` instead of `Env` in `World`
+
 # lang1
 
-> refactoring `Stmt`
+- [lang1] `Env` no side effect
+- [lang1] `Ctx` no side effect
 
 - [lang1] `Let` <: `Exp`
 - [lang1] `Let` syntax
@@ -49,9 +57,14 @@
 - [lang1] no `Begin` use `Let` instead
   - `Exp` should not depend on `Stmt`
 
-- [lang1] `World` for `Stmt.execute`
+- [lang1] `World` for `Stmt.assemble`
+- [lang1] `World.check`
+- [lang1] `World.run_mod`
+- [lang1] `World.run_all`
 
 # lang2
+
+> 尽管不允许递归，但是还是需要以一般的方式实现，使得递归是可选的功能。
 
 > syntax
 
