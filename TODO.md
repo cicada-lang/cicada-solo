@@ -39,15 +39,6 @@
 - [TLT] A. The Way Forward
 - [TLT] B. Rules Are Made to Be Spoken
 
-# lang0
-
-> refactoring `Stmt`
-
-- [lang0] fix `Stmt.execute`
-- [lang0] `stmts/define.ts` -- `Define` for `Stmt.def`
-- [lang0] `stmts/show.ts` -- `Show` for `Stmt.show`
-- [lang0] `Stmt` as intersection type
-
 # lang1
 
 > refactoring `Stmt`

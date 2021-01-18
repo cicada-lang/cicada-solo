@@ -1,6 +1,6 @@
 import * as Exp from "../../exp"
 import { Env } from "../../env"
-import * as Stmt from "../../stmt"
+import { World } from "../../world"
 import * as Syntax from "../../syntax"
 import * as Trace from "../../../trace"
 import * as pt from "../../../partech"
@@ -26,9 +26,8 @@ export const handler = async (argv: Argv) => {
 
   try {
     const stmts = Syntax.parse_stmts(text)
-    const env = new Env()
-    const output = Stmt.run(env, stmts)
-    if (output) console.log(output)
+    const world = stmts.reduce((world, stmt) => stmt.execute(world), new World())
+    if (world.output) console.log(world.output)
   } catch (error) {
     if (error instanceof Trace.Trace) {
       console.error(Trace.repr(error, (exp) => exp.repr()))
