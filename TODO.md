@@ -43,8 +43,6 @@
 
 > refactoring `Stmt`
 
-- [lang0] `Env` no side effect
-- [lang0] `World` for `Stmt.execute`
 - [lang0] fix `Stmt.execute`
 - [lang0] `stmts/define.ts` -- `Define` for `Stmt.def`
 - [lang0] `stmts/show.ts` -- `Show` for `Stmt.show`

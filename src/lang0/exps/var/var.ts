@@ -15,7 +15,7 @@ export function Var(name: string): Var {
     name,
     ...Evaluable({
       evaluability: ({ env }) => {
-        const result = Env.lookup(env, name)
+        const result = env.lookup(name)
         if (result === undefined) {
           throw new Trace.Trace(Explain.explain_name_undefined(name))
         }

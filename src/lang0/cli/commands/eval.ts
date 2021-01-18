@@ -1,5 +1,5 @@
 import * as Exp from "../../exp"
-import * as Env from "../../env"
+import { Env } from "../../env"
 import * as Stmt from "../../stmt"
 import * as Syntax from "../../syntax"
 import * as Trace from "../../../trace"
@@ -26,7 +26,7 @@ export const handler = async (argv: Argv) => {
 
   try {
     const stmts = Syntax.parse_stmts(text)
-    const env = Env.init()
+    const env = new Env()
     const output = Stmt.run(env, stmts)
     if (output) console.log(output)
   } catch (error) {
