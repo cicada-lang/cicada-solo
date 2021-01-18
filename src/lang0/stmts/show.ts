@@ -16,6 +16,6 @@ export function Show(exp: Exp): Show {
       const value = evaluate(world.env, exp)
       const norm = readback(new Set(world.env.names), value)
       return world.output_append(norm.repr() + "\n")
-    }
+    },
   }
 }

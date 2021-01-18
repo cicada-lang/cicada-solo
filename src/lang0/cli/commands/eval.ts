@@ -26,7 +26,10 @@ export const handler = async (argv: Argv) => {
 
   try {
     const stmts = Syntax.parse_stmts(text)
-    const world = stmts.reduce((world, stmt) => stmt.execute(world), new World())
+    const world = stmts.reduce(
+      (world, stmt) => stmt.execute(world),
+      new World()
+    )
     if (world.output) console.log(world.output)
   } catch (error) {
     if (error instanceof Trace.Trace) {

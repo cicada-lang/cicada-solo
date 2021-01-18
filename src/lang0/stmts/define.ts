@@ -11,9 +11,10 @@ export type Define = Stmt & {
 export function Define(name: string, exp: Exp): Define {
   return {
     kind: "Define",
-    name, exp,
+    name,
+    exp,
     execute(world) {
       return world.env_extend(name, evaluate(world.env, exp))
-    }
+    },
   }
 }
