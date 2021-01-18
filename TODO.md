@@ -252,5 +252,8 @@
 
 > Next?
 
+- 这里对 jojo 的 normalization 可以帮助理解 lambda calculus 中的 normalization。
+  - jojo 有 `application_trace`，而是 lambda calculus 中 `application_trace` 都被记录在 `Neutral` 中。
+
 - 我们可以利用这个语言与 Raymond Smullyan 的书，
   来研究相互引用与递归的本质。
