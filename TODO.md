@@ -10,10 +10,10 @@
 - raymond-smullyan
   - to understand diagonalization is to understand recursion without name
   - to understand diagonalization and recursion is to understand graph
-  - graph seems is more complicated than tree
+  - graph seems is more complicated than tree,
     just like tree seems is more complicated than number
-  - two graph can be applied or composed to form new graph
-    just like two cell-complex can be can be composed to form new cell-complex
+  - in lambda calculus, two graph can be applied or composed to form new graph,
+    just like in higher order algebra, two cell-complex can be can be composed to form new cell-complex
 
 - stephen-wolfram/a-new-kind-of-science
 
