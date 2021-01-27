@@ -8,6 +8,13 @@
 > - cell complex 是否可以被划归到 Graph theory 或者 hypergraph theory？
 
 - raymond-smullyan
+  - to understand diagonalization is to understand recursion without name
+  - to understand diagonalization and recursion is to understand graph
+  - graph seems is more complicated than tree
+    just like tree seems is more complicated than number
+  - two graph can be applied or composed to form new graph
+    just like two cell-complex can be can be composed to form new cell-complex
+
 - stephen-wolfram/a-new-kind-of-science
 
 > To improve the design of our type system framework,
