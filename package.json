@@ -1,6 +1,6 @@
 {
   "name": "@cicada-lang/cicada",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "repository": "github:cicada-lang/cicada",
   "main": "lib/index.js",
   "files": [
@@ -16,13 +16,13 @@
     "trailingComma": "es5"
   },
   "bin": {
-    "lang0": "./bin/lang0.js",
-    "lang1": "./bin/lang1.js",
-    "lang2": "./bin/lang2.js",
-    "lang3": "./bin/lang3.js",
-    "lang4": "./bin/lang4.js",
-    "lang5": "./bin/lang5.js",
-    "partech": "./bin/partech.js"
+    "lang0": "bin/lang0.js",
+    "lang1": "bin/lang1.js",
+    "lang2": "bin/lang2.js",
+    "lang3": "bin/lang3.js",
+    "lang4": "bin/lang4.js",
+    "lang5": "bin/lang5.js",
+    "partech": "bin/partech.js"
   },
   "devDependencies": {
     "@types/assert": "^1.5.4",
