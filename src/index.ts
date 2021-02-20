@@ -1,4 +1,4 @@
-export * as lang2 from "./lang2"
+export * as cicada from "./cicada"
 export * as Trace from "./trace"
 export * as pt from "./partech"
 export * as rr from "./rr"

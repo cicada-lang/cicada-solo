@@ -14,7 +14,7 @@ commands.t = async () => {
 commands.test_all = async () => {
   await commands.test_lib()
   await commands.test_impression()
-  await commands.test_lang2()
+  await commands.test_cic()
   await commands.test_partech()
 }
 
@@ -32,16 +32,16 @@ commands.test_impression = async () => {
   )
 }
 
-commands.test_lang2 = async () => {
+commands.test_cic = async () => {
   await test(
-    "./bin/lang2.js $file",
-    { file: "examples/lang2/out/**.cic" },
+    "./bin/cic.js $file",
+    { file: "examples/cicada/out/**.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
 
   await test(
-    "./bin/lang2.js $file",
-    { file: "examples/lang2/err/**.cic" },
+    "./bin/cic.js $file",
+    { file: "examples/cicada/err/**.cic" },
     snapshot.err(({ file }) => file + ".err")
   )
 }

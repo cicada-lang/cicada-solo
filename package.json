@@ -16,7 +16,7 @@
     "trailingComma": "es5"
   },
   "bin": {
-    "lang2": "bin/lang2.js",
+    "cic": "bin/cic.js",
     "partech": "bin/partech.js"
   },
   "devDependencies": {
