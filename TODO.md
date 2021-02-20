@@ -20,10 +20,6 @@
 > To improve the design of our type system framework,
 > we need enough concrete example types.
 
-- Changing lang2 to support pie will provide us more examples.
-  - Before supporting pie, we change the design of lang2 from procedural to OOP.
-  - Changing lang2 to OOP will provide us more examples about readback
-
 - TLT will provide us a suite of tests, and a philosophy of testing.
 
 # partech
@@ -36,7 +32,6 @@
 # TLT
 
 > 强化对类型系统的理解与实现技术。
-> - 同时测试 lang2 与 lang3。
 
 - [TLT] 5. Lists, Lists, and More Lists
 - [TLT] 6. Precisely How Many?
