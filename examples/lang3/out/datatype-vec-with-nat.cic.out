@@ -1,8 +1,0 @@
-(_) => Vec(String)(_)
-Vec(String)(Nat.zero)
-Vec.null(String)
-(prev) => (head) => (tail) => Vec.cons(String)(prev)(head)(tail)
-(head) => (tail) => Vec.cons(String)(Nat.zero)(head)(tail)
-Vec.cons(String)(Nat.zero)("abc")(Vec.null(String))
-Vec.cons(String)(Nat.add1(Nat.zero))("abc")(Vec.cons(String)(Nat.zero)("abc")(Vec.null(String)))
-

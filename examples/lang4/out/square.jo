@@ -1,9 +1,0 @@
-@claim swap [ 'A 'B -> 'B 'A ]
-@define swap [ (b) (a) b a ]
-
-@claim dup [ 'A -> 'A 'A ]
-@define dup [ (a) a a ]
-
-@show [ "a" "b" ]
-@show [ "a" "b" swap ]
-@show [ "a" "b" swap dup dup dup ]

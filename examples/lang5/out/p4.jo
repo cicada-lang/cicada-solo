@@ -1,5 +1,0 @@
-@define swap [ (b) (a) b a ]
-@define dup [ (a) a a ]
-@define drop [ (a) ]
-
-@semantic_show [ swap ! drop drop ! ]

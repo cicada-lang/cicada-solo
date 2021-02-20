@@ -1,6 +1,0 @@
-@define ch0 = (f) => (x) => x
-@define ch1 = (f) => (x) => f(x)
-@define ch2 = (f) => (x) => f(f(x))
-@define ch3 = (f) => (x) => f(f(f(x)))
-
-@show ch3(ch3)

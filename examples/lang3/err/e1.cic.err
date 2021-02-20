@@ -1,9 +1,0 @@
-
-I infer the type to be { x : String }.
-But the given type is String.
-
-previous:
-- z.x
-- z.id(z.x)
-
-

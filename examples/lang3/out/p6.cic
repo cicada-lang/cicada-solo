@@ -1,4 +1,0 @@
-Color : Type
-Color = { "red" | "green" | "blue" }
-
-@show Color

@@ -1,6 +1,0 @@
-(_) => List(_)
-(T) => List.null(T)
-(T) => (head) => (tail) => List.cons(T)(head)(tail)
-List.null(String)
-List.cons(String)("abc")(List.null(String))
-

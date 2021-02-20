@@ -1,7 +1,4 @@
-export * as lang0 from "./lang0"
-export * as lang1 from "./lang1"
 export * as lang2 from "./lang2"
-export * as lang3 from "./lang3"
 export * as Trace from "./trace"
 export * as pt from "./partech"
 export * as rr from "./rr"

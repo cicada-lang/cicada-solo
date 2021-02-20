@@ -1,5 +1,0 @@
-
-Fail to define swap, because type check failed.
-- infered  : 'A 'B
-- expected : 'B 'A
-

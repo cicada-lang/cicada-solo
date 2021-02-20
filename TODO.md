@@ -1,3 +1,4 @@
+- lang2 as cicada
 # main
 
 > 理解关于递归的理论，因为 readback 的难点就是递归。

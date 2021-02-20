@@ -1,3 +1,0 @@
-@define id = (x) => x
-@define f = (x) => id(id)
-@show f

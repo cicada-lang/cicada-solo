@@ -1,6 +1,0 @@
-export * from "./var"
-export * from "./let"
-export * from "./jojo"
-export * from "./apply"
-export * from "./str-lit"
-export * from "./num-lit"
