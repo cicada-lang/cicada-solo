@@ -1,22 +1,3 @@
-# lang0
-
-> church encoding
-
-- church-boolean.cic
-- church-numeral-predicates.cle
-- church-pair.cic
-- 直接用 Church numeral 来实现 Nat，而不用 ADT。
-  其语义是迭代函数，也许有有趣的应用
-  多了一个关于迭代函数的 API。
-
-# lang1
-
-- [lang1] try to generate checker from type
-
-> Play with systemt
-
-> 添加 algebraic data type
-
 # lang3
 
 > module system
@@ -32,18 +13,6 @@
 > project insight
 
 - [lang3] [maybe] good view of `Project` on frontend (project insights)
-
-# langx
-
-> wissen
-
-- learn from "Computation and Deduction" and Logic framework
-  - Run datatype definition as logic programs.
-  - 为古典逻辑设计形式语言。
-
-- Note that, a prolog-like DSL for bidirectional type checking, would be wrong.
-  because the aim of split one judgment `:` to two judgments `=>` and `<=`,
-  is to avoid searching, and making the group of inference rules deterministic.
 
 # cicada
 
