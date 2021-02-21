@@ -1,4 +1,3 @@
-- [refactoring] as class -- sole
 - [refactoring] as class -- trivial
 - [refactoring] as class -- type
 

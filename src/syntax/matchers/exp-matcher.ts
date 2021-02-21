@@ -63,7 +63,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     "exp:replace": ({ target, motive, base }) =>
       Replace(exp_matcher(target), exp_matcher(motive), exp_matcher(base)),
     "exp:trivial": () => Trivial,
-    "exp:sole": () => Sole,
+    "exp:sole": () => new Sole(),
     "exp:absurd": () => new Absurd(),
     "exp:absurd_ind": ({ target, motive }) =>
       new AbsurdInd(exp_matcher(target), exp_matcher(motive)),
