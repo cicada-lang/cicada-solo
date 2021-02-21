@@ -2,7 +2,6 @@
 
 > syntax
 
-- `Let` <: `Exp`
 - `Let` syntax
 
 - no `Begin` use `Let` instead

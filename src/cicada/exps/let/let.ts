@@ -26,12 +26,14 @@ export function Let(name: string, exp: Exp, ret: Exp): Let {
     evaluability({ env }: { env: Env.Env }): Value {
       return evaluate(Env.update(env, name, evaluate(env, exp)), ret)
     },
+
     inferability({ ctx }: { ctx: Ctx.Ctx }): Value {
       return infer(
         Ctx.update(ctx, name, infer(ctx, exp), evaluate(Ctx.to_env(ctx), exp)),
         ret
       )
     },
+
     checkability(t: Value, { ctx }: { ctx: Ctx.Ctx }): void {
       check(
         Ctx.update(ctx, name, infer(ctx, exp), evaluate(Ctx.to_env(ctx), exp)),
@@ -39,11 +41,16 @@ export function Let(name: string, exp: Exp, ret: Exp): Let {
         t
       )
     },
-    repr: () => {
-      throw new Error("TODO")
+
+    repr(): string {
+      return `@let ${name} = ${exp.repr()} ${ret.repr()}`
     },
-    alpha_repr: (opts) => {
-      throw new Error("TODO")
+
+    alpha_repr(opts: AlphaReprOpts): string {
+      return `@let ${name} = ${exp.alpha_repr(opts)} ${ret.alpha_repr({
+        depth: opts.depth + 1,
+        depths: new Map([...opts.depths, [name, opts.depth]]),
+      })}`
     },
   }
 }
