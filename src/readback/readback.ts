@@ -74,7 +74,7 @@ export function readback(
   } else if (t.kind === "Value.type" && value.kind === "Value.str") {
     return new Str()
   } else if (t.kind === "Value.type" && value.kind === "Value.trivial") {
-    return Trivial
+    return new Trivial()
   } else if (t.kind === "Value.type" && value.kind === "Value.absurd") {
     return new Absurd()
   } else if (t.kind === "Value.type" && value.kind === "Value.equal") {
