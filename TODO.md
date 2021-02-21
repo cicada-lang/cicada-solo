@@ -1,12 +1,11 @@
-- [refactoring] parser as factory of `Exp`
-
+- [refactoring] inline `Exp`'s members -- alpha_repr
 - [refactoring] inline `Exp`'s members -- checkable
 - [refactoring] simplify `exps` file structure
-- [refactoring] inline `Exp`'s members -- repr
-- [refactoring] inline `Exp`'s members -- alpha_repr
 
 - [refactoring] simplify `Exp`'s members' declaration
 - [refactoring] `Exp` as abstract class -- use normal oop style
+
+- [refactoring] parser as factory of `Exp`
 
 - [refactoring] `Stmt`
 - [refactoring] `Value`
