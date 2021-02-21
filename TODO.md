@@ -1,4 +1,3 @@
-- [refactoring] inline `Exp`'s members -- alpha_repr
 - [refactoring] inline `Exp`'s members -- checkable
 - [refactoring] simplify `exps` file structure
 

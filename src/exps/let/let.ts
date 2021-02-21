@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, AlphaReprOpts } from "../../exp"
 import { Value } from "../../value"
 import { Env } from "../../env"
 import * as Ctx from "../../ctx"
@@ -6,7 +6,6 @@ import { Inferable } from "../../inferable"
 import { evaluate } from "../../evaluate"
 import { infer } from "../../infer"
 import { check } from "../../check"
-import { AlphaReprOpts } from "../../alpha-repr"
 import * as ut from "../../ut"
 
 export type Let = Exp & {
