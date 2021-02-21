@@ -28,7 +28,7 @@ _ = same
 _ : Equal((Nat) -> Pair(Nat, Nat), (x) => cons(x, x), (y) => cons(y, y))
 _ = same
 
-_ : Equal((Nat) -> Nat, (y) => car({ Pair(Nat, Nat) -- cons(y, y) }), (x) => x)
+_ : Equal((Nat) -> Nat, (y) => car(@the Pair(Nat, Nat) cons(y, y)), (x) => x)
 _ = same
 
 _ : Equal((Pair(Nat, Nat)) -> Nat, (y) => car(y), (x) => car(x))
@@ -66,4 +66,4 @@ _ = cons(String, String)
 Pear : Type
 Pear = Pair(Nat, Nat)
 
-@show { Pear -- cons(1, 2) }
+@show @the Pear cons(1, 2)

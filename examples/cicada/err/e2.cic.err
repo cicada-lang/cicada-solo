@@ -8,6 +8,6 @@ to:
 
 previous:
 - same
-- { Equal(String, "ratatouille", "baguette") -- same }
+- @the Equal(String, "ratatouille", "baguette") same
 
 

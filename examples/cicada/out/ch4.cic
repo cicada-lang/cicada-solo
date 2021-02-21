@@ -27,8 +27,8 @@ _2 : Equal(Type,
   (A: Type) -> (D: Type) -> (Pair(A, D)) -> Pair(D, A),
   (A: Type) -> (D: Type) ->
     (Pair(
-      car({ Pair(Type, Type) -- cons(A, D) }),
-      cdr({ Pair(Type, Type) -- cons(A, D) }))) ->
+      car(@the Pair(Type, Type) cons(A, D)),
+      cdr(@the Pair(Type, Type) cons(A, D)))) ->
     Pair(D, A))
 _2 = same
 

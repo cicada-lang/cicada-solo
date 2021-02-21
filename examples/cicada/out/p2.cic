@@ -1,5 +1,5 @@
-t = { Type -- Nat }
-n = { t -- zero }
-one = { Nat -- add1(n) }
+t = @the Type Nat
+n = @the t zero
+one = @the Nat add1(n)
 
 @show one

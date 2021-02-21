@@ -1,25 +1,18 @@
-add = {
-  (Nat) -> (Nat) -> Nat
-  ---------------------
+add = @the (Nat) -> (Nat) -> Nat
   (x) => (y) => Nat.ind(y, (_) => Nat, x, (prev) => (almost) => add1(almost))
-}
 
-mul = {
-  (Nat) -> (Nat) -> Nat
-  ---------------------
+
+mul = @the (Nat) -> (Nat) -> Nat
   (x) => (y) => Nat.ind(y, (_) => Nat, 0, (prev) => (almost) => add(almost)(x))
-}
 
-pow = {
-  (Nat) -> (Nat) -> Nat
-  ---------------------
+
+pow = @the (Nat) -> (Nat) -> Nat
   (x) => (y) => Nat.ind(y, (_) => Nat, 1, (prev) => (almost) => mul(almost)(x))
-}
 
 eight =
   @let four = add(2)(2)
   add(four)(four)
 
-_ = { Equal(Nat, eight, pow(2)(3)) -- same }
+_ = @the Equal(Nat, eight, pow(2)(3)) same
 
 @show _

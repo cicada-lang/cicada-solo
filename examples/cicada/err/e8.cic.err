@@ -8,6 +8,6 @@ previous:
 - (prev) => add(add1(prev))(gauss(prev))
 - Nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
 - (n) => Nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
-- { (_: Nat) -> Nat -- (n) => Nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev))) }
+- @the (_: Nat) -> Nat (n) => Nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
 
 

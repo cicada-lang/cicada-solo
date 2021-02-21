@@ -8,6 +8,6 @@ to:
 
 previous:
 - same
-- { Equal((_: String) * String, cons("ratatouille", "baguette"), cons("baguette", "ratatouille")) -- same }
+- @the Equal((_: String) * String, cons("ratatouille", "baguette"), cons("baguette", "ratatouille")) same
 
 

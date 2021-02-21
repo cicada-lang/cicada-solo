@@ -114,6 +114,7 @@ export const exp = {
       { exp: "exp" },
       { ret: "exp" },
     ],
+    "exp:the": ['"@"', '"the"', { t: "exp" }, { exp: "exp" }],
     "exp:deduction": [
       '"{"',
       { deduction_entries: { $ap: ["one_or_more", "deduction_entry"] } },

@@ -25,8 +25,8 @@ export function The(t: Exp, exp: Exp): The {
         return t_value
       },
     }),
-    repr: () => `{ ${t.repr()} -- ${exp.repr()} }`,
+    repr: () => `@the ${t.repr()} ${exp.repr()}`,
     alpha_repr: (opts) =>
-      `{ ${t.alpha_repr(opts)} -- ${exp.alpha_repr(opts)} }`,
+      `@the ${t.alpha_repr(opts)} ${exp.alpha_repr(opts)}`,
   }
 }
