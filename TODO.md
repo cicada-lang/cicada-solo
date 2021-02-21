@@ -1,15 +1,19 @@
+- [refactoring] as class -- let
+- [refactoring] as class -- the
+- [refactoring] as class -- var
+
+- [refactoring] as class -- nat-ind
+
+- [refactoring] as class -- fn
+- [refactoring] as class -- pi
+
+- [refactoring] as class -- sigma
 - [refactoring] as class -- car
 - [refactoring] as class -- cdr
 - [refactoring] as class -- cons
+
 - [refactoring] as class -- equal
-- [refactoring] as class -- fn
-- [refactoring] as class -- let
-- [refactoring] as class -- nat-ind
-- [refactoring] as class -- pi
 - [refactoring] as class -- replace
-- [refactoring] as class -- sigma
-- [refactoring] as class -- the
-- [refactoring] as class -- var
 
 - [refactoring] `Exp` as abstract class -- use normal oop style
 
