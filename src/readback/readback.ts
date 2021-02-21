@@ -66,7 +66,7 @@ export function readback(
   ) {
     return The(new Absurd(), Readback.readback_neutral(ctx, value.neutral))
   } else if (t.kind === "Value.equal" && value.kind === "Value.same") {
-    return Same
+    return new Same()
   } else if (t.kind === "Value.str" && value.kind === "Value.quote") {
     return new Quote(value.str)
   } else if (t.kind === "Value.type" && value.kind === "Value.nat") {
