@@ -1,1 +1,1 @@
-@def _ = @the Type cons(String, String)
+@show @the Type cons(String, String)

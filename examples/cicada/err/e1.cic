@@ -1,1 +1,1 @@
-@def _ = @the Nat "ratatouille"
+@show @the Nat "ratatouille"

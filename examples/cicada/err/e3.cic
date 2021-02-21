@@ -1,4 +1,4 @@
-@def _ = @the Equal(
+@show @the Equal(
   Pair(String, String),
   cons("ratatouille", "baguette"),
   cons("baguette", "ratatouille"))
