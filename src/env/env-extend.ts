@@ -6,5 +6,5 @@ export function extend(
   name: string,
   value: Value.Value
 ): Env.Env {
-  return Env.update(Env.clone(env), name, value)
+  return new Map([...env, [name, value]])
 }

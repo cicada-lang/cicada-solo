@@ -1,9 +1,7 @@
 # cicada
 
-- `Env` no side effect
-- `Env` as class
-
 - `Ctx` no side effect
+- `Env` as class
 - `Ctx` as class
 
 - [naming convention] maybe we should change the naming convention to be without dot.

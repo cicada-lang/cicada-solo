@@ -23,7 +23,7 @@ export function Let(name: string, exp: Exp, ret: Exp): Let {
     exp,
     ret,
     evaluability({ env }: { env: Env.Env }): Value {
-      return evaluate(Env.update(env, name, evaluate(env, exp)), ret)
+      return evaluate(Env.extend(env, name, evaluate(env, exp)), ret)
     },
 
     inferability({ ctx }: { ctx: Ctx.Ctx }): Value {

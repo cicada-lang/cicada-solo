@@ -15,7 +15,10 @@ export function run(
   let output = ""
   for (const stmt of stmts) {
     Stmt.declare(ctx, stmt)
-    Stmt.execute(env, stmt)
+    const new_env = Stmt.execute(env, stmt)
+    if (new_env !== undefined) {
+      env = new_env
+    }
     output += show(ctx, env, stmt)
   }
 

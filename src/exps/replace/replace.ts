@@ -39,7 +39,7 @@ export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
         const target_t = infer(ctx, target)
         const equal = Value.is_equal(ctx, target_t)
         const motive_t = evaluate(
-          Env.update(Env.init(), "t", equal.t),
+          Env.extend(Env.init(), "t", equal.t),
           Pi("x", Var("t"), Type)
         )
         check(ctx, motive, motive_t)

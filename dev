@@ -14,7 +14,7 @@ commands.t = async () => {
 commands.test_all = async () => {
   await commands.test_lib()
   await commands.test_impression()
-  await commands.test_cic()
+  await commands.test_cicada()
   await commands.test_partech()
 }
 
@@ -32,7 +32,7 @@ commands.test_impression = async () => {
   )
 }
 
-commands.test_cic = async () => {
+commands.test_cicada = async () => {
   await test(
     "./bin/cic.js $file",
     { file: "examples/cicada/out/**.cic" },
