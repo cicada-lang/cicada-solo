@@ -1,4 +1,3 @@
-- [refactoring] as class -- fn
 - [refactoring] as class -- pi
 
 - [refactoring] as class -- sigma

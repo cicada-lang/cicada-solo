@@ -35,7 +35,7 @@ export function readback(
     //   This implements the η-rule for functions.
     const fresh_name = ut.freshen_name(new Set(ctx.names()), t.ret_t_cl.name)
     const variable = Value.not_yet(t.arg_t, Neutral.v(fresh_name))
-    return Fn(
+    return new Fn(
       fresh_name,
       Readback.readback(
         ctx.extend(fresh_name, t.arg_t),

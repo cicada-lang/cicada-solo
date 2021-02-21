@@ -21,7 +21,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       Pi(pt.Tree.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:arrow": ({ arg_t, ret_t }) =>
       Pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
-    "exp:fn": ({ name, ret }) => Fn(pt.Tree.str(name), exp_matcher(ret)),
+    "exp:fn": ({ name, ret }) => new Fn(pt.Tree.str(name), exp_matcher(ret)),
     "exp:ap": ({ target, args }) => {
       let exp: Exp.Exp = new Var(pt.Tree.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {

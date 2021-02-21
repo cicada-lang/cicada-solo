@@ -10,7 +10,7 @@ export type AlphaReprOpts = {
 export type Exp = {
   kind: string
   evaluability({ env }: { env: Env }): Value.Value
-  checkability(t: Value.Value, the: { ctx: Ctx }): void
+  checkability(t: Value.Value, { ctx }: { ctx: Ctx }): void
   inferability?({ ctx }: { ctx: Ctx }): Value.Value
   repr(): string
   alpha_repr(opts: AlphaReprOpts): string
