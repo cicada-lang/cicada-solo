@@ -68,7 +68,7 @@ export function readback(
   } else if (t.kind === "Value.equal" && value.kind === "Value.same") {
     return Same
   } else if (t.kind === "Value.str" && value.kind === "Value.quote") {
-    return Quote(value.str)
+    return new Quote(value.str)
   } else if (t.kind === "Value.type" && value.kind === "Value.nat") {
     return new Nat()
   } else if (t.kind === "Value.type" && value.kind === "Value.str") {

@@ -1,4 +1,3 @@
-- [refactoring] as class -- quote
 - [refactoring] as class -- same
 - [refactoring] as class -- str
 - [refactoring] as class -- sole
