@@ -1,11 +1,11 @@
-import { Exp } from "../exp"
+import { Exp, AlphaReprOpts } from "../exp"
+import { Ctx } from "../ctx"
+import { Env } from "../env"
 import { Inferable } from "../inferable"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { nat_ind_step_t } from "../exp"
 import * as Explain from "../explain"
-import { Env } from "../env"
-import * as Ctx from "../ctx"
 import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
@@ -15,48 +15,68 @@ import { Type } from "./type"
 import { Nat } from "./nat"
 import { Pi } from "./pi"
 
-export type NatInd = Exp & {
-  kind: "NatInd"
+export class NatInd extends Object implements Exp {
+  kind = "NatInd"
   target: Exp
   motive: Exp
   base: Exp
   step: Exp
-}
 
-export function NatInd(target: Exp, motive: Exp, base: Exp, step: Exp): NatInd {
-  return {
-    kind: "NatInd",
-    target,
-    motive,
-    base,
-    step,
-    evaluability: ({ env }) =>
-      do_nat_ind(
-        evaluate(env, target),
-        evaluate(env, motive),
-        evaluate(env, base),
-        evaluate(env, step)
-      ),
-    ...Inferable({
-      inferability: ({ ctx }) => {
+  constructor(target: Exp, motive: Exp, base: Exp, step: Exp) {
+    super()
+    this.target = target
+    this.motive = motive
+    this.base = base
+    this.step = step
+  }
+
+  evaluability({ env }: { env: Env }): Value.Value {
+    return do_nat_ind(
+      evaluate(env, this.target),
+      evaluate(env, this.motive),
+      evaluate(env, this.base),
+      evaluate(env, this.step)
+    )
+  }
+
+  checkability(t: Value.Value, the: { ctx: Ctx }): void {
+    return Inferable({
+      inferability: ({ ctx }: { ctx: Ctx }) => {
         // NOTE We should always infer target,
         //   but we do a simple check for the simple nat.
-        check(ctx, target, Value.nat)
+        check(ctx, this.target, Value.nat)
         const motive_t = evaluate(Env.init(), Pi("x", new Nat(), new Type()))
-        check(ctx, motive, motive_t)
-        const motive_value = evaluate(ctx.to_env(), motive)
-        check(ctx, base, do_ap(motive_value, Value.zero))
-        check(ctx, step, nat_ind_step_t(motive_value))
-        const target_value = evaluate(ctx.to_env(), target)
+        check(ctx, this.motive, motive_t)
+        const motive_value = evaluate(ctx.to_env(), this.motive)
+        check(ctx, this.base, do_ap(motive_value, Value.zero))
+        check(ctx, this.step, nat_ind_step_t(motive_value))
+        const target_value = evaluate(ctx.to_env(), this.target)
         return do_ap(motive_value, target_value)
       },
-    }),
-    repr: () =>
-      `nat_ind(${target.repr()}, ${motive.repr()}, ${base.repr()}, ${step.repr()})`,
-    alpha_repr: (opts) =>
-      `nat_ind(${target.alpha_repr(opts)}, ${motive.alpha_repr(
-        opts
-      )}, ${base.alpha_repr(opts)}, ${step.alpha_repr(opts)})`,
+    }).checkability(t, the)
+  }
+
+  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+    // NOTE We should always infer target,
+    //   but we do a simple check for the simple nat.
+    check(ctx, this.target, Value.nat)
+    const motive_t = evaluate(Env.init(), Pi("x", new Nat(), new Type()))
+    check(ctx, this.motive, motive_t)
+    const motive_value = evaluate(ctx.to_env(), this.motive)
+    check(ctx, this.base, do_ap(motive_value, Value.zero))
+    check(ctx, this.step, nat_ind_step_t(motive_value))
+    const target_value = evaluate(ctx.to_env(), this.target)
+    return do_ap(motive_value, target_value)
+  }
+
+  repr(): string {
+    return `nat_ind(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()}, ${this.step.repr()})`
+  }
+
+  alpha_repr(opts: AlphaReprOpts): string {
+    return `nat_ind(${this.target.alpha_repr(opts)}, ${this.motive.alpha_repr(
+      opts
+    )}, ${this.base.alpha_repr(opts)}, ${this.step.alpha_repr(opts)})`
   }
 }
 

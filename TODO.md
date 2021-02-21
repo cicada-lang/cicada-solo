@@ -2,8 +2,6 @@
 - [refactoring] as class -- the
 - [refactoring] as class -- var
 
-- [refactoring] as class -- nat-ind
-
 - [refactoring] as class -- fn
 - [refactoring] as class -- pi
 

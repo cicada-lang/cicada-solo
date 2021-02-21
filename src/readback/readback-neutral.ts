@@ -31,7 +31,7 @@ export function readback_neutral(
       return Cdr(Readback.readback_neutral(ctx, neutral.target))
     }
     case "Neutral.nat_ind": {
-      return NatInd(
+      return new NatInd(
         Readback.readback_neutral(ctx, neutral.target),
         Readback.readback_normal(ctx, neutral.motive),
         Readback.readback_normal(ctx, neutral.base),

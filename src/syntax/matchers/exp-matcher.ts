@@ -51,7 +51,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       }
     },
     "exp:nat_ind": ({ target, motive, base, step }) =>
-      NatInd(
+      new NatInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base),
