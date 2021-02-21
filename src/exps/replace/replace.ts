@@ -43,7 +43,7 @@ export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
           Pi("x", Var("t"), Type)
         )
         check(ctx, motive, motive_t)
-        const motive_value = evaluate(Ctx.to_env(ctx), motive)
+        const motive_value = evaluate(ctx.to_env(), motive)
         check(ctx, base, do_ap(motive_value, equal.from))
         return do_ap(motive_value, equal.to)
       },

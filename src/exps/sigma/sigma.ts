@@ -23,8 +23,8 @@ export function Sigma(name: string, car_t: Exp, cdr_t: Exp): Sigma {
     ...Inferable({
       inferability: ({ ctx }) => {
         check(ctx, car_t, Value.type)
-        const car_t_value = evaluate(Ctx.to_env(ctx), car_t)
-        check(Ctx.extend(ctx, name, car_t_value), cdr_t, Value.type)
+        const car_t_value = evaluate(ctx.to_env(), car_t)
+        check(ctx.extend(name, car_t_value), cdr_t, Value.type)
         return Value.type
       },
     }),

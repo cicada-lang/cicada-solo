@@ -21,7 +21,7 @@ export function Cdr(target: Exp): Cdr {
       inferability: ({ ctx }) => {
         const target_t = infer(ctx, target)
         const sigma = Value.is_sigma(ctx, target_t)
-        const car = do_car(evaluate(Ctx.to_env(ctx), target))
+        const car = do_car(evaluate(ctx.to_env(), target))
         return Value.Closure.apply(sigma.cdr_t_cl, car)
       },
     }),

@@ -23,8 +23,8 @@ export function Pi(name: string, arg_t: Exp, ret_t: Exp): Pi {
     ...Inferable({
       inferability: ({ ctx }) => {
         check(ctx, arg_t, Value.type)
-        const arg_t_value = evaluate(Ctx.to_env(ctx), arg_t)
-        check(Ctx.extend(ctx, name, arg_t_value), ret_t, Value.type)
+        const arg_t_value = evaluate(ctx.to_env(), arg_t)
+        check(ctx.extend(name, arg_t_value), ret_t, Value.type)
         return Value.type
       },
     }),

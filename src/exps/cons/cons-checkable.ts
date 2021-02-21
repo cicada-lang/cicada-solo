@@ -11,7 +11,7 @@ export const cons_checkable = (car: Exp, cdr: Exp) =>
       const sigma = Value.is_sigma(ctx, t)
       const cdr_t = Value.Closure.apply(
         sigma.cdr_t_cl,
-        evaluate(Ctx.to_env(ctx), car)
+        evaluate(ctx.to_env(), car)
       )
       check(ctx, car, sigma.car_t)
       check(ctx, cdr, cdr_t)

@@ -1,7 +1,5 @@
 # cicada
 
-- `Ctx` as class
-
 - [naming convention] maybe we should change the naming convention to be without dot.
 
 - parser as factory of `Exp`

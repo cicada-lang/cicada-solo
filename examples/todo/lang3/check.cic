@@ -9,7 +9,7 @@
   Check(ctx, t, Value.type)
   Check(Map.extend(ctx, name, t_value), Exp.cls(tail), Value.type)
   @where {
-    t_value = Exp.evaluate(Ctx.to_env(ctx), t)
+    t_value = Exp.evaluate(ctx.to_env(), t)
   }
 
   Check(ctx, Exp.obj(properties), Value.cls({ next: null }))
@@ -23,7 +23,7 @@
   @where {
     { name, t } = tel.next
     less_properties = Map.remove(properties, name)
-    value = Exp.evaluate(Ctx.to_env(ctx), exp)
+    value = Exp.evaluate(ctx.to_env(), exp)
     filled_tel = Telescope.fill(tel, value)
   }
 

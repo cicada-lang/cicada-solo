@@ -33,12 +33,12 @@ export function readback(
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
-    const fresh_name = ut.freshen_name(new Set(ctx.keys()), t.ret_t_cl.name)
+    const fresh_name = ut.freshen_name(new Set(ctx.names()), t.ret_t_cl.name)
     const variable = Value.not_yet(t.arg_t, Neutral.v(fresh_name))
     return Fn(
       fresh_name,
       Readback.readback(
-        Ctx.extend(ctx, fresh_name, t.arg_t),
+        ctx.extend(fresh_name, t.arg_t),
         Value.Closure.apply(t.ret_t_cl, variable),
         do_ap(value, variable)
       )
@@ -84,21 +84,21 @@ export function readback(
       Readback.readback(ctx, value.t, value.to)
     )
   } else if (t.kind === "Value.type" && value.kind === "Value.sigma") {
-    const fresh_name = ut.freshen_name(new Set(ctx.keys()), value.cdr_t_cl.name)
+    const fresh_name = ut.freshen_name(new Set(ctx.names()), value.cdr_t_cl.name)
     const variable = Value.not_yet(value.car_t, Neutral.v(fresh_name))
     const car_t = Readback.readback(ctx, Value.type, value.car_t)
     const cdr_t = Readback.readback(
-      Ctx.extend(ctx, fresh_name, value.car_t),
+      ctx.extend(fresh_name, value.car_t),
       Value.type,
       Value.Closure.apply(value.cdr_t_cl, variable)
     )
     return Sigma(fresh_name, car_t, cdr_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.pi") {
-    const fresh_name = ut.freshen_name(new Set(ctx.keys()), value.ret_t_cl.name)
+    const fresh_name = ut.freshen_name(new Set(ctx.names()), value.ret_t_cl.name)
     const variable = Value.not_yet(value.arg_t, Neutral.v(fresh_name))
     const arg_t = Readback.readback(ctx, Value.type, value.arg_t)
     const ret_t = Readback.readback(
-      Ctx.extend(ctx, fresh_name, value.arg_t),
+      ctx.extend(fresh_name, value.arg_t),
       Value.type,
       Value.Closure.apply(value.ret_t_cl, variable)
     )

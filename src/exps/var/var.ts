@@ -17,7 +17,7 @@ export function Var(name: string): Var {
     ...var_evaluable(name),
     ...Inferable({
       inferability: ({ ctx }) => {
-        const t = Ctx.lookup(ctx, name)
+        const t = ctx.lookup(name)
         if (t === undefined) {
           throw new Trace.Trace(Explain.explain_name_undefined(name))
         }

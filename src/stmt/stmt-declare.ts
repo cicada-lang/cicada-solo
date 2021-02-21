@@ -7,11 +7,10 @@ import * as Infer from "../infer"
 export function declare(ctx: Ctx.Ctx, stmt: Stmt.Stmt): Ctx.Ctx | undefined {
   switch (stmt.kind) {
     case "Stmt.def": {
-      return Ctx.extend(
-        ctx,
+      return ctx.extend(
         stmt.name,
         Infer.infer(ctx, stmt.exp),
-        Evaluate.evaluate(Ctx.to_env(ctx), stmt.exp)
+        Evaluate.evaluate(ctx.to_env(), stmt.exp)
       )
     }
   }

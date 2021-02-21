@@ -28,14 +28,14 @@ export function Let(name: string, exp: Exp, ret: Exp): Let {
 
     inferability({ ctx }: { ctx: Ctx.Ctx }): Value {
       return infer(
-        Ctx.extend(ctx, name, infer(ctx, exp), evaluate(Ctx.to_env(ctx), exp)),
+        ctx.extend(name, infer(ctx, exp), evaluate(ctx.to_env(), exp)),
         ret
       )
     },
 
     checkability(t: Value, { ctx }: { ctx: Ctx.Ctx }): void {
       check(
-        Ctx.extend(ctx, name, infer(ctx, exp), evaluate(Ctx.to_env(ctx), exp)),
+        ctx.extend(name, infer(ctx, exp), evaluate(ctx.to_env(), exp)),
         ret,
         t
       )

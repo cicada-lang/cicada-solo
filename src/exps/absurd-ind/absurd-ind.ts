@@ -30,7 +30,7 @@ export function AbsurdInd(target: Exp, motive: Exp): AbsurdInd {
         //   but we do a simple check for the simple absurd.
         check(ctx, target, Value.absurd)
         check(ctx, motive, Value.type)
-        const motive_value = evaluate(Ctx.to_env(ctx), motive)
+        const motive_value = evaluate(ctx.to_env(), motive)
         return motive_value
       },
     }),

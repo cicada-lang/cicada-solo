@@ -44,10 +44,10 @@ export function NatInd(target: Exp, motive: Exp, base: Exp, step: Exp): NatInd {
         check(ctx, target, Value.nat)
         const motive_t = evaluate(Env.init(), Pi("x", Nat, Type))
         check(ctx, motive, motive_t)
-        const motive_value = evaluate(Ctx.to_env(ctx), motive)
+        const motive_value = evaluate(ctx.to_env(), motive)
         check(ctx, base, do_ap(motive_value, Value.zero))
         check(ctx, step, nat_ind_step_t(motive_value))
-        const target_value = evaluate(Ctx.to_env(ctx), target)
+        const target_value = evaluate(ctx.to_env(), target)
         return do_ap(motive_value, target_value)
       },
     }),

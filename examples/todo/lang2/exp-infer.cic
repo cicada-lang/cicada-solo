@@ -8,8 +8,8 @@ Exp.infer(ctx, Exp.v(name)) = Map.lookup(ctx, name)
 
 Exp.infer(ctx, Exp.pi(name, arg_t, ret_t)) = {
   Exp.check(ctx, arg_t, Value.type)
-  arg_t_value = Exp.evaluate(Ctx.to_env(ctx), arg_t)
-  Exp.check(Ctx.extend(ctx, name, arg_t_value), ret_t, Value.type)
+  arg_t_value = Exp.evaluate(ctx.to_env(), arg_t)
+  Exp.check(ctx.extend(name, arg_t_value), ret_t, Value.type)
   Value.type
 }
 
@@ -21,8 +21,8 @@ Exp.infer(ctx, Exp.arrow(name, arg_t, ret_t)) = {
 
 Exp.infer(ctx, Exp.sigma(name, car_t, cdr_t)) = {
   Exp.check(ctx, car_t, Value.type)
-  car_t_value = Exp.evaluate(Ctx.to_env(ctx), car_t)
-  Exp.check(Ctx.extend(ctx, name, car_t_value), cdr_t, Value.type)
+  car_t_value = Exp.evaluate(ctx.to_env(), car_t)
+  Exp.check(ctx.extend(name, car_t_value), cdr_t, Value.type)
   Value.type
 }
 
@@ -37,7 +37,7 @@ Exp.infer(ctx, Exp.pair(name, car_t, cdr_t)) = {
 Exp.infer(ctx, Exp.ap(target, arg)) = {
   Value.pi(name, arg_t, ret_t_cl) = Exp.infer(ctx, target)
   Exp.check(ctx, arg, arg_t)
-  arg_value = Exp.evaluate(Ctx.to_env(ctx), arg)
+  arg_value = Exp.evaluate(ctx.to_env(), arg)
   Closure.apply(pi.closure, arg_value)
 }
 
@@ -48,7 +48,7 @@ Exp.infer(ctx, Exp.car(target)) = {
 
 Exp.infer(ctx, Exp.cdr(target)) = {
   Value.sigma(car_t, cdr_t_cl) = Exp.infer(ctx, target)
-  target_value = Exp.evaluate(Ctx.to_env(ctx), target)
+  target_value = Exp.evaluate(ctx.to_env(), target)
   car_value = Exp.do_car(target_value)
   Closure.apply(cdr_t_cl, car_value)
 }

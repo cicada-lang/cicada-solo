@@ -24,7 +24,7 @@ export function Ap(target: Exp, arg: Exp): Ap {
         const target_t = infer(ctx, target)
         const pi = Value.is_pi(ctx, target_t)
         check(ctx, arg, pi.arg_t)
-        const arg_value = evaluate(Ctx.to_env(ctx), arg)
+        const arg_value = evaluate(ctx.to_env(), arg)
         return Value.Closure.apply(pi.ret_t_cl, arg_value)
       },
     }),

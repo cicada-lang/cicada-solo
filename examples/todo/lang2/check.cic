@@ -10,7 +10,7 @@
   Check(ctx, arg_t, Value.type)
   Check(Map.extend(ctx, name, arg_t_value), ret_t, Value.type)
   @where {
-    arg_t_value = Exp.evaluate(Ctx.to_env(ctx), arg_t)
+    arg_t_value = Exp.evaluate(ctx.to_env(), arg_t)
   }
 
   Check(ctx, Exp.arrow(arg_t, ret_t), Value.type)
@@ -35,7 +35,7 @@
   Check(ctx, target, Value.pi(arg_t, ret_t_cl))
   Check(ctx, arg, arg_t)
   @where {
-    arg_value = Exp.evaluate(Ctx.to_env(ctx), arg)
+    arg_value = Exp.evaluate(ctx.to_env(), arg)
     ret_t = Closure.apply(ret_t_cl, arg_value)
   }
 
@@ -44,7 +44,7 @@
   Check(ctx, car_t, Value.type)
   Check(Map.extend(ctx, name, car_t_value), cdr_t, Value.type)
   @where {
-    car_t_value = Exp.evaluate(Ctx.to_env(ctx), car_t)
+    car_t_value = Exp.evaluate(ctx.to_env(), car_t)
   }
 
   Check(ctx, Exp.pair(car_t, cdr_t), Value.type)
@@ -57,7 +57,7 @@
   Check(ctx, car, car_t)
   Check(ctx, cdr, cdr_t)
   @where {
-    car_value = Exp.evaluate(Ctx.to_env(ctx), car)
+    car_value = Exp.evaluate(ctx.to_env(), car)
     cdr_t = Closure.apply(cdr_t_cl, car_value)
   }
 
@@ -95,10 +95,10 @@
   Check(ctx, base, base_t)
   Check(ctx, step, step_t)
   @where {
-    motive_value = Exp.evaluate(Ctx.to_env(ctx), motive)
+    motive_value = Exp.evaluate(ctx.to_env(), motive)
     base_t = Exp.do_ap(motive_value, Value.zero)
     step_t = Exp.nat_ind_step_t(motive_value)
-    target_value = Exp.evaluate(Ctx.to_env(ctx), target)
+    target_value = Exp.evaluate(ctx.to_env(), target)
     t = Exp.do_ap(motive_value, target_value)
   }
 
@@ -108,7 +108,7 @@
   Check(ctx, from, t_value)
   Check(ctx, to, t_value)
   @where {
-    t_value = Exp.evaluate(Ctx.to_env(ctx), t)
+    t_value = Exp.evaluate(ctx.to_env(), t)
   }
 
   Check(ctx, same, Value.equal(t, from, to))
@@ -121,7 +121,7 @@
   Check(ctx, motive, Value.arrow(t, Value.type))
   Check(ctx, base, base_t)
   @where {
-    motive_value = Exp.evaluate(Ctx.to_env(ctx), motive)
+    motive_value = Exp.evaluate(ctx.to_env(), motive)
     base_t = Exp.do_ap(motive_value, from)
     t = Exp.do_ap(motive_value, to)
   }

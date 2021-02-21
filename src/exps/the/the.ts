@@ -20,7 +20,7 @@ export function The(t: Exp, exp: Exp): The {
     ...Inferable({
       inferability: ({ ctx }) => {
         check(ctx, t, Value.type)
-        const t_value = evaluate(Ctx.to_env(ctx), t)
+        const t_value = evaluate(ctx.to_env(), t)
         check(ctx, exp, t_value)
         return t_value
       },

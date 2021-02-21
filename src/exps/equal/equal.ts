@@ -23,7 +23,7 @@ export function Equal(t: Exp, from: Exp, to: Exp): Equal {
     ...Inferable({
       inferability: ({ ctx }) => {
         check(ctx, t, Value.type)
-        const t_value = evaluate(Ctx.to_env(ctx), t)
+        const t_value = evaluate(ctx.to_env(), t)
         check(ctx, from, t_value)
         check(ctx, to, t_value)
         return Value.type
