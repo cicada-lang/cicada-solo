@@ -1,4 +1,4 @@
-- [naming convention] maybe we should change the naming convention to be without dot.
+- [convention] change the naming convention to be without dot.
 
 - [refactoring] parser as factory of `Exp`
 
