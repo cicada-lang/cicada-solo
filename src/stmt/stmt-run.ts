@@ -14,14 +14,8 @@ export function run(
 ): string {
   let output = ""
   for (const stmt of stmts) {
-    const new_ctx = Stmt.declare(ctx, stmt)
-    if (new_ctx !== undefined) {
-      ctx = new_ctx
-    }
-    const new_env = Stmt.execute(env, stmt)
-    if (new_env !== undefined) {
-      env = new_env
-    }
+    ctx = Stmt.declare(ctx, stmt) || ctx
+    env = Stmt.execute(env, stmt) || env
     output += show(ctx, env, stmt)
   }
 
