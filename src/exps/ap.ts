@@ -1,4 +1,6 @@
-import { Exp } from "../exp"
+import { Exp, AlphaReprOpts } from "../exp"
+import { Ctx } from "../ctx"
+import { Env } from "../env"
 import { Inferable } from "../inferable"
 import { evaluate } from "../evaluate"
 import { infer } from "../infer"
