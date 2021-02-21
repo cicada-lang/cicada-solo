@@ -6,13 +6,14 @@ import { Inferable } from "../inferable"
 import { check } from "../check"
 import { evaluate } from "../evaluate"
 
-export class Pi implements Exp {
+export class Pi extends Object implements Exp {
   kind = "Pi"
   name: string
   arg_t: Exp
   ret_t: Exp
 
   constructor(name: string, arg_t: Exp, ret_t: Exp) {
+    super()
     this.name = name
     this.arg_t = arg_t
     this.ret_t = ret_t
