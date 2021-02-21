@@ -6,15 +6,15 @@
 - `Ctx` no side effect
 - `Ctx` as class
 
+- [naming convention] maybe we should change the naming convention to be without dot.
+
 - parser as factory of `Exp`
 
 - `Exp` as abstract class -- use normal oop style
 
 - simplify the interface `Stmt`
 
-- add `@check` syntax for testing
-
-- to use `@claim` and `@define`
+- add `@check` stmt for testing
 
 > refactoring `Value`
 
@@ -23,10 +23,6 @@
 > refactoring `Normal`
 
 > refactoring `Stmt`
-
-> naming convention
-
-- maybe we should change the naming convention to be without dot.
 
 > 将 NbE 教程中的 tartlet 升级为 pie
 
