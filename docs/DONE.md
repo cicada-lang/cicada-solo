@@ -57,6 +57,12 @@
   ``` scala
   concat(E: U, List(E), List(E)): List(E)
   concat(E, x, y) = List.rec(reverse(E, y), x, step_reverse(E))
+
+  @claim concat(E: U, List(E), List(E)): List(E)
+  @define concat(E, x, y) = List.rec(reverse(E, y), x, step_reverse(E))
+
+  @let concat = @the (E: U, List(E), List(E)) -> List(E)
+    (E, x, y) => List.rec(reverse(E, y), x, step_reverse(E))
   ```
 
 # 明确模块系统的使用方式。
