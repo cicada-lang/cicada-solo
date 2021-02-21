@@ -84,7 +84,10 @@ export function readback(
       Readback.readback(ctx, value.t, value.to)
     )
   } else if (t.kind === "Value.type" && value.kind === "Value.sigma") {
-    const fresh_name = ut.freshen_name(new Set(ctx.names()), value.cdr_t_cl.name)
+    const fresh_name = ut.freshen_name(
+      new Set(ctx.names()),
+      value.cdr_t_cl.name
+    )
     const variable = Value.not_yet(value.car_t, Neutral.v(fresh_name))
     const car_t = Readback.readback(ctx, Value.type, value.car_t)
     const cdr_t = Readback.readback(
@@ -94,7 +97,10 @@ export function readback(
     )
     return Sigma(fresh_name, car_t, cdr_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.pi") {
-    const fresh_name = ut.freshen_name(new Set(ctx.names()), value.ret_t_cl.name)
+    const fresh_name = ut.freshen_name(
+      new Set(ctx.names()),
+      value.ret_t_cl.name
+    )
     const variable = Value.not_yet(value.arg_t, Neutral.v(fresh_name))
     const arg_t = Readback.readback(ctx, Value.type, value.arg_t)
     const ret_t = Readback.readback(
