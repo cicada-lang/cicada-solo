@@ -108,7 +108,7 @@ export function readback(
       Value.type,
       Value.Closure.apply(value.ret_t_cl, variable)
     )
-    return Pi(fresh_name, arg_t, ret_t)
+    return new Pi(fresh_name, arg_t, ret_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.type") {
     return new Type()
   } else if (value.kind === "Value.not_yet") {

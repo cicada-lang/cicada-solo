@@ -18,9 +18,9 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>({
     "exp:var": ({ name }) => new Var(pt.Tree.str(name)),
     "exp:pi": ({ name, arg_t, ret_t }) =>
-      Pi(pt.Tree.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
+      new Pi(pt.Tree.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:arrow": ({ arg_t, ret_t }) =>
-      Pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
+      new Pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:fn": ({ name, ret }) => new Fn(pt.Tree.str(name), exp_matcher(ret)),
     "exp:ap": ({ target, args }) => {
       let exp: Exp.Exp = new Var(pt.Tree.str(target))
