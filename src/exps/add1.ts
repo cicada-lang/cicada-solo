@@ -23,8 +23,8 @@ export class Add1 extends Object implements Exp {
   checkability(t: Value.Value, the: { ctx: Ctx }): void {
     return Inferable({
       inferability: ({ ctx }: { ctx: Ctx }) => {
-      check(ctx, this.prev, Value.nat)
-      return Value.nat
+        check(ctx, this.prev, Value.nat)
+        return Value.nat
       },
     }).checkability(t, the)
   }
