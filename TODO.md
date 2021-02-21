@@ -1,36 +1,25 @@
 - [naming convention] maybe we should change the naming convention to be without dot.
 
-- parser as factory of `Exp`
+- [refactoring] parser as factory of `Exp`
 
-- inline `Exp`'s members
-- simplify `Exp`'s members' declaration
-- `Exp` as abstract class -- use normal oop style
+- [refactoring] inline `Exp`'s members
+- [refactoring] simplify `Exp`'s members' declaration
+- [refactoring] `Exp` as abstract class -- use normal oop style
 
-> refactoring `Stmt`
+- [refactoring] `Stmt`
+- [refactoring] `Value`
+- [refactoring] `Neutral`
+- [refactoring] `Normal`
 
-> refactoring `Value`
+- [pie] `List`, `List.cons`, `List.null`, `List.rec`
+- [pie] `Vector`
+- [pie] be able to add type annotation to `Exp.fn`
 
-> refactoring `Neutral`
+- [test] `Equal`
+- [test] `Pi`
+- [test] `Absurd`
 
-> refactoring `Normal`
-
-> 将 NbE 教程中的 tartlet 升级为 pie
-
-- `List`, `List.cons`, `List.null`, `List.rec`
-- `Vector`
-- be able to add type annotation to `Exp.fn`
-
-> 充分测试
-
-- 如何对某一个类型以及相关的 Exp 作出充分的测试？
-
-- test `Equal`
-- test `Pi`
-- test `Absurd`
-
-> 优化
-
-- use native `number` as `Nat`.
+- [optimization] use native `number` as `Nat`.
 
 # partech
 
@@ -40,8 +29,6 @@
 - [partech] change style from procedural to OOP.
 
 # TLT
-
-> 强化对类型系统的理解与实现技术。
 
 - [TLT] 5. Lists, Lists, and More Lists
 - [TLT] 6. Precisely How Many?
