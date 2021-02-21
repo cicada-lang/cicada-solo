@@ -16,7 +16,11 @@ export class Absurd extends Object implements Exp {
   }
 
   checkability(t: Value.Value, the: { ctx: Ctx }): void {
-    return Inferable({ inferability: this.inferability }).checkability(t, the)
+    return Inferable({
+      inferability: ({ ctx }: { ctx: Ctx }) => {
+        return Value.type
+      },
+    }).checkability(t, the)
   }
 
   inferability(the: { ctx: Ctx }): Value.Value {

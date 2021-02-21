@@ -6,6 +6,6 @@ export function nat_from_number(n: number): Exp.Exp {
     return Zero
   } else {
     const almost = nat_from_number(n - 1)
-    return Add1(almost)
+    return new Add1(almost)
   }
 }

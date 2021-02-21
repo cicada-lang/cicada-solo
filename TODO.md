@@ -1,5 +1,4 @@
 - [refactoring] as class -- absurd-ind
-- [refactoring] as class -- add1
 - [refactoring] as class -- ap
 - [refactoring] as class -- car
 - [refactoring] as class -- cdr

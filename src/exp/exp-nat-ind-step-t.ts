@@ -13,7 +13,7 @@ export function nat_ind_step_t(motive: Value.Value): Value.Value {
     Pi(
       "almost",
       Ap(Var("motive"), Var("prev")),
-      Ap(Var("motive"), Add1(Var("prev")))
+      Ap(Var("motive"), new Add1(Var("prev")))
     )
   )
 

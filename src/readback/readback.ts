@@ -28,7 +28,7 @@ export function readback(
   if (t.kind === "Value.nat" && value.kind === "Value.zero") {
     return Zero
   } else if (t.kind === "Value.nat" && value.kind === "Value.add1") {
-    return Add1(Readback.readback(ctx, t, value.prev))
+    return new Add1(Readback.readback(ctx, t, value.prev))
   } else if (t.kind === "Value.pi") {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
