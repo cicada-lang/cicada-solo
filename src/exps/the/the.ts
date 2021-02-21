@@ -26,7 +26,6 @@ export function The(t: Exp, exp: Exp): The {
       },
     }),
     repr: () => `@the ${t.repr()} ${exp.repr()}`,
-    alpha_repr: (opts) =>
-      `@the ${t.alpha_repr(opts)} ${exp.alpha_repr(opts)}`,
+    alpha_repr: (opts) => `@the ${t.alpha_repr(opts)} ${exp.alpha_repr(opts)}`,
   }
 }
