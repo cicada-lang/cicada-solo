@@ -69,7 +69,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       new AbsurdInd(exp_matcher(target), exp_matcher(motive)),
     "exp:str": () => new Str(),
     "exp:quote": ({ value }) => new Quote(pt.trim_boundary(pt.Tree.str(value), 1)),
-    "exp:type": () => Type,
+    "exp:type": () => new Type(),
     "exp:let": ({ name, exp, ret }) =>
       Let(pt.Tree.str(name), exp_matcher(exp), exp_matcher(ret)),
     "exp:the": ({ t, exp }) => The(exp_matcher(t), exp_matcher(exp)),

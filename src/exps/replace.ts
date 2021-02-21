@@ -40,7 +40,7 @@ export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
         const equal = Value.is_equal(ctx, target_t)
         const motive_t = evaluate(
           Env.init().extend("t", equal.t),
-          Pi("x", Var("t"), Type)
+          Pi("x", Var("t"), new Type())
         )
         check(ctx, motive, motive_t)
         const motive_value = evaluate(ctx.to_env(), motive)
@@ -66,7 +66,7 @@ export function do_replace(
   } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.equal") {
       const base_t = do_ap(motive, target.t.from)
-      const closure = Value.Closure.create(Env.init(), "x", Type)
+      const closure = Value.Closure.create(Env.init(), "x", new Type())
       const motive_t = Value.pi(target.t.t, closure)
       return Value.not_yet(
         do_ap(motive, target.t.to),

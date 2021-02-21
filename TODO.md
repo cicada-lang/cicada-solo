@@ -1,5 +1,3 @@
-- [refactoring] as class -- type
-
 - [refactoring] as class -- ap
 - [refactoring] as class -- car
 - [refactoring] as class -- cdr

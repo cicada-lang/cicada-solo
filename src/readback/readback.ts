@@ -110,7 +110,7 @@ export function readback(
     )
     return Pi(fresh_name, arg_t, ret_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.type") {
-    return Type
+    return new Type()
   } else if (value.kind === "Value.not_yet") {
     // NOTE  t and value.t are ignored here,
     //  maybe use them to debug.
