@@ -8,6 +8,8 @@
 - no `Begin` use `Let` instead
   - `Exp` should not depend on `Stmt`
 
+- `Exp` as abstract class -- use normal oop style
+
 - `Env` no side effect
 - `Env` as class
 

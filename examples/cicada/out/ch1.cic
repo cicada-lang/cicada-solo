@@ -3,6 +3,16 @@
 _ : String
 _ = "ratatouille"
 
+// @let _ = @the String "ratatouille"
+
+// @let _ = @the Pair(String, String)
+//   cons("ratatouille", "baguette")
+
+// @let _ = @the Equal(String, "ratatouille",
+//   car(@the Pair(String, String)
+//     cons("ratatouille", "baguette")))
+//   same
+
 _ : Pair(String, String)
 _ = cons("ratatouille", "baguette")
 
