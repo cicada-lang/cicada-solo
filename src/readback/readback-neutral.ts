@@ -16,7 +16,7 @@ export function readback_neutral(
 ): Exp.Exp {
   switch (neutral.kind) {
     case "Neutral.v": {
-      return Var(neutral.name)
+      return new Var(neutral.name)
     }
     case "Neutral.ap": {
       return new Ap(

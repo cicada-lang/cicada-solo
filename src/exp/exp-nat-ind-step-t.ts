@@ -12,8 +12,8 @@ export function nat_ind_step_t(motive: Value.Value): Value.Value {
     new Nat(),
     Pi(
       "almost",
-      new Ap(Var("motive"), Var("prev")),
-      new Ap(Var("motive"), new Add1(Var("prev")))
+      new Ap(new Var("motive"), new Var("prev")),
+      new Ap(new Var("motive"), new Add1(new Var("prev")))
     )
   )
 

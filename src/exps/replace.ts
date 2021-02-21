@@ -40,7 +40,7 @@ export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
         const equal = Value.is_equal(ctx, target_t)
         const motive_t = evaluate(
           Env.init().extend("t", equal.t),
-          Pi("x", Var("t"), new Type())
+          Pi("x", new Var("t"), new Type())
         )
         check(ctx, motive, motive_t)
         const motive_value = evaluate(ctx.to_env(), motive)

@@ -16,14 +16,14 @@ import { The } from "../../exps"
 
 export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
   return pt.Tree.matcher<Exp.Exp>({
-    "exp:var": ({ name }) => Var(pt.Tree.str(name)),
+    "exp:var": ({ name }) => new Var(pt.Tree.str(name)),
     "exp:pi": ({ name, arg_t, ret_t }) =>
       Pi(pt.Tree.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:arrow": ({ arg_t, ret_t }) =>
       Pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:fn": ({ name, ret }) => Fn(pt.Tree.str(name), exp_matcher(ret)),
     "exp:ap": ({ target, args }) => {
-      let exp: Exp.Exp = Var(pt.Tree.str(target))
+      let exp: Exp.Exp = new Var(pt.Tree.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
         exp = new Ap(exp, exp_matcher(arg))
       }

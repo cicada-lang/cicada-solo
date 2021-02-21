@@ -1,5 +1,3 @@
-- [refactoring] as class -- var
-
 - [refactoring] as class -- fn
 - [refactoring] as class -- pi
 
