@@ -40,7 +40,7 @@ export class AbsurdInd extends Object implements Exp {
     }).checkability(t, the)
   }
 
-  inferability({ ctx}: { ctx: Ctx }): Value.Value {
+  inferability({ ctx }: { ctx: Ctx }): Value.Value {
     // NOTE the `motive` here is not a function from target_t to type,
     //   but a element of type.
     // NOTE We should always infer target,
@@ -52,11 +52,13 @@ export class AbsurdInd extends Object implements Exp {
   }
 
   repr(): string {
-    return `Absurd.ind(${this.target.repr()}, ${this.motive.repr()})`
+    return `absurd_ind(${this.target.repr()}, ${this.motive.repr()})`
   }
 
   alpha_repr(opts: AlphaReprOpts): string {
-    return `Absurd.ind(${this.target.alpha_repr(opts)}, ${this.motive.alpha_repr(opts)})`
+    return `absurd_ind(${this.target.alpha_repr(
+      opts
+    )}, ${this.motive.alpha_repr(opts)})`
   }
 }
 

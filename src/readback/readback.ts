@@ -70,7 +70,7 @@ export function readback(
   } else if (t.kind === "Value.str" && value.kind === "Value.quote") {
     return Quote(value.str)
   } else if (t.kind === "Value.type" && value.kind === "Value.nat") {
-    return Nat
+    return new Nat()
   } else if (t.kind === "Value.type" && value.kind === "Value.str") {
     return Str
   } else if (t.kind === "Value.type" && value.kind === "Value.trivial") {

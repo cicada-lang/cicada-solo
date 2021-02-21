@@ -42,7 +42,7 @@ export function NatInd(target: Exp, motive: Exp, base: Exp, step: Exp): NatInd {
         // NOTE We should always infer target,
         //   but we do a simple check for the simple nat.
         check(ctx, target, Value.nat)
-        const motive_t = evaluate(Env.init(), Pi("x", Nat, Type))
+        const motive_t = evaluate(Env.init(), Pi("x", new Nat(), Type))
         check(ctx, motive, motive_t)
         const motive_value = evaluate(ctx.to_env(), motive)
         check(ctx, base, do_ap(motive_value, Value.zero))
@@ -52,9 +52,9 @@ export function NatInd(target: Exp, motive: Exp, base: Exp, step: Exp): NatInd {
       },
     }),
     repr: () =>
-      `Nat.ind(${target.repr()}, ${motive.repr()}, ${base.repr()}, ${step.repr()})`,
+      `nat_ind(${target.repr()}, ${motive.repr()}, ${base.repr()}, ${step.repr()})`,
     alpha_repr: (opts) =>
-      `Nat.ind(${target.alpha_repr(opts)}, ${motive.alpha_repr(
+      `nat_ind(${target.alpha_repr(opts)}, ${motive.alpha_repr(
         opts
       )}, ${base.alpha_repr(opts)}, ${step.alpha_repr(opts)})`,
   }

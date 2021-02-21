@@ -1,4 +1,3 @@
-- [refactoring] as class -- nat
 - [refactoring] as class -- quote
 - [refactoring] as class -- same
 - [refactoring] as class -- str

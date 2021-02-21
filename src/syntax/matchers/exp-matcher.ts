@@ -36,7 +36,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     "exp:cons": ({ car, cdr }) => Cons(exp_matcher(car), exp_matcher(cdr)),
     "exp:car": ({ target }) => Car(exp_matcher(target)),
     "exp:cdr": ({ target }) => Cdr(exp_matcher(target)),
-    "exp:nat": () => Nat,
+    "exp:nat": () => new Nat(),
     "exp:zero": () => new Zero(),
     "exp:add1": ({ prev }) => new Add1(exp_matcher(prev)),
     "exp:number": ({ value }, { span }) => {

@@ -9,7 +9,7 @@ export function nat_ind_step_t(motive: Value.Value): Value.Value {
 
   const step_t = Pi(
     "prev",
-    Nat,
+    new Nat(),
     Pi(
       "almost",
       Ap(Var("motive"), Var("prev")),
