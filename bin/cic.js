@@ -1,4 +1,4 @@
 #!/usr/bin/env node
 
-const cli = require("../lib/cicada/cli")
+const cli = require("../lib/cli")
 cli.run()

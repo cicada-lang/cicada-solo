@@ -1,7 +1,5 @@
 # cicada
 
-- simple file structure
-
 - no `@claim` & `@define` use `@let` instead
 
 - parser as factory of `Exp`
