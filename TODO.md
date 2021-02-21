@@ -1,6 +1,6 @@
 # cicada
 
-- no `@claim` & `@define` use `@let` instead
+
 
 - parser as factory of `Exp`
 

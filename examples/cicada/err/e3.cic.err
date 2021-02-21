@@ -1,13 +1,9 @@
+Found the identifier "_" in [0, 1], while expecting:
+ "@":
+     stmt:def@0 -> > "@" "def" (name: identifier) "=" (exp: exp) 
+ "@":
+     stmt:show@0 -> > "@" "show" (exp: exp) 
 
-I am expecting the following two values to be the same (_: String) * String.
-But they are not.
-from:
-  cons("ratatouille", "baguette")
-to:
-  cons("baguette", "ratatouille")
-
-previous:
-- same
-- @the Equal((_: String) * String, cons("ratatouille", "baguette"), cons("baguette", "ratatouille")) same
-
-
+ 1 |_ : Equal(
+ 2 |  Pair(String, String),
+ 3 |  cons("ratatouille", "baguette"),

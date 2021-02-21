@@ -1,7 +1,3 @@
-t : Type
-t = Nat
-
-n : t
-n = zero
-
-one = add1(n)
+@def t = @the Type Nat
+@def n = @the t zero
+@def one = add1(n)

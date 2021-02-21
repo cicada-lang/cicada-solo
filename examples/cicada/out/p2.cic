@@ -1,5 +1,5 @@
-t = @the Type Nat
-n = @the t zero
-one = @the Nat add1(n)
+@def t = @the Type Nat
+@def n = @the t zero
+@def one = @the Nat add1(n)
 
 @show one

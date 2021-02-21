@@ -1,13 +1,9 @@
+Found the identifier "add" in [0, 3], while expecting:
+ "@":
+     stmt:def@0 -> > "@" "def" (name: identifier) "=" (exp: exp) 
+ "@":
+     stmt:show@0 -> > "@" "show" (exp: exp) 
 
-the name gauss is undefined.
-
-previous:
-- gauss
-- gauss(prev)
-- add(add1(prev))(gauss(prev))
-- (prev) => add(add1(prev))(gauss(prev))
-- Nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
-- (n) => Nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
-- @the (_: Nat) -> Nat (n) => Nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
-
-
+  1 |add : (Nat) -> (Nat) -> Nat
+  2 |add = (x) => (y) => Nat.ind(y, (_) => Nat, x, (prev) => (almost) => add1(almost))
+  3 |

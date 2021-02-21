@@ -1,78 +1,45 @@
 // 1. The More Things Change, the More They Stay the Same
 
-_ : String
-_ = "ratatouille"
+@def _ = @the String "ratatouille"
+@def _ = @the Pair(String, String) cons("ratatouille", "baguette")
+@def _ = @the Equal(String, "ratatouille", "ratatouille") same
 
-// @let _ = @the String "ratatouille"
-
-// @let _ = @the Pair(String, String)
-//   cons("ratatouille", "baguette")
-
-// @let _ = @the Equal(String, "ratatouille",
-//   car(@the Pair(String, String)
-//     cons("ratatouille", "baguette")))
-//   same
-
-_ : Pair(String, String)
-_ = cons("ratatouille", "baguette")
-
-_ : Equal(String, "ratatouille", "ratatouille")
-_ = same
-
-_ : Equal(Pair(String, String),
+@def _ = @the Equal(Pair(String, String),
   cons("ratatouille", "baguette"),
   cons("ratatouille", "baguette"))
-_ = same
+same
 
-_ : String
-_ = car(@the Pair(String, String) cons("ratatouille", "baguette"))
+@def _ = @the String
+  car(@the Pair(String, String) cons("ratatouille", "baguette"))
 
-_ : Equal(String,
+@def _ = @the Equal(String,
   "ratatouille",
   car(@the Pair(String, String) cons("ratatouille", "baguette")))
-_ = same
+same
 
-_ : Type
-_ = Pair(String, String)
+@def _ = @the Type Pair(String, String)
+@def _ = @the Type String
+@def _ = @the Type Type
+@def _ = @the Equal(Type, String, String) same
 
-_ : Type
-_ = String
-
-_ : Type
-_ = Type
-
-_ : Equal(Type, String, String)
-_ = same
-
-_ : Type
-_ = Pair(
+@def _ = @the Type
+Pair(
   car(@the Pair(Type, String) cons(String, "olive")),
   cdr(@the Pair(String, Type) cons("oil", String)))
 
-_ : Pair(
+@def _ = @the Pair(
   car(@the Pair(Type, String) cons(String, "olive")),
   cdr(@the Pair(String, Type) cons("oil", String)))
-_ = cons(
+cons(
   cdr(@the Pair(Type, String) cons(String, "olive")),
   car(@the Pair(String, Type) cons("oil", String)))
 
-_ : Nat
-_ = 172
-
-_ : Nat
-_ = 0
-
-_ : Nat
-_ = zero
-
-_ : Equal(Nat, 0, zero)
-_ = same
-
-_ : Equal(Nat, zero, 0)
-_ = same
-
-one = add1(zero)
-
-two = add1(one)
+@def _ = @the Nat 172
+@def _ = @the Nat 0
+@def _ = @the Nat zero
+@def _ = @the Equal(Nat, 0, zero) same
+@def _ = @the Equal(Nat, zero, 0) same
+@def one = add1(zero)
+@def two = add1(one)
 
 @show two

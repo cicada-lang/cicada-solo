@@ -6,15 +6,7 @@ export const stmts = {
 
 export const stmt = {
   $grammar: {
-    "stmt:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
-    "stmt:claim": [
-      { claim: "identifier" },
-      '":"',
-      { t: "exp" },
-      { define: "identifier" },
-      '"="',
-      { exp: "exp" },
-    ],
+    "stmt:def": ['"@"', '"def"', { name: "identifier" }, '"="', { exp: "exp" }],
     "stmt:show": ['"@"', '"show"', { exp: "exp" }],
   },
 }

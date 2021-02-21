@@ -15,17 +15,6 @@ export function stmt_matcher(tree: pt.Tree.Tree): Stmt.Stmt {
   return pt.Tree.matcher<Stmt.Stmt>({
     "stmt:def": ({ name, exp }) =>
       Stmt.def(pt.Tree.str(name), exp_matcher(exp)),
-    "stmt:claim": ({ claim, t, define, exp }, { span }) => {
-      if (pt.Tree.str(claim) !== pt.Tree.str(define)) {
-        throw new pt.ParsingError(
-          "Name mismatch.\n" +
-            `- name to claim  : ${pt.Tree.str(claim)}\n` +
-            `- name to define : ${pt.Tree.str(define)}\n`,
-          { span }
-        )
-      }
-      return Stmt.def(pt.Tree.str(claim), The(exp_matcher(t), exp_matcher(exp)))
-    },
     "stmt:show": ({ exp }) => Stmt.show(exp_matcher(exp)),
   })(tree)
 }

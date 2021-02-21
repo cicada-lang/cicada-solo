@@ -1,8 +1,8 @@
-one = add1(zero)
-two = add1(one)
-three = add1(two)
-one_two = @the Pair(Nat, Nat)
+@def one = add1(zero)
+@def two = add1(one)
+@def three = add1(two)
+@def one_two = @the Pair(Nat, Nat)
   cons(one, two)
-_ = cdr(one_two)
+@def _ = cdr(one_two)
 
 @show _
