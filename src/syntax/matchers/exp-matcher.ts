@@ -73,7 +73,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     "exp:type": () => new Type(),
     "exp:let": ({ name, exp, ret }) =>
       new Let(pt.Tree.str(name), exp_matcher(exp), exp_matcher(ret)),
-    "exp:the": ({ t, exp }) => The(exp_matcher(t), exp_matcher(exp)),
+    "exp:the": ({ t, exp }) => new The(exp_matcher(t), exp_matcher(exp)),
     "exp:deduction": ({ deduction_entries, deduction_args }) => {
       const entries = pt.matchers
         .one_or_more_matcher(deduction_entries)
@@ -94,13 +94,13 @@ function deduction_aux(
     throw new Error("entries.length === 0")
   } else if (entries.length === 1) {
     let [{ t, exp }] = entries
-    if (args.length === 0) return The(t, exp)
+    if (args.length === 0) return new The(t, exp)
     for (const arg of args) exp = new Ap(exp, arg)
-    return The(t, exp)
+    return new The(t, exp)
   } else {
     const [{ t, exp }, ...rest] = entries
     const arg = deduction_aux(entries.slice(1), args)
-    return The(t, new Ap(exp, arg))
+    return new The(t, new Ap(exp, arg))
   }
 }
 

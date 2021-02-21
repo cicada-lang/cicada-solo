@@ -1,4 +1,3 @@
-- [refactoring] as class -- the
 - [refactoring] as class -- var
 
 - [refactoring] as class -- fn

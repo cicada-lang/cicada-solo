@@ -1,31 +1,49 @@
-import { Exp } from "../exp"
+import { Exp, AlphaReprOpts } from "../exp"
+import { Env } from "../env"
+import { Ctx } from "../ctx"
 import * as Value from "../value"
-import * as Ctx from "../ctx"
 import { Inferable } from "../inferable"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 
-export type The = Exp & {
-  kind: "The"
+export class The extends Object implements Exp {
+  kind = "The"
   t: Exp
   exp: Exp
-}
 
-export function The(t: Exp, exp: Exp): The {
-  return {
-    kind: "The",
-    t,
-    exp,
-    evaluability: ({ env }) => evaluate(env, exp),
-    ...Inferable({
-      inferability: ({ ctx }) => {
-        check(ctx, t, Value.type)
-        const t_value = evaluate(ctx.to_env(), t)
-        check(ctx, exp, t_value)
+  constructor(t: Exp, exp: Exp) {
+    super()
+    this.t = t
+    this.exp = exp
+  }
+
+  evaluability({ env }: { env: Env }): Value.Value {
+    return evaluate(env, this.exp)
+  }
+
+  checkability(t: Value.Value, the: { ctx: Ctx }): void {
+    return Inferable({
+      inferability: ({ ctx }: { ctx: Ctx }) => {
+        check(ctx, this.t, Value.type)
+        const t_value = evaluate(ctx.to_env(), this.t)
+        check(ctx, this.exp, t_value)
         return t_value
       },
-    }),
-    repr: () => `@the ${t.repr()} ${exp.repr()}`,
-    alpha_repr: (opts) => `@the ${t.alpha_repr(opts)} ${exp.alpha_repr(opts)}`,
+    }).checkability(t, the)
+  }
+
+  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+    check(ctx, this.t, Value.type)
+    const t_value = evaluate(ctx.to_env(), this.t)
+    check(ctx, this.exp, t_value)
+    return t_value
+  }
+
+  repr(): string {
+    return `@the ${this.t.repr()} ${this.exp.repr()}`
+  }
+
+  alpha_repr(opts: AlphaReprOpts): string {
+    return `@the ${this.t.alpha_repr(opts)} ${this.exp.alpha_repr(opts)}`
   }
 }

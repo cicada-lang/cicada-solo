@@ -64,7 +64,7 @@ export function readback(
     value.kind === "Value.not_yet" &&
     value.t.kind === "Value.absurd"
   ) {
-    return The(new Absurd(), Readback.readback_neutral(ctx, value.neutral))
+    return new The(new Absurd(), Readback.readback_neutral(ctx, value.neutral))
   } else if (t.kind === "Value.equal" && value.kind === "Value.same") {
     return new Same()
   } else if (t.kind === "Value.str" && value.kind === "Value.quote") {
