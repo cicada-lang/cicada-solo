@@ -25,7 +25,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     "exp:ap": ({ target, args }) => {
       let exp: Exp.Exp = Var(pt.Tree.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
-        exp = Ap(exp, exp_matcher(arg))
+        exp = new Ap(exp, exp_matcher(arg))
       }
       return exp
     },
@@ -94,12 +94,12 @@ function deduction_aux(
   } else if (entries.length === 1) {
     let [{ t, exp }] = entries
     if (args.length === 0) return The(t, exp)
-    for (const arg of args) exp = Ap(exp, arg)
+    for (const arg of args) exp = new Ap(exp, arg)
     return The(t, exp)
   } else {
     const [{ t, exp }, ...rest] = entries
     const arg = deduction_aux(entries.slice(1), args)
-    return The(t, Ap(exp, arg))
+    return The(t, new Ap(exp, arg))
   }
 }
 

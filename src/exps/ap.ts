@@ -11,29 +11,47 @@ import * as Normal from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 
-export type Ap = Exp & {
-  kind: "Ap"
+export class Ap extends Object implements Exp {
+  kind = "Ap"
   target: Exp
   arg: Exp
-}
 
-export function Ap(target: Exp, arg: Exp): Ap {
-  return {
-    kind: "Ap",
-    target,
-    arg,
-    evaluability: ({ env }) => do_ap(evaluate(env, target), evaluate(env, arg)),
-    ...Inferable({
-      inferability: ({ ctx }) => {
-        const target_t = infer(ctx, target)
+  constructor(target: Exp, arg: Exp) {
+    super()
+    this.target = target
+    this.arg = arg
+  }
+
+  evaluability({ env }: { env: Env }): Value.Value {
+    return do_ap(evaluate(env, this.target), evaluate(env, this.arg))
+  }
+
+  checkability(t: Value.Value, the: { ctx: Ctx }): void {
+    return Inferable({
+      inferability: ({ ctx }: { ctx: Ctx }) => {
+        const target_t = infer(ctx, this.target)
         const pi = Value.is_pi(ctx, target_t)
-        check(ctx, arg, pi.arg_t)
-        const arg_value = evaluate(ctx.to_env(), arg)
+        check(ctx, this.arg, pi.arg_t)
+        const arg_value = evaluate(ctx.to_env(), this.arg)
         return Value.Closure.apply(pi.ret_t_cl, arg_value)
       },
-    }),
-    repr: () => `${target.repr()}(${arg.repr()})`,
-    alpha_repr: (opts) => `${target.alpha_repr(opts)}(${arg.alpha_repr(opts)})`,
+    }).checkability(t, the)
+  }
+
+  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+    const target_t = infer(ctx, this.target)
+    const pi = Value.is_pi(ctx, target_t)
+    check(ctx, this.arg, pi.arg_t)
+    const arg_value = evaluate(ctx.to_env(), this.arg)
+    return Value.Closure.apply(pi.ret_t_cl, arg_value)
+  }
+
+  repr(): string {
+    return `${this.target.repr()}(${this.arg.repr()})`
+  }
+
+  alpha_repr(opts: AlphaReprOpts): string {
+    return `${this.target.alpha_repr(opts)}(${this.arg.alpha_repr(opts)})`
   }
 }
 

@@ -19,7 +19,7 @@ export function readback_neutral(
       return Var(neutral.name)
     }
     case "Neutral.ap": {
-      return Ap(
+      return new Ap(
         Readback.readback_neutral(ctx, neutral.target),
         Readback.readback_normal(ctx, neutral.arg)
       )
