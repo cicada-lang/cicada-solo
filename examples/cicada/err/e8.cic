@@ -1,8 +1,8 @@
-add : (Nat) -> (Nat) -> Nat
-add = (x) => (y) => Nat.ind(y, (_) => Nat, x, (prev) => (almost) => add1(almost))
+@def add = @the (Nat) -> (Nat) -> Nat
+  (x) => (y) => Nat.ind(y, (_) => Nat, x, (prev) => (almost) => add1(almost))
 
-Nat_which : (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T
-Nat_which = (target) => (T) => (base) => (step) => Nat.ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
+@def Nat_which = @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T
+  (target) => (T) => (base) => (step) => Nat.ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
 
-gauss : (Nat) -> Nat
-gauss = (n) => Nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
+@def gauss = @the (Nat) -> Nat
+  (n) => Nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))

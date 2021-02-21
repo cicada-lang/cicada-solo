@@ -1,9 +1,13 @@
-Found the identifier "_" in [0, 1], while expecting:
- "@":
-     stmt:def@0 -> > "@" "def" (name: identifier) "=" (exp: exp) 
- "@":
-     stmt:show@0 -> > "@" "show" (exp: exp) 
 
- 1 |_ : Equal(
- 2 |  (String) -> (String) -> Pair(String, String),
- 3 |  (x) => (y) => cons(x, y),
+I am expecting the following two values to be the same (_: String) -> (_1: String) -> (_2: String) * String.
+But they are not.
+from:
+  (_) => (_1) => cons(_, _1)
+to:
+  (_) => (_1) => cons(_1, _)
+
+previous:
+- same
+- @the Equal((_: String) -> (_: String) -> (_: String) * String, (x) => (y) => cons(x, y), (y) => (x) => cons(x, y)) same
+
+

@@ -1,16 +1,14 @@
 # cicada
 
-
-
-- parser as factory of `Exp`
-
-- `Exp` as abstract class -- use normal oop style
-
 - `Env` no side effect
 - `Env` as class
 
 - `Ctx` no side effect
 - `Ctx` as class
+
+- parser as factory of `Exp`
+
+- `Exp` as abstract class -- use normal oop style
 
 - simplify the interface `Stmt`
 

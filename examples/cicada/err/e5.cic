@@ -1,1 +1,1 @@
-_ = Pair("oil", String)
+@def _ = Pair("oil", String)

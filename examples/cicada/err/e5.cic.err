@@ -1,9 +1,9 @@
-Found the identifier "_" in [0, 1], while expecting:
- "@":
-     stmt:def@0 -> > "@" "def" (name: identifier) "=" (exp: exp) 
- "@":
-     stmt:show@0 -> > "@" "show" (exp: exp) 
 
- 1 |_ = Pair("oil", String)
- 2 |
+I infer the type to be String.
+But the given type is Type.
+
+previous:
+- "oil"
+- (_: "oil") * String
+
 

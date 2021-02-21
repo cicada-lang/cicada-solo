@@ -1,1 +1,1 @@
-_ = { Nat -- "ratatouille" }
+@def _ = @the Nat "ratatouille"

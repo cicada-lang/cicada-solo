@@ -1,5 +1,5 @@
-_ : Equal(
+@def _ = @the Equal(
   Pair(String, String),
   cons("ratatouille", "baguette"),
   cons("baguette", "ratatouille"))
-_ = same
+same
