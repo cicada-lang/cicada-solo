@@ -1,8 +1,9 @@
-- [refactoring] inline `Exp`'s members -- checkable
 - [refactoring] simplify `exps` file structure
+- [refactoring] inline `Exp`'s members -- inferable
+
+- [refactoring] `Exp` as abstract class -- use normal oop style
 
 - [refactoring] simplify `Exp`'s members' declaration
-- [refactoring] `Exp` as abstract class -- use normal oop style
 
 - [refactoring] parser as factory of `Exp`
 

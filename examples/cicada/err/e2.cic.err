@@ -1,5 +1,6 @@
 
-I am expecting the following two values to be the same String.
+I am expecting the following two values to be the same type:
+  String
 But they are not.
 from:
   "ratatouille"

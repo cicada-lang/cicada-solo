@@ -1,6 +1,6 @@
 import { Env } from "../env"
+import { Ctx } from "../ctx"
 import { Value } from "../value"
-import { Checkable } from "../checkable"
 import { Inferable } from "../inferable"
 
 export type AlphaReprOpts = {
@@ -11,7 +11,7 @@ export type AlphaReprOpts = {
 export type Exp = {
   kind: string
   evaluability(the: { env: Env }): Value
+  checkability(t: Value, the: { ctx: Ctx }): void
   repr(): string
   alpha_repr(opts: AlphaReprOpts): string
-} & Checkable &
-  Partial<Inferable>
+} & Partial<Inferable>

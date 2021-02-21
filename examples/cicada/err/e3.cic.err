@@ -1,5 +1,6 @@
 
-I am expecting the following two values to be the same (_: String) * String.
+I am expecting the following two values to be the same type:
+  (_: String) * String
 But they are not.
 from:
   cons("ratatouille", "baguette")
