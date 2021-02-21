@@ -1,4 +1,4 @@
-# cicada
+- inline `Stmt.execute` and `Stmt.declare`
 
 - [naming convention] maybe we should change the naming convention to be without dot.
 
@@ -8,8 +8,9 @@
 - simplify `Exp`'s members' declaration
 - `Exp` as abstract class -- use normal oop style
 
-- simplify the interface `Stmt`
+> refactoring `Stmt`
 
+- simplify the interface `Stmt`
 - add `@check` stmt for testing
 
 > refactoring `Value`
@@ -17,8 +18,6 @@
 > refactoring `Neutral`
 
 > refactoring `Normal`
-
-> refactoring `Stmt`
 
 > 将 NbE 教程中的 tartlet 升级为 pie
 
