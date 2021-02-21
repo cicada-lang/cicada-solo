@@ -72,7 +72,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       new Quote(pt.trim_boundary(pt.Tree.str(value), 1)),
     "exp:type": () => new Type(),
     "exp:let": ({ name, exp, ret }) =>
-      Let(pt.Tree.str(name), exp_matcher(exp), exp_matcher(ret)),
+      new Let(pt.Tree.str(name), exp_matcher(exp), exp_matcher(ret)),
     "exp:the": ({ t, exp }) => The(exp_matcher(t), exp_matcher(exp)),
     "exp:deduction": ({ deduction_entries, deduction_args }) => {
       const entries = pt.matchers

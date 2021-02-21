@@ -1,4 +1,3 @@
-- [refactoring] as class -- let
 - [refactoring] as class -- the
 - [refactoring] as class -- var
 

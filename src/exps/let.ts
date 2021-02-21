@@ -8,47 +8,56 @@ import { infer } from "../infer"
 import { check } from "../check"
 import * as ut from "../ut"
 
-export type Let = Exp & {
-  kind: "Let"
+export class Let extends Object implements Exp {
+  kind = "Let"
   name: string
   exp: Exp
   ret: Exp
-}
 
-export function Let(name: string, exp: Exp, ret: Exp): Let {
-  return {
-    kind: "Let",
-    name,
-    exp,
-    ret,
-    evaluability({ env }: { env: Env }): Value {
-      return evaluate(env.extend(name, evaluate(env, exp)), ret)
-    },
+  constructor(name: string, exp: Exp, ret: Exp) {
+    super()
+    this.name = name
+    this.exp = exp
+    this.ret = ret
+  }
 
-    inferability({ ctx }: { ctx: Ctx.Ctx }): Value {
-      return infer(
-        ctx.extend(name, infer(ctx, exp), evaluate(ctx.to_env(), exp)),
-        ret
-      )
-    },
+  evaluability({ env }: { env: Env }): Value {
+    return evaluate(env.extend(this.name, evaluate(env, this.exp)), this.ret)
+  }
 
-    checkability(t: Value, { ctx }: { ctx: Ctx.Ctx }): void {
-      check(
-        ctx.extend(name, infer(ctx, exp), evaluate(ctx.to_env(), exp)),
-        ret,
-        t
-      )
-    },
+  inferability({ ctx }: { ctx: Ctx.Ctx }): Value {
+    return infer(
+      ctx.extend(
+        this.name,
+        infer(ctx, this.exp),
+        evaluate(ctx.to_env(), this.exp)
+      ),
+      this.ret
+    )
+  }
 
-    repr(): string {
-      return `@let ${name} = ${exp.repr()} ${ret.repr()}`
-    },
+  checkability(t: Value, { ctx }: { ctx: Ctx.Ctx }): void {
+    check(
+      ctx.extend(
+        this.name,
+        infer(ctx, this.exp),
+        evaluate(ctx.to_env(), this.exp)
+      ),
+      this.ret,
+      t
+    )
+  }
 
-    alpha_repr(opts: AlphaReprOpts): string {
-      return `@let ${name} = ${exp.alpha_repr(opts)} ${ret.alpha_repr({
-        depth: opts.depth + 1,
-        depths: new Map([...opts.depths, [name, opts.depth]]),
-      })}`
-    },
+  repr(): string {
+    return `@let ${this.name} = ${this.exp.repr()} ${this.ret.repr()}`
+  }
+
+  alpha_repr(opts: AlphaReprOpts): string {
+    return `@let ${this.name} = ${this.exp.alpha_repr(
+      opts
+    )} ${this.ret.alpha_repr({
+      depth: opts.depth + 1,
+      depths: new Map([...opts.depths, [this.name, opts.depth]]),
+    })}`
   }
 }
