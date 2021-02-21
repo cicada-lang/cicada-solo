@@ -8,7 +8,8 @@
   ],
   "scripts": {
     "build": "npx tsc",
-    "vercel-build": "npx tsc",
+    "test": "./dev t",
+    "vercel-build": "npm run build && npm run test",
     "watch": "npx tsc --watch",
     "format": "npx prettier src examples --write"
   },
