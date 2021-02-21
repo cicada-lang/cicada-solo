@@ -1,4 +1,3 @@
-- [refactoring] as class -- sigma
 - [refactoring] as class -- car
 - [refactoring] as class -- cdr
 - [refactoring] as class -- cons

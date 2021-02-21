@@ -45,7 +45,10 @@ export class NatInd extends Object implements Exp {
         // NOTE We should always infer target,
         //   but we do a simple check for the simple nat.
         check(ctx, this.target, Value.nat)
-        const motive_t = evaluate(Env.init(), new Pi("x", new Nat(), new Type()))
+        const motive_t = evaluate(
+          Env.init(),
+          new Pi("x", new Nat(), new Type())
+        )
         check(ctx, this.motive, motive_t)
         const motive_value = evaluate(ctx.to_env(), this.motive)
         check(ctx, this.base, do_ap(motive_value, Value.zero))

@@ -95,7 +95,7 @@ export function readback(
       Value.type,
       Value.Closure.apply(value.cdr_t_cl, variable)
     )
-    return Sigma(fresh_name, car_t, cdr_t)
+    return new Sigma(fresh_name, car_t, cdr_t)
   } else if (t.kind === "Value.type" && value.kind === "Value.pi") {
     const fresh_name = ut.freshen_name(
       new Set(ctx.names()),
