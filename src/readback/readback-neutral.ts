@@ -46,7 +46,7 @@ export function readback_neutral(
       )
     }
     case "Neutral.absurd_ind": {
-      return AbsurdInd(
+      return new AbsurdInd(
         Readback.readback_neutral(ctx, neutral.target),
         Readback.readback_normal(ctx, neutral.motive)
       )

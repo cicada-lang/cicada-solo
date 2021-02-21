@@ -1,42 +1,62 @@
-import { Exp } from "../exp"
+import { Exp, AlphaReprOpts } from "../exp"
 import { Inferable } from "../inferable"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
-import * as Ctx from "../ctx"
+import { Ctx } from "../ctx"
+import { Env } from "../env"
 import * as Value from "../value"
 import * as Explain from "../explain"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 
-export type AbsurdInd = Exp & {
-  kind: "AbsurdInd"
+export class AbsurdInd extends Object implements Exp {
+  kind = "AbsurdInd"
   target: Exp
   motive: Exp
-}
 
-export function AbsurdInd(target: Exp, motive: Exp): AbsurdInd {
-  return {
-    kind: "AbsurdInd",
-    target,
-    motive,
-    evaluability: ({ env }) =>
-      do_absurd_ind(evaluate(env, target), evaluate(env, motive)),
-    ...Inferable({
-      inferability: ({ ctx }) => {
+  constructor(target: Exp, motive: Exp) {
+    super()
+    this.target = target
+    this.motive = motive
+  }
+
+  evaluability({ env }: { env: Env }): Value.Value {
+    return do_absurd_ind(evaluate(env, this.target), evaluate(env, this.motive))
+  }
+
+  checkability(t: Value.Value, the: { ctx: Ctx }): void {
+    return Inferable({
+      inferability: ({ ctx }: { ctx: Ctx }) => {
         // NOTE the `motive` here is not a function from target_t to type,
         //   but a element of type.
         // NOTE We should always infer target,
         //   but we do a simple check for the simple absurd.
-        check(ctx, target, Value.absurd)
-        check(ctx, motive, Value.type)
-        const motive_value = evaluate(ctx.to_env(), motive)
+        check(ctx, this.target, Value.absurd)
+        check(ctx, this.motive, Value.type)
+        const motive_value = evaluate(ctx.to_env(), this.motive)
         return motive_value
       },
-    }),
-    repr: () => `Absurd.ind(${target.repr()}, ${motive.repr()})`,
-    alpha_repr: (opts) =>
-      `Absurd.ind(${target.alpha_repr(opts)}, ${motive.alpha_repr(opts)})`,
+    }).checkability(t, the)
+  }
+
+  inferability({ ctx}: { ctx: Ctx }): Value.Value {
+    // NOTE the `motive` here is not a function from target_t to type,
+    //   but a element of type.
+    // NOTE We should always infer target,
+    //   but we do a simple check for the simple absurd.
+    check(ctx, this.target, Value.absurd)
+    check(ctx, this.motive, Value.type)
+    const motive_value = evaluate(ctx.to_env(), this.motive)
+    return motive_value
+  }
+
+  repr(): string {
+    return `Absurd.ind(${this.target.repr()}, ${this.motive.repr()})`
+  }
+
+  alpha_repr(opts: AlphaReprOpts): string {
+    return `Absurd.ind(${this.target.alpha_repr(opts)}, ${this.motive.alpha_repr(opts)})`
   }
 }
 
