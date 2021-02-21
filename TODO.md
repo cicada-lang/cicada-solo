@@ -17,12 +17,12 @@
 
 - [refactoring] simplify `Exp`'s members' declaration
 
-- [refactoring] parser as factory of `Exp`
-
 - [refactoring] `Stmt`
 - [refactoring] `Value`
 - [refactoring] `Neutral`
 - [refactoring] `Normal`
+
+- [refactoring] parser as factory of `Exp`
 
 - [pie] `List`, `List.cons`, `List.null`, `List.rec`
 - [pie] `Vector`
