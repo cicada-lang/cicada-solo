@@ -4,7 +4,6 @@ import { check } from "../../check"
 import { evaluate } from "../../evaluate"
 import * as Ctx from "../../ctx"
 import * as Value from "../../value"
-import { sigma_evaluable } from "./sigma-evaluable"
 
 export type Sigma = Exp & {
   kind: "Sigma"
@@ -19,7 +18,8 @@ export function Sigma(name: string, car_t: Exp, cdr_t: Exp): Sigma {
     name,
     car_t,
     cdr_t,
-    ...sigma_evaluable(name, car_t, cdr_t),
+    evaluability: ({ env }) =>
+      Value.sigma(evaluate(env, car_t), Value.Closure.create(env, name, cdr_t)),
     ...Inferable({
       inferability: ({ ctx }) => {
         check(ctx, car_t, Value.type)

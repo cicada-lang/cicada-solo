@@ -1,5 +1,5 @@
 import { Exp } from "../../exp"
-import { fn_evaluable } from "./fn-evaluable"
+import * as Value from "../../value"
 import { fn_checkable } from "./fn-checkable"
 
 export type Fn = Exp & {
@@ -13,7 +13,7 @@ export function Fn(name: string, ret: Exp): Fn {
     kind: "Fn",
     name,
     ret,
-    ...fn_evaluable(name, ret),
+    evaluability: ({ env }) => Value.fn(Value.Closure.create(env, name, ret)),
     ...fn_checkable(name, ret),
     repr: () => `(${name}) => ${ret.repr()}`,
     alpha_repr: (opts) => {

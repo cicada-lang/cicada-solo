@@ -3,7 +3,6 @@ import { Inferable } from "../../inferable"
 import * as Ctx from "../../ctx"
 import * as Explain from "../../explain"
 import * as Trace from "../../trace"
-import { var_evaluable } from "./var-evaluable"
 
 export type Var = Exp & {
   kind: "Var"
@@ -14,7 +13,13 @@ export function Var(name: string): Var {
   return {
     kind: "Var",
     name,
-    ...var_evaluable(name),
+    evaluability: ({ env }) => {
+      const result = env.lookup(name)
+      if (result === undefined) {
+        throw new Trace.Trace(Explain.explain_name_undefined(name))
+      }
+      return result
+    },
     ...Inferable({
       inferability: ({ ctx }) => {
         const t = ctx.lookup(name)

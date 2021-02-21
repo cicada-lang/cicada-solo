@@ -1,10 +1,9 @@
 import { Exp } from "../../exp"
+import * as Value from "../../value"
 import { Inferable } from "../../inferable"
 import { check } from "../../check"
 import { evaluate } from "../../evaluate"
 import * as Ctx from "../../ctx"
-import * as Value from "../../value"
-import { pi_evaluable } from "./pi-evaluable"
 
 export type Pi = Exp & {
   kind: "Pi"
@@ -19,7 +18,8 @@ export function Pi(name: string, arg_t: Exp, ret_t: Exp): Pi {
     name,
     arg_t,
     ret_t,
-    ...pi_evaluable(name, arg_t, ret_t),
+    evaluability: ({ env }) =>
+      Value.pi(evaluate(env, arg_t), Value.Closure.create(env, name, ret_t)),
     ...Inferable({
       inferability: ({ ctx }) => {
         check(ctx, arg_t, Value.type)

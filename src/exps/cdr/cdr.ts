@@ -4,8 +4,10 @@ import { infer } from "../../infer"
 import { evaluate } from "../../evaluate"
 import * as Value from "../../value"
 import * as Ctx from "../../ctx"
+import * as Explain from "../../explain"
+import * as Neutral from "../../neutral"
+import * as Trace from "../../trace"
 import { do_car } from "../car"
-import { cdr_evaluable } from "./cdr-evaluable"
 
 export type Cdr = Exp & {
   kind: "Cdr"
@@ -16,7 +18,7 @@ export function Cdr(target: Exp): Cdr {
   return {
     kind: "Cdr",
     target,
-    ...cdr_evaluable(target),
+    evaluability: ({ env }) => do_cdr(evaluate(env, target)),
     ...Inferable({
       inferability: ({ ctx }) => {
         const target_t = infer(ctx, target)
@@ -27,5 +29,34 @@ export function Cdr(target: Exp): Cdr {
     }),
     repr: () => `cdr(${target.repr()})`,
     alpha_repr: (opts) => `cdr(${target.alpha_repr(opts)})`,
+  }
+}
+
+export function do_cdr(target: Value.Value): Value.Value {
+  if (target.kind === "Value.cons") {
+    return target.cdr
+  } else if (target.kind === "Value.not_yet") {
+    if (target.t.kind === "Value.sigma") {
+      return Value.not_yet(
+        Value.Closure.apply(target.t.cdr_t_cl, do_car(target)),
+        Neutral.cdr(target.neutral)
+      )
+    } else {
+      throw new Trace.Trace(
+        Explain.explain_elim_target_type_mismatch({
+          elim: "cdr",
+          expecting: ["Value.sigma"],
+          reality: target.t.kind,
+        })
+      )
+    }
+  } else {
+    throw new Trace.Trace(
+      Explain.explain_elim_target_mismatch({
+        elim: "cdr",
+        expecting: ["Value.cons", "Value.not_yet"],
+        reality: target.kind,
+      })
+    )
   }
 }
