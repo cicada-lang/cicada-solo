@@ -12,7 +12,6 @@ import { Trivial, Sole } from "../../exps"
 import { Str, Quote } from "../../exps"
 import { Type } from "../../exps"
 import { Let } from "../../exps"
-import { Begin } from "../../exps"
 import { The } from "../../exps"
 
 export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
@@ -71,8 +70,6 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     "exp:str": () => Str,
     "exp:quote": ({ value }) => Quote(pt.trim_boundary(pt.Tree.str(value), 1)),
     "exp:type": () => Type,
-    "exp:begin": ({ stmts, ret }) =>
-      Begin(stmts_matcher(stmts), exp_matcher(ret)),
     "exp:let": ({ name, exp, ret }) =>
       Let(pt.Tree.str(name), exp_matcher(exp), exp_matcher(ret)),
     "exp:deduction": ({ deduction_entries, deduction_args }) => {

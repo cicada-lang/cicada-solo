@@ -106,7 +106,6 @@ export const exp = {
     "exp:str": ['"String"'],
     "exp:quote": [{ value: { $pattern: ["string"] } }],
     "exp:type": ['"Type"'],
-    "exp:begin": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
     "exp:let": [
       '"@"',
       '"let"',

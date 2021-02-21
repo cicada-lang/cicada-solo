@@ -17,7 +17,7 @@ import { Absurd } from "../exps"
 import { Trivial, Sole } from "../exps"
 import { Str, Quote } from "../exps"
 import { Type } from "../exps"
-import { Begin } from "../exps"
+import { Let } from "../exps"
 import { The } from "../exps"
 
 export function readback(

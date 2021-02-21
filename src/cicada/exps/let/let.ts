@@ -1,6 +1,5 @@
 import { Exp } from "../../exp"
 import { Value } from "../../value"
-import * as Stmt from "../../stmt"
 import * as Env from "../../env"
 import * as Ctx from "../../ctx"
 import { Inferable } from "../../inferable"

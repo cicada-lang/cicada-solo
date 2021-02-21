@@ -16,10 +16,9 @@ pow = {
   (x) => (y) => Nat.ind(y, (_) => Nat, 1, (prev) => (almost) => mul(almost)(x))
 }
 
-eight = {
-  four = add(2)(2)
+eight =
+  @let four = add(2)(2)
   add(four)(four)
-}
 
 _ = { Equal(Nat, eight, pow(2)(3)) -- same }
 

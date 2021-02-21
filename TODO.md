@@ -1,7 +1,6 @@
 # cicada
 
-- no `Begin` use `Let` instead
-  - `Exp` should not depend on `Stmt`
+- simple file structure
 
 - no `@claim` & `@define` use `@let` instead
 
