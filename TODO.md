@@ -18,7 +18,6 @@
 - [refactoring] as class -- trivial
 - [refactoring] as class -- type
 - [refactoring] as class -- var
-- [refactoring] as class -- zero
 
 - [refactoring] `Exp` as abstract class -- use normal oop style
 

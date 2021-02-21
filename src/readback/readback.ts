@@ -26,7 +26,7 @@ export function readback(
   value: Value.Value
 ): Exp.Exp {
   if (t.kind === "Value.nat" && value.kind === "Value.zero") {
-    return Zero
+    return new Zero()
   } else if (t.kind === "Value.nat" && value.kind === "Value.add1") {
     return new Add1(Readback.readback(ctx, t, value.prev))
   } else if (t.kind === "Value.pi") {

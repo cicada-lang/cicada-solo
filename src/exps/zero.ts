@@ -1,17 +1,37 @@
-import { Exp } from "../exp"
+import { Exp, AlphaReprOpts } from "../exp"
+import { Ctx } from "../ctx"
+import { Env } from "../env"
 import { Inferable } from "../inferable"
 import * as Value from "../value"
 
-export type Zero = Exp & {
-  kind: "Zero"
-}
+export class Zero extends Object implements Exp {
+  kind = "Zero"
 
-export const Zero: Zero = {
-  kind: "Zero",
-  evaluability: (_) => Value.zero,
-  ...Inferable({
-    inferability: ({ ctx }) => Value.nat,
-  }),
-  repr: () => "0",
-  alpha_repr: (_) => "0",
+  constructor() {
+    super()
+  }
+
+  evaluability(the: { env: Env }): Value.Value {
+    return Value.zero
+  }
+
+  checkability(t: Value.Value, the: { ctx: Ctx }): void {
+    return Inferable({
+      inferability: ({ ctx }: { ctx: Ctx }) => {
+        return Value.nat
+      },
+    }).checkability(t, the)
+  }
+
+  inferability(the: { ctx: Ctx }): Value.Value {
+    return Value.nat
+  }
+
+  repr(): string {
+    return "0"
+  }
+
+  alpha_repr(opts: AlphaReprOpts): string {
+    return "0"
+  }
 }

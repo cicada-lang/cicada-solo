@@ -37,7 +37,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     "exp:car": ({ target }) => Car(exp_matcher(target)),
     "exp:cdr": ({ target }) => Cdr(exp_matcher(target)),
     "exp:nat": () => Nat,
-    "exp:zero": () => Zero,
+    "exp:zero": () => new Zero(),
     "exp:add1": ({ prev }) => new Add1(exp_matcher(prev)),
     "exp:number": ({ value }, { span }) => {
       const n = Number.parseInt(pt.Tree.str(value))
