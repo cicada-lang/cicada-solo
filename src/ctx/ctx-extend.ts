@@ -8,5 +8,5 @@ export function extend(
   t: Value.Value,
   value?: Value.Value
 ): Ctx.Ctx {
-  return Ctx.update(Ctx.clone(ctx), name, t, value)
+  return new Map([...ctx, [name, { t, value }]])
 }

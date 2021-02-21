@@ -4,10 +4,10 @@ import * as Exp from "../exp"
 import * as Evaluate from "../evaluate"
 import * as Infer from "../infer"
 
-export function declare(ctx: Ctx.Ctx, stmt: Stmt.Stmt): void {
+export function declare(ctx: Ctx.Ctx, stmt: Stmt.Stmt): Ctx.Ctx | undefined {
   switch (stmt.kind) {
     case "Stmt.def": {
-      Ctx.update(
+      return Ctx.extend(
         ctx,
         stmt.name,
         Infer.infer(ctx, stmt.exp),

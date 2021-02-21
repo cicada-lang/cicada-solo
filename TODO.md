@@ -1,6 +1,5 @@
 # cicada
 
-- `Ctx` no side effect
 - `Env` as class
 - `Ctx` as class
 
