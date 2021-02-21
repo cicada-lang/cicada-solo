@@ -72,7 +72,7 @@ export function readback(
   } else if (t.kind === "Value.type" && value.kind === "Value.nat") {
     return new Nat()
   } else if (t.kind === "Value.type" && value.kind === "Value.str") {
-    return Str
+    return new Str()
   } else if (t.kind === "Value.type" && value.kind === "Value.trivial") {
     return Trivial
   } else if (t.kind === "Value.type" && value.kind === "Value.absurd") {

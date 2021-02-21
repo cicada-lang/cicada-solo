@@ -1,17 +1,37 @@
-import { Exp } from "../exp"
+import { Exp, AlphaReprOpts } from "../exp"
+import { Ctx } from "../ctx"
+import { Env } from "../env"
 import { Inferable } from "../inferable"
 import * as Value from "../value"
 
-export type Str = Exp & {
-  kind: "Str"
-}
+export class Str extends Object implements Exp {
+  kind = "Str"
 
-export const Str: Str = {
-  kind: "Str",
-  evaluability: (_) => Value.str,
-  ...Inferable({
-    inferability: ({ ctx }) => Value.type,
-  }),
-  repr: () => "String",
-  alpha_repr: () => "String",
+  constructor() {
+    super()
+  }
+
+  evaluability(the: { env: Env }): Value.Value {
+    return Value.str
+  }
+
+  checkability(t: Value.Value, the: { ctx: Ctx }): void {
+    return Inferable({
+      inferability: ({ ctx }: { ctx: Ctx }) => {
+        return Value.type
+      },
+    }).checkability(t, the)
+  }
+
+  inferability(the: { ctx: Ctx }): Value.Value {
+    return Value.type
+  }
+
+  repr(): string {
+    return "String"
+  }
+
+  alpha_repr(opts: AlphaReprOpts): string {
+    return "String"
+  }
 }
