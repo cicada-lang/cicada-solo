@@ -1,5 +1,3 @@
-- [refactoring] inline `Exp`'s members -- inferable
-
 - [refactoring] `Exp` as abstract class -- use normal oop style
 
 - [refactoring] simplify `Exp`'s members' declaration
