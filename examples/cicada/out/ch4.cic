@@ -20,12 +20,12 @@
 @show flip(Nat)(String)(cons(123, "abc"))
 @show flip(String)(Nat)(flip(Nat)(String)(cons(123, "abc")))
 
-@def _1 = @the Equal(Type,
+@show @the Equal(Type,
   (A: Type) -> (D: Type) -> (pair: Pair(A, D)) -> Pair(D, A),
   (Lemon: Type) -> (Meringue: Type) -> (Pair(Lemon, Meringue)) -> Pair(Meringue, Lemon))
 same
 
-@def _2 = @the Equal(Type,
+@show @the Equal(Type,
   (A: Type) -> (D: Type) -> (Pair(A, D)) -> Pair(D, A),
   (A: Type) -> (D: Type) ->
     (Pair(

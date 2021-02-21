@@ -1,3 +1,1 @@
-@def _ = @the Nat add1(add1(zero))
-
-@show _
+@show @the Nat add1(add1(zero))

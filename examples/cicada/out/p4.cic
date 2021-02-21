@@ -3,6 +3,4 @@
 @def three = add1(two)
 @def one_two = @the Pair(Nat, Nat)
   cons(one, two)
-@def _ = cdr(one_two)
-
-@show _
+@show cdr(one_two)

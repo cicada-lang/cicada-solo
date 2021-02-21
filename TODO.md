@@ -1,5 +1,3 @@
-- inline `Stmt.execute` and `Stmt.declare`
-
 - [naming convention] maybe we should change the naming convention to be without dot.
 
 - parser as factory of `Exp`
@@ -9,9 +7,6 @@
 - `Exp` as abstract class -- use normal oop style
 
 > refactoring `Stmt`
-
-- simplify the interface `Stmt`
-- add `@check` stmt for testing
 
 > refactoring `Value`
 

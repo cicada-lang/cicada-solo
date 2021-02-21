@@ -1,44 +1,45 @@
 // 1. The More Things Change, the More They Stay the Same
 
-@def _ = @the String "ratatouille"
-@def _ = @the Pair(String, String) cons("ratatouille", "baguette")
-@def _ = @the Equal(String, "ratatouille", "ratatouille") same
+@show @the String "ratatouille"
+@show @the Pair(String, String) cons("ratatouille", "baguette")
+@show @the Equal(String, "ratatouille", "ratatouille") same
 
-@def _ = @the Equal(Pair(String, String),
+@show @the Equal(Pair(String, String),
   cons("ratatouille", "baguette"),
   cons("ratatouille", "baguette"))
 same
 
-@def _ = @the String
+@show @the String
   car(@the Pair(String, String) cons("ratatouille", "baguette"))
 
-@def _ = @the Equal(String,
+@show @the Equal(String,
   "ratatouille",
   car(@the Pair(String, String) cons("ratatouille", "baguette")))
 same
 
-@def _ = @the Type Pair(String, String)
-@def _ = @the Type String
-@def _ = @the Type Type
-@def _ = @the Equal(Type, String, String) same
+@show @the Type Pair(String, String)
+@show @the Type String
+@show @the Type Type
+@show @the Equal(Type, String, String) same
 
-@def _ = @the Type
+@show @the Type
 Pair(
   car(@the Pair(Type, String) cons(String, "olive")),
   cdr(@the Pair(String, Type) cons("oil", String)))
 
-@def _ = @the Pair(
+@show @the Pair(
   car(@the Pair(Type, String) cons(String, "olive")),
   cdr(@the Pair(String, Type) cons("oil", String)))
 cons(
   cdr(@the Pair(Type, String) cons(String, "olive")),
   car(@the Pair(String, Type) cons("oil", String)))
 
-@def _ = @the Nat 172
-@def _ = @the Nat 0
-@def _ = @the Nat zero
-@def _ = @the Equal(Nat, 0, zero) same
-@def _ = @the Equal(Nat, zero, 0) same
+@show @the Nat 172
+@show @the Nat 0
+@show @the Nat zero
+@show @the Equal(Nat, 0, zero) same
+@show @the Equal(Nat, zero, 0) same
+
 @def one = add1(zero)
 @def two = add1(one)
 

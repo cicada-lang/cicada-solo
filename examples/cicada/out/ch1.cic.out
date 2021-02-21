@@ -1,2 +1,19 @@
+String -- "ratatouille"
+(_: String) * String -- cons("ratatouille", "baguette")
+Equal(String, "ratatouille", "ratatouille") -- same
+Equal((_: String) * String, cons("ratatouille", "baguette"), cons("ratatouille", "baguette")) -- same
+String -- "ratatouille"
+Equal(String, "ratatouille", "ratatouille") -- same
+Type -- (_: String) * String
+Type -- String
+Type -- Type
+Equal(Type, String, String) -- same
+Type -- (_: String) * String
+(_: String) * String -- cons("olive", "oil")
+Nat -- 172
+Nat -- 0
+Nat -- 0
+Equal(Nat, 0, 0) -- same
+Equal(Nat, 0, 0) -- same
 Nat -- 2
 

@@ -15,29 +15,29 @@
 @def id_in_pair = @the (x: String) -> T
   (x) => cons(x, (x) => x)
 
-@def _ = @the T
+@show @the T
   id_in_pair("x")
 
 // The x occur in `(x) => x` should not be
 // effected by the substitution of outer `x`,
 // and `(x) => x` is equivalent to `(y) => y`,
 
-@def _ = @the Equal(T, id_in_pair("x"), cons("x", (y) => y))
+@show @the Equal(T, id_in_pair("x"), cons("x", (y) => y))
   same
 
-@def _ = @the Equal((Nat) -> Pair(Nat, Nat), (x) => cons(x, x), (y) => cons(y, y))
+@show @the Equal((Nat) -> Pair(Nat, Nat), (x) => cons(x, x), (y) => cons(y, y))
   same
 
-@def _ = @the Equal((Nat) -> Nat, (y) => car(@the Pair(Nat, Nat) cons(y, y)), (x) => x)
+@show @the Equal((Nat) -> Nat, (y) => car(@the Pair(Nat, Nat) cons(y, y)), (x) => x)
   same
 
-@def _ = @the Equal((Pair(Nat, Nat)) -> Nat, (y) => car(y), (x) => car(x))
+@show @the Equal((Pair(Nat, Nat)) -> Nat, (y) => car(y), (x) => car(x))
   same
 
 @def vegetables = @the Pair(String, String)
   cons("celery", "carrot")
 
-@def _ = @the Equal(Pair(String, String), vegetables, cons(car(vegetables), cdr(vegetables)))
+@show @the Equal(Pair(String, String), vegetables, cons(car(vegetables), cdr(vegetables)))
   same
 
 @def Nat_rec = @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
@@ -51,16 +51,16 @@
 @def naught_or_more = @the (Nat) -> String
   (n) => Nat_which(n)(String)("naught")((_prev) => "more")
 
-@def _ = @the Equal(String, naught_or_more(0), "naught")
+@show @the Equal(String, naught_or_more(0), "naught")
   same
 
-@def _ = @the Equal(String, naught_or_more(1), "more")
+@show @the Equal(String, naught_or_more(1), "more")
   same
 
-@def _ = @the Equal(String, naught_or_more(4), "more")
+@show @the Equal(String, naught_or_more(4), "more")
   same
 
-@def _ = @the Pair(Type, Type)
+@show @the Pair(Type, Type)
   cons(String, String)
 
 @def Pear = @the Type
