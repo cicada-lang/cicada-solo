@@ -107,6 +107,14 @@ export const exp = {
     "exp:quote": [{ value: { $pattern: ["string"] } }],
     "exp:type": ['"Type"'],
     "exp:begin": ['"{"', { stmts: "stmts" }, { ret: "exp" }, '"}"'],
+    "exp:let": [
+      '"@"',
+      '"let"',
+      { name: "identifier" },
+      '"="',
+      { exp: "exp" },
+      { ret: "exp" },
+    ],
     "exp:deduction": [
       '"{"',
       { deduction_entries: { $ap: ["one_or_more", "deduction_entry"] } },

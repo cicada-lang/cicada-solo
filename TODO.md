@@ -1,11 +1,11 @@
 # cicada
 
-> syntax
-
-- `Let` syntax
-
 - no `Begin` use `Let` instead
   - `Exp` should not depend on `Stmt`
+
+- no `@claim` & `@define` use `@let` instead
+
+- parser as factory of `Exp`
 
 - `Exp` as abstract class -- use normal oop style
 
