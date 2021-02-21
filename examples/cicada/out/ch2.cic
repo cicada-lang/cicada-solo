@@ -40,16 +40,16 @@
 @show @the Equal(Pair(String, String), vegetables, cons(car(vegetables), cdr(vegetables)))
   same
 
-@def Nat_rec = @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
+@def nat_rec = @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
 (target) => (T) => (base) => (step) =>
-  Nat.ind(target, (_) => T, base, step)
+  nat_ind(target, (_) => T, base, step)
 
-@def Nat_which = @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T
+@def nat_which = @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T
 (target) => (T) => (base) => (step) =>
-  Nat.ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
+  nat_ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
 
 @def naught_or_more = @the (Nat) -> String
-  (n) => Nat_which(n)(String)("naught")((_prev) => "more")
+  (n) => nat_which(n)(String)("naught")((_prev) => "more")
 
 @show @the Equal(String, naught_or_more(0), "naught")
   same

@@ -56,9 +56,7 @@ export const exp = {
     "exp:add1": ['"add1"', '"("', { prev: "exp" }, '")"'],
     "exp:number": [{ value: { $pattern: ["number"] } }],
     "exp:nat_ind": [
-      '"Nat"',
-      '"."',
-      '"ind"',
+      '"nat_ind"',
       '"("',
       { target: "exp" },
       '","',
@@ -94,9 +92,7 @@ export const exp = {
     "exp:sole": ['"sole"'],
     "exp:absurd": ['"Absurd"'],
     "exp:absurd_ind": [
-      '"Absurd"',
-      '"."',
-      '"ind"',
+      '"absurd_ind"',
       '"("',
       { target: "exp" },
       '","',

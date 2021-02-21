@@ -6,6 +6,7 @@ const preserved = [
   "car",
   "cdr",
   "Nat",
+  "nat_ind",
   "zero",
   "add1",
   "Equal",
@@ -14,6 +15,7 @@ const preserved = [
   "Trivial",
   "sole",
   "Absurd",
+  "absurd_ind",
   "String",
   "Type",
 ]

@@ -1,5 +1,3 @@
-- [convention] change the naming convention to be without dot.
-
 - [refactoring] parser as factory of `Exp`
 
 - [refactoring] inline `Exp`'s members

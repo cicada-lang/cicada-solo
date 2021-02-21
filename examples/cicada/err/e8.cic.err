@@ -6,8 +6,8 @@ previous:
 - gauss(prev)
 - add(add1(prev))(gauss(prev))
 - (prev) => add(add1(prev))(gauss(prev))
-- Nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
-- (n) => Nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
-- @the (_: Nat) -> Nat (n) => Nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
+- nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
+- (n) => nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
+- @the (_: Nat) -> Nat (n) => nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
 
 
