@@ -1,12 +1,12 @@
 import * as Stmt from "../stmt"
-import * as Env from "../env"
+import { Env } from "../env"
 import * as Exp from "../exp"
-import * as Evaluate from "../evaluate"
+import { evaluate } from "../evaluate"
 
-export function execute(env: Env.Env, stmt: Stmt.Stmt): Env.Env | undefined {
+export function execute(env: Env, stmt: Stmt.Stmt): Env | undefined {
   switch (stmt.kind) {
     case "Stmt.def": {
-      return Env.extend(env, stmt.name, Evaluate.evaluate(env, stmt.exp))
+      return env.extend(stmt.name, evaluate(env, stmt.exp))
     }
   }
 }

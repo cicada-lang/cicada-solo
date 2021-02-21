@@ -1,6 +1,6 @@
 import { Exp } from "../../exp"
 import { Value } from "../../value"
-import * as Env from "../../env"
+import { Env } from "../../env"
 import * as Ctx from "../../ctx"
 import { Inferable } from "../../inferable"
 import { evaluate } from "../../evaluate"
@@ -22,8 +22,8 @@ export function Let(name: string, exp: Exp, ret: Exp): Let {
     name,
     exp,
     ret,
-    evaluability({ env }: { env: Env.Env }): Value {
-      return evaluate(Env.extend(env, name, evaluate(env, exp)), ret)
+    evaluability({ env }: { env: Env }): Value {
+      return evaluate(env.extend(name, evaluate(env, exp)), ret)
     },
 
     inferability({ ctx }: { ctx: Ctx.Ctx }): Value {

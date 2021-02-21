@@ -1,12 +1,13 @@
 # cicada
 
-- `Env` as class
 - `Ctx` as class
 
 - [naming convention] maybe we should change the naming convention to be without dot.
 
 - parser as factory of `Exp`
 
+- inline `Exp`'s members
+- simplify `Exp`'s members' declaration
 - `Exp` as abstract class -- use normal oop style
 
 - simplify the interface `Stmt`

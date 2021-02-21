@@ -4,7 +4,7 @@ import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { infer } from "../../infer"
 import * as Explain from "../../explain"
-import * as Env from "../../env"
+import { Env } from "../../env"
 import * as Ctx from "../../ctx"
 import * as Value from "../../value"
 import * as Normal from "../../normal"
@@ -39,7 +39,7 @@ export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
         const target_t = infer(ctx, target)
         const equal = Value.is_equal(ctx, target_t)
         const motive_t = evaluate(
-          Env.extend(Env.init(), "t", equal.t),
+          Env.init().extend("t", equal.t),
           Pi("x", Var("t"), Type)
         )
         check(ctx, motive, motive_t)

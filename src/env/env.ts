@@ -1,3 +1,21 @@
-import * as Value from "../value"
+import { Value } from "../value"
 
-export type Env = Map<string, Value.Value>
+export class Env {
+  values: Map<string, Value>
+
+  constructor(values: Map<string, Value> = new Map()) {
+    this.values = values
+  }
+
+  static init(): Env {
+    return new Env()
+  }
+
+  extend(name: string, value: Value): Env {
+    return new Env(new Map([...this.values, [name, value]]))
+  }
+
+  lookup(name: string): undefined | Value {
+    return this.values.get(name)
+  }
+}
