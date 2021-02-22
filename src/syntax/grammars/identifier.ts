@@ -1,4 +1,4 @@
-import * as pt from "../../partech"
+import pt from "@cicada-lang/partech"
 
 const preserved = [
   "Pair",

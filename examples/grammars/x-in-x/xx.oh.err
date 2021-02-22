@@ -1,8 +1,0 @@
-Found END_OF_TOKENS, while expecting:
- "x":
-     s:x@0 -> > "x" 
- "x":
-     s:x_in_x@0 -> > "x" s "x" 
-
- 1 |x x 
-

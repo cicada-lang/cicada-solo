@@ -1,6 +1,6 @@
 import * as Exp from "../../exp"
 import * as Stmt from "../../stmt"
-import * as pt from "../../partech"
+import pt from "@cicada-lang/partech"
 import { exp_matcher } from "../matchers"
 import { The } from "../../exps"
 

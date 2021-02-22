@@ -1,8 +1,0 @@
-Found the identifier "b" in [3, 4], while expecting:
- "a":
-     aaa:more@2 -> > "a" aaa 
- "]":
-     list_of_a:list@0 -> "["@1 aaa:more@2 > "]" 
-
- 1 |[a b a a]
-

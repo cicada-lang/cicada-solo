@@ -1,6 +1,0 @@
-Found the identifier "a" in [0, 1], while expecting:
- "[":
-     list_of_a:list@0 -> > "[" aaa "]" 
-
- 1 |a a a a
-

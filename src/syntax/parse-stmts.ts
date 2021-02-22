@@ -1,7 +1,7 @@
 import * as grammars from "./grammars"
 import * as matchers from "./matchers"
 import * as Stmt from "../stmt"
-import * as pt from "../partech"
+import * as pt from "@cicada-lang/partech"
 
 export const parse_stmts = pt.gen_parse({
   preprocess: pt.preprocess.erase_comment,

@@ -1,5 +1,0 @@
-export * from "./exp"
-export * from "./exp-evaluate"
-export * from "./exp-present"
-export * from "./exp-from-present"
-export * from "./exp-equal"

@@ -5,7 +5,7 @@ import * as Exp from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import * as Trace from "../../trace"
-import * as pt from "../../partech"
+import pt from "@cicada-lang/partech"
 import fs from "fs"
 import strip_ansi from "strip-ansi"
 

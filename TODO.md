@@ -1,5 +1,3 @@
-- [partech] move partech out to its own repo
-
 # cicada
 
 - [refactoring] `Stmt`
