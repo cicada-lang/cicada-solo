@@ -30,8 +30,8 @@ export class Fn implements Exp {
     return `(${this.name}) => ${this.ret.repr()}`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
-    const ret_repr = this.ret.alpha_repr(opts.extend(this.name))
+  alpha_repr(ctx: AlphaCtx): string {
+    const ret_repr = this.ret.alpha_repr(ctx.extend(this.name))
     return `(${this.name}) => ${ret_repr}`
   }
 }

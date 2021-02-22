@@ -55,10 +55,10 @@ export class NatInd implements Exp {
     return `nat_ind(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()}, ${this.step.repr()})`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
-    return `nat_ind(${this.target.alpha_repr(opts)}, ${this.motive.alpha_repr(
-      opts
-    )}, ${this.base.alpha_repr(opts)}, ${this.step.alpha_repr(opts)})`
+  alpha_repr(ctx: AlphaCtx): string {
+    return `nat_ind(${this.target.alpha_repr(ctx)}, ${this.motive.alpha_repr(
+      ctx
+    )}, ${this.base.alpha_repr(ctx)}, ${this.step.alpha_repr(ctx)})`
   }
 }
 

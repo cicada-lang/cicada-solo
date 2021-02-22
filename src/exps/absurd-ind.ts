@@ -39,10 +39,10 @@ export class AbsurdInd implements Exp {
     return `absurd_ind(${this.target.repr()}, ${this.motive.repr()})`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
-    return `absurd_ind(${this.target.alpha_repr(
-      opts
-    )}, ${this.motive.alpha_repr(opts)})`
+  alpha_repr(ctx: AlphaCtx): string {
+    return `absurd_ind(${this.target.alpha_repr(ctx)}, ${this.motive.alpha_repr(
+      ctx
+    )})`
   }
 }
 

@@ -24,7 +24,7 @@ export class Quote implements Exp {
     return `"${this.str}"`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
+  alpha_repr(ctx: AlphaCtx): string {
     return `"${this.str}"`
   }
 }

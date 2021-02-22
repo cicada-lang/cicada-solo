@@ -33,7 +33,7 @@ export class Cons implements Exp {
     return `cons(${this.car.repr()}, ${this.cdr.repr()})`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
-    return `cons(${this.car.alpha_repr(opts)}, ${this.cdr.alpha_repr(opts)})`
+  alpha_repr(ctx: AlphaCtx): string {
+    return `cons(${this.car.alpha_repr(ctx)}, ${this.cdr.alpha_repr(ctx)})`
   }
 }

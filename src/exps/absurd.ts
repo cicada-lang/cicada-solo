@@ -21,7 +21,7 @@ export class Absurd implements Exp {
     return "Absurd"
   }
 
-  alpha_repr(opts: AlphaCtx): string {
+  alpha_repr(ctx: AlphaCtx): string {
     return "Absurd"
   }
 }

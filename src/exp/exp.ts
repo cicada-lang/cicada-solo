@@ -8,7 +8,7 @@ export type Exp = {
   check?(ctx: Ctx, t: Value): void
   infer?(ctx: Ctx): Value
   repr(): string
-  alpha_repr(opts: AlphaCtx): string
+  alpha_repr(ctx: AlphaCtx): string
 }
 
 export class AlphaCtx {

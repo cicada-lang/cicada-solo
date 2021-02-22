@@ -21,7 +21,7 @@ export class Type implements Exp {
     return "Type"
   }
 
-  alpha_repr(opts: AlphaCtx): string {
+  alpha_repr(ctx: AlphaCtx): string {
     return "Type"
   }
 }

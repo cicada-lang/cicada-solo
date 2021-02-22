@@ -34,8 +34,8 @@ export class Var implements Exp {
     return this.name
   }
 
-  alpha_repr(opts: AlphaCtx): string {
-    const depth = opts.depths.get(this.name)
+  alpha_repr(ctx: AlphaCtx): string {
+    const depth = ctx.depths.get(this.name)
     if (depth === undefined) return this.name
     return `[${depth}]`
   }

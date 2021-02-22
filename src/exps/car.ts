@@ -31,8 +31,8 @@ export class Car implements Exp {
     return `car(${this.target.repr()})`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
-    return `car(${this.target.alpha_repr(opts)})`
+  alpha_repr(ctx: AlphaCtx): string {
+    return `car(${this.target.alpha_repr(ctx)})`
   }
 }
 

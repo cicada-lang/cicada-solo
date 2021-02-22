@@ -36,9 +36,9 @@ export class Pi implements Exp {
     return `(${this.name}: ${this.arg_t.repr()}) -> ${this.ret_t.repr()}`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
-    const arg_t_repr = this.arg_t.alpha_repr(opts)
-    const ret_t_repr = this.ret_t.alpha_repr(opts.extend(this.name))
+  alpha_repr(ctx: AlphaCtx): string {
+    const arg_t_repr = this.arg_t.alpha_repr(ctx)
+    const ret_t_repr = this.ret_t.alpha_repr(ctx.extend(this.name))
     return `(${arg_t_repr}) -> ${ret_t_repr}`
   }
 }

@@ -33,12 +33,12 @@ export class Add1 implements Exp {
     }
   }
 
-  alpha_repr(opts: AlphaCtx): string {
+  alpha_repr(ctx: AlphaCtx): string {
     const n = nat_to_number(this)
     if (n !== undefined) {
       return n.toString()
     } else {
-      return `add1(${this.prev.alpha_repr(opts)})`
+      return `add1(${this.prev.alpha_repr(ctx)})`
     }
   }
 }

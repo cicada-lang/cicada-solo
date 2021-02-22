@@ -31,7 +31,7 @@ export class The implements Exp {
     return `@the ${this.t.repr()} ${this.exp.repr()}`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
-    return `@the ${this.t.alpha_repr(opts)} ${this.exp.alpha_repr(opts)}`
+  alpha_repr(ctx: AlphaCtx): string {
+    return `@the ${this.t.alpha_repr(ctx)} ${this.exp.alpha_repr(ctx)}`
   }
 }

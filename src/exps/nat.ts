@@ -21,7 +21,7 @@ export class Nat implements Exp {
     return "Nat"
   }
 
-  alpha_repr(opts: AlphaCtx): string {
+  alpha_repr(ctx: AlphaCtx): string {
     return "Nat"
   }
 }

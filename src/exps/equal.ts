@@ -38,9 +38,9 @@ export class Equal implements Exp {
     return `Equal(${this.t.repr()}, ${this.from.repr()}, ${this.to.repr()})`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
-    return `Equal(${this.t.alpha_repr(opts)}, ${this.from.alpha_repr(
-      opts
-    )}, ${this.to.alpha_repr(opts)})`
+  alpha_repr(ctx: AlphaCtx): string {
+    return `Equal(${this.t.alpha_repr(ctx)}, ${this.from.alpha_repr(
+      ctx
+    )}, ${this.to.alpha_repr(ctx)})`
   }
 }

@@ -33,8 +33,8 @@ export class Cdr implements Exp {
     return `cdr(${this.target.repr()})`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
-    return `cdr(${this.target.alpha_repr(opts)})`
+  alpha_repr(ctx: AlphaCtx): string {
+    return `cdr(${this.target.alpha_repr(ctx)})`
   }
 }
 

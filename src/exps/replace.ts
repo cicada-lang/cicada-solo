@@ -52,10 +52,10 @@ export class Replace implements Exp {
     return `replace(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()})`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
-    return `replace(${this.target.alpha_repr(opts)}, ${this.motive.alpha_repr(
-      opts
-    )}, ${this.base.alpha_repr(opts)})`
+  alpha_repr(ctx: AlphaCtx): string {
+    return `replace(${this.target.alpha_repr(ctx)}, ${this.motive.alpha_repr(
+      ctx
+    )}, ${this.base.alpha_repr(ctx)})`
   }
 }
 

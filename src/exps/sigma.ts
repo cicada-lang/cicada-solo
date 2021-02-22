@@ -36,8 +36,8 @@ export class Sigma implements Exp {
     return `(${this.name}: ${this.car_t.repr()}) * ${this.cdr_t.repr()}`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
-    const cdr_t_repr = this.cdr_t.alpha_repr(opts.extend(this.name))
-    return `(${this.car_t.alpha_repr(opts)}) * ${cdr_t_repr}`
+  alpha_repr(ctx: AlphaCtx): string {
+    const cdr_t_repr = this.cdr_t.alpha_repr(ctx.extend(this.name))
+    return `(${this.car_t.alpha_repr(ctx)}) * ${cdr_t_repr}`
   }
 }

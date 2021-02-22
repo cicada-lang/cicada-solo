@@ -21,7 +21,7 @@ export class Trivial implements Exp {
     return "Trivial"
   }
 
-  alpha_repr(opts: AlphaCtx): string {
+  alpha_repr(ctx: AlphaCtx): string {
     return "Trivial"
   }
 }

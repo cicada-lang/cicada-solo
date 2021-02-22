@@ -36,7 +36,7 @@ export class Same implements Exp {
     return "same"
   }
 
-  alpha_repr(opts: AlphaCtx): string {
+  alpha_repr(ctx: AlphaCtx): string {
     return "same"
   }
 }

@@ -21,7 +21,7 @@ export class Sole implements Exp {
     return "sole"
   }
 
-  alpha_repr(opts: AlphaCtx): string {
+  alpha_repr(ctx: AlphaCtx): string {
     return "sole"
   }
 }

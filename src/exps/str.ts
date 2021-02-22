@@ -21,7 +21,7 @@ export class Str implements Exp {
     return "String"
   }
 
-  alpha_repr(opts: AlphaCtx): string {
+  alpha_repr(ctx: AlphaCtx): string {
     return "String"
   }
 }

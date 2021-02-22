@@ -51,9 +51,9 @@ export class Let implements Exp {
     return `@let ${this.name} = ${this.exp.repr()} ${this.ret.repr()}`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
+  alpha_repr(ctx: AlphaCtx): string {
     return `@let ${this.name} = ${this.exp.alpha_repr(
-      opts
-    )} ${this.ret.alpha_repr(opts.extend(this.name))}`
+      ctx
+    )} ${this.ret.alpha_repr(ctx.extend(this.name))}`
   }
 }

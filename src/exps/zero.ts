@@ -21,7 +21,7 @@ export class Zero implements Exp {
     return "0"
   }
 
-  alpha_repr(opts: AlphaCtx): string {
+  alpha_repr(ctx: AlphaCtx): string {
     return "0"
   }
 }

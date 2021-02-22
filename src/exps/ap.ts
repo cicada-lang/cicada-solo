@@ -37,8 +37,8 @@ export class Ap implements Exp {
     return `${this.target.repr()}(${this.arg.repr()})`
   }
 
-  alpha_repr(opts: AlphaCtx): string {
-    return `${this.target.alpha_repr(opts)}(${this.arg.alpha_repr(opts)})`
+  alpha_repr(ctx: AlphaCtx): string {
+    return `${this.target.alpha_repr(ctx)}(${this.arg.alpha_repr(ctx)})`
   }
 }
 
