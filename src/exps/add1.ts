@@ -15,11 +15,11 @@ export class Add1 implements Exp {
     this.prev = prev
   }
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     return Value.add1(evaluate(env, this.prev))
   }
 
-  inferability(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value.Value {
     check(ctx, this.prev, Value.nat)
     return Value.nat
   }

@@ -29,7 +29,7 @@ export class NatInd implements Exp {
     this.step = step
   }
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     return do_nat_ind(
       evaluate(env, this.target),
       evaluate(env, this.motive),
@@ -38,7 +38,7 @@ export class NatInd implements Exp {
     )
   }
 
-  inferability(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value.Value {
     // NOTE We should always infer target,
     //   but we do a simple check for the simple nat.
     check(ctx, this.target, Value.nat)

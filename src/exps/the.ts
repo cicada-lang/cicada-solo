@@ -16,11 +16,11 @@ export class The implements Exp {
     this.exp = exp
   }
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     return evaluate(env, this.exp)
   }
 
-  inferability(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value.Value {
     check(ctx, this.t, Value.type)
     const t_value = evaluate(ctx.to_env(), this.t)
     check(ctx, this.exp, t_value)

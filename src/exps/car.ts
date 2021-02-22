@@ -17,11 +17,11 @@ export class Car implements Exp {
     this.target = target
   }
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     return do_car(evaluate(env, this.target))
   }
 
-  inferability(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value.Value {
     const target_t = infer(ctx, this.target)
     const sigma = Value.is_sigma(ctx, target_t)
     return sigma.car_t

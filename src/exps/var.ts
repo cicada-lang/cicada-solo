@@ -14,7 +14,7 @@ export class Var implements Exp {
     this.name = name
   }
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     const result = env.lookup(this.name)
     if (result === undefined) {
       throw new Trace.Trace(Explain.explain_name_undefined(this.name))
@@ -22,7 +22,7 @@ export class Var implements Exp {
     return result
   }
 
-  inferability(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value.Value {
     const t = ctx.lookup(this.name)
     if (t === undefined) {
       throw new Trace.Trace(Explain.explain_name_undefined(this.name))

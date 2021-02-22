@@ -12,11 +12,11 @@ export class Quote implements Exp {
     this.str = str
   }
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     return Value.quote(this.str)
   }
 
-  inferability(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value.Value {
     return Value.str
   }
 

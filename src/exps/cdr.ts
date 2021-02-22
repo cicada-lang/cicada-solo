@@ -18,11 +18,11 @@ export class Cdr implements Exp {
     this.target = target
   }
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     return do_cdr(evaluate(env, this.target))
   }
 
-  inferability(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value.Value {
     const target_t = infer(ctx, this.target)
     const sigma = Value.is_sigma(ctx, target_t)
     const car = do_car(evaluate(ctx.to_env(), this.target))

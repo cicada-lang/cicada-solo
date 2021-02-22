@@ -18,14 +18,14 @@ export class Pi implements Exp {
     this.ret_t = ret_t
   }
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     return Value.pi(
       evaluate(env, this.arg_t),
       Value.Closure.create(env, this.name, this.ret_t)
     )
   }
 
-  inferability(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value.Value {
     check(ctx, this.arg_t, Value.type)
     const arg_t_value = evaluate(ctx.to_env(), this.arg_t)
     check(ctx.extend(this.name, arg_t_value), this.ret_t, Value.type)

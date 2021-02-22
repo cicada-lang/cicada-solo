@@ -20,11 +20,11 @@ export class Let implements Exp {
     this.ret = ret
   }
 
-  evaluability(env: Env): Value {
+  evaluate(env: Env): Value {
     return evaluate(env.extend(this.name, evaluate(env, this.exp)), this.ret)
   }
 
-  inferability(ctx: Ctx.Ctx): Value {
+  infer(ctx: Ctx.Ctx): Value {
     return infer(
       ctx.extend(
         this.name,
@@ -35,7 +35,7 @@ export class Let implements Exp {
     )
   }
 
-  checkability(ctx: Ctx.Ctx, t: Value): void {
+  check(ctx: Ctx.Ctx, t: Value): void {
     check(
       ctx.extend(
         this.name,

@@ -21,11 +21,11 @@ export class Ap implements Exp {
     this.arg = arg
   }
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     return do_ap(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
-  inferability(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value.Value {
     const target_t = infer(ctx, this.target)
     const pi = Value.is_pi(ctx, target_t)
     check(ctx, this.arg, pi.arg_t)

@@ -27,7 +27,7 @@ export class Replace implements Exp {
     this.base = base
   }
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     return do_replace(
       evaluate(env, this.target),
       evaluate(env, this.motive),
@@ -35,7 +35,7 @@ export class Replace implements Exp {
     )
   }
 
-  inferability(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value.Value {
     const target_t = infer(ctx, this.target)
     const equal = Value.is_equal(ctx, target_t)
     const motive_t = evaluate(

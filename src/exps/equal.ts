@@ -18,7 +18,7 @@ export class Equal implements Exp {
     this.to = to
   }
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     return Value.equal(
       evaluate(env, this.t),
       evaluate(env, this.from),
@@ -26,7 +26,7 @@ export class Equal implements Exp {
     )
   }
 
-  inferability(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value.Value {
     check(ctx, this.t, Value.type)
     const t_value = evaluate(ctx.to_env(), this.t)
     check(ctx, this.from, t_value)

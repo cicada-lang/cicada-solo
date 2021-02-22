@@ -9,11 +9,11 @@ export class Absurd implements Exp {
 
   constructor() {}
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     return Value.absurd
   }
 
-  inferability(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value.Value {
     return Value.type
   }
 

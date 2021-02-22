@@ -18,14 +18,14 @@ export class Sigma implements Exp {
     this.cdr_t = cdr_t
   }
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     return Value.sigma(
       evaluate(env, this.car_t),
       Value.Closure.create(env, this.name, this.cdr_t)
     )
   }
 
-  inferability(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value.Value {
     check(ctx, this.car_t, Value.type)
     const car_t_value = evaluate(ctx.to_env(), this.car_t)
     check(ctx.extend(this.name, car_t_value), this.cdr_t, Value.type)

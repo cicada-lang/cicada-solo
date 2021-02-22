@@ -11,7 +11,7 @@ export class Same implements Exp {
 
   constructor() {}
 
-  checkability(ctx: Ctx, t: Value.Value): void {
+  check(ctx: Ctx, t: Value.Value): void {
     const equal = Value.is_equal(ctx, t)
     if (!Value.conversion(ctx, equal.t, equal.from, equal.to)) {
       throw new Trace.Trace(
@@ -28,7 +28,7 @@ export class Same implements Exp {
     }
   }
 
-  evaluability(env: Env): Value.Value {
+  evaluate(env: Env): Value.Value {
     return Value.same
   }
 
