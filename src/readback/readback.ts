@@ -50,7 +50,7 @@ export function readback(
     //   is read back with cons at the top.
     const car = do_car(value)
     const cdr = do_cdr(value)
-    return Cons(
+    return new Cons(
       Readback.readback(ctx, t.car_t, car),
       Readback.readback(ctx, Value.Closure.apply(t.cdr_t_cl, car), cdr)
     )

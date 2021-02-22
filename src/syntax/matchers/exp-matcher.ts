@@ -33,7 +33,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
       new Sigma(pt.Tree.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
     "exp:pair": ({ car_t, cdr_t }) =>
       new Sigma("_", exp_matcher(car_t), exp_matcher(cdr_t)),
-    "exp:cons": ({ car, cdr }) => Cons(exp_matcher(car), exp_matcher(cdr)),
+    "exp:cons": ({ car, cdr }) => new Cons(exp_matcher(car), exp_matcher(cdr)),
     "exp:car": ({ target }) => new Car(exp_matcher(target)),
     "exp:cdr": ({ target }) => new Cdr(exp_matcher(target)),
     "exp:nat": () => new Nat(),

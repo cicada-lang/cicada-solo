@@ -1,5 +1,3 @@
-- [refactoring] as class -- cons
-
 - [refactoring] as class -- equal
 - [refactoring] as class -- replace
 
