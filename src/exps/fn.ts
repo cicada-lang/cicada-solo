@@ -31,10 +31,7 @@ export class Fn implements Exp {
   }
 
   alpha_repr(opts: AlphaCtx): string {
-    const ret_repr = this.ret.alpha_repr({
-      depth: opts.depth + 1,
-      depths: new Map([...opts.depths, [this.name, opts.depth]]),
-    })
+    const ret_repr = this.ret.alpha_repr(opts.extend(this.name))
     return `(${this.name}) => ${ret_repr}`
   }
 }

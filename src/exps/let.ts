@@ -54,9 +54,6 @@ export class Let implements Exp {
   alpha_repr(opts: AlphaCtx): string {
     return `@let ${this.name} = ${this.exp.alpha_repr(
       opts
-    )} ${this.ret.alpha_repr({
-      depth: opts.depth + 1,
-      depths: new Map([...opts.depths, [this.name, opts.depth]]),
-    })}`
+    )} ${this.ret.alpha_repr(opts.extend(this.name))}`
   }
 }

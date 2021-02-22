@@ -38,10 +38,7 @@ export class Pi implements Exp {
 
   alpha_repr(opts: AlphaCtx): string {
     const arg_t_repr = this.arg_t.alpha_repr(opts)
-    const ret_t_repr = this.ret_t.alpha_repr({
-      depth: opts.depth + 1,
-      depths: new Map([...opts.depths, [this.name, opts.depth]]),
-    })
+    const ret_t_repr = this.ret_t.alpha_repr(opts.extend(this.name))
     return `(${arg_t_repr}) -> ${ret_t_repr}`
   }
 }

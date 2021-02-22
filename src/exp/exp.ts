@@ -19,4 +19,11 @@ export class AlphaCtx {
     this.depth = depth
     this.depths = depths
   }
+
+  extend(name: string): AlphaCtx {
+    return new AlphaCtx(
+      this.depth + 1,
+      new Map([...this.depths, [name, this.depth]])
+    )
+  }
 }

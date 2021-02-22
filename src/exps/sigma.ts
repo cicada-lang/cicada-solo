@@ -37,10 +37,7 @@ export class Sigma implements Exp {
   }
 
   alpha_repr(opts: AlphaCtx): string {
-    const cdr_t_repr = this.cdr_t.alpha_repr({
-      depth: opts.depth + 1,
-      depths: new Map([...opts.depths, [this.name, opts.depth]]),
-    })
+    const cdr_t_repr = this.cdr_t.alpha_repr(opts.extend(this.name))
     return `(${this.car_t.alpha_repr(opts)}) * ${cdr_t_repr}`
   }
 }
