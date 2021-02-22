@@ -1,4 +1,3 @@
-- no deduction syntax -- for now
 - [refactoring] `AlphaReprOpts` as class -- with good API
 
 - [refactoring] `Stmt`

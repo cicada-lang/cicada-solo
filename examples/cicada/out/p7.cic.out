@@ -1,2 +1,2 @@
-(_: Nat) * Nat -- cons(1, 2)
+@the (_: Nat) * Nat cons(1, 2)
 

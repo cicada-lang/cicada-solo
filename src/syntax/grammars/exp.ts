@@ -110,12 +110,6 @@ export const exp = {
       { ret: "exp" },
     ],
     "exp:the": ['"@"', '"the"', { t: "exp" }, { exp: "exp" }],
-    "exp:deduction": [
-      '"{"',
-      { deduction_entries: { $ap: ["one_or_more", "deduction_entry"] } },
-      { deduction_args: { $ap: ["zero_or_more", "exp"] } },
-      '"}"',
-    ],
   },
 }
 

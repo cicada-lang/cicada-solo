@@ -74,15 +74,6 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     "exp:let": ({ name, exp, ret }) =>
       new Let(pt.Tree.str(name), exp_matcher(exp), exp_matcher(ret)),
     "exp:the": ({ t, exp }) => new The(exp_matcher(t), exp_matcher(exp)),
-    "exp:deduction": ({ deduction_entries, deduction_args }) => {
-      const entries = pt.matchers
-        .one_or_more_matcher(deduction_entries)
-        .map(deduction_entry_matcher)
-      const args = pt.matchers
-        .zero_or_more_matcher(deduction_args)
-        .map(exp_matcher)
-      return deduction_aux(entries, args)
-    },
   })(tree)
 }
 

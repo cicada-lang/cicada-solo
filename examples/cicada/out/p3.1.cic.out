@@ -1,2 +1,2 @@
-Equal(Nat, 8, 8) -- same
+@the Equal(Nat, 8, 8) same
 
