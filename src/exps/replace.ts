@@ -15,44 +15,65 @@ import { Pi } from "./pi"
 import { Type } from "./type"
 import { Var } from "./var"
 
-export type Replace = Exp & {
-  kind: "Replace"
+export class Replace extends Object implements Exp {
+  kind = "Replace"
   target: Exp
   motive: Exp
   base: Exp
-}
 
-export function Replace(target: Exp, motive: Exp, base: Exp): Replace {
-  return {
-    kind: "Replace",
-    target,
-    motive,
-    base,
-    evaluability: ({ env }) =>
-      do_replace(
-        evaluate(env, target),
-        evaluate(env, motive),
-        evaluate(env, base)
-      ),
-    ...Inferable({
-      inferability: ({ ctx }) => {
-        const target_t = infer(ctx, target)
+  constructor(target: Exp, motive: Exp, base: Exp) {
+    super()
+    this.target = target
+    this.motive = motive
+    this.base = base
+  }
+
+  evaluability({ env }: { env: Env }): Value.Value {
+    return do_replace(
+      evaluate(env, this.target),
+      evaluate(env, this.motive),
+      evaluate(env, this.base)
+    )
+  }
+
+  checkability(t: Value.Value, the: { ctx: Ctx }): void {
+    return Inferable({
+      inferability: ({ ctx }: { ctx: Ctx }) => {
+        const target_t = infer(ctx, this.target)
         const equal = Value.is_equal(ctx, target_t)
         const motive_t = evaluate(
           Env.init().extend("t", equal.t),
           new Pi("x", new Var("t"), new Type())
         )
-        check(ctx, motive, motive_t)
-        const motive_value = evaluate(ctx.to_env(), motive)
-        check(ctx, base, do_ap(motive_value, equal.from))
+        check(ctx, this.motive, motive_t)
+        const motive_value = evaluate(ctx.to_env(), this.motive)
+        check(ctx, this.base, do_ap(motive_value, equal.from))
         return do_ap(motive_value, equal.to)
       },
-    }),
-    repr: () => `replace(${target.repr()}, ${motive.repr()}, ${base.repr()})`,
-    alpha_repr: (opts) =>
-      `replace(${target.alpha_repr(opts)}, ${motive.alpha_repr(
-        opts
-      )}, ${base.alpha_repr(opts)})`,
+    }).checkability(t, the)
+  }
+
+  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+    const target_t = infer(ctx, this.target)
+    const equal = Value.is_equal(ctx, target_t)
+    const motive_t = evaluate(
+      Env.init().extend("t", equal.t),
+      new Pi("x", new Var("t"), new Type())
+    )
+    check(ctx, this.motive, motive_t)
+    const motive_value = evaluate(ctx.to_env(), this.motive)
+    check(ctx, this.base, do_ap(motive_value, equal.from))
+    return do_ap(motive_value, equal.to)
+  }
+
+  repr(): string {
+    return `replace(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()})`
+  }
+
+  alpha_repr(opts: AlphaReprOpts): string {
+    return `replace(${this.target.alpha_repr(opts)}, ${this.motive.alpha_repr(
+      opts
+    )}, ${this.base.alpha_repr(opts)})`
   }
 }
 

@@ -1,5 +1,3 @@
-- [refactoring] as class -- replace
-
 - [refactoring] `Exp` as abstract class -- use normal oop style
 
 - [refactoring] `Exp` handle "check from infer"
