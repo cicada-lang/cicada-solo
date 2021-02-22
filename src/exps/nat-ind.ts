@@ -1,4 +1,4 @@
-import { Exp, AlphaReprOpts } from "../exp"
+import { Exp, AlphaOpts } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 
@@ -55,7 +55,7 @@ export class NatInd implements Exp {
     return `nat_ind(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()}, ${this.step.repr()})`
   }
 
-  alpha_repr(opts: AlphaReprOpts): string {
+  alpha_repr(opts: AlphaOpts): string {
     return `nat_ind(${this.target.alpha_repr(opts)}, ${this.motive.alpha_repr(
       opts
     )}, ${this.base.alpha_repr(opts)}, ${this.step.alpha_repr(opts)})`

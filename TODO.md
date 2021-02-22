@@ -1,4 +1,4 @@
-- [refactoring] `AlphaReprOpts` as class -- with good API
+- [refactoring] `AlphaOpts` as class -- with good API
 
 - [refactoring] `Stmt`
 - [refactoring] `Value`

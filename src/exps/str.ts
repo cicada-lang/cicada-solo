@@ -1,4 +1,4 @@
-import { Exp, AlphaReprOpts } from "../exp"
+import { Exp, AlphaOpts } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 
@@ -21,7 +21,7 @@ export class Str implements Exp {
     return "String"
   }
 
-  alpha_repr(opts: AlphaReprOpts): string {
+  alpha_repr(opts: AlphaOpts): string {
     return "String"
   }
 }

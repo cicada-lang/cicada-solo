@@ -1,6 +1,6 @@
 import { Env } from "../env"
 import { Ctx } from "../ctx"
-import { Exp, AlphaReprOpts } from "../exp"
+import { Exp, AlphaOpts } from "../exp"
 
 import * as Value from "../value"
 
@@ -21,7 +21,7 @@ export class Absurd implements Exp {
     return "Absurd"
   }
 
-  alpha_repr(opts: AlphaReprOpts): string {
+  alpha_repr(opts: AlphaOpts): string {
     return "Absurd"
   }
 }

@@ -1,4 +1,4 @@
-import { Exp, AlphaReprOpts } from "../exp"
+import { Exp, AlphaOpts } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 
@@ -38,7 +38,7 @@ export class Equal implements Exp {
     return `Equal(${this.t.repr()}, ${this.from.repr()}, ${this.to.repr()})`
   }
 
-  alpha_repr(opts: AlphaReprOpts): string {
+  alpha_repr(opts: AlphaOpts): string {
     return `Equal(${this.t.alpha_repr(opts)}, ${this.from.alpha_repr(
       opts
     )}, ${this.to.alpha_repr(opts)})`

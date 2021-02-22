@@ -1,4 +1,4 @@
-import { Exp, AlphaReprOpts } from "../exp"
+import { Exp, AlphaOpts } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import * as Value from "../value"
@@ -36,7 +36,7 @@ export class Same implements Exp {
     return "same"
   }
 
-  alpha_repr(opts: AlphaReprOpts): string {
+  alpha_repr(opts: AlphaOpts): string {
     return "same"
   }
 }

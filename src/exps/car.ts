@@ -1,4 +1,4 @@
-import { Exp, AlphaReprOpts } from "../exp"
+import { Exp, AlphaOpts } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 
@@ -31,7 +31,7 @@ export class Car implements Exp {
     return `car(${this.target.repr()})`
   }
 
-  alpha_repr(opts: AlphaReprOpts): string {
+  alpha_repr(opts: AlphaOpts): string {
     return `car(${this.target.alpha_repr(opts)})`
   }
 }

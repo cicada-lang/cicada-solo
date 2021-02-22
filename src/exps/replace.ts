@@ -1,4 +1,4 @@
-import { Exp, AlphaReprOpts } from "../exp"
+import { Exp, AlphaOpts } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 
@@ -52,7 +52,7 @@ export class Replace implements Exp {
     return `replace(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()})`
   }
 
-  alpha_repr(opts: AlphaReprOpts): string {
+  alpha_repr(opts: AlphaOpts): string {
     return `replace(${this.target.alpha_repr(opts)}, ${this.motive.alpha_repr(
       opts
     )}, ${this.base.alpha_repr(opts)})`

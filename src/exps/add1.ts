@@ -1,4 +1,4 @@
-import { Exp, AlphaReprOpts } from "../exp"
+import { Exp, AlphaOpts } from "../exp"
 
 import { Ctx } from "../ctx"
 import { Env } from "../env"
@@ -33,7 +33,7 @@ export class Add1 implements Exp {
     }
   }
 
-  alpha_repr(opts: AlphaReprOpts): string {
+  alpha_repr(opts: AlphaOpts): string {
     const n = nat_to_number(this)
     if (n !== undefined) {
       return n.toString()
