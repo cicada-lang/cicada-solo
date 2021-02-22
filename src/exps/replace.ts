@@ -1,7 +1,7 @@
 import { Exp, AlphaReprOpts } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import { Inferable } from "../inferable"
+
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { infer } from "../infer"
@@ -15,14 +15,13 @@ import { Pi } from "./pi"
 import { Type } from "./type"
 import { Var } from "./var"
 
-export class Replace extends Object implements Exp {
+export class Replace implements Exp {
   kind = "Replace"
   target: Exp
   motive: Exp
   base: Exp
 
   constructor(target: Exp, motive: Exp, base: Exp) {
-    super()
     this.target = target
     this.motive = motive
     this.base = base
@@ -34,23 +33,6 @@ export class Replace extends Object implements Exp {
       evaluate(env, this.motive),
       evaluate(env, this.base)
     )
-  }
-
-  checkability(t: Value.Value, the: { ctx: Ctx }): void {
-    return Inferable({
-      inferability: ({ ctx }: { ctx: Ctx }) => {
-        const target_t = infer(ctx, this.target)
-        const equal = Value.is_equal(ctx, target_t)
-        const motive_t = evaluate(
-          Env.init().extend("t", equal.t),
-          new Pi("x", new Var("t"), new Type())
-        )
-        check(ctx, this.motive, motive_t)
-        const motive_value = evaluate(ctx.to_env(), this.motive)
-        check(ctx, this.base, do_ap(motive_value, equal.from))
-        return do_ap(motive_value, equal.to)
-      },
-    }).checkability(t, the)
   }
 
   inferability({ ctx }: { ctx: Ctx }): Value.Value {

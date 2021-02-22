@@ -1,7 +1,7 @@
 import { Exp, AlphaReprOpts } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import { Inferable } from "../inferable"
+
 import { infer } from "../infer"
 import * as Value from "../value"
 import { evaluate } from "../evaluate"
@@ -9,27 +9,16 @@ import * as Explain from "../explain"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 
-export class Car extends Object implements Exp {
+export class Car implements Exp {
   kind = "Car"
   target: Exp
 
   constructor(target: Exp) {
-    super()
     this.target = target
   }
 
   evaluability({ env }: { env: Env }): Value.Value {
     return do_car(evaluate(env, this.target))
-  }
-
-  checkability(t: Value.Value, the: { ctx: Ctx }): void {
-    return Inferable({
-      inferability: ({ ctx }: { ctx: Ctx }) => {
-        const target_t = infer(ctx, this.target)
-        const sigma = Value.is_sigma(ctx, target_t)
-        return sigma.car_t
-      },
-    }).checkability(t, the)
   }
 
   inferability({ ctx }: { ctx: Ctx }): Value.Value {

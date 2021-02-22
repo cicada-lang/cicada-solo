@@ -1,6 +1,6 @@
 import { Env } from "../env"
 import { Ctx } from "../ctx"
-import * as Value from "../value"
+import { Value } from "../value"
 
 export type AlphaReprOpts = {
   depth: number
@@ -9,9 +9,9 @@ export type AlphaReprOpts = {
 
 export type Exp = {
   kind: string
-  evaluability({ env }: { env: Env }): Value.Value
-  checkability(t: Value.Value, { ctx }: { ctx: Ctx }): void
-  inferability?({ ctx }: { ctx: Ctx }): Value.Value
+  evaluability({ env }: { env: Env }): Value
+  checkability?(t: Value, { ctx }: { ctx: Ctx }): void
+  inferability?({ ctx }: { ctx: Ctx }): Value
   repr(): string
   alpha_repr(opts: AlphaReprOpts): string
 }

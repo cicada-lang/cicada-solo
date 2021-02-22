@@ -1,19 +1,18 @@
 import { Exp, AlphaReprOpts } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import { Inferable } from "../inferable"
+
 import { check } from "../check"
 import { evaluate } from "../evaluate"
 import * as Value from "../value"
 
-export class Sigma extends Object implements Exp {
+export class Sigma implements Exp {
   kind = "Sigma"
   name: string
   car_t: Exp
   cdr_t: Exp
 
   constructor(name: string, car_t: Exp, cdr_t: Exp) {
-    super()
     this.name = name
     this.car_t = car_t
     this.cdr_t = cdr_t
@@ -24,17 +23,6 @@ export class Sigma extends Object implements Exp {
       evaluate(env, this.car_t),
       Value.Closure.create(env, this.name, this.cdr_t)
     )
-  }
-
-  checkability(t: Value.Value, the: { ctx: Ctx }): void {
-    return Inferable({
-      inferability: ({ ctx }: { ctx: Ctx }) => {
-        check(ctx, this.car_t, Value.type)
-        const car_t_value = evaluate(ctx.to_env(), this.car_t)
-        check(ctx.extend(this.name, car_t_value), this.cdr_t, Value.type)
-        return Value.type
-      },
-    }).checkability(t, the)
   }
 
   inferability({ ctx }: { ctx: Ctx }): Value.Value {

@@ -2,18 +2,17 @@ import { Exp, AlphaReprOpts } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import * as Value from "../value"
-import { Inferable } from "../inferable"
+
 import { check } from "../check"
 import { evaluate } from "../evaluate"
 
-export class Pi extends Object implements Exp {
+export class Pi implements Exp {
   kind = "Pi"
   name: string
   arg_t: Exp
   ret_t: Exp
 
   constructor(name: string, arg_t: Exp, ret_t: Exp) {
-    super()
     this.name = name
     this.arg_t = arg_t
     this.ret_t = ret_t
@@ -24,17 +23,6 @@ export class Pi extends Object implements Exp {
       evaluate(env, this.arg_t),
       Value.Closure.create(env, this.name, this.ret_t)
     )
-  }
-
-  checkability(t: Value.Value, the: { ctx: Ctx }): void {
-    return Inferable({
-      inferability: ({ ctx }: { ctx: Ctx }) => {
-        check(ctx, this.arg_t, Value.type)
-        const arg_t_value = evaluate(ctx.to_env(), this.arg_t)
-        check(ctx.extend(this.name, arg_t_value), this.ret_t, Value.type)
-        return Value.type
-      },
-    }).checkability(t, the)
   }
 
   inferability({ ctx }: { ctx: Ctx }): Value.Value {

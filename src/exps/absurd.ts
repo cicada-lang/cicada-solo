@@ -1,26 +1,16 @@
 import { Env } from "../env"
 import { Ctx } from "../ctx"
 import { Exp, AlphaReprOpts } from "../exp"
-import { Inferable } from "../inferable"
+
 import * as Value from "../value"
 
-export class Absurd extends Object implements Exp {
+export class Absurd implements Exp {
   kind = "Absurd"
 
-  constructor() {
-    super()
-  }
+  constructor() {}
 
   evaluability(the: { env: Env }): Value.Value {
     return Value.absurd
-  }
-
-  checkability(t: Value.Value, the: { ctx: Ctx }): void {
-    return Inferable({
-      inferability: ({ ctx }: { ctx: Ctx }) => {
-        return Value.type
-      },
-    }).checkability(t, the)
   }
 
   inferability(the: { ctx: Ctx }): Value.Value {

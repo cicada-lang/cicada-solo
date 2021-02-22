@@ -2,20 +2,19 @@ import { Exp, AlphaReprOpts } from "../exp"
 import { Value } from "../value"
 import { Env } from "../env"
 import * as Ctx from "../ctx"
-import { Inferable } from "../inferable"
+
 import { evaluate } from "../evaluate"
 import { infer } from "../infer"
 import { check } from "../check"
 import * as ut from "../ut"
 
-export class Let extends Object implements Exp {
+export class Let implements Exp {
   kind = "Let"
   name: string
   exp: Exp
   ret: Exp
 
   constructor(name: string, exp: Exp, ret: Exp) {
-    super()
     this.name = name
     this.exp = exp
     this.ret = ret

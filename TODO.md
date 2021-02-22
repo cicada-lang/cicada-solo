@@ -1,11 +1,3 @@
-- [refactoring] `Exp` as abstract class -- use normal oop style
-
-- [refactoring] `Exp` handle "check from infer"
-
-- [refactoring] `Exp` static `evaluate`
-- [refactoring] `Exp` static `infer`
-- [refactoring] `Exp` static `infer`
-
 - [refactoring] simplify `Exp`'s members' declaration
 
 - [refactoring] `AlphaReprOpts` as class -- with good API

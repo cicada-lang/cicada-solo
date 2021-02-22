@@ -6,12 +6,10 @@ import { readback } from "../readback"
 import * as Trace from "../trace"
 import * as ut from "../ut"
 
-export class Same extends Object implements Exp {
+export class Same implements Exp {
   kind = "Same"
 
-  constructor() {
-    super()
-  }
+  constructor() {}
 
   checkability(t: Value.Value, { ctx }: { ctx: Ctx }): void {
     const equal = Value.is_equal(ctx, t)

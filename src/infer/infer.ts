@@ -1,7 +1,5 @@
 import * as Infer from "../infer"
 import * as Explain from "../explain"
-import * as Evaluate from "../evaluate"
-import * as Check from "../check"
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
@@ -11,7 +9,6 @@ import * as Trace from "../trace"
 import * as ut from "../ut"
 import { do_car } from "../exps/car"
 import { do_ap } from "../exps/ap"
-import { Inferable } from "../inferable"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {

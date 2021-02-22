@@ -1,7 +1,7 @@
 import { Exp, AlphaReprOpts } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import { Inferable } from "../inferable"
+
 import { evaluate } from "../evaluate"
 import { infer } from "../infer"
 import { check } from "../check"
@@ -11,31 +11,18 @@ import * as Normal from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 
-export class Ap extends Object implements Exp {
+export class Ap implements Exp {
   kind = "Ap"
   target: Exp
   arg: Exp
 
   constructor(target: Exp, arg: Exp) {
-    super()
     this.target = target
     this.arg = arg
   }
 
   evaluability({ env }: { env: Env }): Value.Value {
     return do_ap(evaluate(env, this.target), evaluate(env, this.arg))
-  }
-
-  checkability(t: Value.Value, the: { ctx: Ctx }): void {
-    return Inferable({
-      inferability: ({ ctx }: { ctx: Ctx }) => {
-        const target_t = infer(ctx, this.target)
-        const pi = Value.is_pi(ctx, target_t)
-        check(ctx, this.arg, pi.arg_t)
-        const arg_value = evaluate(ctx.to_env(), this.arg)
-        return Value.Closure.apply(pi.ret_t_cl, arg_value)
-      },
-    }).checkability(t, the)
   }
 
   inferability({ ctx }: { ctx: Ctx }): Value.Value {

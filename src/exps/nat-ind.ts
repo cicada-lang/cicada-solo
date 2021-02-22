@@ -1,7 +1,7 @@
 import { Exp, AlphaReprOpts } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import { Inferable } from "../inferable"
+
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { nat_ind_step_t } from "../exp"
@@ -15,7 +15,7 @@ import { Type } from "./type"
 import { Nat } from "./nat"
 import { Pi } from "./pi"
 
-export class NatInd extends Object implements Exp {
+export class NatInd implements Exp {
   kind = "NatInd"
   target: Exp
   motive: Exp
@@ -23,7 +23,6 @@ export class NatInd extends Object implements Exp {
   step: Exp
 
   constructor(target: Exp, motive: Exp, base: Exp, step: Exp) {
-    super()
     this.target = target
     this.motive = motive
     this.base = base
@@ -37,26 +36,6 @@ export class NatInd extends Object implements Exp {
       evaluate(env, this.base),
       evaluate(env, this.step)
     )
-  }
-
-  checkability(t: Value.Value, the: { ctx: Ctx }): void {
-    return Inferable({
-      inferability: ({ ctx }: { ctx: Ctx }) => {
-        // NOTE We should always infer target,
-        //   but we do a simple check for the simple nat.
-        check(ctx, this.target, Value.nat)
-        const motive_t = evaluate(
-          Env.init(),
-          new Pi("x", new Nat(), new Type())
-        )
-        check(ctx, this.motive, motive_t)
-        const motive_value = evaluate(ctx.to_env(), this.motive)
-        check(ctx, this.base, do_ap(motive_value, Value.zero))
-        check(ctx, this.step, nat_ind_step_t(motive_value))
-        const target_value = evaluate(ctx.to_env(), this.target)
-        return do_ap(motive_value, target_value)
-      },
-    }).checkability(t, the)
   }
 
   inferability({ ctx }: { ctx: Ctx }): Value.Value {

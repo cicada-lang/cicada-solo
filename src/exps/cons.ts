@@ -5,13 +5,12 @@ import * as Value from "../value"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 
-export class Cons extends Object implements Exp {
+export class Cons implements Exp {
   kind = "Cons"
   car: Exp
   cdr: Exp
 
   constructor(car: Exp, cdr: Exp) {
-    super()
     this.car = car
     this.cdr = cdr
   }

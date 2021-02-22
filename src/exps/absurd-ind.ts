@@ -1,5 +1,5 @@
 import { Exp, AlphaReprOpts } from "../exp"
-import { Inferable } from "../inferable"
+
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { Ctx } from "../ctx"
@@ -10,34 +10,18 @@ import * as Normal from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 
-export class AbsurdInd extends Object implements Exp {
+export class AbsurdInd implements Exp {
   kind = "AbsurdInd"
   target: Exp
   motive: Exp
 
   constructor(target: Exp, motive: Exp) {
-    super()
     this.target = target
     this.motive = motive
   }
 
   evaluability({ env }: { env: Env }): Value.Value {
     return do_absurd_ind(evaluate(env, this.target), evaluate(env, this.motive))
-  }
-
-  checkability(t: Value.Value, the: { ctx: Ctx }): void {
-    return Inferable({
-      inferability: ({ ctx }: { ctx: Ctx }) => {
-        // NOTE the `motive` here is not a function from target_t to type,
-        //   but a element of type.
-        // NOTE We should always infer target,
-        //   but we do a simple check for the simple absurd.
-        check(ctx, this.target, Value.absurd)
-        check(ctx, this.motive, Value.type)
-        const motive_value = evaluate(ctx.to_env(), this.motive)
-        return motive_value
-      },
-    }).checkability(t, the)
   }
 
   inferability({ ctx }: { ctx: Ctx }): Value.Value {

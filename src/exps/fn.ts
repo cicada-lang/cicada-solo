@@ -5,13 +5,12 @@ import * as Value from "../value"
 import * as Neutral from "../neutral"
 import { check } from "../check"
 
-export class Fn extends Object implements Exp {
+export class Fn implements Exp {
   kind = "Fn"
   name: string
   ret: Exp
 
   constructor(name: string, ret: Exp) {
-    super()
     this.name = name
     this.ret = ret
   }

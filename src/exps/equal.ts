@@ -1,19 +1,18 @@
 import { Exp, AlphaReprOpts } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import { Inferable } from "../inferable"
+
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import * as Value from "../value"
 
-export class Equal extends Object implements Exp {
+export class Equal implements Exp {
   kind = "Equal"
   t: Exp
   from: Exp
   to: Exp
 
   constructor(t: Exp, from: Exp, to: Exp) {
-    super()
     this.t = t
     this.from = from
     this.to = to
@@ -25,18 +24,6 @@ export class Equal extends Object implements Exp {
       evaluate(env, this.from),
       evaluate(env, this.to)
     )
-  }
-
-  checkability(t: Value.Value, the: { ctx: Ctx }): void {
-    return Inferable({
-      inferability: ({ ctx }: { ctx: Ctx }) => {
-        check(ctx, this.t, Value.type)
-        const t_value = evaluate(ctx.to_env(), this.t)
-        check(ctx, this.from, t_value)
-        check(ctx, this.to, t_value)
-        return Value.type
-      },
-    }).checkability(t, the)
   }
 
   inferability({ ctx }: { ctx: Ctx }): Value.Value {
