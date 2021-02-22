@@ -1,6 +1,5 @@
 # partech
 
-- [partech] learn more about framework design
 - [partech] change style from procedural to oop
 - [partech] move partech out to its own repo
 

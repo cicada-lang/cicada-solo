@@ -14,23 +14,23 @@ import { Type } from "../../exps"
 import { Let } from "../../exps"
 import { The } from "../../exps"
 
-export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
-  return pt.Tree.matcher<Exp.Exp>({
-    "exp:var": ({ name }) => new Var(pt.Tree.str(name)),
+export function exp_matcher(tree: pt.Tree): Exp.Exp {
+  return pt.matcher<Exp.Exp>({
+    "exp:var": ({ name }) => new Var(pt.str(name)),
     "exp:pi": ({ name, arg_t, ret_t }) =>
-      new Pi(pt.Tree.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
+      new Pi(pt.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:arrow": ({ arg_t, ret_t }) =>
       new Pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
-    "exp:fn": ({ name, ret }) => new Fn(pt.Tree.str(name), exp_matcher(ret)),
+    "exp:fn": ({ name, ret }) => new Fn(pt.str(name), exp_matcher(ret)),
     "exp:ap": ({ target, args }) => {
-      let exp: Exp.Exp = new Var(pt.Tree.str(target))
+      let exp: Exp.Exp = new Var(pt.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
         exp = new Ap(exp, exp_matcher(arg))
       }
       return exp
     },
     "exp:sigma": ({ name, car_t, cdr_t }) =>
-      new Sigma(pt.Tree.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
+      new Sigma(pt.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
     "exp:pair": ({ car_t, cdr_t }) =>
       new Sigma("_", exp_matcher(car_t), exp_matcher(cdr_t)),
     "exp:cons": ({ car, cdr }) => new Cons(exp_matcher(car), exp_matcher(cdr)),
@@ -40,7 +40,7 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     "exp:zero": () => new Zero(),
     "exp:add1": ({ prev }) => new Add1(exp_matcher(prev)),
     "exp:number": ({ value }, { span }) => {
-      const n = Number.parseInt(pt.Tree.str(value))
+      const n = Number.parseInt(pt.str(value))
       if (Number.isNaN(n)) {
         throw new pt.ParsingError(
           `Expecting number, instead of: ${ut.inspect(n)}`,
@@ -68,11 +68,10 @@ export function exp_matcher(tree: pt.Tree.Tree): Exp.Exp {
     "exp:absurd_ind": ({ target, motive }) =>
       new AbsurdInd(exp_matcher(target), exp_matcher(motive)),
     "exp:str": () => new Str(),
-    "exp:quote": ({ value }) =>
-      new Quote(pt.trim_boundary(pt.Tree.str(value), 1)),
+    "exp:quote": ({ value }) => new Quote(pt.trim_boundary(pt.str(value), 1)),
     "exp:type": () => new Type(),
     "exp:let": ({ name, exp, ret }) =>
-      new Let(pt.Tree.str(name), exp_matcher(exp), exp_matcher(ret)),
+      new Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),
     "exp:the": ({ t, exp }) => new The(exp_matcher(t), exp_matcher(exp)),
   })(tree)
 }
@@ -96,9 +95,9 @@ function deduction_aux(
 }
 
 export function deduction_entry_matcher(
-  tree: pt.Tree.Tree
+  tree: pt.Tree
 ): { t: Exp.Exp; exp: Exp.Exp } {
-  return pt.Tree.matcher<{ t: Exp.Exp; exp: Exp.Exp }>({
+  return pt.matcher<{ t: Exp.Exp; exp: Exp.Exp }>({
     "deduction_entry:deduction_entry": ({ t, exp }) => ({
       t: exp_matcher(t),
       exp: exp_matcher(exp),

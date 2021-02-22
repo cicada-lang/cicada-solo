@@ -41,7 +41,7 @@ export const handler = async (argv: Argv) => {
     if (error instanceof pt.ParsingError) {
       let message = error.message
       message += "\n"
-      message += pt.Span.report(error.span, text)
+      message += pt.report(error.span, text)
       console.error(argv.nocolor ? strip_ansi(message) : message)
       process.exit(1)
     } else {
