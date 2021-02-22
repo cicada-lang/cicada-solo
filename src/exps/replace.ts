@@ -39,7 +39,7 @@ export class Replace implements Exp {
     const target_t = infer(ctx, this.target)
     const equal = Value.is_equal(ctx, target_t)
     const motive_t = evaluate(
-      Env.init().extend("t", equal.t),
+      new Env().extend("t", equal.t),
       new Pi("x", new Var("t"), new Type())
     )
     check(ctx, this.motive, motive_t)
@@ -69,7 +69,7 @@ export function do_replace(
   } else if (target.kind === "Value.not_yet") {
     if (target.t.kind === "Value.equal") {
       const base_t = do_ap(motive, target.t.from)
-      const closure = Value.Closure.create(Env.init(), "x", new Type())
+      const closure = Value.Closure.create(new Env(), "x", new Type())
       const motive_t = Value.pi(target.t.t, closure)
       return Value.not_yet(
         do_ap(motive, target.t.to),

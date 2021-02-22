@@ -7,10 +7,6 @@ export class Env {
     this.values = values
   }
 
-  static init(): Env {
-    return new Env()
-  }
-
   extend(name: string, value: Value): Env {
     return new Env(new Map([...this.values, [name, value]]))
   }

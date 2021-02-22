@@ -29,8 +29,8 @@ export const handler = async (argv: Argv) => {
 
   try {
     const stmts = Syntax.parse_stmts(text)
-    const ctx = Ctx.init()
-    const env = Env.init()
+    const ctx = new Ctx()
+    const env = new Env()
     const output = Stmt.run(ctx, env, stmts)
     if (output) console.log(output)
   } catch (error) {

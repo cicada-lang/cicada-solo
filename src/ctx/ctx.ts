@@ -11,10 +11,6 @@ export class Ctx {
     this.entries = entries
   }
 
-  static init(): Ctx {
-    return new Ctx()
-  }
-
   names(): Array<string> {
     return Array.from(this.entries.keys())
   }
@@ -33,7 +29,7 @@ export class Ctx {
   }
 
   to_env(): Env {
-    let env = Env.init()
+    let env = new Env()
     for (const [name, { t, value }] of this.entries) {
       if (value !== undefined) {
         env = env.extend(name, value)
