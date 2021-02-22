@@ -1,7 +1,8 @@
-import { Exp } from "../exp"
+import { Exp, AlphaReprOpts } from "../exp"
+import { Ctx } from "../ctx"
+import { Env } from "../env"
 import * as Value from "../value"
 import { evaluate } from "../evaluate"
-import * as Ctx from "../ctx"
 import { check } from "../check"
 
 export type Cons = Exp & {
