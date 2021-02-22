@@ -16,7 +16,7 @@ export class The implements Exp {
     this.exp = exp
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return evaluate(env, this.exp)
   }
 

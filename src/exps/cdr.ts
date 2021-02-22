@@ -18,7 +18,7 @@ export class Cdr implements Exp {
     this.target = target
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return do_cdr(evaluate(env, this.target))
   }
 

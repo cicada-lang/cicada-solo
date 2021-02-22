@@ -20,7 +20,7 @@ export class Let implements Exp {
     this.ret = ret
   }
 
-  evaluability({ env }: { env: Env }): Value {
+  evaluability(env: Env): Value {
     return evaluate(env.extend(this.name, evaluate(env, this.exp)), this.ret)
   }
 

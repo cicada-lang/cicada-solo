@@ -28,7 +28,7 @@ export class Same implements Exp {
     }
   }
 
-  evaluability(the: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return Value.same
   }
 

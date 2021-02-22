@@ -9,7 +9,7 @@ export class Str implements Exp {
 
   constructor() {}
 
-  evaluability(the: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return Value.str
   }
 

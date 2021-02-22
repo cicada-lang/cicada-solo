@@ -17,7 +17,7 @@ export class Car implements Exp {
     this.target = target
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return do_car(evaluate(env, this.target))
   }
 

@@ -18,7 +18,7 @@ export class Pi implements Exp {
     this.ret_t = ret_t
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return Value.pi(
       evaluate(env, this.arg_t),
       Value.Closure.create(env, this.name, this.ret_t)

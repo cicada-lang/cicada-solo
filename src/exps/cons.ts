@@ -15,7 +15,7 @@ export class Cons implements Exp {
     this.cdr = cdr
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return Value.cons(evaluate(env, this.car), evaluate(env, this.cdr))
   }
 

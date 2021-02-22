@@ -1,4 +1,5 @@
-- [refactoring] simplify `Exp`'s members' declaration
+- [refactoring] simplify `Exp`'s declaration -- checkability
+- [refactoring] simplify `Exp`'s declaration -- inferability
 
 - [refactoring] `AlphaReprOpts` as class -- with good API
 

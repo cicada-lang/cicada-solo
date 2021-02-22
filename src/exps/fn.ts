@@ -15,7 +15,7 @@ export class Fn implements Exp {
     this.ret = ret
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return Value.fn(Value.Closure.create(env, this.name, this.ret))
   }
 

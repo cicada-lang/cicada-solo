@@ -18,7 +18,7 @@ export class Sigma implements Exp {
     this.cdr_t = cdr_t
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return Value.sigma(
       evaluate(env, this.car_t),
       Value.Closure.create(env, this.name, this.cdr_t)

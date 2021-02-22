@@ -9,7 +9,7 @@ export class Type implements Exp {
 
   constructor() {}
 
-  evaluability(the: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return Value.type
   }
 

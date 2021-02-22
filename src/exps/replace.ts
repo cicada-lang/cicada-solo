@@ -27,7 +27,7 @@ export class Replace implements Exp {
     this.base = base
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return do_replace(
       evaluate(env, this.target),
       evaluate(env, this.motive),

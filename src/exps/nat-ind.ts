@@ -29,7 +29,7 @@ export class NatInd implements Exp {
     this.step = step
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return do_nat_ind(
       evaluate(env, this.target),
       evaluate(env, this.motive),

@@ -15,7 +15,7 @@ export class Add1 implements Exp {
     this.prev = prev
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return Value.add1(evaluate(env, this.prev))
   }
 

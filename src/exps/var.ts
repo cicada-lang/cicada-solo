@@ -14,7 +14,7 @@ export class Var implements Exp {
     this.name = name
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     const result = env.lookup(this.name)
     if (result === undefined) {
       throw new Trace.Trace(Explain.explain_name_undefined(this.name))

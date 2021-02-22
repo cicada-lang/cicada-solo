@@ -20,7 +20,7 @@ export class AbsurdInd implements Exp {
     this.motive = motive
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return do_absurd_ind(evaluate(env, this.target), evaluate(env, this.motive))
   }
 

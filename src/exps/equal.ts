@@ -18,7 +18,7 @@ export class Equal implements Exp {
     this.to = to
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return Value.equal(
       evaluate(env, this.t),
       evaluate(env, this.from),

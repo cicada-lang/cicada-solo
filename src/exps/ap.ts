@@ -21,7 +21,7 @@ export class Ap implements Exp {
     this.arg = arg
   }
 
-  evaluability({ env }: { env: Env }): Value.Value {
+  evaluability(env: Env): Value.Value {
     return do_ap(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
