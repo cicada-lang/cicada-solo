@@ -19,7 +19,7 @@ export class Cons implements Exp {
     return Value.cons(evaluate(env, this.car), evaluate(env, this.cdr))
   }
 
-  checkability(t: Value.Value, { ctx }: { ctx: Ctx }): void {
+  checkability(ctx: Ctx, t: Value.Value): void {
     const sigma = Value.is_sigma(ctx, t)
     const cdr_t = Value.Closure.apply(
       sigma.cdr_t_cl,

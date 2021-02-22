@@ -35,7 +35,7 @@ export class Let implements Exp {
     )
   }
 
-  checkability(t: Value, { ctx }: { ctx: Ctx.Ctx }): void {
+  checkability(ctx: Ctx.Ctx, t: Value): void {
     check(
       ctx.extend(
         this.name,

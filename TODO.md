@@ -1,5 +1,3 @@
-- [refactoring] simplify `Exp`'s declaration -- checkability
-
 - [refactoring] `AlphaReprOpts` as class -- with good API
 
 - [refactoring] `Stmt`

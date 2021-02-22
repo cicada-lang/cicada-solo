@@ -11,7 +11,7 @@ import * as ut from "../ut"
 export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
   try {
     if (exp.checkability) {
-      return exp.checkability(t, { ctx })
+      return exp.checkability(ctx, t)
     } else if (exp.inferability) {
       const u = exp.inferability(ctx)
       if (!Value.conversion(ctx, Value.type, t, u)) {

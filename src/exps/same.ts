@@ -11,7 +11,7 @@ export class Same implements Exp {
 
   constructor() {}
 
-  checkability(t: Value.Value, { ctx }: { ctx: Ctx }): void {
+  checkability(ctx: Ctx, t: Value.Value): void {
     const equal = Value.is_equal(ctx, t)
     if (!Value.conversion(ctx, equal.t, equal.from, equal.to)) {
       throw new Trace.Trace(

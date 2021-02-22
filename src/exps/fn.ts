@@ -19,7 +19,7 @@ export class Fn implements Exp {
     return Value.fn(Value.Closure.create(env, this.name, this.ret))
   }
 
-  checkability(t: Value.Value, { ctx }: { ctx: Ctx }): void {
+  checkability(ctx: Ctx, t: Value.Value): void {
     const pi = Value.is_pi(ctx, t)
     const arg = Value.not_yet(pi.arg_t, Neutral.v(this.name))
     const ret_t = Value.Closure.apply(pi.ret_t_cl, arg)
