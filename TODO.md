@@ -1,3 +1,9 @@
+# partech
+
+- [partech] learn more about framework design
+- [partech] change style from procedural to oop
+- [partech] move partech out to its own repo
+
 # cicada
 
 - [refactoring] `Stmt`
@@ -15,14 +21,7 @@
 - [test] `Pi`
 - [test] `Absurd`
 
-- [optimization] use native `number` as `Nat`.
-
-# partech
-
-> prepare moving partech out to its own repo.
-
-- [partech] learn more about framework design
-- [partech] change style from procedural to OOP.
+- [optimization] use native `number` as `Nat`
 
 # TLT
 
