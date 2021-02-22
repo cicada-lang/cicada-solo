@@ -1,4 +1,3 @@
-- [refactoring] as class -- cdr
 - [refactoring] as class -- cons
 
 - [refactoring] as class -- equal

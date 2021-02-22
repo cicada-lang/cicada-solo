@@ -10,26 +10,43 @@ import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 import { do_car } from "./car"
 
-export type Cdr = Exp & {
-  kind: "Cdr"
+export class Cdr extends Object implements Exp {
+  kind = "Cdr"
   target: Exp
-}
 
-export function Cdr(target: Exp): Cdr {
-  return {
-    kind: "Cdr",
-    target,
-    evaluability: ({ env }) => do_cdr(evaluate(env, target)),
-    ...Inferable({
-      inferability: ({ ctx }) => {
-        const target_t = infer(ctx, target)
+  constructor(target: Exp) {
+    super()
+    this.target = target
+  }
+
+  evaluability({ env }: { env: Env }): Value.Value {
+    return do_cdr(evaluate(env, this.target))
+  }
+
+  checkability(t: Value.Value, the: { ctx: Ctx }): void {
+    return Inferable({
+      inferability: ({ ctx }: { ctx: Ctx }) => {
+        const target_t = infer(ctx, this.target)
         const sigma = Value.is_sigma(ctx, target_t)
-        const car = do_car(evaluate(ctx.to_env(), target))
+        const car = do_car(evaluate(ctx.to_env(), this.target))
         return Value.Closure.apply(sigma.cdr_t_cl, car)
       },
-    }),
-    repr: () => `cdr(${target.repr()})`,
-    alpha_repr: (opts) => `cdr(${target.alpha_repr(opts)})`,
+    }).checkability(t, the)
+  }
+
+  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+    const target_t = infer(ctx, this.target)
+    const sigma = Value.is_sigma(ctx, target_t)
+    const car = do_car(evaluate(ctx.to_env(), this.target))
+    return Value.Closure.apply(sigma.cdr_t_cl, car)
+  }
+
+  repr(): string {
+    return `cdr(${this.target.repr()})`
+  }
+
+  alpha_repr(opts: AlphaReprOpts): string {
+    return `cdr(${this.target.alpha_repr(opts)})`
   }
 }
 
