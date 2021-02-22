@@ -8,18 +8,17 @@
   ],
   "scripts": {
     "build": "npx tsc",
-    "test": "./dev t",
-    "vercel-build": "npm run build && npm run test",
     "watch": "npx tsc --watch",
-    "format": "npx prettier src --write"
+    "format": "npx prettier src --write",
+    "test": "./dev t",
+    "vercel-build": "npm run build && npm run test"
   },
   "prettier": {
     "semi": false,
     "trailingComma": "es5"
   },
   "bin": {
-    "cic": "bin/cic.js",
-    "partech": "bin/partech.js"
+    "cic": "bin/cic.js"
   },
   "devDependencies": {
     "@types/assert": "^1.5.4",
