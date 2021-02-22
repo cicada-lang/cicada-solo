@@ -1,20 +1,10 @@
-# lang3
+- [module system] `cli/commands/run.ts` optionally take `project.json` config file
 
-> module system
+- [repl] `cli/commands/repl.ts` -- by `Project.piece_by_piece`
+- [repl] `cic repl` alias to `cic`
+- [repl] `./dev` test `cic repl`
 
-- [lang3] `cli/commands/run.ts` optionally take `project.json` config file
-
-> repl
-
-- [lang3] `cli/commands/repl.ts` -- by `Project.piece_by_piece`
-- [lang3] `lang3 repl` alias to `lang3`
-- [lang3] `./dev` test `lang3 repl`
-
-> project insight
-
-- [lang3] [maybe] good view of `Project` on frontend (project insights)
-
-# cicada
+- [project insight] [maybe] good view of `Project` on frontend (project insights)
 
 > 有完整的例子来表明语言的设计有效。
 > - 简单易读，可用作形式化数学结构的伪代码。
