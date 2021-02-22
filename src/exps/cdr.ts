@@ -1,4 +1,4 @@
-import { Exp, AlphaOpts } from "../exp"
+import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 
@@ -33,7 +33,7 @@ export class Cdr implements Exp {
     return `cdr(${this.target.repr()})`
   }
 
-  alpha_repr(opts: AlphaOpts): string {
+  alpha_repr(opts: AlphaCtx): string {
     return `cdr(${this.target.alpha_repr(opts)})`
   }
 }

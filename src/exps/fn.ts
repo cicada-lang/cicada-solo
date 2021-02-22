@@ -1,4 +1,4 @@
-import { Exp, AlphaOpts } from "../exp"
+import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import * as Value from "../value"
@@ -30,7 +30,7 @@ export class Fn implements Exp {
     return `(${this.name}) => ${this.ret.repr()}`
   }
 
-  alpha_repr(opts: AlphaOpts): string {
+  alpha_repr(opts: AlphaCtx): string {
     const ret_repr = this.ret.alpha_repr({
       depth: opts.depth + 1,
       depths: new Map([...opts.depths, [this.name, opts.depth]]),

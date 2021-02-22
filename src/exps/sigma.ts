@@ -1,4 +1,4 @@
-import { Exp, AlphaOpts } from "../exp"
+import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 
@@ -36,7 +36,7 @@ export class Sigma implements Exp {
     return `(${this.name}: ${this.car_t.repr()}) * ${this.cdr_t.repr()}`
   }
 
-  alpha_repr(opts: AlphaOpts): string {
+  alpha_repr(opts: AlphaCtx): string {
     const cdr_t_repr = this.cdr_t.alpha_repr({
       depth: opts.depth + 1,
       depths: new Map([...opts.depths, [this.name, opts.depth]]),

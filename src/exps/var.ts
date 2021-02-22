@@ -1,4 +1,4 @@
-import { Exp, AlphaOpts } from "../exp"
+import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import * as Value from "../value"
@@ -34,7 +34,7 @@ export class Var implements Exp {
     return this.name
   }
 
-  alpha_repr(opts: AlphaOpts): string {
+  alpha_repr(opts: AlphaCtx): string {
     const depth = opts.depths.get(this.name)
     if (depth === undefined) return this.name
     return `[${depth}]`

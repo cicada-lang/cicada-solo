@@ -1,6 +1,6 @@
-import { Exp } from "../exp"
+import { Exp, AlphaCtx } from "../exp"
 
 export function equivalent(x: Exp, y: Exp): boolean {
-  const ctx = { depth: 0, depths: new Map() }
+  const ctx = new AlphaCtx()
   return x.alpha_repr(ctx) === y.alpha_repr(ctx)
 }
