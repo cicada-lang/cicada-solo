@@ -14,6 +14,8 @@
 
 - [refactoring] simplify `Exp`'s members' declaration
 
+- [refactoring] `AlphaReprOpts` as class -- with good API
+
 - [refactoring] `Stmt`
 - [refactoring] `Value`
 - [refactoring] `Neutral`
