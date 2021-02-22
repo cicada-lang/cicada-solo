@@ -1,4 +1,3 @@
-- [refactoring] as class -- equal
 - [refactoring] as class -- replace
 
 - [refactoring] `Exp` as abstract class -- use normal oop style

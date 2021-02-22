@@ -78,7 +78,7 @@ export function readback(
   } else if (t.kind === "Value.type" && value.kind === "Value.absurd") {
     return new Absurd()
   } else if (t.kind === "Value.type" && value.kind === "Value.equal") {
-    return Equal(
+    return new Equal(
       Readback.readback(ctx, Value.type, value.t),
       Readback.readback(ctx, value.t, value.from),
       Readback.readback(ctx, value.t, value.to)
