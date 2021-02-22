@@ -25,7 +25,7 @@ export class Ap implements Exp {
     return do_ap(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
-  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     const target_t = infer(ctx, this.target)
     const pi = Value.is_pi(ctx, target_t)
     check(ctx, this.arg, pi.arg_t)

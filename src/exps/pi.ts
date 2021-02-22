@@ -25,7 +25,7 @@ export class Pi implements Exp {
     )
   }
 
-  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     check(ctx, this.arg_t, Value.type)
     const arg_t_value = evaluate(ctx.to_env(), this.arg_t)
     check(ctx.extend(this.name, arg_t_value), this.ret_t, Value.type)

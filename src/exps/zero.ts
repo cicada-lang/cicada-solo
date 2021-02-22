@@ -13,7 +13,7 @@ export class Zero implements Exp {
     return Value.zero
   }
 
-  inferability(the: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     return Value.nat
   }
 

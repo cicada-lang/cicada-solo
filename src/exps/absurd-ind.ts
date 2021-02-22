@@ -24,7 +24,7 @@ export class AbsurdInd implements Exp {
     return do_absurd_ind(evaluate(env, this.target), evaluate(env, this.motive))
   }
 
-  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     // NOTE the `motive` here is not a function from target_t to type,
     //   but a element of type.
     // NOTE We should always infer target,

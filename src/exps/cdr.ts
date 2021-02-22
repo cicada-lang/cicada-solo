@@ -22,7 +22,7 @@ export class Cdr implements Exp {
     return do_cdr(evaluate(env, this.target))
   }
 
-  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     const target_t = infer(ctx, this.target)
     const sigma = Value.is_sigma(ctx, target_t)
     const car = do_car(evaluate(ctx.to_env(), this.target))

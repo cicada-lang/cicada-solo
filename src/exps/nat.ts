@@ -13,7 +13,7 @@ export class Nat implements Exp {
     return Value.nat
   }
 
-  inferability(the: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     return Value.type
   }
 

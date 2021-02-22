@@ -13,7 +13,7 @@ export class Trivial implements Exp {
     return Value.trivial
   }
 
-  inferability(the: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     return Value.type
   }
 

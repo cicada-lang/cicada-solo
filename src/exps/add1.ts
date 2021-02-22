@@ -19,7 +19,7 @@ export class Add1 implements Exp {
     return Value.add1(evaluate(env, this.prev))
   }
 
-  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     check(ctx, this.prev, Value.nat)
     return Value.nat
   }

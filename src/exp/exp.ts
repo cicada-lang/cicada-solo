@@ -11,7 +11,7 @@ export type Exp = {
   kind: string
   evaluability(env: Env): Value
   checkability?(t: Value, { ctx }: { ctx: Ctx }): void
-  inferability?({ ctx }: { ctx: Ctx }): Value
+  inferability?(ctx: Ctx): Value
   repr(): string
   alpha_repr(opts: AlphaReprOpts): string
 }

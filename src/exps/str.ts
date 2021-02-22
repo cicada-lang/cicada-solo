@@ -13,7 +13,7 @@ export class Str implements Exp {
     return Value.str
   }
 
-  inferability(the: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     return Value.type
   }
 

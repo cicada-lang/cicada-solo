@@ -22,7 +22,7 @@ export class Var implements Exp {
     return result
   }
 
-  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     const t = ctx.lookup(this.name)
     if (t === undefined) {
       throw new Trace.Trace(Explain.explain_name_undefined(this.name))

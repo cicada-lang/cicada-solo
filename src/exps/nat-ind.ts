@@ -38,7 +38,7 @@ export class NatInd implements Exp {
     )
   }
 
-  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     // NOTE We should always infer target,
     //   but we do a simple check for the simple nat.
     check(ctx, this.target, Value.nat)

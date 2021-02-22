@@ -13,7 +13,7 @@ import { do_ap } from "../exps/ap"
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
     if (exp.inferability) {
-      return exp.inferability({ ctx })
+      return exp.inferability(ctx)
     }
     throw new Trace.Trace(
       ut.aline(`

@@ -16,7 +16,7 @@ export class Quote implements Exp {
     return Value.quote(this.str)
   }
 
-  inferability(the: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     return Value.str
   }
 

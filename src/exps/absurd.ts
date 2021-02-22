@@ -13,7 +13,7 @@ export class Absurd implements Exp {
     return Value.absurd
   }
 
-  inferability(the: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     return Value.type
   }
 

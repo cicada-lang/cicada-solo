@@ -25,7 +25,7 @@ export class Sigma implements Exp {
     )
   }
 
-  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     check(ctx, this.car_t, Value.type)
     const car_t_value = evaluate(ctx.to_env(), this.car_t)
     check(ctx.extend(this.name, car_t_value), this.cdr_t, Value.type)

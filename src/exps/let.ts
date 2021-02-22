@@ -24,7 +24,7 @@ export class Let implements Exp {
     return evaluate(env.extend(this.name, evaluate(env, this.exp)), this.ret)
   }
 
-  inferability({ ctx }: { ctx: Ctx.Ctx }): Value {
+  inferability(ctx: Ctx.Ctx): Value {
     return infer(
       ctx.extend(
         this.name,

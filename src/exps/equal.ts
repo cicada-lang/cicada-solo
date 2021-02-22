@@ -26,7 +26,7 @@ export class Equal implements Exp {
     )
   }
 
-  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     check(ctx, this.t, Value.type)
     const t_value = evaluate(ctx.to_env(), this.t)
     check(ctx, this.from, t_value)

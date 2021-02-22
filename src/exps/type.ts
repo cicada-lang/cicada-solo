@@ -13,7 +13,7 @@ export class Type implements Exp {
     return Value.type
   }
 
-  inferability(the: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     return Value.type
   }
 

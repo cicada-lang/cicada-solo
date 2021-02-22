@@ -21,7 +21,7 @@ export class Car implements Exp {
     return do_car(evaluate(env, this.target))
   }
 
-  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     const target_t = infer(ctx, this.target)
     const sigma = Value.is_sigma(ctx, target_t)
     return sigma.car_t

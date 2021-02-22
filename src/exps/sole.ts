@@ -13,7 +13,7 @@ export class Sole implements Exp {
     return Value.sole
   }
 
-  inferability(the: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     return Value.trivial
   }
 

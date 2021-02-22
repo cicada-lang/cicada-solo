@@ -13,7 +13,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
     if (exp.checkability) {
       return exp.checkability(t, { ctx })
     } else if (exp.inferability) {
-      const u = exp.inferability({ ctx })
+      const u = exp.inferability(ctx)
       if (!Value.conversion(ctx, Value.type, t, u)) {
         throw new Trace.Trace(
           ut.aline(`

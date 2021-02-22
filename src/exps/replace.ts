@@ -35,7 +35,7 @@ export class Replace implements Exp {
     )
   }
 
-  inferability({ ctx }: { ctx: Ctx }): Value.Value {
+  inferability(ctx: Ctx): Value.Value {
     const target_t = infer(ctx, this.target)
     const equal = Value.is_equal(ctx, target_t)
     const motive_t = evaluate(
