@@ -1,30 +1,30 @@
 // 3. Eliminate All Natural Numbers!
 
-@def nat_rec = @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
+@def nat_rec @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
 (target) => (T) => (base) => (step) =>
   nat_ind(target, (_) => T, base, step)
 
-@def nat_which = @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T
+@def nat_which @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T
 (target) => (T) => (base) => (step) =>
   nat_rec(target)(T)(base)((prev) => (_almost) => step(prev))
 
-@def nat_iter = @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (almost: T) -> T) -> T
+@def nat_iter @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (almost: T) -> T) -> T
 (target) => (T) => (base) => (step) =>
   nat_rec(target)(T)(base)((_prev) => (almost) => step(almost))
 
 // NOTE We use `y` as target, this will make
 //   the definition of `pow` looks more natural.
 
-@def add = @the (Nat) -> (Nat) -> Nat
+@def add @the (Nat) -> (Nat) -> Nat
   (x) => (y) => nat_iter(y)(Nat)(x)((almost) => add1(almost))
 
-@def mul = @the (Nat) -> (Nat) -> Nat
+@def mul @the (Nat) -> (Nat) -> Nat
   (x) => (y) => nat_iter(y)(Nat)(0)((almost) => add(almost)(x))
 
-@def pow = @the (Nat) -> (Nat) -> Nat
+@def pow @the (Nat) -> (Nat) -> Nat
   (x) => (y) => nat_iter(y)(Nat)(1)((almost) => mul(almost)(x))
 
-@def eight = @let four = add(2)(2)
+@def eight @let four add(2)(2)
   add(four)(four)
 
 @show add(4)(3)
@@ -37,7 +37,7 @@
 // - We use `nat_iter` to define `add`;
 // - We use `nat_rec` and `add` to define `gauss`.
 
-@def gauss = @the (Nat) -> Nat
+@def gauss @the (Nat) -> Nat
   (n) => nat_rec(n)(Nat)(0)((prev) => (almost) => add(add1(prev))(almost))
 
 @show "gauss"
@@ -53,7 +53,7 @@
 @show gauss(9)
 @show gauss(10)
 
-@def factorial = @the (Nat) -> Nat
+@def factorial @the (Nat) -> Nat
   (n) => nat_rec(n)(Nat)(1)((prev) => (almost) => mul(add1(prev))(almost))
 
 @show "factorial"

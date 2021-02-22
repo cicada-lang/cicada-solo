@@ -1,4 +1,4 @@
-@def n = zero
-@def one = add1(n)
+@def n zero
+@def one add1(n)
 
 @show one

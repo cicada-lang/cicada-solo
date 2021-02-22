@@ -1,18 +1,18 @@
 // 2. Doin' What Comes Naturally
 
-@def flavored_lentils = @the (String) -> Pair(String, String)
+@def flavored_lentils @the (String) -> Pair(String, String)
   (flavor) => cons(flavor, "lentils")
 
-@def garlic_flavored_lentils = @the Pair(String, String)
+@def garlic_flavored_lentils @the Pair(String, String)
   flavored_lentils("garlic")
 
-@def id = @the (String) -> String
+@def id @the (String) -> String
   (x) => x
 
-@def T = @the Type
+@def T @the Type
   Pair(String, (String) -> String)
 
-@def id_in_pair = @the (x: String) -> T
+@def id_in_pair @the (x: String) -> T
   (x) => cons(x, (x) => x)
 
 @show @the T
@@ -34,21 +34,21 @@
 @show @the Equal((Pair(Nat, Nat)) -> Nat, (y) => car(y), (x) => car(x))
   same
 
-@def vegetables = @the Pair(String, String)
+@def vegetables @the Pair(String, String)
   cons("celery", "carrot")
 
 @show @the Equal(Pair(String, String), vegetables, cons(car(vegetables), cdr(vegetables)))
   same
 
-@def nat_rec = @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
+@def nat_rec @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
 (target) => (T) => (base) => (step) =>
   nat_ind(target, (_) => T, base, step)
 
-@def nat_which = @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T
+@def nat_which @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T
 (target) => (T) => (base) => (step) =>
   nat_ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
 
-@def naught_or_more = @the (Nat) -> String
+@def naught_or_more @the (Nat) -> String
   (n) => nat_which(n)(String)("naught")((_prev) => "more")
 
 @show @the Equal(String, naught_or_more(0), "naught")
@@ -63,7 +63,7 @@
 @show @the Pair(Type, Type)
   cons(String, String)
 
-@def Pear = @the Type
+@def Pear @the Type
   Pair(Nat, Nat)
 
 @show @the Pear cons(1, 2)

@@ -106,7 +106,6 @@ export const exp = {
       '"@"',
       '"let"',
       { name: "identifier" },
-      '"="',
       { exp: "exp" },
       { ret: "exp" },
     ],

@@ -1,6 +1,6 @@
 // 4. Easy as Pie
 
-@def Pair_elim =
+@def Pair_elim
 @the (A: Type) -> (D: Type) -> (X: Type) ->
   (pair: Pair(A, D)) ->
   (maker: (A) -> (D) -> X) ->
@@ -9,7 +9,7 @@
   (pair) => (maker) =>
   maker(car(pair))(cdr(pair))
 
-@def flip =
+@def flip
 @the (A: Type) -> (D: Type) ->
   (pair: Pair(A, D)) ->
   Pair(D, A)
@@ -34,7 +34,7 @@ same
     Pair(D, A))
 same
 
-@def swap = @the (Pair(Nat, String)) -> Pair(String, Nat)
+@def swap @the (Pair(Nat, String)) -> Pair(String, Nat)
 (pair) =>
   Pair_elim(Nat)(String)(Pair(String, Nat))
   (pair)
@@ -42,7 +42,7 @@ same
 
 @show swap(cons(123, "abc"))
 
-@def twin = @the (Y: Type) -> (Y) -> Pair(Y, Y)
+@def twin @the (Y: Type) -> (Y) -> Pair(Y, Y)
   (Y) => (x) => cons(x, x)
 
 @show twin(Nat)(123)
