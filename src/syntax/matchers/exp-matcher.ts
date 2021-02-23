@@ -1,6 +1,6 @@
-import * as Exp from "../../exp"
 import pt from "@cicada-lang/partech"
 import * as ut from "../../ut"
+import { Exp, nat_from_number } from "../../exp"
 import { stmts_matcher } from "../matchers"
 import { Var } from "../../exps"
 import { Pi, Fn, Ap } from "../../exps"
@@ -14,8 +14,8 @@ import { Type } from "../../exps"
 import { Let } from "../../exps"
 import { The } from "../../exps"
 
-export function exp_matcher(tree: pt.Tree): Exp.Exp {
-  return pt.matcher<Exp.Exp>({
+export function exp_matcher(tree: pt.Tree): Exp {
+  return pt.matcher<Exp>({
     "exp:var": ({ name }) => new Var(pt.str(name)),
     "exp:pi": ({ name, arg_t, ret_t }) =>
       new Pi(pt.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
@@ -23,7 +23,7 @@ export function exp_matcher(tree: pt.Tree): Exp.Exp {
       new Pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:fn": ({ name, ret }) => new Fn(pt.str(name), exp_matcher(ret)),
     "exp:ap": ({ target, args }) => {
-      let exp: Exp.Exp = new Var(pt.str(target))
+      let exp: Exp = new Var(pt.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
         exp = new Ap(exp, exp_matcher(arg))
       }
@@ -47,7 +47,7 @@ export function exp_matcher(tree: pt.Tree): Exp.Exp {
           { span }
         )
       } else {
-        return Exp.nat_from_number(n)
+        return nat_from_number(n)
       }
     },
     "exp:nat_ind": ({ target, motive, base, step }) =>
