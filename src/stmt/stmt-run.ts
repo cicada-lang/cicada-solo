@@ -3,34 +3,17 @@ import * as Exp from "../exp"
 import * as Value from "../value"
 import * as Env from "../env"
 import * as Ctx from "../ctx"
-import * as Evaluate from "../evaluate"
-import * as Infer from "../infer"
-import * as Readback from "../readback"
+import { World } from "../world"
 
-export function run(
+export function run_stmts(
   ctx: Ctx.Ctx,
   env: Env.Env,
   stmts: Array<Stmt.Stmt>
 ): string {
-  let output = ""
+  let world = new World({ ctx, env })
   for (const stmt of stmts) {
-    ctx = Stmt.declare(ctx, stmt) || ctx
-    env = Stmt.execute(env, stmt) || env
-    output += show(ctx, env, stmt)
+    world = stmt.execute(world)
   }
 
-  return output
-}
-
-function show(ctx: Ctx.Ctx, env: Env.Env, stmt: Stmt.Stmt): string {
-  if (stmt.kind === "Stmt.show") {
-    const { exp } = stmt
-    const t = Infer.infer(ctx, exp)
-    const value = Evaluate.evaluate(env, exp)
-    const value_repr = Readback.readback(ctx, t, value).repr()
-    const t_repr = Readback.readback(ctx, Value.type, t).repr()
-    return `@the ${t_repr} ${value_repr}\n`
-  }
-
-  return ""
+  return world.output
 }

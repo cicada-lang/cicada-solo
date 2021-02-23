@@ -1,6 +1,6 @@
 import * as Syntax from "../../syntax"
 import * as Value from "../../value"
-import * as Stmt from "../../stmt"
+import { run_stmts } from "../../stmt"
 import * as Exp from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -31,7 +31,7 @@ export const handler = async (argv: Argv) => {
     const stmts = Syntax.parse_stmts(text)
     const ctx = new Ctx()
     const env = new Env()
-    const output = Stmt.run(ctx, env, stmts)
+    const output = run_stmts(ctx, env, stmts)
     if (output) console.log(output)
   } catch (error) {
     if (error instanceof Trace.Trace) {

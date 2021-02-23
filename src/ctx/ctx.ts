@@ -10,9 +10,7 @@ export type CtxEntry = {
 export class Ctx {
   entries: Map<string, CtxEntry>
 
-  constructor(
-    entries: Map<string, CtxEntry> = new Map()
-  ) {
+  constructor(entries: Map<string, CtxEntry> = new Map()) {
     this.entries = entries
   }
 

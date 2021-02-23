@@ -1,6 +1,9 @@
 # cicada
 
-- [refactoring] `Stmt`
+- [refactoring] `World.run_stmts`
+
+- [refactoring] no kind in `Exp`
+
 - [refactoring] `Value`
 - [refactoring] `Neutral`
 - [refactoring] `Normal`
