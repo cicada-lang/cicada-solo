@@ -2,11 +2,16 @@ import { Env } from "../env"
 import * as Neutral from "../neutral"
 import * as Value from "../value"
 
+export type CtxEntry = {
+  t: Value.Value
+  value?: Value.Value
+}
+
 export class Ctx {
-  entries: Map<string, { t: Value.Value; value?: Value.Value }>
+  entries: Map<string, CtxEntry>
 
   constructor(
-    entries: Map<string, { t: Value.Value; value?: Value.Value }> = new Map()
+    entries: Map<string, CtxEntry> = new Map()
   ) {
     this.entries = entries
   }
