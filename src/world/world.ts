@@ -1,6 +1,7 @@
 import { Env } from "../env"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
+import { Stmt } from "../stmt"
 
 export class World {
   env: Env
@@ -32,5 +33,14 @@ export class World {
       ...this,
       output: this.output + str,
     })
+  }
+
+  run_stmts(stmts: Array<Stmt>): World {
+    let world: World = this
+    for (const stmt of stmts) {
+      world = stmt.execute(world)
+    }
+
+    return world
   }
 }

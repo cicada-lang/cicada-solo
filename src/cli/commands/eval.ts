@@ -1,6 +1,6 @@
 import * as Syntax from "../../syntax"
 import * as Value from "../../value"
-import { run_stmts } from "../../stmt"
+import { World } from "../../world"
 import * as Exp from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -29,23 +29,24 @@ export const handler = async (argv: Argv) => {
 
   try {
     const stmts = Syntax.parse_stmts(text)
-    const ctx = new Ctx()
-    const env = new Env()
-    const output = run_stmts(ctx, env, stmts)
-    if (output) console.log(output)
+    const world = new World().run_stmts(stmts)
+    if (world.output) {
+      console.log(world.output)
+    }
   } catch (error) {
     if (error instanceof Trace.Trace) {
       console.error(Trace.repr(error, (exp) => exp.repr()))
       process.exit(1)
     }
+
     if (error instanceof pt.ParsingError) {
       let message = error.message
       message += "\n"
       message += pt.report(error.span, text)
       console.error(argv.nocolor ? strip_ansi(message) : message)
       process.exit(1)
-    } else {
-      throw error
     }
+
+    throw error
   }
 }
