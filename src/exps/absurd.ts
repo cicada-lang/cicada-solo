@@ -5,10 +5,6 @@ import { Exp, AlphaCtx } from "../exp"
 import * as Value from "../value"
 
 export class Absurd implements Exp {
-  kind = "Absurd"
-
-  constructor() {}
-
   evaluate(env: Env): Value.Value {
     return Value.absurd
   }

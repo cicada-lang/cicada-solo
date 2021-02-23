@@ -1,6 +1,6 @@
 # cicada
 
-- [refactoring] no kind in `Exp`
+- [refactoring] `nat-util`
 
 - [refactoring] `Value`
 - [refactoring] `Neutral`
@@ -8,8 +8,9 @@
 
 - [refactoring] parser as factory of `Exp`
 
-- [pie] `List`, `List.cons`, `List.null`, `List.rec`
+- [pie] `List`
 - [pie] `Vector`
+
 - [pie] be able to add type annotation to `Exp.fn`
 
 - [test] `Equal`

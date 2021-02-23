@@ -2,12 +2,10 @@ import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import * as Value from "../value"
-
 import * as Explain from "../explain"
 import * as Trace from "../trace"
 
 export class Var implements Exp {
-  kind = "Var"
   name: string
 
   constructor(name: string) {

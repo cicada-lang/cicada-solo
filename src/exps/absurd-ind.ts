@@ -11,7 +11,6 @@ import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 
 export class AbsurdInd implements Exp {
-  kind = "AbsurdInd"
   target: Exp
   motive: Exp
 

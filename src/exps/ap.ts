@@ -12,7 +12,6 @@ import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 
 export class Ap implements Exp {
-  kind = "Ap"
   target: Exp
   arg: Exp
 

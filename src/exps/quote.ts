@@ -1,11 +1,9 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-
 import * as Value from "../value"
 
 export class Quote implements Exp {
-  kind = "Quote"
   str: string
 
   constructor(str: string) {

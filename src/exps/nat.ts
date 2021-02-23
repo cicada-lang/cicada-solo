@@ -1,14 +1,9 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-
 import * as Value from "../value"
 
 export class Nat implements Exp {
-  kind = "Nat"
-
-  constructor() {}
-
   evaluate(env: Env): Value.Value {
     return Value.nat
   }

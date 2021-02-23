@@ -2,14 +2,11 @@ import { Exp, AlphaCtx } from "../exp"
 import { Value } from "../value"
 import { Env } from "../env"
 import * as Ctx from "../ctx"
-
 import { evaluate } from "../evaluate"
 import { infer } from "../infer"
 import { check } from "../check"
-import * as ut from "../ut"
 
 export class Let implements Exp {
-  kind = "Let"
   name: string
   exp: Exp
   ret: Exp

@@ -8,7 +8,6 @@ import * as Value from "../value"
 import { nat_to_number } from "../exp"
 
 export class Add1 implements Exp {
-  kind = "Add1"
   prev: Exp
 
   constructor(prev: Exp) {

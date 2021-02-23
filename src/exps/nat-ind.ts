@@ -1,7 +1,6 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { nat_ind_step_t } from "../exp"
@@ -16,7 +15,6 @@ import { Nat } from "./nat"
 import { Pi } from "./pi"
 
 export class NatInd implements Exp {
-  kind = "NatInd"
   target: Exp
   motive: Exp
   base: Exp

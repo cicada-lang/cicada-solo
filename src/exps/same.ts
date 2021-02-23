@@ -7,10 +7,6 @@ import * as Trace from "../trace"
 import * as ut from "../ut"
 
 export class Same implements Exp {
-  kind = "Same"
-
-  constructor() {}
-
   check(ctx: Ctx, t: Value.Value): void {
     const equal = Value.is_equal(ctx, t)
     if (!Value.conversion(ctx, equal.t, equal.from, equal.to)) {

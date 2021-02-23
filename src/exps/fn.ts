@@ -6,7 +6,6 @@ import * as Neutral from "../neutral"
 import { check } from "../check"
 
 export class Fn implements Exp {
-  kind = "Fn"
   name: string
   ret: Exp
 

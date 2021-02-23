@@ -1,7 +1,6 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { infer } from "../infer"
@@ -16,7 +15,6 @@ import { Type } from "./type"
 import { Var } from "./var"
 
 export class Replace implements Exp {
-  kind = "Replace"
   target: Exp
   motive: Exp
   base: Exp

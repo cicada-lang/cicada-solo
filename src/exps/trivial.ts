@@ -5,10 +5,6 @@ import { Env } from "../env"
 import * as Value from "../value"
 
 export class Trivial implements Exp {
-  kind = "Trivial"
-
-  constructor() {}
-
   evaluate(env: Env): Value.Value {
     return Value.trivial
   }

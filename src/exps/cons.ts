@@ -6,7 +6,6 @@ import { evaluate } from "../evaluate"
 import { check } from "../check"
 
 export class Cons implements Exp {
-  kind = "Cons"
   car: Exp
   cdr: Exp
 

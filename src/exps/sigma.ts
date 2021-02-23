@@ -1,13 +1,11 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-
 import { check } from "../check"
 import { evaluate } from "../evaluate"
 import * as Value from "../value"
 
 export class Sigma implements Exp {
-  kind = "Sigma"
   name: string
   car_t: Exp
   cdr_t: Exp

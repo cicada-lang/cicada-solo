@@ -10,7 +10,6 @@ import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 
 export class Car implements Exp {
-  kind = "Car"
   target: Exp
 
   constructor(target: Exp) {

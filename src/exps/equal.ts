@@ -1,13 +1,11 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import * as Value from "../value"
 
 export class Equal implements Exp {
-  kind = "Equal"
   t: Exp
   from: Exp
   to: Exp

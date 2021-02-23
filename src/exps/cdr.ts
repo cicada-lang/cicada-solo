@@ -1,7 +1,6 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-
 import { infer } from "../infer"
 import { evaluate } from "../evaluate"
 import * as Value from "../value"
@@ -11,7 +10,6 @@ import * as Trace from "../trace"
 import { do_car } from "./car"
 
 export class Cdr implements Exp {
-  kind = "Cdr"
   target: Exp
 
   constructor(target: Exp) {

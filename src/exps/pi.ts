@@ -2,12 +2,10 @@ import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import * as Value from "../value"
-
 import { check } from "../check"
 import { evaluate } from "../evaluate"
 
 export class Pi implements Exp {
-  kind = "Pi"
   name: string
   arg_t: Exp
   ret_t: Exp

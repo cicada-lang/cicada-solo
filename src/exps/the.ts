@@ -2,12 +2,10 @@ import { Exp, AlphaCtx } from "../exp"
 import { Env } from "../env"
 import { Ctx } from "../ctx"
 import * as Value from "../value"
-
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 
 export class The implements Exp {
-  kind = "The"
   t: Exp
   exp: Exp
 
