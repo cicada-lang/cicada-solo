@@ -1,6 +1,6 @@
 import pt from "@cicada-lang/partech"
 import * as ut from "../../ut"
-import { Exp, nat_from_number } from "../../exp"
+import { Exp } from "../../exp"
 import { stmts_matcher } from "../matchers"
 import { Var } from "../../exps"
 import { Pi, Fn, Ap } from "../../exps"
@@ -13,6 +13,7 @@ import { Str, Quote } from "../../exps"
 import { Type } from "../../exps"
 import { Let } from "../../exps"
 import { The } from "../../exps"
+import { nat_from_number } from "../../exps/nat-util"
 
 export function exp_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({

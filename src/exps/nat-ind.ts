@@ -3,7 +3,6 @@ import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
-import { nat_ind_step_t } from "../exp"
 import * as Explain from "../explain"
 import * as Value from "../value"
 import * as Normal from "../normal"
@@ -13,6 +12,7 @@ import { do_ap } from "./ap"
 import { Type } from "./type"
 import { Nat } from "./nat"
 import { Pi } from "./pi"
+import { nat_ind_step_t } from "./nat-util"
 
 export class NatInd implements Exp {
   target: Exp

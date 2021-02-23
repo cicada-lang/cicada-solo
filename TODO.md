@@ -1,7 +1,5 @@
 # cicada
 
-- [refactoring] `nat-util`
-
 - [refactoring] `Value`
 - [refactoring] `Neutral`
 - [refactoring] `Normal`
