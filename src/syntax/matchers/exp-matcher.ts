@@ -75,32 +75,3 @@ export function exp_matcher(tree: pt.Tree): Exp.Exp {
     "exp:the": ({ t, exp }) => new The(exp_matcher(t), exp_matcher(exp)),
   })(tree)
 }
-
-function deduction_aux(
-  entries: Array<{ t: Exp.Exp; exp: Exp.Exp }>,
-  args: Array<Exp.Exp>
-): Exp.Exp {
-  if (entries.length === 0) {
-    throw new Error("entries.length === 0")
-  } else if (entries.length === 1) {
-    let [{ t, exp }] = entries
-    if (args.length === 0) return new The(t, exp)
-    for (const arg of args) exp = new Ap(exp, arg)
-    return new The(t, exp)
-  } else {
-    const [{ t, exp }, ...rest] = entries
-    const arg = deduction_aux(entries.slice(1), args)
-    return new The(t, new Ap(exp, arg))
-  }
-}
-
-export function deduction_entry_matcher(
-  tree: pt.Tree
-): { t: Exp.Exp; exp: Exp.Exp } {
-  return pt.matcher<{ t: Exp.Exp; exp: Exp.Exp }>({
-    "deduction_entry:deduction_entry": ({ t, exp }) => ({
-      t: exp_matcher(t),
-      exp: exp_matcher(exp),
-    }),
-  })(tree)
-}
