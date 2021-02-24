@@ -1,5 +1,4 @@
 import { Exp, AlphaCtx } from "../exp"
-
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { Ctx } from "../ctx"

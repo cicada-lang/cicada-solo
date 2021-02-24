@@ -1,7 +1,6 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-
 import { evaluate } from "../evaluate"
 import { infer } from "../infer"
 import { check } from "../check"

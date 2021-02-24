@@ -1,15 +1,43 @@
 # cicada
 
-- [refactoring] `Value`
+- type -- value
+
+- absurd -- value
+- absurd-ind -- neutral
+
+- pi -- value
+- fn -- value
+- ap -- neutral
+
+- sigma -- value
+- cons -- value
+- car -- neutral
+- cdr -- neutral
+
+- nat -- value
+- add1 -- value
+- zero -- value
+- nat-ind -- neutral
+
+- str -- value
+- quote -- value
+
+- equal -- value
+- same -- value
+- replace -- neutral
+
+- trivial -- value
+- sole -- value
+
+- not-yet-value
+
 - [refactoring] `Neutral`
 - [refactoring] `Normal`
-
-- [refactoring] parser as factory of `Exp`
 
 - [pie] `List`
 - [pie] `Vector`
 
-- [pie] be able to add type annotation to `Exp.fn`
+- [pie] be able to add type annotation to `Exp.fn` -- without return type
 
 - [test] `Equal`
 - [test] `Pi`
