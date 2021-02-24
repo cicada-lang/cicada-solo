@@ -2,8 +2,8 @@ import { Exp } from "../exp"
 import { Value } from "../value"
 import { Env } from "../env"
 import { evaluate } from "../evaluate"
-import { Nat, Zero, Add1 } from "../exps"
-import { Var, Pi, Ap } from "../exps"
+import { Nat, Zero, Add1 } from "../core"
+import { Var, Pi, Ap } from "../core"
 
 export function nat_from_number(n: number): Exp {
   if (n <= 0) {

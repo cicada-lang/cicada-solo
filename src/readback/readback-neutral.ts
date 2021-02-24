@@ -3,12 +3,12 @@ import * as Neutral from "../neutral"
 import * as Normal from "../normal"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
-import { Var } from "../exps"
-import { Ap } from "../exps"
-import { Car, Cdr } from "../exps"
-import { NatInd } from "../exps"
-import { Replace } from "../exps"
-import { AbsurdInd } from "../exps"
+import { Var } from "../core"
+import { Ap } from "../core"
+import { Car, Cdr } from "../core"
+import { NatInd } from "../core"
+import { Replace } from "../core"
+import { AbsurdInd } from "../core"
 
 export function readback_neutral(
   ctx: Ctx.Ctx,
