@@ -6,7 +6,6 @@ import { StrValue } from "./str-value"
 import { Quote } from "./quote"
 
 export class QuoteValue {
-  kind: "Value.quote" = "Value.quote"
   str: string
 
   constructor(str: string) {

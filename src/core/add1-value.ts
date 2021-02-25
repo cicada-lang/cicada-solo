@@ -6,7 +6,6 @@ import { NatValue } from "./nat-value"
 import { Add1 } from "./add1"
 
 export class Add1Value {
-  kind: "Value.add1" = "Value.add1"
   prev: Value
 
   constructor(prev: Value) {

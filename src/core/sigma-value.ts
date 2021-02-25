@@ -9,7 +9,6 @@ import { TypeValue } from "./type-value"
 import { Sigma } from "./sigma"
 
 export class SigmaValue {
-  kind: "Value.sigma" = "Value.sigma"
   car_t: Value.Value
   cdr_t_cl: Closure.Closure
 

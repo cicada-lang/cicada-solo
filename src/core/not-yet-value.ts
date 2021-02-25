@@ -5,7 +5,6 @@ import * as Neutral from "../neutral"
 import * as Readback from "../readback"
 
 export class NotYetValue {
-  kind: "Value.not_yet" = "Value.not_yet"
   t: Value
   neutral: Neutral.Neutral
 

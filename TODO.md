@@ -1,7 +1,5 @@
 # cicada
 
-- `Value` no `kind`
-
 - `Value.eta_expand`
 
 - [refactoring] `Neutral`

@@ -6,8 +6,6 @@ import { TypeValue } from "./type-value"
 import { Equal } from "./equal"
 
 export class EqualValue {
-  kind: "Value.equal" = "Value.equal"
-
   t: Value.Value
   from: Value.Value
   to: Value.Value

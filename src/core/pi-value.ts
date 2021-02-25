@@ -9,8 +9,6 @@ import { TypeValue } from "./type-value"
 import { Pi } from "./pi"
 
 export class PiValue {
-  kind: "Value.pi" = "Value.pi"
-
   arg_t: Value.Value
   ret_t_cl: Closure.Closure
 

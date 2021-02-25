@@ -7,7 +7,6 @@ import { PiValue } from "./pi-value"
 import { Fn } from "./fn"
 
 export class FnValue {
-  kind: "Value.fn" = "Value.fn"
   ret_cl: Closure.Closure
 
   constructor(ret_cl: Closure.Closure) {
