@@ -1,6 +1,5 @@
 # cicada
 
-- quote -- value
 - cons -- value
 - fn -- value
 

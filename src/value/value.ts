@@ -13,6 +13,7 @@ import { SigmaValue } from "../core/sigma-value"
 import { SameValue } from "../core/same-value"
 import { ZeroValue } from "../core/zero-value"
 import { Add1Value } from "../core/add1-value"
+import { QuoteValue } from "../core/quote-value"
 
 export type Value =
   | pi
@@ -90,15 +91,8 @@ export const absurd: absurd = new AbsurdValue()
 export type str = StrValue
 export const str: str = new StrValue()
 
-type quote = {
-  kind: "Value.quote"
-  str: string
-}
-
-export const quote = (str: string): quote => ({
-  kind: "Value.quote",
-  str,
-})
+type quote = QuoteValue
+export const quote = (str: string): quote => new QuoteValue(str)
 
 export type type = TypeValue
 export const type: type = new TypeValue()

@@ -1,0 +1,21 @@
+import { Ctx } from "../ctx"
+import { Exp } from "../exp"
+import { Value } from "../value"
+import { readback } from "../readback"
+import { StrValue } from "./str-value"
+import { Quote } from "./quote"
+
+export class QuoteValue {
+  kind: "Value.quote" = "Value.quote"
+  str: string
+
+  constructor(str: string) {
+    this.str = str
+  }
+
+  readback(ctx: Ctx, t: Value): Exp | undefined {
+    if (t instanceof StrValue) {
+      return new Quote(this.str)
+    }
+  }
+}
