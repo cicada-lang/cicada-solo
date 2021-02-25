@@ -14,6 +14,7 @@ import { SameValue } from "../core/same-value"
 import { ZeroValue } from "../core/zero-value"
 import { Add1Value } from "../core/add1-value"
 import { QuoteValue } from "../core/quote-value"
+import { ConsValue } from "../core/cons-value"
 
 export type Value =
   | pi
@@ -51,17 +52,8 @@ export type sigma = SigmaValue
 export const sigma = (car_t: Value, cdr_t_cl: Closure.Closure): sigma =>
   new SigmaValue(car_t, cdr_t_cl)
 
-type cons = {
-  kind: "Value.cons"
-  car: Value
-  cdr: Value
-}
-
-export const cons = (car: Value, cdr: Value): cons => ({
-  kind: "Value.cons",
-  car,
-  cdr,
-})
+type cons = ConsValue
+export const cons = (car: Value, cdr: Value): cons => new ConsValue(car, cdr)
 
 export type nat = NatValue
 export const nat: nat = new NatValue()

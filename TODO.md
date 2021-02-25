@@ -1,6 +1,5 @@
 # cicada
 
-- cons -- value
 - fn -- value
 
 - not-yet-value
