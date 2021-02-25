@@ -2,7 +2,6 @@
 
 - absurd-ind -- neutral
 
-- pi -- value
 - fn -- value
 - ap -- neutral
 
@@ -27,6 +26,8 @@
 - sole -- value
 
 - not-yet-value
+
+- `Value` no `kind`
 
 - [refactoring] `Neutral`
 - [refactoring] `Normal`

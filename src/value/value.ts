@@ -1,6 +1,10 @@
 import * as Closure from "./closure"
 import * as Neutral from "../neutral"
 
+import { TypeValue } from "../core/type-value"
+import { AbsurdValue } from "../core/absurd-value"
+import { PiValue } from "../core/pi-value"
+
 export type Value =
   | pi
   | fn
@@ -19,17 +23,10 @@ export type Value =
   | type
   | not_yet
 
-export type pi = {
-  kind: "Value.pi"
-  arg_t: Value
-  ret_t_cl: Closure.Closure
-}
+export type pi = PiValue
 
-export const pi = (arg_t: Value, ret_t_cl: Closure.Closure): pi => ({
-  kind: "Value.pi",
-  arg_t,
-  ret_t_cl,
-})
+export const pi = (arg_t: Value, ret_t_cl: Closure.Closure): pi =>
+  new PiValue(arg_t, ret_t_cl)
 
 type fn = {
   kind: "Value.fn"
@@ -129,13 +126,8 @@ export const sole: sole = {
   kind: "Value.sole",
 }
 
-export type absurd = {
-  kind: "Value.absurd"
-}
-
-export const absurd: absurd = {
-  kind: "Value.absurd",
-}
+export type absurd = AbsurdValue
+export const absurd: absurd = new AbsurdValue()
 
 export type str = {
   kind: "Value.str"
@@ -155,13 +147,8 @@ export const quote = (str: string): quote => ({
   str,
 })
 
-export type type = {
-  kind: "Value.type"
-}
-
-export const type: type = {
-  kind: "Value.type",
-}
+export type type = TypeValue
+export const type: type = new TypeValue()
 
 type not_yet = {
   kind: "Value.not_yet"

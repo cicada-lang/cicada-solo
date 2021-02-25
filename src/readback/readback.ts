@@ -98,7 +98,14 @@ export function readback(
   }
 
   if (t.kind === "Value.type" && value.kind === "Value.absurd") {
-    return new Absurd()
+    const exp = value.readback(ctx, t)
+    if (exp) return exp
+    throw new Error(
+      ut.aline(`
+        |I can not readback value: ${ut.inspect(value)},
+        |of type: ${ut.inspect(t)}.
+        |`)
+    )
   }
 
   if (t.kind === "Value.type" && value.kind === "Value.equal") {
@@ -125,22 +132,25 @@ export function readback(
   }
 
   if (t.kind === "Value.type" && value.kind === "Value.pi") {
-    const fresh_name = ut.freshen_name(
-      new Set(ctx.names()),
-      value.ret_t_cl.name
+    const exp = value.readback(ctx, t)
+    if (exp) return exp
+    throw new Error(
+      ut.aline(`
+        |I can not readback value: ${ut.inspect(value)},
+        |of type: ${ut.inspect(t)}.
+        |`)
     )
-    const variable = Value.not_yet(value.arg_t, Neutral.v(fresh_name))
-    const arg_t = Readback.readback(ctx, Value.type, value.arg_t)
-    const ret_t = Readback.readback(
-      ctx.extend(fresh_name, value.arg_t),
-      Value.type,
-      Value.Closure.apply(value.ret_t_cl, variable)
-    )
-    return new Pi(fresh_name, arg_t, ret_t)
   }
 
   if (t.kind === "Value.type" && value.kind === "Value.type") {
-    return new Type()
+    const exp = value.readback(ctx, t)
+    if (exp) return exp
+    throw new Error(
+      ut.aline(`
+        |I can not readback value: ${ut.inspect(value)},
+        |of type: ${ut.inspect(t)}.
+        |`)
+    )
   }
 
   if (value.kind === "Value.not_yet") {
