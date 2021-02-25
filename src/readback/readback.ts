@@ -34,26 +34,6 @@ export function readback(
     return t.eta_expand(ctx, value)
   }
 
-  if (t instanceof SigmaValue) {
-    // NOTE Pairs are also η-expanded.
-    //   Every value with a pair type,
-    //   whether it is neutral or not,
-    //   is read back with cons at the top.
-    const car = do_car(value)
-    const cdr = do_cdr(value)
-    return new Cons(
-      Readback.readback(ctx, t.car_t, car),
-      Readback.readback(ctx, Value.Closure.apply(t.cdr_t_cl, car), cdr)
-    )
-  }
-
-  if (t instanceof TrivialValue) {
-    // NOTE the η-rule for trivial states that
-    //   all of its inhabitants are the same as sole.
-    //   This is implemented by reading the all back as sole.
-    return new Sole()
-  }
-
   if (
     t instanceof AbsurdValue &&
     value instanceof NotYetValue &&

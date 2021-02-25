@@ -7,6 +7,9 @@ import * as Neutral from "../neutral"
 import * as ut from "../ut"
 import { TypeValue } from "./type-value"
 import { Sigma } from "./sigma"
+import { Cons } from "./cons"
+import { do_car } from "./car"
+import { do_cdr } from "./cdr"
 
 export class SigmaValue {
   car_t: Value.Value
@@ -32,5 +35,18 @@ export class SigmaValue {
       )
       return new Sigma(fresh_name, car_t, cdr_t)
     }
+  }
+
+  eta_expand(ctx: Ctx, value: Value.Value): Exp {
+    // NOTE Pairs are also η-expanded.
+    //   Every value with a pair type,
+    //   whether it is neutral or not,
+    //   is read back with cons at the top.
+    const car = do_car(value)
+    const cdr = do_cdr(value)
+    return new Cons(
+      readback(ctx, this.car_t, car),
+      readback(ctx, Value.Closure.apply(this.cdr_t_cl, car), cdr)
+    )
   }
 }

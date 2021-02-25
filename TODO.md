@@ -2,8 +2,6 @@
 
 - `core/index.ts` export values
 
-- `Value.eta_expand`
-
 - [refactoring] `Neutral`
 
 - absurd-ind -- neutral
