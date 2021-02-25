@@ -9,6 +9,7 @@ import { SoleValue } from "../core/sole-value"
 import { EqualValue } from "../core/equal-value"
 import { StrValue } from "../core/str-value"
 import { NatValue } from "../core/nat-value"
+import { SigmaValue } from "../core/sigma-value"
 
 export type Value =
   | pi
@@ -43,17 +44,9 @@ export const fn = (ret_cl: Closure.Closure): fn => ({
   ret_cl,
 })
 
-export type sigma = {
-  kind: "Value.sigma"
-  car_t: Value
-  cdr_t_cl: Closure.Closure
-}
-
-export const sigma = (car_t: Value, cdr_t_cl: Closure.Closure): sigma => ({
-  kind: "Value.sigma",
-  car_t,
-  cdr_t_cl,
-})
+export type sigma = SigmaValue
+export const sigma = (car_t: Value, cdr_t_cl: Closure.Closure): sigma =>
+  new SigmaValue(car_t, cdr_t_cl)
 
 type cons = {
   kind: "Value.cons"

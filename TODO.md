@@ -5,7 +5,6 @@
 - fn -- value
 - ap -- neutral
 
-- sigma -- value
 - cons -- value
 - car -- neutral
 - cdr -- neutral

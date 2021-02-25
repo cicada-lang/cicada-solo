@@ -141,18 +141,14 @@ export function readback(
   }
 
   if (t.kind === "Value.type" && value.kind === "Value.sigma") {
-    const fresh_name = ut.freshen_name(
-      new Set(ctx.names()),
-      value.cdr_t_cl.name
+    const exp = value.readback(ctx, t)
+    if (exp) return exp
+    throw new Error(
+      ut.aline(`
+        |I can not readback value: ${ut.inspect(value)},
+        |of type: ${ut.inspect(t)}.
+        |`)
     )
-    const variable = Value.not_yet(value.car_t, Neutral.v(fresh_name))
-    const car_t = Readback.readback(ctx, Value.type, value.car_t)
-    const cdr_t = Readback.readback(
-      ctx.extend(fresh_name, value.car_t),
-      Value.type,
-      Value.Closure.apply(value.cdr_t_cl, variable)
-    )
-    return new Sigma(fresh_name, car_t, cdr_t)
   }
 
   if (t.kind === "Value.type" && value.kind === "Value.pi") {
