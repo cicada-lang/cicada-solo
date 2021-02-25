@@ -202,9 +202,14 @@ export function readback(
   }
 
   if (value.kind === "Value.not_yet") {
-    // NOTE  t and value.t are ignored here,
-    //  maybe use them to debug.
-    return Readback.readback_neutral(ctx, value.neutral)
+    const exp = value.readback(ctx, t)
+    if (exp) return exp
+    throw new Error(
+      ut.aline(`
+        |I can not readback value: ${ut.inspect(value)},
+        |of type: ${ut.inspect(t)}.
+        |`)
+    )
   }
 
   throw new Error(

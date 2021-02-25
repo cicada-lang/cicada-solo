@@ -16,6 +16,7 @@ import { Add1Value } from "../core/add1-value"
 import { QuoteValue } from "../core/quote-value"
 import { ConsValue } from "../core/cons-value"
 import { FnValue } from "../core/fn-value"
+import { NotYetValue } from "../core/not-yet-value"
 
 export type Value =
   | pi
@@ -83,14 +84,6 @@ export const quote = (str: string): quote => new QuoteValue(str)
 export type type = TypeValue
 export const type: type = new TypeValue()
 
-type not_yet = {
-  kind: "Value.not_yet"
-  t: Value
-  neutral: Neutral.Neutral
-}
-
-export const not_yet = (t: Value, neutral: Neutral.Neutral): not_yet => ({
-  kind: "Value.not_yet",
-  t,
-  neutral,
-})
+type not_yet = NotYetValue
+export const not_yet = (t: Value, neutral: Neutral.Neutral): not_yet =>
+  new NotYetValue(t, neutral)

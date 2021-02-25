@@ -1,7 +1,5 @@
 # cicada
 
-- not-yet-value
-
 - `Value` no `kind`
 
 - [refactoring] `Neutral`
