@@ -1,7 +1,5 @@
 # cicada
 
-- fn -- value
-
 - not-yet-value
 
 - `Value` no `kind`

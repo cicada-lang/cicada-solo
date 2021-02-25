@@ -15,6 +15,7 @@ import { ZeroValue } from "../core/zero-value"
 import { Add1Value } from "../core/add1-value"
 import { QuoteValue } from "../core/quote-value"
 import { ConsValue } from "../core/cons-value"
+import { FnValue } from "../core/fn-value"
 
 export type Value =
   | pi
@@ -38,15 +39,8 @@ export type pi = PiValue
 export const pi = (arg_t: Value, ret_t_cl: Closure.Closure): pi =>
   new PiValue(arg_t, ret_t_cl)
 
-type fn = {
-  kind: "Value.fn"
-  ret_cl: Closure.Closure
-}
-
-export const fn = (ret_cl: Closure.Closure): fn => ({
-  kind: "Value.fn",
-  ret_cl,
-})
+type fn = FnValue
+export const fn = (ret_cl: Closure.Closure): fn => new FnValue(ret_cl)
 
 export type sigma = SigmaValue
 export const sigma = (car_t: Value, cdr_t_cl: Closure.Closure): sigma =>
