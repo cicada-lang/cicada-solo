@@ -22,8 +22,6 @@
 - same -- value
 - replace -- neutral
 
-- sole -- value
-
 - not-yet-value
 
 - `Value` no `kind`
