@@ -6,6 +6,7 @@ import { AbsurdValue } from "../core/absurd-value"
 import { PiValue } from "../core/pi-value"
 import { TrivialValue } from "../core/trivial-value"
 import { SoleValue } from "../core/sole-value"
+import { EqualValue } from "../core/equal-value"
 
 export type Value =
   | pi
@@ -90,19 +91,10 @@ export const add1 = (prev: Value): add1 => ({
   prev,
 })
 
-export type equal = {
-  kind: "Value.equal"
-  t: Value
-  from: Value
-  to: Value
-}
+export type equal = EqualValue
 
-export const equal = (t: Value, from: Value, to: Value): equal => ({
-  kind: "Value.equal",
-  t,
-  from,
-  to,
-})
+export const equal = (t: Value, from: Value, to: Value): equal =>
+  new EqualValue(t, from, to)
 
 type same = {
   kind: "Value.same"

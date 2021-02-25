@@ -116,10 +116,13 @@ export function readback(
   }
 
   if (t.kind === "Value.type" && value.kind === "Value.equal") {
-    return new Equal(
-      Readback.readback(ctx, Value.type, value.t),
-      Readback.readback(ctx, value.t, value.from),
-      Readback.readback(ctx, value.t, value.to)
+    const exp = value.readback(ctx, t)
+    if (exp) return exp
+    throw new Error(
+      ut.aline(`
+        |I can not readback value: ${ut.inspect(value)},
+        |of type: ${ut.inspect(t)}.
+        |`)
     )
   }
 

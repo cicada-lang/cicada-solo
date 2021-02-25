@@ -18,7 +18,6 @@
 - str -- value
 - quote -- value
 
-- equal -- value
 - same -- value
 - replace -- neutral
 
