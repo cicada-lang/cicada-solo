@@ -12,6 +12,7 @@ import { NatValue } from "../core/nat-value"
 import { SigmaValue } from "../core/sigma-value"
 import { SameValue } from "../core/same-value"
 import { ZeroValue } from "../core/zero-value"
+import { Add1Value } from "../core/add1-value"
 
 export type Value =
   | pi
@@ -32,7 +33,6 @@ export type Value =
   | not_yet
 
 export type pi = PiValue
-
 export const pi = (arg_t: Value, ret_t_cl: Closure.Closure): pi =>
   new PiValue(arg_t, ret_t_cl)
 
@@ -68,18 +68,10 @@ export const nat: nat = new NatValue()
 type zero = ZeroValue
 export const zero: zero = new ZeroValue()
 
-type add1 = {
-  kind: "Value.add1"
-  prev: Value
-}
-
-export const add1 = (prev: Value): add1 => ({
-  kind: "Value.add1",
-  prev,
-})
+type add1 = Add1Value
+export const add1 = (prev: Value): add1 => new Add1Value(prev)
 
 export type equal = EqualValue
-
 export const equal = (t: Value, from: Value, to: Value): equal =>
   new EqualValue(t, from, to)
 

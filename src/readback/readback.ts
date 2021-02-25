@@ -37,7 +37,14 @@ export function readback(
   }
 
   if (t.kind === "Value.nat" && value.kind === "Value.add1") {
-    return new Add1(Readback.readback(ctx, t, value.prev))
+    const exp = value.readback(ctx, t)
+    if (exp) return exp
+    throw new Error(
+      ut.aline(`
+        |I can not readback value: ${ut.inspect(value)},
+        |of type: ${ut.inspect(t)}.
+        |`)
+    )
   }
 
   if (t.kind === "Value.pi") {
