@@ -94,7 +94,14 @@ export function readback(
   }
 
   if (t.kind === "Value.type" && value.kind === "Value.trivial") {
-    return new Trivial()
+    const exp = value.readback(ctx, t)
+    if (exp) return exp
+    throw new Error(
+      ut.aline(`
+        |I can not readback value: ${ut.inspect(value)},
+        |of type: ${ut.inspect(t)}.
+        |`)
+    )
   }
 
   if (t.kind === "Value.type" && value.kind === "Value.absurd") {

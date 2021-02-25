@@ -2,14 +2,14 @@ import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { Value } from "../value"
 import { TypeValue } from "./type-value"
-import { Absurd } from "./absurd"
+import { Trivial } from "./trivial"
 
-export class AbsurdValue {
-  kind: "Value.absurd" = "Value.absurd"
+export class TrivialValue {
+  kind: "Value.trivial" = "Value.trivial"
 
   readback(ctx: Ctx, t: Value): Exp | undefined {
     if (t instanceof TypeValue) {
-      return new Absurd()
+      return new Trivial()
     }
   }
 }

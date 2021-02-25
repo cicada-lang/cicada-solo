@@ -4,6 +4,7 @@ import * as Neutral from "../neutral"
 import { TypeValue } from "../core/type-value"
 import { AbsurdValue } from "../core/absurd-value"
 import { PiValue } from "../core/pi-value"
+import { TrivialValue } from "../core/trivial-value"
 
 export type Value =
   | pi
@@ -110,13 +111,8 @@ export const same: same = {
   kind: "Value.same",
 }
 
-export type trivial = {
-  kind: "Value.trivial"
-}
-
-export const trivial: trivial = {
-  kind: "Value.trivial",
-}
+export type trivial = TrivialValue
+export const trivial: trivial = new TrivialValue()
 
 type sole = {
   kind: "Value.sole"

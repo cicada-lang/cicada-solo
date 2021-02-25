@@ -22,7 +22,6 @@
 - same -- value
 - replace -- neutral
 
-- trivial -- value
 - sole -- value
 
 - not-yet-value
