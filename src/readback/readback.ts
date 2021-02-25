@@ -30,20 +30,8 @@ export function readback(
   t: Value.Value,
   value: Value.Value
 ): Exp.Exp {
-  if (t instanceof PiValue) {
-    // NOTE everything with a function type
-    //   is immediately read back as having a Lambda on top.
-    //   This implements the η-rule for functions.
-    const fresh_name = ut.freshen_name(new Set(ctx.names()), t.ret_t_cl.name)
-    const variable = Value.not_yet(t.arg_t, Neutral.v(fresh_name))
-    return new Fn(
-      fresh_name,
-      Readback.readback(
-        ctx.extend(fresh_name, t.arg_t),
-        Value.Closure.apply(t.ret_t_cl, variable),
-        do_ap(value, variable)
-      )
-    )
+  if (t.eta_expand) {
+    return t.eta_expand(ctx, value)
   }
 
   if (t instanceof SigmaValue) {

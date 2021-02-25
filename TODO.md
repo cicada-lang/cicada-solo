@@ -1,5 +1,7 @@
 # cicada
 
+- `core/index.ts` export values
+
 - `Value.eta_expand`
 
 - [refactoring] `Neutral`

@@ -7,6 +7,8 @@ import * as Closure from "../value/closure"
 import * as ut from "../ut"
 import { TypeValue } from "./type-value"
 import { Pi } from "./pi"
+import { Fn } from "./fn"
+import { do_ap } from "./ap"
 
 export class PiValue {
   arg_t: Value.Value
@@ -32,5 +34,21 @@ export class PiValue {
       )
       return new Pi(fresh_name, arg_t, ret_t)
     }
+  }
+
+  eta_expand(ctx: Ctx, value: Value.Value): Exp {
+    // NOTE everything with a function type
+    //   is immediately read back as having a Lambda on top.
+    //   This implements the η-rule for functions.
+    const fresh_name = ut.freshen_name(new Set(ctx.names()), this.ret_t_cl.name)
+    const variable = Value.not_yet(this.arg_t, Neutral.v(fresh_name))
+    return new Fn(
+      fresh_name,
+      readback(
+        ctx.extend(fresh_name, this.arg_t),
+        Value.Closure.apply(this.ret_t_cl, variable),
+        do_ap(value, variable)
+      )
+    )
   }
 }
