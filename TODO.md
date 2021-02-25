@@ -10,12 +10,10 @@
 - car -- neutral
 - cdr -- neutral
 
-- nat -- value
 - add1 -- value
 - zero -- value
 - nat-ind -- neutral
 
-- str -- value
 - quote -- value
 
 - same -- value

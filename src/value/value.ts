@@ -7,6 +7,8 @@ import { PiValue } from "../core/pi-value"
 import { TrivialValue } from "../core/trivial-value"
 import { SoleValue } from "../core/sole-value"
 import { EqualValue } from "../core/equal-value"
+import { StrValue } from "../core/str-value"
+import { NatValue } from "../core/nat-value"
 
 export type Value =
   | pi
@@ -65,13 +67,8 @@ export const cons = (car: Value, cdr: Value): cons => ({
   cdr,
 })
 
-export type nat = {
-  kind: "Value.nat"
-}
-
-export const nat: nat = {
-  kind: "Value.nat",
-}
+export type nat = NatValue
+export const nat: nat = new NatValue()
 
 type zero = {
   kind: "Value.zero"
@@ -113,13 +110,8 @@ export const sole: sole = new SoleValue()
 export type absurd = AbsurdValue
 export const absurd: absurd = new AbsurdValue()
 
-export type str = {
-  kind: "Value.str"
-}
-
-export const str: str = {
-  kind: "Value.str",
-}
+export type str = StrValue
+export const str: str = new StrValue()
 
 type quote = {
   kind: "Value.quote"
