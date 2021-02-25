@@ -1,8 +1,5 @@
 # cicada
 
-- type -- value
-
-- absurd -- value
 - absurd-ind -- neutral
 
 - pi -- value
