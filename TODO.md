@@ -1,28 +1,28 @@
 # cicada
 
-- absurd-ind -- neutral
-
-- fn -- value
-- ap -- neutral
-
-- cons -- value
-- car -- neutral
-- cdr -- neutral
-
-- add1 -- value
 - zero -- value
-- nat-ind -- neutral
-
 - quote -- value
-
-- same -- value
-- replace -- neutral
+- add1 -- value
+- cons -- value
+- fn -- value
 
 - not-yet-value
 
 - `Value` no `kind`
 
 - [refactoring] `Neutral`
+
+- absurd-ind -- neutral
+
+- ap -- neutral
+
+- car -- neutral
+- cdr -- neutral
+
+- nat-ind -- neutral
+
+- replace -- neutral
+
 - [refactoring] `Normal`
 
 - [pie] `List`

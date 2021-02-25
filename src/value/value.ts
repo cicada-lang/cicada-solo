@@ -10,6 +10,7 @@ import { EqualValue } from "../core/equal-value"
 import { StrValue } from "../core/str-value"
 import { NatValue } from "../core/nat-value"
 import { SigmaValue } from "../core/sigma-value"
+import { SameValue } from "../core/same-value"
 
 export type Value =
   | pi
@@ -86,13 +87,8 @@ export type equal = EqualValue
 export const equal = (t: Value, from: Value, to: Value): equal =>
   new EqualValue(t, from, to)
 
-type same = {
-  kind: "Value.same"
-}
-
-export const same: same = {
-  kind: "Value.same",
-}
+type same = SameValue
+export const same: same = new SameValue()
 
 export type trivial = TrivialValue
 export const trivial: trivial = new TrivialValue()
