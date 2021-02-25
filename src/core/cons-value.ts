@@ -14,4 +14,9 @@ export class ConsValue {
     this.car = car
     this.cdr = cdr
   }
+
+  readback(ctx: Ctx, t: Value): Exp | undefined {
+    // TODO
+    return undefined
+  }
 }

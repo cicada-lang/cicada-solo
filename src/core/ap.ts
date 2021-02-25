@@ -9,6 +9,9 @@ import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
+import { NotYetValue } from "./not-yet-value"
+import { FnValue } from "./fn-value"
+import { PiValue } from "./pi-value"
 
 export class Ap implements Exp {
   target: Exp
@@ -41,10 +44,10 @@ export class Ap implements Exp {
 }
 
 export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
-  if (target.kind === "Value.fn") {
+  if (target instanceof FnValue) {
     return Value.Closure.apply(target.ret_cl, arg)
-  } else if (target.kind === "Value.not_yet") {
-    if (target.t.kind === "Value.pi") {
+  } else if (target instanceof NotYetValue) {
+    if (target.t instanceof PiValue) {
       return Value.not_yet(
         Value.Closure.apply(target.t.ret_t_cl, arg),
         Neutral.ap(target.neutral, Normal.create(target.t.arg_t, arg))
@@ -54,7 +57,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
         Explain.explain_elim_target_type_mismatch({
           elim: "ap",
           expecting: ["Value.pi"],
-          reality: target.t.kind,
+          reality: target.t.constructor.name,
         })
       )
     }
@@ -63,7 +66,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
       Explain.explain_elim_target_mismatch({
         elim: "ap",
         expecting: ["Value.fn", "Value.not_yet"],
-        reality: target.kind,
+        reality: target.constructor.name,
       })
     )
   }

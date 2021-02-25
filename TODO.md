@@ -2,6 +2,8 @@
 
 - `Value` no `kind`
 
+- `Value.eta_expand`
+
 - [refactoring] `Neutral`
 
 - absurd-ind -- neutral

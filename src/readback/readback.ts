@@ -19,35 +19,18 @@ import { Str, Quote } from "../core"
 import { Type } from "../core"
 import { Let } from "../core"
 import { The } from "../core"
+import { PiValue } from "../core/pi-value"
+import { SigmaValue } from "../core/sigma-value"
+import { AbsurdValue } from "../core/absurd-value"
+import { TrivialValue } from "../core/trivial-value"
+import { NotYetValue } from "../core/not-yet-value"
 
 export function readback(
   ctx: Ctx.Ctx,
   t: Value.Value,
   value: Value.Value
 ): Exp.Exp {
-  if (t.kind === "Value.nat" && value.kind === "Value.zero") {
-    const exp = value.readback(ctx, t)
-    if (exp) return exp
-    throw new Error(
-      ut.aline(`
-        |I can not readback value: ${ut.inspect(value)},
-        |of type: ${ut.inspect(t)}.
-        |`)
-    )
-  }
-
-  if (t.kind === "Value.nat" && value.kind === "Value.add1") {
-    const exp = value.readback(ctx, t)
-    if (exp) return exp
-    throw new Error(
-      ut.aline(`
-        |I can not readback value: ${ut.inspect(value)},
-        |of type: ${ut.inspect(t)}.
-        |`)
-    )
-  }
-
-  if (t.kind === "Value.pi") {
+  if (t instanceof PiValue) {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
@@ -63,7 +46,7 @@ export function readback(
     )
   }
 
-  if (t.kind === "Value.sigma") {
+  if (t instanceof SigmaValue) {
     // NOTE Pairs are also η-expanded.
     //   Every value with a pair type,
     //   whether it is neutral or not,
@@ -76,7 +59,7 @@ export function readback(
     )
   }
 
-  if (t.kind === "Value.trivial") {
+  if (t instanceof TrivialValue) {
     // NOTE the η-rule for trivial states that
     //   all of its inhabitants are the same as sole.
     //   This is implemented by reading the all back as sole.
@@ -84,132 +67,17 @@ export function readback(
   }
 
   if (
-    t.kind === "Value.absurd" &&
-    value.kind === "Value.not_yet" &&
-    value.t.kind === "Value.absurd"
+    t instanceof AbsurdValue &&
+    value instanceof NotYetValue &&
+    value.t instanceof AbsurdValue
   ) {
     return new The(new Absurd(), Readback.readback_neutral(ctx, value.neutral))
   }
 
-  if (t.kind === "Value.equal" && value.kind === "Value.same") {
-    const exp = value.readback(ctx, t)
-    if (exp) return exp
-    throw new Error(
-      ut.aline(`
-        |I can not readback value: ${ut.inspect(value)},
-        |of type: ${ut.inspect(t)}.
-        |`)
-    )
-  }
+  const exp = value.readback(ctx, t)
 
-  if (t.kind === "Value.str" && value.kind === "Value.quote") {
-    const exp = value.readback(ctx, t)
-    if (exp) return exp
-    throw new Error(
-      ut.aline(`
-        |I can not readback value: ${ut.inspect(value)},
-        |of type: ${ut.inspect(t)}.
-        |`)
-    )
-  }
-
-  if (t.kind === "Value.type" && value.kind === "Value.nat") {
-    const exp = value.readback(ctx, t)
-    if (exp) return exp
-    throw new Error(
-      ut.aline(`
-        |I can not readback value: ${ut.inspect(value)},
-        |of type: ${ut.inspect(t)}.
-        |`)
-    )
-  }
-
-  if (t.kind === "Value.type" && value.kind === "Value.str") {
-    const exp = value.readback(ctx, t)
-    if (exp) return exp
-    throw new Error(
-      ut.aline(`
-        |I can not readback value: ${ut.inspect(value)},
-        |of type: ${ut.inspect(t)}.
-        |`)
-    )
-  }
-
-  if (t.kind === "Value.type" && value.kind === "Value.trivial") {
-    const exp = value.readback(ctx, t)
-    if (exp) return exp
-    throw new Error(
-      ut.aline(`
-        |I can not readback value: ${ut.inspect(value)},
-        |of type: ${ut.inspect(t)}.
-        |`)
-    )
-  }
-
-  if (t.kind === "Value.type" && value.kind === "Value.absurd") {
-    const exp = value.readback(ctx, t)
-    if (exp) return exp
-    throw new Error(
-      ut.aline(`
-        |I can not readback value: ${ut.inspect(value)},
-        |of type: ${ut.inspect(t)}.
-        |`)
-    )
-  }
-
-  if (t.kind === "Value.type" && value.kind === "Value.equal") {
-    const exp = value.readback(ctx, t)
-    if (exp) return exp
-    throw new Error(
-      ut.aline(`
-        |I can not readback value: ${ut.inspect(value)},
-        |of type: ${ut.inspect(t)}.
-        |`)
-    )
-  }
-
-  if (t.kind === "Value.type" && value.kind === "Value.sigma") {
-    const exp = value.readback(ctx, t)
-    if (exp) return exp
-    throw new Error(
-      ut.aline(`
-        |I can not readback value: ${ut.inspect(value)},
-        |of type: ${ut.inspect(t)}.
-        |`)
-    )
-  }
-
-  if (t.kind === "Value.type" && value.kind === "Value.pi") {
-    const exp = value.readback(ctx, t)
-    if (exp) return exp
-    throw new Error(
-      ut.aline(`
-        |I can not readback value: ${ut.inspect(value)},
-        |of type: ${ut.inspect(t)}.
-        |`)
-    )
-  }
-
-  if (t.kind === "Value.type" && value.kind === "Value.type") {
-    const exp = value.readback(ctx, t)
-    if (exp) return exp
-    throw new Error(
-      ut.aline(`
-        |I can not readback value: ${ut.inspect(value)},
-        |of type: ${ut.inspect(t)}.
-        |`)
-    )
-  }
-
-  if (value.kind === "Value.not_yet") {
-    const exp = value.readback(ctx, t)
-    if (exp) return exp
-    throw new Error(
-      ut.aline(`
-        |I can not readback value: ${ut.inspect(value)},
-        |of type: ${ut.inspect(t)}.
-        |`)
-    )
+  if (exp !== undefined) {
+    return exp
   }
 
   throw new Error(

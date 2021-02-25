@@ -13,4 +13,9 @@ export class FnValue {
   constructor(ret_cl: Closure.Closure) {
     this.ret_cl = ret_cl
   }
+
+  readback(ctx: Ctx, t: Value): Exp | undefined {
+    // TODO
+    return undefined
+  }
 }

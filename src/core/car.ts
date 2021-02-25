@@ -7,6 +7,9 @@ import { evaluate } from "../evaluate"
 import * as Explain from "../explain"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
+import { NotYetValue } from "./not-yet-value"
+import { SigmaValue } from "./sigma-value"
+import { ConsValue } from "./cons-value"
 
 export class Car implements Exp {
   target: Exp
@@ -35,17 +38,17 @@ export class Car implements Exp {
 }
 
 export function do_car(target: Value.Value): Value.Value {
-  if (target.kind === "Value.cons") {
+  if (target instanceof ConsValue) {
     return target.car
-  } else if (target.kind === "Value.not_yet") {
-    if (target.t.kind === "Value.sigma") {
+  } else if (target instanceof NotYetValue) {
+    if (target.t instanceof SigmaValue) {
       return Value.not_yet(target.t.car_t, Neutral.car(target.neutral))
     } else {
       throw new Trace.Trace(
         Explain.explain_elim_target_type_mismatch({
           elim: "car",
           expecting: ["Value.sigma"],
-          reality: target.t.kind,
+          reality: target.t.constructor.name,
         })
       )
     }
@@ -54,7 +57,7 @@ export function do_car(target: Value.Value): Value.Value {
       Explain.explain_elim_target_mismatch({
         elim: "car",
         expecting: ["Value.cons", "Value.not_yet"],
-        reality: target.kind,
+        reality: target.constructor.name,
       })
     )
   }

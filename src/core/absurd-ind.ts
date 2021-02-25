@@ -8,6 +8,8 @@ import * as Explain from "../explain"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
+import { NotYetValue } from "./not-yet-value"
+import { AbsurdValue } from "./absurd-value"
 
 export class AbsurdInd implements Exp {
   target: Exp
@@ -48,8 +50,8 @@ export function do_absurd_ind(
   target: Value.Value,
   motive: Value.Value
 ): Value.Value {
-  if (target.kind === "Value.not_yet") {
-    if (target.t.kind === "Value.absurd") {
+  if (target instanceof NotYetValue) {
+    if (target.t instanceof AbsurdValue) {
       return Value.not_yet(
         motive,
         Neutral.absurd_ind(target.neutral, Normal.create(Value.type, motive))
@@ -59,7 +61,7 @@ export function do_absurd_ind(
         Explain.explain_elim_target_type_mismatch({
           elim: "absurd_ind",
           expecting: ["Value.absurd"],
-          reality: target.t.kind,
+          reality: target.t.constructor.name,
         })
       )
     }
@@ -68,7 +70,7 @@ export function do_absurd_ind(
       Explain.explain_elim_target_mismatch({
         elim: "absurd_ind",
         expecting: ["Value.not_yet"],
-        reality: target.kind,
+        reality: target.constructor.name,
       })
     )
   }

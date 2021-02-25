@@ -8,6 +8,9 @@ import * as Explain from "../explain"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 import { do_car } from "./car"
+import { NotYetValue } from "./not-yet-value"
+import { SigmaValue } from "./sigma-value"
+import { ConsValue } from "./cons-value"
 
 export class Cdr implements Exp {
   target: Exp
@@ -37,10 +40,10 @@ export class Cdr implements Exp {
 }
 
 export function do_cdr(target: Value.Value): Value.Value {
-  if (target.kind === "Value.cons") {
+  if (target instanceof ConsValue) {
     return target.cdr
-  } else if (target.kind === "Value.not_yet") {
-    if (target.t.kind === "Value.sigma") {
+  } else if (target instanceof NotYetValue) {
+    if (target.t instanceof SigmaValue) {
       return Value.not_yet(
         Value.Closure.apply(target.t.cdr_t_cl, do_car(target)),
         Neutral.cdr(target.neutral)
@@ -50,7 +53,7 @@ export function do_cdr(target: Value.Value): Value.Value {
         Explain.explain_elim_target_type_mismatch({
           elim: "cdr",
           expecting: ["Value.sigma"],
-          reality: target.t.kind,
+          reality: target.t.constructor.name,
         })
       )
     }
@@ -59,7 +62,7 @@ export function do_cdr(target: Value.Value): Value.Value {
       Explain.explain_elim_target_mismatch({
         elim: "cdr",
         expecting: ["Value.cons", "Value.not_yet"],
-        reality: target.kind,
+        reality: target.constructor.name,
       })
     )
   }

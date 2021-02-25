@@ -13,6 +13,10 @@ import { Type } from "./type"
 import { Nat } from "./nat"
 import { Pi } from "./pi"
 import { nat_ind_step_t } from "./nat-util"
+import { NotYetValue } from "./not-yet-value"
+import { NatValue } from "./nat-value"
+import { ZeroValue } from "./zero-value"
+import { Add1Value } from "./add1-value"
 
 export class NatInd implements Exp {
   target: Exp
@@ -66,15 +70,15 @@ export function do_nat_ind(
   base: Value.Value,
   step: Value.Value
 ): Value.Value {
-  if (target.kind === "Value.zero") {
+  if (target instanceof ZeroValue) {
     return base
-  } else if (target.kind === "Value.add1") {
+  } else if (target instanceof Add1Value) {
     return do_ap(
       do_ap(step, target.prev),
       do_nat_ind(target.prev, motive, base, step)
     )
-  } else if (target.kind === "Value.not_yet") {
-    if (target.t.kind === "Value.nat") {
+  } else if (target instanceof NotYetValue) {
+    if (target.t instanceof NatValue) {
       const motive_t = Value.pi(
         Value.nat,
         Value.Closure.create(new Env(), "k", new Type())
@@ -95,7 +99,7 @@ export function do_nat_ind(
         Explain.explain_elim_target_type_mismatch({
           elim: "nat_ind",
           expecting: ["Value.nat"],
-          reality: target.t.kind,
+          reality: target.t.constructor.name,
         })
       )
     }
@@ -104,7 +108,7 @@ export function do_nat_ind(
       Explain.explain_elim_target_mismatch({
         elim: "nat_ind",
         expecting: ["Value.zero", "Value.add1", "Value.not_yet"],
-        reality: target.kind,
+        reality: target.constructor.name,
       })
     )
   }

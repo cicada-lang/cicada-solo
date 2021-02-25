@@ -13,6 +13,9 @@ import { do_ap } from "./ap"
 import { Pi } from "./pi"
 import { Type } from "./type"
 import { Var } from "./var"
+import { NotYetValue } from "./not-yet-value"
+import { SameValue } from "./same-value"
+import { EqualValue } from "./equal-value"
 
 export class Replace implements Exp {
   target: Exp
@@ -62,10 +65,10 @@ export function do_replace(
   motive: Value.Value,
   base: Value.Value
 ): Value.Value {
-  if (target.kind === "Value.same") {
+  if (target instanceof SameValue) {
     return base
-  } else if (target.kind === "Value.not_yet") {
-    if (target.t.kind === "Value.equal") {
+  } else if (target instanceof NotYetValue) {
+    if (target.t instanceof EqualValue) {
       const base_t = do_ap(motive, target.t.from)
       const closure = Value.Closure.create(new Env(), "x", new Type())
       const motive_t = Value.pi(target.t.t, closure)
@@ -82,7 +85,7 @@ export function do_replace(
         Explain.explain_elim_target_type_mismatch({
           elim: "replace",
           expecting: ["Value.equal"],
-          reality: target.t.kind,
+          reality: target.t.constructor.name,
         })
       )
     }
@@ -91,7 +94,7 @@ export function do_replace(
       Explain.explain_elim_target_mismatch({
         elim: "replace",
         expecting: ["Value.same", "Value.not_yet"],
-        reality: target.kind,
+        reality: target.constructor.name,
       })
     )
   }

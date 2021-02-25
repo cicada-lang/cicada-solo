@@ -18,23 +18,12 @@ import { ConsValue } from "../core/cons-value"
 import { FnValue } from "../core/fn-value"
 import { NotYetValue } from "../core/not-yet-value"
 
-export type Value =
-  | pi
-  | fn
-  | sigma
-  | cons
-  | nat
-  | zero
-  | add1
-  | equal
-  | same
-  | trivial
-  | sole
-  | absurd
-  | str
-  | quote
-  | type
-  | not_yet
+import { Ctx } from "../ctx"
+import { Exp } from "../exp"
+
+export type Value = {
+  readback(ctx: Ctx, t: Value): Exp | undefined
+}
 
 export type pi = PiValue
 export const pi = (arg_t: Value, ret_t_cl: Closure.Closure): pi =>
