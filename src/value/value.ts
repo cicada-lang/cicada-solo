@@ -11,6 +11,7 @@ import { StrValue } from "../core/str-value"
 import { NatValue } from "../core/nat-value"
 import { SigmaValue } from "../core/sigma-value"
 import { SameValue } from "../core/same-value"
+import { ZeroValue } from "../core/zero-value"
 
 export type Value =
   | pi
@@ -64,13 +65,8 @@ export const cons = (car: Value, cdr: Value): cons => ({
 export type nat = NatValue
 export const nat: nat = new NatValue()
 
-type zero = {
-  kind: "Value.zero"
-}
-
-export const zero: zero = {
-  kind: "Value.zero",
-}
+type zero = ZeroValue
+export const zero: zero = new ZeroValue()
 
 type add1 = {
   kind: "Value.add1"

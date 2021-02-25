@@ -1,8 +1,7 @@
 # cicada
 
-- zero -- value
-- quote -- value
 - add1 -- value
+- quote -- value
 - cons -- value
 - fn -- value
 
