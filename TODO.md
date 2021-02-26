@@ -1,7 +1,5 @@
 # cicada
 
-- ap -- neutral
-
 - car -- neutral
 - cdr -- neutral
 

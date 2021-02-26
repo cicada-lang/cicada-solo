@@ -19,10 +19,7 @@ export function readback_neutral(
       return neutral.readback_neutral(ctx)
     }
     case "Neutral.ap": {
-      return new Ap(
-        Readback.readback_neutral(ctx, neutral.target),
-        neutral.arg.readback_normal(ctx)
-      )
+      return neutral.readback_neutral(ctx)
     }
     case "Neutral.car": {
       return new Car(Readback.readback_neutral(ctx, neutral.target))

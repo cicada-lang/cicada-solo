@@ -6,6 +6,7 @@ export * from "./pi-value"
 export * from "./fn"
 export * from "./fn-value"
 export * from "./ap"
+export * from "./ap-neutral"
 
 export * from "./sigma"
 export * from "./sigma-value"
