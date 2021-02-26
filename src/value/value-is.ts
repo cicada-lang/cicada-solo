@@ -65,9 +65,9 @@ export function is_equal(ctx: Ctx.Ctx, value: Value.Value): Value.equal {
   }
 }
 
-export function is_absurd(ctx: Ctx.Ctx, value: Value.Value): Value.absurd {
+export function is_absurd(ctx: Ctx.Ctx, value: Value.Value): AbsurdValue {
   if (value instanceof AbsurdValue) {
-    return value as Value.absurd
+    return value as AbsurdValue
   } else {
     throw new Trace.Trace(
       Value.unexpected(ctx, value, {

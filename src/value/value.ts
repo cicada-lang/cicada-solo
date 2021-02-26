@@ -9,7 +9,6 @@ export type Value = {
 import * as Closure from "./closure"
 import * as Neutral from "../neutral"
 
-import { AbsurdValue } from "../core/absurd-value"
 import { PiValue } from "../core/pi-value"
 import { TrivialValue } from "../core/trivial-value"
 import { SoleValue } from "../core/sole-value"
@@ -60,9 +59,6 @@ export const trivial: trivial = new TrivialValue()
 
 type sole = SoleValue
 export const sole: sole = new SoleValue()
-
-export type absurd = AbsurdValue
-export const absurd: absurd = new AbsurdValue()
 
 export type str = StrValue
 export const str: str = new StrValue()

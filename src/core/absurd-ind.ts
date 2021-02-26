@@ -30,7 +30,7 @@ export class AbsurdInd implements Exp {
     //   but a element of type.
     // NOTE We should always infer target,
     //   but we do a simple check for the simple absurd.
-    check(ctx, this.target, Value.absurd)
+    check(ctx, this.target, new AbsurdValue())
     check(ctx, this.motive, new TypeValue())
     const motive_value = evaluate(ctx.to_env(), this.motive)
     return motive_value
