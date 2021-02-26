@@ -53,9 +53,9 @@ export function is_nat(ctx: Ctx.Ctx, value: Value.Value): NatValue {
   }
 }
 
-export function is_equal(ctx: Ctx.Ctx, value: Value.Value): Value.equal {
+export function is_equal(ctx: Ctx.Ctx, value: Value.Value): EqualValue {
   if (value instanceof EqualValue) {
-    return value as Value.equal
+    return value as EqualValue
   } else {
     throw new Trace.Trace(
       Value.unexpected(ctx, value, {

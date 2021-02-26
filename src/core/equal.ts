@@ -5,6 +5,7 @@ import { evaluate } from "../evaluate"
 import { check } from "../check"
 import * as Value from "../value"
 import { TypeValue } from "../core"
+import { EqualValue } from "../core"
 
 export class Equal implements Exp {
   t: Exp
@@ -18,7 +19,7 @@ export class Equal implements Exp {
   }
 
   evaluate(env: Env): Value.Value {
-    return Value.equal(
+    return new EqualValue(
       evaluate(env, this.t),
       evaluate(env, this.from),
       evaluate(env, this.to)
