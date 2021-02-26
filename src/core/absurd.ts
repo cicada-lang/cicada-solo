@@ -3,14 +3,14 @@ import { Ctx } from "../ctx"
 import { Exp, AlphaCtx } from "../exp"
 import { TypeValue } from "../core"
 import { AbsurdValue } from "../core"
-import * as Value from "../value"
+import { Value } from "../value"
 
 export class Absurd implements Exp {
-  evaluate(env: Env): Value.Value {
+  evaluate(env: Env): Value {
     return new AbsurdValue()
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     return new TypeValue()
   }
 

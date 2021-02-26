@@ -3,11 +3,10 @@ import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import * as Value from "../value"
+import { Value } from "../value"
 import * as Explain from "../explain"
 import { Normal } from "../normal"
-import * as Neutral from "../neutral"
-import * as Trace from "../trace"
+import { Trace } from "../trace"
 import { NotYetValue } from "../core"
 import { AbsurdValue, AbsurdIndNeutral } from "../core"
 import { TypeValue } from "../core"
@@ -21,11 +20,14 @@ export class AbsurdInd implements Exp {
     this.motive = motive
   }
 
-  evaluate(env: Env): Value.Value {
-    return AbsurdInd.apply(evaluate(env, this.target), evaluate(env, this.motive))
+  evaluate(env: Env): Value {
+    return AbsurdInd.apply(
+      evaluate(env, this.target),
+      evaluate(env, this.motive)
+    )
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     // NOTE the `motive` here is not a function from target_t to type,
     //   but a element of type.
     // NOTE We should always infer target,
@@ -46,7 +48,7 @@ export class AbsurdInd implements Exp {
     )})`
   }
 
-  static apply(target: Value.Value, motive: Value.Value): Value.Value {
+  static apply(target: Value, motive: Value): Value {
     if (target instanceof NotYetValue) {
       if (target.t instanceof AbsurdValue) {
         return new NotYetValue(
@@ -57,7 +59,7 @@ export class AbsurdInd implements Exp {
           )
         )
       } else {
-        throw new Trace.Trace(
+        throw new Trace(
           Explain.explain_elim_target_type_mismatch({
             elim: "absurd_ind",
             expecting: ["Value.absurd"],
@@ -66,7 +68,7 @@ export class AbsurdInd implements Exp {
         )
       }
     } else {
-      throw new Trace.Trace(
+      throw new Trace(
         Explain.explain_elim_target_mismatch({
           elim: "absurd_ind",
           expecting: ["new NotYetValue"],

@@ -3,7 +3,7 @@ import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
-import * as Value from "../value"
+import { Value } from "../value"
 import { nat_to_number } from "./nat-util"
 import { NatValue, Add1Value } from "../core"
 
@@ -14,11 +14,11 @@ export class Add1 implements Exp {
     this.prev = prev
   }
 
-  evaluate(env: Env): Value.Value {
+  evaluate(env: Env): Value {
     return new Add1Value(evaluate(env, this.prev))
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     check(ctx, this.prev, new NatValue())
     return new NatValue()
   }
