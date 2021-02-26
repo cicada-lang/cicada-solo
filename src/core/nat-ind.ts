@@ -72,7 +72,7 @@ export class NatInd implements Exp {
     } else if (target instanceof Add1Value) {
       return Ap.apply(
         Ap.apply(step, target.prev),
-        do_nat_ind(target.prev, motive, base, step)
+        NatInd.apply(target.prev, motive, base, step)
       )
     } else if (target instanceof NotYetValue) {
       if (target.t instanceof NatValue) {
