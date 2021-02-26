@@ -12,12 +12,10 @@ import { do_ap } from "./ap"
 import { Type } from "./type"
 import { Nat } from "./nat"
 import { Pi } from "./pi"
-import { nat_ind_step_t } from "./nat-util"
-import { NotYetValue } from "./not-yet-value"
-import { NatValue } from "./nat-value"
-import { ZeroValue } from "./zero-value"
-import { Add1Value } from "./add1-value"
+import { NatValue, ZeroValue, Add1Value } from "../core"
 import { PiValue } from "../core"
+import { NotYetValue } from "../core"
+import { nat_ind_step_t } from "./nat-util"
 
 export class NatInd implements Exp {
   target: Exp
