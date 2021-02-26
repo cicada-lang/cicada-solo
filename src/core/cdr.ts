@@ -7,7 +7,7 @@ import * as Value from "../value"
 import * as Explain from "../explain"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
-import { do_car } from "./car"
+import { Car } from "../core"
 import { NotYetValue } from "./not-yet-value"
 import { SigmaValue } from "./sigma-value"
 import { ConsValue } from "./cons-value"
@@ -26,7 +26,7 @@ export class Cdr implements Exp {
   infer(ctx: Ctx): Value.Value {
     const target_t = infer(ctx, this.target)
     const sigma = Value.is_sigma(ctx, target_t)
-    const car = do_car(evaluate(ctx.to_env(), this.target))
+    const car = Car.apply(evaluate(ctx.to_env(), this.target))
     return Value.Closure.apply(sigma.cdr_t_cl, car)
   }
 
@@ -45,7 +45,7 @@ export function do_cdr(target: Value.Value): Value.Value {
   } else if (target instanceof NotYetValue) {
     if (target.t instanceof SigmaValue) {
       return new NotYetValue(
-        Value.Closure.apply(target.t.cdr_t_cl, do_car(target)),
+        Value.Closure.apply(target.t.cdr_t_cl, Car.apply(target)),
         Neutral.cdr(target.neutral)
       )
     } else {

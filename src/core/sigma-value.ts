@@ -8,7 +8,7 @@ import * as ut from "../ut"
 import { TypeValue } from "./type-value"
 import { Sigma } from "./sigma"
 import { Cons } from "./cons"
-import { do_car } from "./car"
+import { Car } from "../core"
 import { do_cdr } from "./cdr"
 import { NotYetValue } from "../core"
 
@@ -43,7 +43,7 @@ export class SigmaValue {
     //   Every value with a pair type,
     //   whether it is neutral or not,
     //   is read back with cons at the top.
-    const car = do_car(value)
+    const car = Car.apply(value)
     const cdr = do_cdr(value)
     return new Cons(
       readback(ctx, this.car_t, car),

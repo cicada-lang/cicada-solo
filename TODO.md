@@ -1,9 +1,7 @@
 # cicada
 
-- `do_ap` as `Ap.apply`
-
-- `do_car` as `Car.apply`
 - `do_cdr` as `Cdr.apply`
+- `do_ap` as `Ap.apply`
 
 - [refactoring] `Neutral`
 

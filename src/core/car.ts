@@ -19,7 +19,7 @@ export class Car implements Exp {
   }
 
   evaluate(env: Env): Value.Value {
-    return do_car(evaluate(env, this.target))
+    return Car.apply(evaluate(env, this.target))
   }
 
   infer(ctx: Ctx): Value.Value {
@@ -35,30 +35,30 @@ export class Car implements Exp {
   alpha_repr(ctx: AlphaCtx): string {
     return `car(${this.target.alpha_repr(ctx)})`
   }
-}
 
-export function do_car(target: Value.Value): Value.Value {
-  if (target instanceof ConsValue) {
-    return target.car
-  } else if (target instanceof NotYetValue) {
-    if (target.t instanceof SigmaValue) {
-      return new NotYetValue(target.t.car_t, Neutral.car(target.neutral))
+  static apply(target: Value.Value): Value.Value {
+    if (target instanceof ConsValue) {
+      return target.car
+    } else if (target instanceof NotYetValue) {
+      if (target.t instanceof SigmaValue) {
+        return new NotYetValue(target.t.car_t, Neutral.car(target.neutral))
+      } else {
+        throw new Trace.Trace(
+          Explain.explain_elim_target_type_mismatch({
+            elim: "car",
+            expecting: ["Value.sigma"],
+            reality: target.t.constructor.name,
+          })
+        )
+      }
     } else {
       throw new Trace.Trace(
-        Explain.explain_elim_target_type_mismatch({
+        Explain.explain_elim_target_mismatch({
           elim: "car",
-          expecting: ["Value.sigma"],
-          reality: target.t.constructor.name,
+          expecting: ["Value.cons", "new NotYetValue"],
+          reality: target.constructor.name,
         })
       )
     }
-  } else {
-    throw new Trace.Trace(
-      Explain.explain_elim_target_mismatch({
-        elim: "car",
-        expecting: ["Value.cons", "new NotYetValue"],
-        reality: target.constructor.name,
-      })
-    )
   }
 }

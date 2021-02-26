@@ -5,7 +5,7 @@ import * as Neutral from "../neutral"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as ut from "../ut"
-import { do_car } from "../core/car"
+
 import { do_cdr } from "../core/cdr"
 import { do_ap } from "../core/ap"
 import { Var } from "../core"

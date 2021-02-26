@@ -7,7 +7,7 @@ import * as Env from "../env"
 import * as Ctx from "../ctx"
 import * as Trace from "../trace"
 import * as ut from "../ut"
-import { do_car } from "../core/car"
+
 import { do_ap } from "../core/ap"
 
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {

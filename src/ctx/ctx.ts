@@ -1,11 +1,11 @@
 import { Env } from "../env"
 import * as Neutral from "../neutral"
-import * as Value from "../value"
+import { Value } from "../value"
 import { NotYetValue } from "../core"
 
 export type CtxEntry = {
-  t: Value.Value
-  value?: Value.Value
+  t: Value
+  value?: Value
 }
 
 export class Ctx {
@@ -19,11 +19,11 @@ export class Ctx {
     return Array.from(this.entries.keys())
   }
 
-  extend(name: string, t: Value.Value, value?: Value.Value): Ctx {
+  extend(name: string, t: Value, value?: Value): Ctx {
     return new Ctx(new Map([...this.entries, [name, { t, value }]]))
   }
 
-  lookup(name: string): undefined | Value.Value {
+  lookup(name: string): undefined | Value {
     const entry = this.entries.get(name)
     if (entry !== undefined) {
       return entry.t

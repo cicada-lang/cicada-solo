@@ -49,6 +49,6 @@ Exp.infer(ctx, Exp.car(target)) = {
 Exp.infer(ctx, Exp.cdr(target)) = {
   Value.sigma(car_t, cdr_t_cl) = Exp.infer(ctx, target)
   target_value = Exp.evaluate(ctx.to_env(), target)
-  car_value = Exp.do_car(target_value)
+  car_value = Exp.Car.apply(target_value)
   Closure.apply(cdr_t_cl, car_value)
 }
