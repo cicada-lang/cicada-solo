@@ -46,10 +46,7 @@ export function readback_neutral(
       )
     }
     case "Neutral.absurd_ind": {
-      return new AbsurdInd(
-        Readback.readback_neutral(ctx, neutral.target),
-        neutral.motive.readback_normal(ctx)
-      )
+      return neutral.readback_neutral(ctx)
     }
   }
 }

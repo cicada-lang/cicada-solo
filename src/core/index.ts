@@ -31,6 +31,7 @@ export * from "./replace"
 export * from "./absurd"
 export * from "./absurd-value"
 export * from "./absurd-ind"
+export * from "./absurd-ind-neutral"
 
 export * from "./trivial"
 export * from "./trivial-value"

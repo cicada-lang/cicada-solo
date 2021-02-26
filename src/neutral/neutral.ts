@@ -1,6 +1,7 @@
 import { Normal } from "../normal"
 
 import { VarNeutral } from "../core"
+import { AbsurdIndNeutral } from "../core"
 
 export type Neutral = v | ap | car | cdr | nat_ind | replace | absurd_ind
 
@@ -78,14 +79,6 @@ export const replace = (
   base,
 })
 
-type absurd_ind = {
-  kind: "Neutral.absurd_ind"
-  target: Neutral
-  motive: Normal
-}
-
-export const absurd_ind = (target: Neutral, motive: Normal): absurd_ind => ({
-  kind: "Neutral.absurd_ind",
-  target,
-  motive,
-})
+type absurd_ind = AbsurdIndNeutral
+export const absurd_ind = (target: Neutral, motive: Normal): absurd_ind =>
+  new AbsurdIndNeutral(target, motive)

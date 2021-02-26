@@ -1,9 +1,5 @@
 # cicada
 
-- [refactoring] `Neutral`
-
-- absurd-ind -- neutral
-
 - ap -- neutral
 
 - car -- neutral
