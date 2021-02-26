@@ -77,9 +77,9 @@ export function is_absurd(ctx: Ctx.Ctx, value: Value.Value): AbsurdValue {
   }
 }
 
-export function is_trivial(ctx: Ctx.Ctx, value: Value.Value): Value.trivial {
+export function is_trivial(ctx: Ctx.Ctx, value: Value.Value): TrivialValue {
   if (value instanceof TrivialValue) {
-    return value as Value.trivial
+    return value as TrivialValue
   } else {
     throw new Trace.Trace(
       Value.unexpected(ctx, value, {

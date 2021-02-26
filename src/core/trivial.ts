@@ -1,15 +1,16 @@
 import { Exp, AlphaCtx } from "../exp"
+import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { TypeValue } from "../core"
-import * as Value from "../value"
+import { TrivialValue } from "../core"
 
 export class Trivial implements Exp {
-  evaluate(env: Env): Value.Value {
-    return Value.trivial
+  evaluate(env: Env): Value {
+    return new TrivialValue()
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     return new TypeValue()
   }
 

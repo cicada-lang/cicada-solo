@@ -10,7 +10,6 @@ import * as Closure from "./closure"
 import * as Neutral from "../neutral"
 
 import { PiValue } from "../core/pi-value"
-import { TrivialValue } from "../core/trivial-value"
 import { SoleValue } from "../core/sole-value"
 import { EqualValue } from "../core/equal-value"
 import { StrValue } from "../core/str-value"
@@ -49,9 +48,6 @@ export const equal = (t: Value, from: Value, to: Value): equal =>
 
 type same = SameValue
 export const same: same = new SameValue()
-
-export type trivial = TrivialValue
-export const trivial: trivial = new TrivialValue()
 
 type sole = SoleValue
 export const sole: sole = new SoleValue()

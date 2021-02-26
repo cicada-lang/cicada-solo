@@ -2,6 +2,7 @@ import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import * as Value from "../value"
+import { TrivialValue } from "../core"
 
 export class Sole implements Exp {
   evaluate(env: Env): Value.Value {
@@ -9,7 +10,7 @@ export class Sole implements Exp {
   }
 
   infer(ctx: Ctx): Value.Value {
-    return Value.trivial
+    return new TrivialValue()
   }
 
   repr(): string {
