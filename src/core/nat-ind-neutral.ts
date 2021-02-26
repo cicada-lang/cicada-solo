@@ -5,7 +5,6 @@ import { Ctx } from "../ctx"
 import { NatInd } from "../core"
 
 export class NatIndNeutral {
-  kind: "Neutral.nat_ind" = "Neutral.nat_ind"
   target: Neutral
   motive: Normal
   base: Normal

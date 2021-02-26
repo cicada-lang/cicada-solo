@@ -1,7 +1,5 @@
 # cicada
 
-- neutral no kind
-
 - [refactoring] clear deps
 
 - [pie] `List`

@@ -5,7 +5,6 @@ import { Ctx } from "../ctx"
 import { Cdr } from "../core"
 
 export class CdrNeutral {
-  kind: "Neutral.cdr" = "Neutral.cdr"
   target: Neutral
 
   constructor(target: Neutral) {

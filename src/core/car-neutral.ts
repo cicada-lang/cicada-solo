@@ -5,7 +5,6 @@ import { Ctx } from "../ctx"
 import { Car } from "../core"
 
 export class CarNeutral {
-  kind: "Neutral.car" = "Neutral.car"
   target: Neutral
 
   constructor(target: Neutral) {

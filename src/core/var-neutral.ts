@@ -4,7 +4,6 @@ import { Ctx } from "../ctx"
 import { Var } from "../core"
 
 export class VarNeutral {
-  kind: "Neutral.v" = "Neutral.v"
   name: string
 
   constructor(name: string) {

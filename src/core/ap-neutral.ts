@@ -5,7 +5,6 @@ import { Ctx } from "../ctx"
 import { Ap } from "../core"
 
 export class ApNeutral {
-  kind: "Neutral.ap" = "Neutral.ap"
   target: Neutral
   arg: Normal
 

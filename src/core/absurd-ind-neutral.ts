@@ -5,7 +5,6 @@ import { Ctx } from "../ctx"
 import { AbsurdInd } from "../core"
 
 export class AbsurdIndNeutral {
-  kind: "Neutral.absurd_ind" = "Neutral.absurd_ind"
   target: Neutral
   motive: Normal
 

@@ -5,7 +5,6 @@ import { Ctx } from "../ctx"
 import { Replace } from "../core"
 
 export class ReplaceNeutral {
-  kind: "Neutral.replace" = "Neutral.replace"
   target: Neutral
   motive: Normal
   base: Normal
