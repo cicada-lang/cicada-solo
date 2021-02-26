@@ -9,9 +9,8 @@ import * as Value from "../value"
 import { Normal } from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
-import { NotYetValue } from "./not-yet-value"
-import { FnValue } from "./fn-value"
-import { PiValue } from "./pi-value"
+import { NotYetValue } from "../core"
+import { FnValue, PiValue, ApNeutral } from "../core"
 
 export class Ap implements Exp {
   target: Exp
@@ -49,7 +48,7 @@ export class Ap implements Exp {
       if (target.t instanceof PiValue) {
         return new NotYetValue(
           Value.Closure.apply(target.t.ret_t_cl, arg),
-          Neutral.ap(target.neutral, new Normal(target.t.arg_t, arg))
+          new ApNeutral(target.neutral, new Normal(target.t.arg_t, arg))
         )
       } else {
         throw new Trace.Trace(
