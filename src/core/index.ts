@@ -24,7 +24,7 @@ export * from "./zero-value"
 export * from "./add1"
 export * from "./add1-value"
 export * from "./nat-ind"
-// export * from "./nat-ind-neutral"
+export * from "./nat-ind-neutral"
 
 export * from "./equal"
 export * from "./equal-value"

@@ -4,6 +4,7 @@ import { VarNeutral } from "../core"
 import { ApNeutral } from "../core"
 import { CarNeutral } from "../core"
 import { CdrNeutral } from "../core"
+import { NatIndNeutral } from "../core"
 import { AbsurdIndNeutral } from "../core"
 
 export type Neutral = v | ap | car | cdr | nat_ind | replace | absurd_ind
@@ -21,26 +22,14 @@ export const car = (target: Neutral): car => new CarNeutral(target)
 type cdr = CdrNeutral
 export const cdr = (target: Neutral): cdr => new CdrNeutral(target)
 
-type nat_ind = {
-  kind: "Neutral.nat_ind"
-  target: Neutral
-  motive: Normal
-  base: Normal
-  step: Normal
-}
+type nat_ind = NatIndNeutral
 
 export const nat_ind = (
   target: Neutral,
   motive: Normal,
   base: Normal,
   step: Normal
-): nat_ind => ({
-  kind: "Neutral.nat_ind",
-  target,
-  motive,
-  base,
-  step,
-})
+): nat_ind => new NatIndNeutral(target, motive, base, step)
 
 type replace = {
   kind: "Neutral.replace"

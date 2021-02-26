@@ -28,12 +28,7 @@ export function readback_neutral(
       return neutral.readback_neutral(ctx)
     }
     case "Neutral.nat_ind": {
-      return new NatInd(
-        Readback.readback_neutral(ctx, neutral.target),
-        neutral.motive.readback_normal(ctx),
-        neutral.base.readback_normal(ctx),
-        neutral.step.readback_normal(ctx)
-      )
+      return neutral.readback_neutral(ctx)
     }
     case "Neutral.replace": {
       return new Replace(

@@ -1,6 +1,5 @@
 # cicada
 
-- nat-ind -- neutral
 - replace -- neutral
 
 - neutral no kind
