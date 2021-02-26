@@ -5,7 +5,7 @@ import { evaluate } from "../evaluate"
 import { check } from "../check"
 import * as Explain from "../explain"
 import * as Value from "../value"
-import * as Normal from "../normal"
+import { Normal } from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 
@@ -88,9 +88,9 @@ export function do_nat_ind(
         Ap.apply(motive, target),
         Neutral.nat_ind(
           target.neutral,
-          new Normal.Normal(motive_t, motive),
-          new Normal.Normal(base_t, base),
-          new Normal.Normal(step_t, step)
+          new Normal(motive_t, motive),
+          new Normal(base_t, base),
+          new Normal(step_t, step)
         )
       )
     } else {

@@ -6,7 +6,7 @@ import { check } from "../check"
 import { infer } from "../infer"
 import * as Explain from "../explain"
 import * as Value from "../value"
-import * as Normal from "../normal"
+import { Normal } from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 import { Ap } from "../core"
@@ -77,8 +77,8 @@ export function do_replace(
         Ap.apply(motive, target.t.to),
         Neutral.replace(
           target.neutral,
-          new Normal.Normal(motive_t, motive),
-          new Normal.Normal(base_t, base)
+          new Normal(motive_t, motive),
+          new Normal(base_t, base)
         )
       )
     } else {

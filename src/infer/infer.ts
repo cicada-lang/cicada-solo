@@ -8,8 +8,6 @@ import * as Ctx from "../ctx"
 import * as Trace from "../trace"
 import * as ut from "../ut"
 
-
-
 export function infer(ctx: Ctx.Ctx, exp: Exp.Exp): Value.Value {
   try {
     if (exp.infer) {

@@ -6,7 +6,7 @@ import { infer } from "../infer"
 import { check } from "../check"
 import * as Explain from "../explain"
 import * as Value from "../value"
-import * as Normal from "../normal"
+import { Normal } from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 import { NotYetValue } from "./not-yet-value"
@@ -49,7 +49,7 @@ export class Ap implements Exp {
       if (target.t instanceof PiValue) {
         return new NotYetValue(
           Value.Closure.apply(target.t.ret_t_cl, arg),
-          Neutral.ap(target.neutral, new Normal.Normal(target.t.arg_t, arg))
+          Neutral.ap(target.neutral, new Normal(target.t.arg_t, arg))
         )
       } else {
         throw new Trace.Trace(

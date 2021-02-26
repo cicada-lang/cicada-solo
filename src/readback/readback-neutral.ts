@@ -1,6 +1,6 @@
 import * as Readback from "../readback"
 import * as Neutral from "../neutral"
-import * as Normal from "../normal"
+import { Normal } from "../normal"
 import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import { Var } from "../core"

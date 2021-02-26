@@ -1,4 +1,4 @@
-import * as Normal from "../normal"
+import { Normal } from "../normal"
 
 export type Neutral = v | ap | car | cdr | nat_ind | replace | absurd_ind
 
@@ -15,10 +15,10 @@ export const v = (name: string): v => ({
 type ap = {
   kind: "Neutral.ap"
   target: Neutral
-  arg: Normal.Normal
+  arg: Normal
 }
 
-export const ap = (target: Neutral, arg: Normal.Normal): ap => ({
+export const ap = (target: Neutral, arg: Normal): ap => ({
   kind: "Neutral.ap",
   target,
   arg,
@@ -47,16 +47,16 @@ export const cdr = (target: Neutral): cdr => ({
 type nat_ind = {
   kind: "Neutral.nat_ind"
   target: Neutral
-  motive: Normal.Normal
-  base: Normal.Normal
-  step: Normal.Normal
+  motive: Normal
+  base: Normal
+  step: Normal
 }
 
 export const nat_ind = (
   target: Neutral,
-  motive: Normal.Normal,
-  base: Normal.Normal,
-  step: Normal.Normal
+  motive: Normal,
+  base: Normal,
+  step: Normal
 ): nat_ind => ({
   kind: "Neutral.nat_ind",
   target,
@@ -68,14 +68,14 @@ export const nat_ind = (
 type replace = {
   kind: "Neutral.replace"
   target: Neutral
-  motive: Normal.Normal
-  base: Normal.Normal
+  motive: Normal
+  base: Normal
 }
 
 export const replace = (
   target: Neutral,
-  motive: Normal.Normal,
-  base: Normal.Normal
+  motive: Normal,
+  base: Normal
 ): replace => ({
   kind: "Neutral.replace",
   target,
@@ -86,13 +86,10 @@ export const replace = (
 type absurd_ind = {
   kind: "Neutral.absurd_ind"
   target: Neutral
-  motive: Normal.Normal
+  motive: Normal
 }
 
-export const absurd_ind = (
-  target: Neutral,
-  motive: Normal.Normal
-): absurd_ind => ({
+export const absurd_ind = (target: Neutral, motive: Normal): absurd_ind => ({
   kind: "Neutral.absurd_ind",
   target,
   motive,

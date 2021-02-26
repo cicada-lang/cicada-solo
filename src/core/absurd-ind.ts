@@ -5,7 +5,7 @@ import { Ctx } from "../ctx"
 import { Env } from "../env"
 import * as Value from "../value"
 import * as Explain from "../explain"
-import * as Normal from "../normal"
+import { Normal } from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 import { NotYetValue } from "../core"
@@ -55,10 +55,7 @@ export function do_absurd_ind(
     if (target.t instanceof AbsurdValue) {
       return new NotYetValue(
         motive,
-        Neutral.absurd_ind(
-          target.neutral,
-          new Normal.Normal(new TypeValue(), motive)
-        )
+        Neutral.absurd_ind(target.neutral, new Normal(new TypeValue(), motive))
       )
     } else {
       throw new Trace.Trace(

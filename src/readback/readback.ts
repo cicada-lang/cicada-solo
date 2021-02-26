@@ -6,8 +6,6 @@ import * as Exp from "../exp"
 import * as Ctx from "../ctx"
 import * as ut from "../ut"
 
-
-
 import { Var } from "../core"
 import { Pi, Fn } from "../core"
 import { Sigma, Cons } from "../core"
