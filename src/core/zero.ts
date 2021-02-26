@@ -2,11 +2,11 @@ import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import * as Value from "../value"
-import { NatValue } from "../core"
+import { NatValue, ZeroValue } from "../core"
 
 export class Zero implements Exp {
   evaluate(env: Env): Value.Value {
-    return Value.zero
+    return new ZeroValue()
   }
 
   infer(ctx: Ctx): Value.Value {

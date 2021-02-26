@@ -47,7 +47,7 @@ export class NatInd implements Exp {
     const motive_t = evaluate(new Env(), new Pi("x", new Nat(), new Type()))
     check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), this.motive)
-    check(ctx, this.base, do_ap(motive_value, Value.zero))
+    check(ctx, this.base, do_ap(motive_value, new ZeroValue()))
     check(ctx, this.step, nat_ind_step_t(motive_value))
     const target_value = evaluate(ctx.to_env(), this.target)
     return do_ap(motive_value, target_value)
@@ -83,7 +83,7 @@ export function do_nat_ind(
         new NatValue(),
         Value.Closure.create(new Env(), "k", new Type())
       )
-      const base_t = do_ap(motive, Value.zero)
+      const base_t = do_ap(motive, new ZeroValue())
       const step_t = nat_ind_step_t(motive)
       return Value.not_yet(
         do_ap(motive, target),
