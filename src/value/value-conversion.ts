@@ -1,16 +1,8 @@
-import * as Value from "../value"
-import * as Exp from "../exp"
-import * as Ctx from "../ctx"
-import * as Readback from "../readback"
+import { Value } from "../value"
+import { Ctx } from "../ctx"
+import { equivalent } from "../exp"
+import { readback } from "../readback"
 
-export function conversion(
-  ctx: Ctx.Ctx,
-  t: Value.Value,
-  x: Value.Value,
-  y: Value.Value
-): boolean {
-  return Exp.equivalent(
-    Readback.readback(ctx, t, x),
-    Readback.readback(ctx, t, y)
-  )
+export function conversion(ctx: Ctx, t: Value, x: Value, y: Value): boolean {
+  return equivalent(readback(ctx, t, x), readback(ctx, t, y))
 }
