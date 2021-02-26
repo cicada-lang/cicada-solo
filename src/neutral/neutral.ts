@@ -1,17 +1,18 @@
+import { Exp } from "../exp"
+import { Ctx } from "../ctx"
+
+export type Neutral = {
+  readback_neutral(ctx: Ctx): Exp
+}
+
 import { Normal } from "../normal"
 
-import { VarNeutral } from "../core"
 import { ApNeutral } from "../core"
 import { CarNeutral } from "../core"
 import { CdrNeutral } from "../core"
 import { NatIndNeutral } from "../core"
 import { ReplaceNeutral } from "../core"
 import { AbsurdIndNeutral } from "../core"
-
-export type Neutral = v | ap | car | cdr | nat_ind | replace | absurd_ind
-
-type v = VarNeutral
-export const v = (name: string): v => new VarNeutral(name)
 
 type ap = ApNeutral
 export const ap = (target: Neutral, arg: Normal): ap =>

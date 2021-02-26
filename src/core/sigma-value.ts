@@ -9,6 +9,7 @@ import { TypeValue } from "../core"
 import { Sigma } from "../core"
 import { Cons, Car, Cdr } from "../core"
 import { NotYetValue } from "../core"
+import { VarNeutral } from "../core"
 
 export class SigmaValue {
   car_t: Value.Value
@@ -25,7 +26,7 @@ export class SigmaValue {
         new Set(ctx.names()),
         this.cdr_t_cl.name
       )
-      const variable = new NotYetValue(this.car_t, Neutral.v(fresh_name))
+      const variable = new NotYetValue(this.car_t, new VarNeutral(fresh_name))
       const car_t = readback(ctx, new TypeValue(), this.car_t)
       const cdr_t = readback(
         ctx.extend(fresh_name, this.car_t),

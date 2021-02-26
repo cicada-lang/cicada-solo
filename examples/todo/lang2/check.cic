@@ -22,7 +22,7 @@
   ------------------------------------------------------- fn_pi
   Check(Map.extend(ctx, name, arg_t), ret, ret_t)
   @where {
-    arg = new NotYetValue(arg_t, Neutral.v(name))
+    arg = new NotYetValue(arg_t, new VarNeutral(name))
     ret_t = Closure.apply(ret_t_cl, arg)
   }
 
@@ -74,7 +74,7 @@
   --------------------------------- cdr
   Check(ctx, target, Value.sigma(car_t, cdr_t_cl))
   @where {
-    car = new NotYetValue(car_t, Neutral.v(name))
+    car = new NotYetValue(car_t, new VarNeutral(name))
     cdr_t = Closure.apply(cdr_t_cl, car)
   }
 
