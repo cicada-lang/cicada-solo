@@ -20,7 +20,7 @@ export class Cdr implements Exp {
   }
 
   evaluate(env: Env): Value.Value {
-    return do_cdr(evaluate(env, this.target))
+    return Cdr.apply(evaluate(env, this.target))
   }
 
   infer(ctx: Ctx): Value.Value {
@@ -37,33 +37,34 @@ export class Cdr implements Exp {
   alpha_repr(ctx: AlphaCtx): string {
     return `cdr(${this.target.alpha_repr(ctx)})`
   }
-}
 
-export function do_cdr(target: Value.Value): Value.Value {
-  if (target instanceof ConsValue) {
-    return target.cdr
-  } else if (target instanceof NotYetValue) {
-    if (target.t instanceof SigmaValue) {
-      return new NotYetValue(
-        Value.Closure.apply(target.t.cdr_t_cl, Car.apply(target)),
-        Neutral.cdr(target.neutral)
-      )
+  static apply(target: Value.Value): Value.Value {
+    if (target instanceof ConsValue) {
+      return target.cdr
+    } else if (target instanceof NotYetValue) {
+      if (target.t instanceof SigmaValue) {
+        return new NotYetValue(
+          Value.Closure.apply(target.t.cdr_t_cl, Car.apply(target)),
+          Neutral.cdr(target.neutral)
+        )
+      } else {
+        throw new Trace.Trace(
+          Explain.explain_elim_target_type_mismatch({
+            elim: "cdr",
+            expecting: ["Value.sigma"],
+            reality: target.t.constructor.name,
+          })
+        )
+      }
     } else {
       throw new Trace.Trace(
-        Explain.explain_elim_target_type_mismatch({
+        Explain.explain_elim_target_mismatch({
           elim: "cdr",
-          expecting: ["Value.sigma"],
-          reality: target.t.constructor.name,
+          expecting: ["Value.cons", "new NotYetValue"],
+          reality: target.constructor.name,
         })
       )
     }
-  } else {
-    throw new Trace.Trace(
-      Explain.explain_elim_target_mismatch({
-        elim: "cdr",
-        expecting: ["Value.cons", "new NotYetValue"],
-        reality: target.constructor.name,
-      })
-    )
   }
+
 }

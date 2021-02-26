@@ -5,11 +5,9 @@ import * as Value from "../value"
 import * as Closure from "../value/closure"
 import * as Neutral from "../neutral"
 import * as ut from "../ut"
-import { TypeValue } from "./type-value"
-import { Sigma } from "./sigma"
-import { Cons } from "./cons"
-import { Car } from "../core"
-import { do_cdr } from "./cdr"
+import { TypeValue } from "../core"
+import { Sigma } from "../core"
+import { Cons, Car, Cdr } from "../core"
 import { NotYetValue } from "../core"
 
 export class SigmaValue {
@@ -44,7 +42,7 @@ export class SigmaValue {
     //   whether it is neutral or not,
     //   is read back with cons at the top.
     const car = Car.apply(value)
-    const cdr = do_cdr(value)
+    const cdr = Cdr.apply(value)
     return new Cons(
       readback(ctx, this.car_t, car),
       readback(ctx, Value.Closure.apply(this.cdr_t_cl, car), cdr)

@@ -1,6 +1,5 @@
 # cicada
 
-- `do_cdr` as `Cdr.apply`
 - `do_ap` as `Ap.apply`
 
 - [refactoring] `Neutral`
