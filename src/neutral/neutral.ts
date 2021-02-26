@@ -7,13 +7,9 @@ export type Neutral = {
 
 import { Normal } from "../normal"
 
-import { CdrNeutral } from "../core"
 import { NatIndNeutral } from "../core"
 import { ReplaceNeutral } from "../core"
 import { AbsurdIndNeutral } from "../core"
-
-type cdr = CdrNeutral
-export const cdr = (target: Neutral): cdr => new CdrNeutral(target)
 
 type nat_ind = NatIndNeutral
 export const nat_ind = (

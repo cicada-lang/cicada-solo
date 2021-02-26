@@ -7,10 +7,8 @@ import * as Value from "../value"
 import * as Explain from "../explain"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
-import { Car } from "../core"
-import { NotYetValue } from "./not-yet-value"
-import { SigmaValue } from "./sigma-value"
-import { ConsValue } from "./cons-value"
+import { Car, SigmaValue, ConsValue, CdrNeutral } from "../core"
+import { NotYetValue } from "../core"
 
 export class Cdr implements Exp {
   target: Exp
@@ -45,7 +43,7 @@ export class Cdr implements Exp {
       if (target.t instanceof SigmaValue) {
         return new NotYetValue(
           Value.Closure.apply(target.t.cdr_t_cl, Car.apply(target)),
-          Neutral.cdr(target.neutral)
+          new CdrNeutral(target.neutral)
         )
       } else {
         throw new Trace.Trace(
