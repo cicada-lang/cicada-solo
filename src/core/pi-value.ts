@@ -26,10 +26,10 @@ export class PiValue {
         this.ret_t_cl.name
       )
       const variable = Value.not_yet(this.arg_t, Neutral.v(fresh_name))
-      const arg_t = readback(ctx, Value.type, this.arg_t)
+      const arg_t = readback(ctx, new TypeValue(), this.arg_t)
       const ret_t = readback(
         ctx.extend(fresh_name, this.arg_t),
-        Value.type,
+        new TypeValue(),
         Value.Closure.apply(this.ret_t_cl, variable)
       )
       return new Pi(fresh_name, arg_t, ret_t)

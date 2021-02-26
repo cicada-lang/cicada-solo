@@ -18,8 +18,16 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       if (!Value.conversion(ctx, new TypeValue(), t, u)) {
         throw new Trace.Trace(
           ut.aline(`
-              |I infer the type to be ${readback(ctx, new TypeValue(), u).repr()}.
-              |But the given type is ${readback(ctx, new TypeValue(), t).repr()}.
+              |I infer the type to be ${readback(
+                ctx,
+                new TypeValue(),
+                u
+              ).repr()}.
+              |But the given type is ${readback(
+                ctx,
+                new TypeValue(),
+                t
+              ).repr()}.
               |`)
         )
       }

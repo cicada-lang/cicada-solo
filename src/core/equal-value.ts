@@ -19,7 +19,7 @@ export class EqualValue {
   readback(ctx: Ctx, t: Value.Value): Exp | undefined {
     if (t instanceof TypeValue) {
       return new Equal(
-        readback(ctx, Value.type, this.t),
+        readback(ctx, new TypeValue(), this.t),
         readback(ctx, this.t, this.from),
         readback(ctx, this.t, this.to)
       )

@@ -8,8 +8,9 @@ import * as Explain from "../explain"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
-import { NotYetValue } from "./not-yet-value"
-import { AbsurdValue } from "./absurd-value"
+import { NotYetValue } from "../core"
+import { AbsurdValue } from "../core"
+import { TypeValue } from "../core"
 
 export class AbsurdInd implements Exp {
   target: Exp
@@ -30,7 +31,7 @@ export class AbsurdInd implements Exp {
     // NOTE We should always infer target,
     //   but we do a simple check for the simple absurd.
     check(ctx, this.target, Value.absurd)
-    check(ctx, this.motive, Value.type)
+    check(ctx, this.motive, new TypeValue())
     const motive_value = evaluate(ctx.to_env(), this.motive)
     return motive_value
   }
@@ -54,7 +55,10 @@ export function do_absurd_ind(
     if (target.t instanceof AbsurdValue) {
       return Value.not_yet(
         motive,
-        Neutral.absurd_ind(target.neutral, Normal.create(Value.type, motive))
+        Neutral.absurd_ind(
+          target.neutral,
+          Normal.create(new TypeValue(), motive)
+        )
       )
     } else {
       throw new Trace.Trace(

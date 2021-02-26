@@ -27,10 +27,10 @@ export class SigmaValue {
         this.cdr_t_cl.name
       )
       const variable = Value.not_yet(this.car_t, Neutral.v(fresh_name))
-      const car_t = readback(ctx, Value.type, this.car_t)
+      const car_t = readback(ctx, new TypeValue(), this.car_t)
       const cdr_t = readback(
         ctx.extend(fresh_name, this.car_t),
-        Value.type,
+        new TypeValue(),
         Value.Closure.apply(this.cdr_t_cl, variable)
       )
       return new Sigma(fresh_name, car_t, cdr_t)

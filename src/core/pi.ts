@@ -4,6 +4,7 @@ import { Env } from "../env"
 import * as Value from "../value"
 import { check } from "../check"
 import { evaluate } from "../evaluate"
+import { TypeValue } from "../core"
 
 export class Pi implements Exp {
   name: string
@@ -24,10 +25,10 @@ export class Pi implements Exp {
   }
 
   infer(ctx: Ctx): Value.Value {
-    check(ctx, this.arg_t, Value.type)
+    check(ctx, this.arg_t, new TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), this.arg_t)
-    check(ctx.extend(this.name, arg_t_value), this.ret_t, Value.type)
-    return Value.type
+    check(ctx.extend(this.name, arg_t_value), this.ret_t, new TypeValue())
+    return new TypeValue()
   }
 
   repr(): string {

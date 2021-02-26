@@ -9,7 +9,6 @@ export type Value = {
 import * as Closure from "./closure"
 import * as Neutral from "../neutral"
 
-import { TypeValue } from "../core/type-value"
 import { AbsurdValue } from "../core/absurd-value"
 import { PiValue } from "../core/pi-value"
 import { TrivialValue } from "../core/trivial-value"
@@ -70,9 +69,6 @@ export const str: str = new StrValue()
 
 type quote = QuoteValue
 export const quote = (str: string): quote => new QuoteValue(str)
-
-export type type = TypeValue
-export const type: type = new TypeValue()
 
 type not_yet = NotYetValue
 export const not_yet = (t: Value, neutral: Neutral.Neutral): not_yet =>

@@ -4,6 +4,7 @@ import { Ctx } from "../ctx"
 import * as Value from "../value"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
+import { TypeValue } from "../core"
 
 export class The implements Exp {
   t: Exp
@@ -19,7 +20,7 @@ export class The implements Exp {
   }
 
   infer(ctx: Ctx): Value.Value {
-    check(ctx, this.t, Value.type)
+    check(ctx, this.t, new TypeValue())
     const t_value = evaluate(ctx.to_env(), this.t)
     check(ctx, this.exp, t_value)
     return t_value

@@ -4,6 +4,7 @@ import { Env } from "../env"
 import { check } from "../check"
 import { evaluate } from "../evaluate"
 import * as Value from "../value"
+import { TypeValue } from "../core"
 
 export class Sigma implements Exp {
   name: string
@@ -24,10 +25,10 @@ export class Sigma implements Exp {
   }
 
   infer(ctx: Ctx): Value.Value {
-    check(ctx, this.car_t, Value.type)
+    check(ctx, this.car_t, new TypeValue())
     const car_t_value = evaluate(ctx.to_env(), this.car_t)
-    check(ctx.extend(this.name, car_t_value), this.cdr_t, Value.type)
-    return Value.type
+    check(ctx.extend(this.name, car_t_value), this.cdr_t, new TypeValue())
+    return new TypeValue()
   }
 
   repr(): string {
