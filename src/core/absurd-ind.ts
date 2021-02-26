@@ -22,7 +22,7 @@ export class AbsurdInd implements Exp {
   }
 
   evaluate(env: Env): Value.Value {
-    return do_absurd_ind(evaluate(env, this.target), evaluate(env, this.motive))
+    return AbsurdInd.apply(evaluate(env, this.target), evaluate(env, this.motive))
   }
 
   infer(ctx: Ctx): Value.Value {
@@ -45,37 +45,34 @@ export class AbsurdInd implements Exp {
       ctx
     )})`
   }
-}
 
-export function do_absurd_ind(
-  target: Value.Value,
-  motive: Value.Value
-): Value.Value {
-  if (target instanceof NotYetValue) {
-    if (target.t instanceof AbsurdValue) {
-      return new NotYetValue(
-        motive,
-        new AbsurdIndNeutral(
-          target.neutral,
-          new Normal(new TypeValue(), motive)
+  static apply(target: Value.Value, motive: Value.Value): Value.Value {
+    if (target instanceof NotYetValue) {
+      if (target.t instanceof AbsurdValue) {
+        return new NotYetValue(
+          motive,
+          new AbsurdIndNeutral(
+            target.neutral,
+            new Normal(new TypeValue(), motive)
+          )
         )
-      )
+      } else {
+        throw new Trace.Trace(
+          Explain.explain_elim_target_type_mismatch({
+            elim: "absurd_ind",
+            expecting: ["Value.absurd"],
+            reality: target.t.constructor.name,
+          })
+        )
+      }
     } else {
       throw new Trace.Trace(
-        Explain.explain_elim_target_type_mismatch({
+        Explain.explain_elim_target_mismatch({
           elim: "absurd_ind",
-          expecting: ["Value.absurd"],
-          reality: target.t.constructor.name,
+          expecting: ["new NotYetValue"],
+          reality: target.constructor.name,
         })
       )
     }
-  } else {
-    throw new Trace.Trace(
-      Explain.explain_elim_target_mismatch({
-        elim: "absurd_ind",
-        expecting: ["new NotYetValue"],
-        reality: target.constructor.name,
-      })
-    )
   }
 }
