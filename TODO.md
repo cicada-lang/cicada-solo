@@ -1,7 +1,5 @@
 # cicada
 
-- `NatInd.apply` instead of `do_nat_ind`
-
 - [refactoring] clear deps
 
 - [pie] `List`

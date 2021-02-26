@@ -30,7 +30,7 @@ export class NatInd implements Exp {
   }
 
   evaluate(env: Env): Value.Value {
-    return do_nat_ind(
+    return NatInd.apply(
       evaluate(env, this.target),
       evaluate(env, this.motive),
       evaluate(env, this.base),
@@ -60,54 +60,54 @@ export class NatInd implements Exp {
       ctx
     )}, ${this.base.alpha_repr(ctx)}, ${this.step.alpha_repr(ctx)})`
   }
-}
 
-export function do_nat_ind(
-  target: Value.Value,
-  motive: Value.Value,
-  base: Value.Value,
-  step: Value.Value
-): Value.Value {
-  if (target instanceof ZeroValue) {
-    return base
-  } else if (target instanceof Add1Value) {
-    return Ap.apply(
-      Ap.apply(step, target.prev),
-      do_nat_ind(target.prev, motive, base, step)
-    )
-  } else if (target instanceof NotYetValue) {
-    if (target.t instanceof NatValue) {
-      const motive_t = new PiValue(
-        new NatValue(),
-        Value.Closure.create(new Env(), "k", new Type())
+  static apply(
+    target: Value.Value,
+    motive: Value.Value,
+    base: Value.Value,
+    step: Value.Value
+  ): Value.Value {
+    if (target instanceof ZeroValue) {
+      return base
+    } else if (target instanceof Add1Value) {
+      return Ap.apply(
+        Ap.apply(step, target.prev),
+        do_nat_ind(target.prev, motive, base, step)
       )
-      const base_t = Ap.apply(motive, new ZeroValue())
-      const step_t = nat_ind_step_t(motive)
-      return new NotYetValue(
-        Ap.apply(motive, target),
-        new NatIndNeutral(
-          target.neutral,
-          new Normal(motive_t, motive),
-          new Normal(base_t, base),
-          new Normal(step_t, step)
+    } else if (target instanceof NotYetValue) {
+      if (target.t instanceof NatValue) {
+        const motive_t = new PiValue(
+          new NatValue(),
+          Value.Closure.create(new Env(), "k", new Type())
         )
-      )
+        const base_t = Ap.apply(motive, new ZeroValue())
+        const step_t = nat_ind_step_t(motive)
+        return new NotYetValue(
+          Ap.apply(motive, target),
+          new NatIndNeutral(
+            target.neutral,
+            new Normal(motive_t, motive),
+            new Normal(base_t, base),
+            new Normal(step_t, step)
+          )
+        )
+      } else {
+        throw new Trace.Trace(
+          Explain.explain_elim_target_type_mismatch({
+            elim: "nat_ind",
+            expecting: ["new NatValue()"],
+            reality: target.t.constructor.name,
+          })
+        )
+      }
     } else {
       throw new Trace.Trace(
-        Explain.explain_elim_target_type_mismatch({
+        Explain.explain_elim_target_mismatch({
           elim: "nat_ind",
-          expecting: ["new NatValue()"],
-          reality: target.t.constructor.name,
+          expecting: ["Value.zero", "Value.add1", "new NotYetValue"],
+          reality: target.constructor.name,
         })
       )
     }
-  } else {
-    throw new Trace.Trace(
-      Explain.explain_elim_target_mismatch({
-        elim: "nat_ind",
-        expecting: ["Value.zero", "Value.add1", "new NotYetValue"],
-        reality: target.constructor.name,
-      })
-    )
   }
 }
