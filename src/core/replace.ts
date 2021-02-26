@@ -15,6 +15,7 @@ import { Var } from "../core"
 import { NotYetValue } from "../core"
 import { EqualValue, SameValue } from "../core"
 import { PiValue } from "../core"
+import { ReplaceNeutral } from "../core"
 
 export class Replace implements Exp {
   target: Exp
@@ -73,7 +74,7 @@ export function do_replace(
       const motive_t = new PiValue(target.t.t, closure)
       return new NotYetValue(
         Ap.apply(motive, target.t.to),
-        Neutral.replace(
+        new ReplaceNeutral(
           target.neutral,
           new Normal(motive_t, motive),
           new Normal(base_t, base)
