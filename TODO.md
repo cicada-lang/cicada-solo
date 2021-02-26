@@ -1,5 +1,7 @@
 # cicada
 
+- [refactoring] `Normal`
+
 - [refactoring] `Neutral`
 
 - absurd-ind -- neutral
@@ -13,7 +15,7 @@
 
 - replace -- neutral
 
-- [refactoring] `Normal`
+- [refactoring] clear deps
 
 - [pie] `List`
 - [pie] `Vector`
