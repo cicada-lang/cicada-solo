@@ -7,9 +7,8 @@ import { evaluate } from "../evaluate"
 import * as Explain from "../explain"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
-import { NotYetValue } from "./not-yet-value"
-import { SigmaValue } from "./sigma-value"
-import { ConsValue } from "./cons-value"
+import { NotYetValue } from "../core"
+import { SigmaValue, ConsValue, CarNeutral } from "../core"
 
 export class Car implements Exp {
   target: Exp
@@ -41,7 +40,7 @@ export class Car implements Exp {
       return target.car
     } else if (target instanceof NotYetValue) {
       if (target.t instanceof SigmaValue) {
-        return new NotYetValue(target.t.car_t, Neutral.car(target.neutral))
+        return new NotYetValue(target.t.car_t, new CarNeutral(target.neutral))
       } else {
         throw new Trace.Trace(
           Explain.explain_elim_target_type_mismatch({

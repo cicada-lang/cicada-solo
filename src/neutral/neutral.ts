@@ -7,14 +7,10 @@ export type Neutral = {
 
 import { Normal } from "../normal"
 
-import { CarNeutral } from "../core"
 import { CdrNeutral } from "../core"
 import { NatIndNeutral } from "../core"
 import { ReplaceNeutral } from "../core"
 import { AbsurdIndNeutral } from "../core"
-
-type car = CarNeutral
-export const car = (target: Neutral): car => new CarNeutral(target)
 
 type cdr = CdrNeutral
 export const cdr = (target: Neutral): cdr => new CdrNeutral(target)
