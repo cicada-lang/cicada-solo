@@ -1,16 +1,11 @@
 import { Normal } from "../normal"
 
+import { VarNeutral } from "../core"
+
 export type Neutral = v | ap | car | cdr | nat_ind | replace | absurd_ind
 
-type v = {
-  kind: "Neutral.v"
-  name: string
-}
-
-export const v = (name: string): v => ({
-  kind: "Neutral.v",
-  name,
-})
+type v = VarNeutral
+export const v = (name: string): v => new VarNeutral(name)
 
 type ap = {
   kind: "Neutral.ap"

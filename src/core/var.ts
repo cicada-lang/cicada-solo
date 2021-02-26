@@ -1,9 +1,9 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import * as Value from "../value"
+import { Value } from "../value"
 import * as Explain from "../explain"
-import * as Trace from "../trace"
+import { Trace } from "../trace"
 
 export class Var implements Exp {
   name: string
@@ -12,18 +12,18 @@ export class Var implements Exp {
     this.name = name
   }
 
-  evaluate(env: Env): Value.Value {
+  evaluate(env: Env): Value {
     const result = env.lookup(this.name)
     if (result === undefined) {
-      throw new Trace.Trace(Explain.explain_name_undefined(this.name))
+      throw new Trace(Explain.explain_name_undefined(this.name))
     }
     return result
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     const t = ctx.lookup(this.name)
     if (t === undefined) {
-      throw new Trace.Trace(Explain.explain_name_undefined(this.name))
+      throw new Trace(Explain.explain_name_undefined(this.name))
     }
     return t
   }
