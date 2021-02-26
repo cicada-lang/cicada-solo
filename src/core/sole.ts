@@ -1,15 +1,15 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import * as Value from "../value"
-import { TrivialValue } from "../core"
+import { Value } from "../value"
+import { TrivialValue, SoleValue } from "../core"
 
 export class Sole implements Exp {
-  evaluate(env: Env): Value.Value {
-    return Value.sole
+  evaluate(env: Env): Value {
+    return new SoleValue()
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     return new TrivialValue()
   }
 

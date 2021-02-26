@@ -10,13 +10,11 @@ import * as Closure from "./closure"
 import * as Neutral from "../neutral"
 
 import { PiValue } from "../core/pi-value"
-import { SoleValue } from "../core/sole-value"
 import { EqualValue } from "../core/equal-value"
 import { SigmaValue } from "../core/sigma-value"
 import { SameValue } from "../core/same-value"
 import { ZeroValue } from "../core/zero-value"
 import { Add1Value } from "../core/add1-value"
-import { QuoteValue } from "../core/quote-value"
 import { ConsValue } from "../core/cons-value"
 import { FnValue } from "../core/fn-value"
 import { NotYetValue } from "../core/not-yet-value"
@@ -47,12 +45,6 @@ export const equal = (t: Value, from: Value, to: Value): equal =>
 
 type same = SameValue
 export const same: same = new SameValue()
-
-type sole = SoleValue
-export const sole: sole = new SoleValue()
-
-type quote = QuoteValue
-export const quote = (str: string): quote => new QuoteValue(str)
 
 type not_yet = NotYetValue
 export const not_yet = (t: Value, neutral: Neutral.Neutral): not_yet =>
