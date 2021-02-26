@@ -29,9 +29,9 @@ export function is_pi(ctx: Ctx.Ctx, value: Value.Value): PiValue {
   }
 }
 
-export function is_sigma(ctx: Ctx.Ctx, value: Value.Value): Value.sigma {
+export function is_sigma(ctx: Ctx.Ctx, value: Value.Value): SigmaValue {
   if (value instanceof SigmaValue) {
-    return value as Value.sigma
+    return value as SigmaValue
   } else {
     throw new Trace.Trace(
       Value.unexpected(ctx, value, {

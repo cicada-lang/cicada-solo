@@ -5,6 +5,7 @@ import { check } from "../check"
 import { evaluate } from "../evaluate"
 import * as Value from "../value"
 import { TypeValue } from "../core"
+import { SigmaValue } from "../core"
 
 export class Sigma implements Exp {
   name: string
@@ -18,7 +19,7 @@ export class Sigma implements Exp {
   }
 
   evaluate(env: Env): Value.Value {
-    return Value.sigma(
+    return new SigmaValue(
       evaluate(env, this.car_t),
       Value.Closure.create(env, this.name, this.cdr_t)
     )
