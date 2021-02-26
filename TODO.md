@@ -1,6 +1,6 @@
 # cicada
 
-- `Replace.apply` instead of `do_replace`
+- `NatInd.apply` instead of `do_nat_ind`
 
 - [refactoring] clear deps
 

@@ -29,7 +29,7 @@ export class Replace implements Exp {
   }
 
   evaluate(env: Env): Value.Value {
-    return do_replace(
+    return Replace.apply(
       evaluate(env, this.target),
       evaluate(env, this.motive),
       evaluate(env, this.base)
@@ -58,44 +58,44 @@ export class Replace implements Exp {
       ctx
     )}, ${this.base.alpha_repr(ctx)})`
   }
-}
 
-export function do_replace(
-  target: Value.Value,
-  motive: Value.Value,
-  base: Value.Value
-): Value.Value {
-  if (target instanceof SameValue) {
-    return base
-  } else if (target instanceof NotYetValue) {
-    if (target.t instanceof EqualValue) {
-      const base_t = Ap.apply(motive, target.t.from)
-      const closure = Value.Closure.create(new Env(), "x", new Type())
-      const motive_t = new PiValue(target.t.t, closure)
-      return new NotYetValue(
-        Ap.apply(motive, target.t.to),
-        new ReplaceNeutral(
-          target.neutral,
-          new Normal(motive_t, motive),
-          new Normal(base_t, base)
+  static apply(
+    target: Value.Value,
+    motive: Value.Value,
+    base: Value.Value
+  ): Value.Value {
+    if (target instanceof SameValue) {
+      return base
+    } else if (target instanceof NotYetValue) {
+      if (target.t instanceof EqualValue) {
+        const base_t = Ap.apply(motive, target.t.from)
+        const closure = Value.Closure.create(new Env(), "x", new Type())
+        const motive_t = new PiValue(target.t.t, closure)
+        return new NotYetValue(
+          Ap.apply(motive, target.t.to),
+          new ReplaceNeutral(
+            target.neutral,
+            new Normal(motive_t, motive),
+            new Normal(base_t, base)
+          )
         )
-      )
+      } else {
+        throw new Trace.Trace(
+          Explain.explain_elim_target_type_mismatch({
+            elim: "replace",
+            expecting: ["Value.equal"],
+            reality: target.t.constructor.name,
+          })
+        )
+      }
     } else {
       throw new Trace.Trace(
-        Explain.explain_elim_target_type_mismatch({
+        Explain.explain_elim_target_mismatch({
           elim: "replace",
-          expecting: ["Value.equal"],
-          reality: target.t.constructor.name,
+          expecting: ["Value.same", "new NotYetValue"],
+          reality: target.constructor.name,
         })
       )
     }
-  } else {
-    throw new Trace.Trace(
-      Explain.explain_elim_target_mismatch({
-        elim: "replace",
-        expecting: ["Value.same", "new NotYetValue"],
-        reality: target.constructor.name,
-      })
-    )
   }
 }
