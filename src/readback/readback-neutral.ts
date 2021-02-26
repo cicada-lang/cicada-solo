@@ -31,11 +31,7 @@ export function readback_neutral(
       return neutral.readback_neutral(ctx)
     }
     case "Neutral.replace": {
-      return new Replace(
-        Readback.readback_neutral(ctx, neutral.target),
-        neutral.motive.readback_normal(ctx),
-        neutral.base.readback_normal(ctx)
-      )
+      return neutral.readback_neutral(ctx)
     }
     case "Neutral.absurd_ind": {
       return neutral.readback_neutral(ctx)

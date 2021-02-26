@@ -31,7 +31,7 @@ export * from "./equal-value"
 export * from "./same"
 export * from "./same-value"
 export * from "./replace"
-// export * from "./replace-neutral"
+export * from "./replace-neutral"
 
 export * from "./absurd"
 export * from "./absurd-value"

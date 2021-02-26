@@ -1,7 +1,5 @@
 # cicada
 
-- replace -- neutral
-
 - neutral no kind
 
 - [refactoring] clear deps
