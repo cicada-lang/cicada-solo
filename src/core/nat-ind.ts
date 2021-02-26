@@ -88,9 +88,9 @@ export function do_nat_ind(
         Ap.apply(motive, target),
         Neutral.nat_ind(
           target.neutral,
-          Normal.create(motive_t, motive),
-          Normal.create(base_t, base),
-          Normal.create(step_t, step)
+          new Normal.Normal(motive_t, motive),
+          new Normal.Normal(base_t, base),
+          new Normal.Normal(step_t, step)
         )
       )
     } else {

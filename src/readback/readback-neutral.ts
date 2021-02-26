@@ -21,7 +21,7 @@ export function readback_neutral(
     case "Neutral.ap": {
       return new Ap(
         Readback.readback_neutral(ctx, neutral.target),
-        Readback.readback_normal(ctx, neutral.arg)
+        neutral.arg.readback_normal(ctx)
       )
     }
     case "Neutral.car": {
@@ -33,22 +33,22 @@ export function readback_neutral(
     case "Neutral.nat_ind": {
       return new NatInd(
         Readback.readback_neutral(ctx, neutral.target),
-        Readback.readback_normal(ctx, neutral.motive),
-        Readback.readback_normal(ctx, neutral.base),
-        Readback.readback_normal(ctx, neutral.step)
+        neutral.motive.readback_normal(ctx),
+        neutral.base.readback_normal(ctx),
+        neutral.step.readback_normal(ctx)
       )
     }
     case "Neutral.replace": {
       return new Replace(
         Readback.readback_neutral(ctx, neutral.target),
-        Readback.readback_normal(ctx, neutral.motive),
-        Readback.readback_normal(ctx, neutral.base)
+        neutral.motive.readback_normal(ctx),
+        neutral.base.readback_normal(ctx)
       )
     }
     case "Neutral.absurd_ind": {
       return new AbsurdInd(
         Readback.readback_neutral(ctx, neutral.target),
-        Readback.readback_normal(ctx, neutral.motive)
+        neutral.motive.readback_normal(ctx)
       )
     }
   }

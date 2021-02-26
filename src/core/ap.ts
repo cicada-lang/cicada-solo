@@ -49,7 +49,7 @@ export class Ap implements Exp {
       if (target.t instanceof PiValue) {
         return new NotYetValue(
           Value.Closure.apply(target.t.ret_t_cl, arg),
-          Neutral.ap(target.neutral, Normal.create(target.t.arg_t, arg))
+          Neutral.ap(target.neutral, new Normal.Normal(target.t.arg_t, arg))
         )
       } else {
         throw new Trace.Trace(

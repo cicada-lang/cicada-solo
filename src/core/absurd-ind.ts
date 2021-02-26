@@ -57,7 +57,7 @@ export function do_absurd_ind(
         motive,
         Neutral.absurd_ind(
           target.neutral,
-          Normal.create(new TypeValue(), motive)
+          new Normal.Normal(new TypeValue(), motive)
         )
       )
     } else {

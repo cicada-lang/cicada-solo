@@ -77,8 +77,8 @@ export function do_replace(
         Ap.apply(motive, target.t.to),
         Neutral.replace(
           target.neutral,
-          Normal.create(motive_t, motive),
-          Normal.create(base_t, base)
+          new Normal.Normal(motive_t, motive),
+          new Normal.Normal(base_t, base)
         )
       )
     } else {

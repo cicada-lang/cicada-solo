@@ -1,7 +1,5 @@
 # cicada
 
-- [refactoring] `Normal`
-
 - [refactoring] `Neutral`
 
 - absurd-ind -- neutral
