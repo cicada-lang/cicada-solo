@@ -6,6 +6,7 @@ import { readback } from "../readback"
 import * as Trace from "../trace"
 import * as ut from "../ut"
 import { TypeValue } from "../core"
+import { SameValue } from "../core"
 
 export class Same implements Exp {
   check(ctx: Ctx, t: Value.Value): void {
@@ -26,7 +27,7 @@ export class Same implements Exp {
   }
 
   evaluate(env: Env): Value.Value {
-    return Value.same
+    return new SameValue()
   }
 
   repr(): string {
