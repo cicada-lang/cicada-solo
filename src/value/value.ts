@@ -9,15 +9,10 @@ export type Value = {
 import * as Closure from "./closure"
 import * as Neutral from "../neutral"
 
-import { PiValue } from "../core/pi-value"
 import { SigmaValue } from "../core/sigma-value"
 import { ConsValue } from "../core/cons-value"
 import { FnValue } from "../core/fn-value"
 import { NotYetValue } from "../core/not-yet-value"
-
-export type pi = PiValue
-export const pi = (arg_t: Value, ret_t_cl: Closure.Closure): pi =>
-  new PiValue(arg_t, ret_t_cl)
 
 type fn = FnValue
 export const fn = (ret_cl: Closure.Closure): fn => new FnValue(ret_cl)

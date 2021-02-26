@@ -2,7 +2,7 @@
 
 Exp.check(Map(String, Value), Exp, Value): Trivial
 
-Exp.check(ctx, Exp.fn(name, ret), Value.pi(arg_t, ret_t_cl)) = {
+Exp.check(ctx, Exp.fn(name, ret), new PiValue(arg_t, ret_t_cl)) = {
   arg_value = Value.not_yet(arg_t, Neutral.v(name))
   ret_t = Closure.apply(ret_t_cl, arg_value)
   Exp.check(ctx.extend(name, arg_t), ret, ret_t)

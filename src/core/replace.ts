@@ -16,6 +16,7 @@ import { Var } from "./var"
 import { NotYetValue } from "./not-yet-value"
 import { SameValue } from "./same-value"
 import { EqualValue } from "./equal-value"
+import { PiValue } from "../core"
 
 export class Replace implements Exp {
   target: Exp
@@ -71,7 +72,7 @@ export function do_replace(
     if (target.t instanceof EqualValue) {
       const base_t = do_ap(motive, target.t.from)
       const closure = Value.Closure.create(new Env(), "x", new Type())
-      const motive_t = Value.pi(target.t.t, closure)
+      const motive_t = new PiValue(target.t.t, closure)
       return Value.not_yet(
         do_ap(motive, target.t.to),
         Neutral.replace(

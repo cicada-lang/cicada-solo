@@ -17,6 +17,7 @@ import { NotYetValue } from "./not-yet-value"
 import { NatValue } from "./nat-value"
 import { ZeroValue } from "./zero-value"
 import { Add1Value } from "./add1-value"
+import { PiValue } from "../core"
 
 export class NatInd implements Exp {
   target: Exp
@@ -79,7 +80,7 @@ export function do_nat_ind(
     )
   } else if (target instanceof NotYetValue) {
     if (target.t instanceof NatValue) {
-      const motive_t = Value.pi(
+      const motive_t = new PiValue(
         new NatValue(),
         Value.Closure.create(new Env(), "k", new Type())
       )

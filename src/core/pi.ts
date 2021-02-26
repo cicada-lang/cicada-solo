@@ -5,6 +5,7 @@ import * as Value from "../value"
 import { check } from "../check"
 import { evaluate } from "../evaluate"
 import { TypeValue } from "../core"
+import { PiValue } from "../core"
 
 export class Pi implements Exp {
   name: string
@@ -18,7 +19,7 @@ export class Pi implements Exp {
   }
 
   evaluate(env: Env): Value.Value {
-    return Value.pi(
+    return new PiValue(
       evaluate(env, this.arg_t),
       Value.Closure.create(env, this.name, this.ret_t)
     )

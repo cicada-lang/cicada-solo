@@ -18,7 +18,7 @@
   Check(ctx, arg_t, Value.type)
   Check(ctx, ret_t, Value.type)
 
-  Check(ctx, Exp.fn(name, ret), Value.pi(arg_t, ret_t_cl))
+  Check(ctx, Exp.fn(name, ret), new PiValue(arg_t, ret_t_cl))
   ------------------------------------------------------- fn_pi
   Check(Map.extend(ctx, name, arg_t), ret, ret_t)
   @where {
@@ -32,7 +32,7 @@
 
   Check(ctx, Exp.ap(target, arg), ret_t)
   -------------------------------------- ap
-  Check(ctx, target, Value.pi(arg_t, ret_t_cl))
+  Check(ctx, target, new PiValue(arg_t, ret_t_cl))
   Check(ctx, arg, arg_t)
   @where {
     arg_value = Exp.evaluate(ctx.to_env(), arg)

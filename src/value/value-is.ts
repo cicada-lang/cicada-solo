@@ -19,9 +19,9 @@ import { ConsValue } from "../core/cons-value"
 import { FnValue } from "../core/fn-value"
 import { NotYetValue } from "../core/not-yet-value"
 
-export function is_pi(ctx: Ctx.Ctx, value: Value.Value): Value.pi {
+export function is_pi(ctx: Ctx.Ctx, value: Value.Value): PiValue {
   if (value instanceof PiValue) {
-    return value as Value.pi
+    return value as PiValue
   } else {
     throw new Trace.Trace(
       Value.unexpected(ctx, value, { message: `I am expecting the type pi.` })

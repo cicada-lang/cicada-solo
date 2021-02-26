@@ -56,7 +56,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
       throw new Trace.Trace(
         Explain.explain_elim_target_type_mismatch({
           elim: "ap",
-          expecting: ["Value.pi"],
+          expecting: ["new PiValue()"],
           reality: target.t.constructor.name,
         })
       )
