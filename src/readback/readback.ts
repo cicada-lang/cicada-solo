@@ -7,7 +7,7 @@ import * as Ctx from "../ctx"
 import * as ut from "../ut"
 
 
-import { do_ap } from "../core/ap"
+
 import { Var } from "../core"
 import { Pi, Fn } from "../core"
 import { Sigma, Cons } from "../core"

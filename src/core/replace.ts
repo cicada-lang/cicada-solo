@@ -9,7 +9,7 @@ import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
-import { do_ap } from "./ap"
+import { Ap } from "../core"
 import { Pi } from "./pi"
 import { Type } from "./type"
 import { Var } from "./var"
@@ -46,8 +46,8 @@ export class Replace implements Exp {
     )
     check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), this.motive)
-    check(ctx, this.base, do_ap(motive_value, equal.from))
-    return do_ap(motive_value, equal.to)
+    check(ctx, this.base, Ap.apply(motive_value, equal.from))
+    return Ap.apply(motive_value, equal.to)
   }
 
   repr(): string {
@@ -70,11 +70,11 @@ export function do_replace(
     return base
   } else if (target instanceof NotYetValue) {
     if (target.t instanceof EqualValue) {
-      const base_t = do_ap(motive, target.t.from)
+      const base_t = Ap.apply(motive, target.t.from)
       const closure = Value.Closure.create(new Env(), "x", new Type())
       const motive_t = new PiValue(target.t.t, closure)
       return new NotYetValue(
-        do_ap(motive, target.t.to),
+        Ap.apply(motive, target.t.to),
         Neutral.replace(
           target.neutral,
           Normal.create(motive_t, motive),

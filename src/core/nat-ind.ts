@@ -8,10 +8,10 @@ import * as Value from "../value"
 import * as Normal from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
-import { do_ap } from "./ap"
+
 import { Type } from "./type"
 import { Nat } from "./nat"
-import { Pi } from "./pi"
+import { Pi, Ap } from "../core"
 import { NatValue, ZeroValue, Add1Value } from "../core"
 import { PiValue } from "../core"
 import { NotYetValue } from "../core"
@@ -46,10 +46,10 @@ export class NatInd implements Exp {
     const motive_t = evaluate(new Env(), new Pi("x", new Nat(), new Type()))
     check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), this.motive)
-    check(ctx, this.base, do_ap(motive_value, new ZeroValue()))
+    check(ctx, this.base, Ap.apply(motive_value, new ZeroValue()))
     check(ctx, this.step, nat_ind_step_t(motive_value))
     const target_value = evaluate(ctx.to_env(), this.target)
-    return do_ap(motive_value, target_value)
+    return Ap.apply(motive_value, target_value)
   }
 
   repr(): string {
@@ -72,8 +72,8 @@ export function do_nat_ind(
   if (target instanceof ZeroValue) {
     return base
   } else if (target instanceof Add1Value) {
-    return do_ap(
-      do_ap(step, target.prev),
+    return Ap.apply(
+      Ap.apply(step, target.prev),
       do_nat_ind(target.prev, motive, base, step)
     )
   } else if (target instanceof NotYetValue) {
@@ -82,10 +82,10 @@ export function do_nat_ind(
         new NatValue(),
         Value.Closure.create(new Env(), "k", new Type())
       )
-      const base_t = do_ap(motive, new ZeroValue())
+      const base_t = Ap.apply(motive, new ZeroValue())
       const step_t = nat_ind_step_t(motive)
       return new NotYetValue(
-        do_ap(motive, target),
+        Ap.apply(motive, target),
         Neutral.nat_ind(
           target.neutral,
           Normal.create(motive_t, motive),

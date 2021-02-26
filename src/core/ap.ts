@@ -23,7 +23,7 @@ export class Ap implements Exp {
   }
 
   evaluate(env: Env): Value.Value {
-    return do_ap(evaluate(env, this.target), evaluate(env, this.arg))
+    return Ap.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
   infer(ctx: Ctx): Value.Value {
@@ -41,33 +41,33 @@ export class Ap implements Exp {
   alpha_repr(ctx: AlphaCtx): string {
     return `${this.target.alpha_repr(ctx)}(${this.arg.alpha_repr(ctx)})`
   }
-}
 
-export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
-  if (target instanceof FnValue) {
-    return Value.Closure.apply(target.ret_cl, arg)
-  } else if (target instanceof NotYetValue) {
-    if (target.t instanceof PiValue) {
-      return new NotYetValue(
-        Value.Closure.apply(target.t.ret_t_cl, arg),
-        Neutral.ap(target.neutral, Normal.create(target.t.arg_t, arg))
-      )
+  static apply(target: Value.Value, arg: Value.Value): Value.Value {
+    if (target instanceof FnValue) {
+      return Value.Closure.apply(target.ret_cl, arg)
+    } else if (target instanceof NotYetValue) {
+      if (target.t instanceof PiValue) {
+        return new NotYetValue(
+          Value.Closure.apply(target.t.ret_t_cl, arg),
+          Neutral.ap(target.neutral, Normal.create(target.t.arg_t, arg))
+        )
+      } else {
+        throw new Trace.Trace(
+          Explain.explain_elim_target_type_mismatch({
+            elim: "ap",
+            expecting: ["new PiValue()"],
+            reality: target.t.constructor.name,
+          })
+        )
+      }
     } else {
       throw new Trace.Trace(
-        Explain.explain_elim_target_type_mismatch({
+        Explain.explain_elim_target_mismatch({
           elim: "ap",
-          expecting: ["new PiValue()"],
-          reality: target.t.constructor.name,
+          expecting: ["Value.fn", "new NotYetValue"],
+          reality: target.constructor.name,
         })
       )
     }
-  } else {
-    throw new Trace.Trace(
-      Explain.explain_elim_target_mismatch({
-        elim: "ap",
-        expecting: ["Value.fn", "new NotYetValue"],
-        reality: target.constructor.name,
-      })
-    )
   }
 }

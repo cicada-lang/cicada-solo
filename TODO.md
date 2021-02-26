@@ -1,7 +1,5 @@
 # cicada
 
-- `do_ap` as `Ap.apply`
-
 - [refactoring] `Neutral`
 
 - absurd-ind -- neutral

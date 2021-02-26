@@ -8,7 +8,7 @@ import * as ut from "../ut"
 import { TypeValue } from "./type-value"
 import { Pi } from "./pi"
 import { Fn } from "./fn"
-import { do_ap } from "./ap"
+import { Ap } from "../core"
 import { NotYetValue } from "../core"
 
 export class PiValue {
@@ -48,7 +48,7 @@ export class PiValue {
       readback(
         ctx.extend(fresh_name, this.arg_t),
         Value.Closure.apply(this.ret_t_cl, variable),
-        do_ap(value, variable)
+        Ap.apply(value, variable)
       )
     )
   }
