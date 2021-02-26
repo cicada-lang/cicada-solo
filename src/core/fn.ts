@@ -4,6 +4,7 @@ import { Env } from "../env"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import { check } from "../check"
+import { FnValue } from "../core"
 
 export class Fn implements Exp {
   name: string
@@ -15,7 +16,7 @@ export class Fn implements Exp {
   }
 
   evaluate(env: Env): Value.Value {
-    return Value.fn(Value.Closure.create(env, this.name, this.ret))
+    return new FnValue(Value.Closure.create(env, this.name, this.ret))
   }
 
   check(ctx: Ctx, t: Value.Value): void {
