@@ -15,7 +15,7 @@ export * from "./cons-value"
 export * from "./car"
 export * from "./car-neutral"
 export * from "./cdr"
-// export * from "./cdr-neutral"
+export * from "./cdr-neutral"
 
 export * from "./nat"
 export * from "./nat-value"

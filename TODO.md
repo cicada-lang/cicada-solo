@@ -1,8 +1,9 @@
 # cicada
 
-- cdr -- neutral
 - nat-ind -- neutral
 - replace -- neutral
+
+- neutral no kind
 
 - [refactoring] clear deps
 
