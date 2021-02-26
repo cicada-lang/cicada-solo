@@ -5,7 +5,7 @@ import { evaluate } from "../evaluate"
 import { check } from "../check"
 import * as Value from "../value"
 import { nat_to_number } from "./nat-util"
-import { NatValue } from "../core"
+import { NatValue, Add1Value } from "../core"
 
 export class Add1 implements Exp {
   prev: Exp
@@ -15,7 +15,7 @@ export class Add1 implements Exp {
   }
 
   evaluate(env: Env): Value.Value {
-    return Value.add1(evaluate(env, this.prev))
+    return new Add1Value(evaluate(env, this.prev))
   }
 
   infer(ctx: Ctx): Value.Value {

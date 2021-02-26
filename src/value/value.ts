@@ -12,7 +12,6 @@ import * as Neutral from "../neutral"
 import { PiValue } from "../core/pi-value"
 import { EqualValue } from "../core/equal-value"
 import { SigmaValue } from "../core/sigma-value"
-import { Add1Value } from "../core/add1-value"
 import { ConsValue } from "../core/cons-value"
 import { FnValue } from "../core/fn-value"
 import { NotYetValue } from "../core/not-yet-value"
@@ -30,9 +29,6 @@ export const sigma = (car_t: Value, cdr_t_cl: Closure.Closure): sigma =>
 
 type cons = ConsValue
 export const cons = (car: Value, cdr: Value): cons => new ConsValue(car, cdr)
-
-type add1 = Add1Value
-export const add1 = (prev: Value): add1 => new Add1Value(prev)
 
 export type equal = EqualValue
 export const equal = (t: Value, from: Value, to: Value): equal =>
