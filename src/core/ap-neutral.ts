@@ -3,7 +3,6 @@ import { Normal } from "../normal"
 import { Exp } from "../exp"
 import { Ctx } from "../ctx"
 import { Ap } from "../core"
-import { readback_neutral } from "../readback"
 
 export class ApNeutral {
   kind: "Neutral.ap" = "Neutral.ap"
@@ -17,7 +16,7 @@ export class ApNeutral {
 
   readback_neutral(ctx: Ctx): Exp {
     return new Ap(
-      readback_neutral(ctx, this.target),
+      this.target.readback_neutral(ctx),
       this.arg.readback_normal(ctx)
     )
   }

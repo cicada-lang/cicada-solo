@@ -3,7 +3,6 @@ import { Normal } from "../normal"
 import { Exp } from "../exp"
 import { Ctx } from "../ctx"
 import { Replace } from "../core"
-import { readback_neutral } from "../readback"
 
 export class ReplaceNeutral {
   kind: "Neutral.replace" = "Neutral.replace"
@@ -19,7 +18,7 @@ export class ReplaceNeutral {
 
   readback_neutral(ctx: Ctx): Exp {
     return new Replace(
-      readback_neutral(ctx, this.target),
+      this.target.readback_neutral(ctx),
       this.motive.readback_normal(ctx),
       this.base.readback_normal(ctx)
     )

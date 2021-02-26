@@ -3,7 +3,6 @@ import { Normal } from "../normal"
 import { Exp } from "../exp"
 import { Ctx } from "../ctx"
 import { Car } from "../core"
-import { readback_neutral } from "../readback"
 
 export class CarNeutral {
   kind: "Neutral.car" = "Neutral.car"
@@ -14,6 +13,6 @@ export class CarNeutral {
   }
 
   readback_neutral(ctx: Ctx): Exp {
-    return new Car(readback_neutral(ctx, this.target))
+    return new Car(this.target.readback_neutral(ctx))
   }
 }

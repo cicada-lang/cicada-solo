@@ -1,4 +1,3 @@
-import { readback_neutral } from "../readback"
 import { Value } from "../value"
 import { Exp } from "../exp"
 import { Ctx } from "../ctx"
@@ -18,7 +17,7 @@ export function readback(ctx: Ctx, t: Value, value: Value): Exp {
     value instanceof NotYetValue &&
     value.t instanceof AbsurdValue
   ) {
-    return new The(new Absurd(), readback_neutral(ctx, value.neutral))
+    return new The(new Absurd(), value.neutral.readback_neutral(ctx))
   }
 
   const exp = value.readback(ctx, t)

@@ -3,7 +3,6 @@ import { Normal } from "../normal"
 import { Exp } from "../exp"
 import { Ctx } from "../ctx"
 import { AbsurdInd } from "../core"
-import { readback_neutral } from "../readback"
 
 export class AbsurdIndNeutral {
   kind: "Neutral.absurd_ind" = "Neutral.absurd_ind"
@@ -17,7 +16,7 @@ export class AbsurdIndNeutral {
 
   readback_neutral(ctx: Ctx): Exp {
     return new AbsurdInd(
-      readback_neutral(ctx, this.target),
+      this.target.readback_neutral(ctx),
       this.motive.readback_normal(ctx)
     )
   }
