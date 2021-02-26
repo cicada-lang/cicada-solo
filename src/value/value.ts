@@ -14,7 +14,6 @@ import { TrivialValue } from "../core/trivial-value"
 import { SoleValue } from "../core/sole-value"
 import { EqualValue } from "../core/equal-value"
 import { StrValue } from "../core/str-value"
-import { NatValue } from "../core/nat-value"
 import { SigmaValue } from "../core/sigma-value"
 import { SameValue } from "../core/same-value"
 import { ZeroValue } from "../core/zero-value"
@@ -37,9 +36,6 @@ export const sigma = (car_t: Value, cdr_t_cl: Closure.Closure): sigma =>
 
 type cons = ConsValue
 export const cons = (car: Value, cdr: Value): cons => new ConsValue(car, cdr)
-
-export type nat = NatValue
-export const nat: nat = new NatValue()
 
 type zero = ZeroValue
 export const zero: zero = new ZeroValue()

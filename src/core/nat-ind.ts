@@ -43,7 +43,7 @@ export class NatInd implements Exp {
   infer(ctx: Ctx): Value.Value {
     // NOTE We should always infer target,
     //   but we do a simple check for the simple nat.
-    check(ctx, this.target, Value.nat)
+    check(ctx, this.target, new NatValue())
     const motive_t = evaluate(new Env(), new Pi("x", new Nat(), new Type()))
     check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), this.motive)
@@ -80,7 +80,7 @@ export function do_nat_ind(
   } else if (target instanceof NotYetValue) {
     if (target.t instanceof NatValue) {
       const motive_t = Value.pi(
-        Value.nat,
+        new NatValue(),
         Value.Closure.create(new Env(), "k", new Type())
       )
       const base_t = do_ap(motive, Value.zero)
@@ -98,7 +98,7 @@ export function do_nat_ind(
       throw new Trace.Trace(
         Explain.explain_elim_target_type_mismatch({
           elim: "nat_ind",
-          expecting: ["Value.nat"],
+          expecting: ["new NatValue()"],
           reality: target.t.constructor.name,
         })
       )

@@ -41,9 +41,9 @@ export function is_sigma(ctx: Ctx.Ctx, value: Value.Value): Value.sigma {
   }
 }
 
-export function is_nat(ctx: Ctx.Ctx, value: Value.Value): Value.nat {
+export function is_nat(ctx: Ctx.Ctx, value: Value.Value): NatValue {
   if (value instanceof NatValue) {
-    return value as Value.nat
+    return value as NatValue
   } else {
     throw new Trace.Trace(
       Value.unexpected(ctx, value, {
