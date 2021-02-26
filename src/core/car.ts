@@ -42,7 +42,7 @@ export function do_car(target: Value.Value): Value.Value {
     return target.car
   } else if (target instanceof NotYetValue) {
     if (target.t instanceof SigmaValue) {
-      return Value.not_yet(target.t.car_t, Neutral.car(target.neutral))
+      return new NotYetValue(target.t.car_t, Neutral.car(target.neutral))
     } else {
       throw new Trace.Trace(
         Explain.explain_elim_target_type_mismatch({
@@ -56,7 +56,7 @@ export function do_car(target: Value.Value): Value.Value {
     throw new Trace.Trace(
       Explain.explain_elim_target_mismatch({
         elim: "car",
-        expecting: ["Value.cons", "Value.not_yet"],
+        expecting: ["Value.cons", "new NotYetValue"],
         reality: target.constructor.name,
       })
     )

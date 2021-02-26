@@ -53,7 +53,7 @@ export function do_absurd_ind(
 ): Value.Value {
   if (target instanceof NotYetValue) {
     if (target.t instanceof AbsurdValue) {
-      return Value.not_yet(
+      return new NotYetValue(
         motive,
         Neutral.absurd_ind(
           target.neutral,
@@ -73,7 +73,7 @@ export function do_absurd_ind(
     throw new Trace.Trace(
       Explain.explain_elim_target_mismatch({
         elim: "absurd_ind",
-        expecting: ["Value.not_yet"],
+        expecting: ["new NotYetValue"],
         reality: target.constructor.name,
       })
     )

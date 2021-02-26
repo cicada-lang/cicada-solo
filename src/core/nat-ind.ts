@@ -84,7 +84,7 @@ export function do_nat_ind(
       )
       const base_t = do_ap(motive, new ZeroValue())
       const step_t = nat_ind_step_t(motive)
-      return Value.not_yet(
+      return new NotYetValue(
         do_ap(motive, target),
         Neutral.nat_ind(
           target.neutral,
@@ -106,7 +106,7 @@ export function do_nat_ind(
     throw new Trace.Trace(
       Explain.explain_elim_target_mismatch({
         elim: "nat_ind",
-        expecting: ["Value.zero", "Value.add1", "Value.not_yet"],
+        expecting: ["Value.zero", "Value.add1", "new NotYetValue"],
         reality: target.constructor.name,
       })
     )

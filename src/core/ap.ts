@@ -48,7 +48,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
     return Value.Closure.apply(target.ret_cl, arg)
   } else if (target instanceof NotYetValue) {
     if (target.t instanceof PiValue) {
-      return Value.not_yet(
+      return new NotYetValue(
         Value.Closure.apply(target.t.ret_t_cl, arg),
         Neutral.ap(target.neutral, Normal.create(target.t.arg_t, arg))
       )
@@ -65,7 +65,7 @@ export function do_ap(target: Value.Value, arg: Value.Value): Value.Value {
     throw new Trace.Trace(
       Explain.explain_elim_target_mismatch({
         elim: "ap",
-        expecting: ["Value.fn", "Value.not_yet"],
+        expecting: ["Value.fn", "new NotYetValue"],
         reality: target.constructor.name,
       })
     )

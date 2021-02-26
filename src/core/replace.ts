@@ -73,7 +73,7 @@ export function do_replace(
       const base_t = do_ap(motive, target.t.from)
       const closure = Value.Closure.create(new Env(), "x", new Type())
       const motive_t = new PiValue(target.t.t, closure)
-      return Value.not_yet(
+      return new NotYetValue(
         do_ap(motive, target.t.to),
         Neutral.replace(
           target.neutral,
@@ -94,7 +94,7 @@ export function do_replace(
     throw new Trace.Trace(
       Explain.explain_elim_target_mismatch({
         elim: "replace",
-        expecting: ["Value.same", "Value.not_yet"],
+        expecting: ["Value.same", "new NotYetValue"],
         reality: target.constructor.name,
       })
     )

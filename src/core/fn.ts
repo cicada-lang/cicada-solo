@@ -5,6 +5,7 @@ import * as Value from "../value"
 import * as Neutral from "../neutral"
 import { check } from "../check"
 import { FnValue } from "../core"
+import { NotYetValue } from "../core"
 
 export class Fn implements Exp {
   name: string
@@ -21,7 +22,7 @@ export class Fn implements Exp {
 
   check(ctx: Ctx, t: Value.Value): void {
     const pi = Value.is_pi(ctx, t)
-    const arg = Value.not_yet(pi.arg_t, Neutral.v(this.name))
+    const arg = new NotYetValue(pi.arg_t, Neutral.v(this.name))
     const ret_t = Value.Closure.apply(pi.ret_t_cl, arg)
     check(ctx.extend(this.name, pi.arg_t), this.ret, ret_t)
   }

@@ -9,6 +9,7 @@ import { TypeValue } from "./type-value"
 import { Pi } from "./pi"
 import { Fn } from "./fn"
 import { do_ap } from "./ap"
+import { NotYetValue } from "../core"
 
 export class PiValue {
   arg_t: Value.Value
@@ -25,7 +26,7 @@ export class PiValue {
         new Set(ctx.names()),
         this.ret_t_cl.name
       )
-      const variable = Value.not_yet(this.arg_t, Neutral.v(fresh_name))
+      const variable = new NotYetValue(this.arg_t, Neutral.v(fresh_name))
       const arg_t = readback(ctx, new TypeValue(), this.arg_t)
       const ret_t = readback(
         ctx.extend(fresh_name, this.arg_t),
@@ -41,7 +42,7 @@ export class PiValue {
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
     const fresh_name = ut.freshen_name(new Set(ctx.names()), this.ret_t_cl.name)
-    const variable = Value.not_yet(this.arg_t, Neutral.v(fresh_name))
+    const variable = new NotYetValue(this.arg_t, Neutral.v(fresh_name))
     return new Fn(
       fresh_name,
       readback(

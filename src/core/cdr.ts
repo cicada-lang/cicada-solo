@@ -44,7 +44,7 @@ export function do_cdr(target: Value.Value): Value.Value {
     return target.cdr
   } else if (target instanceof NotYetValue) {
     if (target.t instanceof SigmaValue) {
-      return Value.not_yet(
+      return new NotYetValue(
         Value.Closure.apply(target.t.cdr_t_cl, do_car(target)),
         Neutral.cdr(target.neutral)
       )
@@ -61,7 +61,7 @@ export function do_cdr(target: Value.Value): Value.Value {
     throw new Trace.Trace(
       Explain.explain_elim_target_mismatch({
         elim: "cdr",
-        expecting: ["Value.cons", "Value.not_yet"],
+        expecting: ["Value.cons", "new NotYetValue"],
         reality: target.constructor.name,
       })
     )
