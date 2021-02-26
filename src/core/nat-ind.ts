@@ -8,11 +8,10 @@ import * as Value from "../value"
 import { Normal } from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
-
 import { Type } from "./type"
 import { Nat } from "./nat"
 import { Pi, Ap } from "../core"
-import { NatValue, ZeroValue, Add1Value } from "../core"
+import { NatValue, ZeroValue, Add1Value, NatIndNeutral } from "../core"
 import { PiValue } from "../core"
 import { NotYetValue } from "../core"
 import { nat_ind_step_t } from "./nat-util"
@@ -86,7 +85,7 @@ export function do_nat_ind(
       const step_t = nat_ind_step_t(motive)
       return new NotYetValue(
         Ap.apply(motive, target),
-        Neutral.nat_ind(
+        new NatIndNeutral(
           target.neutral,
           new Normal(motive_t, motive),
           new Normal(base_t, base),
