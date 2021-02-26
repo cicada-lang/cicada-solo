@@ -4,6 +4,7 @@ import { Env } from "../env"
 import * as Value from "../value"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
+import { ConsValue } from "../core"
 
 export class Cons implements Exp {
   car: Exp
@@ -15,7 +16,7 @@ export class Cons implements Exp {
   }
 
   evaluate(env: Env): Value.Value {
-    return Value.cons(evaluate(env, this.car), evaluate(env, this.cdr))
+    return new ConsValue(evaluate(env, this.car), evaluate(env, this.cdr))
   }
 
   check(ctx: Ctx, t: Value.Value): void {
