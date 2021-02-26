@@ -9,7 +9,7 @@ import { Normal } from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
 import { NotYetValue } from "../core"
-import { AbsurdValue } from "../core"
+import { AbsurdValue, AbsurdIndNeutral } from "../core"
 import { TypeValue } from "../core"
 
 export class AbsurdInd implements Exp {
@@ -55,7 +55,10 @@ export function do_absurd_ind(
     if (target.t instanceof AbsurdValue) {
       return new NotYetValue(
         motive,
-        Neutral.absurd_ind(target.neutral, new Normal(new TypeValue(), motive))
+        new AbsurdIndNeutral(
+          target.neutral,
+          new Normal(new TypeValue(), motive)
+        )
       )
     } else {
       throw new Trace.Trace(
