@@ -1,7 +1,5 @@
 # cicada
 
-- `core/index.ts` export values
-
 - `do_ap` as `Ap.apply`
 
 - `do_car` as `Car.apply`

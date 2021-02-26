@@ -12,7 +12,6 @@ import * as Neutral from "../neutral"
 import { PiValue } from "../core/pi-value"
 import { SoleValue } from "../core/sole-value"
 import { EqualValue } from "../core/equal-value"
-import { StrValue } from "../core/str-value"
 import { SigmaValue } from "../core/sigma-value"
 import { SameValue } from "../core/same-value"
 import { ZeroValue } from "../core/zero-value"
@@ -51,9 +50,6 @@ export const same: same = new SameValue()
 
 type sole = SoleValue
 export const sole: sole = new SoleValue()
-
-export type str = StrValue
-export const str: str = new StrValue()
 
 type quote = QuoteValue
 export const quote = (str: string): quote => new QuoteValue(str)

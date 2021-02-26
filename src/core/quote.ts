@@ -1,7 +1,9 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import * as Value from "../value"
+import { Value } from "../value"
+import { StrValue } from "../core"
+import { QuoteValue } from "../core"
 
 export class Quote implements Exp {
   str: string
@@ -10,12 +12,12 @@ export class Quote implements Exp {
     this.str = str
   }
 
-  evaluate(env: Env): Value.Value {
-    return Value.quote(this.str)
+  evaluate(env: Env): Value {
+    return new QuoteValue(this.str)
   }
 
-  infer(ctx: Ctx): Value.Value {
-    return Value.str
+  infer(ctx: Ctx): Value {
+    return new StrValue()
   }
 
   repr(): string {

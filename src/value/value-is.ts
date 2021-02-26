@@ -89,9 +89,9 @@ export function is_trivial(ctx: Ctx.Ctx, value: Value.Value): TrivialValue {
   }
 }
 
-export function is_str(ctx: Ctx.Ctx, value: Value.Value): Value.str {
+export function is_str(ctx: Ctx.Ctx, value: Value.Value): StrValue {
   if (value instanceof StrValue) {
-    return value as Value.str
+    return value as StrValue
   } else {
     throw new Trace.Trace(
       Value.unexpected(ctx, value, {
