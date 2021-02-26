@@ -1,10 +1,7 @@
 # cicada
 
-- car -- neutral
 - cdr -- neutral
-
 - nat-ind -- neutral
-
 - replace -- neutral
 
 - [refactoring] clear deps

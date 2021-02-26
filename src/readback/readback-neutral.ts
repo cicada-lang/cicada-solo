@@ -22,7 +22,7 @@ export function readback_neutral(
       return neutral.readback_neutral(ctx)
     }
     case "Neutral.car": {
-      return new Car(Readback.readback_neutral(ctx, neutral.target))
+      return neutral.readback_neutral(ctx)
     }
     case "Neutral.cdr": {
       return new Cdr(Readback.readback_neutral(ctx, neutral.target))

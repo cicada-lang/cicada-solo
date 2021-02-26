@@ -2,6 +2,8 @@ import { Normal } from "../normal"
 
 import { VarNeutral } from "../core"
 import { ApNeutral } from "../core"
+import { CarNeutral } from "../core"
+// import { CdrNeutral } from "../core"
 import { AbsurdIndNeutral } from "../core"
 
 export type Neutral = v | ap | car | cdr | nat_ind | replace | absurd_ind
@@ -13,15 +15,8 @@ type ap = ApNeutral
 export const ap = (target: Neutral, arg: Normal): ap =>
   new ApNeutral(target, arg)
 
-type car = {
-  kind: "Neutral.car"
-  target: Neutral
-}
-
-export const car = (target: Neutral): car => ({
-  kind: "Neutral.car",
-  target,
-})
+type car = CarNeutral
+export const car = (target: Neutral): car => new CarNeutral(target)
 
 type cdr = {
   kind: "Neutral.cdr"
