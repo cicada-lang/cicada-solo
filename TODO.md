@@ -1,12 +1,5 @@
 # cicada
 
-- `@car`
-- `@cdr`
-
-- [fulfilling type] -- `Cls` `Obj` `Dot`
-
-- `@class` `@object` `@dot`
-
 - [pie] `List`
 - [pie] `Vector`
 
@@ -15,6 +8,10 @@
 - [test] `Equal`
 - [test] `Pi`
 - [test] `Absurd`
+
+- [fulfilling type] -- `Cls` `Obj` `Dot`
+
+- `@class` `@object` `@dot`
 
 - [optimization] use native `number` as `Nat`
 

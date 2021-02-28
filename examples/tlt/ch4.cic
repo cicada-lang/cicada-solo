@@ -1,6 +1,6 @@
 // 4. Easy as Pie
 
-@def Pair_elim
+@def pair_elim
 @the (A: Type) -> (D: Type) -> (X: Type) ->
   (pair: @pair A D) ->
   (maker: (A) -> (D) -> X) ->
@@ -36,7 +36,7 @@ same
 
 @def swap @the (@pair Nat String) -> @pair String Nat
 (pair) =>
-  Pair_elim(Nat)(String)(@pair String Nat)
+  pair_elim(Nat)(String)(@pair String Nat)
   (pair)
   ((a) => (d) => @cons d a)
 
