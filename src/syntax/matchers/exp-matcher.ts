@@ -38,6 +38,8 @@ export function exp_matcher(tree: pt.Tree): Exp {
     },
     "exp:sigma": ({ name, car_t, cdr_t }) =>
       new Sigma(pt.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
+    "exp:sigma_sugar": ({ name, car_t, cdr_t }) =>
+      new Sigma(pt.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
     "exp:pair": ({ car_t, cdr_t }) =>
       new Sigma("_", exp_matcher(car_t), exp_matcher(cdr_t)),
     "exp:cons": ({ car, cdr }) => new Cons(exp_matcher(car), exp_matcher(cdr)),

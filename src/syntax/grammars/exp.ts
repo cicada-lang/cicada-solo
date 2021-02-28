@@ -42,6 +42,13 @@ export const exp = {
       { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
     ],
     "exp:sigma": [
+      '"@"',
+      '"sigma"',
+      { name: "identifier" },
+      { car_t: "exp" },
+      { cdr_t: "exp" },
+    ],
+    "exp:sigma_sugar": [
       '"("',
       { name: "identifier" },
       '":"',
