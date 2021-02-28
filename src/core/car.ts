@@ -3,7 +3,7 @@ import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { infer } from "../infer"
 import { expect } from "../expect"
-import * as Value from "../value"
+import { Value } from "../value"
 import { evaluate } from "../evaluate"
 import * as Explain from "../explain"
 import * as Neutral from "../neutral"
@@ -18,11 +18,11 @@ export class Car implements Exp {
     this.target = target
   }
 
-  evaluate(env: Env): Value.Value {
+  evaluate(env: Env): Value {
     return Car.apply(evaluate(env, this.target))
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
     const sigma = expect(ctx, target_t, SigmaValue)
     return sigma.car_t
@@ -36,7 +36,7 @@ export class Car implements Exp {
     return `car(${this.target.alpha_repr(ctx)})`
   }
 
-  static apply(target: Value.Value): Value.Value {
+  static apply(target: Value): Value {
     if (target instanceof ConsValue) {
       return target.car
     } else if (target instanceof NotYetValue) {

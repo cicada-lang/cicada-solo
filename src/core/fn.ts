@@ -1,7 +1,7 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import * as Value from "../value"
+import { Value } from "../value"
 import * as Closure from "../closure"
 import * as Neutral from "../neutral"
 import { check } from "../check"
@@ -19,11 +19,11 @@ export class Fn implements Exp {
     this.ret = ret
   }
 
-  evaluate(env: Env): Value.Value {
+  evaluate(env: Env): Value {
     return new FnValue(Closure.create(env, this.name, this.ret))
   }
 
-  check(ctx: Ctx, t: Value.Value): void {
+  check(ctx: Ctx, t: Value): void {
     const pi = expect(ctx, t, PiValue)
     const arg = new NotYetValue(pi.arg_t, new VarNeutral(this.name))
     const ret_t = Closure.apply(pi.ret_t_cl, arg)

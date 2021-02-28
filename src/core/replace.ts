@@ -6,7 +6,7 @@ import { check } from "../check"
 import { infer } from "../infer"
 import { expect } from "../expect"
 import * as Explain from "../explain"
-import * as Value from "../value"
+import { Value } from "../value"
 import * as Closure from "../closure"
 import { Normal } from "../normal"
 import * as Neutral from "../neutral"
@@ -30,7 +30,7 @@ export class Replace implements Exp {
     this.base = base
   }
 
-  evaluate(env: Env): Value.Value {
+  evaluate(env: Env): Value {
     return Replace.apply(
       evaluate(env, this.target),
       evaluate(env, this.motive),
@@ -38,7 +38,7 @@ export class Replace implements Exp {
     )
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
     const equal = expect(ctx, target_t, EqualValue)
     const motive_t = evaluate(
@@ -62,10 +62,10 @@ export class Replace implements Exp {
   }
 
   static apply(
-    target: Value.Value,
-    motive: Value.Value,
-    base: Value.Value
-  ): Value.Value {
+    target: Value,
+    motive: Value,
+    base: Value
+  ): Value {
     if (target instanceof SameValue) {
       return base
     } else if (target instanceof NotYetValue) {

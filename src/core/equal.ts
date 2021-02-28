@@ -3,7 +3,7 @@ import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
-import * as Value from "../value"
+import { Value } from "../value"
 import { TypeValue } from "../core"
 import { EqualValue } from "../core"
 
@@ -18,7 +18,7 @@ export class Equal implements Exp {
     this.to = to
   }
 
-  evaluate(env: Env): Value.Value {
+  evaluate(env: Env): Value {
     return new EqualValue(
       evaluate(env, this.t),
       evaluate(env, this.from),
@@ -26,7 +26,7 @@ export class Equal implements Exp {
     )
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     check(ctx, this.t, new TypeValue())
     const t_value = evaluate(ctx.to_env(), this.t)
     check(ctx, this.from, t_value)

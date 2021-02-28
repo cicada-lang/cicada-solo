@@ -1,22 +1,22 @@
 import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { readback } from "../readback"
-import * as Value from "../value"
+import { Value } from "../value"
 import { TypeValue } from "./type-value"
 import { Equal } from "./equal"
 
 export class EqualValue {
-  t: Value.Value
-  from: Value.Value
-  to: Value.Value
+  t: Value
+  from: Value
+  to: Value
 
-  constructor(t: Value.Value, from: Value.Value, to: Value.Value) {
+  constructor(t: Value, from: Value, to: Value) {
     this.t = t
     this.from = from
     this.to = to
   }
 
-  readback(ctx: Ctx, t: Value.Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Exp | undefined {
     if (t instanceof TypeValue) {
       return new Equal(
         readback(ctx, new TypeValue(), this.t),

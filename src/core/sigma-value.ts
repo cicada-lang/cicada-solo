@@ -1,7 +1,7 @@
 import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { readback } from "../readback"
-import * as Value from "../value"
+import { Value } from "../value"
 import * as Closure from "../closure"
 import * as Neutral from "../neutral"
 import * as ut from "../ut"
@@ -12,15 +12,15 @@ import { NotYetValue } from "../core"
 import { VarNeutral } from "../core"
 
 export class SigmaValue {
-  car_t: Value.Value
+  car_t: Value
   cdr_t_cl: Closure.Closure
 
-  constructor(car_t: Value.Value, cdr_t_cl: Closure.Closure) {
+  constructor(car_t: Value, cdr_t_cl: Closure.Closure) {
     this.car_t = car_t
     this.cdr_t_cl = cdr_t_cl
   }
 
-  readback(ctx: Ctx, t: Value.Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Exp | undefined {
     if (t instanceof TypeValue) {
       const fresh_name = ut.freshen_name(
         new Set(ctx.names()),
@@ -37,7 +37,7 @@ export class SigmaValue {
     }
   }
 
-  eta_expand(ctx: Ctx, value: Value.Value): Exp {
+  eta_expand(ctx: Ctx, value: Value): Exp {
     // NOTE Pairs are also η-expanded.
     //   Every value with a pair type,
     //   whether it is neutral or not,

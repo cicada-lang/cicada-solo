@@ -1,7 +1,7 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import * as Value from "../value"
+import { Value } from "../value"
 import { expect } from "../expect"
 import { readback } from "../readback"
 import { conversion } from "../conversion"
@@ -11,7 +11,7 @@ import { TypeValue } from "../core"
 import { EqualValue, SameValue } from "../core"
 
 export class Same implements Exp {
-  check(ctx: Ctx, t: Value.Value): void {
+  check(ctx: Ctx, t: Value): void {
     const equal = expect(ctx, t, EqualValue)
     if (!conversion(ctx, equal.t, equal.from, equal.to)) {
       throw new Trace(
@@ -28,7 +28,7 @@ export class Same implements Exp {
     }
   }
 
-  evaluate(env: Env): Value.Value {
+  evaluate(env: Env): Value {
     return new SameValue()
   }
 

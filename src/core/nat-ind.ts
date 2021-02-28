@@ -4,7 +4,7 @@ import { Env } from "../env"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import * as Explain from "../explain"
-import * as Value from "../value"
+import { Value } from "../value"
 import * as Closure from "../closure"
 import { Normal } from "../normal"
 import * as Neutral from "../neutral"
@@ -30,7 +30,7 @@ export class NatInd implements Exp {
     this.step = step
   }
 
-  evaluate(env: Env): Value.Value {
+  evaluate(env: Env): Value {
     return NatInd.apply(
       evaluate(env, this.target),
       evaluate(env, this.motive),
@@ -39,7 +39,7 @@ export class NatInd implements Exp {
     )
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     // NOTE We should always infer target,
     //   but we do a simple check for the simple nat.
     check(ctx, this.target, new NatValue())
@@ -63,11 +63,11 @@ export class NatInd implements Exp {
   }
 
   static apply(
-    target: Value.Value,
-    motive: Value.Value,
-    base: Value.Value,
-    step: Value.Value
-  ): Value.Value {
+    target: Value,
+    motive: Value,
+    base: Value,
+    step: Value
+  ): Value {
     if (target instanceof ZeroValue) {
       return base
     } else if (target instanceof Add1Value) {

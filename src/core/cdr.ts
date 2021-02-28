@@ -4,7 +4,7 @@ import { Env } from "../env"
 import { infer } from "../infer"
 import { expect } from "../expect"
 import { evaluate } from "../evaluate"
-import * as Value from "../value"
+import { Value } from "../value"
 import * as Closure from "../closure"
 import * as Explain from "../explain"
 import * as Neutral from "../neutral"
@@ -19,11 +19,11 @@ export class Cdr implements Exp {
     this.target = target
   }
 
-  evaluate(env: Env): Value.Value {
+  evaluate(env: Env): Value {
     return Cdr.apply(evaluate(env, this.target))
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
     const sigma = expect(ctx, target_t, SigmaValue)
     const car = Car.apply(evaluate(ctx.to_env(), this.target))
@@ -38,7 +38,7 @@ export class Cdr implements Exp {
     return `cdr(${this.target.alpha_repr(ctx)})`
   }
 
-  static apply(target: Value.Value): Value.Value {
+  static apply(target: Value): Value {
     if (target instanceof ConsValue) {
       return target.cdr
     } else if (target instanceof NotYetValue) {

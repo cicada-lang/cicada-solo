@@ -1,7 +1,7 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import * as Value from "../value"
+import { Value } from "../value"
 import * as Closure from "../closure"
 import { check } from "../check"
 import { evaluate } from "../evaluate"
@@ -19,14 +19,14 @@ export class Pi implements Exp {
     this.ret_t = ret_t
   }
 
-  evaluate(env: Env): Value.Value {
+  evaluate(env: Env): Value {
     return new PiValue(
       evaluate(env, this.arg_t),
       Closure.create(env, this.name, this.ret_t)
     )
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     check(ctx, this.arg_t, new TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), this.arg_t)
     check(ctx.extend(this.name, arg_t_value), this.ret_t, new TypeValue())
