@@ -3,8 +3,7 @@ import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
-import * as Explain from "../explain"
-import { Value } from "../value"
+import { Value, match_value } from "../value"
 import { Closure } from "../closure"
 import { Normal } from "../normal"
 import { Trace } from "../trace"
@@ -62,47 +61,30 @@ export class NatInd implements Exp {
   }
 
   static apply(target: Value, motive: Value, base: Value, step: Value): Value {
-    if (target instanceof ZeroValue) {
-      return base
-    } else if (target instanceof Add1Value) {
-      return Ap.apply(
-        Ap.apply(step, target.prev),
-        NatInd.apply(target.prev, motive, base, step)
-      )
-    } else if (target instanceof NotYetValue) {
-      if (target.t instanceof NatValue) {
-        const motive_t = new PiValue(
-          new NatValue(),
-          new Closure(new Env(), "k", new Type())
-        )
-        const base_t = Ap.apply(motive, new ZeroValue())
-        const step_t = nat_ind_step_t(motive)
-        return new NotYetValue(
-          Ap.apply(motive, target),
-          new NatIndNeutral(
-            target.neutral,
-            new Normal(motive_t, motive),
-            new Normal(base_t, base),
-            new Normal(step_t, step)
-          )
-        )
-      } else {
-        throw new Trace(
-          Explain.explain_elim_target_type_mismatch({
-            elim: "nat_ind",
-            expecting: ["new NatValue()"],
-            reality: target.t.constructor.name,
-          })
-        )
-      }
-    } else {
-      throw new Trace(
-        Explain.explain_elim_target_mismatch({
-          elim: "nat_ind",
-          expecting: ["Value.zero", "Value.add1", "new NotYetValue"],
-          reality: target.constructor.name,
-        })
-      )
-    }
+    return match_value(target, {
+      ZeroValue: (_: ZeroValue) => base,
+      Add1Value: ({ prev }: Add1Value) =>
+        Ap.apply(Ap.apply(step, prev), NatInd.apply(prev, motive, base, step)),
+      NotYetValue: ({ t, neutral }: NotYetValue) =>
+        match_value(t, {
+          NatValue: (_: NatValue) => {
+            const motive_t = new PiValue(
+              new NatValue(),
+              new Closure(new Env(), "k", new Type())
+            )
+            const base_t = Ap.apply(motive, new ZeroValue())
+            const step_t = nat_ind_step_t(motive)
+            return new NotYetValue(
+              Ap.apply(motive, target),
+              new NatIndNeutral(
+                neutral,
+                new Normal(motive_t, motive),
+                new Normal(base_t, base),
+                new Normal(step_t, step)
+              )
+            )
+          },
+        }),
+    })
   }
 }
