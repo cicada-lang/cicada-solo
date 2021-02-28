@@ -9,7 +9,6 @@ import * as Explain from "../explain"
 import { Value } from "../value"
 import * as Closure from "../closure"
 import { Normal } from "../normal"
-import * as Neutral from "../neutral"
 import { Trace } from "../trace"
 import { Pi, Ap } from "../core"
 import { Type } from "../core"
@@ -61,11 +60,7 @@ export class Replace implements Exp {
     )}, ${this.base.alpha_repr(ctx)})`
   }
 
-  static apply(
-    target: Value,
-    motive: Value,
-    base: Value
-  ): Value {
+  static apply(target: Value, motive: Value, base: Value): Value {
     if (target instanceof SameValue) {
       return base
     } else if (target instanceof NotYetValue) {

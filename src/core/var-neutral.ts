@@ -1,4 +1,3 @@
-import { Neutral } from "../neutral"
 import { Exp } from "../exp"
 import { Ctx } from "../ctx"
 import { Var } from "../core"

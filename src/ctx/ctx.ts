@@ -1,5 +1,4 @@
 import { Env } from "../env"
-import * as Neutral from "../neutral"
 import { Value } from "../value"
 import { NotYetValue } from "../core"
 import { VarNeutral } from "../core"

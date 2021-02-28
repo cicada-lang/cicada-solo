@@ -7,7 +7,6 @@ import * as Explain from "../explain"
 import { Value } from "../value"
 import * as Closure from "../closure"
 import { Normal } from "../normal"
-import * as Neutral from "../neutral"
 import { Trace } from "../trace"
 import { Type } from "./type"
 import { Nat } from "./nat"
@@ -62,12 +61,7 @@ export class NatInd implements Exp {
     )}, ${this.base.alpha_repr(ctx)}, ${this.step.alpha_repr(ctx)})`
   }
 
-  static apply(
-    target: Value,
-    motive: Value,
-    base: Value,
-    step: Value
-  ): Value {
+  static apply(target: Value, motive: Value, base: Value, step: Value): Value {
     if (target instanceof ZeroValue) {
       return base
     } else if (target instanceof Add1Value) {

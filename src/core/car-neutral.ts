@@ -1,5 +1,4 @@
 import { Neutral } from "../neutral"
-import { Normal } from "../normal"
 import { Exp } from "../exp"
 import { Ctx } from "../ctx"
 import { Car } from "../core"

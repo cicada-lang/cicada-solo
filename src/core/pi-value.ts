@@ -1,7 +1,6 @@
 import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { Value } from "../value"
-import * as Neutral from "../neutral"
 import { readback } from "../readback"
 import * as Closure from "../closure"
 import * as ut from "../ut"

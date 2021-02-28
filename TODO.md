@@ -2,6 +2,7 @@
 
 - [refactoring] clear deps -- no `import * as ...`
 - [refactoring] `Closure` as class
+- [refactoring] `Trace` as class
 - [refactoring] `Explain`
 
 - [pie] `List`
