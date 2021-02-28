@@ -1,6 +1,6 @@
 # cicada
 
-- [refactoring] closure/
+- [refactoring] `Closure` as class
 - [refactoring] clear deps -- no `import * as ...`
 
 - [pie] `List`

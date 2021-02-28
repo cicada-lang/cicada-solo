@@ -5,6 +5,7 @@ import { evaluate } from "../evaluate"
 import { check } from "../check"
 import * as Explain from "../explain"
 import * as Value from "../value"
+import * as Closure from "../closure"
 import { Normal } from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
@@ -78,7 +79,7 @@ export class NatInd implements Exp {
       if (target.t instanceof NatValue) {
         const motive_t = new PiValue(
           new NatValue(),
-          Value.Closure.create(new Env(), "k", new Type())
+          Closure.create(new Env(), "k", new Type())
         )
         const base_t = Ap.apply(motive, new ZeroValue())
         const step_t = nat_ind_step_t(motive)

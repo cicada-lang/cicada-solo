@@ -1,7 +1,7 @@
 import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { Value } from "../value"
-import * as Closure from "../value/closure"
+import * as Closure from "../closure"
 
 export class FnValue {
   ret_cl: Closure.Closure

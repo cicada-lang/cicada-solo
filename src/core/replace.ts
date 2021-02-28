@@ -7,6 +7,7 @@ import { infer } from "../infer"
 import { expect } from "../expect"
 import * as Explain from "../explain"
 import * as Value from "../value"
+import * as Closure from "../closure"
 import { Normal } from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
@@ -70,7 +71,7 @@ export class Replace implements Exp {
     } else if (target instanceof NotYetValue) {
       if (target.t instanceof EqualValue) {
         const base_t = Ap.apply(motive, target.t.from)
-        const closure = Value.Closure.create(new Env(), "x", new Type())
+        const closure = Closure.create(new Env(), "x", new Type())
         const motive_t = new PiValue(target.t.t, closure)
         return new NotYetValue(
           Ap.apply(motive, target.t.to),
