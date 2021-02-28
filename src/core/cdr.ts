@@ -5,7 +5,7 @@ import { infer } from "../infer"
 import { expect } from "../expect"
 import { evaluate } from "../evaluate"
 import { Value } from "../value"
-import * as Closure from "../closure"
+import { Closure } from "../closure"
 import * as Explain from "../explain"
 import { Trace } from "../trace"
 import { Car, SigmaValue, ConsValue, CdrNeutral } from "../core"
@@ -26,7 +26,7 @@ export class Cdr implements Exp {
     const target_t = infer(ctx, this.target)
     const sigma = expect(ctx, target_t, SigmaValue)
     const car = Car.apply(evaluate(ctx.to_env(), this.target))
-    return Closure.apply(sigma.cdr_t_cl, car)
+    return sigma.cdr_t_cl.apply(car)
   }
 
   repr(): string {
@@ -43,7 +43,7 @@ export class Cdr implements Exp {
     } else if (target instanceof NotYetValue) {
       if (target.t instanceof SigmaValue) {
         return new NotYetValue(
-          Closure.apply(target.t.cdr_t_cl, Car.apply(target)),
+          target.t.cdr_t_cl.apply(Car.apply(target)),
           new CdrNeutral(target.neutral)
         )
       } else {

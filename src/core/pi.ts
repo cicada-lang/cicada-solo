@@ -2,7 +2,7 @@ import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { Value } from "../value"
-import * as Closure from "../closure"
+import { Closure } from "../closure"
 import { check } from "../check"
 import { evaluate } from "../evaluate"
 import { TypeValue } from "../core"
@@ -22,7 +22,7 @@ export class Pi implements Exp {
   evaluate(env: Env): Value {
     return new PiValue(
       evaluate(env, this.arg_t),
-      Closure.create(env, this.name, this.ret_t)
+      new Closure(env, this.name, this.ret_t)
     )
   }
 

@@ -2,7 +2,7 @@ import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { Value } from "../value"
 import { readback } from "../readback"
-import * as Closure from "../closure"
+import { Closure } from "../closure"
 import * as ut from "../ut"
 import { TypeValue } from "./type-value"
 import { Pi, Fn, Ap } from "../core"
@@ -11,9 +11,9 @@ import { VarNeutral } from "../core"
 
 export class PiValue {
   arg_t: Value
-  ret_t_cl: Closure.Closure
+  ret_t_cl: Closure
 
-  constructor(arg_t: Value, ret_t_cl: Closure.Closure) {
+  constructor(arg_t: Value, ret_t_cl: Closure) {
     this.arg_t = arg_t
     this.ret_t_cl = ret_t_cl
   }
@@ -29,7 +29,7 @@ export class PiValue {
       const ret_t = readback(
         ctx.extend(fresh_name, this.arg_t),
         new TypeValue(),
-        Closure.apply(this.ret_t_cl, variable)
+        this.ret_t_cl.apply(variable)
       )
       return new Pi(fresh_name, arg_t, ret_t)
     }
@@ -45,7 +45,7 @@ export class PiValue {
       fresh_name,
       readback(
         ctx.extend(fresh_name, this.arg_t),
-        Closure.apply(this.ret_t_cl, variable),
+        this.ret_t_cl.apply(variable),
         Ap.apply(value, variable)
       )
     )

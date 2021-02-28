@@ -3,7 +3,7 @@ import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { expect } from "../expect"
 import { Value } from "../value"
-import * as Closure from "../closure"
+import { Closure } from "../closure"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { SigmaValue, ConsValue } from "../core"
@@ -23,10 +23,7 @@ export class Cons implements Exp {
 
   check(ctx: Ctx, t: Value): void {
     const sigma = expect(ctx, t, SigmaValue)
-    const cdr_t = Closure.apply(
-      sigma.cdr_t_cl,
-      evaluate(ctx.to_env(), this.car)
-    )
+    const cdr_t = sigma.cdr_t_cl.apply(evaluate(ctx.to_env(), this.car))
     check(ctx, this.car, sigma.car_t)
     check(ctx, this.cdr, cdr_t)
   }

@@ -2,7 +2,7 @@ import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { readback } from "../readback"
 import { Value } from "../value"
-import * as Closure from "../closure"
+import { Closure } from "../closure"
 import * as ut from "../ut"
 import { TypeValue } from "../core"
 import { Sigma } from "../core"
@@ -12,9 +12,9 @@ import { VarNeutral } from "../core"
 
 export class SigmaValue {
   car_t: Value
-  cdr_t_cl: Closure.Closure
+  cdr_t_cl: Closure
 
-  constructor(car_t: Value, cdr_t_cl: Closure.Closure) {
+  constructor(car_t: Value, cdr_t_cl: Closure) {
     this.car_t = car_t
     this.cdr_t_cl = cdr_t_cl
   }
@@ -30,7 +30,7 @@ export class SigmaValue {
       const cdr_t = readback(
         ctx.extend(fresh_name, this.car_t),
         new TypeValue(),
-        Closure.apply(this.cdr_t_cl, variable)
+        this.cdr_t_cl.apply(variable)
       )
       return new Sigma(fresh_name, car_t, cdr_t)
     }
@@ -45,7 +45,7 @@ export class SigmaValue {
     const cdr = Cdr.apply(value)
     return new Cons(
       readback(ctx, this.car_t, car),
-      readback(ctx, Closure.apply(this.cdr_t_cl, car), cdr)
+      readback(ctx, this.cdr_t_cl.apply(car), cdr)
     )
   }
 }

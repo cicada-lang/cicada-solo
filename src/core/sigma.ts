@@ -4,7 +4,7 @@ import { Env } from "../env"
 import { check } from "../check"
 import { evaluate } from "../evaluate"
 import { Value } from "../value"
-import * as Closure from "../closure"
+import { Closure } from "../closure"
 import { TypeValue } from "../core"
 import { SigmaValue } from "../core"
 
@@ -22,7 +22,7 @@ export class Sigma implements Exp {
   evaluate(env: Env): Value {
     return new SigmaValue(
       evaluate(env, this.car_t),
-      Closure.create(env, this.name, this.cdr_t)
+      new Closure(env, this.name, this.cdr_t)
     )
   }
 

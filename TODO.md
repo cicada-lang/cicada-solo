@@ -1,6 +1,6 @@
 # cicada
 
-- [refactoring] `Closure` as class
+
 - [refactoring] `Explain`
 
 - [pie] `List`

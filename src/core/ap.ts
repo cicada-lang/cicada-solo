@@ -6,7 +6,7 @@ import { infer } from "../infer"
 import { check } from "../check"
 import * as Explain from "../explain"
 import { Value } from "../value"
-import * as Closure from "../closure"
+import { Closure } from "../closure"
 import { expect } from "../expect"
 import { Normal } from "../normal"
 import { Trace } from "../trace"
@@ -31,7 +31,7 @@ export class Ap implements Exp {
     const pi = expect(ctx, target_t, PiValue)
     check(ctx, this.arg, pi.arg_t)
     const arg_value = evaluate(ctx.to_env(), this.arg)
-    return Closure.apply(pi.ret_t_cl, arg_value)
+    return pi.ret_t_cl.apply(arg_value)
   }
 
   repr(): string {
@@ -44,11 +44,11 @@ export class Ap implements Exp {
 
   static apply(target: Value, arg: Value): Value {
     if (target instanceof FnValue) {
-      return Closure.apply(target.ret_cl, arg)
+      return target.ret_cl.apply(arg)
     } else if (target instanceof NotYetValue) {
       if (target.t instanceof PiValue) {
         return new NotYetValue(
-          Closure.apply(target.t.ret_t_cl, arg),
+          target.t.ret_t_cl.apply(arg),
           new ApNeutral(target.neutral, new Normal(target.t.arg_t, arg))
         )
       } else {

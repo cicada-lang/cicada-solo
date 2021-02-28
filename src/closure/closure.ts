@@ -1,8 +1,20 @@
-import * as Exp from "../exp"
-import * as Env from "../env"
+import { Exp } from "../exp"
+import { Env } from "../env"
+import { Value } from "../value"
+import { evaluate } from "../evaluate"
 
-export type Closure = {
-  env: Env.Env
+export class Closure {
+  env: Env
   name: string
-  ret: Exp.Exp
+  ret: Exp
+
+  constructor(env: Env, name: string, ret: Exp) {
+    this.env = env
+    this.name = name
+    this.ret = ret
+  }
+
+  apply(value: Value): Value {
+    return evaluate(this.env.extend(this.name, value), this.ret)
+  }
 }
