@@ -1,5 +1,8 @@
 @def nat_rec @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
-  (target) => (T) => (base) => (step) => nat_ind(target, (_) => T, base, step)
+(target) => (T) => (base) => (step) => nat_ind(target, (_) => T, base, step)
+
+@def nat_rec_2 @the @pi target Nat @pi T Type @pi base T @pi step @pi prev Nat @pi almost T T T
+@fn target @fn T @fn base @fn step nat_ind(target, @fn _ T, base, step)
 
 @def add @the (Nat) -> (Nat) -> Nat
 (x) => (y) => nat_rec(y)(Nat)(x)((prev) => (almost) => add1(almost))
