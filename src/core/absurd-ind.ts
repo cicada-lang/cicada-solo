@@ -3,8 +3,7 @@ import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import { Value } from "../value"
-import * as Explain from "../explain"
+import { Value, match_value } from "../value"
 import { Normal } from "../normal"
 import { Trace } from "../trace"
 import { NotYetValue } from "../core"
@@ -49,32 +48,15 @@ export class AbsurdInd implements Exp {
   }
 
   static apply(target: Value, motive: Value): Value {
-    if (target instanceof NotYetValue) {
-      if (target.t instanceof AbsurdValue) {
-        return new NotYetValue(
-          motive,
-          new AbsurdIndNeutral(
-            target.neutral,
-            new Normal(new TypeValue(), motive)
-          )
-        )
-      } else {
-        throw new Trace(
-          Explain.explain_elim_target_type_mismatch({
-            elim: "absurd_ind",
-            expecting: ["Value.absurd"],
-            reality: target.t.constructor.name,
-          })
-        )
-      }
-    } else {
-      throw new Trace(
-        Explain.explain_elim_target_mismatch({
-          elim: "absurd_ind",
-          expecting: ["new NotYetValue"],
-          reality: target.constructor.name,
-        })
-      )
-    }
+    return match_value(target, {
+      NotYetValue: ({ t, neutral }: NotYetValue) =>
+        match_value(t, {
+          AbsurdValue: (_: AbsurdValue) =>
+            new NotYetValue(
+              motive,
+              new AbsurdIndNeutral(neutral, new Normal(new TypeValue(), motive))
+            ),
+        }),
+    })
   }
 }

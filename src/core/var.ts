@@ -15,8 +15,7 @@ export class Var implements Exp {
     const result = env.lookup(this.name)
     if (result === undefined) {
       throw new Trace(
-        `Fail to evaluate a variable.\n` +
-          `The name ${this.name} is undefined.`
+        `Fail to evaluate a variable.\n` + `The name ${this.name} is undefined.`
       )
     }
 

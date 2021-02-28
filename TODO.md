@@ -1,7 +1,5 @@
 # cicada
 
-- [refactoring] `Explain`
-
 - [pie] `List`
 - [pie] `Vector`
 
