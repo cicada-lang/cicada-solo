@@ -1,5 +1,7 @@
 # cicada
 
+- [syntax] pure prefix notation for `@sigma` & `@cons` & `@null`
+
 - [pie] `List`
 - [pie] `Vector`
 

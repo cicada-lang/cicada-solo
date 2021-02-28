@@ -2,6 +2,13 @@ export const exp = {
   $grammar: {
     "exp:var": [{ name: "identifier" }],
     "exp:pi": [
+      '"@"',
+      '"pi"',
+      { name: "identifier" },
+      { arg_t: "exp" },
+      { ret_t: "exp" },
+    ],
+    "exp:pi_sugar": [
       '"("',
       { name: "identifier" },
       '":"',
@@ -11,7 +18,8 @@ export const exp = {
       '">"',
       { ret_t: "exp" },
     ],
-    "exp:arrow": [
+    "exp:arrow": ['"@"', '"arrow"', { arg_t: "exp" }, { ret_t: "exp" }],
+    "exp:arrow_sugar": [
       '"("',
       { arg_t: "exp" },
       '")"',
@@ -19,7 +27,8 @@ export const exp = {
       '">"',
       { ret_t: "exp" },
     ],
-    "exp:fn": [
+    "exp:fn": ['"@"', '"fn"', { name: "identifier" }, { ret: "exp" }],
+    "exp:fn_sugar": [
       '"("',
       { name: "identifier" },
       '")"',
@@ -27,7 +36,8 @@ export const exp = {
       '">"',
       { ret: "exp" },
     ],
-    "exp:ap": [
+    "exp:ap": ['"@"', '"ap"', { target: "exp" }, { arg: "exp" }],
+    "exp:ap_sugar": [
       { target: "identifier" },
       { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
     ],
