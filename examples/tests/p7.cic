@@ -1,6 +1,5 @@
 @def x
-// @the Pair(Nat, Nat)
-@the @sigma _ Nat Nat
+@the @pair Nat Nat
 @let one add1(zero)
 @let two add1(one)
 @let three add1(two)

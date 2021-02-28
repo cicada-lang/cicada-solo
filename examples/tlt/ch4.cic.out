@@ -1,8 +1,8 @@
-@the (_: String) * Nat cons("abc", 123)
-@the (_: Nat) * String cons(123, "abc")
-@the Equal(Type, (A: Type) -> (D: Type) -> (pair: (_: A) * D) -> (_: D) * A, (Lemon: Type) -> (Meringue: Type) -> (_: (_: Lemon) * Meringue) -> (_1: Meringue) * Lemon) same
-@the Equal(Type, (A: Type) -> (D: Type) -> (_: (_: A) * D) -> (_1: D) * A, (A: Type) -> (D: Type) -> (_: (_: A) * D) -> (_1: D) * A) same
-@the (_: String) * Nat cons("abc", 123)
-@the (_: Nat) * Nat cons(123, 123)
-@the (_: String) * String cons("abc", "abc")
+@the @sigma _ String Nat cons("abc", 123)
+@the @sigma _ Nat String cons(123, "abc")
+@the Equal(Type, (A: Type) -> (D: Type) -> (pair: @sigma _ A D) -> @sigma _ D A, (Lemon: Type) -> (Meringue: Type) -> (_: @sigma _ Lemon Meringue) -> @sigma _1 Meringue Lemon) same
+@the Equal(Type, (A: Type) -> (D: Type) -> (_: @sigma _ A D) -> @sigma _1 D A, (A: Type) -> (D: Type) -> (_: @sigma _ A D) -> @sigma _1 D A) same
+@the @sigma _ String Nat cons("abc", 123)
+@the @sigma _ Nat Nat cons(123, 123)
+@the @sigma _ String String cons("abc", "abc")
 

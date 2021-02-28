@@ -1,1 +1,1 @@
-@show Pair("oil", String)
+@show @pair "oil" String

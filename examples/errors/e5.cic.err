@@ -4,6 +4,6 @@ But the given type is Type.
 
 previous:
 - "oil"
-- (_: "oil") * String
+- @sigma _ "oil" String
 
 

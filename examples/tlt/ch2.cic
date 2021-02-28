@@ -1,15 +1,11 @@
 // 2. Doin' What Comes Naturally
 
-// @def flavored_lentils
-// @the (String) -> Pair(String, String)
-// (flavor) => cons(flavor, "lentils")
-
 @def flavored_lentils
-@the @arrow String Pair(String, String)
+@the @arrow String @pair String String
 @fn flavor cons(flavor, "lentils")
 
 @def garlic_flavored_lentils
-@the Pair(String, String)
+@the @pair String String
 flavored_lentils("garlic")
 
 @def id
@@ -18,7 +14,7 @@ flavored_lentils("garlic")
 
 @def T
 @the Type
-Pair(String, (String) -> String)
+@pair String (String) -> String
 
 @def id_in_pair
 @the (x: String) -> T
@@ -33,20 +29,20 @@ Pair(String, (String) -> String)
 @show @the Equal(T, id_in_pair("x"), cons("x", (y) => y))
 same
 
-@show @the Equal(@arrow Nat Pair(Nat, Nat), (x) => cons(x, x), (y) => cons(y, y))
+@show @the Equal(@arrow Nat @pair Nat Nat, (x) => cons(x, x), (y) => cons(y, y))
 same
 
-@show @the Equal((Nat) -> Nat, (y) => car(@the Pair(Nat, Nat) cons(y, y)), (x) => x)
+@show @the Equal((Nat) -> Nat, (y) => car(@the @pair Nat Nat cons(y, y)), (x) => x)
 same
 
-@show @the Equal((Pair(Nat, Nat)) -> Nat, (y) => car(y), (x) => car(x))
+@show @the Equal((@pair Nat Nat) -> Nat, (y) => car(y), (x) => car(x))
 same
 
 @def vegetables
-@the Pair(String, String)
+@the @pair String String
 cons("celery", "carrot")
 
-@show @the Equal(Pair(String, String), vegetables, cons(car(vegetables), cdr(vegetables)))
+@show @the Equal(@pair String String, vegetables, cons(car(vegetables), cdr(vegetables)))
 same
 
 @def nat_rec
@@ -80,11 +76,11 @@ same
 same
 
 @show
-@the Pair(Type, Type)
+@the @pair Type Type
 cons(String, String)
 
 @def Pear
 @the Type
-Pair(Nat, Nat)
+@pair Nat Nat
 
 @show @the Pear cons(1, 2)

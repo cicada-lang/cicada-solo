@@ -1,6 +1,6 @@
 
 I am expecting the following two values to be the same type:
-  (_: String) * String
+  @sigma _ String String
 But they are not.
 from:
   cons("ratatouille", "baguette")
@@ -9,6 +9,6 @@ to:
 
 previous:
 - same
-- @the Equal((_: String) * String, cons("ratatouille", "baguette"), cons("baguette", "ratatouille")) same
+- @the Equal(@sigma _ String String, cons("ratatouille", "baguette"), cons("baguette", "ratatouille")) same
 
 

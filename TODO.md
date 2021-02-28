@@ -1,6 +1,5 @@
 # cicada
 
-- `@pair`
 - `@cons`
 - `@car`
 - `@cdr`
