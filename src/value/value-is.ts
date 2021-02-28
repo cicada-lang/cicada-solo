@@ -1,8 +1,10 @@
-import * as Value from "../value"
-import * as Ctx from "../ctx"
-import * as Trace from "../trace"
+import { Value } from "../value"
+import { Ctx } from "../ctx"
+import { Trace } from "../trace"
+import { readback } from "../readback"
+import { TypeValue } from "../core"
+import * as ut from "../ut"
 
-import { TypeValue } from "../core/type-value"
 import { AbsurdValue } from "../core/absurd-value"
 import { PiValue } from "../core/pi-value"
 import { TrivialValue } from "../core/trivial-value"
@@ -19,82 +21,98 @@ import { ConsValue } from "../core/cons-value"
 import { FnValue } from "../core/fn-value"
 import { NotYetValue } from "../core/not-yet-value"
 
-export function is_pi(ctx: Ctx.Ctx, value: Value.Value): PiValue {
+function unexpected(
+  ctx: Ctx,
+  value: Value,
+  opts: { message?: string } = {}
+): string {
+  const exp_repr = readback(ctx, new TypeValue(), value).repr()
+  return opts.message
+    ? ut.aline(`
+        |I see unexpected ${exp_repr}.
+        |${opts.message}
+        |`)
+    : ut.aline(`
+        |I see unexpected ${exp_repr}.
+        |`)
+}
+
+export function is_pi(ctx: Ctx, value: Value): PiValue {
   if (value instanceof PiValue) {
-    return value as PiValue
+    return value
   } else {
-    throw new Trace.Trace(
-      Value.unexpected(ctx, value, { message: `I am expecting the type pi.` })
+    throw new Trace(
+      unexpected(ctx, value, { message: `I am expecting the type pi.` })
     )
   }
 }
 
-export function is_sigma(ctx: Ctx.Ctx, value: Value.Value): SigmaValue {
+export function is_sigma(ctx: Ctx, value: Value): SigmaValue {
   if (value instanceof SigmaValue) {
-    return value as SigmaValue
+    return value
   } else {
-    throw new Trace.Trace(
-      Value.unexpected(ctx, value, {
+    throw new Trace(
+      unexpected(ctx, value, {
         message: `I am expecting the type sigma.`,
       })
     )
   }
 }
 
-export function is_nat(ctx: Ctx.Ctx, value: Value.Value): NatValue {
+export function is_nat(ctx: Ctx, value: Value): NatValue {
   if (value instanceof NatValue) {
-    return value as NatValue
+    return value
   } else {
-    throw new Trace.Trace(
-      Value.unexpected(ctx, value, {
+    throw new Trace(
+      unexpected(ctx, value, {
         message: `I am expecting the type nat.`,
       })
     )
   }
 }
 
-export function is_equal(ctx: Ctx.Ctx, value: Value.Value): EqualValue {
+export function is_equal(ctx: Ctx, value: Value): EqualValue {
   if (value instanceof EqualValue) {
-    return value as EqualValue
+    return value
   } else {
-    throw new Trace.Trace(
-      Value.unexpected(ctx, value, {
+    throw new Trace(
+      unexpected(ctx, value, {
         message: `I am expecting the type equal.`,
       })
     )
   }
 }
 
-export function is_absurd(ctx: Ctx.Ctx, value: Value.Value): AbsurdValue {
+export function is_absurd(ctx: Ctx, value: Value): AbsurdValue {
   if (value instanceof AbsurdValue) {
-    return value as AbsurdValue
+    return value
   } else {
-    throw new Trace.Trace(
-      Value.unexpected(ctx, value, {
+    throw new Trace(
+      unexpected(ctx, value, {
         message: `I am expecting the type absurd.`,
       })
     )
   }
 }
 
-export function is_trivial(ctx: Ctx.Ctx, value: Value.Value): TrivialValue {
+export function is_trivial(ctx: Ctx, value: Value): TrivialValue {
   if (value instanceof TrivialValue) {
-    return value as TrivialValue
+    return value
   } else {
-    throw new Trace.Trace(
-      Value.unexpected(ctx, value, {
+    throw new Trace(
+      unexpected(ctx, value, {
         message: `I am expecting the type trivial.`,
       })
     )
   }
 }
 
-export function is_str(ctx: Ctx.Ctx, value: Value.Value): StrValue {
+export function is_str(ctx: Ctx, value: Value): StrValue {
   if (value instanceof StrValue) {
-    return value as StrValue
+    return value
   } else {
-    throw new Trace.Trace(
-      Value.unexpected(ctx, value, {
+    throw new Trace(
+      unexpected(ctx, value, {
         message: `I am expecting the type string.`,
       })
     )
