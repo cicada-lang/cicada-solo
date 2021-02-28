@@ -3,7 +3,6 @@ import { Ctx } from "../ctx"
 import { Trace } from "../trace"
 import { readback } from "../readback"
 import { TypeValue } from "../core"
-import * as ut from "../ut"
 
 import { AbsurdValue } from "../core/absurd-value"
 import { PiValue } from "../core/pi-value"
@@ -21,29 +20,16 @@ import { ConsValue } from "../core/cons-value"
 import { FnValue } from "../core/fn-value"
 import { NotYetValue } from "../core/not-yet-value"
 
-function unexpected(
-  ctx: Ctx,
-  value: Value,
-  opts: { message?: string } = {}
-): string {
-  const exp_repr = readback(ctx, new TypeValue(), value).repr()
-  return opts.message
-    ? ut.aline(`
-        |I see unexpected ${exp_repr}.
-        |${opts.message}
-        |`)
-    : ut.aline(`
-        |I see unexpected ${exp_repr}.
-        |`)
+function unexpected(ctx: Ctx, value: Value, message: string = ""): string {
+  const exp = readback(ctx, new TypeValue(), value)
+  return `I see unexpected ${exp.repr()}\n` + message ? message + "\n" : ""
 }
 
 export function is_pi(ctx: Ctx, value: Value): PiValue {
   if (value instanceof PiValue) {
     return value
   } else {
-    throw new Trace(
-      unexpected(ctx, value, { message: `I am expecting the type pi.` })
-    )
+    throw new Trace(unexpected(ctx, value, `I am expecting the type pi.`))
   }
 }
 
@@ -52,9 +38,7 @@ export function is_sigma(ctx: Ctx, value: Value): SigmaValue {
     return value
   } else {
     throw new Trace(
-      unexpected(ctx, value, {
-        message: `I am expecting the type sigma.`,
-      })
+      unexpected(ctx, value, `I am expecting the type sigma.`)
     )
   }
 }
@@ -63,11 +47,7 @@ export function is_nat(ctx: Ctx, value: Value): NatValue {
   if (value instanceof NatValue) {
     return value
   } else {
-    throw new Trace(
-      unexpected(ctx, value, {
-        message: `I am expecting the type nat.`,
-      })
-    )
+    throw new Trace(unexpected(ctx, value, `I am expecting the type nat.`))
   }
 }
 
@@ -75,11 +55,7 @@ export function is_equal(ctx: Ctx, value: Value): EqualValue {
   if (value instanceof EqualValue) {
     return value
   } else {
-    throw new Trace(
-      unexpected(ctx, value, {
-        message: `I am expecting the type equal.`,
-      })
-    )
+    throw new Trace(unexpected(ctx, value, `I am expecting the type equal.`))
   }
 }
 
@@ -87,11 +63,7 @@ export function is_absurd(ctx: Ctx, value: Value): AbsurdValue {
   if (value instanceof AbsurdValue) {
     return value
   } else {
-    throw new Trace(
-      unexpected(ctx, value, {
-        message: `I am expecting the type absurd.`,
-      })
-    )
+    throw new Trace(unexpected(ctx, value, `I am expecting the type absurd.`))
   }
 }
 
@@ -99,11 +71,7 @@ export function is_trivial(ctx: Ctx, value: Value): TrivialValue {
   if (value instanceof TrivialValue) {
     return value
   } else {
-    throw new Trace(
-      unexpected(ctx, value, {
-        message: `I am expecting the type trivial.`,
-      })
-    )
+    throw new Trace(unexpected(ctx, value, `I am expecting the type trivial.`))
   }
 }
 
@@ -111,10 +79,6 @@ export function is_str(ctx: Ctx, value: Value): StrValue {
   if (value instanceof StrValue) {
     return value
   } else {
-    throw new Trace(
-      unexpected(ctx, value, {
-        message: `I am expecting the type string.`,
-      })
-    )
+    throw new Trace(unexpected(ctx, value, `I am expecting the type string.`))
   }
 }
