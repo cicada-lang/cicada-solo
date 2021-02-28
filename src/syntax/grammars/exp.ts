@@ -48,12 +48,7 @@ export const exp = {
       { car_t: "exp" },
       { cdr_t: "exp" },
     ],
-    "exp:pair": [
-      '"@"',
-      '"pair"',
-      { car_t: "exp" },
-      { cdr_t: "exp" },
-    ],
+    "exp:pair": ['"@"', '"pair"', { car_t: "exp" }, { cdr_t: "exp" }],
     "exp:cons": ['"cons"', '"("', { car: "exp" }, '","', { cdr: "exp" }, '")"'],
     "exp:car": ['"car"', '"("', { target: "exp" }, '")"'],
     "exp:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
