@@ -11,7 +11,7 @@ import { Str, Quote } from "@/core"
 import { Type } from "@/core"
 import { Let } from "@/core"
 import { The } from "@/core"
-import { nat_from_number } from "@/core/nat-util"
+import { nat_from_number } from "@/core/nat/nat-util"
 import * as ut from "@/ut"
 
 export function exp_matcher(tree: pt.Tree): Exp {
