@@ -3,7 +3,7 @@ import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { check } from "../check"
 import { evaluate } from "../evaluate"
-import * as Value from "../value"
+import { Value } from "../value"
 import * as Closure from "../closure"
 import { TypeValue } from "../core"
 import { SigmaValue } from "../core"
@@ -19,14 +19,14 @@ export class Sigma implements Exp {
     this.cdr_t = cdr_t
   }
 
-  evaluate(env: Env): Value.Value {
+  evaluate(env: Env): Value {
     return new SigmaValue(
       evaluate(env, this.car_t),
       Closure.create(env, this.name, this.cdr_t)
     )
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     check(ctx, this.car_t, new TypeValue())
     const car_t_value = evaluate(ctx.to_env(), this.car_t)
     check(ctx.extend(this.name, car_t_value), this.cdr_t, new TypeValue())

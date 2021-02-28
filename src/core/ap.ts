@@ -5,12 +5,11 @@ import { evaluate } from "../evaluate"
 import { infer } from "../infer"
 import { check } from "../check"
 import * as Explain from "../explain"
-import * as Value from "../value"
+import { Value } from "../value"
 import * as Closure from "../closure"
 import { expect } from "../expect"
 import { Normal } from "../normal"
-import * as Neutral from "../neutral"
-import * as Trace from "../trace"
+import { Trace } from "../trace"
 import { NotYetValue } from "../core"
 import { FnValue, PiValue, ApNeutral } from "../core"
 
@@ -23,11 +22,11 @@ export class Ap implements Exp {
     this.arg = arg
   }
 
-  evaluate(env: Env): Value.Value {
+  evaluate(env: Env): Value {
     return Ap.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
-  infer(ctx: Ctx): Value.Value {
+  infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
     const pi = expect(ctx, target_t, PiValue)
     check(ctx, this.arg, pi.arg_t)
@@ -43,7 +42,7 @@ export class Ap implements Exp {
     return `${this.target.alpha_repr(ctx)}(${this.arg.alpha_repr(ctx)})`
   }
 
-  static apply(target: Value.Value, arg: Value.Value): Value.Value {
+  static apply(target: Value, arg: Value): Value {
     if (target instanceof FnValue) {
       return Closure.apply(target.ret_cl, arg)
     } else if (target instanceof NotYetValue) {
@@ -53,7 +52,7 @@ export class Ap implements Exp {
           new ApNeutral(target.neutral, new Normal(target.t.arg_t, arg))
         )
       } else {
-        throw new Trace.Trace(
+        throw new Trace(
           Explain.explain_elim_target_type_mismatch({
             elim: "ap",
             expecting: ["new PiValue()"],
@@ -62,7 +61,7 @@ export class Ap implements Exp {
         )
       }
     } else {
-      throw new Trace.Trace(
+      throw new Trace(
         Explain.explain_elim_target_mismatch({
           elim: "ap",
           expecting: ["Value.fn", "new NotYetValue"],

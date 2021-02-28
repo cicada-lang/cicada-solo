@@ -10,7 +10,7 @@ import * as Value from "../value"
 import * as Closure from "../closure"
 import { Normal } from "../normal"
 import * as Neutral from "../neutral"
-import * as Trace from "../trace"
+import { Trace } from "../trace"
 import { Pi, Ap } from "../core"
 import { Type } from "../core"
 import { Var } from "../core"
@@ -82,7 +82,7 @@ export class Replace implements Exp {
           )
         )
       } else {
-        throw new Trace.Trace(
+        throw new Trace(
           Explain.explain_elim_target_type_mismatch({
             elim: "replace",
             expecting: ["Value.equal"],
@@ -91,7 +91,7 @@ export class Replace implements Exp {
         )
       }
     } else {
-      throw new Trace.Trace(
+      throw new Trace(
         Explain.explain_elim_target_mismatch({
           elim: "replace",
           expecting: ["Value.same", "new NotYetValue"],

@@ -1,4 +1,5 @@
-I am expecting the type sigma.
+I see unexpected value: Type
+But I am expecting value of type: SigmaValue.
 
 previous:
 - cons(String, String)

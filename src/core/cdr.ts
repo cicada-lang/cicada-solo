@@ -8,7 +8,7 @@ import * as Value from "../value"
 import * as Closure from "../closure"
 import * as Explain from "../explain"
 import * as Neutral from "../neutral"
-import * as Trace from "../trace"
+import { Trace } from "../trace"
 import { Car, SigmaValue, ConsValue, CdrNeutral } from "../core"
 import { NotYetValue } from "../core"
 
@@ -48,7 +48,7 @@ export class Cdr implements Exp {
           new CdrNeutral(target.neutral)
         )
       } else {
-        throw new Trace.Trace(
+        throw new Trace(
           Explain.explain_elim_target_type_mismatch({
             elim: "cdr",
             expecting: ["Value.sigma"],
@@ -57,7 +57,7 @@ export class Cdr implements Exp {
         )
       }
     } else {
-      throw new Trace.Trace(
+      throw new Trace(
         Explain.explain_elim_target_mismatch({
           elim: "cdr",
           expecting: ["Value.cons", "new NotYetValue"],
