@@ -1,8 +1,7 @@
 # cicada
 
-- [refactoring] clear deps
-- [refactoring] inline equivalent
 - [refactoring] closure/
+- [refactoring] clear deps -- no `import * as ...`
 
 - [pie] `List`
 - [pie] `Vector`
