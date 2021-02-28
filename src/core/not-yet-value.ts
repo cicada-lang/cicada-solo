@@ -1,13 +1,13 @@
 import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { Value } from "../value"
-import * as Neutral from "../neutral"
+import { Neutral } from "../neutral"
 
 export class NotYetValue {
   t: Value
-  neutral: Neutral.Neutral
+  neutral: Neutral
 
-  constructor(t: Value, neutral: Neutral.Neutral) {
+  constructor(t: Value, neutral: Neutral) {
     this.t = t
     this.neutral = neutral
   }
