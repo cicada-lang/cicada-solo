@@ -5,8 +5,7 @@ import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { infer } from "../infer"
 import { expect } from "../expect"
-import * as Explain from "../explain"
-import { Value } from "../value"
+import { Value, match_value } from "../value"
 import { Closure } from "../closure"
 import { Normal } from "../normal"
 import { Trace } from "../trace"
@@ -61,38 +60,24 @@ export class Replace implements Exp {
   }
 
   static apply(target: Value, motive: Value, base: Value): Value {
-    if (target instanceof SameValue) {
-      return base
-    } else if (target instanceof NotYetValue) {
-      if (target.t instanceof EqualValue) {
-        const base_t = Ap.apply(motive, target.t.from)
-        const closure = new Closure(new Env(), "x", new Type())
-        const motive_t = new PiValue(target.t.t, closure)
-        return new NotYetValue(
-          Ap.apply(motive, target.t.to),
-          new ReplaceNeutral(
-            target.neutral,
-            new Normal(motive_t, motive),
-            new Normal(base_t, base)
-          )
-        )
-      } else {
-        throw new Trace(
-          Explain.explain_elim_target_type_mismatch({
-            elim: "replace",
-            expecting: ["Value.equal"],
-            reality: target.t.constructor.name,
-          })
-        )
-      }
-    } else {
-      throw new Trace(
-        Explain.explain_elim_target_mismatch({
-          elim: "replace",
-          expecting: ["Value.same", "new NotYetValue"],
-          reality: target.constructor.name,
-        })
-      )
-    }
+    return match_value(target, {
+      SameValue: (_: SameValue) => base,
+      NotYetValue: ({ t, neutral }: NotYetValue) =>
+        match_value(t, {
+          EqualValue: ({ t, to, from }: EqualValue) => {
+            const base_t = Ap.apply(motive, from)
+            const closure = new Closure(new Env(), "x", new Type())
+            const motive_t = new PiValue(t, closure)
+            return new NotYetValue(
+              Ap.apply(motive, to),
+              new ReplaceNeutral(
+                neutral,
+                new Normal(motive_t, motive),
+                new Normal(base_t, base)
+              )
+            )
+          },
+        }),
+    })
   }
 }
