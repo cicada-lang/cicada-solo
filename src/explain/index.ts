@@ -1,12 +1,5 @@
 import * as ut from "../ut"
 
-export function explain_name_undefined(name: string): string {
-  const explanation = `
-    |the name ${name} is undefined.
-    |`
-  return ut.aline(explanation)
-}
-
 export function explain_elim_target_mismatch(the: {
   elim: string
   expecting: Array<string>

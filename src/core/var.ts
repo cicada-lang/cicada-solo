@@ -2,7 +2,6 @@ import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { Value } from "../value"
-import * as Explain from "../explain"
 import { Trace } from "../trace"
 
 export class Var implements Exp {
@@ -15,15 +14,22 @@ export class Var implements Exp {
   evaluate(env: Env): Value {
     const result = env.lookup(this.name)
     if (result === undefined) {
-      throw new Trace(Explain.explain_name_undefined(this.name))
+      throw new Trace(
+        `Fail to evaluate a variable.\n` +
+          `The name ${this.name} is undefined.`
+      )
     }
+
     return result
   }
 
   infer(ctx: Ctx): Value {
     const t = ctx.lookup(this.name)
     if (t === undefined) {
-      throw new Trace(Explain.explain_name_undefined(this.name))
+      throw new Trace(
+        `Fail to infer the type of a variable.\n` +
+          `The name ${this.name} is undefined.`
+      )
     }
     return t
   }

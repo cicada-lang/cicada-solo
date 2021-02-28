@@ -1,6 +1,5 @@
-
-the name gauss is undefined.
-
+Fail to infer the type of a variable.
+The name gauss is undefined.
 previous:
 - gauss
 - gauss(prev)
