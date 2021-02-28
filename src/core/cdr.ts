@@ -4,9 +4,8 @@ import { Env } from "../env"
 import { infer } from "../infer"
 import { expect } from "../expect"
 import { evaluate } from "../evaluate"
-import { Value } from "../value"
+import { Value, match_value } from "../value"
 import { Closure } from "../closure"
-import * as Explain from "../explain"
 import { Trace } from "../trace"
 import { Car, SigmaValue, ConsValue, CdrNeutral } from "../core"
 import { NotYetValue } from "../core"
@@ -38,31 +37,16 @@ export class Cdr implements Exp {
   }
 
   static apply(target: Value): Value {
-    if (target instanceof ConsValue) {
-      return target.cdr
-    } else if (target instanceof NotYetValue) {
-      if (target.t instanceof SigmaValue) {
-        return new NotYetValue(
-          target.t.cdr_t_cl.apply(Car.apply(target)),
-          new CdrNeutral(target.neutral)
-        )
-      } else {
-        throw new Trace(
-          Explain.explain_elim_target_type_mismatch({
-            elim: "cdr",
-            expecting: ["Value.sigma"],
-            reality: target.t.constructor.name,
-          })
-        )
-      }
-    } else {
-      throw new Trace(
-        Explain.explain_elim_target_mismatch({
-          elim: "cdr",
-          expecting: ["Value.cons", "new NotYetValue"],
-          reality: target.constructor.name,
-        })
-      )
-    }
+    return match_value(target, {
+      ConsValue: (cons: ConsValue) => cons.cdr,
+      NotYetValue: ({ t, neutral }: NotYetValue) =>
+        match_value(t, {
+          SigmaValue: (sigma: SigmaValue) =>
+            new NotYetValue(
+              sigma.cdr_t_cl.apply(Car.apply(target)),
+              new CdrNeutral(neutral)
+            ),
+        }),
+    })
   }
 }
