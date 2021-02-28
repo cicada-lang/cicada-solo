@@ -1,7 +1,6 @@
 import { Stmt } from "../stmt"
 import { World } from "../world"
 import { Exp } from "../exp"
-import * as Value from "../value"
 import { infer } from "../infer"
 import { evaluate } from "../evaluate"
 import { readback } from "../readback"

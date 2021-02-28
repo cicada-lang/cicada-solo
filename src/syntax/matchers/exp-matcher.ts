@@ -12,7 +12,6 @@ import { Type } from "../../core"
 import { Let } from "../../core"
 import { The } from "../../core"
 import { nat_from_number } from "../../core/nat-util"
-import { stmts_matcher } from "../matchers"
 import * as ut from "../../ut"
 
 export function exp_matcher(tree: pt.Tree): Exp {
