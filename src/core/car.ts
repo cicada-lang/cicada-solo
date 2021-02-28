@@ -3,9 +3,8 @@ import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { infer } from "../infer"
 import { expect } from "../expect"
-import { Value } from "../value"
+import { Value, match_value } from "../value"
 import { evaluate } from "../evaluate"
-import * as Explain from "../explain"
 import { Trace } from "../trace"
 import { NotYetValue } from "../core"
 import { SigmaValue, ConsValue, CarNeutral } from "../core"
@@ -36,28 +35,13 @@ export class Car implements Exp {
   }
 
   static apply(target: Value): Value {
-    if (target instanceof ConsValue) {
-      return target.car
-    } else if (target instanceof NotYetValue) {
-      if (target.t instanceof SigmaValue) {
-        return new NotYetValue(target.t.car_t, new CarNeutral(target.neutral))
-      } else {
-        throw new Trace(
-          Explain.explain_elim_target_type_mismatch({
-            elim: "car",
-            expecting: ["Value.sigma"],
-            reality: target.t.constructor.name,
-          })
-        )
-      }
-    } else {
-      throw new Trace(
-        Explain.explain_elim_target_mismatch({
-          elim: "car",
-          expecting: ["Value.cons", "new NotYetValue"],
-          reality: target.constructor.name,
-        })
-      )
-    }
+    return match_value(target, {
+      ConsValue: (cons: ConsValue) => cons.car,
+      NotYetValue: ({ t, neutral }: NotYetValue) =>
+        match_value(t, {
+          SigmaValue: (sigma: SigmaValue) =>
+            new NotYetValue(sigma.car_t, new CarNeutral(neutral)),
+        }),
+    })
   }
 }

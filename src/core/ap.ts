@@ -5,7 +5,7 @@ import { evaluate } from "../evaluate"
 import { infer } from "../infer"
 import { check } from "../check"
 import * as Explain from "../explain"
-import { Value } from "../value"
+import { Value, match_value } from "../value"
 import { Closure } from "../closure"
 import { expect } from "../expect"
 import { Normal } from "../normal"
@@ -43,31 +43,16 @@ export class Ap implements Exp {
   }
 
   static apply(target: Value, arg: Value): Value {
-    if (target instanceof FnValue) {
-      return target.ret_cl.apply(arg)
-    } else if (target instanceof NotYetValue) {
-      if (target.t instanceof PiValue) {
-        return new NotYetValue(
-          target.t.ret_t_cl.apply(arg),
-          new ApNeutral(target.neutral, new Normal(target.t.arg_t, arg))
-        )
-      } else {
-        throw new Trace(
-          Explain.explain_elim_target_type_mismatch({
-            elim: "ap",
-            expecting: ["new PiValue()"],
-            reality: target.t.constructor.name,
-          })
-        )
-      }
-    } else {
-      throw new Trace(
-        Explain.explain_elim_target_mismatch({
-          elim: "ap",
-          expecting: ["Value.fn", "new NotYetValue"],
-          reality: target.constructor.name,
-        })
-      )
-    }
+    return match_value(target, {
+      FnValue: (fn: FnValue) => fn.ret_cl.apply(arg),
+      NotYetValue: ({ t, neutral }: NotYetValue) =>
+        match_value(t, {
+          PiValue: (pi: PiValue) =>
+            new NotYetValue(
+              pi.ret_t_cl.apply(arg),
+              new ApNeutral(neutral, new Normal(pi.arg_t, arg))
+            ),
+        }),
+    })
   }
 }
