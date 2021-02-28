@@ -6,7 +6,7 @@ import * as Value from "../value"
 import { conversion } from "../conversion"
 import * as Neutral from "../neutral"
 import * as Ctx from "../ctx"
-import * as Trace from "../trace"
+import { Trace } from "../trace"
 import * as ut from "../ut"
 import { TypeValue } from "../core"
 
@@ -17,7 +17,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
     } else if (exp.infer) {
       const u = exp.infer(ctx)
       if (!conversion(ctx, new TypeValue(), t, u)) {
-        throw new Trace.Trace(
+        throw new Trace(
           ut.aline(`
               |I infer the type to be ${readback(
                 ctx,
@@ -33,7 +33,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
         )
       }
     } else {
-      throw new Trace.Trace(
+      throw new Trace(
         ut.aline(`
           |I can not check the type of ${exp.repr()}.
           |I also can not check it by infer.
@@ -42,9 +42,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       )
     }
   } catch (error) {
-    if (error instanceof Trace.Trace) {
-      throw Trace.trail(error, exp)
-    }
+    if (error instanceof Trace) throw error.trail(exp)
     throw error
   }
 }

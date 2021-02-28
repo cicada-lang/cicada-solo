@@ -1,7 +1,7 @@
 import { Exp } from "../exp"
 import { Value } from "../value"
 import { Ctx } from "../ctx"
-import { Trace, trail } from "../trace"
+import { Trace } from "../trace"
 import * as ut from "../ut"
 
 export function infer(ctx: Ctx, exp: Exp): Value {
@@ -16,7 +16,7 @@ export function infer(ctx: Ctx, exp: Exp): Value {
           |`)
     )
   } catch (error) {
-    if (error instanceof Trace) throw trail(error, exp)
+    if (error instanceof Trace) throw error.trail(exp)
     throw error
   }
 }

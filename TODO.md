@@ -1,9 +1,8 @@
 # cicada
 
-- [refactoring] clear deps -- no `import * as ...`
 - [refactoring] `Closure` as class
-- [refactoring] `Trace` as class
 - [refactoring] `Explain`
+- [refactoring] clear deps -- no `import * as ...`
 
 - [pie] `List`
 - [pie] `Vector`

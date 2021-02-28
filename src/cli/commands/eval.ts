@@ -4,7 +4,7 @@ import { World } from "../../world"
 import * as Exp from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import * as Trace from "../../trace"
+import { Trace } from "../../trace"
 import pt from "@cicada-lang/partech"
 import fs from "fs"
 import strip_ansi from "strip-ansi"
@@ -34,8 +34,8 @@ export const handler = async (argv: Argv) => {
       console.log(world.output)
     }
   } catch (error) {
-    if (error instanceof Trace.Trace) {
-      console.error(Trace.repr(error, (exp) => exp.repr()))
+    if (error instanceof Trace) {
+      console.error(error.repr((exp) => exp.repr()))
       process.exit(1)
     }
 
