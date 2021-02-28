@@ -1,11 +1,11 @@
-import { Exp, AlphaCtx } from "../exp"
-import { Ctx } from "../ctx"
-import { Env } from "../env"
-import { evaluate } from "../evaluate"
-import { check } from "../check"
-import { Value } from "../value"
+import { Exp, AlphaCtx } from "@/exp"
+import { Ctx } from "@/ctx"
+import { Env } from "@/env"
+import { evaluate } from "@/evaluate"
+import { check } from "@/check"
+import { Value } from "@/value"
 import { nat_to_number } from "./nat-util"
-import { NatValue, Add1Value } from "../core"
+import { NatValue, Add1Value } from "@/core"
 
 export class Add1 implements Exp {
   prev: Exp

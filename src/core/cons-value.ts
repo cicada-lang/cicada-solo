@@ -1,6 +1,6 @@
-import { Ctx } from "../ctx"
-import { Exp } from "../exp"
-import { Value } from "../value"
+import { Ctx } from "@/ctx"
+import { Exp } from "@/exp"
+import { Value } from "@/value"
 
 export class ConsValue {
   car: Value

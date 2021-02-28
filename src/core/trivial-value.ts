@@ -1,8 +1,8 @@
-import { Ctx } from "../ctx"
-import { Exp } from "../exp"
-import { Value } from "../value"
-import { TypeValue } from "../core"
-import { Trivial, Sole } from "../core"
+import { Ctx } from "@/ctx"
+import { Exp } from "@/exp"
+import { Value } from "@/value"
+import { TypeValue } from "@/core"
+import { Trivial, Sole } from "@/core"
 
 export class TrivialValue {
   readback(ctx: Ctx, t: Value): Exp | undefined {

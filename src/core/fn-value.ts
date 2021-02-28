@@ -1,7 +1,7 @@
-import { Ctx } from "../ctx"
-import { Exp } from "../exp"
-import { Value } from "../value"
-import { Closure } from "../closure"
+import { Ctx } from "@/ctx"
+import { Exp } from "@/exp"
+import { Value } from "@/value"
+import { Closure } from "@/closure"
 
 export class FnValue {
   ret_cl: Closure

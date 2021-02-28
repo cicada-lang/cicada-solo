@@ -1,7 +1,7 @@
-import { Ctx } from "../ctx"
-import { Exp } from "../exp"
-import { Trace } from "../trace"
-import * as ut from "../ut"
+import { Ctx } from "@/ctx"
+import { Exp } from "@/exp"
+import { Trace } from "@/trace"
+import * as ut from "@/ut"
 
 export type Value = {
   readback(ctx: Ctx, t: Value): Exp | undefined

@@ -1,11 +1,11 @@
-import { Exp } from "../exp"
-import { Value } from "../value"
-import { Ctx } from "../ctx"
-import { conversion } from "../conversion"
-import { readback } from "../readback"
-import { Trace } from "../trace"
-import { TypeValue } from "../core"
-import * as ut from "../ut"
+import { Exp } from "@/exp"
+import { Value } from "@/value"
+import { Ctx } from "@/ctx"
+import { conversion } from "@/conversion"
+import { readback } from "@/readback"
+import { Trace } from "@/trace"
+import { TypeValue } from "@/core"
+import * as ut from "@/ut"
 
 export function check(ctx: Ctx, exp: Exp, t: Value): void {
   try {

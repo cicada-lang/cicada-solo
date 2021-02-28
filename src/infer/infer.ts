@@ -1,8 +1,8 @@
-import { Exp } from "../exp"
-import { Value } from "../value"
-import { Ctx } from "../ctx"
-import { Trace } from "../trace"
-import * as ut from "../ut"
+import { Exp } from "@/exp"
+import { Value } from "@/value"
+import { Ctx } from "@/ctx"
+import { Trace } from "@/trace"
+import * as ut from "@/ut"
 
 export function infer(ctx: Ctx, exp: Exp): Value {
   try {

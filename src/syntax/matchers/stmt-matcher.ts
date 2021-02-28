@@ -1,6 +1,6 @@
 import pt from "@cicada-lang/partech"
-import { Stmt } from "../../stmt"
-import { Def, Show } from "../../stmts"
+import { Stmt } from "@/stmt"
+import { Def, Show } from "@/stmts"
 import { exp_matcher } from "../matchers"
 
 export function stmts_matcher(tree: pt.Tree): Array<Stmt> {

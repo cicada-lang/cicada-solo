@@ -1,11 +1,11 @@
-import { Exp, AlphaCtx } from "../exp"
-import { Ctx } from "../ctx"
-import { Env } from "../env"
-import { evaluate } from "../evaluate"
-import { check } from "../check"
-import { Value } from "../value"
-import { TypeValue } from "../core"
-import { EqualValue } from "../core"
+import { Exp, AlphaCtx } from "@/exp"
+import { Ctx } from "@/ctx"
+import { Env } from "@/env"
+import { evaluate } from "@/evaluate"
+import { check } from "@/check"
+import { Value } from "@/value"
+import { TypeValue } from "@/core"
+import { EqualValue } from "@/core"
 
 export class Equal implements Exp {
   t: Exp

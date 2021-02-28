@@ -1,10 +1,10 @@
-import { Exp, AlphaCtx } from "../exp"
-import { Value } from "../value"
-import { Env } from "../env"
-import { Ctx } from "../ctx"
-import { evaluate } from "../evaluate"
-import { infer } from "../infer"
-import { check } from "../check"
+import { Exp, AlphaCtx } from "@/exp"
+import { Value } from "@/value"
+import { Env } from "@/env"
+import { Ctx } from "@/ctx"
+import { evaluate } from "@/evaluate"
+import { infer } from "@/infer"
+import { check } from "@/check"
 
 export class Let implements Exp {
   name: string

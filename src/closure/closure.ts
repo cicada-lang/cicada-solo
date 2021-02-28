@@ -1,7 +1,7 @@
-import { Exp } from "../exp"
-import { Env } from "../env"
-import { Value } from "../value"
-import { evaluate } from "../evaluate"
+import { Exp } from "@/exp"
+import { Env } from "@/env"
+import { Value } from "@/value"
+import { evaluate } from "@/evaluate"
 
 export class Closure {
   env: Env

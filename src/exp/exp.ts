@@ -1,6 +1,6 @@
-import { Env } from "../env"
-import { Ctx } from "../ctx"
-import { Value } from "../value"
+import { Env } from "@/env"
+import { Ctx } from "@/ctx"
+import { Value } from "@/value"
 
 export type Exp = {
   evaluate(env: Env): Value

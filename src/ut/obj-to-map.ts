@@ -1,4 +1,4 @@
-import * as ut from "../ut"
+import * as ut from "@/ut"
 
 export function obj_to_map<A>(obj: ut.Obj<A>): Map<string, A> {
   const map = new Map()

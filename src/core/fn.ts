@@ -1,13 +1,13 @@
-import { Exp, AlphaCtx } from "../exp"
-import { Ctx } from "../ctx"
-import { Env } from "../env"
-import { Value } from "../value"
-import { Closure } from "../closure"
-import { check } from "../check"
-import { expect } from "../expect"
-import { PiValue, FnValue } from "../core"
-import { VarNeutral } from "../core"
-import { NotYetValue } from "../core"
+import { Exp, AlphaCtx } from "@/exp"
+import { Ctx } from "@/ctx"
+import { Env } from "@/env"
+import { Value } from "@/value"
+import { Closure } from "@/closure"
+import { check } from "@/check"
+import { expect } from "@/expect"
+import { PiValue, FnValue } from "@/core"
+import { VarNeutral } from "@/core"
+import { NotYetValue } from "@/core"
 
 export class Fn implements Exp {
   name: string

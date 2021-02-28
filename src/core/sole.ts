@@ -1,8 +1,8 @@
-import { Exp, AlphaCtx } from "../exp"
-import { Ctx } from "../ctx"
-import { Env } from "../env"
-import { Value } from "../value"
-import { TrivialValue, SoleValue } from "../core"
+import { Exp, AlphaCtx } from "@/exp"
+import { Ctx } from "@/ctx"
+import { Env } from "@/env"
+import { Value } from "@/value"
+import { TrivialValue, SoleValue } from "@/core"
 
 export class Sole implements Exp {
   evaluate(env: Env): Value {

@@ -6,6 +6,9 @@
   "files": [
     "lib"
   ],
+  "_moduleAliases": {
+    "@": "lib"
+  },
   "scripts": {
     "build": "npx tsc",
     "watch": "npx tsc --watch",
@@ -39,6 +42,7 @@
     "fast-glob": "^3.2.5",
     "fs-readdir-recursive": "^1.1.0",
     "js-yaml": "^4.0.0",
+    "module-alias": "^2.2.2",
     "nanoid": "^3.1.20",
     "portfinder": "^1.0.28",
     "readdirp": "^3.5.0",

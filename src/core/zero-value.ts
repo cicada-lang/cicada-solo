@@ -1,7 +1,7 @@
-import { Ctx } from "../ctx"
-import { Exp } from "../exp"
-import { Value } from "../value"
-import { NatValue } from "../core"
+import { Ctx } from "@/ctx"
+import { Exp } from "@/exp"
+import { Value } from "@/value"
+import { NatValue } from "@/core"
 import { Zero } from "./zero"
 
 export class ZeroValue {

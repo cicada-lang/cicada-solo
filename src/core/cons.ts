@@ -1,12 +1,12 @@
-import { Exp, AlphaCtx } from "../exp"
-import { Ctx } from "../ctx"
-import { Env } from "../env"
-import { expect } from "../expect"
-import { Value } from "../value"
-import { Closure } from "../closure"
-import { evaluate } from "../evaluate"
-import { check } from "../check"
-import { SigmaValue, ConsValue } from "../core"
+import { Exp, AlphaCtx } from "@/exp"
+import { Ctx } from "@/ctx"
+import { Env } from "@/env"
+import { expect } from "@/expect"
+import { Value } from "@/value"
+import { Closure } from "@/closure"
+import { evaluate } from "@/evaluate"
+import { check } from "@/check"
+import { SigmaValue, ConsValue } from "@/core"
 
 export class Cons implements Exp {
   car: Exp

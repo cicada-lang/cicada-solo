@@ -1,7 +1,7 @@
 {
-  "include": [ "src" ],
+  "include": ["src"],
   "compilerOptions": {
-    "lib": [ "esnext", "dom" ],
+    "lib": ["esnext", "dom"],
     "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
@@ -10,6 +10,8 @@
     "strict": true,
     "outDir": "lib",
     "baseUrl": ".",
-    "paths": { "*": [ "node_modules/*" ] },
+    "paths": {
+      "@/*": ["src/*"]
+    }
   }
 }

@@ -1,8 +1,8 @@
-import { Neutral } from "../neutral"
-import { Normal } from "../normal"
-import { Exp } from "../exp"
-import { Ctx } from "../ctx"
-import { NatInd } from "../core"
+import { Neutral } from "@/neutral"
+import { Normal } from "@/normal"
+import { Exp } from "@/exp"
+import { Ctx } from "@/ctx"
+import { NatInd } from "@/core"
 
 export class NatIndNeutral {
   target: Neutral
