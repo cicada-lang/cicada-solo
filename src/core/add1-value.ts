@@ -2,8 +2,8 @@ import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { Value } from "../value"
 import { readback } from "../readback"
-import { NatValue } from "./nat-value"
-import { Add1 } from "./add1"
+import { NatValue } from "../core"
+import { Add1 } from "../core"
 
 export class Add1Value {
   prev: Value

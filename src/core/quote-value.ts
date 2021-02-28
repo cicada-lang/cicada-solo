@@ -1,8 +1,8 @@
 import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { Value } from "../value"
-import { StrValue } from "./str-value"
-import { Quote } from "./quote"
+import { StrValue } from "../core"
+import { Quote } from "../core"
 
 export class QuoteValue {
   str: string

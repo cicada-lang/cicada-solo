@@ -2,7 +2,7 @@ import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { readback } from "../readback"
 import { Value } from "../value"
-import { TypeValue } from "./type-value"
+import { TypeValue } from "../core"
 import { Equal } from "./equal"
 
 export class EqualValue {

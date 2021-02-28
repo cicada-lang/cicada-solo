@@ -1,8 +1,8 @@
 import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { Value } from "../value"
-import { TypeValue } from "./type-value"
-import { Str } from "./str"
+import { TypeValue } from "../core"
+import { Str } from "../core"
 
 export class StrValue {
   readback(ctx: Ctx, t: Value): Exp | undefined {
