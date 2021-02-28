@@ -1,34 +1,25 @@
-import { readback } from "../readback"
-import * as Evaluate from "../evaluate"
-import * as Exp from "../exp"
-import * as Stmt from "../stmt"
-import * as Value from "../value"
+import { Exp } from "../exp"
+import { Value } from "../value"
+import { Ctx } from "../ctx"
 import { conversion } from "../conversion"
-import * as Neutral from "../neutral"
-import * as Ctx from "../ctx"
+import { readback } from "../readback"
 import { Trace } from "../trace"
-import * as ut from "../ut"
 import { TypeValue } from "../core"
+import * as ut from "../ut"
 
-export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
+export function check(ctx: Ctx, exp: Exp, t: Value): void {
   try {
     if (exp.check) {
       return exp.check(ctx, t)
     } else if (exp.infer) {
       const u = exp.infer(ctx)
       if (!conversion(ctx, new TypeValue(), t, u)) {
+        const u_exp = readback(ctx, new TypeValue(), u)
+        const t_exp = readback(ctx, new TypeValue(), t)
         throw new Trace(
           ut.aline(`
-              |I infer the type to be ${readback(
-                ctx,
-                new TypeValue(),
-                u
-              ).repr()}.
-              |But the given type is ${readback(
-                ctx,
-                new TypeValue(),
-                t
-              ).repr()}.
+              |I infer the type to be ${u_exp.repr()}.
+              |But the given type is ${t_exp.repr()}.
               |`)
         )
       }

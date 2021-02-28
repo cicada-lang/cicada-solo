@@ -1,18 +1,12 @@
 import * as Syntax from "../../syntax"
-import * as Value from "../../value"
 import { World } from "../../world"
-import * as Exp from "../../exp"
-import { Ctx } from "../../ctx"
-import { Env } from "../../env"
 import { Trace } from "../../trace"
 import pt from "@cicada-lang/partech"
 import fs from "fs"
 import strip_ansi from "strip-ansi"
 
 export const command = "eval <input>"
-
 export const aliases = ["$0"]
-
 export const description = "Eval a file"
 
 export const builder = {

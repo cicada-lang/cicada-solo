@@ -1,7 +1,7 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Value } from "../value"
 import { Env } from "../env"
-import * as Ctx from "../ctx"
+import { Ctx } from "../ctx"
 import { evaluate } from "../evaluate"
 import { infer } from "../infer"
 import { check } from "../check"
@@ -21,7 +21,7 @@ export class Let implements Exp {
     return evaluate(env.extend(this.name, evaluate(env, this.exp)), this.ret)
   }
 
-  infer(ctx: Ctx.Ctx): Value {
+  infer(ctx: Ctx): Value {
     return infer(
       ctx.extend(
         this.name,
@@ -32,7 +32,7 @@ export class Let implements Exp {
     )
   }
 
-  check(ctx: Ctx.Ctx, t: Value): void {
+  check(ctx: Ctx, t: Value): void {
     check(
       ctx.extend(
         this.name,

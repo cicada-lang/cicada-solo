@@ -2,7 +2,6 @@
 
 - [refactoring] `Closure` as class
 - [refactoring] `Explain`
-- [refactoring] clear deps -- no `import * as ...`
 
 - [pie] `List`
 - [pie] `Vector`
