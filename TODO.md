@@ -1,6 +1,8 @@
 # cicada
 
-- [syntax] pure prefix notation for `@sigma` & `@pair` & `@cons`
+- [syntax] pure prefix notation for `@sigma` & `@pair` & `@cons` & `@car` & `@cdr`
+
+- [fulfilling type] -- `Cls` `Obj` `Dot` -- `@class` `@object` `@dot`
 
 - [pie] `List`
 - [pie] `Vector`
