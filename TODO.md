@@ -1,7 +1,7 @@
 # cicada
 
-- [pie] `List` -- `@list-cons`
-- [pie] `Vector`
+- [pie] `List` -- `@list`
+- [pie] `Vector` --  `@vec`
 
 - [pie] be able to add type annotation to `Exp.fn` -- without return type
 
