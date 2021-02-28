@@ -3,6 +3,7 @@ import * as Evaluate from "../evaluate"
 import * as Exp from "../exp"
 import * as Stmt from "../stmt"
 import * as Value from "../value"
+import { conversion } from "../conversion"
 import * as Neutral from "../neutral"
 import * as Ctx from "../ctx"
 import * as Trace from "../trace"
@@ -15,7 +16,7 @@ export function check(ctx: Ctx.Ctx, exp: Exp.Exp, t: Value.Value): void {
       return exp.check(ctx, t)
     } else if (exp.infer) {
       const u = exp.infer(ctx)
-      if (!Value.conversion(ctx, new TypeValue(), t, u)) {
+      if (!conversion(ctx, new TypeValue(), t, u)) {
         throw new Trace.Trace(
           ut.aline(`
               |I infer the type to be ${readback(

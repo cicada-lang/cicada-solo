@@ -4,6 +4,7 @@ import { Env } from "../env"
 import * as Value from "../value"
 import { expect } from "../expect"
 import { readback } from "../readback"
+import { conversion } from "../conversion"
 import * as Trace from "../trace"
 import * as ut from "../ut"
 import { TypeValue } from "../core"
@@ -12,7 +13,7 @@ import { EqualValue, SameValue } from "../core"
 export class Same implements Exp {
   check(ctx: Ctx, t: Value.Value): void {
     const equal = expect(ctx, t, EqualValue)
-    if (!Value.conversion(ctx, equal.t, equal.from, equal.to)) {
+    if (!conversion(ctx, equal.t, equal.from, equal.to)) {
       throw new Trace.Trace(
         ut.aline(`
           |I am expecting the following two values to be the same type:
