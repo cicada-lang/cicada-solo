@@ -11,7 +11,7 @@ export class FnValue {
   }
 
   readback(ctx: Ctx, t: Value): Exp | undefined {
-    // TODO
+    // NOTE Pi eta expand
     return undefined
   }
 }
