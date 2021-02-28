@@ -1,6 +1,9 @@
 # cicada
 
 - [refactoring] clear deps
+- [refactoring] conversion/
+- [refactoring] inline equivalent
+- [refactoring] closure/
 
 - [pie] `List`
 - [pie] `Vector`

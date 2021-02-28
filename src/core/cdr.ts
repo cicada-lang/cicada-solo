@@ -2,6 +2,7 @@ import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { infer } from "../infer"
+import { expect } from "../expect"
 import { evaluate } from "../evaluate"
 import * as Value from "../value"
 import * as Explain from "../explain"
@@ -23,7 +24,7 @@ export class Cdr implements Exp {
 
   infer(ctx: Ctx): Value.Value {
     const target_t = infer(ctx, this.target)
-    const sigma = Value.is_sigma(ctx, target_t)
+    const sigma = expect(ctx, target_t, SigmaValue)
     const car = Car.apply(evaluate(ctx.to_env(), this.target))
     return Value.Closure.apply(sigma.cdr_t_cl, car)
   }

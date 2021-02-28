@@ -2,6 +2,7 @@ import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { infer } from "../infer"
+import { expect } from "../expect"
 import * as Value from "../value"
 import { evaluate } from "../evaluate"
 import * as Explain from "../explain"
@@ -23,7 +24,7 @@ export class Car implements Exp {
 
   infer(ctx: Ctx): Value.Value {
     const target_t = infer(ctx, this.target)
-    const sigma = Value.is_sigma(ctx, target_t)
+    const sigma = expect(ctx, target_t, SigmaValue)
     return sigma.car_t
   }
 

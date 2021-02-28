@@ -4,6 +4,7 @@ import { Env } from "../env"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { infer } from "../infer"
+import { expect } from "../expect"
 import * as Explain from "../explain"
 import * as Value from "../value"
 import { Normal } from "../normal"
@@ -38,7 +39,7 @@ export class Replace implements Exp {
 
   infer(ctx: Ctx): Value.Value {
     const target_t = infer(ctx, this.target)
-    const equal = Value.is_equal(ctx, target_t)
+    const equal = expect(ctx, target_t, EqualValue)
     const motive_t = evaluate(
       new Env().extend("t", equal.t),
       new Pi("x", new Var("t"), new Type())

@@ -6,6 +6,7 @@ import { infer } from "../infer"
 import { check } from "../check"
 import * as Explain from "../explain"
 import * as Value from "../value"
+import { expect } from "../expect"
 import { Normal } from "../normal"
 import * as Neutral from "../neutral"
 import * as Trace from "../trace"
@@ -27,7 +28,7 @@ export class Ap implements Exp {
 
   infer(ctx: Ctx): Value.Value {
     const target_t = infer(ctx, this.target)
-    const pi = Value.is_pi(ctx, target_t)
+    const pi = expect(ctx, target_t, PiValue)
     check(ctx, this.arg, pi.arg_t)
     const arg_value = evaluate(ctx.to_env(), this.arg)
     return Value.Closure.apply(pi.ret_t_cl, arg_value)

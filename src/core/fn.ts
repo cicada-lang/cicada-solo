@@ -4,7 +4,8 @@ import { Env } from "../env"
 import * as Value from "../value"
 import * as Neutral from "../neutral"
 import { check } from "../check"
-import { FnValue } from "../core"
+import { expect } from "../expect"
+import { PiValue, FnValue } from "../core"
 import { VarNeutral } from "../core"
 import { NotYetValue } from "../core"
 
@@ -22,7 +23,7 @@ export class Fn implements Exp {
   }
 
   check(ctx: Ctx, t: Value.Value): void {
-    const pi = Value.is_pi(ctx, t)
+    const pi = expect(ctx, t, PiValue)
     const arg = new NotYetValue(pi.arg_t, new VarNeutral(this.name))
     const ret_t = Value.Closure.apply(pi.ret_t_cl, arg)
     check(ctx.extend(this.name, pi.arg_t), this.ret, ret_t)

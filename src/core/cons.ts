@@ -1,10 +1,11 @@
 import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
+import { expect } from "../expect"
 import * as Value from "../value"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
-import { ConsValue } from "../core"
+import { SigmaValue, ConsValue } from "../core"
 
 export class Cons implements Exp {
   car: Exp
@@ -20,7 +21,7 @@ export class Cons implements Exp {
   }
 
   check(ctx: Ctx, t: Value.Value): void {
-    const sigma = Value.is_sigma(ctx, t)
+    const sigma = expect(ctx, t, SigmaValue)
     const cdr_t = Value.Closure.apply(
       sigma.cdr_t_cl,
       evaluate(ctx.to_env(), this.car)
