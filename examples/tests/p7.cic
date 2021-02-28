@@ -3,6 +3,6 @@
 @let one add1(zero)
 @let two add1(one)
 @let three add1(two)
-cons(one, two)
+@cons one two
 
 @show x

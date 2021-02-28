@@ -2,7 +2,7 @@
 
 @def flavored_lentils
 @the @arrow String @pair String String
-@fn flavor cons(flavor, "lentils")
+@fn flavor @cons flavor "lentils"
 
 @def garlic_flavored_lentils
 @the @pair String String
@@ -18,7 +18,7 @@ flavored_lentils("garlic")
 
 @def id_in_pair
 @the (x: String) -> T
-(x) => cons(x, (x) => x)
+(x) => @cons x (x) => x
 
 @show @the T id_in_pair("x")
 
@@ -26,13 +26,13 @@ flavored_lentils("garlic")
 // effected by the substitution of outer `x`,
 // and `(x) => x` is equivalent to `(y) => y`,
 
-@show @the Equal(T, id_in_pair("x"), cons("x", (y) => y))
+@show @the Equal(T, id_in_pair("x"), @cons "x" (y) => y)
 same
 
-@show @the Equal(@arrow Nat @pair Nat Nat, (x) => cons(x, x), (y) => cons(y, y))
+@show @the Equal(@arrow Nat @pair Nat Nat, (x) => @cons x x, (y) => @cons y y)
 same
 
-@show @the Equal((Nat) -> Nat, (y) => car(@the @pair Nat Nat cons(y, y)), (x) => x)
+@show @the Equal((Nat) -> Nat, (y) => car(@the @pair Nat Nat @cons y y), (x) => x)
 same
 
 @show @the Equal((@pair Nat Nat) -> Nat, (y) => car(y), (x) => car(x))
@@ -40,9 +40,9 @@ same
 
 @def vegetables
 @the @pair String String
-cons("celery", "carrot")
+@cons "celery" "carrot"
 
-@show @the Equal(@pair String String, vegetables, cons(car(vegetables), cdr(vegetables)))
+@show @the Equal(@pair String String, vegetables, @cons car(vegetables) cdr(vegetables))
 same
 
 @def nat_rec
@@ -77,10 +77,10 @@ same
 
 @show
 @the @pair Type Type
-cons(String, String)
+@cons String String
 
 @def Pear
 @the Type
 @pair Nat Nat
 
-@show @the Pear cons(1, 2)
+@show @the Pear @cons 1 2

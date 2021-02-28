@@ -1,5 +1,5 @@
 @show @the Equal(
   @pair String String,
-  cons("ratatouille", "baguette"),
-  cons("baguette", "ratatouille"))
+  @cons "ratatouille" "baguette",
+  @cons "baguette" "ratatouille")
 same
