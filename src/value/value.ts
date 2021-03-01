@@ -8,10 +8,10 @@ export type Value = {
   eta_expand?(ctx: Ctx, value: Value): Exp
 }
 
-export function match_value<B>(
+export function match_value<A>(
   target: Value,
-  branches: { [key: string]: (value: any) => B }
-): B {
+  branches: { [key: string]: (value: any) => A }
+): A {
   for (const [name, f] of Object.entries(branches)) {
     if (name === target.constructor.name) {
       return f(target)
