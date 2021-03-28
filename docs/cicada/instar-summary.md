@@ -17,19 +17,16 @@ the:
 - @the t exp
 
 pi:
-- @pi name arg_t ret_t
-- @arrow arg_t ret_t
-- @fn name ret
-  - (name) => ret
-- @ap target arg
+- TODO [@forall] (name: arg_t) -> ret_t
+- TODO @arrow arg_t ret_t
+- TODO (name) => ret
+- TODO @ap target arg
   - target(arg)
   - target(arg, ...)
 
 sigma:
-- @sigma name car_t cdr_t
-  - (name: car_t) * cdr_t
+- @exists (name: car_t) [such that] cdr_t
 - Pair(car_t, cdr_t)
-  - (car_t) * cdr_t
 - cons(car, cdr)
 - car(target)
 - cdr(target)
