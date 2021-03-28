@@ -1,0 +1,5 @@
+@def x
+@the Trivial
+sole
+
+@show x
