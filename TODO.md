@@ -1,3 +1,7 @@
+- [syntax back] @pair car_t cdr_t
+- [syntax back] @cons car cdr
+- [syntax back] @arrow arg_t ret_t
+
 - [pie] `List` -- `List` `@li` `@nil`
 - [pie] `Vector` --  `Vector` `@vi` `@vil`
 
