@@ -18,8 +18,7 @@ export const exp = {
       '">"',
       { ret_t: "exp" },
     ],
-    "exp:arrow": ['"@"', '"arrow"', { arg_t: "exp" }, { ret_t: "exp" }],
-    "exp:arrow_sugar": [
+    "exp:arrow": [
       '"("',
       { arg_t: "exp" },
       '")"',

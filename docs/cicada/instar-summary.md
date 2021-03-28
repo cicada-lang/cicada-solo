@@ -18,7 +18,7 @@ the:
 
 pi:
 - TODO [@forall] (name: arg_t) -> ret_t
-- TODO @arrow arg_t ret_t
+- (arg_t) -> ret_t
 - TODO (name) => ret
 - TODO @ap target arg
   - target(arg)

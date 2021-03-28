@@ -1,7 +1,7 @@
 // 2. Doin' What Comes Naturally
 
 @def flavored_lentils
-@the @arrow String Pair(String, String)
+@the (String) -> Pair(String, String)
 @fn flavor cons(flavor, "lentils")
 
 @def garlic_flavored_lentils
@@ -9,7 +9,7 @@
 flavored_lentils("garlic")
 
 @def id
-@the @arrow String String
+@the (String) -> String
 @fn x x
 
 @def T
@@ -29,7 +29,7 @@ Pair(String, (String) -> String)
 @show @the Equal(T, id_in_pair("x"), cons("x", (y) => y))
 same
 
-@show @the Equal(@arrow Nat Pair(Nat, Nat), (x) => cons(x, x), (y) => cons(y, y))
+@show @the Equal((Nat) -> Pair(Nat, Nat), (x) => cons(x, x), (y) => cons(y, y))
 same
 
 @show @the Equal((Nat) -> Nat, (y) => car(@the Pair(Nat, Nat) cons(y, y)), (x) => x)
@@ -61,7 +61,7 @@ nat_ind(target, @fn _ T, base, step)
   nat_ind(target, (_) => T, base, (prev) => (_almost) => step(prev))
 
 @def naught_or_more
-@the @arrow Nat String
+@the (Nat) -> String
 @fn n
 // nat_which(n)(String)("naught")((_prev) => "more")
 @ap @ap @ap @ap nat_which n String "naught" @fn _prev "more"

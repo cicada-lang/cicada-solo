@@ -1,4 +1,3 @@
-- [syntax back] no @arrow
 - [syntax back] no @fn
 
 - [test] `*.test.cic`
