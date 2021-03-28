@@ -1,12 +1,12 @@
-@the @sigma _ String (_1: String) -> String cons("x", (_) => _)
-@the Equal(@sigma _ String (_1: String) -> String, cons("x", (_) => _), cons("x", (_) => _)) same
-@the Equal((_: Nat) -> @sigma _1 Nat Nat, (_) => cons(_, _), (_) => cons(_, _)) same
+@the @sigma _ String (_1: String) -> String @cons "x" (_) => _
+@the Equal(@sigma _ String (_1: String) -> String, @cons "x" (_) => _, @cons "x" (_) => _) same
+@the Equal((_: Nat) -> @sigma _1 Nat Nat, (_) => @cons _ _, (_) => @cons _ _) same
 @the Equal((_: Nat) -> Nat, (_) => _, (_) => _) same
 @the Equal((_: @sigma _ Nat Nat) -> Nat, (_) => car(_), (_) => car(_)) same
-@the Equal(@sigma _ String String, cons("celery", "carrot"), cons("celery", "carrot")) same
+@the Equal(@sigma _ String String, @cons "celery" "carrot", @cons "celery" "carrot") same
 @the Equal(String, "naught", "naught") same
 @the Equal(String, "more", "more") same
 @the Equal(String, "more", "more") same
-@the @sigma _ Type Type cons(String, String)
-@the @sigma _ Nat Nat cons(1, 2)
+@the @sigma _ Type Type @cons String String
+@the @sigma _ Nat Nat @cons 1 2
 

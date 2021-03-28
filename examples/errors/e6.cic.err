@@ -3,12 +3,12 @@ I am expecting the following two values to be the same type:
   (_: String) -> (_1: String) -> @sigma _2 String String
 But they are not.
 from:
-  (_) => (_1) => cons(_, _1)
+  (_) => (_1) => @cons _ _1
 to:
-  (_) => (_1) => cons(_1, _)
+  (_) => (_1) => @cons _1 _
 
 previous:
 - same
-- @the Equal((_: String) -> (_: String) -> @sigma _ String String, (x) => (y) => cons(x, y), (y) => (x) => cons(x, y)) same
+- @the Equal((_: String) -> (_: String) -> @sigma _ String String, (x) => (y) => @cons x y, (y) => (x) => @cons x y) same
 
 

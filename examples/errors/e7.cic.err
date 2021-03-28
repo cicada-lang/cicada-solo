@@ -2,7 +2,7 @@ I see unexpected value: Type
 But I am expecting value of type: SigmaValue.
 
 previous:
-- cons(String, String)
-- @the Type cons(String, String)
+- @cons String String
+- @the Type @cons String String
 
 
