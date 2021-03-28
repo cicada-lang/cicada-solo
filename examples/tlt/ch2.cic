@@ -2,7 +2,7 @@
 
 @def flavored_lentils
 @the (String) -> Pair(String, String)
-@fn flavor cons(flavor, "lentils")
+(flavor) => cons(flavor, "lentils")
 
 @def garlic_flavored_lentils
 @the Pair(String, String)
@@ -10,7 +10,7 @@ flavored_lentils("garlic")
 
 @def id
 @the (String) -> String
-@fn x x
+(x) => x
 
 @def T
 @the Type
@@ -52,8 +52,8 @@ same
 
 @def nat_rec
 @the @pi target Nat @pi T Type @pi base T @pi step @pi prev Nat @pi almost T T T
-@fn target @fn T @fn base @fn step
-nat_ind(target, @fn _ T, base, step)
+(target) => (T) => (base) => (step) =>
+nat_ind(target, (_) => T, base, step)
 
 @def nat_which
 @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T
@@ -62,9 +62,9 @@ nat_ind(target, @fn _ T, base, step)
 
 @def naught_or_more
 @the (Nat) -> String
-@fn n
+(n) =>
 // nat_which(n)(String)("naught")((_prev) => "more")
-@ap @ap @ap @ap nat_which n String "naught" @fn _prev "more"
+@ap @ap @ap @ap nat_which n String "naught" (_prev) => "more"
 
 @show @the Equal(String, naught_or_more(0), "naught")
 same

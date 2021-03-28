@@ -1,4 +1,4 @@
-- [syntax back] no @fn
+- [syntax back] no @ap
 
 - [test] `*.test.cic`
 - [test] `*.play.cic`

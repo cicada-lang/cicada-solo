@@ -26,8 +26,7 @@ export const exp = {
       '">"',
       { ret_t: "exp" },
     ],
-    "exp:fn": ['"@"', '"fn"', { name: "identifier" }, { ret: "exp" }],
-    "exp:fn_sugar": [
+    "exp:fn": [
       '"("',
       { name: "identifier" },
       '")"',

@@ -23,10 +23,7 @@ export function exp_matcher(tree: pt.Tree): Exp {
       new Pi(pt.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:arrow": ({ arg_t, ret_t }) =>
       new Pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
-    "exp:arrow_sugar": ({ arg_t, ret_t }) =>
-      new Pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:fn": ({ name, ret }) => new Fn(pt.str(name), exp_matcher(ret)),
-    "exp:fn_sugar": ({ name, ret }) => new Fn(pt.str(name), exp_matcher(ret)),
     "exp:ap": ({ target, arg }) =>
       new Ap(exp_matcher(target), exp_matcher(arg)),
     "exp:ap_sugar": ({ target, args }) => {
