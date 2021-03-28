@@ -1,5 +1,3 @@
-- [syntax] make the language pure prefix notation for now, and optimize syntax later
-
 - [pie] `List` -- `List` `@li` `@nil`
 - [pie] `Vector` --  `Vector` `@vi` `@vil`
 
