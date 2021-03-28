@@ -34,11 +34,11 @@ export class Sigma implements Exp {
   }
 
   repr(): string {
-    return `@exists (${this.name}: ${this.car_t.repr()}) ${this.cdr_t.repr()}`
+    return `(${this.name}: ${this.car_t.repr()} * ${this.cdr_t.repr()})`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
     const cdr_t_repr = this.cdr_t.alpha_repr(ctx.extend(this.name))
-    return `@exists (${this.car_t.alpha_repr(ctx)}) ${cdr_t_repr}`
+    return `(${this.car_t.alpha_repr(ctx)} * ${cdr_t_repr})`
   }
 }

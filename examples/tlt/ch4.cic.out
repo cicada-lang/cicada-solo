@@ -1,8 +1,8 @@
-@the @exists (_: String) Nat cons("abc", 123)
-@the @exists (_: Nat) String cons(123, "abc")
-@the Equal(Type, (A: Type) -> (D: Type) -> (pair: @exists (_: A) D) -> @exists (_: D) A, (Lemon: Type) -> (Meringue: Type) -> (_: @exists (_: Lemon) Meringue) -> @exists (_1: Meringue) Lemon) same
-@the Equal(Type, (A: Type) -> (D: Type) -> (_: @exists (_: A) D) -> @exists (_1: D) A, (A: Type) -> (D: Type) -> (_: @exists (_: A) D) -> @exists (_1: D) A) same
-@the @exists (_: String) Nat cons("abc", 123)
-@the @exists (_: Nat) Nat cons(123, 123)
-@the @exists (_: String) String cons("abc", "abc")
+@the (_: String * Nat) cons("abc", 123)
+@the (_: Nat * String) cons(123, "abc")
+@the Equal(Type, (A: Type) -> (D: Type) -> (pair: (_: A * D)) -> (_: D * A), (Lemon: Type) -> (Meringue: Type) -> (_: (_: Lemon * Meringue)) -> (_1: Meringue * Lemon)) same
+@the Equal(Type, (A: Type) -> (D: Type) -> (_: (_: A * D)) -> (_1: D * A), (A: Type) -> (D: Type) -> (_: (_: A * D)) -> (_1: D * A)) same
+@the (_: String * Nat) cons("abc", 123)
+@the (_: Nat * Nat) cons(123, 123)
+@the (_: String * String) cons("abc", "abc")
 
