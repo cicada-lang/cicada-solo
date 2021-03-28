@@ -1,5 +1,3 @@
-- [test] by semantic units -- err
-
 - [pie] `List` -- `List` `@li` `@nil`
 - [pie] `Vector` --  `Vector` `@vi` `@vil`
 
