@@ -1,11 +1,5 @@
-- [pie] `List` -- `List` `@li` `@nil`
-- [pie] `Vector` --  `Vector` `@vi` `@vil`
-
-- [pie] be able to add type annotation to `Exp.fn` -- without return type
-
-- [test] `Equal`
-- [test] `Pi`
-- [test] `Absurd`
+- [pie] `List` -- `List` `li()` `nil`
+- [pie] `Vector` --  `Vector` `vli()` `vnil`
 
 - [fulfilling type] -- `Cls` `Obj` `Dot`
   - with:
@@ -17,7 +11,7 @@
   - problem:
     - how to handle `this`?
 
-- [syntax] `@class` `@object` `@dot`
+- [fulfilling type] [syntax] `@class` `@object` `@dot`
 
 - [optimization] use native `number` as `Nat`
 
