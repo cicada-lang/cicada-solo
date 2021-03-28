@@ -34,8 +34,7 @@ export const exp = {
       '">"',
       { ret: "exp" },
     ],
-    "exp:ap": ['"@"', '"ap"', { target: "exp" }, { arg: "exp" }],
-    "exp:ap_sugar": [
+    "exp:ap": [
       { target: "identifier" },
       { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
     ],

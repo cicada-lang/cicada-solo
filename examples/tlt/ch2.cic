@@ -62,9 +62,7 @@ nat_ind(target, (_) => T, base, step)
 
 @def naught_or_more
 @the (Nat) -> String
-(n) =>
-// nat_which(n)(String)("naught")((_prev) => "more")
-@ap @ap @ap @ap nat_which n String "naught" (_prev) => "more"
+(n) => nat_which(n)(String)("naught")((_prev) => "more")
 
 @show @the Equal(String, naught_or_more(0), "naught")
 same
