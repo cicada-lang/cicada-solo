@@ -1,8 +1,5 @@
-- [test] `*.test.cic`
-- [test] `*.play.cic`
-- [test] `*.snapshot.cic`
+- [test] by semantic units -- err
 
-- [test] by semantic units
 
 - [pie] `List` -- `List` `@li` `@nil`
 - [pie] `Vector` --  `Vector` `@vi` `@vil`

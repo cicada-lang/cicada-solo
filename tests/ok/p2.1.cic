@@ -1,3 +1,0 @@
-@def t @the Type Nat
-@def n @the t zero
-@def one add1(n)

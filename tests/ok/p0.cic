@@ -1,1 +1,0 @@
-@show @the Nat add1(add1(zero))

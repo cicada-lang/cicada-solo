@@ -3,7 +3,7 @@
 @def three add1(two)
 
 @def one_two
-@the @pair Nat Nat
-@cons one two
+@the (Nat * Nat)
+cons(one, two)
 
 @show cdr(one_two)
