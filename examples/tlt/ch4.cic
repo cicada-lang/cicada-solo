@@ -15,10 +15,10 @@
   @pair D A
 (A) => (D) =>
   (pair) =>
-  @cons cdr(pair) car(pair)
+  cons(cdr(pair), car(pair))
 
-@show flip(Nat)(String)(@cons 123 "abc")
-@show flip(String)(Nat)(flip(Nat)(String)(@cons 123 "abc"))
+@show flip(Nat)(String)(cons(123, "abc"))
+@show flip(String)(Nat)(flip(Nat)(String)(cons(123, "abc")))
 
 @show @the Equal(Type,
   (A: Type) -> (D: Type) -> (pair: @pair A D) -> @pair D A,
@@ -29,8 +29,8 @@ same
   (A: Type) -> (D: Type) -> (@pair A D) -> @pair D A,
   (A: Type) -> (D: Type) ->
     (@pair
-      car(@the @pair Type Type @cons A D)
-      cdr(@the @pair Type Type @cons A D)) ->
+      car(@the @pair Type Type cons(A, D))
+      cdr(@the @pair Type Type cons(A, D))) ->
     @pair D A)
 same
 
@@ -38,12 +38,12 @@ same
 (pair) =>
   pair_elim(Nat)(String)(@pair String Nat)
   (pair)
-  ((a) => (d) => @cons d a)
+  ((a) => (d) => cons(d, a))
 
-@show swap(@cons 123 "abc")
+@show swap(cons(123, "abc"))
 
 @def twin @the (Y: Type) -> (Y) -> @pair Y Y
-  (Y) => (x) => @cons x x
+  (Y) => (x) => cons(x, x)
 
 @show twin(Nat)(123)
 @show twin(String)("abc")

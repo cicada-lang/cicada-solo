@@ -1,6 +1,7 @@
 import pt from "@cicada-lang/partech"
 
 const preserved = [
+  "cons",
   "car",
   "cdr",
   "Nat",

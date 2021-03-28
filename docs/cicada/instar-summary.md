@@ -20,12 +20,17 @@ pi:
 - @pi name arg_t ret_t
 - @arrow arg_t ret_t
 - @fn name ret
+  - (name) => ret
 - @ap target arg
+  - target(arg)
+  - target(arg, ...)
 
 sigma:
 - @sigma name car_t cdr_t
-- @pair car_t cdr_t
-- @cons car cdr
+  - (name: car_t) * cdr_t
+- Pair(car_t, cdr_t)
+  - (car_t) * cdr_t
+- cons(car, cdr)
 - car(target)
 - cdr(target)
 
