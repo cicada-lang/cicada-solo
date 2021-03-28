@@ -17,15 +17,13 @@ the:
 - @the t exp
 
 pi:
-- (name: arg_t) -> ret_t
-  - @forall (name: arg_t) -> ret_t
+- [@forall] (name: arg_t) -> ret_t
 - (arg_t) -> ret_t
 - (name) => ret
 - target(arg, ...)
 
 sigma:
-- (name: car_t * cdr_t)
-  - @exists (name: car_t * cdr_t)
+- [@exists] (name: car_t * cdr_t)
 - Pair(car_t, cdr_t)
 - cons(car, cdr)
 - car(target)
