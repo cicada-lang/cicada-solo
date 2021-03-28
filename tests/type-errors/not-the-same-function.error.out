@@ -1,0 +1,14 @@
+
+I am expecting the following two values to be the same type:
+  (_: String) -> (_1: String) -> (_2: String * String)
+But they are not.
+from:
+  (_) => (_1) => cons(_, _1)
+to:
+  (_) => (_1) => cons(_1, _)
+
+previous:
+- same
+- @the Equal((_: String) -> (_: String) -> (_: String * String), (x) => (y) => cons(x, y), (y) => (x) => cons(x, y)) same
+
+
