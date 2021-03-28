@@ -1,0 +1,5 @@
+@show @the Equal(
+  (String * String),
+  cons("ratatouille", "baguette"),
+  cons("baguette", "ratatouille"))
+same
