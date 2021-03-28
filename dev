@@ -40,6 +40,12 @@ commands.test_cicada = async () => {
     { file: "tests/**/**.snapshot.cic" },
     snapshot.out(({ file }) => file.replace(/\.cic$/, ".out"))
   )
+
+  await test(
+    "./bin/cic.js $file",
+    { file: "tests/**/**.error.cic" },
+    snapshot.err(({ file }) => file.replace(/\.cic$/, ".out"))
+  )
 }
 
 info()
