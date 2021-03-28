@@ -1,4 +1,4 @@
-- [syntax back] no @pair
+- [syntax back] no @sigma
 - [syntax back] no @arrow
 - [syntax back] no @fn
 

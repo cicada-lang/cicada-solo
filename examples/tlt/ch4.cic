@@ -2,7 +2,7 @@
 
 @def pair_elim
 @the (A: Type) -> (D: Type) -> (X: Type) ->
-  (pair: @pair A D) ->
+  (pair: Pair(A, D)) ->
   (maker: (A) -> (D) -> X) ->
   X
 (A) => (D) => (X) =>
@@ -11,8 +11,8 @@
 
 @def flip
 @the (A: Type) -> (D: Type) ->
-  (pair: @pair A D) ->
-  @pair D A
+  (pair: Pair(A, D)) ->
+  Pair(D, A)
 (A) => (D) =>
   (pair) =>
   cons(cdr(pair), car(pair))
@@ -21,28 +21,28 @@
 @show flip(String)(Nat)(flip(Nat)(String)(cons(123, "abc")))
 
 @show @the Equal(Type,
-  (A: Type) -> (D: Type) -> (pair: @pair A D) -> @pair D A,
-  (Lemon: Type) -> (Meringue: Type) -> (@pair Lemon Meringue) -> @pair Meringue Lemon)
+  (A: Type) -> (D: Type) -> (pair: Pair(A, D)) -> Pair(D, A),
+  (Lemon: Type) -> (Meringue: Type) -> (Pair(Lemon, Meringue)) -> Pair(Meringue, Lemon))
 same
 
 @show @the Equal(Type,
-  (A: Type) -> (D: Type) -> (@pair A D) -> @pair D A,
+  (A: Type) -> (D: Type) -> (Pair(A, D)) -> Pair(D, A),
   (A: Type) -> (D: Type) ->
-    (@pair
-      car(@the @pair Type Type cons(A, D))
-      cdr(@the @pair Type Type cons(A, D))) ->
-    @pair D A)
+    (Pair(
+      car(@the Pair(Type, Type) cons(A, D)),
+      cdr(@the Pair(Type, Type) cons(A, D)))) ->
+    Pair(D, A))
 same
 
-@def swap @the (@pair Nat String) -> @pair String Nat
+@def swap @the (Pair(Nat, String)) -> Pair(String, Nat)
 (pair) =>
-  pair_elim(Nat)(String)(@pair String Nat)
+  pair_elim(Nat)(String)(Pair(String, Nat))
   (pair)
   ((a) => (d) => cons(d, a))
 
 @show swap(cons(123, "abc"))
 
-@def twin @the (Y: Type) -> (Y) -> @pair Y Y
+@def twin @the (Y: Type) -> (Y) -> Pair(Y, Y)
   (Y) => (x) => cons(x, x)
 
 @show twin(Nat)(123)
