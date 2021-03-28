@@ -33,23 +33,23 @@ commands.test_impression = async () => {
 }
 
 commands.test_cicada = async () => {
-  await test(
-    "./bin/cic.js $file",
-    { file: "examples/tests/**.cic" },
-    snapshot.out(({ file }) => file + ".out")
-  )
+  // await test(
+  //   "./bin/cic.js $file",
+  //   { file: "examples/tests/**.cic" },
+  //   snapshot.out(({ file }) => file + ".out")
+  // )
 
   await test(
     "./bin/cic.js $file",
-    { file: "examples/tlt/**.cic" },
+    { file: "tests/tlt/**.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
 
-  await test(
-    "./bin/cic.js $file",
-    { file: "examples/errors/**.cic" },
-    snapshot.err(({ file }) => file + ".err")
-  )
+  // await test(
+  //   "./bin/cic.js $file",
+  //   { file: "examples/errors/**.cic" },
+  //   snapshot.err(({ file }) => file + ".err")
+  // )
 }
 
 info()
