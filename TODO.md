@@ -1,5 +1,3 @@
-- [syntax back] no @pi
-
 - [test] `*.test.cic`
 - [test] `*.play.cic`
 - [test] `*.snapshot.cic`

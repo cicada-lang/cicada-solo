@@ -19,7 +19,7 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:var": ({ name }) => new Var(pt.str(name)),
     "exp:pi": ({ name, arg_t, ret_t }) =>
       new Pi(pt.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
-    "exp:pi_sugar": ({ name, arg_t, ret_t }) =>
+    "exp:pi_forall": ({ name, arg_t, ret_t }) =>
       new Pi(pt.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:arrow": ({ arg_t, ret_t }) =>
       new Pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),

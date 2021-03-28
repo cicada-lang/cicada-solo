@@ -2,13 +2,18 @@ export const exp = {
   $grammar: {
     "exp:var": [{ name: "identifier" }],
     "exp:pi": [
-      '"@"',
-      '"pi"',
+      '"("',
       { name: "identifier" },
+      '":"',
       { arg_t: "exp" },
+      '")"',
+      '"-"',
+      '">"',
       { ret_t: "exp" },
     ],
-    "exp:pi_sugar": [
+    "exp:pi_forall": [
+      '"@"'
+      '"forall"',,
       '"("',
       { name: "identifier" },
       '":"',

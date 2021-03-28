@@ -50,11 +50,6 @@ same
 (target) => (T) => (base) => (step) =>
   nat_ind(target, (_) => T, base, step)
 
-@def nat_rec
-@the @pi target Nat @pi T Type @pi base T @pi step @pi prev Nat @pi almost T T T
-(target) => (T) => (base) => (step) =>
-nat_ind(target, (_) => T, base, step)
-
 @def nat_which
 @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T
 (target) => (T) => (base) => (step) =>

@@ -17,12 +17,10 @@ the:
 - @the t exp
 
 pi:
-- TODO [@forall] (name: arg_t) -> ret_t
+- [@forall] (name: arg_t) -> ret_t
 - (arg_t) -> ret_t
 - (name) => ret
-- TODO @ap target arg
-  - target(arg)
-  - target(arg, ...)
+- target(arg, ...)
 
 sigma:
 - @exists (name: car_t) [such that] cdr_t
