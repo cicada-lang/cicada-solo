@@ -1,4 +1,4 @@
-# cicada
+- [syntax] make the language pure prefix notation for now, and optimize syntax later
 
 - [pie] `List` -- `List` `@li` `@nil`
 - [pie] `Vector` --  `Vector` `@vi` `@vil`
@@ -10,25 +10,35 @@
 - [test] `Absurd`
 
 - [fulfilling type] -- `Cls` `Obj` `Dot`
+  - with:
+    - fulfilling type
+    - inherit -- `extends`
+  - without:
+    - implicit arguments
+    - recursion
+  - problem:
+    - how to handle `this`?
 
-- `@class` `@object` `@dot`
+- [syntax] `@class` `@object` `@dot`
 
 - [optimization] use native `number` as `Nat`
 
-# tlt
+- [pattern matching] algebric datatype -- `@datatype`
+  - generate `ind`
 
-- [tlt] 5. Lists, Lists, and More Lists
-- [tlt] 6. Precisely How Many?
-- [tlt] 7. It All Depends On the Motive
-- [tlt] Recess: One Piece at a Time
-- [tlt] 8. Pick a Number, Any Number
-- [tlt] 9. Double Your Money, Get Twice as Much
-- [tlt] 10. It Also Depends On the List
-- [tlt] 11. All Lists Are Created Equal
-- [tlt] 12. Even Numbers Can Be Odd
-- [tlt] 13. Even Haf a Baker's Dozen
-- [tlt] 14. There's Safety in Numbers
-- [tlt] 15. Imagine That ...
-- [tlt] 16. If It's All the Same to You
-- [tlt] A. The Way Forward
-- [tlt] B. Rules Are Made to Be Spoken
+- [tlt]
+  - 5. Lists, Lists, and More Lists
+  - 6. Precisely How Many?
+  - 7. It All Depends On the Motive
+  - Recess: One Piece at a Time
+  - 8. Pick a Number, Any Number
+  - 9. Double Your Money, Get Twice as Much
+  - 10. It Also Depends On the List
+  - 11. All Lists Are Created Equal
+  - 12. Even Numbers Can Be Odd
+  - 13. Even Haf a Baker's Dozen
+  - 14. There's Safety in Numbers
+  - 15. Imagine That ...
+  - 16. If It's All the Same to You
+  - A. The Way Forward
+  - B. Rules Are Made to Be Spoken
