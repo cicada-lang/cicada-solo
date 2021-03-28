@@ -1,0 +1,10 @@
+// 5. Lists, Lists, and More Lists
+
+// @def expectations
+// @the List(String)
+// @li "cooked"
+// @li "eaten"
+// @li "tried-cleaning"
+// @li "understood"
+// @li "slept"
+// @nil
