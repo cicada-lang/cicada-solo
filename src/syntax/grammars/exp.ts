@@ -12,7 +12,7 @@ export const exp = {
       { ret_t: "exp" },
     ],
     "exp:pi_forall": [
-      '"@"'
+      '"@"',
       '"forall"',,
       '"("',
       { name: "identifier" },
