@@ -1,11 +1,11 @@
 @def add @the (Nat) -> (Nat) -> Nat
-  (x) => (y) => nat_ind(y, (_) => Nat, x, (prev) => (almost) => add1(almost))
+(x) => (y) => nat_ind(y, (_) => Nat, x, (prev) => (almost) => add1(almost))
 
 @def mul @the (Nat) -> (Nat) -> Nat
-  (x) => (y) => nat_ind(y, (_) => Nat, 0, (prev) => (almost) => add(almost)(x))
+(x) => (y) => nat_ind(y, (_) => Nat, 0, (prev) => (almost) => add(almost)(x))
 
 @def pow @the (Nat) -> (Nat) -> Nat
-  (x) => (y) => nat_ind(y, (_) => Nat, 1, (prev) => (almost) => mul(almost)(x))
+(x) => (y) => nat_ind(y, (_) => Nat, 1, (prev) => (almost) => mul(almost)(x))
 
 @def eight
 @let four add(2)(2)
