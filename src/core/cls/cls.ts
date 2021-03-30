@@ -19,9 +19,10 @@ export class Cls implements Exp {
   }
 
   evaluate(env: Env): Value {
-    const fulfilled = []
-    const telescope = new Telescope()
-    return new CleValue({ env, fulfilled, telescope })
+    throw new Error()
+    // const fulfilled = []
+    // const telescope = new Telescope()
+    // return new CleValue({ env, fulfilled, telescope })
   }
 
   infer(ctx: Ctx): Value {
