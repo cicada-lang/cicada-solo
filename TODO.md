@@ -1,6 +1,7 @@
 - [pie] `List` -- `List` `li()` `nil`
 - [pie] `Vector` --  `Vector` `vli()` `vnil`
 
+- `Cls.evaluate`
 - `Cls`
 - `ClsValue`
 - `Telescope`

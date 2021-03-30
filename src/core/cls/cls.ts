@@ -2,6 +2,8 @@ import { Exp, AlphaCtx } from "@/exp"
 import { Value } from "@/value"
 import { Ctx } from "@/ctx"
 import { Env } from "@/env"
+import { Telescope } from "@/telescope"
+import { CleValue } from "@/core"
 import { TypeValue } from "@/core"
 
 export class Cls implements Exp {
@@ -17,8 +19,9 @@ export class Cls implements Exp {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
-    // CleValue
+    const fulfilled = []
+    const telescope = new Telescope()
+    return new CleValue({ env, fulfilled, telescope })
   }
 
   infer(ctx: Ctx): Value {
