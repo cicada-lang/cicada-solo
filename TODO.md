@@ -1,25 +1,26 @@
+- `Telescope`
+
 - `Cls.infer`
-- `Cls.repr`
-- `Cls.alpha_repr`
-
 - `Obj.check`
-- `Obj.repr`
-- `Obj.alpha_repr`
-
 - `ObjValue.readback`
 
 - `Dot`
 - `Dot.evaluate`
 - `Dot.infer`
-- `Dot.repr`
-- `Dot.alpha_repr`
 
 - `DotNeutral`
 
 - `ClsValue.readback`
 - `ClsValue.eta_expand`
 
-- `Telescope`
+- `Cls.repr`
+- `Cls.alpha_repr`
+
+- `Obj.repr`
+- `Obj.alpha_repr`
+
+- `Dot.repr`
+- `Dot.alpha_repr`
 
 - [fulfilling type] -- `Cls` `Obj` `Dot`
   - with:
