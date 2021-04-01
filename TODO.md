@@ -1,6 +1,5 @@
 - `Telescope`
 
-- `Cls.infer`
 - `Obj.check`
 - `ObjValue.readback`
 

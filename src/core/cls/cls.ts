@@ -6,6 +6,7 @@ import { Telescope } from "@/telescope"
 import { ClsValue } from "@/core"
 import { TypeValue } from "@/core"
 import { evaluate } from "@/evaluate"
+import { check } from "@/check"
 
 export class Cls implements Exp {
   fulfilled: Array<{ name: string; t: Exp; exp: Exp }>
@@ -24,7 +25,8 @@ export class Cls implements Exp {
 
     for (const { name, t, exp } of this.fulfilled) {
       const value = evaluate(env, exp)
-      fulfilled.push({ name, t: evaluate(env, t), value })
+      const t_value = evaluate(env, t)
+      fulfilled.push({ name, t: t_value, value })
       env = env.extend(name, value)
     }
 
@@ -33,7 +35,19 @@ export class Cls implements Exp {
   }
 
   infer(ctx: Ctx): Value {
-    // TODO check fulfilled and demanded are well formed
+    for (const { name, t, exp } of this.fulfilled) {
+      check(ctx, t, new TypeValue())
+      const t_value = evaluate(ctx.to_env(), t)
+      check(ctx, exp, t_value)
+      ctx = ctx.extend(name, t_value)
+    }
+
+    for (const { name, t } of this.demanded) {
+      check(ctx, t, new TypeValue())
+      const t_value = evaluate(ctx.to_env(), t)
+      ctx = ctx.extend(name, t_value)
+    }
+
     return new TypeValue()
   }
 
