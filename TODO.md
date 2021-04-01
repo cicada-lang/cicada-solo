@@ -1,5 +1,19 @@
-- `Cls`
-- `ClsValue`
+- `Cls.infer`
+- `Cls.repr`
+- `Cls.alpha_repr`
+
+- `Obj`
+- `Obj.evaluate`
+- `Obj.check`
+- `Obj.repr`
+- `Obj.alpha_repr`
+
+- `ObjValue`
+- `ObjValue.readback`
+
+- `ClsValue.readback`
+- `ClsValue.eta_expand`
+
 - `Telescope`
 
 - [fulfilling type] -- `Cls` `Obj` `Dot`

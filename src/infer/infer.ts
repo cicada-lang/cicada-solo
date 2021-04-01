@@ -9,11 +9,12 @@ export function infer(ctx: Ctx, exp: Exp): Value {
     if (exp.infer) {
       return exp.infer(ctx)
     }
+
     throw new Trace(
       ut.aline(`
-          |I can not infer the type of ${exp.repr()}.
-          |I suggest you add a type annotation to the expression.
-          |`)
+        |I can not infer the type of ${exp.repr()}.
+        |I suggest you add a type annotation to the expression.
+        |`)
     )
   } catch (error) {
     if (error instanceof Trace) throw error.trail(exp)
