@@ -12,11 +12,14 @@ export class Telescope {
     this.demanded = opts.demanded
   }
 
-  get next(): undefined | { name: string, t: Value } {
+  get next(): undefined | { name: string; t: Value } {
     if (this.demanded.length === 0) return undefined
 
     const [{ name, t }] = this.demanded
 
     return { name, t: evaluate(this.env, t) }
   }
+
+  // TODO
+  // fill
 }
