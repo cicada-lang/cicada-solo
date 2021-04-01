@@ -1,6 +1,8 @@
-- `Telescope`
+- `Telescope.next_value`
+- `Telescope.fill`
 
 - `Obj.check`
+
 - `ObjValue.readback`
 
 - `Dot`

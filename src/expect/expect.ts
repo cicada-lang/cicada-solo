@@ -10,6 +10,8 @@ export function expect<T>(ctx: Ctx, value: Value, TheClass: Class<T>): T {
   if (value instanceof TheClass) {
     return value
   } else {
+    // TODO We can not always readback any value as `TypeValue`.
+    //   this should be part of the error report.
     const exp = readback(ctx, new TypeValue(), value)
     const message =
       `I see unexpected value: ${exp.repr()}\n` +
