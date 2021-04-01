@@ -2,7 +2,6 @@
 - `Cls.repr`
 - `Cls.alpha_repr`
 
-- `Obj`
 - `Obj.evaluate`
 - `Obj.check`
 - `Obj.repr`
@@ -10,6 +9,14 @@
 
 - `ObjValue`
 - `ObjValue.readback`
+
+- `Dot`
+- `Dot.evaluate`
+- `Dot.infer`
+- `Dot.repr`
+- `Dot.alpha_repr`
+
+- `DotNeutral`
 
 - `ClsValue.readback`
 - `ClsValue.eta_expand`
