@@ -7,7 +7,6 @@
 - `Obj.repr`
 - `Obj.alpha_repr`
 
-- `ObjValue`
 - `ObjValue.readback`
 
 - `Dot`
