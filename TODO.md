@@ -1,7 +1,3 @@
-- [pie] `List` -- `List` `li()` `nil`
-- [pie] `Vector` --  `Vector` `vli()` `vnil`
-
-- `Cls.evaluate`
 - `Cls`
 - `ClsValue`
 - `Telescope`
@@ -17,6 +13,9 @@
     - how to handle `this`?
 
 - [fulfilling type] [syntax] `@class` `@object` `@dot`
+
+- [pie] `List` -- `List` `li()` `nil`
+- [pie] `Vector` --  `Vector` `vli()` `vnil`
 
 - [optimization] use native `number` as `Nat`
 

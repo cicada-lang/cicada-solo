@@ -3,6 +3,7 @@ import { Value } from "@/value"
 import { Ctx } from "@/ctx"
 import { Env } from "@/env"
 import { Telescope } from "@/telescope"
+import { evaluate } from "@/evaluate"
 import { CleValue } from "@/core"
 import { TypeValue } from "@/core"
 
@@ -19,13 +20,20 @@ export class Cls implements Exp {
   }
 
   evaluate(env: Env): Value {
-    throw new Error()
-    // const fulfilled = []
-    // const telescope = new Telescope()
-    // return new CleValue({ env, fulfilled, telescope })
+    const fulfilled: Array<{ name: string; t: Value; value: Value }> = []
+
+    for (const { name, t, exp } of this.fulfilled) {
+      const value = evaluate(env, exp)
+      fulfilled.push({ name, t: evaluate(env, t), value })
+      env = env.extend(name, value)
+    }
+
+    const telescope = new Telescope({ env, demanded: this.demanded })
+    return new CleValue({ fulfilled, telescope })
   }
 
   infer(ctx: Ctx): Value {
+    // TODO check fulfilled and demanded are well formed
     return new TypeValue()
   }
 
