@@ -71,7 +71,7 @@ export class Obj implements Exp {
       properties.delete(name)
     }
 
-    if (cls.telescope.empty_p()) return
+    if (!cls.telescope.next) return
 
     // TODO
   }

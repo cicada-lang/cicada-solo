@@ -1,6 +1,7 @@
 import { Env } from "@/env"
 import { Exp } from "@/exp"
 import { Value } from "@/value"
+import { evaluate } from "@/evaluate"
 
 export class Telescope {
   env: Env
@@ -11,7 +12,11 @@ export class Telescope {
     this.demanded = opts.demanded
   }
 
-  empty_p(): boolean {
-    return this.demanded.length === 0
+  get next(): undefined | { name: string, t: Value } {
+    if (this.demanded.length === 0) return undefined
+
+    const [{ name, t }] = this.demanded
+
+    return { name, t: evaluate(this.env, t) }
   }
 }
