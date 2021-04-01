@@ -4,7 +4,7 @@ import { Ctx } from "@/ctx"
 import { Env } from "@/env"
 import { Telescope } from "@/telescope"
 import { evaluate } from "@/evaluate"
-import { CleValue } from "@/core"
+import { ClsValue } from "@/core"
 import { TypeValue } from "@/core"
 
 export class Cls implements Exp {
@@ -29,7 +29,7 @@ export class Cls implements Exp {
     }
 
     const telescope = new Telescope({ env, demanded: this.demanded })
-    return new CleValue({ fulfilled, telescope })
+    return new ClsValue({ fulfilled, telescope })
   }
 
   infer(ctx: Ctx): Value {

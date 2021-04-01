@@ -4,7 +4,7 @@ import { Value } from "@/value"
 import { TypeValue } from "@/core"
 import { Telescope } from "@/telescope"
 
-export class CleValue {
+export class ClsValue {
   fulfilled: Array<{ name: string; t: Value; value: Value }>
   telescope: Telescope
 

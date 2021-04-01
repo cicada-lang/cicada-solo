@@ -5,6 +5,12 @@ import { Value } from "@/value"
 import { ClsValue, ObjValue } from "@/core"
 
 export class Obj implements Exp {
+  properties: Map<string, Exp>
+
+  constructor(opts: { properties: Map<string, Exp> }) {
+    this.properties = opts.properties
+  }
+
   evaluate(env: Env): Value {
     throw new Error("TODO")
   }
