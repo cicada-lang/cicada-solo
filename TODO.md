@@ -1,4 +1,4 @@
-- `Telescope.next_value`
+- `Telescope.next`
 - `Telescope.fill`
 
 - `Obj.check`
