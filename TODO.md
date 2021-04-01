@@ -2,7 +2,6 @@
 - `Cls.repr`
 - `Cls.alpha_repr`
 
-- `Obj.evaluate`
 - `Obj.check`
 - `Obj.repr`
 - `Obj.alpha_repr`

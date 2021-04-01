@@ -3,6 +3,7 @@ import { Ctx } from "@/ctx"
 import { Env } from "@/env"
 import { Value } from "@/value"
 import { ClsValue, ObjValue } from "@/core"
+import { evaluate } from "@/evaluate"
 
 export class Obj implements Exp {
   properties: Map<string, Exp>
@@ -12,7 +13,13 @@ export class Obj implements Exp {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
+    const properties = new Map()
+
+    for (const [name, exp] of this.properties) {
+      properties.set(name, evaluate(env, exp))
+    }
+
+    return new ObjValue({ properties })
   }
 
   check(ctx: Ctx, t: Value): Value {

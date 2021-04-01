@@ -3,6 +3,7 @@ import { Exp } from "@/exp"
 import { Value } from "@/value"
 import { TypeValue } from "@/core"
 import { Telescope } from "@/telescope"
+import { evaluate } from "@/evaluate"
 
 export class ClsValue {
   fulfilled: Array<{ name: string; t: Value; value: Value }>

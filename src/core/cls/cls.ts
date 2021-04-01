@@ -3,9 +3,9 @@ import { Value } from "@/value"
 import { Ctx } from "@/ctx"
 import { Env } from "@/env"
 import { Telescope } from "@/telescope"
-import { evaluate } from "@/evaluate"
 import { ClsValue } from "@/core"
 import { TypeValue } from "@/core"
+import { evaluate } from "@/evaluate"
 
 export class Cls implements Exp {
   fulfilled: Array<{ name: string; t: Exp; exp: Exp }>
