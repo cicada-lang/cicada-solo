@@ -11,9 +11,7 @@ export function check(ctx: Ctx, exp: Exp, t: Value): void {
   try {
     if (exp.check) {
       return exp.check(ctx, t)
-    }
-
-    if (exp.infer) {
+    } else if (exp.infer) {
       const u = exp.infer(ctx)
       if (!conversion(ctx, new TypeValue(), t, u)) {
         const u_exp = readback(ctx, new TypeValue(), u)
@@ -25,15 +23,15 @@ export function check(ctx: Ctx, exp: Exp, t: Value): void {
             |`)
         )
       }
+    } else {
+      throw new Trace(
+        ut.aline(`
+          |I can not check the type of ${exp.repr()}.
+          |I also can not check it by infer.
+          |I suggest you add a type annotation to the expression.
+          |`)
+      )
     }
-
-    throw new Trace(
-      ut.aline(`
-        |I can not check the type of ${exp.repr()}.
-        |I also can not check it by infer.
-        |I suggest you add a type annotation to the expression.
-        |`)
-    )
   } catch (error) {
     if (error instanceof Trace) throw error.trail(exp)
     throw error
