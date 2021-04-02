@@ -1,4 +1,3 @@
-- `Dot`
 - `Dot.evaluate`
 - `Dot.infer`
 
