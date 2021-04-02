@@ -2,8 +2,8 @@
 - `Dot.apply`
 - `Dot.infer`
 
-- `ClsValue.readback`
 - `ClsValue.eta_expand`
+- `ClsValue.readback`
 
 - `Cls.repr`
 - `Cls.alpha_repr`
