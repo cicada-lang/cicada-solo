@@ -6,12 +6,12 @@ import { Obj } from "@/core"
 export class ObjValue {
   properties: Map<string, Value>
 
-  constructor(opts: { properties: Map<string, Value> }) {
-    this.properties = opts.properties
+  constructor(properties: Map<string, Value>) {
+    this.properties = properties
   }
 
   readback(ctx: Ctx, t: Value): Exp | undefined {
-    // NOTE Sigma eta expand
+    // NOTE eta expand
     return undefined
   }
 }

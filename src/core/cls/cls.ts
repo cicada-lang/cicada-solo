@@ -30,8 +30,10 @@ export class Cls implements Exp {
       env = env.extend(name, value)
     }
 
-    const telescope = new Telescope({ env, demanded: this.demanded })
-    return new ClsValue({ fulfilled, telescope })
+    return new ClsValue(
+      fulfilled,
+      new Telescope({ env, demanded: this.demanded })
+    )
   }
 
   infer(ctx: Ctx): Value {

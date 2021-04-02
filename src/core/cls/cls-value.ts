@@ -9,12 +9,12 @@ export class ClsValue {
   fulfilled: Array<{ name: string; t: Value; value: Value }>
   telescope: Telescope
 
-  constructor(opts: {
-    fulfilled: Array<{ name: string; t: Value; value: Value }>
+  constructor(
+    fulfilled: Array<{ name: string; t: Value; value: Value }>,
     telescope: Telescope
-  }) {
-    this.fulfilled = opts.fulfilled
-    this.telescope = opts.telescope
+  ) {
+    this.fulfilled = fulfilled
+    this.telescope = telescope
   }
 
   readback(ctx: Ctx, t: Value): Exp | undefined {

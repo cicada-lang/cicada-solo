@@ -14,8 +14,8 @@ import * as ut from "@/ut"
 export class Obj implements Exp {
   properties: Map<string, Exp>
 
-  constructor(opts: { properties: Map<string, Exp> }) {
-    this.properties = opts.properties
+  constructor(properties: Map<string, Exp>) {
+    this.properties = properties
   }
 
   evaluate(env: Env): Value {
@@ -25,7 +25,7 @@ export class Obj implements Exp {
       properties.set(name, evaluate(env, exp))
     }
 
-    return new ObjValue({ properties })
+    return new ObjValue(properties)
   }
 
   check(ctx: Ctx, t: Value): void {
@@ -85,17 +85,15 @@ export class Obj implements Exp {
     }
 
     check(ctx, found, cls.telescope.next.t)
+
     properties.delete(cls.telescope.next.name)
 
-    const value = evaluate(ctx.to_env(), found)
+    const next_value = evaluate(ctx.to_env(), found)
 
     check(
       ctx,
-      new Obj({ properties }),
-      new ClsValue({
-        fulfilled: [],
-        telescope: cls.telescope.fill(value),
-      })
+      new Obj(properties),
+      new ClsValue([], cls.telescope.fill(next_value))
     )
   }
 

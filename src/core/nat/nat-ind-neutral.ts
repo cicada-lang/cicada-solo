@@ -4,7 +4,7 @@ import { Exp } from "@/exp"
 import { Ctx } from "@/ctx"
 import { NatInd } from "@/core"
 
-export class NatIndNeutral {
+export class NatIndNeutral implements Neutral {
   target: Neutral
   motive: Normal
   base: Normal

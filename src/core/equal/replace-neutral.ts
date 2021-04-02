@@ -4,7 +4,7 @@ import { Exp } from "@/exp"
 import { Ctx } from "@/ctx"
 import { Replace } from "@/core"
 
-export class ReplaceNeutral {
+export class ReplaceNeutral implements Neutral {
   target: Neutral
   motive: Normal
   base: Normal

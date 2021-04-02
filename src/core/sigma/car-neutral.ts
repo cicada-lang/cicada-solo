@@ -3,7 +3,7 @@ import { Exp } from "@/exp"
 import { Ctx } from "@/ctx"
 import { Car } from "@/core"
 
-export class CarNeutral {
+export class CarNeutral implements Neutral {
   target: Neutral
 
   constructor(target: Neutral) {

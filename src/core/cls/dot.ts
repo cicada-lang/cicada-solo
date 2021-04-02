@@ -15,9 +15,9 @@ export class Dot implements Exp {
   target: Exp
   name: string
 
-  constructor(opts: { target: Exp; name: string }) {
-    this.target = opts.target
-    this.name = opts.name
+  constructor(target: Exp, name: string) {
+    this.target = target
+    this.name = name
   }
 
   evaluate(env: Env): Value {
