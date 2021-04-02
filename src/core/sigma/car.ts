@@ -20,6 +20,17 @@ export class Car implements Exp {
     return Car.apply(evaluate(env, this.target))
   }
 
+  static apply(target: Value): Value {
+    return match_value(target, {
+      ConsValue: (cons: ConsValue) => cons.car,
+      NotYetValue: ({ t, neutral }: NotYetValue) =>
+        match_value(t, {
+          SigmaValue: (sigma: SigmaValue) =>
+            new NotYetValue(sigma.car_t, new CarNeutral(neutral)),
+        }),
+    })
+  }
+
   infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
     const sigma = expect(ctx, target_t, SigmaValue)
@@ -32,16 +43,5 @@ export class Car implements Exp {
 
   alpha_repr(ctx: AlphaCtx): string {
     return `car(${this.target.alpha_repr(ctx)})`
-  }
-
-  static apply(target: Value): Value {
-    return match_value(target, {
-      ConsValue: (cons: ConsValue) => cons.car,
-      NotYetValue: ({ t, neutral }: NotYetValue) =>
-        match_value(t, {
-          SigmaValue: (sigma: SigmaValue) =>
-            new NotYetValue(sigma.car_t, new CarNeutral(neutral)),
-        }),
-    })
   }
 }

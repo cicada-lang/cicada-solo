@@ -26,6 +26,19 @@ export class AbsurdInd implements Exp {
     )
   }
 
+  static apply(target: Value, motive: Value): Value {
+    return match_value(target, {
+      NotYetValue: ({ t, neutral }: NotYetValue) =>
+        match_value(t, {
+          AbsurdValue: (_: AbsurdValue) =>
+            new NotYetValue(
+              motive,
+              new AbsurdIndNeutral(neutral, new Normal(new TypeValue(), motive))
+            ),
+        }),
+    })
+  }
+
   infer(ctx: Ctx): Value {
     // NOTE the `motive` here is not a function from target_t to type,
     //   but a element of type.
@@ -45,18 +58,5 @@ export class AbsurdInd implements Exp {
     return `absurd_ind(${this.target.alpha_repr(ctx)}, ${this.motive.alpha_repr(
       ctx
     )})`
-  }
-
-  static apply(target: Value, motive: Value): Value {
-    return match_value(target, {
-      NotYetValue: ({ t, neutral }: NotYetValue) =>
-        match_value(t, {
-          AbsurdValue: (_: AbsurdValue) =>
-            new NotYetValue(
-              motive,
-              new AbsurdIndNeutral(neutral, new Normal(new TypeValue(), motive))
-            ),
-        }),
-    })
   }
 }

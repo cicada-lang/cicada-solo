@@ -21,6 +21,20 @@ export class Cdr implements Exp {
     return Cdr.apply(evaluate(env, this.target))
   }
 
+  static apply(target: Value): Value {
+    return match_value(target, {
+      ConsValue: (cons: ConsValue) => cons.cdr,
+      NotYetValue: ({ t, neutral }: NotYetValue) =>
+        match_value(t, {
+          SigmaValue: (sigma: SigmaValue) =>
+            new NotYetValue(
+              sigma.cdr_t_cl.apply(Car.apply(target)),
+              new CdrNeutral(neutral)
+            ),
+        }),
+    })
+  }
+
   infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
     const sigma = expect(ctx, target_t, SigmaValue)
@@ -34,19 +48,5 @@ export class Cdr implements Exp {
 
   alpha_repr(ctx: AlphaCtx): string {
     return `cdr(${this.target.alpha_repr(ctx)})`
-  }
-
-  static apply(target: Value): Value {
-    return match_value(target, {
-      ConsValue: (cons: ConsValue) => cons.cdr,
-      NotYetValue: ({ t, neutral }: NotYetValue) =>
-        match_value(t, {
-          SigmaValue: (sigma: SigmaValue) =>
-            new NotYetValue(
-              sigma.cdr_t_cl.apply(Car.apply(target)),
-              new CdrNeutral(neutral)
-            ),
-        }),
-    })
   }
 }

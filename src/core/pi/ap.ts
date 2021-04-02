@@ -25,6 +25,20 @@ export class Ap implements Exp {
     return Ap.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
+  static apply(target: Value, arg: Value): Value {
+    return match_value(target, {
+      FnValue: (fn: FnValue) => fn.ret_cl.apply(arg),
+      NotYetValue: ({ t, neutral }: NotYetValue) =>
+        match_value(t, {
+          PiValue: (pi: PiValue) =>
+            new NotYetValue(
+              pi.ret_t_cl.apply(arg),
+              new ApNeutral(neutral, new Normal(pi.arg_t, arg))
+            ),
+        }),
+    })
+  }
+
   infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
     const pi = expect(ctx, target_t, PiValue)
@@ -39,19 +53,5 @@ export class Ap implements Exp {
 
   alpha_repr(ctx: AlphaCtx): string {
     return `${this.target.alpha_repr(ctx)}(${this.arg.alpha_repr(ctx)})`
-  }
-
-  static apply(target: Value, arg: Value): Value {
-    return match_value(target, {
-      FnValue: (fn: FnValue) => fn.ret_cl.apply(arg),
-      NotYetValue: ({ t, neutral }: NotYetValue) =>
-        match_value(t, {
-          PiValue: (pi: PiValue) =>
-            new NotYetValue(
-              pi.ret_t_cl.apply(arg),
-              new ApNeutral(neutral, new Normal(pi.arg_t, arg))
-            ),
-        }),
-    })
   }
 }

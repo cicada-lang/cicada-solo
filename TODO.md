@@ -1,7 +1,8 @@
-- `Dot.evaluate`
-- `Dot.infer`
-
 - `DotNeutral`
+
+- `Dot.evaluate`
+- `Dot.apply`
+- `Dot.infer`
 
 - `ClsValue.readback`
 - `ClsValue.eta_expand`
