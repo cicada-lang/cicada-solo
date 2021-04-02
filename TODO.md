@@ -1,5 +1,3 @@
-- `ObjValue.readback`
-
 - `Dot`
 - `Dot.evaluate`
 - `Dot.infer`

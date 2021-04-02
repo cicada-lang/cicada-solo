@@ -11,6 +11,7 @@ export class ObjValue {
   }
 
   readback(ctx: Ctx, t: Value): Exp | undefined {
-    throw new Error("TODO")
+    // NOTE Sigma eta expand
+    return undefined
   }
 }

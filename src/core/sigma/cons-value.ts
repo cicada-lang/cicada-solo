@@ -12,7 +12,7 @@ export class ConsValue {
   }
 
   readback(ctx: Ctx, t: Value): Exp | undefined {
-    // NOTE Sigma eta expand
+    // NOTE eta expand
     return undefined
   }
 }
