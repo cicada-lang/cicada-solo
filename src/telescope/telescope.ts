@@ -2,6 +2,8 @@ import { Env } from "@/env"
 import { Exp } from "@/exp"
 import { Value } from "@/value"
 import { evaluate } from "@/evaluate"
+import { Trace } from "@/trace"
+import * as ut from "@/ut"
 
 export class Telescope {
   env: Env
@@ -13,13 +15,29 @@ export class Telescope {
   }
 
   get next(): undefined | { name: string; t: Value } {
-    if (this.demanded.length === 0) return undefined
+    if (this.demanded.length === 0) {
+      return undefined
+    }
 
     const [{ name, t }] = this.demanded
 
     return { name, t: evaluate(this.env, t) }
   }
 
-  // TODO
-  // fill
+  fill(value: Value): Telescope {
+    if (!this.next) {
+      throw new Trace(
+        ut.aline(`
+          |Filling fulled telescope.
+          |- telescope: ${ut.inspect(this)}
+          |- value: ${ut.inspect(value)}
+          |`)
+      )
+    }
+
+    return new Telescope({
+      env: this.env.extend(this.next.name, value),
+      demanded: this.demanded.slice(1),
+    })
+  }
 }

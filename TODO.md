@@ -1,5 +1,3 @@
-- `Telescope.fill`
-
 - `Obj.check`
 
 - `ObjValue.readback`
