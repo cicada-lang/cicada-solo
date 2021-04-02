@@ -5,18 +5,15 @@ import { Ctx } from "@/ctx"
 import { Dot } from "@/core"
 
 export class DotNeutral {
-  // target: Neutral
-  // name: string
+  target: Neutral
+  name: string
 
-  // constructor(target: Neutral, arg: Normal) {
-  //   this.target = target
-  //   this.arg = arg
-  // }
+  constructor(target: Neutral, name: string) {
+    this.target = target
+    this.name = name
+  }
 
-  // readback_neutral(ctx: Ctx): Exp {
-  //   return new Ap(
-  //     this.target.readback_neutral(ctx),
-  //     this.arg.readback_normal(ctx)
-  //   )
-  // }
+  readback_neutral(ctx: Ctx): Exp {
+    return new Dot(this.target.readback_neutral(ctx), this.name)
+  }
 }

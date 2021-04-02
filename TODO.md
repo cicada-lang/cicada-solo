@@ -1,5 +1,3 @@
-- `DotNeutral`
-
 - `Dot.evaluate`
 - `Dot.apply`
 - `Dot.infer`
