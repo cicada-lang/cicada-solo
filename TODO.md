@@ -1,5 +1,3 @@
-- `Obj.check`
-
 - `ObjValue.readback`
 
 - `Dot`

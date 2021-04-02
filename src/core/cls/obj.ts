@@ -32,6 +32,7 @@ export class Obj implements Exp {
     const cls = expect(ctx, t, ClsValue)
 
     // NOTE We DO NOT need to update the `ctx` as we go along.
+    // - the bindings in telescope will not effect current ctx.
     // - just like checking `cons`.
 
     // NOTE We will delete entries in the Map properties as we go along.
@@ -73,7 +74,29 @@ export class Obj implements Exp {
 
     if (!cls.telescope.next) return
 
-    // TODO
+    const found = properties.get(cls.telescope.next.name)
+
+    if (found === undefined) {
+      throw new Trace(
+        ut.aline(`
+            |Can not found next name: ${cls.telescope.next.name}
+            |`)
+      )
+    }
+
+    check(ctx, found, cls.telescope.next.t)
+    properties.delete(cls.telescope.next.name)
+
+    const value = evaluate(ctx.to_env(), found)
+
+    check(
+      ctx,
+      new Obj({ properties }),
+      new ClsValue({
+        fulfilled: [],
+        telescope: cls.telescope.fill(value),
+      })
+    )
   }
 
   repr(): string {
