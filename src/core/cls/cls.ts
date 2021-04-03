@@ -12,12 +12,12 @@ export class Cls implements Exp {
   fulfilled: Array<{ name: string; t: Exp; exp: Exp }>
   demanded: Array<{ name: string; t: Exp }>
 
-  constructor(opts: {
-    fulfilled: Array<{ name: string; t: Exp; exp: Exp }>
+  constructor(
+    fulfilled: Array<{ name: string; t: Exp; exp: Exp }>,
     demanded: Array<{ name: string; t: Exp }>
-  }) {
-    this.fulfilled = opts.fulfilled
-    this.demanded = opts.demanded
+  ) {
+    this.fulfilled = fulfilled
+    this.demanded = demanded
   }
 
   evaluate(env: Env): Value {

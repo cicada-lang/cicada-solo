@@ -1,7 +1,7 @@
 import { Ctx } from "@/ctx"
 import { Exp } from "@/exp"
 import { Value } from "@/value"
-import { TypeValue } from "@/core"
+import { Cls, Obj, TypeValue } from "@/core"
 import { Telescope } from "@/telescope"
 import { evaluate } from "@/evaluate"
 
@@ -18,7 +18,19 @@ export class ClsValue {
   }
 
   readback(ctx: Ctx, t: Value): Exp | undefined {
-    throw new Error("TODO")
+    if (t instanceof TypeValue) {
+      const fulfilled = new Array()
+
+      for (const { name, t, value } of this.fulfilled) {
+        // fulfilled.push()
+      }
+
+      const demanded = new Array()
+
+      // TODO this.telescope
+
+      return new Cls(fulfilled, demanded)
+    }
   }
 
   eta_expand(ctx: Ctx, value: Value): Exp {
