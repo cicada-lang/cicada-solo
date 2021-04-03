@@ -1,0 +1,5 @@
+@def abc
+@the [ a: String b: String c: String ]
+{ a: "a" b: "b" c: "c" }
+
+@show abc

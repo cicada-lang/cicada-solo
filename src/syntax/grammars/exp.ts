@@ -68,6 +68,16 @@ export const exp = {
     "exp:cons": ['"cons"', '"("', { car: "exp" }, '","', { cdr: "exp" }, '")"'],
     "exp:car": ['"car"', '"("', { target: "exp" }, '")"'],
     "exp:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
+    "exp:cls": [
+      '"["',
+      { demanded: { $ap: ["zero_or_more", "property"] } },
+      '"]"',
+    ],
+    "exp:obj": [
+      '"{"',
+      { properties: { $ap: ["zero_or_more", "property"] } },
+      '"}"',
+    ],
     "exp:nat": ['"Nat"'],
     "exp:zero": ['"zero"'],
     "exp:add1": ['"add1"', '"("', { prev: "exp" }, '")"'],
@@ -127,5 +137,11 @@ export const exp = {
       { ret: "exp" },
     ],
     "exp:the": ['"@"', '"the"', { t: "exp" }, { exp: "exp" }],
+  },
+}
+
+export const property = {
+  $grammar: {
+    "property:property": [{ name: "identifier" }, '":"', { exp: "exp" }],
   },
 }

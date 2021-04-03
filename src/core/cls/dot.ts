@@ -28,14 +28,14 @@ export class Dot implements Exp {
 
   static apply(target: Value, name: string): Value {
     return match_value(target, {
-      ObjValue: (obj: ObjValue) => obj.dot(this.name),
-      ClsValue: (cls: ClsValue) => cls.dot(this.name),
+      ObjValue: (obj: ObjValue) => obj.dot(name),
+      ClsValue: (cls: ClsValue) => cls.dot(name),
       NotYetValue: ({ t, neutral }: NotYetValue) =>
         match_value(t, {
           ClsValue: (cls: ClsValue) =>
             new NotYetValue(
-              cls.dot(this.name),
-              new DotNeutral(neutral, this.name)
+              cls.dot(name),
+              new DotNeutral(neutral, name)
             ),
         }),
     })
