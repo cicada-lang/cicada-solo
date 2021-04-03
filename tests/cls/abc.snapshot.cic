@@ -1,5 +1,9 @@
+@def the_nat_type
+@the (Trivial) -> Type
+(_) => Nat
+
 @def abc
-@the [ a: String b: String c: String ]
-{ a: "a" b: "b" c: "c" }
+@the [ a: Trivial b: the_nat_type(a) c: String ]
+{ a: sole b: 2 c: "c" }
 
 @show abc
