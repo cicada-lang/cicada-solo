@@ -6,6 +6,7 @@ import { ClsValue, ObjValue, TypeValue } from "@/core"
 import { DotNeutral, NotYetValue } from "@/core"
 import { evaluate } from "@/evaluate"
 import { check } from "@/check"
+import { infer } from "@/infer"
 import { conversion } from "@/conversion"
 import { readback } from "@/readback"
 import { expect } from "@/expect"
@@ -41,7 +42,18 @@ export class Dot implements Exp {
   }
 
   infer(ctx: Ctx): Value {
-    throw new Error("TODO")
+    const target_t = infer(ctx, this.target)
+
+    if (target_t instanceof ClsValue) {
+      return target_t.dot(this.name)
+    }
+
+    throw new Trace(
+      ut.aline(`
+        |Expecting target type to be a class.
+        |  ${ut.inspect(target_t)}
+        |`)
+    )
   }
 
   repr(): string {

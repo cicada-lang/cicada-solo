@@ -1,5 +1,3 @@
-- `Dot.infer`
-
 - `ClsValue.eta_expand`
 - `ClsValue.readback`
 
