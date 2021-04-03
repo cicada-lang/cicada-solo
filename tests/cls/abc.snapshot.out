@@ -7,4 +7,36 @@
   b: 2
   c: "c"
 }
+@the Trivial sole
+@the Nat 2
+@the String "c"
+@the [
+  x: String
+  y: String
+  z: [
+    a: Trivial
+    b: Nat
+    c: String
+  ]
+] {
+  x: "x"
+  y: "y"
+  z: {
+    a: sole
+    b: 2
+    c: "c"
+  }
+}
+@the [
+  a: Trivial
+  b: Nat
+  c: String
+] {
+  a: sole
+  b: 2
+  c: "c"
+}
+@the Trivial sole
+@the Nat 2
+@the String "c"
 
