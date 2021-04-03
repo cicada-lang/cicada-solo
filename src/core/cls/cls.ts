@@ -64,6 +64,20 @@ export class Cls implements Exp {
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    throw new Error("TODO")
+    if (this.fulfilled.length === 0 && this.demanded.length === 0) return "{}"
+    const parts = []
+    for (const { name, t, exp } of this.fulfilled) {
+      const t_repr = t.alpha_repr(ctx)
+      const exp_repr = exp.alpha_repr(ctx)
+      parts.push(`${name} : ${t_repr} = ${exp_repr}`)
+      ctx = ctx.extend(name)
+    }
+    for (const { name, t } of this.demanded) {
+      const t_repr = t.alpha_repr(ctx)
+      parts.push(`${name} : ${t_repr}`)
+      ctx = ctx.extend(name)
+    }
+    let s = parts.join("\n")
+    return `{\n${ut.indent(s, "  ")}\n}`
   }
 }
