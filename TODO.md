@@ -1,9 +1,6 @@
 - `Cls.repr`
 - `Cls.alpha_repr`
 
-- `Dot.repr`
-- `Dot.alpha_repr`
-
 - [fulfilling type] [syntax] `Cls` -- [ name: t, ... ]
 - [fulfilling type] [syntax] `Obj` -- { name: property, ... }
 - [fulfilling type] [syntax] `Dot` -- target.name

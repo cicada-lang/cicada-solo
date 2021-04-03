@@ -57,10 +57,10 @@ export class Dot implements Exp {
   }
 
   repr(): string {
-    throw new Error("TODO")
+    return `${this.target.repr()}.${this,name}`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    throw new Error("TODO")
+    return `${this.target.alpha_repr(ctx)}.${this.name}`
   }
 }
