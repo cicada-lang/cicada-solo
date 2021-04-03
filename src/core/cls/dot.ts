@@ -57,7 +57,7 @@ export class Dot implements Exp {
   }
 
   repr(): string {
-    return `${this.target.repr()}.${this,name}`
+    return `${this.target.repr()}.${this.name}`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
