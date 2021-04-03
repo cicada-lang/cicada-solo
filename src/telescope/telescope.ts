@@ -10,9 +10,9 @@ export class Telescope {
   env: Env
   demanded: Array<{ name: string; t: Exp }>
 
-  constructor(opts: { env: Env; demanded: Array<{ name: string; t: Exp }> }) {
-    this.env = opts.env
-    this.demanded = opts.demanded
+  constructor(env: Env, demanded: Array<{ name: string; t: Exp }>) {
+    this.env = env
+    this.demanded = demanded
   }
 
   get next(): undefined | { name: string; t: Value } {
@@ -36,10 +36,10 @@ export class Telescope {
       )
     }
 
-    return new Telescope({
-      env: this.env.extend(this.next.name, value),
-      demanded: this.demanded.slice(1),
-    })
+    return new Telescope(
+      this.env.extend(this.next.name, value),
+      this.demanded.slice(1)
+    )
   }
 
   dot(name: string): Value {
@@ -62,9 +62,9 @@ export class Telescope {
       new VarNeutral(this.next.name)
     )
 
-    return new Telescope({
-      env: this.env.extend(this.next.name, next_value),
-      demanded: this.demanded.slice(1),
-    }).dot(name)
+    return new Telescope(
+      this.env.extend(this.next.name, next_value),
+      this.demanded.slice(1)
+    ).dot(name)
   }
 }
