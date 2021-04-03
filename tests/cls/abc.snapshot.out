@@ -1,10 +1,10 @@
 @the [
-  a: String
-  b: String
+  a: Trivial
+  b: Nat
   c: String
 ] {
-  a: "a"
-  b: "b"
+  a: sole
+  b: 2
   c: "c"
 }
 

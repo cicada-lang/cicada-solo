@@ -142,6 +142,11 @@ export const exp = {
 
 export const property = {
   $grammar: {
-    "property:property": [{ name: "identifier" }, '":"', { exp: "exp" }],
+    "property:property": [
+      { name: "identifier" },
+      '":"',
+      { exp: "exp" },
+      { $ap: ["optional", '","'] },
+    ],
   },
 }

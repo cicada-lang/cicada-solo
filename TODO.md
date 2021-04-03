@@ -1,4 +1,3 @@
-- [fulfilling type] [syntax] `Cls` & `Obj` -- optional `,`
 - [fulfilling type] [syntax] `Dot` -- target.name
 
 - [fulfilling type] -- fulfilling type
