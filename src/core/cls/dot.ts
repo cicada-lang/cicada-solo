@@ -3,6 +3,7 @@ import { Ctx } from "@/ctx"
 import { Env } from "@/env"
 import { Value, match_value } from "@/value"
 import { ClsValue, ObjValue, TypeValue } from "@/core"
+import { DotNeutral, NotYetValue } from "@/core"
 import { evaluate } from "@/evaluate"
 import { check } from "@/check"
 import { conversion } from "@/conversion"
@@ -25,19 +26,18 @@ export class Dot implements Exp {
   }
 
   static apply(target: Value, name: string): Value {
-    throw new Error("TODO")
-
-    // return match_value(target, {
-    //   ObjValue: (fn: FnValue) => ...,
-    //   NotYetValue: ({ t, neutral }: NotYetValue) =>
-    //     match_value(t, {
-    //       PiValue: (pi: PiValue) =>
-    //         new NotYetValue(
-    //           pi.ret_t_cl.apply(arg),
-    //           new ApNeutral(neutral, new Normal(pi.arg_t, arg))
-    //         ),
-    //     }),
-    // })
+    return match_value(target, {
+      ObjValue: (obj: ObjValue) => obj.dot(this.name),
+      ClsValue: (cls: ClsValue) => cls.dot(this.name),
+      NotYetValue: ({ t, neutral }: NotYetValue) =>
+        match_value(t, {
+          ClsValue: (cls: ClsValue) =>
+            new NotYetValue(
+              cls.dot(this.name),
+              new DotNeutral(neutral, this.name)
+            ),
+        }),
+    })
   }
 
   infer(ctx: Ctx): Value {

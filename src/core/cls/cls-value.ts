@@ -24,4 +24,14 @@ export class ClsValue {
   eta_expand(ctx: Ctx, value: Value): Exp {
     throw new Error("TODO")
   }
+
+  dot(name: string): Value {
+    for (const entry of this.fulfilled) {
+      if (entry.name === name) {
+        return entry.t
+      }
+    }
+
+    return this.telescope.dot(name)
+  }
 }

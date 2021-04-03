@@ -1,4 +1,3 @@
-- `Dot.apply`
 - `Dot.infer`
 
 - `ClsValue.eta_expand`
