@@ -1,7 +1,7 @@
 import { Ctx } from "@/ctx"
 import { Exp } from "@/exp"
 import { Value } from "@/value"
-import { Cls, Obj, TypeValue } from "@/core"
+import { Cls, Obj, Dot, TypeValue } from "@/core"
 import { NotYetValue, VarNeutral } from "@/core"
 import { Telescope } from "@/telescope"
 import { evaluate } from "@/evaluate"
