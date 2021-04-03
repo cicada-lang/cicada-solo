@@ -55,6 +55,7 @@ export function exp_matcher(tree: pt.Tree): Exp {
           pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
         )
       ),
+    "exp:dot": ({ target, name }) => new Dot(exp_matcher(target), pt.str(name)),
     "exp:nat": () => new Nat(),
     "exp:zero": () => new Zero(),
     "exp:add1": ({ prev }) => new Add1(exp_matcher(prev)),

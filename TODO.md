@@ -1,5 +1,3 @@
-- [fulfilling type] [syntax] `Dot` -- target.name
-
 - [fulfilling type] -- fulfilling type
 - [fulfilling type] -- inherit -- `extends`
 

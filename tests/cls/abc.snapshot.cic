@@ -7,3 +7,25 @@
 { a: sole, b: 2, c: "c" }
 
 @show abc
+
+@show abc.a
+@show abc.b
+@show abc.c
+
+@def xyz
+@the [
+  x: String,
+  y: String,
+  z: [ a: Trivial, b: the_nat_type(a), c: String ]
+] {
+  x: "x",
+  y: "y",
+  z: abc,
+}
+
+@show xyz
+
+@show xyz.z
+@show xyz.z.a
+@show xyz.z.b
+@show xyz.z.c

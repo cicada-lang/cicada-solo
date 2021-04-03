@@ -33,10 +33,7 @@ export class Dot implements Exp {
       NotYetValue: ({ t, neutral }: NotYetValue) =>
         match_value(t, {
           ClsValue: (cls: ClsValue) =>
-            new NotYetValue(
-              cls.dot(name),
-              new DotNeutral(neutral, name)
-            ),
+            new NotYetValue(cls.dot(name), new DotNeutral(neutral, name)),
         }),
     })
   }

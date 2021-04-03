@@ -78,6 +78,7 @@ export const exp = {
       { properties: { $ap: ["zero_or_more", "property"] } },
       '"}"',
     ],
+    "exp:dot": [{ target: "exp" }, '"."', { name: "identifier" }],
     "exp:nat": ['"Nat"'],
     "exp:zero": ['"zero"'],
     "exp:add1": ['"add1"', '"("', { prev: "exp" }, '")"'],
