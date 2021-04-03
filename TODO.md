@@ -1,15 +1,8 @@
 - [fulfilling type] [syntax] `Cls` & `Obj` -- optional `,`
 - [fulfilling type] [syntax] `Dot` -- target.name
 
-- [fulfilling type] -- `Cls` `Obj` `Dot`
-  - with:
-    - fulfilling type
-    - inherit -- `extends`
-  - without:
-    - implicit arguments
-    - recursion
-  - problem:
-    - how to handle `this`?
+- [fulfilling type] -- fulfilling type
+- [fulfilling type] -- inherit -- `extends`
 
 - [pie] `List` -- `List` `li()` `nil`
 - [pie] `Vector` --  `Vector` `vli()` `vnil`
