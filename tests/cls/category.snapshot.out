@@ -1,0 +1,6 @@
+@the Type [
+  Object: Type
+  Morphism: (dom: Object) -> (com: Object) -> Type
+  id: (x: Object) -> Morphism(x)(x)
+]
+

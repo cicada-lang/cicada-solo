@@ -1,6 +1,15 @@
-- [fulfilling type] -- fulfilling type
-- [fulfilling type] -- js-like spread syntax for cls and obj `...x`
-- [fulfilling type] -- inherit -- use js-like spread syntax
+- [syntax] -- `(x: X, y: Y) -> Z` as sugar for `(x: X) -> (y: Y) -> Z`
+- [syntax] -- `(x1 x2: X) -> Z` as sugar for `(x1: X, x2: X) -> Z`
+- [syntax] -- `(x, y) => z` as sugar for `(x) => (y) => Z`
+- [syntax] -- `f(x, y)` as sugar for `f(x)(y)`
+- [syntax] -- alternative syntax for property
+
+- [syntax] -- `@class name` as sugar for `@def name @the Type`
+
+- [fulfilling] -- fulfilling type
+
+- [syntax] -- js-like spread syntax for cls and obj `...x`
+- [fulfilling] -- inherit -- use js-like spread syntax
 
 - [pie] `List` -- `List` `li()` `nil`
 - [pie] `Vector` --  `Vector` `vli()` `vnil`
