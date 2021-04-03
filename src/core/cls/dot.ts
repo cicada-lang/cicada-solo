@@ -21,7 +21,7 @@ export class Dot implements Exp {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
+    return Dot.apply(evaluate(env, this.target), this.name)
   }
 
   static apply(target: Value, name: string): Value {
