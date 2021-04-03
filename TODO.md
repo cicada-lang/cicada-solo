@@ -1,9 +1,6 @@
 - `Cls.repr`
 - `Cls.alpha_repr`
 
-- `Obj.repr`
-- `Obj.alpha_repr`
-
 - `Dot.repr`
 - `Dot.alpha_repr`
 

@@ -98,10 +98,16 @@ export class Obj implements Exp {
   }
 
   repr(): string {
-    throw new Error("TODO")
+    const s = Array.from(this.properties)
+      .map(([name, exp]) => `${name}: ${exp.repr()}`)
+      .join("\n")
+    return `{\n${ut.indent(s, "  ")}\n}`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    throw new Error("TODO")
+    const s = Array.from(this.properties)
+      .map(([name, exp]) => `${name}: ${exp.alpha_repr(ctx)}`)
+      .join("\n")
+    return `{\n${ut.indent(s, "  ")}\n}`
   }
 }
