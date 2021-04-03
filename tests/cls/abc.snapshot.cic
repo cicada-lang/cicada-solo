@@ -2,8 +2,9 @@
 @the (Trivial) -> Type
 (_) => Nat
 
-@def abc
-@the [ a: Trivial, b: the_nat_type(a), c: String ]
+@def ABC [ a: Trivial, b: the_nat_type(a), c: String ]
+
+@def abc @the ABC
 { a: sole, b: 2, c: "c" }
 
 @show abc
@@ -16,7 +17,7 @@
 @the [
   x: String,
   y: String,
-  z: [ a: Trivial, b: the_nat_type(a), c: String ]
+  z: ABC
 ] {
   x: "x",
   y: "y",
