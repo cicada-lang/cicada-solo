@@ -2,6 +2,7 @@ import { Ctx } from "@/ctx"
 import { Exp } from "@/exp"
 import { Value } from "@/value"
 import { Cls, Obj, TypeValue } from "@/core"
+import { NotYetValue, VarNeutral } from "@/core"
 import { Telescope } from "@/telescope"
 import { evaluate } from "@/evaluate"
 import { readback } from "@/readback"
@@ -31,7 +32,14 @@ export class ClsValue {
 
       const demanded = new Array()
 
-      // TODO this.telescope
+      let telescope = this.telescope
+      while (telescope.next) {
+        const { name, t } = telescope.next
+        const t_exp = readback(ctx, new TypeValue(), t)
+        demanded.push({ name, t: t_exp })
+        ctx.extend(name, t)
+        telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
+      }
 
       return new Cls(fulfilled, demanded)
     }

@@ -1,4 +1,3 @@
-- `ClsValue.readback`
 - `ClsValue.eta_expand`
 
 - `Cls.repr`
