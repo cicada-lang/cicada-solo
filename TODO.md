@@ -1,6 +1,10 @@
 - `ClsValue.eta_expand`
 - `ClsValue.readback`
 
+- [fulfilling type] [syntax] `Cls` -- [ name: t, ... ]
+- [fulfilling type] [syntax] `Obj` -- { name: property, ... }
+- [fulfilling type] [syntax] `Dot` -- target.name
+
 - `Cls.repr`
 - `Cls.alpha_repr`
 
@@ -19,8 +23,6 @@
     - recursion
   - problem:
     - how to handle `this`?
-
-- [fulfilling type] [syntax] `@class` `@object` `@dot`
 
 - [pie] `List` -- `List` `li()` `nil`
 - [pie] `Vector` --  `Vector` `vli()` `vnil`

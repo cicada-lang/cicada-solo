@@ -29,6 +29,11 @@ sigma:
 - car(target)
 - cdr(target)
 
+class:
+- [ name: t, ... ]
+- { name: property, ... }
+- target.name
+
 equal:
 - Equal(t, from, to)
 - same
