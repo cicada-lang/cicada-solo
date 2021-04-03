@@ -7,6 +7,7 @@ import { ClsValue } from "@/core"
 import { TypeValue } from "@/core"
 import { evaluate } from "@/evaluate"
 import { check } from "@/check"
+import * as ut from "@/ut"
 
 export class Cls implements Exp {
   fulfilled: Array<{ name: string; t: Exp; exp: Exp }>
@@ -51,7 +52,15 @@ export class Cls implements Exp {
   }
 
   repr(): string {
-    throw new Error("TODO")
+    if (this.fulfilled.length === 0 && this.demanded.length === 0) return "{}"
+    const fulfilled = this.fulfilled.map(({ name, t, exp }) => {
+      return `${name}: ${t.repr()} = ${exp.repr()}`
+    })
+    const demanded = this.demanded.map(({ name, t }) => {
+      return `${name}: ${t.repr()}`
+    })
+    let s = [...fulfilled, ...demanded].join("\n")
+    return `[\n${ut.indent(s, "  ")}\n]`
   }
 
   alpha_repr(ctx: AlphaCtx): string {

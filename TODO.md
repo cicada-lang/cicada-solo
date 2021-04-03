@@ -1,4 +1,3 @@
-- `Cls.repr`
 - `Cls.alpha_repr`
 
 - [fulfilling type] [syntax] `Cls` -- [ name: t, ... ]
