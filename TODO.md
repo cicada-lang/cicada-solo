@@ -1,5 +1,3 @@
-- `ClsValue.eta_expand`
-
 - `Cls.repr`
 - `Cls.alpha_repr`
 

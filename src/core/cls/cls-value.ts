@@ -6,6 +6,8 @@ import { NotYetValue, VarNeutral } from "@/core"
 import { Telescope } from "@/telescope"
 import { evaluate } from "@/evaluate"
 import { readback } from "@/readback"
+import { conversion } from "@/conversion"
+import { Trace } from "@/trace"
 
 export class ClsValue {
   fulfilled: Array<{ name: string; t: Value; value: Value }>
@@ -48,9 +50,23 @@ export class ClsValue {
   eta_expand(ctx: Ctx, value: Value): Exp {
     const properties = new Map()
 
-    // for () {}
+    for (const { name, t, value: fulfilled_value } of this.fulfilled) {
+      const property_value = Dot.apply(value, name)
+      if (!conversion(ctx, t, property_value, fulfilled_value)) {
+        throw new Trace("property_value not equivalent to fulfilled_value")
+      }
+      const property_exp = readback(ctx, t, property_value)
+      properties.set(name, property_exp)
+    }
 
-    // for () {}
+    let telescope = this.telescope
+    while (telescope.next) {
+      const { name, t } = telescope.next
+      const property_value = Dot.apply(value, name)
+      const property_exp = readback(ctx, t, property_value)
+      properties.set(name, property_exp)
+      telescope = telescope.fill(property_value)
+    }
 
     return new Obj(properties)
   }
