@@ -46,7 +46,13 @@ export class ClsValue {
   }
 
   eta_expand(ctx: Ctx, value: Value): Exp {
-    throw new Error("TODO")
+    const properties = new Map()
+
+    // for () {}
+
+    // for () {}
+
+    return new Obj(properties)
   }
 
   dot(name: string): Value {
