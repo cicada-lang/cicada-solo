@@ -78,6 +78,6 @@ export class Cls implements Exp {
       ctx = ctx.extend(name)
     }
     let s = parts.join("\n")
-    return `{\n${ut.indent(s, "  ")}\n}`
+    return `[\n${ut.indent(s, "  ")}\n]`
   }
 }
