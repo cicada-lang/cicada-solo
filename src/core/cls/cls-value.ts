@@ -4,6 +4,7 @@ import { Value } from "@/value"
 import { Cls, Obj, TypeValue } from "@/core"
 import { Telescope } from "@/telescope"
 import { evaluate } from "@/evaluate"
+import { readback } from "@/readback"
 
 export class ClsValue {
   fulfilled: Array<{ name: string; t: Value; value: Value }>
@@ -22,7 +23,10 @@ export class ClsValue {
       const fulfilled = new Array()
 
       for (const { name, t, value } of this.fulfilled) {
-        // fulfilled.push()
+        const t_exp = readback(ctx, new TypeValue(), t)
+        const exp = readback(ctx, t, value)
+        fulfilled.push({ name, t: t_exp, exp })
+        ctx = ctx.extend(name, t, value)
       }
 
       const demanded = new Array()

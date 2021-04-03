@@ -1,9 +1,5 @@
-- `ClsValue.eta_expand`
 - `ClsValue.readback`
-
-- [fulfilling type] [syntax] `Cls` -- [ name: t, ... ]
-- [fulfilling type] [syntax] `Obj` -- { name: property, ... }
-- [fulfilling type] [syntax] `Dot` -- target.name
+- `ClsValue.eta_expand`
 
 - `Cls.repr`
 - `Cls.alpha_repr`
@@ -13,6 +9,10 @@
 
 - `Dot.repr`
 - `Dot.alpha_repr`
+
+- [fulfilling type] [syntax] `Cls` -- [ name: t, ... ]
+- [fulfilling type] [syntax] `Obj` -- { name: property, ... }
+- [fulfilling type] [syntax] `Dot` -- target.name
 
 - [fulfilling type] -- `Cls` `Obj` `Dot`
   - with:
