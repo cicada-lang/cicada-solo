@@ -129,13 +129,3 @@ export const exp = {
     "exp:the": ['"@"', '"the"', { t: "exp" }, { exp: "exp" }],
   },
 }
-
-export const deduction_entry = {
-  $grammar: {
-    "deduction_entry:deduction_entry": [
-      { t: "exp" },
-      "dashline",
-      { exp: "exp" },
-    ],
-  },
-}
