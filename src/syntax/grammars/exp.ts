@@ -3,19 +3,7 @@ export const exp = {
     "exp:var": [{ name: "identifier" }],
     "exp:pi": [
       { $ap: ["optional", '"@"', '"forall"'] },
-      '"("',
-      { name: "identifier" },
-      '":"',
-      { arg_t: "exp" },
-      '")"',
-      '"-"',
-      '">"',
-      { ret_t: "exp" },
-    ],
-    "exp:arrow": [
-      '"("',
-      { arg_t: "exp" },
-      '")"',
+      { bindings: "bindings" },
       '"-"',
       '">"',
       { ret_t: "exp" },
@@ -116,6 +104,25 @@ export const exp = {
       { ret: "exp" },
     ],
     "exp:the": ['"@"', '"the"', { t: "exp" }, { exp: "exp" }],
+  },
+}
+
+export const bindings = {
+  $grammar: {
+    "bindings:bindings": [
+      '"("',
+      { entries: { $ap: ["zero_or_more", "binding_entry", '","'] } },
+      { last_entry: "binding_entry" },
+      { $ap: ["optional", '","'] },
+      '")"',
+    ],
+  },
+}
+
+export const binding_entry = {
+  $grammar: {
+    "binding_entry:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
+    "binding_entry:nameless": [{ exp: "exp" }],
   },
 }
 

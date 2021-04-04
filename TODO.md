@@ -1,4 +1,3 @@
-- [syntax] -- `(x: X, y: Y) -> Z` as sugar for `(x: X) -> (y: Y) -> Z`
 - [syntax] -- `(x1 x2: X) -> Z` as sugar for `(x1: X, x2: X) -> Z`
 - [syntax] -- `(x, y) => z` as sugar for `(x) => (y) => Z`
 - [syntax] -- `f(x, y)` as sugar for `f(x)(y)`
