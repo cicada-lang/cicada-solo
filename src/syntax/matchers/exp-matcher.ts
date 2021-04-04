@@ -15,18 +15,21 @@ import { The } from "@/core"
 import { nat_from_number } from "@/core/nat/nat-util"
 import * as ut from "@/ut"
 
+function pi_handler(body: { [key: string]: pt.Tree }): Exp {
+  const { bindings, ret_t } = body
+  let result = exp_matcher(ret_t)
+  for (const { names, exp } of bindings_matcher(bindings).reverse()) {
+    for (const name of names.reverse()) {
+      result = new Pi(name, exp, result)
+    }
+  }
+  return result
+}
+
 export function exp_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "exp:var": ({ name }) => new Var(pt.str(name)),
-    "exp:pi": ({ bindings, ret_t }) => {
-      let result = exp_matcher(ret_t)
-      for (const { names, exp } of bindings_matcher(bindings).reverse()) {
-        for (const name of names) {
-          result = new Pi(name, exp, result)
-        }
-      }
-      return result
-    },
+    "exp:pi": pi_handler,
     "exp:fn": ({ names, ret }) => {
       let result = exp_matcher(ret)
       for (const name of names_matcher(names).reverse()) {
@@ -37,8 +40,7 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:ap": ({ target, args }) => {
       let result: Exp = new Var(pt.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
-        for (const exp of exps_matcher(arg))
-          result = new Ap(result, exp)
+        for (const exp of exps_matcher(arg)) result = new Ap(result, exp)
       }
       return result
     },
@@ -154,6 +156,10 @@ export function exps_matcher(tree: pt.Tree): Array<Exp> {
 
 export function property_matcher(tree: pt.Tree): [string, Exp] {
   return pt.matcher<[string, Exp]>({
-    "property:property": ({ name, exp }) => [pt.str(name), exp_matcher(exp)],
+    "property:field": ({ name, exp }) => [pt.str(name), exp_matcher(exp)],
+    "property:method": ({ name, bindings, ret_t }) => [
+      pt.str(name),
+      pi_handler({ bindings, ret_t }),
+    ],
   })(tree)
 }

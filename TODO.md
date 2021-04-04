@@ -1,5 +1,3 @@
-- [syntax] -- alternative syntax for property
-
 - [fulfilling] -- fulfilling type
 
 - [syntax] -- js-like spread syntax for cls and obj `...x`
