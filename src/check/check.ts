@@ -17,7 +17,9 @@ export function check(ctx: Ctx, exp: Exp, t: Value): void {
         const u_exp = readback(ctx, new TypeValue(), u)
         const t_exp = readback(ctx, new TypeValue(), t)
         // TODO
-        // console.log(t, u)
+        console.log(exp)
+        console.log(t)
+        console.log(u)
         throw new Trace(
           ut.aline(`
             |I infer the type to be ${u_exp.repr()}.
