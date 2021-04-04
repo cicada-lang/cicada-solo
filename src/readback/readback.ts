@@ -5,6 +5,7 @@ import { Absurd } from "@/core"
 import { The } from "@/core"
 import { AbsurdValue } from "@/core"
 import { NotYetValue } from "@/core"
+import { Trace } from "@/trace"
 import * as ut from "@/ut"
 
 export function readback(ctx: Ctx, t: Value, value: Value): Exp {
@@ -26,7 +27,7 @@ export function readback(ctx: Ctx, t: Value, value: Value): Exp {
     return exp
   }
 
-  throw new Error(
+  throw new Trace(
     ut.aline(`
       |I can not readback value: ${ut.inspect(value)},
       |of type: ${ut.inspect(t)}.
