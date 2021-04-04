@@ -7,6 +7,10 @@
 @def abc @the ABC
 { a: sole, b: 2, c: "c" }
 
+@def abcde @the ABC
+{ a: sole, b: 2, c: "c",
+  d: "d", e: "e" }
+
 @show abc
 
 @show abc.a
