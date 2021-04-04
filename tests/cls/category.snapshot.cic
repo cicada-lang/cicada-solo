@@ -1,6 +1,6 @@
 @def Category @the Type [
   Object: Type
-  Morphism: (dom: Object) -> (com: Object) -> Type
+  Morphism: (dom com: Object) -> Type
   id: (x: Object) -> Morphism(x)(x)
 
   // TODO

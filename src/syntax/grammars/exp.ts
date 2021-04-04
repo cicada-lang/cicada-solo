@@ -3,7 +3,9 @@ export const exp = {
     "exp:var": [{ name: "identifier" }],
     "exp:pi": [
       { $ap: ["optional", '"@"', '"forall"'] },
+      '"("',
       { bindings: "bindings" },
+      '")"',
       '"-"',
       '">"',
       { ret_t: "exp" },
@@ -110,19 +112,22 @@ export const exp = {
 export const bindings = {
   $grammar: {
     "bindings:bindings": [
-      '"("',
       { entries: { $ap: ["zero_or_more", "binding_entry", '","'] } },
       { last_entry: "binding_entry" },
       { $ap: ["optional", '","'] },
-      '")"',
     ],
   },
 }
 
 export const binding_entry = {
   $grammar: {
-    "binding_entry:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
     "binding_entry:nameless": [{ exp: "exp" }],
+    "binding_entry:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
+    "binding_entry:multi_named": [
+      { names: { $ap: ["one_or_more", "identifier"] } },
+      '":"',
+      { exp: "exp" },
+    ],
   },
 }
 
