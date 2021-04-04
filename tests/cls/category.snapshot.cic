@@ -1,4 +1,4 @@
-@def Category @the Type [
+@class Category [
   Object: Type
   Morphism: (dom com: Object) -> Type
   id: (x: Object) -> Morphism(x)(x)

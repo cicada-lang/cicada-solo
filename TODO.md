@@ -1,7 +1,5 @@
 - [syntax] -- alternative syntax for property
 
-- [syntax] -- `@class name` as sugar for `@def name @the Type`
-
 - [fulfilling] -- fulfilling type
 
 - [syntax] -- js-like spread syntax for cls and obj `...x`
