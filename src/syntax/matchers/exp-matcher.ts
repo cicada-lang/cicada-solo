@@ -67,7 +67,8 @@ export function exp_matcher(tree: pt.Tree): Exp {
           pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
         )
       ),
-    "exp:dot_field": ({ target, name }) => new Dot(exp_matcher(target), pt.str(name)),
+    "exp:dot_field": ({ target, name }) =>
+      new Dot(exp_matcher(target), pt.str(name)),
     "exp:dot_method": ({ target, name, args }) => {
       let result: Exp = new Dot(exp_matcher(target), pt.str(name))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {

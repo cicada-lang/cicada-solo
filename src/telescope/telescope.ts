@@ -41,3 +41,4 @@ export class Telescope {
       this.demanded.slice(1)
     )
   }
+}
