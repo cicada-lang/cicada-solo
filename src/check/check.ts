@@ -14,10 +14,6 @@ export function check(ctx: Ctx, exp: Exp, t: Value): void {
     } else if (exp.infer) {
       const u = exp.infer(ctx)
       if (!conversion(ctx, new TypeValue(), t, u)) {
-        // TODO
-        console.log(exp)
-        console.log(t)
-        console.log(u)
         const u_exp = readback(ctx, new TypeValue(), u)
         const t_exp = readback(ctx, new TypeValue(), t)
         throw new Trace(

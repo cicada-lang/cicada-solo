@@ -29,11 +29,13 @@ export class Dot implements Exp {
   static apply(target: Value, name: string): Value {
     return match_value(target, {
       ObjValue: (obj: ObjValue) => obj.dot(name),
-      ClsValue: (cls: ClsValue) => cls.dot(name),
       NotYetValue: ({ t, neutral }: NotYetValue) =>
         match_value(t, {
           ClsValue: (cls: ClsValue) =>
-            new NotYetValue(cls.dot(name), new DotNeutral(neutral, name)),
+            new NotYetValue(
+              cls.dot(target, name),
+              new DotNeutral(neutral, name)
+            ),
         }),
     })
   }
@@ -42,7 +44,7 @@ export class Dot implements Exp {
     const target_t = infer(ctx, this.target)
 
     if (target_t instanceof ClsValue) {
-      return target_t.dot(this.name)
+      return target_t.dot(evaluate(ctx.to_env(), this.target), this.name)
     }
 
     throw new Trace(

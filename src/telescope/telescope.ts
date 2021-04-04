@@ -42,29 +42,4 @@ export class Telescope {
     )
   }
 
-  dot(name: string): Value {
-    if (this.next === undefined) {
-      throw new Trace(
-        ut.aline(`
-          |I can not find the name in the telescope.
-          |- name: ${name}
-          |- telescope: ${ut.inspect(this)}
-          |`)
-      )
-    }
-
-    if (this.next.name === name) {
-      return this.next.t
-    }
-
-    const next_value = new NotYetValue(
-      this.next.t,
-      new VarNeutral(this.next.name)
-    )
-
-    return new Telescope(
-      this.env.extend(this.next.name, next_value),
-      this.demanded.slice(1)
-    ).dot(name)
-  }
 }

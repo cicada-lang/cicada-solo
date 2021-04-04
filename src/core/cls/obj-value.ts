@@ -20,7 +20,7 @@ export class ObjValue {
   dot(name: string): Value {
     const value = this.properties.get(name)
     if (value === undefined) {
-      throw new Error(
+      throw new Trace(
         ut.aline(`
           |The property name: ${name} of object is undefined.
           |`)
