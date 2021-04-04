@@ -1,5 +1,3 @@
-- [syntax] -- `(x, y) => z` as sugar for `(x) => (y) => Z`
-
 - [syntax] -- `f(x, y)` as sugar for `f(x)(y)`
 
 - [syntax] -- alternative syntax for property

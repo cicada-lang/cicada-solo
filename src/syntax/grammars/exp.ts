@@ -12,7 +12,7 @@ export const exp = {
     ],
     "exp:fn": [
       '"("',
-      { name: "identifier" },
+      { names: "names" },
       '")"',
       '"="',
       '">"',
@@ -127,6 +127,16 @@ export const binding_entry = {
       { names: { $ap: ["one_or_more", "identifier"] } },
       '":"',
       { exp: "exp" },
+    ],
+  },
+}
+
+export const names = {
+  $grammar: {
+    "names:names": [
+      { entries: { $ap: ["zero_or_more", "identifier", '","'] } },
+      { last_entry: "identifier" },
+      { $ap: ["optional", '","'] },
     ],
   },
 }

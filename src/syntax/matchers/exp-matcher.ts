@@ -19,15 +19,21 @@ export function exp_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "exp:var": ({ name }) => new Var(pt.str(name)),
     "exp:pi": ({ bindings, ret_t }) => {
-      let exp = exp_matcher(ret_t)
-      for (const entry of bindings_matcher(bindings).reverse()) {
-        for (const name of entry.names) {
-          exp = new Pi(name, entry.exp, exp)
+      let result = exp_matcher(ret_t)
+      for (const { names, exp } of bindings_matcher(bindings).reverse()) {
+        for (const name of names) {
+          result = new Pi(name, exp, result)
         }
       }
-      return exp
+      return result
     },
-    "exp:fn": ({ name, ret }) => new Fn(pt.str(name), exp_matcher(ret)),
+    "exp:fn": ({ names, ret }) => {
+      let result = exp_matcher(ret)
+      for (const name of names_matcher(names).reverse()) {
+        result = new Fn(name, result)
+      }
+      return result
+    },
     "exp:ap": ({ target, args }) => {
       let exp: Exp = new Var(pt.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
@@ -124,6 +130,15 @@ export function binding_entry_matcher(
       names: pt.matchers.one_or_more_matcher(names).map(pt.str),
       exp: exp_matcher(exp),
     }),
+  })(tree)
+}
+
+export function names_matcher(tree: pt.Tree): Array<string> {
+  return pt.matcher({
+    "names:names": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(pt.str),
+      pt.str(last_entry),
+    ],
   })(tree)
 }
 
