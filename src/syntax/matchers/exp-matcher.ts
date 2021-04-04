@@ -20,8 +20,6 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:var": ({ name }) => new Var(pt.str(name)),
     "exp:pi": ({ name, arg_t, ret_t }) =>
       new Pi(pt.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
-    "exp:pi_forall": ({ name, arg_t, ret_t }) =>
-      new Pi(pt.str(name), exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:arrow": ({ arg_t, ret_t }) =>
       new Pi("_", exp_matcher(arg_t), exp_matcher(ret_t)),
     "exp:fn": ({ name, ret }) => new Fn(pt.str(name), exp_matcher(ret)),
@@ -33,8 +31,6 @@ export function exp_matcher(tree: pt.Tree): Exp {
       return exp
     },
     "exp:sigma": ({ name, car_t, cdr_t }) =>
-      new Sigma(pt.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
-    "exp:sigma_exists": ({ name, car_t, cdr_t }) =>
       new Sigma(pt.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
     "exp:pair": ({ car_t, cdr_t }) =>
       new Sigma("_", exp_matcher(car_t), exp_matcher(cdr_t)),

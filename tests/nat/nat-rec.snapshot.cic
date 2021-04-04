@@ -1,4 +1,5 @@
-@def nat_rec @the (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
+@def nat_rec
+@the @forall (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
 (target) => (T) => (base) => (step) => nat_ind(target, (_) => T, base, step)
 
 @def add @the (Nat) -> (Nat) -> Nat
