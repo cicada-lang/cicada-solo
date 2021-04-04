@@ -1,3 +1,6 @@
+- [error report] -- add optional name to class for `@show`
+  - is typescript's structural typing using optional name?
+
 - [fulfilling] -- fulfilling type
 
 - [syntax] -- js-like spread syntax for cls and obj `...x`
