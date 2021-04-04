@@ -20,7 +20,7 @@ export const exp = {
     ],
     "exp:ap": [
       { target: "identifier" },
-      { args: { $ap: ["one_or_more", '"("', "exp", '")"'] } },
+      { args: { $ap: ["one_or_more", '"("', "exps", '")"'] } },
     ],
     "exp:sigma": [
       { $ap: ["optional", '"@"', '"exists"'] },
@@ -136,6 +136,16 @@ export const names = {
     "names:names": [
       { entries: { $ap: ["zero_or_more", "identifier", '","'] } },
       { last_entry: "identifier" },
+      { $ap: ["optional", '","'] },
+    ],
+  },
+}
+
+export const exps = {
+  $grammar: {
+    "exps:exps": [
+      { entries: { $ap: ["zero_or_more", "exp", '","'] } },
+      { last_entry: "exp" },
       { $ap: ["optional", '","'] },
     ],
   },

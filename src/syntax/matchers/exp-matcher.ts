@@ -35,11 +35,12 @@ export function exp_matcher(tree: pt.Tree): Exp {
       return result
     },
     "exp:ap": ({ target, args }) => {
-      let exp: Exp = new Var(pt.str(target))
+      let result: Exp = new Var(pt.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
-        exp = new Ap(exp, exp_matcher(arg))
+        for (const exp of exps_matcher(arg))
+          result = new Ap(result, exp)
       }
-      return exp
+      return result
     },
     "exp:sigma": ({ name, car_t, cdr_t }) =>
       new Sigma(pt.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
@@ -138,6 +139,15 @@ export function names_matcher(tree: pt.Tree): Array<string> {
     "names:names": ({ entries, last_entry }) => [
       ...pt.matchers.zero_or_more_matcher(entries).map(pt.str),
       pt.str(last_entry),
+    ],
+  })(tree)
+}
+
+export function exps_matcher(tree: pt.Tree): Array<Exp> {
+  return pt.matcher({
+    "exps:exps": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(exp_matcher),
+      exp_matcher(last_entry),
     ],
   })(tree)
 }

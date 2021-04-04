@@ -1,5 +1,3 @@
-- [syntax] -- `f(x, y)` as sugar for `f(x)(y)`
-
 - [syntax] -- alternative syntax for property
 
 - [syntax] -- `@class name` as sugar for `@def name @the Type`
