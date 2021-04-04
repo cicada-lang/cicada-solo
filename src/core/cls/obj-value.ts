@@ -1,7 +1,6 @@
 import { Ctx } from "@/ctx"
 import { Exp } from "@/exp"
 import { Value } from "@/value"
-import { Obj } from "@/core"
 import { Trace } from "@/trace"
 import * as ut from "@/ut"
 

@@ -1,7 +1,6 @@
 import { Env } from "@/env"
 import { Exp } from "@/exp"
 import { Value } from "@/value"
-import { NotYetValue, VarNeutral } from "@/core"
 import { evaluate } from "@/evaluate"
 import { Trace } from "@/trace"
 import * as ut from "@/ut"
