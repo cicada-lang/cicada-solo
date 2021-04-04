@@ -40,7 +40,9 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:ap": ({ target, args }) => {
       let result: Exp = new Var(pt.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
-        for (const exp of exps_matcher(arg)) result = new Ap(result, exp)
+        for (const exp of exps_matcher(arg)) {
+          result = new Ap(result, exp)
+        }
       }
       return result
     },
@@ -65,7 +67,16 @@ export function exp_matcher(tree: pt.Tree): Exp {
           pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
         )
       ),
-    "exp:dot": ({ target, name }) => new Dot(exp_matcher(target), pt.str(name)),
+    "exp:dot_field": ({ target, name }) => new Dot(exp_matcher(target), pt.str(name)),
+    "exp:dot_method": ({ target, name, args }) => {
+      let result: Exp = new Dot(exp_matcher(target), pt.str(name))
+      for (const arg of pt.matchers.one_or_more_matcher(args)) {
+        for (const exp of exps_matcher(arg)) {
+          result = new Ap(result, exp)
+        }
+      }
+      return result
+    },
     "exp:nat": () => new Nat(),
     "exp:zero": () => new Zero(),
     "exp:add1": ({ prev }) => new Add1(exp_matcher(prev)),
