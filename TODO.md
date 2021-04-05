@@ -6,6 +6,7 @@
     thus we need to make `Cls` pre-fillable at any line
 
 - [class] -- handle `this`
+  - since we do not have recursion, `this` will be `so far`
 
 - [pie] `List` -- `List` `li()` `nil`
 - [pie] `Vector` --  `Vector` `vli()` `vnil`
