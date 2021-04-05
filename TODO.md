@@ -1,5 +1,5 @@
 - [error report] -- add optional name to class for `@show`
-  - is typescript's structural typing using optional name?
+- [error report] -- `@class` as a stmt
 
 - [fulfilling] -- fulfilling type
 
