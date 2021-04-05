@@ -12,13 +12,16 @@ import * as ut from "@/ut"
 export class ClsValue {
   fulfilled: Array<{ name: string; t: Value; value: Value }>
   telescope: Telescope
+  name?: string
 
   constructor(
     fulfilled: Array<{ name: string; t: Value; value: Value }>,
-    telescope: Telescope
+    telescope: Telescope,
+    opts?: { name?: string }
   ) {
     this.fulfilled = fulfilled
     this.telescope = telescope
+    this.name = opts?.name
   }
 
   readback(ctx: Ctx, t: Value): Exp | undefined {
@@ -43,7 +46,7 @@ export class ClsValue {
         telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
       }
 
-      return new Cls(fulfilled, demanded)
+      return new Cls(fulfilled, demanded, { name: this.name })
     }
   }
 

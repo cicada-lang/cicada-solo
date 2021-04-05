@@ -1,4 +1,4 @@
-@the Type [
+@the Type Category [
   Object: Type
   Morphism: (dom: Object) -> (com: Object) -> Type
   id: (x: Object) -> Morphism(x)(x)
@@ -7,8 +7,8 @@
   id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
   compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
 ]
-@the Type [
-  dom: [
+@the Type Functor [
+  dom: Category [
     Object: Type
     Morphism: (dom: Object) -> (com: Object) -> Type
     id: (x: Object) -> Morphism(x)(x)
@@ -17,7 +17,7 @@
     id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
     compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
   ]
-  cod: [
+  cod: Category [
     Object: Type
     Morphism: (dom: Object) -> (com: Object) -> Type
     id: (x: Object) -> Morphism(x)(x)

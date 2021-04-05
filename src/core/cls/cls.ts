@@ -12,13 +12,16 @@ import * as ut from "@/ut"
 export class Cls implements Exp {
   fulfilled: Array<{ name: string; t: Exp; exp: Exp }>
   demanded: Array<{ name: string; t: Exp }>
+  name?: string
 
   constructor(
     fulfilled: Array<{ name: string; t: Exp; exp: Exp }>,
-    demanded: Array<{ name: string; t: Exp }>
+    demanded: Array<{ name: string; t: Exp }>,
+    opts?: { name?: string }
   ) {
     this.fulfilled = fulfilled
     this.demanded = demanded
+    this.name = opts?.name
   }
 
   evaluate(env: Env): Value {
@@ -31,7 +34,9 @@ export class Cls implements Exp {
       env = env.extend(name, value)
     }
 
-    return new ClsValue(fulfilled, new Telescope(env, this.demanded))
+    return new ClsValue(fulfilled, new Telescope(env, this.demanded), {
+      name: this.name,
+    })
   }
 
   infer(ctx: Ctx): Value {
@@ -52,7 +57,12 @@ export class Cls implements Exp {
   }
 
   repr(): string {
-    if (this.fulfilled.length === 0 && this.demanded.length === 0) return "{}"
+    const name = this.name ? `${this.name} ` : ""
+
+    if (this.fulfilled.length === 0 && this.demanded.length === 0) {
+      return name + "[]"
+    }
+
     const fulfilled = this.fulfilled.map(({ name, t, exp }) => {
       return `${name}: ${t.repr()} = ${exp.repr()}`
     })
@@ -60,7 +70,7 @@ export class Cls implements Exp {
       return `${name}: ${t.repr()}`
     })
     let s = [...fulfilled, ...demanded].join("\n")
-    return `[\n${ut.indent(s, "  ")}\n]`
+    return name + `[\n${ut.indent(s, "  ")}\n]`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
