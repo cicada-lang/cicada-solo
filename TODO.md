@@ -1,5 +1,5 @@
 - [fulfilling] -- inheritance -- `@extends name [...]`
-  - we can not just appending telescope, because of lexical scope.
+  - we can not just appending telescope, because we need lexical scope
   - `Ext` as new `Exp`
   - `ExtValue` to chaine `ClsValue`
   - `ExtValue` should be readback to `Cls`,
