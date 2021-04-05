@@ -1,5 +1,3 @@
-- [fulfilling] -- fulfilling type
-
 - [fulfilling] -- inherit -- `@extends`
 
 - [pie] `List` -- `List` `li()` `nil`

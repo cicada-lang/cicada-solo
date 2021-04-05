@@ -7,8 +7,20 @@
 @def abc @the ABC
 { a: sole, b: 2, c: "c" }
 
-@show abc
+@def xyz
+@the [
+  x: String,
+  y: String,
+  z: ABC
+] {
+  x: "x",
+  y: "y",
+  z: abc,
+}
 
-@show abc.a
-@show abc.b
-@show abc.c
+@show xyz
+
+@show xyz.z
+@show xyz.z.a
+@show xyz.z.b
+@show xyz.z.c

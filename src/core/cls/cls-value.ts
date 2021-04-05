@@ -96,4 +96,22 @@ export class ClsValue {
         |`)
     )
   }
+
+  apply(arg: Value): Value {
+    if (!this.telescope.next) {
+      throw new Trace(
+        ut.aline(`
+          |The telescope is filled.
+          |`)
+      )
+    }
+
+    const fulfilled = [
+      ...this.fulfilled,
+      { ...this.telescope.next, value: arg },
+    ]
+    return new ClsValue(fulfilled, this.telescope.fill(arg), {
+      name: this.name,
+    })
+  }
 }

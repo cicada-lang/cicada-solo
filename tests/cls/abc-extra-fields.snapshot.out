@@ -7,7 +7,4 @@
   b: 2
   c: "c"
 }
-@the Trivial sole
-@the Nat 2
-@the String "c"
 
