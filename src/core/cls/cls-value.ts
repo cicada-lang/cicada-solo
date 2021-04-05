@@ -101,7 +101,7 @@ export class ClsValue {
     if (!this.telescope.next) {
       throw new Trace(
         ut.aline(`
-          |The telescope is filled.
+          |The telescope is full.
           |`)
       )
     }

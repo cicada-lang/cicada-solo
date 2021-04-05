@@ -57,7 +57,7 @@ export class Ap implements Exp {
       if (!cls.telescope.next) {
         throw new Trace(
           ut.aline(`
-            |The telescope is filled.
+            |The telescope is full.
             |`)
         )
       }
