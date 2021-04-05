@@ -1,5 +1,9 @@
 - [fulfilling] -- inheritance -- `@extends name [...]`
-  - by appending telescope -- no pre-filled value
+  - we can not just appending telescope, because of lexical scope.
+  - `Ext` as new `Exp`
+  - `ExtValue` to chaine `ClsValue`
+  - `ExtValue` should be readback to `Cls`,
+    thus we need to make `Cls` pre-fillable at any line
 
 - [class] -- handle `this`
 
