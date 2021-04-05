@@ -1,6 +1,3 @@
-- [error report] -- add optional name to class for `@show`
-- [error report] -- `@class` as a stmt
-
 - [fulfilling] -- fulfilling type
 
 - [syntax] -- js-like spread syntax for cls and obj `...x`
