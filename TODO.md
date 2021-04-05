@@ -1,4 +1,5 @@
-- [fulfilling] -- inherit -- `@extends`
+- [fulfilling] -- inheritance -- `@extends name [...]`
+- [class] -- handle `this`
 
 - [pie] `List` -- `List` `li()` `nil`
 - [pie] `Vector` --  `Vector` `vli()` `vnil`
