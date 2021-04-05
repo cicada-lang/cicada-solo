@@ -7,6 +7,8 @@
 @def abc @the ABC
 { a: sole, b: 2, c: "c" }
 
+// NOTE extra fields
+
 @def abcde @the ABC
 { a: sole, b: 2, c: "c",
   d: "d", e: "e" }
@@ -16,6 +18,8 @@
 @show abc.a
 @show abc.b
 @show abc.c
+
+// NOTE nested
 
 @def xyz
 @the [
