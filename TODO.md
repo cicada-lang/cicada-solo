@@ -4,6 +4,7 @@
   - `ExtValue` to chaine `ClsValue`
   - `ExtValue` should be readback to `Cls`,
     thus we need to make `Cls` pre-fillable at any line
+  - we also want to be able to use local variables in telescope
 
 - [class] -- handle `this`
   - since we do not have recursion, `this` will be `so far`
