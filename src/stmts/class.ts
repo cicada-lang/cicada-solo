@@ -7,19 +7,16 @@ import { The, Type, Cls } from "@/core"
 
 export class Class implements Stmt {
   name: string
-  exp: Exp
+  cls: Cls
 
-  constructor(name: string, exp: Exp) {
+  constructor(name: string, cls: Cls) {
     this.name = name
-    this.exp = exp
-
-    if (this.exp instanceof Cls) {
-      this.exp.name = this.name
-    }
+    this.cls = cls
+    this.cls.name = this.name
   }
 
   execute(world: World): World {
-    const exp = new The(new Type(), this.exp)
+    const exp = new The(new Type(), this.cls)
 
     return world
       .ctx_extend(

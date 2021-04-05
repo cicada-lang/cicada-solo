@@ -1,6 +1,3 @@
-- [refactor] -- extract cls grammar rule
-- [refactor] -- improve `Class` stmt
-
 - [fulfilling] -- inheritance -- `@extends name [...]`
   - by appending telescope -- no pre-filled value
 

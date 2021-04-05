@@ -53,14 +53,7 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:cons": ({ car, cdr }) => new Cons(exp_matcher(car), exp_matcher(cdr)),
     "exp:car": ({ target }) => new Car(exp_matcher(target)),
     "exp:cdr": ({ target }) => new Cdr(exp_matcher(target)),
-    "exp:cls": ({ demanded }) =>
-      new Cls(
-        [],
-        pt.matchers
-          .zero_or_more_matcher(demanded)
-          .map(property_matcher)
-          .map(([name, t]) => ({ name, t }))
-      ),
+    "exp:cls": ({ cls }) => cls_matcher(cls),
     "exp:obj": ({ properties }) =>
       new Obj(
         new Map(
@@ -115,6 +108,19 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:let": ({ name, exp, ret }) =>
       new Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),
     "exp:the": ({ t, exp }) => new The(exp_matcher(t), exp_matcher(exp)),
+  })(tree)
+}
+
+export function cls_matcher(tree: pt.Tree): Cls {
+  return pt.matcher({
+    "cls:cls": ({ demanded }) =>
+      new Cls(
+        [],
+        pt.matchers
+          .zero_or_more_matcher(demanded)
+          .map(property_matcher)
+          .map(([name, t]) => ({ name, t }))
+      ),
   })(tree)
 }
 

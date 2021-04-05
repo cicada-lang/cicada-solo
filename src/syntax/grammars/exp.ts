@@ -29,11 +29,7 @@ export const exp = {
     "exp:cons": ['"cons"', '"("', { car: "exp" }, '","', { cdr: "exp" }, '")"'],
     "exp:car": ['"car"', '"("', { target: "exp" }, '")"'],
     "exp:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
-    "exp:cls": [
-      '"["',
-      { demanded: { $ap: ["zero_or_more", "property"] } },
-      '"]"',
-    ],
+    "exp:cls": [{ cls: "cls" }],
     "exp:obj": [
       '"{"',
       { properties: { $ap: ["zero_or_more", "property"] } },
@@ -105,6 +101,16 @@ export const exp = {
       { ret: "exp" },
     ],
     "exp:the": ['"@"', '"the"', { t: "exp" }, { exp: "exp" }],
+  },
+}
+
+export const cls = {
+  $grammar: {
+    "cls:cls": [
+      '"["',
+      { demanded: { $ap: ["zero_or_more", "property"] } },
+      '"]"',
+    ],
   },
 }
 
