@@ -1,7 +1,6 @@
 - [fulfilling] -- fulfilling type
 
-- [syntax] -- js-like spread syntax for cls and obj `...x`
-- [fulfilling] -- inherit -- use js-like spread syntax
+- [fulfilling] -- inherit -- `@extends`
 
 - [pie] `List` -- `List` `li()` `nil`
 - [pie] `Vector` --  `Vector` `vli()` `vnil`

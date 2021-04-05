@@ -3,9 +3,13 @@
 // NOTE the following use of `Category.Isomorphism(this, f, inv(f))`
 //   is an example of partly fulfilled object construction
 @class Groupoid extends Category {
-  @given x: Object, y: Object
-  inv(f: Morphism(x, y)): Morphism(y, x)
+  inv(
+    x y: Object,
+    f: Morphism(x, y)
+  ): Morphism(y, x)
 
-  @given x: Object, y: Object
-  inv_iso(f: Morphism(x, y)): Category.Isomorphism(this, f, inv(f))
+  inv_iso(
+    x y: Object,
+    f: Morphism(x, y)
+  ): Category.Isomorphism(this, f, inv(x, y)(f))
 }
