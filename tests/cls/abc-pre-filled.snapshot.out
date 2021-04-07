@@ -1,0 +1,31 @@
+@the ABC [
+  a: Trivial = sole
+  b: Nat = 2
+  c: String = "c"
+] {
+  a: sole
+  b: 2
+  c: "c"
+}
+@the Trivial sole
+@the Nat 2
+@the String "c"
+@the ABCDE [
+  a: Trivial = sole
+  b: Nat = 2
+  c: String = "c"
+  d: String = "d"
+  e: String
+] {
+  a: sole
+  b: 2
+  c: "c"
+  d: "d"
+  e: "e"
+}
+@the Trivial sole
+@the Nat 2
+@the String "c"
+@the String "d"
+@the String "e"
+

@@ -53,7 +53,8 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:cons": ({ car, cdr }) => new Cons(exp_matcher(car), exp_matcher(cdr)),
     "exp:car": ({ target }) => new Car(exp_matcher(target)),
     "exp:cdr": ({ target }) => new Cdr(exp_matcher(target)),
-    "exp:cls": ({ cls_entries }) => new Cls(cls_entries_matcher(cls_entries)),
+    "exp:cls": ({ entries }) =>
+      new Cls(pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)),
     "exp:obj": ({ properties }) =>
       new Obj(
         new Map(
@@ -111,30 +112,37 @@ export function exp_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-export function cls_entries_matcher(
-  tree: pt.Tree
-): Array<{ name: string; t: Exp; exp?: Exp }> {
-  return pt.matcher({
-    "cls_entries:cls_entries": ({ entries, last_entry }) => [
-      ...pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher),
-      cls_entry_matcher(last_entry),
-    ],
-  })(tree)
-}
-
 export function cls_entry_matcher(
   tree: pt.Tree
 ): { name: string; t: Exp; exp?: Exp } {
   return pt.matcher({
-    "cls_entry:fulfilled": ({ name, t, exp }) => ({
+    "cls_entry:field_demanded": ({ name, t }) => ({
+      name: pt.str(name),
+      t: exp_matcher(t),
+    }),
+    "cls_entry:field_fulfilled": ({ name, t, exp }) => ({
       name: pt.str(name),
       t: exp_matcher(t),
       exp: exp_matcher(exp),
     }),
-    "cls_entry:demanded": ({ name, t }) => ({
+    "cls_entry:method_demanded": ({ name, bindings, ret_t }) => ({
       name: pt.str(name),
-      t: exp_matcher(t),
+      t: pi_handler({ bindings, ret_t }),
     }),
+    "cls_entry:method_fulfilled": ({ name, bindings, ret_t, ret }) => {
+      let fn = exp_matcher(ret)
+      for (const { names } of bindings_matcher(bindings).reverse()) {
+        for (const name of names.reverse()) {
+          fn = new Fn(name, fn)
+        }
+      }
+
+      return {
+        name: pt.str(name),
+        t: pi_handler({ bindings, ret_t }),
+        exp: fn,
+      }
+    },
   })(tree)
 }
 

@@ -34,10 +34,14 @@ export const exp = {
       '"extends"',
       { parent_name: "identifier" },
       '"["',
-      { entries: "cls_entries" },
+      { entries: { $ap: ["zero_or_more", "cls_entry"] } },
       '"]"',
     ],
-    "exp:cls": ['"["', { entries: "cls_entries" }, '"]"'],
+    "exp:cls": [
+      '"["',
+      { entries: { $ap: ["zero_or_more", "cls_entry"] } },
+      '"]"',
+    ],
     "exp:obj": [
       '"{"',
       { properties: { $ap: ["zero_or_more", "property"] } },
@@ -112,26 +116,42 @@ export const exp = {
   },
 }
 
-export const cls_entries = {
-  $grammar: {
-    "cls_entries:cls_entries": [
-      { entries: { $ap: ["zero_or_more", "cls_entry", '","'] } },
-      { last_entry: "cls_entry" },
-      { $ap: ["optional", '","'] },
-    ],
-  },
-}
-
 export const cls_entry = {
   $grammar: {
-    "cls_entry:fulfilled": [
+    "cls_entry:field_demanded": [
+      { name: "identifier" },
+      '":"',
+      { t: "exp" },
+      { $ap: ["optional", '","'] },
+    ],
+    "cls_entry:field_fulfilled": [
       { name: "identifier" },
       '":"',
       { t: "exp" },
       '"="',
       { exp: "exp" },
+      { $ap: ["optional", '","'] },
     ],
-    "cls_entry:demanded": [{ name: "identifier" }, '":"', { t: "exp" }],
+    "cls_entry:method_demanded": [
+      { name: "identifier" },
+      '"("',
+      { bindings: "bindings" },
+      '")"',
+      '":"',
+      { ret_t: "exp" },
+      { $ap: ["optional", '","'] },
+    ],
+    "cls_entry:method_fulfilled": [
+      { name: "identifier" },
+      '"("',
+      { bindings: "bindings" },
+      '")"',
+      '":"',
+      { ret_t: "exp" },
+      '"="',
+      { ret: "exp" },
+      { $ap: ["optional", '","'] },
+    ],
   },
 }
 

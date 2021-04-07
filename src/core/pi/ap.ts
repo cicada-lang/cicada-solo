@@ -54,16 +54,23 @@ export class Ap implements Exp {
     const target = evaluate(ctx.to_env(), this.target)
     if (target instanceof ClsValue) {
       const cls = target
-      if (!cls.telescope.next) {
-        throw new Trace(
-          ut.aline(`
-            |The telescope is full.
-            |`)
-        )
+      let telescope = cls.telescope
+      while (telescope.next) {
+        const { name, t, value } = telescope.next
+        if (value) {
+          telescope = telescope.fill(value)
+        } else {
+          check(ctx, this.arg, t)
+          const arg_value = evaluate(ctx.to_env(), this.arg)
+          return new TypeValue()
+        }
       }
-      check(ctx, this.arg, cls.telescope.next.t)
-      const arg_value = evaluate(ctx.to_env(), this.arg)
-      return new TypeValue()
+
+      throw new Trace(
+        ut.aline(`
+          |The telescope is full.
+          |`)
+      )
     }
 
     throw new Trace(

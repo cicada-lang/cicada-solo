@@ -1,6 +1,6 @@
 @class Category [
   Object: Type
-  Morphism(dom com: Object): Type
+  Morphism(dom cod: Object): Type
   id(x: Object): Morphism(x, x)
 
   compose(

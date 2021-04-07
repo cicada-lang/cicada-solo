@@ -22,6 +22,13 @@ export class ClsValue {
     if (t instanceof TypeValue) {
       const entries = new Array()
 
+      for (const { name, t, value } of this.telescope.fulfilled) {
+        const t_exp = readback(ctx, new TypeValue(), t)
+        const exp = readback(ctx, t, value)
+        entries.push({ name, t: t_exp, exp })
+        ctx = ctx.extend(name, t, value)
+      }
+
       let telescope = this.telescope
       while (telescope.next) {
         const { name, t, value } = telescope.next
@@ -43,6 +50,15 @@ export class ClsValue {
 
   eta_expand(ctx: Ctx, value: Value): Exp {
     const properties = new Map()
+
+    for (const { name, t, value: fulfilled_value } of this.telescope.fulfilled) {
+      const property_value = Dot.apply(value, name)
+      if (!conversion(ctx, t, property_value, fulfilled_value)) {
+        throw new Trace("property_value not equivalent to fulfilled_value")
+      }
+      const property_exp = readback(ctx, t, property_value)
+      properties.set(name, property_exp)
+    }
 
     let telescope = this.telescope
     while (telescope.next) {
@@ -67,31 +83,17 @@ export class ClsValue {
   }
 
   dot(target: Value, name: string): Value {
-    let telescope = this.telescope
-    while (telescope.next) {
-      const { name: next_name, t } = telescope.next
-      if (next_name !== name) {
-        telescope = telescope.fill(Dot.apply(target, next_name))
-      } else {
-        return t
-      }
-    }
-
-    throw new Trace(
-      ut.aline(`
-        |The property name: ${name} of class is undefined.
-        |`)
-    )
+    return this.telescope.dot(target, name)
   }
 
   apply(arg: Value): Value {
     let telescope = this.telescope
     while (telescope.next) {
-      const { name, value } = telescope.next
+      const {  value } = telescope.next
       if (value) {
         telescope = telescope.fill(value)
       } else {
-        return new ClsValue(this.telescope.fill(arg), { name: this.name })
+        return new ClsValue(telescope.fill(arg), { name: this.name })
       }
     }
 
