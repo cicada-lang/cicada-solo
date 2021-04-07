@@ -1,4 +1,4 @@
-- [pre-fillable] `Telescope`
+- [pre-fillable] `Telescope` -- api re-design
 
 - [pre-fillable] `ClsValue.readback`
 - [pre-fillable] `ClsValue.eta_expand`
