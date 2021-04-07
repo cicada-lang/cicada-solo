@@ -38,62 +38,46 @@ export class Obj implements Exp {
     // NOTE We will delete entries in the Map properties as we go along.
     const properties = new Map(this.properties)
 
-    // for (const { name, t, value } of cls.fulfilled) {
-    //   const found = properties.get(name)
-
-    //   if (found === undefined) {
-    //     throw new Trace(
-    //       ut.aline(`
-    //         |Can not found satisfied entry name: ${name}
-    //         |`)
-    //     )
-    //   }
-
-    //   check(ctx, found, t)
-
-    //   const found_value = evaluate(ctx.to_env(), found)
-
-    //   if (!conversion(ctx, t, value, found_value)) {
-    //     const t_repr = readback(ctx, new TypeValue(), t).repr()
-    //     const value_repr = readback(ctx, t, value).repr()
-    //     const found_repr = readback(ctx, t, found_value).repr()
-    //     throw new Trace(
-    //       ut.aline(`
-    //       |I am expecting the following two values to be the same ${t_repr}.
-    //       |But they are not.
-    //       |The value in object:
-    //       |  ${value_repr}
-    //       |The value in partially filled class:
-    //       |  ${found_repr}
-    //       |`)
-    //     )
-    //   }
-
-    //   properties.delete(name)
-    // }
-
     if (!cls.telescope.next) return
 
-    const found = properties.get(cls.telescope.next.name)
+    const { name, t: next_t, value } = cls.telescope.next
 
+    const found = properties.get(name)
     if (found === undefined) {
       throw new Trace(
         ut.aline(`
-            |Can not found next name: ${cls.telescope.next.name}
-            |`)
+          |Can not found next name: ${name}
+          |`)
       )
     }
 
-    check(ctx, found, cls.telescope.next.t)
+    check(ctx, found, next_t)
 
-    properties.delete(cls.telescope.next.name)
+    if (value) {
+      const found_value = evaluate(ctx.to_env(), found)
+      if (!conversion(ctx, next_t, value, found_value)) {
+        const t_repr = readback(ctx, new TypeValue(), next_t).repr()
+        const value_repr = readback(ctx, next_t, value).repr()
+        const found_repr = readback(ctx, next_t, found_value).repr()
+        throw new Trace(
+          ut.aline(`
+          |I am expecting the following two values to be the same ${t_repr}.
+          |But they are not.
+          |The value in object:
+          |  ${value_repr}
+          |The value in partially filled class:
+          |  ${found_repr}
+          |`)
+        )
+      }
+    }
 
-    const next_value = evaluate(ctx.to_env(), found)
+    properties.delete(name)
 
     check(
       ctx,
       new Obj(properties),
-      new ClsValue(cls.telescope.fill(next_value))
+      new ClsValue(cls.telescope.fill(evaluate(ctx.to_env(), found)))
     )
   }
 

@@ -1,5 +1,3 @@
-- [pre-fillable] `Obj.check`
-
 - `Ext.evaluate`
 - `Ext.infer`
 - `Ext.repr`
