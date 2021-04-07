@@ -1,4 +1,3 @@
-- [pre-fillable] `ClsValue.dot`
 - [pre-fillable] `ClsValue.apply`
 
 - [pre-fillable] `Obj.check`

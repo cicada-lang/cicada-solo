@@ -67,28 +67,21 @@ export class ClsValue {
   }
 
   dot(target: Value, name: string): Value {
-    throw new Error()
+    let telescope = this.telescope
+    while (telescope.next !== undefined) {
+      const { name: next_name, t } = telescope.next
+      if (next_name !== name) {
+        telescope = telescope.fill(Dot.apply(target, next_name))
+      } else {
+        return t
+      }
+    }
 
-    // for (const entry of this.fulfilled) {
-    //   if (entry.name === name) {
-    //     return entry.t
-    //   }
-    // }
-
-    // let telescope = this.telescope
-    // while (telescope.next !== undefined) {
-    //   if (telescope.next.name !== name) {
-    //     telescope = telescope.fill(Dot.apply(target, telescope.next.name))
-    //   } else {
-    //     return telescope.next.t
-    //   }
-    // }
-
-    // throw new Trace(
-    //   ut.aline(`
-    //     |The property name: ${name} of class is undefined.
-    //     |`)
-    // )
+    throw new Trace(
+      ut.aline(`
+        |The property name: ${name} of class is undefined.
+        |`)
+    )
   }
 
   apply(arg: Value): Value {
