@@ -19,31 +19,25 @@ export class ClsValue {
   }
 
   readback(ctx: Ctx, t: Value): Exp | undefined {
-    throw new Error()
+    if (t instanceof TypeValue) {
+      const entries = new Array()
 
-    // if (t instanceof TypeValue) {
-    //   const fulfilled = new Array()
+      let telescope = this.telescope
+      while (telescope.next) {
+        const { name, t, value } = telescope.next
+        const t_exp = readback(ctx, new TypeValue(), t)
+        if (value) {
+          entries.push({ name, t: t_exp, exp: readback(ctx, t, value) })
+          ctx = ctx.extend(name, t, value)
+        } else {
+          entries.push({ name, t: t_exp })
+          ctx = ctx.extend(name, t)
+        }
+        telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
+      }
 
-    //   for (const { name, t, value } of this.fulfilled) {
-    //     const t_exp = readback(ctx, new TypeValue(), t)
-    //     const exp = readback(ctx, t, value)
-    //     fulfilled.push({ name, t: t_exp, exp })
-    //     ctx = ctx.extend(name, t, value)
-    //   }
-
-    //   const demanded = new Array()
-
-    //   let telescope = this.telescope
-    //   while (telescope.next) {
-    //     const { name, t } = telescope.next
-    //     const t_exp = readback(ctx, new TypeValue(), t)
-    //     demanded.push({ name, t: t_exp })
-    //     ctx.extend(name, t)
-    //     telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
-    //   }
-
-    //   return new Cls(fulfilled, demanded, { name: this.name })
-    // }
+      return new Cls(entries, { name: this.name })
+    }
   }
 
   eta_expand(ctx: Ctx, value: Value): Exp {
