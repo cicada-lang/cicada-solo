@@ -65,7 +65,6 @@ export class Ap implements Exp {
           return new TypeValue()
         }
       }
-
       throw new Trace(
         ut.aline(`
           |The telescope is full.
