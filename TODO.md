@@ -1,4 +1,13 @@
-- `Cls` should be pre-fillable at any line
+- [pre-fillable] `Cls` syntax grammar
+- [pre-fillable] `Cls` syntax matcher
+
+- [pre-fillable] `ClsValue.readback`
+- [pre-fillable] `ClsValue.eta_expand`
+- [pre-fillable] `ClsValue.dot`
+- [pre-fillable] `ClsValue.apply`
+
+- [pre-fillable] `Telescope`
+
 - `Ext.evaluate`
 - `Ext.infer`
 - `Ext.repr`

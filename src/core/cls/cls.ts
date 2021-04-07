@@ -10,46 +10,26 @@ import { check } from "@/check"
 import * as ut from "@/ut"
 
 export class Cls implements Exp {
-  fulfilled: Array<{ name: string; t: Exp; exp: Exp }>
-  demanded: Array<{ name: string; t: Exp }>
+  entries: Array<{ name: string; t: Exp; exp?: Exp }>
   name?: string
 
   constructor(
-    fulfilled: Array<{ name: string; t: Exp; exp: Exp }>,
-    demanded: Array<{ name: string; t: Exp }>,
+    entries: Array<{ name: string; t: Exp; exp?: Exp }>,
     opts?: { name?: string }
   ) {
-    this.fulfilled = fulfilled
-    this.demanded = demanded
+    this.entries = entries
     this.name = opts?.name
   }
 
   evaluate(env: Env): Value {
-    const fulfilled: Array<{ name: string; t: Value; value: Value }> = []
-
-    for (const { name, t, exp } of this.fulfilled) {
-      const value = evaluate(env, exp)
-      const t_value = evaluate(env, t)
-      fulfilled.push({ name, t: t_value, value })
-      env = env.extend(name, value)
-    }
-
-    return new ClsValue(fulfilled, new Telescope(env, this.demanded), {
-      name: this.name,
-    })
+    return new ClsValue(new Telescope(env, this.entries), { name: this.name })
   }
 
   infer(ctx: Ctx): Value {
-    for (const { name, t, exp } of this.fulfilled) {
+    for (const { name, t, exp } of this.entries) {
       check(ctx, t, new TypeValue())
       const t_value = evaluate(ctx.to_env(), t)
-      check(ctx, exp, t_value)
-      ctx = ctx.extend(name, t_value)
-    }
-
-    for (const { name, t } of this.demanded) {
-      check(ctx, t, new TypeValue())
-      const t_value = evaluate(ctx.to_env(), t)
+      if (exp) check(ctx, exp, t_value)
       ctx = ctx.extend(name, t_value)
     }
 
@@ -59,35 +39,39 @@ export class Cls implements Exp {
   repr(): string {
     const name = this.name ? `${this.name} ` : ""
 
-    if (this.fulfilled.length === 0 && this.demanded.length === 0) {
+    if (this.entries.length === 0) {
       return name + "[]"
     }
 
-    const fulfilled = this.fulfilled.map(({ name, t, exp }) => {
-      return `${name}: ${t.repr()} = ${exp.repr()}`
+    const entries = this.entries.map(({ name, t, exp }) => {
+      return exp
+        ? `${name}: ${t.repr()} = ${exp.repr()}`
+        : `${name}: ${t.repr()}`
     })
-    const demanded = this.demanded.map(({ name, t }) => {
-      return `${name}: ${t.repr()}`
-    })
-    let s = [...fulfilled, ...demanded].join("\n")
+
+    const s = entries.join("\n")
+
     return name + `[\n${ut.indent(s, "  ")}\n]`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    if (this.fulfilled.length === 0 && this.demanded.length === 0) return "{}"
+    if (this.entries.length === 0) return "[]"
+
     const parts = []
-    for (const { name, t, exp } of this.fulfilled) {
+
+    for (const { name, t, exp } of this.entries) {
       const t_repr = t.alpha_repr(ctx)
-      const exp_repr = exp.alpha_repr(ctx)
-      parts.push(`${name} : ${t_repr} = ${exp_repr}`)
+      if (exp) {
+        const exp_repr = exp.alpha_repr(ctx)
+        parts.push(`${name} : ${t_repr} = ${exp_repr}`)
+      } else {
+        parts.push(`${name} : ${t_repr}`)
+      }
       ctx = ctx.extend(name)
     }
-    for (const { name, t } of this.demanded) {
-      const t_repr = t.alpha_repr(ctx)
-      parts.push(`${name} : ${t_repr}`)
-      ctx = ctx.extend(name)
-    }
-    let s = parts.join("\n")
+
+    const s = parts.join("\n")
+
     return `[\n${ut.indent(s, "  ")}\n]`
   }
 }
