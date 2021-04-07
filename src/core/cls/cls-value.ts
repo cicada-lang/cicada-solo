@@ -13,10 +13,7 @@ export class ClsValue {
   telescope: Telescope
   name?: string
 
-  constructor(
-    telescope: Telescope,
-    opts?: { name?: string }
-  ) {
+  constructor(telescope: Telescope, opts?: { name?: string }) {
     this.telescope = telescope
     this.name = opts?.name
   }
