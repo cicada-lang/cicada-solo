@@ -14,14 +14,14 @@ export class Telescope {
     this.entries = entries
   }
 
-  get next(): undefined | { name: string; t: Value } {
-    if (this.entries.length === 0) {
-      return undefined
+  get next(): undefined | { name: string; t: Value; value?: Value } {
+    if (this.entries.length === 0) return undefined
+    const [{ name, t, exp }] = this.entries
+    return {
+      name,
+      t: evaluate(this.env, t),
+      value: exp ? evaluate(this.env, exp) : undefined,
     }
-
-    const [{ name, t }] = this.entries
-
-    return { name, t: evaluate(this.env, t) }
   }
 
   fill(value: Value): Telescope {
