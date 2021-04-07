@@ -68,7 +68,7 @@ export class ClsValue {
 
   dot(target: Value, name: string): Value {
     let telescope = this.telescope
-    while (telescope.next !== undefined) {
+    while (telescope.next) {
       const { name: next_name, t } = telescope.next
       if (next_name !== name) {
         telescope = telescope.fill(Dot.apply(target, next_name))
@@ -85,22 +85,20 @@ export class ClsValue {
   }
 
   apply(arg: Value): Value {
-    throw new Error()
+    let telescope = this.telescope
+    while (telescope.next) {
+      const { name, value } = telescope.next
+      if (value) {
+        telescope = telescope.fill(value)
+      } else {
+        return new ClsValue(this.telescope.fill(arg), { name: this.name })
+      }
+    }
 
-    // if (!this.telescope.next) {
-    //   throw new Trace(
-    //     ut.aline(`
-    //       |The telescope is full.
-    //       |`)
-    //   )
-    // }
-
-    // const fulfilled = [
-    //   ...this.fulfilled,
-    //   { ...this.telescope.next, value: arg },
-    // ]
-    // return new ClsValue(fulfilled, this.telescope.fill(arg), {
-    //   name: this.name,
-    // })
+    throw new Trace(
+      ut.aline(`
+        |The telescope is full.
+        |`)
+    )
   }
 }

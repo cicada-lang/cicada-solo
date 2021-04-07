@@ -1,5 +1,3 @@
-- [pre-fillable] `ClsValue.apply`
-
 - [pre-fillable] `Obj.check`
 
 - `Ext.evaluate`
