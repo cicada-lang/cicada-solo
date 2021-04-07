@@ -1,4 +1,3 @@
-- [pre-fillable] `ClsValue.eta_expand`
 - [pre-fillable] `ClsValue.dot`
 - [pre-fillable] `ClsValue.apply`
 

@@ -29,11 +29,12 @@ export class ClsValue {
         if (value) {
           entries.push({ name, t: t_exp, exp: readback(ctx, t, value) })
           ctx = ctx.extend(name, t, value)
+          telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
         } else {
           entries.push({ name, t: t_exp })
           ctx = ctx.extend(name, t)
+          telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
         }
-        telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
       }
 
       return new Cls(entries, { name: this.name })
@@ -41,29 +42,28 @@ export class ClsValue {
   }
 
   eta_expand(ctx: Ctx, value: Value): Exp {
-    throw new Error()
+    const properties = new Map()
 
-    // const properties = new Map()
+    let telescope = this.telescope
+    while (telescope.next) {
+      const { name, t, value: fulfilled_value } = telescope.next
+      if (fulfilled_value) {
+        const property_value = Dot.apply(value, name)
+        if (!conversion(ctx, t, property_value, fulfilled_value)) {
+          throw new Trace("property_value not equivalent to fulfilled_value")
+        }
+        const property_exp = readback(ctx, t, property_value)
+        properties.set(name, property_exp)
+        telescope = telescope.fill(property_value)
+      } else {
+        const property_value = Dot.apply(value, name)
+        const property_exp = readback(ctx, t, property_value)
+        properties.set(name, property_exp)
+        telescope = telescope.fill(property_value)
+      }
+    }
 
-    // for (const { name, t, value: fulfilled_value } of this.fulfilled) {
-    //   const property_value = Dot.apply(value, name)
-    //   if (!conversion(ctx, t, property_value, fulfilled_value)) {
-    //     throw new Trace("property_value not equivalent to fulfilled_value")
-    //   }
-    //   const property_exp = readback(ctx, t, property_value)
-    //   properties.set(name, property_exp)
-    // }
-
-    // let telescope = this.telescope
-    // while (telescope.next) {
-    //   const { name, t } = telescope.next
-    //   const property_value = Dot.apply(value, name)
-    //   const property_exp = readback(ctx, t, property_value)
-    //   properties.set(name, property_exp)
-    //   telescope = telescope.fill(property_value)
-    // }
-
-    // return new Obj(properties)
+    return new Obj(properties)
   }
 
   dot(target: Value, name: string): Value {
