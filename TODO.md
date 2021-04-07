@@ -1,6 +1,3 @@
-- [pre-fillable] `Cls` syntax grammar
-- [pre-fillable] `Cls` syntax matcher
-
 - [pre-fillable] `ClsValue.readback`
 - [pre-fillable] `ClsValue.eta_expand`
 - [pre-fillable] `ClsValue.dot`

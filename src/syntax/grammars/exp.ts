@@ -37,7 +37,7 @@ export const exp = {
       { entries: "cls_entries" },
       '"]"',
     ],
-    "exp:cls": [{ cls: "cls" }],
+    "exp:cls": ['"["', { entries: "cls_entries" }, '"]"'],
     "exp:obj": [
       '"{"',
       { properties: { $ap: ["zero_or_more", "property"] } },
@@ -109,16 +109,6 @@ export const exp = {
       { ret: "exp" },
     ],
     "exp:the": ['"@"', '"the"', { t: "exp" }, { exp: "exp" }],
-  },
-}
-
-export const cls = {
-  $grammar: {
-    "cls:cls": [
-      '"["',
-      { demanded: { $ap: ["zero_or_more", "property"] } },
-      '"]"',
-    ],
   },
 }
 
