@@ -1,10 +1,14 @@
-- [fulfilling] -- inheritance -- `@extends name [...]`
-  - we can not just appending telescope, because we need lexical scope
-  - `Ext` as new `Exp`
-  - `ExtValue` to chaine `ClsValue`
-  - `ExtValue` should be readback to `Cls`,
-    thus we need to make `Cls` pre-fillable at any line
-  - we also want to be able to use local variables in telescope
+- `Cls` should be pre-fillable at any line
+- `Ext` as syntax of `@extends name [...]`
+- `Ext.evaluate`
+- `Ext.infer`
+- `Ext.repr`
+- `Ext.alpha_repr`
+- `ExtValue`
+  - `Ext` can not evaluate to `ClsValue`,
+    because we need to handle lexical scope
+  - we need to use `ExtValue` to chaine `ClsValue`
+- `ExtValue` should be readback to `Cls`
 
 - [class] -- handle `this`
   - since we do not have recursion, `this` will be `so far`
