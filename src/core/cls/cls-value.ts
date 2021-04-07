@@ -51,7 +51,8 @@ export class ClsValue {
   eta_expand(ctx: Ctx, value: Value): Exp {
     const properties = new Map()
 
-    for (const { name, t, value: fulfilled_value } of this.telescope.fulfilled) {
+    for (const entry of this.telescope.fulfilled) {
+      const { name, t, value: fulfilled_value } = entry
       const property_value = Dot.apply(value, name)
       if (!conversion(ctx, t, property_value, fulfilled_value)) {
         throw new Trace("property_value not equivalent to fulfilled_value")
@@ -89,7 +90,7 @@ export class ClsValue {
   apply(arg: Value): Value {
     let telescope = this.telescope
     while (telescope.next) {
-      const {  value } = telescope.next
+      const { value } = telescope.next
       if (value) {
         telescope = telescope.fill(value)
       } else {
