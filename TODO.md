@@ -1,9 +1,11 @@
+- [pre-fillable] `Telescope`
+
 - [pre-fillable] `ClsValue.readback`
 - [pre-fillable] `ClsValue.eta_expand`
 - [pre-fillable] `ClsValue.dot`
 - [pre-fillable] `ClsValue.apply`
 
-- [pre-fillable] `Telescope`
+- [pre-fillable] `Obj.check`
 
 - `Ext.evaluate`
 - `Ext.infer`

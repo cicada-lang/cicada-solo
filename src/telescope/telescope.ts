@@ -7,19 +7,19 @@ import * as ut from "@/ut"
 
 export class Telescope {
   env: Env
-  demanded: Array<{ name: string; t: Exp }>
+  entries: Array<{ name: string; t: Exp; exp?: Exp }>
 
-  constructor(env: Env, demanded: Array<{ name: string; t: Exp }>) {
+  constructor(env: Env, entries: Array<{ name: string; t: Exp; exp?: Exp }>) {
     this.env = env
-    this.demanded = demanded
+    this.entries = entries
   }
 
   get next(): undefined | { name: string; t: Value } {
-    if (this.demanded.length === 0) {
+    if (this.entries.length === 0) {
       return undefined
     }
 
-    const [{ name, t }] = this.demanded
+    const [{ name, t }] = this.entries
 
     return { name, t: evaluate(this.env, t) }
   }
@@ -37,7 +37,7 @@ export class Telescope {
 
     return new Telescope(
       this.env.extend(this.next.name, value),
-      this.demanded.slice(1)
+      this.entries.slice(1)
     )
   }
 }
