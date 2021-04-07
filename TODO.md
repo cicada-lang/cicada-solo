@@ -1,9 +1,9 @@
 - `Cls` should be pre-fillable at any line
-- `Ext` as syntax of `@extends name [...]`
 - `Ext.evaluate`
 - `Ext.infer`
 - `Ext.repr`
 - `Ext.alpha_repr`
+- `Ext` -- syntax -- matcher
 - `ExtValue`
   - `Ext` can not evaluate to `ClsValue`,
     because we need to handle lexical scope

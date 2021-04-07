@@ -29,6 +29,14 @@ export const exp = {
     "exp:cons": ['"cons"', '"("', { car: "exp" }, '","', { cdr: "exp" }, '")"'],
     "exp:car": ['"car"', '"("', { target: "exp" }, '")"'],
     "exp:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
+    "exp:ext": [
+      '"@"',
+      '"extends"',
+      { parent_name: "identifier" },
+      '"["',
+      { entries: "cls_entries" },
+      '"]"',
+    ],
     "exp:cls": [{ cls: "cls" }],
     "exp:obj": [
       '"{"',
@@ -111,6 +119,29 @@ export const cls = {
       { demanded: { $ap: ["zero_or_more", "property"] } },
       '"]"',
     ],
+  },
+}
+
+export const cls_entries = {
+  $grammar: {
+    "cls_entries:cls_entries": [
+      { entries: { $ap: ["zero_or_more", "cls_entry", '","'] } },
+      { last_entry: "cls_entry" },
+      { $ap: ["optional", '","'] },
+    ],
+  },
+}
+
+export const cls_entry = {
+  $grammar: {
+    "cls_entry:fulfilled": [
+      { name: "identifier" },
+      '":"',
+      { t: "exp" },
+      '"="',
+      { exp: "exp" },
+    ],
+    "cls_entry:demanded": [{ name: "identifier" }, '":"', { t: "exp" }],
   },
 }
 
