@@ -2,7 +2,7 @@ import { Exp, AlphaCtx } from "@/exp"
 import { Ctx } from "@/ctx"
 import { Env } from "@/env"
 import { Value, match_value } from "@/value"
-import { ClsValue, ObjValue } from "@/core"
+import { ClsValue, ExtValue, ObjValue } from "@/core"
 import { DotNeutral, NotYetValue } from "@/core"
 import { evaluate } from "@/evaluate"
 import { infer } from "@/infer"
@@ -40,6 +40,10 @@ export class Dot implements Exp {
     const target_t = infer(ctx, this.target)
 
     if (target_t instanceof ClsValue) {
+      return target_t.dot(evaluate(ctx.to_env(), this.target), this.name)
+    }
+
+    if (target_t instanceof ExtValue) {
       return target_t.dot(evaluate(ctx.to_env(), this.target), this.name)
     }
 

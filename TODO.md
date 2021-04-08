@@ -1,3 +1,5 @@
+- `@class name @extends parent_name [...]`
+
 - extract functions that handle telescope for `ExtValue` and `ClsValue`
 
 - [formalization] category

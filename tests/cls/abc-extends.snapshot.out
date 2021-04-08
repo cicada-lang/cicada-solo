@@ -1,0 +1,22 @@
+@the [
+  a: Trivial
+  b: Nat
+  c: String
+  e: Trivial
+  f: Nat
+  g: String
+] {
+  a: sole
+  b: 2
+  c: "c"
+  e: sole
+  f: 5
+  g: "g"
+}
+@the Trivial sole
+@the Nat 2
+@the String "c"
+@the Trivial sole
+@the Nat 5
+@the String "g"
+
