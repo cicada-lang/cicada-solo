@@ -1,4 +1,3 @@
-- `Ext.evaluate`
 - `Ext.infer`
 - `Ext.repr`
 - `Ext.alpha_repr`

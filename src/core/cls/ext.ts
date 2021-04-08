@@ -1,12 +1,13 @@
 import { Exp, AlphaCtx } from "@/exp"
-import { Value } from "@/value"
+import { Value, match_value } from "@/value"
 import { Ctx } from "@/ctx"
 import { Env } from "@/env"
 import { Telescope } from "@/telescope"
-import { ClsValue } from "@/core"
+import { Var, ClsValue, ExtValue } from "@/core"
 import { TypeValue } from "@/core"
 import { evaluate } from "@/evaluate"
 import { check } from "@/check"
+import { Trace } from "@/trace"
 import * as ut from "@/ut"
 
 export class Ext implements Exp {
@@ -25,7 +26,23 @@ export class Ext implements Exp {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
+    const parent = evaluate(env, new Var(this.parent_name))
+
+    if (parent instanceof ClsValue) {
+      return new ExtValue([
+        { name: parent.name, telescope: parent.telescope },
+        { name: this.name, telescope: new Telescope(env, this.entries) },
+      ])
+    }
+
+    if (parent instanceof ExtValue) {
+      return new ExtValue([
+        ...parent.entries,
+        { name: this.name, telescope: new Telescope(env, this.entries) },
+      ])
+    }
+
+    throw new Trace(`Expecting parent to be ClsValue or ExtValue`)
   }
 
   infer(ctx: Ctx): Value {
