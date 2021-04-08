@@ -1,12 +1,12 @@
-- `ExtValue`
-  - `Ext` can not evaluate to `ClsValue`,
-    because we need to handle lexical scope
-  - we need to use `ExtValue` to chaine `ClsValue`
-
 - `Ext.evaluate`
 - `Ext.infer`
 - `Ext.repr`
 - `Ext.alpha_repr`
+
+- `ExtValue.readback`
+- `ExtValue.eta_expand`
+- `ExtValue.dot`
+- `ExtValue.apply`
 
 - `ExtValue` should be readback to `Cls`
 
