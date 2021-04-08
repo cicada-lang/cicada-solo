@@ -1,4 +1,3 @@
-- `ExtValue.readback`
 - `ExtValue.eta_expand`
 
 - [formalization] category

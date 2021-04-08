@@ -27,32 +27,33 @@ export class ExtValue {
 
   // NOTE ExtValue should be readback to Cls instead of Ext.
   readback(ctx: Ctx, t: Value): Exp | undefined {
-    throw new Error("TODO")
+    if (t instanceof TypeValue) {
+      const entries = new Array()
+      for (const entry of this.entries) {
+        for (const { name, t, value } of entry.telescope.fulfilled) {
+          const t_exp = readback(ctx, new TypeValue(), t)
+          const exp = readback(ctx, t, value)
+          entries.push({ name, t: t_exp, exp })
+          ctx = ctx.extend(name, t, value)
+        }
+        let telescope = entry.telescope
+        while (telescope.next) {
+          const { name, t, value } = telescope.next
+          const t_exp = readback(ctx, new TypeValue(), t)
+          if (value) {
+            entries.push({ name, t: t_exp, exp: readback(ctx, t, value) })
+            ctx = ctx.extend(name, t, value)
+            telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
+          } else {
+            entries.push({ name, t: t_exp })
+            ctx = ctx.extend(name, t)
+            telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
+          }
+        }
+      }
 
-    // if (t instanceof TypeValue) {
-    //   const entries = new Array()
-    //   for (const { name, t, value } of this.telescope.fulfilled) {
-    //     const t_exp = readback(ctx, new TypeValue(), t)
-    //     const exp = readback(ctx, t, value)
-    //     entries.push({ name, t: t_exp, exp })
-    //     ctx = ctx.extend(name, t, value)
-    //   }
-    //   let telescope = this.telescope
-    //   while (telescope.next) {
-    //     const { name, t, value } = telescope.next
-    //     const t_exp = readback(ctx, new TypeValue(), t)
-    //     if (value) {
-    //       entries.push({ name, t: t_exp, exp: readback(ctx, t, value) })
-    //       ctx = ctx.extend(name, t, value)
-    //       telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
-    //     } else {
-    //       entries.push({ name, t: t_exp })
-    //       ctx = ctx.extend(name, t)
-    //       telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
-    //     }
-    //   }
-    //   return new Cls(entries, { name: this.name })
-    // }
+      return new Cls(entries, { name: this.name })
+    }
   }
 
   eta_expand(ctx: Ctx, value: Value): Exp {
