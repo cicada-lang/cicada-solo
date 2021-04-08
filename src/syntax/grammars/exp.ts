@@ -29,15 +29,15 @@ export const exp = {
     "exp:cons": ['"cons"', '"("', { car: "exp" }, '","', { cdr: "exp" }, '")"'],
     "exp:car": ['"car"', '"("', { target: "exp" }, '")"'],
     "exp:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
-    "exp:ext": [
-      '"@"',
-      '"extends"',
-      { parent_name: "identifier" },
+    "exp:cls": [
       '"["',
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
       '"]"',
     ],
-    "exp:cls": [
+    "exp:ext": [
+      '"@"',
+      '"extends"',
+      { parent_name: "identifier" },
       '"["',
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
       '"]"',

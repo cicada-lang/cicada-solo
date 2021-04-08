@@ -3,7 +3,7 @@ import { Exp } from "@/exp"
 import { Var } from "@/core"
 import { Pi, Fn, Ap } from "@/core"
 import { Sigma, Cons, Car, Cdr } from "@/core"
-import { Cls, Obj, Dot } from "@/core"
+import { Cls, Ext, Obj, Dot } from "@/core"
 import { Nat, Zero, Add1, NatInd } from "@/core"
 import { Equal, Same, Replace } from "@/core"
 import { Absurd, AbsurdInd } from "@/core"
@@ -55,6 +55,11 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:cdr": ({ target }) => new Cdr(exp_matcher(target)),
     "exp:cls": ({ entries }) =>
       new Cls(pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)),
+    "exp:ext": ({ parent_name, entries }) =>
+      new Ext(
+        pt.str(parent_name),
+        pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
+      ),
     "exp:obj": ({ properties }) =>
       new Obj(
         new Map(
