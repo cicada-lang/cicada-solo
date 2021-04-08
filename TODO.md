@@ -1,3 +1,6 @@
+- how should we design the module system or namespace system when no recursion is allowed?
+  - the loading order of files matters
+
 - `Telescope.check_properties`
 
 - `Telescope.*`
