@@ -1,4 +1,3 @@
-- `Ext.repr`
 - `Ext.alpha_repr`
 
 - `ExtValue.readback`

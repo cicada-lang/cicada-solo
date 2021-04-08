@@ -59,7 +59,23 @@ export class Ext implements Exp {
   }
 
   repr(): string {
-    throw new Error("TODO")
+    const name = this.name ? `${this.name} ` : ""
+
+    if (this.entries.length === 0) {
+      return name + "[]"
+    }
+
+    const entries = this.entries.map(({ name, t, exp }) => {
+      return exp
+        ? `${name}: ${t.repr()} = ${exp.repr()}`
+        : `${name}: ${t.repr()}`
+    })
+
+    const s = entries.join("\n")
+
+    return (
+      name + `@extends ${this.parent_name} ` + `[\n${ut.indent(s, "  ")}\n]`
+    )
   }
 
   alpha_repr(ctx: AlphaCtx): string {
