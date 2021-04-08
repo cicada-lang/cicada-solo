@@ -10,7 +10,7 @@ import { expect } from "@/expect"
 import { Normal } from "@/normal"
 import { NotYetValue } from "@/core"
 import { FnValue, PiValue, ApNeutral } from "@/core"
-import { ClsValue, TypeValue } from "@/core"
+import { ClsValue, ExtValue, TypeValue } from "@/core"
 import { Trace } from "@/trace"
 import * as ut from "@/ut"
 
@@ -31,6 +31,7 @@ export class Ap implements Exp {
     return match_value(target, {
       FnValue: (fn: FnValue) => fn.ret_cl.apply(arg),
       ClsValue: (cls: ClsValue) => cls.apply(arg),
+      ExtValue: (ext: ExtValue) => ext.apply(arg),
       NotYetValue: ({ t, neutral }: NotYetValue) =>
         match_value(t, {
           PiValue: (pi: PiValue) =>
