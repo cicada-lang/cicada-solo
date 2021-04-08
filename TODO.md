@@ -1,6 +1,9 @@
-- `@class name @extends parent_name [...]`
+- `Telescope.check_properties`
 
-- extract functions that handle telescope for `ExtValue` and `ClsValue`
+- `Telescope.*`
+  - extract functions that handle telescope for `ExtValue` and `ClsValue`
+
+- `@class name @extends parent_name [...]`
 
 - [formalization] category
 - [formalization] group
