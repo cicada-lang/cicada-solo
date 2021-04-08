@@ -17,24 +17,26 @@ export class ExtValue {
   entries: Array<{ name?: string; telescope: Telescope }>
   name?: string
 
-  constructor(entries: Array<{ name?: string; telescope: Telescope }>, opts?: { name?: string }) {
+  constructor(
+    entries: Array<{ name?: string; telescope: Telescope }>,
+    opts?: { name?: string }
+  ) {
     this.entries = entries
     this.name = opts?.name
   }
 
+  // NOTE ExtValue should be readback to Cls instead of Ext.
   readback(ctx: Ctx, t: Value): Exp | undefined {
     throw new Error("TODO")
 
     // if (t instanceof TypeValue) {
     //   const entries = new Array()
-
     //   for (const { name, t, value } of this.telescope.fulfilled) {
     //     const t_exp = readback(ctx, new TypeValue(), t)
     //     const exp = readback(ctx, t, value)
     //     entries.push({ name, t: t_exp, exp })
     //     ctx = ctx.extend(name, t, value)
     //   }
-
     //   let telescope = this.telescope
     //   while (telescope.next) {
     //     const { name, t, value } = telescope.next
@@ -49,7 +51,6 @@ export class ExtValue {
     //       telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
     //     }
     //   }
-
     //   return new Cls(entries, { name: this.name })
     // }
   }
@@ -92,9 +93,21 @@ export class ExtValue {
   }
 
   dot(target: Value, name: string): Value {
-    throw new Error("TODO")
+    for (const { telescope } of this.entries) {
+      try {
+        return telescope.dot(target, name)
+      } catch(error) {
+        // NOTE try next one
+      }
+    }
 
-    // return this.telescope.dot(target, name)
+    throw new Trace(
+      ut.aline(`
+        |The property name: ${name} of extended class is undefined.
+        |`)
+    )
+
+
   }
 
   apply(arg: Value): Value {

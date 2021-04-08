@@ -1,13 +1,20 @@
 - `ExtValue.readback`
 - `ExtValue.eta_expand`
-- `ExtValue.dot`
 - `ExtValue.apply`
 
-- [class] -- handle `this`
-  - since we do not have recursion, `this` will be `so far`
+- [formalization] category
+- [formalization] group
+- [formalization] ring
+- [formalization] algebra
+- [formalization] lattice
+- [formalization] module
+- [formalization] order
 
 - [pie] `List` -- `List` `li()` `nil`
 - [pie] `Vector` --  `Vector` `vli()` `vnil`
+
+- [class] -- handle `this`
+  - since we do not have recursion, `this` will be `so far`
 
 - [optimization] use native `number` as `Nat`
 
