@@ -1,4 +1,6 @@
-- `ExtValue.eta_expand`
+- extract functions that handle telescope for `ExtValue` and `ClsValue`
+
+- `Ap.apply` handle `ExtValue`
 
 - [formalization] category
 - [formalization] group
