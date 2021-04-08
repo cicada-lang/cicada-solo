@@ -79,6 +79,9 @@ export class Ext implements Exp {
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    throw new Error("TODO")
+    throw new Trace(
+      `ExtValue should be readback to Cls,\n` +
+        `thus ExtValue.alpha_repr should never be called.`
+    )
   }
 }

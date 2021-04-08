@@ -1,11 +1,7 @@
-- `Ext.alpha_repr`
-
 - `ExtValue.readback`
 - `ExtValue.eta_expand`
 - `ExtValue.dot`
 - `ExtValue.apply`
-
-- `ExtValue` should be readback to `Cls`
 
 - [class] -- handle `this`
   - since we do not have recursion, `this` will be `so far`
