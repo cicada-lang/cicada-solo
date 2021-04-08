@@ -1,6 +1,5 @@
 - `ExtValue.readback`
 - `ExtValue.eta_expand`
-- `ExtValue.apply`
 
 - [formalization] category
 - [formalization] group

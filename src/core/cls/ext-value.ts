@@ -109,22 +109,28 @@ export class ExtValue {
   }
 
   apply(arg: Value): Value {
-    throw new Error("TODO")
+    for (const [index, entry] of this.entries.entries()) {
+      let telescope = entry.telescope
+      while (telescope.next !== undefined) {
+        const { value } = telescope.next
+        if (value) {
+          telescope = telescope.fill(value)
+        } else {
+          return new ExtValue(
+            this.entries.splice(index, 1, {
+              name: entry.name,
+              telescope: telescope.fill(arg),
+            }),
+            { name: this.name }
+          )
+        }
+      }
+    }
 
-    // let telescope = this.telescope
-    // while (telescope.next) {
-    //   const { value } = telescope.next
-    //   if (value) {
-    //     telescope = telescope.fill(value)
-    //   } else {
-    //     return new ExtValue(telescope.fill(arg), { name: this.name })
-    //   }
-    // }
-
-    // throw new Trace(
-    //   ut.aline(`
-    //     |The telescope is full.
-    //     |`)
-    // )
+    throw new Trace(
+      ut.aline(`
+        |The telescope is full.
+        |`)
+    )
   }
 }
