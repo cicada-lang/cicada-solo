@@ -96,7 +96,7 @@ export class ExtValue {
     for (const { telescope } of this.entries) {
       try {
         return telescope.dot(target, name)
-      } catch(error) {
+      } catch (error) {
         // NOTE try next one
       }
     }
@@ -106,8 +106,6 @@ export class ExtValue {
         |The property name: ${name} of extended class is undefined.
         |`)
     )
-
-
   }
 
   apply(arg: Value): Value {
