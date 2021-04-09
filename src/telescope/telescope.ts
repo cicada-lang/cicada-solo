@@ -3,6 +3,7 @@ import { Ctx } from "@/ctx"
 import { Exp } from "@/exp"
 import { Value } from "@/value"
 import { TypeValue } from "@/core"
+import { NotYetValue, VarNeutral } from "@/core"
 import { conversion } from "@/conversion"
 import { readback } from "@/readback"
 import { evaluate } from "@/evaluate"
@@ -83,6 +84,34 @@ export class Telescope {
         |The property name: ${name} of class is undefined.
         |`)
     )
+  }
+
+  readback(ctx: Ctx): Array<{ name: string, t: Exp, exp?: Exp }> {
+    const entries = []
+
+    for (const { name, t, value } of this.fulfilled) {
+      const t_exp = readback(ctx, new TypeValue(), t)
+      const exp = readback(ctx, t, value)
+      entries.push({ name, t: t_exp, exp })
+      ctx = ctx.extend(name, t, value)
+    }
+
+    let telescope: Telescope = this
+    while (telescope.next) {
+      const { name, t, value } = telescope.next
+      const t_exp = readback(ctx, new TypeValue(), t)
+      if (value) {
+        entries.push({ name, t: t_exp, exp: readback(ctx, t, value) })
+        ctx = ctx.extend(name, t, value)
+        telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
+      } else {
+        entries.push({ name, t: t_exp })
+        ctx = ctx.extend(name, t)
+        telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
+      }
+    }
+
+    return entries
   }
 
   check_properties(ctx: Ctx, properties: Map<string, Exp>): void {

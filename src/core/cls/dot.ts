@@ -39,11 +39,7 @@ export class Dot implements Exp {
   infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
 
-    if (target_t instanceof ClsValue) {
-      return target_t.dot(evaluate(ctx.to_env(), this.target), this.name)
-    }
-
-    if (target_t instanceof ExtValue) {
+    if (target_t instanceof ClsValue || target_t instanceof ExtValue) {
       return target_t.dot(evaluate(ctx.to_env(), this.target), this.name)
     }
 

@@ -20,30 +20,7 @@ export class ClsValue {
 
   readback(ctx: Ctx, t: Value): Exp | undefined {
     if (t instanceof TypeValue) {
-      const entries = new Array()
-
-      for (const { name, t, value } of this.telescope.fulfilled) {
-        const t_exp = readback(ctx, new TypeValue(), t)
-        const exp = readback(ctx, t, value)
-        entries.push({ name, t: t_exp, exp })
-        ctx = ctx.extend(name, t, value)
-      }
-
-      let telescope = this.telescope
-      while (telescope.next) {
-        const { name, t, value } = telescope.next
-        const t_exp = readback(ctx, new TypeValue(), t)
-        if (value) {
-          entries.push({ name, t: t_exp, exp: readback(ctx, t, value) })
-          ctx = ctx.extend(name, t, value)
-          telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
-        } else {
-          entries.push({ name, t: t_exp })
-          ctx = ctx.extend(name, t)
-          telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
-        }
-      }
-
+      const { entries } = this.telescope.readback(ctx)
       return new Cls(entries, { name: this.name })
     }
   }
