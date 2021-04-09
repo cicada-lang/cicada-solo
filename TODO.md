@@ -4,8 +4,6 @@
   - the loading order of files matters
   - no recursion
 
-- `Telescope.check_properties`
-
 - `Telescope.*`
   - extract functions that handle telescope for `ExtValue` and `ClsValue`
 
