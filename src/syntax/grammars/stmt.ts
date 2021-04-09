@@ -7,6 +7,7 @@ export const stmts = {
 export const stmt = {
   $grammar: {
     "stmt:def": ['"@"', '"def"', { name: "identifier" }, { exp: "exp" }],
+    "stmt:show": ['"@"', '"show"', { exp: "exp" }],
     "stmt:class": [
       '"@"',
       '"class"',
@@ -15,6 +16,16 @@ export const stmt = {
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
       '"]"',
     ],
-    "stmt:show": ['"@"', '"show"', { exp: "exp" }],
+    "stmt:class_extends": [
+      '"@"',
+      '"class"',
+      { name: "identifier" },
+      '"@"',
+      '"extends"',
+      { parent_name: "identifier" },
+      '"["',
+      { entries: { $ap: ["zero_or_more", "cls_entry"] } },
+      '"]"',
+    ],
   },
 }

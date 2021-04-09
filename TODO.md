@@ -7,8 +7,6 @@
 - `Telescope.*`
   - extract functions that handle telescope for `ExtValue` and `ClsValue`
 
-- `@class name @extends parent_name [...]`
-
 - [formalization] category
 - [formalization] group
 - [formalization] ring
