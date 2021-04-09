@@ -1,5 +1,8 @@
-- how should we design the module system or namespace system when no recursion is allowed?
+- module system
+  - a module need a `baseDir` -- use `module.json` to mark `baseDir`
+  - one file one module, loaded modules are cached
   - the loading order of files matters
+  - no recursion
 
 - `Telescope.check_properties`
 
