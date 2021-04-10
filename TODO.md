@@ -1,6 +1,7 @@
-- [module] `Stmt.execute` take `Module` as new argument
+- [cli] be able to eval file with module system -- use `--no-module`
 
-- [cli] be able to eval file with module system
+- [module] `Import` -- new `Stmt`
+
 - [cli] be able to eval simple file without module system
 
 - [library] can be used as a module

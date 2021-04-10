@@ -6,9 +6,8 @@ import pt from "@cicada-lang/partech"
 import fs from "fs"
 import strip_ansi from "strip-ansi"
 
-export const command = "eval <input>"
-export const aliases = ["$0"]
-export const description = "Eval a file"
+export const command = "run <input>"
+export const description = "Run a file"
 
 export const builder = {
   nocolor: { type: "boolean", default: false },
