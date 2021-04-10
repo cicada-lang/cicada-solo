@@ -1,4 +1,4 @@
-import { World } from "./world"
+import { World } from "../world"
 
 export class Module {
   world: World
