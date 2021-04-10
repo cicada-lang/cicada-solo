@@ -1,5 +1,10 @@
-- module system
-  - a module need a `base_dir` -- use `module.json` to mark `base_dir`
+- [library] design
+  - what is the relation between library and module?
+
+- [library] cli tests
+- [library] create `LocalLibrary`
+
+- [module] design
   - one file one module, loaded modules are cached
   - the loading order of files matters
   - no recursion
