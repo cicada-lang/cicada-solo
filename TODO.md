@@ -1,4 +1,5 @@
 - [module] `Import` -- handle relative path
+- [module] `Import` -- handle absolute path
 - [module] `Import` -- handle alias
 - [module] `Import` -- handle "import as"
 
