@@ -4,7 +4,7 @@ import * as ut from "../ut"
 
 async function test_create(): Promise<void> {
   const file = "../../libraries/algebra/library.json"
-  const lib = await LocalLibrary.fromConfigFile(Path.resolve(__dirname, file))
+  const lib = await LocalLibrary.from_config_file(Path.resolve(__dirname, file))
 
   const base_dir = "../../libraries/algebra"
   ut.assert_equal(lib.base_dir, Path.resolve(__dirname, base_dir))
@@ -18,7 +18,7 @@ test_create().catch((error) => {
 
 async function test_load(): Promise<void> {
   const file = "../../libraries/algebra/library.json"
-  const lib = await LocalLibrary.fromConfigFile(Path.resolve(__dirname, file))
+  const lib = await LocalLibrary.from_config_file(Path.resolve(__dirname, file))
   const mod = await lib.load("category.cic")
   const cached = await lib.load("category.cic")
   ut.assert_equal(mod === cached, true)

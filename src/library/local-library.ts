@@ -20,7 +20,7 @@ export class LocalLibrary implements Library {
     this.cached_modules = opts.cached_modules || new Map()
   }
 
-  static async fromConfigFile(file: string): Promise<LocalLibrary> {
+  static async from_config_file(file: string): Promise<LocalLibrary> {
     const text = await fs.promises.readFile(file, "utf8")
     return new LocalLibrary({
       base_dir: Path.dirname(file),
