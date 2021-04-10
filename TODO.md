@@ -12,6 +12,9 @@
   - the loading order of files matters
   - no recursion
 
+- [cli] design
+  - TODO
+
 - [formalization] category
 - [formalization] group
 - [formalization] ring
