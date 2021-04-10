@@ -1,5 +1,3 @@
-- [library] `new LibraryConfig` -- with validation
-
 - [library] `LocalLibrary.load_source` -- a library have the source files of the modules
 - [library] `LocalLibrary.load_module` -- a library have the modules -- lazy load
 
