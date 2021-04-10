@@ -1,5 +1,5 @@
 import { Stmt } from "../stmt"
-import { World } from "../world"
+import { Module } from "../module"
 import { Exp } from "../exp"
 import { infer } from "../infer"
 import { evaluate } from "../evaluate"
@@ -15,13 +15,13 @@ export class Class implements Stmt {
     this.t.name = this.name
   }
 
-  async execute(world: World): Promise<void> {
+  async execute(mod: Module): Promise<void> {
     const exp = new The(new Type(), this.t)
-    world.ctx = world.ctx.extend(
+    mod.ctx = mod.ctx.extend(
       this.name,
       new TypeValue(),
-      evaluate(world.ctx.to_env(), exp)
+      evaluate(mod.ctx.to_env(), exp)
     )
-    world.env = world.env.extend(this.name, evaluate(world.env, exp))
+    mod.env = mod.env.extend(this.name, evaluate(mod.env, exp))
   }
 }

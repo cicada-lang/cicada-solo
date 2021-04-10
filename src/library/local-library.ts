@@ -1,9 +1,8 @@
 import { Library, LibraryConfig } from "../library"
 import { Module } from "../module"
+import * as Syntax from "../syntax"
 import Path from "path"
 import fs from "fs"
-import * as Syntax from "../syntax"
-import { World } from "../world"
 
 export class LocalLibrary implements Library {
   base_dir: string
@@ -35,9 +34,8 @@ export class LocalLibrary implements Library {
     const file = Path.resolve(this.base_dir, this.config.src, name)
     const text = await fs.promises.readFile(file, "utf8")
     const stmts = Syntax.parse_stmts(text)
-    let world = new World()
-    for (const stmt of stmts) await stmt.execute(world)
-    const mod = new Module({ world, library: this })
+    let mod = new Module({ library: this })
+    for (const stmt of stmts) await stmt.execute(mod)
     this.cached_modules.set(name, mod)
     return mod
   }

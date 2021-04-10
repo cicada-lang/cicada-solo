@@ -1,5 +1,6 @@
 import * as Syntax from "../../syntax"
-import { World } from "../../world"
+import { Module } from "../../module"
+import { EmptyLibrary } from "../../library"
 import { Trace } from "../../trace"
 import pt from "@cicada-lang/partech"
 import fs from "fs"
@@ -23,10 +24,10 @@ export const handler = async (argv: Argv) => {
 
   try {
     const stmts = Syntax.parse_stmts(text)
-    let world = new World()
-    for (const stmt of stmts) await stmt.execute(world)
-    if (world.output) {
-      console.log(world.output)
+    let mod = new Module({ library: new EmptyLibrary() })
+    for (const stmt of stmts) await stmt.execute(mod)
+    if (mod.output) {
+      console.log(mod.output)
     }
   } catch (error) {
     if (error instanceof Trace) {

@@ -1,5 +1,5 @@
-import { World } from "../world"
+import { Module } from "../module"
 
 export type Stmt = {
-  execute(world: World): Promise<void>
+  execute(mod: Module): Promise<void>
 }

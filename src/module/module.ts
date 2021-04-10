@@ -1,6 +1,8 @@
-import { ModuleSource } from "../module"
-import { World } from "../world"
 import { Library } from "../library"
+import { Env } from "../env"
+import { Ctx } from "../ctx"
+import { Value } from "../value"
+import { Stmt } from "../stmt"
 
 // NOTE
 // - a module knows which library it belongs to
@@ -9,17 +11,20 @@ import { Library } from "../library"
 // - no recursion
 
 export class Module {
-  world: World
+  env: Env
+  ctx: Ctx
+  output: string
   library: Library
-  // source: ModuleSource
 
   constructor(opts: {
-    world: World
-    // source: ModuleSource;
     library: Library
+    env?: Env
+    ctx?: Ctx
+    output?: string
   }) {
-    this.world = opts.world
     this.library = opts.library
-    // this.source = opts.source
+    this.env = opts.env || new Env()
+    this.ctx = opts.ctx || new Ctx()
+    this.output = opts.output || ""
   }
 }

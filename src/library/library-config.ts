@@ -3,7 +3,7 @@ import Joi from "joi"
 const joiSchema = Joi.object({
   name: Joi.string(),
   date: Joi.string(),
-  src: Joi.string(),
+  src: Joi.string().optional(),
 }).unknown()
 
 export class LibraryConfig {
@@ -20,7 +20,7 @@ export class LibraryConfig {
 
     this.name = value.name
     this.date = value.date
-    this.src = value.src
+    this.src = value.src || "src"
   }
 
   json(): {
