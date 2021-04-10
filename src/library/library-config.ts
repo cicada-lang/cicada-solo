@@ -3,15 +3,13 @@ import Joi from "joi"
 const joiSchema = Joi.object({
   name: Joi.string(),
   date: Joi.string(),
-  shelves: Joi.array().items(Joi.string()),
+  src: Joi.string(),
 }).unknown()
 
 export class LibraryConfig {
   name: string
   date: string
-  shelves: Array<string>
-
-  rawConfig: any
+  src: string
 
   constructor(config: any) {
     const { value, error } = joiSchema.validate(config, {
@@ -20,22 +18,20 @@ export class LibraryConfig {
 
     if (error) throw error
 
-    this.rawConfig = config
-
     this.name = value.name
     this.date = value.date
-    this.shelves = value.shelves
+    this.src = value.src
   }
 
   json(): {
     name: string
     date: string
-    shelves: Array<string>
+    src: string
   } {
     return {
       name: this.name,
       date: this.date,
-      shelves: this.shelves,
+      src: this.src,
     }
   }
 }

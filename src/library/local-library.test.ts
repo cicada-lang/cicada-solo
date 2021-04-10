@@ -19,8 +19,9 @@ test_create().catch((error) => {
 async function test_load(): Promise<void> {
   const file = "../../libraries/algebra/library.json"
   const lib = await LocalLibrary.fromConfigFile(Path.resolve(__dirname, file))
-  // const mod = await lib.load("category.cic")
-  // console.log(mod)
+  const mod = await lib.load("category.cic")
+  const cached = await lib.load("category.cic")
+  ut.assert_equal(mod === cached, true)
 }
 
 test_load().catch((error) => {

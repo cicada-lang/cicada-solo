@@ -1,4 +1,5 @@
 import { LibraryConfig } from "../library"
+import { Module } from "../module"
 
 // NOTE This interface is to abstract away:
 // - the `base_dir` of `LocalLibrary`
@@ -7,4 +8,5 @@ import { LibraryConfig } from "../library"
 
 export interface Library {
   config: LibraryConfig
+  load(name: string): Promise<Module>
 }

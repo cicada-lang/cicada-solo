@@ -5,11 +5,15 @@ import { Library } from "../library"
 export class Module {
   world: World
   library: Library
-  source: ModuleSource
+  // source: ModuleSource
 
-  constructor(opts: { world: World; source: ModuleSource; library: Library }) {
+  constructor(opts: {
+    world: World
+    // source: ModuleSource;
+    library: Library
+  }) {
     this.world = opts.world
     this.library = opts.library
-    this.source = opts.source
+    // this.source = opts.source
   }
 }
