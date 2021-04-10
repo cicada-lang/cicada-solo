@@ -1,5 +1,4 @@
-- [library] `LocalLibrary.load_source` -- a library have the source files of the modules
-- [library] `LocalLibrary.load_module` -- a library have the modules -- lazy load
+- [library] `LocalLibrary.load` -- a library have the modules -- lazy load
 
 - [cli] be able to eval simple file without module system
 - [cli] be able to eval file with module system

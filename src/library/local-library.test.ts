@@ -2,7 +2,7 @@ import { LocalLibrary } from "../library"
 import Path from "path"
 import * as ut from "../ut"
 
-async function test(): Promise<void> {
+async function test_create(): Promise<void> {
   const file = "../../libraries/algebra/library.json"
   const lib = await LocalLibrary.fromConfigFile(Path.resolve(__dirname, file))
 
@@ -11,7 +11,19 @@ async function test(): Promise<void> {
   ut.assert_equal(lib.config.name, "algebra")
 }
 
-test().catch((error) => {
+test_create().catch((error) => {
+  console.error(error)
+  process.exit(1)
+})
+
+async function test_load(): Promise<void> {
+  const file = "../../libraries/algebra/library.json"
+  const lib = await LocalLibrary.fromConfigFile(Path.resolve(__dirname, file))
+  // const mod = await lib.load("category.cic")
+  // console.log(mod)
+}
+
+test_load().catch((error) => {
   console.error(error)
   process.exit(1)
 })
