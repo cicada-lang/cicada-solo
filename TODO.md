@@ -4,8 +4,6 @@
   - the loading order of files matters
   - no recursion
 
-- extract `Telescope.*`
-
 - [formalization] category
 - [formalization] group
 - [formalization] ring

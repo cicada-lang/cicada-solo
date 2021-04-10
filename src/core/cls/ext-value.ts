@@ -40,37 +40,12 @@ export class ExtValue {
   }
 
   eta_expand(ctx: Ctx, value: Value): Exp {
-    const properties = new Map()
-
-    for (const entry of this.entries) {
-      for (const { name, t, value: fulfilled_value } of entry.telescope
-        .fulfilled) {
-        const property_value = Dot.apply(value, name)
-        if (!conversion(ctx, t, property_value, fulfilled_value)) {
-          throw new Trace("property_value not equivalent to fulfilled_value")
-        }
-        const property_exp = readback(ctx, t, property_value)
-        properties.set(name, property_exp)
-      }
-
-      let telescope = entry.telescope
-      while (telescope.next) {
-        const { name, t, value: fulfilled_value } = telescope.next
-        if (fulfilled_value) {
-          const property_value = Dot.apply(value, name)
-          if (!conversion(ctx, t, property_value, fulfilled_value)) {
-            throw new Trace("property_value not equivalent to fulfilled_value")
-          }
-          const property_exp = readback(ctx, t, property_value)
-          properties.set(name, property_exp)
-          telescope = telescope.fill(property_value)
-        } else {
-          const property_value = Dot.apply(value, name)
-          const property_exp = readback(ctx, t, property_value)
-          properties.set(name, property_exp)
-          telescope = telescope.fill(property_value)
-        }
-      }
+    let properties = new Map()
+    for (const { telescope } of this.entries) {
+      properties = new Map([
+        ...properties,
+        ...telescope.eta_expand_properties(ctx, value),
+      ])
     }
 
     return new Obj(properties)

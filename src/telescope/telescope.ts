@@ -119,14 +119,46 @@ export class Telescope {
     return { entries, ctx }
   }
 
+  eta_expand_properties(ctx: Ctx, value: Value): Map<string, Exp> {
+    const properties = new Map()
+
+    for (const { name, t, value: fulfilled_value } of this.fulfilled) {
+      const property_value = Dot.apply(value, name)
+      if (!conversion(ctx, t, property_value, fulfilled_value)) {
+        throw new Trace("property_value not equivalent to fulfilled_value")
+      }
+      const property_exp = readback(ctx, t, property_value)
+      properties.set(name, property_exp)
+    }
+
+    let telescope: Telescope = this
+    while (telescope.next) {
+      const { name, t, value: fulfilled_value } = telescope.next
+      if (fulfilled_value) {
+        const property_value = Dot.apply(value, name)
+        if (!conversion(ctx, t, property_value, fulfilled_value)) {
+          throw new Trace("property_value not equivalent to fulfilled_value")
+        }
+        const property_exp = readback(ctx, t, property_value)
+        properties.set(name, property_exp)
+        telescope = telescope.fill(property_value)
+      } else {
+        const property_value = Dot.apply(value, name)
+        const property_exp = readback(ctx, t, property_value)
+        properties.set(name, property_exp)
+        telescope = telescope.fill(property_value)
+      }
+    }
+
+    return properties
+  }
+
   check_properties(ctx: Ctx, properties: Map<string, Exp>): void {
     // NOTE We DO NOT need to update the `ctx` as we go along.
     // - the bindings in telescope will not effect current ctx.
     // - just like checking `cons`.
 
-    let telescope: Telescope = this
-
-    for (const { name, t, value } of telescope.fulfilled) {
+    for (const { name, t, value } of this.fulfilled) {
       const found = properties.get(name)
 
       if (found === undefined) {
@@ -158,6 +190,7 @@ export class Telescope {
       }
     }
 
+    let telescope: Telescope = this
     while (telescope.next) {
       const { name, t: next_t, value } = telescope.next
 
