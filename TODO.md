@@ -1,24 +1,20 @@
-- [library] library first should solve the problem about loading module
+- [library] `new LibraryConfig` -- with validation
 
-- [library] design
-  - a library have a list of modules
-    - to load a library is to build its modules
-  - a library have the source files of the modules
+- [library] `LocalLibrary.load_source` -- a library have the source files of the modules
+- [library] `LocalLibrary.load_module` -- a library have the modules -- lazy load
+
+- [cli] be able to eval simple file without module system
+- [cli] be able to eval file with module system
 
 - [library] can be used as a module
-  - this is independent problem from "loading module"
-
-- [library] cli tests
-- [library] create `LocalLibrary`
+  - library first should solve the problem about loading module,
+    this is independent problem from "loading module".
 
 - [module] design
   - a module knows which library it belongs to
   - one file one module, loaded modules are cached
   - the loading order of files matters
   - no recursion
-
-- [cli] design
-  - be able to eval simple file without module system
 
 - [formalization] category
 - [formalization] group

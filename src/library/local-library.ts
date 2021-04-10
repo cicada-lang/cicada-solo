@@ -15,7 +15,7 @@ export class LocalLibrary implements Library {
     const text = await fs.promises.readFile(file, "utf8")
     return new LocalLibrary({
       base_dir: Path.dirname(file),
-      config: new LibraryConfig(JSON.parse(text))
+      config: new LibraryConfig(JSON.parse(text)),
     })
   }
 }

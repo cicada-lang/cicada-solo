@@ -1,5 +1,5 @@
 export class LibraryConfig {
-  constructor(config: any){
-
+  constructor(config: any) {
+    // TODO
   }
 }
