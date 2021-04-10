@@ -36,9 +36,7 @@ export class LocalLibrary implements Library {
     const stmts = Syntax.parse_stmts(text)
     let mod = new Module({ library: this })
     for (const stmt of stmts) await stmt.execute(mod)
-    if (mod.output) {
-      console.log(mod.output)
-    }
+    if (mod.output) console.log(mod.output)
     this.cached_modules.set(name, mod)
     return mod
   }

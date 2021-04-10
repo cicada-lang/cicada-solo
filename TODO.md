@@ -1,9 +1,10 @@
 - [module] `Import` -- handle relative path
 - [module] `Import` -- handle alias
+- [module] `Import` -- handle "import as"
 
 - [cli] learn from deno's cli
-- [cli] be able to eval file with module system -- use `--no-module`
-- [cli] be able to eval simple file without module system
+- [cli] be able to run file with module system -- use `--no-module`
+- [cli] be able to run simple file without module system
 
 - [library] can be used as a module
   - library first should solve the problem about loading module,
