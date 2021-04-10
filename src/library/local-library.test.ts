@@ -6,8 +6,8 @@ async function test_create(): Promise<void> {
   const file = "../../libraries/algebra/library.json"
   const lib = await LocalLibrary.from_config_file(Path.resolve(__dirname, file))
 
-  const base_dir = "../../libraries/algebra"
-  ut.assert_equal(lib.base_dir, Path.resolve(__dirname, base_dir))
+  const root_dir = "../../libraries/algebra"
+  ut.assert_equal(lib.root_dir, Path.resolve(__dirname, root_dir))
   ut.assert_equal(lib.config.name, "algebra")
 }
 

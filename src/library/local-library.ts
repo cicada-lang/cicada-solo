@@ -5,16 +5,16 @@ import Path from "path"
 import fs from "fs"
 
 export class LocalLibrary implements Library {
-  base_dir: string
+  root_dir: string
   config: LibraryConfig
   cached_modules: Map<string, Module>
 
   constructor(opts: {
-    base_dir: string
+    root_dir: string
     config: LibraryConfig
     cached_modules?: Map<string, Module>
   }) {
-    this.base_dir = opts.base_dir
+    this.root_dir = opts.root_dir
     this.config = opts.config
     this.cached_modules = opts.cached_modules || new Map()
   }
@@ -22,7 +22,7 @@ export class LocalLibrary implements Library {
   static async from_config_file(file: string): Promise<LocalLibrary> {
     const text = await fs.promises.readFile(file, "utf8")
     return new LocalLibrary({
-      base_dir: Path.dirname(file),
+      root_dir: Path.dirname(file),
       config: new LibraryConfig(JSON.parse(text)),
     })
   }
@@ -33,7 +33,7 @@ export class LocalLibrary implements Library {
       return cached
     }
 
-    const file = Path.resolve(this.base_dir, this.config.src, name)
+    const file = Path.resolve(this.root_dir, this.config.src, name)
     const text = await fs.promises.readFile(file, "utf8")
     const stmts = Syntax.parse_stmts(text)
     let mod = new Module({ library: this })
