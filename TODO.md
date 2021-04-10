@@ -1,7 +1,12 @@
+- [library] library first should solve the problem about loading module
+
 - [library] design
   - a library have a list of modules
     - to load a library is to build its modules
   - a library have the source files of the modules
+
+- [library] can be used as a module
+  - this is independent problem from "loading module"
 
 - [library] cli tests
 - [library] create `LocalLibrary`
@@ -13,7 +18,7 @@
   - no recursion
 
 - [cli] design
-  - TODO
+  - be able to eval simple file without module system
 
 - [formalization] category
 - [formalization] group
