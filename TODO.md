@@ -1,6 +1,6 @@
-- [module] `Import` -- new `Stmt`
-  - use js module system syntax? or do our syntax?
-
+- [module] `@import path { ... }`
+- [module] `Import` -- handle relative path
+- [module] `Import` -- handle alias
 - [cli] learn from deno's cli
 - [cli] be able to eval file with module system -- use `--no-module`
 - [cli] be able to eval simple file without module system
