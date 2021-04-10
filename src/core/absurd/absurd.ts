@@ -1,9 +1,9 @@
-import { Env } from "@/env"
-import { Ctx } from "@/ctx"
-import { Exp, AlphaCtx } from "@/exp"
-import { TypeValue } from "@/core"
-import { AbsurdValue } from "@/core"
-import { Value } from "@/value"
+import { Env } from "../../env"
+import { Ctx } from "../../ctx"
+import { Exp, AlphaCtx } from "../../exp"
+import { TypeValue } from "../../core"
+import { AbsurdValue } from "../../core"
+import { Value } from "../../value"
 
 export class Absurd implements Exp {
   evaluate(env: Env): Value {

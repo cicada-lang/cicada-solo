@@ -1,7 +1,7 @@
-import { Neutral } from "@/neutral"
-import { Exp } from "@/exp"
-import { Ctx } from "@/ctx"
-import { Car } from "@/core"
+import { Neutral } from "../../neutral"
+import { Exp } from "../../exp"
+import { Ctx } from "../../ctx"
+import { Car } from "../../core"
 
 export class CarNeutral implements Neutral {
   target: Neutral

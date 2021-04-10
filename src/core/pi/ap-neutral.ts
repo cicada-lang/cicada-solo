@@ -1,8 +1,8 @@
-import { Neutral } from "@/neutral"
-import { Normal } from "@/normal"
-import { Exp } from "@/exp"
-import { Ctx } from "@/ctx"
-import { Ap } from "@/core"
+import { Neutral } from "../../neutral"
+import { Normal } from "../../normal"
+import { Exp } from "../../exp"
+import { Ctx } from "../../ctx"
+import { Ap } from "../../core"
 
 export class ApNeutral implements Neutral {
   target: Neutral

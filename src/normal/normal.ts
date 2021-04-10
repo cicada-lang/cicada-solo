@@ -1,7 +1,7 @@
-import { Exp } from "@/exp"
-import { Value } from "@/value"
-import { Ctx } from "@/ctx"
-import { readback } from "@/readback"
+import { Exp } from "../exp"
+import { Value } from "../value"
+import { Ctx } from "../ctx"
+import { readback } from "../readback"
 
 export class Normal {
   t: Value

@@ -1,8 +1,8 @@
-import { Exp, AlphaCtx } from "@/exp"
-import { Ctx } from "@/ctx"
-import { Env } from "@/env"
-import { Value } from "@/value"
-import { Trace } from "@/trace"
+import { Exp, AlphaCtx } from "../exp"
+import { Ctx } from "../ctx"
+import { Env } from "../env"
+import { Value } from "../value"
+import { Trace } from "../trace"
 
 export class Var implements Exp {
   name: string

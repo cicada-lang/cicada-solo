@@ -1,8 +1,8 @@
-import { Ctx } from "@/ctx"
-import { Exp } from "@/exp"
-import { Value } from "@/value"
-import { Trace } from "@/trace"
-import * as ut from "@/ut"
+import { Ctx } from "../../ctx"
+import { Exp } from "../../exp"
+import { Value } from "../../value"
+import { Trace } from "../../trace"
+import * as ut from "../../ut"
 
 export class ObjValue {
   properties: Map<string, Value>

@@ -1,13 +1,13 @@
-import { Exp, AlphaCtx } from "@/exp"
-import { Ctx } from "@/ctx"
-import { Env } from "@/env"
-import { infer } from "@/infer"
-import { expect } from "@/expect"
-import { Value, match_value } from "@/value"
-import { evaluate } from "@/evaluate"
-import { Trace } from "@/trace"
-import { NotYetValue } from "@/core"
-import { SigmaValue, ConsValue, CarNeutral } from "@/core"
+import { Exp, AlphaCtx } from "../../exp"
+import { Ctx } from "../../ctx"
+import { Env } from "../../env"
+import { infer } from "../../infer"
+import { expect } from "../../expect"
+import { Value, match_value } from "../../value"
+import { evaluate } from "../../evaluate"
+import { Trace } from "../../trace"
+import { NotYetValue } from "../../core"
+import { SigmaValue, ConsValue, CarNeutral } from "../../core"
 
 export class Car implements Exp {
   target: Exp

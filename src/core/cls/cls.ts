@@ -1,13 +1,13 @@
-import { Exp, AlphaCtx } from "@/exp"
-import { Value } from "@/value"
-import { Ctx } from "@/ctx"
-import { Env } from "@/env"
-import { Telescope } from "@/telescope"
-import { ClsValue } from "@/core"
-import { TypeValue } from "@/core"
-import { evaluate } from "@/evaluate"
-import { check } from "@/check"
-import * as ut from "@/ut"
+import { Exp, AlphaCtx } from "../../exp"
+import { Value } from "../../value"
+import { Ctx } from "../../ctx"
+import { Env } from "../../env"
+import { Telescope } from "../../telescope"
+import { ClsValue } from "../../core"
+import { TypeValue } from "../../core"
+import { evaluate } from "../../evaluate"
+import { check } from "../../check"
+import * as ut from "../../ut"
 
 export class Cls implements Exp {
   entries: Array<{ name: string; t: Exp; exp?: Exp }>

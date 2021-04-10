@@ -1,9 +1,9 @@
-import { Ctx } from "@/ctx"
-import { Exp } from "@/exp"
-import { Value } from "@/value"
-import { readback } from "@/readback"
-import { NatValue } from "@/core"
-import { Add1 } from "@/core"
+import { Ctx } from "../../ctx"
+import { Exp } from "../../exp"
+import { Value } from "../../value"
+import { readback } from "../../readback"
+import { NatValue } from "../../core"
+import { Add1 } from "../../core"
 
 export class Add1Value {
   prev: Value

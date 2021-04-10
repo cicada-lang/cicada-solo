@@ -1,13 +1,13 @@
-import { Ctx } from "@/ctx"
-import { Exp } from "@/exp"
-import { Value } from "@/value"
-import { readback } from "@/readback"
-import { Closure } from "@/closure"
-import * as ut from "@/ut"
-import { TypeValue } from "@/core"
-import { Pi, Fn, Ap } from "@/core"
-import { NotYetValue } from "@/core"
-import { VarNeutral } from "@/core"
+import { Ctx } from "../../ctx"
+import { Exp } from "../../exp"
+import { Value } from "../../value"
+import { readback } from "../../readback"
+import { Closure } from "../../closure"
+import * as ut from "../../ut"
+import { TypeValue } from "../../core"
+import { Pi, Fn, Ap } from "../../core"
+import { NotYetValue } from "../../core"
+import { VarNeutral } from "../../core"
 
 export class PiValue {
   arg_t: Value

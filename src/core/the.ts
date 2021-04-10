@@ -1,10 +1,10 @@
-import { Exp, AlphaCtx } from "@/exp"
-import { Env } from "@/env"
-import { Ctx } from "@/ctx"
-import { Value } from "@/value"
-import { evaluate } from "@/evaluate"
-import { check } from "@/check"
-import { TypeValue } from "@/core"
+import { Exp, AlphaCtx } from "../exp"
+import { Env } from "../env"
+import { Ctx } from "../ctx"
+import { Value } from "../value"
+import { evaluate } from "../evaluate"
+import { check } from "../check"
+import { TypeValue } from "../core"
 
 export class The implements Exp {
   t: Exp

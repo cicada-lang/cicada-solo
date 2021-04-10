@@ -1,7 +1,7 @@
-import { Env } from "@/env"
-import { Ctx } from "@/ctx"
-import { Value } from "@/value"
-import { Stmt } from "@/stmt"
+import { Env } from "../env"
+import { Ctx } from "../ctx"
+import { Value } from "../value"
+import { Stmt } from "../stmt"
 
 export class World {
   env: Env

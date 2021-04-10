@@ -1,13 +1,13 @@
-import { Ctx } from "@/ctx"
-import { Exp } from "@/exp"
-import { Value } from "@/value"
-import { Cls, Obj, Dot, TypeValue } from "@/core"
-import { NotYetValue, VarNeutral } from "@/core"
-import { Telescope } from "@/telescope"
-import { readback } from "@/readback"
-import { conversion } from "@/conversion"
-import { Trace } from "@/trace"
-import * as ut from "@/ut"
+import { Ctx } from "../../ctx"
+import { Exp } from "../../exp"
+import { Value } from "../../value"
+import { Cls, Obj, Dot, TypeValue } from "../../core"
+import { NotYetValue, VarNeutral } from "../../core"
+import { Telescope } from "../../telescope"
+import { readback } from "../../readback"
+import { conversion } from "../../conversion"
+import { Trace } from "../../trace"
+import * as ut from "../../ut"
 
 // NOTE `Ext` can not evaluate to `ClsValue`,
 //   because we need lexical scope,

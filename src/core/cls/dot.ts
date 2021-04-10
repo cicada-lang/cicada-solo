@@ -1,13 +1,13 @@
-import { Exp, AlphaCtx } from "@/exp"
-import { Ctx } from "@/ctx"
-import { Env } from "@/env"
-import { Value, match_value } from "@/value"
-import { ClsValue, ExtValue, ObjValue } from "@/core"
-import { DotNeutral, NotYetValue } from "@/core"
-import { evaluate } from "@/evaluate"
-import { infer } from "@/infer"
-import { Trace } from "@/trace"
-import * as ut from "@/ut"
+import { Exp, AlphaCtx } from "../../exp"
+import { Ctx } from "../../ctx"
+import { Env } from "../../env"
+import { Value, match_value } from "../../value"
+import { ClsValue, ExtValue, ObjValue } from "../../core"
+import { DotNeutral, NotYetValue } from "../../core"
+import { evaluate } from "../../evaluate"
+import { infer } from "../../infer"
+import { Trace } from "../../trace"
+import * as ut from "../../ut"
 
 export class Dot implements Exp {
   target: Exp

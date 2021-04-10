@@ -1,9 +1,9 @@
-import { Stmt } from "@/stmt"
-import { World } from "@/world"
-import { Exp } from "@/exp"
-import { infer } from "@/infer"
-import { evaluate } from "@/evaluate"
-import { The, Type, TypeValue, Cls, Ext } from "@/core"
+import { Stmt } from "../stmt"
+import { World } from "../world"
+import { Exp } from "../exp"
+import { infer } from "../infer"
+import { evaluate } from "../evaluate"
+import { The, Type, TypeValue, Cls, Ext } from "../core"
 
 export class Class implements Stmt {
   name: string

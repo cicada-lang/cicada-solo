@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-require("module-alias/register")
 const { run, test, expect, snapshot, info } = require("@xieyuheng/test-runner")
 const changeCase = require("change-case")
 const path = require("path")

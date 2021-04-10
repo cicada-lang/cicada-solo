@@ -1,7 +1,7 @@
-import { Ctx } from "@/ctx"
-import { Exp } from "@/exp"
-import { Value } from "@/value"
-import { Neutral } from "@/neutral"
+import { Ctx } from "../ctx"
+import { Exp } from "../exp"
+import { Value } from "../value"
+import { Neutral } from "../neutral"
 
 export class NotYetValue {
   t: Value

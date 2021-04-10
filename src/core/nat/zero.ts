@@ -1,8 +1,8 @@
-import { Exp, AlphaCtx } from "@/exp"
-import { Ctx } from "@/ctx"
-import { Env } from "@/env"
-import { Value } from "@/value"
-import { NatValue, ZeroValue } from "@/core"
+import { Exp, AlphaCtx } from "../../exp"
+import { Ctx } from "../../ctx"
+import { Env } from "../../env"
+import { Value } from "../../value"
+import { NatValue, ZeroValue } from "../../core"
 
 export class Zero implements Exp {
   evaluate(env: Env): Value {

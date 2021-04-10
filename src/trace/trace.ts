@@ -1,4 +1,4 @@
-import * as ut from "@/ut"
+import * as ut from "../ut"
 
 export class Trace<T> {
   previous: Array<T> = Array.of()

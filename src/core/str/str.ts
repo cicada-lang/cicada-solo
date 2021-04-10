@@ -1,9 +1,9 @@
-import { Exp, AlphaCtx } from "@/exp"
-import { Ctx } from "@/ctx"
-import { Env } from "@/env"
-import { Value } from "@/value"
-import { TypeValue } from "@/core"
-import { StrValue } from "@/core"
+import { Exp, AlphaCtx } from "../../exp"
+import { Ctx } from "../../ctx"
+import { Env } from "../../env"
+import { Value } from "../../value"
+import { TypeValue } from "../../core"
+import { StrValue } from "../../core"
 
 export class Str implements Exp {
   evaluate(env: Env): Value {

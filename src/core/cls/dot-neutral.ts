@@ -1,7 +1,7 @@
-import { Neutral } from "@/neutral"
-import { Exp } from "@/exp"
-import { Ctx } from "@/ctx"
-import { Dot } from "@/core"
+import { Neutral } from "../../neutral"
+import { Exp } from "../../exp"
+import { Ctx } from "../../ctx"
+import { Dot } from "../../core"
 
 export class DotNeutral {
   target: Neutral

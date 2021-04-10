@@ -1,6 +1,6 @@
-import { Exp } from "@/exp"
-import { Ctx } from "@/ctx"
-import { Var } from "@/core"
+import { Exp } from "../exp"
+import { Ctx } from "../ctx"
+import { Var } from "../core"
 
 export class VarNeutral {
   name: string

@@ -1,9 +1,9 @@
-import { Exp, AlphaCtx } from "@/exp"
-import { Ctx } from "@/ctx"
-import { Env } from "@/env"
-import { Value } from "@/value"
-import { TypeValue } from "@/core"
-import { NatValue } from "@/core"
+import { Exp, AlphaCtx } from "../../exp"
+import { Ctx } from "../../ctx"
+import { Env } from "../../env"
+import { Value } from "../../value"
+import { TypeValue } from "../../core"
+import { NatValue } from "../../core"
 
 export class Nat implements Exp {
   evaluate(env: Env): Value {

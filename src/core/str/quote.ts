@@ -1,9 +1,9 @@
-import { Exp, AlphaCtx } from "@/exp"
-import { Ctx } from "@/ctx"
-import { Env } from "@/env"
-import { Value } from "@/value"
-import { StrValue } from "@/core"
-import { QuoteValue } from "@/core"
+import { Exp, AlphaCtx } from "../../exp"
+import { Ctx } from "../../ctx"
+import { Env } from "../../env"
+import { Value } from "../../value"
+import { StrValue } from "../../core"
+import { QuoteValue } from "../../core"
 
 export class Quote implements Exp {
   str: string

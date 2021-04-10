@@ -1,12 +1,12 @@
-import { Exp, AlphaCtx } from "@/exp"
-import { Ctx } from "@/ctx"
-import { Env } from "@/env"
-import { check } from "@/check"
-import { evaluate } from "@/evaluate"
-import { Value } from "@/value"
-import { Closure } from "@/closure"
-import { TypeValue } from "@/core"
-import { SigmaValue } from "@/core"
+import { Exp, AlphaCtx } from "../../exp"
+import { Ctx } from "../../ctx"
+import { Env } from "../../env"
+import { check } from "../../check"
+import { evaluate } from "../../evaluate"
+import { Value } from "../../value"
+import { Closure } from "../../closure"
+import { TypeValue } from "../../core"
+import { SigmaValue } from "../../core"
 
 export class Sigma implements Exp {
   name: string
