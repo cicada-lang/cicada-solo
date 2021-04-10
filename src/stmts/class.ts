@@ -15,7 +15,7 @@ export class Class implements Stmt {
     this.t.name = this.name
   }
 
-  execute(world: World): World {
+  async execute(world: World): Promise<World> {
     const t = new The(new Type(), this.t)
 
     return world

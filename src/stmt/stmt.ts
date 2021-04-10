@@ -1,5 +1,5 @@
 import { World } from "../world"
 
 export type Stmt = {
-  execute(world: World): World
+  execute(world: World): Promise<World>
 }

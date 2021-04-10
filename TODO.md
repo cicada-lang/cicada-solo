@@ -1,11 +1,7 @@
-- [module] design
-  - a module knows which library it belongs to
-  - one file one module, loaded modules are cached
-  - the loading order of files matters
-  - no recursion
+- [module] `Stmt.execute` take `Module` as new argument
 
-- [cli] be able to eval simple file without module system
 - [cli] be able to eval file with module system
+- [cli] be able to eval simple file without module system
 
 - [library] can be used as a module
   - library first should solve the problem about loading module,

@@ -13,7 +13,7 @@ export class Def implements Stmt {
     this.exp = exp
   }
 
-  execute(world: World): World {
+  async execute(world: World): Promise<World> {
     return world
       .ctx_extend(
         this.name,

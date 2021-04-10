@@ -35,10 +35,10 @@ export class World {
     })
   }
 
-  run_stmts(stmts: Array<Stmt>): World {
+  async run_stmts(stmts: Array<Stmt>): Promise<World> {
     let world: World = this
     for (const stmt of stmts) {
-      world = stmt.execute(world)
+      world = await stmt.execute(world)
     }
 
     return world

@@ -25,7 +25,7 @@ export const handler = async (argv: Argv) => {
     const stmts = Syntax.parse_stmts(text)
 
     let world = new World()
-    world = world.run_stmts(stmts)
+    world = await world.run_stmts(stmts)
 
     if (world.output) {
       console.log(world.output)
