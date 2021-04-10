@@ -1,5 +1,5 @@
 - module system
-  - a module need a `baseDir` -- use `module.json` to mark `baseDir`
+  - a module need a `base_dir` -- use `module.json` to mark `base_dir`
   - one file one module, loaded modules are cached
   - the loading order of files matters
   - no recursion
