@@ -15,11 +15,13 @@ export class Class implements Stmt {
     this.t.name = this.name
   }
 
-  async execute(world: World): Promise<World> {
-    const t = new The(new Type(), this.t)
-
-    return world
-      .ctx_extend(this.name, new TypeValue(), evaluate(world.ctx.to_env(), t))
-      .env_extend(this.name, evaluate(world.env, t))
+  async execute(world: World): Promise<void> {
+    const exp = new The(new Type(), this.t)
+    world.ctx = world.ctx.extend(
+      this.name,
+      new TypeValue(),
+      evaluate(world.ctx.to_env(), exp)
+    )
+    world.env = world.env.extend(this.name, evaluate(world.env, exp))
   }
 }

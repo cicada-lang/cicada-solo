@@ -13,13 +13,12 @@ export class Def implements Stmt {
     this.exp = exp
   }
 
-  async execute(world: World): Promise<World> {
-    return world
-      .ctx_extend(
-        this.name,
-        infer(world.ctx, this.exp),
-        evaluate(world.ctx.to_env(), this.exp)
-      )
-      .env_extend(this.name, evaluate(world.env, this.exp))
+  async execute(world: World): Promise<void> {
+    world.ctx = world.ctx.extend(
+      this.name,
+      infer(world.ctx, this.exp),
+      evaluate(world.ctx.to_env(), this.exp)
+    )
+    world.env = world.env.extend(this.name, evaluate(world.env, this.exp))
   }
 }

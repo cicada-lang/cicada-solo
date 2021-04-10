@@ -1,3 +1,4 @@
+- [module] inline `World` to `Module`
 - [module] `Stmt.execute` take `Module` as new argument
 
 - [cli] be able to eval file with module system

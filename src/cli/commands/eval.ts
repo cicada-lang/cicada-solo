@@ -23,10 +23,8 @@ export const handler = async (argv: Argv) => {
 
   try {
     const stmts = Syntax.parse_stmts(text)
-
     let world = new World()
-    world = await world.run_stmts(stmts)
-
+    for (const stmt of stmts) await stmt.execute(world)
     if (world.output) {
       console.log(world.output)
     }

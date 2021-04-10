@@ -13,11 +13,11 @@ export class Show implements Stmt {
     this.exp = exp
   }
 
-  async execute(world: World): Promise<World> {
+  async execute(world: World): Promise<void> {
     const t = infer(world.ctx, this.exp)
     const value = evaluate(world.env, this.exp)
     const value_repr = readback(world.ctx, t, value).repr()
     const t_repr = readback(world.ctx, new TypeValue(), t).repr()
-    return world.output_append(`@the ${t_repr} ${value_repr}\n`)
+    world.output += `@the ${t_repr} ${value_repr}\n`
   }
 }

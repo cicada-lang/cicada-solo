@@ -35,10 +35,9 @@ export class LocalLibrary implements Library {
     const file = Path.resolve(this.base_dir, this.config.src, name)
     const text = await fs.promises.readFile(file, "utf8")
     const stmts = Syntax.parse_stmts(text)
-    const mod = new Module({
-      world: await new World().run_stmts(stmts),
-      library: this,
-    })
+    let world = new World()
+    for (const stmt of stmts) await stmt.execute(world)
+    const mod = new Module({ world, library: this })
     this.cached_modules.set(name, mod)
     return mod
   }

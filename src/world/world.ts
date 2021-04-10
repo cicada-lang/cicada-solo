@@ -13,34 +13,4 @@ export class World {
     this.ctx = the?.ctx || new Ctx()
     this.output = the?.output || ""
   }
-
-  env_extend(name: string, value: Value): World {
-    return new World({
-      ...this,
-      env: this.env.extend(name, value),
-    })
-  }
-
-  ctx_extend(name: string, t: Value, value?: Value): World {
-    return new World({
-      ...this,
-      ctx: this.ctx.extend(name, t, value),
-    })
-  }
-
-  output_append(str: string): World {
-    return new World({
-      ...this,
-      output: this.output + str,
-    })
-  }
-
-  async run_stmts(stmts: Array<Stmt>): Promise<World> {
-    let world: World = this
-    for (const stmt of stmts) {
-      world = await stmt.execute(world)
-    }
-
-    return world
-  }
 }
