@@ -1,12 +1,13 @@
-- ambr World Module
-
 - [library] design
-  - what is the relation between library and module?
+  - a library have a list of modules
+    - to load a library is to build its modules
+  - a library have the source files of the modules
 
 - [library] cli tests
 - [library] create `LocalLibrary`
 
 - [module] design
+  - a module knows which library it belongs to
   - one file one module, loaded modules are cached
   - the loading order of files matters
   - no recursion
