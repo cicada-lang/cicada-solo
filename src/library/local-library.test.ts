@@ -8,6 +8,7 @@ async function test(): Promise<void> {
 
   const base_dir = "../../libraries/algebra"
   ut.assert_equal(lib.base_dir, Path.resolve(__dirname, base_dir))
+  ut.assert_equal(lib.config.name, "algebra")
 }
 
 test().catch((error) => {
