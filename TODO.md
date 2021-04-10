@@ -1,3 +1,5 @@
+- [tdd] setup tdd for the features about library and module
+
 - [library] library first should solve the problem about loading module
 
 - [library] design
