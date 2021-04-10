@@ -23,7 +23,10 @@ export const handler = async (argv: Argv) => {
 
   try {
     const stmts = Syntax.parse_stmts(text)
-    const world = new World().run_stmts(stmts)
+
+    let world = new World()
+    world = world.run_stmts(stmts)
+
     if (world.output) {
       console.log(world.output)
     }
