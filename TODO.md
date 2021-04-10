@@ -4,8 +4,7 @@
   - the loading order of files matters
   - no recursion
 
-- `Telescope.*`
-  - extract functions that handle telescope for `ExtValue` and `ClsValue`
+- extract `Telescope.*`
 
 - [formalization] category
 - [formalization] group

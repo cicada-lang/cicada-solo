@@ -86,7 +86,12 @@ export class Telescope {
     )
   }
 
-  readback(ctx: Ctx): Array<{ name: string, t: Exp, exp?: Exp }> {
+  readback(
+    ctx: Ctx
+  ): {
+    entries: Array<{ name: string; t: Exp; exp?: Exp }>
+    ctx: Ctx
+  } {
     const entries = []
 
     for (const { name, t, value } of this.fulfilled) {
@@ -111,7 +116,7 @@ export class Telescope {
       }
     }
 
-    return entries
+    return { entries, ctx }
   }
 
   check_properties(ctx: Ctx, properties: Map<string, Exp>): void {
