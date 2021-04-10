@@ -28,3 +28,16 @@ test_load().catch((error) => {
   console.error(error)
   process.exit(1)
 })
+
+async function test_import(): Promise<void> {
+  const file = "../../libraries/algebra/library.json"
+  const lib = await LocalLibrary.from_config_file(Path.resolve(__dirname, file))
+  const mod = await lib.load("functor.cic")
+  const cached = await lib.load("functor.cic")
+  ut.assert_equal(mod === cached, true)
+}
+
+test_import().catch((error) => {
+  console.error(error)
+  process.exit(1)
+})

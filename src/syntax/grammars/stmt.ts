@@ -27,5 +27,19 @@ export const stmt = {
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
       '"]"',
     ],
+    "stmt:import": [
+      '"@"',
+      '"import"',
+      { path: { $pattern: ["string"] } },
+      '"{"',
+      { entries: { $ap: ["zero_or_more", "import_entry"] } },
+      '"}"',
+    ],
+  },
+}
+
+export const import_entry = {
+  $grammar: {
+    "import_entry:name": [{ name: "identifier" }, { $ap: ["optional", '","'] }],
   },
 }

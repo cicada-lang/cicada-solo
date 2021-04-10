@@ -5,7 +5,7 @@ import { infer } from "../infer"
 import { evaluate } from "../evaluate"
 import { The, Type, TypeValue, Cls, Ext } from "../core"
 
-type ImportEntry = {
+export type ImportEntry = {
   name: string
   alias?: string
 }
