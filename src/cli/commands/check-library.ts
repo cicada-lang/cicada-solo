@@ -58,8 +58,8 @@ async function watch(library: LocalLibrary): Promise<void> {
         }
       }
 
-      const time = moment().format("YYYY-MM-DD HH:MM:SS")
-      console.log(chalk.green.bold(`[${time}]`), chalk.bold(`[${event}]`), path)
+      const time = moment().format("HH:MM:SS")
+      console.log(chalk.green.bold(`[${time}]`), chalk.bold(`(${event})`), path)
     }
   })
 }
