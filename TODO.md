@@ -1,5 +1,3 @@
-- [docs] review old note
-
 - [cli] improve error report format -- for `--watch`
 
 - [formalization] order
