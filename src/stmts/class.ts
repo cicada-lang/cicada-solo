@@ -19,7 +19,7 @@ export class Class implements Stmt {
     const exp = new The(new Type(), this.t)
     mod.ctx = mod.ctx.extend(
       this.name,
-      new TypeValue(),
+      infer(mod.ctx, exp),
       evaluate(mod.ctx.to_env(), exp)
     )
     mod.env = mod.env.extend(this.name, evaluate(mod.env, exp))

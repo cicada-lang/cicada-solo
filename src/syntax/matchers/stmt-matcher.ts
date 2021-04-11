@@ -30,11 +30,13 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
         )
       ),
-    "stmt:import": ({ path, entries }) =>
-      new Import(
+    "stmt:import": ({ path, entries }) => {
+      return new Import(
         pt.trim_boundary(pt.str(path), 1),
         pt.matchers.zero_or_more_matcher(entries).map(import_entry_matcher)
-      ),
+      )
+    },
+
   })(tree)
 }
 

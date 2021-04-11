@@ -1,6 +1,6 @@
-- [cli] `cic check-library` -- `--watch`
 - [cli] `./dev t` for library
-- built-in `snapshot` and `test` support
+- [cli] `cic check-library` -- `--watch`
+- [cli] `cic check-library` -- built-in `snapshot` and `test` support
 
 # pie
 

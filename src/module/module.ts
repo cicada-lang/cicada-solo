@@ -3,6 +3,7 @@ import { Env } from "../env"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import { Stmt } from "../stmt"
+import { Trace } from "../trace"
 
 // NOTE
 // - a module knows which library it belongs to

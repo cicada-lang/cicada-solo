@@ -28,7 +28,23 @@ export const handler = async (argv: Argv) => {
     ? await find_local_library(Path.dirname(argv.file))
     : new EmptyLibrary()
   const mod = new Module({ library })
-  await run_stmts(mod, stmts)
+
+  try {
+    for (const stmt of stmts) {
+      console.log(stmt)
+      await stmt.execute(mod)
+    }
+    if (mod.output) {
+      console.log(mod.output)
+    }
+  } catch (error) {
+    if (error instanceof Trace) {
+      console.error(error.repr((exp) => exp.repr()))
+      process.exit(1)
+    }
+
+    throw error
+  }
 }
 
 async function find_local_library(cwd: string): Promise<LocalLibrary> {
@@ -41,20 +57,4 @@ async function find_local_library(cwd: string): Promise<LocalLibrary> {
   }
 
   return LocalLibrary.from_config_file(config_file)
-}
-
-async function run_stmts(mod: Module, stmts: Array<Stmt>): Promise<void> {
-  try {
-    for (const stmt of stmts) await stmt.execute(mod)
-    if (mod.output) {
-      console.log(mod.output)
-    }
-  } catch (error) {
-    if (error instanceof Trace) {
-      console.error(error.repr((exp) => exp.repr()))
-      process.exit(1)
-    }
-
-    throw error
-  }
 }

@@ -38,7 +38,10 @@ export class LocalLibrary implements Library {
     const text = await fs.promises.readFile(file, "utf8")
     const stmts = Syntax.parse_stmts(text)
     let mod = new Module({ library: this })
-    for (const stmt of stmts) await stmt.execute(mod)
+    for (const stmt of stmts) {
+      console.log(stmt)
+      await stmt.execute(mod)
+    }
     if (!opts?.silent && mod.output) {
       console.log(mod.output)
     }
