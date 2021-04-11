@@ -1,4 +1,4 @@
-- [cli] `cic check-library` -- `--watch`
+- [cli] improve error report format -- for `--watch`
 
 - [formalization] order
 

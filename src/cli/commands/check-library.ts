@@ -1,5 +1,9 @@
 import { LocalLibrary } from "../../library"
 import { Trace } from "../../trace"
+import chokidar from "chokidar"
+import moment from "moment"
+import chalk from "chalk"
+import Path from "path"
 
 export const command = "check-library <config-file>"
 export const description = "Check all files in a library"
@@ -15,14 +19,42 @@ type Argv = {
 
 export const handler = async (argv: Argv) => {
   const library = await LocalLibrary.from_config_file(argv["config-file"])
+  if (argv.watch) await watch(library)
+  else await check(library)
+}
+
+async function check(library: LocalLibrary): Promise<void> {
   try {
-    const modules = await library.load_all()
+    const mods = await library.load_all()
   } catch (error) {
     if (error instanceof Trace) {
       console.error(error.repr((exp) => exp.repr()))
       process.exit(1)
+    } else {
+      throw error
     }
-
-    throw error
   }
+}
+
+async function watch(library: LocalLibrary): Promise<void> {
+  const src_dir = Path.resolve(library.root_dir, library.config.src)
+  const watcher = chokidar.watch(src_dir)
+
+  watcher.on("all", async (event, file) => {
+    if (event === "add" || event === "change") {
+      const time = moment().format("YYYY-MM-DD HH:MM:SS")
+      console.log(chalk.bold(`[${time}]`), chalk.bold(`[${event}]`), file)
+      try {
+        const path = file.slice(`${src_dir}/`.length)
+        library.cached_mods.delete(path)
+        const mod = await library.load(path)
+      } catch (error) {
+        if (error instanceof Trace) {
+          console.error(error.repr((exp) => exp.repr()))
+        } else {
+          throw error
+        }
+      }
+    }
+  })
 }

@@ -8,16 +8,16 @@ import readdirp from "readdirp"
 export class LocalLibrary implements Library {
   root_dir: string
   config: LibraryConfig
-  cached_modules: Map<string, Module>
+  cached_mods: Map<string, Module>
 
   constructor(opts: {
     root_dir: string
     config: LibraryConfig
-    cached_modules?: Map<string, Module>
+    cached_mods?: Map<string, Module>
   }) {
     this.root_dir = opts.root_dir
     this.config = opts.config
-    this.cached_modules = opts.cached_modules || new Map()
+    this.cached_mods = opts.cached_mods || new Map()
   }
 
   static async from_config_file(file: string): Promise<LocalLibrary> {
@@ -29,7 +29,7 @@ export class LocalLibrary implements Library {
   }
 
   async load(path: string, opts?: { silent?: boolean }): Promise<Module> {
-    const cached = this.cached_modules.get(path)
+    const cached = this.cached_mods.get(path)
     if (cached) {
       return cached
     }
@@ -40,7 +40,7 @@ export class LocalLibrary implements Library {
     let mod = new Module({ library: this })
     for (const stmt of stmts) await stmt.execute(mod)
     if (!opts?.silent && mod.output) console.log(mod.output)
-    this.cached_modules.set(path, mod)
+    this.cached_mods.set(path, mod)
     return mod
   }
 
@@ -51,6 +51,6 @@ export class LocalLibrary implements Library {
         await this.load(path, { silent: true })
       }
     }
-    return this.cached_modules
+    return this.cached_mods
   }
 }
