@@ -32,16 +32,16 @@ commands.test_impression = async () => {
 }
 
 commands.test_cicada = async () => {
-  await test("./bin/cic.js run $file", { file: "tests/**/**.test.cic" }, expect.ok)
+  await test("./bin/cic.js run --no-module $file", { file: "tests/**/**.test.cic" }, expect.ok)
 
   await test(
-    "./bin/cic.js run $file",
+    "./bin/cic.js run --no-module $file",
     { file: "tests/**/**.snapshot.cic" },
     snapshot.out(({ file }) => file.replace(/\.cic$/, ".out"))
   )
 
   await test(
-    "./bin/cic.js run $file",
+    "./bin/cic.js run --no-module $file",
     { file: "tests/**/**.error.cic" },
     snapshot.err(({ file }) => file.replace(/\.cic$/, ".out"))
   )
