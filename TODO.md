@@ -1,5 +1,3 @@
-- [module] `Import` -- handle "import as"
-
 - [cli] be able to run file with module system -- use `--no-module`
 - [cli] be able to run simple file without module system
 
