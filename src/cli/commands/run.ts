@@ -22,8 +22,6 @@ type Argv = {
 }
 
 export const handler = async (argv: Argv) => {
-  console.log(argv)
-
   const text = fs.readFileSync(argv.file, { encoding: "utf-8" })
 
   try {
