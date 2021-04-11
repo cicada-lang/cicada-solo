@@ -227,4 +227,19 @@ export class Telescope {
       telescope = telescope.fill(evaluate(ctx.to_env(), found))
     }
   }
+
+  extend_ctx(ctx: Ctx): Ctx {
+    for (const { name, t, value } of this.fulfilled) {
+      ctx = ctx.extend(name, t, value)
+    }
+    for (const { name, t, exp } of this.entries) {
+      const env = ctx.to_env()
+      if (exp) {
+        ctx = ctx.extend(name, evaluate(env, t), evaluate(env, exp))
+      } else {
+        ctx = ctx.extend(name, evaluate(env, t))
+      }
+    }
+    return ctx
+  }
 }

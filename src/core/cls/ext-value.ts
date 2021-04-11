@@ -92,4 +92,11 @@ export class ExtValue {
         |`)
     )
   }
+
+  extend_ctx(ctx: Ctx): Ctx {
+    for (const { telescope } of this.entries) {
+      ctx = telescope.extend_ctx(ctx)
+    }
+    return ctx
+  }
 }

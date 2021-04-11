@@ -1,14 +1,15 @@
+- [bug] we should pass parent's bindings in to next scope
 - [tests] unit tests for cls type error
 - [cli] `cic check-library` -- built-in `snapshot` and `test` support
 - [cli] `cic check-library` -- `--watch`
 
-- [formalization] category
-- [formalization] group
 - [formalization] ring
 - [formalization] algebra
 - [formalization] lattice
 - [formalization] module
 - [formalization] order
+- [formalization] category
+- [formalization] group-category
 
 # pie
 

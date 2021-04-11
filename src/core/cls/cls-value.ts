@@ -50,4 +50,8 @@ export class ClsValue {
         |`)
     )
   }
+
+  extend_ctx(ctx: Ctx): Ctx {
+    return this.telescope.extend_ctx(ctx)
+  }
 }

@@ -48,6 +48,8 @@ export class Ext implements Exp {
       throw new Trace(`Expecting parent to be ClsValue or ExtValue`)
     }
 
+    ctx = parent.extend_ctx(ctx)
+
     for (const { name, t, exp } of this.entries) {
       check(ctx, t, new TypeValue())
       const t_value = evaluate(ctx.to_env(), t)
