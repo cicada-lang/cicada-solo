@@ -4,6 +4,7 @@ import chokidar from "chokidar"
 import moment from "moment"
 import chalk from "chalk"
 import Path from "path"
+import pt from "@cicada-lang/partech"
 
 export const command = "check-library <config-file>"
 export const description = "Check all files in a library"
@@ -43,7 +44,7 @@ async function watch(library: LocalLibrary): Promise<void> {
   watcher.on("all", async (event, file) => {
     if (event === "add" || event === "change") {
       const time = moment().format("YYYY-MM-DD HH:MM:SS")
-      console.log(chalk.bold(`[${time}]`), chalk.bold(`[${event}]`), file)
+      console.log(chalk.green.bold(`[${time}]`), chalk.bold(`[${event}]`), file)
       try {
         const path = file.slice(`${src_dir}/`.length)
         library.cached_mods.delete(path)
@@ -51,6 +52,7 @@ async function watch(library: LocalLibrary): Promise<void> {
       } catch (error) {
         if (error instanceof Trace) {
           console.error(error.repr((exp) => exp.repr()))
+        } else if (error instanceof pt.ParsingError) {
         } else {
           throw error
         }

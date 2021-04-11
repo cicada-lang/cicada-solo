@@ -1,7 +1,4 @@
 - [cli] improve error report format -- for `--watch`
-
-- [formalization] order
-
 - [cli] `cic check-library` -- built-in `test` support
 - [cli] `cic check-library` -- built-in `snapshot` support
 

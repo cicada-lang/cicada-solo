@@ -26,5 +26,3 @@
     fmap(x, x)(dom.id(x)),
     cod.id(map(x)))
 ]
-
-@show Functor
