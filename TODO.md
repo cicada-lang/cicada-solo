@@ -1,15 +1,17 @@
-- [bug] we should pass parent's bindings in to next scope
-- [tests] unit tests for cls type error
-- [cli] `cic check-library` -- built-in `snapshot` and `test` support
 - [cli] `cic check-library` -- `--watch`
 
+- [tests] unit tests for cls type error
+- [cli] `cic check-library` -- built-in `snapshot` and `test` support
+
+- [formalization] category
 - [formalization] ring
 - [formalization] algebra
 - [formalization] lattice
 - [formalization] module
 - [formalization] order
-- [formalization] category
 - [formalization] group-category
+
+- [formalization] clear old notes about mathematical structure
 
 # pie
 
