@@ -6,21 +6,16 @@ About knowledge, logic, formal inference rule and computation
 
 - logic := the system we use to express beliefs.
 
-- inference rule := definition of judgment (belief).
+- logic inference rule := definition of judgment (belief).
   - by giving algorithm to check whether a group of data
     can be viewed as evidence of the judgment,
     which is the same as type checking algorithm.
-  - use a group of data constructors to define a type constructor,
-    is one way of doing this.
-  - this is using introduction rules to define type.
-    how about elimination?
-    - we need elimination rule about arrow elimination
-      to do computation by substitution.
-    - although we have general pattern matching and recursion
-      to do computation for all other algebraic data type,
-      we still can use elimination rule to
-      1. make sure all cases are covered;
-      2. avoid recursion.
+  - introduction rule := use a group of data constructors to define a type constructor.
+  - elimination rule := TODO
+    - I do not understand the duality between introduction and aelimination.
+      - when introduction rules are given how to generate elimination rules?
 
 - computation := directed changes (simulation of action).
-  - TODO new view
+  - computational model := rule about how to change the state in the next step.
+    - examples: beta reduction of lambda calculus, turing machine.
+  - program := carefully prepared init state.
