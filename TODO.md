@@ -2,6 +2,14 @@
 - [cli] `cic check-library` -- built-in `snapshot` and `test` support
 - [cli] `cic check-library` -- `--watch`
 
+- [formalization] category
+- [formalization] group
+- [formalization] ring
+- [formalization] algebra
+- [formalization] lattice
+- [formalization] module
+- [formalization] order
+
 # pie
 
 - [pie] `List` -- `List` `li()` `nil`
@@ -16,16 +24,6 @@
 
 - [pattern matching] algebric datatype -- `@datatype`
   - generate `ind`
-
-# formalization
-
-- [formalization] category
-- [formalization] group
-- [formalization] ring
-- [formalization] algebra
-- [formalization] lattice
-- [formalization] module
-- [formalization] order
 
 # the little typer
 
