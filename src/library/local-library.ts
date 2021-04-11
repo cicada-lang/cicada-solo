@@ -47,7 +47,9 @@ export class LocalLibrary implements Library {
   async load_all(): Promise<Map<string, Module>> {
     const src_dir = Path.resolve(this.root_dir, this.config.src)
     for await (const { path } of readdirp(src_dir)) {
-      await this.load(path, { silent: true })
+      if (path.endsWith(".cic")) {
+        await this.load(path, { silent: true })
+      }
     }
     return this.cached_modules
   }
