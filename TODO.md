@@ -1,8 +1,6 @@
 - [cli] `cic check-library` -- `--watch`
 
-- [tests] unit tests for cls type error
-
-- [formalization] lattice
+- [formalization] order
 
 - [cli] `cic check-library` -- built-in `test` support
 - [cli] `cic check-library` -- built-in `snapshot` support
@@ -10,7 +8,7 @@
 - [formalization] ring
 - [formalization] algebra
 - [formalization] module
-- [formalization] order
+- [formalization] lattice
 
 - [formalization] category
 
