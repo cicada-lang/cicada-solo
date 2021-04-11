@@ -9,8 +9,6 @@
 - [formalization] category
 - [formalization] group-category
 
-- [formalization] clear old notes about mathematical structure
-
 # pie
 
 - [pie] `List` -- `List` `li()` `nil`
