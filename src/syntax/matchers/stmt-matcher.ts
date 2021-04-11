@@ -36,7 +36,6 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         pt.matchers.zero_or_more_matcher(entries).map(import_entry_matcher)
       )
     },
-
   })(tree)
 }
 
