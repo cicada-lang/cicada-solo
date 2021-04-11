@@ -9,7 +9,8 @@
     "build": "npx tsc",
     "watch": "npx tsc --watch",
     "format": "npx prettier src --write",
-    "test": "./dev t"
+    "test": "./dev t",
+    "vercel-build": "npm run build && npm run test"
   },
   "prettier": {
     "semi": false,
