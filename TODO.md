@@ -1,3 +1,5 @@
+- [cli] be able to check all modules in a library
+
 # pie
 
 - [pie] `List` -- `List` `li()` `nil`
@@ -12,10 +14,6 @@
 
 - [pattern matching] algebric datatype -- `@datatype`
   - generate `ind`
-
-# cli
-
-- [cli] be able to run simple file without module system
 
 # formalization
 
