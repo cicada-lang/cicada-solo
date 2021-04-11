@@ -6,7 +6,10 @@
 
 - logic := the system we use to express beliefs.
 
-- logic inference rule := definition of judgment (belief).
+- judgment := an attitude that a person takes towards expressions.
+  - when we come to know something, we are making a judgment.
+
+- logic inference rule := formalized definition of judgment (belief).
   - by giving algorithm to check whether a group of data
     can be viewed as evidence of the judgment,
     which is the same as type checking algorithm.
