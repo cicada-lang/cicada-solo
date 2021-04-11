@@ -11,13 +11,11 @@ export const command = "run <file>"
 export const description = "Run a file"
 
 export const builder = {
-  color: { type: "boolean", default: true },
   module: { type: "boolean", default: true },
 }
 
 type Argv = {
   file: string
-  color: boolean
   module: boolean
 }
 
