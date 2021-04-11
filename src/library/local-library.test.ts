@@ -8,7 +8,7 @@ async function test_create(): Promise<void> {
 
   const root_dir = "../../std"
   ut.assert_equal(lib.root_dir, Path.resolve(__dirname, root_dir))
-  ut.assert_equal(lib.config.name, "algebra")
+  ut.assert_equal(lib.config.name, "Cicada Standard Library")
 }
 
 test_create().catch((error) => {
