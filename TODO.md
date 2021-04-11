@@ -1,4 +1,5 @@
 - [cli] be able to check all modules in a library
+- [cli] `./dev t` for library
 
 # pie
 
