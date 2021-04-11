@@ -26,7 +26,8 @@
     h: Morphism(z, w),
   ): Equal(
     Morphism(x, w),
-    compose(x, y, w)(f, compose(y, z, w)(g, h)),
+    // compose(x, y, w)(f, compose(y, z, w)(g, h)),
+    compose(x, x, w)(f, compose(y, z, w)(g, h)),
     compose(x, z, w)(compose(x, y, z)(f, g), h))
 ]
 
