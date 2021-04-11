@@ -22,7 +22,6 @@ export class Import implements Stmt {
   async execute(mod: Module): Promise<void> {
     const imported = await mod.library.load(this.path)
     for (const { name, alias } of this.entries) {
-      // TODO handle alias
       const t = imported.ctx.lookup(name)
       const value = imported.env.lookup(name)
       if (!t || !value) {
@@ -31,8 +30,8 @@ export class Import implements Stmt {
         )
       }
 
-      mod.ctx = mod.ctx.extend(name, t)
-      mod.env = mod.env.extend(name, value)
+      mod.ctx = mod.ctx.extend(alias || name, t)
+      mod.env = mod.env.extend(alias || name, value)
     }
   }
 }

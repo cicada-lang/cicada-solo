@@ -1,4 +1,3 @@
-- [module] `Import` -- handle alias
 - [module] `Import` -- handle "import as"
 
 - [cli] be able to run file with module system -- use `--no-module`

@@ -41,5 +41,11 @@ export const stmt = {
 export const import_entry = {
   $grammar: {
     "import_entry:name": [{ name: "identifier" }, { $ap: ["optional", '","'] }],
+    "import_entry:name_alias": [
+      { name: "identifier" },
+      '":"',
+      { alias: "identifier" },
+      { $ap: ["optional", '","'] },
+    ],
   },
 }
