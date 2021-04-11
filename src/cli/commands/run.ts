@@ -3,8 +3,6 @@ import { Module } from "../../module"
 import { Stmt } from "../../stmt"
 import { Trace } from "../../trace"
 import * as Syntax from "../../syntax"
-import pt from "@cicada-lang/partech"
-import strip_ansi from "strip-ansi"
 import find_up from "find-up"
 import Path from "path"
 import fs from "fs"
@@ -25,25 +23,12 @@ type Argv = {
 
 export const handler = async (argv: Argv) => {
   const text = fs.readFileSync(argv.file, { encoding: "utf-8" })
-
-  try {
-    const stmts = Syntax.parse_stmts(text)
-    const library = argv["module"]
-      ? await find_local_library(Path.dirname(argv.file))
-      : new EmptyLibrary()
-    const mod = new Module({ library })
-    await run_stmts(mod, stmts)
-  } catch (error) {
-    if (error instanceof pt.ParsingError) {
-      let message = error.message
-      message += "\n"
-      message += pt.report(error.span, text)
-      console.error(argv["color"] ? message : strip_ansi(message))
-      process.exit(1)
-    }
-
-    throw error
-  }
+  const stmts = Syntax.parse_stmts(text)
+  const library = argv["module"]
+    ? await find_local_library(Path.dirname(argv.file))
+    : new EmptyLibrary()
+  const mod = new Module({ library })
+  await run_stmts(mod, stmts)
 }
 
 async function find_local_library(cwd: string): Promise<LocalLibrary> {
