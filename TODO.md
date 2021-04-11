@@ -1,20 +1,9 @@
-- [cli] be able to run file with module system -- use `--no-module`
-- [cli] be able to run simple file without module system
-
-- [library] can be used as a module
-  - library first should solve the problem about loading module,
-    this is independent problem from "loading module".
-
-- [formalization] category
-- [formalization] group
-- [formalization] ring
-- [formalization] algebra
-- [formalization] lattice
-- [formalization] module
-- [formalization] order
+# pie
 
 - [pie] `List` -- `List` `li()` `nil`
 - [pie] `Vector` --  `Vector` `vli()` `vnil`
+
+# cicada
 
 - [class] -- handle `this`
   - since we do not have recursion, `this` will be `so far`
@@ -24,19 +13,39 @@
 - [pattern matching] algebric datatype -- `@datatype`
   - generate `ind`
 
-- [tlt]
-  - 5. Lists, Lists, and More Lists
-  - 6. Precisely How Many?
-  - 7. It All Depends On the Motive
-  - Recess: One Piece at a Time
-  - 8. Pick a Number, Any Number
-  - 9. Double Your Money, Get Twice as Much
-  - 10. It Also Depends On the List
-  - 11. All Lists Are Created Equal
-  - 12. Even Numbers Can Be Odd
-  - 13. Even Haf a Baker's Dozen
-  - 14. There's Safety in Numbers
-  - 15. Imagine That ...
-  - 16. If It's All the Same to You
-  - A. The Way Forward
-  - B. Rules Are Made to Be Spoken
+# cli
+
+- [cli] be able to run file with module system -- use `--no-module`
+- [cli] be able to run simple file without module system
+
+# formalization
+
+- [formalization] category
+- [formalization] group
+- [formalization] ring
+- [formalization] algebra
+- [formalization] lattice
+- [formalization] module
+- [formalization] order
+
+# the little typer
+
+- [tlt] 5. Lists, Lists, and More Lists
+- [tlt] 6. Precisely How Many?
+- [tlt] 7. It All Depends On the Motive
+- [tlt] Recess: One Piece at a Time
+- [tlt] 8. Pick a Number, Any Number
+- [tlt] 9. Double Your Money, Get Twice as Much
+- [tlt] 10. It Also Depends On the List
+- [tlt] 11. All Lists Are Created Equal
+- [tlt] 12. Even Numbers Can Be Odd
+- [tlt] 13. Even Haf a Baker's Dozen
+- [tlt] 14. There's Safety in Numbers
+- [tlt] 15. Imagine That ...
+- [tlt] 16. If It's All the Same to You
+- [tlt] A. The Way Forward
+- [tlt] B. Rules Are Made to Be Spoken
+
+# library management
+
+- [library] can be used as a module
