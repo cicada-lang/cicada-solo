@@ -1,6 +1,5 @@
 {
-  "name": "algebra",
-  "date": "2021-04-10 testing cicada",
-  "src": "src",
-  "references": []
+  "name": "Cicada Standard Library",
+  "date": "2021-04-10 testing",
+  "src": "src"
 }
