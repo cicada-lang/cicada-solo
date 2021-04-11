@@ -1,4 +1,4 @@
-# Instar Summary
+# Syntax Summary
 
 ## stmts
 
