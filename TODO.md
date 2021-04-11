@@ -1,5 +1,6 @@
-- [cli] `cic check-library` -- `--watch`
+- [tests] unit tests for cls type error
 - [cli] `cic check-library` -- built-in `snapshot` and `test` support
+- [cli] `cic check-library` -- `--watch`
 
 # pie
 
