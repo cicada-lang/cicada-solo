@@ -20,7 +20,6 @@ export class Import implements Stmt {
   }
 
   async execute(mod: Module): Promise<void> {
-    // TODO handle relative path
     const imported = await mod.library.load(this.path)
     for (const { name, alias } of this.entries) {
       // TODO handle alias

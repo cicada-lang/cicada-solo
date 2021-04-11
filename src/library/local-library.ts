@@ -27,13 +27,13 @@ export class LocalLibrary implements Library {
     })
   }
 
-  async load(name: string): Promise<Module> {
-    const cached = this.cached_modules.get(name)
+  async load(path: string): Promise<Module> {
+    const cached = this.cached_modules.get(path)
     if (cached) {
       return cached
     }
 
-    const file = Path.resolve(this.root_dir, this.config.src, name)
+    const file = Path.resolve(this.root_dir, this.config.src, path)
     const text = await fs.promises.readFile(file, "utf8")
     const stmts = Syntax.parse_stmts(text)
     let mod = new Module({ library: this })
@@ -42,7 +42,7 @@ export class LocalLibrary implements Library {
       console.log(mod.output)
     }
 
-    this.cached_modules.set(name, mod)
+    this.cached_modules.set(path, mod)
 
     return mod
   }
