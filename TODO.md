@@ -1,4 +1,3 @@
-- [cli] `./dev t` for library
 - [cli] `cic check-library` -- `--watch`
 - [cli] `cic check-library` -- built-in `snapshot` and `test` support
 

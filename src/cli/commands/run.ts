@@ -30,13 +30,8 @@ export const handler = async (argv: Argv) => {
   const mod = new Module({ library })
 
   try {
-    for (const stmt of stmts) {
-      console.log(stmt)
-      await stmt.execute(mod)
-    }
-    if (mod.output) {
-      console.log(mod.output)
-    }
+    for (const stmt of stmts) await stmt.execute(mod)
+    if (mod.output) console.log(mod.output)
   } catch (error) {
     if (error instanceof Trace) {
       console.error(error.repr((exp) => exp.repr()))
