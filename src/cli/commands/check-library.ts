@@ -43,9 +43,9 @@ async function watch(library: LocalLibrary): Promise<void> {
 
   watcher.on("all", async (event, file) => {
     if (event === "add" || event === "change") {
-      const time = moment().format("YYYY-MM-DD HH:MM:SS")
-      const path = file.slice(`${src_dir}/`.length)
-      console.log(chalk.green.bold(`[${time}]`), chalk.bold(`[${event}]`), path)
+      const prefix = `${src_dir}/`
+      const path = file.slice(prefix.length)
+
       try {
         library.cached_mods.delete(path)
         const mod = await library.load(path)
@@ -57,6 +57,9 @@ async function watch(library: LocalLibrary): Promise<void> {
           throw error
         }
       }
+
+      const time = moment().format("YYYY-MM-DD HH:MM:SS")
+      console.log(chalk.green.bold(`[${time}]`), chalk.bold(`[${event}]`), path)
     }
   })
 }
