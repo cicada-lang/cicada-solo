@@ -1,4 +1,4 @@
-About knowledge, logic, formal inference rule and computation
+# About knowledge, logic, formal inference rule and computation
 
 - knowledge := fixation of belief.
 
