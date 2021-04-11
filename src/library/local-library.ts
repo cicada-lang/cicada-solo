@@ -3,6 +3,7 @@ import { Module } from "../module"
 import * as Syntax from "../syntax"
 import Path from "path"
 import fs from "fs"
+import readdirp from "readdirp"
 
 export class LocalLibrary implements Library {
   root_dir: string
@@ -27,7 +28,7 @@ export class LocalLibrary implements Library {
     })
   }
 
-  async load(path: string): Promise<Module> {
+  async load(path: string, opts?: { silent?: boolean }): Promise<Module> {
     const cached = this.cached_modules.get(path)
     if (cached) {
       return cached
@@ -38,12 +39,19 @@ export class LocalLibrary implements Library {
     const stmts = Syntax.parse_stmts(text)
     let mod = new Module({ library: this })
     for (const stmt of stmts) await stmt.execute(mod)
-    if (mod.output) {
+    if (!opts?.silent && mod.output) {
       console.log(mod.output)
     }
 
     this.cached_modules.set(path, mod)
-
     return mod
+  }
+
+  async load_all(): Promise<Map<string, Module>> {
+    const src_dir = Path.resolve(this.root_dir, this.config.src)
+    for await (const { path } of readdirp(src_dir)) {
+      await this.load(path, { silent: true })
+    }
+    return this.cached_modules
   }
 }

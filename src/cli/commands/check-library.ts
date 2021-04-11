@@ -14,6 +14,5 @@ type Argv = {
 
 export const handler = async (argv: Argv) => {
   const library = await LocalLibrary.from_config_file(argv["config-file"])
-  // TODO
-  // await library.check_all()
+  const modules = await library.load_all()
 }

@@ -14,4 +14,8 @@ export class EmptyLibrary implements Library {
   async load(name: string): Promise<Module> {
     throw new Error(`The empty library can not load module: ${name}`)
   }
+
+  async load_all(): Promise<Map<string, Module>> {
+    throw new Error(`The empty library can not load any module`)
+  }
 }

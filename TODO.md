@@ -1,5 +1,4 @@
-- handle `ParsingError` early
-- [cli] `cic check-library` -- be able to check all files in a library
+- [cli] `cic check-library` -- `--watch`
 - [cli] `./dev t` for library
 - built-in `snapshot` and `test` support
 
