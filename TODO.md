@@ -1,14 +1,19 @@
 - [cli] `cic check-library` -- `--watch`
 
 - [tests] unit tests for cls type error
-- [cli] `cic check-library` -- built-in `snapshot` and `test` support
 
-- [formalization] category
+- [formalization] lattice
+
+- [cli] `cic check-library` -- built-in `test` support
+- [cli] `cic check-library` -- built-in `snapshot` support
+
 - [formalization] ring
 - [formalization] algebra
-- [formalization] lattice
 - [formalization] module
 - [formalization] order
+
+- [formalization] category
+
 - [formalization] group-category
 
 - [formalization] clear old notes about mathematical structure
