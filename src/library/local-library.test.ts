@@ -3,10 +3,10 @@ import Path from "path"
 import * as ut from "../ut"
 
 async function test_create(): Promise<void> {
-  const file = "../../libraries/algebra/library.json"
+  const file = "../../std/library.json"
   const lib = await LocalLibrary.from_config_file(Path.resolve(__dirname, file))
 
-  const root_dir = "../../libraries/algebra"
+  const root_dir = "../../std"
   ut.assert_equal(lib.root_dir, Path.resolve(__dirname, root_dir))
   ut.assert_equal(lib.config.name, "algebra")
 }
@@ -17,7 +17,7 @@ test_create().catch((error) => {
 })
 
 async function test_load(): Promise<void> {
-  const file = "../../libraries/algebra/library.json"
+  const file = "../../std/library.json"
   const lib = await LocalLibrary.from_config_file(Path.resolve(__dirname, file))
   const mod = await lib.load("category.cic")
   const cached = await lib.load("category.cic")
@@ -30,7 +30,7 @@ test_load().catch((error) => {
 })
 
 async function test_import(): Promise<void> {
-  const file = "../../libraries/algebra/library.json"
+  const file = "../../std/library.json"
   const lib = await LocalLibrary.from_config_file(Path.resolve(__dirname, file))
   const mod = await lib.load("functor.cic")
   const cached = await lib.load("functor.cic")
