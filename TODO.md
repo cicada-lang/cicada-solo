@@ -1,5 +1,3 @@
-- [formalization] category-terminal.cic
-
 # pie
 
 - [pie] `List` -- `List` `li()` `nil`

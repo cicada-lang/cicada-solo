@@ -1,6 +1,0 @@
-@module structure.order
-
-@class Equivalence extends PreOrder {
-  @given x: Elem, y: Elem
-  symmetric(Under(x, y)): Under(y, x)
-}

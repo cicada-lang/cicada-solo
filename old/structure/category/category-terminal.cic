@@ -12,7 +12,7 @@
   ): TheEqual(cat.Morphism(x, object), f, g)
 }
 
-// TODO
+// TODO universal-construction
 
 @given cat: cat.Object
 terminal_iso(
