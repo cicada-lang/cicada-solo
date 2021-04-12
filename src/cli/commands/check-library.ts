@@ -49,17 +49,24 @@ async function watch(library: LocalLibrary): Promise<void> {
       try {
         library.cached_mods.delete(path)
         const mod = await library.load(path)
+
+        const time = moment().format("HH:MM:SS")
+        console.log(
+          chalk.green.bold(`[${time}]`),
+          chalk.bold(`(${event})`),
+          path
+        )
       } catch (error) {
         if (error instanceof Trace) {
           console.error(error.repr((exp) => exp.repr()))
         } else if (error instanceof pt.ParsingError) {
         } else {
-          throw error
+          console.log(error)
         }
-      }
 
-      const time = moment().format("HH:MM:SS")
-      console.log(chalk.green.bold(`[${time}]`), chalk.bold(`(${event})`), path)
+        const time = moment().format("HH:MM:SS")
+        console.log(chalk.red.bold(`[${time}]`), chalk.bold(`(${event})`), path)
+      }
     }
   })
 }
