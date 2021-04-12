@@ -78,6 +78,15 @@ export class LocalLibrary implements Library {
     return mod
   }
 
+  async paths(): Promise<Array<string>> {
+    const src_dir = Path.resolve(this.root_dir, this.config.src)
+    const paths = []
+    for await (const { path } of readdirp(src_dir)) {
+      paths.push(path)
+    }
+    return paths
+  }
+
   async load_all(
     opts: {
       verbose?: boolean
@@ -88,7 +97,7 @@ export class LocalLibrary implements Library {
     }
   ): Promise<Map<string, Module>> {
     const src_dir = Path.resolve(this.root_dir, this.config.src)
-    for await (const { path } of readdirp(src_dir)) {
+    for (const path of await this.paths()) {
       if (path.endsWith(".cic")) {
         await this.load(path, opts)
       }
