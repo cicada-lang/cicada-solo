@@ -7,12 +7,12 @@
   morphism: cat.Morphism(dom, cod)
 
   cancel_left(
-    cod z: cat.Object,
-    f: cat.Morphism(cod, z),
-    g: cat.Morphism(cod, z),
+    x: cat.Object,
+    f: cat.Morphism(cod, x),
+    g: cat.Morphism(cod, x),
     Equal(
-      cat.Morphism(dom, z),
-      cat.compose(dom, cod, z)(morphism, f),
-      cat.compose(dom, cod, z)(morphism, g)),
-  ): Equal(cat.Morphism(cod, z), f, g)
+      cat.Morphism(dom, x),
+      cat.compose(dom, cod, x)(morphism, f),
+      cat.compose(dom, cod, x)(morphism, g)),
+  ): Equal(cat.Morphism(cod, x), f, g)
 ]

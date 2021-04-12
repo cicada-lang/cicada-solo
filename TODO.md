@@ -1,4 +1,3 @@
-- [formalization] category-monomorphism.cic
 - [formalization] category-isomorphism.cic
 - [formalization] category-terminal.cic
 
