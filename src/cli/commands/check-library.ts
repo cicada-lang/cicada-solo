@@ -1,4 +1,5 @@
 import { LocalLibrary } from "../../library"
+import { Module } from "../../module"
 import { Trace } from "../../trace"
 import pt from "@cicada-lang/partech"
 import chokidar from "chokidar"
@@ -34,7 +35,7 @@ async function check(
 ): Promise<void> {
   try {
     const mods = await library.load_all(opts)
-    await write_snapshot(library)
+    await library_snapshot(library)
   } catch (error) {
     if (error instanceof Trace) {
       console.error(error.repr((exp) => exp.repr()))
@@ -53,46 +54,56 @@ async function watch(
   const watcher = chokidar.watch(src_dir)
 
   watcher.on("all", async (event, file) => {
-    if (event === "add" || event === "change") {
-      const prefix = `${src_dir}/`
-      const path = file.slice(prefix.length)
+    if (!file.endsWith(".cic")) return
+    if (event !== "add" && event !== "change") return
 
-      try {
-        library.cached_mods.delete(path)
-        const mod = await library.load(path, opts)
+    const prefix = `${src_dir}/`
+    const path = file.slice(prefix.length)
 
-        console.log(
-          chalk.bold(`(${event})`),
-          chalk.green.bold(`[${moment().format("HH:MM:SS")}]`),
-          path
-        )
-      } catch (error) {
-        if (error instanceof Trace) {
-          console.error(error.repr((exp) => exp.repr()))
-        } else if (error instanceof pt.ParsingError) {
-        } else {
-          console.log(error)
-        }
+    try {
+      library.cached_mods.delete(path)
+      const mod = await library.load(path, opts)
+      await mod_snapshot(library, path, mod)
 
-        console.log(
-          chalk.bold(`(${event})`),
-          chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
-          path
-        )
+      console.log(
+        chalk.bold(`(${event})`),
+        chalk.green.bold(`[${moment().format("HH:MM:SS")}]`),
+        path
+      )
+    } catch (error) {
+      if (error instanceof Trace) {
+        console.error(error.repr((exp) => exp.repr()))
+      } else if (error instanceof pt.ParsingError) {
+      } else {
+        console.log(error)
       }
+
+      console.log(
+        chalk.bold(`(${event})`),
+        chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
+        path
+      )
     }
   })
 }
 
-async function write_snapshot(library: LocalLibrary): Promise<void> {
+async function library_snapshot(library: LocalLibrary): Promise<void> {
   for (const [path, mod] of library.cached_mods) {
-    if (path.endsWith(".snapshot.cic")) {
-      const file = Path.resolve(
-        library.root_dir,
-        library.config.src,
-        path.replace(/snapshot\.cic/, "snapshot.out")
-      )
-      fs.promises.writeFile(file, mod.output)
-    }
+    mod_snapshot(library, path, mod)
+  }
+}
+
+async function mod_snapshot(
+  library: LocalLibrary,
+  path: string,
+  mod: Module
+): Promise<void> {
+  if (path.endsWith(".snapshot.cic")) {
+    const file = Path.resolve(
+      library.root_dir,
+      library.config.src,
+      path.replace(/snapshot\.cic/, "snapshot.out")
+    )
+    await fs.promises.writeFile(file, mod.output)
   }
 }
