@@ -32,7 +32,7 @@
   "dependencies": {
     "@cicada-lang/partech": "^0.1.2",
     "@types/deep-diff": "^1.0.0",
-    "@xieyuheng/test-runner": "^0.1.18",
+    "@xieyuheng/test-runner": "^0.1.20",
     "chalk": "^4.1.0",
     "change-case": "^4.1.2",
     "chokidar": "^3.5.1",
