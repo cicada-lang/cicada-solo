@@ -1,10 +1,11 @@
 import { LocalLibrary } from "../../library"
 import { Trace } from "../../trace"
+import pt from "@cicada-lang/partech"
 import chokidar from "chokidar"
 import moment from "moment"
 import chalk from "chalk"
 import Path from "path"
-import pt from "@cicada-lang/partech"
+import fs from "fs"
 
 export const command = "check-library <config-file>"
 export const description = "Check all files in a library"
@@ -33,6 +34,7 @@ async function check(
 ): Promise<void> {
   try {
     const mods = await library.load_all(opts)
+    await write_snapshot(library)
   } catch (error) {
     if (error instanceof Trace) {
       console.error(error.repr((exp) => exp.repr()))
@@ -80,4 +82,17 @@ async function watch(
       }
     }
   })
+}
+
+async function write_snapshot(library: LocalLibrary): Promise<void> {
+  for (const [path, mod] of library.cached_mods) {
+    if (path.endsWith(".snapshot.cic")) {
+      const file = Path.resolve(
+        library.root_dir,
+        library.config.src,
+        path.replace(/snapshot\.cic/, "snapshot.out")
+      )
+      fs.promises.writeFile(file, mod.output)
+    }
+  }
 }

@@ -62,7 +62,7 @@ export class LocalLibrary implements Library {
 
     const t2 = Date.now()
 
-    if (!opts.silent && mod.output) {
+    if (opts.silent === false && mod.output) {
       console.log(mod.output)
     }
 

@@ -1,8 +1,3 @@
-- [cli] `cic check-library` -- built-in `snapshot` support
-- [cli] `cic check-library` -- built-in `test` support
-
-- [cli] improve error report format -- for `--watch`
-
 - [formalization] ring
 - [formalization] algebra
 - [formalization] module
