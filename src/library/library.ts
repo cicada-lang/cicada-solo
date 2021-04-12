@@ -6,5 +6,5 @@ export interface Library {
   // NOTE path will be resolved from `config.src`
   // - do not support relative path
   load(path: string): Promise<Module>
-  load_all(): Promise<Map<string, Module>>
+  load_all(opts?: { verbose?: boolean }): Promise<Map<string, Module>>
 }

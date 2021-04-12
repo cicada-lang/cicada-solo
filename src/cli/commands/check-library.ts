@@ -11,22 +11,28 @@ export const description = "Check all files in a library"
 
 export const builder = {
   watch: { type: "boolean", default: false },
+  verbose: { type: "boolean", default: false },
 }
 
 type Argv = {
   "config-file": string
   watch: boolean
+  verbose: boolean
 }
 
 export const handler = async (argv: Argv) => {
   const library = await LocalLibrary.from_config_file(argv["config-file"])
-  if (argv.watch) await watch(library)
-  else await check(library)
+  const opts = { verbose: argv.verbose }
+  if (argv.watch) await watch(library, opts)
+  else await check(library, opts)
 }
 
-async function check(library: LocalLibrary): Promise<void> {
+async function check(
+  library: LocalLibrary,
+  opts: { verbose: boolean }
+): Promise<void> {
   try {
-    const mods = await library.load_all()
+    const mods = await library.load_all(opts)
   } catch (error) {
     if (error instanceof Trace) {
       console.error(error.repr((exp) => exp.repr()))
@@ -37,7 +43,10 @@ async function check(library: LocalLibrary): Promise<void> {
   }
 }
 
-async function watch(library: LocalLibrary): Promise<void> {
+async function watch(
+  library: LocalLibrary,
+  opts: { verbose: boolean }
+): Promise<void> {
   const src_dir = Path.resolve(library.root_dir, library.config.src)
   const watcher = chokidar.watch(src_dir)
 
@@ -48,12 +57,11 @@ async function watch(library: LocalLibrary): Promise<void> {
 
       try {
         library.cached_mods.delete(path)
-        const mod = await library.load(path)
+        const mod = await library.load(path, opts)
 
-        const time = moment().format("HH:MM:SS")
         console.log(
-          chalk.green.bold(`[${time}]`),
           chalk.bold(`(${event})`),
+          chalk.green.bold(`[${moment().format("HH:MM:SS")}]`),
           path
         )
       } catch (error) {
@@ -64,8 +72,11 @@ async function watch(library: LocalLibrary): Promise<void> {
           console.log(error)
         }
 
-        const time = moment().format("HH:MM:SS")
-        console.log(chalk.red.bold(`[${time}]`), chalk.bold(`(${event})`), path)
+        console.log(
+          chalk.bold(`(${event})`),
+          chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
+          path
+        )
       }
     }
   })

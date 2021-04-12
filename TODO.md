@@ -1,4 +1,3 @@
-- [cli] `cic check-library` -- `--verbose`
 - [cli] `cic check-library` -- built-in `snapshot` support
 - [cli] `cic check-library` -- built-in `test` support
 
