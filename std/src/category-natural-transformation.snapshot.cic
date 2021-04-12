@@ -1,0 +1,3 @@
+@import "category-natural-transformation.cic" { NaturalTransformation }
+
+@show NaturalTransformation

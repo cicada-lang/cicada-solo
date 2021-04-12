@@ -1,5 +1,3 @@
 @import "category-functor.cic" { Functor }
 
 @show Functor
-@show Functor
-@show Functor
