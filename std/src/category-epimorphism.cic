@@ -1,0 +1,18 @@
+@import "category.cic" { Category }
+
+@class Epimorphism [
+  cat: Category
+  dom: cat.Object
+  cod: cat.Object
+  morphism: cat.Morphism(dom, cod)
+
+  cancel_left(
+    cod z: cat.Object,
+    f: cat.Morphism(cod, z),
+    g: cat.Morphism(cod, z),
+    Equal(
+      cat.Morphism(dom, z),
+      cat.compose(dom, cod, z)(morphism, f),
+      cat.compose(dom, cod, z)(morphism, g)),
+  ): Equal(cat.Morphism(cod, z), f, g)
+]
