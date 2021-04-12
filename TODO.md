@@ -1,4 +1,3 @@
-- [formalization] category-isomorphism.cic
 - [formalization] category-terminal.cic
 
 # pie
