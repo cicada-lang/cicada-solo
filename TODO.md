@@ -1,5 +1,3 @@
-- `SingleFileLibrary` instead of `EmptyLibrary`
-
 # repl
 
 - [repl] `cli/commands/repl.ts` -- by `*.piece_by_piece`

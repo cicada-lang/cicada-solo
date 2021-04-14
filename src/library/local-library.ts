@@ -49,13 +49,15 @@ export class LocalLibrary implements Library {
 
     const t0 = Date.now()
 
-    const file = Path.resolve(this.root_dir, this.config.src, path)
+    const file = Path.isAbsolute(path)
+      ? path
+      : Path.resolve(this.root_dir, this.config.src, path)
     const text = await fs.promises.readFile(file, "utf8")
     const stmts = Syntax.parse_stmts(text)
 
     const t1 = Date.now()
 
-    let mod = new Module({ library: this })
+    const mod = new Module({ library: this })
     for (const stmt of stmts) {
       await stmt.execute(mod)
     }

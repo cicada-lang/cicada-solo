@@ -1,9 +1,6 @@
-import { EmptyLibrary } from "../../library/empty-library"
+import { SingleFileLibrary } from "../../library/single-file-library"
 import { LocalLibrary } from "../../library/local-library"
-import { Module } from "../../module"
-import { Stmt } from "../../stmt"
 import { Trace } from "../../trace"
-import * as Syntax from "../../syntax"
 import find_up from "find-up"
 import Path from "path"
 import fs from "fs"
@@ -21,19 +18,13 @@ type Argv = {
 }
 
 export const handler = async (argv: Argv) => {
+  const path = Path.resolve(argv.file)
+  const dir = Path.dirname(path)
   const library = argv["module"]
-    ? await LocalLibrary.from_config_file(
-        await find_library_config_file(Path.dirname(argv.file))
-      )
-    : new EmptyLibrary()
-  const mod = new Module({ library })
-
-  const text = fs.readFileSync(argv.file, { encoding: "utf-8" })
-  const stmts = Syntax.parse_stmts(text)
-
+    ? await find_library_config_file(dir).then(LocalLibrary.from_config_file)
+    : new SingleFileLibrary(path)
   try {
-    for (const stmt of stmts) await stmt.execute(mod)
-    if (mod.output) console.log(mod.output)
+    await library.load(path)
   } catch (error) {
     if (error instanceof Trace) {
       console.error(error.repr((exp) => exp.repr()))

@@ -7,5 +7,5 @@ export interface Library {
   // - do not support relative path
   load(path: string): Promise<Module>
   paths(): Promise<Array<string>>
-  load_all(opts?: { verbose?: boolean }): Promise<Map<string, Module>>
+  load_all(): Promise<Map<string, Module>>
 }
