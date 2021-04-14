@@ -21,12 +21,15 @@ type Argv = {
 }
 
 export const handler = async (argv: Argv) => {
-  const text = fs.readFileSync(argv.file, { encoding: "utf-8" })
-  const stmts = Syntax.parse_stmts(text)
   const library = argv["module"]
-    ? await find_local_library(Path.dirname(argv.file))
+    ? await LocalLibrary.from_config_file(
+        await find_library_config_file(Path.dirname(argv.file))
+      )
     : new EmptyLibrary()
   const mod = new Module({ library })
+
+  const text = fs.readFileSync(argv.file, { encoding: "utf-8" })
+  const stmts = Syntax.parse_stmts(text)
 
   try {
     for (const stmt of stmts) await stmt.execute(mod)
@@ -41,7 +44,7 @@ export const handler = async (argv: Argv) => {
   }
 }
 
-async function find_local_library(cwd: string): Promise<LocalLibrary> {
+async function find_library_config_file(cwd: string): Promise<string> {
   const config_file = await find_up("library.json", { cwd })
   if (!config_file) {
     throw new Error(
@@ -50,5 +53,5 @@ async function find_local_library(cwd: string): Promise<LocalLibrary> {
     )
   }
 
-  return LocalLibrary.from_config_file(config_file)
+  return config_file
 }
