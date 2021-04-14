@@ -1,4 +1,5 @@
-import { EmptyLibrary, LocalLibrary } from "../../library"
+import { EmptyLibrary } from "../../library/empty-library"
+import { LocalLibrary } from "../../library/local-library"
 import { Module } from "../../module"
 import { Stmt } from "../../stmt"
 import { Trace } from "../../trace"

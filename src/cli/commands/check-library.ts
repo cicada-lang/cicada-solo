@@ -1,4 +1,4 @@
-import { LocalLibrary } from "../../library"
+import { LocalLibrary } from "../../library/local-library"
 import { Module } from "../../module"
 import { Trace } from "../../trace"
 import pt from "@cicada-lang/partech"

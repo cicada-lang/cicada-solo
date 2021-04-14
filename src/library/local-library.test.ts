@@ -1,4 +1,4 @@
-import { LocalLibrary } from "../library"
+import { LocalLibrary } from "./local-library"
 import Path from "path"
 import * as ut from "../ut"
 
