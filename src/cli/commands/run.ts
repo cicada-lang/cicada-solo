@@ -3,7 +3,6 @@ import { LocalLibrary } from "../../library/local-library"
 import { Trace } from "../../trace"
 import find_up from "find-up"
 import Path from "path"
-import fs from "fs"
 
 export const command = "run <file>"
 export const description = "Run a file"

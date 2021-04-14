@@ -1,7 +1,6 @@
 import { Library, LibraryConfig } from "../library"
 import { Module } from "../module"
 import * as Syntax from "../syntax"
-import Path from "path"
 import fs from "fs"
 
 export class SingleFileLibrary implements Library {

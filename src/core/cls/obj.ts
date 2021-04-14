@@ -4,12 +4,6 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { ClsValue, ExtValue, ObjValue, TypeValue } from "../../core"
 import { evaluate } from "../../evaluate"
-import { check } from "../../check"
-import { conversion } from "../../conversion"
-import { readback } from "../../readback"
-import { expect } from "../../expect"
-import { Trace } from "../../trace"
-import { Telescope } from "../../telescope"
 import * as ut from "../../ut"
 
 export class Obj implements Exp {
