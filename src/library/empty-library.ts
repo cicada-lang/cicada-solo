@@ -7,7 +7,8 @@ export class EmptyLibrary implements Library {
   constructor() {
     this.config = new LibraryConfig({
       name: "empty-library",
-      date: "2021-04-11 cicada",
+      // TODO use `Date.now`
+      date: "2021-04-11",
     })
   }
 
