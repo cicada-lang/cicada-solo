@@ -2,6 +2,9 @@
   "name": "@cicada-lang/cicada",
   "version": "0.1.5",
   "repository": "github:cicada-lang/cicada",
+  "main": [
+    "lib/main.js"
+  ],
   "files": [
     "lib"
   ],
