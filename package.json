@@ -25,7 +25,7 @@
     "@types/fs-readdir-recursive": "^1.0.0",
     "@types/js-yaml": "^4.0.0",
     "@types/nanoid": "^2.1.0",
-    "@types/node": "^14.14.37",
+    "@types/node": "^14.14.40",
     "prettier": "^2.2.1",
     "typescript": "^4.2.4"
   },
@@ -42,7 +42,7 @@
     "find-up": "^5.0.0",
     "fs-readdir-recursive": "^1.1.0",
     "joi": "^17.4.0",
-    "js-yaml": "^4.0.0",
+    "js-yaml": "^4.1.0",
     "moment": "^2.29.1",
     "nanoid": "^3.1.22",
     "portfinder": "^1.0.28",
