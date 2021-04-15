@@ -98,12 +98,12 @@ export class LocalLibrary implements Library {
       silent: true,
     }
   ): Promise<Map<string, Module>> {
-    const src_dir = Path.resolve(this.root_dir, this.config.src)
     for (const path of await this.paths()) {
       if (path.endsWith(".cic")) {
         await this.load(path, opts)
       }
     }
+
     return this.cached_mods
   }
 }
