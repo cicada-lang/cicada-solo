@@ -84,7 +84,9 @@ export class LocalLibrary implements Library {
     const src_dir = Path.resolve(this.root_dir, this.config.src)
     const paths = []
     for await (const { path } of readdirp(src_dir)) {
-      paths.push(path)
+      if (path.endsWith(".cic")) {
+        paths.push(path)
+      }
     }
     return paths
   }
@@ -99,9 +101,7 @@ export class LocalLibrary implements Library {
     }
   ): Promise<Map<string, Module>> {
     for (const path of await this.paths()) {
-      if (path.endsWith(".cic")) {
-        await this.load(path, opts)
-      }
+      await this.load(path, opts)
     }
 
     return this.cached_mods
