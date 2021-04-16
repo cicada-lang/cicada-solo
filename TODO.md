@@ -1,5 +1,3 @@
-- `parse_stmts` should not log syntax error
-
 # repl
 
 - [repl] `cli/commands/repl.ts` -- by `*.piece_by_piece`
