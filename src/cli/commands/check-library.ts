@@ -61,8 +61,7 @@ async function watch(
     const path = file.slice(prefix.length)
 
     try {
-      library.cached_mods.delete(path)
-      const mod = await library.load(path, opts)
+      const mod = await library.load(path, {...opts, force: true })
       await mod_snapshot(library, path, mod)
 
       console.log(

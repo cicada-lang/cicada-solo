@@ -1,5 +1,3 @@
-- add `opts.force` to `Library.load`
-
 # repl
 
 - [repl] `cli/commands/repl.ts` -- by `*.piece_by_piece`

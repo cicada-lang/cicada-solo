@@ -32,13 +32,19 @@ export class LocalLibrary implements Library {
   async load(
     path: string,
     opts: {
+      force?: boolean
       verbose?: boolean
       silent?: boolean
     } = {
+      force: false,
       verbose: false,
       silent: false,
     }
   ): Promise<Module> {
+    if (opts?.force) {
+      this.cached_mods.delete(path)
+    }
+
     const cached = this.cached_mods.get(path)
     if (cached) {
       if (opts.verbose) {
