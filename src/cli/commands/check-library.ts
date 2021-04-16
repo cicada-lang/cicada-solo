@@ -34,7 +34,7 @@ async function check(
   opts: { verbose: boolean }
 ): Promise<void> {
   try {
-    const mods = await library.load_all(opts)
+    const mods = await library.load_mods(opts)
     await library_snapshot(library)
   } catch (error) {
     if (error instanceof Trace) {

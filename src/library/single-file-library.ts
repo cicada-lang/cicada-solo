@@ -38,11 +38,12 @@ export class SingleFileLibrary implements Library {
     return mod
   }
 
-  async paths(): Promise<Array<string>> {
-    return [this.path]
+  async fetch_files(): Promise<Map<string, string>> {
+    const text = fs.readFileSync(this.path, { encoding: "utf-8" })
+    return new Map([[this.path, text]])
   }
 
-  async load_all(): Promise<Map<string, Module>> {
+  async load_mods(): Promise<Map<string, Module>> {
     return new Map([[this.path, await this.load(this.path)]])
   }
 }

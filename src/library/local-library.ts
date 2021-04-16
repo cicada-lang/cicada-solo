@@ -86,18 +86,24 @@ export class LocalLibrary implements Library {
     return mod
   }
 
-  async paths(): Promise<Array<string>> {
+  async fetch_files(): Promise<Map<string, string>> {
     const src_dir = Path.resolve(this.root_dir, this.config.src)
-    const paths = []
+
+    const files = new Map()
     for await (const { path } of readdirp(src_dir)) {
       if (path.endsWith(".cic")) {
-        paths.push(path)
+        const file = Path.isAbsolute(path)
+          ? path
+          : Path.resolve(this.root_dir, this.config.src, path)
+        const text = await fs.promises.readFile(file, "utf8")
+        files.set(path, text)
       }
     }
-    return paths
+
+    return files
   }
 
-  async load_all(
+  async load_mods(
     opts: {
       verbose?: boolean
       silent?: boolean
@@ -106,7 +112,8 @@ export class LocalLibrary implements Library {
       silent: true,
     }
   ): Promise<Map<string, Module>> {
-    for (const path of await this.paths()) {
+    const files = await this.fetch_files()
+    for (const path of files.keys()) {
       await this.load(path, opts)
     }
 

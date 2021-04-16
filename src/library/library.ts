@@ -3,9 +3,7 @@ import { Module } from "../module"
 
 export interface Library {
   config: LibraryConfig
-  // NOTE path will be resolved from `config.src`
-  // - do not support relative path
+  fetch_files(): Promise<Map<string, string>>
   load(path: string): Promise<Module>
-  paths(): Promise<Array<string>>
-  load_all(): Promise<Map<string, Module>>
+  load_mods(): Promise<Map<string, Module>>
 }
