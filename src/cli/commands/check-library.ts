@@ -61,7 +61,7 @@ async function watch(
     const path = file.slice(prefix.length)
 
     try {
-      const mod = await library.load(path, {...opts, force: true })
+      const mod = await library.load(path, { ...opts, force: true })
       await mod_snapshot(library, path, mod)
 
       console.log(
@@ -73,8 +73,18 @@ async function watch(
       if (error instanceof Trace) {
         console.error(error.repr((exp) => exp.repr()))
       } else if (error instanceof pt.ParsingError) {
+        const files = await library.fetch_files()
+        const text = files.get(path)
+        if (!text) {
+          console.error(`Unknown path: ${path}`)
+        } else {
+          let message = error.message
+          message += "\n"
+          message += pt.report(error.span, text)
+          console.error(message)
+        }
       } else {
-        console.log(error)
+        console.error(error)
       }
 
       console.log(
