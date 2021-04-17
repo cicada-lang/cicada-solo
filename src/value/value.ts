@@ -8,12 +8,14 @@ export type Value = {
   eta_expand?(ctx: Ctx, value: Value): Exp
 }
 
+type Class<T> = new (...args: any[]) => T
+
 export function match_value<A>(
   target: Value,
-  branches: { [key: string]: (value: any) => A }
+  branches: Array<[Class<any>, (value: any) => A]>
 ): A {
-  for (const [name, f] of Object.entries(branches)) {
-    if (name === target.constructor.name) {
+  for (const [theClass, f] of branches) {
+    if (target instanceof theClass) {
       return f(target)
     }
   }
@@ -22,8 +24,8 @@ export function match_value<A>(
     ut.aline(`
       |Value mismatch.
       |
-      |I am expecting: ${Object.keys(branches).join(", ")},
-      |but in reality, the target type is ${target.constructor.name}.
+      |I am expecting javascript classes: ${branches.map(([theClass]) => theClass).join(", ")},
+      |but in reality, the target constructor name is ${target.constructor.name}.
       |`)
   )
 }

@@ -23,17 +23,23 @@ export class Dot implements Exp {
   }
 
   static apply(target: Value, name: string): Value {
-    return match_value(target, {
-      ObjValue: (obj: ObjValue) => obj.dot(name),
-      NotYetValue: ({ t, neutral }: NotYetValue) =>
-        match_value(t, {
-          ClsValue: (cls: ClsValue) =>
-            new NotYetValue(
-              cls.dot(target, name),
-              new DotNeutral(neutral, name)
-            ),
-        }),
-    })
+    return match_value(target, [
+      [ObjValue, (obj: ObjValue) => obj.dot(name)],
+      [
+        NotYetValue,
+        ({ t, neutral }: NotYetValue) =>
+          match_value(t, [
+            [
+              ClsValue,
+              (cls: ClsValue) =>
+                new NotYetValue(
+                  cls.dot(target, name),
+                  new DotNeutral(neutral, name)
+                ),
+            ],
+          ]),
+      ],
+    ])
   }
 
   infer(ctx: Ctx): Value {

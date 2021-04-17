@@ -22,17 +22,23 @@ export class Cdr implements Exp {
   }
 
   static apply(target: Value): Value {
-    return match_value(target, {
-      ConsValue: (cons: ConsValue) => cons.cdr,
-      NotYetValue: ({ t, neutral }: NotYetValue) =>
-        match_value(t, {
-          SigmaValue: (sigma: SigmaValue) =>
-            new NotYetValue(
-              sigma.cdr_t_cl.apply(Car.apply(target)),
-              new CdrNeutral(neutral)
-            ),
-        }),
-    })
+    return match_value(target, [
+      [ConsValue, (cons: ConsValue) => cons.cdr],
+      [
+        NotYetValue,
+        ({ t, neutral }: NotYetValue) =>
+          match_value(t, [
+            [
+              SigmaValue,
+              (sigma: SigmaValue) =>
+                new NotYetValue(
+                  sigma.cdr_t_cl.apply(Car.apply(target)),
+                  new CdrNeutral(neutral)
+                ),
+            ],
+          ]),
+      ],
+    ])
   }
 
   infer(ctx: Ctx): Value {

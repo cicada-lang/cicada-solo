@@ -28,19 +28,25 @@ export class Ap implements Exp {
   }
 
   static apply(target: Value, arg: Value): Value {
-    return match_value(target, {
-      FnValue: (fn: FnValue) => fn.ret_cl.apply(arg),
-      ClsValue: (cls: ClsValue) => cls.apply(arg),
-      ExtValue: (ext: ExtValue) => ext.apply(arg),
-      NotYetValue: ({ t, neutral }: NotYetValue) =>
-        match_value(t, {
-          PiValue: (pi: PiValue) =>
-            new NotYetValue(
-              pi.ret_t_cl.apply(arg),
-              new ApNeutral(neutral, new Normal(pi.arg_t, arg))
-            ),
-        }),
-    })
+    return match_value(target, [
+      [FnValue, (fn: FnValue) => fn.ret_cl.apply(arg)],
+      [ClsValue, (cls: ClsValue) => cls.apply(arg)],
+      [ExtValue, (ext: ExtValue) => ext.apply(arg)],
+      [
+        NotYetValue,
+        ({ t, neutral }: NotYetValue) =>
+          match_value(t, [
+            [
+              PiValue,
+              (pi: PiValue) =>
+                new NotYetValue(
+                  pi.ret_t_cl.apply(arg),
+                  new ApNeutral(neutral, new Normal(pi.arg_t, arg))
+                ),
+            ],
+          ]),
+      ],
+    ])
   }
 
   infer(ctx: Ctx): Value {

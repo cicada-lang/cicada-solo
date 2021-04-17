@@ -27,16 +27,25 @@ export class AbsurdInd implements Exp {
   }
 
   static apply(target: Value, motive: Value): Value {
-    return match_value(target, {
-      NotYetValue: ({ t, neutral }: NotYetValue) =>
-        match_value(t, {
-          AbsurdValue: (_: AbsurdValue) =>
-            new NotYetValue(
-              motive,
-              new AbsurdIndNeutral(neutral, new Normal(new TypeValue(), motive))
-            ),
-        }),
-    })
+    return match_value(target, [
+      [
+        NotYetValue,
+        ({ t, neutral }: NotYetValue) =>
+          match_value(t, [
+            [
+              AbsurdValue,
+              (_: AbsurdValue) =>
+                new NotYetValue(
+                  motive,
+                  new AbsurdIndNeutral(
+                    neutral,
+                    new Normal(new TypeValue(), motive)
+                  )
+                ),
+            ],
+          ]),
+      ],
+    ])
   }
 
   infer(ctx: Ctx): Value {

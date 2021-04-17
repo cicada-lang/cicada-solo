@@ -38,31 +38,43 @@ export class NatInd implements Exp {
   }
 
   static apply(target: Value, motive: Value, base: Value, step: Value): Value {
-    return match_value(target, {
-      ZeroValue: (_: ZeroValue) => base,
-      Add1Value: ({ prev }: Add1Value) =>
-        Ap.apply(Ap.apply(step, prev), NatInd.apply(prev, motive, base, step)),
-      NotYetValue: ({ t, neutral }: NotYetValue) =>
-        match_value(t, {
-          NatValue: (_: NatValue) => {
-            const motive_t = new PiValue(
-              new NatValue(),
-              new Closure(new Env(), "k", new Type())
-            )
-            const base_t = Ap.apply(motive, new ZeroValue())
-            const step_t = nat_ind_step_t(motive)
-            return new NotYetValue(
-              Ap.apply(motive, target),
-              new NatIndNeutral(
-                neutral,
-                new Normal(motive_t, motive),
-                new Normal(base_t, base),
-                new Normal(step_t, step)
-              )
-            )
-          },
-        }),
-    })
+    return match_value(target, [
+      [ZeroValue, (_: ZeroValue) => base],
+      [
+        Add1Value,
+        ({ prev }: Add1Value) =>
+          Ap.apply(
+            Ap.apply(step, prev),
+            NatInd.apply(prev, motive, base, step)
+          ),
+      ],
+      [
+        NotYetValue,
+        ({ t, neutral }: NotYetValue) =>
+          match_value(t, [
+            [
+              NatValue,
+              (_: NatValue) => {
+                const motive_t = new PiValue(
+                  new NatValue(),
+                  new Closure(new Env(), "k", new Type())
+                )
+                const base_t = Ap.apply(motive, new ZeroValue())
+                const step_t = nat_ind_step_t(motive)
+                return new NotYetValue(
+                  Ap.apply(motive, target),
+                  new NatIndNeutral(
+                    neutral,
+                    new Normal(motive_t, motive),
+                    new Normal(base_t, base),
+                    new Normal(step_t, step)
+                  )
+                )
+              },
+            ],
+          ]),
+      ],
+    ])
   }
 
   infer(ctx: Ctx): Value {

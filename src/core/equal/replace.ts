@@ -36,25 +36,31 @@ export class Replace implements Exp {
   }
 
   static apply(target: Value, motive: Value, base: Value): Value {
-    return match_value(target, {
-      SameValue: (_: SameValue) => base,
-      NotYetValue: ({ t, neutral }: NotYetValue) =>
-        match_value(t, {
-          EqualValue: ({ t, to, from }: EqualValue) => {
-            const base_t = Ap.apply(motive, from)
-            const closure = new Closure(new Env(), "x", new Type())
-            const motive_t = new PiValue(t, closure)
-            return new NotYetValue(
-              Ap.apply(motive, to),
-              new ReplaceNeutral(
-                neutral,
-                new Normal(motive_t, motive),
-                new Normal(base_t, base)
-              )
-            )
-          },
-        }),
-    })
+    return match_value(target, [
+      [SameValue, (_: SameValue) => base],
+      [
+        NotYetValue,
+        ({ t, neutral }: NotYetValue) =>
+          match_value(t, [
+            [
+              EqualValue,
+              ({ t, to, from }: EqualValue) => {
+                const base_t = Ap.apply(motive, from)
+                const closure = new Closure(new Env(), "x", new Type())
+                const motive_t = new PiValue(t, closure)
+                return new NotYetValue(
+                  Ap.apply(motive, to),
+                  new ReplaceNeutral(
+                    neutral,
+                    new Normal(motive_t, motive),
+                    new Normal(base_t, base)
+                  )
+                )
+              },
+            ],
+          ]),
+      ],
+    ])
   }
 
   infer(ctx: Ctx): Value {

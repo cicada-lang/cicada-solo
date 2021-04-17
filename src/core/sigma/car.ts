@@ -21,14 +21,20 @@ export class Car implements Exp {
   }
 
   static apply(target: Value): Value {
-    return match_value(target, {
-      ConsValue: (cons: ConsValue) => cons.car,
-      NotYetValue: ({ t, neutral }: NotYetValue) =>
-        match_value(t, {
-          SigmaValue: (sigma: SigmaValue) =>
-            new NotYetValue(sigma.car_t, new CarNeutral(neutral)),
-        }),
-    })
+    return match_value(target, [
+      [ConsValue, (cons: ConsValue) => cons.car],
+      [
+        NotYetValue,
+        ({ t, neutral }: NotYetValue) =>
+          match_value(t, [
+            [
+              SigmaValue,
+              (sigma: SigmaValue) =>
+                new NotYetValue(sigma.car_t, new CarNeutral(neutral)),
+            ],
+          ]),
+      ],
+    ])
   }
 
   infer(ctx: Ctx): Value {
