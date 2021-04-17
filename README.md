@@ -1,4 +1,4 @@
-# Cicada
+# Cicada Language
 
 ## Community
 
