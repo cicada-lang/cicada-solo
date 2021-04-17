@@ -1,3 +1,5 @@
+- support relative path in `@import`
+
 # repl
 
 - [repl] `cli/commands/repl.ts` -- by `*.piece_by_piece`

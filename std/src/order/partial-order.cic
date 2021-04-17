@@ -1,4 +1,4 @@
-@import "pre-order.cic" { PreOrder }
+@import "order/pre-order.cic" { PreOrder }
 
 // NOTE No cycle.
 // NOTE Can implement:

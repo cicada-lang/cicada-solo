@@ -1,4 +1,4 @@
-@import "category.cic" { Category }
+@import "category/category.cic" { Category }
 
 @class Monomorphism [
   cat: Category
