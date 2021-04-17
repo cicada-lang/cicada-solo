@@ -24,8 +24,12 @@ export function match_value<A>(
     ut.aline(`
       |Value mismatch.
       |
-      |I am expecting javascript classes: ${branches.map(([theClass]) => theClass).join(", ")},
-      |but in reality, the target constructor name is ${target.constructor.name}.
+      |I am expecting javascript classes: ${branches
+        .map(([theClass]) => theClass)
+        .join(", ")},
+      |but in reality, the target constructor name is ${
+        target.constructor.name
+      }.
       |`)
   )
 }
