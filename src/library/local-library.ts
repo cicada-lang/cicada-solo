@@ -29,22 +29,30 @@ export class LocalLibrary implements Library {
     })
   }
 
-  async load(
+  async reload(
     path: string,
     opts: {
-      force?: boolean
       verbose?: boolean
       silent?: boolean
     } = {
-      force: false,
       verbose: false,
       silent: false,
     }
   ): Promise<Module> {
-    if (opts?.force) {
-      this.cached_mods.delete(path)
-    }
+    this.cached_mods.delete(path)
+    return await this.load(path, opts)
+  }
 
+  async load(
+    path: string,
+    opts: {
+      verbose?: boolean
+      silent?: boolean
+    } = {
+      verbose: false,
+      silent: false,
+    }
+  ): Promise<Module> {
     const cached = this.cached_mods.get(path)
     if (cached) {
       if (opts.verbose) {

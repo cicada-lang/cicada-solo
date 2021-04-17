@@ -15,6 +15,10 @@ export class SingleFileLibrary implements Library {
     })
   }
 
+  async reload(path: string): Promise<Module> {
+    return await this.load(path)
+  }
+
   async load(name: string): Promise<Module> {
     if (name !== this.path) {
       throw new Error(

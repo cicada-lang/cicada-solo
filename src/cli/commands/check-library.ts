@@ -61,7 +61,7 @@ async function watch(
     const path = file.slice(prefix.length)
 
     try {
-      const mod = await library.load(path, { ...opts, force: true })
+      const mod = await library.reload(path, opts)
       await mod_snapshot(library, path, mod)
 
       console.log(

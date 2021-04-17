@@ -1,3 +1,5 @@
+- `Library.reload`
+
 # repl
 
 - [repl] `cli/commands/repl.ts` -- by `*.piece_by_piece`
