@@ -20,10 +20,6 @@ export class SingleFileLibrary implements Library {
     return new Map([[this.path, text]])
   }
 
-  async resolve_path(path: string): Promise<string> {
-    return this.path
-  }
-
   async reload(path: string): Promise<Module> {
     return await this.load(path)
   }

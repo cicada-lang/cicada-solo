@@ -46,11 +46,6 @@ export class LocalLibrary implements Library {
     return files
   }
 
-  async resolve_path(path: string): Promise<string> {
-    // TODO
-    return path
-  }
-
   async load(
     path: string,
     opts: {
