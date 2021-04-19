@@ -32,8 +32,8 @@ test_load().catch((error) => {
 async function test_import(): Promise<void> {
   const file = "../../stdlib/library.json"
   const lib = await LocalLibrary.from_config_file(Path.resolve(__dirname, file))
-  const mod = await lib.load("category/category-functor.cic")
-  const cached = await lib.load("category/category-functor.cic")
+  const mod = await lib.load("category/functor.cic")
+  const cached = await lib.load("category/functor.cic")
   ut.assert_equal(mod === cached, true)
 }
 

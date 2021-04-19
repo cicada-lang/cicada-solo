@@ -1,5 +1,5 @@
 @import "category/category.cic" { Category }
-@import "category/category-functor.cic" { Functor }
+@import "category/functor.cic" { Functor }
 
 @class NaturalTransformation [
   dom: Category
