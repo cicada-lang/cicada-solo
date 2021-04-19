@@ -1,4 +1,4 @@
-@import "category/category-natural-transformation.cic" { NaturalTransformation }
+@import "category/natural-transformation.cic" { NaturalTransformation }
 
 @show NaturalTransformation
 @show NaturalTransformation
