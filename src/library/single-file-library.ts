@@ -25,7 +25,7 @@ export class SingleFileLibrary implements Library {
   }
 
   async reload(path: string): Promise<Module> {
-    return await this.load(await this.resolve_path(path))
+    return await this.load(path)
   }
 
   async load(path: string): Promise<Module> {
