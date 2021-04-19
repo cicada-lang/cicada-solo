@@ -1,1 +1,1 @@
-# Cicada Language Standard Library
+# 蟬語標準文庫 / Cicada Language Standard Library
