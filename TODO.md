@@ -1,4 +1,4 @@
-- support relative path in `@import`
+- support absolute & relative path in `@import`
 
 # repl
 
