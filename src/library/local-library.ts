@@ -29,18 +29,26 @@ export class LocalLibrary implements Library {
     })
   }
 
-  async reload(
-    path: string,
-    opts: {
-      verbose?: boolean
-      silent?: boolean
-    } = {
-      verbose: false,
-      silent: false,
+  async fetch_files(): Promise<Map<string, string>> {
+    const src_dir = Path.resolve(this.root_dir, this.config.src)
+
+    const files = new Map()
+    for await (const { path } of readdirp(src_dir)) {
+      if (path.endsWith(".cic")) {
+        const file = Path.isAbsolute(path)
+          ? path
+          : Path.resolve(this.root_dir, this.config.src, path)
+        const text = await fs.promises.readFile(file, "utf8")
+        files.set(path, text)
+      }
     }
-  ): Promise<Module> {
-    this.cached_mods.delete(path)
-    return await this.load(path, opts)
+
+    return files
+  }
+
+  async resolve_path(path: string): Promise<string> {
+    // TODO
+    return path
   }
 
   async load(
@@ -94,21 +102,18 @@ export class LocalLibrary implements Library {
     return mod
   }
 
-  async fetch_files(): Promise<Map<string, string>> {
-    const src_dir = Path.resolve(this.root_dir, this.config.src)
-
-    const files = new Map()
-    for await (const { path } of readdirp(src_dir)) {
-      if (path.endsWith(".cic")) {
-        const file = Path.isAbsolute(path)
-          ? path
-          : Path.resolve(this.root_dir, this.config.src, path)
-        const text = await fs.promises.readFile(file, "utf8")
-        files.set(path, text)
-      }
+  async reload(
+    path: string,
+    opts: {
+      verbose?: boolean
+      silent?: boolean
+    } = {
+      verbose: false,
+      silent: false,
     }
-
-    return files
+  ): Promise<Module> {
+    this.cached_mods.delete(path)
+    return await this.load(path, opts)
   }
 
   async load_mods(

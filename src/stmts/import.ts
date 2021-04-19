@@ -20,13 +20,14 @@ export class Import implements Stmt {
   }
 
   async execute(mod: Module): Promise<void> {
-    const imported = await mod.library.load(this.path)
+    const path = await mod.library.resolve_path(this.path)
+    const imported = await mod.library.load(path)
     for (const { name, alias } of this.entries) {
       const t = imported.ctx.lookup(name)
       const value = imported.env.lookup(name)
       if (!t || !value) {
         throw new Error(
-          `I meet undefined name: ${name}, when importing from ${this.path}`
+          `I meet undefined name: ${name}, when importing from ${path}`
         )
       }
 
