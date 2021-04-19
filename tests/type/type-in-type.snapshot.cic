@@ -1,0 +1,11 @@
+@def type
+@the Type
+Type
+
+@show type
+
+@def pair_of_types
+@the Type
+(Type * Type)
+
+@show pair_of_types
