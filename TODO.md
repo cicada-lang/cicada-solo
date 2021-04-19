@@ -1,7 +1,7 @@
 # pie
 
 - [pie] `List` -- `List` `li()` `nil`
-- [pie] `Vector` --  `Vector` `vli()` `vnil`
+- [pie] `Vector` --  `Vector` `vec()` `vecnil`
 
 # cicada
 
