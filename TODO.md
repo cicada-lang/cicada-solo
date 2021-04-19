@@ -1,9 +1,3 @@
-# repl
-
-- [repl] `cli/commands/repl.ts` -- by `*.piece_by_piece`
-- [repl] `cic repl` alias to `cic`
-- [repl] `./dev` test `cic repl`
-
 # pie
 
 - [pie] `List` -- `List` `li()` `nil`
