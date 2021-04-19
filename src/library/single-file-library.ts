@@ -21,18 +21,17 @@ export class SingleFileLibrary implements Library {
   }
 
   async resolve_path(path: string): Promise<string> {
-    // TODO
-    return path
+    return this.path
   }
 
   async reload(path: string): Promise<Module> {
-    return await this.load(path)
+    return await this.load(await this.resolve_path(path))
   }
 
-  async load(name: string): Promise<Module> {
-    if (name !== this.path) {
-      throw new Error(
-        `The single file library can not load module: ${name}\n` +
+  async load(path: string): Promise<Module> {
+    if (path !== this.path) {
+      console.warn(
+        `The single file library can not load module: ${path}\n` +
           `The only file in this library is: ${this.path}`
       )
     }

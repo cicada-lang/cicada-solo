@@ -1,5 +1,4 @@
 - `LocalLibrary.resolve_path`
-- `SingleFileLibrary.resolve_path`
 
 - support absolute & relative path in `@import`
 
