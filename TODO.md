@@ -3,6 +3,15 @@
 - [pie] `List` -- `List` `li()` `nil`
 - [pie] `Vector` --  `Vector` `vec()` `vecnil`
 
+# questions?
+
+- what is the duality between introduction rule and elimination rule?
+  (how to use introduction rule to generate elimination rule and all other rules?)
+  - adjoint functors -- category theory
+
+- how to explain the formation rule, introduction rule and elimination rule as little style laws?
+  how to explain the computation rule, eta rule and sameness rules as little book style commandments?
+
 # cicada
 
 - [class] -- handle `this`
