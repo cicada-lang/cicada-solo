@@ -11,6 +11,7 @@
 
 - how to explain the formation rule, introduction rule and elimination rule as little style laws?
 - how to explain the computation rule, eta rule and sameness rules as little book style commandments?
+
 - what is elaboration?
 - about implementing dependent type system (without recursion),
   are there any point I am still missing?
