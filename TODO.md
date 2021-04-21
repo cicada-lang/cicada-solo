@@ -1,6 +1,8 @@
 # pie
 
 - [pie] `List` -- `List` `li()` `nil`
+  - without elaboration, try to implement list now and see what will happen.
+
 - [pie] `Vector` --  `Vector` `vec()` `vecnil`
 
 # questions?
