@@ -1,19 +1,34 @@
 // 1. The More Things Change, the More They Stay the Same
 
-@show @the String "ratatouille"
-@show @the (String * String) cons("ratatouille", "baguette")
-@show @the Equal(String, "ratatouille", "ratatouille") same
+@show
+@the String
+"ratatouille"
 
-@show @the Equal(
+@show
+@the (String * String)
+cons("ratatouille", "baguette")
+
+@show
+@the Equal(
+  String,
+  "ratatouille",
+  "ratatouille")
+same
+
+@show
+@the Equal(
   (String * String),
   cons("ratatouille", "baguette"),
   cons("ratatouille", "baguette"))
 same
 
-@show @the String
-  car(@the (String * String) cons("ratatouille", "baguette"))
+@show
+@the String
+car(@the (String * String) cons("ratatouille", "baguette"))
 
-@show @the Equal(String,
+@show
+@the Equal(
+  String,
   "ratatouille",
   car(@the (String * String) cons("ratatouille", "baguette")))
 same
@@ -23,13 +38,15 @@ same
 @show @the Type Type
 @show @the Equal(Type, String, String) same
 
-@show @the Type
+@show
+@the Type
 (car(@the (Type * String) cons(String, "olive")) *
  cdr(@the (String * Type) cons("oil", String)))
 
-@show @the
-(car(@the (Type * String) cons(String, "olive")) *
- cdr(@the (String * Type) cons("oil", String)))
+@show
+@the (
+  car(@the (Type * String) cons(String, "olive")) *
+  cdr(@the (String * Type) cons("oil", String)))
 cons(
   cdr(@the (Type * String) cons(String, "olive")),
   car(@the (String * Type) cons("oil", String)))
