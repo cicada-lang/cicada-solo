@@ -42,10 +42,10 @@
 (x, y) => nat_iter(y, Nat, x, (almost) => add1(almost))
 
 @def mul @the (Nat, Nat) -> Nat
-(x, y) => nat_iter(y, Nat, 0, (almost) => add(almost)(x))
+(x, y) => nat_iter(y, Nat, 0, (almost) => add(almost, x))
 
 @def pow @the (Nat, Nat) -> Nat
-(x, y) => nat_iter(y, Nat, 1, (almost) => mul(almost)(x))
+(x, y) => nat_iter(y, Nat, 1, (almost) => mul(almost, x))
 
 @def eight
 @let four add(2, 2)
