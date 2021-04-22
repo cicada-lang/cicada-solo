@@ -10,8 +10,12 @@
 // @nil
 
 @def nat_rec_t
-@the Type
-(X: Type, target: Nat, base: X, step: (prev: Nat, almost: X) -> X) -> X
+@the Type (
+  X: Type,
+  target: Nat,
+  base: T,
+  step: (prev: Nat, almost: T) -> T,
+) -> T
 
 @show nat_rec_t
 
@@ -20,7 +24,12 @@
 (_) => Type // TODO
 
 @def list_rec_t
-@the Type
-(E: Type, target: List(E), X: Type, base: X, step: (head: E, tail: List(E), almost: X) -> X) -> X
+the Type (
+  E: Type,
+  target: List(E),
+  T: Type,
+  base: T,
+  step: (head: E, tail: List(E), almost: T) -> T,
+) -> T
 
 @show list_rec_t
