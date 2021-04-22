@@ -35,7 +35,13 @@
 @show list_rec_t
 
 @def step_length_t
-@the Type (E: Type, head: E, tail: List(E), almost: Nat) -> Nat
+@the Type (E: Type) -> (head: E, tail: List(E), almost: Nat) -> Nat
 
 @def length_t
-@the Type (E: Type, List(String)) -> Nat
+@the Type (E: Type) -> (List(E)) -> Nat
+
+@def append_t
+@the Type (E: Type) -> (List(E), List(E)) -> List(E)
+
+@def step_append_t
+@the Type (E: Type) -> (head: E, tail: List(E), almost: List(E)) -> List(E)
