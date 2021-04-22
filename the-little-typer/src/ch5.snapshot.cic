@@ -33,3 +33,9 @@
 ) -> T
 
 @show list_rec_t
+
+@def step_length_t
+@the Type (E: Type, head: E, tail: List(E), almost: Nat) -> Nat
+
+@def length_t
+@the Type (E: Type, List(String)) -> Nat
