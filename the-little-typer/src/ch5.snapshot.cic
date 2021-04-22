@@ -21,7 +21,7 @@
 
 @def List
 @the (Type) -> Type
-(_) => Type // TODO
+(_) => Type // NOTE not really
 
 @def list_rec_t
 @the Type (
