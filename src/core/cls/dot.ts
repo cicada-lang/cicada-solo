@@ -22,26 +22,6 @@ export class Dot implements Exp {
     return Dot.apply(evaluate(env, this.target), this.name)
   }
 
-  static apply(target: Value, name: string): Value {
-    return match_value(target, [
-      [ObjValue, (obj: ObjValue) => obj.dot(name)],
-      [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
-          match_value(t, [
-            [
-              ClsValue,
-              (cls: ClsValue) =>
-                new NotYetValue(
-                  cls.dot(target, name),
-                  new DotNeutral(neutral, name)
-                ),
-            ],
-          ]),
-      ],
-    ])
-  }
-
   infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
 
@@ -63,5 +43,25 @@ export class Dot implements Exp {
 
   alpha_repr(ctx: AlphaCtx): string {
     return `${this.target.alpha_repr(ctx)}.${this.name}`
+  }
+
+  static apply(target: Value, name: string): Value {
+    return match_value(target, [
+      [ObjValue, (obj: ObjValue) => obj.dot(name)],
+      [
+        NotYetValue,
+        ({ t, neutral }: NotYetValue) =>
+          match_value(t, [
+            [
+              ClsValue,
+              (cls: ClsValue) =>
+                new NotYetValue(
+                  cls.dot(target, name),
+                  new DotNeutral(neutral, name)
+                ),
+            ],
+          ]),
+      ],
+    ])
   }
 }

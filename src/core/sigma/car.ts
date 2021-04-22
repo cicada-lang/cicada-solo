@@ -20,6 +20,20 @@ export class Car implements Exp {
     return Car.apply(evaluate(env, this.target))
   }
 
+  infer(ctx: Ctx): Value {
+    const target_t = infer(ctx, this.target)
+    const sigma = expect(ctx, target_t, SigmaValue)
+    return sigma.car_t
+  }
+
+  repr(): string {
+    return `car(${this.target.repr()})`
+  }
+
+  alpha_repr(ctx: AlphaCtx): string {
+    return `car(${this.target.alpha_repr(ctx)})`
+  }
+
   static apply(target: Value): Value {
     return match_value(target, [
       [ConsValue, (cons: ConsValue) => cons.car],
@@ -35,19 +49,5 @@ export class Car implements Exp {
           ]),
       ],
     ])
-  }
-
-  infer(ctx: Ctx): Value {
-    const target_t = infer(ctx, this.target)
-    const sigma = expect(ctx, target_t, SigmaValue)
-    return sigma.car_t
-  }
-
-  repr(): string {
-    return `car(${this.target.repr()})`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    return `car(${this.target.alpha_repr(ctx)})`
   }
 }

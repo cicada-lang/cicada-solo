@@ -35,6 +35,29 @@ export class Replace implements Exp {
     )
   }
 
+  infer(ctx: Ctx): Value {
+    const target_t = infer(ctx, this.target)
+    const equal = expect(ctx, target_t, EqualValue)
+    const motive_t = evaluate(
+      new Env().extend("t", equal.t),
+      new Pi("x", new Var("t"), new Type())
+    )
+    check(ctx, this.motive, motive_t)
+    const motive_value = evaluate(ctx.to_env(), this.motive)
+    check(ctx, this.base, Ap.apply(motive_value, equal.from))
+    return Ap.apply(motive_value, equal.to)
+  }
+
+  repr(): string {
+    return `replace(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()})`
+  }
+
+  alpha_repr(ctx: AlphaCtx): string {
+    return `replace(${this.target.alpha_repr(ctx)}, ${this.motive.alpha_repr(
+      ctx
+    )}, ${this.base.alpha_repr(ctx)})`
+  }
+
   static apply(target: Value, motive: Value, base: Value): Value {
     return match_value(target, [
       [SameValue, (_: SameValue) => base],
@@ -61,28 +84,5 @@ export class Replace implements Exp {
           ]),
       ],
     ])
-  }
-
-  infer(ctx: Ctx): Value {
-    const target_t = infer(ctx, this.target)
-    const equal = expect(ctx, target_t, EqualValue)
-    const motive_t = evaluate(
-      new Env().extend("t", equal.t),
-      new Pi("x", new Var("t"), new Type())
-    )
-    check(ctx, this.motive, motive_t)
-    const motive_value = evaluate(ctx.to_env(), this.motive)
-    check(ctx, this.base, Ap.apply(motive_value, equal.from))
-    return Ap.apply(motive_value, equal.to)
-  }
-
-  repr(): string {
-    return `replace(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()})`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    return `replace(${this.target.alpha_repr(ctx)}, ${this.motive.alpha_repr(
-      ctx
-    )}, ${this.base.alpha_repr(ctx)})`
   }
 }
