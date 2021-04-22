@@ -8,3 +8,8 @@
 // @li "understood"
 // @li "slept"
 // @nil
+
+@def list_rec_t @the Type
+(X: Type, target: Nat, base: X, step: (Nat, X) -> X) -> X
+
+@show list_rec_t
