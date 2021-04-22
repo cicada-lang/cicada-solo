@@ -1,6 +1,6 @@
-# 蟬語 / Cicada Language
+# 蝉语 / Cicada Language
 
-## 社區 / Community
+## 社区 / Community
 
 Contributions are welcome, see [current TODO list](TODO.md) for tasks. <br>
 (Please add yourself to [the AUTHORS list](AUTHORS) if you made any contributions.)
@@ -11,6 +11,6 @@ Contributions are welcome, see [current TODO list](TODO.md) for tasks. <br>
   - Observe the style of existing code and respect it.
 - [Code of Conduct](CODE-OF-CONDUCT.md)
 
-## 協議 / License
+## 协议 / License
 
 - [GPLv3](LICENSE)
