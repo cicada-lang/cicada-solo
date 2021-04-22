@@ -11,7 +11,7 @@
 
 @def nat_rec_t
 @the Type (
-  X: Type,
+  T: Type,
   target: Nat,
   base: T,
   step: (prev: Nat, almost: T) -> T,
@@ -24,7 +24,7 @@
 (_) => Type // TODO
 
 @def list_rec_t
-the Type (
+@the Type (
   E: Type,
   target: List(E),
   T: Type,
