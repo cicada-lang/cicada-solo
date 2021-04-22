@@ -8,31 +8,40 @@
   step: (prev: Nat, almost: motive(prev)) -> motive(add1(prev)),
 ) -> motive(target)
 
-@def nat_rec
-@the (
+@def nat_rec_t
+@the Type (
   target: Nat,
   T: Type,
   base: T,
   step: (prev: Nat, almost: T) -> T,
 ) -> T
-(target, T, base, step) => nat_ind(target, (_) => T, base, step)
 
-@def nat_which
-@the (
+@def nat_which_t
+@the Type (
   target: Nat,
   T: Type,
   base: T,
   step: (prev: Nat) -> T,
 ) -> T
-(target, T, base, step) => nat_rec(target, T, base, (prev, _almost) => step(prev))
 
-@def nat_iter
-@the (
+@def nat_iter_t
+@the Type (
   target: Nat,
   T: Type,
   base: T,
   step: (almost: T) -> T,
 ) -> T
+
+@def nat_rec
+@the nat_rec_t
+(target, T, base, step) => nat_ind(target, (_) => T, base, step)
+
+@def nat_which
+@the nat_which_t
+(target, T, base, step) => nat_rec(target, T, base, (prev, _almost) => step(prev))
+
+@def nat_iter
+@the nat_iter_t
 (target, T, base, step) => nat_rec(target, T, base, (_prev, almost) => step(almost))
 
 // NOTE We use `y` as target, this will make
