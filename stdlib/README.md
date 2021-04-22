@@ -1,1 +1,1 @@
-# 蝉语标准文库 / Cicada Language Standard Library
+# 蝉语标准文库 / Cicada Standard Library
