@@ -1,0 +1,26 @@
+// 5. Lists, Lists, and More Lists
+
+// @def expectations
+// @the List(String)
+// @li cooked
+// @li "eaten"
+// @li "tried-cleaning"
+// @li "understood"
+// @li "slept"
+// @nil
+
+@def nat_rec_t
+@the Type
+(X: Type, target: Nat, base: X, step: (prev: Nat, almost: X) -> X) -> X
+
+@show nat_rec_t
+
+@def List
+@the (Type) -> Type
+(_) => Type // TODO
+
+@def list_rec_t
+@the Type
+(E: Type, target: List(E), X: Type, base: X, step: (head: E, tail: List(E), almost: X) -> X) -> X
+
+@show list_rec_t

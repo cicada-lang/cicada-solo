@@ -1,0 +1,2 @@
+@the Type (X: Type) -> (target: Nat) -> (base: X) -> (step: (prev: Nat) -> (almost: X) -> X) -> X
+@the Type (E: Type) -> (target: Type) -> (X: Type) -> (base: X) -> (step: (head: E) -> (tail: Type) -> (almost: X) -> X) -> X
