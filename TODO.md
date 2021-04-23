@@ -1,8 +1,5 @@
 > without elaboration, try to implement list now and see what will happen.
 
-- `Nil`
-- `NilValue`
-
 - [syntax] `nil` & `@nil`
 
 - `Li`
