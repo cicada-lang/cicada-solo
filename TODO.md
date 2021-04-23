@@ -1,12 +1,21 @@
 > without elaboration, try to implement list now and see what will happen.
 
+- [syntax] `List(elem_t)`
+
 - `Nil`
 - `NilValue`
+
+- [syntax] `nil` & `@nil`
 
 - `Li`
 - `LiValue`
 
+- [syntax] `li(head, tail)` & `@li head tail`
+
 - `ListValue.eta_expand`
+
+- `ListInd`
+- `ListIndNeutral`
 
 # pie
 
