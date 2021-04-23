@@ -1,9 +1,14 @@
-# pie
+> without elaboration, try to implement list now and see what will happen.
+
+- `Nil`
+- `NilValue`
+
+- `Li`
+- `LiValue`
 
 - `ListValue.eta_expand`
 
-- [pie] `List` -- `List` `li()` `nil`
-  - without elaboration, try to implement list now and see what will happen.
+# pie
 
 - [elaboration] implement `nat_rec` directly -- by elaboration
 
