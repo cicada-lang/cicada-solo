@@ -1,5 +1,13 @@
 # pie
 
+- `List.evaluate`
+- `List.infer`
+- `List.repr`
+- `List.alpha_repr`
+
+- `ListValue.readback`
+- `ListValue.eta_expand`
+
 - [pie] `List` -- `List` `li()` `nil`
   - without elaboration, try to implement list now and see what will happen.
 
