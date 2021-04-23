@@ -1,0 +1,11 @@
+@show
+@the Type
+List(Nat)
+
+@show
+@the Type
+List(List(Nat))
+
+@show
+@the Type
+List(List(List(Nat)))

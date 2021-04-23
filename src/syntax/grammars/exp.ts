@@ -70,6 +70,7 @@ export const exp = {
       { step: "exp" },
       '")"',
     ],
+    "exp:list": ['"List"', '"("', { elem_t: "exp" }, '")"'],
     "exp:equal": [
       '"Equal"',
       '"("',

@@ -19,10 +19,6 @@
 
 @show nat_rec_t
 
-@def List
-@the (Type) -> Type
-(_) => Type // NOTE not really
-
 @def list_rec_t
 @the Type (
   E: Type,
