@@ -1,6 +1,5 @@
 # pie
 
-- `ListValue.readback`
 - `ListValue.eta_expand`
 
 - [pie] `List` -- `List` `li()` `nil`

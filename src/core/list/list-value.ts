@@ -12,6 +12,8 @@ export class ListValue {
   }
 
   readback(ctx: Ctx, t: Value): Exp | undefined {
-    throw new Error("TODO")
+    if (t instanceof TypeValue) {
+      return new List(readback(ctx, new TypeValue(), this.elem_t))
+    }
   }
 }
