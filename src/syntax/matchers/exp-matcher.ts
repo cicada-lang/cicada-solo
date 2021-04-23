@@ -83,7 +83,7 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:add1": ({ prev }) => new Add1(exp_matcher(prev)),
     "exp:list": ({ elem_t }) => new List(exp_matcher(elem_t)),
     "exp:nil": () => new Nil(),
-    "exp:nil_sugar": () => new new Nil()(),
+    "exp:nil_sugar": () => new Nil(),
     "exp:number": ({ value }, { span }) => {
       const n = Number.parseInt(pt.str(value))
       if (Number.isNaN(n)) {

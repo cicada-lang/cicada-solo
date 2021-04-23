@@ -1,0 +1,15 @@
+@show
+@the List(Nat)
+nil
+
+@show
+@the List(Nat)
+@nil
+
+@show
+@the List(List(Nat))
+nil
+
+@show
+@the List(List(Nat))
+@nil
