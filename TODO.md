@@ -1,10 +1,5 @@
 # pie
 
-- `List.evaluate`
-- `List.infer`
-- `List.repr`
-- `List.alpha_repr`
-
 - `ListValue.readback`
 - `ListValue.eta_expand`
 

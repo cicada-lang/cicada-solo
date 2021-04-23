@@ -1,6 +1,8 @@
 import { Exp, AlphaCtx } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
+import { check } from "../../check"
+import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
 import { TypeValue } from "../../core"
 import { ListValue } from "../../core"
@@ -13,18 +15,19 @@ export class List implements Exp {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
+    return new ListValue(evaluate(env, this.elem_t))
   }
 
   infer(ctx: Ctx): Value {
-    throw new Error("TODO")
+    check(ctx, this.elem_t, new TypeValue())
+    return new TypeValue()
   }
 
   repr(): string {
-    throw new Error("TODO")
+    return `List(${this.elem_t.repr()})`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    throw new Error("TODO")
+    return `List(${this.elem_t.alpha_repr(ctx)})`
   }
 }
