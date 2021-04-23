@@ -3,7 +3,7 @@
 - [pie] `List` -- `List` `li()` `nil`
   - without elaboration, try to implement list now and see what will happen.
 
-- [elaboration] implement `nat_rec`, `nat_iter` & `nat_which` directly -- by elaboration
+- [elaboration] implement `nat_rec` directly -- by elaboration
 
 - [pie] `Vector` --  `Vector` `vec()` `vecnil`
 
