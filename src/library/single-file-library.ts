@@ -15,6 +15,11 @@ export class SingleFileLibrary implements Library {
     })
   }
 
+  async fetch_file(path: string): Promise<string> {
+    const text = fs.readFileSync(this.path, { encoding: "utf-8" })
+    return text
+  }
+
   async fetch_files(): Promise<Map<string, string>> {
     const text = fs.readFileSync(this.path, { encoding: "utf-8" })
     return new Map([[this.path, text]])

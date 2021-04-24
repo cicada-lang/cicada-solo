@@ -1,3 +1,8 @@
+- `Library.fetch_files` -- return `Record` instead of `Map`
+- `Library.load_mod` -- instead of `Library.load`
+- `Library.reload_mod` -- instead of `Library.reload`
+- `Library.load_mods` -- return `Record` instead of `Map`
+
 > without elaboration, try to implement list now and see what will happen.
 > - maybe we can not implement the `list_rec` with simple type signature.
 

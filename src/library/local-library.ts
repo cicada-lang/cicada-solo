@@ -29,6 +29,16 @@ export class LocalLibrary implements Library {
     })
   }
 
+  async fetch_file(path: string): Promise<string> {
+    const src_dir = Path.resolve(this.root_dir, this.config.src)
+
+    const file = Path.isAbsolute(path)
+      ? path
+      : Path.resolve(this.root_dir, this.config.src, path)
+    const text = await fs.promises.readFile(file, "utf8")
+    return text
+  }
+
   async fetch_files(): Promise<Map<string, string>> {
     const src_dir = Path.resolve(this.root_dir, this.config.src)
 
