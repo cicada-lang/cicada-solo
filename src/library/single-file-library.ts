@@ -20,9 +20,9 @@ export class SingleFileLibrary implements Library {
     return text
   }
 
-  async fetch_files(): Promise<Map<string, string>> {
+  async fetch_files(): Promise<Record<string, string>> {
     const text = fs.readFileSync(this.path, { encoding: "utf-8" })
-    return new Map([[this.path, text]])
+    return { [this.path]: text }
   }
 
   async reload(path: string): Promise<Module> {

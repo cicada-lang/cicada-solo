@@ -73,8 +73,7 @@ async function watch(
       if (error instanceof Trace) {
         console.error(error.repr((exp) => exp.repr()))
       } else if (error instanceof pt.ParsingError) {
-        const files = await library.fetch_files()
-        const text = files.get(path)
+        const text = await library.fetch_file(path)
         if (!text) {
           console.error(`Unknown path: ${path}`)
         } else {
