@@ -28,6 +28,6 @@ export class Li implements Exp {
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    throw new Error("TODO")
+    return `li(${this.head.alpha_repr(ctx)}, ${this.tail.alpha_repr(ctx)})`
   }
 }
