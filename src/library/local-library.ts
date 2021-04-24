@@ -30,8 +30,6 @@ export class LocalLibrary implements Library {
   }
 
   async fetch_file(path: string): Promise<string> {
-    const src_dir = Path.resolve(this.root_dir, this.config.src)
-
     const file = Path.isAbsolute(path)
       ? path
       : Path.resolve(this.root_dir, this.config.src, path)
@@ -45,10 +43,7 @@ export class LocalLibrary implements Library {
     const files: Record<string, string> = {}
     for await (const { path } of readdirp(src_dir)) {
       if (path.endsWith(".cic")) {
-        const file = Path.isAbsolute(path)
-          ? path
-          : Path.resolve(this.root_dir, this.config.src, path)
-        const text = await fs.promises.readFile(file, "utf8")
+        const text = await this.fetch_file(path)
         files[path] = text
       }
     }
@@ -76,10 +71,7 @@ export class LocalLibrary implements Library {
 
     const t0 = Date.now()
 
-    const file = Path.isAbsolute(path)
-      ? path
-      : Path.resolve(this.root_dir, this.config.src, path)
-    const text = await fs.promises.readFile(file, "utf8")
+    const text = await this.fetch_file(path)
     const stmts = Syntax.parse_stmts(text)
 
     const t1 = Date.now()

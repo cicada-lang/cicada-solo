@@ -1,11 +1,3 @@
-- `Library.load_mods` -- return `Record` instead of `Map`
-- `Library.load_mod` -- instead of `Library.load`
-- `Library.reload_mod` -- instead of `Library.reload`
-
-- `Library.fetch_file` -- might return `undefined`
-- `Library.load_mod` -- might return `undefined`
-- `Library.reload_mod` -- might return `undefined`
-
 > without elaboration, try to implement list now and see what will happen.
 > - maybe we can not implement the `list_rec` with simple type signature.
 

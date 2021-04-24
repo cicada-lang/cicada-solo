@@ -34,7 +34,7 @@ async function check(
   opts: { verbose: boolean }
 ): Promise<void> {
   try {
-    const mods = await library.load_mods(opts)
+    await library.load_mods(opts)
     await library_snapshot(library)
   } catch (error) {
     if (error instanceof Trace) {
@@ -96,7 +96,7 @@ async function watch(
 }
 
 async function library_snapshot(library: LocalLibrary): Promise<void> {
-  for (const [path, mod] of library.cached_mods) {
+  for (const [path, mod] of await library.load_mods()) {
     mod_snapshot(library, path, mod)
   }
 }
