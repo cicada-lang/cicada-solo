@@ -1,0 +1,19 @@
+@def step_list_length
+@the (E: Type) -> (e: E, es: List(E), almost: Nat) -> Nat
+  (E) => (e, es, almost) => add1(almost)
+
+@def list_length
+@the (E: Type) -> (List(E)) -> Nat
+(E) => (x) => list_ind(x, (_) => Nat, 0, step_list_length(E))
+
+@def expectations
+@the List(String)
+@li "cooked"
+@li "eaten"
+@li "tried-cleaning"
+@li "understood"
+@li "slept"
+@nil
+
+@show
+list_length(String, expectations)
