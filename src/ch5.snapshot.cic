@@ -1,13 +1,15 @@
 // 5. Lists, Lists, and More Lists
 
-// @def expectations
-// @the List(String)
-// @li cooked
-// @li "eaten"
-// @li "tried-cleaning"
-// @li "understood"
-// @li "slept"
-// @nil
+@def expectations
+@the List(String)
+@li "cooked"
+@li "eaten"
+@li "tried-cleaning"
+@li "understood"
+@li "slept"
+@nil
+
+@show expectations
 
 @def nat_rec_t
 @the Type (
@@ -18,10 +20,6 @@
 ) -> T
 
 @show nat_rec_t
-
-@def List
-@the (Type) -> Type
-(_) => Type // NOTE not really
 
 @def list_rec_t
 @the Type (
