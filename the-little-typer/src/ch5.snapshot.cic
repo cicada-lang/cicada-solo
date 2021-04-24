@@ -9,6 +9,8 @@
 @li "slept"
 @nil
 
+@show expectations
+
 @def nat_rec_t
 @the Type (
   T: Type,
