@@ -1,3 +1,4 @@
 @the List(String) li("cooked", li("eaten", li("tried-cleaning", li("understood", li("slept", nil)))))
 @the Type (T: Type) -> (target: Nat) -> (base: T) -> (step: (prev: Nat) -> (almost: T) -> T) -> T
 @the Type (E: Type) -> (target: List(E)) -> (T: Type) -> (base: T) -> (step: (head: E) -> (tail: List(E)) -> (almost: T) -> T) -> T
+@the Nat 5
