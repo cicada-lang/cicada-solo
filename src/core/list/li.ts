@@ -16,10 +16,10 @@ export class Li implements Exp {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
+    return new LiValue(evaluate(env, this.head), evaluate(env, this.tail))
   }
 
-  infer(ctx: Ctx): Value {
+  check(ctx: Ctx, t: Value): void {
     throw new Error("TODO")
   }
 
