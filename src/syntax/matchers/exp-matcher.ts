@@ -5,7 +5,7 @@ import { Pi, Fn, Ap } from "../../core"
 import { Sigma, Cons, Car, Cdr } from "../../core"
 import { Cls, Ext, Obj, Dot } from "../../core"
 import { Nat, Zero, Add1, NatInd } from "../../core"
-import { List, Nil, Li } from "../../core"
+import { List, Nil, Li, ListInd } from "../../core"
 import { Equal, Same, Replace } from "../../core"
 import { Absurd, AbsurdInd } from "../../core"
 import { Trivial, Sole } from "../../core"
@@ -81,12 +81,6 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:nat": () => new Nat(),
     "exp:zero": () => new Zero(),
     "exp:add1": ({ prev }) => new Add1(exp_matcher(prev)),
-    "exp:list": ({ elem_t }) => new List(exp_matcher(elem_t)),
-    "exp:nil": () => new Nil(),
-    "exp:nil_sugar": () => new Nil(),
-    "exp:li": ({ head, tail }) => new Li(exp_matcher(head), exp_matcher(tail)),
-    "exp:li_sugar": ({ head, tail }) =>
-      new Li(exp_matcher(head), exp_matcher(tail)),
     "exp:number": ({ value }, { span }) => {
       const n = Number.parseInt(pt.str(value))
       if (Number.isNaN(n)) {
@@ -100,6 +94,19 @@ export function exp_matcher(tree: pt.Tree): Exp {
     },
     "exp:nat_ind": ({ target, motive, base, step }) =>
       new NatInd(
+        exp_matcher(target),
+        exp_matcher(motive),
+        exp_matcher(base),
+        exp_matcher(step)
+      ),
+    "exp:list": ({ elem_t }) => new List(exp_matcher(elem_t)),
+    "exp:nil": () => new Nil(),
+    "exp:nil_sugar": () => new Nil(),
+    "exp:li": ({ head, tail }) => new Li(exp_matcher(head), exp_matcher(tail)),
+    "exp:li_sugar": ({ head, tail }) =>
+      new Li(exp_matcher(head), exp_matcher(tail)),
+    "exp:list_ind": ({ target, motive, base, step }) =>
+      new ListInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base),
