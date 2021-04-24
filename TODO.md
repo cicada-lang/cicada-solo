@@ -1,10 +1,15 @@
 > without elaboration, try to implement list now and see what will happen.
 > - maybe we can not implement the `list_rec` with simple type signature.
 
-- `ListValue.eta_expand`
-
 - `ListInd`
-- `ListIndNeutral`
+- `ListInd.evaluate`
+- `ListInd.infer`
+- `ListInd.repr`
+- `ListInd.alpha_repr`
+
+- [syntax] `list_ind(head, tail)`
+
+- `ListValue.eta_expand`
 
 # pie
 

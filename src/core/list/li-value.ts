@@ -15,7 +15,7 @@ export class LiValue {
 
   readback(ctx: Ctx, t: Value): Exp | undefined {
     if (t instanceof ListValue) {
-      return new Li(readback(ctx, t, this.head), readback(ctx, t, this.tail))
+      return new Li(readback(ctx, t.elem_t, this.head), readback(ctx, t, this.tail))
     }
   }
 }
