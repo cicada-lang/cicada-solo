@@ -5,7 +5,7 @@ import { Pi, Fn, Ap } from "../../core"
 import { Sigma, Cons, Car, Cdr } from "../../core"
 import { Cls, Ext, Obj, Dot } from "../../core"
 import { Nat, Zero, Add1, NatInd } from "../../core"
-import { List, Nil } from "../../core"
+import { List, Nil, Li } from "../../core"
 import { Equal, Same, Replace } from "../../core"
 import { Absurd, AbsurdInd } from "../../core"
 import { Trivial, Sole } from "../../core"
@@ -84,6 +84,9 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:list": ({ elem_t }) => new List(exp_matcher(elem_t)),
     "exp:nil": () => new Nil(),
     "exp:nil_sugar": () => new Nil(),
+    "exp:li": ({ head, tail }) => new Li(exp_matcher(head), exp_matcher(tail)),
+    "exp:li_sugar": ({ head, tail }) =>
+      new Li(exp_matcher(head), exp_matcher(tail)),
     "exp:number": ({ value }, { span }) => {
       const n = Number.parseInt(pt.str(value))
       if (Number.isNaN(n)) {

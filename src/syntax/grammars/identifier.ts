@@ -10,7 +10,7 @@ const preserved = [
   "add1",
   "List",
   "nil",
-  // "li",
+  "li",
   // "list_ind",
   "Equal",
   "same",

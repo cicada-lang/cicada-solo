@@ -1,8 +1,6 @@
 > without elaboration, try to implement list now and see what will happen.
 > - maybe we can not implement the `list_rec` with simple type signature.
 
-- [syntax] `li(head, tail)` & `@li head tail`
-
 - `ListValue.eta_expand`
 
 - `ListInd`

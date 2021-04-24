@@ -73,6 +73,8 @@ export const exp = {
     "exp:list": ['"List"', '"("', { elem_t: "exp" }, '")"'],
     "exp:nil": ['"nil"'],
     "exp:nil_sugar": ['"@"', '"nil"'],
+    "exp:li": ['"li"', '"("', { head: "exp" }, '","', { tail: "exp" }, '")"'],
+    "exp:li_sugar": ['"@"', '"li"', { head: "exp" }, { tail: "exp" }],
     "exp:equal": [
       '"Equal"',
       '"("',
