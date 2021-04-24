@@ -39,7 +39,10 @@ export class NatInd implements Exp {
     // NOTE We should always infer target,
     //   but we do a simple check for the simple nat.
     check(ctx, this.target, new NatValue())
-    const motive_t = evaluate(new Env(), new Pi("target_nat", new Nat(), new Type()))
+    const motive_t = evaluate(
+      new Env(),
+      new Pi("target_nat", new Nat(), new Type())
+    )
     check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), this.motive)
     check(ctx, this.base, Ap.apply(motive_value, new ZeroValue()))
