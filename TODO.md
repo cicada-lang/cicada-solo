@@ -3,8 +3,6 @@
 
 - `ListInd.evaluate`
 - `ListInd.infer`
-- `ListInd.repr`
-- `ListInd.alpha_repr`
 
 - [syntax] `list_ind(head, tail)`
 

@@ -36,10 +36,12 @@ export class ListInd implements Exp {
   }
 
   repr(): string {
-    throw new Error("TODO")
+    return `list_ind(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()}, ${this.step.repr()})`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    throw new Error("TODO")
+    return `list_ind(${this.target.alpha_repr(ctx)}, ${this.motive.alpha_repr(
+      ctx
+    )}, ${this.base.alpha_repr(ctx)}, ${this.step.alpha_repr(ctx)})`
   }
 }
