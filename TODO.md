@@ -1,8 +1,10 @@
 > without elaboration, try to implement list now and see what will happen.
 > - maybe we can not implement the `list_rec` with simple type signature.
 
-- `Li`
-- `LiValue`
+- `Li.evaluate`
+- `Li.check`
+- `Li.repr`
+- `Li.alpha_repr`
 
 - [syntax] `li(head, tail)` & `@li head tail`
 
