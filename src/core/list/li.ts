@@ -24,7 +24,7 @@ export class Li implements Exp {
   }
 
   repr(): string {
-    throw new Error("TODO")
+    return `li(${this.head.repr()}, ${this.tail.repr()})`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
