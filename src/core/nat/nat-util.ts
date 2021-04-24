@@ -1,9 +1,5 @@
 import { Exp } from "../../exp"
-import { Value } from "../../value"
-import { Env } from "../../env"
-import { evaluate } from "../../evaluate"
-import { Nat, Zero, Add1 } from "../../core"
-import { Var, Pi, Ap } from "../../core"
+import { Zero, Add1 } from "../../core"
 
 export function nat_from_number(n: number): Exp {
   if (n <= 0) {
@@ -27,20 +23,4 @@ export function nat_to_number(exp: Exp): number | undefined {
   } else {
     return undefined
   }
-}
-
-export function nat_ind_step_t(motive: Value): Value {
-  const env = new Env().extend("motive", motive)
-
-  const step_t = new Pi(
-    "prev",
-    new Nat(),
-    new Pi(
-      "almost",
-      new Ap(new Var("motive"), new Var("prev")),
-      new Ap(new Var("motive"), new Add1(new Var("prev")))
-    )
-  )
-
-  return evaluate(env, step_t)
 }

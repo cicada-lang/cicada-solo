@@ -6,8 +6,6 @@
 
 - [syntax] `list_ind(head, tail)`
 
-- `ListValue.eta_expand`
-
 - `ListRec`
 
 # pie

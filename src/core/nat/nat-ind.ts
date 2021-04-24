@@ -6,14 +6,12 @@ import { check } from "../../check"
 import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
-import { Trace } from "../../trace"
 import { Type } from "../../core"
 import { Nat } from "../../core"
-import { Pi, Ap } from "../../core"
-import { NatValue, ZeroValue, Add1Value, NatIndNeutral } from "../../core"
+import { Var, Pi, Ap } from "../../core"
+import { Add1, NatValue, ZeroValue, Add1Value, NatIndNeutral } from "../../core"
 import { PiValue } from "../../core"
 import { NotYetValue } from "../../core"
-import { nat_ind_step_t } from "./nat-util"
 
 export class NatInd implements Exp {
   target: Exp
@@ -99,4 +97,20 @@ export class NatInd implements Exp {
       ],
     ])
   }
+}
+
+function nat_ind_step_t(motive: Value): Value {
+  const env = new Env().extend("motive", motive)
+
+  const step_t = new Pi(
+    "prev",
+    new Nat(),
+    new Pi(
+      "almost",
+      new Ap(new Var("motive"), new Var("prev")),
+      new Ap(new Var("motive"), new Add1(new Var("prev")))
+    )
+  )
+
+  return evaluate(env, step_t)
 }
