@@ -1,10 +1,10 @@
-@def step_list_length
+@def step_length
 @the (E: Type) -> (e: E, es: List(E), almost: Nat) -> Nat
   (E) => (e, es, almost) => add1(almost)
 
-@def list_length
+@def length
 @the (E: Type) -> (List(E)) -> Nat
-(E) => (x) => list_ind(x, (_) => Nat, 0, step_list_length(E))
+(E) => (x) => list_ind(x, (_) => Nat, 0, step_length(E))
 
 @def expectations
 @the List(String)
@@ -16,4 +16,4 @@
 @nil
 
 @show
-list_length(String, expectations)
+length(String, expectations)
