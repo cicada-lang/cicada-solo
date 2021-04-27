@@ -1,0 +1,99 @@
+// 3. Eliminate All Natural Numbers!
+
+@def nat_ind_t
+@the Type (
+  target: Nat,
+  motive: (target: Nat) -> Type,
+  base: motive(0),
+  step: (prev: Nat, almost: motive(prev)) -> motive(add1(prev)),
+) -> motive(target)
+
+@def nat_rec_t
+@the Type (
+  target: Nat,
+  T: Type,
+  base: T,
+  step: (prev: Nat, almost: T) -> T,
+) -> T
+
+@def nat_which_t
+@the Type (
+  target: Nat,
+  T: Type,
+  base: T,
+  step: (prev: Nat) -> T,
+) -> T
+
+@def nat_iter_t
+@the Type (
+  target: Nat,
+  T: Type,
+  base: T,
+  step: (almost: T) -> T,
+) -> T
+
+@def nat_rec
+@the nat_rec_t
+(target, T, base, step) => nat_ind(target, (_) => T, base, step)
+
+@def nat_which
+@the nat_which_t
+(target, T, base, step) => nat_rec(target, T, base, (prev, _almost) => step(prev))
+
+@def nat_iter
+@the nat_iter_t
+(target, T, base, step) => nat_rec(target, T, base, (_prev, almost) => step(almost))
+
+// NOTE We use `y` as target, this will make
+//   the definition of `pow` looks more natural.
+
+@def add @the (Nat, Nat) -> Nat
+(x, y) => nat_iter(y, Nat, x, (almost) => add1(almost))
+
+@def mul @the (Nat, Nat) -> Nat
+(x, y) => nat_iter(y, Nat, 0, (almost) => add(almost, x))
+
+@def pow @the (Nat, Nat) -> Nat
+(x, y) => nat_iter(y, Nat, 1, (almost) => mul(almost, x))
+
+@def eight
+@let four add(2, 2)
+add(four, four)
+
+@show add(4, 3)
+@show mul(4, 3)
+@show pow(4, 3)
+
+// NOTE We want to define `gauss` (without recursion).
+// - We try `nat_which`, but it does not work;
+// - We have a rest and think to define `gauss` we also need `add`;
+// - We use `nat_iter` to define `add`;
+// - We use `nat_rec` and `add` to define `gauss`.
+
+@def gauss @the (Nat) -> Nat
+(n) => nat_rec(n, Nat, 0, (prev, almost) => add(add1(prev), almost))
+
+@show "gauss"
+@show gauss(0)
+@show gauss(1)
+@show gauss(2)
+@show gauss(3)
+@show gauss(4)
+@show gauss(5)
+@show gauss(6)
+@show gauss(7)
+@show gauss(8)
+@show gauss(9)
+@show gauss(10)
+
+@def factorial @the (Nat) -> Nat
+(n) => nat_rec(n, Nat, 1, (prev, almost) => mul(add1(prev), almost))
+
+@show "factorial"
+@show factorial(0)
+@show factorial(1)
+@show factorial(2)
+@show factorial(3)
+@show factorial(4)
+@show factorial(5)
+@show factorial(6)
