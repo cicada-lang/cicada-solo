@@ -15,8 +15,7 @@ commands.test_all = async () => {
   await commands.test_lib()
   await commands.test_impression()
   await commands.test_cicada()
-  await commands.test_cicada_stdlib()
-  await commands.test_cicada_tlt()
+  await commands.test_libraries()
 }
 
 commands.test_lib = async () => {
@@ -53,13 +52,14 @@ commands.test_cicada = async () => {
   )
 }
 
-commands.test_cicada_stdlib = async () => {
-  await test("./bin/cic.js check-library stdlib/library.json", {}, expect.ok)
-}
-
-commands.test_cicada_tlt = async () => {
+commands.test_libraries = async () => {
   await test(
-    "./bin/cic.js check-library the-little-typer/library.json",
+    "./bin/cic.js check-library libraries/the-little-typer/library.json",
+    {},
+    expect.ok
+  )
+  await test(
+    "./bin/cic.js check-library libraries/cicada-stdlib/library.json",
     {},
     expect.ok
   )
