@@ -2,4 +2,4 @@
 
 - [来学习室学习吧 / Study in studyroom](https://cicada-studyroom.vercel.app/studyroom?s=github&p=xieyuheng/the-little-typer)
 
-try to do a pr to the-little-typer by git subtree
+try to do a pr to the-little-typer by git subtree -- like a fork
