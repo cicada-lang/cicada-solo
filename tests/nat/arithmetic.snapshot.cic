@@ -1,11 +1,11 @@
-@def add: (Nat, Nat) -> Nat =
-  (x, y) => nat_ind(y, (_) => Nat, x, (prev, almost) => add1(almost))
+@fn add(x: Nat, y: Nat): Nat =
+  nat_ind(y, (_) => Nat, x, (prev, almost) => add1(almost))
 
-@def mul: (Nat, Nat) -> Nat =
-(x, y) => nat_ind(y, (_) => Nat, 0, (prev, almost) => add(almost, x))
+@fn mul(x: Nat, y: Nat): Nat =
+  nat_ind(y, (_) => Nat, 0, (prev, almost) => add(almost, x))
 
-@def pow: (Nat, Nat) -> Nat =
-  (x, y) => nat_ind(y, (_) => Nat, 1, (prev, almost) => mul(almost, x))
+@fn pow(x: Nat, y: Nat): Nat =
+  nat_ind(y, (_) => Nat, 1, (prev, almost) => mul(almost, x))
 
 @def eight =
   @let four = add(2, 2)
