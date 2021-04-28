@@ -3,6 +3,8 @@
 
 - `ListRec` -- try to reuse `ListInd`
 
+- [tlt] 5. Lists, Lists, and More Lists
+
 # pie
 
 - [elaboration] implement `nat_rec` directly -- by elaboration
@@ -34,7 +36,6 @@
 
 # the little typer
 
-- [tlt] 5. Lists, Lists, and More Lists
 - [tlt] 6. Precisely How Many?
 - [tlt] 7. It All Depends On the Motive
 - [tlt] Recess: One Piece at a Time
