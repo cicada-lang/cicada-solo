@@ -1,24 +1,19 @@
 // 2. Doin' What Comes Naturally
 
-@def flavored_lentils
-@the (String) -> (String * String)
-(flavor) => cons(flavor, "lentils")
+@def flavored_lentils: (String) -> (String * String) =
+  (flavor) => cons(flavor, "lentils")
 
-@def garlic_flavored_lentils
-@the (String * String)
-flavored_lentils("garlic")
+@def garlic_flavored_lentils: (String * String) =
+  flavored_lentils("garlic")
 
-@def id
-@the (String) -> String
-(x) => x
+@def id: (String) -> String =
+  (x) => x
 
-@def T
-@the Type
-(String * (String) -> String)
+@def T: Type =
+  (String * (String) -> String)
 
-@def id_in_pair
-@the (x: String) -> T
-(x) => cons(x, (x) => x)
+@def id_in_pair: (x: String) -> T =
+  (x) => cons(x, (x) => x)
 
 @show
 @the T
@@ -56,9 +51,8 @@ same
   (x) => car(x))
 same
 
-@def vegetables
-@the (String * String)
-cons("celery", "carrot")
+@def vegetables: (String * String) =
+  cons("celery", "carrot")
 
 @show
 @the Equal(
@@ -67,19 +61,14 @@ cons("celery", "carrot")
   cons(car(vegetables), cdr(vegetables)))
 same
 
-@def nat_rec
-@the (target: Nat, T: Type, base: T, step: (prev: Nat, almost: T) -> T) -> T
-(target, T, base, step) =>
-  nat_ind(target, (_) => T, base, step)
+@def nat_rec: (target: Nat, T: Type, base: T, step: (prev: Nat, almost: T) -> T) -> T =
+  (target, T, base, step) => nat_ind(target, (_) => T, base, step)
 
-@def nat_which
-@the (target: Nat, T: Type, base: T, step: (prev: Nat) -> T) -> T
-(target, T, base, step) =>
-  nat_ind(target, (_) => T, base, (prev, _almost) => step(prev))
+@def nat_which: (target: Nat, T: Type, base: T, step: (prev: Nat) -> T) -> T =
+  (target, T, base, step) => nat_ind(target, (_) => T, base, (prev, _almost) => step(prev))
 
-@def naught_or_more
-@the (Nat) -> String
-(n) => nat_which(n, String, "naught", (_prev) => "more")
+@def naught_or_more: (Nat) -> String =
+  (n) => nat_which(n, String, "naught", (_prev) => "more")
 
 @show
 @the Equal(
@@ -106,9 +95,7 @@ same
 @the (Type * Type)
 cons(String, String)
 
-@def Pear
-@the Type
-(Nat * Nat)
+@def Pear: Type = (Nat * Nat)
 
 @show
 @the Pear

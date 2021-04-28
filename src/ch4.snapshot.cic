@@ -1,20 +1,16 @@
 // 4. Easy as Pie
 
-@def pair_elim
-@the (
+@def pair_elim: (
   A: Type, D: Type, X: Type,
   pair: (A * D),
   maker: (A, D) -> X,
-) -> X
-(A, D, X, pair, maker) =>
-  maker(car(pair), cdr(pair))
+) -> X =
+  (A, D, X, pair, maker) => maker(car(pair), cdr(pair))
 
-@def flip
-@the (
+@def flip: (
   A: Type, D: Type, pair: (A * D)
-) -> (D * A)
-(A, D, pair) =>
-  cons(cdr(pair), car(pair))
+) -> (D * A) =
+  (A, D, pair) => cons(cdr(pair), car(pair))
 
 @show flip(Nat, String, cons(123, "abc"))
 @show flip(String, Nat, flip(Nat, String, cons(123, "abc")))
@@ -36,17 +32,15 @@ same
   ) -> (D * A))
 same
 
-@def swap
-@the ((Nat * String)) -> (String * Nat)
-(pair) => pair_elim(
-  Nat, String, (String * Nat), pair,
-  (a, d) => cons(d, a))
+@def swap: ((Nat * String)) -> (String * Nat) =
+  (pair) => pair_elim(
+    Nat, String, (String * Nat), pair,
+    (a, d) => cons(d, a))
 
 @show swap(cons(123, "abc"))
 
-@def twin
-@the (X: Type, X) -> (X * X)
-(X, x) => cons(x, x)
+@def twin: (X: Type, X) -> (X * X) =
+  (X, x) => cons(x, x)
 
 @show twin(Nat, 123)
 @show twin(String, "abc")
