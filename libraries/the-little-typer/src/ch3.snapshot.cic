@@ -50,7 +50,7 @@
   (x, y) => nat_iter(y, Nat, 1, (almost) => mul(almost, x))
 
 @def eight =
-  @let four add(2, 2)
+  @let four = add(2, 2)
   add(four, four)
 
 @show add(4, 3)
