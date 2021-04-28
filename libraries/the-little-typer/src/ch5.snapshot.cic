@@ -1,12 +1,12 @@
 // 5. Lists, Lists, and More Lists
 
-@def expectations: List(String) =
-@li "cooked"
-@li "eaten"
-@li "tried-cleaning"
-@li "understood"
-@li "slept"
-@nil
+@def expectations: List(String) = @li [
+  "cooked",
+  "eaten",
+  "tried-cleaning",
+  "understood",
+  "slept",
+]
 
 @show expectations
 

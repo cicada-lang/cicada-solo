@@ -1,6 +1,7 @@
 import { SingleFileLibrary } from "../../library/single-file-library"
 import { LocalLibrary } from "../../library/local-library"
 import { Trace } from "../../trace"
+import pt from "@cicada-lang/partech"
 import find_up from "find-up"
 import Path from "path"
 
@@ -28,9 +29,19 @@ export const handler = async (argv: Argv) => {
     if (error instanceof Trace) {
       console.error(error.repr((exp) => exp.repr()))
       process.exit(1)
+    } else if (error instanceof pt.ParsingError) {
+      const text = await library.fetch_file(path)
+      if (!text) {
+        console.error(`Unknown path: ${path}`)
+      } else {
+        let message = error.message
+        message += "\n"
+        message += pt.report(error.span, text)
+        console.error(message)
+      }
+    } else {
+      throw error
     }
-
-    throw error
   }
 }
 

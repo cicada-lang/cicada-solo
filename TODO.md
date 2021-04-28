@@ -1,5 +1,5 @@
-- [syntax] use `@li []` instead of `@li ... @li ...`
 - [syntax] use `@fn` as a sugar for `@def`
+- [syntax] `@li [...]` optional `,`
 
 - update git subtrees in `libraries/`
 

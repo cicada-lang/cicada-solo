@@ -74,7 +74,13 @@ export const exp = {
     "exp:nil": ['"nil"'],
     "exp:nil_sugar": ['"@"', '"nil"'],
     "exp:li": ['"li"', '"("', { head: "exp" }, '","', { tail: "exp" }, '")"'],
-    "exp:li_sugar": ['"@"', '"li"', { head: "exp" }, { tail: "exp" }],
+    "exp:li_sugar": [
+      '"@"',
+      '"li"',
+      '"["',
+      { elems: { $ap: ["zero_or_more", "exp", '","'] } },
+      '"]"',
+    ],
     "exp:list_ind": [
       '"list_ind"',
       '"("',

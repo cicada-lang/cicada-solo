@@ -4,13 +4,13 @@
 @def length: (E: Type) -> (List(E)) -> Nat =
   (E) => (x) => list_ind(x, (_) => Nat, 0, step_length(E))
 
-@def expectations: List(String) =
-@li "cooked"
-@li "eaten"
-@li "tried-cleaning"
-@li "understood"
-@li "slept"
-@nil
+@def expectations: List(String) = @li [
+  "cooked",
+  "eaten",
+  "tried-cleaning",
+  "understood",
+  "slept",
+]
 
 @show
 length(String, expectations)

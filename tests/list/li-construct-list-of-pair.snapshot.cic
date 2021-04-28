@@ -1,8 +1,9 @@
 @show
 @the List((String * String))
-@li @the (String * String) cons("cooked", "cooked")
-@li @the (String * String) cons("eaten", "eaten")
-@li @the (String * String) cons("tried-cleaning", "tried-cleaning")
-@li @the (String * String) cons("understood", "understood")
-@li @the (String * String) cons("slept", "slept")
-@nil
+@li [
+  @the (String * String) cons("cooked", "cooked"),
+  @the (String * String) cons("eaten", "eaten"),
+  @the (String * String) cons("tried-cleaning", "tried-cleaning"),
+  @the (String * String) cons("understood", "understood"),
+  @the (String * String) cons("slept", "slept"),
+]
