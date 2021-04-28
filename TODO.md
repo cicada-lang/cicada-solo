@@ -1,4 +1,3 @@
-- [syntax] `=` should not be optional
 - [syntax] add `=` to `@let`
 - [syntax] use `@li []` instead of `@li ... @li ...`
 - [syntax] use `@fn` as a sugar for `@def`

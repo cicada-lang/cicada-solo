@@ -14,8 +14,6 @@ export function stmts_matcher(tree: pt.Tree): Array<Stmt> {
 export function stmt_matcher(tree: pt.Tree): Stmt {
   return pt.matcher<Stmt>({
     "stmt:def": ({ name, exp }) => new Def(pt.str(name), exp_matcher(exp)),
-    "stmt:def_optional_equal": ({ name, exp }) =>
-      new Def(pt.str(name), exp_matcher(exp)),
     "stmt:def_the": ({ name, t, exp }) =>
       new Def(pt.str(name), new The(exp_matcher(t), exp_matcher(exp))),
     "stmt:show": ({ exp }) => new Show(exp_matcher(exp)),
