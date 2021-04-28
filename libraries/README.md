@@ -1,3 +1,5 @@
+## Note about `git subtree`
+
 We use `git subtree` to manage libraries in this directory.
 
 You can run `sh add-remotes.sh` to add the following remotes:
