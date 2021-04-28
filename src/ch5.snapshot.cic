@@ -32,14 +32,20 @@
 @def step_length_t: Type =
   (E: Type) -> (head: E, tail: List(E), almost: Nat) -> Nat
 
-@def step_length: step_length_t =
-  (E) => (e, es, almost) => add1(almost)
+// @def step_length: step_length_t =
+//   (E) => (e, es, almost) => add1(almost)
+
+@fn step_length(E: Type, head: E, tail: List(E), almost: Nat): Nat =
+  add1(almost)
 
 @def length_t: Type =
   (E: Type) -> (List(E)) -> Nat
 
-@def length: length_t =
-  (E) => (x) => list_ind(x, (_) => Nat, 0, step_length(E))
+// @def length: length_t =
+//   (E) => (x) => list_ind(x, (_) => Nat, 0, step_length(E))
+
+@fn length(E: Type, x: List(E)): Nat =
+  list_ind(x, (_) => Nat, 0, step_length(E))
 
 @show
 length(String, expectations)
