@@ -33,16 +33,47 @@ async function check(
   library: LocalLibrary,
   opts: { verbose: boolean }
 ): Promise<void> {
-  try {
-    await library.load_mods(opts)
-    await library_snapshot(library)
-  } catch (error) {
-    if (error instanceof Trace) {
-      console.error(error.repr((exp) => exp.repr()))
-      process.exit(1)
-    } else {
-      throw error
+  let error_occured = false
+
+  for (const path of Object.keys(await library.fetch_files())) {
+    try {
+      const mod = await library.load(path, opts)
+      await mod_snapshot(library, path, mod)
+
+      console.log(
+        chalk.bold(`(check)`),
+        chalk.green.bold(`[${moment().format("HH:MM:SS")}]`),
+        path
+      )
+    } catch (error) {
+      error_occured = true
+
+      if (error instanceof Trace) {
+        console.error(error.repr((exp) => exp.repr()))
+      } else if (error instanceof pt.ParsingError) {
+        const text = await library.fetch_file(path)
+        if (!text) {
+          console.error(`Unknown path: ${path}`)
+        } else {
+          let message = error.message
+          message += "\n"
+          message += pt.report(error.span, text)
+          console.error(message)
+        }
+      } else {
+        console.error(error)
+      }
+
+      console.log(
+        chalk.bold(`(check)`),
+        chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
+        path
+      )
     }
+  }
+
+  if (error_occured) {
+    process.exit(1)
   }
 }
 
@@ -54,8 +85,8 @@ async function watch(
   const watcher = chokidar.watch(src_dir)
 
   watcher.on("all", async (event, file) => {
-    if (!file.endsWith(".cic")) return
     if (event !== "add" && event !== "change") return
+    if (!file.endsWith(".cic")) return
 
     const prefix = `${src_dir}/`
     const path = file.slice(prefix.length)
@@ -93,12 +124,6 @@ async function watch(
       )
     }
   })
-}
-
-async function library_snapshot(library: LocalLibrary): Promise<void> {
-  for (const [path, mod] of await library.load_mods()) {
-    mod_snapshot(library, path, mod)
-  }
 }
 
 async function mod_snapshot(
