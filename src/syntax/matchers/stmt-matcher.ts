@@ -1,7 +1,7 @@
 import pt from "@cicada-lang/partech"
 import { Stmt } from "../../stmt"
 import { Def, Show, Class, Import, ImportEntry } from "../../stmts"
-import { Cls, Ext } from "../../core"
+import { The, Cls, Ext } from "../../core"
 import { exp_matcher, cls_entry_matcher } from "../matchers"
 
 export function stmts_matcher(tree: pt.Tree): Array<Stmt> {
@@ -14,6 +14,10 @@ export function stmts_matcher(tree: pt.Tree): Array<Stmt> {
 export function stmt_matcher(tree: pt.Tree): Stmt {
   return pt.matcher<Stmt>({
     "stmt:def": ({ name, exp }) => new Def(pt.str(name), exp_matcher(exp)),
+    "stmt:def_optional_equal": ({ name, exp }) =>
+      new Def(pt.str(name), exp_matcher(exp)),
+    "stmt:def_the": ({ name, t, exp }) =>
+      new Def(pt.str(name), new The(exp_matcher(t), exp_matcher(exp))),
     "stmt:show": ({ exp }) => new Show(exp_matcher(exp)),
     "stmt:class": ({ name, entries }) =>
       new Class(

@@ -11,7 +11,7 @@ const preserved = [
   "List",
   "nil",
   "li",
-  // "list_ind",
+  "list_ind",
   "Equal",
   "same",
   "replace",

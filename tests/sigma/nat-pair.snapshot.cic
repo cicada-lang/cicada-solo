@@ -1,9 +1,7 @@
-@def one add1(zero)
-@def two add1(one)
-@def three add1(two)
+@def one = add1(zero)
+@def two = add1(one)
+@def three = add1(two)
 
-@def one_two
-@the (Nat * Nat)
-cons(one, two)
+@def one_two: (Nat * Nat) = cons(one, two)
 
 @show cdr(one_two)

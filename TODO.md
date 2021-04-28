@@ -1,4 +1,8 @@
-- use `@li []` instead of `@li ... @li ...`
+- [syntax] `=` should not be optional
+- [syntax] add `=` to `@let`
+- [syntax] use `@li []` instead of `@li ... @li ...`
+- [syntax] use `@fn` as a sugar for `@def`
+
 
 > without elaboration, try to implement list now and see what will happen.
 > - maybe we can not implement the `list_rec` with simple type signature.

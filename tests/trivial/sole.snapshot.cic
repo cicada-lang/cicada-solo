@@ -1,5 +1,3 @@
-@def x
-@the Trivial
-sole
+@def x: Trivial = sole
 
 @show x

@@ -7,6 +7,22 @@ export const stmts = {
 export const stmt = {
   $grammar: {
     "stmt:def": ['"@"', '"def"', { name: "identifier" }, { exp: "exp" }],
+    "stmt:def_optional_equal": [
+      '"@"',
+      '"def"',
+      { name: "identifier" },
+      '"="',
+      { exp: "exp" },
+    ],
+    "stmt:def_the": [
+      '"@"',
+      '"def"',
+      { name: "identifier" },
+      '":"',
+      { t: "exp" },
+      '"="',
+      { exp: "exp" },
+    ],
     "stmt:show": ['"@"', '"show"', { exp: "exp" }],
     "stmt:class": [
       '"@"',
