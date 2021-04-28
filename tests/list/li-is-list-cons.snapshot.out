@@ -1,3 +1,3 @@
-@the List(String) li("cooked", li("eaten", li("tried-cleaning", li("understood", li("slept", nil)))))
+@the List(String) li("slept", li("understood", li("tried-cleaning", li("eaten", li("cooked", nil)))))
 @the List(String) li("cooked", li("eaten", li("tried-cleaning", li("understood", li("slept", nil)))))
 

@@ -103,12 +103,10 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:nil": () => new Nil(),
     "exp:nil_sugar": () => new Nil(),
     "exp:li": ({ head, tail }) => new Li(exp_matcher(head), exp_matcher(tail)),
-    "exp:li_sugar": ({ elems }) => {
+    "exp:li_sugar": ({ exps }) => {
       let list: Exp = new Nil()
-      for (const elem of pt.matchers
-        .zero_or_more_matcher(elems)
-        .map(exp_matcher)) {
-        list = new Li(elem, list)
+      for (const exp of exps_matcher(exps)) {
+        list = new Li(exp, list)
       }
       return list
     },

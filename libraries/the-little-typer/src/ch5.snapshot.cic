@@ -5,7 +5,7 @@
   "eaten",
   "tried-cleaning",
   "understood",
-  "slept",
+  "slept"
 ]
 
 @show expectations
