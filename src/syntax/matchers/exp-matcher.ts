@@ -16,7 +16,7 @@ import { The } from "../../core"
 import { nat_from_number } from "../../core/nat/nat-util"
 import * as ut from "../../ut"
 
-function pi_handler(body: { [key: string]: pt.Tree }): Exp {
+export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
   const { bindings, ret_t } = body
   let result = exp_matcher(ret_t)
   for (const { names, exp } of bindings_matcher(bindings).reverse()) {

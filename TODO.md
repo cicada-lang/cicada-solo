@@ -1,5 +1,3 @@
-- [syntax] use `@fn` as a sugar for `@def`
-
 - update git subtrees in `libraries/`
 
 > without elaboration, try to implement list now and see what will happen.

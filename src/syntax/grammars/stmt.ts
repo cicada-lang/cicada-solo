@@ -16,6 +16,18 @@ export const stmt = {
       '"="',
       { exp: "exp" },
     ],
+    "stmt:fn": [
+      '"@"',
+      '"fn"',
+      { name: "identifier" },
+      '"("',
+      { bindings: "bindings" },
+      '")"',
+      '":"',
+      { ret_t: "exp" },
+      '"="',
+      { ret: "exp" }
+    ],
     "stmt:show": ['"@"', '"show"', { exp: "exp" }],
     "stmt:class": [
       '"@"',
