@@ -11,7 +11,7 @@ export class Env {
     return new Env(new Map([...this.values, [name, value]]))
   }
 
-  lookup(name: string): undefined | Value {
+  lookup_value(name: string): undefined | Value {
     return this.values.get(name)
   }
 }

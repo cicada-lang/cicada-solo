@@ -3,7 +3,7 @@ import { Value } from "../value"
 import { NotYetValue } from "../core"
 import { VarNeutral } from "../core"
 
-export type CtxEntry = {
+type CtxEntry = {
   t: Value
   value?: Value
 }
@@ -23,7 +23,7 @@ export class Ctx {
     return new Ctx(new Map([...this.entries, [name, { t, value }]]))
   }
 
-  lookup(name: string): undefined | Value {
+  lookup_type(name: string): undefined | Value {
     const entry = this.entries.get(name)
     if (entry !== undefined) {
       return entry.t

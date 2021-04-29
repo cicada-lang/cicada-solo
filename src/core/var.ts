@@ -12,7 +12,7 @@ export class Var implements Exp {
   }
 
   evaluate(env: Env): Value {
-    const result = env.lookup(this.name)
+    const result = env.lookup_value(this.name)
     if (result === undefined) {
       throw new Trace(
         `Fail to evaluate a variable.\n` + `The name ${this.name} is undefined.`
@@ -23,7 +23,7 @@ export class Var implements Exp {
   }
 
   infer(ctx: Ctx): Value {
-    const t = ctx.lookup(this.name)
+    const t = ctx.lookup_type(this.name)
     if (t === undefined) {
       throw new Trace(
         `Fail to infer the type of a variable.\n` +
