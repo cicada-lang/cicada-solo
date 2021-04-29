@@ -26,7 +26,7 @@ export const stmt = {
       '":"',
       { ret_t: "exp" },
       '"="',
-      { ret: "exp" }
+      { ret: "exp" },
     ],
     "stmt:show": ['"@"', '"show"', { exp: "exp" }],
     "stmt:class": [
