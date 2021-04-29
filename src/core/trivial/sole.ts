@@ -5,7 +5,7 @@ import { Value } from "../../value"
 import { TrivialValue, SoleValue } from "../../core"
 
 export class Sole implements Exp {
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return new SoleValue()
   }
 

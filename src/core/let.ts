@@ -17,8 +17,14 @@ export class Let implements Exp {
     this.ret = ret
   }
 
-  evaluate(env: Env): Value {
-    return evaluate(env.extend(this.name, evaluate(env, this.exp)), this.ret)
+  evaluate(ctx: Ctx, env: Env): Value {
+    const t = infer(ctx, this.exp)
+    const value = evaluate(ctx, env, this.exp)
+    return evaluate(
+      ctx.extend(this.name, t, value),
+      env.extend(this.name, t, value),
+      this.ret
+    )
   }
 
   infer(ctx: Ctx): Value {
@@ -26,7 +32,7 @@ export class Let implements Exp {
       ctx.extend(
         this.name,
         infer(ctx, this.exp),
-        evaluate(ctx.to_env(), this.exp)
+        evaluate(ctx, ctx.to_env(), this.exp)
       ),
       this.ret
     )
@@ -37,7 +43,7 @@ export class Let implements Exp {
       ctx.extend(
         this.name,
         infer(ctx, this.exp),
-        evaluate(ctx.to_env(), this.exp)
+        evaluate(ctx, ctx.to_env(), this.exp)
       ),
       this.ret,
       t

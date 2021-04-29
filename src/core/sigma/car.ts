@@ -16,8 +16,8 @@ export class Car implements Exp {
     this.target = target
   }
 
-  evaluate(env: Env): Value {
-    return Car.apply(evaluate(env, this.target))
+  evaluate(ctx: Ctx, env: Env): Value {
+    return Car.apply(evaluate(ctx, env, this.target))
   }
 
   infer(ctx: Ctx): Value {

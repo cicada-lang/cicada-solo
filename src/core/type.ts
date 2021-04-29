@@ -5,7 +5,7 @@ import { Value } from "../value"
 import { TypeValue } from "../core"
 
 export class Type implements Exp {
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return new TypeValue()
   }
 

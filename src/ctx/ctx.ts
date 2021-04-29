@@ -25,20 +25,17 @@ export class Ctx {
 
   lookup_type(name: string): undefined | Value {
     const entry = this.entries.get(name)
-    if (entry !== undefined) {
-      return entry.t
-    } else {
-      return undefined
-    }
+    if (entry !== undefined) return entry.t
+    else return undefined
   }
 
   to_env(): Env {
     let env = new Env()
     for (const [name, { t, value }] of this.entries) {
       if (value !== undefined) {
-        env = env.extend(name, value)
+        env = env.extend(name, t, value)
       } else {
-        env = env.extend(name, new NotYetValue(t, new VarNeutral(name)))
+        env = env.extend(name, t, new NotYetValue(t, new VarNeutral(name)))
       }
     }
     return env

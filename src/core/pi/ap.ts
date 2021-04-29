@@ -23,8 +23,8 @@ export class Ap implements Exp {
     this.arg = arg
   }
 
-  evaluate(env: Env): Value {
-    return Ap.apply(evaluate(env, this.target), evaluate(env, this.arg))
+  evaluate(ctx: Ctx, env: Env): Value {
+    return Ap.apply(evaluate(ctx, env, this.target), evaluate(ctx, env, this.arg))
   }
 
   infer(ctx: Ctx): Value {
@@ -32,11 +32,11 @@ export class Ap implements Exp {
     if (target_t instanceof PiValue) {
       const pi = target_t
       check(ctx, this.arg, pi.arg_t)
-      const arg_value = evaluate(ctx.to_env(), this.arg)
+      const arg_value = evaluate(ctx, ctx.to_env(), this.arg)
       return pi.ret_t_cl.apply(arg_value)
     }
 
-    const target = evaluate(ctx.to_env(), this.target)
+    const target = evaluate(ctx, ctx.to_env(), this.target)
     if (target instanceof ClsValue) {
       const cls = target
       let telescope = cls.telescope
@@ -46,7 +46,7 @@ export class Ap implements Exp {
           telescope = telescope.fill(value)
         } else {
           check(ctx, this.arg, t)
-          const arg_value = evaluate(ctx.to_env(), this.arg)
+          const arg_value = evaluate(ctx, ctx.to_env(), this.arg)
           return new TypeValue()
         }
       }

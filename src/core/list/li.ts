@@ -16,8 +16,8 @@ export class Li implements Exp {
     this.tail = tail
   }
 
-  evaluate(env: Env): Value {
-    return new LiValue(evaluate(env, this.head), evaluate(env, this.tail))
+  evaluate(ctx: Ctx, env: Env): Value {
+    return new LiValue(evaluate(ctx, env, this.head), evaluate(ctx, env, this.tail))
   }
 
   infer(ctx: Ctx): Value {

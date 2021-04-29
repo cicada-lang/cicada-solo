@@ -2,7 +2,6 @@ import { Stmt } from "../stmt"
 import { Module } from "../module"
 import { Exp } from "../exp"
 import { infer } from "../infer"
-import { evaluate } from "../evaluate"
 import { The, Type, TypeValue, Cls, Ext } from "../core"
 
 export type ImportEntry = {
@@ -31,7 +30,7 @@ export class Import implements Stmt {
       }
 
       mod.ctx = mod.ctx.extend(alias || name, t, value)
-      mod.env = mod.env.extend(alias || name, value)
+      mod.env = mod.env.extend(alias || name, t, value)
     }
   }
 }

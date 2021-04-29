@@ -14,8 +14,8 @@ export class List implements Exp {
     this.elem_t = elem_t
   }
 
-  evaluate(env: Env): Value {
-    return new ListValue(evaluate(env, this.elem_t))
+  evaluate(ctx: Ctx, env: Env): Value {
+    return new ListValue(evaluate(ctx, env, this.elem_t))
   }
 
   infer(ctx: Ctx): Value {

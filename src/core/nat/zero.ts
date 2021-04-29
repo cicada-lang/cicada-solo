@@ -5,7 +5,7 @@ import { Value } from "../../value"
 import { NatValue, ZeroValue } from "../../core"
 
 export class Zero implements Exp {
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return new ZeroValue()
   }
 

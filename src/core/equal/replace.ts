@@ -9,7 +9,7 @@ import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { Pi, Ap } from "../../core"
-import { Type } from "../../core"
+import { Type, TypeValue } from "../../core"
 import { Var } from "../../core"
 import { NotYetValue } from "../../core"
 import { EqualValue, SameValue } from "../../core"
@@ -27,11 +27,11 @@ export class Replace implements Exp {
     this.base = base
   }
 
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return Replace.apply(
-      evaluate(env, this.target),
-      evaluate(env, this.motive),
-      evaluate(env, this.base)
+      evaluate(ctx, env, this.target),
+      evaluate(ctx, env, this.motive),
+      evaluate(ctx, env, this.base)
     )
   }
 
@@ -39,11 +39,12 @@ export class Replace implements Exp {
     const target_t = infer(ctx, this.target)
     const equal = expect(ctx, target_t, EqualValue)
     const motive_t = evaluate(
-      new Env().extend("t", equal.t),
+      new Ctx().extend("t", new TypeValue(), equal.t),
+      new Env().extend("t", new TypeValue(), equal.t),
       new Pi("x", new Var("t"), new Type())
     )
     check(ctx, this.motive, motive_t)
-    const motive_value = evaluate(ctx.to_env(), this.motive)
+    const motive_value = evaluate(ctx, ctx.to_env(), this.motive)
     check(ctx, this.base, Ap.apply(motive_value, equal.from))
     return Ap.apply(motive_value, equal.to)
   }
@@ -69,8 +70,10 @@ export class Replace implements Exp {
               EqualValue,
               ({ t, to, from }: EqualValue) => {
                 const base_t = Ap.apply(motive, from)
-                const closure = new Closure(new Env(), "x", new Type())
-                const motive_t = new PiValue(t, closure)
+                const motive_t = new PiValue(
+                  t,
+                  new Closure(new Ctx(), new Env(), "x", t, new Type())
+                )
                 return new NotYetValue(
                   Ap.apply(motive, to),
                   new ReplaceNeutral(

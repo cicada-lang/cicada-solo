@@ -6,7 +6,7 @@ import { AbsurdValue } from "../../core"
 import { Value } from "../../value"
 
 export class Absurd implements Exp {
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return new AbsurdValue()
   }
 

@@ -18,15 +18,15 @@ export class Dot implements Exp {
     this.name = name
   }
 
-  evaluate(env: Env): Value {
-    return Dot.apply(evaluate(env, this.target), this.name)
+  evaluate(ctx: Ctx, env: Env): Value {
+    return Dot.apply(evaluate(ctx, env, this.target), this.name)
   }
 
   infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
 
     if (target_t instanceof ClsValue || target_t instanceof ExtValue) {
-      return target_t.dot(evaluate(ctx.to_env(), this.target), this.name)
+      return target_t.dot(evaluate(ctx, ctx.to_env(), this.target), this.name)
     }
 
     throw new Trace(

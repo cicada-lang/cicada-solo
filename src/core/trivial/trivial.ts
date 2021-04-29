@@ -6,7 +6,7 @@ import { TypeValue } from "../../core"
 import { TrivialValue } from "../../core"
 
 export class Trivial implements Exp {
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return new TrivialValue()
   }
 

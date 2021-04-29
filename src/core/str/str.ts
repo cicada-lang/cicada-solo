@@ -6,7 +6,7 @@ import { TypeValue } from "../../core"
 import { StrValue } from "../../core"
 
 export class Str implements Exp {
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return new StrValue()
   }
 

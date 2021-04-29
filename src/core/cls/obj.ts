@@ -13,11 +13,11 @@ export class Obj implements Exp {
     this.properties = properties
   }
 
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     const properties = new Map()
 
     for (const [name, exp] of this.properties) {
-      properties.set(name, evaluate(env, exp))
+      properties.set(name, evaluate(ctx, env, exp))
     }
 
     return new ObjValue(properties)

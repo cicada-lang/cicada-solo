@@ -12,7 +12,7 @@ export class Quote implements Exp {
     this.str = str
   }
 
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return new QuoteValue(this.str)
   }
 

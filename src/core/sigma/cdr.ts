@@ -17,14 +17,14 @@ export class Cdr implements Exp {
     this.target = target
   }
 
-  evaluate(env: Env): Value {
-    return Cdr.apply(evaluate(env, this.target))
+  evaluate(ctx: Ctx, env: Env): Value {
+    return Cdr.apply(evaluate(ctx, env, this.target))
   }
 
   infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
     const sigma = expect(ctx, target_t, SigmaValue)
-    const car = Car.apply(evaluate(ctx.to_env(), this.target))
+    const car = Car.apply(evaluate(ctx, ctx.to_env(), this.target))
     return sigma.cdr_t_cl.apply(car)
   }
 

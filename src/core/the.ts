@@ -15,13 +15,13 @@ export class The implements Exp {
     this.exp = exp
   }
 
-  evaluate(env: Env): Value {
-    return evaluate(env, this.exp)
+  evaluate(ctx: Ctx, env: Env): Value {
+    return evaluate(ctx, env, this.exp)
   }
 
   infer(ctx: Ctx): Value {
     check(ctx, this.t, new TypeValue())
-    const t_value = evaluate(ctx.to_env(), this.t)
+    const t_value = evaluate(ctx, ctx.to_env(), this.t)
     check(ctx, this.exp, t_value)
     return t_value
   }

@@ -28,7 +28,7 @@ export class Same implements Exp {
     }
   }
 
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return new SameValue()
   }
 

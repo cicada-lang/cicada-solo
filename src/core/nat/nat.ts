@@ -6,7 +6,7 @@ import { TypeValue } from "../../core"
 import { NatValue } from "../../core"
 
 export class Nat implements Exp {
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return new NatValue()
   }
 

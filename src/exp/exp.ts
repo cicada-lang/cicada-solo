@@ -3,7 +3,7 @@ import { Ctx } from "../ctx"
 import { Value } from "../value"
 
 export type Exp = {
-  evaluate(env: Env): Value
+  evaluate(ctx: Ctx, env: Env): Value
   check?(ctx: Ctx, t: Value): void
   infer?(ctx: Ctx): Value
   repr(): string

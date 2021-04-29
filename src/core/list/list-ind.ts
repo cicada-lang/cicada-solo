@@ -9,7 +9,7 @@ import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { Trace } from "../../trace"
-import { Type } from "../../core"
+import { Type, TypeValue } from "../../core"
 import { Var, Pi, Ap } from "../../core"
 import {
   ListValue,
@@ -36,12 +36,12 @@ export class ListInd implements Exp {
     this.step = step
   }
 
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return ListInd.apply(
-      evaluate(env, this.target),
-      evaluate(env, this.motive),
-      evaluate(env, this.base),
-      evaluate(env, this.step)
+      evaluate(ctx, env, this.target),
+      evaluate(ctx, env, this.motive),
+      evaluate(ctx, env, this.base),
+      evaluate(ctx, env, this.step)
     )
   }
 
@@ -50,14 +50,15 @@ export class ListInd implements Exp {
     const list_t = expect(ctx, target_t, ListValue)
     const elem_t = list_t.elem_t
     const motive_t = evaluate(
-      new Env().extend("elem_t", elem_t),
+      new Ctx().extend("elem_t", new TypeValue(), elem_t),
+      new Env().extend("elem_t", new TypeValue(), elem_t),
       new Pi("target_list", new List(new Var("elem_t")), new Type())
     )
     check(ctx, this.motive, motive_t)
-    const motive_value = evaluate(ctx.to_env(), this.motive)
+    const motive_value = evaluate(ctx, ctx.to_env(), this.motive)
     check(ctx, this.base, Ap.apply(motive_value, new NilValue()))
-    check(ctx, this.step, list_ind_step_t(motive_value, elem_t))
-    const target_value = evaluate(ctx.to_env(), this.target)
+    check(ctx, this.step, list_ind_step_t(motive_t, motive_value, elem_t))
+    const target_value = evaluate(ctx, ctx.to_env(), this.target)
     return Ap.apply(motive_value, target_value)
   }
 
@@ -91,11 +92,11 @@ export class ListInd implements Exp {
               (list_t: ListValue) => {
                 const motive_t = new PiValue(
                   list_t,
-                  new Closure(new Env(), "target_list", new Type())
+                  new Closure(new Ctx(),new Env(), "target_list", list_t, new Type())
                 )
                 const base_t = Ap.apply(motive, new NilValue())
                 const elem_t = list_t.elem_t
-                const step_t = list_ind_step_t(motive, elem_t)
+                const step_t = list_ind_step_t(motive_t, motive, elem_t)
                 return new NotYetValue(
                   Ap.apply(motive, target),
                   new ListIndNeutral(
@@ -113,8 +114,13 @@ export class ListInd implements Exp {
   }
 }
 
-function list_ind_step_t(motive: Value, elem_t: Value): Value {
-  const env = new Env().extend("motive", motive).extend("elem_t", elem_t)
+function list_ind_step_t(motive_t: Value, motive: Value, elem_t: Value): Value {
+  const ctx = new Ctx()
+    .extend("motive", motive_t, motive)
+    .extend("elem_t", new TypeValue(), elem_t)
+  const env = new Env()
+    .extend("motive", motive_t, motive)
+    .extend("elem_t", new TypeValue(), elem_t)
 
   const step_t = new Pi(
     "head",
@@ -130,5 +136,5 @@ function list_ind_step_t(motive: Value, elem_t: Value): Value {
     )
   )
 
-  return evaluate(env, step_t)
+  return evaluate(ctx, env, step_t)
 }

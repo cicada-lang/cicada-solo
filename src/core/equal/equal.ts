@@ -18,17 +18,17 @@ export class Equal implements Exp {
     this.to = to
   }
 
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return new EqualValue(
-      evaluate(env, this.t),
-      evaluate(env, this.from),
-      evaluate(env, this.to)
+      evaluate(ctx, env, this.t),
+      evaluate(ctx, env, this.from),
+      evaluate(ctx, env, this.to)
     )
   }
 
   infer(ctx: Ctx): Value {
     check(ctx, this.t, new TypeValue())
-    const t_value = evaluate(ctx.to_env(), this.t)
+    const t_value = evaluate(ctx, ctx.to_env(), this.t)
     check(ctx, this.from, t_value)
     check(ctx, this.to, t_value)
     return new TypeValue()

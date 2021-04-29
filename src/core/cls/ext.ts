@@ -25,25 +25,25 @@ export class Ext implements Exp {
     this.name = opts?.name
   }
 
-  evaluate(env: Env): Value {
-    const parent = evaluate(env, new Var(this.parent_name))
+  evaluate(ctx: Ctx, env: Env): Value {
+    const parent = evaluate(ctx, env, new Var(this.parent_name))
     if (parent instanceof ClsValue) {
       return new ExtValue([
         { name: parent.name, telescope: parent.telescope },
-        { name: this.name, telescope: new Telescope(env, this.entries) },
+        { name: this.name, telescope: new Telescope(ctx, env, this.entries) },
       ])
     }
     if (parent instanceof ExtValue) {
       return new ExtValue([
         ...parent.entries,
-        { name: this.name, telescope: new Telescope(env, this.entries) },
+        { name: this.name, telescope: new Telescope(ctx, env, this.entries) },
       ])
     }
     throw new Trace(`Expecting parent to be ClsValue or ExtValue`)
   }
 
   infer(ctx: Ctx): Value {
-    const parent = evaluate(ctx.to_env(), new Var(this.parent_name))
+    const parent = evaluate(ctx, ctx.to_env(), new Var(this.parent_name))
     if (!(parent instanceof ClsValue || parent instanceof ExtValue)) {
       throw new Trace(`Expecting parent to be ClsValue or ExtValue`)
     }
@@ -52,7 +52,7 @@ export class Ext implements Exp {
 
     for (const { name, t, exp } of this.entries) {
       check(ctx, t, new TypeValue())
-      const t_value = evaluate(ctx.to_env(), t)
+      const t_value = evaluate(ctx, ctx.to_env(), t)
       if (exp) check(ctx, exp, t_value)
       ctx = ctx.extend(name, t_value)
     }

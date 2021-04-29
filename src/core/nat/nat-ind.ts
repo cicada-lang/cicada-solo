@@ -26,12 +26,12 @@ export class NatInd implements Exp {
     this.step = step
   }
 
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return NatInd.apply(
-      evaluate(env, this.target),
-      evaluate(env, this.motive),
-      evaluate(env, this.base),
-      evaluate(env, this.step)
+      evaluate(ctx, env, this.target),
+      evaluate(ctx, env, this.motive),
+      evaluate(ctx, env, this.base),
+      evaluate(ctx, env, this.step)
     )
   }
 
@@ -40,14 +40,15 @@ export class NatInd implements Exp {
     //   but we do a simple check for the simple nat.
     check(ctx, this.target, new NatValue())
     const motive_t = evaluate(
+      new Ctx(),
       new Env(),
       new Pi("target_nat", new Nat(), new Type())
     )
     check(ctx, this.motive, motive_t)
-    const motive_value = evaluate(ctx.to_env(), this.motive)
+    const motive_value = evaluate(ctx, ctx.to_env(), this.motive)
     check(ctx, this.base, Ap.apply(motive_value, new ZeroValue()))
-    check(ctx, this.step, nat_ind_step_t(motive_value))
-    const target_value = evaluate(ctx.to_env(), this.target)
+    check(ctx, this.step, nat_ind_step_t(motive_t, motive_value))
+    const target_value = evaluate(ctx, ctx.to_env(), this.target)
     return Ap.apply(motive_value, target_value)
   }
 
@@ -81,10 +82,10 @@ export class NatInd implements Exp {
               (nat_t: NatValue) => {
                 const motive_t = new PiValue(
                   nat_t,
-                  new Closure(new Env(), "target_nat", new Type())
+                  new Closure(new Ctx(), new Env(), "target_nat", nat_t, new Type())
                 )
                 const base_t = Ap.apply(motive, new ZeroValue())
-                const step_t = nat_ind_step_t(motive)
+                const step_t = nat_ind_step_t(motive_t, motive)
                 return new NotYetValue(
                   Ap.apply(motive, target),
                   new NatIndNeutral(
@@ -102,8 +103,9 @@ export class NatInd implements Exp {
   }
 }
 
-function nat_ind_step_t(motive: Value): Value {
-  const env = new Env().extend("motive", motive)
+function nat_ind_step_t(motive_t: Value, motive: Value): Value {
+  const ctx = new Ctx().extend("motive", motive_t, motive)
+  const env = new Env().extend("motive", motive_t, motive)
 
   const step_t = new Pi(
     "prev",
@@ -115,5 +117,5 @@ function nat_ind_step_t(motive: Value): Value {
     )
   )
 
-  return evaluate(env, step_t)
+  return evaluate(ctx, env, step_t)
 }

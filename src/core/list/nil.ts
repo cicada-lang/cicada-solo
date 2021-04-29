@@ -6,7 +6,7 @@ import { Value } from "../../value"
 import { ListValue, NilValue } from "../../core"
 
 export class Nil implements Exp {
-  evaluate(env: Env): Value {
+  evaluate(ctx: Ctx, env: Env): Value {
     return new NilValue()
   }
 

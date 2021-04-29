@@ -1,8 +1,8 @@
-> try to let evaluate take ctx
+- split the responsibilities of `exp` to `core` and `exp`
 
-- t in env
-- env.extend with t
-- t in closure
+  - `core` -- `evaluate` `alpha_repr`
+    - `readback` return `core`
+  - `exp` -- `check` `infer`
 
 > without elaboration, try to implement list now and see what will happen.
 > - maybe we can not implement the `list_rec` with simple type signature.

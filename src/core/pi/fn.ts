@@ -4,9 +4,10 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { check } from "../../check"
+import { infer } from "../../infer"
 import { expect } from "../../expect"
 import { PiValue, FnValue } from "../../core"
-import { VarNeutral } from "../../core"
+import { Var, VarNeutral } from "../../core"
 import { NotYetValue } from "../../core"
 
 export class Fn implements Exp {
@@ -18,8 +19,10 @@ export class Fn implements Exp {
     this.ret = ret
   }
 
-  evaluate(env: Env): Value {
-    return new FnValue(new Closure(env, this.name, this.ret))
+  evaluate(ctx: Ctx, env: Env): Value {
+    return new FnValue(
+      new Closure(ctx, env, this.name, infer(ctx, new Var(this.name)), this.ret)
+    )
   }
 
   check(ctx: Ctx, t: Value): void {

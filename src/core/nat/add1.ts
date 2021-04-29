@@ -14,8 +14,8 @@ export class Add1 implements Exp {
     this.prev = prev
   }
 
-  evaluate(env: Env): Value {
-    return new Add1Value(evaluate(env, this.prev))
+  evaluate(ctx: Ctx, env: Env): Value {
+    return new Add1Value(evaluate(ctx, env, this.prev))
   }
 
   infer(ctx: Ctx): Value {
