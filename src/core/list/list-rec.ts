@@ -57,13 +57,55 @@ export class ListRec implements Exp {
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    return `list_rec(${this.target.alpha_repr(ctx)}, ${this.base.alpha_repr(
-      ctx
-    )}, ${this.step.alpha_repr(ctx)})`
+    throw new Trace(
+      `ListRec should be readback to ListInd,\n` +
+        `thus ListRec.alpha_repr should never be called.`
+    )
   }
 
   static apply(target: Value, base: Value, step: Value): Value {
-    throw new Error("TODO")
+    return match_value(target, [
+      [NilValue, (_: NilValue) => base],
+      [
+        LiValue,
+        ({ head, tail }: LiValue) =>
+          Ap.apply(
+            Ap.apply(Ap.apply(step, head), tail),
+            ListRec.apply(tail, base, step)
+          ),
+      ],
+      [
+        NotYetValue,
+        ({ t, neutral }: NotYetValue) =>
+          match_value(t, [
+            [
+              ListValue,
+              (list_t: ListValue) => {
+                const motive_t = new PiValue(
+                  list_t,
+                  new Closure(new Env(), "target_list", new Type())
+                )
+                throw new Error("TODO")
+                // NOTE We need to construct a constant motive function to return `base_t`
+                //   but we do not have `base_t`.
+                // const base_t = ???
+                // const motive = ???
+                // const elem_t = list_t.elem_t
+                // const step_t = list_rec_step_t(base_t, elem_t)
+                // return new NotYetValue(
+                //   base_t,
+                //   new ListIndNeutral(
+                //     neutral,
+                //     new Normal(motive_t, motive),
+                //     new Normal(base_t, base),
+                //     new Normal(step_t, step)
+                //   )
+                // )
+              },
+            ],
+          ]),
+      ],
+    ])
   }
 }
 
