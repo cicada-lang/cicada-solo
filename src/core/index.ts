@@ -43,6 +43,7 @@ export * from "./list/li"
 export * from "./list/li-value"
 export * from "./list/list-ind"
 export * from "./list/list-ind-neutral"
+export * from "./list/list-rec"
 
 export * from "./equal/equal"
 export * from "./equal/equal-value"

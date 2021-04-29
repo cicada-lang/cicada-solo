@@ -1,7 +1,9 @@
 > without elaboration, try to implement list now and see what will happen.
 > - maybe we can not implement the `list_rec` with simple type signature.
 
-- `ListRec` -- try to reuse `ListInd`
+- `ListRec.infer`
+- `ListRec.evaluate`
+
 
 - [tlt] 5. Lists, Lists, and More Lists
 
