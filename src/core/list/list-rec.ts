@@ -85,9 +85,12 @@ export class ListRec implements Exp {
                   list_t,
                   new Closure(new Env(), "target_list", new Type())
                 )
+
                 throw new Error("TODO")
+
                 // NOTE We need to construct a constant motive function to return `base_t`
                 //   but we do not have `base_t`.
+
                 // const base_t = ???
                 // const motive = ???
                 // const elem_t = list_t.elem_t
