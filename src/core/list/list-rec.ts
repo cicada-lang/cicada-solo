@@ -36,11 +36,20 @@ export class ListRec implements Exp {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
+    return ListRec.apply(
+      evaluate(env, this.target),
+      evaluate(env, this.base),
+      evaluate(env, this.step)
+    )
   }
 
   infer(ctx: Ctx): Value {
-    throw new Error("TODO")
+    const target_t = infer(ctx, this.target)
+    const list_t = expect(ctx, target_t, ListValue)
+    const elem_t = list_t.elem_t
+    const base_t = infer(ctx, this.base)
+    check(ctx, this.step, list_rec_step_t(base_t, elem_t))
+    return base_t
   }
 
   repr(): string {
@@ -52,4 +61,24 @@ export class ListRec implements Exp {
       ctx
     )}, ${this.step.alpha_repr(ctx)})`
   }
+
+  static apply(target: Value, base: Value, step: Value): Value {
+    throw new Error("TODO")
+  }
+}
+
+function list_rec_step_t(base_t: Value, elem_t: Value): Value {
+  const env = new Env().extend("base_t", base_t).extend("elem_t", elem_t)
+
+  const step_t = new Pi(
+    "head",
+    new Var("elem_t"),
+    new Pi(
+      "tail",
+      new List(new Var("elem_t")),
+      new Pi("almost", new Var("base_t"), new Var("base_t"))
+    )
+  )
+
+  return evaluate(env, step_t)
 }
