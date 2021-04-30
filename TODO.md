@@ -1,5 +1,7 @@
 - split the responsibilities of `exp` to `core` and `exp`
 
+  > we need to do this little by little
+
   - `core` -- `evaluate` `repr` `alpha_repr`
     - `readback` return `core`
   - `exp` -- `check` `infer` `repr`
