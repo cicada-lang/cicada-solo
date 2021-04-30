@@ -1,7 +1,7 @@
 import { Exp } from "../exp"
 import { Value } from "../value"
 import { Ctx } from "../ctx"
-import { TypeValue } from "../core"
+import { TypeValue } from "../cores"
 import { conversion } from "../conversion"
 import { readback } from "../readback"
 import { Trace } from "../trace"

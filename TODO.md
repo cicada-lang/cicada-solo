@@ -1,8 +1,8 @@
 - split the responsibilities of `exp` to `core` and `exp`
 
-  - `core` -- `evaluate` `alpha_repr`
+  - `core` -- `evaluate` `repr` `alpha_repr`
     - `readback` return `core`
-  - `exp` -- `check` `infer`
+  - `exp` -- `check` `infer` `repr`
 
 > without elaboration, try to implement list now and see what will happen.
 > - maybe we can not implement the `list_rec` with simple type signature.

@@ -3,7 +3,7 @@ import { Module } from "../module"
 import { Exp } from "../exp"
 import { infer } from "../infer"
 import { evaluate } from "../evaluate"
-import { The, Type, TypeValue, Cls, Ext } from "../core"
+import { The, Type, TypeValue, Cls, Ext } from "../cores"
 
 export class Class implements Stmt {
   name: string

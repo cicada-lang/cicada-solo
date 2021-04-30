@@ -2,7 +2,7 @@ import { Stmt } from "../stmt"
 import { Module } from "../module"
 import { Exp } from "../exp"
 import { infer } from "../infer"
-import { The, Type, TypeValue, Cls, Ext } from "../core"
+import { The, Type, TypeValue, Cls, Ext } from "../cores"
 
 export type ImportEntry = {
   name: string
