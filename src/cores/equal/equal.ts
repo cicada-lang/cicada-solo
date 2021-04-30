@@ -26,14 +26,6 @@ export class Equal implements Core {
     )
   }
 
-  infer(ctx: Ctx): Value {
-    check(ctx, this.t, new TypeValue())
-    const t_value = evaluate(ctx, ctx.to_env(), this.t)
-    check(ctx, this.from, t_value)
-    check(ctx, this.to, t_value)
-    return new TypeValue()
-  }
-
   repr(): string {
     return `Equal(${this.t.repr()}, ${this.from.repr()}, ${this.to.repr()})`
   }

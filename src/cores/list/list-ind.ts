@@ -45,23 +45,6 @@ export class ListInd implements Core {
     )
   }
 
-  infer(ctx: Ctx): Value {
-    const target_t = infer(ctx, this.target)
-    const list_t = expect(ctx, target_t, ListValue)
-    const elem_t = list_t.elem_t
-    const motive_t = evaluate(
-      new Ctx().extend("elem_t", new TypeValue(), elem_t),
-      new Env().extend("elem_t", new TypeValue(), elem_t),
-      new Pi("target_list", new List(new Var("elem_t")), new Type())
-    )
-    check(ctx, this.motive, motive_t)
-    const motive_value = evaluate(ctx, ctx.to_env(), this.motive)
-    check(ctx, this.base, Ap.apply(motive_value, new NilValue()))
-    check(ctx, this.step, list_ind_step_t(motive_t, motive_value, elem_t))
-    const target_value = evaluate(ctx, ctx.to_env(), this.target)
-    return Ap.apply(motive_value, target_value)
-  }
-
   repr(): string {
     return `list_ind(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()}, ${this.step.repr()})`
   }
@@ -92,7 +75,13 @@ export class ListInd implements Core {
               (list_t: ListValue) => {
                 const motive_t = new PiValue(
                   list_t,
-                  new Closure(new Ctx(),new Env(), "target_list", list_t, new Type())
+                  new Closure(
+                    new Ctx(),
+                    new Env(),
+                    "target_list",
+                    list_t,
+                    new Type()
+                  )
                 )
                 const base_t = Ap.apply(motive, new NilValue())
                 const elem_t = list_t.elem_t

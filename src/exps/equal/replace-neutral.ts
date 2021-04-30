@@ -2,7 +2,7 @@ import { Neutral } from "../../neutral"
 import { Normal } from "../../normal"
 import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
-import { Replace } from "../../cores"
+import { Replace } from "../../exps"
 
 export class ReplaceNeutral implements Neutral {
   target: Neutral

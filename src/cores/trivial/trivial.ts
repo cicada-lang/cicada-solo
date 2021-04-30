@@ -10,10 +10,6 @@ export class Trivial implements Core {
     return new TrivialValue()
   }
 
-  infer(ctx: Ctx): Value {
-    return new TypeValue()
-  }
-
   repr(): string {
     return "Trivial"
   }

@@ -9,8 +9,8 @@ import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { Trace } from "../../trace"
-import { Type, TypeValue } from "../../cores"
-import { Var, Pi, Ap } from "../../cores"
+import { Type, TypeValue } from "../../exps"
+import { Var, Pi, Ap } from "../../exps"
 import {
   ListValue,
   Nil,
@@ -19,9 +19,9 @@ import {
   Li,
   LiValue,
   ListIndNeutral,
-} from "../../cores"
-import { PiValue } from "../../cores"
-import { NotYetValue } from "../../cores"
+} from "../../exps"
+import { PiValue } from "../../exps"
+import { NotYetValue } from "../../exps"
 
 export class ListInd implements Exp {
   target: Exp
@@ -92,7 +92,13 @@ export class ListInd implements Exp {
               (list_t: ListValue) => {
                 const motive_t = new PiValue(
                   list_t,
-                  new Closure(new Ctx(),new Env(), "target_list", list_t, new Type())
+                  new Closure(
+                    new Ctx(),
+                    new Env(),
+                    "target_list",
+                    list_t,
+                    new Type()
+                  )
                 )
                 const base_t = Ap.apply(motive, new NilValue())
                 const elem_t = list_t.elem_t

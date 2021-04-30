@@ -10,10 +10,6 @@ export class Str implements Core {
     return new StrValue()
   }
 
-  infer(ctx: Ctx): Value {
-    return new TypeValue()
-  }
-
   repr(): string {
     return "String"
   }

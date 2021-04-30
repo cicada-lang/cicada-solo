@@ -22,21 +22,6 @@ export class Dot implements Core {
     return Dot.apply(evaluate(ctx, env, this.target), this.name)
   }
 
-  infer(ctx: Ctx): Value {
-    const target_t = infer(ctx, this.target)
-
-    if (target_t instanceof ClsValue || target_t instanceof ExtValue) {
-      return target_t.dot(evaluate(ctx, ctx.to_env(), this.target), this.name)
-    }
-
-    throw new Trace(
-      ut.aline(`
-        |Coreecting target type to be a class.
-        |  ${ut.inspect(target_t)}
-        |`)
-    )
-  }
-
   repr(): string {
     return `${this.target.repr()}.${this.name}`
   }

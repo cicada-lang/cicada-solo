@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Value } from "../../value"
-import { Nil, ListValue } from "../../cores"
+import { Nil, ListValue } from "../../exps"
 
 export class NilValue {
   readback(ctx: Ctx, t: Value): Exp | undefined {

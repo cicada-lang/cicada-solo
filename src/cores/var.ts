@@ -22,17 +22,6 @@ export class Var implements Core {
     return result
   }
 
-  infer(ctx: Ctx): Value {
-    const t = ctx.lookup_type(this.name)
-    if (t === undefined) {
-      throw new Trace(
-        `Fail to infer the type of a variable.\n` +
-          `The name ${this.name} is undefined.`
-      )
-    }
-    return t
-  }
-
   repr(): string {
     return this.name
   }

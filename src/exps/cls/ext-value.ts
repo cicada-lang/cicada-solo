@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Value } from "../../value"
-import { Cls, Obj, TypeValue } from "../../cores"
+import { Cls, Obj, TypeValue } from "../../exps"
 import { Telescope } from "../../telescope"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"

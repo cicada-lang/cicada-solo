@@ -6,12 +6,12 @@ import { check } from "../../check"
 import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
-import { Type } from "../../cores"
-import { Nat } from "../../cores"
-import { Var, Pi, Ap } from "../../cores"
-import { Add1, NatValue, ZeroValue, Add1Value, NatIndNeutral } from "../../cores"
-import { PiValue } from "../../cores"
-import { NotYetValue } from "../../cores"
+import { Type } from "../../exps"
+import { Nat } from "../../exps"
+import { Var, Pi, Ap } from "../../exps"
+import { Add1, NatValue, ZeroValue, Add1Value, NatIndNeutral } from "../../exps"
+import { PiValue } from "../../exps"
+import { NotYetValue } from "../../exps"
 
 export class NatInd implements Exp {
   target: Exp
@@ -82,7 +82,13 @@ export class NatInd implements Exp {
               (nat_t: NatValue) => {
                 const motive_t = new PiValue(
                   nat_t,
-                  new Closure(new Ctx(), new Env(), "target_nat", nat_t, new Type())
+                  new Closure(
+                    new Ctx(),
+                    new Env(),
+                    "target_nat",
+                    nat_t,
+                    new Type()
+                  )
                 )
                 const base_t = Ap.apply(motive, new ZeroValue())
                 const step_t = nat_ind_step_t(motive_t, motive)

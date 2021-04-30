@@ -17,13 +17,10 @@ export class Li implements Core {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new LiValue(evaluate(ctx, env, this.head), evaluate(ctx, env, this.tail))
-  }
-
-  infer(ctx: Ctx): Value {
-    const elem_t = infer(ctx, this.head)
-    check(ctx, this.tail, new ListValue(elem_t))
-    return new ListValue(elem_t)
+    return new LiValue(
+      evaluate(ctx, env, this.head),
+      evaluate(ctx, env, this.tail)
+    )
   }
 
   repr(): string {

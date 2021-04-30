@@ -8,9 +8,9 @@ import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { expect } from "../../expect"
 import { Normal } from "../../normal"
-import { NotYetValue } from "../../cores"
-import { FnValue, PiValue, ApNeutral } from "../../cores"
-import { ClsValue, ExtValue, TypeValue } from "../../cores"
+import { NotYetValue } from "../../exps"
+import { FnValue, PiValue, ApNeutral } from "../../exps"
+import { ClsValue, ExtValue, TypeValue } from "../../exps"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
 
@@ -24,7 +24,10 @@ export class Ap implements Exp {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return Ap.apply(evaluate(ctx, env, this.target), evaluate(ctx, env, this.arg))
+    return Ap.apply(
+      evaluate(ctx, env, this.target),
+      evaluate(ctx, env, this.arg)
+    )
   }
 
   infer(ctx: Ctx): Value {

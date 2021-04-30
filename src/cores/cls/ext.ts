@@ -42,24 +42,6 @@ export class Ext implements Core {
     throw new Trace(`Coreecting parent to be ClsValue or ExtValue`)
   }
 
-  infer(ctx: Ctx): Value {
-    const parent = evaluate(ctx, ctx.to_env(), new Var(this.parent_name))
-    if (!(parent instanceof ClsValue || parent instanceof ExtValue)) {
-      throw new Trace(`Coreecting parent to be ClsValue or ExtValue`)
-    }
-
-    ctx = parent.extend_ctx(ctx)
-
-    for (const { name, t, exp } of this.entries) {
-      check(ctx, t, new TypeValue())
-      const t_value = evaluate(ctx, ctx.to_env(), t)
-      if (exp) check(ctx, exp, t_value)
-      ctx = ctx.extend(name, t_value)
-    }
-
-    return new TypeValue()
-  }
-
   repr(): string {
     const name = this.name ? `${this.name} ` : ""
 

@@ -2,7 +2,7 @@ import { Exp, AlphaCtx } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { NatValue, ZeroValue } from "../../cores"
+import { NatValue, ZeroValue } from "../../exps"
 
 export class Zero implements Exp {
   evaluate(ctx: Ctx, env: Env): Value {

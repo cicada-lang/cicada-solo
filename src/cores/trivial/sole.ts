@@ -9,10 +9,6 @@ export class Sole implements Core {
     return new SoleValue()
   }
 
-  infer(ctx: Ctx): Value {
-    return new TrivialValue()
-  }
-
   repr(): string {
     return "sole"
   }

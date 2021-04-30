@@ -1,8 +1,8 @@
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Value } from "../../value"
-import { EqualValue } from "../../cores"
-import { Same } from "../../cores"
+import { EqualValue } from "../../exps"
+import { Same } from "../../exps"
 
 export class SameValue {
   readback(ctx: Ctx, t: Value): Exp | undefined {

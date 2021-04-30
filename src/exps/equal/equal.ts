@@ -4,8 +4,8 @@ import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { Value } from "../../value"
-import { TypeValue } from "../../cores"
-import { EqualValue } from "../../cores"
+import { TypeValue } from "../../exps"
+import { EqualValue } from "../../exps"
 
 export class Equal implements Exp {
   t: Exp

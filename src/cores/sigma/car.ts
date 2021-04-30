@@ -20,12 +20,6 @@ export class Car implements Core {
     return Car.apply(evaluate(ctx, env, this.target))
   }
 
-  infer(ctx: Ctx): Value {
-    const target_t = infer(ctx, this.target)
-    const sigma = expect(ctx, target_t, SigmaValue)
-    return sigma.car_t
-  }
-
   repr(): string {
     return `car(${this.target.repr()})`
   }

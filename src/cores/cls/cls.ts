@@ -22,18 +22,9 @@ export class Cls implements Core {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new ClsValue(new Telescope(ctx, env, this.entries), { name: this.name })
-  }
-
-  infer(ctx: Ctx): Value {
-    for (const { name, t, exp } of this.entries) {
-      check(ctx, t, new TypeValue())
-      const t_value = evaluate(ctx, ctx.to_env(), t)
-      if (exp) check(ctx, exp, t_value)
-      ctx = ctx.extend(name, t_value)
-    }
-
-    return new TypeValue()
+    return new ClsValue(new Telescope(ctx, env, this.entries), {
+      name: this.name,
+    })
   }
 
   repr(): string {

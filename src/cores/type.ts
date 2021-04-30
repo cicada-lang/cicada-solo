@@ -9,10 +9,6 @@ export class Type implements Core {
     return new TypeValue()
   }
 
-  infer(ctx: Ctx): Value {
-    return new TypeValue()
-  }
-
   repr(): string {
     return "Type"
   }

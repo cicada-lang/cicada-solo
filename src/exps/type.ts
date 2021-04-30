@@ -2,7 +2,7 @@ import { Exp, AlphaCtx } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { Value } from "../value"
-import { TypeValue } from "../cores"
+import { TypeValue } from "../exps"
 
 export class Type implements Exp {
   evaluate(ctx: Ctx, env: Env): Value {

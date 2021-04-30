@@ -6,9 +6,9 @@ import { Env } from "../../env"
 import { Value, match_value } from "../../value"
 import { Normal } from "../../normal"
 import { Trace } from "../../trace"
-import { NotYetValue } from "../../cores"
-import { AbsurdValue, AbsurdIndNeutral } from "../../cores"
-import { TypeValue } from "../../cores"
+import { NotYetValue } from "../../exps"
+import { AbsurdValue, AbsurdIndNeutral } from "../../exps"
+import { TypeValue } from "../../exps"
 
 export class AbsurdInd implements Exp {
   target: Exp

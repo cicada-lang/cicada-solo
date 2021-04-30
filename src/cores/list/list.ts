@@ -18,11 +18,6 @@ export class List implements Core {
     return new ListValue(evaluate(ctx, env, this.elem_t))
   }
 
-  infer(ctx: Ctx): Value {
-    check(ctx, this.elem_t, new TypeValue())
-    return new TypeValue()
-  }
-
   repr(): string {
     return `List(${this.elem_t.repr()})`
   }

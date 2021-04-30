@@ -25,13 +25,6 @@ export class Fn implements Core {
     )
   }
 
-  check(ctx: Ctx, t: Value): void {
-    const pi = expect(ctx, t, PiValue)
-    const arg = new NotYetValue(pi.arg_t, new VarNeutral(this.name))
-    const ret_t = pi.ret_t_cl.apply(arg)
-    check(ctx.extend(this.name, pi.arg_t), this.ret, ret_t)
-  }
-
   repr(): string {
     return `(${this.name}) => ${this.ret.repr()}`
   }

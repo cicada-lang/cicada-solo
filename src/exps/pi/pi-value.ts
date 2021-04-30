@@ -4,10 +4,10 @@ import { Value } from "../../value"
 import { readback } from "../../readback"
 import { Closure } from "../../closure"
 import * as ut from "../../ut"
-import { TypeValue } from "../../cores"
-import { Pi, Fn, Ap } from "../../cores"
-import { NotYetValue } from "../../cores"
-import { VarNeutral } from "../../cores"
+import { TypeValue } from "../../exps"
+import { Pi, Fn, Ap } from "../../exps"
+import { NotYetValue } from "../../exps"
+import { VarNeutral } from "../../exps"
 
 export class PiValue {
   arg_t: Value

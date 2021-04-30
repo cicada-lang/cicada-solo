@@ -9,10 +9,6 @@ export class Zero implements Core {
     return new ZeroValue()
   }
 
-  infer(ctx: Ctx): Value {
-    return new NatValue()
-  }
-
   repr(): string {
     return "0"
   }

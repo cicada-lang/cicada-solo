@@ -3,7 +3,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { expect } from "../../expect"
 import { Value } from "../../value"
-import { ListValue, NilValue } from "../../cores"
+import { ListValue, NilValue } from "../../exps"
 
 export class Nil implements Exp {
   evaluate(ctx: Ctx, env: Env): Value {

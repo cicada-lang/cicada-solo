@@ -4,9 +4,11 @@
   >   understanding type system than most of the others.
   > We need to do this little by little.
 
-  - `core` -- `evaluate` `repr` `alpha_repr`
-    - `readback` return `core`
-  - `exp` -- `check` `infer` `repr`
+  - [x] `core` -- only `evaluate` `repr` `alpha_repr`
+  - [] `readback` return `Core`
+  - [] `check` return `Core`
+  - [] `infer` return `{ t: Value, core: Core }`
+  - [] `exp` -- only `check` `infer` `repr`
 
 > without elaboration, try to implement list now and see what will happen.
 > - maybe we can not implement the `list_rec` with simple type signature.

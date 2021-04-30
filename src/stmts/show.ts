@@ -4,7 +4,7 @@ import { Exp } from "../exp"
 import { infer } from "../infer"
 import { evaluate } from "../evaluate"
 import { readback } from "../readback"
-import { TypeValue } from "../cores"
+import { TypeValue } from "../exps"
 
 export class Show implements Stmt {
   exp: Exp

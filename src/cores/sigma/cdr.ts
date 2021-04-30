@@ -21,13 +21,6 @@ export class Cdr implements Core {
     return Cdr.apply(evaluate(ctx, env, this.target))
   }
 
-  infer(ctx: Ctx): Value {
-    const target_t = infer(ctx, this.target)
-    const sigma = expect(ctx, target_t, SigmaValue)
-    const car = Car.apply(evaluate(ctx, ctx.to_env(), this.target))
-    return sigma.cdr_t_cl.apply(car)
-  }
-
   repr(): string {
     return `cdr(${this.target.repr()})`
   }

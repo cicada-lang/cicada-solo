@@ -18,11 +18,6 @@ export class Add1 implements Core {
     return new Add1Value(evaluate(ctx, env, this.prev))
   }
 
-  infer(ctx: Ctx): Value {
-    check(ctx, this.prev, new NatValue())
-    return new NatValue()
-  }
-
   repr(): string {
     const n = nat_to_number(this)
     if (n !== undefined) {

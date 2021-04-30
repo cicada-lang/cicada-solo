@@ -6,9 +6,9 @@ import { Closure } from "../../closure"
 import { check } from "../../check"
 import { infer } from "../../infer"
 import { expect } from "../../expect"
-import { PiValue, FnValue } from "../../cores"
-import { Var, VarNeutral } from "../../cores"
-import { NotYetValue } from "../../cores"
+import { PiValue, FnValue } from "../../exps"
+import { Var, VarNeutral } from "../../exps"
+import { NotYetValue } from "../../exps"
 
 export class Fn implements Exp {
   name: string

@@ -23,18 +23,6 @@ export class Obj implements Core {
     return new ObjValue(properties)
   }
 
-  check(ctx: Ctx, t: Value): void {
-    if (t instanceof ClsValue) {
-      const cls = t
-      cls.telescope.check_properties(ctx, this.properties)
-    } else if (t instanceof ExtValue) {
-      const ext = t
-      for (const { telescope } of ext.entries) {
-        telescope.check_properties(ctx, this.properties)
-      }
-    }
-  }
-
   repr(): string {
     const s = Array.from(this.properties)
       .map(([name, exp]) => `${name}: ${exp.repr()}`)

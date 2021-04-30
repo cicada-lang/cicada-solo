@@ -10,10 +10,6 @@ export class Nat implements Core {
     return new NatValue()
   }
 
-  infer(ctx: Ctx): Value {
-    return new TypeValue()
-  }
-
   repr(): string {
     return "Nat"
   }

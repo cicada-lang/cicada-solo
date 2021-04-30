@@ -1,7 +1,7 @@
 import { Env } from "../env"
 import { Value } from "../value"
-import { NotYetValue } from "../cores"
-import { VarNeutral } from "../cores"
+import { NotYetValue } from "../exps"
+import { VarNeutral } from "../exps"
 
 type CtxEntry = {
   t: Value

@@ -5,8 +5,8 @@ import { check } from "../../check"
 import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
-import { TypeValue } from "../../cores"
-import { SigmaValue } from "../../cores"
+import { TypeValue } from "../../exps"
+import { SigmaValue } from "../../exps"
 
 export class Sigma implements Exp {
   name: string
@@ -21,7 +21,10 @@ export class Sigma implements Exp {
 
   evaluate(ctx: Ctx, env: Env): Value {
     const car_t = evaluate(ctx, env, this.car_t)
-    return new SigmaValue(car_t, new Closure(ctx, env, this.name, car_t, this.cdr_t))
+    return new SigmaValue(
+      car_t,
+      new Closure(ctx, env, this.name, car_t, this.cdr_t)
+    )
   }
 
   infer(ctx: Ctx): Value {

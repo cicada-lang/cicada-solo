@@ -16,10 +16,6 @@ export class Quote implements Core {
     return new QuoteValue(this.str)
   }
 
-  infer(ctx: Ctx): Value {
-    return new StrValue()
-  }
-
   repr(): string {
     return `"${this.str}"`
   }

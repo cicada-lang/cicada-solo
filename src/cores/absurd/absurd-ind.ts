@@ -26,17 +26,6 @@ export class AbsurdInd implements Core {
     )
   }
 
-  infer(ctx: Ctx): Value {
-    // NOTE the `motive` here is not a function from target_t to type,
-    //   but a element of type.
-    // NOTE We should always infer target,
-    //   but we do a simple check for the simple absurd.
-    check(ctx, this.target, new AbsurdValue())
-    check(ctx, this.motive, new TypeValue())
-    const motive_value = evaluate(ctx, ctx.to_env(), this.motive)
-    return motive_value
-  }
-
   repr(): string {
     return `absurd_ind(${this.target.repr()}, ${this.motive.repr()})`
   }

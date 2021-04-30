@@ -2,7 +2,7 @@ import { Neutral } from "../../neutral"
 import { Normal } from "../../normal"
 import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
-import { NatInd } from "../../cores"
+import { NatInd } from "../../exps"
 
 export class NatIndNeutral implements Neutral {
   target: Neutral

@@ -1,8 +1,8 @@
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Value } from "../../value"
-import { TypeValue } from "../../cores"
-import { Nat } from "../../cores"
+import { TypeValue } from "../../exps"
+import { Nat } from "../../exps"
 
 export class NatValue {
   readback(ctx: Ctx, t: Value): Exp | undefined {

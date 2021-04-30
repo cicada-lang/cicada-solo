@@ -5,8 +5,8 @@ import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { check } from "../../check"
 import { evaluate } from "../../evaluate"
-import { TypeValue } from "../../cores"
-import { PiValue } from "../../cores"
+import { TypeValue } from "../../exps"
+import { PiValue } from "../../exps"
 
 export class Pi implements Exp {
   name: string
@@ -21,7 +21,10 @@ export class Pi implements Exp {
 
   evaluate(ctx: Ctx, env: Env): Value {
     const arg_t = evaluate(ctx, env, this.arg_t)
-    return new PiValue(arg_t, new Closure(ctx, env, this.name, arg_t, this.ret_t))
+    return new PiValue(
+      arg_t,
+      new Closure(ctx, env, this.name, arg_t, this.ret_t)
+    )
   }
 
   infer(ctx: Ctx): Value {

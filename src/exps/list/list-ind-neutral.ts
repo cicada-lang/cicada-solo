@@ -2,7 +2,7 @@ import { Neutral } from "../../neutral"
 import { Normal } from "../../normal"
 import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
-import { ListInd } from "../../cores"
+import { ListInd } from "../../exps"
 
 export class ListIndNeutral implements Neutral {
   target: Neutral

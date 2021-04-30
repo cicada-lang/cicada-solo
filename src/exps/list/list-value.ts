@@ -2,8 +2,8 @@ import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Value } from "../../value"
 import { readback } from "../../readback"
-import { TypeValue } from "../../cores"
-import { List } from "../../cores"
+import { TypeValue } from "../../exps"
+import { List } from "../../exps"
 
 export class ListValue {
   elem_t: Value

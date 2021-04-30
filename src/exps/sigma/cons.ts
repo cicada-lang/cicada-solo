@@ -6,7 +6,7 @@ import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
-import { SigmaValue, ConsValue } from "../../cores"
+import { SigmaValue, ConsValue } from "../../exps"
 
 export class Cons implements Exp {
   car: Exp
@@ -18,7 +18,10 @@ export class Cons implements Exp {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new ConsValue(evaluate(ctx, env, this.car), evaluate(ctx, env, this.cdr))
+    return new ConsValue(
+      evaluate(ctx, env, this.car),
+      evaluate(ctx, env, this.cdr)
+    )
   }
 
   check(ctx: Ctx, t: Value): void {

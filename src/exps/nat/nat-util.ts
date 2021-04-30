@@ -1,5 +1,5 @@
 import { Exp } from "../../exp"
-import { Zero, Add1 } from "../../cores"
+import { Zero, Add1 } from "../../exps"
 
 export function nat_from_number(n: number): Exp {
   if (n <= 0) {

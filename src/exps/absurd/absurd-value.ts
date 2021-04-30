@@ -1,8 +1,8 @@
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Value } from "../../value"
-import { TypeValue } from "../../cores"
-import { Absurd } from "../../cores"
+import { TypeValue } from "../../exps"
+import { Absurd } from "../../exps"
 
 export class AbsurdValue {
   readback(ctx: Ctx, t: Value): Exp | undefined {

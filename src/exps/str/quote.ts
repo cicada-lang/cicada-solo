@@ -2,8 +2,8 @@ import { Exp, AlphaCtx } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { StrValue } from "../../cores"
-import { QuoteValue } from "../../cores"
+import { StrValue } from "../../exps"
+import { QuoteValue } from "../../exps"
 
 export class Quote implements Exp {
   str: string

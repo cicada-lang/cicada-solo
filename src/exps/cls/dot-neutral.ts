@@ -1,7 +1,7 @@
 import { Neutral } from "../../neutral"
 import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
-import { Dot } from "../../cores"
+import { Dot } from "../../exps"
 
 export class DotNeutral {
   target: Neutral

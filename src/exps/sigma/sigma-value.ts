@@ -4,11 +4,11 @@ import { readback } from "../../readback"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 import * as ut from "../../ut"
-import { TypeValue } from "../../cores"
-import { Sigma } from "../../cores"
-import { Cons, Car, Cdr } from "../../cores"
-import { NotYetValue } from "../../cores"
-import { VarNeutral } from "../../cores"
+import { TypeValue } from "../../exps"
+import { Sigma } from "../../exps"
+import { Cons, Car, Cdr } from "../../exps"
+import { NotYetValue } from "../../exps"
+import { VarNeutral } from "../../exps"
 
 export class SigmaValue {
   car_t: Value

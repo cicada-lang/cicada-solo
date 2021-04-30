@@ -19,13 +19,6 @@ export class The implements Core {
     return evaluate(ctx, env, this.exp)
   }
 
-  infer(ctx: Ctx): Value {
-    check(ctx, this.t, new TypeValue())
-    const t_value = evaluate(ctx, ctx.to_env(), this.t)
-    check(ctx, this.exp, t_value)
-    return t_value
-  }
-
   repr(): string {
     return `@the ${this.t.repr()} ${this.exp.repr()}`
   }

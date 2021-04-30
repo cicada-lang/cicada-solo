@@ -10,10 +10,6 @@ export class Nil implements Core {
     return new NilValue()
   }
 
-  check(ctx: Ctx, t: Value): void {
-    expect(ctx, t, ListValue)
-  }
-
   repr(): string {
     return "nil"
   }

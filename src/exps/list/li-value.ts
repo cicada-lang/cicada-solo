@@ -2,7 +2,7 @@ import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Value } from "../../value"
 import { readback } from "../../readback"
-import { ListValue, Li } from "../../cores"
+import { ListValue, Li } from "../../exps"
 
 export class LiValue {
   head: Value

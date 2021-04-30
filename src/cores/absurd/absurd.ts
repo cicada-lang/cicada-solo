@@ -10,10 +10,6 @@ export class Absurd implements Core {
     return new AbsurdValue()
   }
 
-  infer(ctx: Ctx): Value {
-    return new TypeValue()
-  }
-
   repr(): string {
     return "Absurd"
   }

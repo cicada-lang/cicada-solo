@@ -1,7 +1,7 @@
 import pt from "@cicada-lang/partech"
 import { Stmt } from "../../stmt"
 import { Def, Show, Class, Import, ImportEntry } from "../../stmts"
-import { The, Pi, Fn, Cls, Ext } from "../../cores"
+import { The, Pi, Fn, Cls, Ext } from "../../exps"
 import {
   exp_matcher,
   cls_entry_matcher,

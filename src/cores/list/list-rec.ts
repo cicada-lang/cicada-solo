@@ -43,15 +43,6 @@ export class ListRec implements Core {
     )
   }
 
-  infer(ctx: Ctx): Value {
-    const target_t = infer(ctx, this.target)
-    const list_t = expect(ctx, target_t, ListValue)
-    const elem_t = list_t.elem_t
-    const base_t = infer(ctx, this.base)
-    check(ctx, this.step, list_rec_step_t(base_t, elem_t))
-    return base_t
-  }
-
   repr(): string {
     return `list_rec(${this.target.repr()}, ${this.base.repr()}, ${this.step.repr()})`
   }
@@ -83,7 +74,13 @@ export class ListRec implements Core {
               (list_t: ListValue) => {
                 const motive_t = new PiValue(
                   list_t,
-                  new Closure(new Ctx(), new Env(), "target_list", list_t, new Type())
+                  new Closure(
+                    new Ctx(),
+                    new Env(),
+                    "target_list",
+                    list_t,
+                    new Type()
+                  )
                 )
 
                 throw new Error("TODO")

@@ -7,10 +7,14 @@ import { readback } from "../../readback"
 import { conversion } from "../../conversion"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
-import { TypeValue } from "../../cores"
-import { EqualValue, SameValue } from "../../cores"
+import { TypeValue } from "../../exps"
+import { EqualValue, SameValue } from "../../exps"
 
 export class Same implements Exp {
+  evaluate(ctx: Ctx, env: Env): Value {
+    return new SameValue()
+  }
+
   check(ctx: Ctx, t: Value): void {
     const equal = expect(ctx, t, EqualValue)
     if (!conversion(ctx, equal.t, equal.from, equal.to)) {
@@ -26,10 +30,6 @@ export class Same implements Exp {
           |`)
       )
     }
-  }
-
-  evaluate(ctx: Ctx, env: Env): Value {
-    return new SameValue()
   }
 
   repr(): string {

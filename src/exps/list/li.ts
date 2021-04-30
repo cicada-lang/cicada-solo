@@ -5,7 +5,7 @@ import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { infer } from "../../infer"
 import { Value } from "../../value"
-import { ListValue, LiValue } from "../../cores"
+import { ListValue, LiValue } from "../../exps"
 
 export class Li implements Exp {
   head: Exp
@@ -17,7 +17,10 @@ export class Li implements Exp {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new LiValue(evaluate(ctx, env, this.head), evaluate(ctx, env, this.tail))
+    return new LiValue(
+      evaluate(ctx, env, this.head),
+      evaluate(ctx, env, this.tail)
+    )
   }
 
   infer(ctx: Ctx): Value {

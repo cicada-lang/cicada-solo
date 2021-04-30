@@ -1,8 +1,8 @@
 import { Env } from "../../env"
 import { Ctx } from "../../ctx"
 import { Exp, AlphaCtx } from "../../exp"
-import { TypeValue } from "../../cores"
-import { AbsurdValue } from "../../cores"
+import { TypeValue } from "../../exps"
+import { AbsurdValue } from "../../exps"
 import { Value } from "../../value"
 
 export class Absurd implements Exp {

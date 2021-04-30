@@ -27,29 +27,6 @@ export class Let implements Core {
     )
   }
 
-  infer(ctx: Ctx): Value {
-    return infer(
-      ctx.extend(
-        this.name,
-        infer(ctx, this.exp),
-        evaluate(ctx, ctx.to_env(), this.exp)
-      ),
-      this.ret
-    )
-  }
-
-  check(ctx: Ctx, t: Value): void {
-    check(
-      ctx.extend(
-        this.name,
-        infer(ctx, this.exp),
-        evaluate(ctx, ctx.to_env(), this.exp)
-      ),
-      this.ret,
-      t
-    )
-  }
-
   repr(): string {
     return `@let ${this.name} = ${this.exp.repr()} ${this.ret.repr()}`
   }

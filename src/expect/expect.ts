@@ -2,7 +2,7 @@ import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { Trace } from "../trace"
 import { readback } from "../readback"
-import { TypeValue } from "../cores"
+import { TypeValue } from "../exps"
 
 type Class<T> = new (...args: any[]) => T
 

@@ -3,8 +3,8 @@ import { Value } from "../../value"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Telescope } from "../../telescope"
-import { ClsValue } from "../../cores"
-import { TypeValue } from "../../cores"
+import { ClsValue } from "../../exps"
+import { TypeValue } from "../../exps"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import * as ut from "../../ut"
@@ -22,7 +22,9 @@ export class Cls implements Exp {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new ClsValue(new Telescope(ctx, env, this.entries), { name: this.name })
+    return new ClsValue(new Telescope(ctx, env, this.entries), {
+      name: this.name,
+    })
   }
 
   infer(ctx: Ctx): Value {

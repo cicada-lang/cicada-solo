@@ -1,6 +1,6 @@
 import { Exp } from "../exp"
 import { Ctx } from "../ctx"
-import { Var } from "../cores"
+import { Var } from "../exps"
 
 export class VarNeutral {
   name: string

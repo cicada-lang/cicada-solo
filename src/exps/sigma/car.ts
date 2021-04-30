@@ -6,8 +6,8 @@ import { expect } from "../../expect"
 import { Value, match_value } from "../../value"
 import { evaluate } from "../../evaluate"
 import { Trace } from "../../trace"
-import { NotYetValue } from "../../cores"
-import { SigmaValue, ConsValue, CarNeutral } from "../../cores"
+import { NotYetValue } from "../../exps"
+import { SigmaValue, ConsValue, CarNeutral } from "../../exps"
 
 export class Car implements Exp {
   target: Exp
