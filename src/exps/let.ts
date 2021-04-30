@@ -21,7 +21,10 @@ export class Let extends Exp {
 
   evaluate(ctx: Ctx, env: Env): Value {
     // const t = infer(ctx, this.exp)
+
+    // TODO the following use of `new TypeValue()` is placeholder.
     const t = new TypeValue()
+
     const value = evaluate(ctx, env, this.exp)
     return evaluate(
       ctx.extend(this.name, t, value),

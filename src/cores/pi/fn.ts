@@ -21,9 +21,8 @@ export class Fn extends Core {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new FnValue(
-      new Closure(ctx, env, this.name, infer(ctx, new Var(this.name)), this.ret)
-    )
+    const t = infer(ctx, new Var(this.name))
+    return new FnValue(new Closure(ctx, env, this.name, t, this.ret))
   }
 
   repr(): string {

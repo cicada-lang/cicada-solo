@@ -20,12 +20,12 @@ export class Fn extends Exp {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new FnValue(
-      new Closure(ctx, env, this.name, new TypeValue(), this.ret)
-    )
-    // return new FnValue(
-    //   new Closure(ctx, env, this.name, infer(ctx, new Var(this.name)), this.ret)
-    // )
+    // const t = infer(ctx, new Var(this.name))
+
+    // TODO the following use of `new TypeValue()` is placeholder.
+    const t = new TypeValue()
+
+    return new FnValue(new Closure(ctx, env, this.name, t, this.ret))
   }
 
   check(ctx: Ctx, t: Value): void {
