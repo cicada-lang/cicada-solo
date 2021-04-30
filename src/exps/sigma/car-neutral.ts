@@ -1,7 +1,7 @@
 import { Neutral } from "../../neutral"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Car } from "../../exps"
+import { Car } from "../../cores"
 
 export class CarNeutral implements Neutral {
   target: Neutral
@@ -10,7 +10,7 @@ export class CarNeutral implements Neutral {
     this.target = target
   }
 
-  readback_neutral(ctx: Ctx): Exp {
+  readback_neutral(ctx: Ctx): Core {
     return new Car(this.target.readback_neutral(ctx))
   }
 }

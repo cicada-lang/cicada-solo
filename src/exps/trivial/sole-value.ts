@@ -1,10 +1,10 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value } from "../../value"
-import { Sole } from "../../exps"
+import { Sole } from "../../cores"
 
 export class SoleValue {
-  readback(ctx: Ctx, t: Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Core | undefined {
     return new Sole()
   }
 }

@@ -1,6 +1,6 @@
-import { Exp } from "../exp"
+import { Core } from "../core"
 import { Ctx } from "../ctx"
-import { Var } from "../exps"
+import { Var } from "../cores"
 
 export class VarNeutral {
   name: string
@@ -9,7 +9,7 @@ export class VarNeutral {
     this.name = name
   }
 
-  readback_neutral(ctx: Ctx): Exp {
+  readback_neutral(ctx: Ctx): Core {
     return new Var(this.name)
   }
 }

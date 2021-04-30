@@ -1,15 +1,16 @@
 import { Env } from "../env"
 import { Ctx } from "../ctx"
 import { Exp } from "../exp"
+import { Core } from "../core"
 import { Value } from "../value"
-import { TypeValue } from "../exps"
-import { NotYetValue, VarNeutral } from "../exps"
+import { TypeValue } from "../cores"
+import { NotYetValue, VarNeutral } from "../cores"
 import { conversion } from "../conversion"
 import { readback } from "../readback"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { Trace } from "../trace"
-import { Dot } from "../exps"
+import { Dot } from "../cores"
 import * as ut from "../ut"
 
 export class Telescope {
@@ -93,7 +94,7 @@ export class Telescope {
   readback(
     ctx: Ctx
   ): {
-    entries: Array<{ name: string; t: Exp; exp?: Exp }>
+    entries: Array<{ name: string; t: Core; exp?: Core }>
     ctx: Ctx
   } {
     const entries = []
@@ -123,7 +124,7 @@ export class Telescope {
     return { entries, ctx }
   }
 
-  eta_expand_properties(ctx: Ctx, value: Value): Map<string, Exp> {
+  eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
     const properties = new Map()
 
     for (const { name, t, value: fulfilled_value } of this.fulfilled) {

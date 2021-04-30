@@ -1,11 +1,12 @@
 import { Ctx } from "../ctx"
 import { Exp } from "../exp"
+import { Core } from "../core"
 import { Trace } from "../trace"
 import * as ut from "../ut"
 
 export type Value = {
-  readback(ctx: Ctx, t: Value): Exp | undefined
-  eta_expand?(ctx: Ctx, value: Value): Exp
+  readback(ctx: Ctx, t: Value): Core | undefined
+  eta_expand?(ctx: Ctx, value: Value): Core
 }
 
 type Class<T> = new (...args: any[]) => T

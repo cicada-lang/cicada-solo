@@ -1,8 +1,8 @@
 import { Neutral } from "../../neutral"
 import { Normal } from "../../normal"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Replace } from "../../exps"
+import { Replace } from "../../cores"
 
 export class ReplaceNeutral implements Neutral {
   target: Neutral
@@ -15,7 +15,7 @@ export class ReplaceNeutral implements Neutral {
     this.base = base
   }
 
-  readback_neutral(ctx: Ctx): Exp {
+  readback_neutral(ctx: Ctx): Core {
     return new Replace(
       this.target.readback_neutral(ctx),
       this.motive.readback_normal(ctx),

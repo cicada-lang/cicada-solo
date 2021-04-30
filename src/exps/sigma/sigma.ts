@@ -5,8 +5,8 @@ import { check } from "../../check"
 import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
-import { TypeValue } from "../../exps"
-import { SigmaValue } from "../../exps"
+import { TypeValue } from "../../cores"
+import { SigmaValue } from "../../cores"
 
 export class Sigma extends Exp {
   name: string

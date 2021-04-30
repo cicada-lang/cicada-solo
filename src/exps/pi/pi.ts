@@ -5,8 +5,8 @@ import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { check } from "../../check"
 import { evaluate } from "../../evaluate"
-import { TypeValue } from "../../exps"
-import { PiValue } from "../../exps"
+import { TypeValue } from "../../cores"
+import { PiValue } from "../../cores"
 
 export class Pi extends Exp {
   name: string

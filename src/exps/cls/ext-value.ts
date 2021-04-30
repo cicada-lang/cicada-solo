@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value } from "../../value"
-import { Cls, Obj, TypeValue } from "../../exps"
+import { Cls, Obj, TypeValue } from "../../cores"
 import { Telescope } from "../../telescope"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
@@ -23,7 +23,7 @@ export class ExtValue {
   }
 
   // NOTE ExtValue should be readback to Cls instead of Ext.
-  readback(ctx: Ctx, t: Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof TypeValue) {
       let entries = new Array()
       for (const { telescope } of this.entries) {
@@ -36,7 +36,7 @@ export class ExtValue {
     }
   }
 
-  eta_expand(ctx: Ctx, value: Value): Exp {
+  eta_expand(ctx: Ctx, value: Value): Core {
     let properties = new Map()
     for (const { telescope } of this.entries) {
       properties = new Map([

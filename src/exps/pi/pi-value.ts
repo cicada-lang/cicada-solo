@@ -1,13 +1,13 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value } from "../../value"
 import { readback } from "../../readback"
 import { Closure } from "../../closure"
 import * as ut from "../../ut"
-import { TypeValue } from "../../exps"
-import { Pi, Fn, Ap } from "../../exps"
-import { NotYetValue } from "../../exps"
-import { VarNeutral } from "../../exps"
+import { TypeValue } from "../../cores"
+import { Pi, Fn, Ap } from "../../cores"
+import { NotYetValue } from "../../cores"
+import { VarNeutral } from "../../cores"
 
 export class PiValue {
   arg_t: Value
@@ -18,7 +18,7 @@ export class PiValue {
     this.ret_t_cl = ret_t_cl
   }
 
-  readback(ctx: Ctx, t: Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof TypeValue) {
       const fresh_name = ut.freshen_name(
         new Set(ctx.names()),
@@ -35,7 +35,7 @@ export class PiValue {
     }
   }
 
-  eta_expand(ctx: Ctx, value: Value): Exp {
+  eta_expand(ctx: Ctx, value: Value): Core {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.

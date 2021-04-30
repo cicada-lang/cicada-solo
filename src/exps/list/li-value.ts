@@ -1,8 +1,8 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value } from "../../value"
 import { readback } from "../../readback"
-import { ListValue, Li } from "../../exps"
+import { ListValue, Li } from "../../cores"
 
 export class LiValue {
   head: Value
@@ -13,7 +13,7 @@ export class LiValue {
     this.tail = tail
   }
 
-  readback(ctx: Ctx, t: Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof ListValue) {
       return new Li(
         readback(ctx, t.elem_t, this.head),

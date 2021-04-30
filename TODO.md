@@ -5,7 +5,7 @@
   > We need to do this little by little.
 
   - [x] `core` -- only `evaluate` `repr` `alpha_repr`
-  - [] `readback` return `Core`
+  - [x] `readback` return `Core`
   - [] `check` return `Core`
   - [] `infer` return `{ t: Value, core: Core }`
   - [] `exp` -- only `check` `infer` `repr`

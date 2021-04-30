@@ -1,11 +1,11 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value } from "../../value"
-import { TypeValue } from "../../exps"
-import { Absurd } from "../../exps"
+import { TypeValue } from "../../cores"
+import { Absurd } from "../../cores"
 
 export class AbsurdValue {
-  readback(ctx: Ctx, t: Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof TypeValue) {
       return new Absurd()
     }

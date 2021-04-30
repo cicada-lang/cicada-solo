@@ -5,10 +5,9 @@ import { infer } from "../../infer"
 import { expect } from "../../expect"
 import { evaluate } from "../../evaluate"
 import { Value, match_value } from "../../value"
-import { Closure } from "../../closure"
-import { Trace } from "../../trace"
-import { Car, SigmaValue, ConsValue, CdrNeutral } from "../../exps"
-import { NotYetValue } from "../../exps"
+import { Car } from "../../exps"
+import { SigmaValue, ConsValue, CdrNeutral } from "../../cores"
+import { NotYetValue } from "../../cores"
 
 export class Cdr extends Exp {
   target: Exp

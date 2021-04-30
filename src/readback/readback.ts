@@ -1,15 +1,14 @@
 import { Value } from "../value"
 import { Core } from "../core"
-import { Exp } from "../exp"
 import { Ctx } from "../ctx"
-import { Absurd } from "../exps"
-import { The } from "../exps"
-import { AbsurdValue } from "../exps"
-import { NotYetValue } from "../exps"
+import { Absurd } from "../cores"
+import { The } from "../cores"
+import { AbsurdValue } from "../cores"
+import { NotYetValue } from "../cores"
 import { Trace } from "../trace"
 import * as ut from "../ut"
 
-export function readback(ctx: Ctx, t: Value, value: Value): Exp {
+export function readback(ctx: Ctx, t: Value, value: Value): Core {
   if (t.eta_expand) {
     return t.eta_expand(ctx, value)
   }

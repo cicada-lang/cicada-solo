@@ -1,5 +1,5 @@
 import { Ctx } from "../ctx"
-import { Exp } from "../exp"
+import { Core } from "../core"
 import { Value } from "../value"
 import { Neutral } from "../neutral"
 
@@ -12,7 +12,7 @@ export class NotYetValue {
     this.neutral = neutral
   }
 
-  readback(ctx: Ctx, t: Value): Exp {
+  readback(ctx: Ctx, t: Value): Core {
     // NOTE  t and value.t are ignored here,
     //  maybe use them to debug.
     return this.neutral.readback_neutral(ctx)

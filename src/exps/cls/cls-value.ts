@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value } from "../../value"
-import { Cls, Obj, TypeValue } from "../../exps"
+import { Cls, Obj, TypeValue } from "../../cores"
 import { Telescope } from "../../telescope"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
@@ -15,14 +15,14 @@ export class ClsValue {
     this.name = opts?.name
   }
 
-  readback(ctx: Ctx, t: Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof TypeValue) {
       const { entries } = this.telescope.readback(ctx)
       return new Cls(entries, { name: this.name })
     }
   }
 
-  eta_expand(ctx: Ctx, value: Value): Exp {
+  eta_expand(ctx: Ctx, value: Value): Core {
     return new Obj(this.telescope.eta_expand_properties(ctx, value))
   }
 

@@ -1,7 +1,7 @@
 import { Neutral } from "../../neutral"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Cdr } from "../../exps"
+import { Cdr } from "../../cores"
 
 export class CdrNeutral implements Neutral {
   target: Neutral
@@ -10,7 +10,7 @@ export class CdrNeutral implements Neutral {
     this.target = target
   }
 
-  readback_neutral(ctx: Ctx): Exp {
+  readback_neutral(ctx: Ctx): Core {
     return new Cdr(this.target.readback_neutral(ctx))
   }
 }

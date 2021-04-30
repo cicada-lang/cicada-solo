@@ -1,11 +1,11 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value } from "../../value"
-import { TypeValue } from "../../exps"
-import { Nat } from "../../exps"
+import { TypeValue } from "../../cores"
+import { Nat } from "../../cores"
 
 export class NatValue {
-  readback(ctx: Ctx, t: Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof TypeValue) {
       return new Nat()
     }

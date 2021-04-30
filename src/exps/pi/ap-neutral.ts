@@ -1,8 +1,8 @@
 import { Neutral } from "../../neutral"
 import { Normal } from "../../normal"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Ap } from "../../exps"
+import { Ap } from "../../cores"
 
 export class ApNeutral implements Neutral {
   target: Neutral
@@ -13,7 +13,7 @@ export class ApNeutral implements Neutral {
     this.arg = arg
   }
 
-  readback_neutral(ctx: Ctx): Exp {
+  readback_neutral(ctx: Ctx): Core {
     return new Ap(
       this.target.readback_neutral(ctx),
       this.arg.readback_normal(ctx)

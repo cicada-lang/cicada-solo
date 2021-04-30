@@ -1,8 +1,8 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value } from "../../value"
-import { StrValue } from "../../exps"
-import { Quote } from "../../exps"
+import { StrValue } from "../../cores"
+import { Quote } from "../../cores"
 
 export class QuoteValue {
   str: string
@@ -11,7 +11,7 @@ export class QuoteValue {
     this.str = str
   }
 
-  readback(ctx: Ctx, t: Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof StrValue) {
       return new Quote(this.str)
     }

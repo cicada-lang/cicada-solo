@@ -1,5 +1,5 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 
@@ -10,7 +10,7 @@ export class FnValue {
     this.ret_cl = ret_cl
   }
 
-  readback(ctx: Ctx, t: Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Core | undefined {
     // NOTE eta expand
     return undefined
   }

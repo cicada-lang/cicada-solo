@@ -1,11 +1,11 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value } from "../../value"
-import { TypeValue } from "../../exps"
-import { Str } from "../../exps"
+import { TypeValue } from "../../cores"
+import { Str } from "../../cores"
 
 export class StrValue {
-  readback(ctx: Ctx, t: Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof TypeValue) {
       return new Str()
     }

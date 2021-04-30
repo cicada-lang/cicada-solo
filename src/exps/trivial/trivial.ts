@@ -2,8 +2,8 @@ import { Exp, AlphaCtx } from "../../exp"
 import { Value } from "../../value"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import { TypeValue } from "../../exps"
-import { TrivialValue } from "../../exps"
+import { TypeValue } from "../../cores"
+import { TrivialValue } from "../../cores"
 
 export class Trivial extends Exp {
   evaluate(ctx: Ctx, env: Env): Value {

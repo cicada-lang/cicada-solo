@@ -1,4 +1,5 @@
 import { Exp } from "../exp"
+import { Core } from "../core"
 import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { readback } from "../readback"
@@ -12,7 +13,7 @@ export class Normal {
     this.value = value
   }
 
-  readback_normal(ctx: Ctx): Exp {
+  readback_normal(ctx: Ctx): Core {
     return readback(ctx, this.t, this.value)
   }
 }

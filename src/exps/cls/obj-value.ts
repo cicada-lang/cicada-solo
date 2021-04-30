@@ -1,5 +1,5 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value } from "../../value"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
@@ -11,7 +11,7 @@ export class ObjValue {
     this.properties = properties
   }
 
-  readback(ctx: Ctx, t: Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Core | undefined {
     // NOTE eta expand
     return undefined
   }

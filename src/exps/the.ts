@@ -4,7 +4,7 @@ import { Ctx } from "../ctx"
 import { Value } from "../value"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
-import { TypeValue } from "../exps"
+import { TypeValue } from "../cores"
 
 export class The extends Exp {
   t: Exp

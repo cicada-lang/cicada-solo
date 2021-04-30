@@ -1,8 +1,8 @@
 import { Neutral } from "../../neutral"
 import { Normal } from "../../normal"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { NatInd } from "../../exps"
+import { NatInd } from "../../cores"
 
 export class NatIndNeutral implements Neutral {
   target: Neutral
@@ -17,7 +17,7 @@ export class NatIndNeutral implements Neutral {
     this.step = step
   }
 
-  readback_neutral(ctx: Ctx): Exp {
+  readback_neutral(ctx: Ctx): Core {
     return new NatInd(
       this.target.readback_neutral(ctx),
       this.motive.readback_normal(ctx),

@@ -1,14 +1,14 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { readback } from "../../readback"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 import * as ut from "../../ut"
-import { TypeValue } from "../../exps"
-import { Sigma } from "../../exps"
-import { Cons, Car, Cdr } from "../../exps"
-import { NotYetValue } from "../../exps"
-import { VarNeutral } from "../../exps"
+import { TypeValue } from "../../cores"
+import { Sigma } from "../../cores"
+import { Cons, Car, Cdr } from "../../cores"
+import { NotYetValue } from "../../cores"
+import { VarNeutral } from "../../cores"
 
 export class SigmaValue {
   car_t: Value
@@ -19,7 +19,7 @@ export class SigmaValue {
     this.cdr_t_cl = cdr_t_cl
   }
 
-  readback(ctx: Ctx, t: Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof TypeValue) {
       const fresh_name = ut.freshen_name(
         new Set(ctx.names()),
@@ -36,7 +36,7 @@ export class SigmaValue {
     }
   }
 
-  eta_expand(ctx: Ctx, value: Value): Exp {
+  eta_expand(ctx: Ctx, value: Value): Core {
     // NOTE Pairs are also η-expanded.
     //   Every value with a pair type,
     //   whether it is neutral or not,

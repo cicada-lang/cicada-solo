@@ -1,11 +1,11 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value } from "../../value"
-import { EqualValue } from "../../exps"
-import { Same } from "../../exps"
+import { EqualValue } from "../../cores"
+import { Same } from "../../cores"
 
 export class SameValue {
-  readback(ctx: Ctx, t: Value): Exp | undefined {
+  readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof EqualValue) {
       return new Same()
     }
