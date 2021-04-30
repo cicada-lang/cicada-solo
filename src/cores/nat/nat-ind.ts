@@ -19,13 +19,14 @@ import {
 import { PiValue } from "../../cores"
 import { NotYetValue } from "../../cores"
 
-export class NatInd implements Core {
+export class NatInd extends Core {
   target: Core
   motive: Core
   base: Core
   step: Core
 
   constructor(target: Core, motive: Core, base: Core, step: Core) {
+    super()
     this.target = target
     this.motive = motive
     this.base = base

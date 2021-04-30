@@ -2,10 +2,10 @@ import { Env } from "../env"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 
-export type Core = {
-  evaluate(ctx: Ctx, env: Env): Value
-  repr(): string
-  alpha_repr(ctx: AlphaCtx): string
+export abstract class Core {
+  abstract evaluate(ctx: Ctx, env: Env): Value
+  abstract repr(): string
+  abstract alpha_repr(ctx: AlphaCtx): string
 }
 
 export class AlphaCtx {

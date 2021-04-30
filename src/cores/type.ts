@@ -4,7 +4,7 @@ import { Env } from "../env"
 import { Value } from "../value"
 import { TypeValue } from "../cores"
 
-export class Type implements Core {
+export class Type extends Core {
   evaluate(ctx: Ctx, env: Env): Value {
     return new TypeValue()
   }

@@ -10,7 +10,7 @@ import * as ut from "../../ut"
 import { TypeValue } from "../../cores"
 import { EqualValue, SameValue } from "../../cores"
 
-export class Same implements Core {
+export class Same extends Core {
   evaluate(ctx: Ctx, env: Env): Value {
     return new SameValue()
   }

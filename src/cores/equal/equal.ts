@@ -7,12 +7,13 @@ import { Value } from "../../value"
 import { TypeValue } from "../../cores"
 import { EqualValue } from "../../cores"
 
-export class Equal implements Core {
+export class Equal extends Core {
   t: Core
   from: Core
   to: Core
 
   constructor(t: Core, from: Core, to: Core) {
+    super()
     this.t = t
     this.from = from
     this.to = to

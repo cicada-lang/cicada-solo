@@ -1,4 +1,3 @@
-- make `Core` an `abstract class` instead of `interface`
 - split the responsibilities of `exp` to `core` and `exp`
 
   > If we can achieve this, we will be better at

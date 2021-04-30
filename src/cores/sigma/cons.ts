@@ -8,11 +8,12 @@ import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { SigmaValue, ConsValue } from "../../cores"
 
-export class Cons implements Core {
+export class Cons extends Core {
   car: Core
   cdr: Core
 
   constructor(car: Core, cdr: Core) {
+    super()
     this.car = car
     this.cdr = cdr
   }

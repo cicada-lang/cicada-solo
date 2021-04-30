@@ -5,7 +5,7 @@ import { expect } from "../../expect"
 import { Value } from "../../value"
 import { ListValue, NilValue } from "../../cores"
 
-export class Nil implements Core {
+export class Nil extends Core {
   evaluate(ctx: Ctx, env: Env): Value {
     return new NilValue()
   }

@@ -9,7 +9,7 @@ import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import * as ut from "../../ut"
 
-export class Cls implements Core {
+export class Cls extends Core {
   entries: Array<{ name: string; t: Core; exp?: Core }>
   name?: string
 
@@ -17,6 +17,7 @@ export class Cls implements Core {
     entries: Array<{ name: string; t: Core; exp?: Core }>,
     opts?: { name?: string }
   ) {
+    super()
     this.entries = entries
     this.name = opts?.name
   }

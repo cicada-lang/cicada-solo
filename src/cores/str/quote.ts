@@ -5,10 +5,11 @@ import { Value } from "../../value"
 import { StrValue } from "../../cores"
 import { QuoteValue } from "../../cores"
 
-export class Quote implements Core {
+export class Quote extends Core {
   str: string
 
   constructor(str: string) {
+    super()
     this.str = str
   }
 

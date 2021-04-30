@@ -5,7 +5,7 @@ import { TypeValue } from "../../cores"
 import { AbsurdValue } from "../../cores"
 import { Value } from "../../value"
 
-export class Absurd implements Core {
+export class Absurd extends Core {
   evaluate(ctx: Ctx, env: Env): Value {
     return new AbsurdValue()
   }

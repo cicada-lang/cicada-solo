@@ -9,10 +9,11 @@ import { Trace } from "../../trace"
 import { NotYetValue } from "../../cores"
 import { SigmaValue, ConsValue, CarNeutral } from "../../cores"
 
-export class Car implements Core {
+export class Car extends Core {
   target: Core
 
   constructor(target: Core) {
+    super()
     this.target = target
   }
 

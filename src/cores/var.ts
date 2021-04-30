@@ -4,10 +4,11 @@ import { Env } from "../env"
 import { Value } from "../value"
 import { Trace } from "../trace"
 
-export class Var implements Core {
+export class Var extends Core {
   name: string
 
   constructor(name: string) {
+    super()
     this.name = name
   }
 

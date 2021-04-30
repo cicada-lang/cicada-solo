@@ -9,11 +9,12 @@ import { infer } from "../../infer"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
 
-export class Dot implements Core {
+export class Dot extends Core {
   target: Core
   name: string
 
   constructor(target: Core, name: string) {
+    super()
     this.target = target
     this.name = name
   }

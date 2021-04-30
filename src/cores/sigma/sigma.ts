@@ -8,12 +8,13 @@ import { Closure } from "../../closure"
 import { TypeValue } from "../../cores"
 import { SigmaValue } from "../../cores"
 
-export class Sigma implements Core {
+export class Sigma extends Core {
   name: string
   car_t: Core
   cdr_t: Core
 
   constructor(name: string, car_t: Core, cdr_t: Core) {
+    super()
     this.name = name
     this.car_t = car_t
     this.cdr_t = cdr_t

@@ -16,12 +16,13 @@ import { EqualValue, SameValue } from "../../cores"
 import { PiValue } from "../../cores"
 import { ReplaceNeutral } from "../../cores"
 
-export class Replace implements Core {
+export class Replace extends Core {
   target: Core
   motive: Core
   base: Core
 
   constructor(target: Core, motive: Core, base: Core) {
+    super()
     this.target = target
     this.motive = motive
     this.base = base

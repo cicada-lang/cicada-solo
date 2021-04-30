@@ -7,10 +7,11 @@ import { Value } from "../../value"
 import { TypeValue } from "../../cores"
 import { ListValue } from "../../cores"
 
-export class List implements Core {
+export class List extends Core {
   elem_t: Core
 
   constructor(elem_t: Core) {
+    super()
     this.elem_t = elem_t
   }
 

@@ -7,10 +7,11 @@ import { Value } from "../../value"
 import { nat_to_number } from "./nat-util"
 import { NatValue, Add1Value } from "../../cores"
 
-export class Add1 implements Core {
+export class Add1 extends Core {
   prev: Core
 
   constructor(prev: Core) {
+    super()
     this.prev = prev
   }
 

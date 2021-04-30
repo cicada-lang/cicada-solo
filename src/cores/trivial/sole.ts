@@ -4,7 +4,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { TrivialValue, SoleValue } from "../../cores"
 
-export class Sole implements Core {
+export class Sole extends Core {
   evaluate(ctx: Ctx, env: Env): Value {
     return new SoleValue()
   }

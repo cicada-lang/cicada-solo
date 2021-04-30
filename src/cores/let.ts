@@ -6,12 +6,13 @@ import { evaluate } from "../evaluate"
 import { infer } from "../infer"
 import { check } from "../check"
 
-export class Let implements Core {
+export class Let extends Core {
   name: string
   exp: Core
   ret: Core
 
   constructor(name: string, exp: Core, ret: Core) {
+    super()
     this.name = name
     this.exp = exp
     this.ret = ret

@@ -7,11 +7,12 @@ import { infer } from "../../infer"
 import { Value } from "../../value"
 import { ListValue, LiValue } from "../../cores"
 
-export class Li implements Core {
+export class Li extends Core {
   head: Core
   tail: Core
 
   constructor(head: Core, tail: Core) {
+    super()
     this.head = head
     this.tail = tail
   }
