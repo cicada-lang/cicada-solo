@@ -1,6 +1,8 @@
 - split the responsibilities of `exp` to `core` and `exp`
 
-  > we need to do this little by little
+  > If we can achieve this, we will be better at
+  >   understanding type system than most of the others.
+  > We need to do this little by little.
 
   - `core` -- `evaluate` `repr` `alpha_repr`
     - `readback` return `core`
