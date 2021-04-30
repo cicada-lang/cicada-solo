@@ -5,10 +5,9 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value, match_value } from "../../value"
 import { Normal } from "../../normal"
-import { Trace } from "../../trace"
-import { NotYetValue } from "../../exps"
-import { AbsurdValue, AbsurdIndNeutral } from "../../exps"
-import { TypeValue } from "../../exps"
+import { NotYetValue } from "../../cores"
+import { AbsurdValue, AbsurdIndNeutral } from "../../cores"
+import { TypeValue } from "../../cores"
 
 export class AbsurdInd extends Exp {
   target: Exp

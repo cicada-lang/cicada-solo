@@ -8,20 +8,12 @@ import { expect } from "../../expect"
 import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
-import { Trace } from "../../trace"
-import { Type, TypeValue } from "../../exps"
-import { Var, Pi, Ap } from "../../exps"
-import {
-  ListValue,
-  Nil,
-  NilValue,
-  List,
-  Li,
-  LiValue,
-  ListIndNeutral,
-} from "../../exps"
-import { PiValue } from "../../exps"
-import { NotYetValue } from "../../exps"
+import { TypeValue } from "../../cores"
+import { Type, Var, Pi, Ap } from "../../exps"
+import { Nil, List, Li } from "../../exps"
+import { ListValue, NilValue, LiValue, ListIndNeutral } from "../../cores"
+import { PiValue } from "../../cores"
+import { NotYetValue } from "../../cores"
 
 export class ListInd extends Exp {
   target: Exp

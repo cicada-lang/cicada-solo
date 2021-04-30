@@ -9,9 +9,10 @@ import { Normal } from "../../normal"
 import { Type } from "../../exps"
 import { Nat } from "../../exps"
 import { Var, Pi, Ap } from "../../exps"
-import { Add1, NatValue, ZeroValue, Add1Value, NatIndNeutral } from "../../exps"
-import { PiValue } from "../../exps"
-import { NotYetValue } from "../../exps"
+import { NatValue, ZeroValue, Add1Value, NatIndNeutral } from "../../cores"
+import { Add1 } from "../../exps"
+import { PiValue } from "../../cores"
+import { NotYetValue } from "../../cores"
 
 export class NatInd extends Exp {
   target: Exp

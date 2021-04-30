@@ -9,12 +9,13 @@ import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { Pi, Ap } from "../../exps"
-import { Type, TypeValue } from "../../exps"
+import { Type } from "../../exps"
 import { Var } from "../../exps"
-import { NotYetValue } from "../../exps"
-import { EqualValue, SameValue } from "../../exps"
-import { PiValue } from "../../exps"
-import { ReplaceNeutral } from "../../exps"
+import { TypeValue } from "../../cores"
+import { NotYetValue } from "../../cores"
+import { EqualValue, SameValue } from "../../cores"
+import { PiValue } from "../../cores"
+import { ReplaceNeutral } from "../../cores"
 
 export class Replace extends Exp {
   target: Exp

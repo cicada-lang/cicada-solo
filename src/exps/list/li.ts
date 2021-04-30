@@ -5,7 +5,7 @@ import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { infer } from "../../infer"
 import { Value } from "../../value"
-import { ListValue, LiValue } from "../../exps"
+import { ListValue, LiValue } from "../../cores"
 
 export class Li extends Exp {
   head: Exp

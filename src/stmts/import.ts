@@ -1,8 +1,5 @@
 import { Stmt } from "../stmt"
 import { Module } from "../module"
-import { Exp } from "../exp"
-import { infer } from "../infer"
-import { The, Type, TypeValue, Cls, Ext } from "../exps"
 
 export type ImportEntry = {
   name: string

@@ -1,9 +1,8 @@
 import { Stmt } from "../stmt"
 import { Module } from "../module"
-import { Exp } from "../exp"
 import { infer } from "../infer"
 import { evaluate } from "../evaluate"
-import { The, Type, TypeValue, Cls, Ext } from "../exps"
+import { The, Type, Cls, Ext } from "../exps"
 
 export class Class implements Stmt {
   name: string

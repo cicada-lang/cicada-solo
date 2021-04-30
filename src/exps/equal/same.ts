@@ -7,8 +7,8 @@ import { readback } from "../../readback"
 import { conversion } from "../../conversion"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
-import { TypeValue } from "../../exps"
-import { EqualValue, SameValue } from "../../exps"
+import { TypeValue } from "../../cores"
+import { EqualValue, SameValue } from "../../cores"
 
 export class Same extends Exp {
   evaluate(ctx: Ctx, env: Env): Value {

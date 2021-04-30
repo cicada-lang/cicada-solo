@@ -4,8 +4,7 @@ import { Env } from "../../env"
 import { check } from "../../check"
 import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
-import { TypeValue } from "../../exps"
-import { ListValue } from "../../exps"
+import { TypeValue, ListValue } from "../../cores"
 
 export class List extends Exp {
   elem_t: Exp

@@ -2,8 +2,7 @@ import { Exp, AlphaCtx } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { TypeValue } from "../../exps"
-import { NatValue } from "../../exps"
+import { TypeValue, NatValue } from "../../cores"
 
 export class Nat extends Exp {
   evaluate(ctx: Ctx, env: Env): Value {
