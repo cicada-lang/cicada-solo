@@ -2,14 +2,6 @@ import { Env } from "../env"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 
-// export type Exp = {
-//   evaluate(ctx: Ctx, env: Env): Value
-//   check?(ctx: Ctx, t: Value): void
-//   infer?(ctx: Ctx): Value
-//   repr(): string
-//   alpha_repr(ctx: AlphaCtx): string
-// }
-
 export abstract class Exp {
   abstract evaluate(ctx: Ctx, env: Env): Value
   check?(ctx: Ctx, t: Value): void
