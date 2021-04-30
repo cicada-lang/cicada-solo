@@ -14,11 +14,12 @@ import { ClsValue, ExtValue, TypeValue } from "../../exps"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
 
-export class Ap implements Exp {
+export class Ap extends Exp {
   target: Exp
   arg: Exp
 
   constructor(target: Exp, arg: Exp) {
+    super()
     this.target = target
     this.arg = arg
   }

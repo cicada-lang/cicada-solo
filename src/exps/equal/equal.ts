@@ -7,12 +7,13 @@ import { Value } from "../../value"
 import { TypeValue } from "../../exps"
 import { EqualValue } from "../../exps"
 
-export class Equal implements Exp {
+export class Equal extends Exp {
   t: Exp
   from: Exp
   to: Exp
 
   constructor(t: Exp, from: Exp, to: Exp) {
+    super()
     this.t = t
     this.from = from
     this.to = to

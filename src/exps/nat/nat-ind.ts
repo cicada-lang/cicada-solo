@@ -13,13 +13,14 @@ import { Add1, NatValue, ZeroValue, Add1Value, NatIndNeutral } from "../../exps"
 import { PiValue } from "../../exps"
 import { NotYetValue } from "../../exps"
 
-export class NatInd implements Exp {
+export class NatInd extends Exp {
   target: Exp
   motive: Exp
   base: Exp
   step: Exp
 
   constructor(target: Exp, motive: Exp, base: Exp, step: Exp) {
+    super()
     this.target = target
     this.motive = motive
     this.base = base

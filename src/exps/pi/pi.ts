@@ -8,12 +8,13 @@ import { evaluate } from "../../evaluate"
 import { TypeValue } from "../../exps"
 import { PiValue } from "../../exps"
 
-export class Pi implements Exp {
+export class Pi extends Exp {
   name: string
   arg_t: Exp
   ret_t: Exp
 
   constructor(name: string, arg_t: Exp, ret_t: Exp) {
+    super()
     this.name = name
     this.arg_t = arg_t
     this.ret_t = ret_t

@@ -9,10 +9,11 @@ import { Trace } from "../../trace"
 import { NotYetValue } from "../../exps"
 import { SigmaValue, ConsValue, CarNeutral } from "../../exps"
 
-export class Car implements Exp {
+export class Car extends Exp {
   target: Exp
 
   constructor(target: Exp) {
+    super()
     this.target = target
   }
 

@@ -16,12 +16,13 @@ import { EqualValue, SameValue } from "../../exps"
 import { PiValue } from "../../exps"
 import { ReplaceNeutral } from "../../exps"
 
-export class Replace implements Exp {
+export class Replace extends Exp {
   target: Exp
   motive: Exp
   base: Exp
 
   constructor(target: Exp, motive: Exp, base: Exp) {
+    super()
     this.target = target
     this.motive = motive
     this.base = base

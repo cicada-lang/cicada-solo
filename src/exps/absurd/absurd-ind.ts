@@ -10,11 +10,12 @@ import { NotYetValue } from "../../exps"
 import { AbsurdValue, AbsurdIndNeutral } from "../../exps"
 import { TypeValue } from "../../exps"
 
-export class AbsurdInd implements Exp {
+export class AbsurdInd extends Exp {
   target: Exp
   motive: Exp
 
   constructor(target: Exp, motive: Exp) {
+    super()
     this.target = target
     this.motive = motive
   }

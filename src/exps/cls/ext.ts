@@ -10,7 +10,7 @@ import { check } from "../../check"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
 
-export class Ext implements Exp {
+export class Ext extends Exp {
   name?: string
   parent_name: string
   entries: Array<{ name: string; t: Exp; exp?: Exp }>
@@ -20,6 +20,7 @@ export class Ext implements Exp {
     entries: Array<{ name: string; t: Exp; exp?: Exp }>,
     opts?: { name?: string }
   ) {
+    super()
     this.parent_name = parent_name
     this.entries = entries
     this.name = opts?.name

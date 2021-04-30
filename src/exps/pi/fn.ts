@@ -10,11 +10,12 @@ import { PiValue, FnValue } from "../../exps"
 import { Var, VarNeutral } from "../../exps"
 import { TypeValue, NotYetValue } from "../../cores"
 
-export class Fn implements Exp {
+export class Fn extends Exp {
   name: string
   ret: Exp
 
   constructor(name: string, ret: Exp) {
+    super()
     this.name = name
     this.ret = ret
   }

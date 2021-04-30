@@ -7,10 +7,11 @@ import { Value } from "../../value"
 import { nat_to_number } from "./nat-util"
 import { NatValue, Add1Value } from "../../exps"
 
-export class Add1 implements Exp {
+export class Add1 extends Exp {
   prev: Exp
 
   constructor(prev: Exp) {
+    super()
     this.prev = prev
   }
 

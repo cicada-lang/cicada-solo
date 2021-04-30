@@ -24,12 +24,13 @@ import {
 import { PiValue } from "../../exps"
 import { NotYetValue } from "../../exps"
 
-export class ListRec implements Exp {
+export class ListRec extends Exp {
   target: Exp
   base: Exp
   step: Exp
 
   constructor(target: Exp, base: Exp, step: Exp) {
+    super()
     this.target = target
     this.base = base
     this.step = step

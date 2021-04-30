@@ -6,11 +6,12 @@ import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { TypeValue } from "../exps"
 
-export class The implements Exp {
+export class The extends Exp {
   t: Exp
   exp: Exp
 
   constructor(t: Exp, exp: Exp) {
+    super()
     this.t = t
     this.exp = exp
   }

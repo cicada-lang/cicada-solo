@@ -5,7 +5,7 @@ import { Value } from "../../value"
 import { TypeValue } from "../../exps"
 import { NatValue } from "../../exps"
 
-export class Nat implements Exp {
+export class Nat extends Exp {
   evaluate(ctx: Ctx, env: Env): Value {
     return new NatValue()
   }

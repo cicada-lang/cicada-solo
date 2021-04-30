@@ -23,13 +23,14 @@ import {
 import { PiValue } from "../../exps"
 import { NotYetValue } from "../../exps"
 
-export class ListInd implements Exp {
+export class ListInd extends Exp {
   target: Exp
   motive: Exp
   base: Exp
   step: Exp
 
   constructor(target: Exp, motive: Exp, base: Exp, step: Exp) {
+    super()
     this.target = target
     this.motive = motive
     this.base = base

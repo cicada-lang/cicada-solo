@@ -4,7 +4,7 @@ import { Env } from "../env"
 import { Value } from "../value"
 import { TypeValue } from "../exps"
 
-export class Type implements Exp {
+export class Type extends Exp {
   evaluate(ctx: Ctx, env: Env): Value {
     return new TypeValue()
   }

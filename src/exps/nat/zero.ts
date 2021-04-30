@@ -4,7 +4,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { NatValue, ZeroValue } from "../../exps"
 
-export class Zero implements Exp {
+export class Zero extends Exp {
   evaluate(ctx: Ctx, env: Env): Value {
     return new ZeroValue()
   }

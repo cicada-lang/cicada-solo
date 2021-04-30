@@ -6,10 +6,11 @@ import { ClsValue, ExtValue, ObjValue, TypeValue } from "../../exps"
 import { evaluate } from "../../evaluate"
 import * as ut from "../../ut"
 
-export class Obj implements Exp {
+export class Obj extends Exp {
   properties: Map<string, Exp>
 
   constructor(properties: Map<string, Exp>) {
+    super()
     this.properties = properties
   }
 

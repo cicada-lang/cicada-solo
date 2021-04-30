@@ -7,12 +7,13 @@ import { infer } from "../infer"
 import { check } from "../check"
 import { TypeValue } from "../cores"
 
-export class Let implements Exp {
+export class Let extends Exp {
   name: string
   exp: Exp
   ret: Exp
 
   constructor(name: string, exp: Exp, ret: Exp) {
+    super()
     this.name = name
     this.exp = exp
     this.ret = ret
