@@ -1,4 +1,5 @@
 import { Value } from "../value"
+import { Core } from "../core"
 import { Exp } from "../exp"
 import { Ctx } from "../ctx"
 import { Absurd } from "../exps"

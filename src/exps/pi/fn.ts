@@ -8,7 +8,7 @@ import { infer } from "../../infer"
 import { expect } from "../../expect"
 import { PiValue, FnValue } from "../../exps"
 import { Var, VarNeutral } from "../../exps"
-import { NotYetValue } from "../../exps"
+import { TypeValue, NotYetValue } from "../../cores"
 
 export class Fn implements Exp {
   name: string
@@ -21,8 +21,11 @@ export class Fn implements Exp {
 
   evaluate(ctx: Ctx, env: Env): Value {
     return new FnValue(
-      new Closure(ctx, env, this.name, infer(ctx, new Var(this.name)), this.ret)
+      new Closure(ctx, env, this.name, new TypeValue(), this.ret)
     )
+    // return new FnValue(
+    //   new Closure(ctx, env, this.name, infer(ctx, new Var(this.name)), this.ret)
+    // )
   }
 
   check(ctx: Ctx, t: Value): void {

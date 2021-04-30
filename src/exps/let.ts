@@ -5,6 +5,7 @@ import { Ctx } from "../ctx"
 import { evaluate } from "../evaluate"
 import { infer } from "../infer"
 import { check } from "../check"
+import { TypeValue } from "../cores"
 
 export class Let implements Exp {
   name: string
@@ -18,7 +19,8 @@ export class Let implements Exp {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    const t = infer(ctx, this.exp)
+    // const t = infer(ctx, this.exp)
+    const t = new TypeValue()
     const value = evaluate(ctx, env, this.exp)
     return evaluate(
       ctx.extend(this.name, t, value),
