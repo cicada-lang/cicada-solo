@@ -3,7 +3,7 @@ import { Ctx } from "../ctx"
 import { Value } from "../value"
 
 export abstract class Core {
-  __abstract_class_core__ = "Core"
+  __the_abstract_class_name_is_core__ = "Core"
 
   abstract evaluate(ctx: Ctx, env: Env): Value
   abstract repr(): string
