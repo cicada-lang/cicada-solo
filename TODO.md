@@ -1,4 +1,16 @@
-- split the responsibilities of `exp` to `core` and `exp`
+- import cores with `Cores` prefix -- in `exps/`
+- import cores with `Cores` prefix -- in `cores/`
+- import exps with `Exps` prefix
+
+- `evaluate` should not take `ctx` as argument.
+
+  - After split the `Exp` into `Exp` and `Core`,
+    it is clear that `evaluate` is method of of `Core`,
+    `infer` and `check` are methods of `Exp` (which can take `ctx`),
+    thus it is useless to pass `ctx` into `evaluate`.
+
+
+- split the responsibilities of `Exp` to `Exp` and `Core`
 
   > If we can achieve this, we will be better at
   >   understanding type system than most of the others.
@@ -8,11 +20,13 @@
   - [x] `core` -- only `evaluate` `repr` `alpha_repr`
   - [x] `readback` return `Core`
   - [] `check` return `Core`
-  - [] `infer` return `{ t: Value, core: Core }`
+  - [] `infer` return `{ t: Value, exp: Core }`
   - [] `exp` -- only `check` `infer` `repr`
 
-> without elaboration, try to implement list now and see what will happen.
-> - maybe we can not implement the `list_rec` with simple type signature.
+
+> With elaboration,
+>   we can elaborate `Exps.ListRec` into `Cores.ListInd` (which need `readback`),
+>   or into `Cores.ListRec` (which does not need `readback`).
 
 - `ListRec.apply`
 
