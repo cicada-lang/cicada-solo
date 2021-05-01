@@ -1,3 +1,6 @@
+- import cores with as `Cores.` prefix in `exps/`
+- import cores with as `Cores.` prefix in `cores/`
+
 - split the responsibilities of `exp` to `core` and `exp`
 
   > If we can achieve this, we will be better at
@@ -10,9 +13,6 @@
   - [] `check` return `Core`
   - [] `infer` return `{ t: Value, core: Core }`
   - [] `exp` -- only `check` `infer` `repr`
-
-- import cores with as `Cores.` prefix in `exps/`
-- import cores with as `Cores.` prefix in `cores/`
 
 > without elaboration, try to implement list now and see what will happen.
 > - maybe we can not implement the `list_rec` with simple type signature.
