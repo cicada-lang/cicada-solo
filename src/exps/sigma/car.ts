@@ -17,9 +17,11 @@ export class Car extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const target_t = infer(ctx, this.target)
-    const sigma = expect(ctx, target_t, Cores.SigmaValue)
-    return sigma.car_t
+    const inferred_target = infer(ctx, this.target)
+    const sigma = expect(ctx, inferred_target.t, Cores.SigmaValue)
+    const t = sigma.car_t
+    const core = new Cores.Car(inferred_target.core)
+    return { t, core }
   }
 
   repr(): string {
