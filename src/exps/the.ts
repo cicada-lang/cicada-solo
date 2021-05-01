@@ -1,4 +1,5 @@
 import { Exp } from "../exp"
+import { Core } from "../core"
 import { Env } from "../env"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
@@ -16,11 +17,7 @@ export class The extends Exp {
     this.exp = exp
   }
 
-  evaluate(env: Env): Value {
-    return evaluate(env, this.exp)
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     check(ctx, this.t, new Cores.TypeValue())
     const t_value = evaluate(ctx.to_env(), this.t)
     check(ctx, this.exp, t_value)

@@ -1,3 +1,4 @@
+import { Core } from "../core"
 import { Exp } from "../exp"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
@@ -5,11 +6,7 @@ import { Value } from "../value"
 import * as Cores from "../cores"
 
 export class Type extends Exp {
-  evaluate(env: Env): Value {
-    return new Cores.TypeValue()
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     return new Cores.TypeValue()
   }
 

@@ -7,9 +7,10 @@
 
   - [x] `core` -- only `evaluate` `repr` `alpha_repr`
   - [x] `readback` return `Core`
-  - [] `check` return `Core`
-  - [] `infer` return `{ t: Value, exp: Core }`
-  - [] `exp` -- only `check` `infer` `repr`
+  - [x] `exp` -- only `check` `infer` `repr`
+  - [] use elaboration in bidirectional type checking split.
+    - `check` return `Core`
+    - `infer` return `{ t: Value, exp: Core }`
 
 > With elaboration,
 >   we can elaborate `Exps.ListRec` into `Cores.ListInd` (which need `readback`),

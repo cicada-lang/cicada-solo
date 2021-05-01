@@ -1,4 +1,5 @@
 import { Exp } from "../exp"
+import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { Value } from "../value"
@@ -12,18 +13,7 @@ export class Var extends Exp {
     this.name = name
   }
 
-  evaluate(env: Env): Value {
-    const result = env.lookup_value(this.name)
-    if (result === undefined) {
-      throw new Trace(
-        `Fail to evaluate a variable.\n` + `The name ${this.name} is undefined.`
-      )
-    }
-
-    return result
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     const t = ctx.lookup_type(this.name)
     if (t === undefined) {
       throw new Trace(

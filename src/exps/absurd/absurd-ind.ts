@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { Ctx } from "../../ctx"
@@ -17,14 +18,7 @@ export class AbsurdInd extends Exp {
     this.motive = motive
   }
 
-  evaluate(env: Env): Value {
-    return AbsurdInd.apply(
-      evaluate(env, this.target),
-      evaluate(env, this.motive)
-    )
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     // NOTE the `motive` here is not a function from target_t to type,
     //   but a element of type.
     // NOTE We should always infer target,
@@ -37,27 +31,5 @@ export class AbsurdInd extends Exp {
 
   repr(): string {
     return `absurd_ind(${this.target.repr()}, ${this.motive.repr()})`
-  }
-
-  static apply(target: Value, motive: Value): Value {
-    return match_value(target, [
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
-            [
-              Cores.AbsurdValue,
-              (_: Cores.AbsurdValue) =>
-                new Cores.NotYetValue(
-                  motive,
-                  new Cores.AbsurdIndNeutral(
-                    neutral,
-                    new Normal(new Cores.TypeValue(), motive)
-                  )
-                ),
-            ],
-          ]),
-      ],
-    ])
   }
 }

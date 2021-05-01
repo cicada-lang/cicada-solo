@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
@@ -14,17 +15,7 @@ export class Obj extends Exp {
     this.properties = properties
   }
 
-  evaluate(env: Env): Value {
-    const properties = new Map()
-
-    for (const [name, exp] of this.properties) {
-      properties.set(name, evaluate(env, exp))
-    }
-
-    return new Cores.ObjValue(properties)
-  }
-
-  check(ctx: Ctx, t: Value): void {
+  check(ctx: Ctx, t: Value): Core {
     if (t instanceof Cores.ClsValue) {
       const cls = t
       cls.telescope.check_properties(ctx, this.properties)

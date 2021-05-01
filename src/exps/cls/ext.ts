@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value, match_value } from "../../value"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -26,24 +27,7 @@ export class Ext extends Exp {
     this.name = opts?.name
   }
 
-  evaluate(env: Env): Value {
-    const parent = evaluate(env, new Exps.Var(this.parent_name))
-    if (parent instanceof Cores.ClsValue) {
-      return new Cores.ExtValue([
-        { name: parent.name, telescope: parent.telescope },
-        { name: this.name, telescope: new Telescope(env, this.entries) },
-      ])
-    }
-    if (parent instanceof Cores.ExtValue) {
-      return new Cores.ExtValue([
-        ...parent.entries,
-        { name: this.name, telescope: new Telescope(env, this.entries) },
-      ])
-    }
-    throw new Trace(`Expecting parent to be ClsValue or ExtValue`)
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     const parent = evaluate(ctx.to_env(), new Exps.Var(this.parent_name))
     if (
       !(parent instanceof Cores.ClsValue || parent instanceof Cores.ExtValue)

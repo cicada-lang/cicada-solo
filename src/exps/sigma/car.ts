@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { infer } from "../../infer"
@@ -15,11 +16,7 @@ export class Car extends Exp {
     this.target = target
   }
 
-  evaluate(env: Env): Value {
-    return Car.apply(evaluate(env, this.target))
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     const target_t = infer(ctx, this.target)
     const sigma = expect(ctx, target_t, Cores.SigmaValue)
     return sigma.car_t
@@ -27,25 +24,5 @@ export class Car extends Exp {
 
   repr(): string {
     return `car(${this.target.repr()})`
-  }
-
-  static apply(target: Value): Value {
-    return match_value(target, [
-      [Cores.ConsValue, (cons: Cores.ConsValue) => cons.car],
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
-            [
-              Cores.SigmaValue,
-              (sigma: Cores.SigmaValue) =>
-                new Cores.NotYetValue(
-                  sigma.car_t,
-                  new Cores.CarNeutral(neutral)
-                ),
-            ],
-          ]),
-      ],
-    ])
   }
 }

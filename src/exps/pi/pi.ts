@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
@@ -19,12 +20,7 @@ export class Pi extends Exp {
     this.ret_t = ret_t
   }
 
-  evaluate(env: Env): Value {
-    const arg_t = evaluate(env, this.arg_t)
-    return new Cores.PiValue(arg_t, new Closure(env, this.name, this.ret_t))
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     check(ctx, this.arg_t, new Cores.TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), this.arg_t)
     check(ctx.extend(this.name, arg_t_value), this.ret_t, new Cores.TypeValue())

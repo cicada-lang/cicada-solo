@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
@@ -15,11 +16,7 @@ export class Add1 extends Exp {
     this.prev = prev
   }
 
-  evaluate(env: Env): Value {
-    return new Cores.Add1Value(evaluate(env, this.prev))
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     check(ctx, this.prev, new Cores.NatValue())
     return new Cores.NatValue()
   }

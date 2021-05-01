@@ -1,10 +1,11 @@
 import { Exp } from "../exp"
+import { Core } from "../core"
 import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { Trace } from "../trace"
 import * as ut from "../ut"
 
-export function infer(ctx: Ctx, exp: Exp): Value {
+export function infer(ctx: Ctx, exp: Exp): { t: Value; exp: Core } {
   try {
     if (exp.infer) {
       return exp.infer(ctx)

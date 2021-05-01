@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
@@ -17,11 +18,7 @@ export class Fn extends Exp {
     this.ret = ret
   }
 
-  evaluate(env: Env): Value {
-    return new Cores.FnValue(new Closure(env, this.name, this.ret))
-  }
-
-  check(ctx: Ctx, t: Value): void {
+  check(ctx: Ctx, t: Value): Core {
     const pi = expect(ctx, t, Cores.PiValue)
     const arg = new Cores.NotYetValue(pi.arg_t, new Cores.VarNeutral(this.name))
     const ret_t = pi.ret_t_cl.apply(arg)

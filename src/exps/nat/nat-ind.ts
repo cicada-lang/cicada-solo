@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
@@ -23,16 +24,7 @@ export class NatInd extends Exp {
     this.step = step
   }
 
-  evaluate(env: Env): Value {
-    return NatInd.apply(
-      evaluate(env, this.target),
-      evaluate(env, this.motive),
-      evaluate(env, this.base),
-      evaluate(env, this.step)
-    )
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     // NOTE We should always infer target,
     //   but we do a simple check for the simple nat.
     check(ctx, this.target, new Cores.NatValue())
@@ -50,46 +42,6 @@ export class NatInd extends Exp {
 
   repr(): string {
     return `nat_ind(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()}, ${this.step.repr()})`
-  }
-
-  static apply(target: Value, motive: Value, base: Value, step: Value): Value {
-    return match_value(target, [
-      [Cores.ZeroValue, (_: Cores.ZeroValue) => base],
-      [
-        Cores.Add1Value,
-        ({ prev }: Cores.Add1Value) =>
-          Cores.Ap.apply(
-            Cores.Ap.apply(step, prev),
-            NatInd.apply(prev, motive, base, step)
-          ),
-      ],
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
-            [
-              Cores.NatValue,
-              (nat_t: Cores.NatValue) => {
-                const motive_t = new Cores.PiValue(
-                  nat_t,
-                  new Closure(new Env(), "target_nat", new Exps.Type())
-                )
-                const base_t = Cores.Ap.apply(motive, new Cores.ZeroValue())
-                const step_t = nat_ind_step_t(motive_t, motive)
-                return new Cores.NotYetValue(
-                  Cores.Ap.apply(motive, target),
-                  new Cores.NatIndNeutral(
-                    neutral,
-                    new Normal(motive_t, motive),
-                    new Normal(base_t, base),
-                    new Normal(step_t, step)
-                  )
-                )
-              },
-            ],
-          ]),
-      ],
-    ])
   }
 }
 

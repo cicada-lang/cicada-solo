@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
@@ -20,11 +21,7 @@ export class Ap extends Exp {
     this.arg = arg
   }
 
-  evaluate(env: Env): Value {
-    return Ap.apply(evaluate(env, this.target), evaluate(env, this.arg))
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     const target_t = infer(ctx, this.target)
     if (target_t instanceof Cores.PiValue) {
       const pi = target_t
@@ -63,27 +60,5 @@ export class Ap extends Exp {
 
   repr(): string {
     return `${this.target.repr()}(${this.arg.repr()})`
-  }
-
-  static apply(target: Value, arg: Value): Value {
-    return match_value(target, [
-      [Cores.FnValue, (fn: Cores.FnValue) => fn.ret_cl.apply(arg)],
-      [Cores.ClsValue, (cls: Cores.ClsValue) => cls.apply(arg)],
-      [Cores.ExtValue, (ext: Cores.ExtValue) => ext.apply(arg)],
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
-            [
-              Cores.PiValue,
-              (pi: Cores.PiValue) =>
-                new Cores.NotYetValue(
-                  pi.ret_t_cl.apply(arg),
-                  new Cores.ApNeutral(neutral, new Normal(pi.arg_t, arg))
-                ),
-            ],
-          ]),
-      ],
-    ])
   }
 }

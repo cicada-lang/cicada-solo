@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Value } from "../../value"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -21,13 +22,7 @@ export class Cls extends Exp {
     this.name = opts?.name
   }
 
-  evaluate(env: Env): Value {
-    return new Cores.ClsValue(new Telescope(env, this.entries), {
-      name: this.name,
-    })
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     for (const { name, t, exp } of this.entries) {
       check(ctx, t, new Cores.TypeValue())
       const t_value = evaluate(ctx.to_env(), t)

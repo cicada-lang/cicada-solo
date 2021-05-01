@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { check } from "../../check"
@@ -14,11 +15,7 @@ export class List extends Exp {
     this.elem_t = elem_t
   }
 
-  evaluate(env: Env): Value {
-    return new Cores.ListValue(evaluate(env, this.elem_t))
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     check(ctx, this.elem_t, new Cores.TypeValue())
     return new Cores.TypeValue()
   }

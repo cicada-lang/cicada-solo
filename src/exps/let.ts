@@ -1,4 +1,5 @@
 import { Exp } from "../exp"
+import { Core } from "../core"
 import { Value } from "../value"
 import { Env } from "../env"
 import { Ctx } from "../ctx"
@@ -19,12 +20,7 @@ export class Let extends Exp {
     this.ret = ret
   }
 
-  evaluate(env: Env): Value {
-    const value = evaluate(env, this.exp)
-    return evaluate(env.extend(this.name, value), this.ret)
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     return infer(
       ctx.extend(
         this.name,
@@ -35,7 +31,7 @@ export class Let extends Exp {
     )
   }
 
-  check(ctx: Ctx, t: Value): void {
+  check(ctx: Ctx, t: Value): Core {
     check(
       ctx.extend(
         this.name,

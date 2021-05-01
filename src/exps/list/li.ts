@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
@@ -17,11 +18,7 @@ export class Li extends Exp {
     this.tail = tail
   }
 
-  evaluate(env: Env): Value {
-    return new Cores.LiValue(evaluate(env, this.head), evaluate(env, this.tail))
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     const elem_t = infer(ctx, this.head)
     check(ctx, this.tail, new Cores.ListValue(elem_t))
     return new Cores.ListValue(elem_t)

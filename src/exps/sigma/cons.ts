@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { expect } from "../../expect"
@@ -17,11 +18,7 @@ export class Cons extends Exp {
     this.cdr = cdr
   }
 
-  evaluate(env: Env): Value {
-    return new Cores.ConsValue(evaluate(env, this.car), evaluate(env, this.cdr))
-  }
-
-  check(ctx: Ctx, t: Value): void {
+  check(ctx: Ctx, t: Value): Core {
     const sigma = expect(ctx, t, Cores.SigmaValue)
     const cdr_t = sigma.cdr_t_cl.apply(evaluate(ctx.to_env(), this.car))
     check(ctx, this.car, sigma.car_t)

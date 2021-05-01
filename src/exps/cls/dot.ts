@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value, match_value } from "../../value"
@@ -18,11 +19,7 @@ export class Dot extends Exp {
     this.name = name
   }
 
-  evaluate(env: Env): Value {
-    return Dot.apply(evaluate(env, this.target), this.name)
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     const target_t = infer(ctx, this.target)
 
     if (
@@ -42,25 +39,5 @@ export class Dot extends Exp {
 
   repr(): string {
     return `${this.target.repr()}.${this.name}`
-  }
-
-  static apply(target: Value, name: string): Value {
-    return match_value(target, [
-      [Cores.ObjValue, (obj: Cores.ObjValue) => obj.dot(name)],
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
-            [
-              Cores.ClsValue,
-              (cls: Cores.ClsValue) =>
-                new Cores.NotYetValue(
-                  cls.dot(target, name),
-                  new Cores.DotNeutral(neutral, name)
-                ),
-            ],
-          ]),
-      ],
-    ])
   }
 }

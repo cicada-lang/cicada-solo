@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { check } from "../../check"
@@ -19,12 +20,7 @@ export class Sigma extends Exp {
     this.cdr_t = cdr_t
   }
 
-  evaluate(env: Env): Value {
-    const car_t = evaluate(env, this.car_t)
-    return new Cores.SigmaValue(car_t, new Closure(env, this.name, this.cdr_t))
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     check(ctx, this.car_t, new Cores.TypeValue())
     const car_t_value = evaluate(ctx.to_env(), this.car_t)
     check(ctx.extend(this.name, car_t_value), this.cdr_t, new Cores.TypeValue())

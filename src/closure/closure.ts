@@ -1,4 +1,4 @@
-import { Exp } from "../exp"
+import { Core } from "../core"
 import { Env } from "../env"
 import { Value } from "../value"
 import { evaluate } from "../evaluate"
@@ -6,9 +6,9 @@ import { evaluate } from "../evaluate"
 export class Closure {
   env: Env
   name: string
-  ret: Exp
+  ret: Core
 
-  constructor(env: Env, name: string, ret: Exp) {
+  constructor(env: Env, name: string, ret: Core) {
     this.env = env
     this.name = name
     this.ret = ret

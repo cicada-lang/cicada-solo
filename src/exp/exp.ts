@@ -1,10 +1,9 @@
-import { Env } from "../env"
 import { Ctx } from "../ctx"
+import { Core } from "../core"
 import { Value } from "../value"
 
 export abstract class Exp {
-  abstract evaluate(env: Env): Value
-  check?(ctx: Ctx, t: Value): void
-  infer?(ctx: Ctx): Value
+  check?(ctx: Ctx, t: Value): Core
+  infer?(ctx: Ctx): { t: Value; exp: Core }
   abstract repr(): string
 }

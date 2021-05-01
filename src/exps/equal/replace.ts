@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
@@ -23,15 +24,7 @@ export class Replace extends Exp {
     this.base = base
   }
 
-  evaluate(env: Env): Value {
-    return Replace.apply(
-      evaluate(env, this.target),
-      evaluate(env, this.motive),
-      evaluate(env, this.base)
-    )
-  }
-
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     const target_t = infer(ctx, this.target)
     const equal = expect(ctx, target_t, Cores.EqualValue)
     const motive_t = evaluate(
@@ -46,35 +39,5 @@ export class Replace extends Exp {
 
   repr(): string {
     return `replace(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()})`
-  }
-
-  static apply(target: Value, motive: Value, base: Value): Value {
-    return match_value(target, [
-      [Cores.SameValue, (_: Cores.SameValue) => base],
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
-            [
-              Cores.EqualValue,
-              ({ t, to, from }: Cores.EqualValue) => {
-                const base_t = Cores.Ap.apply(motive, from)
-                const motive_t = new Cores.PiValue(
-                  t,
-                  new Closure(new Env(), "x", new Exps.Type())
-                )
-                return new Cores.NotYetValue(
-                  Cores.Ap.apply(motive, to),
-                  new Cores.ReplaceNeutral(
-                    neutral,
-                    new Normal(motive_t, motive),
-                    new Normal(base_t, base)
-                  )
-                )
-              },
-            ],
-          ]),
-      ],
-    ])
   }
 }

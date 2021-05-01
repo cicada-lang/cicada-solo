@@ -1,4 +1,5 @@
 import { Exp } from "../../exp"
+import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
@@ -9,7 +10,7 @@ export class Zero extends Exp {
     return new Cores.ZeroValue()
   }
 
-  infer(ctx: Ctx): Value {
+  infer(ctx: Ctx): { t: Value; exp: Core } {
     return new Cores.NatValue()
   }
 
