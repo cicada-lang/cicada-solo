@@ -1,5 +1,4 @@
 - import cores with `Cores` prefix -- in `cores/`
-- import exps with `Exps` prefix
 
 - `evaluate` should not take `ctx` as argument.
 

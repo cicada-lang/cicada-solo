@@ -3,12 +3,12 @@ import { Value, match_value } from "../../value"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Telescope } from "../../telescope"
-import { Var } from "../../exps"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"
+import * as Exps from "../../exps"
 
 export class Ext extends Exp {
   name?: string
@@ -27,7 +27,7 @@ export class Ext extends Exp {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    const parent = evaluate(ctx, env, new Var(this.parent_name))
+    const parent = evaluate(ctx, env, new Exps.Var(this.parent_name))
     if (parent instanceof Cores.ClsValue) {
       return new Cores.ExtValue([
         { name: parent.name, telescope: parent.telescope },
@@ -44,7 +44,7 @@ export class Ext extends Exp {
   }
 
   infer(ctx: Ctx): Value {
-    const parent = evaluate(ctx, ctx.to_env(), new Var(this.parent_name))
+    const parent = evaluate(ctx, ctx.to_env(), new Exps.Var(this.parent_name))
     if (
       !(parent instanceof Cores.ClsValue || parent instanceof Cores.ExtValue)
     ) {

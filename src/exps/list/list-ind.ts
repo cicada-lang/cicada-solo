@@ -8,8 +8,7 @@ import { expect } from "../../expect"
 import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
-import { Type, Var, Pi, Ap } from "../../exps"
-import { Nil, List, Li } from "../../exps"
+import * as Exps from "../../exps"
 import * as Cores from "../../cores"
 
 export class ListInd extends Exp {
@@ -42,7 +41,7 @@ export class ListInd extends Exp {
     const motive_t = evaluate(
       new Ctx().extend("elem_t", new Cores.TypeValue(), elem_t),
       new Env().extend("elem_t", new Cores.TypeValue(), elem_t),
-      new Pi("target_list", new List(new Var("elem_t")), new Type())
+      new Exps.Pi("target_list", new Exps.List(new Exps.Var("elem_t")), new Exps.Type())
     )
     check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx, ctx.to_env(), this.motive)
@@ -81,7 +80,7 @@ export class ListInd extends Exp {
                     new Env(),
                     "target_list",
                     list_t,
-                    new Type()
+                    new Exps.Type()
                   )
                 )
                 const base_t = Cores.Ap.apply(motive, new Cores.NilValue())
@@ -112,16 +111,16 @@ function list_ind_step_t(motive_t: Value, motive: Value, elem_t: Value): Value {
     .extend("motive", motive_t, motive)
     .extend("elem_t", new Cores.TypeValue(), elem_t)
 
-  const step_t = new Pi(
+  const step_t = new Exps.Pi(
     "head",
-    new Var("elem_t"),
-    new Pi(
+    new Exps.Var("elem_t"),
+    new Exps.Pi(
       "tail",
-      new List(new Var("elem_t")),
-      new Pi(
+      new Exps.List(new Exps.Var("elem_t")),
+      new Exps.Pi(
         "almost",
-        new Ap(new Var("motive"), new Var("tail")),
-        new Ap(new Var("motive"), new Li(new Var("head"), new Var("tail")))
+        new Exps.Ap(new Exps.Var("motive"), new Exps.Var("tail")),
+        new Exps.Ap(new Exps.Var("motive"), new Exps.Li(new Exps.Var("head"), new Exps.Var("tail")))
       )
     )
   )

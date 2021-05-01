@@ -5,7 +5,7 @@ import { infer } from "../../infer"
 import { expect } from "../../expect"
 import { evaluate } from "../../evaluate"
 import { Value, match_value } from "../../value"
-import { Car } from "../../exps"
+import * as Exps from "../../exps"
 import * as Cores from "../../cores"
 
 export class Cdr extends Exp {
@@ -17,13 +17,13 @@ export class Cdr extends Exp {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return Cdr.apply(evaluate(ctx, env, this.target))
+    return Cores.Cdr.apply(evaluate(ctx, env, this.target))
   }
 
   infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
     const sigma = expect(ctx, target_t, Cores.SigmaValue)
-    const car = Car.apply(evaluate(ctx, ctx.to_env(), this.target))
+    const car = Cores.Car.apply(evaluate(ctx, ctx.to_env(), this.target))
     return sigma.cdr_t_cl.apply(car)
   }
 
@@ -42,7 +42,7 @@ export class Cdr extends Exp {
               Cores.SigmaValue,
               (sigma: Cores.SigmaValue) =>
                 new Cores.NotYetValue(
-                  sigma.cdr_t_cl.apply(Car.apply(target)),
+                  sigma.cdr_t_cl.apply(Cores.Car.apply(target)),
                   new Cores.CdrNeutral(neutral)
                 ),
             ],

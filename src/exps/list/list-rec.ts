@@ -8,9 +8,8 @@ import { expect } from "../../expect"
 import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Trace } from "../../trace"
-import { Type, Var, Pi, Ap } from "../../exps"
-import { Nil, List, Li } from "../../exps"
 import * as Cores from "../../cores"
+import * as Exps from "../../exps"
 
 export class ListRec extends Exp {
   target: Exp
@@ -51,8 +50,8 @@ export class ListRec extends Exp {
       [
         Cores.LiValue,
         ({ head, tail }: Cores.LiValue) =>
-          Ap.apply(
-            Ap.apply(Ap.apply(step, head), tail),
+          Cores.Ap.apply(
+            Cores.Ap.apply(Cores.Ap.apply(step, head), tail),
             ListRec.apply(tail, base, step)
           ),
       ],
@@ -70,7 +69,7 @@ export class ListRec extends Exp {
                     new Env(),
                     "target_list",
                     list_t,
-                    new Type()
+                    new Cores.Type()
                   )
                 )
 
@@ -108,13 +107,13 @@ function list_rec_step_t(base_t: Value, elem_t: Value): Value {
     .extend("base_t", new Cores.TypeValue(), base_t)
     .extend("elem_t", new Cores.TypeValue(), elem_t)
 
-  const step_t = new Pi(
+  const step_t = new Cores.Pi(
     "head",
-    new Var("elem_t"),
-    new Pi(
+    new Cores.Var("elem_t"),
+    new Cores.Pi(
       "tail",
-      new List(new Var("elem_t")),
-      new Pi("almost", new Var("base_t"), new Var("base_t"))
+      new Cores.List(new Cores.Var("elem_t")),
+      new Cores.Pi("almost", new Cores.Var("base_t"), new Cores.Var("base_t"))
     )
   )
 
