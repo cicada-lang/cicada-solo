@@ -8,18 +8,9 @@ import { expect } from "../../expect"
 import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Trace } from "../../trace"
-import { TypeValue } from "../../cores"
 import { Type, Var, Pi, Ap } from "../../exps"
 import { Nil, List, Li } from "../../exps"
-import {
-  ListValue,
-  NilValue,
-  LiValue,
-  ListInd,
-  ListIndNeutral,
-} from "../../cores"
-import { PiValue } from "../../cores"
-import { NotYetValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class ListRec extends Exp {
   target: Exp
@@ -43,7 +34,7 @@ export class ListRec extends Exp {
 
   infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
-    const list_t = expect(ctx, target_t, ListValue)
+    const list_t = expect(ctx, target_t, Cores.ListValue)
     const elem_t = list_t.elem_t
     const base_t = infer(ctx, this.base)
     check(ctx, this.step, list_rec_step_t(base_t, elem_t))
@@ -56,23 +47,23 @@ export class ListRec extends Exp {
 
   static apply(target: Value, base: Value, step: Value): Value {
     return match_value(target, [
-      [NilValue, (_: NilValue) => base],
+      [Cores.NilValue, (_: Cores.NilValue) => base],
       [
-        LiValue,
-        ({ head, tail }: LiValue) =>
+        Cores.LiValue,
+        ({ head, tail }: Cores.LiValue) =>
           Ap.apply(
             Ap.apply(Ap.apply(step, head), tail),
             ListRec.apply(tail, base, step)
           ),
       ],
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              ListValue,
-              (list_t: ListValue) => {
-                const motive_t = new PiValue(
+              Cores.ListValue,
+              (list_t: Cores.ListValue) => {
+                const motive_t = new Cores.PiValue(
                   list_t,
                   new Closure(
                     new Ctx(),
@@ -111,11 +102,11 @@ export class ListRec extends Exp {
 
 function list_rec_step_t(base_t: Value, elem_t: Value): Value {
   const ctx = new Ctx()
-    .extend("base_t", new TypeValue(), base_t)
-    .extend("elem_t", new TypeValue(), elem_t)
+    .extend("base_t", new Cores.TypeValue(), base_t)
+    .extend("elem_t", new Cores.TypeValue(), elem_t)
   const env = new Env()
-    .extend("base_t", new TypeValue(), base_t)
-    .extend("elem_t", new TypeValue(), elem_t)
+    .extend("base_t", new Cores.TypeValue(), base_t)
+    .extend("elem_t", new Cores.TypeValue(), elem_t)
 
   const step_t = new Pi(
     "head",

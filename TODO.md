@@ -1,4 +1,3 @@
-- import cores with `Cores` prefix -- in `exps/`
 - import cores with `Cores` prefix -- in `cores/`
 - import exps with `Exps` prefix
 

@@ -2,12 +2,11 @@ import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value, match_value } from "../../value"
-import { ClsValue, ExtValue, ObjValue } from "../../cores"
-import { DotNeutral, NotYetValue } from "../../cores"
 import { evaluate } from "../../evaluate"
 import { infer } from "../../infer"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
+import * as Cores from "../../cores"
 
 export class Dot extends Exp {
   target: Exp
@@ -26,7 +25,10 @@ export class Dot extends Exp {
   infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
 
-    if (target_t instanceof ClsValue || target_t instanceof ExtValue) {
+    if (
+      target_t instanceof Cores.ClsValue ||
+      target_t instanceof Cores.ExtValue
+    ) {
       return target_t.dot(evaluate(ctx, ctx.to_env(), this.target), this.name)
     }
 
@@ -44,17 +46,17 @@ export class Dot extends Exp {
 
   static apply(target: Value, name: string): Value {
     return match_value(target, [
-      [ObjValue, (obj: ObjValue) => obj.dot(name)],
+      [Cores.ObjValue, (obj: Cores.ObjValue) => obj.dot(name)],
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              ClsValue,
-              (cls: ClsValue) =>
-                new NotYetValue(
+              Cores.ClsValue,
+              (cls: Cores.ClsValue) =>
+                new Cores.NotYetValue(
                   cls.dot(target, name),
-                  new DotNeutral(neutral, name)
+                  new Cores.DotNeutral(neutral, name)
                 ),
             ],
           ]),

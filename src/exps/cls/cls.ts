@@ -3,11 +3,10 @@ import { Value } from "../../value"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Telescope } from "../../telescope"
-import { ClsValue } from "../../cores"
-import { TypeValue } from "../../cores"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import * as ut from "../../ut"
+import * as Cores from "../../cores"
 
 export class Cls extends Exp {
   entries: Array<{ name: string; t: Exp; exp?: Exp }>
@@ -23,20 +22,20 @@ export class Cls extends Exp {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new ClsValue(new Telescope(ctx, env, this.entries), {
+    return new Cores.ClsValue(new Telescope(ctx, env, this.entries), {
       name: this.name,
     })
   }
 
   infer(ctx: Ctx): Value {
     for (const { name, t, exp } of this.entries) {
-      check(ctx, t, new TypeValue())
+      check(ctx, t, new Cores.TypeValue())
       const t_value = evaluate(ctx, ctx.to_env(), t)
       if (exp) check(ctx, exp, t_value)
       ctx = ctx.extend(name, t_value)
     }
 
-    return new TypeValue()
+    return new Cores.TypeValue()
   }
 
   repr(): string {

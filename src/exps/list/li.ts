@@ -5,7 +5,7 @@ import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { infer } from "../../infer"
 import { Value } from "../../value"
-import { ListValue, LiValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Li extends Exp {
   head: Exp
@@ -18,7 +18,7 @@ export class Li extends Exp {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new LiValue(
+    return new Cores.LiValue(
       evaluate(ctx, env, this.head),
       evaluate(ctx, env, this.tail)
     )
@@ -26,8 +26,8 @@ export class Li extends Exp {
 
   infer(ctx: Ctx): Value {
     const elem_t = infer(ctx, this.head)
-    check(ctx, this.tail, new ListValue(elem_t))
-    return new ListValue(elem_t)
+    check(ctx, this.tail, new Cores.ListValue(elem_t))
+    return new Cores.ListValue(elem_t)
   }
 
   repr(): string {

@@ -2,9 +2,9 @@ import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { ClsValue, ExtValue, ObjValue, TypeValue } from "../../cores"
 import { evaluate } from "../../evaluate"
 import * as ut from "../../ut"
+import * as Cores from "../../cores"
 
 export class Obj extends Exp {
   properties: Map<string, Exp>
@@ -21,14 +21,14 @@ export class Obj extends Exp {
       properties.set(name, evaluate(ctx, env, exp))
     }
 
-    return new ObjValue(properties)
+    return new Cores.ObjValue(properties)
   }
 
   check(ctx: Ctx, t: Value): void {
-    if (t instanceof ClsValue) {
+    if (t instanceof Cores.ClsValue) {
       const cls = t
       cls.telescope.check_properties(ctx, this.properties)
-    } else if (t instanceof ExtValue) {
+    } else if (t instanceof Cores.ExtValue) {
       const ext = t
       for (const { telescope } of ext.entries) {
         telescope.check_properties(ctx, this.properties)

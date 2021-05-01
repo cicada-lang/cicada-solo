@@ -5,9 +5,7 @@ import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { check } from "../../check"
 import { expect } from "../../expect"
-import { PiValue, FnValue } from "../../cores"
-import { VarNeutral } from "../../cores"
-import { TypeValue, NotYetValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Fn extends Exp {
   name: string
@@ -23,14 +21,14 @@ export class Fn extends Exp {
     // const t = infer(ctx, new Var(this.name))
 
     // TODO the following use of `new TypeValue()` is placeholder.
-    const t = new TypeValue()
+    const t = new Cores.TypeValue()
 
-    return new FnValue(new Closure(ctx, env, this.name, t, this.ret))
+    return new Cores.FnValue(new Closure(ctx, env, this.name, t, this.ret))
   }
 
   check(ctx: Ctx, t: Value): void {
-    const pi = expect(ctx, t, PiValue)
-    const arg = new NotYetValue(pi.arg_t, new VarNeutral(this.name))
+    const pi = expect(ctx, t, Cores.PiValue)
+    const arg = new Cores.NotYetValue(pi.arg_t, new Cores.VarNeutral(this.name))
     const ret_t = pi.ret_t_cl.apply(arg)
     check(ctx.extend(this.name, pi.arg_t), this.ret, ret_t)
   }

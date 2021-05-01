@@ -9,10 +9,8 @@ import { Normal } from "../../normal"
 import { Type } from "../../exps"
 import { Nat } from "../../exps"
 import { Var, Pi, Ap } from "../../exps"
-import { NatValue, ZeroValue, Add1Value, NatIndNeutral } from "../../cores"
 import { Add1 } from "../../exps"
-import { PiValue } from "../../cores"
-import { NotYetValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class NatInd extends Exp {
   target: Exp
@@ -40,7 +38,7 @@ export class NatInd extends Exp {
   infer(ctx: Ctx): Value {
     // NOTE We should always infer target,
     //   but we do a simple check for the simple nat.
-    check(ctx, this.target, new NatValue())
+    check(ctx, this.target, new Cores.NatValue())
     const motive_t = evaluate(
       new Ctx(),
       new Env(),
@@ -48,7 +46,7 @@ export class NatInd extends Exp {
     )
     check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx, ctx.to_env(), this.motive)
-    check(ctx, this.base, Ap.apply(motive_value, new ZeroValue()))
+    check(ctx, this.base, Ap.apply(motive_value, new Cores.ZeroValue()))
     check(ctx, this.step, nat_ind_step_t(motive_t, motive_value))
     const target_value = evaluate(ctx, ctx.to_env(), this.target)
     return Ap.apply(motive_value, target_value)
@@ -60,23 +58,23 @@ export class NatInd extends Exp {
 
   static apply(target: Value, motive: Value, base: Value, step: Value): Value {
     return match_value(target, [
-      [ZeroValue, (_: ZeroValue) => base],
+      [Cores.ZeroValue, (_: Cores.ZeroValue) => base],
       [
-        Add1Value,
-        ({ prev }: Add1Value) =>
+        Cores.Add1Value,
+        ({ prev }: Cores.Add1Value) =>
           Ap.apply(
             Ap.apply(step, prev),
             NatInd.apply(prev, motive, base, step)
           ),
       ],
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              NatValue,
-              (nat_t: NatValue) => {
-                const motive_t = new PiValue(
+              Cores.NatValue,
+              (nat_t: Cores.NatValue) => {
+                const motive_t = new Cores.PiValue(
                   nat_t,
                   new Closure(
                     new Ctx(),
@@ -86,11 +84,11 @@ export class NatInd extends Exp {
                     new Type()
                   )
                 )
-                const base_t = Ap.apply(motive, new ZeroValue())
+                const base_t = Ap.apply(motive, new Cores.ZeroValue())
                 const step_t = nat_ind_step_t(motive_t, motive)
-                return new NotYetValue(
+                return new Cores.NotYetValue(
                   Ap.apply(motive, target),
-                  new NatIndNeutral(
+                  new Cores.NatIndNeutral(
                     neutral,
                     new Normal(motive_t, motive),
                     new Normal(base_t, base),

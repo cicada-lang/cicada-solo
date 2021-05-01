@@ -2,15 +2,15 @@ import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { TypeValue, NatValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Nat extends Exp {
   evaluate(ctx: Ctx, env: Env): Value {
-    return new NatValue()
+    return new Cores.NatValue()
   }
 
   infer(ctx: Ctx): Value {
-    return new TypeValue()
+    return new Cores.TypeValue()
   }
 
   repr(): string {

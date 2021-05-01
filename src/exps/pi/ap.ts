@@ -6,11 +6,9 @@ import { infer } from "../../infer"
 import { check } from "../../check"
 import { Value, match_value } from "../../value"
 import { Normal } from "../../normal"
-import { NotYetValue } from "../../cores"
-import { FnValue, PiValue, ApNeutral } from "../../cores"
-import { ClsValue, ExtValue, TypeValue } from "../../cores"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
+import * as Cores from "../../cores"
 
 export class Ap extends Exp {
   target: Exp
@@ -31,7 +29,7 @@ export class Ap extends Exp {
 
   infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
-    if (target_t instanceof PiValue) {
+    if (target_t instanceof Cores.PiValue) {
       const pi = target_t
       check(ctx, this.arg, pi.arg_t)
       const arg_value = evaluate(ctx, ctx.to_env(), this.arg)
@@ -39,7 +37,7 @@ export class Ap extends Exp {
     }
 
     const target = evaluate(ctx, ctx.to_env(), this.target)
-    if (target instanceof ClsValue) {
+    if (target instanceof Cores.ClsValue) {
       const cls = target
       let telescope = cls.telescope
       while (telescope.next) {
@@ -49,7 +47,7 @@ export class Ap extends Exp {
         } else {
           check(ctx, this.arg, t)
           const arg_value = evaluate(ctx, ctx.to_env(), this.arg)
-          return new TypeValue()
+          return new Cores.TypeValue()
         }
       }
       throw new Trace(
@@ -72,19 +70,19 @@ export class Ap extends Exp {
 
   static apply(target: Value, arg: Value): Value {
     return match_value(target, [
-      [FnValue, (fn: FnValue) => fn.ret_cl.apply(arg)],
-      [ClsValue, (cls: ClsValue) => cls.apply(arg)],
-      [ExtValue, (ext: ExtValue) => ext.apply(arg)],
+      [Cores.FnValue, (fn: Cores.FnValue) => fn.ret_cl.apply(arg)],
+      [Cores.ClsValue, (cls: Cores.ClsValue) => cls.apply(arg)],
+      [Cores.ExtValue, (ext: Cores.ExtValue) => ext.apply(arg)],
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              PiValue,
-              (pi: PiValue) =>
-                new NotYetValue(
+              Cores.PiValue,
+              (pi: Cores.PiValue) =>
+                new Cores.NotYetValue(
                   pi.ret_t_cl.apply(arg),
-                  new ApNeutral(neutral, new Normal(pi.arg_t, arg))
+                  new Cores.ApNeutral(neutral, new Normal(pi.arg_t, arg))
                 ),
             ],
           ]),

@@ -4,12 +4,11 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Telescope } from "../../telescope"
 import { Var } from "../../exps"
-import { ClsValue, ExtValue } from "../../cores"
-import { TypeValue } from "../../cores"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
+import * as Cores from "../../cores"
 
 export class Ext extends Exp {
   name?: string
@@ -29,14 +28,14 @@ export class Ext extends Exp {
 
   evaluate(ctx: Ctx, env: Env): Value {
     const parent = evaluate(ctx, env, new Var(this.parent_name))
-    if (parent instanceof ClsValue) {
-      return new ExtValue([
+    if (parent instanceof Cores.ClsValue) {
+      return new Cores.ExtValue([
         { name: parent.name, telescope: parent.telescope },
         { name: this.name, telescope: new Telescope(ctx, env, this.entries) },
       ])
     }
-    if (parent instanceof ExtValue) {
-      return new ExtValue([
+    if (parent instanceof Cores.ExtValue) {
+      return new Cores.ExtValue([
         ...parent.entries,
         { name: this.name, telescope: new Telescope(ctx, env, this.entries) },
       ])
@@ -46,20 +45,22 @@ export class Ext extends Exp {
 
   infer(ctx: Ctx): Value {
     const parent = evaluate(ctx, ctx.to_env(), new Var(this.parent_name))
-    if (!(parent instanceof ClsValue || parent instanceof ExtValue)) {
+    if (
+      !(parent instanceof Cores.ClsValue || parent instanceof Cores.ExtValue)
+    ) {
       throw new Trace(`Expecting parent to be ClsValue or ExtValue`)
     }
 
     ctx = parent.extend_ctx(ctx)
 
     for (const { name, t, exp } of this.entries) {
-      check(ctx, t, new TypeValue())
+      check(ctx, t, new Cores.TypeValue())
       const t_value = evaluate(ctx, ctx.to_env(), t)
       if (exp) check(ctx, exp, t_value)
       ctx = ctx.extend(name, t_value)
     }
 
-    return new TypeValue()
+    return new Cores.TypeValue()
   }
 
   repr(): string {

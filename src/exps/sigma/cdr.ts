@@ -6,8 +6,7 @@ import { expect } from "../../expect"
 import { evaluate } from "../../evaluate"
 import { Value, match_value } from "../../value"
 import { Car } from "../../exps"
-import { SigmaValue, ConsValue, CdrNeutral } from "../../cores"
-import { NotYetValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Cdr extends Exp {
   target: Exp
@@ -23,7 +22,7 @@ export class Cdr extends Exp {
 
   infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
-    const sigma = expect(ctx, target_t, SigmaValue)
+    const sigma = expect(ctx, target_t, Cores.SigmaValue)
     const car = Car.apply(evaluate(ctx, ctx.to_env(), this.target))
     return sigma.cdr_t_cl.apply(car)
   }
@@ -34,17 +33,17 @@ export class Cdr extends Exp {
 
   static apply(target: Value): Value {
     return match_value(target, [
-      [ConsValue, (cons: ConsValue) => cons.cdr],
+      [Cores.ConsValue, (cons: Cores.ConsValue) => cons.cdr],
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              SigmaValue,
-              (sigma: SigmaValue) =>
-                new NotYetValue(
+              Cores.SigmaValue,
+              (sigma: Cores.SigmaValue) =>
+                new Cores.NotYetValue(
                   sigma.cdr_t_cl.apply(Car.apply(target)),
-                  new CdrNeutral(neutral)
+                  new Cores.CdrNeutral(neutral)
                 ),
             ],
           ]),

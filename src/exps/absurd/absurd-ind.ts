@@ -5,9 +5,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value, match_value } from "../../value"
 import { Normal } from "../../normal"
-import { NotYetValue } from "../../cores"
-import { AbsurdValue, AbsurdIndNeutral } from "../../cores"
-import { TypeValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class AbsurdInd extends Exp {
   target: Exp
@@ -31,8 +29,8 @@ export class AbsurdInd extends Exp {
     //   but a element of type.
     // NOTE We should always infer target,
     //   but we do a simple check for the simple absurd.
-    check(ctx, this.target, new AbsurdValue())
-    check(ctx, this.motive, new TypeValue())
+    check(ctx, this.target, new Cores.AbsurdValue())
+    check(ctx, this.motive, new Cores.TypeValue())
     const motive_value = evaluate(ctx, ctx.to_env(), this.motive)
     return motive_value
   }
@@ -44,17 +42,17 @@ export class AbsurdInd extends Exp {
   static apply(target: Value, motive: Value): Value {
     return match_value(target, [
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              AbsurdValue,
-              (_: AbsurdValue) =>
-                new NotYetValue(
+              Cores.AbsurdValue,
+              (_: Cores.AbsurdValue) =>
+                new Cores.NotYetValue(
                   motive,
-                  new AbsurdIndNeutral(
+                  new Cores.AbsurdIndNeutral(
                     neutral,
-                    new Normal(new TypeValue(), motive)
+                    new Normal(new Cores.TypeValue(), motive)
                   )
                 ),
             ],

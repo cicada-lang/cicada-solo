@@ -7,12 +7,11 @@ import { readback } from "../../readback"
 import { conversion } from "../../conversion"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
-import { TypeValue } from "../../cores"
-import { EqualValue, SameValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Same extends Exp {
   evaluate(ctx: Ctx, env: Env): Value {
-    return new SameValue()
+    return new Cores.SameValue()
   }
 
   check(ctx: Ctx, t: Value): void {
@@ -21,7 +20,7 @@ export class Same extends Exp {
       throw new Trace(
         ut.aline(`
           |I am expecting the following two values to be the same type:
-          |  ${readback(ctx, new TypeValue(), equal.t).repr()}
+          |  ${readback(ctx, new Cores.TypeValue(), equal.t).repr()}
           |But they are not.
           |from:
           |  ${readback(ctx, equal.t, equal.from).repr()}

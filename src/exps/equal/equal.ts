@@ -4,8 +4,7 @@ import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { Value } from "../../value"
-import { TypeValue } from "../../cores"
-import { EqualValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Equal extends Exp {
   t: Exp
@@ -20,7 +19,7 @@ export class Equal extends Exp {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new EqualValue(
+    return new Cores.EqualValue(
       evaluate(ctx, env, this.t),
       evaluate(ctx, env, this.from),
       evaluate(ctx, env, this.to)
@@ -28,11 +27,11 @@ export class Equal extends Exp {
   }
 
   infer(ctx: Ctx): Value {
-    check(ctx, this.t, new TypeValue())
+    check(ctx, this.t, new Cores.TypeValue())
     const t_value = evaluate(ctx, ctx.to_env(), this.t)
     check(ctx, this.from, t_value)
     check(ctx, this.to, t_value)
-    return new TypeValue()
+    return new Cores.TypeValue()
   }
 
   repr(): string {

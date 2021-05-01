@@ -11,11 +11,7 @@ import { Normal } from "../../normal"
 import { Pi, Ap } from "../../exps"
 import { Type } from "../../exps"
 import { Var } from "../../exps"
-import { TypeValue } from "../../cores"
-import { NotYetValue } from "../../cores"
-import { EqualValue, SameValue } from "../../cores"
-import { PiValue } from "../../cores"
-import { ReplaceNeutral } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Replace extends Exp {
   target: Exp
@@ -39,10 +35,10 @@ export class Replace extends Exp {
 
   infer(ctx: Ctx): Value {
     const target_t = infer(ctx, this.target)
-    const equal = expect(ctx, target_t, EqualValue)
+    const equal = expect(ctx, target_t, Cores.EqualValue)
     const motive_t = evaluate(
-      new Ctx().extend("t", new TypeValue(), equal.t),
-      new Env().extend("t", new TypeValue(), equal.t),
+      new Ctx().extend("t", new Cores.TypeValue(), equal.t),
+      new Env().extend("t", new Cores.TypeValue(), equal.t),
       new Pi("x", new Var("t"), new Type())
     )
     check(ctx, this.motive, motive_t)
@@ -57,22 +53,22 @@ export class Replace extends Exp {
 
   static apply(target: Value, motive: Value, base: Value): Value {
     return match_value(target, [
-      [SameValue, (_: SameValue) => base],
+      [Cores.SameValue, (_: Cores.SameValue) => base],
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              EqualValue,
-              ({ t, to, from }: EqualValue) => {
+              Cores.EqualValue,
+              ({ t, to, from }: Cores.EqualValue) => {
                 const base_t = Ap.apply(motive, from)
-                const motive_t = new PiValue(
+                const motive_t = new Cores.PiValue(
                   t,
                   new Closure(new Ctx(), new Env(), "x", t, new Type())
                 )
-                return new NotYetValue(
+                return new Cores.NotYetValue(
                   Ap.apply(motive, to),
-                  new ReplaceNeutral(
+                  new Cores.ReplaceNeutral(
                     neutral,
                     new Normal(motive_t, motive),
                     new Normal(base_t, base)

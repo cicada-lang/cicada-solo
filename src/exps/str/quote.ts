@@ -2,8 +2,7 @@ import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { StrValue } from "../../cores"
-import { QuoteValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Quote extends Exp {
   str: string
@@ -14,11 +13,11 @@ export class Quote extends Exp {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new QuoteValue(this.str)
+    return new Cores.QuoteValue(this.str)
   }
 
   infer(ctx: Ctx): Value {
-    return new StrValue()
+    return new Cores.StrValue()
   }
 
   repr(): string {

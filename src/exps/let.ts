@@ -5,7 +5,7 @@ import { Ctx } from "../ctx"
 import { evaluate } from "../evaluate"
 import { infer } from "../infer"
 import { check } from "../check"
-import { TypeValue } from "../cores"
+import * as Cores from "../cores"
 
 export class Let extends Exp {
   name: string
@@ -23,7 +23,7 @@ export class Let extends Exp {
     // const t = infer(ctx, this.exp)
 
     // TODO the following use of `new TypeValue()` is placeholder.
-    const t = new TypeValue()
+    const t = new Cores.TypeValue()
 
     const value = evaluate(ctx, env, this.exp)
     return evaluate(
