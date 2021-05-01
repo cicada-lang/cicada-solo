@@ -6,10 +6,7 @@ import { check } from "../../check"
 import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
-import { Type } from "../../exps"
-import { Nat } from "../../exps"
-import { Var, Pi, Ap } from "../../exps"
-import { Add1 } from "../../exps"
+import * as Exps from "../../exps"
 import * as Cores from "../../cores"
 
 export class NatInd extends Exp {
@@ -42,14 +39,14 @@ export class NatInd extends Exp {
     const motive_t = evaluate(
       new Ctx(),
       new Env(),
-      new Pi("target_nat", new Nat(), new Type())
+      new Exps.Pi("target_nat", new Exps.Nat(), new Exps.Type())
     )
     check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx, ctx.to_env(), this.motive)
-    check(ctx, this.base, Ap.apply(motive_value, new Cores.ZeroValue()))
+    check(ctx, this.base, Cores.Ap.apply(motive_value, new Cores.ZeroValue()))
     check(ctx, this.step, nat_ind_step_t(motive_t, motive_value))
     const target_value = evaluate(ctx, ctx.to_env(), this.target)
-    return Ap.apply(motive_value, target_value)
+    return Cores.Ap.apply(motive_value, target_value)
   }
 
   repr(): string {
@@ -62,8 +59,8 @@ export class NatInd extends Exp {
       [
         Cores.Add1Value,
         ({ prev }: Cores.Add1Value) =>
-          Ap.apply(
-            Ap.apply(step, prev),
+          Cores.Ap.apply(
+            Cores.Ap.apply(step, prev),
             NatInd.apply(prev, motive, base, step)
           ),
       ],
@@ -81,13 +78,13 @@ export class NatInd extends Exp {
                     new Env(),
                     "target_nat",
                     nat_t,
-                    new Type()
+                    new Exps.Type()
                   )
                 )
-                const base_t = Ap.apply(motive, new Cores.ZeroValue())
+                const base_t = Cores.Ap.apply(motive, new Cores.ZeroValue())
                 const step_t = nat_ind_step_t(motive_t, motive)
                 return new Cores.NotYetValue(
-                  Ap.apply(motive, target),
+                  Cores.Ap.apply(motive, target),
                   new Cores.NatIndNeutral(
                     neutral,
                     new Normal(motive_t, motive),
@@ -107,13 +104,13 @@ function nat_ind_step_t(motive_t: Value, motive: Value): Value {
   const ctx = new Ctx().extend("motive", motive_t, motive)
   const env = new Env().extend("motive", motive_t, motive)
 
-  const step_t = new Pi(
+  const step_t = new Exps.Pi(
     "prev",
-    new Nat(),
-    new Pi(
+    new Exps.Nat(),
+    new Exps.Pi(
       "almost",
-      new Ap(new Var("motive"), new Var("prev")),
-      new Ap(new Var("motive"), new Add1(new Var("prev")))
+      new Exps.Ap(new Exps.Var("motive"), new Exps.Var("prev")),
+      new Exps.Ap(new Exps.Var("motive"), new Exps.Add1(new Exps.Var("prev")))
     )
   )
 

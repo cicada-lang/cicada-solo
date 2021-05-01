@@ -76,7 +76,7 @@ export class Telescope {
     while (telescope.next) {
       const { name: next_name, t } = telescope.next
       if (next_name !== name) {
-        telescope = telescope.fill(Dot.apply(target, next_name))
+        telescope = telescope.fill(Cores.Dot.apply(target, next_name))
       } else {
         return t
       }
@@ -111,11 +111,15 @@ export class Telescope {
       if (value) {
         entries.push({ name, t: t_exp, exp: readback(ctx, t, value) })
         ctx = ctx.extend(name, t, value)
-        telescope = telescope.fill(new Cores.NotYetValue(t, new Cores.VarNeutral(name)))
+        telescope = telescope.fill(
+          new Cores.NotYetValue(t, new Cores.VarNeutral(name))
+        )
       } else {
         entries.push({ name, t: t_exp })
         ctx = ctx.extend(name, t)
-        telescope = telescope.fill(new Cores.NotYetValue(t, new Cores.VarNeutral(name)))
+        telescope = telescope.fill(
+          new Cores.NotYetValue(t, new Cores.VarNeutral(name))
+        )
       }
     }
 
@@ -126,7 +130,7 @@ export class Telescope {
     const properties = new Map()
 
     for (const { name, t, value: fulfilled_value } of this.fulfilled) {
-      const property_value = Dot.apply(value, name)
+      const property_value = Cores.Dot.apply(value, name)
       if (!conversion(ctx, t, property_value, fulfilled_value)) {
         throw new Trace("property_value not equivalent to fulfilled_value")
       }
@@ -138,7 +142,7 @@ export class Telescope {
     while (telescope.next) {
       const { name, t, value: fulfilled_value } = telescope.next
       if (fulfilled_value) {
-        const property_value = Dot.apply(value, name)
+        const property_value = Cores.Dot.apply(value, name)
         if (!conversion(ctx, t, property_value, fulfilled_value)) {
           throw new Trace("property_value not equivalent to fulfilled_value")
         }

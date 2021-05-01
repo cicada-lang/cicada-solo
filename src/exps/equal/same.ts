@@ -15,7 +15,7 @@ export class Same extends Exp {
   }
 
   check(ctx: Ctx, t: Value): void {
-    const equal = expect(ctx, t, EqualValue)
+    const equal = expect(ctx, t, Cores.EqualValue)
     if (!conversion(ctx, equal.t, equal.from, equal.to)) {
       throw new Trace(
         ut.aline(`

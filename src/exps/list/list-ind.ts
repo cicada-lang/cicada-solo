@@ -46,10 +46,10 @@ export class ListInd extends Exp {
     )
     check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx, ctx.to_env(), this.motive)
-    check(ctx, this.base, Ap.apply(motive_value, new Cores.NilValue()))
+    check(ctx, this.base, Cores.Ap.apply(motive_value, new Cores.NilValue()))
     check(ctx, this.step, list_ind_step_t(motive_t, motive_value, elem_t))
     const target_value = evaluate(ctx, ctx.to_env(), this.target)
-    return Ap.apply(motive_value, target_value)
+    return Cores.Ap.apply(motive_value, target_value)
   }
 
   repr(): string {
@@ -62,8 +62,8 @@ export class ListInd extends Exp {
       [
         Cores.LiValue,
         ({ head, tail }: Cores.LiValue) =>
-          Ap.apply(
-            Ap.apply(Ap.apply(step, head), tail),
+          Cores.Ap.apply(
+            Cores.Ap.apply(Cores.Ap.apply(step, head), tail),
             ListInd.apply(tail, motive, base, step)
           ),
       ],
@@ -84,11 +84,11 @@ export class ListInd extends Exp {
                     new Type()
                   )
                 )
-                const base_t = Ap.apply(motive, new Cores.NilValue())
+                const base_t = Cores.Ap.apply(motive, new Cores.NilValue())
                 const elem_t = list_t.elem_t
                 const step_t = list_ind_step_t(motive_t, motive, elem_t)
                 return new Cores.NotYetValue(
-                  Ap.apply(motive, target),
+                  Cores.Ap.apply(motive, target),
                   new Cores.ListIndNeutral(
                     neutral,
                     new Normal(motive_t, motive),

@@ -15,7 +15,10 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
     value instanceof Cores.NotYetValue &&
     value.t instanceof Cores.AbsurdValue
   ) {
-    return new Cores.The(new Cores.Absurd(), value.neutral.readback_neutral(ctx))
+    return new Cores.The(
+      new Cores.Absurd(),
+      value.neutral.readback_neutral(ctx)
+    )
   }
 
   const exp = value.readback(ctx, t)
