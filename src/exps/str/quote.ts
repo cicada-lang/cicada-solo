@@ -12,7 +12,7 @@ export class Quote extends Exp {
     this.str = str
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     return new Cores.QuoteValue(this.str)
   }
 

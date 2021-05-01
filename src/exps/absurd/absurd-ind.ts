@@ -17,10 +17,10 @@ export class AbsurdInd extends Exp {
     this.motive = motive
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     return AbsurdInd.apply(
-      evaluate(ctx, env, this.target),
-      evaluate(ctx, env, this.motive)
+      evaluate(env, this.target),
+      evaluate(env, this.motive)
     )
   }
 
@@ -31,7 +31,7 @@ export class AbsurdInd extends Exp {
     //   but we do a simple check for the simple absurd.
     check(ctx, this.target, new Cores.AbsurdValue())
     check(ctx, this.motive, new Cores.TypeValue())
-    const motive_value = evaluate(ctx, ctx.to_env(), this.motive)
+    const motive_value = evaluate(ctx.to_env(), this.motive)
     return motive_value
   }
 

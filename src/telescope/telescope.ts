@@ -12,18 +12,15 @@ import * as Cores from "../cores"
 import * as ut from "../ut"
 
 export class Telescope {
-  ctx: Ctx
   env: Env
   entries: Array<{ name: string; t: Exp; exp?: Exp }>
   fulfilled: Array<{ name: string; t: Value; value: Value }>
 
   constructor(
-    ctx: Ctx,
     env: Env,
     entries: Array<{ name: string; t: Exp; exp?: Exp }>,
     fulfilled?: Array<{ name: string; t: Value; value: Value }>
   ) {
-    this.ctx = ctx
     this.env = env
     this.entries = entries
     this.fulfilled = fulfilled || []
@@ -34,8 +31,8 @@ export class Telescope {
     const [{ name, t, exp }] = this.entries
     return {
       name,
-      t: evaluate(this.ctx, this.env, t),
-      value: exp ? evaluate(this.ctx, this.env, exp) : undefined,
+      t: evaluate(this.env, t),
+      value: exp ? evaluate(this.env, exp) : undefined,
     }
   }
 
@@ -51,8 +48,7 @@ export class Telescope {
     }
 
     return new Telescope(
-      this.ctx.extend(this.next.name, this.next.t, value),
-      this.env.extend(this.next.name, this.next.t, value),
+      this.env.extend(this.next.name, value),
       this.entries.slice(1),
       [
         ...this.fulfilled,
@@ -178,7 +174,7 @@ export class Telescope {
 
       check(ctx, found, t)
 
-      const found_value = evaluate(ctx, ctx.to_env(), found)
+      const found_value = evaluate(ctx.to_env(), found)
 
       if (!conversion(ctx, t, value, found_value)) {
         const t_repr = readback(ctx, new Cores.TypeValue(), t).repr()
@@ -213,7 +209,7 @@ export class Telescope {
       check(ctx, found, next_t)
 
       if (value) {
-        const found_value = evaluate(ctx, ctx.to_env(), found)
+        const found_value = evaluate(ctx.to_env(), found)
         if (!conversion(ctx, next_t, value, found_value)) {
           const t_repr = readback(ctx, new Cores.TypeValue(), next_t).repr()
           const value_repr = readback(ctx, next_t, value).repr()
@@ -231,7 +227,7 @@ export class Telescope {
         }
       }
 
-      telescope = telescope.fill(evaluate(ctx, ctx.to_env(), found))
+      telescope = telescope.fill(evaluate(ctx.to_env(), found))
     }
   }
 
@@ -242,9 +238,9 @@ export class Telescope {
     for (const { name, t, exp } of this.entries) {
       const env = ctx.to_env()
       if (exp) {
-        ctx = ctx.extend(name, evaluate(ctx, env, t), evaluate(ctx, env, exp))
+        ctx = ctx.extend(name, evaluate(env, t), evaluate(env, exp))
       } else {
-        ctx = ctx.extend(name, evaluate(ctx, env, t))
+        ctx = ctx.extend(name, evaluate(env, t))
       }
     }
     return ctx

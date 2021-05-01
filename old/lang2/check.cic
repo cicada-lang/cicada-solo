@@ -134,6 +134,6 @@
   Check(ctx, target, Value.absurd)
   Check(ctx, motive, Value.type)
   @where {
-    motive_value = Exp.evaluate(ctx, motive)
+    motive_value = Exp.evaluate(motive)
   }
 }

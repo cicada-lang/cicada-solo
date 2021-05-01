@@ -32,11 +32,10 @@ export class Ctx {
     let env = new Env()
     for (const [name, { t, value }] of this.entries) {
       if (value !== undefined) {
-        env = env.extend(name, t, value)
+        env = env.extend(name, value)
       } else {
         env = env.extend(
           name,
-          t,
           new Cores.NotYetValue(t, new Cores.VarNeutral(name))
         )
       }

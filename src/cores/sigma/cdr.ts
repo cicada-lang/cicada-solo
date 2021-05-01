@@ -13,8 +13,8 @@ export class Cdr extends Core {
     this.target = target
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    return Cdr.apply(evaluate(ctx, env, this.target))
+  evaluate(env: Env): Value {
+    return Cdr.apply(evaluate(env, this.target))
   }
 
   repr(): string {

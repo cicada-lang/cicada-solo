@@ -15,11 +15,8 @@ export class Li extends Core {
     this.tail = tail
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    return new Cores.LiValue(
-      evaluate(ctx, env, this.head),
-      evaluate(ctx, env, this.tail)
-    )
+  evaluate(env: Env): Value {
+    return new Cores.LiValue(evaluate(env, this.head), evaluate(env, this.tail))
   }
 
   repr(): string {

@@ -15,11 +15,8 @@ export class Cons extends Core {
     this.cdr = cdr
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    return new Cores.ConsValue(
-      evaluate(ctx, env, this.car),
-      evaluate(ctx, env, this.cdr)
-    )
+  evaluate(env: Env): Value {
+    return new Cores.ConsValue(evaluate(env, this.car), evaluate(env, this.cdr))
   }
 
   repr(): string {

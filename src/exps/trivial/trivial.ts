@@ -5,7 +5,7 @@ import { Env } from "../../env"
 import * as Cores from "../../cores"
 
 export class Trivial extends Exp {
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     return new Cores.TrivialValue()
   }
 

@@ -16,9 +16,8 @@ export class Fn extends Core {
     this.ret = ret
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    const t = infer(ctx, new Cores.Var(this.name))
-    return new Cores.FnValue(new Closure(ctx, env, this.name, t, this.ret))
+  evaluate(env: Env): Value {
+    return new Cores.FnValue(new Closure(env, this.name, this.ret))
   }
 
   repr(): string {

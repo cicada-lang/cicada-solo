@@ -15,8 +15,8 @@ export class Dot extends Core {
     this.name = name
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    return Cores.Dot.apply(evaluate(ctx, env, this.target), this.name)
+  evaluate(env: Env): Value {
+    return Cores.Dot.apply(evaluate(env, this.target), this.name)
   }
 
   repr(): string {

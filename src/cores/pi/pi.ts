@@ -18,12 +18,9 @@ export class Pi extends Core {
     this.ret_t = ret_t
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    const arg_t = evaluate(ctx, env, this.arg_t)
-    return new Cores.PiValue(
-      arg_t,
-      new Closure(ctx, env, this.name, arg_t, this.ret_t)
-    )
+  evaluate(env: Env): Value {
+    const arg_t = evaluate(env, this.arg_t)
+    return new Cores.PiValue(arg_t, new Closure(env, this.name, this.ret_t))
   }
 
   repr(): string {

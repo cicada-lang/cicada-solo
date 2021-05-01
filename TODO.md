@@ -1,11 +1,3 @@
-- `evaluate` should not take `ctx` as argument.
-
-  - After split the `Exp` into `Exp` and `Core`,
-    it is clear that `evaluate` is method of of `Core`,
-    `infer` and `check` are methods of `Exp` (which can take `ctx`),
-    thus it is useless to pass `ctx` into `evaluate`.
-
-
 - split the responsibilities of `Exp` to `Exp` and `Core`
 
   > If we can achieve this, we will be better at

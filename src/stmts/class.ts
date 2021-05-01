@@ -18,7 +18,7 @@ export class Class implements Stmt {
     const exp = new Exps.The(new Exps.Type(), this.t)
     const t = infer(mod.ctx, exp)
     const ctx = mod.ctx
-    mod.ctx = mod.ctx.extend(this.name, t, evaluate(ctx, ctx.to_env(), exp))
-    mod.env = mod.env.extend(this.name, t, evaluate(ctx, mod.env, exp))
+    mod.ctx = mod.ctx.extend(this.name, t, evaluate(ctx.to_env(), exp))
+    mod.env = mod.env.extend(this.name, evaluate(mod.env, exp))
   }
 }

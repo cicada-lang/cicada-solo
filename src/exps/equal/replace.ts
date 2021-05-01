@@ -23,11 +23,11 @@ export class Replace extends Exp {
     this.base = base
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     return Replace.apply(
-      evaluate(ctx, env, this.target),
-      evaluate(ctx, env, this.motive),
-      evaluate(ctx, env, this.base)
+      evaluate(env, this.target),
+      evaluate(env, this.motive),
+      evaluate(env, this.base)
     )
   }
 
@@ -35,12 +35,11 @@ export class Replace extends Exp {
     const target_t = infer(ctx, this.target)
     const equal = expect(ctx, target_t, Cores.EqualValue)
     const motive_t = evaluate(
-      new Ctx().extend("t", new Cores.TypeValue(), equal.t),
-      new Env().extend("t", new Cores.TypeValue(), equal.t),
+      new Env().extend("t", equal.t),
       new Exps.Pi("x", new Exps.Var("t"), new Exps.Type())
     )
     check(ctx, this.motive, motive_t)
-    const motive_value = evaluate(ctx, ctx.to_env(), this.motive)
+    const motive_value = evaluate(ctx.to_env(), this.motive)
     check(ctx, this.base, Cores.Ap.apply(motive_value, equal.from))
     return Cores.Ap.apply(motive_value, equal.to)
   }
@@ -62,7 +61,7 @@ export class Replace extends Exp {
                 const base_t = Cores.Ap.apply(motive, from)
                 const motive_t = new Cores.PiValue(
                   t,
-                  new Closure(new Ctx(), new Env(), "x", t, new Exps.Type())
+                  new Closure(new Env(), "x", new Exps.Type())
                 )
                 return new Cores.NotYetValue(
                   Cores.Ap.apply(motive, to),

@@ -1,30 +1,19 @@
 import { Value } from "../value"
 
-type EnvEntry = {
-  t: Value
-  value: Value
-}
-
 export class Env {
-  entries: Map<string, EnvEntry>
+  values: Map<string, Value>
 
-  constructor(entries: Map<string, EnvEntry> = new Map()) {
-    this.entries = entries
+  constructor(values: Map<string, Value> = new Map()) {
+    this.values = values
   }
 
-  extend(name: string, t: Value, value: Value): Env {
-    return new Env(new Map([...this.entries, [name, { t, value }]]))
+  extend(name: string, value: Value): Env {
+    return new Env(new Map([...this.values, [name, value]]))
   }
 
   lookup_value(name: string): undefined | Value {
-    const entry = this.entries.get(name)
-    if (entry !== undefined) return entry.value
-    else return undefined
-  }
-
-  lookup_type(name: string): undefined | Value {
-    const entry = this.entries.get(name)
-    if (entry !== undefined) return entry.t
+    const value = this.values.get(name)
+    if (value !== undefined) return value
     else return undefined
   }
 }

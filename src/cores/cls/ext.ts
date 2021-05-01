@@ -24,18 +24,18 @@ export class Ext extends Core {
     this.name = opts?.name
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    const parent = evaluate(ctx, env, new Cores.Var(this.parent_name))
+  evaluate(env: Env): Value {
+    const parent = evaluate(env, new Cores.Var(this.parent_name))
     if (parent instanceof Cores.ClsValue) {
       return new Cores.ExtValue([
         { name: parent.name, telescope: parent.telescope },
-        { name: this.name, telescope: new Telescope(ctx, env, this.entries) },
+        { name: this.name, telescope: new Telescope(env, this.entries) },
       ])
     }
     if (parent instanceof Cores.ExtValue) {
       return new Cores.ExtValue([
         ...parent.entries,
-        { name: this.name, telescope: new Telescope(ctx, env, this.entries) },
+        { name: this.name, telescope: new Telescope(env, this.entries) },
       ])
     }
     throw new Trace(`Coreecting parent to be ClsValue or ExtValue`)

@@ -19,18 +19,9 @@ export class Let extends Exp {
     this.ret = ret
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    // const t = infer(ctx, this.exp)
-
-    // TODO the following use of `new TypeValue()` is placeholder.
-    const t = new Cores.TypeValue()
-
-    const value = evaluate(ctx, env, this.exp)
-    return evaluate(
-      ctx.extend(this.name, t, value),
-      env.extend(this.name, t, value),
-      this.ret
-    )
+  evaluate(env: Env): Value {
+    const value = evaluate(env, this.exp)
+    return evaluate(env.extend(this.name, value), this.ret)
   }
 
   infer(ctx: Ctx): Value {
@@ -38,7 +29,7 @@ export class Let extends Exp {
       ctx.extend(
         this.name,
         infer(ctx, this.exp),
-        evaluate(ctx, ctx.to_env(), this.exp)
+        evaluate(ctx.to_env(), this.exp)
       ),
       this.ret
     )
@@ -49,7 +40,7 @@ export class Let extends Exp {
       ctx.extend(
         this.name,
         infer(ctx, this.exp),
-        evaluate(ctx, ctx.to_env(), this.exp)
+        evaluate(ctx.to_env(), this.exp)
       ),
       this.ret,
       t

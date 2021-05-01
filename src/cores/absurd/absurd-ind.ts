@@ -16,10 +16,10 @@ export class AbsurdInd extends Core {
     this.motive = motive
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     return AbsurdInd.apply(
-      evaluate(ctx, env, this.target),
-      evaluate(ctx, env, this.motive)
+      evaluate(env, this.target),
+      evaluate(env, this.motive)
     )
   }
 

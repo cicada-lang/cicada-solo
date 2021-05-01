@@ -18,12 +18,9 @@ export class Sigma extends Core {
     this.cdr_t = cdr_t
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    const car_t = evaluate(ctx, env, this.car_t)
-    return new Cores.SigmaValue(
-      car_t,
-      new Closure(ctx, env, this.name, car_t, this.cdr_t)
-    )
+  evaluate(env: Env): Value {
+    const car_t = evaluate(env, this.car_t)
+    return new Cores.SigmaValue(car_t, new Closure(env, this.name, this.cdr_t))
   }
 
   repr(): string {

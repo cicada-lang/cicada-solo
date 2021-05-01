@@ -22,12 +22,12 @@ export class NatInd extends Core {
     this.step = step
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     return NatInd.apply(
-      evaluate(ctx, env, this.target),
-      evaluate(ctx, env, this.motive),
-      evaluate(ctx, env, this.base),
-      evaluate(ctx, env, this.step)
+      evaluate(env, this.target),
+      evaluate(env, this.motive),
+      evaluate(env, this.base),
+      evaluate(env, this.step)
     )
   }
 
@@ -61,13 +61,7 @@ export class NatInd extends Core {
               (nat_t: Cores.NatValue) => {
                 const motive_t = new Cores.PiValue(
                   nat_t,
-                  new Closure(
-                    new Ctx(),
-                    new Env(),
-                    "target_nat",
-                    nat_t,
-                    new Cores.Type()
-                  )
+                  new Closure(new Env(), "target_nat", new Cores.Type())
                 )
                 const base_t = Cores.Ap.apply(motive, new Cores.ZeroValue())
                 const step_t = nat_ind_step_t(motive_t, motive)
@@ -89,8 +83,8 @@ export class NatInd extends Core {
 }
 
 function nat_ind_step_t(motive_t: Value, motive: Value): Value {
-  const ctx = new Ctx().extend("motive", motive_t, motive)
-  const env = new Env().extend("motive", motive_t, motive)
+  const ctx = new Ctx().extend("motive", motive)
+  const env = new Env().extend("motive", motive)
 
   const step_t = new Cores.Pi(
     "prev",
@@ -105,5 +99,5 @@ function nat_ind_step_t(motive_t: Value, motive: Value): Value {
     )
   )
 
-  return evaluate(ctx, env, step_t)
+  return evaluate(env, step_t)
 }

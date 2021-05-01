@@ -14,11 +14,11 @@ export class Obj extends Core {
     this.properties = properties
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     const properties = new Map()
 
     for (const [name, exp] of this.properties) {
-      properties.set(name, evaluate(ctx, env, exp))
+      properties.set(name, evaluate(env, exp))
     }
 
     return new Cores.ObjValue(properties)

@@ -17,11 +17,11 @@ export class Equal extends Core {
     this.to = to
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     return new Cores.EqualValue(
-      evaluate(ctx, env, this.t),
-      evaluate(ctx, env, this.from),
-      evaluate(ctx, env, this.to)
+      evaluate(env, this.t),
+      evaluate(env, this.from),
+      evaluate(env, this.to)
     )
   }
 

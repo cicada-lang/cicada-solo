@@ -14,8 +14,8 @@ export class The extends Core {
     this.exp = exp
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    return evaluate(ctx, env, this.exp)
+  evaluate(env: Env): Value {
+    return evaluate(env, this.exp)
   }
 
   repr(): string {

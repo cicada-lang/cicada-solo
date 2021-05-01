@@ -5,7 +5,7 @@ import { Value } from "../value"
 export abstract class Core {
   __the_abstract_class_name_is_core__ = "Core"
 
-  abstract evaluate(ctx: Ctx, env: Env): Value
+  abstract evaluate(env: Env): Value
   abstract repr(): string
   abstract alpha_repr(ctx: AlphaCtx): string
 }

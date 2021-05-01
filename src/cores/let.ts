@@ -17,14 +17,9 @@ export class Let extends Core {
     this.ret = ret
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    const t = infer(ctx, this.exp)
-    const value = evaluate(ctx, env, this.exp)
-    return evaluate(
-      ctx.extend(this.name, t, value),
-      env.extend(this.name, t, value),
-      this.ret
-    )
+  evaluate(env: Env): Value {
+    const value = evaluate(env, this.exp)
+    return evaluate(env.extend(this.name, value), this.ret)
   }
 
   repr(): string {

@@ -19,11 +19,11 @@ export class Replace extends Core {
     this.base = base
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     return Replace.apply(
-      evaluate(ctx, env, this.target),
-      evaluate(ctx, env, this.motive),
-      evaluate(ctx, env, this.base)
+      evaluate(env, this.target),
+      evaluate(env, this.motive),
+      evaluate(env, this.base)
     )
   }
 
@@ -50,7 +50,7 @@ export class Replace extends Core {
                 const base_t = Cores.Ap.apply(motive, from)
                 const motive_t = new Cores.PiValue(
                   t,
-                  new Closure(new Ctx(), new Env(), "x", t, new Cores.Type())
+                  new Closure(new Env(), "x", new Cores.Type())
                 )
                 return new Cores.NotYetValue(
                   Cores.Ap.apply(motive, to),

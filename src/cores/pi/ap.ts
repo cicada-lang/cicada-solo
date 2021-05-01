@@ -16,11 +16,8 @@ export class Ap extends Core {
     this.arg = arg
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    return Ap.apply(
-      evaluate(ctx, env, this.target),
-      evaluate(ctx, env, this.arg)
-    )
+  evaluate(env: Env): Value {
+    return Ap.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
   repr(): string {

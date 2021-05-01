@@ -5,7 +5,7 @@ import * as Cores from "../../cores"
 import { Value } from "../../value"
 
 export class Absurd extends Core {
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     return new Cores.AbsurdValue()
   }
 

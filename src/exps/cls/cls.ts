@@ -21,8 +21,8 @@ export class Cls extends Exp {
     this.name = opts?.name
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    return new Cores.ClsValue(new Telescope(ctx, env, this.entries), {
+  evaluate(env: Env): Value {
+    return new Cores.ClsValue(new Telescope(env, this.entries), {
       name: this.name,
     })
   }
@@ -30,7 +30,7 @@ export class Cls extends Exp {
   infer(ctx: Ctx): Value {
     for (const { name, t, exp } of this.entries) {
       check(ctx, t, new Cores.TypeValue())
-      const t_value = evaluate(ctx, ctx.to_env(), t)
+      const t_value = evaluate(ctx.to_env(), t)
       if (exp) check(ctx, exp, t_value)
       ctx = ctx.extend(name, t_value)
     }

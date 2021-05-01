@@ -5,7 +5,7 @@ import { Value } from "../value"
 import * as Cores from "../cores"
 
 export class Type extends Exp {
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     return new Cores.TypeValue()
   }
 

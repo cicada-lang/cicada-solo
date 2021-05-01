@@ -5,7 +5,7 @@ import { Value } from "../../value"
 import * as Cores from "../../cores"
 
 export class Nat extends Core {
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     return new Cores.NatValue()
   }
 

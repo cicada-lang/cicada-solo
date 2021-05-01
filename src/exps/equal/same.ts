@@ -10,7 +10,7 @@ import * as ut from "../../ut"
 import * as Cores from "../../cores"
 
 export class Same extends Exp {
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     return new Cores.SameValue()
   }
 

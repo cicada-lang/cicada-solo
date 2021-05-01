@@ -15,8 +15,8 @@ export class Add1 extends Exp {
     this.prev = prev
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    return new Cores.Add1Value(evaluate(ctx, env, this.prev))
+  evaluate(env: Env): Value {
+    return new Cores.Add1Value(evaluate(env, this.prev))
   }
 
   infer(ctx: Ctx): Value {

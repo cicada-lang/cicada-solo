@@ -17,16 +17,13 @@ export class Cons extends Exp {
     this.cdr = cdr
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    return new Cores.ConsValue(
-      evaluate(ctx, env, this.car),
-      evaluate(ctx, env, this.cdr)
-    )
+  evaluate(env: Env): Value {
+    return new Cores.ConsValue(evaluate(env, this.car), evaluate(env, this.cdr))
   }
 
   check(ctx: Ctx, t: Value): void {
     const sigma = expect(ctx, t, Cores.SigmaValue)
-    const cdr_t = sigma.cdr_t_cl.apply(evaluate(ctx, ctx.to_env(), this.car))
+    const cdr_t = sigma.cdr_t_cl.apply(evaluate(ctx.to_env(), this.car))
     check(ctx, this.car, sigma.car_t)
     check(ctx, this.cdr, cdr_t)
   }

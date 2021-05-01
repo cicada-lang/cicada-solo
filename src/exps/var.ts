@@ -12,7 +12,7 @@ export class Var extends Exp {
     this.name = name
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     const result = env.lookup_value(this.name)
     if (result === undefined) {
       throw new Trace(

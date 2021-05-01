@@ -13,8 +13,8 @@ export class Car extends Core {
     this.target = target
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    return Car.apply(evaluate(ctx, env, this.target))
+  evaluate(env: Env): Value {
+    return Car.apply(evaluate(env, this.target))
   }
 
   repr(): string {

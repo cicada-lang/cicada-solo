@@ -23,11 +23,11 @@ export class ListRec extends Exp {
     this.step = step
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
+  evaluate(env: Env): Value {
     return ListRec.apply(
-      evaluate(ctx, env, this.target),
-      evaluate(ctx, env, this.base),
-      evaluate(ctx, env, this.step)
+      evaluate(env, this.target),
+      evaluate(env, this.base),
+      evaluate(env, this.step)
     )
   }
 
@@ -64,13 +64,7 @@ export class ListRec extends Exp {
               (list_t: Cores.ListValue) => {
                 const motive_t = new Cores.PiValue(
                   list_t,
-                  new Closure(
-                    new Ctx(),
-                    new Env(),
-                    "target_list",
-                    list_t,
-                    new Cores.Type()
-                  )
+                  new Closure(new Env(), "target_list", new Cores.Type())
                 )
 
                 throw new Error("TODO")
@@ -100,12 +94,8 @@ export class ListRec extends Exp {
 }
 
 function list_rec_step_t(base_t: Value, elem_t: Value): Value {
-  const ctx = new Ctx()
-    .extend("base_t", new Cores.TypeValue(), base_t)
-    .extend("elem_t", new Cores.TypeValue(), elem_t)
-  const env = new Env()
-    .extend("base_t", new Cores.TypeValue(), base_t)
-    .extend("elem_t", new Cores.TypeValue(), elem_t)
+  const ctx = new Ctx().extend("base_t", base_t).extend("elem_t", elem_t)
+  const env = new Env().extend("base_t", base_t).extend("elem_t", elem_t)
 
   const step_t = new Cores.Pi(
     "head",
@@ -117,5 +107,5 @@ function list_rec_step_t(base_t: Value, elem_t: Value): Value {
     )
   )
 
-  return evaluate(ctx, env, step_t)
+  return evaluate(env, step_t)
 }

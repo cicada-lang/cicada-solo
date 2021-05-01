@@ -18,8 +18,8 @@ export class Dot extends Exp {
     this.name = name
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    return Dot.apply(evaluate(ctx, env, this.target), this.name)
+  evaluate(env: Env): Value {
+    return Dot.apply(evaluate(env, this.target), this.name)
   }
 
   infer(ctx: Ctx): Value {
@@ -29,7 +29,7 @@ export class Dot extends Exp {
       target_t instanceof Cores.ClsValue ||
       target_t instanceof Cores.ExtValue
     ) {
-      return target_t.dot(evaluate(ctx, ctx.to_env(), this.target), this.name)
+      return target_t.dot(evaluate(ctx.to_env(), this.target), this.name)
     }
 
     throw new Trace(

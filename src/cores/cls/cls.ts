@@ -19,8 +19,8 @@ export class Cls extends Core {
     this.name = opts?.name
   }
 
-  evaluate(ctx: Ctx, env: Env): Value {
-    return new Cores.ClsValue(new Telescope(ctx, env, this.entries), {
+  evaluate(env: Env): Value {
+    return new Cores.ClsValue(new Telescope(env, this.entries), {
       name: this.name,
     })
   }
