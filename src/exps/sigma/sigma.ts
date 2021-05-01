@@ -21,10 +21,16 @@ export class Sigma extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    check(ctx, this.car_t, new Cores.TypeValue())
-    const car_t_value = evaluate(ctx.to_env(), this.car_t)
-    check(ctx.extend(this.name, car_t_value), this.cdr_t, new Cores.TypeValue())
-    return new Cores.TypeValue()
+    const car_t_core = check(ctx, this.car_t, new Cores.TypeValue())
+    const car_t_value = evaluate(ctx.to_env(), car_t_core)
+    const cdr_t_core = check(
+      ctx.extend(this.name, car_t_value),
+      this.cdr_t,
+      new Cores.TypeValue()
+    )
+    const core = new Cores.Sigma(this.name, car_t_core, cdr_t_core)
+    const t = new Cores.TypeValue()
+    return { t, core }
   }
 
   repr(): string {
