@@ -7,7 +7,10 @@ import * as Cores from "../../cores"
 
 export class Trivial extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
-    return new Cores.TypeValue()
+    return {
+      t: new Cores.TypeValue(),
+      core: new Cores.Trivial(),
+    }
   }
 
   repr(): string {
