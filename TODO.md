@@ -1,4 +1,3 @@
-- import stmts with as `Stmts.` prefix in `syntax/`
 - import cores with as `Cores.` prefix in `exps/`
 
 - split the responsibilities of `exp` to `core` and `exp`

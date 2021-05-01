@@ -1,6 +1,6 @@
 import pt from "@cicada-lang/partech"
 import { Stmt } from "../../stmt"
-import { Def, Show, Class, Import, ImportEntry } from "../../stmts"
+import * as Stmts from "../../stmts"
 import * as Exps from "../../exps"
 import {
   exp_matcher,
@@ -18,9 +18,13 @@ export function stmts_matcher(tree: pt.Tree): Array<Stmt> {
 
 export function stmt_matcher(tree: pt.Tree): Stmt {
   return pt.matcher<Stmt>({
-    "stmt:def": ({ name, exp }) => new Def(pt.str(name), exp_matcher(exp)),
+    "stmt:def": ({ name, exp }) =>
+      new Stmts.Def(pt.str(name), exp_matcher(exp)),
     "stmt:def_the": ({ name, t, exp }) =>
-      new Def(pt.str(name), new Exps.The(exp_matcher(t), exp_matcher(exp))),
+      new Stmts.Def(
+        pt.str(name),
+        new Exps.The(exp_matcher(t), exp_matcher(exp))
+      ),
     "stmt:fn": ({ name, bindings, ret_t, ret }) => {
       let fn = exp_matcher(ret)
       for (const { names, exp } of bindings_matcher(bindings).reverse()) {
@@ -29,21 +33,21 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         }
       }
 
-      return new Def(
+      return new Stmts.Def(
         pt.str(name),
         new Exps.The(pi_handler({ bindings, ret_t }), fn)
       )
     },
-    "stmt:show": ({ exp }) => new Show(exp_matcher(exp)),
+    "stmt:show": ({ exp }) => new Stmts.Show(exp_matcher(exp)),
     "stmt:class": ({ name, entries }) =>
-      new Class(
+      new Stmts.Class(
         pt.str(name),
         new Exps.Cls(
           pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
         )
       ),
     "stmt:class_extends": ({ name, parent_name, entries }) =>
-      new Class(
+      new Stmts.Class(
         pt.str(name),
         new Exps.Ext(
           pt.str(parent_name),
@@ -51,7 +55,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         )
       ),
     "stmt:import": ({ path, entries }) => {
-      return new Import(
+      return new Stmts.Import(
         pt.trim_boundary(pt.str(path), 1),
         pt.matchers.zero_or_more_matcher(entries).map(import_entry_matcher)
       )
@@ -59,7 +63,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
   })(tree)
 }
 
-export function import_entry_matcher(tree: pt.Tree): ImportEntry {
+export function import_entry_matcher(tree: pt.Tree): Stmts.ImportEntry {
   return pt.matcher({
     "import_entry:name": ({ name }) => ({ name: pt.str(name) }),
     "import_entry:name_alias": ({ name, alias }) => ({
