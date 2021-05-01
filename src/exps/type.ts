@@ -7,7 +7,10 @@ import * as Cores from "../cores"
 
 export class Type extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
-    return new Cores.TypeValue()
+    return {
+      t: new Cores.TypeValue(),
+      core: new Cores.Type(),
+    }
   }
 
   repr(): string {
