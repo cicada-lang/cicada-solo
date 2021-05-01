@@ -1,6 +1,3 @@
-- import cores with as `Cores.` prefix in `exps/`
-- import cores with as `Cores.` prefix in `cores/`
-
 - split the responsibilities of `exp` to `core` and `exp`
 
   > If we can achieve this, we will be better at
