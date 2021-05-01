@@ -6,7 +6,7 @@ import { Value } from "../value"
 import * as Cores from "../cores"
 
 export class Type extends Exp {
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     return new Cores.TypeValue()
   }
 

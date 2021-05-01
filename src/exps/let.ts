@@ -20,7 +20,7 @@ export class Let extends Exp {
     this.ret = ret
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     return infer(
       ctx.extend(
         this.name,

@@ -10,7 +10,7 @@ export class Zero extends Exp {
     return new Cores.ZeroValue()
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     return new Cores.NatValue()
   }
 

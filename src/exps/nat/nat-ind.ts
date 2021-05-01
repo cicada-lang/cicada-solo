@@ -24,7 +24,7 @@ export class NatInd extends Exp {
     this.step = step
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     // NOTE We should always infer target,
     //   but we do a simple check for the simple nat.
     check(ctx, this.target, new Cores.NatValue())

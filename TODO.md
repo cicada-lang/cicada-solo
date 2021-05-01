@@ -10,7 +10,7 @@
   - [x] `exp` -- only `check` `infer` `repr`
   - [] use elaboration in bidirectional type checking split.
     - `check` return `Core`
-    - `infer` return `{ t: Value, exp: Core }`
+    - `infer` return `{ t: Value, core: Core }`
 
 > With elaboration,
 >   we can elaborate `Exps.ListRec` into `Cores.ListInd` (which need `readback`),

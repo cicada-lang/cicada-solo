@@ -22,7 +22,7 @@ export class Cls extends Exp {
     this.name = opts?.name
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     for (const { name, t, exp } of this.entries) {
       check(ctx, t, new Cores.TypeValue())
       const t_value = evaluate(ctx.to_env(), t)

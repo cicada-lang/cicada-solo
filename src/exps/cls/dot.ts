@@ -19,7 +19,7 @@ export class Dot extends Exp {
     this.name = name
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     const target_t = infer(ctx, this.target)
 
     if (

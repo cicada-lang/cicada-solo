@@ -16,7 +16,7 @@ export class Show implements Stmt {
   async execute(mod: Module): Promise<void> {
     const inferred = infer(mod.ctx, this.exp)
     const t = inferred.t
-    const value = evaluate(mod.env, inferred.exp)
+    const value = evaluate(mod.env, inferred.core)
     const value_repr = readback(mod.ctx, t, value).repr()
     const t_repr = readback(mod.ctx, new Cores.TypeValue(), t).repr()
     mod.output += `@the ${t_repr} ${value_repr}\n`

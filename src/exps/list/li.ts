@@ -18,7 +18,7 @@ export class Li extends Exp {
     this.tail = tail
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     const elem_t = infer(ctx, this.head)
     check(ctx, this.tail, new Cores.ListValue(elem_t))
     return new Cores.ListValue(elem_t)

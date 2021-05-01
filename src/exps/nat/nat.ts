@@ -10,7 +10,7 @@ export class Nat extends Exp {
     return new Cores.NatValue()
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     return new Cores.TypeValue()
   }
 

@@ -24,7 +24,7 @@ export class ListRec extends Exp {
     this.step = step
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     const target_t = infer(ctx, this.target)
     const list_t = expect(ctx, target_t, Cores.ListValue)
     const elem_t = list_t.elem_t

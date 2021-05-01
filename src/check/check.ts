@@ -26,7 +26,7 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
         )
       }
 
-      return inferred.exp
+      return inferred.core
     } else {
       throw new Trace(
         ut.aline(`

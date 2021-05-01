@@ -19,7 +19,7 @@ export class Equal extends Exp {
     this.to = to
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     check(ctx, this.t, new Cores.TypeValue())
     const t_value = evaluate(ctx.to_env(), this.t)
     check(ctx, this.from, t_value)

@@ -20,7 +20,7 @@ export class Pi extends Exp {
     this.ret_t = ret_t
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     check(ctx, this.arg_t, new Cores.TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), this.arg_t)
     check(ctx.extend(this.name, arg_t_value), this.ret_t, new Cores.TypeValue())

@@ -21,7 +21,7 @@ export class Ap extends Exp {
     this.arg = arg
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     const target_t = infer(ctx, this.target)
     if (target_t instanceof Cores.PiValue) {
       const pi = target_t

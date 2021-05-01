@@ -24,7 +24,7 @@ export class Replace extends Exp {
     this.base = base
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     const target_t = infer(ctx, this.target)
     const equal = expect(ctx, target_t, Cores.EqualValue)
     const motive_t = evaluate(

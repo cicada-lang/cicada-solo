@@ -14,7 +14,7 @@ export class Var extends Exp {
     this.name = name
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     const t = ctx.lookup_type(this.name)
     if (t === undefined) {
       throw new Trace(
@@ -25,7 +25,7 @@ export class Var extends Exp {
 
     return {
       t,
-      exp: new Cores.Var(this.name),
+      core: new Cores.Var(this.name),
     }
   }
 

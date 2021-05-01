@@ -20,7 +20,7 @@ export class Sigma extends Exp {
     this.cdr_t = cdr_t
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     check(ctx, this.car_t, new Cores.TypeValue())
     const car_t_value = evaluate(ctx.to_env(), this.car_t)
     check(ctx.extend(this.name, car_t_value), this.cdr_t, new Cores.TypeValue())

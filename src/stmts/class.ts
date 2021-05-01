@@ -19,7 +19,11 @@ export class Class implements Stmt {
     const inferred = infer(mod.ctx, exp)
     const t = inferred.t
     const ctx = mod.ctx
-    mod.ctx = mod.ctx.extend(this.name, t, evaluate(ctx.to_env(), inferred.exp))
-    mod.env = mod.env.extend(this.name, evaluate(mod.env, inferred.exp))
+    mod.ctx = mod.ctx.extend(
+      this.name,
+      t,
+      evaluate(ctx.to_env(), inferred.core)
+    )
+    mod.env = mod.env.extend(this.name, evaluate(mod.env, inferred.core))
   }
 }

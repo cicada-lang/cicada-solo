@@ -16,7 +16,7 @@ export class Add1 extends Exp {
     this.prev = prev
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     check(ctx, this.prev, new Cores.NatValue())
     return new Cores.NatValue()
   }

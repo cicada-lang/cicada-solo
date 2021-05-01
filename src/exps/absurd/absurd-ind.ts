@@ -18,7 +18,7 @@ export class AbsurdInd extends Exp {
     this.motive = motive
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     // NOTE the `motive` here is not a function from target_t to type,
     //   but a element of type.
     // NOTE We should always infer target,

@@ -5,7 +5,7 @@ import { Ctx } from "../ctx"
 import { Trace } from "../trace"
 import * as ut from "../ut"
 
-export function infer(ctx: Ctx, exp: Exp): { t: Value; exp: Core } {
+export function infer(ctx: Ctx, exp: Exp): { t: Value; core: Core } {
   try {
     if (exp.infer) {
       return exp.infer(ctx)

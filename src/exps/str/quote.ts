@@ -13,7 +13,7 @@ export class Quote extends Exp {
     this.str = str
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     return new Cores.StrValue()
   }
 

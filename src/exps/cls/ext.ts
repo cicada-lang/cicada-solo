@@ -27,7 +27,7 @@ export class Ext extends Exp {
     this.name = opts?.name
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     const parent = evaluate(ctx.to_env(), new Exps.Var(this.parent_name))
     if (
       !(parent instanceof Cores.ClsValue || parent instanceof Cores.ExtValue)

@@ -15,7 +15,7 @@ export class List extends Exp {
     this.elem_t = elem_t
   }
 
-  infer(ctx: Ctx): { t: Value; exp: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     check(ctx, this.elem_t, new Cores.TypeValue())
     return new Cores.TypeValue()
   }
