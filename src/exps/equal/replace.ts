@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
@@ -53,12 +53,6 @@ export class Replace extends Exp {
 
   repr(): string {
     return `replace(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()})`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    return `replace(${this.target.alpha_repr(ctx)}, ${this.motive.alpha_repr(
-      ctx
-    )}, ${this.base.alpha_repr(ctx)})`
   }
 
   static apply(target: Value, motive: Value, base: Value): Value {

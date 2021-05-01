@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Value } from "../../value"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -15,10 +15,6 @@ export class Trivial extends Exp {
   }
 
   repr(): string {
-    return "Trivial"
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
     return "Trivial"
   }
 }

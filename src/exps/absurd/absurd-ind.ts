@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { Ctx } from "../../ctx"
@@ -39,12 +39,6 @@ export class AbsurdInd extends Exp {
 
   repr(): string {
     return `absurd_ind(${this.target.repr()}, ${this.motive.repr()})`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    return `absurd_ind(${this.target.alpha_repr(ctx)}, ${this.motive.alpha_repr(
-      ctx
-    )})`
   }
 
   static apply(target: Value, motive: Value): Value {

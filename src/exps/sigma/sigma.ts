@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { check } from "../../check"
@@ -37,10 +37,5 @@ export class Sigma extends Exp {
 
   repr(): string {
     return `(${this.name}: ${this.car_t.repr()} * ${this.cdr_t.repr()})`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    const cdr_t_repr = this.cdr_t.alpha_repr(ctx.extend(this.name))
-    return `(${this.car_t.alpha_repr(ctx)} * ${cdr_t_repr})`
   }
 }

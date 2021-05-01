@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { expect } from "../../expect"
@@ -33,9 +33,5 @@ export class Cons extends Exp {
 
   repr(): string {
     return `cons(${this.car.repr()}, ${this.cdr.repr()})`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    return `cons(${this.car.alpha_repr(ctx)}, ${this.cdr.alpha_repr(ctx)})`
   }
 }

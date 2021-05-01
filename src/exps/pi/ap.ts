@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
@@ -68,10 +68,6 @@ export class Ap extends Exp {
 
   repr(): string {
     return `${this.target.repr()}(${this.arg.repr()})`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    return `${this.target.alpha_repr(ctx)}(${this.arg.alpha_repr(ctx)})`
   }
 
   static apply(target: Value, arg: Value): Value {

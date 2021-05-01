@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
@@ -37,10 +37,5 @@ export class Fn extends Exp {
 
   repr(): string {
     return `(${this.name}) => ${this.ret.repr()}`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    const ret_repr = this.ret.alpha_repr(ctx.extend(this.name))
-    return `(${this.name}) => ${ret_repr}`
   }
 }

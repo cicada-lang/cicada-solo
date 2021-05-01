@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Value } from "../../value"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -55,26 +55,5 @@ export class Cls extends Exp {
     const s = entries.join("\n")
 
     return name + `[\n${ut.indent(s, "  ")}\n]`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    if (this.entries.length === 0) return "[]"
-
-    const parts = []
-
-    for (const { name, t, exp } of this.entries) {
-      const t_repr = t.alpha_repr(ctx)
-      if (exp) {
-        const exp_repr = exp.alpha_repr(ctx)
-        parts.push(`${name} : ${t_repr} = ${exp_repr}`)
-      } else {
-        parts.push(`${name} : ${t_repr}`)
-      }
-      ctx = ctx.extend(name)
-    }
-
-    const s = parts.join("\n")
-
-    return `[\n${ut.indent(s, "  ")}\n]`
   }
 }

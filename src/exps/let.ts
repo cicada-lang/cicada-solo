@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../exp"
+import { Exp } from "../exp"
 import { Value } from "../value"
 import { Env } from "../env"
 import { Ctx } from "../ctx"
@@ -58,11 +58,5 @@ export class Let extends Exp {
 
   repr(): string {
     return `@let ${this.name} = ${this.exp.repr()} ${this.ret.repr()}`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    return `@let ${this.name} = ${this.exp.alpha_repr(
-      ctx
-    )} ${this.ret.alpha_repr(ctx.extend(this.name))}`
   }
 }

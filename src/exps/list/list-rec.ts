@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
@@ -52,13 +52,6 @@ export class ListRec extends Exp {
 
   repr(): string {
     return `list_rec(${this.target.repr()}, ${this.base.repr()}, ${this.step.repr()})`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    throw new Trace(
-      `ListRec should be readback to ListInd,\n` +
-        `thus ListRec.alpha_repr should never be called.`
-    )
   }
 
   static apply(target: Value, base: Value, step: Value): Value {

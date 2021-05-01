@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { infer } from "../../infer"
@@ -30,10 +30,6 @@ export class Cdr extends Exp {
 
   repr(): string {
     return `cdr(${this.target.repr()})`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    return `cdr(${this.target.alpha_repr(ctx)})`
   }
 
   static apply(target: Value): Value {

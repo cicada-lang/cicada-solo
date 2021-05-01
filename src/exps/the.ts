@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../exp"
+import { Exp } from "../exp"
 import { Env } from "../env"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
@@ -29,9 +29,5 @@ export class The extends Exp {
 
   repr(): string {
     return `@the ${this.t.repr()} ${this.exp.repr()}`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    return `@the ${this.t.alpha_repr(ctx)} ${this.exp.alpha_repr(ctx)}`
   }
 }

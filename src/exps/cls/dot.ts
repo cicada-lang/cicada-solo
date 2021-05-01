@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value, match_value } from "../../value"
@@ -40,10 +40,6 @@ export class Dot extends Exp {
 
   repr(): string {
     return `${this.target.repr()}.${this.name}`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    return `${this.target.alpha_repr(ctx)}.${this.name}`
   }
 
   static apply(target: Value, name: string): Value {

@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
@@ -56,12 +56,6 @@ export class NatInd extends Exp {
 
   repr(): string {
     return `nat_ind(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()}, ${this.step.repr()})`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    return `nat_ind(${this.target.alpha_repr(ctx)}, ${this.motive.alpha_repr(
-      ctx
-    )}, ${this.base.alpha_repr(ctx)}, ${this.step.alpha_repr(ctx)})`
   }
 
   static apply(target: Value, motive: Value, base: Value, step: Value): Value {

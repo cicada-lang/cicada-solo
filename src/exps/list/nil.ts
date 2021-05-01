@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { expect } from "../../expect"
@@ -15,10 +15,6 @@ export class Nil extends Exp {
   }
 
   repr(): string {
-    return "nil"
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
     return "nil"
   }
 }

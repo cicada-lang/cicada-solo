@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
@@ -30,15 +30,6 @@ export class Add1 extends Exp {
       return n.toString()
     } else {
       return `add1(${this.prev.repr()})`
-    }
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    const n = nat_to_number(this)
-    if (n !== undefined) {
-      return n.toString()
-    } else {
-      return `add1(${this.prev.alpha_repr(ctx)})`
     }
   }
 }

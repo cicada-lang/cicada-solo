@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Value, match_value } from "../../value"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -79,13 +79,6 @@ export class Ext extends Exp {
 
     return (
       name + `@extends ${this.parent_name} ` + `[\n${ut.indent(s, "  ")}\n]`
-    )
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    throw new Trace(
-      `ExtValue should be readback to Cls,\n` +
-        `thus ExtValue.alpha_repr should never be called.`
     )
   }
 }

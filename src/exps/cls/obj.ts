@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
@@ -39,13 +39,6 @@ export class Obj extends Exp {
   repr(): string {
     const s = Array.from(this.properties)
       .map(([name, exp]) => `${name}: ${exp.repr()}`)
-      .join("\n")
-    return `{\n${ut.indent(s, "  ")}\n}`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    const s = Array.from(this.properties)
-      .map(([name, exp]) => `${name}: ${exp.alpha_repr(ctx)}`)
       .join("\n")
     return `{\n${ut.indent(s, "  ")}\n}`
   }

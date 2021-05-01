@@ -1,4 +1,4 @@
-import { Exp, AlphaCtx } from "../../exp"
+import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
@@ -37,11 +37,5 @@ export class Pi extends Exp {
 
   repr(): string {
     return `(${this.name}: ${this.arg_t.repr()}) -> ${this.ret_t.repr()}`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    const arg_t_repr = this.arg_t.alpha_repr(ctx)
-    const ret_t_repr = this.ret_t.alpha_repr(ctx.extend(this.name))
-    return `(${arg_t_repr}) -> ${ret_t_repr}`
   }
 }
