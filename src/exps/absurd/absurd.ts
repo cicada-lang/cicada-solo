@@ -7,7 +7,9 @@ import * as Cores from "../../cores"
 
 export class Absurd extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
-    return new Cores.TypeValue()
+    const t = new Cores.TypeValue()
+    const core = new Cores.Absurd()
+    return { t, core }
   }
 
   repr(): string {
