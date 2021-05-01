@@ -4,6 +4,7 @@ import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { Value } from "../value"
 import { Trace } from "../trace"
+import * as Cores from "../cores"
 
 export class Var extends Exp {
   name: string
@@ -21,7 +22,11 @@ export class Var extends Exp {
           `The name ${this.name} is undefined.`
       )
     }
-    return t
+
+    return {
+      t,
+      exp: new Cores.Var(this.name),
+    }
   }
 
   repr(): string {
