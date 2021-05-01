@@ -21,10 +21,16 @@ export class Pi extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    check(ctx, this.arg_t, new Cores.TypeValue())
-    const arg_t_value = evaluate(ctx.to_env(), this.arg_t)
-    check(ctx.extend(this.name, arg_t_value), this.ret_t, new Cores.TypeValue())
-    return new Cores.TypeValue()
+    const arg_t_core = check(ctx, this.arg_t, new Cores.TypeValue())
+    const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
+    const ret_t_core = check(
+      ctx.extend(this.name, arg_t_value),
+      this.ret_t,
+      new Cores.TypeValue()
+    )
+    const t = new Cores.TypeValue()
+    const core = new Cores.Pi(this.name, arg_t_core, ret_t_core)
+    return { t, core }
   }
 
   repr(): string {
