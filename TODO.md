@@ -11,7 +11,6 @@
   - [] `infer` return `{ t: Value, exp: Core }`
   - [] `exp` -- only `check` `infer` `repr`
 
-
 > With elaboration,
 >   we can elaborate `Exps.ListRec` into `Cores.ListInd` (which need `readback`),
 >   or into `Cores.ListRec` (which does not need `readback`).
