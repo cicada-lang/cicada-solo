@@ -18,10 +18,10 @@ export class The extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    check(ctx, this.t, new Cores.TypeValue())
-    const t_value = evaluate(ctx.to_env(), this.t)
-    check(ctx, this.exp, t_value)
-    return t_value
+    const t_core = check(ctx, this.t, new Cores.TypeValue())
+    const t = evaluate(ctx.to_env(), t_core)
+    const core = check(ctx, this.exp, t)
+    return { t, core }
   }
 
   repr(): string {
