@@ -54,7 +54,10 @@ function nat_ind_step_t(motive_t: Value, motive: Value): Value {
     new Cores.Pi(
       "almost",
       new Cores.Ap(new Cores.Var("motive"), new Cores.Var("prev")),
-      new Cores.Ap(new Cores.Var("motive"), new Cores.Add1(new Cores.Var("prev")))
+      new Cores.Ap(
+        new Cores.Var("motive"),
+        new Cores.Add1(new Cores.Var("prev"))
+      )
     )
   )
 
