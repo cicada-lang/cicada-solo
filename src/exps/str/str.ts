@@ -7,7 +7,9 @@ import * as Cores from "../../cores"
 
 export class Str extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
-    return new Cores.TypeValue()
+    const t = new Cores.TypeValue()
+    const core = new Cores.Str()
+    return { t, core }
   }
 
   repr(): string {

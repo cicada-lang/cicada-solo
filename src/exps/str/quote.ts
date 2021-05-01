@@ -14,7 +14,9 @@ export class Quote extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    return new Cores.StrValue()
+    const t = new Cores.StrValue()
+    const core = new Cores.Quote(this.str)
+    return { t, core }
   }
 
   repr(): string {
