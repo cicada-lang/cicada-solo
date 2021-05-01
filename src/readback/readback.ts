@@ -1,12 +1,9 @@
 import { Value } from "../value"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
-import { Absurd } from "../cores"
-import { The } from "../cores"
-import { AbsurdValue } from "../cores"
-import { NotYetValue } from "../cores"
 import { Trace } from "../trace"
 import * as ut from "../ut"
+import * as Cores from "../cores"
 
 export function readback(ctx: Ctx, t: Value, value: Value): Core {
   if (t.eta_expand) {
@@ -14,11 +11,11 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
   }
 
   if (
-    t instanceof AbsurdValue &&
-    value instanceof NotYetValue &&
-    value.t instanceof AbsurdValue
+    t instanceof Cores.AbsurdValue &&
+    value instanceof Cores.NotYetValue &&
+    value.t instanceof Cores.AbsurdValue
   ) {
-    return new The(new Absurd(), value.neutral.readback_neutral(ctx))
+    return new Cores.The(new Cores.Absurd(), value.neutral.readback_neutral(ctx))
   }
 
   const exp = value.readback(ctx, t)

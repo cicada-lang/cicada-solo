@@ -1,7 +1,6 @@
 import { Env } from "../env"
 import { Value } from "../value"
-import { NotYetValue } from "../cores"
-import { VarNeutral } from "../cores"
+import * as Cores from "../cores"
 
 type CtxEntry = {
   t: Value
@@ -35,7 +34,11 @@ export class Ctx {
       if (value !== undefined) {
         env = env.extend(name, t, value)
       } else {
-        env = env.extend(name, t, new NotYetValue(t, new VarNeutral(name)))
+        env = env.extend(
+          name,
+          t,
+          new Cores.NotYetValue(t, new Cores.VarNeutral(name))
+        )
       }
     }
     return env

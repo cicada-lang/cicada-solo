@@ -1,11 +1,11 @@
 import { Exp } from "../exp"
 import { Value } from "../value"
 import { Ctx } from "../ctx"
-import { TypeValue } from "../cores"
 import { conversion } from "../conversion"
 import { readback } from "../readback"
 import { Trace } from "../trace"
 import * as ut from "../ut"
+import * as Cores from "../cores"
 
 export function check(ctx: Ctx, exp: Exp, t: Value): void {
   try {
@@ -13,9 +13,9 @@ export function check(ctx: Ctx, exp: Exp, t: Value): void {
       return exp.check(ctx, t)
     } else if (exp.infer) {
       const u = exp.infer(ctx)
-      if (!conversion(ctx, new TypeValue(), t, u)) {
-        const u_exp = readback(ctx, new TypeValue(), u)
-        const t_exp = readback(ctx, new TypeValue(), t)
+      if (!conversion(ctx, new Cores.TypeValue(), t, u)) {
+        const u_exp = readback(ctx, new Cores.TypeValue(), u)
+        const t_exp = readback(ctx, new Cores.TypeValue(), t)
         throw new Trace(
           ut.aline(`
             |I infer the type to be ${u_exp.repr()}.

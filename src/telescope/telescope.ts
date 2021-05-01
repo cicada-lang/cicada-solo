@@ -3,14 +3,12 @@ import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { Core } from "../core"
 import { Value } from "../value"
-import { TypeValue } from "../cores"
-import { NotYetValue, VarNeutral } from "../cores"
 import { conversion } from "../conversion"
 import { readback } from "../readback"
 import { evaluate } from "../evaluate"
 import { check } from "../check"
 import { Trace } from "../trace"
-import { Dot } from "../cores"
+import * as Cores from "../cores"
 import * as ut from "../ut"
 
 export class Telescope {
@@ -100,7 +98,7 @@ export class Telescope {
     const entries = []
 
     for (const { name, t, value } of this.fulfilled) {
-      const t_exp = readback(ctx, new TypeValue(), t)
+      const t_exp = readback(ctx, new Cores.TypeValue(), t)
       const exp = readback(ctx, t, value)
       entries.push({ name, t: t_exp, exp })
       ctx = ctx.extend(name, t, value)
@@ -109,15 +107,15 @@ export class Telescope {
     let telescope: Telescope = this
     while (telescope.next) {
       const { name, t, value } = telescope.next
-      const t_exp = readback(ctx, new TypeValue(), t)
+      const t_exp = readback(ctx, new Cores.TypeValue(), t)
       if (value) {
         entries.push({ name, t: t_exp, exp: readback(ctx, t, value) })
         ctx = ctx.extend(name, t, value)
-        telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
+        telescope = telescope.fill(new Cores.NotYetValue(t, new Cores.VarNeutral(name)))
       } else {
         entries.push({ name, t: t_exp })
         ctx = ctx.extend(name, t)
-        telescope = telescope.fill(new NotYetValue(t, new VarNeutral(name)))
+        telescope = telescope.fill(new Cores.NotYetValue(t, new Cores.VarNeutral(name)))
       }
     }
 
@@ -148,7 +146,7 @@ export class Telescope {
         properties.set(name, property_exp)
         telescope = telescope.fill(property_value)
       } else {
-        const property_value = Dot.apply(value, name)
+        const property_value = Cores.Dot.apply(value, name)
         const property_exp = readback(ctx, t, property_value)
         properties.set(name, property_exp)
         telescope = telescope.fill(property_value)
@@ -179,7 +177,7 @@ export class Telescope {
       const found_value = evaluate(ctx, ctx.to_env(), found)
 
       if (!conversion(ctx, t, value, found_value)) {
-        const t_repr = readback(ctx, new TypeValue(), t).repr()
+        const t_repr = readback(ctx, new Cores.TypeValue(), t).repr()
         const value_repr = readback(ctx, t, value).repr()
         const found_repr = readback(ctx, t, found_value).repr()
         throw new Trace(
@@ -213,7 +211,7 @@ export class Telescope {
       if (value) {
         const found_value = evaluate(ctx, ctx.to_env(), found)
         if (!conversion(ctx, next_t, value, found_value)) {
-          const t_repr = readback(ctx, new TypeValue(), next_t).repr()
+          const t_repr = readback(ctx, new Cores.TypeValue(), next_t).repr()
           const value_repr = readback(ctx, next_t, value).repr()
           const found_repr = readback(ctx, next_t, found_value).repr()
           throw new Trace(
