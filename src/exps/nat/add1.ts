@@ -17,8 +17,9 @@ export class Add1 extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    check(ctx, this.prev, new Cores.NatValue())
-    return new Cores.NatValue()
+    const t = new Cores.NatValue()
+    const core = new Cores.Add1(check(ctx, this.prev, new Cores.NatValue()))
+    return { t, core }
   }
 
   repr(): string {
