@@ -12,6 +12,10 @@
     - `check` return `Core`
     - `infer` return `{ t: Value, core: Core }`
 
+- [refactoring] `ap` avoid using if:
+  - `target_t instanceof Cores.PiValue`
+  - `target instanceof Cores.ClsValue`
+
 > With elaboration,
 >   we can elaborate `Exps.ListRec` into `Cores.ListInd` (which need `readback`),
 >   or into `Cores.ListRec` (which does not need `readback`).
