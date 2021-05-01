@@ -1,10 +1,10 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { Cls, Obj, TypeValue } from "../../cores"
 import { Telescope } from "../../telescope"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
+import * as Cores from "../../cores"
 
 // NOTE `Ext` can not evaluate to `ClsValue`,
 //   because we need lexical scope,
@@ -24,7 +24,7 @@ export class ExtValue {
 
   // NOTE ExtValue should be readback to Cls instead of Ext.
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof TypeValue) {
+    if (t instanceof Cores.TypeValue) {
       let entries = new Array()
       for (const { telescope } of this.entries) {
         const { entries: next_entries, ctx: next_ctx } = telescope.readback(ctx)
@@ -32,7 +32,7 @@ export class ExtValue {
         ctx = next_ctx
       }
 
-      return new Cls(entries, { name: this.name })
+      return new Cores.Cls(entries, { name: this.name })
     }
   }
 
@@ -45,7 +45,7 @@ export class ExtValue {
       ])
     }
 
-    return new Obj(properties)
+    return new Cores.Obj(properties)
   }
 
   dot(target: Value, name: string): Value {
@@ -72,7 +72,7 @@ export class ExtValue {
         if (value) {
           telescope = telescope.fill(value)
         } else {
-          return new ExtValue(
+          return new Cores.ExtValue(
             this.entries.splice(index, 1, {
               name: entry.name,
               telescope: telescope.fill(arg),

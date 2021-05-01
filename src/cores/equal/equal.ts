@@ -3,7 +3,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
-import { EqualValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Equal extends Core {
   t: Core
@@ -18,7 +18,7 @@ export class Equal extends Core {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new EqualValue(
+    return new Cores.EqualValue(
       evaluate(ctx, env, this.t),
       evaluate(ctx, env, this.from),
       evaluate(ctx, env, this.to)

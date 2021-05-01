@@ -2,8 +2,7 @@ import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import { readback } from "../../readback"
-import { TypeValue } from "../../cores"
-import { List } from "../../cores"
+import * as Cores from "../../cores"
 
 export class ListValue {
   elem_t: Value
@@ -13,8 +12,8 @@ export class ListValue {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof TypeValue) {
-      return new List(readback(ctx, new TypeValue(), this.elem_t))
+    if (t instanceof Cores.TypeValue) {
+      return new Cores.List(readback(ctx, new Cores.TypeValue(), this.elem_t))
     }
   }
 }

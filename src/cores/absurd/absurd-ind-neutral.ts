@@ -2,7 +2,7 @@ import { Neutral } from "../../neutral"
 import { Normal } from "../../normal"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { AbsurdInd } from "../../cores"
+import * as Cores from "../../cores"
 
 export class AbsurdIndNeutral implements Neutral {
   target: Neutral
@@ -14,7 +14,7 @@ export class AbsurdIndNeutral implements Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new AbsurdInd(
+    return new Cores.AbsurdInd(
       this.target.readback_neutral(ctx),
       this.motive.readback_normal(ctx)
     )

@@ -4,10 +4,7 @@ import { Value } from "../../value"
 import { readback } from "../../readback"
 import { Closure } from "../../closure"
 import * as ut from "../../ut"
-import { TypeValue } from "../../cores"
-import { Pi, Fn, Ap } from "../../cores"
-import { NotYetValue } from "../../cores"
-import { VarNeutral } from "../../cores"
+import * as Cores from "../../cores"
 
 export class PiValue {
   arg_t: Value
@@ -19,19 +16,22 @@ export class PiValue {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof TypeValue) {
+    if (t instanceof Cores.TypeValue) {
       const fresh_name = ut.freshen_name(
         new Set(ctx.names()),
         this.ret_t_cl.name
       )
-      const variable = new NotYetValue(this.arg_t, new VarNeutral(fresh_name))
-      const arg_t = readback(ctx, new TypeValue(), this.arg_t)
+      const variable = new Cores.NotYetValue(
+        this.arg_t,
+        new Cores.VarNeutral(fresh_name)
+      )
+      const arg_t = readback(ctx, new Cores.TypeValue(), this.arg_t)
       const ret_t = readback(
         ctx.extend(fresh_name, this.arg_t),
-        new TypeValue(),
+        new Cores.TypeValue(),
         this.ret_t_cl.apply(variable)
       )
-      return new Pi(fresh_name, arg_t, ret_t)
+      return new Cores.Pi(fresh_name, arg_t, ret_t)
     }
   }
 
@@ -40,13 +40,16 @@ export class PiValue {
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
     const fresh_name = ut.freshen_name(new Set(ctx.names()), this.ret_t_cl.name)
-    const variable = new NotYetValue(this.arg_t, new VarNeutral(fresh_name))
-    return new Fn(
+    const variable = new Cores.NotYetValue(
+      this.arg_t,
+      new Cores.VarNeutral(fresh_name)
+    )
+    return new Cores.Fn(
       fresh_name,
       readback(
         ctx.extend(fresh_name, this.arg_t),
         this.ret_t_cl.apply(variable),
-        Ap.apply(value, variable)
+        Cores.Ap.apply(value, variable)
       )
     )
   }

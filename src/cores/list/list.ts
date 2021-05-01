@@ -3,7 +3,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
-import { ListValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class List extends Core {
   elem_t: Core
@@ -14,7 +14,7 @@ export class List extends Core {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new ListValue(evaluate(ctx, env, this.elem_t))
+    return new Cores.ListValue(evaluate(ctx, env, this.elem_t))
   }
 
   repr(): string {

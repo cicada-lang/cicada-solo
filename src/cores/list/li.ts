@@ -3,7 +3,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
-import { LiValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Li extends Core {
   head: Core
@@ -16,7 +16,7 @@ export class Li extends Core {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new LiValue(
+    return new Cores.LiValue(
       evaluate(ctx, env, this.head),
       evaluate(ctx, env, this.tail)
     )

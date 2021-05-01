@@ -2,9 +2,8 @@ import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value, match_value } from "../../value"
-import { ClsValue, ObjValue } from "../../cores"
-import { DotNeutral, NotYetValue } from "../../cores"
 import { evaluate } from "../../evaluate"
+import * as Cores from "../../cores"
 
 export class Dot extends Core {
   target: Core
@@ -17,7 +16,7 @@ export class Dot extends Core {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return Dot.apply(evaluate(ctx, env, this.target), this.name)
+    return Cores.Dot.apply(evaluate(ctx, env, this.target), this.name)
   }
 
   repr(): string {
@@ -30,17 +29,17 @@ export class Dot extends Core {
 
   static apply(target: Value, name: string): Value {
     return match_value(target, [
-      [ObjValue, (obj: ObjValue) => obj.dot(name)],
+      [Cores.ObjValue, (obj: Cores.ObjValue) => obj.dot(name)],
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              ClsValue,
-              (cls: ClsValue) =>
-                new NotYetValue(
+              Cores.ClsValue,
+              (cls: Cores.ClsValue) =>
+                new Cores.NotYetValue(
                   cls.dot(target, name),
-                  new DotNeutral(neutral, name)
+                  new Cores.DotNeutral(neutral, name)
                 ),
             ],
           ]),

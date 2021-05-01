@@ -3,7 +3,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { evaluate } from "../../evaluate"
-import { ConsValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Cons extends Core {
   car: Core
@@ -16,7 +16,7 @@ export class Cons extends Core {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new ConsValue(
+    return new Cores.ConsValue(
       evaluate(ctx, env, this.car),
       evaluate(ctx, env, this.cdr)
     )

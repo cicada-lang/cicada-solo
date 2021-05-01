@@ -2,11 +2,11 @@ import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { NatValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Nat extends Core {
   evaluate(ctx: Ctx, env: Env): Value {
-    return new NatValue()
+    return new Cores.NatValue()
   }
 
   repr(): string {

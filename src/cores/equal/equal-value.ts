@@ -2,8 +2,7 @@ import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { readback } from "../../readback"
 import { Value } from "../../value"
-import { TypeValue } from "../../cores"
-import { Equal } from "./equal"
+import * as Cores from "../../cores"
 
 export class EqualValue {
   t: Value
@@ -17,9 +16,9 @@ export class EqualValue {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof TypeValue) {
-      return new Equal(
-        readback(ctx, new TypeValue(), this.t),
+    if (t instanceof Cores.TypeValue) {
+      return new Cores.Equal(
+        readback(ctx, new Cores.TypeValue(), this.t),
         readback(ctx, this.t, this.from),
         readback(ctx, this.t, this.to)
       )

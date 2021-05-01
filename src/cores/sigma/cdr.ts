@@ -3,8 +3,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { Value, match_value } from "../../value"
-import { Car, SigmaValue, ConsValue, CdrNeutral } from "../../cores"
-import { NotYetValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Cdr extends Core {
   target: Core
@@ -28,17 +27,17 @@ export class Cdr extends Core {
 
   static apply(target: Value): Value {
     return match_value(target, [
-      [ConsValue, (cons: ConsValue) => cons.cdr],
+      [Cores.ConsValue, (cons: Cores.ConsValue) => cons.cdr],
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              SigmaValue,
-              (sigma: SigmaValue) =>
-                new NotYetValue(
-                  sigma.cdr_t_cl.apply(Car.apply(target)),
-                  new CdrNeutral(neutral)
+              Cores.SigmaValue,
+              (sigma: Cores.SigmaValue) =>
+                new Cores.NotYetValue(
+                  sigma.cdr_t_cl.apply(Cores.Car.apply(target)),
+                  new Cores.CdrNeutral(neutral)
                 ),
             ],
           ]),

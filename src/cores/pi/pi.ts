@@ -4,7 +4,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { evaluate } from "../../evaluate"
-import { PiValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Pi extends Core {
   name: string
@@ -20,7 +20,7 @@ export class Pi extends Core {
 
   evaluate(ctx: Ctx, env: Env): Value {
     const arg_t = evaluate(ctx, env, this.arg_t)
-    return new PiValue(
+    return new Cores.PiValue(
       arg_t,
       new Closure(ctx, env, this.name, arg_t, this.ret_t)
     )

@@ -4,9 +4,7 @@ import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { Value, match_value } from "../../value"
 import { Normal } from "../../normal"
-import { NotYetValue } from "../../cores"
-import { FnValue, PiValue, ApNeutral } from "../../cores"
-import { ClsValue, ExtValue, TypeValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Ap extends Core {
   target: Core
@@ -35,19 +33,19 @@ export class Ap extends Core {
 
   static apply(target: Value, arg: Value): Value {
     return match_value(target, [
-      [FnValue, (fn: FnValue) => fn.ret_cl.apply(arg)],
-      [ClsValue, (cls: ClsValue) => cls.apply(arg)],
-      [ExtValue, (ext: ExtValue) => ext.apply(arg)],
+      [Cores.FnValue, (fn: Cores.FnValue) => fn.ret_cl.apply(arg)],
+      [Cores.ClsValue, (cls: Cores.ClsValue) => cls.apply(arg)],
+      [Cores.ExtValue, (ext: Cores.ExtValue) => ext.apply(arg)],
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              PiValue,
-              (pi: PiValue) =>
-                new NotYetValue(
+              Cores.PiValue,
+              (pi: Cores.PiValue) =>
+                new Cores.NotYetValue(
                   pi.ret_t_cl.apply(arg),
-                  new ApNeutral(neutral, new Normal(pi.arg_t, arg))
+                  new Cores.ApNeutral(neutral, new Normal(pi.arg_t, arg))
                 ),
             ],
           ]),

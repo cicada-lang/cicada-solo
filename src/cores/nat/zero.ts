@@ -2,11 +2,11 @@ import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { ZeroValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Zero extends Core {
   evaluate(ctx: Ctx, env: Env): Value {
-    return new ZeroValue()
+    return new Cores.ZeroValue()
   }
 
   repr(): string {

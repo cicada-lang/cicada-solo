@@ -3,7 +3,7 @@ import { Value } from "../../value"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Telescope } from "../../telescope"
-import { ClsValue } from "../../cores"
+import * as Cores from "../../cores"
 import * as ut from "../../ut"
 
 export class Cls extends Core {
@@ -20,7 +20,7 @@ export class Cls extends Core {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new ClsValue(new Telescope(ctx, env, this.entries), {
+    return new Cores.ClsValue(new Telescope(ctx, env, this.entries), {
       name: this.name,
     })
   }

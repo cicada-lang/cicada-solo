@@ -4,8 +4,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { infer } from "../../infer"
-import { FnValue } from "../../cores"
-import { Var } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Fn extends Core {
   name: string
@@ -18,8 +17,8 @@ export class Fn extends Core {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    const t = infer(ctx, new Var(this.name))
-    return new FnValue(new Closure(ctx, env, this.name, t, this.ret))
+    const t = infer(ctx, new Cores.Var(this.name))
+    return new Cores.FnValue(new Closure(ctx, env, this.name, t, this.ret))
   }
 
   repr(): string {

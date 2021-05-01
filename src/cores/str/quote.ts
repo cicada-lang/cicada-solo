@@ -2,7 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { QuoteValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Quote extends Core {
   str: string
@@ -13,7 +13,7 @@ export class Quote extends Core {
   }
 
   evaluate(ctx: Ctx, env: Env): Value {
-    return new QuoteValue(this.str)
+    return new Cores.QuoteValue(this.str)
   }
 
   repr(): string {

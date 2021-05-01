@@ -1,5 +1,3 @@
-- import cores with `Cores` prefix -- in `cores/`
-
 - `evaluate` should not take `ctx` as argument.
 
   - After split the `Exp` into `Exp` and `Core`,

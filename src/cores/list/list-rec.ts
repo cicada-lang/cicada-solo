@@ -5,20 +5,7 @@ import { evaluate } from "../../evaluate"
 import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Trace } from "../../trace"
-import { Type, TypeValue } from "../../cores"
-import { Var, Pi, Ap } from "../../cores"
-import {
-  ListValue,
-  Nil,
-  NilValue,
-  List,
-  Li,
-  LiValue,
-  ListInd,
-  ListIndNeutral,
-} from "../../cores"
-import { PiValue } from "../../cores"
-import { NotYetValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class ListRec extends Core {
   target: Core
@@ -53,30 +40,30 @@ export class ListRec extends Core {
 
   static apply(target: Value, base: Value, step: Value): Value {
     return match_value(target, [
-      [NilValue, (_: NilValue) => base],
+      [Cores.NilValue, (_: Cores.NilValue) => base],
       [
-        LiValue,
-        ({ head, tail }: LiValue) =>
-          Ap.apply(
-            Ap.apply(Ap.apply(step, head), tail),
-            ListRec.apply(tail, base, step)
+        Cores.LiValue,
+        ({ head, tail }: Cores.LiValue) =>
+          Cores.Ap.apply(
+            Cores.Ap.apply(Cores.Ap.apply(step, head), tail),
+            Cores.ListRec.apply(tail, base, step)
           ),
       ],
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              ListValue,
-              (list_t: ListValue) => {
-                const motive_t = new PiValue(
+              Cores.ListValue,
+              (list_t: Cores.ListValue) => {
+                const motive_t = new Cores.PiValue(
                   list_t,
                   new Closure(
                     new Ctx(),
                     new Env(),
                     "target_list",
                     list_t,
-                    new Type()
+                    new Cores.Type()
                   )
                 )
 
@@ -108,19 +95,19 @@ export class ListRec extends Core {
 
 function list_rec_step_t(base_t: Value, elem_t: Value): Value {
   const ctx = new Ctx()
-    .extend("base_t", new TypeValue(), base_t)
-    .extend("elem_t", new TypeValue(), elem_t)
+    .extend("base_t", new Cores.TypeValue(), base_t)
+    .extend("elem_t", new Cores.TypeValue(), elem_t)
   const env = new Env()
-    .extend("base_t", new TypeValue(), base_t)
-    .extend("elem_t", new TypeValue(), elem_t)
+    .extend("base_t", new Cores.TypeValue(), base_t)
+    .extend("elem_t", new Cores.TypeValue(), elem_t)
 
-  const step_t = new Pi(
+  const step_t = new Cores.Pi(
     "head",
-    new Var("elem_t"),
-    new Pi(
+    new Cores.Var("elem_t"),
+    new Cores.Pi(
       "tail",
-      new List(new Var("elem_t")),
-      new Pi("almost", new Var("base_t"), new Var("base_t"))
+      new Cores.List(new Cores.Var("elem_t")),
+      new Cores.Pi("almost", new Cores.Var("base_t"), new Cores.Var("base_t"))
     )
   )
 

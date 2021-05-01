@@ -5,12 +5,7 @@ import { evaluate } from "../../evaluate"
 import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
-import { Ap } from "../../cores"
-import { Type } from "../../cores"
-import { NotYetValue } from "../../cores"
-import { EqualValue, SameValue } from "../../cores"
-import { PiValue } from "../../cores"
-import { ReplaceNeutral } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Replace extends Core {
   target: Core
@@ -44,22 +39,22 @@ export class Replace extends Core {
 
   static apply(target: Value, motive: Value, base: Value): Value {
     return match_value(target, [
-      [SameValue, (_: SameValue) => base],
+      [Cores.SameValue, (_: Cores.SameValue) => base],
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              EqualValue,
-              ({ t, to, from }: EqualValue) => {
-                const base_t = Ap.apply(motive, from)
-                const motive_t = new PiValue(
+              Cores.EqualValue,
+              ({ t, to, from }: Cores.EqualValue) => {
+                const base_t = Cores.Ap.apply(motive, from)
+                const motive_t = new Cores.PiValue(
                   t,
-                  new Closure(new Ctx(), new Env(), "x", t, new Type())
+                  new Closure(new Ctx(), new Env(), "x", t, new Cores.Type())
                 )
-                return new NotYetValue(
-                  Ap.apply(motive, to),
-                  new ReplaceNeutral(
+                return new Cores.NotYetValue(
+                  Cores.Ap.apply(motive, to),
+                  new Cores.ReplaceNeutral(
                     neutral,
                     new Normal(motive_t, motive),
                     new Normal(base_t, base)

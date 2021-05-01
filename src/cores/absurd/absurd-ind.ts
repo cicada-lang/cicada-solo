@@ -4,9 +4,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value, match_value } from "../../value"
 import { Normal } from "../../normal"
-import { NotYetValue } from "../../cores"
-import { AbsurdValue, AbsurdIndNeutral } from "../../cores"
-import { TypeValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class AbsurdInd extends Core {
   target: Core
@@ -38,17 +36,17 @@ export class AbsurdInd extends Core {
   static apply(target: Value, motive: Value): Value {
     return match_value(target, [
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              AbsurdValue,
-              (_: AbsurdValue) =>
-                new NotYetValue(
+              Cores.AbsurdValue,
+              (_: Cores.AbsurdValue) =>
+                new Cores.NotYetValue(
                   motive,
-                  new AbsurdIndNeutral(
+                  new Cores.AbsurdIndNeutral(
                     neutral,
-                    new Normal(new TypeValue(), motive)
+                    new Normal(new Cores.TypeValue(), motive)
                   )
                 ),
             ],

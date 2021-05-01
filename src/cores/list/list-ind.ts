@@ -9,19 +9,7 @@ import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { Trace } from "../../trace"
-import { Type, TypeValue } from "../../cores"
-import { Var, Pi, Ap } from "../../cores"
-import {
-  ListValue,
-  Nil,
-  NilValue,
-  List,
-  Li,
-  LiValue,
-  ListIndNeutral,
-} from "../../cores"
-import { PiValue } from "../../cores"
-import { NotYetValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class ListInd extends Core {
   target: Core
@@ -58,38 +46,38 @@ export class ListInd extends Core {
 
   static apply(target: Value, motive: Value, base: Value, step: Value): Value {
     return match_value(target, [
-      [NilValue, (_: NilValue) => base],
+      [Cores.NilValue, (_: Cores.NilValue) => base],
       [
-        LiValue,
-        ({ head, tail }: LiValue) =>
-          Ap.apply(
-            Ap.apply(Ap.apply(step, head), tail),
-            ListInd.apply(tail, motive, base, step)
+        Cores.LiValue,
+        ({ head, tail }: Cores.LiValue) =>
+          Cores.Ap.apply(
+            Cores.Ap.apply(Cores.Ap.apply(step, head), tail),
+            Cores.ListInd.apply(tail, motive, base, step)
           ),
       ],
       [
-        NotYetValue,
-        ({ t, neutral }: NotYetValue) =>
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
           match_value(t, [
             [
-              ListValue,
-              (list_t: ListValue) => {
-                const motive_t = new PiValue(
+              Cores.ListValue,
+              (list_t: Cores.ListValue) => {
+                const motive_t = new Cores.PiValue(
                   list_t,
                   new Closure(
                     new Ctx(),
                     new Env(),
                     "target_list",
                     list_t,
-                    new Type()
+                    new Cores.Type()
                   )
                 )
-                const base_t = Ap.apply(motive, new NilValue())
+                const base_t = Cores.Ap.apply(motive, new Cores.NilValue())
                 const elem_t = list_t.elem_t
                 const step_t = list_ind_step_t(motive_t, motive, elem_t)
-                return new NotYetValue(
-                  Ap.apply(motive, target),
-                  new ListIndNeutral(
+                return new Cores.NotYetValue(
+                  Cores.Ap.apply(motive, target),
+                  new Cores.ListIndNeutral(
                     neutral,
                     new Normal(motive_t, motive),
                     new Normal(base_t, base),
@@ -107,21 +95,24 @@ export class ListInd extends Core {
 function list_ind_step_t(motive_t: Value, motive: Value, elem_t: Value): Value {
   const ctx = new Ctx()
     .extend("motive", motive_t, motive)
-    .extend("elem_t", new TypeValue(), elem_t)
+    .extend("elem_t", new Cores.TypeValue(), elem_t)
   const env = new Env()
     .extend("motive", motive_t, motive)
-    .extend("elem_t", new TypeValue(), elem_t)
+    .extend("elem_t", new Cores.TypeValue(), elem_t)
 
-  const step_t = new Pi(
+  const step_t = new Cores.Pi(
     "head",
-    new Var("elem_t"),
-    new Pi(
+    new Cores.Var("elem_t"),
+    new Cores.Pi(
       "tail",
-      new List(new Var("elem_t")),
-      new Pi(
+      new Cores.List(new Cores.Var("elem_t")),
+      new Cores.Pi(
         "almost",
-        new Ap(new Var("motive"), new Var("tail")),
-        new Ap(new Var("motive"), new Li(new Var("head"), new Var("tail")))
+        new Cores.Ap(new Cores.Var("motive"), new Cores.Var("tail")),
+        new Cores.Ap(
+          new Cores.Var("motive"),
+          new Cores.Li(new Cores.Var("head"), new Cores.Var("tail"))
+        )
       )
     )
   )

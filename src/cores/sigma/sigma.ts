@@ -4,7 +4,7 @@ import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
-import { SigmaValue } from "../../cores"
+import * as Cores from "../../cores"
 
 export class Sigma extends Core {
   name: string
@@ -20,7 +20,7 @@ export class Sigma extends Core {
 
   evaluate(ctx: Ctx, env: Env): Value {
     const car_t = evaluate(ctx, env, this.car_t)
-    return new SigmaValue(
+    return new Cores.SigmaValue(
       car_t,
       new Closure(ctx, env, this.name, car_t, this.cdr_t)
     )

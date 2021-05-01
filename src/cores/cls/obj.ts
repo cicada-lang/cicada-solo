@@ -2,9 +2,9 @@ import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { ObjValue } from "../../cores"
 import { evaluate } from "../../evaluate"
 import * as ut from "../../ut"
+import * as Cores from "../../cores"
 
 export class Obj extends Core {
   properties: Map<string, Core>
@@ -21,7 +21,7 @@ export class Obj extends Core {
       properties.set(name, evaluate(ctx, env, exp))
     }
 
-    return new ObjValue(properties)
+    return new Cores.ObjValue(properties)
   }
 
   repr(): string {

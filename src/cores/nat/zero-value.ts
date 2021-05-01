@@ -1,13 +1,12 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { NatValue } from "../../cores"
-import { Zero } from "./zero"
+import * as Cores from "../../cores"
 
 export class ZeroValue {
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof NatValue) {
-      return new Zero()
+    if (t instanceof Cores.NatValue) {
+      return new Cores.Zero()
     }
   }
 }
