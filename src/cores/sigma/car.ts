@@ -1,11 +1,8 @@
 import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import { infer } from "../../infer"
-import { expect } from "../../expect"
 import { Value, match_value } from "../../value"
 import { evaluate } from "../../evaluate"
-import { Trace } from "../../trace"
 import { NotYetValue } from "../../cores"
 import { SigmaValue, ConsValue, CarNeutral } from "../../cores"
 

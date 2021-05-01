@@ -4,9 +4,6 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Telescope } from "../../telescope"
 import { ClsValue } from "../../cores"
-import { TypeValue } from "../../cores"
-import { evaluate } from "../../evaluate"
-import { check } from "../../check"
 import * as ut from "../../ut"
 
 export class Cls extends Core {

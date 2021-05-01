@@ -2,7 +2,6 @@ import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { TypeValue } from "../../cores"
 import { StrValue } from "../../cores"
 
 export class Str extends Core {

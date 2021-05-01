@@ -1,12 +1,10 @@
 import { Core, AlphaCtx } from "../../core"
-import { Value, match_value } from "../../value"
+import { Value } from "../../value"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Telescope } from "../../telescope"
 import { Var, ClsValue, ExtValue } from "../../cores"
-import { TypeValue } from "../../cores"
 import { evaluate } from "../../evaluate"
-import { check } from "../../check"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
 

@@ -3,12 +3,9 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
-import { check } from "../../check"
 import { infer } from "../../infer"
-import { expect } from "../../expect"
-import { PiValue, FnValue } from "../../cores"
-import { Var, VarNeutral } from "../../cores"
-import { NotYetValue } from "../../cores"
+import { FnValue } from "../../cores"
+import { Var } from "../../cores"
 
 export class Fn extends Core {
   name: string

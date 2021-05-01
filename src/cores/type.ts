@@ -2,11 +2,11 @@ import { Core, AlphaCtx } from "../core"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { Value } from "../value"
-import { TypeValue } from "../cores"
+import * as Cores from "../cores"
 
 export class Type extends Core {
   evaluate(ctx: Ctx, env: Env): Value {
-    return new TypeValue()
+    return new Cores.TypeValue()
   }
 
   repr(): string {

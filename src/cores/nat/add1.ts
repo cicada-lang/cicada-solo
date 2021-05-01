@@ -2,10 +2,9 @@ import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
-import { check } from "../../check"
 import { Value } from "../../value"
 import { nat_to_number } from "./nat-util"
-import { NatValue, Add1Value } from "../../cores"
+import { Add1Value } from "../../cores"
 
 export class Add1 extends Core {
   prev: Core

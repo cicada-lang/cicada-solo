@@ -2,10 +2,8 @@ import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
-import { check } from "../../check"
-import { infer } from "../../infer"
 import { Value } from "../../value"
-import { ListValue, LiValue } from "../../cores"
+import { LiValue } from "../../cores"
 
 export class Li extends Core {
   head: Core

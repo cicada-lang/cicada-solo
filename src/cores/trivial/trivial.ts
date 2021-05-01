@@ -2,7 +2,6 @@ import { Core, AlphaCtx } from "../../core"
 import { Value } from "../../value"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import { TypeValue } from "../../cores"
 import { TrivialValue } from "../../cores"
 
 export class Trivial extends Core {

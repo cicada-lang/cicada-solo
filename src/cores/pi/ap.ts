@@ -2,17 +2,11 @@ import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
-import { infer } from "../../infer"
-import { check } from "../../check"
 import { Value, match_value } from "../../value"
-import { Closure } from "../../closure"
-import { expect } from "../../expect"
 import { Normal } from "../../normal"
 import { NotYetValue } from "../../cores"
 import { FnValue, PiValue, ApNeutral } from "../../cores"
 import { ClsValue, ExtValue, TypeValue } from "../../cores"
-import { Trace } from "../../trace"
-import * as ut from "../../ut"
 
 export class Ap extends Core {
   target: Core

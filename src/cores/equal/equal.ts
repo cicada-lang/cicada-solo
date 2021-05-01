@@ -2,9 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
-import { check } from "../../check"
 import { Value } from "../../value"
-import { TypeValue } from "../../cores"
 import { EqualValue } from "../../cores"
 
 export class Equal extends Core {

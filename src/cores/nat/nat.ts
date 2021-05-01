@@ -2,7 +2,6 @@ import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { TypeValue } from "../../cores"
 import { NatValue } from "../../cores"
 
 export class Nat extends Core {

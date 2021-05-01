@@ -3,9 +3,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
-import { check } from "../../check"
 import { evaluate } from "../../evaluate"
-import { TypeValue } from "../../cores"
 import { PiValue } from "../../cores"
 
 export class Pi extends Core {

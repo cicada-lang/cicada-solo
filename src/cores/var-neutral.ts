@@ -1,6 +1,6 @@
 import { Core } from "../core"
 import { Ctx } from "../ctx"
-import { Var } from "../cores"
+import * as Cores from "../cores"
 
 export class VarNeutral {
   name: string
@@ -10,6 +10,6 @@ export class VarNeutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Var(this.name)
+    return new Cores.Var(this.name)
   }
 }

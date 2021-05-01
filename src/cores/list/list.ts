@@ -1,10 +1,8 @@
 import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import { check } from "../../check"
 import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
-import { TypeValue } from "../../cores"
 import { ListValue } from "../../cores"
 
 export class List extends Core {

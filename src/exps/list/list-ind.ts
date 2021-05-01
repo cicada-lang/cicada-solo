@@ -41,7 +41,11 @@ export class ListInd extends Exp {
     const motive_t = evaluate(
       new Ctx().extend("elem_t", new Cores.TypeValue(), elem_t),
       new Env().extend("elem_t", new Cores.TypeValue(), elem_t),
-      new Exps.Pi("target_list", new Exps.List(new Exps.Var("elem_t")), new Exps.Type())
+      new Exps.Pi(
+        "target_list",
+        new Exps.List(new Exps.Var("elem_t")),
+        new Exps.Type()
+      )
     )
     check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx, ctx.to_env(), this.motive)
@@ -120,7 +124,10 @@ function list_ind_step_t(motive_t: Value, motive: Value, elem_t: Value): Value {
       new Exps.Pi(
         "almost",
         new Exps.Ap(new Exps.Var("motive"), new Exps.Var("tail")),
-        new Exps.Ap(new Exps.Var("motive"), new Exps.Li(new Exps.Var("head"), new Exps.Var("tail")))
+        new Exps.Ap(
+          new Exps.Var("motive"),
+          new Exps.Li(new Exps.Var("head"), new Exps.Var("tail"))
+        )
       )
     )
   )

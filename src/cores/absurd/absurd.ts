@@ -1,7 +1,6 @@
 import { Env } from "../../env"
 import { Ctx } from "../../ctx"
 import { Core, AlphaCtx } from "../../core"
-import { TypeValue } from "../../cores"
 import { AbsurdValue } from "../../cores"
 import { Value } from "../../value"
 

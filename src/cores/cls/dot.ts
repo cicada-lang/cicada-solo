@@ -2,12 +2,9 @@ import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value, match_value } from "../../value"
-import { ClsValue, ExtValue, ObjValue } from "../../cores"
+import { ClsValue, ObjValue } from "../../cores"
 import { DotNeutral, NotYetValue } from "../../cores"
 import { evaluate } from "../../evaluate"
-import { infer } from "../../infer"
-import { Trace } from "../../trace"
-import * as ut from "../../ut"
 
 export class Dot extends Core {
   target: Core

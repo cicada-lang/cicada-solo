@@ -4,7 +4,6 @@ import { Env } from "../env"
 import { Ctx } from "../ctx"
 import { evaluate } from "../evaluate"
 import { infer } from "../infer"
-import { check } from "../check"
 
 export class Let extends Core {
   name: string

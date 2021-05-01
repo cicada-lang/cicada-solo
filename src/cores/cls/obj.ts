@@ -2,7 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { ClsValue, ExtValue, ObjValue, TypeValue } from "../../cores"
+import { ObjValue } from "../../cores"
 import { evaluate } from "../../evaluate"
 import * as ut from "../../ut"
 

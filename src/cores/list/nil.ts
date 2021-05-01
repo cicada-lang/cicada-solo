@@ -1,9 +1,8 @@
 import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import { expect } from "../../expect"
 import { Value } from "../../value"
-import { ListValue, NilValue } from "../../cores"
+import { NilValue } from "../../cores"
 
 export class Nil extends Core {
   evaluate(ctx: Ctx, env: Env): Value {
