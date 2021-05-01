@@ -39,7 +39,6 @@ export class ListRec extends Exp {
 }
 
 function list_rec_step_t(base_t: Value, elem_t: Value): Value {
-  const ctx = new Ctx().extend("base_t", base_t).extend("elem_t", elem_t)
   const env = new Env().extend("base_t", base_t).extend("elem_t", elem_t)
 
   const step_t = new Cores.Pi(
