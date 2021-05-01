@@ -39,11 +39,14 @@ export function exp_matcher(tree: pt.Tree): Exp {
       new Exps.Sigma(pt.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
     "exp:pair": ({ car_t, cdr_t }) =>
       new Exps.Sigma("_", exp_matcher(car_t), exp_matcher(cdr_t)),
-    "exp:cons": ({ car, cdr }) => new Exps.Cons(exp_matcher(car), exp_matcher(cdr)),
+    "exp:cons": ({ car, cdr }) =>
+      new Exps.Cons(exp_matcher(car), exp_matcher(cdr)),
     "exp:car": ({ target }) => new Exps.Car(exp_matcher(target)),
     "exp:cdr": ({ target }) => new Exps.Cdr(exp_matcher(target)),
     "exp:cls": ({ entries }) =>
-      new Exps.Cls(pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)),
+      new Exps.Cls(
+        pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
+      ),
     "exp:ext": ({ parent_name, entries }) =>
       new Exps.Ext(
         pt.str(parent_name),
@@ -90,7 +93,8 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:list": ({ elem_t }) => new Exps.List(exp_matcher(elem_t)),
     "exp:nil": () => new Exps.Nil(),
     "exp:nil_sugar": () => new Exps.Nil(),
-    "exp:li": ({ head, tail }) => new Exps.Li(exp_matcher(head), exp_matcher(tail)),
+    "exp:li": ({ head, tail }) =>
+      new Exps.Li(exp_matcher(head), exp_matcher(tail)),
     "exp:li_sugar": ({ exps }) => {
       let list: Exp = new Exps.Nil()
       for (const exp of exps_matcher(exps)) {
@@ -109,14 +113,19 @@ export function exp_matcher(tree: pt.Tree): Exp {
       new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
     "exp:same": () => new Exps.Same(),
     "exp:replace": ({ target, motive, base }) =>
-      new Exps.Replace(exp_matcher(target), exp_matcher(motive), exp_matcher(base)),
+      new Exps.Replace(
+        exp_matcher(target),
+        exp_matcher(motive),
+        exp_matcher(base)
+      ),
     "exp:trivial": () => new Exps.Trivial(),
     "exp:sole": () => new Exps.Sole(),
     "exp:absurd": () => new Exps.Absurd(),
     "exp:absurd_ind": ({ target, motive }) =>
       new Exps.AbsurdInd(exp_matcher(target), exp_matcher(motive)),
     "exp:str": () => new Exps.Str(),
-    "exp:quote": ({ value }) => new Exps.Quote(pt.trim_boundary(pt.str(value), 1)),
+    "exp:quote": ({ value }) =>
+      new Exps.Quote(pt.trim_boundary(pt.str(value), 1)),
     "exp:type": () => new Exps.Type(),
     "exp:let": ({ name, exp, ret }) =>
       new Exps.Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),

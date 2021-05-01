@@ -29,7 +29,10 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         }
       }
 
-      return new Def(pt.str(name), new Exps.The(pi_handler({ bindings, ret_t }), fn))
+      return new Def(
+        pt.str(name),
+        new Exps.The(pi_handler({ bindings, ret_t }), fn)
+      )
     },
     "stmt:show": ({ exp }) => new Show(exp_matcher(exp)),
     "stmt:class": ({ name, entries }) =>
