@@ -1,18 +1,6 @@
 import pt from "@cicada-lang/partech"
 import { Exp } from "../../exp"
-import { Var } from "../../exps"
-import { Pi, Fn, Ap } from "../../exps"
-import { Sigma, Cons, Car, Cdr } from "../../exps"
-import { Cls, Ext, Obj, Dot } from "../../exps"
-import { Nat, Zero, Add1, NatInd } from "../../exps"
-import { List, Nil, Li, ListInd } from "../../exps"
-import { Equal, Same, Replace } from "../../exps"
-import { Absurd, AbsurdInd } from "../../exps"
-import { Trivial, Sole } from "../../exps"
-import { Str, Quote } from "../../exps"
-import { Type } from "../../exps"
-import { Let } from "../../exps"
-import { The } from "../../exps"
+import * as Exps from "../../exps"
 import { nat_from_number } from "../../exps/nat/nat-util"
 import * as ut from "../../ut"
 
@@ -21,7 +9,7 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
   let result = exp_matcher(ret_t)
   for (const { names, exp } of bindings_matcher(bindings).reverse()) {
     for (const name of names.reverse()) {
-      result = new Pi(name, exp, result)
+      result = new Exps.Pi(name, exp, result)
     }
   }
   return result
@@ -29,58 +17,58 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
 
 export function exp_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
-    "exp:var": ({ name }) => new Var(pt.str(name)),
+    "exp:var": ({ name }) => new Exps.Var(pt.str(name)),
     "exp:pi": pi_handler,
     "exp:fn": ({ names, ret }) => {
       let result = exp_matcher(ret)
       for (const name of names_matcher(names).reverse()) {
-        result = new Fn(name, result)
+        result = new Exps.Fn(name, result)
       }
       return result
     },
     "exp:ap": ({ target, args }) => {
-      let result: Exp = new Var(pt.str(target))
+      let result: Exp = new Exps.Var(pt.str(target))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
         for (const exp of exps_matcher(arg)) {
-          result = new Ap(result, exp)
+          result = new Exps.Ap(result, exp)
         }
       }
       return result
     },
     "exp:sigma": ({ name, car_t, cdr_t }) =>
-      new Sigma(pt.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
+      new Exps.Sigma(pt.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
     "exp:pair": ({ car_t, cdr_t }) =>
-      new Sigma("_", exp_matcher(car_t), exp_matcher(cdr_t)),
-    "exp:cons": ({ car, cdr }) => new Cons(exp_matcher(car), exp_matcher(cdr)),
-    "exp:car": ({ target }) => new Car(exp_matcher(target)),
-    "exp:cdr": ({ target }) => new Cdr(exp_matcher(target)),
+      new Exps.Sigma("_", exp_matcher(car_t), exp_matcher(cdr_t)),
+    "exp:cons": ({ car, cdr }) => new Exps.Cons(exp_matcher(car), exp_matcher(cdr)),
+    "exp:car": ({ target }) => new Exps.Car(exp_matcher(target)),
+    "exp:cdr": ({ target }) => new Exps.Cdr(exp_matcher(target)),
     "exp:cls": ({ entries }) =>
-      new Cls(pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)),
+      new Exps.Cls(pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)),
     "exp:ext": ({ parent_name, entries }) =>
-      new Ext(
+      new Exps.Ext(
         pt.str(parent_name),
         pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
       ),
     "exp:obj": ({ properties }) =>
-      new Obj(
+      new Exps.Obj(
         new Map(
           pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
         )
       ),
     "exp:dot_field": ({ target, name }) =>
-      new Dot(exp_matcher(target), pt.str(name)),
+      new Exps.Dot(exp_matcher(target), pt.str(name)),
     "exp:dot_method": ({ target, name, args }) => {
-      let result: Exp = new Dot(exp_matcher(target), pt.str(name))
+      let result: Exp = new Exps.Dot(exp_matcher(target), pt.str(name))
       for (const arg of pt.matchers.one_or_more_matcher(args)) {
         for (const exp of exps_matcher(arg)) {
-          result = new Ap(result, exp)
+          result = new Exps.Ap(result, exp)
         }
       }
       return result
     },
-    "exp:nat": () => new Nat(),
-    "exp:zero": () => new Zero(),
-    "exp:add1": ({ prev }) => new Add1(exp_matcher(prev)),
+    "exp:nat": () => new Exps.Nat(),
+    "exp:zero": () => new Exps.Zero(),
+    "exp:add1": ({ prev }) => new Exps.Add1(exp_matcher(prev)),
     "exp:number": ({ value }, { span }) => {
       const n = Number.parseInt(pt.str(value))
       if (Number.isNaN(n)) {
@@ -93,46 +81,46 @@ export function exp_matcher(tree: pt.Tree): Exp {
       }
     },
     "exp:nat_ind": ({ target, motive, base, step }) =>
-      new NatInd(
+      new Exps.NatInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base),
         exp_matcher(step)
       ),
-    "exp:list": ({ elem_t }) => new List(exp_matcher(elem_t)),
-    "exp:nil": () => new Nil(),
-    "exp:nil_sugar": () => new Nil(),
-    "exp:li": ({ head, tail }) => new Li(exp_matcher(head), exp_matcher(tail)),
+    "exp:list": ({ elem_t }) => new Exps.List(exp_matcher(elem_t)),
+    "exp:nil": () => new Exps.Nil(),
+    "exp:nil_sugar": () => new Exps.Nil(),
+    "exp:li": ({ head, tail }) => new Exps.Li(exp_matcher(head), exp_matcher(tail)),
     "exp:li_sugar": ({ exps }) => {
-      let list: Exp = new Nil()
+      let list: Exp = new Exps.Nil()
       for (const exp of exps_matcher(exps)) {
-        list = new Li(exp, list)
+        list = new Exps.Li(exp, list)
       }
       return list
     },
     "exp:list_ind": ({ target, motive, base, step }) =>
-      new ListInd(
+      new Exps.ListInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base),
         exp_matcher(step)
       ),
     "exp:equal": ({ t, from, to }) =>
-      new Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
-    "exp:same": () => new Same(),
+      new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
+    "exp:same": () => new Exps.Same(),
     "exp:replace": ({ target, motive, base }) =>
-      new Replace(exp_matcher(target), exp_matcher(motive), exp_matcher(base)),
-    "exp:trivial": () => new Trivial(),
-    "exp:sole": () => new Sole(),
-    "exp:absurd": () => new Absurd(),
+      new Exps.Replace(exp_matcher(target), exp_matcher(motive), exp_matcher(base)),
+    "exp:trivial": () => new Exps.Trivial(),
+    "exp:sole": () => new Exps.Sole(),
+    "exp:absurd": () => new Exps.Absurd(),
     "exp:absurd_ind": ({ target, motive }) =>
-      new AbsurdInd(exp_matcher(target), exp_matcher(motive)),
-    "exp:str": () => new Str(),
-    "exp:quote": ({ value }) => new Quote(pt.trim_boundary(pt.str(value), 1)),
-    "exp:type": () => new Type(),
+      new Exps.AbsurdInd(exp_matcher(target), exp_matcher(motive)),
+    "exp:str": () => new Exps.Str(),
+    "exp:quote": ({ value }) => new Exps.Quote(pt.trim_boundary(pt.str(value), 1)),
+    "exp:type": () => new Exps.Type(),
     "exp:let": ({ name, exp, ret }) =>
-      new Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),
-    "exp:the": ({ t, exp }) => new The(exp_matcher(t), exp_matcher(exp)),
+      new Exps.Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),
+    "exp:the": ({ t, exp }) => new Exps.The(exp_matcher(t), exp_matcher(exp)),
   })(tree)
 }
 
@@ -157,7 +145,7 @@ export function cls_entry_matcher(
       let fn = exp_matcher(ret)
       for (const { names } of bindings_matcher(bindings).reverse()) {
         for (const name of names.reverse()) {
-          fn = new Fn(name, fn)
+          fn = new Exps.Fn(name, fn)
         }
       }
 
