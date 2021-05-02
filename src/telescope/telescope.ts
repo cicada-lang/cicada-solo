@@ -156,7 +156,7 @@ export class Telescope {
     return properties
   }
 
-  check_properties(ctx: Ctx, properties: Map<string, Exp>): void {
+  check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
     // NOTE We DO NOT need to update the `ctx` as we go along.
     // - the bindings in telescope will not effect current ctx.
     // - just like checking `cons`.

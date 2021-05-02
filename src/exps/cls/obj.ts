@@ -4,6 +4,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { evaluate } from "../../evaluate"
+import { Trace } from "../../trace"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"
 
@@ -18,13 +19,27 @@ export class Obj extends Exp {
   check(ctx: Ctx, t: Value): Core {
     if (t instanceof Cores.ClsValue) {
       const cls = t
-      cls.telescope.check_properties(ctx, this.properties)
-    } else if (t instanceof Cores.ExtValue) {
-      const ext = t
-      for (const { telescope } of ext.entries) {
-        telescope.check_properties(ctx, this.properties)
-      }
+      const core_properties = cls.telescope.check_properties(
+        ctx,
+        this.properties
+      )
+      return new Cores.Obj(core_properties)
     }
+
+    if (t instanceof Cores.ExtValue) {
+      const ext = t
+      let core_properties: Map<string, Core> = new Map()
+      for (const { telescope } of ext.entries) {
+        core_properties = new Map([
+          ...core_properties,
+          ...telescope.check_properties(ctx, this.properties),
+        ])
+      }
+
+      return new Cores.Obj(core_properties)
+    }
+
+    throw new Trace(`Expecting t to be ClsValue or ExtValue`)
   }
 
   repr(): string {
