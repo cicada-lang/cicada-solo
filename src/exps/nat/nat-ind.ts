@@ -27,17 +27,32 @@ export class NatInd extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     // NOTE We should always infer target,
     //   but we do a simple check for the simple nat.
-    check(ctx, this.target, new Cores.NatValue())
+    const target_core = check(ctx, this.target, new Cores.NatValue())
     const motive_t = evaluate(
       new Env(),
-      new Exps.Pi("target_nat", new Exps.Nat(), new Exps.Type())
+      new Cores.Pi("target_nat", new Cores.Nat(), new Cores.Type())
     )
-    check(ctx, this.motive, motive_t)
-    const motive_value = evaluate(ctx.to_env(), this.motive)
-    check(ctx, this.base, Cores.Ap.apply(motive_value, new Cores.ZeroValue()))
-    check(ctx, this.step, nat_ind_step_t(motive_t, motive_value))
-    const target_value = evaluate(ctx.to_env(), this.target)
-    return Cores.Ap.apply(motive_value, target_value)
+    const motive_core = check(ctx, this.motive, motive_t)
+    const motive_value = evaluate(ctx.to_env(), motive_core)
+    const base_core = check(
+      ctx,
+      this.base,
+      Cores.Ap.apply(motive_value, new Cores.ZeroValue())
+    )
+    const step_core = check(
+      ctx,
+      this.step,
+      nat_ind_step_t(motive_t, motive_value)
+    )
+    const target_value = evaluate(ctx.to_env(), target_core)
+    const t = Cores.Ap.apply(motive_value, target_value)
+    const core = new Cores.NatInd(
+      target_core,
+      motive_core,
+      base_core,
+      step_core
+    )
+    return { t, core }
   }
 
   repr(): string {
