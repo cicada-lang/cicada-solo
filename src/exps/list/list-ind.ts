@@ -27,23 +27,39 @@ export class ListInd extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const target_t = infer(ctx, this.target)
-    const list_t = expect(ctx, target_t, Cores.ListValue)
+    const inferred_target = infer(ctx, this.target)
+    const list_t = expect(ctx, inferred_target.t, Cores.ListValue)
     const elem_t = list_t.elem_t
     const motive_t = evaluate(
       new Env().extend("elem_t", elem_t),
-      new Exps.Pi(
+      new Cores.Pi(
         "target_list",
-        new Exps.List(new Exps.Var("elem_t")),
-        new Exps.Type()
+        new Cores.List(new Cores.Var("elem_t")),
+        new Cores.Type()
       )
     )
-    check(ctx, this.motive, motive_t)
-    const motive_value = evaluate(ctx.to_env(), this.motive)
-    check(ctx, this.base, Cores.Ap.apply(motive_value, new Cores.NilValue()))
-    check(ctx, this.step, list_ind_step_t(motive_t, motive_value, elem_t))
-    const target_value = evaluate(ctx.to_env(), this.target)
-    return Cores.Ap.apply(motive_value, target_value)
+    const motive_core = check(ctx, this.motive, motive_t)
+    const motive_value = evaluate(ctx.to_env(), motive_core)
+    const base_core = check(
+      ctx,
+      this.base,
+      Cores.Ap.apply(motive_value, new Cores.NilValue())
+    )
+    const step_core = check(
+      ctx,
+      this.step,
+      list_ind_step_t(motive_t, motive_value, elem_t)
+    )
+    const target_value = evaluate(ctx.to_env(), inferred_target.core)
+    return {
+      t: Cores.Ap.apply(motive_value, target_value),
+      core: new Cores.ListInd(
+        inferred_target.core,
+        motive_core,
+        base_core,
+        step_core
+      ),
+    }
   }
 
   repr(): string {
