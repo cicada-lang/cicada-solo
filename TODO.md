@@ -1,3 +1,6 @@
+- move `fresh_name` to `Cores`
+- `collect_fresh_variable_names`
+
 - `ListRec.infer` need `fresh_name` after `readback`
 
 - [refactoring] `ap` avoid using if:
