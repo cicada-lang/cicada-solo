@@ -22,19 +22,24 @@ export class Let extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred = infer(ctx, this.exp)
-    return infer(
-      ctx.extend(this.name, inferred.t, evaluate(ctx.to_env(), inferred.core)),
+    const value = evaluate(ctx.to_env(), inferred.core)
+    const inferred_ret = infer(
+      ctx.extend(this.name, inferred.t, value),
       this.ret
     )
+    const core = new Cores.Let(this.name, inferred.core, inferred_ret.core)
+    return { t: inferred_ret.t, core }
   }
 
   check(ctx: Ctx, t: Value): Core {
     const inferred = infer(ctx, this.exp)
-    return check(
-      ctx.extend(this.name, inferred.t, evaluate(ctx.to_env(), inferred.core)),
+    const value = evaluate(ctx.to_env(), inferred.core)
+    const ret_core = check(
+      ctx.extend(this.name, inferred.t, value),
       this.ret,
       t
     )
+    return new Cores.Let(this.name, inferred.core, ret_core)
   }
 
   repr(): string {
