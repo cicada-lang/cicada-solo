@@ -1,5 +1,3 @@
-- fix `Telescope.check_properties`
-
 - split the responsibilities of `Exp` to `Exp` and `Core`
 
   > If we can achieve this, we will be better at

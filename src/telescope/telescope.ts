@@ -161,6 +161,8 @@ export class Telescope {
     // - the bindings in telescope will not effect current ctx.
     // - just like checking `cons`.
 
+    const core_properties: Map<string, Core>  = new Map()
+
     for (const { name, t, value } of this.fulfilled) {
       const found = properties.get(name)
 
@@ -173,6 +175,7 @@ export class Telescope {
       }
 
       const core = check(ctx, found, t)
+      core_properties.set(name, core)
       const found_value = evaluate(ctx.to_env(), core)
 
       if (!conversion(ctx, t, value, found_value)) {
@@ -206,6 +209,7 @@ export class Telescope {
       }
 
       const core = check(ctx, found, next_t)
+      core_properties.set(name, core)
 
       if (value) {
         const found_value = evaluate(ctx.to_env(), core)
@@ -228,6 +232,8 @@ export class Telescope {
 
       telescope = telescope.fill(evaluate(ctx.to_env(), core))
     }
+
+    return core_properties
   }
 
   extend_ctx(ctx: Ctx): Ctx {
