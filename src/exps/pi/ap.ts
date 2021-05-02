@@ -22,17 +22,17 @@ export class Ap extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const infered_target = infer(ctx, this.target)
-    if (infered_target.t instanceof Cores.PiValue) {
-      const pi = infered_target.t
+    const inferred_target = infer(ctx, this.target)
+    if (inferred_target.t instanceof Cores.PiValue) {
+      const pi = inferred_target.t
       const arg_core = check(ctx, this.arg, pi.arg_t)
       const arg_value = evaluate(ctx.to_env(), arg_core)
       const t = pi.ret_t_cl.apply(arg_value)
-      const core = new Cores.Ap(infered_target.core, arg_core)
+      const core = new Cores.Ap(inferred_target.core, arg_core)
       return { t, core }
     }
 
-    const target_value = evaluate(ctx.to_env(), infered_target.core)
+    const target_value = evaluate(ctx.to_env(), inferred_target.core)
     if (target_value instanceof Cores.ClsValue) {
       const cls = target_value
       let telescope = cls.telescope
@@ -43,7 +43,7 @@ export class Ap extends Exp {
         } else {
           const arg_core = check(ctx, this.arg, t)
           const arg_value = evaluate(ctx.to_env(), arg_core)
-          const core = new Cores.Ap(infered_target.core, arg_core)
+          const core = new Cores.Ap(inferred_target.core, arg_core)
           return { t: new Cores.TypeValue(), core }
         }
       }
