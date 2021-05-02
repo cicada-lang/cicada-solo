@@ -25,12 +25,23 @@ export class ListRec extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const target_t = infer(ctx, this.target)
-    const list_t = expect(ctx, target_t, Cores.ListValue)
+    const inferred_target = infer(ctx, this.target)
+    const list_t = expect(ctx, inferred_target.t, Cores.ListValue)
     const elem_t = list_t.elem_t
-    const base_t = infer(ctx, this.base)
-    check(ctx, this.step, list_rec_step_t(base_t, elem_t))
-    return base_t
+    const inferred_base = infer(ctx, this.base)
+    const step_core = check(
+      ctx,
+      this.step,
+      list_rec_step_t(inferred_base.t, elem_t)
+    )
+    return {
+      t: inferred_base.t,
+      core: new Cores.ListRec(
+        inferred_target.core,
+        inferred_base.core,
+        step_core
+      ),
+    }
   }
 
   repr(): string {
