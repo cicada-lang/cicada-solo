@@ -87,6 +87,16 @@ export const exp = {
       { step: "exp" },
       '")"',
     ],
+    "exp:list_rec": [
+      '"list_rec"',
+      '"("',
+      { target: "exp" },
+      '","',
+      { base: "exp" },
+      '","',
+      { step: "exp" },
+      '")"',
+    ],
     "exp:equal": [
       '"Equal"',
       '"("',

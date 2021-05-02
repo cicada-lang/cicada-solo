@@ -1,12 +1,10 @@
+- `ListRec.infer` need `fresh_name` after `readback`
+
 - [refactoring] `ap` avoid using if:
   - `target_t instanceof Cores.PiValue`
   - `target instanceof Cores.ClsValue`
 
-> With elaboration,
->   we can elaborate `Exps.ListRec` into `Cores.ListInd` (which need `readback`),
->   or into `Cores.ListRec` (which does not need `readback`).
-
-- `ListRec.apply`
+- [refactoring] big methods in `telescope`
 
 - [tlt] 5. Lists, Lists, and More Lists
 
