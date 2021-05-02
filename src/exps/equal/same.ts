@@ -26,6 +26,8 @@ export class Same extends Exp {
           |`)
       )
     }
+
+    return new Cores.Same()
   }
 
   repr(): string {
