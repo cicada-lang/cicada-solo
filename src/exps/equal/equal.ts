@@ -20,11 +20,13 @@ export class Equal extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    check(ctx, this.t, new Cores.TypeValue())
-    const t_value = evaluate(ctx.to_env(), this.t)
-    check(ctx, this.from, t_value)
-    check(ctx, this.to, t_value)
-    return new Cores.TypeValue()
+    const t_core = check(ctx, this.t, new Cores.TypeValue())
+    const t_value = evaluate(ctx.to_env(), t_core)
+    const from_core = check(ctx, this.from, t_value)
+    const to_core = check(ctx, this.to, t_value)
+    const t = new Cores.TypeValue()
+    const core = new Cores.Equal(t_core, from_core, to_core)
+    return { t, core }
   }
 
   repr(): string {
