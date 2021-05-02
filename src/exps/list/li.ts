@@ -19,9 +19,11 @@ export class Li extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const elem_t = infer(ctx, this.head)
-    check(ctx, this.tail, new Cores.ListValue(elem_t))
-    return new Cores.ListValue(elem_t)
+    const inferred_head = infer(ctx, this.head)
+    const list_t = new Cores.ListValue(inferred_head.t)
+    const tail_core = check(ctx, this.tail, list_t)
+    const core = new Cores.Li(inferred_head.core, tail_core)
+    return { t: list_t, core }
   }
 
   repr(): string {
