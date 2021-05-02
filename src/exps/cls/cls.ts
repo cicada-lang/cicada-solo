@@ -23,14 +23,22 @@ export class Cls extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
+    const core_entries: Array<{
+      name: string
+      t: Core
+      exp?: Core
+    }> = new Array()
     for (const { name, t, exp } of this.entries) {
-      check(ctx, t, new Cores.TypeValue())
-      const t_value = evaluate(ctx.to_env(), t)
-      if (exp) check(ctx, exp, t_value)
+      const t_core = check(ctx, t, new Cores.TypeValue())
+      const t_value = evaluate(ctx.to_env(), t_core)
+      const exp_core = exp ? check(ctx, exp, t_value) : undefined
+      core_entries.push({ name, t: t_core, exp: exp_core })
       ctx = ctx.extend(name, t_value)
     }
 
-    return new Cores.TypeValue()
+    const t = new Cores.TypeValue()
+    const core = new Cores.Cls(core_entries, { name: this.name })
+    return { t, core }
   }
 
   repr(): string {
