@@ -25,16 +25,22 @@ export class Replace extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const target_t = infer(ctx, this.target)
-    const equal = expect(ctx, target_t, Cores.EqualValue)
+    const inferred_target = infer(ctx, this.target)
+    const equal = expect(ctx, inferred_target.t, Cores.EqualValue)
     const motive_t = evaluate(
       new Env().extend("t", equal.t),
-      new Exps.Pi("x", new Exps.Var("t"), new Exps.Type())
+      new Cores.Pi("x", new Cores.Var("t"), new Cores.Type())
     )
-    check(ctx, this.motive, motive_t)
-    const motive_value = evaluate(ctx.to_env(), this.motive)
-    check(ctx, this.base, Cores.Ap.apply(motive_value, equal.from))
-    return Cores.Ap.apply(motive_value, equal.to)
+    const motive_core = check(ctx, this.motive, motive_t)
+    const motive_value = evaluate(ctx.to_env(), motive_core)
+    const base_core = check(
+      ctx,
+      this.base,
+      Cores.Ap.apply(motive_value, equal.from)
+    )
+    const t = Cores.Ap.apply(motive_value, equal.to)
+    const core = new Cores.Replace(inferred_target.core, motive_core, base_core)
+    return { t, core }
   }
 
   repr(): string {
