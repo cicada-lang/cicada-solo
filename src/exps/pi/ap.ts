@@ -22,28 +22,32 @@ export class Ap extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const target_t = infer(ctx, this.target)
-    if (target_t instanceof Cores.PiValue) {
-      const pi = target_t
-      check(ctx, this.arg, pi.arg_t)
-      const arg_value = evaluate(ctx.to_env(), this.arg)
-      return pi.ret_t_cl.apply(arg_value)
+    const infered_target = infer(ctx, this.target)
+    if (infered_target.t instanceof Cores.PiValue) {
+      const pi = infered_target.t
+      const arg_core = check(ctx, this.arg, pi.arg_t)
+      const arg_value = evaluate(ctx.to_env(), arg_core)
+      const t = pi.ret_t_cl.apply(arg_value)
+      const core = new Cores.Ap(infered_target.core, arg_core)
+      return { t, core }
     }
 
-    const target = evaluate(ctx.to_env(), this.target)
-    if (target instanceof Cores.ClsValue) {
-      const cls = target
+    const target_value = evaluate(ctx.to_env(), infered_target.core)
+    if (target_value instanceof Cores.ClsValue) {
+      const cls = target_value
       let telescope = cls.telescope
       while (telescope.next) {
         const { name, t, value } = telescope.next
         if (value) {
           telescope = telescope.fill(value)
         } else {
-          check(ctx, this.arg, t)
-          const arg_value = evaluate(ctx.to_env(), this.arg)
-          return new Cores.TypeValue()
+          const arg_core = check(ctx, this.arg, t)
+          const arg_value = evaluate(ctx.to_env(), arg_core)
+          const core = new Cores.Ap(infered_target.core, arg_core)
+          return { t: new Cores.TypeValue(), core }
         }
       }
+
       throw new Trace(
         ut.aline(`
           |The telescope is full.
