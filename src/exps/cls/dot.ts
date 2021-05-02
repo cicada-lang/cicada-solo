@@ -20,19 +20,24 @@ export class Dot extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const target_t = infer(ctx, this.target)
+    const inferred_target = infer(ctx, this.target)
 
     if (
-      target_t instanceof Cores.ClsValue ||
-      target_t instanceof Cores.ExtValue
+      inferred_target.t instanceof Cores.ClsValue ||
+      inferred_target.t instanceof Cores.ExtValue
     ) {
-      return target_t.dot(evaluate(ctx.to_env(), this.target), this.name)
+      const t = inferred_target.t.dot(
+        evaluate(ctx.to_env(), inferred_target.core),
+        this.name
+      )
+      const core = new Cores.Dot(inferred_target.core, this.name)
+      return { t, core }
     }
 
     throw new Trace(
       ut.aline(`
         |Expecting target type to be a class.
-        |  ${ut.inspect(target_t)}
+        |  ${ut.inspect(inferred_target.t)}
         |`)
     )
   }
