@@ -1,7 +1,7 @@
-- move `fresh_name` to `Cores`
-- `collect_fresh_variable_names`
+- where to put `freshen_name`?
 
 - `ListRec.infer` need `fresh_name` after `readback`
+  - just generate random number for names
 
 - [refactoring] `ap` avoid using if:
   - `target_t instanceof Cores.PiValue`
