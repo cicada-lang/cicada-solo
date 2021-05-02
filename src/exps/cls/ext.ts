@@ -28,7 +28,7 @@ export class Ext extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const parent = evaluate(ctx.to_env(), new Exps.Var(this.parent_name))
+    const parent = evaluate(ctx.to_env(), new Cores.Var(this.parent_name))
     if (
       !(parent instanceof Cores.ClsValue || parent instanceof Cores.ExtValue)
     ) {
@@ -37,14 +37,26 @@ export class Ext extends Exp {
 
     ctx = parent.extend_ctx(ctx)
 
+    const core_entries: Array<{
+      name: string
+      t: Core
+      exp?: Core
+    }> = new Array()
+
     for (const { name, t, exp } of this.entries) {
-      check(ctx, t, new Cores.TypeValue())
-      const t_value = evaluate(ctx.to_env(), t)
-      if (exp) check(ctx, exp, t_value)
+      const t_core = check(ctx, t, new Cores.TypeValue())
+      const t_value = evaluate(ctx.to_env(), t_core)
+      const exp_core = exp ? check(ctx, exp, t_value) : undefined
+      core_entries.push({ name, t: t_core, exp: exp_core })
       ctx = ctx.extend(name, t_value)
     }
 
-    return new Cores.TypeValue()
+    const t = new Cores.TypeValue()
+    const core = new Cores.Ext(this.parent_name, core_entries, {
+      name: this.name,
+    })
+
+    return { t, core }
   }
 
   repr(): string {
