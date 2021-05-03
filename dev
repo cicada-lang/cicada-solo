@@ -13,7 +13,7 @@ commands.t = async () => {
 
 commands.test_all = async () => {
   await commands.test_lib()
-  await commands.test_impression()
+  await commands.test_snapshot()
   await commands.test_cicada()
   await commands.test_libraries()
 }
@@ -22,10 +22,10 @@ commands.test_lib = async () => {
   await test("node $file", { file: "lib/**/*.test.js" }, expect.ok)
 }
 
-commands.test_impression = async () => {
+commands.test_snapshot = async () => {
   await test(
     "node $file",
-    { file: "lib/**/*.impression.js" },
+    { file: "lib/**/*.snapshot.js" },
     snapshot.out(({ file }) =>
       path.resolve("snapshot", changeCase.paramCase(file) + ".out")
     )

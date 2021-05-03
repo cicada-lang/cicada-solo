@@ -1,12 +1,12 @@
-- [elaboration] implement `nat_rec` directly -- by elaboration
-- [elaboration] implement `nat_iter` directly -- by elaboration
-- [elaboration] implement `nat_which` directly -- by elaboration
-
 - [refactoring] `ap` avoid using if:
   - `target_t instanceof Cores.PiValue`
   - `target instanceof Cores.ClsValue`
 
 - [refactoring] big methods in `telescope`
+
+- [elaboration] implement `nat_rec` directly -- by elaboration
+- [elaboration] implement `nat_iter` directly -- by elaboration
+- [elaboration] implement `nat_which` directly -- by elaboration
 
 - [tlt] 5. Lists, Lists, and More Lists
 
