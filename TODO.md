@@ -1,3 +1,5 @@
+- use nanoid when expending arrow and pair type
+
 - [refactoring] `ap` avoid using if:
   - `target_t instanceof Cores.PiValue`
   - `target instanceof Cores.ClsValue`
