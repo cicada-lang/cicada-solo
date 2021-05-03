@@ -12,6 +12,7 @@ import { Closure } from "../../closure"
 import { Trace } from "../../trace"
 import * as Cores from "../../cores"
 import * as Exps from "../../exps"
+import { nanoid } from "nanoid"
 
 export class ListRec extends Exp {
   target: Exp
@@ -30,24 +31,27 @@ export class ListRec extends Exp {
     const list_t = expect(ctx, inferred_target.t, Cores.ListValue)
     const elem_t = list_t.elem_t
     const inferred_base = infer(ctx, this.base)
-    const target_t_core = readback(ctx, new Cores.TypeValue(), inferred_target.t)
+    const target_t_core = readback(
+      ctx,
+      new Cores.TypeValue(),
+      inferred_target.t
+    )
     const base_t_core = readback(ctx, new Cores.TypeValue(), inferred_base.t)
-    const fresh_name = "_target_list"
+    const fresh_name = "target_list_" + nanoid().toString()
     const motive_core = new Cores.Pi(fresh_name, target_t_core, base_t_core)
     const step_core = check(
       ctx,
       this.step,
       list_rec_step_t(inferred_base.t, elem_t)
     )
-    return {
-      t: inferred_base.t,
-      core: new Cores.ListInd(
-        inferred_target.core,
-        motive_core,
-        inferred_base.core,
-        step_core
-      ),
-    }
+    const t = inferred_base.t
+    const core = new Cores.ListInd(
+      inferred_target.core,
+      motive_core,
+      inferred_base.core,
+      step_core
+    )
+    return { t, core }
   }
 
   repr(): string {

@@ -1,8 +1,3 @@
-- where to put `freshen_name`?
-
-- `ListRec.infer` need `fresh_name` after `readback`
-  - just generate random number for names
-
 - [refactoring] `ap` avoid using if:
   - `target_t instanceof Cores.PiValue`
   - `target instanceof Cores.ClsValue`
