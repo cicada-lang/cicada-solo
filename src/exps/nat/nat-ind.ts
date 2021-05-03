@@ -4,10 +4,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
-import { Value, match_value } from "../../value"
-import { Closure } from "../../closure"
-import { Normal } from "../../normal"
-import * as Exps from "../../exps"
+import { Value } from "../../value"
 import * as Cores from "../../cores"
 
 export class NatInd extends Exp {

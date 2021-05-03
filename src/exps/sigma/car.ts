@@ -1,11 +1,9 @@
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Env } from "../../env"
 import { infer } from "../../infer"
 import { expect } from "../../expect"
-import { Value, match_value } from "../../value"
-import { evaluate } from "../../evaluate"
+import { Value } from "../../value"
 import * as Cores from "../../cores"
 
 export class Car extends Exp {

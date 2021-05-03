@@ -1,7 +1,6 @@
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { Value } from "../../value"

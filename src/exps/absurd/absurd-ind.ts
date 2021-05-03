@@ -3,9 +3,7 @@ import { Core } from "../../core"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { Ctx } from "../../ctx"
-import { Env } from "../../env"
-import { Value, match_value } from "../../value"
-import { Normal } from "../../normal"
+import { Value } from "../../value"
 import * as Cores from "../../cores"
 
 export class AbsurdInd extends Exp {

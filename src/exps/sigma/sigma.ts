@@ -1,11 +1,9 @@
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Env } from "../../env"
 import { check } from "../../check"
 import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
-import { Closure } from "../../closure"
 import * as Cores from "../../cores"
 
 export class Sigma extends Exp {

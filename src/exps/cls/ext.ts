@@ -1,15 +1,12 @@
 import { Exp } from "../../exp"
 import { Core } from "../../core"
-import { Value, match_value } from "../../value"
+import { Value } from "../../value"
 import { Ctx } from "../../ctx"
-import { Env } from "../../env"
-import { Telescope } from "../../telescope"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"
-import * as Exps from "../../exps"
 
 export class Ext extends Exp {
   name?: string

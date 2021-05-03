@@ -1,12 +1,10 @@
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Env } from "../../env"
 import { infer } from "../../infer"
 import { expect } from "../../expect"
 import { evaluate } from "../../evaluate"
-import { Value, match_value } from "../../value"
-import * as Exps from "../../exps"
+import { Value } from "../../value"
 import * as Cores from "../../cores"
 
 export class Cdr extends Exp {

@@ -7,11 +7,8 @@ import { check } from "../../check"
 import { readback } from "../../readback"
 import { infer } from "../../infer"
 import { expect } from "../../expect"
-import { Value, match_value } from "../../value"
-import { Closure } from "../../closure"
-import { Trace } from "../../trace"
+import { Value } from "../../value"
 import * as Cores from "../../cores"
-import * as Exps from "../../exps"
 import { nanoid } from "nanoid"
 
 export class ListRec extends Exp {
