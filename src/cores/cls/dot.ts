@@ -29,7 +29,7 @@ export class Dot extends Core {
 
   static apply(target: Value, name: string): Value {
     return match_value(target, [
-      [Cores.ObjValue, (obj: Cores.ObjValue) => obj.dot(name)],
+      [Cores.ObjValue, (obj: Cores.ObjValue) => obj.dot_value(name)],
       [
         Cores.NotYetValue,
         ({ t, neutral }: Cores.NotYetValue) =>
@@ -38,7 +38,7 @@ export class Dot extends Core {
               Cores.ClsValue,
               (cls: Cores.ClsValue) =>
                 new Cores.NotYetValue(
-                  cls.dot(target, name),
+                  cls.dot_type(target, name),
                   new Cores.DotNeutral(neutral, name)
                 ),
             ],

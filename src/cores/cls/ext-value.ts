@@ -48,10 +48,26 @@ export class ExtValue {
     return new Cores.Obj(properties)
   }
 
-  dot(target: Value, name: string): Value {
+  dot_type(target: Value, name: string): Value {
     for (const { telescope } of this.entries) {
       try {
-        return telescope.dot(target, name)
+        return telescope.dot_type(target, name)
+      } catch (error) {
+        // NOTE try next one
+      }
+    }
+
+    throw new Trace(
+      ut.aline(`
+        |The property name: ${name} of extended class is undefined.
+        |`)
+    )
+  }
+
+  dot_value(target: Value, name: string): Value {
+    for (const { telescope } of this.entries) {
+      try {
+        return telescope.dot_value(target, name)
       } catch (error) {
         // NOTE try next one
       }

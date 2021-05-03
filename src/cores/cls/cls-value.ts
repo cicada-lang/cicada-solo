@@ -26,8 +26,12 @@ export class ClsValue {
     return new Cores.Obj(this.telescope.eta_expand_properties(ctx, value))
   }
 
-  dot(target: Value, name: string): Value {
-    return this.telescope.dot(target, name)
+  dot_type(target: Value, name: string): Value {
+    return this.telescope.dot_type(target, name)
+  }
+
+  dot_value(target: Value, name: string): Value {
+    return this.telescope.dot_value(target, name)
   }
 
   apply(arg: Value): Value {

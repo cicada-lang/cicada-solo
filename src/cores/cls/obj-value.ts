@@ -16,7 +16,7 @@ export class ObjValue {
     return undefined
   }
 
-  dot(name: string): Value {
+  dot_value(name: string): Value {
     const value = this.properties.get(name)
     if (value === undefined) {
       throw new Trace(

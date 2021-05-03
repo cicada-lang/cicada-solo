@@ -4,6 +4,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value, match_value } from "../../value"
 import { evaluate } from "../../evaluate"
+import { readback } from "../../readback"
 import { infer } from "../../infer"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
@@ -26,11 +27,23 @@ export class Dot extends Exp {
       inferred_target.t instanceof Cores.ClsValue ||
       inferred_target.t instanceof Cores.ExtValue
     ) {
-      const t = inferred_target.t.dot(
+      // NOTE `infer` need to return normalized value as core.
+      // Because of `ClsValue` and `ExtValue` can be partially fulfilled by value,
+      // during `infer` of `Exps.Dot`, we have opportunity to get those value back,
+      // and return them as core.
+
+      const t = inferred_target.t.dot_type(
         evaluate(ctx.to_env(), inferred_target.core),
         this.name
       )
-      const core = new Cores.Dot(inferred_target.core, this.name)
+
+      const value = inferred_target.t.dot_value(
+        evaluate(ctx.to_env(), inferred_target.core),
+        this.name
+      )
+
+      const core = readback(ctx, t, value)
+
       return { t, core }
     }
 

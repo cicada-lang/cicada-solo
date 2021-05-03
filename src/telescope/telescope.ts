@@ -61,7 +61,7 @@ export class Telescope {
     )
   }
 
-  dot(target: Value, name: string): Value {
+  dot_type(target: Value, name: string): Value {
     for (const entry of this.fulfilled) {
       if (entry.name === name) {
         return entry.t
@@ -75,6 +75,30 @@ export class Telescope {
         telescope = telescope.fill(Cores.Dot.apply(target, next_name))
       } else {
         return t
+      }
+    }
+
+    throw new Trace(
+      ut.aline(`
+        |The property name: ${name} of class is undefined.
+        |`)
+    )
+  }
+
+  dot_value(target: Value, name: string): Value {
+    for (const entry of this.fulfilled) {
+      if (entry.name === name) {
+        return entry.value
+      }
+    }
+
+    let telescope: Telescope = this
+    while (telescope.next) {
+      const { name: next_name, t } = telescope.next
+      if (next_name !== name) {
+        telescope = telescope.fill(Cores.Dot.apply(target, next_name))
+      } else {
+        return Cores.Dot.apply(target, next_name)
       }
     }
 
@@ -161,7 +185,7 @@ export class Telescope {
     // - the bindings in telescope will not effect current ctx.
     // - just like checking `cons`.
 
-    const core_properties: Map<string, Core>  = new Map()
+    const core_properties: Map<string, Core> = new Map()
 
     for (const { name, t, value } of this.fulfilled) {
       const found = properties.get(name)
