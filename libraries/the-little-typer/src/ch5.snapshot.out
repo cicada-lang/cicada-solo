@@ -3,4 +3,6 @@
 @the List(String) nil
 @the List(Nat) nil
 @the List(List(String)) nil
+@the List(String) li("a", li("b", li("c", nil)))
+@the List(String) li("c", li("b", li("a", nil)))
 @the Nat 5
