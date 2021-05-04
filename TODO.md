@@ -1,12 +1,8 @@
-- use nanoid when expending arrow and pair type
-
+- [tlt] 5. Lists, Lists, and More Lists
 
 - [elaboration] implement `nat_rec` directly -- by elaboration
 - [elaboration] implement `nat_iter` directly -- by elaboration
 - [elaboration] implement `nat_which` directly -- by elaboration
-
-- [tlt] 5. Lists, Lists, and More Lists
-
 
 - [refactoring] `ap` avoid using if:
   - `target_t instanceof Cores.PiValue`
@@ -36,6 +32,10 @@
 
 - [pattern matching] algebric datatype -- `@datatype`
   - generate `ind`
+
+# markdown support
+
+- be able to embed cic code in markdown `.cic.md`
 
 # the little typer
 
