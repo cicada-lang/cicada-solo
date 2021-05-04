@@ -42,14 +42,11 @@ export class NatInd extends Exp {
       nat_ind_step_t(motive_t, motive_value)
     )
     const target_value = evaluate(ctx.to_env(), target_core)
-    const t = Cores.Ap.apply(motive_value, target_value)
-    const core = new Cores.NatInd(
-      target_core,
-      motive_core,
-      base_core,
-      step_core
-    )
-    return { t, core }
+
+    return {
+      t: Cores.Ap.apply(motive_value, target_value),
+      core: new Cores.NatInd(target_core, motive_core, base_core, step_core),
+    }
   }
 
   repr(): string {

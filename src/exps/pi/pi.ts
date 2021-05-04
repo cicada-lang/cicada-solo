@@ -26,9 +26,11 @@ export class Pi extends Exp {
       this.ret_t,
       new Cores.TypeValue()
     )
-    const t = new Cores.TypeValue()
-    const core = new Cores.Pi(this.name, arg_t_core, ret_t_core)
-    return { t, core }
+
+    return {
+      t: new Cores.TypeValue(),
+      core: new Cores.Pi(this.name, arg_t_core, ret_t_core),
+    }
   }
 
   repr(): string {

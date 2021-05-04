@@ -31,19 +31,20 @@ export class Dot extends Exp {
       // during `infer` of `Exps.Dot`, we have opportunity to get those value back,
       // and return them as core.
 
-      const t = inferred_target.t.dot_type(
-        evaluate(ctx.to_env(), inferred_target.core),
-        this.name
-      )
-
       const value = inferred_target.t.dot_value(
         evaluate(ctx.to_env(), inferred_target.core),
         this.name
       )
 
-      const core = readback(ctx, t, value)
+      const t = inferred_target.t.dot_type(
+        evaluate(ctx.to_env(), inferred_target.core),
+        this.name
+      )
 
-      return { t, core }
+      return {
+        t,
+        core: readback(ctx, t, value),
+      }
     }
 
     throw new Trace(

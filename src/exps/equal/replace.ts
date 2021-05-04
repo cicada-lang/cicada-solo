@@ -35,9 +35,11 @@ export class Replace extends Exp {
       this.base,
       Cores.Ap.apply(motive_value, equal.from)
     )
-    const t = Cores.Ap.apply(motive_value, equal.to)
-    const core = new Cores.Replace(inferred_target.core, motive_core, base_core)
-    return { t, core }
+
+    return {
+      t: Cores.Ap.apply(motive_value, equal.to),
+      core: new Cores.Replace(inferred_target.core, motive_core, base_core),
+    }
   }
 
   repr(): string {

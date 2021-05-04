@@ -11,9 +11,10 @@ export class Nat extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const t = new Cores.TypeValue()
-    const core = new Cores.Nat()
-    return { t, core }
+    return {
+      t: new Cores.TypeValue(),
+      core: new Cores.Nat(),
+    }
   }
 
   repr(): string {

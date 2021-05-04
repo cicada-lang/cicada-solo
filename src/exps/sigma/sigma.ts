@@ -26,9 +26,11 @@ export class Sigma extends Exp {
       this.cdr_t,
       new Cores.TypeValue()
     )
-    const core = new Cores.Sigma(this.name, car_t_core, cdr_t_core)
-    const t = new Cores.TypeValue()
-    return { t, core }
+
+    return {
+      t: new Cores.TypeValue(),
+      core: new Cores.Sigma(this.name, car_t_core, cdr_t_core),
+    }
   }
 
   repr(): string {

@@ -23,9 +23,11 @@ export class AbsurdInd extends Exp {
     //   but we do a simple check for the simple absurd.
     const target_core = check(ctx, this.target, new Cores.AbsurdValue())
     const motive_core = check(ctx, this.motive, new Cores.TypeValue())
-    const t = evaluate(ctx.to_env(), motive_core)
-    const core = new Cores.AbsurdInd(target_core, motive_core)
-    return { t, core }
+
+    return {
+      t: evaluate(ctx.to_env(), motive_core),
+      core: new Cores.AbsurdInd(target_core, motive_core),
+    }
   }
 
   repr(): string {

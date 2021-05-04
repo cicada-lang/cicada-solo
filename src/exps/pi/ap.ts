@@ -25,9 +25,11 @@ export class Ap extends Exp {
       const pi = inferred_target.t
       const arg_core = check(ctx, this.arg, pi.arg_t)
       const arg_value = evaluate(ctx.to_env(), arg_core)
-      const t = pi.ret_t_cl.apply(arg_value)
-      const core = new Cores.Ap(inferred_target.core, arg_core)
-      return { t, core }
+
+      return {
+        t: pi.ret_t_cl.apply(arg_value),
+        core: new Cores.Ap(inferred_target.core, arg_core),
+      }
     }
 
     const target_value = evaluate(ctx.to_env(), inferred_target.core)

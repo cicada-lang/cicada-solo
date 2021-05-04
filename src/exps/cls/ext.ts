@@ -48,12 +48,12 @@ export class Ext extends Exp {
       ctx = ctx.extend(name, t_value)
     }
 
-    const t = new Cores.TypeValue()
-    const core = new Cores.Ext(this.parent_name, core_entries, {
-      name: this.name,
-    })
-
-    return { t, core }
+    return {
+      t: new Cores.TypeValue(),
+      core: new Cores.Ext(this.parent_name, core_entries, {
+        name: this.name,
+      }),
+    }
   }
 
   repr(): string {

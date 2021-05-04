@@ -48,6 +48,7 @@ export class ListInd extends Exp {
       list_ind_step_t(motive_t, motive_value, elem_t)
     )
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
+
     return {
       t: Cores.Ap.apply(motive_value, target_value),
       core: new Cores.ListInd(

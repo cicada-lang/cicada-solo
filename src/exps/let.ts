@@ -26,8 +26,11 @@ export class Let extends Exp {
       ctx.extend(this.name, inferred.t, value),
       this.ret
     )
-    const core = new Cores.Let(this.name, inferred.core, inferred_ret.core)
-    return { t: inferred_ret.t, core }
+
+    return {
+      t: inferred_ret.t,
+      core: new Cores.Let(this.name, inferred.core, inferred_ret.core),
+    }
   }
 
   check(ctx: Ctx, t: Value): Core {

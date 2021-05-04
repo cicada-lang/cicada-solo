@@ -14,9 +14,10 @@ export class List extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const core = new Cores.List(check(ctx, this.elem_t, new Cores.TypeValue()))
-    const t = new Cores.TypeValue()
-    return { t, core }
+    return {
+      t: new Cores.TypeValue(),
+      core: new Cores.List(check(ctx, this.elem_t, new Cores.TypeValue())),
+    }
   }
 
   repr(): string {

@@ -34,9 +34,10 @@ export class Cls extends Exp {
       ctx = ctx.extend(name, t_value)
     }
 
-    const t = new Cores.TypeValue()
-    const core = new Cores.Cls(core_entries, { name: this.name })
-    return { t, core }
+    return {
+      t: new Cores.TypeValue(),
+      core: new Cores.Cls(core_entries, { name: this.name }),
+    }
   }
 
   repr(): string {

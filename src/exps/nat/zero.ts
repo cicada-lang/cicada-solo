@@ -11,9 +11,10 @@ export class Zero extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const t = new Cores.NatValue()
-    const core = new Cores.Zero()
-    return { t, core }
+    return {
+      t: new Cores.NatValue(),
+      core: new Cores.Zero(),
+    }
   }
 
   repr(): string {
