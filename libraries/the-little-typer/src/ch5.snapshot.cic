@@ -18,11 +18,8 @@
 @show @the List(String) li("a", li("b", li("c", nil)))
 @show @the List(String) @li [ "a", "b", "c"]
 
-@fn step_length(E: Type, head: E, tail: List(E), almost: Nat): Nat =
-  add1(almost)
-
-@fn length(E: Type, x: List(E)): Nat =
-  list_rec(x, 0, step_length(E))
+@fn step_length(E: Type, head: E, tail: List(E), almost: Nat): Nat = add1(almost)
+@fn length(E: Type, x: List(E)): Nat = list_rec(x, 0, step_length(E))
 
 @show length(String, expectations)
 
