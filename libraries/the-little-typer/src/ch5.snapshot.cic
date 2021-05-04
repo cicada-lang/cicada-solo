@@ -10,6 +10,11 @@
 
 @show expectations
 
+@show List(String)
+@show @the List(String) nil
+@show @the List(Nat) nil
+@show @the List(List(String)) nil
+
 @fn step_length(E: Type, head: E, tail: List(E), almost: Nat): Nat =
   add1(almost)
 

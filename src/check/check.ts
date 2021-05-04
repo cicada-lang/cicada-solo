@@ -21,7 +21,7 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
         throw new Trace(
           ut.aline(`
             |I infer the type to be ${u_exp.repr()}.
-            |But the given type is ${t_exp.repr()}.
+            |But the expected type is ${t_exp.repr()}.
             |`)
         )
       }

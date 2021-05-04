@@ -1,6 +1,6 @@
 
 I infer the type to be dom.Morphism(x)(z).
-But the given type is dom.Morphism(x)(y).
+But the expected type is dom.Morphism(x)(y).
 
 previous:
 - dom.compose(x)(y)(z)(f)(g)

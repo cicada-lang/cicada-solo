@@ -1,2 +1,6 @@
 @the List(String) li("slept", li("understood", li("tried-cleaning", li("eaten", li("cooked", nil)))))
+@the Type List(String)
+@the List(String) nil
+@the List(Nat) nil
+@the List(List(String)) nil
 @the Nat 5

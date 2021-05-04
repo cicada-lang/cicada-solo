@@ -1,6 +1,6 @@
 
 I infer the type to be String.
-But the given type is Type.
+But the expected type is Type.
 
 previous:
 - "oil"
