@@ -1,5 +1,3 @@
-- [tlt] 5. Lists, Lists, and More Lists
-
 - [elaboration] implement `nat_rec` directly -- by elaboration
 - [elaboration] implement `nat_iter` directly -- by elaboration
 - [elaboration] implement `nat_which` directly -- by elaboration
