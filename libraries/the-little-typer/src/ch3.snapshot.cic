@@ -7,12 +7,6 @@
   step: (prev: Nat, almost: motive(prev)) -> motive(add1(prev)),
 ) -> motive(target)
 
-@def nat_rec_t: Type = (
-  target: Nat,
-  T: Type,
-  base: T,
-  step: (prev: Nat, almost: T) -> T,
-) -> T
 
 @def nat_which_t: Type = (
   target: Nat,
@@ -28,14 +22,11 @@
   step: (almost: T) -> T,
 ) -> T
 
-@def nat_rec: nat_rec_t =
-  (target, T, base, step) => nat_ind(target, (_) => T, base, step)
-
 @def nat_which: nat_which_t =
-  (target, T, base, step) => nat_rec(target, T, base, (prev, _almost) => step(prev))
+  (target, T, base, step) => nat_rec(target, base, (prev, _almost) => step(prev))
 
 @def nat_iter: nat_iter_t =
-  (target, T, base, step) => nat_rec(target, T, base, (_prev, almost) => step(almost))
+  (target, T, base, step) => nat_rec(target, base, (_prev, almost) => step(almost))
 
 // NOTE We use `y` as target, this will make
 //   the definition of `pow` looks more natural.
@@ -64,7 +55,7 @@
 // - We use `nat_rec` and `add` to define `gauss`.
 
 @def gauss: (Nat) -> Nat =
-  (n) => nat_rec(n, Nat, 0, (prev, almost) => add(add1(prev), almost))
+  (n) => nat_rec(n, 0, (prev, almost) => add(add1(prev), almost))
 
 @show "gauss"
 @show gauss(0)
@@ -80,7 +71,7 @@
 @show gauss(10)
 
 @def factorial: (Nat) -> Nat =
-  (n) => nat_rec(n, Nat, 1, (prev, almost) => mul(add1(prev), almost))
+  (n) => nat_rec(n, 1, (prev, almost) => mul(add1(prev), almost))
 
 @show "factorial"
 @show factorial(0)

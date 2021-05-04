@@ -65,24 +65,23 @@ export class ListInd extends Exp {
 }
 
 function list_ind_step_t(motive_t: Value, motive: Value, elem_t: Value): Value {
-  const env = new Env().extend("motive", motive).extend("elem_t", elem_t)
-
-  const step_t = new Cores.Pi(
-    "head",
-    new Cores.Var("elem_t"),
+  return evaluate(
+    new Env().extend("motive", motive).extend("elem_t", elem_t),
     new Cores.Pi(
-      "tail",
-      new Cores.List(new Cores.Var("elem_t")),
+      "head",
+      new Cores.Var("elem_t"),
       new Cores.Pi(
-        "almost",
-        new Cores.Ap(new Cores.Var("motive"), new Cores.Var("tail")),
-        new Cores.Ap(
-          new Cores.Var("motive"),
-          new Cores.Li(new Cores.Var("head"), new Cores.Var("tail"))
+        "tail",
+        new Cores.List(new Cores.Var("elem_t")),
+        new Cores.Pi(
+          "almost",
+          new Cores.Ap(new Cores.Var("motive"), new Cores.Var("tail")),
+          new Cores.Ap(
+            new Cores.Var("motive"),
+            new Cores.Li(new Cores.Var("head"), new Cores.Var("tail"))
+          )
         )
       )
     )
   )
-
-  return evaluate(env, step_t)
 }

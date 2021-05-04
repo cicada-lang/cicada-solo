@@ -34,21 +34,23 @@ export class ListRec extends Exp {
       inferred_target.t
     )
     const base_t_core = readback(ctx, new Cores.TypeValue(), inferred_base.t)
-    const fresh_name = "target_list_" + nanoid().toString()
+    const fresh_name = "list_rec_target_list_" + nanoid().toString()
     const motive_core = new Cores.Pi(fresh_name, target_t_core, base_t_core)
     const step_core = check(
       ctx,
       this.step,
       list_rec_step_t(inferred_base.t, elem_t)
     )
-    const t = inferred_base.t
-    const core = new Cores.ListInd(
-      inferred_target.core,
-      motive_core,
-      inferred_base.core,
-      step_core
-    )
-    return { t, core }
+
+    return {
+      t: inferred_base.t,
+      core: new Cores.ListInd(
+        inferred_target.core,
+        motive_core,
+        inferred_base.core,
+        step_core
+      ),
+    }
   }
 
   repr(): string {
@@ -57,17 +59,16 @@ export class ListRec extends Exp {
 }
 
 function list_rec_step_t(base_t: Value, elem_t: Value): Value {
-  const env = new Env().extend("base_t", base_t).extend("elem_t", elem_t)
-
-  const step_t = new Cores.Pi(
-    "head",
-    new Cores.Var("elem_t"),
+  return evaluate(
+    new Env().extend("base_t", base_t).extend("elem_t", elem_t),
     new Cores.Pi(
-      "tail",
-      new Cores.List(new Cores.Var("elem_t")),
-      new Cores.Pi("almost", new Cores.Var("base_t"), new Cores.Var("base_t"))
+      "head",
+      new Cores.Var("elem_t"),
+      new Cores.Pi(
+        "tail",
+        new Cores.List(new Cores.Var("elem_t")),
+        new Cores.Pi("almost", new Cores.Var("base_t"), new Cores.Var("base_t"))
+      )
     )
   )
-
-  return evaluate(env, step_t)
 }

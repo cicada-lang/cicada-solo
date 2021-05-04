@@ -1,19 +1,11 @@
-@fn nat_rec(
-  target: Nat,
-  T: Type,
-  base: T,
-  step: (prev: Nat, almost: T) -> T,
-): T =
-  nat_ind(target, (_) => T, base, step)
-
 @fn add(x: Nat, y: Nat): Nat =
-  nat_rec(y, Nat, x, (prev, almost) => add1(almost))
+  nat_rec(y, x, (prev, almost) => add1(almost))
 
 @fn mul(x: Nat, y: Nat): Nat =
-  nat_rec(y, Nat, 0, (prev, almost) => add(almost, x))
+  nat_rec(y, 0, (prev, almost) => add(almost, x))
 
 @fn pow(x: Nat, y: Nat): Nat =
-  nat_rec(y, Nat, 1, (prev, almost) => mul(almost, x))
+  nat_rec(y, 1, (prev, almost) => mul(almost, x))
 
 @def eight =
   @let four = add(2, 2)

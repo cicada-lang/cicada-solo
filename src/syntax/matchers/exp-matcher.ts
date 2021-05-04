@@ -90,6 +90,12 @@ export function exp_matcher(tree: pt.Tree): Exp {
         exp_matcher(base),
         exp_matcher(step)
       ),
+    "exp:nat_rec": ({ target, base, step }) =>
+      new Exps.NatRec(
+        exp_matcher(target),
+        exp_matcher(base),
+        exp_matcher(step)
+      ),
     "exp:list": ({ elem_t }) => new Exps.List(exp_matcher(elem_t)),
     "exp:nil": () => new Exps.Nil(),
     "exp:nil_sugar": () => new Exps.Nil(),

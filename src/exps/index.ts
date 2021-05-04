@@ -19,6 +19,7 @@ export * from "./nat/nat"
 export * from "./nat/zero"
 export * from "./nat/add1"
 export * from "./nat/nat-ind"
+export * from "./nat/nat-rec"
 
 export * from "./list/list"
 export * from "./list/nil"

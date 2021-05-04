@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+process.on("unhandledRejection", (error) => {
+  console.error(error)
+  process.exit(1)
+})
+
 const { run, test, expect, snapshot, info } = require("@xieyuheng/test-runner")
 const changeCase = require("change-case")
 const path = require("path")

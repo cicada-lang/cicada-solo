@@ -6,6 +6,7 @@ const preserved = [
   "cdr",
   "Nat",
   "nat_ind",
+  "nat_rec",
   "zero",
   "add1",
   "List",
