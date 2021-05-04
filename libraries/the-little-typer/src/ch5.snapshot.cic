@@ -18,13 +18,21 @@
 @show @the List(String) li("a", li("b", li("c", nil)))
 @show @the List(String) @li [ "a", "b", "c"]
 
-@fn step_length(E: Type, head: E, tail: List(E), almost: Nat): Nat = add1(almost)
-@fn length(E: Type, x: List(E)): Nat = list_rec(x, 0, step_length(E))
+@fn length_step(E: Type, _head: E, _tail: List(E), almost: Nat): Nat = add1(almost)
+@fn length(E: Type, x: List(E)): Nat = list_rec(x, 0, length_step(E))
 
 @show length(String, expectations)
 
 @def append_t: Type =
   (E: Type, List(E), List(E)) -> List(E)
 
-@def step_append_t: Type =
-  (E: Type, head: E, tail: List(E), almost: List(E)) -> List(E)
+@fn append_step(E: Type, head: E, _tail: List(E), almost: List(E)): List(E) = li(head, almost)
+@fn append(E: Type, x y: List(E)): List(E) = list_rec(x, y, append_step(E))
+
+@show append(Nat, @li [1, 2, 3], @li [4, 5, 6])
+
+@fn li_end(E: Type, x: List(E), e: E): List(E) = list_rec(x, li(e, nil), append_step(E))
+
+@show li_end(Nat, @li [1, 2, 3], 4)
+
+// @fn concat(E: Type, x y: List(E)): List(E) = list_rec(x, y, append_step(E))
