@@ -97,7 +97,7 @@ export function exp_matcher(tree: pt.Tree): Exp {
       new Exps.Li(exp_matcher(head), exp_matcher(tail)),
     "exp:li_sugar": ({ exps }) => {
       let list: Exp = new Exps.Nil()
-      for (const exp of exps_matcher(exps)) {
+      for (const exp of exps_matcher(exps).reverse()) {
         list = new Exps.Li(exp, list)
       }
       return list
