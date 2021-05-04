@@ -22,7 +22,7 @@
   add1(almost)
 
 @fn length(E: Type, x: List(E)): Nat =
-  list_ind(x, (_) => Nat, 0, step_length(E))
+  list_rec(x, 0, step_length(E))
 
 @show length(String, expectations)
 
