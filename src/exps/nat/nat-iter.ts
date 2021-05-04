@@ -8,9 +8,10 @@ import { infer } from "../../infer"
 import { readback } from "../../readback"
 import { Value } from "../../value"
 import * as Cores from "../../cores"
+import * as Exps from "../../exps"
 import { nanoid } from "nanoid"
 
-export class NatRec extends Exp {
+export class NatIter extends Exp {
   target: Exp
   base: Exp
   step: Exp
@@ -26,9 +27,11 @@ export class NatRec extends Exp {
     const target_core = check(ctx, this.target, new Cores.NatValue())
     const inferred_base = infer(ctx, this.base)
     const base_t_core = readback(ctx, new Cores.TypeValue(), inferred_base.t)
-    const target_name = "nat_rec_target_nat_" + nanoid().toString()
+    const target_name = "nat_iter_target_nat_" + nanoid().toString()
     const motive_core = new Cores.Pi(target_name, new Cores.Nat(), base_t_core)
-    const step_core = check(ctx, this.step, nat_ind_step_t(inferred_base.t))
+    const prev_name = "nat_iter_prev_" + nanoid().toString()
+    const ind_step = new Exps.Fn(prev_name, this.step)
+    const step_core = check(ctx, ind_step, nat_ind_step_t(inferred_base.t))
 
     return {
       t: inferred_base.t,
@@ -42,7 +45,7 @@ export class NatRec extends Exp {
   }
 
   repr(): string {
-    return `nat_rec(${this.target.repr()}, ${this.base.repr()}, ${this.step.repr()})`
+    return `nat_iter(${this.target.repr()}, ${this.base.repr()}, ${this.step.repr()})`
   }
 }
 

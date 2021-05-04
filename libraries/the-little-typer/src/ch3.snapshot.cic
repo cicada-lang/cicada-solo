@@ -15,30 +15,20 @@
   step: (prev: Nat) -> T,
 ) -> T
 
-@def nat_iter_t: Type = (
-  target: Nat,
-  T: Type,
-  base: T,
-  step: (almost: T) -> T,
-) -> T
-
 @def nat_which: nat_which_t =
   (target, T, base, step) => nat_rec(target, base, (prev, _almost) => step(prev))
-
-@def nat_iter: nat_iter_t =
-  (target, T, base, step) => nat_rec(target, base, (_prev, almost) => step(almost))
 
 // NOTE We use `y` as target, this will make
 //   the definition of `pow` looks more natural.
 
 @def add: (Nat, Nat) -> Nat =
-  (x, y) => nat_iter(y, Nat, x, (almost) => add1(almost))
+  (x, y) => nat_iter(y, x, (almost) => add1(almost))
 
 @def mul: (Nat, Nat) -> Nat =
-  (x, y) => nat_iter(y, Nat, 0, (almost) => add(almost, x))
+  (x, y) => nat_iter(y, 0, (almost) => add(almost, x))
 
 @def pow: (Nat, Nat) -> Nat =
-  (x, y) => nat_iter(y, Nat, 1, (almost) => mul(almost, x))
+  (x, y) => nat_iter(y, 1, (almost) => mul(almost, x))
 
 @def eight =
   @let four = add(2, 2)

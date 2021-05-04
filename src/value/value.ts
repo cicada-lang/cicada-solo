@@ -26,7 +26,7 @@ export function match_value<A>(
       |Value mismatch.
       |
       |I am expecting javascript classes: ${branches
-        .map(([theClass]) => theClass)
+        .map(([theClass]) => theClass.name)
         .join(", ")},
       |but in reality, the target constructor name is ${
         target.constructor.name

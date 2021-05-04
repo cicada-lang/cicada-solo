@@ -22,8 +22,6 @@ export class NatInd extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    // NOTE We should always infer target,
-    //   but we do a simple check for the simple nat.
     const target_core = check(ctx, this.target, new Cores.NatValue())
     const motive_t = evaluate(
       new Env(),

@@ -34,8 +34,8 @@ export class ListRec extends Exp {
       inferred_target.t
     )
     const base_t_core = readback(ctx, new Cores.TypeValue(), inferred_base.t)
-    const fresh_name = "list_rec_target_list_" + nanoid().toString()
-    const motive_core = new Cores.Pi(fresh_name, target_t_core, base_t_core)
+    const target_name = "list_rec_target_list_" + nanoid().toString()
+    const motive_core = new Cores.Pi(target_name, target_t_core, base_t_core)
     const step_core = check(
       ctx,
       this.step,

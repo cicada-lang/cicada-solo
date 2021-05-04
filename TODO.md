@@ -1,4 +1,3 @@
-- [elaboration] implement `nat_iter` directly -- by elaboration
 - [elaboration] implement `nat_which` directly -- by elaboration
 
 - [refactoring] `ap` avoid using if:
