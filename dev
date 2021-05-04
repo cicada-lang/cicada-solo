@@ -15,6 +15,7 @@ commands.test_all = async () => {
   await commands.test_lib()
   await commands.test_snapshot()
   await commands.test_cicada()
+  await commands.test_examples()
   await commands.test_libraries()
 }
 
@@ -49,6 +50,14 @@ commands.test_cicada = async () => {
     "./bin/cic.js run --no-module $file",
     { file: "tests/**/**.error.cic" },
     snapshot.err(({ file }) => file.replace(/\.cic$/, ".out"))
+  )
+}
+
+commands.test_examples = async () => {
+  await test(
+    "./bin/cic.js run --no-module $file",
+    { file: "examples/**/**.cic" },
+    expect.ok
   )
 }
 
