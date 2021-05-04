@@ -7,17 +7,6 @@
   step: (prev: Nat, almost: motive(prev)) -> motive(add1(prev)),
 ) -> motive(target)
 
-
-@def nat_which_t: Type = (
-  target: Nat,
-  T: Type,
-  base: T,
-  step: (prev: Nat) -> T,
-) -> T
-
-@def nat_which: nat_which_t =
-  (target, T, base, step) => nat_rec(target, base, (prev, _almost) => step(prev))
-
 // NOTE We use `y` as target, this will make
 //   the definition of `pow` looks more natural.
 

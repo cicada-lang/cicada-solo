@@ -1,5 +1,3 @@
-- [elaboration] implement `nat_which` directly -- by elaboration
-
 - [refactoring] `ap` avoid using if:
   - `target_t instanceof Cores.PiValue`
   - `target instanceof Cores.ClsValue`

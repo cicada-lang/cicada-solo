@@ -8,7 +8,7 @@ const preserved = [
   "nat_ind",
   "nat_rec",
   "nat_iter",
-  // "nat_which",
+  "nat_which",
   "zero",
   "add1",
   "List",
