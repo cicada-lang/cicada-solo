@@ -10,6 +10,7 @@ import { Value } from "../../value"
 import * as Cores from "../../cores"
 import * as Exps from "../../exps"
 import { nanoid } from "nanoid"
+import { nat_ind_step_t } from "./nat-rec"
 
 export class NatWhich extends Exp {
   target: Exp
@@ -48,15 +49,4 @@ export class NatWhich extends Exp {
   repr(): string {
     return `nat_iter(${this.target.repr()}, ${this.base.repr()}, ${this.step.repr()})`
   }
-}
-
-function nat_ind_step_t(base_t: Value): Value {
-  return evaluate(
-    new Env().extend("base_t", base_t),
-    new Cores.Pi(
-      "prev",
-      new Cores.Nat(),
-      new Cores.Pi("almost", new Cores.Var("base_t"), new Cores.Var("base_t"))
-    )
-  )
 }

@@ -53,20 +53,19 @@ export class NatInd extends Exp {
 }
 
 function nat_ind_step_t(motive_t: Value, motive: Value): Value {
-  const env = new Env().extend("motive", motive)
-
-  const step_t = new Cores.Pi(
-    "prev",
-    new Cores.Nat(),
+  return evaluate(
+    new Env().extend("motive", motive),
     new Cores.Pi(
-      "almost",
-      new Cores.Ap(new Cores.Var("motive"), new Cores.Var("prev")),
-      new Cores.Ap(
-        new Cores.Var("motive"),
-        new Cores.Add1(new Cores.Var("prev"))
+      "prev",
+      new Cores.Nat(),
+      new Cores.Pi(
+        "almost",
+        new Cores.Ap(new Cores.Var("motive"), new Cores.Var("prev")),
+        new Cores.Ap(
+          new Cores.Var("motive"),
+          new Cores.Add1(new Cores.Var("prev"))
+        )
       )
     )
   )
-
-  return evaluate(env, step_t)
 }
