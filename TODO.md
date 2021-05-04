@@ -1,16 +1,18 @@
 - use nanoid when expending arrow and pair type
 
-- [refactoring] `ap` avoid using if:
-  - `target_t instanceof Cores.PiValue`
-  - `target instanceof Cores.ClsValue`
-
-- [refactoring] big methods in `telescope`
 
 - [elaboration] implement `nat_rec` directly -- by elaboration
 - [elaboration] implement `nat_iter` directly -- by elaboration
 - [elaboration] implement `nat_which` directly -- by elaboration
 
 - [tlt] 5. Lists, Lists, and More Lists
+
+
+- [refactoring] `ap` avoid using if:
+  - `target_t instanceof Cores.PiValue`
+  - `target instanceof Cores.ClsValue`
+
+- [refactoring] big methods in `telescope`
 
 # pie
 
@@ -22,12 +24,8 @@
   (how to use introduction rule to generate elimination rule and all other rules?)
   - adjoint functors -- category theory
 
-- how to explain the formation rule, introduction rule and elimination rule as little style laws?
-- how to explain the computation rule, eta rule and sameness rules as little book style commandments?
-
-- what is elaboration?
-- about implementing dependent type system (without recursion),
-  are there any point I am still missing?
+- how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
+- how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
 
 # cicada
 
