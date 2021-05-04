@@ -35,4 +35,11 @@
 
 @show li_end(Nat, @li [1, 2, 3], 4)
 
-// @fn concat(E: Type, x y: List(E)): List(E) = list_rec(x, y, append_step(E))
+@fn reverse_step(E: Type, head: E, _tail: List(E), almost: List(E)): List(E) = li_end(E, almost, head)
+@fn reverse(E: Type, x: List(E)): List(E) = list_rec(x, @the List(E) nil, reverse_step(E))
+
+@show reverse(Nat, @li [1, 2, 3])
+
+@fn append_by_reverse(E: Type, x y: List(E)): List(E) = list_rec(reverse(E, y), x, reverse_step(E))
+
+@show append_by_reverse(Nat, @li [1, 2, 3], @li [4, 5, 6])

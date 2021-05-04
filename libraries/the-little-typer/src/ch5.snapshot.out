@@ -8,3 +8,5 @@
 @the Nat 5
 @the List(Nat) li(1, li(2, li(3, li(4, li(5, li(6, nil))))))
 @the List(Nat) li(1, li(2, li(3, li(4, nil))))
+@the List(Nat) li(3, li(2, li(1, nil)))
+@the List(Nat) li(1, li(2, li(3, li(4, li(5, li(6, nil))))))
