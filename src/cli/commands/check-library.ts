@@ -38,7 +38,7 @@ async function check(
   for (const path of Object.keys(await library.fetch_files())) {
     try {
       const mod = await library.load(path, opts)
-      await mod_snapshot(library, path, mod)
+      await mod_snapshot(library, path, mod, opts)
 
       console.log(
         chalk.bold(`(check)`),
@@ -93,7 +93,7 @@ async function watch(
 
     try {
       const mod = await library.reload(path, opts)
-      await mod_snapshot(library, path, mod)
+      await mod_snapshot(library, path, mod, opts)
 
       console.log(
         chalk.bold(`(${event})`),
@@ -129,7 +129,8 @@ async function watch(
 async function mod_snapshot(
   library: LocalLibrary,
   path: string,
-  mod: Module
+  mod: Module,
+  opts: { verbose: boolean }
 ): Promise<void> {
   if (path.endsWith(".snapshot.cic")) {
     const file = Path.resolve(
@@ -137,6 +138,11 @@ async function mod_snapshot(
       library.config.src,
       path.replace(/snapshot\.cic/, "snapshot.out")
     )
+
     await fs.promises.writeFile(file, mod.output)
+
+    if (opts.verbose) {
+      console.log(mod.output)
+    }
   }
 }
