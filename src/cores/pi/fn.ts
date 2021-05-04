@@ -1,9 +1,7 @@
 import { Core, AlphaCtx } from "../../core"
-import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
-import { infer } from "../../infer"
 import * as Cores from "../../cores"
 
 export class Fn extends Core {

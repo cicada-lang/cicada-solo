@@ -1,5 +1,4 @@
 import { Core, AlphaCtx } from "../../core"
-import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { Value, match_value } from "../../value"

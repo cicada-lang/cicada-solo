@@ -1,6 +1,5 @@
 import { Core, AlphaCtx } from "../../core"
 import { Value } from "../../value"
-import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Telescope } from "../../telescope"
 import { evaluate } from "../../evaluate"

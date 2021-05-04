@@ -1,9 +1,7 @@
 import { Core, AlphaCtx } from "../core"
 import { Value } from "../value"
 import { Env } from "../env"
-import { Ctx } from "../ctx"
 import { evaluate } from "../evaluate"
-import { infer } from "../infer"
 
 export class Let extends Core {
   name: string
