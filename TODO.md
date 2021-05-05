@@ -1,4 +1,3 @@
-- vector/vec
 - vector/vec -- syntax -- `vec(head, tail)`
 - vector/vec -- syntax sugar -- `@vec [...]`
 - vector/vector-ind
