@@ -1,5 +1,12 @@
+- vector/vector-head
+- vector/vector-head -- syntax -- `vector_head()`
+
+- vector/vector-tail
+- vector/vector-tail -- syntax -- `vector_tail()`
+
 - vector/vector-ind
 - vector/vector-ind -- syntax -- `vector_ind()`
+
 - vector/vector-rec
 - vector/vector-rec -- syntax -- `vector_rec()`
 
