@@ -2,3 +2,6 @@
 @the Type Vector(String, 1)
 @the Type Vector(List(String), 0)
 @the Type Vector(List(String), 1)
+@the Vector(String, 0) vecnil
+@the Vector(List(String), 0) vecnil
+@the Vector(List(List(String)), 0) vecnil

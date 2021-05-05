@@ -1,5 +1,3 @@
-- vector/vecnil -- syntax -- `vecnil`
-
 - vector/vec
 
 - vector/vec -- syntax -- `vec(head, tail)`

@@ -1,0 +1,3 @@
+@show @the Vector(String, 0) vecnil
+@show @the Vector(List(String), 0) vecnil
+@show @the Vector(List(List(String)), 0) vecnil

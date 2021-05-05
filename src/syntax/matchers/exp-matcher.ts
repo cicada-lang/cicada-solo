@@ -98,7 +98,6 @@ export function exp_matcher(tree: pt.Tree): Exp {
       ),
     "exp:list": ({ elem_t }) => new Exps.List(exp_matcher(elem_t)),
     "exp:nil": () => new Exps.Nil(),
-    "exp:nil_sugar": () => new Exps.Nil(),
     "exp:li": ({ head, tail }) =>
       new Exps.Li(exp_matcher(head), exp_matcher(tail)),
     "exp:li_sugar": ({ exps }) => {
@@ -123,6 +122,7 @@ export function exp_matcher(tree: pt.Tree): Exp {
       ),
     "exp:vector": ({ elem_t, length }) =>
       new Exps.Vector(exp_matcher(elem_t), exp_matcher(length)),
+    "exp:vecnil": () => new Exps.Vecnil(),
     "exp:equal": ({ t, from, to }) =>
       new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
     "exp:same": () => new Exps.Same(),

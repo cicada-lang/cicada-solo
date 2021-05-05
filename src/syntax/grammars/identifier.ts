@@ -15,7 +15,7 @@ const preserved = [
   "list_ind",
   "list_rec",
   "Vector",
-  // "vecnil",
+  "vecnil",
   // "vec",
   // "vector_ind",
   // "vector_rec",

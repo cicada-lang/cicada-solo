@@ -23,10 +23,10 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
 
   const exp = value.readback(ctx, t)
 
-  if (exp !== undefined) {
-    return exp
-  }
+  if (exp) return exp
 
+  console.log(value)
+  console.log(t)
   throw new Trace(
     ut.aline(`
       |I can not readback value: ${ut.inspect(value)},
