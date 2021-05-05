@@ -1,12 +1,7 @@
-- [refactoring] `ap` avoid using if:
-  - `target_t instanceof Cores.PiValue`
-  - `target instanceof Cores.ClsValue`
-
-- [refactoring] big methods in `telescope`
+- [tlt] 6. Precisely How Many?
 
 - [pie] `Vector` --  `Vector` `vec()` `vecnil`
 
-- [tlt] 6. Precisely How Many?
 - [tlt] 7. It All Depends On the Motive
 - [tlt] Recess: One Piece at a Time
 - [tlt] 8. Pick a Number, Any Number
@@ -20,6 +15,14 @@
 - [tlt] 16. If It's All the Same to You
 - [tlt] A. The Way Forward
 - [tlt] B. Rules Are Made to Be Spoken
+
+# references
+
+- [refactoring] `ap` avoid using if:
+  - `target_t instanceof Cores.PiValue`
+  - `target instanceof Cores.ClsValue`
+
+- [refactoring] big methods in `telescope`
 
 # questions?
 
