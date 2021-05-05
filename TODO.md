@@ -1,6 +1,11 @@
-- [tlt] 6. Precisely How Many?
-
 - [pie] `Vector` --  `Vector` `vec()` `vecnil`
+
+- vector/vecnil
+- vector/vec
+- vector/vector-ind
+- vector/vector-rec
+
+- [tlt] 6. Precisely How Many?
 
 - [tlt] 7. It All Depends On the Motive
 - [tlt] Recess: One Piece at a Time
@@ -15,6 +20,10 @@
 - [tlt] 16. If It's All the Same to You
 - [tlt] A. The Way Forward
 - [tlt] B. Rules Are Made to Be Spoken
+
+# syntax
+
+- [syntax] [maybe] preserved keywords instead of using `@`
 
 # references
 
