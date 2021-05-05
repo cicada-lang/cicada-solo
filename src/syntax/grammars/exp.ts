@@ -115,6 +115,8 @@ export const exp = {
       '")"',
     ],
     "exp:vecnil": ['"vecnil"'],
+    "exp:vec": ['"vec"', '"("', { head: "exp" }, '","', { tail: "exp" }, '")"'],
+    // "exp:vec_sugar": ['"@"', '"li"', '"["', { exps: "exps" }, '"]"'],
     "exp:equal": [
       '"Equal"',
       '"("',

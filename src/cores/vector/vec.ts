@@ -15,7 +15,10 @@ export class Vec extends Core {
   }
 
   evaluate(env: Env): Value {
-    return new Cores.VecValue(evaluate(env, this.head), evaluate(env, this.tail))
+    return new Cores.VecValue(
+      evaluate(env, this.head),
+      evaluate(env, this.tail)
+    )
   }
 
   repr(): string {

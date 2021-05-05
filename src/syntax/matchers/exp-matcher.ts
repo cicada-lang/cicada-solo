@@ -123,6 +123,8 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:vector": ({ elem_t, length }) =>
       new Exps.Vector(exp_matcher(elem_t), exp_matcher(length)),
     "exp:vecnil": () => new Exps.Vecnil(),
+    "exp:vec": ({ head, tail }) =>
+      new Exps.Vec(exp_matcher(head), exp_matcher(tail)),
     "exp:equal": ({ t, from, to }) =>
       new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
     "exp:same": () => new Exps.Same(),

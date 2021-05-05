@@ -8,3 +8,6 @@
 @show @the Vector(String, 0) vecnil
 @show @the Vector(List(String), 0) vecnil
 @show @the Vector(List(List(String)), 0) vecnil
+
+@show @the Vector(String, 1) vec("a", vecnil)
+@show @the Vector(String, 2) vec("a", vec("b", vecnil))
