@@ -111,7 +111,7 @@ export const exp = {
       '"Vector"',
       '"("',
       { elem_t: "exp" },
-      '","',      
+      '","',
       { length: "exp" },
       '")"',
     ],
