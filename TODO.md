@@ -1,5 +1,3 @@
-- vector/vecnil
-
 - vector/vecnil -- syntax -- `vecnil`
 
 - vector/vec
