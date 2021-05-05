@@ -125,6 +125,13 @@ export function exp_matcher(tree: pt.Tree): Exp {
     "exp:vecnil": () => new Exps.Vecnil(),
     "exp:vec": ({ head, tail }) =>
       new Exps.Vec(exp_matcher(head), exp_matcher(tail)),
+    "exp:vec_sugar": ({ exps }) => {
+      let vector: Exp = new Exps.Vecnil()
+      for (const exp of exps_matcher(exps).reverse()) {
+        vector = new Exps.Vec(exp, vector)
+      }
+      return vector
+    },
     "exp:equal": ({ t, from, to }) =>
       new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
     "exp:same": () => new Exps.Same(),

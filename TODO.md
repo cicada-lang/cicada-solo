@@ -1,4 +1,3 @@
-- vector/vec -- syntax sugar -- `@vec [...]`
 - vector/vector-ind
 - vector/vector-ind -- syntax -- `vector_ind()`
 - vector/vector-rec

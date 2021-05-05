@@ -1,2 +1,5 @@
 @show @the Vector(String, 1) vec("a", vecnil)
 @show @the Vector(String, 2) vec("a", vec("b", vecnil))
+
+@show @the Vector(String, 1) @vec ["a"]
+@show @the Vector(String, 2) @vec ["a", "b"]
