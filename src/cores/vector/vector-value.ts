@@ -17,7 +17,7 @@ export class VectorValue {
     if (t instanceof Cores.TypeValue) {
       return new Cores.Vector(
         readback(ctx, new Cores.TypeValue(), this.elem_t),
-        readback(ctx, new Cores.TypeValue(), this.length)
+        readback(ctx, new Cores.NatValue(), this.length)
       )
     }
   }

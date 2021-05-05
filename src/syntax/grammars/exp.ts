@@ -107,6 +107,14 @@ export const exp = {
       { step: "exp" },
       '")"',
     ],
+    "exp:vector": [
+      '"Vector"',
+      '"("',
+      { elem_t: "exp" },
+      '","',      
+      { length: "exp" },
+      '")"',
+    ],
     "exp:equal": [
       '"Equal"',
       '"("',

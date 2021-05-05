@@ -1,9 +1,20 @@
-- [pie] `Vector` --  `Vector` `vec()` `vecnil`
-
 - vector/vecnil
+
+- vector/vecnil -- syntax -- `vecnil`
+
 - vector/vec
+
+- vector/vec -- syntax -- `vec(head, tail)`
+
+- vector/vec -- syntax sugar -- `@vec [...]`
+
 - vector/vector-ind
+
+- vector/vector-ind -- syntax -- `vector_ind()`
+
 - vector/vector-rec
+
+- vector/vector-rec -- syntax -- `vector_rec()`
 
 - [tlt] 6. Precisely How Many?
 
@@ -20,10 +31,6 @@
 - [tlt] 16. If It's All the Same to You
 - [tlt] A. The Way Forward
 - [tlt] B. Rules Are Made to Be Spoken
-
-# syntax
-
-- [syntax] [maybe] preserved keywords instead of using `@`
 
 # references
 

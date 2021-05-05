@@ -1,5 +1,3 @@
-// 6. Precisely How Many?
-
 @show @the Type Vector(String, 0)
 @show @the Type Vector(String, 1)
 @show @the Type Vector(List(String), 0)
