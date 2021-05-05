@@ -11,13 +11,13 @@
 //   the definition of `pow` looks more natural.
 
 @def add: (Nat, Nat) -> Nat =
-  (x, y) => nat_iter(y, x, (almost) => add1(almost))
+  (x, y) => nat_rec(y, x, (_prev, almost) => add1(almost))
 
 @def mul: (Nat, Nat) -> Nat =
-  (x, y) => nat_iter(y, 0, (almost) => add(almost, x))
+  (x, y) => nat_rec(y, 0, (_prev, almost) => add(almost, x))
 
 @def pow: (Nat, Nat) -> Nat =
-  (x, y) => nat_iter(y, 1, (almost) => mul(almost, x))
+  (x, y) => nat_rec(y, 1, (_prev, almost) => mul(almost, x))
 
 @def eight =
   @let four = add(2, 2)
@@ -26,12 +26,6 @@
 @show add(4, 3)
 @show mul(4, 3)
 @show pow(4, 3)
-
-// NOTE We want to define `gauss` (without recursion).
-// - We try `nat_which`, but it does not work;
-// - We have a rest and think to define `gauss` we also need `add`;
-// - We use `nat_iter` to define `add`;
-// - We use `nat_rec` and `add` to define `gauss`.
 
 @def gauss: (Nat) -> Nat =
   (n) => nat_rec(n, 0, (prev, almost) => add(add1(prev), almost))

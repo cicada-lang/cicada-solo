@@ -62,7 +62,7 @@ same
 same
 
 @def naught_or_more: (Nat) -> String =
-  (n) => nat_which(n, "naught", "more")
+  (n) => nat_rec(n, "naught", (_prev, _almost) => "more")
 
 @show
 @the Equal(
