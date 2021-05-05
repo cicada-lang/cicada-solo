@@ -4,11 +4,7 @@
 
 - [refactoring] big methods in `telescope`
 
-# pie
-
 - [pie] `Vector` --  `Vector` `vec()` `vecnil`
-
-# the little typer
 
 - [tlt] 6. Precisely How Many?
 - [tlt] 7. It All Depends On the Motive
