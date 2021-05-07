@@ -1,0 +1,4 @@
+@the Vector(String, 2) vec("b", vec("c", vecnil))
+@the Vector(String, 1) vec("c", vecnil)
+@the Vector(String, 0) vecnil
+

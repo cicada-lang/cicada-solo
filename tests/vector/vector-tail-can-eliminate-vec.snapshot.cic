@@ -1,0 +1,5 @@
+@def abc: Vector(String, 3) = @vec ["a", "b", "c"]
+
+@show vector_tail(abc)
+@show vector_tail(vector_tail(abc))
+@show vector_tail(vector_tail(vector_tail(abc)))

@@ -18,7 +18,7 @@ const preserved = [
   "vecnil",
   "vec",
   "vector_head",
-  // "vector_tail",
+  "vector_tail",
   // "vector_ind",
   // "vector_rec",
   "Equal",
