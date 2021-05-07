@@ -7,3 +7,4 @@
 @the Vector(List(List(String)), 0) vecnil
 @the Vector(String, 1) vec("a", vecnil)
 @the Vector(String, 2) vec("a", vec("b", vecnil))
+@the String "a"

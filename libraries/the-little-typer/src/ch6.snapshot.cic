@@ -11,3 +11,9 @@
 
 @show @the Vector(String, 1) vec("a", vecnil)
 @show @the Vector(String, 2) vec("a", vec("b", vecnil))
+
+@fn first(E: Type, prev: Nat, vector: Vector(E, add1(prev))): E = vector_head(vector)
+
+@def abc: Vector(String, 3) = @vec ["a", "b", "c"]
+
+@show first(String, 2, abc)
