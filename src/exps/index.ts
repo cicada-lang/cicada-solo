@@ -30,6 +30,8 @@ export * from "./list/list-rec"
 export * from "./vector/vector"
 export * from "./vector/vecnil"
 export * from "./vector/vec"
+export * from "./vector/vector-head"
+// export * from "./vector/vector-tail"
 // export * from "./vector/vector-ind"
 // export * from "./vector/vector-rec"
 

@@ -1,4 +1,3 @@
-- vector/vector-head
 - vector/vector-head -- syntax -- `vector_head()`
 
 - vector/vector-tail
