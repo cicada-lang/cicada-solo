@@ -1,6 +1,5 @@
-I expect the value to be a Type
-But I see unexpected value class: TypeValue,
-The asserted class is: SigmaValue.
+I see unexpected value class: TypeValue,
+but the asserted class is: SigmaValue.
 
 previous:
 - cons(String, String)

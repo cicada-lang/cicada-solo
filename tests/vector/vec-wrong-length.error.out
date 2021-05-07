@@ -1,6 +1,5 @@
-I expect the value to be a Type
-But I see unexpected value class: ZeroValue,
-The asserted class is: Add1Value.
+I see unexpected value class: ZeroValue,
+but the asserted class is: Add1Value.
 
 previous:
 - vec("c", vecnil)
