@@ -20,7 +20,6 @@ const preserved = [
   "vector_head",
   "vector_tail",
   // "vector_ind",
-  // "vector_rec",
   "Equal",
   "same",
   "replace",

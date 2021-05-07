@@ -1,9 +1,6 @@
 - vector/vector-ind
 - vector/vector-ind -- syntax -- `vector_ind()`
 
-- vector/vector-rec
-- vector/vector-rec -- syntax -- `vector_rec()`
-
 - [tlt] 6. Precisely How Many?
 
 - [tlt] 7. It All Depends On the Motive
