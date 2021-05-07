@@ -17,3 +17,7 @@
 @def abc: Vector(String, 3) = @vec ["a", "b", "c"]
 
 @show first(String, 2, abc)
+
+@fn rest(E: Type, prev: Nat, vector: Vector(E, add1(prev))): Vector(E, prev) = vector_tail(vector)
+
+@show rest(String, 2, abc)
