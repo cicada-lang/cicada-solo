@@ -1,5 +1,3 @@
-- vector/vector-head -- syntax -- `vector_head()`
-
 - vector/vector-tail
 - vector/vector-tail -- syntax -- `vector_tail()`
 

@@ -1,0 +1,3 @@
+@def abc: Vector(String, 3) = @vec ["a", "b", "c"]
+
+@show vector_head(abc)

@@ -1,0 +1,8 @@
+I expect the value to be a Type
+But I see unexpected value class: ZeroValue,
+The asserted class is: Add1Value.
+
+previous:
+- vector_head(@the Vector(String, 0) vecnil)
+
+

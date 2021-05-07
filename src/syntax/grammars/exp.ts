@@ -117,6 +117,7 @@ export const exp = {
     "exp:vecnil": ['"vecnil"'],
     "exp:vec": ['"vec"', '"("', { head: "exp" }, '","', { tail: "exp" }, '")"'],
     "exp:vec_sugar": ['"@"', '"vec"', '"["', { exps: "exps" }, '"]"'],
+    "exp:vector_head": ['"vector_head"', '"("', { target: "exp" }, '")"'],
     "exp:equal": [
       '"Equal"',
       '"("',

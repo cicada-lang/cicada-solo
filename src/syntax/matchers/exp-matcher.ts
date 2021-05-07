@@ -132,6 +132,7 @@ export function exp_matcher(tree: pt.Tree): Exp {
       }
       return vector
     },
+    "exp:vector_head": ({ target }) => new Exps.VectorHead(exp_matcher(target)),
     "exp:equal": ({ t, from, to }) =>
       new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
     "exp:same": () => new Exps.Same(),

@@ -25,8 +25,6 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
 
   if (exp) return exp
 
-  console.log(value)
-  console.log(t)
   throw new Trace(
     ut.aline(`
       |I can not readback value: ${ut.inspect(value)},
