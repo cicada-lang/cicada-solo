@@ -15,10 +15,8 @@
 
 @show peas(6)
 
-@fn last_mot(E: Type, n: Nat): Type =
-  (Vector(E, add1(n))) -> E
-@fn last_base(E: Type): last_mot(E, zero) =
-  (vector) => vector_head(vector)
+@fn last_mot(E: Type, n: Nat): Type = (Vector(E, add1(n))) -> E
+@fn last_base(E: Type): last_mot(E, zero) = (vector) => vector_head(vector)
 @fn last_step(E: Type, prev: Nat, almost: last_mot(E, prev)): last_mot(E, add1(prev)) =
   (vector) => almost(vector_tail(vector))
 @fn last(E: Type, n: Nat): last_mot(E, n) =
