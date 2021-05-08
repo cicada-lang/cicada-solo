@@ -9,27 +9,29 @@
 
 @def my_nat_ind: nat_ind_t = (target, motive, base, step) => nat_ind(target, motive, base, step)
 
-@fn peas_mot(n: Nat): Type = Vector(String, n)
-@fn peas_step(prev: Nat, almost: peas_mot(prev)): peas_mot(add1(prev)) = vec("pea", almost)
-@fn peas(n: Nat): Vector(String, n) = nat_ind(n, peas_mot, vecnil, peas_step)
+@fn peas_motive(n: Nat): Type = Vector(String, n)
+@fn peas_step(prev: Nat, almost: peas_motive(prev)): peas_motive(add1(prev)) = vec("pea", almost)
+@fn peas(n: Nat): Vector(String, n) = nat_ind(n, peas_motive, vecnil, peas_step)
 
 @show peas(6)
 
-@fn last_mot(E: Type, n: Nat): Type = (Vector(E, add1(n))) -> E
+@fn last_motive(E: Type, n: Nat): Type =
+  (Vector(E, add1(n))) -> E
 
-@fn last_base(E: Type): last_mot(E, zero) = (vector) => vector_head(vector)
+@fn last_base(E: Type): last_motive(E, zero) =
+  (vector) => vector_head(vector)
 
 @fn last_step(
   E: Type,
   prev: Nat,
-  almost: last_mot(E, prev),
-): last_mot(E, add1(prev)) =
+  almost: last_motive(E, prev),
+): last_motive(E, add1(prev)) =
   (vector) => almost(vector_tail(vector))
 
-@fn last(E: Type, n: Nat): last_mot(E, n) =
+@fn last(E: Type, n: Nat): last_motive(E, n) =
   nat_ind(
     n,
-    last_mot(E),
+    last_motive(E),
     last_base(E),
     last_step(E))
 
