@@ -1,5 +1,14 @@
 // 7. It All Depends On the Motive
 
+@def nat_ind_t = (
+  target: Nat,
+  motive: (Nat) -> Type,
+  base: motive(0),
+  step: (prev: Nat, almost: motive(prev)) -> motive(add1(prev)),
+) -> motive(target)
+
+@def my_nat_ind: nat_ind_t = (target, motive, base, step) => nat_ind(target, motive, base, step)
+
 @fn peas_mot(n: Nat): Type = Vector(String, n)
 @fn peas(n: Nat): Vector(String, n) =
   nat_ind(n, peas_mot, vecnil, (prev, almost) => vec("pea", almost))
