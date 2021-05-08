@@ -9,12 +9,15 @@
 
 @def my_nat_ind: nat_ind_t = (target, motive, base, step) => nat_ind(target, motive, base, step)
 
+// NOTE peas -- generate given number of peas
+
 @fn peas_motive(n: Nat): Type = Vector(String, n)
 @fn peas_step(prev: Nat, almost: peas_motive(prev)): peas_motive(add1(prev)) = vec("pea", almost)
 @fn peas(n: Nat): Vector(String, n) = nat_ind(n, peas_motive, vecnil, peas_step)
 
 @show peas(6)
 
+// NOTE last -- get the last element of a vector
 
 @fn last_motive(E: Type, n: Nat): Type =
   (Vector(E, add1(n))) -> E
@@ -38,6 +41,7 @@
 
 @show last(String, 3, @vec ["1", "2", "3", "LAST"])
 
+// NOTE drop_last -- drop the last element of a vector
 
 @fn drop_last_motive(E: Type, n: Nat): Type =
   (Vector(E, add1(n))) -> Vector(E, n)
