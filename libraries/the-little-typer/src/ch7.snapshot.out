@@ -1,2 +1,3 @@
 @the Vector(String, 6) vec("pea", vec("pea", vec("pea", vec("pea", vec("pea", vec("pea", vecnil))))))
 @the String "LAST"
+@the Vector(String, 3) vec("1", vec("2", vec("3", vecnil)))

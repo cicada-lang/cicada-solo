@@ -15,6 +15,7 @@
 
 @show peas(6)
 
+
 @fn last_motive(E: Type, n: Nat): Type =
   (Vector(E, add1(n))) -> E
 
@@ -36,3 +37,26 @@
     last_step(E))
 
 @show last(String, 3, @vec ["1", "2", "3", "LAST"])
+
+
+@fn drop_last_motive(E: Type, n: Nat): Type =
+  (Vector(E, add1(n))) -> Vector(E, n)
+
+@fn drop_last_base(E: Type): drop_last_motive(E, zero) =
+  (_vector) => vecnil
+
+@fn drop_last_step(
+  E: Type,
+  prev: Nat,
+  almost: drop_last_motive(E, prev)
+): drop_last_motive(E, add1(prev)) =
+  (vector) => vec(vector_head(vector), almost(vector_tail(vector)))
+
+@fn drop_last(E: Type, n: Nat): drop_last_motive(E, n) =
+  nat_ind(
+    n,
+    drop_last_motive(E),
+    drop_last_base(E),
+    drop_last_step(E))
+
+@show drop_last(String, 3, @vec ["1", "2", "3", "LAST"])
