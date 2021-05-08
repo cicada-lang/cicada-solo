@@ -1,9 +1,8 @@
+- [tlt] 7. It All Depends On the Motive
+
 - vector/vector-ind
 - vector/vector-ind -- syntax -- `vector_ind()`
 
-- [tlt] 6. Precisely How Many?
-
-- [tlt] 7. It All Depends On the Motive
 - [tlt] Recess: One Piece at a Time
 - [tlt] 8. Pick a Number, Any Number
 - [tlt] 9. Double Your Money, Get Twice as Much
