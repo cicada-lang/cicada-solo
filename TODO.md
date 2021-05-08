@@ -1,7 +1,6 @@
 - vector/vector-ind
 - vector/vector-ind -- syntax -- `vector_ind()`
 
-- [tlt] Recess: One Piece at a Time
 - [tlt] 8. Pick a Number, Any Number
 - [tlt] 9. Double Your Money, Get Twice as Much
 - [tlt] 10. It Also Depends On the List
