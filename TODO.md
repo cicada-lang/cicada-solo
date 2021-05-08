@@ -1,5 +1,3 @@
-- [tlt] 7. It All Depends On the Motive
-
 - vector/vector-ind
 - vector/vector-ind -- syntax -- `vector_ind()`
 
