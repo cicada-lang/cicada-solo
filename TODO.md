@@ -1,3 +1,4 @@
+- refactor `check-library`
 - `cic check-library` handle `.error.cic`
 
 - vector/vector-ind
