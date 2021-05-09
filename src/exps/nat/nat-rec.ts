@@ -28,8 +28,8 @@ export class NatRec extends Exp {
     const base_t_core = readback(ctx, new Cores.TypeValue(), inferred_base.t)
     const target_name = "nat_rec_target_nat_" + nanoid().toString()
     const motive_core = new Cores.The(
-      new Cores.Pi(target_name, new Cores.Nat(), base_t_core),
-      new Cores.Fn(target_name, inferred_base.core)
+      new Cores.Pi(target_name, new Cores.Type(), new Cores.Nat()),
+      new Cores.Fn(target_name, base_t_core)
     )
     const step_core = check(ctx, this.step, nat_ind_step_t(inferred_base.t))
 

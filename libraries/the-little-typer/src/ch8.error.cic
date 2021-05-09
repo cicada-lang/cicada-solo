@@ -7,3 +7,6 @@
 
 @show add(1)(3)
 @show incr(3)
+
+// NOTE `add(1)` is not equal to `incr` by reflection, we need to prove it.
+// @show @the Equal((Nat) -> Nat, add(1), incr) same

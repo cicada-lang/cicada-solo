@@ -1,3 +1,5 @@
+- `cic check-library` handle `.error.cic`
+
 - vector/vector-ind
 - vector/vector-ind -- syntax -- `vector_ind()`
 

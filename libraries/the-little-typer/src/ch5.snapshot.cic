@@ -21,6 +21,7 @@
 @fn length_step(E: Type, _head: E, _tail: List(E), almost: Nat): Nat = add1(almost)
 @fn length(E: Type, x: List(E)): Nat = list_rec(x, 0, length_step(E))
 
+@show length(String)
 @show length(String, expectations)
 
 @def append_t: Type =

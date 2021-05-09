@@ -45,11 +45,11 @@ export class PiValue {
       new Cores.VarNeutral(fresh_name)
     )
     const ret_t = this.ret_t_cl.apply(variable)
-    const body = readback(
+    const ret = readback(
       ctx.extend(fresh_name, this.arg_t),
       ret_t,
       Cores.Ap.apply(value, variable)
     )
-    return new Cores.Fn(fresh_name, body)
+    return new Cores.Fn(fresh_name, ret)
   }
 }
