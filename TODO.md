@@ -55,9 +55,6 @@
 
 # formalization
 
-> 有完整的例子来表明语言的设计有效。
-> - 简单易读，可用作形式化数学结构的伪代码。
-
 - [formalization] [EWD1240a] A little bit of lattice theory
   - To test our system.
   - This paper is about the relation between PartialOrder and Lattice.
