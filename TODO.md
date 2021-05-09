@@ -1,8 +1,10 @@
-- [refactoring] refactor `check-library`
-
-- `cic check-library` handle `.error.cic`
+- [refactoring] `check-library`
+  - [requirement] `cic check-library` handle `.error.cic`
 
 - [refactoring] big methods in `telescope`
+  - [requirement] class should handle `this`
+    - since we do not have recursion, the semantic of `this` will be "so far"
+  - [requirement] support to use `@let` to do local definitions in class
 
 - vector/vector-ind
 - vector/vector-ind -- syntax -- `vector_ind()`
@@ -29,9 +31,6 @@
 - how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
 
 # cicada
-
-- [class] -- handle `this`
-  - since we do not have recursion, the semantic of `this` will be "so far"
 
 - support to use TODO has hole
 
