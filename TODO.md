@@ -1,5 +1,12 @@
-- refactor `check-library`
+- [refactoring] refactor `check-library`
+
 - `cic check-library` handle `.error.cic`
+
+- [refactoring] `ap` avoid using if:
+  - `target_t instanceof Cores.PiValue`
+  - `target instanceof Cores.ClsValue`
+
+- [refactoring] big methods in `telescope`
 
 - vector/vector-ind
 - vector/vector-ind -- syntax -- `vector_ind()`
@@ -15,14 +22,6 @@
 - [tlt] 16. If It's All the Same to You
 - [tlt] A. The Way Forward
 - [tlt] B. Rules Are Made to Be Spoken
-
-# references
-
-- [refactoring] `ap` avoid using if:
-  - `target_t instanceof Cores.PiValue`
-  - `target instanceof Cores.ClsValue`
-
-- [refactoring] big methods in `telescope`
 
 # questions?
 
