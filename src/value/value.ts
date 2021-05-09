@@ -21,16 +21,14 @@ export function match_value<A>(
     }
   }
 
+  const classes = branches.map(([theClass]) => theClass.name).join(", ")
+
   throw new Trace(
     ut.aline(`
       |Value mismatch.
       |
-      |I am expecting javascript classes: ${branches
-        .map(([theClass]) => theClass.name)
-        .join(", ")},
-      |but in reality, the target constructor name is ${
-        target.constructor.name
-      }.
+      |I am expecting javascript classes: ${classes},
+      |but in reality, the target class name is ${target.constructor.name}.
       |`)
   )
 }

@@ -32,8 +32,8 @@
 
 # cicada
 
-- [class] -- handle `@this`
-  - since we do not have recursion, the semantic of `@this` will be "so far"
+- [class] -- handle `this`
+  - since we do not have recursion, the semantic of `this` will be "so far"
 
 - support to use TODO has hole
 

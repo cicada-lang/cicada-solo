@@ -44,13 +44,12 @@ export class PiValue {
       this.arg_t,
       new Cores.VarNeutral(fresh_name)
     )
-    return new Cores.Fn(
-      fresh_name,
-      readback(
-        ctx.extend(fresh_name, this.arg_t),
-        this.ret_t_cl.apply(variable),
-        Cores.Ap.apply(value, variable)
-      )
+    const ret_t = this.ret_t_cl.apply(variable)
+    const body = readback(
+      ctx.extend(fresh_name, this.arg_t),
+      ret_t,
+      Cores.Ap.apply(value, variable)
     )
+    return new Cores.Fn(fresh_name, body)
   }
 }
