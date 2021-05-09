@@ -42,9 +42,11 @@ export class Ap extends Exp {
           telescope = telescope.fill(value)
         } else {
           const arg_core = check(ctx, this.arg, t)
-          const arg_value = evaluate(ctx.to_env(), arg_core)
-          const core = new Cores.Ap(inferred_target.core, arg_core)
-          return { t: new Cores.TypeValue(), core }
+
+          return {
+            t: new Cores.TypeValue(),
+            core: new Cores.Ap(inferred_target.core, arg_core),
+          }
         }
       }
 

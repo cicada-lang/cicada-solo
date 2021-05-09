@@ -29,7 +29,7 @@ export class Ap extends Core {
 
   static apply(target: Value, arg: Value): Value {
     return match_value(target, [
-      [Cores.FnValue, (fn: Cores.FnValue) => fn.ret_cl.apply(arg)],
+      [Cores.FnValue, (fn: Cores.FnValue) => fn.apply(arg)],
       [Cores.ClsValue, (cls: Cores.ClsValue) => cls.apply(arg)],
       [Cores.ExtValue, (ext: Cores.ExtValue) => ext.apply(arg)],
       [

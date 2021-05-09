@@ -10,6 +10,10 @@ export class FnValue {
     this.ret_cl = ret_cl
   }
 
+  apply(arg: Value): Value {
+    return this.ret_cl.apply(arg)
+  }
+
   readback(ctx: Ctx, t: Value): Core | undefined {
     // NOTE eta expand
     return undefined

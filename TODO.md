@@ -2,10 +2,6 @@
 
 - `cic check-library` handle `.error.cic`
 
-- [refactoring] `ap` avoid using if:
-  - `target_t instanceof Cores.PiValue`
-  - `target instanceof Cores.ClsValue`
-
 - [refactoring] big methods in `telescope`
 
 - vector/vector-ind
