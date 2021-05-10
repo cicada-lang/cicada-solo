@@ -54,9 +54,7 @@ export function exp_matcher(tree: pt.Tree): Exp {
       ),
     "exp:obj": ({ properties }) =>
       new Exps.Obj(
-        new Map(
-          pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
-        )
+        pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
       ),
     "exp:dot_field": ({ target, name }) =>
       new Exps.Dot(exp_matcher(target), pt.str(name)),
@@ -240,16 +238,13 @@ export function exps_matcher(tree: pt.Tree): Array<Exp> {
   })(tree)
 }
 
-export function property_matcher(tree: pt.Tree): [string, Exp] {
-  return pt.matcher<[string, Exp]>({
-    "property:field_shorthand": ({ name }) => [
-      pt.str(name),
-      new Exps.Var(pt.str(name)),
-    ],
-    "property:field": ({ name, exp }) => [pt.str(name), exp_matcher(exp)],
-    "property:method": ({ name, bindings, ret_t }) => [
-      pt.str(name),
-      pi_handler({ bindings, ret_t }),
-    ],
+export function property_matcher(tree: pt.Tree): Exps.Prop {
+  return pt.matcher({
+    "property:field_shorthand": ({ name }) =>
+      new Exps.FieldShorthandProp(pt.str(name)),
+    "property:field": ({ name, exp }) =>
+      new Exps.FieldProp(pt.str(name), exp_matcher(exp)),
+    "property:method": ({ name, bindings, ret_t }) =>
+      new Exps.FieldProp(pt.str(name), pi_handler({ bindings, ret_t })),
   })(tree)
 }
