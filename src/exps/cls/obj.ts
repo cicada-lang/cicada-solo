@@ -1,8 +1,9 @@
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Value } from "../../value"
+import { Value, match_value } from "../../value"
 import { Trace } from "../../trace"
+import { infer } from "../../infer"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
 import * as Cores from "../../cores"
@@ -10,24 +11,36 @@ import * as Cores from "../../cores"
 export abstract class Prop {
   instanceofProp = true
 
-  abstract expand(): Array<[string, Exp]>
+  abstract expand(ctx: Ctx): Array<[string, Exp]>
   abstract repr(): string
 }
 
 export class SpreadProp extends Prop {
-  name: string
+  exp: Exp
 
-  constructor(name: string) {
+  constructor(exp: Exp) {
     super()
-    this.name = name
+    this.exp = exp
   }
 
-  expand(): Array<[string, Exp]> {
-    throw new Error("TODO")
+  expand(ctx: Ctx): Array<[string, Exp]> {
+    const inferred = infer(ctx, this.exp)
+    return match_value(inferred.t, [
+      [
+        Cores.ExtValue,
+        (ext: Cores.ExtValue) =>
+          ext.names.map((name) => [name, new Exps.Dot(this.exp, name)]),
+      ],
+      [
+        Cores.ClsValue,
+        (cls: Cores.ClsValue) =>
+          cls.names.map((name) => [name, new Exps.Dot(this.exp, name)]),
+      ],
+    ])
   }
 
   repr(): string {
-    return `...${this.name}`
+    return `...${this.exp.repr()}`
   }
 }
 
@@ -41,7 +54,7 @@ export class FieldProp extends Prop {
     this.exp = exp
   }
 
-  expand(): Array<[string, Exp]> {
+  expand(ctx: Ctx): Array<[string, Exp]> {
     return [[this.name, this.exp]]
   }
 
@@ -58,7 +71,7 @@ export class FieldShorthandProp extends Prop {
     this.name = name
   }
 
-  expand(): Array<[string, Exp]> {
+  expand(ctx: Ctx): Array<[string, Exp]> {
     return [[this.name, new Exps.Var(this.name)]]
   }
 
@@ -76,7 +89,9 @@ export class Obj extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const properties = new Map(this.properties.flatMap((prop) => prop.expand()))
+    const properties = new Map(
+      this.properties.flatMap((prop) => prop.expand(ctx))
+    )
 
     if (t instanceof Cores.ClsValue) {
       const cls = t

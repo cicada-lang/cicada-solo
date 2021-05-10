@@ -268,5 +268,12 @@ export const property = {
       { ret_t: "exp" },
       { $ap: ["optional", '","'] },
     ],
+    "property:spread": [
+      '"."',
+      '"."',
+      '"."',
+      { exp: "exp" },
+      { $ap: ["optional", '","'] },
+    ],
   },
 }

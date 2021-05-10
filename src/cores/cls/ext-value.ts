@@ -106,6 +106,10 @@ export class ExtValue {
     )
   }
 
+  get names(): Array<string> {
+    return this.entries.flatMap((entry) => entry.telescope.names)
+  }
+
   extend_ctx(ctx: Ctx): Ctx {
     for (const { telescope } of this.entries) {
       ctx = telescope.extend_ctx(ctx)

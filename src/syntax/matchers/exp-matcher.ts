@@ -239,12 +239,13 @@ export function exps_matcher(tree: pt.Tree): Array<Exp> {
 }
 
 export function property_matcher(tree: pt.Tree): Exps.Prop {
-  return pt.matcher({
+  return pt.matcher<Exps.Prop>({
     "property:field_shorthand": ({ name }) =>
       new Exps.FieldShorthandProp(pt.str(name)),
     "property:field": ({ name, exp }) =>
       new Exps.FieldProp(pt.str(name), exp_matcher(exp)),
     "property:method": ({ name, bindings, ret_t }) =>
       new Exps.FieldProp(pt.str(name), pi_handler({ bindings, ret_t })),
+    "property:spread": ({ exp }) => new Exps.SpreadProp(exp_matcher(exp)),
   })(tree)
 }

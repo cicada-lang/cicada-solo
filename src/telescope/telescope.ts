@@ -26,6 +26,13 @@ export class Telescope {
     this.fulfilled = fulfilled || []
   }
 
+  get names(): Array<string> {
+    return [
+      ...this.fulfilled.map((entry) => entry.name),
+      ...this.entries.map((entry) => entry.name),
+    ]
+  }
+
   get next(): undefined | { name: string; t: Value; value?: Value } {
     if (this.entries.length === 0) return undefined
     const [{ name, t, exp }] = this.entries

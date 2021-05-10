@@ -1,5 +1,3 @@
-- [requirement] `Exps.obj` should handle spread syntax `{ ...sub_obj }`
-
 - [refactoring] big methods in `telescope`
   - [requirement] class should handle named super class
   - [requirement] support to use `@let` to do local definitions in class

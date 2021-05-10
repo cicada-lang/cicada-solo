@@ -52,6 +52,10 @@ export class ClsValue {
     )
   }
 
+  get names(): Array<string> {
+    return this.telescope.names
+  }
+
   extend_ctx(ctx: Ctx): Ctx {
     return this.telescope.extend_ctx(ctx)
   }
