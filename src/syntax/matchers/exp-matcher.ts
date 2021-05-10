@@ -242,6 +242,10 @@ export function exps_matcher(tree: pt.Tree): Array<Exp> {
 
 export function property_matcher(tree: pt.Tree): [string, Exp] {
   return pt.matcher<[string, Exp]>({
+    "property:field_shorthand": ({ name }) => [
+      pt.str(name),
+      new Exps.Var(pt.str(name)),
+    ],
     "property:field": ({ name, exp }) => [pt.str(name), exp_matcher(exp)],
     "property:method": ({ name, bindings, ret_t }) => [
       pt.str(name),

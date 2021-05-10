@@ -37,7 +37,8 @@ export class ListRec extends Exp {
     const target_name = "list_rec_target_list_" + nanoid().toString()
     const motive_core = new Cores.The(
       new Cores.Pi(target_name, new Cores.Type(), target_t_core),
-      new Cores.Fn(target_name, base_t_core))
+      new Cores.Fn(target_name, base_t_core)
+    )
     const step_core = check(
       ctx,
       this.step,

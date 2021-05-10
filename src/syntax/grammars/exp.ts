@@ -249,6 +249,10 @@ export const exps = {
 
 export const property = {
   $grammar: {
+    "property:field_shorthand": [
+      { name: "identifier" },
+      { $ap: ["optional", '","'] },
+    ],
     "property:field": [
       { name: "identifier" },
       '":"',

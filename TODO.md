@@ -1,10 +1,11 @@
-- [refactoring] `check-library`
-  - [requirement] `cic check-library` handle `.error.cic`
+- [requirement] `obj` should handle spread syntax `{ ...sub_obj }`
 
 - [refactoring] big methods in `telescope`
-  - [requirement] class should handle `this`
-    - since we do not have recursion, the semantic of `this` will be "so far"
+  - [requirement] class should handle named super class
   - [requirement] support to use `@let` to do local definitions in class
+
+- [refactoring] `check-library`
+  - [requirement] `cic check-library` handle `.error.cic`
 
 - vector/vector-ind
 - vector/vector-ind -- syntax -- `vector_ind()`
