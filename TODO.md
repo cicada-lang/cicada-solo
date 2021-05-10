@@ -1,6 +1,7 @@
+- [requirement] class should handle named super class
+- [requirement] support to use `@let` to do local definitions in class
+
 - [refactoring] big methods in `telescope`
-  - [requirement] class should handle named super class
-  - [requirement] support to use `@let` to do local definitions in class
 
 - [refactoring] `check-library`
   - [requirement] `cic check-library` handle `.error.cic`
