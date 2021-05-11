@@ -26,8 +26,14 @@ export class ExtValue {
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Cores.TypeValue) {
       let entries = new Array()
-      for (const { telescope } of this.entries) {
-        const { entries: next_entries, ctx: next_ctx } = telescope.readback(ctx)
+      let values = new Map()
+      for (let { telescope } of this.entries) {
+        const {
+          entries: next_entries,
+          ctx: next_ctx,
+          values: next_values,
+        } = telescope.env_extend_by_values(values).readback(ctx)
+        values = new Map([...values, ...next_values])
         entries = [...entries, ...next_entries]
         ctx = next_ctx
       }

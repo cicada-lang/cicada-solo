@@ -8,6 +8,47 @@ import * as ut from "../../ut"
 import * as Exps from "../../exps"
 import * as Cores from "../../cores"
 
+export class Obj extends Exp {
+  properties: Array<Prop>
+
+  constructor(properties: Array<Prop>) {
+    super()
+    this.properties = properties
+  }
+
+  check(ctx: Ctx, t: Value): Core {
+    const properties = new Map(
+      this.properties.flatMap((prop) => prop.expand(ctx))
+    )
+
+    if (t instanceof Cores.ClsValue) {
+      const cls = t
+      const core_properties = cls.telescope.check_properties(ctx, properties)
+      return new Cores.Obj(core_properties)
+    }
+
+    if (t instanceof Cores.ExtValue) {
+      const ext = t
+      let core_properties: Map<string, Core> = new Map()
+      for (const { telescope } of ext.entries) {
+        core_properties = new Map([
+          ...core_properties,
+          ...telescope.check_properties(ctx, properties),
+        ])
+      }
+
+      return new Cores.Obj(core_properties)
+    }
+
+    throw new Trace(`Expecting t to be ClsValue or ExtValue`)
+  }
+
+  repr(): string {
+    const s = this.properties.map((prop) => prop.repr()).join("\n")
+    return `{\n${ut.indent(s, "  ")}\n}`
+  }
+}
+
 export abstract class Prop {
   instanceofProp = true
 
@@ -77,46 +118,5 @@ export class FieldShorthandProp extends Prop {
 
   repr(): string {
     return `${this.name}`
-  }
-}
-
-export class Obj extends Exp {
-  properties: Array<Prop>
-
-  constructor(properties: Array<Prop>) {
-    super()
-    this.properties = properties
-  }
-
-  check(ctx: Ctx, t: Value): Core {
-    const properties = new Map(
-      this.properties.flatMap((prop) => prop.expand(ctx))
-    )
-
-    if (t instanceof Cores.ClsValue) {
-      const cls = t
-      const core_properties = cls.telescope.check_properties(ctx, properties)
-      return new Cores.Obj(core_properties)
-    }
-
-    if (t instanceof Cores.ExtValue) {
-      const ext = t
-      let core_properties: Map<string, Core> = new Map()
-      for (const { telescope } of ext.entries) {
-        core_properties = new Map([
-          ...core_properties,
-          ...telescope.check_properties(ctx, properties),
-        ])
-      }
-
-      return new Cores.Obj(core_properties)
-    }
-
-    throw new Trace(`Expecting t to be ClsValue or ExtValue`)
-  }
-
-  repr(): string {
-    const s = this.properties.map((prop) => prop.repr()).join("\n")
-    return `{\n${ut.indent(s, "  ")}\n}`
   }
 }

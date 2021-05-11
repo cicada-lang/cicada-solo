@@ -26,6 +26,14 @@ export class Telescope {
     this.fulfilled = fulfilled || []
   }
 
+  env_extend_by_values(values: Map<string, Value>): Telescope {
+    return new Telescope(
+      this.env.extend_by_values(values),
+      this.entries,
+      this.fulfilled
+    )
+  }
+
   get names(): Array<string> {
     return [
       ...this.fulfilled.map((entry) => entry.name),
@@ -35,7 +43,9 @@ export class Telescope {
 
   get next(): undefined | { name: string; t: Value; value?: Value } {
     if (this.entries.length === 0) return undefined
+
     const [{ name, t, exp }] = this.entries
+    evaluate(this.env, t)
     return {
       name,
       t: evaluate(this.env, t),
@@ -121,13 +131,16 @@ export class Telescope {
   ): {
     entries: Array<{ name: string; t: Core; exp?: Core }>
     ctx: Ctx
+    values: Map<string, Value>
   } {
     const entries = []
+    const values: Map<string, Value> = new Map()
 
     for (const { name, t, value } of this.fulfilled) {
       const t_exp = readback(ctx, new Cores.TypeValue(), t)
       const exp = readback(ctx, t, value)
       entries.push({ name, t: t_exp, exp })
+      values.set(name, value)
       ctx = ctx.extend(name, t, value)
     }
 
@@ -137,20 +150,19 @@ export class Telescope {
       const t_exp = readback(ctx, new Cores.TypeValue(), t)
       if (value) {
         entries.push({ name, t: t_exp, exp: readback(ctx, t, value) })
+        values.set(name, value)
         ctx = ctx.extend(name, t, value)
-        telescope = telescope.fill(
-          new Cores.NotYetValue(t, new Cores.VarNeutral(name))
-        )
+        telescope = telescope.fill(value)
       } else {
         entries.push({ name, t: t_exp })
+        const value = new Cores.NotYetValue(t, new Cores.VarNeutral(name))
+        values.set(name, value)
         ctx = ctx.extend(name, t)
-        telescope = telescope.fill(
-          new Cores.NotYetValue(t, new Cores.VarNeutral(name))
-        )
+        telescope = telescope.fill(value)
       }
     }
 
-    return { entries, ctx }
+    return { entries, ctx, values }
   }
 
   eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {

@@ -9,18 +9,20 @@ import * as Cores from "../../cores"
 
 export class Ext extends Core {
   name?: string
+  super_name?: string
   parent_name: string
   entries: Array<{ name: string; t: Core; exp?: Core }>
 
   constructor(
     parent_name: string,
     entries: Array<{ name: string; t: Core; exp?: Core }>,
-    opts?: { name?: string }
+    opts?: { name?: string; super_name?: string }
   ) {
     super()
     this.parent_name = parent_name
     this.entries = entries
     this.name = opts?.name
+    this.super_name = opts?.super_name
   }
 
   evaluate(env: Env): Value {

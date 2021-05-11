@@ -59,7 +59,10 @@ export class Ext extends Exp {
 
     return {
       t: new Cores.TypeValue(),
-      core: new Cores.Ext(this.parent_name, core_entries, { name: this.name }),
+      core: new Cores.Ext(this.parent_name, core_entries, {
+        name: this.name,
+        super_name: this.super_name,
+      }),
     }
   }
 
