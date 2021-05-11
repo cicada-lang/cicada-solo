@@ -1,5 +1,6 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
+import { Exp } from "../../exp"
 import { Value } from "../../value"
 import * as Cores from "../../cores"
 import { Telescope } from "../../telescope"
@@ -15,15 +16,33 @@ export class ClsValue {
     this.name = opts?.name
   }
 
+  check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
+    return this.telescope.check_properties(ctx, properties)
+  }
+
+  readback_entries(
+    ctx: Ctx
+  ): {
+    entries: Array<{ name: string; t: Core; exp?: Core }>
+    ctx: Ctx
+    values: Map<string, Value>
+  } {
+    return this.telescope.readback_entries(ctx)
+  }
+
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Cores.TypeValue) {
-      const { entries } = this.telescope.readback(ctx)
+      const { entries } = this.readback_entries(ctx)
       return new Cores.Cls(entries, { name: this.name })
     }
   }
 
+  eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
+    return this.telescope.eta_expand_properties(ctx, value)
+  }
+
   eta_expand(ctx: Ctx, value: Value): Core {
-    return new Cores.Obj(this.telescope.eta_expand_properties(ctx, value))
+    return new Cores.Obj(this.eta_expand_properties(ctx, value))
   }
 
   dot_type(target: Value, name: string): Value {
@@ -34,22 +53,12 @@ export class ClsValue {
     return this.telescope.dot_value(target, name)
   }
 
-  apply(arg: Value): Value {
-    let telescope = this.telescope
-    while (telescope.next) {
-      const { value } = telescope.next
-      if (value) {
-        telescope = telescope.fill(value)
-      } else {
-        return new Cores.ClsValue(telescope.fill(arg), { name: this.name })
-      }
-    }
+  fulled(): boolean {
+    return this.telescope.fulled()
+  }
 
-    throw new Trace(
-      ut.aline(`
-        |The telescope is full.
-        |`)
-    )
+  apply(arg: Value): Cores.ClsValue {
+    return new Cores.ClsValue(this.telescope.apply(arg), { name: this.name })
   }
 
   get names(): Array<string> {

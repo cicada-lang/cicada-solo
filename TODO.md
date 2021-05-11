@@ -1,5 +1,3 @@
-- [refactoring] `ExtValue` use recursion instead of loop
-
 - [refactoring] [pull up field [through composition]] -- `Telescope.fulfilled` to `ClsValue`
 - [refactoring] [pull up field [through composition]] -- `Telescope.fulfilled` to `ExtValue`
 

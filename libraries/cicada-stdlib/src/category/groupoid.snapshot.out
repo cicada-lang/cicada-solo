@@ -1,4 +1,4 @@
-@the Type [
+@the Type Groupoid [
   Object: Type
   Morphism: (dom: Object) -> (cod: Object) -> Type
   id: (x: Object) -> Morphism(x)(x)

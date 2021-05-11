@@ -30,18 +30,16 @@ export class Ext extends Core {
       [
         Cores.ClsValue,
         (cls: Cores.ClsValue) =>
-          new Cores.ExtValue([
-            { name: cls.name, telescope: cls.telescope },
-            { name: this.name, telescope: new Telescope(env, this.entries) },
-          ]),
+          new Cores.ExtValue(cls, new Telescope(env, this.entries), {
+            name: this.name,
+          }),
       ],
       [
         Cores.ExtValue,
         (ext: Cores.ExtValue) =>
-          new Cores.ExtValue([
-            ...ext.entries,
-            { name: this.name, telescope: new Telescope(env, this.entries) },
-          ]),
+          new Cores.ExtValue(ext, new Telescope(env, this.entries), {
+            name: this.name,
+          }),
       ],
     ])
   }

@@ -1,4 +1,5 @@
 import { Ctx } from "../../ctx"
+import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import { Telescope } from "../../telescope"
@@ -12,124 +13,109 @@ import * as Cores from "../../cores"
 //   we need to use `ExtValue` to chain `ClsValue`.
 
 export class ExtValue {
-  entries: Array<{ name?: string; telescope: Telescope }>
+  parent: Cores.ExtValue | Cores.ClsValue
+  telescope: Telescope
   name?: string
 
   constructor(
-    entries: Array<{ name?: string; telescope: Telescope }>,
+    parent: Cores.ExtValue | Cores.ClsValue,
+    telescope: Telescope,
     opts?: { name?: string }
   ) {
-    this.entries = entries
+    this.parent = parent
+    this.telescope = telescope
     this.name = opts?.name
+  }
+
+  check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
+    return new Map([
+      ...this.parent.check_properties(ctx, properties),
+      ...this.telescope.check_properties(ctx, properties),
+    ])
+  }
+
+  readback_entries(
+    ctx: Ctx
+  ): {
+    entries: Array<{ name: string; t: Core; exp?: Core }>
+    ctx: Ctx
+    values: Map<string, Value>
+  } {
+    const pre = this.parent.readback_entries(ctx)
+    const cls = evaluate(
+      pre.ctx.to_env(),
+      new Cores.Cls(pre.entries, { name: this.name })
+    )
+    const telescope = this.telescope
+      .env_extend_by_values(pre.values)
+      .env_extend(
+        "this",
+        new Cores.NotYetValue(cls, new Cores.VarNeutral("this"))
+      )
+    const self = telescope.readback_entries(pre.ctx)
+    return {
+      entries: [...pre.entries, ...self.entries],
+      values: new Map([...pre.values, ...self.values]),
+      ctx: self.ctx,
+    }
   }
 
   // NOTE ExtValue should be readback to Cls instead of Ext.
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Cores.TypeValue) {
-      let entries = new Array()
-      let values = new Map()
-      let cls = evaluate(ctx.to_env(), new Cores.Cls([]))
-
-      for (let { telescope } of this.entries) {
-        telescope = telescope.env_extend_by_values(values)
-        telescope = telescope.env_extend(
-          "this",
-          new Cores.NotYetValue(cls, new Cores.VarNeutral("this"))
-        )
-        const next = telescope.readback(ctx)
-        values = new Map([...values, ...next.values])
-        entries = [...entries, ...next.entries]
-        ctx = next.ctx
-        cls = evaluate(
-          ctx.to_env(),
-          new Cores.Cls(entries, { name: this.name })
-        )
-      }
-
+      const { entries } = this.readback_entries(ctx)
       return new Cores.Cls(entries, { name: this.name })
     }
   }
 
-  eta_expand(ctx: Ctx, value: Value): Core {
-    let properties = new Map()
-    for (const { telescope } of this.entries) {
-      properties = new Map([
-        ...properties,
-        ...telescope.eta_expand_properties(ctx, value),
-      ])
-    }
+  eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
+    return new Map([
+      ...this.parent.eta_expand_properties(ctx, value),
+      ...this.telescope.eta_expand_properties(ctx, value),
+    ])
+  }
 
-    return new Cores.Obj(properties)
+  eta_expand(ctx: Ctx, value: Value): Core {
+    return new Cores.Obj(this.eta_expand_properties(ctx, value))
   }
 
   dot_type(target: Value, name: string): Value {
-    for (const { telescope } of this.entries) {
-      try {
-        return telescope.dot_type(target, name)
-      } catch (error) {
-        // NOTE try next one
-      }
+    try {
+      return this.parent.dot_type(target, name)
+    } catch (error) {
+      return this.telescope.dot_type(target, name)
     }
-
-    throw new Trace(
-      ut.aline(`
-        |I can not dot_type on ExtValue.
-        |The property name: ${name} of extended class is undefined.
-        |`)
-    )
   }
 
   dot_value(target: Value, name: string): Value {
-    for (const { telescope } of this.entries) {
-      try {
-        return telescope.dot_value(target, name)
-      } catch (error) {
-        // NOTE try next one
-      }
+    try {
+      return this.parent.dot_value(target, name)
+    } catch (error) {
+      return this.telescope.dot_value(target, name)
     }
-
-    throw new Trace(
-      ut.aline(`
-        |I can not dot_value on ExtValue.
-        |The property name: ${name} of extended class is undefined.
-        |`)
-    )
   }
 
-  apply(arg: Value): Value {
-    for (const [index, entry] of this.entries.entries()) {
-      let telescope = entry.telescope
-      while (telescope.next !== undefined) {
-        const { value } = telescope.next
-        if (value) {
-          telescope = telescope.fill(value)
-        } else {
-          return new Cores.ExtValue(
-            this.entries.splice(index, 1, {
-              name: entry.name,
-              telescope: telescope.fill(arg),
-            }),
-            { name: this.name }
-          )
-        }
-      }
-    }
+  fulled(): boolean {
+    return this.parent.fulled() && this.telescope.fulled()
+  }
 
-    throw new Trace(
-      ut.aline(`
-        |The telescope is full.
-        |`)
-    )
+  apply(arg: Value): Cores.ExtValue {
+    if (!this.parent.fulled()) {
+      return new Cores.ExtValue(this.parent.apply(arg), this.telescope, {
+        name: this.name,
+      })
+    } else {
+      return new Cores.ExtValue(this.parent, this.telescope.apply(arg), {
+        name: this.name,
+      })
+    }
   }
 
   get names(): Array<string> {
-    return this.entries.flatMap((entry) => entry.telescope.names)
+    return [...this.parent.names, ...this.telescope.names]
   }
 
   extend_ctx(ctx: Ctx, opts?: { prefix?: Core }): Ctx {
-    for (const { telescope } of this.entries) {
-      ctx = telescope.extend_ctx(ctx, opts)
-    }
-    return ctx
+    return this.telescope.extend_ctx(this.parent.extend_ctx(ctx, opts), opts)
   }
 }

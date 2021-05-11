@@ -61,6 +61,38 @@ export class Telescope {
     }
   }
 
+  fulled(): boolean {
+    let telescope: Telescope = this
+    while (telescope.next) {
+      const { value } = telescope.next
+      if (value) {
+        telescope = telescope.fill(value)
+      } else {
+        return false
+      }
+    }
+
+    return true
+  }
+
+  apply(arg: Value): Telescope {
+    let telescope: Telescope = this
+    while (telescope.next) {
+      const { value } = telescope.next
+      if (value) {
+        telescope = telescope.fill(value)
+      } else {
+        return telescope.fill(arg)
+      }
+    }
+
+    throw new Trace(
+      ut.aline(`
+        |The telescope is full.
+        |`)
+    )
+  }
+
   fill(value: Value): Telescope {
     if (!this.next) {
       throw new Trace(
@@ -134,7 +166,7 @@ export class Telescope {
     )
   }
 
-  readback(
+  readback_entries(
     ctx: Ctx
   ): {
     entries: Array<{ name: string; t: Core; exp?: Core }>

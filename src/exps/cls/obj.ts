@@ -21,22 +21,8 @@ export class Obj extends Exp {
       this.properties.flatMap((prop) => prop.expand(ctx))
     )
 
-    if (t instanceof Cores.ClsValue) {
-      const cls = t
-      const core_properties = cls.telescope.check_properties(ctx, properties)
-      return new Cores.Obj(core_properties)
-    }
-
-    if (t instanceof Cores.ExtValue) {
-      const ext = t
-      let core_properties: Map<string, Core> = new Map()
-      for (const { telescope } of ext.entries) {
-        core_properties = new Map([
-          ...core_properties,
-          ...telescope.check_properties(ctx, properties),
-        ])
-      }
-
+    if (t instanceof Cores.ClsValue || t instanceof Cores.ExtValue) {
+      const core_properties = t.check_properties(ctx, properties)
       return new Cores.Obj(core_properties)
     }
 

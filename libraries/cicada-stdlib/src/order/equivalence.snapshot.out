@@ -1,4 +1,4 @@
-@the Type [
+@the Type Equivalence [
   Elem: Type
   Under: (_: Elem) -> (_1: Elem) -> Type
   reflexive: (x: Elem) -> Under(x)(x)
