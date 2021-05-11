@@ -1,15 +1,3 @@
 @import "category/groupoid.cic" { Groupoid }
 
 @show Groupoid
-
-// @import "category/category.cic" { Category }
-// @import "category/isomorphism.cic" { Isomorphism }
-
-// @class Groupoid2 @extends (dog: Category) [
-//   inv(x y: Object, f: Morphism(x, y)): Morphism(y, x)
-//   inv_iso(x y: Object, f: Morphism(x, y)): Isomorphism(dog, x, y, f, inv(x, y, f))
-// ]
-
-// @show
-// @the Equal(Type, Groupoid, Groupoid2)
-// same

@@ -4,7 +4,7 @@
 
 // @import "order/pre-order.cic" { PreOrder }
 
-// @class PartialOrder2 @extends (this: PreOrder) [
+// @class PartialOrder2 @extends PreOrder [
 //   antisymmetric(
 //     x y: this.Elem,
 //     this.Under(x, y),

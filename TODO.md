@@ -1,3 +1,5 @@
+- `this` not only for parent, but also for all fields
+
 - [test] `Equal` should handle `this`
 
 - [refactoring] [pull up field [through composition]] -- `Telescope.fulfilled` to `ClsValue`
