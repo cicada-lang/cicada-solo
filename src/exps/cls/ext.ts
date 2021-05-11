@@ -33,7 +33,9 @@ export class Ext extends Exp {
       throw new Trace(`Expecting parent to be ClsValue or ExtValue`)
     }
 
-    ctx = ctx.extend("this", parent)
+    let this_value = parent
+
+    ctx = ctx.extend("this", this_value)
     ctx = parent.extend_ctx(ctx)
 
     const core_entries: Array<{
@@ -47,6 +49,24 @@ export class Ext extends Exp {
       const t_value = evaluate(ctx.to_env(), t_core)
       const exp_core = exp ? check(ctx, exp, t_value) : undefined
       core_entries.push({ name, t: t_core, exp: exp_core })
+
+      // // TODO refactoring
+
+      // {
+      //   const sofar = evaluate(
+      //     ctx.to_env(),
+      //     new Cores.Cls([{ name, t: t_core, exp: exp_core }])
+      //   ) as Cores.ClsValue
+      //   this_value = new Cores.ExtValue(this_value, sofar.telescope)
+      //   ctx = ctx.extend("this", this_value)
+      // }
+
+      // const value = exp_core
+      //   ? evaluate(ctx.to_env(), exp_core)
+      //   : evaluate(ctx.to_env(), new Cores.Dot(new Cores.Var("this"), name))
+
+      // ctx = ctx.extend(name, t_value, value)
+
       ctx = ctx.extend(name, t_value)
     }
 

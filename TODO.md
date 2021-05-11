@@ -1,4 +1,8 @@
-- `this` not only for parent, but also for all fields
+- `this` not only for parent, but also for all fields -- `Exps.Cls.infer` and `Exps.Ext.infer`
+
+- `this` not only for parent, but also for all fields -- `evaluate` and `readback`
+
+- [refactoring] `Exps.Cls.infer` and `Exps.Ext.infer`
 
 - [test] `Equal` should handle `this`
 

@@ -185,30 +185,65 @@ export class Telescope {
     ctx: Ctx
     values: Map<string, Value>
   } {
-    const entries = []
+    const entries: Array<{ name: string; t: Core; exp?: Core }> = []
     const values: Map<string, Value> = new Map()
+
+    let telescope: Telescope = this
 
     for (const { name, t, value } of this.fulfilled) {
       const t_exp = readback(ctx, new Cores.TypeValue(), t)
       const exp = readback(ctx, t, value)
       entries.push({ name, t: t_exp, exp })
       values.set(name, value)
+
+      // // TODO refactoring
+      // {
+      //   const this_value = new Cores.NotYetValue(
+      //     evaluate(ctx.to_env(), new Cores.Cls(entries)),
+      //     new Cores.VarNeutral("this")
+      //   )
+      //   telescope = telescope.env_extend("this", this_value)
+      // }
+
       ctx = ctx.extend(name, t, value)
     }
 
-    let telescope: Telescope = this
     while (telescope.next) {
       const { name, t, value } = telescope.next
       const t_exp = readback(ctx, new Cores.TypeValue(), t)
       if (value) {
         entries.push({ name, t: t_exp, exp: readback(ctx, t, value) })
         values.set(name, value)
+
+        // // TODO refactoring
+        // {
+        //   const this_value = new Cores.NotYetValue(
+        //     evaluate(ctx.to_env(), new Cores.Cls(entries)),
+        //     new Cores.VarNeutral("this")
+        //   )
+        //   telescope = telescope.env_extend("this", this_value)
+        //   ctx = ctx.extend("this", this_value)
+        // }
+
         ctx = ctx.extend(name, t, value)
         telescope = telescope.fill(value)
       } else {
         entries.push({ name, t: t_exp })
         const value = new Cores.NotYetValue(t, new Cores.VarNeutral(name))
         values.set(name, value)
+
+        // // TODO refactoring
+        // {
+        //   const this_value = new Cores.NotYetValue(
+        //     evaluate(ctx.to_env(), new Cores.Cls(entries)),
+        //     new Cores.VarNeutral("this")
+        //   )
+        //   telescope = telescope.env_extend("this", this_value)
+        //   ctx = ctx.extend("this", this_value)
+        // }
+
+        // ctx = ctx.extend(name, t, evaluate(ctx.to_env(), new Cores.Dot(new Cores.Var("this"), name)))
+
         ctx = ctx.extend(name, t)
         telescope = telescope.fill(value)
       }

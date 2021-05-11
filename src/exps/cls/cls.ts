@@ -21,6 +21,10 @@ export class Cls extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
+    let this_value = evaluate(ctx.to_env(), new Cores.Cls([])) as Cores.ClsValue
+
+    ctx = ctx.extend("this", this_value)
+
     const core_entries: Array<{
       name: string
       t: Core
@@ -31,6 +35,24 @@ export class Cls extends Exp {
       const t_value = evaluate(ctx.to_env(), t_core)
       const exp_core = exp ? check(ctx, exp, t_value) : undefined
       core_entries.push({ name, t: t_core, exp: exp_core })
+
+      // // TODO refactoring
+
+      // {
+      //   const sofar = evaluate(
+      //     ctx.to_env(),
+      //     new Cores.Cls([{ name, t: t_core, exp: exp_core }])
+      //   ) as Cores.ClsValue
+      //   this_value = new Cores.ExtValue(this_value, sofar.telescope)
+      //   ctx = ctx.extend("this", this_value)
+      // }
+
+      // const value = exp_core
+      //   ? evaluate(ctx.to_env(), exp_core)
+      //   : evaluate(ctx.to_env(), new Cores.Dot(new Cores.Var("this"), name))
+
+      // ctx = ctx.extend(name, t_value, value)
+
       ctx = ctx.extend(name, t_value)
     }
 
