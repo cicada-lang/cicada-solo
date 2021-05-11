@@ -1,5 +1,6 @@
 import { Env } from "../env"
 import { Value } from "../value"
+import { Trace } from "../trace"
 import * as Cores from "../cores"
 
 type CtxEntry = {
@@ -19,6 +20,15 @@ export class Ctx {
   }
 
   extend(name: string, t: Value, value?: Value): Ctx {
+    return new Ctx(new Map([...this.entries, [name, { t, value }]]))
+  }
+
+  refine(name: string, value: Value): Ctx {
+    const t = this.lookup_type(name)
+    if (!t) {
+      throw new Trace(`I can not refine unknown type name: ${name}`)
+    }
+
     return new Ctx(new Map([...this.entries, [name, { t, value }]]))
   }
 

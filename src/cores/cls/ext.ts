@@ -1,5 +1,5 @@
 import { Core, AlphaCtx } from "../../core"
-import { Value } from "../../value"
+import { Value, match_value } from "../../value"
 import { Env } from "../../env"
 import { Telescope } from "../../telescope"
 import { evaluate } from "../../evaluate"
@@ -25,19 +25,25 @@ export class Ext extends Core {
 
   evaluate(env: Env): Value {
     const parent = evaluate(env, new Cores.Var(this.parent_name))
-    if (parent instanceof Cores.ClsValue) {
-      return new Cores.ExtValue([
-        { name: parent.name, telescope: parent.telescope },
-        { name: this.name, telescope: new Telescope(env, this.entries) },
-      ])
-    }
-    if (parent instanceof Cores.ExtValue) {
-      return new Cores.ExtValue([
-        ...parent.entries,
-        { name: this.name, telescope: new Telescope(env, this.entries) },
-      ])
-    }
-    throw new Trace(`Coreecting parent to be ClsValue or ExtValue`)
+
+    return match_value(parent, [
+      [
+        Cores.ClsValue,
+        (cls: Cores.ClsValue) =>
+          new Cores.ExtValue([
+            { name: cls.name, telescope: cls.telescope },
+            { name: this.name, telescope: new Telescope(env, this.entries) },
+          ]),
+      ],
+      [
+        Cores.ExtValue,
+        (ext: Cores.ExtValue) =>
+          new Cores.ExtValue([
+            ...ext.entries,
+            { name: this.name, telescope: new Telescope(env, this.entries) },
+          ]),
+      ],
+    ])
   }
 
   repr(): string {

@@ -1,5 +1,7 @@
 - [requirement] class should handle named super class
 
+- [requirement] `telescope` should handle named super class
+
 - [requirement] support to use `@let` to do local definitions in class
 
 - [refactoring] big methods in `telescope`
