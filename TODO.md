@@ -1,5 +1,3 @@
-- [requirement] `telescope` should handle named super class -- for `evaluate`
-
 - [test] `Equal` should handle named super class
 
 - [requirement] support to use `@let` to do local definitions in class

@@ -3,6 +3,7 @@ import { Core } from "../../core"
 import { Value } from "../../value"
 import { Telescope } from "../../telescope"
 import { Trace } from "../../trace"
+import { evaluate } from "../../evaluate"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"
 
@@ -11,11 +12,15 @@ import * as Cores from "../../cores"
 //   we need to use `ExtValue` to chain `ClsValue`.
 
 export class ExtValue {
-  entries: Array<{ name?: string; telescope: Telescope }>
+  entries: Array<{ name?: string; super_name?: string; telescope: Telescope }>
   name?: string
 
   constructor(
-    entries: Array<{ name?: string; telescope: Telescope }>,
+    entries: Array<{
+      name?: string
+      super_name?: string
+      telescope: Telescope
+    }>,
     opts?: { name?: string }
   ) {
     this.entries = entries
@@ -27,15 +32,24 @@ export class ExtValue {
     if (t instanceof Cores.TypeValue) {
       let entries = new Array()
       let values = new Map()
-      for (let { telescope } of this.entries) {
-        const {
-          entries: next_entries,
-          ctx: next_ctx,
-          values: next_values,
-        } = telescope.env_extend_by_values(values).readback(ctx)
-        values = new Map([...values, ...next_values])
-        entries = [...entries, ...next_entries]
-        ctx = next_ctx
+      let cls = evaluate(ctx.to_env(), new Cores.Cls([]))
+
+      for (let { super_name, telescope } of this.entries) {
+        telescope = telescope.env_extend_by_values(values)
+        if (super_name) {
+          telescope = telescope.env_extend(
+            super_name,
+            new Cores.NotYetValue(cls, new Cores.VarNeutral(super_name))
+          )
+        }
+        const next = telescope.readback(ctx)
+        values = new Map([...values, ...next.values])
+        entries = [...entries, ...next.entries]
+        ctx = next.ctx
+        cls = evaluate(
+          ctx.to_env(),
+          new Cores.Cls(entries, { name: this.name })
+        )
       }
 
       return new Cores.Cls(entries, { name: this.name })
