@@ -20,19 +20,19 @@ export class ClsValue {
     return this.telescope.check_properties(ctx, properties)
   }
 
-  readback_entries(
+  readback_aux(
     ctx: Ctx
   ): {
     entries: Array<{ name: string; t: Core; exp?: Core }>
     ctx: Ctx
     values: Map<string, Value>
   } {
-    return this.telescope.readback_entries(ctx)
+    return this.telescope.readback_aux(ctx)
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Cores.TypeValue) {
-      const { entries } = this.readback_entries(ctx)
+      const { entries } = this.readback_aux(ctx)
       return new Cores.Cls(entries, { name: this.name })
     }
   }
@@ -45,8 +45,27 @@ export class ClsValue {
     return new Cores.Obj(this.eta_expand_properties(ctx, value))
   }
 
+  dot_type_aux(
+    target: Value,
+    name: string
+  ): {
+    t?: Value
+    values: Map<string, Value>
+  } {
+    return this.telescope.dot_type_aux(target, name)
+  }
+
   dot_type(target: Value, name: string): Value {
-    return this.telescope.dot_type(target, name)
+    const { t } = this.dot_type_aux(target, name)
+    if (!t) {
+      throw new Trace(
+        ut.aline(`
+        |In ClsValue, I meet unknown property name: ${name}
+        |`)
+      )
+    }
+
+    return t
   }
 
   dot_value(target: Value, name: string): Value {

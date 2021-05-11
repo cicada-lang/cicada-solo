@@ -34,14 +34,14 @@ export class ExtValue {
     ])
   }
 
-  readback_entries(
+  readback_aux(
     ctx: Ctx
   ): {
     entries: Array<{ name: string; t: Core; exp?: Core }>
     ctx: Ctx
     values: Map<string, Value>
   } {
-    const pre = this.parent.readback_entries(ctx)
+    const pre = this.parent.readback_aux(ctx)
     const this_value = new Cores.NotYetValue(
       evaluate(
         pre.ctx.to_env(),
@@ -52,7 +52,7 @@ export class ExtValue {
     const self = this.telescope
       .env_extend_by_values(pre.values)
       .env_extend("this", this_value)
-      .readback_entries(pre.ctx)
+      .readback_aux(pre.ctx)
 
     return {
       entries: [...pre.entries, ...self.entries],
@@ -64,7 +64,7 @@ export class ExtValue {
   // NOTE ExtValue should be readback to Cls instead of Ext.
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Cores.TypeValue) {
-      const { entries } = this.readback_entries(ctx)
+      const { entries } = this.readback_aux(ctx)
       return new Cores.Cls(entries, { name: this.name })
     }
   }
@@ -80,12 +80,32 @@ export class ExtValue {
     return new Cores.Obj(this.eta_expand_properties(ctx, value))
   }
 
+  dot_type_aux(
+    target: Value,
+    name: string
+  ): {
+    t?: Value
+    values: Map<string, Value>
+  } {
+    const pre = this.parent.dot_type_aux(target, name)
+    if (pre.t) return pre
+
+    return this.telescope
+      .env_extend_by_values(pre.values)
+      .dot_type_aux(target, name)
+  }
+
   dot_type(target: Value, name: string): Value {
-    try {
-      return this.parent.dot_type(target, name)
-    } catch (error) {
-      return this.telescope.dot_type(target, name)
+    const { t } = this.dot_type_aux(target, name)
+    if (!t) {
+      throw new Trace(
+        ut.aline(`
+        |In ExtValue, I meet unknown property name: ${name}
+        |`)
+      )
     }
+
+    return t
   }
 
   dot_value(target: Value, name: string): Value {

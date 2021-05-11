@@ -1,11 +1,11 @@
 - [refactoring] `Telescope`'s methods return collected info
 
+- [test] `Equal` should handle `this`
+
 - [refactoring] [pull up field [through composition]] -- `Telescope.fulfilled` to `ClsValue`
 - [refactoring] [pull up field [through composition]] -- `Telescope.fulfilled` to `ExtValue`
 
 - [refactoring] `Telescope` use recursion instead of loop
-
-- [test] `Equal` should handle `this`
 
 - change syntax to be closer to js
 

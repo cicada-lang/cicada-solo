@@ -1,0 +1,12 @@
+@the Type Group [
+  Elem: Type
+  mul: (x: Elem) -> (y: Elem) -> Elem
+  mul_associative: (x: Elem) -> (y: Elem) -> (z: Elem) -> Equal(Elem, mul(x)(mul(y)(z)), mul(mul(x)(y))(z))
+  id: Elem
+  id_left: (x: Elem) -> Equal(Elem, mul(id)(x), x)
+  id_right: (x: Elem) -> Equal(Elem, mul(x)(id), x)
+  inv: (x: Elem) -> Elem
+  left_inv: (x: Elem) -> Equal(Elem, mul(inv(x))(x), id)
+  right_inv: (x: Elem) -> Equal(Elem, mul(x)(inv(x)), id)
+  div: (x: Elem) -> (y: Elem) -> Elem = (x) => (y) => mul(x)(inv(y))
+]

@@ -118,28 +118,40 @@ export class Telescope {
     )
   }
 
-  dot_type(target: Value, name: string): Value {
+  dot_type_aux(
+    target: Value,
+    name: string
+  ): {
+    t?: Value
+    values: Map<string, Value>
+  } {
+    const values: Map<string, Value> = new Map()
+
     for (const entry of this.fulfilled) {
+      values.set(entry.name, entry.value)
       if (entry.name === name) {
-        return entry.t
+        return { t: entry.t, values }
       }
     }
 
     let telescope: Telescope = this
     while (telescope.next) {
-      const { name: next_name, t } = telescope.next
-      if (next_name !== name) {
-        telescope = telescope.fill(Cores.Dot.apply(target, next_name))
+      const next = telescope.next
+      if (next.value) {
+        values.set(next.name, next.value)
+      }
+      if (next.name !== name) {
+        const value = Cores.Dot.apply(target, next.name)
+        if (!next.value) {
+          values.set(next.name, value)
+        }
+        telescope = telescope.fill(value)
       } else {
-        return t
+        return { t: next.t, values }
       }
     }
 
-    throw new Trace(
-      ut.aline(`
-        |The property name: ${name} of class is undefined.
-        |`)
-    )
+    return { values }
   }
 
   dot_value(target: Value, name: string): Value {
@@ -166,7 +178,7 @@ export class Telescope {
     )
   }
 
-  readback_entries(
+  readback_aux(
     ctx: Ctx
   ): {
     entries: Array<{ name: string; t: Core; exp?: Core }>
