@@ -1,11 +1,11 @@
 @import "category/category.cic" { Category }
 @import "category/isomorphism.cic" { Isomorphism }
 
-// NOTE named super class
-// @class Groupoid @extends (cat: Category) [
-//   inv(x y: Object, f: Morphism(x, y)): Morphism(y, x)
+// NOTE This class is an example of "named super class".
+@class Groupoid @extends (cat: Category) [
+  inv(x y: Object, f: Morphism(x, y)): Morphism(y, x)
 
-//   // NOTE The following use of `Isomorphism(cat, f, inv(x, y)(f))`
-//   //   is an example of partly fulfilled object construction
-//   inv_iso(x y: Object, f: Morphism(x, y)): Isomorphism(cat, f, inv(x, y)(f))
-// ]
+  // NOTE The following use of `Isomorphism(cat, f, inv(x, y)(f))`
+  //   is an example of "partly fulfilled object construction".
+  // inv_iso(x y: Object, f: Morphism(x, y)): Isomorphism(cat, f, inv(x, y)(f))
+]
