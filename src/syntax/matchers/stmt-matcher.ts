@@ -54,7 +54,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
         )
       ),
-    "stmt:class_extends_named_super_class": ({
+    "stmt:class_extends_with_named_super": ({
       name,
       super_name,
       parent_name,
@@ -64,11 +64,9 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         pt.str(name),
         new Exps.Ext(
           pt.str(parent_name),
-          pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
-        ),
-        {
-          super_name: pt.str(super_name),
-        }
+          pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher),
+          { super_name: pt.str(super_name) }
+        )
       ),
     "stmt:import": ({ path, entries }) => {
       return new Stmts.Import(

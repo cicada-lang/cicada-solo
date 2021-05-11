@@ -42,6 +42,18 @@ export const exp = {
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
       '"]"',
     ],
+    "exp:ext_with_named_super": [
+      '"@"',
+      '"extends"',
+      '"("',
+      { super_name: "identifier" },
+      '":"',
+      { parent_name: "identifier" },
+      '")"',
+      '"["',
+      { entries: { $ap: ["zero_or_more", "cls_entry"] } },
+      '"]"',
+    ],
     "exp:obj": [
       '"{"',
       { properties: { $ap: ["zero_or_more", "property"] } },

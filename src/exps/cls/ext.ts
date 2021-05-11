@@ -10,18 +10,20 @@ import * as Cores from "../../cores"
 
 export class Ext extends Exp {
   name?: string
+  super_name?: string
   parent_name: string
   entries: Array<{ name: string; t: Exp; exp?: Exp }>
 
   constructor(
     parent_name: string,
     entries: Array<{ name: string; t: Exp; exp?: Exp }>,
-    opts?: { name?: string }
+    opts?: { name?: string; super_name?: string }
   ) {
     super()
     this.parent_name = parent_name
     this.entries = entries
     this.name = opts?.name
+    this.super_name = opts?.super_name
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

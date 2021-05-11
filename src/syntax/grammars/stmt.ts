@@ -48,7 +48,7 @@ export const stmt = {
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
       '"]"',
     ],
-    "stmt:class_extends_named_super_class": [
+    "stmt:class_extends_with_named_super": [
       '"@"',
       '"class"',
       { name: "identifier" },

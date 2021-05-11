@@ -7,19 +7,11 @@ import * as Exps from "../exps"
 export class Class implements Stmt {
   name: string
   t: Exps.Cls | Exps.Ext
-  super_name?: string
 
-  constructor(
-    name: string,
-    t: Exps.Cls | Exps.Ext,
-    opts?: {
-      super_name?: string
-    }
-  ) {
+  constructor(name: string, t: Exps.Cls | Exps.Ext) {
     this.name = name
     this.t = t
     this.t.name = this.name
-    this.super_name = opts?.super_name
   }
 
   async execute(mod: Module): Promise<void> {
