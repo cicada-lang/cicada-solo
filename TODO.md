@@ -1,4 +1,8 @@
-- [test] `Equal` should handle named super class
+- use `this` instead of named super class -- for normalization
+
+- [test] `Equal` should handle `this`
+
+- change syntax to be closer to js
 
 - [requirement] support to use `@let` to do local definitions in class
 

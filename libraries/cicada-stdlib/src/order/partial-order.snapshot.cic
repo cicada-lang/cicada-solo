@@ -1,3 +1,19 @@
 @import "order/partial-order.cic" { PartialOrder }
 
 @show PartialOrder
+
+// @import "order/pre-order.cic" { PreOrder }
+
+// @class PartialOrder2 @extends (this: PreOrder) [
+//   antisymmetric(
+//     x y: this.Elem,
+//     this.Under(x, y),
+//     this.Under(y, x),
+//   ): Equal(this.Elem, x, y)
+// ]
+
+// @show PartialOrder2
+
+// @show
+// @the Equal(Type, PartialOrder, PartialOrder2)
+// same
