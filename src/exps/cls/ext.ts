@@ -35,21 +35,12 @@ export class Ext extends Exp {
       throw new Trace(`Expecting parent to be ClsValue or ExtValue`)
     }
 
-    ctx = parent.extend_ctx(ctx)
-
     if (this.super_name) {
       ctx = ctx.extend(this.super_name, parent)
-
-      // TODO ctx.refine is not enough
-      for (const name of parent.names) {
-        ctx = ctx.refine(
-          name,
-          evaluate(
-            ctx.to_env(),
-            new Cores.Dot(new Cores.Var(this.super_name), name)
-          )
-        )
-      }
+      const prefix = new Cores.Var(this.super_name)
+      ctx = parent.extend_ctx(ctx, { prefix })
+    } else {
+      ctx = parent.extend_ctx(ctx)
     }
 
     const core_entries: Array<{

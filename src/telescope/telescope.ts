@@ -267,7 +267,7 @@ export class Telescope {
     return core_properties
   }
 
-  extend_ctx(ctx: Ctx): Ctx {
+  extend_ctx(ctx: Ctx, opts?: { prefix?: Core }): Ctx {
     for (const { name, t, value } of this.fulfilled) {
       ctx = ctx.extend(name, t, value)
     }
@@ -275,6 +275,9 @@ export class Telescope {
       const env = ctx.to_env()
       if (exp) {
         ctx = ctx.extend(name, evaluate(env, t), evaluate(env, exp))
+      } else if (opts?.prefix) {
+        const dot = evaluate(env, new Cores.Dot(opts?.prefix, name))
+        ctx = ctx.extend(name, evaluate(env, t), dot)
       } else {
         ctx = ctx.extend(name, evaluate(env, t))
       }
