@@ -12,13 +12,12 @@ import * as Cores from "../../cores"
 //   we need to use `ExtValue` to chain `ClsValue`.
 
 export class ExtValue {
-  entries: Array<{ name?: string; super_name?: string; telescope: Telescope }>
+  entries: Array<{ name?: string; telescope: Telescope }>
   name?: string
 
   constructor(
     entries: Array<{
       name?: string
-      super_name?: string
       telescope: Telescope
     }>,
     opts?: { name?: string }
@@ -34,14 +33,12 @@ export class ExtValue {
       let values = new Map()
       let cls = evaluate(ctx.to_env(), new Cores.Cls([]))
 
-      for (let { super_name, telescope } of this.entries) {
+      for (let { telescope } of this.entries) {
         telescope = telescope.env_extend_by_values(values)
-        if (super_name) {
-          telescope = telescope.env_extend(
-            super_name,
-            new Cores.NotYetValue(cls, new Cores.VarNeutral(super_name))
-          )
-        }
+        telescope = telescope.env_extend(
+          "this",
+          new Cores.NotYetValue(cls, new Cores.VarNeutral("this"))
+        )
         const next = telescope.readback(ctx)
         values = new Map([...values, ...next.values])
         entries = [...entries, ...next.entries]
@@ -79,6 +76,7 @@ export class ExtValue {
 
     throw new Trace(
       ut.aline(`
+        |I can not dot_type on ExtValue.
         |The property name: ${name} of extended class is undefined.
         |`)
     )
@@ -95,6 +93,7 @@ export class ExtValue {
 
     throw new Trace(
       ut.aline(`
+        |I can not dot_value on ExtValue.
         |The property name: ${name} of extended class is undefined.
         |`)
     )

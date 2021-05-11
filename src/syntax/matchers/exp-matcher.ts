@@ -52,12 +52,6 @@ export function exp_matcher(tree: pt.Tree): Exp {
         pt.str(parent_name),
         pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
       ),
-    "exp:ext_with_named_super": ({ super_name, parent_name, entries }) =>
-      new Exps.Ext(
-        pt.str(parent_name),
-        pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher),
-        { super_name: pt.str(super_name) }
-      ),
     "exp:obj": ({ properties }) =>
       new Exps.Obj(
         pt.matchers.zero_or_more_matcher(properties).map(property_matcher)

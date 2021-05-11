@@ -10,20 +10,18 @@ import * as Cores from "../../cores"
 
 export class Ext extends Exp {
   name?: string
-  super_name?: string
   parent_name: string
   entries: Array<{ name: string; t: Exp; exp?: Exp }>
 
   constructor(
     parent_name: string,
     entries: Array<{ name: string; t: Exp; exp?: Exp }>,
-    opts?: { name?: string; super_name?: string }
+    opts?: { name: string }
   ) {
     super()
     this.parent_name = parent_name
     this.entries = entries
     this.name = opts?.name
-    this.super_name = opts?.super_name
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
@@ -35,13 +33,9 @@ export class Ext extends Exp {
       throw new Trace(`Expecting parent to be ClsValue or ExtValue`)
     }
 
-    if (this.super_name) {
-      ctx = ctx.extend(this.super_name, parent)
-      const prefix = new Cores.Var(this.super_name)
-      ctx = parent.extend_ctx(ctx, { prefix })
-    } else {
-      ctx = parent.extend_ctx(ctx)
-    }
+    ctx = ctx.extend("this", parent)
+    const prefix = new Cores.Var("this")
+    ctx = parent.extend_ctx(ctx, { prefix })
 
     const core_entries: Array<{
       name: string
@@ -61,7 +55,6 @@ export class Ext extends Exp {
       t: new Cores.TypeValue(),
       core: new Cores.Ext(this.parent_name, core_entries, {
         name: this.name,
-        super_name: this.super_name,
       }),
     }
   }

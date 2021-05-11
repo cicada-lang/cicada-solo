@@ -1,12 +1,19 @@
-- use `this` instead of named super class -- for normalization
+- [refactoring] `ExtValue` use recursion instead of loop
+
+- [refactoring] [pull up field [through composition]] -- `Telescope.fulfilled` to `ClsValue`
+- [refactoring] [pull up field [through composition]] -- `Telescope.fulfilled` to `ExtValue`
+
+- [refactoring] `Telescope` use recursion instead of loop
+
+- [refactoring] `Telescope`'s methods return collected info
 
 - [test] `Equal` should handle `this`
 
 - change syntax to be closer to js
 
-- [requirement] support to use `@let` to do local definitions in class
+  - https://www.youtube.com/watch?v=JTvNVxk1WnU
 
-- [refactoring] big methods in `telescope`
+- [requirement] support to use `@let` to do local definitions in class
 
 - [refactoring] `check-library`
   - [requirement] `cic check-library` handle `.error.cic`
