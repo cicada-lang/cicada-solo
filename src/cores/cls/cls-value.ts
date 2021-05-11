@@ -65,7 +65,7 @@ export class ClsValue {
     return this.telescope.names
   }
 
-  extend_ctx(ctx: Ctx, opts?: { prefix?: Core }): Ctx {
-    return this.telescope.extend_ctx(ctx, opts)
+  extend_ctx(ctx: Ctx): Ctx {
+    return this.telescope.extend_ctx(ctx)
   }
 }

@@ -34,8 +34,7 @@ export class Ext extends Exp {
     }
 
     ctx = ctx.extend("this", parent)
-    const prefix = new Cores.Var("this")
-    ctx = parent.extend_ctx(ctx, { prefix })
+    ctx = parent.extend_ctx(ctx)
 
     const core_entries: Array<{
       name: string

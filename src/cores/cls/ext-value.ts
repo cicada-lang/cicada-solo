@@ -49,10 +49,11 @@ export class ExtValue {
       ),
       new Cores.VarNeutral("this")
     )
-    const telescope = this.telescope
+    const self = this.telescope
       .env_extend_by_values(pre.values)
       .env_extend("this", this_value)
-    const self = telescope.readback_entries(pre.ctx)
+      .readback_entries(pre.ctx)
+
     return {
       entries: [...pre.entries, ...self.entries],
       values: new Map([...pre.values, ...self.values]),
@@ -115,7 +116,7 @@ export class ExtValue {
     return [...this.parent.names, ...this.telescope.names]
   }
 
-  extend_ctx(ctx: Ctx, opts?: { prefix?: Core }): Ctx {
-    return this.telescope.extend_ctx(this.parent.extend_ctx(ctx, opts), opts)
+  extend_ctx(ctx: Ctx): Ctx {
+    return this.telescope.extend_ctx(this.parent.extend_ctx(ctx))
   }
 }
