@@ -1,9 +1,9 @@
+- [refactoring] `Telescope`'s methods return collected info
+
 - [refactoring] [pull up field [through composition]] -- `Telescope.fulfilled` to `ClsValue`
 - [refactoring] [pull up field [through composition]] -- `Telescope.fulfilled` to `ExtValue`
 
 - [refactoring] `Telescope` use recursion instead of loop
-
-- [refactoring] `Telescope`'s methods return collected info
 
 - [test] `Equal` should handle `this`
 

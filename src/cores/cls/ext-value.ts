@@ -42,16 +42,16 @@ export class ExtValue {
     values: Map<string, Value>
   } {
     const pre = this.parent.readback_entries(ctx)
-    const cls = evaluate(
-      pre.ctx.to_env(),
-      new Cores.Cls(pre.entries, { name: this.name })
+    const this_value = new Cores.NotYetValue(
+      evaluate(
+        pre.ctx.to_env(),
+        new Cores.Cls(pre.entries, { name: this.name })
+      ),
+      new Cores.VarNeutral("this")
     )
     const telescope = this.telescope
       .env_extend_by_values(pre.values)
-      .env_extend(
-        "this",
-        new Cores.NotYetValue(cls, new Cores.VarNeutral("this"))
-      )
+      .env_extend("this", this_value)
     const self = telescope.readback_entries(pre.ctx)
     return {
       entries: [...pre.entries, ...self.entries],
