@@ -16,10 +16,7 @@ export class ExtValue {
   name?: string
 
   constructor(
-    entries: Array<{
-      name?: string
-      telescope: Telescope
-    }>,
+    entries: Array<{ name?: string; telescope: Telescope }>,
     opts?: { name?: string }
   ) {
     this.entries = entries
