@@ -3,6 +3,7 @@ import { Core } from "../../core"
 import { Value } from "../../value"
 import { Ctx } from "../../ctx"
 import { evaluate } from "../../evaluate"
+import { readback } from "../../readback"
 import { check } from "../../check"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
@@ -27,10 +28,14 @@ export class Ext extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const parent = evaluate(ctx.to_env(), new Cores.Var(this.parent_name))
 
-    if (
-      !(parent instanceof Cores.ClsValue || parent instanceof Cores.ExtValue)
-    ) {
-      throw new Trace(`Expecting parent to be ClsValue or ExtValue`)
+    if (!(parent instanceof Cores.ClsValue)) {
+      throw new Trace(`Expecting parent to be ClsValue`)
+    }
+
+    const parent_core = readback(ctx, new Cores.TypeValue(), parent)
+
+    if (!(parent_core instanceof Cores.Cls)) {
+      throw new Trace(`Expecting parent_core to be Cls`)
     }
 
     let this_value = parent
@@ -72,7 +77,7 @@ export class Ext extends Exp {
 
     return {
       t: new Cores.TypeValue(),
-      core: new Cores.Ext(this.parent_name, core_entries, {
+      core: new Cores.Cls([...parent_core.entries, ...core_entries], {
         name: this.name,
       }),
     }

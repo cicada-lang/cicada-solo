@@ -41,14 +41,6 @@ export class Dot extends Core {
                   new Cores.DotNeutral(neutral, name)
                 ),
             ],
-            [
-              Cores.ExtValue,
-              (ext: Cores.ExtValue) =>
-                new Cores.NotYetValue(
-                  ext.dot_type(target, name),
-                  new Cores.DotNeutral(neutral, name)
-                ),
-            ],
           ]),
       ],
     ])

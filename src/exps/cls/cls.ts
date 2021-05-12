@@ -23,7 +23,7 @@ export class Cls extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     let this_value = evaluate(ctx.to_env(), new Cores.Cls([])) as Cores.ClsValue
 
-    ctx = ctx.extend("this", this_value)
+    // ctx = ctx.extend("this", this_value)
 
     const core_entries: Array<{
       name: string
