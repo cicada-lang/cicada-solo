@@ -341,7 +341,7 @@ export class Telescope {
       if (exp) {
         ctx = ctx.extend(name, evaluate(env, t), evaluate(env, exp))
       } else {
-        const dot = evaluate(env, new Cores.Dot(new Cores.Var("this"), name))
+        const dot = evaluate(env, new Cores.Dot(new Cores.Var("super"), name))
         ctx = ctx.extend(name, evaluate(env, t), dot)
       }
     }

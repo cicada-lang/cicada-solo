@@ -5,8 +5,7 @@
 @class Groupoid @extends Category [
   inv(x y: Object, f: Morphism(x, y)): Morphism(y, x)
 
-  // NOTE The following use of `Isomorphism(this, f, inv(x, y)(f))`
+  // NOTE The following use of `Isomorphism(super, f, inv(x, y)(f))`
   //   is an example of "partly fulfilled object construction".
-  // TODO handle `this`
-  inv_iso(x y: Object, f: Morphism(x, y)): Isomorphism(this, x, y, f, inv(x, y, f))
+  inv_iso(x y: Object, f: Morphism(x, y)): Isomorphism(super, x, y, f, inv(x, y, f))
 ]
