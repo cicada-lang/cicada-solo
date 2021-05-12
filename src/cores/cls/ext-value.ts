@@ -42,17 +42,8 @@ export class ExtValue {
     values: Map<string, Value>
   } {
     const pre = this.parent.readback_aux(ctx)
-    const super_t = evaluate(
-      pre.ctx.to_env(),
-      new Cores.Cls(pre.entries, { name: this.name })
-    )
-    const super_value = new Cores.NotYetValue(
-      super_t,
-      new Cores.VarNeutral("super")
-    )
     const self = this.telescope
       .env_extend_by_values(pre.values)
-      .env_extend("super", super_value)
       .readback_aux(pre.ctx)
 
     return {
