@@ -22,9 +22,12 @@ export class Dot extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
 
-    if (inferred_target.t instanceof Cores.ClsValue) {
+    if (
+      inferred_target.t instanceof Cores.ClsValue ||
+      inferred_target.t instanceof Cores.ExtValue
+    ) {
       // NOTE `infer` need to return normalized value as core.
-      // Because of `ClsValue` can be partially fulfilled by value,
+      // Because of `ClsValue` and `ExtValue` can be partially fulfilled by value,
       // during `infer` of `Exps.Dot`, we have opportunity to get those value back,
       // and return them as core.
 

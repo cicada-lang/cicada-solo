@@ -31,6 +31,7 @@ export class Ap extends Core {
     return match_value(target, [
       [Cores.FnValue, (fn: Cores.FnValue) => fn.apply(arg)],
       [Cores.ClsValue, (cls: Cores.ClsValue) => cls.apply(arg)],
+      [Cores.ExtValue, (ext: Cores.ExtValue) => ext.apply(arg)],
       [
         Cores.NotYetValue,
         ({ t, neutral }: Cores.NotYetValue) =>

@@ -3,7 +3,6 @@ import { Core } from "../../core"
 import { Value } from "../../value"
 import { Ctx } from "../../ctx"
 import { evaluate } from "../../evaluate"
-import { readback } from "../../readback"
 import { check } from "../../check"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
@@ -28,58 +27,30 @@ export class Ext extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const parent = evaluate(ctx.to_env(), new Cores.Var(this.parent_name))
 
-    if (!(parent instanceof Cores.ClsValue)) {
-      throw new Trace(`Expecting parent to be ClsValue`)
+    if (
+      !(parent instanceof Cores.ClsValue || parent instanceof Cores.ExtValue)
+    ) {
+      throw new Trace(`Expecting parent to be ClsValue or ExtValue`)
     }
 
-    const parent_core = readback(ctx, new Cores.TypeValue(), parent)
+    let this_t = parent
 
-    if (!(parent_core instanceof Cores.Cls)) {
-      throw new Trace(`Expecting parent_core to be Cls`)
-    }
-
-    let this_value = parent
-
-    ctx = ctx.extend("this", this_value)
+    ctx = ctx.extend("this", this_t)
     ctx = parent.extend_ctx(ctx)
 
-    const core_entries: Array<{
-      name: string
-      t: Core
-      exp?: Core
-    }> = new Array()
+    const entries: Array<{ name: string; t: Core; exp?: Core }> = new Array()
 
     for (const { name, t, exp } of this.entries) {
       const t_core = check(ctx, t, new Cores.TypeValue())
       const t_value = evaluate(ctx.to_env(), t_core)
       const exp_core = exp ? check(ctx, exp, t_value) : undefined
-      core_entries.push({ name, t: t_core, exp: exp_core })
-
-      // // TODO refactoring
-
-      // {
-      //   const sofar = evaluate(
-      //     ctx.to_env(),
-      //     new Cores.Cls([{ name, t: t_core, exp: exp_core }])
-      //   ) as Cores.ClsValue
-      //   this_value = new Cores.ExtValue(this_value, sofar.telescope)
-      //   ctx = ctx.extend("this", this_value)
-      // }
-
-      // const value = exp_core
-      //   ? evaluate(ctx.to_env(), exp_core)
-      //   : evaluate(ctx.to_env(), new Cores.Dot(new Cores.Var("this"), name))
-
-      // ctx = ctx.extend(name, t_value, value)
-
+      entries.push({ name, t: t_core, exp: exp_core })
       ctx = ctx.extend(name, t_value)
     }
 
     return {
       t: new Cores.TypeValue(),
-      core: new Cores.Cls([...parent_core.entries, ...core_entries], {
-        name: this.name,
-      }),
+      core: new Cores.Ext(this.parent_name, entries, { name: this.name }),
     }
   }
 

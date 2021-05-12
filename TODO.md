@@ -1,3 +1,5 @@
+- rename "this" to "super"
+
 - [problem] I do not know how to define `Telescope` as a recursive data type, and use recursive functions to handle it.
   - I think I need to separate `Telescope` into `fulfilled` and `Scope`, where `Scope` is recursive data type.
   - Maybe because my recursion skills are rusty now. (I can re-read "The Little Schemer", and "The Seasoned Schemer")
@@ -9,13 +11,7 @@
 
 - [refactoring] `Telescope` use recursion instead of loop
 
-- `this` not only for parent, but also for all fields -- `Exps.Cls.infer` and `Exps.Ext.infer`
-
-- `this` not only for parent, but also for all fields -- `evaluate` and `readback`
-
 - [refactoring] `Exps.Cls.infer` and `Exps.Ext.infer`
-
-- [test] `Equal` should handle `this`
 
 - change syntax to be closer to js
 

@@ -195,16 +195,6 @@ export class Telescope {
       const exp = readback(ctx, t, value)
       entries.push({ name, t: t_exp, exp })
       values.set(name, value)
-
-      // // TODO refactoring
-      // {
-      //   const this_value = new Cores.NotYetValue(
-      //     evaluate(ctx.to_env(), new Cores.Cls(entries)),
-      //     new Cores.VarNeutral("this")
-      //   )
-      //   telescope = telescope.env_extend("this", this_value)
-      // }
-
       ctx = ctx.extend(name, t, value)
     }
 
@@ -214,36 +204,12 @@ export class Telescope {
       if (value) {
         entries.push({ name, t: t_exp, exp: readback(ctx, t, value) })
         values.set(name, value)
-
-        // // TODO refactoring
-        // {
-        //   const this_value = new Cores.NotYetValue(
-        //     evaluate(ctx.to_env(), new Cores.Cls(entries)),
-        //     new Cores.VarNeutral("this")
-        //   )
-        //   telescope = telescope.env_extend("this", this_value)
-        //   ctx = ctx.extend("this", this_value)
-        // }
-
         ctx = ctx.extend(name, t, value)
         telescope = telescope.fill(value)
       } else {
         entries.push({ name, t: t_exp })
         const value = new Cores.NotYetValue(t, new Cores.VarNeutral(name))
         values.set(name, value)
-
-        // // TODO refactoring
-        // {
-        //   const this_value = new Cores.NotYetValue(
-        //     evaluate(ctx.to_env(), new Cores.Cls(entries)),
-        //     new Cores.VarNeutral("this")
-        //   )
-        //   telescope = telescope.env_extend("this", this_value)
-        //   ctx = ctx.extend("this", this_value)
-        // }
-
-        // ctx = ctx.extend(name, t, evaluate(ctx.to_env(), new Cores.Dot(new Cores.Var("this"), name)))
-
         ctx = ctx.extend(name, t)
         telescope = telescope.fill(value)
       }
