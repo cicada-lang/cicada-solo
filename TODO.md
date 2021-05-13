@@ -1,3 +1,9 @@
+- change syntax to be closer to js
+
+  - https://www.youtube.com/watch?v=JTvNVxk1WnU
+
+- before dis-allowing `super`, test class with examples.
+
 - `Groupoid` should not extends `Category`, use `Groupoid.as_category` instead.
 
 - [problem] I do not know how to define `Telescope` as a recursive data type, and use recursive functions to handle it.
@@ -13,11 +19,7 @@
 
 - [refactoring] `Exps.Cls.infer` and `Exps.Ext.infer`
 
-- change syntax to be closer to js
-
-  - https://www.youtube.com/watch?v=JTvNVxk1WnU
-
-- [requirement] support to use `@let` to do local definitions in class
+- [requirement] support to use `let` to do local definitions in class
 
 - [refactoring] `check-library`
   - [requirement] `cic check-library` handle `.error.cic`
@@ -52,7 +54,7 @@
 
 - [optimization] use native `number` as `Nat`
 
-- [pattern matching] algebric datatype -- `@datatype`
+- [pattern matching] algebric datatype -- `datatype`
   - generate `ind`
 
 # markdown support
