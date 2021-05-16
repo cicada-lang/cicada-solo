@@ -252,6 +252,91 @@ export class Telescope {
     return properties
   }
 
+  check_properties_aux(
+    ctx: Ctx,
+    properties: Map<string, Exp>
+  ): { cores: Map<string, Core>; values: Map<string, Value> } {
+    // NOTE We DO NOT need to update the `ctx` as we go along.
+    // - the bindings in telescope will not effect current ctx.
+    // - just like checking `cons`.
+
+    const cores: Map<string, Core> = new Map()
+    const values: Map<string, Value> = new Map()
+
+    for (const { name, t, value } of this.fulfilled) {
+      const found = properties.get(name)
+
+      if (found === undefined) {
+        throw new Trace(
+          ut.aline(`
+            |Can not found satisfied entry name: ${name}
+            |`)
+        )
+      }
+
+      const core = check(ctx, found, t)
+      cores.set(name, core)
+      const found_value = evaluate(ctx.to_env(), core)
+      values.set(name, found_value)
+
+      if (!conversion(ctx, t, value, found_value)) {
+        const t_repr = readback(ctx, new Cores.TypeValue(), t).repr()
+        const value_repr = readback(ctx, t, value).repr()
+        const found_repr = readback(ctx, t, found_value).repr()
+        throw new Trace(
+          ut.aline(`
+          |I am expecting the following two values to be the same ${t_repr}.
+          |But they are not.
+          |The value in object:
+          |  ${value_repr}
+          |The value in partially filled class:
+          |  ${found_repr}
+          |`)
+        )
+      }
+    }
+
+    let telescope: Telescope = this
+    while (telescope.next) {
+      const { name, t: next_t, value } = telescope.next
+
+      const found = properties.get(name)
+      if (found === undefined) {
+        throw new Trace(
+          ut.aline(`
+          |Can not found next name: ${name}
+          |`)
+        )
+      }
+
+      const core = check(ctx, found, next_t)
+      cores.set(name, core)
+      const found_value = evaluate(ctx.to_env(), core)
+      values.set(name, found_value)
+      if (value) {
+        if (!conversion(ctx, next_t, value, found_value)) {
+          const t_repr = readback(ctx, new Cores.TypeValue(), next_t).repr()
+          const value_repr = readback(ctx, next_t, value).repr()
+          const found_repr = readback(ctx, next_t, found_value).repr()
+          throw new Trace(
+            ut.aline(`
+          |I am expecting the following two values to be the same ${t_repr}.
+          |But they are not.
+          |The value in object:
+          |  ${value_repr}
+          |The value in partially filled class:
+          |  ${found_repr}
+          |`)
+          )
+        }
+      }
+
+      telescope = telescope.fill(found_value)
+    }
+
+    return { cores, values }
+  }
+
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
     // NOTE We DO NOT need to update the `ctx` as we go along.
     // - the bindings in telescope will not effect current ctx.
@@ -341,8 +426,7 @@ export class Telescope {
       if (exp) {
         ctx = ctx.extend(name, evaluate(env, t), evaluate(env, exp))
       } else {
-        const dot = evaluate(env, new Cores.Dot(new Cores.Var("super"), name))
-        ctx = ctx.extend(name, evaluate(env, t), dot)
+        ctx = ctx.extend(name, evaluate(env, t))
       }
     }
     return ctx

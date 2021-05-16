@@ -27,11 +27,24 @@ export class ExtValue {
     this.name = opts?.name
   }
 
+  check_properties_aux(
+    ctx: Ctx,
+    properties: Map<string, Exp>
+  ): { cores: Map<string, Core>; values: Map<string, Value> } {
+    const pre = this.parent.check_properties_aux(ctx, properties)
+    const self = this.telescope
+      .env_extend_by_values(pre.values)
+      .check_properties_aux(ctx, properties)
+
+    return {
+      cores: new Map([...pre.cores, ...self.cores]),
+      values: new Map([...pre.values, ...self.values]),
+    }
+  }
+
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
-    return new Map([
-      ...this.parent.check_properties(ctx, properties),
-      ...this.telescope.check_properties(ctx, properties),
-    ])
+    const { cores } = this.check_properties_aux(ctx, properties)
+    return cores
   }
 
   readback_aux(

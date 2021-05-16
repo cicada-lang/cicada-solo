@@ -26,13 +26,6 @@ export class Ext extends Core {
   evaluate(env: Env): Value {
     const parent = evaluate(env, new Cores.Var(this.parent_name))
 
-    const super_t = parent
-    const super_value = new Cores.NotYetValue(
-      super_t,
-      new Cores.VarNeutral("super")
-    )
-    env = env.extend("super", super_value)
-
     return match_value(parent, [
       [
         Cores.ClsValue,

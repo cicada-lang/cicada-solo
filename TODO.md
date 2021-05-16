@@ -1,3 +1,13 @@
+- `subst_exp`
+
+- elab `super` in `Exps.Ext` to object with parent fields
+
+- elab `Exps.Ext` to `Cores.Cls`
+
+- use `subtype` instead of `conversion`
+
+- elab the type of obj to be fulfilled class
+
 - change syntax to be closer to js
 
   - https://www.youtube.com/watch?v=JTvNVxk1WnU

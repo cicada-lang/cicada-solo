@@ -33,9 +33,6 @@ export class Ext extends Exp {
       throw new Trace(`Expecting parent to be ClsValue or ExtValue`)
     }
 
-    let super_t = parent
-
-    ctx = ctx.extend("super", super_t)
     ctx = parent.extend_ctx(ctx)
 
     const entries: Array<{ name: string; t: Core; exp?: Core }> = new Array()

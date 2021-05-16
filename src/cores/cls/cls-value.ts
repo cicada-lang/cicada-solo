@@ -16,6 +16,13 @@ export class ClsValue {
     this.name = opts?.name
   }
 
+  check_properties_aux(
+    ctx: Ctx,
+    properties: Map<string, Exp>
+  ): { cores: Map<string, Core>; values: Map<string, Value> } {
+    return this.telescope.check_properties_aux(ctx, properties)
+  }
+
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
     return this.telescope.check_properties(ctx, properties)
   }

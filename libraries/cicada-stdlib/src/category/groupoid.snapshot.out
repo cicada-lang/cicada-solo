@@ -17,19 +17,19 @@
       id_right: (x1: Object) -> (y1: Object) -> (f1: Morphism(x1)(y1)) -> Equal(Morphism(x1)(y1), compose(x1)(y1)(y1)(f1)(id(y1)), f1)
       compose_associative: (x1: Object) -> (y1: Object) -> (z: Object) -> (w: Object) -> (f1: Morphism(x1)(y1)) -> (g: Morphism(y1)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x1)(w), compose(x1)(y1)(w)(f1)(compose(y1)(z)(w)(g)(h)), compose(x1)(z)(w)(compose(x1)(y1)(z)(f1)(g))(h))
     ] = {
-      Object: super.Object
-      Morphism: (dom) => (cod) => super.Morphism(dom)(cod)
-      id: (x1) => super.id(x1)
-      compose: (x1) => (y1) => (z) => (f1) => (g) => super.compose(x1)(y1)(z)(f1)(g)
-      id_left: (x1) => (y1) => (f1) => super.id_left(x1)(y1)(f1)
-      id_right: (x1) => (y1) => (f1) => super.id_right(x1)(y1)(f1)
-      compose_associative: (x1) => (y1) => (z) => (w) => (f1) => (g) => (h) => super.compose_associative(x1)(y1)(z)(w)(f1)(g)(h)
+      Object: Object
+      Morphism: (dom) => (cod) => Morphism(dom)(cod)
+      id: (x1) => id(x1)
+      compose: (x1) => (y1) => (z) => (f1) => (g) => compose(x1)(y1)(z)(f1)(g)
+      id_left: (x1) => (y1) => (f1) => id_left(x1)(y1)(f1)
+      id_right: (x1) => (y1) => (f1) => id_right(x1)(y1)(f1)
+      compose_associative: (x1) => (y1) => (z) => (w) => (f1) => (g) => (h) => compose_associative(x1)(y1)(z)(w)(f1)(g)(h)
     }
-    dom: super.Object = x
-    cod: super.Object = y
-    morphism: super.Morphism(x)(y) = f
-    inverse: super.Morphism(y)(x) = inv(x)(y)(f)
-    inverse_left: Equal(super.Morphism(x)(x), super.compose(x)(y)(x)(f)(inv(x)(y)(f)), super.id(x))
-    inverse_right: Equal(super.Morphism(y)(y), super.compose(y)(x)(y)(inv(x)(y)(f))(f), super.id(y))
+    dom: Object = x
+    cod: Object = y
+    morphism: Morphism(x)(y) = f
+    inverse: Morphism(y)(x) = inv(x)(y)(f)
+    inverse_left: Equal(Morphism(x)(x), compose(x)(y)(x)(f)(inv(x)(y)(f)), id(x))
+    inverse_right: Equal(Morphism(y)(y), compose(y)(x)(y)(inv(x)(y)(f))(f), id(y))
   ]
 ]
