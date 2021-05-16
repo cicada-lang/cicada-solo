@@ -22,3 +22,7 @@
   inv: (x, y, f) => sole
   inv_iso: (x, y, f) => trivial_isomorphism
 }
+
+// // TODO
+
+// @show trivial_groupoid

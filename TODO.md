@@ -12,6 +12,8 @@
 
   - https://www.youtube.com/watch?v=JTvNVxk1WnU
 
+- fix `@show trivial_groupoid`
+
 - before dis-allowing `super`, test class with examples.
 
 - `Groupoid` should not extends `Category`, use `Groupoid.as_category` instead.
