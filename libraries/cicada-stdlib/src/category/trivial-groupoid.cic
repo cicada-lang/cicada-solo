@@ -1,0 +1,24 @@
+@import "category/trivial-category.cic" { trivial_category }
+@import "category/isomorphism.cic" { Isomorphism }
+@import "category/groupoid.cic" { Groupoid }
+
+@def trivial_isomorphism_t = Isomorphism(trivial_category, sole, sole, sole, sole)
+
+@def trivial_isomorphism: trivial_isomorphism_t = {
+  cat: trivial_category
+
+  dom: sole
+  cod: sole
+  morphism: sole
+  inverse: sole
+
+  inverse_left: same
+  inverse_right: same
+}
+
+@def trivial_groupoid: Groupoid = {
+  ...trivial_category
+
+  inv: (x, y, f) => sole
+  inv_iso: (x, y, f) => trivial_isomorphism
+}
