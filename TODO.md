@@ -6,10 +6,6 @@
 
 - fix `evaluate` for `trivial_groupoid`
 
-- before dis-allowing `super`, test class with examples.
-
-- `Groupoid` should not extends `Category`, use `Groupoid.as_category` instead.
-
 - [problem] I do not know how to define `Telescope` as a recursive data type, and use recursive functions to handle it.
   - I think I need to separate `Telescope` into `fulfilled` and `Scope`, where `Scope` is recursive data type.
   - Maybe because my recursion skills are rusty now. (I can re-read "The Little Schemer", and "The Seasoned Schemer")
