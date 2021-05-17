@@ -81,8 +81,6 @@ export * from "./str/quote-value"
 
 export * from "./cls/cls"
 export * from "./cls/cls-value"
-export * from "./cls/ext"
-export * from "./cls/ext-value"
 export * from "./cls/obj"
 export * from "./cls/obj-value"
 export * from "./cls/dot"

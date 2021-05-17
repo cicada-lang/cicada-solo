@@ -21,12 +21,12 @@ export class Obj extends Exp {
       this.properties.flatMap((prop) => prop.expand(ctx))
     )
 
-    if (t instanceof Cores.ClsValue || t instanceof Cores.ExtValue) {
+    if (t instanceof Cores.ClsValue) {
       const core_properties = t.check_properties(ctx, properties)
       return new Cores.Obj(core_properties)
     }
 
-    throw new Trace(`Expecting t to be ClsValue or ExtValue`)
+    throw new Trace(`Expecting t to be ClsValue`)
   }
 
   repr(): string {
@@ -53,11 +53,6 @@ export class SpreadProp extends Prop {
   expand(ctx: Ctx): Array<[string, Exp]> {
     const inferred = infer(ctx, this.exp)
     return match_value(inferred.t, [
-      [
-        Cores.ExtValue,
-        (ext: Cores.ExtValue) =>
-          ext.names.map((name) => [name, new Exps.Dot(this.exp, name)]),
-      ],
       [
         Cores.ClsValue,
         (cls: Cores.ClsValue) =>

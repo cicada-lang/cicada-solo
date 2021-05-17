@@ -1,11 +1,7 @@
 - `subst_exp`
-
 - elab `super` in `Exps.Ext` to object with parent fields
 
-- elab `Exps.Ext` to `Cores.Cls`
-
 - use `subtype` instead of `conversion`
-
 - elab the type of obj to be fulfilled class
 
 - fix `evaluate` for `trivial_groupoid`
