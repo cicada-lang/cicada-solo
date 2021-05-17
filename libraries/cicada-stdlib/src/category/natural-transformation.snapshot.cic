@@ -1,4 +1,4 @@
-import "category/natural-transformation.cic" { NaturalTransformation }
+import { NaturalTransformation } from "category/natural-transformation.cic"
 
 NaturalTransformation
 NaturalTransformation

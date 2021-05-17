@@ -1,6 +1,6 @@
-import "category/trivial-category.cic" { trivial_category }
-import "category/isomorphism.cic" { Isomorphism }
-import "category/groupoid.cic" { Groupoid }
+import { trivial_category } from "category/trivial-category.cic"
+import { Isomorphism } from "category/isomorphism.cic"
+import { Groupoid } from "category/groupoid.cic"
 
 def trivial_isomorphism_t = Isomorphism(trivial_category, sole, sole, sole, sole)
 

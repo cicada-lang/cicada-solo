@@ -45,10 +45,11 @@ export const stmt = {
     ],
     "stmt:import": [
       '"import"',
-      { path: { $pattern: ["string"] } },
       '"{"',
       { entries: { $ap: ["zero_or_more", "import_entry"] } },
       '"}"',
+      '"from"',
+      { path: { $pattern: ["string"] } },
     ],
   },
 }

@@ -1,5 +1,5 @@
-import "category/category.cic" { Category }
-import "category/functor.cic" { Functor }
+import { Category } from "category/category.cic"
+import { Functor } from "category/functor.cic"
 
 class NaturalTransformation [
   dom: Category

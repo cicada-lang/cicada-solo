@@ -1,4 +1,4 @@
-import "order/pre-order.cic" { PreOrder }
+import { PreOrder } from "order/pre-order.cic"
 
 // NOTE No cycle.
 // NOTE Can implement:

@@ -1,4 +1,4 @@
-import "category/category.cic" { Category }
+import { Category } from "category/category.cic"
 
 def trivial_category: Category = {
   Object: Trivial
