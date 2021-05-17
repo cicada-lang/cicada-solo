@@ -8,7 +8,7 @@
 
 - elab the type of obj to be fulfilled class
 
-- fix `@show trivial_groupoid`
+- fix `evaluate` for `trivial_groupoid`
 
 - before dis-allowing `super`, test class with examples.
 
