@@ -2,7 +2,6 @@ export const exp = {
   $grammar: {
     "exp:var": [{ name: "identifier" }],
     "exp:pi": [
-      { $ap: ["optional", '"@"', '"forall"'] },
       '"("',
       { bindings: "bindings" },
       '")"',
@@ -16,7 +15,6 @@ export const exp = {
       { args: { $ap: ["one_or_more", '"("', "exps", '")"'] } },
     ],
     "exp:sigma": [
-      { $ap: ["optional", '"@"', '"exists"'] },
       '"("',
       { name: "identifier" },
       '":"',
@@ -35,7 +33,6 @@ export const exp = {
       '"]"',
     ],
     "exp:ext": [
-      '"@"',
       '"extends"',
       { parent_name: "identifier" },
       '"["',
@@ -83,7 +80,7 @@ export const exp = {
     "exp:list": ['"List"', '"("', { elem_t: "exp" }, '")"'],
     "exp:nil": ['"nil"'],
     "exp:li": ['"li"', '"("', { head: "exp" }, '","', { tail: "exp" }, '")"'],
-    "exp:li_sugar": ['"@"', '"li"', '"["', { exps: "exps" }, '"]"'],
+    "exp:li_sugar": ['"li"', '"!"', '"["', { exps: "exps" }, '"]"'],
     "exp:list_ind": [
       '"list_ind"',
       '"("',
@@ -116,7 +113,7 @@ export const exp = {
     ],
     "exp:vecnil": ['"vecnil"'],
     "exp:vec": ['"vec"', '"("', { head: "exp" }, '","', { tail: "exp" }, '")"'],
-    "exp:vec_sugar": ['"@"', '"vec"', '"["', { exps: "exps" }, '"]"'],
+    "exp:vec_sugar": ['"vec"', '"!"', '"["', { exps: "exps" }, '"]"'],
     "exp:vector_head": ['"vector_head"', '"("', { target: "exp" }, '")"'],
     "exp:vector_tail": ['"vector_tail"', '"("', { target: "exp" }, '")"'],
     "exp:equal": [
@@ -155,14 +152,13 @@ export const exp = {
     "exp:quote": [{ value: { $pattern: ["string"] } }],
     "exp:type": ['"Type"'],
     "exp:let": [
-      '"@"',
       '"let"',
       { name: "identifier" },
       '"="',
       { exp: "exp" },
       { ret: "exp" },
     ],
-    "exp:the": ['"@"', '"the"', { t: "exp" }, { exp: "exp" }],
+    "exp:the": ['"the"', { t: "exp" }, { exp: "exp" }],
   },
 }
 

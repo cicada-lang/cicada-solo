@@ -24,6 +24,6 @@ export class The extends Exp {
   }
 
   repr(): string {
-    return `@the ${this.t.repr()} ${this.exp.repr()}`
+    return `the ${this.t.repr()} ${this.exp.repr()}`
   }
 }

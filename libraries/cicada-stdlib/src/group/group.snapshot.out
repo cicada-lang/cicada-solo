@@ -1,4 +1,4 @@
-@the Type Group [
+the Type Group [
   Elem: Type
   mul: (x: Elem) -> (y: Elem) -> Elem
   mul_associative: (x: Elem) -> (y: Elem) -> (z: Elem) -> Equal(Elem, mul(x)(mul(y)(z)), mul(mul(x)(y))(z))

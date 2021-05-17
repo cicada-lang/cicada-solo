@@ -1,4 +1,4 @@
-@def expectations: List(String) = @li [
+def expectations: List(String) = li! [
   "cooked",
   "eaten",
   "tried-cleaning",
@@ -6,10 +6,10 @@
   "slept"
 ]
 
-@show expectations
+expectations
 
-@show
-@the List(String)
+
+the List(String)
 li("cooked",
   li("eaten",
     li("tried-cleaning",

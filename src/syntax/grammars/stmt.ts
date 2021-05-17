@@ -6,9 +6,8 @@ export const stmts = {
 
 export const stmt = {
   $grammar: {
-    "stmt:def": ['"@"', '"def"', { name: "identifier" }, '"="', { exp: "exp" }],
+    "stmt:def": ['"def"', { name: "identifier" }, '"="', { exp: "exp" }],
     "stmt:def_the": [
-      '"@"',
       '"def"',
       { name: "identifier" },
       '":"',
@@ -17,8 +16,7 @@ export const stmt = {
       { exp: "exp" },
     ],
     "stmt:fn": [
-      '"@"',
-      '"fn"',
+      '"def"',
       { name: "identifier" },
       '"("',
       { bindings: "bindings" },
@@ -28,9 +26,8 @@ export const stmt = {
       '"="',
       { ret: "exp" },
     ],
-    "stmt:show": ['"@"', '"show"', { exp: "exp" }],
+    "stmt:show": [{ exp: "exp" }],
     "stmt:class": [
-      '"@"',
       '"class"',
       { name: "identifier" },
       '"["',
@@ -38,10 +35,8 @@ export const stmt = {
       '"]"',
     ],
     "stmt:class_extends": [
-      '"@"',
       '"class"',
       { name: "identifier" },
-      '"@"',
       '"extends"',
       { parent_name: "identifier" },
       '"["',
@@ -49,7 +44,6 @@ export const stmt = {
       '"]"',
     ],
     "stmt:import": [
-      '"@"',
       '"import"',
       { path: { $pattern: ["string"] } },
       '"{"',

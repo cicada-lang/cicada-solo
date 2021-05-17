@@ -1,4 +1,4 @@
-@the [
+the [
   x: String
   y: String
   z: ABC [
@@ -15,7 +15,7 @@
     c: "c"
   }
 }
-@the ABC [
+the ABC [
   a: Trivial
   b: Nat
   c: String
@@ -24,7 +24,7 @@
   b: 2
   c: "c"
 }
-@the Trivial sole
-@the Nat 2
-@the String "c"
+the Trivial sole
+the Nat 2
+the String "c"
 

@@ -1,6 +1,6 @@
 // NOTE Thin category.
 // NOTE hom_set(A, B).size <= 1
-@class PreOrder [
+class PreOrder [
   Elem: Type
   Under(Elem, Elem): Type
 

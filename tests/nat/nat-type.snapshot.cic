@@ -1,5 +1,5 @@
-@def t: Type = Nat
-@def n: t = zero
-@def one: Nat = add1(n)
+def t: Type = Nat
+def n: t = zero
+def one: Nat = add1(n)
 
-@show one
+one

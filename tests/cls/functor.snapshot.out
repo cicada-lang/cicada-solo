@@ -1,4 +1,4 @@
-@the Type Functor [
+the Type Functor [
   dom: Category [
     Object: Type
     Morphism: (dom: Object) -> (cod: Object) -> Type

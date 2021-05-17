@@ -47,9 +47,7 @@ export class ExtValue {
     return cores
   }
 
-  readback_aux(
-    ctx: Ctx
-  ): {
+  readback_aux(ctx: Ctx): {
     entries: Array<{ name: string; t: Core; exp?: Core }>
     ctx: Ctx
     values: Map<string, Value>

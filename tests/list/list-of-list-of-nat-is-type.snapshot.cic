@@ -1,11 +1,11 @@
-@show
-@the Type
+
+the Type
 List(Nat)
 
-@show
-@the Type
+
+the Type
 List(List(Nat))
 
-@show
-@the Type
+
+the Type
 List(List(List(Nat)))

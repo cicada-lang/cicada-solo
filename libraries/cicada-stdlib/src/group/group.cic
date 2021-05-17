@@ -1,6 +1,6 @@
-@import "group/monoid.cic" { Monoid }
+import "group/monoid.cic" { Monoid }
 
-@class Group @extends Monoid [
+class Group extends Monoid [
   inv(x: Elem): Elem
 
   left_inv(x: Elem): Equal(Elem, mul(inv(x), x), id)

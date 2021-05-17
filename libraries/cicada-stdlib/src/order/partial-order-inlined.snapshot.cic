@@ -1,7 +1,7 @@
-@import "order/partial-order.cic" { PartialOrder }
-@import "order/pre-order.cic" { PreOrder }
+import "order/partial-order.cic" { PartialOrder }
+import "order/pre-order.cic" { PreOrder }
 
-@class PartialOrderInlined [
+class PartialOrderInlined [
   Elem: Type
   Under(Elem, Elem): Type
 
@@ -19,6 +19,6 @@
   ): Equal(Elem, x, y)
 ]
 
-@show
-@the Equal(Type, PartialOrder, PartialOrderInlined)
+
+the Equal(Type, PartialOrder, PartialOrderInlined)
 same

@@ -1,4 +1,4 @@
-@def x = 100
+def x = 100
 
-@show x
-@show x
+x
+x

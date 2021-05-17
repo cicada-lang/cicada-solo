@@ -1,3 +1,3 @@
-@import "order/partial-order.cic" { PartialOrder }
+import "order/partial-order.cic" { PartialOrder }
 
-@show PartialOrder
+PartialOrder

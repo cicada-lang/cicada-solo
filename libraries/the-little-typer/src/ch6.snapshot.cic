@@ -1,23 +1,23 @@
 // 6. Precisely How Many?
 
-@show @the Type Vector(String, 0)
-@show @the Type Vector(String, 1)
-@show @the Type Vector(List(String), 0)
-@show @the Type Vector(List(String), 1)
+the Type Vector(String, 0)
+the Type Vector(String, 1)
+the Type Vector(List(String), 0)
+the Type Vector(List(String), 1)
 
-@show @the Vector(String, 0) vecnil
-@show @the Vector(List(String), 0) vecnil
-@show @the Vector(List(List(String)), 0) vecnil
+the Vector(String, 0) vecnil
+the Vector(List(String), 0) vecnil
+the Vector(List(List(String)), 0) vecnil
 
-@show @the Vector(String, 1) vec("a", vecnil)
-@show @the Vector(String, 2) vec("a", vec("b", vecnil))
+the Vector(String, 1) vec("a", vecnil)
+the Vector(String, 2) vec("a", vec("b", vecnil))
 
-@fn first(E: Type, prev: Nat, vector: Vector(E, add1(prev))): E = vector_head(vector)
+def first(E: Type, prev: Nat, vector: Vector(E, add1(prev))): E = vector_head(vector)
 
-@def abc: Vector(String, 3) = @vec ["a", "b", "c"]
+def abc: Vector(String, 3) = vec! ["a", "b", "c"]
 
-@show first(String, 2, abc)
+first(String, 2, abc)
 
-@fn rest(E: Type, prev: Nat, vector: Vector(E, add1(prev))): Vector(E, prev) = vector_tail(vector)
+def rest(E: Type, prev: Nat, vector: Vector(E, add1(prev))): Vector(E, prev) = vector_tail(vector)
 
-@show rest(String, 2, abc)
+rest(String, 2, abc)

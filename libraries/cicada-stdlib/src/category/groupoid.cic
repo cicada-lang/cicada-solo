@@ -1,7 +1,7 @@
-@import "category/category.cic" { Category }
-@import "category/isomorphism.cic" { Isomorphism }
+import "category/category.cic" { Category }
+import "category/isomorphism.cic" { Isomorphism }
 
-@class Groupoid @extends Category [
+class Groupoid extends Category [
   inv(x y: Object, f: Morphism(x, y)): Morphism(y, x)
 
   // NOTE The following use of `Isomorphism`

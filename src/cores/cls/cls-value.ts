@@ -27,9 +27,7 @@ export class ClsValue {
     return this.telescope.check_properties(ctx, properties)
   }
 
-  readback_aux(
-    ctx: Ctx
-  ): {
+  readback_aux(ctx: Ctx): {
     entries: Array<{ name: string; t: Core; exp?: Core }>
     ctx: Ctx
     values: Map<string, Value>

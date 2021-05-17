@@ -1,7 +1,7 @@
-@import "category/category.cic" { Category }
-@import "category/functor.cic" { Functor }
+import "category/category.cic" { Category }
+import "category/functor.cic" { Functor }
 
-@class NaturalTransformation [
+class NaturalTransformation [
   dom: Category
   cod: Category
   src: Functor(dom, cod)

@@ -66,8 +66,6 @@ export class Ext extends Exp {
 
     const s = entries.join("\n")
 
-    return (
-      name + `@extends ${this.parent_name} ` + `[\n${ut.indent(s, "  ")}\n]`
-    )
+    return name + `extends ${this.parent_name} ` + `[\n${ut.indent(s, "  ")}\n]`
   }
 }

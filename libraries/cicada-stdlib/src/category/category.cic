@@ -1,4 +1,4 @@
-@class Category [
+class Category [
   Object: Type
   Morphism(dom cod: Object): Type
   id(x: Object): Morphism(x, x)

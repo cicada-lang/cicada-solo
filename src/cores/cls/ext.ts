@@ -59,9 +59,7 @@ export class Ext extends Core {
 
     const s = entries.join("\n")
 
-    return (
-      name + `@extends ${this.parent_name} ` + `[\n${ut.indent(s, "  ")}\n]`
-    )
+    return name + `extends ${this.parent_name} ` + `[\n${ut.indent(s, "  ")}\n]`
   }
 
   alpha_repr(ctx: AlphaCtx): string {

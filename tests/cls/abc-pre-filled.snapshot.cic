@@ -1,28 +1,28 @@
-@fn the_nat_type(_: Trivial): Type = Nat
+def the_nat_type(_: Trivial): Type = Nat
 
-@class ABC [ a: Trivial = sole, b: the_nat_type(a), c: String ]
+class ABC [ a: Trivial = sole, b: the_nat_type(a), c: String ]
 
-@def abc: ABC(2, "c") = {
+def abc: ABC(2, "c") = {
   a: sole, b: 2, c: "c"
 }
 
-@show abc
+abc
 
-@show abc.a
-@show abc.b
-@show abc.c
+abc.a
+abc.b
+abc.c
 
 
-@class ABCDE [ a: Trivial, b: the_nat_type(a), c: String = "c", d: String, e: String ]
+class ABCDE [ a: Trivial, b: the_nat_type(a), c: String = "c", d: String, e: String ]
 
-@def abcde: ABCDE(sole, 2, "d") = {
+def abcde: ABCDE(sole, 2, "d") = {
   a: sole, b: 2, c: "c", d: "d", e: "e"
 }
 
-@show abcde
+abcde
 
-@show abcde.a
-@show abcde.b
-@show abcde.c
-@show abcde.d
-@show abcde.e
+abcde.a
+abcde.b
+abcde.c
+abcde.d
+abcde.e

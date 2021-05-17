@@ -1,6 +1,6 @@
-@import "category/category.cic" { Category }
+import "category/category.cic" { Category }
 
-@class Monomorphism [
+class Monomorphism [
   cat: Category
   dom: cat.Object
   cod: cat.Object

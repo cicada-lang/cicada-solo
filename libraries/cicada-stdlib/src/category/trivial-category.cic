@@ -1,6 +1,6 @@
-@import "category/category.cic" { Category }
+import "category/category.cic" { Category }
 
-@def trivial_category: Category = {
+def trivial_category: Category = {
   Object: Trivial
   Morphism: (dom, cod) => Trivial
 

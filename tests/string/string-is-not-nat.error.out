@@ -4,6 +4,6 @@ But the expected type is Nat.
 
 previous:
 - "ratatouille"
-- @the Nat "ratatouille"
+- the Nat "ratatouille"
 
 

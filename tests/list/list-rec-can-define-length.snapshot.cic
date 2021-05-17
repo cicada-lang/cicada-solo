@@ -1,10 +1,10 @@
-@fn step_length(E: Type, e: E, es: List(E), almost: Nat): Nat =
+def step_length(E: Type, e: E, es: List(E), almost: Nat): Nat =
   add1(almost)
 
-@fn length(E: Type, x: List(E)): Nat =
+def length(E: Type, x: List(E)): Nat =
   list_rec(x, 0, step_length(E))
 
-@def expectations: List(String) = @li [
+def expectations: List(String) = li! [
   "cooked",
   "eaten",
   "tried-cleaning",
@@ -12,5 +12,5 @@
   "slept",
 ]
 
-@show
+
 length(String, expectations)

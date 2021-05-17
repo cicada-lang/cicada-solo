@@ -1,6 +1,14 @@
 import pt from "@cicada-lang/partech"
 
 const preserved = [
+  // stmts
+  "def",
+  "class",
+  "import",
+  // keywords
+  "let",
+  "the",
+  // built-in
   "cons",
   "car",
   "cdr",

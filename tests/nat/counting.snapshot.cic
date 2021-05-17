@@ -1,6 +1,6 @@
-@def n = zero
-@def one = add1(n)
+def n = zero
+def one = add1(n)
 
-@show one
+one
 
-@show @the Nat add1(add1(zero))
+the Nat add1(add1(zero))

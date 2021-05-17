@@ -1,3 +1,3 @@
-@the List(Nat) nil
-@the List(List(Nat)) nil
+the List(Nat) nil
+the List(List(Nat)) nil
 

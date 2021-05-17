@@ -1,4 +1,4 @@
-@show @the Type Vector(String, 0)
-@show @the Type Vector(String, 1)
-@show @the Type Vector(List(String), 0)
-@show @the Type Vector(List(String), 1)
+the Type Vector(String, 0)
+the Type Vector(String, 1)
+the Type Vector(List(String), 0)
+the Type Vector(List(String), 1)

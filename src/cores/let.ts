@@ -21,11 +21,11 @@ export class Let extends Core {
   }
 
   repr(): string {
-    return `@let ${this.name} = ${this.exp.repr()} ${this.ret.repr()}`
+    return `let ${this.name} = ${this.exp.repr()} ${this.ret.repr()}`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    return `@let ${this.name} = ${this.exp.alpha_repr(
+    return `let ${this.name} = ${this.exp.alpha_repr(
       ctx
     )} ${this.ret.alpha_repr(ctx.extend(this.name))}`
   }

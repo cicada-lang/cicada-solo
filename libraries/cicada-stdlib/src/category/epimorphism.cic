@@ -1,6 +1,6 @@
-@import "category/category.cic" { Category }
+import "category/category.cic" { Category }
 
-@class Epimorphism [
+class Epimorphism [
   cat: Category
   dom: cat.Object
   cod: cat.Object

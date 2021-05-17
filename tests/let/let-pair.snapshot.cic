@@ -1,7 +1,7 @@
-@def x: (Nat * Nat) =
-  @let one = add1(zero)
-  @let two = add1(one)
-  @let three = add1(two)
+def x: (Nat * Nat) =
+  let one = add1(zero)
+  let two = add1(one)
+  let three = add1(two)
   cons(one, two)
 
-@show x
+x

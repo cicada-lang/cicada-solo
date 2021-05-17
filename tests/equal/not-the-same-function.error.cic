@@ -1,4 +1,4 @@
-@show @the Equal(
+the Equal(
   (String) -> (String) -> (String * String),
   (x) => (y) => cons(x, y),
   (y) => (x) => cons(x, y))

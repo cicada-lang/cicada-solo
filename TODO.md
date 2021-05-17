@@ -8,10 +8,6 @@
 
 - elab the type of obj to be fulfilled class
 
-- change syntax to be closer to js
-
-  - https://www.youtube.com/watch?v=JTvNVxk1WnU
-
 - fix `@show trivial_groupoid`
 
 - before dis-allowing `super`, test class with examples.

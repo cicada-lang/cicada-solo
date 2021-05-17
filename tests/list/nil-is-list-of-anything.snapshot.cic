@@ -1,7 +1,7 @@
-@show
-@the List(Nat)
+
+the List(Nat)
 nil
 
-@show
-@the List(List(Nat))
+
+the List(List(Nat))
 nil

@@ -1,14 +1,14 @@
-@fn add(x: Nat, y: Nat): Nat =
+def add(x: Nat, y: Nat): Nat =
   nat_ind(y, (_) => Nat, x, (prev, almost) => add1(almost))
 
-@fn mul(x: Nat, y: Nat): Nat =
+def mul(x: Nat, y: Nat): Nat =
   nat_ind(y, (_) => Nat, 0, (prev, almost) => add(almost, x))
 
-@fn pow(x: Nat, y: Nat): Nat =
+def pow(x: Nat, y: Nat): Nat =
   nat_ind(y, (_) => Nat, 1, (prev, almost) => mul(almost, x))
 
-@def eight =
-  @let four = add(2, 2)
+def eight =
+  let four = add(2, 2)
   add(four, four)
 
-@show @the Equal(Nat, eight, pow(2, 3)) same
+the Equal(Nat, eight, pow(2, 3)) same

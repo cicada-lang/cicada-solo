@@ -19,6 +19,6 @@ export class Show implements Stmt {
     const value = evaluate(mod.env, inferred.core)
     const value_repr = readback(mod.ctx, t, value).repr()
     const t_repr = readback(mod.ctx, new Cores.TypeValue(), t).repr()
-    mod.output += `@the ${t_repr} ${value_repr}\n`
+    mod.output += `the ${t_repr} ${value_repr}\n`
   }
 }

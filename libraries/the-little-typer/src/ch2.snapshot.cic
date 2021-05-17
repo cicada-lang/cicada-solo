@@ -1,96 +1,96 @@
 // 2. Doin' What Comes Naturally
 
-@def flavored_lentils: (String) -> (String * String) =
+def flavored_lentils: (String) -> (String * String) =
   (flavor) => cons(flavor, "lentils")
 
-@def garlic_flavored_lentils: (String * String) =
+def garlic_flavored_lentils: (String * String) =
   flavored_lentils("garlic")
 
-@def id: (String) -> String =
+def id: (String) -> String =
   (x) => x
 
-@def T: Type =
+def T: Type =
   (String * (String) -> String)
 
-@def id_in_pair: (x: String) -> T =
+def id_in_pair: (x: String) -> T =
   (x) => cons(x, (x) => x)
 
-@show
-@the T
+
+the T
 id_in_pair("x")
 
 // The x occur in `(x) => x` should not be
 // effected by the substitution of outer `x`,
 // and `(x) => x` is equivalent to `(y) => y`,
 
-@show
-@the Equal(
+
+the Equal(
   T,
   id_in_pair("x"),
   cons("x", (y) => y))
 same
 
-@show
-@the Equal(
+
+the Equal(
   (Nat) -> (Nat * Nat),
   (x) => cons(x, x),
   (y) => cons(y, y))
 same
 
-@show
-@the Equal(
+
+the Equal(
   (Nat) -> Nat,
-  (y) => car(@the (Nat * Nat) cons(y, y)),
+  (y) => car(the (Nat * Nat) cons(y, y)),
   (x) => x)
 same
 
-@show
-@the Equal(
+
+the Equal(
   ((Nat * Nat)) -> Nat,
   (y) => car(y),
   (x) => car(x))
 same
 
-@def vegetables: (String * String) =
+def vegetables: (String * String) =
   cons("celery", "carrot")
 
-@show
-@the Equal(
+
+the Equal(
   (String * String),
   vegetables,
   cons(car(vegetables), cdr(vegetables)))
 same
 
-@def naught_or_more: (Nat) -> String =
+def naught_or_more: (Nat) -> String =
   (n) => nat_rec(n, "naught", (_prev, _almost) => "more")
 
-@show
-@the Equal(
+
+the Equal(
   String,
   naught_or_more(0),
   "naught")
 same
 
-@show
-@the Equal(
+
+the Equal(
   String,
   naught_or_more(1),
   "more")
 same
 
-@show
-@the Equal(
+
+the Equal(
   String,
   naught_or_more(4),
   "more")
 same
 
-@show
-@the (Type * Type)
+
+the (Type * Type)
 cons(String, String)
 
-@def Pear: Type = (Nat * Nat)
+def Pear: Type = (Nat * Nat)
 
-@show
-@the Pear
+
+the Pear
 cons(1, 2)

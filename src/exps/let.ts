@@ -45,6 +45,6 @@ export class Let extends Exp {
   }
 
   repr(): string {
-    return `@let ${this.name} = ${this.exp.repr()} ${this.ret.repr()}`
+    return `let ${this.name} = ${this.exp.repr()} ${this.ret.repr()}`
   }
 }

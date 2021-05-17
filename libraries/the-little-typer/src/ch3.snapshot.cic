@@ -1,6 +1,6 @@
 // 3. Eliminate All Natural Numbers!
 
-@def nat_ind_t: Type = (
+def nat_ind_t: Type = (
   target: Nat,
   motive: (target: Nat) -> Type,
   base: motive(0),
@@ -10,47 +10,47 @@
 // NOTE We use `y` as target, this will make
 //   the definition of `pow` looks more natural.
 
-@def add: (Nat, Nat) -> Nat =
+def add: (Nat, Nat) -> Nat =
   (x, y) => nat_rec(y, x, (_prev, almost) => add1(almost))
 
-@def mul: (Nat, Nat) -> Nat =
+def mul: (Nat, Nat) -> Nat =
   (x, y) => nat_rec(y, 0, (_prev, almost) => add(almost, x))
 
-@def pow: (Nat, Nat) -> Nat =
+def pow: (Nat, Nat) -> Nat =
   (x, y) => nat_rec(y, 1, (_prev, almost) => mul(almost, x))
 
-@def eight =
-  @let four = add(2, 2)
+def eight =
+  let four = add(2, 2)
   add(four, four)
 
-@show add(4, 3)
-@show mul(4, 3)
-@show pow(4, 3)
+add(4, 3)
+mul(4, 3)
+pow(4, 3)
 
-@def gauss: (Nat) -> Nat =
+def gauss: (Nat) -> Nat =
   (n) => nat_rec(n, 0, (prev, almost) => add(add1(prev), almost))
 
-@show "gauss"
-@show gauss(0)
-@show gauss(1)
-@show gauss(2)
-@show gauss(3)
-@show gauss(4)
-@show gauss(5)
-@show gauss(6)
-@show gauss(7)
-@show gauss(8)
-@show gauss(9)
-@show gauss(10)
+"gauss"
+gauss(0)
+gauss(1)
+gauss(2)
+gauss(3)
+gauss(4)
+gauss(5)
+gauss(6)
+gauss(7)
+gauss(8)
+gauss(9)
+gauss(10)
 
-@def factorial: (Nat) -> Nat =
+def factorial: (Nat) -> Nat =
   (n) => nat_rec(n, 1, (prev, almost) => mul(add1(prev), almost))
 
-@show "factorial"
-@show factorial(0)
-@show factorial(1)
-@show factorial(2)
-@show factorial(3)
-@show factorial(4)
-@show factorial(5)
-@show factorial(6)
+"factorial"
+factorial(0)
+factorial(1)
+factorial(2)
+factorial(3)
+factorial(4)
+factorial(5)
+factorial(6)

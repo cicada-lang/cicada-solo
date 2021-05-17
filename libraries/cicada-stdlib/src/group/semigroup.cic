@@ -1,4 +1,4 @@
-@class Semigroup [
+class Semigroup [
   Elem: Type
   mul(x y: Elem): Elem
 

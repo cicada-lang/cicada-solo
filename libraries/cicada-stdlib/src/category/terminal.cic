@@ -1,6 +1,6 @@
-@import "category/category.cic" { Category }
+import "category/category.cic" { Category }
 
-@class Terminal [
+class Terminal [
   cat: Category
   obj: cat.Object
   morphism(x: cat.Object): cat.Morphism(x, obj)

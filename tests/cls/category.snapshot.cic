@@ -1,4 +1,4 @@
-@class Category [
+class Category [
   Object: Type
   Morphism(dom cod: Object): Type
   id(x: Object): Morphism(x, x)
@@ -30,4 +30,4 @@
     compose(x, z, w)(compose(x, y, z)(f, g), h))
 ]
 
-@show Category
+Category

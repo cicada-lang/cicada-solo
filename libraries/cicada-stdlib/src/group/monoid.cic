@@ -1,6 +1,6 @@
-@import "group/semigroup.cic" { Semigroup }
+import "group/semigroup.cic" { Semigroup }
 
-@class Monoid @extends Semigroup [
+class Monoid extends Semigroup [
   id: Elem
 
   id_left(x: Elem): Equal(Elem, mul(id, x), x)

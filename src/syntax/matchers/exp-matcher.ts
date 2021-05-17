@@ -156,9 +156,11 @@ export function exp_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-export function cls_entry_matcher(
-  tree: pt.Tree
-): { name: string; t: Exp; exp?: Exp } {
+export function cls_entry_matcher(tree: pt.Tree): {
+  name: string
+  t: Exp
+  exp?: Exp
+} {
   return pt.matcher({
     "cls_entry:field_demanded": ({ name, t }) => ({
       name: pt.str(name),
@@ -201,9 +203,10 @@ export function bindings_matcher(
   })(tree)
 }
 
-export function binding_entry_matcher(
-  tree: pt.Tree
-): { names: Array<string>; exp: Exp } {
+export function binding_entry_matcher(tree: pt.Tree): {
+  names: Array<string>
+  exp: Exp
+} {
   return pt.matcher({
     "binding_entry:nameless": ({ exp }) => ({
       names: ["_"],

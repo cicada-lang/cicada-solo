@@ -1,7 +1,7 @@
-@def type: Type = Type
+def type: Type = Type
 
-@show type
+type
 
-@def pair_of_types: Type = (Type * Type)
+def pair_of_types: Type = (Type * Type)
 
-@show pair_of_types
+pair_of_types

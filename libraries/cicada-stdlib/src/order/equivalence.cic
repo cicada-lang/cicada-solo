@@ -1,5 +1,5 @@
-@import "order/pre-order.cic" { PreOrder }
+import "order/pre-order.cic" { PreOrder }
 
-@class Equivalence @extends PreOrder [
+class Equivalence extends PreOrder [
   symmetric(x y: Elem, Under(x, y)): Under(y, x)
 ]

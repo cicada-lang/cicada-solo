@@ -1,4 +1,4 @@
-@show @the Equal(
+the Equal(
   (String * String),
   cons("ratatouille", "baguette"),
   cons("baguette", "ratatouille"))
