@@ -1,6 +1,6 @@
 import { Category } from "category/category.cic"
 
-class Epimorphism [
+class Epimorphism {
   cat: Category
   dom: cat.Object
   cod: cat.Object
@@ -15,4 +15,4 @@ class Epimorphism [
       cat.compose(dom, cod, x)(morphism, f),
       cat.compose(dom, cod, x)(morphism, g)),
   ): Equal(cat.Morphism(cod, x), f, g)
-]
+}

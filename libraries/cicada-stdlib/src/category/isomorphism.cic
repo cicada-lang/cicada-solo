@@ -1,6 +1,6 @@
 import { Category } from "category/category.cic"
 
-class Isomorphism [
+class Isomorphism {
   cat: Category
   dom: cat.Object
   cod: cat.Object
@@ -16,4 +16,4 @@ class Isomorphism [
     cat.Morphism(cod, cod),
     cat.compose(cod, dom, cod)(inverse, morphism),
     cat.id(cod))
-]
+}

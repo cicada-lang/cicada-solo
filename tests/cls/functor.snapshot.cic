@@ -1,4 +1,4 @@
-class Category [
+class Category {
   Object: Type
   Morphism(dom cod: Object): Type
   id(x: Object): Morphism(x, x)
@@ -28,9 +28,9 @@ class Category [
     Morphism(x, w),
     compose(x, y, w)(f, compose(y, z, w)(g, h)),
     compose(x, z, w)(compose(x, y, z)(f, g), h))
-]
+}
 
-class Functor [
+class Functor {
   dom: Category
   cod: Category
   map(x: dom.Object): cod.Object
@@ -55,6 +55,6 @@ class Functor [
     cod.Morphism(map(x), map(x)),
     fmap(x, x)(dom.id(x)),
     cod.id(map(x)))
-]
+}
 
 Functor

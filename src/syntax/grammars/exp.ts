@@ -28,16 +28,18 @@ export const exp = {
     "exp:car": ['"car"', '"("', { target: "exp" }, '")"'],
     "exp:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
     "exp:cls": [
-      '"["',
+      '"class"',
+      '"{"',
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
-      '"]"',
+      '"}"',
     ],
     "exp:ext": [
+      '"class"',
       '"extends"',
       { parent_name: "identifier" },
-      '"["',
+      '"{"',
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
-      '"]"',
+      '"}"',
     ],
     "exp:obj": [
       '"{"',

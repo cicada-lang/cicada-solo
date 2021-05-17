@@ -1,5 +1,5 @@
-the Type NaturalTransformation [
-  dom: Category [
+the Type class NaturalTransformation {
+  dom: class Category {
     Object: Type
     Morphism: (dom: Object) -> (cod: Object) -> Type
     id: (x: Object) -> Morphism(x)(x)
@@ -7,8 +7,8 @@ the Type NaturalTransformation [
     id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
     id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
     compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-  ]
-  cod: Category [
+  }
+  cod: class Category {
     Object: Type
     Morphism: (dom1: Object) -> (cod: Object) -> Type
     id: (x: Object) -> Morphism(x)(x)
@@ -16,9 +16,9 @@ the Type NaturalTransformation [
     id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
     id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
     compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-  ]
-  src: Functor [
-    dom: Category [
+  }
+  src: class Functor {
+    dom: class Category {
       Object: Type
       Morphism: (dom1: Object) -> (cod1: Object) -> Type
       id: (x: Object) -> Morphism(x)(x)
@@ -26,7 +26,7 @@ the Type NaturalTransformation [
       id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
       id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
       compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-    ] = {
+    } = {
       Object: dom.Object
       Morphism: (dom1) => (cod1) => dom.Morphism(dom1)(cod1)
       id: (x) => dom.id(x)
@@ -35,7 +35,7 @@ the Type NaturalTransformation [
       id_right: (x) => (y) => (f) => dom.id_right(x)(y)(f)
       compose_associative: (x) => (y) => (z) => (w) => (f) => (g) => (h) => dom.compose_associative(x)(y)(z)(w)(f)(g)(h)
     }
-    cod: Category [
+    cod: class Category {
       Object: Type
       Morphism: (dom1: Object) -> (cod1: Object) -> Type
       id: (x: Object) -> Morphism(x)(x)
@@ -43,7 +43,7 @@ the Type NaturalTransformation [
       id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
       id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
       compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-    ] = {
+    } = {
       Object: cod.Object
       Morphism: (dom1) => (cod1) => cod.Morphism(dom1)(cod1)
       id: (x) => cod.id(x)
@@ -56,9 +56,9 @@ the Type NaturalTransformation [
     fmap: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
     fmap_respect_compose: (x: dom.Object) -> (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(z)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
     fmap_respect_id: (x: dom.Object) -> Equal(cod.Morphism(map(x))(map(x)), fmap(x)(x)(dom.id(x)), cod.id(map(x)))
-  ]
-  tar: Functor [
-    dom: Category [
+  }
+  tar: class Functor {
+    dom: class Category {
       Object: Type
       Morphism: (dom1: Object) -> (cod1: Object) -> Type
       id: (x: Object) -> Morphism(x)(x)
@@ -66,7 +66,7 @@ the Type NaturalTransformation [
       id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
       id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
       compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-    ] = {
+    } = {
       Object: dom.Object
       Morphism: (dom1) => (cod1) => dom.Morphism(dom1)(cod1)
       id: (x) => dom.id(x)
@@ -75,7 +75,7 @@ the Type NaturalTransformation [
       id_right: (x) => (y) => (f) => dom.id_right(x)(y)(f)
       compose_associative: (x) => (y) => (z) => (w) => (f) => (g) => (h) => dom.compose_associative(x)(y)(z)(w)(f)(g)(h)
     }
-    cod: Category [
+    cod: class Category {
       Object: Type
       Morphism: (dom1: Object) -> (cod1: Object) -> Type
       id: (x: Object) -> Morphism(x)(x)
@@ -83,7 +83,7 @@ the Type NaturalTransformation [
       id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
       id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
       compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-    ] = {
+    } = {
       Object: cod.Object
       Morphism: (dom1) => (cod1) => cod.Morphism(dom1)(cod1)
       id: (x) => cod.id(x)
@@ -96,12 +96,12 @@ the Type NaturalTransformation [
     fmap: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
     fmap_respect_compose: (x: dom.Object) -> (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(z)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
     fmap_respect_id: (x: dom.Object) -> Equal(cod.Morphism(map(x))(map(x)), fmap(x)(x)(dom.id(x)), cod.id(map(x)))
-  ]
+  }
   component: (x: dom.Object) -> cod.Morphism(src.map(x))(tar.map(x))
   naturality: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> Equal(cod.Morphism(src.map(x))(tar.map(y)), cod.compose(src.map(x))(tar.map(x))(tar.map(y))(component(x))(tar.fmap(x)(y)(f)), cod.compose(src.map(x))(src.map(y))(tar.map(y))(src.fmap(x)(y)(f))(component(y)))
-]
-the Type NaturalTransformation [
-  dom: Category [
+}
+the Type class NaturalTransformation {
+  dom: class Category {
     Object: Type
     Morphism: (dom: Object) -> (cod: Object) -> Type
     id: (x: Object) -> Morphism(x)(x)
@@ -109,8 +109,8 @@ the Type NaturalTransformation [
     id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
     id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
     compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-  ]
-  cod: Category [
+  }
+  cod: class Category {
     Object: Type
     Morphism: (dom1: Object) -> (cod: Object) -> Type
     id: (x: Object) -> Morphism(x)(x)
@@ -118,9 +118,9 @@ the Type NaturalTransformation [
     id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
     id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
     compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-  ]
-  src: Functor [
-    dom: Category [
+  }
+  src: class Functor {
+    dom: class Category {
       Object: Type
       Morphism: (dom1: Object) -> (cod1: Object) -> Type
       id: (x: Object) -> Morphism(x)(x)
@@ -128,7 +128,7 @@ the Type NaturalTransformation [
       id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
       id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
       compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-    ] = {
+    } = {
       Object: dom.Object
       Morphism: (dom1) => (cod1) => dom.Morphism(dom1)(cod1)
       id: (x) => dom.id(x)
@@ -137,7 +137,7 @@ the Type NaturalTransformation [
       id_right: (x) => (y) => (f) => dom.id_right(x)(y)(f)
       compose_associative: (x) => (y) => (z) => (w) => (f) => (g) => (h) => dom.compose_associative(x)(y)(z)(w)(f)(g)(h)
     }
-    cod: Category [
+    cod: class Category {
       Object: Type
       Morphism: (dom1: Object) -> (cod1: Object) -> Type
       id: (x: Object) -> Morphism(x)(x)
@@ -145,7 +145,7 @@ the Type NaturalTransformation [
       id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
       id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
       compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-    ] = {
+    } = {
       Object: cod.Object
       Morphism: (dom1) => (cod1) => cod.Morphism(dom1)(cod1)
       id: (x) => cod.id(x)
@@ -158,9 +158,9 @@ the Type NaturalTransformation [
     fmap: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
     fmap_respect_compose: (x: dom.Object) -> (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(z)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
     fmap_respect_id: (x: dom.Object) -> Equal(cod.Morphism(map(x))(map(x)), fmap(x)(x)(dom.id(x)), cod.id(map(x)))
-  ]
-  tar: Functor [
-    dom: Category [
+  }
+  tar: class Functor {
+    dom: class Category {
       Object: Type
       Morphism: (dom1: Object) -> (cod1: Object) -> Type
       id: (x: Object) -> Morphism(x)(x)
@@ -168,7 +168,7 @@ the Type NaturalTransformation [
       id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
       id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
       compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-    ] = {
+    } = {
       Object: dom.Object
       Morphism: (dom1) => (cod1) => dom.Morphism(dom1)(cod1)
       id: (x) => dom.id(x)
@@ -177,7 +177,7 @@ the Type NaturalTransformation [
       id_right: (x) => (y) => (f) => dom.id_right(x)(y)(f)
       compose_associative: (x) => (y) => (z) => (w) => (f) => (g) => (h) => dom.compose_associative(x)(y)(z)(w)(f)(g)(h)
     }
-    cod: Category [
+    cod: class Category {
       Object: Type
       Morphism: (dom1: Object) -> (cod1: Object) -> Type
       id: (x: Object) -> Morphism(x)(x)
@@ -185,7 +185,7 @@ the Type NaturalTransformation [
       id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
       id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
       compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-    ] = {
+    } = {
       Object: cod.Object
       Morphism: (dom1) => (cod1) => cod.Morphism(dom1)(cod1)
       id: (x) => cod.id(x)
@@ -198,12 +198,12 @@ the Type NaturalTransformation [
     fmap: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
     fmap_respect_compose: (x: dom.Object) -> (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(z)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
     fmap_respect_id: (x: dom.Object) -> Equal(cod.Morphism(map(x))(map(x)), fmap(x)(x)(dom.id(x)), cod.id(map(x)))
-  ]
+  }
   component: (x: dom.Object) -> cod.Morphism(src.map(x))(tar.map(x))
   naturality: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> Equal(cod.Morphism(src.map(x))(tar.map(y)), cod.compose(src.map(x))(tar.map(x))(tar.map(y))(component(x))(tar.fmap(x)(y)(f)), cod.compose(src.map(x))(src.map(y))(tar.map(y))(src.fmap(x)(y)(f))(component(y)))
-]
-the Type NaturalTransformation [
-  dom: Category [
+}
+the Type class NaturalTransformation {
+  dom: class Category {
     Object: Type
     Morphism: (dom: Object) -> (cod: Object) -> Type
     id: (x: Object) -> Morphism(x)(x)
@@ -211,8 +211,8 @@ the Type NaturalTransformation [
     id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
     id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
     compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-  ]
-  cod: Category [
+  }
+  cod: class Category {
     Object: Type
     Morphism: (dom1: Object) -> (cod: Object) -> Type
     id: (x: Object) -> Morphism(x)(x)
@@ -220,9 +220,9 @@ the Type NaturalTransformation [
     id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
     id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
     compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-  ]
-  src: Functor [
-    dom: Category [
+  }
+  src: class Functor {
+    dom: class Category {
       Object: Type
       Morphism: (dom1: Object) -> (cod1: Object) -> Type
       id: (x: Object) -> Morphism(x)(x)
@@ -230,7 +230,7 @@ the Type NaturalTransformation [
       id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
       id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
       compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-    ] = {
+    } = {
       Object: dom.Object
       Morphism: (dom1) => (cod1) => dom.Morphism(dom1)(cod1)
       id: (x) => dom.id(x)
@@ -239,7 +239,7 @@ the Type NaturalTransformation [
       id_right: (x) => (y) => (f) => dom.id_right(x)(y)(f)
       compose_associative: (x) => (y) => (z) => (w) => (f) => (g) => (h) => dom.compose_associative(x)(y)(z)(w)(f)(g)(h)
     }
-    cod: Category [
+    cod: class Category {
       Object: Type
       Morphism: (dom1: Object) -> (cod1: Object) -> Type
       id: (x: Object) -> Morphism(x)(x)
@@ -247,7 +247,7 @@ the Type NaturalTransformation [
       id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
       id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
       compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-    ] = {
+    } = {
       Object: cod.Object
       Morphism: (dom1) => (cod1) => cod.Morphism(dom1)(cod1)
       id: (x) => cod.id(x)
@@ -260,9 +260,9 @@ the Type NaturalTransformation [
     fmap: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
     fmap_respect_compose: (x: dom.Object) -> (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(z)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
     fmap_respect_id: (x: dom.Object) -> Equal(cod.Morphism(map(x))(map(x)), fmap(x)(x)(dom.id(x)), cod.id(map(x)))
-  ]
-  tar: Functor [
-    dom: Category [
+  }
+  tar: class Functor {
+    dom: class Category {
       Object: Type
       Morphism: (dom1: Object) -> (cod1: Object) -> Type
       id: (x: Object) -> Morphism(x)(x)
@@ -270,7 +270,7 @@ the Type NaturalTransformation [
       id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
       id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
       compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-    ] = {
+    } = {
       Object: dom.Object
       Morphism: (dom1) => (cod1) => dom.Morphism(dom1)(cod1)
       id: (x) => dom.id(x)
@@ -279,7 +279,7 @@ the Type NaturalTransformation [
       id_right: (x) => (y) => (f) => dom.id_right(x)(y)(f)
       compose_associative: (x) => (y) => (z) => (w) => (f) => (g) => (h) => dom.compose_associative(x)(y)(z)(w)(f)(g)(h)
     }
-    cod: Category [
+    cod: class Category {
       Object: Type
       Morphism: (dom1: Object) -> (cod1: Object) -> Type
       id: (x: Object) -> Morphism(x)(x)
@@ -287,7 +287,7 @@ the Type NaturalTransformation [
       id_left: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(x)(y)(id(x))(f), f)
       id_right: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> Equal(Morphism(x)(y), compose(x)(y)(y)(f)(id(y)), f)
       compose_associative: (x: Object) -> (y: Object) -> (z: Object) -> (w: Object) -> (f: Morphism(x)(y)) -> (g: Morphism(y)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x)(w), compose(x)(y)(w)(f)(compose(y)(z)(w)(g)(h)), compose(x)(z)(w)(compose(x)(y)(z)(f)(g))(h))
-    ] = {
+    } = {
       Object: cod.Object
       Morphism: (dom1) => (cod1) => cod.Morphism(dom1)(cod1)
       id: (x) => cod.id(x)
@@ -300,7 +300,7 @@ the Type NaturalTransformation [
     fmap: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
     fmap_respect_compose: (x: dom.Object) -> (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(z)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
     fmap_respect_id: (x: dom.Object) -> Equal(cod.Morphism(map(x))(map(x)), fmap(x)(x)(dom.id(x)), cod.id(map(x)))
-  ]
+  }
   component: (x: dom.Object) -> cod.Morphism(src.map(x))(tar.map(x))
   naturality: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> Equal(cod.Morphism(src.map(x))(tar.map(y)), cod.compose(src.map(x))(tar.map(x))(tar.map(y))(component(x))(tar.fmap(x)(y)(f)), cod.compose(src.map(x))(src.map(y))(tar.map(y))(src.fmap(x)(y)(f))(component(y)))
-]
+}

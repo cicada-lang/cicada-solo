@@ -1,11 +1,11 @@
-the ABCEFG [
+the class ABCEFG {
   a: Trivial
   b: Nat
   c: String
   e: Trivial
   f: Nat
   g: String
-] {
+} {
   a: sole
   b: 2
   c: "c"

@@ -1,6 +1,6 @@
 import { Category } from "category/category.cic"
 
-class Functor [
+class Functor {
   dom: Category
   cod: Category
   map(x: dom.Object): cod.Object
@@ -25,4 +25,4 @@ class Functor [
     cod.Morphism(map(x), map(x)),
     fmap(x, x)(dom.id(x)),
     cod.id(map(x)))
-]
+}

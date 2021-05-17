@@ -1,7 +1,7 @@
 import { Category } from "category/category.cic"
 import { Isomorphism } from "category/isomorphism.cic"
 
-class Groupoid extends Category [
+class Groupoid extends Category {
   inv(x y: Object, f: Morphism(x, y)): Morphism(y, x)
 
   // NOTE The following use of `Isomorphism`
@@ -16,4 +16,4 @@ class Groupoid extends Category [
     id_right
     compose_associative
   }, x, y, f, inv(x, y, f))
-]
+}

@@ -1,6 +1,6 @@
 def the_nat_type(_: Trivial): Type = Nat
 
-class ABC [ a: Trivial = sole, b: the_nat_type(a), c: String ]
+class ABC { a: Trivial = sole, b: the_nat_type(a), c: String }
 
 def abc: ABC(2, "c") = {
   a: sole, b: 2, c: "c"
@@ -13,7 +13,7 @@ abc.b
 abc.c
 
 
-class ABCDE [ a: Trivial, b: the_nat_type(a), c: String = "c", d: String, e: String ]
+class ABCDE { a: Trivial, b: the_nat_type(a), c: String = "c", d: String, e: String }
 
 def abcde: ABCDE(sole, 2, "d") = {
   a: sole, b: 2, c: "c", d: "d", e: "e"

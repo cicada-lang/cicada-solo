@@ -30,18 +30,18 @@ export const stmt = {
     "stmt:class": [
       '"class"',
       { name: "identifier" },
-      '"["',
+      '"{"',
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
-      '"]"',
+      '"}"',
     ],
     "stmt:class_extends": [
       '"class"',
       { name: "identifier" },
       '"extends"',
       { parent_name: "identifier" },
-      '"["',
+      '"{"',
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
-      '"]"',
+      '"}"',
     ],
     "stmt:import": [
       '"import"',

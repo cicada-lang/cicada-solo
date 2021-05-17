@@ -1,7 +1,7 @@
 import { Category } from "category/category.cic"
 import { Functor } from "category/functor.cic"
 
-class NaturalTransformation [
+class NaturalTransformation {
   dom: Category
   cod: Category
   src: Functor(dom, cod)
@@ -15,4 +15,4 @@ class NaturalTransformation [
     cod.Morphism(src.map(x), tar.map(y)),
     cod.compose(src.map(x), tar.map(x), tar.map(y))(component(x), tar.fmap(x, y)(f)),
     cod.compose(src.map(x), src.map(y), tar.map(y))(src.fmap(x, y)(f), component(y)))
-]
+}

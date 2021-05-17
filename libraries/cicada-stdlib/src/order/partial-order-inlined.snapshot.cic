@@ -1,7 +1,7 @@
 import { PartialOrder } from "order/partial-order.cic"
 import { PreOrder } from "order/pre-order.cic"
 
-class PartialOrderInlined [
+class PartialOrderInlined {
   Elem: Type
   Under(Elem, Elem): Type
 
@@ -17,7 +17,7 @@ class PartialOrderInlined [
     Under(x, y),
     Under(y, x),
   ): Equal(Elem, x, y)
-]
+}
 
 
 the Equal(Type, PartialOrder, PartialOrderInlined)

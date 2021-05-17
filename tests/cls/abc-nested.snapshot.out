@@ -1,12 +1,12 @@
-the [
+the class  {
   x: String
   y: String
-  z: ABC [
+  z: class ABC {
     a: Trivial
     b: Nat
     c: String
-  ]
-] {
+  }
+} {
   x: "x"
   y: "y"
   z: {
@@ -15,11 +15,11 @@ the [
     c: "c"
   }
 }
-the ABC [
+the class ABC {
   a: Trivial
   b: Nat
   c: String
-] {
+} {
   a: sole
   b: 2
   c: "c"

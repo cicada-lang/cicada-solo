@@ -1,6 +1,6 @@
 import { Category } from "category/category.cic"
 
-class Monomorphism [
+class Monomorphism {
   cat: Category
   dom: cat.Object
   cod: cat.Object
@@ -15,7 +15,7 @@ class Monomorphism [
       cat.compose(x, dom, cod)(f, morphism),
       cat.compose(x, dom, cod)(g, morphism)),
   ): Equal(cat.Morphism(x, dom), f, g)
-]
+}
 
 // NOTE example:
 //   mono: Monomorphism(cat, x, y)

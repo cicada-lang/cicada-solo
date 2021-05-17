@@ -1,8 +1,8 @@
-the ABC [
+the class ABC {
   a: Trivial
   b: Nat
   c: String
-] {
+} {
   a: sole
   b: 2
   c: "c"

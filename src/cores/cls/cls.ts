@@ -25,10 +25,10 @@ export class Cls extends Core {
   }
 
   repr(): string {
-    const name = this.name ? `${this.name} ` : ""
+    const name = this.name || ""
 
     if (this.entries.length === 0) {
-      return name + "[]"
+      return `class ${name} {}`
     }
 
     const entries = this.entries.map(({ name, t, exp }) => {
@@ -39,7 +39,7 @@ export class Cls extends Core {
 
     const s = entries.join("\n")
 
-    return name + `[\n${ut.indent(s, "  ")}\n]`
+    return `class ${name} {\n${ut.indent(s, "  ")}\n}`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
@@ -60,6 +60,6 @@ export class Cls extends Core {
 
     const s = parts.join("\n")
 
-    return `[\n${ut.indent(s, "  ")}\n]`
+    return `class {\n${ut.indent(s, "  ")}\n}`
   }
 }

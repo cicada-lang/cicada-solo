@@ -1,8 +1,8 @@
-the ABC [
+the class ABC {
   a: Trivial = sole
   b: Nat = 2
   c: String = "c"
-] {
+} {
   a: sole
   b: 2
   c: "c"
@@ -10,13 +10,13 @@ the ABC [
 the Trivial sole
 the Nat 2
 the String "c"
-the ABCDE [
+the class ABCDE {
   a: Trivial = sole
   b: Nat = 2
   c: String = "c"
   d: String = "d"
   e: String
-] {
+} {
   a: sole
   b: 2
   c: "c"

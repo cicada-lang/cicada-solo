@@ -1,4 +1,4 @@
-class Category [
+class Category {
   Object: Type
   Morphism(dom cod: Object): Type
   id(x: Object): Morphism(x, x)
@@ -28,9 +28,9 @@ class Category [
     Morphism(x, w),
     compose(x, y, w)(f, compose(y, z, w)(g, h)),
     compose(x, z, w)(compose(x, y, z)(f, g), h))
-]
+}
 
-class Functor [
+class Functor {
   dom: Category
   cod: Category
   map(x: dom.Object): cod.Object
@@ -55,9 +55,9 @@ class Functor [
     cod.Morphism(map(x), map(x)),
     fmap(x, x)(dom.id(x)),
     cod.id(map(x)))
-]
+}
 
-class NaturalTransformation [
+class NaturalTransformation {
   dom: Category
   cod: Category
   src: Functor(dom, cod)
@@ -71,11 +71,11 @@ class NaturalTransformation [
     cod.Morphism(src.map(x), tar.map(y)),
     cod.compose(src.map(x), tar.map(x), tar.map(y))(component(x), tar.fmap(x, y)(f)),
     cod.compose(src.map(x), src.map(y), tar.map(y))(src.fmap(x, y)(f), component(y)))
-]
+}
 
 NaturalTransformation
 
-class NaturalTransformation2 [
+class NaturalTransformation2 {
   dom: Category
   cod: Category
   src: Functor(dom, cod)
@@ -90,7 +90,7 @@ class NaturalTransformation2 [
     cod.Morphism(src.map(x), tar.map(y)),
     cod.compose(src.map(x), tar.map(x), tar.map(y))(component(x), tar.fmap(x, y)(f)),
     cod.compose(src.map(x), src.map(y), tar.map(y))(src.fmap(x, y)(f), component(y)))
-]
+}
 
 NaturalTransformation2
 
