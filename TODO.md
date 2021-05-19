@@ -1,8 +1,11 @@
-- `subst_exp`
 - elab `super` in `Exps.Ext` to object with parent fields
+  - use the context instead expression substitution
 
 - use `subtype` instead of `conversion`
-- elab the type of obj to be fulfilled class
+
+- when we do a typed binding, we need to be able to refine the declared type
+  - this is specially needed for `<var>: <fulfilled class> = <object>`
+  - this must also recurse into the structure of nested class and object, maybe even for pi type
 
 - fix `evaluate` for `trivial_groupoid`
 
