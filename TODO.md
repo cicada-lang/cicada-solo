@@ -1,4 +1,4 @@
-- [refactoring] `Telescope` no `check_properties_aux`
+- [refactoring] `Telescope` pull `fulfilled` into `ClsValue`
 
 - elab `super` in `Exps.Ext` to object with parent fields
   - use the context instead expression substitution

@@ -17,8 +17,7 @@ export class ClsValue {
   }
 
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
-    const { cores } = this.telescope.check_properties_aux(ctx, properties)
-    return cores
+    return this.telescope.check_properties(ctx, properties)
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
