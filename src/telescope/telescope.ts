@@ -38,22 +38,6 @@ export class Telescope {
     }
   }
 
-  env_extend_by_values(values: Map<string, Value>): Telescope {
-    return new Telescope(
-      this.env.extend_by_values(values),
-      this.entries,
-      this.fulfilled
-    )
-  }
-
-  env_extend(name: string, value: Value): Telescope {
-    return new Telescope(
-      this.env.extend(name, value),
-      this.entries,
-      this.fulfilled
-    )
-  }
-
   get names(): Array<string> {
     return [
       ...this.fulfilled.map((entry) => entry.name),
