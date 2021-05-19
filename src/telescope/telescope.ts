@@ -148,15 +148,10 @@ export class Telescope {
     )
   }
 
-  readback_aux(
+  readback(
     ctx: Ctx
-  ): {
-    entries: Array<{ name: string; t: Core; exp?: Core }>
-    ctx: Ctx
-    values: Map<string, Value>
-  } {
+  ): Array<{ name: string; t: Core; exp?: Core }> {
     const entries: Array<{ name: string; t: Core; exp?: Core }> = []
-    const values: Map<string, Value> = new Map()
 
     let telescope: Telescope = this
 
@@ -164,7 +159,6 @@ export class Telescope {
       const t_exp = readback(ctx, new Cores.TypeValue(), t)
       const exp = readback(ctx, t, value)
       entries.push({ name, t: t_exp, exp })
-      values.set(name, value)
       ctx = ctx.extend(name, t, value)
     }
 
@@ -173,19 +167,17 @@ export class Telescope {
       const t_exp = readback(ctx, new Cores.TypeValue(), t)
       if (value) {
         entries.push({ name, t: t_exp, exp: readback(ctx, t, value) })
-        values.set(name, value)
         ctx = ctx.extend(name, t, value)
         telescope = telescope.fill(value)
       } else {
         entries.push({ name, t: t_exp })
         const value = new Cores.NotYetValue(t, new Cores.VarNeutral(name))
-        values.set(name, value)
         ctx = ctx.extend(name, t)
         telescope = telescope.fill(value)
       }
     }
 
-    return { entries, ctx, values }
+    return entries
   }
 
   eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {

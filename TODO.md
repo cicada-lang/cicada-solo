@@ -1,4 +1,3 @@
-- [refactoring] `Telescope` no `readback_aux`
 - [refactoring] `Telescope` no `check_properties_aux`
 
 - elab `super` in `Exps.Ext` to object with parent fields

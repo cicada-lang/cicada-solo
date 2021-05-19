@@ -21,19 +21,9 @@ export class ClsValue {
     return cores
   }
 
-  readback_aux(
-    ctx: Ctx
-  ): {
-    entries: Array<{ name: string; t: Core; exp?: Core }>
-    ctx: Ctx
-    values: Map<string, Value>
-  } {
-    return this.telescope.readback_aux(ctx)
-  }
-
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Cores.TypeValue) {
-      const { entries } = this.readback_aux(ctx)
+      const entries = this.telescope.readback(ctx)
       return new Cores.Cls(entries, { name: this.name })
     }
   }
