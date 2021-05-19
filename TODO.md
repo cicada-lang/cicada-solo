@@ -1,5 +1,7 @@
 - elab `super` in `Exps.Ext` to object with parent fields
   - use the context instead expression substitution
+    - this does not work, because when evaluate `Cores.Cls`,
+      we can not put `super` in to the `env` of `Telescope` properly
 
 - use `subtype` instead of `conversion`
 
