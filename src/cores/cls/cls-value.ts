@@ -46,27 +46,8 @@ export class ClsValue {
     return new Cores.Obj(this.eta_expand_properties(ctx, value))
   }
 
-  dot_type_aux(
-    target: Value,
-    name: string
-  ): {
-    t?: Value
-    values: Map<string, Value>
-  } {
-    return this.telescope.dot_type_aux(target, name)
-  }
-
   dot_type(target: Value, name: string): Value {
-    const { t } = this.dot_type_aux(target, name)
-    if (!t) {
-      throw new Trace(
-        ut.aline(`
-        |In ClsValue, I meet unknown property name: ${name}
-        |`)
-      )
-    }
-
-    return t
+    return this.telescope.dot_type(target, name)
   }
 
   dot_value(target: Value, name: string): Value {

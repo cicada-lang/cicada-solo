@@ -15,6 +15,7 @@ export class Telescope {
   env: Env
   entries: Array<{ name: string; t: Core; exp?: Core }>
   fulfilled: Array<{ name: string; t: Value; value: Value }>
+  next?: { name: string; t: Value; value?: Value }
 
   constructor(
     env: Env,
@@ -24,6 +25,17 @@ export class Telescope {
     this.env = env
     this.entries = entries
     this.fulfilled = fulfilled || []
+
+    if (this.entries.length === 0) {
+      this.next = undefined
+    } else {
+      const [{ name, t, exp }] = this.entries
+      this.next = {
+        name,
+        t: evaluate(this.env, t),
+        value: exp ? evaluate(this.env, exp) : undefined,
+      }
+    }
   }
 
   env_extend_by_values(values: Map<string, Value>): Telescope {
@@ -49,48 +61,16 @@ export class Telescope {
     ]
   }
 
-  get next(): undefined | { name: string; t: Value; value?: Value } {
-    if (this.entries.length === 0) return undefined
-
-    const [{ name, t, exp }] = this.entries
-    evaluate(this.env, t)
-    return {
-      name,
-      t: evaluate(this.env, t),
-      value: exp ? evaluate(this.env, exp) : undefined,
-    }
-  }
-
   fulled(): boolean {
-    let telescope: Telescope = this
-    while (telescope.next) {
-      const { value } = telescope.next
-      if (value) {
-        telescope = telescope.fill(value)
-      } else {
-        return false
-      }
-    }
-
-    return true
+    if (!this.next) return true
+    if (!this.next.value) return false
+    return this.fill(this.next.value).fulled()
   }
 
   apply(arg: Value): Telescope {
-    let telescope: Telescope = this
-    while (telescope.next) {
-      const { value } = telescope.next
-      if (value) {
-        telescope = telescope.fill(value)
-      } else {
-        return telescope.fill(arg)
-      }
-    }
-
-    throw new Trace(
-      ut.aline(`
-        |The telescope is full.
-        |`)
-    )
+    if (!this.next) throw new Trace("The telescope is full")
+    if (!this.next.value) return this.fill(arg)
+    return this.fill(this.next.value).apply(arg)
   }
 
   fill(value: Value): Telescope {
@@ -118,40 +98,30 @@ export class Telescope {
     )
   }
 
-  dot_type_aux(
-    target: Value,
-    name: string
-  ): {
-    t?: Value
-    values: Map<string, Value>
-  } {
-    const values: Map<string, Value> = new Map()
-
+  dot_type(target: Value, name: string): Value {
     for (const entry of this.fulfilled) {
-      values.set(entry.name, entry.value)
       if (entry.name === name) {
-        return { t: entry.t, values }
+        return entry.t
       }
     }
 
     let telescope: Telescope = this
     while (telescope.next) {
       const next = telescope.next
-      if (next.value) {
-        values.set(next.name, next.value)
-      }
-      if (next.name !== name) {
-        const value = Cores.Dot.apply(target, next.name)
-        if (!next.value) {
-          values.set(next.name, value)
-        }
-        telescope = telescope.fill(value)
+
+      if (next.name === name) {
+        return next.t
       } else {
-        return { t: next.t, values }
+        const value = Cores.Dot.apply(target, next.name)
+        telescope = telescope.fill(value)
       }
     }
 
-    return { values }
+    throw new Trace(
+      ut.aline(`
+        |In Telescope, I meet unknown property name: ${name}
+        |`)
+    )
   }
 
   dot_value(target: Value, name: string): Value {
@@ -163,11 +133,11 @@ export class Telescope {
 
     let telescope: Telescope = this
     while (telescope.next) {
-      const { name: next_name, t } = telescope.next
-      if (next_name !== name) {
-        telescope = telescope.fill(Cores.Dot.apply(target, next_name))
+      const next = telescope.next
+      if (next.name === name) {
+        return Cores.Dot.apply(target, next.name)
       } else {
-        return Cores.Dot.apply(target, next_name)
+        telescope = telescope.fill(Cores.Dot.apply(target, next.name))
       }
     }
 
@@ -178,7 +148,9 @@ export class Telescope {
     )
   }
 
-  readback_aux(ctx: Ctx): {
+  readback_aux(
+    ctx: Ctx
+  ): {
     entries: Array<{ name: string; t: Core; exp?: Core }>
     ctx: Ctx
     values: Map<string, Value>

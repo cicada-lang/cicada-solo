@@ -1,3 +1,6 @@
+- [refactoring] `Telescope` no `readback_aux`
+- [refactoring] `Telescope` no `check_properties_aux`
+
 - elab `super` in `Exps.Ext` to object with parent fields
   - use the context instead expression substitution
     - this does not work, because when evaluate `Cores.Cls`,
@@ -10,15 +13,6 @@
   - this must also recurse into the structure of nested class and object, maybe even for pi type
 
 - fix `evaluate` for `trivial_groupoid`
-
-- [problem] I do not know how to define `Telescope` as a recursive data type, and use recursive functions to handle it.
-  - I think I need to separate `Telescope` into `fulfilled` and `Scope`, where `Scope` is recursive data type.
-  - Maybe because my recursion skills are rusty now. (I can re-read "The Little Schemer", and "The Seasoned Schemer")
-
-- [refactoring] instead of [pull up field [through composition]] maybe we should split `Telescope`
-
-- [refactoring] [pull up field [through composition]] -- `Telescope.fulfilled` to `ClsValue`
-- [refactoring] [pull up field [through composition]] -- `Telescope.fulfilled` to `ExtValue`
 
 - [refactoring] `Telescope` use recursion instead of loop
 
