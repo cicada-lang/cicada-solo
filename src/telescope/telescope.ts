@@ -45,12 +45,6 @@ export class Telescope {
     ]
   }
 
-  fulled(): boolean {
-    if (!this.next) return true
-    if (!this.next.value) return false
-    return this.fill(this.next.value).fulled()
-  }
-
   apply(arg: Value): Telescope {
     if (!this.next) throw new Trace("The telescope is full")
     if (!this.next.value) return this.fill(arg)

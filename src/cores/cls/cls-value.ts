@@ -43,10 +43,6 @@ export class ClsValue {
     return this.telescope.dot_value(target, name)
   }
 
-  fulled(): boolean {
-    return this.telescope.fulled()
-  }
-
   apply(arg: Value): Cores.ClsValue {
     return new Cores.ClsValue(this.telescope.apply(arg), { name: this.name })
   }
