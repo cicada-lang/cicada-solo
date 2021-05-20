@@ -1,4 +1,5 @@
-- [refactoring] `Telescope` pull `fulfilled` into `ClsValue`
+- [refactoring] `Telescope` use recursion
+- [refactoring] `ClsValue` extract `Fulfilled` class
 
 - elab `super` in `Exps.Ext` to object with parent fields
   - use the context instead expression substitution

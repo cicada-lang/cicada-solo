@@ -14,17 +14,14 @@ import * as ut from "../ut"
 export class Telescope {
   env: Env
   entries: Array<{ name: string; t: Core; exp?: Core }>
-  fulfilled: Array<{ name: string; t: Value; value: Value }>
   next?: { name: string; t: Value; value?: Value }
 
   constructor(
     env: Env,
     entries: Array<{ name: string; t: Core; exp?: Core }>,
-    fulfilled?: Array<{ name: string; t: Value; value: Value }>
   ) {
     this.env = env
     this.entries = entries
-    this.fulfilled = fulfilled || []
 
     if (this.entries.length === 0) {
       this.next = undefined
@@ -39,16 +36,7 @@ export class Telescope {
   }
 
   get names(): Array<string> {
-    return [
-      ...this.fulfilled.map((entry) => entry.name),
-      ...this.entries.map((entry) => entry.name),
-    ]
-  }
-
-  apply(arg: Value): Telescope {
-    if (!this.next) throw new Trace("The telescope is full")
-    if (!this.next.value) return this.fill(arg)
-    return this.fill(this.next.value).apply(arg)
+    return this.entries.map((entry) => entry.name)
   }
 
   fill(value: Value): Telescope {
@@ -64,25 +52,11 @@ export class Telescope {
 
     return new Telescope(
       this.env.extend(this.next.name, value),
-      this.entries.slice(1),
-      [
-        ...this.fulfilled,
-        {
-          name: this.next.name,
-          t: this.next.t,
-          value,
-        },
-      ]
+      this.entries.slice(1)
     )
   }
 
   dot_type(target: Value, name: string): Value {
-    for (const entry of this.fulfilled) {
-      if (entry.name === name) {
-        return entry.t
-      }
-    }
-
     let telescope: Telescope = this
     while (telescope.next) {
       const next = telescope.next
@@ -103,12 +77,6 @@ export class Telescope {
   }
 
   dot_value(target: Value, name: string): Value {
-    for (const entry of this.fulfilled) {
-      if (entry.name === name) {
-        return entry.value
-      }
-    }
-
     let telescope: Telescope = this
     while (telescope.next) {
       const next = telescope.next
@@ -130,14 +98,6 @@ export class Telescope {
     const entries: Array<{ name: string; t: Core; exp?: Core }> = []
 
     let telescope: Telescope = this
-
-    for (const { name, t, value } of this.fulfilled) {
-      const t_exp = readback(ctx, new Cores.TypeValue(), t)
-      const exp = readback(ctx, t, value)
-      entries.push({ name, t: t_exp, exp })
-      ctx = ctx.extend(name, t, value)
-    }
-
     while (telescope.next) {
       const { name, t, value } = telescope.next
       const t_exp = readback(ctx, new Cores.TypeValue(), t)
@@ -158,15 +118,6 @@ export class Telescope {
 
   eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
     const properties = new Map()
-
-    for (const { name, t, value: fulfilled_value } of this.fulfilled) {
-      const property_value = Cores.Dot.apply(value, name)
-      if (!conversion(ctx, t, property_value, fulfilled_value)) {
-        throw new Trace("property_value not equivalent to fulfilled_value")
-      }
-      const property_exp = readback(ctx, t, property_value)
-      properties.set(name, property_exp)
-    }
 
     let telescope: Telescope = this
     while (telescope.next) {
@@ -196,38 +147,6 @@ export class Telescope {
     // - just like checking `cons`.
 
     const cores: Map<string, Core> = new Map()
-
-    for (const { name, t, value } of this.fulfilled) {
-      const found = properties.get(name)
-
-      if (found === undefined) {
-        throw new Trace(
-          ut.aline(`
-            |Can not found satisfied entry name: ${name}
-            |`)
-        )
-      }
-
-      const core = check(ctx, found, t)
-      cores.set(name, core)
-      const found_value = evaluate(ctx.to_env(), core)
-
-      if (!conversion(ctx, t, value, found_value)) {
-        const t_repr = readback(ctx, new Cores.TypeValue(), t).repr()
-        const value_repr = readback(ctx, t, value).repr()
-        const found_repr = readback(ctx, t, found_value).repr()
-        throw new Trace(
-          ut.aline(`
-          |I am expecting the following two values to be the same ${t_repr}.
-          |But they are not.
-          |The value in object:
-          |  ${value_repr}
-          |The value in partially filled class:
-          |  ${found_repr}
-          |`)
-        )
-      }
-    }
 
     let telescope: Telescope = this
     while (telescope.next) {
@@ -270,9 +189,6 @@ export class Telescope {
   }
 
   extend_ctx(ctx: Ctx): Ctx {
-    for (const { name, t, value } of this.fulfilled) {
-      ctx = ctx.extend(name, t, value)
-    }
     for (const { name, t, exp } of this.entries) {
       const env = ctx.to_env()
       if (exp) {
