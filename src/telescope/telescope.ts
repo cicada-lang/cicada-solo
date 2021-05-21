@@ -95,19 +95,19 @@ export class Telescope {
       return entries
     } else {
       const t = readback(ctx, new Cores.TypeValue(), this.next.t)
-      if (this.next.value === undefined) {
+      if (this.next.value !== undefined) {
+        const exp = readback(ctx, this.next.t, this.next.value)
+        const entry = { name: this.next.name, t, exp }
+        return this.fill(this.next.value).readback_aux(
+          ctx.extend(this.next.name, this.next.t, this.next.value),
+          [...entries, entry]
+        )
+      } else {
         const entry = { name: this.next.name, t }
         const v = new Cores.VarNeutral(this.next.name)
         const value = new Cores.NotYetValue(this.next.t, v)
         return this.fill(value).readback_aux(
           ctx.extend(this.next.name, this.next.t),
-          [...entries, entry]
-        )
-      } else {
-        const exp = readback(ctx, this.next.t, this.next.value)
-        const entry = { name: this.next.name, t, exp }
-        return this.fill(this.next.value).readback_aux(
-          ctx.extend(this.next.name, this.next.t, this.next.value),
           [...entries, entry]
         )
       }
@@ -118,29 +118,43 @@ export class Telescope {
     return this.readback_aux(ctx, new Array())
   }
 
-  eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
-    const properties = new Map()
-
-    let telescope: Telescope = this
-    while (telescope.next) {
-      const { name, t, value: fulfilled_value } = telescope.next
-      if (fulfilled_value) {
-        const property_value = Cores.Dot.apply(value, name)
-        if (!conversion(ctx, t, property_value, fulfilled_value)) {
-          throw new Trace("property_value not equivalent to fulfilled_value")
+  eta_expand_properties_aux(
+    ctx: Ctx,
+    value: Value,
+    properties: Map<string, Core>
+  ): Map<string, Core> {
+    if (this.next === undefined) {
+      return properties
+    } else {
+      if (this.next.value !== undefined) {
+        const property_value = Cores.Dot.apply(value, this.next.name)
+        if (!conversion(ctx, this.next.t, property_value, this.next.value)) {
+          throw new Trace("property_value not equivalent to this.next.value")
         }
-        const property_exp = readback(ctx, t, property_value)
-        properties.set(name, property_exp)
-        telescope = telescope.fill(property_value)
+        return this.fill(property_value).eta_expand_properties_aux(
+          ctx,
+          value,
+          new Map([
+            ...properties,
+            [this.next.name, readback(ctx, this.next.t, property_value)],
+          ])
+        )
       } else {
-        const property_value = Cores.Dot.apply(value, name)
-        const property_exp = readback(ctx, t, property_value)
-        properties.set(name, property_exp)
-        telescope = telescope.fill(property_value)
+        const property_value = Cores.Dot.apply(value, this.next.name)
+        return this.fill(property_value).eta_expand_properties_aux(
+          ctx,
+          value,
+          new Map([
+            ...properties,
+            [this.next.name, readback(ctx, this.next.t, property_value)],
+          ])
+        )
       }
     }
+  }
 
-    return properties
+  eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
+    return this.eta_expand_properties_aux(ctx, value, new Map())
   }
 
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {

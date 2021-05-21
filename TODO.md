@@ -1,5 +1,3 @@
-- [refactoring] `Telescope` use recursion -- `extend_ctx`
-- [refactoring] `Telescope` use recursion -- `eta_expand_properties_aux`
 - [refactoring] `Telescope` use recursion -- `check_properties_aux`
 
 - [refactoring] `ClsValue` extract `Fulfilled` class
