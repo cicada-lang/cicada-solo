@@ -137,18 +137,18 @@ export class ClsValue {
       )
     }
 
-    if (next.value === undefined) {
-      const entry = { name: next.name, t: next.t, value: arg }
-      return new Cores.ClsValue(this.telescope.fill(arg), {
-        name: this.name,
-        fulfilled: [...this.fulfilled, entry],
-      })
-    } else {
+    if (next.value !== undefined) {
       const entry = { name: next.name, t: next.t, value: next.value }
       return new Cores.ClsValue(this.telescope.fill(next.value), {
         name: this.name,
         fulfilled: [...this.fulfilled, entry],
       }).apply(arg)
+    } else {
+      const entry = { name: next.name, t: next.t, value: arg }
+      return new Cores.ClsValue(this.telescope.fill(arg), {
+        name: this.name,
+        fulfilled: [...this.fulfilled, entry],
+      })
     }
   }
 
