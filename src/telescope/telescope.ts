@@ -131,6 +131,7 @@ export class Telescope {
         if (!conversion(ctx, this.next.t, property_value, this.next.value)) {
           throw new Trace("property_value not equivalent to this.next.value")
         }
+
         return this.fill(property_value).eta_expand_properties_aux(
           ctx,
           value,
@@ -157,34 +158,34 @@ export class Telescope {
     return this.eta_expand_properties_aux(ctx, value, new Map())
   }
 
-  check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
+  check_properties_aux(
+    ctx: Ctx,
+    properties: Map<string, Exp>,
+    cores: Map<string, Core>
+  ): Map<string, Core> {
     // NOTE We DO NOT need to update the `ctx` as we go along.
     // - the bindings in telescope will not effect current ctx.
     // - just like checking `cons`.
 
-    const cores: Map<string, Core> = new Map()
-
-    let telescope: Telescope = this
-    while (telescope.next) {
-      const { name, t: next_t, value } = telescope.next
-
-      const found = properties.get(name)
+    if (this.next === undefined) {
+      return cores
+    } else {
+      const found = properties.get(this.next.name)
       if (found === undefined) {
-        throw new Trace(
-          ut.aline(`
-          |Can not found next name: ${name}
-          |`)
-        )
+        throw new Trace(`Can not found next name: ${this.next.name}`)
       }
 
-      const core = check(ctx, found, next_t)
-      cores.set(name, core)
-      const found_value = evaluate(ctx.to_env(), core)
-      if (value) {
-        if (!conversion(ctx, next_t, value, found_value)) {
-          const t_repr = readback(ctx, new Cores.TypeValue(), next_t).repr()
-          const value_repr = readback(ctx, next_t, value).repr()
-          const found_repr = readback(ctx, next_t, found_value).repr()
+      const found_core = check(ctx, found, this.next.t)
+      const found_value = evaluate(ctx.to_env(), found_core)
+      if (this.next.value !== undefined) {
+        if (!conversion(ctx, this.next.t, this.next.value, found_value)) {
+          const t_repr = readback(
+            ctx,
+            new Cores.TypeValue(),
+            this.next.t
+          ).repr()
+          const value_repr = readback(ctx, this.next.t, this.next.value).repr()
+          const found_repr = readback(ctx, this.next.t, found_value).repr()
           throw new Trace(
             ut.aline(`
           |I am expecting the following two values to be the same ${t_repr}.
@@ -198,10 +199,16 @@ export class Telescope {
         }
       }
 
-      telescope = telescope.fill(found_value)
+      return this.fill(found_value).check_properties_aux(
+        ctx,
+        properties,
+        new Map([...cores, [this.next.name, found_core]])
+      )
     }
+  }
 
-    return cores
+  check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
+    return this.check_properties_aux(ctx, properties, new Map())
   }
 
   extend_ctx(ctx: Ctx): Ctx {

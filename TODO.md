@@ -1,4 +1,4 @@
-- [refactoring] `Telescope` use recursion -- `check_properties_aux`
+- [refactoring] `Telescope` extract the use of `check_conversion`
 
 - [refactoring] `ClsValue` extract `Fulfilled` class
 
