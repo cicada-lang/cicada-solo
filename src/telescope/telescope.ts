@@ -178,7 +178,6 @@ export class Telescope {
       if (found === undefined) {
         throw new Trace(`Can not found next name: ${this.next.name}`)
       }
-
       const found_core = check(ctx, found, this.next.t)
       const found_value = evaluate(ctx.to_env(), found_core)
       if (this.next.value !== undefined) {
@@ -235,13 +234,13 @@ function check_conversion(
     const to_description = opts.description?.to || ""
     throw new Trace(
       ut.aline(`
-          |I am expecting the following two values to be the same ${t_repr}.
-          |But they are not.
-          |from ${from_description}:
-          |  ${from_repr}
-          |to ${from_description}:
-          |  ${to_repr}
-          |`)
+        |I am expecting the following two values to be the same ${t_repr}.
+        |But they are not.
+        |from ${from_description}:
+        |  ${from_repr}
+        |to ${from_description}:
+        |  ${to_repr}
+        |`)
     )
   }
 }
