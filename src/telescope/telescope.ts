@@ -16,10 +16,7 @@ export class Telescope {
   entries: Array<{ name: string; t: Core; exp?: Core }>
   next?: { name: string; t: Value; value?: Value }
 
-  constructor(
-    env: Env,
-    entries: Array<{ name: string; t: Core; exp?: Core }>,
-  ) {
+  constructor(env: Env, entries: Array<{ name: string; t: Core; exp?: Core }>) {
     this.env = env
     this.entries = entries
 
@@ -40,7 +37,7 @@ export class Telescope {
   }
 
   fill(value: Value): Telescope {
-    if (!this.next) {
+    if (this.next === undefined) {
       throw new Trace(
         ut.aline(`
           |Filling fulled telescope.
@@ -57,63 +54,68 @@ export class Telescope {
   }
 
   dot_type(target: Value, name: string): Value {
-    let telescope: Telescope = this
-    while (telescope.next) {
-      const next = telescope.next
-
-      if (next.name === name) {
-        return next.t
-      } else {
-        const value = Cores.Dot.apply(target, next.name)
-        telescope = telescope.fill(value)
-      }
-    }
-
-    throw new Trace(
-      ut.aline(`
+    if (this.next === undefined) {
+      throw new Trace(
+        ut.aline(`
         |In Telescope, I meet unknown property name: ${name}
         |`)
-    )
+      )
+    } else {
+      if (this.next.name === name) {
+        return this.next.t
+      } else {
+        const value = Cores.Dot.apply(target, this.next.name)
+        return this.fill(value).dot_type(target, name)
+      }
+    }
   }
 
   dot_value(target: Value, name: string): Value {
-    let telescope: Telescope = this
-    while (telescope.next) {
-      const next = telescope.next
-      if (next.name === name) {
-        return Cores.Dot.apply(target, next.name)
-      } else {
-        telescope = telescope.fill(Cores.Dot.apply(target, next.name))
-      }
-    }
-
-    throw new Trace(
-      ut.aline(`
+    if (this.next === undefined) {
+      throw new Trace(
+        ut.aline(`
         |The property name: ${name} of class is undefined.
         |`)
-    )
+      )
+    } else {
+      if (this.next.name === name) {
+        return Cores.Dot.apply(target, this.next.name)
+      } else {
+        const value = Cores.Dot.apply(target, this.next.name)
+        return this.fill(value).dot_value(target, name)
+      }
+    }
+  }
+
+  readback_aux(
+    ctx: Ctx,
+    entries: Array<{ name: string; t: Core; exp?: Core }>
+  ): Array<{ name: string; t: Core; exp?: Core }> {
+    if (this.next === undefined) {
+      return entries
+    } else {
+      const t = readback(ctx, new Cores.TypeValue(), this.next.t)
+      if (this.next.value === undefined) {
+        const entry = { name: this.next.name, t }
+        const v = new Cores.VarNeutral(this.next.name)
+        const value = new Cores.NotYetValue(this.next.t, v)
+        return this.fill(value).readback_aux(
+          ctx.extend(this.next.name, this.next.t),
+          [...entries, entry]
+        )
+      } else {
+        const exp = readback(ctx, this.next.t, this.next.value)
+        const entry = { name: this.next.name, t, exp }
+        return this.fill(this.next.value).readback_aux(
+          ctx.extend(this.next.name, this.next.t, this.next.value),
+          [...entries, entry]
+        )
+      }
+    }
   }
 
   readback(ctx: Ctx): Array<{ name: string; t: Core; exp?: Core }> {
-    const entries: Array<{ name: string; t: Core; exp?: Core }> = []
-
-    let telescope: Telescope = this
-    while (telescope.next) {
-      const { name, t, value } = telescope.next
-      const t_exp = readback(ctx, new Cores.TypeValue(), t)
-      if (value) {
-        entries.push({ name, t: t_exp, exp: readback(ctx, t, value) })
-        ctx = ctx.extend(name, t, value)
-        telescope = telescope.fill(value)
-      } else {
-        entries.push({ name, t: t_exp })
-        const value = new Cores.NotYetValue(t, new Cores.VarNeutral(name))
-        ctx = ctx.extend(name, t)
-        telescope = telescope.fill(value)
-      }
-    }
-
-    return entries
+    return this.readback_aux(ctx, new Array())
   }
 
   eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
