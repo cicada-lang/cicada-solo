@@ -60,13 +60,13 @@ export class Telescope {
         |In Telescope, I meet unknown property name: ${name}
         |`)
       )
+    }
+
+    if (this.next.name === name) {
+      return this.next.t
     } else {
-      if (this.next.name === name) {
-        return this.next.t
-      } else {
-        const value = Cores.Dot.apply(target, this.next.name)
-        return this.fill(value).dot_type(target, name)
-      }
+      const value = Cores.Dot.apply(target, this.next.name)
+      return this.fill(value).dot_type(target, name)
     }
   }
 
@@ -77,13 +77,13 @@ export class Telescope {
         |The property name: ${name} of class is undefined.
         |`)
       )
+    }
+
+    if (this.next.name === name) {
+      return Cores.Dot.apply(target, this.next.name)
     } else {
-      if (this.next.name === name) {
-        return Cores.Dot.apply(target, this.next.name)
-      } else {
-        const value = Cores.Dot.apply(target, this.next.name)
-        return this.fill(value).dot_value(target, name)
-      }
+      const value = Cores.Dot.apply(target, this.next.name)
+      return this.fill(value).dot_value(target, name)
     }
   }
 
@@ -91,26 +91,25 @@ export class Telescope {
     ctx: Ctx,
     entries: Array<{ name: string; t: Core; exp?: Core }>
   ): Array<{ name: string; t: Core; exp?: Core }> {
-    if (this.next === undefined) {
-      return entries
+    if (this.next === undefined) return entries
+
+    const t = readback(ctx, new Cores.TypeValue(), this.next.t)
+
+    if (this.next.value !== undefined) {
+      const exp = readback(ctx, this.next.t, this.next.value)
+      const entry = { name: this.next.name, t, exp }
+      return this.fill(this.next.value).readback_aux(
+        ctx.extend(this.next.name, this.next.t, this.next.value),
+        [...entries, entry]
+      )
     } else {
-      const t = readback(ctx, new Cores.TypeValue(), this.next.t)
-      if (this.next.value !== undefined) {
-        const exp = readback(ctx, this.next.t, this.next.value)
-        const entry = { name: this.next.name, t, exp }
-        return this.fill(this.next.value).readback_aux(
-          ctx.extend(this.next.name, this.next.t, this.next.value),
-          [...entries, entry]
-        )
-      } else {
-        const entry = { name: this.next.name, t }
-        const v = new Cores.VarNeutral(this.next.name)
-        const value = new Cores.NotYetValue(this.next.t, v)
-        return this.fill(value).readback_aux(
-          ctx.extend(this.next.name, this.next.t),
-          [...entries, entry]
-        )
-      }
+      const entry = { name: this.next.name, t }
+      const v = new Cores.VarNeutral(this.next.name)
+      const value = new Cores.NotYetValue(this.next.t, v)
+      return this.fill(value).readback_aux(
+        ctx.extend(this.next.name, this.next.t),
+        [...entries, entry]
+      )
     }
   }
 
@@ -123,38 +122,34 @@ export class Telescope {
     value: Value,
     properties: Map<string, Core>
   ): Map<string, Core> {
-    if (this.next === undefined) {
-      return properties
+    if (this.next === undefined) return properties
+
+    if (this.next.value !== undefined) {
+      const property_value = Cores.Dot.apply(value, this.next.name)
+      check_conversion(ctx, this.next.t, property_value, this.next.value, {
+        description: {
+          from: "the property value",
+          to: "the next value in telescope",
+        },
+      })
+      return this.fill(property_value).eta_expand_properties_aux(
+        ctx,
+        value,
+        new Map([
+          ...properties,
+          [this.next.name, readback(ctx, this.next.t, property_value)],
+        ])
+      )
     } else {
-      if (this.next.value !== undefined) {
-        const property_value = Cores.Dot.apply(value, this.next.name)
-
-        check_conversion(ctx, this.next.t, property_value, this.next.value, {
-          description: {
-            from: "the property value",
-            to: "the next value in telescope",
-          },
-        })
-
-        return this.fill(property_value).eta_expand_properties_aux(
-          ctx,
-          value,
-          new Map([
-            ...properties,
-            [this.next.name, readback(ctx, this.next.t, property_value)],
-          ])
-        )
-      } else {
-        const property_value = Cores.Dot.apply(value, this.next.name)
-        return this.fill(property_value).eta_expand_properties_aux(
-          ctx,
-          value,
-          new Map([
-            ...properties,
-            [this.next.name, readback(ctx, this.next.t, property_value)],
-          ])
-        )
-      }
+      const property_value = Cores.Dot.apply(value, this.next.name)
+      return this.fill(property_value).eta_expand_properties_aux(
+        ctx,
+        value,
+        new Map([
+          ...properties,
+          [this.next.name, readback(ctx, this.next.t, property_value)],
+        ])
+      )
     }
   }
 
@@ -171,30 +166,28 @@ export class Telescope {
     // - the bindings in telescope will not effect current ctx.
     // - just like checking `cons`.
 
-    if (this.next === undefined) {
-      return cores
-    } else {
-      const found = properties.get(this.next.name)
-      if (found === undefined) {
-        throw new Trace(`Can not found next name: ${this.next.name}`)
-      }
-      const found_core = check(ctx, found, this.next.t)
-      const found_value = evaluate(ctx.to_env(), found_core)
-      if (this.next.value !== undefined) {
-        check_conversion(ctx, this.next.t, this.next.value, found_value, {
-          description: {
-            from: "the value in partially filled class",
-            to: "the value in object",
-          },
-        })
-      }
+    if (this.next === undefined) return cores
 
-      return this.fill(found_value).check_properties_aux(
-        ctx,
-        properties,
-        new Map([...cores, [this.next.name, found_core]])
-      )
+    const found = properties.get(this.next.name)
+    if (found === undefined) {
+      throw new Trace(`Can not found next name: ${this.next.name}`)
     }
+    const found_core = check(ctx, found, this.next.t)
+    const found_value = evaluate(ctx.to_env(), found_core)
+    if (this.next.value !== undefined) {
+      check_conversion(ctx, this.next.t, this.next.value, found_value, {
+        description: {
+          from: "the value in partially filled class",
+          to: "the value in object",
+        },
+      })
+    }
+
+    return this.fill(found_value).check_properties_aux(
+      ctx,
+      properties,
+      new Map([...cores, [this.next.name, found_core]])
+    )
   }
 
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
