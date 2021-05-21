@@ -1,5 +1,3 @@
-- [refactoring] `Telescope` extract the use of `check_conversion`
-
 - [refactoring] `ClsValue` extract `Fulfilled` class
 
 - elab `super` in `Exps.Ext` to object with parent fields

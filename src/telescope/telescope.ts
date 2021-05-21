@@ -128,9 +128,13 @@ export class Telescope {
     } else {
       if (this.next.value !== undefined) {
         const property_value = Cores.Dot.apply(value, this.next.name)
-        if (!conversion(ctx, this.next.t, property_value, this.next.value)) {
-          throw new Trace("property_value not equivalent to this.next.value")
-        }
+
+        check_conversion(ctx, this.next.t, property_value, this.next.value, {
+          description: {
+            from: "the property value",
+            to: "the next value in telescope",
+          },
+        })
 
         return this.fill(property_value).eta_expand_properties_aux(
           ctx,
@@ -178,25 +182,12 @@ export class Telescope {
       const found_core = check(ctx, found, this.next.t)
       const found_value = evaluate(ctx.to_env(), found_core)
       if (this.next.value !== undefined) {
-        if (!conversion(ctx, this.next.t, this.next.value, found_value)) {
-          const t_repr = readback(
-            ctx,
-            new Cores.TypeValue(),
-            this.next.t
-          ).repr()
-          const value_repr = readback(ctx, this.next.t, this.next.value).repr()
-          const found_repr = readback(ctx, this.next.t, found_value).repr()
-          throw new Trace(
-            ut.aline(`
-          |I am expecting the following two values to be the same ${t_repr}.
-          |But they are not.
-          |The value in object:
-          |  ${value_repr}
-          |The value in partially filled class:
-          |  ${found_repr}
-          |`)
-          )
-        }
+        check_conversion(ctx, this.next.t, this.next.value, found_value, {
+          description: {
+            from: "the value in partially filled class",
+            to: "the value in object",
+          },
+        })
       }
 
       return this.fill(found_value).check_properties_aux(
@@ -221,5 +212,36 @@ export class Telescope {
       }
     }
     return ctx
+  }
+}
+
+function check_conversion(
+  ctx: Ctx,
+  t: Value,
+  from: Value,
+  to: Value,
+  opts: {
+    description?: {
+      from: string
+      to: string
+    }
+  }
+): void {
+  if (!conversion(ctx, t, from, to)) {
+    const t_repr = readback(ctx, new Cores.TypeValue(), t).repr()
+    const from_repr = readback(ctx, t, from).repr()
+    const from_description = opts.description?.from || ""
+    const to_repr = readback(ctx, t, to).repr()
+    const to_description = opts.description?.to || ""
+    throw new Trace(
+      ut.aline(`
+          |I am expecting the following two values to be the same ${t_repr}.
+          |But they are not.
+          |from ${from_description}:
+          |  ${from_repr}
+          |to ${from_description}:
+          |  ${to_repr}
+          |`)
+    )
   }
 }
