@@ -5,7 +5,7 @@ import { Value } from "../../value"
 import { readback } from "../../readback"
 import { check } from "../../check"
 import { evaluate } from "../../evaluate"
-import { conversion } from "../../conversion"
+import { check_conversion } from "../../conversion"
 import { Trace } from "../../trace"
 import * as Cores from "../../cores"
 import * as ut from "../../ut"
@@ -37,25 +37,16 @@ export class Fulfilled {
         )
       }
 
-      const core = check(ctx, found, t)
-      cores.set(name, core)
-      const found_value = evaluate(ctx.to_env(), core)
+      const found_core = check(ctx, found, t)
+      cores.set(name, found_core)
+      const found_value = evaluate(ctx.to_env(), found_core)
 
-      if (!conversion(ctx, t, value, found_value)) {
-        const t_repr = readback(ctx, new Cores.TypeValue(), t).repr()
-        const value_repr = readback(ctx, t, value).repr()
-        const found_repr = readback(ctx, t, found_value).repr()
-        throw new Trace(
-          ut.aline(`
-          |I am expecting the following two values to be the same ${t_repr}.
-          |But they are not.
-          |The value in object:
-          |  ${value_repr}
-          |The value in partially filled class:
-          |  ${found_repr}
-          |`)
-        )
-      }
+      check_conversion(ctx, t, value, found_value, {
+        description: {
+          from: "the value in object",
+          to: "the value in partially filled class",
+        },
+      })
     }
 
     return cores
@@ -82,11 +73,14 @@ export class Fulfilled {
 
     for (const entry of this.entries) {
       const property_value = Cores.Dot.apply(value, entry.name)
-      if (!conversion(ctx, entry.t, property_value, entry.value)) {
-        throw new Trace(
-          "property_value not equivalent to the fulfilled entry value"
-        )
-      }
+
+      check_conversion(ctx, entry.t, property_value, entry.value, {
+        description: {
+          from: "the property value",
+          to: "the fulfilled entry value",
+        },
+      })
+
       const property_exp = readback(ctx, entry.t, property_value)
       properties.set(entry.name, property_exp)
     }

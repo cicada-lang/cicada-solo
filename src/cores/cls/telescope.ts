@@ -3,7 +3,7 @@ import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { conversion } from "../../conversion"
+import { check_conversion } from "../../conversion"
 import { readback } from "../../readback"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
@@ -204,36 +204,5 @@ export class Telescope {
       }
     }
     return ctx
-  }
-}
-
-function check_conversion(
-  ctx: Ctx,
-  t: Value,
-  from: Value,
-  to: Value,
-  opts: {
-    description?: {
-      from: string
-      to: string
-    }
-  }
-): void {
-  if (!conversion(ctx, t, from, to)) {
-    const t_repr = readback(ctx, new Cores.TypeValue(), t).repr()
-    const from_repr = readback(ctx, t, from).repr()
-    const from_description = opts.description?.from || ""
-    const to_repr = readback(ctx, t, to).repr()
-    const to_description = opts.description?.to || ""
-    throw new Trace(
-      ut.aline(`
-        |I am expecting the following two values to be the same ${t_repr}.
-        |But they are not.
-        |from ${from_description}:
-        |  ${from_repr}
-        |to ${from_description}:
-        |  ${to_repr}
-        |`)
-    )
   }
 }
