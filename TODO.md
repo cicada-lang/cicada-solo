@@ -1,3 +1,5 @@
+- should we have a `Exp.subexps` interface (readonly query for sub-expressions)?
+
 - `check` use `subtype` instead of `conversion`
   - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
   - `Value.subtype` can reuse `conversion`

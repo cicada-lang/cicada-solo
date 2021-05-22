@@ -1,10 +1,9 @@
 
-I am expecting the following two values to be the same type:
-  (_: String) -> (_1: String) -> (_2: String * String)
+I am expecting the following two values to be the same (_: String) -> (_1: String) -> (_2: String * String).
 But they are not.
-from:
+from left hand side:
   (_) => (_1) => cons(_, _1)
-to:
+to left hand side:
   (_) => (_1) => cons(_1, _)
 
 previous:

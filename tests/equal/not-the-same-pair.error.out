@@ -1,10 +1,9 @@
 
-I am expecting the following two values to be the same type:
-  (_: String * String)
+I am expecting the following two values to be the same (_: String * String).
 But they are not.
-from:
+from left hand side:
   cons("ratatouille", "baguette")
-to:
+to left hand side:
   cons("baguette", "ratatouille")
 
 previous:
