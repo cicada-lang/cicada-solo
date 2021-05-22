@@ -1,9 +1,10 @@
-- elab `super` in `Exps.Ext` to object with parent fields
-  - use the context instead expression substitution
-    - this does not work, because when evaluate `Cores.Cls`,
-      we can not put `super` in to the `env` of `Telescope` properly
+- `check` use `subtype` instead of `conversion`
+  - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
+  - `Value.subtype` can reuse `conversion`
 
-- use `subtype` instead of `conversion`
+- `Exp.subst`
+
+- elab `super` in `Exps.Ext` to object with parent fields -- by `Exp.subst`
 
 - when we do a typed binding, we need to be able to refine the declared type
   - this is specially needed for `<var>: <fulfilled class> = <object>`
