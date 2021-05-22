@@ -1,7 +1,7 @@
 import { Core, AlphaCtx } from "../../core"
 import { Value } from "../../value"
 import { Env } from "../../env"
-import { Telescope } from "../../telescope"
+import { Telescope } from "./telescope"
 import * as Cores from "../../cores"
 import * as ut from "../../ut"
 

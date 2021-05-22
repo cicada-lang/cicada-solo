@@ -1,4 +1,4 @@
-- [refactoring] `ClsValue` extract `Fulfilled` class
+- [refactoring] `ClsValue` extract `Fulfilled` class -- `cores/fulfilled.ts`
 
 - elab `super` in `Exps.Ext` to object with parent fields
   - use the context instead expression substitution
