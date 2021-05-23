@@ -1,11 +1,11 @@
-- should we have a `Exp.subexps` interface (readonly query for sub-expressions)?
-
 - `check` use `subtype` instead of `conversion`
   - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
   - `subtype` function default to `conversion`
   - `Value.subtype` call `subtype` for recursion
 
 - `Exp.subst`
+
+- should we have a `Exp.subexps` interface (readonly query for sub-expressions)?
 
 - elab `super` in `Exps.Ext` to object with parent fields -- by `Exp.subst`
 
