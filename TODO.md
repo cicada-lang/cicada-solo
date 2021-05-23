@@ -2,7 +2,8 @@
 
 - `check` use `subtype` instead of `conversion`
   - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
-  - `Value.subtype` can reuse `conversion`
+  - `subtype` function default to `conversion`
+  - `Value.subtype` call `subtype` for recursion
 
 - `Exp.subst`
 
