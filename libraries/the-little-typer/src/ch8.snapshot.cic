@@ -12,3 +12,5 @@ def equal_add_1_add1(n: Nat): Equal(Nat, add(1, n), add1(n)) = same
 
 def equal_add_1_add1_t = (n: Nat) -> Equal(Nat, add(1, n), add1(n))
 def equal_add_1_add1: equal_add_1_add1_t = (n) => same
+
+def equal_incr_add1(n: Nat): Equal(Nat, incr(n), add1(n)) = same
