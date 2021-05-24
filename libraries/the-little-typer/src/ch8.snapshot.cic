@@ -5,5 +5,5 @@ def add(x: Nat, y: Nat): Nat = nat_rec(y, x, (_prev, almost) => add1(almost))
 // NOTE increase
 def incr(x: Nat): Nat = nat_rec(x, 1, (_prev, almost) => add(1, almost))
 
-add(1)(3)
-incr(3)
+the Equal(Nat, add(1)(3), incr(3)) same
+the Equal(Nat, incr(3), add(1)(3)) same
