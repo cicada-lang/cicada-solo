@@ -11,13 +11,13 @@ def nat_ind_t: Type = (
 //   the definition of `pow` looks more natural.
 
 def add: (Nat, Nat) -> Nat =
-  (x, y) => nat_rec(y, x, (_prev, almost) => add1(almost))
+  (x, y) => nat_rec(x, y, (_prev, almost) => add1(almost))
 
 def mul: (Nat, Nat) -> Nat =
-  (x, y) => nat_rec(y, 0, (_prev, almost) => add(almost, x))
+  (x, y) => nat_rec(x, 0, (_prev, almost) => add(almost, y))
 
 def pow: (Nat, Nat) -> Nat =
-  (x, y) => nat_rec(y, 1, (_prev, almost) => mul(almost, x))
+  (x, y) => nat_rec(x, 1, (_prev, almost) => mul(almost, y))
 
 def eight =
   let four = add(2, 2)
