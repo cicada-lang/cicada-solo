@@ -3,6 +3,8 @@
   - we can not use `replace` to define `cong` be because we do not have implicit,
     maybe we should add this kind of implicit
 
+- if will be good to have a form of explicit `same(x)`
+
 - `check` use `subtype` instead of `conversion`
   - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
   - `subtype` function default to `conversion`
