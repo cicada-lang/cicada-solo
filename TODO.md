@@ -1,3 +1,8 @@
+- elaborate `cong` to `replace`
+
+  - we can not use `replace` to define `cong` be because we do not have implicit,
+    maybe we should add this kind of implicit
+
 - `check` use `subtype` instead of `conversion`
   - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
   - `subtype` function default to `conversion`
