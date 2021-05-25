@@ -34,7 +34,6 @@
 - vector/vector-ind
 - vector/vector-ind -- syntax -- `vector_ind()`
 
-- [tlt] 8. Pick a Number, Any Number
 - [tlt] 9. Double Your Money, Get Twice as Much
 - [tlt] 10. It Also Depends On the List
 - [tlt] 11. All Lists Are Created Equal
