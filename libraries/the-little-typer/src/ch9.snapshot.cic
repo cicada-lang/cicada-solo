@@ -28,7 +28,8 @@ def incr_add1_equal_step(
 ): Equal(Nat, add1(incr(prev)), add1(add1(prev))) =
   let motive = the (n: Nat) -> Type
     (n) => Equal(Nat, add1(incr(prev)), add1(n))
-  replace(almost, motive, same)
+  let base = the Equal(Nat, add1(incr(prev)), add1(incr(prev))) same
+  replace(almost, motive, base)
 
 def incr_add1_equal(n: Nat): Equal(Nat, incr(n), add1(n)) =
   nat_ind(
