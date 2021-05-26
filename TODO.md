@@ -1,3 +1,16 @@
+- fix `cong` with opts as first argument
+
+- [tlt] 9. Double Your Money, Get Twice as Much
+- [tlt] 10. It Also Depends On the List
+- [tlt] 11. All Lists Are Created Equal
+- [tlt] 12. Even Numbers Can Be Odd
+- [tlt] 13. Even Haf a Baker's Dozen
+- [tlt] 14. There's Safety in Numbers
+- [tlt] 15. Imagine That ...
+- [tlt] 16. If It's All the Same to You
+- [tlt] A. The Way Forward
+- [tlt] B. Rules Are Made to Be Spoken
+
 - if will be good to have a form of explicit `same(x)`
 
 - `check` use `subtype` instead of `conversion`
@@ -28,17 +41,6 @@
 
 - vector/vector-ind
 - vector/vector-ind -- syntax -- `vector_ind()`
-
-- [tlt] 9. Double Your Money, Get Twice as Much
-- [tlt] 10. It Also Depends On the List
-- [tlt] 11. All Lists Are Created Equal
-- [tlt] 12. Even Numbers Can Be Odd
-- [tlt] 13. Even Haf a Baker's Dozen
-- [tlt] 14. There's Safety in Numbers
-- [tlt] 15. Imagine That ...
-- [tlt] 16. If It's All the Same to You
-- [tlt] A. The Way Forward
-- [tlt] B. Rules Are Made to Be Spoken
 
 # questions?
 
