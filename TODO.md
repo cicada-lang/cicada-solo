@@ -1,8 +1,3 @@
-- elaborate `cong` to `replace`
-
-  - we can not use `replace` to define `cong` be because we do not have implicit,
-    maybe we should add this kind of implicit
-
 - if will be good to have a form of explicit `same(x)`
 
 - `check` use `subtype` instead of `conversion`
@@ -22,7 +17,7 @@
 
 - fix `evaluate` for `trivial_groupoid`
 
-- [refactoring] `Telescope` use recursion instead of loop
+- [maybe] elaborate `cong` to `replace`
 
 - [refactoring] `Exps.Cls.infer` and `Exps.Ext.infer`
 

@@ -1,17 +1,11 @@
-// 8. Pick a Number, Any Number
+// 9. Double Your Money, Get Twice as Much
 
 def add(x: Nat, y: Nat): Nat = nat_rec(x, y, (_prev, almost) => add1(almost))
 
 // NOTE increase
 def incr(x: Nat): Nat = nat_rec(x, 1, (_prev, almost) => add(1, almost))
 
-the Equal(Nat, add(1)(3), incr(3)) same
-the Equal(Nat, incr(3), add(1)(3)) same
-
-def add_1_add1_equal(n: Nat): Equal(Nat, add(1, n), add1(n)) = same
-
-def add_1_add1_equal_t = (n: Nat) -> Equal(Nat, add(1, n), add1(n))
-def add_1_add1_equal: add_1_add1_equal_t = (n) => same
+the Equal(Nat, incr(3), add1(3)) same
 
 def replace_t: Type = (
   X: Type,
@@ -20,14 +14,6 @@ def replace_t: Type = (
   motive: (X) -> Type,
   base: motive(from),
 ) -> motive(to)
-
-def cong(
-  X Y: Type,
-  from to: X,
-  target: Equal(X, from, to),
-  f: (X) -> Y,
-): Equal(Y, f(from), f(to)) =
-  replace(target, (to) => Equal(Y, f(from), f(to)), same)
 
 def incr_add1_equal_motive(n: Nat): Type = Equal(Nat, incr(n), add1(n))
 def incr_add1_equal_base: Equal(Nat, incr(zero), add1(zero)) = same
@@ -40,7 +26,9 @@ def incr_add1_equal_step(
   prev: Nat,
   almost: Equal(Nat, incr(prev), add1(prev))
 ): Equal(Nat, add1(incr(prev)), add1(add1(prev))) =
-  cong(Nat, Nat, incr(prev), add1(prev), almost, add(1))
+  let motive = the (n: Nat) -> Type
+    (n) => Equal(Nat, add1(incr(prev)), add1(n))
+  replace(almost, motive, same)
 
 def incr_add1_equal(n: Nat): Equal(Nat, incr(n), add1(n)) =
   nat_ind(
