@@ -172,6 +172,20 @@ export function cons_matcher(tree: pt.Tree): Exp {
         new Exps.The(exp_matcher(t), exp_matcher(exp)),
         exp_matcher(ret)
       ),
+    "cons:let_fn": ({ name, bindings, ret_t, ret, body }) => {
+      let fn = exp_matcher(ret)
+      for (const { names, exp } of bindings_matcher(bindings).reverse()) {
+        for (const name of names.reverse()) {
+          fn = new Exps.Fn(name, fn)
+        }
+      }
+
+      return new Exps.Let(
+        pt.str(name),
+        new Exps.The(pi_handler({ bindings, ret_t }), fn),
+        exp_matcher(body)
+      )
+    },
     "cons:the": ({ t, exp }) => new Exps.The(exp_matcher(t), exp_matcher(exp)),
   })(tree)
 }
