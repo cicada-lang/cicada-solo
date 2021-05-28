@@ -71,11 +71,25 @@ def add1_add_commute_on_2nd_arg(n j: Nat): Equal(Nat, add1(add(n, j)), add(n, ad
     Equal(Nat, add1(add(target, j)), add(target, add1(j)))
   let base: Equal(Nat, add1(add(0, j)), add(0, add1(j))) = same
   let step(
-    j: Nat,
     prev: Nat,
     almost: Equal(Nat, add1(add(prev, j)), add(prev, add1(j)))
   ): Equal(Nat, add1(add1(add(prev, j))), add1(add(prev, add1(j)))) =
     cong(Nat, Nat, add1(add(prev, j)), add(prev, add1(j)), almost, add(1))
-  nat_ind(n, motive(j), base, step(j))
+  nat_ind(n, motive(j), base, step)
 
-// def twice_double_equal(n: Nat): Equal(Nat, twice(n), double(n)) = same
+def twice_double_equal_step(
+  prev: Nat,
+  almost: Equal(Nat, add(prev, prev), double(prev))
+): Equal(Nat, add1(add(prev, add1(prev))), add1(add1(double(prev)))) =
+  let target: Equal(Nat, add1(add(prev, prev)), add(prev, add1(prev))) =
+    add1_add_commute_on_2nd_arg(prev, prev)
+  let motive(target: Nat): Type =
+    Equal(Nat, add1(target), add1(add1(double(prev))))
+  let base: Equal(Nat, add1(add1(add(prev, prev))), add1(add1(double(prev)))) =
+      cong(Nat, Nat, add(prev, prev), double(prev), almost, add(2))
+  replace(target, motive, base)
+
+def twice_double_equal(n: Nat): Equal(Nat, twice(n), double(n)) =
+  let motive(target: Nat): Type = Equal(Nat, twice(target), double(target))
+  let base: Equal(Nat, 0, 0) = same
+  nat_ind(n, motive, base, twice_double_equal_step)
