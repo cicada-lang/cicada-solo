@@ -100,3 +100,46 @@ def twice_double_equal_on_17: Equal(Nat, twice(17), double(17)) =
 
 def twice_double_equal_on_17_again: Equal(Nat, twice(17), double(17)) =
   same
+
+def vector_double(
+  E: Type,
+  length: Nat,
+): (Vector(E, length)) -> Vector(E, double(length)) =
+  let motive(target: Nat): Type = (Vector(E, target)) -> Vector(E, double(target))
+  let base: (Vector(E, 0)) -> Vector(E, double(0)) = (vector) => vecnil
+  let step(prev: Nat, almost: motive(prev)): motive(add1(prev)) =
+    (vector) =>
+      let head = vector_head(vector)
+      vec(head, vec(head, almost(vector_tail(vector))))
+  nat_ind(length, motive, base, step)
+
+// TODO fix equal between pi, should be able to use `doubler` as bound variable.
+
+// def vector_double(
+//   E: Type,
+//   length: Nat,
+// ): (Vector(E, length)) -> Vector(E, double(length)) =
+//   let motive(target: Nat): Type = (Vector(E, target)) -> Vector(E, double(target))
+//   let base: (Vector(E, 0)) -> Vector(E, double(0)) = (vector) => vecnil
+//   let step(prev: Nat, doubler: motive(prev)): motive(add1(prev)) =
+//     (vector) =>
+//       let head = vector_head(vector)
+//       vec(head, vec(head, doubler(vector_tail(vector))))
+//   nat_ind(length, motive, base, step)
+
+vector_double(String, 3, vec! ["a", "b", "c"])
+
+// TODO Can we use `replace` to define `symm`?
+
+// def symm(T: Type, from to: T, target: Equal(T, from, to)): Equal(T, to, from) = TODO
+
+// def vector_twice(
+//   E: Type,
+//   length: Nat,
+//   vector: Vector(E, length)
+// ): Vector(E, twice(length)) =
+//   let target: Equal(Nat, twice(length), double(length)) =
+//     twice_double_equal(length)
+//   let motive(length: Nat): Type = Vector(E, length)
+//   let base = vector_double(E, length, vector)
+//   replace(target, motive, base)

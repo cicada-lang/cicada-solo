@@ -12,3 +12,4 @@ the Nat 4
 the Nat 6
 the Nat 8
 the Equal(Nat, 34, 34) same
+the Vector(String, 6) vec("a", vec("a", vec("b", vec("b", vec("c", vec("c", vecnil))))))
