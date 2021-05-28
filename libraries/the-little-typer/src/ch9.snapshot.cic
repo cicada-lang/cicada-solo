@@ -15,6 +15,14 @@ def replace_t: Type = (
   base: motive(from),
 ) -> motive(to)
 
+def cong(
+  X Y: Type,
+  from to: X,
+  target: Equal(X, from, to),
+  f: (X) -> Y,
+): Equal(Y, f(from), f(to)) =
+  replace(target, (to) => Equal(Y, f(from), f(to)), same)
+
 def incr_add1_equal_motive(n: Nat): Type = Equal(Nat, incr(n), add1(n))
 def incr_add1_equal_base: Equal(Nat, incr(zero), add1(zero)) = same
 def incr_add1_equal_step_t: Type = (
@@ -22,6 +30,7 @@ def incr_add1_equal_step_t: Type = (
   almost: Equal(Nat, incr(prev), add1(prev))
 ) -> Equal(Nat, add1(incr(prev)), add1(add1(prev)))
 
+// NOTE Let's prove `incr_add1_equal_step` use `replace` directly.
 def incr_add1_equal_step(
   prev: Nat,
   almost: Equal(Nat, incr(prev), add1(prev))
@@ -42,3 +51,40 @@ incr_add1_equal(0)
 incr_add1_equal(1)
 incr_add1_equal(2)
 incr_add1_equal(3)
+
+def double(n: Nat): Nat = nat_rec(n, 0, (_prev, almost) => add1(add1(almost)))
+
+double(1)
+double(2)
+double(3)
+double(4)
+
+def twice(n: Nat): Nat = add(n, n)
+
+twice(1)
+twice(2)
+twice(3)
+twice(4)
+
+def add1_add_commute_on_2nd_arg(n j: Nat): Equal(Nat, add1(add(n, j)), add(n, add1(j))) =
+  let motive = the (j: Nat) -> (target: Nat) -> Type
+    (j, target) => Equal(Nat, add1(add(target, j)), add(target, add1(j)))
+  let base = the Equal(Nat, add1(add(0, j)), add(0, add1(j))) same
+  let step = the (
+    j: Nat,
+    prev: Nat,
+    almost: Equal(Nat, add1(add(prev, j)), add(prev, add1(j)))
+  ) -> Equal(Nat, add1(add1(add(prev, j))), add1(add(prev, add1(j))))
+    (j, prev, almost) => cong(Nat, Nat, add1(add(prev, j)), add(prev, add1(j)), almost, add(1))
+  nat_ind(n, motive(j), base, step(j))
+
+// def add1_add_commute_on_2nd_arg(n j: Nat): Equal(Nat, add1(add(n, j)), add(n, add1(j))) =
+//   let motive(j: Nat, target: Nat): Type = Equal(Nat, add1(add(target, j)), add(target, add1(j)))
+//   let base: Equal(Nat, add1(add(0, j)), add(0, add1(j))) = same
+//   let step(
+//     j: Nat, prev: Nat, almost: Equal(Nat, add1(add(prev, j)), add(prev, add1(j)))
+//   ): Equal(Nat, add1(add1(add(prev, j))), add1(add(prev, add1(j)))) =
+//     (j, prev, almost) => cong(Nat, Nat, add1(add(prev, j)), add(prev, add1(j)), almost, add(1))
+//   nat_ind(n, motive(j), base, step(j))
+
+// def twice_double_equal(n: Nat): Equal(Nat, twice(n), double(n)) = same

@@ -3,3 +3,11 @@ the Equal(Nat, 1, 1) same
 the Equal(Nat, 2, 2) same
 the Equal(Nat, 3, 3) same
 the Equal(Nat, 4, 4) same
+the Nat 2
+the Nat 4
+the Nat 6
+the Nat 8
+the Nat 2
+the Nat 4
+the Nat 6
+the Nat 8
