@@ -1,4 +1,3 @@
-
 let one = add1(zero)
 let two = add1(one)
 two

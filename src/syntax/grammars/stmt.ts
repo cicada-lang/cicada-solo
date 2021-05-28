@@ -15,7 +15,7 @@ export const stmt = {
       '"="',
       { exp: "exp" },
     ],
-    "stmt:fn": [
+    "stmt:def_fn": [
       '"def"',
       { name: "identifier" },
       '"("',

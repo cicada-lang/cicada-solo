@@ -179,6 +179,22 @@ export const cons = {
       { exp: "exp" },
       { ret: "exp" },
     ],
+    "cons:let_the": [
+      '"let"',
+      { name: "identifier" },
+      '":"',
+      { t: "exp" },
+      '"="',
+      { exp: "exp" },
+      { ret: "exp" },
+    ],
+    // "cons:let_fn": [
+    //   '"let"',
+    //   { name: "identifier" },
+    //   '"="',
+    //   { exp: "exp" },
+    //   { ret: "exp" },
+    // ],
     "cons:the": ['"the"', { t: "exp" }, { exp: "exp" }],
   },
 }

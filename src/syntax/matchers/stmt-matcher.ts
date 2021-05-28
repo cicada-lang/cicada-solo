@@ -25,7 +25,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         pt.str(name),
         new Exps.The(exp_matcher(t), exp_matcher(exp))
       ),
-    "stmt:fn": ({ name, bindings, ret_t, ret }) => {
+    "stmt:def_fn": ({ name, bindings, ret_t, ret }) => {
       let fn = exp_matcher(ret)
       for (const { names, exp } of bindings_matcher(bindings).reverse()) {
         for (const name of names.reverse()) {

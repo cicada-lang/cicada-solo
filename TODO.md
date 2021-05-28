@@ -1,4 +1,4 @@
-- syntax sugar to define function for `let` -- just like `def`
+- `cons:let_fn` -- syntax sugar to define function for `let` -- just like `def`
 
 - [tlt] 9. Double Your Money, Get Twice as Much
 - [tlt] 10. It Also Depends On the List

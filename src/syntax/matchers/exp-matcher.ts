@@ -166,6 +166,12 @@ export function cons_matcher(tree: pt.Tree): Exp {
     "cons:type": () => new Exps.Type(),
     "cons:let": ({ name, exp, ret }) =>
       new Exps.Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),
+    "cons:let_the": ({ name, t, exp, ret }) =>
+      new Exps.Let(
+        pt.str(name),
+        new Exps.The(exp_matcher(t), exp_matcher(exp)),
+        exp_matcher(ret)
+      ),
     "cons:the": ({ t, exp }) => new Exps.The(exp_matcher(t), exp_matcher(exp)),
   })(tree)
 }
