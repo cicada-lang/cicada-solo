@@ -1,63 +1,20 @@
-export const exp = {
+export const elim = {
   $grammar: {
-    "exp:var": [{ name: "identifier" }],
-    "exp:pi": [
-      '"("',
-      { bindings: "bindings" },
-      '")"',
-      '"-"',
-      '">"',
-      { ret_t: "exp" },
-    ],
-    "exp:fn": ['"("', { names: "names" }, '")"', '"="', '">"', { ret: "exp" }],
-    "exp:ap": [
+    "elim:var": [{ name: "identifier" }],
+    "elim:ap": [
       { target: "identifier" },
       { args: { $ap: ["one_or_more", '"("', "exps", '")"'] } },
     ],
-    "exp:sigma": [
-      '"("',
-      { name: "identifier" },
-      '":"',
-      { car_t: "exp" },
-      '"*"',
-      { cdr_t: "exp" },
-      '")"',
-    ],
-    "exp:pair": ['"("', { car_t: "exp" }, '"*"', { cdr_t: "exp" }, '")"'],
-    "exp:cons": ['"cons"', '"("', { car: "exp" }, '","', { cdr: "exp" }, '")"'],
-    "exp:car": ['"car"', '"("', { target: "exp" }, '")"'],
-    "exp:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
-    "exp:cls": [
-      '"class"',
-      '"{"',
-      { entries: { $ap: ["zero_or_more", "cls_entry"] } },
-      '"}"',
-    ],
-    "exp:ext": [
-      '"class"',
-      '"extends"',
-      { parent_name: "identifier" },
-      '"{"',
-      { entries: { $ap: ["zero_or_more", "cls_entry"] } },
-      '"}"',
-    ],
-    "exp:obj": [
-      '"{"',
-      { properties: { $ap: ["zero_or_more", "property"] } },
-      '"}"',
-    ],
-    "exp:dot_field": [{ target: "exp" }, '"."', { name: "identifier" }],
-    "exp:dot_method": [
-      { target: "exp" },
+    "elim:car": ['"car"', '"("', { target: "exp" }, '")"'],
+    "elim:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
+    "elim:dot_field": [{ target: "elim" }, '"."', { name: "identifier" }],
+    "elim:dot_method": [
+      { target: "elim" },
       '"."',
       { name: "identifier" },
       { args: { $ap: ["one_or_more", '"("', "exps", '")"'] } },
     ],
-    "exp:nat": ['"Nat"'],
-    "exp:zero": ['"zero"'],
-    "exp:add1": ['"add1"', '"("', { prev: "exp" }, '")"'],
-    "exp:number": [{ value: { $pattern: ["number"] } }],
-    "exp:nat_ind": [
+    "elim:nat_ind": [
       '"nat_ind"',
       '"("',
       { target: "exp" },
@@ -69,7 +26,7 @@ export const exp = {
       { step: "exp" },
       '")"',
     ],
-    "exp:nat_rec": [
+    "elim:nat_rec": [
       '"nat_rec"',
       '"("',
       { target: "exp" },
@@ -79,11 +36,7 @@ export const exp = {
       { step: "exp" },
       '")"',
     ],
-    "exp:list": ['"List"', '"("', { elem_t: "exp" }, '")"'],
-    "exp:nil": ['"nil"'],
-    "exp:li": ['"li"', '"("', { head: "exp" }, '","', { tail: "exp" }, '")"'],
-    "exp:li_sugar": ['"li"', '"!"', '"["', { exps: "exps" }, '"]"'],
-    "exp:list_ind": [
+    "elim:list_ind": [
       '"list_ind"',
       '"("',
       { target: "exp" },
@@ -95,7 +48,7 @@ export const exp = {
       { step: "exp" },
       '")"',
     ],
-    "exp:list_rec": [
+    "elim:list_rec": [
       '"list_rec"',
       '"("',
       { target: "exp" },
@@ -105,31 +58,9 @@ export const exp = {
       { step: "exp" },
       '")"',
     ],
-    "exp:vector": [
-      '"Vector"',
-      '"("',
-      { elem_t: "exp" },
-      '","',
-      { length: "exp" },
-      '")"',
-    ],
-    "exp:vecnil": ['"vecnil"'],
-    "exp:vec": ['"vec"', '"("', { head: "exp" }, '","', { tail: "exp" }, '")"'],
-    "exp:vec_sugar": ['"vec"', '"!"', '"["', { exps: "exps" }, '"]"'],
-    "exp:vector_head": ['"vector_head"', '"("', { target: "exp" }, '")"'],
-    "exp:vector_tail": ['"vector_tail"', '"("', { target: "exp" }, '")"'],
-    "exp:equal": [
-      '"Equal"',
-      '"("',
-      { t: "exp" },
-      '","',
-      { from: "exp" },
-      '","',
-      { to: "exp" },
-      '")"',
-    ],
-    "exp:same": ['"same"'],
-    "exp:replace": [
+    "elim:vector_head": ['"vector_head"', '"("', { target: "exp" }, '")"'],
+    "elim:vector_tail": ['"vector_tail"', '"("', { target: "exp" }, '")"'],
+    "elim:replace": [
       '"replace"',
       '"("',
       { target: "exp" },
@@ -139,10 +70,7 @@ export const exp = {
       { base: "exp" },
       '")"',
     ],
-    "exp:trivial": ['"Trivial"'],
-    "exp:sole": ['"sole"'],
-    "exp:absurd": ['"Absurd"'],
-    "exp:absurd_ind": [
+    "elim:absurd_ind": [
       '"absurd_ind"',
       '"("',
       { target: "exp" },
@@ -150,17 +78,115 @@ export const exp = {
       { motive: "exp" },
       '")"',
     ],
-    "exp:str": ['"String"'],
-    "exp:quote": [{ value: { $pattern: ["string"] } }],
-    "exp:type": ['"Type"'],
-    "exp:let": [
+  },
+}
+
+export const cons = {
+  $grammar: {
+    "cons:pi": [
+      '"("',
+      { bindings: "bindings" },
+      '")"',
+      '"-"',
+      '">"',
+      { ret_t: "exp" },
+    ],
+    "cons:fn": ['"("', { names: "names" }, '")"', '"="', '">"', { ret: "exp" }],
+    "cons:sigma": [
+      '"("',
+      { name: "identifier" },
+      '":"',
+      { car_t: "exp" },
+      '"*"',
+      { cdr_t: "exp" },
+      '")"',
+    ],
+    "cons:pair": ['"("', { car_t: "exp" }, '"*"', { cdr_t: "exp" }, '")"'],
+    "cons:cons": [
+      '"cons"',
+      '"("',
+      { car: "exp" },
+      '","',
+      { cdr: "exp" },
+      '")"',
+    ],
+    "cons:cls": [
+      '"class"',
+      '"{"',
+      { entries: { $ap: ["zero_or_more", "cls_entry"] } },
+      '"}"',
+    ],
+    "cons:ext": [
+      '"class"',
+      '"extends"',
+      { parent_name: "identifier" },
+      '"{"',
+      { entries: { $ap: ["zero_or_more", "cls_entry"] } },
+      '"}"',
+    ],
+    "cons:obj": [
+      '"{"',
+      { properties: { $ap: ["zero_or_more", "property"] } },
+      '"}"',
+    ],
+    "cons:nat": ['"Nat"'],
+    "cons:zero": ['"zero"'],
+    "cons:add1": ['"add1"', '"("', { prev: "exp" }, '")"'],
+    "cons:number": [{ value: { $pattern: ["number"] } }],
+    "cons:list": ['"List"', '"("', { elem_t: "exp" }, '")"'],
+    "cons:nil": ['"nil"'],
+    "cons:li": ['"li"', '"("', { head: "exp" }, '","', { tail: "exp" }, '")"'],
+    "cons:li_sugar": ['"li"', '"!"', '"["', { exps: "exps" }, '"]"'],
+    "cons:vector": [
+      '"Vector"',
+      '"("',
+      { elem_t: "exp" },
+      '","',
+      { length: "exp" },
+      '")"',
+    ],
+    "cons:vecnil": ['"vecnil"'],
+    "cons:vec": [
+      '"vec"',
+      '"("',
+      { head: "exp" },
+      '","',
+      { tail: "exp" },
+      '")"',
+    ],
+    "cons:vec_sugar": ['"vec"', '"!"', '"["', { exps: "exps" }, '"]"'],
+    "cons:equal": [
+      '"Equal"',
+      '"("',
+      { t: "exp" },
+      '","',
+      { from: "exp" },
+      '","',
+      { to: "exp" },
+      '")"',
+    ],
+    "cons:same": ['"same"'],
+    "cons:trivial": ['"Trivial"'],
+    "cons:sole": ['"sole"'],
+    "cons:absurd": ['"Absurd"'],
+    "cons:str": ['"String"'],
+    "cons:quote": [{ value: { $pattern: ["string"] } }],
+    "cons:type": ['"Type"'],
+    "cons:let": [
       '"let"',
       { name: "identifier" },
       '"="',
       { exp: "exp" },
       { ret: "exp" },
     ],
-    "exp:the": ['"the"', { t: "exp" }, { exp: "exp" }],
+    "cons:the": ['"the"', { t: "exp" }, { exp: "exp" }],
+  },
+}
+
+export const exp = {
+  $grammar: {
+    "exp:elim": [{ elim: "elim" }],
+    "exp:cons": [{ cons: "cons" }],
   },
 }
 
