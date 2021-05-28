@@ -9,7 +9,7 @@
 - [tlt] A. The Way Forward
 - [tlt] B. Rules Are Made to Be Spoken
 
-- if will be good to have a form of explicit `same(x)`
+- it will be good to have a form of explicit `same(x)`
 
 - `check` use `subtype` instead of `conversion`
   - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
