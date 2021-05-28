@@ -23,6 +23,14 @@ def cong(
 ): Equal(Y, f(from), f(to)) =
   replace(target, (to) => Equal(Y, f(from), f(to)), same)
 
+// TODO Instead of implicit, how about the following?
+
+// def cong(
+//   target: Equal(let X: Type, let from: X, let to: X),
+//   f: (X) -> let Y: Type,
+// ): Equal(Y, f(from), f(to)) =
+//   replace(target, (to) => Equal(Y, f(from), f(to)), same)
+
 def incr_add1_equal_motive(n: Nat): Type = Equal(Nat, incr(n), add1(n))
 def incr_add1_equal_base: Equal(Nat, incr(zero), add1(zero)) = same
 def incr_add1_equal_step_t: Type = (
