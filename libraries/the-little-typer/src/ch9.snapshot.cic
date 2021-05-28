@@ -93,3 +93,8 @@ def twice_double_equal(n: Nat): Equal(Nat, twice(n), double(n)) =
   let motive(target: Nat): Type = Equal(Nat, twice(target), double(target))
   let base: Equal(Nat, 0, 0) = same
   nat_ind(n, motive, base, twice_double_equal_step)
+
+def twice_double_equal_on_17: Equal(Nat, twice(17), double(17)) =
+  twice_double_equal(17)
+
+twice_double_equal_on_17
