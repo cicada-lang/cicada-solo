@@ -137,17 +137,18 @@ def vector_double(
 
 vector_double(String, 3, vec! ["a", "b", "c"])
 
-// TODO Can we use `replace` to define `symm`?
+def symm(T: Type, from to: T, target: Equal(T, from, to)): Equal(T, to, from) =
+  replace(target, (x) => Equal(T, x, from), same)
 
-// def symm(T: Type, from to: T, target: Equal(T, from, to)): Equal(T, to, from) = TODO
+def vector_twice(
+  E: Type,
+  length: Nat,
+  vector: Vector(E, length)
+): Vector(E, twice(length)) =
+  let target: Equal(Nat, double(length), twice(length)) =
+    symm(Nat, twice(length), double(length), twice_double_equal(length))
+  let motive(length: Nat): Type = Vector(E, length)
+  let base = vector_double(E, length, vector)
+  replace(target, motive, base)
 
-// def vector_twice(
-//   E: Type,
-//   length: Nat,
-//   vector: Vector(E, length)
-// ): Vector(E, twice(length)) =
-//   let target: Equal(Nat, twice(length), double(length)) =
-//     twice_double_equal(length)
-//   let motive(length: Nat): Type = Vector(E, length)
-//   let base = vector_double(E, length, vector)
-//   replace(target, motive, base)
+vector_twice(String, 3, vec! ["a", "b", "c"])

@@ -1,4 +1,3 @@
-- [tlt] 9. Double Your Money, Get Twice as Much
 - [tlt] 10. It Also Depends On the List
 - [tlt] 11. All Lists Are Created Equal
 - [tlt] 12. Even Numbers Can Be Odd
