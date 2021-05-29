@@ -6,7 +6,7 @@
 - [tlt] 15. Imagine That ...
 - [tlt] 16. If It's All the Same to You
 
-- it will be good to have a form of explicit `same(x)`
+- it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
 
 - `check` use `subtype` instead of `conversion`
   - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
