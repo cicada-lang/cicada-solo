@@ -1,13 +1,10 @@
 // 1. The More Things Change, the More They Stay the Same
 
-
 the String
 "ratatouille"
 
-
 the (String * String)
 cons("ratatouille", "baguette")
-
 
 the Equal(
   String,
@@ -15,17 +12,14 @@ the Equal(
   "ratatouille")
 same
 
-
 the Equal(
   (String * String),
   cons("ratatouille", "baguette"),
   cons("ratatouille", "baguette"))
 same
 
-
 the String
 car(the (String * String) cons("ratatouille", "baguette"))
-
 
 the Equal(
   String,
@@ -38,11 +32,9 @@ the Type String
 the Type Type
 the Equal(Type, String, String) same
 
-
 the Type
 (car(the (Type * String) cons(String, "olive")) *
  cdr(the (String * Type) cons("oil", String)))
-
 
 the (
   car(the (Type * String) cons(String, "olive")) *
