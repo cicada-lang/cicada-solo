@@ -1,0 +1,2 @@
+the Type (bread: String * Equal(String, bread, "bagel"))
+the (bread: String * Equal(String, bread, "bagel")) cons("bagel", same)
