@@ -1,3 +1,8 @@
+- [refactoring] `check-library`
+  - [requirement] `cic check-library` handle `.error.cic`
+
+- [markdown] be able to embed cic code in markdown `.cic.md`
+
 - [tlt] 10. It Also Depends On the List
 - [tlt] 11. All Lists Are Created Equal
 - [tlt] 12. Even Numbers Can Be Odd
@@ -29,9 +34,6 @@
 
 - [requirement] support to use `let` to do local definitions in class
 
-- [refactoring] `check-library`
-  - [requirement] `cic check-library` handle `.error.cic`
-
 - vector/vector-ind
 - vector/vector-ind -- syntax -- `vector_ind()`
 
@@ -52,10 +54,6 @@
 
 - [pattern matching] algebric datatype -- `datatype`
   - generate `ind`
-
-# markdown support
-
-- be able to embed cic code in markdown `.cic.md`
 
 # library management
 
