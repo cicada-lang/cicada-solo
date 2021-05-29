@@ -18,10 +18,13 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
       if (!conversion(ctx, new Cores.TypeValue(), t, u)) {
         const u_exp = readback(ctx, new Cores.TypeValue(), u)
         const t_exp = readback(ctx, new Cores.TypeValue(), t)
+
         throw new Trace(
           ut.aline(`
-            |I infer the type to be ${u_exp.repr()}.
-            |But the expected type is ${t_exp.repr()}.
+            |I infer the type to be:
+            |  ${u_exp.repr()}
+            |But the expected type is:
+            |  ${t_exp.repr()}
             |`)
         )
       }
@@ -30,7 +33,8 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
     } else {
       throw new Trace(
         ut.aline(`
-          |I can not check the type of ${exp.repr()}.
+          |I can not check the type of:
+          |  ${exp.repr()}
           |I also can not check it by infer.
           |I suggest you add a type annotation to the expression.
           |`)

@@ -24,6 +24,6 @@ export class Fn extends Core {
 
   alpha_repr(ctx: AlphaCtx): string {
     const ret_repr = this.ret.alpha_repr(ctx.extend(this.name))
-    return `(${this.name}) => ${ret_repr}`
+    return `fn => ${ret_repr}`
   }
 }

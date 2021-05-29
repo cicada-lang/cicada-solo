@@ -1,6 +1,8 @@
 
-I infer the type to be String.
-But the expected type is Type.
+I infer the type to be:
+  String
+But the expected type is:
+  Type
 
 previous:
 - "courgette"

@@ -1,6 +1,8 @@
 
-I infer the type to be Morphism(x)(y).
-But the expected type is Morphism(x)(x).
+I infer the type to be:
+  Morphism(x)(y)
+But the expected type is:
+  Morphism(x)(x)
 
 previous:
 - f

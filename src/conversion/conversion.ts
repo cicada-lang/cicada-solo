@@ -11,7 +11,10 @@ export function conversion(ctx: Ctx, t: Value, x: Value, y: Value): boolean {
 }
 
 function alpha_equivalent(x: Core, y: Core): boolean {
-  return x.alpha_repr(new AlphaCtx()) === y.alpha_repr(new AlphaCtx())
+  const x_repr = x.alpha_repr(new AlphaCtx())
+  const y_repr = y.alpha_repr(new AlphaCtx())
+
+  return x_repr === y_repr
 }
 
 export function check_conversion(

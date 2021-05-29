@@ -115,25 +115,11 @@ def vector_double(
 ): (Vector(E, length)) -> Vector(E, double(length)) =
   let motive(target: Nat): Type = (Vector(E, target)) -> Vector(E, double(target))
   let base: (Vector(E, 0)) -> Vector(E, double(0)) = (vector) => vecnil
-  let step(prev: Nat, almost: motive(prev)): motive(add1(prev)) =
+  let step(prev: Nat, doubler: motive(prev)): motive(add1(prev)) =
     (vector) =>
       let head = vector_head(vector)
-      vec(head, vec(head, almost(vector_tail(vector))))
+      vec(head, vec(head, doubler(vector_tail(vector))))
   nat_ind(length, motive, base, step)
-
-// TODO fix equal between pi, should be able to use `doubler` as bound variable.
-
-// def vector_double(
-//   E: Type,
-//   length: Nat,
-// ): (Vector(E, length)) -> Vector(E, double(length)) =
-//   let motive(target: Nat): Type = (Vector(E, target)) -> Vector(E, double(target))
-//   let base: (Vector(E, 0)) -> Vector(E, double(0)) = (vector) => vecnil
-//   let step(prev: Nat, doubler: motive(prev)): motive(add1(prev)) =
-//     (vector) =>
-//       let head = vector_head(vector)
-//       vec(head, vec(head, doubler(vector_tail(vector))))
-//   nat_ind(length, motive, base, step)
 
 vector_double(String, 3, vec! ["a", "b", "c"])
 
