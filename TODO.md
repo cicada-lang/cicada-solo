@@ -73,3 +73,10 @@
 - [formalization] Topology theory
 - [formalization] Category of Groups
 - [formalization] Number theroy -- https://en.wikipedia.org/wiki/Number_theory
+
+# cicada-stoa
+
+- with oauth
+- be able to use github and gitlab as wiki's database
+  - one repo one group of pages
+  - edit => fork + PR + help from merger bot
