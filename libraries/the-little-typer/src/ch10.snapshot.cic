@@ -19,3 +19,6 @@ cons("toast", same)
 
 the (length: Nat * Vector(String, length))
 cons(6, peas(6))
+
+the (length: Nat * Vector(String, length))
+cons(2, vec! ["toast-and-jam", "tea"])
