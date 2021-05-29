@@ -1,0 +1,3 @@
+import { trivial_groupoid } from "category/trivial-groupoid.cic"
+
+trivial_groupoid

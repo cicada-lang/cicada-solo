@@ -22,7 +22,3 @@ def trivial_groupoid: Groupoid = {
   inv: (x, y, f) => sole
   inv_iso: (x, y, f) => trivial_isomorphism
 }
-
-// // TODO
-
-// trivial_groupoid

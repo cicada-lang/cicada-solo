@@ -23,8 +23,6 @@
   - this is specially needed for `<var>: <fulfilled class> = <object>`
   - this must also recurse into the structure of nested class and object, maybe even for pi type
 
-- fix `evaluate` for `trivial_groupoid`
-
 - [maybe] elaborate `cong` to `replace`
 
 - [refactoring] `Exps.Cls.infer` and `Exps.Ext.infer`
