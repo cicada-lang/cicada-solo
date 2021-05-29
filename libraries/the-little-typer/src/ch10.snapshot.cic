@@ -1,11 +1,21 @@
 // 10. It Also Depends On the List
 
-def add(x: Nat, y: Nat): Nat = nat_rec(x, y, (_prev, almost) => add1(almost))
+import { peas } from "ch07.snapshot.cic"
 
 the Type (bread: String * Equal(String, bread, "bagel"))
-the (bread: String * Equal(String, bread, "bagel")) cons("bagel", same)
+
+the (bread: String * Equal(String, bread, "bagel"))
+cons("bagel", same)
 
 the Type (T: Type * T)
 the (T: Type * T) cons(Nat, 1)
 the (T: Type * T) cons(String, "a")
+
+def add(x: Nat, y: Nat): Nat = nat_rec(x, y, (_prev, almost) => add1(almost))
 the (T: Type * T) cons((Nat) -> Nat, add(6))
+
+the (food: String * Equal(List(String), li(food, nil), li("toast", nil)))
+cons("toast", same)
+
+the (length: Nat * Vector(String, length))
+cons(6, peas(6))

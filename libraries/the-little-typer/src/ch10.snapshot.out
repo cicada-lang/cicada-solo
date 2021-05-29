@@ -1,2 +1,8 @@
 the Type (bread: String * Equal(String, bread, "bagel"))
 the (bread: String * Equal(String, bread, "bagel")) cons("bagel", same)
+the Type (T: Type * T)
+the (T: Type * T) cons(Nat, 1)
+the (T: Type * T) cons(String, "a")
+the (T: Type * T) cons((_: Nat) -> Nat, (_) => add1(add1(add1(add1(add1(add1(_)))))))
+the (food: String * Equal(List(String), li(food, nil), li("toast", nil))) cons("toast", same)
+the (length: Nat * Vector(String, length)) cons(6, vec("pea", vec("pea", vec("pea", vec("pea", vec("pea", vec("pea", vecnil)))))))
