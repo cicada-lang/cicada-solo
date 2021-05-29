@@ -5,8 +5,6 @@
 - [tlt] 14. There's Safety in Numbers
 - [tlt] 15. Imagine That ...
 - [tlt] 16. If It's All the Same to You
-- [tlt] A. The Way Forward
-- [tlt] B. Rules Are Made to Be Spoken
 
 - it will be good to have a form of explicit `same(x)`
 
