@@ -1,5 +1,3 @@
-- [test framework] [markdown] we may also make code block as `error` or `snapshot`
-
 - a structure must have its own equivalence relation -- for quotient structure
   - structure should take `Equivalence` as argument
   - is the axioms of `Equivalence` enough to be used for quotient structure?
