@@ -23,5 +23,6 @@ export class Def implements Stmt {
       evaluate(ctx.to_env(), inferred.core)
     )
     mod.env = mod.env.extend(this.name, evaluate(mod.env, inferred.core))
+    mod.enter(this)
   }
 }
