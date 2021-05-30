@@ -136,7 +136,21 @@ async function mod_snapshot(
     const file = Path.resolve(
       library.root_dir,
       library.config.src,
-      path.replace(/snapshot\.cic/, "snapshot.out")
+      path.replace(/snapshot\.cic$/, "snapshot.out")
+    )
+
+    await fs.promises.writeFile(file, mod.output)
+
+    if (opts.verbose) {
+      console.log(mod.output)
+    }
+  }
+
+  if (path.endsWith(".snapshot.md")) {
+    const file = Path.resolve(
+      library.root_dir,
+      library.config.src,
+      path.replace(/snapshot\.md$/, "snapshot.out")
     )
 
     await fs.promises.writeFile(file, mod.output)
