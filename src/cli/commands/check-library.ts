@@ -1,6 +1,7 @@
 import { LocalLibrary } from "../../library/local-library"
 import { Module } from "../../module"
 import { Trace } from "../../trace"
+import { doc_ext_p } from "../../doc"
 import pt from "@cicada-lang/partech"
 import chokidar from "chokidar"
 import moment from "moment"
@@ -86,7 +87,7 @@ async function watch(
 
   watcher.on("all", async (event, file) => {
     if (event !== "add" && event !== "change") return
-    if (!file.endsWith(".cic")) return
+    if (!doc_ext_p(file)) return
 
     const prefix = `${src_dir}/`
     const path = file.slice(prefix.length)
