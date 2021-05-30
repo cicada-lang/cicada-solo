@@ -1,15 +1,17 @@
+- prepare `MdDoc`
+
+- `Library` can fetch `doc: Doc` instead of `file: strign`
+
+- [refactoring] file is too low level a concept,
+  we should use "async generator of stmt" instead,
+  which will generalize:
+  - cic file
+  - md file and stmts in its code blocks
+  - REPL
+
 - a structure must have its own equivalence relation -- for quotient structure
   - structure should take `Equivalence` as argument
   - is the axioms of `Equivalence` enough to be used for quotient structure?
-
-- [refactor] code block's output should correspond to the code block
-
-  - file is too low level a concept,
-    we should use "async generator of stmt" instead,
-    which will generalize:
-    - cic file
-    - md file and stmts in its code blocks
-    - REPL
 
 - about built-in test framework
 
@@ -49,7 +51,7 @@
 
 - [maybe] elaborate `cong` to `replace`
 
-- [refactor] `Exps.Cls.infer` and `Exps.Ext.infer`
+- [refactoring] `Exps.Cls.infer` and `Exps.Ext.infer`
 
 - [requirement] support to use `let` to do local definitions in class
 

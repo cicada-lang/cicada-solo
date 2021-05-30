@@ -1,11 +1,16 @@
+import { Library } from "../library"
 import { Stmt } from "../stmt"
 
-// TODO
+export class DocEntry {
+  stmt: Stmt
 
-export abstract class Doc {
-  abstract text: string
-  abstract stmtGenerator: AsyncGenerator<Stmt>
+  constructor(opts: { stmt: Stmt }) {
+    this.stmt = opts.stmt
+  }
 }
 
-// MdDoc
-// CicDoc
+export abstract class Doc {
+  abstract library: Library
+  abstract text: string
+  abstract entry_gen(): AsyncGenerator<DocEntry>
+}
