@@ -2,10 +2,6 @@
   - structure should take `Equivalence` as argument
   - is the axioms of `Equivalence` enough to be used for quotient structure?
 
-- [markdown] be able to embed cic code in markdown `.cic.md`
-  - be able to distinguish in-site links from external links
-  - be able to generate TOC
-
 - [tlt] 10. It Also Depends On the List
 - [tlt] 11. All Lists Are Created Equal
 - [tlt] 12. Even Numbers Can Be Odd
