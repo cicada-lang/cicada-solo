@@ -14,6 +14,6 @@ export class CicDoc extends Doc {
 
   get entries(): Array<DocEntry> {
     const stmts = Syntax.parse_stmts(this.text)
-    return stmts.map(stmt => new DocEntry({ stmt }))
+    return stmts.map((stmt) => new DocEntry({ stmt }))
   }
 }
