@@ -1,0 +1,8 @@
+def add(x: Nat, y: Nat): Nat = nat_rec(x, y, (_prev, almost) => add1(almost))
+
+class Integer { left: Nat, right: Nat }
+
+def IntegerEqual(x: Integer, y: Integer): Type =
+  Equal(Nat, add(x.left, y.right), add(y.left, x.right))
+
+the IntegerEqual({ left: 10, right: 6 }, { left: 11, right: 7 }) same

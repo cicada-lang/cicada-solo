@@ -1,3 +1,6 @@
+- a structure must have its own equivalence relation -- for quotient structure
+  - structure should take `Equivalence` as argument
+
 - [refactoring] `check-library`
   - [requirement] `cic check-library` handle `.error.cic`
 
