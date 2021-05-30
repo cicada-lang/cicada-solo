@@ -1,5 +1,3 @@
-- [test framework] `cic check-library` handle `.error.cic`
-
 - [test framework] [markdown] we may also make code block as `error` or `snapshot`
 
 - a structure must have its own equivalence relation -- for quotient structure

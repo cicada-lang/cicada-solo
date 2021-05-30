@@ -39,7 +39,8 @@ async function check(
   for (const path of Object.keys(await library.fetch_files())) {
     try {
       const mod = await library.load(path, opts)
-      await mod_snapshot(library, path, mod, opts)
+      await snapshot_log(library, path, mod, opts)
+      maybe_assert_error(path)
 
       console.log(
         chalk.bold(`(check)`),
@@ -47,24 +48,7 @@ async function check(
         path
       )
     } catch (error) {
-      error_occured = true
-
-      if (error instanceof Trace) {
-        console.error(error.repr((exp) => exp.repr()))
-      } else if (error instanceof pt.ParsingError) {
-        const text = await library.fetch_file(path)
-        if (!text) {
-          console.error(`Unknown path: ${path}`)
-        } else {
-          let message = error.message
-          message += "\n"
-          message += pt.report(error.span, text)
-          console.error(message)
-        }
-      } else {
-        console.error(error)
-      }
-
+      error_occured = await error_log(error, path, library)
       console.log(
         chalk.bold(`(check)`),
         chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
@@ -94,7 +78,8 @@ async function watch(
 
     try {
       const mod = await library.reload(path, opts)
-      await mod_snapshot(library, path, mod, opts)
+      await snapshot_log(library, path, mod, opts)
+      maybe_assert_error(path)
 
       console.log(
         chalk.bold(`(${event})`),
@@ -102,22 +87,7 @@ async function watch(
         path
       )
     } catch (error) {
-      if (error instanceof Trace) {
-        console.error(error.repr((exp) => exp.repr()))
-      } else if (error instanceof pt.ParsingError) {
-        const text = await library.fetch_file(path)
-        if (!text) {
-          console.error(`Unknown path: ${path}`)
-        } else {
-          let message = error.message
-          message += "\n"
-          message += pt.report(error.span, text)
-          console.error(message)
-        }
-      } else {
-        console.error(error)
-      }
-
+      await error_log(error, path, library)
       console.log(
         chalk.bold(`(${event})`),
         chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
@@ -127,7 +97,71 @@ async function watch(
   })
 }
 
-async function mod_snapshot(
+function maybe_assert_error(path: string): void {
+  if (path.endsWith(".error.cic") || path.endsWith(".error.cic")) {
+    throw new Error(`I expect to find error in the file: ${path}`)
+  }
+}
+
+async function error_log(
+  error: Error,
+  path: string,
+  library: LocalLibrary
+): Promise<boolean> {
+  const report = await error_report(error, path, library)
+
+  if (path.endsWith(".error.cic")) {
+    const file = Path.resolve(
+      library.root_dir,
+      library.config.src,
+      path.replace(/cic$/, "out")
+    )
+
+    await fs.promises.writeFile(file, report)
+
+    return false
+  }
+
+  if (path.endsWith(".error.md")) {
+    const file = Path.resolve(
+      library.root_dir,
+      library.config.src,
+      path.replace(/md$/, "out")
+    )
+
+    await fs.promises.writeFile(file, report)
+
+    return false
+  }
+
+  console.error(report)
+
+  return true
+}
+
+async function error_report(
+  error: Error,
+  path: string,
+  library: LocalLibrary
+): Promise<string> {
+  if (error instanceof Trace) {
+    return error.repr((exp) => exp.repr())
+  } else if (error instanceof pt.ParsingError) {
+    const text = await library.fetch_file(path)
+    if (!text) {
+      return `Unknown path: ${path}`
+    } else {
+      let message = error.message
+      message += "\n"
+      message += pt.report(error.span, text)
+      return message
+    }
+  } else {
+    throw error
+  }
+}
+
+async function snapshot_log(
   library: LocalLibrary,
   path: string,
   mod: Module,
@@ -137,7 +171,7 @@ async function mod_snapshot(
     const file = Path.resolve(
       library.root_dir,
       library.config.src,
-      path.replace(/snapshot\.cic$/, "snapshot.out")
+      path.replace(/cic$/, "out")
     )
 
     await fs.promises.writeFile(file, mod.output)
@@ -151,7 +185,7 @@ async function mod_snapshot(
     const file = Path.resolve(
       library.root_dir,
       library.config.src,
-      path.replace(/snapshot\.md$/, "snapshot.out")
+      path.replace(/md$/, "out")
     )
 
     await fs.promises.writeFile(file, mod.output)
