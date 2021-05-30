@@ -6,7 +6,7 @@ import fs from "fs"
 import readdirp from "readdirp"
 import chalk from "chalk"
 
-export class LocalLibrary implements Library {
+export class LocalLibrary extends Library {
   root_dir: string
   config: LibraryConfig
   cached_mods: Map<string, Module>
@@ -16,6 +16,7 @@ export class LocalLibrary implements Library {
     config: LibraryConfig
     cached_mods?: Map<string, Module>
   }) {
+    super()
     this.root_dir = opts.root_dir
     this.config = opts.config
     this.cached_mods = opts.cached_mods || new Map()

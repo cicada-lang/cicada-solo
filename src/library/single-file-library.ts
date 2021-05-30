@@ -3,11 +3,12 @@ import { Module } from "../module"
 import * as Syntax from "../syntax"
 import fs from "fs"
 
-export class SingleFileLibrary implements Library {
+export class SingleFileLibrary extends Library {
   config: LibraryConfig
   path: string
 
   constructor(path: string) {
+    super()    
     this.path = path
     this.config = new LibraryConfig({
       name: "single-file-library",
