@@ -3,8 +3,20 @@
   - is the axioms of `Equivalence` enough to be used for quotient structure?
 
 - [refactoring] `check-library`
+  - code block's output should correspond to the code block
+    - a module know its list of stmts, and associate output of a stmt to the stmt
+    - file is too low level a concept,
+      we should use "iterator (steam) of stmts" instead,
+      which will generalize:
+      - cic file
+      - md file and stmts in its code blocks
+      - REPL
+
+- about built-in test framework
+
   - we might not use `.error.cic` `.snapshot.cic`
     because we need to support code block in markdown
+
   - `cic check-library` handle `.error.cic`
 
 - [markdown] be able to embed cic code in markdown `.cic.md`
