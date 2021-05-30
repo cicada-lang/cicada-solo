@@ -1,7 +1,3 @@
-- a structure must have its own equivalence relation -- for quotient structure
-  - structure should take `Equivalence` as argument
-  - is the axioms of `Equivalence` enough to be used for quotient structure?
-
 - [tlt] 10. It Also Depends On the List
 - [tlt] 11. All Lists Are Created Equal
 - [tlt] 12. Even Numbers Can Be Odd
@@ -9,6 +5,10 @@
 - [tlt] 14. There's Safety in Numbers
 - [tlt] 15. Imagine That ...
 - [tlt] 16. If It's All the Same to You
+
+- a structure must have its own equivalence relation -- for quotient structure
+  - structure should take `Equivalence` as argument
+  - is the axioms of `Equivalence` enough to be used for quotient structure?
 
 - it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
 
