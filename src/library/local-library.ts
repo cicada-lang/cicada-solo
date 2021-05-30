@@ -1,6 +1,6 @@
 import { Library, LibraryConfig } from "../library"
 import { Module } from "../module"
-import { CicDoc } from "../doc"
+import { Doc, doc_ext_p, doc_from_file } from "../doc"
 import Path from "path"
 import fs from "fs"
 import readdirp from "readdirp"
@@ -30,20 +30,20 @@ export class LocalLibrary extends Library {
     })
   }
 
-  async fetch_doc(path: string): Promise<CicDoc> {
+  async fetch_doc(path: string): Promise<Doc> {
     const file = Path.isAbsolute(path)
       ? path
       : Path.resolve(this.root_dir, this.config.src, path)
     const text = await fs.promises.readFile(file, "utf8")
-    return new CicDoc({ library: this, text })
+    return doc_from_file({ path, text, library: this })
   }
 
-  async fetch_docs(): Promise<Record<string, CicDoc>> {
+  async fetch_docs(): Promise<Record<string, Doc>> {
     const src_dir = Path.resolve(this.root_dir, this.config.src)
 
-    const docs: Record<string, CicDoc> = {}
+    const docs: Record<string, Doc> = {}
     for await (const { path } of readdirp(src_dir)) {
-      if (path.endsWith(".cic")) {
+      if (doc_ext_p(path)) {
         docs[path] = await this.fetch_doc(path)
       }
     }

@@ -1,6 +1,6 @@
 import { Library, LibraryConfig } from "../library"
 import { Module } from "../module"
-import { CicDoc } from "../doc"
+import { Doc, doc_from_file } from "../doc"
 import * as Syntax from "../syntax"
 import fs from "fs"
 
@@ -17,14 +17,14 @@ export class SingleFileLibrary extends Library {
     })
   }
 
-  async fetch_doc(path: string): Promise<CicDoc> {
+  async fetch_doc(path: string): Promise<Doc> {
     const text = fs.readFileSync(this.path, { encoding: "utf-8" })
-    return new CicDoc({ library: this, text })
+    return doc_from_file({ path: this.path, library: this, text })
   }
 
-  async fetch_docs(): Promise<Record<string, CicDoc>> {
+  async fetch_docs(): Promise<Record<string, Doc>> {
     const text = fs.readFileSync(this.path, { encoding: "utf-8" })
-    const doc = new CicDoc({ library: this, text })
+    const doc = doc_from_file({ path: this.path, library: this, text })
     return { [this.path]: doc }
   }
 

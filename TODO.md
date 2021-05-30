@@ -1,15 +1,13 @@
-- `MdDoc`
-
-- a structure must have its own equivalence relation -- for quotient structure
-  - structure should take `Equivalence` as argument
-  - is the axioms of `Equivalence` enough to be used for quotient structure?
-
 - about built-in test framework
 
   - we might not use `.error.cic` `.snapshot.cic`
     because we need to support code block in markdown
 
   - `cic check-library` handle `.error.cic`
+
+- a structure must have its own equivalence relation -- for quotient structure
+  - structure should take `Equivalence` as argument
+  - is the axioms of `Equivalence` enough to be used for quotient structure?
 
 - [markdown] be able to embed cic code in markdown `.cic.md`
   - be able to distinguish in-site links from external links

@@ -1,5 +1,6 @@
+import { Doc, DocEntry } from "../doc"
 import { Library } from "../library"
-import { Doc, DocEntry } from "./doc"
+import * as Syntax from "../syntax"
 import * as commonmark from "commonmark"
 
 export class MdDoc extends Doc {
@@ -13,8 +14,9 @@ export class MdDoc extends Doc {
   }
 
   get entries(): Array<DocEntry> {
-    // TODO
-    return []
+    return this.code_blocks.flatMap((code_block) =>
+      Syntax.parse_stmts(code_block.text).map((stmt) => new DocEntry({ stmt }))
+    )
   }
 
   get code_blocks(): Array<{ info: string; text: string }> {

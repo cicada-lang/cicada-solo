@@ -1,6 +1,6 @@
+import { Doc, DocEntry } from "../doc"
 import { Library } from "../library"
 import * as Syntax from "../syntax"
-import { Doc, DocEntry } from "./doc"
 
 export class CicDoc extends Doc {
   library: Library
