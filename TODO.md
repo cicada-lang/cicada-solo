@@ -1,5 +1,3 @@
-- prepare `MdDoc`
-
 - `Library` can fetch `doc: Doc` instead of `file: strign`
 
 - [refactoring] file is too low level a concept,
