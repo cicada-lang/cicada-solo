@@ -2,7 +2,9 @@
   - structure should take `Equivalence` as argument
 
 - [refactoring] `check-library`
-  - [requirement] `cic check-library` handle `.error.cic`
+  - we might not use `.error.cic` `.snapshot.cic`
+    because we need to support code block in markdown
+  - `cic check-library` handle `.error.cic`
 
 - [markdown] be able to embed cic code in markdown `.cic.md`
   - be able to distinguish in-site links from external links
