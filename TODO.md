@@ -1,4 +1,4 @@
-- `Library` can fetch `doc: Doc` instead of `file: strign`
+- `Library` can fetch `doc: Doc` instead of `file: string`
 
 - [refactoring] file is too low level a concept,
   we should use "async generator of stmt" instead,

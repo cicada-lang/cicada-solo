@@ -12,5 +12,5 @@ export class DocEntry {
 export abstract class Doc {
   abstract library: Library
   abstract text: string
-  abstract entry_gen(): AsyncGenerator<DocEntry>
+  abstract entries: Array<DocEntry>
 }
