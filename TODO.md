@@ -6,7 +6,7 @@
   - code block's output should correspond to the code block
     - a module know its list of stmts, and associate output of a stmt to the stmt
     - file is too low level a concept,
-      we should use "iterator (steam) of stmts" instead,
+      we should use "iterator (stream) of stmts" instead,
       which will generalize:
       - cic file
       - md file and stmts in its code blocks
