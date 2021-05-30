@@ -1,5 +1,6 @@
 - a structure must have its own equivalence relation -- for quotient structure
   - structure should take `Equivalence` as argument
+  - is the axioms of `Equivalence` enough to be used for quotient structure?
 
 - [refactoring] `check-library`
   - we might not use `.error.cic` `.snapshot.cic`
