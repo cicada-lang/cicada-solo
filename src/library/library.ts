@@ -7,11 +7,23 @@ import { Doc } from "../doc"
 export abstract class Library {
   abstract config: LibraryConfig
 
-  // fetch_doc(path: string): Promise<Doc>
-  // fetch_docs(): Promise<Record<string, Doc>>
+  abstract fetch_doc(path: string): Promise<Doc>
+  abstract fetch_docs(): Promise<Record<string, Doc>>
 
-  abstract fetch_file(path: string): Promise<string>
-  abstract fetch_files(): Promise<Record<string, string>>
+  async fetch_file(path: string): Promise<string> {
+    const doc = await this.fetch_doc(path)
+    return doc.text
+  }
+
+  async fetch_files(): Promise<Record<string, string>> {
+    const docs = await this.fetch_docs()
+    const files: Record<string, string> = {}
+    for (const [path, doc] of Object.entries(docs)) {
+      files[path] = doc.text
+    }
+
+    return files
+  }
 
   abstract load(path: string): Promise<Module>
   abstract reload(path: string): Promise<Module>

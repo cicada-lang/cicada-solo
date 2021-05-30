@@ -1,6 +1,6 @@
 import { Library, LibraryConfig } from "../library"
 import { Module } from "../module"
-import * as Syntax from "../syntax"
+import { CicDoc } from "../doc"
 import Path from "path"
 import fs from "fs"
 import readdirp from "readdirp"
@@ -30,26 +30,25 @@ export class LocalLibrary extends Library {
     })
   }
 
-  async fetch_file(path: string): Promise<string> {
+  async fetch_doc(path: string): Promise<CicDoc> {
     const file = Path.isAbsolute(path)
       ? path
       : Path.resolve(this.root_dir, this.config.src, path)
     const text = await fs.promises.readFile(file, "utf8")
-    return text
+    return new CicDoc({ library: this, text })
   }
 
-  async fetch_files(): Promise<Record<string, string>> {
+  async fetch_docs(): Promise<Record<string, CicDoc>> {
     const src_dir = Path.resolve(this.root_dir, this.config.src)
 
-    const files: Record<string, string> = {}
+    const docs: Record<string, CicDoc> = {}
     for await (const { path } of readdirp(src_dir)) {
       if (path.endsWith(".cic")) {
-        const text = await this.fetch_file(path)
-        files[path] = text
+        docs[path] = await this.fetch_doc(path)
       }
     }
 
-    return files
+    return docs
   }
 
   async load(
@@ -71,17 +70,9 @@ export class LocalLibrary extends Library {
     }
 
     const t0 = Date.now()
-
-    const text = await this.fetch_file(path)
-    const stmts = Syntax.parse_stmts(text)
-
+    const doc = await this.fetch_doc(path)
     const t1 = Date.now()
-
-    const mod = new Module({ library: this })
-    for (const stmt of stmts) {
-      await stmt.execute(mod)
-    }
-
+    const mod = await Module.from_doc(doc)
     const t2 = Date.now()
 
     if (opts.silent === false && mod.output) {

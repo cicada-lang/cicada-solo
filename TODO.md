@@ -1,11 +1,4 @@
-- `Library` can fetch `doc: Doc` instead of `file: string`
-
-- [refactoring] file is too low level a concept,
-  we should use "async generator of stmt" instead,
-  which will generalize:
-  - cic file
-  - md file and stmts in its code blocks
-  - REPL
+- `MdDoc`
 
 - a structure must have its own equivalence relation -- for quotient structure
   - structure should take `Equivalence` as argument

@@ -2,6 +2,7 @@ import { Library } from "../library"
 import { Stmt } from "../stmt"
 import { Env } from "../env"
 import { Ctx } from "../ctx"
+import { Doc } from "../doc"
 
 // NOTE
 // - a module knows which library it belongs to
@@ -35,6 +36,14 @@ export class Module {
     this.env = opts.env || new Env()
     this.ctx = opts.ctx || new Ctx()
     this.entries = opts.entries || []
+  }
+
+  static async from_doc(doc: Doc): Promise<Module> {
+    const mod = new Module({ library: doc.library })
+    for (const { stmt } of doc.entries) {
+      await stmt.execute(mod)
+    }
+    return mod
   }
 
   enter(stmt: Stmt, opts?: { output?: string }): void {

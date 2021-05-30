@@ -1,5 +1,6 @@
 import { Library, LibraryConfig } from "../library"
 import { Module } from "../module"
+import { CicDoc } from "../doc"
 import * as Syntax from "../syntax"
 import fs from "fs"
 
@@ -8,7 +9,7 @@ export class SingleFileLibrary extends Library {
   path: string
 
   constructor(path: string) {
-    super()    
+    super()
     this.path = path
     this.config = new LibraryConfig({
       name: "single-file-library",
@@ -16,14 +17,15 @@ export class SingleFileLibrary extends Library {
     })
   }
 
-  async fetch_file(path: string): Promise<string> {
+  async fetch_doc(path: string): Promise<CicDoc> {
     const text = fs.readFileSync(this.path, { encoding: "utf-8" })
-    return text
+    return new CicDoc({ library: this, text })
   }
 
-  async fetch_files(): Promise<Record<string, string>> {
+  async fetch_docs(): Promise<Record<string, CicDoc>> {
     const text = fs.readFileSync(this.path, { encoding: "utf-8" })
-    return { [this.path]: text }
+    const doc = new CicDoc({ library: this, text })
+    return { [this.path]: doc }
   }
 
   async reload(path: string): Promise<Module> {
@@ -38,13 +40,8 @@ export class SingleFileLibrary extends Library {
       )
     }
 
-    const text = fs.readFileSync(this.path, { encoding: "utf-8" })
-    const stmts = Syntax.parse_stmts(text)
-
-    const mod = new Module({ library: this })
-    for (const stmt of stmts) {
-      await stmt.execute(mod)
-    }
+    const doc = await this.fetch_doc(this.path)
+    const mod = await Module.from_doc(doc)
 
     if (mod.output) {
       console.log(mod.output)
