@@ -50,15 +50,14 @@ export function elim_matcher(tree: pt.Tree): Exp {
     "elim:cdr": ({ target }) => new Exps.Cdr(exp_matcher(target)),
     "elim:dot_field": ({ target, name }) =>
       new Exps.Dot(elim_matcher(target), pt.str(name)),
-    "elim:dot_method": ({ target, name, args }) => {
-      let result: Exp = new Exps.Dot(elim_matcher(target), pt.str(name))
-      for (const arg of pt.matchers.one_or_more_matcher(args)) {
-        for (const exp of exps_matcher(arg)) {
-          result = new Exps.Ap(result, exp)
-        }
-      }
-      return result
-    },
+    "elim:dot_method": ({ target, name, args }) =>
+      pt.matchers
+        .one_or_more_matcher(args)
+        .flatMap((arg) => exps_matcher(arg))
+        .reduce(
+          (result, exp) => new Exps.Ap(result, exp),
+          new Exps.Dot(elim_matcher(target), pt.str(name))
+        ),
     "elim:nat_ind": ({ target, motive, base, step }) =>
       new Exps.NatInd(
         exp_matcher(target),
@@ -178,12 +177,10 @@ export function cons_matcher(tree: pt.Tree): Exp {
         exp_matcher(ret)
       ),
     "cons:let_fn": ({ name, bindings, ret_t, ret, body }) => {
-      let fn = exp_matcher(ret)
-      for (const { names, exp } of bindings_matcher(bindings).reverse()) {
-        for (const name of names.reverse()) {
-          fn = new Exps.Fn(name, fn)
-        }
-      }
+      const fn = bindings_matcher(bindings)
+        .reverse()
+        .flatMap(({ names }) => names.reverse())
+        .reduce((fn, name) => new Exps.Fn(name, fn), exp_matcher(ret))
 
       return new Exps.Let(
         pt.str(name),
@@ -217,12 +214,10 @@ export function cls_entry_matcher(
       t: pi_handler({ bindings, ret_t }),
     }),
     "cls_entry:method_fulfilled": ({ name, bindings, ret_t, ret }) => {
-      let fn = exp_matcher(ret)
-      for (const { names } of bindings_matcher(bindings).reverse()) {
-        for (const name of names.reverse()) {
-          fn = new Exps.Fn(name, fn)
-        }
-      }
+      const fn = bindings_matcher(bindings)
+        .reverse()
+        .flatMap(({ names }) => names.reverse())
+        .reduce((fn, name) => new Exps.Fn(name, fn), exp_matcher(ret))
 
       return {
         name: pt.str(name),
