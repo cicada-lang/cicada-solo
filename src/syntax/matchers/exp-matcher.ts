@@ -148,6 +148,7 @@ export function cons_matcher(tree: pt.Tree): Exp {
     },
     "cons:list": ({ elem_t }) => new Exps.List(exp_matcher(elem_t)),
     "cons:nil": () => new Exps.Nil(),
+    "cons:nil_sugar": () => new Exps.Nil(),
     "cons:li": ({ head, tail }) =>
       new Exps.Li(exp_matcher(head), exp_matcher(tail)),
     "cons:li_sugar": ({ exps }) => {

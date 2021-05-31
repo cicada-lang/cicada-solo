@@ -140,6 +140,7 @@ export const cons = {
     "cons:number": [{ value: { $pattern: ["number"] } }],
     "cons:list": ['"List"', '"("', { elem_t: "exp" }, '")"'],
     "cons:nil": ['"nil"'],
+    "cons:nil_sugar": ['"li"', '"!"', '"["', '"]"'],
     "cons:li": ['"li"', '"("', { head: "exp" }, '","', { tail: "exp" }, '")"'],
     "cons:li_sugar": ['"li"', '"!"', '"["', { exps: "exps" }, '"]"'],
     "cons:vector": [
