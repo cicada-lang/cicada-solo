@@ -15,6 +15,17 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
   return result
 }
 
+export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
+  const { bindings, cdr_t } = body
+  let result = exp_matcher(cdr_t)
+  for (const { names, exp } of bindings_matcher(bindings).reverse()) {
+    for (const name of names.reverse()) {
+      result = new Exps.Sigma(name, exp, result)
+    }
+  }
+  return result
+}
+
 export function exp_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "exp:elim": ({ elim }) => elim_matcher(elim),
@@ -98,10 +109,7 @@ export function cons_matcher(tree: pt.Tree): Exp {
       }
       return result
     },
-    "cons:sigma": ({ name, car_t, cdr_t }) =>
-      new Exps.Sigma(pt.str(name), exp_matcher(car_t), exp_matcher(cdr_t)),
-    "cons:pair": ({ car_t, cdr_t }) =>
-      new Exps.Sigma("_", exp_matcher(car_t), exp_matcher(cdr_t)),
+    "cons:sigma": sigma_handler,
     "cons:cons": ({ car, cdr }) =>
       new Exps.Cons(exp_matcher(car), exp_matcher(cdr)),
     "cons:cls": ({ entries }) =>
@@ -190,7 +198,9 @@ export function cons_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-export function cls_entry_matcher(tree: pt.Tree): {
+export function cls_entry_matcher(
+  tree: pt.Tree
+): {
   name: string
   t: Exp
   exp?: Exp
@@ -237,7 +247,9 @@ export function bindings_matcher(
   })(tree)
 }
 
-export function binding_entry_matcher(tree: pt.Tree): {
+export function binding_entry_matcher(
+  tree: pt.Tree
+): {
   names: Array<string>
   exp: Exp
 } {

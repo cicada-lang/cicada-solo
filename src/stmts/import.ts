@@ -18,6 +18,7 @@ export class Import implements Stmt {
 
   async execute(mod: Module): Promise<void> {
     const imported = await mod.library.load(this.path)
+
     for (const { name, alias } of this.entries) {
       const t = imported.ctx.lookup_type(name)
       const value = imported.env.lookup_value(name)
@@ -35,6 +36,7 @@ export class Import implements Stmt {
       mod.ctx = mod.ctx.extend(alias || name, t, value)
       mod.env = mod.env.extend(alias || name, value)
     }
+
     mod.enter(this)
   }
 }

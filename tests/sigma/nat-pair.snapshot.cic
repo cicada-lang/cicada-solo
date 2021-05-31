@@ -5,3 +5,7 @@ def three = add1(two)
 def one_two: (Nat) * Nat = cons(one, two)
 
 cdr(one_two)
+
+def one_two_three: (Nat) * (Nat) * Nat = cons(one, cons(two, three))
+
+cdr(cdr(one_two_three))

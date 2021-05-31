@@ -94,14 +94,11 @@ export const cons = {
     "cons:fn": ['"("', { names: "names" }, '")"', '"="', '">"', { ret: "exp" }],
     "cons:sigma": [
       '"("',
-      { name: "identifier" },
-      '":"',
-      { car_t: "exp" },
+      { bindings: "bindings" },
       '")"',
       '"*"',
       { cdr_t: "exp" },
     ],
-    "cons:pair": ['"("', { car_t: "exp" }, '")"', '"*"', { cdr_t: "exp" }],
     "cons:cons": [
       '"cons"',
       '"("',

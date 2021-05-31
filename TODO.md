@@ -1,4 +1,3 @@
-- syntax sugar for sigma type `(x: A, y: B) * D`
 - syntax sugar for cons `(A, B) ** D`
 
 - [tlt] 10. It Also Depends On the List
