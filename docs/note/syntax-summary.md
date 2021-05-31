@@ -2,8 +2,8 @@
 
 ## stmts
 
-- @def name exp
-- @show exp
+- def name exp
+- show exp
 
 ## exps
 
@@ -11,26 +11,26 @@ type:
 - Type
 
 let:
-- @let name exp exp
+- let name exp exp
 
 the:
-- @the t exp
+- the t exp
 
 pi:
-- [@forall] (name: arg_t) -> ret_t
+- (name: arg_t) -> ret_t
 - (arg_t) -> ret_t
 - (name) => ret
 - target(arg, ...)
 
 sigma:
-- [@exists] (name: car_t * cdr_t)
-- Pair(car_t, cdr_t)
+- (name: car_t * cdr_t)
+- (car_t * cdr_t)
 - cons(car, cdr)
 - car(target)
 - cdr(target)
 
 class:
-- [ name: t, ... ]
+- class { name: t, ... }
 - { name: property, ... }
 - target.name
 
