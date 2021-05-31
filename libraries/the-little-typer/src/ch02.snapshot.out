@@ -1,11 +1,11 @@
-the (_: String * (_1: String) -> String) cons("x", (_) => _)
-the Equal((_: String * (_1: String) -> String), cons("x", (_) => _), cons("x", (_) => _)) same
-the Equal((_: Nat) -> (_1: Nat * Nat), (_) => cons(_, _), (_) => cons(_, _)) same
+the (_: String) * (_1: String) -> String cons("x", (_) => _)
+the Equal((_: String) * (_1: String) -> String, cons("x", (_) => _), cons("x", (_) => _)) same
+the Equal((_: Nat) -> (_1: Nat) * Nat, (_) => cons(_, _), (_) => cons(_, _)) same
 the Equal((_: Nat) -> Nat, (_) => _, (_) => _) same
-the Equal((_: (_: Nat * Nat)) -> Nat, (_) => car(_), (_) => car(_)) same
-the Equal((_: String * String), cons("celery", "carrot"), cons("celery", "carrot")) same
+the Equal((_: (_: Nat) * Nat) -> Nat, (_) => car(_), (_) => car(_)) same
+the Equal((_: String) * String, cons("celery", "carrot"), cons("celery", "carrot")) same
 the Equal(String, "naught", "naught") same
 the Equal(String, "more", "more") same
 the Equal(String, "more", "more") same
-the (_: Type * Type) cons(String, String)
-the (_: Nat * Nat) cons(1, 2)
+the (_: Type) * Type cons(String, String)
+the (_: Nat) * Nat cons(1, 2)

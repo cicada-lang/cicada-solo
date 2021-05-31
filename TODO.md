@@ -1,3 +1,6 @@
+- syntax sugar for sigma type `(x: A, y: B) * D`
+- syntax sugar for cons `(A, B) ** D`
+
 - [tlt] 10. It Also Depends On the List
 - [tlt] 11. All Lists Are Created Equal
 - [tlt] 12. Even Numbers Can Be Odd

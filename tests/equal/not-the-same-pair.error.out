@@ -1,5 +1,5 @@
 
-I am expecting the following two values to be the same (_: String * String).
+I am expecting the following two values to be the same (_: String) * String.
 But they are not.
 from left hand side:
   cons("ratatouille", "baguette")
@@ -8,6 +8,6 @@ to left hand side:
 
 previous:
 - same
-- the Equal((_: String * String), cons("ratatouille", "baguette"), cons("baguette", "ratatouille")) same
+- the Equal((_: String) * String, cons("ratatouille", "baguette"), cons("baguette", "ratatouille")) same
 
 

@@ -23,9 +23,10 @@ pi:
 - target(arg, ...)
 
 sigma:
-- (name: car_t * cdr_t)
-- (car_t * cdr_t)
+- (name: car_t) * cdr_t
+- (car_t) * cdr_t
 - cons(car, cdr)
+  - (car) ** cdr
 - car(target)
 - cdr(target)
 

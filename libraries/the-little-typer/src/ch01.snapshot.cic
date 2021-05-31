@@ -3,7 +3,7 @@
 the String
 "ratatouille"
 
-the (String * String)
+the (String) * String
 cons("ratatouille", "baguette")
 
 the Equal(
@@ -13,35 +13,34 @@ the Equal(
 same
 
 the Equal(
-  (String * String),
+  (String) * String,
   cons("ratatouille", "baguette"),
   cons("ratatouille", "baguette"))
 same
 
 the String
-car(the (String * String) cons("ratatouille", "baguette"))
+car(the (String) * String cons("ratatouille", "baguette"))
 
 the Equal(
   String,
   "ratatouille",
-  car(the (String * String) cons("ratatouille", "baguette")))
+  car(the (String) * String cons("ratatouille", "baguette")))
 same
 
-the Type (String * String)
+the Type (String) * String
 the Type String
 the Type Type
 the Equal(Type, String, String) same
 
 the Type
-(car(the (Type * String) cons(String, "olive")) *
- cdr(the (String * Type) cons("oil", String)))
+(car(the (Type) * String cons(String, "olive"))) *
+ cdr(the (String) * Type cons("oil", String))
 
-the (
-  car(the (Type * String) cons(String, "olive")) *
-  cdr(the (String * Type) cons("oil", String)))
+the (car(the (Type) * String cons(String, "olive"))) *
+  cdr(the (String) * Type cons("oil", String))
 cons(
-  cdr(the (Type * String) cons(String, "olive")),
-  car(the (String * Type) cons("oil", String)))
+  cdr(the (Type) * String cons(String, "olive")),
+  car(the (String) * Type cons("oil", String)))
 
 the Nat 172
 the Nat 0

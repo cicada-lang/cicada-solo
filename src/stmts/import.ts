@@ -1,5 +1,6 @@
 import { Stmt } from "../stmt"
 import { Module } from "../module"
+import { Trace } from "../trace"
 
 export type ImportEntry = {
   name: string
@@ -21,8 +22,13 @@ export class Import implements Stmt {
       const t = imported.ctx.lookup_type(name)
       const value = imported.env.lookup_value(name)
       if (!t || !value) {
-        throw new Error(
-          `I meet undefined name: ${name}, when importing from ${this.path}`
+        throw new Trace(
+          [
+            `I meet undefined name:`,
+            `  ${name}`,
+            `when importing from module:`,
+            `  ${this.path}`,
+          ].join("\n") + "\n"
         )
       }
 

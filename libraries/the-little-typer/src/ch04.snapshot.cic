@@ -2,14 +2,14 @@
 
 def pair_elim: (
   A: Type, D: Type, X: Type,
-  pair: (A * D),
+  pair: (A) * D,
   maker: (A, D) -> X,
 ) -> X =
   (A, D, X, pair, maker) => maker(car(pair), cdr(pair))
 
 def flip: (
-  A: Type, D: Type, pair: (A * D)
-) -> (D * A) =
+  A: Type, D: Type, pair: (A) * D
+) -> (D) * A =
   (A, D, pair) => cons(cdr(pair), car(pair))
 
 flip(Nat, String, cons(123, "abc"))
@@ -18,28 +18,28 @@ flip(String, Nat, flip(Nat, String, cons(123, "abc")))
 
 the Equal(
   Type,
-  (A D: Type, pair: (A * D)) -> (D * A),
-  (Lemon Meringue: Type, (Lemon * Meringue)) -> (Meringue * Lemon))
+  (A D: Type, pair: (A) * D) -> (D) * A,
+  (Lemon Meringue: Type, (Lemon) * Meringue) -> (Meringue) * Lemon)
 same
 
 
 the Equal(
   Type,
-  (A: Type, D: Type, (A * D)) -> (D * A),
+  (A: Type, D: Type, (A) * D) -> (D) * A,
   (A: Type, D: Type,
-    (car(the (Type * Type) cons(A, D)) *
-     cdr(the (Type * Type) cons(A, D)))
-  ) -> (D * A))
+    (car(the (Type * Type) cons(A, D))) *
+     cdr(the (Type * Type) cons(A, D))
+  ) -> (D) * A)
 same
 
-def swap: ((Nat * String)) -> (String * Nat) =
+def swap: ((Nat) * String) -> (String) * Nat =
   (pair) => pair_elim(
-    Nat, String, (String * Nat), pair,
+    Nat, String, (String) * Nat, pair,
     (a, d) => cons(d, a))
 
 swap(cons(123, "abc"))
 
-def twin: (X: Type, X) -> (X * X) =
+def twin: (X: Type, X) -> (X) * X =
   (X, x) => cons(x, x)
 
 twin(Nat, 123)

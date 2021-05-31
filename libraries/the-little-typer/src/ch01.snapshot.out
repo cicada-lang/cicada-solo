@@ -1,15 +1,15 @@
 the String "ratatouille"
-the (_: String * String) cons("ratatouille", "baguette")
+the (_: String) * String cons("ratatouille", "baguette")
 the Equal(String, "ratatouille", "ratatouille") same
-the Equal((_: String * String), cons("ratatouille", "baguette"), cons("ratatouille", "baguette")) same
+the Equal((_: String) * String, cons("ratatouille", "baguette"), cons("ratatouille", "baguette")) same
 the String "ratatouille"
 the Equal(String, "ratatouille", "ratatouille") same
-the Type (_: String * String)
+the Type (_: String) * String
 the Type String
 the Type Type
 the Equal(Type, String, String) same
-the Type (_: String * String)
-the (_: String * String) cons("olive", "oil")
+the Type (_: String) * String
+the (_: String) * String cons("olive", "oil")
 the Nat 172
 the Nat 0
 the Nat 0

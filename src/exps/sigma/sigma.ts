@@ -34,6 +34,6 @@ export class Sigma extends Exp {
   }
 
   repr(): string {
-    return `(${this.name}: ${this.car_t.repr()} * ${this.cdr_t.repr()})`
+    return `(${this.name}: ${this.car_t.repr()}) * ${this.cdr_t.repr()}`
   }
 }

@@ -1,16 +1,16 @@
 // 2. Doin' What Comes Naturally
 
-def flavored_lentils: (String) -> (String * String) =
+def flavored_lentils: (String) -> (String) * String =
   (flavor) => cons(flavor, "lentils")
 
-def garlic_flavored_lentils: (String * String) =
+def garlic_flavored_lentils: (String) * String =
   flavored_lentils("garlic")
 
 def id: (String) -> String =
   (x) => x
 
 def T: Type =
-  (String * (String) -> String)
+  (String) * (String) -> String
 
 def id_in_pair: (x: String) -> T =
   (x) => cons(x, (x) => x)
@@ -32,7 +32,7 @@ same
 
 
 the Equal(
-  (Nat) -> (Nat * Nat),
+  (Nat) -> (Nat) * Nat,
   (x) => cons(x, x),
   (y) => cons(y, y))
 same
@@ -40,23 +40,23 @@ same
 
 the Equal(
   (Nat) -> Nat,
-  (y) => car(the (Nat * Nat) cons(y, y)),
+  (y) => car(the (Nat) * Nat cons(y, y)),
   (x) => x)
 same
 
 
 the Equal(
-  ((Nat * Nat)) -> Nat,
+  ((Nat) * Nat) -> Nat,
   (y) => car(y),
   (x) => car(x))
 same
 
-def vegetables: (String * String) =
+def vegetables: (String) * String =
   cons("celery", "carrot")
 
 
 the Equal(
-  (String * String),
+  (String) * String,
   vegetables,
   cons(car(vegetables), cdr(vegetables)))
 same
@@ -86,10 +86,10 @@ the Equal(
 same
 
 
-the (Type * Type)
+the (Type) * Type
 cons(String, String)
 
-def Pear: Type = (Nat * Nat)
+def Pear: Type = (Nat) * Nat
 
 
 the Pear

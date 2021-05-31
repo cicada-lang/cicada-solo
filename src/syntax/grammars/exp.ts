@@ -97,11 +97,11 @@ export const cons = {
       { name: "identifier" },
       '":"',
       { car_t: "exp" },
+      '")"',
       '"*"',
       { cdr_t: "exp" },
-      '")"',
     ],
-    "cons:pair": ['"("', { car_t: "exp" }, '"*"', { cdr_t: "exp" }, '")"'],
+    "cons:pair": ['"("', { car_t: "exp" }, '")"', '"*"', { cdr_t: "exp" }],
     "cons:cons": [
       '"cons"',
       '"("',

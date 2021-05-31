@@ -6,6 +6,6 @@ But the expected type is:
 
 previous:
 - "oil"
-- (_: "oil" * String)
+- (_: "oil") * String
 
 

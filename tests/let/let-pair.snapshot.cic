@@ -1,4 +1,4 @@
-def x: (Nat * Nat) =
+def x: (Nat) * Nat =
   let one = add1(zero)
   let two = add1(one)
   let three = add1(two)

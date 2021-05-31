@@ -2,6 +2,6 @@ def type: Type = Type
 
 type
 
-def pair_of_types: Type = (Type * Type)
+def pair_of_types: Type = (Type) * Type
 
 pair_of_types
