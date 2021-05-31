@@ -38,15 +38,14 @@ export function exp_matcher(tree: pt.Tree): Exp {
 export function elim_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "elim:var": ({ name }) => new Exps.Var(pt.str(name)),
-    "elim:ap": ({ target, args }) => {
-      let result: Exp = new Exps.Var(pt.str(target))
-      for (const arg of pt.matchers.one_or_more_matcher(args)) {
-        for (const exp of exps_matcher(arg)) {
-          result = new Exps.Ap(result, exp)
-        }
-      }
-      return result
-    },
+    "elim:ap": ({ target, args }) =>
+      pt.matchers
+        .one_or_more_matcher(args)
+        .flatMap((arg) => exps_matcher(arg))
+        .reduce(
+          (result, exp) => new Exps.Ap(result, exp),
+          new Exps.Var(pt.str(target))
+        ),
     "elim:car": ({ target }) => new Exps.Car(exp_matcher(target)),
     "elim:cdr": ({ target }) => new Exps.Cdr(exp_matcher(target)),
     "elim:dot_field": ({ target, name }) =>
