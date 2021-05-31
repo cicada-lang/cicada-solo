@@ -6,24 +6,26 @@ import * as ut from "../../ut"
 
 export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
   const { bindings, ret_t } = body
-  let result = exp_matcher(ret_t)
-  for (const { names, exp } of bindings_matcher(bindings).reverse()) {
-    for (const name of names.reverse()) {
-      result = new Exps.Pi(name, exp, result)
-    }
-  }
-  return result
+
+  return bindings_matcher(bindings)
+    .reverse()
+    .flatMap(({ names, exp }) => names.map((name) => ({ name, exp })).reverse())
+    .reduce(
+      (result, { name, exp }) => new Exps.Pi(name, exp, result),
+      exp_matcher(ret_t)
+    )
 }
 
 export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
   const { bindings, cdr_t } = body
-  let result = exp_matcher(cdr_t)
-  for (const { names, exp } of bindings_matcher(bindings).reverse()) {
-    for (const name of names.reverse()) {
-      result = new Exps.Sigma(name, exp, result)
-    }
-  }
-  return result
+
+  return bindings_matcher(bindings)
+    .reverse()
+    .flatMap(({ names, exp }) => names.map((name) => ({ name, exp })).reverse())
+    .reduce(
+      (result, { name, exp }) => new Exps.Sigma(name, exp, result),
+      exp_matcher(cdr_t)
+    )
 }
 
 export function exp_matcher(tree: pt.Tree): Exp {
@@ -102,23 +104,17 @@ export function elim_matcher(tree: pt.Tree): Exp {
 export function cons_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "cons:pi": pi_handler,
-    "cons:fn": ({ names, ret }) => {
-      let result = exp_matcher(ret)
-      for (const name of names_matcher(names).reverse()) {
-        result = new Exps.Fn(name, result)
-      }
-      return result
-    },
+    "cons:fn": ({ names, ret }) =>
+      names_matcher(names)
+        .reverse()
+        .reduce((result, name) => new Exps.Fn(name, result), exp_matcher(ret)),
     "cons:sigma": sigma_handler,
     "cons:cons": ({ car, cdr }) =>
       new Exps.Cons(exp_matcher(car), exp_matcher(cdr)),
-    "cons:cons_sugar": ({ exps, cdr }) => {
-      let result = exp_matcher(cdr)
-      for (const exp of exps_matcher(exps).reverse()) {
-        result = new Exps.Cons(exp, result)
-      }
-      return result
-    },
+    "cons:cons_sugar": ({ exps, cdr }) =>
+      exps_matcher(exps)
+        .reverse()
+        .reduce((result, exp) => new Exps.Cons(exp, result), exp_matcher(cdr)),
     "cons:cls": ({ entries }) =>
       new Exps.Cls(
         pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
@@ -151,25 +147,19 @@ export function cons_matcher(tree: pt.Tree): Exp {
     "cons:nil_sugar": () => new Exps.Nil(),
     "cons:li": ({ head, tail }) =>
       new Exps.Li(exp_matcher(head), exp_matcher(tail)),
-    "cons:li_sugar": ({ exps }) => {
-      let list: Exp = new Exps.Nil()
-      for (const exp of exps_matcher(exps).reverse()) {
-        list = new Exps.Li(exp, list)
-      }
-      return list
-    },
+    "cons:li_sugar": ({ exps }) =>
+      exps_matcher(exps)
+        .reverse()
+        .reduce((list, exp) => new Exps.Li(exp, list), new Exps.Nil()),
     "cons:vector": ({ elem_t, length }) =>
       new Exps.Vector(exp_matcher(elem_t), exp_matcher(length)),
     "cons:vecnil": () => new Exps.Vecnil(),
     "cons:vec": ({ head, tail }) =>
       new Exps.Vec(exp_matcher(head), exp_matcher(tail)),
-    "cons:vec_sugar": ({ exps }) => {
-      let vector: Exp = new Exps.Vecnil()
-      for (const exp of exps_matcher(exps).reverse()) {
-        vector = new Exps.Vec(exp, vector)
-      }
-      return vector
-    },
+    "cons:vec_sugar": ({ exps }) =>
+      exps_matcher(exps)
+        .reverse()
+        .reduce((vector, exp) => new Exps.Vec(exp, vector), new Exps.Vecnil()),
     "cons:equal": ({ t, from, to }) =>
       new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
     "cons:same": () => new Exps.Same(),
@@ -206,7 +196,9 @@ export function cons_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-export function cls_entry_matcher(tree: pt.Tree): {
+export function cls_entry_matcher(
+  tree: pt.Tree
+): {
   name: string
   t: Exp
   exp?: Exp
@@ -253,7 +245,9 @@ export function bindings_matcher(
   })(tree)
 }
 
-export function binding_entry_matcher(tree: pt.Tree): {
+export function binding_entry_matcher(
+  tree: pt.Tree
+): {
   names: Array<string>
   exp: Exp
 } {
