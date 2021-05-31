@@ -205,9 +205,7 @@ export function cons_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-export function cls_entry_matcher(
-  tree: pt.Tree
-): {
+export function cls_entry_matcher(tree: pt.Tree): {
   name: string
   t: Exp
   exp?: Exp
@@ -254,9 +252,7 @@ export function bindings_matcher(
   })(tree)
 }
 
-export function binding_entry_matcher(
-  tree: pt.Tree
-): {
+export function binding_entry_matcher(tree: pt.Tree): {
   names: Array<string>
   exp: Exp
 } {
