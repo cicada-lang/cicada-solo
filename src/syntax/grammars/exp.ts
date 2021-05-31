@@ -107,6 +107,14 @@ export const cons = {
       { cdr: "exp" },
       '")"',
     ],
+    "cons:cons_sugar": [
+      '"("',
+      { exps: "exps" },
+      '")"',
+      '"*"',
+      '"*"',
+      { cdr: "exp" },
+    ],
     "cons:cls": [
       '"class"',
       '"{"',

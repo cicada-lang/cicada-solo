@@ -1,11 +1,13 @@
 def one = add1(zero)
 def two = add1(one)
 def three = add1(two)
+def four = add1(three)
 
 def one_two: (Nat) * Nat = cons(one, two)
-
 cdr(one_two)
 
-def one_two_three: (Nat) * (Nat) * Nat = cons(one, cons(two, three))
-
+def one_two_three: (Nat, Nat) * Nat = cons(one, cons(two, three))
 cdr(cdr(one_two_three))
+
+def one_two_three_four: (Nat, Nat, Nat) * Nat = (one, two, three) ** four
+cdr(cdr(cdr(one_two_three_four)))
