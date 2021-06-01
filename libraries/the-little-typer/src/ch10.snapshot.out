@@ -15,3 +15,7 @@ the (list: List(String)) * Equal(List(String), list_ind(list, (target_list) => L
 the (list: List(String)) * Equal(List(String), list_ind(list, (target_list) => List(String), li("grape", nil), (head) => (tail) => (almost) => li(head, almost)), li("grape", list)) cons(li("grape", nil), same)
 the (list: List(String)) * Equal(List(String), list_ind(list, (target_list) => List(String), li("grape", nil), (head) => (tail) => (almost) => li(head, almost)), li("grape", list)) cons(li("grape", li("grape", nil)), same)
 the Vector(String, 6) vec("hi", vec("hi", vec("hi", vec("hi", vec("hi", vec("hi", vecnil))))))
+the Vector(Nat, 0) vecnil
+the Vector(Nat, 1) vec(1, vecnil)
+the Vector(Nat, 2) vec(1, vec(2, vecnil))
+the Vector(Nat, 3) vec(1, vec(2, vec(3, vecnil)))
