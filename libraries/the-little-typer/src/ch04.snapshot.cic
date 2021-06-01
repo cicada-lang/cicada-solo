@@ -27,8 +27,8 @@ the Equal(
   Type,
   (A: Type, D: Type, (A) * D) -> (D) * A,
   (A: Type, D: Type,
-    (car(the (Type * Type) cons(A, D))) *
-     cdr(the (Type * Type) cons(A, D))
+    (car(the (Type) * Type cons(A, D))) *
+     cdr(the (Type) * Type cons(A, D))
   ) -> (D) * A)
 same
 

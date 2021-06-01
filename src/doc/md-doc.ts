@@ -15,16 +15,24 @@ export class MdDoc extends Doc {
 
   get entries(): Array<DocEntry> {
     return this.code_blocks.flatMap((code_block) =>
-      Syntax.parse_stmts(code_block.text).map((stmt) => new DocEntry({ stmt }))
+      Syntax.parse_stmts(code_block.text, code_block.offset).map(
+        (stmt) => new DocEntry({ stmt })
+      )
     )
   }
 
-  get code_blocks(): Array<{ info: string; text: string }> {
+  private offset_from_pos(row: number, col: number): number {
+    const lines = this.text.split("\n")
+
+    return lines.slice(0, row).join("\n").length + col
+  }
+
+  get code_blocks(): Array<{ info: string; text: string; offset: number }> {
     const reader = new commonmark.Parser()
     const writer = new commonmark.HtmlRenderer()
     const parsed: commonmark.Node = reader.parse(this.text)
 
-    const code_blocks: Array<{ info: string; text: string }> = []
+    const code_blocks = []
 
     const walker = parsed.walker()
 
@@ -34,8 +42,12 @@ export class MdDoc extends Doc {
 
       if (event.entering && node.type === "code_block") {
         if (node.literal && node.info === "cicada") {
-          // TODO use node.sourcepos
-          code_blocks.push({ info: node.info, text: node.literal })
+          const [[row, col]] = node.sourcepos
+          code_blocks.push({
+            info: node.info,
+            text: node.literal,
+            offset: this.offset_from_pos(row, col),
+          })
         }
       }
     }
