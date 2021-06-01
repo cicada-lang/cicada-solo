@@ -23,7 +23,6 @@ export class MdDoc extends Doc {
 
   private offset_from_pos(row: number, col: number): number {
     const lines = this.text.split("\n")
-
     return lines.slice(0, row).join("\n").length + col
   }
 
@@ -42,7 +41,8 @@ export class MdDoc extends Doc {
 
       if (event.entering && node.type === "code_block") {
         if (node.literal && node.info === "cicada") {
-          const [[row, col]] = node.sourcepos
+          const [start_pos, _end_pos] = node.sourcepos
+          const [row, col] = start_pos
           code_blocks.push({
             info: node.info,
             text: node.literal,
