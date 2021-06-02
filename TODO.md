@@ -1,3 +1,5 @@
+- extract `*_ind_motive_t` for `List`
+
 - [tlt] 11. All Lists Are Created Equal
 - [tlt] 12. Even Numbers Can Be Odd
 - [tlt] 13. Even Haf a Baker's Dozen

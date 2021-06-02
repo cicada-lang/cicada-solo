@@ -7,7 +7,7 @@ import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import * as Cores from "../../cores"
-import { nat_ind_step_t } from "../../exps/nat/nat-ind"
+import { nat_ind_motive_t, nat_ind_step_t } from "../../exps/nat/nat-ind"
 
 export class NatInd extends Core {
   target: Core
@@ -72,10 +72,7 @@ export class NatInd extends Core {
             [
               Cores.NatValue,
               (nat_t: Cores.NatValue) => {
-                const motive_t = new Cores.PiValue(
-                  nat_t,
-                  new Closure(new Env(), "target_nat", new Cores.Type())
-                )
+                const motive_t = nat_ind_motive_t
                 const base_t = Cores.Ap.apply(motive, new Cores.ZeroValue())
                 const step_t = nat_ind_step_t(motive)
                 return new Cores.NotYetValue(

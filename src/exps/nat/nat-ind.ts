@@ -23,10 +23,7 @@ export class NatInd extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const target_core = check(ctx, this.target, new Cores.NatValue())
-    const motive_t = evaluate(
-      new Env(),
-      new Cores.Pi("target_nat", new Cores.Nat(), new Cores.Type())
-    )
+    const motive_t = nat_ind_motive_t
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)
     const base_core = check(
@@ -54,6 +51,11 @@ export class NatInd extends Exp {
     return `nat_ind(${args})`
   }
 }
+
+export const nat_ind_motive_t: Value = evaluate(
+  new Env(),
+  new Cores.Pi("target_nat", new Cores.Nat(), new Cores.Type())
+)
 
 export function nat_ind_step_t(motive: Value): Value {
   return evaluate(
