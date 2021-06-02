@@ -42,11 +42,8 @@ export class ListInd extends Exp {
       this.base,
       Cores.Ap.apply(motive_value, new Cores.NilValue())
     )
-    const step_core = check(
-      ctx,
-      this.step,
-      list_ind_step_t(motive_t, motive_value, elem_t)
-    )
+    const step_t = list_ind_step_t(motive_value, elem_t)
+    const step_core = check(ctx, this.step, step_t)
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
 
     return {
@@ -61,11 +58,18 @@ export class ListInd extends Exp {
   }
 
   repr(): string {
-    return `list_ind(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()}, ${this.step.repr()})`
+    const args = [
+      this.target.repr(),
+      this.motive.repr(),
+      this.base.repr(),
+      this.step.repr(),
+    ].join(", ")
+
+    return `list_ind(${args})`
   }
 }
 
-function list_ind_step_t(motive_t: Value, motive: Value, elem_t: Value): Value {
+function list_ind_step_t(motive: Value, elem_t: Value): Value {
   return evaluate(
     new Env().extend("motive", motive).extend("elem_t", elem_t),
     new Cores.Pi(

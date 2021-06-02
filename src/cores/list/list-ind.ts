@@ -80,7 +80,7 @@ export class ListInd extends Core {
                 )
                 const base_t = Cores.Ap.apply(motive, new Cores.NilValue())
                 const elem_t = list_t.elem_t
-                const step_t = list_ind_step_t(motive_t, motive, elem_t)
+                const step_t = list_ind_step_t(motive, elem_t)
                 return new Cores.NotYetValue(
                   Cores.Ap.apply(motive, target),
                   new Cores.ListIndNeutral(
@@ -98,7 +98,7 @@ export class ListInd extends Core {
   }
 }
 
-function list_ind_step_t(motive_t: Value, motive: Value, elem_t: Value): Value {
+function list_ind_step_t(motive: Value, elem_t: Value): Value {
   return evaluate(
     new Env().extend("motive", motive).extend("elem_t", elem_t),
     new Cores.Pi(

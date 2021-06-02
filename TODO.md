@@ -1,5 +1,8 @@
-- vector/vector-ind -- `Exps.VectorInd.infer`
 - vector/vector-ind -- `Cores.VectorInd.apply`
+
+- should not repeat the functions that build `*_step_t` for `Nat`
+- should not repeat the functions that build `*_step_t` for `List`
+- should not repeat the functions that build `*_step_t` for `Vector`
 
 - [tlt] 11. All Lists Are Created Equal
 - [tlt] 12. Even Numbers Can Be Odd

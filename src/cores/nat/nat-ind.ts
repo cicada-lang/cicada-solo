@@ -76,7 +76,7 @@ export class NatInd extends Core {
                   new Closure(new Env(), "target_nat", new Cores.Type())
                 )
                 const base_t = Cores.Ap.apply(motive, new Cores.ZeroValue())
-                const step_t = nat_ind_step_t(motive_t, motive)
+                const step_t = nat_ind_step_t(motive)
                 return new Cores.NotYetValue(
                   Cores.Ap.apply(motive, target),
                   new Cores.NatIndNeutral(
@@ -94,7 +94,7 @@ export class NatInd extends Core {
   }
 }
 
-function nat_ind_step_t(motive_t: Value, motive: Value): Value {
+function nat_ind_step_t(motive: Value): Value {
   return evaluate(
     new Env().extend("motive", motive),
     new Cores.Pi(
