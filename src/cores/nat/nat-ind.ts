@@ -7,6 +7,7 @@ import { Value, match_value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import * as Cores from "../../cores"
+import { nat_ind_step_t } from "../../exps/nat/nat-ind"
 
 export class NatInd extends Core {
   target: Core
@@ -92,22 +93,4 @@ export class NatInd extends Core {
       ],
     ])
   }
-}
-
-function nat_ind_step_t(motive: Value): Value {
-  return evaluate(
-    new Env().extend("motive", motive),
-    new Cores.Pi(
-      "prev",
-      new Cores.Nat(),
-      new Cores.Pi(
-        "almost",
-        new Cores.Ap(new Cores.Var("motive"), new Cores.Var("prev")),
-        new Cores.Ap(
-          new Cores.Var("motive"),
-          new Cores.Add1(new Cores.Var("prev"))
-        )
-      )
-    )
-  )
 }

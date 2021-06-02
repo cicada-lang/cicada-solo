@@ -44,11 +44,18 @@ export class NatInd extends Exp {
   }
 
   repr(): string {
-    return `nat_ind(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()}, ${this.step.repr()})`
+    const args = [
+      this.target.repr(),
+      this.motive.repr(),
+      this.base.repr(),
+      this.step.repr(),
+    ].join(", ")
+
+    return `nat_ind(${args})`
   }
 }
 
-function nat_ind_step_t(motive: Value): Value {
+export function nat_ind_step_t(motive: Value): Value {
   return evaluate(
     new Env().extend("motive", motive),
     new Cores.Pi(

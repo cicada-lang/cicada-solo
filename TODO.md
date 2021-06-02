@@ -1,6 +1,5 @@
 - vector/vector-ind -- `Cores.VectorInd.apply`
 
-- should not repeat the functions that build `*_step_t` for `Nat`
 - should not repeat the functions that build `*_step_t` for `List`
 - should not repeat the functions that build `*_step_t` for `Vector`
 
