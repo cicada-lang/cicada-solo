@@ -88,6 +88,14 @@ export function elim_matcher(tree: pt.Tree): Exp {
       new Exps.VectorHead(exp_matcher(target)),
     "elim:vector_tail": ({ target }) =>
       new Exps.VectorTail(exp_matcher(target)),
+    "elim:vector_ind": ({ length, target, motive, base, step }) =>
+      new Exps.VectorInd(
+        exp_matcher(length),
+        exp_matcher(target),
+        exp_matcher(motive),
+        exp_matcher(base),
+        exp_matcher(step)
+      ),
     "elim:replace": ({ target, motive, base }) =>
       new Exps.Replace(
         exp_matcher(target),
