@@ -27,7 +27,7 @@ const preserved = [
   "vec",
   "vector_head",
   "vector_tail",
-  // "vector_ind",
+  "vector_ind",
   "Equal",
   "same",
   "replace",

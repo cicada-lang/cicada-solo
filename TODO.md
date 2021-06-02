@@ -1,9 +1,14 @@
+- vector/vector-ind
+- vector/vector-ind -- syntax -- `vector_ind()`
+
 - [tlt] 11. All Lists Are Created Equal
 - [tlt] 12. Even Numbers Can Be Odd
 - [tlt] 13. Even Haf a Baker's Dozen
 - [tlt] 14. There's Safety in Numbers
 - [tlt] 15. Imagine That ...
 - [tlt] 16. If It's All the Same to You
+
+- [maybe] `the(t, v)` instead of `the t v`
 
 - a structure must have its own equivalence relation -- for quotient structure
   - structure should take `Equivalence` as argument
@@ -31,9 +36,6 @@
 - [refactoring] `Exps.Cls.infer` and `Exps.Ext.infer`
 
 - [requirement] support to use `let` to do local definitions in class
-
-- vector/vector-ind
-- vector/vector-ind -- syntax -- `vector_ind()`
 
 # questions?
 

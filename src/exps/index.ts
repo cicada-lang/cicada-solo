@@ -32,7 +32,7 @@ export * from "./vector/vecnil"
 export * from "./vector/vec"
 export * from "./vector/vector-head"
 export * from "./vector/vector-tail"
-// export * from "./vector/vector-ind"
+export * from "./vector/vector-ind"
 
 export * from "./equal/equal"
 export * from "./equal/same"

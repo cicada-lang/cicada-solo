@@ -27,13 +27,23 @@ export class Replace extends Core {
   }
 
   repr(): string {
-    return `replace(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()})`
+    const args = [
+      this.target.repr(),
+      this.motive.repr(),
+      this.base.repr(),
+    ].join(", ")
+
+    return `replace(${args})`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    return `replace(${this.target.alpha_repr(ctx)}, ${this.motive.alpha_repr(
-      ctx
-    )}, ${this.base.alpha_repr(ctx)})`
+    const args = [
+      this.target.alpha_repr(ctx),
+      this.motive.alpha_repr(ctx),
+      this.base.alpha_repr(ctx),
+    ].join(", ")
+
+    return `replace(${args})`
   }
 
   static apply(target: Value, motive: Value, base: Value): Value {

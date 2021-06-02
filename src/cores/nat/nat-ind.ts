@@ -32,13 +32,25 @@ export class NatInd extends Core {
   }
 
   repr(): string {
-    return `nat_ind(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()}, ${this.step.repr()})`
+    const args = [
+      this.target.repr(),
+      this.motive.repr(),
+      this.base.repr(),
+      this.step.repr(),
+    ].join(", ")
+
+    return `nat_ind(${args})`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    return `nat_ind(${this.target.alpha_repr(ctx)}, ${this.motive.alpha_repr(
-      ctx
-    )}, ${this.base.alpha_repr(ctx)}, ${this.step.alpha_repr(ctx)})`
+    const args = [
+      this.target.alpha_repr(ctx),
+      this.motive.alpha_repr(ctx),
+      this.base.alpha_repr(ctx),
+      this.step.alpha_repr(ctx),
+    ].join(", ")
+
+    return `nat_ind(${args})`
   }
 
   static apply(target: Value, motive: Value, base: Value, step: Value): Value {
