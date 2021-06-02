@@ -10,7 +10,7 @@ import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { Trace } from "../../trace"
 import * as Cores from "../../cores"
-import { list_ind_step_t } from "../../exps/list/list-ind"
+import { list_ind_motive_t, list_ind_step_t } from "../../exps/list/list-ind"
 
 export class ListInd extends Core {
   target: Core
@@ -75,12 +75,9 @@ export class ListInd extends Core {
             [
               Cores.ListValue,
               (list_t: Cores.ListValue) => {
-                const motive_t = new Cores.PiValue(
-                  list_t,
-                  new Closure(new Env(), "target_list", new Cores.Type())
-                )
-                const base_t = Cores.Ap.apply(motive, new Cores.NilValue())
                 const elem_t = list_t.elem_t
+                const motive_t = list_ind_motive_t(elem_t)
+                const base_t = Cores.Ap.apply(motive, new Cores.NilValue())
                 const step_t = list_ind_step_t(motive, elem_t)
                 return new Cores.NotYetValue(
                   Cores.Ap.apply(motive, target),

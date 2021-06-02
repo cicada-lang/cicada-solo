@@ -27,14 +27,7 @@ export class ListInd extends Exp {
     const inferred_target = infer(ctx, this.target)
     const list_t = expect(ctx, inferred_target.t, Cores.ListValue)
     const elem_t = list_t.elem_t
-    const motive_t = evaluate(
-      new Env().extend("elem_t", elem_t),
-      new Cores.Pi(
-        "target_list",
-        new Cores.List(new Cores.Var("elem_t")),
-        new Cores.Type()
-      )
-    )
+    const motive_t = list_ind_motive_t(elem_t)
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)
     const base_core = check(
@@ -67,6 +60,17 @@ export class ListInd extends Exp {
 
     return `list_ind(${args})`
   }
+}
+
+export function list_ind_motive_t(elem_t: Value): Value {
+  return evaluate(
+    new Env().extend("elem_t", elem_t),
+    new Cores.Pi(
+      "target_list",
+      new Cores.List(new Cores.Var("elem_t")),
+      new Cores.Type()
+    )
+  )
 }
 
 export function list_ind_step_t(motive: Value, elem_t: Value): Value {
