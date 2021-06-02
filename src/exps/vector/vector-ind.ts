@@ -40,18 +40,7 @@ export class VectorInd extends Exp {
       },
     })
 
-    const motive_t = evaluate(
-      new Env().extend("elem_t", elem_t),
-      new Cores.Pi(
-        "length",
-        new Cores.Nat(),
-        new Cores.Pi(
-          "target_vector",
-          new Cores.Vector(new Cores.Var("elem_t"), new Cores.Var("length")),
-          new Cores.Type()
-        )
-      )
-    )
+    const motive_t = vector_ind_motive_t(elem_t)
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)
 
@@ -92,6 +81,21 @@ export class VectorInd extends Exp {
 
     return `vector_ind(${args})`
   }
+}
+
+export function vector_ind_motive_t(elem_t: Value): Value {
+  return evaluate(
+    new Env().extend("elem_t", elem_t),
+    new Cores.Pi(
+      "length",
+      new Cores.Nat(),
+      new Cores.Pi(
+        "target_vector",
+        new Cores.Vector(new Cores.Var("elem_t"), new Cores.Var("length")),
+        new Cores.Type()
+      )
+    )
+  )
 }
 
 export function vector_ind_step_t(motive: Value, elem_t: Value): Value {

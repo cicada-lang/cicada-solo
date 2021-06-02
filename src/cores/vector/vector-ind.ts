@@ -10,7 +10,10 @@ import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { Trace } from "../../trace"
 import * as Cores from "../../cores"
-import { vector_ind_step_t } from "../../exps/vector/vector-ind"
+import {
+  vector_ind_motive_t,
+  vector_ind_step_t,
+} from "../../exps/vector/vector-ind"
 
 export class VectorInd extends Core {
   length: Core
@@ -75,6 +78,53 @@ export class VectorInd extends Core {
     base: Value,
     step: Value
   ): Value {
-    throw new Error("TODO")
+    return match_value(target, [
+      [Cores.VecnilValue, (_: Cores.VecnilValue) => base],
+      [
+        Cores.VecValue,
+        ({ head, tail }: Cores.VecValue) => {
+          const prev = match_value(length, [
+            [Cores.Add1Value, ({ prev }: Cores.Add1Value) => prev],
+          ])
+
+          return Cores.Ap.apply(
+            Cores.Ap.apply(
+              Cores.Ap.apply(Cores.Ap.apply(step, length), head),
+              tail
+            ),
+            Cores.VectorInd.apply(prev, tail, motive, base, step)
+          )
+        },
+      ],
+      [
+        Cores.NotYetValue,
+        ({ t, neutral }: Cores.NotYetValue) =>
+          match_value(t, [
+            [
+              Cores.VectorValue,
+              (vector_t: Cores.VectorValue) => {
+                const elem_t = vector_t.elem_t
+                const length_t = new Cores.NatValue()
+                const motive_t = vector_ind_motive_t(elem_t)
+                const base_t = Cores.Ap.apply(
+                  Cores.Ap.apply(motive, new Cores.ZeroValue()),
+                  new Cores.VecnilValue()
+                )
+                const step_t = vector_ind_step_t(motive, elem_t)
+                return new Cores.NotYetValue(
+                  Cores.Ap.apply(Cores.Ap.apply(motive, length), target),
+                  new Cores.VectorIndNeutral(
+                    new Normal(length_t, length),
+                    neutral,
+                    new Normal(motive_t, motive),
+                    new Normal(base_t, base),
+                    new Normal(step_t, step)
+                  )
+                )
+              },
+            ],
+          ]),
+      ],
+    ])
   }
 }
