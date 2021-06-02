@@ -1,7 +1,5 @@
 - vector/vector-ind -- `Cores.VectorInd.apply`
 
-- should not repeat the functions that build `*_step_t` for `Vector`
-
 - [tlt] 11. All Lists Are Created Equal
 - [tlt] 12. Even Numbers Can Be Odd
 - [tlt] 13. Even Haf a Baker's Dozen

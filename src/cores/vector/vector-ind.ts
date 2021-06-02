@@ -10,6 +10,7 @@ import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { Trace } from "../../trace"
 import * as Cores from "../../cores"
+import { vector_ind_step_t } from "../../exps/vector/vector-ind"
 
 export class VectorInd extends Core {
   length: Core
