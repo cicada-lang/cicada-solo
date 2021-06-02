@@ -71,9 +71,8 @@ export class LocalLibrary extends Library {
 
     const t0 = Date.now()
     const doc = await this.fetch_doc(path)
-    const t1 = Date.now()
     const mod = await Module.from_doc(doc)
-    const t2 = Date.now()
+    const t1 = Date.now()
 
     if (opts.silent === false && mod.output) {
       console.log(mod.output)
@@ -82,7 +81,7 @@ export class LocalLibrary extends Library {
     if (opts.verbose) {
       console.log(
         chalk.bold("(load)"),
-        chalk.green.bold(`[parse: ${t1 - t0}ms, execute: ${t2 - t1}ms]`),
+        chalk.green.bold(`[elapse: ${t1 - t0}ms]`),
         path
       )
     }
