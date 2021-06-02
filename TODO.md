@@ -1,6 +1,5 @@
 - vector/vector-ind -- `Cores.VectorInd.apply`
 
-- should not repeat the functions that build `*_step_t` for `List`
 - should not repeat the functions that build `*_step_t` for `Vector`
 
 - [tlt] 11. All Lists Are Created Equal

@@ -10,6 +10,7 @@ import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { Trace } from "../../trace"
 import * as Cores from "../../cores"
+import { list_ind_step_t } from "../../exps/list/list-ind"
 
 export class ListInd extends Core {
   target: Core
@@ -96,26 +97,4 @@ export class ListInd extends Core {
       ],
     ])
   }
-}
-
-function list_ind_step_t(motive: Value, elem_t: Value): Value {
-  return evaluate(
-    new Env().extend("motive", motive).extend("elem_t", elem_t),
-    new Cores.Pi(
-      "head",
-      new Cores.Var("elem_t"),
-      new Cores.Pi(
-        "tail",
-        new Cores.List(new Cores.Var("elem_t")),
-        new Cores.Pi(
-          "almost",
-          new Cores.Ap(new Cores.Var("motive"), new Cores.Var("tail")),
-          new Cores.Ap(
-            new Cores.Var("motive"),
-            new Cores.Li(new Cores.Var("head"), new Cores.Var("tail"))
-          )
-        )
-      )
-    )
-  )
 }

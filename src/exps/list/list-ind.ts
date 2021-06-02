@@ -69,7 +69,7 @@ export class ListInd extends Exp {
   }
 }
 
-function list_ind_step_t(motive: Value, elem_t: Value): Value {
+export function list_ind_step_t(motive: Value, elem_t: Value): Value {
   return evaluate(
     new Env().extend("motive", motive).extend("elem_t", elem_t),
     new Cores.Pi(
