@@ -1,5 +1,6 @@
-- `cores/inl`
 - `exps/inl` syntax
+
+- `Value` as a class
 
 - `exps/inr`
 - `cores/inr`

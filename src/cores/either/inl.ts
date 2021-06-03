@@ -14,11 +14,7 @@ export class Inl extends Core {
   }
 
   evaluate(env: Env): Value {
-    throw new Error()
-    // return new Cores.EitherValue(
-    //   evaluate(env, this.left_t),
-    //   evaluate(env, this.right_t)
-    // )
+    return new Cores.InlValue(evaluate(env, this.left))
   }
 
   repr(): string {
