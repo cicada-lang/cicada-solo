@@ -3,11 +3,12 @@ import { Core } from "../core"
 import { Value } from "../value"
 import { Neutral } from "../neutral"
 
-export class NotYetValue {
+export class NotYetValue extends Value {
   t: Value
   neutral: Neutral
 
   constructor(t: Value, neutral: Neutral) {
+    super()
     this.t = t
     this.neutral = neutral
   }

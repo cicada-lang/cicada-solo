@@ -3,10 +3,11 @@ import { Core } from "../../core"
 import { Value } from "../../value"
 import * as Cores from "../../cores"
 
-export class QuoteValue {
+export class QuoteValue extends Value {
   str: string
 
   constructor(str: string) {
+    super()
     this.str = str
   }
 

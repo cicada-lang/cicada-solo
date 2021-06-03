@@ -2,11 +2,12 @@ import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
 
-export class ConsValue {
+export class ConsValue extends Value {
   car: Value
   cdr: Value
 
   constructor(car: Value, cdr: Value) {
+    super()
     this.car = car
     this.cdr = cdr
   }

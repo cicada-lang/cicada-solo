@@ -12,7 +12,7 @@ import { Fulfilled } from "./fulfilled"
 import * as Cores from "../../cores"
 import * as ut from "../../ut"
 
-export class ClsValue {
+export class ClsValue extends Value {
   telescope: Telescope
   fulfilled: Fulfilled
   name?: string
@@ -24,6 +24,7 @@ export class ClsValue {
       fulfilled?: Fulfilled
     }
   ) {
+    super()
     this.telescope = telescope
     this.fulfilled = opts?.fulfilled || new Fulfilled()
     this.name = opts?.name

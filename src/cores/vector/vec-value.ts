@@ -4,11 +4,12 @@ import { Value } from "../../value"
 import { readback } from "../../readback"
 import * as Cores from "../../cores"
 
-export class VecValue {
+export class VecValue extends Value{
   head: Value
   tail: Value
 
   constructor(head: Value, tail: Value) {
+    super()
     this.head = head
     this.tail = tail
   }

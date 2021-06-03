@@ -6,11 +6,12 @@ import { Closure } from "../../closure"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"
 
-export class SigmaValue {
+export class SigmaValue extends Value {
   car_t: Value
   cdr_t_cl: Closure
 
   constructor(car_t: Value, cdr_t_cl: Closure) {
+    super()
     this.car_t = car_t
     this.cdr_t_cl = cdr_t_cl
   }

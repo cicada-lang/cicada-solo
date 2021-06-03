@@ -1,4 +1,6 @@
-- `Value` as a class
+- [maybe] `Value.match` instead of `match_value`
+
+- `Neutral` as a class
 
 - `exps/inr`
 - `cores/inr`

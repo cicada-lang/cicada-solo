@@ -4,10 +4,11 @@ import { Value } from "../../value"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
 
-export class ObjValue {
+export class ObjValue extends Value {
   properties: Map<string, Value>
 
   constructor(properties: Map<string, Value>) {
+    super()
     this.properties = properties
   }
 

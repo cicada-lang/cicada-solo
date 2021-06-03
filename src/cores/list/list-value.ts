@@ -4,10 +4,11 @@ import { Value } from "../../value"
 import { readback } from "../../readback"
 import * as Cores from "../../cores"
 
-export class ListValue {
+export class ListValue extends Value {
   elem_t: Value
 
   constructor(elem_t: Value) {
+    super()
     this.elem_t = elem_t
   }
 

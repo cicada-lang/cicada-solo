@@ -4,10 +4,11 @@ import { Value } from "../../value"
 import { readback } from "../../readback"
 import * as Cores from "../../cores"
 
-export class InlValue {
+export class InlValue extends Value {
   left: Value
 
   constructor(left: Value) {
+    super()
     this.left = left
   }
 

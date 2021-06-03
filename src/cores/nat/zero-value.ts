@@ -3,7 +3,7 @@ import { Core } from "../../core"
 import { Value } from "../../value"
 import * as Cores from "../../cores"
 
-export class ZeroValue {
+export class ZeroValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Cores.NatValue) {
       return new Cores.Zero()

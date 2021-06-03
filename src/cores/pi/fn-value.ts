@@ -3,10 +3,11 @@ import { Core } from "../../core"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 
-export class FnValue {
+export class FnValue extends Value {
   ret_cl: Closure
 
   constructor(ret_cl: Closure) {
+    super()
     this.ret_cl = ret_cl
   }
 

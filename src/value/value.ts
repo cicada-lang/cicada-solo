@@ -4,8 +4,10 @@ import { Core } from "../core"
 import { Trace } from "../trace"
 import * as ut from "../ut"
 
-export type Value = {
-  readback(ctx: Ctx, t: Value): Core | undefined
+export abstract class Value {
+  instanceofValue = true
+
+  abstract readback(ctx: Ctx, t: Value): Core | undefined
   eta_expand?(ctx: Ctx, value: Value): Core
 }
 

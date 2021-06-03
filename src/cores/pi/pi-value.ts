@@ -6,11 +6,12 @@ import { Closure } from "../../closure"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"
 
-export class PiValue {
+export class PiValue extends Value {
   arg_t: Value
   ret_t_cl: Closure
 
   constructor(arg_t: Value, ret_t_cl: Closure) {
+    super()
     this.arg_t = arg_t
     this.ret_t_cl = ret_t_cl
   }

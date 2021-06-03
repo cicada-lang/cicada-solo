@@ -6,11 +6,12 @@ import { Closure } from "../../closure"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"
 
-export class EitherValue {
+export class EitherValue extends Value {
   left_t: Value
   right_t: Value
 
   constructor(left_t: Value, right_t: Value) {
+    super()
     this.left_t = left_t
     this.right_t = right_t
   }

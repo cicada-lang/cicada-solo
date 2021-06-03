@@ -4,12 +4,13 @@ import { readback } from "../../readback"
 import { Value } from "../../value"
 import * as Cores from "../../cores"
 
-export class EqualValue {
+export class EqualValue extends Value {
   t: Value
   from: Value
   to: Value
 
   constructor(t: Value, from: Value, to: Value) {
+    super()
     this.t = t
     this.from = from
     this.to = to

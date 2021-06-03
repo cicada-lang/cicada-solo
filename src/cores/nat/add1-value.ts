@@ -4,10 +4,11 @@ import { Value } from "../../value"
 import { readback } from "../../readback"
 import * as Cores from "../../cores"
 
-export class Add1Value {
+export class Add1Value extends Value {
   prev: Value
 
   constructor(prev: Value) {
+    super()
     this.prev = prev
   }
 
