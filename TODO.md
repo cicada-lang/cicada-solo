@@ -1,12 +1,9 @@
-- `exps/inl`
-
-- `exps/inr` syntax
-
-- `exps/inr` syntax
-
-- `cores/inr`
-
 - `cores/inl`
+- `exps/inl` syntax
+
+- `exps/inr`
+- `cores/inr`
+- `exps/inr` syntax
 
 - `exps/either_ind`
 - `cores/either_ind`
