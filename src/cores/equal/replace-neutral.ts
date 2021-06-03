@@ -4,12 +4,13 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import * as Cores from "../../cores"
 
-export class ReplaceNeutral implements Neutral {
+export class ReplaceNeutral extends Neutral {
   target: Neutral
   motive: Normal
   base: Normal
 
   constructor(target: Neutral, motive: Normal, base: Normal) {
+    super()
     this.target = target
     this.motive = motive
     this.base = base

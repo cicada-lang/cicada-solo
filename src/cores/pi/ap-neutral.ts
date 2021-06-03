@@ -4,11 +4,12 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import * as Cores from "../../cores"
 
-export class ApNeutral implements Neutral {
+export class ApNeutral extends Neutral {
   target: Neutral
   arg: Normal
 
   constructor(target: Neutral, arg: Normal) {
+    super()
     this.target = target
     this.arg = arg
   }

@@ -4,13 +4,14 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import * as Cores from "../../cores"
 
-export class NatIndNeutral implements Neutral {
+export class NatIndNeutral extends Neutral {
   target: Neutral
   motive: Normal
   base: Normal
   step: Normal
 
   constructor(target: Neutral, motive: Normal, base: Normal, step: Normal) {
+    super()
     this.target = target
     this.motive = motive
     this.base = base

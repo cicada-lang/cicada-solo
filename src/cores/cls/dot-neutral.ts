@@ -3,11 +3,12 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import * as Cores from "../../cores"
 
-export class DotNeutral {
+export class DotNeutral extends Neutral {
   target: Neutral
   name: string
 
   constructor(target: Neutral, name: string) {
+    super()
     this.target = target
     this.name = name
   }

@@ -4,7 +4,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import * as Cores from "../../cores"
 
-export class VectorIndNeutral implements Neutral {
+export class VectorIndNeutral extends Neutral {
   length: Normal
   target: Neutral
   motive: Normal
@@ -18,6 +18,7 @@ export class VectorIndNeutral implements Neutral {
     base: Normal,
     step: Normal
   ) {
+    super()
     this.length = length
     this.target = target
     this.motive = motive

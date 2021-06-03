@@ -1,5 +1,3 @@
-- `Neutral` as a class
-
 - `exps/inr`
 - `cores/inr`
 - `exps/inr` syntax

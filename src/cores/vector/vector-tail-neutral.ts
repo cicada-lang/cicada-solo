@@ -3,10 +3,11 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import * as Cores from "../../cores"
 
-export class VectorTailNeutral implements Neutral {
+export class VectorTailNeutral extends Neutral {
   target: Neutral
 
   constructor(target: Neutral) {
+    super()
     this.target = target
   }
 
