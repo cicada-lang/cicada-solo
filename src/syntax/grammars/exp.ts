@@ -200,6 +200,7 @@ export const cons = {
       '")"',
     ],
     "cons:inl": ['"inl"', '"("', { left: "exp" }, '")"'],
+    "cons:inr": ['"inr"', '"("', { right: "exp" }, '")"'],
     "cons:type": ['"Type"'],
     "cons:let": [
       '"let"',
