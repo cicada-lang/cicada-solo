@@ -1,6 +1,6 @@
 import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
-import { Value, match_value } from "../../value"
+import { Value } from "../../value"
 import { evaluate } from "../../evaluate"
 import * as Cores from "../../cores"
 
@@ -25,16 +25,16 @@ export class VectorHead extends Core {
   }
 
   static apply(target: Value): Value {
-    return match_value(target, [
+    return Value.match(target, [
       [Cores.VecValue, (vec: Cores.VecValue) => vec.head],
       [
         Cores.NotYetValue,
         ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
+          Value.match(t, [
             [
               Cores.VectorValue,
               (vector_t: Cores.VectorValue) =>
-                match_value(vector_t.length, [
+                Value.match(vector_t.length, [
                   [
                     Cores.Add1Value,
                     (_length: Cores.Add1Value) =>

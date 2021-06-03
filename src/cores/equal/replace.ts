@@ -1,7 +1,7 @@
 import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
-import { Value, match_value } from "../../value"
+import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import * as Cores from "../../cores"
@@ -47,12 +47,12 @@ export class Replace extends Core {
   }
 
   static apply(target: Value, motive: Value, base: Value): Value {
-    return match_value(target, [
+    return Value.match(target, [
       [Cores.SameValue, (_: Cores.SameValue) => base],
       [
         Cores.NotYetValue,
         ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
+          Value.match(t, [
             [
               Cores.EqualValue,
               ({ t, to, from }: Cores.EqualValue) => {

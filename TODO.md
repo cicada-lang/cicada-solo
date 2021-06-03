@@ -1,5 +1,3 @@
-- [maybe] `Value.match` instead of `match_value`
-
 - `Neutral` as a class
 
 - `exps/inr`

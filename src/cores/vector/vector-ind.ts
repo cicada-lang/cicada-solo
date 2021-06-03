@@ -5,7 +5,7 @@ import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { infer } from "../../infer"
 import { expect } from "../../expect"
-import { Value, match_value } from "../../value"
+import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { Trace } from "../../trace"
@@ -78,12 +78,12 @@ export class VectorInd extends Core {
     base: Value,
     step: Value
   ): Value {
-    return match_value(target, [
+    return Value.match(target, [
       [Cores.VecnilValue, (_: Cores.VecnilValue) => base],
       [
         Cores.VecValue,
         ({ head, tail }: Cores.VecValue) => {
-          const prev = match_value(length, [
+          const prev = Value.match(length, [
             [Cores.Add1Value, ({ prev }: Cores.Add1Value) => prev],
           ])
 
@@ -99,7 +99,7 @@ export class VectorInd extends Core {
       [
         Cores.NotYetValue,
         ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
+          Value.match(t, [
             [
               Cores.VectorValue,
               (vector_t: Cores.VectorValue) => {

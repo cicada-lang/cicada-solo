@@ -1,6 +1,6 @@
 import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
-import { Value, match_value } from "../../value"
+import { Value } from "../../value"
 import { evaluate } from "../../evaluate"
 import * as Cores from "../../cores"
 
@@ -27,12 +27,12 @@ export class Dot extends Core {
   }
 
   static apply(target: Value, name: string): Value {
-    return match_value(target, [
+    return Value.match(target, [
       [Cores.ObjValue, (obj: Cores.ObjValue) => obj.dot_value(name)],
       [
         Cores.NotYetValue,
         ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
+          Value.match(t, [
             [
               Cores.ClsValue,
               (cls: Cores.ClsValue) =>

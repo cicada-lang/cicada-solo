@@ -3,7 +3,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
-import { Value, match_value } from "../../value"
+import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import * as Cores from "../../cores"
@@ -55,7 +55,7 @@ export class NatInd extends Core {
   }
 
   static apply(target: Value, motive: Value, base: Value, step: Value): Value {
-    return match_value(target, [
+    return Value.match(target, [
       [Cores.ZeroValue, (_: Cores.ZeroValue) => base],
       [
         Cores.Add1Value,
@@ -68,7 +68,7 @@ export class NatInd extends Core {
       [
         Cores.NotYetValue,
         ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
+          Value.match(t, [
             [
               Cores.NatValue,
               (nat_t: Cores.NatValue) => {

@@ -1,7 +1,7 @@
 import { Core, AlphaCtx } from "../../core"
 import { evaluate } from "../../evaluate"
 import { Env } from "../../env"
-import { Value, match_value } from "../../value"
+import { Value } from "../../value"
 import { Normal } from "../../normal"
 import * as Cores from "../../cores"
 
@@ -33,11 +33,11 @@ export class AbsurdInd extends Core {
   }
 
   static apply(target: Value, motive: Value): Value {
-    return match_value(target, [
+    return Value.match(target, [
       [
         Cores.NotYetValue,
         ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
+          Value.match(t, [
             [
               Cores.AbsurdValue,
               (_: Cores.AbsurdValue) =>

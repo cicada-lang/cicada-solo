@@ -1,7 +1,7 @@
 import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
-import { Value, match_value } from "../../value"
+import { Value } from "../../value"
 import * as Cores from "../../cores"
 
 export class Cdr extends Core {
@@ -25,12 +25,12 @@ export class Cdr extends Core {
   }
 
   static apply(target: Value): Value {
-    return match_value(target, [
+    return Value.match(target, [
       [Cores.ConsValue, (cons: Cores.ConsValue) => cons.cdr],
       [
         Cores.NotYetValue,
         ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
+          Value.match(t, [
             [
               Cores.SigmaValue,
               (sigma: Cores.SigmaValue) =>

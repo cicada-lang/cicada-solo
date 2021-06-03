@@ -9,7 +9,7 @@ export class VectorValue extends Value {
   length: Value
 
   constructor(elem_t: Value, length: Value) {
-   super()
+    super()
     this.elem_t = elem_t
     this.length = length
   }

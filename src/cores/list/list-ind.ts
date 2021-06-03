@@ -5,7 +5,7 @@ import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { infer } from "../../infer"
 import { expect } from "../../expect"
-import { Value, match_value } from "../../value"
+import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { Trace } from "../../trace"
@@ -58,7 +58,7 @@ export class ListInd extends Core {
   }
 
   static apply(target: Value, motive: Value, base: Value, step: Value): Value {
-    return match_value(target, [
+    return Value.match(target, [
       [Cores.NilValue, (_: Cores.NilValue) => base],
       [
         Cores.LiValue,
@@ -71,7 +71,7 @@ export class ListInd extends Core {
       [
         Cores.NotYetValue,
         ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
+          Value.match(t, [
             [
               Cores.ListValue,
               (list_t: Cores.ListValue) => {

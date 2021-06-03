@@ -1,6 +1,6 @@
 import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
-import { Value, match_value } from "../../value"
+import { Value } from "../../value"
 import { evaluate } from "../../evaluate"
 import * as Cores from "../../cores"
 
@@ -25,12 +25,12 @@ export class Car extends Core {
   }
 
   static apply(target: Value): Value {
-    return match_value(target, [
+    return Value.match(target, [
       [Cores.ConsValue, (cons: Cores.ConsValue) => cons.car],
       [
         Cores.NotYetValue,
         ({ t, neutral }: Cores.NotYetValue) =>
-          match_value(t, [
+          Value.match(t, [
             [
               Cores.SigmaValue,
               (sigma: Cores.SigmaValue) =>

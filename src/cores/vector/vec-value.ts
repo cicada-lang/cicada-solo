@@ -4,7 +4,7 @@ import { Value } from "../../value"
 import { readback } from "../../readback"
 import * as Cores from "../../cores"
 
-export class VecValue extends Value{
+export class VecValue extends Value {
   head: Value
   tail: Value
 

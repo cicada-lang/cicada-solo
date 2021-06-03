@@ -1,7 +1,7 @@
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Value, match_value } from "../../value"
+import { Value } from "../../value"
 import { Trace } from "../../trace"
 import { infer } from "../../infer"
 import * as ut from "../../ut"
@@ -52,7 +52,7 @@ export class SpreadProp extends Prop {
 
   expand(ctx: Ctx): Array<[string, Exp]> {
     const inferred = infer(ctx, this.exp)
-    return match_value(inferred.t, [
+    return Value.match(inferred.t, [
       [
         Cores.ClsValue,
         (cls: Cores.ClsValue) =>
