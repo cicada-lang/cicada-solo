@@ -1,4 +1,3 @@
-- [tlt] 12. Even Numbers Can Be Odd
 - [tlt] 13. Even Haf a Baker's Dozen
 - [tlt] 14. There's Safety in Numbers
 - [tlt] 15. Imagine That ...
