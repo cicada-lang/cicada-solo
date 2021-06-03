@@ -1,2 +1,3 @@
 the Type Either(Nat, String)
 the Either(Nat, String) inl(6)
+the Either(Nat, String) inl("abc")

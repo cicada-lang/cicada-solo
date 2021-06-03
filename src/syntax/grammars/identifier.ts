@@ -38,7 +38,7 @@ const preserved = [
   "Either",
   "inl",
   "inr",
-  // "either_ind",
+  "either_ind",
   "String",
   "Type",
 ]

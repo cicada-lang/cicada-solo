@@ -104,6 +104,13 @@ export function elim_matcher(tree: pt.Tree): Exp {
       ),
     "elim:absurd_ind": ({ target, motive }) =>
       new Exps.AbsurdInd(exp_matcher(target), exp_matcher(motive)),
+    "elim:either_ind": ({ target, motive, base_left, base_right }) =>
+      new Exps.EitherInd(
+        exp_matcher(target),
+        exp_matcher(motive),
+        exp_matcher(base_left),
+        exp_matcher(base_right)
+      ),
   })(tree)
 }
 

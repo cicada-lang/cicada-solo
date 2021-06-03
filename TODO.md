@@ -1,7 +1,3 @@
-- `exps/either_ind`
-- `cores/either_ind`
-- `exps/either_ind` syntax
-
 - [tlt] 13. Even Haf a Baker's Dozen
 - [tlt] 14. There's Safety in Numbers
 - [tlt] 15. Imagine That ...

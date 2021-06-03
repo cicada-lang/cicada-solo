@@ -92,6 +92,18 @@ export const elim = {
       { motive: "exp" },
       '")"',
     ],
+    "elim:either_ind": [
+      '"either_ind"',
+      '"("',
+      { target: "exp" },
+      '","',
+      { motive: "exp" },
+      '","',
+      { base_left: "exp" },
+      '","',
+      { base_right: "exp" },
+      '")"',
+    ],
   },
 }
 
