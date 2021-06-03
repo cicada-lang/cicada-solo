@@ -5,7 +5,7 @@
 - [maybe] `the(t, v)` instead of `the t v`
 - [maybe] explicit `apply`
 - [maybe] it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
-  - this will not effect normalization, because `same(from)` and `same(to)` will always be definitional eqaul.
+  - this will not effect normalization, because `same(from)` and `same(to)` will always be definitional or computational eqaul.
 
 - a structure must have its own equivalence relation -- for quotient structure
   - structure should take `Equivalence` as argument
