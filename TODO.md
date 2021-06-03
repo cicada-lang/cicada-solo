@@ -4,12 +4,11 @@
 - [tlt] 16. If It's All the Same to You
 
 - [maybe] `the(t, v)` instead of `the t v`
+- [maybe] it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
 
 - a structure must have its own equivalence relation -- for quotient structure
   - structure should take `Equivalence` as argument
   - is the axioms of `Equivalence` enough to be used for quotient structure?
-
-- it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
 
 - `check` use `subtype` instead of `conversion`
   - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
