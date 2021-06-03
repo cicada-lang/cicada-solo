@@ -191,6 +191,14 @@ export const cons = {
     "cons:absurd": ['"Absurd"'],
     "cons:str": ['"String"'],
     "cons:quote": [{ value: { $pattern: ["string"] } }],
+    "cons:either": [
+      '"Either"',
+      '"("',
+      { left_t: "exp" },
+      '","',
+      { right_t: "exp" },
+      '")"',
+    ],
     "cons:type": ['"Type"'],
     "cons:let": [
       '"let"',

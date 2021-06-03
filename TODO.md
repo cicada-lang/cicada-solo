@@ -1,5 +1,3 @@
-- `exps/either` -- syntax `Either`
-
 - [tlt] 13. Even Haf a Baker's Dozen
 - [tlt] 14. There's Safety in Numbers
 - [tlt] 15. Imagine That ...

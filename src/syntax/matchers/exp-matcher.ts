@@ -175,6 +175,8 @@ export function cons_matcher(tree: pt.Tree): Exp {
     "cons:str": () => new Exps.Str(),
     "cons:quote": ({ value }) =>
       new Exps.Quote(pt.trim_boundary(pt.str(value), 1)),
+    "cons:either": ({ left_t, right_t }) =>
+      new Exps.Either(exp_matcher(left_t), exp_matcher(right_t)),
     "cons:type": () => new Exps.Type(),
     "cons:let": ({ name, exp, ret }) =>
       new Exps.Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),
