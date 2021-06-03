@@ -53,6 +53,6 @@ export * from "./cls/obj"
 export * from "./cls/dot"
 
 export * from "./either/either"
-// export * from "./either/inl"
+export * from "./either/inl"
 // export * from "./either/inr"
 // export * from "./either/either-ind"

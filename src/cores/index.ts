@@ -88,7 +88,7 @@ export * from "./cls/dot-neutral"
 
 export * from "./either/either"
 export * from "./either/either-value"
-// export * from "./either/inl"
+export * from "./either/inl"
 // export * from "./either/inl-neutral"
 // export * from "./either/inr"
 // export * from "./either/inr-neutral"
