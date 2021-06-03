@@ -1,9 +1,9 @@
-- [tlt] 13. Even Haf a Baker's Dozen
 - [tlt] 14. There's Safety in Numbers
 - [tlt] 15. Imagine That ...
 - [tlt] 16. If It's All the Same to You
 
 - [maybe] `the(t, v)` instead of `the t v`
+- [maybe] explicit `apply`
 - [maybe] it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
 
 - a structure must have its own equivalence relation -- for quotient structure
