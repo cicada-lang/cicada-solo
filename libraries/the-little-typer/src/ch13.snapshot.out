@@ -1,1 +1,2 @@
 the Type Either(Nat, String)
+the Either(Nat, String) inl(666)

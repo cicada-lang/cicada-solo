@@ -199,6 +199,7 @@ export const cons = {
       { right_t: "exp" },
       '")"',
     ],
+    "cons:inl": ['"inl"', '"("', { left: "exp" }, '")"'],
     "cons:type": ['"Type"'],
     "cons:let": [
       '"let"',

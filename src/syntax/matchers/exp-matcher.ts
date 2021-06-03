@@ -177,6 +177,7 @@ export function cons_matcher(tree: pt.Tree): Exp {
       new Exps.Quote(pt.trim_boundary(pt.str(value), 1)),
     "cons:either": ({ left_t, right_t }) =>
       new Exps.Either(exp_matcher(left_t), exp_matcher(right_t)),
+    "cons:inl": ({ left }) => new Exps.Inl(exp_matcher(left)),
     "cons:type": () => new Exps.Type(),
     "cons:let": ({ name, exp, ret }) =>
       new Exps.Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),
@@ -202,7 +203,9 @@ export function cons_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-export function cls_entry_matcher(tree: pt.Tree): {
+export function cls_entry_matcher(
+  tree: pt.Tree
+): {
   name: string
   t: Exp
   exp?: Exp
@@ -247,7 +250,9 @@ export function bindings_matcher(
   })(tree)
 }
 
-export function binding_entry_matcher(tree: pt.Tree): {
+export function binding_entry_matcher(
+  tree: pt.Tree
+): {
   names: Array<string>
   exp: Exp
 } {

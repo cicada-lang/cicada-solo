@@ -1,5 +1,3 @@
-- `exps/inl` syntax
-
 - `Value` as a class
 
 - `exps/inr`
