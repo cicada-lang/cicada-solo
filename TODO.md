@@ -1,5 +1,3 @@
-- `exps/inr`
-- `cores/inr`
 - `exps/inr` syntax
 
 - `exps/either_ind`
