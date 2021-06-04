@@ -25,6 +25,6 @@ export class Inr extends Exp {
   repr(): string {
     const args = [this.right.repr()].join(", ")
 
-    return `inl(${args})`
+    return `inr(${args})`
   }
 }

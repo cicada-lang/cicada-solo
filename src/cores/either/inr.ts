@@ -20,12 +20,12 @@ export class Inr extends Core {
   repr(): string {
     const args = [this.right.repr()].join(", ")
 
-    return `inl(${args})`
+    return `inr(${args})`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
     const args = [this.right.alpha_repr(ctx)].join(", ")
 
-    return `inl(${args})`
+    return `inr(${args})`
   }
 }

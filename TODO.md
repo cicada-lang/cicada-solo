@@ -1,5 +1,3 @@
-- [tlt] [ch14] Turner's Teaser
-
 - abstract `fin_ind` -- instead of using `either_ind`
 
 - [maybe] `the(t, v)` instead of `the t v`

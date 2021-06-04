@@ -14,7 +14,7 @@ export class InrValue extends Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Cores.EitherValue) {
-      return new Cores.Inl(readback(ctx, t.right_t, this.right))
+      return new Cores.Inr(readback(ctx, t.right_t, this.right))
     }
   }
 }
