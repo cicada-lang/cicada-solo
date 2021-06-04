@@ -3,6 +3,7 @@
 - [tlt] 16. If It's All the Same to You
 
 - [maybe] `the(t, v)` instead of `the t v`
+- [maybe] change the format of `Show` to be `value: T`
 - [maybe] explicit `apply`
 - [maybe] it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
   - this will not effect normalization, because `same(from)` and `same(to)` will always be definitional or computational eqaul.
