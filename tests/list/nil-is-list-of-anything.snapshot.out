@@ -1,5 +1,5 @@
-the List(Nat) nil
-the List(Nat) nil
-the List(List(Nat)) nil
-the List(List(Nat)) nil
+nil: List(Nat) 
+nil: List(Nat) 
+nil: List(List(Nat)) 
+nil: List(List(Nat)) 
 

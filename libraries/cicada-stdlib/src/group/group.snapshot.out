@@ -1,4 +1,4 @@
-the Type class Group {
+class Group {
   Elem: Type
   mul: (x: Elem) -> (y: Elem) -> Elem
   mul_associative: (x: Elem) -> (y: Elem) -> (z: Elem) -> Equal(Elem, mul(x)(mul(y)(z)), mul(mul(x)(y))(z))
@@ -9,4 +9,4 @@ the Type class Group {
   left_inv: (x: Elem) -> Equal(Elem, mul(inv(x))(x), id)
   right_inv: (x: Elem) -> Equal(Elem, mul(x)(inv(x)), id)
   div: (x: Elem) -> (y: Elem) -> Elem = (x) => (y) => mul(x)(inv(y))
-}
+}: Type 

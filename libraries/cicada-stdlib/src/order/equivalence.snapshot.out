@@ -1,7 +1,7 @@
-the Type class Equivalence {
+class Equivalence {
   Elem: Type
   Under: (_: Elem) -> (_1: Elem) -> Type
   reflexive: (x: Elem) -> Under(x)(x)
   transitive: (x: Elem) -> (y: Elem) -> (z: Elem) -> (_: Under(x)(y)) -> (_1: Under(y)(z)) -> Under(x)(z)
   symmetric: (x: Elem) -> (y: Elem) -> (_: Under(x)(y)) -> Under(y)(x)
-}
+}: Type 

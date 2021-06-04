@@ -1,9 +1,9 @@
-the Equal(Nat, 4, 4) same
-the Equal(Nat, 1, 1) same
-the Equal(Nat, 2, 2) same
-the Equal(Nat, 3, 3) same
-the Equal(Nat, 4, 4) same
-the Equal(Nat, 1, 1) same
-the Equal(Nat, 2, 2) same
-the Equal(Nat, 3, 3) same
-the Equal(Nat, 4, 4) same
+same: Equal(Nat, 4, 4) 
+same: Equal(Nat, 1, 1) 
+same: Equal(Nat, 2, 2) 
+same: Equal(Nat, 3, 3) 
+same: Equal(Nat, 4, 4) 
+same: Equal(Nat, 1, 1) 
+same: Equal(Nat, 2, 2) 
+same: Equal(Nat, 3, 3) 
+same: Equal(Nat, 4, 4) 

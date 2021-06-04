@@ -1,13 +1,13 @@
-the class ABC {
-  a: Trivial = sole
-  b: Nat = 2
-  c: String
-} {
+{
   a: sole
   b: 2
   c: "c"
-}
-the Trivial sole
-the Nat 2
-the String "c"
+}: class ABC {
+  a: Trivial = sole
+  b: Nat = 2
+  c: String
+} 
+sole: Trivial 
+2: Nat 
+"c": String 
 

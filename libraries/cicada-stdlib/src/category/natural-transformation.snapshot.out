@@ -1,4 +1,4 @@
-the Type class NaturalTransformation {
+class NaturalTransformation {
   dom: class Category {
     Object: Type
     Morphism: (dom: Object) -> (cod: Object) -> Type
@@ -99,8 +99,8 @@ the Type class NaturalTransformation {
   }
   component: (x: dom.Object) -> cod.Morphism(src.map(x))(tar.map(x))
   naturality: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> Equal(cod.Morphism(src.map(x))(tar.map(y)), cod.compose(src.map(x))(tar.map(x))(tar.map(y))(component(x))(tar.fmap(x)(y)(f)), cod.compose(src.map(x))(src.map(y))(tar.map(y))(src.fmap(x)(y)(f))(component(y)))
-}
-the Type class NaturalTransformation {
+}: Type 
+class NaturalTransformation {
   dom: class Category {
     Object: Type
     Morphism: (dom: Object) -> (cod: Object) -> Type
@@ -201,8 +201,8 @@ the Type class NaturalTransformation {
   }
   component: (x: dom.Object) -> cod.Morphism(src.map(x))(tar.map(x))
   naturality: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> Equal(cod.Morphism(src.map(x))(tar.map(y)), cod.compose(src.map(x))(tar.map(x))(tar.map(y))(component(x))(tar.fmap(x)(y)(f)), cod.compose(src.map(x))(src.map(y))(tar.map(y))(src.fmap(x)(y)(f))(component(y)))
-}
-the Type class NaturalTransformation {
+}: Type 
+class NaturalTransformation {
   dom: class Category {
     Object: Type
     Morphism: (dom: Object) -> (cod: Object) -> Type
@@ -303,4 +303,4 @@ the Type class NaturalTransformation {
   }
   component: (x: dom.Object) -> cod.Morphism(src.map(x))(tar.map(x))
   naturality: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> Equal(cod.Morphism(src.map(x))(tar.map(y)), cod.compose(src.map(x))(tar.map(x))(tar.map(y))(component(x))(tar.fmap(x)(y)(f)), cod.compose(src.map(x))(src.map(y))(tar.map(y))(src.fmap(x)(y)(f))(component(y)))
-}
+}: Type 

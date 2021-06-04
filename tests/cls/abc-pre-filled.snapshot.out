@@ -1,31 +1,31 @@
-the class ABC {
-  a: Trivial = sole
-  b: Nat = 2
-  c: String = "c"
-} {
+{
   a: sole
   b: 2
   c: "c"
-}
-the Trivial sole
-the Nat 2
-the String "c"
-the class ABCDE {
+}: class ABC {
   a: Trivial = sole
   b: Nat = 2
   c: String = "c"
-  d: String = "d"
-  e: String
-} {
+} 
+sole: Trivial 
+2: Nat 
+"c": String 
+{
   a: sole
   b: 2
   c: "c"
   d: "d"
   e: "e"
-}
-the Trivial sole
-the Nat 2
-the String "c"
-the String "d"
-the String "e"
+}: class ABCDE {
+  a: Trivial = sole
+  b: Nat = 2
+  c: String = "c"
+  d: String = "d"
+  e: String
+} 
+sole: Trivial 
+2: Nat 
+"c": String 
+"d": String 
+"e": String 
 

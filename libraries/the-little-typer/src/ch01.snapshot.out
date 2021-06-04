@@ -1,18 +1,18 @@
-the String "ratatouille"
-the (_: String) * String cons("ratatouille", "baguette")
-the Equal(String, "ratatouille", "ratatouille") same
-the Equal((_: String) * String, cons("ratatouille", "baguette"), cons("ratatouille", "baguette")) same
-the String "ratatouille"
-the Equal(String, "ratatouille", "ratatouille") same
-the Type (_: String) * String
-the Type String
-the Type Type
-the Equal(Type, String, String) same
-the Type (_: String) * String
-the (_: String) * String cons("olive", "oil")
-the Nat 172
-the Nat 0
-the Nat 0
-the Equal(Nat, 0, 0) same
-the Equal(Nat, 0, 0) same
-the Nat 2
+"ratatouille": String 
+cons("ratatouille", "baguette"): (_: String) * String 
+same: Equal(String, "ratatouille", "ratatouille") 
+same: Equal((_: String) * String, cons("ratatouille", "baguette"), cons("ratatouille", "baguette")) 
+"ratatouille": String 
+same: Equal(String, "ratatouille", "ratatouille") 
+(_: String) * String: Type 
+String: Type 
+Type: Type 
+same: Equal(Type, String, String) 
+(_: String) * String: Type 
+cons("olive", "oil"): (_: String) * String 
+172: Nat 
+0: Nat 
+0: Nat 
+same: Equal(Nat, 0, 0) 
+same: Equal(Nat, 0, 0) 
+2: Nat 

@@ -1,4 +1,4 @@
-the Equal(Type, class PartialOrder {
+same: Equal(Type, class PartialOrder {
   Elem: Type
   Under: (_: Elem) -> (_1: Elem) -> Type
   reflexive: (x: Elem) -> Under(x)(x)
@@ -10,4 +10,4 @@ the Equal(Type, class PartialOrder {
   reflexive: (x: Elem) -> Under(x)(x)
   transitive: (x: Elem) -> (y: Elem) -> (z: Elem) -> (_: Under(x)(y)) -> (_1: Under(y)(z)) -> Under(x)(z)
   antisymmetric: (x: Elem) -> (y: Elem) -> (_: Under(x)(y)) -> (_1: Under(y)(x)) -> Equal(Elem, x, y)
-}) same
+}) 

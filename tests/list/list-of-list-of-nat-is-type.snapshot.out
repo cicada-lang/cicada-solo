@@ -1,4 +1,4 @@
-the Type List(Nat)
-the Type List(List(Nat))
-the Type List(List(List(Nat)))
+List(Nat): Type 
+List(List(Nat)): Type 
+List(List(List(Nat))): Type 
 

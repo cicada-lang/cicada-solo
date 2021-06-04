@@ -1,2 +1,2 @@
-the Vector(Nat, 5) vec(1, vec(2, vec(3, vec(4, vec(5, vecnil)))))
-the List(Nat) li(1, li(2, li(3, nil)))
+vec(1, vec(2, vec(3, vec(4, vec(5, vecnil))))): Vector(Nat, 5) 
+li(1, li(2, li(3, nil))): List(Nat) 
