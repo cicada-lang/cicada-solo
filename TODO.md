@@ -2,11 +2,13 @@
 
 - abstract `fin_ind` -- instead of using `either_ind`
 
+- [maybe] `the(t, v)` instead of `the t v`
+- [maybe] `is(v, t)` elab to `the(t, v)`
+
+- [maybe] as syntex to help "same-as" charts
+
 - [tlt] 15. Imagine That ...
 - [tlt] 16. If It's All the Same to You
-
-- [maybe] `the(t, v)` instead of `the t v`
-- [maybe] `is(v, t)`
 
   In set theory, the symbol "∈" is a stylized lowercase Greek letter epsilon ("ϵ"),
   the first letter of the word ἐστί, which means "is".
