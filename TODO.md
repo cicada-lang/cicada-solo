@@ -1,4 +1,7 @@
-- [tlt] 14. There's Safety in Numbers
+- [tlt] [ch14] Turner's Teaser
+
+- abstract `fin_ind` -- instead of using `either_ind`
+
 - [tlt] 15. Imagine That ...
 - [tlt] 16. If It's All the Same to You
 
@@ -7,6 +10,8 @@
 
   In set theory, the symbol "∈" is a stylized lowercase Greek letter epsilon ("ϵ"),
   the first letter of the word ἐστί, which means "is".
+
+  - https://en.wikipedia.org/wiki/Element_(mathematics)
 
 - [maybe] explicit `apply`
 - [maybe] it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version

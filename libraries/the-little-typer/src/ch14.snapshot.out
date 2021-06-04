@@ -16,3 +16,20 @@ inl("c"): Either(String, Trivial)
 inl(sole): Either(String, Trivial) 
 inl(sole): Either(String, Trivial) 
 (x) => the Absurd x: (x: Absurd) -> Absurd 
+Absurd: Type 
+Either(Absurd, Trivial): Type 
+Either(Either(Absurd, Trivial), Trivial): Type 
+Either(Either(Either(Absurd, Trivial), Trivial), Trivial): Type 
+inl(sole): Either(Absurd, Trivial) 
+inl(sole): Either(Either(Absurd, Trivial), Trivial) 
+inl(sole): Either(Either(Either(Absurd, Trivial), Trivial), Trivial) 
+inl(sole): Either(Either(Either(Either(Absurd, Trivial), Trivial), Trivial), Trivial) 
+inl(inl(sole)): Either(Either(Absurd, Trivial), Trivial) 
+inl(inl(inl(sole))): Either(Either(Either(Absurd, Trivial), Trivial), Trivial) 
+inl(inl(inl(inl(sole)))): Either(Either(Either(Either(Absurd, Trivial), Trivial), Trivial), Trivial) 
+inl(inl(sole)): Either(Either(Either(Either(Either(Either(Either(Either(Either(Either(Either(Either(Absurd, Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial) 
+inl(inl(inl(sole))): Either(Either(Either(Either(Either(Either(Either(Either(Either(Either(Either(Either(Either(Absurd, Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial) 
+inl(inl(inl(inl(sole)))): Either(Either(Either(Either(Either(Either(Either(Either(Either(Either(Either(Either(Either(Either(Absurd, Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial), Trivial) 
+"a": String 
+"b": String 
+"c": String 
