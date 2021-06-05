@@ -1,52 +1,54 @@
 // 1. The More Things Change, the More They Stay the Same
 
-the String
-"ratatouille"
+the(String, "ratatouille")
 
-the (String) * String
-cons("ratatouille", "baguette")
+the((String) * String, cons("ratatouille", "baguette"))
 
-the Equal(
-  String,
-  "ratatouille",
-  "ratatouille")
-same
+the(
+  Equal(
+    String,
+    "ratatouille",
+    "ratatouille"),
+  same)
 
-the Equal(
-  (String) * String,
-  cons("ratatouille", "baguette"),
-  cons("ratatouille", "baguette"))
-same
+the(
+  Equal(
+    (String) * String,
+    cons("ratatouille", "baguette"),
+    cons("ratatouille", "baguette")),
+  same)
 
-the String
-car(the (String) * String cons("ratatouille", "baguette"))
+the(String, car(the((String) * String, cons("ratatouille", "baguette"))))
 
-the Equal(
-  String,
-  "ratatouille",
-  car(the (String) * String cons("ratatouille", "baguette")))
-same
+the(
+  Equal(
+    String,
+    "ratatouille",
+    car(the((String) * String, cons("ratatouille", "baguette")))),
+  same)
 
-the Type (String) * String
-the Type String
-the Type Type
-the Equal(Type, String, String) same
+the(Type, (String) * String)
+the(Type, String)
+the(Type, Type)
+the(Equal(Type, String, String), same)
 
-the Type
-(car(the (Type) * String cons(String, "olive"))) *
- cdr(the (String) * Type cons("oil", String))
+the(
+  Type,
+  (car(the((Type) * String, cons(String, "olive")))) *
+   cdr(the((String) * Type, cons("oil", String))))
 
-the (car(the (Type) * String cons(String, "olive"))) *
-  cdr(the (String) * Type cons("oil", String))
-cons(
-  cdr(the (Type) * String cons(String, "olive")),
-  car(the (String) * Type cons("oil", String)))
+the(
+  (car(the((Type) * String, cons(String, "olive")))) *
+   cdr(the((String) * Type, cons("oil", String))),
+  cons(
+    cdr(the((Type) * String, cons(String, "olive"))),
+    car(the((String) * Type, cons("oil", String)))))
 
-the Nat 172
-the Nat 0
-the Nat zero
-the Equal(Nat, 0, zero) same
-the Equal(Nat, zero, 0) same
+the(Nat, 172)
+the(Nat, 0)
+the(Nat, zero)
+the(Equal(Nat, 0, zero), same)
+the(Equal(Nat, zero, 0), same)
 
 def one = add1(zero)
 def two = add1(one)

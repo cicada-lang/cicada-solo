@@ -16,81 +16,85 @@ def id_in_pair: (x: String) -> T =
   (x) => cons(x, (x) => x)
 
 
-the T
-id_in_pair("x")
+the(T, id_in_pair("x"))
 
 // The x occur in `(x) => x` should not be
 // effected by the substitution of outer `x`,
 // and `(x) => x` is equivalent to `(y) => y`,
 
 
-the Equal(
-  T,
-  id_in_pair("x"),
-  cons("x", (y) => y))
-same
+the(
+  Equal(
+    T,
+    id_in_pair("x"),
+    cons("x", (y) => y)),
+  same)
 
 
-the Equal(
-  (Nat) -> (Nat) * Nat,
-  (x) => cons(x, x),
-  (y) => cons(y, y))
-same
+the(
+  Equal(
+    (Nat) -> (Nat) * Nat,
+    (x) => cons(x, x),
+    (y) => cons(y, y)),
+  same)
 
 
-the Equal(
-  (Nat) -> Nat,
-  (y) => car(the (Nat) * Nat cons(y, y)),
-  (x) => x)
-same
+the(
+  Equal(
+    (Nat) -> Nat,
+    (y) => car(the((Nat) * Nat, cons(y, y))),
+    (x) => x),
+  same)
 
 
-the Equal(
-  ((Nat) * Nat) -> Nat,
-  (y) => car(y),
-  (x) => car(x))
-same
+the(
+  Equal(
+    ((Nat) * Nat) -> Nat,
+    (y) => car(y),
+    (x) => car(x)),
+  same)
 
 def vegetables: (String) * String =
   cons("celery", "carrot")
 
 
-the Equal(
-  (String) * String,
-  vegetables,
-  cons(car(vegetables), cdr(vegetables)))
-same
+the(
+  Equal(
+    (String) * String,
+    vegetables,
+    cons(car(vegetables), cdr(vegetables))),
+  same)
 
 def naught_or_more: (Nat) -> String =
   (n) => nat_rec(n, "naught", (_prev, _almost) => "more")
 
 
-the Equal(
-  String,
-  naught_or_more(0),
-  "naught")
-same
+the(
+  Equal(
+    String,
+    naught_or_more(0),
+    "naught"),
+  same)
 
 
-the Equal(
-  String,
-  naught_or_more(1),
-  "more")
-same
+the(
+  Equal(
+    String,
+    naught_or_more(1),
+    "more"),
+  same)
 
 
-the Equal(
-  String,
-  naught_or_more(4),
-  "more")
-same
+the(
+  Equal(
+    String,
+    naught_or_more(4),
+    "more"),
+  same)
 
 
-the (Type) * Type
-cons(String, String)
+the((Type) * Type, cons(String, String))
 
 def Pear: Type = (Nat) * Nat
 
-
-the Pear
-cons(1, 2)
+the(Pear, cons(1, 2))

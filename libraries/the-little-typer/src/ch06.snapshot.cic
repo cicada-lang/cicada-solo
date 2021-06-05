@@ -1,16 +1,16 @@
 // 6. Precisely How Many?
 
-the Type Vector(String, 0)
-the Type Vector(String, 1)
-the Type Vector(List(String), 0)
-the Type Vector(List(String), 1)
+the(Type, Vector(String, 0))
+the(Type, Vector(String, 1))
+the(Type, Vector(List(String), 0))
+the(Type, Vector(List(String), 1))
 
-the Vector(String, 0) vecnil
-the Vector(List(String), 0) vecnil
-the Vector(List(List(String)), 0) vecnil
+the(Vector(String, 0), vecnil)
+the(Vector(List(String), 0), vecnil)
+the(Vector(List(List(String)), 0), vecnil)
 
-the Vector(String, 1) vec("a", vecnil)
-the Vector(String, 2) vec("a", vec("b", vecnil))
+the(Vector(String, 1), vec("a", vecnil))
+the(Vector(String, 2), vec("a", vec("b", vecnil)))
 
 def first(E: Type, prev: Nat, vector: Vector(E, add1(prev))): E = vector_head(vector)
 

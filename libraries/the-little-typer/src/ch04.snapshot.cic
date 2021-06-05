@@ -16,21 +16,23 @@ flip(Nat, String, cons(123, "abc"))
 flip(String, Nat, flip(Nat, String, cons(123, "abc")))
 
 
-the Equal(
-  Type,
-  (A D: Type, pair: (A) * D) -> (D) * A,
-  (Lemon Meringue: Type, (Lemon) * Meringue) -> (Meringue) * Lemon)
-same
+the(
+  Equal(
+    Type,
+    (A D: Type, pair: (A) * D) -> (D) * A,
+    (Lemon Meringue: Type, (Lemon) * Meringue) -> (Meringue) * Lemon),
+  same)
 
 
-the Equal(
-  Type,
-  (A: Type, D: Type, (A) * D) -> (D) * A,
-  (A: Type, D: Type,
-    (car(the (Type) * Type cons(A, D))) *
-     cdr(the (Type) * Type cons(A, D))
-  ) -> (D) * A)
-same
+the(
+  Equal(
+    Type,
+    (A: Type, D: Type, (A) * D) -> (D) * A,
+    (A: Type, D: Type,
+      (car(the((Type) * Type, cons(A, D)))) *
+       cdr(the((Type) * Type, cons(A, D)))
+    ) -> (D) * A),
+  same)
 
 def swap: ((Nat) * String) -> (String) * Nat =
   (pair) => pair_elim(

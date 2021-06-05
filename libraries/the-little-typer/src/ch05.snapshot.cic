@@ -11,12 +11,12 @@ def expectations: List(String) = li! [
 expectations
 
 List(String)
-the List(String) nil
-the List(Nat) nil
-the List(List(String)) nil
+the(List(String), nil)
+the(List(Nat), nil)
+the(List(List(String)), nil)
 
-the List(String) li("a", li("b", li("c", nil)))
-the List(String) li! [ "a", "b", "c"]
+the(List(String), li("a", li("b", li("c", nil))))
+the(List(String), li! [ "a", "b", "c"])
 
 def length_step(E: Type, _head: E, _tail: List(E), almost: Nat): Nat = add1(almost)
 def length(E: Type, x: List(E)): Nat = list_rec(x, 0, length_step(E))
@@ -37,7 +37,7 @@ def li_end(E: Type, x: List(E), e: E): List(E) = list_rec(x, li(e, nil), append_
 li_end(Nat, li! [1, 2, 3], 4)
 
 def reverse_step(E: Type, head: E, _tail: List(E), almost: List(E)): List(E) = li_end(E, almost, head)
-def reverse(E: Type, x: List(E)): List(E) = list_rec(x, the List(E) nil, reverse_step(E))
+def reverse(E: Type, x: List(E)): List(E) = list_rec(x, the(List(E), nil), reverse_step(E))
 
 reverse(Nat, li! [1, 2, 3])
 

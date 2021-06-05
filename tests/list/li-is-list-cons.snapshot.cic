@@ -9,10 +9,11 @@ def expectations: List(String) = li! [
 expectations
 
 
-the List(String)
-li("cooked",
-  li("eaten",
-    li("tried-cleaning",
-      li("understood",
-        li("slept",
-          nil)))))
+the(
+  List(String),
+  li("cooked",
+    li("eaten",
+      li("tried-cleaning",
+        li("understood",
+          li("slept",
+            nil))))))

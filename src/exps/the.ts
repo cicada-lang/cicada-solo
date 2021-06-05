@@ -24,6 +24,7 @@ export class The extends Exp {
   }
 
   repr(): string {
-    return `the ${this.t.repr()} ${this.exp.repr()}`
+    const args = [this.t.repr(), this.exp.repr()].join(", ")
+    return `the(${args})`
   }
 }

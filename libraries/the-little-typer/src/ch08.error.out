@@ -8,5 +8,5 @@ to left hand side:
 
 previous:
 - same
-- the Equal((_: Nat) -> Nat, add(1), incr) same
+- the(Equal((_: Nat) -> Nat, add(1), incr), same)
 

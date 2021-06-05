@@ -95,8 +95,9 @@ class NaturalTransformation2 {
 NaturalTransformation2
 
 
-the Equal(
-  Type,
-  NaturalTransformation,
-  NaturalTransformation2)
-same
+the(
+  Equal(
+    Type,
+    NaturalTransformation,
+    NaturalTransformation2),
+  same)

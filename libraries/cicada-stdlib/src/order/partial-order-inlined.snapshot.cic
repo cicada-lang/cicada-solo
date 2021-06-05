@@ -20,5 +20,4 @@ class PartialOrderInlined {
 }
 
 
-the Equal(Type, PartialOrder, PartialOrderInlined)
-same
+the(Equal(Type, PartialOrder, PartialOrderInlined), same)

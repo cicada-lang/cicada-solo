@@ -15,7 +15,7 @@ inl("b"): Either(String, Trivial)
 inl("c"): Either(String, Trivial) 
 inr(sole): Either(String, Trivial) 
 inr(sole): Either(String, Trivial) 
-(x) => the Absurd x: (x: Absurd) -> Absurd 
+(x) => the(Absurd, x): (x: Absurd) -> Absurd 
 Absurd: Type 
 Either(Absurd, Trivial): Type 
 Either(Either(Absurd, Trivial), Trivial): Type 

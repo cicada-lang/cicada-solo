@@ -1,1 +1,1 @@
-the Vector(String, 2) vec("a", vec("b", vec("c", vecnil)))
+the(Vector(String, 2), vec("a", vec("b", vec("c", vecnil))))

@@ -6,6 +6,6 @@ But the expected type is:
 
 previous:
 - "courgette"
-- the Type "courgette"
+- the(Type, "courgette")
 
 

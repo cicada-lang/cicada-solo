@@ -1,5 +1,6 @@
-the Equal(
-  (String) * String,
-  cons("ratatouille", "baguette"),
-  cons("baguette", "ratatouille"))
-same
+the(
+  Equal(
+    (String) * String,
+    cons("ratatouille", "baguette"),
+    cons("baguette", "ratatouille")),
+  same)

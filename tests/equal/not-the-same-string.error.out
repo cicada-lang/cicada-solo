@@ -8,6 +8,6 @@ to left hand side:
 
 previous:
 - same
-- the Equal(String, "ratatouille", "baguette") same
+- the(Equal(String, "ratatouille", "baguette"), same)
 
 

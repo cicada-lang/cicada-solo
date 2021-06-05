@@ -18,10 +18,12 @@ export class The extends Core {
   }
 
   repr(): string {
-    return `the ${this.t.repr()} ${this.exp.repr()}`
+    const args = [this.t.repr(), this.exp.repr()].join(", ")
+    return `the(${args})`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    return `the ${this.t.alpha_repr(ctx)} ${this.exp.alpha_repr(ctx)}`
+    const args = [this.t.alpha_repr(ctx), this.exp.alpha_repr(ctx)].join(", ")
+    return `the(${args})`
   }
 }

@@ -8,6 +8,6 @@ to left hand side:
 
 previous:
 - same
-- the Equal((_: String) -> (_: String) -> (_: String) * String, (x) => (y) => cons(x, y), (y) => (x) => cons(x, y)) same
+- the(Equal((_: String) -> (_: String) -> (_: String) * String, (x) => (y) => cons(x, y), (y) => (x) => cons(x, y)), same)
 
 

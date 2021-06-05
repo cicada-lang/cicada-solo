@@ -1,4 +1,4 @@
-- [maybe] `the(t, v)` instead of `the t v`
+- "elim:the" instead of "cons:the"
 - [maybe] `is(v, t)` elab to `the(t, v)`
 
 - [maybe] [uni-syntax] merge `**` and `cons` to either `**` or `cons`

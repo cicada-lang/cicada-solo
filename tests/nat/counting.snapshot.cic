@@ -3,4 +3,4 @@ def one = add1(n)
 
 one
 
-the Nat add1(add1(zero))
+the(Nat, add1(add1(zero)))

@@ -242,7 +242,7 @@ export const cons = {
       { ret: "exp" },
       { body: "exp" },
     ],
-    "cons:the": ['"the"', { t: "exp" }, { exp: "exp" }],
+    "cons:the": ['"the"', '"("', { t: "exp" }, '","', { exp: "exp" }, '")"'],
   },
 }
 
