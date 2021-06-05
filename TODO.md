@@ -48,7 +48,7 @@
 - [maybe] as syntex to help "same-as" charts
 - [maybe] explicit `apply` -- to help non-elim in syntex
 - [maybe] it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
-  - this will not effect normalization, because `same(from)` and `same(to)` will always be definitional or computational eqaul.
+  - this will not effect normalization, because `same(from)` and `same(to)` will always be definitional or computational equal.
 
 # library management
 
