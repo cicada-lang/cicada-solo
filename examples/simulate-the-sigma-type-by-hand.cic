@@ -8,8 +8,13 @@
 //                  E))
 // (define my-cons (λ (A B x y) (λ (E f) (f x y))))
 
-def my_cons: (A: Type, B: (A) -> Type, x: A, y: B(x), E: Type, f: (x: A, B(x)) -> E) -> E =
-  (A, B, x, y) => (E, f) => f(x, y)
+def my_cons(
+  A: Type,
+  B: (A) -> Type,
+  x: A, y: B(x),
+  E: Type,
+  f: (x: A, B(x)) -> E,
+): E = f(x, y)
 
 // (claim my-car (Π ((A U)
 //                   (B (→ A U))
@@ -20,8 +25,11 @@ def my_cons: (A: Type, B: (A) -> Type, x: A, y: B(x), E: Type, f: (x: A, B(x)) -
 // @def my_car: (A: Type, B: (A) -> Type, p: (E: Type, f: (A, B(x)) -> E) -> E) -> A =
 //   (A, B, p) => p(A, (a, b) => a)
 
-def my_car1: (A: Type, B: (A) -> Type, p: (E: Type, f: (x: A, B(x)) -> E) -> E) -> A =
-  (A, B, p) => p(A, (a, b) => a)
+def my_car1(
+  A: Type,
+  B: (A) -> Type,
+  p: (E: Type, f: (x: A, B(x)) -> E) -> E
+): A = p(A, (a, b) => a)
 
 // (claim my-car1 (Π ((A U)
 //                    (B (→ A U))
