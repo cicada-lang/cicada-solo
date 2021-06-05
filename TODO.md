@@ -1,11 +1,5 @@
-- [maybe] as syntex to help "same-as" charts
-
 - [tlt] 15. Imagine That ...
 - [tlt] 16. If It's All the Same to You
-
-- [maybe] explicit `apply`
-- [maybe] it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
-  - this will not effect normalization, because `same(from)` and `same(to)` will always be definitional or computational eqaul.
 
 - a structure must have its own equivalence relation -- for quotient structure
   - structure should take `Equivalence` as argument
@@ -26,7 +20,13 @@
   - this is specially needed for `<var>: <fulfilled class> = <object>`
   - this must also recurse into the structure of nested class and object, maybe even for pi type
 
-- [maybe] elaborate `cong` to `replace`
+- [maybe] as syntex to help "same-as" charts
+- [maybe] explicit `apply` -- to help non-elim in syntex
+- [maybe] it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
+  - this will not effect normalization, because `same(from)` and `same(to)` will always be definitional or computational eqaul.
+
+- [implicit] implement implicit by explicit `let`
+- [implicit] use implicit to implement `cong` by `replace`
 
 - [refactoring] `Exps.Cls.infer` and `Exps.Ext.infer`
 
