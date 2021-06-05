@@ -1,5 +1,3 @@
-- [maybe] `is(v, t)` elab to `the(t, v)`
-
 - [maybe] [uni-syntax] merge `**` and `cons` to either `**` or `cons`
 
 - [maybe] as syntex to help "same-as" charts

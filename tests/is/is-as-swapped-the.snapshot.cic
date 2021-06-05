@@ -1,0 +1,2 @@
+is(1, Nat)
+is("abc", String)

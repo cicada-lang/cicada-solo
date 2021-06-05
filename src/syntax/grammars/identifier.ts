@@ -8,6 +8,7 @@ const preserved = [
   // keywords
   "let",
   "the",
+  "is",
   // built-in
   "cons",
   "car",

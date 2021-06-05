@@ -112,6 +112,7 @@ export function elim_matcher(tree: pt.Tree): Exp {
         exp_matcher(base_right)
       ),
     "elim:the": ({ t, exp }) => new Exps.The(exp_matcher(t), exp_matcher(exp)),
+    "elim:is": ({ t, exp }) => new Exps.The(exp_matcher(t), exp_matcher(exp)),
   })(tree)
 }
 

@@ -105,6 +105,7 @@ export const elim = {
       '")"',
     ],
     "elim:the": ['"the"', '"("', { t: "exp" }, '","', { exp: "exp" }, '")"'],
+    "elim:is": ['"is"', '"("', { exp: "exp" }, '","', { t: "exp" }, '")"'],
   },
 }
 
