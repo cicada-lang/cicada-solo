@@ -105,6 +105,10 @@ export const elim = {
       '")"',
     ],
     "elim:the": ['"the"', '"("', { t: "exp" }, '","', { exp: "exp" }, '")"'],
+    // NOTE about `is(exp, t)`
+    // In set theory, the symbol "∈" is a stylized lowercase Greek letter epsilon ("ϵ"),
+    // the first letter of the word ἐστί, which means "is".
+    // - https://en.wikipedia.org/wiki/Element_(mathematics)
     "elim:is": ['"is"', '"("', { exp: "exp" }, '","', { t: "exp" }, '")"'],
   },
 }
