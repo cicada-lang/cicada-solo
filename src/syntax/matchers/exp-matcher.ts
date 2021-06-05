@@ -126,10 +126,6 @@ export function cons_matcher(tree: pt.Tree): Exp {
     "cons:sigma": sigma_handler,
     "cons:cons": ({ car, cdr }) =>
       new Exps.Cons(exp_matcher(car), exp_matcher(cdr)),
-    "cons:cons_sugar": ({ exps, cdr }) =>
-      exps_matcher(exps)
-        .reverse()
-        .reduce((result, exp) => new Exps.Cons(exp, result), exp_matcher(cdr)),
     "cons:cls": ({ entries }) =>
       new Exps.Cls(
         pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
