@@ -104,6 +104,7 @@ export const elim = {
       { base_right: "exp" },
       '")"',
     ],
+    "elim:the": ['"the"', '"("', { t: "exp" }, '","', { exp: "exp" }, '")"'],
   },
 }
 
@@ -242,7 +243,6 @@ export const cons = {
       { ret: "exp" },
       { body: "exp" },
     ],
-    "cons:the": ['"the"', '"("', { t: "exp" }, '","', { exp: "exp" }, '")"'],
   },
 }
 
