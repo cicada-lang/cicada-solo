@@ -1,5 +1,3 @@
-- abstract `fin_ind` -- instead of using `either_ind`
-
 - [maybe] `the(t, v)` instead of `the t v`
 - [maybe] `is(v, t)` elab to `the(t, v)`
 
