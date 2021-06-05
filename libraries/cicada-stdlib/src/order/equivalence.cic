@@ -1,5 +1,5 @@
 import { PreOrder } from "order/pre-order.cic"
 
 class Equivalence extends PreOrder {
-  symmetric(x y: Elem, Under(x, y)): Under(y, x)
+  symmetric(x y: Element, Under(x, y)): Under(y, x)
 }

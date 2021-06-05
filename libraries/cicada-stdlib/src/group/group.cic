@@ -1,10 +1,10 @@
 import { Monoid } from "group/monoid.cic"
 
 class Group extends Monoid {
-  inv(x: Elem): Elem
+  inv(x: Element): Element
 
-  left_inv(x: Elem): Equal(Elem, mul(inv(x), x), id)
-  right_inv(x: Elem): Equal(Elem, mul(x, inv(x)), id)
+  left_inv(x: Element): Equal(Element, mul(inv(x), x), id)
+  right_inv(x: Element): Equal(Element, mul(x, inv(x)), id)
 
-  div(x: Elem, y: Elem): Elem = mul(x, inv(y))
+  div(x: Element, y: Element): Element = mul(x, inv(y))
 }

@@ -1,6 +1,6 @@
 class PreOrder {
-  Elem: Type
-  Under: (_: Elem) -> (_1: Elem) -> Type
-  reflexive: (x: Elem) -> Under(x)(x)
-  transitive: (x: Elem) -> (y: Elem) -> (z: Elem) -> (_: Under(x)(y)) -> (_1: Under(y)(z)) -> Under(x)(z)
+  Element: Type
+  Under: (_: Element) -> (_1: Element) -> Type
+  reflexive: (x: Element) -> Under(x)(x)
+  transitive: (x: Element) -> (y: Element) -> (z: Element) -> (_: Under(x)(y)) -> (_1: Under(y)(z)) -> Under(x)(z)
 }: Type 
