@@ -22,7 +22,6 @@ export class AlphaCtx {
   }
 
   lookup_depth(name: string): number | undefined {
-    console.log(this.depths)
     let index: undefined | number = undefined
 
     for (const [n, i] of this.depths) {
