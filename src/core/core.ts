@@ -11,29 +11,26 @@ export abstract class Core {
 }
 
 export class AlphaCtx {
-  depths: Array<[string, number]>
+  names: Array<string>
 
-  constructor(depths: Array<[string, number]> = new Array()) {
-    this.depths = depths
+  constructor(names: Array<string> = new Array()) {
+    this.names = names
   }
 
   get depth(): number {
-    return this.depths.length
+    return this.names.length
   }
 
   lookup_depth(name: string): number | undefined {
-    let index: undefined | number = undefined
-
-    for (const [n, i] of this.depths) {
-      if (name === n) {
-        index = i
-      }
+    const index = this.names.lastIndexOf(name)
+    if (index === -1) {
+      return undefined
+    } else {
+      return index
     }
-
-    return index
   }
 
   extend(name: string): AlphaCtx {
-    return new AlphaCtx([...this.depths, [name, this.depth]])
+    return new AlphaCtx([...this.names, name])
   }
 }
