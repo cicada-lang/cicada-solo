@@ -12,11 +12,11 @@ export function conversion(ctx: Ctx, t: Value, x: Value, y: Value): boolean {
 
 function alpha_equivalent(ctx: Ctx, x: Core, y: Core): boolean {
   const names = ctx.names()
-  const alpha_ctx = names.reduce(
-    (alpha_ctx, name) => alpha_ctx.extend(name),
-    new AlphaCtx()
-  )
-  // const alpha_ctx = new AlphaCtx()
+  // const alpha_ctx = names.reduce(
+  //   (alpha_ctx, name) => alpha_ctx.extend(name),
+  //   new AlphaCtx()
+  // )
+  const alpha_ctx = new AlphaCtx()
   const x_repr = x.alpha_repr(alpha_ctx)
   const y_repr = y.alpha_repr(alpha_ctx)
 
@@ -30,8 +30,8 @@ function alpha_equivalent(ctx: Ctx, x: Core, y: Core): boolean {
   //     console.log("(x_repr !== y_repr)")
   //   }
   //   console.log("names --", ctx.names())
-  //   console.log("x --", x_repr)
-  //   console.log("y --", y_repr)
+  //   console.log("x --", x_repr, x)
+  //   console.log("y --", y_repr, y)
   // }
 
   return x_repr === y_repr
