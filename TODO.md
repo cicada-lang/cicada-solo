@@ -1,6 +1,9 @@
 - fix for conversion check for ch15 `rest` when `prev` is `j`
 
+  - we need to study scope more carefully
+
   - use De Bruijn index
+  - use renaming to ensure that each entry in Γ has a distinct name
 
 - [tlt] 16. If It's All the Same to You
 

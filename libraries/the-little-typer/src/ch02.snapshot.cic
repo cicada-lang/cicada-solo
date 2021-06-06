@@ -15,13 +15,12 @@ def T: Type =
 def id_in_pair: (x: String) -> T =
   (x) => cons(x, (x) => x)
 
-
+id_in_pair
 the(T, id_in_pair("x"))
 
 // The x occur in `(x) => x` should not be
 // effected by the substitution of outer `x`,
 // and `(x) => x` is equivalent to `(y) => y`,
-
 
 the(
   Equal(
