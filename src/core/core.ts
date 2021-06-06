@@ -11,18 +11,30 @@ export abstract class Core {
 }
 
 export class AlphaCtx {
-  depth: number
-  depths: Map<string, number>
+  depths: Array<[string, number]>
 
-  constructor(depth: number = 0, depths: Map<string, number> = new Map()) {
-    this.depth = depth
+  constructor(depths: Array<[string, number]> = new Array()) {
     this.depths = depths
   }
 
+  get depth(): number {
+    return this.depths.length
+  }
+
+  lookup_depth(name: string): number | undefined {
+    console.log(this.depths)
+    let index: undefined | number = undefined
+
+    for (const [n, i] of this.depths) {
+      if (name === n) {
+        index = i
+      }
+    }
+
+    return index
+  }
+
   extend(name: string): AlphaCtx {
-    return new AlphaCtx(
-      this.depth + 1,
-      new Map([...this.depths, [name, this.depth]])
-    )
+    return new AlphaCtx([...this.depths, [name, this.depth]])
   }
 }

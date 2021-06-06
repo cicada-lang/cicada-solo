@@ -27,8 +27,10 @@ export class Var extends Core {
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    const depth = ctx.depths.get(this.name)
-    if (depth === undefined) return this.name
+    const depth = ctx.lookup_depth(this.name)
+    if (depth === undefined) {
+      return this.name
+    }
     return `#${depth}`
   }
 }
