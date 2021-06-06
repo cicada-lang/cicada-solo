@@ -1,4 +1,9 @@
-- about naming convention,
+- [tlt] 15. Imagine That ...
+- [tlt] 16. If It's All the Same to You
+
+# style
+
+- [style review] about naming convention,
   - in some case, we use type as postfix to name variable of this type,
     - `nat_equal_consequence_t` -- `_t` for `Type`
     - `incr_add1_equal` -- `_equal` for `Equal`
@@ -6,9 +11,6 @@
   - but in other case, we use type as prefix to name variable of this type,
     - `nat_equal_consequence_same` -- `nat_equal_consequence_` for `nat_equal_consequence_t`
     - `vec` & `vecnil` -- `vec` for `Vector`
-
-- [tlt] 15. Imagine That ...
-- [tlt] 16. If It's All the Same to You
 
 # implicit
 
