@@ -1,6 +1,8 @@
 - [tlt] 15. Imagine That ...
 - [tlt] 16. If It's All the Same to You
 
+- fix for conversion check for ch15 `rest` when prev is 
+
 # style
 
 - [style review] about naming convention,

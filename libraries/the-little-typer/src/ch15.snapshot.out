@@ -1,3 +1,11 @@
 1: Nat 
 1: Nat 
 1: Nat 
+vec(2, vecnil): Vector(Nat, 1) 
+vec(2, vec(3, vecnil)): Vector(Nat, 2) 
+vec(2, vec(3, vec(4, vecnil))): Vector(Nat, 3) 
+vec(2, vecnil): Vector(Nat, 1) 
+vec(2, vec(3, vecnil)): Vector(Nat, 2) 
+vec(2, vec(3, vec(4, vecnil))): Vector(Nat, 3) 
+(_) => (_1) => (_2) => (_3) => (_4) => (_5) => _2: (_: Nat) -> (_1: Nat) -> (_2: Nat) -> (_3: Nat) -> (_4: Nat) -> (_5: Nat) -> Nat 
+(_) => (_1) => (_2) => (_3) => (_4) => (_5) => _2: (_: Nat) -> (_1: Nat) -> (_2: Nat) -> (_3: Nat) -> (_4: Nat) -> (_5: Nat) -> Nat 
