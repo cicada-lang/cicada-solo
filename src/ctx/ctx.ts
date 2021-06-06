@@ -4,34 +4,37 @@ import { Trace } from "../trace"
 import * as Cores from "../cores"
 
 type CtxEntry = {
+  name: string
   t: Value
   value?: Value
 }
 
 export class Ctx {
-  entries: Map<string, CtxEntry>
+  entries: Array<CtxEntry>
 
-  constructor(entries: Map<string, CtxEntry> = new Map()) {
+  constructor(entries: Array<CtxEntry> = new Array()) {
     this.entries = entries
   }
 
   names(): Array<string> {
-    return Array.from(this.entries.keys())
+    return Array.from(this.entries.map(({ name }) => name))
   }
 
   extend(name: string, t: Value, value?: Value): Ctx {
-    return new Ctx(new Map([...this.entries, [name, { t, value }]]))
+    return new Ctx([...this.entries, { name, t, value }])
   }
 
   lookup_type(name: string): undefined | Value {
-    const entry = this.entries.get(name)
-    if (entry !== undefined) return entry.t
-    else return undefined
+    const names = this.names()
+    const index = names.lastIndexOf(name)
+    const entry = this.entries[index]
+    if (index === -1) return undefined
+    else return entry.t
   }
 
   to_env(): Env {
     let env = new Env()
-    for (const [name, { t, value }] of this.entries) {
+    for (const { name, t, value } of this.entries) {
       if (value !== undefined) {
         env = env.extend(name, value)
       } else {
