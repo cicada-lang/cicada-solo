@@ -28,15 +28,9 @@ export class Dot extends Exp {
       // during `infer` of `Exps.Dot`, we have opportunity to get those value back,
       // and return them as core.
 
-      const value = inferred_target.t.dot_value(
-        evaluate(ctx.to_env(), inferred_target.core),
-        this.name
-      )
-
-      const t = inferred_target.t.dot_type(
-        evaluate(ctx.to_env(), inferred_target.core),
-        this.name
-      )
+      const target_value = evaluate(ctx.to_env(), inferred_target.core)
+      const value = inferred_target.t.dot_value(target_value, this.name)
+      const t = inferred_target.t.dot_type(target_value, this.name)
 
       return {
         t,
