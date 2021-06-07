@@ -2,8 +2,12 @@
 
   - we need to study scope more carefully
 
-  - use De Bruijn index
-  - use renaming to ensure that each entry in Γ has a distinct name
+  - (A) use De Bruijn index
+  - (B) use renaming to ensure that each entry in Γ has a distinct name
+  - (C)
+    - (1) disallow top level redefinition statements
+    - (2) keep ctx with distinct names, use subst to change variable name for `Exp`
+    - (3) telescope contains information about renaming
 
 - [tlt] 16. If It's All the Same to You
 
