@@ -1,4 +1,5 @@
-- `Exp.subst` -- dance with expressions
+- `Exp.subst` -- let's dance with expressions
+- elab `super` in `Exps.Ext` to object with parent fields -- by `Exp.subst`
 
 - fix for conversion check for ch15 `rest` when `prev` is `j`
 
@@ -12,12 +13,6 @@
     - (3) [] telescope contains information about renaming
 
 - [tlt] 16. If It's All the Same to You
-
-# subst
-
-> Dance with expressions
-
-- elab `super` in `Exps.Ext` to object with parent fields -- by `Exp.subst`
 
 # style
 

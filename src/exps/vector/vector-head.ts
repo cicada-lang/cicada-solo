@@ -14,6 +14,10 @@ export class VectorHead extends Exp {
     this.target = target
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new VectorHead(this.target.subst(name, exp))
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
     const vector_t = expect(ctx, inferred_target.t, Cores.VectorValue)

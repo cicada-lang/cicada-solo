@@ -6,6 +6,10 @@ import { Value } from "../../value"
 import * as Cores from "../../cores"
 
 export class Vecnil extends Exp {
+  subst(name: string, exp: Exp): Exp {
+    return this
+  }
+
   check(ctx: Ctx, t: Value): Core {
     const vector_t = expect(ctx, t, Cores.VectorValue)
     expect(ctx, vector_t.length, Cores.ZeroValue)

@@ -14,6 +14,10 @@ export class Car extends Exp {
     this.target = target
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Car(this.name, this.target.subst(name, exp))
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
     const sigma = expect(ctx, inferred_target.t, Cores.SigmaValue)

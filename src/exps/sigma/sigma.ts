@@ -18,6 +18,11 @@ export class Sigma extends Exp {
     this.cdr_t = cdr_t
   }
 
+  subst(name: string, exp: Exp): Exp {
+    // TODO
+
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const car_t_core = check(ctx, this.car_t, new Cores.TypeValue())
     const car_t_value = evaluate(ctx.to_env(), car_t_core)

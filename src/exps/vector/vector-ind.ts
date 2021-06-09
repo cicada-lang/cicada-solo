@@ -26,6 +26,15 @@ export class VectorInd extends Exp {
     this.step = step
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new VectorInd(
+      this.length.subst(name, exp),
+      this.target.subst(name, exp),
+      this.motive.subst(name, exp),
+      this.base.subst(name, exp),
+      this.step.subst(name, exp))
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
     const vector_t = expect(ctx, inferred_target.t, Cores.VectorValue)

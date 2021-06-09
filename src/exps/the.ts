@@ -16,6 +16,10 @@ export class The extends Exp {
     this.exp = exp
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new The(this.t.subst(name, exp), exp.t.subst(name, exp))
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const t_core = check(ctx, this.t, new Cores.TypeValue())
     const t = evaluate(ctx.to_env(), t_core)

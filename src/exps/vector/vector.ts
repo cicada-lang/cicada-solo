@@ -15,6 +15,12 @@ export class Vector extends Exp {
     this.length = length
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Vector(
+      this.elem_t.subst(name, exp),
+      this.length.subst(name, exp))
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Cores.TypeValue(),

@@ -12,6 +12,10 @@ export class Quote extends Exp {
     this.str = str
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return this
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Cores.StrValue(),

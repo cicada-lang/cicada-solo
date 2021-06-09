@@ -17,6 +17,12 @@ export class Vec extends Exp {
     this.tail = tail
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Vec(
+      this.head.subst(name, exp),
+      this.tail.subst(name, exp))
+  }
+
   check(ctx: Ctx, t: Value): Core {
     const vector_t = expect(ctx, t, Cores.VectorValue)
     const elem_t = vector_t.elem_t

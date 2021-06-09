@@ -5,6 +5,10 @@ import { Value } from "../value"
 import * as Cores from "../cores"
 
 export class Type extends Exp {
+  subst(name: string, exp: Exp): Exp {
+    return this
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Cores.TypeValue(),

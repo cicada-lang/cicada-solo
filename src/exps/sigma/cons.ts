@@ -17,6 +17,10 @@ export class Cons extends Exp {
     this.cdr = cdr
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Cons(this.car.subst(name, exp), this.cdr.subst(name, exp))
+  }
+
   check(ctx: Ctx, t: Value): Core {
     const sigma = expect(ctx, t, Cores.SigmaValue)
     const car_core = check(ctx, this.car, sigma.car_t)

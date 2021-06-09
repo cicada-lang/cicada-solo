@@ -13,6 +13,14 @@ export class Var extends Exp {
     this.name = name
   }
 
+  subst(name: string, exp: Exp): Exp {
+    if (name === this.name) {
+      return exp
+    } else {
+      return this
+    }
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const t = ctx.lookup_type(this.name)
     if (t === undefined) {

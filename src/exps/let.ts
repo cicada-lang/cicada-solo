@@ -19,6 +19,18 @@ export class Let extends Exp {
     this.ret = ret
   }
 
+  subst(name: string, exp: Exp): Exp {
+    if (name === this.name) {
+      return new Let(this.name, this.exp.subst(name, exp), this.ret)
+    } else {
+      return new Let(
+        this.name,
+        this.exp.subst(name, exp),
+        this.ret.subst(name, exp)
+      )
+    }
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred = infer(ctx, this.exp)
     const value = evaluate(ctx.to_env(), inferred.core)
