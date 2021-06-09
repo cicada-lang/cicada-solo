@@ -17,7 +17,6 @@
 
 > Dance with expressions
 
-- should we have a `Exp.subexps` interface (readonly query for sub-expressions)?
 - elab `super` in `Exps.Ext` to object with parent fields -- by `Exp.subst`
 
 # style

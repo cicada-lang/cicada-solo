@@ -1,6 +1,7 @@
 import { Env } from "../env"
 import { Value } from "../value"
 import { Trace } from "../trace"
+import { readback } from "../readback"
 import * as Cores from "../cores"
 
 type CtxEntry = {
@@ -45,5 +46,23 @@ export class Ctx {
       }
     }
     return env
+  }
+
+  assert_not_redefine(name: string, t: Value, value?: Value): void {
+    const old_t = this.lookup_type(name)
+    if (old_t) {
+      const old_t_repr = readback(this, new Cores.TypeValue(), old_t).repr()
+      const t_repr = readback(this, new Cores.TypeValue(), t).repr()
+      throw new Trace(
+        [
+          `I can not redefine name:`,
+          `  ${name}`,
+          `to a value of type:`,
+          `  ${old_t_repr}`,
+          `It is already define to a value of type:`,
+          `  ${t_repr}`,
+        ].join("\n")
+      )
+    }
   }
 }
