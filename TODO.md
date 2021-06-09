@@ -5,11 +5,19 @@
   - (A) use De Bruijn index
   - (B) use renaming to ensure that each entry in Γ has a distinct name
   - (C)
-    - (1) disallow top level redefinition statements
-    - (2) keep ctx with distinct names, use subst to change variable name for `Exp`
-    - (3) telescope contains information about renaming
+    - (1) [x] disallow top level redefinition statements
+    - (2) [] keep ctx with distinct names, use `Exp.subst` to change variable name
+    - (3) [] telescope contains information about renaming
 
 - [tlt] 16. If It's All the Same to You
+
+# subst
+
+> Dance with expressions
+
+- `Exp.subst`
+- should we have a `Exp.subexps` interface (readonly query for sub-expressions)?
+- elab `super` in `Exps.Ext` to object with parent fields -- by `Exp.subst`
 
 # style
 
@@ -37,14 +45,6 @@
 - when we do a typed binding, we need to be able to refine the declared type
   - this is specially needed for `<var>: <fulfilled class> = <object>`
   - this must also recurse into the structure of nested class and object, maybe even for pi type
-
-# subst
-
-> Dance with expressions
-
-- `Exp.subst`
-- should we have a `Exp.subexps` interface (readonly query for sub-expressions)?
-- elab `super` in `Exps.Ext` to object with parent fields -- by `Exp.subst`
 
 # core features
 

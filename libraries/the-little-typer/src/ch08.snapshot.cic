@@ -9,9 +9,6 @@ the(Equal(Nat, incr(3), add(1)(3)), same)
 
 def add_1_add1_equal(n: Nat): Equal(Nat, add(1, n), add1(n)) = same
 
-def add_1_add1_equal_t = (n: Nat) -> Equal(Nat, add(1, n), add1(n))
-def add_1_add1_equal: add_1_add1_equal_t = (n) => same
-
 def replace_t: Type = (
   X: Type,
   from to: X,
