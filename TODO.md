@@ -1,3 +1,5 @@
+- `Exp.subst` -- dance with expressions
+
 - fix for conversion check for ch15 `rest` when `prev` is `j`
 
   - we need to study scope more carefully
@@ -15,7 +17,6 @@
 
 > Dance with expressions
 
-- `Exp.subst`
 - should we have a `Exp.subexps` interface (readonly query for sub-expressions)?
 - elab `super` in `Exps.Ext` to object with parent fields -- by `Exp.subst`
 
