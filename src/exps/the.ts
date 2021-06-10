@@ -17,7 +17,7 @@ export class The extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new The(this.t.subst(name, exp), exp.t.subst(name, exp))
+    return new The(this.t.subst(name, exp), this.exp.subst(name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

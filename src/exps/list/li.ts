@@ -16,6 +16,10 @@ export class Li extends Exp {
     this.tail = tail
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Li(this.head.subst(name, exp), this.tail.subst(name, exp))
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_head = infer(ctx, this.head)
     const list_t = new Cores.ListValue(inferred_head.t)

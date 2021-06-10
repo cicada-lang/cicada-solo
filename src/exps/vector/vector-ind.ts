@@ -32,7 +32,8 @@ export class VectorInd extends Exp {
       this.target.subst(name, exp),
       this.motive.subst(name, exp),
       this.base.subst(name, exp),
-      this.step.subst(name, exp))
+      this.step.subst(name, exp)
+    )
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

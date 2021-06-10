@@ -6,6 +6,10 @@ import { Value } from "../../value"
 import * as Cores from "../../cores"
 
 export class Zero extends Exp {
+  subst(name: string, exp: Exp): Exp {
+    return this
+  }
+
   evaluate(env: Env): Value {
     return new Cores.ZeroValue()
   }

@@ -16,7 +16,7 @@ export class Cdr extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Cdr(this.name, this.target.subst(name, exp))
+    return new Cdr(this.target.subst(name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

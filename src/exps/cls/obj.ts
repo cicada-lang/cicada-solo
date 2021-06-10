@@ -16,6 +16,10 @@ export class Obj extends Exp {
     this.properties = properties
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Obj(this.properties.map((property) => property.subst(name, exp)))
+  }
+
   check(ctx: Ctx, t: Value): Core {
     const properties = new Map(
       this.properties.flatMap((prop) => prop.expand(ctx))
@@ -38,6 +42,7 @@ export class Obj extends Exp {
 export abstract class Prop {
   instanceofProp = true
 
+  abstract subst(name: string, exp: Exp): Prop
   abstract expand(ctx: Ctx): Array<[string, Exp]>
   abstract repr(): string
 }
@@ -48,6 +53,10 @@ export class SpreadProp extends Prop {
   constructor(exp: Exp) {
     super()
     this.exp = exp
+  }
+
+  subst(name: string, exp: Exp): Prop {
+    return new SpreadProp(this.exp.subst(name, exp))
   }
 
   expand(ctx: Ctx): Array<[string, Exp]> {
@@ -76,6 +85,10 @@ export class FieldProp extends Prop {
     this.exp = exp
   }
 
+  subst(name: string, exp: Exp): Prop {
+    return new FieldProp(this.name, this.exp.subst(name, exp))
+  }
+
   expand(ctx: Ctx): Array<[string, Exp]> {
     return [[this.name, this.exp]]
   }
@@ -91,6 +104,10 @@ export class FieldShorthandProp extends Prop {
   constructor(name: string) {
     super()
     this.name = name
+  }
+
+  subst(name: string, exp: Exp): Prop {
+    return this
   }
 
   expand(ctx: Ctx): Array<[string, Exp]> {

@@ -14,6 +14,10 @@ export class Add1 extends Exp {
     this.prev = prev
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Add1(this.prev.subst(name, exp))
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Cores.NatValue(),

@@ -19,6 +19,10 @@ export class Ap extends Exp {
     this.arg = arg
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Ap(this.target.subst(name, exp), this.arg.subst(name, exp))
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
     if (inferred_target.t instanceof Cores.PiValue) {

@@ -16,6 +16,13 @@ export class Either extends Exp {
     this.right_t = right_t
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Either(
+      this.left_t.subst(name, exp),
+      this.right_t.subst(name, exp)
+    )
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const left_t_core = check(ctx, this.left_t, new Cores.TypeValue())
     const right_t_core = check(ctx, this.right_t, new Cores.TypeValue())

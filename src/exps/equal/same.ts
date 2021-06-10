@@ -10,6 +10,10 @@ import * as ut from "../../ut"
 import * as Cores from "../../cores"
 
 export class Same extends Exp {
+  subst(name: string, exp: Exp): Exp {
+    return this
+  }
+
   check(ctx: Ctx, t: Value): Core {
     const equal = expect(ctx, t, Cores.EqualValue)
     check_conversion(ctx, equal.t, equal.from, equal.to, {

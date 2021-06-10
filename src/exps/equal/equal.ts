@@ -18,6 +18,14 @@ export class Equal extends Exp {
     this.to = to
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Equal(
+      this.t.subst(name, exp),
+      this.from.subst(name, exp),
+      this.to.subst(name, exp)
+    )
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const t_core = check(ctx, this.t, new Cores.TypeValue())
     const t_value = evaluate(ctx.to_env(), t_core)

@@ -17,12 +17,47 @@ export class Ext extends Exp {
   constructor(
     parent_name: string,
     entries: Array<{ name: string; t: Exp; exp?: Exp }>,
-    opts?: { name: string }
+    opts?: { name?: string }
   ) {
     super()
     this.parent_name = parent_name
     this.entries = entries
     this.name = opts?.name
+  }
+
+  private subst_entries(
+    name: string,
+    exp: Exp
+  ): Array<{ name: string; t: Exp; exp?: Exp }> {
+    const entries: Array<{ name: string; t: Exp; exp?: Exp }> = new Array()
+    let occured: boolean = false
+
+    for (const entry of this.entries) {
+      if (occured) {
+        entries.push(entry)
+      } else if (name === entry.name) {
+        entries.push({
+          name: entry.name,
+          t: entry.t.subst(name, exp),
+          exp: entry.exp,
+        })
+        occured = true
+      } else {
+        entries.push({
+          name: entry.name,
+          t: entry.t.subst(name, exp),
+          exp: entry.exp?.subst(name, exp),
+        })
+      }
+    }
+
+    return entries
+  }
+
+  subst(name: string, exp: Exp): Exp {
+    return new Ext(this.parent_name, this.subst_entries(name, exp), {
+      name: this.name,
+    })
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

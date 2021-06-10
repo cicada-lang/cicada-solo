@@ -21,6 +21,15 @@ export class NatInd extends Exp {
     this.step = step
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new NatInd(
+      this.target.subst(name, exp),
+      this.motive.subst(name, exp),
+      this.base.subst(name, exp),
+      this.step.subst(name, exp)
+    )
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const target_core = check(ctx, this.target, new Cores.NatValue())
     const motive_t = nat_ind_motive_t

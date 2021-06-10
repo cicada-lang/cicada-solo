@@ -18,6 +18,18 @@ export class Pi extends Exp {
     this.ret_t = ret_t
   }
 
+  subst(name: string, exp: Exp): Exp {
+    if (name === this.name) {
+      return new Pi(this.name, this.arg_t.subst(name, exp), this.ret_t)
+    } else {
+      return new Pi(
+        this.name,
+        this.arg_t.subst(name, exp),
+        this.ret_t.subst(name, exp)
+      )
+    }
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const arg_t_core = check(ctx, this.arg_t, new Cores.TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), arg_t_core)

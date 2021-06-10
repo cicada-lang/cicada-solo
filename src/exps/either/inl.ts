@@ -15,6 +15,10 @@ export class Inl extends Exp {
     this.left = left
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Inl(this.left.subst(name, exp))
+  }
+
   check(ctx: Ctx, t: Value): Core {
     const either = expect(ctx, t, Cores.EitherValue)
     const left_core = check(ctx, this.left, either.left_t)

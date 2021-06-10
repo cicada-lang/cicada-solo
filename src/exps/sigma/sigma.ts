@@ -19,8 +19,15 @@ export class Sigma extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    // TODO
-
+    if (name === this.name) {
+      return new Sigma(this.name, this.car_t.subst(name, exp), this.cdr_t)
+    } else {
+      return new Sigma(
+        this.name,
+        this.car_t.subst(name, exp),
+        this.cdr_t.subst(name, exp)
+      )
+    }
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

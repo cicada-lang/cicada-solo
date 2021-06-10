@@ -15,6 +15,10 @@ export class Inr extends Exp {
     this.right = right
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Inr(this.right.subst(name, exp))
+  }
+
   check(ctx: Ctx, t: Value): Core {
     const either = expect(ctx, t, Cores.EitherValue)
     const right_core = check(ctx, this.right, either.right_t)

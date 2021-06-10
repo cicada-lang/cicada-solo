@@ -22,6 +22,14 @@ export class NatRec extends Exp {
     this.step = step
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new NatRec(
+      this.target.subst(name, exp),
+      this.base.subst(name, exp),
+      this.step.subst(name, exp)
+    )
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const target_core = check(ctx, this.target, new Cores.NatValue())
     const inferred_base = infer(ctx, this.base)

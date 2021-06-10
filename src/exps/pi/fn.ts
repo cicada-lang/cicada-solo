@@ -17,6 +17,14 @@ export class Fn extends Exp {
     this.ret = ret
   }
 
+  subst(name: string, exp: Exp): Exp {
+    if (name === this.name) {
+      return this
+    } else {
+      return new Fn(this.name, this.ret.subst(name, exp))
+    }
+  }
+
   check(ctx: Ctx, t: Value): Core {
     const name = this.name
     const pi = expect(ctx, t, Cores.PiValue)

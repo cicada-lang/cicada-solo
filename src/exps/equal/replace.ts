@@ -21,6 +21,14 @@ export class Replace extends Exp {
     this.base = base
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Replace(
+      this.target.subst(name, exp),
+      this.motive.subst(name, exp),
+      this.base.subst(name, exp)
+    )
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
     const equal = expect(ctx, inferred_target.t, Cores.EqualValue)

@@ -19,6 +19,10 @@ export class Dot extends Exp {
     this.name = name
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new Dot(this.target.subst(name, exp), this.name)
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
 

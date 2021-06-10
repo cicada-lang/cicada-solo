@@ -15,7 +15,7 @@ export class Car extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Car(this.name, this.target.subst(name, exp))
+    return new Car(this.target.subst(name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

@@ -23,6 +23,15 @@ export class EitherInd extends Exp {
     this.base_right = base_right
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new EitherInd(
+      this.target.subst(name, exp),
+      this.motive.subst(name, exp),
+      this.base_left.subst(name, exp),
+      this.base_right.subst(name, exp)
+    )
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
     const either_t = expect(ctx, inferred_target.t, Cores.EitherValue)

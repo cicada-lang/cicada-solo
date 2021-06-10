@@ -18,9 +18,7 @@ export class Vec extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Vec(
-      this.head.subst(name, exp),
-      this.tail.subst(name, exp))
+    return new Vec(this.head.subst(name, exp), this.tail.subst(name, exp))
   }
 
   check(ctx: Ctx, t: Value): Core {

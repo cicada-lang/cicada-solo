@@ -13,6 +13,10 @@ export class List extends Exp {
     this.elem_t = elem_t
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new List(this.elem_t.subst(name, exp))
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Cores.TypeValue(),

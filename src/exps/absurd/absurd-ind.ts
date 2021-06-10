@@ -16,6 +16,13 @@ export class AbsurdInd extends Exp {
     this.motive = motive
   }
 
+  subst(name: string, exp: Exp): Exp {
+    return new AbsurdInd(
+      this.target.subst(name, exp),
+      this.motive.subst(name, exp)
+    )
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     // NOTE the `motive` here is not a function from target_t to type,
     //   but a element of type.

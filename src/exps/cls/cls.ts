@@ -20,6 +20,39 @@ export class Cls extends Exp {
     this.name = opts?.name
   }
 
+  private subst_entries(
+    name: string,
+    exp: Exp
+  ): Array<{ name: string; t: Exp; exp?: Exp }> {
+    const entries: Array<{ name: string; t: Exp; exp?: Exp }> = new Array()
+    let occured: boolean = false
+
+    for (const entry of this.entries) {
+      if (occured) {
+        entries.push(entry)
+      } else if (name === entry.name) {
+        entries.push({
+          name: entry.name,
+          t: entry.t.subst(name, exp),
+          exp: entry.exp,
+        })
+        occured = true
+      } else {
+        entries.push({
+          name: entry.name,
+          t: entry.t.subst(name, exp),
+          exp: entry.exp?.subst(name, exp),
+        })
+      }
+    }
+
+    return entries
+  }
+
+  subst(name: string, exp: Exp): Exp {
+    return new Cls(this.subst_entries(name, exp), { name: this.name })
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const entries: Array<{ name: string; t: Core; exp?: Core }> = new Array()
 
