@@ -18,7 +18,8 @@
 
 ## 贡献 / Contributions
 
-> 请保持礼貌 不要给同伴带来负面情绪
+> 请保持礼貌，不要给他人带来负面情绪。<br>
+> Be polite, do not bring negative emotion to others.
 
 - 当前 TODO： [TODO.md](TODO.md)
 - 提交 issue 与 pull request 可以参考：[The C4 RFC](https://rfc.zeromq.org/spec:42/C4)
