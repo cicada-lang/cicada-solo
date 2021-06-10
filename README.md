@@ -2,6 +2,16 @@
 
 ## 使用 / Usage
 
+### 命令行工具 / Command Line Tools
+
+Install: `npm install @cicada-lang/cicada --global`
+
+```
+Commands:
+  cic check-library <config-file>  Check all files in a library
+  cic run <file>                   Run a file
+```
+
 ### 蝉语学习室 / Cicada Studyroom
 
 - 访问：[cicada-studyroom.vercel.app](https://cicada-studyroom.vercel.app)
