@@ -98,7 +98,7 @@ async function watch(
 }
 
 function maybe_assert_error(path: string): void {
-  if (path.endsWith(".error.cic") || path.endsWith(".error.cic")) {
+  if (path.endsWith(".error.cic") || path.endsWith(".error.md")) {
     throw new Error(`I expect to find error in the file: ${path}`)
   }
 }
@@ -110,23 +110,11 @@ async function error_log(
 ): Promise<boolean> {
   const report = await error_report(error, path, library)
 
-  if (path.endsWith(".error.cic")) {
+  if (path.endsWith(".error.cic") || path.endsWith(".error.md")) {
     const file = Path.resolve(
       library.root_dir,
       library.config.src,
-      path.replace(/cic$/, "out")
-    )
-
-    await fs.promises.writeFile(file, report)
-
-    return false
-  }
-
-  if (path.endsWith(".error.md")) {
-    const file = Path.resolve(
-      library.root_dir,
-      library.config.src,
-      path.replace(/md$/, "out")
+      path + ".out"
     )
 
     await fs.promises.writeFile(file, report)
@@ -167,25 +155,11 @@ async function snapshot_log(
   mod: Module,
   opts: { verbose: boolean }
 ): Promise<void> {
-  if (path.endsWith(".snapshot.cic")) {
+  if (path.endsWith(".snapshot.cic") || path.endsWith(".snapshot.md")) {
     const file = Path.resolve(
       library.root_dir,
       library.config.src,
-      path.replace(/cic$/, "out")
-    )
-
-    await fs.promises.writeFile(file, mod.output)
-
-    if (opts.verbose) {
-      console.log(mod.output)
-    }
-  }
-
-  if (path.endsWith(".snapshot.md")) {
-    const file = Path.resolve(
-      library.root_dir,
-      library.config.src,
-      path.replace(/md$/, "out")
+      path + ".out"
     )
 
     await fs.promises.writeFile(file, mod.output)

@@ -1,9 +1,3 @@
-- [refactoring] `.error.md` `.error.cic` `.snapshot.md` `.snapshot.cic`
-
-  - `ErrorModule` and `SnapshotModule`
-
-- `.error.md` should not output during `cic check-library` command
-
 > Use TDD to find BUG for each of the following cases.
 
 - `Exps.Pi` ctx with distinct names, use `Exp.subst` to change variable name

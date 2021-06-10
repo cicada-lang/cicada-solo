@@ -21,25 +21,27 @@ class ModuleEntry {
 }
 
 export class Module {
+  doc: Doc
   env: Env
   ctx: Ctx
   entries: Array<ModuleEntry>
   library: Library
 
   constructor(opts: {
-    library: Library
+    doc: Doc
     env?: Env
     ctx?: Ctx
     entries?: Array<ModuleEntry>
   }) {
-    this.library = opts.library
+    this.doc = opts.doc
+    this.library = opts.doc.library
     this.env = opts.env || new Env()
     this.ctx = opts.ctx || new Ctx()
     this.entries = opts.entries || []
   }
 
   static async from_doc(doc: Doc): Promise<Module> {
-    const mod = new Module({ library: doc.library })
+    const mod = new Module({ doc: doc })
     for (const { stmt } of doc.entries) {
       await stmt.execute(mod)
     }
