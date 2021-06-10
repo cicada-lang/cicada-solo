@@ -1,5 +1,12 @@
 # 蝉语 / Cicada Language
 
+## 使用 / Usage
+
+### 蝉语学习室 / Cicada Studyroom
+
+- 访问：[cicada-studyroom.vercel.app](https://cicada-studyroom.vercel.app)
+- 项目：[cicada-lang/cicada-studyroom](https://github.com/cicada-lang/cicada-studyroom)
+
 ## 贡献 / Contributions
 
 > 请保持礼貌 不要给同伴带来负面情绪
