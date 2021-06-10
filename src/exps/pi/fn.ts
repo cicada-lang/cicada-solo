@@ -5,6 +5,7 @@ import { Value } from "../../value"
 import { check } from "../../check"
 import { expect } from "../../expect"
 import * as Cores from "../../cores"
+import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class Fn extends Exp {
@@ -26,11 +27,13 @@ export class Fn extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const name = this.name
+    const name = ut.freshen_name(new Set(ctx.names()), this.name)
+    const v = new Exps.Var(name)
     const pi = expect(ctx, t, Cores.PiValue)
     const arg = new Cores.NotYetValue(pi.arg_t, new Cores.VarNeutral(name))
     const ret_t = pi.ret_t_cl.apply(arg)
-    const ret_core = check(ctx.extend(name, pi.arg_t), this.ret, ret_t)
+    const ret = this.ret.subst(this.name, v)
+    const ret_core = check(ctx.extend(name, pi.arg_t), ret, ret_t)
     return new Cores.Fn(name, ret_core)
   }
 

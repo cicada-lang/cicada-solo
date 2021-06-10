@@ -1,13 +1,20 @@
-- fix for conversion check for ch15 `rest` when `prev` is `j`
+- [refactoring] `.error.md` `.error.cic` `.snapshot.md` `.snapshot.cic`
 
-  - we need to study scope more carefully
+- `.error.md` should not output during `cic check-library` command
 
-  - (A) use De Bruijn index
-  - (B) use renaming to ensure that each entry in Γ has a distinct name
-  - (C)
-    - (1) [x] disallow top level redefinition statements
-    - (2) [] keep ctx with distinct names, use `Exp.subst` to change variable name
-    - (3) [] telescope contains information about renaming
+- `Exps.Pi` ctx with distinct names, use `Exp.subst` to change variable name
+- `Exps.Sigma` ctx with distinct names, use `Exp.subst` to change variable name
+- `Exps.Let` ctx with distinct names, use `Exp.subst` to change variable name
+- `Exps.Cls` ctx with distinct names, use `Exp.subst` to change variable name
+- `Exps.Ext` ctx with distinct names, use `Exp.subst` to change variable name
+
+- [maybe] use De Bruijn index -- as an optimization
+
+- use `Exp.subst` to handle problem about the scope
+
+  - (1) [x] disallow top level redefinition statements
+  - (2) [] keep ctx with distinct names, use `Exp.subst` to change variable name
+  - (3) [] telescope contains information about renaming
 
 - [tlt] 16. If It's All the Same to You
 
