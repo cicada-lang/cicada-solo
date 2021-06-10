@@ -8,11 +8,7 @@ export class MdDoc extends Doc {
   text: string
   path: string
 
-  constructor(opts: {
-    library: Library
-    text: string
-    path: string
-  }) {
+  constructor(opts: { library: Library; text: string; path: string }) {
     super()
     this.library = opts.library
     this.text = opts.text
