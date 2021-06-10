@@ -1,5 +1,7 @@
 - [refactoring] `.error.md` `.error.cic` `.snapshot.md` `.snapshot.cic`
 
+  - maybe use `use-case/` and `use-cases/`
+
 - `.error.md` should not output during `cic check-library` command
 
 - `Exps.Pi` ctx with distinct names, use `Exp.subst` to change variable name
