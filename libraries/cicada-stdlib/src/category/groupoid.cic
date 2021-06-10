@@ -6,14 +6,5 @@ class Groupoid extends Category {
 
   // NOTE The following use of `Isomorphism`
   //   is an example of "partly fulfilled object construction".
-
-  inv_iso(x y: Object, f: Morphism(x, y)): Isomorphism({
-    Object
-    Morphism
-    id
-    compose
-    id_left
-    id_right
-    compose_associative
-  }, x, y, f, inv(x, y, f))
+  inv_iso(x y: Object, f: Morphism(x, y)): Isomorphism(super, x, y, f, inv(x, y, f))
 }

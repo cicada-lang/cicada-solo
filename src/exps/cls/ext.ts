@@ -8,6 +8,7 @@ import { readback } from "../../readback"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"
+import * as Exps from "../../exps"
 
 export class Ext extends Exp {
   name?: string
@@ -75,19 +76,29 @@ export class Ext extends Exp {
       throw new Trace(`Expecting parent_core to be Cls`)
     }
 
-    const entries: Array<{ name: string; t: Core; exp?: Core }> = new Array()
+    const entries = this.subst_entries(
+      "super",
+      new Exps.Obj(
+        parent.names.map((name) => new Exps.FieldShorthandProp(name))
+      )
+    )
 
-    for (const { name, t, exp } of this.entries) {
+    const core_entries: Array<{
+      name: string
+      t: Core
+      exp?: Core
+    }> = new Array()
+    for (const { name, t, exp } of entries) {
       const t_core = check(ctx, t, new Cores.TypeValue())
       const t_value = evaluate(ctx.to_env(), t_core)
       const exp_core = exp ? check(ctx, exp, t_value) : undefined
-      entries.push({ name, t: t_core, exp: exp_core })
+      core_entries.push({ name, t: t_core, exp: exp_core })
       ctx = ctx.extend(name, t_value)
     }
 
     return {
       t: new Cores.TypeValue(),
-      core: new Cores.Cls([...parent_core.entries, ...entries], {
+      core: new Cores.Cls([...parent_core.entries, ...core_entries], {
         name: this.name,
       }),
     }

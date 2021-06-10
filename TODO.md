@@ -1,5 +1,3 @@
-- elab `super` in `Exps.Ext` to object with parent fields -- by `Exp.subst`
-
 - fix for conversion check for ch15 `rest` when `prev` is `j`
 
   - we need to study scope more carefully
