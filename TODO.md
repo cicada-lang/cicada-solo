@@ -1,6 +1,6 @@
 - [refactoring] `.error.md` `.error.cic` `.snapshot.md` `.snapshot.cic`
 
-  - maybe use `use-case/` and `use-cases/`
+  - `ErrorModule` and `SnapshotModule`
 
 - `.error.md` should not output during `cic check-library` command
 

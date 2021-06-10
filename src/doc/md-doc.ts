@@ -6,11 +6,20 @@ import * as commonmark from "commonmark"
 export class MdDoc extends Doc {
   library: Library
   text: string
+  extension: string
+  total_extension: string
 
-  constructor(opts: { library: Library; text: string }) {
+  constructor(opts: {
+    library: Library
+    text: string
+    extension: string
+    total_extension: string
+  }) {
     super()
     this.library = opts.library
     this.text = opts.text
+    this.extension = opts.extension
+    this.total_extension = opts.total_extension
   }
 
   get entries(): Array<DocEntry> {

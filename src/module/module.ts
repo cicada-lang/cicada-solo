@@ -6,8 +6,8 @@ import { Doc } from "../doc"
 
 // NOTE
 // - a module knows which library it belongs to
-// - one file one module, loaded modules are cached
-// - the loading order of files matters
+// - one doc one module, loaded modules are cached
+// - the loading order of docs matters
 // - no recursion
 
 class ModuleEntry {
