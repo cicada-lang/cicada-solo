@@ -48,13 +48,13 @@ commands.test_cicada = async () => {
   await test(
     "./bin/cic.js run --no-module $file",
     { file: "tests/**/**.snapshot.cic" },
-    snapshot.out(({ file }) => file.replace(/\.cic$/, ".out"))
+    snapshot.out(({ file }) => file + ".out")
   )
 
   await test(
     "./bin/cic.js run --no-module $file",
     { file: "tests/**/**.error.cic" },
-    snapshot.err(({ file }) => file.replace(/\.cic$/, ".out"))
+    snapshot.err(({ file }) => file + ".out")
   )
 }
 
