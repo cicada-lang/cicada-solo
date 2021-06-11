@@ -24,7 +24,8 @@ export const handler = async (argv: Argv) => {
     ? await find_library_config_file(dir).then(LocalLibrary.from_config_file)
     : new SingleFileLibrary(path)
   try {
-    await library.load(path)
+    const mod = await library.load(path)
+    console.log(mod.output)
   } catch (error) {
     if (error instanceof Trace) {
       console.error(error.repr((exp) => exp.repr()))

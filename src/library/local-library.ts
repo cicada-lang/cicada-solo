@@ -55,10 +55,8 @@ export class LocalLibrary extends Library {
     path: string,
     opts: {
       verbose?: boolean
-      silent?: boolean
     } = {
       verbose: false,
-      silent: false,
     }
   ): Promise<Module> {
     const cached = this.cached_mods.get(path)
@@ -73,10 +71,6 @@ export class LocalLibrary extends Library {
     const doc = await this.fetch_doc(path)
     const mod = await Module.from_doc(doc)
     const t1 = Date.now()
-
-    if (opts.silent === false && mod.output) {
-      console.log(mod.output)
-    }
 
     if (opts.verbose) {
       console.log(
@@ -94,10 +88,8 @@ export class LocalLibrary extends Library {
     path: string,
     opts: {
       verbose?: boolean
-      silent?: boolean
     } = {
       verbose: false,
-      silent: false,
     }
   ): Promise<Module> {
     this.cached_mods.delete(path)
@@ -107,10 +99,8 @@ export class LocalLibrary extends Library {
   async load_mods(
     opts: {
       verbose?: boolean
-      silent?: boolean
     } = {
       verbose: false,
-      silent: true,
     }
   ): Promise<Map<string, Module>> {
     const files = await this.fetch_files()
