@@ -6,6 +6,8 @@ import { evaluate } from "../evaluate"
 import { infer } from "../infer"
 import { check } from "../check"
 import * as Cores from "../cores"
+import * as Exps from "../exps"
+import * as ut from "../ut"
 
 export class Let extends Exp {
   name: string
@@ -30,25 +32,28 @@ export class Let extends Exp {
     if (name === this.name) {
       return new Let(this.name, this.exp.subst(name, exp), this.ret)
     } else {
+      const free_names = exp.free_names(new Set())
+      const fresh_name = ut.freshen_name(free_names, this.name)
+      const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
+
       return new Let(
-        this.name,
+        fresh_name,
         this.exp.subst(name, exp),
-        this.ret.subst(name, exp)
+        ret.subst(name, exp)
       )
     }
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
+    const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const inferred = infer(ctx, this.exp)
     const value = evaluate(ctx.to_env(), inferred.core)
-    const inferred_ret = infer(
-      ctx.extend(this.name, inferred.t, value),
-      this.ret
-    )
+    const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
+    const inferred_ret = infer(ctx.extend(fresh_name, inferred.t, value), ret)
 
     return {
       t: inferred_ret.t,
-      core: new Cores.Let(this.name, inferred.core, inferred_ret.core),
+      core: new Cores.Let(fresh_name, inferred.core, inferred_ret.core),
     }
   }
 
