@@ -33,9 +33,13 @@ export class Pi extends Exp {
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
-      const arg_t = this.arg_t.subst(this.name, new Exps.Var(fresh_name))
       const ret_t = this.ret_t.subst(this.name, new Exps.Var(fresh_name))
-      return new Pi(fresh_name, arg_t.subst(name, exp), ret_t.subst(name, exp))
+
+      return new Pi(
+        fresh_name,
+        this.arg_t.subst(name, exp),
+        ret_t.subst(name, exp)
+      )
     }
   }
 
