@@ -1,3 +1,7 @@
+- [tlt] 16. If It's All the Same to You -- refactor the proof of `nat_equal_decide`
+
+# scope
+
 - `Exps.Cls` ctx with distinct names, use `Exp.subst` to change variable name
 - `Exps.Ext` ctx with distinct names, use `Exp.subst` to change variable name
 
@@ -8,8 +12,6 @@
   - (1) [x] disallow top level redefinition statements
   - (2) [] keep ctx with distinct names, use `Exp.subst` to change variable name
   - (3) [] telescope contains information about renaming
-
-- [tlt] 16. If It's All the Same to You -- refactor the proof of `nat_equal_decide`
 
 # implicit
 
