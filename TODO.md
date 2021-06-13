@@ -6,7 +6,7 @@
 - `Exps.Cls` ctx with distinct names, use `Exp.subst` to change variable name
 - `Exps.Ext` ctx with distinct names, use `Exp.subst` to change variable name
 
-- [maybe] use De Bruijn index -- as an optimization
+- add assertion in `Ctx.extend` for distinct names
 
 - use `Exp.subst` to handle problem about the scope
 
