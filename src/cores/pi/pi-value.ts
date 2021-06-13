@@ -18,10 +18,7 @@ export class PiValue extends Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Cores.TypeValue) {
-      const fresh_name = ut.freshen_name(
-        new Set(ctx.names()),
-        this.ret_t_cl.name
-      )
+      const fresh_name = ut.freshen_name(new Set(ctx.names), this.ret_t_cl.name)
       const variable = new Cores.NotYetValue(
         this.arg_t,
         new Cores.VarNeutral(fresh_name)
@@ -40,7 +37,7 @@ export class PiValue extends Value {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
-    const fresh_name = ut.freshen_name(new Set(ctx.names()), this.ret_t_cl.name)
+    const fresh_name = ut.freshen_name(new Set(ctx.names), this.ret_t_cl.name)
     const variable = new Cores.NotYetValue(
       this.arg_t,
       new Cores.VarNeutral(fresh_name)

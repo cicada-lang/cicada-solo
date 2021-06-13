@@ -11,7 +11,7 @@ export function conversion(ctx: Ctx, t: Value, x: Value, y: Value): boolean {
 }
 
 function alpha_equivalent(ctx: Ctx, x: Core, y: Core): boolean {
-  const names = ctx.names()
+  const names = ctx.names
   const alpha_ctx = new AlphaCtx()
   const x_repr = x.alpha_repr(alpha_ctx)
   const y_repr = y.alpha_repr(alpha_ctx)

@@ -18,10 +18,7 @@ export class SigmaValue extends Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Cores.TypeValue) {
-      const fresh_name = ut.freshen_name(
-        new Set(ctx.names()),
-        this.cdr_t_cl.name
-      )
+      const fresh_name = ut.freshen_name(new Set(ctx.names), this.cdr_t_cl.name)
       const variable = new Cores.NotYetValue(
         this.car_t,
         new Cores.VarNeutral(fresh_name)

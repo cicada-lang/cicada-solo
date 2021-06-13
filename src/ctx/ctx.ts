@@ -17,7 +17,7 @@ export class Ctx {
     this.entries = entries
   }
 
-  names(): Array<string> {
+  get names(): Array<string> {
     return Array.from(this.entries.map(({ name }) => name))
   }
 
@@ -26,8 +26,7 @@ export class Ctx {
   }
 
   lookup_type(name: string): undefined | Value {
-    const names = this.names()
-    const index = names.lastIndexOf(name)
+    const index = this.names.lastIndexOf(name)
     const entry = this.entries[index]
     if (index === -1) return undefined
     else return entry.t
