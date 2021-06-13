@@ -1,5 +1,3 @@
-> Use TDD to find BUG for each of the following cases.
-
 - `Exps.Cls` ctx with distinct names, use `Exp.subst` to change variable name
 - `Exps.Ext` ctx with distinct names, use `Exp.subst` to change variable name
 
@@ -12,17 +10,6 @@
   - (3) [] telescope contains information about renaming
 
 - [tlt] 16. If It's All the Same to You
-
-# style
-
-- [style review] about naming convention,
-  - in some case, we use type as postfix to name variable of this type,
-    - `nat_equal_consequence_t` -- `_t` for `Type`
-    - `incr_add1_equal` -- `_equal` for `Equal`
-
-  - but in other case, we use type as prefix to name variable of this type,
-    - `nat_equal_consequence_same` -- `nat_equal_consequence_` for `nat_equal_consequence_t`
-    - `vec` & `vecnil` -- `vec` for `Vector`
 
 # implicit
 

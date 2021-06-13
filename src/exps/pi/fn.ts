@@ -38,7 +38,10 @@ export class Fn extends Exp {
   check(ctx: Ctx, t: Value): Core {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const pi = expect(ctx, t, Cores.PiValue)
-    const arg = new Cores.NotYetValue(pi.arg_t, new Cores.VarNeutral(fresh_name))
+    const arg = new Cores.NotYetValue(
+      pi.arg_t,
+      new Cores.VarNeutral(fresh_name)
+    )
     const ret_t = pi.ret_t_cl.apply(arg)
     const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
     const ret_core = check(ctx.extend(fresh_name, pi.arg_t), ret, ret_t)

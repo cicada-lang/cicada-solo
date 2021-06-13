@@ -2,8 +2,13 @@
 
 ## stmts
 
-- def name exp
-- show exp
+def:
+- def name = exp
+- def name: t = exp
+- def name(arg: arg_t, ...): ret_t = exp
+
+show:
+- exp
 
 ## exps
 

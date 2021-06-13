@@ -14,9 +14,7 @@ export class List extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    return new Set([
-      ...this.elem_t.free_names(bound_names),
-    ])
+    return new Set([...this.elem_t.free_names(bound_names)])
   }
 
   subst(name: string, exp: Exp): Exp {

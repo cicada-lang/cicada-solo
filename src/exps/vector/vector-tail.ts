@@ -15,9 +15,7 @@ export class VectorTail extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    return new Set([
-      ...this.target.free_names(bound_names),
-    ])
+    return new Set([...this.target.free_names(bound_names)])
   }
 
   subst(name: string, exp: Exp): Exp {
