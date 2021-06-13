@@ -12,6 +12,10 @@ export class Quote extends Exp {
     this.str = str
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set()
+  }
+
   subst(name: string, exp: Exp): Exp {
     return this
   }

@@ -18,6 +18,13 @@ export class Sigma extends Exp {
     this.cdr_t = cdr_t
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.car_t.free_names(bound_names),
+      ...this.cdr_t.free_names(new Set([...bound_names, this.name])),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     if (name === this.name) {
       return new Sigma(this.name, this.car_t.subst(name, exp), this.cdr_t)

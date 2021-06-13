@@ -15,6 +15,13 @@ export class Vector extends Exp {
     this.length = length
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.elem_t.free_names(bound_names),
+      ...this.length.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new Vector(
       this.elem_t.subst(name, exp),

@@ -16,6 +16,13 @@ export class Li extends Exp {
     this.tail = tail
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.head.free_names(bound_names),
+      ...this.tail.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new Li(this.head.subst(name, exp), this.tail.subst(name, exp))
   }

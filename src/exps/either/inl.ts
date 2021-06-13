@@ -15,6 +15,12 @@ export class Inl extends Exp {
     this.left = left
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.left.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new Inl(this.left.subst(name, exp))
   }

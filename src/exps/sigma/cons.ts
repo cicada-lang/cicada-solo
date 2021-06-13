@@ -17,6 +17,13 @@ export class Cons extends Exp {
     this.cdr = cdr
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.car.free_names(bound_names),
+      ...this.cdr.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new Cons(this.car.subst(name, exp), this.cdr.subst(name, exp))
   }

@@ -19,6 +19,13 @@ export class Let extends Exp {
     this.ret = ret
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.exp.free_names(bound_names),
+      ...this.ret.free_names(new Set([...bound_names, this.name])),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     if (name === this.name) {
       return new Let(this.name, this.exp.subst(name, exp), this.ret)

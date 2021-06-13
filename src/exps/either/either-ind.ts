@@ -23,6 +23,15 @@ export class EitherInd extends Exp {
     this.base_right = base_right
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.target.free_names(bound_names),
+      ...this.motive.free_names(bound_names),
+      ...this.base_left.free_names(bound_names),
+      ...this.base_right.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new EitherInd(
       this.target.subst(name, exp),

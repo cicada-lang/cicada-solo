@@ -16,6 +16,13 @@ export class Either extends Exp {
     this.right_t = right_t
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.left_t.free_names(bound_names),
+      ...this.right_t.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new Either(
       this.left_t.subst(name, exp),

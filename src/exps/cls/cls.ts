@@ -20,6 +20,21 @@ export class Cls extends Exp {
     this.name = opts?.name
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    let free_names: Set<string> = new Set()
+
+    for (const entry of this.entries) {
+      free_names = new Set([
+        ...free_names,
+        ...entry.t.free_names(bound_names),
+        ...(entry.exp ? entry.exp.free_names(bound_names) : []),
+      ])
+      bound_names = new Set([...bound_names, entry.name])
+    }
+
+    return free_names
+  }
+
   private subst_entries(
     name: string,
     exp: Exp

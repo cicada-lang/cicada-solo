@@ -16,6 +16,13 @@ export class AbsurdInd extends Exp {
     this.motive = motive
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.target.free_names(bound_names),
+      ...this.motive.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new AbsurdInd(
       this.target.subst(name, exp),

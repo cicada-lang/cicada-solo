@@ -18,18 +18,27 @@ export class Fn extends Exp {
     this.ret = ret
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.ret.free_names(new Set([...bound_names, this.name])),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     if (name === this.name) {
       return this
     } else {
-      return new Fn(this.name, this.ret.subst(name, exp))
+      const free_names = exp.free_names(new Set())
+      const fresh_name = ut.freshen_name(free_names, this.name)
+      const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
+      return new Fn(fresh_name, ret.subst(name, exp))
     }
   }
 
   check(ctx: Ctx, t: Value): Core {
     const name = ut.freshen_name(new Set(ctx.names), this.name)
-    const v = new Exps.Var(name)
     const pi = expect(ctx, t, Cores.PiValue)
+    const v = new Exps.Var(name)
     const arg = new Cores.NotYetValue(pi.arg_t, new Cores.VarNeutral(name))
     const ret_t = pi.ret_t_cl.apply(arg)
     const ret = this.ret.subst(this.name, v)

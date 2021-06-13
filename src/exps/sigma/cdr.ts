@@ -15,6 +15,12 @@ export class Cdr extends Exp {
     this.target = target
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.target.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new Cdr(this.target.subst(name, exp))
   }

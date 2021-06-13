@@ -10,6 +10,10 @@ import * as ut from "../../ut"
 import * as Cores from "../../cores"
 
 export class Same extends Exp {
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set()
+  }
+
   subst(name: string, exp: Exp): Exp {
     return this
   }

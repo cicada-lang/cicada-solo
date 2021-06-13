@@ -13,6 +13,12 @@ export class List extends Exp {
     this.elem_t = elem_t
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.elem_t.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new List(this.elem_t.subst(name, exp))
   }

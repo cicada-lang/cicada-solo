@@ -16,6 +16,14 @@ export class Obj extends Exp {
     this.properties = properties
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set(
+      this.properties.flatMap((property) =>
+        Array.from(property.free_names(bound_names))
+      )
+    )
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new Obj(this.properties.map((property) => property.subst(name, exp)))
   }
@@ -42,6 +50,7 @@ export class Obj extends Exp {
 export abstract class Prop {
   instanceofProp = true
 
+  abstract free_names(bound_names: Set<string>): Set<string>
   abstract subst(name: string, exp: Exp): Prop
   abstract expand(ctx: Ctx): Array<[string, Exp]>
   abstract repr(): string
@@ -53,6 +62,10 @@ export class SpreadProp extends Prop {
   constructor(exp: Exp) {
     super()
     this.exp = exp
+  }
+
+  free_names(bound_names: Set<string>): Set<string> {
+    return this.exp.free_names(bound_names)
   }
 
   subst(name: string, exp: Exp): Prop {
@@ -85,6 +98,10 @@ export class FieldProp extends Prop {
     this.exp = exp
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return this.exp.free_names(bound_names)
+  }
+
   subst(name: string, exp: Exp): Prop {
     return new FieldProp(this.name, this.exp.subst(name, exp))
   }
@@ -104,6 +121,10 @@ export class FieldShorthandProp extends Prop {
   constructor(name: string) {
     super()
     this.name = name
+  }
+
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Exps.Var(this.name).free_names(bound_names)
   }
 
   subst(name: string, exp: Exp): Prop {

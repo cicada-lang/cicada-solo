@@ -18,6 +18,14 @@ export class Equal extends Exp {
     this.to = to
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.t.free_names(bound_names),
+      ...this.from.free_names(bound_names),
+      ...this.to.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new Equal(
       this.t.subst(name, exp),

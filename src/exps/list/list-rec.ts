@@ -23,6 +23,14 @@ export class ListRec extends Exp {
     this.step = step
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.target.free_names(bound_names),
+      ...this.base.free_names(bound_names),
+      ...this.step.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new ListRec(
       this.target.subst(name, exp),

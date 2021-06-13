@@ -19,6 +19,13 @@ export class Ap extends Exp {
     this.arg = arg
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.target.free_names(bound_names),
+      ...this.arg.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new Ap(this.target.subst(name, exp), this.arg.subst(name, exp))
   }

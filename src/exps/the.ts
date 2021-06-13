@@ -16,6 +16,13 @@ export class The extends Exp {
     this.exp = exp
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.t.free_names(bound_names),
+      ...this.exp.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new The(this.t.subst(name, exp), this.exp.subst(name, exp))
   }

@@ -14,6 +14,12 @@ export class Add1 extends Exp {
     this.prev = prev
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.prev.free_names(bound_names),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     return new Add1(this.prev.subst(name, exp))
   }

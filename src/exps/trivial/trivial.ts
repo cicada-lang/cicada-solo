@@ -5,6 +5,10 @@ import { Ctx } from "../../ctx"
 import * as Cores from "../../cores"
 
 export class Trivial extends Exp {
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set()
+  }
+
   subst(name: string, exp: Exp): Exp {
     return this
   }

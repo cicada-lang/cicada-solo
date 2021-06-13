@@ -5,6 +5,8 @@ import { Value } from "../../value"
 import { check } from "../../check"
 import { evaluate } from "../../evaluate"
 import * as Cores from "../../cores"
+import * as Exps from "../../exps"
+import * as ut from "../../ut"
 
 export class Pi extends Exp {
   name: string
@@ -18,14 +20,25 @@ export class Pi extends Exp {
     this.ret_t = ret_t
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.arg_t.free_names(bound_names),
+      ...this.ret_t.free_names(new Set([...bound_names, this.name])),
+    ])
+  }
+
   subst(name: string, exp: Exp): Exp {
     if (name === this.name) {
       return new Pi(this.name, this.arg_t.subst(name, exp), this.ret_t)
     } else {
+      const free_names = exp.free_names(new Set())
+      const fresh_name = ut.freshen_name(free_names, this.name)
+      const arg_t = this.arg_t.subst(this.name, new Exps.Var(fresh_name))
+      const ret_t = this.ret_t.subst(this.name, new Exps.Var(fresh_name))
       return new Pi(
-        this.name,
-        this.arg_t.subst(name, exp),
-        this.ret_t.subst(name, exp)
+        fresh_name,
+        arg_t.subst(name, exp),
+        ret_t.subst(name, exp)
       )
     }
   }
