@@ -1,6 +1,5 @@
 > Use TDD to find BUG for each of the following cases.
 
-- `Exps.Pi` ctx with distinct names, use `Exp.subst` to change variable name
 - `Exps.Sigma` ctx with distinct names, use `Exp.subst` to change variable name
 - `Exps.Let` ctx with distinct names, use `Exp.subst` to change variable name
 - `Exps.Cls` ctx with distinct names, use `Exp.subst` to change variable name
