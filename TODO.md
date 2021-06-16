@@ -1,3 +1,6 @@
+- extract `nat_equal_decide_step`'s base
+- extract `nat_equal_decide_step`'s step
+
 - [tlt] 16. If It's All the Same to You -- refactor the proof of `nat_equal_decide`
 
 # scope
