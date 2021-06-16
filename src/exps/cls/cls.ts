@@ -41,7 +41,8 @@ export class Cls extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const core_entries: Array<{ name: string; t: Core; exp?: Core }> = new Array()
+    const core_entries: Array<{ name: string; t: Core; exp?: Core }> =
+      new Array()
     const renaming: Array<[string, string]> = new Array()
 
     for (let entry of this.entries) {
