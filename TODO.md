@@ -1,7 +1,10 @@
 # scope
 
-- `Exps.Cls` ctx with distinct names, use `Exp.subst` to change variable name
-- `Exps.Ext` ctx with distinct names, use `Exp.subst` to change variable name
+- `Exps.Obj` ctx with distinct names
+
+- `Exps.Ext` fix `Exp.subst`
+- `Exps.Cls` fix `Exp.subst`
+- `Exps.Obj` fix `Exp.subst`
 
 - add assertion in `Ctx.extend` for distinct names
 
@@ -9,7 +12,7 @@
 
   - (1) [x] disallow top level redefinition statements
   - (2) [] keep ctx with distinct names, use `Exp.subst` to change variable name
-  - (3) [] telescope contains information about renaming
+  - (3) [maybe not] telescope contains information about renaming
 
 # implicit
 

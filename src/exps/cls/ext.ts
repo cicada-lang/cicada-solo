@@ -6,9 +6,9 @@ import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { readback } from "../../readback"
 import { Trace } from "../../trace"
-import * as ut from "../../ut"
 import * as Cores from "../../cores"
 import * as Exps from "../../exps"
+import * as ut from "../../ut"
 
 export class Ext extends Exp {
   name?: string
@@ -41,37 +41,8 @@ export class Ext extends Exp {
     return free_names
   }
 
-  private subst_entries(
-    name: string,
-    exp: Exp
-  ): Array<{ name: string; t: Exp; exp?: Exp }> {
-    const entries: Array<{ name: string; t: Exp; exp?: Exp }> = new Array()
-    let occured: boolean = false
-
-    for (const entry of this.entries) {
-      if (occured) {
-        entries.push(entry)
-      } else if (name === entry.name) {
-        entries.push({
-          name: entry.name,
-          t: entry.t.subst(name, exp),
-          exp: entry.exp,
-        })
-        occured = true
-      } else {
-        entries.push({
-          name: entry.name,
-          t: entry.t.subst(name, exp),
-          exp: entry.exp?.subst(name, exp),
-        })
-      }
-    }
-
-    return entries
-  }
-
   subst(name: string, exp: Exp): Exp {
-    return new Ext(this.parent_name, this.subst_entries(name, exp), {
+    return new Ext(this.parent_name, subst_entries(this.entries, name, exp), {
       name: this.name,
     })
   }
@@ -91,24 +62,33 @@ export class Ext extends Exp {
       throw new Trace(`Expecting parent_core to be Cls`)
     }
 
-    const entries = this.subst_entries(
+    const entries = subst_entries(
+      this.entries,
       "super",
       new Exps.Obj(
         parent.names.map((name) => new Exps.FieldShorthandProp(name))
       )
     )
 
-    const core_entries: Array<{
-      name: string
-      t: Core
-      exp?: Core
-    }> = new Array()
-    for (const { name, t, exp } of entries) {
+    type core_entry_t = { name: string; t: Core; exp?: Core }
+    const core_entries: Array<core_entry_t> = new Array()
+    const renaming: Array<[string, string]> = new Array()
+
+    for (const entry of entries) {
+      const { name, t, exp } = renaming.reduce(
+        (entry, [name, fresh_name]) =>
+          subst_entry(entry, name, new Exps.Var(fresh_name)),
+        entry
+      )
+
+      const fresh_name = ut.freshen_name(new Set(ctx.names), name)
       const t_core = check(ctx, t, new Cores.TypeValue())
       const t_value = evaluate(ctx.to_env(), t_core)
       const exp_core = exp ? check(ctx, exp, t_value) : undefined
       core_entries.push({ name, t: t_core, exp: exp_core })
-      ctx = ctx.extend(name, t_value)
+      ctx = ctx.extend(fresh_name, t_value)
+
+      renaming.push([name, fresh_name])
     }
 
     return {
@@ -135,5 +115,39 @@ export class Ext extends Exp {
     const s = entries.join("\n")
     const body = `{\n${ut.indent(s, "  ")}\n}`
     return `class ${name} extends ${this.parent_name} ${body}`
+  }
+}
+
+function subst_entries(
+  origin_entries: Array<{ name: string; t: Exp; exp?: Exp }>,
+  name: string,
+  exp: Exp
+): Array<{ name: string; t: Exp; exp?: Exp }> {
+  const entries: Array<{ name: string; t: Exp; exp?: Exp }> = new Array()
+  let occured: boolean = false
+
+  for (const entry of origin_entries) {
+    if (occured) {
+      entries.push(entry)
+    } else if (name === entry.name) {
+      entries.push(subst_entry(entry, name, exp))
+      occured = true
+    } else {
+      entries.push(subst_entry(entry, name, exp))
+    }
+  }
+
+  return entries
+}
+
+function subst_entry(
+  entry: { name: string; t: Exp; exp?: Exp },
+  name: string,
+  exp: Exp
+): { name: string; t: Exp; exp?: Exp } {
+  return {
+    name: entry.name,
+    t: entry.t.subst(name, exp),
+    exp: entry.exp?.subst(name, exp),
   }
 }
