@@ -1,10 +1,10 @@
 # scope
 
+- `Exps.Obj` ctx with distinct names
+
 - `Exps.Cls` & `Exps.Ext` extract `ClsEntry`
 
 - `ClsEntry` must maintain two names -- one `field_name` one `local_name`
-
-- `Exps.Obj` ctx with distinct names
 
 - `Exps.Ext` fix `Exp.subst`
 - `Exps.Cls` fix `Exp.subst`
@@ -16,7 +16,7 @@
 
   - (1) [x] disallow top level redefinition statements
   - (2) [] keep ctx with distinct names, use `Exp.subst` to change variable name
-  - (3) [maybe not] telescope contains information about renaming
+  - (3) [] telescope contains information about renaming
 
 # implicit
 
