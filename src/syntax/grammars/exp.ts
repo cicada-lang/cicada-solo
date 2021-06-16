@@ -2,7 +2,7 @@ export const elim = {
   $grammar: {
     "elim:var": [{ name: "identifier" }],
     "elim:ap": [
-      { target: "identifier" },
+      { target: "elim" },
       { args: { $ap: ["one_or_more", '"("', "exps", '")"'] } },
     ],
     "elim:car": ['"car"', '"("', { target: "exp" }, '")"'],

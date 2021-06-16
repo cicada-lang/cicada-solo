@@ -44,7 +44,7 @@ export function elim_matcher(tree: pt.Tree): Exp {
         .flatMap((arg) => exps_matcher(arg))
         .reduce(
           (result, exp) => new Exps.Ap(result, exp),
-          new Exps.Var(pt.str(target))
+          elim_matcher(target)
         ),
     "elim:car": ({ target }) => new Exps.Car(exp_matcher(target)),
     "elim:cdr": ({ target }) => new Exps.Cdr(exp_matcher(target)),
@@ -208,7 +208,9 @@ export function cons_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-export function cls_entry_matcher(tree: pt.Tree): {
+export function cls_entry_matcher(
+  tree: pt.Tree
+): {
   name: string
   t: Exp
   exp?: Exp
@@ -253,7 +255,9 @@ export function bindings_matcher(
   })(tree)
 }
 
-export function binding_entry_matcher(tree: pt.Tree): {
+export function binding_entry_matcher(
+  tree: pt.Tree
+): {
   names: Array<string>
   exp: Exp
 } {
