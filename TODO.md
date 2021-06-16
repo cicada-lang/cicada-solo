@@ -1,3 +1,5 @@
+- fix ap syntax
+
 - [tlt] 16. If It's All the Same to You -- refactor the proof of `nat_equal_decide`
 
 # scope
