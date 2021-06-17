@@ -63,25 +63,25 @@ export class ClsEntry {
     }
   }
 
-  // static infer_entries(
-  //   ctx: Ctx,
-  //   entries: Array<Exps.ClsEntry>
-  // ): Array<Cores.ClsEntry> {
-  //   if (entries.length === 0) return []
+  static infer_entries(
+    ctx: Ctx,
+    entries: Array<Exps.ClsEntry>
+  ): Array<Cores.ClsEntry> {
+    if (entries.length === 0) return []
 
-  //   const [entry, ...rest] = entries
-  //   const { field_name, local_name, t, exp } = entry
-  //   const fresh_name = ut.freshen_name(new Set(ctx.names), local_name)
-  //   const t_core = check(ctx, t, new Cores.TypeValue())
-  //   const t_value = evaluate(ctx.to_env(), t_core)
-  //   const exp_core = exp ? check(ctx, exp, t_value) : undefined
+    const [entry, ...rest] = entries
+    const { field_name, local_name, t, exp } = entry
+    const fresh_name = ut.freshen_name(new Set(ctx.names), local_name)
+    const t_core = check(ctx, t, new Cores.TypeValue())
+    const t_value = evaluate(ctx.to_env(), t_core)
+    const exp_core = exp ? check(ctx, exp, t_value) : undefined
 
-  //   return [
-  //     new Cores.ClsEntry(field_name, t_core, exp_core),
-  //     ...ClsEntry.infer_entries(
-  //       ctx.extend(fresh_name, t_value),
-  //       Exps.ClsEntry.subst_entries(rest, local_name, new Exps.Var(fresh_name))
-  //     ),
-  //   ]
-  // }
+    return [
+      new Cores.ClsEntry(field_name, t_core, exp_core),
+      ...ClsEntry.infer_entries(
+        ctx.extend(fresh_name, t_value),
+        Exps.ClsEntry.subst_entries(rest, local_name, new Exps.Var(fresh_name))
+      ),
+    ]
+  }
 }

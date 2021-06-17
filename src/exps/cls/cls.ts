@@ -40,7 +40,7 @@ export class Cls extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Cores.TypeValue(),
-      core: new Cores.Cls(infer_entries(ctx, this.entries), {
+      core: new Cores.Cls(Exps.ClsEntry.infer_entries(ctx, this.entries), {
         name: this.name,
       }),
     }
@@ -56,26 +56,4 @@ export class Cls extends Exp {
     const entries = this.entries.map((entry) => entry.repr()).join("\n")
     return `class ${name} {\n${ut.indent(entries, "  ")}\n}`
   }
-}
-
-function infer_entries(
-  ctx: Ctx,
-  entries: Array<Exps.ClsEntry>
-): Array<Cores.ClsEntry> {
-  if (entries.length === 0) return []
-
-  const [entry, ...rest] = entries
-  const { field_name, local_name, t, exp } = entry
-  const fresh_name = ut.freshen_name(new Set(ctx.names), local_name)
-  const t_core = check(ctx, t, new Cores.TypeValue())
-  const t_value = evaluate(ctx.to_env(), t_core)
-  const exp_core = exp ? check(ctx, exp, t_value) : undefined
-
-  return [
-    new Cores.ClsEntry(field_name, t_core, exp_core),
-    ...infer_entries(
-      ctx.extend(fresh_name, t_value),
-      Exps.ClsEntry.subst_entries(rest, local_name, new Exps.Var(fresh_name))
-    ),
-  ]
 }

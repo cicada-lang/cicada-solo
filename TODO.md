@@ -1,7 +1,5 @@
 # scope
 
-- use shared `Exps.ClsEntry.infer_entries`
-
 - `Exps.Cls` check field names are distinct
 - `Exps.Ext` check field names are distinct
 
