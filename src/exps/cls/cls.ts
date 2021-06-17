@@ -41,7 +41,7 @@ export class Cls extends Exp {
     entry: Exps.ClsEntry,
     [local_name, fresh_name]: [string, string]
   ): Exps.ClsEntry {
-    return entry.subst(local_name, new Exps.Var(fresh_name))
+    return entry.rename(local_name, fresh_name)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

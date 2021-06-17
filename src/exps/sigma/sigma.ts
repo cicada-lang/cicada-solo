@@ -33,7 +33,7 @@ export class Sigma extends Exp {
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
-      const cdr_t = this.cdr_t.subst(this.name, new Exps.Var(fresh_name))
+      const cdr_t = this.cdr_t.rename(this.name, fresh_name)
 
       return new Sigma(
         fresh_name,
@@ -47,7 +47,7 @@ export class Sigma extends Exp {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const car_t_core = check(ctx, this.car_t, new Cores.TypeValue())
     const car_t_value = evaluate(ctx.to_env(), car_t_core)
-    const cdr_t = this.cdr_t.subst(this.name, new Exps.Var(fresh_name))
+    const cdr_t = this.cdr_t.rename(this.name, fresh_name)
     const cdr_t_core = check(
       ctx.extend(fresh_name, car_t_value),
       cdr_t,
