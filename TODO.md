@@ -1,7 +1,5 @@
 # scope
 
-- be sure about the use of `ctx.extend` in `Cores`' `readback`
-
 - `Exps.Obj` ctx with distinct names
 
 - `Exps.Cls` & `Exps.Ext` extract `ClsEntry`
