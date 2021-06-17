@@ -9,15 +9,16 @@ import { Trace } from "../../trace"
 import * as Cores from "../../cores"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
+import { ClsEntry } from "./cls-entry"
 
 export class Ext extends Exp {
   name?: string
   parent_name: string
-  entries: Array<{ name: string; t: Exp; exp?: Exp }>
+  entries: Array<ClsEntry>
 
   constructor(
     parent_name: string,
-    entries: Array<{ name: string; t: Exp; exp?: Exp }>,
+    entries: Array<ClsEntry>,
     opts?: { name?: string }
   ) {
     super()
@@ -42,9 +43,13 @@ export class Ext extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Ext(this.parent_name, subst_entries(this.entries, name, exp), {
-      name: this.name,
-    })
+    return new Ext(
+      this.parent_name,
+      ClsEntry.subst_entries(this.entries, name, exp),
+      {
+        name: this.name,
+      }
+    )
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
@@ -62,7 +67,7 @@ export class Ext extends Exp {
       throw new Trace(`Expecting parent_core to be Cls`)
     }
 
-    const entries = subst_entries(
+    const entries = ClsEntry.subst_entries(
       this.entries,
       "super",
       new Exps.Obj(
@@ -77,7 +82,7 @@ export class Ext extends Exp {
     for (const entry of entries) {
       const { name, t, exp } = renaming.reduce(
         (entry, [name, fresh_name]) =>
-          subst_entry(entry, name, new Exps.Var(fresh_name)),
+          entry.subst(name, new Exps.Var(fresh_name)),
         entry
       )
 
@@ -115,39 +120,5 @@ export class Ext extends Exp {
     const s = entries.join("\n")
     const body = `{\n${ut.indent(s, "  ")}\n}`
     return `class ${name} extends ${this.parent_name} ${body}`
-  }
-}
-
-function subst_entries(
-  origin_entries: Array<{ name: string; t: Exp; exp?: Exp }>,
-  name: string,
-  exp: Exp
-): Array<{ name: string; t: Exp; exp?: Exp }> {
-  const entries: Array<{ name: string; t: Exp; exp?: Exp }> = new Array()
-  let occured: boolean = false
-
-  for (const entry of origin_entries) {
-    if (occured) {
-      entries.push(entry)
-    } else if (name === entry.name) {
-      entries.push(subst_entry(entry, name, exp))
-      occured = true
-    } else {
-      entries.push(subst_entry(entry, name, exp))
-    }
-  }
-
-  return entries
-}
-
-function subst_entry(
-  entry: { name: string; t: Exp; exp?: Exp },
-  name: string,
-  exp: Exp
-): { name: string; t: Exp; exp?: Exp } {
-  return {
-    name: entry.name,
-    t: entry.t.subst(name, exp),
-    exp: entry.exp?.subst(name, exp),
   }
 }

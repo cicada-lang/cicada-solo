@@ -208,36 +208,25 @@ export function cons_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-export function cls_entry_matcher(tree: pt.Tree): {
-  name: string
-  t: Exp
-  exp?: Exp
-} {
+export function cls_entry_matcher(tree: pt.Tree): Exps.ClsEntry {
   return pt.matcher({
-    "cls_entry:field_demanded": ({ name, t }) => ({
-      name: pt.str(name),
-      t: exp_matcher(t),
-    }),
-    "cls_entry:field_fulfilled": ({ name, t, exp }) => ({
-      name: pt.str(name),
-      t: exp_matcher(t),
-      exp: exp_matcher(exp),
-    }),
-    "cls_entry:method_demanded": ({ name, bindings, ret_t }) => ({
-      name: pt.str(name),
-      t: pi_handler({ bindings, ret_t }),
-    }),
+    "cls_entry:field_demanded": ({ name, t }) =>
+      new Exps.ClsEntry(pt.str(name), exp_matcher(t)),
+    "cls_entry:field_fulfilled": ({ name, t, exp }) =>
+      new Exps.ClsEntry(pt.str(name), exp_matcher(t), exp_matcher(exp)),
+    "cls_entry:method_demanded": ({ name, bindings, ret_t }) =>
+      new Exps.ClsEntry(pt.str(name), pi_handler({ bindings, ret_t })),
     "cls_entry:method_fulfilled": ({ name, bindings, ret_t, ret }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
         .flatMap(({ names }) => names.reverse())
         .reduce((fn, name) => new Exps.Fn(name, fn), exp_matcher(ret))
 
-      return {
-        name: pt.str(name),
-        t: pi_handler({ bindings, ret_t }),
-        exp: fn,
-      }
+      return new Exps.ClsEntry(
+        pt.str(name),
+        pi_handler({ bindings, ret_t }),
+        fn
+      )
     },
   })(tree)
 }

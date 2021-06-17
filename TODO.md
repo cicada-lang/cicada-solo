@@ -1,7 +1,5 @@
 # scope
 
-- `Exps.Cls` & `Exps.Ext` extract `ClsEntry`
-
 - `ClsEntry` must maintain two names -- one `field_name` one `local_name`
 
 - `Exps.Obj` ctx with distinct names
