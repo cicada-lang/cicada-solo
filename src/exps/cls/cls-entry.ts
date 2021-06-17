@@ -9,16 +9,16 @@ import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class ClsEntry {
-  name: string
+  field_name: string
   local_name: string
   t: Exp
   exp?: Exp
 
-  constructor(name: string, t: Exp, exp?: Exp, local_name?: string) {
-    this.name = name
+  constructor(field_name: string, t: Exp, exp?: Exp, local_name?: string) {
+    this.field_name = field_name
     this.t = t
     this.exp = exp
-    this.local_name = local_name || name
+    this.local_name = local_name || field_name
   }
 
   free_names(bound_names: Set<string>): Set<string> {
@@ -30,7 +30,7 @@ export class ClsEntry {
 
   subst(name: string, exp: Exp): ClsEntry {
     return new ClsEntry(
-      this.name,
+      this.field_name,
       this.t.subst(name, exp),
       this.exp?.subst(name, exp)
     )
@@ -47,7 +47,7 @@ export class ClsEntry {
     for (const entry of origin_entries) {
       if (occured) {
         entries.push(entry)
-      } else if (name === entry.name) {
+      } else if (name === entry.field_name) {
         entries.push(entry.subst(name, exp))
         occured = true
       } else {
@@ -60,7 +60,7 @@ export class ClsEntry {
 
   repr(): string {
     return this.exp
-      ? `${this.name}: ${this.t.repr()} = ${this.exp.repr()}`
-      : `${this.name}: ${this.t.repr()}`
+      ? `${this.field_name}: ${this.t.repr()} = ${this.exp.repr()}`
+      : `${this.field_name}: ${this.t.repr()}`
   }
 }

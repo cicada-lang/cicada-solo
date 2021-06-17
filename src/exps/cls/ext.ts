@@ -31,7 +31,7 @@ export class Ext extends Exp {
 
     for (const entry of this.entries) {
       free_names = new Set([...free_names, ...entry.free_names(bound_names)])
-      bound_names = new Set([...bound_names, entry.name])
+      bound_names = new Set([...bound_names, entry.local_name])
     }
 
     return free_names
@@ -74,20 +74,20 @@ export class Ext extends Exp {
     const renaming: Array<[string, string]> = new Array()
 
     for (const entry of entries) {
-      const { name, t, exp } = renaming.reduce(
-        (entry, [name, fresh_name]) =>
-          entry.subst(name, new Exps.Var(fresh_name)),
+      const { field_name, local_name, t, exp } = renaming.reduce(
+        (entry, [local_name, fresh_name]) =>
+          entry.subst(local_name, new Exps.Var(fresh_name)),
         entry
       )
 
-      const fresh_name = ut.freshen_name(new Set(ctx.names), name)
+      const fresh_name = ut.freshen_name(new Set(ctx.names), field_name)
       const t_core = check(ctx, t, new Cores.TypeValue())
       const t_value = evaluate(ctx.to_env(), t_core)
       const exp_core = exp ? check(ctx, exp, t_value) : undefined
-      core_entries.push(new Cores.ClsEntry(name, t_core, exp_core))
+      core_entries.push(new Cores.ClsEntry(field_name, t_core, exp_core))
       ctx = ctx.extend(fresh_name, t_value)
 
-      renaming.push([name, fresh_name])
+      renaming.push([local_name, fresh_name])
     }
 
     return {
