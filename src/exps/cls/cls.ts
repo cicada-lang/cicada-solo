@@ -31,6 +31,10 @@ export class Cls extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
+    Exps.ClsEntry.entries_check_distinct_field_names(
+      this.entries.map((entry) => entry.field_name)
+    )
+
     return {
       t: new Cores.TypeValue(),
       core: new Cores.Cls(Exps.ClsEntry.entries_infer(ctx, this.entries), {

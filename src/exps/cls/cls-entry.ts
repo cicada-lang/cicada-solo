@@ -4,6 +4,7 @@ import { Value } from "../../value"
 import { Ctx } from "../../ctx"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
+import { Trace } from "../../trace"
 import * as Cores from "../../cores"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
@@ -32,6 +33,28 @@ export class ClsEntry {
       ...this.t.free_names(bound_names),
       ...(this.exp ? this.exp.free_names(bound_names) : []),
     ])
+  }
+
+  static entries_check_distinct_field_names(field_names: Array<string>): void {
+    function recur(names: Array<string>): void {
+      if (names.length === 0) return
+
+      const [name, ...rest] = names
+      if (rest.includes(name)) {
+        throw new Trace(
+          [
+            `I found duplicated name:`,
+            `  ${name}`,
+            `in field_names:`,
+            `  ${field_names.join(", ")}`,
+          ].join("\n")
+        )
+      }
+
+      return recur(rest)
+    }
+
+    return recur(field_names)
   }
 
   static entries_free_names(

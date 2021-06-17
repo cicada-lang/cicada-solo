@@ -63,12 +63,18 @@ export class Ext extends Exp {
       )
     )
 
+    const core_entries = [
+      ...parent_core.entries,
+      ...Exps.ClsEntry.entries_infer(ctx, entries),
+    ]
+
+    Exps.ClsEntry.entries_check_distinct_field_names(
+      core_entries.map((entry) => entry.field_name)
+    )
+
     return {
       t: new Cores.TypeValue(),
-      core: new Cores.Cls(
-        [...parent_core.entries, ...Exps.ClsEntry.entries_infer(ctx, entries)],
-        { name: this.name }
-      ),
+      core: new Cores.Cls(core_entries, { name: this.name }),
     }
   }
 
