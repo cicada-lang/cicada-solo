@@ -30,7 +30,7 @@ export class Fn extends Exp {
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
-      const ret = this.ret.rename(this.name, fresh_name)
+      const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
       return new Fn(fresh_name, ret.subst(name, exp))
     }
   }
@@ -43,7 +43,7 @@ export class Fn extends Exp {
       new Cores.VarNeutral(fresh_name)
     )
     const ret_t = pi.ret_t_cl.apply(arg)
-    const ret = this.ret.rename(this.name, fresh_name)
+    const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
     const ret_core = check(ctx.extend(fresh_name, pi.arg_t), ret, ret_t)
     return new Cores.Fn(fresh_name, ret_core)
   }

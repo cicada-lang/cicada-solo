@@ -33,12 +33,8 @@ export class ClsEntry {
       this.field_name,
       this.t.subst(name, exp),
       this.exp?.subst(name, exp),
-      this.local_name
+      this.local_name,
     )
-  }
-
-  rename(name: string, new_name: string): ClsEntry {
-    return this.subst(name, new Exps.Var(new_name))
   }
 
   static subst_entries(

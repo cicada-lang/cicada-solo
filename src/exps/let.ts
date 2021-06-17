@@ -34,7 +34,7 @@ export class Let extends Exp {
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
-      const ret = this.ret.rename(this.name, fresh_name)
+      const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
 
       return new Let(
         fresh_name,
@@ -48,7 +48,7 @@ export class Let extends Exp {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const inferred = infer(ctx, this.exp)
     const value = evaluate(ctx.to_env(), inferred.core)
-    const ret = this.ret.rename(this.name, fresh_name)
+    const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
     const inferred_ret = infer(ctx.extend(fresh_name, inferred.t, value), ret)
 
     return {
