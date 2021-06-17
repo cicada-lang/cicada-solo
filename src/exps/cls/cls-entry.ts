@@ -28,7 +28,7 @@ export class ClsEntry {
     ])
   }
 
-  subst(name: string, exp: Exp): ClsEntry {
+  private subst(name: string, exp: Exp): ClsEntry {
     return new ClsEntry(
       this.field_name,
       this.t.subst(name, exp),

@@ -47,7 +47,7 @@ export class Ext extends Exp {
     )
   }
 
-  private renaming_reducer(
+  private renamings_reducer(
     entry: Exps.ClsEntry,
     [local_name, fresh_name]: [string, string]
   ): Exps.ClsEntry {
@@ -78,11 +78,11 @@ export class Ext extends Exp {
     )
 
     const core_entries: Array<Cores.ClsEntry> = new Array()
-    const renaming: Array<[string, string]> = new Array()
+    const renamings: Array<[string, string]> = new Array()
 
     for (const entry of entries) {
-      const { field_name, local_name, t, exp } = renaming.reduce(
-        this.renaming_reducer,
+      const { field_name, local_name, t, exp } = renamings.reduce(
+        this.renamings_reducer,
         entry
       )
 
@@ -93,7 +93,7 @@ export class Ext extends Exp {
       core_entries.push(new Cores.ClsEntry(field_name, t_core, exp_core))
       ctx = ctx.extend(fresh_name, t_value)
 
-      renaming.push([local_name, fresh_name])
+      renamings.push([local_name, fresh_name])
     }
 
     return {

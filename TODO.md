@@ -16,7 +16,7 @@
 
   - (1) [x] disallow top level redefinition statements
   - (2) [] keep ctx with distinct names, use `Exp.subst` to change variable name
-  - (3) [] telescope contains information about renaming
+  - (3) [] telescope contains information about renamings
 
 # implicit
 
