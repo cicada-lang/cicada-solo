@@ -30,11 +30,7 @@ export class Ext extends Exp {
     let free_names: Set<string> = new Set()
 
     for (const entry of this.entries) {
-      free_names = new Set([
-        ...free_names,
-        ...entry.t.free_names(bound_names),
-        ...(entry.exp ? entry.exp.free_names(bound_names) : []),
-      ])
+      free_names = new Set([...free_names, ...entry.free_names(bound_names)])
       bound_names = new Set([...bound_names, entry.name])
     }
 

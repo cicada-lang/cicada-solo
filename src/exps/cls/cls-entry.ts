@@ -21,6 +21,13 @@ export class ClsEntry {
     this.local_name = local_name || name
   }
 
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.t.free_names(bound_names),
+      ...(this.exp ? this.exp.free_names(bound_names) : []),
+    ])
+  }
+
   subst(name: string, exp: Exp): ClsEntry {
     return new ClsEntry(
       this.name,
