@@ -40,11 +40,7 @@ export class Cls extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const core_entries: Array<{
-      name: string
-      t: Core
-      exp?: Core
-    }> = new Array()
+    const core_entries: Array<Cores.ClsEntry> = new Array()
     const renaming: Array<[string, string]> = new Array()
 
     for (let entry of this.entries) {
@@ -58,7 +54,7 @@ export class Cls extends Exp {
       const t_core = check(ctx, t, new Cores.TypeValue())
       const t_value = evaluate(ctx.to_env(), t_core)
       const exp_core = exp ? check(ctx, exp, t_value) : undefined
-      core_entries.push({ name, t: t_core, exp: exp_core })
+      core_entries.push(new Cores.ClsEntry(name, t_core, exp_core))
       ctx = ctx.extend(fresh_name, t_value)
 
       renaming.push([name, fresh_name])

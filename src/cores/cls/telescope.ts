@@ -13,10 +13,10 @@ import * as ut from "../../ut"
 
 export class Telescope {
   env: Env
-  entries: Array<{ name: string; t: Core; exp?: Core }>
+  entries: Array<Cores.ClsEntry>
   next?: { name: string; t: Value; value?: Value }
 
-  constructor(env: Env, entries: Array<{ name: string; t: Core; exp?: Core }>) {
+  constructor(env: Env, entries: Array<Cores.ClsEntry>) {
     this.env = env
     this.entries = entries
 
@@ -89,21 +89,21 @@ export class Telescope {
 
   readback_aux(
     ctx: Ctx,
-    entries: Array<{ name: string; t: Core; exp?: Core }>
-  ): Array<{ name: string; t: Core; exp?: Core }> {
+    entries: Array<Cores.ClsEntry>
+  ): Array<Cores.ClsEntry> {
     if (this.next === undefined) return entries
 
     const t = readback(ctx, new Cores.TypeValue(), this.next.t)
 
     if (this.next.value !== undefined) {
       const exp = readback(ctx, this.next.t, this.next.value)
-      const entry = { name: this.next.name, t, exp }
+      const entry = new Cores.ClsEntry(this.next.name, t, exp)
       return this.fill(this.next.value).readback_aux(
         ctx.extend(this.next.name, this.next.t, this.next.value),
         [...entries, entry]
       )
     } else {
-      const entry = { name: this.next.name, t }
+      const entry = new Cores.ClsEntry(this.next.name, t)
       const v = new Cores.VarNeutral(this.next.name)
       const value = new Cores.NotYetValue(this.next.t, v)
       return this.fill(value).readback_aux(
@@ -113,7 +113,7 @@ export class Telescope {
     }
   }
 
-  readback(ctx: Ctx): Array<{ name: string; t: Core; exp?: Core }> {
+  readback(ctx: Ctx): Array<Cores.ClsEntry> {
     return this.readback_aux(ctx, new Array())
   }
 

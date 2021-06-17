@@ -55,13 +55,13 @@ export class Fulfilled {
   readback_aux(
     ctx: Ctx,
     t: Value
-  ): { entries: Array<{ name: string; t: Core; exp?: Core }>; ctx: Ctx } {
-    const entries: Array<{ name: string; t: Core; exp?: Core }> = []
+  ): { entries: Array<Cores.ClsEntry>; ctx: Ctx } {
+    const entries: Array<Cores.ClsEntry> = []
 
     for (const { name, t, value } of this.entries) {
       const t_exp = readback(ctx, new Cores.TypeValue(), t)
       const exp = readback(ctx, t, value)
-      entries.push({ name, t: t_exp, exp })
+      entries.push(new Cores.ClsEntry(name, t_exp, exp))
       ctx = ctx.extend(name, t, value)
     }
 

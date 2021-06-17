@@ -5,14 +5,23 @@ import { Telescope } from "./telescope"
 import * as Cores from "../../cores"
 import * as ut from "../../ut"
 
+export class ClsEntry {
+  name: string
+  t: Core
+  exp?: Core
+
+  constructor(name: string, t: Core, exp?: Core) {
+    this.name = name
+    this.t = t
+    this.exp = exp
+  }
+}
+
 export class Cls extends Core {
-  entries: Array<{ name: string; t: Core; exp?: Core }>
+  entries: Array<ClsEntry>
   name?: string
 
-  constructor(
-    entries: Array<{ name: string; t: Core; exp?: Core }>,
-    opts?: { name?: string }
-  ) {
+  constructor(entries: Array<ClsEntry>, opts?: { name?: string }) {
     super()
     this.entries = entries
     this.name = opts?.name
