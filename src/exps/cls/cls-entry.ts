@@ -32,7 +32,8 @@ export class ClsEntry {
     return new ClsEntry(
       this.field_name,
       this.t.subst(name, exp),
-      this.exp?.subst(name, exp)
+      this.exp?.subst(name, exp),
+      this.local_name,
     )
   }
 
@@ -42,14 +43,14 @@ export class ClsEntry {
     exp: Exp
   ): Array<ClsEntry> {
     const entries: Array<ClsEntry> = new Array()
-    let occured: boolean = false
+    let shadow: boolean = false
 
     for (const entry of origin_entries) {
-      if (occured) {
+      if (shadow) {
         entries.push(entry)
       } else if (name === entry.field_name) {
         entries.push(entry.subst(name, exp))
-        occured = true
+        shadow = true
       } else {
         entries.push(entry.subst(name, exp))
       }

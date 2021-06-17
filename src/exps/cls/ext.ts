@@ -47,6 +47,13 @@ export class Ext extends Exp {
     )
   }
 
+  private renaming_reducer(
+    entry: Exps.ClsEntry,
+    [local_name, fresh_name]: [string, string]
+  ): Exps.ClsEntry {
+    return entry.subst(local_name, new Exps.Var(fresh_name))
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const parent = evaluate(ctx.to_env(), new Cores.Var(this.parent_name))
 
@@ -75,8 +82,7 @@ export class Ext extends Exp {
 
     for (const entry of entries) {
       const { field_name, local_name, t, exp } = renaming.reduce(
-        (entry, [local_name, fresh_name]) =>
-          entry.subst(local_name, new Exps.Var(fresh_name)),
+        this.renaming_reducer,
         entry
       )
 

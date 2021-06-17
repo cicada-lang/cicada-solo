@@ -1,5 +1,7 @@
 # scope
 
+- fix `Exps.ClsEntry.subst_entries`
+
 - `Exps.Cls` check field names are distinct
 - `Exps.Ext` check field names are distinct
 
@@ -7,10 +9,6 @@
 - `Cores.ClsEntry` must maintain two names -- one `field_name` one `local_name`
 
 - `Exps.Obj` ctx with distinct names
-
-- `Exps.Ext` fix `Exp.subst`
-- `Exps.Cls` fix `Exp.subst`
-- `Exps.Obj` fix `Exp.subst`
 
 - add assertion in `Ctx.extend` for distinct names
 
