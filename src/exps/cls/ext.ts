@@ -109,14 +109,8 @@ export class Ext extends Exp {
       return `class ${name} {}`
     }
 
-    const entries = this.entries.map(({ name, t, exp }) => {
-      return exp
-        ? `${name}: ${t.repr()} = ${exp.repr()}`
-        : `${name}: ${t.repr()}`
-    })
-
-    const s = entries.join("\n")
-    const body = `{\n${ut.indent(s, "  ")}\n}`
+    const entries = this.entries.map((entry) => entry.repr()).join("\n")
+    const body = `{\n${ut.indent(entries, "  ")}\n}`
     return `class ${name} extends ${this.parent_name} ${body}`
   }
 }

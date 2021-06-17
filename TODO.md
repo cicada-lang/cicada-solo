@@ -1,8 +1,10 @@
 # scope
 
-- `Exps.ClsEntry` must maintain two names -- one `field_name` one `local_name`
+- `Exps.Cls` check field names are distinct
+- `Exps.Ext` check field names are distinct
 
-- `Cores.ClsEntry` must maintain two names -- one `field_name` one `local_name`
+- `Exps.ClsEntry` must maintain two names -- one `name` one `local_name`
+- `Cores.ClsEntry` must maintain two names -- one `name` one `local_name`
 
 - `Exps.Obj` ctx with distinct names
 

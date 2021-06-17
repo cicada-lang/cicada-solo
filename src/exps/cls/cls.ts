@@ -1,3 +1,5 @@
+export { ClsEntry } from "./cls-entry"
+
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Value } from "../../value"
@@ -9,10 +11,10 @@ import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class Cls extends Exp {
-  entries: Array<ClsEntry>
+  entries: Array<Exps.ClsEntry>
   name?: string
 
-  constructor(entries: Array<ClsEntry>, opts?: { name?: string }) {
+  constructor(entries: Array<Exps.ClsEntry>, opts?: { name?: string }) {
     super()
     this.entries = entries
     this.name = opts?.name
@@ -34,7 +36,7 @@ export class Cls extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Cls(ClsEntry.subst_entries(this.entries, name, exp), {
+    return new Cls(Exps.ClsEntry.subst_entries(this.entries, name, exp), {
       name: this.name,
     })
   }
@@ -73,56 +75,7 @@ export class Cls extends Exp {
       return `class ${name} {}`
     }
 
-    const entries = this.entries.map(({ name, t, exp }) => {
-      return exp
-        ? `${name}: ${t.repr()} = ${exp.repr()}`
-        : `${name}: ${t.repr()}`
-    })
-
-    const s = entries.join("\n")
-
-    return `class ${name} {\n${ut.indent(s, "  ")}\n}`
-  }
-}
-
-export class ClsEntry {
-  name: string
-  t: Exp
-  exp?: Exp
-
-  constructor(name: string, t: Exp, exp?: Exp) {
-    this.name = name
-    this.t = t
-    this.exp = exp
-  }
-
-  subst(name: string, exp: Exp): ClsEntry {
-    return new ClsEntry(
-      this.name,
-      this.t.subst(name, exp),
-      this.exp?.subst(name, exp)
-    )
-  }
-
-  static subst_entries(
-    origin_entries: Array<ClsEntry>,
-    name: string,
-    exp: Exp
-  ): Array<ClsEntry> {
-    const entries: Array<ClsEntry> = new Array()
-    let occured: boolean = false
-
-    for (const entry of origin_entries) {
-      if (occured) {
-        entries.push(entry)
-      } else if (name === entry.name) {
-        entries.push(entry.subst(name, exp))
-        occured = true
-      } else {
-        entries.push(entry.subst(name, exp))
-      }
-    }
-
-    return entries
+    const entries = this.entries.map((entry) => entry.repr()).join("\n")
+    return `class ${name} {\n${ut.indent(entries, "  ")}\n}`
   }
 }
