@@ -33,7 +33,7 @@ export class ClsEntry {
       this.field_name,
       this.t.subst(name, exp),
       this.exp?.subst(name, exp),
-      this.local_name,
+      this.local_name
     )
   }
 
