@@ -47,13 +47,6 @@ export class Ext extends Exp {
     )
   }
 
-  private renamings_reducer(
-    entry: Exps.ClsEntry,
-    [local_name, fresh_name]: [string, string]
-  ): Exps.ClsEntry {
-    return entry.subst(local_name, new Exps.Var(fresh_name))
-  }
-
   infer(ctx: Ctx): { t: Value; core: Core } {
     const parent = evaluate(ctx.to_env(), new Cores.Var(this.parent_name))
 
@@ -77,30 +70,12 @@ export class Ext extends Exp {
       )
     )
 
-    const core_entries: Array<Cores.ClsEntry> = new Array()
-    const renamings: Array<[string, string]> = new Array()
-
-    for (const entry of entries) {
-      const { field_name, local_name, t, exp } = renamings.reduce(
-        this.renamings_reducer,
-        entry
-      )
-
-      const fresh_name = ut.freshen_name(new Set(ctx.names), field_name)
-      const t_core = check(ctx, t, new Cores.TypeValue())
-      const t_value = evaluate(ctx.to_env(), t_core)
-      const exp_core = exp ? check(ctx, exp, t_value) : undefined
-      core_entries.push(new Cores.ClsEntry(field_name, t_core, exp_core))
-      ctx = ctx.extend(fresh_name, t_value)
-
-      renamings.push([local_name, fresh_name])
-    }
-
     return {
       t: new Cores.TypeValue(),
-      core: new Cores.Cls([...parent_core.entries, ...core_entries], {
-        name: this.name,
-      }),
+      core: new Cores.Cls(
+        [...parent_core.entries, ...infer_entries(ctx, entries)],
+        { name: this.name }
+      ),
     }
   }
 
@@ -115,4 +90,26 @@ export class Ext extends Exp {
     const body = `{\n${ut.indent(entries, "  ")}\n}`
     return `class ${name} extends ${this.parent_name} ${body}`
   }
+}
+
+function infer_entries(
+  ctx: Ctx,
+  entries: Array<Exps.ClsEntry>
+): Array<Cores.ClsEntry> {
+  if (entries.length === 0) return []
+
+  const [entry, ...rest] = entries
+  const { field_name, local_name, t, exp } = entry
+  const fresh_name = ut.freshen_name(new Set(ctx.names), local_name)
+  const t_core = check(ctx, t, new Cores.TypeValue())
+  const t_value = evaluate(ctx.to_env(), t_core)
+  const exp_core = exp ? check(ctx, exp, t_value) : undefined
+
+  return [
+    new Cores.ClsEntry(field_name, t_core, exp_core),
+    ...infer_entries(
+      ctx.extend(fresh_name, t_value),
+      Exps.ClsEntry.subst_entries(rest, local_name, new Exps.Var(fresh_name))
+    ),
+  ]
 }

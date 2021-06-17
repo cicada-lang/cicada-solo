@@ -21,6 +21,12 @@ export class ClsEntry {
     this.local_name = local_name || field_name
   }
 
+  repr(): string {
+    return this.exp
+      ? `${this.field_name}: ${this.t.repr()} = ${this.exp.repr()}`
+      : `${this.field_name}: ${this.t.repr()}`
+  }
+
   free_names(bound_names: Set<string>): Set<string> {
     return new Set([
       ...this.t.free_names(bound_names),
@@ -28,7 +34,7 @@ export class ClsEntry {
     ])
   }
 
-  subst(name: string, exp: Exp, local_name?: string): ClsEntry {
+  private subst(name: string, exp: Exp, local_name?: string): ClsEntry {
     return new ClsEntry(
       this.field_name,
       this.t.subst(name, exp),
@@ -57,9 +63,25 @@ export class ClsEntry {
     }
   }
 
-  repr(): string {
-    return this.exp
-      ? `${this.field_name}: ${this.t.repr()} = ${this.exp.repr()}`
-      : `${this.field_name}: ${this.t.repr()}`
-  }
+  // static infer_entries(
+  //   ctx: Ctx,
+  //   entries: Array<Exps.ClsEntry>
+  // ): Array<Cores.ClsEntry> {
+  //   if (entries.length === 0) return []
+
+  //   const [entry, ...rest] = entries
+  //   const { field_name, local_name, t, exp } = entry
+  //   const fresh_name = ut.freshen_name(new Set(ctx.names), local_name)
+  //   const t_core = check(ctx, t, new Cores.TypeValue())
+  //   const t_value = evaluate(ctx.to_env(), t_core)
+  //   const exp_core = exp ? check(ctx, exp, t_value) : undefined
+
+  //   return [
+  //     new Cores.ClsEntry(field_name, t_core, exp_core),
+  //     ...ClsEntry.infer_entries(
+  //       ctx.extend(fresh_name, t_value),
+  //       Exps.ClsEntry.subst_entries(rest, local_name, new Exps.Var(fresh_name))
+  //     ),
+  //   ]
+  // }
 }

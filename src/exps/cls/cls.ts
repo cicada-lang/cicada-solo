@@ -37,13 +37,6 @@ export class Cls extends Exp {
     })
   }
 
-  private renamings_reducer(
-    entry: Exps.ClsEntry,
-    [local_name, fresh_name]: [string, string]
-  ): Exps.ClsEntry {
-    return entry.subst(local_name, new Exps.Var(fresh_name))
-  }
-
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Cores.TypeValue(),
