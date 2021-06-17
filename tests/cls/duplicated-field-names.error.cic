@@ -1,0 +1,6 @@
+class Test {
+  a: Nat
+  b: Nat
+  a: Nat
+  c: Nat
+}
