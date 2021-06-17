@@ -1,6 +1,7 @@
 # scope
 
 - fix `Exps.ClsEntry.subst_entries`
+- make `Exps.ClsEntry.subst` private
 
 - `Exps.Cls` check field names are distinct
 - `Exps.Ext` check field names are distinct

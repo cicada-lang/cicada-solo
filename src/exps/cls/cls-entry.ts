@@ -28,7 +28,7 @@ export class ClsEntry {
     ])
   }
 
-  private subst(name: string, exp: Exp): ClsEntry {
+  subst(name: string, exp: Exp): ClsEntry {
     return new ClsEntry(
       this.field_name,
       this.t.subst(name, exp),
@@ -42,21 +42,16 @@ export class ClsEntry {
     name: string,
     exp: Exp
   ): Array<ClsEntry> {
-    const entries: Array<ClsEntry> = new Array()
-    let shadow: boolean = false
-
-    for (const entry of origin_entries) {
-      if (shadow) {
-        entries.push(entry)
-      } else if (name === entry.field_name) {
-        entries.push(entry.subst(name, exp))
-        shadow = true
-      } else {
-        entries.push(entry.subst(name, exp))
-      }
+    if (origin_entries.length === 0) {
+      return origin_entries
     }
 
-    return entries
+    const [entry, ...tail] = origin_entries
+    if (name === entry.local_name) {
+      return [entry.subst(name, exp), ...tail]
+    } else {
+      return [entry.subst(name, exp), ...ClsEntry.subst_entries(tail, name, exp)]
+    }
   }
 
   repr(): string {
