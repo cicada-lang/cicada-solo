@@ -203,6 +203,7 @@ export class Telescope {
         ctx = ctx.extend(field_name, evaluate(env, t))
       }
     }
+
     return ctx
   }
 }

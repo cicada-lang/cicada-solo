@@ -114,7 +114,7 @@ export class ClsEntry {
     const exp_core = exp ? check(ctx, exp, t_value) : undefined
 
     return [
-      new Cores.ClsEntry(field_name, t_core, exp_core),
+      new Cores.ClsEntry(field_name, t_core, exp_core, local_name),
       ...ClsEntry.entries_infer(
         ctx.extend(fresh_name, t_value),
         Exps.ClsEntry.entries_subst(rest, local_name, new Exps.Var(fresh_name))

@@ -9,11 +9,13 @@ export class ClsEntry {
   field_name: string
   t: Core
   exp?: Core
+  local_name: string
 
-  constructor(field_name: string, t: Core, exp?: Core) {
+  constructor(field_name: string, t: Core, exp?: Core, local_name?: string) {
     this.field_name = field_name
     this.t = t
     this.exp = exp
+    this.local_name = local_name || field_name
   }
 }
 

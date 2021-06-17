@@ -2,7 +2,7 @@
 
 - `Exps.Obj` ctx with distinct names
 
-- `Cores.ClsEntry` must maintain two names -- one `field_name` one `local_name`
+- `Fulfilled` entry must maintain two names -- one `field_name` one `local_name`
 
 - add assertion in `Ctx.extend` for distinct names
 
