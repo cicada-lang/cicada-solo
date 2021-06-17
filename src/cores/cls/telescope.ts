@@ -23,9 +23,9 @@ export class Telescope {
     if (this.entries.length === 0) {
       this.next = undefined
     } else {
-      const [{ name, t, exp }] = this.entries
+      const [{ field_name, t, exp }] = this.entries
       this.next = {
-        name,
+        name: field_name,
         t: evaluate(this.env, t),
         value: exp ? evaluate(this.env, exp) : undefined,
       }
@@ -33,7 +33,7 @@ export class Telescope {
   }
 
   get names(): Array<string> {
-    return this.entries.map((entry) => entry.name)
+    return this.entries.map((entry) => entry.field_name)
   }
 
   fill(value: Value): Telescope {
@@ -195,12 +195,12 @@ export class Telescope {
   }
 
   extend_ctx(ctx: Ctx): Ctx {
-    for (const { name, t, exp } of this.entries) {
+    for (const { field_name, t, exp } of this.entries) {
       const env = ctx.to_env()
       if (exp) {
-        ctx = ctx.extend(name, evaluate(env, t), evaluate(env, exp))
+        ctx = ctx.extend(field_name, evaluate(env, t), evaluate(env, exp))
       } else {
-        ctx = ctx.extend(name, evaluate(env, t))
+        ctx = ctx.extend(field_name, evaluate(env, t))
       }
     }
     return ctx

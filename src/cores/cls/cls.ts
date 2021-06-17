@@ -6,12 +6,12 @@ import * as Cores from "../../cores"
 import * as ut from "../../ut"
 
 export class ClsEntry {
-  name: string
+  field_name: string
   t: Core
   exp?: Core
 
-  constructor(name: string, t: Core, exp?: Core) {
-    this.name = name
+  constructor(field_name: string, t: Core, exp?: Core) {
+    this.field_name = field_name
     this.t = t
     this.exp = exp
   }
@@ -40,10 +40,10 @@ export class Cls extends Core {
       return `class ${name} {}`
     }
 
-    const entries = this.entries.map(({ name, t, exp }) => {
+    const entries = this.entries.map(({ field_name, t, exp }) => {
       return exp
-        ? `${name}: ${t.repr()} = ${exp.repr()}`
-        : `${name}: ${t.repr()}`
+        ? `${field_name}: ${t.repr()} = ${exp.repr()}`
+        : `${field_name}: ${t.repr()}`
     })
 
     const s = entries.join("\n")
@@ -56,15 +56,15 @@ export class Cls extends Core {
 
     const parts = []
 
-    for (const { name, t, exp } of this.entries) {
+    for (const { field_name, t, exp } of this.entries) {
       const t_repr = t.alpha_repr(ctx)
       if (exp) {
         const exp_repr = exp.alpha_repr(ctx)
-        parts.push(`${name} : ${t_repr} = ${exp_repr}`)
+        parts.push(`${field_name} : ${t_repr} = ${exp_repr}`)
       } else {
-        parts.push(`${name} : ${t_repr}`)
+        parts.push(`${field_name} : ${t_repr}`)
       }
-      ctx = ctx.extend(name)
+      ctx = ctx.extend(field_name)
     }
 
     const s = parts.join("\n")
