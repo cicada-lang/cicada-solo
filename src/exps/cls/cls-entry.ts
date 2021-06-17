@@ -28,29 +28,32 @@ export class ClsEntry {
     ])
   }
 
-  subst(name: string, exp: Exp): ClsEntry {
+  subst(name: string, exp: Exp, local_name?: string): ClsEntry {
     return new ClsEntry(
       this.field_name,
       this.t.subst(name, exp),
       this.exp?.subst(name, exp),
-      this.local_name
+      local_name || this.local_name
     )
   }
 
   static subst_entries(
-    origin_entries: Array<ClsEntry>,
+    entries: Array<ClsEntry>,
     name: string,
     exp: Exp
   ): Array<ClsEntry> {
-    if (origin_entries.length === 0) {
-      return origin_entries
-    }
+    if (entries.length === 0) return []
 
-    const [entry, ...tail] = origin_entries
+    let [entry, ...rest] = entries
     if (name === entry.local_name) {
-      return [entry.subst(name, exp), ...tail]
+      return [entry.subst(name, exp), ...rest]
     } else {
-      return [entry.subst(name, exp), ...ClsEntry.subst_entries(tail, name, exp)]
+      const free_names = exp.free_names(new Set())
+      const fresh_name = ut.freshen_name(free_names, entry.local_name)
+      const v = new Exps.Var(fresh_name)
+      rest = ClsEntry.subst_entries(rest, entry.local_name, v)
+      rest = ClsEntry.subst_entries(rest, name, exp)
+      return [entry.subst(name, exp, fresh_name), ...rest]
     }
   }
 

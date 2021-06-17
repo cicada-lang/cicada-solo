@@ -34,12 +34,11 @@ export class Let extends Exp {
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
-      const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
 
       return new Let(
         fresh_name,
         this.exp.subst(name, exp),
-        ret.subst(name, exp)
+        this.ret.subst(this.name, new Exps.Var(fresh_name)).subst(name, exp)
       )
     }
   }
