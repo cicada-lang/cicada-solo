@@ -1,5 +1,9 @@
 # scope
 
+- [test] `Exps.Cls` ctx without distinct names
+- [test] `Exps.Ext` ctx without distinct names
+- [test] `Exps.Obj` ctx without distinct names
+
 - `Exps.Obj` ctx with distinct names
 
 - `Exps.Cls` & `Exps.Ext` extract `ClsEntry`
