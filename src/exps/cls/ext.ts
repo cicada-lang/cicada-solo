@@ -9,16 +9,15 @@ import { Trace } from "../../trace"
 import * as Cores from "../../cores"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
-import { ClsEntry } from "./cls-entry"
 
 export class Ext extends Exp {
   name?: string
   parent_name: string
-  entries: Array<ClsEntry>
+  entries: Array<Exps.ClsEntry>
 
   constructor(
     parent_name: string,
-    entries: Array<ClsEntry>,
+    entries: Array<Exps.ClsEntry>,
     opts?: { name?: string }
   ) {
     super()
@@ -45,7 +44,7 @@ export class Ext extends Exp {
   subst(name: string, exp: Exp): Exp {
     return new Ext(
       this.parent_name,
-      ClsEntry.subst_entries(this.entries, name, exp),
+      Exps.ClsEntry.subst_entries(this.entries, name, exp),
       {
         name: this.name,
       }
@@ -67,7 +66,7 @@ export class Ext extends Exp {
       throw new Trace(`Expecting parent_core to be Cls`)
     }
 
-    const entries = ClsEntry.subst_entries(
+    const entries = Exps.ClsEntry.subst_entries(
       this.entries,
       "super",
       new Exps.Obj(

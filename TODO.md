@@ -1,6 +1,10 @@
 # scope
 
-- `ClsEntry` must maintain two names -- one `field_name` one `local_name`
+- `Cores.Cls` extract `Cores.ClsEntry`
+
+- `Exps.ClsEntry` must maintain two names -- one `field_name` one `local_name`
+
+- `Cores.ClsEntry` must maintain two names -- one `field_name` one `local_name`
 
 - `Exps.Obj` ctx with distinct names
 
