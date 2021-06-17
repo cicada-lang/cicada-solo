@@ -1,14 +1,10 @@
 # scope
 
-- [test] `Exps.Cls` ctx without distinct names
-- [test] `Exps.Ext` ctx without distinct names
-- [test] `Exps.Obj` ctx without distinct names
-
-- `Exps.Obj` ctx with distinct names
-
 - `Exps.Cls` & `Exps.Ext` extract `ClsEntry`
 
 - `ClsEntry` must maintain two names -- one `field_name` one `local_name`
+
+- `Exps.Obj` ctx with distinct names
 
 - `Exps.Ext` fix `Exp.subst`
 - `Exps.Cls` fix `Exp.subst`

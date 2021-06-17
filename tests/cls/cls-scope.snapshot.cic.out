@@ -1,0 +1,12 @@
+{
+  X: String
+  a: 1
+  b: "b"
+  equal: same
+}: class Test {
+  X: Type = String
+  a: Nat
+  b: String
+  equal: Equal(Type, String, String)
+} 
+
