@@ -11,34 +11,34 @@ import * as Cores from "../../cores"
 import * as ut from "../../ut"
 
 export class Fulfilled {
-  entries: Array<{ name: string; t: Value; value: Value }>
+  entries: Array<{ field_name: string; t: Value; value: Value }>
 
   constructor(
-    entries: Array<{ name: string; t: Value; value: Value }> = new Array()
+    entries: Array<{ field_name: string; t: Value; value: Value }> = new Array()
   ) {
     this.entries = entries
   }
 
-  fill_entry(name: string, t: Value, value: Value): Fulfilled {
-    return new Fulfilled([...this.entries, { name, t, value }])
+  fill_entry(field_name: string, t: Value, value: Value): Fulfilled {
+    return new Fulfilled([...this.entries, { field_name, t, value }])
   }
 
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
     const cores: Map<string, Core> = new Map()
 
-    for (const { name, t, value } of this.entries) {
-      const found = properties.get(name)
+    for (const { field_name, t, value } of this.entries) {
+      const found = properties.get(field_name)
 
       if (found === undefined) {
         throw new Trace(
           ut.aline(`
-            |Can not found satisfied entry name: ${name}
+            |Can not found satisfied field_name: ${field_name}
             |`)
         )
       }
 
       const found_core = check(ctx, found, t)
-      cores.set(name, found_core)
+      cores.set(field_name, found_core)
       const found_value = evaluate(ctx.to_env(), found_core)
 
       check_conversion(ctx, t, value, found_value, {
@@ -58,11 +58,11 @@ export class Fulfilled {
   ): { entries: Array<Cores.ClsEntry>; ctx: Ctx } {
     const entries: Array<Cores.ClsEntry> = []
 
-    for (const { name, t, value } of this.entries) {
+    for (const { field_name, t, value } of this.entries) {
       const t_exp = readback(ctx, new Cores.TypeValue(), t)
       const exp = readback(ctx, t, value)
-      entries.push(new Cores.ClsEntry(name, t_exp, exp))
-      ctx = ctx.extend(name, t, value)
+      entries.push(new Cores.ClsEntry(field_name, t_exp, exp))
+      ctx = ctx.extend(field_name, t, value)
     }
 
     return { entries, ctx }
@@ -72,7 +72,7 @@ export class Fulfilled {
     const properties = new Map()
 
     for (const entry of this.entries) {
-      const property_value = Cores.Dot.apply(value, entry.name)
+      const property_value = Cores.Dot.apply(value, entry.field_name)
 
       check_conversion(ctx, entry.t, property_value, entry.value, {
         description: {
@@ -82,7 +82,7 @@ export class Fulfilled {
       })
 
       const property_exp = readback(ctx, entry.t, property_value)
-      properties.set(entry.name, property_exp)
+      properties.set(entry.field_name, property_exp)
     }
 
     return properties
@@ -90,7 +90,7 @@ export class Fulfilled {
 
   dot_type(target: Value, name: string): undefined | Value {
     for (const entry of this.entries) {
-      if (entry.name === name) {
+      if (name === entry.field_name) {
         return entry.t
       }
     }
@@ -100,7 +100,7 @@ export class Fulfilled {
 
   dot_value(target: Value, name: string): undefined | Value {
     for (const entry of this.entries) {
-      if (entry.name === name) {
+      if (name === entry.field_name) {
         return entry.value
       }
     }
@@ -109,12 +109,12 @@ export class Fulfilled {
   }
 
   get names(): Array<string> {
-    return this.entries.map((entry) => entry.name)
+    return this.entries.map((entry) => entry.field_name)
   }
 
   extend_ctx(ctx: Ctx): Ctx {
-    for (const { name, t, value } of this.entries) {
-      ctx = ctx.extend(name, t, value)
+    for (const { field_name, t, value } of this.entries) {
+      ctx = ctx.extend(field_name, t, value)
     }
 
     return ctx

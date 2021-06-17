@@ -1,8 +1,9 @@
 # scope
 
-- `Exps.Obj` ctx with distinct names
+- use `FulfilledEntry`
+- `FulfilledEntry` entry must maintain two names -- one `field_name` one `local_name`
 
-- `Fulfilled` entry must maintain two names -- one `field_name` one `local_name`
+- `Exps.Obj` ctx with distinct names
 
 - add assertion in `Ctx.extend` for distinct names
 
