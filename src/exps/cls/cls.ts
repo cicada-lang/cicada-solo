@@ -21,18 +21,11 @@ export class Cls extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    let free_names: Set<string> = new Set()
-
-    for (const entry of this.entries) {
-      free_names = new Set([...free_names, ...entry.free_names(bound_names)])
-      bound_names = new Set([...bound_names, entry.local_name])
-    }
-
-    return free_names
+    return Exps.ClsEntry.entries_free_names(this.entries, bound_names)
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Cls(Exps.ClsEntry.subst_entries(this.entries, name, exp), {
+    return new Cls(Exps.ClsEntry.entries_subst(this.entries, name, exp), {
       name: this.name,
     })
   }
@@ -40,7 +33,7 @@ export class Cls extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Cores.TypeValue(),
-      core: new Cores.Cls(Exps.ClsEntry.infer_entries(ctx, this.entries), {
+      core: new Cores.Cls(Exps.ClsEntry.entries_infer(ctx, this.entries), {
         name: this.name,
       }),
     }

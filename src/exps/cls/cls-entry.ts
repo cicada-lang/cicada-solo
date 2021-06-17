@@ -34,6 +34,20 @@ export class ClsEntry {
     ])
   }
 
+  static entries_free_names(
+    entries: Array<ClsEntry>,
+    bound_names: Set<string>
+  ): Set<string> {
+    let free_names: Set<string> = new Set()
+
+    for (const entry of entries) {
+      free_names = new Set([...free_names, ...entry.free_names(bound_names)])
+      bound_names = new Set([...bound_names, entry.local_name])
+    }
+
+    return free_names
+  }
+
   private subst(name: string, exp: Exp, local_name?: string): ClsEntry {
     return new ClsEntry(
       this.field_name,
@@ -43,7 +57,7 @@ export class ClsEntry {
     )
   }
 
-  static subst_entries(
+  static entries_subst(
     entries: Array<ClsEntry>,
     name: string,
     exp: Exp
@@ -57,13 +71,13 @@ export class ClsEntry {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, entry.local_name)
       const v = new Exps.Var(fresh_name)
-      rest = ClsEntry.subst_entries(rest, entry.local_name, v)
-      rest = ClsEntry.subst_entries(rest, name, exp)
+      rest = ClsEntry.entries_subst(rest, entry.local_name, v)
+      rest = ClsEntry.entries_subst(rest, name, exp)
       return [entry.subst(name, exp, fresh_name), ...rest]
     }
   }
 
-  static infer_entries(
+  static entries_infer(
     ctx: Ctx,
     entries: Array<Exps.ClsEntry>
   ): Array<Cores.ClsEntry> {
@@ -78,9 +92,9 @@ export class ClsEntry {
 
     return [
       new Cores.ClsEntry(field_name, t_core, exp_core),
-      ...ClsEntry.infer_entries(
+      ...ClsEntry.entries_infer(
         ctx.extend(fresh_name, t_value),
-        Exps.ClsEntry.subst_entries(rest, local_name, new Exps.Var(fresh_name))
+        Exps.ClsEntry.entries_subst(rest, local_name, new Exps.Var(fresh_name))
       ),
     ]
   }

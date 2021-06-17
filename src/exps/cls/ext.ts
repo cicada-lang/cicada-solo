@@ -27,20 +27,13 @@ export class Ext extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    let free_names: Set<string> = new Set()
-
-    for (const entry of this.entries) {
-      free_names = new Set([...free_names, ...entry.free_names(bound_names)])
-      bound_names = new Set([...bound_names, entry.local_name])
-    }
-
-    return free_names
+    return Exps.ClsEntry.entries_free_names(this.entries, bound_names)
   }
 
   subst(name: string, exp: Exp): Exp {
     return new Ext(
       this.parent_name,
-      Exps.ClsEntry.subst_entries(this.entries, name, exp),
+      Exps.ClsEntry.entries_subst(this.entries, name, exp),
       {
         name: this.name,
       }
@@ -62,7 +55,7 @@ export class Ext extends Exp {
       throw new Trace(`Expecting parent_core to be Cls`)
     }
 
-    const entries = Exps.ClsEntry.subst_entries(
+    const entries = Exps.ClsEntry.entries_subst(
       this.entries,
       "super",
       new Exps.Obj(
@@ -73,7 +66,7 @@ export class Ext extends Exp {
     return {
       t: new Cores.TypeValue(),
       core: new Cores.Cls(
-        [...parent_core.entries, ...Exps.ClsEntry.infer_entries(ctx, entries)],
+        [...parent_core.entries, ...Exps.ClsEntry.entries_infer(ctx, entries)],
         { name: this.name }
       ),
     }
