@@ -1,6 +1,6 @@
 > first class record type -- to replace current implementation of `class`
 
-- `cls2` -- exp -- obj -- `check`
+- `cls2` -- exp -- obj -- `check` -- `SpreadProp2.expend`
 
 - `cls2` -- exp -- dot
 - `cls2` -- core -- dot

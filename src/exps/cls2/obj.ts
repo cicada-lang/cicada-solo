@@ -31,17 +31,16 @@ export class Obj2 extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    throw new Error()
-    // const properties = new Map(
-    //   this.properties.flatMap((prop) => prop.expand(ctx))
-    // )
+    const properties = new Map(
+      this.properties.flatMap((prop) => prop.expand(ctx))
+    )
 
-    // if (t instanceof Cores.ClsValue) {
-    //   const core_properties = t.check_properties(ctx, properties)
-    //   return new Cores.Obj(core_properties)
-    // }
+    if (t instanceof Cores.Cls2Value) {
+      const core_properties = t.check_properties(ctx, properties)
+      return new Cores.Obj2(core_properties)
+    }
 
-    // throw new Trace(`Expecting t to be ClsValue`)
+    throw new Trace(`Expecting t to be ClsValue`)
   }
 
   repr(): string {
