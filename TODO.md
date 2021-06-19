@@ -1,8 +1,9 @@
 > first class record type -- to replace current implementation of `class`
 
-- `cls2` -- value -- cons
+- `cls2` -- core -- cons -- `repr`
+- `cls2` -- core -- cons -- `alpha_repr`
 
-- `cls2` -- core -- cons
+- `cls2` -- value -- cons -- `readback`
 
 - `cls2` -- exp -- nil -- infer
 - `cls2` -- exp -- cons -- infer

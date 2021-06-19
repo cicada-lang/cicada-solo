@@ -20,3 +20,25 @@ export class ClsNilValue extends Cls2Value {
 
   // eta_expand(ctx: Ctx, value: Value): Core {}
 }
+
+export class ClsConsValue extends Cls2Value {
+  field_name: string
+  field_t: Value
+  rest_t_cl: Closure
+
+  constructor(field_name: string, field_t: Value, rest_t_cl: Closure) {
+    super()
+    this.field_name = field_name
+    this.field_t = field_t
+    this.rest_t_cl = rest_t_cl
+  }
+
+  readback(ctx: Ctx, t: Value): Core | undefined {
+    if (t instanceof Cores.TypeValue) {
+      // TODO
+      return new Cores.ClsNil()
+    }
+  }
+
+  // eta_expand(ctx: Ctx, value: Value): Core {}
+}
