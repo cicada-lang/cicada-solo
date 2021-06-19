@@ -99,7 +99,7 @@ export class ClsCons extends Cls2 {
   }
 
   repr(): string {
-    const fields = this.fields_repr().join()
+    const fields = this.fields_repr().join("\n")
     return `class {\n${ut.indent(fields, "  ")}\n}`
   }
 

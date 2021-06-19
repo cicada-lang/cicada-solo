@@ -10,6 +10,7 @@ export abstract class Cls2 extends Core {
   instanceofCoresCls2 = true
 
   abstract fields_repr(): Array<string>
+  abstract fields_alpha_repr(ctx: AlphaCtx): Array<string>
 }
 
 export class ClsNil extends Cls2 {
@@ -23,6 +24,10 @@ export class ClsNil extends Cls2 {
 
   repr(): string {
     return `class {}`
+  }
+
+  fields_alpha_repr(ctx: AlphaCtx): Array<string> {
+    return []
   }
 
   alpha_repr(ctx: AlphaCtx): string {
@@ -65,11 +70,19 @@ export class ClsCons extends Cls2 {
   }
 
   repr(): string {
-    const fields = this.fields_repr().join()
+    const fields = this.fields_repr().join("\n")
     return `class {\n${ut.indent(fields, "  ")}\n}`
   }
 
+  fields_alpha_repr(ctx: AlphaCtx): Array<string> {
+    return [
+      `${this.field_name}: ${this.field_t.alpha_repr(ctx)}`,
+      ...this.rest_t.fields_alpha_repr(ctx.extend(this.local_name)),
+    ]
+  }
+
   alpha_repr(ctx: AlphaCtx): string {
-    throw new Error()
+    const fields = this.fields_alpha_repr(ctx).join("\n")
+    return `class {\n${ut.indent(fields, "  ")}\n}`
   }
 }
