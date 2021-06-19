@@ -7,7 +7,7 @@ import * as Cores from "../../cores"
 import * as ut from "../../ut"
 
 export abstract class Cls2 extends Core {
-  instanceofCoresCls2 = true
+  // instanceofCoresCls2 = true
 }
 
 export class ClsNil extends Cls2 {
@@ -28,13 +28,13 @@ export class ClsCons extends Cls2 {
   field_name: string
   local_name: string
   field_t: Core
-  rest_t: Cls2
+  rest_t: Core
 
   constructor(
     field_name: string,
     local_name: string,
     field_t: Core,
-    rest_t: Cls2
+    rest_t: Core
   ) {
     super()
     this.field_name = field_name

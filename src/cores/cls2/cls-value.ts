@@ -7,6 +7,8 @@ import * as ut from "../../ut"
 import * as Cores from "../../cores"
 
 export abstract class Cls2Value extends Value {
+  // instanceofCoresCls2Value = true
+
   abstract readback(ctx: Ctx, t: Value): Core | undefined
   eta_expand?(ctx: Ctx, value: Value): Core
 }

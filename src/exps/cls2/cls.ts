@@ -9,7 +9,7 @@ import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export abstract class Cls2 extends Exp {
-  instanceofExpsCls2 = true
+  // instanceofExpsCls2 = true
 
   abstract fields_repr(): Array<string>
   abstract subst(name: string, exp: Exp): Cls2
@@ -34,7 +34,10 @@ export class ClsNil extends Cls2 {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    return new Cores.TypeValue()
+    return {
+      t: new Cores.TypeValue(),
+      core: new Cores.ClsNil(),
+    }
   }
 }
 
@@ -100,6 +103,24 @@ export class ClsCons extends Cls2 {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    return new Cores.TypeValue()
+    const fresh_name = ut.freshen_name(new Set(ctx.names), this.local_name)
+    const field_t_core = check(ctx, this.field_t, new Cores.TypeValue())
+    const field_t_value = evaluate(ctx.to_env(), field_t_core)
+    const rest_t = this.rest_t.subst(this.local_name, new Exps.Var(fresh_name))
+    const rest_t_core = check(
+      ctx.extend(fresh_name, field_t_value),
+      rest_t,
+      new Cores.TypeValue()
+    )
+
+    return {
+      t: new Cores.TypeValue(),
+      core: new Cores.ClsCons(
+        this.field_name,
+        fresh_name,
+        field_t_core,
+        rest_t_core
+      ),
+    }
   }
 }

@@ -1,7 +1,5 @@
 > first class record type -- to replace current implementation of `class`
 
-- `cls2` -- exp -- cons -- `infer`
-
 - `cls2` -- core -- cons -- `repr`
 - `cls2` -- core -- cons -- `alpha_repr`
 
