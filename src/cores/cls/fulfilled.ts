@@ -61,11 +61,11 @@ export class Fulfilled {
   ): { entries: Array<Cores.ClsEntry>; ctx: Ctx } {
     const entries: Array<Cores.ClsEntry> = []
 
-    for (const { field_name, t, value } of this.entries) {
-      const t_exp = readback(ctx, new Cores.TypeValue(), t)
-      const exp = readback(ctx, t, value)
-      entries.push(new Cores.ClsEntry(field_name, t_exp, exp))
-      ctx = ctx.extend(field_name, t, value)
+    for (const { field_name, local_name, t, value } of this.entries) {
+      const t_core = readback(ctx, new Cores.TypeValue(), t)
+      const core = readback(ctx, t, value)
+      entries.push(new Cores.ClsEntry(field_name, t_core, core, local_name))
+      ctx = ctx.extend(local_name, t, value)
     }
 
     return { entries, ctx }
@@ -116,8 +116,8 @@ export class Fulfilled {
   }
 
   extend_ctx(ctx: Ctx): Ctx {
-    for (const { field_name, t, value } of this.entries) {
-      ctx = ctx.extend(field_name, t, value)
+    for (const { field_name, local_name, t, value } of this.entries) {
+      ctx = ctx.extend(local_name, t, value)
     }
 
     return ctx

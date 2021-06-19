@@ -1,6 +1,6 @@
 # scope
 
-- `FulfilledEntry` must maintain two names -- one `field_name` one `local_name`
+- fix the use of `Fulfilled.fill_entry`
 
 - `Exps.Obj` ctx with distinct names
 
