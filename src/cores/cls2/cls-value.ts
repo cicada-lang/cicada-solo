@@ -20,6 +20,10 @@ export class ClsNilValue extends Cls2Value {
       return new Cores.ClsNil()
     }
   }
+
+  // eta_expand(ctx: Ctx, value: Value): Core {
+  //   // TODO
+  // }
 }
 
 export class ClsConsValue extends Cls2Value {
@@ -59,5 +63,7 @@ export class ClsConsValue extends Cls2Value {
     }
   }
 
-  // eta_expand(ctx: Ctx, value: Value): Core {}
+  // eta_expand(ctx: Ctx, value: Value): Core {
+  //   // TODO
+  // }
 }

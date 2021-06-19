@@ -1,5 +1,15 @@
 > first class record type -- to replace current implementation of `class`
 
+- `cls2` -- exp -- obj
+- `cls2` -- exp -- dot
+
+- `cls2` -- core -- obj
+- `cls2` -- core -- dot
+
+- `cls2` -- value -- obj
+- `cls2` -- neutral -- dot
+
+- `cls2` -- value -- nil -- `eta_expand`
 - `cls2` -- value -- cons -- `eta_expand`
 
 # scope
