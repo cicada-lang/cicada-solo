@@ -9,8 +9,11 @@ import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export abstract class Cls2 extends Exp {
+  instanceofExpsCls2 = true
+
   abstract fields_repr(): Array<string>
   abstract subst(name: string, exp: Exp): Cls2
+  abstract infer(ctx: Ctx): { t: Value; core: Core }
 }
 
 export class ClsNil extends Cls2 {
@@ -27,7 +30,7 @@ export class ClsNil extends Cls2 {
   }
 
   repr(): string {
-    return `{}`
+    return `class {}`
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
@@ -93,7 +96,7 @@ export class ClsCons extends Cls2 {
 
   repr(): string {
     const fields = this.fields_repr().join()
-    return `{\n${ut.indent(fields, "  ")}\n}`
+    return `class {\n${ut.indent(fields, "  ")}\n}`
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
