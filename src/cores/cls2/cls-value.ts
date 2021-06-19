@@ -13,6 +13,7 @@ import * as Cores from "../../cores"
 export abstract class Cls2Value extends Value {
   instanceofCoresCls2Value = true
 
+  abstract names: Array<string>
   abstract readback(ctx: Ctx, t: Value): Core | undefined
   abstract check_properties(
     ctx: Ctx,
@@ -22,6 +23,10 @@ export abstract class Cls2Value extends Value {
 }
 
 export class ClsNilValue extends Cls2Value {
+  get names(): Array<string> {
+    return []
+  }
+
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
     return new Map()
   }
@@ -47,6 +52,11 @@ export class ClsConsValue extends Cls2Value {
     this.field_name = field_name
     this.field_t = field_t
     this.rest_t_cl = rest_t_cl
+  }
+
+  get names(): Array<string> {
+    // TODO
+    return [this.field_name]
   }
 
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
