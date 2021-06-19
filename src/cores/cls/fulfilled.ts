@@ -10,17 +10,20 @@ import { Trace } from "../../trace"
 import * as Cores from "../../cores"
 import * as ut from "../../ut"
 
-export class Fulfilled {
-  entries: Array<{ field_name: string; t: Value; value: Value }>
+import { FulfilledEntry } from "./fulfilled-entry"
 
-  constructor(
-    entries: Array<{ field_name: string; t: Value; value: Value }> = new Array()
-  ) {
+export class Fulfilled {
+  entries: Array<FulfilledEntry>
+
+  constructor(entries: Array<FulfilledEntry> = new Array()) {
     this.entries = entries
   }
 
   fill_entry(field_name: string, t: Value, value: Value): Fulfilled {
-    return new Fulfilled([...this.entries, { field_name, t, value }])
+    return new Fulfilled([
+      ...this.entries,
+      new FulfilledEntry(field_name, t, value),
+    ])
   }
 
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
