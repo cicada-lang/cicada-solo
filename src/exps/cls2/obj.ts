@@ -25,7 +25,9 @@ export class Obj2 extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Obj2(this.properties.map((property) => property.subst(name, exp)))
+    return new Obj2(
+      this.properties.map((property) => property.subst(name, exp))
+    )
   }
 
   check(ctx: Ctx, t: Value): Core {

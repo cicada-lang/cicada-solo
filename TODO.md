@@ -1,6 +1,5 @@
 > first class record type -- to replace current implementation of `class`
 
-- `cls2` -- value -- obj
 - `cls2` -- exp -- obj -- `check`
 
 - `cls2` -- exp -- dot
