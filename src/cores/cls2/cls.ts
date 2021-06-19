@@ -7,12 +7,18 @@ import * as Cores from "../../cores"
 import * as ut from "../../ut"
 
 export abstract class Cls2 extends Core {
-  // instanceofCoresCls2 = true
+  instanceofCoresCls2 = true
+
+  abstract fields_repr(): Array<string>
 }
 
 export class ClsNil extends Cls2 {
   evaluate(env: Env): Value {
     return new Cores.ClsNilValue()
+  }
+
+  fields_repr(): Array<string> {
+    return []
   }
 
   repr(): string {
@@ -28,13 +34,13 @@ export class ClsCons extends Cls2 {
   field_name: string
   local_name: string
   field_t: Core
-  rest_t: Core
+  rest_t: Cls2
 
   constructor(
     field_name: string,
     local_name: string,
     field_t: Core,
-    rest_t: Core
+    rest_t: Cls2
   ) {
     super()
     this.field_name = field_name
@@ -51,8 +57,16 @@ export class ClsCons extends Cls2 {
     )
   }
 
+  fields_repr(): Array<string> {
+    return [
+      `${this.field_name}: ${this.field_t.repr()}`,
+      ...this.rest_t.fields_repr(),
+    ]
+  }
+
   repr(): string {
-    throw new Error()
+    const fields = this.fields_repr().join()
+    return `class {\n${ut.indent(fields, "  ")}\n}`
   }
 
   alpha_repr(ctx: AlphaCtx): string {

@@ -4,12 +4,13 @@ import { Ctx } from "../../ctx"
 import { check } from "../../check"
 import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
+import { Trace } from "../../trace"
 import * as Cores from "../../cores"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export abstract class Cls2 extends Exp {
-  // instanceofExpsCls2 = true
+  instanceofExpsCls2 = true
 
   abstract fields_repr(): Array<string>
   abstract subst(name: string, exp: Exp): Cls2
@@ -112,6 +113,10 @@ export class ClsCons extends Cls2 {
       rest_t,
       new Cores.TypeValue()
     )
+
+    if (!(rest_t_core instanceof Cores.Cls2)) {
+      throw new Trace("I expect rest_t_core to be Cores.Cls2")
+    }
 
     return {
       t: new Cores.TypeValue(),
