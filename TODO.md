@@ -1,10 +1,12 @@
+- first class Record Type -- to replace current implementation of `class`
+
 # scope
 
-- refactoring `Telescope` for `Exps.Obj`
+- The `readback` of `Telescope` and `Fulfilled` might be wrong,
+  because after `fresh_name` is introduced -- for ctx with distinct names,
+  no subst for `Core` is done.
 
 - `Exps.Obj` ctx with distinct names
-
-- add assertion in `Ctx.extend` for distinct names
 
 - use `Exp.subst` to handle problem about the scope
 

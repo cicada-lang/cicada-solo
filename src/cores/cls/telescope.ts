@@ -103,27 +103,32 @@ export class Telescope {
 
     if (this.next.value !== undefined) {
       const exp = readback(ctx, this.next.t, this.next.value)
-      const entry = new Cores.ClsEntry(
-        this.next.field_name,
-        t,
-        exp,
+      const fresh_name = ut.freshen_name(
+        new Set(ctx.names),
         this.next.local_name
       )
+      const entry = new Cores.ClsEntry(this.next.field_name, t, exp, fresh_name)
       return this.fill(this.next.value).readback_aux(
-        ctx.extend(this.next.local_name, this.next.t, this.next.value),
+        ctx.extend(fresh_name, this.next.t, this.next.value),
         [...entries, entry]
       )
     } else {
+      const fresh_name = ut.freshen_name(
+        new Set(ctx.names),
+        this.next.local_name
+      )
       const entry = new Cores.ClsEntry(
         this.next.field_name,
         t,
         undefined,
-        this.next.local_name
+        fresh_name
       )
-      const v = new Cores.VarNeutral(this.next.local_name)
-      const value = new Cores.NotYetValue(this.next.t, v)
-      return this.fill(value).readback_aux(
-        ctx.extend(this.next.local_name, this.next.t),
+      const variable = new Cores.NotYetValue(
+        this.next.t,
+        new Cores.VarNeutral(fresh_name)
+      )
+      return this.fill(variable).readback_aux(
+        ctx.extend(fresh_name, this.next.t),
         [...entries, entry]
       )
     }

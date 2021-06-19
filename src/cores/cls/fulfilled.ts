@@ -67,10 +67,11 @@ export class Fulfilled {
     const entries: Array<Cores.ClsEntry> = []
 
     for (const { field_name, local_name, t, value } of this.entries) {
+      const fresh_name = ut.freshen_name(new Set(ctx.names), local_name)
       const t_core = readback(ctx, new Cores.TypeValue(), t)
       const core = readback(ctx, t, value)
-      entries.push(new Cores.ClsEntry(field_name, t_core, core, local_name))
-      ctx = ctx.extend(local_name, t, value)
+      entries.push(new Cores.ClsEntry(field_name, t_core, core, fresh_name))
+      ctx = ctx.extend(fresh_name, t, value)
     }
 
     return { entries, ctx }

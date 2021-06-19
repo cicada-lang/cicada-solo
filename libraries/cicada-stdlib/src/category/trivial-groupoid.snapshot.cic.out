@@ -36,12 +36,12 @@
   inv_iso: (x: Object) -> (y: Object) -> (f: Morphism(x)(y)) -> class Isomorphism {
     cat: class Category {
       Object: Type
-      Morphism: (dom: Object) -> (cod: Object) -> Type
-      id: (x1: Object) -> Morphism(x1)(x1)
-      compose: (x1: Object) -> (y1: Object) -> (z: Object) -> (f1: Morphism(x1)(y1)) -> (g: Morphism(y1)(z)) -> Morphism(x1)(z)
-      id_left: (x1: Object) -> (y1: Object) -> (f1: Morphism(x1)(y1)) -> Equal(Morphism(x1)(y1), compose(x1)(x1)(y1)(id(x1))(f1), f1)
-      id_right: (x1: Object) -> (y1: Object) -> (f1: Morphism(x1)(y1)) -> Equal(Morphism(x1)(y1), compose(x1)(y1)(y1)(f1)(id(y1)), f1)
-      compose_associative: (x1: Object) -> (y1: Object) -> (z: Object) -> (w: Object) -> (f1: Morphism(x1)(y1)) -> (g: Morphism(y1)(z)) -> (h: Morphism(z)(w)) -> Equal(Morphism(x1)(w), compose(x1)(y1)(w)(f1)(compose(y1)(z)(w)(g)(h)), compose(x1)(z)(w)(compose(x1)(y1)(z)(f1)(g))(h))
+      Morphism: (dom: Object1) -> (cod: Object1) -> Type
+      id: (x1: Object1) -> Morphism1(x1)(x1)
+      compose: (x1: Object1) -> (y1: Object1) -> (z: Object1) -> (f1: Morphism1(x1)(y1)) -> (g: Morphism1(y1)(z)) -> Morphism1(x1)(z)
+      id_left: (x1: Object1) -> (y1: Object1) -> (f1: Morphism1(x1)(y1)) -> Equal(Morphism1(x1)(y1), compose1(x1)(x1)(y1)(id1(x1))(f1), f1)
+      id_right: (x1: Object1) -> (y1: Object1) -> (f1: Morphism1(x1)(y1)) -> Equal(Morphism1(x1)(y1), compose1(x1)(y1)(y1)(f1)(id1(y1)), f1)
+      compose_associative: (x1: Object1) -> (y1: Object1) -> (z: Object1) -> (w: Object1) -> (f1: Morphism1(x1)(y1)) -> (g: Morphism1(y1)(z)) -> (h: Morphism1(z)(w)) -> Equal(Morphism1(x1)(w), compose1(x1)(y1)(w)(f1)(compose1(y1)(z)(w)(g)(h)), compose1(x1)(z)(w)(compose1(x1)(y1)(z)(f1)(g))(h))
     } = {
       Object: Object
       Morphism: (dom) => (cod) => Morphism(dom)(cod)
