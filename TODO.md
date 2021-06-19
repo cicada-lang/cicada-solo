@@ -1,4 +1,8 @@
-- first class Record Type -- to replace current implementation of `class`
+> first class record type -- to replace current implementation of `class`
+
+- `cls2` -- core
+- `cls2` -- value
+- `cls2` -- exp -- infer
 
 # scope
 

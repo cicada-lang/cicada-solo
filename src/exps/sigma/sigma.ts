@@ -33,12 +33,11 @@ export class Sigma extends Exp {
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
-      const cdr_t = this.cdr_t.subst(this.name, new Exps.Var(fresh_name))
 
       return new Sigma(
         fresh_name,
         this.car_t.subst(name, exp),
-        cdr_t.subst(name, exp)
+        this.cdr_t.subst(this.name, new Exps.Var(fresh_name)).subst(name, exp)
       )
     }
   }
