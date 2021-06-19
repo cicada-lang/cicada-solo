@@ -1,5 +1,7 @@
 # scope
 
+- refactoring `Telescope` for `Exps.Obj`
+
 - `Exps.Obj` ctx with distinct names
 
 - add assertion in `Ctx.extend` for distinct names

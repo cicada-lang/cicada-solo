@@ -47,9 +47,9 @@ export class Ext extends Exp {
       throw new Trace(`Expecting parent to be ClsValue`)
     }
 
-    ctx = parent.extend_ctx(ctx)
-
     const parent_core = readback(ctx, new Cores.TypeValue(), parent)
+
+    ctx = parent.extend_ctx(ctx)
 
     if (!(parent_core instanceof Cores.Cls)) {
       throw new Trace(`Expecting parent_core to be Cls`)

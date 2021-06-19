@@ -22,6 +22,19 @@ export class Ctx {
   }
 
   extend(name: string, t: Value, value?: Value): Ctx {
+    // TODO
+    // if (this.names.includes(name)) {
+    //   throw new Trace(
+    //     [
+    //       `The names in ctx must be distinct.`,
+    //       `But I found duplicated name:`,
+    //       `  ${name}`,
+    //       `existing names:`,
+    //       `  ${this.names.join(", ")}`,
+    //     ].join("\n") + "\n"
+    //   )
+    // }
+
     return new Ctx([...this.entries, { name, t, value }])
   }
 

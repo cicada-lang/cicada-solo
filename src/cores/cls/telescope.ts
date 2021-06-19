@@ -103,17 +103,27 @@ export class Telescope {
 
     if (this.next.value !== undefined) {
       const exp = readback(ctx, this.next.t, this.next.value)
-      const entry = new Cores.ClsEntry(this.next.field_name, t, exp)
+      const entry = new Cores.ClsEntry(
+        this.next.field_name,
+        t,
+        exp,
+        this.next.local_name
+      )
       return this.fill(this.next.value).readback_aux(
-        ctx.extend(this.next.field_name, this.next.t, this.next.value),
+        ctx.extend(this.next.local_name, this.next.t, this.next.value),
         [...entries, entry]
       )
     } else {
-      const entry = new Cores.ClsEntry(this.next.field_name, t)
-      const v = new Cores.VarNeutral(this.next.field_name)
+      const entry = new Cores.ClsEntry(
+        this.next.field_name,
+        t,
+        undefined,
+        this.next.local_name
+      )
+      const v = new Cores.VarNeutral(this.next.local_name)
       const value = new Cores.NotYetValue(this.next.t, v)
       return this.fill(value).readback_aux(
-        ctx.extend(this.next.field_name, this.next.t),
+        ctx.extend(this.next.local_name, this.next.t),
         [...entries, entry]
       )
     }
@@ -201,12 +211,12 @@ export class Telescope {
   }
 
   extend_ctx(ctx: Ctx): Ctx {
-    for (const { field_name, t, exp } of this.entries) {
+    for (const { local_name, t, exp } of this.entries) {
       const env = ctx.to_env()
       if (exp) {
-        ctx = ctx.extend(field_name, evaluate(env, t), evaluate(env, exp))
+        ctx = ctx.extend(local_name, evaluate(env, t), evaluate(env, exp))
       } else {
-        ctx = ctx.extend(field_name, evaluate(env, t))
+        ctx = ctx.extend(local_name, evaluate(env, t))
       }
     }
 
