@@ -54,7 +54,7 @@ export * from "./cls/dot"
 
 export * from "./cls2/cls"
 // export * from "./cls2/ext"
-// export * from "./cls2/obj"
+export * from "./cls2/obj"
 // export * from "./cls2/dot"
 
 export * from "./either/either"
