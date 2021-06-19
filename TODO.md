@@ -2,7 +2,6 @@
 
 - `cls2` -- value -- cons
 
-- `cls2` -- core -- nil
 - `cls2` -- core -- cons
 
 - `cls2` -- exp -- nil -- infer

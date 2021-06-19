@@ -10,8 +10,7 @@ export abstract class Cls2 extends Core {
 
 export class ClsNil extends Cls2 {
   evaluate(env: Env): Value {
-    throw new Error()
-    // return new Cores.ClsNilValue()
+    return new Cores.ClsNilValue()
   }
 
   repr(): string {
