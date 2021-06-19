@@ -83,12 +83,22 @@ export class ClsValue extends Value {
     if (next.value !== undefined) {
       return new Cores.ClsValue(this.telescope.fill(next.value), {
         name: this.name,
-        fulfilled: this.fulfilled.fill_entry(next.name, next.t, next.value),
+        fulfilled: this.fulfilled.fill_entry(
+          next.field_name,
+          next.local_name,
+          next.t,
+          next.value
+        ),
       }).apply(arg)
     } else {
       return new Cores.ClsValue(this.telescope.fill(arg), {
         name: this.name,
-        fulfilled: this.fulfilled.fill_entry(next.name, next.t, arg),
+        fulfilled: this.fulfilled.fill_entry(
+          next.field_name,
+          next.local_name,
+          next.t,
+          arg
+        ),
       })
     }
   }

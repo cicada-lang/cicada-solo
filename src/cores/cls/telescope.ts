@@ -14,7 +14,12 @@ import * as ut from "../../ut"
 export class Telescope {
   env: Env
   entries: Array<Cores.ClsEntry>
-  next?: { name: string; t: Value; value?: Value }
+  next?: {
+    field_name: string
+    local_name: string
+    t: Value
+    value?: Value
+  }
 
   constructor(env: Env, entries: Array<Cores.ClsEntry>) {
     this.env = env
@@ -23,9 +28,10 @@ export class Telescope {
     if (this.entries.length === 0) {
       this.next = undefined
     } else {
-      const [{ field_name, t, exp }] = this.entries
+      const [{ field_name, local_name, t, exp }] = this.entries
       this.next = {
-        name: field_name,
+        field_name,
+        local_name,
         t: evaluate(this.env, t),
         value: exp ? evaluate(this.env, exp) : undefined,
       }
@@ -48,7 +54,7 @@ export class Telescope {
     }
 
     return new Telescope(
-      this.env.extend(this.next.name, value),
+      this.env.extend(this.next.field_name, value),
       this.entries.slice(1)
     )
   }
@@ -62,10 +68,10 @@ export class Telescope {
       )
     }
 
-    if (this.next.name === name) {
+    if (this.next.field_name === name) {
       return this.next.t
     } else {
-      const value = Cores.Dot.apply(target, this.next.name)
+      const value = Cores.Dot.apply(target, this.next.field_name)
       return this.fill(value).dot_type(target, name)
     }
   }
@@ -79,10 +85,10 @@ export class Telescope {
       )
     }
 
-    if (this.next.name === name) {
-      return Cores.Dot.apply(target, this.next.name)
+    if (this.next.field_name === name) {
+      return Cores.Dot.apply(target, this.next.field_name)
     } else {
-      const value = Cores.Dot.apply(target, this.next.name)
+      const value = Cores.Dot.apply(target, this.next.field_name)
       return this.fill(value).dot_value(target, name)
     }
   }
@@ -97,17 +103,17 @@ export class Telescope {
 
     if (this.next.value !== undefined) {
       const exp = readback(ctx, this.next.t, this.next.value)
-      const entry = new Cores.ClsEntry(this.next.name, t, exp)
+      const entry = new Cores.ClsEntry(this.next.field_name, t, exp)
       return this.fill(this.next.value).readback_aux(
-        ctx.extend(this.next.name, this.next.t, this.next.value),
+        ctx.extend(this.next.field_name, this.next.t, this.next.value),
         [...entries, entry]
       )
     } else {
-      const entry = new Cores.ClsEntry(this.next.name, t)
-      const v = new Cores.VarNeutral(this.next.name)
+      const entry = new Cores.ClsEntry(this.next.field_name, t)
+      const v = new Cores.VarNeutral(this.next.field_name)
       const value = new Cores.NotYetValue(this.next.t, v)
       return this.fill(value).readback_aux(
-        ctx.extend(this.next.name, this.next.t),
+        ctx.extend(this.next.field_name, this.next.t),
         [...entries, entry]
       )
     }
@@ -125,7 +131,7 @@ export class Telescope {
     if (this.next === undefined) return properties
 
     if (this.next.value !== undefined) {
-      const property_value = Cores.Dot.apply(value, this.next.name)
+      const property_value = Cores.Dot.apply(value, this.next.field_name)
       check_conversion(ctx, this.next.t, property_value, this.next.value, {
         description: {
           from: "the property value",
@@ -137,17 +143,17 @@ export class Telescope {
         value,
         new Map([
           ...properties,
-          [this.next.name, readback(ctx, this.next.t, property_value)],
+          [this.next.field_name, readback(ctx, this.next.t, property_value)],
         ])
       )
     } else {
-      const property_value = Cores.Dot.apply(value, this.next.name)
+      const property_value = Cores.Dot.apply(value, this.next.field_name)
       return this.fill(property_value).eta_expand_properties_aux(
         ctx,
         value,
         new Map([
           ...properties,
-          [this.next.name, readback(ctx, this.next.t, property_value)],
+          [this.next.field_name, readback(ctx, this.next.t, property_value)],
         ])
       )
     }
@@ -168,9 +174,9 @@ export class Telescope {
 
     if (this.next === undefined) return cores
 
-    const found = properties.get(this.next.name)
+    const found = properties.get(this.next.field_name)
     if (found === undefined) {
-      throw new Trace(`Can not found next name: ${this.next.name}`)
+      throw new Trace(`Can not found next name: ${this.next.field_name}`)
     }
     const found_core = check(ctx, found, this.next.t)
     const found_value = evaluate(ctx.to_env(), found_core)
@@ -186,7 +192,7 @@ export class Telescope {
     return this.fill(found_value).check_properties_aux(
       ctx,
       properties,
-      new Map([...cores, [this.next.name, found_core]])
+      new Map([...cores, [this.next.field_name, found_core]])
     )
   }
 

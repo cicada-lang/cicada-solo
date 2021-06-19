@@ -19,10 +19,15 @@ export class Fulfilled {
     this.entries = entries
   }
 
-  fill_entry(field_name: string, t: Value, value: Value): Fulfilled {
+  fill_entry(
+    field_name: string,
+    local_name: string,
+    t: Value,
+    value: Value
+  ): Fulfilled {
     return new Fulfilled([
       ...this.entries,
-      new FulfilledEntry(field_name, t, value),
+      new FulfilledEntry(field_name, t, value, local_name),
     ])
   }
 

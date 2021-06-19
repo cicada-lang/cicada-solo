@@ -48,7 +48,7 @@ export class Ap extends Exp {
       const cls = target_value
       let telescope = cls.telescope
       while (telescope.next) {
-        const { name, t, value } = telescope.next
+        const { t, value } = telescope.next
         if (value) {
           telescope = telescope.fill(value)
         } else {

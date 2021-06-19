@@ -1,7 +1,5 @@
 # scope
 
-- fix the use of `Fulfilled.fill_entry`
-
 - `Exps.Obj` ctx with distinct names
 
 - add assertion in `Ctx.extend` for distinct names
