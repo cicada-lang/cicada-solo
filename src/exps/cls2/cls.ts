@@ -34,7 +34,7 @@ export class ClsNil extends Cls2 {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    throw new Error()
+    return new Cores.TypeValue()
   }
 }
 
@@ -100,6 +100,6 @@ export class ClsCons extends Cls2 {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    throw new Error()
+    return new Cores.TypeValue()
   }
 }

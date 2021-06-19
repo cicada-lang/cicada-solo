@@ -1,12 +1,11 @@
 > first class record type -- to replace current implementation of `class`
 
+- `cls2` -- exp -- cons -- `infer`
+
 - `cls2` -- core -- cons -- `repr`
 - `cls2` -- core -- cons -- `alpha_repr`
 
 - `cls2` -- value -- cons -- `readback`
-
-- `cls2` -- exp -- nil -- infer
-- `cls2` -- exp -- cons -- infer
 
 - `cls2` -- value -- nil -- `eta_expand`
 - `cls2` -- value -- cons -- `eta_expand`
