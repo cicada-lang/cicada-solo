@@ -3,6 +3,7 @@ import { Core } from "../../core"
 import { readback } from "../../readback"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
+import { Trace } from "../../trace"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"
 
@@ -19,8 +20,6 @@ export class ClsNilValue extends Cls2Value {
       return new Cores.ClsNil()
     }
   }
-
-  // eta_expand(ctx: Ctx, value: Value): Core {}
 }
 
 export class ClsConsValue extends Cls2Value {
@@ -37,8 +36,26 @@ export class ClsConsValue extends Cls2Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Cores.TypeValue) {
-      // TODO
-      return new Cores.ClsNil()
+      const fresh_name = ut.freshen_name(
+        new Set(ctx.names),
+        this.rest_t_cl.name
+      )
+      const variable = new Cores.NotYetValue(
+        this.field_t,
+        new Cores.VarNeutral(fresh_name)
+      )
+      const field_t = readback(ctx, new Cores.TypeValue(), this.field_t)
+      const rest_t = readback(
+        ctx.extend(fresh_name, this.field_t),
+        new Cores.TypeValue(),
+        this.rest_t_cl.apply(variable)
+      )
+
+      if (!(rest_t instanceof Cores.Cls2)) {
+        throw new Trace("I expect rest_t to be Cores.Cls2")
+      }
+
+      return new Cores.ClsCons(this.field_name, fresh_name, field_t, rest_t)
     }
   }
 
