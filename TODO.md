@@ -1,7 +1,6 @@
 > first class record type -- to replace current implementation of `class`
 
 - `cls2` -- core -- dot
-- `cls2` -- neutral -- dot
 
 - `cls2` -- value -- nil -- `eta_expand`
 - `cls2` -- value -- cons -- `eta_expand`

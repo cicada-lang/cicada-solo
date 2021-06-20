@@ -91,7 +91,7 @@ export * from "./cls2/cls-value"
 export * from "./cls2/obj"
 export * from "./cls2/obj-value"
 export * from "./cls2/dot"
-// export * from "./cls2/dot-neutral"
+export * from "./cls2/dot-neutral"
 
 export * from "./either/either"
 export * from "./either/either-value"
