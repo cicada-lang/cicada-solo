@@ -1,6 +1,7 @@
-- restore inheritance
+- restore inheritance -- handle `extends` by new `Stmt`
 
-- restore `super`
+  - be able to append `Exps.Cls` during `Stmt.execute`
+  - use `Exp.subst` to restore `super`
 
 - restore fulfilling type
   - `cores/ap` -- `apply` for `ClsValue`
