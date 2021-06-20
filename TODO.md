@@ -1,5 +1,8 @@
 > first class record type -- to replace current implementation of `class`
 
+- split test about `super`
+- switch to new record type
+
 # scope
 
 - The `readback` of `Telescope` and `Fulfilled` might be wrong,

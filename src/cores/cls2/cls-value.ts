@@ -150,11 +150,11 @@ export class ClsConsValue extends Cls2Value {
   }
 
   eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
-    const value = Cores.Dot2.apply(value, this.field_name)
+    const property_value = Cores.Dot2.apply(value, this.field_name)
 
     return new Map([
-      [this.field_name, readback(ctx, this.field_t, value)],
-      ...this.rest_t_cl.apply(value).eta_expand_properties(ctx, value),
+      [this.field_name, readback(ctx, this.field_t, property_value)],
+      ...this.rest_t_cl.apply(property_value).eta_expand_properties(ctx, value),
     ])
   }
 }
