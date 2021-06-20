@@ -19,6 +19,10 @@ export abstract class Cls2Value extends Value {
     ctx: Ctx,
     properties: Map<string, Exp>
   ): Map<string, Core>
+
+  abstract dot_value(target: Value, field_name: string): Value
+  abstract dot_type(target: Value, field_name: string): Value
+
   eta_expand?(ctx: Ctx, value: Value): Core
 }
 
@@ -35,6 +39,26 @@ export class ClsNilValue extends Cls2Value {
     if (t instanceof Cores.TypeValue) {
       return new Cores.ClsNil()
     }
+  }
+
+  dot_value(target: Value, field_name: string): Value {
+    throw new Trace(
+      [
+        `I can not dot the value out of class`,
+        `because I meet an unknown field name:`,
+        `  ${field_name}`,
+      ].join("\n") + "\n"
+    )
+  }
+
+  dot_type(target: Value, field_name: string): Value {
+    throw new Trace(
+      [
+        `I can not dot the type out of class`,
+        `because I meet an unknown field name:`,
+        `  ${field_name}`,
+      ].join("\n") + "\n"
+    )
   }
 
   // eta_expand(ctx: Ctx, value: Value): Core {
@@ -99,6 +123,26 @@ export class ClsConsValue extends Cls2Value {
 
       return new Cores.ClsCons(this.field_name, fresh_name, field_t, rest_t)
     }
+  }
+
+  dot_value(target: Value, field_name: string): Value {
+    if (field_name === this.field_name) {
+      return Cores.Dot2.apply(target, this.field_name)
+    }
+
+    return this.rest_t_cl
+      .apply(Cores.Dot2.apply(target, this.field_name))
+      .dot_value(target, field_name)
+  }
+
+  dot_type(target: Value, field_name: string): Value {
+    if (field_name === this.field_name) {
+      return this.field_t
+    }
+
+    return this.rest_t_cl
+      .apply(Cores.Dot2.apply(target, this.field_name))
+      .dot_type(target, field_name)
   }
 
   // eta_expand(ctx: Ctx, value: Value): Core {

@@ -82,12 +82,12 @@ export class SpreadProp2 extends Prop2 {
       [
         Cores.ClsNilValue,
         (cls: Cores.ClsNilValue) =>
-          cls.field_names.map((name) => [name, new Exps.Dot(this.exp, name)]),
+          cls.field_names.map((name) => [name, new Exps.Dot2(this.exp, name)]),
       ],
       [
         Cores.ClsConsValue,
         (cls: Cores.ClsConsValue) =>
-          cls.field_names.map((name) => [name, new Exps.Dot(this.exp, name)]),
+          cls.field_names.map((name) => [name, new Exps.Dot2(this.exp, name)]),
       ],
     ])
   }
