@@ -34,12 +34,19 @@ export class Dot2 extends Core {
         ({ t, neutral }: Cores.NotYetValue) =>
           Value.match(t, [
             [
-              Cores.ClsValue,
-              (cls: Cores.ClsValue) =>
+              Cores.ClsNilValue,
+              (cls: Cores.ClsNilValue) =>
                 new Cores.NotYetValue(
                   cls.dot_type(target, name),
-                  // TODO use Dot2Neutral
-                  new Cores.DotNeutral(neutral, name)
+                  new Cores.Dot2Neutral(neutral, name)
+                ),
+            ],
+            [
+              Cores.ClsConsValue,
+              (cls: Cores.ClsConsValue) =>
+                new Cores.NotYetValue(
+                  cls.dot_type(target, name),
+                  new Cores.Dot2Neutral(neutral, name)
                 ),
             ],
           ]),
