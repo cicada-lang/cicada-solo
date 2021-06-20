@@ -108,7 +108,7 @@ export class ClsConsValue extends ClsValue {
     if (t instanceof Cores.TypeValue) {
       const fresh_name = ut.freshen_name(
         new Set(ctx.names),
-        this.rest_t_cl.name
+        this.rest_t_cl.local_name
       )
       const variable = new Cores.NotYetValue(
         this.field_t,

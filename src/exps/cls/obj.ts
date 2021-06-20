@@ -42,9 +42,8 @@ export class Obj extends Exp {
 
     throw new Trace(
       [
-        //
         `I expect t to be ClsValue`,
-        `but it is: ${t.constructor.name}`,
+        `but the constructor name I meet is: ${t.constructor.name}`,
       ].join("\n") + "\n"
     )
   }

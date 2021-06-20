@@ -1,24 +1,14 @@
 - restore inheritance
 
+- restore `super`
+
 - restore fulfilling type
   - `cores/ap` -- `apply` for `ClsValue`
   - `exps/ap` -- `infer` for `ClsValue`
 
-- restore `super`
-
 # scope
 
-- The `readback` of `Telescope` and `Fulfilled` might be wrong,
-  because after `fresh_name` is introduced -- for ctx with distinct names,
-  no subst for `Core` is done.
-
-- `Exps.Obj` ctx with distinct names
-
-- use `Exp.subst` to handle problem about the scope
-
-  - (1) [x] disallow top level redefinition statements
-  - (2) [] keep ctx with distinct names, use `Exp.subst` to change variable name
-  - (3) [] telescope contains information about renamings
+- be sure about `exps/obj`'s `SpreadProp`
 
 # implicit
 
