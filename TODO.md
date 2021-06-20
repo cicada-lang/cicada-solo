@@ -26,16 +26,11 @@
   - this is specially needed for `<var>: <fulfilled class> = <object>`
   - this must also recurse into the structure of nested class and object, maybe even for pi type
 
-# core features
+# inductive datatype
 
-- [refactoring] `Exps.Cls.infer` and `Exps.Ext.infer`
-- [requirement] support to use `let` to do local definitions in class
-- support to use `TODO("name-of-this-hole")` has hole
-- [optimization] use native `number` as `Nat`
-- [pattern matching] algebric datatype -- `datatype`
-  - generate `ind`
+- [inductive datatype] generate `ind` from `datatype` definitions
 
-# questions
+> questions
 
 - what is the duality between introduction rule and elimination rule?
   (how to use introduction rule to generate elimination rule and all other rules?)
@@ -43,6 +38,13 @@
 
 - how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
 - how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
+
+# core features
+
+- [refactoring] `Exps.Cls.infer` and `Exps.Ext.infer`
+- [requirement] support to use `let` to do local definitions in class
+- support to use `TODO("name-of-this-hole")` has hole
+- [optimization] use native `number` as `Nat`
 
 # syntax
 
