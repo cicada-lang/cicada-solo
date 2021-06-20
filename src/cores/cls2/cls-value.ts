@@ -23,7 +23,11 @@ export abstract class Cls2Value extends Value {
   abstract dot_value(target: Value, field_name: string): Value
   abstract dot_type(target: Value, field_name: string): Value
 
-  eta_expand?(ctx: Ctx, value: Value): Core
+  abstract eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core>
+
+  eta_expand(ctx: Ctx, value: Value): Core {
+    return new Cores.Obj2(this.eta_expand_properties(ctx,value))
+  }
 }
 
 export class ClsNilValue extends Cls2Value {
@@ -61,9 +65,9 @@ export class ClsNilValue extends Cls2Value {
     )
   }
 
-  // eta_expand(ctx: Ctx, value: Value): Core {
-  //   // TODO
-  // }
+  eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
+    return new Map()
+  }
 }
 
 export class ClsConsValue extends Cls2Value {
@@ -145,7 +149,8 @@ export class ClsConsValue extends Cls2Value {
       .dot_type(target, field_name)
   }
 
-  // eta_expand(ctx: Ctx, value: Value): Core {
-  //   // TODO
-  // }
+  eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
+    // TODO
+    return new Map()
+  }
 }
