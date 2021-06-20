@@ -2,13 +2,13 @@ import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { Closure } from "../../closure"
 import { readback } from "../../readback"
 import { evaluate } from "../../evaluate"
 import { check } from "../../check"
 import { Trace } from "../../trace"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"
+import { ClsClosure } from "./cls-closure"
 
 export abstract class Cls2Value extends Value {
   instanceofCoresCls2Value = true
@@ -45,9 +45,9 @@ export class ClsNilValue extends Cls2Value {
 export class ClsConsValue extends Cls2Value {
   field_name: string
   field_t: Value
-  rest_t_cl: Closure
+  rest_t_cl: ClsClosure
 
-  constructor(field_name: string, field_t: Value, rest_t_cl: Closure) {
+  constructor(field_name: string, field_t: Value, rest_t_cl: ClsClosure) {
     super()
     this.field_name = field_name
     this.field_t = field_t
@@ -70,10 +70,6 @@ export class ClsConsValue extends Cls2Value {
     const rest_t_value = this.rest_t_cl.apply(
       evaluate(ctx.to_env(), field_core)
     )
-
-    if (!(rest_t_value instanceof Cores.Cls2Value)) {
-      throw new Trace("I expect rest_t_value to be Cores.Cls2Value")
-    }
 
     return new Map([
       [this.field_name, field_core],

@@ -1,20 +1,21 @@
 import { Core, AlphaCtx } from "../../core"
 import { evaluate } from "../../evaluate"
-import { Closure } from "../../closure"
 import { Value } from "../../value"
 import { Env } from "../../env"
 import * as Cores from "../../cores"
 import * as ut from "../../ut"
+import { ClsClosure } from "./cls-closure"
 
 export abstract class Cls2 extends Core {
   instanceofCoresCls2 = true
 
+  abstract evaluate(env: Env): Cores.Cls2Value
   abstract fields_repr(): Array<string>
   abstract fields_alpha_repr(ctx: AlphaCtx): Array<string>
 }
 
 export class ClsNil extends Cls2 {
-  evaluate(env: Env): Value {
+  evaluate(env: Env): Cores.Cls2Value {
     return new Cores.ClsNilValue()
   }
 
@@ -54,11 +55,11 @@ export class ClsCons extends Cls2 {
     this.rest_t = rest_t
   }
 
-  evaluate(env: Env): Value {
+  evaluate(env: Env): Cores.Cls2Value {
     return new Cores.ClsConsValue(
       this.field_name,
       evaluate(env, this.field_t),
-      new Closure(env, this.local_name, this.rest_t)
+      new ClsClosure(env, this.local_name, this.rest_t)
     )
   }
 
