@@ -1,4 +1,4 @@
-class Category {
+class {
   Object: Type
   Morphism: (dom: Object) -> (cod: Object) -> Type
   id: (x: Object) -> Morphism(x)(x)

@@ -33,12 +33,20 @@ export class Obj extends Exp {
       this.properties.flatMap((prop) => prop.expand(ctx))
     )
 
+    // NOTE TODO SpreadProp might introduce new property name, thus new scope.
+
     if (t instanceof Cores.ClsValue) {
       const core_properties = t.check_properties(ctx, properties)
       return new Cores.Obj(core_properties)
     }
 
-    throw new Trace(`Expecting t to be ClsValue`)
+    throw new Trace(
+      [
+        //
+        `I expect t to be ClsValue`,
+        `but it is: ${t.constructor.name}`,
+      ].join("\n") + "\n"
+    )
   }
 
   repr(): string {
@@ -76,9 +84,14 @@ export class SpreadProp extends Prop {
     const inferred = infer(ctx, this.exp)
     return Value.match(inferred.t, [
       [
-        Cores.ClsValue,
-        (cls: Cores.ClsValue) =>
-          cls.names.map((name) => [name, new Exps.Dot(this.exp, name)]),
+        Cores.ClsNilValue,
+        (cls: Cores.ClsNilValue) =>
+          cls.field_names.map((name) => [name, new Exps.Dot(this.exp, name)]),
+      ],
+      [
+        Cores.ClsConsValue,
+        (cls: Cores.ClsConsValue) =>
+          cls.field_names.map((name) => [name, new Exps.Dot(this.exp, name)]),
       ],
     ])
   }

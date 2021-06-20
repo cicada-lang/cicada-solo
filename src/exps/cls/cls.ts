@@ -1,56 +1,131 @@
-export { ClsEntry } from "./cls-entry"
-
 import { Exp } from "../../exp"
 import { Core } from "../../core"
-import { Value } from "../../value"
 import { Ctx } from "../../ctx"
-import { evaluate } from "../../evaluate"
 import { check } from "../../check"
+import { evaluate } from "../../evaluate"
+import { Value } from "../../value"
+import { Trace } from "../../trace"
 import * as Cores from "../../cores"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
-export class Cls extends Exp {
-  entries: Array<Exps.ClsEntry>
-  name?: string
+export abstract class Cls extends Exp {
+  instanceofExpsCls = true
 
-  constructor(entries: Array<Exps.ClsEntry>, opts?: { name?: string }) {
-    super()
-    this.entries = entries
-    this.name = opts?.name
-  }
+  abstract fields_repr(): Array<string>
+  abstract subst(name: string, exp: Exp): Cls
+  abstract infer(ctx: Ctx): { t: Value; core: Core }
+}
 
+export class ClsNil extends Cls {
   free_names(bound_names: Set<string>): Set<string> {
-    return Exps.ClsEntry.entries_free_names(this.entries, bound_names)
+    return new Set()
   }
 
-  subst(name: string, exp: Exp): Exp {
-    return new Cls(Exps.ClsEntry.entries_subst(this.entries, name, exp), {
-      name: this.name,
-    })
+  subst(name: string, exp: Exp): Cls {
+    return this
   }
 
-  infer(ctx: Ctx): { t: Value; core: Core } {
-    Exps.ClsEntry.entries_check_distinct_field_names(
-      this.entries.map((entry) => entry.field_name)
-    )
-
-    return {
-      t: new Cores.TypeValue(),
-      core: new Cores.Cls(Exps.ClsEntry.entries_infer(ctx, this.entries), {
-        name: this.name,
-      }),
-    }
+  fields_repr(): Array<string> {
+    return []
   }
 
   repr(): string {
-    const name = this.name || ""
+    return `class {}`
+  }
 
-    if (this.entries.length === 0) {
-      return `class ${name} {}`
+  infer(ctx: Ctx): { t: Value; core: Core } {
+    return {
+      t: new Cores.TypeValue(),
+      core: new Cores.ClsNil(),
+    }
+  }
+}
+
+export class ClsCons extends Cls {
+  field_name: string
+  local_name: string
+  field_t: Exp
+  rest_t: Cls
+
+  constructor(
+    field_name: string,
+    local_name: string,
+    field_t: Exp,
+    rest_t: Cls
+  ) {
+    super()
+    this.field_name = field_name
+    this.local_name = local_name
+    this.field_t = field_t
+    this.rest_t = rest_t
+  }
+
+  free_names(bound_names: Set<string>): Set<string> {
+    return new Set([
+      ...this.field_t.free_names(bound_names),
+      ...this.rest_t.free_names(new Set([...bound_names, this.local_name])),
+    ])
+  }
+
+  subst(name: string, exp: Exp): Cls {
+    if (name === this.local_name) {
+      return new ClsCons(
+        this.field_name,
+        this.local_name,
+        this.field_t.subst(name, exp),
+        this.rest_t
+      )
+    } else {
+      const free_names = exp.free_names(new Set())
+      const fresh_name = ut.freshen_name(free_names, this.local_name)
+
+      return new ClsCons(
+        this.field_name,
+        fresh_name,
+        this.field_t.subst(name, exp),
+        this.rest_t
+          .subst(this.local_name, new Exps.Var(fresh_name))
+          .subst(name, exp)
+      )
+    }
+  }
+
+  fields_repr(): Array<string> {
+    return [
+      `${this.field_name}: ${this.field_t.repr()}`,
+      ...this.rest_t.fields_repr(),
+    ]
+  }
+
+  repr(): string {
+    const fields = this.fields_repr().join("\n")
+    return `class {\n${ut.indent(fields, "  ")}\n}`
+  }
+
+  infer(ctx: Ctx): { t: Value; core: Core } {
+    const fresh_name = ut.freshen_name(new Set(ctx.names), this.local_name)
+    const field_t_core = check(ctx, this.field_t, new Cores.TypeValue())
+    const field_t_value = evaluate(ctx.to_env(), field_t_core)
+    const rest_t = this.rest_t.subst(this.local_name, new Exps.Var(fresh_name))
+    const rest_t_core = check(
+      ctx.extend(fresh_name, field_t_value),
+      rest_t,
+      new Cores.TypeValue()
+    )
+
+    if (!(rest_t_core instanceof Cores.Cls)) {
+      throw new Trace("I expect rest_t_core to be Cores.Cls")
     }
 
-    const entries = this.entries.map((entry) => entry.repr()).join("\n")
-    return `class ${name} {\n${ut.indent(entries, "  ")}\n}`
+    return {
+      t: new Cores.TypeValue(),
+      core: new Cores.ClsCons(
+        this.field_name,
+        fresh_name,
+        field_t_core,
+        rest_t_core
+      ),
+    }
   }
 }

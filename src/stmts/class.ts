@@ -6,12 +6,11 @@ import * as Exps from "../exps"
 
 export class Class implements Stmt {
   name: string
-  t: Exps.Cls | Exps.Ext
+  t: Exps.Cls
 
-  constructor(name: string, t: Exps.Cls | Exps.Ext) {
+  constructor(name: string, t: Exps.Cls) {
     this.name = name
     this.t = t
-    this.t.name = this.name
   }
 
   async execute(mod: Module): Promise<void> {

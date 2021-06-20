@@ -43,30 +43,32 @@ export class Ap extends Exp {
       }
     }
 
-    const target_value = evaluate(ctx.to_env(), inferred_target.core)
-    if (target_value instanceof Cores.ClsValue) {
-      const cls = target_value
-      let telescope = cls.telescope
-      while (telescope.next) {
-        const { t, value } = telescope.next
-        if (value) {
-          telescope = telescope.fill(value)
-        } else {
-          const arg_core = check(ctx, this.arg, t)
+    // TODO
 
-          return {
-            t: new Cores.TypeValue(),
-            core: new Cores.Ap(inferred_target.core, arg_core),
-          }
-        }
-      }
+    // const target_value = evaluate(ctx.to_env(), inferred_target.core)
+    // if (target_value instanceof Cores.ClsValue) {
+    //   const cls = target_value
+    //   let telescope = cls.telescope
+    //   while (telescope.next) {
+    //     const { t, value } = telescope.next
+    //     if (value) {
+    //       telescope = telescope.fill(value)
+    //     } else {
+    //       const arg_core = check(ctx, this.arg, t)
 
-      throw new Trace(
-        ut.aline(`
-          |The telescope is full.
-          |`)
-      )
-    }
+    //       return {
+    //         t: new Cores.TypeValue(),
+    //         core: new Cores.Ap(inferred_target.core, arg_core),
+    //       }
+    //     }
+    //   }
+
+    //   throw new Trace(
+    //     ut.aline(`
+    //       |The telescope is full.
+    //       |`)
+    //   )
+    // }
 
     throw new Trace(
       ut.aline(`

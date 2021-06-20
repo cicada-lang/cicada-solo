@@ -30,7 +30,8 @@ export class Ap extends Core {
   static apply(target: Value, arg: Value): Value {
     return Value.match(target, [
       [Cores.FnValue, (fn: Cores.FnValue) => fn.apply(arg)],
-      [Cores.ClsValue, (cls: Cores.ClsValue) => cls.apply(arg)],
+      // TODO
+      // [Cores.ClsValue, (cls: Cores.ClsValue) => cls.apply(arg)],
       [
         Cores.NotYetValue,
         ({ t, neutral }: Cores.NotYetValue) =>

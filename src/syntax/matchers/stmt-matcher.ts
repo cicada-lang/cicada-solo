@@ -40,18 +40,29 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     "stmt:class": ({ name, entries }) =>
       new Stmts.Class(
         pt.str(name),
-        new Exps.Cls(
-          pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
-        )
+        pt.matchers
+          .zero_or_more_matcher(entries)
+          .map(cls_entry_matcher)
+          .reverse()
+          .reduce(
+            (rest_t, entry) =>
+              new Exps.ClsCons(
+                entry.field_name,
+                entry.field_name,
+                entry.field_t,
+                rest_t
+              ),
+            new Exps.ClsNil()
+          )
       ),
-    "stmt:class_extends": ({ name, parent_name, entries }) =>
-      new Stmts.Class(
-        pt.str(name),
-        new Exps.Ext(
-          pt.str(parent_name),
-          pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
-        )
-      ),
+    // "stmt:class_extends": ({ name, parent_name, entries }) =>
+    //   new Stmts.Class(
+    //     pt.str(name),
+    //     new Exps.Ext(
+    //       pt.str(parent_name),
+    //       pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
+    //     )
+    //   ),
     "stmt:import": ({ path, entries }) => {
       return new Stmts.Import(
         pt.trim_boundary(pt.str(path), 1),

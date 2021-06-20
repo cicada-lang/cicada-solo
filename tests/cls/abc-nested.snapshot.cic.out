@@ -6,10 +6,10 @@
     b: 2
     c: "c"
   }
-}: class  {
+}: class {
   x: String
   y: String
-  z: class ABC {
+  z: class {
     a: Trivial
     b: Nat
     c: String
@@ -19,7 +19,7 @@
   a: sole
   b: 2
   c: "c"
-}: class ABC {
+}: class {
   a: Trivial
   b: Nat
   c: String

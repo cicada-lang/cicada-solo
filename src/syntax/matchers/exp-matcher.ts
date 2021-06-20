@@ -127,14 +127,29 @@ export function cons_matcher(tree: pt.Tree): Exp {
     "cons:cons": ({ car, cdr }) =>
       new Exps.Cons(exp_matcher(car), exp_matcher(cdr)),
     "cons:cls": ({ entries }) =>
-      new Exps.Cls(
-        pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
-      ),
-    "cons:ext": ({ parent_name, entries }) =>
-      new Exps.Ext(
-        pt.str(parent_name),
-        pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
-      ),
+      pt.matchers
+        .zero_or_more_matcher(entries)
+        .map(cls_entry_matcher)
+        .reverse()
+        .reduce(
+          (rest_t, entry) =>
+            new Exps.ClsCons(
+              entry.field_name,
+              entry.field_name,
+              entry.field_t,
+              rest_t
+            ),
+          new Exps.ClsNil()
+        ),
+    // "cons:cls": ({ entries }) =>
+    //   new Exps.Cls(
+    //     pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
+    //   ),
+    // "cons:ext": ({ parent_name, entries }) =>
+    //   new Exps.Ext(
+    //     pt.str(parent_name),
+    //     pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
+    //   ),
     "cons:obj": ({ properties }) =>
       new Exps.Obj(
         pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
@@ -208,25 +223,36 @@ export function cons_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-export function cls_entry_matcher(tree: pt.Tree): Exps.ClsEntry {
+export function cls_entry_matcher(tree: pt.Tree): {
+  field_name: string
+  field_t: Exp
+  field_exp?: Exp
+} {
   return pt.matcher({
-    "cls_entry:field_demanded": ({ name, t }) =>
-      new Exps.ClsEntry(pt.str(name), exp_matcher(t)),
-    "cls_entry:field_fulfilled": ({ name, t, exp }) =>
-      new Exps.ClsEntry(pt.str(name), exp_matcher(t), exp_matcher(exp)),
-    "cls_entry:method_demanded": ({ name, bindings, ret_t }) =>
-      new Exps.ClsEntry(pt.str(name), pi_handler({ bindings, ret_t })),
+    "cls_entry:field_demanded": ({ name, t }) => ({
+      field_name: pt.str(name),
+      field_t: exp_matcher(t),
+    }),
+    "cls_entry:field_fulfilled": ({ name, t, exp }) => ({
+      field_name: pt.str(name),
+      field_t: exp_matcher(t),
+      field_exp: exp_matcher(exp),
+    }),
+    "cls_entry:method_demanded": ({ name, bindings, ret_t }) => ({
+      field_name: pt.str(name),
+      field_t: pi_handler({ bindings, ret_t }),
+    }),
     "cls_entry:method_fulfilled": ({ name, bindings, ret_t, ret }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
         .flatMap(({ names }) => names.reverse())
         .reduce((fn, name) => new Exps.Fn(name, fn), exp_matcher(ret))
 
-      return new Exps.ClsEntry(
-        pt.str(name),
-        pi_handler({ bindings, ret_t }),
-        fn
-      )
+      return {
+        field_name: pt.str(name),
+        field_t: pi_handler({ bindings, ret_t }),
+        field_exp: fn,
+      }
     },
   })(tree)
 }

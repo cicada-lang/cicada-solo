@@ -1,7 +1,10 @@
-> first class record type -- to replace current implementation of `class`
+- restore inheritance
 
-- split test about `super`
-- switch to new record type
+- restore fulfilling type
+  - `cores/ap` -- `apply` for `ClsValue`
+  - `exps/ap` -- `infer` for `ClsValue`
+
+- restore `super`
 
 # scope
 

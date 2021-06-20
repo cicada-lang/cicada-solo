@@ -57,14 +57,12 @@ export class Let extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
+    const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const inferred = infer(ctx, this.exp)
     const value = evaluate(ctx.to_env(), inferred.core)
-    const ret_core = check(
-      ctx.extend(this.name, inferred.t, value),
-      this.ret,
-      t
-    )
-    return new Cores.Let(this.name, inferred.core, ret_core)
+    const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
+    const ret_core = check(ctx.extend(fresh_name, inferred.t, value), ret, t)
+    return new Cores.Let(fresh_name, inferred.core, ret_core)
   }
 
   repr(): string {

@@ -1,76 +1,98 @@
 import { Core, AlphaCtx } from "../../core"
+import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
 import { Env } from "../../env"
-import { Telescope } from "./telescope"
 import * as Cores from "../../cores"
 import * as ut from "../../ut"
+import { ClsClosure } from "./cls-closure"
 
-export class ClsEntry {
-  field_name: string
-  t: Core
-  exp?: Core
-  local_name: string
+export abstract class Cls extends Core {
+  instanceofCoresCls = true
 
-  constructor(field_name: string, t: Core, exp?: Core, local_name?: string) {
-    this.field_name = field_name
-    this.t = t
-    this.exp = exp
-    this.local_name = local_name || field_name
-  }
+  abstract field_names: Array<string>
+  abstract evaluate(env: Env): Cores.ClsValue
+  abstract fields_repr(): Array<string>
+  abstract fields_alpha_repr(ctx: AlphaCtx): Array<string>
 }
 
-export class Cls extends Core {
-  entries: Array<ClsEntry>
-  name?: string
-
-  constructor(entries: Array<ClsEntry>, opts?: { name?: string }) {
-    super()
-    this.entries = entries
-    this.name = opts?.name
+export class ClsNil extends Cls {
+  get field_names(): Array<string> {
+    return []
   }
 
-  evaluate(env: Env): Value {
-    return new Cores.ClsValue(new Telescope(env, this.entries), {
-      name: this.name,
-    })
+  evaluate(env: Env): Cores.ClsValue {
+    return new Cores.ClsNilValue()
+  }
+
+  fields_repr(): Array<string> {
+    return []
   }
 
   repr(): string {
-    const name = this.name || ""
+    return `class {}`
+  }
 
-    if (this.entries.length === 0) {
-      return `class ${name} {}`
-    }
-
-    const entries = this.entries.map(({ field_name, t, exp }) => {
-      return exp
-        ? `${field_name}: ${t.repr()} = ${exp.repr()}`
-        : `${field_name}: ${t.repr()}`
-    })
-
-    const s = entries.join("\n")
-
-    return `class ${name} {\n${ut.indent(s, "  ")}\n}`
+  fields_alpha_repr(ctx: AlphaCtx): Array<string> {
+    return []
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    if (this.entries.length === 0) return "[]"
+    return `class {}`
+  }
+}
 
-    const parts = []
+export class ClsCons extends Cls {
+  field_name: string
+  local_name: string
+  field_t: Core
+  rest_t: Cls
 
-    for (const { field_name, t, exp } of this.entries) {
-      const t_repr = t.alpha_repr(ctx)
-      if (exp) {
-        const exp_repr = exp.alpha_repr(ctx)
-        parts.push(`${field_name} : ${t_repr} = ${exp_repr}`)
-      } else {
-        parts.push(`${field_name} : ${t_repr}`)
-      }
-      ctx = ctx.extend(field_name)
-    }
+  constructor(
+    field_name: string,
+    local_name: string,
+    field_t: Core,
+    rest_t: Cls
+  ) {
+    super()
+    this.field_name = field_name
+    this.local_name = local_name
+    this.field_t = field_t
+    this.rest_t = rest_t
+  }
 
-    const s = parts.join("\n")
+  get field_names(): Array<string> {
+    return [this.field_name, ...this.rest_t.field_names]
+  }
 
-    return `class {\n${ut.indent(s, "  ")}\n}`
+  evaluate(env: Env): Cores.ClsValue {
+    return new Cores.ClsConsValue(
+      this.field_name,
+      evaluate(env, this.field_t),
+      new ClsClosure(env, this.local_name, this.rest_t)
+    )
+  }
+
+  fields_repr(): Array<string> {
+    return [
+      `${this.field_name}: ${this.field_t.repr()}`,
+      ...this.rest_t.fields_repr(),
+    ]
+  }
+
+  repr(): string {
+    const fields = this.fields_repr().join("\n")
+    return `class {\n${ut.indent(fields, "  ")}\n}`
+  }
+
+  fields_alpha_repr(ctx: AlphaCtx): Array<string> {
+    return [
+      `${this.field_name}: ${this.field_t.alpha_repr(ctx)}`,
+      ...this.rest_t.fields_alpha_repr(ctx.extend(this.local_name)),
+    ]
+  }
+
+  alpha_repr(ctx: AlphaCtx): string {
+    const fields = this.fields_alpha_repr(ctx).join("\n")
+    return `class {\n${ut.indent(fields, "  ")}\n}`
   }
 }
