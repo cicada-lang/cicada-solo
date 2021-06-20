@@ -13,7 +13,7 @@ import { ClsClosure } from "./cls-closure"
 export abstract class Cls2Value extends Value {
   instanceofCoresCls2Value = true
 
-  abstract names: Array<string>
+  abstract field_names: Array<string>
   abstract readback(ctx: Ctx, t: Value): Core | undefined
   abstract check_properties(
     ctx: Ctx,
@@ -23,7 +23,7 @@ export abstract class Cls2Value extends Value {
 }
 
 export class ClsNilValue extends Cls2Value {
-  get names(): Array<string> {
+  get field_names(): Array<string> {
     return []
   }
 
@@ -54,9 +54,8 @@ export class ClsConsValue extends Cls2Value {
     this.rest_t_cl = rest_t_cl
   }
 
-  get names(): Array<string> {
-    // TODO
-    return [this.field_name]
+  get field_names(): Array<string> {
+    return [this.field_name, ...this.rest_t_cl.rest_t.field_names]
   }
 
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {

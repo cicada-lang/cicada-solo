@@ -9,12 +9,17 @@ import { ClsClosure } from "./cls-closure"
 export abstract class Cls2 extends Core {
   instanceofCoresCls2 = true
 
+  abstract field_names: Array<string>
   abstract evaluate(env: Env): Cores.Cls2Value
   abstract fields_repr(): Array<string>
   abstract fields_alpha_repr(ctx: AlphaCtx): Array<string>
 }
 
 export class ClsNil extends Cls2 {
+  get field_names(): Array<string> {
+    return []
+  }
+
   evaluate(env: Env): Cores.Cls2Value {
     return new Cores.ClsNilValue()
   }
@@ -53,6 +58,10 @@ export class ClsCons extends Cls2 {
     this.local_name = local_name
     this.field_t = field_t
     this.rest_t = rest_t
+  }
+
+  get field_names(): Array<string> {
+    return [this.field_name, ...this.rest_t.field_names]
   }
 
   evaluate(env: Env): Cores.Cls2Value {

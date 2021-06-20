@@ -1,7 +1,5 @@
 > first class record type -- to replace current implementation of `class`
 
-- fix `ClsConsValue.field_names`
-
 - `cls2` -- exp -- dot
 - `cls2` -- core -- dot
 - `cls2` -- neutral -- dot
