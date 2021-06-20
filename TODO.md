@@ -1,7 +1,5 @@
 > first class record type -- to replace current implementation of `class`
 
-- `cls2` -- value -- cons -- `eta_expand`
-
 # scope
 
 - The `readback` of `Telescope` and `Fulfilled` might be wrong,

@@ -26,7 +26,7 @@ export abstract class Cls2Value extends Value {
   abstract eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core>
 
   eta_expand(ctx: Ctx, value: Value): Core {
-    return new Cores.Obj2(this.eta_expand_properties(ctx,value))
+    return new Cores.Obj2(this.eta_expand_properties(ctx, value))
   }
 }
 
@@ -150,7 +150,11 @@ export class ClsConsValue extends Cls2Value {
   }
 
   eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
-    // TODO
-    return new Map()
+    const value = Cores.Dot2.apply(value, this.field_name)
+
+    return new Map([
+      [this.field_name, readback(ctx, this.field_t, value)],
+      ...this.rest_t_cl.apply(value).eta_expand_properties(ctx, value),
+    ])
   }
 }
