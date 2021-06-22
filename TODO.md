@@ -1,5 +1,3 @@
-- maybe project structure should be `semantics -- exps cores values neutrals`
-
 - restore inheritance -- handle `extends` by new `Stmt`
 
   - be able to append `Exps.Cls` during `Stmt.execute`
