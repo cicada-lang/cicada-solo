@@ -25,6 +25,6 @@
 - [CODE-OF-CONDUCT.md](CODE-OF-CONDUCT.md)
 - When contributing, add yourself to [AUTHORS](AUTHORS)
 
-## 协议 / License
+## License
 
 - [GPLv3](LICENSE)
