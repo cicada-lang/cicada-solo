@@ -1,4 +1,4 @@
-# Cicada Language
+# 蝉语 / Cicada Language
 
 ## Usage
 
