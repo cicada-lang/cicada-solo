@@ -6,15 +6,15 @@ import * as Exps from "../exps"
 
 export class Class implements Stmt {
   name: string
-  t: Exps.Cls
+  cls: Exps.Cls
 
-  constructor(name: string, t: Exps.Cls) {
+  constructor(name: string, cls: Exps.Cls) {
     this.name = name
-    this.t = t
+    this.cls = cls
   }
 
   async execute(mod: Module): Promise<void> {
-    const exp = new Exps.The(new Exps.Type(), this.t)
+    const exp = new Exps.The(new Exps.Type(), this.cls)
     const inferred = infer(mod.ctx, exp)
     const inferred_value = evaluate(mod.ctx.to_env(), inferred.core)
     mod.ctx.assert_not_redefine(this.name, inferred.t, inferred_value)
