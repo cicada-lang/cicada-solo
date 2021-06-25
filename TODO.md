@@ -1,4 +1,3 @@
-- [inheritance] `Cores.Cls.append`
 - [inheritance] `Exps.Ext` -- restore syntax
 
 - restore fulfilling type

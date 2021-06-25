@@ -38,19 +38,30 @@ export class Ext extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const result = this.parent_extend_ctx(ctx, this.get_parent_value(ctx))
+    const parent_value = this.get_parent_value(ctx)
+    const result = cls_value_extend_ctx(ctx, parent_value)
     const rest_t = result.renamings.reduce(
       (rest_t, renaming) =>
         rest_t.subst(renaming.field_name, new Exps.Var(renaming.local_name)),
-      this.rest_t
+      this.rest_t.subst(
+        "super",
+        new Exps.Obj(
+          parent_value.field_names.map(
+            (name) => new Exps.FieldShorthandProp(name)
+          )
+        )
+      )
     )
+
     const rest_t_core = check(result.ctx, rest_t, new Cores.TypeValue())
+
+    if (!(rest_t_core instanceof Cores.Cls)) {
+      throw new Trace("I expect rest_t_core to be Cores.Cls")
+    }
 
     return {
       t: new Cores.TypeValue(),
-      // TODO
-      // core: this.get_parent_core(ctx).append(rest_t_core),
-      core: rest_t_core,
+      core: this.get_parent_core(ctx).append(rest_t_core),
     }
   }
 
@@ -73,38 +84,35 @@ export class Ext extends Exp {
 
     return parent_value
   }
+}
 
-  private parent_extend_ctx(
-    ctx: Ctx,
-    parent: Cores.ClsValue,
-    renamings: Array<{ field_name: string; local_name: string }> = new Array()
-  ): {
-    ctx: Ctx
-    renamings: Array<{ field_name: string; local_name: string }>
-  } {
-    if (parent instanceof Cores.ClsNilValue) {
-      return { ctx, renamings }
-    }
+function cls_value_extend_ctx(
+  ctx: Ctx,
+  parent: Cores.ClsValue,
+  renamings: Array<{ field_name: string; local_name: string }> = new Array()
+): {
+  ctx: Ctx
+  renamings: Array<{ field_name: string; local_name: string }>
+} {
+  if (parent instanceof Cores.ClsNilValue) {
+    return { ctx, renamings }
+  }
 
-    if (parent instanceof Cores.ClsConsValue) {
-      const fresh_name = ut.freshen_name(new Set(ctx.names), parent.field_name)
-      const variable = new Cores.NotYetValue(
-        parent.field_t,
-        new Cores.VarNeutral(fresh_name)
-      )
+  if (parent instanceof Cores.ClsConsValue) {
+    const fresh_name = ut.freshen_name(new Set(ctx.names), parent.field_name)
+    const variable = new Cores.NotYetValue(
+      parent.field_t,
+      new Cores.VarNeutral(fresh_name)
+    )
 
-      return this.parent_extend_ctx(
-        ctx.extend(fresh_name, parent.field_t),
-        parent.rest_t_cl.apply(variable),
-        [
-          ...renamings,
-          { field_name: parent.field_name, local_name: fresh_name },
-        ]
-      )
-    }
-
-    throw new Trace(
-      `The parent is of unknown subclass of ClsValue ${parent.constructor.name}`
+    return cls_value_extend_ctx(
+      ctx.extend(fresh_name, parent.field_t),
+      parent.rest_t_cl.apply(variable),
+      [...renamings, { field_name: parent.field_name, local_name: fresh_name }]
     )
   }
+
+  throw new Trace(
+    `The parent is of unknown subclass of ClsValue ${parent.constructor.name}`
+  )
 }
