@@ -141,15 +141,24 @@ export function cons_matcher(tree: pt.Tree): Exp {
             ),
           new Exps.ClsNil()
         ),
-    // "cons:cls": ({ entries }) =>
-    //   new Exps.Cls(
-    //     pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
-    //   ),
-    // "cons:ext": ({ parent_name, entries }) =>
-    //   new Exps.Ext(
-    //     pt.str(parent_name),
-    //     pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
-    //   ),
+    "cons:ext": ({ parent, entries }) =>
+      new Exps.Ext(
+        elim_matcher(parent),
+        pt.matchers
+          .zero_or_more_matcher(entries)
+          .map(cls_entry_matcher)
+          .reverse()
+          .reduce(
+            (rest_t, entry) =>
+              new Exps.ClsCons(
+                entry.field_name,
+                entry.field_name,
+                entry.field_t,
+                rest_t
+              ),
+            new Exps.ClsNil()
+          )
+      ),
     "cons:obj": ({ properties }) =>
       new Exps.Obj(
         pt.matchers.zero_or_more_matcher(properties).map(property_matcher)

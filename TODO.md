@@ -1,9 +1,5 @@
-- [inheritance] `Exps.Ext` -- restore syntax
-
-- restore fulfilling type
-
-  - `cores/ap` -- `apply` for `ClsValue`
-  - `exps/ap` -- `infer` for `ClsValue`
+- [fulfilling type] `cores/ap` -- `apply` for `ClsValue`
+- [fulfilling type] `exps/ap` -- `infer` for `ClsValue`
 
 # scope
 

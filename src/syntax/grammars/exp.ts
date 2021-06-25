@@ -148,7 +148,7 @@ export const cons = {
     "cons:ext": [
       '"class"',
       '"extends"',
-      { parent_name: "identifier" },
+      { parent: "elim" },
       '"{"',
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
       '"}"',

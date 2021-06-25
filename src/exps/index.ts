@@ -48,7 +48,7 @@ export * from "./str/str"
 export * from "./str/quote"
 
 export * from "./cls/cls"
-// export * from "./cls/ext"
+export * from "./cls/ext"
 export * from "./cls/obj"
 export * from "./cls/dot"
 

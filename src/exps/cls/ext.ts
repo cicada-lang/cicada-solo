@@ -4,6 +4,7 @@ import { Ctx } from "../../ctx"
 import { check } from "../../check"
 import { infer } from "../../infer"
 import { evaluate } from "../../evaluate"
+import { readback } from "../../readback"
 import { Value } from "../../value"
 import { Trace } from "../../trace"
 import * as Cores from "../../cores"
@@ -59,27 +60,30 @@ export class Ext extends Exp {
       throw new Trace("I expect rest_t_core to be Cores.Cls")
     }
 
+    const parent_core = readback(ctx, new Cores.TypeValue(), parent_value)
+
+    if (!(parent_core instanceof Cores.Cls)) {
+      throw new Trace("I expect parent_core to be Cores.Cls")
+    }
+
     return {
       t: new Cores.TypeValue(),
-      core: this.get_parent_core(ctx).append(rest_t_core),
+      core: parent_core.append(rest_t_core),
     }
-  }
-
-  private get_parent_core(ctx: Ctx): Cores.Cls {
-    const inferred_parent = infer(ctx, this.parent)
-
-    if (!(inferred_parent.core instanceof Cores.Cls)) {
-      throw new Trace(`Expecting inferred_parent.core to be Cls`)
-    }
-
-    return inferred_parent.core
   }
 
   private get_parent_value(ctx: Ctx): Cores.ClsValue {
-    const parent_value = evaluate(ctx.to_env(), this.get_parent_core(ctx))
+    const inferred_parent = infer(ctx, this.parent)
+    const parent_value = evaluate(ctx.to_env(), inferred_parent.core)
 
     if (!(parent_value instanceof Cores.ClsValue)) {
-      throw new Trace(`Expecting parent_value to be ClsValue`)
+      throw new Trace(
+        [
+          `I expect parent_value to be Cores.ClsValue,`,
+          `but I found class name:`,
+          `  ${parent_value.constructor.name}`,
+        ].join("\n") + "\n"
+      )
     }
 
     return parent_value

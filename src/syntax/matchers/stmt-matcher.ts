@@ -4,6 +4,7 @@ import * as Stmts from "../../stmts"
 import * as Exps from "../../exps"
 import {
   exp_matcher,
+  elim_matcher,
   cls_entry_matcher,
   pi_handler,
   bindings_matcher,
@@ -55,14 +56,27 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
             new Exps.ClsNil()
           )
       ),
-    // "stmt:class_extends": ({ name, parent_name, entries }) =>
-    //   new Stmts.Class(
-    //     pt.str(name),
-    //     new Exps.Ext(
-    //       pt.str(parent_name),
-    //       pt.matchers.zero_or_more_matcher(entries).map(cls_entry_matcher)
-    //     )
-    //   ),
+    "stmt:class_extends": ({ name, parent, entries }) =>
+      new Stmts.ClassExtends(
+        pt.str(name),
+        new Exps.Ext(
+          elim_matcher(parent),
+          pt.matchers
+            .zero_or_more_matcher(entries)
+            .map(cls_entry_matcher)
+            .reverse()
+            .reduce(
+              (rest_t, entry) =>
+                new Exps.ClsCons(
+                  entry.field_name,
+                  entry.field_name,
+                  entry.field_t,
+                  rest_t
+                ),
+              new Exps.ClsNil()
+            )
+        )
+      ),
     "stmt:import": ({ path, entries }) => {
       return new Stmts.Import(
         pt.trim_boundary(pt.str(path), 1),
