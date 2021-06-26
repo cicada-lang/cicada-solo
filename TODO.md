@@ -1,5 +1,4 @@
 - [syntax] remove `(x) => ...` for lambda syntax
-- [syntax] remove `**` -- only one way to do `cons`
 
 - [fulfilling type] `cores/ap` -- `apply` for `ClsValue`
 - [fulfilling type] `exps/ap` -- `infer` for `ClsValue`
