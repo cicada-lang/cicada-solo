@@ -24,15 +24,16 @@ def my_cons(
 //                 A))
 // (define my-car (λ (A B p) (p A (λ (a b) a))))
 
-// @def my_car: (A: Type, B: (A) -> Type, p: (E: Type, f: (A, B(x)) -> E) -> E) -> A =
-//   (A, B, p) => p(A, (a, b) => a)
+// @def my_car: (A: Type, B: (A) -> Type, p: (E: Type, f: (A, B(x)) -> E) -> E) -> A {
+//   (A, B, p) { p(A, (a, b) { a }) }
+// }
 
 def my_car1(
   A: Type,
   B: (A) -> Type,
   p: (E: Type, f: (x: A, B(x)) -> E) -> E
 ): A {
-  p(A, (a, b) => a)
+  p(A, (a, b) { a })
 }
 
 // (claim my-car1 (Π ((A U)
