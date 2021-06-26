@@ -1,6 +1,7 @@
+- [syntax] remove `(x) => ...` for lambda syntax
+
 - [syntax] class field -- only use flower for fn related cases
 - [syntax] object field -- only use flower for fn related cases
-- [syntax] remove `(x) => ...` for lambda syntax
 
 - [fulfilling type] `cores/ap` -- `apply` for `ClsValue`
 - [fulfilling type] `exps/ap` -- `infer` for `ClsValue`
