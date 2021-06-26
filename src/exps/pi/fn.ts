@@ -48,9 +48,10 @@ export class Fn extends Exp {
     return new Cores.Fn(fresh_name, ret_core)
   }
 
-  private multi_fn(
-    names: Array<string> = new Array()
-  ): { names: Array<string>; ret: Exp } {
+  private multi_fn(names: Array<string> = new Array()): {
+    names: Array<string>
+    ret: Exp
+  } {
     if (this.ret instanceof Fn) {
       return this.ret.multi_fn([...names, this.name])
     } else {

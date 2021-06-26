@@ -18,9 +18,10 @@ export class Fn extends Core {
     return new Cores.FnValue(new Closure(env, this.name, this.ret))
   }
 
-  private multi_fn(
-    names: Array<string> = new Array()
-  ): { names: Array<string>; ret: Core } {
+  private multi_fn(names: Array<string> = new Array()): {
+    names: Array<string>
+    ret: Core
+  } {
     if (this.ret instanceof Fn) {
       return this.ret.multi_fn([...names, this.name])
     } else {
