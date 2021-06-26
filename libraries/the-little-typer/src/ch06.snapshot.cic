@@ -12,12 +12,16 @@ the(Vector(List(List(String)), 0), vecnil)
 the(Vector(String, 1), vec("a", vecnil))
 the(Vector(String, 2), vec("a", vec("b", vecnil)))
 
-def first(E: Type, prev: Nat, vector: Vector(E, add1(prev))): E = vector_head(vector)
+def first(E: Type, prev: Nat, vector: Vector(E, add1(prev))): E {
+  vector_head(vector)
+}
 
 def abc: Vector(String, 3) = vec! ["a", "b", "c"]
 
 first(String, 2, abc)
 
-def rest(E: Type, prev: Nat, vector: Vector(E, add1(prev))): Vector(E, prev) = vector_tail(vector)
+def rest(E: Type, prev: Nat, vector: Vector(E, add1(prev))): Vector(E, prev) {
+  vector_tail(vector)
+}
 
 rest(String, 2, abc)

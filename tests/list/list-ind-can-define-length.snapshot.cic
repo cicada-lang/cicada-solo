@@ -1,8 +1,10 @@
-def step_length(E: Type, e: E, es: List(E), almost: Nat): Nat =
+def step_length(E: Type, e: E, es: List(E), almost: Nat): Nat {
   add1(almost)
+}
 
-def length(E: Type, x: List(E)): Nat =
+def length(E: Type, x: List(E)): Nat {
   list_ind(x, (_) => Nat, 0, step_length(E))
+}
 
 def expectations: List(String) = li! [
   "cooked",

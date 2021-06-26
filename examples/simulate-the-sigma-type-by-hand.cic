@@ -14,7 +14,9 @@ def my_cons(
   x: A, y: B(x),
   E: Type,
   f: (x: A, B(x)) -> E,
-): E = f(x, y)
+): E {
+  f(x, y)
+}
 
 // (claim my-car (Π ((A U)
 //                   (B (→ A U))
@@ -29,7 +31,9 @@ def my_car1(
   A: Type,
   B: (A) -> Type,
   p: (E: Type, f: (x: A, B(x)) -> E) -> E
-): A = p(A, (a, b) => a)
+): A {
+  p(A, (a, b) => a)
+}
 
 // (claim my-car1 (Π ((A U)
 //                    (B (→ A U))

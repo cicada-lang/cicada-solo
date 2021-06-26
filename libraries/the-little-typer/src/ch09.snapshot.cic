@@ -1,9 +1,13 @@
 // 9. Double Your Money, Get Twice as Much
 
-def add(x: Nat, y: Nat): Nat = nat_rec(x, y, (_prev, almost) => add1(almost))
+def add(x: Nat, y: Nat): Nat {
+  nat_rec(x, y, (_prev, almost) => add1(almost))
+}
 
 // NOTE increase
-def incr(x: Nat): Nat = nat_rec(x, 1, (_prev, almost) => add(1, almost))
+def incr(x: Nat): Nat {
+  nat_rec(x, 1, (_prev, almost) => add(1, almost))
+}
 
 the(Equal(Nat, incr(3), add1(3)), same)
 
@@ -20,19 +24,25 @@ def cong(
   from to: X,
   target: Equal(X, from, to),
   f: (X) -> Y,
-): Equal(Y, f(from), f(to)) =
+): Equal(Y, f(from), f(to)) {
   replace(target, (to) => Equal(Y, f(from), f(to)), same)
+}
 
 // TODO Instead of implicit, how about the following?
 
 // def cong(
 //   target: Equal(let X: Type, let from: X, let to: X),
 //   f: (X) -> let Y: Type,
-// ): Equal(Y, f(from), f(to)) =
+// ): Equal(Y, f(from), f(to)) {
 //   replace(target, (to) => Equal(Y, f(from), f(to)), same)
+// }
 
-def incr_add1_equal_motive(n: Nat): Type = Equal(Nat, incr(n), add1(n))
+def incr_add1_equal_motive(n: Nat): Type {
+  Equal(Nat, incr(n), add1(n))
+}
+
 def incr_add1_equal_base: Equal(Nat, incr(zero), add1(zero)) = same
+
 def incr_add1_equal_step_t: Type = (
   prev: Nat,
   almost: Equal(Nat, incr(prev), add1(prev))
@@ -42,38 +52,44 @@ def incr_add1_equal_step_t: Type = (
 def incr_add1_equal_step(
   prev: Nat,
   almost: Equal(Nat, incr(prev), add1(prev))
-): Equal(Nat, add1(incr(prev)), add1(add1(prev))) =
+): Equal(Nat, add1(incr(prev)), add1(add1(prev))) {
   let motive(n: Nat): Type = Equal(Nat, add1(incr(prev)), add1(n))
   let base: Equal(Nat, add1(incr(prev)), add1(incr(prev))) = same
   replace(almost, motive, base)
+}
 
-def incr_add1_equal(n: Nat): Equal(Nat, incr(n), add1(n)) =
+def incr_add1_equal(n: Nat): Equal(Nat, incr(n), add1(n)) {
   nat_ind(
     n,
     incr_add1_equal_motive,
     incr_add1_equal_base,
     incr_add1_equal_step)
+}
 
 incr_add1_equal(0)
 incr_add1_equal(1)
 incr_add1_equal(2)
 incr_add1_equal(3)
 
-def double(n: Nat): Nat = nat_rec(n, 0, (_prev, almost) => add1(add1(almost)))
+def double(n: Nat): Nat {
+  nat_rec(n, 0, (_prev, almost) => add1(add1(almost)))
+}
 
 double(1)
 double(2)
 double(3)
 double(4)
 
-def twice(n: Nat): Nat = add(n, n)
+def twice(n: Nat): Nat {
+  add(n, n)
+}
 
 twice(1)
 twice(2)
 twice(3)
 twice(4)
 
-def add1_add_commute_on_2nd_arg(n j: Nat): Equal(Nat, add1(add(n, j)), add(n, add1(j))) =
+def add1_add_commute_on_2nd_arg(n j: Nat): Equal(Nat, add1(add(n, j)), add(n, add1(j))) {
   let motive(j: Nat, target: Nat): Type =
     Equal(Nat, add1(add(target, j)), add(target, add1(j)))
   let base: Equal(Nat, add1(add(0, j)), add(0, add1(j))) = same
@@ -83,11 +99,12 @@ def add1_add_commute_on_2nd_arg(n j: Nat): Equal(Nat, add1(add(n, j)), add(n, ad
   ): Equal(Nat, add1(add1(add(prev, j))), add1(add(prev, add1(j)))) =
     cong(Nat, Nat, add1(add(prev, j)), add(prev, add1(j)), almost, add(1))
   nat_ind(n, motive(j), base, step)
+}
 
 def twice_double_equal_step(
   prev: Nat,
   almost: Equal(Nat, add(prev, prev), double(prev))
-): Equal(Nat, add1(add(prev, add1(prev))), add1(add1(double(prev)))) =
+): Equal(Nat, add1(add(prev, add1(prev))), add1(add1(double(prev)))) {
   let target: Equal(Nat, add1(add(prev, prev)), add(prev, add1(prev))) =
     add1_add_commute_on_2nd_arg(prev, prev)
   let motive(target: Nat): Type =
@@ -95,24 +112,23 @@ def twice_double_equal_step(
   let base: Equal(Nat, add1(add1(add(prev, prev))), add1(add1(double(prev)))) =
       cong(Nat, Nat, add(prev, prev), double(prev), almost, add(2))
   replace(target, motive, base)
+}
 
-def twice_double_equal(n: Nat): Equal(Nat, twice(n), double(n)) =
+def twice_double_equal(n: Nat): Equal(Nat, twice(n), double(n)) {
   let motive(target: Nat): Type = Equal(Nat, twice(target), double(target))
   let base: Equal(Nat, 0, 0) = same
   nat_ind(n, motive, base, twice_double_equal_step)
+}
 
 twice_double_equal(17)
 
-def twice_double_equal_on_17: Equal(Nat, twice(17), double(17)) =
-  twice_double_equal(17)
-
-def twice_double_equal_on_17_again: Equal(Nat, twice(17), double(17)) =
-  same
+def twice_double_equal_on_17: Equal(Nat, twice(17), double(17)) = twice_double_equal(17)
+def twice_double_equal_on_17_again: Equal(Nat, twice(17), double(17)) = same
 
 def vector_double(
   E: Type,
   length: Nat,
-): (Vector(E, length)) -> Vector(E, double(length)) =
+): (Vector(E, length)) -> Vector(E, double(length)) {
   let motive(target: Nat): Type = (Vector(E, target)) -> Vector(E, double(target))
   let base: (Vector(E, 0)) -> Vector(E, double(0)) = (vector) => vecnil
   let step(prev: Nat, doubler: motive(prev)): motive(add1(prev)) =
@@ -120,21 +136,24 @@ def vector_double(
       let head = vector_head(vector)
       vec(head, vec(head, doubler(vector_tail(vector))))
   nat_ind(length, motive, base, step)
+}
 
 vector_double(String, 3, vec! ["a", "b", "c"])
 
-def symm(T: Type, from to: T, target: Equal(T, from, to)): Equal(T, to, from) =
+def symm(T: Type, from to: T, target: Equal(T, from, to)): Equal(T, to, from) {
   replace(target, (x) => Equal(T, x, from), same)
+}
 
 def vector_twice(
   E: Type,
   length: Nat,
   vector: Vector(E, length)
-): Vector(E, twice(length)) =
+): Vector(E, twice(length)) {
   let target: Equal(Nat, double(length), twice(length)) =
     symm(Nat, twice(length), double(length), twice_double_equal(length))
   let motive(length: Nat): Type = Vector(E, length)
   let base = vector_double(E, length, vector)
   replace(target, motive, base)
+}
 
 vector_twice(String, 3, vec! ["a", "b", "c"])
