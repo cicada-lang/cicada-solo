@@ -1,5 +1,3 @@
-- report import syntax error in the right context
-
 - improve function repr -- by grouping multi pi
 - improve function repr -- by grouping multi sigma
 

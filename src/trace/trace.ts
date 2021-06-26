@@ -14,11 +14,15 @@ export class Trace<T> {
     let s = ""
     s += this.message
     s += "\n"
-    s += "previous:\n"
-    for (const x of this.previous) {
-      s += `- ${formater(x)}\n`
+
+    if (this.previous.length > 0) {
+      s += "previous:\n"
+      for (const x of this.previous) {
+        s += `- ${formater(x)}\n`
+      }
+      s += "\n"
     }
-    s += "\n"
+
     return s
   }
 }

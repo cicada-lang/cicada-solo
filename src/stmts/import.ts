@@ -17,11 +17,18 @@ export class Import implements Stmt {
   }
 
   async execute(mod: Module): Promise<void> {
-    const imported = await mod.library.load(this.path)
+    const imported_mod = await mod.library.load(this.path).catch((error) => {
+      throw new Trace(
+        [
+          `I fail to import from path: ${this.path}`,
+          `because there are errors in that module.`,
+        ].join("\n")
+      )
+    })
 
     for (const { name, alias } of this.entries) {
-      const t = imported.ctx.lookup_type(name)
-      const value = imported.env.lookup_value(name)
+      const t = imported_mod.ctx.lookup_type(name)
+      const value = imported_mod.env.lookup_value(name)
       if (!t || !value) {
         throw new Trace(
           [
@@ -29,7 +36,7 @@ export class Import implements Stmt {
             `  ${name}`,
             `when importing from module:`,
             `  ${this.path}`,
-          ].join("\n") + "\n"
+          ].join("\n")
         )
       }
 
