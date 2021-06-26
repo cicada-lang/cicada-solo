@@ -7,7 +7,11 @@ export const operator = {
     ],
     "operator:car": ['"car"', '"("', { target: "exp" }, '")"'],
     "operator:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
-    "operator:dot_field": [{ target: "operator" }, '"."', { name: "identifier" }],
+    "operator:dot_field": [
+      { target: "operator" },
+      '"."',
+      { name: "identifier" },
+    ],
     "operator:dot_method": [
       { target: "operator" },
       '"."',
@@ -104,7 +108,14 @@ export const operator = {
       { base_right: "exp" },
       '")"',
     ],
-    "operator:the": ['"the"', '"("', { t: "exp" }, '","', { exp: "exp" }, '")"'],
+    "operator:the": [
+      '"the"',
+      '"("',
+      { t: "exp" },
+      '","',
+      { exp: "exp" },
+      '")"',
+    ],
     // NOTE about `is(exp, t)`
     // In set theory, the symbol "∈" is a stylized lowercase Greek letter epsilon ("ϵ"),
     // the first letter of the word ἐστί, which means "is".

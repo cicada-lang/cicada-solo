@@ -111,8 +111,10 @@ export function operator_matcher(tree: pt.Tree): Exp {
         exp_matcher(base_left),
         exp_matcher(base_right)
       ),
-    "operator:the": ({ t, exp }) => new Exps.The(exp_matcher(t), exp_matcher(exp)),
-    "operator:is": ({ t, exp }) => new Exps.The(exp_matcher(t), exp_matcher(exp)),
+    "operator:the": ({ t, exp }) =>
+      new Exps.The(exp_matcher(t), exp_matcher(exp)),
+    "operator:is": ({ t, exp }) =>
+      new Exps.The(exp_matcher(t), exp_matcher(exp)),
   })(tree)
 }
 
