@@ -4,9 +4,9 @@ previous:
 - gauss
 - gauss(prev)
 - add(add1(prev))(gauss(prev))
-- (prev) => add(add1(prev))(gauss(prev))
-- my_nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
-- (n) => my_nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev)))
-- the((_: Nat) -> Nat, (n) => my_nat_which(n)(Nat)(0)((prev) => add(add1(prev))(gauss(prev))))
+- (prev) { add(add1(prev))(gauss(prev)) }
+- my_nat_which(n)(Nat)(0)((prev) { add(add1(prev))(gauss(prev)) })
+- (n) { my_nat_which(n)(Nat)(0)((prev) { add(add1(prev))(gauss(prev)) }) }
+- the((_: Nat) -> Nat, (n) { my_nat_which(n)(Nat)(0)((prev) { add(add1(prev))(gauss(prev)) }) })
 
 

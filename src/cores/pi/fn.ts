@@ -19,11 +19,11 @@ export class Fn extends Core {
   }
 
   repr(): string {
-    return `(${this.name}) => ${this.ret.repr()}`
+    return `(${this.name}) { ${this.ret.repr()} }`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
     const ret_repr = this.ret.alpha_repr(ctx.extend(this.name))
-    return `# => ${ret_repr}`
+    return `# { ${ret_repr} }`
   }
 }

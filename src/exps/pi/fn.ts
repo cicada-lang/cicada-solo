@@ -49,6 +49,6 @@ export class Fn extends Exp {
   }
 
   repr(): string {
-    return `(${this.name}) => ${this.ret.repr()}`
+    return `(${this.name}) { ${this.ret.repr()} }`
   }
 }

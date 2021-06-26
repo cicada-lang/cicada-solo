@@ -1,4 +1,4 @@
-- fix fn repr
+- improve function repr -- by grouping functions succession
 - [syntax] move fn from `operator` to `operand`
 - [syntax] class field -- only use flower for fn related cases
 - [syntax] object field -- only use flower for fn related cases
