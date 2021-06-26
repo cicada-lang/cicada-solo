@@ -1,6 +1,6 @@
 x =
-  let one = add1(zero)
-  let two = add1(one)
+  one = add1(zero)
+  two = add1(one)
   two
 
 x

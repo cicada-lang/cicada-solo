@@ -11,7 +11,7 @@ pow(x: Nat, y: Nat): Nat {
 }
 
 eight =
-  let four = add(2, 2)
+  four = add(2, 2)
   add(four, four)
 
 the(Equal(Nat, eight, pow(2, 3)), same)

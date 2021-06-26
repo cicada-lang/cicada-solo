@@ -31,18 +31,6 @@ cong(
     same)
 }
 
-// TODO Instead of implicit, how about the following?
-
-// cong(
-//   target: Equal(let X: Type, let from: X, let to: X),
-//   f: (X) -> let Y: Type,
-// ): Equal(Y, f(from), f(to)) {
-//   replace(
-//     target,
-//     (to) { Equal(Y, f(from), f(to)) },
-//     same)
-// }
-
 incr_add1_equal_motive(n: Nat): Type {
   Equal(Nat, incr(n), add1(n))
 }
@@ -59,11 +47,11 @@ incr_add1_equal_step(
   prev: Nat,
   almost: Equal(Nat, incr(prev), add1(prev))
 ): Equal(Nat, add1(incr(prev)), add1(add1(prev))) {
-  let motive(n: Nat): Type {
+  motive(n: Nat): Type {
     Equal(Nat, add1(incr(prev)), add1(n))
   }
 
-  let base: Equal(Nat, add1(incr(prev)), add1(incr(prev))) = same
+  base: Equal(Nat, add1(incr(prev)), add1(incr(prev))) = same
 
   replace(almost, motive, base)
 }
@@ -100,13 +88,13 @@ twice(3)
 twice(4)
 
 add1_add_commute_on_2nd_arg(n j: Nat): Equal(Nat, add1(add(n, j)), add(n, add1(j))) {
-  let motive(j: Nat, target: Nat): Type {
+  motive(j: Nat, target: Nat): Type {
     Equal(Nat, add1(add(target, j)), add(target, add1(j)))
   }
 
-  let base: Equal(Nat, add1(add(0, j)), add(0, add1(j))) = same
+  base: Equal(Nat, add1(add(0, j)), add(0, add1(j))) = same
 
-  let step(
+  step(
     prev: Nat,
     almost: Equal(Nat, add1(add(prev, j)), add(prev, add1(j)))
   ): Equal(Nat, add1(add1(add(prev, j))), add1(add(prev, add1(j)))) {
@@ -120,25 +108,25 @@ twice_double_equal_step(
   prev: Nat,
   almost: Equal(Nat, add(prev, prev), double(prev))
 ): Equal(Nat, add1(add(prev, add1(prev))), add1(add1(double(prev)))) {
-  let target: Equal(Nat, add1(add(prev, prev)), add(prev, add1(prev))) =
+  target: Equal(Nat, add1(add(prev, prev)), add(prev, add1(prev))) =
     add1_add_commute_on_2nd_arg(prev, prev)
 
-  let motive(target: Nat): Type {
+  motive(target: Nat): Type {
     Equal(Nat, add1(target), add1(add1(double(prev))))
   }
 
-  let base: Equal(Nat, add1(add1(add(prev, prev))), add1(add1(double(prev)))) =
+  base: Equal(Nat, add1(add1(add(prev, prev))), add1(add1(double(prev)))) =
     cong(Nat, Nat, add(prev, prev), double(prev), almost, add(2))
 
   replace(target, motive, base)
 }
 
 twice_double_equal(n: Nat): Equal(Nat, twice(n), double(n)) {
-  let motive(target: Nat): Type {
+  motive(target: Nat): Type {
     Equal(Nat, twice(target), double(target))
   }
 
-  let base: Equal(Nat, 0, 0) = same
+  base: Equal(Nat, 0, 0) = same
 
   nat_ind(n, motive, base, twice_double_equal_step)
 }
@@ -152,15 +140,15 @@ vector_double(
   E: Type,
   length: Nat,
 ): (Vector(E, length)) -> Vector(E, double(length)) {
-  let motive(target: Nat): Type {
+  motive(target: Nat): Type {
      (Vector(E, target)) -> Vector(E, double(target))
   }
 
-  let base: (Vector(E, 0)) -> Vector(E, double(0)) = (vector) { vecnil }
+  base: (Vector(E, 0)) -> Vector(E, double(0)) = (vector) { vecnil }
 
-  let step(prev: Nat, doubler: motive(prev)): motive(add1(prev)) {
+  step(prev: Nat, doubler: motive(prev)): motive(add1(prev)) {
     (vector) {
-      let head = vector_head(vector)
+      head = vector_head(vector)
       vec(head, vec(head, doubler(vector_tail(vector))))
     }
   }
@@ -179,14 +167,14 @@ vector_twice(
   length: Nat,
   vector: Vector(E, length)
 ): Vector(E, twice(length)) {
-  let target: Equal(Nat, double(length), twice(length)) =
+  target: Equal(Nat, double(length), twice(length)) =
     symm(Nat, twice(length), double(length), twice_double_equal(length))
 
-  let motive(length: Nat): Type {
+  motive(length: Nat): Type {
     Vector(E, length)
   }
 
-  let base = vector_double(E, length, vector)
+  base = vector_double(E, length, vector)
 
   replace(target, motive, base)
 }

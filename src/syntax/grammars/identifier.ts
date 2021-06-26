@@ -5,7 +5,6 @@ const preserved = [
   "class",
   "import",
   // keywords
-  "let",
   "the",
   "is",
   // built-in

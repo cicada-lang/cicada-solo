@@ -243,14 +243,12 @@ export const operand = {
 export const declaration = {
   $grammar: {
     "declaration:let": [
-      '"let"',
       { name: "identifier" },
       '"="',
       { exp: "exp" },
       { ret: "exp" },
     ],
     "declaration:let_the": [
-      '"let"',
       { name: "identifier" },
       '":"',
       { t: "exp" },
@@ -259,7 +257,6 @@ export const declaration = {
       { ret: "exp" },
     ],
     "declaration:let_fn": [
-      '"let"',
       { name: "identifier" },
       '"("',
       { bindings: "bindings" },
