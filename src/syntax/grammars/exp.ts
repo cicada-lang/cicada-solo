@@ -134,7 +134,14 @@ export const operand = {
       '">"',
       { ret_t: "exp" },
     ],
-    "operand:fn": ['"("', { names: "names" }, '")"', '"="', '">"', { ret: "exp" }],
+    "operand:fn": [
+      '"("',
+      { names: "names" },
+      '")"',
+      '"="',
+      '">"',
+      { ret: "exp" },
+    ],
     "operand:fn_flower": [
       '"("',
       { names: "names" },
@@ -184,7 +191,14 @@ export const operand = {
     "operand:list": ['"List"', '"("', { elem_t: "exp" }, '")"'],
     "operand:nil": ['"nil"'],
     "operand:nil_sugar": ['"li"', '"!"', '"["', '"]"'],
-    "operand:li": ['"li"', '"("', { head: "exp" }, '","', { tail: "exp" }, '")"'],
+    "operand:li": [
+      '"li"',
+      '"("',
+      { head: "exp" },
+      '","',
+      { tail: "exp" },
+      '")"',
+    ],
     "operand:li_sugar": ['"li"', '"!"', '"["', { exps: "exps" }, '"]"'],
     "operand:vector": [
       '"Vector"',
