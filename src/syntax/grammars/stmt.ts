@@ -25,7 +25,8 @@ export const stmt = {
       { ret: "exp" },
       '"}"',
     ],
-    "stmt:show": [{ exp: "exp" }],
+    "stmt:show_operator": [{ operator: "operator" }],
+    "stmt:show_operand": [{ operand: "operand" }],
     "stmt:class": [
       '"class"',
       { name: "identifier" },

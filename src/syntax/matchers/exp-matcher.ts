@@ -32,6 +32,7 @@ export function exp_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "exp:operator": ({ operator }) => operator_matcher(operator),
     "exp:operand": ({ operand }) => operand_matcher(operand),
+    "exp:declaration": ({ declaration }) => declaration_matcher(declaration),
   })(tree)
 }
 
@@ -211,15 +212,20 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:inl": ({ left }) => new Exps.Inl(exp_matcher(left)),
     "operand:inr": ({ right }) => new Exps.Inr(exp_matcher(right)),
     "operand:type": () => new Exps.Type(),
-    "operand:let": ({ name, exp, ret }) =>
+  })(tree)
+}
+
+export function declaration_matcher(tree: pt.Tree): Exp {
+  return pt.matcher<Exp>({
+    "declaration:let": ({ name, exp, ret }) =>
       new Exps.Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),
-    "operand:let_the": ({ name, t, exp, ret }) =>
+    "declaration:let_the": ({ name, t, exp, ret }) =>
       new Exps.Let(
         pt.str(name),
         new Exps.The(exp_matcher(t), exp_matcher(exp)),
         exp_matcher(ret)
       ),
-    "operand:let_fn": ({ name, bindings, ret_t, ret, body }) => {
+    "declaration:let_fn": ({ name, bindings, ret_t, ret, body }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
         .flatMap(({ names }) => names.reverse())

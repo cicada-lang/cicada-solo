@@ -1,3 +1,6 @@
-let one = add1(zero)
-let two = add1(one)
-two
+x =
+  let one = add1(zero)
+  let two = add1(one)
+  two
+
+x

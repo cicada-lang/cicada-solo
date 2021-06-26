@@ -237,14 +237,19 @@ export const operand = {
     "operand:inl": ['"inl"', '"("', { left: "exp" }, '")"'],
     "operand:inr": ['"inr"', '"("', { right: "exp" }, '")"'],
     "operand:type": ['"Type"'],
-    "operand:let": [
+  },
+}
+
+export const declaration = {
+  $grammar: {
+    "declaration:let": [
       '"let"',
       { name: "identifier" },
       '"="',
       { exp: "exp" },
       { ret: "exp" },
     ],
-    "operand:let_the": [
+    "declaration:let_the": [
       '"let"',
       { name: "identifier" },
       '":"',
@@ -253,7 +258,7 @@ export const operand = {
       { exp: "exp" },
       { ret: "exp" },
     ],
-    "operand:let_fn": [
+    "declaration:let_fn": [
       '"let"',
       { name: "identifier" },
       '"("',
@@ -273,6 +278,7 @@ export const exp = {
   $grammar: {
     "exp:operator": [{ operator: "operator" }],
     "exp:operand": [{ operand: "operand" }],
+    "exp:declaration": [{ declaration: "declaration" }],
   },
 }
 

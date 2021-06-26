@@ -5,6 +5,7 @@ import * as Exps from "../../exps"
 import {
   exp_matcher,
   operator_matcher,
+  operand_matcher,
   cls_entry_matcher,
   pi_handler,
   bindings_matcher,
@@ -37,7 +38,10 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         new Exps.The(pi_handler({ bindings, ret_t }), fn)
       )
     },
-    "stmt:show": ({ exp }) => new Stmts.Show(exp_matcher(exp)),
+    "stmt:show_operator": ({ operator }) =>
+      new Stmts.Show(operator_matcher(operator)),
+    "stmt:show_operand": ({ operand }) =>
+      new Stmts.Show(operand_matcher(operand)),
     "stmt:class": ({ name, entries }) =>
       new Stmts.Class(
         pt.str(name),
