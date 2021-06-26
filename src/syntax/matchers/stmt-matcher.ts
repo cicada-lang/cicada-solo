@@ -37,6 +37,24 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         new Exps.The(pi_handler({ bindings, ret_t }), fn)
       )
     },
+    "stmt:def_flower": ({ name, exp }) =>
+      new Stmts.Def(pt.str(name), exp_matcher(exp)),
+    "stmt:def_flower_the": ({ name, t, exp }) =>
+      new Stmts.Def(
+        pt.str(name),
+        new Exps.The(exp_matcher(t), exp_matcher(exp))
+      ),
+    "stmt:def_flower_fn": ({ name, bindings, ret_t, ret }) => {
+      const fn = bindings_matcher(bindings)
+        .reverse()
+        .flatMap(({ names }) => names.reverse())
+        .reduce((fn, name) => new Exps.Fn(name, fn), exp_matcher(ret))
+
+      return new Stmts.Def(
+        pt.str(name),
+        new Exps.The(pi_handler({ bindings, ret_t }), fn)
+      )
+    },
     "stmt:show": ({ exp }) => new Stmts.Show(exp_matcher(exp)),
     "stmt:class": ({ name, entries }) =>
       new Stmts.Class(

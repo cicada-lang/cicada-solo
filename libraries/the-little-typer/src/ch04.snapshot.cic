@@ -15,14 +15,12 @@ def flip: (
 flip(Nat, String, cons(123, "abc"))
 flip(String, Nat, flip(Nat, String, cons(123, "abc")))
 
-
 the(
   Equal(
     Type,
     (A D: Type, pair: (A) * D) -> (D) * A,
     (Lemon Meringue: Type, (Lemon) * Meringue) -> (Meringue) * Lemon),
   same)
-
 
 the(
   Equal(
