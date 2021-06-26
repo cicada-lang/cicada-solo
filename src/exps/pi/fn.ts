@@ -48,7 +48,18 @@ export class Fn extends Exp {
     return new Cores.Fn(fresh_name, ret_core)
   }
 
+  private multi_fn(
+    names: Array<string> = new Array()
+  ): { names: Array<string>; ret: Exp } {
+    if (this.ret instanceof Fn) {
+      return this.ret.multi_fn([...names, this.name])
+    } else {
+      return { names: [...names, this.name], ret: this.ret }
+    }
+  }
+
   repr(): string {
-    return `(${this.name}) { ${this.ret.repr()} }`
+    const { names, ret } = this.multi_fn()
+    return `(${names.join(", ")}) { ${ret.repr()} }`
   }
 }

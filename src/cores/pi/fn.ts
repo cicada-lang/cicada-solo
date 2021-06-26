@@ -18,8 +18,19 @@ export class Fn extends Core {
     return new Cores.FnValue(new Closure(env, this.name, this.ret))
   }
 
+  private multi_fn(
+    names: Array<string> = new Array()
+  ): { names: Array<string>; ret: Core } {
+    if (this.ret instanceof Fn) {
+      return this.ret.multi_fn([...names, this.name])
+    } else {
+      return { names: [...names, this.name], ret: this.ret }
+    }
+  }
+
   repr(): string {
-    return `(${this.name}) { ${this.ret.repr()} }`
+    const { names, ret } = this.multi_fn()
+    return `(${names.join(", ")}) { ${ret.repr()} }`
   }
 
   alpha_repr(ctx: AlphaCtx): string {

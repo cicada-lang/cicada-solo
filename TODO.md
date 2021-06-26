@@ -1,4 +1,5 @@
-- improve function repr -- by grouping functions succession
+- improve function repr -- by grouping multi pi
+- improve function repr -- by grouping multi sigma
 
 - [syntax] class field -- only use flower for fn related cases
 - [syntax] object field -- only use flower for fn related cases
