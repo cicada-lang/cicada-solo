@@ -1,4 +1,5 @@
-- [syntax] add `def ...: { ... }`
+- [syntax] only use flower for fn related cases in `let` & `def`
+- [syntax] remove `(x) => ...` for lambda syntax
 - [syntax] remove `**` -- only one way to do `cons`
 
 - [fulfilling type] `cores/ap` -- `apply` for `ClsValue`
