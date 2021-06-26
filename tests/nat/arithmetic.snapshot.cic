@@ -1,13 +1,13 @@
 def add(x: Nat, y: Nat): Nat {
-  nat_ind(y, (_) => Nat, x, (prev, almost) => add1(almost))
+  nat_ind(y, (_) { Nat }, x, (prev, almost) { add1(almost) })
 }
 
 def mul(x: Nat, y: Nat): Nat {
-  nat_ind(y, (_) => Nat, 0, (prev, almost) => add(almost, x))
+  nat_ind(y, (_) { Nat }, 0, (prev, almost) { add(almost, x) })
 }
 
 def pow(x: Nat, y: Nat): Nat {
-  nat_ind(y, (_) => Nat, 1, (prev, almost) => mul(almost, x))
+  nat_ind(y, (_) { Nat }, 1, (prev, almost) { mul(almost, x) })
 }
 
 def eight =

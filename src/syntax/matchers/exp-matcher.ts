@@ -125,10 +125,6 @@ export function operand_matcher(tree: pt.Tree): Exp {
       names_matcher(names)
         .reverse()
         .reduce((result, name) => new Exps.Fn(name, result), exp_matcher(ret)),
-    "operand:fn_flower": ({ names, ret }) =>
-      names_matcher(names)
-        .reverse()
-        .reduce((result, name) => new Exps.Fn(name, result), exp_matcher(ret)),
     "operand:sigma": sigma_handler,
     "operand:cons": ({ car, cdr }) =>
       new Exps.Cons(exp_matcher(car), exp_matcher(cdr)),

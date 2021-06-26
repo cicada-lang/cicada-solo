@@ -5,12 +5,16 @@ def pair_elim: (
   pair: (A) * D,
   maker: (A, D) -> X,
 ) -> X =
-  (A, D, X, pair, maker) => maker(car(pair), cdr(pair))
+  (A, D, X, pair, maker) {
+    maker(car(pair), cdr(pair))
+  }
 
 def flip: (
   A: Type, D: Type, pair: (A) * D
 ) -> (D) * A =
-  (A, D, pair) => cons(cdr(pair), car(pair))
+  (A, D, pair) {
+    cons(cdr(pair), car(pair))
+  }
 
 flip(Nat, String, cons(123, "abc"))
 flip(String, Nat, flip(Nat, String, cons(123, "abc")))
@@ -33,14 +37,16 @@ the(
   same)
 
 def swap: ((Nat) * String) -> (String) * Nat =
-  (pair) => pair_elim(
-    Nat, String, (String) * Nat, pair,
-    (a, d) => cons(d, a))
+  (pair) {
+    pair_elim(
+      Nat, String, (String) * Nat, pair,
+      (a, d) { cons(d, a) })
+  }
 
 swap(cons(123, "abc"))
 
 def twin: (X: Type, X) -> (X) * X =
-  (X, x) => cons(x, x)
+  (X, x) { cons(x, x) }
 
 twin(Nat, 123)
 twin(String, "abc")

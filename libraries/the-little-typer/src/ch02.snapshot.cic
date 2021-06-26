@@ -1,56 +1,56 @@
 // 2. Doin' What Comes Naturally
 
 def flavored_lentils: (String) -> (String) * String =
-  (flavor) => cons(flavor, "lentils")
+  (flavor) { cons(flavor, "lentils") }
 
 def garlic_flavored_lentils: (String) * String =
   flavored_lentils("garlic")
 
 def id: (String) -> String =
-  (x) => x
+  (x) { x }
 
 def T: Type =
   (String) * (String) -> String
 
 def id_in_pair: (x: String) -> T =
-  (x) => cons(x, (x) => x)
+  (x) { cons(x, (x) { x }) }
 
 id_in_pair
 the(T, id_in_pair("x"))
 
-// The x occur in `(x) => x` should not be
+// The x occur in `(x) { x }` should not be
 // effected by the substitution of outer `x`,
-// and `(x) => x` is equivalent to `(y) => y`,
+// and `(x) { x }` is equivalent to `(y) { y }`,
 
 the(
   Equal(
     T,
     id_in_pair("x"),
-    cons("x", (y) => y)),
+    cons("x", (y) { y })),
   same)
 
 
 the(
   Equal(
     (Nat) -> (Nat) * Nat,
-    (x) => cons(x, x),
-    (y) => cons(y, y)),
+    (x) { cons(x, x) },
+    (y) { cons(y, y) }),
   same)
 
 
 the(
   Equal(
     (Nat) -> Nat,
-    (y) => car(the((Nat) * Nat, cons(y, y))),
-    (x) => x),
+    (y) { car(the((Nat) * Nat, cons(y, y))) },
+    (x) { x }),
   same)
 
 
 the(
   Equal(
     ((Nat) * Nat) -> Nat,
-    (y) => car(y),
-    (x) => car(x)),
+    (y) { car(y) },
+    (x) { car(x) }),
   same)
 
 def vegetables: (String) * String =
@@ -65,7 +65,9 @@ the(
   same)
 
 def naught_or_more: (Nat) -> String =
-  (n) => nat_rec(n, "naught", (_prev, _almost) => "more")
+  (n) {
+    nat_rec(n, "naught", (_prev, _almost) { "more" })
+  }
 
 
 the(

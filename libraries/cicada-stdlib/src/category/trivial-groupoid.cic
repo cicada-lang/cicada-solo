@@ -19,6 +19,6 @@ def trivial_isomorphism: trivial_isomorphism_t = {
 def trivial_groupoid: Groupoid = {
   ...trivial_category
 
-  inv: (x, y, f) => sole
-  inv_iso: (x, y, f) => trivial_isomorphism
+  inv: (x, y, f) { sole }
+  inv_iso: (x, y, f) { trivial_isomorphism }
 }

@@ -1,12 +1,12 @@
 // 9. Double Your Money, Get Twice as Much
 
 def add(x: Nat, y: Nat): Nat {
-  nat_rec(x, y, (_prev, almost) => add1(almost))
+  nat_rec(x, y, (_prev, almost) { add1(almost) })
 }
 
 // NOTE increase
 def incr(x: Nat): Nat {
-  nat_rec(x, 1, (_prev, almost) => add(1, almost))
+  nat_rec(x, 1, (_prev, almost) { add(1, almost) })
 }
 
 the(Equal(Nat, incr(3), add1(3)), same)
@@ -25,7 +25,10 @@ def cong(
   target: Equal(X, from, to),
   f: (X) -> Y,
 ): Equal(Y, f(from), f(to)) {
-  replace(target, (to) => Equal(Y, f(from), f(to)), same)
+  replace(
+    target,
+    (to) { Equal(Y, f(from), f(to)) },
+    same)
 }
 
 // TODO Instead of implicit, how about the following?
@@ -34,7 +37,10 @@ def cong(
 //   target: Equal(let X: Type, let from: X, let to: X),
 //   f: (X) -> let Y: Type,
 // ): Equal(Y, f(from), f(to)) {
-//   replace(target, (to) => Equal(Y, f(from), f(to)), same)
+//   replace(
+//     target,
+//     (to) { Equal(Y, f(from), f(to)) },
+//     same)
 // }
 
 def incr_add1_equal_motive(n: Nat): Type {
@@ -76,7 +82,7 @@ incr_add1_equal(2)
 incr_add1_equal(3)
 
 def double(n: Nat): Nat {
-  nat_rec(n, 0, (_prev, almost) => add1(add1(almost)))
+  nat_rec(n, 0, (_prev, almost) { add1(add1(almost)) })
 }
 
 double(1)
@@ -150,12 +156,13 @@ def vector_double(
      (Vector(E, target)) -> Vector(E, double(target))
   }
 
-  let base: (Vector(E, 0)) -> Vector(E, double(0)) = (vector) => vecnil
+  let base: (Vector(E, 0)) -> Vector(E, double(0)) = (vector) { vecnil }
 
   let step(prev: Nat, doubler: motive(prev)): motive(add1(prev)) {
-    (vector) =>
+    (vector) {
       let head = vector_head(vector)
       vec(head, vec(head, doubler(vector_tail(vector))))
+    }
   }
 
   nat_ind(length, motive, base, step)
@@ -164,7 +171,7 @@ def vector_double(
 vector_double(String, 3, vec! ["a", "b", "c"])
 
 def symm(T: Type, from to: T, target: Equal(T, from, to)): Equal(T, to, from) {
-  replace(target, (x) => Equal(T, x, from), same)
+  replace(target, (x) { Equal(T, x, from) }, same)
 }
 
 def vector_twice(

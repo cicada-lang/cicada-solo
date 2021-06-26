@@ -11,13 +11,19 @@ def nat_ind_t: Type = (
 //   the definition of `pow` looks more natural.
 
 def add: (Nat, Nat) -> Nat =
-  (x, y) => nat_rec(x, y, (_prev, almost) => add1(almost))
+  (x, y) {
+    nat_rec(x, y, (_prev, almost) { add1(almost) })
+  }
 
 def mul: (Nat, Nat) -> Nat =
-  (x, y) => nat_rec(x, 0, (_prev, almost) => add(almost, y))
+  (x, y) {
+    nat_rec(x, 0, (_prev, almost) { add(almost, y) })
+  }
 
 def pow: (Nat, Nat) -> Nat =
-  (x, y) => nat_rec(x, 1, (_prev, almost) => mul(almost, y))
+  (x, y) {
+    nat_rec(x, 1, (_prev, almost) { mul(almost, y) })
+  }
 
 def eight =
   let four = add(2, 2)
@@ -28,7 +34,9 @@ mul(4, 3)
 pow(4, 3)
 
 def gauss: (Nat) -> Nat =
-  (n) => nat_rec(n, 0, (prev, almost) => add(add1(prev), almost))
+  (n) {
+    nat_rec(n, 0, (prev, almost) { add(add1(prev), almost) })
+  }
 
 "gauss"
 gauss(0)
@@ -44,7 +52,9 @@ gauss(9)
 gauss(10)
 
 def factorial: (Nat) -> Nat =
-  (n) => nat_rec(n, 1, (prev, almost) => mul(add1(prev), almost))
+  (n) {
+    nat_rec(n, 1, (prev, almost) { mul(add1(prev), almost) })
+  }
 
 "factorial"
 factorial(0)

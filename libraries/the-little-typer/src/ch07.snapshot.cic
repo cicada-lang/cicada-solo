@@ -7,7 +7,9 @@ def nat_ind_t = (
   step: (prev: Nat, almost: motive(prev)) -> motive(add1(prev)),
 ) -> motive(target)
 
-def my_nat_ind: nat_ind_t = (target, motive, base, step) => nat_ind(target, motive, base, step)
+def my_nat_ind: nat_ind_t = (target, motive, base, step) {
+  nat_ind(target, motive, base, step)
+}
 
 // NOTE peas -- generate given number of peas
 
@@ -32,7 +34,9 @@ def last_motive(E: Type, n: Nat): Type {
 }
 
 def last_base(E: Type): last_motive(E, zero) {
-  (vector) => vector_head(vector)
+  (vector) {
+    vector_head(vector)
+  }
 }
 
 def last_step(
@@ -40,7 +44,9 @@ def last_step(
   prev: Nat,
   almost: last_motive(E, prev),
 ): last_motive(E, add1(prev)) {
-  (vector) => almost(vector_tail(vector))
+  (vector) {
+    almost(vector_tail(vector))
+  }
 }
 
 def last(E: Type, n: Nat): last_motive(E, n) {
@@ -60,7 +66,7 @@ def drop_last_motive(E: Type, n: Nat): Type {
 }
 
 def drop_last_base(E: Type): drop_last_motive(E, zero) {
-  (_vector) => vecnil
+  (_vector) { vecnil }
 }
 
 def drop_last_step(
@@ -68,7 +74,9 @@ def drop_last_step(
   prev: Nat,
   almost: drop_last_motive(E, prev)
 ): drop_last_motive(E, add1(prev)) {
-  (vector) => vec(vector_head(vector), almost(vector_tail(vector)))
+  (vector) {
+    vec(vector_head(vector), almost(vector_tail(vector)))
+  }
 }
 
 def drop_last(E: Type, n: Nat): drop_last_motive(E, n) {
