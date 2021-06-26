@@ -124,9 +124,9 @@ export const operator = {
   },
 }
 
-export const cons = {
+export const operand = {
   $grammar: {
-    "cons:pi": [
+    "operand:pi": [
       '"("',
       { bindings: "bindings" },
       '")"',
@@ -134,8 +134,8 @@ export const cons = {
       '">"',
       { ret_t: "exp" },
     ],
-    "cons:fn": ['"("', { names: "names" }, '")"', '"="', '">"', { ret: "exp" }],
-    "cons:fn_flower": [
+    "operand:fn": ['"("', { names: "names" }, '")"', '"="', '">"', { ret: "exp" }],
+    "operand:fn_flower": [
       '"("',
       { names: "names" },
       '")"',
@@ -143,14 +143,14 @@ export const cons = {
       { ret: "exp" },
       '"}"',
     ],
-    "cons:sigma": [
+    "operand:sigma": [
       '"("',
       { bindings: "bindings" },
       '")"',
       '"*"',
       { cdr_t: "exp" },
     ],
-    "cons:cons": [
+    "operand:cons": [
       '"cons"',
       '"("',
       { car: "exp" },
@@ -158,13 +158,13 @@ export const cons = {
       { cdr: "exp" },
       '")"',
     ],
-    "cons:cls": [
+    "operand:cls": [
       '"class"',
       '"{"',
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
       '"}"',
     ],
-    "cons:ext": [
+    "operand:ext": [
       '"class"',
       '"extends"',
       { parent: "operator" },
@@ -172,21 +172,21 @@ export const cons = {
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
       '"}"',
     ],
-    "cons:obj": [
+    "operand:obj": [
       '"{"',
       { properties: { $ap: ["zero_or_more", "property"] } },
       '"}"',
     ],
-    "cons:nat": ['"Nat"'],
-    "cons:zero": ['"zero"'],
-    "cons:add1": ['"add1"', '"("', { prev: "exp" }, '")"'],
-    "cons:number": [{ value: { $pattern: ["number"] } }],
-    "cons:list": ['"List"', '"("', { elem_t: "exp" }, '")"'],
-    "cons:nil": ['"nil"'],
-    "cons:nil_sugar": ['"li"', '"!"', '"["', '"]"'],
-    "cons:li": ['"li"', '"("', { head: "exp" }, '","', { tail: "exp" }, '")"'],
-    "cons:li_sugar": ['"li"', '"!"', '"["', { exps: "exps" }, '"]"'],
-    "cons:vector": [
+    "operand:nat": ['"Nat"'],
+    "operand:zero": ['"zero"'],
+    "operand:add1": ['"add1"', '"("', { prev: "exp" }, '")"'],
+    "operand:number": [{ value: { $pattern: ["number"] } }],
+    "operand:list": ['"List"', '"("', { elem_t: "exp" }, '")"'],
+    "operand:nil": ['"nil"'],
+    "operand:nil_sugar": ['"li"', '"!"', '"["', '"]"'],
+    "operand:li": ['"li"', '"("', { head: "exp" }, '","', { tail: "exp" }, '")"'],
+    "operand:li_sugar": ['"li"', '"!"', '"["', { exps: "exps" }, '"]"'],
+    "operand:vector": [
       '"Vector"',
       '"("',
       { elem_t: "exp" },
@@ -194,8 +194,8 @@ export const cons = {
       { length: "exp" },
       '")"',
     ],
-    "cons:vecnil": ['"vecnil"'],
-    "cons:vec": [
+    "operand:vecnil": ['"vecnil"'],
+    "operand:vec": [
       '"vec"',
       '"("',
       { head: "exp" },
@@ -203,8 +203,8 @@ export const cons = {
       { tail: "exp" },
       '")"',
     ],
-    "cons:vec_sugar": ['"vec"', '"!"', '"["', { exps: "exps" }, '"]"'],
-    "cons:equal": [
+    "operand:vec_sugar": ['"vec"', '"!"', '"["', { exps: "exps" }, '"]"'],
+    "operand:equal": [
       '"Equal"',
       '"("',
       { t: "exp" },
@@ -214,13 +214,13 @@ export const cons = {
       { to: "exp" },
       '")"',
     ],
-    "cons:same": ['"same"'],
-    "cons:trivial": ['"Trivial"'],
-    "cons:sole": ['"sole"'],
-    "cons:absurd": ['"Absurd"'],
-    "cons:str": ['"String"'],
-    "cons:quote": [{ value: { $pattern: ["string"] } }],
-    "cons:either": [
+    "operand:same": ['"same"'],
+    "operand:trivial": ['"Trivial"'],
+    "operand:sole": ['"sole"'],
+    "operand:absurd": ['"Absurd"'],
+    "operand:str": ['"String"'],
+    "operand:quote": [{ value: { $pattern: ["string"] } }],
+    "operand:either": [
       '"Either"',
       '"("',
       { left_t: "exp" },
@@ -228,17 +228,17 @@ export const cons = {
       { right_t: "exp" },
       '")"',
     ],
-    "cons:inl": ['"inl"', '"("', { left: "exp" }, '")"'],
-    "cons:inr": ['"inr"', '"("', { right: "exp" }, '")"'],
-    "cons:type": ['"Type"'],
-    "cons:let": [
+    "operand:inl": ['"inl"', '"("', { left: "exp" }, '")"'],
+    "operand:inr": ['"inr"', '"("', { right: "exp" }, '")"'],
+    "operand:type": ['"Type"'],
+    "operand:let": [
       '"let"',
       { name: "identifier" },
       '"="',
       { exp: "exp" },
       { ret: "exp" },
     ],
-    "cons:let_the": [
+    "operand:let_the": [
       '"let"',
       { name: "identifier" },
       '":"',
@@ -247,7 +247,7 @@ export const cons = {
       { exp: "exp" },
       { ret: "exp" },
     ],
-    "cons:let_fn": [
+    "operand:let_fn": [
       '"let"',
       { name: "identifier" },
       '"("',
@@ -266,7 +266,7 @@ export const cons = {
 export const exp = {
   $grammar: {
     "exp:operator": [{ operator: "operator" }],
-    "exp:cons": [{ cons: "cons" }],
+    "exp:operand": [{ operand: "operand" }],
   },
 }
 

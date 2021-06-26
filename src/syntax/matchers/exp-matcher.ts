@@ -31,7 +31,7 @@ export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
 export function exp_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "exp:operator": ({ operator }) => operator_matcher(operator),
-    "exp:cons": ({ cons }) => cons_matcher(cons),
+    "exp:operand": ({ operand }) => operand_matcher(operand),
   })(tree)
 }
 
@@ -118,21 +118,21 @@ export function operator_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-export function cons_matcher(tree: pt.Tree): Exp {
+export function operand_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
-    "cons:pi": pi_handler,
-    "cons:fn": ({ names, ret }) =>
+    "operand:pi": pi_handler,
+    "operand:fn": ({ names, ret }) =>
       names_matcher(names)
         .reverse()
         .reduce((result, name) => new Exps.Fn(name, result), exp_matcher(ret)),
-    "cons:fn_flower": ({ names, ret }) =>
+    "operand:fn_flower": ({ names, ret }) =>
       names_matcher(names)
         .reverse()
         .reduce((result, name) => new Exps.Fn(name, result), exp_matcher(ret)),
-    "cons:sigma": sigma_handler,
-    "cons:cons": ({ car, cdr }) =>
+    "operand:sigma": sigma_handler,
+    "operand:cons": ({ car, cdr }) =>
       new Exps.Cons(exp_matcher(car), exp_matcher(cdr)),
-    "cons:cls": ({ entries }) =>
+    "operand:cls": ({ entries }) =>
       pt.matchers
         .zero_or_more_matcher(entries)
         .map(cls_entry_matcher)
@@ -147,7 +147,7 @@ export function cons_matcher(tree: pt.Tree): Exp {
             ),
           new Exps.ClsNil()
         ),
-    "cons:ext": ({ parent, entries }) =>
+    "operand:ext": ({ parent, entries }) =>
       new Exps.Ext(
         operator_matcher(parent),
         pt.matchers
@@ -165,14 +165,14 @@ export function cons_matcher(tree: pt.Tree): Exp {
             new Exps.ClsNil()
           )
       ),
-    "cons:obj": ({ properties }) =>
+    "operand:obj": ({ properties }) =>
       new Exps.Obj(
         pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
       ),
-    "cons:nat": () => new Exps.Nat(),
-    "cons:zero": () => new Exps.Zero(),
-    "cons:add1": ({ prev }) => new Exps.Add1(exp_matcher(prev)),
-    "cons:number": ({ value }, { span }) => {
+    "operand:nat": () => new Exps.Nat(),
+    "operand:zero": () => new Exps.Zero(),
+    "operand:add1": ({ prev }) => new Exps.Add1(exp_matcher(prev)),
+    "operand:number": ({ value }, { span }) => {
       const n = Number.parseInt(pt.str(value))
       if (Number.isNaN(n)) {
         throw new pt.ParsingError(
@@ -183,47 +183,47 @@ export function cons_matcher(tree: pt.Tree): Exp {
         return nat_from_number(n)
       }
     },
-    "cons:list": ({ elem_t }) => new Exps.List(exp_matcher(elem_t)),
-    "cons:nil": () => new Exps.Nil(),
-    "cons:nil_sugar": () => new Exps.Nil(),
-    "cons:li": ({ head, tail }) =>
+    "operand:list": ({ elem_t }) => new Exps.List(exp_matcher(elem_t)),
+    "operand:nil": () => new Exps.Nil(),
+    "operand:nil_sugar": () => new Exps.Nil(),
+    "operand:li": ({ head, tail }) =>
       new Exps.Li(exp_matcher(head), exp_matcher(tail)),
-    "cons:li_sugar": ({ exps }) =>
+    "operand:li_sugar": ({ exps }) =>
       exps_matcher(exps)
         .reverse()
         .reduce((list, exp) => new Exps.Li(exp, list), new Exps.Nil()),
-    "cons:vector": ({ elem_t, length }) =>
+    "operand:vector": ({ elem_t, length }) =>
       new Exps.Vector(exp_matcher(elem_t), exp_matcher(length)),
-    "cons:vecnil": () => new Exps.Vecnil(),
-    "cons:vec": ({ head, tail }) =>
+    "operand:vecnil": () => new Exps.Vecnil(),
+    "operand:vec": ({ head, tail }) =>
       new Exps.Vec(exp_matcher(head), exp_matcher(tail)),
-    "cons:vec_sugar": ({ exps }) =>
+    "operand:vec_sugar": ({ exps }) =>
       exps_matcher(exps)
         .reverse()
         .reduce((vector, exp) => new Exps.Vec(exp, vector), new Exps.Vecnil()),
-    "cons:equal": ({ t, from, to }) =>
+    "operand:equal": ({ t, from, to }) =>
       new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
-    "cons:same": () => new Exps.Same(),
-    "cons:trivial": () => new Exps.Trivial(),
-    "cons:sole": () => new Exps.Sole(),
-    "cons:absurd": () => new Exps.Absurd(),
-    "cons:str": () => new Exps.Str(),
-    "cons:quote": ({ value }) =>
+    "operand:same": () => new Exps.Same(),
+    "operand:trivial": () => new Exps.Trivial(),
+    "operand:sole": () => new Exps.Sole(),
+    "operand:absurd": () => new Exps.Absurd(),
+    "operand:str": () => new Exps.Str(),
+    "operand:quote": ({ value }) =>
       new Exps.Quote(pt.trim_boundary(pt.str(value), 1)),
-    "cons:either": ({ left_t, right_t }) =>
+    "operand:either": ({ left_t, right_t }) =>
       new Exps.Either(exp_matcher(left_t), exp_matcher(right_t)),
-    "cons:inl": ({ left }) => new Exps.Inl(exp_matcher(left)),
-    "cons:inr": ({ right }) => new Exps.Inr(exp_matcher(right)),
-    "cons:type": () => new Exps.Type(),
-    "cons:let": ({ name, exp, ret }) =>
+    "operand:inl": ({ left }) => new Exps.Inl(exp_matcher(left)),
+    "operand:inr": ({ right }) => new Exps.Inr(exp_matcher(right)),
+    "operand:type": () => new Exps.Type(),
+    "operand:let": ({ name, exp, ret }) =>
       new Exps.Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),
-    "cons:let_the": ({ name, t, exp, ret }) =>
+    "operand:let_the": ({ name, t, exp, ret }) =>
       new Exps.Let(
         pt.str(name),
         new Exps.The(exp_matcher(t), exp_matcher(exp)),
         exp_matcher(ret)
       ),
-    "cons:let_fn": ({ name, bindings, ret_t, ret, body }) => {
+    "operand:let_fn": ({ name, bindings, ret_t, ret, body }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
         .flatMap(({ names }) => names.reverse())

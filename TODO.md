@@ -1,6 +1,5 @@
-- [syntax] rename `cons` to `operand`
 - [syntax] remove `(x) => ...` for lambda syntax
-
+- [syntax] move fn from `operator` to `operand`
 - [syntax] class field -- only use flower for fn related cases
 - [syntax] object field -- only use flower for fn related cases
 
