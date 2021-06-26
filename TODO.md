@@ -1,4 +1,3 @@
-- [syntax] `let` -- only use flower for fn related cases
 - [syntax] remove `(x) => ...` for lambda syntax
 - [syntax] remove `**` -- only one way to do `cons`
 

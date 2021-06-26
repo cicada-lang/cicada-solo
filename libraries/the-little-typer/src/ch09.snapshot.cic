@@ -53,8 +53,12 @@ def incr_add1_equal_step(
   prev: Nat,
   almost: Equal(Nat, incr(prev), add1(prev))
 ): Equal(Nat, add1(incr(prev)), add1(add1(prev))) {
-  let motive(n: Nat): Type = Equal(Nat, add1(incr(prev)), add1(n))
+  let motive(n: Nat): Type {
+    Equal(Nat, add1(incr(prev)), add1(n))
+  }
+
   let base: Equal(Nat, add1(incr(prev)), add1(incr(prev))) = same
+
   replace(almost, motive, base)
 }
 
@@ -90,14 +94,19 @@ twice(3)
 twice(4)
 
 def add1_add_commute_on_2nd_arg(n j: Nat): Equal(Nat, add1(add(n, j)), add(n, add1(j))) {
-  let motive(j: Nat, target: Nat): Type =
+  let motive(j: Nat, target: Nat): Type {
     Equal(Nat, add1(add(target, j)), add(target, add1(j)))
+  }
+
   let base: Equal(Nat, add1(add(0, j)), add(0, add1(j))) = same
+
   let step(
     prev: Nat,
     almost: Equal(Nat, add1(add(prev, j)), add(prev, add1(j)))
-  ): Equal(Nat, add1(add1(add(prev, j))), add1(add(prev, add1(j)))) =
+  ): Equal(Nat, add1(add1(add(prev, j))), add1(add(prev, add1(j)))) {
     cong(Nat, Nat, add1(add(prev, j)), add(prev, add1(j)), almost, add(1))
+  }
+
   nat_ind(n, motive(j), base, step)
 }
 
@@ -107,16 +116,24 @@ def twice_double_equal_step(
 ): Equal(Nat, add1(add(prev, add1(prev))), add1(add1(double(prev)))) {
   let target: Equal(Nat, add1(add(prev, prev)), add(prev, add1(prev))) =
     add1_add_commute_on_2nd_arg(prev, prev)
-  let motive(target: Nat): Type =
+
+  let motive(target: Nat): Type {
     Equal(Nat, add1(target), add1(add1(double(prev))))
+  }
+
   let base: Equal(Nat, add1(add1(add(prev, prev))), add1(add1(double(prev)))) =
-      cong(Nat, Nat, add(prev, prev), double(prev), almost, add(2))
+    cong(Nat, Nat, add(prev, prev), double(prev), almost, add(2))
+
   replace(target, motive, base)
 }
 
 def twice_double_equal(n: Nat): Equal(Nat, twice(n), double(n)) {
-  let motive(target: Nat): Type = Equal(Nat, twice(target), double(target))
+  let motive(target: Nat): Type {
+    Equal(Nat, twice(target), double(target))
+  }
+
   let base: Equal(Nat, 0, 0) = same
+
   nat_ind(n, motive, base, twice_double_equal_step)
 }
 
@@ -129,12 +146,18 @@ def vector_double(
   E: Type,
   length: Nat,
 ): (Vector(E, length)) -> Vector(E, double(length)) {
-  let motive(target: Nat): Type = (Vector(E, target)) -> Vector(E, double(target))
+  let motive(target: Nat): Type {
+     (Vector(E, target)) -> Vector(E, double(target))
+  }
+
   let base: (Vector(E, 0)) -> Vector(E, double(0)) = (vector) => vecnil
-  let step(prev: Nat, doubler: motive(prev)): motive(add1(prev)) =
+
+  let step(prev: Nat, doubler: motive(prev)): motive(add1(prev)) {
     (vector) =>
       let head = vector_head(vector)
       vec(head, vec(head, doubler(vector_tail(vector))))
+  }
+
   nat_ind(length, motive, base, step)
 }
 
@@ -151,8 +174,13 @@ def vector_twice(
 ): Vector(E, twice(length)) {
   let target: Equal(Nat, double(length), twice(length)) =
     symm(Nat, twice(length), double(length), twice_double_equal(length))
-  let motive(length: Nat): Type = Vector(E, length)
+
+  let motive(length: Nat): Type {
+    Vector(E, length)
+  }
+
   let base = vector_double(E, length, vector)
+
   replace(target, motive, base)
 }
 

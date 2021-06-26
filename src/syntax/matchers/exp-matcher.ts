@@ -233,26 +233,6 @@ export function cons_matcher(tree: pt.Tree): Exp {
         exp_matcher(body)
       )
     },
-    "cons:let_flower": ({ name, exp, ret }) =>
-      new Exps.Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),
-    "cons:let_flower_the": ({ name, t, exp, ret }) =>
-      new Exps.Let(
-        pt.str(name),
-        new Exps.The(exp_matcher(t), exp_matcher(exp)),
-        exp_matcher(ret)
-      ),
-    "cons:let_flower_fn": ({ name, bindings, ret_t, ret, body }) => {
-      const fn = bindings_matcher(bindings)
-        .reverse()
-        .flatMap(({ names }) => names.reverse())
-        .reduce((fn, name) => new Exps.Fn(name, fn), exp_matcher(ret))
-
-      return new Exps.Let(
-        pt.str(name),
-        new Exps.The(pi_handler({ bindings, ret_t }), fn),
-        exp_matcher(body)
-      )
-    },
   })(tree)
 }
 
