@@ -2,7 +2,6 @@
 - improve function repr -- by grouping multi sigma
 
 - [syntax] class field -- only use flower for fn related cases
-- [syntax] object field -- only use flower for fn related cases
 
 - [fulfilling type] `cores/ap` -- `apply` for `ClsValue`
 - [fulfilling type] `exps/ap` -- `infer` for `ClsValue`
