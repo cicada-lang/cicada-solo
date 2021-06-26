@@ -39,7 +39,7 @@ export const stmt = {
       '"class"',
       { name: "identifier" },
       '"extends"',
-      { parent: "elim" },
+      { parent: "operator" },
       '"{"',
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
       '"}"',

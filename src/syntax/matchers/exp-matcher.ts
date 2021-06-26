@@ -30,65 +30,65 @@ export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
 
 export function exp_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
-    "exp:elim": ({ elim }) => elim_matcher(elim),
+    "exp:operator": ({ operator }) => operator_matcher(operator),
     "exp:cons": ({ cons }) => cons_matcher(cons),
   })(tree)
 }
 
-export function elim_matcher(tree: pt.Tree): Exp {
+export function operator_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
-    "elim:var": ({ name }) => new Exps.Var(pt.str(name)),
-    "elim:ap": ({ target, args }) =>
+    "operator:var": ({ name }) => new Exps.Var(pt.str(name)),
+    "operator:ap": ({ target, args }) =>
       pt.matchers
         .one_or_more_matcher(args)
         .flatMap((arg) => exps_matcher(arg))
         .reduce(
           (result, exp) => new Exps.Ap(result, exp),
-          elim_matcher(target)
+          operator_matcher(target)
         ),
-    "elim:car": ({ target }) => new Exps.Car(exp_matcher(target)),
-    "elim:cdr": ({ target }) => new Exps.Cdr(exp_matcher(target)),
-    "elim:dot_field": ({ target, name }) =>
-      new Exps.Dot(elim_matcher(target), pt.str(name)),
-    "elim:dot_method": ({ target, name, args }) =>
+    "operator:car": ({ target }) => new Exps.Car(exp_matcher(target)),
+    "operator:cdr": ({ target }) => new Exps.Cdr(exp_matcher(target)),
+    "operator:dot_field": ({ target, name }) =>
+      new Exps.Dot(operator_matcher(target), pt.str(name)),
+    "operator:dot_method": ({ target, name, args }) =>
       pt.matchers
         .one_or_more_matcher(args)
         .flatMap((arg) => exps_matcher(arg))
         .reduce(
           (result, exp) => new Exps.Ap(result, exp),
-          new Exps.Dot(elim_matcher(target), pt.str(name))
+          new Exps.Dot(operator_matcher(target), pt.str(name))
         ),
-    "elim:nat_ind": ({ target, motive, base, step }) =>
+    "operator:nat_ind": ({ target, motive, base, step }) =>
       new Exps.NatInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base),
         exp_matcher(step)
       ),
-    "elim:nat_rec": ({ target, base, step }) =>
+    "operator:nat_rec": ({ target, base, step }) =>
       new Exps.NatRec(
         exp_matcher(target),
         exp_matcher(base),
         exp_matcher(step)
       ),
-    "elim:list_ind": ({ target, motive, base, step }) =>
+    "operator:list_ind": ({ target, motive, base, step }) =>
       new Exps.ListInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base),
         exp_matcher(step)
       ),
-    "elim:list_rec": ({ target, base, step }) =>
+    "operator:list_rec": ({ target, base, step }) =>
       new Exps.ListRec(
         exp_matcher(target),
         exp_matcher(base),
         exp_matcher(step)
       ),
-    "elim:vector_head": ({ target }) =>
+    "operator:vector_head": ({ target }) =>
       new Exps.VectorHead(exp_matcher(target)),
-    "elim:vector_tail": ({ target }) =>
+    "operator:vector_tail": ({ target }) =>
       new Exps.VectorTail(exp_matcher(target)),
-    "elim:vector_ind": ({ length, target, motive, base, step }) =>
+    "operator:vector_ind": ({ length, target, motive, base, step }) =>
       new Exps.VectorInd(
         exp_matcher(length),
         exp_matcher(target),
@@ -96,23 +96,23 @@ export function elim_matcher(tree: pt.Tree): Exp {
         exp_matcher(base),
         exp_matcher(step)
       ),
-    "elim:replace": ({ target, motive, base }) =>
+    "operator:replace": ({ target, motive, base }) =>
       new Exps.Replace(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base)
       ),
-    "elim:absurd_ind": ({ target, motive }) =>
+    "operator:absurd_ind": ({ target, motive }) =>
       new Exps.AbsurdInd(exp_matcher(target), exp_matcher(motive)),
-    "elim:either_ind": ({ target, motive, base_left, base_right }) =>
+    "operator:either_ind": ({ target, motive, base_left, base_right }) =>
       new Exps.EitherInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base_left),
         exp_matcher(base_right)
       ),
-    "elim:the": ({ t, exp }) => new Exps.The(exp_matcher(t), exp_matcher(exp)),
-    "elim:is": ({ t, exp }) => new Exps.The(exp_matcher(t), exp_matcher(exp)),
+    "operator:the": ({ t, exp }) => new Exps.The(exp_matcher(t), exp_matcher(exp)),
+    "operator:is": ({ t, exp }) => new Exps.The(exp_matcher(t), exp_matcher(exp)),
   })(tree)
 }
 
@@ -147,7 +147,7 @@ export function cons_matcher(tree: pt.Tree): Exp {
         ),
     "cons:ext": ({ parent, entries }) =>
       new Exps.Ext(
-        elim_matcher(parent),
+        operator_matcher(parent),
         pt.matchers
           .zero_or_more_matcher(entries)
           .map(cls_entry_matcher)

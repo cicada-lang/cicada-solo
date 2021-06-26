@@ -4,7 +4,7 @@ import * as Stmts from "../../stmts"
 import * as Exps from "../../exps"
 import {
   exp_matcher,
-  elim_matcher,
+  operator_matcher,
   cls_entry_matcher,
   pi_handler,
   bindings_matcher,
@@ -60,7 +60,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
       new Stmts.ClassExtends(
         pt.str(name),
         new Exps.Ext(
-          elim_matcher(parent),
+          operator_matcher(parent),
           pt.matchers
             .zero_or_more_matcher(entries)
             .map(cls_entry_matcher)

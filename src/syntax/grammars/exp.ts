@@ -1,20 +1,20 @@
-export const elim = {
+export const operator = {
   $grammar: {
-    "elim:var": [{ name: "identifier" }],
-    "elim:ap": [
-      { target: "elim" },
+    "operator:var": [{ name: "identifier" }],
+    "operator:ap": [
+      { target: "operator" },
       { args: { $ap: ["one_or_more", '"("', "exps", '")"'] } },
     ],
-    "elim:car": ['"car"', '"("', { target: "exp" }, '")"'],
-    "elim:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
-    "elim:dot_field": [{ target: "elim" }, '"."', { name: "identifier" }],
-    "elim:dot_method": [
-      { target: "elim" },
+    "operator:car": ['"car"', '"("', { target: "exp" }, '")"'],
+    "operator:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
+    "operator:dot_field": [{ target: "operator" }, '"."', { name: "identifier" }],
+    "operator:dot_method": [
+      { target: "operator" },
       '"."',
       { name: "identifier" },
       { args: { $ap: ["one_or_more", '"("', "exps", '")"'] } },
     ],
-    "elim:nat_ind": [
+    "operator:nat_ind": [
       '"nat_ind"',
       '"("',
       { target: "exp" },
@@ -26,7 +26,7 @@ export const elim = {
       { step: "exp" },
       '")"',
     ],
-    "elim:nat_rec": [
+    "operator:nat_rec": [
       '"nat_rec"',
       '"("',
       { target: "exp" },
@@ -36,7 +36,7 @@ export const elim = {
       { step: "exp" },
       '")"',
     ],
-    "elim:list_ind": [
+    "operator:list_ind": [
       '"list_ind"',
       '"("',
       { target: "exp" },
@@ -48,7 +48,7 @@ export const elim = {
       { step: "exp" },
       '")"',
     ],
-    "elim:list_rec": [
+    "operator:list_rec": [
       '"list_rec"',
       '"("',
       { target: "exp" },
@@ -58,9 +58,9 @@ export const elim = {
       { step: "exp" },
       '")"',
     ],
-    "elim:vector_head": ['"vector_head"', '"("', { target: "exp" }, '")"'],
-    "elim:vector_tail": ['"vector_tail"', '"("', { target: "exp" }, '")"'],
-    "elim:vector_ind": [
+    "operator:vector_head": ['"vector_head"', '"("', { target: "exp" }, '")"'],
+    "operator:vector_tail": ['"vector_tail"', '"("', { target: "exp" }, '")"'],
+    "operator:vector_ind": [
       '"vector_ind"',
       '"("',
       { length: "exp" },
@@ -74,7 +74,7 @@ export const elim = {
       { step: "exp" },
       '")"',
     ],
-    "elim:replace": [
+    "operator:replace": [
       '"replace"',
       '"("',
       { target: "exp" },
@@ -84,7 +84,7 @@ export const elim = {
       { base: "exp" },
       '")"',
     ],
-    "elim:absurd_ind": [
+    "operator:absurd_ind": [
       '"absurd_ind"',
       '"("',
       { target: "exp" },
@@ -92,7 +92,7 @@ export const elim = {
       { motive: "exp" },
       '")"',
     ],
-    "elim:either_ind": [
+    "operator:either_ind": [
       '"either_ind"',
       '"("',
       { target: "exp" },
@@ -104,12 +104,12 @@ export const elim = {
       { base_right: "exp" },
       '")"',
     ],
-    "elim:the": ['"the"', '"("', { t: "exp" }, '","', { exp: "exp" }, '")"'],
+    "operator:the": ['"the"', '"("', { t: "exp" }, '","', { exp: "exp" }, '")"'],
     // NOTE about `is(exp, t)`
     // In set theory, the symbol "∈" is a stylized lowercase Greek letter epsilon ("ϵ"),
     // the first letter of the word ἐστί, which means "is".
     // - https://en.wikipedia.org/wiki/Element_(mathematics)
-    "elim:is": ['"is"', '"("', { exp: "exp" }, '","', { t: "exp" }, '")"'],
+    "operator:is": ['"is"', '"("', { exp: "exp" }, '","', { t: "exp" }, '")"'],
   },
 }
 
@@ -156,7 +156,7 @@ export const cons = {
     "cons:ext": [
       '"class"',
       '"extends"',
-      { parent: "elim" },
+      { parent: "operator" },
       '"{"',
       { entries: { $ap: ["zero_or_more", "cls_entry"] } },
       '"}"',
@@ -254,7 +254,7 @@ export const cons = {
 
 export const exp = {
   $grammar: {
-    "exp:elim": [{ elim: "elim" }],
+    "exp:operator": [{ operator: "operator" }],
     "exp:cons": [{ cons: "cons" }],
   },
 }

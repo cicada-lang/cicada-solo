@@ -1,3 +1,4 @@
+- [syntax] rename `cons` to `operand`
 - [syntax] remove `(x) => ...` for lambda syntax
 
 - [syntax] class field -- only use flower for fn related cases
