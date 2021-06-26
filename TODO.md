@@ -1,3 +1,6 @@
+- disallow `let` at top-level
+- we do not need local `let` keyword, it is the default semantic
+
 - improve function repr -- by grouping multi pi
 - improve function repr -- by grouping multi sigma
 

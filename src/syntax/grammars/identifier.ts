@@ -2,7 +2,6 @@ import pt from "@cicada-lang/partech"
 
 const preserved = [
   // stmts
-  "def",
   "class",
   "import",
   // keywords

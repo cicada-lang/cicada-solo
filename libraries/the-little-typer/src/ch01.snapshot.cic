@@ -50,7 +50,7 @@ the(Nat, zero)
 the(Equal(Nat, 0, zero), same)
 the(Equal(Nat, zero, 0), same)
 
-def one = add1(zero)
-def two = add1(one)
+one = add1(zero)
+two = add1(one)
 
 two

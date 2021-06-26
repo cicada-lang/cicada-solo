@@ -6,9 +6,8 @@ export const stmts = {
 
 export const stmt = {
   $grammar: {
-    "stmt:def": ['"def"', { name: "identifier" }, '"="', { exp: "exp" }],
+    "stmt:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
     "stmt:def_the": [
-      '"def"',
       { name: "identifier" },
       '":"',
       { t: "exp" },
@@ -16,7 +15,6 @@ export const stmt = {
       { exp: "exp" },
     ],
     "stmt:def_fn": [
-      '"def"',
       { name: "identifier" },
       '"("',
       { bindings: "bindings" },

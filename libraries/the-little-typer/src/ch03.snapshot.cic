@@ -1,6 +1,6 @@
 // 3. Eliminate All Natural Numbers!
 
-def nat_ind_t: Type = (
+nat_ind_t: Type = (
   target: Nat,
   motive: (target: Nat) -> Type,
   base: motive(0),
@@ -10,22 +10,22 @@ def nat_ind_t: Type = (
 // NOTE We use `y` as target, this will make
 //   the definition of `pow` looks more natural.
 
-def add: (Nat, Nat) -> Nat =
+add: (Nat, Nat) -> Nat =
   (x, y) {
     nat_rec(x, y, (_prev, almost) { add1(almost) })
   }
 
-def mul: (Nat, Nat) -> Nat =
+mul: (Nat, Nat) -> Nat =
   (x, y) {
     nat_rec(x, 0, (_prev, almost) { add(almost, y) })
   }
 
-def pow: (Nat, Nat) -> Nat =
+pow: (Nat, Nat) -> Nat =
   (x, y) {
     nat_rec(x, 1, (_prev, almost) { mul(almost, y) })
   }
 
-def eight =
+eight =
   let four = add(2, 2)
   add(four, four)
 
@@ -33,7 +33,7 @@ add(4, 3)
 mul(4, 3)
 pow(4, 3)
 
-def gauss: (Nat) -> Nat =
+gauss: (Nat) -> Nat =
   (n) {
     nat_rec(n, 0, (prev, almost) { add(add1(prev), almost) })
   }
@@ -51,7 +51,7 @@ gauss(8)
 gauss(9)
 gauss(10)
 
-def factorial: (Nat) -> Nat =
+factorial: (Nat) -> Nat =
   (n) {
     nat_rec(n, 1, (prev, almost) { mul(add1(prev), almost) })
   }

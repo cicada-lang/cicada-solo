@@ -1,6 +1,6 @@
 // 5. Lists, Lists, and More Lists
 
-def expectations: List(String) = li! [
+expectations: List(String) = li! [
   "cooked",
   "eaten",
   "tried-cleaning",
@@ -18,40 +18,40 @@ the(List(List(String)), nil)
 the(List(String), li("a", li("b", li("c", nil))))
 the(List(String), li! [ "a", "b", "c"])
 
-def length_step(E: Type, _head: E, _tail: List(E), almost: Nat): Nat { add1(almost) }
+length_step(E: Type, _head: E, _tail: List(E), almost: Nat): Nat { add1(almost) }
 
-def length(E: Type, x: List(E)): Nat { list_rec(x, 0, length_step(E)) }
+length(E: Type, x: List(E)): Nat { list_rec(x, 0, length_step(E)) }
 
 length(String)
 length(String, expectations)
 
-def append_t: Type = (E: Type, List(E), List(E)) -> List(E)
+append_t: Type = (E: Type, List(E), List(E)) -> List(E)
 
-def append_step(E: Type, head: E, _tail: List(E), almost: List(E)): List(E) {
+append_step(E: Type, head: E, _tail: List(E), almost: List(E)): List(E) {
   li(head, almost)
 }
 
-def append(E: Type, x y: List(E)): List(E) {
+append(E: Type, x y: List(E)): List(E) {
   list_rec(x, y, append_step(E))
 }
 
 append(Nat, li! [1, 2, 3], li! [4, 5, 6])
 
-def li_end(E: Type, x: List(E), e: E): List(E) { list_rec(x, li(e, nil), append_step(E)) }
+li_end(E: Type, x: List(E), e: E): List(E) { list_rec(x, li(e, nil), append_step(E)) }
 
 li_end(Nat, li! [1, 2, 3], 4)
 
-def reverse_step(E: Type, head: E, _tail: List(E), almost: List(E)): List(E) {
+reverse_step(E: Type, head: E, _tail: List(E), almost: List(E)): List(E) {
   li_end(E, almost, head)
 }
 
-def reverse(E: Type, x: List(E)): List(E) {
+reverse(E: Type, x: List(E)): List(E) {
   list_rec(x, the(List(E), nil), reverse_step(E))
 }
 
 reverse(Nat, li! [1, 2, 3])
 
-def append_by_reverse(E: Type, x y: List(E)): List(E) {
+append_by_reverse(E: Type, x y: List(E)): List(E) {
   list_rec(reverse(E, y), x, reverse_step(E))
 }
 

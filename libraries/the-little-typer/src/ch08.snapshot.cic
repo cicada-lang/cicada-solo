@@ -1,21 +1,21 @@
 // 8. Pick a Number, Any Number
 
-def add(x: Nat, y: Nat): Nat {
+add(x: Nat, y: Nat): Nat {
   nat_rec(x, y, (_prev, almost) { add1(almost) })
 }
 
 // NOTE increase
-def incr(x: Nat): Nat {
+incr(x: Nat): Nat {
   nat_rec(x, 1, (_prev, almost) { add(1, almost) })
 }
 
 the(Equal(Nat, incr(3), add(1)(3)), same)
 
-def add_1_add1_equal(n: Nat): Equal(Nat, add(1, n), add1(n)) {
+add_1_add1_equal(n: Nat): Equal(Nat, add(1, n), add1(n)) {
   same
 }
 
-def replace_t: Type = (
+replace_t: Type = (
   X: Type,
   from to: X,
   target: Equal(X, from, to),
@@ -23,7 +23,7 @@ def replace_t: Type = (
   base: motive(from),
 ) -> motive(to)
 
-def cong(
+cong(
   X Y: Type,
   from to: X,
   target: Equal(X, from, to),
@@ -35,25 +35,25 @@ def cong(
     same)
 }
 
-def incr_add1_equal_motive(n: Nat): Type {
+incr_add1_equal_motive(n: Nat): Type {
   Equal(Nat, incr(n), add1(n))
 }
 
-def incr_add1_equal_base: Equal(Nat, incr(zero), add1(zero)) = same
+incr_add1_equal_base: Equal(Nat, incr(zero), add1(zero)) = same
 
-def incr_add1_equal_step_t: Type = (
+incr_add1_equal_step_t: Type = (
   prev: Nat,
   almost: Equal(Nat, incr(prev), add1(prev))
 ) -> Equal(Nat, add1(incr(prev)), add1(add1(prev)))
 
-def incr_add1_equal_step(
+incr_add1_equal_step(
   prev: Nat,
   almost: Equal(Nat, incr(prev), add1(prev))
 ): Equal(Nat, add1(incr(prev)), add1(add1(prev))) {
   cong(Nat, Nat, incr(prev), add1(prev), almost, add(1))
 }
 
-def incr_add1_equal(n: Nat): Equal(Nat, incr(n), add1(n)) {
+incr_add1_equal(n: Nat): Equal(Nat, incr(n), add1(n)) {
   nat_ind(
     n,
     incr_add1_equal_motive,
@@ -66,7 +66,7 @@ incr_add1_equal(1)
 incr_add1_equal(2)
 incr_add1_equal(3)
 
-def cong_opts(
+cong_opts(
   opts: class {
     X: Type,
     Y: Type,
@@ -82,7 +82,7 @@ def cong_opts(
     same)
 }
 
-def incr_add1_equal_step_opts(
+incr_add1_equal_step_opts(
   prev: Nat,
   almost: Equal(Nat, incr(prev), add1(prev))
 ): Equal(Nat, add1(incr(prev)), add1(add1(prev))) {
@@ -94,7 +94,7 @@ def incr_add1_equal_step_opts(
   }, almost, add(1))
 }
 
-def incr_add1_equal_opts(n: Nat): Equal(Nat, incr(n), add1(n)) {
+incr_add1_equal_opts(n: Nat): Equal(Nat, incr(n), add1(n)) {
   nat_ind(
     n,
     incr_add1_equal_motive,

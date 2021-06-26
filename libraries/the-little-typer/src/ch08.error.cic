@@ -1,11 +1,11 @@
 // 8. Pick a Number, Any Number
 
-def add(x: Nat, y: Nat): Nat {
+add(x: Nat, y: Nat): Nat {
   nat_rec(x, y, (_prev, almost) { add1(almost) })
 }
 
 // NOTE increase
-def incr(x: Nat): Nat {
+incr(x: Nat): Nat {
   nat_rec(x, 1, (_prev, almost) { add(1, almost) })
 }
 

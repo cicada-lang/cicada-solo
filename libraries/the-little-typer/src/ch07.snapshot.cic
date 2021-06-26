@@ -1,27 +1,27 @@
 // 7. It All Depends On the Motive
 
-def nat_ind_t = (
+nat_ind_t = (
   target: Nat,
   motive: (Nat) -> Type,
   base: motive(0),
   step: (prev: Nat, almost: motive(prev)) -> motive(add1(prev)),
 ) -> motive(target)
 
-def my_nat_ind: nat_ind_t = (target, motive, base, step) {
+my_nat_ind: nat_ind_t = (target, motive, base, step) {
   nat_ind(target, motive, base, step)
 }
 
 // NOTE peas -- generate given number of peas
 
-def peas_motive(n: Nat): Type {
+peas_motive(n: Nat): Type {
   Vector(String, n)
 }
 
-def peas_step(prev: Nat, almost: peas_motive(prev)): peas_motive(add1(prev)) {
+peas_step(prev: Nat, almost: peas_motive(prev)): peas_motive(add1(prev)) {
   vec("pea", almost)
 }
 
-def peas(n: Nat): Vector(String, n) {
+peas(n: Nat): Vector(String, n) {
   nat_ind(n, peas_motive, vecnil, peas_step)
 }
 
@@ -29,17 +29,17 @@ peas(6)
 
 // NOTE last -- get the last element of a vector
 
-def last_motive(E: Type, n: Nat): Type {
+last_motive(E: Type, n: Nat): Type {
   (Vector(E, add1(n))) -> E
 }
 
-def last_base(E: Type): last_motive(E, zero) {
+last_base(E: Type): last_motive(E, zero) {
   (vector) {
     vector_head(vector)
   }
 }
 
-def last_step(
+last_step(
   E: Type,
   prev: Nat,
   almost: last_motive(E, prev),
@@ -49,7 +49,7 @@ def last_step(
   }
 }
 
-def last(E: Type, n: Nat): last_motive(E, n) {
+last(E: Type, n: Nat): last_motive(E, n) {
   nat_ind(
     n,
     last_motive(E),
@@ -61,15 +61,15 @@ last(String, 3, vec! ["1", "2", "3", "LAST"])
 
 // NOTE drop_last -- drop the last element of a vector
 
-def drop_last_motive(E: Type, n: Nat): Type {
+drop_last_motive(E: Type, n: Nat): Type {
   (Vector(E, add1(n))) -> Vector(E, n)
 }
 
-def drop_last_base(E: Type): drop_last_motive(E, zero) {
+drop_last_base(E: Type): drop_last_motive(E, zero) {
   (_vector) { vecnil }
 }
 
-def drop_last_step(
+drop_last_step(
   E: Type,
   prev: Nat,
   almost: drop_last_motive(E, prev)
@@ -79,7 +79,7 @@ def drop_last_step(
   }
 }
 
-def drop_last(E: Type, n: Nat): drop_last_motive(E, n) {
+drop_last(E: Type, n: Nat): drop_last_motive(E, n) {
   nat_ind(
     n,
     drop_last_motive(E),

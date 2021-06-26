@@ -1,4 +1,4 @@
-def expectations: List(String) = li! [
+expectations: List(String) = li! [
   "cooked",
   "eaten",
   "tried-cleaning",

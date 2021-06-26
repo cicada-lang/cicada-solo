@@ -1,6 +1,6 @@
 // 4. Easy as Pie
 
-def pair_elim: (
+pair_elim: (
   A: Type, D: Type, X: Type,
   pair: (A) * D,
   maker: (A, D) -> X,
@@ -9,7 +9,7 @@ def pair_elim: (
     maker(car(pair), cdr(pair))
   }
 
-def flip: (
+flip: (
   A: Type, D: Type, pair: (A) * D
 ) -> (D) * A =
   (A, D, pair) {
@@ -36,7 +36,7 @@ the(
     ) -> (D) * A),
   same)
 
-def swap: ((Nat) * String) -> (String) * Nat =
+swap: ((Nat) * String) -> (String) * Nat =
   (pair) {
     pair_elim(
       Nat, String, (String) * Nat, pair,
@@ -45,7 +45,7 @@ def swap: ((Nat) * String) -> (String) * Nat =
 
 swap(cons(123, "abc"))
 
-def twin: (X: Type, X) -> (X) * X =
+twin: (X: Type, X) -> (X) * X =
   (X, x) { cons(x, x) }
 
 twin(Nat, 123)

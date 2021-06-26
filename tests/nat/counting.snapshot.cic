@@ -1,5 +1,5 @@
-def n = zero
-def one = add1(n)
+n = zero
+one = add1(n)
 
 one
 
