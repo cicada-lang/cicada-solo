@@ -46,6 +46,10 @@ export function operator_matcher(tree: pt.Tree): Exp {
           (result, exp) => new Exps.Ap(result, exp),
           operator_matcher(target)
         ),
+    "operator:fn": ({ names, ret }) =>
+      names_matcher(names)
+        .reverse()
+        .reduce((result, name) => new Exps.Fn(name, result), exp_matcher(ret)),
     "operator:car": ({ target }) => new Exps.Car(exp_matcher(target)),
     "operator:cdr": ({ target }) => new Exps.Cdr(exp_matcher(target)),
     "operator:dot_field": ({ target, name }) =>
@@ -121,10 +125,6 @@ export function operator_matcher(tree: pt.Tree): Exp {
 export function operand_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "operand:pi": pi_handler,
-    "operand:fn": ({ names, ret }) =>
-      names_matcher(names)
-        .reverse()
-        .reduce((result, name) => new Exps.Fn(name, result), exp_matcher(ret)),
     "operand:sigma": sigma_handler,
     "operand:cons": ({ car, cdr }) =>
       new Exps.Cons(exp_matcher(car), exp_matcher(cdr)),

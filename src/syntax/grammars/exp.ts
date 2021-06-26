@@ -5,6 +5,14 @@ export const operator = {
       { target: "operator" },
       { args: { $ap: ["one_or_more", '"("', "exps", '")"'] } },
     ],
+    "operator:fn": [
+      '"("',
+      { names: "names" },
+      '")"',
+      '"{"',
+      { ret: "exp" },
+      '"}"',
+    ],
     "operator:car": ['"car"', '"("', { target: "exp" }, '")"'],
     "operator:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
     "operator:dot_field": [
@@ -133,14 +141,6 @@ export const operand = {
       '"-"',
       '">"',
       { ret_t: "exp" },
-    ],
-    "operand:fn": [
-      '"("',
-      { names: "names" },
-      '")"',
-      '"{"',
-      { ret: "exp" },
-      '"}"',
     ],
     "operand:sigma": [
       '"("',
