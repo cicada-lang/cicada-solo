@@ -9,46 +9,46 @@ previous:
 - fmap(x)(y)(dom.compose(x)(y)(z)(f)(g))
 - Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
 - (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
-- (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
-- (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
-- (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
-- (x: dom.Object) -> (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
+- (f: dom.Morphism(x)(y), g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
+- (z: dom.Object, f: dom.Morphism(x)(y), g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
+- (y: dom.Object, z: dom.Object, f: dom.Morphism(x)(y), g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
+- (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x)(y), g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
 - class {
-  fmap_respect_compose: (x: dom.Object) -> (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
+  fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x)(y), g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
   fmap_respect_id: (x: dom.Object) -> Equal(cod.Morphism(map(x))(map(x)), fmap(x)(x)(dom.id(x)), cod.id(map(x)))
 }
 - class {
-  fmap: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
-  fmap_respect_compose: (x: dom.Object) -> (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
+  fmap: (x: dom.Object, y: dom.Object, f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
+  fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x)(y), g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
   fmap_respect_id: (x: dom.Object) -> Equal(cod.Morphism(map(x))(map(x)), fmap(x)(x)(dom.id(x)), cod.id(map(x)))
 }
 - class {
   map: (x: dom.Object) -> cod.Object
-  fmap: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
-  fmap_respect_compose: (x: dom.Object) -> (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
+  fmap: (x: dom.Object, y: dom.Object, f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
+  fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x)(y), g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
   fmap_respect_id: (x: dom.Object) -> Equal(cod.Morphism(map(x))(map(x)), fmap(x)(x)(dom.id(x)), cod.id(map(x)))
 }
 - class {
   cod: Category
   map: (x: dom.Object) -> cod.Object
-  fmap: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
-  fmap_respect_compose: (x: dom.Object) -> (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
+  fmap: (x: dom.Object, y: dom.Object, f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
+  fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x)(y), g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
   fmap_respect_id: (x: dom.Object) -> Equal(cod.Morphism(map(x))(map(x)), fmap(x)(x)(dom.id(x)), cod.id(map(x)))
 }
 - class {
   dom: Category
   cod: Category
   map: (x: dom.Object) -> cod.Object
-  fmap: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
-  fmap_respect_compose: (x: dom.Object) -> (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
+  fmap: (x: dom.Object, y: dom.Object, f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
+  fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x)(y), g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
   fmap_respect_id: (x: dom.Object) -> Equal(cod.Morphism(map(x))(map(x)), fmap(x)(x)(dom.id(x)), cod.id(map(x)))
 }
 - the(Type, class {
   dom: Category
   cod: Category
   map: (x: dom.Object) -> cod.Object
-  fmap: (x: dom.Object) -> (y: dom.Object) -> (f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
-  fmap_respect_compose: (x: dom.Object) -> (y: dom.Object) -> (z: dom.Object) -> (f: dom.Morphism(x)(y)) -> (g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
+  fmap: (x: dom.Object, y: dom.Object, f: dom.Morphism(x)(y)) -> cod.Morphism(map(x))(map(y))
+  fmap_respect_compose: (x: dom.Object, y: dom.Object, z: dom.Object, f: dom.Morphism(x)(y), g: dom.Morphism(y)(z)) -> Equal(cod.Morphism(map(x))(map(z)), fmap(x)(y)(dom.compose(x)(y)(z)(f)(g)), cod.compose(map(x))(map(y))(map(z))(fmap(x)(y)(f))(fmap(y)(z)(g)))
   fmap_respect_id: (x: dom.Object) -> Equal(cod.Morphism(map(x))(map(x)), fmap(x)(x)(dom.id(x)), cod.id(map(x)))
 })
 

@@ -22,8 +22,30 @@ export class Pi extends Core {
     return new Cores.PiValue(arg_t, new Closure(env, this.name, this.ret_t))
   }
 
+  private multi_pi(
+    entries: Array<{ name: string; arg_t: Core }> = new Array()
+  ): {
+    entries: Array<{ name: string; arg_t: Core }>
+    ret_t: Core
+  } {
+    const entry = { name: this.name, arg_t: this.arg_t }
+
+    if (this.ret_t instanceof Pi) {
+      return this.ret_t.multi_pi([...entries, entry])
+    } else {
+      return {
+        entries: [...entries, entry],
+        ret_t: this.ret_t,
+      }
+    }
+  }
+
   repr(): string {
-    return `(${this.name}: ${this.arg_t.repr()}) -> ${this.ret_t.repr()}`
+    const { entries, ret_t } = this.multi_pi()
+    const entries_repr = entries
+      .map(({ name, arg_t }) => `${name}: ${arg_t.repr()}`)
+      .join(", ")
+    return `(${entries_repr}) -> ${ret_t.repr()}`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
