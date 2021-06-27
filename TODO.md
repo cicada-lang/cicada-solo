@@ -1,5 +1,7 @@
 - use `instanceof` instead of `Value.match` for `Cores.ClsValue`
 
+- quit using `Value.match`
+
 - `ClsFulfilledValue`
 
 - [fulfilling type] `cores/ap` -- `apply` for `ClsValue`
