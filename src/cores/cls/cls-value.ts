@@ -28,6 +28,14 @@ export abstract class ClsValue extends Value {
   eta_expand(ctx: Ctx, value: Value): Core {
     return new Cores.Obj(this.eta_expand_properties(ctx, value))
   }
+
+  abstract extend_ctx(
+    ctx: Ctx,
+    renamings: Array<{ field_name: string; local_name: string }>
+  ): {
+    ctx: Ctx
+    renamings: Array<{ field_name: string; local_name: string }>
+  }
 }
 
 export class ClsNilValue extends ClsValue {
@@ -67,6 +75,16 @@ export class ClsNilValue extends ClsValue {
 
   eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
     return new Map()
+  }
+
+  extend_ctx(
+    ctx: Ctx,
+    renamings: Array<{ field_name: string; local_name: string }>
+  ): {
+    ctx: Ctx
+    renamings: Array<{ field_name: string; local_name: string }>
+  } {
+    return { ctx, renamings }
   }
 }
 
@@ -156,5 +174,26 @@ export class ClsConsValue extends ClsValue {
       [this.field_name, readback(ctx, this.field_t, property_value)],
       ...this.rest_t_cl.apply(property_value).eta_expand_properties(ctx, value),
     ])
+  }
+
+  extend_ctx(
+    ctx: Ctx,
+    renamings: Array<{ field_name: string; local_name: string }>
+  ): {
+    ctx: Ctx
+    renamings: Array<{ field_name: string; local_name: string }>
+  } {
+    const fresh_name = ut.freshen_name(new Set(ctx.names), this.field_name)
+    const variable = new Cores.NotYetValue(
+      this.field_t,
+      new Cores.VarNeutral(fresh_name)
+    )
+
+    return this.rest_t_cl
+      .apply(variable)
+      .extend_ctx(ctx.extend(fresh_name, this.field_t), [
+        ...renamings,
+        { field_name: this.field_name, local_name: fresh_name },
+      ])
   }
 }
