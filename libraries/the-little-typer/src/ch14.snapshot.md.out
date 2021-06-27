@@ -35,7 +35,7 @@ inl(inl(inl(inr(sole)))): Either(Either(Either(Either(Either(Either(Either(Eithe
 "c": String 
 Either(Trivial, Trivial): Type 
 (_: Either(Trivial, Trivial)) -> Either(Trivial, Trivial): Type 
-(_: Either(Trivial, Trivial)) -> (_1: Either(Trivial, Trivial)) -> Either(Trivial, Trivial): Type 
+(_: Either(Trivial, Trivial), _1: Either(Trivial, Trivial)) -> Either(Trivial, Trivial): Type 
 inr(sole): Either(Trivial, Trivial) 
 inr(sole): Either(Trivial, Trivial) 
 inr(sole): Either(Trivial, Trivial) 
