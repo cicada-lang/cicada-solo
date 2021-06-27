@@ -19,8 +19,22 @@ export class Ap extends Core {
     return Ap.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
+  private multi_ap(
+    args: Array<Core> = new Array()
+  ): {
+    target: Core
+    args: Array<Core>
+  } {
+    if (this.target instanceof Ap) {
+      return this.target.multi_ap([this.arg, ...args])
+    } else {
+      return { target: this.target, args: [this.arg, ...args] }
+    }
+  }
+
   repr(): string {
-    return `${this.target.repr()}(${this.arg.repr()})`
+    const { target, args } = this.multi_ap()
+    return `${target.repr()}(${args.map((arg) => arg.repr()).join(", ")})`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
