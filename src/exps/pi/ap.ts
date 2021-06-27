@@ -77,16 +77,14 @@ export class Ap extends Exp {
     )
   }
 
-  private multi_ap(
-    args: Array<Exp> = new Array()
-  ): {
+  private multi_ap(args: Array<Exp> = new Array()): {
     target: Exp
     args: Array<Exp>
   } {
     if (this.target instanceof Ap) {
-      return this.target.multi_ap([this.arg, ...args, ])
+      return this.target.multi_ap([this.arg, ...args])
     } else {
-      return { target: this.target, args: [this.arg, ...args, ] }
+      return { target: this.target, args: [this.arg, ...args] }
     }
   }
 

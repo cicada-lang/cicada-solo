@@ -196,4 +196,8 @@ export class ClsConsValue extends ClsValue {
         { field_name: this.field_name, local_name: fresh_name },
       ])
   }
+
+  apply(arg: Value): Value {
+    throw new Error("TODO")
+  }
 }
