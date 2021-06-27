@@ -1,5 +1,3 @@
-- improve function repr -- by grouping multi sigma
-
 - [fulfilling type] `cores/ap` -- `apply` for `ClsValue`
 - [fulfilling type] `exps/ap` -- `infer` for `ClsValue`
 

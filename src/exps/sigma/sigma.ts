@@ -59,7 +59,29 @@ export class Sigma extends Exp {
     }
   }
 
+  private multi_sigma(
+    entries: Array<{ name: string; car_t: Exp }> = new Array()
+  ): {
+    entries: Array<{ name: string; car_t: Exp }>
+    cdr_t: Exp
+  } {
+    const entry = { name: this.name, car_t: this.car_t }
+
+    if (this.cdr_t instanceof Sigma) {
+      return this.cdr_t.multi_sigma([...entries, entry])
+    } else {
+      return {
+        entries: [...entries, entry],
+        cdr_t: this.cdr_t,
+      }
+    }
+  }
+
   repr(): string {
-    return `(${this.name}: ${this.car_t.repr()}) * ${this.cdr_t.repr()}`
+    const { entries, cdr_t } = this.multi_sigma()
+    const entries_repr = entries
+      .map(({ name, car_t }) => `${name}: ${car_t.repr()}`)
+      .join(", ")
+    return `(${entries_repr}) * ${cdr_t.repr()}`
   }
 }
