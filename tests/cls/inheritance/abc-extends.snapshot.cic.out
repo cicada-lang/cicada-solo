@@ -5,7 +5,7 @@
   e: sole
   f: 5
   g: "g"
-}: class ABCEFG {
+}: class {
   a: Trivial
   b: Nat
   c: String

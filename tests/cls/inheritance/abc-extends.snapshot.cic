@@ -1,4 +1,4 @@
-def the_nat_type(_: Trivial): Type = Nat
+the_nat_type(_: Trivial): Type { Nat }
 
 class ABC {
   a: Trivial
@@ -12,7 +12,7 @@ class ABCEFG extends ABC {
   g: String
 }
 
-def abcefg: ABCEFG = {
+abcefg: ABCEFG = {
   a: sole
   b: 2
   c: "c"

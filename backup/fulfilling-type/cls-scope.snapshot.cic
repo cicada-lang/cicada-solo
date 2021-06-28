@@ -1,4 +1,4 @@
-def a = String
+a = String
 
 class Test {
   X: Type = a
