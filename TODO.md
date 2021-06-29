@@ -1,4 +1,15 @@
-- quit using `Value.match`
+- quit using `Value.match` -- cores/sigma/cdr.ts
+- quit using `Value.match` -- cores/sigma/car.ts
+- quit using `Value.match` -- cores/list/list-ind.ts
+- quit using `Value.match` -- cores/cls/dot.ts
+- quit using `Value.match` -- cores/nat/nat-ind.ts
+- quit using `Value.match` -- cores/vector/vector-ind.ts
+- quit using `Value.match` -- cores/vector/vector-head.ts
+- quit using `Value.match` -- cores/either/either-ind.ts
+- quit using `Value.match` -- cores/vector/vector-tail.ts
+- quit using `Value.match` -- cores/equal/replace.ts
+
+- remove `Value.match`
 
 - `ClsFulfilledValue`
 
