@@ -2,6 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { evaluate } from "../../evaluate"
+import { InternalError } from "../../errors"
 import * as Cores from "../../cores"
 
 export class Car extends Core {
@@ -25,22 +26,27 @@ export class Car extends Core {
   }
 
   static apply(target: Value): Value {
-    return Value.match(target, [
-      [Cores.ConsValue, (cons: Cores.ConsValue) => cons.car],
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          Value.match(t, [
-            [
-              Cores.SigmaValue,
-              (sigma: Cores.SigmaValue) =>
-                new Cores.NotYetValue(
-                  sigma.car_t,
-                  new Cores.CarNeutral(neutral)
-                ),
-            ],
-          ]),
-      ],
-    ])
+    if (target instanceof Cores.ConsValue) {
+      return target.car
+    } else if (target instanceof Cores.NotYetValue) {
+      const { t, neutral } = target
+      if (t instanceof Cores.SigmaValue) {
+        return new Cores.NotYetValue(t.car_t, new Cores.CarNeutral(neutral))
+      } else {
+        throw new InternalError(
+          [
+            `I expect the type of the neutral to be an instance of SigmaValue`,
+            `but the constructor name I meet is: ${t.constructor.name}`,
+          ].join("\n") + "\n"
+        )
+      }
+    } else {
+      throw new InternalError(
+        [
+          `I expect the target to be an instance of ConsValue`,
+          `but the constructor name I meet is: ${target.constructor.name}`,
+        ].join("\n") + "\n"
+      )
+    }
   }
 }
