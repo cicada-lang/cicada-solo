@@ -2,7 +2,7 @@ import { Exp } from "../exp"
 import { Core } from "../core"
 import { Value } from "../value"
 import { Ctx } from "../ctx"
-import { Trace } from "../trace"
+import { Trace } from "../errors"
 import * as ut from "../ut"
 
 export function infer(ctx: Ctx, exp: Exp): { t: Value; core: Core } {

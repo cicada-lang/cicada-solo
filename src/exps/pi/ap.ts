@@ -5,7 +5,7 @@ import { evaluate } from "../../evaluate"
 import { infer } from "../../infer"
 import { check } from "../../check"
 import { Value } from "../../value"
-import { Trace } from "../../trace"
+import { Trace } from "../../errors"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"
 

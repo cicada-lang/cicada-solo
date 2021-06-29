@@ -3,6 +3,7 @@ import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
 import { Normal } from "../../normal"
+import { Trace } from "../../errors"
 import * as Cores from "../../cores"
 
 export class Ap extends Core {
@@ -42,32 +43,32 @@ export class Ap extends Core {
   static apply(target: Value, arg: Value): Value {
     if (target instanceof Cores.FnValue) {
       return target.apply(arg)
+    } else if (target instanceof Cores.ClsValue) {
+      return target.apply(arg)
+    } else if (target instanceof Cores.NotYetValue) {
+      const { t, neutral } = target
+      if (t instanceof Cores.PiValue) {
+        return new Cores.NotYetValue(
+          t.ret_t_cl.apply(arg),
+          new Cores.ApNeutral(neutral, new Normal(t.arg_t, arg))
+        )
+      } else {
+        throw new Trace(
+          [
+            `[INTERNAL_ERROR]`,
+            `I expect the type of the neutral to be an instance of PiValue`,
+            `but the constructor name I meet is: ${t.constructor.name}`,
+          ].join("\n") + "\n"
+        )
+      }
+    } else {
+      throw new Trace(
+        [
+          `[INTERNAL_ERROR]`,
+          `I expect the target to be an instance of FnValue or ClsValue`,
+          `but the constructor name I meet is: ${target.constructor.name}`,
+        ].join("\n") + "\n"
+      )
     }
-
-    // if (target instanceof Cores.ClsValue) {
-    //   return target.apply(arg)
-    // }
-
-    // if (t instanceof Cores.NotYetValue) {
-    //   const { t, neutral } = t
-
-    // }
-
-    return Value.match(target, [
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          Value.match(t, [
-            [
-              Cores.PiValue,
-              (pi: Cores.PiValue) =>
-                new Cores.NotYetValue(
-                  pi.ret_t_cl.apply(arg),
-                  new Cores.ApNeutral(neutral, new Normal(pi.arg_t, arg))
-                ),
-            ],
-          ]),
-      ],
-    ])
   }
 }

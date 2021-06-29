@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { Trace } from "../../trace"
+import { Trace } from "../../errors"
 import * as ut from "../../ut"
 
 export class ObjValue extends Value {

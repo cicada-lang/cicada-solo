@@ -8,7 +8,7 @@ import { expect } from "../../expect"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
-import { Trace } from "../../trace"
+import { Trace } from "../../errors"
 import * as Cores from "../../cores"
 import {
   vector_ind_motive_t,

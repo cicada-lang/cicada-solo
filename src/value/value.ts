@@ -1,7 +1,7 @@
 import { Ctx } from "../ctx"
 import { Exp } from "../exp"
 import { Core } from "../core"
-import { Trace } from "../trace"
+import { Trace } from "../errors"
 import * as ut from "../ut"
 
 type Class<T> = new (...args: any[]) => T

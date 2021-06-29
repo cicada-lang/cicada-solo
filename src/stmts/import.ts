@@ -1,6 +1,6 @@
 import { Stmt } from "../stmt"
 import { Module } from "../module"
-import { Trace } from "../trace"
+import { Trace } from "../errors"
 
 export type ImportEntry = {
   name: string

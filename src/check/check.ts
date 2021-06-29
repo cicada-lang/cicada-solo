@@ -4,7 +4,7 @@ import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { conversion } from "../conversion"
 import { readback } from "../readback"
-import { Trace } from "../trace"
+import { Trace } from "../errors"
 import * as ut from "../ut"
 import * as Cores from "../cores"
 

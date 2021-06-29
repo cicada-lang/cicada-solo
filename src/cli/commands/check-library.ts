@@ -1,6 +1,6 @@
 import { LocalLibrary } from "../../library/local-library"
 import { Module } from "../../module"
-import { Trace } from "../../trace"
+import { Trace } from "../../errors"
 import { doc_ext_p } from "../../doc"
 import pt from "@cicada-lang/partech"
 import chokidar from "chokidar"

@@ -5,7 +5,7 @@ import { Value } from "../../value"
 import { expect } from "../../expect"
 import { readback } from "../../readback"
 import { check_conversion } from "../../conversion"
-import { Trace } from "../../trace"
+import { Trace } from "../../errors"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"
 

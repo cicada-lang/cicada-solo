@@ -3,7 +3,7 @@ import { Module } from "../module"
 import { Exp } from "../exp"
 import { infer } from "../infer"
 import { evaluate } from "../evaluate"
-import { Trace } from "../trace"
+import { Trace } from "../errors"
 
 export class Def implements Stmt {
   name: string

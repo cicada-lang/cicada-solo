@@ -2,7 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { evaluate } from "../../evaluate"
-import { Trace } from "../../trace"
+import { Trace } from "../../errors"
 import * as Cores from "../../cores"
 
 export class Dot extends Core {

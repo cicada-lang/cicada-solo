@@ -1,6 +1,6 @@
 import { Env } from "../env"
 import { Value } from "../value"
-import { Trace } from "../trace"
+import { Trace } from "../errors"
 import { readback } from "../readback"
 import * as Cores from "../cores"
 

@@ -1,7 +1,7 @@
 import { Value } from "../value"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
-import { Trace } from "../trace"
+import { Trace } from "../errors"
 import * as ut from "../ut"
 import * as Cores from "../cores"
 

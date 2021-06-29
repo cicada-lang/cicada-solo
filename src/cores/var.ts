@@ -1,7 +1,7 @@
 import { Core, AlphaCtx } from "../core"
 import { Env } from "../env"
 import { Value } from "../value"
-import { Trace } from "../trace"
+import { Trace } from "../errors"
 
 export class Var extends Core {
   name: string
