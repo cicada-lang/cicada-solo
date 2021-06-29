@@ -1,4 +1,3 @@
-- quit using `Value.match` -- cores/sigma/car.ts
 - quit using `Value.match` -- cores/list/list-ind.ts
 - quit using `Value.match` -- cores/cls/dot.ts
 - quit using `Value.match` -- cores/nat/nat-ind.ts
