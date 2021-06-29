@@ -81,18 +81,18 @@ export class SpreadProp extends Prop {
 
   expand(ctx: Ctx): Array<[string, Exp]> {
     const inferred = infer(ctx, this.exp)
-    return Value.match(inferred.t, [
+
+    if (inferred.t instanceof Cores.ClsValue) {
+      const cls = inferred.t
+      return cls.field_names.map((name) => [name, new Exps.Dot(this.exp, name)])
+    }
+
+    throw new Trace(
       [
-        Cores.ClsNilValue,
-        (cls: Cores.ClsNilValue) =>
-          cls.field_names.map((name) => [name, new Exps.Dot(this.exp, name)]),
-      ],
-      [
-        Cores.ClsConsValue,
-        (cls: Cores.ClsConsValue) =>
-          cls.field_names.map((name) => [name, new Exps.Dot(this.exp, name)]),
-      ],
-    ])
+        `I expect inferred.t to be an instance of ClsValue`,
+        `but the constructor name I meet is: ${inferred.t.constructor.name}`,
+      ].join("\n") + "\n"
+    )
   }
 
   repr(): string {

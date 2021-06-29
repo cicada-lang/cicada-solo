@@ -2,6 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { evaluate } from "../../evaluate"
+import { Trace } from "../../trace"
 import * as Cores from "../../cores"
 
 export class Dot extends Core {
@@ -31,25 +32,23 @@ export class Dot extends Core {
       [Cores.ObjValue, (obj: Cores.ObjValue) => obj.dot_value(name)],
       [
         Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          Value.match(t, [
-            [
-              Cores.ClsNilValue,
-              (cls: Cores.ClsNilValue) =>
-                new Cores.NotYetValue(
-                  cls.dot_type(target, name),
-                  new Cores.DotNeutral(neutral, name)
-                ),
-            ],
-            [
-              Cores.ClsConsValue,
-              (cls: Cores.ClsConsValue) =>
-                new Cores.NotYetValue(
-                  cls.dot_type(target, name),
-                  new Cores.DotNeutral(neutral, name)
-                ),
-            ],
-          ]),
+        ({ t, neutral }: Cores.NotYetValue) => {
+          if (t instanceof Cores.ClsValue) {
+            const cls = t as Cores.ClsValue
+            return new Cores.NotYetValue(
+              cls.dot_type(target, name),
+              new Cores.DotNeutral(neutral, name)
+            )
+          } else {
+            throw new Trace(
+              [
+                `[INTERNAL_ERROR]`,
+                `I expect the type of the neutral to be an instance of ClsValue`,
+                `but the constructor name I meet is: ${t.constructor.name}`,
+              ].join("\n") + "\n"
+            )
+          }
+        },
       ],
     ])
   }

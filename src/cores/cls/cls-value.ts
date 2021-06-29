@@ -13,6 +13,10 @@ import { ClsClosure } from "./cls-closure"
 export abstract class ClsValue extends Value {
   instanceofCoresClsValue = true
 
+  constructor() {
+    super()
+  }
+
   abstract field_names: Array<string>
   abstract readback(ctx: Ctx, t: Value): Core | undefined
   abstract check_properties(
@@ -36,6 +40,8 @@ export abstract class ClsValue extends Value {
     ctx: Ctx
     renamings: Array<{ field_name: string; local_name: string }>
   }
+
+  abstract apply(arg: Value): Value
 }
 
 export class ClsNilValue extends ClsValue {
@@ -85,6 +91,10 @@ export class ClsNilValue extends ClsValue {
     renamings: Array<{ field_name: string; local_name: string }>
   } {
     return { ctx, renamings }
+  }
+
+  apply(arg: Value): Value {
+    throw new Error("TODO")
   }
 }
 

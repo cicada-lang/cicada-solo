@@ -40,11 +40,20 @@ export class Ap extends Core {
   }
 
   static apply(target: Value, arg: Value): Value {
+    if (target instanceof Cores.FnValue) {
+      return target.apply(arg)
+    }
+
+    // if (target instanceof Cores.ClsValue) {
+    //   return target.apply(arg)
+    // }
+
+    // if (t instanceof Cores.NotYetValue) {
+    //   const { t, neutral } = t
+
+    // }
+
     return Value.match(target, [
-      [Cores.FnValue, (fn: Cores.FnValue) => fn.apply(arg)],
-      [Cores.ClsConsValue, (cls: Cores.ClsConsValue) => cls.apply(arg)],
-      // TODO
-      // [Cores.ClsFulfilledValue, (cls: Cores.ClsFulfilledValue) => cls.apply(arg)],
       [
         Cores.NotYetValue,
         ({ t, neutral }: Cores.NotYetValue) =>
