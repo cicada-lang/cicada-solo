@@ -1,4 +1,3 @@
-- extract `InternalError`
 - quit using `Value.match`
 
 - `ClsFulfilledValue`

@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
 import { Normal } from "../../normal"
-import { Trace } from "../../errors"
+import { InternalError } from "../../errors"
 import * as Cores from "../../cores"
 
 export class Ap extends Core {
@@ -53,18 +53,16 @@ export class Ap extends Core {
           new Cores.ApNeutral(neutral, new Normal(t.arg_t, arg))
         )
       } else {
-        throw new Trace(
+        throw new InternalError(
           [
-            `[INTERNAL_ERROR]`,
             `I expect the type of the neutral to be an instance of PiValue`,
             `but the constructor name I meet is: ${t.constructor.name}`,
           ].join("\n") + "\n"
         )
       }
     } else {
-      throw new Trace(
+      throw new InternalError(
         [
-          `[INTERNAL_ERROR]`,
           `I expect the target to be an instance of FnValue or ClsValue`,
           `but the constructor name I meet is: ${target.constructor.name}`,
         ].join("\n") + "\n"

@@ -2,7 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { evaluate } from "../../evaluate"
-import { Trace } from "../../errors"
+import { InternalError } from "../../errors"
 import * as Cores from "../../cores"
 
 export class Dot extends Core {
@@ -40,9 +40,8 @@ export class Dot extends Core {
               new Cores.DotNeutral(neutral, name)
             )
           } else {
-            throw new Trace(
+            throw new InternalError(
               [
-                `[INTERNAL_ERROR]`,
                 `I expect the type of the neutral to be an instance of ClsValue`,
                 `but the constructor name I meet is: ${t.constructor.name}`,
               ].join("\n") + "\n"
