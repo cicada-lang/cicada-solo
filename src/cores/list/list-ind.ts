@@ -8,7 +8,7 @@ import { expect } from "../../expect"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
-import { Trace } from "../../errors"
+import { InternalError } from "../../errors"
 import * as Cores from "../../cores"
 import { list_ind_motive_t, list_ind_step_t } from "../../exps/list/list-ind"
 
