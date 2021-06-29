@@ -3,6 +3,7 @@ import { evaluate } from "../../evaluate"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { Normal } from "../../normal"
+import { InternalError } from "../../errors"
 import * as Cores from "../../cores"
 
 export class AbsurdInd extends Core {
@@ -33,24 +34,31 @@ export class AbsurdInd extends Core {
   }
 
   static apply(target: Value, motive: Value): Value {
-    return Value.match(target, [
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          Value.match(t, [
-            [
-              Cores.AbsurdValue,
-              (_: Cores.AbsurdValue) =>
-                new Cores.NotYetValue(
-                  motive,
-                  new Cores.AbsurdIndNeutral(
-                    neutral,
-                    new Normal(new Cores.TypeValue(), motive)
-                  )
-                ),
-            ],
-          ]),
-      ],
-    ])
+    if (target instanceof Cores.NotYetValue) {
+      const { t, neutral } = target
+      if (t instanceof Cores.AbsurdValue) {
+        return new Cores.NotYetValue(
+          motive,
+          new Cores.AbsurdIndNeutral(
+            neutral,
+            new Normal(new Cores.TypeValue(), motive)
+          )
+        )
+      } else {
+        throw new InternalError(
+          [
+            `I expect the type of the neutral to be an instance of AbsurdValue`,
+            `but the constructor name I meet is: ${t.constructor.name}`,
+          ].join("\n") + "\n"
+        )
+      }
+    } else {
+      throw new InternalError(
+        [
+          `I expect the target to be an instance of NotYetValue`,
+          `but the constructor name I meet is: ${target.constructor.name}`,
+        ].join("\n") + "\n"
+      )
+    }
   }
 }
