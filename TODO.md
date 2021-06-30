@@ -21,6 +21,7 @@
 # scope
 
 - be sure about `exps/obj`'s `SpreadProp`
+- practice to dance with expressions
 
 # implicit
 
