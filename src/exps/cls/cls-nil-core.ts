@@ -1,6 +1,9 @@
-import { AlphaCtx } from "../../core"
+import { Core, AlphaCtx } from "../../core"
+import { evaluate } from "../../core"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
+import * as ut from "../../ut"
+import { ClsClosure } from "./cls-closure"
 
 export class ClsNilCore extends Exps.ClsCore {
   append(cls: Exps.ClsCore): Exps.ClsCore {
