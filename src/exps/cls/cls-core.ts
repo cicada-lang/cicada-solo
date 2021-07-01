@@ -15,6 +15,36 @@ export abstract class ClsCore extends Core {
   abstract fields_alpha_repr(ctx: AlphaCtx): Array<string>
 }
 
+export class ClsNilCore extends ClsCore {
+  append(cls: Exps.ClsCore): Exps.ClsCore {
+    return cls
+  }
+
+  get field_names(): Array<string> {
+    return []
+  }
+
+  evaluate(env: Env): Exps.ClsValue {
+    return new Exps.ClsNilValue()
+  }
+
+  fields_repr(): Array<string> {
+    return []
+  }
+
+  repr(): string {
+    return `class {}`
+  }
+
+  fields_alpha_repr(ctx: AlphaCtx): Array<string> {
+    return []
+  }
+
+  alpha_repr(ctx: AlphaCtx): string {
+    return `class {}`
+  }
+}
+
 export class ClsConsCore extends ClsCore {
   field_name: string
   local_name: string
