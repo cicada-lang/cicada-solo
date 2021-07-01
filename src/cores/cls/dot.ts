@@ -28,24 +28,25 @@ export class Dot extends Core {
   }
 
   static apply(target: Value, name: string): Value {
-    return Value.match(target, [
-      [Cores.ObjValue, (obj: Cores.ObjValue) => obj.dot_value(name)],
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) => {
-          if (t instanceof Cores.ClsValue) {
-            const cls = t as Cores.ClsValue
-            return new Cores.NotYetValue(
-              cls.dot_type(target, name),
-              new Cores.DotNeutral(neutral, name)
-            )
-          } else {
-            throw InternalError.wrong_target_t(t, {
-              expected: [Cores.ClsNilValue, Cores.ClsConsValue],
-            })
-          }
-        },
-      ],
-    ])
+    if (target instanceof Cores.ObjValue) {
+      return target.dot_value(name)
+    } else if (target instanceof Cores.NotYetValue) {
+      const { t, neutral } = target
+
+      if (t instanceof Cores.ClsValue) {
+        return new Cores.NotYetValue(
+          t.dot_type(target, name),
+          new Cores.DotNeutral(neutral, name)
+        )
+      } else {
+        throw InternalError.wrong_target_t(t, {
+          expected: [Cores.ClsNilValue, Cores.ClsConsValue],
+        })
+      }
+    } else {
+      throw InternalError.wrong_target(target, {
+        expected: [Cores.ObjValue],
+      })
+    }
   }
 }
