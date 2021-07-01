@@ -2,7 +2,7 @@ import { Neutral } from "../../neutral"
 import { Normal } from "../../normal"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class VectorIndNeutral extends Neutral {
   length: Normal
@@ -27,7 +27,7 @@ export class VectorIndNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Cores.VectorInd(
+    return new Sem.VectorInd(
       this.length.readback_normal(ctx),
       this.target.readback_neutral(ctx),
       this.motive.readback_normal(ctx),

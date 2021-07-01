@@ -4,7 +4,7 @@ import { evaluate } from "../../core"
 import { check } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class AbsurdInd extends Exp {
   target: Exp
@@ -35,12 +35,12 @@ export class AbsurdInd extends Exp {
     //   but a element of type.
     // NOTE We should always infer target,
     //   but we do a simple check for the simple absurd.
-    const target_core = check(ctx, this.target, new Cores.AbsurdValue())
-    const motive_core = check(ctx, this.motive, new Cores.TypeValue())
+    const target_core = check(ctx, this.target, new Sem.AbsurdValue())
+    const motive_core = check(ctx, this.motive, new Sem.TypeValue())
 
     return {
       t: evaluate(ctx.to_env(), motive_core),
-      core: new Cores.AbsurdInd(target_core, motive_core),
+      core: new Sem.AbsurdInd(target_core, motive_core),
     }
   }
 

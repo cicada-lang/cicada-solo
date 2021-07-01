@@ -1,7 +1,7 @@
 import { Neutral } from "../../neutral"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class VectorTailNeutral extends Neutral {
   target: Neutral
@@ -12,6 +12,6 @@ export class VectorTailNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Cores.VectorTail(this.target.readback_neutral(ctx))
+    return new Sem.VectorTail(this.target.readback_neutral(ctx))
   }
 }

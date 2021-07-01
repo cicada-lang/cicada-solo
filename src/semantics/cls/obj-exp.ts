@@ -6,7 +6,7 @@ import { Trace } from "../../errors"
 import { infer } from "../../exp"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Obj extends Exp {
   properties: Array<Prop>
@@ -35,9 +35,9 @@ export class Obj extends Exp {
 
     // NOTE TODO SpreadProp might introduce new property name, thus new scope.
 
-    if (t instanceof Cores.ClsValue) {
+    if (t instanceof Sem.ClsValue) {
       const core_properties = t.check_properties(ctx, properties)
-      return new Cores.Obj(core_properties)
+      return new Sem.Obj(core_properties)
     }
 
     throw new Trace(
@@ -82,7 +82,7 @@ export class SpreadProp extends Prop {
   expand(ctx: Ctx): Array<[string, Exp]> {
     const inferred = infer(ctx, this.exp)
 
-    if (inferred.t instanceof Cores.ClsValue) {
+    if (inferred.t instanceof Sem.ClsValue) {
       const cls = inferred.t
       return cls.field_names.map((name) => [name, new Exps.Dot(this.exp, name)])
     }

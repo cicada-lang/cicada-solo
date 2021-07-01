@@ -4,7 +4,7 @@ import { Value } from "../../value"
 import { readback } from "../../value"
 import { Closure } from "../../closure"
 import * as ut from "../../ut"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class EitherValue extends Value {
   left_t: Value
@@ -17,10 +17,10 @@ export class EitherValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof Cores.TypeValue) {
-      return new Cores.Either(
-        readback(ctx, new Cores.TypeValue(), this.left_t),
-        readback(ctx, new Cores.TypeValue(), this.right_t)
+    if (t instanceof Sem.TypeValue) {
+      return new Sem.Either(
+        readback(ctx, new Sem.TypeValue(), this.left_t),
+        readback(ctx, new Sem.TypeValue(), this.right_t)
       )
     }
   }

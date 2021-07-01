@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { evaluate } from "../../core"
 import { InternalError } from "../../errors"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class VectorTail extends Core {
   target: Core
@@ -26,16 +26,16 @@ export class VectorTail extends Core {
   }
 
   static apply(target: Value): Value {
-    if (target instanceof Cores.VecValue) {
+    if (target instanceof Sem.VecValue) {
       return target.tail
-    } else if (target instanceof Cores.NotYetValue) {
+    } else if (target instanceof Sem.NotYetValue) {
       const { t, neutral } = target
 
-      if (t instanceof Cores.VectorValue) {
-        if (t.length instanceof Cores.Add1Value) {
-          return new Cores.NotYetValue(
-            new Cores.VectorValue(t.elem_t, t.length.prev),
-            new Cores.VectorTailNeutral(neutral)
+      if (t instanceof Sem.VectorValue) {
+        if (t.length instanceof Sem.Add1Value) {
+          return new Sem.NotYetValue(
+            new Sem.VectorValue(t.elem_t, t.length.prev),
+            new Sem.VectorTailNeutral(neutral)
           )
         } else {
           throw new InternalError(
@@ -48,12 +48,12 @@ export class VectorTail extends Core {
         }
       } else {
         throw InternalError.wrong_target_t(target.t, {
-          expected: [Cores.VectorValue],
+          expected: [Sem.VectorValue],
         })
       }
     } else {
       throw InternalError.wrong_target(target, {
-        expected: [Cores.VecValue],
+        expected: [Sem.VecValue],
       })
     }
   }

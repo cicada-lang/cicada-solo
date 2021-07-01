@@ -9,7 +9,7 @@ import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 import { list_ind_motive_t, list_ind_step_t } from "./list-ind-exp"
 
 export class ListInd extends Core {
@@ -58,26 +58,26 @@ export class ListInd extends Core {
   }
 
   static apply(target: Value, motive: Value, base: Value, step: Value): Value {
-    if (target instanceof Cores.NilValue) {
+    if (target instanceof Sem.NilValue) {
       return base
-    } else if (target instanceof Cores.LiValue) {
+    } else if (target instanceof Sem.LiValue) {
       const { head, tail } = target
 
-      return Cores.Ap.apply(
-        Cores.Ap.apply(Cores.Ap.apply(step, head), tail),
-        Cores.ListInd.apply(tail, motive, base, step)
+      return Sem.Ap.apply(
+        Sem.Ap.apply(Sem.Ap.apply(step, head), tail),
+        Sem.ListInd.apply(tail, motive, base, step)
       )
-    } else if (target instanceof Cores.NotYetValue) {
+    } else if (target instanceof Sem.NotYetValue) {
       const { t, neutral } = target
 
-      if (t instanceof Cores.ListValue) {
+      if (t instanceof Sem.ListValue) {
         const elem_t = t.elem_t
         const motive_t = list_ind_motive_t(elem_t)
-        const base_t = Cores.Ap.apply(motive, new Cores.NilValue())
+        const base_t = Sem.Ap.apply(motive, new Sem.NilValue())
         const step_t = list_ind_step_t(motive, elem_t)
-        return new Cores.NotYetValue(
-          Cores.Ap.apply(motive, target),
-          new Cores.ListIndNeutral(
+        return new Sem.NotYetValue(
+          Sem.Ap.apply(motive, target),
+          new Sem.ListIndNeutral(
             neutral,
             new Normal(motive_t, motive),
             new Normal(base_t, base),
@@ -86,12 +86,12 @@ export class ListInd extends Core {
         )
       } else {
         throw InternalError.wrong_target_t(target.t, {
-          expected: [Cores.ListValue],
+          expected: [Sem.ListValue],
         })
       }
     } else {
       throw InternalError.wrong_target(target, {
-        expected: [Cores.NilValue, Cores.LiValue],
+        expected: [Sem.NilValue, Sem.LiValue],
       })
     }
   }

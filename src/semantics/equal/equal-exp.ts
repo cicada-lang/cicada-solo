@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { evaluate } from "../../core"
 import { check } from "../../exp"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Equal extends Exp {
   t: Exp
@@ -35,14 +35,14 @@ export class Equal extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const t_core = check(ctx, this.t, new Cores.TypeValue())
+    const t_core = check(ctx, this.t, new Sem.TypeValue())
     const t_value = evaluate(ctx.to_env(), t_core)
     const from_core = check(ctx, this.from, t_value)
     const to_core = check(ctx, this.to, t_value)
 
     return {
-      t: new Cores.TypeValue(),
-      core: new Cores.Equal(t_core, from_core, to_core),
+      t: new Sem.TypeValue(),
+      core: new Sem.Equal(t_core, from_core, to_core),
     }
   }
 

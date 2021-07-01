@@ -7,7 +7,7 @@ import { check } from "../../exp"
 import { infer } from "../../exp"
 import { expect } from "../../value"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class EitherInd extends Exp {
   target: Exp
@@ -43,7 +43,7 @@ export class EitherInd extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
-    const either_t = expect(ctx, inferred_target.t, Cores.EitherValue)
+    const either_t = expect(ctx, inferred_target.t, Sem.EitherValue)
     const motive_t = either_ind_motive_t(either_t)
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)
@@ -61,8 +61,8 @@ export class EitherInd extends Exp {
     const target_value = evaluate(ctx.to_env(), target_core)
 
     return {
-      t: Cores.Ap.apply(motive_value, target_value),
-      core: new Cores.EitherInd(
+      t: Sem.Ap.apply(motive_value, target_value),
+      core: new Sem.EitherInd(
         target_core,
         motive_core,
         base_left_core,
@@ -86,20 +86,17 @@ export class EitherInd extends Exp {
 export function either_ind_motive_t(either_t: Value): Value {
   return evaluate(
     new Env().extend("either_t", either_t),
-    new Cores.Pi("target_either", new Cores.Var("either_t"), new Cores.Type())
+    new Sem.Pi("target_either", new Sem.Var("either_t"), new Sem.Type())
   )
 }
 
 export function either_ind_base_left_t(left_t: Value, motive: Value): Value {
   return evaluate(
     new Env().extend("motive", motive).extend("left_t", left_t),
-    new Cores.Pi(
+    new Sem.Pi(
       "left",
-      new Cores.Var("left_t"),
-      new Cores.Ap(
-        new Cores.Var("motive"),
-        new Cores.Inl(new Cores.Var("left"))
-      )
+      new Sem.Var("left_t"),
+      new Sem.Ap(new Sem.Var("motive"), new Sem.Inl(new Sem.Var("left")))
     )
   )
 }
@@ -107,13 +104,10 @@ export function either_ind_base_left_t(left_t: Value, motive: Value): Value {
 export function either_ind_base_right_t(right_t: Value, motive: Value): Value {
   return evaluate(
     new Env().extend("motive", motive).extend("right_t", right_t),
-    new Cores.Pi(
+    new Sem.Pi(
       "right",
-      new Cores.Var("right_t"),
-      new Cores.Ap(
-        new Cores.Var("motive"),
-        new Cores.Inr(new Cores.Var("right"))
-      )
+      new Sem.Var("right_t"),
+      new Sem.Ap(new Sem.Var("motive"), new Sem.Inr(new Sem.Var("right")))
     )
   )
 }

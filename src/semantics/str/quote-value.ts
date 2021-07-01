@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class QuoteValue extends Value {
   str: string
@@ -12,8 +12,8 @@ export class QuoteValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof Cores.StrValue) {
-      return new Cores.Quote(this.str)
+    if (t instanceof Sem.StrValue) {
+      return new Sem.Quote(this.str)
     }
   }
 }

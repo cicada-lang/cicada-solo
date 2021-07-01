@@ -3,7 +3,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class List extends Exp {
   elem_t: Exp
@@ -23,8 +23,8 @@ export class List extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
-      t: new Cores.TypeValue(),
-      core: new Cores.List(check(ctx, this.elem_t, new Cores.TypeValue())),
+      t: new Sem.TypeValue(),
+      core: new Sem.List(check(ctx, this.elem_t, new Sem.TypeValue())),
     }
   }
 

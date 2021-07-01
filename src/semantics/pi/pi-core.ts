@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { evaluate } from "../../core"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Pi extends Core {
   name: string
@@ -19,7 +19,7 @@ export class Pi extends Core {
 
   evaluate(env: Env): Value {
     const arg_t = evaluate(env, this.arg_t)
-    return new Cores.PiValue(arg_t, new Closure(env, this.name, this.ret_t))
+    return new Sem.PiValue(arg_t, new Closure(env, this.name, this.ret_t))
   }
 
   private multi_pi(

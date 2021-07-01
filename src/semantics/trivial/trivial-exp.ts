@@ -2,7 +2,7 @@ import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import { Ctx } from "../../ctx"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Trivial extends Exp {
   free_names(bound_names: Set<string>): Set<string> {
@@ -15,8 +15,8 @@ export class Trivial extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
-      t: new Cores.TypeValue(),
-      core: new Cores.Trivial(),
+      t: new Sem.TypeValue(),
+      core: new Sem.Trivial(),
     }
   }
 

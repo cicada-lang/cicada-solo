@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { evaluate } from "../../core"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Inl extends Core {
   left: Core
@@ -14,7 +14,7 @@ export class Inl extends Core {
   }
 
   evaluate(env: Env): Value {
-    return new Cores.InlValue(evaluate(env, this.left))
+    return new Sem.InlValue(evaluate(env, this.left))
   }
 
   repr(): string {

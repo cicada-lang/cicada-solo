@@ -1,7 +1,7 @@
 import { Core } from "../core"
 import { Neutral } from "../neutral"
 import { Ctx } from "../ctx"
-import * as Cores from "../cores"
+import * as Sem from "../sem"
 
 export class VarNeutral extends Neutral {
   name: string
@@ -12,6 +12,6 @@ export class VarNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Cores.Var(this.name)
+    return new Sem.Var(this.name)
   }
 }

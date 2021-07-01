@@ -2,7 +2,7 @@ import { Neutral } from "../../neutral"
 import { Normal } from "../../normal"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class EitherIndNeutral extends Neutral {
   target: Neutral
@@ -24,7 +24,7 @@ export class EitherIndNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Cores.EitherInd(
+    return new Sem.EitherInd(
       this.target.readback_neutral(ctx),
       this.motive.readback_normal(ctx),
       this.base_left.readback_normal(ctx),

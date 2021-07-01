@@ -7,7 +7,7 @@ import { check } from "../../exp"
 import { infer } from "../../exp"
 import { expect } from "../../value"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class ListInd extends Exp {
   target: Exp
@@ -43,7 +43,7 @@ export class ListInd extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
-    const list_t = expect(ctx, inferred_target.t, Cores.ListValue)
+    const list_t = expect(ctx, inferred_target.t, Sem.ListValue)
     const elem_t = list_t.elem_t
     const motive_t = list_ind_motive_t(elem_t)
     const motive_core = check(ctx, this.motive, motive_t)
@@ -51,15 +51,15 @@ export class ListInd extends Exp {
     const base_core = check(
       ctx,
       this.base,
-      Cores.Ap.apply(motive_value, new Cores.NilValue())
+      Sem.Ap.apply(motive_value, new Sem.NilValue())
     )
     const step_t = list_ind_step_t(motive_value, elem_t)
     const step_core = check(ctx, this.step, step_t)
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
 
     return {
-      t: Cores.Ap.apply(motive_value, target_value),
-      core: new Cores.ListInd(
+      t: Sem.Ap.apply(motive_value, target_value),
+      core: new Sem.ListInd(
         inferred_target.core,
         motive_core,
         base_core,
@@ -83,10 +83,10 @@ export class ListInd extends Exp {
 export function list_ind_motive_t(elem_t: Value): Value {
   return evaluate(
     new Env().extend("elem_t", elem_t),
-    new Cores.Pi(
+    new Sem.Pi(
       "target_list",
-      new Cores.List(new Cores.Var("elem_t")),
-      new Cores.Type()
+      new Sem.List(new Sem.Var("elem_t")),
+      new Sem.Type()
     )
   )
 }
@@ -94,18 +94,18 @@ export function list_ind_motive_t(elem_t: Value): Value {
 export function list_ind_step_t(motive: Value, elem_t: Value): Value {
   return evaluate(
     new Env().extend("motive", motive).extend("elem_t", elem_t),
-    new Cores.Pi(
+    new Sem.Pi(
       "head",
-      new Cores.Var("elem_t"),
-      new Cores.Pi(
+      new Sem.Var("elem_t"),
+      new Sem.Pi(
         "tail",
-        new Cores.List(new Cores.Var("elem_t")),
-        new Cores.Pi(
+        new Sem.List(new Sem.Var("elem_t")),
+        new Sem.Pi(
           "almost",
-          new Cores.Ap(new Cores.Var("motive"), new Cores.Var("tail")),
-          new Cores.Ap(
-            new Cores.Var("motive"),
-            new Cores.Li(new Cores.Var("head"), new Cores.Var("tail"))
+          new Sem.Ap(new Sem.Var("motive"), new Sem.Var("tail")),
+          new Sem.Ap(
+            new Sem.Var("motive"),
+            new Sem.Li(new Sem.Var("head"), new Sem.Var("tail"))
           )
         )
       )

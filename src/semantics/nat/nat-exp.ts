@@ -3,7 +3,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Nat extends Exp {
   free_names(bound_names: Set<string>): Set<string> {
@@ -15,13 +15,13 @@ export class Nat extends Exp {
   }
 
   evaluate(env: Env): Value {
-    return new Cores.NatValue()
+    return new Sem.NatValue()
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
-      t: new Cores.TypeValue(),
-      core: new Cores.Nat(),
+      t: new Sem.TypeValue(),
+      core: new Sem.Nat(),
     }
   }
 

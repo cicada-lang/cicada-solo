@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { infer } from "../../exp"
 import { expect } from "../../value"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class VectorHead extends Exp {
   target: Exp
@@ -24,12 +24,12 @@ export class VectorHead extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
-    const vector_t = expect(ctx, inferred_target.t, Cores.VectorValue)
-    expect(ctx, vector_t.length, Cores.Add1Value)
+    const vector_t = expect(ctx, inferred_target.t, Sem.VectorValue)
+    expect(ctx, vector_t.length, Sem.Add1Value)
 
     return {
       t: vector_t.elem_t,
-      core: new Cores.VectorHead(inferred_target.core),
+      core: new Sem.VectorHead(inferred_target.core),
     }
   }
 

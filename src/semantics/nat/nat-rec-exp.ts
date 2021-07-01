@@ -7,7 +7,7 @@ import { check } from "../../exp"
 import { infer } from "../../exp"
 import { readback } from "../../value"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 import { nanoid } from "nanoid"
 
 export class NatRec extends Exp {
@@ -39,19 +39,19 @@ export class NatRec extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const target_core = check(ctx, this.target, new Cores.NatValue())
+    const target_core = check(ctx, this.target, new Sem.NatValue())
     const inferred_base = infer(ctx, this.base)
-    const base_t_core = readback(ctx, new Cores.TypeValue(), inferred_base.t)
+    const base_t_core = readback(ctx, new Sem.TypeValue(), inferred_base.t)
     const target_name = "nat_rec_target_nat_" + nanoid().toString()
-    const motive_core = new Cores.The(
-      new Cores.Pi(target_name, new Cores.Type(), new Cores.Nat()),
-      new Cores.Fn(target_name, base_t_core)
+    const motive_core = new Sem.The(
+      new Sem.Pi(target_name, new Sem.Type(), new Sem.Nat()),
+      new Sem.Fn(target_name, base_t_core)
     )
     const step_core = check(ctx, this.step, nat_ind_step_t(inferred_base.t))
 
     return {
       t: inferred_base.t,
-      core: new Cores.NatInd(
+      core: new Sem.NatInd(
         target_core,
         motive_core,
         inferred_base.core,
@@ -68,10 +68,10 @@ export class NatRec extends Exp {
 function nat_ind_step_t(base_t: Value): Value {
   return evaluate(
     new Env().extend("base_t", base_t),
-    new Cores.Pi(
+    new Sem.Pi(
       "prev",
-      new Cores.Nat(),
-      new Cores.Pi("almost", new Cores.Var("base_t"), new Cores.Var("base_t"))
+      new Sem.Nat(),
+      new Sem.Pi("almost", new Sem.Var("base_t"), new Sem.Var("base_t"))
     )
   )
 }

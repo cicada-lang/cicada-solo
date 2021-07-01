@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { check } from "../../exp"
 import { evaluate } from "../../core"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
@@ -45,18 +45,18 @@ export class Pi extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
-    const arg_t_core = check(ctx, this.arg_t, new Cores.TypeValue())
+    const arg_t_core = check(ctx, this.arg_t, new Sem.TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
     const ret_t = this.ret_t.subst(this.name, new Exps.Var(fresh_name))
     const ret_t_core = check(
       ctx.extend(fresh_name, arg_t_value),
       ret_t,
-      new Cores.TypeValue()
+      new Sem.TypeValue()
     )
 
     return {
-      t: new Cores.TypeValue(),
-      core: new Cores.Pi(fresh_name, arg_t_core, ret_t_core),
+      t: new Sem.TypeValue(),
+      core: new Sem.Pi(fresh_name, arg_t_core, ret_t_core),
     }
   }
 

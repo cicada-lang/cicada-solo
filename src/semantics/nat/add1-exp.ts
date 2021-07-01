@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { check } from "../../exp"
 import { Value } from "../../value"
 import { nat_to_number } from "./nat-util"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Add1 extends Exp {
   prev: Exp
@@ -24,8 +24,8 @@ export class Add1 extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
-      t: new Cores.NatValue(),
-      core: new Cores.Add1(check(ctx, this.prev, new Cores.NatValue())),
+      t: new Sem.NatValue(),
+      core: new Sem.Add1(check(ctx, this.prev, new Sem.NatValue())),
     }
   }
 

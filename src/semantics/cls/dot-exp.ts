@@ -7,7 +7,7 @@ import { readback } from "../../value"
 import { infer } from "../../exp"
 import { Trace } from "../../errors"
 import * as ut from "../../ut"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Dot extends Exp {
   target: Exp
@@ -30,7 +30,7 @@ export class Dot extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
 
-    if (inferred_target.t instanceof Cores.ClsValue) {
+    if (inferred_target.t instanceof Sem.ClsValue) {
       // NOTE `infer` need to return normalized value as core.
       // Because of `ClsValue` can be partially fulfilled by value,
       // during `infer` of `Exps.Dot`, we have opportunity to get those value back,

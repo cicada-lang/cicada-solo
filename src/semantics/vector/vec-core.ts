@@ -2,7 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Vec extends Core {
   head: Core
@@ -15,10 +15,7 @@ export class Vec extends Core {
   }
 
   evaluate(env: Env): Value {
-    return new Cores.VecValue(
-      evaluate(env, this.head),
-      evaluate(env, this.tail)
-    )
+    return new Sem.VecValue(evaluate(env, this.head), evaluate(env, this.tail))
   }
 
   repr(): string {

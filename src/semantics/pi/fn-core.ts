@@ -2,7 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Fn extends Core {
   name: string
@@ -15,7 +15,7 @@ export class Fn extends Core {
   }
 
   evaluate(env: Env): Value {
-    return new Cores.FnValue(new Closure(env, this.name, this.ret))
+    return new Sem.FnValue(new Closure(env, this.name, this.ret))
   }
 
   private multi_fn(names: Array<string> = new Array()): {

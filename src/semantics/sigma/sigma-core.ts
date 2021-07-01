@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Sigma extends Core {
   name: string
@@ -19,7 +19,7 @@ export class Sigma extends Core {
 
   evaluate(env: Env): Value {
     const car_t = evaluate(env, this.car_t)
-    return new Cores.SigmaValue(car_t, new Closure(env, this.name, this.cdr_t))
+    return new Sem.SigmaValue(car_t, new Closure(env, this.name, this.cdr_t))
   }
 
   private multi_sigma(

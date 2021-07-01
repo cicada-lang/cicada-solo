@@ -1,7 +1,7 @@
 import { Neutral } from "../../neutral"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class DotNeutral extends Neutral {
   target: Neutral
@@ -14,6 +14,6 @@ export class DotNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Cores.Dot(this.target.readback_neutral(ctx), this.name)
+    return new Sem.Dot(this.target.readback_neutral(ctx), this.name)
   }
 }

@@ -2,7 +2,7 @@ import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { readback } from "../../value"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class EqualValue extends Value {
   t: Value
@@ -17,9 +17,9 @@ export class EqualValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof Cores.TypeValue) {
-      return new Cores.Equal(
-        readback(ctx, new Cores.TypeValue(), this.t),
+    if (t instanceof Sem.TypeValue) {
+      return new Sem.Equal(
+        readback(ctx, new Sem.TypeValue(), this.t),
         readback(ctx, this.t, this.from),
         readback(ctx, this.t, this.to)
       )

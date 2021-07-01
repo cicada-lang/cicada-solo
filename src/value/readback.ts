@@ -3,7 +3,7 @@ import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { Trace } from "../errors"
 import * as ut from "../ut"
-import * as Cores from "../cores"
+import * as Sem from "../sem"
 
 export function readback(ctx: Ctx, t: Value, value: Value): Core {
   if (t.eta_expand) {
@@ -11,14 +11,11 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
   }
 
   if (
-    t instanceof Cores.AbsurdValue &&
-    value instanceof Cores.NotYetValue &&
-    value.t instanceof Cores.AbsurdValue
+    t instanceof Sem.AbsurdValue &&
+    value instanceof Sem.NotYetValue &&
+    value.t instanceof Sem.AbsurdValue
   ) {
-    return new Cores.The(
-      new Cores.Absurd(),
-      value.neutral.readback_neutral(ctx)
-    )
+    return new Sem.The(new Sem.Absurd(), value.neutral.readback_neutral(ctx))
   }
 
   const exp = value.readback(ctx, t)

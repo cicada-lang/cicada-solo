@@ -10,7 +10,7 @@ import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { Trace } from "../../errors"
 import { InternalError } from "../../errors"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 import { vector_ind_motive_t, vector_ind_step_t } from "./vector-ind-exp"
 
 export class VectorInd extends Core {
@@ -76,18 +76,15 @@ export class VectorInd extends Core {
     base: Value,
     step: Value
   ): Value {
-    if (target instanceof Cores.VecnilValue) {
+    if (target instanceof Sem.VecnilValue) {
       return base
-    } else if (target instanceof Cores.VecValue) {
+    } else if (target instanceof Sem.VecValue) {
       const { head, tail } = target
 
-      if (length instanceof Cores.Add1Value) {
-        return Cores.Ap.apply(
-          Cores.Ap.apply(
-            Cores.Ap.apply(Cores.Ap.apply(step, length), head),
-            tail
-          ),
-          Cores.VectorInd.apply(length.prev, tail, motive, base, step)
+      if (length instanceof Sem.Add1Value) {
+        return Sem.Ap.apply(
+          Sem.Ap.apply(Sem.Ap.apply(Sem.Ap.apply(step, length), head), tail),
+          Sem.VectorInd.apply(length.prev, tail, motive, base, step)
         )
       } else {
         throw new InternalError(
@@ -98,21 +95,21 @@ export class VectorInd extends Core {
           ].join("\n") + "\n"
         )
       }
-    } else if (target instanceof Cores.NotYetValue) {
+    } else if (target instanceof Sem.NotYetValue) {
       const { t, neutral } = target
 
-      if (t instanceof Cores.VectorValue) {
+      if (t instanceof Sem.VectorValue) {
         const elem_t = t.elem_t
-        const length_t = new Cores.NatValue()
+        const length_t = new Sem.NatValue()
         const motive_t = vector_ind_motive_t(elem_t)
-        const base_t = Cores.Ap.apply(
-          Cores.Ap.apply(motive, new Cores.ZeroValue()),
-          new Cores.VecnilValue()
+        const base_t = Sem.Ap.apply(
+          Sem.Ap.apply(motive, new Sem.ZeroValue()),
+          new Sem.VecnilValue()
         )
         const step_t = vector_ind_step_t(motive, elem_t)
-        return new Cores.NotYetValue(
-          Cores.Ap.apply(Cores.Ap.apply(motive, length), target),
-          new Cores.VectorIndNeutral(
+        return new Sem.NotYetValue(
+          Sem.Ap.apply(Sem.Ap.apply(motive, length), target),
+          new Sem.VectorIndNeutral(
             new Normal(length_t, length),
             neutral,
             new Normal(motive_t, motive),
@@ -122,12 +119,12 @@ export class VectorInd extends Core {
         )
       } else {
         throw InternalError.wrong_target_t(target.t, {
-          expected: [Cores.VectorValue],
+          expected: [Sem.VectorValue],
         })
       }
     } else {
       throw InternalError.wrong_target(target, {
-        expected: [Cores.VecnilValue, Cores.VecValue],
+        expected: [Sem.VecnilValue, Sem.VecValue],
       })
     }
   }

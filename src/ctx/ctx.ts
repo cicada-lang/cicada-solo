@@ -2,7 +2,7 @@ import { Env } from "../env"
 import { Value } from "../value"
 import { Trace } from "../errors"
 import { readback } from "../value"
-import * as Cores from "../cores"
+import * as Sem from "../sem"
 
 type CtxEntry = {
   name: string
@@ -50,10 +50,7 @@ export class Ctx {
       if (value !== undefined) {
         env = env.extend(name, value)
       } else {
-        env = env.extend(
-          name,
-          new Cores.NotYetValue(t, new Cores.VarNeutral(name))
-        )
+        env = env.extend(name, new Sem.NotYetValue(t, new Sem.VarNeutral(name)))
       }
     }
     return env
@@ -62,8 +59,8 @@ export class Ctx {
   assert_not_redefine(name: string, t: Value, value?: Value): void {
     const old_t = this.lookup_type(name)
     if (old_t) {
-      const old_t_repr = readback(this, new Cores.TypeValue(), old_t).repr()
-      const t_repr = readback(this, new Cores.TypeValue(), t).repr()
+      const old_t_repr = readback(this, new Sem.TypeValue(), old_t).repr()
+      const t_repr = readback(this, new Sem.TypeValue(), t).repr()
       throw new Trace(
         [
           `I can not redefine name:`,

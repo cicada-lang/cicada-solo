@@ -2,7 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { evaluate } from "../../core"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Cons extends Core {
   car: Core
@@ -15,7 +15,7 @@ export class Cons extends Core {
   }
 
   evaluate(env: Env): Value {
-    return new Cores.ConsValue(evaluate(env, this.car), evaluate(env, this.cdr))
+    return new Sem.ConsValue(evaluate(env, this.car), evaluate(env, this.cdr))
   }
 
   repr(): string {

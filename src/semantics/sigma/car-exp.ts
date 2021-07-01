@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { infer } from "../../exp"
 import { expect } from "../../value"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Car extends Exp {
   target: Exp
@@ -24,11 +24,11 @@ export class Car extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
-    const sigma = expect(ctx, inferred_target.t, Cores.SigmaValue)
+    const sigma = expect(ctx, inferred_target.t, Sem.SigmaValue)
 
     return {
       t: sigma.car_t,
-      core: new Cores.Car(inferred_target.core),
+      core: new Sem.Car(inferred_target.core),
     }
   }
 

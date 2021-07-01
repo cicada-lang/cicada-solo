@@ -4,7 +4,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class AbsurdInd extends Core {
   target: Core
@@ -34,24 +34,24 @@ export class AbsurdInd extends Core {
   }
 
   static apply(target: Value, motive: Value): Value {
-    if (target instanceof Cores.NotYetValue) {
+    if (target instanceof Sem.NotYetValue) {
       const { t, neutral } = target
-      if (t instanceof Cores.AbsurdValue) {
-        return new Cores.NotYetValue(
+      if (t instanceof Sem.AbsurdValue) {
+        return new Sem.NotYetValue(
           motive,
-          new Cores.AbsurdIndNeutral(
+          new Sem.AbsurdIndNeutral(
             neutral,
-            new Normal(new Cores.TypeValue(), motive)
+            new Normal(new Sem.TypeValue(), motive)
           )
         )
       } else {
         throw InternalError.wrong_target_t(target.t, {
-          expected: [Cores.AbsurdValue],
+          expected: [Sem.AbsurdValue],
         })
       }
     } else {
       throw InternalError.wrong_target(target, {
-        expected: [Cores.NotYetValue],
+        expected: [Sem.NotYetValue],
       })
     }
   }

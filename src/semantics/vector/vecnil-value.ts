@@ -1,12 +1,12 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class VecnilValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof Cores.VectorValue) {
-      return new Cores.Vecnil()
+    if (t instanceof Sem.VectorValue) {
+      return new Sem.Vecnil()
     }
   }
 }

@@ -2,7 +2,7 @@ import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import { readback } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class VectorValue extends Value {
   elem_t: Value
@@ -15,10 +15,10 @@ export class VectorValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof Cores.TypeValue) {
-      return new Cores.Vector(
-        readback(ctx, new Cores.TypeValue(), this.elem_t),
-        readback(ctx, new Cores.NatValue(), this.length)
+    if (t instanceof Sem.TypeValue) {
+      return new Sem.Vector(
+        readback(ctx, new Sem.TypeValue(), this.elem_t),
+        readback(ctx, new Sem.NatValue(), this.length)
       )
     }
   }

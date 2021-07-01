@@ -4,7 +4,7 @@ import { evaluate } from "../../core"
 import { Value } from "../../value"
 import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Ap extends Core {
   target: Core
@@ -41,25 +41,25 @@ export class Ap extends Core {
   }
 
   static apply(target: Value, arg: Value): Value {
-    if (target instanceof Cores.FnValue) {
+    if (target instanceof Sem.FnValue) {
       return target.apply(arg)
-    } else if (target instanceof Cores.ClsValue) {
+    } else if (target instanceof Sem.ClsValue) {
       return target.apply(arg)
-    } else if (target instanceof Cores.NotYetValue) {
+    } else if (target instanceof Sem.NotYetValue) {
       const { t, neutral } = target
-      if (t instanceof Cores.PiValue) {
-        return new Cores.NotYetValue(
+      if (t instanceof Sem.PiValue) {
+        return new Sem.NotYetValue(
           t.ret_t_cl.apply(arg),
-          new Cores.ApNeutral(neutral, new Normal(t.arg_t, arg))
+          new Sem.ApNeutral(neutral, new Normal(t.arg_t, arg))
         )
       } else {
         throw InternalError.wrong_target_t(target.t, {
-          expected: [Cores.PiValue],
+          expected: [Sem.PiValue],
         })
       }
     } else {
       throw InternalError.wrong_target(target, {
-        expected: [Cores.FnValue, Cores.ClsNilValue, Cores.ClsConsValue],
+        expected: [Sem.FnValue, Sem.ClsNilValue, Sem.ClsConsValue],
       })
     }
   }

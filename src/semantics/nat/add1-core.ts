@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
 import { nat_to_number } from "./nat-util"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Add1 extends Core {
   prev: Core
@@ -14,7 +14,7 @@ export class Add1 extends Core {
   }
 
   evaluate(env: Env): Value {
-    return new Cores.Add1Value(evaluate(env, this.prev))
+    return new Sem.Add1Value(evaluate(env, this.prev))
   }
 
   repr(): string {

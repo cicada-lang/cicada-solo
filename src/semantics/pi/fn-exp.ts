@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { check } from "../../exp"
 import { expect } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
@@ -37,15 +37,12 @@ export class Fn extends Exp {
 
   check(ctx: Ctx, t: Value): Core {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
-    const pi = expect(ctx, t, Cores.PiValue)
-    const arg = new Cores.NotYetValue(
-      pi.arg_t,
-      new Cores.VarNeutral(fresh_name)
-    )
+    const pi = expect(ctx, t, Sem.PiValue)
+    const arg = new Sem.NotYetValue(pi.arg_t, new Sem.VarNeutral(fresh_name))
     const ret_t = pi.ret_t_cl.apply(arg)
     const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
     const ret_core = check(ctx.extend(fresh_name, pi.arg_t), ret, ret_t)
-    return new Cores.Fn(fresh_name, ret_core)
+    return new Sem.Fn(fresh_name, ret_core)
   }
 
   private multi_fn(names: Array<string> = new Array()): {

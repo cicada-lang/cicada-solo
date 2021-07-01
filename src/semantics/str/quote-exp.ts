@@ -2,7 +2,7 @@ import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Quote extends Exp {
   str: string
@@ -22,8 +22,8 @@ export class Quote extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
-      t: new Cores.StrValue(),
-      core: new Cores.Quote(this.str),
+      t: new Sem.StrValue(),
+      core: new Sem.Quote(this.str),
     }
   }
 

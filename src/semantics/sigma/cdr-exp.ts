@@ -5,7 +5,7 @@ import { infer } from "../../exp"
 import { expect } from "../../value"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Cdr extends Exp {
   target: Exp
@@ -25,13 +25,13 @@ export class Cdr extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
-    const sigma = expect(ctx, inferred_target.t, Cores.SigmaValue)
+    const sigma = expect(ctx, inferred_target.t, Sem.SigmaValue)
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
-    const car = Cores.Car.apply(target_value)
+    const car = Sem.Car.apply(target_value)
 
     return {
       t: sigma.cdr_t_cl.apply(car),
-      core: new Cores.Cdr(inferred_target.core),
+      core: new Sem.Cdr(inferred_target.core),
     }
   }
 

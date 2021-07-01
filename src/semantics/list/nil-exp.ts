@@ -3,7 +3,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { expect } from "../../value"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Nil extends Exp {
   free_names(bound_names: Set<string>): Set<string> {
@@ -15,8 +15,8 @@ export class Nil extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    expect(ctx, t, Cores.ListValue)
-    return new Cores.Nil()
+    expect(ctx, t, Sem.ListValue)
+    return new Sem.Nil()
   }
 
   repr(): string {

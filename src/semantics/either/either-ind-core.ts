@@ -7,7 +7,7 @@ import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 import {
   either_ind_motive_t,
   either_ind_base_left_t,
@@ -65,20 +65,20 @@ export class EitherInd extends Core {
     base_left: Value,
     base_right: Value
   ): Value {
-    if (target instanceof Cores.InlValue) {
-      return Cores.Ap.apply(base_left, target.left)
-    } else if (target instanceof Cores.InrValue) {
-      return Cores.Ap.apply(base_right, target.right)
-    } else if (target instanceof Cores.NotYetValue) {
+    if (target instanceof Sem.InlValue) {
+      return Sem.Ap.apply(base_left, target.left)
+    } else if (target instanceof Sem.InrValue) {
+      return Sem.Ap.apply(base_right, target.right)
+    } else if (target instanceof Sem.NotYetValue) {
       const { t, neutral } = target
 
-      if (t instanceof Cores.EitherValue) {
+      if (t instanceof Sem.EitherValue) {
         const motive_t = either_ind_motive_t(t)
         const base_left_t = either_ind_base_left_t(t.left_t, motive)
         const base_right_t = either_ind_base_right_t(t.right_t, motive)
-        return new Cores.NotYetValue(
-          Cores.Ap.apply(motive, target),
-          new Cores.EitherIndNeutral(
+        return new Sem.NotYetValue(
+          Sem.Ap.apply(motive, target),
+          new Sem.EitherIndNeutral(
             neutral,
             new Normal(motive_t, motive),
             new Normal(base_left_t, base_left),
@@ -87,12 +87,12 @@ export class EitherInd extends Core {
         )
       } else {
         throw InternalError.wrong_target_t(target.t, {
-          expected: [Cores.EitherValue],
+          expected: [Sem.EitherValue],
         })
       }
     } else {
       throw InternalError.wrong_target(target, {
-        expected: [Cores.InlValue, Cores.InrValue],
+        expected: [Sem.InlValue, Sem.InrValue],
       })
     }
   }

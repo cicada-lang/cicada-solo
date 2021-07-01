@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { evaluate } from "../../core"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Either extends Core {
   left_t: Core
@@ -16,7 +16,7 @@ export class Either extends Core {
   }
 
   evaluate(env: Env): Value {
-    return new Cores.EitherValue(
+    return new Sem.EitherValue(
       evaluate(env, this.left_t),
       evaluate(env, this.right_t)
     )

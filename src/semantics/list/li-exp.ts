@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { check } from "../../exp"
 import { infer } from "../../exp"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Li extends Exp {
   head: Exp
@@ -29,12 +29,12 @@ export class Li extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_head = infer(ctx, this.head)
-    const list_t = new Cores.ListValue(inferred_head.t)
+    const list_t = new Sem.ListValue(inferred_head.t)
     const tail_core = check(ctx, this.tail, list_t)
 
     return {
       t: list_t,
-      core: new Cores.Li(inferred_head.core, tail_core),
+      core: new Sem.Li(inferred_head.core, tail_core),
     }
   }
 

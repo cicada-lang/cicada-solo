@@ -4,7 +4,7 @@ import { Value } from "../../value"
 import { readback } from "../../value"
 import { Closure } from "../../closure"
 import * as ut from "../../ut"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class PiValue extends Value {
   arg_t: Value
@@ -17,19 +17,19 @@ export class PiValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof Cores.TypeValue) {
+    if (t instanceof Sem.TypeValue) {
       const fresh_name = ut.freshen_name(new Set(ctx.names), this.ret_t_cl.name)
-      const variable = new Cores.NotYetValue(
+      const variable = new Sem.NotYetValue(
         this.arg_t,
-        new Cores.VarNeutral(fresh_name)
+        new Sem.VarNeutral(fresh_name)
       )
-      const arg_t = readback(ctx, new Cores.TypeValue(), this.arg_t)
+      const arg_t = readback(ctx, new Sem.TypeValue(), this.arg_t)
       const ret_t = readback(
         ctx.extend(fresh_name, this.arg_t),
-        new Cores.TypeValue(),
+        new Sem.TypeValue(),
         this.ret_t_cl.apply(variable)
       )
-      return new Cores.Pi(fresh_name, arg_t, ret_t)
+      return new Sem.Pi(fresh_name, arg_t, ret_t)
     }
   }
 
@@ -38,16 +38,16 @@ export class PiValue extends Value {
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.ret_t_cl.name)
-    const variable = new Cores.NotYetValue(
+    const variable = new Sem.NotYetValue(
       this.arg_t,
-      new Cores.VarNeutral(fresh_name)
+      new Sem.VarNeutral(fresh_name)
     )
     const ret_t = this.ret_t_cl.apply(variable)
     const ret = readback(
       ctx.extend(fresh_name, this.arg_t),
       ret_t,
-      Cores.Ap.apply(value, variable)
+      Sem.Ap.apply(value, variable)
     )
-    return new Cores.Fn(fresh_name, ret)
+    return new Sem.Fn(fresh_name, ret)
   }
 }

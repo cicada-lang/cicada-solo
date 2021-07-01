@@ -5,7 +5,7 @@ import { Value } from "../../value"
 import { check } from "../../exp"
 import { expect } from "../../value"
 import { evaluate } from "../../core"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Inl extends Exp {
   left: Exp
@@ -24,10 +24,10 @@ export class Inl extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const either = expect(ctx, t, Cores.EitherValue)
+    const either = expect(ctx, t, Sem.EitherValue)
     const left_core = check(ctx, this.left, either.left_t)
 
-    return new Cores.Inl(left_core)
+    return new Sem.Inl(left_core)
   }
 
   repr(): string {

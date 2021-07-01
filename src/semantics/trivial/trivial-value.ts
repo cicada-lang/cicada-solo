@@ -1,12 +1,12 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class TrivialValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof Cores.TypeValue) {
-      return new Cores.Trivial()
+    if (t instanceof Sem.TypeValue) {
+      return new Sem.Trivial()
     }
   }
 
@@ -14,6 +14,6 @@ export class TrivialValue extends Value {
     // NOTE the η-rule for trivial states that
     //   all of its inhabitants are the same as sole.
     //   This is implemented by reading the all back as sole.
-    return new Cores.Sole()
+    return new Sem.Sole()
   }
 }

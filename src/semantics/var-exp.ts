@@ -3,7 +3,7 @@ import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import { Trace } from "../errors"
-import * as Cores from "../cores"
+import * as Sem from "../sem"
 
 export class Var extends Exp {
   name: string
@@ -40,7 +40,7 @@ export class Var extends Exp {
 
     return {
       t,
-      core: new Cores.Var(this.name),
+      core: new Sem.Var(this.name),
     }
   }
 

@@ -3,7 +3,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Vector extends Exp {
   elem_t: Exp
@@ -31,10 +31,10 @@ export class Vector extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
-      t: new Cores.TypeValue(),
-      core: new Cores.Vector(
-        check(ctx, this.elem_t, new Cores.TypeValue()),
-        check(ctx, this.length, new Cores.NatValue())
+      t: new Sem.TypeValue(),
+      core: new Sem.Vector(
+        check(ctx, this.elem_t, new Sem.TypeValue()),
+        check(ctx, this.length, new Sem.NatValue())
       ),
     }
   }

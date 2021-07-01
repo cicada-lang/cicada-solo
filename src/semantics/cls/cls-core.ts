@@ -2,22 +2,22 @@ import { Core, AlphaCtx } from "../../core"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
 import { Env } from "../../env"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 import * as ut from "../../ut"
 import { ClsClosure } from "./cls-closure"
 
 export abstract class Cls extends Core {
-  instanceofCoresCls = true
+  instanceofSemCls = true
 
-  abstract append(cls: Cores.Cls): Cores.Cls
+  abstract append(cls: Sem.Cls): Sem.Cls
   abstract field_names: Array<string>
-  abstract evaluate(env: Env): Cores.ClsValue
+  abstract evaluate(env: Env): Sem.ClsValue
   abstract fields_repr(): Array<string>
   abstract fields_alpha_repr(ctx: AlphaCtx): Array<string>
 }
 
 export class ClsNil extends Cls {
-  append(cls: Cores.Cls): Cores.Cls {
+  append(cls: Sem.Cls): Sem.Cls {
     return cls
   }
 
@@ -25,8 +25,8 @@ export class ClsNil extends Cls {
     return []
   }
 
-  evaluate(env: Env): Cores.ClsValue {
-    return new Cores.ClsNilValue()
+  evaluate(env: Env): Sem.ClsValue {
+    return new Sem.ClsNilValue()
   }
 
   fields_repr(): Array<string> {
@@ -65,7 +65,7 @@ export class ClsCons extends Cls {
     this.rest_t = rest_t
   }
 
-  append(cls: Cores.Cls): Cores.Cls {
+  append(cls: Sem.Cls): Sem.Cls {
     return new ClsCons(
       this.field_name,
       this.local_name,
@@ -78,8 +78,8 @@ export class ClsCons extends Cls {
     return [this.field_name, ...this.rest_t.field_names]
   }
 
-  evaluate(env: Env): Cores.ClsValue {
-    return new Cores.ClsConsValue(
+  evaluate(env: Env): Sem.ClsValue {
+    return new Sem.ClsConsValue(
       this.field_name,
       evaluate(env, this.field_t),
       new ClsClosure(env, this.local_name, this.rest_t)

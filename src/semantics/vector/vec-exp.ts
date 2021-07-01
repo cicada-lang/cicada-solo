@@ -5,7 +5,7 @@ import { check } from "../../exp"
 import { expect } from "../../value"
 import { infer } from "../../exp"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Vec extends Exp {
   head: Exp
@@ -29,14 +29,14 @@ export class Vec extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const vector_t = expect(ctx, t, Cores.VectorValue)
+    const vector_t = expect(ctx, t, Sem.VectorValue)
     const elem_t = vector_t.elem_t
-    const length_value = expect(ctx, vector_t.length, Cores.Add1Value)
+    const length_value = expect(ctx, vector_t.length, Sem.Add1Value)
     const prev_value = length_value.prev
     const head_core = check(ctx, this.head, elem_t)
-    const tail_t = new Cores.VectorValue(elem_t, prev_value)
+    const tail_t = new Sem.VectorValue(elem_t, prev_value)
     const tail_core = check(ctx, this.tail, tail_t)
-    return new Cores.Vec(head_core, tail_core)
+    return new Sem.Vec(head_core, tail_core)
   }
 
   repr(): string {

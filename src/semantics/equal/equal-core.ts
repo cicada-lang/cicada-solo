@@ -2,7 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Equal extends Core {
   t: Core
@@ -17,7 +17,7 @@ export class Equal extends Core {
   }
 
   evaluate(env: Env): Value {
-    return new Cores.EqualValue(
+    return new Sem.EqualValue(
       evaluate(env, this.t),
       evaluate(env, this.from),
       evaluate(env, this.to)

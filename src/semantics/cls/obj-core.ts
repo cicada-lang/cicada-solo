@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { evaluate } from "../../core"
 import * as ut from "../../ut"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Obj extends Core {
   properties: Map<string, Core>
@@ -20,7 +20,7 @@ export class Obj extends Core {
       properties.set(name, evaluate(env, exp))
     }
 
-    return new Cores.ObjValue(properties)
+    return new Sem.ObjValue(properties)
   }
 
   repr(): string {

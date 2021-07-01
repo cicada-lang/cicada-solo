@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { evaluate } from "../../core"
 import { InternalError } from "../../errors"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Dot extends Core {
   target: Core
@@ -16,7 +16,7 @@ export class Dot extends Core {
   }
 
   evaluate(env: Env): Value {
-    return Cores.Dot.apply(evaluate(env, this.target), this.name)
+    return Sem.Dot.apply(evaluate(env, this.target), this.name)
   }
 
   repr(): string {
@@ -28,24 +28,24 @@ export class Dot extends Core {
   }
 
   static apply(target: Value, name: string): Value {
-    if (target instanceof Cores.ObjValue) {
+    if (target instanceof Sem.ObjValue) {
       return target.dot_value(name)
-    } else if (target instanceof Cores.NotYetValue) {
+    } else if (target instanceof Sem.NotYetValue) {
       const { t, neutral } = target
 
-      if (t instanceof Cores.ClsValue) {
-        return new Cores.NotYetValue(
+      if (t instanceof Sem.ClsValue) {
+        return new Sem.NotYetValue(
           t.dot_type(target, name),
-          new Cores.DotNeutral(neutral, name)
+          new Sem.DotNeutral(neutral, name)
         )
       } else {
         throw InternalError.wrong_target_t(t, {
-          expected: [Cores.ClsNilValue, Cores.ClsConsValue],
+          expected: [Sem.ClsNilValue, Sem.ClsConsValue],
         })
       }
     } else {
       throw InternalError.wrong_target(target, {
-        expected: [Cores.ObjValue],
+        expected: [Sem.ObjValue],
       })
     }
   }

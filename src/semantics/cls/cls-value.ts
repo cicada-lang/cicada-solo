@@ -7,11 +7,11 @@ import { evaluate } from "../../core"
 import { check } from "../../exp"
 import { Trace } from "../../errors"
 import * as ut from "../../ut"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 import { ClsClosure } from "./cls-closure"
 
 export abstract class ClsValue extends Value {
-  instanceofCoresClsValue = true
+  instanceofSemClsValue = true
 
   constructor() {
     super()
@@ -30,7 +30,7 @@ export abstract class ClsValue extends Value {
   abstract eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core>
 
   eta_expand(ctx: Ctx, value: Value): Core {
-    return new Cores.Obj(this.eta_expand_properties(ctx, value))
+    return new Sem.Obj(this.eta_expand_properties(ctx, value))
   }
 
   abstract extend_ctx(
@@ -54,8 +54,8 @@ export class ClsNilValue extends ClsValue {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof Cores.TypeValue) {
-      return new Cores.ClsNil()
+    if (t instanceof Sem.TypeValue) {
+      return new Sem.ClsNil()
     }
   }
 
@@ -133,37 +133,37 @@ export class ClsConsValue extends ClsValue {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof Cores.TypeValue) {
+    if (t instanceof Sem.TypeValue) {
       const fresh_name = ut.freshen_name(
         new Set(ctx.names),
         this.rest_t_cl.local_name
       )
-      const variable = new Cores.NotYetValue(
+      const variable = new Sem.NotYetValue(
         this.field_t,
-        new Cores.VarNeutral(fresh_name)
+        new Sem.VarNeutral(fresh_name)
       )
-      const field_t = readback(ctx, new Cores.TypeValue(), this.field_t)
+      const field_t = readback(ctx, new Sem.TypeValue(), this.field_t)
       const rest_t = readback(
         ctx.extend(fresh_name, this.field_t),
-        new Cores.TypeValue(),
+        new Sem.TypeValue(),
         this.rest_t_cl.apply(variable)
       )
 
-      if (!(rest_t instanceof Cores.Cls)) {
-        throw new Trace("I expect rest_t to be Cores.Cls")
+      if (!(rest_t instanceof Sem.Cls)) {
+        throw new Trace("I expect rest_t to be Sem.Cls")
       }
 
-      return new Cores.ClsCons(this.field_name, fresh_name, field_t, rest_t)
+      return new Sem.ClsCons(this.field_name, fresh_name, field_t, rest_t)
     }
   }
 
   dot_value(target: Value, field_name: string): Value {
     if (field_name === this.field_name) {
-      return Cores.Dot.apply(target, this.field_name)
+      return Sem.Dot.apply(target, this.field_name)
     }
 
     return this.rest_t_cl
-      .apply(Cores.Dot.apply(target, this.field_name))
+      .apply(Sem.Dot.apply(target, this.field_name))
       .dot_value(target, field_name)
   }
 
@@ -173,12 +173,12 @@ export class ClsConsValue extends ClsValue {
     }
 
     return this.rest_t_cl
-      .apply(Cores.Dot.apply(target, this.field_name))
+      .apply(Sem.Dot.apply(target, this.field_name))
       .dot_type(target, field_name)
   }
 
   eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
-    const property_value = Cores.Dot.apply(value, this.field_name)
+    const property_value = Sem.Dot.apply(value, this.field_name)
 
     return new Map([
       [this.field_name, readback(ctx, this.field_t, property_value)],
@@ -194,9 +194,9 @@ export class ClsConsValue extends ClsValue {
     renamings: Array<{ field_name: string; local_name: string }>
   } {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.field_name)
-    const variable = new Cores.NotYetValue(
+    const variable = new Sem.NotYetValue(
       this.field_t,
-      new Cores.VarNeutral(fresh_name)
+      new Sem.VarNeutral(fresh_name)
     )
 
     return this.rest_t_cl

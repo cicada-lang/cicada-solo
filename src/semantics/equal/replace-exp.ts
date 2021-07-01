@@ -7,7 +7,7 @@ import { check } from "../../exp"
 import { infer } from "../../exp"
 import { expect } from "../../value"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Replace extends Exp {
   target: Exp
@@ -39,22 +39,22 @@ export class Replace extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
-    const equal = expect(ctx, inferred_target.t, Cores.EqualValue)
+    const equal = expect(ctx, inferred_target.t, Sem.EqualValue)
     const motive_t = evaluate(
       new Env().extend("t", equal.t),
-      new Cores.Pi("x", new Cores.Var("t"), new Cores.Type())
+      new Sem.Pi("x", new Sem.Var("t"), new Sem.Type())
     )
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)
     const base_core = check(
       ctx,
       this.base,
-      Cores.Ap.apply(motive_value, equal.from)
+      Sem.Ap.apply(motive_value, equal.from)
     )
 
     return {
-      t: Cores.Ap.apply(motive_value, equal.to),
-      core: new Cores.Replace(inferred_target.core, motive_core, base_core),
+      t: Sem.Ap.apply(motive_value, equal.to),
+      core: new Sem.Replace(inferred_target.core, motive_core, base_core),
     }
   }
 

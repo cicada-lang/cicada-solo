@@ -2,7 +2,7 @@ import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import { readback } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class InlValue extends Value {
   left: Value
@@ -13,8 +13,8 @@ export class InlValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof Cores.EitherValue) {
-      return new Cores.Inl(readback(ctx, t.left_t, this.left))
+    if (t instanceof Sem.EitherValue) {
+      return new Sem.Inl(readback(ctx, t.left_t, this.left))
     }
   }
 }

@@ -2,7 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class List extends Core {
   elem_t: Core
@@ -13,7 +13,7 @@ export class List extends Core {
   }
 
   evaluate(env: Env): Value {
-    return new Cores.ListValue(evaluate(env, this.elem_t))
+    return new Sem.ListValue(evaluate(env, this.elem_t))
   }
 
   repr(): string {

@@ -7,7 +7,7 @@ import { check } from "../../exp"
 import { Value } from "../../value"
 import { Trace } from "../../errors"
 import * as ut from "../../ut"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Ap extends Exp {
   target: Exp
@@ -32,21 +32,21 @@ export class Ap extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
-    if (inferred_target.t instanceof Cores.PiValue) {
+    if (inferred_target.t instanceof Sem.PiValue) {
       const pi = inferred_target.t
       const arg_core = check(ctx, this.arg, pi.arg_t)
       const arg_value = evaluate(ctx.to_env(), arg_core)
 
       return {
         t: pi.ret_t_cl.apply(arg_value),
-        core: new Cores.Ap(inferred_target.core, arg_core),
+        core: new Sem.Ap(inferred_target.core, arg_core),
       }
     }
 
     // TODO
 
     // const target_value = evaluate(ctx.to_env(), inferred_target.core)
-    // if (target_value instanceof Cores.ClsValue) {
+    // if (target_value instanceof Sem.ClsValue) {
     //   const cls = target_value
     //   let telescope = cls.telescope
     //   while (telescope.next) {
@@ -57,8 +57,8 @@ export class Ap extends Exp {
     //       const arg_core = check(ctx, this.arg, t)
 
     //       return {
-    //         t: new Cores.TypeValue(),
-    //         core: new Cores.Ap(inferred_target.core, arg_core),
+    //         t: new Sem.TypeValue(),
+    //         core: new Sem.Ap(inferred_target.core, arg_core),
     //       }
     //     }
     //   }

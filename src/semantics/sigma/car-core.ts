@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { evaluate } from "../../core"
 import { InternalError } from "../../errors"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Car extends Core {
   target: Core
@@ -26,20 +26,20 @@ export class Car extends Core {
   }
 
   static apply(target: Value): Value {
-    if (target instanceof Cores.ConsValue) {
+    if (target instanceof Sem.ConsValue) {
       return target.car
-    } else if (target instanceof Cores.NotYetValue) {
+    } else if (target instanceof Sem.NotYetValue) {
       const { t, neutral } = target
-      if (t instanceof Cores.SigmaValue) {
-        return new Cores.NotYetValue(t.car_t, new Cores.CarNeutral(neutral))
+      if (t instanceof Sem.SigmaValue) {
+        return new Sem.NotYetValue(t.car_t, new Sem.CarNeutral(neutral))
       } else {
         throw InternalError.wrong_target_t(target.t, {
-          expected: [Cores.SigmaValue],
+          expected: [Sem.SigmaValue],
         })
       }
     } else {
       throw InternalError.wrong_target(target, {
-        expected: [Cores.ConsValue],
+        expected: [Sem.ConsValue],
       })
     }
   }

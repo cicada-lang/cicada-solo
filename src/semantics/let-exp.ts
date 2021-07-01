@@ -5,7 +5,7 @@ import { Ctx } from "../ctx"
 import { evaluate } from "../core"
 import { infer } from "../exp"
 import { check } from "../exp"
-import * as Cores from "../cores"
+import * as Sem from "../sem"
 import * as Exps from "../exps"
 import * as ut from "../ut"
 
@@ -52,7 +52,7 @@ export class Let extends Exp {
 
     return {
       t: inferred_ret.t,
-      core: new Cores.Let(fresh_name, inferred.core, inferred_ret.core),
+      core: new Sem.Let(fresh_name, inferred.core, inferred_ret.core),
     }
   }
 
@@ -62,7 +62,7 @@ export class Let extends Exp {
     const value = evaluate(ctx.to_env(), inferred.core)
     const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
     const ret_core = check(ctx.extend(fresh_name, inferred.t, value), ret, t)
-    return new Cores.Let(fresh_name, inferred.core, ret_core)
+    return new Sem.Let(fresh_name, inferred.core, ret_core)
   }
 
   repr(): string {

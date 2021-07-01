@@ -3,7 +3,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { expect } from "../../value"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Vecnil extends Exp {
   free_names(bound_names: Set<string>): Set<string> {
@@ -15,9 +15,9 @@ export class Vecnil extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const vector_t = expect(ctx, t, Cores.VectorValue)
-    expect(ctx, vector_t.length, Cores.ZeroValue)
-    return new Cores.Vecnil()
+    const vector_t = expect(ctx, t, Sem.VectorValue)
+    expect(ctx, vector_t.length, Sem.ZeroValue)
+    return new Sem.Vecnil()
   }
 
   repr(): string {

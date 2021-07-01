@@ -2,7 +2,7 @@ import { Neutral } from "../../neutral"
 import { Normal } from "../../normal"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class ListIndNeutral extends Neutral {
   target: Neutral
@@ -19,7 +19,7 @@ export class ListIndNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Cores.ListInd(
+    return new Sem.ListInd(
       this.target.readback_neutral(ctx),
       this.motive.readback_normal(ctx),
       this.base.readback_normal(ctx),

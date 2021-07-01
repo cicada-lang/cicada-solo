@@ -7,7 +7,7 @@ import { evaluate } from "../../core"
 import { readback } from "../../value"
 import { Value } from "../../value"
 import { Trace } from "../../errors"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
@@ -54,32 +54,32 @@ export class Ext extends Exp {
       )
     )
 
-    const rest_t_core = check(result.ctx, rest_t, new Cores.TypeValue())
+    const rest_t_core = check(result.ctx, rest_t, new Sem.TypeValue())
 
-    if (!(rest_t_core instanceof Cores.Cls)) {
-      throw new Trace("I expect rest_t_core to be Cores.Cls")
+    if (!(rest_t_core instanceof Sem.Cls)) {
+      throw new Trace("I expect rest_t_core to be Sem.Cls")
     }
 
-    const parent_core = readback(ctx, new Cores.TypeValue(), parent_value)
+    const parent_core = readback(ctx, new Sem.TypeValue(), parent_value)
 
-    if (!(parent_core instanceof Cores.Cls)) {
-      throw new Trace("I expect parent_core to be Cores.Cls")
+    if (!(parent_core instanceof Sem.Cls)) {
+      throw new Trace("I expect parent_core to be Sem.Cls")
     }
 
     return {
-      t: new Cores.TypeValue(),
+      t: new Sem.TypeValue(),
       core: parent_core.append(rest_t_core),
     }
   }
 
-  private get_parent_value(ctx: Ctx): Cores.ClsValue {
+  private get_parent_value(ctx: Ctx): Sem.ClsValue {
     const inferred_parent = infer(ctx, this.parent)
     const parent_value = evaluate(ctx.to_env(), inferred_parent.core)
 
-    if (!(parent_value instanceof Cores.ClsValue)) {
+    if (!(parent_value instanceof Sem.ClsValue)) {
       throw new Trace(
         [
-          `I expect parent_value to be Cores.ClsValue,`,
+          `I expect parent_value to be Sem.ClsValue,`,
           `but I found class name:`,
           `  ${parent_value.constructor.name}`,
         ].join("\n") + "\n"

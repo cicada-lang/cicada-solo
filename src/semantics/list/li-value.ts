@@ -2,7 +2,7 @@ import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import { readback } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class LiValue extends Value {
   head: Value
@@ -15,8 +15,8 @@ export class LiValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof Cores.ListValue) {
-      return new Cores.Li(
+    if (t instanceof Sem.ListValue) {
+      return new Sem.Li(
         readback(ctx, t.elem_t, this.head),
         readback(ctx, t, this.tail)
       )

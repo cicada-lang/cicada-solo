@@ -1,7 +1,7 @@
 import { Neutral } from "../../neutral"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class CarNeutral extends Neutral {
   target: Neutral
@@ -12,6 +12,6 @@ export class CarNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Cores.Car(this.target.readback_neutral(ctx))
+    return new Sem.Car(this.target.readback_neutral(ctx))
   }
 }

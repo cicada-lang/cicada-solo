@@ -5,7 +5,7 @@ import { check } from "../../exp"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
 import { Trace } from "../../errors"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
@@ -36,8 +36,8 @@ export class ClsNil extends Cls {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
-      t: new Cores.TypeValue(),
-      core: new Cores.ClsNil(),
+      t: new Sem.TypeValue(),
+      core: new Sem.ClsNil(),
     }
   }
 }
@@ -105,22 +105,22 @@ export class ClsCons extends Cls {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.local_name)
-    const field_t_core = check(ctx, this.field_t, new Cores.TypeValue())
+    const field_t_core = check(ctx, this.field_t, new Sem.TypeValue())
     const field_t_value = evaluate(ctx.to_env(), field_t_core)
     const rest_t = this.rest_t.subst(this.local_name, new Exps.Var(fresh_name))
     const rest_t_core = check(
       ctx.extend(fresh_name, field_t_value),
       rest_t,
-      new Cores.TypeValue()
+      new Sem.TypeValue()
     )
 
-    if (!(rest_t_core instanceof Cores.Cls)) {
-      throw new Trace("I expect rest_t_core to be Cores.Cls")
+    if (!(rest_t_core instanceof Sem.Cls)) {
+      throw new Trace("I expect rest_t_core to be Sem.Cls")
     }
 
     return {
-      t: new Cores.TypeValue(),
-      core: new Cores.ClsCons(
+      t: new Sem.TypeValue(),
+      core: new Sem.ClsCons(
         this.field_name,
         fresh_name,
         field_t_core,

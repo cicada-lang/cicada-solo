@@ -5,7 +5,7 @@ import { expect } from "../../value"
 import { Value } from "../../value"
 import { evaluate } from "../../core"
 import { check } from "../../exp"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Cons extends Exp {
   car: Exp
@@ -29,11 +29,11 @@ export class Cons extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const sigma = expect(ctx, t, Cores.SigmaValue)
+    const sigma = expect(ctx, t, Sem.SigmaValue)
     const car_core = check(ctx, this.car, sigma.car_t)
     const cdr_t_value = sigma.cdr_t_cl.apply(evaluate(ctx.to_env(), car_core))
     const cdr_core = check(ctx, this.cdr, cdr_t_value)
-    return new Cores.Cons(car_core, cdr_core)
+    return new Sem.Cons(car_core, cdr_core)
   }
 
   repr(): string {

@@ -2,7 +2,7 @@ import { Core } from "../core"
 import { Exp } from "../exp"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
-import * as Cores from "../cores"
+import * as Sem from "../sem"
 
 export class Type extends Exp {
   free_names(bound_names: Set<string>): Set<string> {
@@ -15,8 +15,8 @@ export class Type extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
-      t: new Cores.TypeValue(),
-      core: new Cores.Type(),
+      t: new Sem.TypeValue(),
+      core: new Sem.Type(),
     }
   }
 

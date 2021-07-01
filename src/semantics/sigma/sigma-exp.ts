@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { check } from "../../exp"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
@@ -44,18 +44,18 @@ export class Sigma extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
-    const car_t_core = check(ctx, this.car_t, new Cores.TypeValue())
+    const car_t_core = check(ctx, this.car_t, new Sem.TypeValue())
     const car_t_value = evaluate(ctx.to_env(), car_t_core)
     const cdr_t = this.cdr_t.subst(this.name, new Exps.Var(fresh_name))
     const cdr_t_core = check(
       ctx.extend(fresh_name, car_t_value),
       cdr_t,
-      new Cores.TypeValue()
+      new Sem.TypeValue()
     )
 
     return {
-      t: new Cores.TypeValue(),
-      core: new Cores.Sigma(fresh_name, car_t_core, cdr_t_core),
+      t: new Sem.TypeValue(),
+      core: new Sem.Sigma(fresh_name, car_t_core, cdr_t_core),
     }
   }
 

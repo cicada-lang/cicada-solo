@@ -5,7 +5,7 @@ import { Env } from "../../env"
 import { evaluate } from "../../core"
 import { check } from "../../exp"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class NatInd extends Exp {
   target: Exp
@@ -40,21 +40,21 @@ export class NatInd extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const target_core = check(ctx, this.target, new Cores.NatValue())
+    const target_core = check(ctx, this.target, new Sem.NatValue())
     const motive_t = nat_ind_motive_t
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)
     const base_core = check(
       ctx,
       this.base,
-      Cores.Ap.apply(motive_value, new Cores.ZeroValue())
+      Sem.Ap.apply(motive_value, new Sem.ZeroValue())
     )
     const step_core = check(ctx, this.step, nat_ind_step_t(motive_value))
     const target_value = evaluate(ctx.to_env(), target_core)
 
     return {
-      t: Cores.Ap.apply(motive_value, target_value),
-      core: new Cores.NatInd(target_core, motive_core, base_core, step_core),
+      t: Sem.Ap.apply(motive_value, target_value),
+      core: new Sem.NatInd(target_core, motive_core, base_core, step_core),
     }
   }
 
@@ -72,22 +72,19 @@ export class NatInd extends Exp {
 
 export const nat_ind_motive_t: Value = evaluate(
   new Env(),
-  new Cores.Pi("target_nat", new Cores.Nat(), new Cores.Type())
+  new Sem.Pi("target_nat", new Sem.Nat(), new Sem.Type())
 )
 
 export function nat_ind_step_t(motive: Value): Value {
   return evaluate(
     new Env().extend("motive", motive),
-    new Cores.Pi(
+    new Sem.Pi(
       "prev",
-      new Cores.Nat(),
-      new Cores.Pi(
+      new Sem.Nat(),
+      new Sem.Pi(
         "almost",
-        new Cores.Ap(new Cores.Var("motive"), new Cores.Var("prev")),
-        new Cores.Ap(
-          new Cores.Var("motive"),
-          new Cores.Add1(new Cores.Var("prev"))
-        )
+        new Sem.Ap(new Sem.Var("motive"), new Sem.Var("prev")),
+        new Sem.Ap(new Sem.Var("motive"), new Sem.Add1(new Sem.Var("prev")))
       )
     )
   )

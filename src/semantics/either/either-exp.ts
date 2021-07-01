@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { check } from "../../exp"
 import { evaluate } from "../../core"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Either extends Exp {
   left_t: Exp
@@ -31,12 +31,12 @@ export class Either extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const left_t_core = check(ctx, this.left_t, new Cores.TypeValue())
-    const right_t_core = check(ctx, this.right_t, new Cores.TypeValue())
+    const left_t_core = check(ctx, this.left_t, new Sem.TypeValue())
+    const right_t_core = check(ctx, this.right_t, new Sem.TypeValue())
 
     return {
-      t: new Cores.TypeValue(),
-      core: new Cores.Either(left_t_core, right_t_core),
+      t: new Sem.TypeValue(),
+      core: new Sem.Either(left_t_core, right_t_core),
     }
   }
 

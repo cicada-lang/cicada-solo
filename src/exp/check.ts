@@ -6,7 +6,7 @@ import { conversion } from "../value"
 import { readback } from "../value"
 import { Trace } from "../errors"
 import * as ut from "../ut"
-import * as Cores from "../cores"
+import * as Sem from "../sem"
 
 export function check(ctx: Ctx, exp: Exp, t: Value): Core {
   try {
@@ -15,9 +15,9 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
     } else if (exp.infer) {
       const inferred = exp.infer(ctx)
       const u = inferred.t
-      if (!conversion(ctx, new Cores.TypeValue(), t, u)) {
-        const u_exp = readback(ctx, new Cores.TypeValue(), u)
-        const t_exp = readback(ctx, new Cores.TypeValue(), t)
+      if (!conversion(ctx, new Sem.TypeValue(), t, u)) {
+        const u_exp = readback(ctx, new Sem.TypeValue(), u)
+        const t_exp = readback(ctx, new Sem.TypeValue(), t)
 
         throw new Trace(
           ut.aline(`

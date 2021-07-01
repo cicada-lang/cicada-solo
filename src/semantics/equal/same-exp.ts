@@ -7,7 +7,7 @@ import { readback } from "../../value"
 import { check_conversion } from "../../value"
 import { Trace } from "../../errors"
 import * as ut from "../../ut"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Same extends Exp {
   free_names(bound_names: Set<string>): Set<string> {
@@ -19,14 +19,14 @@ export class Same extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const equal = expect(ctx, t, Cores.EqualValue)
+    const equal = expect(ctx, t, Sem.EqualValue)
     check_conversion(ctx, equal.t, equal.from, equal.to, {
       description: {
         from: "left hand side",
         to: "right hand side",
       },
     })
-    return new Cores.Same()
+    return new Sem.Same()
   }
 
   repr(): string {

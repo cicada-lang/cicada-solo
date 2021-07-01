@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
 import { InternalError } from "../../errors"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class Cdr extends Core {
   target: Core
@@ -26,22 +26,22 @@ export class Cdr extends Core {
   }
 
   static apply(target: Value): Value {
-    if (target instanceof Cores.ConsValue) {
+    if (target instanceof Sem.ConsValue) {
       return target.cdr
-    } else if (target instanceof Cores.NotYetValue) {
+    } else if (target instanceof Sem.NotYetValue) {
       const { t, neutral } = target
-      if (t instanceof Cores.SigmaValue) {
-        return new Cores.NotYetValue(
-          t.cdr_t_cl.apply(Cores.Car.apply(target)),
-          new Cores.CdrNeutral(neutral)
+      if (t instanceof Sem.SigmaValue) {
+        return new Sem.NotYetValue(
+          t.cdr_t_cl.apply(Sem.Car.apply(target)),
+          new Sem.CdrNeutral(neutral)
         )
       } else {
         throw InternalError.wrong_target_t(target.t, {
-          expected: [Cores.SigmaValue],
+          expected: [Sem.SigmaValue],
         })
       }
     } else {
-      throw InternalError.wrong_target(target, { expected: [Cores.ConsValue] })
+      throw InternalError.wrong_target(target, { expected: [Sem.ConsValue] })
     }
   }
 }

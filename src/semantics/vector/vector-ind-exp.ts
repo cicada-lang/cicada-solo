@@ -8,7 +8,7 @@ import { expect } from "../../value"
 import { evaluate } from "../../core"
 import { check_conversion } from "../../value"
 import { Value } from "../../value"
-import * as Cores from "../../cores"
+import * as Sem from "../../sem"
 
 export class VectorInd extends Exp {
   length: Exp
@@ -48,12 +48,12 @@ export class VectorInd extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
-    const vector_t = expect(ctx, inferred_target.t, Cores.VectorValue)
+    const vector_t = expect(ctx, inferred_target.t, Sem.VectorValue)
     const elem_t = vector_t.elem_t
 
-    const length_core = check(ctx, this.length, new Cores.NatValue())
+    const length_core = check(ctx, this.length, new Sem.NatValue())
     const length_value = evaluate(ctx.to_env(), length_core)
-    check_conversion(ctx, new Cores.NatValue(), length_value, vector_t.length, {
+    check_conversion(ctx, new Sem.NatValue(), length_value, vector_t.length, {
       description: {
         from: "given length",
         to: "inferred length of Vector",
@@ -64,9 +64,9 @@ export class VectorInd extends Exp {
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)
 
-    const base_t = Cores.Ap.apply(
-      Cores.Ap.apply(motive_value, new Cores.ZeroValue()),
-      new Cores.VecnilValue()
+    const base_t = Sem.Ap.apply(
+      Sem.Ap.apply(motive_value, new Sem.ZeroValue()),
+      new Sem.VecnilValue()
     )
     const base_core = check(ctx, this.base, base_t)
 
@@ -76,11 +76,8 @@ export class VectorInd extends Exp {
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
 
     return {
-      t: Cores.Ap.apply(
-        Cores.Ap.apply(motive_value, length_value),
-        target_value
-      ),
-      core: new Cores.VectorInd(
+      t: Sem.Ap.apply(Sem.Ap.apply(motive_value, length_value), target_value),
+      core: new Sem.VectorInd(
         length_core,
         inferred_target.core,
         motive_core,
@@ -106,13 +103,13 @@ export class VectorInd extends Exp {
 export function vector_ind_motive_t(elem_t: Value): Value {
   return evaluate(
     new Env().extend("elem_t", elem_t),
-    new Cores.Pi(
+    new Sem.Pi(
       "length",
-      new Cores.Nat(),
-      new Cores.Pi(
+      new Sem.Nat(),
+      new Sem.Pi(
         "target_vector",
-        new Cores.Vector(new Cores.Var("elem_t"), new Cores.Var("length")),
-        new Cores.Type()
+        new Sem.Vector(new Sem.Var("elem_t"), new Sem.Var("length")),
+        new Sem.Type()
       )
     )
   )
@@ -121,27 +118,27 @@ export function vector_ind_motive_t(elem_t: Value): Value {
 export function vector_ind_step_t(motive: Value, elem_t: Value): Value {
   return evaluate(
     new Env().extend("motive", motive).extend("elem_t", elem_t),
-    new Cores.Pi(
+    new Sem.Pi(
       "length",
-      new Cores.Nat(),
-      new Cores.Pi(
+      new Sem.Nat(),
+      new Sem.Pi(
         "head",
-        new Cores.Var("elem_t"),
-        new Cores.Pi(
+        new Sem.Var("elem_t"),
+        new Sem.Pi(
           "tail",
-          new Cores.Vector(new Cores.Var("elem_t"), new Cores.Var("length")),
-          new Cores.Pi(
+          new Sem.Vector(new Sem.Var("elem_t"), new Sem.Var("length")),
+          new Sem.Pi(
             "almost",
-            new Cores.Ap(
-              new Cores.Ap(new Cores.Var("motive"), new Cores.Var("length")),
-              new Cores.Var("tail")
+            new Sem.Ap(
+              new Sem.Ap(new Sem.Var("motive"), new Sem.Var("length")),
+              new Sem.Var("tail")
             ),
-            new Cores.Ap(
-              new Cores.Ap(
-                new Cores.Var("motive"),
-                new Cores.Add1(new Cores.Var("length"))
+            new Sem.Ap(
+              new Sem.Ap(
+                new Sem.Var("motive"),
+                new Sem.Add1(new Sem.Var("length"))
               ),
-              new Cores.Vec(new Cores.Var("head"), new Cores.Var("tail"))
+              new Sem.Vec(new Sem.Var("head"), new Sem.Var("tail"))
             )
           )
         )
