@@ -1,4 +1,3 @@
-- [refactor file structure] move `check` to `exp/`
 - [refactor file structure] move `conversion` to `value/`
 - [refactor file structure] move `readback` to `value/`
 
