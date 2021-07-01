@@ -58,40 +58,47 @@ export class ListInd extends Core {
   }
 
   static apply(target: Value, motive: Value, base: Value, step: Value): Value {
-    return Value.match(target, [
-      [Cores.NilValue, (_: Cores.NilValue) => base],
-      [
-        Cores.LiValue,
-        ({ head, tail }: Cores.LiValue) =>
-          Cores.Ap.apply(
-            Cores.Ap.apply(Cores.Ap.apply(step, head), tail),
-            Cores.ListInd.apply(tail, motive, base, step)
-          ),
-      ],
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          Value.match(t, [
-            [
-              Cores.ListValue,
-              (list_t: Cores.ListValue) => {
-                const elem_t = list_t.elem_t
-                const motive_t = list_ind_motive_t(elem_t)
-                const base_t = Cores.Ap.apply(motive, new Cores.NilValue())
-                const step_t = list_ind_step_t(motive, elem_t)
-                return new Cores.NotYetValue(
-                  Cores.Ap.apply(motive, target),
-                  new Cores.ListIndNeutral(
-                    neutral,
-                    new Normal(motive_t, motive),
-                    new Normal(base_t, base),
-                    new Normal(step_t, step)
-                  )
-                )
-              },
-            ],
-          ]),
-      ],
-    ])
+    if (target instanceof Cores.NilValue) {
+      return base
+    } else if (target instanceof Cores.LiValue) {
+      const { head, tail } = target
+
+      return Cores.Ap.apply(
+        Cores.Ap.apply(Cores.Ap.apply(step, head), tail),
+        Cores.ListInd.apply(tail, motive, base, step)
+      )
+    } else if (target instanceof Cores.NotYetValue) {
+      const { t, neutral } = target
+
+      if (t instanceof Cores.ListValue) {
+        const elem_t = t.elem_t
+        const motive_t = list_ind_motive_t(elem_t)
+        const base_t = Cores.Ap.apply(motive, new Cores.NilValue())
+        const step_t = list_ind_step_t(motive, elem_t)
+        return new Cores.NotYetValue(
+          Cores.Ap.apply(motive, target),
+          new Cores.ListIndNeutral(
+            neutral,
+            new Normal(motive_t, motive),
+            new Normal(base_t, base),
+            new Normal(step_t, step)
+          )
+        )
+      } else {
+        throw new InternalError(
+          [
+            `I expect the type of the neutral to be an instance of ListValue`,
+            `but the constructor name I meet is: ${t.constructor.name}`,
+          ].join("\n") + "\n"
+        )
+      }
+    } else {
+      throw new InternalError(
+        [
+          `I expect the target to be an instance of NilValue or LiValue`,
+          `but the constructor name I meet is: ${target.constructor.name}`,
+        ].join("\n") + "\n"
+      )
+    }
   }
 }
