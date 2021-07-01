@@ -2,7 +2,7 @@ import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { readback } from "../../value"
 import { Value } from "../../value"
-import { Closure } from "../../closure"
+import { Closure } from "../closure"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
 

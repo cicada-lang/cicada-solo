@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { Closure } from "../../closure"
+import { Closure } from "../closure"
 
 export class FnValue extends Value {
   ret_cl: Closure

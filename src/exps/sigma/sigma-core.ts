@@ -2,7 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
-import { Closure } from "../../closure"
+import { Closure } from "../closure"
 import * as Exps from "../../exps"
 
 export class SigmaCore extends Core {
