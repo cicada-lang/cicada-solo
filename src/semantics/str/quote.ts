@@ -23,7 +23,7 @@ export class Quote extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Sem.StrValue(),
-      core: new Sem.Quote(this.str),
+      core: new Sem.QuoteCore(this.str),
     }
   }
 

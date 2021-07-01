@@ -42,19 +42,19 @@ export class Replace extends Exp {
     const equal = expect(ctx, inferred_target.t, Sem.EqualValue)
     const motive_t = evaluate(
       new Env().extend("t", equal.t),
-      new Sem.Pi("x", new Sem.VarCore("t"), new Sem.TypeCore())
+      new Sem.PiCore("x", new Sem.VarCore("t"), new Sem.TypeCore())
     )
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)
     const base_core = check(
       ctx,
       this.base,
-      Sem.Ap.apply(motive_value, equal.from)
+      Sem.ApCore.apply(motive_value, equal.from)
     )
 
     return {
-      t: Sem.Ap.apply(motive_value, equal.to),
-      core: new Sem.Replace(inferred_target.core, motive_core, base_core),
+      t: Sem.ApCore.apply(motive_value, equal.to),
+      core: new Sem.ReplaceCore(inferred_target.core, motive_core, base_core),
     }
   }
 

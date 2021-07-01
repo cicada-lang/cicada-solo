@@ -36,7 +36,7 @@ export class Vec extends Exp {
     const head_core = check(ctx, this.head, elem_t)
     const tail_t = new Sem.VectorValue(elem_t, prev_value)
     const tail_core = check(ctx, this.tail, tail_t)
-    return new Sem.Vec(head_core, tail_core)
+    return new Sem.VecCore(head_core, tail_core)
   }
 
   repr(): string {

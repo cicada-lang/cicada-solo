@@ -5,6 +5,6 @@ import * as Sem from "../../sem"
 
 export class SoleValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
-    return new Sem.Sole()
+    return new Sem.SoleCore()
   }
 }

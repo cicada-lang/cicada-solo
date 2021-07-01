@@ -21,7 +21,7 @@ export class Nat extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Sem.TypeValue(),
-      core: new Sem.Nat(),
+      core: new Sem.NatCore(),
     }
   }
 

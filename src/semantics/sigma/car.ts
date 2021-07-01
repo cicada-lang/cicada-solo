@@ -28,7 +28,7 @@ export class Car extends Exp {
 
     return {
       t: sigma.car_t,
-      core: new Sem.Car(inferred_target.core),
+      core: new Sem.CarCore(inferred_target.core),
     }
   }
 

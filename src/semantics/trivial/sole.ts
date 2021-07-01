@@ -16,7 +16,7 @@ export class Sole extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Sem.TrivialValue(),
-      core: new Sem.Sole(),
+      core: new Sem.SoleCore(),
     }
   }
 

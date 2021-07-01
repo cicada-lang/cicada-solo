@@ -15,7 +15,7 @@ export class ApNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Sem.Ap(
+    return new Sem.ApCore(
       this.target.readback_neutral(ctx),
       this.arg.readback_normal(ctx)
     )

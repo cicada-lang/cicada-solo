@@ -14,7 +14,7 @@ export class Add1Value extends Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Sem.NatValue) {
-      return new Sem.Add1(readback(ctx, t, this.prev))
+      return new Sem.Add1Core(readback(ctx, t, this.prev))
     }
   }
 }

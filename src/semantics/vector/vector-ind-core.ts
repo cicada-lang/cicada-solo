@@ -1,19 +1,13 @@
 import { Core, AlphaCtx } from "../../core"
-import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../core"
-import { check } from "../../exp"
-import { infer } from "../../exp"
-import { expect } from "../../value"
 import { Value } from "../../value"
-import { Closure } from "../../closure"
 import { Normal } from "../../normal"
-import { Trace } from "../../errors"
 import { InternalError } from "../../errors"
 import * as Sem from "../../sem"
 import { vector_ind_motive_t, vector_ind_step_t } from "./vector-ind"
 
-export class VectorInd extends Core {
+export class VectorIndCore extends Core {
   length: Core
   target: Core
   motive: Core
@@ -36,7 +30,7 @@ export class VectorInd extends Core {
   }
 
   evaluate(env: Env): Value {
-    return VectorInd.apply(
+    return VectorIndCore.apply(
       evaluate(env, this.length),
       evaluate(env, this.target),
       evaluate(env, this.motive),
@@ -82,9 +76,12 @@ export class VectorInd extends Core {
       const { head, tail } = target
 
       if (length instanceof Sem.Add1Value) {
-        return Sem.Ap.apply(
-          Sem.Ap.apply(Sem.Ap.apply(Sem.Ap.apply(step, length), head), tail),
-          Sem.VectorInd.apply(length.prev, tail, motive, base, step)
+        return Sem.ApCore.apply(
+          Sem.ApCore.apply(
+            Sem.ApCore.apply(Sem.ApCore.apply(step, length), head),
+            tail
+          ),
+          Sem.VectorIndCore.apply(length.prev, tail, motive, base, step)
         )
       } else {
         throw new InternalError(
@@ -102,13 +99,13 @@ export class VectorInd extends Core {
         const elem_t = t.elem_t
         const length_t = new Sem.NatValue()
         const motive_t = vector_ind_motive_t(elem_t)
-        const base_t = Sem.Ap.apply(
-          Sem.Ap.apply(motive, new Sem.ZeroValue()),
+        const base_t = Sem.ApCore.apply(
+          Sem.ApCore.apply(motive, new Sem.ZeroValue()),
           new Sem.VecnilValue()
         )
         const step_t = vector_ind_step_t(motive, elem_t)
         return new Sem.NotYetValue(
-          Sem.Ap.apply(Sem.Ap.apply(motive, length), target),
+          Sem.ApCore.apply(Sem.ApCore.apply(motive, length), target),
           new Sem.VectorIndNeutral(
             new Normal(length_t, length),
             neutral,

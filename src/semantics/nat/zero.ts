@@ -21,7 +21,7 @@ export class Zero extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Sem.NatValue(),
-      core: new Sem.Zero(),
+      core: new Sem.ZeroCore(),
     }
   }
 

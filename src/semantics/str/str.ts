@@ -16,7 +16,7 @@ export class Str extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Sem.TypeValue(),
-      core: new Sem.Str(),
+      core: new Sem.StrCore(),
     }
   }
 

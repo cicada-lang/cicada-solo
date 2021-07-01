@@ -42,7 +42,7 @@ export class Equal extends Exp {
 
     return {
       t: new Sem.TypeValue(),
-      core: new Sem.Equal(t_core, from_core, to_core),
+      core: new Sem.EqualCore(t_core, from_core, to_core),
     }
   }
 

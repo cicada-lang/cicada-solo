@@ -5,7 +5,7 @@ import { evaluate } from "../../core"
 import { InternalError } from "../../errors"
 import * as Sem from "../../sem"
 
-export class Car extends Core {
+export class CarCore extends Core {
   target: Core
 
   constructor(target: Core) {
@@ -14,7 +14,7 @@ export class Car extends Core {
   }
 
   evaluate(env: Env): Value {
-    return Car.apply(evaluate(env, this.target))
+    return CarCore.apply(evaluate(env, this.target))
   }
 
   repr(): string {

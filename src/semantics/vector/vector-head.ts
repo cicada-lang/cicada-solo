@@ -29,7 +29,7 @@ export class VectorHead extends Exp {
 
     return {
       t: vector_t.elem_t,
-      core: new Sem.VectorHead(inferred_target.core),
+      core: new Sem.VectorHeadCore(inferred_target.core),
     }
   }
 

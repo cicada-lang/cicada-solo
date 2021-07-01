@@ -5,7 +5,7 @@ import { Value } from "../../value"
 import { InternalError } from "../../errors"
 import * as Sem from "../../sem"
 
-export class Cdr extends Core {
+export class CdrCore extends Core {
   target: Core
 
   constructor(target: Core) {
@@ -14,7 +14,7 @@ export class Cdr extends Core {
   }
 
   evaluate(env: Env): Value {
-    return Cdr.apply(evaluate(env, this.target))
+    return CdrCore.apply(evaluate(env, this.target))
   }
 
   repr(): string {
@@ -32,7 +32,7 @@ export class Cdr extends Core {
       const { t, neutral } = target
       if (t instanceof Sem.SigmaValue) {
         return new Sem.NotYetValue(
-          t.cdr_t_cl.apply(Sem.Car.apply(target)),
+          t.cdr_t_cl.apply(Sem.CarCore.apply(target)),
           new Sem.CdrNeutral(neutral)
         )
       } else {

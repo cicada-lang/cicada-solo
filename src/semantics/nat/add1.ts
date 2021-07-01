@@ -25,7 +25,7 @@ export class Add1 extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Sem.NatValue(),
-      core: new Sem.Add1(check(ctx, this.prev, new Sem.NatValue())),
+      core: new Sem.Add1Core(check(ctx, this.prev, new Sem.NatValue())),
     }
   }
 

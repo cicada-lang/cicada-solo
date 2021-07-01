@@ -27,7 +27,7 @@ export class VectorIndNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Sem.VectorInd(
+    return new Sem.VectorIndCore(
       this.length.readback_normal(ctx),
       this.target.readback_neutral(ctx),
       this.motive.readback_normal(ctx),

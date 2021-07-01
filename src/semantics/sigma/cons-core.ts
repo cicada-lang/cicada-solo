@@ -4,7 +4,7 @@ import { Value } from "../../value"
 import { evaluate } from "../../core"
 import * as Sem from "../../sem"
 
-export class Cons extends Core {
+export class ConsCore extends Core {
   car: Core
   cdr: Core
 

@@ -1,11 +1,10 @@
 import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { Closure } from "../../closure"
 import { evaluate } from "../../core"
 import * as Sem from "../../sem"
 
-export class Inr extends Core {
+export class InrCore extends Core {
   right: Core
 
   constructor(right: Core) {

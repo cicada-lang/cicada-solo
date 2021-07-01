@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import * as Sem from "../../sem"
 
-export class Quote extends Core {
+export class QuoteCore extends Core {
   str: string
 
   constructor(str: string) {

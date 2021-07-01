@@ -16,7 +16,7 @@ export class Trivial extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Sem.TypeValue(),
-      core: new Sem.Trivial(),
+      core: new Sem.TrivialCore(),
     }
   }
 

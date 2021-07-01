@@ -18,7 +18,7 @@ export class EqualValue extends Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Sem.TypeValue) {
-      return new Sem.Equal(
+      return new Sem.EqualCore(
         readback(ctx, new Sem.TypeValue(), this.t),
         readback(ctx, this.t, this.from),
         readback(ctx, this.t, this.to)

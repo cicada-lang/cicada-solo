@@ -16,7 +16,7 @@ export class Nil extends Exp {
 
   check(ctx: Ctx, t: Value): Core {
     expect(ctx, t, Sem.ListValue)
-    return new Sem.Nil()
+    return new Sem.NilCore()
   }
 
   repr(): string {

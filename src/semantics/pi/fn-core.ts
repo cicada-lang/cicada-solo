@@ -4,7 +4,7 @@ import { Value } from "../../value"
 import { Closure } from "../../closure"
 import * as Sem from "../../sem"
 
-export class Fn extends Core {
+export class FnCore extends Core {
   name: string
   ret: Core
 
@@ -22,7 +22,7 @@ export class Fn extends Core {
     names: Array<string>
     ret: Core
   } {
-    if (this.ret instanceof Fn) {
+    if (this.ret instanceof FnCore) {
       return this.ret.multi_fn([...names, this.name])
     } else {
       return { names: [...names, this.name], ret: this.ret }

@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import * as Sem from "../../sem"
 
-export class Nil extends Core {
+export class NilCore extends Core {
   evaluate(env: Env): Value {
     return new Sem.NilValue()
   }

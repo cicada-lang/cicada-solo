@@ -51,15 +51,15 @@ export class ListInd extends Exp {
     const base_core = check(
       ctx,
       this.base,
-      Sem.Ap.apply(motive_value, new Sem.NilValue())
+      Sem.ApCore.apply(motive_value, new Sem.NilValue())
     )
     const step_t = list_ind_step_t(motive_value, elem_t)
     const step_core = check(ctx, this.step, step_t)
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
 
     return {
-      t: Sem.Ap.apply(motive_value, target_value),
-      core: new Sem.ListInd(
+      t: Sem.ApCore.apply(motive_value, target_value),
+      core: new Sem.ListIndCore(
         inferred_target.core,
         motive_core,
         base_core,
@@ -83,9 +83,9 @@ export class ListInd extends Exp {
 export function list_ind_motive_t(elem_t: Value): Value {
   return evaluate(
     new Env().extend("elem_t", elem_t),
-    new Sem.Pi(
+    new Sem.PiCore(
       "target_list",
-      new Sem.List(new Sem.VarCore("elem_t")),
+      new Sem.ListCore(new Sem.VarCore("elem_t")),
       new Sem.TypeCore()
     )
   )
@@ -94,18 +94,18 @@ export function list_ind_motive_t(elem_t: Value): Value {
 export function list_ind_step_t(motive: Value, elem_t: Value): Value {
   return evaluate(
     new Env().extend("motive", motive).extend("elem_t", elem_t),
-    new Sem.Pi(
+    new Sem.PiCore(
       "head",
       new Sem.VarCore("elem_t"),
-      new Sem.Pi(
+      new Sem.PiCore(
         "tail",
-        new Sem.List(new Sem.VarCore("elem_t")),
-        new Sem.Pi(
+        new Sem.ListCore(new Sem.VarCore("elem_t")),
+        new Sem.PiCore(
           "almost",
-          new Sem.Ap(new Sem.VarCore("motive"), new Sem.VarCore("tail")),
-          new Sem.Ap(
+          new Sem.ApCore(new Sem.VarCore("motive"), new Sem.VarCore("tail")),
+          new Sem.ApCore(
             new Sem.VarCore("motive"),
-            new Sem.Li(new Sem.VarCore("head"), new Sem.VarCore("tail"))
+            new Sem.LiCore(new Sem.VarCore("head"), new Sem.VarCore("tail"))
           )
         )
       )

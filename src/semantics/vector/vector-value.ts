@@ -16,7 +16,7 @@ export class VectorValue extends Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Sem.TypeValue) {
-      return new Sem.Vector(
+      return new Sem.VectorCore(
         readback(ctx, new Sem.TypeValue(), this.elem_t),
         readback(ctx, new Sem.NatValue(), this.length)
       )

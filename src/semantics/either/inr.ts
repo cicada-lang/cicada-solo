@@ -27,7 +27,7 @@ export class Inr extends Exp {
     const either = expect(ctx, t, Sem.EitherValue)
     const right_core = check(ctx, this.right, either.right_t)
 
-    return new Sem.Inr(right_core)
+    return new Sem.InrCore(right_core)
   }
 
   repr(): string {

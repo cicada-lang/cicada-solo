@@ -19,7 +19,7 @@ export class ListIndNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Sem.ListInd(
+    return new Sem.ListIndCore(
       this.target.readback_neutral(ctx),
       this.motive.readback_normal(ctx),
       this.base.readback_normal(ctx),

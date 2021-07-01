@@ -64,8 +64,8 @@ export class VectorInd extends Exp {
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)
 
-    const base_t = Sem.Ap.apply(
-      Sem.Ap.apply(motive_value, new Sem.ZeroValue()),
+    const base_t = Sem.ApCore.apply(
+      Sem.ApCore.apply(motive_value, new Sem.ZeroValue()),
       new Sem.VecnilValue()
     )
     const base_core = check(ctx, this.base, base_t)
@@ -76,8 +76,11 @@ export class VectorInd extends Exp {
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
 
     return {
-      t: Sem.Ap.apply(Sem.Ap.apply(motive_value, length_value), target_value),
-      core: new Sem.VectorInd(
+      t: Sem.ApCore.apply(
+        Sem.ApCore.apply(motive_value, length_value),
+        target_value
+      ),
+      core: new Sem.VectorIndCore(
         length_core,
         inferred_target.core,
         motive_core,
@@ -103,12 +106,15 @@ export class VectorInd extends Exp {
 export function vector_ind_motive_t(elem_t: Value): Value {
   return evaluate(
     new Env().extend("elem_t", elem_t),
-    new Sem.Pi(
+    new Sem.PiCore(
       "length",
-      new Sem.Nat(),
-      new Sem.Pi(
+      new Sem.NatCore(),
+      new Sem.PiCore(
         "target_vector",
-        new Sem.Vector(new Sem.VarCore("elem_t"), new Sem.VarCore("length")),
+        new Sem.VectorCore(
+          new Sem.VarCore("elem_t"),
+          new Sem.VarCore("length")
+        ),
         new Sem.TypeCore()
       )
     )
@@ -118,27 +124,33 @@ export function vector_ind_motive_t(elem_t: Value): Value {
 export function vector_ind_step_t(motive: Value, elem_t: Value): Value {
   return evaluate(
     new Env().extend("motive", motive).extend("elem_t", elem_t),
-    new Sem.Pi(
+    new Sem.PiCore(
       "length",
-      new Sem.Nat(),
-      new Sem.Pi(
+      new Sem.NatCore(),
+      new Sem.PiCore(
         "head",
         new Sem.VarCore("elem_t"),
-        new Sem.Pi(
+        new Sem.PiCore(
           "tail",
-          new Sem.Vector(new Sem.VarCore("elem_t"), new Sem.VarCore("length")),
-          new Sem.Pi(
+          new Sem.VectorCore(
+            new Sem.VarCore("elem_t"),
+            new Sem.VarCore("length")
+          ),
+          new Sem.PiCore(
             "almost",
-            new Sem.Ap(
-              new Sem.Ap(new Sem.VarCore("motive"), new Sem.VarCore("length")),
+            new Sem.ApCore(
+              new Sem.ApCore(
+                new Sem.VarCore("motive"),
+                new Sem.VarCore("length")
+              ),
               new Sem.VarCore("tail")
             ),
-            new Sem.Ap(
-              new Sem.Ap(
+            new Sem.ApCore(
+              new Sem.ApCore(
                 new Sem.VarCore("motive"),
-                new Sem.Add1(new Sem.VarCore("length"))
+                new Sem.Add1Core(new Sem.VarCore("length"))
               ),
-              new Sem.Vec(new Sem.VarCore("head"), new Sem.VarCore("tail"))
+              new Sem.VecCore(new Sem.VarCore("head"), new Sem.VarCore("tail"))
             )
           )
         )

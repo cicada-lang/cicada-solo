@@ -12,6 +12,6 @@ export class CdrNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Sem.Cdr(this.target.readback_neutral(ctx))
+    return new Sem.CdrCore(this.target.readback_neutral(ctx))
   }
 }

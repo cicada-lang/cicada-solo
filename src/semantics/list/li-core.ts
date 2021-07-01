@@ -4,7 +4,7 @@ import { evaluate } from "../../core"
 import { Value } from "../../value"
 import * as Sem from "../../sem"
 
-export class Li extends Core {
+export class LiCore extends Core {
   head: Core
   tail: Core
 

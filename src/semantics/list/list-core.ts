@@ -4,7 +4,7 @@ import { evaluate } from "../../core"
 import { Value } from "../../value"
 import * as Sem from "../../sem"
 
-export class List extends Core {
+export class ListCore extends Core {
   elem_t: Core
 
   constructor(elem_t: Core) {

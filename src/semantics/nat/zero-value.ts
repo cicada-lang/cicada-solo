@@ -6,7 +6,7 @@ import * as Sem from "../../sem"
 export class ZeroValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Sem.NatValue) {
-      return new Sem.Zero()
+      return new Sem.ZeroCore()
     }
   }
 }

@@ -6,7 +6,7 @@ import * as Sem from "../../sem"
 export class SameValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Sem.EqualValue) {
-      return new Sem.Same()
+      return new Sem.SameCore()
     }
   }
 }

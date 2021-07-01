@@ -13,10 +13,10 @@ export function nat_from_number(n: number): Exp {
 }
 
 export function nat_to_number(exp: Exp | Core): number | undefined {
-  if (exp instanceof Sem.Zero || exp instanceof Exps.Zero) {
+  if (exp instanceof Sem.ZeroCore || exp instanceof Exps.Zero) {
     return 0
-  } else if (exp instanceof Sem.Add1 || exp instanceof Exps.Add1) {
-    const almost = nat_to_number((exp as Sem.Add1).prev)
+  } else if (exp instanceof Sem.Add1Core || exp instanceof Exps.Add1) {
+    const almost = nat_to_number((exp as Sem.Add1Core).prev)
     if (almost !== undefined) {
       return 1 + almost
     } else {

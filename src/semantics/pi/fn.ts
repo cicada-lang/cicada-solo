@@ -42,7 +42,7 @@ export class Fn extends Exp {
     const ret_t = pi.ret_t_cl.apply(arg)
     const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
     const ret_core = check(ctx.extend(fresh_name, pi.arg_t), ret, ret_t)
-    return new Sem.Fn(fresh_name, ret_core)
+    return new Sem.FnCore(fresh_name, ret_core)
   }
 
   private multi_fn(names: Array<string> = new Array()): {

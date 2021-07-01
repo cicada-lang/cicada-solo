@@ -16,7 +16,7 @@ export class LiValue extends Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Sem.ListValue) {
-      return new Sem.Li(
+      return new Sem.LiCore(
         readback(ctx, t.elem_t, this.head),
         readback(ctx, t, this.tail)
       )

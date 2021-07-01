@@ -3,7 +3,7 @@ import { Value } from "../../value"
 import { Env } from "../../env"
 import * as Sem from "../../sem"
 
-export class Trivial extends Core {
+export class TrivialCore extends Core {
   evaluate(env: Env): Value {
     return new Sem.TrivialValue()
   }

@@ -4,7 +4,7 @@ import { evaluate } from "../../core"
 import { Value } from "../../value"
 import * as Sem from "../../sem"
 
-export class Vector extends Core {
+export class VectorCore extends Core {
   elem_t: Core
   length: Core
 

@@ -7,7 +7,7 @@ import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
 import * as Sem from "../../sem"
 
-export class Replace extends Core {
+export class ReplaceCore extends Core {
   target: Core
   motive: Core
   base: Core
@@ -20,7 +20,7 @@ export class Replace extends Core {
   }
 
   evaluate(env: Env): Value {
-    return Replace.apply(
+    return ReplaceCore.apply(
       evaluate(env, this.target),
       evaluate(env, this.motive),
       evaluate(env, this.base)
@@ -54,13 +54,13 @@ export class Replace extends Core {
       const { t, neutral } = target
 
       if (t instanceof Sem.EqualValue) {
-        const base_t = Sem.Ap.apply(motive, t.from)
+        const base_t = Sem.ApCore.apply(motive, t.from)
         const motive_t = new Sem.PiValue(
           t.t,
           new Closure(new Env(), "x", new Sem.TypeCore())
         )
         return new Sem.NotYetValue(
-          Sem.Ap.apply(motive, t.to),
+          Sem.ApCore.apply(motive, t.to),
           new Sem.ReplaceNeutral(
             neutral,
             new Normal(motive_t, motive),

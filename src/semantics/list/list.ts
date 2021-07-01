@@ -24,7 +24,7 @@ export class List extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Sem.TypeValue(),
-      core: new Sem.List(check(ctx, this.elem_t, new Sem.TypeValue())),
+      core: new Sem.ListCore(check(ctx, this.elem_t, new Sem.TypeValue())),
     }
   }
 

@@ -17,7 +17,7 @@ export class ReplaceNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Sem.Replace(
+    return new Sem.ReplaceCore(
       this.target.readback_neutral(ctx),
       this.motive.readback_normal(ctx),
       this.base.readback_normal(ctx)

@@ -13,7 +13,7 @@ export class QuoteValue extends Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Sem.StrValue) {
-      return new Sem.Quote(this.str)
+      return new Sem.QuoteCore(this.str)
     }
   }
 }

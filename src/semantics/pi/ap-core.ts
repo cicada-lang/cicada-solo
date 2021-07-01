@@ -6,7 +6,7 @@ import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
 import * as Sem from "../../sem"
 
-export class Ap extends Core {
+export class ApCore extends Core {
   target: Core
   arg: Core
 
@@ -17,14 +17,14 @@ export class Ap extends Core {
   }
 
   evaluate(env: Env): Value {
-    return Ap.apply(evaluate(env, this.target), evaluate(env, this.arg))
+    return ApCore.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
   private multi_ap(args: Array<Core> = new Array()): {
     target: Core
     args: Array<Core>
   } {
-    if (this.target instanceof Ap) {
+    if (this.target instanceof ApCore) {
       return this.target.multi_ap([this.arg, ...args])
     } else {
       return { target: this.target, args: [this.arg, ...args] }

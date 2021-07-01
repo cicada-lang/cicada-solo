@@ -47,14 +47,14 @@ export class NatInd extends Exp {
     const base_core = check(
       ctx,
       this.base,
-      Sem.Ap.apply(motive_value, new Sem.ZeroValue())
+      Sem.ApCore.apply(motive_value, new Sem.ZeroValue())
     )
     const step_core = check(ctx, this.step, nat_ind_step_t(motive_value))
     const target_value = evaluate(ctx.to_env(), target_core)
 
     return {
-      t: Sem.Ap.apply(motive_value, target_value),
-      core: new Sem.NatInd(target_core, motive_core, base_core, step_core),
+      t: Sem.ApCore.apply(motive_value, target_value),
+      core: new Sem.NatIndCore(target_core, motive_core, base_core, step_core),
     }
   }
 
@@ -72,21 +72,21 @@ export class NatInd extends Exp {
 
 export const nat_ind_motive_t: Value = evaluate(
   new Env(),
-  new Sem.Pi("target_nat", new Sem.Nat(), new Sem.TypeCore())
+  new Sem.PiCore("target_nat", new Sem.NatCore(), new Sem.TypeCore())
 )
 
 export function nat_ind_step_t(motive: Value): Value {
   return evaluate(
     new Env().extend("motive", motive),
-    new Sem.Pi(
+    new Sem.PiCore(
       "prev",
-      new Sem.Nat(),
-      new Sem.Pi(
+      new Sem.NatCore(),
+      new Sem.PiCore(
         "almost",
-        new Sem.Ap(new Sem.VarCore("motive"), new Sem.VarCore("prev")),
-        new Sem.Ap(
+        new Sem.ApCore(new Sem.VarCore("motive"), new Sem.VarCore("prev")),
+        new Sem.ApCore(
           new Sem.VarCore("motive"),
-          new Sem.Add1(new Sem.VarCore("prev"))
+          new Sem.Add1Core(new Sem.VarCore("prev"))
         )
       )
     )

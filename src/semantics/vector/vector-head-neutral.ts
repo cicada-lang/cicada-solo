@@ -12,6 +12,6 @@ export class VectorHeadNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Sem.VectorHead(this.target.readback_neutral(ctx))
+    return new Sem.VectorHeadCore(this.target.readback_neutral(ctx))
   }
 }

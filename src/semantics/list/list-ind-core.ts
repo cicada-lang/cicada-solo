@@ -1,18 +1,13 @@
 import { Core, AlphaCtx } from "../../core"
-import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../core"
-import { check } from "../../exp"
-import { infer } from "../../exp"
-import { expect } from "../../value"
 import { Value } from "../../value"
-import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
 import * as Sem from "../../sem"
 import { list_ind_motive_t, list_ind_step_t } from "./list-ind"
 
-export class ListInd extends Core {
+export class ListIndCore extends Core {
   target: Core
   motive: Core
   base: Core
@@ -27,7 +22,7 @@ export class ListInd extends Core {
   }
 
   evaluate(env: Env): Value {
-    return ListInd.apply(
+    return ListIndCore.apply(
       evaluate(env, this.target),
       evaluate(env, this.motive),
       evaluate(env, this.base),
@@ -63,9 +58,9 @@ export class ListInd extends Core {
     } else if (target instanceof Sem.LiValue) {
       const { head, tail } = target
 
-      return Sem.Ap.apply(
-        Sem.Ap.apply(Sem.Ap.apply(step, head), tail),
-        Sem.ListInd.apply(tail, motive, base, step)
+      return Sem.ApCore.apply(
+        Sem.ApCore.apply(Sem.ApCore.apply(step, head), tail),
+        Sem.ListIndCore.apply(tail, motive, base, step)
       )
     } else if (target instanceof Sem.NotYetValue) {
       const { t, neutral } = target
@@ -73,10 +68,10 @@ export class ListInd extends Core {
       if (t instanceof Sem.ListValue) {
         const elem_t = t.elem_t
         const motive_t = list_ind_motive_t(elem_t)
-        const base_t = Sem.Ap.apply(motive, new Sem.NilValue())
+        const base_t = Sem.ApCore.apply(motive, new Sem.NilValue())
         const step_t = list_ind_step_t(motive, elem_t)
         return new Sem.NotYetValue(
-          Sem.Ap.apply(motive, target),
+          Sem.ApCore.apply(motive, target),
           new Sem.ListIndNeutral(
             neutral,
             new Normal(motive_t, motive),

@@ -56,7 +56,7 @@ export class Pi extends Exp {
 
     return {
       t: new Sem.TypeValue(),
-      core: new Sem.Pi(fresh_name, arg_t_core, ret_t_core),
+      core: new Sem.PiCore(fresh_name, arg_t_core, ret_t_core),
     }
   }
 

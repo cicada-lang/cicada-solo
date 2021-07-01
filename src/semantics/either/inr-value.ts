@@ -14,7 +14,7 @@ export class InrValue extends Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Sem.EitherValue) {
-      return new Sem.Inr(readback(ctx, t.right_t, this.right))
+      return new Sem.InrCore(readback(ctx, t.right_t, this.right))
     }
   }
 }

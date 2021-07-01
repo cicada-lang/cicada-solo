@@ -5,7 +5,7 @@ import { Closure } from "../../closure"
 import { evaluate } from "../../core"
 import * as Sem from "../../sem"
 
-export class Pi extends Core {
+export class PiCore extends Core {
   name: string
   arg_t: Core
   ret_t: Core
@@ -30,7 +30,7 @@ export class Pi extends Core {
   } {
     const entry = { name: this.name, arg_t: this.arg_t }
 
-    if (this.ret_t instanceof Pi) {
+    if (this.ret_t instanceof PiCore) {
       return this.ret_t.multi_pi([...entries, entry])
     } else {
       return {

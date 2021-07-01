@@ -34,7 +34,7 @@ export class Li extends Exp {
 
     return {
       t: list_t,
-      core: new Sem.Li(inferred_head.core, tail_core),
+      core: new Sem.LiCore(inferred_head.core, tail_core),
     }
   }
 

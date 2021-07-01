@@ -61,7 +61,7 @@ export class EitherInd extends Exp {
     const target_value = evaluate(ctx.to_env(), target_core)
 
     return {
-      t: Sem.Ap.apply(motive_value, target_value),
+      t: Sem.ApCore.apply(motive_value, target_value),
       core: new Sem.EitherIndCore(
         target_core,
         motive_core,
@@ -86,17 +86,21 @@ export class EitherInd extends Exp {
 export function either_ind_motive_t(either_t: Value): Value {
   return evaluate(
     new Env().extend("either_t", either_t),
-    new Sem.Pi("target_either", new Sem.VarCore("either_t"), new Sem.TypeCore())
+    new Sem.PiCore(
+      "target_either",
+      new Sem.VarCore("either_t"),
+      new Sem.TypeCore()
+    )
   )
 }
 
 export function either_ind_base_left_t(left_t: Value, motive: Value): Value {
   return evaluate(
     new Env().extend("motive", motive).extend("left_t", left_t),
-    new Sem.Pi(
+    new Sem.PiCore(
       "left",
       new Sem.VarCore("left_t"),
-      new Sem.Ap(
+      new Sem.ApCore(
         new Sem.VarCore("motive"),
         new Sem.InlCore(new Sem.VarCore("left"))
       )
@@ -107,12 +111,12 @@ export function either_ind_base_left_t(left_t: Value, motive: Value): Value {
 export function either_ind_base_right_t(right_t: Value, motive: Value): Value {
   return evaluate(
     new Env().extend("motive", motive).extend("right_t", right_t),
-    new Sem.Pi(
+    new Sem.PiCore(
       "right",
       new Sem.VarCore("right_t"),
-      new Sem.Ap(
+      new Sem.ApCore(
         new Sem.VarCore("motive"),
-        new Sem.Inr(new Sem.VarCore("right"))
+        new Sem.InrCore(new Sem.VarCore("right"))
       )
     )
   )

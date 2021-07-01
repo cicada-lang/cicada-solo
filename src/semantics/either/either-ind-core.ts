@@ -66,9 +66,9 @@ export class EitherIndCore extends Core {
     base_right: Value
   ): Value {
     if (target instanceof Sem.InlValue) {
-      return Sem.Ap.apply(base_left, target.left)
+      return Sem.ApCore.apply(base_left, target.left)
     } else if (target instanceof Sem.InrValue) {
-      return Sem.Ap.apply(base_right, target.right)
+      return Sem.ApCore.apply(base_right, target.right)
     } else if (target instanceof Sem.NotYetValue) {
       const { t, neutral } = target
 
@@ -77,7 +77,7 @@ export class EitherIndCore extends Core {
         const base_left_t = either_ind_base_left_t(t.left_t, motive)
         const base_right_t = either_ind_base_right_t(t.right_t, motive)
         return new Sem.NotYetValue(
-          Sem.Ap.apply(motive, target),
+          Sem.ApCore.apply(motive, target),
           new Sem.EitherIndNeutral(
             neutral,
             new Normal(motive_t, motive),

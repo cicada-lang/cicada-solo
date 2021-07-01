@@ -29,7 +29,7 @@ export class SigmaValue extends Value {
         new Sem.TypeValue(),
         this.cdr_t_cl.apply(variable)
       )
-      return new Sem.Sigma(fresh_name, car_t, cdr_t)
+      return new Sem.SigmaCore(fresh_name, car_t, cdr_t)
     }
   }
 
@@ -38,9 +38,9 @@ export class SigmaValue extends Value {
     //   Every value with a pair type,
     //   whether it is neutral or not,
     //   is read back with cons at the top.
-    const car = Sem.Car.apply(value)
-    const cdr = Sem.Cdr.apply(value)
-    return new Sem.Cons(
+    const car = Sem.CarCore.apply(value)
+    const cdr = Sem.CdrCore.apply(value)
+    return new Sem.ConsCore(
       readback(ctx, this.car_t, car),
       readback(ctx, this.cdr_t_cl.apply(car), cdr)
     )

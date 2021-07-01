@@ -32,7 +32,7 @@ export class Vector extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Sem.TypeValue(),
-      core: new Sem.Vector(
+      core: new Sem.VectorCore(
         check(ctx, this.elem_t, new Sem.TypeValue()),
         check(ctx, this.length, new Sem.NatValue())
       ),

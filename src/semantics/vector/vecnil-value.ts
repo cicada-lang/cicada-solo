@@ -6,7 +6,7 @@ import * as Sem from "../../sem"
 export class VecnilValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Sem.VectorValue) {
-      return new Sem.Vecnil()
+      return new Sem.VecnilCore()
     }
   }
 }

@@ -5,7 +5,7 @@ import { Value } from "../../value"
 import { Closure } from "../../closure"
 import * as Sem from "../../sem"
 
-export class Sigma extends Core {
+export class SigmaCore extends Core {
   name: string
   car_t: Core
   cdr_t: Core
@@ -30,7 +30,7 @@ export class Sigma extends Core {
   } {
     const entry = { name: this.name, car_t: this.car_t }
 
-    if (this.cdr_t instanceof Sigma) {
+    if (this.cdr_t instanceof SigmaCore) {
       return this.cdr_t.multi_sigma([...entries, entry])
     } else {
       return {

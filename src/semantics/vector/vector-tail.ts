@@ -29,7 +29,7 @@ export class VectorTail extends Exp {
 
     return {
       t: new Sem.VectorValue(vector_t.elem_t, length.prev),
-      core: new Sem.VectorTail(inferred_target.core),
+      core: new Sem.VectorTailCore(inferred_target.core),
     }
   }
 

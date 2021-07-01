@@ -1,16 +1,13 @@
 import { Core, AlphaCtx } from "../../core"
-import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { evaluate } from "../../core"
-import { check } from "../../exp"
 import { Value } from "../../value"
-import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
 import * as Sem from "../../sem"
 import { nat_ind_motive_t, nat_ind_step_t } from "./nat-ind"
 
-export class NatInd extends Core {
+export class NatIndCore extends Core {
   target: Core
   motive: Core
   base: Core
@@ -25,7 +22,7 @@ export class NatInd extends Core {
   }
 
   evaluate(env: Env): Value {
-    return NatInd.apply(
+    return NatIndCore.apply(
       evaluate(env, this.target),
       evaluate(env, this.motive),
       evaluate(env, this.base),
@@ -61,19 +58,19 @@ export class NatInd extends Core {
     } else if (target instanceof Sem.Add1Value) {
       const { prev } = target
 
-      return Sem.Ap.apply(
-        Sem.Ap.apply(step, prev),
-        Sem.NatInd.apply(prev, motive, base, step)
+      return Sem.ApCore.apply(
+        Sem.ApCore.apply(step, prev),
+        Sem.NatIndCore.apply(prev, motive, base, step)
       )
     } else if (target instanceof Sem.NotYetValue) {
       const { t, neutral } = target
 
       if (t instanceof Sem.NatValue) {
         const motive_t = nat_ind_motive_t
-        const base_t = Sem.Ap.apply(motive, new Sem.ZeroValue())
+        const base_t = Sem.ApCore.apply(motive, new Sem.ZeroValue())
         const step_t = nat_ind_step_t(motive)
         return new Sem.NotYetValue(
-          Sem.Ap.apply(motive, target),
+          Sem.ApCore.apply(motive, target),
           new Sem.NatIndNeutral(
             neutral,
             new Normal(motive_t, motive),

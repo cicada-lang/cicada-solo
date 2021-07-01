@@ -17,7 +17,7 @@ export class Vecnil extends Exp {
   check(ctx: Ctx, t: Value): Core {
     const vector_t = expect(ctx, t, Sem.VectorValue)
     expect(ctx, vector_t.length, Sem.ZeroValue)
-    return new Sem.Vecnil()
+    return new Sem.VecnilCore()
   }
 
   repr(): string {

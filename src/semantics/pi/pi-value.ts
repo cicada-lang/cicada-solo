@@ -29,7 +29,7 @@ export class PiValue extends Value {
         new Sem.TypeValue(),
         this.ret_t_cl.apply(variable)
       )
-      return new Sem.Pi(fresh_name, arg_t, ret_t)
+      return new Sem.PiCore(fresh_name, arg_t, ret_t)
     }
   }
 
@@ -46,8 +46,8 @@ export class PiValue extends Value {
     const ret = readback(
       ctx.extend(fresh_name, this.arg_t),
       ret_t,
-      Sem.Ap.apply(value, variable)
+      Sem.ApCore.apply(value, variable)
     )
-    return new Sem.Fn(fresh_name, ret)
+    return new Sem.FnCore(fresh_name, ret)
   }
 }

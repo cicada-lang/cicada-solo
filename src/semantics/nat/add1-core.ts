@@ -5,7 +5,7 @@ import { Value } from "../../value"
 import { nat_to_number } from "./nat-util"
 import * as Sem from "../../sem"
 
-export class Add1 extends Core {
+export class Add1Core extends Core {
   prev: Core
 
   constructor(prev: Core) {

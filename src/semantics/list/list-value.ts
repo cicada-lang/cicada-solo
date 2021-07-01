@@ -14,7 +14,7 @@ export class ListValue extends Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Sem.TypeValue) {
-      return new Sem.List(readback(ctx, new Sem.TypeValue(), this.elem_t))
+      return new Sem.ListCore(readback(ctx, new Sem.TypeValue(), this.elem_t))
     }
   }
 }

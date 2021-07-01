@@ -33,7 +33,7 @@ export class Cons extends Exp {
     const car_core = check(ctx, this.car, sigma.car_t)
     const cdr_t_value = sigma.cdr_t_cl.apply(evaluate(ctx.to_env(), car_core))
     const cdr_core = check(ctx, this.cdr, cdr_t_value)
-    return new Sem.Cons(car_core, cdr_core)
+    return new Sem.ConsCore(car_core, cdr_core)
   }
 
   repr(): string {

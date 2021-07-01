@@ -26,7 +26,7 @@ export class Same extends Exp {
         to: "right hand side",
       },
     })
-    return new Sem.Same()
+    return new Sem.SameCore()
   }
 
   repr(): string {

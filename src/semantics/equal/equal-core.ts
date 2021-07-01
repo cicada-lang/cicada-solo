@@ -4,7 +4,7 @@ import { evaluate } from "../../core"
 import { Value } from "../../value"
 import * as Sem from "../../sem"
 
-export class Equal extends Core {
+export class EqualCore extends Core {
   t: Core
   from: Core
   to: Core

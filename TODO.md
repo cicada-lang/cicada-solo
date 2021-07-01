@@ -1,5 +1,3 @@
-- [refactor file structure] add `Core` postfix to core classes
-
 - `ClsFulfilledValue`
 
 - [fulfilling type] `cores/ap` -- `apply` for `ClsValue`

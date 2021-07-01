@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import * as Sem from "../../sem"
 
-export class Same extends Core {
+export class SameCore extends Core {
   evaluate(env: Env): Value {
     return new Sem.SameValue()
   }

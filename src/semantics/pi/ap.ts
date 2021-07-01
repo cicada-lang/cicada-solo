@@ -39,7 +39,7 @@ export class Ap extends Exp {
 
       return {
         t: pi.ret_t_cl.apply(arg_value),
-        core: new Sem.Ap(inferred_target.core, arg_core),
+        core: new Sem.ApCore(inferred_target.core, arg_core),
       }
     }
 

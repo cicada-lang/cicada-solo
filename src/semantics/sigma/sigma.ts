@@ -55,7 +55,7 @@ export class Sigma extends Exp {
 
     return {
       t: new Sem.TypeValue(),
-      core: new Sem.Sigma(fresh_name, car_t_core, cdr_t_core),
+      core: new Sem.SigmaCore(fresh_name, car_t_core, cdr_t_core),
     }
   }
 

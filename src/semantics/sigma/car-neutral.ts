@@ -12,6 +12,6 @@ export class CarNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Sem.Car(this.target.readback_neutral(ctx))
+    return new Sem.CarCore(this.target.readback_neutral(ctx))
   }
 }
