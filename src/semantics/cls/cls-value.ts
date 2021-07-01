@@ -30,7 +30,7 @@ export abstract class ClsValue extends Value {
   abstract eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core>
 
   eta_expand(ctx: Ctx, value: Value): Core {
-    return new Sem.Obj(this.eta_expand_properties(ctx, value))
+    return new Sem.ObjCore(this.eta_expand_properties(ctx, value))
   }
 
   abstract extend_ctx(
@@ -149,7 +149,7 @@ export class ClsConsValue extends ClsValue {
         this.rest_t_cl.apply(variable)
       )
 
-      if (!(rest_t instanceof Sem.Cls)) {
+      if (!(rest_t instanceof Sem.ClsCore)) {
         throw new Trace("I expect rest_t to be Sem.Cls")
       }
 
@@ -159,11 +159,11 @@ export class ClsConsValue extends ClsValue {
 
   dot_value(target: Value, field_name: string): Value {
     if (field_name === this.field_name) {
-      return Sem.Dot.apply(target, this.field_name)
+      return Sem.DotCore.apply(target, this.field_name)
     }
 
     return this.rest_t_cl
-      .apply(Sem.Dot.apply(target, this.field_name))
+      .apply(Sem.DotCore.apply(target, this.field_name))
       .dot_value(target, field_name)
   }
 
@@ -173,12 +173,12 @@ export class ClsConsValue extends ClsValue {
     }
 
     return this.rest_t_cl
-      .apply(Sem.Dot.apply(target, this.field_name))
+      .apply(Sem.DotCore.apply(target, this.field_name))
       .dot_type(target, field_name)
   }
 
   eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
-    const property_value = Sem.Dot.apply(value, this.field_name)
+    const property_value = Sem.DotCore.apply(value, this.field_name)
 
     return new Map([
       [this.field_name, readback(ctx, this.field_t, property_value)],

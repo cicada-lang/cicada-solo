@@ -16,7 +16,7 @@ export class Absurd extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Sem.TypeValue(),
-      core: new Sem.Absurd(),
+      core: new Sem.AbsurdCore(),
     }
   }
 

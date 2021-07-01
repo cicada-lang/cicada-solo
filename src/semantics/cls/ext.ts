@@ -56,13 +56,13 @@ export class Ext extends Exp {
 
     const rest_t_core = check(result.ctx, rest_t, new Sem.TypeValue())
 
-    if (!(rest_t_core instanceof Sem.Cls)) {
+    if (!(rest_t_core instanceof Sem.ClsCore)) {
       throw new Trace("I expect rest_t_core to be Sem.Cls")
     }
 
     const parent_core = readback(ctx, new Sem.TypeValue(), parent_value)
 
-    if (!(parent_core instanceof Sem.Cls)) {
+    if (!(parent_core instanceof Sem.ClsCore)) {
       throw new Trace("I expect parent_core to be Sem.Cls")
     }
 

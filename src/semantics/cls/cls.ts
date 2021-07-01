@@ -114,7 +114,7 @@ export class ClsCons extends Cls {
       new Sem.TypeValue()
     )
 
-    if (!(rest_t_core instanceof Sem.Cls)) {
+    if (!(rest_t_core instanceof Sem.ClsCore)) {
       throw new Trace("I expect rest_t_core to be Sem.Cls")
     }
 

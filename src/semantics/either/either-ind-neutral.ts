@@ -24,7 +24,7 @@ export class EitherIndNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Sem.EitherInd(
+    return new Sem.EitherIndCore(
       this.target.readback_neutral(ctx),
       this.motive.readback_normal(ctx),
       this.base_left.readback_normal(ctx),

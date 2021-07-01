@@ -18,7 +18,7 @@ export class EitherValue extends Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Sem.TypeValue) {
-      return new Sem.Either(
+      return new Sem.EitherCore(
         readback(ctx, new Sem.TypeValue(), this.left_t),
         readback(ctx, new Sem.TypeValue(), this.right_t)
       )

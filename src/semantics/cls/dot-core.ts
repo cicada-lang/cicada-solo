@@ -5,7 +5,7 @@ import { evaluate } from "../../core"
 import { InternalError } from "../../errors"
 import * as Sem from "../../sem"
 
-export class Dot extends Core {
+export class DotCore extends Core {
   target: Core
   name: string
 
@@ -16,7 +16,7 @@ export class Dot extends Core {
   }
 
   evaluate(env: Env): Value {
-    return Sem.Dot.apply(evaluate(env, this.target), this.name)
+    return Sem.DotCore.apply(evaluate(env, this.target), this.name)
   }
 
   repr(): string {

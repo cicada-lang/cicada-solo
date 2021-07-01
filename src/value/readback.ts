@@ -16,7 +16,7 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
     value.t instanceof Sem.AbsurdValue
   ) {
     return new Sem.TheCore(
-      new Sem.Absurd(),
+      new Sem.AbsurdCore(),
       value.neutral.readback_neutral(ctx)
     )
   }

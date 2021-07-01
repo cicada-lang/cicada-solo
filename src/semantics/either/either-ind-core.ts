@@ -14,7 +14,7 @@ import {
   either_ind_base_right_t,
 } from "./either-ind"
 
-export class EitherInd extends Core {
+export class EitherIndCore extends Core {
   target: Core
   motive: Core
   base_left: Core
@@ -29,7 +29,7 @@ export class EitherInd extends Core {
   }
 
   evaluate(env: Env): Value {
-    return EitherInd.apply(
+    return EitherIndCore.apply(
       evaluate(env, this.target),
       evaluate(env, this.motive),
       evaluate(env, this.base_left),

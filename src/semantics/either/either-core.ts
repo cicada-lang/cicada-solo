@@ -5,7 +5,7 @@ import { Closure } from "../../closure"
 import { evaluate } from "../../core"
 import * as Sem from "../../sem"
 
-export class Either extends Core {
+export class EitherCore extends Core {
   left_t: Core
   right_t: Core
 

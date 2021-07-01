@@ -14,6 +14,6 @@ export class DotNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Sem.Dot(this.target.readback_neutral(ctx), this.name)
+    return new Sem.DotCore(this.target.readback_neutral(ctx), this.name)
   }
 }

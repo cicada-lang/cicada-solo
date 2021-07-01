@@ -36,7 +36,7 @@ export class Either extends Exp {
 
     return {
       t: new Sem.TypeValue(),
-      core: new Sem.Either(left_t_core, right_t_core),
+      core: new Sem.EitherCore(left_t_core, right_t_core),
     }
   }
 

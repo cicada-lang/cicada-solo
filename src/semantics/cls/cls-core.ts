@@ -6,18 +6,18 @@ import * as Sem from "../../sem"
 import * as ut from "../../ut"
 import { ClsClosure } from "./cls-closure"
 
-export abstract class Cls extends Core {
+export abstract class ClsCore extends Core {
   instanceofSemCls = true
 
-  abstract append(cls: Sem.Cls): Sem.Cls
+  abstract append(cls: Sem.ClsCore): Sem.ClsCore
   abstract field_names: Array<string>
   abstract evaluate(env: Env): Sem.ClsValue
   abstract fields_repr(): Array<string>
   abstract fields_alpha_repr(ctx: AlphaCtx): Array<string>
 }
 
-export class ClsNil extends Cls {
-  append(cls: Sem.Cls): Sem.Cls {
+export class ClsNil extends ClsCore {
+  append(cls: Sem.ClsCore): Sem.ClsCore {
     return cls
   }
 
@@ -46,17 +46,17 @@ export class ClsNil extends Cls {
   }
 }
 
-export class ClsCons extends Cls {
+export class ClsCons extends ClsCore {
   field_name: string
   local_name: string
   field_t: Core
-  rest_t: Cls
+  rest_t: ClsCore
 
   constructor(
     field_name: string,
     local_name: string,
     field_t: Core,
-    rest_t: Cls
+    rest_t: ClsCore
   ) {
     super()
     this.field_name = field_name
@@ -65,7 +65,7 @@ export class ClsCons extends Cls {
     this.rest_t = rest_t
   }
 
-  append(cls: Sem.Cls): Sem.Cls {
+  append(cls: Sem.ClsCore): Sem.ClsCore {
     return new ClsCons(
       this.field_name,
       this.local_name,

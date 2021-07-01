@@ -62,7 +62,7 @@ export class EitherInd extends Exp {
 
     return {
       t: Sem.Ap.apply(motive_value, target_value),
-      core: new Sem.EitherInd(
+      core: new Sem.EitherIndCore(
         target_core,
         motive_core,
         base_left_core,

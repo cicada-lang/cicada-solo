@@ -37,7 +37,7 @@ export class Obj extends Exp {
 
     if (t instanceof Sem.ClsValue) {
       const core_properties = t.check_properties(ctx, properties)
-      return new Sem.Obj(core_properties)
+      return new Sem.ObjCore(core_properties)
     }
 
     throw new Trace(
