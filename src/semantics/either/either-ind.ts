@@ -98,7 +98,7 @@ export function either_ind_base_left_t(left_t: Value, motive: Value): Value {
       new Sem.VarCore("left_t"),
       new Sem.Ap(
         new Sem.VarCore("motive"),
-        new Sem.Inl(new Sem.VarCore("left"))
+        new Sem.InlCore(new Sem.VarCore("left"))
       )
     )
   )
