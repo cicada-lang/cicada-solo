@@ -1,5 +1,4 @@
 - quit using `Value.match` -- cores/vector/vector-ind.ts
-- quit using `Value.match` -- cores/vector/vector-tail.ts
 
 - remove `Value.match`
 
