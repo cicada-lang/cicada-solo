@@ -2,13 +2,7 @@ import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { readback } from "../../value"
-import { evaluate } from "../../core"
-import { check } from "../../exp"
-import { Trace } from "../../errors"
-import * as ut from "../../ut"
 import * as Exps from "../../exps"
-import { ClsClosure } from "./cls-closure"
 
 export abstract class ClsValue extends Value {
   instanceofExpsClsValue = true

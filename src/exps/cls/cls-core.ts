@@ -1,9 +1,6 @@
 import { Core, AlphaCtx } from "../../core"
-import { evaluate } from "../../core"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
-import * as ut from "../../ut"
-import { ClsClosure } from "./cls-closure"
 
 export abstract class ClsCore extends Core {
   instanceofExpsCls = true

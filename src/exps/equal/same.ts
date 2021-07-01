@@ -3,10 +3,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { expect } from "../../value"
-import { readback } from "../../value"
 import { check_conversion } from "../../value"
-import { Trace } from "../../errors"
-import * as ut from "../../ut"
 import * as Exps from "../../exps"
 
 export class Same extends Exp {
