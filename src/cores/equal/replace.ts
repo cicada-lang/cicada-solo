@@ -4,6 +4,7 @@ import { evaluate } from "../../evaluate"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
+import { InternalError } from "../../errors"
 import * as Cores from "../../cores"
 
 export class Replace extends Core {
@@ -47,32 +48,34 @@ export class Replace extends Core {
   }
 
   static apply(target: Value, motive: Value, base: Value): Value {
-    return Value.match(target, [
-      [Cores.SameValue, (_: Cores.SameValue) => base],
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          Value.match(t, [
-            [
-              Cores.EqualValue,
-              ({ t, to, from }: Cores.EqualValue) => {
-                const base_t = Cores.Ap.apply(motive, from)
-                const motive_t = new Cores.PiValue(
-                  t,
-                  new Closure(new Env(), "x", new Cores.Type())
-                )
-                return new Cores.NotYetValue(
-                  Cores.Ap.apply(motive, to),
-                  new Cores.ReplaceNeutral(
-                    neutral,
-                    new Normal(motive_t, motive),
-                    new Normal(base_t, base)
-                  )
-                )
-              },
-            ],
-          ]),
-      ],
-    ])
+    if (target instanceof Cores.SameValue) {
+      return base
+    } else if (target instanceof Cores.NotYetValue) {
+      const { t, neutral } = target
+
+      if (t instanceof Cores.EqualValue) {
+        const base_t = Cores.Ap.apply(motive, t.from)
+        const motive_t = new Cores.PiValue(
+          t.t,
+          new Closure(new Env(), "x", new Cores.Type())
+        )
+        return new Cores.NotYetValue(
+          Cores.Ap.apply(motive, t.to),
+          new Cores.ReplaceNeutral(
+            neutral,
+            new Normal(motive_t, motive),
+            new Normal(base_t, base)
+          )
+        )
+      } else {
+        throw InternalError.wrong_target_t(target.t, {
+          expected: [Cores.EqualValue],
+        })
+      }
+    } else {
+      throw InternalError.wrong_target(target, {
+        expected: [Cores.SameValue],
+      })
+    }
   }
 }
