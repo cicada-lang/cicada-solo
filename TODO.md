@@ -1,5 +1,3 @@
-- extract file -- exps/cls-cons-value.ts
-
 - `ClsConsValue.apply`
 - `ClsFulfilledValue`
 - `ClsFulfilledValue.apply`
