@@ -1,5 +1,3 @@
-- [refactor file structure] `values` as renaming and index
-
 - [refactor file structure] add `Core` postfix to core classes
 - [refactor file structure] add `Exp` postfix to exp classes
 
