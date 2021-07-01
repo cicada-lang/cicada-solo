@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { readback } from "../../readback"
+import { readback } from "../../value"
 import { Closure } from "../../closure"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"

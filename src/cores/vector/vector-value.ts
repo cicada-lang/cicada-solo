@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { readback } from "../../readback"
+import { readback } from "../../value"
 import * as Cores from "../../cores"
 
 export class VectorValue extends Value {

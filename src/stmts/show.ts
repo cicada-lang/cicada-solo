@@ -3,7 +3,7 @@ import { Module } from "../module"
 import { Exp } from "../exp"
 import { infer } from "../exp"
 import { evaluate } from "../core"
-import { readback } from "../readback"
+import { readback } from "../value"
 import * as Cores from "../cores"
 
 export class Show implements Stmt {

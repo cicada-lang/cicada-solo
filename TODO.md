@@ -1,5 +1,4 @@
 - [refactor file structure] move `conversion` to `value/`
-- [refactor file structure] move `readback` to `value/`
 
 - [refactor file structure] TODO
 

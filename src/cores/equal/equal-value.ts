@@ -1,6 +1,6 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { readback } from "../../readback"
+import { readback } from "../../value"
 import { Value } from "../../value"
 import * as Cores from "../../cores"
 

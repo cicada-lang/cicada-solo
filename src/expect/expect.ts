@@ -1,7 +1,7 @@
 import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { Trace } from "../errors"
-import { readback } from "../readback"
+import { readback } from "../value"
 import * as Cores from "../cores"
 
 type Class<T> = new (...args: any[]) => T
