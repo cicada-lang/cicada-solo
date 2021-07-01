@@ -6,6 +6,7 @@ import { check } from "../../check"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
+import { InternalError } from "../../errors"
 import * as Cores from "../../cores"
 import { nat_ind_motive_t, nat_ind_step_t } from "../../exps/nat/nat-ind"
 
@@ -55,39 +56,40 @@ export class NatInd extends Core {
   }
 
   static apply(target: Value, motive: Value, base: Value, step: Value): Value {
-    return Value.match(target, [
-      [Cores.ZeroValue, (_: Cores.ZeroValue) => base],
-      [
-        Cores.Add1Value,
-        ({ prev }: Cores.Add1Value) =>
-          Cores.Ap.apply(
-            Cores.Ap.apply(step, prev),
-            Cores.NatInd.apply(prev, motive, base, step)
-          ),
-      ],
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          Value.match(t, [
-            [
-              Cores.NatValue,
-              (nat_t: Cores.NatValue) => {
-                const motive_t = nat_ind_motive_t
-                const base_t = Cores.Ap.apply(motive, new Cores.ZeroValue())
-                const step_t = nat_ind_step_t(motive)
-                return new Cores.NotYetValue(
-                  Cores.Ap.apply(motive, target),
-                  new Cores.NatIndNeutral(
-                    neutral,
-                    new Normal(motive_t, motive),
-                    new Normal(base_t, base),
-                    new Normal(step_t, step)
-                  )
-                )
-              },
-            ],
-          ]),
-      ],
-    ])
+    if (target instanceof Cores.ZeroValue) {
+      return base
+    } else if (target instanceof Cores.Add1Value) {
+      const { prev } = target
+
+      return Cores.Ap.apply(
+        Cores.Ap.apply(step, prev),
+        Cores.NatInd.apply(prev, motive, base, step)
+      )
+    } else if (target instanceof Cores.NotYetValue) {
+      const { t, neutral } = target
+
+      if (t instanceof Cores.NatValue) {
+        const motive_t = nat_ind_motive_t
+        const base_t = Cores.Ap.apply(motive, new Cores.ZeroValue())
+        const step_t = nat_ind_step_t(motive)
+        return new Cores.NotYetValue(
+          Cores.Ap.apply(motive, target),
+          new Cores.NatIndNeutral(
+            neutral,
+            new Normal(motive_t, motive),
+            new Normal(base_t, base),
+            new Normal(step_t, step)
+          )
+        )
+      } else {
+        throw InternalError.wrong_target_t(target.t, {
+          expected: [Cores.NatValue],
+        })
+      }
+    } else {
+      throw InternalError.wrong_target(target, {
+        expected: [Cores.ZeroValue, Cores.Add1Value],
+      })
+    }
   }
 }
