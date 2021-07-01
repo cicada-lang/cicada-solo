@@ -43,8 +43,8 @@ export class NatRec extends Exp {
     const inferred_base = infer(ctx, this.base)
     const base_t_core = readback(ctx, new Sem.TypeValue(), inferred_base.t)
     const target_name = "nat_rec_target_nat_" + nanoid().toString()
-    const motive_core = new Sem.The(
-      new Sem.Pi(target_name, new Sem.Type(), new Sem.Nat()),
+    const motive_core = new Sem.TheCore(
+      new Sem.Pi(target_name, new Sem.TypeCore(), new Sem.Nat()),
       new Sem.Fn(target_name, base_t_core)
     )
     const step_core = check(ctx, this.step, nat_ind_step_t(inferred_base.t))
@@ -71,7 +71,7 @@ function nat_ind_step_t(base_t: Value): Value {
     new Sem.Pi(
       "prev",
       new Sem.Nat(),
-      new Sem.Pi("almost", new Sem.Var("base_t"), new Sem.Var("base_t"))
+      new Sem.Pi("almost", new Sem.VarCore("base_t"), new Sem.VarCore("base_t"))
     )
   )
 }

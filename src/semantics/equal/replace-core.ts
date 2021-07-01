@@ -57,7 +57,7 @@ export class Replace extends Core {
         const base_t = Sem.Ap.apply(motive, t.from)
         const motive_t = new Sem.PiValue(
           t.t,
-          new Closure(new Env(), "x", new Sem.Type())
+          new Closure(new Env(), "x", new Sem.TypeCore())
         )
         return new Sem.NotYetValue(
           Sem.Ap.apply(motive, t.to),

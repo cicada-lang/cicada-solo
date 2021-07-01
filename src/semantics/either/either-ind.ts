@@ -86,7 +86,7 @@ export class EitherInd extends Exp {
 export function either_ind_motive_t(either_t: Value): Value {
   return evaluate(
     new Env().extend("either_t", either_t),
-    new Sem.Pi("target_either", new Sem.Var("either_t"), new Sem.Type())
+    new Sem.Pi("target_either", new Sem.VarCore("either_t"), new Sem.TypeCore())
   )
 }
 
@@ -95,8 +95,11 @@ export function either_ind_base_left_t(left_t: Value, motive: Value): Value {
     new Env().extend("motive", motive).extend("left_t", left_t),
     new Sem.Pi(
       "left",
-      new Sem.Var("left_t"),
-      new Sem.Ap(new Sem.Var("motive"), new Sem.Inl(new Sem.Var("left")))
+      new Sem.VarCore("left_t"),
+      new Sem.Ap(
+        new Sem.VarCore("motive"),
+        new Sem.Inl(new Sem.VarCore("left"))
+      )
     )
   )
 }
@@ -106,8 +109,11 @@ export function either_ind_base_right_t(right_t: Value, motive: Value): Value {
     new Env().extend("motive", motive).extend("right_t", right_t),
     new Sem.Pi(
       "right",
-      new Sem.Var("right_t"),
-      new Sem.Ap(new Sem.Var("motive"), new Sem.Inr(new Sem.Var("right")))
+      new Sem.VarCore("right_t"),
+      new Sem.Ap(
+        new Sem.VarCore("motive"),
+        new Sem.Inr(new Sem.VarCore("right"))
+      )
     )
   )
 }

@@ -16,7 +16,7 @@ export class Type extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Sem.TypeValue(),
-      core: new Sem.Type(),
+      core: new Sem.TypeCore(),
     }
   }
 

@@ -108,8 +108,8 @@ export function vector_ind_motive_t(elem_t: Value): Value {
       new Sem.Nat(),
       new Sem.Pi(
         "target_vector",
-        new Sem.Vector(new Sem.Var("elem_t"), new Sem.Var("length")),
-        new Sem.Type()
+        new Sem.Vector(new Sem.VarCore("elem_t"), new Sem.VarCore("length")),
+        new Sem.TypeCore()
       )
     )
   )
@@ -123,22 +123,22 @@ export function vector_ind_step_t(motive: Value, elem_t: Value): Value {
       new Sem.Nat(),
       new Sem.Pi(
         "head",
-        new Sem.Var("elem_t"),
+        new Sem.VarCore("elem_t"),
         new Sem.Pi(
           "tail",
-          new Sem.Vector(new Sem.Var("elem_t"), new Sem.Var("length")),
+          new Sem.Vector(new Sem.VarCore("elem_t"), new Sem.VarCore("length")),
           new Sem.Pi(
             "almost",
             new Sem.Ap(
-              new Sem.Ap(new Sem.Var("motive"), new Sem.Var("length")),
-              new Sem.Var("tail")
+              new Sem.Ap(new Sem.VarCore("motive"), new Sem.VarCore("length")),
+              new Sem.VarCore("tail")
             ),
             new Sem.Ap(
               new Sem.Ap(
-                new Sem.Var("motive"),
-                new Sem.Add1(new Sem.Var("length"))
+                new Sem.VarCore("motive"),
+                new Sem.Add1(new Sem.VarCore("length"))
               ),
-              new Sem.Vec(new Sem.Var("head"), new Sem.Var("tail"))
+              new Sem.Vec(new Sem.VarCore("head"), new Sem.VarCore("tail"))
             )
           )
         )

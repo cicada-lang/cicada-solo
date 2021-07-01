@@ -85,8 +85,8 @@ export function list_ind_motive_t(elem_t: Value): Value {
     new Env().extend("elem_t", elem_t),
     new Sem.Pi(
       "target_list",
-      new Sem.List(new Sem.Var("elem_t")),
-      new Sem.Type()
+      new Sem.List(new Sem.VarCore("elem_t")),
+      new Sem.TypeCore()
     )
   )
 }
@@ -96,16 +96,16 @@ export function list_ind_step_t(motive: Value, elem_t: Value): Value {
     new Env().extend("motive", motive).extend("elem_t", elem_t),
     new Sem.Pi(
       "head",
-      new Sem.Var("elem_t"),
+      new Sem.VarCore("elem_t"),
       new Sem.Pi(
         "tail",
-        new Sem.List(new Sem.Var("elem_t")),
+        new Sem.List(new Sem.VarCore("elem_t")),
         new Sem.Pi(
           "almost",
-          new Sem.Ap(new Sem.Var("motive"), new Sem.Var("tail")),
+          new Sem.Ap(new Sem.VarCore("motive"), new Sem.VarCore("tail")),
           new Sem.Ap(
-            new Sem.Var("motive"),
-            new Sem.Li(new Sem.Var("head"), new Sem.Var("tail"))
+            new Sem.VarCore("motive"),
+            new Sem.Li(new Sem.VarCore("head"), new Sem.VarCore("tail"))
           )
         )
       )

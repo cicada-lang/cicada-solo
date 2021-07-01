@@ -3,7 +3,7 @@ import { Value } from "../value"
 import { Env } from "../env"
 import { evaluate } from "../core"
 
-export class Let extends Core {
+export class LetCore extends Core {
   name: string
   exp: Core
   ret: Core

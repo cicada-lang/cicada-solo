@@ -12,6 +12,6 @@ export class VarNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Sem.Var(this.name)
+    return new Sem.VarCore(this.name)
   }
 }

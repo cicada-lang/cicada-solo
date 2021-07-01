@@ -47,8 +47,8 @@ export class ListRec extends Exp {
     const target_t_core = readback(ctx, new Sem.TypeValue(), inferred_target.t)
     const base_t_core = readback(ctx, new Sem.TypeValue(), inferred_base.t)
     const target_name = "list_rec_target_list_" + nanoid().toString()
-    const motive_core = new Sem.The(
-      new Sem.Pi(target_name, new Sem.Type(), target_t_core),
+    const motive_core = new Sem.TheCore(
+      new Sem.Pi(target_name, new Sem.TypeCore(), target_t_core),
       new Sem.Fn(target_name, base_t_core)
     )
     const step_core = check(
@@ -78,11 +78,11 @@ function list_rec_step_t(base_t: Value, elem_t: Value): Value {
     new Env().extend("base_t", base_t).extend("elem_t", elem_t),
     new Sem.Pi(
       "head",
-      new Sem.Var("elem_t"),
+      new Sem.VarCore("elem_t"),
       new Sem.Pi(
         "tail",
-        new Sem.List(new Sem.Var("elem_t")),
-        new Sem.Pi("almost", new Sem.Var("base_t"), new Sem.Var("base_t"))
+        new Sem.List(new Sem.VarCore("elem_t")),
+        new Sem.Pi("almost", new Sem.VarCore("base_t"), new Sem.VarCore("base_t"))
       )
     )
   )

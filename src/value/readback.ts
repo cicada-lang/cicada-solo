@@ -15,7 +15,7 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
     value instanceof Sem.NotYetValue &&
     value.t instanceof Sem.AbsurdValue
   ) {
-    return new Sem.The(new Sem.Absurd(), value.neutral.readback_neutral(ctx))
+    return new Sem.TheCore(new Sem.Absurd(), value.neutral.readback_neutral(ctx))
   }
 
   const exp = value.readback(ctx, t)

@@ -72,7 +72,7 @@ export class NatInd extends Exp {
 
 export const nat_ind_motive_t: Value = evaluate(
   new Env(),
-  new Sem.Pi("target_nat", new Sem.Nat(), new Sem.Type())
+  new Sem.Pi("target_nat", new Sem.Nat(), new Sem.TypeCore())
 )
 
 export function nat_ind_step_t(motive: Value): Value {
@@ -83,8 +83,8 @@ export function nat_ind_step_t(motive: Value): Value {
       new Sem.Nat(),
       new Sem.Pi(
         "almost",
-        new Sem.Ap(new Sem.Var("motive"), new Sem.Var("prev")),
-        new Sem.Ap(new Sem.Var("motive"), new Sem.Add1(new Sem.Var("prev")))
+        new Sem.Ap(new Sem.VarCore("motive"), new Sem.VarCore("prev")),
+        new Sem.Ap(new Sem.VarCore("motive"), new Sem.Add1(new Sem.VarCore("prev")))
       )
     )
   )

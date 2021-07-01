@@ -40,7 +40,7 @@ export class Var extends Exp {
 
     return {
       t,
-      core: new Sem.Var(this.name),
+      core: new Sem.VarCore(this.name),
     }
   }
 

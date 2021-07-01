@@ -6,7 +6,7 @@ import * as Sem from "../sem"
 export class TypeValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Sem.TypeValue) {
-      return new Sem.Type()
+      return new Sem.TypeCore()
     }
   }
 }
