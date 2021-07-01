@@ -2,6 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { evaluate } from "../../evaluate"
+import { InternalError } from "../../errors"
 import * as Cores from "../../cores"
 
 export class VectorHead extends Core {
@@ -25,28 +26,35 @@ export class VectorHead extends Core {
   }
 
   static apply(target: Value): Value {
-    return Value.match(target, [
-      [Cores.VecValue, (vec: Cores.VecValue) => vec.head],
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          Value.match(t, [
+    if (target instanceof Cores.VecValue) {
+      return target.head
+    } else if (target instanceof Cores.NotYetValue) {
+      const { t, neutral } = target
+
+      if (t instanceof Cores.VectorValue) {
+        if (t.length instanceof Cores.Add1Value) {
+          return new Cores.NotYetValue(
+            t.elem_t,
+            new Cores.VectorHeadNeutral(neutral)
+          )
+        } else {
+          throw new InternalError(
             [
-              Cores.VectorValue,
-              (vector_t: Cores.VectorValue) =>
-                Value.match(vector_t.length, [
-                  [
-                    Cores.Add1Value,
-                    (_length: Cores.Add1Value) =>
-                      new Cores.NotYetValue(
-                        vector_t.elem_t,
-                        new Cores.VectorHeadNeutral(neutral)
-                      ),
-                  ],
-                ]),
-            ],
-          ]),
-      ],
-    ])
+              `To apply vector_head`,
+              `I expect length of vector to be an instance of Add1Value`,
+              `but the given class name is: ${t.length.constructor.name}`,
+            ].join("\n") + "\n"
+          )
+        }
+      } else {
+        throw InternalError.wrong_target_t(target.t, {
+          expected: [Cores.VectorValue],
+        })
+      }
+    } else {
+      throw InternalError.wrong_target(target, {
+        expected: [Cores.VecValue],
+      })
+    }
   }
 }
