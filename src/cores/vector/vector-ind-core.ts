@@ -11,10 +11,7 @@ import { Normal } from "../../normal"
 import { Trace } from "../../errors"
 import { InternalError } from "../../errors"
 import * as Cores from "../../cores"
-import {
-  vector_ind_motive_t,
-  vector_ind_step_t,
-} from "../../exps/vector/vector-ind-exp"
+import { vector_ind_motive_t, vector_ind_step_t } from "./vector-ind-exp"
 
 export class VectorInd extends Core {
   length: Core

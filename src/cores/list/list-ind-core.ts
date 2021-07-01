@@ -10,10 +10,7 @@ import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
 import * as Cores from "../../cores"
-import {
-  list_ind_motive_t,
-  list_ind_step_t,
-} from "../../exps/list/list-ind-exp"
+import { list_ind_motive_t, list_ind_step_t } from "./list-ind-exp"
 
 export class ListInd extends Core {
   target: Core
