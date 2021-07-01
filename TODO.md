@@ -1,5 +1,3 @@
-- remove `Value.match` -- because not like `instanceof`, it can not handle subclass
-
 - `ClsFulfilledValue`
 
 - [fulfilling type] `cores/ap` -- `apply` for `ClsValue`
