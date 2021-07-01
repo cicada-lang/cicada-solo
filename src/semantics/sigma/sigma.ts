@@ -5,7 +5,6 @@ import { check } from "../../exp"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
 import * as Sem from "../../sem"
-import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class Sigma extends Exp {
@@ -37,7 +36,7 @@ export class Sigma extends Exp {
       return new Sigma(
         fresh_name,
         this.car_t.subst(name, exp),
-        this.cdr_t.subst(this.name, new Exps.Var(fresh_name)).subst(name, exp)
+        this.cdr_t.subst(this.name, new Sem.Var(fresh_name)).subst(name, exp)
       )
     }
   }
@@ -46,7 +45,7 @@ export class Sigma extends Exp {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const car_t_core = check(ctx, this.car_t, new Sem.TypeValue())
     const car_t_value = evaluate(ctx.to_env(), car_t_core)
-    const cdr_t = this.cdr_t.subst(this.name, new Exps.Var(fresh_name))
+    const cdr_t = this.cdr_t.subst(this.name, new Sem.Var(fresh_name))
     const cdr_t_core = check(
       ctx.extend(fresh_name, car_t_value),
       cdr_t,

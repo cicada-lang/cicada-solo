@@ -33,7 +33,7 @@ export class Dot extends Exp {
     if (inferred_target.t instanceof Sem.ClsValue) {
       // NOTE `infer` need to return normalized value as core.
       // Because of `ClsValue` can be partially fulfilled by value,
-      // during `infer` of `Exps.Dot`, we have opportunity to get those value back,
+      // during `infer` of `Sem.Dot`, we have opportunity to get those value back,
       // and return them as core.
 
       const target_value = evaluate(ctx.to_env(), inferred_target.core)

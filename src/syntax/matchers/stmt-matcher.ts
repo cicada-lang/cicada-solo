@@ -1,7 +1,7 @@
 import pt from "@cicada-lang/partech"
 import { Stmt } from "../../stmt"
 import * as Stmts from "../../stmts"
-import * as Exps from "../../exps"
+import * as Sem from "../../sem"
 import {
   exp_matcher,
   operator_matcher,
@@ -25,17 +25,17 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     "stmt:def_the": ({ name, t, exp }) =>
       new Stmts.Def(
         pt.str(name),
-        new Exps.The(exp_matcher(t), exp_matcher(exp))
+        new Sem.The(exp_matcher(t), exp_matcher(exp))
       ),
     "stmt:def_fn": ({ name, bindings, ret_t, ret }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
         .flatMap(({ names }) => names.reverse())
-        .reduce((fn, name) => new Exps.Fn(name, fn), exp_matcher(ret))
+        .reduce((fn, name) => new Sem.Fn(name, fn), exp_matcher(ret))
 
       return new Stmts.Def(
         pt.str(name),
-        new Exps.The(pi_handler({ bindings, ret_t }), fn)
+        new Sem.The(pi_handler({ bindings, ret_t }), fn)
       )
     },
     "stmt:show_operator": ({ operator }) =>
@@ -51,19 +51,19 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           .reverse()
           .reduce(
             (rest_t, entry) =>
-              new Exps.ClsCons(
+              new Sem.ClsCons(
                 entry.field_name,
                 entry.field_name,
                 entry.field_t,
                 rest_t
               ),
-            new Exps.ClsNil()
+            new Sem.ClsNil()
           )
       ),
     "stmt:class_extends": ({ name, parent, entries }) =>
       new Stmts.ClassExtends(
         pt.str(name),
-        new Exps.Ext(
+        new Sem.Ext(
           operator_matcher(parent),
           pt.matchers
             .zero_or_more_matcher(entries)
@@ -71,13 +71,13 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
             .reverse()
             .reduce(
               (rest_t, entry) =>
-                new Exps.ClsCons(
+                new Sem.ClsCons(
                   entry.field_name,
                   entry.field_name,
                   entry.field_t,
                   rest_t
                 ),
-              new Exps.ClsNil()
+              new Sem.ClsNil()
             )
         )
       ),

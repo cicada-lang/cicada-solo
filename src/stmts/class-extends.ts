@@ -2,19 +2,19 @@ import { Stmt } from "../stmt"
 import { Module } from "../module"
 import { infer } from "../exp"
 import { evaluate } from "../core"
-import * as Exps from "../exps"
+import * as Sem from "../sem"
 
 export class ClassExtends implements Stmt {
   name: string
-  ext: Exps.Ext
+  ext: Sem.Ext
 
-  constructor(name: string, ext: Exps.Ext) {
+  constructor(name: string, ext: Sem.Ext) {
     this.name = name
     this.ext = ext
   }
 
   async execute(mod: Module): Promise<void> {
-    const exp = new Exps.The(new Exps.Type(), this.ext)
+    const exp = new Sem.The(new Sem.Type(), this.ext)
     const inferred = infer(mod.ctx, exp)
     const inferred_value = evaluate(mod.ctx.to_env(), inferred.core)
     mod.ctx.assert_not_redefine(this.name, inferred.t, inferred_value)

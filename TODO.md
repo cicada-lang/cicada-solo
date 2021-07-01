@@ -1,4 +1,4 @@
-- merge `Sem` namespace with `Exps` namespace
+- rename `Sem` namespace to `Exps`
 
 - `ClsFulfilledValue`
 

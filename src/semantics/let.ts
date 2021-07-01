@@ -6,7 +6,6 @@ import { evaluate } from "../core"
 import { infer } from "../exp"
 import { check } from "../exp"
 import * as Sem from "../sem"
-import * as Exps from "../exps"
 import * as ut from "../ut"
 
 export class Let extends Exp {
@@ -38,7 +37,7 @@ export class Let extends Exp {
       return new Let(
         fresh_name,
         this.exp.subst(name, exp),
-        this.ret.subst(this.name, new Exps.Var(fresh_name)).subst(name, exp)
+        this.ret.subst(this.name, new Sem.Var(fresh_name)).subst(name, exp)
       )
     }
   }
@@ -47,7 +46,7 @@ export class Let extends Exp {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const inferred = infer(ctx, this.exp)
     const value = evaluate(ctx.to_env(), inferred.core)
-    const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
+    const ret = this.ret.subst(this.name, new Sem.Var(fresh_name))
     const inferred_ret = infer(ctx.extend(fresh_name, inferred.t, value), ret)
 
     return {
@@ -60,7 +59,7 @@ export class Let extends Exp {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const inferred = infer(ctx, this.exp)
     const value = evaluate(ctx.to_env(), inferred.core)
-    const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
+    const ret = this.ret.subst(this.name, new Sem.Var(fresh_name))
     const ret_core = check(ctx.extend(fresh_name, inferred.t, value), ret, t)
     return new Sem.LetCore(fresh_name, inferred.core, ret_core)
   }

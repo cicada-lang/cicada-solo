@@ -5,7 +5,6 @@ import { Value } from "../../value"
 import { Trace } from "../../errors"
 import { infer } from "../../exp"
 import * as ut from "../../ut"
-import * as Exps from "../../exps"
 import * as Sem from "../../sem"
 
 export class Obj extends Exp {
@@ -84,7 +83,7 @@ export class SpreadProp extends Prop {
 
     if (inferred.t instanceof Sem.ClsValue) {
       const cls = inferred.t
-      return cls.field_names.map((name) => [name, new Exps.Dot(this.exp, name)])
+      return cls.field_names.map((name) => [name, new Sem.Dot(this.exp, name)])
     }
 
     throw new Trace(
@@ -136,7 +135,7 @@ export class FieldShorthandProp extends Prop {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    return new Exps.Var(this.name).free_names(bound_names)
+    return new Sem.Var(this.name).free_names(bound_names)
   }
 
   subst(name: string, exp: Exp): Prop {
@@ -144,7 +143,7 @@ export class FieldShorthandProp extends Prop {
   }
 
   expand(ctx: Ctx): Array<[string, Exp]> {
-    return [[this.name, new Exps.Var(this.name)]]
+    return [[this.name, new Sem.Var(this.name)]]
   }
 
   repr(): string {

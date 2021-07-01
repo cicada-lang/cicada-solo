@@ -6,11 +6,10 @@ import { evaluate } from "../../core"
 import { Value } from "../../value"
 import { Trace } from "../../errors"
 import * as Sem from "../../sem"
-import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export abstract class Cls extends Exp {
-  instanceofExpsCls = true
+  instanceofSemCls = true
 
   abstract fields_repr(): Array<string>
   abstract subst(name: string, exp: Exp): Cls
@@ -85,7 +84,7 @@ export class ClsCons extends Cls {
         fresh_name,
         this.field_t.subst(name, exp),
         this.rest_t
-          .subst(this.local_name, new Exps.Var(fresh_name))
+          .subst(this.local_name, new Sem.Var(fresh_name))
           .subst(name, exp)
       )
     }
@@ -107,7 +106,7 @@ export class ClsCons extends Cls {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.local_name)
     const field_t_core = check(ctx, this.field_t, new Sem.TypeValue())
     const field_t_value = evaluate(ctx.to_env(), field_t_core)
-    const rest_t = this.rest_t.subst(this.local_name, new Exps.Var(fresh_name))
+    const rest_t = this.rest_t.subst(this.local_name, new Sem.Var(fresh_name))
     const rest_t_core = check(
       ctx.extend(fresh_name, field_t_value),
       rest_t,

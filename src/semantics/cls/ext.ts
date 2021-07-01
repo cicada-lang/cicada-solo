@@ -8,14 +8,13 @@ import { readback } from "../../value"
 import { Value } from "../../value"
 import { Trace } from "../../errors"
 import * as Sem from "../../sem"
-import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class Ext extends Exp {
   parent: Exp
-  rest_t: Exps.Cls
+  rest_t: Sem.Cls
 
-  constructor(parent: Exp, rest_t: Exps.Cls) {
+  constructor(parent: Exp, rest_t: Sem.Cls) {
     super()
     this.parent = parent
     this.rest_t = rest_t
@@ -43,12 +42,12 @@ export class Ext extends Exp {
     const result = parent_value.extend_ctx(ctx, [])
     const rest_t = result.renamings.reduce(
       (rest_t, renaming) =>
-        rest_t.subst(renaming.field_name, new Exps.Var(renaming.local_name)),
+        rest_t.subst(renaming.field_name, new Sem.Var(renaming.local_name)),
       this.rest_t.subst(
         "super",
-        new Exps.Obj(
+        new Sem.Obj(
           parent_value.field_names.map(
-            (name) => new Exps.FieldShorthandProp(name)
+            (name) => new Sem.FieldShorthandProp(name)
           )
         )
       )

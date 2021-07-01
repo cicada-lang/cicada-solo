@@ -2,19 +2,19 @@ import { Stmt } from "../stmt"
 import { Module } from "../module"
 import { infer } from "../exp"
 import { evaluate } from "../core"
-import * as Exps from "../exps"
+import * as Sem from "../sem"
 
 export class Class implements Stmt {
   name: string
-  cls: Exps.Cls
+  cls: Sem.Cls
 
-  constructor(name: string, cls: Exps.Cls) {
+  constructor(name: string, cls: Sem.Cls) {
     this.name = name
     this.cls = cls
   }
 
   async execute(mod: Module): Promise<void> {
-    const exp = new Exps.The(new Exps.Type(), this.cls)
+    const exp = new Sem.The(new Sem.Type(), this.cls)
     const inferred = infer(mod.ctx, exp)
     const inferred_value = evaluate(mod.ctx.to_env(), inferred.core)
     mod.ctx.assert_not_redefine(this.name, inferred.t, inferred_value)

@@ -5,7 +5,6 @@ import { Value } from "../../value"
 import { check } from "../../exp"
 import { expect } from "../../value"
 import * as Sem from "../../sem"
-import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class Fn extends Exp {
@@ -30,7 +29,7 @@ export class Fn extends Exp {
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
-      const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
+      const ret = this.ret.subst(this.name, new Sem.Var(fresh_name))
       return new Fn(fresh_name, ret.subst(name, exp))
     }
   }
@@ -40,7 +39,7 @@ export class Fn extends Exp {
     const pi = expect(ctx, t, Sem.PiValue)
     const arg = new Sem.NotYetValue(pi.arg_t, new Sem.VarNeutral(fresh_name))
     const ret_t = pi.ret_t_cl.apply(arg)
-    const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
+    const ret = this.ret.subst(this.name, new Sem.Var(fresh_name))
     const ret_core = check(ctx.extend(fresh_name, pi.arg_t), ret, ret_t)
     return new Sem.FnCore(fresh_name, ret_core)
   }
