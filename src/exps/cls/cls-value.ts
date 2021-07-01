@@ -94,7 +94,13 @@ export class ClsNilValue extends ClsValue {
   }
 
   apply(arg: Value): Value {
-    throw new Error("TODO")
+    throw new Trace(
+      [
+        `I meet the end of ClsValue`,
+        `I can not apply arg to it anymore`,
+        `arg class name: ${arg.constructor.name}`,
+      ].join("\n") + "\n"
+    )
   }
 }
 
