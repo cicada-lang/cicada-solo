@@ -45,20 +45,14 @@ export class AbsurdInd extends Core {
           )
         )
       } else {
-        throw new InternalError(
-          [
-            `I expect the type of the neutral to be an instance of AbsurdValue`,
-            `but the constructor name I meet is: ${t.constructor.name}`,
-          ].join("\n") + "\n"
-        )
+        throw InternalError.wrong_target_t(target.t, {
+          expected: [Cores.AbsurdValue],
+        })
       }
     } else {
-      throw new InternalError(
-        [
-          `I expect the target to be an instance of NotYetValue`,
-          `but the constructor name I meet is: ${target.constructor.name}`,
-        ].join("\n") + "\n"
-      )
+      throw InternalError.wrong_target(target, {
+        expected: [Cores.NotYetValue],
+      })
     }
   }
 }

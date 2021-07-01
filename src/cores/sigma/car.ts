@@ -33,20 +33,14 @@ export class Car extends Core {
       if (t instanceof Cores.SigmaValue) {
         return new Cores.NotYetValue(t.car_t, new Cores.CarNeutral(neutral))
       } else {
-        throw new InternalError(
-          [
-            `I expect the type of the neutral to be an instance of SigmaValue`,
-            `but the constructor name I meet is: ${t.constructor.name}`,
-          ].join("\n") + "\n"
-        )
+        throw InternalError.wrong_target_t(target.t, {
+          expected: [Cores.SigmaValue],
+        })
       }
     } else {
-      throw new InternalError(
-        [
-          `I expect the target to be an instance of ConsValue`,
-          `but the constructor name I meet is: ${target.constructor.name}`,
-        ].join("\n") + "\n"
-      )
+      throw InternalError.wrong_target(target, {
+        expected: [Cores.ConsValue],
+      })
     }
   }
 }

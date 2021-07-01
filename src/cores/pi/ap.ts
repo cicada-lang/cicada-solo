@@ -53,20 +53,14 @@ export class Ap extends Core {
           new Cores.ApNeutral(neutral, new Normal(t.arg_t, arg))
         )
       } else {
-        throw new InternalError(
-          [
-            `I expect the type of the neutral to be an instance of PiValue`,
-            `but the constructor name I meet is: ${t.constructor.name}`,
-          ].join("\n") + "\n"
-        )
+        throw InternalError.wrong_target_t(target.t, {
+          expected: [Cores.PiValue],
+        })
       }
     } else {
-      throw new InternalError(
-        [
-          `I expect the target to be an instance of FnValue or ClsValue`,
-          `but the constructor name I meet is: ${target.constructor.name}`,
-        ].join("\n") + "\n"
-      )
+      throw InternalError.wrong_target(target, {
+        expected: [Cores.FnValue, Cores.ClsNilValue, Cores.ClsConsValue],
+      })
     }
   }
 }

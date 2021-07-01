@@ -85,20 +85,14 @@ export class ListInd extends Core {
           )
         )
       } else {
-        throw new InternalError(
-          [
-            `I expect the type of the neutral to be an instance of ListValue`,
-            `but the constructor name I meet is: ${t.constructor.name}`,
-          ].join("\n") + "\n"
-        )
+        throw InternalError.wrong_target_t(target.t, {
+          expected: [Cores.ListValue],
+        })
       }
     } else {
-      throw new InternalError(
-        [
-          `I expect the target to be an instance of NilValue or LiValue`,
-          `but the constructor name I meet is: ${target.constructor.name}`,
-        ].join("\n") + "\n"
-      )
+      throw InternalError.wrong_target(target, {
+        expected: [Cores.NilValue, Cores.LiValue],
+      })
     }
   }
 }

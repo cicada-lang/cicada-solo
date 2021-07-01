@@ -40,12 +40,9 @@ export class Dot extends Core {
               new Cores.DotNeutral(neutral, name)
             )
           } else {
-            throw new InternalError(
-              [
-                `I expect the type of the neutral to be an instance of ClsValue`,
-                `but the constructor name I meet is: ${t.constructor.name}`,
-              ].join("\n") + "\n"
-            )
+            throw InternalError.wrong_target_t(t, {
+              expected: [Cores.ClsNilValue, Cores.ClsConsValue],
+            })
           }
         },
       ],
