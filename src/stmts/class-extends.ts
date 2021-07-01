@@ -1,6 +1,6 @@
 import { Stmt } from "../stmt"
 import { Module } from "../module"
-import { infer } from "../infer"
+import { infer } from "../exp"
 import { evaluate } from "../core"
 import * as Exps from "../exps"
 

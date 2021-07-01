@@ -1,7 +1,7 @@
 import { Stmt } from "../stmt"
 import { Module } from "../module"
 import { Exp } from "../exp"
-import { infer } from "../infer"
+import { infer } from "../exp"
 import { evaluate } from "../core"
 import { Trace } from "../errors"
 

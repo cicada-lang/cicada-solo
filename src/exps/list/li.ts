@@ -2,7 +2,7 @@ import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../check"
-import { infer } from "../../infer"
+import { infer } from "../../exp"
 import { Value } from "../../value"
 import * as Cores from "../../cores"
 
