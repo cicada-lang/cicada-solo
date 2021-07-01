@@ -15,7 +15,7 @@ export class AbsurdIndNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Sem.AbsurdInd(
+    return new Sem.AbsurdIndCore(
       this.target.readback_neutral(ctx),
       this.motive.readback_normal(ctx)
     )

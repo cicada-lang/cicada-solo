@@ -6,7 +6,7 @@ import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
 import * as Sem from "../../sem"
 
-export class AbsurdInd extends Core {
+export class AbsurdIndCore extends Core {
   target: Core
   motive: Core
 
@@ -17,7 +17,7 @@ export class AbsurdInd extends Core {
   }
 
   evaluate(env: Env): Value {
-    return AbsurdInd.apply(
+    return AbsurdIndCore.apply(
       evaluate(env, this.target),
       evaluate(env, this.motive)
     )

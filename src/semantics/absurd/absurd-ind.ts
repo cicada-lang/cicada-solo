@@ -40,7 +40,7 @@ export class AbsurdInd extends Exp {
 
     return {
       t: evaluate(ctx.to_env(), motive_core),
-      core: new Sem.AbsurdInd(target_core, motive_core),
+      core: new Sem.AbsurdIndCore(target_core, motive_core),
     }
   }
 
