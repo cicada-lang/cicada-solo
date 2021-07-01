@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { check } from "../../check"
 import { expect } from "../../expect"
-import { evaluate } from "../../evaluate"
+import { evaluate } from "../../core"
 import * as Cores from "../../cores"
 
 export class Inr extends Exp {

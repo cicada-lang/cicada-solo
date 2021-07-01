@@ -1,11 +1,16 @@
+- [refactor file structure] move `infer` to `exp/`
+- [refactor file structure] move `check` to `exp/`
+- [refactor file structure] move `conversion` to `value/`
+- [refactor file structure] move `readback` to `value/`
+
+- [refactor file structure] TODO
+
 - `ClsFulfilledValue`
 
 - [fulfilling type] `cores/ap` -- `apply` for `ClsValue`
 - [fulfilling type] `exps/ap` -- `infer` for `ClsValue`
 
 - [syntax] class field -- only use flower for fn related cases
-
-- [refactoring] for better dir structure
 
 # scope
 

@@ -2,7 +2,7 @@ import { Stmt } from "../stmt"
 import { Module } from "../module"
 import { Exp } from "../exp"
 import { infer } from "../infer"
-import { evaluate } from "../evaluate"
+import { evaluate } from "../core"
 import { readback } from "../readback"
 import * as Cores from "../cores"
 

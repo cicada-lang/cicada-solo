@@ -1,7 +1,7 @@
 import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { evaluate } from "../../evaluate"
+import { evaluate } from "../../core"
 import * as Cores from "../../cores"
 
 export class Cons extends Core {
