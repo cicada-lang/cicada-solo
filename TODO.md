@@ -1,6 +1,6 @@
 - `ClsFulfilledValue`
 
-- [fulfilling type] `cores/ap` -- `apply` for `ClsValue`
+- [fulfilling type] `exps/ap-core` -- `apply` for `ClsValue`
 - [fulfilling type] `exps/ap` -- `infer` for `ClsValue`
 
 - [syntax] class field -- only use flower for fn related cases
