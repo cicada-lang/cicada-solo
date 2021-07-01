@@ -16,31 +16,6 @@ export abstract class Cls extends Exp {
   abstract infer(ctx: Ctx): { t: Value; core: Core }
 }
 
-export class ClsNil extends Cls {
-  free_names(bound_names: Set<string>): Set<string> {
-    return new Set()
-  }
-
-  subst(name: string, exp: Exp): Cls {
-    return this
-  }
-
-  fields_repr(): Array<string> {
-    return []
-  }
-
-  repr(): string {
-    return `class {}`
-  }
-
-  infer(ctx: Ctx): { t: Value; core: Core } {
-    return {
-      t: new Exps.TypeValue(),
-      core: new Exps.ClsNilCore(),
-    }
-  }
-}
-
 export class ClsCons extends Cls {
   field_name: string
   local_name: string
