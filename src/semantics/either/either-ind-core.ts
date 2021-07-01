@@ -12,7 +12,7 @@ import {
   either_ind_motive_t,
   either_ind_base_left_t,
   either_ind_base_right_t,
-} from "./either-ind-exp"
+} from "./either-ind"
 
 export class EitherInd extends Core {
   target: Core

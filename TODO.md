@@ -1,5 +1,4 @@
 - [refactor file structure] add `Core` postfix to core classes
-- [refactor file structure] add `Exp` postfix to exp classes
 
 - `ClsFulfilledValue`
 

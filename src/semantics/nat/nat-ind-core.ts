@@ -8,7 +8,7 @@ import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
 import * as Sem from "../../sem"
-import { nat_ind_motive_t, nat_ind_step_t } from "./nat-ind-exp"
+import { nat_ind_motive_t, nat_ind_step_t } from "./nat-ind"
 
 export class NatInd extends Core {
   target: Core
