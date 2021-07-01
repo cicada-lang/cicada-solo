@@ -1,3 +1,5 @@
+- merge `Sem` namespace with `Exps` namespace
+
 - `ClsFulfilledValue`
 
 - [fulfilling type] `cores/ap` -- `apply` for `ClsValue`
