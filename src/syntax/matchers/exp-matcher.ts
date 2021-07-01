@@ -1,7 +1,7 @@
 import pt from "@cicada-lang/partech"
 import { Exp } from "../../exp"
-import { nat_from_number } from "../../semantics/nat/nat-util"
-import * as Sem from "../../sem"
+import { nat_from_number } from "../../exps/nat/nat-util"
+import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
@@ -11,7 +11,7 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
     .reverse()
     .flatMap(({ names, exp }) => names.map((name) => ({ name, exp })).reverse())
     .reduce(
-      (result, { name, exp }) => new Sem.Pi(name, exp, result),
+      (result, { name, exp }) => new Exps.Pi(name, exp, result),
       exp_matcher(ret_t)
     )
 }
@@ -23,7 +23,7 @@ export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
     .reverse()
     .flatMap(({ names, exp }) => names.map((name) => ({ name, exp })).reverse())
     .reduce(
-      (result, { name, exp }) => new Sem.Sigma(name, exp, result),
+      (result, { name, exp }) => new Exps.Sigma(name, exp, result),
       exp_matcher(cdr_t)
     )
 }
@@ -38,63 +38,63 @@ export function exp_matcher(tree: pt.Tree): Exp {
 
 export function operator_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
-    "operator:var": ({ name }) => new Sem.Var(pt.str(name)),
+    "operator:var": ({ name }) => new Exps.Var(pt.str(name)),
     "operator:ap": ({ target, args }) =>
       pt.matchers
         .one_or_more_matcher(args)
         .flatMap((arg) => exps_matcher(arg))
         .reduce(
-          (result, exp) => new Sem.Ap(result, exp),
+          (result, exp) => new Exps.Ap(result, exp),
           operator_matcher(target)
         ),
     "operator:fn": ({ names, ret }) =>
       names_matcher(names)
         .reverse()
-        .reduce((result, name) => new Sem.Fn(name, result), exp_matcher(ret)),
-    "operator:car": ({ target }) => new Sem.Car(exp_matcher(target)),
-    "operator:cdr": ({ target }) => new Sem.Cdr(exp_matcher(target)),
+        .reduce((result, name) => new Exps.Fn(name, result), exp_matcher(ret)),
+    "operator:car": ({ target }) => new Exps.Car(exp_matcher(target)),
+    "operator:cdr": ({ target }) => new Exps.Cdr(exp_matcher(target)),
     "operator:dot_field": ({ target, name }) =>
-      new Sem.Dot(operator_matcher(target), pt.str(name)),
+      new Exps.Dot(operator_matcher(target), pt.str(name)),
     "operator:dot_method": ({ target, name, args }) =>
       pt.matchers
         .one_or_more_matcher(args)
         .flatMap((arg) => exps_matcher(arg))
         .reduce(
-          (result, exp) => new Sem.Ap(result, exp),
-          new Sem.Dot(operator_matcher(target), pt.str(name))
+          (result, exp) => new Exps.Ap(result, exp),
+          new Exps.Dot(operator_matcher(target), pt.str(name))
         ),
     "operator:nat_ind": ({ target, motive, base, step }) =>
-      new Sem.NatInd(
+      new Exps.NatInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base),
         exp_matcher(step)
       ),
     "operator:nat_rec": ({ target, base, step }) =>
-      new Sem.NatRec(
+      new Exps.NatRec(
         exp_matcher(target),
         exp_matcher(base),
         exp_matcher(step)
       ),
     "operator:list_ind": ({ target, motive, base, step }) =>
-      new Sem.ListInd(
+      new Exps.ListInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base),
         exp_matcher(step)
       ),
     "operator:list_rec": ({ target, base, step }) =>
-      new Sem.ListRec(
+      new Exps.ListRec(
         exp_matcher(target),
         exp_matcher(base),
         exp_matcher(step)
       ),
     "operator:vector_head": ({ target }) =>
-      new Sem.VectorHead(exp_matcher(target)),
+      new Exps.VectorHead(exp_matcher(target)),
     "operator:vector_tail": ({ target }) =>
-      new Sem.VectorTail(exp_matcher(target)),
+      new Exps.VectorTail(exp_matcher(target)),
     "operator:vector_ind": ({ length, target, motive, base, step }) =>
-      new Sem.VectorInd(
+      new Exps.VectorInd(
         exp_matcher(length),
         exp_matcher(target),
         exp_matcher(motive),
@@ -102,24 +102,24 @@ export function operator_matcher(tree: pt.Tree): Exp {
         exp_matcher(step)
       ),
     "operator:replace": ({ target, motive, base }) =>
-      new Sem.Replace(
+      new Exps.Replace(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base)
       ),
     "operator:absurd_ind": ({ target, motive }) =>
-      new Sem.AbsurdInd(exp_matcher(target), exp_matcher(motive)),
+      new Exps.AbsurdInd(exp_matcher(target), exp_matcher(motive)),
     "operator:either_ind": ({ target, motive, base_left, base_right }) =>
-      new Sem.EitherInd(
+      new Exps.EitherInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base_left),
         exp_matcher(base_right)
       ),
     "operator:the": ({ t, exp }) =>
-      new Sem.The(exp_matcher(t), exp_matcher(exp)),
+      new Exps.The(exp_matcher(t), exp_matcher(exp)),
     "operator:is": ({ t, exp }) =>
-      new Sem.The(exp_matcher(t), exp_matcher(exp)),
+      new Exps.The(exp_matcher(t), exp_matcher(exp)),
   })(tree)
 }
 
@@ -128,7 +128,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:pi": pi_handler,
     "operand:sigma": sigma_handler,
     "operand:cons": ({ car, cdr }) =>
-      new Sem.Cons(exp_matcher(car), exp_matcher(cdr)),
+      new Exps.Cons(exp_matcher(car), exp_matcher(cdr)),
     "operand:cls": ({ entries }) =>
       pt.matchers
         .zero_or_more_matcher(entries)
@@ -136,16 +136,16 @@ export function operand_matcher(tree: pt.Tree): Exp {
         .reverse()
         .reduce(
           (rest_t, entry) =>
-            new Sem.ClsCons(
+            new Exps.ClsCons(
               entry.field_name,
               entry.field_name,
               entry.field_t,
               rest_t
             ),
-          new Sem.ClsNil()
+          new Exps.ClsNil()
         ),
     "operand:ext": ({ parent, entries }) =>
-      new Sem.Ext(
+      new Exps.Ext(
         operator_matcher(parent),
         pt.matchers
           .zero_or_more_matcher(entries)
@@ -153,22 +153,22 @@ export function operand_matcher(tree: pt.Tree): Exp {
           .reverse()
           .reduce(
             (rest_t, entry) =>
-              new Sem.ClsCons(
+              new Exps.ClsCons(
                 entry.field_name,
                 entry.field_name,
                 entry.field_t,
                 rest_t
               ),
-            new Sem.ClsNil()
+            new Exps.ClsNil()
           )
       ),
     "operand:obj": ({ properties }) =>
-      new Sem.Obj(
+      new Exps.Obj(
         pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
       ),
-    "operand:nat": () => new Sem.Nat(),
-    "operand:zero": () => new Sem.Zero(),
-    "operand:add1": ({ prev }) => new Sem.Add1(exp_matcher(prev)),
+    "operand:nat": () => new Exps.Nat(),
+    "operand:zero": () => new Exps.Zero(),
+    "operand:add1": ({ prev }) => new Exps.Add1(exp_matcher(prev)),
     "operand:number": ({ value }, { span }) => {
       const n = Number.parseInt(pt.str(value))
       if (Number.isNaN(n)) {
@@ -180,60 +180,60 @@ export function operand_matcher(tree: pt.Tree): Exp {
         return nat_from_number(n)
       }
     },
-    "operand:list": ({ elem_t }) => new Sem.List(exp_matcher(elem_t)),
-    "operand:nil": () => new Sem.Nil(),
-    "operand:nil_sugar": () => new Sem.Nil(),
+    "operand:list": ({ elem_t }) => new Exps.List(exp_matcher(elem_t)),
+    "operand:nil": () => new Exps.Nil(),
+    "operand:nil_sugar": () => new Exps.Nil(),
     "operand:li": ({ head, tail }) =>
-      new Sem.Li(exp_matcher(head), exp_matcher(tail)),
+      new Exps.Li(exp_matcher(head), exp_matcher(tail)),
     "operand:li_sugar": ({ exps }) =>
       exps_matcher(exps)
         .reverse()
-        .reduce((list, exp) => new Sem.Li(exp, list), new Sem.Nil()),
+        .reduce((list, exp) => new Exps.Li(exp, list), new Exps.Nil()),
     "operand:vector": ({ elem_t, length }) =>
-      new Sem.Vector(exp_matcher(elem_t), exp_matcher(length)),
-    "operand:vecnil": () => new Sem.Vecnil(),
+      new Exps.Vector(exp_matcher(elem_t), exp_matcher(length)),
+    "operand:vecnil": () => new Exps.Vecnil(),
     "operand:vec": ({ head, tail }) =>
-      new Sem.Vec(exp_matcher(head), exp_matcher(tail)),
+      new Exps.Vec(exp_matcher(head), exp_matcher(tail)),
     "operand:vec_sugar": ({ exps }) =>
       exps_matcher(exps)
         .reverse()
-        .reduce((vector, exp) => new Sem.Vec(exp, vector), new Sem.Vecnil()),
+        .reduce((vector, exp) => new Exps.Vec(exp, vector), new Exps.Vecnil()),
     "operand:equal": ({ t, from, to }) =>
-      new Sem.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
-    "operand:same": () => new Sem.Same(),
-    "operand:trivial": () => new Sem.Trivial(),
-    "operand:sole": () => new Sem.Sole(),
-    "operand:absurd": () => new Sem.Absurd(),
-    "operand:str": () => new Sem.Str(),
+      new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
+    "operand:same": () => new Exps.Same(),
+    "operand:trivial": () => new Exps.Trivial(),
+    "operand:sole": () => new Exps.Sole(),
+    "operand:absurd": () => new Exps.Absurd(),
+    "operand:str": () => new Exps.Str(),
     "operand:quote": ({ value }) =>
-      new Sem.Quote(pt.trim_boundary(pt.str(value), 1)),
+      new Exps.Quote(pt.trim_boundary(pt.str(value), 1)),
     "operand:either": ({ left_t, right_t }) =>
-      new Sem.Either(exp_matcher(left_t), exp_matcher(right_t)),
-    "operand:inl": ({ left }) => new Sem.Inl(exp_matcher(left)),
-    "operand:inr": ({ right }) => new Sem.Inr(exp_matcher(right)),
-    "operand:type": () => new Sem.Type(),
+      new Exps.Either(exp_matcher(left_t), exp_matcher(right_t)),
+    "operand:inl": ({ left }) => new Exps.Inl(exp_matcher(left)),
+    "operand:inr": ({ right }) => new Exps.Inr(exp_matcher(right)),
+    "operand:type": () => new Exps.Type(),
   })(tree)
 }
 
 export function declaration_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "declaration:let": ({ name, exp, ret }) =>
-      new Sem.Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),
+      new Exps.Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),
     "declaration:let_the": ({ name, t, exp, ret }) =>
-      new Sem.Let(
+      new Exps.Let(
         pt.str(name),
-        new Sem.The(exp_matcher(t), exp_matcher(exp)),
+        new Exps.The(exp_matcher(t), exp_matcher(exp)),
         exp_matcher(ret)
       ),
     "declaration:let_fn": ({ name, bindings, ret_t, ret, body }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
         .flatMap(({ names }) => names.reverse())
-        .reduce((fn, name) => new Sem.Fn(name, fn), exp_matcher(ret))
+        .reduce((fn, name) => new Exps.Fn(name, fn), exp_matcher(ret))
 
-      return new Sem.Let(
+      return new Exps.Let(
         pt.str(name),
-        new Sem.The(pi_handler({ bindings, ret_t }), fn),
+        new Exps.The(pi_handler({ bindings, ret_t }), fn),
         exp_matcher(body)
       )
     },
@@ -263,7 +263,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
       const fn = bindings_matcher(bindings)
         .reverse()
         .flatMap(({ names }) => names.reverse())
-        .reduce((fn, name) => new Sem.Fn(name, fn), exp_matcher(ret))
+        .reduce((fn, name) => new Exps.Fn(name, fn), exp_matcher(ret))
 
       return {
         field_name: pt.str(name),
@@ -323,14 +323,14 @@ export function exps_matcher(tree: pt.Tree): Array<Exp> {
   })(tree)
 }
 
-export function property_matcher(tree: pt.Tree): Sem.Prop {
-  return pt.matcher<Sem.Prop>({
+export function property_matcher(tree: pt.Tree): Exps.Prop {
+  return pt.matcher<Exps.Prop>({
     "property:field_shorthand": ({ name }) =>
-      new Sem.FieldShorthandProp(pt.str(name)),
+      new Exps.FieldShorthandProp(pt.str(name)),
     "property:field": ({ name, exp }) =>
-      new Sem.FieldProp(pt.str(name), exp_matcher(exp)),
+      new Exps.FieldProp(pt.str(name), exp_matcher(exp)),
     "property:method": ({ name, bindings, ret_t }) =>
-      new Sem.FieldProp(pt.str(name), pi_handler({ bindings, ret_t })),
-    "property:spread": ({ exp }) => new Sem.SpreadProp(exp_matcher(exp)),
+      new Exps.FieldProp(pt.str(name), pi_handler({ bindings, ret_t })),
+    "property:spread": ({ exp }) => new Exps.SpreadProp(exp_matcher(exp)),
   })(tree)
 }

@@ -1,5 +1,3 @@
-- rename `Sem` namespace to `Exps`
-
 - `ClsFulfilledValue`
 
 - [fulfilling type] `cores/ap` -- `apply` for `ClsValue`

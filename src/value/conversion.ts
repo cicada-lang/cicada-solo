@@ -3,7 +3,7 @@ import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { readback } from "../value"
 import { Trace } from "../errors"
-import * as Sem from "../sem"
+import * as Exps from "../exps"
 import * as ut from "../ut"
 
 export function conversion(ctx: Ctx, t: Value, x: Value, y: Value): boolean {
@@ -31,7 +31,7 @@ export function check_conversion(
   }
 ): void {
   if (!conversion(ctx, t, from, to)) {
-    const t_repr = readback(ctx, new Sem.TypeValue(), t).repr()
+    const t_repr = readback(ctx, new Exps.TypeValue(), t).repr()
     const from_repr = readback(ctx, t, from).repr()
     const from_description = opts.description?.from || ""
     const to_repr = readback(ctx, t, to).repr()

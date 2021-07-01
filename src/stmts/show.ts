@@ -4,7 +4,7 @@ import { Exp } from "../exp"
 import { infer } from "../exp"
 import { evaluate } from "../core"
 import { readback } from "../value"
-import * as Sem from "../sem"
+import * as Exps from "../exps"
 
 export class Show implements Stmt {
   exp: Exp
@@ -18,7 +18,7 @@ export class Show implements Stmt {
     const t = inferred.t
     const value = evaluate(mod.env, inferred.core)
     const value_repr = readback(mod.ctx, t, value).repr()
-    const t_repr = readback(mod.ctx, new Sem.TypeValue(), t).repr()
+    const t_repr = readback(mod.ctx, new Exps.TypeValue(), t).repr()
     const output = `${value_repr}: ${t_repr} `
     mod.enter(this, { output })
   }

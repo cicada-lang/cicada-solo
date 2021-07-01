@@ -2,7 +2,7 @@ import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { Trace } from "../errors"
 import { readback } from "../value"
-import * as Sem from "../sem"
+import * as Exps from "../exps"
 
 type Class<T> = new (...args: any[]) => T
 
@@ -11,7 +11,7 @@ export function expect<T>(ctx: Ctx, value: Value, TheClass: Class<T>): T {
     return value
   } else {
     try {
-      const exp = readback(ctx, new Sem.TypeValue(), value)
+      const exp = readback(ctx, new Exps.TypeValue(), value)
       const message =
         `I see unexpected value class: ${value.constructor.name},\n` +
         `which reads back to exp: ${exp.repr()},\n` +
