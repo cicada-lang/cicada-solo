@@ -84,7 +84,10 @@ export function nat_ind_step_t(motive: Value): Value {
       new Sem.Pi(
         "almost",
         new Sem.Ap(new Sem.VarCore("motive"), new Sem.VarCore("prev")),
-        new Sem.Ap(new Sem.VarCore("motive"), new Sem.Add1(new Sem.VarCore("prev")))
+        new Sem.Ap(
+          new Sem.VarCore("motive"),
+          new Sem.Add1(new Sem.VarCore("prev"))
+        )
       )
     )
   )

@@ -82,7 +82,11 @@ function list_rec_step_t(base_t: Value, elem_t: Value): Value {
       new Sem.Pi(
         "tail",
         new Sem.List(new Sem.VarCore("elem_t")),
-        new Sem.Pi("almost", new Sem.VarCore("base_t"), new Sem.VarCore("base_t"))
+        new Sem.Pi(
+          "almost",
+          new Sem.VarCore("base_t"),
+          new Sem.VarCore("base_t")
+        )
       )
     )
   )
