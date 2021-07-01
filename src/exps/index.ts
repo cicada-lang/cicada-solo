@@ -116,7 +116,6 @@ export * from "./str/quote-core"
 export * from "./str/quote-value"
 
 export * from "./cls/cls"
-export * from "./cls/cls-nil"
 export * from "./cls/ext"
 export * from "./cls/cls-core"
 export * from "./cls/cls-value"
