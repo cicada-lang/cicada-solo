@@ -9,6 +9,7 @@ import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
 import { Trace } from "../../errors"
+import { InternalError } from "../../errors"
 import * as Cores from "../../cores"
 import {
   vector_ind_motive_t,
@@ -78,53 +79,59 @@ export class VectorInd extends Core {
     base: Value,
     step: Value
   ): Value {
-    return Value.match(target, [
-      [Cores.VecnilValue, (_: Cores.VecnilValue) => base],
-      [
-        Cores.VecValue,
-        ({ head, tail }: Cores.VecValue) => {
-          const prev = Value.match(length, [
-            [Cores.Add1Value, ({ prev }: Cores.Add1Value) => prev],
-          ])
+    if (target instanceof Cores.VecnilValue) {
+      return base
+    } else if (target instanceof Cores.VecValue) {
+      const { head, tail } = target
 
-          return Cores.Ap.apply(
-            Cores.Ap.apply(
-              Cores.Ap.apply(Cores.Ap.apply(step, length), head),
-              tail
-            ),
-            Cores.VectorInd.apply(prev, tail, motive, base, step)
+      if (length instanceof Cores.Add1Value) {
+        return Cores.Ap.apply(
+          Cores.Ap.apply(
+            Cores.Ap.apply(Cores.Ap.apply(step, length), head),
+            tail
+          ),
+          Cores.VectorInd.apply(length.prev, tail, motive, base, step)
+        )
+      } else {
+        throw new InternalError(
+          [
+            `To apply vector_ind`,
+            `I expect the length to be Add1Value`,
+            `but the given class name is: ${length.constructor.name}`,
+          ].join("\n") + "\n"
+        )
+      }
+    } else if (target instanceof Cores.NotYetValue) {
+      const { t, neutral } = target
+
+      if (t instanceof Cores.VectorValue) {
+        const elem_t = t.elem_t
+        const length_t = new Cores.NatValue()
+        const motive_t = vector_ind_motive_t(elem_t)
+        const base_t = Cores.Ap.apply(
+          Cores.Ap.apply(motive, new Cores.ZeroValue()),
+          new Cores.VecnilValue()
+        )
+        const step_t = vector_ind_step_t(motive, elem_t)
+        return new Cores.NotYetValue(
+          Cores.Ap.apply(Cores.Ap.apply(motive, length), target),
+          new Cores.VectorIndNeutral(
+            new Normal(length_t, length),
+            neutral,
+            new Normal(motive_t, motive),
+            new Normal(base_t, base),
+            new Normal(step_t, step)
           )
-        },
-      ],
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          Value.match(t, [
-            [
-              Cores.VectorValue,
-              (vector_t: Cores.VectorValue) => {
-                const elem_t = vector_t.elem_t
-                const length_t = new Cores.NatValue()
-                const motive_t = vector_ind_motive_t(elem_t)
-                const base_t = Cores.Ap.apply(
-                  Cores.Ap.apply(motive, new Cores.ZeroValue()),
-                  new Cores.VecnilValue()
-                )
-                const step_t = vector_ind_step_t(motive, elem_t)
-                return new Cores.NotYetValue(
-                  Cores.Ap.apply(Cores.Ap.apply(motive, length), target),
-                  new Cores.VectorIndNeutral(
-                    new Normal(length_t, length),
-                    neutral,
-                    new Normal(motive_t, motive),
-                    new Normal(base_t, base),
-                    new Normal(step_t, step)
-                  )
-                )
-              },
-            ],
-          ]),
-      ],
-    ])
+        )
+      } else {
+        throw InternalError.wrong_target_t(target.t, {
+          expected: [Cores.VectorValue],
+        })
+      }
+    } else {
+      throw InternalError.wrong_target(target, {
+        expected: [Cores.VecnilValue, Cores.VecValue],
+      })
+    }
   }
 }

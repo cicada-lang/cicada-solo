@@ -1,6 +1,4 @@
-- quit using `Value.match` -- cores/vector/vector-ind.ts
-
-- remove `Value.match`
+- remove `Value.match` -- because not like `instanceof`, it can not handle subclass
 
 - `ClsFulfilledValue`
 
