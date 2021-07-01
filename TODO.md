@@ -1,9 +1,7 @@
+- [refactor file structure] `values` as renaming and index
+
 - [refactor file structure] add `Core` postfix to core classes
 - [refactor file structure] add `Exp` postfix to exp classes
-
-- [refactor file structure] `exps` as renaming and index
-- [refactor file structure] `cores` as renaming and index
-- [refactor file structure] `values` as renaming and index
 
 - `ClsFulfilledValue`
 

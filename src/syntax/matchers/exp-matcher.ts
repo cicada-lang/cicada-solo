@@ -1,6 +1,6 @@
 import pt from "@cicada-lang/partech"
 import { Exp } from "../../exp"
-import { nat_from_number } from "../../cores/nat/nat-util"
+import { nat_from_number } from "../../semantics/nat/nat-util"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
