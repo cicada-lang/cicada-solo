@@ -2,6 +2,8 @@ import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import { readback } from "../../value"
+import { Closure } from "../closure"
+import * as ut from "../../ut"
 import * as Exps from "../../exps"
 
 export class EitherValue extends Value {

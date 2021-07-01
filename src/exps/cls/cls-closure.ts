@@ -1,5 +1,7 @@
+import { Core } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
+import { evaluate } from "../../core"
 import * as Exps from "../../exps"
 
 export class ClsClosure {
