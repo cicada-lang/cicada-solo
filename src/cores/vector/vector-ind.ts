@@ -14,7 +14,7 @@ import * as Cores from "../../cores"
 import {
   vector_ind_motive_t,
   vector_ind_step_t,
-} from "../../exps/vector/vector-ind"
+} from "../../exps/vector/vector-ind-exp"
 
 export class VectorInd extends Core {
   length: Core
