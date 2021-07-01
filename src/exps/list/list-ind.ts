@@ -5,7 +5,7 @@ import { Env } from "../../env"
 import { evaluate } from "../../core"
 import { check } from "../../exp"
 import { infer } from "../../exp"
-import { expect } from "../../expect"
+import { expect } from "../../value"
 import { Value } from "../../value"
 import * as Cores from "../../cores"
 
