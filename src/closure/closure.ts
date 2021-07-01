@@ -1,7 +1,7 @@
 import { Core } from "../core"
 import { Env } from "../env"
 import { Value } from "../value"
-import { evaluate } from "../exp"
+import { evaluate } from "../evaluate"
 
 export class Closure {
   env: Env

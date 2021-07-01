@@ -1,5 +1,5 @@
 import { Core, AlphaCtx } from "../../core"
-import { evaluate } from "../../exp"
+import { evaluate } from "../../evaluate"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { Normal } from "../../normal"
