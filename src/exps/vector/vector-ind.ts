@@ -6,7 +6,7 @@ import { infer } from "../../exp"
 import { check } from "../../exp"
 import { expect } from "../../expect"
 import { evaluate } from "../../core"
-import { check_conversion } from "../../conversion"
+import { check_conversion } from "../../value"
 import { Value } from "../../value"
 import * as Cores from "../../cores"
 
