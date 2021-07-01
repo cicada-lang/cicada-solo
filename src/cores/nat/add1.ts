@@ -1,6 +1,6 @@
 import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
-import { evaluate } from "../../evaluate"
+import { evaluate } from "../../exp"
 import { Value } from "../../value"
 import { nat_to_number } from "./nat-util"
 import * as Cores from "../../cores"

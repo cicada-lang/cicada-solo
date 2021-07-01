@@ -1,7 +1,7 @@
 import { Core, AlphaCtx } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import { evaluate } from "../../evaluate"
+import { evaluate } from "../../exp"
 import { check } from "../../check"
 import { infer } from "../../infer"
 import { expect } from "../../expect"

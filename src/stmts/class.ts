@@ -1,7 +1,7 @@
 import { Stmt } from "../stmt"
 import { Module } from "../module"
 import { infer } from "../infer"
-import { evaluate } from "../evaluate"
+import { evaluate } from "../exp"
 import * as Exps from "../exps"
 
 export class Class implements Stmt {

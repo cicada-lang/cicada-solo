@@ -2,7 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
-import { evaluate } from "../../evaluate"
+import { evaluate } from "../../exp"
 import * as Cores from "../../cores"
 
 export class Pi extends Core {

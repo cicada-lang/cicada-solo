@@ -1,7 +1,7 @@
 import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { evaluate } from "../../evaluate"
+import { evaluate } from "../../exp"
 import * as ut from "../../ut"
 import * as Cores from "../../cores"
 
