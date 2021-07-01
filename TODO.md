@@ -1,8 +1,10 @@
+- quit using `Value.match` -- cores/equal/replace.ts
+
 - quit using `Value.match` -- cores/vector/vector-ind.ts
 - quit using `Value.match` -- cores/vector/vector-head.ts
-- quit using `Value.match` -- cores/either/either-ind.ts
 - quit using `Value.match` -- cores/vector/vector-tail.ts
-- quit using `Value.match` -- cores/equal/replace.ts
+
+
 
 - remove `Value.match`
 

@@ -6,6 +6,7 @@ import { check } from "../../check"
 import { Value } from "../../value"
 import { Closure } from "../../closure"
 import { Normal } from "../../normal"
+import { InternalError } from "../../errors"
 import * as Cores from "../../cores"
 import {
   either_ind_motive_t,
@@ -64,44 +65,35 @@ export class EitherInd extends Core {
     base_left: Value,
     base_right: Value
   ): Value {
-    return Value.match(target, [
-      [
-        Cores.InlValue,
-        ({ left }: Cores.InlValue) => Cores.Ap.apply(base_left, left),
-      ],
-      [
-        Cores.InrValue,
-        ({ right }: Cores.InrValue) => Cores.Ap.apply(base_right, right),
-      ],
-      [
-        Cores.NotYetValue,
-        ({ t, neutral }: Cores.NotYetValue) =>
-          Value.match(t, [
-            [
-              Cores.EitherValue,
-              (either_t: Cores.EitherValue) => {
-                const motive_t = either_ind_motive_t(either_t)
-                const base_left_t = either_ind_base_left_t(
-                  either_t.left_t,
-                  motive
-                )
-                const base_right_t = either_ind_base_right_t(
-                  either_t.right_t,
-                  motive
-                )
-                return new Cores.NotYetValue(
-                  Cores.Ap.apply(motive, target),
-                  new Cores.EitherIndNeutral(
-                    neutral,
-                    new Normal(motive_t, motive),
-                    new Normal(base_left_t, base_left),
-                    new Normal(base_right_t, base_right)
-                  )
-                )
-              },
-            ],
-          ]),
-      ],
-    ])
+    if (target instanceof Cores.InlValue) {
+      return Cores.Ap.apply(base_left, target.left)
+    } else if (target instanceof Cores.InrValue) {
+      return Cores.Ap.apply(base_right, target.right)
+    } else if (target instanceof Cores.NotYetValue) {
+      const { t, neutral } = target
+
+      if (t instanceof Cores.EitherValue) {
+        const motive_t = either_ind_motive_t(t)
+        const base_left_t = either_ind_base_left_t(t.left_t, motive)
+        const base_right_t = either_ind_base_right_t(t.right_t, motive)
+        return new Cores.NotYetValue(
+          Cores.Ap.apply(motive, target),
+          new Cores.EitherIndNeutral(
+            neutral,
+            new Normal(motive_t, motive),
+            new Normal(base_left_t, base_left),
+            new Normal(base_right_t, base_right)
+          )
+        )
+      } else {
+        throw InternalError.wrong_target_t(target.t, {
+          expected: [Cores.EitherValue],
+        })
+      }
+    } else {
+      throw InternalError.wrong_target(target, {
+        expected: [Cores.InlValue, Cores.InrValue],
+      })
+    }
   }
 }
