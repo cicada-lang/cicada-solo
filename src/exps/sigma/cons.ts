@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { expect } from "../../expect"
 import { Value } from "../../value"
 import { evaluate } from "../../core"
-import { check } from "../../check"
+import { check } from "../../exp"
 import * as Cores from "../../cores"
 
 export class Cons extends Exp {

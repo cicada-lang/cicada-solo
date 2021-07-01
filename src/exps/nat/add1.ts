@@ -1,7 +1,7 @@
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { check } from "../../check"
+import { check } from "../../exp"
 import { Value } from "../../value"
 import { nat_to_number } from "./nat-util"
 import * as Cores from "../../cores"

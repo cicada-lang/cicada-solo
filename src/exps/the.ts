@@ -3,7 +3,7 @@ import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import { evaluate } from "../core"
-import { check } from "../check"
+import { check } from "../exp"
 import * as Cores from "../cores"
 
 export class The extends Exp {
