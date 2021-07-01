@@ -55,7 +55,7 @@ export class ClsNilValue extends ClsValue {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Sem.TypeValue) {
-      return new Sem.ClsNil()
+      return new Sem.ClsNilCore()
     }
   }
 
@@ -153,7 +153,7 @@ export class ClsConsValue extends ClsValue {
         throw new Trace("I expect rest_t to be Sem.Cls")
       }
 
-      return new Sem.ClsCons(this.field_name, fresh_name, field_t, rest_t)
+      return new Sem.ClsConsCore(this.field_name, fresh_name, field_t, rest_t)
     }
   }
 

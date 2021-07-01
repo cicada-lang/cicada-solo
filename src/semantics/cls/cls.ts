@@ -37,7 +37,7 @@ export class ClsNil extends Cls {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Sem.TypeValue(),
-      core: new Sem.ClsNil(),
+      core: new Sem.ClsNilCore(),
     }
   }
 }
@@ -120,7 +120,7 @@ export class ClsCons extends Cls {
 
     return {
       t: new Sem.TypeValue(),
-      core: new Sem.ClsCons(
+      core: new Sem.ClsConsCore(
         this.field_name,
         fresh_name,
         field_t_core,

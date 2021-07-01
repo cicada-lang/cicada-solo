@@ -1,6 +1,5 @@
 import { Core, AlphaCtx } from "../../core"
 import { evaluate } from "../../core"
-import { Value } from "../../value"
 import { Env } from "../../env"
 import * as Sem from "../../sem"
 import * as ut from "../../ut"
@@ -16,7 +15,7 @@ export abstract class ClsCore extends Core {
   abstract fields_alpha_repr(ctx: AlphaCtx): Array<string>
 }
 
-export class ClsNil extends ClsCore {
+export class ClsNilCore extends ClsCore {
   append(cls: Sem.ClsCore): Sem.ClsCore {
     return cls
   }
@@ -46,7 +45,7 @@ export class ClsNil extends ClsCore {
   }
 }
 
-export class ClsCons extends ClsCore {
+export class ClsConsCore extends ClsCore {
   field_name: string
   local_name: string
   field_t: Core
@@ -66,7 +65,7 @@ export class ClsCons extends ClsCore {
   }
 
   append(cls: Sem.ClsCore): Sem.ClsCore {
-    return new ClsCons(
+    return new ClsConsCore(
       this.field_name,
       this.local_name,
       this.field_t,
