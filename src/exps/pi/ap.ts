@@ -5,7 +5,7 @@ import { evaluate } from "../../core"
 import { infer } from "../../exp"
 import { check } from "../../exp"
 import { Value } from "../../value"
-import { Trace } from "../../errors"
+import { Trace, InternalError } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
 
@@ -30,6 +30,28 @@ export class Ap extends Exp {
     return new Ap(this.target.subst(name, exp), this.arg.subst(name, exp))
   }
 
+  private infer_for_cls(
+    ctx: Ctx,
+    cls: Exps.ClsValue,
+    target_core: Core
+  ): { t: Value; core: Core } {
+    if (cls instanceof Exps.ClsConsValue) {
+      const arg_core = check(ctx, this.arg, cls.field_t)
+      return {
+        t: new Exps.TypeValue(),
+        core: new Exps.ApCore(target_core, arg_core),
+      }
+    } else if (cls instanceof Exps.ClsFulfilledValue) {
+      return this.infer_for_cls(ctx, cls.rest_t, target_core)
+    } else if (cls instanceof Exps.ClsNilValue) {
+      throw new Trace(`The telescope is full.`)
+    } else {
+      throw new InternalError(
+        `Unknown subclass of Exps.ClsValue: ${cls.constructor.name}`
+      )
+    }
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
     if (inferred_target.t instanceof Exps.PiValue) {
@@ -43,38 +65,12 @@ export class Ap extends Exp {
       }
     }
 
-    // TODO
+    const target_value = evaluate(ctx.to_env(), inferred_target.core)
+    if (target_value instanceof Exps.ClsValue) {
+      return this.infer_for_cls(ctx, target_value, inferred_target.core)
+    }
 
-    // const target_value = evaluate(ctx.to_env(), inferred_target.core)
-    // if (target_value instanceof Exps.ClsValue) {
-    //   const cls = target_value
-    //   let telescope = cls.telescope
-    //   while (telescope.next) {
-    //     const { t, value } = telescope.next
-    //     if (value) {
-    //       telescope = telescope.fill(value)
-    //     } else {
-    //       const arg_core = check(ctx, this.arg, t)
-
-    //       return {
-    //         t: new Exps.TypeValue(),
-    //         core: new Exps.Ap(inferred_target.core, arg_core),
-    //       }
-    //     }
-    //   }
-
-    //   throw new Trace(
-    //     ut.aline(`
-    //       |The telescope is full.
-    //       |`)
-    //   )
-    // }
-
-    throw new Trace(
-      ut.aline(`
-        |I am expecting value of type: PiValue or ClsValue.
-        |`)
-    )
+    throw new Trace(`I am expecting value of type: PiValue or ClsValue`)
   }
 
   private multi_ap(args: Array<Exp> = new Array()): {
