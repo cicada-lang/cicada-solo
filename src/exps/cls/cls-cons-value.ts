@@ -74,21 +74,21 @@ export class ClsConsValue extends Exps.ClsValue {
   dot_value(target: Value, field_name: string): Value {
     if (field_name === this.field_name) {
       return Exps.DotCore.apply(target, this.field_name)
+    } else {
+      return this.rest_t_cl
+        .apply(Exps.DotCore.apply(target, this.field_name))
+        .dot_value(target, field_name)
     }
-
-    return this.rest_t_cl
-      .apply(Exps.DotCore.apply(target, this.field_name))
-      .dot_value(target, field_name)
   }
 
   dot_type(target: Value, field_name: string): Value {
     if (field_name === this.field_name) {
       return this.field_t
+    } else {
+      return this.rest_t_cl
+        .apply(Exps.DotCore.apply(target, this.field_name))
+        .dot_type(target, field_name)
     }
-
-    return this.rest_t_cl
-      .apply(Exps.DotCore.apply(target, this.field_name))
-      .dot_type(target, field_name)
   }
 
   eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {

@@ -30,8 +30,7 @@ export class ClsFulfilledValue extends Exps.ClsValue {
   }
 
   get field_names(): Array<string> {
-    throw new Error("TODO")
-    // return [this.field_name, ...this.rest_t_cl.rest_t.field_names]
+    return [this.field_name, ...this.rest_t.field_names]
   }
 
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
@@ -82,26 +81,19 @@ export class ClsFulfilledValue extends Exps.ClsValue {
   }
 
   dot_value(target: Value, field_name: string): Value {
-    throw new Error("TODO")
-    // if (field_name === this.field_name) {
-    //   return Exps.DotCore.apply(target, this.field_name)
-    // }
-
-    // return this.rest_t_cl
-    //   .apply(Exps.DotCore.apply(target, this.field_name))
-    //   .dot_value(target, field_name)
+    if (field_name === this.field_name) {
+      return this.field_value
+    } else {
+      return this.rest_t.dot_value(target, field_name)
+    }
   }
 
   dot_type(target: Value, field_name: string): Value {
-    throw new Error("TODO")
-
-    // if (field_name === this.field_name) {
-    //   return this.field_t
-    // }
-
-    // return this.rest_t_cl
-    //   .apply(Exps.DotCore.apply(target, this.field_name))
-    //   .dot_type(target, field_name)
+    if (field_name === this.field_name) {
+      return this.field_t
+    } else {
+      return this.rest_t.dot_type(target, field_name)
+    }
   }
 
   eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
