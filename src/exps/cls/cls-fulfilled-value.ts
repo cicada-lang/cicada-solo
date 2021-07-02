@@ -12,20 +12,23 @@ import { ClsClosure } from "./cls-closure"
 
 export class ClsFulfilledValue extends Exps.ClsValue {
   field_name: string
+  local_name: string
   field_t: Value
-  field_value: Value
+  field: Value
   rest_t: Exps.ClsValue
 
   constructor(
     field_name: string,
+    local_name: string,
     field_t: Value,
-    field_value: Value,
+    field: Value,
     rest_t: Exps.ClsValue
   ) {
     super()
     this.field_name = field_name
+    this.local_name = local_name
     this.field_t = field_t
-    this.field_value = field_value
+    this.field = field
     this.rest_t = rest_t
   }
 
@@ -40,7 +43,7 @@ export class ClsFulfilledValue extends Exps.ClsValue {
       throw new Trace(`I expect to find field: ${this.field_name}`)
     }
 
-    const field_core = readback(ctx, this.field_t, this.field_value)
+    const field_core = readback(ctx, this.field_t, this.field)
 
     return new Map([
       [this.field_name, field_core],
@@ -49,36 +52,37 @@ export class ClsFulfilledValue extends Exps.ClsValue {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    throw new Error("TODO")
-    // if (t instanceof Exps.TypeValue) {
-    //   const fresh_name = ut.freshen_name(
-    //     new Set(ctx.names),
-    //     this.rest_t_cl.local_name
-    //   )
-    //   const variable = new Exps.NotYetValue(
-    //     this.field_t,
-    //     new Exps.VarNeutral(fresh_name)
-    //   )
-    //   const field_t = readback(ctx, new Exps.TypeValue(), this.field_t)
-    //   const rest_t = readback(
-    //     ctx.extend(fresh_name, this.field_t),
-    //     new Exps.TypeValue(),
-    //     this.rest_t_cl.apply(variable)
-    //   )
+    if (t instanceof Exps.TypeValue) {
+      const fresh_name = ut.freshen_name(new Set(ctx.names), this.local_name)
 
-    //   if (!(rest_t instanceof Exps.ClsCore)) {
-    //     throw new Trace(
-    //       `I expect rest_t to be an instance of ${Exps.ClsCore.name}`
-    //     )
-    //   }
+      const field_t = readback(ctx, new Exps.TypeValue(), this.field_t)
+      const field_core = readback(ctx, this.field_t, this.field)
 
-    //   return new Exps.ClsConsCore(this.field_name, fresh_name, field_t, rest_t)
-    // }
+      const rest_t = readback(
+        ctx.extend(fresh_name, this.field_t, this.field),
+        new Exps.TypeValue(),
+        this.rest_t
+      )
+
+      if (!(rest_t instanceof Exps.ClsCore)) {
+        throw new Trace(
+          `I expect rest_t to be an instance of ${Exps.ClsCore.name}`
+        )
+      }
+
+      return new Exps.ClsFulfilledCore(
+        this.field_name,
+        fresh_name,
+        field_t,
+        field_core,
+        rest_t
+      )
+    }
   }
 
   dot_value(target: Value, field_name: string): Value {
     if (field_name === this.field_name) {
-      return this.field_value
+      return this.field
     } else {
       return this.rest_t.dot_value(target, field_name)
     }
@@ -94,7 +98,7 @@ export class ClsFulfilledValue extends Exps.ClsValue {
 
   eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
     return new Map([
-      [this.field_name, readback(ctx, this.field_t, this.field_value)],
+      [this.field_name, readback(ctx, this.field_t, this.field)],
       ...this.rest_t.eta_expand_properties(ctx, value),
     ])
   }
@@ -109,7 +113,7 @@ export class ClsFulfilledValue extends Exps.ClsValue {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.field_name)
 
     return this.rest_t.extend_ctx(
-      ctx.extend(fresh_name, this.field_t, this.field_value),
+      ctx.extend(fresh_name, this.field_t, this.field),
       [...renamings, { field_name: this.field_name, local_name: fresh_name }]
     )
   }
@@ -117,8 +121,9 @@ export class ClsFulfilledValue extends Exps.ClsValue {
   apply(arg: Value): Exps.ClsValue {
     return new Exps.ClsFulfilledValue(
       this.field_name,
+      this.local_name,
       this.field_t,
-      this.field_value,
+      this.field,
       this.rest_t.apply(arg)
     )
   }
