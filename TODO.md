@@ -1,4 +1,3 @@
-- `ClsFulfilledValue.extend_ctx`
 - `ClsFulfilledValue.check_properties`
 - `ClsFulfilledValue.readback`
 

@@ -110,20 +110,12 @@ export class ClsFulfilledValue extends Exps.ClsValue {
     ctx: Ctx
     renamings: Array<{ field_name: string; local_name: string }>
   } {
-    throw new Error("TODO")
+    const fresh_name = ut.freshen_name(new Set(ctx.names), this.field_name)
 
-    // const fresh_name = ut.freshen_name(new Set(ctx.names), this.field_name)
-    // const variable = new Exps.NotYetValue(
-    //   this.field_t,
-    //   new Exps.VarNeutral(fresh_name)
-    // )
-
-    // return this.rest_t_cl
-    //   .apply(variable)
-    //   .extend_ctx(ctx.extend(fresh_name, this.field_t), [
-    //     ...renamings,
-    //     { field_name: this.field_name, local_name: fresh_name },
-    //   ])
+    return this.rest_t.extend_ctx(
+      ctx.extend(fresh_name, this.field_t, this.field_value),
+      [...renamings, { field_name: this.field_name, local_name: fresh_name }]
+    )
   }
 
   apply(arg: Value): Exps.ClsValue {
