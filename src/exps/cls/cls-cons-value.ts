@@ -121,12 +121,12 @@ export class ClsConsValue extends Exps.ClsValue {
       ])
   }
 
-  apply(arg: Value): Value {
+  apply(arg: Value): Exps.ClsValue {
     return new Exps.ClsFulfilledValue(
       this.field_name,
       this.field_t,
       arg,
-      this.rest_t_cl
+      this.rest_t_cl.apply(arg)
     )
   }
 }

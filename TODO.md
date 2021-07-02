@@ -1,5 +1,4 @@
 - `ClsFulfilledValue`
-- `ClsFulfilledValue.apply`
 
 - [fulfilling type] `exps/ap-core` -- `apply` for `ClsValue`
 - [fulfilling type] `exps/ap` -- `infer` for `ClsValue`

@@ -54,7 +54,7 @@ export class ClsNilValue extends Exps.ClsValue {
     return { ctx, renamings }
   }
 
-  apply(arg: Value): Value {
+  apply(arg: Value): Exps.ClsValue {
     throw new Trace(
       [
         `I meet the end of ClsValue`,

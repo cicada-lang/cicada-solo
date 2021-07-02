@@ -35,5 +35,5 @@ export abstract class ClsValue extends Value {
     renamings: Array<{ field_name: string; local_name: string }>
   }
 
-  abstract apply(arg: Value): Value
+  abstract apply(arg: Value): ClsValue
 }
