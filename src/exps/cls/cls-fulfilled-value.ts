@@ -34,22 +34,18 @@ export class ClsFulfilledValue extends Exps.ClsValue {
   }
 
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
-    throw new Error("TODO")
-    // const exp = properties.get(this.field_name)
+    const exp = properties.get(this.field_name)
 
-    // if (exp === undefined) {
-    //   throw new Trace(`I expect to find field: ${this.field_name}`)
-    // }
+    if (exp === undefined) {
+      throw new Trace(`I expect to find field: ${this.field_name}`)
+    }
 
-    // const field_core = check(ctx, exp, this.field_t)
-    // const rest_t_value = this.rest_t_cl.apply(
-    //   evaluate(ctx.to_env(), field_core)
-    // )
+    const field_core = readback(ctx, this.field_t, this.field_value)
 
-    // return new Map([
-    //   [this.field_name, field_core],
-    //   ...rest_t_value.check_properties(ctx, properties),
-    // ])
+    return new Map([
+      [this.field_name, field_core],
+      ...this.rest_t.check_properties(ctx, properties),
+    ])
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {

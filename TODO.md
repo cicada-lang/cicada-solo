@@ -1,4 +1,3 @@
-- `ClsFulfilledValue.check_properties`
 - `ClsFulfilledValue.readback`
 
 - [fulfilling type] `exps/ap-core` -- `apply` for `ClsValue`
