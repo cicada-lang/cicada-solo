@@ -8,7 +8,7 @@
 
 # implicit
 
-- [implicit] implement implicit by explicit `let`
+- [implicit] implement implicit
 - [implicit] use implicit to implement `cong` by `replace`
 
 # subtype
