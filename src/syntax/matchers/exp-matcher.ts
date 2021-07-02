@@ -240,10 +240,12 @@ export function declaration_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-export function cls_entry_matcher(tree: pt.Tree): {
+export function cls_entry_matcher(
+  tree: pt.Tree
+): {
   field_name: string
   field_t: Exp
-  field_exp?: Exp
+  field?: Exp
 } {
   return pt.matcher({
     "cls_entry:field_demanded": ({ name, t }) => ({
@@ -253,7 +255,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
     "cls_entry:field_fulfilled": ({ name, t, exp }) => ({
       field_name: pt.str(name),
       field_t: exp_matcher(t),
-      field_exp: exp_matcher(exp),
+      field: exp_matcher(exp),
     }),
     "cls_entry:method_demanded": ({ name, bindings, ret_t }) => ({
       field_name: pt.str(name),
@@ -268,7 +270,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
       return {
         field_name: pt.str(name),
         field_t: pi_handler({ bindings, ret_t }),
-        field_exp: fn,
+        field: fn,
       }
     },
   })(tree)
@@ -285,7 +287,9 @@ export function bindings_matcher(
   })(tree)
 }
 
-export function binding_entry_matcher(tree: pt.Tree): {
+export function binding_entry_matcher(
+  tree: pt.Tree
+): {
   names: Array<string>
   exp: Exp
 } {
