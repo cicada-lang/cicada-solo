@@ -1,4 +1,3 @@
-- `ClsFulfilledCore.fields_repr`
 - `ClsFulfilledCore.fields_alpha_repr`
 
 - `ClsFulfilled`

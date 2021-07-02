@@ -54,12 +54,10 @@ export class ClsFulfilledCore extends Exps.ClsCore {
   }
 
   fields_repr(): Array<string> {
-    throw new Error("TODO")
-
-    // return [
-    //   `${this.field_name}: ${this.field_t.repr()}`,
-    //   ...this.rest_t.fields_repr(),
-    // ]
+    return [
+      `${this.field_name}: ${this.field_t.repr()} = ${this.field.repr()}`,
+      ...this.rest_t.fields_repr(),
+    ]
   }
 
   repr(): string {
