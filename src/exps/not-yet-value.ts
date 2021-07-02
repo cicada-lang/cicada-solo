@@ -14,7 +14,7 @@ export class NotYetValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core {
-    // NOTE  t and value.t are ignored here,
+    // NOTE  t and this.t are ignored here,
     //  maybe use them to debug.
     return this.neutral.readback_neutral(ctx)
   }
