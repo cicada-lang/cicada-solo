@@ -1,4 +1,3 @@
-- `ClsConsValue.apply`
 - `ClsFulfilledValue`
 - `ClsFulfilledValue.apply`
 

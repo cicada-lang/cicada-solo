@@ -10,17 +10,26 @@ import * as ut from "../../ut"
 import * as Exps from "../../exps"
 import { ClsClosure } from "./cls-closure"
 
-export class ClsConsValue extends Exps.ClsValue {
+export class ClsFulfilledValue extends Exps.ClsValue {
   field_name: string
   field_t: Value
+  field_value: Value
   rest_t_cl: ClsClosure
 
-  constructor(field_name: string, field_t: Value, rest_t_cl: ClsClosure) {
+  constructor(
+    field_name: string,
+    field_t: Value,
+    field_value: Value,
+    rest_t_cl: ClsClosure
+  ) {
     super()
     this.field_name = field_name
     this.field_t = field_t
+    this.field_value = field_value
     this.rest_t_cl = rest_t_cl
   }
+
+  // TODO
 
   get field_names(): Array<string> {
     return [this.field_name, ...this.rest_t_cl.rest_t.field_names]
@@ -122,11 +131,12 @@ export class ClsConsValue extends Exps.ClsValue {
   }
 
   apply(arg: Value): Value {
-    return new Exps.ClsFulfilledValue(
-      this.field_name,
-      this.field_t,
-      arg,
-      this.rest_t_cl
-    )
+    throw new Error("")
+    // return new Exps.ClsFulfilledValue(
+    //   this.field_name,
+    //   this.field_t,
+    //   arg,
+    //   this.rest_t_cl
+    // )
   }
 }
