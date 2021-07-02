@@ -1,8 +1,5 @@
 - `ClsFulfilled`
-
 - [syntax] `ClsFulfilled`
-
-- [syntax] class field -- only use flower for fn related cases
 
 # scope
 
