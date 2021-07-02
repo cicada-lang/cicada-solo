@@ -66,12 +66,11 @@ export class ClsFulfilledCore extends Exps.ClsCore {
   }
 
   fields_alpha_repr(ctx: AlphaCtx): Array<string> {
-    throw new Error("TODO")
-
-    // return [
-    //   `${this.field_name}: ${this.field_t.alpha_repr(ctx)}`,
-    //   ...this.rest_t.fields_alpha_repr(ctx.extend(this.local_name)),
-    // ]
+    // prettier-ignore
+    return [
+      `${this.field_name}: ${this.field_t.alpha_repr(ctx)} = ${this.field.alpha_repr(ctx)}`,
+      ...this.rest_t.fields_alpha_repr(ctx.extend(this.local_name)),
+    ]
   }
 
   alpha_repr(ctx: AlphaCtx): string {
