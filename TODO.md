@@ -1,4 +1,6 @@
-- `ClsFulfilledValue`
+- `ClsFulfilledValue.extend_ctx`
+- `ClsFulfilledValue.check_properties`
+- `ClsFulfilledValue.readback`
 
 - [fulfilling type] `exps/ap-core` -- `apply` for `ClsValue`
 - [fulfilling type] `exps/ap` -- `infer` for `ClsValue`

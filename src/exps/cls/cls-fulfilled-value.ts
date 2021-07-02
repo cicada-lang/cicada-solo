@@ -97,14 +97,10 @@ export class ClsFulfilledValue extends Exps.ClsValue {
   }
 
   eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core> {
-    throw new Error("TODO")
-
-    // const property_value = Exps.DotCore.apply(value, this.field_name)
-
-    // return new Map([
-    //   [this.field_name, readback(ctx, this.field_t, property_value)],
-    //   ...this.rest_t_cl.apply(property_value).eta_expand_properties(ctx, value),
-    // ])
+    return new Map([
+      [this.field_name, readback(ctx, this.field_t, this.field_value)],
+      ...this.rest_t.eta_expand_properties(ctx, value),
+    ])
   }
 
   extend_ctx(
