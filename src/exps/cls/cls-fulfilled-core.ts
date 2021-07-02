@@ -42,13 +42,15 @@ export class ClsFulfilledCore extends Exps.ClsCore {
   }
 
   evaluate(env: Env): Exps.ClsValue {
-    throw new Error("TODO")
+    const field = evaluate(env, this.field)
 
-    // return new Exps.ClsConsValue(
-    //   this.field_name,
-    //   evaluate(env, this.field_t),
-    //   new ClsClosure(env, this.local_name, this.rest_t)
-    // )
+    return new Exps.ClsFulfilledValue(
+      this.field_name,
+      this.local_name,
+      evaluate(env, this.field_t),
+      field,
+      new ClsClosure(env, this.local_name, this.rest_t).apply(field)
+    )
   }
 
   fields_repr(): Array<string> {

@@ -1,8 +1,9 @@
-- `ClsFulfilledCore.evaluate`
 - `ClsFulfilledCore.fields_repr`
 - `ClsFulfilledCore.fields_alpha_repr`
 
 - `ClsFulfilled`
+
+- [syntax] `ClsFulfilled`
 
 - [fulfilling type] `exps/ap-core` -- `apply` for `ClsValue`
 - [fulfilling type] `exps/ap` -- `infer` for `ClsValue`
