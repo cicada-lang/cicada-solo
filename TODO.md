@@ -1,4 +1,6 @@
-- `ClsFulfilled`
+- `ClsFulfilled.subst`
+- `ClsFulfilled.infer`
+
 - [syntax] `ClsFulfilled`
 
 # scope
