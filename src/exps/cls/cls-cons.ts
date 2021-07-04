@@ -9,6 +9,7 @@ import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class ClsCons extends Exps.Cls {
+  field_names: Array<string>
   field_name: string
   local_name: string
   field_t: Exp
@@ -25,6 +26,20 @@ export class ClsCons extends Exps.Cls {
     this.local_name = local_name
     this.field_t = field_t
     this.rest_t = rest_t
+
+    if (rest_t.field_names.includes(field_name)) {
+      throw new Trace(
+        [
+          `I found duplicated field name in class`,
+          `field name:`,
+          `  ${field_name}`,
+          `field names:`,
+          `  ${field_name}, ${rest_t.field_names.join(", ")}`,
+        ].join("\n")
+      )
+    }
+
+    this.field_names = [field_name, ...rest_t.field_names]
   }
 
   free_names(bound_names: Set<string>): Set<string> {

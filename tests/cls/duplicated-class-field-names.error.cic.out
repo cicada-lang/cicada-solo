@@ -1,0 +1,6 @@
+I found duplicated field name in class
+field name:
+  a
+field names:
+  a, b, a, c
+

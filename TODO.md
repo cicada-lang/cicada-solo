@@ -1,4 +1,3 @@
-- fix `duplicated-class-field-names.error.cic`
 - dance with expressions
 
 # implicit

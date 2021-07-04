@@ -1,0 +1,20 @@
+I found duplicated field name in object
+field name:
+  b
+field name list:
+  a, b, b, c
+previous:
+- {
+  a: 1
+  b: 2
+  b: 6
+  c: 3
+}
+- the(Test, {
+  a: 1
+  b: 2
+  b: 6
+  c: 3
+})
+
+

@@ -52,11 +52,11 @@ export class Obj extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
+    this.check_duplicated_field_name(ctx)
+
     const properties = new Map(
       this.properties.flatMap((prop) => prop.to_entries(ctx))
     )
-
-    this.check_duplicated_field_name(ctx)
 
     if (t instanceof Exps.ClsValue) {
       const core_properties = t.check_properties(ctx, properties)

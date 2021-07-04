@@ -5,6 +5,8 @@ import { Value } from "../../value"
 import * as Exps from "../../exps"
 
 export class ClsNil extends Exps.Cls {
+  field_names: Array<string> = []
+
   free_names(bound_names: Set<string>): Set<string> {
     return new Set()
   }
