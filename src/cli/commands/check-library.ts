@@ -34,7 +34,7 @@ async function check(
   library: LocalLibrary,
   opts: { verbose: boolean }
 ): Promise<void> {
-  let error_occured = false
+  let error_occurred = false
 
   for (const path of Object.keys(await library.fetch_files())) {
     try {
@@ -48,7 +48,7 @@ async function check(
         path
       )
     } catch (error) {
-      error_occured = await error_log(error, path, library)
+      error_occurred = await error_log(error, path, library)
       console.log(
         chalk.bold(`(check)`),
         chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
@@ -57,7 +57,7 @@ async function check(
     }
   }
 
-  if (error_occured) {
+  if (error_occurred) {
     process.exit(1)
   }
 }

@@ -1,0 +1,12 @@
+class Test {
+  a: Nat
+  c: Nat
+  b: Nat
+}
+
+the(Test, {
+  a: 1
+  b: 2
+  b: 6
+  c: 3
+})
