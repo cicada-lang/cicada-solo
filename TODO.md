@@ -1,5 +1,3 @@
-- dance with expressions
-
 # implicit
 
 - [implicit] implement implicit
