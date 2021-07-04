@@ -1,5 +1,3 @@
-- `ClsFulfilled.infer`
-
 - [syntax] `ClsFulfilled`
 
 # scope

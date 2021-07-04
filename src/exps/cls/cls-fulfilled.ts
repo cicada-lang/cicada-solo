@@ -76,30 +76,31 @@ export class ClsFulfilled extends Exps.Cls {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    throw new Error("TODO")
+    const fresh_name = ut.freshen_name(new Set(ctx.names), this.local_name)
+    const field_t_core = check(ctx, this.field_t, new Exps.TypeValue())
+    const field_t_value = evaluate(ctx.to_env(), field_t_core)
+    const field_core = check(ctx, this.field, field_t_value)
+    const field_value = evaluate(ctx.to_env(), field_core)
+    const rest_t = this.rest_t.subst(this.local_name, new Exps.Var(fresh_name))
+    const rest_t_core = check(
+      ctx.extend(fresh_name, field_t_value, field_value),
+      rest_t,
+      new Exps.TypeValue()
+    )
 
-    //   const fresh_name = ut.freshen_name(new Set(ctx.names), this.local_name)
-    //   const field_t_core = check(ctx, this.field_t, new Exps.TypeValue())
-    //   const field_t_value = evaluate(ctx.to_env(), field_t_core)
-    //   const rest_t = this.rest_t.subst(this.local_name, new Exps.Var(fresh_name))
-    //   const rest_t_core = check(
-    //     ctx.extend(fresh_name, field_t_value),
-    //     rest_t,
-    //     new Exps.TypeValue()
-    //   )
+    if (!(rest_t_core instanceof Exps.ClsCore)) {
+      throw new Trace("I expect rest_t_core to be Exps.Cls")
+    }
 
-    //   if (!(rest_t_core instanceof Exps.ClsCore)) {
-    //     throw new Trace("I expect rest_t_core to be Exps.Cls")
-    //   }
-
-    //   return {
-    //     t: new Exps.TypeValue(),
-    //     core: new Exps.ClsConsCore(
-    //       this.field_name,
-    //       fresh_name,
-    //       field_t_core,
-    //       rest_t_core
-    //     ),
-    //   }
+    return {
+      t: new Exps.TypeValue(),
+      core: new Exps.ClsFulfilledCore(
+        this.field_name,
+        fresh_name,
+        field_t_core,
+        field_core,
+        rest_t_core
+      ),
+    }
   }
 }
