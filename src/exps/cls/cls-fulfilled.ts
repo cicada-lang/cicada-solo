@@ -39,28 +39,28 @@ export class ClsFulfilled extends Exps.Cls {
   }
 
   subst(name: string, exp: Exp): Exps.Cls {
-    throw new Error("TODO")
+    if (name === this.local_name) {
+      return new ClsFulfilled(
+        this.field_name,
+        this.local_name,
+        this.field_t.subst(name, exp),
+        this.field.subst(name, exp),
+        this.rest_t
+      )
+    } else {
+      const free_names = exp.free_names(new Set())
+      const fresh_name = ut.freshen_name(free_names, this.local_name)
 
-    // if (name === this.local_name) {
-    //   return new ClsCons(
-    //     this.field_name,
-    //     this.local_name,
-    //     this.field_t.subst(name, exp),
-    //     this.rest_t
-    //   )
-    // } else {
-    //   const free_names = exp.free_names(new Set())
-    //   const fresh_name = ut.freshen_name(free_names, this.local_name)
-
-    //   return new ClsCons(
-    //     this.field_name,
-    //     fresh_name,
-    //     this.field_t.subst(name, exp),
-    //     this.rest_t
-    //       .subst(this.local_name, new Exps.Var(fresh_name))
-    //       .subst(name, exp)
-    //   )
-    // }
+      return new ClsFulfilled(
+        this.field_name,
+        fresh_name,
+        this.field_t.subst(name, exp),
+        this.field.subst(name, exp),
+        this.rest_t
+          .subst(this.local_name, new Exps.Var(fresh_name))
+          .subst(name, exp)
+      )
+    }
   }
 
   fields_repr(): Array<string> {
