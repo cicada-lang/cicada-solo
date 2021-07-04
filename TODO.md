@@ -1,7 +1,5 @@
-# scope
-
-- be sure about `exps/obj`'s `SpreadProp`
-- practice to dance with expressions
+- fix `duplicated-field-names.error.cic`
+- dance with expressions
 
 # implicit
 

@@ -1,7 +1,7 @@
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Value } from "../../value"
+import { Value, expect } from "../../value"
 import { Trace } from "../../errors"
 import { infer } from "../../exp"
 import * as ut from "../../ut"
@@ -29,10 +29,8 @@ export class Obj extends Exp {
 
   check(ctx: Ctx, t: Value): Core {
     const properties = new Map(
-      this.properties.flatMap((prop) => prop.expand(ctx))
+      this.properties.flatMap((prop) => prop.to_entries(ctx))
     )
-
-    // NOTE TODO SpreadProp might introduce new property name, thus new scope.
 
     if (t instanceof Exps.ClsValue) {
       const core_properties = t.check_properties(ctx, properties)
@@ -58,7 +56,7 @@ export abstract class Prop {
 
   abstract free_names(bound_names: Set<string>): Set<string>
   abstract subst(name: string, exp: Exp): Prop
-  abstract expand(ctx: Ctx): Array<[string, Exp]>
+  abstract to_entries(ctx: Ctx): Array<[string, Exp]>
   abstract repr(): string
 }
 
@@ -78,7 +76,7 @@ export class SpreadProp extends Prop {
     return new SpreadProp(this.exp.subst(name, exp))
   }
 
-  expand(ctx: Ctx): Array<[string, Exp]> {
+  to_entries(ctx: Ctx): Array<[string, Exp]> {
     const inferred = infer(ctx, this.exp)
 
     if (inferred.t instanceof Exps.ClsValue) {
@@ -117,7 +115,7 @@ export class FieldProp extends Prop {
     return new FieldProp(this.name, this.exp.subst(name, exp))
   }
 
-  expand(ctx: Ctx): Array<[string, Exp]> {
+  to_entries(ctx: Ctx): Array<[string, Exp]> {
     return [[this.name, this.exp]]
   }
 
@@ -142,7 +140,7 @@ export class FieldShorthandProp extends Prop {
     return this
   }
 
-  expand(ctx: Ctx): Array<[string, Exp]> {
+  to_entries(ctx: Ctx): Array<[string, Exp]> {
     return [[this.name, new Exps.Var(this.name)]]
   }
 
