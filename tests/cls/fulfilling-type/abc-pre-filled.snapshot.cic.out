@@ -2,10 +2,10 @@
   a: sole
   b: 2
   c: "c"
-}: class ABC {
+}: class {
   a: Trivial = sole
   b: Nat = 2
-  c: String = "c"
+  c: String
 } 
 sole: Trivial 
 2: Nat 
@@ -13,19 +13,19 @@ sole: Trivial
 {
   a: sole
   b: 2
-  c: "c"
+  c: "d"
   d: "d"
   e: "e"
-}: class ABCDE {
+}: class {
   a: Trivial = sole
   b: Nat = 2
-  c: String = "c"
-  d: String = "d"
+  c: String = "d"
+  d: String
   e: String
 } 
 sole: Trivial 
 2: Nat 
-"c": String 
+"d": String 
 "d": String 
 "e": String 
 

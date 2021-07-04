@@ -136,12 +136,20 @@ export function operand_matcher(tree: pt.Tree): Exp {
         .reverse()
         .reduce(
           (rest_t, entry) =>
-            new Exps.ClsCons(
-              entry.field_name,
-              entry.field_name,
-              entry.field_t,
-              rest_t
-            ),
+            entry.field
+              ? new Exps.ClsFulfilled(
+                  entry.field_name,
+                  entry.field_name,
+                  entry.field_t,
+                  entry.field,
+                  rest_t
+                )
+              : new Exps.ClsCons(
+                  entry.field_name,
+                  entry.field_name,
+                  entry.field_t,
+                  rest_t
+                ),
           new Exps.ClsNil()
         ),
     "operand:ext": ({ parent, entries }) =>
@@ -153,12 +161,20 @@ export function operand_matcher(tree: pt.Tree): Exp {
           .reverse()
           .reduce(
             (rest_t, entry) =>
-              new Exps.ClsCons(
-                entry.field_name,
-                entry.field_name,
-                entry.field_t,
-                rest_t
-              ),
+              entry.field
+                ? new Exps.ClsFulfilled(
+                    entry.field_name,
+                    entry.field_name,
+                    entry.field_t,
+                    entry.field,
+                    rest_t
+                  )
+                : new Exps.ClsCons(
+                    entry.field_name,
+                    entry.field_name,
+                    entry.field_t,
+                    rest_t
+                  ),
             new Exps.ClsNil()
           )
       ),

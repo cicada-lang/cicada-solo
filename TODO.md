@@ -1,5 +1,3 @@
-- [syntax] `ClsFulfilled`
-
 # scope
 
 - be sure about `exps/obj`'s `SpreadProp`
