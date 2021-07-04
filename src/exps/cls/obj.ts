@@ -27,10 +27,36 @@ export class Obj extends Exp {
     return new Obj(this.properties.map((property) => property.subst(name, exp)))
   }
 
+  private check_duplicated_field_name(ctx: Ctx): void {
+    const field_names = this.properties.flatMap((prop) =>
+      prop.to_entries(ctx).map(([name]) => name)
+    )
+
+    const occurred = new Set()
+
+    for (const field_name of field_names) {
+      if (occurred.has(field_name)) {
+        throw new Trace(
+          [
+            `I found duplicated field name in object`,
+            `field name:`,
+            `  ${field_name}`,
+            `field name list:`,
+            `  ${field_names.join(", ")}`,
+          ].join("\n")
+        )
+      } else {
+        occurred.add(field_name)
+      }
+    }
+  }
+
   check(ctx: Ctx, t: Value): Core {
     const properties = new Map(
       this.properties.flatMap((prop) => prop.to_entries(ctx))
     )
+
+    this.check_duplicated_field_name(ctx)
 
     if (t instanceof Exps.ClsValue) {
       const core_properties = t.check_properties(ctx, properties)
