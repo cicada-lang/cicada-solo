@@ -11,10 +11,6 @@ export class Env {
     return new Env(new Map([...this.values, [name, value]]))
   }
 
-  extend_by_values(values: Map<string, Value>): Env {
-    return new Env(new Map([...this.values, ...values]))
-  }
-
   lookup_value(name: string): undefined | Value {
     const value = this.values.get(name)
     if (value !== undefined) return value
