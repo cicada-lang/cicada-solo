@@ -40,14 +40,6 @@ export class Module {
     this.entries = opts.entries || []
   }
 
-  static async from_doc(doc: Doc): Promise<Module> {
-    const mod = new Module({ doc: doc })
-    for (const { stmt } of doc.entries) {
-      await stmt.execute(mod)
-    }
-    return mod
-  }
-
   enter(stmt: Stmt, opts?: { output?: string }): void {
     const output = opts?.output || ""
     this.entries.push(new ModuleEntry({ stmt, output }))

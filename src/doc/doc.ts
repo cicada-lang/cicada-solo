@@ -1,4 +1,5 @@
 import { Library } from "../library"
+import { Module } from "../module"
 import { Stmt } from "../stmt"
 
 export class DocEntry {
@@ -16,6 +17,7 @@ export abstract class Doc {
   abstract text: string
   abstract entries: Array<DocEntry>
   abstract path: string
+  abstract load(): Promise<Module>
 
   get extension(): string {
     const parts = this.path.split(".")

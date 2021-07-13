@@ -1,6 +1,13 @@
-- [refactor] move `Module.from_doc` to `doc.load`
+- [refactor] `Doc` private `entries` -- rename to `stmts`
+
+- `Doc` take `Module` as type arg
+- `Library` take `Doc` & `Module` as type args
 
 - extract `@cicada-lang/librarian`
+
+# later
+
+- [later] update `cicada-lang/cicada-studyroom`
 
 # implicit
 
