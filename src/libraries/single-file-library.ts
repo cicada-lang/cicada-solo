@@ -3,7 +3,7 @@ import { Module } from "../module"
 import { Doc, doc_from_file } from "../doc"
 import fs from "fs"
 
-export class SingleFileLibrary extends Library {
+export class SingleFileLibrary extends Library<Module> {
   config: LibraryConfig
   path: string
 
@@ -16,12 +16,12 @@ export class SingleFileLibrary extends Library {
     })
   }
 
-  async fetch_doc(path: string): Promise<Doc> {
+  async fetch_doc(path: string): Promise<Doc<Module>> {
     const text = fs.readFileSync(this.path, { encoding: "utf-8" })
     return doc_from_file({ path: this.path, library: this, text })
   }
 
-  async fetch_docs(): Promise<Record<string, Doc>> {
+  async fetch_docs(): Promise<Record<string, Doc<Module>>> {
     const text = fs.readFileSync(this.path, { encoding: "utf-8" })
     const doc = doc_from_file({ path: this.path, library: this, text })
     return { [this.path]: doc }

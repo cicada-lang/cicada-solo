@@ -4,12 +4,12 @@ import { Module } from "../module"
 import { Stmt } from "../stmt"
 import * as Syntax from "../syntax"
 
-export class CicDoc extends Doc {
-  library: Library
+export class CicDoc extends Doc<Module> {
+  library: Library<Module>
   text: string
   path: string
 
-  constructor(opts: { library: Library; text: string; path: string }) {
+  constructor(opts: { library: Library<Module>; text: string; path: string }) {
     super()
     this.library = opts.library
     this.text = opts.text

@@ -1,6 +1,3 @@
-- `Doc` take `Module` as type arg
-- `Library` take `Doc` & `Module` as type args
-
 - extract `@cicada-lang/librarian`
 
 # later

@@ -1,14 +1,13 @@
 import { LibraryConfig } from "../library"
-import { Module } from "../module"
 import { Doc } from "../doc"
 
 // NOTE in the following interface, caller is responsible to make sure the path exists.
 //   maybe this should be changed, and these functions should be able to return `undefined`.
-export abstract class Library {
+export abstract class Library<Module> {
   abstract config: LibraryConfig
 
-  abstract fetch_doc(path: string): Promise<Doc>
-  abstract fetch_docs(): Promise<Record<string, Doc>>
+  abstract fetch_doc(path: string): Promise<Doc<Module>>
+  abstract fetch_docs(): Promise<Record<string, Doc<Module>>>
 
   async fetch_file(path: string): Promise<string> {
     const doc = await this.fetch_doc(path)

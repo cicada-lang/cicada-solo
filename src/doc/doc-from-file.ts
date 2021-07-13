@@ -1,6 +1,7 @@
 import { Doc } from "../doc"
 import { CicDoc, MdDoc } from "../docs"
 import { Library } from "../library"
+import { Module } from "../module"
 
 export function doc_ext_p(path: string): boolean {
   return path.endsWith(".cic") || path.endsWith(".md")
@@ -9,8 +10,8 @@ export function doc_ext_p(path: string): boolean {
 export function doc_from_file(opts: {
   path: string
   text: string
-  library: Library
-}): Doc {
+  library: Library<Module>
+}): Doc<Module> {
   const { path, text, library } = opts
 
   if (path.endsWith(".cic")) {

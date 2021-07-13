@@ -21,14 +21,14 @@ class ModuleEntry {
 }
 
 export class Module {
-  doc: Doc
-  library: Library
+  doc: Doc<Module>
+  library: Library<Module>
   env: Env
   ctx: Ctx
   entries: Array<ModuleEntry>
 
   constructor(opts: {
-    doc: Doc
+    doc: Doc<Module>
     env?: Env
     ctx?: Ctx
     entries?: Array<ModuleEntry>

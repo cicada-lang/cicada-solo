@@ -6,7 +6,7 @@ import fs from "fs"
 import readdirp from "readdirp"
 import chalk from "chalk"
 
-export class LocalLibrary extends Library {
+export class LocalLibrary extends Library<Module> {
   root_dir: string
   config: LibraryConfig
   cached_mods: Map<string, Module>
@@ -30,7 +30,7 @@ export class LocalLibrary extends Library {
     })
   }
 
-  async fetch_doc(path: string): Promise<Doc> {
+  async fetch_doc(path: string): Promise<Doc<Module>> {
     const file = Path.isAbsolute(path)
       ? path
       : Path.resolve(this.root_dir, this.config.src, path)
@@ -38,10 +38,10 @@ export class LocalLibrary extends Library {
     return doc_from_file({ path, text, library: this })
   }
 
-  async fetch_docs(): Promise<Record<string, Doc>> {
+  async fetch_docs(): Promise<Record<string, Doc<Module>>> {
     const src_dir = Path.resolve(this.root_dir, this.config.src)
 
-    const docs: Record<string, Doc> = {}
+    const docs: Record<string, Doc<Module>> = {}
     for await (const { path } of readdirp(src_dir)) {
       if (doc_ext_p(path)) {
         docs[path] = await this.fetch_doc(path)

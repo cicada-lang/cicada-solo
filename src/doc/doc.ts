@@ -1,11 +1,10 @@
 import { Library } from "../library"
-import { Module } from "../module"
 import { Stmt } from "../stmt"
 
 // NOTE The responsibility of this class
 //   is to parse file to different kinds of doc.
-export abstract class Doc {
-  abstract library: Library
+export abstract class Doc<Module> {
+  abstract library: Library<Module>
   abstract text: string
   abstract path: string
   abstract load(): Promise<Module>
