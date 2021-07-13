@@ -1,4 +1,4 @@
-import { LocalLibrary } from "../../library/local-library"
+import { LocalLibrary } from "../../libraries"
 import { Module } from "../../module"
 import { Trace } from "../../errors"
 import { doc_ext_p } from "../../doc"

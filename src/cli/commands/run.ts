@@ -1,5 +1,5 @@
-import { SingleFileLibrary } from "../../library/single-file-library"
-import { LocalLibrary } from "../../library/local-library"
+import { SingleFileLibrary } from "../../libraries"
+import { LocalLibrary } from "../../libraries"
 import { Trace } from "../../errors"
 import pt from "@cicada-lang/partech"
 import find_up from "find-up"
