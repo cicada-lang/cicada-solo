@@ -1,4 +1,5 @@
-import { Doc, CicDoc, MdDoc } from "../doc"
+import { Doc } from "../doc"
+import { CicDoc, MdDoc } from "../docs"
 import { Library } from "../library"
 
 export function doc_ext_p(path: string): boolean {
