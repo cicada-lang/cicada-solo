@@ -2,20 +2,11 @@ import { Library } from "../library"
 import { Module } from "../module"
 import { Stmt } from "../stmt"
 
-export class DocEntry {
-  stmt: Stmt
-
-  constructor(opts: { stmt: Stmt }) {
-    this.stmt = opts.stmt
-  }
-}
-
 // NOTE The responsibility of this class
 //   is to parse file to different kinds of doc.
 export abstract class Doc {
   abstract library: Library
   abstract text: string
-  abstract entries: Array<DocEntry>
   abstract path: string
   abstract load(): Promise<Module>
 

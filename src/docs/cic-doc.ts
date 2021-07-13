@@ -1,6 +1,7 @@
-import { Doc, DocEntry } from "../doc"
+import { Doc } from "../doc"
 import { Library } from "../library"
 import { Module } from "../module"
+import { Stmt } from "../stmt"
 import * as Syntax from "../syntax"
 
 export class CicDoc extends Doc {
@@ -17,14 +18,13 @@ export class CicDoc extends Doc {
 
   async load(): Promise<Module> {
     const mod = new Module({ doc: this })
-    for (const { stmt } of this.entries) {
+    for (const stmt of this.stmts) {
       await stmt.execute(mod)
     }
     return mod
   }
 
-  get entries(): Array<DocEntry> {
-    const stmts = Syntax.parse_stmts(this.text)
-    return stmts.map((stmt) => new DocEntry({ stmt }))
+  private get stmts(): Array<Stmt> {
+    return Syntax.parse_stmts(this.text)
   }
 }

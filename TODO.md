@@ -1,5 +1,3 @@
-- [refactor] `Doc` private `entries` -- rename to `stmts`
-
 - `Doc` take `Module` as type arg
 - `Library` take `Doc` & `Module` as type args
 

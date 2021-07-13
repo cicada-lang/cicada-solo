@@ -1,6 +1,7 @@
-import { Doc, DocEntry } from "../doc"
+import { Doc } from "../doc"
 import { Library } from "../library"
 import { Module } from "../module"
+import { Stmt } from "../stmt"
 import * as Syntax from "../syntax"
 import * as commonmark from "commonmark"
 
@@ -16,20 +17,18 @@ export class MdDoc extends Doc {
     this.path = opts.path
   }
 
+  private get stmts(): Array<Stmt> {
+    return this.code_blocks.flatMap((code_block) =>
+      Syntax.parse_stmts(code_block.text, code_block.offset)
+    )
+  }
+
   async load(): Promise<Module> {
     const mod = new Module({ doc: this })
-    for (const { stmt } of this.entries) {
+    for (const stmt of this.stmts) {
       await stmt.execute(mod)
     }
     return mod
-  }
-
-  get entries(): Array<DocEntry> {
-    return this.code_blocks.flatMap((code_block) =>
-      Syntax.parse_stmts(code_block.text, code_block.offset).map(
-        (stmt) => new DocEntry({ stmt })
-      )
-    )
   }
 
   private offset_from_pos(row: number, col: number): number {
