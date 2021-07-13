@@ -1,3 +1,7 @@
+- [refactor] move `Module.from_doc` to `doc.load`
+
+- extract `@cicada-lang/librarian`
+
 # implicit
 
 - [implicit] implement implicit
