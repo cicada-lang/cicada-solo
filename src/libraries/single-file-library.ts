@@ -1,7 +1,6 @@
 import { Library, LibraryConfig } from "../library"
 import { Module } from "../module"
 import { Doc, doc_from_file } from "../doc"
-import * as Syntax from "../syntax"
 import fs from "fs"
 
 export class SingleFileLibrary extends Library {
