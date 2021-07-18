@@ -1,12 +1,8 @@
+- `mod.output` is used in `cli/` -- how to deal with this?
+
+  - `Module` is a type argument, we can not describe it interface such as `output`
+
 - extract `@cicada-lang/librarian`
-
-  - abstract `DocBuilder` -- `from_file` & `right_extension_p`
-  - inject `DocBuilder` in to `LocalLibrary` and `SingleFileLibrary`
-
-    - fix the use of `doc_from_file`
-    - fix the use of `doc_ext_p`
-
-- `mod.output` is used in `cli/` -- how to?
 
 # later
 

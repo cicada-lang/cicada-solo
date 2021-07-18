@@ -1,2 +1,2 @@
 export * from "./doc"
-export * from "./doc-from-file"
+export * from "./doc-builder"

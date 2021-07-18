@@ -1,6 +1,6 @@
 import { Library, LibraryConfig } from "../library"
 import { Module } from "../module"
-import { Doc, doc_ext_p, doc_from_file } from "../doc"
+import { Doc, DocBuilder } from "../doc"
 import Path from "path"
 import fs from "fs"
 import readdirp from "readdirp"
@@ -10,23 +10,32 @@ export class LocalLibrary extends Library<Module> {
   root_dir: string
   config: LibraryConfig
   cached_mods: Map<string, Module>
+  doc_builder: DocBuilder<Module>
 
   constructor(opts: {
     root_dir: string
     config: LibraryConfig
     cached_mods?: Map<string, Module>
+    doc_builder: DocBuilder<Module>
   }) {
     super()
     this.root_dir = opts.root_dir
     this.config = opts.config
     this.cached_mods = opts.cached_mods || new Map()
+    this.doc_builder = opts.doc_builder
   }
 
-  static async from_config_file(file: string): Promise<LocalLibrary> {
+  static async from_config_file(
+    file: string,
+    opts: {
+      doc_builder: DocBuilder<Module>
+    }
+  ): Promise<LocalLibrary> {
     const text = await fs.promises.readFile(file, "utf8")
     return new LocalLibrary({
       root_dir: Path.dirname(file),
       config: new LibraryConfig(JSON.parse(text)),
+      doc_builder: opts.doc_builder,
     })
   }
 
@@ -35,7 +44,7 @@ export class LocalLibrary extends Library<Module> {
       ? path
       : Path.resolve(this.root_dir, this.config.src, path)
     const text = await fs.promises.readFile(file, "utf8")
-    return doc_from_file({ path, text, library: this })
+    return this.doc_builder.from_file({ path, text, library: this })
   }
 
   async fetch_docs(): Promise<Record<string, Doc<Module>>> {
@@ -43,7 +52,7 @@ export class LocalLibrary extends Library<Module> {
 
     const docs: Record<string, Doc<Module>> = {}
     for await (const { path } of readdirp(src_dir)) {
-      if (doc_ext_p(path)) {
+      if (this.doc_builder.right_extension_p(path)) {
         docs[path] = await this.fetch_doc(path)
       }
     }

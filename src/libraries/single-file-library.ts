@@ -1,29 +1,40 @@
 import { Library, LibraryConfig } from "../library"
 import { Module } from "../module"
-import { Doc, doc_from_file } from "../doc"
+import { Doc, DocBuilder } from "../doc"
 import fs from "fs"
 
 export class SingleFileLibrary extends Library<Module> {
   config: LibraryConfig
   path: string
+  doc_builder: DocBuilder<Module>
 
-  constructor(path: string) {
+  constructor(
+    path: string,
+    opts: {
+      doc_builder: DocBuilder<Module>
+    }
+  ) {
     super()
     this.path = path
     this.config = new LibraryConfig({
       name: "single-file-library",
       date: new Date().toLocaleDateString(),
     })
+    this.doc_builder = opts.doc_builder
   }
 
   async fetch_doc(path: string): Promise<Doc<Module>> {
     const text = fs.readFileSync(this.path, { encoding: "utf-8" })
-    return doc_from_file({ path: this.path, library: this, text })
+    return this.doc_builder.from_file({ path: this.path, library: this, text })
   }
 
   async fetch_docs(): Promise<Record<string, Doc<Module>>> {
     const text = fs.readFileSync(this.path, { encoding: "utf-8" })
-    const doc = doc_from_file({ path: this.path, library: this, text })
+    const doc = this.doc_builder.from_file({
+      path: this.path,
+      library: this,
+      text,
+    })
     return { [this.path]: doc }
   }
 
