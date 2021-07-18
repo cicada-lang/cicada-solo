@@ -1,6 +1,4 @@
-- `mod.output` is used in `cli/` -- how to deal with this?
-
-  - `Module` is a type argument, we can not describe it interface such as `output`
+- inject `ModuleViewer` to `Library`
 
 - extract `@cicada-lang/librarian`
 
