@@ -11,16 +11,24 @@ export class LibraryConfig {
   date: string
   src: string
 
-  constructor(config: any) {
-    const { value, error } = joiSchema.validate(config, {
+  constructor(opts: { name: string; date: string; src: string }) {
+    this.name = opts.name
+    this.date = opts.date
+    this.src = opts.src
+  }
+
+  static create(data: any): LibraryConfig {
+    const { value, error } = joiSchema.validate(data, {
       presence: "required",
     })
 
     if (error) throw error
 
-    this.name = value.name
-    this.date = value.date
-    this.src = value.src || "src"
+    return new LibraryConfig({
+      name: value.name,
+      date: value.date,
+      src: value.src || "src",
+    })
   }
 
   json(): {

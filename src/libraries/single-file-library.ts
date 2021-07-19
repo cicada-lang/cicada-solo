@@ -15,7 +15,7 @@ export class SingleFileLibrary<Module> extends Library<Module> {
   }) {
     super()
     this.path = opts.path
-    this.config = new LibraryConfig({
+    this.config = LibraryConfig.create({
       name: "single-file-library",
       date: new Date().toLocaleDateString(),
     })
