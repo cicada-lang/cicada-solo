@@ -1,4 +1,5 @@
-- inject `ModuleViewer` to `Library`
+- `library/dependencies/` make the use of dependency injection explicit
+
 - extract `@cicada-lang/librarian`
 
 # later

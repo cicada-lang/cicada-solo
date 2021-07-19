@@ -23,9 +23,16 @@ type Argv = {
   verbose: boolean
 }
 
+const module_viewer = {
+  view(mod: Module): string {
+    return mod.output
+  },
+}
+
 export const handler = async (argv: Argv) => {
   const library = await LocalLibrary.from_config_file(argv["config-file"], {
     doc_builder,
+    module_viewer,
   })
   const opts = { verbose: argv.verbose }
   if (argv.watch) await watch(library, opts)

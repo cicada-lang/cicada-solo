@@ -1,6 +1,7 @@
 import { SingleFileLibrary } from "../../libraries"
 import { LocalLibrary } from "../../libraries"
 import { Trace } from "../../errors"
+import { Module } from "../../module"
 import { doc_builder } from "../../docs"
 import pt from "@cicada-lang/partech"
 import find_up from "find-up"
@@ -18,14 +19,20 @@ type Argv = {
   module: boolean
 }
 
+const module_viewer = {
+  view(mod: Module): string {
+    return mod.output
+  },
+}
+
 export const handler = async (argv: Argv) => {
   const path = Path.resolve(argv.file)
   const dir = Path.dirname(path)
   const library = argv["module"]
     ? await find_library_config_file(dir).then((file) =>
-        LocalLibrary.from_config_file(file, { doc_builder })
+        LocalLibrary.from_config_file(file, { doc_builder, module_viewer })
       )
-    : new SingleFileLibrary(path, { doc_builder })
+    : new SingleFileLibrary({ path, doc_builder, module_viewer })
   try {
     const mod = await library.load(path)
     console.log(mod.output)
