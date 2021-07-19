@@ -1,5 +1,5 @@
-import { LibraryConfig } from "../library"
-import { Doc, DocBuilder } from "../doc"
+import { LibraryConfig, DocBuilder } from "../library"
+import { Doc } from "../doc"
 
 // NOTE in the following interface, caller is responsible to make sure the path exists.
 //   maybe this should be changed, and these functions should be able to return `undefined`.

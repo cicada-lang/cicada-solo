@@ -1,5 +1,5 @@
-import { Library, LibraryConfig } from "../library"
-import { Doc, DocBuilder } from "../doc"
+import { Library, LibraryConfig, DocBuilder } from "../library"
+import { Doc } from "../doc"
 import fs from "fs"
 
 export class SingleFileLibrary<Module> extends Library<Module> {

@@ -1,6 +1,6 @@
-import { Doc, DocBuilder } from "../doc"
+import { Doc } from "../doc"
 import { CicDoc, MdDoc } from "../docs"
-import { Library } from "../library"
+import { Library, DocBuilder } from "../library"
 import { Module } from "../module"
 
 export const doc_builder: DocBuilder<Module> = {
