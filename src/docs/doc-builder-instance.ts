@@ -17,14 +17,12 @@ export const doc_builder: Dependencies.DocBuilder<Module> = {
 
     if (path.endsWith(".cic")) {
       return new CicDoc({ library, text, path })
-    }
-
-    if (path.endsWith(".md")) {
+    } else if (path.endsWith(".md")) {
       return new MdDoc({ library, text, path })
+    } else {
+      throw new Error(
+        `When try to create doc from file, I met path with unknown ext: ${path}`
+      )
     }
-
-    throw new Error(
-      `When try to create doc from file, I met path with unknown ext: ${path}`
-    )
   },
 }

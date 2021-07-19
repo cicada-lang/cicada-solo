@@ -35,7 +35,7 @@ export const handler = async (argv: Argv) => {
     : new SingleFileLibrary({ path, doc_builder, module_viewer })
   try {
     const mod = await library.load(path)
-    console.log(mod.output)
+    console.log(library.module_viewer.view(mod))
   } catch (error) {
     if (error instanceof Trace) {
       console.error(error.repr((exp) => exp.repr()))

@@ -171,10 +171,10 @@ async function snapshot_log(
       path + ".out"
     )
 
-    await fs.promises.writeFile(file, mod.output)
+    await fs.promises.writeFile(file, library.module_viewer.view(mod))
 
     if (opts.verbose) {
-      console.log(mod.output)
+      console.log(library.module_viewer.view(mod))
     }
   }
 }

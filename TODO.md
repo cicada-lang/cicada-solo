@@ -1,5 +1,3 @@
-- can not just load yargs commands from dir, can we use a service layer
-
 - extract `@cicada-lang/librarian`
 
 # later
