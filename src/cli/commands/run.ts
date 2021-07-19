@@ -1,5 +1,5 @@
-import { SingleFileLibrary } from "../../libraries"
-import { LocalLibrary } from "../../libraries"
+import { SingleFileLibrary } from "@cicada-lang/librarian"
+import { LocalLibrary } from "@cicada-lang/librarian"
 import { Trace } from "../../errors"
 import { Module } from "../../module"
 import { doc_builder } from "../../docs"

@@ -1,4 +1,4 @@
-import { LocalLibrary } from "../../libraries"
+import { LocalLibrary } from "@cicada-lang/librarian"
 import { Module } from "../../module"
 import { Trace } from "../../errors"
 import { doc_builder } from "../../docs"

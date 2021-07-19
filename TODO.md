@@ -1,5 +1,3 @@
-- extract `@cicada-lang/librarian`
-
 # later
 
 - [later] update `cicada-lang/cicada-studyroom`

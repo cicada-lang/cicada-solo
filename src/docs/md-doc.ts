@@ -1,5 +1,4 @@
-import { Doc } from "../doc"
-import { Library } from "../library"
+import { Library, Doc } from "@cicada-lang/librarian"
 import { Module } from "../module"
 import { Stmt } from "../stmt"
 import * as Syntax from "../syntax"
