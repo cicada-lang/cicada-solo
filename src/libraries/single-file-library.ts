@@ -1,9 +1,8 @@
 import { Library, LibraryConfig } from "../library"
-import { Module } from "../module"
 import { Doc, DocBuilder } from "../doc"
 import fs from "fs"
 
-export class SingleFileLibrary extends Library<Module> {
+export class SingleFileLibrary<Module> extends Library<Module> {
   config: LibraryConfig
   path: string
   doc_builder: DocBuilder<Module>

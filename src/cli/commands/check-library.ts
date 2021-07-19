@@ -33,7 +33,7 @@ export const handler = async (argv: Argv) => {
 }
 
 async function check(
-  library: LocalLibrary,
+  library: LocalLibrary<Module>,
   opts: { verbose: boolean }
 ): Promise<void> {
   let error_occurred = false
@@ -65,7 +65,7 @@ async function check(
 }
 
 async function watch(
-  library: LocalLibrary,
+  library: LocalLibrary<Module>,
   opts: { verbose: boolean }
 ): Promise<void> {
   const src_dir = Path.resolve(library.root_dir, library.config.src)
@@ -108,7 +108,7 @@ function maybe_assert_error(path: string): void {
 async function error_log(
   error: Error,
   path: string,
-  library: LocalLibrary
+  library: LocalLibrary<Module>
 ): Promise<boolean> {
   const report = await error_report(error, path, library)
 
@@ -132,7 +132,7 @@ async function error_log(
 async function error_report(
   error: Error,
   path: string,
-  library: LocalLibrary
+  library: LocalLibrary<Module>
 ): Promise<string> {
   if (error instanceof Trace) {
     return error.repr((exp) => exp.repr())
@@ -152,7 +152,7 @@ async function error_report(
 }
 
 async function snapshot_log(
-  library: LocalLibrary,
+  library: LocalLibrary<Module>,
   path: string,
   mod: Module,
   opts: { verbose: boolean }

@@ -1,12 +1,11 @@
 import { Library, LibraryConfig } from "../library"
-import { Module } from "../module"
 import { Doc, DocBuilder } from "../doc"
 import Path from "path"
 import fs from "fs"
 import readdirp from "readdirp"
 import chalk from "chalk"
 
-export class LocalLibrary extends Library<Module> {
+export class LocalLibrary<Module> extends Library<Module> {
   root_dir: string
   config: LibraryConfig
   cached_mods: Map<string, Module>
@@ -25,12 +24,12 @@ export class LocalLibrary extends Library<Module> {
     this.doc_builder = opts.doc_builder
   }
 
-  static async from_config_file(
+  static async from_config_file<Module>(
     file: string,
     opts: {
       doc_builder: DocBuilder<Module>
     }
-  ): Promise<LocalLibrary> {
+  ): Promise<LocalLibrary<Module>> {
     const text = await fs.promises.readFile(file, "utf8")
     return new LocalLibrary({
       root_dir: Path.dirname(file),
