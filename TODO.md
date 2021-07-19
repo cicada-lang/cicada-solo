@@ -1,4 +1,3 @@
-- `library/dependencies/` make the use of dependency injection explicit
 - can not just load yargs commands from dir, can we use a service layer
 
 - extract `@cicada-lang/librarian`

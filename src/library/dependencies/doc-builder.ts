@@ -1,5 +1,5 @@
-import { Doc } from "../doc"
-import { Library } from "../library"
+import { Doc } from "../../doc"
+import { Library } from "../../library"
 
 export interface DocBuilder<Module> {
   right_extension_p: (path: string) => boolean

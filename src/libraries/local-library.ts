@@ -1,4 +1,4 @@
-import { Library, LibraryConfig, DocBuilder, ModuleViewer } from "../library"
+import { Library, LibraryConfig, Dependencies } from "../library"
 import { Doc } from "../doc"
 import Path from "path"
 import fs from "fs"
@@ -9,15 +9,15 @@ export class LocalLibrary<Module> extends Library<Module> {
   root_dir: string
   config: LibraryConfig
   cached_mods: Map<string, Module>
-  doc_builder: DocBuilder<Module>
-  module_viewer: ModuleViewer<Module>
+  doc_builder: Dependencies.DocBuilder<Module>
+  module_viewer: Dependencies.ModuleViewer<Module>
 
   constructor(opts: {
     root_dir: string
     config: LibraryConfig
     cached_mods?: Map<string, Module>
-    doc_builder: DocBuilder<Module>
-    module_viewer: ModuleViewer<Module>
+    doc_builder: Dependencies.DocBuilder<Module>
+    module_viewer: Dependencies.ModuleViewer<Module>
   }) {
     super()
     this.root_dir = opts.root_dir
@@ -30,8 +30,8 @@ export class LocalLibrary<Module> extends Library<Module> {
   static async from_config_file<Module>(
     file: string,
     opts: {
-      doc_builder: DocBuilder<Module>
-      module_viewer: ModuleViewer<Module>
+      doc_builder: Dependencies.DocBuilder<Module>
+      module_viewer: Dependencies.ModuleViewer<Module>
     }
   ): Promise<LocalLibrary<Module>> {
     const text = await fs.promises.readFile(file, "utf8")

@@ -1,4 +1,4 @@
-import { LibraryConfig, DocBuilder, ModuleViewer } from "../library"
+import { LibraryConfig, Dependencies } from "../library"
 import { Doc } from "../doc"
 
 // NOTE in the following interface, caller is responsible to make sure the path exists.
@@ -6,8 +6,8 @@ import { Doc } from "../doc"
 export abstract class Library<Module> {
   abstract config: LibraryConfig
 
-  abstract doc_builder: DocBuilder<Module>
-  abstract module_viewer: ModuleViewer<Module>
+  abstract doc_builder: Dependencies.DocBuilder<Module>
+  abstract module_viewer: Dependencies.ModuleViewer<Module>
 
   abstract fetch_doc(path: string): Promise<Doc<Module>>
   abstract fetch_docs(): Promise<Record<string, Doc<Module>>>

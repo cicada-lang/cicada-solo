@@ -1,17 +1,17 @@
-import { Library, LibraryConfig, DocBuilder, ModuleViewer } from "../library"
+import { Library, LibraryConfig, Dependencies } from "../library"
 import { Doc } from "../doc"
 import fs from "fs"
 
 export class SingleFileLibrary<Module> extends Library<Module> {
   config: LibraryConfig
   path: string
-  doc_builder: DocBuilder<Module>
-  module_viewer: ModuleViewer<Module>
+  doc_builder: Dependencies.DocBuilder<Module>
+  module_viewer: Dependencies.ModuleViewer<Module>
 
   constructor(opts: {
     path: string
-    doc_builder: DocBuilder<Module>
-    module_viewer: ModuleViewer<Module>
+    doc_builder: Dependencies.DocBuilder<Module>
+    module_viewer: Dependencies.ModuleViewer<Module>
   }) {
     super()
     this.path = opts.path

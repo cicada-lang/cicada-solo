@@ -1,9 +1,9 @@
 import { Doc } from "../doc"
 import { CicDoc, MdDoc } from "../docs"
-import { Library, DocBuilder } from "../library"
+import { Library, Dependencies } from "../library"
 import { Module } from "../module"
 
-export const doc_builder: DocBuilder<Module> = {
+export const doc_builder: Dependencies.DocBuilder<Module> = {
   right_extension_p(path: string): boolean {
     return path.endsWith(".cic") || path.endsWith(".md")
   },
