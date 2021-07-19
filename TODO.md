@@ -1,11 +1,11 @@
-# later
-
-- [later] update `cicada-lang/cicada-studyroom`
-
 # implicit
 
 - [implicit] implement implicit
 - [implicit] use implicit to implement `cong` by `replace`
+
+# later
+
+- [later] update `cicada-lang/cicada-studyroom`
 
 # subtype
 
