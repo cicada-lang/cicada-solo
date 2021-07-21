@@ -2,6 +2,7 @@ import { LocalLibrary } from "@cicada-lang/librarian"
 import { Module } from "../../module"
 import { Trace } from "../../errors"
 import { doc_builder } from "../../docs"
+import { module_viewer } from "../../module"
 import pt from "@cicada-lang/partech"
 import chokidar from "chokidar"
 import moment from "moment"
@@ -21,12 +22,6 @@ type Argv = {
   "config-file": string
   watch: boolean
   verbose: boolean
-}
-
-const module_viewer = {
-  view(mod: Module): string {
-    return mod.output
-  },
 }
 
 export const handler = async (argv: Argv) => {

@@ -3,6 +3,7 @@ import { LocalLibrary } from "@cicada-lang/librarian"
 import { Trace } from "../../errors"
 import { Module } from "../../module"
 import { doc_builder } from "../../docs"
+import { module_viewer } from "../../module"
 import pt from "@cicada-lang/partech"
 import find_up from "find-up"
 import Path from "path"
@@ -17,12 +18,6 @@ export const builder = {
 type Argv = {
   file: string
   module: boolean
-}
-
-const module_viewer = {
-  view(mod: Module): string {
-    return mod.output
-  },
 }
 
 export const handler = async (argv: Argv) => {
