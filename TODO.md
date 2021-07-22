@@ -1,7 +1,12 @@
 # implicit
 
-- [implicit] implement implicit
-- [implicit] use implicit to implement `cong` by `replace`
+- pi-implicit -- `(given x: A) -> B`
+
+- fn-implicit
+  - no argument -- `(given) { b }`
+  - with argument -- `(given x) { b(x) }`
+
+- use implicit to implement `cong` by `replace`
 
 # later
 
