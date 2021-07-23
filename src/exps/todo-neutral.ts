@@ -6,15 +6,15 @@ import {Value} from "../value";
 
 export class TodoNeutral extends Neutral {
     message: string
-    type: Value
+    t: Value
 
     constructor(message: string, type: Value) {
         super()
         this.message = message
-        this.type = type
+        this.t = type
     }
 
     readback_neutral(ctx: Ctx): Core {
-        return new TodoCore(this.message, this.type)
+        return new TodoCore(this.message, this.t)
     }
 }

@@ -4,7 +4,6 @@ import {Value} from "../value";
 import {Core} from "../core";
 import {TodoCore} from "./todo-core";
 import {QuoteCore} from "./str/quote-core";
-import * as Exps from "./var";
 
 export class Todo extends Exp {
     message: string
