@@ -2,10 +2,9 @@ import {Exp} from "../exp";
 import {Ctx} from "../ctx";
 import {Value} from "../value";
 import {Core} from "../core";
-import * as Exps from "./var";
 import {TodoCore} from "./todo-core";
 
-export class TODO extends Exp {
+export class Todo extends Exp {
     message: string
 
     constructor(message: string) {
@@ -22,7 +21,7 @@ export class TODO extends Exp {
     }
 
     repr(): string {
-        return "Type"
+        return (new TodoCore(this.message)).repr()
     }
 
     check(ctx: Ctx, t: Value): Core {
