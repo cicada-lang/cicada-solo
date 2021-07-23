@@ -1,0 +1,9 @@
+a: Nat = TODO("A trival Nat")
+
+b: Trival = TODO("It's not Trival")
+
+c: Absurd = TODO("Absurd!")
+
+law_of_excluded_middle(A: Type): Either(A, (A) -> Absurd) {
+  TODO("tertium non datur")
+}

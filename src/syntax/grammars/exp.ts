@@ -237,6 +237,7 @@ export const operand = {
     "operand:inl": ['"inl"', '"("', { left: "exp" }, '")"'],
     "operand:inr": ['"inr"', '"("', { right: "exp" }, '")"'],
     "operand:type": ['"Type"'],
+    "operand:todo": ['"TODO"', '"("', { message: "exp" }, ")"],
   },
 }
 
