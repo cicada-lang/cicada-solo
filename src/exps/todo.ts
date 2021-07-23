@@ -27,6 +27,6 @@ export class Todo extends Exp {
     }
 
     check(ctx: Ctx, t: Value): Core {
-        return new TodoCore(this.message, t.readback(ctx, new Exps.TypeValue()))
+        return new TodoCore(this.message, t)
     }
 }

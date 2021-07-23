@@ -2,20 +2,20 @@ import {Core, AlphaCtx} from "../core"
 import {Env} from "../env"
 import {Value} from "../value"
 import * as Exps from "../exps"
-import {QuoteCore} from "../exps";
+import {QuoteCore, TodoNeutral} from "../exps";
 
 export class TodoCore extends Core {
     message: string
-    type: Core
+    type: Value
 
-    constructor(message: string, type: Core) {
+    constructor(message: string, type: Value) {
         super()
         this.message = message
         this.type = type
     }
 
     evaluate(env: Env): Value {
-        return new Exps.TypeValue()
+        return new Exps.NotYetValue(this.type, new TodoNeutral(this.message, this.type))
     }
 
     repr(): string {
