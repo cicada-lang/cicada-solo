@@ -40,7 +40,6 @@
 
 - [refactoring] `Exps.Cls.infer` and `Exps.Ext.infer`
 - [requirement] support to use `let` to do local definitions in class
-- support to use `TODO("name-of-this-hole")` has hole
 - [optimization] use native `number` as `Nat`
 
 # syntax
