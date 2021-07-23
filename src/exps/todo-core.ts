@@ -6,10 +6,12 @@ import {QuoteCore} from "../exps";
 
 export class TodoCore extends Core {
     message: string
+    type: Core
 
-    constructor(message: string) {
+    constructor(message: string, type: Core) {
         super()
         this.message = message
+        this.type = type
     }
 
     evaluate(env: Env): Value {

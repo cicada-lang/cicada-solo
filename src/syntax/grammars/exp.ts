@@ -226,6 +226,7 @@ export const operand = {
     "operand:absurd": ['"Absurd"'],
     "operand:str": ['"String"'],
     "operand:quote": [{ value: { $pattern: ["string"] } }],
+    "operand:todo": ['"TODO"', '"("', { value: { $pattern: ["string"] } }, ")"],
     "operand:either": [
       '"Either"',
       '"("',
@@ -237,7 +238,6 @@ export const operand = {
     "operand:inl": ['"inl"', '"("', { left: "exp" }, '")"'],
     "operand:inr": ['"inr"', '"("', { right: "exp" }, '")"'],
     "operand:type": ['"Type"'],
-    "operand:todo": ['"TODO"', '"("', { message: "exp" }, ")"],
   },
 }
 

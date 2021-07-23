@@ -3,6 +3,8 @@ import {Ctx} from "../ctx";
 import {Value} from "../value";
 import {Core} from "../core";
 import {TodoCore} from "./todo-core";
+import {QuoteCore} from "./str/quote-core";
+import * as Exps from "./var";
 
 export class Todo extends Exp {
     message: string
@@ -21,10 +23,10 @@ export class Todo extends Exp {
     }
 
     repr(): string {
-        return (new TodoCore(this.message)).repr()
+        return `TODO(${(new QuoteCore(this.message)).repr()})`
     }
 
     check(ctx: Ctx, t: Value): Core {
-        return new TodoCore(this.message)
+        return new TodoCore(this.message, t.readback(ctx, new Exps.TypeValue()))
     }
 }
