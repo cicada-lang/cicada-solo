@@ -223,6 +223,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:str": () => new Exps.Str(),
     "operand:quote": ({ value }) =>
       new Exps.Quote(pt.trim_boundary(pt.str(value), 1)),
+    "operand:todo": ({ value }) =>
+        new Exps.Todo(pt.trim_boundary(pt.str(value), 1)),
     "operand:either": ({ left_t, right_t }) =>
       new Exps.Either(exp_matcher(left_t), exp_matcher(right_t)),
     "operand:inl": ({ left }) => new Exps.Inl(exp_matcher(left)),
