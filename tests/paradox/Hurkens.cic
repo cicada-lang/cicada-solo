@@ -44,6 +44,10 @@ delta: P(U) = (y) {
   Not((p: P(U), _: sigma(y, p)) -> p(tauon(sigma(y))))
 }
 
-//omega: Type = tauon((p) {
+// omega: Type = tauon((p) {
 //  (x: Type, _: sigma(x, p)) -> p(x)
-//})
+// })
+
+omega: U = tauon((p) {
+ (x: U, _: sigma(x, p)) -> p(x)
+})
