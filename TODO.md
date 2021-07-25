@@ -1,5 +1,11 @@
 # implicit
 
+- we need unification over `Value` -- what should be the interface?
+
+  - we need to reify `Value`
+
+  - be careful when handling pi and sigma type's closure
+
 - pi-implicit -- only over pi `(given x: A, y: B(x)) -> C(x)`
 
 - fn-implicit -- `(given x, y) { z(x) }`
