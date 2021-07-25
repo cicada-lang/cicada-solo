@@ -38,9 +38,10 @@ cong(
 // TODO use implicit to define `cong`
 
 // cong(
-//   given X Y: Type,
+//   given X: Type,
 //   given from to: X,
 //   target: Equal(X, from, to),
+//   given Y: Type,
 //   f: (X) -> Y,
 // ): Equal(Y, f(from), f(to)) {
 //   replace(
