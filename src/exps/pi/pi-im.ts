@@ -7,7 +7,7 @@ import { evaluate } from "../../core"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
-export class PiImplicit extends Exp {
+export class PiIm extends Exp {
   name: string
   arg_t: Exp
   pi: Exps.Pi
@@ -29,15 +29,15 @@ export class PiImplicit extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): PiImplicit {
+  subst(name: string, exp: Exp): PiIm {
     if (name === this.name) {
-      return new PiImplicit(this.name, this.arg_t.subst(name, exp), this.pi)
+      return new PiIm(this.name, this.arg_t.subst(name, exp), this.pi)
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
       const pi = this.pi.subst(this.name, new Exps.Var(fresh_name))
 
-      return new PiImplicit(
+      return new PiIm(
         fresh_name,
         this.arg_t.subst(name, exp),
         pi.subst(name, exp)
@@ -60,7 +60,7 @@ export class PiImplicit extends Exp {
 
     // return {
     //   t: new Exps.TypeValue(),
-    //   core: new Exps.PiImplicitCore(fresh_name, arg_t_core, pi_core),
+    //   core: new Exps.PiImCore(fresh_name, arg_t_core, pi_core),
     // }
   }
 

@@ -67,7 +67,7 @@ export class Ap extends Exp {
 
     // TODO
 
-    // if (inferred_target.t instanceof Exps.PiImplicitValue) {
+    // if (inferred_target.t instanceof Exps.PiImValue) {
     //   const pi_implicit = inferred_target.t
     //   const inferred_arg = infer(ctx, this.arg)
     //   const solution = solve(pi_implicit.pi.arg_t, inferred_arg.t)
