@@ -4,6 +4,7 @@ import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { check } from "../../exp"
 import { evaluate } from "../../core"
+import { Trace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
@@ -56,12 +57,19 @@ export class PiIm extends Exp {
       new Exps.TypeValue()
     )
 
-    throw new Error("TODO")
+    if (!(pi_core instanceof Exps.PiCore)) {
+      throw new Trace(
+        [
+          `I expect pi_core to be Exps.PiCore`,
+          `but the constructor name I meet is: ${pi_core.constructor.name}`,
+        ].join("\n") + "\n"
+      )
+    }
 
-    // return {
-    //   t: new Exps.TypeValue(),
-    //   core: new Exps.PiImCore(fresh_name, arg_t_core, pi_core),
-    // }
+    return {
+      t: new Exps.TypeValue(),
+      core: new Exps.PiImCore(fresh_name, arg_t_core, pi_core),
+    }
   }
 
   repr(): string {
