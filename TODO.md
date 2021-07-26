@@ -1,9 +1,6 @@
 # implicit
 
-- `exps/pi/pi-implicit` -- `repr`
-
 - `exps/pi/pi-implicit` -- `subst`
-- `exps/pi/pi-implicit` -- `free_names`
 
 - `exps/pi/pi-implicit` -- `infer`
 

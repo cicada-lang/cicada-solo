@@ -27,11 +27,13 @@ export class PiImplicit extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    throw new Error("TODO")
-    // return new Set([
-    //   ...this.arg_t.free_names(bound_names),
-    //   ...this.ret_t.free_names(new Set([...bound_names, this.name])),
-    // ])
+    return new Set([
+      ...this.given.arg_t.free_names(bound_names),
+      ...this.arg_t.free_names(new Set([...bound_names, this.given.name])),
+      ...this.ret_t.free_names(
+        new Set([...bound_names, this.given.name, this.name])
+      ),
+    ])
   }
 
   subst(name: string, exp: Exp): Exp {
@@ -69,32 +71,12 @@ export class PiImplicit extends Exp {
     // }
   }
 
-  private multi_pi(
-    entries: Array<{ name: string; arg_t: Exp }> = new Array()
-  ): {
-    entries: Array<{ name: string; arg_t: Exp }>
-    ret_t: Exp
-  } {
-    throw new Error("TODO")
-
-    // const entry = { name: this.name, arg_t: this.arg_t }
-
-    // if (this.ret_t instanceof PiImplicit) {
-    //   return this.ret_t.multi_pi([...entries, entry])
-    // } else {
-    //   return {
-    //     entries: [...entries, entry],
-    //     ret_t: this.ret_t,
-    //   }
-    // }
-  }
-
   repr(): string {
-    throw new Error("TODO")
-    // const { entries, ret_t } = this.multi_pi()
-    // const entries_repr = entries
-    //   .map(({ name, arg_t }) => `${name}: ${arg_t.repr()}`)
-    //   .join(", ")
-    // return `(${entries_repr}) -> ${ret_t.repr()}`
+    const entries_repr = [
+      `${this.given.name}: ${this.given.arg_t.repr()}`,
+      `${this.name}: ${this.arg_t.repr()}`,
+    ].join(", ")
+
+    return `(${entries_repr}) -> ${this.ret_t.repr()}`
   }
 }
