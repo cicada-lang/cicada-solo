@@ -1,7 +1,5 @@
 # implicit
 
-- fix type of `Exp.subst`
-
 - `exps/pi/pi-implicit` -- `infer`
 
 - `exps/pi/pi-implicit` -- syntax -- only over pi `(given x: A, y: B(x)) -> C(x)`

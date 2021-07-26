@@ -27,7 +27,7 @@ export class Let extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): Let {
     if (name === this.name) {
       return new Let(this.name, this.exp.subst(name, exp), this.ret)
     } else {

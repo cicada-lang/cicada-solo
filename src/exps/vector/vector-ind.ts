@@ -36,7 +36,7 @@ export class VectorInd extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): VectorInd {
     return new VectorInd(
       this.length.subst(name, exp),
       this.target.subst(name, exp),

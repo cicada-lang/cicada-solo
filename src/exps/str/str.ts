@@ -9,7 +9,7 @@ export class Str extends Exp {
     return new Set()
   }
 
-  subst(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): this {
     return this
   }
 

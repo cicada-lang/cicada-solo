@@ -24,7 +24,7 @@ export class Vec extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): Vec {
     return new Vec(this.head.subst(name, exp), this.tail.subst(name, exp))
   }
 

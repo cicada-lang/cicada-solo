@@ -23,7 +23,7 @@ export class The extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): The {
     return new The(this.t.subst(name, exp), this.exp.subst(name, exp))
   }
 
