@@ -1,14 +1,24 @@
 # implicit
 
+- `exps/pi/pi-implicit` -- `repr`
+
+- `exps/pi/pi-implicit` -- `subst`
+- `exps/pi/pi-implicit` -- `free_names`
+
+- `exps/pi/pi-implicit` -- `infer`
+
+- `exps/pi/pi-implicit` -- syntax -- only over pi `(given x: A, y: B(x)) -> C(x)`
+
+- `exps/pi/fn-implicit` -- stab
+- `exps/pi/fn-implicit` -- syntax  -- `(given x, y) { z(x) }`
+
+- `exps/pi/ap-implicit` -- syntax  -- `f(given x)`
+
 - we need unification over `Value` -- what should be the interface?
 
   - we need to reify `Value`
 
   - be careful when handling pi and sigma type's closure
-
-- pi-implicit -- only over pi `(given x: A, y: B(x)) -> C(x)`
-
-- fn-implicit -- `(given x, y) { z(x) }`
 
 - use implicit to implement `cong` by `replace`
 
