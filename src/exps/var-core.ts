@@ -15,7 +15,10 @@ export class VarCore extends Core {
     const result = env.lookup_value(this.name)
     if (result === undefined) {
       throw new Trace(
-        `Fail to evaluate a variable.\n` + `The name ${this.name} is undefined.`
+        [
+          `Fail to evaluate a variable.`,
+          `The name ${this.name} is undefined.`,
+        ].join("\n")
       )
     }
 

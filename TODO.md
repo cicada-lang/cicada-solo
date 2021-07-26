@@ -3,23 +3,20 @@
 - `exps/pi/pi-im-value`
 - `exps/pi/pi-im-core`
 
-- `exps/pi/fn-im-core`
-- `exps/pi/fn-im-value`
+- `exps/pi/pi-im` -- `infer` -- need `PiImCore`
 
 - `exps/pi/ap` -- `infer`  -- handle `Exps.PiImValue`
 
 - `exps/pi/fn-im` -- stab
-- `exps/pi/fn-im` -- syntax  -- `(given x, y) { z(x) }`
+- `exps/pi/fn-im-core`
+- `exps/pi/fn-im-value`
 
+- `exps/pi/pi-im` -- syntax -- only over pi `(given x: A, y: B(x)) -> C(x)`
+- `exps/pi/fn-im` -- syntax  -- `(given x, y) { z(x) }`
 - `exps/pi/ap-im` -- syntax  -- `f(given x)`
 
-- `exps/pi/pi-im` -- `infer` -- need `PiImCore`
-- `exps/pi/pi-im` -- syntax -- only over pi `(given x: A, y: B(x)) -> C(x)`
-
 - we need unification over `Value` -- what should be the interface?
-
   - we need to reify `Value`
-
   - be careful when handling pi and sigma type's closure
 
 - use implicit to implement `cong` by `replace`
