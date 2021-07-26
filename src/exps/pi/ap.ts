@@ -65,6 +65,24 @@ export class Ap extends Exp {
       }
     }
 
+    // TODO
+
+    // if (inferred_target.t instanceof Exps.PiImplicitValue) {
+    //   const pi_implicit = inferred_target.t
+    //   const inferred_arg = infer(ctx, this.arg)
+    //   const solution = solve(pi_implicit.pi.arg_t, inferred_arg.t)
+
+    //   arg_core = check(ctx.extend(name, arg_t), ret_t, Type)
+
+    //   const arg_core = check(ctx, this.arg, pi.arg_t)
+    //   const arg_value = evaluate(ctx.to_env(), arg_core)
+
+    //   return {
+    //     t: pi.ret_t_cl.apply(arg_value),
+    //     core: new Exps.ApCore(inferred_target.core, arg_core),
+    //   }
+    // }
+
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
     if (target_value instanceof Exps.ClsValue) {
       return this.infer_for_cls(ctx, target_value, inferred_target.core)

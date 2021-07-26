@@ -1,5 +1,7 @@
 # implicit
 
+- `exps/pi/ap` -- `infer`  -- handle `Exps.PiImplicitValue`
+
 - `exps/pi/fn-implicit` -- stab
 - `exps/pi/fn-implicit` -- syntax  -- `(given x, y) { z(x) }`
 
