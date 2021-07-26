@@ -1,13 +1,12 @@
 # implicit
 
-- `exps/pi/pi-implicit` -- `infer`
-
-- `exps/pi/pi-implicit` -- syntax -- only over pi `(given x: A, y: B(x)) -> C(x)`
-
 - `exps/pi/fn-implicit` -- stab
 - `exps/pi/fn-implicit` -- syntax  -- `(given x, y) { z(x) }`
 
 - `exps/pi/ap-implicit` -- syntax  -- `f(given x)`
+
+- `exps/pi/pi-implicit` -- `infer` -- need `PiImplicitCore`
+- `exps/pi/pi-implicit` -- syntax -- only over pi `(given x: A, y: B(x)) -> C(x)`
 
 - we need unification over `Value` -- what should be the interface?
 

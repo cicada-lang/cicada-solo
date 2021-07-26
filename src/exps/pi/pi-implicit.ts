@@ -46,20 +46,21 @@ export class PiImplicit extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
+    const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
+    const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
+    const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
+    const pi = this.pi.subst(this.name, new Exps.Var(fresh_name))
+    const pi_core = check(
+      ctx.extend(fresh_name, arg_t_value),
+      pi,
+      new Exps.TypeValue()
+    )
+
     throw new Error("TODO")
-    // const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
-    // const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
-    // const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
-    // const ret_t = this.ret_t.subst(this.name, new Exps.Var(fresh_name))
-    // const ret_t_core = check(
-    //   ctx.extend(fresh_name, arg_t_value),
-    //   ret_t,
-    //   new Exps.TypeValue()
-    // )
 
     // return {
     //   t: new Exps.TypeValue(),
-    //   core: new Exps.PiCore(fresh_name, arg_t_core, ret_t_core),
+    //   core: new Exps.PiImplicitCore(fresh_name, arg_t_core, pi_core),
     // }
   }
 
