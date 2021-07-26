@@ -23,7 +23,7 @@ export class Fn extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): Fn {
     if (name === this.name) {
       return this
     } else {

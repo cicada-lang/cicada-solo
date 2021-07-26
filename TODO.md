@@ -1,6 +1,6 @@
 # implicit
 
-- `exps/pi/pi-implicit` -- `subst`
+- fix type of `Exp.subst`
 
 - `exps/pi/pi-implicit` -- `infer`
 

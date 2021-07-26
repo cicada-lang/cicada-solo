@@ -8,49 +8,41 @@ import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class PiImplicit extends Exp {
-  given: { name: string; arg_t: Exp }
   name: string
   arg_t: Exp
-  ret_t: Exp
+  pi: Exps.Pi
 
-  constructor(
-    given: { name: string; arg_t: Exp },
-    name: string,
-    arg_t: Exp,
-    ret_t: Exp
-  ) {
+  constructor(name: string, arg_t: Exp, pi: Exps.Pi) {
     super()
-    this.given = given
     this.name = name
     this.arg_t = arg_t
-    this.ret_t = ret_t
+    this.pi = pi
   }
 
   free_names(bound_names: Set<string>): Set<string> {
     return new Set([
-      ...this.given.arg_t.free_names(bound_names),
-      ...this.arg_t.free_names(new Set([...bound_names, this.given.name])),
-      ...this.ret_t.free_names(
-        new Set([...bound_names, this.given.name, this.name])
+      ...this.arg_t.free_names(bound_names),
+      ...this.pi.arg_t.free_names(new Set([...bound_names, this.name])),
+      ...this.pi.ret_t.free_names(
+        new Set([...bound_names, this.name, this.pi.name])
       ),
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
-    throw new Error("TODO")
-    // if (name === this.name) {
-    //   return new PiImplicit(this.name, this.arg_t.subst(name, exp), this.ret_t)
-    // } else {
-    //   const free_names = exp.free_names(new Set())
-    //   const fresh_name = ut.freshen_name(free_names, this.name)
-    //   const ret_t = this.ret_t.subst(this.name, new Exps.Var(fresh_name))
+  subst(name: string, exp: Exp): PiImplicit {
+    if (name === this.name) {
+      return new PiImplicit(this.name, this.arg_t.subst(name, exp), this.pi)
+    } else {
+      const free_names = exp.free_names(new Set())
+      const fresh_name = ut.freshen_name(free_names, this.name)
+      const pi = this.pi.subst(this.name, new Exps.Var(fresh_name))
 
-    //   return new PiImplicit(
-    //     fresh_name,
-    //     this.arg_t.subst(name, exp),
-    //     ret_t.subst(name, exp)
-    //   )
-    // }
+      return new PiImplicit(
+        fresh_name,
+        this.arg_t.subst(name, exp),
+        pi.subst(name, exp)
+      )
+    }
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
@@ -73,10 +65,10 @@ export class PiImplicit extends Exp {
 
   repr(): string {
     const entries_repr = [
-      `${this.given.name}: ${this.given.arg_t.repr()}`,
       `${this.name}: ${this.arg_t.repr()}`,
+      `${this.pi.name}: ${this.pi.arg_t.repr()}`,
     ].join(", ")
 
-    return `(${entries_repr}) -> ${this.ret_t.repr()}`
+    return `(${entries_repr}) -> ${this.pi.ret_t.repr()}`
   }
 }

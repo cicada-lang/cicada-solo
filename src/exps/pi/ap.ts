@@ -26,7 +26,7 @@ export class Ap extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): Ap {
     return new Ap(this.target.subst(name, exp), this.arg.subst(name, exp))
   }
 

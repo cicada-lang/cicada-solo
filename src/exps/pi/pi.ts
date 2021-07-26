@@ -26,7 +26,7 @@ export class Pi extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): Pi {
     if (name === this.name) {
       return new Pi(this.name, this.arg_t.subst(name, exp), this.ret_t)
     } else {
