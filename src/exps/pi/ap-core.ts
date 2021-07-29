@@ -20,20 +20,25 @@ export class ApCore extends Core {
     return ApCore.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
-  private multi_ap(args: Array<Core> = new Array()): {
-    target: Core
-    args: Array<Core>
+  private multi_ap_repr(
+    args: Array<string> = new Array()
+  ): {
+    target: string
+    args: Array<string>
   } {
     if (this.target instanceof ApCore) {
-      return this.target.multi_ap([this.arg, ...args])
+      return this.target.multi_ap_repr([this.arg.repr(), ...args])
     } else {
-      return { target: this.target, args: [this.arg, ...args] }
+      return {
+        target: this.target.repr(),
+        args: [this.arg.repr(), ...args],
+      }
     }
   }
 
   repr(): string {
-    const { target, args } = this.multi_ap()
-    return `${target.repr()}(${args.map((arg) => arg.repr()).join(", ")})`
+    const { target, args } = this.multi_ap_repr()
+    return `${target}(${args.join(", ")})`
   }
 
   alpha_repr(ctx: AlphaCtx): string {

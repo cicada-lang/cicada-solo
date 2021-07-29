@@ -91,19 +91,24 @@ export class Ap extends Exp {
     throw new Trace(`I am expecting value of type: PiValue or ClsValue`)
   }
 
-  private multi_ap(args: Array<Exp> = new Array()): {
-    target: Exp
-    args: Array<Exp>
+  private multi_ap_repr(
+    args: Array<string> = new Array()
+  ): {
+    target: string
+    args: Array<string>
   } {
     if (this.target instanceof Ap) {
-      return this.target.multi_ap([this.arg, ...args])
+      return this.target.multi_ap_repr([this.arg.repr(), ...args])
     } else {
-      return { target: this.target, args: [this.arg, ...args] }
+      return {
+        target: this.target.repr(),
+        args: [this.arg.repr(), ...args],
+      }
     }
   }
 
   repr(): string {
-    const { target, args } = this.multi_ap()
-    return `${target.repr()}(${args.map((arg) => arg.repr()).join(", ")})`
+    const { target, args } = this.multi_ap_repr()
+    return `${target}(${args.join(", ")})`
   }
 }
