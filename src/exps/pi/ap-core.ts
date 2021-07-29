@@ -20,9 +20,7 @@ export class ApCore extends Core {
     return ApCore.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
-  private multi_ap_repr(
-    args: Array<string> = new Array()
-  ): {
+  private multi_ap_repr(args: Array<string> = new Array()): {
     target: string
     args: Array<string>
   } {

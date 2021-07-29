@@ -91,9 +91,7 @@ export class Ap extends Exp {
     throw new Trace(`I am expecting value of type: PiValue or ClsValue`)
   }
 
-  private multi_ap_repr(
-    args: Array<string> = new Array()
-  ): {
+  private multi_ap_repr(args: Array<string> = new Array()): {
     target: string
     args: Array<string>
   } {

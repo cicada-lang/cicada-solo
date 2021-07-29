@@ -44,9 +44,7 @@ export class Fn extends Exp {
     return new Exps.FnCore(fresh_name, ret_core)
   }
 
-  private multi_fn_repr(
-    names: Array<string> = new Array()
-  ): {
+  private multi_fn_repr(names: Array<string> = new Array()): {
     names: Array<string>
     ret: string
   } {
