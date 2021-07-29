@@ -68,7 +68,7 @@ export class Pi extends Exp {
     const entry = `${this.name}: ${this.arg_t.repr()}`
 
     if (this.ret_t instanceof Pi) {
-      return this.ret_t.multi_pi([...entries, entry])
+      return this.ret_t.multi_pi_repr([...entries, entry])
     } else {
       return {
         entries: [...entries, entry],

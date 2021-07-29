@@ -51,7 +51,7 @@ export class Fn extends Exp {
     ret: string
   } {
     if (this.ret instanceof Fn) {
-      return this.ret.multi_fn([...names, this.name])
+      return this.ret.multi_fn_repr([...names, this.name])
     } else {
       return { names: [...names, this.name], ret: this.ret.repr() }
     }
