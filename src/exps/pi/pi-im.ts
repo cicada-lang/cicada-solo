@@ -72,9 +72,7 @@ export class PiIm extends Exp {
     }
   }
 
-  multi_pi_repr(
-    entries: Array<string> = new Array()
-  ): {
+  multi_pi_repr(entries: Array<string> = new Array()): {
     entries: Array<string>
     ret_t: string
   } {
