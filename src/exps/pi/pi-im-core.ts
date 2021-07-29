@@ -38,10 +38,8 @@ export class PiImCore extends Core {
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    throw new Error("TODO")
-
-    // const arg_t_repr = this.arg_t.alpha_repr(ctx)
-    // const ret_t_repr = this.ret_t.alpha_repr(ctx.extend(this.name))
-    // return `(${arg_t_repr}) -> ${ret_t_repr}`
+    const arg_t_repr = this.arg_t.alpha_repr(ctx)
+    const pi_repr = this.pi.alpha_repr(ctx.extend(this.name))
+    return `(given ${arg_t_repr}) -> ${pi_repr}`
   }
 }
