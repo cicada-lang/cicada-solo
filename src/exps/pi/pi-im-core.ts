@@ -24,34 +24,17 @@ export class PiImCore extends Core {
     // return new Exps.PiValue(arg_t, new Closure(env, this.name, this.ret_t))
   }
 
-  private multi_pi(
-    entries: Array<{ name: string; arg_t: Core }> = new Array()
-  ): {
-    entries: Array<{ name: string; arg_t: Core }>
-    ret_t: Core
+  multi_pi_repr(entries: Array<string> = new Array()): {
+    entries: Array<string>
+    ret_t: string
   } {
-    throw new Error("TODO")
-
-    // const entry = { name: this.name, arg_t: this.arg_t }
-
-    // if (this.ret_t instanceof PiCore) {
-    //   return this.ret_t.multi_pi([...entries, entry])
-    // } else {
-    //   return {
-    //     entries: [...entries, entry],
-    //     ret_t: this.ret_t,
-    //   }
-    // }
+    const entry = `given ${this.name}: ${this.arg_t.repr()}`
+    return this.pi.multi_pi_repr([...entries, entry])
   }
 
   repr(): string {
-    throw new Error("TODO")
-
-    // const { entries, ret_t } = this.multi_pi()
-    // const entries_repr = entries
-    //   .map(({ name, arg_t }) => `${name}: ${arg_t.repr()}`)
-    //   .join(", ")
-    // return `(${entries_repr}) -> ${ret_t.repr()}`
+    const { entries, ret_t } = this.multi_pi_repr()
+    return `(${entries.join(", ")}) -> ${ret_t}`
   }
 
   alpha_repr(ctx: AlphaCtx): string {

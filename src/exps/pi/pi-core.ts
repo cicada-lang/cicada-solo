@@ -22,7 +22,7 @@ export class PiCore extends Core {
     return new Exps.PiValue(arg_t, new Closure(env, this.name, this.ret_t))
   }
 
-  private multi_pi_repr(entries: Array<string> = new Array()): {
+  multi_pi_repr(entries: Array<string> = new Array()): {
     entries: Array<string>
     ret_t: string
   } {
