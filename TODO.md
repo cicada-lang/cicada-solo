@@ -1,5 +1,8 @@
 # implicit
 
+- improve `multi_fn`
+- improve `multi_sigma`
+
 - `exps/pi/pi-im-core` -- `alpha_repr`
 - `exps/pi/pi-im-core` -- `repr`
 - `exps/pi/pi-im-core` -- `evaluate`
