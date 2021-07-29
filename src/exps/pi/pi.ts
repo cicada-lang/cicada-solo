@@ -59,7 +59,7 @@ export class Pi extends Exp {
     }
   }
 
-  private multi_pi(
+  private multi_pi_repr(
     entries: Array<string> = new Array()
   ): {
     entries: Array<string>
@@ -78,7 +78,7 @@ export class Pi extends Exp {
   }
 
   repr(): string {
-    const { entries, ret_t } = this.multi_pi()
+    const { entries, ret_t } = this.multi_pi_repr()
     return `(${entries.join(", ")}) -> ${ret_t}`
   }
 }
