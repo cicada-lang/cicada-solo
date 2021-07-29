@@ -72,12 +72,18 @@ export class PiIm extends Exp {
     }
   }
 
-  repr(): string {
-    const entries_repr = [
-      `${this.name}: ${this.arg_t.repr()}`,
-      `${this.pi.name}: ${this.pi.arg_t.repr()}`,
-    ].join(", ")
+  multi_pi_repr(
+    entries: Array<string> = new Array()
+  ): {
+    entries: Array<string>
+    ret_t: string
+  } {
+    const entry = `given ${this.name}: ${this.arg_t.repr()}`
+    return this.pi.multi_pi_repr([...entries, entry])
+  }
 
-    return `(${entries_repr}) -> ${this.pi.ret_t.repr()}`
+  repr(): string {
+    const { entries, ret_t } = this.multi_pi_repr()
+    return `(${entries.join(", ")}) -> ${ret_t}`
   }
 }

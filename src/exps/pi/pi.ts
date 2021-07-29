@@ -59,7 +59,7 @@ export class Pi extends Exp {
     }
   }
 
-  private multi_pi_repr(entries: Array<string> = new Array()): {
+  multi_pi_repr(entries: Array<string> = new Array()): {
     entries: Array<string>
     ret_t: string
   } {
