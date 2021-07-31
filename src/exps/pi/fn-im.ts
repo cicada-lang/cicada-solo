@@ -35,15 +35,14 @@ export class FnIm extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
+    const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
+    const pi_im = expect(ctx, t, Exps.PiImValue)
+    const arg = new Exps.NotYetValue(pi_im.arg_t, new Exps.VarNeutral(fresh_name))
+    const pi = pi_im.pi_cl.apply(arg)
+    const fn = this.fn.subst(this.name, new Exps.Var(fresh_name))
+    const fn_core = check(ctx.extend(fresh_name, pi_im.arg_t), fn, pi)
     throw new Error("TODO")
-
-    // const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
-    // const pi = expect(ctx, t, Exps.PiValue)
-    // const arg = new Exps.NotYetValue(pi.arg_t, new Exps.VarNeutral(fresh_name))
-    // const ret_t = pi.ret_t_cl.apply(arg)
-    // const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
-    // const ret_core = check(ctx.extend(fresh_name, pi.arg_t), ret, ret_t)
-    // return new Exps.FnCore(fresh_name, ret_core)
+    // return new Exps.FnImCore(fresh_name, fn_core)
   }
 
   private multi_fn_repr(names: Array<string> = new Array()): {

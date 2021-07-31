@@ -1,7 +1,8 @@
 # implicit
 
-- `exps/pi/fn-im` -- `check`
 - `exps/pi/fn-im` -- `repr`
+- `exps/pi/fn-im-core` -- stab
+- `exps/pi/fn-im` -- fix `check`
 
 - `exps/pi/fn-im-core`
 - `exps/pi/fn-im-value`
