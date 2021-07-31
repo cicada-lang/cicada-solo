@@ -31,23 +31,21 @@ export class ApIm extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    throw new Error("TODO")
+    const inferred_target = infer(ctx, this.target)
+    if (inferred_target.t instanceof Exps.PiImValue) {
+      const pi = inferred_target.t
+      const arg_core = check(ctx, this.arg, pi.arg_t)
+      const arg_value = evaluate(ctx.to_env(), arg_core)
 
-    // const inferred_target = infer(ctx, this.target)
-    // if (inferred_target.t instanceof Exps.PiValue) {
-    //   const pi = inferred_target.t
-    //   const arg_core = check(ctx, this.arg, pi.arg_t)
-    //   const arg_value = evaluate(ctx.to_env(), arg_core)
+      throw new Error("TODO")
 
-    //   return {
-    //     t: pi.ret_t_cl.apply(arg_value),
-    //     core: new Exps.ApCore(inferred_target.core, arg_core),
-    //   }
-    // }
+      // return {
+      //   t: pi.ret_t_cl.apply(arg_value),
+      //   core: new Exps.ApImCore(inferred_target.core, arg_core),
+      // }
+    }
 
-    // // TODO
-
-    // throw new Trace(`I am expecting value of type: PiImValue`)
+    throw new Trace(`I am expecting value of type: PiImValue`)
   }
 
   multi_ap_repr(args: Array<string> = new Array()): {
