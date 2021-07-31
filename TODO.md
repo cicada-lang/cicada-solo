@@ -1,8 +1,6 @@
 # implicit
 
 - `exps/pi/fn-im-core` -- `evaluate`
-- `exps/pi/fn-im-core` -- `repr`
-- `exps/pi/fn-im-core` -- `alpha_repr`
 
 - `exps/pi/fn-im-value`
 

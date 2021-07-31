@@ -24,26 +24,17 @@ export class FnImCore extends Core {
     names: Array<string>
     ret: string
   } {
-    throw new Error("TODO")
-
-    // if (this.ret instanceof FnImCore) {
-    //   return this.ret.multi_fn_repr([...names, this.name])
-    // } else {
-    //   return { names: [...names, this.name], ret: this.ret.repr() }
-    // }
+    const name = `given ${this.name}`
+    return this.fn.multi_fn_repr([...names, name])
   }
 
   repr(): string {
-    throw new Error("TODO")
-
-    // const { names, ret } = this.multi_fn_repr()
-    // return `(${names.join(", ")}) { ${ret} }`
+    const { names, ret } = this.multi_fn_repr()
+    return `(${names.join(", ")}) { ${ret} }`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    throw new Error("TODO")
-
-    // const ret_repr = this.ret.alpha_repr(ctx.extend(this.name))
-    // return `# { ${ret_repr} }`
+    const fn_repr = this.fn.alpha_repr(ctx.extend(this.name))
+    return `(given #) { ${fn_repr} }`
   }
 }

@@ -36,6 +36,6 @@ export class FnCore extends Core {
 
   alpha_repr(ctx: AlphaCtx): string {
     const ret_repr = this.ret.alpha_repr(ctx.extend(this.name))
-    return `# { ${ret_repr} }`
+    return `(#) { ${ret_repr} }`
   }
 }
