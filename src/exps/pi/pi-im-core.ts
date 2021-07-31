@@ -21,7 +21,7 @@ export class PiImCore extends Core {
     throw new Error("TODO")
 
     // const arg_t = evaluate(env, this.arg_t)
-    // return new Exps.PiImValue(arg_t, new PiImClosure(env, this.name, this.pi))
+    // return new Exps.PiImValue(arg_t, new Closure(env, this.name, this.pi))
   }
 
   multi_pi_repr(entries: Array<string> = new Array()): {
