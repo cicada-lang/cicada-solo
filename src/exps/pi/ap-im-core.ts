@@ -17,9 +17,7 @@ export class ApImCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
-
-    // return ApImCore.apply(evaluate(env, this.target), evaluate(env, this.arg))
+    return ApImCore.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
   multi_ap_repr(args: Array<string> = new Array()): {
@@ -49,28 +47,25 @@ export class ApImCore extends Core {
   }
 
   static apply(target: Value, arg: Value): Value {
-    throw new Error("TODO")
-
-    // if (target instanceof Exps.FnValue) {
-    //   return target.apply(arg)
-    // } else if (target instanceof Exps.ClsValue) {
-    //   return target.apply(arg)
-    // } else if (target instanceof Exps.NotYetValue) {
-    //   const { t, neutral } = target
-    //   if (t instanceof Exps.PiValue) {
-    //     return new Exps.NotYetValue(
-    //       t.ret_t_cl.apply(arg),
-    //       new Exps.ApNeutral(neutral, new Normal(t.arg_t, arg))
-    //     )
-    //   } else {
-    //     throw InternalError.wrong_target_t(target.t, {
-    //       expected: [Exps.PiValue],
-    //     })
-    //   }
-    // } else {
-    //   throw InternalError.wrong_target(target, {
-    //     expected: [Exps.FnValue, Exps.ClsNilValue, Exps.ClsConsValue],
-    //   })
-    // }
+    if (target instanceof Exps.FnImValue) {
+      return target.apply(arg)
+    } else if (target instanceof Exps.NotYetValue) {
+      const { t, neutral } = target
+      if (t instanceof Exps.PiImValue) {
+        return new Exps.NotYetValue(
+          t.pi_cl.apply(arg),
+          // TODO ApImNeutral ?
+          new Exps.ApNeutral(neutral, new Normal(t.arg_t, arg))
+        )
+      } else {
+        throw InternalError.wrong_target_t(target.t, {
+          expected: [Exps.PiImValue],
+        })
+      }
+    } else {
+      throw InternalError.wrong_target(target, {
+        expected: [Exps.FnImValue],
+      })
+    }
   }
 }
