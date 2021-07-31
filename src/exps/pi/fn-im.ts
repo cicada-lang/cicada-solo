@@ -18,11 +18,9 @@ export class FnIm extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    throw new Error("TODO")
-
-    // return new Set([
-    //   ...this.ret.free_names(new Set([...bound_names, this.name])),
-    // ])
+    return new Set([
+      ...this.fn.free_names(new Set([...bound_names, this.name])),
+    ])
   }
 
   subst(name: string, exp: Exp): FnIm {
