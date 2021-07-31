@@ -34,7 +34,7 @@ export * from "./pi/ap"
 export * from "./pi/ap-core"
 export * from "./pi/ap-neutral"
 export * from "./pi/ap-im"
-// export * from "./pi/ap-im-core"
+export * from "./pi/ap-im-core"
 // export * from "./pi/ap-im-neutral"
 
 export * from "./sigma/sigma"
