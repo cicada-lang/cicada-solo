@@ -24,15 +24,16 @@ export class ApImCore extends Core {
     target: string
     args: Array<string>
   } {
+    const arg = `given ${this.arg.repr()}`
     if (
       this.target instanceof Exps.ApCore ||
       this.target instanceof Exps.ApImCore
     ) {
-      return this.target.multi_ap_repr([this.arg.repr(), ...args])
+      return this.target.multi_ap_repr([arg, ...args])
     } else {
       return {
         target: this.target.repr(),
-        args: [this.arg.repr(), ...args],
+        args: [arg, ...args],
       }
     }
   }
@@ -54,8 +55,7 @@ export class ApImCore extends Core {
       if (t instanceof Exps.PiImValue) {
         return new Exps.NotYetValue(
           t.pi_cl.apply(arg),
-          // TODO ApImNeutral ?
-          new Exps.ApNeutral(neutral, new Normal(t.arg_t, arg))
+          new Exps.ApImNeutral(neutral, new Normal(t.arg_t, arg))
         )
       } else {
         throw InternalError.wrong_target_t(target.t, {
