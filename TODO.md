@@ -1,12 +1,16 @@
 # implicit
 
+- `exps/pi/fn-im`
+- `exps/pi/fn-im-core`
+- `exps/pi/fn-im-value`
+
+- `exps/pi/ap-im`
+- `exps/pi/ap-im-core`
+- `exps/pi/ap-im-value`
+
 - `exps/pi/pi-im-value` -- `eta_expand`
 
 - `exps/pi/ap` -- `infer`  -- handle `Exps.PiImValue`
-
-- `exps/pi/fn-im` -- stab
-- `exps/pi/fn-im-core`
-- `exps/pi/fn-im-value`
 
 - `exps/pi/pi-im` -- syntax -- only over pi `(given x: A, y: B(x)) -> C(x)`
 - `exps/pi/fn-im` -- syntax  -- `(given x, y) { z(x) }`
