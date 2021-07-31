@@ -1,6 +1,6 @@
 # implicit
 
-- `exps/pi/pi-im-value`
+- `exps/pi/pi-im-value` -- `eta_expand`
 
 - `exps/pi/ap` -- `infer`  -- handle `Exps.PiImValue`
 
