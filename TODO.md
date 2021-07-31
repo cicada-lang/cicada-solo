@@ -1,7 +1,5 @@
 # implicit
 
-- `exps/pi/pi-im-core` -- `evaluate`
-
 - `exps/pi/pi-im-value`
 
 - `exps/pi/ap` -- `infer`  -- handle `Exps.PiImValue`
