@@ -22,7 +22,7 @@ export class SigmaCore extends Core {
     return new Exps.SigmaValue(car_t, new Closure(env, this.name, this.cdr_t))
   }
 
-  private multi_sigma_repr(entries: Array<string> = new Array()): {
+  multi_sigma_repr(entries: Array<string> = new Array()): {
     entries: Array<string>
     cdr_t: string
   } {

@@ -58,7 +58,7 @@ export class Sigma extends Exp {
     }
   }
 
-  private multi_sigma_repr(entries: Array<string> = new Array()): {
+  multi_sigma_repr(entries: Array<string> = new Array()): {
     entries: Array<string>
     cdr_t: string
   } {

@@ -58,7 +58,7 @@ export class FnIm extends Exp {
     return new Exps.FnImCore(fresh_name, fn_core)
   }
 
-  private multi_fn_repr(names: Array<string> = new Array()): {
+  multi_fn_repr(names: Array<string> = new Array()): {
     names: Array<string>
     ret: string
   } {
