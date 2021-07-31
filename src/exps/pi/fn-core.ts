@@ -18,7 +18,7 @@ export class FnCore extends Core {
     return new Exps.FnValue(new Closure(env, this.name, this.ret))
   }
 
-  private multi_fn_repr(names: Array<string> = new Array()): {
+  multi_fn_repr(names: Array<string> = new Array()): {
     names: Array<string>
     ret: string
   } {

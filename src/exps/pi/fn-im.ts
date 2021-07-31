@@ -4,6 +4,7 @@ import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { check } from "../../exp"
 import { expect } from "../../value"
+import { Trace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
@@ -44,8 +45,17 @@ export class FnIm extends Exp {
     const pi = pi_im.pi_cl.apply(arg)
     const fn = this.fn.subst(this.name, new Exps.Var(fresh_name))
     const fn_core = check(ctx.extend(fresh_name, pi_im.arg_t), fn, pi)
-    throw new Error("TODO")
-    // return new Exps.FnImCore(fresh_name, fn_core)
+
+    if (!(fn_core instanceof Exps.FnCore)) {
+      throw new Trace(
+        [
+          `I expect fn_core to be Exps.FnCore`,
+          `but the constructor name I meet is: ${fn_core.constructor.name}`,
+        ].join("\n") + "\n"
+      )
+    }
+
+    return new Exps.FnImCore(fresh_name, fn_core)
   }
 
   private multi_fn_repr(names: Array<string> = new Array()): {
