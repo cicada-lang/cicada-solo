@@ -1,9 +1,5 @@
 # implicit
 
-- `exps/pi/fn-im-core` -- `evaluate`
-
-- `exps/pi/fn-im-value`
-
 - `exps/pi/ap-im`
 - `exps/pi/ap-im-core`
 - `exps/pi/ap-im-value`

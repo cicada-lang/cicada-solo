@@ -15,9 +15,7 @@ export class FnImCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
-
-    // return new Exps.FnValue(new Closure(env, this.name, this.ret))
+    return new Exps.FnImValue(new Closure(env, this.name, this.fn))
   }
 
   multi_fn_repr(names: Array<string> = new Array()): {
