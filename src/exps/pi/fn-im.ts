@@ -24,16 +24,14 @@ export class FnIm extends Exp {
   }
 
   subst(name: string, exp: Exp): FnIm {
-    throw new Error("TODO")
-
-    // if (name === this.name) {
-    //   return this
-    // } else {
-    //   const free_names = exp.free_names(new Set())
-    //   const fresh_name = ut.freshen_name(free_names, this.name)
-    //   const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
-    //   return new Fn(fresh_name, ret.subst(name, exp))
-    // }
+    if (name === this.name) {
+      return this
+    } else {
+      const free_names = exp.free_names(new Set())
+      const fresh_name = ut.freshen_name(free_names, this.name)
+      const fn = this.fn.subst(this.name, new Exps.Var(fresh_name))
+      return new FnIm(fresh_name, fn.subst(name, exp))
+    }
   }
 
   check(ctx: Ctx, t: Value): Core {
