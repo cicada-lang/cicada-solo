@@ -1,7 +1,5 @@
 # implicit
 
-- `exps/pi/ap-im` -- `free_names`
-- `exps/pi/ap-im` -- `subst`
 - `exps/pi/ap-im` -- `infer`
 - `exps/pi/ap-im` -- `repr`
 

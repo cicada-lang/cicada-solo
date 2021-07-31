@@ -20,18 +20,14 @@ export class ApIm extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    throw new Error("TODO")
-
-    // return new Set([
-    //   ...this.target.free_names(bound_names),
-    //   ...this.arg.free_names(bound_names),
-    // ])
+    return new Set([
+      ...this.target.free_names(bound_names),
+      ...this.arg.free_names(bound_names),
+    ])
   }
 
   subst(name: string, exp: Exp): ApIm {
-    throw new Error("TODO")
-
-    // return new Ap(this.target.subst(name, exp), this.arg.subst(name, exp))
+    return new ApIm(this.target.subst(name, exp), this.arg.subst(name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
