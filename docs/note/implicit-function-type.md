@@ -80,13 +80,28 @@ Infer `id(true)`
 5. Infer `Bool` for `true`
 5. Unify expected `a` type with `Bool`
 
-Simple version:
+Simple version (always infer argument):
 
 1. Infer `(given A: Type, A) -> A` for `id`
 2. The given `A` will be viewed as a pattern variable
 3. Infer `Bool` for `true`
 4. Unify expected `A` type with `Bool`
 5. Reify `id(given A, true)` to be `id(given Bool, true)` and return it
+
+### What can go wrong
+
+```
+poly: Maybe((given A: Type, A) -> A) =
+  just((x) { x })
+```
+
+1. Infer `(given a: Type, a) -> Maybe(a)` for `just`
+2. Insert appilication to fresh meta `just(a)`
+3. Now we have `just(a): (a) -> Maybe(a)`
+2. Check `(x) { x }` against `a`
+3. Unknown checking type, thus we do not know what to insert
+3. Infer `Maybe((b) -> b)` for `just((x) { x })`
+4. Fail to unify with `Maybe((given A: Type, A) -> A)`
 
 ## Look back
 
