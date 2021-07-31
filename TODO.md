@@ -1,6 +1,10 @@
 # implicit
 
-- `exps/pi/fn-im`
+- `exps/pi/fn-im` -- `free_names`
+- `exps/pi/fn-im` -- `subst`
+- `exps/pi/fn-im` -- `check`
+- `exps/pi/fn-im` -- `repr`
+
 - `exps/pi/fn-im-core`
 - `exps/pi/fn-im-value`
 
@@ -8,9 +12,10 @@
 - `exps/pi/ap-im-core`
 - `exps/pi/ap-im-value`
 
-- `exps/pi/pi-im-value` -- `eta_expand`
+- `exps/pi/fn` `check` insert `FnIm` on `PiIm`
+- `exps/pi/ap` `infer` insert `ApIm` on `PiIm`
 
-- `exps/pi/ap` -- `infer`  -- handle `Exps.PiImValue`
+- `exps/pi/pi-im-value` -- `eta_expand`
 
 - `exps/pi/pi-im` -- syntax -- only over pi `(given x: A, y: B(x)) -> C(x)`
 - `exps/pi/fn-im` -- syntax  -- `(given x, y) { z(x) }`

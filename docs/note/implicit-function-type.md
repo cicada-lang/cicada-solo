@@ -58,7 +58,35 @@ infer(ctx, Ap(target, arg)) {
 
 ## Understand
 
-TODO
+### Implicit lambda insertion
+
+Check `(x) { x }` against `(given A: Type, A) -> A`
+
+1. `(x) { x }` is not an impicit lambda
+2. Assume `A: Type` in context
+3. Check `(x) { x }` against `(Type, A) -> A`
+4. Return `(given A, x) { x }`
+
+### Implicit argument insertion
+
+Assume `id: (given A: Type, A) -> A`
+
+Infer `id(true)`
+
+1. Infer `(given A: Type, A) -> A` for `id`
+2. Insert appilication to fresh meta `id(a)`
+3. Now we have `id(a): (a) -> a`
+4. Check argument `true` against `a` -- we can not check
+5. Infer `Bool` for `true`
+5. Unify expected `a` type with `Bool`
+
+Simple version:
+
+1. Infer `(given A: Type, A) -> A` for `id`
+2. The given `A` will be viewed as a pattern variable
+3. Infer `Bool` for `true`
+4. Unify expected `A` type with `Bool`
+5. Reify `id(given A, true)` to be `id(given Bool, true)` and return it
 
 ## Look back
 
