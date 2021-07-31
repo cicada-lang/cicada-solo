@@ -1,6 +1,8 @@
 # implicit
 
-- `exps/pi/ap-im-core`
+- `exps/pi/ap-im-core` -- `apply`
+- `exps/pi/ap-im-core` -- `evaluate`
+
 - `exps/pi/ap-im-value`
 
 - `exps/pi/fn` `check` insert `FnIm` on `PiIm`

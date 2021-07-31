@@ -26,32 +26,26 @@ export class ApImCore extends Core {
     target: string
     args: Array<string>
   } {
-    throw new Error("TODO")
-
-    // if (
-    //   this.target instanceof Exps.ApCore ||
-    //   this.target instanceof Exps.ApImCore
-    // ) {
-    //   return this.target.multi_ap_repr([this.arg.repr(), ...args])
-    // } else {
-    //   return {
-    //     target: this.target.repr(),
-    //     args: [this.arg.repr(), ...args],
-    //   }
-    // }
+    if (
+      this.target instanceof Exps.ApCore ||
+      this.target instanceof Exps.ApImCore
+    ) {
+      return this.target.multi_ap_repr([this.arg.repr(), ...args])
+    } else {
+      return {
+        target: this.target.repr(),
+        args: [this.arg.repr(), ...args],
+      }
+    }
   }
 
   repr(): string {
-    throw new Error("TODO")
-
-    // const { target, args } = this.multi_ap_repr()
-    // return `${target}(${args.join(", ")})`
+    const { target, args } = this.multi_ap_repr()
+    return `${target}(${args.join(", ")})`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    throw new Error("TODO")
-
-    // return `${this.target.alpha_repr(ctx)}(${this.arg.alpha_repr(ctx)})`
+    return `${this.target.alpha_repr(ctx)}(${this.arg.alpha_repr(ctx)})`
   }
 
   static apply(target: Value, arg: Value): Value {
