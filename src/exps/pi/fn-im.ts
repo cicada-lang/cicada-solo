@@ -37,7 +37,10 @@ export class FnIm extends Exp {
   check(ctx: Ctx, t: Value): Core {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const pi_im = expect(ctx, t, Exps.PiImValue)
-    const arg = new Exps.NotYetValue(pi_im.arg_t, new Exps.VarNeutral(fresh_name))
+    const arg = new Exps.NotYetValue(
+      pi_im.arg_t,
+      new Exps.VarNeutral(fresh_name)
+    )
     const pi = pi_im.pi_cl.apply(arg)
     const fn = this.fn.subst(this.name, new Exps.Var(fresh_name))
     const fn_core = check(ctx.extend(fresh_name, pi_im.arg_t), fn, pi)
@@ -49,19 +52,12 @@ export class FnIm extends Exp {
     names: Array<string>
     ret: string
   } {
-    throw new Error("TODO")
-
-    // if (this.ret instanceof Fn) {
-    //   return this.ret.multi_fn_repr([...names, this.name])
-    // } else {
-    //   return { names: [...names, this.name], ret: this.ret.repr() }
-    // }
+    const name = `given ${this.name}`
+    return this.fn.multi_fn_repr([...names, name])
   }
 
   repr(): string {
-    throw new Error("TODO")
-
-    // const { names, ret } = this.multi_fn_repr()
-    // return `(${names.join(", ")}) { ${ret} }`
+    const { names, ret } = this.multi_fn_repr()
+    return `(${names.join(", ")}) { ${ret} }`
   }
 }

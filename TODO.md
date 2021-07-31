@@ -1,6 +1,5 @@
 # implicit
 
-- `exps/pi/fn-im` -- `repr`
 - `exps/pi/fn-im-core` -- stab
 - `exps/pi/fn-im` -- fix `check`
 
