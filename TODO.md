@@ -1,7 +1,6 @@
 # implicit
 
 - `exps/pi/ap-im` -- `infer`
-- `exps/pi/ap-im` -- `repr`
 
 - `exps/pi/ap-im-core`
 - `exps/pi/ap-im-value`

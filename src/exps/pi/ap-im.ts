@@ -54,22 +54,20 @@ export class ApIm extends Exp {
     target: string
     args: Array<string>
   } {
-    throw new Error("TODO")
+    const arg = `given ${this.arg.repr()}`
 
-    // if (this.target instanceof Ap) {
-    //   return this.target.multi_ap_repr([this.arg.repr(), ...args])
-    // } else {
-    //   return {
-    //     target: this.target.repr(),
-    //     args: [this.arg.repr(), ...args],
-    //   }
-    // }
+    if (this.target instanceof Exps.Ap || this.target instanceof Exps.ApIm) {
+      return this.target.multi_ap_repr([arg, ...args])
+    } else {
+      return {
+        target: this.target.repr(),
+        args: [arg, ...args],
+      }
+    }
   }
 
   repr(): string {
-    throw new Error("TODO")
-
-    // const { target, args } = this.multi_ap_repr()
-    // return `${target}(${args.join(", ")})`
+    const { target, args } = this.multi_ap_repr()
+    return `${target}(${args.join(", ")})`
   }
 }
