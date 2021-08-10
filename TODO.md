@@ -48,7 +48,6 @@
 
 # core features
 
-- [refactoring] `Exps.Cls.infer` and `Exps.Ext.infer`
 - [requirement] support to use `let` to do local definitions in class
 - [optimization] use native `number` as `Nat`
 
