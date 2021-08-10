@@ -33,10 +33,22 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         .flatMap(({ given, names }) =>
           names.map((name) => ({ given, name })).reverse()
         )
-        .reduce(
-          (fn, { given, name }) => new Exps.Fn(name, fn),
-          exp_matcher(ret)
-        )
+        .reduce((result, { given, name }) => {
+          if (given) {
+            if (!(result instanceof Exps.Fn)) {
+              throw new Error(
+                [
+                  `When reducing given names,`,
+                  `the bindings_matcher expects the result to be Exps.Fn`,
+                  `result class name: ${result.constructor.name}`,
+                ].join("\n")
+              )
+            }
+            return new Exps.FnIm(name, result)
+          } else {
+            return new Exps.Fn(name, result)
+          }
+        }, exp_matcher(ret))
 
       return new Stmts.Def(
         pt.str(name),

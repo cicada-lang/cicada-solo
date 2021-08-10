@@ -12,10 +12,22 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
     .flatMap(({ given, names, exp }) =>
       names.map((name) => ({ given, name, exp })).reverse()
     )
-    .reduce(
-      (result, { given, name, exp }) => new Exps.Pi(name, exp, result),
-      exp_matcher(ret_t)
-    )
+    .reduce((result, { given, name, exp }) => {
+      if (given) {
+        if (!(result instanceof Exps.Pi)) {
+          throw new Error(
+            [
+              `When reducing given names,`,
+              `the bindings_matcher expects the result to be Exps.Pi`,
+              `result class name: ${result.constructor.name}`,
+            ].join("\n")
+          )
+        }
+        return new Exps.PiIm(name, exp, result)
+      } else {
+        return new Exps.Pi(name, exp, result)
+      }
+    }, exp_matcher(ret_t))
 }
 
 export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
@@ -26,10 +38,12 @@ export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
     .flatMap(({ given, names, exp }) =>
       names.map((name) => ({ given, name, exp })).reverse()
     )
-    .reduce(
-      (result, { given, name, exp }) => new Exps.Sigma(name, exp, result),
-      exp_matcher(cdr_t)
-    )
+    .reduce((result, { given, name, exp }) => {
+      if (given) {
+        throw new Error(`The "given" keyword should not be used in sigma`)
+      }
+      return new Exps.Sigma(name, exp, result)
+    }, exp_matcher(cdr_t))
 }
 
 export function exp_matcher(tree: pt.Tree): Exp {
@@ -54,7 +68,22 @@ export function operator_matcher(tree: pt.Tree): Exp {
     "operator:fn": ({ names, ret }) =>
       names_matcher(names)
         .reverse()
-        .reduce((result, name) => new Exps.Fn(name, result), exp_matcher(ret)),
+        .reduce((result, { given, name }) => {
+          if (given) {
+            if (!(result instanceof Exps.Fn)) {
+              throw new Error(
+                [
+                  `When reducing given names,`,
+                  `the names_matcher expects the result to be Exps.Fn`,
+                  `result class name: ${result.constructor.name}`,
+                ].join("\n")
+              )
+            }
+            return new Exps.FnIm(name, result)
+          } else {
+            return new Exps.Fn(name, result)
+          }
+        }, exp_matcher(ret)),
     "operator:car": ({ target }) => new Exps.Car(exp_matcher(target)),
     "operator:cdr": ({ target }) => new Exps.Cdr(exp_matcher(target)),
     "operator:dot_field": ({ target, name }) =>
@@ -253,10 +282,22 @@ export function declaration_matcher(tree: pt.Tree): Exp {
         .flatMap(({ given, names }) =>
           names.map((name) => ({ given, name })).reverse()
         )
-        .reduce(
-          (fn, { given, name }) => new Exps.Fn(name, fn),
-          exp_matcher(ret)
-        )
+        .reduce((result, { given, name }) => {
+          if (given) {
+            if (!(result instanceof Exps.Fn)) {
+              throw new Error(
+                [
+                  `When reducing given names,`,
+                  `the bindings_matcher expects the result to be Exps.Fn`,
+                  `result class name: ${result.constructor.name}`,
+                ].join("\n")
+              )
+            }
+            return new Exps.FnIm(name, result)
+          } else {
+            return new Exps.Fn(name, result)
+          }
+        }, exp_matcher(ret))
 
       return new Exps.Let(
         pt.str(name),
@@ -292,10 +333,22 @@ export function cls_entry_matcher(tree: pt.Tree): {
         .flatMap(({ given, names }) =>
           names.map((name) => ({ given, name })).reverse()
         )
-        .reduce(
-          (fn, { given, name }) => new Exps.Fn(name, fn),
-          exp_matcher(ret)
-        )
+        .reduce((result, { given, name }) => {
+          if (given) {
+            if (!(result instanceof Exps.Fn)) {
+              throw new Error(
+                [
+                  `When reducing given names,`,
+                  `the bindings_matcher expects the result to be Exps.Fn`,
+                  `result class name: ${result.constructor.name}`,
+                ].join("\n")
+              )
+            }
+            return new Exps.FnIm(name, result)
+          } else {
+            return new Exps.Fn(name, result)
+          }
+        }, exp_matcher(ret))
 
       return {
         field_name: pt.str(name),
@@ -353,16 +406,34 @@ export function binding_entry_matcher(tree: pt.Tree): {
   })(tree)
 }
 
-export function names_matcher(tree: pt.Tree): Array<string> {
+export function names_matcher(
+  tree: pt.Tree
+): Array<{ given: boolean; name: string }> {
   return pt.matcher({
     "names:names": ({ entries, last_entry }) => [
-      ...pt.matchers.zero_or_more_matcher(entries).map(pt.str),
-      pt.str(last_entry),
+      ...pt.matchers.zero_or_more_matcher(entries).map(name_entry_matcher),
+      name_entry_matcher(last_entry),
     ],
     "names:names_bracket_separated": ({ entries, last_entry }) => [
-      ...pt.matchers.zero_or_more_matcher(entries).map(pt.str),
-      pt.str(last_entry),
+      ...pt.matchers.zero_or_more_matcher(entries).map(name_entry_matcher),
+      name_entry_matcher(last_entry),
     ],
+  })(tree)
+}
+
+export function name_entry_matcher(tree: pt.Tree): {
+  given: boolean
+  name: string
+} {
+  return pt.matcher({
+    "name_entry:name_entry": ({ name }) => ({
+      given: false,
+      name: pt.str(name),
+    }),
+    "name_entry:given_name_entry": ({ name }) => ({
+      given: true,
+      name: pt.str(name),
+    }),
   })(tree)
 }
 

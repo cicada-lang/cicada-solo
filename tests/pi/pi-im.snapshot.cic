@@ -1,0 +1,13 @@
+id1: (given A: Type, x: A) -> A =
+  (given A, x) {
+    x
+  }
+
+id2: (given A: Type, x: A) -> A =
+  (x) {
+    x
+  }
+
+id3(given A: Type, x: A): A {
+  x
+}

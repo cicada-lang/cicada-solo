@@ -1,12 +1,10 @@
 # implicit
 
-- `exps/pi/pi-im` -- syntax -- only one `given` over pi `(given x: A, y: B(x)) -> C(x)`
-- `exps/pi/fn-im` -- syntax -- only one `given` over fn `(given x, y) { z(x) }`
+- `exps/pi/pi-im-value` -- `eta_expand`
+
 - `exps/pi/ap-im` -- syntax -- `f(given x)`
 
 - `exps/pi/ap` `infer` insert `ApIm` on `PiIm`
-
-- `exps/pi/pi-im-value` -- `eta_expand`
 
 - we need unification over `Value` -- what should be the interface?
   - we need to reify `Value`

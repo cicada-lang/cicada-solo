@@ -362,17 +362,24 @@ export const binding_entry = {
 export const names = {
   $grammar: {
     "names:names": [
-      { entries: { $ap: ["zero_or_more", "identifier", '","'] } },
-      { last_entry: "identifier" },
+      { entries: { $ap: ["zero_or_more", "name_entry", '","'] } },
+      { last_entry: "name_entry" },
       { $ap: ["optional", '","'] },
     ],
     // NOTE The following allow us to write `x, y` as `x) (y`,
     //   thus allow us to write `(x, y)` as `(x) (y)`,
     //   thus this grammar is only meaningful when used in between `(` ... `)`.
     "names:names_bracket_separated": [
-      { entries: { $ap: ["zero_or_more", "identifier", '")"', '"("'] } },
-      { last_entry: "identifier" },
+      { entries: { $ap: ["zero_or_more", "name_entry", '")"', '"("'] } },
+      { last_entry: "name_entry" },
     ],
+  },
+}
+
+export const name_entry = {
+  $grammar: {
+    "name_entry:name_entry": [{ name: "identifier" }],
+    "name_entry:given_name_entry": ['"given"', { name: "identifier" }],
   },
 }
 
