@@ -1,7 +1,5 @@
 # implicit
 
-- `exps/pi/ap-im` -- syntax -- `f(given x)`
-
 - `exps/pi/ap` -- `infer` insert `ApIm` on `PiIm`
 
 - we need unification over `Value` -- what should be the interface?

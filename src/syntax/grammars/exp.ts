@@ -3,7 +3,7 @@ export const operator = {
     "operator:var": [{ name: "identifier" }],
     "operator:ap": [
       { target: "operator" },
-      { args: { $ap: ["one_or_more", '"("', "exps", '")"'] } },
+      { args: { $ap: ["one_or_more", '"("', "args", '")"'] } },
     ],
     "operator:fn": [
       '"("',
@@ -390,6 +390,23 @@ export const exps = {
       { last_entry: "exp" },
       { $ap: ["optional", '","'] },
     ],
+  },
+}
+
+export const args = {
+  $grammar: {
+    "args:args": [
+      { entries: { $ap: ["zero_or_more", "arg_entry", '","'] } },
+      { last_entry: "arg_entry" },
+      { $ap: ["optional", '","'] },
+    ],
+  },
+}
+
+export const arg_entry = {
+  $grammar: {
+    "arg_entry:arg_entry": [{ exp: "exp" }],
+    "arg_entry:given_arg_entry": ['"given"', { exp: "exp" }],
   },
 }
 

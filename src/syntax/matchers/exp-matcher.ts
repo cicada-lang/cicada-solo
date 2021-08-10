@@ -60,11 +60,14 @@ export function operator_matcher(tree: pt.Tree): Exp {
     "operator:ap": ({ target, args }) =>
       pt.matchers
         .one_or_more_matcher(args)
-        .flatMap((arg) => exps_matcher(arg))
-        .reduce(
-          (result, exp) => new Exps.Ap(result, exp),
-          operator_matcher(target)
-        ),
+        .flatMap((args) => args_matcher(args))
+        .reduce((result, { given, exp }) => {
+          if (given) {
+            return new Exps.ApIm(result, exp)
+          } else {
+            return new Exps.Ap(result, exp)
+          }
+        }, operator_matcher(target)),
     "operator:fn": ({ names, ret }) =>
       names_matcher(names)
         .reverse()
@@ -443,6 +446,34 @@ export function exps_matcher(tree: pt.Tree): Array<Exp> {
       ...pt.matchers.zero_or_more_matcher(entries).map(exp_matcher),
       exp_matcher(last_entry),
     ],
+  })(tree)
+}
+
+export function args_matcher(tree: pt.Tree): Array<{
+  given: boolean
+  exp: Exp
+}> {
+  return pt.matcher({
+    "args:args": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(arg_entry_matcher),
+      arg_entry_matcher(last_entry),
+    ],
+  })(tree)
+}
+
+export function arg_entry_matcher(tree: pt.Tree): {
+  given: boolean
+  exp: Exp
+} {
+  return pt.matcher({
+    "arg_entry:arg_entry": ({ exp }) => ({
+      given: false,
+      exp: exp_matcher(exp),
+    }),
+    "arg_entry:given_arg_entry": ({ exp }) => ({
+      given: true,
+      exp: exp_matcher(exp),
+    }),
   })(tree)
 }
 
