@@ -1,6 +1,5 @@
 # implicit
 
-- `exps/pi/fn` `check` insert `FnIm` on `PiIm`
 - `exps/pi/ap` `infer` insert `ApIm` on `PiIm`
 
 - `exps/pi/pi-im-value` -- `eta_expand`
@@ -16,6 +15,7 @@
 - use implicit to implement `cong` by `replace`
 
 - [question] Do we need `ap-im-neutral` and `fn-im-value`, or should just use  `ap-neutral` and `fn-value`?
+   - (A) we keep `ap-im-neutral` and `fn-im-value` for now, remove them if needed in the future
 
 # later
 

@@ -3,6 +3,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { check } from "../../exp"
+import { Trace } from "../../errors"
 import { expect } from "../../value"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
@@ -35,13 +36,37 @@ export class Fn extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
-    const pi = expect(ctx, t, Exps.PiValue)
-    const arg = new Exps.NotYetValue(pi.arg_t, new Exps.VarNeutral(fresh_name))
-    const ret_t = pi.ret_t_cl.apply(arg)
-    const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
-    const ret_core = check(ctx.extend(fresh_name, pi.arg_t), ret, ret_t)
-    return new Exps.FnCore(fresh_name, ret_core)
+    if (t instanceof Exps.PiValue) {
+      const { arg_t, ret_t_cl } = t
+      const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
+      const arg = new Exps.NotYetValue(arg_t, new Exps.VarNeutral(fresh_name))
+      const ret_t = ret_t_cl.apply(arg)
+      const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
+      const ret_core = check(ctx.extend(fresh_name, arg_t), ret, ret_t)
+      return new Exps.FnCore(fresh_name, ret_core)
+    } else if (t instanceof Exps.PiImValue) {
+      const { arg_t, pi_cl } = t
+      const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
+      const arg = new Exps.NotYetValue(arg_t, new Exps.VarNeutral(fresh_name))
+      const pi = pi_cl.apply(arg)
+      const fn_core = check(ctx.extend(fresh_name, arg_t), this, pi)
+      if (!(fn_core instanceof Exps.FnCore)) {
+        throw new Trace(
+          [
+            `Fn.check expecting this to be elab to a FnCore`,
+            `result of elab: ${JSON.stringify(fn_core, null, 2)}`,
+          ].join("\n")
+        )
+      }
+      return new Exps.FnImCore(fresh_name, fn_core)
+    } else {
+      throw new Trace(
+        [
+          `Fn.check expecting t to be PiValue or PiImValue`,
+          `t: ${JSON.stringify(t, null, 2)}`,
+        ].join("\n")
+      )
+    }
   }
 
   multi_fn_repr(names: Array<string> = new Array()): {
