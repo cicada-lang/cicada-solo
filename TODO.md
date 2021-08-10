@@ -1,6 +1,6 @@
 # implicit
 
-- `exps/pi/pi-im-value` -- `eta_expand`
+- `exps/pi/pi-im-value` -- `eta_expand` -- be able to readback `FnImValue`
 
 - `exps/pi/ap-im` -- syntax -- `f(given x)`
 
