@@ -54,6 +54,10 @@
 
 # syntax
 
+- as our syntax become more and more complicated,
+  we need to improve the API of `@cicada-lang/partech`,
+  to manage the complexity.
+
 - [maybe] as syntex to help "same-as" charts
 - [maybe] explicit `apply` -- to help non-elim in syntex
 - [maybe] it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
