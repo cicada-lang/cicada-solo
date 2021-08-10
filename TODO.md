@@ -1,12 +1,12 @@
 # implicit
 
+- `exps/pi/pi-im` -- syntax -- only over pi `(given x: A, y: B(x)) -> C(x)`
+- `exps/pi/fn-im` -- syntax -- `(given x, y) { z(x) }`
+- `exps/pi/ap-im` -- syntax -- `f(given x)`
+
 - `exps/pi/ap` `infer` insert `ApIm` on `PiIm`
 
 - `exps/pi/pi-im-value` -- `eta_expand`
-
-- `exps/pi/pi-im` -- syntax -- only over pi `(given x: A, y: B(x)) -> C(x)`
-- `exps/pi/fn-im` -- syntax  -- `(given x, y) { z(x) }`
-- `exps/pi/ap-im` -- syntax  -- `f(given x)`
 
 - we need unification over `Value` -- what should be the interface?
   - we need to reify `Value`
@@ -16,6 +16,9 @@
 
 - [question] Do we need `ap-im-neutral` and `fn-im-value`, or should just use  `ap-neutral` and `fn-value`?
    - (A) we keep `ap-im-neutral` and `fn-im-value` for now, remove them if needed in the future
+
+- `exps/pi/fn` `check` insert `FnIm` on `PiIm`
+  - The result of elab might also be `FnImCore`
 
 # later
 

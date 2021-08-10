@@ -1,0 +1,17 @@
+f: (Trivial) -> (Trivial) -> Trivial =
+  (x, y) {
+    sole
+  }
+
+f
+f(sole)
+f(sole, sole)
+
+g: (Trivial) -> (Trivial) -> Trivial =
+  (x) (y) {
+    sole
+  }
+
+g
+g(sole)
+g(sole, sole)

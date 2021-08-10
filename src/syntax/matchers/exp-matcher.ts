@@ -329,6 +329,10 @@ export function names_matcher(tree: pt.Tree): Array<string> {
       ...pt.matchers.zero_or_more_matcher(entries).map(pt.str),
       pt.str(last_entry),
     ],
+    "names:names_bracket_separated": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(pt.str),
+      pt.str(last_entry),
+    ],
   })(tree)
 }
 

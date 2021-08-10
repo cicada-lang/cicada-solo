@@ -49,16 +49,17 @@ export class Fn extends Exp {
       const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
       const arg = new Exps.NotYetValue(arg_t, new Exps.VarNeutral(fresh_name))
       const pi = pi_cl.apply(arg)
-      const fn_core = check(ctx.extend(fresh_name, arg_t), this, pi)
-      if (!(fn_core instanceof Exps.FnCore)) {
+      const result = check(ctx.extend(fresh_name, arg_t), this, pi)
+      // TODO The result of elab might also be `FnImCore`
+      if (!(result instanceof Exps.FnCore)) {
         throw new Trace(
           [
-            `Fn.check expecting this to be elab to a FnCore`,
-            `result of elab: ${JSON.stringify(fn_core, null, 2)}`,
+            `Fn.check expecting the result of elaborating this fn to a FnCore`,
+            `result of elab: ${JSON.stringify(result, null, 2)}`,
           ].join("\n")
         )
       }
-      return new Exps.FnImCore(fresh_name, fn_core)
+      return new Exps.FnImCore(fresh_name, result)
     } else {
       throw new Trace(
         [
