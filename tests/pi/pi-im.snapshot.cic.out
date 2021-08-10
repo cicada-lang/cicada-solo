@@ -1,1 +1,5 @@
+(given A, x) { x }: (given A: Type, x: A) -> A 
+(given A, x) { x }: (given A: Type, x: A) -> A 
+(given A, x) { x }: (given A: Type, x: A) -> A 
+(given A, x) { (given B, y) { x } }: (given A: Type, x: A) -> (given B: Type, y: B) -> A 
 
