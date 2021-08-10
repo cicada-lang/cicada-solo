@@ -1,7 +1,7 @@
 # implicit
 
-- `exps/pi/pi-im` -- syntax -- only over pi `(given x: A, y: B(x)) -> C(x)`
-- `exps/pi/fn-im` -- syntax -- `(given x, y) { z(x) }`
+- `exps/pi/pi-im` -- syntax -- only one `given` over pi `(given x: A, y: B(x)) -> C(x)`
+- `exps/pi/fn-im` -- syntax -- only one `given` over fn `(given x, y) { z(x) }`
 - `exps/pi/ap-im` -- syntax -- `f(given x)`
 
 - `exps/pi/ap` `infer` insert `ApIm` on `PiIm`

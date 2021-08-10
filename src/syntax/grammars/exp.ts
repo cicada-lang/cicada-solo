@@ -344,6 +344,18 @@ export const binding_entry = {
       '":"',
       { exp: "exp" },
     ],
+    "binding_entry:given_named": [
+      '"given"',
+      { name: "identifier" },
+      '":"',
+      { exp: "exp" },
+    ],
+    "binding_entry:given_multi_named": [
+      '"given"',
+      { names: { $ap: ["one_or_more", "identifier"] } },
+      '":"',
+      { exp: "exp" },
+    ],
   },
 }
 

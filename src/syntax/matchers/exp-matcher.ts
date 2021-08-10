@@ -9,9 +9,11 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
 
   return bindings_matcher(bindings)
     .reverse()
-    .flatMap(({ names, exp }) => names.map((name) => ({ name, exp })).reverse())
+    .flatMap(({ given, names, exp }) =>
+      names.map((name) => ({ given, name, exp })).reverse()
+    )
     .reduce(
-      (result, { name, exp }) => new Exps.Pi(name, exp, result),
+      (result, { given, name, exp }) => new Exps.Pi(name, exp, result),
       exp_matcher(ret_t)
     )
 }
@@ -21,9 +23,11 @@ export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
 
   return bindings_matcher(bindings)
     .reverse()
-    .flatMap(({ names, exp }) => names.map((name) => ({ name, exp })).reverse())
+    .flatMap(({ given, names, exp }) =>
+      names.map((name) => ({ given, name, exp })).reverse()
+    )
     .reduce(
-      (result, { name, exp }) => new Exps.Sigma(name, exp, result),
+      (result, { given, name, exp }) => new Exps.Sigma(name, exp, result),
       exp_matcher(cdr_t)
     )
 }
@@ -246,8 +250,13 @@ export function declaration_matcher(tree: pt.Tree): Exp {
     "declaration:let_fn": ({ name, bindings, ret_t, ret, body }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
-        .flatMap(({ names }) => names.reverse())
-        .reduce((fn, name) => new Exps.Fn(name, fn), exp_matcher(ret))
+        .flatMap(({ given, names }) =>
+          names.map((name) => ({ given, name })).reverse()
+        )
+        .reduce(
+          (fn, { given, name }) => new Exps.Fn(name, fn),
+          exp_matcher(ret)
+        )
 
       return new Exps.Let(
         pt.str(name),
@@ -280,8 +289,13 @@ export function cls_entry_matcher(tree: pt.Tree): {
     "cls_entry:method_fulfilled": ({ name, bindings, ret_t, ret }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
-        .flatMap(({ names }) => names.reverse())
-        .reduce((fn, name) => new Exps.Fn(name, fn), exp_matcher(ret))
+        .flatMap(({ given, names }) =>
+          names.map((name) => ({ given, name })).reverse()
+        )
+        .reduce(
+          (fn, { given, name }) => new Exps.Fn(name, fn),
+          exp_matcher(ret)
+        )
 
       return {
         field_name: pt.str(name),
@@ -292,9 +306,11 @@ export function cls_entry_matcher(tree: pt.Tree): {
   })(tree)
 }
 
-export function bindings_matcher(
-  tree: pt.Tree
-): Array<{ names: Array<string>; exp: Exp }> {
+export function bindings_matcher(tree: pt.Tree): Array<{
+  given: boolean
+  names: Array<string>
+  exp: Exp
+}> {
   return pt.matcher({
     "bindings:bindings": ({ entries, last_entry }) => [
       ...pt.matchers.zero_or_more_matcher(entries).map(binding_entry_matcher),
@@ -304,19 +320,33 @@ export function bindings_matcher(
 }
 
 export function binding_entry_matcher(tree: pt.Tree): {
+  given: boolean
   names: Array<string>
   exp: Exp
 } {
   return pt.matcher({
     "binding_entry:nameless": ({ exp }) => ({
+      given: false,
       names: ["_"],
       exp: exp_matcher(exp),
     }),
     "binding_entry:named": ({ name, exp }) => ({
+      given: false,
       names: [pt.str(name)],
       exp: exp_matcher(exp),
     }),
     "binding_entry:multi_named": ({ names, exp }) => ({
+      given: false,
+      names: pt.matchers.one_or_more_matcher(names).map(pt.str),
+      exp: exp_matcher(exp),
+    }),
+    "binding_entry:given_named": ({ name, exp }) => ({
+      given: true,
+      names: [pt.str(name)],
+      exp: exp_matcher(exp),
+    }),
+    "binding_entry:given_multi_named": ({ names, exp }) => ({
+      given: true,
       names: pt.matchers.one_or_more_matcher(names).map(pt.str),
       exp: exp_matcher(exp),
     }),

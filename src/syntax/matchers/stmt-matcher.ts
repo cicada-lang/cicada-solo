@@ -30,8 +30,13 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     "stmt:def_fn": ({ name, bindings, ret_t, ret }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
-        .flatMap(({ names }) => names.reverse())
-        .reduce((fn, name) => new Exps.Fn(name, fn), exp_matcher(ret))
+        .flatMap(({ given, names }) =>
+          names.map((name) => ({ given, name })).reverse()
+        )
+        .reduce(
+          (fn, { given, name }) => new Exps.Fn(name, fn),
+          exp_matcher(ret)
+        )
 
       return new Stmts.Def(
         pt.str(name),
