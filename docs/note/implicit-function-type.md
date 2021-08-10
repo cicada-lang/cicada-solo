@@ -109,7 +109,9 @@ Infer `id(true)`
 3. Infer `Bool` for `true`
 4. Unify `pi.arg_t` -- `V` type with `Bool`
 5. Reify `id(given V, true)` to be `id(given Bool, true)`
+  - This Reify is simply the solution of `V`
 6. Reify `(V) -> V` to be `(Bool) -> Bool`
+  - We can do this reify by apply the closure to the solution of `V`
 
 Maybe we can simply use the `ctx` instead of `Reify`.
 
