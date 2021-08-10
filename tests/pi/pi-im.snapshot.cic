@@ -11,3 +11,10 @@ id2: (given A: Type, x: A) -> A =
 id3(given A: Type, x: A): A {
   x
 }
+
+k3(
+  given A: Type, x: A,
+  given B: Type, y: B,
+): A {
+  x
+}
