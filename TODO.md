@@ -2,6 +2,10 @@
 
 - `exps/pi/ap` -- `infer` insert `ApIm` on `PiIm`
 
+- `solve` get solution
+- `unify` walk the variables
+- `Value.unify` handle each case
+
 - we need unification over `Value` -- what should be the interface?
   - we need to reify `Value`
   - be careful when handling pi and sigma type's closure
