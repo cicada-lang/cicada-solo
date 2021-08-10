@@ -1,9 +1,5 @@
 # implicit
 
-- `exps/pi/pi-im-value` -- `eta_expand` -- be able to readback `FnImValue`
-
-  - test `pi-im` type checking
-
 - `exps/pi/ap-im` -- syntax -- `f(given x)`
 
 - `exps/pi/ap` -- `infer` insert `ApIm` on `PiIm`

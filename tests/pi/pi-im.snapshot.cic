@@ -12,9 +12,15 @@ id3(given A: Type, x: A): A {
   x
 }
 
+id1
+id2
+id3
+
 k3(
   given A: Type, x: A,
   given B: Type, y: B,
 ): A {
   x
 }
+
+k3

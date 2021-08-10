@@ -45,22 +45,30 @@ export class PiImValue extends Value {
   }
 
   eta_expand(ctx: Ctx, value: Value): Core {
-    throw new Error("TODO")
+    // NOTE everything with a function type
+    //   is immediately read back as having a Lambda on top.
+    //   This implements the η-rule for functions.
+    const fresh_name = ut.freshen_name(new Set(ctx.names), this.pi_cl.name)
+    const variable = new Exps.NotYetValue(
+      this.arg_t,
+      new Exps.VarNeutral(fresh_name)
+    )
+    const pi = this.pi_cl.apply(variable)
+    const result = readback(
+      ctx.extend(fresh_name, this.arg_t),
+      pi,
+      Exps.ApImCore.apply(value, variable)
+    )
 
-    // // NOTE everything with a function type
-    // //   is immediately read back as having a Lambda on top.
-    // //   This implements the η-rule for functions.
-    // const fresh_name = ut.freshen_name(new Set(ctx.names), this.ret_t_cl.name)
-    // const variable = new Exps.NotYetValue(
-    //   this.arg_t,
-    //   new Exps.VarNeutral(fresh_name)
-    // )
-    // const ret_t = this.ret_t_cl.apply(variable)
-    // const ret = readback(
-    //   ctx.extend(fresh_name, this.arg_t),
-    //   ret_t,
-    //   Exps.ApCore.apply(value, variable)
-    // )
-    // return new Exps.FnCore(fresh_name, ret)
+    if (!(result instanceof Exps.FnCore)) {
+      throw new Trace(
+        [
+          `I expect result to be Exps.FnCore`,
+          `but the constructor name I meet is: ${result.constructor.name}`,
+        ].join("\n") + "\n"
+      )
+    }
+
+    return new Exps.FnImCore(fresh_name, result)
   }
 }
