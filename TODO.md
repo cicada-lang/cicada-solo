@@ -2,9 +2,11 @@
 
 - `exps/pi/pi-im-value` -- `eta_expand` -- be able to readback `FnImValue`
 
+  - test `pi-im` type checking
+
 - `exps/pi/ap-im` -- syntax -- `f(given x)`
 
-- `exps/pi/ap` `infer` insert `ApIm` on `PiIm`
+- `exps/pi/ap` -- `infer` insert `ApIm` on `PiIm`
 
 - we need unification over `Value` -- what should be the interface?
   - we need to reify `Value`
