@@ -69,7 +69,7 @@ Check `(x) { x }` against `(given A: Type, A) -> A`
 
 With closure (the argument name of a closure is unknown):
 
-Check `(x) { x }` against `(given Type) (closure A) => (A) -> A`
+Check `(x) { x }` against `(given Type) -> (closure A) => (A) -> A`
 
 1. `(x) { x }` is not an impicit lambda
 2. Assume `fresh_name: Type` in context
@@ -96,6 +96,22 @@ Simple version (always infer argument):
 3. Infer `Bool` for `true`
 4. Unify expected `A` type with `Bool`
 5. Reify `id(given A, true)` to be `id(given Bool, true)` and return it
+
+With closure (the argument name of a closure is unknown):
+
+Assume `id: (given Type) -> (closure A) => (A) -> A`
+
+Infer `id(true)`
+
+1. Infer `(given Type) -> (closure A) => (A) -> A` for `id`
+2. Generate fresh pattern variable `V`
+2. Apply `(closure A) => (A) -> A` to `V` to get `pi` -- `(V) -> V`
+3. Infer `Bool` for `true`
+4. Unify `pi.arg_t` -- `V` type with `Bool`
+5. Reify `id(given V, true)` to be `id(given Bool, true)`
+6. Reify `(V) -> V` to be `(Bool) -> Bool`
+
+Maybe we can simply use the `ctx` instead of `Reify`.
 
 ### What can go wrong
 

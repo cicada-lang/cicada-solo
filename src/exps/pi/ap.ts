@@ -55,33 +55,43 @@ export class Ap extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
     if (inferred_target.t instanceof Exps.PiValue) {
-      const pi = inferred_target.t
-      const arg_core = check(ctx, this.arg, pi.arg_t)
+      const { arg_t, ret_t_cl } = inferred_target.t
+      const arg_core = check(ctx, this.arg, arg_t)
       const arg_value = evaluate(ctx.to_env(), arg_core)
-
       return {
-        t: pi.ret_t_cl.apply(arg_value),
+        t: ret_t_cl.apply(arg_value),
         core: new Exps.ApCore(inferred_target.core, arg_core),
       }
+    } else if (inferred_target.t instanceof Exps.PiImValue) {
+      const { arg_t, pi_cl } = inferred_target.t
+      const inferred_arg = infer(ctx, this.arg)
+      const arg_value = evaluate(ctx.to_env(), inferred_arg.core)
+      const pi = pi_cl.apply(arg_value)
+
+      if (!(pi instanceof Exps.PiValue)) {
+        throw new Trace(
+          [
+            `When Ap.infer meet target of type Exps.PiImValue,`,
+            `It expects the result of pi_cl.apply(arg_value) to be PiValue,`,
+            `result class name: ${pi.constructor.name}`,
+          ].join("\n")
+        )
+      }
+
+      pi.arg_t
+      inferred_arg.t
+
+      throw new Error("TODO")
+
+      // const solution = solve(pi.arg_t, inferred_arg.t)
+      // arg_core = check(ctx.extend(name, arg_t), ret_t, Type)
+      // const arg_core = check(ctx, this.arg, pi.arg_t)
+      // const arg_value = evaluate(ctx.to_env(), arg_core)
+      // return {
+      //   t: pi.ret_t_cl.apply(arg_value),
+      //   core: new Exps.ApCore(inferred_target.core, arg_core),
+      // }
     }
-
-    // TODO
-
-    // if (inferred_target.t instanceof Exps.PiImValue) {
-    //   const pi_implicit = inferred_target.t
-    //   const inferred_arg = infer(ctx, this.arg)
-    //   const solution = solve(pi_implicit.pi.arg_t, inferred_arg.t)
-
-    //   arg_core = check(ctx.extend(name, arg_t), ret_t, Type)
-
-    //   const arg_core = check(ctx, this.arg, pi.arg_t)
-    //   const arg_value = evaluate(ctx.to_env(), arg_core)
-
-    //   return {
-    //     t: pi.ret_t_cl.apply(arg_value),
-    //     core: new Exps.ApCore(inferred_target.core, arg_core),
-    //   }
-    // }
 
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
     if (target_value instanceof Exps.ClsValue) {
