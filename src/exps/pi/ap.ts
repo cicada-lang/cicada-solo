@@ -4,7 +4,7 @@ import { Ctx } from "../../ctx"
 import { evaluate } from "../../core"
 import { infer } from "../../exp"
 import { check } from "../../exp"
-import { Value } from "../../value"
+import { Value, solve } from "../../value"
 import { Trace, InternalError } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
@@ -65,32 +65,53 @@ export class Ap extends Exp {
     } else if (inferred_target.t instanceof Exps.PiImValue) {
       const { arg_t, pi_cl } = inferred_target.t
       const inferred_arg = infer(ctx, this.arg)
-      const arg_value = evaluate(ctx.to_env(), inferred_arg.core)
-      const pi = pi_cl.apply(arg_value)
+      const fresh_name = ut.freshen_name(new Set(ctx.names), pi_cl.name)
+      const logic_var = new Exps.NotYetValue(
+        arg_t,
+        new Exps.VarNeutral(fresh_name)
+      )
+
+      const pi = pi_cl.apply(logic_var)
 
       if (!(pi instanceof Exps.PiValue)) {
         throw new Trace(
           [
             `When Ap.infer meet target of type Exps.PiImValue,`,
-            `It expects the result of pi_cl.apply(arg_value) to be PiValue,`,
+            `It expects the result of application of pi_cl to be PiValue,`,
             `result class name: ${pi.constructor.name}`,
           ].join("\n")
         )
       }
 
-      pi.arg_t
-      inferred_arg.t
+      const solution = solve(
+        ctx.extend(fresh_name, arg_t, logic_var),
+        (pi as Exps.PiValue).arg_t,
+        inferred_arg.t,
+        arg_t,
+        fresh_name
+      )
 
-      throw new Error("TODO")
+      const real_pi = pi_cl.apply(solution.value)
 
-      // const solution = solve(pi.arg_t, inferred_arg.t)
-      // arg_core = check(ctx.extend(name, arg_t), ret_t, Type)
-      // const arg_core = check(ctx, this.arg, pi.arg_t)
-      // const arg_value = evaluate(ctx.to_env(), arg_core)
-      // return {
-      //   t: pi.ret_t_cl.apply(arg_value),
-      //   core: new Exps.ApCore(inferred_target.core, arg_core),
-      // }
+      if (!(real_pi instanceof Exps.PiValue)) {
+        throw new Trace(
+          [
+            `When Ap.infer meet target of type Exps.PiImValue,`,
+            `It expects the result of application of pi_cl to be PiValue,`,
+            `result class name: ${pi.constructor.name}`,
+          ].join("\n")
+        )
+      }
+
+      const arg_value = evaluate(ctx.to_env(), inferred_arg.core)
+
+      return {
+        t: real_pi.ret_t_cl.apply(arg_value),
+        core: new Exps.ApCore(
+          new Exps.ApImCore(inferred_target.core, solution.core),
+          inferred_arg.core
+        ),
+      }
     }
 
     const target_value = evaluate(ctx.to_env(), inferred_target.core)

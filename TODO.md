@@ -1,8 +1,5 @@
 # implicit
 
-- `exps/pi/ap` -- `infer` insert `ApIm` on `PiIm`
-
-- `solve` get solution
 - `unify` walk the variables
 - `Value.unify` handle each case
 

@@ -37,6 +37,17 @@ export class Ctx {
     return new Ctx([...this.entries, { name, t, value }])
   }
 
+  lookup_entry(name: string): undefined | { t: Value; value?: Value } {
+    const index = this.names.lastIndexOf(name)
+    const entry = this.entries[index]
+    if (index === -1) return undefined
+    else
+      return {
+        t: entry.t,
+        value: entry.value,
+      }
+  }
+
   lookup_type(name: string): undefined | Value {
     const index = this.names.lastIndexOf(name)
     const entry = this.entries[index]

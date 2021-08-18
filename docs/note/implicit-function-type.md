@@ -112,6 +112,7 @@ Infer `id(true)`
   - This Reify is simply the solution of `V`
 6. Reify `(V) -> V` to be `(Bool) -> Bool`
   - We can do this reify by apply the closure to the solution of `V`
+6. Return -- core: `id(Bool)(true)`, t: `(Bool) -> Bool`
 
 Maybe we can simply use the `ctx` instead of `Reify`.
 
