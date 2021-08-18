@@ -83,15 +83,15 @@ export class Ap extends Exp {
         )
       }
 
-      const solution = solve(
+      const result = solve(
         ctx.extend(fresh_name, arg_t, logic_var),
         (pi as Exps.PiValue).arg_t,
         inferred_arg.t,
         arg_t,
-        fresh_name
+        logic_var
       )
 
-      const real_pi = pi_cl.apply(solution.value)
+      const real_pi = pi_cl.apply(result.value)
 
       if (!(real_pi instanceof Exps.PiValue)) {
         throw new Trace(
@@ -108,7 +108,7 @@ export class Ap extends Exp {
       return {
         t: real_pi.ret_t_cl.apply(arg_value),
         core: new Exps.ApCore(
-          new Exps.ApImCore(inferred_target.core, solution.core),
+          new Exps.ApImCore(inferred_target.core, result.core),
           inferred_arg.core
         ),
       }

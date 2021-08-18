@@ -1,6 +1,5 @@
 # implicit
 
-- `unify` walk the variables
 - `Value.unify` handle each case
 
 - we need unification over `Value` -- what should be the interface?
