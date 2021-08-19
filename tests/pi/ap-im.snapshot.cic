@@ -1,0 +1,7 @@
+id: (given A: Type, x: A) -> A =
+  (x) {
+    x
+  }
+
+// TODO
+// id(1)
