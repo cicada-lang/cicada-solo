@@ -4,9 +4,11 @@ import { Functor } from "category/functor.cic"
 class NaturalTransformation {
   dom: Category
   cod: Category
-  // NOTE The following use of `Functor(dom, cod)` is examples of fulfilling type.
+
+  // NOTE The following use of `Functor(dom, cod)` is an example of fulfilling type.
   src: Functor(dom, cod)
   tar: Functor(dom, cod)
+
   component(x: dom.Object): cod.Morphism(src.map(x), tar.map(x))
 
   naturality(
