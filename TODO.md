@@ -4,6 +4,8 @@
 
 - `Subst.unify` occur check
 
+- `Value.occur` handle each case
+
 - we need unification over `Value` -- what should be the interface?
   - we need to reify `Value`
   - be careful when handling pi and sigma type's closure
