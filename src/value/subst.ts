@@ -68,11 +68,21 @@ export class Subst {
     x = this.walk(x)
     y = this.walk(y)
 
-    if (Subst.logic_var_p(y)) {
+    if (Subst.logic_var_p(x) && Subst.logic_var_p(y)) {
+      if (Subst.logic_var_name(x) === Subst.logic_var_name(x)) {
+        return this
+      } else {
+        return null
+      }
+    } else if (Subst.logic_var_p(x)) {
+      // TODO occur check
+      return this.extend(Subst.logic_var_name(x), y)
+    } else if (Subst.logic_var_p(y)) {
+      // TODO occur check
+      return this.extend(Subst.logic_var_name(y), x)
+    } else {
       // NOTE When implementing unify for a `Value` subclass,
       //   the case where the argument is a logic variable is already handled.
-      return y.unify(this, x)
-    } else {
       return x.unify(this, y)
     }
   }

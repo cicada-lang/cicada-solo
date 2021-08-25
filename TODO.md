@@ -2,6 +2,8 @@
 
 - `Value.unify` handle each case
 
+- `Subst.unify` occur check
+
 - we need unification over `Value` -- what should be the interface?
   - we need to reify `Value`
   - be careful when handling pi and sigma type's closure

@@ -11,7 +11,6 @@ export abstract class Value {
   eta_expand?(ctx: Ctx, value: Value): Core
 
   unify(subst: Subst, x: Value): Subst | null {
-    // TODO
-    throw new Error("TODO")
+    throw new Error("Method not implemented: unify")
   }
 }

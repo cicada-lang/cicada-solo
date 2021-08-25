@@ -3,5 +3,8 @@ id: (given A: Type, x: A) -> A =
     x
   }
 
-// TODO
-// id(1)
+id(1)
+id(given Nat, 1)
+
+id("a")
+id(given String, "a")
