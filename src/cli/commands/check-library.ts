@@ -52,6 +52,8 @@ async function check(
         path
       )
     } catch (error) {
+      if (!(error instanceof Error)) throw error
+
       error_occurred = await error_log(error, path, library)
       console.log(
         chalk.bold(`(check)`),
@@ -91,6 +93,8 @@ async function watch(
         path
       )
     } catch (error) {
+      if (!(error instanceof Error)) throw error
+
       await error_log(error, path, library)
       console.log(
         chalk.bold(`(${event})`),

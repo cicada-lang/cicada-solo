@@ -21,15 +21,15 @@
     "cic": "bin/cic.js"
   },
   "devDependencies": {
-    "@types/assert": "^1.5.5",
+    "@types/assert": "^1.5.6",
     "@types/commonmark": "^0.27.5",
     "@types/fs-readdir-recursive": "^1.0.0",
     "@types/js-yaml": "^4.0.3",
     "@types/nanoid": "^2.1.0",
-    "@types/node": "^16.7.1",
+    "@types/node": "^16.7.4",
     "@types/yargs": "^17.0.2",
     "prettier": "^2.3.2",
-    "typescript": "^4.3.5"
+    "typescript": "^4.4.2"
   },
   "dependencies": {
     "@cicada-lang/librarian": "^0.0.13",
