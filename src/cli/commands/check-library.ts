@@ -52,9 +52,7 @@ async function check(
         path
       )
     } catch (error) {
-      if (!(error instanceof Error)) throw error
-
-      error_occurred = await error_log(error, path, library)
+      error_occurred = await error_log(error as any, path, library)
       console.log(
         chalk.bold(`(check)`),
         chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
@@ -93,9 +91,7 @@ async function watch(
         path
       )
     } catch (error) {
-      if (!(error instanceof Error)) throw error
-
-      await error_log(error, path, library)
+      await error_log(error as any, path, library)
       console.log(
         chalk.bold(`(${event})`),
         chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
