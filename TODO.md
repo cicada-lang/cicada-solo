@@ -46,6 +46,25 @@
 - how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
 - how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
 
+# librarian?
+
+- the `cicada-lang/librarian`'s library class is like a file system
+
+  - this is complicated because of a module need to import other modules
+
+    - this is like lazy mapping over the record of files,
+      load it into module as needed.
+
+    - one library denotes one source of files
+
+      - local-library
+      - github-library
+      - gitlab-library
+
+      how about we need to load from url, from a local module?
+
+      how es6 module system does this?
+
 # core features
 
 - [requirement] support to use `let` to do local definitions in class
