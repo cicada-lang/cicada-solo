@@ -1,6 +1,6 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
+import { Value, Subst } from "../../value"
 import * as Exps from "../../exps"
 
 export class TrivialValue extends Value {
@@ -15,5 +15,11 @@ export class TrivialValue extends Value {
     //   all of its inhabitants are the same as sole.
     //   This is implemented by reading the all back as sole.
     return new Exps.SoleCore()
+  }
+
+  unify(subst: Subst, x: Value): Subst | undefined {
+    if (x instanceof Exps.TrivialValue) {
+      return subst
+    }
   }
 }
