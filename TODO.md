@@ -1,7 +1,6 @@
 # implicit
 
 - Value.unify -- pi/fn-value.ts
-- Value.unify -- pi/pi-value.ts
 - Value.unify -- pi/pi-im-value.ts
 - Value.unify -- pi/fn-im-value.ts
 

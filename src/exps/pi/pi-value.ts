@@ -50,4 +50,26 @@ export class PiValue extends Value {
     )
     return new Exps.FnCore(fresh_name, ret)
   }
+
+  unify(subst: Subst, that: Value): Subst {
+    if (that instanceof Exps.PiValue) {
+      subst = subst.unify(this.arg_t, that.arg_t)
+      if (subst.null_p) return subst
+      const names = new Set([
+        ...subst.names,
+        this.ret_t_cl.name,
+        that.ret_t_cl.name,
+      ])
+      const fresh_name = ut.freshen_name(names, this.ret_t_cl.name)
+      const v = new Exps.VarNeutral(fresh_name)
+      const this_v = new Exps.NotYetValue(this.arg_t, v)
+      const that_v = new Exps.NotYetValue(that.arg_t, v)
+      return subst.unify(
+        this.ret_t_cl.apply(this_v),
+        that.ret_t_cl.apply(that_v)
+      )
+    } else {
+      return Subst.null
+    }
+  }
 }
