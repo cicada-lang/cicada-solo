@@ -12,7 +12,7 @@ export function solve(
   logic_var: Exps.NotYetValue
 ): { value: Value; core: Core } {
   const subst = Subst.create().unify(x, y)
-  if (subst === null) {
+  if (subst === undefined) {
     const logic_var_repr = readback(ctx, logic_var_t, logic_var).repr()
     throw new Trace(
       `Unification fail, fail to solve logic variable: ${logic_var_repr}`

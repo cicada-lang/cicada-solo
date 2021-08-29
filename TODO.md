@@ -1,5 +1,41 @@
 # implicit
 
+- Value.unify -- absurd/absurd-value.ts
+- Value.unify -- cls/cls-nil-value.ts
+- Value.unify -- cls/cls-value.ts
+- Value.unify -- cls/cls-cons-value.ts
+- Value.unify -- cls/obj-value.ts
+- Value.unify -- cls/cls-fulfilled-value.ts
+- Value.unify -- sigma/cons-value.ts
+- Value.unify -- sigma/sigma-value.ts
+- Value.unify -- list/li-value.ts
+- Value.unify -- list/list-value.ts
+- Value.unify -- list/nil-value.ts
+- Value.unify -- pi/fn-value.ts
+- Value.unify -- pi/pi-value.ts
+- Value.unify -- pi/pi-im-value.ts
+- Value.unify -- pi/fn-im-value.ts
+- Value.unify -- equal/equal-value.ts
+- Value.unify -- equal/same-value.ts
+- Value.unify -- vector/vector-value.ts
+- Value.unify -- vector/vecnil-value.ts
+- Value.unify -- vector/vec-value.ts
+- Value.unify -- str/str-value.ts
+- Value.unify -- str/quote-value.ts
+- Value.unify -- nat/add1-value.ts
+- Value.unify -- nat/nat-value.ts
+- Value.unify -- nat/zero-value.ts
+- Value.unify -- either/inr-value.ts
+- Value.unify -- either/inl-value.ts
+- Value.unify -- either/either-value.ts
+- Value.unify -- not-yet-value.ts
+- Value.unify -- trivial/sole-value.ts
+- Value.unify -- trivial/trivial-value.ts
+
+- `Subst.unify` occur check
+
+- `Value.occur` handle each case
+
 > 我之所以停在这里了
 > - 因为目前 exps 太多了。
 >   因此 inductive type 就很重要，
@@ -11,12 +47,6 @@
 > - 因为我不确定目前的代码结构良好（比如关于 librarian）。
 >   因此 OOD 就 refactoring 就很重要，
 >   不断响应新的需求，才能检验代码的结构是否良好。
-
-- `Value.unify` handle each case
-
-- `Subst.unify` occur check
-
-- `Value.occur` handle each case
 
 - we need unification over `Value` -- what should be the interface?
   - we need to reify `Value`

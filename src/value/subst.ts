@@ -64,7 +64,7 @@ export class Subst {
     return value
   }
 
-  unify(x: Value, y: Value): Subst | null {
+  unify(x: Value, y: Value): Subst | undefined {
     x = this.walk(x)
     y = this.walk(y)
 
@@ -72,7 +72,7 @@ export class Subst {
       if (Subst.logic_var_name(x) === Subst.logic_var_name(x)) {
         return this
       } else {
-        return null
+        return undefined
       }
     } else if (Subst.logic_var_p(x)) {
       // TODO occur check
