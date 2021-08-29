@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { readback } from "../../value"
-import { Value } from "../../value"
+import { Value, Subst } from "../../value"
 import * as Exps from "../../exps"
 
 export class EqualValue extends Value {
@@ -23,6 +23,17 @@ export class EqualValue extends Value {
         readback(ctx, this.t, this.from),
         readback(ctx, this.t, this.to)
       )
+    }
+  }
+
+  unify(subst: Subst, that: Value): Subst {
+    if (that instanceof Exps.EqualValue) {
+      return subst
+        .unify(this.t, that.t)
+        .unify(this.from, that.from)
+        .unify(this.to, that.to)
+    } else {
+      return Subst.null
     }
   }
 }
