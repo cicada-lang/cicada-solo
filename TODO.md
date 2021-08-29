@@ -24,7 +24,6 @@
 - Value.unify -- nat/add1-value.ts
 - Value.unify -- nat/nat-value.ts
 - Value.unify -- nat/zero-value.ts
-- Value.unify -- either/inr-value.ts
 
 - Value.unify -- not-yet-value.ts
 
