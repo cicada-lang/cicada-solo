@@ -1,7 +1,6 @@
 # implicit
 
 - Value.unify -- equal/equal-value.ts
-- Value.unify -- equal/same-value.ts
 
 - Value.unify -- vector/vector-value.ts
 - Value.unify -- vector/vecnil-value.ts
