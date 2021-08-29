@@ -1,6 +1,6 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
+import { Value, Subst } from "../../value"
 import { readback } from "../../value"
 import * as Exps from "../../exps"
 
@@ -15,6 +15,14 @@ export class ListValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
       return new Exps.ListCore(readback(ctx, new Exps.TypeValue(), this.elem_t))
+    }
+  }
+
+  unify(subst: Subst, that: Value): Subst {
+    if (that instanceof Exps.ListValue) {
+      return subst.unify(this.elem_t, that.elem_t)
+    } else {
+      return Subst.null
     }
   }
 }
