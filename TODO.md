@@ -1,3 +1,6 @@
+> It is easier to ponder about working code, and refactor it to better code,
+>   than to conceive the perfect design at the beginning.
+
 # implicit
 
 - Value.unify -- not-yet-value.ts
