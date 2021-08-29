@@ -45,4 +45,26 @@ export class SigmaValue extends Value {
       readback(ctx, this.cdr_t_cl.apply(car), cdr)
     )
   }
+
+  unify(subst: Subst, that: Value): Subst {
+    if (that instanceof Exps.SigmaValue) {
+      subst = subst.unify(this.car_t, that.car_t)
+      if (subst.null_p) return subst
+      const names = new Set([
+        ...subst.names,
+        this.cdr_t_cl.name,
+        that.cdr_t_cl.name,
+      ])
+      const fresh_name = ut.freshen_name(names, this.cdr_t_cl.name)
+      const v = new Exps.VarNeutral(fresh_name)
+      const this_v = new Exps.NotYetValue(this.car_t, v)
+      const that_v = new Exps.NotYetValue(that.car_t, v)
+      return subst.unify(
+        this.cdr_t_cl.apply(this_v),
+        that.cdr_t_cl.apply(that_v)
+      )
+    } else {
+      return Subst.null
+    }
+  }
 }
