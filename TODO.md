@@ -1,7 +1,5 @@
 # implicit
 
-- Value.unify -- str/quote-value.ts
-
 - Value.unify -- list/li-value.ts
 - Value.unify -- list/list-value.ts
 - Value.unify -- list/nil-value.ts
