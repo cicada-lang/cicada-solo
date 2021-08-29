@@ -1,7 +1,6 @@
 # implicit
 
 - Value.unify -- list/list-value.ts
-- Value.unify -- list/nil-value.ts
 
 - Value.unify -- equal/equal-value.ts
 - Value.unify -- equal/same-value.ts
