@@ -1,6 +1,5 @@
 # implicit
 
-- Value.unify -- trivial/sole-value.ts
 - Value.unify -- trivial/trivial-value.ts
 
 - Value.unify -- cls/cls-nil-value.ts

@@ -11,8 +11,8 @@ export class AbsurdValue extends Value {
   }
 
   unify(subst: Subst, x: Value): Subst | undefined {
-    if (x instanceof Exps.AbsurdCore) {
+    if (x instanceof Exps.AbsurdValue) {
       return subst
     }
-  }  
+  }
 }
