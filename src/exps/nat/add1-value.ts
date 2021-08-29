@@ -17,4 +17,12 @@ export class Add1Value extends Value {
       return new Exps.Add1Core(readback(ctx, t, this.prev))
     }
   }
+
+  unify(subst: Subst, that: Value): Subst {
+    if (that instanceof Exps.Add1Value) {
+      return subst.unify(this.prev, that.prev)
+    } else {
+      return Subst.null
+    }
+  }
 }
