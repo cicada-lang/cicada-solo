@@ -87,7 +87,6 @@ export class Ap extends Exp {
         ctx.extend(fresh_name, arg_t, logic_var),
         pi.arg_t,
         inferred_arg.t,
-        arg_t,
         logic_var
       )
 
