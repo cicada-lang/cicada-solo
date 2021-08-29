@@ -1,6 +1,6 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
+import { Value, Subst } from "../../value"
 import { Closure } from "../closure"
 
 export class FnValue extends Value {

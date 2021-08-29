@@ -1,6 +1,6 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
+import { Value, Subst } from "../../value"
 import { readback } from "../../value"
 import { Closure } from "../closure"
 import { Trace } from "../../errors"

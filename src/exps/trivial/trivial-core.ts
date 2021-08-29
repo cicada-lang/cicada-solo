@@ -1,5 +1,5 @@
 import { Core, AlphaCtx } from "../../core"
-import { Value } from "../../value"
+import { Value, Subst } from "../../value"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 

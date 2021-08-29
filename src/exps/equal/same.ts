@@ -1,7 +1,7 @@
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Value } from "../../value"
+import { Value, Subst } from "../../value"
 import { expect } from "../../value"
 import { check_conversion } from "../../value"
 import * as Exps from "../../exps"

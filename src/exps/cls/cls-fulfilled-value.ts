@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Core } from "../../core"
-import { Value } from "../../value"
+import { Value, Subst } from "../../value"
 import { readback } from "../../value"
 import { Trace } from "../../errors"
 import * as ut from "../../ut"

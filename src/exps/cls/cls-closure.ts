@@ -1,5 +1,5 @@
 import { Env } from "../../env"
-import { Value } from "../../value"
+import { Value, Subst } from "../../value"
 import * as Exps from "../../exps"
 
 export class ClsClosure {

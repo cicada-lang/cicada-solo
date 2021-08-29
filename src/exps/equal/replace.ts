@@ -6,7 +6,7 @@ import { evaluate } from "../../core"
 import { check } from "../../exp"
 import { infer } from "../../exp"
 import { expect } from "../../value"
-import { Value } from "../../value"
+import { Value, Subst } from "../../value"
 import * as Exps from "../../exps"
 
 export class Replace extends Exp {

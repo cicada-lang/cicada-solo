@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Core } from "../../core"
-import { Value } from "../../value"
+import { Value, Subst } from "../../value"
 import { readback } from "../../value"
 import { evaluate } from "../../core"
 import { check } from "../../exp"
