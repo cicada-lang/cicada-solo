@@ -1,6 +1,6 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
+import { Value, Subst } from "../../value"
 import * as Exps from "../../exps"
 
 export class AbsurdValue extends Value {
@@ -9,4 +9,10 @@ export class AbsurdValue extends Value {
       return new Exps.AbsurdCore()
     }
   }
+
+  unify(subst: Subst, x: Value): Subst | undefined {
+    if (x instanceof Exps.AbsurdCore) {
+      return subst
+    }
+  }  
 }

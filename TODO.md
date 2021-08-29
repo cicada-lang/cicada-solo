@@ -1,6 +1,8 @@
 # implicit
 
-- Value.unify -- absurd/absurd-value.ts
+- Value.unify -- trivial/sole-value.ts
+- Value.unify -- trivial/trivial-value.ts
+
 - Value.unify -- cls/cls-nil-value.ts
 - Value.unify -- cls/cls-value.ts
 - Value.unify -- cls/cls-cons-value.ts
@@ -28,9 +30,8 @@
 - Value.unify -- either/inr-value.ts
 - Value.unify -- either/inl-value.ts
 - Value.unify -- either/either-value.ts
+
 - Value.unify -- not-yet-value.ts
-- Value.unify -- trivial/sole-value.ts
-- Value.unify -- trivial/trivial-value.ts
 
 - `Subst.unify` occur check
 
