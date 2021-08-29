@@ -1,17 +1,9 @@
-import { Ctx } from "../ctx"
-import { Value, readback } from "../value"
-import { Core } from "../core"
+import { Value } from "../value"
 import * as Exps from "../exps"
-import { Trace } from "../errors"
 
-export class Subst {
-  // NOTE no side-effect
-
-  private map: Map<string, Value>
-
-  constructor(map: Map<string, Value>) {
-    this.map = map
-  }
+export abstract class Subst {
+  abstract find(name: string): Value | undefined
+  abstract null_p: boolean
 
   static logic_var_p(value: Value): boolean {
     return (
@@ -31,24 +23,12 @@ export class Subst {
     }
   }
 
-  static create(): Subst {
-    const map = new Map()
-    return new Subst(map)
-  }
-
-  clone(): Subst {
-    const map = new Map(this.map)
-    return new Subst(map)
+  static get null(): Subst {
+    return new NullSubst()
   }
 
   extend(name: string, value: Value): Subst {
-    const subst = this.clone()
-    subst.map.set(name, value)
-    return subst
-  }
-
-  find(name: string): Value | undefined {
-    return this.map.get(name)
+    return new ConsSubst(name, value, this)
   }
 
   walk(value: Value): Value {
@@ -64,7 +44,7 @@ export class Subst {
     return value
   }
 
-  unify(x: Value, y: Value): Subst | undefined {
+  unify(x: Value, y: Value): Subst {
     x = this.walk(x)
     y = this.walk(y)
 
@@ -72,7 +52,7 @@ export class Subst {
       if (Subst.logic_var_name(x) === Subst.logic_var_name(x)) {
         return this
       } else {
-        return undefined
+        return new NullSubst()
       }
     } else if (Subst.logic_var_p(x)) {
       // TODO occur check
@@ -85,5 +65,35 @@ export class Subst {
       //   the case where the argument is a logic variable is already handled.
       return x.unify(this, y)
     }
+  }
+}
+
+class ConsSubst extends Subst {
+  name: string
+  value: Value
+  rest: Subst
+  null_p = false
+
+  constructor(name: string, value: Value, rest: Subst) {
+    super()
+    this.name = name
+    this.value = value
+    this.rest = rest
+  }
+
+  find(name: string): Value | undefined {
+    if (name === this.name) {
+      return this.value
+    } else {
+      return this.rest.find(name)
+    }
+  }
+}
+
+class NullSubst extends Subst {
+  null_p = true
+
+  find(name: string): Value | undefined {
+    return undefined
   }
 }

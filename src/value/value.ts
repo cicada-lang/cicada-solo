@@ -10,7 +10,7 @@ export abstract class Value {
   abstract readback(ctx: Ctx, t: Value): Core | undefined
   eta_expand?(ctx: Ctx, value: Value): Core
 
-  unify(subst: Subst, x: Value): Subst | undefined {
+  unify(subst: Subst, that: Value): Subst {
     throw new Error("Method not implemented: unify")
   }
 }

@@ -10,9 +10,11 @@ export class AbsurdValue extends Value {
     }
   }
 
-  unify(subst: Subst, x: Value): Subst | undefined {
-    if (x instanceof Exps.AbsurdValue) {
+  unify(subst: Subst, that: Value): Subst {
+    if (that instanceof Exps.AbsurdValue) {
       return subst
+    } else {
+      return Subst.null
     }
   }
 }

@@ -10,9 +10,11 @@ export class TypeValue extends Value {
     }
   }
 
-  unify(subst: Subst, x: Value): Subst | undefined {
-    if (x instanceof Exps.TypeValue) {
+  unify(subst: Subst, that: Value): Subst {
+    if (that instanceof Exps.TypeValue) {
       return subst
+    } else {
+      return Subst.null
     }
   }
 }

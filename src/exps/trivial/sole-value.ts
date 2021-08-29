@@ -8,9 +8,11 @@ export class SoleValue extends Value {
     return new Exps.SoleCore()
   }
 
-  unify(subst: Subst, x: Value): Subst | undefined {
-    if (x instanceof Exps.SoleValue) {
+  unify(subst: Subst, that: Value): Subst {
+    if (that instanceof Exps.SoleValue) {
       return subst
+    } else {
+      return Subst.null
     }
   }
 }
