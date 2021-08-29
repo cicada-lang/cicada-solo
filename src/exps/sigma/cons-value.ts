@@ -1,6 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value, Subst } from "../../value"
+import * as Exps from "../../exps"
 
 export class ConsValue extends Value {
   car: Value
@@ -15,5 +16,13 @@ export class ConsValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
     // NOTE eta expand
     return undefined
+  }
+
+  unify(subst: Subst, that: Value): Subst {
+    if (that instanceof Exps.ConsValue) {
+      return subst.unify(this.car, that.car).unify(this.cdr, that.cdr)
+    } else {
+      return Subst.null
+    }
   }
 }

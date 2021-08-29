@@ -1,6 +1,5 @@
 # implicit
 
-- Value.unify -- sigma/cons-value.ts
 - Value.unify -- sigma/sigma-value.ts
 
 - Value.unify -- cls/cls-nil-value.ts
