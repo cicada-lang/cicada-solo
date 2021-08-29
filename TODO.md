@@ -1,7 +1,5 @@
 # implicit
 
-- Value.unify -- vector/vec-value.ts
-
 - Value.unify -- nat/add1-value.ts
 - Value.unify -- nat/nat-value.ts
 - Value.unify -- nat/zero-value.ts
