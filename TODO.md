@@ -1,6 +1,5 @@
 # implicit
 
-- Value.unify -- nat/nat-value.ts
 - Value.unify -- nat/zero-value.ts
 
 - Value.unify -- cls/cls-nil-value.ts

@@ -9,4 +9,12 @@ export class NatValue extends Value {
       return new Exps.NatCore()
     }
   }
+
+  unify(subst: Subst, that: Value): Subst {
+    if (that instanceof Exps.NatValue) {
+      return subst
+    } else {
+      return Subst.null
+    }
+  }
 }
