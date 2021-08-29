@@ -74,6 +74,12 @@
 - how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
 - how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
 
+# quotient type
+
+- learn from lean
+
+# git-based wiki system
+
 # librarian?
 
 - the `cicada-lang/librarian`'s library class is like a file system
