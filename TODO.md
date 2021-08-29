@@ -1,6 +1,5 @@
 # implicit
 
-- Value.unify -- vector/vector-value.ts
 - Value.unify -- vector/vecnil-value.ts
 - Value.unify -- vector/vec-value.ts
 

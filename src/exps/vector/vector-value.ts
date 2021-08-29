@@ -1,6 +1,6 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
+import { Value, Subst } from "../../value"
 import { readback } from "../../value"
 import * as Exps from "../../exps"
 
@@ -20,6 +20,16 @@ export class VectorValue extends Value {
         readback(ctx, new Exps.TypeValue(), this.elem_t),
         readback(ctx, new Exps.NatValue(), this.length)
       )
+    }
+  }
+
+  unify(subst: Subst, that: Value): Subst {
+    if (that instanceof Exps.VectorValue) {
+      return subst
+        .unify(this.elem_t, that.elem_t)
+        .unify(this.length, that.length)
+    } else {
+      return Subst.null
     }
   }
 }
