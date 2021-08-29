@@ -2,8 +2,6 @@
 
 - Value.unify -- not-yet-value.ts
 
-- Value.unify -- pi/pi-im-value.ts
-
 - Value.unify -- cls/cls-nil-value.ts
 - Value.unify -- cls/cls-value.ts
 - Value.unify -- cls/cls-cons-value.ts

@@ -71,4 +71,26 @@ export class PiImValue extends Value {
 
     return new Exps.FnImCore(fresh_name, result)
   }
+
+  unify(subst: Subst, that: Value): Subst {
+    if (that instanceof Exps.PiImValue) {
+      subst = subst.unify(this.arg_t, that.arg_t)
+      if (subst.null_p) return subst
+      const names = new Set([
+        ...subst.names,
+        this.pi_cl.name,
+        that.pi_cl.name,
+      ])
+      const fresh_name = ut.freshen_name(names, this.pi_cl.name)
+      const v = new Exps.VarNeutral(fresh_name)
+      const this_v = new Exps.NotYetValue(this.arg_t, v)
+      const that_v = new Exps.NotYetValue(that.arg_t, v)
+      return subst.unify(
+        this.pi_cl.apply(this_v),
+        that.pi_cl.apply(that_v)
+      )
+    } else {
+      return Subst.null
+    }
+  }  
 }
