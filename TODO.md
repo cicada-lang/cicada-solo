@@ -1,15 +1,15 @@
 # implicit
 
+- Value.unify -- pi/fn-value.ts
+- Value.unify -- pi/pi-value.ts
+- Value.unify -- pi/pi-im-value.ts
+- Value.unify -- pi/fn-im-value.ts
+
 - Value.unify -- cls/cls-nil-value.ts
 - Value.unify -- cls/cls-value.ts
 - Value.unify -- cls/cls-cons-value.ts
 - Value.unify -- cls/obj-value.ts
 - Value.unify -- cls/cls-fulfilled-value.ts
-
-- Value.unify -- pi/fn-value.ts
-- Value.unify -- pi/pi-value.ts
-- Value.unify -- pi/pi-im-value.ts
-- Value.unify -- pi/fn-im-value.ts
 
 - Value.unify -- not-yet-value.ts
 
