@@ -19,4 +19,8 @@ export class FnValue extends Value {
     // NOTE eta expand
     return undefined
   }
+
+  unify(subst: Subst, that: Value): Subst {
+    throw new Error("unify is not implemented for Exps.FnValue")
+  }
 }

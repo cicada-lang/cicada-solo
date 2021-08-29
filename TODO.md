@@ -1,8 +1,8 @@
 # implicit
 
-- Value.unify -- pi/fn-value.ts
+- Value.unify -- not-yet-value.ts
+
 - Value.unify -- pi/pi-im-value.ts
-- Value.unify -- pi/fn-im-value.ts
 
 - Value.unify -- cls/cls-nil-value.ts
 - Value.unify -- cls/cls-value.ts
@@ -10,7 +10,12 @@
 - Value.unify -- cls/obj-value.ts
 - Value.unify -- cls/cls-fulfilled-value.ts
 
-- Value.unify -- not-yet-value.ts
+- Value.unify -- pi/fn-value.ts & pi/fn-im-value.ts
+
+  - maybe need typed `unify`
+  - maybe also need bidirectional `unify`
+  - maybe `unify` can replace `readback`
+    - thus maybe we also need to handle eta-expansion in `unify`
 
 - `Subst.unify` occur check
 
