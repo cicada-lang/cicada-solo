@@ -20,8 +20,7 @@ export class InrValue extends Value {
 
   unify(subst: Subst, that: Value): Subst {
     if (that instanceof Exps.InrValue) {
-      return subst
-        .unify(this.right, that.right)
+      return subst.unify(this.right, that.right)
     } else {
       return Subst.null
     }
