@@ -9,4 +9,12 @@ export class ZeroValue extends Value {
       return new Exps.ZeroCore()
     }
   }
+
+  unify(subst: Subst, that: Value): Subst {
+    if (that instanceof Exps.ZeroValue) {
+      return subst
+    } else {
+      return Subst.null
+    }
+  }
 }
