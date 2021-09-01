@@ -16,6 +16,10 @@
 - Visit: [cicada-studyroom.vercel.app](https://cicada-studyroom.vercel.app)
 - Project: [cicada-lang/cicada-studyroom](https://github.com/cicada-lang/cicada-studyroom)
 
+## Community
+
+- IRC Channel: `#cicada-lang` at [libera.chat](https://libera.chat)
+
 ## Contributions
 
 > Be polite, do not bring negative emotion to others.
