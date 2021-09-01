@@ -15,7 +15,7 @@
     which is the same as type checking algorithm.
   - introduction rule := use a group of data constructors to define a type constructor.
   - elimination rule := TODO
-    - I do not understand the duality between introduction and aelimination.
+    - I do not understand the duality between introduction and elimination.
       - when introduction rules are given how to generate elimination rules?
 
 - computation := directed changes (simulation of action).
