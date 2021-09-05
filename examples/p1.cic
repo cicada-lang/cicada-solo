@@ -1,0 +1,21 @@
+add: (Nat, Nat) -> Nat = (x, y) {
+  nat_rec(x, y, (_prev, almost) { add1(almost) })
+}
+
+mul: (Nat, Nat) -> Nat = (x, y) {
+  nat_rec(x, 0, (_prev, almost) { add(almost, y) })
+}
+
+Prime(n: Nat): Type {
+  TODO("Prime")
+}
+
+euler_s_conjecture(n: Nat): (
+  x: Nat, p: Nat, Prime(p)
+) * Equal(
+  Nat,
+  add(mul(8, n), 3),
+  add(mul(x, x), add(p, p))
+) {
+  TODO("euler_s_conjecture")
+}
