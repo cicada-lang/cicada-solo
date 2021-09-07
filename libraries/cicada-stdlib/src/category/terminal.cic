@@ -44,6 +44,7 @@ terminal_unique(
     //   cat.id(x.terminal))
 
     // TODO we need good way to compose Equal
+    //   no we should use equivalence relation to define `Category` instead of `Equal`
 
     // TODO we need to be able to define this as `terminal_morphism_unique_aux` in the class
 
