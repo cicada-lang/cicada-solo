@@ -1,0 +1,12 @@
+import { Category } from "category/category.cic"
+
+class Initial {
+  cat: Category
+
+  initial: cat.Object
+  initial_arrow(x: cat.Object): cat.Morphism(initial, x)
+  initial_arrow_unique(
+    x: cat.Object,
+    f: cat.Morphism(initial, x),
+  ): Equal(cat.Morphism(initial, x), f, initial_arrow(x))
+}
