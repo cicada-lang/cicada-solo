@@ -45,6 +45,8 @@ terminal_object_isomorphism(
 
     // TODO we need good way to compose Equal
     //   no we should use equivalence relation to define `Category` instead of `Equal`
+    //   meybe use `Set` as the name of equivalence relation,
+    //     and use `hom_set` as the name of its instance
 
     // TODO we need to be able to define this as `morphism_unique_aux` in the class
 
