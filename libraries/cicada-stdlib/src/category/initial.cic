@@ -4,9 +4,11 @@ class Initial {
   cat: Category
 
   initial: cat.Object
-  initial_arrow(x: cat.Object): cat.Morphism(initial, x)
-  initial_arrow_unique(
+  initial_morphism(x: cat.Object): cat.Morphism(initial, x)
+  initial_morphism_unique(
     x: cat.Object,
     f: cat.Morphism(initial, x),
-  ): Equal(cat.Morphism(initial, x), f, initial_arrow(x))
+  ): Equal(cat.Morphism(initial, x), f, initial_morphism(x))
 }
+
+Initial

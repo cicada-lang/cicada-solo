@@ -4,9 +4,9 @@ class Terminal {
   cat: Category
 
   terminal: cat.Object
-  terminal_arrow(x: cat.Object): cat.Morphism(x, terminal)
-  terminal_arrow_unique(
+  terminal_morphism(x: cat.Object): cat.Morphism(x, terminal)
+  terminal_morphism_unique(
     x: cat.Object,
     f: cat.Morphism(x, terminal),
-  ): Equal(cat.Morphism(x, terminal), f, terminal_arrow(x))
+  ): Equal(cat.Morphism(x, terminal), f, terminal_morphism(x))
 }
