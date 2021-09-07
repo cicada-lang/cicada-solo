@@ -2,12 +2,10 @@ import { Category } from "category/category.cic"
 
 class Terminal {
   cat: Category
-  obj: cat.Object
-  morphism(x: cat.Object): cat.Morphism(x, obj)
+  terminal: cat.Object
+  terminal_arrow(x: cat.Object): cat.Morphism(x, terminal)
 
-  morphism_unique(
-    x: cat.Object,
-    f: cat.Morphism(x, obj),
-    g: cat.Morphism(x, obj),
-  ): Equal(cat.Morphism(x, obj), f, g)
+  terminal_arrow_unique(
+    x: cat.Object, f: cat.Morphism(x, terminal),
+  ): Equal(cat.Morphism(x, terminal), f, terminal_arrow(x))
 }
