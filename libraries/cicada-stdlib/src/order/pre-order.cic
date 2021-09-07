@@ -5,9 +5,5 @@ class PreOrder {
   Under(Element, Element): Type
 
   reflexive(x: Element): Under(x, x)
-  transitive(
-    x y z: Element,
-    Under(x, y),
-    Under(y, z)
-  ): Under(x, z)
+  transitive(x y z: Element, Under(x, y), Under(y, z)): Under(x, z)
 }
