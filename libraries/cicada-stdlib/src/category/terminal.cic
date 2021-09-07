@@ -1,4 +1,5 @@
 import { Category } from "category/category.cic"
+import { Isomorphism } from "category/isomorphism.cic"
 
 class Terminal {
   cat: Category
@@ -10,3 +11,86 @@ class Terminal {
     f: cat.Morphism(x, terminal),
   ): Equal(cat.Morphism(x, terminal), f, terminal_morphism(x))
 }
+
+terminal_unique(
+  cat: Category,
+  x y: Terminal(cat),
+): Isomorphism(cat, x.terminal, y.terminal) {
+  {
+    cat,
+    dom: x.terminal
+    cod: y.terminal
+    morphism: y.terminal_morphism(x.terminal)
+    inverse: x.terminal_morphism(y.terminal)
+
+    inverse_left: TODO("")
+
+      // Equal(
+      // cat.Morphism(dom, dom),
+      // cat.compose(dom, cod, dom)(morphism, inverse),
+      // cat.id(dom))
+
+    // TODO we need to compose the following two Equal
+
+    // x.terminal_morphism_unique(
+    //   x.terminal,
+    //   cat.compose(
+    //     x.terminal, y.terminal, x.terminal,
+    //     y.terminal_morphism(x.terminal),
+    //     x.terminal_morphism(y.terminal)))
+
+    // x.terminal_morphism_unique(
+    //   x.terminal,
+    //   cat.id(x.terminal))
+
+    // TODO we need good way to compose Equal
+
+    // TODO we need to be able to define this as `terminal_morphism_unique_aux` in the class
+
+    //   terminal_morphism_unique_aux(
+    //     x: cat.Object,
+    //     f: cat.Morphism(x, terminal),
+    //     g: cat.Morphism(x, terminal),
+    //   ): Equal(cat.Morphism(x, terminal), f, g)
+
+
+
+
+    inverse_right: TODO("asd")
+
+      //   : Equal(
+      // cat.Morphism(cod, cod),
+      // cat.compose(cod, dom, cod)(inverse, morphism),
+      // cat.id(cod))
+  }
+}
+
+// TODO BUG this should fail
+
+terminal_unique_bug(
+  cat: Category,
+  x y: Terminal(cat),
+): Isomorphism(cat, x.terminal, y.terminal) {
+  {
+    cat,
+    dom: x
+    cod: y
+    morphism: y.terminal_morphism(x.terminal)
+    inverse: TODO("cat.Morphism(cod, dom)")
+    // cat.Morphism(cod, dom)
+
+    inverse_left: TODO("1")
+      //   Equal(
+      // cat.Morphism(dom, dom),
+      // cat.compose(dom, cod, dom)(morphism, inverse),
+      // cat.id(dom))
+
+    inverse_right: TODO("asd")
+      //   : Equal(
+      // cat.Morphism(cod, cod),
+      // cat.compose(cod, dom, cod)(inverse, morphism),
+      // cat.id(cod))
+  }
+}
+
+// terminal_unique_up_to_unique_isomorphism
