@@ -78,22 +78,11 @@ terminal_object_isomorphism_bug(
     cat,
     dom: x_terminal
     cod: y_terminal
-    morphism: y_terminal.morphism(x_terminal.object)
-    inverse: TODO("cat.Morphism(cod, dom)")
-    // cat.Morphism(cod, dom)
-
-    inverse_left: TODO("1")
-    //   Equal(
-    // cat.Morphism(dom, dom),
-    // cat.compose(dom, cod, dom)(morphism, inverse),
-    // cat.id(dom))
-
-    inverse_right: TODO("asd")
-    //   : Equal(
-    // cat.Morphism(cod, cod),
-    // cat.compose(cod, dom, cod)(inverse, morphism),
-    // cat.id(cod))
+    // dom: x_terminal.object
+    // cod: y_terminal.object
+    morphism: TODO("")
+    inverse: TODO("")
+    inverse_left: TODO("")
+    inverse_right: TODO("")
   }
 }
-
-// terminal_object_isomorphism_unique
