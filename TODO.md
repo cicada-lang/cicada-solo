@@ -1,3 +1,5 @@
+- disallow syntax like `(x y: A) -> B` use `(x: A, y: A) -> B`
+
 > It is easier to ponder about working code, and refactor it to better code,
 >   than to conceive the perfect design at the beginning.
 
