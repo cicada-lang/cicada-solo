@@ -6,6 +6,14 @@
   which is high order unification,
   and this is why we need to learn prolog and alpha-kanren.
 
+  - the relationship between Env Ctx and Subst
+
+- 学习 web development 的时候，尝试观察到所解决的问题，与程序语言实现中的问题之间的相似性，
+  这样就可以将一个问题领域中的 pattern 用到另外一个问题领域。
+  知道很多 pattern 重要，知道如何将 pattern 与 problem 匹配同样重要。
+
+  - 这可能在于改善 Module，可能需要重新 inline librarian 这个 package
+
 # implicit
 
 - Value.unify -- not-yet-value.ts
