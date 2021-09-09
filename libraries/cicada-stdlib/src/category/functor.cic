@@ -6,12 +6,15 @@ class Functor {
   map(x: dom.Object): cod.Object
 
   fmap(
-    x y: dom.Object,
+    x: dom.Object,
+    y: dom.Object,
     f: dom.Morphism(x, y)
   ): cod.Morphism(map(x), map(y))
 
   fmap_respect_compose(
-    x y z: dom.Object,
+    x: dom.Object,
+    y: dom.Object,
+    z: dom.Object,
     f: dom.Morphism(x, y),
     g: dom.Morphism(y, z),
   ): Equal(

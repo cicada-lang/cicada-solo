@@ -31,7 +31,7 @@ append_step(E: Type, head: E, _tail: List(E), almost: List(E)): List(E) {
   li(head, almost)
 }
 
-append(E: Type, x y: List(E)): List(E) {
+append(E: Type, x: List(E), y: List(E)): List(E) {
   list_rec(x, y, append_step(E))
 }
 
@@ -51,7 +51,7 @@ reverse(E: Type, x: List(E)): List(E) {
 
 reverse(Nat, li! [1, 2, 3])
 
-append_by_reverse(E: Type, x y: List(E)): List(E) {
+append_by_reverse(E: Type, x: List(E), y: List(E)): List(E) {
   list_rec(reverse(E, y), x, reverse_step(E))
 }
 

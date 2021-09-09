@@ -14,7 +14,8 @@ class Terminal {
 
 terminal_object_isomorphism(
   cat: Category,
-  x_terminal y_terminal: Terminal(cat),
+  x_terminal: Terminal(cat),
+  y_terminal: Terminal(cat),
 ): Isomorphism(cat, x_terminal.object, y_terminal.object) {
   {
     cat,
@@ -72,7 +73,8 @@ terminal_object_isomorphism(
 
 terminal_object_isomorphism_bug(
   cat: Category,
-  x_terminal y_terminal: Terminal(cat),
+  x_terminal: Terminal(cat),
+  y_terminal: Terminal(cat),
 ): Isomorphism(cat, x_terminal.object, y_terminal.object) {
   {
     cat,

@@ -4,5 +4,5 @@ import { PreOrder } from "order/pre-order.cic"
 // NOTE Can implement:
 // - topological sort
 class PartialOrder extends PreOrder {
-  antisymmetric(x y: Element, Under(x, y), Under(y, x)): Equal(Element, x, y)
+  antisymmetric(x: Element, y: Element, Under(x, y), Under(y, x)): Equal(Element, x, y)
 }

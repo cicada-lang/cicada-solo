@@ -339,20 +339,9 @@ export const binding_entry = {
   $grammar: {
     "binding_entry:nameless": [{ exp: "exp" }],
     "binding_entry:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
-    "binding_entry:multi_named": [
-      { names: { $ap: ["one_or_more", "identifier"] } },
-      '":"',
-      { exp: "exp" },
-    ],
     "binding_entry:given_named": [
       '"given"',
       { name: "identifier" },
-      '":"',
-      { exp: "exp" },
-    ],
-    "binding_entry:given_multi_named": [
-      '"given"',
-      { names: { $ap: ["one_or_more", "identifier"] } },
       '":"',
       { exp: "exp" },
     ],

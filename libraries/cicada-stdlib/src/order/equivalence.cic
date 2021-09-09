@@ -1,7 +1,7 @@
 import { PreOrder } from "order/pre-order.cic"
 
 class Equivalence extends PreOrder {
-  symmetric(x y: Element, Under(x, y)): Under(y, x)
+  symmetric(x: Element, y: Element, Under(x, y)): Under(y, x)
 
   // TODO be able to rename
   // Eq: Type = Under

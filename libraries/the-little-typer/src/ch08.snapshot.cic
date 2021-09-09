@@ -17,15 +17,15 @@ add_1_add1_equal(n: Nat): Equal(Nat, add(1, n), add1(n)) {
 
 replace_t: Type = (
   X: Type,
-  from to: X,
+  from: X, to: X,
   target: Equal(X, from, to),
   motive: (X) -> Type,
   base: motive(from),
 ) -> motive(to)
 
 cong(
-  X Y: Type,
-  from to: X,
+  X: Type, Y: Type,
+  from: X, to: X,
   target: Equal(X, from, to),
   f: (X) -> Y,
 ): Equal(Y, f(from), f(to)) {
@@ -39,7 +39,7 @@ cong(
 
 // cong(
 //   given X: Type,
-//   given from to: X,
+//   given from: X, given to: X,
 //   target: Equal(X, from, to),
 //   given Y: Type,
 //   f: (X) -> Y,

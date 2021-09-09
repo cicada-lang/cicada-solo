@@ -12,7 +12,8 @@ class NaturalTransformation {
   component(x: dom.Object): cod.Morphism(src.map(x), tar.map(x))
 
   naturality(
-    x y: dom.Object,
+    x: dom.Object,
+    y: dom.Object,
     f: dom.Morphism(x, y),
   ): Equal(
     cod.Morphism(src.map(x), tar.map(y)),

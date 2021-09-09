@@ -391,19 +391,9 @@ export function binding_entry_matcher(tree: pt.Tree): {
       names: [pt.str(name)],
       exp: exp_matcher(exp),
     }),
-    "binding_entry:multi_named": ({ names, exp }) => ({
-      given: false,
-      names: pt.matchers.one_or_more_matcher(names).map(pt.str),
-      exp: exp_matcher(exp),
-    }),
     "binding_entry:given_named": ({ name, exp }) => ({
       given: true,
       names: [pt.str(name)],
-      exp: exp_matcher(exp),
-    }),
-    "binding_entry:given_multi_named": ({ names, exp }) => ({
-      given: true,
-      names: pt.matchers.one_or_more_matcher(names).map(pt.str),
       exp: exp_matcher(exp),
     }),
   })(tree)

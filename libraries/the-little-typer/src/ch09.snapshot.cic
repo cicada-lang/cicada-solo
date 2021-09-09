@@ -13,15 +13,15 @@ the(Equal(Nat, incr(3), add1(3)), same)
 
 replace_t: Type = (
   X: Type,
-  from to: X,
+  from: X, to: X,
   target: Equal(X, from, to),
   motive: (X) -> Type,
   base: motive(from),
 ) -> motive(to)
 
 cong(
-  X Y: Type,
-  from to: X,
+  X: Type, Y: Type,
+  from: X, to: X,
   target: Equal(X, from, to),
   f: (X) -> Y,
 ): Equal(Y, f(from), f(to)) {
@@ -87,7 +87,7 @@ twice(2)
 twice(3)
 twice(4)
 
-add1_add_commute_on_2nd_arg(n j: Nat): Equal(Nat, add1(add(n, j)), add(n, add1(j))) {
+add1_add_commute_on_2nd_arg(n: Nat, j: Nat): Equal(Nat, add1(add(n, j)), add(n, add1(j))) {
   motive(j: Nat, target: Nat): Type {
     Equal(Nat, add1(add(target, j)), add(target, add1(j)))
   }
@@ -158,7 +158,7 @@ vector_double(
 
 vector_double(String, 3, vec! ["a", "b", "c"])
 
-symm(T: Type, from to: T, target: Equal(T, from, to)): Equal(T, to, from) {
+symm(T: Type, from:T, to: T, target: Equal(T, from, to)): Equal(T, to, from) {
   replace(target, (x) { Equal(T, x, from) }, same)
 }
 
