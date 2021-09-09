@@ -58,33 +58,11 @@ terminal_object_isomorphism(
     //   ): Equal(cat.Morphism(x_terminal, object), f, g)
 
 
-
-
     inverse_right: TODO("asd")
 
     //   : Equal(
     // cat.Morphism(cod, cod),
     // cat.compose(cod, dom, cod)(inverse, morphism),
     // cat.id(cod))
-  }
-}
-
-// TODO BUG this should fail
-
-terminal_object_isomorphism_bug(
-  cat: Category,
-  x_terminal: Terminal(cat),
-  y_terminal: Terminal(cat),
-): Isomorphism(cat, x_terminal.object, y_terminal.object) {
-  {
-    cat
-    dom: x_terminal.object
-    cod: y_terminal.object
-    // dom: x_terminal.object
-    // cod: y_terminal.object
-    morphism: TODO("")
-    inverse: TODO("")
-    inverse_left: TODO("")
-    inverse_right: TODO("")
   }
 }
