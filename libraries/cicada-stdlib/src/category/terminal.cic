@@ -18,7 +18,7 @@ terminal_object_isomorphism(
   y_terminal: Terminal(cat),
 ): Isomorphism(cat, x_terminal.object, y_terminal.object) {
   {
-    cat,
+    cat
     dom: x_terminal.object
     cod: y_terminal.object
     morphism: y_terminal.morphism(x_terminal.object)
@@ -77,7 +77,7 @@ terminal_object_isomorphism_bug(
   y_terminal: Terminal(cat),
 ): Isomorphism(cat, x_terminal.object, y_terminal.object) {
   {
-    cat,
+    cat
     dom: x_terminal
     cod: y_terminal
     // dom: x_terminal.object
