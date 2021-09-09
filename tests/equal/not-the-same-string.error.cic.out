@@ -1,9 +1,10 @@
 
 I am expecting the following two values to be the same String.
 But they are not.
+
 from left hand side:
   "ratatouille"
-to left hand side:
+to right hand side:
   "baguette"
 
 previous:

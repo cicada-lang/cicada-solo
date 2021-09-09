@@ -1,0 +1,26 @@
+
+I am expecting the following two values to be the same String.
+But they are not.
+
+from given field value:
+  "c"
+to already fulfilled value:
+  "d"
+
+previous:
+- {
+  a: sole
+  b: 2
+  c: "c"
+  d: "d"
+  e: "e"
+}
+- the(ABCDE(sole, 2, "d"), {
+  a: sole
+  b: 2
+  c: "c"
+  d: "d"
+  e: "e"
+})
+
+

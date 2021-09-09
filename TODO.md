@@ -27,17 +27,18 @@
 
 - `Value.occur` handle each case
 
-> 我之所以停在这里了
-> - 因为目前 exps 太多了。
->   因此 inductive type 就很重要，
->   因为它可以用来实现大多数 exps，
->   并且大大地简化代码。
-> - 因为我不确定我的实现的正确性。
->   因此更清晰的理解就很重要，
->   TDD 所带来的自信也很重要。
-> - 因为我不确定目前的代码结构良好（比如关于 librarian）。
->   因此 OOD 就 refactoring 就很重要，
->   不断响应新的需求，才能检验代码的结构是否良好。
+- 目前 exps 太多了。
+  因此 inductive type 就很重要，
+  因为它可以用来实现大多数 exps，
+  并且大大地简化代码。
+
+- 我不确定我的实现的正确性。
+  因此更清晰的理解就很重要，
+  TDD 所带来的自信也很重要。
+
+- 我不确定目前的代码结构良好（比如关于 librarian）。
+  因此 OOD 就 refactoring 就很重要，
+  不断响应新的需求，才能检验代码的结构是否良好。
 
 - we need unification over `Value` -- what should be the interface?
   - we need to reify `Value`

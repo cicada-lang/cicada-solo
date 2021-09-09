@@ -1,9 +1,10 @@
 
 I am expecting the following two values to be the same (_: String, _1: String) -> (_2: String) * String.
 But they are not.
+
 from left hand side:
   (_, _1) { cons(_, _1) }
-to left hand side:
+to right hand side:
   (_, _1) { cons(_1, _) }
 
 previous:

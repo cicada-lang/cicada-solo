@@ -27,10 +27,10 @@ class ABCDE {
   e: String
 }
 
-abcde: ABCDE(sole, 2, "c") = {
+abcde: ABCDE(sole, 2, "d") = {
   a: sole
   b: 2
-  c: "c"
+  c: "c" // NOTE "c" is not equal to "d"
   d: "d"
   e: "e"
 }

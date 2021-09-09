@@ -78,8 +78,8 @@ terminal_object_isomorphism_bug(
 ): Isomorphism(cat, x_terminal.object, y_terminal.object) {
   {
     cat
-    dom: x_terminal
-    cod: y_terminal
+    dom: x_terminal.object
+    cod: y_terminal.object
     // dom: x_terminal.object
     // cod: y_terminal.object
     morphism: TODO("")

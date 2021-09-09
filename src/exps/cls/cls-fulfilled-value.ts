@@ -2,6 +2,9 @@ import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Value, Subst } from "../../value"
+import { check } from "../../exp"
+import { evaluate } from "../../core"
+import { check_conversion } from "../../value"
 import { readback } from "../../value"
 import { Trace } from "../../errors"
 import * as ut from "../../ut"
@@ -40,7 +43,15 @@ export class ClsFulfilledValue extends Exps.ClsValue {
       throw new Trace(`I expect to find field: ${this.field_name}`)
     }
 
-    const field_core = readback(ctx, this.field_t, this.field)
+    const field_core = check(ctx, exp, this.field_t)
+    const field_value = evaluate(ctx.to_env(), field_core)
+
+    check_conversion(ctx, this.field_t, field_value, this.field, {
+      description: {
+        from: "given field value",
+        to: "already fulfilled value",
+      },
+    })
 
     return new Map([
       [this.field_name, field_core],

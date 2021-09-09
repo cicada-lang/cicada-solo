@@ -1,9 +1,10 @@
 
 I am expecting the following two values to be the same (_: Nat) -> Nat.
 But they are not.
+
 from left hand side:
   (_) { add1(_) }
-to left hand side:
+to right hand side:
   (_) { nat_ind(_, (target_nat) { Nat }, 1, (prev, almost) { add1(almost) }) }
 
 previous:

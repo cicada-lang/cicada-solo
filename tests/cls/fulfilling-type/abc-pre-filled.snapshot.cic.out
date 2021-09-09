@@ -13,19 +13,19 @@ sole: Trivial
 {
   a: sole
   b: 2
-  c: "d"
+  c: "c"
   d: "d"
   e: "e"
 }: class {
   a: Trivial = sole
   b: Nat = 2
-  c: String = "d"
+  c: String = "c"
   d: String
   e: String
 } 
 sole: Trivial 
 2: Nat 
-"d": String 
+"c": String 
 "d": String 
 "e": String 
 

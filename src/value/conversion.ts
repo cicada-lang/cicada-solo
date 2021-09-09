@@ -40,9 +40,10 @@ export function check_conversion(
       ut.aline(`
         |I am expecting the following two values to be the same ${t_repr}.
         |But they are not.
+        |
         |from ${from_description}:
         |  ${from_repr}
-        |to ${from_description}:
+        |to ${to_description}:
         |  ${to_repr}
         |`)
     )
