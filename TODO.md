@@ -12,7 +12,8 @@
   这样就可以将一个问题领域中的 pattern 用到另外一个问题领域。
   知道很多 pattern 重要，知道如何将 pattern 与 problem 匹配同样重要。
 
-  - 这可能在于改善 Module，可能需要重新 inline librarian 这个 package
+  - 这可能在于改善 Module，使得它变成 request / response 与 client / server 的感觉
+    - 可能需要重新 inline librarian 这个 package
 
 # implicit
 
