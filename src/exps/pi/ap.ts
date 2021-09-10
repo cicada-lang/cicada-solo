@@ -85,7 +85,9 @@ export class Ap extends Exp {
 
       const result = solve(
         ctx.extend(fresh_name, arg_t, logic_var),
+        new Exps.TypeValue(),
         pi.arg_t,
+        new Exps.TypeValue(),
         inferred_arg.t,
         logic_var
       )

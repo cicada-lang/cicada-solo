@@ -1,5 +1,7 @@
 # implicit
 
+- fix `unify` return value -- should not be `Subst.null`
+
 - Value.unify -- pi/fn-value.ts & pi/fn-im-value.ts
 
   - typed directed `unify`
