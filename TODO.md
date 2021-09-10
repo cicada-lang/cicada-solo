@@ -1,8 +1,6 @@
 > It is easier to ponder about working code, and refactor it to better code,
 >   than to conceive the perfect design at the beginning.
 
-- inline librarian
-
 - We need to use `unify` to replace `readback`,
   which means type-directed unification of function,
   which is high order unification,
