@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { Subst, NullSubst } from "../../subst"
+import { Subst } from "../../subst"
 import { readback } from "../../value"
 import { Closure } from "../closure"
 import * as ut from "../../ut"
@@ -55,7 +55,7 @@ export class PiValue extends Value {
   unify(subst: Subst, that: Value): Subst {
     if (that instanceof Exps.PiValue) {
       subst = subst.unify(this.arg_t, that.arg_t)
-      if (subst instanceof NullSubst) return subst
+      if (Subst.null_p(subst)) return subst
       const names = new Set([
         ...subst.names,
         this.ret_t_cl.name,

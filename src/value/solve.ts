@@ -1,6 +1,6 @@
 import { Ctx } from "../ctx"
 import { Value, readback } from "../value"
-import { Subst, NullSubst } from "../subst"
+import { Subst } from "../subst"
 import { Core } from "../core"
 import * as Exps from "../exps"
 import { Trace } from "../errors"
@@ -19,7 +19,7 @@ export function solve(
     )
   }
 
-  if (subst instanceof NullSubst) {
+  if (Subst.null_p(subst)) {
     const logic_var_repr = readback(ctx, logic_var.t, logic_var).repr()
     throw new Trace(
       `Unification fail, fail to solve logic variable: ${logic_var_repr}`

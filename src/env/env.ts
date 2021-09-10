@@ -12,7 +12,7 @@ export abstract class Env {
   }
 }
 
-export class ConsEnv extends Env {
+class ConsEnv extends Env {
   name: string
   value: Value
   rest: Env
@@ -33,7 +33,7 @@ export class ConsEnv extends Env {
   }
 }
 
-export class NullEnv extends Env {
+class NullEnv extends Env {
   lookup_value(name: string): undefined | Value {
     return undefined
   }

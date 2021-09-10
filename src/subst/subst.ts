@@ -27,6 +27,10 @@ export abstract class Subst {
     return new NullSubst()
   }
 
+  static null_p(subst: Subst): subst is NullSubst {
+    return subst instanceof NullSubst
+  }
+
   extend(name: string, value: Value): Subst {
     return new ConsSubst(name, value, this)
   }
@@ -68,7 +72,7 @@ export abstract class Subst {
   }
 }
 
-export class ConsSubst extends Subst {
+class ConsSubst extends Subst {
   name: string
   value: Value
   rest: Subst
@@ -93,7 +97,7 @@ export class ConsSubst extends Subst {
   }
 }
 
-export class NullSubst extends Subst {
+class NullSubst extends Subst {
   names = []
 
   find(name: string): Value | undefined {
