@@ -71,6 +71,7 @@
 - get information about location from parser
 - good error report like elm
   - https://elm-lang.org/news/compiler-errors-for-humans
+  - https://elm-lang.org/news/the-syntax-cliff
 
 # git-based wiki system
 
