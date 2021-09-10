@@ -4,21 +4,15 @@ import { Trace } from "../errors"
 import { readback } from "../value"
 import * as Exps from "../exps"
 
-type CtxEntry = {
-  name: string
-  t: Value
-  value?: Value
-}
+type CtxEntry = { name: string; t: Value; value?: Value }
 
-export class Ctx {
-  entries: Array<CtxEntry>
+export abstract class Ctx {
+  abstract names: Array<string>
+  abstract lookup_entry(name: string): undefined | { t: Value; value?: Value }
+  abstract to_env(): Env
 
-  constructor(entries: Array<CtxEntry> = new Array()) {
-    this.entries = entries
-  }
-
-  get names(): Array<string> {
-    return Array.from(this.entries.map(({ name }) => name))
+  static get null(): NullCtx {
+    return new NullCtx()
   }
 
   extend(name: string, t: Value, value?: Value): Ctx {
@@ -34,40 +28,16 @@ export class Ctx {
       )
     }
 
-    return new Ctx([...this.entries, { name, t, value }])
-  }
-
-  lookup_entry(name: string): undefined | { t: Value; value?: Value } {
-    const index = this.names.lastIndexOf(name)
-    const entry = this.entries[index]
-    if (index === -1) return undefined
-    else
-      return {
-        t: entry.t,
-        value: entry.value,
-      }
+    return new ConsCtx({ name, t, value, rest: this })
   }
 
   lookup_type(name: string): undefined | Value {
-    const index = this.names.lastIndexOf(name)
-    const entry = this.entries[index]
-    if (index === -1) return undefined
-    else return entry.t
-  }
-
-  to_env(): Env {
-    let env = Env.null
-    for (const { name, t, value } of this.entries) {
-      if (value !== undefined) {
-        env = env.extend(name, value)
-      } else {
-        env = env.extend(
-          name,
-          new Exps.NotYetValue(t, new Exps.VarNeutral(name))
-        )
-      }
+    const entry = this.lookup_entry(name)
+    if (entry) {
+      return entry.t
+    } else {
+      return undefined
     }
-    return env
   }
 
   assert_not_redefine(name: string, t: Value, value?: Value): void {
@@ -86,5 +56,51 @@ export class Ctx {
         ].join("\n")
       )
     }
+  }
+}
+
+class ConsCtx extends Ctx {
+  name: string
+  t: Value
+  value?: Value
+  rest: Ctx
+
+  constructor(opts: { name: string; t: Value; value?: Value; rest: Ctx }) {
+    super()
+    this.name = opts.name
+    this.t = opts.t
+    this.value = opts.value
+    this.rest = opts.rest
+  }
+
+  get names(): Array<string> {
+    return [this.name, ...this.rest.names]
+  }
+
+  lookup_entry(name: string): undefined | { t: Value; value?: Value } {
+    if (name === this.name) {
+      return { t: this.t, value: this.value }
+    } else {
+      return this.rest.lookup_entry(name)
+    }
+  }
+
+  to_env(): Env {
+    const value =
+      this.value || new Exps.NotYetValue(this.t, new Exps.VarNeutral(this.name))
+
+    return this.rest.to_env().extend(this.name, value)
+  }
+}
+
+class NullCtx extends Ctx {
+  names = []
+
+  lookup_entry(name: string): undefined | { t: Value; value?: Value } {
+    return undefined
+  }
+
+  to_env(): Env {
+    return Env.null
   }
 }

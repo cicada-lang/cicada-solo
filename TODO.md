@@ -1,8 +1,6 @@
 > It is easier to ponder about working code, and refactor it to better code,
 >   than to conceive the perfect design at the beginning.
 
-- `Ctx` use null object pattern
-
 - inline librarian
 
 - We need to use `unify` to replace `readback`,
