@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Subst, NullSubst } from "../../subst"
 import { readback } from "../../value"
 import { Closure } from "../closure"
 import { Trace } from "../../errors"
@@ -76,7 +76,7 @@ export class PiImValue extends Value {
   unify(subst: Subst, that: Value): Subst {
     if (that instanceof Exps.PiImValue) {
       subst = subst.unify(this.arg_t, that.arg_t)
-      if (subst.null_p) return subst
+      if (subst instanceof NullSubst) return subst
       const names = new Set([...subst.names, this.pi_cl.name, that.pi_cl.name])
       const fresh_name = ut.freshen_name(names, this.pi_cl.name)
       const v = new Exps.VarNeutral(fresh_name)

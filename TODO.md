@@ -4,6 +4,8 @@
 - `Env` use null object pattern
 - `Ctx` use null object pattern
 
+- inline librarian
+
 - We need to use `unify` to replace `readback`,
   which means type-directed unification of function,
   which is high order unification,

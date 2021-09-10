@@ -4,7 +4,6 @@ import * as Exps from "../exps"
 export abstract class Subst {
   abstract find(name: string): Value | undefined
   abstract names: Array<string>
-  abstract null_p: boolean
 
   static logic_var_p(value: Value): boolean {
     return (
@@ -69,11 +68,10 @@ export abstract class Subst {
   }
 }
 
-class ConsSubst extends Subst {
+export class ConsSubst extends Subst {
   name: string
   value: Value
   rest: Subst
-  null_p = false
 
   constructor(name: string, value: Value, rest: Subst) {
     super()
@@ -95,8 +93,7 @@ class ConsSubst extends Subst {
   }
 }
 
-class NullSubst extends Subst {
-  null_p = true
+export class NullSubst extends Subst {
   names = []
 
   find(name: string): Value | undefined {

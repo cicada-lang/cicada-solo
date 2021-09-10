@@ -2,7 +2,7 @@ import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { readback } from "../../value"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Subst, NullSubst } from "../../subst"
 import { Closure } from "../closure"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
@@ -50,7 +50,7 @@ export class SigmaValue extends Value {
   unify(subst: Subst, that: Value): Subst {
     if (that instanceof Exps.SigmaValue) {
       subst = subst.unify(this.car_t, that.car_t)
-      if (subst.null_p) return subst
+      if (subst instanceof NullSubst) return subst
       const names = new Set([
         ...subst.names,
         this.cdr_t_cl.name,
