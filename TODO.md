@@ -44,6 +44,7 @@
 
   - 这可能在于改善 Module，使得它变成 request / response 与 client / server 的感觉
     - 可能需要重新 inline librarian 这个 package
+    - top-level syntax is statement-oriented
 
 - module vs namespace?
 
@@ -63,6 +64,12 @@
       how about we need to load from url, from a local module?
 
       how es6 module system does this?
+
+# error report
+
+- learn from the request / response & client / server arch
+- get information about location from parser
+- good error report like elm
 
 # git-based wiki system
 
