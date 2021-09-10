@@ -1,6 +1,7 @@
 import { Exp } from "../../exp"
 import { Core } from "../../core"
-import { Value, Subst } from "../../value"
+import { Value } from "../../value"
+import { Subst } from "../../subst"
 import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
 

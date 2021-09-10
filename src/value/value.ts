@@ -1,8 +1,6 @@
 import { Ctx } from "../ctx"
-import { Exp } from "../exp"
 import { Core } from "../core"
-import { Trace } from "../errors"
-import { Subst } from "../value"
+import { Subst } from "../subst"
 
 export abstract class Value {
   instanceofValue = true

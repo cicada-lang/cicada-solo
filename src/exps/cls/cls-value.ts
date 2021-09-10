@@ -1,7 +1,8 @@
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Core } from "../../core"
-import { Value, Subst } from "../../value"
+import { Value } from "../../value"
+import { Subst } from "../../subst"
 import * as Exps from "../../exps"
 
 export abstract class ClsValue extends Value {

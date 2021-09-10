@@ -1,7 +1,8 @@
 import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { evaluate } from "../../core"
-import { Value, Subst } from "../../value"
+import { Value } from "../../value"
+import { Subst } from "../../subst"
 import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
 

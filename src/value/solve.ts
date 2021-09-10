@@ -1,5 +1,6 @@
 import { Ctx } from "../ctx"
-import { Value, Subst, readback } from "../value"
+import { Value, readback } from "../value"
+import { Subst } from "../subst"
 import { Core } from "../core"
 import * as Exps from "../exps"
 import { Trace } from "../errors"

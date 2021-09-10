@@ -7,7 +7,8 @@ import { check } from "../../exp"
 import { expect } from "../../value"
 import { evaluate } from "../../core"
 import { check_conversion } from "../../value"
-import { Value, Subst } from "../../value"
+import { Value } from "../../value"
+import { Subst } from "../../subst"
 import * as Exps from "../../exps"
 
 export class VectorInd extends Exp {
