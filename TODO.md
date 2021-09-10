@@ -1,19 +1,10 @@
-> It is easier to ponder about working code, and refactor it to better code,
->   than to conceive the perfect design at the beginning.
-
-- We need to use `unify` to replace `readback`,
-  which means type-directed unification of function,
-  which is high order unification,
-  and this is why we need to learn prolog and alpha-kanren.
-
-- 学习 web development 的时候，尝试观察到所解决的问题，与程序语言实现中的问题之间的相似性，
-  这样就可以将一个问题领域中的 pattern 用到另外一个问题领域。
-  知道很多 pattern 重要，知道如何将 pattern 与 problem 匹配同样重要。
-
-  - 这可能在于改善 Module，使得它变成 request / response 与 client / server 的感觉
-    - 可能需要重新 inline librarian 这个 package
-
 # implicit
+
+- Value.unify -- pi/fn-value.ts & pi/fn-im-value.ts
+
+  - typed directed `unify`
+  - bidirectional `unify`
+  - handle eta-expansion in `unify`
 
 - Value.unify -- not-yet-value.ts
 
@@ -23,34 +14,6 @@
 - Value.unify -- cls/obj-value.ts
 - Value.unify -- cls/cls-fulfilled-value.ts
 
-- Value.unify -- pi/fn-value.ts & pi/fn-im-value.ts
-
-  - maybe need typed `unify`
-  - maybe also need bidirectional `unify`
-  - maybe `unify` can replace `readback`
-    - thus maybe we also need to handle eta-expansion in `unify`
-
-- `Subst.unify` occur check
-
-- `Value.occur` handle each case
-
-- 目前 exps 太多了。
-  因此 inductive type 就很重要，
-  因为它可以用来实现大多数 exps，
-  并且大大地简化代码。
-
-- 我不确定我的实现的正确性。
-  因此更清晰的理解就很重要，
-  TDD 所带来的自信也很重要。
-
-- 我不确定目前的代码结构良好（比如关于 librarian）。
-  因此 OOD 就 refactoring 就很重要，
-  不断响应新的需求，才能检验代码的结构是否良好。
-
-- we need unification over `Value` -- what should be the interface?
-  - we need to reify `Value`
-  - be careful when handling pi and sigma type's closure
-
 - use implicit to implement `cong` by `replace`
 
 - [question] Do we need `ap-im-neutral` and `fn-im-value`, or should just use  `ap-neutral` and `fn-value`?
@@ -59,41 +22,28 @@
 - `exps/pi/fn` `check` insert `FnIm` on `PiIm`
   - The result of elab might also be `FnImCore`
 
-# later
+- `Subst.unify` occur check
 
-- [later] update `cicada-lang/cicada-studyroom`
+- `Value.occur` handle each case
 
-# subtype
+# use `unify` to replace `readback`
 
-- `check` use `subtype` instead of `conversion`
-  - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
-  - `subtype` function default to `conversion`
-  - `Value.subtype` call `subtype` for recursion
+# library
 
-- when we do a typed binding, we need to be able to refine the declared type
-  - this is specially needed for `<var>: <fulfilled class> = <object>`
-  - this must also recurse into the structure of nested class and object, maybe even for pi type
+- [library] can be used as a module
 
-# inductive datatype
+- 我不确定目前的代码结构良好（比如关于 librarian）。
+  因此 OOD 就 refactoring 就很重要，
+  不断响应新的需求，才能检验代码的结构是否良好。
 
-- [inductive datatype] generate `ind` from `datatype` definitions
+- 学习 web development 的时候，尝试观察到所解决的问题，与程序语言实现中的问题之间的相似性，
+  这样就可以将一个问题领域中的 pattern 用到另外一个问题领域。
+  知道很多 pattern 重要，知道如何将 pattern 与 problem 匹配同样重要。
 
-> questions
+  - 这可能在于改善 Module，使得它变成 request / response 与 client / server 的感觉
+    - 可能需要重新 inline librarian 这个 package
 
-- what is the duality between introduction rule and elimination rule?
-  (how to use introduction rule to generate elimination rule and all other rules?)
-  - adjoint functors -- category theory
-
-- how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
-- how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
-
-# quotient type
-
-- learn from lean
-
-# git-based wiki system
-
-# librarian?
+- module vs namespace?
 
 - the `cicada-lang/librarian`'s library class is like a file system
 
@@ -112,6 +62,41 @@
 
       how es6 module system does this?
 
+# git-based wiki system
+
+# subtype
+
+- `check` use `subtype` instead of `conversion`
+  - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
+  - `subtype` function default to `conversion`
+  - `Value.subtype` call `subtype` for recursion
+
+- when we do a typed binding, we need to be able to refine the declared type
+  - this is specially needed for `<var>: <fulfilled class> = <object>`
+  - this must also recurse into the structure of nested class and object, maybe even for pi type
+
+# inductive datatype
+
+- 目前 exps 太多了。
+  因此 inductive type 就很重要，
+  因为它可以用来实现大多数 exps，
+  并且大大地简化代码。
+
+- [inductive datatype] generate `ind` from `datatype` definitions
+
+> questions
+
+- what is the duality between introduction rule and elimination rule?
+  (how to use introduction rule to generate elimination rule and all other rules?)
+  - adjoint functors -- category theory
+
+- how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
+- how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
+
+# quotient type
+
+- learn from lean
+
 # core features
 
 - [requirement] support to use `let` to do local definitions in class
@@ -127,10 +112,6 @@
 - [maybe] explicit `apply` -- to help non-elim in syntex
 - [maybe] it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
   - this will not effect normalization, because `same(from)` and `same(to)` will always be definitional or computational equal.
-
-# library management
-
-- [library] can be used as a module
 
 # formalization
 
