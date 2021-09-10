@@ -70,6 +70,7 @@
 - learn from the request / response & client / server arch
 - get information about location from parser
 - good error report like elm
+  - https://elm-lang.org/news/compiler-errors-for-humans
 
 # git-based wiki system
 
