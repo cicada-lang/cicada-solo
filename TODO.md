@@ -16,13 +16,13 @@
 - Value.unify -- cls/obj-value.ts
 - Value.unify -- cls/cls-fulfilled-value.ts
 
+- `exps/pi/fn` `check` insert `FnIm` on `PiIm`
+  - The result of elab might also be `FnImCore`
+
 - use implicit to implement `cong` by `replace`
 
 - [question] Do we need `ap-im-neutral` and `fn-im-value`, or should just use  `ap-neutral` and `fn-value`?
    - (A) we keep `ap-im-neutral` and `fn-im-value` for now, remove them if needed in the future
-
-- `exps/pi/fn` `check` insert `FnIm` on `PiIm`
-  - The result of elab might also be `FnImCore`
 
 - `Subst.unify` occur check
 
