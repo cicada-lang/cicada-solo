@@ -1,7 +1,6 @@
 > It is easier to ponder about working code, and refactor it to better code,
 >   than to conceive the perfect design at the beginning.
 
-- `Env` use null object pattern
 - `Ctx` use null object pattern
 
 - inline librarian

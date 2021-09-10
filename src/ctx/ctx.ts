@@ -56,7 +56,7 @@ export class Ctx {
   }
 
   to_env(): Env {
-    let env = new Env()
+    let env = Env.null
     for (const { name, t, value } of this.entries) {
       if (value !== undefined) {
         env = env.extend(name, value)

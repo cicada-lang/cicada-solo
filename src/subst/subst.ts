@@ -23,7 +23,7 @@ export abstract class Subst {
     }
   }
 
-  static get null(): Subst {
+  static get null(): NullSubst {
     return new NullSubst()
   }
 

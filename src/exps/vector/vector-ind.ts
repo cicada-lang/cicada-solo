@@ -106,7 +106,7 @@ export class VectorInd extends Exp {
 
 export function vector_ind_motive_t(elem_t: Value): Value {
   return evaluate(
-    new Env().extend("elem_t", elem_t),
+    Env.null.extend("elem_t", elem_t),
     new Exps.PiCore(
       "length",
       new Exps.NatCore(),
@@ -124,7 +124,7 @@ export function vector_ind_motive_t(elem_t: Value): Value {
 
 export function vector_ind_step_t(motive: Value, elem_t: Value): Value {
   return evaluate(
-    new Env().extend("motive", motive).extend("elem_t", elem_t),
+    Env.null.extend("motive", motive).extend("elem_t", elem_t),
     new Exps.PiCore(
       "length",
       new Exps.NatCore(),
