@@ -47,7 +47,7 @@ commands.test_cicada = async () => {
 
   await test(
     "./bin/cic.js run --no-module $file",
-    { file: "tests/**/**.snapshot.md" },
+    { file: "tests/**/**.snapshot.cic" },
     snapshot.out(({ file }) => file + ".out")
   )
 
