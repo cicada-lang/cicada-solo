@@ -8,11 +8,11 @@ export abstract class Env {
   }
 
   extend(name: string, value: Value): Env {
-    return new ConsEnv(name, value, this)
+    return new ExtendEnv(name, value, this)
   }
 }
 
-class ConsEnv extends Env {
+class ExtendEnv extends Env {
   name: string
   value: Value
   rest: Env

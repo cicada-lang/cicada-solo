@@ -1,7 +1,5 @@
 # implicit
 
-- `Env` rename `Cons` to `Extend`
-
 - `Ctx` rename `null` to `null`
 - `Ctx` rename `Cons` to `Extend`
 
