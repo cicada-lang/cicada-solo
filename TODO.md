@@ -1,6 +1,5 @@
 # implicit
 
-- `Ctx` rename `null` to `null`
 - `Ctx` rename `Cons` to `Extend`
 
 - `unify` return `Subst.failure` -- should not be `Subst.empty`

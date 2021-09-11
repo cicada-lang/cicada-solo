@@ -36,7 +36,7 @@ export class Module {
     this.doc = opts.doc
     this.library = opts.doc.library
     this.env = opts.env || Env.empty
-    this.ctx = opts.ctx || Ctx.null
+    this.ctx = opts.ctx || Ctx.empty
     this.entries = opts.entries || []
   }
 

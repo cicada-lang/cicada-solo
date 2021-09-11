@@ -4,15 +4,13 @@ import { Trace } from "../errors"
 import { readback } from "../value"
 import * as Exps from "../exps"
 
-type CtxEntry = { name: string; t: Value; value?: Value }
-
 export abstract class Ctx {
   abstract names: Array<string>
   abstract lookup_entry(name: string): undefined | { t: Value; value?: Value }
   abstract to_env(): Env
 
-  static get null(): NullCtx {
-    return new NullCtx()
+  static get empty(): EmptyCtx {
+    return new EmptyCtx()
   }
 
   extend(name: string, t: Value, value?: Value): Ctx {
@@ -93,7 +91,7 @@ class ConsCtx extends Ctx {
   }
 }
 
-class NullCtx extends Ctx {
+class EmptyCtx extends Ctx {
   names = []
 
   lookup_entry(name: string): undefined | { t: Value; value?: Value } {
