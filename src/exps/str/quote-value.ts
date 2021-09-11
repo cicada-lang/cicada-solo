@@ -22,7 +22,7 @@ export class QuoteValue extends Value {
     if (that instanceof Exps.QuoteValue && that.str === this.str) {
       return subst
     } else {
-      return Subst.null
+      return Subst.empty
     }
   }
 }

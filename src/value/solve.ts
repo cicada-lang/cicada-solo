@@ -13,7 +13,7 @@ export function solve(
   y: Value,
   logic_var: Exps.NotYetValue
 ): { value: Value; core: Core } {
-  const subst = Subst.null.unify(x, y)
+  const subst = Subst.empty.unify(x, y)
 
   if (!(logic_var.neutral instanceof Exps.VarNeutral)) {
     throw new Trace(
@@ -21,7 +21,7 @@ export function solve(
     )
   }
 
-  if (Subst.null_p(subst)) {
+  if (Subst.empty_p(subst)) {
     const logic_var_repr = readback(ctx, logic_var.t, logic_var).repr()
     const x_repr = readback(ctx, x_t, x).repr()
     const y_repr = readback(ctx, y_t, y).repr()

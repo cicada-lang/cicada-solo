@@ -23,7 +23,7 @@ export class InrValue extends Value {
     if (that instanceof Exps.InrValue) {
       return subst.unify(this.right, that.right)
     } else {
-      return Subst.null
+      return Subst.empty
     }
   }
 }

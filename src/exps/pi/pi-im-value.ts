@@ -76,7 +76,7 @@ export class PiImValue extends Value {
   unify(subst: Subst, that: Value): Subst {
     if (that instanceof Exps.PiImValue) {
       subst = subst.unify(this.arg_t, that.arg_t)
-      if (Subst.null_p(subst)) return subst
+      if (Subst.empty_p(subst)) return subst
       const names = new Set([...subst.names, this.pi_cl.name, that.pi_cl.name])
       const fresh_name = ut.freshen_name(names, this.pi_cl.name)
       const v = new Exps.VarNeutral(fresh_name)
@@ -84,7 +84,7 @@ export class PiImValue extends Value {
       const that_v = new Exps.NotYetValue(that.arg_t, v)
       return subst.unify(this.pi_cl.apply(this_v), that.pi_cl.apply(that_v))
     } else {
-      return Subst.null
+      return Subst.empty
     }
   }
 }

@@ -15,7 +15,7 @@ export class VecnilValue extends Value {
     if (that instanceof Exps.VecnilValue) {
       return subst
     } else {
-      return Subst.null
+      return Subst.empty
     }
   }
 }

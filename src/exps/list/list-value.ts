@@ -23,7 +23,7 @@ export class ListValue extends Value {
     if (that instanceof Exps.ListValue) {
       return subst.unify(this.elem_t, that.elem_t)
     } else {
-      return Subst.null
+      return Subst.empty
     }
   }
 }

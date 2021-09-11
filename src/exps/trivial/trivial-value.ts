@@ -22,7 +22,7 @@ export class TrivialValue extends Value {
     if (that instanceof Exps.TrivialValue) {
       return subst
     } else {
-      return Subst.null
+      return Subst.empty
     }
   }
 }

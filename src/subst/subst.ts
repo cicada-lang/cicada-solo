@@ -2,6 +2,7 @@ import { Value } from "../value"
 import * as Exps from "../exps"
 
 export abstract class Subst {
+  abstract extend(name: string, value: Value): Subst
   abstract find(name: string): Value | undefined
   abstract names: Array<string>
 
@@ -23,16 +24,20 @@ export abstract class Subst {
     }
   }
 
-  static get null(): NullSubst {
-    return new NullSubst()
+  static get empty(): EmptySubst {
+    return new EmptySubst()
   }
 
-  static null_p(subst: Subst): subst is NullSubst {
-    return subst instanceof NullSubst
+  static empty_p(subst: Subst): subst is EmptySubst {
+    return subst instanceof EmptySubst
   }
 
-  extend(name: string, value: Value): Subst {
-    return new ConsSubst(name, value, this)
+  static get failure(): FailureSubst {
+    return new FailureSubst()
+  }
+
+  static failure_p(subst: Subst): subst is FailureSubst {
+    return subst instanceof FailureSubst
   }
 
   walk(value: Value): Value {
@@ -56,7 +61,7 @@ export abstract class Subst {
       if (Subst.logic_var_name(x) === Subst.logic_var_name(x)) {
         return this
       } else {
-        return new NullSubst()
+        return Subst.failure
       }
     } else if (Subst.logic_var_p(x)) {
       // TODO occur check
@@ -88,6 +93,10 @@ class ConsSubst extends Subst {
     return [this.name, ...this.rest.names]
   }
 
+  extend(name: string, value: Value): Subst {
+    return new ConsSubst(name, value, this)
+  }
+
   find(name: string): Value | undefined {
     if (name === this.name) {
       return this.value
@@ -97,10 +106,26 @@ class ConsSubst extends Subst {
   }
 }
 
-class NullSubst extends Subst {
+class EmptySubst extends Subst {
   names = []
+
+  extend(name: string, value: Value): Subst {
+    return new ConsSubst(name, value, this)
+  }
 
   find(name: string): Value | undefined {
     return undefined
+  }
+}
+
+class FailureSubst extends Subst {
+  names = []
+
+  extend(name: string, value: Value): Subst {
+    return this
+  }
+
+  find(name: string): Value | undefined {
+    throw new Error(`Can not find name: ${name}, from a FailureSubst.`)
   }
 }

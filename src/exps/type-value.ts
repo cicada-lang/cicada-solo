@@ -15,7 +15,7 @@ export class TypeValue extends Value {
     if (that instanceof Exps.TypeValue) {
       return subst
     } else {
-      return Subst.null
+      return Subst.empty
     }
   }
 }

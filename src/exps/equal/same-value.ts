@@ -15,7 +15,7 @@ export class SameValue extends Value {
     if (that instanceof Exps.SameValue) {
       return subst
     } else {
-      return Subst.null
+      return Subst.empty
     }
   }
 }

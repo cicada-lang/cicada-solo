@@ -1,6 +1,14 @@
 # implicit
 
-- fix `unify` return value -- should not be `Subst.null`
+- `Subst` rename `Cons` to `Extend`
+
+- `Env` rename `null` to `empty`
+- `Env` rename `Cons` to `Extend`
+
+- `Ctx` rename `null` to `null`
+- `Ctx` rename `Cons` to `Extend`
+
+- `unify` return `Subst.failure` -- should not be `Subst.empty`
 
 - Value.unify -- pi/fn-value.ts & pi/fn-im-value.ts
 
