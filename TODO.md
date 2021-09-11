@@ -1,9 +1,15 @@
+- [stdlib] use `hom_set` in category theory
+- [stdlib] prove theory about terminal object
+- [stdlib] prove theory about initial object
+
 # implicit
 
 - `exps/pi/fn` `check` insert `FnIm` on `PiIm`
   - The result of elab might also be `FnImCore`
 
 - use implicit to implement `cong` by `replace` -- `from` and `to`
+
+- [stdlib] try implicit argument in `stdlib`
 
 - Value.unify -- pi/fn-value.ts & pi/fn-im-value.ts
 
