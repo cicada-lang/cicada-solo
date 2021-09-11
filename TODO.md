@@ -1,5 +1,10 @@
 # implicit
 
+- `exps/pi/fn` `check` insert `FnIm` on `PiIm`
+  - The result of elab might also be `FnImCore`
+
+- use implicit to implement `cong` by `replace` -- `from` and `to`
+
 - Value.unify -- pi/fn-value.ts & pi/fn-im-value.ts
 
   - typed directed `unify`
@@ -13,11 +18,6 @@
 - Value.unify -- cls/cls-cons-value.ts
 - Value.unify -- cls/obj-value.ts
 - Value.unify -- cls/cls-fulfilled-value.ts
-
-- `exps/pi/fn` `check` insert `FnIm` on `PiIm`
-  - The result of elab might also be `FnImCore`
-
-- use implicit to implement `cong` by `replace` -- `from` and `to`
 
 - [question] Do we need `ap-im-neutral` and `fn-im-value`, or should just use  `ap-neutral` and `fn-value`?
    - (A) we keep `ap-im-neutral` and `fn-im-value` for now, remove them if needed in the future
