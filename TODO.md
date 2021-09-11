@@ -49,6 +49,8 @@
 
 - the `cicada-lang/librarian`'s library class is like a file system
 
+  - support load library from a sub-dir of a repo -- to avoid using `git-subtree`
+
   - this is complicated because of a module need to import other modules
 
     - this is like lazy mapping over the record of files,
