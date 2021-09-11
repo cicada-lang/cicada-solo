@@ -27,21 +27,32 @@
 
 # use `unify` to replace `readback`
 
+# testing
+
+- improve test framework
+- improve test speed
+
+# cli
+
+- cli is route, thus should be as simple as route
+
+  - learn from laravel
+
 # library
+
+> Responding to new requirements can improve code structure.
+
+> Learn patterns from web development.
+
+- inline `librarian` package back to this project
 
 - [library] can be used as a module
 
-- 我不确定目前的代码结构良好（比如关于 librarian）。
-  因此 OOD 就 refactoring 就很重要，
-  不断响应新的需求，才能检验代码的结构是否良好。
+- `Module` improve architecture -- use use client / server
 
-- 学习 web development 的时候，尝试观察到所解决的问题，与程序语言实现中的问题之间的相似性，
-  这样就可以将一个问题领域中的 pattern 用到另外一个问题领域。
-  知道很多 pattern 重要，知道如何将 pattern 与 problem 匹配同样重要。
+- `Module` improve architecture -- use request / response
 
-  - 这可能在于改善 Module，使得它变成 request / response 与 client / server 的感觉
-    - 可能需要重新 inline librarian 这个 package
-    - top-level syntax is statement-oriented
+  - note that, top-level syntax of `Module` is statement-oriented
 
 - use relative path to resolve module
 
@@ -89,10 +100,7 @@
 
 # inductive datatype
 
-- 目前 exps 太多了。
-  因此 inductive type 就很重要，
-  因为它可以用来实现大多数 exps，
-  并且大大地简化代码。
+> Inductive type can reduce the number of exps.
 
 - [inductive datatype] generate `ind` from `datatype` definitions
 

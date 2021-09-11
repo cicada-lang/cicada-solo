@@ -78,6 +78,7 @@ export abstract class Subst {
 }
 
 class ExtendSubst extends Subst {
+  // TODO Should `Subst` also contains type of value -- like `Ctx`?
   name: string
   value: Value
   rest: Subst
