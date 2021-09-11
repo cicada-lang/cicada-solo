@@ -26,7 +26,7 @@ export abstract class Ctx {
       )
     }
 
-    return new ConsCtx({ name, t, value, rest: this })
+    return new ExtendCtx({ name, t, value, rest: this })
   }
 
   lookup_type(name: string): undefined | Value {
@@ -57,7 +57,7 @@ export abstract class Ctx {
   }
 }
 
-class ConsCtx extends Ctx {
+class ExtendCtx extends Ctx {
   name: string
   t: Value
   value?: Value

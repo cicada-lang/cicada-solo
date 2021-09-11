@@ -1,7 +1,5 @@
 # implicit
 
-- `Ctx` rename `Cons` to `Extend`
-
 - `unify` return `Subst.failure` -- should not be `Subst.empty`
 
 - Value.unify -- pi/fn-value.ts & pi/fn-im-value.ts
