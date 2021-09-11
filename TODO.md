@@ -50,7 +50,9 @@
     - 可能需要重新 inline librarian 这个 package
     - top-level syntax is statement-oriented
 
-- module vs namespace?
+- use relative path to resolve module
+
+- support `@/` -- to resolve module by absolute path from current library
 
 - the `cicada-lang/librarian`'s library class is like a file system
 
