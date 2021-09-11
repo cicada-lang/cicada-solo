@@ -86,7 +86,7 @@ export class EitherInd extends Exp {
 
 export function either_ind_motive_t(either_t: Value): Value {
   return evaluate(
-    Env.null.extend("either_t", either_t),
+    Env.empty.extend("either_t", either_t),
     new Exps.PiCore(
       "target_either",
       new Exps.VarCore("either_t"),
@@ -97,7 +97,7 @@ export function either_ind_motive_t(either_t: Value): Value {
 
 export function either_ind_base_left_t(left_t: Value, motive: Value): Value {
   return evaluate(
-    Env.null.extend("motive", motive).extend("left_t", left_t),
+    Env.empty.extend("motive", motive).extend("left_t", left_t),
     new Exps.PiCore(
       "left",
       new Exps.VarCore("left_t"),
@@ -111,7 +111,7 @@ export function either_ind_base_left_t(left_t: Value, motive: Value): Value {
 
 export function either_ind_base_right_t(right_t: Value, motive: Value): Value {
   return evaluate(
-    Env.null.extend("motive", motive).extend("right_t", right_t),
+    Env.empty.extend("motive", motive).extend("right_t", right_t),
     new Exps.PiCore(
       "right",
       new Exps.VarCore("right_t"),

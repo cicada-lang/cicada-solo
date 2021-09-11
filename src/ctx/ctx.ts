@@ -101,6 +101,6 @@ class NullCtx extends Ctx {
   }
 
   to_env(): Env {
-    return Env.null
+    return Env.empty
   }
 }

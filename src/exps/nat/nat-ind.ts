@@ -72,13 +72,13 @@ export class NatInd extends Exp {
 }
 
 export const nat_ind_motive_t: Value = evaluate(
-  Env.null,
+  Env.empty,
   new Exps.PiCore("target_nat", new Exps.NatCore(), new Exps.TypeCore())
 )
 
 export function nat_ind_step_t(motive: Value): Value {
   return evaluate(
-    Env.null.extend("motive", motive),
+    Env.empty.extend("motive", motive),
     new Exps.PiCore(
       "prev",
       new Exps.NatCore(),

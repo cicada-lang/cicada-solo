@@ -76,7 +76,7 @@ export class ListRec extends Exp {
 
 function list_rec_step_t(base_t: Value, elem_t: Value): Value {
   return evaluate(
-    Env.null.extend("base_t", base_t).extend("elem_t", elem_t),
+    Env.empty.extend("base_t", base_t).extend("elem_t", elem_t),
     new Exps.PiCore(
       "head",
       new Exps.VarCore("elem_t"),

@@ -3,8 +3,8 @@ import { Value } from "../value"
 export abstract class Env {
   abstract lookup_value(name: string): undefined | Value
 
-  static get null(): NullEnv {
-    return new NullEnv()
+  static get empty(): EmptyEnv {
+    return new EmptyEnv()
   }
 
   extend(name: string, value: Value): Env {
@@ -33,7 +33,7 @@ class ConsEnv extends Env {
   }
 }
 
-class NullEnv extends Env {
+class EmptyEnv extends Env {
   lookup_value(name: string): undefined | Value {
     return undefined
   }
