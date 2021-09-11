@@ -1,5 +1,7 @@
 // 9. Double Your Money, Get Twice as Much
 
+import { cong } from "ch08.snapshot.cic"
+
 add(x: Nat, y: Nat): Nat {
   nat_rec(x, y, (_prev, almost) { add1(almost) })
 }
@@ -10,26 +12,6 @@ incr(x: Nat): Nat {
 }
 
 the(Equal(Nat, incr(3), add1(3)), same)
-
-replace_t: Type = (
-  X: Type,
-  from: X, to: X,
-  target: Equal(X, from, to),
-  motive: (X) -> Type,
-  base: motive(from),
-) -> motive(to)
-
-cong(
-  X: Type, Y: Type,
-  from: X, to: X,
-  target: Equal(X, from, to),
-  f: (X) -> Y,
-): Equal(Y, f(from), f(to)) {
-  replace(
-    target,
-    (to) { Equal(Y, f(from), f(to)) },
-    same)
-}
 
 incr_add1_equal_motive(n: Nat): Type {
   Equal(Nat, incr(n), add1(n))
@@ -98,7 +80,7 @@ add1_add_commute_on_2nd_arg(n: Nat, j: Nat): Equal(Nat, add1(add(n, j)), add(n, 
     prev: Nat,
     almost: Equal(Nat, add1(add(prev, j)), add(prev, add1(j)))
   ): Equal(Nat, add1(add1(add(prev, j))), add1(add(prev, add1(j)))) {
-    cong(Nat, Nat, add1(add(prev, j)), add(prev, add1(j)), almost, add(1))
+    cong(add1(add(prev, j)), add(prev, add1(j)), almost, add(1))
   }
 
   nat_ind(n, motive(j), base, step)
@@ -116,7 +98,7 @@ twice_double_equal_step(
   }
 
   base: Equal(Nat, add1(add1(add(prev, prev))), add1(add1(double(prev)))) =
-    cong(Nat, Nat, add(prev, prev), double(prev), almost, add(2))
+    cong(add(prev, prev), double(prev), almost, add(2))
 
   replace(target, motive, base)
 }

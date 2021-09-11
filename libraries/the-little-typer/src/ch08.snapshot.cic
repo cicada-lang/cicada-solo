@@ -23,30 +23,14 @@ replace_t: Type = (
   base: motive(from),
 ) -> motive(to)
 
+// TODO Use implicit for `from` and `to`
 
 cong(
-  X: Type,
-  Y: Type,
-  from: X,
-  to: X,
-  target: Equal(X, from, to),
-  f: (X) -> Y,
-): Equal(Y, f(from), f(to)) {
-  replace(
-    target,
-    (to) { Equal(Y, f(from), f(to)) },
-    same)
-}
-
-// TODO use implicit to define `cong`
-
-cong_im(
   given X: Type,
   from: X,
   to: X,
   target: Equal(X, from, to),
-  // given Y: Type,
-  Y: Type,
+  given Y: Type,
   f: (X) -> Y,
 ): Equal(Y, f(from), f(to)) {
   replace(
@@ -70,7 +54,7 @@ incr_add1_equal_step(
   prev: Nat,
   almost: Equal(Nat, incr(prev), add1(prev))
 ): Equal(Nat, add1(incr(prev)), add1(add1(prev))) {
-  cong(Nat, Nat, incr(prev), add1(prev), almost, add(1))
+  cong(incr(prev), add1(prev), almost, add(1))
 }
 
 incr_add1_equal(n: Nat): Equal(Nat, incr(n), add1(n)) {

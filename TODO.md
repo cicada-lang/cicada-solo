@@ -1,5 +1,7 @@
 # implicit
 
+- `the-little-typer` -- all examples in markdown files
+
 - Value.unify -- pi/fn-value.ts & pi/fn-im-value.ts
 
   - typed directed `unify`
@@ -17,7 +19,7 @@
 - `exps/pi/fn` `check` insert `FnIm` on `PiIm`
   - The result of elab might also be `FnImCore`
 
-- use implicit to implement `cong` by `replace`
+- use implicit to implement `cong` by `replace` -- `from` and `to`
 
 - [question] Do we need `ap-im-neutral` and `fn-im-value`, or should just use  `ap-neutral` and `fn-value`?
    - (A) we keep `ap-im-neutral` and `fn-im-value` for now, remove them if needed in the future
