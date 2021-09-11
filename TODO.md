@@ -1,6 +1,6 @@
-# implicit
+- `the-little-typer` -- use front matter in markdown files
 
-- `the-little-typer` -- all examples in markdown files
+# implicit
 
 - Value.unify -- pi/fn-value.ts & pi/fn-im-value.ts
 
