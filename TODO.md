@@ -1,7 +1,5 @@
 # implicit
 
-- `Subst` rename `Cons` to `Extend`
-
 - `Env` rename `null` to `empty`
 - `Env` rename `Cons` to `Extend`
 

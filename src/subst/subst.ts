@@ -77,7 +77,7 @@ export abstract class Subst {
   }
 }
 
-class ConsSubst extends Subst {
+class ExtendSubst extends Subst {
   name: string
   value: Value
   rest: Subst
@@ -94,7 +94,7 @@ class ConsSubst extends Subst {
   }
 
   extend(name: string, value: Value): Subst {
-    return new ConsSubst(name, value, this)
+    return new ExtendSubst(name, value, this)
   }
 
   find(name: string): Value | undefined {
@@ -110,7 +110,7 @@ class EmptySubst extends Subst {
   names = []
 
   extend(name: string, value: Value): Subst {
-    return new ConsSubst(name, value, this)
+    return new ExtendSubst(name, value, this)
   }
 
   find(name: string): Value | undefined {
