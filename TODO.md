@@ -1,7 +1,3 @@
-- [stdlib] use `hom_set` in category theory
-- [stdlib] prove theory about terminal object
-- [stdlib] prove theory about initial object
-
 # implicit
 
 - `exps/pi/fn` `check` insert `FnIm` on `PiIm`
@@ -24,9 +20,6 @@
 - Value.unify -- cls/cls-cons-value.ts
 - Value.unify -- cls/obj-value.ts
 - Value.unify -- cls/cls-fulfilled-value.ts
-
-- [question] Do we need `ap-im-neutral` and `fn-im-value`, or should just use  `ap-neutral` and `fn-value`?
-   - (A) we keep `ap-im-neutral` and `fn-im-value` for now, remove them if needed in the future
 
 - `Subst.unify` occur check
 
@@ -130,19 +123,27 @@
 - [maybe] it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
   - this will not effect normalization, because `same(from)` and `same(to)` will always be definitional or computational equal.
 
-# formalization
+# stdlib
 
-- [formalization] a structure must have its own equivalence relation -- for quotient structure
-  - structure should take `Equivalence` as argument
-  - is the axioms of `Equivalence` enough to be used for quotient structure?
+- [stdlib] `Set` -- Bishop's set theory -- with notes
 
-- [formalization] [EWD1240a] A little bit of lattice theory
+- [stdlib] use `hom_set` in category theory
+- [stdlib] prove theory about terminal object
+- [stdlib] prove theory about initial object
+
+- [stdlib] [EWD1240a] A little bit of lattice theory
   - To test our system.
   - This paper is about the relation between PartialOrder and Lattice.
   - Learn from the story line for teaching.
-- [formalization] Algebraic structures -- https://en.wikipedia.org/wiki/Algebraic_structure
-- [formalization] Lattice theory
-- [formalization] Closure system -- for FCA
-- [formalization] Topology theory
-- [formalization] Category of Groups
-- [formalization] Number theroy -- https://en.wikipedia.org/wiki/Number_theory
+
+- [stdlib] Algebraic structures -- https://en.wikipedia.org/wiki/Algebraic_structure
+
+- [stdlib] Lattice theory
+
+- [stdlib] Closure system -- for FCA
+
+- [stdlib] Topology theory
+
+- [stdlib] Category of Groups
+
+- [stdlib] Number theroy -- https://en.wikipedia.org/wiki/Number_theory
