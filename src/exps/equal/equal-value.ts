@@ -34,7 +34,7 @@ export class EqualValue extends Value {
         .unify(this.from, that.from)
         .unify(this.to, that.to)
     } else {
-      return Subst.empty
+      return Subst.failure
     }
   }
 }

@@ -50,7 +50,7 @@ export class SigmaValue extends Value {
   unify(subst: Subst, that: Value): Subst {
     if (that instanceof Exps.SigmaValue) {
       subst = subst.unify(this.car_t, that.car_t)
-      if (Subst.empty_p(subst)) return subst
+      if (Subst.failure_p(subst)) return subst
       const names = new Set([
         ...subst.names,
         this.cdr_t_cl.name,
@@ -65,7 +65,7 @@ export class SigmaValue extends Value {
         that.cdr_t_cl.apply(that_v)
       )
     } else {
-      return Subst.empty
+      return Subst.failure
     }
   }
 }

@@ -15,7 +15,7 @@ export class StrValue extends Value {
     if (that instanceof Exps.StrValue) {
       return subst
     } else {
-      return Subst.empty
+      return Subst.failure
     }
   }
 }

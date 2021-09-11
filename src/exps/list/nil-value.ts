@@ -15,7 +15,7 @@ export class NilValue extends Value {
     if (that instanceof Exps.NilValue) {
       return subst
     } else {
-      return Subst.empty
+      return Subst.failure
     }
   }
 }

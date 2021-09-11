@@ -28,7 +28,7 @@ export class VecValue extends Value {
     if (that instanceof Exps.VecValue) {
       return subst.unify(this.head, that.head).unify(this.tail, that.tail)
     } else {
-      return Subst.empty
+      return Subst.failure
     }
   }
 }

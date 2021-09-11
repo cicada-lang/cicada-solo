@@ -23,7 +23,7 @@ export class Add1Value extends Value {
     if (that instanceof Exps.Add1Value) {
       return subst.unify(this.prev, that.prev)
     } else {
-      return Subst.empty
+      return Subst.failure
     }
   }
 }

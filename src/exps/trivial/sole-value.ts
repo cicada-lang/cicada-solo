@@ -13,7 +13,7 @@ export class SoleValue extends Value {
     if (that instanceof Exps.SoleValue) {
       return subst
     } else {
-      return Subst.empty
+      return Subst.failure
     }
   }
 }

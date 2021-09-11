@@ -30,7 +30,7 @@ export class EitherValue extends Value {
         .unify(this.left_t, that.left_t)
         .unify(this.right_t, that.right_t)
     } else {
-      return Subst.empty
+      return Subst.failure
     }
   }
 }

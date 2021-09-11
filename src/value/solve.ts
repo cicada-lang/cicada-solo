@@ -21,7 +21,7 @@ export function solve(
     )
   }
 
-  if (Subst.empty_p(subst)) {
+  if (Subst.failure_p(subst)) {
     const logic_var_repr = readback(ctx, logic_var.t, logic_var).repr()
     const x_repr = readback(ctx, x_t, x).repr()
     const y_repr = readback(ctx, y_t, y).repr()

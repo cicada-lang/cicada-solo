@@ -23,7 +23,7 @@ export class ConsValue extends Value {
     if (that instanceof Exps.ConsValue) {
       return subst.unify(this.car, that.car).unify(this.cdr, that.cdr)
     } else {
-      return Subst.empty
+      return Subst.failure
     }
   }
 }

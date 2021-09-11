@@ -15,7 +15,7 @@ export class AbsurdValue extends Value {
     if (that instanceof Exps.AbsurdValue) {
       return subst
     } else {
-      return Subst.empty
+      return Subst.failure
     }
   }
 }

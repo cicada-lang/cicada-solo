@@ -15,7 +15,7 @@ export class NatValue extends Value {
     if (that instanceof Exps.NatValue) {
       return subst
     } else {
-      return Subst.empty
+      return Subst.failure
     }
   }
 }

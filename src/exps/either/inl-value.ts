@@ -23,7 +23,7 @@ export class InlValue extends Value {
     if (that instanceof Exps.InlValue) {
       return subst.unify(this.left, that.left)
     } else {
-      return Subst.empty
+      return Subst.failure
     }
   }
 }

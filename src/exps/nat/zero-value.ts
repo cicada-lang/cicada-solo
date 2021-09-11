@@ -15,7 +15,7 @@ export class ZeroValue extends Value {
     if (that instanceof Exps.ZeroValue) {
       return subst
     } else {
-      return Subst.empty
+      return Subst.failure
     }
   }
 }
