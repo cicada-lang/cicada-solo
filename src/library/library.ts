@@ -1,10 +1,10 @@
 import { LibraryConfig } from "../library"
 import { Module } from "../module"
-import { Doc } from "../doc"
+import { ModuleLoader } from "../module"
 
 export interface DocBuilder {
   right_extension_p(path: string): boolean
-  from_file(opts: { path: string }): Doc
+  from_file(opts: { path: string }): ModuleLoader
 }
 
 // NOTE in the following interface, caller is responsible to make sure the path exists.

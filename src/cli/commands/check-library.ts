@@ -1,7 +1,7 @@
 import { LocalLibrary } from "../../libraries"
 import { Module } from "../../module"
 import { Trace } from "../../errors"
-import { doc_builder } from "../../docs"
+import { doc_builder } from "../../module/module-loaders"
 import pt from "@cicada-lang/partech"
 import chokidar from "chokidar"
 import moment from "moment"

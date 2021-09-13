@@ -1,6 +1,6 @@
 import { Library, LibraryConfig, DocBuilder } from "../library"
 import { Module } from "../module"
-import { Doc } from "../doc"
+import { ModuleLoader } from "../module"
 import Path from "path"
 import fs from "fs"
 import readdirp from "readdirp"

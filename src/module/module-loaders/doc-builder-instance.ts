@@ -1,20 +1,20 @@
-import { Doc } from "../doc"
-import { Library, DocBuilder } from "../library"
-import { CicDoc, MdDoc } from "../docs"
-import { Module } from "../module"
+import { ModuleLoader } from "../../module"
+import { DocBuilder } from "../../library"
+import { CicModuleLoader } from "./cic-module-loader"
+import { MarkdownModuleLoader } from "./markdown-module-loader"
 
 export const doc_builder: DocBuilder = {
   right_extension_p(path: string): boolean {
     return path.endsWith(".cic") || path.endsWith(".md")
   },
 
-  from_file(opts: { path: string }): Doc {
+  from_file(opts: { path: string }): ModuleLoader {
     const { path } = opts
 
     if (path.endsWith(".cic")) {
-      return new CicDoc({ path })
+      return new CicModuleLoader({ path })
     } else if (path.endsWith(".md")) {
-      return new MdDoc({ path })
+      return new MarkdownModuleLoader({ path })
     } else {
       throw new Error(
         `When try to create doc from file, I met path with unknown ext: ${path}`

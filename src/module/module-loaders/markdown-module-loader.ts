@@ -1,11 +1,10 @@
-import { Doc } from "../doc"
-import { Library } from "../library"
-import { Module } from "../module"
-import { Stmt } from "../stmt"
-import * as Syntax from "../syntax"
+import { ModuleLoader } from "../module-loader"
+import { Library } from "../../library"
+import { Module } from "../../module"
+import * as Syntax from "../../syntax"
 import * as commonmark from "commonmark"
 
-export class MdDoc extends Doc {
+export class MarkdownModuleLoader extends ModuleLoader {
   path: string
 
   constructor(opts: { path: string }) {

@@ -1,8 +1,6 @@
-- rename `Doc` to `ModuleLoader`
-
 - `ModuleLoader` register `factories`
 
-- inline `doc_builder`
+- replace `doc_builder` and `right_extension_p`
 
 - [cli] `snapshot` in cli argument -- instead of in file name
 
