@@ -37,6 +37,8 @@
 
 # cli
 
+- improve cli design
+
 - cli is route, thus should be as simple as route
 
   - learn from laravel
