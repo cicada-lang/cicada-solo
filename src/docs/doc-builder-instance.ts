@@ -8,13 +8,13 @@ export const doc_builder: DocBuilder = {
     return path.endsWith(".cic") || path.endsWith(".md")
   },
 
-  from_file(opts: { path: string; text: string }): Doc {
-    const { path, text } = opts
+  from_file(opts: { path: string }): Doc {
+    const { path } = opts
 
     if (path.endsWith(".cic")) {
-      return new CicDoc({ text, path })
+      return new CicDoc({ path })
     } else if (path.endsWith(".md")) {
-      return new MdDoc({ text, path })
+      return new MdDoc({ path })
     } else {
       throw new Error(
         `When try to create doc from file, I met path with unknown ext: ${path}`

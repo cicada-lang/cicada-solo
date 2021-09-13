@@ -1,6 +1,11 @@
-import { LibraryConfig, DocBuilder } from "../library"
+import { LibraryConfig } from "../library"
 import { Module } from "../module"
 import { Doc } from "../doc"
+
+export interface DocBuilder {
+  right_extension_p(path: string): boolean
+  from_file(opts: { path: string; text: string; library: Library }): Doc
+}
 
 // NOTE in the following interface, caller is responsible to make sure the path exists.
 //   maybe this should be changed, and these functions should be able to return `undefined`.

@@ -4,7 +4,6 @@ import { Module } from "../module"
 // NOTE The responsibility of this class
 //   is to parse file to different kinds of doc.
 export abstract class Doc {
-  abstract text: string
   abstract path: string
   abstract load(library: Library): Promise<Module>
 

@@ -5,21 +5,21 @@ import { Stmt } from "../stmt"
 import * as Syntax from "../syntax"
 
 export class CicDoc extends Doc {
-  text: string
   path: string
 
-  constructor(opts: { text: string; path: string }) {
+  constructor(opts: { path: string }) {
     super()
-    this.text = opts.text
     this.path = opts.path
   }
 
   async load(library: Library): Promise<Module> {
+    const text = await library.fetch_file(this.path)
+
     return new Module({
       library,
       path: this.path,
-      text: this.text,
-      stmts: Syntax.parse_stmts(this.text),
+      text,
+      stmts: Syntax.parse_stmts(text),
     })
   }
 }

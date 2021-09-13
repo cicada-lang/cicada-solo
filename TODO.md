@@ -1,4 +1,5 @@
-- avoid using `right_extension_p`
+- `Doc.load` take `library` and `path`
+
 - rename `Doc` to `ModuleLoader`
 
 - [cli] `snapshot` in cli argument -- instead of in file name
