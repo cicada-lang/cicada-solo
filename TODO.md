@@ -1,3 +1,5 @@
+- no `execute()` in `Doc`
+
 - merge fields of `Doc` into `Module`
 
 - rename `Doc` to `ModuleLoader`

@@ -15,10 +15,8 @@ export class CicDoc extends Doc {
   }
 
   async load(library: Library): Promise<Module> {
-    const mod = new Module({ library, path: this.path, text: this.text })
-    for (const stmt of this.stmts) {
-      await stmt.execute(mod)
-    }
+    const mod = new Module({ library, path: this.path, text: this.text, stmts: this.stmts })
+    await mod.execute()
     return mod
   }
 

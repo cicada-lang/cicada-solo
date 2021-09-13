@@ -23,6 +23,7 @@ export class Module {
   library: Library
   path: string
   text: string
+  stmts: Array<Stmt>
   env: Env
   ctx: Ctx
   entries: Array<ModuleEntry>
@@ -31,6 +32,7 @@ export class Module {
     library: Library
     path: string
     text: string
+    stmts: Array<Stmt>
     env?: Env
     ctx?: Ctx
     entries?: Array<ModuleEntry>
@@ -38,9 +40,16 @@ export class Module {
     this.library = opts.library
     this.path = opts.path
     this.text = opts.text
+    this.stmts = opts.stmts
     this.env = opts.env || Env.empty
     this.ctx = opts.ctx || Ctx.empty
     this.entries = opts.entries || []
+  }
+
+  async execute(): Promise<void> {
+    for (const stmt of this.stmts) {
+      await stmt.execute(this)
+    }
   }
 
   enter(stmt: Stmt, opts?: { output?: string }): void {
