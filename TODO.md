@@ -2,7 +2,7 @@
 
 - [cli] [refactor] cli is route, thus should be as simple as route
 
-  - extract service?
+  - extract service? controller?
 
 - [cli] `snapshot` in cli argument -- instead of in file name
 
