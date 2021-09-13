@@ -4,26 +4,17 @@ import { Module } from "../module"
 // NOTE The responsibility of this class
 //   is to parse file to different kinds of doc.
 export abstract class ModuleLoader {
-  abstract path: string
-  abstract load(library: Library): Promise<Module>
+  abstract load(library: Library, path: string): Promise<Module>
 
-  get extension(): string {
-    const parts = this.path.split(".")
-    if (parts.length === 0) {
-      return ""
-    }
+  private factories: Array<{
+    extension: string
+    create: (path: string) => ModuleLoader
+  }> = []
 
-    const extension = parts[parts.length - 1]
-    return extension
-  }
-
-  get total_extension(): string {
-    const parts = this.path.split(".")
-    if (parts.length === 0) {
-      return ""
-    }
-
-    const total_extension = parts.slice(1).join(".")
-    return total_extension
+  register(factory: {
+    extension: string
+    create: (path: string) => ModuleLoader
+  }): void {
+    this.factories.push(factory)
   }
 }

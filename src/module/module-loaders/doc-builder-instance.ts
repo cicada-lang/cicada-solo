@@ -12,9 +12,9 @@ export const doc_builder: DocBuilder = {
     const { path } = opts
 
     if (path.endsWith(".cic")) {
-      return new CicModuleLoader({ path })
+      return new CicModuleLoader()
     } else if (path.endsWith(".md")) {
-      return new MarkdownModuleLoader({ path })
+      return new MarkdownModuleLoader()
     } else {
       throw new Error(
         `When try to create doc from file, I met path with unknown ext: ${path}`

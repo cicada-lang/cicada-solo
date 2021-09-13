@@ -39,7 +39,7 @@ export class SingleFileLibrary extends Library {
     }
 
     const doc = this.doc_builder.from_file({ path: this.path })
-    const mod = await doc.load(this)
+    const mod = await doc.load(this, this.path)
     await mod.execute()
     return mod
   }

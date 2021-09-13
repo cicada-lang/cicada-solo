@@ -70,7 +70,7 @@ export class LocalLibrary extends Library {
 
     const t0 = Date.now()
     const doc = this.doc_builder.from_file({ path })
-    const mod = await doc.load(this)
+    const mod = await doc.load(this, path)
     await mod.execute()
     const t1 = Date.now()
 

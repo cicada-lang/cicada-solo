@@ -5,24 +5,12 @@ import * as Syntax from "../../syntax"
 import * as commonmark from "commonmark"
 
 export class MarkdownModuleLoader extends ModuleLoader {
-  path: string
-
-  constructor(opts: { path: string }) {
-    super()
-    this.path = opts.path
-  }
-
-  async load(library: Library): Promise<Module> {
-    const text = await library.fetch_file(this.path)
-
-    return new Module({
-      library,
-      path: this.path,
-      text,
-      stmts: code_blocks(text).flatMap((code_block) =>
-        Syntax.parse_stmts(code_block.text, code_block.offset)
-      ),
-    })
+  async load(library: Library, path: string): Promise<Module> {
+    const text = await library.fetch_file(path)
+    const stmts = code_blocks(text).flatMap((code_block) =>
+      Syntax.parse_stmts(code_block.text, code_block.offset)
+    )
+    return new Module({ library, path, text, stmts })
   }
 }
 
