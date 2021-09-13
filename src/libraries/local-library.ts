@@ -48,15 +48,8 @@ export class LocalLibrary extends Library {
 
   async list_paths(): Promise<Array<string>> {
     const src_dir = Path.resolve(this.root_dir, this.config.src)
-
-    const paths: Array<string> = []
-    for await (const { path } of readdirp(src_dir)) {
-      if (this.doc_builder.right_extension_p(path)) {
-        paths.push(path)
-      }
-    }
-
-    return paths
+    const entries = await readdirp.promise(src_dir)
+    return entries.map(({ path }) => path)
   }
 
   async fetch_doc(path: string): Promise<Doc> {
