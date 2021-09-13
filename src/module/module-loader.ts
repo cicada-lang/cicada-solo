@@ -17,7 +17,7 @@ export abstract class ModuleLoader {
     return this.loaders.some(({ extension }) => path.endsWith(extension))
   }
 
-  static create(path: string): ModuleLoader {
+  private static create(path: string): ModuleLoader {
     for (const { extension, loader } of this.loaders) {
       if (path.endsWith(extension)) {
         return loader
