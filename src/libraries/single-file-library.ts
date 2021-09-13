@@ -46,7 +46,7 @@ export class SingleFileLibrary extends Library {
     }
 
     const doc = await this.fetch_doc(this.path)
-    return await doc.load()
+    return await doc.load(this)
   }
 
   async load_mods(): Promise<Map<string, Module>> {
