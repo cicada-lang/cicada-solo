@@ -5,12 +5,12 @@ import { Stmt } from "../stmt"
 import * as Syntax from "../syntax"
 import * as commonmark from "commonmark"
 
-export class MdDoc extends Doc<Module> {
-  library: Library<Module>
+export class MdDoc extends Doc {
+  library: Library
   text: string
   path: string
 
-  constructor(opts: { library: Library<Module>; text: string; path: string }) {
+  constructor(opts: { library: Library; text: string; path: string }) {
     super()
     this.library = opts.library
     this.text = opts.text

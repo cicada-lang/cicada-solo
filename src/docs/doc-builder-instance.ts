@@ -3,16 +3,12 @@ import { Library, DocBuilder } from "../library"
 import { CicDoc, MdDoc } from "../docs"
 import { Module } from "../module"
 
-export const doc_builder: DocBuilder<Module> = {
+export const doc_builder: DocBuilder = {
   right_extension_p(path: string): boolean {
     return path.endsWith(".cic") || path.endsWith(".md")
   },
 
-  from_file(opts: {
-    path: string
-    text: string
-    library: Library<Module>
-  }): Doc<Module> {
+  from_file(opts: { path: string; text: string; library: Library }): Doc {
     const { path, text, library } = opts
 
     if (path.endsWith(".cic")) {

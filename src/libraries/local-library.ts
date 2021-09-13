@@ -1,23 +1,24 @@
 import { Library, LibraryConfig, DocBuilder, ModuleViewer } from "../library"
+import { Module } from "../module"
 import { Doc } from "../doc"
 import Path from "path"
 import fs from "fs"
 import readdirp from "readdirp"
 import chalk from "chalk"
 
-export class LocalLibrary<Module> extends Library<Module> {
+export class LocalLibrary extends Library {
   root_dir: string
   config: LibraryConfig
   cached_mods: Map<string, Module>
-  doc_builder: DocBuilder<Module>
-  module_viewer: ModuleViewer<Module>
+  doc_builder: DocBuilder
+  module_viewer: ModuleViewer
 
   constructor(opts: {
     root_dir: string
     config: LibraryConfig
     cached_mods?: Map<string, Module>
-    doc_builder: DocBuilder<Module>
-    module_viewer: ModuleViewer<Module>
+    doc_builder: DocBuilder
+    module_viewer: ModuleViewer
   }) {
     super()
     this.root_dir = opts.root_dir
@@ -30,10 +31,10 @@ export class LocalLibrary<Module> extends Library<Module> {
   static async from_config_file<Module>(
     file: string,
     opts: {
-      doc_builder: DocBuilder<Module>
-      module_viewer: ModuleViewer<Module>
+      doc_builder: DocBuilder
+      module_viewer: ModuleViewer
     }
-  ): Promise<LocalLibrary<Module>> {
+  ): Promise<LocalLibrary> {
     const text = await fs.promises.readFile(file, "utf8")
     return new LocalLibrary({
       root_dir: Path.dirname(file),
@@ -43,7 +44,7 @@ export class LocalLibrary<Module> extends Library<Module> {
     })
   }
 
-  async fetch_doc(path: string): Promise<Doc<Module>> {
+  async fetch_doc(path: string): Promise<Doc> {
     const file = Path.isAbsolute(path)
       ? path
       : Path.resolve(this.root_dir, this.config.src, path)
@@ -51,10 +52,10 @@ export class LocalLibrary<Module> extends Library<Module> {
     return this.doc_builder.from_file({ path, text, library: this })
   }
 
-  async fetch_docs(): Promise<Record<string, Doc<Module>>> {
+  async fetch_docs(): Promise<Record<string, Doc>> {
     const src_dir = Path.resolve(this.root_dir, this.config.src)
 
-    const docs: Record<string, Doc<Module>> = {}
+    const docs: Record<string, Doc> = {}
     for await (const { path } of readdirp(src_dir)) {
       if (this.doc_builder.right_extension_p(path)) {
         docs[path] = await this.fetch_doc(path)

@@ -1,9 +1,10 @@
 import { Library } from "../library"
+import { Module } from "../module"
 
 // NOTE The responsibility of this class
 //   is to parse file to different kinds of doc.
-export abstract class Doc<Module> {
-  abstract library: Library<Module>
+export abstract class Doc {
+  abstract library: Library
   abstract text: string
   abstract path: string
   abstract load(): Promise<Module>

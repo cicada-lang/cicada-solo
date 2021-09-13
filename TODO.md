@@ -1,5 +1,5 @@
-- `Doc` does not use type variable `Module` -- use concrete `Module`
-- `Library` does not use type variable `Module` -- use concrete `Module`
+- inline `ModuleViewer`
+
 - [maybe] `ModuleLoader`
 
 - merge `Doc` into `Module` and use `ModuleLoader`

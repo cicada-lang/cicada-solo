@@ -20,13 +20,13 @@ class ModuleEntry {
 }
 
 export class Module {
-  library: Library<Module>
+  library: Library
   env: Env
   ctx: Ctx
   entries: Array<ModuleEntry>
 
   constructor(opts: {
-    library: Library<Module>
+    library: Library
     env?: Env
     ctx?: Ctx
     entries?: Array<ModuleEntry>
