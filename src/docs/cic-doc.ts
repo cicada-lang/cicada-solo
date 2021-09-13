@@ -19,11 +19,7 @@ export class CicDoc extends Doc {
       library,
       path: this.path,
       text: this.text,
-      stmts: this.stmts,
+      stmts: Syntax.parse_stmts(this.text),
     })
-  }
-
-  private get stmts(): Array<Stmt> {
-    return Syntax.parse_stmts(this.text)
   }
 }

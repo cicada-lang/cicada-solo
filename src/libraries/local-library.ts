@@ -52,27 +52,6 @@ export class LocalLibrary extends Library {
     return entries.map(({ path }) => path)
   }
 
-  async fetch_doc(path: string): Promise<Doc> {
-    const file = Path.isAbsolute(path)
-      ? path
-      : Path.resolve(this.root_dir, this.config.src, path)
-    const text = await fs.promises.readFile(file, "utf8")
-    return this.doc_builder.from_file({ path, text, library: this })
-  }
-
-  async fetch_docs(): Promise<Record<string, Doc>> {
-    const src_dir = Path.resolve(this.root_dir, this.config.src)
-
-    const docs: Record<string, Doc> = {}
-    for await (const { path } of readdirp(src_dir)) {
-      if (this.doc_builder.right_extension_p(path)) {
-        docs[path] = await this.fetch_doc(path)
-      }
-    }
-
-    return docs
-  }
-
   async load(
     path: string,
     opts: {
@@ -90,7 +69,11 @@ export class LocalLibrary extends Library {
     }
 
     const t0 = Date.now()
-    const doc = await this.fetch_doc(path)
+    const doc = this.doc_builder.from_file({
+      path,
+      text: await this.fetch_file(path),
+      library: this,
+    })
     const mod = await doc.load(this)
     await mod.execute()
     const t1 = Date.now()

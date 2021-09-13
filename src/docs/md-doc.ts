@@ -15,24 +15,15 @@ export class MdDoc extends Doc {
     this.path = opts.path
   }
 
-  private get stmts(): Array<Stmt> {
-    return this.code_blocks.flatMap((code_block) =>
-      Syntax.parse_stmts(code_block.text, code_block.offset)
-    )
-  }
-
   async load(library: Library): Promise<Module> {
     return new Module({
       library,
       path: this.path,
       text: this.text,
-      stmts: this.stmts,
+      stmts: this.code_blocks.flatMap((code_block) =>
+        Syntax.parse_stmts(code_block.text, code_block.offset)
+      ),
     })
-  }
-
-  private offset_from_pos(row: number, col: number): number {
-    const lines = this.text.split("\n")
-    return lines.slice(0, row).join("\n").length + col
   }
 
   private get code_blocks(): Array<{
@@ -66,5 +57,10 @@ export class MdDoc extends Doc {
     }
 
     return code_blocks
+  }
+
+  private offset_from_pos(row: number, col: number): number {
+    const lines = this.text.split("\n")
+    return lines.slice(0, row).join("\n").length + col
   }
 }

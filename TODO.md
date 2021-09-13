@@ -1,5 +1,4 @@
-- merge fields of `Doc` into `Module`
-
+- avoid using `right_extension_p`
 - rename `Doc` to `ModuleLoader`
 
 - [cli] `snapshot` in cli argument -- instead of in file name
