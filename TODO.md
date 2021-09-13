@@ -1,5 +1,3 @@
-- `Library` -- `list_paths` as abstract & `fetch_files` as concrete
-
 - merge fields of `Doc` into `Module`
 
 - rename `Doc` to `ModuleLoader`

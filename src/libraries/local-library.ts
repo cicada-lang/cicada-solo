@@ -46,17 +46,17 @@ export class LocalLibrary extends Library {
     return await fs.promises.readFile(file, "utf8")
   }
 
-  async fetch_files(): Promise<Record<string, string>> {
+  async list_paths(): Promise<Array<string>> {
     const src_dir = Path.resolve(this.root_dir, this.config.src)
 
-    const files: Record<string, string> = {}
+    const paths: Array<string> = []
     for await (const { path } of readdirp(src_dir)) {
       if (this.doc_builder.right_extension_p(path)) {
-        files[path] = await this.fetch_file(path)
+        paths.push(path)
       }
     }
 
-    return files
+    return paths
   }
 
   async fetch_doc(path: string): Promise<Doc> {

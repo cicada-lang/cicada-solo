@@ -10,7 +10,18 @@ export abstract class Library {
   abstract doc_builder: DocBuilder
 
   abstract fetch_file(path: string): Promise<string>
-  abstract fetch_files(): Promise<Record<string, string>>
+  abstract list_paths(): Promise<Array<string>>
+
+  async fetch_files(): Promise<Record<string, string>> {
+    const files: Record<string, string> = {}
+    for (const path of await this.list_paths()) {
+      if (this.doc_builder.right_extension_p(path)) {
+        files[path] = await this.fetch_file(path)
+      }
+    }
+
+    return files
+  }
 
   abstract load(path: string): Promise<Module>
   abstract reload(path: string): Promise<Module>

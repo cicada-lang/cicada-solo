@@ -18,13 +18,12 @@ export class SingleFileLibrary extends Library {
     this.doc_builder = opts.doc_builder
   }
 
-  async fetch_file(path: string): Promise<string> {
-    return fs.readFileSync(this.path, { encoding: "utf-8" })
+  async list_paths(): Promise<Array<string>> {
+    return [this.path]
   }
 
-  async fetch_files(): Promise<Record<string, string>> {
-    const text = fs.readFileSync(this.path, { encoding: "utf-8" })
-    return { [this.path]: text }
+  async fetch_file(path: string): Promise<string> {
+    return fs.readFileSync(this.path, { encoding: "utf-8" })
   }
 
   async fetch_doc(path: string): Promise<Doc> {
