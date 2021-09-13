@@ -1,4 +1,4 @@
-import { ModuleViewer } from "@cicada-lang/librarian"
+import { ModuleViewer } from "../library"
 import { Module } from "../module"
 
 export const module_viewer: ModuleViewer<Module> = {

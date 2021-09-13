@@ -1,3 +1,5 @@
+- `snapshot` in cli argument -- instead of in file name
+
 # implicit
 
 - `exps/pi/pi-im` -- be able to take pi-im
@@ -49,8 +51,6 @@
 
 > Learn patterns from web development.
 
-- inline `librarian` package back to this project
-
 - [library] can be used as a module
 
 - `Module` improve architecture -- use use client / server
@@ -63,7 +63,7 @@
 
 - support `@/` -- to resolve module by absolute path from current library
 
-- the `cicada-lang/librarian`'s library class is like a file system
+- the `Library` class is like a file system
 
   - support load library from a sub-dir of a repo -- to avoid using `git-subtree`
 

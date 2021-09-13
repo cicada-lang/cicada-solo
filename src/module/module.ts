@@ -1,8 +1,8 @@
-import { Library } from "@cicada-lang/librarian"
+import { Doc } from "../doc"
+import { Library } from "../library"
 import { Stmt } from "../stmt"
 import { Env } from "../env"
 import { Ctx } from "../ctx"
-import { Doc } from "@cicada-lang/librarian"
 
 // NOTE
 // - a module knows which library it belongs to

@@ -1,4 +1,5 @@
-import { Library, DocBuilder, Doc } from "@cicada-lang/librarian"
+import { Doc } from "../doc"
+import { Library, DocBuilder } from "../library"
 import { CicDoc, MdDoc } from "../docs"
 import { Module } from "../module"
 
