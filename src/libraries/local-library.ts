@@ -92,6 +92,7 @@ export class LocalLibrary extends Library {
     const t0 = Date.now()
     const doc = await this.fetch_doc(path)
     const mod = await doc.load(this)
+    await mod.execute()
     const t1 = Date.now()
 
     if (opts.verbose) {

@@ -15,9 +15,12 @@ export class CicDoc extends Doc {
   }
 
   async load(library: Library): Promise<Module> {
-    const mod = new Module({ library, path: this.path, text: this.text, stmts: this.stmts })
-    await mod.execute()
-    return mod
+    return new Module({
+      library,
+      path: this.path,
+      text: this.text,
+      stmts: this.stmts,
+    })
   }
 
   private get stmts(): Array<Stmt> {

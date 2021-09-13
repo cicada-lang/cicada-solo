@@ -22,9 +22,12 @@ export class MdDoc extends Doc {
   }
 
   async load(library: Library): Promise<Module> {
-    const mod = new Module({ library, path: this.path, text: this.text, stmts: this.stmts })
-    await mod.execute()
-    return mod
+    return new Module({
+      library,
+      path: this.path,
+      text: this.text,
+      stmts: this.stmts,
+    })
   }
 
   private offset_from_pos(row: number, col: number): number {
