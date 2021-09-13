@@ -1,5 +1,3 @@
-- in line `doc_builder`
-
 - [cli] `snapshot` in cli argument -- instead of in file name
 
 - [cli] [refactor] cli is route, thus should be as simple as route

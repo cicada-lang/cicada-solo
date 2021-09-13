@@ -1,7 +1,7 @@
 import { LocalLibrary } from "../../libraries"
 import { Module } from "../../module"
+import { ModuleLoader } from "../../module"
 import { Trace } from "../../errors"
-import { doc_builder } from "../../module/module-loaders"
 import pt from "@cicada-lang/partech"
 import chokidar from "chokidar"
 import moment from "moment"
@@ -24,9 +24,7 @@ type Argv = {
 }
 
 export const handler = async (argv: Argv) => {
-  const library = await LocalLibrary.from_config_file(argv["config-file"], {
-    doc_builder,
-  })
+  const library = await LocalLibrary.from_config_file(argv["config-file"])
   const opts = { verbose: argv.verbose }
   if (argv.watch) await watch(library, opts)
   else await check(library, opts)
@@ -73,7 +71,7 @@ async function watch(
 
   watcher.on("all", async (event, file) => {
     if (event !== "add" && event !== "change") return
-    if (!doc_builder.right_extension_p(file)) return
+    if (!ModuleLoader.can_load(file)) return
 
     const prefix = `${src_dir}/`
     const path = file.slice(prefix.length)

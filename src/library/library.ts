@@ -2,17 +2,10 @@ import { LibraryConfig } from "../library"
 import { Module } from "../module"
 import { ModuleLoader } from "../module"
 
-export interface DocBuilder {
-  right_extension_p(path: string): boolean
-  from_file(opts: { path: string }): ModuleLoader
-}
-
 // NOTE in the following interface, caller is responsible to make sure the path exists.
 //   maybe this should be changed, and these functions should be able to return `undefined`.
 export abstract class Library {
   abstract config: LibraryConfig
-
-  abstract doc_builder: DocBuilder
 
   abstract fetch_file(path: string): Promise<string>
   abstract list_paths(): Promise<Array<string>>
@@ -20,7 +13,7 @@ export abstract class Library {
   async fetch_files(): Promise<Record<string, string>> {
     const files: Record<string, string> = {}
     for (const path of await this.list_paths()) {
-      if (this.doc_builder.right_extension_p(path)) {
+      if (ModuleLoader.can_load(path)) {
         files[path] = await this.fetch_file(path)
       }
     }

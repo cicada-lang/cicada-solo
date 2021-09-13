@@ -1,4 +1,4 @@
-import { Library, LibraryConfig, DocBuilder } from "../library"
+import { Library, LibraryConfig } from "../library"
 import { Module } from "../module"
 import { ModuleLoader } from "../module"
 import fs from "fs"
@@ -6,16 +6,14 @@ import fs from "fs"
 export class SingleFileLibrary extends Library {
   config: LibraryConfig
   path: string
-  doc_builder: DocBuilder
 
-  constructor(opts: { path: string; doc_builder: DocBuilder }) {
+  constructor(opts: { path: string }) {
     super()
     this.path = opts.path
     this.config = LibraryConfig.create({
       name: "single-file-library",
       date: new Date().toLocaleDateString(),
     })
-    this.doc_builder = opts.doc_builder
   }
 
   async list_paths(): Promise<Array<string>> {
@@ -38,8 +36,7 @@ export class SingleFileLibrary extends Library {
       )
     }
 
-    const doc = this.doc_builder.from_file({ path: this.path })
-    const mod = await doc.load(this, this.path)
+    const mod = await ModuleLoader.load(this, this.path)
     await mod.execute()
     return mod
   }
