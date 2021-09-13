@@ -1,4 +1,4 @@
-import { Library, LibraryConfig, DocBuilder, ModuleViewer } from "../library"
+import { Library, LibraryConfig, DocBuilder } from "../library"
 import { Module } from "../module"
 import { Doc } from "../doc"
 import fs from "fs"
@@ -7,13 +7,8 @@ export class SingleFileLibrary extends Library {
   config: LibraryConfig
   path: string
   doc_builder: DocBuilder
-  module_viewer: ModuleViewer
 
-  constructor(opts: {
-    path: string
-    doc_builder: DocBuilder
-    module_viewer: ModuleViewer
-  }) {
+  constructor(opts: { path: string; doc_builder: DocBuilder }) {
     super()
     this.path = opts.path
     this.config = LibraryConfig.create({
@@ -21,7 +16,6 @@ export class SingleFileLibrary extends Library {
       date: new Date().toLocaleDateString(),
     })
     this.doc_builder = opts.doc_builder
-    this.module_viewer = opts.module_viewer
   }
 
   async fetch_doc(path: string): Promise<Doc> {

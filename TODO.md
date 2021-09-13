@@ -1,5 +1,3 @@
-- inline `ModuleViewer`
-
 - [maybe] `ModuleLoader`
 
 - merge `Doc` into `Module` and use `ModuleLoader`

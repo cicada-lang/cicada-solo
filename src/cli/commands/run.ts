@@ -3,7 +3,6 @@ import { LocalLibrary } from "../../libraries"
 import { Trace } from "../../errors"
 import { Module } from "../../module"
 import { doc_builder } from "../../docs"
-import { module_viewer } from "../../module"
 import pt from "@cicada-lang/partech"
 import find_up from "find-up"
 import Path from "path"
@@ -25,12 +24,12 @@ export const handler = async (argv: Argv) => {
   const dir = Path.dirname(path)
   const library = argv["module"]
     ? await find_library_config_file(dir).then((file) =>
-        LocalLibrary.from_config_file(file, { doc_builder, module_viewer })
+        LocalLibrary.from_config_file(file, { doc_builder })
       )
-    : new SingleFileLibrary({ path, doc_builder, module_viewer })
+    : new SingleFileLibrary({ path, doc_builder })
   try {
     const mod = await library.load(path)
-    console.log(library.module_viewer.view(mod))
+    console.log(mod.output)
   } catch (error) {
     if (error instanceof Trace) {
       console.error(error.repr((exp) => exp.repr()))

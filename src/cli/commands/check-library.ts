@@ -2,7 +2,6 @@ import { LocalLibrary } from "../../libraries"
 import { Module } from "../../module"
 import { Trace } from "../../errors"
 import { doc_builder } from "../../docs"
-import { module_viewer } from "../../module"
 import pt from "@cicada-lang/partech"
 import chokidar from "chokidar"
 import moment from "moment"
@@ -27,7 +26,6 @@ type Argv = {
 export const handler = async (argv: Argv) => {
   const library = await LocalLibrary.from_config_file(argv["config-file"], {
     doc_builder,
-    module_viewer,
   })
   const opts = { verbose: argv.verbose }
   if (argv.watch) await watch(library, opts)
@@ -166,10 +164,10 @@ async function snapshot_log(
       path + ".out"
     )
 
-    await fs.promises.writeFile(file, library.module_viewer.view(mod))
+    await fs.promises.writeFile(file, mod.output)
 
     if (opts.verbose) {
-      console.log(library.module_viewer.view(mod))
+      console.log(mod.output)
     }
   }
 }

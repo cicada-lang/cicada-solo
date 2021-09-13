@@ -1,4 +1,4 @@
-import { LibraryConfig, DocBuilder, ModuleViewer } from "../library"
+import { LibraryConfig, DocBuilder } from "../library"
 import { Module } from "../module"
 import { Doc } from "../doc"
 
@@ -8,7 +8,6 @@ export abstract class Library {
   abstract config: LibraryConfig
 
   abstract doc_builder: DocBuilder
-  abstract module_viewer: ModuleViewer
 
   abstract fetch_doc(path: string): Promise<Doc>
   abstract fetch_docs(): Promise<Record<string, Doc>>
