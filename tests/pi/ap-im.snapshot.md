@@ -11,3 +11,17 @@ id(given Nat, 1)
 id("a")
 id(given String, "a")
 ```
+
+# multiple implicit arguments
+
+``` cicada
+k(
+  given A: Type, x: A,
+  given B: Type, y: B,
+): A {
+  x
+}
+
+k(100, 101)
+k(given Nat, 100, given Nat, 101)
+```
