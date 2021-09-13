@@ -21,17 +21,23 @@ class ModuleEntry {
 
 export class Module {
   library: Library
+  path: string
+  text: string
   env: Env
   ctx: Ctx
   entries: Array<ModuleEntry>
 
   constructor(opts: {
     library: Library
+    path: string
+    text: string
     env?: Env
     ctx?: Ctx
     entries?: Array<ModuleEntry>
   }) {
     this.library = opts.library
+    this.path = opts.path
+    this.text = opts.text
     this.env = opts.env || Env.empty
     this.ctx = opts.ctx || Ctx.empty
     this.entries = opts.entries || []

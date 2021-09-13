@@ -39,6 +39,26 @@ export class LocalLibrary extends Library {
     })
   }
 
+  async fetch_file(path: string): Promise<string> {
+    const file = Path.isAbsolute(path)
+      ? path
+      : Path.resolve(this.root_dir, this.config.src, path)
+    return await fs.promises.readFile(file, "utf8")
+  }
+
+  async fetch_files(): Promise<Record<string, string>> {
+    const src_dir = Path.resolve(this.root_dir, this.config.src)
+
+    const files: Record<string, string> = {}
+    for await (const { path } of readdirp(src_dir)) {
+      if (this.doc_builder.right_extension_p(path)) {
+        files[path] = await this.fetch_file(path)
+      }
+    }
+
+    return files
+  }
+
   async fetch_doc(path: string): Promise<Doc> {
     const file = Path.isAbsolute(path)
       ? path

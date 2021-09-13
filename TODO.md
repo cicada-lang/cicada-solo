@@ -1,6 +1,9 @@
-- [maybe] `ModuleLoader`
+- `Library` -- remove `fetch_doc` & `fetch_docs`
+- `Library` -- `list_paths` as abstract & `fetch_files` as concrete
 
-- merge `Doc` into `Module` and use `ModuleLoader`
+- merge fields of `Doc` into `Module`
+
+- rename `Doc` to `ModuleLoader`
 
 - [cli] `snapshot` in cli argument -- instead of in file name
 

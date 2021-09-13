@@ -22,7 +22,7 @@ export class MdDoc extends Doc {
   }
 
   async load(library: Library): Promise<Module> {
-    const mod = new Module({ library })
+    const mod = new Module({ library, path: this.path, text: this.text })
     for (const stmt of this.stmts) {
       await stmt.execute(mod)
     }
@@ -34,7 +34,11 @@ export class MdDoc extends Doc {
     return lines.slice(0, row).join("\n").length + col
   }
 
-  get code_blocks(): Array<{ info: string; text: string; offset: number }> {
+  private get code_blocks(): Array<{
+    info: string
+    text: string
+    offset: number
+  }> {
     const reader = new commonmark.Parser()
     const writer = new commonmark.HtmlRenderer()
     const parsed: commonmark.Node = reader.parse(this.text)
