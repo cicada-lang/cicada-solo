@@ -1,4 +1,3 @@
-import { Doc } from "../doc"
 import { Library } from "../library"
 import { Stmt } from "../stmt"
 import { Env } from "../env"
@@ -21,20 +20,18 @@ class ModuleEntry {
 }
 
 export class Module {
-  doc: Doc<Module>
   library: Library<Module>
   env: Env
   ctx: Ctx
   entries: Array<ModuleEntry>
 
   constructor(opts: {
-    doc: Doc<Module>
+    library: Library<Module>
     env?: Env
     ctx?: Ctx
     entries?: Array<ModuleEntry>
   }) {
-    this.doc = opts.doc
-    this.library = opts.doc.library
+    this.library = opts.library
     this.env = opts.env || Env.empty
     this.ctx = opts.ctx || Ctx.empty
     this.entries = opts.entries || []

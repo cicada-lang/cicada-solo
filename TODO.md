@@ -1,3 +1,9 @@
+- `Doc` does not use type variable `Module` -- use concrete `Module`
+- `Library` does not use type variable `Module` -- use concrete `Module`
+- [maybe] `ModuleLoader`
+
+- merge `Doc` into `Module` and use `ModuleLoader`
+
 - [cli] `snapshot` in cli argument -- instead of in file name
 
 - [cli] [refactor] cli is route, thus should be as simple as route

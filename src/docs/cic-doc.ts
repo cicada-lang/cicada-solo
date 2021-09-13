@@ -17,7 +17,7 @@ export class CicDoc extends Doc<Module> {
   }
 
   async load(): Promise<Module> {
-    const mod = new Module({ doc: this })
+    const mod = new Module({ library: this.library })
     for (const stmt of this.stmts) {
       await stmt.execute(mod)
     }
