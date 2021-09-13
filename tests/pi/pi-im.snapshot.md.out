@@ -1,0 +1,8 @@
+(given A, x) { x }: (given A: Type, x: A) -> A 
+(given A, x) { x }: (given A: Type, x: A) -> A 
+(given A, x) { x }: (given A: Type, x: A) -> A 
+1: Nat 
+1: Nat 
+1: Nat 
+100: Nat 
+

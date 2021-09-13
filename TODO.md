@@ -1,4 +1,8 @@
-- `snapshot` in cli argument -- instead of in file name
+- [cli] `snapshot` in cli argument -- instead of in file name
+
+- [cli] [refactor] cli is route, thus should be as simple as route
+- [cli] [refactor] cli is route, thus should be as simple as route
+- [cli] simple interface
 
 # implicit
 
@@ -31,19 +35,6 @@
 - `Value.occur` handle each case
 
 # use `unify` to replace `readback`
-
-# testing
-
-- improve test framework
-- improve test speed
-
-# cli
-
-- improve cli design
-
-- cli is route, thus should be as simple as route
-
-  - learn from laravel
 
 # library
 
