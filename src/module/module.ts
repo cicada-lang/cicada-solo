@@ -4,9 +4,9 @@ import { Env } from "../env"
 import { Ctx } from "../ctx"
 
 // NOTE
-// - a module knows which library it belongs to
-// - one doc one module, loaded modules are cached
-// - the loading order of docs matters
+// - a module belongs to a library
+// - loaded modules are cached
+// - the loading order matters
 // - no recursion
 
 class ModuleEntry {
