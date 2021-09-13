@@ -1,6 +1,8 @@
-- `Doc.load` take `library` and `path`
-
 - rename `Doc` to `ModuleLoader`
+
+- `ModuleLoader` register `factories`
+
+- inline `doc_builder`
 
 - [cli] `snapshot` in cli argument -- instead of in file name
 

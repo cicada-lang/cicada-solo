@@ -4,7 +4,7 @@ import { Doc } from "../doc"
 
 export interface DocBuilder {
   right_extension_p(path: string): boolean
-  from_file(opts: { path: string; text: string; library: Library }): Doc
+  from_file(opts: { path: string }): Doc
 }
 
 // NOTE in the following interface, caller is responsible to make sure the path exists.

@@ -38,11 +38,7 @@ export class SingleFileLibrary extends Library {
       )
     }
 
-    const doc = this.doc_builder.from_file({
-      path: this.path,
-      library: this,
-      text: await this.fetch_file(path),
-    })
+    const doc = this.doc_builder.from_file({ path: this.path })
     const mod = await doc.load(this)
     await mod.execute()
     return mod
