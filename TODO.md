@@ -3,8 +3,10 @@
 - [cli] `snapshot` in cli argument -- instead of in file name
 
 - [cli] [refactor] cli is route, thus should be as simple as route
-- [cli] [refactor] cli is route, thus should be as simple as route
-- [cli] simple interface
+
+  - extract service?
+
+- [cli] simple user interface
 
 # implicit
 
