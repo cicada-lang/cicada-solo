@@ -1,4 +1,3 @@
-- `Library` -- remove `fetch_doc` & `fetch_docs`
 - `Library` -- `list_paths` as abstract & `fetch_files` as concrete
 
 - merge fields of `Doc` into `Module`
