@@ -44,7 +44,7 @@ async function check(library: Library, files: LocalFileAdapter): Promise<void> {
 
   for (const path of Object.keys(await files.all())) {
     try {
-      const mod = await library.mods.get(path)
+      const mod = await library.mods.load(path)
       await logger.snapshot(path, mod)
       logger.maybe_assert_error(path)
       logger.log_info("check", path)
@@ -62,7 +62,6 @@ async function check(library: Library, files: LocalFileAdapter): Promise<void> {
 async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
   const src_dir = Path.resolve(files.root_dir, files.config.src)
   const watcher = chokidar.watch(src_dir)
-
   const logger = new ModuleLogger({ files })
 
   watcher.on("all", async (event, file) => {
@@ -73,7 +72,7 @@ async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
     const path = file.slice(prefix.length)
 
     try {
-      const mod = await library.mods.refresh(path)
+      const mod = await library.mods.reload(path)
       await logger.snapshot(path, mod)
       logger.maybe_assert_error(path)
       logger.log_info(event, path)
@@ -82,6 +81,16 @@ async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
       logger.log_error(event, path)
     }
   })
+}
+
+export class ModuleRunner {
+  files: LocalFileAdapter
+
+  constructor(opts: { files: LocalFileAdapter }) {
+    this.files = opts.files
+  }
+
+  // TODO
 }
 
 export class ModuleLogger {

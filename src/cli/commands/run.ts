@@ -30,7 +30,7 @@ export const handler = async (argv: Argv) => {
     : new SingleFileAdapter({ path })
   const library = new Library({ file_adapter })
   try {
-    const mod = await library.mods.get(path)
+    const mod = await library.mods.load(path)
     console.log(mod.output)
   } catch (error) {
     if (error instanceof Trace) {

@@ -13,7 +13,7 @@ export class ModuleManager {
     this.files = opts.library.files
   }
 
-  async get(path: string): Promise<Module> {
+  async load(path: string): Promise<Module> {
     const cached = this.cache.get(path)
     if (cached) {
       return cached
@@ -26,15 +26,15 @@ export class ModuleManager {
     return mod
   }
 
-  async refresh(path: string): Promise<Module> {
+  async reload(path: string): Promise<Module> {
     this.cache.delete(path)
-    return await this.get(path)
+    return await this.load(path)
   }
 
   async all(): Promise<Map<string, Module>> {
     const files = await this.files.all()
     for (const path of Object.keys(files)) {
-      await this.get(path)
+      await this.load(path)
     }
 
     return this.cache
