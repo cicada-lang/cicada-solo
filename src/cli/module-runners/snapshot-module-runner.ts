@@ -2,8 +2,6 @@ import { Library } from "../../library"
 import { LocalFileAdapter } from "../../library/file-adapters"
 import { Logger } from "../logger"
 import { ModuleRunner } from "../module-runner"
-import { Module } from "../../module"
-import Path from "path"
 import fs from "fs"
 
 export class SnapshotModuleRunner extends ModuleRunner {

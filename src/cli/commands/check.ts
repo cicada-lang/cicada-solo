@@ -6,7 +6,7 @@ import { Logger } from "../logger"
 import chokidar from "chokidar"
 import Path from "path"
 
-export const command = "check-library <config-file>"
+export const command = "check <library>"
 export const description = "Check a library"
 
 export const builder = {
@@ -14,14 +14,12 @@ export const builder = {
 }
 
 type Argv = {
-  "config-file": string
+  library: string
   watch: boolean
 }
 
 export const handler = async (argv: Argv) => {
-  const file_adapter = await LocalFileAdapter.from_config_file(
-    argv["config-file"]
-  )
+  const file_adapter = await LocalFileAdapter.from_config_file(argv["library"])
   const library = new Library({ file_adapter })
   if (argv.watch) {
     await watch(library, file_adapter)

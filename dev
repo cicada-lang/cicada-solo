@@ -56,12 +56,12 @@ commands.test_examples = async () => {
 
 commands.test_libraries = async () => {
   await test(
-    "./bin/cic.js check-library libraries/the-little-typer/library.json",
+    "./bin/cic.js check libraries/the-little-typer/library.json",
     {},
     expect.ok
   )
   await test(
-    "./bin/cic.js check-library libraries/cicada-stdlib/library.json",
+    "./bin/cic.js check libraries/cicada-stdlib/library.json",
     {},
     expect.ok
   )

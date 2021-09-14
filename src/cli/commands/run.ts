@@ -2,8 +2,6 @@ import { Library } from "../../library"
 import { LocalFileAdapter } from "../../library/file-adapters"
 import { SingleFileAdapter } from "../../library/file-adapters"
 import { createModuleRunner } from "../create-module-runner"
-import { Trace } from "../../errors"
-import pt from "@cicada-lang/partech"
 import find_up from "find-up"
 import Path from "path"
 
