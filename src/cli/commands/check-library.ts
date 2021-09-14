@@ -50,7 +50,7 @@ async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
 
   watcher.on("all", async (event, file) => {
     if (event !== "add" && event !== "change") return
-    if (!ModuleLoader.can_load(file)) return
+    if (!ModuleLoader.can_handle(file)) return
 
     const prefix = `${src_dir}/`
     const path = file.slice(prefix.length)

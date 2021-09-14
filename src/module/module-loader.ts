@@ -11,7 +11,7 @@ export abstract class ModuleLoader {
     this.loaders.push(opts)
   }
 
-  static can_load(path: string): boolean {
+  static can_handle(path: string): boolean {
     return this.loaders.some(({ extension }) => path.endsWith(extension))
   }
 
