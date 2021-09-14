@@ -2,6 +2,8 @@ import { Library } from "../../library"
 import { LocalFileAdapter } from "../../library/file-adapters"
 import { ModuleLogger } from "../module-logger"
 import { ModuleRunner } from "../module-runner"
+import Path from "path"
+import fs from "fs"
 
 export class ErrorModuleRunner extends ModuleRunner {
   static extensions = [".error.cic", ".error.md"]
@@ -20,14 +22,22 @@ export class ErrorModuleRunner extends ModuleRunner {
   async run(path: string, opts: { by: string }): Promise<{ error?: unknown }> {
     try {
       const mod = await this.library.mods.load(path)
-      await this.logger.snapshot(path, mod)
-      this.logger.maybe_assert_error(path)
-      this.logger.log_info(opts.by, path)
-      return { error: new Error(`I expect to find error in the file: ${path}`) }
+      this.logger.info(opts.by, path)
+      return { error: new Error(`I expect to find error in the path: ${path}`) }
     } catch (error) {
-      await this.logger.error(error as any, path)
-      this.logger.log_error(opts.by, path)
+      await this.error(error as any, path)
+      this.logger.error(opts.by, path)
       return { error: undefined }
     }
+  }
+
+  private async error(error: Error, path: string): Promise<void> {
+    const report = await this.logger.error_report(error, path)
+    const file = Path.resolve(
+      this.files.root_dir,
+      this.files.config.src,
+      path + ".out"
+    )
+    await fs.promises.writeFile(file, report)
   }
 }

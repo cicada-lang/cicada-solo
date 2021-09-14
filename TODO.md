@@ -1,6 +1,8 @@
-- [refactor] `DefaultModuleRunner` inline `cli/module-logger`
-- [refactor] `SnapshotModuleRunner` inline `cli/module-logger`
-- [refactor] `ErrorModuleRunner` inline `cli/module-logger`
+- [refactor] remove `ModuleLogger` to `Logger`
+
+- [refactor] `Logger`'s dependance on `LocalFileAdapter`
+
+- [refactor] move `error_report` to ???
 
 - [refactor] inline `cli/module-logger` into `module-runners`
 

@@ -18,12 +18,12 @@ export class DefaultModuleRunner extends ModuleRunner {
   async run(path: string, opts: { by: string }): Promise<{ error?: unknown }> {
     try {
       const mod = await this.library.mods.load(path)
-      this.logger.log_info(opts.by, path)
+      this.logger.info(opts.by, path)
       return { error: undefined }
     } catch (error) {
       const report = await this.logger.error_report(error, path)
       console.error(report)
-      this.logger.log_error(opts.by, path)
+      this.logger.error(opts.by, path)
       return { error }
     }
   }
