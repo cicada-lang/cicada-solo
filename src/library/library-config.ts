@@ -11,7 +11,7 @@ export class LibraryConfig {
   date: string
   src: string
 
-  constructor(opts: { name: string; date: string; src: string }) {
+  constructor(opts: LibraryConfigJson) {
     this.name = opts.name
     this.date = opts.date
     this.src = opts.src

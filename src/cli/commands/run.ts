@@ -28,10 +28,7 @@ export const handler = async (argv: Argv) => {
         LocalFileAdapter.from_config_file(file)
       )
     : new SingleFileAdapter({ path })
-  const library = new Library({
-    files: file_adapter,
-    config: file_adapter.config,
-  })
+  const library = new Library({ files: file_adapter })
   try {
     const mod = await library.mods.get(path)
     console.log(mod.output)
