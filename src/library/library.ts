@@ -9,8 +9,8 @@ import { ModuleManager } from "./module-manager"
 export class Library {
   files: FileAdapter
 
-  constructor(opts: { files: FileAdapter }) {
-    this.files = opts.files
+  constructor(opts: { file_adapter: FileAdapter }) {
+    this.files = opts.file_adapter
   }
 
   get mods(): ModuleManager {

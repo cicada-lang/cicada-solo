@@ -1,4 +1,4 @@
-- [refactor] `check-library`
+- [refactor] `check-library` -- extract `Logger`
 
 - [refactor] avoid using `Module.enter` -- also about `Module` `output`
 

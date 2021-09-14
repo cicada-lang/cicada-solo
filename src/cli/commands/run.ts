@@ -24,11 +24,11 @@ export const handler = async (argv: Argv) => {
   const path = Path.resolve(argv.file)
   const dir = Path.dirname(path)
   const file_adapter = argv["module"]
-    ? await find_library_config_file(dir).then((file) =>
-        LocalFileAdapter.from_config_file(file)
+    ? await LocalFileAdapter.from_config_file(
+        await find_library_config_file(dir)
       )
     : new SingleFileAdapter({ path })
-  const library = new Library({ files: file_adapter })
+  const library = new Library({ file_adapter })
   try {
     const mod = await library.mods.get(path)
     console.log(mod.output)

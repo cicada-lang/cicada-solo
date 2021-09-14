@@ -29,9 +29,12 @@ export const handler = async (argv: Argv) => {
   const file_adapter = await LocalFileAdapter.from_config_file(
     argv["config-file"]
   )
-  const library = new Library({ files: file_adapter })
-  if (argv.watch) await watch(library, file_adapter)
-  else await check(library, file_adapter)
+  const library = new Library({ file_adapter })
+  if (argv.watch) {
+    await watch(library, file_adapter)
+  } else {
+    await check(library, file_adapter)
+  }
 }
 
 async function check(library: Library, files: LocalFileAdapter): Promise<void> {
