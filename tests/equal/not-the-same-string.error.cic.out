@@ -11,4 +11,3 @@ previous:
 - same
 - the(Equal(String, "ratatouille", "baguette"), same)
 
-

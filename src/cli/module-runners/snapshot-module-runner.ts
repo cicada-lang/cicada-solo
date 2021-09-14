@@ -28,12 +28,16 @@ export class SnapshotModuleRunner extends ModuleRunner {
       const mod = await this.library.mods.load(path)
       const file = this.files.src(path + ".out")
       await fs.promises.writeFile(file, mod.output)
-      this.logger.info(path, opts?.logger)
+      if (opts?.logger) {
+        this.logger.info(path, opts?.logger)
+      }
       return { error: undefined }
     } catch (error) {
       const report = await this.library.error_report(error, path)
       console.error(report)
-      this.logger.error(path, opts?.logger)
+      if (opts?.logger) {
+        this.logger.error(path, opts?.logger)
+      }
       return { error }
     }
   }

@@ -68,4 +68,3 @@ previous:
   compose_associative: (x: Object, y: Object, z: Object, w: Object, f: Morphism(x, y), g: Morphism(y, z), h: Morphism(z, w)) -> Equal(Morphism(x, w), compose(x, x, w, f, compose(y, z, w, g, h)), compose(x, z, w, compose(x, y, z, f, g), h))
 })
 
-

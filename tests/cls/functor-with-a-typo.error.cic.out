@@ -52,4 +52,3 @@ previous:
   fmap_respect_id: (x: dom.Object) -> Equal(cod.Morphism(map(x), map(x)), fmap(x, x, dom.id(x)), cod.id(map(x)))
 })
 
-

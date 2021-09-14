@@ -9,4 +9,3 @@
   b: X
   equal: Equal(Type, String, X)
 } 
-

@@ -7,4 +7,3 @@ sole: Trivial
 (_, _1) { sole }: (_: Trivial, _1: Trivial) -> Trivial 
 (_1) { sole }: (_1: Trivial) -> Trivial 
 sole: Trivial 
-

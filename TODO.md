@@ -1,9 +1,5 @@
 - `runner` take `LoggerOptions` in constructor
 
-- [refactor] refactor `cli/commands/run`
-
-  - `SingleFileAdapter` inherit `LocalFileAdapter`
-
 - [cli] `cli/commands/run` -- `--no-module` if can not find `library.json`
 - [cli] `cli/commands/run` as the default command
 

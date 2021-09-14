@@ -39,48 +39,17 @@ commands.test_snapshot = async () => {
 }
 
 commands.test_cicada = async () => {
-
-  // await test(
-  //   "./bin/cic.js run --no-module $file",
-  //   { file: "tests/**/**.(cic|md)" },
-  //   expect.ok
-  // )
-
   await test(
     "./bin/cic.js run --no-module $file",
-    { file: "tests/**/**.snapshot.cic" },
-    snapshot.out(({ file }) => file + ".out")
-  )
-
-  await test(
-    "./bin/cic.js run --no-module $file",
-    { file: "tests/**/**.snapshot.md" },
-    snapshot.out(({ file }) => file + ".out")
-  )
-
-  await test(
-    "./bin/cic.js run --no-module $file",
-    { file: "tests/**/**.error.cic" },
-    snapshot.err(({ file }) => file + ".out")
-  )
-
-  await test(
-    "./bin/cic.js run --no-module $file",
-    { file: "tests/**/**.error.md" },
-    snapshot.err(({ file }) => file + ".out")
+    { file: "tests/**/**.(cic|md)" },
+    expect.ok
   )
 }
 
 commands.test_examples = async () => {
   await test(
     "./bin/cic.js run --no-module $file",
-    { file: "examples/**/**.cic" },
-    expect.ok
-  )
-
-  await test(
-    "./bin/cic.js run --no-module $file",
-    { file: "examples/**/**.md" },
+    { file: "examples/**/**.(cic|md)" },
     expect.ok
   )
 }

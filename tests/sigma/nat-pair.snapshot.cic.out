@@ -4,4 +4,3 @@
 3: Nat 
 (_: Nat, _1: Nat, _2: Nat) * Nat: Type 
 4: Nat 
-

@@ -29,32 +29,10 @@ export const handler = async (argv: Argv) => {
     : new SingleFileAdapter({ path })
   const library = new Library({ file_adapter })
 
-  // const runner = createModuleRunner({ path, library, files: file_adapter })
-  // const { error } = await runner.run(path)
-  // if (error) {
-  //   process.exit(1)
-  // }
-
-  try {
-    const mod = await library.mods.load(path)
-    console.log(mod.output)
-  } catch (error) {
-    if (error instanceof Trace) {
-      console.error(error.repr((exp) => exp.repr()))
-      process.exit(1)
-    } else if (error instanceof pt.ParsingError) {
-      const text = await library.files.get(path)
-      if (!text) {
-        console.error(`Unknown path: ${path}`)
-      } else {
-        let message = error.message
-        message += "\n"
-        message += pt.report(error.span, text)
-        console.error(message)
-      }
-    } else {
-      throw error
-    }
+  const runner = createModuleRunner({ path, library, files: file_adapter })
+  const { error } = await runner.run(path)
+  if (error) {
+    process.exit(1)
   }
 }
 
