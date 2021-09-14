@@ -6,8 +6,8 @@ import find_up from "find-up"
 import Path from "path"
 import fs from "fs"
 
-export const command = "test <file>"
-export const description = "Test a file -- will write snapshot to .out"
+export const command = "snapshot <file>"
+export const description = "Snapshot a file and write to <file>.out"
 export const builder = {}
 
 type Argv = {

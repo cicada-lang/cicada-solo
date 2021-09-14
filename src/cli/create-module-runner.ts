@@ -16,13 +16,13 @@ export function createModuleRunner(opts: {
 }): ModuleRunner {
   const { path } = opts
 
-  if (SnapshotModuleRunner.extensions.some((e) => path.endsWith(e))) {
-    return new SnapshotModuleRunner(opts)
-  }
-
   if (ErrorModuleRunner.extensions.some((e) => path.endsWith(e))) {
     return new ErrorModuleRunner(opts)
   }
 
-  return new DefaultModuleRunner(opts)
+  if (SnapshotModuleRunner.extensions.some((e) => path.endsWith(e))) {
+    return new SnapshotModuleRunner(opts)
+  }
+
+  throw new Error(`I can not handle file extension: ${path}`)
 }

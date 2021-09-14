@@ -5,7 +5,7 @@ import { ModuleRunner } from "../module-runner"
 import fs from "fs"
 
 export class SnapshotModuleRunner extends ModuleRunner {
-  static extensions = [".snapshot.cic", ".snapshot.md"]
+  static extensions = [".cic", ".md"]
 
   library: Library
   files: LocalFileAdapter
@@ -26,7 +26,9 @@ export class SnapshotModuleRunner extends ModuleRunner {
     try {
       const mod = await this.library.mods.load(path)
       const file = this.files.src(path + ".out")
-      await fs.promises.writeFile(file, mod.output)
+      if (mod.output) {
+        await fs.promises.writeFile(file, mod.output)
+      }
       if (this.logger) {
         this.logger.info(path)
       }
