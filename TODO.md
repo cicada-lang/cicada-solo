@@ -1,5 +1,3 @@
-- [cli] `cli/commands/run` -- `--no-module` if can not find `library.json`
-
 - [cli] `cli/commands/run` as the default command
 
 - [refactor] rename `cli/commands/check-library` to ???

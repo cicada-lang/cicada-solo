@@ -10,22 +10,18 @@ import Path from "path"
 export const command = "run <file>"
 export const description = "Run a file"
 
-export const builder = {
-  module: { type: "boolean", default: true },
-}
+export const builder = {}
 
 type Argv = {
   file: string
-  module: boolean
 }
 
 export const handler = async (argv: Argv) => {
   const path = Path.resolve(argv.file)
   const dir = Path.dirname(path)
-  const file_adapter = argv["module"]
-    ? await LocalFileAdapter.from_config_file(
-        await find_library_config_file(dir)
-      )
+  const config_file = await find_up("library.json", { cwd: dir })
+  const file_adapter = config_file
+    ? await LocalFileAdapter.from_config_file(config_file)
     : new SingleFileAdapter({ path })
   const library = new Library({ file_adapter })
 
@@ -34,16 +30,4 @@ export const handler = async (argv: Argv) => {
   if (error) {
     process.exit(1)
   }
-}
-
-async function find_library_config_file(cwd: string): Promise<string> {
-  const config_file = await find_up("library.json", { cwd })
-  if (!config_file) {
-    throw new Error(
-      `I can not find a library.json config file,\n` +
-        `I searched upward from: ${cwd}`
-    )
-  }
-
-  return config_file
 }
