@@ -7,7 +7,7 @@ import chokidar from "chokidar"
 import Path from "path"
 import fs from "fs"
 
-export const command = "check <library>"
+export const command = "check [library]"
 export const description = "Check a library"
 
 export const builder = {
@@ -15,7 +15,7 @@ export const builder = {
 }
 
 type Argv = {
-  library: string
+  library?: string
   watch: boolean
 }
 
@@ -24,7 +24,7 @@ export const handler = async (argv: Argv) => {
     ? fs.lstatSync(argv["library"]).isFile()
       ? argv["library"]
       : argv["library"] + "/library.json"
-    : process.cwd()
+    : process.cwd() + "/library.json"
   const file_adapter = await LocalFileAdapter.from_config_file(config_file)
   const library = new Library({ file_adapter })
   if (argv.watch) {
