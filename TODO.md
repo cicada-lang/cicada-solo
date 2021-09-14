@@ -1,5 +1,5 @@
-- [refactor] `Library` view library as resource of `files`
 - [refactor] `Library` view library as resource of `mods`
+- [refactor] `Library` as concrete class
 
 - [refactor] avoid using `Module.enter` -- also about `Module` `output`
 

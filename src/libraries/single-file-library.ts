@@ -1,4 +1,6 @@
 import { Library, LibraryConfig } from "../library"
+import { FileAdapter } from "../library/file-adapter"
+import { SingleFileAdapter } from "../library/file-adapters"
 import { Module } from "../module"
 import { ModuleLoader } from "../module"
 import fs from "fs"
@@ -6,6 +8,7 @@ import fs from "fs"
 export class SingleFileLibrary extends Library {
   config: LibraryConfig
   path: string
+  files: SingleFileAdapter
 
   constructor(opts: { path: string }) {
     super()
@@ -14,14 +17,8 @@ export class SingleFileLibrary extends Library {
       name: "single-file-library",
       date: new Date().toLocaleDateString(),
     })
-  }
 
-  async list(): Promise<Array<string>> {
-    return [this.path]
-  }
-
-  async get(path: string): Promise<string> {
-    return fs.readFileSync(this.path, { encoding: "utf-8" })
+    this.files = new SingleFileAdapter(opts)
   }
 
   async reload(path: string): Promise<Module> {

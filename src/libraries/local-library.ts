@@ -1,4 +1,6 @@
 import { Library, LibraryConfig } from "../library"
+import { FileAdapter } from "../library/file-adapter"
+import { LocalFileAdapter } from "../library/file-adapters"
 import { Module } from "../module"
 import { ModuleLoader } from "../module"
 import Path from "path"
@@ -10,6 +12,7 @@ export class LocalLibrary extends Library {
   root_dir: string
   config: LibraryConfig
   cached_mods: Map<string, Module>
+  files: FileAdapter
 
   constructor(opts: {
     root_dir: string
@@ -20,6 +23,7 @@ export class LocalLibrary extends Library {
     this.root_dir = opts.root_dir
     this.config = opts.config
     this.cached_mods = opts.cached_mods || new Map()
+    this.files = new LocalFileAdapter(opts)
   }
 
   static async from_config_file<Module>(file: string): Promise<LocalLibrary> {
@@ -28,19 +32,6 @@ export class LocalLibrary extends Library {
       root_dir: Path.dirname(file),
       config: new LibraryConfig(JSON.parse(text)),
     })
-  }
-
-  async get(path: string): Promise<string> {
-    const file = Path.isAbsolute(path)
-      ? path
-      : Path.resolve(this.root_dir, this.config.src, path)
-    return await fs.promises.readFile(file, "utf8")
-  }
-
-  async list(): Promise<Array<string>> {
-    const src_dir = Path.resolve(this.root_dir, this.config.src)
-    const entries = await readdirp.promise(src_dir)
-    return entries.map(({ path }) => path)
   }
 
   async load(path: string): Promise<Module> {
@@ -62,7 +53,7 @@ export class LocalLibrary extends Library {
   }
 
   async load_mods(): Promise<Map<string, Module>> {
-    const files = await this.all()
+    const files = await this.files.all()
     for (const path of Object.keys(files)) {
       await this.load(path)
     }

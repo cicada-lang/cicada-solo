@@ -5,7 +5,7 @@ import * as Syntax from "../../syntax"
 
 export class CicModuleLoader extends ModuleLoader {
   async load(library: Library, path: string): Promise<Module> {
-    const text = await library.get(path)
+    const text = await library.files.get(path)
     const stmts = Syntax.parse_stmts(text)
     return new Module({ library, path, text, stmts })
   }

@@ -33,7 +33,7 @@ export const handler = async (argv: Argv) => {
       console.error(error.repr((exp) => exp.repr()))
       process.exit(1)
     } else if (error instanceof pt.ParsingError) {
-      const text = await library.get(path)
+      const text = await library.files.get(path)
       if (!text) {
         console.error(`Unknown path: ${path}`)
       } else {

@@ -32,7 +32,7 @@ export const handler = async (argv: Argv) => {
 async function check(library: LocalLibrary): Promise<void> {
   let error_occurred = false
 
-  for (const path of Object.keys(await library.all())) {
+  for (const path of Object.keys(await library.files.all())) {
     try {
       const mod = await library.load(path)
       await snapshot_log(library, path, mod)
@@ -128,7 +128,7 @@ async function error_report(
   if (error instanceof Trace) {
     return error.repr((exp) => exp.repr())
   } else if (error instanceof pt.ParsingError) {
-    const text = await library.get(path)
+    const text = await library.files.get(path)
     if (!text) {
       return `Unknown path: ${path}`
     } else {
