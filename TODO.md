@@ -1,4 +1,4 @@
-- [refactor] `Library` as concrete class -- inject `FileAdapter`
+- [refactor] `check-library`
 
 - [refactor] avoid using `Module.enter` -- also about `Module` `output`
 

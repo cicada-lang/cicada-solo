@@ -1,4 +1,5 @@
-import { LocalLibrary } from "../../libraries"
+import { Library } from "../../library"
+import { LocalFileAdapter } from "../../library/file-adapters"
 import { Module } from "../../module"
 import { ModuleLoader } from "../../module"
 import { Trace } from "../../errors"
@@ -8,6 +9,7 @@ import moment from "moment"
 import chalk from "chalk"
 import Path from "path"
 import fs from "fs"
+import { FAILSAFE_SCHEMA } from "js-yaml"
 
 export const command = "check-library <config-file>"
 export const description = "Check all files in a library"
@@ -24,18 +26,24 @@ type Argv = {
 }
 
 export const handler = async (argv: Argv) => {
-  const library = await LocalLibrary.from_config_file(argv["config-file"])
-  if (argv.watch) await watch(library)
-  else await check(library)
+  const file_adapter = await LocalFileAdapter.from_config_file(
+    argv["config-file"]
+  )
+  const library = new Library({
+    files: file_adapter,
+    config: file_adapter.config,
+  })
+  if (argv.watch) await watch(library, file_adapter)
+  else await check(library, file_adapter)
 }
 
-async function check(library: LocalLibrary): Promise<void> {
+async function check(library: Library, files: LocalFileAdapter): Promise<void> {
   let error_occurred = false
 
   for (const path of Object.keys(await library.files.all())) {
     try {
       const mod = await library.mods.get(path)
-      await snapshot_log(library, path, mod)
+      await snapshot_log(library, files, path, mod)
       maybe_assert_error(path)
 
       console.log(
@@ -44,7 +52,7 @@ async function check(library: LocalLibrary): Promise<void> {
         path
       )
     } catch (error) {
-      error_occurred = await error_log(error as any, path, library)
+      error_occurred = await error_log(error as any, path, library, files)
       console.log(
         chalk.bold(`(check)`),
         chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
@@ -58,8 +66,8 @@ async function check(library: LocalLibrary): Promise<void> {
   }
 }
 
-async function watch(library: LocalLibrary): Promise<void> {
-  const src_dir = Path.resolve(library.root_dir, library.config.src)
+async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
+  const src_dir = Path.resolve(files.root_dir, library.config.src)
   const watcher = chokidar.watch(src_dir)
 
   watcher.on("all", async (event, file) => {
@@ -71,7 +79,7 @@ async function watch(library: LocalLibrary): Promise<void> {
 
     try {
       const mod = await library.mods.refresh(path)
-      await snapshot_log(library, path, mod)
+      await snapshot_log(library, files, path, mod)
       maybe_assert_error(path)
 
       console.log(
@@ -80,7 +88,7 @@ async function watch(library: LocalLibrary): Promise<void> {
         path
       )
     } catch (error) {
-      await error_log(error as any, path, library)
+      await error_log(error as any, path, library, files)
       console.log(
         chalk.bold(`(${event})`),
         chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
@@ -99,16 +107,13 @@ function maybe_assert_error(path: string): void {
 async function error_log(
   error: Error,
   path: string,
-  library: LocalLibrary
+  library: Library,
+  files: LocalFileAdapter
 ): Promise<boolean> {
   const report = await error_report(error, path, library)
 
   if (path.endsWith(".error.cic") || path.endsWith(".error.md")) {
-    const file = Path.resolve(
-      library.root_dir,
-      library.config.src,
-      path + ".out"
-    )
+    const file = Path.resolve(files.root_dir, library.config.src, path + ".out")
 
     await fs.promises.writeFile(file, report)
 
@@ -123,7 +128,7 @@ async function error_log(
 async function error_report(
   error: Error,
   path: string,
-  library: LocalLibrary
+  library: Library
 ): Promise<string> {
   if (error instanceof Trace) {
     return error.repr((exp) => exp.repr())
@@ -143,16 +148,13 @@ async function error_report(
 }
 
 async function snapshot_log(
-  library: LocalLibrary,
+  library: Library,
+  files: LocalFileAdapter,
   path: string,
   mod: Module
 ): Promise<void> {
   if (path.endsWith(".snapshot.cic") || path.endsWith(".snapshot.md")) {
-    const file = Path.resolve(
-      library.root_dir,
-      library.config.src,
-      path + ".out"
-    )
+    const file = Path.resolve(files.root_dir, library.config.src, path + ".out")
 
     await fs.promises.writeFile(file, mod.output)
   }

@@ -1,5 +1,8 @@
-import { SingleFileLibrary } from "../../libraries"
-import { LocalLibrary } from "../../libraries"
+import { Library } from "../../library"
+import {
+  SingleFileAdapter,
+  LocalFileAdapter,
+} from "../../library/file-adapters"
 import { Trace } from "../../errors"
 import pt from "@cicada-lang/partech"
 import find_up from "find-up"
@@ -20,11 +23,15 @@ type Argv = {
 export const handler = async (argv: Argv) => {
   const path = Path.resolve(argv.file)
   const dir = Path.dirname(path)
-  const library = argv["module"]
+  const file_adapter = argv["module"]
     ? await find_library_config_file(dir).then((file) =>
-        LocalLibrary.from_config_file(file)
+        LocalFileAdapter.from_config_file(file)
       )
-    : new SingleFileLibrary({ path })
+    : new SingleFileAdapter({ path })
+  const library = new Library({
+    files: file_adapter,
+    config: file_adapter.config,
+  })
   try {
     const mod = await library.mods.get(path)
     console.log(mod.output)
