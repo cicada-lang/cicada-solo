@@ -16,11 +16,11 @@ export class SingleFileLibrary extends Library {
     })
   }
 
-  async list_paths(): Promise<Array<string>> {
+  async list(): Promise<Array<string>> {
     return [this.path]
   }
 
-  async fetch_file(path: string): Promise<string> {
+  async get(path: string): Promise<string> {
     return fs.readFileSync(this.path, { encoding: "utf-8" })
   }
 

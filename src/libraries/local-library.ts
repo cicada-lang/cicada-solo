@@ -30,14 +30,14 @@ export class LocalLibrary extends Library {
     })
   }
 
-  async fetch_file(path: string): Promise<string> {
+  async get(path: string): Promise<string> {
     const file = Path.isAbsolute(path)
       ? path
       : Path.resolve(this.root_dir, this.config.src, path)
     return await fs.promises.readFile(file, "utf8")
   }
 
-  async list_paths(): Promise<Array<string>> {
+  async list(): Promise<Array<string>> {
     const src_dir = Path.resolve(this.root_dir, this.config.src)
     const entries = await readdirp.promise(src_dir)
     return entries.map(({ path }) => path)
@@ -49,10 +49,8 @@ export class LocalLibrary extends Library {
       return cached
     }
 
-    const t0 = Date.now()
     const mod = await ModuleLoader.load(this, path)
     await mod.execute()
-    const t1 = Date.now()
 
     this.cached_mods.set(path, mod)
     return mod
@@ -64,7 +62,7 @@ export class LocalLibrary extends Library {
   }
 
   async load_mods(): Promise<Map<string, Module>> {
-    const files = await this.fetch_files()
+    const files = await this.all()
     for (const path of Object.keys(files)) {
       await this.load(path)
     }

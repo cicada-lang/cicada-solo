@@ -6,15 +6,14 @@ import { ModuleLoader } from "../module"
 //   maybe this should be changed, and these functions should be able to return `undefined`.
 export abstract class Library {
   abstract config: LibraryConfig
+  abstract list(): Promise<Array<string>>
+  abstract get(path: string): Promise<string>
 
-  abstract fetch_file(path: string): Promise<string>
-  abstract list_paths(): Promise<Array<string>>
-
-  async fetch_files(): Promise<Record<string, string>> {
+  async all(): Promise<Record<string, string>> {
     const files: Record<string, string> = {}
-    for (const path of await this.list_paths()) {
+    for (const path of await this.list()) {
       if (ModuleLoader.can_load(path)) {
-        files[path] = await this.fetch_file(path)
+        files[path] = await this.get(path)
       }
     }
 

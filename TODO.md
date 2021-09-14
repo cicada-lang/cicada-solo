@@ -1,5 +1,9 @@
 - [refactor] `Library` view library as resource of `files` and `mods`
 
+  - `FileAdapter` abstract class
+  - `SingleFileAdapter`
+  - `LocalFileAdapter`
+
 - [refactor] avoid using `Module.enter` -- also about `Module` `output`
 
 - [cli] [refactor] cli is route, thus should be as simple as route
