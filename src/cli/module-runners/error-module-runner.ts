@@ -1,7 +1,8 @@
 import { Library } from "../../library"
 import { LocalFileAdapter } from "../../library/file-adapters"
-import { ModuleLogger } from "../module-logger"
+import { Logger } from "../logger"
 import { ModuleRunner } from "../module-runner"
+import { error_report } from "../error-report"
 import Path from "path"
 import fs from "fs"
 
@@ -10,13 +11,13 @@ export class ErrorModuleRunner extends ModuleRunner {
 
   library: Library
   files: LocalFileAdapter
-  logger: ModuleLogger
+  logger: Logger
 
   constructor(opts: { library: Library; files: LocalFileAdapter }) {
     super()
     this.library = opts.library
     this.files = opts.files
-    this.logger = new ModuleLogger({ files: opts.files })
+    this.logger = new Logger()
   }
 
   async run(path: string, opts: { by: string }): Promise<{ error?: unknown }> {
@@ -32,7 +33,7 @@ export class ErrorModuleRunner extends ModuleRunner {
   }
 
   private async error(error: Error, path: string): Promise<void> {
-    const report = await this.logger.error_report(error, path)
+    const report = await error_report(error, path, this.files)
     const file = Path.resolve(
       this.files.root_dir,
       this.files.config.src,

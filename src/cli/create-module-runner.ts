@@ -1,7 +1,7 @@
 import { Library } from "../library"
 import { LocalFileAdapter } from "../library/file-adapters"
 import { ModuleLoader } from "../module"
-import { ModuleLogger } from "./module-logger"
+import { Logger } from "./logger"
 import { ModuleRunner } from "./module-runner"
 import {
   SnapshotModuleRunner,

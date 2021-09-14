@@ -1,18 +1,19 @@
 import { Library } from "../../library"
 import { LocalFileAdapter } from "../../library/file-adapters"
-import { ModuleLogger } from "../module-logger"
+import { Logger } from "../logger"
 import { ModuleRunner } from "../module-runner"
+import { error_report } from "../error-report"
 
 export class DefaultModuleRunner extends ModuleRunner {
   library: Library
   files: LocalFileAdapter
-  logger: ModuleLogger
+  logger: Logger
 
   constructor(opts: { library: Library; files: LocalFileAdapter }) {
     super()
     this.library = opts.library
     this.files = opts.files
-    this.logger = new ModuleLogger({ files: opts.files })
+    this.logger = new Logger()
   }
 
   async run(path: string, opts: { by: string }): Promise<{ error?: unknown }> {
@@ -21,7 +22,7 @@ export class DefaultModuleRunner extends ModuleRunner {
       this.logger.info(opts.by, path)
       return { error: undefined }
     } catch (error) {
-      const report = await this.logger.error_report(error, path)
+      const report = await error_report(error, path, this.files)
       console.error(report)
       this.logger.error(opts.by, path)
       return { error }
