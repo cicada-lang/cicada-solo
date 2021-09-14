@@ -13,29 +13,17 @@ export class ModuleRunner {
     this.logger = new ModuleLogger({ files: opts.files })
   }
 
-  async run(path: string): Promise<boolean> {
+  async run(path: string, opts: { by: string }): Promise<boolean> {
     try {
       const mod = await this.library.mods.load(path)
       await this.logger.snapshot(path, mod)
       this.logger.maybe_assert_error(path)
-      this.logger.log_info("check", path)
+      this.logger.log_info(opts.by, path)
       return false
     } catch (error) {
       const error_occurred = await this.logger.error(error as any, path)
-      this.logger.log_error("check", path)
+      this.logger.log_error(opts.by, path)
       return error_occurred
-    }
-  }
-
-  async rerun(event: string, path: string): Promise<void> {
-    try {
-      const mod = await this.library.mods.reload(path)
-      await this.logger.snapshot(path, mod)
-      this.logger.maybe_assert_error(path)
-      this.logger.log_info("check", path)
-    } catch (error) {
-      await this.logger.error(error as any, path)
-      this.logger.log_error("check", path)
     }
   }
 }

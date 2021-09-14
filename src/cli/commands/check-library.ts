@@ -34,7 +34,7 @@ async function check(library: Library, files: LocalFileAdapter): Promise<void> {
 
   let error_occurred = false
   for (const path of Object.keys(await files.all())) {
-    error_occurred = await runner.run(path)
+    error_occurred = await runner.run(path, { by: "check" })
   }
 
   if (error_occurred) {
@@ -53,6 +53,7 @@ async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
 
     const prefix = `${src_dir}/`
     const path = file.slice(prefix.length)
-    await runner.rerun(event, path)
+    library.mods.cache.delete(path)
+    await runner.run(path, { by: event })
   })
 }

@@ -26,11 +26,6 @@ export class ModuleManager {
     return mod
   }
 
-  async reload(path: string): Promise<Module> {
-    this.cache.delete(path)
-    return await this.load(path)
-  }
-
   async all(): Promise<Map<string, Module>> {
     const files = await this.files.all()
     for (const path of Object.keys(files)) {
