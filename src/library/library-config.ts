@@ -1,4 +1,4 @@
-import Joi from "joi"
+import ty from "@xieyuheng/ty"
 
 export type LibraryConfigJson = {
   name: string
@@ -17,23 +17,19 @@ export class LibraryConfig {
     this.src = opts.src
   }
 
-  static validate(data: any): LibraryConfigJson {
-    const schema = Joi.object({
-      name: Joi.string(),
-      date: Joi.string(),
-      src: Joi.string().optional(),
-    }).unknown()
-
-    const { value, error } = schema.validate(data, {
-      presence: "required",
+  static validate(inupt: any): LibraryConfigJson {
+    const schema = ty.object({
+      name: ty.string(),
+      date: ty.string(),
+      src: ty.optional(ty.string()),
     })
 
-    if (error) throw error
+    const data = schema.validate(inupt)
 
     return {
-      name: value.name,
-      date: value.date,
-      src: value.src || "src",
+      name: data.name,
+      date: data.date,
+      src: data.src || "src",
     }
   }
 
