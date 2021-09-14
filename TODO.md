@@ -1,6 +1,4 @@
-- [refactor] move `error_report` to ???
-
-- [refactor] inline `cli/module-logger` into `module-runners`
+- [refactor] `module-runners`
 
 - [refactor] `cli/commands/run`
 

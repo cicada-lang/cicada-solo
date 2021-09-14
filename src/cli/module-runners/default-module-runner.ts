@@ -2,7 +2,6 @@ import { Library } from "../../library"
 import { LocalFileAdapter } from "../../library/file-adapters"
 import { Logger } from "../logger"
 import { ModuleRunner } from "../module-runner"
-import { error_report } from "../error-report"
 
 export class DefaultModuleRunner extends ModuleRunner {
   library: Library
@@ -22,7 +21,7 @@ export class DefaultModuleRunner extends ModuleRunner {
       this.logger.info(opts.by, path)
       return { error: undefined }
     } catch (error) {
-      const report = await error_report(error, path, this.files)
+      const report = await this.library.error_report(error, path)
       console.error(report)
       this.logger.error(opts.by, path)
       return { error }

@@ -2,7 +2,6 @@ import { Library } from "../../library"
 import { LocalFileAdapter } from "../../library/file-adapters"
 import { Logger } from "../logger"
 import { ModuleRunner } from "../module-runner"
-import { error_report } from "../error-report"
 import Path from "path"
 import fs from "fs"
 
@@ -33,7 +32,7 @@ export class ErrorModuleRunner extends ModuleRunner {
   }
 
   private async error(error: Error, path: string): Promise<void> {
-    const report = await error_report(error, path, this.files)
+    const report = await this.library.error_report(error, path)
     const file = Path.resolve(
       this.files.root_dir,
       this.files.config.src,
