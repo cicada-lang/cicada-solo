@@ -32,12 +32,15 @@ export const handler = async (argv: Argv) => {
 async function check(library: Library, files: LocalFileAdapter): Promise<void> {
   const runner = new ModuleRunner({ library, files })
 
-  let error_occurred = false
+  let errors: Array<unknown> = []
   for (const path of Object.keys(await files.all())) {
-    error_occurred = await runner.run(path, { by: "check" })
+    const { error } = await runner.run(path, { by: "check" })
+    if (error) {
+      errors.push(error)
+    }
   }
 
-  if (error_occurred) {
+  if (errors.length !== 0) {
     process.exit(1)
   }
 }

@@ -1,8 +1,10 @@
-- [refactor] `cli/module-runner` and `cli/module-logger`
+- [refactor] `cli/module-runner`
 
   - `DefaultModuleRunner`
   - `SnapshotModuleRunner`
   - `ErrorModuleRunner`
+
+- [refactor] inline `cli/module-logger` into `module-runners`
 
 - [refactor] `cli/commands/run`
 

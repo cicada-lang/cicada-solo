@@ -53,12 +53,9 @@ export class ModuleLogger {
       )
 
       await fs.promises.writeFile(file, report)
-
       return false
     }
-
     console.error(report)
-
     return true
   }
 
@@ -68,7 +65,7 @@ export class ModuleLogger {
     }
   }
 
-  private async error_report(error: Error, path: string): Promise<string> {
+  async error_report(error: unknown, path: string): Promise<string> {
     if (error instanceof Trace) {
       return error.repr((exp) => exp.repr())
     } else if (error instanceof pt.ParsingError) {
