@@ -4,12 +4,11 @@ import { SingleFileAdapter } from "../../library/file-adapters"
 import { DefaultModuleRunner } from "../module-runners"
 import find_up from "find-up"
 import Path from "path"
-
-export const command = "run <file>"
-export const description = "Run a file -- .md or .cic"
+import fs from "fs"
 
 export const aliases = ["$0"]
-
+export const command = "run <file>"
+export const description = "Run a file -- .md or .cic"
 export const builder = {}
 
 type Argv = {
@@ -17,7 +16,12 @@ type Argv = {
 }
 
 export const handler = async (argv: Argv) => {
-  const path = Path.resolve(argv.file)
+  if (!fs.existsSync(argv["file"])) {
+    console.error(`The given file does not exist: ${argv["file"]}`)
+    process.exit(1)
+  }
+
+  const path = Path.resolve(argv["file"])
   const dir = Path.dirname(path)
   const config_file = await find_up("library.json", { cwd: dir })
   const file_adapter = config_file

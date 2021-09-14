@@ -1,5 +1,3 @@
-- [cli] improve error when argument is not validate
-
 - [refactor] avoid using `Module.enter` -- also about `Module` `output`
 
 # implicit

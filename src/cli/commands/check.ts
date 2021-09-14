@@ -8,8 +8,8 @@ import Path from "path"
 import fs from "fs"
 
 export const command = "check [library]"
-export const description = "Check a library"
-
+export const description =
+  "Check a library -- dir (default cwd) or library.json file"
 export const builder = {
   watch: { type: "boolean", default: false },
 }
@@ -20,6 +20,11 @@ type Argv = {
 }
 
 export const handler = async (argv: Argv) => {
+  if (argv["library"] && !fs.existsSync(argv["library"])) {
+    console.error(`The given file or dir does not exist: ${argv["library"]}`)
+    process.exit(1)
+  }
+
   const config_file = argv["library"]
     ? fs.lstatSync(argv["library"]).isFile()
       ? argv["library"]

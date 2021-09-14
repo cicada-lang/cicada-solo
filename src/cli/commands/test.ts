@@ -4,10 +4,10 @@ import { SingleFileAdapter } from "../../library/file-adapters"
 import { createModuleRunner } from "../create-module-runner"
 import find_up from "find-up"
 import Path from "path"
+import fs from "fs"
 
 export const command = "test <file>"
 export const description = "Test a file -- will write snapshot to .out"
-
 export const builder = {}
 
 type Argv = {
@@ -15,7 +15,12 @@ type Argv = {
 }
 
 export const handler = async (argv: Argv) => {
-  const path = Path.resolve(argv.file)
+  if (!fs.existsSync(argv["file"])) {
+    console.error(`The given file does not exist: ${argv["file"]}`)
+    process.exit(1)
+  }
+
+  const path = Path.resolve(argv["file"])
   const dir = Path.dirname(path)
   const config_file = await find_up("library.json", { cwd: dir })
   const file_adapter = config_file
