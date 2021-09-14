@@ -1,14 +1,12 @@
 import { Library } from "../../library"
 import { LocalFileAdapter } from "../../library/file-adapters"
 import { SingleFileAdapter } from "../../library/file-adapters"
-import { DefaultModuleRunner } from "../module-runners"
+import { createModuleRunner } from "../create-module-runner"
 import find_up from "find-up"
 import Path from "path"
 
-export const command = "run <file>"
-export const description = "Run a file -- .md or .cic"
-
-export const aliases = ["$0"]
+export const command = "test <file>"
+export const description = "Test a file -- will write snapshot to .out"
 
 export const builder = {}
 
@@ -25,7 +23,7 @@ export const handler = async (argv: Argv) => {
     : new SingleFileAdapter({ path })
   const library = new Library({ file_adapter })
 
-  const runner = new DefaultModuleRunner({ library, files: file_adapter })
+  const runner = createModuleRunner({ path, library, files: file_adapter })
   const { error } = await runner.run(path)
   if (error) {
     process.exit(1)
