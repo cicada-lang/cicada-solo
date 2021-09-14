@@ -25,21 +25,17 @@ type Argv = {
 
 export const handler = async (argv: Argv) => {
   const library = await LocalLibrary.from_config_file(argv["config-file"])
-  const opts = { verbose: argv.verbose }
-  if (argv.watch) await watch(library, opts)
-  else await check(library, opts)
+  if (argv.watch) await watch(library)
+  else await check(library)
 }
 
-async function check(
-  library: LocalLibrary,
-  opts: { verbose: boolean }
-): Promise<void> {
+async function check(library: LocalLibrary): Promise<void> {
   let error_occurred = false
 
   for (const path of Object.keys(await library.fetch_files())) {
     try {
-      const mod = await library.load(path, opts)
-      await snapshot_log(library, path, mod, opts)
+      const mod = await library.load(path)
+      await snapshot_log(library, path, mod)
       maybe_assert_error(path)
 
       console.log(
@@ -62,10 +58,7 @@ async function check(
   }
 }
 
-async function watch(
-  library: LocalLibrary,
-  opts: { verbose: boolean }
-): Promise<void> {
+async function watch(library: LocalLibrary): Promise<void> {
   const src_dir = Path.resolve(library.root_dir, library.config.src)
   const watcher = chokidar.watch(src_dir)
 
@@ -77,8 +70,8 @@ async function watch(
     const path = file.slice(prefix.length)
 
     try {
-      const mod = await library.reload(path, opts)
-      await snapshot_log(library, path, mod, opts)
+      const mod = await library.reload(path)
+      await snapshot_log(library, path, mod)
       maybe_assert_error(path)
 
       console.log(
@@ -152,8 +145,7 @@ async function error_report(
 async function snapshot_log(
   library: LocalLibrary,
   path: string,
-  mod: Module,
-  opts: { verbose: boolean }
+  mod: Module
 ): Promise<void> {
   if (path.endsWith(".snapshot.cic") || path.endsWith(".snapshot.md")) {
     const file = Path.resolve(
@@ -163,9 +155,5 @@ async function snapshot_log(
     )
 
     await fs.promises.writeFile(file, mod.output)
-
-    if (opts.verbose) {
-      console.log(mod.output)
-    }
   }
 }

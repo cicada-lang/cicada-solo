@@ -43,19 +43,9 @@ export class LocalLibrary extends Library {
     return entries.map(({ path }) => path)
   }
 
-  async load(
-    path: string,
-    opts: {
-      verbose?: boolean
-    } = {
-      verbose: false,
-    }
-  ): Promise<Module> {
+  async load(path: string): Promise<Module> {
     const cached = this.cached_mods.get(path)
     if (cached) {
-      if (opts.verbose) {
-        console.log(chalk.bold("(load)"), chalk.bold.blue("[cached]"), path)
-      }
       return cached
     }
 
@@ -64,40 +54,19 @@ export class LocalLibrary extends Library {
     await mod.execute()
     const t1 = Date.now()
 
-    if (opts.verbose) {
-      console.log(
-        chalk.bold("(load)"),
-        chalk.green.bold(`[elapse: ${t1 - t0}ms]`),
-        path
-      )
-    }
-
     this.cached_mods.set(path, mod)
     return mod
   }
 
-  async reload(
-    path: string,
-    opts: {
-      verbose?: boolean
-    } = {
-      verbose: false,
-    }
-  ): Promise<Module> {
+  async reload(path: string): Promise<Module> {
     this.cached_mods.delete(path)
-    return await this.load(path, opts)
+    return await this.load(path)
   }
 
-  async load_mods(
-    opts: {
-      verbose?: boolean
-    } = {
-      verbose: false,
-    }
-  ): Promise<Map<string, Module>> {
+  async load_mods(): Promise<Map<string, Module>> {
     const files = await this.fetch_files()
     for (const path of Object.keys(files)) {
-      await this.load(path, opts)
+      await this.load(path)
     }
 
     return this.cached_mods
