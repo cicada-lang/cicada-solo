@@ -1,6 +1,6 @@
-- [refactor] `module-runners`
+- [refactor] `cli/commands/run --no-module` should be another command
 
-- [refactor] `cli/commands/run`
+- [refactor] `module-runners` move path resolution to `LocalFileAdapter`
 
 - [cli] `snapshot` in cli argument -- instead of in file name
 

@@ -23,7 +23,12 @@ export class SnapshotModuleRunner extends ModuleRunner {
   async run(path: string, opts: { by: string }): Promise<{ error?: unknown }> {
     try {
       const mod = await this.library.mods.load(path)
-      await this.snapshot(path, mod)
+      const file = Path.resolve(
+        this.files.root_dir,
+        this.files.config.src,
+        path + ".out"
+      )
+      await fs.promises.writeFile(file, mod.output)
       this.logger.info(opts.by, path)
       return { error: undefined }
     } catch (error) {
@@ -32,15 +37,5 @@ export class SnapshotModuleRunner extends ModuleRunner {
       this.logger.error(opts.by, path)
       return { error }
     }
-  }
-
-  private async snapshot(path: string, mod: Module): Promise<void> {
-    const file = Path.resolve(
-      this.files.root_dir,
-      this.files.config.src,
-      path + ".out"
-    )
-
-    await fs.promises.writeFile(file, mod.output)
   }
 }

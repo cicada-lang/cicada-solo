@@ -1,14 +1,14 @@
 import { Library } from "../../library"
-import { LocalFileAdapter } from "../../library/file-adapters"
+import { FileAdapter } from "../../library/file-adapter"
 import { Logger } from "../logger"
 import { ModuleRunner } from "../module-runner"
 
 export class DefaultModuleRunner extends ModuleRunner {
   library: Library
-  files: LocalFileAdapter
+  files: FileAdapter
   logger: Logger
 
-  constructor(opts: { library: Library; files: LocalFileAdapter }) {
+  constructor(opts: { library: Library; files: FileAdapter }) {
     super()
     this.library = opts.library
     this.files = opts.files

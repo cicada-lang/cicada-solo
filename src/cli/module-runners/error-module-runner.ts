@@ -25,19 +25,15 @@ export class ErrorModuleRunner extends ModuleRunner {
       this.logger.info(opts.by, path)
       return { error: new Error(`I expect to find error in the path: ${path}`) }
     } catch (error) {
-      await this.error(error as any, path)
+      const report = await this.library.error_report(error, path)
+      const file = Path.resolve(
+        this.files.root_dir,
+        this.files.config.src,
+        path + ".out"
+      )
+      await fs.promises.writeFile(file, report)
       this.logger.error(opts.by, path)
       return { error: undefined }
     }
-  }
-
-  private async error(error: Error, path: string): Promise<void> {
-    const report = await this.library.error_report(error, path)
-    const file = Path.resolve(
-      this.files.root_dir,
-      this.files.config.src,
-      path + ".out"
-    )
-    await fs.promises.writeFile(file, report)
   }
 }
