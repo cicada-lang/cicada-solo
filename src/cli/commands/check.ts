@@ -8,8 +8,7 @@ import Path from "path"
 import fs from "fs"
 
 export const command = "check [library]"
-export const description =
-  "Check a library -- dir (default cwd) or library.json file"
+export const description = "Check a library -- by cwd, dir or library.json"
 export const builder = {
   watch: { type: "boolean", default: false },
 }

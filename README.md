@@ -11,8 +11,9 @@ npm i @cicada-lang/cicada -g
 ### Command Line Tools
 
 ```
-cic check-library <config-file>  Check a library
-cic run <file>                   Run a file       [default]
+cic check [library]  Check a library -- by cwd, dir or library.json
+cic run <file>       Run a file -- support .md or .cic               [default]
+cic snapshot <file>  Snapshot a file -- write to <file>.out
 ```
 
 ### Cicada Studyroom

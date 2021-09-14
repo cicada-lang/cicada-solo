@@ -8,7 +8,7 @@ import fs from "fs"
 
 export const aliases = ["$0"]
 export const command = "run <file>"
-export const description = "Run a file -- .md or .cic"
+export const description = "Run a file -- support .md or .cic"
 export const builder = {}
 
 type Argv = {

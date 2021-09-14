@@ -7,7 +7,7 @@ import Path from "path"
 import fs from "fs"
 
 export const command = "snapshot <file>"
-export const description = "Snapshot a file and write to <file>.out"
+export const description = "Snapshot a file -- write to <file>.out"
 export const builder = {}
 
 type Argv = {
