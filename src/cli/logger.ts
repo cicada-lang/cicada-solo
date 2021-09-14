@@ -6,20 +6,26 @@ export type LoggerOptions = {
 }
 
 export class Logger {
-  info(msg: string, opts?: LoggerOptions): void {
+  tag?: string
+
+  constructor(opts?: LoggerOptions) {
+    this.tag = opts?.tag
+  }
+
+  info(msg: string): void {
     const time = chalk.green.bold(`[${moment().format("HH:MM:SS")}]`)
-    if (opts?.tag) {
-      const tag = chalk.bold(`(${opts.tag})`)
+    if (this.tag) {
+      const tag = chalk.bold(`(${this.tag})`)
       console.log(tag, time, msg)
     } else {
       console.log(time, msg)
     }
   }
 
-  error(msg: string, opts?: LoggerOptions): void {
+  error(msg: string): void {
     const time = chalk.red.bold(`[${moment().format("HH:MM:SS")}]`)
-    if (opts?.tag) {
-      const tag = chalk.bold(`(${opts.tag})`)
+    if (this.tag) {
+      const tag = chalk.bold(`(${this.tag})`)
       console.log(tag, time, msg)
     } else {
       console.log(time, msg)
