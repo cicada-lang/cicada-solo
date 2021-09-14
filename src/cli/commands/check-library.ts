@@ -40,24 +40,17 @@ export const handler = async (argv: Argv) => {
 async function check(library: Library, files: LocalFileAdapter): Promise<void> {
   let error_occurred = false
 
+  const logger = new ModuleLogger({ files })
+
   for (const path of Object.keys(await files.all())) {
     try {
       const mod = await library.mods.get(path)
-      await snapshot_log(files, path, mod)
-      maybe_assert_error(path)
-
-      console.log(
-        chalk.bold(`(check)`),
-        chalk.green.bold(`[${moment().format("HH:MM:SS")}]`),
-        path
-      )
+      await logger.snapshot(path, mod)
+      logger.maybe_assert_error(path)
+      logger.log_info("check", path)
     } catch (error) {
-      error_occurred = await error_log(error as any, path, files)
-      console.log(
-        chalk.bold(`(check)`),
-        chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
-        path
-      )
+      error_occurred = await logger.error(error as any, path)
+      logger.log_error("check", path)
     }
   }
 
@@ -70,6 +63,8 @@ async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
   const src_dir = Path.resolve(files.root_dir, files.config.src)
   const watcher = chokidar.watch(src_dir)
 
+  const logger = new ModuleLogger({ files })
+
   watcher.on("all", async (event, file) => {
     if (event !== "add" && event !== "change") return
     if (!ModuleLoader.can_load(file)) return
@@ -79,81 +74,92 @@ async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
 
     try {
       const mod = await library.mods.refresh(path)
-      await snapshot_log(files, path, mod)
-      maybe_assert_error(path)
-
-      console.log(
-        chalk.bold(`(${event})`),
-        chalk.green.bold(`[${moment().format("HH:MM:SS")}]`),
-        path
-      )
+      await logger.snapshot(path, mod)
+      logger.maybe_assert_error(path)
+      logger.log_info(event, path)
     } catch (error) {
-      await error_log(error as any, path, files)
-      console.log(
-        chalk.bold(`(${event})`),
-        chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
-        path
-      )
+      await logger.error(error as any, path)
+      logger.log_error(event, path)
     }
   })
 }
 
-function maybe_assert_error(path: string): void {
-  if (path.endsWith(".error.cic") || path.endsWith(".error.md")) {
-    throw new Error(`I expect to find error in the file: ${path}`)
-  }
-}
-
-async function error_log(
-  error: Error,
-  path: string,
+export class ModuleLogger {
   files: LocalFileAdapter
-): Promise<boolean> {
-  const report = await error_report(error, path, files)
 
-  if (path.endsWith(".error.cic") || path.endsWith(".error.md")) {
-    const file = Path.resolve(files.root_dir, files.config.src, path + ".out")
-
-    await fs.promises.writeFile(file, report)
-
-    return false
+  constructor(opts: { files: LocalFileAdapter }) {
+    this.files = opts.files
   }
 
-  console.error(report)
+  log_info(tag: string, path: string): void {
+    console.log(
+      chalk.bold(`(${tag})`),
+      chalk.green.bold(`[${moment().format("HH:MM:SS")}]`),
+      path
+    )
+  }
 
-  return true
-}
+  log_error(tag: string, path: string): void {
+    console.log(
+      chalk.bold(`(${tag})`),
+      chalk.red.bold(`[${moment().format("HH:MM:SS")}]`),
+      path
+    )
+  }
 
-async function error_report(
-  error: Error,
-  path: string,
-  files: LocalFileAdapter
-): Promise<string> {
-  if (error instanceof Trace) {
-    return error.repr((exp) => exp.repr())
-  } else if (error instanceof pt.ParsingError) {
-    const text = await files.get(path)
-    if (!text) {
-      return `Unknown path: ${path}`
-    } else {
-      let message = error.message
-      message += "\n"
-      message += pt.report(error.span, text)
-      return message
+  async snapshot(path: string, mod: Module): Promise<void> {
+    if (path.endsWith(".snapshot.cic") || path.endsWith(".snapshot.md")) {
+      const file = Path.resolve(
+        this.files.root_dir,
+        this.files.config.src,
+        path + ".out"
+      )
+
+      await fs.promises.writeFile(file, mod.output)
     }
-  } else {
-    throw error
   }
-}
 
-async function snapshot_log(
-  files: LocalFileAdapter,
-  path: string,
-  mod: Module
-): Promise<void> {
-  if (path.endsWith(".snapshot.cic") || path.endsWith(".snapshot.md")) {
-    const file = Path.resolve(files.root_dir, files.config.src, path + ".out")
+  async error(error: Error, path: string): Promise<boolean> {
+    const report = await this.error_report(error, path)
 
-    await fs.promises.writeFile(file, mod.output)
+    if (path.endsWith(".error.cic") || path.endsWith(".error.md")) {
+      const file = Path.resolve(
+        this.files.root_dir,
+        this.files.config.src,
+        path + ".out"
+      )
+
+      await fs.promises.writeFile(file, report)
+
+      return false
+    }
+
+    console.error(report)
+
+    return true
+  }
+
+  maybe_assert_error(path: string): void {
+    if (path.endsWith(".error.cic") || path.endsWith(".error.md")) {
+      throw new Error(`I expect to find error in the file: ${path}`)
+    }
+  }
+
+  private async error_report(error: Error, path: string): Promise<string> {
+    if (error instanceof Trace) {
+      return error.repr((exp) => exp.repr())
+    } else if (error instanceof pt.ParsingError) {
+      const text = await this.files.get(path)
+      if (!text) {
+        return `Unknown path: ${path}`
+      } else {
+        let message = error.message
+        message += "\n"
+        message += pt.report(error.span, text)
+        return message
+      }
+    } else {
+      throw error
+    }
   }
 }
