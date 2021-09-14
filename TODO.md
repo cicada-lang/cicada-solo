@@ -1,5 +1,9 @@
 - [refactor] `cli/module-runner` and `cli/module-logger`
 
+  - `DefaultModuleRunner`
+  - `SnapshotModuleRunner`
+  - `ErrorModuleRunner`
+
 - [refactor] `cli/commands/run`
 
 - [cli] `snapshot` in cli argument -- instead of in file name
