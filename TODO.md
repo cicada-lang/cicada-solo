@@ -1,8 +1,8 @@
-- [refactor] `cli/module-runner`
+- rename `can_load` to `can_handle`
 
-  - `DefaultModuleRunner`
-  - `SnapshotModuleRunner`
-  - `ErrorModuleRunner`
+- [refactor] `DefaultModuleRunner` inline `cli/module-logger`
+- [refactor] `SnapshotModuleRunner` inline `cli/module-logger`
+- [refactor] `ErrorModuleRunner` inline `cli/module-logger`
 
 - [refactor] inline `cli/module-logger` into `module-runners`
 

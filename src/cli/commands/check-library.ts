@@ -1,7 +1,7 @@
 import { Library } from "../../library"
 import { LocalFileAdapter } from "../../library/file-adapters"
 import { ModuleLoader } from "../../module"
-import { ModuleRunner } from "../module-runner"
+import { createModuleRunner } from "../create-module-runner"
 import chokidar from "chokidar"
 import Path from "path"
 
@@ -30,10 +30,9 @@ export const handler = async (argv: Argv) => {
 }
 
 async function check(library: Library, files: LocalFileAdapter): Promise<void> {
-  const runner = new ModuleRunner({ library, files })
-
   let errors: Array<unknown> = []
   for (const path of Object.keys(await files.all())) {
+    const runner = createModuleRunner({ path, library, files })
     const { error } = await runner.run(path, { by: "check" })
     if (error) {
       errors.push(error)
@@ -48,7 +47,6 @@ async function check(library: Library, files: LocalFileAdapter): Promise<void> {
 async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
   const src_dir = Path.resolve(files.root_dir, files.config.src)
   const watcher = chokidar.watch(src_dir)
-  const runner = new ModuleRunner({ library, files })
 
   watcher.on("all", async (event, file) => {
     if (event !== "add" && event !== "change") return
@@ -57,6 +55,8 @@ async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
     const prefix = `${src_dir}/`
     const path = file.slice(prefix.length)
     library.mods.cache.delete(path)
+
+    const runner = createModuleRunner({ path, library, files })
     await runner.run(path, { by: event })
   })
 }
