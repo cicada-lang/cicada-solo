@@ -26,11 +26,7 @@ export class ErrorModuleRunner extends ModuleRunner {
       return { error: new Error(`I expect to find error in the path: ${path}`) }
     } catch (error) {
       const report = await this.library.error_report(error, path)
-      const file = Path.resolve(
-        this.files.root_dir,
-        this.files.config.src,
-        path + ".out"
-      )
+      const file = this.files.src(path + ".out")
       await fs.promises.writeFile(file, report)
       this.logger.error(opts.by, path)
       return { error: undefined }

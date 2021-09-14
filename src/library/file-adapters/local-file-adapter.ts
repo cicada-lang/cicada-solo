@@ -39,4 +39,8 @@ export class LocalFileAdapter extends FileAdapter {
     const entries = await readdirp.promise(src_dir)
     return entries.map(({ path }) => path)
   }
+
+  src(path: string): string {
+    return Path.resolve(this.root_dir, this.config.src, path)
+  }
 }
