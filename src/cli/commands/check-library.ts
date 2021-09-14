@@ -16,13 +16,11 @@ export const description = "Check all files in a library"
 
 export const builder = {
   watch: { type: "boolean", default: false },
-  verbose: { type: "boolean", default: false },
 }
 
 type Argv = {
   "config-file": string
   watch: boolean
-  verbose: boolean
 }
 
 export const handler = async (argv: Argv) => {
@@ -38,20 +36,11 @@ export const handler = async (argv: Argv) => {
 }
 
 async function check(library: Library, files: LocalFileAdapter): Promise<void> {
+  const runner = new ModuleRunner({ library, files })
+
   let error_occurred = false
-
-  const logger = new ModuleLogger({ files })
-
   for (const path of Object.keys(await files.all())) {
-    try {
-      const mod = await library.mods.load(path)
-      await logger.snapshot(path, mod)
-      logger.maybe_assert_error(path)
-      logger.log_info("check", path)
-    } catch (error) {
-      error_occurred = await logger.error(error as any, path)
-      logger.log_error("check", path)
-    }
+    error_occurred = await runner.run(path)
   }
 
   if (error_occurred) {
@@ -62,7 +51,7 @@ async function check(library: Library, files: LocalFileAdapter): Promise<void> {
 async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
   const src_dir = Path.resolve(files.root_dir, files.config.src)
   const watcher = chokidar.watch(src_dir)
-  const logger = new ModuleLogger({ files })
+  const runner = new ModuleRunner({ library, files })
 
   watcher.on("all", async (event, file) => {
     if (event !== "add" && event !== "change") return
@@ -70,27 +59,46 @@ async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
 
     const prefix = `${src_dir}/`
     const path = file.slice(prefix.length)
-
-    try {
-      const mod = await library.mods.reload(path)
-      await logger.snapshot(path, mod)
-      logger.maybe_assert_error(path)
-      logger.log_info(event, path)
-    } catch (error) {
-      await logger.error(error as any, path)
-      logger.log_error(event, path)
-    }
+    await runner.rerun(event, path)
   })
 }
 
 export class ModuleRunner {
+  library: Library
   files: LocalFileAdapter
+  logger: ModuleLogger
 
-  constructor(opts: { files: LocalFileAdapter }) {
+  constructor(opts: { library: Library; files: LocalFileAdapter }) {
+    this.library = opts.library
     this.files = opts.files
+    this.logger = new ModuleLogger({ files: opts.files })
   }
 
-  // TODO
+  async run(path: string): Promise<boolean> {
+    try {
+      const mod = await this.library.mods.load(path)
+      await this.logger.snapshot(path, mod)
+      this.logger.maybe_assert_error(path)
+      this.logger.log_info("check", path)
+      return false
+    } catch (error) {
+      const error_occurred = await this.logger.error(error as any, path)
+      this.logger.log_error("check", path)
+      return error_occurred
+    }
+  }
+
+  async rerun(event: string, path: string): Promise<void> {
+    try {
+      const mod = await this.library.mods.reload(path)
+      await this.logger.snapshot(path, mod)
+      this.logger.maybe_assert_error(path)
+      this.logger.log_info("check", path)
+    } catch (error) {
+      await this.logger.error(error as any, path)
+      this.logger.log_error("check", path)
+    }
+  }
 }
 
 export class ModuleLogger {

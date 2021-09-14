@@ -1,6 +1,3 @@
-- [refactor] `check-library` -- extract `ModuleLogger`
-- [refactor] `run` -- reuse `ModuleRunner`
-
 - [refactor] avoid using `Module.enter` -- also about `Module` `output`
 
 - [cli] [refactor] cli is route, thus should be as simple as route
