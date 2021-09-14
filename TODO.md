@@ -1,8 +1,5 @@
-- [refactor] `Library` view library as resource of `files` and `mods`
-
-  - `FileAdapter` abstract class
-  - `SingleFileAdapter`
-  - `LocalFileAdapter`
+- [refactor] `Library` view library as resource of `files`
+- [refactor] `Library` view library as resource of `mods`
 
 - [refactor] avoid using `Module.enter` -- also about `Module` `output`
 
