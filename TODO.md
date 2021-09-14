@@ -1,12 +1,12 @@
-- [refactor] avoid using `Module.enter` -- also about `Module` `output`
+- [refactor] `cli/module-runner` and `cli/module-logger`
 
-- [cli] [refactor] cli is route, thus should be as simple as route
-
-  - extract service? controller?
+- [refactor] `cli/commands/run`
 
 - [cli] `snapshot` in cli argument -- instead of in file name
 
 - [cli] design simple command line interface
+
+- [refactor] avoid using `Module.enter` -- also about `Module` `output`
 
 # implicit
 

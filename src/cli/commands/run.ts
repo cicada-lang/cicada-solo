@@ -1,8 +1,6 @@
 import { Library } from "../../library"
-import {
-  SingleFileAdapter,
-  LocalFileAdapter,
-} from "../../library/file-adapters"
+import { LocalFileAdapter } from "../../library/file-adapters"
+import { SingleFileAdapter } from "../../library/file-adapters"
 import { Trace } from "../../errors"
 import pt from "@cicada-lang/partech"
 import find_up from "find-up"
