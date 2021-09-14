@@ -1,4 +1,3 @@
-- [cli] `cli/commands/check` be able to take dir as library
 - [cli] `cli/commands/check` be able use current dir as library
 
 - [refactor] avoid using `Module.enter` -- also about `Module` `output`

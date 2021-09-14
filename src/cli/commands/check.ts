@@ -5,6 +5,7 @@ import { createModuleRunner } from "../create-module-runner"
 import { Logger } from "../logger"
 import chokidar from "chokidar"
 import Path from "path"
+import fs from "fs"
 
 export const command = "check <library>"
 export const description = "Check a library"
@@ -19,7 +20,12 @@ type Argv = {
 }
 
 export const handler = async (argv: Argv) => {
-  const file_adapter = await LocalFileAdapter.from_config_file(argv["library"])
+  const config_file = argv["library"]
+    ? fs.lstatSync(argv["library"]).isFile()
+      ? argv["library"]
+      : argv["library"] + "/library.json"
+    : process.cwd()
+  const file_adapter = await LocalFileAdapter.from_config_file(config_file)
   const library = new Library({ file_adapter })
   if (argv.watch) {
     await watch(library, file_adapter)
