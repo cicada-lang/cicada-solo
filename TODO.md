@@ -1,10 +1,9 @@
-- [cli] `cli/commands/run` as the default command
+- [cli] `cli/commands/test` handle snapshot and error
 
 - [refactor] rename `cli/commands/check-library` to ???
 
-- [cli] `cli/commands/run` be able to specify `--snapshot` in cli option for
-
-- [cli] design simple command line interface
+- [cli] `cli/commands/check-library` be able to take dir as library
+- [cli] `cli/commands/check-library` be able use current dir as library
 
 - [refactor] avoid using `Module.enter` -- also about `Module` `output`
 

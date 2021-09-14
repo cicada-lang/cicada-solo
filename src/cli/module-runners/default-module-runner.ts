@@ -21,6 +21,9 @@ export class DefaultModuleRunner extends ModuleRunner {
       if (this.logger) {
         this.logger.info(path)
       }
+      if (mod.output) {
+        console.log(mod.output)
+      }
       return { error: undefined }
     } catch (error) {
       const report = await this.library.error_report(error, path)

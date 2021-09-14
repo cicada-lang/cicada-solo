@@ -1,15 +1,19 @@
 # 蝉语 / Cicada Language
 
+## Install
+
+```
+npm i @cicada-lang/cicada -g
+```
+
 ## Usage
 
 ### Command Line Tools
 
-- Install: `npm install @cicada-lang/cicada --global`
-- Commands:
-  ```
-  cic check-library <config-file>  Check all files in a library
-  cic run <file>                   Run a file
-  ```
+```
+cic check-library <config-file>  Check a library
+cic run <file>                   Run a file       [default]
+```
 
 ### Cicada Studyroom
 

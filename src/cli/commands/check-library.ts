@@ -7,7 +7,7 @@ import chokidar from "chokidar"
 import Path from "path"
 
 export const command = "check-library <config-file>"
-export const description = "Check all files in a library"
+export const description = "Check a library"
 
 export const builder = {
   watch: { type: "boolean", default: false },

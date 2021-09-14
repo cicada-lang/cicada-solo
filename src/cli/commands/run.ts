@@ -10,6 +10,8 @@ import Path from "path"
 export const command = "run <file>"
 export const description = "Run a file"
 
+export const aliases = ["$0"]
+
 export const builder = {}
 
 type Argv = {
