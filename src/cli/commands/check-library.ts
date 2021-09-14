@@ -1,6 +1,5 @@
 import { Library } from "../../library"
 import { LocalFileAdapter } from "../../library/file-adapters"
-
 import { ModuleLoader } from "../../module"
 import { createModuleRunner } from "../create-module-runner"
 import chokidar from "chokidar"
@@ -34,7 +33,7 @@ async function check(library: Library, files: LocalFileAdapter): Promise<void> {
   let errors: Array<unknown> = []
   for (const path of Object.keys(await files.all())) {
     const runner = createModuleRunner({ path, library, files })
-    const { error } = await runner.run(path, { by: "check" })
+    const { error } = await runner.run(path, { logger: { tag: "check" } })
     if (error) {
       errors.push(error)
     }
@@ -58,6 +57,6 @@ async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
     library.mods.cache.delete(path)
 
     const runner = createModuleRunner({ path, library, files })
-    await runner.run(path, { by: event })
+    await runner.run(path, { logger: { tag: event } })
   })
 }

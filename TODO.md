@@ -1,8 +1,15 @@
-- [refactor] `SingleFileAdapter` inherit `LocalFileAdapter`
+- `runner` take `LoggerOptions` in constructor
 
-- [refactor] refactor `cli/commands/run --no-module`
+- [refactor] refactor `cli/commands/run`
 
-- [cli] `snapshot` in cli argument -- instead of in file name
+  - `SingleFileAdapter` inherit `LocalFileAdapter`
+
+- [cli] `cli/commands/run` -- `--no-module` if can not find `library.json`
+- [cli] `cli/commands/run` as the default command
+
+- [refactor] rename `cli/commands/check-library` to ???
+
+- [cli] `cli/commands/run` be able to specify `--snapshot` in cli option for
 
 - [cli] design simple command line interface
 

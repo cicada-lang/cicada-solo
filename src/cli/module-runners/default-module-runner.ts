@@ -1,6 +1,6 @@
 import { Library } from "../../library"
 import { FileAdapter } from "../../library/file-adapter"
-import { Logger } from "../logger"
+import { Logger, LoggerOptions } from "../logger"
 import { ModuleRunner } from "../module-runner"
 
 export class DefaultModuleRunner extends ModuleRunner {
@@ -15,15 +15,18 @@ export class DefaultModuleRunner extends ModuleRunner {
     this.logger = new Logger()
   }
 
-  async run(path: string, opts: { by: string }): Promise<{ error?: unknown }> {
+  async run(
+    path: string,
+    opts?: { logger?: LoggerOptions }
+  ): Promise<{ error?: unknown }> {
     try {
       const mod = await this.library.mods.load(path)
-      this.logger.info(opts.by, path)
+      this.logger.info(path, opts?.logger)
       return { error: undefined }
     } catch (error) {
       const report = await this.library.error_report(error, path)
       console.error(report)
-      this.logger.error(opts.by, path)
+      this.logger.error(path, opts?.logger)
       return { error }
     }
   }
