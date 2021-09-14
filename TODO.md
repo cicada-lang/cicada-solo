@@ -1,5 +1,4 @@
-- [refactor] `Library` view library as resource of `mods`
-- [refactor] `Library` as concrete class
+- [refactor] `Library` as concrete class -- inject `FileAdapter`
 
 - [refactor] avoid using `Module.enter` -- also about `Module` `output`
 

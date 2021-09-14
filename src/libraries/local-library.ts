@@ -33,31 +33,4 @@ export class LocalLibrary extends Library {
       config: new LibraryConfig(JSON.parse(text)),
     })
   }
-
-  async load(path: string): Promise<Module> {
-    const cached = this.cached_mods.get(path)
-    if (cached) {
-      return cached
-    }
-
-    const mod = await ModuleLoader.load(this, path)
-    await mod.execute()
-
-    this.cached_mods.set(path, mod)
-    return mod
-  }
-
-  async reload(path: string): Promise<Module> {
-    this.cached_mods.delete(path)
-    return await this.load(path)
-  }
-
-  async load_mods(): Promise<Map<string, Module>> {
-    const files = await this.files.all()
-    for (const path of Object.keys(files)) {
-      await this.load(path)
-    }
-
-    return this.cached_mods
-  }
 }

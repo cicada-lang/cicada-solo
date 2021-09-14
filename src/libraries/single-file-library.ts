@@ -20,25 +20,4 @@ export class SingleFileLibrary extends Library {
 
     this.files = new SingleFileAdapter(opts)
   }
-
-  async reload(path: string): Promise<Module> {
-    return await this.load(path)
-  }
-
-  async load(path: string): Promise<Module> {
-    if (path !== this.path) {
-      console.warn(
-        `The single file library can not load module: ${path}\n` +
-          `The only file in this library is: ${this.path}`
-      )
-    }
-
-    const mod = await ModuleLoader.load(this, this.path)
-    await mod.execute()
-    return mod
-  }
-
-  async load_mods(): Promise<Map<string, Module>> {
-    return new Map([[this.path, await this.load(this.path)]])
-  }
 }

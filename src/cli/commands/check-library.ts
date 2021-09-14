@@ -34,7 +34,7 @@ async function check(library: LocalLibrary): Promise<void> {
 
   for (const path of Object.keys(await library.files.all())) {
     try {
-      const mod = await library.load(path)
+      const mod = await library.mods.get(path)
       await snapshot_log(library, path, mod)
       maybe_assert_error(path)
 
@@ -70,7 +70,7 @@ async function watch(library: LocalLibrary): Promise<void> {
     const path = file.slice(prefix.length)
 
     try {
-      const mod = await library.reload(path)
+      const mod = await library.mods.refresh(path)
       await snapshot_log(library, path, mod)
       maybe_assert_error(path)
 

@@ -26,7 +26,7 @@ export const handler = async (argv: Argv) => {
       )
     : new SingleFileLibrary({ path })
   try {
-    const mod = await library.load(path)
+    const mod = await library.mods.get(path)
     console.log(mod.output)
   } catch (error) {
     if (error instanceof Trace) {
