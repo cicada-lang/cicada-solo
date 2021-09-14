@@ -14,15 +14,15 @@ export function createModuleRunner(opts: {
   files: LocalFileAdapter
   logger?: Logger
 }): ModuleRunner {
-  const { path, library, files, logger } = opts
+  const { path } = opts
 
   if (SnapshotModuleRunner.extensions.some((e) => path.endsWith(e))) {
-    return new SnapshotModuleRunner({ library, files, logger })
+    return new SnapshotModuleRunner(opts)
   }
 
   if (ErrorModuleRunner.extensions.some((e) => path.endsWith(e))) {
-    return new ErrorModuleRunner({ library, files, logger })
+    return new ErrorModuleRunner(opts)
   }
 
-  return new DefaultModuleRunner({ library, files, logger })
+  return new DefaultModuleRunner(opts)
 }
