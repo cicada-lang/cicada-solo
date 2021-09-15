@@ -1,3 +1,4 @@
+- inline `ModuleResource` to `Library`
 # implicit
 
 - `exps/pi/pi-im` -- be able to take pi-im

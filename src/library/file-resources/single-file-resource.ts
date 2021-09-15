@@ -26,12 +26,7 @@ export class SingleFileResource extends LocalFileResource {
   }
 
   async get(path: string): Promise<string> {
-    if (path !== this.path) {
-      throw new Error(
-        `I only have a single file: ${this.path}, given path: ${path}`
-      )
-    }
-
-    return fs.readFileSync(this.path, { encoding: "utf-8" })
+    const resolved_path = Path.resolve(Path.dirname(this.path), path)
+    return fs.readFileSync(resolved_path, { encoding: "utf-8" })
   }
 }

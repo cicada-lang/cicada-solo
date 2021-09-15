@@ -20,6 +20,11 @@ export const handler = async (argv: Argv) => {
     process.exit(1)
   }
 
+  if (!fs.lstatSync(argv["file"]).isFile()) {
+    console.error(`The given path does not refer to a file: ${argv["file"]}`)
+    process.exit(1)
+  }
+
   const path = Path.resolve(argv["file"])
   const dir = Path.dirname(path)
   const config = await find_up("library.json", { cwd: dir })

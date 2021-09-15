@@ -25,13 +25,4 @@ export class ModuleResource {
     this.cache.set(path, mod)
     return mod
   }
-
-  async all(): Promise<Map<string, Module>> {
-    const files = await this.files.all()
-    for (const path of Object.keys(files)) {
-      await this.get(path)
-    }
-
-    return this.cache
-  }
 }
