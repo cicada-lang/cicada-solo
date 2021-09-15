@@ -1,4 +1,4 @@
-import { Category } from "category/category.cic"
+import { Category } from "./category.cic"
 
 class Initial {
   cat: Category

@@ -1,4 +1,4 @@
-import { Semigroup } from "group/semigroup.cic"
+import { Semigroup } from "./semigroup.cic"
 
 class Monoid extends Semigroup {
   id: Element

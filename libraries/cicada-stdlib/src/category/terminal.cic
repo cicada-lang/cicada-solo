@@ -1,5 +1,5 @@
-import { Category } from "category/category.cic"
-import { Isomorphism } from "category/isomorphism.cic"
+import { Category } from "./category.cic"
+import { Isomorphism } from "./isomorphism.cic"
 
 class Terminal {
   cat: Category

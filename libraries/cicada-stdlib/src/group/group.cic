@@ -1,4 +1,4 @@
-import { Monoid } from "group/monoid.cic"
+import { Monoid } from "./monoid.cic"
 
 class Group extends Monoid {
   inv(x: Element): Element

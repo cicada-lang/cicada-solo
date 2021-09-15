@@ -1,6 +1,7 @@
 import { Stmt } from "../stmt"
 import { Module } from "../module"
 import { Trace } from "../errors"
+import Path from "path"
 
 export type ImportEntry = {
   name: string
@@ -18,7 +19,7 @@ export class Import implements Stmt {
 
   async execute(mod: Module): Promise<void> {
     const imported_mod = await mod.library.mods
-      .get(this.path)
+      .get(resolve_path(mod.path, this.path))
       .catch((error) => {
         throw new Trace(
           [
@@ -46,5 +47,15 @@ export class Import implements Stmt {
       mod.ctx = mod.ctx.extend(alias || name, t, value)
       mod.env = mod.env.extend(alias || name, value)
     }
+  }
+}
+
+function resolve_path(base: string, path: string): string {
+  if (path.startsWith("@/")) {
+    return path.slice("@/".length)
+  } else if (Path.isAbsolute(base)) {
+    return Path.resolve(Path.dirname(base), path)
+  } else {
+    return Path.resolve(Path.dirname("/" + base), path).slice(1)
   }
 }

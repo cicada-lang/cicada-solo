@@ -1,4 +1,4 @@
-import { Functor } from "category/functor.cic"
+import { Functor } from "./functor.cic"
 
 Functor
 Functor

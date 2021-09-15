@@ -30,43 +30,6 @@
 
 # use `unify` to replace `readback`
 
-# library
-
-> Responding to new requirements can improve code structure.
-
-> Learn patterns from web development.
-
-- [library] can be used as a module
-
-- `Module` improve architecture -- use use client / server
-
-- `Module` improve architecture -- use request / response
-
-  - note that, top-level syntax of `Module` is statement-oriented
-
-- use relative path to resolve module
-
-- support `@/` -- to resolve module by absolute path from current library
-
-- the `Library` class is like a file system
-
-  - support load library from a sub-dir of a repo -- to avoid using `git-subtree`
-
-  - this is complicated because of a module need to import other modules
-
-    - this is like lazy mapping over the record of files,
-      load it into module as needed.
-
-    - one library denotes one source of files
-
-      - local-library
-      - github-library
-      - gitlab-library
-
-      how about we need to load from url, from a local module?
-
-      how es6 module system does this?
-
 # error report
 
 - learn from the request / response & client / server arch
@@ -76,6 +39,12 @@
   - https://elm-lang.org/news/the-syntax-cliff
 
 # git-based wiki system
+
+# library manager
+
+- library registry server
+- download library from registry
+- library can be used as a module  -- like package manager
 
 # subtype
 

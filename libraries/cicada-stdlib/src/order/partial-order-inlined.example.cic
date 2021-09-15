@@ -1,5 +1,5 @@
-import { PartialOrder } from "order/partial-order.cic"
-import { PreOrder } from "order/pre-order.cic"
+import { PartialOrder } from "./partial-order.cic"
+import { PreOrder } from "./pre-order.cic"
 
 class PartialOrderInlined {
   Element: Type

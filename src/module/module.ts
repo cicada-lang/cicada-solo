@@ -9,14 +9,11 @@ import { Ctx } from "../ctx"
 // - The loading order matters.
 // - Recursion is not an option.
 
-class ModuleEntry {
+// NOTE top-level syntax of `Module` is statement-oriented
+
+interface ModuleEntry {
   stmt: Stmt
   output?: string
-
-  constructor(opts: { stmt: Stmt; output?: string }) {
-    this.stmt = opts.stmt
-    this.output = opts.output
-  }
 }
 
 export class Module {

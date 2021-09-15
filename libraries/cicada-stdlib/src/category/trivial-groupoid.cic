@@ -1,6 +1,6 @@
-import { trivial_category } from "category/trivial-category.cic"
-import { Isomorphism } from "category/isomorphism.cic"
-import { Groupoid } from "category/groupoid.cic"
+import { trivial_category } from "./trivial-category.cic"
+import { Isomorphism } from "./isomorphism.cic"
+import { Groupoid } from "./groupoid.cic"
 
 trivial_isomorphism_t = Isomorphism(trivial_category, sole, sole, sole, sole)
 
