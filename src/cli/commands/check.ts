@@ -71,7 +71,7 @@ async function watch(
     const prefix = `${src_dir}/`
     const path = file.slice(prefix.length)
 
-    library.mods.cache.delete(path)
+    library.cache.delete(path)
 
     const logger = new Logger({ tag: event })
     const runner = createRunner({ path, library, files, logger })
