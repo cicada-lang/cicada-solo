@@ -1,9 +1,9 @@
-import { Library, LibraryConfig } from "../library"
+import { Library } from "../library"
 import { Module } from "../module"
 import { ModuleLoader } from "../module"
 import { FileResource } from "./file-resource"
 
-export class ModuleManager {
+export class ModuleResource {
   library: Library
   files: FileResource
   cache: Map<string, Module> = new Map()

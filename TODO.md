@@ -1,5 +1,3 @@
-- rename ModuleManager to ModuleResource
-
 - [note] extract `Reporter` -- for `error_report` in `Library`
 
 - [refactor] avoid using `Module.enter` -- also about `Module` `output`

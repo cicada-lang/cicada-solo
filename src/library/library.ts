@@ -1,13 +1,8 @@
-import { LibraryConfig } from "../library"
-import { Module } from "../module"
-import { ModuleLoader } from "../module"
 import { FileResource } from "./file-resource"
-import { ModuleManager } from "./module-manager"
+import { ModuleResource } from "./module-resource"
 
 import { Trace } from "../errors"
 import pt from "@cicada-lang/partech"
-import moment from "moment"
-import chalk from "chalk"
 
 export class Library {
   files: FileResource
@@ -16,8 +11,8 @@ export class Library {
     this.files = opts.files
   }
 
-  get mods(): ModuleManager {
-    return new ModuleManager({ library: this })
+  get mods(): ModuleResource {
+    return new ModuleResource({ library: this })
   }
 
   async error_report(error: unknown, path: string): Promise<string> {
