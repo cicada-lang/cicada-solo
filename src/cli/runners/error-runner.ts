@@ -24,7 +24,7 @@ export class ErrorRunner extends Runner {
 
   async run(path: string): Promise<{ error?: unknown }> {
     try {
-      const mod = await this.library.mods.load(path)
+      const mod = await this.library.mods.get(path)
       if (this.logger) {
         this.logger.info(path)
       }

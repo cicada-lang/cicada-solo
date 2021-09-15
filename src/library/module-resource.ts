@@ -13,7 +13,7 @@ export class ModuleResource {
     this.files = opts.library.files
   }
 
-  async load(path: string): Promise<Module> {
+  async get(path: string): Promise<Module> {
     const cached = this.cache.get(path)
     if (cached) {
       return cached
@@ -29,7 +29,7 @@ export class ModuleResource {
   async all(): Promise<Map<string, Module>> {
     const files = await this.files.all()
     for (const path of Object.keys(files)) {
-      await this.load(path)
+      await this.get(path)
     }
 
     return this.cache

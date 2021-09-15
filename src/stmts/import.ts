@@ -18,7 +18,7 @@ export class Import implements Stmt {
 
   async execute(mod: Module): Promise<void> {
     const imported_mod = await mod.library.mods
-      .load(this.path)
+      .get(this.path)
       .catch((error) => {
         throw new Trace(
           [

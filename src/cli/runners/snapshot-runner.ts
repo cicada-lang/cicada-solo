@@ -24,7 +24,7 @@ export class SnapshotRunner extends Runner {
 
   async run(path: string): Promise<{ error?: unknown }> {
     try {
-      const mod = await this.library.mods.load(path)
+      const mod = await this.library.mods.get(path)
       const file = this.files.src(path + ".out")
       if (mod.output) {
         await fs.promises.writeFile(file, mod.output)
