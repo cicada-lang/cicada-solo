@@ -1,9 +1,9 @@
 import { Library } from "../../library"
 import { FileAdapter } from "../../library/file-adapter"
 import { Logger } from "../logger"
-import { ModuleRunner } from "../module-runner"
+import { Runner } from "../runner"
 
-export class DefaultModuleRunner extends ModuleRunner {
+export class DefaultModuleRunner extends Runner {
   library: Library
   files: FileAdapter
   logger?: Logger

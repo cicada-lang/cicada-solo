@@ -1,6 +1,6 @@
 import { Library } from "../library"
 import { LocalFileAdapter } from "../library/file-adapters"
-import { ModuleRunner } from "./module-runner"
+import { Runner } from "./runner"
 import {
   SnapshotModuleRunner,
   ErrorModuleRunner,
@@ -13,7 +13,7 @@ export function createModuleRunner(opts: {
   library: Library
   files: LocalFileAdapter
   logger?: Logger
-}): ModuleRunner {
+}): Runner {
   const { path } = opts
 
   if (ErrorModuleRunner.extensions.some((e) => path.endsWith(e))) {

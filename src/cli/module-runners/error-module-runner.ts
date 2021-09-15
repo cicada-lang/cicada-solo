@@ -1,10 +1,10 @@
 import { Library } from "../../library"
 import { LocalFileAdapter } from "../../library/file-adapters"
 import { Logger } from "../logger"
-import { ModuleRunner } from "../module-runner"
+import { Runner } from "../runner"
 import fs from "fs"
 
-export class ErrorModuleRunner extends ModuleRunner {
+export class ErrorModuleRunner extends Runner {
   static extensions = [".error.cic", ".error.md"]
 
   library: Library

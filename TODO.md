@@ -1,4 +1,3 @@
-- [refactor] rename `ModuleRunner` to `Runner`
 - [note] note about `error_report` in `Library` and `Library`'s relation with `ModuleManager`
 - [refactor] avoid using `Module.enter` -- also about `Module` `output`
 
