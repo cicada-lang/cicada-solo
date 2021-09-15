@@ -24,12 +24,12 @@ export const handler = async (argv: Argv) => {
     process.exit(1)
   }
 
-  const config_file = argv["library"]
+  const config = argv["library"]
     ? fs.lstatSync(argv["library"]).isFile()
       ? argv["library"]
       : argv["library"] + "/library.json"
     : process.cwd() + "/library.json"
-  const files = await LocalFileResource.from_config_file(config_file)
+  const files = await LocalFileResource.build(config)
   const library = new Library({ files })
   if (argv.watch) {
     await watch(library, files)

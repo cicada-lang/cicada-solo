@@ -14,9 +14,7 @@ export class LocalFileResource extends FileResource {
     this.config = opts.config
   }
 
-  static async from_config_file<Module>(
-    file: string
-  ): Promise<LocalFileResource> {
+  static async build(file: string): Promise<LocalFileResource> {
     const text = await fs.promises.readFile(file, "utf8")
     return new LocalFileResource({
       root_dir: Path.dirname(file),

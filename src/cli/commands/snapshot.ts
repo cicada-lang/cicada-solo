@@ -22,9 +22,9 @@ export const handler = async (argv: Argv) => {
 
   const path = Path.resolve(argv["file"])
   const dir = Path.dirname(path)
-  const config_file = await find_up("library.json", { cwd: dir })
-  const files = config_file
-    ? await LocalFileResource.from_config_file(config_file)
+  const config = await find_up("library.json", { cwd: dir })
+  const files = config
+    ? await LocalFileResource.build(config)
     : new SingleFileResource({ path })
   const library = new Library({ files })
 
