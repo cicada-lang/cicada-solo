@@ -1,7 +1,6 @@
 import { Module } from "../module"
 import { ModuleLoader } from "../module"
 import { FileResource } from "./file-resource"
-import { ModuleResource } from "./module-resource"
 import { Reporter } from "./reporter"
 
 export class Library {
