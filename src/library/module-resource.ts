@@ -20,7 +20,7 @@ export class ModuleResource {
     }
 
     const mod = await ModuleLoader.load(this.library, path)
-    await mod.execute()
+    await mod.run()
 
     this.cache.set(path, mod)
     return mod

@@ -46,7 +46,5 @@ export class Import implements Stmt {
       mod.ctx = mod.ctx.extend(alias || name, t, value)
       mod.env = mod.env.extend(alias || name, value)
     }
-
-    mod.enter(this)
   }
 }

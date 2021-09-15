@@ -20,6 +20,5 @@ export class Class implements Stmt {
     mod.ctx.assert_not_redefine(this.name, inferred.t, inferred_value)
     mod.ctx = mod.ctx.extend(this.name, inferred.t, inferred_value)
     mod.env = mod.env.extend(this.name, evaluate(mod.env, inferred.core))
-    mod.enter(this)
   }
 }

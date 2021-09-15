@@ -11,9 +11,9 @@ import { Ctx } from "../ctx"
 
 class ModuleEntry {
   stmt: Stmt
-  output: string
+  output?: string
 
-  constructor(opts: { stmt: Stmt; output: string }) {
+  constructor(opts: { stmt: Stmt; output?: string }) {
     this.stmt = opts.stmt
     this.output = opts.output
   }
@@ -23,10 +23,10 @@ export class Module {
   library: Library
   path: string
   text: string
-  stmts: Array<Stmt>
+  entries: Array<ModuleEntry>
+  index: number = 0
   env: Env = Env.empty
   ctx: Ctx = Ctx.empty
-  entries: Array<ModuleEntry> = []
 
   constructor(opts: {
     library: Library
@@ -37,21 +37,35 @@ export class Module {
     this.library = opts.library
     this.path = opts.path
     this.text = opts.text
-    this.stmts = opts.stmts
+    this.entries = opts.stmts.map((stmt) => ({ stmt }))
   }
 
-  async execute(): Promise<void> {
-    for (const stmt of this.stmts) {
-      await stmt.execute(this)
+  get stmts(): Array<Stmt> {
+    return this.entries.map((entry) => entry.stmt)
+  }
+
+  end_p(): boolean {
+    return this.index === this.entries.length
+  }
+
+  async step(): Promise<void> {
+    const { stmt } = this.entries[this.index]
+    await stmt.execute(this)
+    this.index++
+  }
+
+  async run(): Promise<void> {
+    while (!this.end_p()) {
+      await this.step()
     }
   }
 
-  enter(stmt: Stmt, opts?: { output?: string }): void {
-    const output = opts?.output || ""
-    this.entries.push(new ModuleEntry({ stmt, output }))
+  output(output: string): void {
+    const entry = this.entries[this.index]
+    entry.output = output
   }
 
-  get output(): string {
+  get all_output(): string {
     const output = this.entries
       .filter((entry) => entry.output)
       .map((entry) => entry.output)

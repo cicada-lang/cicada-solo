@@ -20,6 +20,6 @@ export class Show implements Stmt {
     const value_repr = readback(mod.ctx, t, value).repr()
     const t_repr = readback(mod.ctx, new Exps.TypeValue(), t).repr()
     const output = `${value_repr}: ${t_repr} `
-    mod.enter(this, { output })
+    mod.output(output)
   }
 }

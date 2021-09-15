@@ -26,8 +26,8 @@ export class SnapshotRunner extends Runner {
     try {
       const mod = await this.library.mods.get(path)
       const file = this.files.src(path + ".out")
-      if (mod.output) {
-        await fs.promises.writeFile(file, mod.output)
+      if (mod.all_output) {
+        await fs.promises.writeFile(file, mod.all_output)
       }
       if (this.logger) {
         this.logger.info(path)

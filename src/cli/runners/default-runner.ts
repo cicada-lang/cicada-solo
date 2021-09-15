@@ -25,8 +25,8 @@ export class DefaultRunner extends Runner {
       if (this.logger) {
         this.logger.info(path)
       }
-      if (mod.output) {
-        console.log(mod.output)
+      if (mod.all_output) {
+        console.log(mod.all_output)
       }
       return { error: undefined }
     } catch (error) {
