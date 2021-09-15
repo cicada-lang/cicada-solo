@@ -4,10 +4,10 @@ import { Env } from "../env"
 import { Ctx } from "../ctx"
 
 // NOTE
-// - a module belongs to a library
-// - loaded modules are cached
-// - the loading order matters
-// - no recursion
+// - A module belongs to a library.
+// - Loaded modules are cached.
+// - The loading order matters.
+// - Recursion is not an option.
 
 class ModuleEntry {
   stmt: Stmt
