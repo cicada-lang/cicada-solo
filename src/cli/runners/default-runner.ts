@@ -30,7 +30,7 @@ export class DefaultRunner extends Runner {
       }
       return { error: undefined }
     } catch (error) {
-      const report = await this.library.error_report(error, path)
+      const report = await this.library.reporter.error(error, path)
       console.error(report)
       if (this.logger) {
         this.logger.error(path)

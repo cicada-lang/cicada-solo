@@ -30,7 +30,7 @@ export class ErrorRunner extends Runner {
       }
       return { error: new Error(`I expect to find error in the path: ${path}`) }
     } catch (error) {
-      const report = await this.library.error_report(error, path)
+      const report = await this.library.reporter.error(error, path)
       const file = this.files.src(path + ".out")
       await fs.promises.writeFile(file, report)
       if (this.logger) {
