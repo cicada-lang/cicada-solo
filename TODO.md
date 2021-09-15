@@ -32,18 +32,20 @@
 
 # error report
 
-- learn from the request / response & client / server arch
-- get information about location from parser
+- [cli] improve validation and error report
+
 - good error report like elm
   - https://elm-lang.org/news/compiler-errors-for-humans
   - https://elm-lang.org/news/the-syntax-cliff
+
+- get information about location from parser
 
 # git-based wiki system
 
 # library manager
 
 - library registry server
-- download library from registry
+- download library from registry -- and cli support
 - library can be used as a module  -- like package manager
 
 # subtype
