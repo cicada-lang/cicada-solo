@@ -24,12 +24,12 @@ export const handler = async (argv: Argv) => {
   const path = Path.resolve(argv["file"])
   const dir = Path.dirname(path)
   const config_file = await find_up("library.json", { cwd: dir })
-  const file_adapter = config_file
+  const files = config_file
     ? await LocalFileResource.from_config_file(config_file)
     : new SingleFileResource({ path })
-  const library = new Library({ file_adapter })
+  const library = new Library({ files })
 
-  const runner = new DefaultRunner({ library, files: file_adapter })
+  const runner = new DefaultRunner({ library, files })
   const { error } = await runner.run(path)
   if (error) {
     process.exit(1)

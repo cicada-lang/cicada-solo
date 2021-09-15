@@ -12,8 +12,8 @@ import chalk from "chalk"
 export class Library {
   files: FileResource
 
-  constructor(opts: { file_adapter: FileResource }) {
-    this.files = opts.file_adapter
+  constructor(opts: { files: FileResource }) {
+    this.files = opts.files
   }
 
   get mods(): ModuleManager {

@@ -29,12 +29,12 @@ export const handler = async (argv: Argv) => {
       ? argv["library"]
       : argv["library"] + "/library.json"
     : process.cwd() + "/library.json"
-  const file_adapter = await LocalFileResource.from_config_file(config_file)
-  const library = new Library({ file_adapter })
+  const files = await LocalFileResource.from_config_file(config_file)
+  const library = new Library({ files })
   if (argv.watch) {
-    await watch(library, file_adapter)
+    await watch(library, files)
   } else {
-    await check(library, file_adapter)
+    await check(library, files)
   }
 }
 
