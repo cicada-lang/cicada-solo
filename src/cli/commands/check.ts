@@ -1,7 +1,7 @@
 import { Library } from "../../library"
 import { LocalFileResource } from "../../library/file-resources"
 import { ModuleLoader } from "../../module"
-import { createModuleRunner } from "../create-module-runner"
+import { createRunner } from "../create-runner"
 import { Logger } from "../logger"
 import chokidar from "chokidar"
 import Path from "path"
@@ -45,7 +45,7 @@ async function check(
   let errors: Array<unknown> = []
   for (const path of Object.keys(await files.all())) {
     const logger = new Logger({ tag: "check" })
-    const runner = createModuleRunner({ path, library, files, logger })
+    const runner = createRunner({ path, library, files, logger })
     const { error } = await runner.run(path)
     if (error) {
       errors.push(error)
@@ -74,7 +74,7 @@ async function watch(
     library.mods.cache.delete(path)
 
     const logger = new Logger({ tag: event })
-    const runner = createModuleRunner({ path, library, files, logger })
+    const runner = createRunner({ path, library, files, logger })
     await runner.run(path)
   })
 }

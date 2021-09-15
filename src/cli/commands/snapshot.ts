@@ -1,7 +1,7 @@
 import { Library } from "../../library"
 import { LocalFileResource } from "../../library/file-resources"
 import { SingleFileResource } from "../../library/file-resources"
-import { createModuleRunner } from "../create-module-runner"
+import { createRunner } from "../create-runner"
 import find_up from "find-up"
 import Path from "path"
 import fs from "fs"
@@ -28,7 +28,7 @@ export const handler = async (argv: Argv) => {
     : new SingleFileResource({ path })
   const library = new Library({ file_adapter })
 
-  const runner = createModuleRunner({ path, library, files: file_adapter })
+  const runner = createRunner({ path, library, files: file_adapter })
   const { error } = await runner.run(path)
   if (error) {
     process.exit(1)

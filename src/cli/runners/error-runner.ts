@@ -4,7 +4,7 @@ import { Logger } from "../logger"
 import { Runner } from "../runner"
 import fs from "fs"
 
-export class ErrorModuleRunner extends Runner {
+export class ErrorRunner extends Runner {
   static extensions = [".error.cic", ".error.md"]
 
   library: Library
