@@ -1,8 +1,8 @@
 import { Library } from "../library"
-import { FileAdapter } from "../library/file-adapter"
+import { FileResource } from "../library/file-resource"
 
 export abstract class Runner {
   abstract library: Library
-  abstract files: FileAdapter
+  abstract files: FileResource
   abstract run(path: string): Promise<{ error?: unknown }>
 }

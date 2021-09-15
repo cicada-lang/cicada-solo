@@ -1,13 +1,10 @@
-import { FileAdapter } from "../file-adapter"
-import { LibraryConfig } from "../../library"
-import { Module } from "../../module"
-import { ModuleLoader } from "../../module"
+import { FileResource } from "../file-resource"
+import { LibraryConfig } from ".."
 import Path from "path"
 import fs from "fs"
 import readdirp from "readdirp"
-import chalk from "chalk"
 
-export class LocalFileAdapter extends FileAdapter {
+export class LocalFileResource extends FileResource {
   root_dir: string
   config: LibraryConfig
 
@@ -19,9 +16,9 @@ export class LocalFileAdapter extends FileAdapter {
 
   static async from_config_file<Module>(
     file: string
-  ): Promise<LocalFileAdapter> {
+  ): Promise<LocalFileResource> {
     const text = await fs.promises.readFile(file, "utf8")
-    return new LocalFileAdapter({
+    return new LocalFileResource({
       root_dir: Path.dirname(file),
       config: new LibraryConfig(JSON.parse(text)),
     })

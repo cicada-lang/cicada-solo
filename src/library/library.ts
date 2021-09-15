@@ -1,7 +1,7 @@
 import { LibraryConfig } from "../library"
 import { Module } from "../module"
 import { ModuleLoader } from "../module"
-import { FileAdapter } from "./file-adapter"
+import { FileResource } from "./file-resource"
 import { ModuleManager } from "./module-manager"
 
 import { Trace } from "../errors"
@@ -9,12 +9,10 @@ import pt from "@cicada-lang/partech"
 import moment from "moment"
 import chalk from "chalk"
 
-// NOTE in the following interface, caller is responsible to make sure the path exists.
-//   maybe this should be changed, and these functions should be able to return `undefined`.
 export class Library {
-  files: FileAdapter
+  files: FileResource
 
-  constructor(opts: { file_adapter: FileAdapter }) {
+  constructor(opts: { file_adapter: FileResource }) {
     this.files = opts.file_adapter
   }
 

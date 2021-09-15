@@ -1,11 +1,9 @@
-import { LocalFileAdapter } from "./local-file-adapter"
-import { LibraryConfig } from "../../library"
-import { Module } from "../../module"
-import { ModuleLoader } from "../../module"
+import { LocalFileResource } from "./local-file-resource"
+import { LibraryConfig } from ".."
 import fs from "fs"
 import Path from "path"
 
-export class SingleFileAdapter extends LocalFileAdapter {
+export class SingleFileResource extends LocalFileResource {
   config: LibraryConfig
   path: string
 

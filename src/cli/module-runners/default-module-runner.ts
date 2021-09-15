@@ -1,14 +1,18 @@
 import { Library } from "../../library"
-import { FileAdapter } from "../../library/file-adapter"
+import { FileResource } from "../../library/file-resource"
 import { Logger } from "../logger"
 import { Runner } from "../runner"
 
 export class DefaultModuleRunner extends Runner {
   library: Library
-  files: FileAdapter
+  files: FileResource
   logger?: Logger
 
-  constructor(opts: { library: Library; files: FileAdapter; logger?: Logger }) {
+  constructor(opts: {
+    library: Library
+    files: FileResource
+    logger?: Logger
+  }) {
     super()
     this.library = opts.library
     this.files = opts.files

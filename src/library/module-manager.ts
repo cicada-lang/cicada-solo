@@ -1,11 +1,11 @@
 import { Library, LibraryConfig } from "../library"
 import { Module } from "../module"
 import { ModuleLoader } from "../module"
-import { FileAdapter } from "./file-adapter"
+import { FileResource } from "./file-resource"
 
 export class ModuleManager {
   library: Library
-  files: FileAdapter
+  files: FileResource
   cache: Map<string, Module> = new Map()
 
   constructor(opts: { library: Library }) {

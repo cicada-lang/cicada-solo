@@ -1,5 +1,5 @@
 import { Library } from "../../library"
-import { LocalFileAdapter } from "../../library/file-adapters"
+import { LocalFileResource } from "../../library/file-resources"
 import { Logger } from "../logger"
 import { Runner } from "../runner"
 import fs from "fs"
@@ -8,12 +8,12 @@ export class SnapshotModuleRunner extends Runner {
   static extensions = [".cic", ".md"]
 
   library: Library
-  files: LocalFileAdapter
+  files: LocalFileResource
   logger?: Logger
 
   constructor(opts: {
     library: Library
-    files: LocalFileAdapter
+    files: LocalFileResource
     logger?: Logger
   }) {
     super()

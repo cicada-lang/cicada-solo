@@ -1,5 +1,5 @@
 import { Library } from "../library"
-import { LocalFileAdapter } from "../library/file-adapters"
+import { LocalFileResource } from "../library/file-resources"
 import { Runner } from "./runner"
 import {
   SnapshotModuleRunner,
@@ -11,7 +11,7 @@ import { Logger } from "./logger"
 export function createModuleRunner(opts: {
   path: string
   library: Library
-  files: LocalFileAdapter
+  files: LocalFileResource
   logger?: Logger
 }): Runner {
   const { path } = opts

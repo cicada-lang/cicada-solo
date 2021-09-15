@@ -1,5 +1,5 @@
 import { Library } from "../../library"
-import { LocalFileAdapter } from "../../library/file-adapters"
+import { LocalFileResource } from "../../library/file-resources"
 import { ModuleLoader } from "../../module"
 import { createModuleRunner } from "../create-module-runner"
 import { Logger } from "../logger"
@@ -29,7 +29,7 @@ export const handler = async (argv: Argv) => {
       ? argv["library"]
       : argv["library"] + "/library.json"
     : process.cwd() + "/library.json"
-  const file_adapter = await LocalFileAdapter.from_config_file(config_file)
+  const file_adapter = await LocalFileResource.from_config_file(config_file)
   const library = new Library({ file_adapter })
   if (argv.watch) {
     await watch(library, file_adapter)
@@ -38,7 +38,10 @@ export const handler = async (argv: Argv) => {
   }
 }
 
-async function check(library: Library, files: LocalFileAdapter): Promise<void> {
+async function check(
+  library: Library,
+  files: LocalFileResource
+): Promise<void> {
   let errors: Array<unknown> = []
   for (const path of Object.keys(await files.all())) {
     const logger = new Logger({ tag: "check" })
@@ -54,7 +57,10 @@ async function check(library: Library, files: LocalFileAdapter): Promise<void> {
   }
 }
 
-async function watch(library: Library, files: LocalFileAdapter): Promise<void> {
+async function watch(
+  library: Library,
+  files: LocalFileResource
+): Promise<void> {
   const src_dir = Path.resolve(files.root_dir, files.config.src)
   const watcher = chokidar.watch(src_dir)
 

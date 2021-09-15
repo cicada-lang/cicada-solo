@@ -1,6 +1,6 @@
 import { Library } from "../../library"
-import { LocalFileAdapter } from "../../library/file-adapters"
-import { SingleFileAdapter } from "../../library/file-adapters"
+import { LocalFileResource } from "../../library/file-resources"
+import { SingleFileResource } from "../../library/file-resources"
 import { createModuleRunner } from "../create-module-runner"
 import find_up from "find-up"
 import Path from "path"
@@ -24,8 +24,8 @@ export const handler = async (argv: Argv) => {
   const dir = Path.dirname(path)
   const config_file = await find_up("library.json", { cwd: dir })
   const file_adapter = config_file
-    ? await LocalFileAdapter.from_config_file(config_file)
-    : new SingleFileAdapter({ path })
+    ? await LocalFileResource.from_config_file(config_file)
+    : new SingleFileResource({ path })
   const library = new Library({ file_adapter })
 
   const runner = createModuleRunner({ path, library, files: file_adapter })

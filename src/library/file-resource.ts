@@ -1,6 +1,6 @@
 import { ModuleLoader } from "../module"
 
-export abstract class FileAdapter {
+export abstract class FileResource {
   abstract list(): Promise<Array<string>>
 
   abstract get(path: string): Promise<string>
