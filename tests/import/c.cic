@@ -1,0 +1,8 @@
+import { a } from "./a.cic"
+import { b } from "./b.cic"
+
+c = "c"
+
+a
+b
+c
