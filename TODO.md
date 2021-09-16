@@ -1,5 +1,3 @@
-- improve error report on `library.json` schema error
-
 # implicit
 
 - `exps/pi/pi-im` -- be able to take pi-im
