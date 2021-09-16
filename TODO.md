@@ -1,12 +1,3 @@
-- use `pt.concise_report`
-
-- [refactor] `Reporter.error`
-
-- [refactor] relation between `Library`, `Module` and `ModuleLoader`
-
-  - if `Module` knows how to parse stmts, it must also knows the offset -- thus the text
-  - `FakeFileResource` should be able to be used as REPL history file
-
 # implicit
 
 - `exps/pi/pi-im` -- be able to take pi-im
@@ -38,6 +29,15 @@
 - `Value.occur` handle each case
 
 # use `unify` to replace `readback`
+
+# refactor
+
+- [refactor] `Reporter.error` -- take `path` or `text`?
+
+- [refactor] relation between `Library`, `Module` and `ModuleLoader`
+
+  - if `Module` knows how to parse stmts, it must also knows the offset -- thus the text
+  - `FakeFileResource` should be able to be used as REPL history file
 
 # error report
 
