@@ -1,8 +1,6 @@
-- remove `SingleFileResource` to `FakeFileResource`
-
 - be able to inject fake files in `FakeFileResource`
 
-- [repl] commit on "balance" -- use `ReplFileResource`
+- [repl] commit on "balance" -- use `FakeFileResource`
 
   - be able to use library config file
 

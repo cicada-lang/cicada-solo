@@ -1,6 +1,6 @@
 import { Library } from "../../library"
 import { LocalFileResource } from "../../library/file-resources"
-import { SingleFileResource } from "../../library/file-resources"
+import { FakeFileResource } from "../../library/file-resources"
 import { createRunner } from "../create-runner"
 import find_up from "find-up"
 import Path from "path"
@@ -30,7 +30,7 @@ export const handler = async (argv: Argv) => {
   const config = await find_up("library.json", { cwd: dir })
   const files = config
     ? await LocalFileResource.build(config)
-    : new SingleFileResource({ dir })
+    : new FakeFileResource({ dir })
   const library = new Library({ files })
 
   const runner = createRunner({ path, library, files })

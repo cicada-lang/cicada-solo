@@ -3,7 +3,7 @@ import { LibraryConfig } from ".."
 import fs from "fs"
 import Path from "path"
 
-export class SingleFileResource extends LocalFileResource {
+export class FakeFileResource extends LocalFileResource {
   config: LibraryConfig
   dir: string
 
