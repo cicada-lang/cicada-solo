@@ -1,3 +1,11 @@
+- no `date` in library.json
+
+- extract `repl` command
+
+- remove `SingleFileResource` to `FakeFileResource`
+
+- be able to inject fake files in `FakeFileResource`
+
 - [repl] commit on "balance" -- use `ReplFileResource`
 
   - be able to use library config file
@@ -86,7 +94,7 @@
 
 # core features
 
-- [requirement] support to use `let` to do local definitions in class
+- [requirement] support to use `=` to do local definitions in class
 - [optimization] use native `number` as `Nat`
 
 # syntax
@@ -95,7 +103,7 @@
   we need to improve the API of `@cicada-lang/partech`,
   to manage the complexity.
 
-- [maybe] as syntex to help "same-as" charts
+- [maybe] design syntex to help "same-as" charts
 - [maybe] explicit `apply` -- to help non-elim in syntex
 - [maybe] it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
   - this will not effect normalization, because `same(from)` and `same(to)` will always be definitional or computational equal.

@@ -5,11 +5,10 @@ import Path from "path"
 
 export class SingleFileResource extends LocalFileResource {
   config: LibraryConfig
-  path: string
+  dir: string
 
-  constructor(opts: { path: string }) {
-    const path = Path.resolve(opts.path)
-    const dir = Path.dirname(path)
+  constructor(opts: { dir: string }) {
+    const dir = Path.resolve(opts.dir)
     const config = LibraryConfig.create({
       name: "single-file-library",
       date: new Date().toLocaleDateString(),
@@ -17,16 +16,16 @@ export class SingleFileResource extends LocalFileResource {
 
     super({ root_dir: dir, config })
 
-    this.path = path
+    this.dir = dir
     this.config = config
   }
 
   async list(): Promise<Array<string>> {
-    return [this.path]
+    return []
   }
 
   async get(path: string): Promise<string> {
-    const resolved_path = Path.resolve(Path.dirname(this.path), path)
+    const resolved_path = Path.resolve(this.dir, path)
     return fs.readFileSync(resolved_path, { encoding: "utf-8" })
   }
 }

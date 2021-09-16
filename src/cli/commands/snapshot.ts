@@ -30,7 +30,7 @@ export const handler = async (argv: Argv) => {
   const config = await find_up("library.json", { cwd: dir })
   const files = config
     ? await LocalFileResource.build(config)
-    : new SingleFileResource({ path })
+    : new SingleFileResource({ dir })
   const library = new Library({ files })
 
   const runner = createRunner({ path, library, files })

@@ -1,6 +1,9 @@
-import Readline from "readline"
+import { Library } from "../../library"
+import { DefaultRunner } from "../runners"
 import pt from "@cicada-lang/partech"
-const pkg = require("../../package.json")
+const pkg = require("../../../package.json")
+import Readline from "readline"
+import { ReplFileResource } from "./repl-file-resource"
 
 export class Repl {
   rl = Readline.createInterface({
@@ -9,6 +12,8 @@ export class Repl {
   })
 
   lines: Array<string> = []
+
+  files = new ReplFileResource()
 
   constructor() {
     this.listen()
@@ -24,8 +29,16 @@ export class Repl {
 
   prompt(): void {
     const depth = pt.lexers.common.parens_depth(this.text)
-    this.rl.setPrompt(createPrompt(depth))
+    this.rl.setPrompt(this.createPrompt(depth))
     this.rl.prompt()
+  }
+
+  private createPrompt(depth: number): string {
+    if (depth === 0) {
+      return "> "
+    } else {
+      return "." + "..".repeat(depth) + " "
+    }
   }
 
   run(): void {
@@ -34,7 +47,7 @@ export class Repl {
   }
 
   private listen(): void {
-    this.rl.on("line", (line) => {
+    this.rl.on("line", async (line) => {
       const text = this.text + "\n" + line + "\n"
       const result = pt.lexers.common.parens_check(text)
       if (result.kind === "lack") {
@@ -42,7 +55,13 @@ export class Repl {
         this.lines.push(line)
       } else if (result.kind === "balance") {
         // NOTE commit
-        console.log(text)
+        const path = "TODO"
+        const library = new Library({ files: this.files })
+        const runner = new DefaultRunner({ library, files: this.files })
+        const { error } = await runner.run(path)
+        if (error) {
+          // TODO
+        }
         this.lines = []
       } else {
         // NOTE report error
@@ -55,13 +74,5 @@ export class Repl {
 
       this.prompt()
     })
-  }
-}
-
-function createPrompt(depth: number): string {
-  if (depth === 0) {
-    return "> "
-  } else {
-    return "." + "..".repeat(depth) + " "
   }
 }
