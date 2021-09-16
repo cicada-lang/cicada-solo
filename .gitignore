@@ -1,6 +1,9 @@
 # typescript
 lib
 
+# pkg
+dist
+
 # npm
 node_modules
 

@@ -11,6 +11,9 @@
     "watch": "tsc --watch",
     "format": "prettier src --write",
     "test": "./dev t",
+    "dist:linux": "pkg --output dist/cic package.json --target linux",
+    "dist:macos": "pkg --output dist/cic-macos package.json --target macos",
+    "dist:win": "pkg --output dist/cic-win.exe package.json --target win",
     "vercel-build": "npm run build && npm run test"
   },
   "prettier": {
