@@ -3,7 +3,7 @@
 ## Install
 
 ```
-npm i @cicada-lang/cicada -g
+npm i -g @cicada-lang/cicada
 ```
 
 ## Usage
