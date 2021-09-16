@@ -4,8 +4,6 @@
 
   - be able to use library config file
 
-- [bug] report circular import error
-
 # implicit
 
 - `exps/pi/pi-im` -- be able to take pi-im

@@ -1,0 +1,2 @@
+I can not do circular import.
+  path: /home/xyh/cicada-lang/cicada/tests/import/circular-import.error.cic

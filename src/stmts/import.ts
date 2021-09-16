@@ -18,16 +18,22 @@ export class Import implements Stmt {
   }
 
   async execute(mod: Module): Promise<void> {
-    const imported_mod = await mod.library
-      .load(resolve_path(mod.path, this.path))
-      .catch((error) => {
-        throw new Trace(
-          [
-            `I fail to import from path: ${this.path}`,
-            `because there are errors in that module.`,
-          ].join("\n")
-        )
-      })
+    const path = resolve_path(mod.path, this.path)
+    if (path === mod.path) {
+      throw new Trace([
+        `I can not do circular import.`,
+        `  path: ${path}`
+      ].join("\n"))
+    }
+
+    const imported_mod = await mod.library.load(path).catch((error) => {
+      throw new Trace(
+        [
+          `I fail to import from path: ${this.path}`,
+          `because there are errors in that module.`,
+        ].join("\n")
+      )
+    })
 
     for (const { name, alias } of this.entries) {
       const t = imported_mod.ctx.lookup_type(name)
