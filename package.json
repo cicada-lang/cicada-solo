@@ -36,7 +36,7 @@
     "typescript": "^4.4.3"
   },
   "dependencies": {
-    "@cicada-lang/partech": "^0.1.8",
+    "@cicada-lang/partech": "^0.1.9",
     "@types/deep-diff": "^1.0.1",
     "@xieyuheng/test-runner": "^0.1.23",
     "@xieyuheng/ty": "^0.1.4",

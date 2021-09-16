@@ -1,4 +1,5 @@
-- [repl] with the help of nodejs `readline`
+- [repl] error report on "mismatch" and "excess"
+- [repl] commit on "balance"
 
 # implicit
 

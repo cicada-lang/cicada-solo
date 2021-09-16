@@ -15,12 +15,34 @@ export class Repl {
 
     rl.prompt()
     rl.on("line", (line) => {
-      lines.push(line)
-      const text = lines.join("\n") + "\n"
-      const result = pt.lexers.common.check_parentheses(text)
-      console.log(result)
-      // TODO
-      rl.prompt()
+      const text = [...lines, line].join("\n")
+      const result = pt.lexers.common.parens_check(text)
+      if (result.kind === "lack") {
+        // NOTE save
+        lines.push(line)
+      } else if (result.kind === "balance") {
+        // NOTE commit
+        console.log(text)
+        lines = []
+      } else {
+        // NOTE report error
+        console.log(result)
+        lines = []
+      }
+
+      {
+        const depth = pt.lexers.common.parens_depth(lines.join("\n"))
+        rl.setPrompt(createPrompt(depth))
+        rl.prompt()
+      }
     })
+  }
+}
+
+function createPrompt(depth: number): string {
+  if (depth === 0) {
+    return "> "
+  } else {
+    return "." + "..".repeat(depth) + " "
   }
 }
