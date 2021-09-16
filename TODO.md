@@ -1,4 +1,3 @@
-- [repl] use `pt.lexers.common.check_parentheses`
 - [repl] with the help of nodejs `readline`
 
 # implicit
