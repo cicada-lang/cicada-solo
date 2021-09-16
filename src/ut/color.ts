@@ -12,7 +12,7 @@ export function color(
 ): string {
   switch (opts.mode) {
     case "escape-code": {
-      if (opts.color === "red") text = chalk.bold.red(text)
+      if (opts.color === "red") text = chalk.red(text)
       if (opts.background === "red") text = chalk.bgRed(text)
       return text
     }

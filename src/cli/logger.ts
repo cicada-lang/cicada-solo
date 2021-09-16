@@ -13,9 +13,9 @@ export class Logger {
   }
 
   info(msg: string): void {
-    const time = chalk.green.bold(`[${ut.format_time(new Date())}]`)
+    const time = chalk.green(`[${ut.format_time(new Date())}]`)
     if (this.tag) {
-      const tag = chalk.bold(`(${this.tag})`)
+      const tag = chalk(`(${this.tag})`)
       console.log(tag, time, msg)
     } else {
       console.log(time, msg)
@@ -23,9 +23,9 @@ export class Logger {
   }
 
   error(msg: string): void {
-    const time = chalk.red.bold(`[${ut.format_time(new Date())}]`)
+    const time = chalk.red(`[${ut.format_time(new Date())}]`)
     if (this.tag) {
-      const tag = chalk.bold(`(${this.tag})`)
+      const tag = chalk(`(${this.tag})`)
       console.log(tag, time, msg)
     } else {
       console.log(time, msg)
