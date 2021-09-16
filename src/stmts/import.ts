@@ -27,14 +27,16 @@ export class Import implements Stmt {
 
     const imported_mod = await mod.library.load(path)
 
-    await imported_mod.run().catch((error) => {
+    try {
+      await imported_mod.run()
+    } catch (error) {
       throw new Trace(
         [
           `I fail to import from path: ${this.path}`,
           `because there are errors in that module.`,
         ].join("\n")
       )
-    })
+    }
 
     for (const { name, alias } of this.entries) {
       const t = imported_mod.ctx.lookup_type(name)
