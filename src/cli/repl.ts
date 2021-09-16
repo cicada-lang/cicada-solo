@@ -3,7 +3,7 @@ import pt from "@cicada-lang/partech"
 const pkg = require("../../package.json")
 
 export class Repl {
-  run(): void {
+  async run(): Promise<void> {
     const rl = Readline.createInterface({
       input: process.stdin,
       output: process.stdout,
@@ -26,7 +26,10 @@ export class Repl {
         lines = []
       } else {
         // NOTE report error
-        console.log(result)
+        const report = pt.report(result.token.span, text)
+        console.error()
+        console.error(`Parentheses error: ${result.kind}`)
+        console.error(report)
         lines = []
       }
 

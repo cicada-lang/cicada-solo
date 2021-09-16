@@ -19,7 +19,8 @@ type Argv = {
 export const handler = async (argv: Argv) => {
   if (argv["file"] === undefined) {
     const repl = new Repl()
-    return repl.run()
+    await repl.run()
+    return
   }
 
   if (!fs.existsSync(argv["file"])) {

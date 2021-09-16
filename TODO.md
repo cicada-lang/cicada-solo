@@ -1,5 +1,5 @@
-- [repl] error report on "mismatch" and "excess"
 - [repl] commit on "balance"
+- [repl] be able to use library config file
 
 # implicit
 
