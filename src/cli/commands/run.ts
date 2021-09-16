@@ -6,6 +6,7 @@ import { Repl } from "../repl"
 import find_up from "find-up"
 import Path from "path"
 import fs from "fs"
+import { handler as repl_handler } from "./repl"
 
 export const aliases = ["$0"]
 export const command = "run [file]"
@@ -18,8 +19,7 @@ type Argv = {
 
 export const handler = async (argv: Argv) => {
   if (argv["file"] === undefined) {
-    const repl = new Repl()
-    await repl.run()
+    await repl_handler(argv)
     return
   }
 

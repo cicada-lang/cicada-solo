@@ -1,5 +1,3 @@
-- extract `repl` command
-
 - remove `SingleFileResource` to `FakeFileResource`
 
 - be able to inject fake files in `FakeFileResource`
