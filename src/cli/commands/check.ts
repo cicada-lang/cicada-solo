@@ -31,6 +31,9 @@ export const handler = async (argv: Argv) => {
     : process.cwd() + "/library.json"
   const files = await LocalFileResource.build(config)
   const library = new Library({ files })
+
+  console.log(library.info())
+
   if (argv.watch) {
     await watch(library, files)
   } else {

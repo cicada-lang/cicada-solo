@@ -1,5 +1,3 @@
-- `check` command print library name
-
 - extract `repl` command
 
 - remove `SingleFileResource` to `FakeFileResource`

@@ -1,6 +1,9 @@
 import { ModuleLoader } from "../module"
+import { LibraryConfig } from "./library-config"
 
 export abstract class FileResource {
+  abstract config: LibraryConfig
+
   abstract list(): Promise<Array<string>>
 
   abstract get(path: string): Promise<string>

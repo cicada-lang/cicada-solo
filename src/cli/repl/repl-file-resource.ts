@@ -9,6 +9,10 @@ export class ReplFileResource extends FileResource {
     super()
   }
 
+  get config(): LibraryConfig {
+    throw new Error()
+  }
+
   async get(path: string): Promise<string> {
     throw new Error()
   }
