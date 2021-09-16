@@ -1,5 +1,6 @@
-- [repl] commit on "balance"
-- [repl] be able to use library config file
+- [repl] commit on "balance" -- use `ReplFileResource`
+
+  - be able to use library config file
 
 # implicit
 
