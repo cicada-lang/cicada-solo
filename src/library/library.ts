@@ -32,11 +32,11 @@ export class Library {
   }
 
   info(): string {
-    // prettier-ignore
     return [
       ``,
       `library:`,
       `  name: ${this.config.name}`,
+      `  version: TODO`,
       ``,
     ].join("\n")
   }

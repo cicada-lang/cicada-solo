@@ -7,14 +7,17 @@ import find_up from "find-up"
 import Path from "path"
 import fs from "fs"
 
-export const command = "repl"
+export const command = "repl [dir]"
 export const description = "Run interactive REPL"
 export const builder = {}
 
-type Argv = {}
+type Argv = {
+  dir?: string
+}
 
 export const handler = async (argv: Argv) => {
-  const repl = new Repl()
+  const dir = argv["dir"] || process.cwd()
+  const repl = new Repl({ dir })
   await repl.run()
   return
 }

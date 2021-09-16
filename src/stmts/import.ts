@@ -20,10 +20,9 @@ export class Import implements Stmt {
   async execute(mod: Module): Promise<void> {
     const path = resolve_path(mod.path, this.path)
     if (path === mod.path) {
-      throw new Trace([
-        `I can not do circular import.`,
-        `  path: ${path}`
-      ].join("\n"))
+      throw new Trace(
+        [`I can not do circular import.`, `  path: ${path}`].join("\n")
+      )
     }
 
     const imported_mod = await mod.library.load(path).catch((error) => {

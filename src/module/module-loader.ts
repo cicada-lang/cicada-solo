@@ -23,7 +23,10 @@ export abstract class ModuleLoader {
     }
 
     throw new Error(
-      `When try to create doc from file, I met path with unknown ext: ${path}`
+      [
+        `When try to create ModuleLoader, I met unknown ext.`,
+        `  path: ${path}`,
+      ].join("\n")
     )
   }
 

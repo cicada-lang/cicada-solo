@@ -1,21 +1,37 @@
 import { Library } from "../../library"
+import { FakeFileResource } from "../../library/file-resources"
 import { DefaultRunner } from "../runners"
 import pt from "@cicada-lang/partech"
 const pkg = require("../../../package.json")
 import Readline from "readline"
-import { ReplFileResource } from "./repl-file-resource"
+import { customAlphabet } from "nanoid"
+const nanoid = customAlphabet("1234567890abcdef", 16)
 
 export class Repl {
   rl = Readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   })
-
   lines: Array<string> = []
+  files: FakeFileResource
+  library: Library
+  runner: DefaultRunner
+  path: string
 
-  files = new ReplFileResource()
+  constructor(opts: { dir: string }) {
+    this.path = `repl-file-${nanoid()}.cic`
+    this.files = new FakeFileResource({
+      dir: opts.dir,
+      faked: {
+        [this.path]: "",
+      },
+    })
+    this.library = new Library({ files: this.files })
+    this.runner = new DefaultRunner({
+      library: this.library,
+      files: this.files,
+    })
 
-  constructor() {
     this.listen()
   }
 
@@ -55,12 +71,11 @@ export class Repl {
         this.lines.push(line)
       } else if (result.kind === "balance") {
         // NOTE commit
-        const path = "TODO"
-        const library = new Library({ files: this.files })
-        const runner = new DefaultRunner({ library, files: this.files })
-        const { error } = await runner.run(path)
+        this.files.faked[this.path] += "\n" + text
+        const { error } = await this.runner.run(this.path)
         if (error) {
           // TODO
+          // console.log(error)
         }
         this.lines = []
       } else {

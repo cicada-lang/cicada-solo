@@ -1,4 +1,4 @@
-- be able to inject fake files in `FakeFileResource`
+- `library.load` should not call `mod.run`
 
 - [repl] commit on "balance" -- use `FakeFileResource`
 

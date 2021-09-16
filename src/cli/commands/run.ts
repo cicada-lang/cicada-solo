@@ -19,7 +19,7 @@ type Argv = {
 
 export const handler = async (argv: Argv) => {
   if (argv["file"] === undefined) {
-    await repl_handler(argv)
+    await repl_handler({ dir: process.cwd() })
     return
   }
 
