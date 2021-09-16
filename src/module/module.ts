@@ -50,10 +50,23 @@ export class Module {
     this.index++
   }
 
-  async run(): Promise<void> {
+  undo(index: number): void {
+    this.index = index
+    this.entries = this.entries.slice(0, index)
+  }
+
+  async run(): Promise<string> {
+    let s = ""
     while (!this.end_p()) {
       await this.step()
+      const entry = this.entries[this.index - 1]
+
+      if (entry && entry.output) {
+        s += entry.output + "\n"
+      }
     }
+
+    return s
   }
 
   output(output: string): void {

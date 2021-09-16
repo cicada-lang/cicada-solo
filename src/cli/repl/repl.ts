@@ -6,11 +6,12 @@ import Readline from "readline"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
 
+const rl = Readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+})
+
 export class Repl {
-  rl = Readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  })
   lines: Array<string> = []
   files: FakeFileResource
   library: Library
@@ -38,8 +39,8 @@ export class Repl {
 
   prompt(): void {
     const depth = pt.lexers.common.parens_depth(this.text)
-    this.rl.setPrompt(this.createPrompt(depth))
-    this.rl.prompt()
+    rl.setPrompt(this.createPrompt(depth))
+    rl.prompt()
   }
 
   private createPrompt(depth: number): string {
@@ -55,30 +56,67 @@ export class Repl {
     this.prompt()
   }
 
+  private async commit(text: string): Promise<void> {
+    const mod = await this.library.load(this.path)
+    const index = mod.index
+    mod.append(text)
+    try {
+      const output = await mod.run()
+      console.log(output)
+    } catch (error) {
+      const report = await this.library.reporter.error(error, this.path)
+      console.error(report)
+      mod.undo(index)
+    }
+
+    // NOTE For repl history.
+    this.files.faked[this.path] += text
+  }
+
   private listen(): void {
-    this.rl.on("line", async (line) => {
+    rl.on("line", async (line) => {
       const text = this.text + "\n" + line + "\n"
       const result = pt.lexers.common.parens_check(text)
+
       if (result.kind === "lack") {
-        // NOTE save
         this.lines.push(line)
-      } else if (result.kind === "balance") {
-        // NOTE commit
-        this.files.faked[this.path] += text
-        const mod = await this.library.load(this.path)
-        mod.append(text)
-        await mod.run()
-        this.lines = []
       } else {
-        // NOTE report error
-        const report = pt.report(result.token.span, text)
-        console.error()
-        console.error(`Parentheses error: ${result.kind}`)
-        console.error(report)
         this.lines = []
+      }
+
+      if (result.kind === "balance") {
+        await this.commit(text)
+      }
+
+      if (result.kind === "mismatch") {
+        this.log_parens_error({
+          msg: "Parentheses mismatch",
+          token: result.token,
+          text,
+        })
+      }
+
+      if (result.kind === "excess") {
+        this.log_parens_error({
+          msg: "Parentheses mismatch",
+          token: result.token,
+          text,
+        })
       }
 
       this.prompt()
     })
+  }
+
+  private log_parens_error(opts: {
+    msg: string
+    token: pt.Token
+    text: string
+  }): void {
+    const { msg, token, text } = opts
+
+    console.error()
+    console.error(`${msg}:`)
+    console.error(pt.report(token.span, text))
   }
 }

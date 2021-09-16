@@ -1,9 +1,3 @@
-- `Module.run` return `output`
-
-- [repl] commit on "balance" -- use `FakeFileResource`
-
-  - be able to use library config file
-
 - `library.json` has `version` -- use `ty.version()` -- fix `library.info()`
 
 # implicit
