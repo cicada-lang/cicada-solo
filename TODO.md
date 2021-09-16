@@ -1,4 +1,4 @@
-- no `date` in library.json
+- `check` command print library name
 
 - extract `repl` command
 

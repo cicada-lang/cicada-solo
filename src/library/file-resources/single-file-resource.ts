@@ -11,7 +11,6 @@ export class SingleFileResource extends LocalFileResource {
     const dir = Path.resolve(opts.dir)
     const config = LibraryConfig.create({
       name: "single-file-library",
-      date: new Date().toLocaleDateString(),
     })
 
     super({ root_dir: dir, config })
