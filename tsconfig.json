@@ -6,6 +6,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "declaration": true,
     "strict": true,
     "outDir": "lib",

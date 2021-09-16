@@ -1,7 +1,5 @@
-- [repl] with the help of nodejs repl
-
-  - https://nodejs.org/api/repl.html
-  - https://blog.logrocket.com/creating-custom-repl-node-js
+- [repl] use `pt.lexers.common.check_parentheses`
+- [repl] with the help of nodejs `readline`
 
 # implicit
 
