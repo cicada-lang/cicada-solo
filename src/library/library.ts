@@ -34,7 +34,7 @@ export class Library {
       ``,
       `library:`,
       `  name: ${this.config.name}`,
-      `  version: TODO`,
+      `  version: ${this.config.version}`,
       ``,
     ].join("\n")
   }

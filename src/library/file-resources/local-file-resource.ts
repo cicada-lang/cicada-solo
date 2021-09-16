@@ -1,5 +1,5 @@
 import { FileResource } from "../file-resource"
-import { LibraryConfig } from ".."
+import { LibraryConfig, libraryConfigSchema } from ".."
 import Path from "path"
 import fs from "fs"
 import readdirp from "readdirp"
@@ -18,7 +18,7 @@ export class LocalFileResource extends FileResource {
     const text = await fs.promises.readFile(file, "utf8")
     return new LocalFileResource({
       root_dir: Path.dirname(file),
-      config: new LibraryConfig(JSON.parse(text)),
+      config: libraryConfigSchema.validate(JSON.parse(text)),
     })
   }
 

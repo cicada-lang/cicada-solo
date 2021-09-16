@@ -6,12 +6,12 @@ import Readline from "readline"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
 
-const rl = Readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-})
 
 export class Repl {
+  rl = Readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  })
   lines: Array<string> = []
   files: FakeFileResource
   library: Library
@@ -39,8 +39,8 @@ export class Repl {
 
   prompt(): void {
     const depth = pt.lexers.common.parens_depth(this.text)
-    rl.setPrompt(this.createPrompt(depth))
-    rl.prompt()
+    this.rl.setPrompt(this.createPrompt(depth))
+    this.rl.prompt()
   }
 
   private createPrompt(depth: number): string {
@@ -74,7 +74,7 @@ export class Repl {
   }
 
   private listen(): void {
-    rl.on("line", async (line) => {
+    this.rl.on("line", async (line) => {
       const text = this.text + "\n" + line + "\n"
       const result = pt.lexers.common.parens_check(text)
 

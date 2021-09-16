@@ -39,7 +39,7 @@
     "@cicada-lang/partech": "^0.1.9",
     "@types/deep-diff": "^1.0.1",
     "@xieyuheng/test-runner": "^0.1.23",
-    "@xieyuheng/ty": "^0.1.4",
+    "@xieyuheng/ty": "^0.1.5",
     "chalk": "^4.1.2",
     "change-case": "^4.1.2",
     "chokidar": "^3.5.2",

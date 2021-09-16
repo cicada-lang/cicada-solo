@@ -1,4 +1,4 @@
-- `library.json` has `version` -- use `ty.version()` -- fix `library.info()`
+- improve error report on `library.json` schema error
 
 # implicit
 
