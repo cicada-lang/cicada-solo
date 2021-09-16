@@ -4,6 +4,8 @@
 
   - be able to use library config file
 
+- `library.json` has `version` -- use `ty.version()` -- fix `library.info()`
+
 # implicit
 
 - `exps/pi/pi-im` -- be able to take pi-im

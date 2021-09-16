@@ -2,6 +2,7 @@ import { LocalFileResource } from "./local-file-resource"
 import { LibraryConfig } from ".."
 import fs from "fs"
 import Path from "path"
+import { customAlphabet } from "nanoid"
 
 export class FakeFileResource extends LocalFileResource {
   config: LibraryConfig
@@ -9,8 +10,9 @@ export class FakeFileResource extends LocalFileResource {
 
   constructor(opts: { dir: string }) {
     const dir = Path.resolve(opts.dir)
+    const nanoid = customAlphabet("1234567890abcdef", 16)
     const config = LibraryConfig.create({
-      name: "single-file-library",
+      name: `<fake-library-${nanoid()}>`,
     })
 
     super({ root_dir: dir, config })
