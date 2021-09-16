@@ -10,7 +10,7 @@ export class MarkdownModuleLoader extends ModuleLoader {
     const stmts = code_blocks(text).flatMap((code_block) =>
       Syntax.parse_stmts(code_block.text, code_block.offset)
     )
-    return new Module({ library, path, text, stmts })
+    return new Module({ library, path, stmts })
   }
 }
 

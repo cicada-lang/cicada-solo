@@ -19,21 +19,14 @@ interface ModuleEntry {
 export class Module {
   library: Library
   path: string
-  text: string
   entries: Array<ModuleEntry>
   index: number = 0
   env: Env = Env.empty
   ctx: Ctx = Ctx.empty
 
-  constructor(opts: {
-    library: Library
-    path: string
-    text: string
-    stmts: Array<Stmt>
-  }) {
+  constructor(opts: { library: Library; path: string; stmts: Array<Stmt> }) {
     this.library = opts.library
     this.path = opts.path
-    this.text = opts.text
     this.entries = opts.stmts.map((stmt) => ({ stmt }))
   }
 

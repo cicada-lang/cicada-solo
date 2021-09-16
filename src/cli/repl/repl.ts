@@ -71,7 +71,8 @@ export class Repl {
         this.lines.push(line)
       } else if (result.kind === "balance") {
         // NOTE commit
-        this.files.faked[this.path] += "\n" + text
+        this.files.faked[this.path] += text
+        const mod = await this.library.load(this.path)
         const { error } = await this.runner.run(this.path)
         if (error) {
           // TODO
