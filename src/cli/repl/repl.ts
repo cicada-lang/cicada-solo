@@ -73,11 +73,8 @@ export class Repl {
         // NOTE commit
         this.files.faked[this.path] += text
         const mod = await this.library.load(this.path)
-        const { error } = await this.runner.run(this.path)
-        if (error) {
-          // TODO
-          // console.log(error)
-        }
+        mod.append(text)
+        await mod.run()
         this.lines = []
       } else {
         // NOTE report error

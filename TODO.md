@@ -1,4 +1,4 @@
-- be able to append `stmts` to `module`
+- `Module.run` return `output`
 
 - [repl] commit on "balance" -- use `FakeFileResource`
 

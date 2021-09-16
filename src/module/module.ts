@@ -2,6 +2,7 @@ import { Library } from "../library"
 import { Stmt } from "../stmt"
 import { Env } from "../env"
 import { Ctx } from "../ctx"
+import * as Syntax from "../syntax"
 
 // NOTE
 // - A module belongs to a library.
@@ -32,6 +33,11 @@ export class Module {
 
   get stmts(): Array<Stmt> {
     return this.entries.map((entry) => entry.stmt)
+  }
+
+  append(text: string): void {
+    const stmts = Syntax.parse_stmts(text)
+    this.entries.push(...stmts.map((stmt) => ({ stmt })))
   }
 
   end_p(): boolean {
