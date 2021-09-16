@@ -19,6 +19,8 @@ cic snapshot <file>  Snapshot a file -- write to <file>.out
 
 ### Cicada Studyroom
 
+(Not up to date)
+
 - Visit: [cicada-studyroom.vercel.app](https://cicada-studyroom.vercel.app)
 - Project: [cicada-lang/cicada-studyroom](https://github.com/cicada-lang/cicada-studyroom)
 
