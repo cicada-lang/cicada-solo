@@ -35,9 +35,10 @@ export class Module {
     return this.entries.map((entry) => entry.stmt)
   }
 
-  append(text: string): void {
+  append(text: string): this {
     const stmts = Syntax.parse_stmts(text)
     this.entries.push(...stmts.map((stmt) => ({ stmt })))
+    return this
   }
 
   end_p(): boolean {

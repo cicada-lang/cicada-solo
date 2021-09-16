@@ -6,7 +6,6 @@ import Readline from "readline"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
 
-
 export class Repl {
   rl = Readline.createInterface({
     input: process.stdin,
@@ -21,9 +20,7 @@ export class Repl {
     this.path = `repl-file-${nanoid()}.cic`
     this.files = new FakeFileResource({
       dir: opts.dir,
-      faked: {
-        [this.path]: "",
-      },
+      faked: { [this.path]: "" },
     })
     this.library = new Library({ files: this.files })
     this.listen()
@@ -59,12 +56,14 @@ export class Repl {
   private async commit(text: string): Promise<void> {
     const mod = await this.library.load(this.path)
     const index = mod.index
-    mod.append(text)
+
     try {
-      const output = await mod.run()
+      const output = await mod.append(text).run()
       console.log(output)
     } catch (error) {
-      const report = await this.library.reporter.error(error, this.path)
+      const report = await this.library.reporter.error(error, this.path, {
+        text,
+      })
       console.error(report)
       mod.undo(index)
     }
@@ -75,7 +74,8 @@ export class Repl {
 
   private listen(): void {
     this.rl.on("line", async (line) => {
-      const text = this.text + "\n" + line + "\n"
+      const text = (this.text + "\n" + line).trim()
+
       const result = pt.lexers.common.parens_check(text)
 
       if (result.kind === "lack") {

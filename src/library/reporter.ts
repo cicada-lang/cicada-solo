@@ -9,11 +9,15 @@ export class Reporter {
     this.files = opts.files
   }
 
-  async error(error: unknown, path: string): Promise<string> {
+  async error(
+    error: unknown,
+    path: string,
+    opts?: { text?: string }
+  ): Promise<string> {
     if (error instanceof Trace) {
       return error.repr((exp) => exp.repr())
     } else if (error instanceof pt.ParsingError) {
-      const text = await this.files.get(path)
+      const text = opts?.text || (await this.files.get(path))
       if (!text) {
         return `Unknown path: ${path}`
       } else {
