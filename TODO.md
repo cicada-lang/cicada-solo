@@ -1,4 +1,4 @@
-- `library.load` should not call `mod.run`
+- be able to append `stmts` to `module`
 
 - [repl] commit on "balance" -- use `FakeFileResource`
 

@@ -25,7 +25,9 @@ export class Import implements Stmt {
       )
     }
 
-    const imported_mod = await mod.library.load(path).catch((error) => {
+    const imported_mod = await mod.library.load(path)
+
+    await imported_mod.run().catch((error) => {
       throw new Trace(
         [
           `I fail to import from path: ${this.path}`,

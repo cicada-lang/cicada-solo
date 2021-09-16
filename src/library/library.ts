@@ -21,8 +21,6 @@ export class Library {
     }
 
     const mod = await ModuleLoader.load(this, path)
-    await mod.run()
-
     this.cache.set(path, mod)
     return mod
   }
