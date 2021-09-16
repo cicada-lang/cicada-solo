@@ -1,6 +1,5 @@
 import { Library } from "../../library"
 import { FakeFileResource } from "../../library/file-resources"
-import { DefaultRunner } from "../runners"
 import pt from "@cicada-lang/partech"
 const pkg = require("../../../package.json")
 import Readline from "readline"
@@ -15,7 +14,6 @@ export class Repl {
   lines: Array<string> = []
   files: FakeFileResource
   library: Library
-  runner: DefaultRunner
   path: string
 
   constructor(opts: { dir: string }) {
@@ -27,11 +25,6 @@ export class Repl {
       },
     })
     this.library = new Library({ files: this.files })
-    this.runner = new DefaultRunner({
-      library: this.library,
-      files: this.files,
-    })
-
     this.listen()
   }
 
