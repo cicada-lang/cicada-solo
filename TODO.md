@@ -1,3 +1,8 @@
+- [repl] with the help of nodejs repl
+
+  - https://nodejs.org/api/repl.html
+  - https://blog.logrocket.com/creating-custom-repl-node-js
+
 # implicit
 
 - `exps/pi/pi-im` -- be able to take pi-im
