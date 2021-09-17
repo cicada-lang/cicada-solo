@@ -391,7 +391,7 @@ export function binding_entry_matcher(tree: pt.Tree): {
       names: [pt.str(name)],
       exp: exp_matcher(exp),
     }),
-    "binding_entry:given_named": ({ name, exp }) => ({
+    "binding_entry:implicit_named": ({ name, exp }) => ({
       given: true,
       names: [pt.str(name)],
       exp: exp_matcher(exp),
@@ -423,7 +423,7 @@ export function name_entry_matcher(tree: pt.Tree): {
       given: false,
       name: pt.str(name),
     }),
-    "name_entry:given_name_entry": ({ name }) => ({
+    "name_entry:implicit_name_entry": ({ name }) => ({
       given: true,
       name: pt.str(name),
     }),
@@ -460,7 +460,7 @@ export function arg_entry_matcher(tree: pt.Tree): {
       given: false,
       exp: exp_matcher(exp),
     }),
-    "arg_entry:given_arg_entry": ({ exp }) => ({
+    "arg_entry:implicit_arg_entry": ({ exp }) => ({
       given: true,
       exp: exp_matcher(exp),
     }),

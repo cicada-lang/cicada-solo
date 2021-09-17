@@ -339,7 +339,7 @@ export const binding_entry = {
   $grammar: {
     "binding_entry:nameless": [{ exp: "exp" }],
     "binding_entry:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
-    "binding_entry:given_named": [
+    "binding_entry:implicit_named": [
       '"{"',
       { name: "identifier" },
       '":"',
@@ -369,7 +369,7 @@ export const names = {
 export const name_entry = {
   $grammar: {
     "name_entry:name_entry": [{ name: "identifier" }],
-    "name_entry:given_name_entry": [
+    "name_entry:implicit_name_entry": [
       '"implicit"',
       '"{"',
       { name: "identifier" },
@@ -401,7 +401,7 @@ export const args = {
 export const arg_entry = {
   $grammar: {
     "arg_entry:arg_entry": [{ exp: "exp" }],
-    "arg_entry:given_arg_entry": [
+    "arg_entry:implicit_arg_entry": [
       '"implicit"',
       '"{"',
       { name: "identifier" },
