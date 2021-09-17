@@ -54,14 +54,14 @@ k2_t = (
 
 k2_t
 
-k2(
-  given A: Type,
-  given B: Type,
-  x: A,
-  y: B,
-): A {
-  x
-}
+// k2(
+//   given A: Type,
+//   given B: Type,
+//   x: A,
+//   y: B,
+// ): A {
+//   x
+// }
 
 // k2(given Nat, given Nat, 100, 101)
 ```
