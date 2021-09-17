@@ -1,7 +1,5 @@
 # implicit
 
-- `im-pi/`
-
 - `im-pi-insertion` -- `based_on` as type guard
 
 - [refactor] `ap` -- apply
