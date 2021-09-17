@@ -54,10 +54,7 @@ export class PiValue extends Value {
 
   unify(subst: Subst, that: Value): Subst {
     if (that instanceof Exps.PiValue) {
-      // console.log({ this: this.arg_t, that: that.arg_t })
-      // console.log({ subst })
       subst = subst.unify(this.arg_t, that.arg_t)
-      // console.log({ subst })
       if (Subst.failure_p(subst)) return subst
       const names = new Set([
         ...subst.names,
