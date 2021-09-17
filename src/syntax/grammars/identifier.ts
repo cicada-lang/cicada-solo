@@ -8,6 +8,7 @@ const preserved = [
   "the",
   "is",
   "given",
+  "implicit",
   // built-in
   "cons",
   "car",

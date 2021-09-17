@@ -1,12 +1,17 @@
 # implicit
 
-- use `{ }` for implicit function syntax -- instead of `give`
-
-- `ap-im` -- named argument
+- use `{ }` for implicit pi syntax -- instead of `give`
 - use `implicit { }` for implicit application syntax -- instead of `give`
+- use `implicit { }` for implicit function syntax -- instead of `give`
 
 - `pi-im` implicit argument should always be a record
+- `pi-im` syntax for implicit argument record
+
+- `ap-im` implicit argument should always be a record
+- `ap-im` syntax for implicit argument record
+
 - `fn-im` implicit argument should always be a record
+- `fn-im` syntax for implicit argument record
 
 - refactor interface about `solve`
 
