@@ -55,66 +55,82 @@ export class Ap extends Exp {
     }
   }
 
+  private infer_for_pi(
+    ctx: Ctx,
+    target_t: Exps.PiValue,
+    target_core: Core
+  ): { t: Value; core: Core } {
+    const { arg_t, ret_t_cl } = target_t
+    const arg_core = check(ctx, this.arg, arg_t)
+    const arg_value = evaluate(ctx.to_env(), arg_core)
+    return {
+      t: ret_t_cl.apply(arg_value),
+      core: new Exps.ApCore(target_core, arg_core),
+    }
+  }
+
+  private infer_for_pi_im(
+    ctx: Ctx,
+    target_t: Exps.PiImValue,
+    target_core: Core
+  ): { t: Value; core: Core } {
+    const { arg_t, ret_t_cl } = target_t
+    const inferred_arg = infer(ctx, this.arg)
+    const fresh_name = ut.freshen_name(new Set(ctx.names), ret_t_cl.name)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const not_yet_value = new Exps.NotYetValue(arg_t, variable)
+    const ret_t = ret_t_cl.apply(not_yet_value)
+
+    if (!(ret_t instanceof Exps.PiValue || ret_t instanceof Exps.PiImValue)) {
+      throw new Trace(
+        [
+          `When Exps.Ap.infer meet target of type Exps.PiImValue,`,
+          `It expects the result of applying ret_t_cl to logic variable to be Exps.PiValue or Exps.PiImValue,`,
+          `  class name: ${ret_t.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    const result = solve(not_yet_value, {
+      ctx: ctx.extend(fresh_name, arg_t, not_yet_value),
+      left: { t: new Exps.TypeValue(), value: ret_t.arg_t },
+      right: { t: new Exps.TypeValue(), value: inferred_arg.t },
+    })
+
+    const real_ret_t = ret_t_cl.apply(result.value)
+
+    if (
+      !(
+        real_ret_t instanceof Exps.PiValue ||
+        real_ret_t instanceof Exps.PiImValue
+      )
+    ) {
+      throw new Trace(
+        [
+          `When Exps.Ap.infer meet target of type Exps.PiImValue,`,
+          `It expects the result of applying ret_t_cl to logic variable to be Exps.PiValue or Exps.PiImValue,`,
+          `  class name: ${real_ret_t.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    const arg_value = evaluate(ctx.to_env(), inferred_arg.core)
+
+    return {
+      t: real_ret_t.ret_t_cl.apply(arg_value),
+      core: new Exps.ApCore(
+        new Exps.ApImCore(target_core, result.core),
+        inferred_arg.core
+      ),
+    }
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
     if (inferred_target.t instanceof Exps.PiValue) {
-      const { arg_t, ret_t_cl } = inferred_target.t
-      const arg_core = check(ctx, this.arg, arg_t)
-      const arg_value = evaluate(ctx.to_env(), arg_core)
-      return {
-        t: ret_t_cl.apply(arg_value),
-        core: new Exps.ApCore(inferred_target.core, arg_core),
-      }
+      return this.infer_for_pi(ctx, inferred_target.t, inferred_target.core)
     } else if (inferred_target.t instanceof Exps.PiImValue) {
-      const { arg_t, ret_t_cl } = inferred_target.t
-      const inferred_arg = infer(ctx, this.arg)
-      const fresh_name = ut.freshen_name(new Set(ctx.names), ret_t_cl.name)
-      const variable = new Exps.VarNeutral(fresh_name)
-      const not_yet_value = new Exps.NotYetValue(arg_t, variable)
-      const ret_t = ret_t_cl.apply(not_yet_value)
-
-      if (!(ret_t instanceof Exps.PiValue || ret_t instanceof Exps.PiImValue)) {
-        throw new Trace(
-          [
-            `When Exps.Ap.infer meet target of type Exps.PiImValue,`,
-            `It expects the result of applying ret_t_cl to logic variable to be Exps.PiValue or Exps.PiImValue,`,
-            `  class name: ${ret_t.constructor.name}`,
-          ].join("\n")
-        )
-      }
-
-      const result = solve(not_yet_value, {
-        ctx: ctx.extend(fresh_name, arg_t, not_yet_value),
-        left: { t: new Exps.TypeValue(), value: ret_t.arg_t },
-        right: { t: new Exps.TypeValue(), value: inferred_arg.t },
-      })
-
-      const real_ret_t = ret_t_cl.apply(result.value)
-
-      if (
-        !(
-          real_ret_t instanceof Exps.PiValue ||
-          real_ret_t instanceof Exps.PiImValue
-        )
-      ) {
-        throw new Trace(
-          [
-            `When Exps.Ap.infer meet target of type Exps.PiImValue,`,
-            `It expects the result of applying ret_t_cl to logic variable to be Exps.PiValue or Exps.PiImValue,`,
-            `  class name: ${real_ret_t.constructor.name}`,
-          ].join("\n")
-        )
-      }
-
-      const arg_value = evaluate(ctx.to_env(), inferred_arg.core)
-
-      return {
-        t: real_ret_t.ret_t_cl.apply(arg_value),
-        core: new Exps.ApCore(
-          new Exps.ApImCore(inferred_target.core, result.core),
-          inferred_arg.core
-        ),
-      }
+      return this.infer_for_pi_im(ctx, inferred_target.t, inferred_target.core)
     }
 
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
@@ -122,7 +138,12 @@ export class Ap extends Exp {
       return this.infer_for_cls(ctx, target_value, inferred_target.core)
     }
 
-    throw new Trace(`I am expecting value of type: PiValue or ClsValue`)
+    throw new Trace(
+      [
+        `I am expecting target value of type PiValue or ClsValue`,
+        `  class name: ${target_value.constructor.name}`,
+      ].join("\n")
+    )
   }
 
   multi_ap_repr(args: Array<string> = new Array()): {

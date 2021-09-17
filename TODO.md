@@ -1,5 +1,9 @@
 # implicit
 
+- [refactor] ap.ts -- extract ???
+
+- ap.ts -- handle `PiImValue`
+
 - use implicit to implement `cong` by `replace` -- `from` and `to`
 
 - [stdlib] try implicit argument in `stdlib`
