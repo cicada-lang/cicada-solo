@@ -69,4 +69,8 @@ export class PiValue extends Value {
       return Subst.failure
     }
   }
+
+  insert_ap_im(ctx: Ctx, ap: Exps.Ap): { t: Value; core: Core } {
+    throw new Error()
+  }
 }

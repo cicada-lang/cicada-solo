@@ -1,10 +1,15 @@
 # implicit
 
-- [refactor] `ap`
+- rename fn-im to im-fn
+- rename ap-im to im-ap
 
-- `pi-im` implicit argument record
-- `pi-im-core` implicit argument record
-- `pi-im-value` implicit argument record
+- `im-pi-insertion` -- `based_on` as type guard
+
+- [refactor] `ap` -- apply
+
+- `im-pi` implicit argument record
+- `im-pi-core` implicit argument record
+- `im-pi-value` implicit argument record
 
 - `fn-im` implicit argument record
 - `fn-im-core` implicit argument record

@@ -38,14 +38,14 @@ export class FnIm extends Exp {
 
   check(ctx: Ctx, t: Value): Core {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
-    const pi_im = expect(ctx, t, Exps.PiImValue)
+    const im_pi = expect(ctx, t, Exps.ImPiValue)
     const arg = new Exps.NotYetValue(
-      pi_im.arg_t,
+      im_pi.arg_t,
       new Exps.VarNeutral(fresh_name)
     )
-    const ret_t = pi_im.ret_t_cl.apply(arg)
+    const ret_t = im_pi.ret_t_cl.apply(arg)
     const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
-    const ret_core = check(ctx.extend(fresh_name, pi_im.arg_t), ret, ret_t)
+    const ret_core = check(ctx.extend(fresh_name, im_pi.arg_t), ret, ret_t)
 
     if (
       !(ret_core instanceof Exps.FnCore || ret_core instanceof Exps.FnImCore)

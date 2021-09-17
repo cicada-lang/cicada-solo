@@ -6,7 +6,7 @@ import { Closure } from "../closure"
 import { evaluate } from "../../core"
 import * as Exps from "../../exps"
 
-export class PiImCore extends Core {
+export class ImPiCore extends Core {
   name: string
   arg_t: Core
   ret_t: Exps.PiCore
@@ -20,7 +20,7 @@ export class PiImCore extends Core {
 
   evaluate(env: Env): Value {
     const arg_t = evaluate(env, this.arg_t)
-    return new Exps.PiImValue(arg_t, new Closure(env, this.name, this.ret_t))
+    return new Exps.ImPiValue(arg_t, new Closure(env, this.name, this.ret_t))
   }
 
   multi_pi_repr(entries: Array<string> = new Array()): {

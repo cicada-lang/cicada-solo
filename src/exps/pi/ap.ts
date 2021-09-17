@@ -31,12 +31,14 @@ export class Ap extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
+
     const inferred_target = infer(ctx, this.target)
+
     if (inferred_target.t instanceof Exps.PiValue) {
       return this.infer_for_pi(ctx, inferred_target.t, inferred_target.core)
-    } else if (inferred_target.t instanceof Exps.PiImValue) {
+    } else if (inferred_target.t instanceof Exps.ImPiValue) {
       // NOTE Implicit application insertion
-      return this.infer_for_pi_im(ctx, inferred_target.t, inferred_target.core)
+      return this.infer_for_im_pi(ctx, inferred_target.t, inferred_target.core)
     }
 
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
@@ -66,9 +68,9 @@ export class Ap extends Exp {
     }
   }
 
-  private infer_for_pi_im(
+  private infer_for_im_pi(
     ctx: Ctx,
-    target_t: Exps.PiImValue,
+    target_t: Exps.ImPiValue,
     target_core: Core
   ): { t: Value; core: Core } {
     const { arg_t, ret_t_cl } = target_t
@@ -81,7 +83,7 @@ export class Ap extends Exp {
     if (!(ret_t instanceof Exps.PiValue)) {
       throw new Trace(
         [
-          `When Exps.Ap.infer meet target of type Exps.PiImValue,`,
+          `When Exps.Ap.infer meet target of type Exps.ImPiValue,`,
           `It expects the result of applying ret_t_cl to logic variable to be Exps.PiValue,`,
           `  class name: ${ret_t.constructor.name}`,
         ].join("\n")
@@ -99,7 +101,7 @@ export class Ap extends Exp {
     if (!(real_ret_t instanceof Exps.PiValue)) {
       throw new Trace(
         [
-          `When Exps.Ap.infer meet target of type Exps.PiImValue,`,
+          `When Exps.Ap.infer meet target of type Exps.ImPiValue,`,
           `and when ret_t is Exps.PiValue,`,
           `it expects real_ret_t to also be Exps.PiValue,`,
           `  class name: ${real_ret_t.constructor.name}`,

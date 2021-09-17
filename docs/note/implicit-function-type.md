@@ -27,22 +27,22 @@ infer(ctx, Ap(target, arg)) {
 ## The rules about implicit `Fn` and `Ap`
 
 ``` typescript
-PiIm(given: { name: string, arg_t }, name: string, arg_t: Exp, ret_t: Exp)
+ImPi(given: { name: string, arg_t }, name: string, arg_t: Exp, ret_t: Exp)
 FnIm(given: { name: string }, name: string, ret: Exp)
 ApIm(target: Exp, arg: Exp)
 
-infer(ctx, PiIm(given, name, arg_t, ret_t)) {
+infer(ctx, ImPi(given, name, arg_t, ret_t)) {
   ...
-  [ Type, PiImCore(given, name, arg_t_core, ret_t_core) ]
+  [ Type, ImPiCore(given, name, arg_t_core, ret_t_core) ]
 }
 
-check(ctx, Fn(name, ret), PiIm(given, name, arg_t, ret_t)) {
+check(ctx, Fn(name, ret), ImPi(given, name, arg_t, ret_t)) {
   fn_core = check(ctx.extend(given.name, given.arg_t).extend(name, arg_t), ret, ret_t)
   FnImCore(...)
 }
 
 infer(ctx, Ap(target, arg)) {
-  [ PiIm(given, name, arg_t, ret_t), target_core ] = infer(ctx, target)
+  [ ImPi(given, name, arg_t, ret_t), target_core ] = infer(ctx, target)
   [ arg_t_value, arg_core ] = infer(ctx, arg)
   subst = solve(arg_t_value, arg_t)
   arg_core = check(ctx.extend(name, arg_t), ret_t, Type)

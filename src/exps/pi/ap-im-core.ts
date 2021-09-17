@@ -53,14 +53,14 @@ export class ApImCore extends Core {
       return target.apply(arg)
     } else if (target instanceof Exps.NotYetValue) {
       const { t, neutral } = target
-      if (t instanceof Exps.PiImValue) {
+      if (t instanceof Exps.ImPiValue) {
         return new Exps.NotYetValue(
           t.ret_t_cl.apply(arg),
           new Exps.ApImNeutral(neutral, new Normal(t.arg_t, arg))
         )
       } else {
         throw InternalError.wrong_target_t(target.t, {
-          expected: [Exps.PiImValue],
+          expected: [Exps.ImPiValue],
         })
       }
     } else {
