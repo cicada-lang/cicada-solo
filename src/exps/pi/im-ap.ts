@@ -10,7 +10,7 @@ import { Trace, InternalError } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
 
-export class ApIm extends Exp {
+export class ImAp extends Exp {
   target: Exp
   arg: Exp
 
@@ -27,8 +27,8 @@ export class ApIm extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): ApIm {
-    return new ApIm(this.target.subst(name, exp), this.arg.subst(name, exp))
+  subst(name: string, exp: Exp): ImAp {
+    return new ImAp(this.target.subst(name, exp), this.arg.subst(name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
@@ -40,7 +40,7 @@ export class ApIm extends Exp {
 
       return {
         t: im_pi.ret_t_cl.apply(arg_value),
-        core: new Exps.ApImCore(inferred_target.core, arg_core),
+        core: new Exps.ImApCore(inferred_target.core, arg_core),
       }
     }
 
@@ -53,7 +53,7 @@ export class ApIm extends Exp {
   } {
     const arg = `given ${this.arg.repr()}`
 
-    if (this.target instanceof Exps.Ap || this.target instanceof Exps.ApIm) {
+    if (this.target instanceof Exps.Ap || this.target instanceof Exps.ImAp) {
       return this.target.multi_ap_repr([arg, ...args])
     } else {
       return {

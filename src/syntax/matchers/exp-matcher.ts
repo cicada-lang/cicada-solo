@@ -63,7 +63,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
         .flatMap((args) => args_matcher(args))
         .reduce((result, { implicit, exp }) => {
           if (implicit) {
-            return new Exps.ApIm(result, exp)
+            return new Exps.ImAp(result, exp)
           } else {
             return new Exps.Ap(result, exp)
           }

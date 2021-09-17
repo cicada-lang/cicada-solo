@@ -70,7 +70,7 @@ export class PiValue extends Value {
     }
   }
 
-  insert_ap_im(ctx: Ctx, ap: Exps.Ap): { t: Value; core: Core } {
+  insert_im_ap(ctx: Ctx, ap: Exps.Ap): { t: Value; core: Core } {
     throw new Error()
   }
 }

@@ -29,7 +29,7 @@ infer(ctx, Ap(target, arg)) {
 ``` typescript
 ImPi(given: { name: string, arg_t }, name: string, arg_t: Exp, ret_t: Exp)
 ImFn(given: { name: string }, name: string, ret: Exp)
-ApIm(target: Exp, arg: Exp)
+ImAp(target: Exp, arg: Exp)
 
 infer(ctx, ImPi(given, name, arg_t, ret_t)) {
   ...
@@ -48,7 +48,7 @@ infer(ctx, Ap(target, arg)) {
   arg_core = check(ctx.extend(name, arg_t), ret_t, Type)
   [ ret_t.subst(name, arg_core).reify(subst),
     ApCore(
-      ApImCore(
+      ImApCore(
         target_core,
         subst.find(given.name)),
       arg_core).reify(subst)

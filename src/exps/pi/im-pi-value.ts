@@ -54,7 +54,7 @@ export class ImPiValue extends Value {
     const result = readback(
       ctx.extend(fresh_name, this.arg_t),
       pi,
-      Exps.ApImCore.apply(value, not_yet_value)
+      Exps.ImApCore.apply(value, not_yet_value)
     )
 
     if (!(result instanceof Exps.FnCore)) {

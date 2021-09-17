@@ -4,7 +4,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
 
-export class ApImNeutral extends Neutral {
+export class ImApNeutral extends Neutral {
   target: Neutral
   arg: Normal
 
@@ -15,7 +15,7 @@ export class ApImNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Exps.ApImCore(
+    return new Exps.ImApCore(
       this.target.readback_neutral(ctx),
       this.arg.readback_normal(ctx)
     )

@@ -111,7 +111,7 @@ export class Ap extends Exp {
     return {
       t: real_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
       core: new Exps.ApCore(
-        new Exps.ApImCore(target_core, result.core),
+        new Exps.ImApCore(target_core, result.core),
         inferred_arg.core
       ),
     }

@@ -14,11 +14,11 @@
 - `im-fn-core` implicit argument record
 - `im-fn-value` implicit argument record
 
-- `ap-im` implicit argument record
-- `ap-im-core` implicit argument record
-- `ap-im-neutral` implicit argument record
+- `im-ap` implicit argument record
+- `im-ap-core` implicit argument record
+- `im-ap-neutral` implicit argument record
 
-- `ap-im` syntax for implicit argument record
+- `im-ap` syntax for implicit argument record
 
 - refactor interface about `solve`
 
