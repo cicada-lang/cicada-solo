@@ -20,15 +20,13 @@ export class PiValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
       const fresh_name = ut.freshen_name(new Set(ctx.names), this.ret_t_cl.name)
-      const variable = new Exps.NotYetValue(
-        this.arg_t,
-        new Exps.VarNeutral(fresh_name)
-      )
+      const variable = new Exps.VarNeutral(fresh_name)
+      const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
       const arg_t = readback(ctx, new Exps.TypeValue(), this.arg_t)
       const ret_t = readback(
         ctx.extend(fresh_name, this.arg_t),
         new Exps.TypeValue(),
-        this.ret_t_cl.apply(variable)
+        this.ret_t_cl.apply(not_yet_value)
       )
       return new Exps.PiCore(fresh_name, arg_t, ret_t)
     }
@@ -39,15 +37,13 @@ export class PiValue extends Value {
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.ret_t_cl.name)
-    const variable = new Exps.NotYetValue(
-      this.arg_t,
-      new Exps.VarNeutral(fresh_name)
-    )
-    const ret_t = this.ret_t_cl.apply(variable)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
+    const ret_t = this.ret_t_cl.apply(not_yet_value)
     const ret = readback(
       ctx.extend(fresh_name, this.arg_t),
       ret_t,
-      Exps.ApCore.apply(value, variable)
+      Exps.ApCore.apply(value, not_yet_value)
     )
     return new Exps.FnCore(fresh_name, ret)
   }
