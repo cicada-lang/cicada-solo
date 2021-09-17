@@ -6,10 +6,10 @@ id({ A: Type }, x: A): A {
 }
 
 id(1)
-id(given Nat, 1)
+id(implicit { A: Nat }, 1)
 
 id("a")
-id(given String, "a")
+id(implicit { A: String }, "a")
 ```
 
 # multiple implicit arguments
@@ -23,5 +23,5 @@ k(
 }
 
 k(100, 101)
-k(given Nat, 100, given Nat, 101)
+k(implicit { A: Nat }, 100, implicit { A: Nat }, 101)
 ```

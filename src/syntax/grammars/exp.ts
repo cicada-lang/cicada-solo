@@ -401,7 +401,14 @@ export const args = {
 export const arg_entry = {
   $grammar: {
     "arg_entry:arg_entry": [{ exp: "exp" }],
-    "arg_entry:given_arg_entry": ['"given"', { exp: "exp" }],
+    "arg_entry:given_arg_entry": [
+      '"implicit"',
+      '"{"',
+      { name: "identifier" },
+      '":"',
+      { exp: "exp" },
+      '"}"',
+    ],
   },
 }
 

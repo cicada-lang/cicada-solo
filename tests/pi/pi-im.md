@@ -24,9 +24,9 @@ id1
 id2
 id3
 
-id1(given Nat, 1)
-id2(given Nat, 1)
-id3(given Nat, 1)
+id1(implicit { A: Nat }, 1)
+id2(implicit { A: Nat }, 1)
+id3(implicit { A: Nat }, 1)
 ```
 
 # return implicit value
@@ -50,7 +50,7 @@ k(
   x
 }
 
-k(given Nat, 100, given Nat, 101)
+k(implicit { A: Nat }, 100, implicit { A: Nat }, 101)
 k(100, 101)
 ```
 

@@ -1,9 +1,5 @@
 # implicit
 
-- use `implicit { }` for implicit application syntax -- instead of `given`
-
-  - remove `given` from preserved identifier
-
 - `pi-im` implicit argument should always be a record
 - `pi-im` syntax for implicit argument record
 
