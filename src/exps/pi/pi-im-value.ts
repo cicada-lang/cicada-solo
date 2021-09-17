@@ -26,22 +26,27 @@ export class PiImValue extends Value {
         new Exps.VarNeutral(fresh_name)
       )
       const arg_t = readback(ctx, new Exps.TypeValue(), this.arg_t)
-      const pi = readback(
+      const ret_t_core = readback(
         ctx.extend(fresh_name, this.arg_t),
         new Exps.TypeValue(),
         this.ret_t_cl.apply(variable)
       )
 
-      if (!(pi instanceof Exps.PiCore)) {
+      if (
+        !(
+          ret_t_core instanceof Exps.PiCore ||
+          ret_t_core instanceof Exps.PiImCore
+        )
+      ) {
         throw new Trace(
           [
-            `I expect pi to be of type Exps.PiCore.`,
-            `pi class name: ${pi.constructor.name}`,
+            `I expect ret_t_core to be of type Exps.PiCore or Exps.PiImCore.`,
+            `  class name: ${ret_t_core.constructor.name}`,
           ].join("\n")
         )
       }
 
-      return new Exps.PiImCore(fresh_name, arg_t, pi)
+      return new Exps.PiImCore(fresh_name, arg_t, ret_t_core)
     }
   }
 

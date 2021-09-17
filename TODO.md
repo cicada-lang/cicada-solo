@@ -1,7 +1,5 @@
 # implicit
 
-- `syntax/mathers/exp-matcher` -- be able to parse new `pi-im`
-
 - `exps/pi/fn-im` -- be able to take fn-im
 
 - `syntax/mathers/exp-matcher` -- be able to parse new `fn-im`

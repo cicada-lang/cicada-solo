@@ -14,12 +14,12 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
     )
     .reduce((result, { given, name, exp }) => {
       if (given) {
-        if (!(result instanceof Exps.Pi)) {
+        if (!(result instanceof Exps.Pi || result instanceof Exps.PiIm)) {
           throw new Error(
             [
               `When reducing given names,`,
-              `the bindings_matcher expects the result to be Exps.Pi`,
-              `result class name: ${result.constructor.name}`,
+              `the bindings_matcher expects the result to be Exps.Pi or Exps.PiIm`,
+              `  result class name: ${result.constructor.name}`,
             ].join("\n")
           )
         }
