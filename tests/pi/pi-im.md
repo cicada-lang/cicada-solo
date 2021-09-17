@@ -32,39 +32,21 @@ id3(given Nat, 1)
 # multiple implicit arguments
 
 ``` cicada
-k1(
+k(
   given A: Type, x: A,
   given B: Type, y: B,
 ): A {
   x
 }
 
-k1(given Nat, 100, given Nat, 101)
-k1(100, 101)
+k(given Nat, 100, given Nat, 101)
+k(100, 101)
 ```
 
-# implicit argument over one argument
+# do *not* support implicit argument over implicit argument
 
-``` cicada
-k_trivial(given A: Type, Trivial, x: A): A { x }
-k_trivial(given Nat, sole, 123)
-// TODO
-// k_trivial(sole, 123)
-```
-
-# implicit argument over implicit argument
-
-``` cicada
-k2_t = (
-  given A: Type,
-  given B: Type,
-  x: A,
-  y: B,
-) -> A
-
-k2_t
-
-k2(
+``` cicada counterexample
+k(
   given A: Type,
   given B: Type,
   x: A,
@@ -72,19 +54,16 @@ k2(
 ): A {
   x
 }
+```
 
-k2(given Nat, given Nat, 100, 101)
-// TODO
-// k2(100, 101)
+# do *not* support implicit argument over one argument
 
-// NOTE Test implicit fn insertion
-
-k2_again: k2_t =
-  (x, y) {
-    x
-  }
-
-k2_again(given Nat, given Nat, 100, 101)
-// TODO
-// k2_again(100, 101)
+``` cicada counterexample
+k(
+  given A: Type,
+  Trivial,
+  x: A,
+): A {
+  x
+}
 ```

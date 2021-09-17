@@ -6,7 +6,3 @@
 1: Nat 
 100: Nat 
 100: Nat 
-123: Nat 
-(given A: Type, given B: Type, x: A, y: B) -> A: Type 
-100: Nat 
-100: Nat 

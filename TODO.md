@@ -1,9 +1,14 @@
 # implicit
 
-- refactor interface about `solve`
+- use `{ }` for implicit function syntax -- instead of `give`
 
-- ap.ts -- `infer` implicit argument over one argument
-- ap.ts -- `infer` implicit argument over implicit argument
+- `ap-im` -- named argument
+- use `implicit { }` for implicit application syntax -- instead of `give`
+
+- `pi-im` implicit argument should always be a record
+- `fn-im` implicit argument should always be a record
+
+- refactor interface about `solve`
 
 - use implicit to implement `cong` by `replace` -- `from` and `to`
 
