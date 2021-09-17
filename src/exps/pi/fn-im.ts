@@ -44,19 +44,19 @@ export class FnIm extends Exp {
       new Exps.VarNeutral(fresh_name)
     )
     const ret_t = pi_im.ret_t_cl.apply(arg)
-    const fn = this.ret.subst(this.name, new Exps.Var(fresh_name))
-    const fn_core = check(ctx.extend(fresh_name, pi_im.arg_t), fn, ret_t)
+    const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
+    const ret_core = check(ctx.extend(fresh_name, pi_im.arg_t), ret, ret_t)
 
-    if (!(fn_core instanceof Exps.FnCore)) {
+    if (!(ret_core instanceof Exps.FnCore || ret_core instanceof Exps.FnImCore)) {
       throw new Trace(
         [
-          `I expect fn_core to be Exps.FnCore`,
-          `  class name: ${fn_core.constructor.name}`,
+          `I expect ret_core to be Exps.FnCore or Exps.FnImCore`,
+          `  class name: ${ret_core.constructor.name}`,
         ].join("\n") + "\n"
       )
     }
 
-    return new Exps.FnImCore(fresh_name, fn_core)
+    return new Exps.FnImCore(fresh_name, ret_core)
   }
 
   multi_fn_repr(names: Array<string> = new Array()): {

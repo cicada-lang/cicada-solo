@@ -7,16 +7,16 @@ import * as Exps from "../../exps"
 
 export class FnImCore extends Core {
   name: string
-  fn: Exps.FnCore
+  ret: Exps.FnCore | Exps.FnImCore
 
-  constructor(name: string, fn: Exps.FnCore) {
+  constructor(name: string, ret: Exps.FnCore | Exps.FnImCore) {
     super()
     this.name = name
-    this.fn = fn
+    this.ret = ret
   }
 
   evaluate(env: Env): Value {
-    return new Exps.FnImValue(new Closure(env, this.name, this.fn))
+    return new Exps.FnImValue(new Closure(env, this.name, this.ret))
   }
 
   multi_fn_repr(names: Array<string> = new Array()): {
@@ -24,7 +24,7 @@ export class FnImCore extends Core {
     ret: string
   } {
     const name = `given ${this.name}`
-    return this.fn.multi_fn_repr([...names, name])
+    return this.ret.multi_fn_repr([...names, name])
   }
 
   repr(): string {
@@ -33,7 +33,7 @@ export class FnImCore extends Core {
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    const fn_repr = this.fn.alpha_repr(ctx.extend(this.name))
+    const fn_repr = this.ret.alpha_repr(ctx.extend(this.name))
     return `(given #) { ${fn_repr} }`
   }
 }

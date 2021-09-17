@@ -19,7 +19,7 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
             [
               `When reducing given names,`,
               `I expects the result to be Exps.Pi or Exps.PiIm`,
-              `  result class name: ${result.constructor.name}`,
+              `  class name: ${result.constructor.name}`,
             ].join("\n")
           )
         }
@@ -78,7 +78,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
                 [
                   `When reducing given names,`,
                   `the names_matcher expects the result to be Exps.Fn`,
-                  `result class name: ${result.constructor.name}`,
+                  `class name: ${result.constructor.name}`,
                 ].join("\n")
               )
             }
@@ -292,7 +292,7 @@ export function declaration_matcher(tree: pt.Tree): Exp {
                 [
                   `When reducing given names,`,
                   `I expects the result to be Exps.Fn or Exps.FnIm`,
-                  `  result class name: ${result.constructor.name}`,
+                  `  class name: ${result.constructor.name}`,
                 ].join("\n")
               )
             }
@@ -343,7 +343,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
                 [
                   `When reducing given names,`,
                   `I expects the result to be Exps.Fn or Exps.FnIm`,
-                  `  result class name: ${result.constructor.name}`,
+                  `  class name: ${result.constructor.name}`,
                 ].join("\n")
               )
             }

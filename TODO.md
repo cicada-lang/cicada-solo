@@ -1,7 +1,5 @@
 # implicit
 
-- `exps/pi/fn-im` -- be able to take fn-im
-
 - `exps/pi/fn` `check` insert `FnIm` on `PiIm`
   - The result of elab might also be `FnImCore`
 

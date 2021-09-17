@@ -40,7 +40,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                 [
                   `When reducing given names,`,
                   `I expects the result to be Exps.Fn or Exps.FnIm`,
-                  `  result class name: ${result.constructor.name}`,
+                  `  class name: ${result.constructor.name}`,
                 ].join("\n")
               )
             }

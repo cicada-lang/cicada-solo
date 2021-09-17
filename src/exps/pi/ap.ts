@@ -78,7 +78,7 @@ export class Ap extends Exp {
           [
             `When Ap.infer meet target of type Exps.PiImValue,`,
             `It expects the result of application of pi_cl to be PiValue,`,
-            `result class name: ${pi.constructor.name}`,
+            `class name: ${pi.constructor.name}`,
           ].join("\n")
         )
       }
@@ -99,7 +99,7 @@ export class Ap extends Exp {
           [
             `When Ap.infer meet target of type Exps.PiImValue,`,
             `It expects the result of application of pi_cl to be PiValue,`,
-            `result class name: ${pi.constructor.name}`,
+            `class name: ${pi.constructor.name}`,
           ].join("\n")
         )
       }
