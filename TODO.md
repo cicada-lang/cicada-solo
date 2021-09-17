@@ -1,6 +1,6 @@
 # implicit
 
-- back to testable
+- [refactor] `ap`
 
 - `pi-im` implicit argument record
 - `pi-im-core` implicit argument record
@@ -19,8 +19,6 @@
 - refactor interface about `solve`
 
 - use implicit to implement `cong` by `replace` -- `from` and `to`
-
-- [refactor] ap.ts -- how?
 
 - [stdlib] try implicit argument in `stdlib`
 

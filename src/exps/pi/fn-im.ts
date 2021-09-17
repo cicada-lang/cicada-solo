@@ -37,28 +37,28 @@ export class FnIm extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    throw new Error()
+    const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
+    const pi_im = expect(ctx, t, Exps.PiImValue)
+    const arg = new Exps.NotYetValue(
+      pi_im.arg_t,
+      new Exps.VarNeutral(fresh_name)
+    )
+    const ret_t = pi_im.ret_t_cl.apply(arg)
+    const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
+    const ret_core = check(ctx.extend(fresh_name, pi_im.arg_t), ret, ret_t)
 
-    // const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
-    // const pi_im = expect(ctx, t, Exps.PiImValue)
-    // const arg = new Exps.NotYetValue(
-    //   pi_im.arg_t,
-    //   new Exps.VarNeutral(fresh_name)
-    // )
-    // const ret_t = pi_im.ret_t_cl.apply(arg)
-    // const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
-    // const ret_core = check(ctx.extend(fresh_name, pi_im.arg_t), ret, ret_t)
+    if (
+      !(ret_core instanceof Exps.FnCore || ret_core instanceof Exps.FnImCore)
+    ) {
+      throw new Trace(
+        [
+          `I expect ret_core to be Exps.FnCore or Exps.FnImCore`,
+          `  class name: ${ret_core.constructor.name}`,
+        ].join("\n") + "\n"
+      )
+    }
 
-    // if (!(ret_core instanceof Exps.FnCore)) {
-    //   throw new Trace(
-    //     [
-    //       `I expect ret_core to be Exps.FnCore`,
-    //       `  class name: ${ret_core.constructor.name}`,
-    //     ].join("\n") + "\n"
-    //   )
-    // }
-
-    // return new Exps.FnImCore(fresh_name, ret_core)
+    return new Exps.FnImCore(fresh_name, ret_core)
   }
 
   multi_fn_repr(names: Array<string> = new Array()): {
