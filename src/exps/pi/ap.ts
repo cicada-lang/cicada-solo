@@ -30,31 +30,6 @@ export class Ap extends Exp {
     return new Ap(this.target.subst(name, exp), this.arg.subst(name, exp))
   }
 
-  private infer_for_cls(
-    ctx: Ctx,
-    cls: Exps.ClsValue,
-    target_core: Core
-  ): { t: Value; core: Core } {
-    if (cls instanceof Exps.ClsConsValue) {
-      const arg_core = check(ctx, this.arg, cls.field_t)
-      return {
-        t: new Exps.TypeValue(),
-        core: new Exps.ApCore(target_core, arg_core),
-      }
-    } else if (cls instanceof Exps.ClsFulfilledValue) {
-      return this.infer_for_cls(ctx, cls.rest_t, target_core)
-    } else if (cls instanceof Exps.ClsNilValue) {
-      throw new Trace(`The telescope is full.`)
-    } else {
-      throw new InternalError(
-        [
-          `Unknown subclass of Exps.ClsValue`,
-          `  class name: ${cls.constructor.name}`,
-        ].join("\n")
-      )
-    }
-  }
-
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
     if (inferred_target.t instanceof Exps.PiValue) {
@@ -167,6 +142,31 @@ export class Ap extends Exp {
         `  class name: ${ret_t.constructor.name}`,
       ].join("\n")
     )
+  }
+
+  private infer_for_cls(
+    ctx: Ctx,
+    cls: Exps.ClsValue,
+    target_core: Core
+  ): { t: Value; core: Core } {
+    if (cls instanceof Exps.ClsConsValue) {
+      const arg_core = check(ctx, this.arg, cls.field_t)
+      return {
+        t: new Exps.TypeValue(),
+        core: new Exps.ApCore(target_core, arg_core),
+      }
+    } else if (cls instanceof Exps.ClsFulfilledValue) {
+      return this.infer_for_cls(ctx, cls.rest_t, target_core)
+    } else if (cls instanceof Exps.ClsNilValue) {
+      throw new Trace(`The telescope is full.`)
+    } else {
+      throw new InternalError(
+        [
+          `Unknown subclass of Exps.ClsValue`,
+          `  class name: ${cls.constructor.name}`,
+        ].join("\n")
+      )
+    }
   }
 
   multi_ap_repr(args: Array<string> = new Array()): {
