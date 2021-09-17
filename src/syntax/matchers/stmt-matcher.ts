@@ -35,12 +35,12 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         )
         .reduce((result, { given, name }) => {
           if (given) {
-            if (!(result instanceof Exps.Fn)) {
+            if (!(result instanceof Exps.Fn || result instanceof Exps.FnIm)) {
               throw new Error(
                 [
                   `When reducing given names,`,
-                  `the bindings_matcher expects the result to be Exps.Fn`,
-                  `result class name: ${result.constructor.name}`,
+                  `I expects the result to be Exps.Fn or Exps.FnIm`,
+                  `  result class name: ${result.constructor.name}`,
                 ].join("\n")
               )
             }

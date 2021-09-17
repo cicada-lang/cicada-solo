@@ -18,7 +18,7 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
           throw new Error(
             [
               `When reducing given names,`,
-              `the bindings_matcher expects the result to be Exps.Pi or Exps.PiIm`,
+              `I expects the result to be Exps.Pi or Exps.PiIm`,
               `  result class name: ${result.constructor.name}`,
             ].join("\n")
           )
@@ -287,12 +287,12 @@ export function declaration_matcher(tree: pt.Tree): Exp {
         )
         .reduce((result, { given, name }) => {
           if (given) {
-            if (!(result instanceof Exps.Fn)) {
+            if (!(result instanceof Exps.Fn || result instanceof Exps.FnIm)) {
               throw new Error(
                 [
                   `When reducing given names,`,
-                  `the bindings_matcher expects the result to be Exps.Fn`,
-                  `result class name: ${result.constructor.name}`,
+                  `I expects the result to be Exps.Fn or Exps.FnIm`,
+                  `  result class name: ${result.constructor.name}`,
                 ].join("\n")
               )
             }
@@ -338,12 +338,12 @@ export function cls_entry_matcher(tree: pt.Tree): {
         )
         .reduce((result, { given, name }) => {
           if (given) {
-            if (!(result instanceof Exps.Fn)) {
+            if (!(result instanceof Exps.Fn || result instanceof Exps.FnIm)) {
               throw new Error(
                 [
                   `When reducing given names,`,
-                  `the bindings_matcher expects the result to be Exps.Fn`,
-                  `result class name: ${result.constructor.name}`,
+                  `I expects the result to be Exps.Fn or Exps.FnIm`,
+                  `  result class name: ${result.constructor.name}`,
                 ].join("\n")
               )
             }
