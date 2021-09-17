@@ -12,32 +12,29 @@ import * as ut from "../../ut"
 export class PiIm extends Exp {
   name: string
   arg_t: Exp
-  pi: Exps.Pi
+  rest_t: Exps.Pi
 
-  constructor(name: string, arg_t: Exp, pi: Exps.Pi) {
+  constructor(name: string, arg_t: Exp, rest_t: Exps.Pi) {
     super()
     this.name = name
     this.arg_t = arg_t
-    this.pi = pi
+    this.rest_t = rest_t
   }
 
   free_names(bound_names: Set<string>): Set<string> {
     return new Set([
       ...this.arg_t.free_names(bound_names),
-      ...this.pi.arg_t.free_names(new Set([...bound_names, this.name])),
-      ...this.pi.ret_t.free_names(
-        new Set([...bound_names, this.name, this.pi.name])
-      ),
+      ...this.rest_t.free_names(new Set([...bound_names, this.name])),
     ])
   }
 
   subst(name: string, exp: Exp): PiIm {
     if (name === this.name) {
-      return new PiIm(this.name, this.arg_t.subst(name, exp), this.pi)
+      return new PiIm(this.name, this.arg_t.subst(name, exp), this.rest_t)
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
-      const pi = this.pi.subst(this.name, new Exps.Var(fresh_name))
+      const pi = this.rest_t.subst(this.name, new Exps.Var(fresh_name))
 
       return new PiIm(
         fresh_name,
@@ -51,7 +48,7 @@ export class PiIm extends Exp {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
-    const pi = this.pi.subst(this.name, new Exps.Var(fresh_name))
+    const pi = this.rest_t.subst(this.name, new Exps.Var(fresh_name))
     const pi_core = check(
       ctx.extend(fresh_name, arg_t_value),
       pi,
@@ -78,7 +75,7 @@ export class PiIm extends Exp {
     ret_t: string
   } {
     const entry = `given ${this.name}: ${this.arg_t.repr()}`
-    return this.pi.multi_pi_repr([...entries, entry])
+    return this.rest_t.multi_pi_repr([...entries, entry])
   }
 
   repr(): string {

@@ -44,14 +44,13 @@ k1(given Nat, 100, given Nat, 101)
 
 # implicit argument over implicit argument
 
-``` cicada todo
-k2_t = (
-  given A: Type,
-  given B: Type,
-  x: A,
-  y: B,
-) -> A
-
+``` cicada
+// k2_t = (
+//   given A: Type,
+//   given B: Type,
+//   x: A,
+//   y: B,
+// ) -> A
 
 // k2(
 //   given A: Type,

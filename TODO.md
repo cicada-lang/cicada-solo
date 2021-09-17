@@ -1,7 +1,12 @@
 # implicit
 
 - `exps/pi/pi-im` -- be able to take pi-im
+
+- `syntax/mathers/exp-matcher` -- be able to parse new `pi-im`
+
 - `exps/pi/fn-im` -- be able to take fn-im
+
+- `syntax/mathers/exp-matcher` -- be able to parse new `fn-im`
 
 - `exps/pi/fn` `check` insert `FnIm` on `PiIm`
   - The result of elab might also be `FnImCore`
