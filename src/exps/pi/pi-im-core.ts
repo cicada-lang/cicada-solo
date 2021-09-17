@@ -9,18 +9,18 @@ import * as Exps from "../../exps"
 export class PiImCore extends Core {
   name: string
   arg_t: Core
-  pi: Exps.PiCore
+  ret_t: Exps.PiCore
 
-  constructor(name: string, arg_t: Core, pi: Exps.PiCore) {
+  constructor(name: string, arg_t: Core, ret_t: Exps.PiCore) {
     super()
     this.name = name
     this.arg_t = arg_t
-    this.pi = pi
+    this.ret_t = ret_t
   }
 
   evaluate(env: Env): Value {
     const arg_t = evaluate(env, this.arg_t)
-    return new Exps.PiImValue(arg_t, new Closure(env, this.name, this.pi))
+    return new Exps.PiImValue(arg_t, new Closure(env, this.name, this.ret_t))
   }
 
   multi_pi_repr(entries: Array<string> = new Array()): {
@@ -28,7 +28,7 @@ export class PiImCore extends Core {
     ret_t: string
   } {
     const entry = `given ${this.name}: ${this.arg_t.repr()}`
-    return this.pi.multi_pi_repr([...entries, entry])
+    return this.ret_t.multi_pi_repr([...entries, entry])
   }
 
   repr(): string {
@@ -38,7 +38,7 @@ export class PiImCore extends Core {
 
   alpha_repr(ctx: AlphaCtx): string {
     const arg_t_repr = this.arg_t.alpha_repr(ctx)
-    const pi_repr = this.pi.alpha_repr(ctx.extend(this.name))
+    const pi_repr = this.ret_t.alpha_repr(ctx.extend(this.name))
     return `(given ${arg_t_repr}) -> ${pi_repr}`
   }
 }

@@ -39,7 +39,7 @@ export class ApIm extends Exp {
       const arg_value = evaluate(ctx.to_env(), arg_core)
 
       return {
-        t: pi_im.pi_cl.apply(arg_value),
+        t: pi_im.ret_t_cl.apply(arg_value),
         core: new Exps.ApImCore(inferred_target.core, arg_core),
       }
     }

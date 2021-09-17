@@ -43,7 +43,7 @@ export class FnIm extends Exp {
       pi_im.arg_t,
       new Exps.VarNeutral(fresh_name)
     )
-    const pi = pi_im.pi_cl.apply(arg)
+    const pi = pi_im.ret_t_cl.apply(arg)
     const fn = this.fn.subst(this.name, new Exps.Var(fresh_name))
     const fn_core = check(ctx.extend(fresh_name, pi_im.arg_t), fn, pi)
 

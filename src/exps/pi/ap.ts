@@ -63,7 +63,7 @@ export class Ap extends Exp {
         core: new Exps.ApCore(inferred_target.core, arg_core),
       }
     } else if (inferred_target.t instanceof Exps.PiImValue) {
-      const { arg_t, pi_cl } = inferred_target.t
+      const { arg_t, ret_t_cl: pi_cl } = inferred_target.t
       const inferred_arg = infer(ctx, this.arg)
       const fresh_name = ut.freshen_name(new Set(ctx.names), pi_cl.name)
       const logic_var = new Exps.NotYetValue(

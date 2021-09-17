@@ -46,7 +46,7 @@ export class Fn extends Exp {
       const ret_core = check(ctx.extend(fresh_name, arg_t), ret, ret_t)
       return new Exps.FnCore(fresh_name, ret_core)
     } else if (t instanceof Exps.PiImValue) {
-      const { arg_t, pi_cl } = t
+      const { arg_t, ret_t_cl: pi_cl } = t
       const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
       const arg = new Exps.NotYetValue(arg_t, new Exps.VarNeutral(fresh_name))
       const pi = pi_cl.apply(arg)

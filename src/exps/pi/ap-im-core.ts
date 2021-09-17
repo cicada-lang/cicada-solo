@@ -55,7 +55,7 @@ export class ApImCore extends Core {
       const { t, neutral } = target
       if (t instanceof Exps.PiImValue) {
         return new Exps.NotYetValue(
-          t.pi_cl.apply(arg),
+          t.ret_t_cl.apply(arg),
           new Exps.ApImNeutral(neutral, new Normal(t.arg_t, arg))
         )
       } else {

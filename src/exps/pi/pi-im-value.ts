@@ -10,17 +10,17 @@ import * as Exps from "../../exps"
 
 export class PiImValue extends Value {
   arg_t: Value
-  pi_cl: Closure
+  ret_t_cl: Closure
 
-  constructor(arg_t: Value, pi_cl: Closure) {
+  constructor(arg_t: Value, ret_t_cl: Closure) {
     super()
     this.arg_t = arg_t
-    this.pi_cl = pi_cl
+    this.ret_t_cl = ret_t_cl
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
-      const fresh_name = ut.freshen_name(new Set(ctx.names), this.pi_cl.name)
+      const fresh_name = ut.freshen_name(new Set(ctx.names), this.ret_t_cl.name)
       const variable = new Exps.NotYetValue(
         this.arg_t,
         new Exps.VarNeutral(fresh_name)
@@ -29,7 +29,7 @@ export class PiImValue extends Value {
       const pi = readback(
         ctx.extend(fresh_name, this.arg_t),
         new Exps.TypeValue(),
-        this.pi_cl.apply(variable)
+        this.ret_t_cl.apply(variable)
       )
 
       if (!(pi instanceof Exps.PiCore)) {
@@ -49,12 +49,12 @@ export class PiImValue extends Value {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
-    const fresh_name = ut.freshen_name(new Set(ctx.names), this.pi_cl.name)
+    const fresh_name = ut.freshen_name(new Set(ctx.names), this.ret_t_cl.name)
     const variable = new Exps.NotYetValue(
       this.arg_t,
       new Exps.VarNeutral(fresh_name)
     )
-    const pi = this.pi_cl.apply(variable)
+    const pi = this.ret_t_cl.apply(variable)
     const result = readback(
       ctx.extend(fresh_name, this.arg_t),
       pi,
@@ -77,12 +77,19 @@ export class PiImValue extends Value {
     if (that instanceof Exps.PiImValue) {
       subst = subst.unify(this.arg_t, that.arg_t)
       if (Subst.failure_p(subst)) return subst
-      const names = new Set([...subst.names, this.pi_cl.name, that.pi_cl.name])
-      const fresh_name = ut.freshen_name(names, this.pi_cl.name)
+      const names = new Set([
+        ...subst.names,
+        this.ret_t_cl.name,
+        that.ret_t_cl.name,
+      ])
+      const fresh_name = ut.freshen_name(names, this.ret_t_cl.name)
       const v = new Exps.VarNeutral(fresh_name)
       const this_v = new Exps.NotYetValue(this.arg_t, v)
       const that_v = new Exps.NotYetValue(that.arg_t, v)
-      return subst.unify(this.pi_cl.apply(this_v), that.pi_cl.apply(that_v))
+      return subst.unify(
+        this.ret_t_cl.apply(this_v),
+        that.ret_t_cl.apply(that_v)
+      )
     } else {
       return Subst.failure
     }
