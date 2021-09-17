@@ -9,15 +9,15 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
 
   return bindings_matcher(bindings)
     .reverse()
-    .flatMap(({ given, names, exp }) =>
-      names.map((name) => ({ given, name, exp })).reverse()
+    .flatMap(({ implicit, names, exp }) =>
+      names.map((name) => ({ implicit, name, exp })).reverse()
     )
-    .reduce((result, { given, name, exp }) => {
-      if (given) {
+    .reduce((result, { implicit, name, exp }) => {
+      if (implicit) {
         if (!(result instanceof Exps.Pi || result instanceof Exps.PiIm)) {
           throw new Error(
             [
-              `When reducing given names,`,
+              `When reducing implicit names,`,
               `I expects the result to be Exps.Pi or Exps.PiIm`,
               `  class name: ${result.constructor.name}`,
             ].join("\n")
@@ -35,12 +35,12 @@ export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
 
   return bindings_matcher(bindings)
     .reverse()
-    .flatMap(({ given, names, exp }) =>
-      names.map((name) => ({ given, name, exp })).reverse()
+    .flatMap(({ implicit, names, exp }) =>
+      names.map((name) => ({ implicit, name, exp })).reverse()
     )
-    .reduce((result, { given, name, exp }) => {
-      if (given) {
-        throw new Error(`The "given" keyword should not be used in sigma`)
+    .reduce((result, { implicit, name, exp }) => {
+      if (implicit) {
+        throw new Error(`The "implicit" keyword should not be used in sigma`)
       }
       return new Exps.Sigma(name, exp, result)
     }, exp_matcher(cdr_t))
@@ -61,8 +61,8 @@ export function operator_matcher(tree: pt.Tree): Exp {
       pt.matchers
         .one_or_more_matcher(args)
         .flatMap((args) => args_matcher(args))
-        .reduce((result, { given, exp }) => {
-          if (given) {
+        .reduce((result, { implicit, exp }) => {
+          if (implicit) {
             return new Exps.ApIm(result, exp)
           } else {
             return new Exps.Ap(result, exp)
@@ -71,12 +71,12 @@ export function operator_matcher(tree: pt.Tree): Exp {
     "operator:fn": ({ names, ret }) =>
       names_matcher(names)
         .reverse()
-        .reduce((result, { given, name }) => {
-          if (given) {
+        .reduce((result, { implicit, name }) => {
+          if (implicit) {
             if (!(result instanceof Exps.Fn)) {
               throw new Error(
                 [
-                  `When reducing given names,`,
+                  `When reducing implicit names,`,
                   `the names_matcher expects the result to be Exps.Fn`,
                   `class name: ${result.constructor.name}`,
                 ].join("\n")
@@ -282,15 +282,15 @@ export function declaration_matcher(tree: pt.Tree): Exp {
     "declaration:let_fn": ({ name, bindings, ret_t, ret, body }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
-        .flatMap(({ given, names }) =>
-          names.map((name) => ({ given, name })).reverse()
+        .flatMap(({ implicit, names }) =>
+          names.map((name) => ({ implicit, name })).reverse()
         )
-        .reduce((result, { given, name }) => {
-          if (given) {
+        .reduce((result, { implicit, name }) => {
+          if (implicit) {
             if (!(result instanceof Exps.Fn || result instanceof Exps.FnIm)) {
               throw new Error(
                 [
-                  `When reducing given names,`,
+                  `When reducing implicit names,`,
                   `I expects the result to be Exps.Fn or Exps.FnIm`,
                   `  class name: ${result.constructor.name}`,
                 ].join("\n")
@@ -333,15 +333,15 @@ export function cls_entry_matcher(tree: pt.Tree): {
     "cls_entry:method_fulfilled": ({ name, bindings, ret_t, ret }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
-        .flatMap(({ given, names }) =>
-          names.map((name) => ({ given, name })).reverse()
+        .flatMap(({ implicit, names }) =>
+          names.map((name) => ({ implicit, name })).reverse()
         )
-        .reduce((result, { given, name }) => {
-          if (given) {
+        .reduce((result, { implicit, name }) => {
+          if (implicit) {
             if (!(result instanceof Exps.Fn || result instanceof Exps.FnIm)) {
               throw new Error(
                 [
-                  `When reducing given names,`,
+                  `When reducing implicit names,`,
                   `I expects the result to be Exps.Fn or Exps.FnIm`,
                   `  class name: ${result.constructor.name}`,
                 ].join("\n")
@@ -363,7 +363,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
 }
 
 export function bindings_matcher(tree: pt.Tree): Array<{
-  given: boolean
+  implicit: boolean
   names: Array<string>
   exp: Exp
 }> {
@@ -376,23 +376,23 @@ export function bindings_matcher(tree: pt.Tree): Array<{
 }
 
 export function binding_entry_matcher(tree: pt.Tree): {
-  given: boolean
+  implicit: boolean
   names: Array<string>
   exp: Exp
 } {
   return pt.matcher({
     "binding_entry:nameless": ({ exp }) => ({
-      given: false,
+      implicit: false,
       names: ["_"],
       exp: exp_matcher(exp),
     }),
     "binding_entry:named": ({ name, exp }) => ({
-      given: false,
+      implicit: false,
       names: [pt.str(name)],
       exp: exp_matcher(exp),
     }),
     "binding_entry:implicit_named": ({ name, exp }) => ({
-      given: true,
+      implicit: true,
       names: [pt.str(name)],
       exp: exp_matcher(exp),
     }),
@@ -401,7 +401,7 @@ export function binding_entry_matcher(tree: pt.Tree): {
 
 export function names_matcher(
   tree: pt.Tree
-): Array<{ given: boolean; name: string }> {
+): Array<{ implicit: boolean; name: string }> {
   return pt.matcher({
     "names:names": ({ entries, last_entry }) => [
       ...pt.matchers.zero_or_more_matcher(entries).map(name_entry_matcher),
@@ -415,16 +415,16 @@ export function names_matcher(
 }
 
 export function name_entry_matcher(tree: pt.Tree): {
-  given: boolean
+  implicit: boolean
   name: string
 } {
   return pt.matcher({
     "name_entry:name_entry": ({ name }) => ({
-      given: false,
+      implicit: false,
       name: pt.str(name),
     }),
     "name_entry:implicit_name_entry": ({ name }) => ({
-      given: true,
+      implicit: true,
       name: pt.str(name),
     }),
   })(tree)
@@ -440,7 +440,7 @@ export function exps_matcher(tree: pt.Tree): Array<Exp> {
 }
 
 export function args_matcher(tree: pt.Tree): Array<{
-  given: boolean
+  implicit: boolean
   exp: Exp
 }> {
   return pt.matcher({
@@ -452,16 +452,16 @@ export function args_matcher(tree: pt.Tree): Array<{
 }
 
 export function arg_entry_matcher(tree: pt.Tree): {
-  given: boolean
+  implicit: boolean
   exp: Exp
 } {
   return pt.matcher({
     "arg_entry:arg_entry": ({ exp }) => ({
-      given: false,
+      implicit: false,
       exp: exp_matcher(exp),
     }),
     "arg_entry:implicit_arg_entry": ({ exp }) => ({
-      given: true,
+      implicit: true,
       exp: exp_matcher(exp),
     }),
   })(tree)

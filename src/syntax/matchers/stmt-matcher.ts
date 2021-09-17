@@ -30,15 +30,15 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     "stmt:def_fn": ({ name, bindings, ret_t, ret }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
-        .flatMap(({ given, names }) =>
-          names.map((name) => ({ given, name })).reverse()
+        .flatMap(({ implicit, names }) =>
+          names.map((name) => ({ implicit, name })).reverse()
         )
-        .reduce((result, { given, name }) => {
-          if (given) {
+        .reduce((result, { implicit, name }) => {
+          if (implicit) {
             if (!(result instanceof Exps.Fn || result instanceof Exps.FnIm)) {
               throw new Error(
                 [
-                  `When reducing given names,`,
+                  `When reducing implicit names,`,
                   `I expects the result to be Exps.Fn or Exps.FnIm`,
                   `  class name: ${result.constructor.name}`,
                 ].join("\n")
