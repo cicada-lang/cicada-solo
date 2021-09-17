@@ -4,5 +4,7 @@
 1: Nat 
 1: Nat 
 1: Nat 
+Nat: Type 
+String: Type 
 100: Nat 
 100: Nat 
