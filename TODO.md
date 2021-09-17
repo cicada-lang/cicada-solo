@@ -1,6 +1,5 @@
 # implicit
 
-- use `{ }` for implicit pi syntax -- instead of `give`
 - use `implicit { }` for implicit application syntax -- instead of `give`
 - use `implicit { }` for implicit function syntax -- instead of `give`
 
