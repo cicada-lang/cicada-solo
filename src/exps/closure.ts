@@ -14,7 +14,7 @@ export class Closure {
     this.ret = ret
   }
 
-  apply(value: Value): Value {
-    return evaluate(this.env.extend(this.name, value), this.ret)
+  apply(arg: Value): Value {
+    return evaluate(this.env.extend(this.name, arg), this.ret)
   }
 }

@@ -1,12 +1,15 @@
 # implicit
 
-- `pi-im` implicit argument should always be a record
-- `pi-im` syntax for implicit argument record
+- `pi-im-value` implicit argument record
 
-- `fn-im` implicit argument should always be a record
-- `fn-im` syntax for implicit argument record
+- `fn-im` implicit argument record
+- `fn-im-core` implicit argument record
+- `fn-im-value` implicit argument record
 
-- `ap-im` implicit argument should always be a record
+- `ap-im` implicit argument record
+- `ap-im-core` implicit argument record
+- `ap-im-value` implicit argument record
+
 - `ap-im` syntax for implicit argument record
 
 - refactor interface about `solve`

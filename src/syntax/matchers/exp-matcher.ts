@@ -23,7 +23,7 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
             ].join("\n")
           )
         }
-        return new Exps.PiIm(name, exp, result)
+        return new Exps.PiIm([{ name, arg_t: exp }], result)
       } else {
         return new Exps.Pi(name, exp, result)
       }

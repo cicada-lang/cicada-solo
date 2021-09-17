@@ -62,7 +62,7 @@ infer(ctx, Ap(target, arg)) {
 
 Check `(x) { x }` against `(given A: Type, A) -> A`
 
-1. `(x) { x }` is not an impicit lambda
+1. `(x) { x }` is not an implicit lambda
 2. Assume `A: Type` in context
 3. Check `(x) { x }` against `(A) -> A`
 4. Return `(given A, x) { x }`
@@ -71,7 +71,7 @@ With closure (the argument name of a closure is unknown):
 
 Check `(x) { x }` against `(given Type) -> (closure A) => (A) -> A`
 
-1. `(x) { x }` is not an impicit lambda
+1. `(x) { x }` is not an implicit lambda
 2. Assume `fresh_name: Type` in context
 3. Check `(x) { x }` against `(fresh_name) -> fresh_name`
 4. Return `(given fresh_name, x) { x }`
