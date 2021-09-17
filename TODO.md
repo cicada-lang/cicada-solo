@@ -1,5 +1,9 @@
 # implicit
 
+- back to testable
+
+- `pi-im` implicit argument record
+- `pi-im-core` implicit argument record
 - `pi-im-value` implicit argument record
 
 - `fn-im` implicit argument record
