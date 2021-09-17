@@ -369,7 +369,12 @@ export const names = {
 export const name_entry = {
   $grammar: {
     "name_entry:name_entry": [{ name: "identifier" }],
-    "name_entry:given_name_entry": ['"given"', { name: "identifier" }],
+    "name_entry:given_name_entry": [
+      '"implicit"',
+      '"{"',
+      { name: "identifier" },
+      '"}"',
+    ],
   },
 }
 

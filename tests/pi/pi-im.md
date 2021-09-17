@@ -16,7 +16,7 @@ id2: ({ A: Type }, x: A) -> A =
   }
 
 id3: ({ A: Type }, x: A) -> A =
-  (given A, x) {
+  (implicit { A }, x) {
     x
   }
 
