@@ -64,4 +64,13 @@ k2(
 }
 
 k2(given Nat, given Nat, 100, 101)
+
+// NOTE Test implicit fn insertion
+
+k2_again: k2_t =
+  (x, y) {
+    x
+  }
+
+k2_again(given Nat, given Nat, 100, 101)
 ```

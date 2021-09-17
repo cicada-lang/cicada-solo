@@ -47,7 +47,9 @@ export class FnIm extends Exp {
     const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
     const ret_core = check(ctx.extend(fresh_name, pi_im.arg_t), ret, ret_t)
 
-    if (!(ret_core instanceof Exps.FnCore || ret_core instanceof Exps.FnImCore)) {
+    if (
+      !(ret_core instanceof Exps.FnCore || ret_core instanceof Exps.FnImCore)
+    ) {
       throw new Trace(
         [
           `I expect ret_core to be Exps.FnCore or Exps.FnImCore`,
