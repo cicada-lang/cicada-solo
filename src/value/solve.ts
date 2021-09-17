@@ -6,42 +6,52 @@ import * as Exps from "../exps"
 import { Trace } from "../errors"
 
 export function solve(
-  ctx: Ctx,
-  x_t: Value,
-  x: Value,
-  y_t: Value,
-  y: Value,
-  logic_var: Exps.NotYetValue
+  not_yet_value: Exps.NotYetValue,
+  opts: {
+    ctx: Ctx
+    left: { t: Value; value: Value }
+    right: { t: Value; value: Value }
+  }
 ): { value: Value; core: Core } {
-  const subst = Subst.empty.unify(x, y)
+  const { ctx, left, right } = opts
 
-  if (!(logic_var.neutral instanceof Exps.VarNeutral)) {
+  const subst = Subst.empty.unify(left.value, right.value)
+
+  if (!(not_yet_value.neutral instanceof Exps.VarNeutral)) {
     throw new Trace(
-      `Solve fail, expecting logic_var.neutral to be Exps.VarNeutral`
+      `Solve fail, expecting not_yet_value.neutral to be Exps.VarNeutral`
     )
   }
 
   if (Subst.failure_p(subst)) {
-    const logic_var_repr = readback(ctx, logic_var.t, logic_var).repr()
-    const x_repr = readback(ctx, x_t, x).repr()
-    const y_repr = readback(ctx, y_t, y).repr()
+    const not_yet_value_repr = readback(
+      ctx,
+      not_yet_value.t,
+      not_yet_value
+    ).repr()
+    const left_repr = readback(ctx, left.t, left.value).repr()
+    const right_repr = readback(ctx, right.t, right.value).repr()
     throw new Trace(
       [
-        `Unification fail, fail to solve logic variable: ${logic_var_repr}`,
-        `  left: ${x_repr}`,
-        `  right: ${y_repr}`,
+        `Unification fail, fail to solve logic variable: ${not_yet_value_repr}`,
+        `  left: ${left_repr}`,
+        `  right: ${right_repr}`,
       ].join("\n")
     )
   }
 
-  const value = subst.find(Subst.logic_var_name(logic_var))
+  const value = subst.find(Subst.logic_var_name(not_yet_value))
   if (value === undefined) {
-    const logic_var_repr = readback(ctx, logic_var.t, logic_var).repr()
-    throw new Trace(`Fail to solve logic variable: ${logic_var_repr}`)
+    const not_yet_value_repr = readback(
+      ctx,
+      not_yet_value.t,
+      not_yet_value
+    ).repr()
+    throw new Trace(`Fail to solve logic variable: ${not_yet_value_repr}`)
   }
 
   return {
     value,
-    core: readback(ctx, logic_var.t, value),
+    core: readback(ctx, not_yet_value.t, value),
   }
 }

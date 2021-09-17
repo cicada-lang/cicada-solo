@@ -40,6 +40,9 @@ k1(
 }
 
 k1(given Nat, 100, given Nat, 101)
+
+// NOTE Test implicit ap insertion
+k1(100, 101)
 ```
 
 # implicit argument over implicit argument
@@ -73,4 +76,8 @@ k2_again: k2_t =
   }
 
 k2_again(given Nat, given Nat, 100, 101)
+
+// NOTE Test implicit ap insertion
+// k2(100, 101)
+// k2_again(100, 101)
 ```
