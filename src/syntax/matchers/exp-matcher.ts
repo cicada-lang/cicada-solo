@@ -14,11 +14,11 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
     )
     .reduce((result, { implicit, name, exp }) => {
       if (implicit) {
-        if (!(result instanceof Exps.Pi || result instanceof Exps.PiIm)) {
+        if (!(result instanceof Exps.Pi)) {
           throw new Error(
             [
               `When reducing implicit names,`,
-              `I expects the result to be Exps.Pi or Exps.PiIm`,
+              `I expects the result to be Exps.Pi`,
               `  class name: ${result.constructor.name}`,
             ].join("\n")
           )
@@ -287,11 +287,11 @@ export function declaration_matcher(tree: pt.Tree): Exp {
         )
         .reduce((result, { implicit, name }) => {
           if (implicit) {
-            if (!(result instanceof Exps.Fn || result instanceof Exps.FnIm)) {
+            if (!(result instanceof Exps.Fn)) {
               throw new Error(
                 [
                   `When reducing implicit names,`,
-                  `I expects the result to be Exps.Fn or Exps.FnIm`,
+                  `I expects the result to be Exps.Fn`,
                   `  class name: ${result.constructor.name}`,
                 ].join("\n")
               )
@@ -338,11 +338,11 @@ export function cls_entry_matcher(tree: pt.Tree): {
         )
         .reduce((result, { implicit, name }) => {
           if (implicit) {
-            if (!(result instanceof Exps.Fn || result instanceof Exps.FnIm)) {
+            if (!(result instanceof Exps.Fn)) {
               throw new Error(
                 [
                   `When reducing implicit names,`,
-                  `I expects the result to be Exps.Fn or Exps.FnIm`,
+                  `I expects the result to be Exps.Fn`,
                   `  class name: ${result.constructor.name}`,
                 ].join("\n")
               )

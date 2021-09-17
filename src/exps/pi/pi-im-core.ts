@@ -9,9 +9,9 @@ import * as Exps from "../../exps"
 export class PiImCore extends Core {
   name: string
   arg_t: Core
-  ret_t: Exps.PiCore | Exps.PiImCore
+  ret_t: Exps.PiCore
 
-  constructor(name: string, arg_t: Core, ret_t: Exps.PiCore | Exps.PiImCore) {
+  constructor(name: string, arg_t: Core, ret_t: Exps.PiCore) {
     super()
     this.name = name
     this.arg_t = arg_t

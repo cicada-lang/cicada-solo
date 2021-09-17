@@ -35,11 +35,11 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         )
         .reduce((result, { implicit, name }) => {
           if (implicit) {
-            if (!(result instanceof Exps.Fn || result instanceof Exps.FnIm)) {
+            if (!(result instanceof Exps.Fn)) {
               throw new Error(
                 [
                   `When reducing implicit names,`,
-                  `I expects the result to be Exps.Fn or Exps.FnIm`,
+                  `I expects the result to be Exps.Fn`,
                   `  class name: ${result.constructor.name}`,
                 ].join("\n")
               )

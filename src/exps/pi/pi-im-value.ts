@@ -30,15 +30,10 @@ export class PiImValue extends Value {
         this.ret_t_cl.apply(not_yet_value)
       )
 
-      if (
-        !(
-          ret_t_core instanceof Exps.PiCore ||
-          ret_t_core instanceof Exps.PiImCore
-        )
-      ) {
+      if (!(ret_t_core instanceof Exps.PiCore)) {
         throw new Trace(
           [
-            `I expect ret_t_core to be of type Exps.PiCore or Exps.PiImCore.`,
+            `I expect ret_t_core to be of type Exps.PiCore.`,
             `  class name: ${ret_t_core.constructor.name}`,
           ].join("\n")
         )

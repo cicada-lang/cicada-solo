@@ -12,9 +12,9 @@ import * as ut from "../../ut"
 export class PiIm extends Exp {
   name: string
   arg_t: Exp
-  ret_t: Exps.Pi | Exps.PiIm
+  ret_t: Exps.Pi
 
-  constructor(name: string, arg_t: Exp, ret_t: Exps.Pi | Exps.PiIm) {
+  constructor(name: string, arg_t: Exp, ret_t: Exps.Pi) {
     super()
     this.name = name
     this.arg_t = arg_t
@@ -55,14 +55,10 @@ export class PiIm extends Exp {
       new Exps.TypeValue()
     )
 
-    if (
-      !(
-        ret_t_core instanceof Exps.PiCore || ret_t_core instanceof Exps.PiImCore
-      )
-    ) {
+    if (!(ret_t_core instanceof Exps.PiCore)) {
       throw new Trace(
         [
-          `I expect ret_t_core to be Exps.PiCore or Exps.PiImCore`,
+          `I expect ret_t_core to be Exps.PiCore`,
           `but the constructor name I meet is: ${ret_t_core.constructor.name}`,
         ].join("\n") + "\n"
       )
