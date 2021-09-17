@@ -1,7 +1,6 @@
 # implicit
 
-- rename fn-im to im-fn
-- rename ap-im to im-ap
+- `im-pi/`
 
 - `im-pi-insertion` -- `based_on` as type guard
 
@@ -11,9 +10,9 @@
 - `im-pi-core` implicit argument record
 - `im-pi-value` implicit argument record
 
-- `fn-im` implicit argument record
-- `fn-im-core` implicit argument record
-- `fn-im-value` implicit argument record
+- `im-fn` implicit argument record
+- `im-fn-core` implicit argument record
+- `im-fn-value` implicit argument record
 
 - `ap-im` implicit argument record
 - `ap-im-core` implicit argument record
@@ -27,7 +26,7 @@
 
 - [stdlib] try implicit argument in `stdlib`
 
-- Value.unify -- pi/fn-value.ts & pi/fn-im-value.ts
+- Value.unify -- pi/fn-value.ts & pi/im-fn-value.ts
 
   - typed directed `unify`
   - bidirectional `unify`

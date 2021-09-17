@@ -49,7 +49,7 @@ export class ApImCore extends Core {
   }
 
   static apply(target: Value, arg: Value): Value {
-    if (target instanceof Exps.FnImValue) {
+    if (target instanceof Exps.ImFnValue) {
       return target.apply(arg)
     } else if (target instanceof Exps.NotYetValue) {
       const { t, neutral } = target
@@ -65,7 +65,7 @@ export class ApImCore extends Core {
       }
     } else {
       throw InternalError.wrong_target(target, {
-        expected: [Exps.FnImValue],
+        expected: [Exps.ImFnValue],
       })
     }
   }

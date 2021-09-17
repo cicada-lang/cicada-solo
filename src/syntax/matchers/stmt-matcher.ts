@@ -44,7 +44,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                 ].join("\n")
               )
             }
-            return new Exps.FnIm(name, result)
+            return new Exps.ImFn(name, result)
           } else {
             return new Exps.Fn(name, result)
           }

@@ -62,7 +62,7 @@ export class Fn extends Exp {
         )
       }
 
-      return new Exps.FnImCore(fresh_name, result)
+      return new Exps.ImFnCore(fresh_name, result)
     } else {
       throw new Trace(
         [

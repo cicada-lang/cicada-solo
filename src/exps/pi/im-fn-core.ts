@@ -5,18 +5,18 @@ import { Subst } from "../../subst"
 import { Closure } from "../closure"
 import * as Exps from "../../exps"
 
-export class FnImCore extends Core {
+export class ImFnCore extends Core {
   name: string
-  ret: Exps.FnCore | Exps.FnImCore
+  ret: Exps.FnCore | Exps.ImFnCore
 
-  constructor(name: string, ret: Exps.FnCore | Exps.FnImCore) {
+  constructor(name: string, ret: Exps.FnCore | Exps.ImFnCore) {
     super()
     this.name = name
     this.ret = ret
   }
 
   evaluate(env: Env): Value {
-    return new Exps.FnImValue(new Closure(env, this.name, this.ret))
+    return new Exps.ImFnValue(new Closure(env, this.name, this.ret))
   }
 
   multi_fn_repr(names: Array<string> = new Array()): {

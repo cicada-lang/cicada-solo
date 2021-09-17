@@ -66,7 +66,7 @@ export class ImPiValue extends Value {
       )
     }
 
-    return new Exps.FnImCore(fresh_name, result)
+    return new Exps.ImFnCore(fresh_name, result)
   }
 
   unify(subst: Subst, that: Value): Subst {
