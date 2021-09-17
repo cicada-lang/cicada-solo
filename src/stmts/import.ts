@@ -8,11 +8,12 @@ export type ImportEntry = {
   alias?: string
 }
 
-export class Import implements Stmt {
+export class Import extends Stmt {
   path: string
   entries: Array<ImportEntry>
 
   constructor(path: string, entries: Array<ImportEntry>) {
+    super()
     this.path = path
     this.entries = entries
   }

@@ -1,5 +1,5 @@
 import { Module } from "../module"
 
-export type Stmt = {
-  execute(mod: Module): Promise<void>
+export abstract class Stmt {
+  abstract execute(mod: Module): Promise<void>
 }

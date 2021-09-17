@@ -5,11 +5,12 @@ import { infer } from "../exp"
 import { evaluate } from "../core"
 import { Trace } from "../errors"
 
-export class Def implements Stmt {
+export class Def extends Stmt {
   name: string
   exp: Exp
 
   constructor(name: string, exp: Exp) {
+    super()
     this.name = name
     this.exp = exp
   }

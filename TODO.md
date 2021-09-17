@@ -1,8 +1,9 @@
 # implicit
 
-- `im-pi-insertion` -- `based_on` as type guard
+- `im-ap-insertion` -- `based_on` as type guard
 
-- [refactor] `ap` -- apply
+- `ap` extract by interface `im-ap-insertion`
+- `fn` extract by interface `im-fn-insertion`
 
 - `im-pi` implicit argument record
 - `im-pi-core` implicit argument record

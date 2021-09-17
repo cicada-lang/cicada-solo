@@ -4,11 +4,12 @@ import { infer } from "../exp"
 import { evaluate } from "../core"
 import * as Exps from "../exps"
 
-export class Class implements Stmt {
+export class Class extends Stmt {
   name: string
   cls: Exps.Cls
 
   constructor(name: string, cls: Exps.Cls) {
+    super()
     this.name = name
     this.cls = cls
   }

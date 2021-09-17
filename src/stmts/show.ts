@@ -6,10 +6,11 @@ import { evaluate } from "../core"
 import { readback } from "../value"
 import * as Exps from "../exps"
 
-export class Show implements Stmt {
+export class Show extends Stmt {
   exp: Exp
 
   constructor(exp: Exp) {
+    super()
     this.exp = exp
   }
 
