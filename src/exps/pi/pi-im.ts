@@ -64,7 +64,7 @@ export class PiIm extends Exp {
       const entry = implicit[i]
       const fresh_name = ut.freshen_name(new Set(ctx.names), entry.name)
       const arg_t_core = check(ctx, entry.arg_t, new Exps.TypeValue())
-      implicit_core.push([{ name: fresh_name, art_t: arg_t_core }])
+      implicit_core.push({ name: fresh_name, arg_t: arg_t_core })
       ret_t = ret_t.subst(entry.name, new Exps.Var(fresh_name))
       ctx = ctx.extend(fresh_name, evaluate(ctx.to_env(), arg_t_core))
     }

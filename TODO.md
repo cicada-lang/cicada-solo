@@ -8,7 +8,7 @@
 
 - `ap-im` implicit argument record
 - `ap-im-core` implicit argument record
-- `ap-im-value` implicit argument record
+- `ap-im-neutral` implicit argument record
 
 - `ap-im` syntax for implicit argument record
 
