@@ -29,6 +29,17 @@ id2(given Nat, 1)
 id3(given Nat, 1)
 ```
 
+# return implicit value
+
+``` cicada
+typeof({ T: Type }, T): Type {
+  T
+}
+
+typeof(123)
+typeof("abc")
+```
+
 # multiple implicit arguments
 
 ``` cicada

@@ -1,7 +1,5 @@
 # implicit
 
-- test returning implicit value
-
 - use `implicit { }` for implicit application syntax -- instead of `given`
 
   - remove `given` from preserved identifier
