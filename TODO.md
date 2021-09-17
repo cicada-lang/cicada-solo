@@ -1,6 +1,9 @@
 # implicit
 
-- ap.ts -- handle `PiImValue`
+- refactor interface about `solve`
+
+- ap.ts -- `infer` implicit argument over one argument
+- ap.ts -- `infer` implicit argument over implicit argument
 
 - use implicit to implement `cong` by `replace` -- `from` and `to`
 

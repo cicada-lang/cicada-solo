@@ -40,9 +40,16 @@ k1(
 }
 
 k1(given Nat, 100, given Nat, 101)
-
-// NOTE Test implicit ap insertion
 k1(100, 101)
+```
+
+# implicit argument over one argument
+
+``` cicada
+k_trivial(given A: Type, Trivial, x: A): A { x }
+k_trivial(given Nat, sole, 123)
+// TODO
+// k_trivial(sole, 123)
 ```
 
 # implicit argument over implicit argument
@@ -67,6 +74,8 @@ k2(
 }
 
 k2(given Nat, given Nat, 100, 101)
+// TODO
+// k2(100, 101)
 
 // NOTE Test implicit fn insertion
 
@@ -76,8 +85,6 @@ k2_again: k2_t =
   }
 
 k2_again(given Nat, given Nat, 100, 101)
-
-// NOTE Test implicit ap insertion
-// k2(100, 101)
+// TODO
 // k2_again(100, 101)
 ```

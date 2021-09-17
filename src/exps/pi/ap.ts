@@ -107,32 +107,7 @@ export class Ap extends Exp {
     }
 
     if (ret_t instanceof Exps.PiImValue) {
-      const result = solve(not_yet_value, {
-        ctx: ctx.extend(fresh_name, arg_t, not_yet_value),
-        left: { t: new Exps.TypeValue(), value: ret_t.arg_t },
-        right: { t: new Exps.TypeValue(), value: inferred_arg.t },
-      })
-
-      const real_ret_t = ret_t_cl.apply(result.value)
-
-      if (!(real_ret_t instanceof Exps.PiImValue)) {
-        throw new Trace(
-          [
-            `When Exps.Ap.infer meet target of type Exps.PiImValue,`,
-            `and when ret_t is Exps.PiImValue,`,
-            `it expects real_ret_t to also be Exps.PiImValue,`,
-            `  class name: ${real_ret_t.constructor.name}`,
-          ].join("\n")
-        )
-      }
-
-      return {
-        t: real_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
-        core: new Exps.ApCore(
-          new Exps.ApImCore(target_core, result.core),
-          inferred_arg.core
-        ),
-      }
+      throw new Error("TODO implicit argument over implicit argument")
     }
 
     throw new Trace(
