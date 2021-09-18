@@ -6,8 +6,9 @@ import { Subst } from "../../subst"
 import { Closure } from "../closure"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
+import { ReadbackEtaExpansion } from "../../value"
 
-export class SigmaValue extends Value {
+export class SigmaValue extends Value implements ReadbackEtaExpansion {
   car_t: Value
   cdr_t_cl: Closure
 
@@ -34,7 +35,7 @@ export class SigmaValue extends Value {
     }
   }
 
-  eta_expand(ctx: Ctx, value: Value): Core {
+  readback_eta_expand(ctx: Ctx, value: Value): Core {
     // NOTE Pairs are also η-expanded.
     //   Every value with a pair type,
     //   whether it is neutral or not,

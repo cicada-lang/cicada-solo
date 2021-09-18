@@ -4,8 +4,9 @@ import { Core } from "../../core"
 import { Value } from "../../value"
 import { Subst } from "../../subst"
 import * as Exps from "../../exps"
+import { ReadbackEtaExpansion } from "../../value"
 
-export abstract class ClsValue extends Value {
+export abstract class ClsValue extends Value implements ReadbackEtaExpansion {
   instanceofExpsClsValue = true
 
   constructor() {
@@ -24,7 +25,7 @@ export abstract class ClsValue extends Value {
 
   abstract eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core>
 
-  eta_expand(ctx: Ctx, value: Value): Core {
+  readback_eta_expand(ctx: Ctx, value: Value): Core {
     return new Exps.ObjCore(this.eta_expand_properties(ctx, value))
   }
 

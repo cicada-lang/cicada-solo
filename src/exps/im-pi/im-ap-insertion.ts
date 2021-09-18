@@ -9,7 +9,7 @@ export interface ImApInsertion {
 
 export const ImApInsertion = {
   // NOTE A type guard for type-based implicit application insertion.
-  based_on(value: Value): value is Value & ImApInsertion {
-    return (value as any)["insert_im_ap"] instanceof Function
+  based_on(t: Value): t is Value & ImApInsertion {
+    return (t as any)["insert_im_ap"] instanceof Function
   },
 }

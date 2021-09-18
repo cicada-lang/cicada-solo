@@ -1,10 +1,5 @@
 # implicit
 
-- [refactor] `ReadbackEtaExpansion` instead of the `Value.eta_expand`
-
-  - the method `Value.eta_expand` is confusing, because it also `readback` value
-  - the same is true for eta-expansion during `unify`
-
 - `im-pi` implicit argument record
 - `im-pi-core` implicit argument record
 - `im-pi-value` implicit argument record

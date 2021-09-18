@@ -27,7 +27,7 @@ export class Repl {
   }
 
   greeting(): void {
-    console.log(`Welcome to Cicada ${pkg.version} ^-^/`)
+    console.log(`Welcome to Cicada ${pkg.version} *^-^*/`)
   }
 
   get text(): string {

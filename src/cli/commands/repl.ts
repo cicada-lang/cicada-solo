@@ -11,5 +11,4 @@ export const handler = async (argv: Argv) => {
   const dir = argv["dir"] || process.cwd()
   const repl = new Repl({ dir })
   await repl.run()
-  return
 }

@@ -8,8 +8,9 @@ import { readback } from "../../value"
 import { Closure } from "../closure"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
+import { ReadbackEtaExpansion } from "../../value"
 
-export class PiValue extends Value {
+export class PiValue extends Value implements ReadbackEtaExpansion {
   arg_t: Value
   ret_t_cl: Closure
 
@@ -34,7 +35,7 @@ export class PiValue extends Value {
     }
   }
 
-  eta_expand(ctx: Ctx, value: Value): Core {
+  readback_eta_expand(ctx: Ctx, value: Value): Core {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.

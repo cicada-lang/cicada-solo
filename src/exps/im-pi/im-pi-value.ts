@@ -12,8 +12,12 @@ import * as ut from "../../ut"
 import * as Exps from "../../exps"
 import { ImApInsertion } from "./im-ap-insertion"
 import { ImFnInsertion } from "./im-fn-insertion"
+import { ReadbackEtaExpansion } from "../../value"
 
-export class ImPiValue extends Value implements ImApInsertion, ImFnInsertion {
+export class ImPiValue
+  extends Value
+  implements ImApInsertion, ImFnInsertion, ReadbackEtaExpansion
+{
   arg_t: Value
   ret_t_cl: Closure
 
@@ -48,7 +52,7 @@ export class ImPiValue extends Value implements ImApInsertion, ImFnInsertion {
     }
   }
 
-  eta_expand(ctx: Ctx, value: Value): Core {
+  readback_eta_expand(ctx: Ctx, value: Value): Core {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.

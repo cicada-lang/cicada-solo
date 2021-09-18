@@ -9,7 +9,7 @@ export interface ImFnInsertion {
 
 export const ImFnInsertion = {
   // NOTE A type guard for type-based implicit function insertion.
-  based_on(value: Value): value is Value & ImFnInsertion {
-    return (value as any)["insert_im_fn"] instanceof Function
+  based_on(t: Value): t is Value & ImFnInsertion {
+    return (t as any)["insert_im_fn"] instanceof Function
   },
 }
