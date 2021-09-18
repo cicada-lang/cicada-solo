@@ -1,6 +1,12 @@
+- rename the use of `Subst` in unification to `Solution`
+- rename `Exp.subst` to `Exp.substitute`
+- improve `substitute` by avoid doing it when name and fresh name are the same.
+
 # implicit
 
-- use git branch to implement implicit
+> Implementation guides:
+> - use git branch to implement implicit
+> - use null object pattern (in our case unit object pattern)
 
 - [note] we are implementing named argument,
   thus we can not just use `name`,
@@ -47,19 +53,6 @@
 - `Subst.unify` occur check
 
 - `Value.occur` handle each case
-
-# substitution
-
-- rename the use of `subst` in unification to `solution`
-
-- most of the complexity of the type checker come from the use of `subst`,
-  which is to ensure names in `ctx` are unique.
-
-  - we need to ensure names in `ctx` are unique,
-    because of `readback`. [need examples]
-
-  - `subst` can be improved by avoid doing the it
-    when name and fresh name are the same.
 
 # use `unify` to replace `readback`
 
