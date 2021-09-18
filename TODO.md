@@ -1,7 +1,5 @@
 # implicit
 
-- back to testable
-
 - use git branch to implement implicit
 
 - [note] we are implementing named argument,
