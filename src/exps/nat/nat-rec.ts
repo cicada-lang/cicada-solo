@@ -7,7 +7,7 @@ import { check } from "../../exp"
 import { infer } from "../../exp"
 import { readback } from "../../value"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 import { nanoid } from "nanoid"
 

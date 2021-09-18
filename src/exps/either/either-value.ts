@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 import { readback } from "../../value"
 import * as Exps from "../../exps"
 
@@ -24,13 +24,13 @@ export class EitherValue extends Value {
     }
   }
 
-  unify(subst: Subst, that: Value): Subst {
+  unify(subst: Solution, that: Value): Solution {
     if (that instanceof Exps.EitherValue) {
       return subst
         .unify(this.left_t, that.left_t)
         .unify(this.right_t, that.right_t)
     } else {
-      return Subst.failure
+      return Solution.failure
     }
   }
 }

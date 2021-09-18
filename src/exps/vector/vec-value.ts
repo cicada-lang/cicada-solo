@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 import { readback } from "../../value"
 import * as Exps from "../../exps"
 
@@ -24,11 +24,11 @@ export class VecValue extends Value {
     }
   }
 
-  unify(subst: Subst, that: Value): Subst {
+  unify(subst: Solution, that: Value): Solution {
     if (that instanceof Exps.VecValue) {
       return subst.unify(this.head, that.head).unify(this.tail, that.tail)
     } else {
-      return Subst.failure
+      return Solution.failure
     }
   }
 }

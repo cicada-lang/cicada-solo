@@ -2,7 +2,7 @@ import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 import { ReadbackEtaExpansion } from "../../value"
 

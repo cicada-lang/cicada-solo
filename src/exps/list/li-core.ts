@@ -2,7 +2,7 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class LiCore extends Core {

@@ -5,7 +5,7 @@ import { infer } from "../../exp"
 import { expect } from "../../value"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class Cdr extends Exp {

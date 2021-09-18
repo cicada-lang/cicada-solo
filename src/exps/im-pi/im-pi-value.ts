@@ -1,6 +1,6 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 import { readback } from "../../value"
 import { evaluate } from "../../core"
 import { infer } from "../../exp"
@@ -78,10 +78,10 @@ export class ImPiValue
     return new Exps.ImFnCore(fresh_name, result)
   }
 
-  unify(subst: Subst, that: Value): Subst {
+  unify(subst: Solution, that: Value): Solution {
     if (that instanceof Exps.ImPiValue) {
       subst = subst.unify(this.arg_t, that.arg_t)
-      if (Subst.failure_p(subst)) return subst
+      if (Solution.failure_p(subst)) return subst
       const names = new Set([
         ...subst.names,
         this.ret_t_cl.name,
@@ -96,7 +96,7 @@ export class ImPiValue
         that.ret_t_cl.apply(that_v)
       )
     } else {
-      return Subst.failure
+      return Solution.failure
     }
   }
 

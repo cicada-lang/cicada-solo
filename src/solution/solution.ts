@@ -1,8 +1,8 @@
 import { Value } from "../value"
 import * as Exps from "../exps"
 
-export abstract class Subst {
-  abstract extend(name: string, value: Value): Subst
+export abstract class Solution {
+  abstract extend(name: string, value: Value): Solution
   abstract find(name: string): Value | undefined
   abstract names: Array<string>
 
@@ -24,25 +24,25 @@ export abstract class Subst {
     }
   }
 
-  static get empty(): EmptySubst {
-    return new EmptySubst()
+  static get empty(): EmptySolution {
+    return new EmptySolution()
   }
 
-  static empty_p(subst: Subst): subst is EmptySubst {
-    return subst instanceof EmptySubst
+  static empty_p(subst: Solution): subst is EmptySolution {
+    return subst instanceof EmptySolution
   }
 
-  static get failure(): FailureSubst {
-    return new FailureSubst()
+  static get failure(): FailureSolution {
+    return new FailureSolution()
   }
 
-  static failure_p(subst: Subst): subst is FailureSubst {
-    return subst instanceof FailureSubst
+  static failure_p(subst: Solution): subst is FailureSolution {
+    return subst instanceof FailureSolution
   }
 
   walk(value: Value): Value {
-    while (Subst.logic_var_p(value)) {
-      const found = this.find(Subst.logic_var_name(value))
+    while (Solution.logic_var_p(value)) {
+      const found = this.find(Solution.logic_var_name(value))
       if (found === undefined) {
         return value
       } else {
@@ -53,22 +53,22 @@ export abstract class Subst {
     return value
   }
 
-  unify(x: Value, y: Value): Subst {
+  unify(x: Value, y: Value): Solution {
     x = this.walk(x)
     y = this.walk(y)
 
-    if (Subst.logic_var_p(x) && Subst.logic_var_p(y)) {
-      if (Subst.logic_var_name(x) === Subst.logic_var_name(x)) {
+    if (Solution.logic_var_p(x) && Solution.logic_var_p(y)) {
+      if (Solution.logic_var_name(x) === Solution.logic_var_name(x)) {
         return this
       } else {
-        return Subst.failure
+        return Solution.failure
       }
-    } else if (Subst.logic_var_p(x)) {
+    } else if (Solution.logic_var_p(x)) {
       // TODO occur check
-      return this.extend(Subst.logic_var_name(x), y)
-    } else if (Subst.logic_var_p(y)) {
+      return this.extend(Solution.logic_var_name(x), y)
+    } else if (Solution.logic_var_p(y)) {
       // TODO occur check
-      return this.extend(Subst.logic_var_name(y), x)
+      return this.extend(Solution.logic_var_name(y), x)
     } else {
       // NOTE When implementing unify for a `Value` subclass,
       //   the case where the argument is a logic variable is already handled.
@@ -77,13 +77,13 @@ export abstract class Subst {
   }
 }
 
-class ExtendSubst extends Subst {
+class ExtendSolution extends Solution {
   // TODO Should `Subst` also contains type of value -- like `Ctx`?
   name: string
   value: Value
-  rest: Subst
+  rest: Solution
 
-  constructor(name: string, value: Value, rest: Subst) {
+  constructor(name: string, value: Value, rest: Solution) {
     super()
     this.name = name
     this.value = value
@@ -94,8 +94,8 @@ class ExtendSubst extends Subst {
     return [this.name, ...this.rest.names]
   }
 
-  extend(name: string, value: Value): Subst {
-    return new ExtendSubst(name, value, this)
+  extend(name: string, value: Value): Solution {
+    return new ExtendSolution(name, value, this)
   }
 
   find(name: string): Value | undefined {
@@ -107,11 +107,11 @@ class ExtendSubst extends Subst {
   }
 }
 
-class EmptySubst extends Subst {
+class EmptySolution extends Solution {
   names = []
 
-  extend(name: string, value: Value): Subst {
-    return new ExtendSubst(name, value, this)
+  extend(name: string, value: Value): Solution {
+    return new ExtendSolution(name, value, this)
   }
 
   find(name: string): Value | undefined {
@@ -119,10 +119,10 @@ class EmptySubst extends Subst {
   }
 }
 
-class FailureSubst extends Subst {
+class FailureSolution extends Solution {
   names = []
 
-  extend(name: string, value: Value): Subst {
+  extend(name: string, value: Value): Solution {
     return this
   }
 

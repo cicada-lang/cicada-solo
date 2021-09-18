@@ -1,6 +1,6 @@
 import { Ctx } from "../ctx"
 import { Value, readback } from "../value"
-import { Subst } from "../subst"
+import { Solution } from "../solution"
 import { Core } from "../core"
 import * as Exps from "../exps"
 import { Trace } from "../errors"
@@ -15,7 +15,7 @@ export function solve(
 ): { value: Value; core: Core } {
   const { ctx, left, right } = opts
 
-  const subst = Subst.empty.unify(left.value, right.value)
+  const subst = Solution.empty.unify(left.value, right.value)
 
   if (!(not_yet_value.neutral instanceof Exps.VarNeutral)) {
     throw new Trace(
@@ -23,7 +23,7 @@ export function solve(
     )
   }
 
-  if (Subst.failure_p(subst)) {
+  if (Solution.failure_p(subst)) {
     const not_yet_value_repr = readback(
       ctx,
       not_yet_value.t,
@@ -40,7 +40,7 @@ export function solve(
     )
   }
 
-  const value = subst.find(Subst.logic_var_name(not_yet_value))
+  const value = subst.find(Solution.logic_var_name(not_yet_value))
   if (value === undefined) {
     const not_yet_value_repr = readback(
       ctx,

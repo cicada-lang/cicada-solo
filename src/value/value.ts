@@ -1,11 +1,11 @@
 import { Ctx } from "../ctx"
 import { Core } from "../core"
-import { Subst } from "../subst"
+import { Solution } from "../solution"
 
 export abstract class Value {
   abstract readback(ctx: Ctx, t: Value): Core | undefined
 
-  unify(subst: Subst, that: Value): Subst {
+  unify(subst: Solution, that: Value): Solution {
     throw new Error("Method not implemented: unify")
   }
 }

@@ -3,7 +3,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 import { nat_to_number } from "./nat-util"
 import * as Exps from "../../exps"
 

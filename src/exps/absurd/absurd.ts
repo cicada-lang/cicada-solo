@@ -2,7 +2,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class Absurd extends Exp {

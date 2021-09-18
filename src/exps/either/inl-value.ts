@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 import { readback } from "../../value"
 import * as Exps from "../../exps"
 
@@ -19,11 +19,11 @@ export class InlValue extends Value {
     }
   }
 
-  unify(subst: Subst, that: Value): Subst {
+  unify(subst: Solution, that: Value): Solution {
     if (that instanceof Exps.InlValue) {
       return subst.unify(this.left, that.left)
     } else {
-      return Subst.failure
+      return Solution.failure
     }
   }
 }

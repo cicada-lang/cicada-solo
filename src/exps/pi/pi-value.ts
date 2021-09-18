@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 import { evaluate } from "../../core"
 import { check } from "../../exp"
 import { readback } from "../../value"
@@ -51,10 +51,10 @@ export class PiValue extends Value implements ReadbackEtaExpansion {
     return new Exps.FnCore(fresh_name, ret)
   }
 
-  unify(subst: Subst, that: Value): Subst {
+  unify(subst: Solution, that: Value): Solution {
     if (that instanceof Exps.PiValue) {
       subst = subst.unify(this.arg_t, that.arg_t)
-      if (Subst.failure_p(subst)) return subst
+      if (Solution.failure_p(subst)) return subst
       const names = new Set([
         ...subst.names,
         this.ret_t_cl.name,
@@ -69,7 +69,7 @@ export class PiValue extends Value implements ReadbackEtaExpansion {
         that.ret_t_cl.apply(that_v)
       )
     } else {
-      return Subst.failure
+      return Solution.failure
     }
   }
 }

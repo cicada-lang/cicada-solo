@@ -1,7 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 import { Closure } from "../closure"
 
 export class FnValue extends Value {
@@ -21,7 +21,7 @@ export class FnValue extends Value {
     return undefined
   }
 
-  unify(subst: Subst, that: Value): Subst {
+  unify(subst: Solution, that: Value): Solution {
     throw new Error("unify is not implemented for Exps.FnValue")
   }
 }

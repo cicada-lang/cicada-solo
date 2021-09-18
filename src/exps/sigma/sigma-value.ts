@@ -2,7 +2,7 @@ import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { readback } from "../../value"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 import { Closure } from "../closure"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
@@ -48,10 +48,10 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
     )
   }
 
-  unify(subst: Subst, that: Value): Subst {
+  unify(subst: Solution, that: Value): Solution {
     if (that instanceof Exps.SigmaValue) {
       subst = subst.unify(this.car_t, that.car_t)
-      if (Subst.failure_p(subst)) return subst
+      if (Solution.failure_p(subst)) return subst
       const names = new Set([
         ...subst.names,
         this.cdr_t_cl.name,
@@ -66,7 +66,7 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
         that.cdr_t_cl.apply(that_v)
       )
     } else {
-      return Subst.failure
+      return Solution.failure
     }
   }
 }

@@ -2,7 +2,7 @@ import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Solution } from "../../solution"
 
 export abstract class Cls extends Exp {
   instanceofExpsCls = true

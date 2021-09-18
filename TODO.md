@@ -1,4 +1,3 @@
-- rename the use of `Subst` in unification to `Solution`
 - rename `Exp.subst` to `Exp.substitute`
 - improve `substitute` by avoid doing it when name and fresh name are the same.
 
