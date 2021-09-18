@@ -1,7 +1,6 @@
 # implicit
 
 > Implementation guides:
-> - use git branch to implement implicit
 > - use null object pattern (in our case unit object pattern)
 
 - [note] we are implementing named argument,
