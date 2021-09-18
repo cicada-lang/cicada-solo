@@ -1,5 +1,13 @@
 # implicit
 
+- back to testable
+
+- use git branch to implement implicit
+
+- [note] we are implementing named argument,
+  thus we can not just use `name`,
+  we need `field_name` and `local_name` just like `cls`
+
 - `im-fn` -- subst
 - `im-fn` -- check
 - `im-fn` -- multi_fn_repr
@@ -43,6 +51,8 @@
 - `Value.occur` handle each case
 
 # substitution
+
+- rename the use of `subst` in unification to `solution`
 
 - most of the complexity of the type checker come from the use of `subst`,
   which is to ensure names in `ctx` are unique.
