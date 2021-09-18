@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
@@ -25,11 +25,8 @@ export class Vec extends Exp {
     ])
   }
 
-  substitute(name: string, exp: Exp): Vec {
-    return new Vec(
-      substitute(this.head, name, exp),
-      substitute(this.tail, name, exp)
-    )
+  subst(name: string, exp: Exp): Vec {
+    return new Vec(subst(this.head, name, exp), subst(this.tail, name, exp))
   }
 
   check(ctx: Ctx, t: Value): Core {

@@ -1,5 +1,5 @@
 import { Core } from "../core"
-import { Exp, substitute } from "../exp"
+import { Exp, subst } from "../exp"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import * as Exps from "../exps"
@@ -9,7 +9,7 @@ export class Type extends Exp {
     return new Set()
   }
 
-  substitute(name: string, exp: Exp): this {
+  subst(name: string, exp: Exp): this {
     return this
   }
 

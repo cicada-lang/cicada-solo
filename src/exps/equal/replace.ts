@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -30,11 +30,11 @@ export class Replace extends Exp {
     ])
   }
 
-  substitute(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): Exp {
     return new Replace(
-      substitute(this.target, name, exp),
-      substitute(this.motive, name, exp),
-      substitute(this.base, name, exp)
+      subst(this.target, name, exp),
+      subst(this.motive, name, exp),
+      subst(this.base, name, exp)
     )
   }
 

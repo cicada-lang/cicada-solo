@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { expect } from "../../value"
@@ -25,11 +25,8 @@ export class Cons extends Exp {
     ])
   }
 
-  substitute(name: string, exp: Exp): Exp {
-    return new Cons(
-      substitute(this.car, name, exp),
-      substitute(this.cdr, name, exp)
-    )
+  subst(name: string, exp: Exp): Exp {
+    return new Cons(subst(this.car, name, exp), subst(this.cdr, name, exp))
   }
 
   check(ctx: Ctx, t: Value): Core {

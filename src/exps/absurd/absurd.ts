@@ -1,6 +1,6 @@
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
 import * as Exps from "../../exps"
@@ -10,7 +10,7 @@ export class Absurd extends Exp {
     return new Set()
   }
 
-  substitute(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): Exp {
     return this
   }
 

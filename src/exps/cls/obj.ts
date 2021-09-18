@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value, expect } from "../../value"
@@ -23,7 +23,7 @@ export class Obj extends Exp {
     )
   }
 
-  substitute(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): Exp {
     return new Obj(
       this.properties.map((property) => property.solution(name, exp))
     )
@@ -101,7 +101,7 @@ export class SpreadProp extends Prop {
   }
 
   solution(name: string, exp: Exp): Prop {
-    return new SpreadProp(substitute(this.exp, name, exp))
+    return new SpreadProp(subst(this.exp, name, exp))
   }
 
   to_entries(ctx: Ctx): Array<[string, Exp]> {
@@ -140,7 +140,7 @@ export class FieldProp extends Prop {
   }
 
   solution(name: string, exp: Exp): Prop {
-    return new FieldProp(this.name, substitute(this.exp, name, exp))
+    return new FieldProp(this.name, subst(this.exp, name, exp))
   }
 
   to_entries(ctx: Ctx): Array<[string, Exp]> {

@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -37,13 +37,13 @@ export class VectorInd extends Exp {
     ])
   }
 
-  substitute(name: string, exp: Exp): VectorInd {
+  subst(name: string, exp: Exp): VectorInd {
     return new VectorInd(
-      substitute(this.length, name, exp),
-      substitute(this.target, name, exp),
-      substitute(this.motive, name, exp),
-      substitute(this.base, name, exp),
-      substitute(this.step, name, exp)
+      subst(this.length, name, exp),
+      subst(this.target, name, exp),
+      subst(this.motive, name, exp),
+      subst(this.base, name, exp),
+      subst(this.step, name, exp)
     )
   }
 

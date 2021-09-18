@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
@@ -10,7 +10,7 @@ export class Trivial extends Exp {
     return new Set()
   }
 
-  substitute(name: string, exp: Exp): this {
+  subst(name: string, exp: Exp): this {
     return this
   }
 

@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
@@ -23,10 +23,10 @@ export class Either extends Exp {
     ])
   }
 
-  substitute(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): Exp {
     return new Either(
-      substitute(this.left_t, name, exp),
-      substitute(this.right_t, name, exp)
+      subst(this.left_t, name, exp),
+      subst(this.right_t, name, exp)
     )
   }
 

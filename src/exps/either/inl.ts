@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
@@ -19,8 +19,8 @@ export class Inl extends Exp {
     return new Set([...this.left.free_names(bound_names)])
   }
 
-  substitute(name: string, exp: Exp): Exp {
-    return new Inl(substitute(this.left, name, exp))
+  subst(name: string, exp: Exp): Exp {
+    return new Inl(subst(this.left, name, exp))
   }
 
   check(ctx: Ctx, t: Value): Core {

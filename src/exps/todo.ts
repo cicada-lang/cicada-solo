@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../exp"
+import { Exp, subst } from "../exp"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import { Core } from "../core"
@@ -17,7 +17,7 @@ export class Todo extends Exp {
     return new Set()
   }
 
-  substitute(name: string, exp: Exp): this {
+  subst(name: string, exp: Exp): this {
     return this
   }
 

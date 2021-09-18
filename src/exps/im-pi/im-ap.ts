@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { evaluate } from "../../core"
@@ -27,11 +27,8 @@ export class ImAp extends Exp {
     ])
   }
 
-  substitute(name: string, exp: Exp): ImAp {
-    return new ImAp(
-      substitute(this.target, name, exp),
-      substitute(this.arg, name, exp)
-    )
+  subst(name: string, exp: Exp): ImAp {
+    return new ImAp(subst(this.target, name, exp), subst(this.arg, name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { evaluate } from "../../core"
@@ -27,11 +27,11 @@ export class Equal extends Exp {
     ])
   }
 
-  substitute(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): Exp {
     return new Equal(
-      substitute(this.t, name, exp),
-      substitute(this.from, name, exp),
-      substitute(this.to, name, exp)
+      subst(this.t, name, exp),
+      subst(this.from, name, exp),
+      subst(this.to, name, exp)
     )
   }
 

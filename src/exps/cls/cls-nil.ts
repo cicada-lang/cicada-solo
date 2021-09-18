@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
@@ -12,7 +12,7 @@ export class ClsNil extends Exps.Cls {
     return new Set()
   }
 
-  substitute(name: string, exp: Exp): Exps.Cls {
+  subst(name: string, exp: Exp): Exps.Cls {
     return this
   }
 

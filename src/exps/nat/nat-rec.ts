@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -31,11 +31,11 @@ export class NatRec extends Exp {
     ])
   }
 
-  substitute(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): Exp {
     return new NatRec(
-      substitute(this.target, name, exp),
-      substitute(this.base, name, exp),
-      substitute(this.step, name, exp)
+      subst(this.target, name, exp),
+      subst(this.base, name, exp),
+      subst(this.step, name, exp)
     )
   }
 

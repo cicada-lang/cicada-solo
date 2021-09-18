@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
@@ -9,6 +9,6 @@ export abstract class Cls extends Exp {
 
   abstract field_names: Array<string>
   abstract fields_repr(): Array<string>
-  abstract substitute(name: string, exp: Exp): Cls
+  abstract subst(name: string, exp: Exp): Cls
   abstract infer(ctx: Ctx): { t: Value; core: Core }
 }

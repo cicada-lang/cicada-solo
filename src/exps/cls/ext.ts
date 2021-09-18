@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
@@ -28,10 +28,10 @@ export class Ext extends Exp {
     ])
   }
 
-  substitute(name: string, exp: Exp): Exp {
+  subst(name: string, exp: Exp): Exp {
     return new Ext(
-      substitute(this.parent, name, exp),
-      substitute(this.rest_t, name, exp) as Exps.Cls
+      subst(this.parent, name, exp),
+      subst(this.rest_t, name, exp) as Exps.Cls
     )
   }
 
@@ -46,12 +46,8 @@ export class Ext extends Exp {
     const result = parent_value.extend_ctx(ctx, [])
     const rest_t = result.renamings.reduce(
       (rest_t, renaming) =>
-        substitute(
-          rest_t,
-          renaming.field_name,
-          new Exps.Var(renaming.local_name)
-        ),
-      substitute(
+        subst(rest_t, renaming.field_name, new Exps.Var(renaming.local_name)),
+      subst(
         this.rest_t,
         "super",
         new Exps.Obj(

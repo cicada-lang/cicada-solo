@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
@@ -24,8 +24,8 @@ export class Dot extends Exp {
     return new Set([...this.target.free_names(bound_names)])
   }
 
-  substitute(name: string, exp: Exp): Exp {
-    return new Dot(substitute(this.target, name, exp), this.name)
+  subst(name: string, exp: Exp): Exp {
+    return new Dot(subst(this.target, name, exp), this.name)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

@@ -1,4 +1,4 @@
-import { Exp, substitute } from "../../exp"
+import { Exp, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
@@ -24,11 +24,8 @@ export class Li extends Exp {
     ])
   }
 
-  substitute(name: string, exp: Exp): Exp {
-    return new Li(
-      substitute(this.head, name, exp),
-      substitute(this.tail, name, exp)
-    )
+  subst(name: string, exp: Exp): Exp {
+    return new Li(subst(this.head, name, exp), subst(this.tail, name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
