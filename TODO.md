@@ -1,18 +1,22 @@
 # implicit
 
-- `im-fn` implicit argument record
-- `im-fn-core` implicit argument record
-- `im-fn-value` implicit argument record
+- `im-fn` -- subst
+- `im-fn` -- check
+- `im-fn` -- multi_fn_repr
+- `im-fn` -- repr
 
-- `im-ap` implicit argument record
-- `im-ap-core` implicit argument record
-- `im-ap-neutral` implicit argument record
+- `im-fn-core`
+- `im-fn-value`
 
-- `im-pi-value` implicit argument record
+- `im-ap`
+- `im-ap-core`
+- `im-ap-neutral`
 
-- `im-pi` syntax for implicit argument record
-- `im-fn` syntax for implicit argument record
-- `im-ap` syntax for implicit argument record
+- `im-pi-value`
+
+- `im-pi` -- syntax
+- `im-fn` -- syntax
+- `im-ap` -- syntax
 
 - refactor interface about `solve`
 
