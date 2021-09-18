@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
@@ -19,7 +19,7 @@ export class List extends Exp {
   }
 
   substitute(name: string, exp: Exp): Exp {
-    return new List(this.elem_t.substitute(name, exp))
+    return new List(substitute(this.elem_t, name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

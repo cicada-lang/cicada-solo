@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
@@ -20,7 +20,7 @@ export class Inr extends Exp {
   }
 
   substitute(name: string, exp: Exp): Exp {
-    return new Inr(this.right.substitute(name, exp))
+    return new Inr(substitute(this.right, name, exp))
   }
 
   check(ctx: Ctx, t: Value): Core {

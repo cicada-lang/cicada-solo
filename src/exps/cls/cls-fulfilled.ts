@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
@@ -59,8 +59,8 @@ export class ClsFulfilled extends Exps.Cls {
       return new ClsFulfilled(
         this.field_name,
         this.local_name,
-        this.field_t.substitute(name, exp),
-        this.field.substitute(name, exp),
+        substitute(this.field_t, name, exp),
+        substitute(this.field, name, exp),
         this.rest_t
       )
     } else {
@@ -70,11 +70,13 @@ export class ClsFulfilled extends Exps.Cls {
       return new ClsFulfilled(
         this.field_name,
         fresh_name,
-        this.field_t.substitute(name, exp),
-        this.field.substitute(name, exp),
-        this.rest_t
-          .substitute(this.local_name, new Exps.Var(fresh_name))
-          .substitute(name, exp)
+        substitute(this.field_t, name, exp),
+        substitute(this.field, name, exp),
+        substitute(
+          substitute(this.rest_t, this.local_name, new Exps.Var(fresh_name)),
+          name,
+          exp
+        ) as Exps.Cls
       )
     }
   }
@@ -97,7 +99,8 @@ export class ClsFulfilled extends Exps.Cls {
     const field_t_value = evaluate(ctx.to_env(), field_t_core)
     const field_core = check(ctx, this.field, field_t_value)
     const field_value = evaluate(ctx.to_env(), field_core)
-    const rest_t = this.rest_t.substitute(
+    const rest_t = substitute(
+      this.rest_t,
       this.local_name,
       new Exps.Var(fresh_name)
     )

@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { evaluate } from "../../core"
@@ -29,8 +29,8 @@ export class Ap extends Exp {
 
   substitute(name: string, exp: Exp): Ap {
     return new Ap(
-      this.target.substitute(name, exp),
-      this.arg.substitute(name, exp)
+      substitute(this.target, name, exp),
+      substitute(this.arg, name, exp)
     )
   }
 

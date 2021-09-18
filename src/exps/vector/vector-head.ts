@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { infer } from "../../exp"
@@ -20,7 +20,7 @@ export class VectorHead extends Exp {
   }
 
   substitute(name: string, exp: Exp): VectorHead {
-    return new VectorHead(this.target.substitute(name, exp))
+    return new VectorHead(substitute(this.target, name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

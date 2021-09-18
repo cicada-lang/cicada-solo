@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -34,9 +34,9 @@ export class ListRec extends Exp {
 
   substitute(name: string, exp: Exp): Exp {
     return new ListRec(
-      this.target.substitute(name, exp),
-      this.base.substitute(name, exp),
-      this.step.substitute(name, exp)
+      substitute(this.target, name, exp),
+      substitute(this.base, name, exp),
+      substitute(this.step, name, exp)
     )
   }
 

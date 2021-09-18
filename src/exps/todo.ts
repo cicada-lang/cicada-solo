@@ -1,4 +1,4 @@
-import { Exp } from "../exp"
+import { Exp, substitute } from "../exp"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import { Core } from "../core"

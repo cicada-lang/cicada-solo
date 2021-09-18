@@ -1,4 +1,4 @@
-import { Exp } from "../exp"
+import { Exp, substitute } from "../exp"
 import { Core } from "../core"
 import { Value } from "../value"
 import { Ctx } from "../ctx"
@@ -29,17 +29,19 @@ export class Let extends Exp {
 
   substitute(name: string, exp: Exp): Let {
     if (name === this.name) {
-      return new Let(this.name, this.exp.substitute(name, exp), this.ret)
+      return new Let(this.name, substitute(this.exp, name, exp), this.ret)
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
 
       return new Let(
         fresh_name,
-        this.exp.substitute(name, exp),
-        this.ret
-          .substitute(this.name, new Exps.Var(fresh_name))
-          .substitute(name, exp)
+        substitute(this.exp, name, exp),
+        substitute(
+          substitute(this.ret, this.name, new Exps.Var(fresh_name)),
+          name,
+          exp
+        )
       )
     }
   }
@@ -48,7 +50,7 @@ export class Let extends Exp {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const inferred = infer(ctx, this.exp)
     const value = evaluate(ctx.to_env(), inferred.core)
-    const ret = this.ret.substitute(this.name, new Exps.Var(fresh_name))
+    const ret = substitute(this.ret, this.name, new Exps.Var(fresh_name))
     const inferred_ret = infer(ctx.extend(fresh_name, inferred.t, value), ret)
 
     return {
@@ -61,7 +63,7 @@ export class Let extends Exp {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const inferred = infer(ctx, this.exp)
     const value = evaluate(ctx.to_env(), inferred.core)
-    const ret = this.ret.substitute(this.name, new Exps.Var(fresh_name))
+    const ret = substitute(this.ret, this.name, new Exps.Var(fresh_name))
     const ret_core = check(ctx.extend(fresh_name, inferred.t, value), ret, t)
     return new Exps.LetCore(fresh_name, inferred.core, ret_core)
   }

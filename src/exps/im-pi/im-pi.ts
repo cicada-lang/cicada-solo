@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
@@ -30,16 +30,20 @@ export class ImPi extends Exp {
 
   substitute(name: string, exp: Exp): ImPi {
     if (name === this.name) {
-      return new ImPi(this.name, this.arg_t.substitute(name, exp), this.ret_t)
+      return new ImPi(this.name, substitute(this.arg_t, name, exp), this.ret_t)
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
-      const ret_t = this.ret_t.substitute(this.name, new Exps.Var(fresh_name))
+      const ret_t = substitute(
+        this.ret_t,
+        this.name,
+        new Exps.Var(fresh_name)
+      ) as Exps.Pi
 
       return new ImPi(
         fresh_name,
-        this.arg_t.substitute(name, exp),
-        ret_t.substitute(name, exp)
+        substitute(this.arg_t, name, exp),
+        substitute(ret_t, name, exp) as Exps.Pi
       )
     }
   }
@@ -48,7 +52,7 @@ export class ImPi extends Exp {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
-    const ret_t = this.ret_t.substitute(this.name, new Exps.Var(fresh_name))
+    const ret_t = substitute(this.ret_t, this.name, new Exps.Var(fresh_name))
     const ret_t_core = check(
       ctx.extend(fresh_name, arg_t_value),
       ret_t,

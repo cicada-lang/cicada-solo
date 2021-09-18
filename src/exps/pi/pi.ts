@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
@@ -29,16 +29,16 @@ export class Pi extends Exp {
 
   substitute(name: string, exp: Exp): Pi {
     if (name === this.name) {
-      return new Pi(this.name, this.arg_t.substitute(name, exp), this.ret_t)
+      return new Pi(this.name, substitute(this.arg_t, name, exp), this.ret_t)
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
-      const ret_t = this.ret_t.substitute(this.name, new Exps.Var(fresh_name))
+      const ret_t = substitute(this.ret_t, this.name, new Exps.Var(fresh_name))
 
       return new Pi(
         fresh_name,
-        this.arg_t.substitute(name, exp),
-        ret_t.substitute(name, exp)
+        substitute(this.arg_t, name, exp),
+        substitute(ret_t, name, exp)
       )
     }
   }
@@ -47,7 +47,7 @@ export class Pi extends Exp {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
-    const ret_t = this.ret_t.substitute(this.name, new Exps.Var(fresh_name))
+    const ret_t = substitute(this.ret_t, this.name, new Exps.Var(fresh_name))
     const ret_t_core = check(
       ctx.extend(fresh_name, arg_t_value),
       ret_t,

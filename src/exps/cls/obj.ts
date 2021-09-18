@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value, expect } from "../../value"
@@ -101,7 +101,7 @@ export class SpreadProp extends Prop {
   }
 
   solution(name: string, exp: Exp): Prop {
-    return new SpreadProp(this.exp.substitute(name, exp))
+    return new SpreadProp(substitute(this.exp, name, exp))
   }
 
   to_entries(ctx: Ctx): Array<[string, Exp]> {
@@ -140,7 +140,7 @@ export class FieldProp extends Prop {
   }
 
   solution(name: string, exp: Exp): Prop {
-    return new FieldProp(this.name, this.exp.substitute(name, exp))
+    return new FieldProp(this.name, substitute(this.exp, name, exp))
   }
 
   to_entries(ctx: Ctx): Array<[string, Exp]> {

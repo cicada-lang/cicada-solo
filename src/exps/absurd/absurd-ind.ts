@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { evaluate } from "../../core"
 import { check } from "../../exp"
@@ -26,8 +26,8 @@ export class AbsurdInd extends Exp {
 
   substitute(name: string, exp: Exp): Exp {
     return new AbsurdInd(
-      this.target.substitute(name, exp),
-      this.motive.substitute(name, exp)
+      substitute(this.target, name, exp),
+      substitute(this.motive, name, exp)
     )
   }
 

@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
@@ -55,7 +55,7 @@ export class ClsCons extends Exps.Cls {
       return new ClsCons(
         this.field_name,
         this.local_name,
-        this.field_t.substitute(name, exp),
+        substitute(this.field_t, name, exp),
         this.rest_t
       )
     } else {
@@ -65,10 +65,12 @@ export class ClsCons extends Exps.Cls {
       return new ClsCons(
         this.field_name,
         fresh_name,
-        this.field_t.substitute(name, exp),
-        this.rest_t
-          .substitute(this.local_name, new Exps.Var(fresh_name))
-          .substitute(name, exp)
+        substitute(this.field_t, name, exp),
+        substitute(
+          substitute(this.rest_t, this.local_name, new Exps.Var(fresh_name)),
+          name,
+          exp
+        ) as Exps.Cls
       )
     }
   }
@@ -89,7 +91,8 @@ export class ClsCons extends Exps.Cls {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.local_name)
     const field_t_core = check(ctx, this.field_t, new Exps.TypeValue())
     const field_t_value = evaluate(ctx.to_env(), field_t_core)
-    const rest_t = this.rest_t.substitute(
+    const rest_t = substitute(
+      this.rest_t,
       this.local_name,
       new Exps.Var(fresh_name)
     )

@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
@@ -31,8 +31,12 @@ export class ImFn extends Exp {
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
-      const ret = this.ret.substitute(this.name, new Exps.Var(fresh_name))
-      return new ImFn(fresh_name, ret.substitute(name, exp))
+      const ret = substitute(
+        this.ret,
+        this.name,
+        new Exps.Var(fresh_name)
+      ) as Exps.Fn
+      return new ImFn(fresh_name, substitute(ret, name, exp) as Exps.Fn)
     }
   }
 
@@ -44,7 +48,7 @@ export class ImFn extends Exp {
       new Exps.VarNeutral(fresh_name)
     )
     const ret_t = im_pi.ret_t_cl.apply(arg)
-    const ret = this.ret.substitute(this.name, new Exps.Var(fresh_name))
+    const ret = substitute(this.ret, this.name, new Exps.Var(fresh_name))
     const ret_core = check(ctx.extend(fresh_name, im_pi.arg_t), ret, ret_t)
 
     if (

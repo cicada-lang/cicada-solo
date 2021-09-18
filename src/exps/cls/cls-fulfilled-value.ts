@@ -1,5 +1,5 @@
 import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import { Solution } from "../../solution"

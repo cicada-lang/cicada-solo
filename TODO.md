@@ -1,5 +1,3 @@
-- void using `.substitute` directly
-
 # implicit
 
 > Implementation guides:

@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { expect } from "../../value"
@@ -27,8 +27,8 @@ export class Cons extends Exp {
 
   substitute(name: string, exp: Exp): Exp {
     return new Cons(
-      this.car.substitute(name, exp),
-      this.cdr.substitute(name, exp)
+      substitute(this.car, name, exp),
+      substitute(this.cdr, name, exp)
     )
   }
 

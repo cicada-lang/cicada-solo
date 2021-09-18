@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
@@ -29,17 +29,19 @@ export class Sigma extends Exp {
 
   substitute(name: string, exp: Exp): Exp {
     if (name === this.name) {
-      return new Sigma(this.name, this.car_t.substitute(name, exp), this.cdr_t)
+      return new Sigma(this.name, substitute(this.car_t, name, exp), this.cdr_t)
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
 
       return new Sigma(
         fresh_name,
-        this.car_t.substitute(name, exp),
-        this.cdr_t
-          .substitute(this.name, new Exps.Var(fresh_name))
-          .substitute(name, exp)
+        substitute(this.car_t, name, exp),
+        substitute(
+          substitute(this.cdr_t, this.name, new Exps.Var(fresh_name)),
+          name,
+          exp
+        )
       )
     }
   }
@@ -48,7 +50,7 @@ export class Sigma extends Exp {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const car_t_core = check(ctx, this.car_t, new Exps.TypeValue())
     const car_t_value = evaluate(ctx.to_env(), car_t_core)
-    const cdr_t = this.cdr_t.substitute(this.name, new Exps.Var(fresh_name))
+    const cdr_t = substitute(this.cdr_t, this.name, new Exps.Var(fresh_name))
     const cdr_t_core = check(
       ctx.extend(fresh_name, car_t_value),
       cdr_t,

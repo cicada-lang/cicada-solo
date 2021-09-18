@@ -1,4 +1,4 @@
-import { Exp } from "../../exp"
+import { Exp, substitute } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
@@ -25,8 +25,8 @@ export class Vector extends Exp {
 
   substitute(name: string, exp: Exp): Vector {
     return new Vector(
-      this.elem_t.substitute(name, exp),
-      this.length.substitute(name, exp)
+      substitute(this.elem_t, name, exp),
+      substitute(this.length, name, exp)
     )
   }
 
