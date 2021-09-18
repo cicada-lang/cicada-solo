@@ -2,32 +2,43 @@ import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
 import { Subst } from "../../subst"
+import { RecordClosure } from "../record-closure"
 import { Closure } from "../closure"
 import { evaluate } from "../../core"
 import * as Exps from "../../exps"
 
 export class ImPiCore extends Core {
-  name: string
-  arg_t: Core
+  implicit: Array<{ name: string; arg_t: Core }>
   ret_t: Exps.PiCore
 
-  constructor(name: string, arg_t: Core, ret_t: Exps.PiCore) {
+  constructor(
+    implicit: Array<{ name: string; arg_t: Core }>,
+    ret_t: Exps.PiCore
+  ) {
     super()
-    this.name = name
-    this.arg_t = arg_t
+    this.implicit = implicit
     this.ret_t = ret_t
   }
 
   evaluate(env: Env): Value {
-    const arg_t = evaluate(env, this.arg_t)
-    return new Exps.ImPiValue(arg_t, new Closure(env, this.name, this.ret_t))
+    const implicit = this.implicit.map(({ name, arg_t }) => ({
+      name,
+      arg_t: evaluate(env, arg_t),
+    }))
+    const [{ name, arg_t }] = implicit
+    return new Exps.ImPiValue(arg_t, new Closure(env, name, this.ret_t))
+    // TODO
+    // return new Exps.ImPiValue(implicit, new RecordClosure(env, this.ret_t))
   }
 
   multi_pi_repr(entries: Array<string> = new Array()): {
     entries: Array<string>
     ret_t: string
   } {
-    const entry = `given ${this.name}: ${this.arg_t.repr()}`
+    const implicit = this.implicit
+      .map(({ name, arg_t }) => `${name}: ${arg_t.repr()}`)
+      .join(", ")
+    const entry = `implicit { ${implicit} }`
     return this.ret_t.multi_pi_repr([...entries, entry])
   }
 
@@ -37,8 +48,15 @@ export class ImPiCore extends Core {
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    const arg_t_repr = this.arg_t.alpha_repr(ctx)
-    const pi_repr = this.ret_t.alpha_repr(ctx.extend(this.name))
-    return `(given ${arg_t_repr}) -> ${pi_repr}`
+    const implicit = this.implicit
+      .map(({ name, arg_t }) => {
+        const result = `${name}: ${arg_t.alpha_repr(ctx)}`
+        ctx = ctx.extend(name)
+        return result
+      })
+      .join(", ")
+    const entry = `implicit { ${implicit} }`
+    const ret_t_repr = this.ret_t.alpha_repr(ctx)
+    return `(${entry}) -> ${ret_t_repr}`
   }
 }

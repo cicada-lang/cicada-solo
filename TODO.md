@@ -1,7 +1,5 @@
 # implicit
 
-- `im-pi` implicit argument record
-- `im-pi-core` implicit argument record
 - `im-pi-value` implicit argument record
 
 - `im-fn` implicit argument record
