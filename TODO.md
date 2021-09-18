@@ -1,5 +1,10 @@
 # implicit
 
+- [refactor] `ReadbackEtaExpansion` instead of the `Value.eta_expand`
+
+  - the method `Value.eta_expand` is confusing, because it also `readback` value
+  - the same is true for eta-expansion during `unify`
+
 - `im-pi` implicit argument record
 - `im-pi-core` implicit argument record
 - `im-pi-value` implicit argument record
@@ -25,10 +30,6 @@
   - typed directed `unify`
   - bidirectional `unify`
   - handle eta-expansion in `unify`
-
-- [refactor] the method `Value.eta_expand` is confusing, because it also `readback` value
-
-  - the same would be true for `unify`
 
 - Value.unify -- not-yet-value.ts
 
