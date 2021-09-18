@@ -2,7 +2,7 @@ import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Subst } from "../../solution"
 import { check } from "../../exp"
 import { evaluate } from "../../core"
 import { Trace } from "../../errors"
@@ -31,24 +31,24 @@ export class ImPi extends Exp {
     return names
   }
 
-  subst(name: string, exp: Exp): ImPi {
+  solution(name: string, exp: Exp): ImPi {
     let implicit = [...this.implicit]
     let ret_t = this.ret_t
 
     for (let i = 0; i < implicit.length; i++) {
       const entry = implicit[i]
       if (name === entry.name) {
-        implicit[i] = { name: entry.name, arg_t: entry.arg_t.subst(name, exp) }
+        implicit[i] = { name: entry.name, arg_t: entry.arg_t.solution(name, exp) }
       } else {
         const free_names = exp.free_names(new Set())
         const fresh_name = ut.freshen_name(free_names, entry.name)
         const variable = new Exps.Var(fresh_name)
-        ret_t = ret_t.subst(entry.name, variable)
+        ret_t = ret_t.solution(entry.name, variable)
         for (let j = i; j < implicit.length; j++) {
-          implicit[j].arg_t = implicit[j].arg_t.subst(entry.name, variable)
+          implicit[j].arg_t = implicit[j].arg_t.solution(entry.name, variable)
         }
-        implicit[i] = { name: fresh_name, arg_t: entry.arg_t.subst(name, exp) }
-        ret_t = ret_t.subst(name, exp)
+        implicit[i] = { name: fresh_name, arg_t: entry.arg_t.solution(name, exp) }
+        ret_t = ret_t.solution(name, exp)
       }
     }
 
@@ -65,7 +65,7 @@ export class ImPi extends Exp {
       const fresh_name = ut.freshen_name(new Set(ctx.names), entry.name)
       const arg_t_core = check(ctx, entry.arg_t, new Exps.TypeValue())
       implicit_core.push({ name: fresh_name, arg_t: arg_t_core })
-      ret_t = ret_t.subst(entry.name, new Exps.Var(fresh_name))
+      ret_t = ret_t.solution(entry.name, new Exps.Var(fresh_name))
       ctx = ctx.extend(fresh_name, evaluate(ctx.to_env(), arg_t_core))
     }
 

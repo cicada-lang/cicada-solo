@@ -1,6 +1,6 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Subst } from "../../subst"
+import { Subst } from "../../solution"
 import { readback } from "../../value"
 import { evaluate } from "../../core"
 import { infer } from "../../exp"
@@ -86,14 +86,14 @@ export class ImPiValue
     // return new Exps.ImFnCore(fresh_name, result)
   }
 
-  unify(subst: Subst, that: Value): Subst {
+  unify(solution: Subst, that: Value): Subst {
     throw new Error("TODO")
 
     // if (that instanceof Exps.ImPiValue) {
-    //   subst = subst.unify(this.arg_t, that.arg_t)
-    //   if (Subst.failure_p(subst)) return subst
+    //   solution = solution.unify(this.arg_t, that.arg_t)
+    //   if (Subst.failure_p(solution)) return solution
     //   const names = new Set([
-    //     ...subst.names,
+    //     ...solution.names,
     //     this.ret_t_cl.name,
     //     that.ret_t_cl.name,
     //   ])
@@ -101,7 +101,7 @@ export class ImPiValue
     //   const v = new Exps.VarNeutral(fresh_name)
     //   const this_v = new Exps.NotYetValue(this.arg_t, v)
     //   const that_v = new Exps.NotYetValue(that.arg_t, v)
-    //   return subst.unify(
+    //   return solution.unify(
     //     this.ret_t_cl.apply(this_v),
     //     that.ret_t_cl.apply(that_v)
     //   )

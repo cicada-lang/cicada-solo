@@ -20,7 +20,7 @@ check(ctx, Fn(name, ret), Pi(name, arg_t, ret_t)) {
 infer(ctx, Ap(target, arg)) {
   [ Pi(name, arg_t, ret_t), target_core ] = infer(ctx, target)
   arg_core = check(ctx.extend(name, arg_t), ret_t, Type)
-  [ ret_t.subst(name, arg_core), ApCore(target_core, arg_core) ]
+  [ ret_t.solution(name, arg_core), ApCore(target_core, arg_core) ]
 }
 ```
 
@@ -44,14 +44,14 @@ check(ctx, Fn(name, ret), ImPi(given, name, arg_t, ret_t)) {
 infer(ctx, Ap(target, arg)) {
   [ ImPi(given, name, arg_t, ret_t), target_core ] = infer(ctx, target)
   [ arg_t_value, arg_core ] = infer(ctx, arg)
-  subst = solve(arg_t_value, arg_t)
+  solution = solve(arg_t_value, arg_t)
   arg_core = check(ctx.extend(name, arg_t), ret_t, Type)
-  [ ret_t.subst(name, arg_core).reify(subst),
+  [ ret_t.solution(name, arg_core).reify(solution),
     ApCore(
       ImApCore(
         target_core,
-        subst.find(given.name)),
-      arg_core).reify(subst)
+        solution.find(given.name)),
+      arg_core).reify(solution)
    ]
 }
 ```

@@ -19,9 +19,9 @@ export class ListValue extends Value {
     }
   }
 
-  unify(subst: Solution, that: Value): Solution {
+  unify(solution: Solution, that: Value): Solution {
     if (that instanceof Exps.ListValue) {
-      return subst.unify(this.elem_t, that.elem_t)
+      return solution.unify(this.elem_t, that.elem_t)
     } else {
       return Solution.failure
     }

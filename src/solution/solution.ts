@@ -28,16 +28,16 @@ export abstract class Solution {
     return new EmptySolution()
   }
 
-  static empty_p(subst: Solution): subst is EmptySolution {
-    return subst instanceof EmptySolution
+  static empty_p(solution: Solution): solution is EmptySolution {
+    return solution instanceof EmptySolution
   }
 
   static get failure(): FailureSolution {
     return new FailureSolution()
   }
 
-  static failure_p(subst: Solution): subst is FailureSolution {
-    return subst instanceof FailureSolution
+  static failure_p(solution: Solution): solution is FailureSolution {
+    return solution instanceof FailureSolution
   }
 
   walk(value: Value): Value {

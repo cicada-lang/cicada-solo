@@ -24,9 +24,9 @@ export class VectorValue extends Value {
     }
   }
 
-  unify(subst: Solution, that: Value): Solution {
+  unify(solution: Solution, that: Value): Solution {
     if (that instanceof Exps.VectorValue) {
-      return subst
+      return solution
         .unify(this.elem_t, that.elem_t)
         .unify(this.length, that.length)
     } else {

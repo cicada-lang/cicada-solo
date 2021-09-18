@@ -78,12 +78,12 @@ export class ImPiValue
     return new Exps.ImFnCore(fresh_name, result)
   }
 
-  unify(subst: Solution, that: Value): Solution {
+  unify(solution: Solution, that: Value): Solution {
     if (that instanceof Exps.ImPiValue) {
-      subst = subst.unify(this.arg_t, that.arg_t)
-      if (Solution.failure_p(subst)) return subst
+      solution = solution.unify(this.arg_t, that.arg_t)
+      if (Solution.failure_p(solution)) return solution
       const names = new Set([
-        ...subst.names,
+        ...solution.names,
         this.ret_t_cl.name,
         that.ret_t_cl.name,
       ])
@@ -91,7 +91,7 @@ export class ImPiValue
       const v = new Exps.VarNeutral(fresh_name)
       const this_v = new Exps.NotYetValue(this.arg_t, v)
       const that_v = new Exps.NotYetValue(that.arg_t, v)
-      return subst.unify(
+      return solution.unify(
         this.ret_t_cl.apply(this_v),
         that.ret_t_cl.apply(that_v)
       )

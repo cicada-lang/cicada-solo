@@ -11,9 +11,9 @@ export class VecnilValue extends Value {
     }
   }
 
-  unify(subst: Solution, that: Value): Solution {
+  unify(solution: Solution, that: Value): Solution {
     if (that instanceof Exps.VecnilValue) {
-      return subst
+      return solution
     } else {
       return Solution.failure
     }

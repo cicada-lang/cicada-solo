@@ -27,9 +27,9 @@ export class EqualValue extends Value {
     }
   }
 
-  unify(subst: Solution, that: Value): Solution {
+  unify(solution: Solution, that: Value): Solution {
     if (that instanceof Exps.EqualValue) {
-      return subst
+      return solution
         .unify(this.t, that.t)
         .unify(this.from, that.from)
         .unify(this.to, that.to)

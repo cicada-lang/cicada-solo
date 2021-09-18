@@ -19,9 +19,9 @@ export class TrivialValue extends Value implements ReadbackEtaExpansion {
     return new Exps.SoleCore()
   }
 
-  unify(subst: Solution, that: Value): Solution {
+  unify(solution: Solution, that: Value): Solution {
     if (that instanceof Exps.TrivialValue) {
-      return subst
+      return solution
     } else {
       return Solution.failure
     }

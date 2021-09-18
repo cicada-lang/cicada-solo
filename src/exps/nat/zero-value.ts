@@ -11,9 +11,9 @@ export class ZeroValue extends Value {
     }
   }
 
-  unify(subst: Solution, that: Value): Solution {
+  unify(solution: Solution, that: Value): Solution {
     if (that instanceof Exps.ZeroValue) {
-      return subst
+      return solution
     } else {
       return Solution.failure
     }

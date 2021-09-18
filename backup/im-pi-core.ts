@@ -1,7 +1,7 @@
 import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Subst } from "../../solution"
 import { RecordClosure } from "../record-closure"
 import { Closure } from "../closure"
 import { evaluate } from "../../core"

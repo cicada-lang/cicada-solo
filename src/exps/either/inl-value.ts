@@ -19,9 +19,9 @@ export class InlValue extends Value {
     }
   }
 
-  unify(subst: Solution, that: Value): Solution {
+  unify(solution: Solution, that: Value): Solution {
     if (that instanceof Exps.InlValue) {
-      return subst.unify(this.left, that.left)
+      return solution.unify(this.left, that.left)
     } else {
       return Solution.failure
     }

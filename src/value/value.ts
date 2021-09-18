@@ -5,7 +5,7 @@ import { Solution } from "../solution"
 export abstract class Value {
   abstract readback(ctx: Ctx, t: Value): Core | undefined
 
-  unify(subst: Solution, that: Value): Solution {
+  unify(solution: Solution, that: Value): Solution {
     throw new Error("Method not implemented: unify")
   }
 }

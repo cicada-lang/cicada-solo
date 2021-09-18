@@ -19,9 +19,9 @@ export class Add1Value extends Value {
     }
   }
 
-  unify(subst: Solution, that: Value): Solution {
+  unify(solution: Solution, that: Value): Solution {
     if (that instanceof Exps.Add1Value) {
-      return subst.unify(this.prev, that.prev)
+      return solution.unify(this.prev, that.prev)
     } else {
       return Solution.failure
     }

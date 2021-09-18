@@ -24,9 +24,9 @@ export class LiValue extends Value {
     }
   }
 
-  unify(subst: Solution, that: Value): Solution {
+  unify(solution: Solution, that: Value): Solution {
     if (that instanceof Exps.LiValue) {
-      return subst.unify(this.head, that.head).unify(this.tail, that.tail)
+      return solution.unify(this.head, that.head).unify(this.tail, that.tail)
     } else {
       return Solution.failure
     }

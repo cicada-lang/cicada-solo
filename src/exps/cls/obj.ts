@@ -24,7 +24,9 @@ export class Obj extends Exp {
   }
 
   substitute(name: string, exp: Exp): Exp {
-    return new Obj(this.properties.map((property) => property.subst(name, exp)))
+    return new Obj(
+      this.properties.map((property) => property.solution(name, exp))
+    )
   }
 
   private check_duplicated_field_name(ctx: Ctx): void {
@@ -81,7 +83,7 @@ export abstract class Prop {
   instanceofProp = true
 
   abstract free_names(bound_names: Set<string>): Set<string>
-  abstract subst(name: string, exp: Exp): Prop
+  abstract solution(name: string, exp: Exp): Prop
   abstract to_entries(ctx: Ctx): Array<[string, Exp]>
   abstract repr(): string
 }
@@ -98,7 +100,7 @@ export class SpreadProp extends Prop {
     return this.exp.free_names(bound_names)
   }
 
-  subst(name: string, exp: Exp): Prop {
+  solution(name: string, exp: Exp): Prop {
     return new SpreadProp(this.exp.substitute(name, exp))
   }
 
@@ -137,7 +139,7 @@ export class FieldProp extends Prop {
     return this.exp.free_names(bound_names)
   }
 
-  subst(name: string, exp: Exp): Prop {
+  solution(name: string, exp: Exp): Prop {
     return new FieldProp(this.name, this.exp.substitute(name, exp))
   }
 
@@ -162,7 +164,7 @@ export class FieldShorthandProp extends Prop {
     return new Exps.Var(this.name).free_names(bound_names)
   }
 
-  subst(name: string, exp: Exp): Prop {
+  solution(name: string, exp: Exp): Prop {
     return this
   }
 

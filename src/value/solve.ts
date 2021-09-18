@@ -15,7 +15,7 @@ export function solve(
 ): { value: Value; core: Core } {
   const { ctx, left, right } = opts
 
-  const subst = Solution.empty.unify(left.value, right.value)
+  const solution = Solution.empty.unify(left.value, right.value)
 
   if (!(not_yet_value.neutral instanceof Exps.VarNeutral)) {
     throw new Trace(
@@ -23,7 +23,7 @@ export function solve(
     )
   }
 
-  if (Solution.failure_p(subst)) {
+  if (Solution.failure_p(solution)) {
     const not_yet_value_repr = readback(
       ctx,
       not_yet_value.t,
@@ -40,7 +40,7 @@ export function solve(
     )
   }
 
-  const value = subst.find(Solution.logic_var_name(not_yet_value))
+  const value = solution.find(Solution.logic_var_name(not_yet_value))
   if (value === undefined) {
     const not_yet_value_repr = readback(
       ctx,

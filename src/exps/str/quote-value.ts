@@ -18,9 +18,9 @@ export class QuoteValue extends Value {
     }
   }
 
-  unify(subst: Solution, that: Value): Solution {
+  unify(solution: Solution, that: Value): Solution {
     if (that instanceof Exps.QuoteValue && that.str === this.str) {
-      return subst
+      return solution
     } else {
       return Solution.failure
     }

@@ -5,7 +5,7 @@ import { evaluate } from "../../core"
 import { infer } from "../../exp"
 import { check } from "../../exp"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Subst } from "../../solution"
 import { Trace, InternalError } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
@@ -29,10 +29,10 @@ export class ImAp extends Exp {
     // ])
   }
 
-  subst(name: string, exp: Exp): ImAp {
+  solution(name: string, exp: Exp): ImAp {
     throw new Error("TODO")
 
-    // return new ImAp(this.target.subst(name, exp), this.arg.subst(name, exp))
+    // return new ImAp(this.target.solution(name, exp), this.arg.solution(name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

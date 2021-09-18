@@ -2,7 +2,7 @@ import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
-import { Subst } from "../../subst"
+import { Subst } from "../../solution"
 import { check } from "../../exp"
 import { expect } from "../../value"
 import { Trace } from "../../errors"
@@ -25,7 +25,7 @@ export class ImFn extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): ImFn {
+  solution(name: string, exp: Exp): ImFn {
     throw new Error("TODO")
 
     // if (name === this.name) {
@@ -33,8 +33,8 @@ export class ImFn extends Exp {
     // } else {
     //   const free_names = exp.free_names(new Set())
     //   const fresh_name = ut.freshen_name(free_names, this.name)
-    //   const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
-    //   return new ImFn(fresh_name, ret.subst(name, exp))
+    //   const ret = this.ret.solution(this.name, new Exps.Var(fresh_name))
+    //   return new ImFn(fresh_name, ret.solution(name, exp))
     // }
   }
 
@@ -48,7 +48,7 @@ export class ImFn extends Exp {
     //   new Exps.VarNeutral(fresh_name)
     // )
     // const ret_t = im_pi.ret_t_cl.apply(arg)
-    // const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
+    // const ret = this.ret.solution(this.name, new Exps.Var(fresh_name))
     // const ret_core = check(ctx.extend(fresh_name, im_pi.arg_t), ret, ret_t)
 
     // if (

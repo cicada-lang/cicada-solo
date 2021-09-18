@@ -24,9 +24,9 @@ export class EitherValue extends Value {
     }
   }
 
-  unify(subst: Solution, that: Value): Solution {
+  unify(solution: Solution, that: Value): Solution {
     if (that instanceof Exps.EitherValue) {
-      return subst
+      return solution
         .unify(this.left_t, that.left_t)
         .unify(this.right_t, that.right_t)
     } else {
