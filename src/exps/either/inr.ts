@@ -19,8 +19,8 @@ export class Inr extends Exp {
     return new Set([...this.right.free_names(bound_names)])
   }
 
-  subst(name: string, exp: Exp): Exp {
-    return new Inr(this.right.subst(name, exp))
+  substitute(name: string, exp: Exp): Exp {
+    return new Inr(this.right.substitute(name, exp))
   }
 
   check(ctx: Ctx, t: Value): Core {

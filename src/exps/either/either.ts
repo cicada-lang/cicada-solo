@@ -23,10 +23,10 @@ export class Either extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
+  substitute(name: string, exp: Exp): Exp {
     return new Either(
-      this.left_t.subst(name, exp),
-      this.right_t.subst(name, exp)
+      this.left_t.substitute(name, exp),
+      this.right_t.substitute(name, exp)
     )
   }
 

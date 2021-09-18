@@ -12,7 +12,7 @@ export class ClsNil extends Exps.Cls {
     return new Set()
   }
 
-  subst(name: string, exp: Exp): Exps.Cls {
+  substitute(name: string, exp: Exp): Exps.Cls {
     return this
   }
 

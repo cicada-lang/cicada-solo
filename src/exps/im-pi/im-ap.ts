@@ -27,8 +27,11 @@ export class ImAp extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): ImAp {
-    return new ImAp(this.target.subst(name, exp), this.arg.subst(name, exp))
+  substitute(name: string, exp: Exp): ImAp {
+    return new ImAp(
+      this.target.substitute(name, exp),
+      this.arg.substitute(name, exp)
+    )
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

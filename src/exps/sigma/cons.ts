@@ -25,8 +25,11 @@ export class Cons extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
-    return new Cons(this.car.subst(name, exp), this.cdr.subst(name, exp))
+  substitute(name: string, exp: Exp): Exp {
+    return new Cons(
+      this.car.substitute(name, exp),
+      this.cdr.substitute(name, exp)
+    )
   }
 
   check(ctx: Ctx, t: Value): Core {

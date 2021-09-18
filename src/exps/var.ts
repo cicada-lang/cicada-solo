@@ -21,7 +21,7 @@ export class Var extends Exp {
     }
   }
 
-  subst(name: string, exp: Exp): Exp {
+  substitute(name: string, exp: Exp): Exp {
     if (name === this.name) {
       return exp
     } else {

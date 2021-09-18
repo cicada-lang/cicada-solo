@@ -23,10 +23,10 @@ export class Vector extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Vector {
+  substitute(name: string, exp: Exp): Vector {
     return new Vector(
-      this.elem_t.subst(name, exp),
-      this.length.subst(name, exp)
+      this.elem_t.substitute(name, exp),
+      this.length.substitute(name, exp)
     )
   }
 

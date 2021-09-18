@@ -24,8 +24,8 @@ export class Dot extends Exp {
     return new Set([...this.target.free_names(bound_names)])
   }
 
-  subst(name: string, exp: Exp): Exp {
-    return new Dot(this.target.subst(name, exp), this.name)
+  substitute(name: string, exp: Exp): Exp {
+    return new Dot(this.target.substitute(name, exp), this.name)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

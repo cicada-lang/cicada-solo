@@ -33,12 +33,12 @@ export class EitherInd extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
+  substitute(name: string, exp: Exp): Exp {
     return new EitherInd(
-      this.target.subst(name, exp),
-      this.motive.subst(name, exp),
-      this.base_left.subst(name, exp),
-      this.base_right.subst(name, exp)
+      this.target.substitute(name, exp),
+      this.motive.substitute(name, exp),
+      this.base_left.substitute(name, exp),
+      this.base_right.substitute(name, exp)
     )
   }
 

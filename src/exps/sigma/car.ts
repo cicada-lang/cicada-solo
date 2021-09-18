@@ -19,8 +19,8 @@ export class Car extends Exp {
     return new Set([...this.target.free_names(bound_names)])
   }
 
-  subst(name: string, exp: Exp): Exp {
-    return new Car(this.target.subst(name, exp))
+  substitute(name: string, exp: Exp): Exp {
+    return new Car(this.target.substitute(name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

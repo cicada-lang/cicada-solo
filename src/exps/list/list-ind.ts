@@ -33,12 +33,12 @@ export class ListInd extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
+  substitute(name: string, exp: Exp): Exp {
     return new ListInd(
-      this.target.subst(name, exp),
-      this.motive.subst(name, exp),
-      this.base.subst(name, exp),
-      this.step.subst(name, exp)
+      this.target.substitute(name, exp),
+      this.motive.substitute(name, exp),
+      this.base.substitute(name, exp),
+      this.step.substitute(name, exp)
     )
   }
 

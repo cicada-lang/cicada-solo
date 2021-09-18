@@ -4,7 +4,7 @@ import { Value } from "../value"
 
 export abstract class Exp {
   abstract free_names(bound_names: Set<string>): Set<string>
-  abstract subst(name: string, exp: Exp): Exp
+  abstract substitute(name: string, exp: Exp): Exp
   abstract repr(): string
 
   check?(ctx: Ctx, t: Value): Core

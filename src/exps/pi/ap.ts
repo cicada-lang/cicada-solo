@@ -27,8 +27,11 @@ export class Ap extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Ap {
-    return new Ap(this.target.subst(name, exp), this.arg.subst(name, exp))
+  substitute(name: string, exp: Exp): Ap {
+    return new Ap(
+      this.target.substitute(name, exp),
+      this.arg.substitute(name, exp)
+    )
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

@@ -24,10 +24,10 @@ export class AbsurdInd extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
+  substitute(name: string, exp: Exp): Exp {
     return new AbsurdInd(
-      this.target.subst(name, exp),
-      this.motive.subst(name, exp)
+      this.target.substitute(name, exp),
+      this.motive.substitute(name, exp)
     )
   }
 

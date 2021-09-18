@@ -18,8 +18,8 @@ export class List extends Exp {
     return new Set([...this.elem_t.free_names(bound_names)])
   }
 
-  subst(name: string, exp: Exp): Exp {
-    return new List(this.elem_t.subst(name, exp))
+  substitute(name: string, exp: Exp): Exp {
+    return new List(this.elem_t.substitute(name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

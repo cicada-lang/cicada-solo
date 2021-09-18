@@ -23,7 +23,7 @@ export class Obj extends Exp {
     )
   }
 
-  subst(name: string, exp: Exp): Exp {
+  substitute(name: string, exp: Exp): Exp {
     return new Obj(this.properties.map((property) => property.subst(name, exp)))
   }
 
@@ -99,7 +99,7 @@ export class SpreadProp extends Prop {
   }
 
   subst(name: string, exp: Exp): Prop {
-    return new SpreadProp(this.exp.subst(name, exp))
+    return new SpreadProp(this.exp.substitute(name, exp))
   }
 
   to_entries(ctx: Ctx): Array<[string, Exp]> {
@@ -138,7 +138,7 @@ export class FieldProp extends Prop {
   }
 
   subst(name: string, exp: Exp): Prop {
-    return new FieldProp(this.name, this.exp.subst(name, exp))
+    return new FieldProp(this.name, this.exp.substitute(name, exp))
   }
 
   to_entries(ctx: Ctx): Array<[string, Exp]> {

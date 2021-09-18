@@ -27,18 +27,18 @@ export class Pi extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Pi {
+  substitute(name: string, exp: Exp): Pi {
     if (name === this.name) {
-      return new Pi(this.name, this.arg_t.subst(name, exp), this.ret_t)
+      return new Pi(this.name, this.arg_t.substitute(name, exp), this.ret_t)
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
-      const ret_t = this.ret_t.subst(this.name, new Exps.Var(fresh_name))
+      const ret_t = this.ret_t.substitute(this.name, new Exps.Var(fresh_name))
 
       return new Pi(
         fresh_name,
-        this.arg_t.subst(name, exp),
-        ret_t.subst(name, exp)
+        this.arg_t.substitute(name, exp),
+        ret_t.substitute(name, exp)
       )
     }
   }
@@ -47,7 +47,7 @@ export class Pi extends Exp {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
-    const ret_t = this.ret_t.subst(this.name, new Exps.Var(fresh_name))
+    const ret_t = this.ret_t.substitute(this.name, new Exps.Var(fresh_name))
     const ret_t_core = check(
       ctx.extend(fresh_name, arg_t_value),
       ret_t,

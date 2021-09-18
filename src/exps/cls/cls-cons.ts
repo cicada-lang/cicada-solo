@@ -50,12 +50,12 @@ export class ClsCons extends Exps.Cls {
     ])
   }
 
-  subst(name: string, exp: Exp): Exps.Cls {
+  substitute(name: string, exp: Exp): Exps.Cls {
     if (name === this.local_name) {
       return new ClsCons(
         this.field_name,
         this.local_name,
-        this.field_t.subst(name, exp),
+        this.field_t.substitute(name, exp),
         this.rest_t
       )
     } else {
@@ -65,10 +65,10 @@ export class ClsCons extends Exps.Cls {
       return new ClsCons(
         this.field_name,
         fresh_name,
-        this.field_t.subst(name, exp),
+        this.field_t.substitute(name, exp),
         this.rest_t
-          .subst(this.local_name, new Exps.Var(fresh_name))
-          .subst(name, exp)
+          .substitute(this.local_name, new Exps.Var(fresh_name))
+          .substitute(name, exp)
       )
     }
   }
@@ -89,7 +89,10 @@ export class ClsCons extends Exps.Cls {
     const fresh_name = ut.freshen_name(new Set(ctx.names), this.local_name)
     const field_t_core = check(ctx, this.field_t, new Exps.TypeValue())
     const field_t_value = evaluate(ctx.to_env(), field_t_core)
-    const rest_t = this.rest_t.subst(this.local_name, new Exps.Var(fresh_name))
+    const rest_t = this.rest_t.substitute(
+      this.local_name,
+      new Exps.Var(fresh_name)
+    )
     const rest_t_core = check(
       ctx.extend(fresh_name, field_t_value),
       rest_t,

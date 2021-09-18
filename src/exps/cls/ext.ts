@@ -28,8 +28,11 @@ export class Ext extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
-    return new Ext(this.parent.subst(name, exp), this.rest_t.subst(name, exp))
+  substitute(name: string, exp: Exp): Exp {
+    return new Ext(
+      this.parent.substitute(name, exp),
+      this.rest_t.substitute(name, exp)
+    )
   }
 
   repr(): string {
@@ -43,8 +46,11 @@ export class Ext extends Exp {
     const result = parent_value.extend_ctx(ctx, [])
     const rest_t = result.renamings.reduce(
       (rest_t, renaming) =>
-        rest_t.subst(renaming.field_name, new Exps.Var(renaming.local_name)),
-      this.rest_t.subst(
+        rest_t.substitute(
+          renaming.field_name,
+          new Exps.Var(renaming.local_name)
+        ),
+      this.rest_t.substitute(
         "super",
         new Exps.Obj(
           parent_value.field_names.map(

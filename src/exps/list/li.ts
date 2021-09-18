@@ -24,8 +24,11 @@ export class Li extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
-    return new Li(this.head.subst(name, exp), this.tail.subst(name, exp))
+  substitute(name: string, exp: Exp): Exp {
+    return new Li(
+      this.head.substitute(name, exp),
+      this.tail.substitute(name, exp)
+    )
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

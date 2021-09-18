@@ -27,11 +27,11 @@ export class Equal extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
+  substitute(name: string, exp: Exp): Exp {
     return new Equal(
-      this.t.subst(name, exp),
-      this.from.subst(name, exp),
-      this.to.subst(name, exp)
+      this.t.substitute(name, exp),
+      this.from.substitute(name, exp),
+      this.to.substitute(name, exp)
     )
   }
 

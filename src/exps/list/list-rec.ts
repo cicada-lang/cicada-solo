@@ -32,11 +32,11 @@ export class ListRec extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): Exp {
+  substitute(name: string, exp: Exp): Exp {
     return new ListRec(
-      this.target.subst(name, exp),
-      this.base.subst(name, exp),
-      this.step.subst(name, exp)
+      this.target.substitute(name, exp),
+      this.base.substitute(name, exp),
+      this.step.substitute(name, exp)
     )
   }
 

@@ -10,7 +10,7 @@ export class Trivial extends Exp {
     return new Set()
   }
 
-  subst(name: string, exp: Exp): this {
+  substitute(name: string, exp: Exp): this {
     return this
   }
 

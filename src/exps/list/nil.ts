@@ -11,7 +11,7 @@ export class Nil extends Exp {
     return new Set()
   }
 
-  subst(name: string, exp: Exp): Exp {
+  substitute(name: string, exp: Exp): Exp {
     return this
   }
 

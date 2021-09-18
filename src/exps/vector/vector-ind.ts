@@ -37,13 +37,13 @@ export class VectorInd extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): VectorInd {
+  substitute(name: string, exp: Exp): VectorInd {
     return new VectorInd(
-      this.length.subst(name, exp),
-      this.target.subst(name, exp),
-      this.motive.subst(name, exp),
-      this.base.subst(name, exp),
-      this.step.subst(name, exp)
+      this.length.substitute(name, exp),
+      this.target.substitute(name, exp),
+      this.motive.substitute(name, exp),
+      this.base.substitute(name, exp),
+      this.step.substitute(name, exp)
     )
   }
 

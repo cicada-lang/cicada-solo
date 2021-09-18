@@ -23,8 +23,8 @@ export class The extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): The {
-    return new The(this.t.subst(name, exp), this.exp.subst(name, exp))
+  substitute(name: string, exp: Exp): The {
+    return new The(this.t.substitute(name, exp), this.exp.substitute(name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

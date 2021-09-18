@@ -20,8 +20,8 @@ export class Cdr extends Exp {
     return new Set([...this.target.free_names(bound_names)])
   }
 
-  subst(name: string, exp: Exp): Exp {
-    return new Cdr(this.target.subst(name, exp))
+  substitute(name: string, exp: Exp): Exp {
+    return new Cdr(this.target.substitute(name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

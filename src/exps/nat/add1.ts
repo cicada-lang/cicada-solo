@@ -19,8 +19,8 @@ export class Add1 extends Exp {
     return new Set([...this.prev.free_names(bound_names)])
   }
 
-  subst(name: string, exp: Exp): Exp {
-    return new Add1(this.prev.subst(name, exp))
+  substitute(name: string, exp: Exp): Exp {
+    return new Add1(this.prev.substitute(name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
