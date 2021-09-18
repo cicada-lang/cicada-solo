@@ -1,5 +1,7 @@
 # implicit
 
+- `im-pi` syntax -- require `implicit` keyword
+
 > Implementation guides:
 > - use null object pattern (in our case unit object pattern)
 
