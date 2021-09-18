@@ -4,14 +4,16 @@ import { Subst } from "../../subst"
 import { readback } from "../../value"
 import { evaluate } from "../../core"
 import { infer } from "../../exp"
+import { check } from "../../exp"
 import { Value, solve } from "../../value"
 import { Closure } from "../closure"
 import { Trace } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
 import { ImApInsertion } from "./im-ap-insertion"
+import { ImFnInsertion } from "./im-fn-insertion"
 
-export class ImPiValue extends Value implements ImApInsertion {
+export class ImPiValue extends Value implements ImApInsertion, ImFnInsertion {
   arg_t: Value
   ret_t_cl: Closure
 
@@ -138,5 +140,25 @@ export class ImPiValue extends Value implements ImApInsertion {
         inferred_arg.core
       ),
     }
+  }
+
+  insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core {
+    // NOTE Implicit lambda insertion
+    const { arg_t, ret_t_cl } = this
+    const fresh_name = ut.freshen_name(new Set(ctx.names), fn.name)
+    const arg = new Exps.NotYetValue(arg_t, new Exps.VarNeutral(fresh_name))
+    const ret_t = ret_t_cl.apply(arg)
+    const result = check(ctx.extend(fresh_name, arg_t), fn, ret_t)
+
+    if (!(result instanceof Exps.FnCore)) {
+      throw new Trace(
+        [
+          `Fn.check expecting the result of elab to be Exps.FnCore`,
+          `  class name: ${result.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    return new Exps.ImFnCore(fresh_name, result)
   }
 }

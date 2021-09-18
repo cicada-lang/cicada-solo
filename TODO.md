@@ -1,7 +1,5 @@
 # implicit
 
-- `fn` extract by interface `im-fn-insertion`
-
 - `im-pi` implicit argument record
 - `im-pi-core` implicit argument record
 - `im-pi-value` implicit argument record
