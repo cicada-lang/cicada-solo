@@ -6,16 +6,16 @@ Let's write the identity function with implicit type argument.
 - for `id1` and `id2`, an implicit function will be inserted to get `id3`.
 
 ``` cicada
-id1({ A: Type }, x: A): A {
+id1(implicit { A: Type }, x: A): A {
   x
 }
 
-id2: ({ A: Type }, x: A) -> A =
+id2: (implicit { A: Type }, x: A) -> A =
   (x) {
     x
   }
 
-id3: ({ A: Type }, x: A) -> A =
+id3: (implicit { A: Type }, x: A) -> A =
   (implicit { A }, x) {
     x
   }
@@ -32,7 +32,7 @@ id3(implicit { A: Nat }, 1)
 # return implicit value
 
 ``` cicada
-typeof({ T: Type }, T): Type {
+typeof(implicit { T: Type }, T): Type {
   T
 }
 
@@ -44,8 +44,8 @@ typeof("abc")
 
 ``` cicada
 k(
-  { A: Type }, x: A,
-  { B: Type }, y: B,
+  implicit { A: Type }, x: A,
+  implicit { B: Type }, y: B,
 ): A {
   x
 }
@@ -58,8 +58,8 @@ k(100, 101)
 
 ``` cicada counterexample
 k(
-  { A: Type },
-  { B: Type },
+  implicit { A: Type },
+  implicit { B: Type },
   x: A,
   y: B,
 ): A {
@@ -71,7 +71,7 @@ k(
 
 ``` cicada counterexample
 k(
-  { A: Type },
+  implicit { A: Type },
   Trivial,
   x: A,
 ): A {

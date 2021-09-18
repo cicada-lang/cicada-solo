@@ -340,6 +340,7 @@ export const binding_entry = {
     "binding_entry:nameless": [{ exp: "exp" }],
     "binding_entry:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
     "binding_entry:implicit_named": [
+      '"implicit"',
       '"{"',
       { name: "identifier" },
       '":"',
