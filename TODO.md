@@ -1,16 +1,20 @@
 # implicit
 
+- stub `im-ap`
+
 - `im-fn` implicit argument record
-- `im-fn` syntax for implicit argument record
 - `im-fn-core` implicit argument record
 - `im-fn-value` implicit argument record
 
 - `im-ap` implicit argument record
-- `im-ap` syntax for implicit argument record
 - `im-ap-core` implicit argument record
 - `im-ap-neutral` implicit argument record
 
 - `im-pi-value` implicit argument record
+
+- `im-pi` syntax for implicit argument record
+- `im-fn` syntax for implicit argument record
+- `im-ap` syntax for implicit argument record
 
 - refactor interface about `solve`
 

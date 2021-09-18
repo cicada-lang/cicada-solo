@@ -82,7 +82,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
                 ].join("\n")
               )
             }
-            return new Exps.ImFn(name, result)
+            return new Exps.ImFn([name], result)
           } else {
             return new Exps.Fn(name, result)
           }
@@ -296,7 +296,7 @@ export function declaration_matcher(tree: pt.Tree): Exp {
                 ].join("\n")
               )
             }
-            return new Exps.ImFn(name, result)
+            return new Exps.ImFn([name], result)
           } else {
             return new Exps.Fn(name, result)
           }
@@ -347,7 +347,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
                 ].join("\n")
               )
             }
-            return new Exps.ImFn(name, result)
+            return new Exps.ImFn([name], result)
           } else {
             return new Exps.Fn(name, result)
           }
