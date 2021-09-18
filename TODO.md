@@ -38,6 +38,17 @@
 
 - `Value.occur` handle each case
 
+# substitution
+
+- most of the complexity of the type checker come from the use of `subst`,
+  which is to ensure names in `ctx` are unique.
+
+  - we need to ensure names in `ctx` are unique,
+    because of `readback`. [need examples]
+
+  - `subst` can be improved by avoid doing the it
+    when name and fresh name are the same.
+
 # use `unify` to replace `readback`
 
 # refactor

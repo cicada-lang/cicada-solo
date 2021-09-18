@@ -9,7 +9,7 @@ import { Trace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
-export class PiIm extends Exp {
+export class ImPi extends Exp {
   name: string
   arg_t: Exp
   ret_t: Exps.Pi
@@ -28,15 +28,15 @@ export class PiIm extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): PiIm {
+  subst(name: string, exp: Exp): ImPi {
     if (name === this.name) {
-      return new PiIm(this.name, this.arg_t.subst(name, exp), this.ret_t)
+      return new ImPi(this.name, this.arg_t.subst(name, exp), this.ret_t)
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen_name(free_names, this.name)
       const ret_t = this.ret_t.subst(this.name, new Exps.Var(fresh_name))
 
-      return new PiIm(
+      return new ImPi(
         fresh_name,
         this.arg_t.subst(name, exp),
         ret_t.subst(name, exp)
@@ -66,7 +66,7 @@ export class PiIm extends Exp {
 
     return {
       t: new Exps.TypeValue(),
-      core: new Exps.PiImCore(fresh_name, arg_t_core, ret_t_core),
+      core: new Exps.ImPiCore(fresh_name, arg_t_core, ret_t_core),
     }
   }
 

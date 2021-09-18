@@ -8,7 +8,7 @@ import { Trace } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
 
-export class PiImValue extends Value {
+export class ImPiValue extends Value {
   arg_t: Value
   ret_t_cl: Closure
 
@@ -39,7 +39,7 @@ export class PiImValue extends Value {
         )
       }
 
-      return new Exps.PiImCore(fresh_name, arg_t, ret_t_core)
+      return new Exps.ImPiCore(fresh_name, arg_t, ret_t_core)
     }
   }
 
@@ -66,11 +66,11 @@ export class PiImValue extends Value {
       )
     }
 
-    return new Exps.FnImCore(fresh_name, result)
+    return new Exps.ImFnCore(fresh_name, result)
   }
 
   unify(subst: Subst, that: Value): Subst {
-    if (that instanceof Exps.PiImValue) {
+    if (that instanceof Exps.ImPiValue) {
       subst = subst.unify(this.arg_t, that.arg_t)
       if (Subst.failure_p(subst)) return subst
       const names = new Set([

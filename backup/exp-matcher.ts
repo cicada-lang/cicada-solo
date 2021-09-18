@@ -23,7 +23,7 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
             ].join("\n")
           )
         }
-        return new Exps.PiIm(name, exp, result)
+        return new Exps.ImPi(name, exp, result)
       } else {
         return new Exps.Pi(name, exp, result)
       }
@@ -82,7 +82,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
                 ].join("\n")
               )
             }
-            return new Exps.FnIm(name, result)
+            return new Exps.ImFn(name, result)
           } else {
             return new Exps.Fn(name, result)
           }
@@ -296,7 +296,7 @@ export function declaration_matcher(tree: pt.Tree): Exp {
                 ].join("\n")
               )
             }
-            return new Exps.FnIm(name, result)
+            return new Exps.ImFn(name, result)
           } else {
             return new Exps.Fn(name, result)
           }
@@ -347,7 +347,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
                 ].join("\n")
               )
             }
-            return new Exps.FnIm(name, result)
+            return new Exps.ImFn(name, result)
           } else {
             return new Exps.Fn(name, result)
           }

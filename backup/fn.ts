@@ -45,7 +45,7 @@ export class Fn extends Exp {
       const ret = this.ret.subst(this.name, new Exps.Var(fresh_name))
       const ret_core = check(ctx.extend(fresh_name, arg_t), ret, ret_t)
       return new Exps.FnCore(fresh_name, ret_core)
-    } else if (t instanceof Exps.PiImValue) {
+    } else if (t instanceof Exps.ImPiValue) {
       // NOTE Implicit lambda insertion
       const { arg_t, ret_t_cl } = t
       const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
@@ -62,11 +62,11 @@ export class Fn extends Exp {
         )
       }
 
-      return new Exps.FnImCore(fresh_name, result)
+      return new Exps.ImFnCore(fresh_name, result)
     } else {
       throw new Trace(
         [
-          `Fn.check expecting t to be PiValue or PiImValue`,
+          `Fn.check expecting t to be PiValue or ImPiValue`,
           `  t: ${JSON.stringify(t, null, 2)}`,
         ].join("\n")
       )
