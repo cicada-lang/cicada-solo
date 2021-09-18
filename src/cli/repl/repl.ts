@@ -73,10 +73,17 @@ export class Repl {
   }
 
   private listen(): void {
+    let lock = false
+
     this.rl.on("line", async (line) => {
       const text = (this.text + "\n" + line).trim()
 
       const result = pt.lexers.common.parens_check(text)
+
+      if (lock) {
+        this.lines.push(line)
+        return
+      }
 
       if (result.kind === "lack") {
         this.lines.push(line)
@@ -85,7 +92,9 @@ export class Repl {
       }
 
       if (result.kind === "balance") {
+        lock = true
         await this.commit(text)
+        lock = false
       }
 
       if (result.kind === "mismatch") {
