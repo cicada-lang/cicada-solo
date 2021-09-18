@@ -12,7 +12,7 @@ export class VarCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    const result = env.lookup_value(this.name)
+    const result = env.find_value(this.name)
     if (result === undefined) {
       throw new Trace(
         [
@@ -30,7 +30,7 @@ export class VarCore extends Core {
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    const depth = ctx.lookup_depth(this.name)
+    const depth = ctx.find_depth(this.name)
     if (depth === undefined) {
       return this.name
     }

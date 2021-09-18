@@ -2,7 +2,7 @@
 
 Exp.infer(Map(String, Ty), Exp): Ty
 
-Exp.infer(ctx, Exp.v(name)) = Map.lookup(ctx, name)
+Exp.infer(ctx, Exp.v(name)) = Map.find(ctx, name)
 
 // 为 eliminator 实现 infer 的模式是：
 // - target 通常要 infer；

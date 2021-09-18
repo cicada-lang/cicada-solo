@@ -21,7 +21,7 @@ export class AlphaCtx {
     return this.names.length
   }
 
-  lookup_depth(name: string): number | undefined {
+  find_depth(name: string): number | undefined {
     const index = this.names.lastIndexOf(name)
     if (index === -1) {
       return undefined

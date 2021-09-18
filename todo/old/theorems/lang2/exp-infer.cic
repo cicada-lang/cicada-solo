@@ -2,7 +2,7 @@
 
 Exp.infer(Map(String, Value), Exp): Value
 
-Exp.infer(ctx, Exp.v(name)) = Map.lookup(ctx, name)
+Exp.infer(ctx, Exp.v(name)) = Map.find(ctx, name)
 
 // 下面几个类型做为值，其类型都是 type 本身，因此都用 infer 了。
 

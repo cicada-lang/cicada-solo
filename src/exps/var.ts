@@ -30,7 +30,7 @@ export class Var extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const t = ctx.lookup_type(this.name)
+    const t = ctx.find_type(this.name)
     if (t === undefined) {
       throw new Trace(
         `Fail to infer the type of a variable.\n` +

@@ -6,7 +6,7 @@ import * as Exps from "../exps"
 
 export abstract class Ctx {
   abstract names: Array<string>
-  abstract lookup_entry(name: string): undefined | { t: Value; value?: Value }
+  abstract find_entry(name: string): undefined | { t: Value; value?: Value }
   abstract to_env(): Env
 
   static get empty(): EmptyCtx {
@@ -29,8 +29,8 @@ export abstract class Ctx {
     return new ExtendCtx({ name, t, value, rest: this })
   }
 
-  lookup_type(name: string): undefined | Value {
-    const entry = this.lookup_entry(name)
+  find_type(name: string): undefined | Value {
+    const entry = this.find_entry(name)
     if (entry) {
       return entry.t
     } else {
@@ -39,7 +39,7 @@ export abstract class Ctx {
   }
 
   assert_not_redefine(name: string, t: Value, value?: Value): void {
-    const old_t = this.lookup_type(name)
+    const old_t = this.find_type(name)
     if (old_t) {
       const old_t_repr = readback(this, new Exps.TypeValue(), old_t).repr()
       const t_repr = readback(this, new Exps.TypeValue(), t).repr()
@@ -75,11 +75,11 @@ class ExtendCtx extends Ctx {
     return [this.name, ...this.rest.names]
   }
 
-  lookup_entry(name: string): undefined | { t: Value; value?: Value } {
+  find_entry(name: string): undefined | { t: Value; value?: Value } {
     if (name === this.name) {
       return { t: this.t, value: this.value }
     } else {
-      return this.rest.lookup_entry(name)
+      return this.rest.find_entry(name)
     }
   }
 
@@ -94,7 +94,7 @@ class ExtendCtx extends Ctx {
 class EmptyCtx extends Ctx {
   names = []
 
-  lookup_entry(name: string): undefined | { t: Value; value?: Value } {
+  find_entry(name: string): undefined | { t: Value; value?: Value } {
     return undefined
   }
 
