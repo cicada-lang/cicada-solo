@@ -1,4 +1,3 @@
-- rename find to find
 - improve `substitute` by avoid doing it when name and fresh name are the same.
 
 # implicit
