@@ -20,7 +20,7 @@ export class ImFn extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    throw new Error()
+    throw new Error("TODO")
 
     // return new Set([
     //   ...this.ret.free_names(new Set([...bound_names, this.name])),
@@ -28,7 +28,7 @@ export class ImFn extends Exp {
   }
 
   subst(name: string, exp: Exp): ImFn {
-    throw new Error()
+    throw new Error("TODO")
 
     // if (name === this.name) {
     //   return this
@@ -41,7 +41,7 @@ export class ImFn extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    throw new Error()
+    throw new Error("TODO")
 
     // const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
     // const im_pi = expect(ctx, t, Exps.ImPiValue)
@@ -71,14 +71,14 @@ export class ImFn extends Exp {
     names: Array<string>
     ret: string
   } {
-    throw new Error()
+    throw new Error("TODO")
 
     // const name = `given ${this.name}`
     // return this.ret.multi_fn_repr([...names, name])
   }
 
   repr(): string {
-    throw new Error()
+    throw new Error("TODO")
 
     // const { names, ret } = this.multi_fn_repr()
     // return `(${names.join(", ")}) { ${ret} }`

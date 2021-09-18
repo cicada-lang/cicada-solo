@@ -1,7 +1,5 @@
 # implicit
 
-- stub `im-ap`
-
 - `im-fn` implicit argument record
 - `im-fn-core` implicit argument record
 - `im-fn-value` implicit argument record

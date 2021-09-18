@@ -32,7 +32,7 @@ export class ImPiValue
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    throw new Error()
+    throw new Error("TODO")
 
     // if (t instanceof Exps.TypeValue) {
     //   const fresh_name = ut.freshen_name(new Set(ctx.names), this.ret_t_cl.name)
@@ -59,7 +59,7 @@ export class ImPiValue
   }
 
   readback_eta_expand(ctx: Ctx, value: Value): Core {
-    throw new Error()
+    throw new Error("TODO")
 
     // // NOTE everything with a function type
     // //   is immediately read back as having a Lambda on top.
@@ -87,7 +87,7 @@ export class ImPiValue
   }
 
   unify(subst: Subst, that: Value): Subst {
-    throw new Error()
+    throw new Error("TODO")
 
     // if (that instanceof Exps.ImPiValue) {
     //   subst = subst.unify(this.arg_t, that.arg_t)
@@ -111,7 +111,7 @@ export class ImPiValue
   }
 
   insert_im_ap(ctx: Ctx, ap: Exps.Ap, core: Core): { t: Value; core: Core } {
-    throw new Error()
+    throw new Error("TODO")
 
     // const { arg_t, ret_t_cl } = this
     // const inferred_arg = infer(ctx, ap.arg)
@@ -159,7 +159,7 @@ export class ImPiValue
   }
 
   insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core {
-    throw new Error()
+    throw new Error("TODO")
 
     // // NOTE Implicit lambda insertion
     // const { arg_t, ret_t_cl } = this
