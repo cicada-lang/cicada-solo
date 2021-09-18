@@ -1,5 +1,3 @@
-- [repl] ctrl-d and ctrl-c confirm for exit
-
 # implicit
 
 - `im-pi` implicit argument record
