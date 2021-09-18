@@ -1,8 +1,5 @@
 # implicit
 
-- `im-ap-insertion` -- `based_on` as type guard
-
-- `ap` extract by interface `im-ap-insertion`
 - `fn` extract by interface `im-fn-insertion`
 
 - `im-pi` implicit argument record
@@ -30,6 +27,10 @@
   - typed directed `unify`
   - bidirectional `unify`
   - handle eta-expansion in `unify`
+
+- [refactor] the method `Value.eta_expand` is confusing, because it also `readback` value
+
+  - the same would be true for `unify`
 
 - Value.unify -- not-yet-value.ts
 

@@ -2,6 +2,8 @@ import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import { Subst } from "../../subst"
+import { evaluate } from "../../core"
+import { check } from "../../exp"
 import { readback } from "../../value"
 import { Closure } from "../closure"
 import * as ut from "../../ut"
@@ -68,9 +70,5 @@ export class PiValue extends Value {
     } else {
       return Subst.failure
     }
-  }
-
-  insert_im_ap(ctx: Ctx, ap: Exps.Ap): { t: Value; core: Core } {
-    throw new Error()
   }
 }

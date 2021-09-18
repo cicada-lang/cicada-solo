@@ -8,6 +8,7 @@ import { Value, solve } from "../../value"
 import { Trace, InternalError } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
+import { ImApInsertion } from "../im-pi/im-ap-insertion"
 
 export class Ap extends Exp {
   target: Exp
@@ -35,9 +36,10 @@ export class Ap extends Exp {
 
     if (inferred_target.t instanceof Exps.PiValue) {
       return this.infer_for_pi(ctx, inferred_target.t, inferred_target.core)
-    } else if (inferred_target.t instanceof Exps.ImPiValue) {
-      // NOTE Implicit application insertion
-      return this.infer_for_im_pi(ctx, inferred_target.t, inferred_target.core)
+    }
+
+    if (ImApInsertion.based_on(inferred_target.t)) {
+      return inferred_target.t.insert_im_ap(ctx, this, inferred_target.core)
     }
 
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
@@ -64,56 +66,6 @@ export class Ap extends Exp {
     return {
       t: ret_t_cl.apply(arg_value),
       core: new Exps.ApCore(target_core, arg_core),
-    }
-  }
-
-  private infer_for_im_pi(
-    ctx: Ctx,
-    target_t: Exps.ImPiValue,
-    target_core: Core
-  ): { t: Value; core: Core } {
-    const { arg_t, ret_t_cl } = target_t
-    const inferred_arg = infer(ctx, this.arg)
-    const fresh_name = ut.freshen_name(new Set(ctx.names), ret_t_cl.name)
-    const variable = new Exps.VarNeutral(fresh_name)
-    const not_yet_value = new Exps.NotYetValue(arg_t, variable)
-    const ret_t = ret_t_cl.apply(not_yet_value)
-
-    if (!(ret_t instanceof Exps.PiValue)) {
-      throw new Trace(
-        [
-          `When Exps.Ap.infer meet target of type Exps.ImPiValue,`,
-          `It expects the result of applying ret_t_cl to logic variable to be Exps.PiValue,`,
-          `  class name: ${ret_t.constructor.name}`,
-        ].join("\n")
-      )
-    }
-
-    const result = solve(not_yet_value, {
-      ctx: ctx.extend(fresh_name, arg_t, not_yet_value),
-      left: { t: new Exps.TypeValue(), value: ret_t.arg_t },
-      right: { t: new Exps.TypeValue(), value: inferred_arg.t },
-    })
-
-    const real_ret_t = ret_t_cl.apply(result.value)
-
-    if (!(real_ret_t instanceof Exps.PiValue)) {
-      throw new Trace(
-        [
-          `When Exps.Ap.infer meet target of type Exps.ImPiValue,`,
-          `and when ret_t is Exps.PiValue,`,
-          `it expects real_ret_t to also be Exps.PiValue,`,
-          `  class name: ${real_ret_t.constructor.name}`,
-        ].join("\n")
-      )
-    }
-
-    return {
-      t: real_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
-      core: new Exps.ApCore(
-        new Exps.ImApCore(target_core, result.core),
-        inferred_arg.core
-      ),
     }
   }
 

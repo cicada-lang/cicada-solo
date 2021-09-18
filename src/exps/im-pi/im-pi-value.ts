@@ -1,14 +1,17 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
 import { Subst } from "../../subst"
 import { readback } from "../../value"
+import { evaluate } from "../../core"
+import { infer } from "../../exp"
+import { Value, solve } from "../../value"
 import { Closure } from "../closure"
 import { Trace } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
+import { ImApInsertion } from "./im-ap-insertion"
 
-export class ImPiValue extends Value {
+export class ImPiValue extends Value implements ImApInsertion {
   arg_t: Value
   ret_t_cl: Closure
 
@@ -88,6 +91,52 @@ export class ImPiValue extends Value {
       )
     } else {
       return Subst.failure
+    }
+  }
+
+  insert_im_ap(ctx: Ctx, ap: Exps.Ap, core: Core): { t: Value; core: Core } {
+    const { arg_t, ret_t_cl } = this
+    const inferred_arg = infer(ctx, ap.arg)
+    const fresh_name = ut.freshen_name(new Set(ctx.names), ret_t_cl.name)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const not_yet_value = new Exps.NotYetValue(arg_t, variable)
+    const ret_t = ret_t_cl.apply(not_yet_value)
+
+    if (!(ret_t instanceof Exps.PiValue)) {
+      throw new Trace(
+        [
+          `When Exps.Ap.infer meet target of type Exps.ImPiValue,`,
+          `It expects the result of applying ret_t_cl to logic variable to be Exps.PiValue,`,
+          `  class name: ${ret_t.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    const result = solve(not_yet_value, {
+      ctx: ctx.extend(fresh_name, arg_t, not_yet_value),
+      left: { t: new Exps.TypeValue(), value: ret_t.arg_t },
+      right: { t: new Exps.TypeValue(), value: inferred_arg.t },
+    })
+
+    const real_ret_t = ret_t_cl.apply(result.value)
+
+    if (!(real_ret_t instanceof Exps.PiValue)) {
+      throw new Trace(
+        [
+          `When Exps.Ap.infer meet target of type Exps.ImPiValue,`,
+          `and when ret_t is Exps.PiValue,`,
+          `it expects real_ret_t to also be Exps.PiValue,`,
+          `  class name: ${real_ret_t.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    return {
+      t: real_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
+      core: new Exps.ApCore(
+        new Exps.ImApCore(core, result.core),
+        inferred_arg.core
+      ),
     }
   }
 }
