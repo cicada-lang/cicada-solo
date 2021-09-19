@@ -9,7 +9,7 @@ import { Trace } from "../../errors"
 import * as Exps from ".."
 import * as ut from "../../ut"
 
-export class BaseImPi extends Exp {
+export class BaseImPi extends Exps.ImPi {
   field_name: string
   arg_t: Exp
   ret_t: Exps.Pi
