@@ -3,9 +3,9 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 
-export class ClsNil extends Exps.Cls {
+export class NilCls extends Exps.Cls {
   field_names: Array<string> = []
 
   free_names(bound_names: Set<string>): Set<string> {
@@ -27,7 +27,7 @@ export class ClsNil extends Exps.Cls {
   infer(ctx: Ctx): { t: Value; core: Core } {
     return {
       t: new Exps.TypeValue(),
-      core: new Exps.ClsNilCore(),
+      core: new Exps.NilClsCore(),
     }
   }
 }

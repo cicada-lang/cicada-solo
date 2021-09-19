@@ -74,7 +74,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                 entry.field_t,
                 rest_t
               ),
-            new Exps.ClsNil()
+            new Exps.NilCls()
           )
       ),
     "stmt:class_extends": ({ name, parent, entries }) =>
@@ -94,7 +94,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                   entry.field_t,
                   rest_t
                 ),
-              new Exps.ClsNil()
+              new Exps.NilCls()
             )
         )
       ),

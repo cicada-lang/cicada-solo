@@ -6,7 +6,7 @@ import { Solution } from "../../solution"
 import { Trace } from "../../errors"
 import * as Exps from "../../exps"
 
-export class ClsNilValue extends Exps.ClsValue {
+export class NilClsValue extends Exps.ClsValue {
   get field_names(): Array<string> {
     return []
   }
@@ -17,7 +17,7 @@ export class ClsNilValue extends Exps.ClsValue {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
-      return new Exps.ClsNilCore()
+      return new Exps.NilClsCore()
     }
   }
 

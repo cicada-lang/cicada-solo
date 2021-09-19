@@ -186,7 +186,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
                   entry.field_t,
                   rest_t
                 ),
-          new Exps.ClsNil()
+          new Exps.NilCls()
         ),
     "operand:ext": ({ parent, entries }) =>
       new Exps.Ext(
@@ -211,7 +211,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
                     entry.field_t,
                     rest_t
                   ),
-            new Exps.ClsNil()
+            new Exps.NilCls()
           )
       ),
     "operand:obj": ({ properties }) =>

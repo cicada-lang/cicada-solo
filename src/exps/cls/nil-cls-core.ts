@@ -2,7 +2,7 @@ import { AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 
-export class ClsNilCore extends Exps.ClsCore {
+export class NilClsCore extends Exps.ClsCore {
   append(cls: Exps.ClsCore): Exps.ClsCore {
     return cls
   }
@@ -12,7 +12,7 @@ export class ClsNilCore extends Exps.ClsCore {
   }
 
   evaluate(env: Env): Exps.ClsValue {
-    return new Exps.ClsNilValue()
+    return new Exps.NilClsValue()
   }
 
   fields_repr(): Array<string> {

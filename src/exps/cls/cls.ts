@@ -4,9 +4,9 @@ import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
 
-export abstract class Cls extends Exp {
-  instanceofExpsCls = true
+// NOTE We use null object pattern for `Cls`'s subclasses.
 
+export abstract class Cls extends Exp {
   abstract field_names: Array<string>
   abstract fields_repr(): Array<string>
   abstract subst(name: string, exp: Exp): Cls
