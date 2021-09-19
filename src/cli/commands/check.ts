@@ -51,6 +51,7 @@ async function check(
     const runner = createRunner({ path, library, files, logger })
     const { error } = await runner.run(path)
     if (error) {
+      console.error(error.message)
       errors.push(error)
     }
   }
