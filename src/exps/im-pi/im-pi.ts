@@ -9,6 +9,11 @@ import { Trace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
+// NOTE We base object pattern (a generalization of null object pattern).
+// NOTE We are implementing named argument,
+//   thus we can not just use `name`,
+//   we need `field_name` and `local_name` just like `Cls`.
+
 export abstract class ImPi extends Exp {
   instanceofImPi = true
 

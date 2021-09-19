@@ -1,27 +1,20 @@
 - `im-pi` -- syntax for `cons-im-pi`
 
-- `base-im-pi-core` with `field_name` and `local_name`
-- `base-im-pi-value` with `field_name` and `local_name`
-
 - fix `ImPi.multi_pi_repr`
+
+# implicit
 
 - `cons-im-pi-core`
 
   - fix `cons-im-pi` -- `infer`
 
+- `base-im-pi-core` with `field_name` and `local_name`
+- `base-im-pi-value` with `field_name` and `local_name`
+
 - `cons-im-pi-value`
 
 - `cons-im-pi-core`
 - `cons-im-pi-value`
-
-# implicit
-
-> Implementation guides:
-> - use null object pattern (in our case base object pattern)
-
-- [note] we are implementing named argument,
-  thus we can not just use `name`,
-  we need `field_name` and `local_name` just like `cls`
 
 - `im-fn` -- subst
 - `im-fn` -- check
