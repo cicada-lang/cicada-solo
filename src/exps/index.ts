@@ -29,7 +29,7 @@ export * from "./pi/ap-core"
 export * from "./pi/ap-neutral"
 
 export * from "./im-pi/base-im-pi"
-export * from "./im-pi/im-pi-core"
+export * from "./im-pi/base-im-pi-core"
 export * from "./im-pi/im-pi-value"
 export * from "./im-pi/im-fn"
 export * from "./im-pi/im-fn-core"

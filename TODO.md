@@ -8,8 +8,11 @@
   we need `field_name` and `local_name` just like `cls`
 
 - `base-im-pi` with `field_name` and `local_name`
-- `im-pi` as abstract class
 
+
+- rename `im-pi-value` to `base-im-pi-value`
+
+- `im-pi` as abstract class
 - `im-pi-core` as abstract class
 - `im-pi-value` as abstract class
 

@@ -48,7 +48,7 @@ export class ImPiValue
         )
       }
 
-      return new Exps.ImPiCore(fresh_name, arg_t, ret_t_core)
+      return new Exps.BaseImPiCore(fresh_name, arg_t, ret_t_core)
     }
   }
 
