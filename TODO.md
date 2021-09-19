@@ -1,3 +1,5 @@
+- [style-guide] note about the use of first order `Exp`
+
 # implicit
 
 > Implementation guides:

@@ -24,6 +24,17 @@ cic snapshot <file>  Snapshot a file -- write to <file>.out
 - Visit: [cicada-studyroom.vercel.app](https://cicada-studyroom.vercel.app)
 - Project: [cicada-lang/cicada-studyroom](https://github.com/cicada-lang/cicada-studyroom)
 
+## Development
+
+- Install dependences:
+  - `npm install`
+- Compile `src/` to `lib/`:
+  - `npm run build`
+- Watch the compilation:
+  - `npm run watch`
+- Run test:
+  - `npm run test`
+
 ## Community
 
 - IRC Channel: `#cicada-lang` at [libera.chat](https://libera.chat)
