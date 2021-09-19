@@ -11,6 +11,8 @@ import * as ut from "../../ut"
 
 export class ClsCons extends Exps.Cls {
   field_names: Array<string>
+  // NOTE We can not only use `field_name` we also need `local_name`,
+  //   because of `subst` might rename bound variables.
   field_name: string
   local_name: string
   field_t: Exp

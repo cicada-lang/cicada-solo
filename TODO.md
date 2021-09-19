@@ -1,7 +1,7 @@
 # implicit
 
 > Implementation guides:
-> - use null object pattern (in our case unit object pattern)
+> - use null object pattern (in our case base object pattern)
 
 - [note] we are implementing named argument,
   thus we can not just use `name`,
