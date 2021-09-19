@@ -1,8 +1,8 @@
-import * as Syntax from ".."
+import * as tester from "../tester"
 
 // suger for not repeating argument list
 
-Syntax.stmts`
+tester.stmts`
 
 id(A: Type, x: A): A {
   x
@@ -25,7 +25,7 @@ id: (A: Type, x: A) -> A =
 
 // suger for multi-argument function
 
-Syntax.stmts`
+tester.stmts`
 
 f: (Trivial) -> (Trivial) -> Trivial =
   (x, y) {
