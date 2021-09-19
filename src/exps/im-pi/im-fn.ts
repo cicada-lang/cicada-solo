@@ -41,7 +41,7 @@ export class ImFn extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const fresh_name = ut.freshen(new Set(ctx.names), this.name)
+    const fresh_name = ctx.freshen(this.name)
     const im_pi = expect(ctx, t, Exps.ImPiValue)
     const arg = new Exps.NotYetValue(
       im_pi.arg_t,

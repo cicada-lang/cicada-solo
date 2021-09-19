@@ -1,5 +1,3 @@
-- use `Ctx.freshen`
-
 # implicit
 
 > Implementation guides:

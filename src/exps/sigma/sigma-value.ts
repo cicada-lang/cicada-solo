@@ -20,7 +20,7 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
-      const fresh_name = ut.freshen(new Set(ctx.names), this.cdr_t_cl.name)
+      const fresh_name = ctx.freshen(this.cdr_t_cl.name)
       const variable = new Exps.NotYetValue(
         this.car_t,
         new Exps.VarNeutral(fresh_name)

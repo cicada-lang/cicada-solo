@@ -43,7 +43,7 @@ export class Let extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const fresh_name = ut.freshen(new Set(ctx.names), this.name)
+    const fresh_name = ctx.freshen(this.name)
     const inferred = infer(ctx, this.exp)
     const value = evaluate(ctx.to_env(), inferred.core)
     const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
@@ -56,7 +56,7 @@ export class Let extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const fresh_name = ut.freshen(new Set(ctx.names), this.name)
+    const fresh_name = ctx.freshen(this.name)
     const inferred = infer(ctx, this.exp)
     const value = evaluate(ctx.to_env(), inferred.core)
     const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))

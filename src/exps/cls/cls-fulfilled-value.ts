@@ -62,7 +62,7 @@ export class ClsFulfilledValue extends Exps.ClsValue {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
-      const fresh_name = ut.freshen(new Set(ctx.names), this.local_name)
+      const fresh_name = ctx.freshen(this.local_name)
 
       const field_t = readback(ctx, new Exps.TypeValue(), this.field_t)
       const field_core = readback(ctx, this.field_t, this.field)
@@ -119,7 +119,7 @@ export class ClsFulfilledValue extends Exps.ClsValue {
     ctx: Ctx
     renamings: Array<{ field_name: string; local_name: string }>
   } {
-    const fresh_name = ut.freshen(new Set(ctx.names), this.field_name)
+    const fresh_name = ctx.freshen(this.field_name)
 
     return this.rest_t.extend_ctx(
       ctx.extend(fresh_name, this.field_t, this.field),

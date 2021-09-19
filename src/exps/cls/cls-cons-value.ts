@@ -108,7 +108,7 @@ export class ClsConsValue extends Exps.ClsValue {
     ctx: Ctx
     renamings: Array<{ field_name: string; local_name: string }>
   } {
-    const fresh_name = ut.freshen(new Set(ctx.names), this.field_name)
+    const fresh_name = ctx.freshen(this.field_name)
     const variable = new Exps.NotYetValue(
       this.field_t,
       new Exps.VarNeutral(fresh_name)
