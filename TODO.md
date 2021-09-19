@@ -9,8 +9,6 @@
 
 - `base-im-pi` with `field_name` and `local_name`
 
-- `im-pi-value` as abstract class
-
 - `im-fn` -- subst
 - `im-fn` -- check
 - `im-fn` -- multi_fn_repr
