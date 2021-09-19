@@ -1,5 +1,3 @@
-- rename cls-fulfilled to fulfilled-cls
-
 # implicit
 
 > Implementation guides:
@@ -45,7 +43,7 @@
 - Value.unify -- cls/cls-value.ts
 - Value.unify -- cls/cons-cls-value.ts
 - Value.unify -- cls/obj-value.ts
-- Value.unify -- cls/cls-fulfilled-value.ts
+- Value.unify -- cls/fulfilled-cls-value.ts
 
 - `Subst.unify` occur check
 

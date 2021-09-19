@@ -123,7 +123,7 @@ export class ConsClsValue extends Exps.ClsValue {
   }
 
   apply(arg: Value): Exps.ClsValue {
-    return new Exps.ClsFulfilledValue(
+    return new Exps.FulfilledClsValue(
       this.field_name,
       this.rest_t_cl.local_name,
       this.field_t,

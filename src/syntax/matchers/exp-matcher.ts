@@ -173,7 +173,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
         .reduce(
           (rest_t, entry) =>
             entry.field
-              ? new Exps.ClsFulfilled(
+              ? new Exps.FulfilledCls(
                   entry.field_name,
                   entry.field_name,
                   entry.field_t,
@@ -198,7 +198,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
           .reduce(
             (rest_t, entry) =>
               entry.field
-                ? new Exps.ClsFulfilled(
+                ? new Exps.FulfilledCls(
                     entry.field_name,
                     entry.field_name,
                     entry.field_t,

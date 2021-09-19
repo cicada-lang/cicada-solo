@@ -9,7 +9,7 @@ import { Trace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
-export class ClsFulfilled extends Exps.Cls {
+export class FulfilledCls extends Exps.Cls {
   field_names: Array<string>
   field_name: string
   local_name: string
@@ -56,7 +56,7 @@ export class ClsFulfilled extends Exps.Cls {
 
   subst(name: string, exp: Exp): Exps.Cls {
     if (name === this.local_name) {
-      return new ClsFulfilled(
+      return new FulfilledCls(
         this.field_name,
         this.local_name,
         subst(this.field_t, name, exp),
@@ -67,7 +67,7 @@ export class ClsFulfilled extends Exps.Cls {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen(free_names, this.local_name)
 
-      return new ClsFulfilled(
+      return new FulfilledCls(
         this.field_name,
         fresh_name,
         subst(this.field_t, name, exp),
@@ -112,7 +112,7 @@ export class ClsFulfilled extends Exps.Cls {
 
     return {
       t: new Exps.TypeValue(),
-      core: new Exps.ClsFulfilledCore(
+      core: new Exps.FulfilledClsCore(
         this.field_name,
         fresh_name,
         field_t_core,

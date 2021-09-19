@@ -80,7 +80,7 @@ export class Ap extends Exp {
         t: new Exps.TypeValue(),
         core: new Exps.ApCore(target_core, arg_core),
       }
-    } else if (cls instanceof Exps.ClsFulfilledValue) {
+    } else if (cls instanceof Exps.FulfilledClsValue) {
       return this.infer_for_cls(ctx, cls.rest_t, target_core)
     } else if (cls instanceof Exps.NilClsValue) {
       throw new Trace(`The telescope is full.`)

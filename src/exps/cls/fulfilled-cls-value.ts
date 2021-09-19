@@ -11,7 +11,7 @@ import { Trace } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
 
-export class ClsFulfilledValue extends Exps.ClsValue {
+export class FulfilledClsValue extends Exps.ClsValue {
   field_name: string
   local_name: string
   field_t: Value
@@ -79,7 +79,7 @@ export class ClsFulfilledValue extends Exps.ClsValue {
         )
       }
 
-      return new Exps.ClsFulfilledCore(
+      return new Exps.FulfilledClsCore(
         this.field_name,
         fresh_name,
         field_t,
@@ -128,7 +128,7 @@ export class ClsFulfilledValue extends Exps.ClsValue {
   }
 
   apply(arg: Value): Exps.ClsValue {
-    return new Exps.ClsFulfilledValue(
+    return new Exps.FulfilledClsValue(
       this.field_name,
       this.local_name,
       this.field_t,
