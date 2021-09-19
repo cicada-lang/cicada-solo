@@ -1,4 +1,4 @@
-- [style-guide] note about the use of first order `Exp`
+- `Ctx` can generate fresh name
 
 # implicit
 
