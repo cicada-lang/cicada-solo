@@ -11,12 +11,19 @@ import * as ut from "../../ut"
 
 export class BaseImPi extends Exps.ImPi {
   field_name: string
+  local_name: string
   arg_t: Exp
   ret_t: Exps.Pi
 
-  constructor(field_name: string, arg_t: Exp, ret_t: Exps.Pi) {
+  constructor(
+    field_name: string,
+    local_name: string,
+    arg_t: Exp,
+    ret_t: Exps.Pi
+  ) {
     super()
     this.field_name = field_name
+    this.local_name = local_name
     this.arg_t = arg_t
     this.ret_t = ret_t
   }
@@ -29,8 +36,9 @@ export class BaseImPi extends Exps.ImPi {
   }
 
   subst(name: string, exp: Exp): BaseImPi {
-    if (name === this.field_name) {
+    if (name === this.local_name) {
       return new BaseImPi(
+        this.local_name,
         this.field_name,
         subst(this.arg_t, name, exp),
         this.ret_t
@@ -45,6 +53,7 @@ export class BaseImPi extends Exps.ImPi {
       ) as Exps.Pi
 
       return new BaseImPi(
+        this.field_name,
         fresh_name,
         subst(this.arg_t, name, exp),
         subst(ret_t, name, exp) as Exps.Pi

@@ -1,4 +1,5 @@
-- `base-im-pi` with `field_name` and `local_name`
+- `base-im-pi-core` with `field_name` and `local_name`
+- `base-im-pi-value` with `field_name` and `local_name`
 
 - `cons-im-pi`
 
