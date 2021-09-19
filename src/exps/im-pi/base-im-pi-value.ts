@@ -14,10 +14,7 @@ import { ImApInsertion } from "./im-ap-insertion"
 import { ImFnInsertion } from "./im-fn-insertion"
 import { ReadbackEtaExpansion } from "../../value"
 
-export class BaseImPiValue
-  extends Value
-  implements ImApInsertion, ImFnInsertion, ReadbackEtaExpansion
-{
+export class BaseImPiValue extends Exps.ImPiValue {
   arg_t: Value
   ret_t_cl: Closure
 
