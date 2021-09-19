@@ -9,6 +9,13 @@
 
 - `base-im-pi` with `field_name` and `local_name`
 
+- `cons-im-pi`
+
+- `im-pi` -- syntax for `cons-im-pi`
+
+- `cons-im-pi-core`
+- `cons-im-pi-value`
+
 - `im-fn` -- subst
 - `im-fn` -- check
 - `im-fn` -- multi_fn_repr
@@ -21,7 +28,6 @@
 - `im-ap-core`
 - `im-ap-neutral`
 
-- `im-pi` -- syntax
 - `im-fn` -- syntax
 - `im-ap` -- syntax
 
