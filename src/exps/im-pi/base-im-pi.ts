@@ -6,17 +6,17 @@ import { Solution } from "../../solution"
 import { check } from "../../exp"
 import { evaluate } from "../../core"
 import { Trace } from "../../errors"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 import * as ut from "../../ut"
 
-export class ImPi extends Exp {
-  name: string
+export class BaseImPi extends Exp {
+  field_name: string
   arg_t: Exp
   ret_t: Exps.Pi
 
-  constructor(name: string, arg_t: Exp, ret_t: Exps.Pi) {
+  constructor(field_name: string, arg_t: Exp, ret_t: Exps.Pi) {
     super()
-    this.name = name
+    this.field_name = field_name
     this.arg_t = arg_t
     this.ret_t = ret_t
   }
@@ -24,23 +24,27 @@ export class ImPi extends Exp {
   free_names(bound_names: Set<string>): Set<string> {
     return new Set([
       ...this.arg_t.free_names(bound_names),
-      ...this.ret_t.free_names(new Set([...bound_names, this.name])),
+      ...this.ret_t.free_names(new Set([...bound_names, this.field_name])),
     ])
   }
 
-  subst(name: string, exp: Exp): ImPi {
-    if (name === this.name) {
-      return new ImPi(this.name, subst(this.arg_t, name, exp), this.ret_t)
+  subst(name: string, exp: Exp): BaseImPi {
+    if (name === this.field_name) {
+      return new BaseImPi(
+        this.field_name,
+        subst(this.arg_t, name, exp),
+        this.ret_t
+      )
     } else {
       const free_names = exp.free_names(new Set())
-      const fresh_name = ut.freshen(free_names, this.name)
+      const fresh_name = ut.freshen(free_names, this.field_name)
       const ret_t = subst(
         this.ret_t,
-        this.name,
+        this.field_name,
         new Exps.Var(fresh_name)
       ) as Exps.Pi
 
-      return new ImPi(
+      return new BaseImPi(
         fresh_name,
         subst(this.arg_t, name, exp),
         subst(ret_t, name, exp) as Exps.Pi
@@ -49,10 +53,10 @@ export class ImPi extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const fresh_name = ctx.freshen(this.name)
+    const fresh_name = ctx.freshen(this.field_name)
     const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
-    const ret_t = subst(this.ret_t, this.name, new Exps.Var(fresh_name))
+    const ret_t = subst(this.ret_t, this.field_name, new Exps.Var(fresh_name))
     const ret_t_core = check(
       ctx.extend(fresh_name, arg_t_value),
       ret_t,
@@ -78,7 +82,7 @@ export class ImPi extends Exp {
     entries: Array<string>
     ret_t: string
   } {
-    const entry = `given ${this.name}: ${this.arg_t.repr()}`
+    const entry = `given ${this.field_name}: ${this.arg_t.repr()}`
     return this.ret_t.multi_pi_repr([...entries, entry])
   }
 

@@ -7,6 +7,12 @@
   thus we can not just use `name`,
   we need `field_name` and `local_name` just like `cls`
 
+- `base-im-pi` with `field_name` and `local_name`
+- `im-pi` as abstract class
+
+- `im-pi-core` as abstract class
+- `im-pi-value` as abstract class
+
 - `im-fn` -- subst
 - `im-fn` -- check
 - `im-fn` -- multi_fn_repr
@@ -18,8 +24,6 @@
 - `im-ap`
 - `im-ap-core`
 - `im-ap-neutral`
-
-- `im-pi-value`
 
 - `im-pi` -- syntax
 - `im-fn` -- syntax
