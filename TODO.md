@@ -9,9 +9,6 @@
 
 - `base-im-pi` with `field_name` and `local_name`
 
-
-- rename `im-pi-value` to `base-im-pi-value`
-
 - `im-pi` as abstract class
 - `im-pi-core` as abstract class
 - `im-pi-value` as abstract class

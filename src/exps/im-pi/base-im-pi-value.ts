@@ -9,12 +9,12 @@ import { Value, solve } from "../../value"
 import { Closure } from "../closure"
 import { Trace } from "../../errors"
 import * as ut from "../../ut"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 import { ImApInsertion } from "./im-ap-insertion"
 import { ImFnInsertion } from "./im-fn-insertion"
 import { ReadbackEtaExpansion } from "../../value"
 
-export class ImPiValue
+export class BaseImPiValue
   extends Value
   implements ImApInsertion, ImFnInsertion, ReadbackEtaExpansion
 {
@@ -79,7 +79,7 @@ export class ImPiValue
   }
 
   unify(solution: Solution, that: Value): Solution {
-    if (that instanceof Exps.ImPiValue) {
+    if (that instanceof Exps.BaseImPiValue) {
       solution = solution.unify(this.arg_t, that.arg_t)
       if (Solution.failure_p(solution)) return solution
       const names = new Set([
