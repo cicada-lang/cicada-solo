@@ -1,4 +1,4 @@
-- `Ctx.freshen`
+- use `Ctx.freshen`
 
 # implicit
 

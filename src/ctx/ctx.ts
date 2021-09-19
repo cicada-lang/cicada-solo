@@ -3,7 +3,7 @@ import { Value } from "../value"
 import { Trace } from "../errors"
 import { readback } from "../value"
 import * as Exps from "../exps"
-import * as ut from "../exps"
+import * as ut from "../ut"
 
 export abstract class Ctx {
   abstract names: Array<string>
@@ -12,6 +12,10 @@ export abstract class Ctx {
 
   static get empty(): EmptyCtx {
     return new EmptyCtx()
+  }
+
+  freshen(name: string): string {
+    return ut.freshen(new Set(this.names), name)
   }
 
   extend(name: string, t: Value, value?: Value): Ctx {
