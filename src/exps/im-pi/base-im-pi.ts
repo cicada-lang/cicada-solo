@@ -31,7 +31,7 @@ export class BaseImPi extends Exps.ImPi {
   free_names(bound_names: Set<string>): Set<string> {
     return new Set([
       ...this.arg_t.free_names(bound_names),
-      ...this.ret_t.free_names(new Set([...bound_names, this.field_name])),
+      ...this.ret_t.free_names(new Set([...bound_names, this.local_name])),
     ])
   }
 
@@ -45,10 +45,10 @@ export class BaseImPi extends Exps.ImPi {
       )
     } else {
       const free_names = exp.free_names(new Set())
-      const fresh_name = ut.freshen(free_names, this.field_name)
+      const fresh_name = ut.freshen(free_names, this.local_name)
       const ret_t = subst(
         this.ret_t,
-        this.field_name,
+        this.local_name,
         new Exps.Var(fresh_name)
       ) as Exps.Pi
 
@@ -62,10 +62,10 @@ export class BaseImPi extends Exps.ImPi {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const fresh_name = ctx.freshen(this.field_name)
+    const fresh_name = ctx.freshen(this.local_name)
     const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
-    const ret_t = subst(this.ret_t, this.field_name, new Exps.Var(fresh_name))
+    const ret_t = subst(this.ret_t, this.local_name, new Exps.Var(fresh_name))
     const ret_t_core = check(
       ctx.extend(fresh_name, arg_t_value),
       ret_t,

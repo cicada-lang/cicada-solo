@@ -13,25 +13,25 @@ export class ConsImPi extends Exps.ImPi {
   field_name: string
   local_name: string
   arg_t: Exp
-  ret_t: Exps.Pi
+  rest: Exps.ImPi
 
   constructor(
     field_name: string,
     local_name: string,
     arg_t: Exp,
-    ret_t: Exps.Pi
+    rest: Exps.ImPi
   ) {
     super()
     this.field_name = field_name
     this.local_name = local_name
     this.arg_t = arg_t
-    this.ret_t = ret_t
+    this.rest = rest
   }
 
   free_names(bound_names: Set<string>): Set<string> {
     return new Set([
       ...this.arg_t.free_names(bound_names),
-      ...this.ret_t.free_names(new Set([...bound_names, this.field_name])),
+      ...this.rest.free_names(new Set([...bound_names, this.local_name])),
     ])
   }
 
@@ -41,47 +41,47 @@ export class ConsImPi extends Exps.ImPi {
         this.local_name,
         this.field_name,
         subst(this.arg_t, name, exp),
-        this.ret_t
+        this.rest
       )
     } else {
       const free_names = exp.free_names(new Set())
-      const fresh_name = ut.freshen(free_names, this.field_name)
+      const fresh_name = ut.freshen(free_names, this.local_name)
       const ret_t = subst(
-        this.ret_t,
-        this.field_name,
+        this.rest,
+        this.local_name,
         new Exps.Var(fresh_name)
-      ) as Exps.Pi
+      ) as Exps.ImPi
 
       return new ConsImPi(
         this.field_name,
         fresh_name,
         subst(this.arg_t, name, exp),
-        subst(ret_t, name, exp) as Exps.Pi
+        subst(ret_t, name, exp) as Exps.ImPi
       )
     }
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    throw new Error()
+    const fresh_name = ctx.freshen(this.local_name)
+    const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
+    const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
+    const ret_t = subst(this.rest, this.local_name, new Exps.Var(fresh_name))
+    const ret_t_core = check(
+      ctx.extend(fresh_name, arg_t_value),
+      ret_t,
+      new Exps.TypeValue()
+    )
 
-    // const fresh_name = ctx.freshen(this.field_name)
-    // const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
-    // const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
-    // const ret_t = subst(this.ret_t, this.field_name, new Exps.Var(fresh_name))
-    // const ret_t_core = check(
-    //   ctx.extend(fresh_name, arg_t_value),
-    //   ret_t,
-    //   new Exps.TypeValue()
-    // )
+    if (!(ret_t_core instanceof Exps.ImPiCore)) {
+      throw new Trace(
+        [
+          `I expect ret_t_core to be Exps.ImPiCore`,
+          `but the constructor name I meet is: ${ret_t_core.constructor.name}`,
+        ].join("\n") + "\n"
+      )
+    }
 
-    // if (!(ret_t_core instanceof Exps.PiCore)) {
-    //   throw new Trace(
-    //     [
-    //       `I expect ret_t_core to be Exps.PiCore`,
-    //       `but the constructor name I meet is: ${ret_t_core.constructor.name}`,
-    //     ].join("\n") + "\n"
-    //   )
-    // }
+    throw new Error("TODO")
 
     // return {
     //   t: new Exps.TypeValue(),
@@ -94,7 +94,7 @@ export class ConsImPi extends Exps.ImPi {
     ret_t: string
   } {
     const entry = `given ${this.field_name}: ${this.arg_t.repr()}`
-    return this.ret_t.multi_pi_repr([...entries, entry])
+    return this.rest.multi_pi_repr([...entries, entry])
   }
 
   repr(): string {

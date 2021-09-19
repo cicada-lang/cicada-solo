@@ -1,12 +1,19 @@
+- `src/syntax/tests/` -- be able to test syntax without semantics
+
+- move some syntax test from `tests/` to `src/syntax/tests/`
+
+- `im-pi` -- syntax for `cons-im-pi`
+
 - `base-im-pi-core` with `field_name` and `local_name`
 - `base-im-pi-value` with `field_name` and `local_name`
 
-- `cons-im-pi`
+- fix `ImPi.multi_pi_repr`
 
 - `cons-im-pi-core`
-- `cons-im-pi-value`
 
-- `im-pi` -- syntax for `cons-im-pi`
+  - fix `cons-im-pi` -- `infer`
+
+- `cons-im-pi-value`
 
 - `cons-im-pi-core`
 - `cons-im-pi-value`

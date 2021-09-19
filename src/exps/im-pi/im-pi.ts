@@ -11,4 +11,9 @@ import * as ut from "../../ut"
 
 export abstract class ImPi extends Exp {
   instanceofImPi = true
+
+  abstract multi_pi_repr(entries: Array<string>): {
+    entries: Array<string>
+    ret_t: string
+  }
 }
