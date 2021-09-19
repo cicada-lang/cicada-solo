@@ -1,7 +1,3 @@
-- `src/syntax/tests/` -- be able to test syntax without semantics
-
-- move some syntax test from `tests/` to `src/syntax/tests/`
-
 - `im-pi` -- syntax for `cons-im-pi`
 
 - `base-im-pi-core` with `field_name` and `local_name`
