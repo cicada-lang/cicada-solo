@@ -26,14 +26,12 @@ cic snapshot <file>  Snapshot a file -- write to <file>.out
 
 ## Development
 
-- Install dependences:
-  - `npm install`
-- Compile `src/` to `lib/`:
-  - `npm run build`
-- Watch the compilation:
-  - `npm run watch`
-- Run test:
-  - `npm run test`
+```
+npm install     // Install dependences
+npm run build   // Compile `src/` to `lib/`
+npm run watch   // Watch the compilation
+npm run test    // Run test
+```
 
 ## Community
 
