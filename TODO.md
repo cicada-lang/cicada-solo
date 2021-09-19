@@ -1,6 +1,3 @@
-- `syntax/tester.ts` -- support `not_stmts` and `not_exp`
-
-
 - `im-pi` -- syntax for `cons-im-pi`
 
 - `base-im-pi-core` with `field_name` and `local_name`
