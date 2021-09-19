@@ -3,6 +3,9 @@
 
 - `cons-im-pi`
 
+- `cons-im-pi-core`
+- `cons-im-pi-value`
+
 - `im-pi` -- syntax for `cons-im-pi`
 
 - `cons-im-pi-core`
