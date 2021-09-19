@@ -25,7 +25,7 @@ export abstract class ClsValue extends Value implements ReadbackEtaExpansion {
 
   abstract eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core>
 
-  readback_eta_expand(ctx: Ctx, value: Value): Core {
+  readback_eta_expansion(ctx: Ctx, value: Value): Core {
     return new Exps.ObjCore(this.eta_expand_properties(ctx, value))
   }
 

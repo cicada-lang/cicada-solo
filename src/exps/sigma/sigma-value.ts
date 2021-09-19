@@ -35,7 +35,7 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
     }
   }
 
-  readback_eta_expand(ctx: Ctx, value: Value): Core {
+  readback_eta_expansion(ctx: Ctx, value: Value): Core {
     // NOTE Pairs are also η-expanded.
     //   Every value with a pair type,
     //   whether it is neutral or not,

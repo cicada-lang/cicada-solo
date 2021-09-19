@@ -7,7 +7,7 @@ import * as Exps from "../exps"
 
 export function readback(ctx: Ctx, t: Value, value: Value): Core {
   if (ReadbackEtaExpansion.based_on(t)) {
-    return t.readback_eta_expand(ctx, value)
+    return t.readback_eta_expansion(ctx, value)
   }
 
   if (
@@ -34,11 +34,11 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
 }
 
 export interface ReadbackEtaExpansion {
-  readback_eta_expand(ctx: Ctx, value: Value): Core
+  readback_eta_expansion(ctx: Ctx, value: Value): Core
 }
 
 export const ReadbackEtaExpansion = {
   based_on(t: Value): t is Value & ReadbackEtaExpansion {
-    return (t as any)["readback_eta_expand"] instanceof Function
+    return (t as any)["readback_eta_expansion"] instanceof Function
   },
 }

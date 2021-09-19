@@ -35,7 +35,7 @@ export class PiValue extends Value implements ReadbackEtaExpansion {
     }
   }
 
-  readback_eta_expand(ctx: Ctx, value: Value): Core {
+  readback_eta_expansion(ctx: Ctx, value: Value): Core {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.

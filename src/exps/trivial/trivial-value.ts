@@ -12,7 +12,7 @@ export class TrivialValue extends Value implements ReadbackEtaExpansion {
     }
   }
 
-  readback_eta_expand(ctx: Ctx, value: Value): Core {
+  readback_eta_expansion(ctx: Ctx, value: Value): Core {
     // NOTE the η-rule for trivial states that
     //   all of its inhabitants are the same as sole.
     //   This is implemented by reading the all back as sole.

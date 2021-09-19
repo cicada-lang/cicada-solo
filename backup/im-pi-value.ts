@@ -58,7 +58,7 @@ export class ImPiValue
     // }
   }
 
-  readback_eta_expand(ctx: Ctx, value: Value): Core {
+  readback_eta_expansion(ctx: Ctx, value: Value): Core {
     throw new Error("TODO")
 
     // // NOTE everything with a function type
