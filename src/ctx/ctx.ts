@@ -3,6 +3,7 @@ import { Value } from "../value"
 import { Trace } from "../errors"
 import { readback } from "../value"
 import * as Exps from "../exps"
+import * as ut from "../exps"
 
 export abstract class Ctx {
   abstract names: Array<string>

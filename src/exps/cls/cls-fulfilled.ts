@@ -65,7 +65,7 @@ export class ClsFulfilled extends Exps.Cls {
       )
     } else {
       const free_names = exp.free_names(new Set())
-      const fresh_name = ut.freshen_name(free_names, this.local_name)
+      const fresh_name = ut.freshen(free_names, this.local_name)
 
       return new ClsFulfilled(
         this.field_name,
@@ -94,7 +94,7 @@ export class ClsFulfilled extends Exps.Cls {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const fresh_name = ut.freshen_name(new Set(ctx.names), this.local_name)
+    const fresh_name = ut.freshen(new Set(ctx.names), this.local_name)
     const field_t_core = check(ctx, this.field_t, new Exps.TypeValue())
     const field_t_value = evaluate(ctx.to_env(), field_t_core)
     const field_core = check(ctx, this.field, field_t_value)

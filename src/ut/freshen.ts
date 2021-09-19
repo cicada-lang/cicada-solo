@@ -1,4 +1,4 @@
-export function freshen_name(used: Set<string>, name: string): string {
+export function freshen(used: Set<string>, name: string): string {
   let counter = 1
   let new_name = name
   while (true) {

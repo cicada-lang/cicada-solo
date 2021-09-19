@@ -1,4 +1,4 @@
-- `Ctx` can generate fresh name
+- `Ctx.freshen`
 
 # implicit
 

@@ -32,7 +32,7 @@ export class Pi extends Exp {
       return new Pi(this.name, subst(this.arg_t, name, exp), this.ret_t)
     } else {
       const free_names = exp.free_names(new Set())
-      const fresh_name = ut.freshen_name(free_names, this.name)
+      const fresh_name = ut.freshen(free_names, this.name)
       const ret_t = subst(this.ret_t, this.name, new Exps.Var(fresh_name))
 
       return new Pi(
@@ -44,7 +44,7 @@ export class Pi extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
+    const fresh_name = ut.freshen(new Set(ctx.names), this.name)
     const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
     const ret_t = subst(this.ret_t, this.name, new Exps.Var(fresh_name))

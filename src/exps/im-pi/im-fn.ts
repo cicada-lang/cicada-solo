@@ -30,7 +30,7 @@ export class ImFn extends Exp {
       return this
     } else {
       const free_names = exp.free_names(new Set())
-      const fresh_name = ut.freshen_name(free_names, this.name)
+      const fresh_name = ut.freshen(free_names, this.name)
       const ret = subst(
         this.ret,
         this.name,
@@ -41,7 +41,7 @@ export class ImFn extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
+    const fresh_name = ut.freshen(new Set(ctx.names), this.name)
     const im_pi = expect(ctx, t, Exps.ImPiValue)
     const arg = new Exps.NotYetValue(
       im_pi.arg_t,

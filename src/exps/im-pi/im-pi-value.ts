@@ -29,7 +29,7 @@ export class ImPiValue
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
-      const fresh_name = ut.freshen_name(new Set(ctx.names), this.ret_t_cl.name)
+      const fresh_name = ut.freshen(new Set(ctx.names), this.ret_t_cl.name)
       const variable = new Exps.VarNeutral(fresh_name)
       const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
       const arg_t = readback(ctx, new Exps.TypeValue(), this.arg_t)
@@ -56,7 +56,7 @@ export class ImPiValue
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
-    const fresh_name = ut.freshen_name(new Set(ctx.names), this.ret_t_cl.name)
+    const fresh_name = ut.freshen(new Set(ctx.names), this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const pi = this.ret_t_cl.apply(not_yet_value)
@@ -87,7 +87,7 @@ export class ImPiValue
         this.ret_t_cl.name,
         that.ret_t_cl.name,
       ])
-      const fresh_name = ut.freshen_name(names, this.ret_t_cl.name)
+      const fresh_name = ut.freshen(names, this.ret_t_cl.name)
       const v = new Exps.VarNeutral(fresh_name)
       const this_v = new Exps.NotYetValue(this.arg_t, v)
       const that_v = new Exps.NotYetValue(that.arg_t, v)
@@ -103,7 +103,7 @@ export class ImPiValue
   insert_im_ap(ctx: Ctx, ap: Exps.Ap, core: Core): { t: Value; core: Core } {
     const { arg_t, ret_t_cl } = this
     const inferred_arg = infer(ctx, ap.arg)
-    const fresh_name = ut.freshen_name(new Set(ctx.names), ret_t_cl.name)
+    const fresh_name = ut.freshen(new Set(ctx.names), ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(arg_t, variable)
     const ret_t = ret_t_cl.apply(not_yet_value)
@@ -149,7 +149,7 @@ export class ImPiValue
   insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core {
     // NOTE Implicit lambda insertion
     const { arg_t, ret_t_cl } = this
-    const fresh_name = ut.freshen_name(new Set(ctx.names), fn.name)
+    const fresh_name = ut.freshen(new Set(ctx.names), fn.name)
     const arg = new Exps.NotYetValue(arg_t, new Exps.VarNeutral(fresh_name))
     const ret_t = ret_t_cl.apply(arg)
     const result = check(ctx.extend(fresh_name, arg_t), fn, ret_t)

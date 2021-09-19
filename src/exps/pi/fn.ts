@@ -31,7 +31,7 @@ export class Fn extends Exp {
       return this
     } else {
       const free_names = exp.free_names(new Set())
-      const fresh_name = ut.freshen_name(free_names, this.name)
+      const fresh_name = ut.freshen(free_names, this.name)
       const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
       return new Fn(fresh_name, subst(ret, name, exp))
     }
@@ -43,7 +43,7 @@ export class Fn extends Exp {
     }
 
     const { arg_t, ret_t_cl } = expect(ctx, t, Exps.PiValue)
-    const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
+    const fresh_name = ut.freshen(new Set(ctx.names), this.name)
     const arg = new Exps.NotYetValue(arg_t, new Exps.VarNeutral(fresh_name))
     const ret_t = ret_t_cl.apply(arg)
     const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))

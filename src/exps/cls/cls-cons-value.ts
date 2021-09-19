@@ -47,7 +47,7 @@ export class ClsConsValue extends Exps.ClsValue {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
-      const fresh_name = ut.freshen_name(
+      const fresh_name = ut.freshen(
         new Set(ctx.names),
         this.rest_t_cl.local_name
       )
@@ -108,7 +108,7 @@ export class ClsConsValue extends Exps.ClsValue {
     ctx: Ctx
     renamings: Array<{ field_name: string; local_name: string }>
   } {
-    const fresh_name = ut.freshen_name(new Set(ctx.names), this.field_name)
+    const fresh_name = ut.freshen(new Set(ctx.names), this.field_name)
     const variable = new Exps.NotYetValue(
       this.field_t,
       new Exps.VarNeutral(fresh_name)
