@@ -89,7 +89,7 @@ export class ImPiValue
   unify(solution: Subst, that: Value): Subst {
     throw new Error("TODO")
 
-    // if (that instanceof Exps.ImPiValue) {
+    // if (that instanceof Exps.BaseImPiValue) {
     //   solution = solution.unify(this.arg_t, that.arg_t)
     //   if (Subst.failure_p(solution)) return solution
     //   const names = new Set([
@@ -123,7 +123,7 @@ export class ImPiValue
     // if (!(ret_t instanceof Exps.PiValue)) {
     //   throw new Trace(
     //     [
-    //       `When Exps.Ap.infer meet target of type Exps.ImPiValue,`,
+    //       `When Exps.Ap.infer meet target of type Exps.BaseImPiValue,`,
     //       `It expects the result of applying ret_t_cl to logic variable to be Exps.PiValue,`,
     //       `  class name: ${ret_t.constructor.name}`,
     //     ].join("\n")
@@ -141,7 +141,7 @@ export class ImPiValue
     // if (!(real_ret_t instanceof Exps.PiValue)) {
     //   throw new Trace(
     //     [
-    //       `When Exps.Ap.infer meet target of type Exps.ImPiValue,`,
+    //       `When Exps.Ap.infer meet target of type Exps.BaseImPiValue,`,
     //       `and when ret_t is Exps.PiValue,`,
     //       `it expects real_ret_t to also be Exps.PiValue,`,
     //       `  class name: ${real_ret_t.constructor.name}`,

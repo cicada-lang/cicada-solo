@@ -39,7 +39,7 @@ export class ImAp extends Exp {
     throw new Error("TODO")
 
     // const inferred_target = infer(ctx, this.target)
-    // if (inferred_target.t instanceof Exps.ImPiValue) {
+    // if (inferred_target.t instanceof Exps.BaseImPiValue) {
     //   const im_pi = inferred_target.t
     //   const arg_core = check(ctx, this.arg, im_pi.arg_t)
     //   const arg_value = evaluate(ctx.to_env(), arg_core)

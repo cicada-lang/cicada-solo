@@ -42,7 +42,7 @@ export class ImFn extends Exp {
     throw new Error("TODO")
 
     // const fresh_name = ut.freshen_name(new Set(ctx.names), this.name)
-    // const im_pi = expect(ctx, t, Exps.ImPiValue)
+    // const im_pi = expect(ctx, t, Exps.BaseImPiValue)
     // const arg = new Exps.NotYetValue(
     //   im_pi.arg_t,
     //   new Exps.VarNeutral(fresh_name)

@@ -25,7 +25,7 @@ export class ImPiCore extends Core {
       name,
       arg_t: evaluate(env, arg_t),
     }))
-    return new Exps.ImPiValue(implicit, new RecordClosure(env, this.ret_t))
+    return new Exps.BaseImPiValue(implicit, new RecordClosure(env, this.ret_t))
   }
 
   multi_pi_repr(entries: Array<string> = new Array()): {
