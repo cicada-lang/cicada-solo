@@ -41,7 +41,7 @@ export class DotCore extends Core {
         )
       } else {
         throw InternalError.wrong_target_t(t, {
-          expected: [Exps.NilClsValue, Exps.ClsConsValue],
+          expected: [Exps.NilClsValue, Exps.ConsClsValue],
         })
       }
     } else {

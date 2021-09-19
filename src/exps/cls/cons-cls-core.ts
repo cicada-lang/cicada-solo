@@ -5,7 +5,7 @@ import * as Exps from "../../exps"
 import * as ut from "../../ut"
 import { ClsClosure } from "./cls-closure"
 
-export class ClsConsCore extends Exps.ClsCore {
+export class ConsClsCore extends Exps.ClsCore {
   field_name: string
   local_name: string
   field_t: Core
@@ -25,7 +25,7 @@ export class ClsConsCore extends Exps.ClsCore {
   }
 
   append(cls: Exps.ClsCore): Exps.ClsCore {
-    return new ClsConsCore(
+    return new ConsClsCore(
       this.field_name,
       this.local_name,
       this.field_t,
@@ -38,7 +38,7 @@ export class ClsConsCore extends Exps.ClsCore {
   }
 
   evaluate(env: Env): Exps.ClsValue {
-    return new Exps.ClsConsValue(
+    return new Exps.ConsClsValue(
       this.field_name,
       evaluate(env, this.field_t),
       new ClsClosure(env, this.local_name, this.rest_t)

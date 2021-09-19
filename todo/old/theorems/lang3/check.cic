@@ -5,7 +5,7 @@
   ----------------------------------------- cls_null
 
   Check(ctx, Exp.cls(List.cons({ name, t }, tail)), Value.type)
-  ------------------------------------------------------------ cls_cons
+  ------------------------------------------------------------ cons_cls
   Check(ctx, t, Value.type)
   Check(Map.extend(ctx, name, t_value), Exp.cls(tail), Value.type)
   @where {

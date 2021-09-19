@@ -63,7 +63,7 @@ export class ApCore extends Core {
       }
     } else {
       throw InternalError.wrong_target(target, {
-        expected: [Exps.FnValue, Exps.NilClsValue, Exps.ClsConsValue],
+        expected: [Exps.FnValue, Exps.NilClsValue, Exps.ConsClsValue],
       })
     }
   }

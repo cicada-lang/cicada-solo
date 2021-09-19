@@ -1,4 +1,3 @@
-- rename cls-cons to cons-cls
 - rename cls-fulfilled to fulfilled-cls
 
 # implicit
@@ -44,7 +43,7 @@
 
 - Value.unify -- cls/nil-cls-value.ts
 - Value.unify -- cls/cls-value.ts
-- Value.unify -- cls/cls-cons-value.ts
+- Value.unify -- cls/cons-cls-value.ts
 - Value.unify -- cls/obj-value.ts
 - Value.unify -- cls/cls-fulfilled-value.ts
 

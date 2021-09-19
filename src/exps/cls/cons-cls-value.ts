@@ -11,7 +11,7 @@ import * as ut from "../../ut"
 import * as Exps from "../../exps"
 import { ClsClosure } from "./cls-closure"
 
-export class ClsConsValue extends Exps.ClsValue {
+export class ConsClsValue extends Exps.ClsValue {
   field_name: string
   field_t: Value
   rest_t_cl: ClsClosure
@@ -68,7 +68,7 @@ export class ClsConsValue extends Exps.ClsValue {
         )
       }
 
-      return new Exps.ClsConsCore(this.field_name, fresh_name, field_t, rest_t)
+      return new Exps.ConsClsCore(this.field_name, fresh_name, field_t, rest_t)
     }
   }
 

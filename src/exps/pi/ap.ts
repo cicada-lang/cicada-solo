@@ -74,7 +74,7 @@ export class Ap extends Exp {
     cls: Exps.ClsValue,
     target_core: Core
   ): { t: Value; core: Core } {
-    if (cls instanceof Exps.ClsConsValue) {
+    if (cls instanceof Exps.ConsClsValue) {
       const arg_core = check(ctx, this.arg, cls.field_t)
       return {
         t: new Exps.TypeValue(),

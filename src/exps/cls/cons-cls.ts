@@ -9,7 +9,7 @@ import { Trace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
-export class ClsCons extends Exps.Cls {
+export class ConsCls extends Exps.Cls {
   field_names: Array<string>
   // NOTE We can not only use `field_name` we also need `local_name`,
   //   because of `subst` might rename bound variables.
@@ -54,7 +54,7 @@ export class ClsCons extends Exps.Cls {
 
   subst(name: string, exp: Exp): Exps.Cls {
     if (name === this.local_name) {
-      return new ClsCons(
+      return new ConsCls(
         this.field_name,
         this.local_name,
         subst(this.field_t, name, exp),
@@ -64,7 +64,7 @@ export class ClsCons extends Exps.Cls {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen(free_names, this.local_name)
 
-      return new ClsCons(
+      return new ConsCls(
         this.field_name,
         fresh_name,
         subst(this.field_t, name, exp),
@@ -106,7 +106,7 @@ export class ClsCons extends Exps.Cls {
 
     return {
       t: new Exps.TypeValue(),
-      core: new Exps.ClsConsCore(
+      core: new Exps.ConsClsCore(
         this.field_name,
         fresh_name,
         field_t_core,

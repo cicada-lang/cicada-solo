@@ -68,7 +68,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           .reverse()
           .reduce(
             (rest_t, entry) =>
-              new Exps.ClsCons(
+              new Exps.ConsCls(
                 entry.field_name,
                 entry.field_name,
                 entry.field_t,
@@ -88,7 +88,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
             .reverse()
             .reduce(
               (rest_t, entry) =>
-                new Exps.ClsCons(
+                new Exps.ConsCls(
                   entry.field_name,
                   entry.field_name,
                   entry.field_t,
