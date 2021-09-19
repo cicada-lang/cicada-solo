@@ -9,7 +9,6 @@
 
 - `base-im-pi` with `field_name` and `local_name`
 
-- `im-pi-core` as abstract class
 - `im-pi-value` as abstract class
 
 - `im-fn` -- subst

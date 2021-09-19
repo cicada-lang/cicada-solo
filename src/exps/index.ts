@@ -31,6 +31,7 @@ export * from "./pi/ap-neutral"
 // NOTE subclass must follow abstract class
 export * from "./im-pi/im-pi"
 export * from "./im-pi/base-im-pi"
+export * from "./im-pi/im-pi-core"
 export * from "./im-pi/base-im-pi-core"
 export * from "./im-pi/base-im-pi-value"
 export * from "./im-pi/im-fn"

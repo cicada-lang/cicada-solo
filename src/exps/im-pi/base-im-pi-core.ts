@@ -6,7 +6,7 @@ import { Closure } from "../closure"
 import { evaluate } from "../../core"
 import * as Exps from ".."
 
-export class BaseImPiCore extends Core {
+export class BaseImPiCore extends Exps.ImPiCore {
   field_name: string
   arg_t: Core
   ret_t: Exps.PiCore
