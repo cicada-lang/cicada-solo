@@ -1,3 +1,5 @@
+- `Binding` as a helper union type
+
 - `im-pi` -- syntax for `cons-im-pi`
 
 - fix `ImPi.multi_pi_repr`

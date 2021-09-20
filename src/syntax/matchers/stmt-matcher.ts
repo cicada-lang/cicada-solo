@@ -30,9 +30,6 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     "stmt:def_fn": ({ name, bindings, ret_t, ret }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
-        .flatMap(({ implicit, names }) =>
-          names.map((name) => ({ implicit, name })).reverse()
-        )
         .reduce((result, { implicit, name }) => {
           if (implicit) {
             if (!(result instanceof Exps.Fn)) {

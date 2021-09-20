@@ -9,9 +9,6 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
 
   return bindings_matcher(bindings)
     .reverse()
-    .flatMap(({ implicit, names, exp }) =>
-      names.map((name) => ({ implicit, name, exp })).reverse()
-    )
     .reduce((result, { implicit, name, exp }) => {
       if (implicit) {
         if (!(result instanceof Exps.Pi)) {
@@ -35,9 +32,6 @@ export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
 
   return bindings_matcher(bindings)
     .reverse()
-    .flatMap(({ implicit, names, exp }) =>
-      names.map((name) => ({ implicit, name, exp })).reverse()
-    )
     .reduce((result, { implicit, name, exp }) => {
       if (implicit) {
         throw new Error(`The "implicit" keyword should not be used in sigma`)
@@ -282,9 +276,6 @@ export function declaration_matcher(tree: pt.Tree): Exp {
     "declaration:let_fn": ({ name, bindings, ret_t, ret, body }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
-        .flatMap(({ implicit, names }) =>
-          names.map((name) => ({ implicit, name })).reverse()
-        )
         .reduce((result, { implicit, name }) => {
           if (implicit) {
             if (!(result instanceof Exps.Fn)) {
@@ -333,9 +324,6 @@ export function cls_entry_matcher(tree: pt.Tree): {
     "cls_entry:method_fulfilled": ({ name, bindings, ret_t, ret }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
-        .flatMap(({ implicit, names }) =>
-          names.map((name) => ({ implicit, name })).reverse()
-        )
         .reduce((result, { implicit, name }) => {
           if (implicit) {
             if (!(result instanceof Exps.Fn)) {
@@ -364,7 +352,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
 
 export function bindings_matcher(tree: pt.Tree): Array<{
   implicit: boolean
-  names: Array<string>
+  name: string
   exp: Exp
 }> {
   return pt.matcher({
@@ -377,23 +365,23 @@ export function bindings_matcher(tree: pt.Tree): Array<{
 
 export function binding_matcher(tree: pt.Tree): {
   implicit: boolean
-  names: Array<string>
+  name: string
   exp: Exp
 } {
   return pt.matcher({
     "binding:nameless": ({ exp }) => ({
       implicit: false,
-      names: ["_"],
+      name: "_",
       exp: exp_matcher(exp),
     }),
     "binding:named": ({ name, exp }) => ({
       implicit: false,
-      names: [pt.str(name)],
+      name: pt.str(name),
       exp: exp_matcher(exp),
     }),
     "binding:implicit_named": ({ name, exp }) => ({
       implicit: true,
-      names: [pt.str(name)],
+      name: pt.str(name),
       exp: exp_matcher(exp),
     }),
   })(tree)
