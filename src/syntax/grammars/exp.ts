@@ -328,18 +328,18 @@ export const cls_entry = {
 export const bindings = {
   $grammar: {
     "bindings:bindings": [
-      { entries: { $ap: ["zero_or_more", "binding_entry", '","'] } },
-      { last_entry: "binding_entry" },
+      { entries: { $ap: ["zero_or_more", "binding", '","'] } },
+      { last_entry: "binding" },
       { $ap: ["optional", '","'] },
     ],
   },
 }
 
-export const binding_entry = {
+export const binding = {
   $grammar: {
-    "binding_entry:nameless": [{ exp: "exp" }],
-    "binding_entry:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
-    "binding_entry:implicit_named": [
+    "binding:nameless": [{ exp: "exp" }],
+    "binding:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
+    "binding:implicit_named": [
       '"implicit"',
       '"{"',
       { name: "identifier" },

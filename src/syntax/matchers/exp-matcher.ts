@@ -369,29 +369,29 @@ export function bindings_matcher(tree: pt.Tree): Array<{
 }> {
   return pt.matcher({
     "bindings:bindings": ({ entries, last_entry }) => [
-      ...pt.matchers.zero_or_more_matcher(entries).map(binding_entry_matcher),
-      binding_entry_matcher(last_entry),
+      ...pt.matchers.zero_or_more_matcher(entries).map(binding_matcher),
+      binding_matcher(last_entry),
     ],
   })(tree)
 }
 
-export function binding_entry_matcher(tree: pt.Tree): {
+export function binding_matcher(tree: pt.Tree): {
   implicit: boolean
   names: Array<string>
   exp: Exp
 } {
   return pt.matcher({
-    "binding_entry:nameless": ({ exp }) => ({
+    "binding:nameless": ({ exp }) => ({
       implicit: false,
       names: ["_"],
       exp: exp_matcher(exp),
     }),
-    "binding_entry:named": ({ name, exp }) => ({
+    "binding:named": ({ name, exp }) => ({
       implicit: false,
       names: [pt.str(name)],
       exp: exp_matcher(exp),
     }),
-    "binding_entry:implicit_named": ({ name, exp }) => ({
+    "binding:implicit_named": ({ name, exp }) => ({
       implicit: true,
       names: [pt.str(name)],
       exp: exp_matcher(exp),
