@@ -19,8 +19,10 @@ export class PiCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    const arg_t = evaluate(env, this.arg_t)
-    return new Exps.PiValue(arg_t, new Closure(env, this.name, this.ret_t))
+    return new Exps.PiValue(
+      evaluate(env, this.arg_t),
+      new Closure(env, this.name, this.ret_t)
+    )
   }
 
   pi_args_repr(): Array<string> {

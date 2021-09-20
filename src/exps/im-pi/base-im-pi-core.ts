@@ -19,9 +19,8 @@ export class BaseImPiCore extends Exps.ImPiCore {
   }
 
   evaluate(env: Env): Value {
-    const arg_t = evaluate(env, this.arg_t)
     return new Exps.BaseImPiValue(
-      arg_t,
+      evaluate(env, this.arg_t),
       new Closure(env, this.field_name, this.ret_t)
     )
   }
