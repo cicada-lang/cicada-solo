@@ -1,8 +1,6 @@
-- `cons-im-pi-core`
-
-  - fix `cons-im-pi` -- `infer`
-
 - `cons-im-pi-value`
+
+  - fix `cons-im-pi-core` -- `evaluate`
 
 # implicit
 

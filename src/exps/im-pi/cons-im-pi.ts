@@ -81,12 +81,15 @@ export class ConsImPi extends Exps.ImPi {
       )
     }
 
-    throw new Error("TODO")
-
-    // return {
-    //   t: new Exps.TypeValue(),
-    //   core: new Exps.ConsImPiCore(fresh_name, arg_t_core, ret_t_core),
-    // }
+    return {
+      t: new Exps.TypeValue(),
+      core: new Exps.ConsImPiCore(
+        this.field_name,
+        fresh_name,
+        arg_t_core,
+        ret_t_core
+      ),
+    }
   }
 
   im_pi_args_repr(): Array<string> {
