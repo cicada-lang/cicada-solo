@@ -107,8 +107,8 @@ export class ConsImPi extends Exps.ImPi {
   }
 
   repr(): string {
-    const entries = this.pi_args_repr().join(", ")
+    const args = this.pi_args_repr().join(", ")
     const ret_t = this.pi_ret_t_repr()
-    return `(${entries}) -> ${ret_t}`
+    return `(${args}) -> ${ret_t}`
   }
 }

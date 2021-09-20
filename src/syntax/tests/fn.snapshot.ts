@@ -2,7 +2,7 @@ import * as tester from "../tester"
 
 // suger for not repeating argument list
 
-tester.stmts`
+tester.echo_stmts`
 id(A: Type, x: A): A {
   x
 }

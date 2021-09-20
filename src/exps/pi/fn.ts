@@ -62,8 +62,25 @@ export class Fn extends Exp {
     }
   }
 
+  fn_args_repr(): Array<string> {
+    if (this.ret instanceof Fn) {
+      return [this.name, ...this.ret.fn_args_repr()]
+    } else {
+      return [this.name]
+    }
+  }
+
+  fn_ret_repr(): string {
+    if (this.ret instanceof Fn) {
+      return this.ret.fn_ret_repr()
+    } else {
+      return this.ret.repr()
+    }
+  }
+
   repr(): string {
-    const { names, ret } = this.flatten_repr()
-    return `(${names.join(", ")}) { ${ret} }`
+    const args = this.fn_args_repr().join(", ")
+    const ret = this.fn_ret_repr()
+    return `(${args}) { ${ret} }`
   }
 }
