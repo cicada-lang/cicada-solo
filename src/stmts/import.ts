@@ -58,6 +58,14 @@ export class Import extends Stmt {
       mod.env = mod.env.extend(alias || name, value)
     }
   }
+
+  repr(): string {
+    const entries = this.entries
+      .map(({ name, alias }) => (alias ? `${name} as ${alias}` : name))
+      .join(", ")
+
+    return `import { ${entries} } from "${this.path}"`
+  }
 }
 
 function resolve_path(base: string, path: string): string {

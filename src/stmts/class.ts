@@ -22,4 +22,8 @@ export class Class extends Stmt {
     mod.ctx = mod.ctx.extend(this.name, inferred.t, inferred_value)
     mod.env = mod.env.extend(this.name, evaluate(mod.env, inferred.core))
   }
+
+  repr(): string {
+    return `${this.name} = ${this.cls.repr()}`
+  }
 }

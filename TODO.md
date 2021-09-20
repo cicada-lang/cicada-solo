@@ -1,6 +1,3 @@
-- `Stmt.repr`
-- `syntex/tester` -- `echo_stmts`
-
 - `im-pi` -- syntax for `cons-im-pi`
 
 - fix `ImPi.multi_pi_repr`

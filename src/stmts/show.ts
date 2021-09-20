@@ -23,4 +23,8 @@ export class Show extends Stmt {
     const output = `${value_repr}: ${t_repr} `
     mod.output(output)
   }
+
+  repr(): string {
+    return this.exp.repr()
+  }
 }
