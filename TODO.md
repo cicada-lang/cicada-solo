@@ -1,5 +1,4 @@
-- `fn-core` -- simplify `flatten_repr`
-- `im-fn-core` -- simplify `flatten_repr`
+- simplify type guards
 
 - `pi-core` -- simplify `flatten_repr`
 

@@ -19,17 +19,18 @@ export class ImFnCore extends Core {
     return new Exps.ImFnValue(new Closure(env, this.name, this.ret))
   }
 
-  flatten_repr(names: Array<string> = new Array()): {
-    names: Array<string>
-    ret: string
-  } {
-    const name = `given ${this.name}`
-    return this.ret.flatten_repr([...names, name])
+  fn_args_repr(): Array<string> {
+    return [`given ${this.name}`, ...this.ret.fn_args_repr()]
+  }
+
+  fn_ret_repr(): string {
+    return this.ret.fn_ret_repr()
   }
 
   repr(): string {
-    const { names, ret } = this.flatten_repr()
-    return `(${names.join(", ")}) { ${ret} }`
+    const args = this.fn_args_repr().join(", ")
+    const ret = this.fn_ret_repr()
+    return `(${args}) { ${ret} }`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
