@@ -32,6 +32,9 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         .reverse()
         .reduce((result, { kind, name }) => {
           switch (kind) {
+            case "named": {
+              return new Exps.Fn(name, result)
+            }
             case "implicit": {
               if (!(result instanceof Exps.Fn)) {
                 throw new Error(
@@ -43,9 +46,6 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                 )
               }
               return new Exps.ImFn(name, result)
-            }
-            case "named": {
-              return new Exps.Fn(name, result)
             }
           }
         }, exp_matcher(ret))

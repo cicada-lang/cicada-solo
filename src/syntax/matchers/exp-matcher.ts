@@ -11,6 +11,9 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
     .reverse()
     .reduce((result, { kind, name, exp }) => {
       switch (kind) {
+        case "named": {
+          return new Exps.Pi(name, exp, result)
+        }
         case "implicit": {
           if (!(result instanceof Exps.Pi)) {
             throw new Error(
@@ -23,9 +26,6 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
           }
           return new Exps.BaseImPi(name, name, exp, result)
         }
-        case "named": {
-          return new Exps.Pi(name, exp, result)
-        }
       }
     }, exp_matcher(ret_t))
 }
@@ -37,11 +37,11 @@ export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
     .reverse()
     .reduce((result, { kind, name, exp }) => {
       switch (kind) {
-        case "implicit": {
-          throw new Error(`The "implicit" keyword should not be used in sigma`)
-        }
         case "named": {
           return new Exps.Sigma(name, exp, result)
+        }
+        case "implicit": {
+          throw new Error(`The "implicit" keyword should not be used in sigma`)
         }
       }
     }, exp_matcher(cdr_t))
@@ -285,6 +285,9 @@ export function declaration_matcher(tree: pt.Tree): Exp {
         .reverse()
         .reduce((result, { kind, name }) => {
           switch (kind) {
+            case "named": {
+              return new Exps.Fn(name, result)
+            }
             case "implicit": {
               if (!(result instanceof Exps.Fn)) {
                 throw new Error(
@@ -296,9 +299,6 @@ export function declaration_matcher(tree: pt.Tree): Exp {
                 )
               }
               return new Exps.ImFn(name, result)
-            }
-            case "named": {
-              return new Exps.Fn(name, result)
             }
           }
         }, exp_matcher(ret))
@@ -336,6 +336,9 @@ export function cls_entry_matcher(tree: pt.Tree): {
         .reverse()
         .reduce((result, { kind, name }) => {
           switch (kind) {
+            case "named": {
+              return new Exps.Fn(name, result)
+            }
             case "implicit": {
               if (!(result instanceof Exps.Fn)) {
                 throw new Error(
@@ -347,9 +350,6 @@ export function cls_entry_matcher(tree: pt.Tree): {
                 )
               }
               return new Exps.ImFn(name, result)
-            }
-            case "named": {
-              return new Exps.Fn(name, result)
             }
           }
         }, exp_matcher(ret))
