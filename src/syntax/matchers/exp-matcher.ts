@@ -379,7 +379,7 @@ export function binding_matcher(tree: pt.Tree): {
       name: pt.str(name),
       exp: exp_matcher(exp),
     }),
-    "binding:implicit_named": ({ name, exp }) => ({
+    "binding:implicit": ({ name, exp }) => ({
       implicit: true,
       name: pt.str(name),
       exp: exp_matcher(exp),

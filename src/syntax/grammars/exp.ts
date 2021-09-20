@@ -339,7 +339,7 @@ export const binding = {
   $grammar: {
     "binding:nameless": [{ exp: "exp" }],
     "binding:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
-    "binding:implicit_named": [
+    "binding:implicit": [
       '"implicit"',
       '"{"',
       { name: "identifier" },
