@@ -1,20 +1,17 @@
-- `cons-im-pi-core`
-
-  - fix `cons-im-pi` -- `infer`
-
 - fix `ImPi.flatten_repr`
 
   - test by `tester.echo_stmts`
 
-# implicit
-
-
 - `base-im-pi-core` with `field_name` and `local_name`
 - `base-im-pi-value` with `field_name` and `local_name`
 
-- `cons-im-pi-value`
 - `cons-im-pi-core`
+
+  - fix `cons-im-pi` -- `infer`
+
 - `cons-im-pi-value`
+
+# implicit
 
 - `im-fn`
 - `im-fn` -- syntax
