@@ -54,6 +54,22 @@ k(implicit { A: Nat }, 100, implicit { A: Nat }, 101)
 k(100, 101)
 ```
 
+# record of implicit arguments
+
+``` cicada
+car_type_t = (
+  implicit { A: Type, B: Type }, pair: (A) * B,
+) -> Type
+
+car_type_t
+
+// car_type(
+//   implicit { A: Type, B: Type }, pair: (A) * B,
+// ): Type {
+//   A
+// }
+```
+
 # do *not* support implicit argument over implicit argument
 
 ``` cicada counterexample

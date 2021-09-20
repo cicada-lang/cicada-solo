@@ -8,3 +8,4 @@ Nat: Type
 String: Type 
 100: Nat 
 100: Nat 
+(implicit { A: Type, B: Type }, pair: (_: A) * B) -> Type: Type 
