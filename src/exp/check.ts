@@ -20,24 +20,24 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
         const t_exp = readback(ctx, new Exps.TypeValue(), t)
 
         throw new Trace(
-          ut.aline(`
-            |I infer the type to be:
-            |  ${u_exp.repr()}
-            |But the expected type is:
-            |  ${t_exp.repr()}
-            |`)
+          [
+            `I infer the type to be:`,
+            `  ${u_exp.repr()}`,
+            `But the expected type is:`,
+            `  ${t_exp.repr()}`,
+          ].join("\n")
         )
       }
 
       return inferred.core
     } else {
       throw new Trace(
-        ut.aline(`
-          |I can not check the type of:
-          |  ${exp.repr()}
-          |I also can not check it by infer.
-          |I suggest you add a type annotation to the expression.
-          |`)
+        [
+          `I can not check the type of:`,
+          `  ${exp.repr()}`,
+          `I also can not check it by infer.`,
+          `I suggest you add a type annotation to the expression.`,
+        ].join("\n")
       )
     }
   } catch (error) {

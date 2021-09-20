@@ -1,4 +1,3 @@
-
 I infer the type to be:
   Vector(E, j)
 But the expected type is:
@@ -20,4 +19,3 @@ previous:
 - (n, vector) { let motive = the((length: Nat, target: Vector(E, length)) -> Type, (length, target) { (j: Nat, equal: Equal(Nat, length, add1(j))) -> Vector(E, j) }) let aux = the(motive(add1(n), vector), vector_ind(add1(n), vector, motive, (j, equal) { absurd_ind(zero_add1_equal_absurd(j, equal), Vector(E, j)) }, (j, head, tail, almost, j, equal) { tail })) aux(n, same) }
 - (E, n, vector) { let motive = the((length: Nat, target: Vector(E, length)) -> Type, (length, target) { (j: Nat, equal: Equal(Nat, length, add1(j))) -> Vector(E, j) }) let aux = the(motive(add1(n), vector), vector_ind(add1(n), vector, motive, (j, equal) { absurd_ind(zero_add1_equal_absurd(j, equal), Vector(E, j)) }, (j, head, tail, almost, j, equal) { tail })) aux(n, same) }
 - the((E: Type, n: Nat, vector: Vector(E, add1(n))) -> Vector(E, n), (E, n, vector) { let motive = the((length: Nat, target: Vector(E, length)) -> Type, (length, target) { (j: Nat, equal: Equal(Nat, length, add1(j))) -> Vector(E, j) }) let aux = the(motive(add1(n), vector), vector_ind(add1(n), vector, motive, (j, equal) { absurd_ind(zero_add1_equal_absurd(j, equal), Vector(E, j)) }, (j, head, tail, almost, j, equal) { tail })) aux(n, same) })
-

@@ -26,10 +26,10 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
   if (exp) return exp
 
   throw new Trace(
-    ut.aline(`
-      |I can not readback value: ${ut.inspect(value)},
-      |of type: ${ut.inspect(t)}.
-      |`)
+    [
+      `I can not readback value: ${ut.inspect(value)},`,
+      `  type: ${ut.inspect(t)}.`,
+    ].join("\n ")
   )
 }
 

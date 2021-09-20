@@ -1,4 +1,3 @@
-
 I infer the type to be:
   String
 But the expected type is:
@@ -7,4 +6,3 @@ But the expected type is:
 previous:
 - "ratatouille"
 - the(Nat, "ratatouille")
-

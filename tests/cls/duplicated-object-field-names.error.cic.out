@@ -3,6 +3,7 @@ field name:
   b
 field name list:
   a, b, b, c
+
 previous:
 - {
   a: 1
@@ -16,4 +17,3 @@ previous:
   b: 6
   c: 3
 })
-

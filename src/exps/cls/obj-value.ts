@@ -21,11 +21,7 @@ export class ObjValue extends Value {
   dot_value(name: string): Value {
     const value = this.properties.get(name)
     if (value === undefined) {
-      throw new Trace(
-        ut.aline(`
-          |The property name: ${name} of object is undefined.
-          |`)
-      )
+      throw new Trace(`The property name: ${name} of object is undefined.`)
     }
 
     return value

@@ -48,10 +48,10 @@ export class Dot extends Exp {
     }
 
     throw new Trace(
-      ut.aline(`
-        |Expecting target type to be a class.
-        |  ${ut.inspect(inferred_target.t)}
-        |`)
+      [
+        `Expecting target type to be a class.`,
+        `  ${ut.inspect(inferred_target.t)}`,
+      ].join("\n")
     )
   }
 

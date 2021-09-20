@@ -37,15 +37,15 @@ export function check_conversion(
     const to_repr = readback(ctx, t, to).repr()
     const to_description = opts.description?.to || ""
     throw new Trace(
-      ut.aline(`
-        |I am expecting the following two values to be the same ${t_repr}.
-        |But they are not.
-        |
-        |from ${from_description}:
-        |  ${from_repr}
-        |to ${to_description}:
-        |  ${to_repr}
-        |`)
+      [
+        `I am expecting the following two values to be the same ${t_repr}.`,
+        `But they are not.`,
+        ``,
+        `from ${from_description}:`,
+        `  ${from_repr}`,
+        `to ${to_description}:`,
+        `  ${to_repr}`,
+      ].join("\n")
     )
   }
 }

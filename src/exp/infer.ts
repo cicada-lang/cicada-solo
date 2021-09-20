@@ -12,10 +12,10 @@ export function infer(ctx: Ctx, exp: Exp): { t: Value; core: Core } {
     }
 
     throw new Trace(
-      ut.aline(`
-        |I can not infer the type of ${exp.repr()}.
-        |I suggest you add a type annotation to the expression.
-        |`)
+      [
+        `I can not infer the type of ${exp.repr()}.`,
+        `I suggest you add a type annotation to the expression.`,
+      ].join("\n")
     )
   } catch (error) {
     if (error instanceof Trace) throw error.trail(exp)
