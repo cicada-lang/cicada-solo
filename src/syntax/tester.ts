@@ -55,3 +55,17 @@ export function not_exp(strs: TemplateStringsArray): void {
     }
   }
 }
+
+// export function echo_stmts(strs: TemplateStringsArray): void {
+//   const [text] = strs
+//   const stmts = parse_stmts(text)
+//   for (const stmt of stmts) {
+//     console.log(stmt.repr())
+//   }
+// }
+
+export function echo_exp(strs: TemplateStringsArray): void {
+  const [text] = strs
+  const exp = parse_exp(text)
+  console.log(exp.repr())
+}
