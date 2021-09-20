@@ -1,5 +1,3 @@
-- `sigma-core` -- simplify `flatten_repr`
-
 - `ap` -- simplify `flatten_repr`
 - `ap-core` -- simplify `flatten_repr`
 

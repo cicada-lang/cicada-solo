@@ -23,29 +23,44 @@ export class SigmaCore extends Core {
     return new Exps.SigmaValue(car_t, new Closure(env, this.name, this.cdr_t))
   }
 
-  flatten_repr(entries: Array<string> = new Array()): {
-    entries: Array<string>
-    cdr_t: string
-  } {
+  sigma_cars_repr(): Array<string> {
     const entry = `${this.name}: ${this.car_t.repr()}`
 
-    if (this.cdr_t instanceof SigmaCore) {
-      return this.cdr_t.flatten_repr([...entries, entry])
+    if (has_sigma_cars_repr(this.cdr_t)) {
+      return [entry, ...this.cdr_t.sigma_cars_repr()]
     } else {
-      return {
-        entries: [...entries, entry],
-        cdr_t: this.cdr_t.repr(),
-      }
+      return [entry]
+    }
+  }
+
+  sigma_cdr_t_repr(): string {
+    if (has_sigma_cdr_t_repr(this.cdr_t)) {
+      return this.cdr_t.sigma_cdr_t_repr()
+    } else {
+      return this.cdr_t.repr()
     }
   }
 
   repr(): string {
-    const { entries, cdr_t } = this.flatten_repr()
-    return `(${entries.join(", ")}) * ${cdr_t}`
+    const cars = this.sigma_cars_repr().join(", ")
+    const cdr_t = this.sigma_cdr_t_repr()
+    return `(${cars}) * ${cdr_t}`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
     const cdr_t_repr = this.cdr_t.alpha_repr(ctx.extend(this.name))
     return `(${this.car_t.alpha_repr(ctx)}) * ${cdr_t_repr}`
   }
+}
+
+function has_sigma_cars_repr(
+  core: Core
+): core is Core & { sigma_cars_repr(): Array<string> } {
+  return (core as any).sigma_cars_repr instanceof Function
+}
+
+function has_sigma_cdr_t_repr(
+  core: Core
+): core is Core & { sigma_cdr_t_repr(): string } {
+  return (core as any).sigma_cdr_t_repr instanceof Function
 }
