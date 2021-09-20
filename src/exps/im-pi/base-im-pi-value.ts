@@ -15,11 +15,13 @@ import { ImFnInsertion } from "./im-fn-insertion"
 import { ReadbackEtaExpansion } from "../../value"
 
 export class BaseImPiValue extends Exps.ImPiValue {
+  field_name: string
   arg_t: Value
   ret_t_cl: Closure
 
-  constructor(arg_t: Value, ret_t_cl: Closure) {
+  constructor(field_name: string, arg_t: Value, ret_t_cl: Closure) {
     super()
+    this.field_name = field_name
     this.arg_t = arg_t
     this.ret_t_cl = ret_t_cl
   }
@@ -45,7 +47,12 @@ export class BaseImPiValue extends Exps.ImPiValue {
         )
       }
 
-      return new Exps.BaseImPiCore(fresh_name, arg_t, ret_t_core)
+      return new Exps.BaseImPiCore(
+        this.field_name,
+        fresh_name,
+        arg_t,
+        ret_t_core
+      )
     }
   }
 

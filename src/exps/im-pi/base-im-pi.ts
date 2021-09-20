@@ -83,7 +83,12 @@ export class BaseImPi extends Exps.ImPi {
 
     return {
       t: new Exps.TypeValue(),
-      core: new Exps.BaseImPiCore(fresh_name, arg_t_core, ret_t_core),
+      core: new Exps.BaseImPiCore(
+        fresh_name,
+        fresh_name,
+        arg_t_core,
+        ret_t_core
+      ),
     }
   }
 

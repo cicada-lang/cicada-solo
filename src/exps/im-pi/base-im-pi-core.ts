@@ -8,20 +8,28 @@ import * as Exps from ".."
 
 export class BaseImPiCore extends Exps.ImPiCore {
   field_name: string
+  local_name: string
   arg_t: Core
   ret_t: Exps.PiCore
 
-  constructor(field_name: string, arg_t: Core, ret_t: Exps.PiCore) {
+  constructor(
+    field_name: string,
+    local_name: string,
+    arg_t: Core,
+    ret_t: Exps.PiCore
+  ) {
     super()
     this.field_name = field_name
+    this.local_name = local_name
     this.arg_t = arg_t
     this.ret_t = ret_t
   }
 
   evaluate(env: Env): Value {
     return new Exps.BaseImPiValue(
+      this.field_name,
       evaluate(env, this.arg_t),
-      new Closure(env, this.field_name, this.ret_t)
+      new Closure(env, this.local_name, this.ret_t)
     )
   }
 
@@ -46,7 +54,7 @@ export class BaseImPiCore extends Exps.ImPiCore {
 
   alpha_repr(ctx: AlphaCtx): string {
     const arg_t_repr = this.arg_t.alpha_repr(ctx)
-    const pi_repr = this.ret_t.alpha_repr(ctx.extend(this.field_name))
-    return `(given ${arg_t_repr}) -> ${pi_repr}`
+    const pi_repr = this.ret_t.alpha_repr(ctx.extend(this.local_name))
+    return `(implicit ${arg_t_repr}) -> ${pi_repr}`
   }
 }

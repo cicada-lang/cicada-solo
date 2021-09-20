@@ -1,6 +1,3 @@
-- `base-im-pi-core` with `field_name` and `local_name`
-- `base-im-pi-value` with `field_name` and `local_name`
-
 - `cons-im-pi-core`
 
   - fix `cons-im-pi` -- `infer`
