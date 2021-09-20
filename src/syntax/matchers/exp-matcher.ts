@@ -9,20 +9,23 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
 
   return bindings_matcher(bindings)
     .reverse()
-    .reduce((result, { implicit, name, exp }) => {
-      if (implicit) {
-        if (!(result instanceof Exps.Pi)) {
-          throw new Error(
-            [
-              `When reducing implicit names,`,
-              `I expects the result to be Exps.Pi`,
-              `  class name: ${result.constructor.name}`,
-            ].join("\n")
-          )
+    .reduce((result, { kind, name, exp }) => {
+      switch (kind) {
+        case "implicit": {
+          if (!(result instanceof Exps.Pi)) {
+            throw new Error(
+              [
+                `When reducing implicit names,`,
+                `I expects the result to be Exps.Pi`,
+                `  class name: ${result.constructor.name}`,
+              ].join("\n")
+            )
+          }
+          return new Exps.BaseImPi(name, name, exp, result)
         }
-        return new Exps.BaseImPi(name, name, exp, result)
-      } else {
-        return new Exps.Pi(name, exp, result)
+        case "named": {
+          return new Exps.Pi(name, exp, result)
+        }
       }
     }, exp_matcher(ret_t))
 }
@@ -32,11 +35,15 @@ export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
 
   return bindings_matcher(bindings)
     .reverse()
-    .reduce((result, { implicit, name, exp }) => {
-      if (implicit) {
-        throw new Error(`The "implicit" keyword should not be used in sigma`)
+    .reduce((result, { kind, name, exp }) => {
+      switch (kind) {
+        case "implicit": {
+          throw new Error(`The "implicit" keyword should not be used in sigma`)
+        }
+        case "named": {
+          return new Exps.Sigma(name, exp, result)
+        }
       }
-      return new Exps.Sigma(name, exp, result)
     }, exp_matcher(cdr_t))
 }
 
@@ -276,20 +283,23 @@ export function declaration_matcher(tree: pt.Tree): Exp {
     "declaration:let_fn": ({ name, bindings, ret_t, ret, body }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
-        .reduce((result, { implicit, name }) => {
-          if (implicit) {
-            if (!(result instanceof Exps.Fn)) {
-              throw new Error(
-                [
-                  `When reducing implicit names,`,
-                  `I expects the result to be Exps.Fn`,
-                  `  class name: ${result.constructor.name}`,
-                ].join("\n")
-              )
+        .reduce((result, { kind, name }) => {
+          switch (kind) {
+            case "implicit": {
+              if (!(result instanceof Exps.Fn)) {
+                throw new Error(
+                  [
+                    `When reducing implicit names,`,
+                    `I expects the result to be Exps.Fn`,
+                    `  class name: ${result.constructor.name}`,
+                  ].join("\n")
+                )
+              }
+              return new Exps.ImFn(name, result)
             }
-            return new Exps.ImFn(name, result)
-          } else {
-            return new Exps.Fn(name, result)
+            case "named": {
+              return new Exps.Fn(name, result)
+            }
           }
         }, exp_matcher(ret))
 
@@ -324,20 +334,23 @@ export function cls_entry_matcher(tree: pt.Tree): {
     "cls_entry:method_fulfilled": ({ name, bindings, ret_t, ret }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
-        .reduce((result, { implicit, name }) => {
-          if (implicit) {
-            if (!(result instanceof Exps.Fn)) {
-              throw new Error(
-                [
-                  `When reducing implicit names,`,
-                  `I expects the result to be Exps.Fn`,
-                  `  class name: ${result.constructor.name}`,
-                ].join("\n")
-              )
+        .reduce((result, { kind, name }) => {
+          switch (kind) {
+            case "implicit": {
+              if (!(result instanceof Exps.Fn)) {
+                throw new Error(
+                  [
+                    `When reducing implicit names,`,
+                    `I expects the result to be Exps.Fn`,
+                    `  class name: ${result.constructor.name}`,
+                  ].join("\n")
+                )
+              }
+              return new Exps.ImFn(name, result)
             }
-            return new Exps.ImFn(name, result)
-          } else {
-            return new Exps.Fn(name, result)
+            case "named": {
+              return new Exps.Fn(name, result)
+            }
           }
         }, exp_matcher(ret))
 
@@ -359,26 +372,24 @@ export function bindings_matcher(tree: pt.Tree): Array<Binding> {
   })(tree)
 }
 
-type Binding = {
-  implicit: boolean
-  name: string
-  exp: Exp
-}
+type Binding =
+  | { kind: "named"; name: string; exp: Exp }
+  | { kind: "implicit"; name: string; exp: Exp }
 
 export function binding_matcher(tree: pt.Tree): Binding {
-  return pt.matcher({
+  return pt.matcher<Binding>({
     "binding:nameless": ({ exp }) => ({
-      implicit: false,
+      kind: "named",
       name: "_",
       exp: exp_matcher(exp),
     }),
     "binding:named": ({ name, exp }) => ({
-      implicit: false,
+      kind: "named",
       name: pt.str(name),
       exp: exp_matcher(exp),
     }),
     "binding:implicit": ({ name, exp }) => ({
-      implicit: true,
+      kind: "implicit",
       name: pt.str(name),
       exp: exp_matcher(exp),
     }),

@@ -1,4 +1,4 @@
-- `Binding` as a helper union type
+- `Binding` `implicit` handle record
 
 - `im-pi` -- syntax for `cons-im-pi`
 
