@@ -1,5 +1,3 @@
-- `Binding` `implicit` handle record
-
 - `im-pi` -- syntax for `cons-im-pi`
 
 - fix `ImPi.multi_pi_repr`

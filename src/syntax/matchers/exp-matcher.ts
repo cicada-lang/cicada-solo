@@ -9,10 +9,10 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
 
   return bindings_matcher(bindings)
     .reverse()
-    .reduce((result, { kind, name, exp }) => {
-      switch (kind) {
+    .reduce((result, binding) => {
+      switch (binding.kind) {
         case "named": {
-          return new Exps.Pi(name, exp, result)
+          return new Exps.Pi(binding.name, binding.exp, result)
         }
         case "implicit": {
           if (!(result instanceof Exps.Pi)) {
@@ -24,7 +24,12 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
               ].join("\n")
             )
           }
-          return new Exps.BaseImPi(name, name, exp, result)
+          return new Exps.BaseImPi(
+            binding.entries[0].name,
+            binding.entries[0].name,
+            binding.entries[0].exp,
+            result
+          )
         }
       }
     }, exp_matcher(ret_t))
@@ -35,10 +40,10 @@ export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
 
   return bindings_matcher(bindings)
     .reverse()
-    .reduce((result, { kind, name, exp }) => {
-      switch (kind) {
+    .reduce((result, binding) => {
+      switch (binding.kind) {
         case "named": {
-          return new Exps.Sigma(name, exp, result)
+          return new Exps.Sigma(binding.name, binding.exp, result)
         }
         case "implicit": {
           throw new Error(`The "implicit" keyword should not be used in sigma`)
@@ -283,10 +288,10 @@ export function declaration_matcher(tree: pt.Tree): Exp {
     "declaration:let_fn": ({ name, bindings, ret_t, ret, body }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
-        .reduce((result, { kind, name }) => {
-          switch (kind) {
+        .reduce((result, binding) => {
+          switch (binding.kind) {
             case "named": {
-              return new Exps.Fn(name, result)
+              return new Exps.Fn(binding.name, result)
             }
             case "implicit": {
               if (!(result instanceof Exps.Fn)) {
@@ -298,7 +303,7 @@ export function declaration_matcher(tree: pt.Tree): Exp {
                   ].join("\n")
                 )
               }
-              return new Exps.ImFn(name, result)
+              return new Exps.ImFn(binding.entries[0].name, result)
             }
           }
         }, exp_matcher(ret))
@@ -334,10 +339,10 @@ export function cls_entry_matcher(tree: pt.Tree): {
     "cls_entry:method_fulfilled": ({ name, bindings, ret_t, ret }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
-        .reduce((result, { kind, name }) => {
-          switch (kind) {
+        .reduce((result, binding) => {
+          switch (binding.kind) {
             case "named": {
-              return new Exps.Fn(name, result)
+              return new Exps.Fn(binding.name, result)
             }
             case "implicit": {
               if (!(result instanceof Exps.Fn)) {
@@ -349,7 +354,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
                   ].join("\n")
                 )
               }
-              return new Exps.ImFn(name, result)
+              return new Exps.ImFn(binding.entries[0].name, result)
             }
           }
         }, exp_matcher(ret))
@@ -363,6 +368,10 @@ export function cls_entry_matcher(tree: pt.Tree): {
   })(tree)
 }
 
+type Binding =
+  | { kind: "named"; name: string; exp: Exp }
+  | { kind: "implicit"; entries: Array<{ name: string; exp: Exp }> }
+
 export function bindings_matcher(tree: pt.Tree): Array<Binding> {
   return pt.matcher({
     "bindings:bindings": ({ entries, last_entry }) => [
@@ -371,10 +380,6 @@ export function bindings_matcher(tree: pt.Tree): Array<Binding> {
     ],
   })(tree)
 }
-
-type Binding =
-  | { kind: "named"; name: string; exp: Exp }
-  | { kind: "implicit"; name: string; exp: Exp }
 
 export function binding_matcher(tree: pt.Tree): Binding {
   return pt.matcher<Binding>({
@@ -388,8 +393,24 @@ export function binding_matcher(tree: pt.Tree): Binding {
       name: pt.str(name),
       exp: exp_matcher(exp),
     }),
-    "binding:implicit": ({ name, exp }) => ({
+    "binding:implicit": ({ entries, last_entry }) => ({
       kind: "implicit",
+      entries: [
+        ...pt.matchers
+          .zero_or_more_matcher(entries)
+          .map(binding_implicit_entry_matcher),
+        binding_implicit_entry_matcher(last_entry),
+      ],
+    }),
+  })(tree)
+}
+
+export function binding_implicit_entry_matcher(tree: pt.Tree): {
+  name: string
+  exp: Exp
+} {
+  return pt.matcher({
+    "binding_implicit_entry:binding_implicit_entry": ({ name, exp }) => ({
       name: pt.str(name),
       exp: exp_matcher(exp),
     }),
