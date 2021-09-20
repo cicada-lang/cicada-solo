@@ -51,19 +51,19 @@ export class Fn extends Exp {
     return new Exps.FnCore(fresh_name, ret_core)
   }
 
-  multi_fn_repr(names: Array<string> = new Array()): {
+  flatten_repr(names: Array<string> = new Array()): {
     names: Array<string>
     ret: string
   } {
     if (this.ret instanceof Fn) {
-      return this.ret.multi_fn_repr([...names, this.name])
+      return this.ret.flatten_repr([...names, this.name])
     } else {
       return { names: [...names, this.name], ret: this.ret.repr() }
     }
   }
 
   repr(): string {
-    const { names, ret } = this.multi_fn_repr()
+    const { names, ret } = this.flatten_repr()
     return `(${names.join(", ")}) { ${ret} }`
   }
 }

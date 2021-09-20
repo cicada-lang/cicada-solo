@@ -26,16 +26,16 @@ export class BaseImPiCore extends Exps.ImPiCore {
     )
   }
 
-  multi_pi_repr(entries: Array<string> = new Array()): {
+  flatten_repr(entries: Array<string> = new Array()): {
     entries: Array<string>
     ret_t: string
   } {
     const entry = `given ${this.field_name}: ${this.arg_t.repr()}`
-    return this.ret_t.multi_pi_repr([...entries, entry])
+    return this.ret_t.flatten_repr([...entries, entry])
   }
 
   repr(): string {
-    const { entries, ret_t } = this.multi_pi_repr()
+    const { entries, ret_t } = this.flatten_repr()
     return `(${entries.join(", ")}) -> ${ret_t}`
   }
 

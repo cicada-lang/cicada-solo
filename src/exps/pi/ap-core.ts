@@ -21,12 +21,12 @@ export class ApCore extends Core {
     return ApCore.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
-  multi_ap_repr(args: Array<string> = new Array()): {
+  flatten_repr(args: Array<string> = new Array()): {
     target: string
     args: Array<string>
   } {
     if (this.target instanceof ApCore) {
-      return this.target.multi_ap_repr([this.arg.repr(), ...args])
+      return this.target.flatten_repr([this.arg.repr(), ...args])
     } else {
       return {
         target: this.target.repr(),
@@ -36,7 +36,7 @@ export class ApCore extends Core {
   }
 
   repr(): string {
-    const { target, args } = this.multi_ap_repr()
+    const { target, args } = this.flatten_repr()
     return `${target}(${args.join(", ")})`
   }
 

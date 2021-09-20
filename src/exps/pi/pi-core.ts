@@ -23,14 +23,14 @@ export class PiCore extends Core {
     return new Exps.PiValue(arg_t, new Closure(env, this.name, this.ret_t))
   }
 
-  multi_pi_repr(entries: Array<string> = new Array()): {
+  flatten_repr(entries: Array<string> = new Array()): {
     entries: Array<string>
     ret_t: string
   } {
     const entry = `${this.name}: ${this.arg_t.repr()}`
 
     if (this.ret_t instanceof PiCore) {
-      return this.ret_t.multi_pi_repr([...entries, entry])
+      return this.ret_t.flatten_repr([...entries, entry])
     } else {
       return {
         entries: [...entries, entry],
@@ -40,7 +40,7 @@ export class PiCore extends Core {
   }
 
   repr(): string {
-    const { entries, ret_t } = this.multi_pi_repr()
+    const { entries, ret_t } = this.flatten_repr()
     return `(${entries.join(", ")}) -> ${ret_t}`
   }
 

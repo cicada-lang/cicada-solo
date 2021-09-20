@@ -356,7 +356,7 @@ export const binding_implicit_entry = {
       { name: "identifier" },
       '":"',
       { exp: "exp" },
-      { $ap: ["optional", '","'] }
+      { $ap: ["optional", '","'] },
     ],
   },
 }

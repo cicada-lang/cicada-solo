@@ -59,14 +59,14 @@ export class Sigma extends Exp {
     }
   }
 
-  multi_sigma_repr(entries: Array<string> = new Array()): {
+  flatten_repr(entries: Array<string> = new Array()): {
     entries: Array<string>
     cdr_t: string
   } {
     const entry = `${this.name}: ${this.car_t.repr()}`
 
     if (this.cdr_t instanceof Sigma) {
-      return this.cdr_t.multi_sigma_repr([...entries, entry])
+      return this.cdr_t.flatten_repr([...entries, entry])
     } else {
       return {
         entries: [...entries, entry],
@@ -76,7 +76,7 @@ export class Sigma extends Exp {
   }
 
   repr(): string {
-    const { entries, cdr_t } = this.multi_sigma_repr()
+    const { entries, cdr_t } = this.flatten_repr()
     return `(${entries.join(", ")}) * ${cdr_t}`
   }
 }

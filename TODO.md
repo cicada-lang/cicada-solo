@@ -1,12 +1,8 @@
-- `multi_*_repr` -- use `protected`
-- rename `multi_*_repr` -- to `flatten`
-
-
 - `cons-im-pi-core`
 
   - fix `cons-im-pi` -- `infer`
 
-- fix `ImPi.multi_pi_repr`
+- fix `ImPi.flatten_repr`
 
   - test by `tester.echo_stmts`
 

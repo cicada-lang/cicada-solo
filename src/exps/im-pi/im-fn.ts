@@ -65,16 +65,16 @@ export class ImFn extends Exp {
     return new Exps.ImFnCore(fresh_name, ret_core)
   }
 
-  multi_fn_repr(names: Array<string> = new Array()): {
+  flatten_repr(names: Array<string> = new Array()): {
     names: Array<string>
     ret: string
   } {
     const name = `given ${this.name}`
-    return this.ret.multi_fn_repr([...names, name])
+    return this.ret.flatten_repr([...names, name])
   }
 
   repr(): string {
-    const { names, ret } = this.multi_fn_repr()
+    const { names, ret } = this.flatten_repr()
     return `(${names.join(", ")}) { ${ret} }`
   }
 }

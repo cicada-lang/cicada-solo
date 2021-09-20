@@ -94,12 +94,12 @@ export class Ap extends Exp {
     }
   }
 
-  multi_ap_repr(args: Array<string> = new Array()): {
+  flatten_repr(args: Array<string> = new Array()): {
     target: string
     args: Array<string>
   } {
     if (this.target instanceof Ap) {
-      return this.target.multi_ap_repr([this.arg.repr(), ...args])
+      return this.target.flatten_repr([this.arg.repr(), ...args])
     } else {
       return {
         target: this.target.repr(),
@@ -109,7 +109,7 @@ export class Ap extends Exp {
   }
 
   repr(): string {
-    const { target, args } = this.multi_ap_repr()
+    const { target, args } = this.flatten_repr()
     return `${target}(${args.join(", ")})`
   }
 }

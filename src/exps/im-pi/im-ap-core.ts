@@ -21,7 +21,7 @@ export class ImApCore extends Core {
     return ImApCore.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
-  multi_ap_repr(args: Array<string> = new Array()): {
+  flatten_repr(args: Array<string> = new Array()): {
     target: string
     args: Array<string>
   } {
@@ -30,7 +30,7 @@ export class ImApCore extends Core {
       this.target instanceof Exps.ApCore ||
       this.target instanceof Exps.ImApCore
     ) {
-      return this.target.multi_ap_repr([arg, ...args])
+      return this.target.flatten_repr([arg, ...args])
     } else {
       return {
         target: this.target.repr(),
@@ -40,7 +40,7 @@ export class ImApCore extends Core {
   }
 
   repr(): string {
-    const { target, args } = this.multi_ap_repr()
+    const { target, args } = this.flatten_repr()
     return `${target}(${args.join(", ")})`
   }
 
