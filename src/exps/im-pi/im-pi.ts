@@ -17,8 +17,7 @@ import * as ut from "../../ut"
 export abstract class ImPi extends Exp {
   instanceofImPi = true
 
-  abstract flatten_repr(entries: Array<string>): {
-    entries: Array<string>
-    ret_t: string
-  }
+  abstract im_pi_args_repr(): Array<string>
+  abstract pi_args_repr(): Array<string>
+  abstract pi_ret_t_repr(): string
 }

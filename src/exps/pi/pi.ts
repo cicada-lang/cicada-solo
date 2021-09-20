@@ -60,24 +60,27 @@ export class Pi extends Exp {
     }
   }
 
-  flatten_repr(entries: Array<string> = new Array()): {
-    entries: Array<string>
-    ret_t: string
-  } {
+  pi_args_repr(): Array<string> {
     const entry = `${this.name}: ${this.arg_t.repr()}`
 
-    if (this.ret_t instanceof Pi) {
-      return this.ret_t.flatten_repr([...entries, entry])
+    if (this.ret_t instanceof Pi || this.ret_t instanceof Exps.ImPi) {
+      return [entry, ...this.ret_t.pi_args_repr()]
     } else {
-      return {
-        entries: [...entries, entry],
-        ret_t: this.ret_t.repr(),
-      }
+      return [entry]
+    }
+  }
+
+  pi_ret_t_repr(): string {
+    if (this.ret_t instanceof Pi) {
+      return this.ret_t.pi_ret_t_repr()
+    } else {
+      return this.ret_t.repr()
     }
   }
 
   repr(): string {
-    const { entries, ret_t } = this.flatten_repr()
-    return `(${entries.join(", ")}) -> ${ret_t}`
+    const entries = this.pi_args_repr().join(", ")
+    const ret_t = this.pi_ret_t_repr()
+    return `(${entries}) -> ${ret_t}`
   }
 }

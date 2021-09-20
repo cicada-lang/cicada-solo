@@ -1,6 +1,4 @@
-- fix `ImPi.flatten_repr`
-
-  - test by `tester.echo_stmts`
+- simplify `flatten_repr`
 
 - `base-im-pi-core` with `field_name` and `local_name`
 - `base-im-pi-value` with `field_name` and `local_name`

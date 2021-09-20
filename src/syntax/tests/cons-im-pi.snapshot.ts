@@ -1,6 +1,6 @@
 import * as tester from "../tester"
 
-tester.stmts`
+tester.echo_stmts`
 
 cong(
   implicit {
@@ -20,7 +20,7 @@ cong(
 
 `
 
-tester.stmts`
+tester.echo_stmts`
 
 cong(
   implicit {

@@ -87,16 +87,22 @@ export class BaseImPi extends Exps.ImPi {
     }
   }
 
-  flatten_repr(entries: Array<string> = new Array()): {
-    entries: Array<string>
-    ret_t: string
-  } {
-    const entry = `given ${this.field_name}: ${this.arg_t.repr()}`
-    return this.ret_t.flatten_repr([...entries, entry])
+  im_pi_args_repr(): Array<string> {
+    return [`${this.field_name}: ${this.arg_t.repr()}`]
+  }
+
+  pi_args_repr(): Array<string> {
+    const entry = `implicit { ${this.im_pi_args_repr().join(", ")} }`
+    return [entry, ...this.ret_t.pi_args_repr()]
+  }
+
+  pi_ret_t_repr(): string {
+    return this.ret_t.pi_ret_t_repr()
   }
 
   repr(): string {
-    const { entries, ret_t } = this.flatten_repr()
-    return `(${entries.join(", ")}) -> ${ret_t}`
+    const entries = this.pi_args_repr().join(", ")
+    const ret_t = this.pi_ret_t_repr()
+    return `(${entries}) -> ${ret_t}`
   }
 }
