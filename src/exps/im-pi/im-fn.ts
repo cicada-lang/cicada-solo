@@ -43,10 +43,8 @@ export class ImFn extends Exp {
   check(ctx: Ctx, t: Value): Core {
     const fresh_name = ctx.freshen(this.name)
     const im_pi = expect(ctx, t, Exps.BaseImPiValue)
-    const arg = new Exps.NotYetValue(
-      im_pi.arg_t,
-      new Exps.VarNeutral(fresh_name)
-    )
+    const variable = new Exps.VarNeutral(fresh_name)
+    const arg = new Exps.NotYetValue(im_pi.arg_t, variable)
     const ret_t = im_pi.ret_t_cl.apply(arg)
     const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
     const ret_core = check(ctx.extend(fresh_name, im_pi.arg_t), ret, ret_t)
