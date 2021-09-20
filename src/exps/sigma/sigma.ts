@@ -59,24 +59,39 @@ export class Sigma extends Exp {
     }
   }
 
-  flatten_repr(entries: Array<string> = new Array()): {
-    entries: Array<string>
-    cdr_t: string
-  } {
+  sigma_cars_repr(): Array<string> {
     const entry = `${this.name}: ${this.car_t.repr()}`
 
-    if (this.cdr_t instanceof Sigma) {
-      return this.cdr_t.flatten_repr([...entries, entry])
+    if (has_sigma_cars_repr(this.cdr_t)) {
+      return [entry, ...this.cdr_t.sigma_cars_repr()]
     } else {
-      return {
-        entries: [...entries, entry],
-        cdr_t: this.cdr_t.repr(),
-      }
+      return [entry]
+    }
+  }
+
+  sigma_cdr_t_repr(): string {
+    if (has_sigma_cdr_t_repr(this.cdr_t)) {
+      return this.cdr_t.sigma_cdr_t_repr()
+    } else {
+      return this.cdr_t.repr()
     }
   }
 
   repr(): string {
-    const { entries, cdr_t } = this.flatten_repr()
-    return `(${entries.join(", ")}) * ${cdr_t}`
+    const cars = this.sigma_cars_repr().join(", ")
+    const cdr_t = this.sigma_cdr_t_repr()
+    return `(${cars}) * ${cdr_t}`
   }
+}
+
+function has_sigma_cars_repr(
+  exp: Exp
+): exp is Exp & { sigma_cars_repr(): Array<string> } {
+  return (exp as any).sigma_cars_repr instanceof Function
+}
+
+function has_sigma_cdr_t_repr(
+  exp: Exp
+): exp is Exp & { sigma_cdr_t_repr(): string } {
+  return (exp as any).sigma_cdr_t_repr instanceof Function
 }

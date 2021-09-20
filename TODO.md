@@ -1,11 +1,10 @@
+- `sigma-core` -- simplify `flatten_repr`
+
 - `ap` -- simplify `flatten_repr`
 - `ap-core` -- simplify `flatten_repr`
 
 - `im-ap` -- simplify `flatten_repr`
 - `im-ap-core` -- simplify `flatten_repr`
-
-- `sigma` -- simplify `flatten_repr`
-- `sigma-core` -- simplify `flatten_repr`
 
 
 - `base-im-pi-core` with `field_name` and `local_name`
