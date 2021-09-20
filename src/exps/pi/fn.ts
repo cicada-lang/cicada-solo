@@ -51,19 +51,8 @@ export class Fn extends Exp {
     return new Exps.FnCore(fresh_name, ret_core)
   }
 
-  flatten_repr(names: Array<string> = new Array()): {
-    names: Array<string>
-    ret: string
-  } {
-    if (this.ret instanceof Fn) {
-      return this.ret.flatten_repr([...names, this.name])
-    } else {
-      return { names: [...names, this.name], ret: this.ret.repr() }
-    }
-  }
-
   fn_args_repr(): Array<string> {
-    if (this.ret instanceof Fn) {
+    if (this.ret instanceof Fn || this.ret instanceof Exps.ImFn) {
       return [this.name, ...this.ret.fn_args_repr()]
     } else {
       return [this.name]
@@ -71,7 +60,7 @@ export class Fn extends Exp {
   }
 
   fn_ret_repr(): string {
-    if (this.ret instanceof Fn) {
+    if (this.ret instanceof Fn || this.ret instanceof Exps.ImFn) {
       return this.ret.fn_ret_repr()
     } else {
       return this.ret.repr()

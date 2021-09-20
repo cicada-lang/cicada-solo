@@ -71,7 +71,7 @@ export class Pi extends Exp {
   }
 
   pi_ret_t_repr(): string {
-    if (this.ret_t instanceof Pi) {
+    if (this.ret_t instanceof Pi || this.ret_t instanceof Exps.ImPi) {
       return this.ret_t.pi_ret_t_repr()
     } else {
       return this.ret_t.repr()
