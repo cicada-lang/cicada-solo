@@ -24,12 +24,19 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
               ].join("\n")
             )
           }
-          return new Exps.BaseImPi(
-            binding.last_entry.name,
-            binding.last_entry.name,
-            binding.last_entry.exp,
-            result
-          )
+
+          return binding.entries
+            .reverse()
+            .reduce<Exps.ImPi>(
+              (result, entry) =>
+                new Exps.ConsImPi(entry.name, entry.name, entry.exp, result),
+              new Exps.BaseImPi(
+                binding.last_entry.name,
+                binding.last_entry.name,
+                binding.last_entry.exp,
+                result
+              )
+            )
         }
       }
     }, exp_matcher(ret_t))

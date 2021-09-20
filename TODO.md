@@ -1,6 +1,6 @@
-- `im-pi` -- syntax for `cons-im-pi`
-
 - fix `ImPi.multi_pi_repr`
+
+  - test by `tester.echo_stmts`
 
 # implicit
 

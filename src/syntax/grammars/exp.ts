@@ -342,7 +342,7 @@ export const binding = {
     "binding:implicit": [
       '"implicit"',
       '"{"',
-      { entries: { $ap: ["zero_or_more", "binding_implicit_entry", '","'] } },
+      { entries: { $ap: ["zero_or_more", "binding_implicit_entry"] } },
       { last_entry: "binding_implicit_entry" },
       { $ap: ["optional", '","'] },
       '"}"',
@@ -356,6 +356,7 @@ export const binding_implicit_entry = {
       { name: "identifier" },
       '":"',
       { exp: "exp" },
+      { $ap: ["optional", '","'] }
     ],
   },
 }
