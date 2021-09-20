@@ -26,13 +26,11 @@ export class ConsImPiCore extends Exps.ImPiCore {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
-
-    // return new Exps.ConsImPiValue(
-    //   this.field_name,
-    //   evaluate(env, this.arg_t),
-    //   new Closure(env, this.local_name, this.ret_t)
-    // )
+    return new Exps.ConsImPiValue(
+      this.field_name,
+      evaluate(env, this.arg_t),
+      new Closure(env, this.local_name, this.ret_t)
+    )
   }
 
   im_pi_args_repr(): Array<string> {

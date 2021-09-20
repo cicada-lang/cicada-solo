@@ -1,6 +1,5 @@
-- `cons-im-pi-value`
-
-  - fix `cons-im-pi-core` -- `evaluate`
+- `cons-im-pi-value` -- `insert_im_fn`
+- `cons-im-pi-value` -- `insert_im_ap`
 
 # implicit
 
