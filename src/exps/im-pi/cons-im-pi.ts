@@ -13,25 +13,25 @@ export class ConsImPi extends Exps.ImPi {
   field_name: string
   local_name: string
   arg_t: Exp
-  rest: Exps.ImPi
+  ret_t: Exps.ImPi
 
   constructor(
     field_name: string,
     local_name: string,
     arg_t: Exp,
-    rest: Exps.ImPi
+    ret_t: Exps.ImPi
   ) {
     super()
     this.field_name = field_name
     this.local_name = local_name
     this.arg_t = arg_t
-    this.rest = rest
+    this.ret_t = ret_t
   }
 
   free_names(bound_names: Set<string>): Set<string> {
     return new Set([
       ...this.arg_t.free_names(bound_names),
-      ...this.rest.free_names(new Set([...bound_names, this.local_name])),
+      ...this.ret_t.free_names(new Set([...bound_names, this.local_name])),
     ])
   }
 
@@ -41,13 +41,13 @@ export class ConsImPi extends Exps.ImPi {
         this.local_name,
         this.field_name,
         subst(this.arg_t, name, exp),
-        this.rest
+        this.ret_t
       )
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen(free_names, this.local_name)
       const ret_t = subst(
-        this.rest,
+        this.ret_t,
         this.local_name,
         new Exps.Var(fresh_name)
       ) as Exps.ImPi
@@ -65,7 +65,7 @@ export class ConsImPi extends Exps.ImPi {
     const fresh_name = ctx.freshen(this.local_name)
     const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
-    const ret_t = subst(this.rest, this.local_name, new Exps.Var(fresh_name))
+    const ret_t = subst(this.ret_t, this.local_name, new Exps.Var(fresh_name))
     const ret_t_core = check(
       ctx.extend(fresh_name, arg_t_value),
       ret_t,
@@ -94,7 +94,7 @@ export class ConsImPi extends Exps.ImPi {
     ret_t: string
   } {
     const entry = `given ${this.field_name}: ${this.arg_t.repr()}`
-    return this.rest.multi_pi_repr([...entries, entry])
+    return this.ret_t.multi_pi_repr([...entries, entry])
   }
 
   repr(): string {

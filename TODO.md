@@ -1,35 +1,34 @@
+- `multi_*_repr` -- use `protected`
+- rename `multi_*_repr` -- to `flatten`
+
+
+- `cons-im-pi-core`
+
+  - fix `cons-im-pi` -- `infer`
+
 - fix `ImPi.multi_pi_repr`
 
   - test by `tester.echo_stmts`
 
 # implicit
 
-- `cons-im-pi-core`
-
-  - fix `cons-im-pi` -- `infer`
 
 - `base-im-pi-core` with `field_name` and `local_name`
 - `base-im-pi-value` with `field_name` and `local_name`
 
 - `cons-im-pi-value`
-
 - `cons-im-pi-core`
 - `cons-im-pi-value`
 
-- `im-fn` -- subst
-- `im-fn` -- check
-- `im-fn` -- multi_fn_repr
-- `im-fn` -- repr
-
+- `im-fn`
+- `im-fn` -- syntax
 - `im-fn-core`
 - `im-fn-value`
 
 - `im-ap`
+- `im-ap` -- syntax
 - `im-ap-core`
 - `im-ap-neutral`
-
-- `im-fn` -- syntax
-- `im-ap` -- syntax
 
 - refactor interface about `solve`
 
