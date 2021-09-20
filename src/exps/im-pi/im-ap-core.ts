@@ -21,27 +21,28 @@ export class ImApCore extends Core {
     return ImApCore.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
-  flatten_repr(args: Array<string> = new Array()): {
-    target: string
-    args: Array<string>
-  } {
+  ap_args_repr(): Array<string> {
     const arg = `given ${this.arg.repr()}`
-    if (
-      this.target instanceof Exps.ApCore ||
-      this.target instanceof Exps.ImApCore
-    ) {
-      return this.target.flatten_repr([arg, ...args])
+
+    if (has_ap_args_repr(this.target)) {
+      return [...this.target.ap_args_repr(), arg]
     } else {
-      return {
-        target: this.target.repr(),
-        args: [arg, ...args],
-      }
+      return [arg]
+    }
+  }
+
+  ap_target_repr(): string {
+    if (has_ap_target_repr(this.target)) {
+      return this.target.ap_target_repr()
+    } else {
+      return this.target.repr()
     }
   }
 
   repr(): string {
-    const { target, args } = this.flatten_repr()
-    return `${target}(${args.join(", ")})`
+    const target = this.ap_target_repr()
+    const args = this.ap_args_repr().join(", ")
+    return `${target}(${args})`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
@@ -69,4 +70,16 @@ export class ImApCore extends Core {
       })
     }
   }
+}
+
+function has_ap_args_repr(
+  core: Core
+): core is Core & { ap_args_repr(): Array<string> } {
+  return (core as any).ap_args_repr instanceof Function
+}
+
+function has_ap_target_repr(
+  core: Core
+): core is Core & { ap_target_repr(): string } {
+  return (core as any).ap_target_repr instanceof Function
 }
