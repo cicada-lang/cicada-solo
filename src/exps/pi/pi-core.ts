@@ -23,25 +23,27 @@ export class PiCore extends Core {
     return new Exps.PiValue(arg_t, new Closure(env, this.name, this.ret_t))
   }
 
-  flatten_repr(entries: Array<string> = new Array()): {
-    entries: Array<string>
-    ret_t: string
-  } {
+  pi_args_repr(): Array<string> {
     const entry = `${this.name}: ${this.arg_t.repr()}`
-
-    if (this.ret_t instanceof PiCore) {
-      return this.ret_t.flatten_repr([...entries, entry])
+    if (has_pi_args_repr(this.ret_t)) {
+      return [entry, ...this.ret_t.pi_args_repr()]
     } else {
-      return {
-        entries: [...entries, entry],
-        ret_t: this.ret_t.repr(),
-      }
+      return [entry]
+    }
+  }
+
+  pi_ret_t_repr(): string {
+    if (has_pi_ret_t_repr(this.ret_t)) {
+      return this.ret_t.pi_ret_t_repr()
+    } else {
+      return this.ret_t.repr()
     }
   }
 
   repr(): string {
-    const { entries, ret_t } = this.flatten_repr()
-    return `(${entries.join(", ")}) -> ${ret_t}`
+    const args = this.pi_args_repr().join(", ")
+    const ret_t = this.pi_ret_t_repr()
+    return `(${args}) -> ${ret_t}`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
@@ -49,4 +51,16 @@ export class PiCore extends Core {
     const ret_t_repr = this.ret_t.alpha_repr(ctx.extend(this.name))
     return `(${arg_t_repr}) -> ${ret_t_repr}`
   }
+}
+
+function has_pi_args_repr(
+  core: Core
+): core is Core & { pi_args_repr(): Array<string> } {
+  return (core as any).pi_args_repr instanceof Function
+}
+
+function has_pi_ret_t_repr(
+  core: Core
+): core is Core & { pi_ret_t_repr(): string } {
+  return (core as any).pi_ret_t_repr instanceof Function
 }
