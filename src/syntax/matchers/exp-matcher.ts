@@ -350,11 +350,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
   })(tree)
 }
 
-export function bindings_matcher(tree: pt.Tree): Array<{
-  implicit: boolean
-  name: string
-  exp: Exp
-}> {
+export function bindings_matcher(tree: pt.Tree): Array<Binding> {
   return pt.matcher({
     "bindings:bindings": ({ entries, last_entry }) => [
       ...pt.matchers.zero_or_more_matcher(entries).map(binding_matcher),
@@ -363,11 +359,13 @@ export function bindings_matcher(tree: pt.Tree): Array<{
   })(tree)
 }
 
-export function binding_matcher(tree: pt.Tree): {
+type Binding = {
   implicit: boolean
   name: string
   exp: Exp
-} {
+}
+
+export function binding_matcher(tree: pt.Tree): Binding {
   return pt.matcher({
     "binding:nameless": ({ exp }) => ({
       implicit: false,
