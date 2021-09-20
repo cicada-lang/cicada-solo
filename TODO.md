@@ -7,8 +7,6 @@
 
 - `cons-im-pi-value`
 
-- fix `im-ap` --`ap_args_repr`  by `im_ap_args_repr`
-
 # implicit
 
 - `im-fn`
@@ -17,6 +15,9 @@
 - `im-fn-value`
 
 - `im-ap`
+
+- fix `im-ap` --`ap_args_repr`  by `im_ap_args_repr`
+
 - `im-ap` -- syntax
 - `im-ap-core`
 - `im-ap-neutral`
