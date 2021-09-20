@@ -45,7 +45,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                   ].join("\n")
                 )
               }
-              return new Exps.ImFn(binding.entries[0].name, result)
+              return new Exps.ImFn(binding.last_entry.name, result)
             }
           }
         }, exp_matcher(ret))

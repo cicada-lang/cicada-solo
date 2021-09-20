@@ -25,9 +25,9 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
             )
           }
           return new Exps.BaseImPi(
-            binding.entries[0].name,
-            binding.entries[0].name,
-            binding.entries[0].exp,
+            binding.last_entry.name,
+            binding.last_entry.name,
+            binding.last_entry.exp,
             result
           )
         }
@@ -303,7 +303,7 @@ export function declaration_matcher(tree: pt.Tree): Exp {
                   ].join("\n")
                 )
               }
-              return new Exps.ImFn(binding.entries[0].name, result)
+              return new Exps.ImFn(binding.last_entry.name, result)
             }
           }
         }, exp_matcher(ret))
@@ -354,7 +354,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
                   ].join("\n")
                 )
               }
-              return new Exps.ImFn(binding.entries[0].name, result)
+              return new Exps.ImFn(binding.last_entry.name, result)
             }
           }
         }, exp_matcher(ret))
@@ -370,7 +370,11 @@ export function cls_entry_matcher(tree: pt.Tree): {
 
 type Binding =
   | { kind: "named"; name: string; exp: Exp }
-  | { kind: "implicit"; entries: Array<{ name: string; exp: Exp }> }
+  | {
+      kind: "implicit"
+      entries: Array<{ name: string; exp: Exp }>
+      last_entry: { name: string; exp: Exp }
+    }
 
 export function bindings_matcher(tree: pt.Tree): Array<Binding> {
   return pt.matcher({
@@ -395,12 +399,10 @@ export function binding_matcher(tree: pt.Tree): Binding {
     }),
     "binding:implicit": ({ entries, last_entry }) => ({
       kind: "implicit",
-      entries: [
-        ...pt.matchers
-          .zero_or_more_matcher(entries)
-          .map(binding_implicit_entry_matcher),
-        binding_implicit_entry_matcher(last_entry),
-      ],
+      entries: pt.matchers
+        .zero_or_more_matcher(entries)
+        .map(binding_implicit_entry_matcher),
+      last_entry: binding_implicit_entry_matcher(last_entry),
     }),
   })(tree)
 }
