@@ -1,9 +1,9 @@
-# implicit
-
 - `im-fn`
 - `im-fn` -- syntax
 - `im-fn-core`
 - `im-fn-value`
+
+# implicit
 
 - `im-ap`
 
