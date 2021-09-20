@@ -19,26 +19,16 @@ export class FnCore extends Core {
     return new Exps.FnValue(new Closure(env, this.name, this.ret))
   }
 
-  static has_fn_args_repr(
-    core: Core
-  ): core is Core & { fn_args_repr(): Array<string> } {
-    return (core as any).fn_args_repr instanceof Function
-  }
-
   fn_args_repr(): Array<string> {
-    if (Exps.FnCore.has_fn_args_repr(this.ret)) {
+    if (has_fn_args_repr(this.ret)) {
       return [this.name, ...this.ret.fn_args_repr()]
     } else {
       return [this.name]
     }
   }
 
-  static has_fn_ret_repr(core: Core): core is Core & { fn_ret_repr(): string } {
-    return (core as any).fn_ret_repr instanceof Function
-  }
-
   fn_ret_repr(): string {
-    if (Exps.FnCore.has_fn_ret_repr(this.ret)) {
+    if (has_fn_ret_repr(this.ret)) {
       return this.ret.fn_ret_repr()
     } else {
       return this.ret.repr()
@@ -55,4 +45,14 @@ export class FnCore extends Core {
     const ret_repr = this.ret.alpha_repr(ctx.extend(this.name))
     return `(#) { ${ret_repr} }`
   }
+}
+
+function has_fn_args_repr(
+  core: Core
+): core is Core & { fn_args_repr(): Array<string> } {
+  return (core as any).fn_args_repr instanceof Function
+}
+
+function has_fn_ret_repr(core: Core): core is Core & { fn_ret_repr(): string } {
+  return (core as any).fn_ret_repr instanceof Function
 }

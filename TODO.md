@@ -1,5 +1,3 @@
-- simplify type guards
-
 - `pi-core` -- simplify `flatten_repr`
 
 - `ap` -- simplify `flatten_repr`

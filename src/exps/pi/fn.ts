@@ -51,26 +51,16 @@ export class Fn extends Exp {
     return new Exps.FnCore(fresh_name, ret_core)
   }
 
-  static has_fn_args_repr(
-    exp: Exp
-  ): exp is Exp & { fn_args_repr(): Array<string> } {
-    return (exp as any).fn_args_repr instanceof Function
-  }
-
   fn_args_repr(): Array<string> {
-    if (Exps.Fn.has_fn_args_repr(this.ret)) {
+    if (has_fn_args_repr(this.ret)) {
       return [this.name, ...this.ret.fn_args_repr()]
     } else {
       return [this.name]
     }
   }
 
-  static has_fn_ret_repr(exp: Exp): exp is Exp & { fn_ret_repr(): string } {
-    return (exp as any).fn_ret_repr instanceof Function
-  }
-
   fn_ret_repr(): string {
-    if (Exps.Fn.has_fn_ret_repr(this.ret)) {
+    if (has_fn_ret_repr(this.ret)) {
       return this.ret.fn_ret_repr()
     } else {
       return this.ret.repr()
@@ -82,4 +72,14 @@ export class Fn extends Exp {
     const ret = this.fn_ret_repr()
     return `(${args}) { ${ret} }`
   }
+}
+
+function has_fn_args_repr(
+  exp: Exp
+): exp is Exp & { fn_args_repr(): Array<string> } {
+  return (exp as any).fn_args_repr instanceof Function
+}
+
+function has_fn_ret_repr(exp: Exp): exp is Exp & { fn_ret_repr(): string } {
+  return (exp as any).fn_ret_repr instanceof Function
 }
