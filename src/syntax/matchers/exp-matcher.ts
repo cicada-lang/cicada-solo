@@ -320,6 +320,10 @@ export function declaration_matcher(tree: pt.Tree): Exp {
               }
               return new Exps.ImFn(
                 [
+                  ...binding.entries.map(({ name }) => ({
+                    field_name: name,
+                    local_name: name,
+                  })),
                   {
                     field_name: binding.last_entry.name,
                     local_name: binding.last_entry.name,
@@ -379,6 +383,10 @@ export function cls_entry_matcher(tree: pt.Tree): {
               }
               return new Exps.ImFn(
                 [
+                  ...binding.entries.map(({ name }) => ({
+                    field_name: name,
+                    local_name: name,
+                  })),
                   {
                     field_name: binding.last_entry.name,
                     local_name: binding.last_entry.name,
