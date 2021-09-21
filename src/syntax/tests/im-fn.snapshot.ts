@@ -21,13 +21,13 @@ car_type: (
 
 `
 
-// tester.echo_stmts`
+tester.echo_stmts`
 
-// car_type: (
-//   implicit { A: Type, B: Type }, pair: (A) * B,
-// ) -> Type =
-//   (implicit { A, B }, pair) {
-//     A
-//   }
+car_type: (
+  implicit { A: Type, B: Type }, pair: (A) * B,
+) -> Type =
+  (implicit { A, B }, pair) {
+    A
+  }
 
-// `
+`

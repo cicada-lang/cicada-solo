@@ -1,5 +1,3 @@
-- `im-fn` -- syntax
-
 - `im-fn-core`
 
   - fix `BaseImPiValue.insert_im_fn`

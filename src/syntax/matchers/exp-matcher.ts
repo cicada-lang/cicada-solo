@@ -84,28 +84,36 @@ export function operator_matcher(tree: pt.Tree): Exp {
     "operator:fn": ({ names, ret }) =>
       names_matcher(names)
         .reverse()
-        .reduce((result, { implicit, name }) => {
-          if (implicit) {
-            if (!(result instanceof Exps.Fn)) {
-              throw new Error(
+        .reduce((result, name_entry) => {
+          switch (name_entry.kind) {
+            case "name": {
+              return new Exps.Fn(name_entry.name, result)
+            }
+            case "implicit": {
+              if (!(result instanceof Exps.Fn)) {
+                throw new Error(
+                  [
+                    `When reducing implicit names,`,
+                    `the names_matcher expects the result to be Exps.Fn`,
+                    `class name: ${result.constructor.name}`,
+                  ].join("\n")
+                )
+              }
+
+              return new Exps.ImFn(
                 [
-                  `When reducing implicit names,`,
-                  `the names_matcher expects the result to be Exps.Fn`,
-                  `class name: ${result.constructor.name}`,
-                ].join("\n")
+                  ...name_entry.names.map((name) => ({
+                    field_name: name,
+                    local_name: name,
+                  })),
+                  {
+                    field_name: name_entry.last_name,
+                    local_name: name_entry.last_name,
+                  },
+                ],
+                result
               )
             }
-            return new Exps.ImFn(
-              [
-                {
-                  field_name: name,
-                  local_name: name,
-                },
-              ],
-              result
-            )
-          } else {
-            return new Exps.Fn(name, result)
           }
         }, exp_matcher(ret)),
     "operator:car": ({ target }) => new Exps.Car(exp_matcher(target)),
@@ -458,9 +466,7 @@ export function binding_implicit_entry_matcher(tree: pt.Tree): {
   })(tree)
 }
 
-export function names_matcher(
-  tree: pt.Tree
-): Array<{ implicit: boolean; name: string }> {
+export function names_matcher(tree: pt.Tree): Array<NameEntry> {
   return pt.matcher({
     "names:names": ({ entries, last_entry }) => [
       ...pt.matchers.zero_or_more_matcher(entries).map(name_entry_matcher),
@@ -473,19 +479,29 @@ export function names_matcher(
   })(tree)
 }
 
-export function name_entry_matcher(tree: pt.Tree): {
-  implicit: boolean
-  name: string
-} {
-  return pt.matcher({
+type NameEntry =
+  | { kind: "name"; name: string }
+  | { kind: "implicit"; names: Array<string>; last_name: string }
+
+export function name_entry_matcher(tree: pt.Tree): NameEntry {
+  return pt.matcher<NameEntry>({
     "name_entry:name_entry": ({ name }) => ({
-      implicit: false,
+      kind: "name",
       name: pt.str(name),
     }),
-    "name_entry:implicit_name_entry": ({ name }) => ({
-      implicit: true,
-      name: pt.str(name),
+    "name_entry:implicit_name_entry": ({ names, last_name }) => ({
+      kind: "implicit",
+      names: pt.matchers
+        .zero_or_more_matcher(names)
+        .map(name_implicit_entry_matcher),
+      last_name: name_implicit_entry_matcher(last_name),
     }),
+  })(tree)
+}
+
+export function name_implicit_entry_matcher(tree: pt.Tree): string {
+  return pt.matcher({
+    "name_implicit_entry:name_implicit_entry": ({ name }) => pt.str(name),
   })(tree)
 }
 
