@@ -104,9 +104,23 @@ export class BaseImPiValue extends Exps.ImPiValue {
     }
   }
 
-  insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core {
-    const fresh_name = ctx.freshen(fn.name)
-    const arg = new Exps.NotYetValue(this.arg_t, new Exps.VarNeutral(fresh_name))
+  insert_im_fn(
+    ctx: Ctx,
+    fn: Exps.Fn,
+    renaming: Array<{
+      field_name: string
+      local_name: string
+    }>
+  ): Core {
+    const found = renaming.find(
+      ({ field_name }) => field_name === this.field_name
+    )
+    const local_name = found ? found.local_name : this.field_name
+    const fresh_name = ctx.freshen(local_name)
+    const arg = new Exps.NotYetValue(
+      this.arg_t,
+      new Exps.VarNeutral(fresh_name)
+    )
     const ret_t = this.ret_t_cl.apply(arg)
     const fn_core = check(ctx.extend(fresh_name, this.arg_t), fn, ret_t)
 
@@ -167,5 +181,4 @@ export class BaseImPiValue extends Exps.ImPiValue {
       ),
     }
   }
-
 }
