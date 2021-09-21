@@ -1,4 +1,3 @@
-- `im-fn` -- `free_names`
 - `im-fn` -- `subst`
 - `im-fn` -- `check`
 - `im-fn` -- `repr`

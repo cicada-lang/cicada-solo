@@ -29,11 +29,14 @@ export class ImFn extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    throw new Error("TODO")
-
-    // return new Set([
-    //   ...this.ret.free_names(new Set([...bound_names, this.name])),
-    // ])
+    return new Set(
+      this.ret.free_names(
+        new Set([
+          ...bound_names,
+          ...this.names.map(({ local_name }) => local_name),
+        ])
+      )
+    )
   }
 
   subst(name: string, exp: Exp): ImFn {
