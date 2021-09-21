@@ -40,20 +40,21 @@ export class ImFn extends Exp {
   }
 
   subst(name: string, exp: Exp): ImFn {
-    throw new Error("TODO")
+    if (this.names.some(({ local_name }) => name === local_name)) {
+      return this
+    } else {
+      let ret = this.ret
+      let names = []
 
-    // if (name === this.name) {
-    //   return this
-    // } else {
-    //   const free_names = exp.free_names(new Set())
-    //   const fresh_name = ut.freshen(free_names, this.name)
-    //   const ret = subst(
-    //     this.ret,
-    //     this.name,
-    //     new Exps.Var(fresh_name)
-    //   ) as Exps.Fn
-    //   return new ImFn(fresh_name, subst(ret, name, exp) as Exps.Fn)
-    // }
+      for (const { field_name, local_name } of this.names) {
+        const free_names = exp.free_names(new Set())
+        const fresh_name = ut.freshen(free_names, local_name)
+        ret = subst(ret, local_name, new Exps.Var(fresh_name)) as Exps.Fn
+        names.push({ field_name, local_name: fresh_name })
+      }
+
+      return new ImFn(names, subst(ret, name, exp) as Exps.Fn)
+    }
   }
 
   check(ctx: Ctx, t: Value): Core {

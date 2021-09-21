@@ -1,4 +1,3 @@
-- `im-fn` -- `subst`
 - `im-fn` -- `check`
 - `im-fn` -- `repr`
 
