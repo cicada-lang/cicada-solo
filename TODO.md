@@ -1,5 +1,14 @@
-- `im-fn`
+- `im-fn` -- array of `field_name` and `local_name`
+
+- `im-fn` -- `free_names`
+- `im-fn` -- `subst`
+- `im-fn` -- `check`
+- `im-fn` -- `repr`
+
 - `im-fn` -- syntax
+
+- test syntax
+
 - `im-fn-core`
 - `im-fn-value`
 

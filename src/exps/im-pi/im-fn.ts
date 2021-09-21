@@ -41,6 +41,9 @@ export class ImFn extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
+    // NOTE We need to insert im-fn here,
+    //   because the arguments can be partly given.
+    // NOTE During insertion we also reorder the arguments.
     const fresh_name = ctx.freshen(this.name)
     const im_pi = expect(ctx, t, Exps.BaseImPiValue)
     const variable = new Exps.VarNeutral(fresh_name)
