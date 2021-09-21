@@ -22,7 +22,10 @@ export class ImFnCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    return new Exps.ImFnValue(new Closure(env, this.local_name, this.ret))
+    return new Exps.ImFnValue(
+      this.field_name,
+      new Closure(env, this.local_name, this.ret)
+    )
   }
 
   im_fn_args_repr(): Array<string> {
