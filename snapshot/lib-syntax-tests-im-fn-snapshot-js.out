@@ -1,0 +1,2 @@
+car_type = the((implicit { A: Type, B: Type }, pair: (_: A) * B) -> Type, (implicit { B }, pair) { A })
+car_type = the((implicit { A: Type, B: Type }, pair: (_: A) * B) -> Type, (implicit { A }, pair) { A })

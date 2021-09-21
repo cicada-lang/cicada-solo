@@ -1,6 +1,6 @@
-- `im-fn` -- syntax
+- setup tests for `im-fn`
 
-- test syntax
+- `im-fn` -- syntax
 
 - `im-fn-core`
 

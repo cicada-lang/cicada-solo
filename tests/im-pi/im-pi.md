@@ -63,11 +63,13 @@ car_type_t = (
 
 car_type_t
 
-// car_type(
-//   implicit { A: Type, B: Type }, pair: (A) * B,
-// ): Type {
-//   A
-// }
+car_type(
+  implicit { A: Type, B: Type }, pair: (A) * B,
+): Type {
+  A
+}
+
+// car_type(is(cons(1, "a"), (Nat) * String))
 ```
 
 # do *not* support implicit argument over implicit argument
