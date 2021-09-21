@@ -116,13 +116,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
       ({ field_name, local_name }) => field_name === this.field_name
     )
 
-    if (found === undefined) {
-      throw new InternalError(
-        `During im-fn insertion, I can not find field_name: ${this.field_name}`
-      )
-    }
-
-    const { local_name } = found
+    const local_name = found ? found.local_name : "_"
 
     const fresh_name = ctx.freshen(local_name)
     const variable = new Exps.VarNeutral(fresh_name)
