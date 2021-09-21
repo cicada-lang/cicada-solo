@@ -1,5 +1,3 @@
-- `im-fn` -- `repr`
-
 - `im-fn` -- syntax
 
 - test syntax

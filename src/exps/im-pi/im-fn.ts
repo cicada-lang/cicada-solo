@@ -65,26 +65,26 @@ export class ImFn extends Exp {
     // - After the insertion we need to add the require names into scope.
 
     if (!ImFnInsertion.based_on(t)) {
-      throw new Trace(`I can not do im-fn insertion based on: ${t.constructor.name}`)
+      throw new Trace(
+        `I can not do im-fn insertion based on: ${t.constructor.name}`
+      )
     }
 
     return t.insert_im_fn(ctx, this.ret, this.names)
   }
 
   fn_args_repr(): Array<string> {
-    throw new Error("TODO")
-    // return [`given ${this.name}`, ...this.ret.fn_args_repr()]
+    const names = this.names.map(({ field_name }) => field_name).join(", ")
+    return [`implicit { ${names} }`, ...this.ret.fn_args_repr()]
   }
 
   fn_ret_repr(): string {
-    throw new Error("TODO")
-    // return this.ret.fn_ret_repr()
+    return this.ret.fn_ret_repr()
   }
 
   repr(): string {
-    throw new Error("TODO")
-    // const args = this.fn_args_repr().join(", ")
-    // const ret = this.fn_ret_repr()
-    // return `(${args}) { ${ret} }`
+    const args = this.fn_args_repr().join(", ")
+    const ret = this.fn_ret_repr()
+    return `(${args}) { ${ret} }`
   }
 }
