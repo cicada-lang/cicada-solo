@@ -1,9 +1,4 @@
-- `im-fn-core`
-
-  - fix `BaseImPiValue.insert_im_fn`
-  - fix `ConsImPiValue.insert_im_fn`
-
-- `im-fn-value`
+- `im-fn-value` with `field_name`
 
 # implicit
 

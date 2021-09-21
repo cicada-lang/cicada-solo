@@ -79,7 +79,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
       )
     }
 
-    return new Exps.ImFnCore(fresh_name, result)
+    return new Exps.ImFnCore(this.field_name, fresh_name, result)
   }
 
   unify(solution: Solution, that: Value): Solution {
@@ -131,7 +131,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
       )
     }
 
-    return new Exps.ImFnCore(fresh_name, fn_core)
+    return new Exps.ImFnCore(this.field_name, fresh_name, fn_core)
   }
 
   insert_im_ap(ctx: Ctx, ap: Exps.Ap, core: Core): { t: Value; core: Core } {
