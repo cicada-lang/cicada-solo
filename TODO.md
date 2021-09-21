@@ -1,5 +1,3 @@
-- setup tests for `im-fn`
-
 - `im-fn` -- syntax
 
 - `im-fn-core`
