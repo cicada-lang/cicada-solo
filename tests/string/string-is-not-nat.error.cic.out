@@ -1,8 +1,0 @@
-I infer the type to be:
-  String
-But the expected type is:
-  Nat
-
-previous:
-- "ratatouille"
-- the(Nat, "ratatouille")
