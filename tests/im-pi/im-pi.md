@@ -69,6 +69,17 @@ car_type(
   A
 }
 
+car_type
+
+car_type_again: (
+  implicit { A: Type, B: Type }, pair: (A) * B,
+) -> Type =
+  (implicit { A, B }, pair) {
+    A
+  }
+
+car_type_again
+
 // car_type(is(cons(1, "a"), (Nat) * String))
 ```
 

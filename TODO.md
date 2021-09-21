@@ -1,5 +1,3 @@
-# implicit
-
 - `im-ap`
 
 - fix `im-fn-value`
@@ -11,6 +9,8 @@
 - `im-ap-neutral`
 
 - `cons-im-pi-value` -- `insert_im_ap`
+
+# implicit
 
 - refactor interface about `solve`
 

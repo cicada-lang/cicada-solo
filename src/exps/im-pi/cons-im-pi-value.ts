@@ -70,10 +70,10 @@ export class ConsImPiValue extends Exps.ImPiValue {
       Exps.ImApCore.apply(value, not_yet_value)
     )
 
-    if (!(result instanceof Exps.FnCore)) {
+    if (!(result instanceof Exps.FnCore || result instanceof Exps.ImFnCore)) {
       throw new Trace(
         [
-          `I expect result to be Exps.FnCore`,
+          `I expect result to be Exps.FnCore or Exps.ImFnCore`,
           `but the constructor name I meet is: ${result.constructor.name}`,
         ].join("\n") + "\n"
       )
