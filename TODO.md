@@ -1,5 +1,3 @@
-- `cons-im-pi-value` -- `insert_im_fn`
-
 - `im-fn` -- `repr`
 
 - `im-fn` -- syntax
@@ -7,6 +5,10 @@
 - test syntax
 
 - `im-fn-core`
+
+  - fix `BaseImPiValue.insert_im_fn`
+  - fix `ConsImPiValue.insert_im_fn`
+
 - `im-fn-value`
 
 # implicit

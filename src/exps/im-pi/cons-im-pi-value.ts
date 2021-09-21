@@ -7,7 +7,7 @@ import { infer } from "../../exp"
 import { check } from "../../exp"
 import { Value, solve } from "../../value"
 import { Closure } from "../closure"
-import { Trace } from "../../errors"
+import { Trace, InternalError } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from ".."
 import { ImApInsertion } from "./im-ap-insertion"
@@ -112,7 +112,34 @@ export class ConsImPiValue extends Exps.ImPiValue {
       local_name: string
     }>
   ): Core {
-    throw new Error("TODO")
+    const found = renaming.find(
+      ({ field_name, local_name }) => field_name === this.field_name
+    )
+
+    if (found === undefined) {
+      throw new InternalError(
+        `During im-fn insertion, I can not find field_name: ${this.field_name}`
+      )
+    }
+
+    const { local_name } = found
+
+    const fresh_name = ctx.freshen(local_name)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const arg = new Exps.NotYetValue(this.arg_t, variable)
+    const ret_t = this.ret_t_cl.apply(arg)
+    const fn_core = check(ctx.extend(fresh_name, this.arg_t), fn, ret_t)
+
+    if (!(fn_core instanceof Exps.FnCore || fn_core instanceof Exps.ImFnCore)) {
+      throw new Trace(
+        [
+          `ConsImPiValue.insert_im_fn expecting the result of elab to be Exps.FnCore or Exps.ImFnCore`,
+          `  class name: ${fn_core.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    return new Exps.ImFnCore(fresh_name, fn_core)
   }
 
   insert_im_ap(ctx: Ctx, ap: Exps.Ap, core: Core): { t: Value; core: Core } {

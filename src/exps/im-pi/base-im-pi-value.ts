@@ -108,18 +108,18 @@ export class BaseImPiValue extends Exps.ImPiValue {
     const fresh_name = ctx.freshen(fn.name)
     const arg = new Exps.NotYetValue(this.arg_t, new Exps.VarNeutral(fresh_name))
     const ret_t = this.ret_t_cl.apply(arg)
-    const result = check(ctx.extend(fresh_name, this.arg_t), fn, ret_t)
+    const fn_core = check(ctx.extend(fresh_name, this.arg_t), fn, ret_t)
 
-    if (!(result instanceof Exps.FnCore)) {
+    if (!(fn_core instanceof Exps.FnCore)) {
       throw new Trace(
         [
-          `Fn.check expecting the result of elab to be Exps.FnCore`,
-          `  class name: ${result.constructor.name}`,
+          `BaseImPiValue.insert_im_fn expecting the result of elab to be Exps.FnCore`,
+          `  class name: ${fn_core.constructor.name}`,
         ].join("\n")
       )
     }
 
-    return new Exps.ImFnCore(fresh_name, result)
+    return new Exps.ImFnCore(fresh_name, fn_core)
   }
 
   insert_im_ap(ctx: Ctx, ap: Exps.Ap, core: Core): { t: Value; core: Core } {

@@ -21,7 +21,16 @@ export abstract class ImPiValue
   instanceofImPiValue = true
 
   abstract readback_eta_expansion(ctx: Ctx, value: Value): Core
-  abstract insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core
+
+  abstract insert_im_fn(
+    ctx: Ctx,
+    fn: Exps.Fn,
+    renaming: Array<{
+      field_name: string
+      local_name: string
+    }>
+  ): Core
+
   abstract insert_im_ap(
     ctx: Ctx,
     ap: Exps.Ap,
