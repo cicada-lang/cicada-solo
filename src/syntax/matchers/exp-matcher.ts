@@ -95,7 +95,15 @@ export function operator_matcher(tree: pt.Tree): Exp {
                 ].join("\n")
               )
             }
-            return new Exps.ImFn(name, result)
+            return new Exps.ImFn(
+              [
+                {
+                  field_name: name,
+                  local_name: name,
+                },
+              ],
+              result
+            )
           } else {
             return new Exps.Fn(name, result)
           }
@@ -310,7 +318,15 @@ export function declaration_matcher(tree: pt.Tree): Exp {
                   ].join("\n")
                 )
               }
-              return new Exps.ImFn(binding.last_entry.name, result)
+              return new Exps.ImFn(
+                [
+                  {
+                    field_name: binding.last_entry.name,
+                    local_name: binding.last_entry.name,
+                  },
+                ],
+                result
+              )
             }
           }
         }, exp_matcher(ret))
@@ -361,7 +377,15 @@ export function cls_entry_matcher(tree: pt.Tree): {
                   ].join("\n")
                 )
               }
-              return new Exps.ImFn(binding.last_entry.name, result)
+              return new Exps.ImFn(
+                [
+                  {
+                    field_name: binding.last_entry.name,
+                    local_name: binding.last_entry.name,
+                  },
+                ],
+                result
+              )
             }
           }
         }, exp_matcher(ret))

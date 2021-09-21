@@ -1,5 +1,3 @@
-- `im-fn` -- array of `field_name` and `local_name`
-
 - `im-fn` -- `free_names`
 - `im-fn` -- `subst`
 - `im-fn` -- `check`
