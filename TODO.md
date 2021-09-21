@@ -1,4 +1,5 @@
-- `im-fn` -- `check`
+- `cons-im-pi-value` -- `insert_im_fn`
+
 - `im-fn` -- `repr`
 
 - `im-fn` -- syntax
@@ -18,7 +19,6 @@
 - `im-ap-core`
 - `im-ap-neutral`
 
-- `cons-im-pi-value` -- `insert_im_fn`
 - `cons-im-pi-value` -- `insert_im_ap`
 
 - refactor interface about `solve`

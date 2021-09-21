@@ -8,6 +8,7 @@ import { expect } from "../../value"
 import { Trace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
+import { ImFnInsertion } from "./im-fn-insertion"
 
 export class ImFn extends Exp {
   names: Array<{
@@ -58,31 +59,16 @@ export class ImFn extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    throw new Error("TODO")
+    // NOTE We need to insert im-fn here, because the arguments can be partly given.
+    // - Pass this.names as renaming to `insert_im_fn`.
+    // - The insertion will reorder the arguments.
+    // - After the insertion we need to add the require names into scope.
 
-    // // NOTE We need to insert im-fn here,
-    // //   because the arguments can be partly given.
-    // // NOTE During insertion we also reorder the arguments.
-    // const fresh_name = ctx.freshen(this.name)
-    // const im_pi = expect(ctx, t, Exps.BaseImPiValue)
-    // const variable = new Exps.VarNeutral(fresh_name)
-    // const arg = new Exps.NotYetValue(im_pi.arg_t, variable)
-    // const ret_t = im_pi.ret_t_cl.apply(arg)
-    // const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
-    // const ret_core = check(ctx.extend(fresh_name, im_pi.arg_t), ret, ret_t)
+    if (!ImFnInsertion.based_on(t)) {
+      throw new Trace(`I can not do im-fn insertion based on: ${t.constructor.name}`)
+    }
 
-    // if (
-    //   !(ret_core instanceof Exps.FnCore || ret_core instanceof Exps.ImFnCore)
-    // ) {
-    //   throw new Trace(
-    //     [
-    //       `I expect ret_core to be Exps.FnCore or Exps.ImFnCore`,
-    //       `  class name: ${ret_core.constructor.name}`,
-    //     ].join("\n") + "\n"
-    //   )
-    // }
-
-    // return new Exps.ImFnCore(fresh_name, ret_core)
+    return t.insert_im_fn(ctx, this.ret, this.names)
   }
 
   fn_args_repr(): Array<string> {

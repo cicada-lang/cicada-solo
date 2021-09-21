@@ -104,6 +104,24 @@ export class BaseImPiValue extends Exps.ImPiValue {
     }
   }
 
+  insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core {
+    const fresh_name = ctx.freshen(fn.name)
+    const arg = new Exps.NotYetValue(this.arg_t, new Exps.VarNeutral(fresh_name))
+    const ret_t = this.ret_t_cl.apply(arg)
+    const result = check(ctx.extend(fresh_name, this.arg_t), fn, ret_t)
+
+    if (!(result instanceof Exps.FnCore)) {
+      throw new Trace(
+        [
+          `Fn.check expecting the result of elab to be Exps.FnCore`,
+          `  class name: ${result.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    return new Exps.ImFnCore(fresh_name, result)
+  }
+
   insert_im_ap(ctx: Ctx, ap: Exps.Ap, core: Core): { t: Value; core: Core } {
     const { arg_t, ret_t_cl } = this
     const inferred_arg = infer(ctx, ap.arg)
@@ -150,23 +168,4 @@ export class BaseImPiValue extends Exps.ImPiValue {
     }
   }
 
-  insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core {
-    // NOTE Implicit lambda insertion
-    const { arg_t, ret_t_cl } = this
-    const fresh_name = ctx.freshen(fn.name)
-    const arg = new Exps.NotYetValue(arg_t, new Exps.VarNeutral(fresh_name))
-    const ret_t = ret_t_cl.apply(arg)
-    const result = check(ctx.extend(fresh_name, arg_t), fn, ret_t)
-
-    if (!(result instanceof Exps.FnCore)) {
-      throw new Trace(
-        [
-          `Fn.check expecting the result of elab to be Exps.FnCore`,
-          `  class name: ${result.constructor.name}`,
-        ].join("\n")
-      )
-    }
-
-    return new Exps.ImFnCore(fresh_name, result)
-  }
 }

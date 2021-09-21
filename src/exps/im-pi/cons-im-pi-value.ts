@@ -104,11 +104,18 @@ export class ConsImPiValue extends Exps.ImPiValue {
     }
   }
 
-  insert_im_ap(ctx: Ctx, ap: Exps.Ap, core: Core): { t: Value; core: Core } {
+  insert_im_fn(
+    ctx: Ctx,
+    fn: Exps.Fn,
+    renaming: Array<{
+      field_name: string
+      local_name: string
+    }>
+  ): Core {
     throw new Error("TODO")
   }
 
-  insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core {
+  insert_im_ap(ctx: Ctx, ap: Exps.Ap, core: Core): { t: Value; core: Core } {
     throw new Error("TODO")
   }
 }

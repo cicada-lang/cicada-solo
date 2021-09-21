@@ -4,7 +4,14 @@ import { Value } from "../../value"
 import * as Exps from "../../exps"
 
 export interface ImFnInsertion {
-  insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core
+  insert_im_fn(
+    ctx: Ctx,
+    fn: Exps.Fn,
+    renaming: Array<{
+      field_name: string
+      local_name: string
+    }>
+  ): Core
 }
 
 export const ImFnInsertion = {
