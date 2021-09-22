@@ -1,16 +1,23 @@
-- `im-ap`
+- `im-ap` -- `args: Map<string, Exp>`
 
-- fix `im-fn-value`
-
-- fix `im-ap` --`ap_args_repr`  by `im_ap_args_repr`
+- fix `im-ap` --`ap_args_repr` by `im_ap_args_repr`
 
 - `im-ap` -- syntax
+
+- fix `im-fn-value`'s `apply`
+
 - `im-ap-core`
+
 - `im-ap-neutral`
 
 - `cons-im-pi-value` -- `insert_im_ap`
 
 # implicit
+
+
+- [maybe] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
+
+  - create `ImFnInserter` and `ImApInserter` from `im-pi`'s `ret_t`
 
 - refactor interface about `solve`
 
