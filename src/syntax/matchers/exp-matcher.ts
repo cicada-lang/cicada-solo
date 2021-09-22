@@ -254,7 +254,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
       const n = Number.parseInt(pt.str(value))
       if (Number.isNaN(n)) {
         throw new pt.ParsingError(
-          `Expecting number, instead of: ${ut.inspect(n)}`,
+          `Expecting number, instead of: ${JSON.stringify(n)}`,
           { span }
         )
       } else {

@@ -1,5 +1,4 @@
 export * from "./equal"
-export * from "./inspect"
 export * from "./indent"
 export * from "./assert-equal"
 export * from "./freshen"

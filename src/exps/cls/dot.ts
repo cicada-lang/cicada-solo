@@ -50,7 +50,7 @@ export class Dot extends Exp {
     throw new Trace(
       [
         `Expecting target type to be a class.`,
-        `  ${ut.inspect(inferred_target.t)}`,
+        `  ${JSON.stringify(inferred_target.t)}`,
       ].join("\n")
     )
   }
