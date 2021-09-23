@@ -12,31 +12,35 @@ import * as Exps from "../../exps"
 
 export class ImAp extends Exp {
   target: Exp
-  args: Map<string, Exp>
+  args: Array<{ name: string, arg: Exp }>
 
-  constructor(target: Exp, args: Map<string, Exp>) {
+  constructor(target: Exp, args: Array<{ name: string, arg: Exp }>) {
     super()
     this.target = target
     this.args = args
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    const args = Array.from(this.args.values())
-    return new Set([
-      ...this.target.free_names(bound_names),
-      ...args.flatMap((arg) => [...arg.free_names(bound_names)]),
-    ])
+    throw new Error("TODO")
+
+    // const args = Array.from(this.args.values())
+    // return new Set([
+    //   ...this.target.free_names(bound_names),
+    //   ...args.flatMap((arg) => [...arg.free_names(bound_names)]),
+    // ])
   }
 
   subst(name: string, exp: Exp): ImAp {
-    const args = new Map(
-      Array.from(this.args.entries()).map(([entry_name, arg]) => [
-        entry_name,
-        subst(arg, name, exp),
-      ])
-    )
+    throw new Error("TODO")
 
-    return new ImAp(subst(this.target, name, exp), args)
+    // const args = new Map(
+    //   Array.from(this.args.entries()).map(([entry_name, arg]) => [
+    //     entry_name,
+    //     subst(arg, name, exp),
+    //   ])
+    // )
+
+    // return new ImAp(subst(this.target, name, exp), args)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
@@ -60,31 +64,28 @@ export class ImAp extends Exp {
   ap_args_repr(): Array<string> {
     throw new Error("TODO")
 
-    // const arg = `given ${this.arg.repr()}`
+    // const entries = this.args.repr()
+    // const args = `implicit { ${entries} }`
 
     // if (has_ap_args_repr(this.target)) {
-    //   return [...this.target.ap_args_repr(), arg]
+    //   return [...this.target.ap_args_repr(), args]
     // } else {
     //   return [arg]
     // }
   }
 
   ap_target_repr(): string {
-    throw new Error("TODO")
-
-    // if (has_ap_target_repr(this.target)) {
-    //   return this.target.ap_target_repr()
-    // } else {
-    //   return this.target.repr()
-    // }
+    if (has_ap_target_repr(this.target)) {
+      return this.target.ap_target_repr()
+    } else {
+      return this.target.repr()
+    }
   }
 
   repr(): string {
-    throw new Error("TODO")
-
-    // const target = this.ap_target_repr()
-    // const args = this.ap_args_repr().join(", ")
-    // return `${target}(${args})`
+    const target = this.ap_target_repr()
+    const args = this.ap_args_repr().join(", ")
+    return `${target}(${args})`
   }
 }
 

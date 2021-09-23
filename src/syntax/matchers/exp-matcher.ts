@@ -80,10 +80,9 @@ export function operator_matcher(tree: pt.Tree): Exp {
               return new Exps.Ap(result, arg_entry.exp)
             }
             case "implicit": {
-              return new Exps.ImAp(
-                result,
-                new Map([[arg_entry.name, arg_entry.exp]])
-              )
+              return new Exps.ImAp(result, [
+                { name: arg_entry.name, arg: arg_entry.exp },
+              ])
             }
           }
         }, operator_matcher(target)),
