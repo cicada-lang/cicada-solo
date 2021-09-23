@@ -12,63 +12,75 @@ import * as Exps from "../../exps"
 
 export class ImAp extends Exp {
   target: Exp
-  arg: Exp
+  args: Map<string, Exp>
 
-  constructor(target: Exp, arg: Exp) {
+  constructor(target: Exp, args: Map<string, Exp>) {
     super()
     this.target = target
-    this.arg = arg
+    this.args = args
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    return new Set([
-      ...this.target.free_names(bound_names),
-      ...this.arg.free_names(bound_names),
-    ])
+    throw new Error("TODO")
+
+    // return new Set([
+    //   ...this.target.free_names(bound_names),
+    //   ...this.arg.free_names(bound_names),
+    // ])
   }
 
   subst(name: string, exp: Exp): ImAp {
-    return new ImAp(subst(this.target, name, exp), subst(this.arg, name, exp))
+    throw new Error("TODO")
+
+    // return new ImAp(subst(this.target, name, exp), subst(this.arg, name, exp))
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const inferred_target = infer(ctx, this.target)
-    if (inferred_target.t instanceof Exps.BaseImPiValue) {
-      const im_pi = inferred_target.t
-      const arg_core = check(ctx, this.arg, im_pi.arg_t)
-      const arg_value = evaluate(ctx.to_env(), arg_core)
+    throw new Error("TODO")
 
-      return {
-        t: im_pi.ret_t_cl.apply(arg_value),
-        core: new Exps.ImApCore(inferred_target.core, arg_core),
-      }
-    }
+    // const inferred_target = infer(ctx, this.target)
+    // if (inferred_target.t instanceof Exps.BaseImPiValue) {
+    //   const im_pi = inferred_target.t
+    //   const arg_core = check(ctx, this.arg, im_pi.arg_t)
+    //   const arg_value = evaluate(ctx.to_env(), arg_core)
 
-    throw new Trace(`I am expecting value of type: ImPiValue`)
+    //   return {
+    //     t: im_pi.ret_t_cl.apply(arg_value),
+    //     core: new Exps.ImApCore(inferred_target.core, arg_core),
+    //   }
+    // }
+
+    // throw new Trace(`I am expecting value of type: ImPiValue`)
   }
 
   ap_args_repr(): Array<string> {
-    const arg = `given ${this.arg.repr()}`
+    throw new Error("TODO")
 
-    if (has_ap_args_repr(this.target)) {
-      return [...this.target.ap_args_repr(), arg]
-    } else {
-      return [arg]
-    }
+    // const arg = `given ${this.arg.repr()}`
+
+    // if (has_ap_args_repr(this.target)) {
+    //   return [...this.target.ap_args_repr(), arg]
+    // } else {
+    //   return [arg]
+    // }
   }
 
   ap_target_repr(): string {
-    if (has_ap_target_repr(this.target)) {
-      return this.target.ap_target_repr()
-    } else {
-      return this.target.repr()
-    }
+    throw new Error("TODO")
+
+    // if (has_ap_target_repr(this.target)) {
+    //   return this.target.ap_target_repr()
+    // } else {
+    //   return this.target.repr()
+    // }
   }
 
   repr(): string {
-    const target = this.ap_target_repr()
-    const args = this.ap_args_repr().join(", ")
-    return `${target}(${args})`
+    throw new Error("TODO")
+
+    // const target = this.ap_target_repr()
+    // const args = this.ap_args_repr().join(", ")
+    // return `${target}(${args})`
   }
 }
 

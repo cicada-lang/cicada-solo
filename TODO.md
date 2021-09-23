@@ -1,6 +1,9 @@
-- `im-ap` -- `args: Map<string, Exp>`
+- `im-ap` -- `free_names`
+- `im-ap` -- `subst`
+- `im-ap` -- `infer`
 
-- fix `im-ap` --`ap_args_repr` by `im_ap_args_repr`
+- `im-ap` -- fix `ap_args_repr` by `im_ap_args_repr`
+- `im-ap` -- `repr`
 
 - `im-ap` -- syntax
 
