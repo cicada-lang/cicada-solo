@@ -6,10 +6,9 @@
 
 - `im-ap-neutral`
 
-- `cons-im-pi-value` -- `insert_im_ap`
-
 # implicit
 
+- `cons-im-pi-value` -- `insert_im_ap`
 
 - [maybe] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
 
