@@ -81,7 +81,14 @@ export function operator_matcher(tree: pt.Tree): Exp {
             }
             case "implicit": {
               return new Exps.ImAp(result, [
-                { name: arg_entry.name, arg: arg_entry.exp },
+                ...arg_entry.entries.map((entry) => ({
+                  name: entry.name,
+                  arg: entry.exp,
+                })),
+                {
+                  name: arg_entry.last_entry.name,
+                  arg: arg_entry.last_entry.exp,
+                },
               ])
             }
           }
@@ -530,7 +537,11 @@ export function args_matcher(tree: pt.Tree): Array<ArgEntry> {
 
 type ArgEntry =
   | { kind: "arg"; exp: Exp }
-  | { kind: "implicit"; name: string; exp: Exp }
+  | {
+      kind: "implicit"
+      entries: Array<{ name: string; exp: Exp }>
+      last_entry: { name: string; exp: Exp }
+    }
 
 export function arg_entry_matcher(tree: pt.Tree): ArgEntry {
   return pt.matcher<ArgEntry>({
@@ -538,8 +549,22 @@ export function arg_entry_matcher(tree: pt.Tree): ArgEntry {
       kind: "arg",
       exp: exp_matcher(exp),
     }),
-    "arg_entry:implicit_arg_entry": ({ name, exp }) => ({
+    "arg_entry:implicit_arg_entry": ({ name, entries, last_entry }) => ({
       kind: "implicit",
+      entries: pt.matchers
+        .zero_or_more_matcher(entries)
+        .map(arg_implicit_entry_matcher),
+      last_entry: arg_implicit_entry_matcher(last_entry),
+    }),
+  })(tree)
+}
+
+export function arg_implicit_entry_matcher(tree: pt.Tree): {
+  name: string
+  exp: Exp
+} {
+  return pt.matcher({
+    "arg_implicit_entry:arg_implicit_entry": ({ name, exp }) => ({
       name: pt.str(name),
       exp: exp_matcher(exp),
     }),

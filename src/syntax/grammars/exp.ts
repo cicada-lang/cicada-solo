@@ -425,10 +425,20 @@ export const arg_entry = {
     "arg_entry:implicit_arg_entry": [
       '"implicit"',
       '"{"',
+      { entries: { $ap: ["zero_or_more", "arg_implicit_entry"] } },
+      { last_entry: "arg_implicit_entry" },
+      '"}"',
+    ],
+  },
+}
+
+export const arg_implicit_entry = {
+  $grammar: {
+    "arg_implicit_entry:arg_implicit_entry": [
       { name: "identifier" },
       '":"',
       { exp: "exp" },
-      '"}"',
+      { $ap: ["optional", '","'] },
     ],
   },
 }

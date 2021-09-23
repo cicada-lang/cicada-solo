@@ -1,5 +1,3 @@
-- `im-ap` -- syntax
-
 - `im-ap` -- `infer`
 
 - fix `im-fn-value`'s `apply`
