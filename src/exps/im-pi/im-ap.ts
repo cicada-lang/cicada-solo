@@ -28,16 +28,13 @@ export class ImAp extends Exp {
   }
 
   subst(name: string, exp: Exp): ImAp {
-    throw new Error("TODO")
-
-    // const args = new Map(
-    //   Array.from(this.args.entries()).map(([entry_name, arg]) => [
-    //     entry_name,
-    //     subst(arg, name, exp),
-    //   ])
-    // )
-
-    // return new ImAp(subst(this.target, name, exp), args)
+    return new ImAp(
+      subst(this.target, name, exp),
+      this.args.map((entry) => ({
+        name: entry.name,
+        arg: subst(entry.arg, name, exp),
+      }))
+    )
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
