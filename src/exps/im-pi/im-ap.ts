@@ -21,12 +21,12 @@ export class ImAp extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    throw new Error("TODO")
-
-    // return new Set([
-    //   ...this.target.free_names(bound_names),
-    //   ...this.arg.free_names(bound_names),
-    // ])
+    return new Set([
+      ...this.target.free_names(bound_names),
+      ...Array.from(this.args.values()).flatMap((arg) => [
+        ...arg.free_names(bound_names),
+      ]),
+    ])
   }
 
   subst(name: string, exp: Exp): ImAp {

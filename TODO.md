@@ -1,4 +1,3 @@
-- `im-ap` -- `free_names`
 - `im-ap` -- `subst`
 - `im-ap` -- `infer`
 
