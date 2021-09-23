@@ -21,18 +21,22 @@ export class ImAp extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
+    const args = Array.from(this.args.values())
     return new Set([
       ...this.target.free_names(bound_names),
-      ...Array.from(this.args.values()).flatMap((arg) => [
-        ...arg.free_names(bound_names),
-      ]),
+      ...args.flatMap((arg) => [...arg.free_names(bound_names)]),
     ])
   }
 
   subst(name: string, exp: Exp): ImAp {
-    throw new Error("TODO")
+    const args = new Map(
+      Array.from(this.args.entries()).map(([entry_name, arg]) => [
+        entry_name,
+        subst(arg, name, exp),
+      ])
+    )
 
-    // return new ImAp(subst(this.target, name, exp), subst(this.arg, name, exp))
+    return new ImAp(subst(this.target, name, exp), args)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
