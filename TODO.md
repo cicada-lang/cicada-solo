@@ -1,4 +1,3 @@
-- `im-ap` -- `free_names` again
 - `im-ap` -- `subst` again
 
 - `im-ap` -- fix `ap_args_repr` by `im_ap_args_repr`
