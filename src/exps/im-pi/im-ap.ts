@@ -56,16 +56,17 @@ export class ImAp extends Exp {
   }
 
   ap_args_repr(): Array<string> {
-    throw new Error("TODO")
+    const entries = this.args
+      .map(({ name, arg }) => `${name}: ${arg.repr()}`)
+      .join(", ")
 
-    // const entries = this.args.repr()
-    // const args = `implicit { ${entries} }`
+    const args = `implicit { ${entries} }`
 
-    // if (has_ap_args_repr(this.target)) {
-    //   return [...this.target.ap_args_repr(), args]
-    // } else {
-    //   return [arg]
-    // }
+    if (has_ap_args_repr(this.target)) {
+      return [...this.target.ap_args_repr(), args]
+    } else {
+      return [args]
+    }
   }
 
   ap_target_repr(): string {

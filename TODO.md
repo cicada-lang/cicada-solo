@@ -1,7 +1,3 @@
-- `im-ap` -- fix `ap_args_repr` by `im_ap_args_repr`
-
-- `im-ap` -- `repr`
-
 - `im-ap` -- syntax
 
 - `im-ap` -- `infer`
