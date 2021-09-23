@@ -31,7 +31,6 @@ export class Library {
 
   info(): string {
     return [
-      ``,
       `library:`,
       `  name: ${this.config.name}`,
       `  version: ${this.config.version}`,
