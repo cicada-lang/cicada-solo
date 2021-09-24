@@ -1,6 +1,4 @@
-- fix `insert_im_ap` for `base-im-pi-value` & `cons-im-pi-value`
-
-  - accumulate `cons-im-pi-value` info in argument of `insert_im_ap`
+- `base-im-pi-value` -- fix `insert_im_ap` -- use accumulated info from `cons-im-pi-value`
 
 # implicit
 

@@ -39,7 +39,7 @@ export class Ap extends Exp {
     }
 
     if (ImApInsertion.based_on(t)) {
-      return t.insert_im_ap(ctx, this.arg, core)
+      return t.insert_im_ap(ctx, this.arg, core, [])
     }
 
     const target_value = evaluate(ctx.to_env(), core)

@@ -137,7 +137,17 @@ export class BaseImPiValue extends Exps.ImPiValue {
     return new Exps.ImFnCore(this.field_name, fresh_name, fn_core)
   }
 
-  insert_im_ap(ctx: Ctx, arg: Exp, core: Core): { t: Value; core: Core } {
+  insert_im_ap(
+    ctx: Ctx,
+    arg: Exp,
+    core: Core,
+    entries: Array<{
+      field_name: string
+      fresh_name: string
+      arg_t: Value
+      not_yet_value: Exps.NotYetValue
+    }>
+  ): { t: Value; core: Core } {
     const fresh_name = ctx.freshen(this.field_name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)

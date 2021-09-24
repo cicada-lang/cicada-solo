@@ -35,6 +35,12 @@ export abstract class ImPiValue
   abstract insert_im_ap(
     ctx: Ctx,
     arg: Exp,
-    core: Core
+    core: Core,
+    entries: Array<{
+      field_name: string
+      fresh_name: string
+      arg_t: Value
+      not_yet_value: Exps.NotYetValue
+    }>
   ): { t: Value; core: Core }
 }
