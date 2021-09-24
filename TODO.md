@@ -1,6 +1,4 @@
-- `im-ap` has `arg` beside implicit `args`
-
-- `im-ap` fix system for taking `arg`
+- `im-ap` fix `repr`
 
 - fix `im-fn-value`'s `apply`
 

@@ -70,17 +70,31 @@ export function exp_matcher(tree: pt.Tree): Exp {
 export function operator_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "operator:var": ({ name }) => new Exps.Var(pt.str(name)),
-    "operator:ap": ({ target, args }) =>
-      pt.matchers
+    "operator:ap": ({ target, args }) => {
+      const arg_entries = pt.matchers
         .one_or_more_matcher(args)
         .flatMap((args) => args_matcher(args))
-        .reduce((result, arg_entry) => {
-          switch (arg_entry.kind) {
-            case "arg": {
-              return new Exps.Ap(result, arg_entry.exp)
-            }
-            case "implicit": {
-              return new Exps.ImAp(result, [
+
+      let result = operator_matcher(target)
+
+      for (let i = 0; i < arg_entries.length; i++) {
+        const arg_entry = arg_entries[i]
+        if (arg_entry.kind === "arg") {
+          result = new Exps.Ap(result, arg_entry.exp)
+        } else if (arg_entry.kind === "implicit") {
+          const next_arg_entry = arg_entries[i + 1]
+          i = i + 1
+          if (next_arg_entry.kind === "implicit") {
+            throw new Error(
+              [
+                "When matching a function application,",
+                "I expect a normal arg after an implicit arg.",
+              ].join("\n")
+            )
+          } else if (next_arg_entry.kind === "arg") {
+            result = new Exps.ImAp(
+              result,
+              [
                 ...arg_entry.entries.map((entry) => ({
                   name: entry.name,
                   arg: entry.exp,
@@ -89,10 +103,15 @@ export function operator_matcher(tree: pt.Tree): Exp {
                   name: arg_entry.last_entry.name,
                   arg: arg_entry.last_entry.exp,
                 },
-              ])
-            }
+              ],
+              next_arg_entry.exp
+            )
           }
-        }, operator_matcher(target)),
+        }
+      }
+
+      return result
+    },
     "operator:fn": ({ names, ret }) =>
       names_matcher(names)
         .reverse()

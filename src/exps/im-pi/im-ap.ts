@@ -14,17 +14,20 @@ import { ImApInsertion } from "./im-ap-insertion"
 export class ImAp extends Exp {
   target: Exp
   args: Array<{ name: string; arg: Exp }>
+  arg: Exp
 
-  constructor(target: Exp, args: Array<{ name: string; arg: Exp }>) {
+  constructor(target: Exp, args: Array<{ name: string; arg: Exp }>, arg: Exp) {
     super()
     this.target = target
     this.args = args
+    this.arg = arg
   }
 
   free_names(bound_names: Set<string>): Set<string> {
     return new Set([
       ...this.target.free_names(bound_names),
       ...this.args.flatMap(({ arg }) => [...arg.free_names(bound_names)]),
+      ...this.arg.free_names(bound_names),
     ])
   }
 
@@ -34,7 +37,8 @@ export class ImAp extends Exp {
       this.args.map((entry) => ({
         name: entry.name,
         arg: subst(entry.arg, name, exp),
-      }))
+      })),
+      subst(this.arg, name, exp)
     )
   }
 
