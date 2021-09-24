@@ -140,7 +140,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
   insert_im_ap(
     ctx: Ctx,
     arg: Exp,
-    core: Core,
+    target_core: Core,
     entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core } {
     const fresh_name = ctx.freshen(this.field_name)
@@ -157,12 +157,14 @@ export class BaseImPiValue extends Exps.ImPiValue {
     const im_arg_core = readback(ctx, this.arg_t, im_arg)
     const real_ret_t = expect(ctx, this.ret_t_cl.apply(im_arg), Exps.PiValue)
 
+    const core = new Exps.ApCore(
+      new Exps.ImApCore(target_core, im_arg_core),
+      inferred_arg.core
+    )
+
     return {
       t: real_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
-      core: new Exps.ApCore(
-        new Exps.ImApCore(core, im_arg_core),
-        inferred_arg.core
-      ),
+      core,
     }
   }
 }

@@ -138,7 +138,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
   insert_im_ap(
     ctx: Ctx,
     arg: Exp,
-    core: Core,
+    target_core: Core,
     entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core } {
     const fresh_name = ctx.freshen(this.field_name)
@@ -155,7 +155,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
       )
     }
 
-    return ret_t.insert_im_ap(ctx, arg, core, [
+    return ret_t.insert_im_ap(ctx, arg, target_core, [
       ...entries,
       {
         arg_t: this.arg_t,

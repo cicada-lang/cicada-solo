@@ -35,7 +35,7 @@ export abstract class ImPiValue
   abstract insert_im_ap(
     ctx: Ctx,
     arg: Exp,
-    core: Core,
+    target_core: Core,
     entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core }
 }
