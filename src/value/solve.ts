@@ -9,13 +9,13 @@ export function solve(
   not_yet_value: Exps.NotYetValue,
   opts: {
     ctx: Ctx
-    left: { t: Value; value: Value }
-    right: { t: Value; value: Value }
+    left: Value
+    right: Value
   }
 ): { value: Value; core: Core } {
   const { ctx, left, right } = opts
 
-  const solution = Solution.empty.unify(left.value, right.value)
+  const solution = Solution.empty.unify(left, right)
 
   if (!(not_yet_value.neutral instanceof Exps.VarNeutral)) {
     throw new Trace(
@@ -29,8 +29,8 @@ export function solve(
       not_yet_value.t,
       not_yet_value
     ).repr()
-    const left_repr = readback(ctx, left.t, left.value).repr()
-    const right_repr = readback(ctx, right.t, right.value).repr()
+    const left_repr = readback(ctx, new Exps.TypeValue(), left).repr()
+    const right_repr = readback(ctx, new Exps.TypeValue(), right).repr()
     throw new Trace(
       [
         `Unification fail, fail to solve logic variable: ${not_yet_value_repr}`,

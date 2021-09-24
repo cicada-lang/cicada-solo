@@ -151,8 +151,8 @@ export class BaseImPiValue extends Exps.ImPiValue {
 
     const result = solve(not_yet_value, {
       ctx: ctx.extend(fresh_name, this.arg_t, not_yet_value),
-      left: { t: new Exps.TypeValue(), value: ret_t.arg_t },
-      right: { t: new Exps.TypeValue(), value: inferred_arg.t },
+      left: ret_t.arg_t,
+      right: inferred_arg.t,
     })
 
     const real_ret_t = expect(
