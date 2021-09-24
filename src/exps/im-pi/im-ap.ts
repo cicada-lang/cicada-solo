@@ -50,19 +50,6 @@ export class ImAp extends Exp {
       )
     }
 
-    // TODO limit target type
-
-    const ap = this.target
-
-    if (!(ap instanceof Exps.Ap)) {
-      throw new Trace(
-        [
-          `I expect that target of ImAp to be Ap.`,
-          `  class name: ${ap.constructor.name}`,
-        ].join("\n")
-      )
-    }
-
     throw new Error("TODO")
 
     // TODO should take `this.arg`
