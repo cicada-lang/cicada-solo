@@ -1,4 +1,5 @@
 import { Ctx } from "../../ctx"
+import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Solution } from "../../solution"
 import { readback } from "../../value"
@@ -34,6 +35,7 @@ export abstract class ImPiValue
   abstract insert_im_ap(
     ctx: Ctx,
     ap: Exps.Ap,
-    core: Core
+    core: Core,
+    args: Array<{ name: string; arg: Exp }>
   ): { t: Value; core: Core }
 }

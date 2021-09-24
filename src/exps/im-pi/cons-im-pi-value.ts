@@ -1,4 +1,5 @@
 import { Ctx } from "../../ctx"
+import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Solution } from "../../solution"
 import { readback } from "../../value"
@@ -134,7 +135,12 @@ export class ConsImPiValue extends Exps.ImPiValue {
     return new Exps.ImFnCore(this.field_name, fresh_name, fn_core)
   }
 
-  insert_im_ap(ctx: Ctx, ap: Exps.Ap, core: Core): { t: Value; core: Core } {
+  insert_im_ap(
+    ctx: Ctx,
+    ap: Exps.Ap,
+    core: Core,
+    args: Array<{ name: string; arg: Exp }>
+  ): { t: Value; core: Core } {
     throw new Error("TODO")
 
     // // im-pi is infer without im-ap insertion
