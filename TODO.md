@@ -1,10 +1,9 @@
-- `im-ap` fix `infer`
+- [maybe] `im-ap-core` -- take `arg`
 
-  - `cons-im-pi-value` -- `insert_im_ap`
+- `base-im-pi-value` -- fix `insert_im_ap`
+- `cons-im-pi-value` -- fix `insert_im_ap`
 
 - fix `im-fn-value`'s `apply`
-
-- `im-ap-core`
 
 - `im-ap-neutral`
 

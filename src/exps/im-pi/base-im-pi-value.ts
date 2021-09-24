@@ -143,12 +143,11 @@ export class BaseImPiValue extends Exps.ImPiValue {
     core: Core,
     args: Array<{ name: string; arg: Exp }>
   ): { t: Value; core: Core } {
-    const { arg_t, ret_t_cl } = this
     const inferred_arg = infer(ctx, arg)
-    const fresh_name = ctx.freshen(ret_t_cl.name)
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
-    const not_yet_value = new Exps.NotYetValue(arg_t, variable)
-    const ret_t = ret_t_cl.apply(not_yet_value)
+    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
+    const ret_t = this.ret_t_cl.apply(not_yet_value)
 
     if (!(ret_t instanceof Exps.PiValue)) {
       throw new Trace(
@@ -161,12 +160,12 @@ export class BaseImPiValue extends Exps.ImPiValue {
     }
 
     const result = solve(not_yet_value, {
-      ctx: ctx.extend(fresh_name, arg_t, not_yet_value),
+      ctx: ctx.extend(fresh_name, this.arg_t, not_yet_value),
       left: { t: new Exps.TypeValue(), value: ret_t.arg_t },
       right: { t: new Exps.TypeValue(), value: inferred_arg.t },
     })
 
-    const real_ret_t = ret_t_cl.apply(result.value)
+    const real_ret_t = this.ret_t_cl.apply(result.value)
 
     if (!(real_ret_t instanceof Exps.PiValue)) {
       throw new Trace(
