@@ -1,3 +1,7 @@
+- Value.unify -- not-yet-value.ts -- for `nat_ind`
+
+  - try to fix `cong` with implicit arguments
+
 - use implicit to implement `cong` by `replace` -- `from` and `to`
 
 # implicit

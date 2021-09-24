@@ -6,6 +6,26 @@ import * as ut from "../ut"
 import * as Exps from "../exps"
 
 export function readback(ctx: Ctx, t: Value, value: Value): Core {
+  // NOTE The following two `find_entry`s are like `deep_walk`
+  //   (before `readback` `arg_t` in `ImApInsertion`).
+
+  if (t instanceof Exps.NotYetValue && t.neutral instanceof Exps.VarNeutral) {
+    const entry = ctx.find_entry(t.neutral.name)
+    if (entry && entry.value) {
+      t = entry.value
+    }
+  }
+
+  if (
+    value instanceof Exps.NotYetValue &&
+    value.neutral instanceof Exps.VarNeutral
+  ) {
+    const entry = ctx.find_entry(value.neutral.name)
+    if (entry && entry.value) {
+      value = entry.value
+    }
+  }
+
   if (ReadbackEtaExpansion.based_on(t)) {
     return t.readback_eta_expansion(ctx, value)
   }
@@ -27,8 +47,11 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
 
   throw new Trace(
     [
-      `I can not readback value: ${JSON.stringify(value)},`,
-      `  type: ${JSON.stringify(t)}.`,
+      `I can not readback value.`,
+      `  value class name: ${value.constructor.name}`,
+      `  type class name: ${t.constructor.name}`,
+      `  value json: ${JSON.stringify(value)}`,
+      `  type json: ${JSON.stringify(t)}`,
     ].join("\n ")
   )
 }
