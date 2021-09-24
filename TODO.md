@@ -1,21 +1,16 @@
-- [maybe] `im-ap-core` -- take `arg`
+- fix `insert_im_ap` for `base-im-pi-value` & `cons-im-pi-value`
 
-- `base-im-pi-value` -- fix `insert_im_ap`
-- `cons-im-pi-value` -- fix `insert_im_ap`
-
-- fix `im-fn-value`'s `apply`
-
-- `im-ap-neutral`
+  - accumulate `cons-im-pi-value` info in argument of `insert_im_ap`
 
 # implicit
-
-- [maybe] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
-
-  - create `ImFnInserter` and `ImApInserter` from `im-pi`'s `ret_t`
 
 - use implicit to implement `cong` by `replace` -- `from` and `to`
 
 - [stdlib] try implicit argument in `stdlib`
+
+- [maybe] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
+
+  - create `ImFnInserter` and `ImApInserter` from `im-pi`'s `ret_t`
 
 - Value.unify -- pi/fn-value.ts & pi/im-fn-value.ts
 

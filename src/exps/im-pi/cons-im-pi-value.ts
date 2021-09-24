@@ -6,7 +6,7 @@ import { readback } from "../../value"
 import { evaluate } from "../../core"
 import { infer } from "../../exp"
 import { check } from "../../exp"
-import { Value, solve } from "../../value"
+import { Value, expect } from "../../value"
 import { Closure } from "../closure"
 import { Trace, InternalError } from "../../errors"
 import * as ut from "../../ut"
@@ -136,22 +136,20 @@ export class ConsImPiValue extends Exps.ImPiValue {
   }
 
   insert_im_ap(ctx: Ctx, arg: Exp, core: Core): { t: Value; core: Core } {
-    throw new Error("TODO")
+    const fresh_name = ctx.freshen(this.field_name)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
+    const ret_t = this.ret_t_cl.apply(not_yet_value)
 
-    // // im-pi is infer without im-ap insertion
-
-    // const inferred_target = infer(ctx, this.target)
-    // if (inferred_target.t instanceof Exps.BaseImPiValue) {
-    //   const im_pi = inferred_target.t
-    //   const arg_core = check(ctx, this.arg, im_pi.arg_t)
-    //   const arg_value = evaluate(ctx.to_env(), arg_core)
-
-    //   return {
-    //     t: im_pi.ret_t_cl.apply(arg_value),
-    //     core: new Exps.ImApCore(inferred_target.core, arg_core),
-    //   }
-    // }
-
-    // throw new Trace(`I am expecting value of type: ImPiValue`)
+    if (ret_t instanceof Exps.ImPiValue) {
+      return ret_t.insert_im_ap(ctx, arg, core)
+    } else {
+      throw new Trace(
+        [
+          `I expect ret_t to be Exps.ImPiValue,`,
+          `  class name: ${ret_t.constructor.name}`,
+        ].join("\n")
+      )
+    }
   }
 }
