@@ -158,9 +158,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
     return ret_t.insert_im_ap(ctx, arg, core, [
       ...entries,
       {
-        field_name: this.field_name,
         arg_t: this.arg_t,
-        fresh_name,
         not_yet_value,
       },
     ])

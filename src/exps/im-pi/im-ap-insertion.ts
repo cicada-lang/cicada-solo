@@ -5,8 +5,6 @@ import { Value } from "../../value"
 import * as Exps from "../../exps"
 
 export interface ImApInsertionEntry {
-  field_name: string
-  fresh_name: string
   arg_t: Value
   not_yet_value: Exps.NotYetValue
 }
