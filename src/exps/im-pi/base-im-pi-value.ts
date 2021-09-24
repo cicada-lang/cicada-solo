@@ -139,12 +139,12 @@ export class BaseImPiValue extends Exps.ImPiValue {
 
   insert_im_ap(
     ctx: Ctx,
-    ap: Exps.Ap,
+    arg: Exp,
     core: Core,
     args: Array<{ name: string; arg: Exp }>
   ): { t: Value; core: Core } {
     const { arg_t, ret_t_cl } = this
-    const inferred_arg = infer(ctx, ap.arg)
+    const inferred_arg = infer(ctx, arg)
     const fresh_name = ctx.freshen(ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(arg_t, variable)

@@ -34,7 +34,7 @@ export abstract class ImPiValue
 
   abstract insert_im_ap(
     ctx: Ctx,
-    ap: Exps.Ap,
+    arg: Exp,
     core: Core,
     args: Array<{ name: string; arg: Exp }>
   ): { t: Value; core: Core }

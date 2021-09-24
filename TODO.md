@@ -1,3 +1,5 @@
+- `im-ap` has `arg` beside implicit `args`
+
 - fix `im-fn-value`'s `apply`
 
 - `im-ap-core`

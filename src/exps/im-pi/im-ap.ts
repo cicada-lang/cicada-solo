@@ -63,9 +63,11 @@ export class ImAp extends Exp {
       )
     }
 
-    // TODO should not pass `this.target`
+    throw new Error("TODO")
 
-    return t.insert_im_ap(ctx, ap, core, this.args)
+    // TODO should take `this.arg`
+
+    // return t.insert_im_ap(ctx, ap, core, this.args)
   }
 
   ap_args_repr(): Array<string> {

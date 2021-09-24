@@ -1,6 +1,6 @@
 # implicit argument insertion when applying implicit function
 
-``` cicada
+``` cicada todo
 id(implicit { A: Type }, x: A): A {
   x
 }
@@ -14,7 +14,7 @@ id(implicit { A: String }, "a")
 
 # multiple implicit arguments
 
-``` cicada
+``` cicada todo
 k(
   implicit { A: Type }, x: A,
   implicit { B: Type }, y: B,
