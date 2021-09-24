@@ -189,6 +189,8 @@ export class BaseImPiValue extends Exps.ImPiValue {
     const core = new Exps.ApCore(target, inferred_arg.core)
     const real_ret_t = expect(ctx, this.ret_t_cl.apply(im_arg), Exps.PiValue)
 
+    // TODO We need to `deep_walk` the result type.
+
     return {
       t: real_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
       core,

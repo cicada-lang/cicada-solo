@@ -4,6 +4,8 @@
     not just the structure of the code, but also the behavior of the system.
   - how to make it easier to test?
   - how about "when in doubt, evaluate."?
+  - how to improve internal error message to help debug?
+  - why it took me so long to find out the problem is about `deep_walk` the result type?
 
 - `solution.deep_walk`
 
