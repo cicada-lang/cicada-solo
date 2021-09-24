@@ -16,8 +16,9 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
       const inferred = exp.infer(ctx)
       const u = inferred.t
       if (!conversion(ctx, new Exps.TypeValue(), t, u)) {
-        console.dir(t, {depth: 4})
-        console.dir(u, {depth: 4})
+        // DEBUG
+        // console.dir(t, { depth: 4 })
+        // console.dir(u, { depth: 4 })
         const u_exp = readback(ctx, new Exps.TypeValue(), u)
         const t_exp = readback(ctx, new Exps.TypeValue(), t)
 

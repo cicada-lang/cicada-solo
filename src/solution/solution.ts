@@ -67,10 +67,11 @@ export abstract class Solution {
         return Solution.failure
       }
     } else if (Solution.logic_var_p(x)) {
-      console.dir(Solution.logic_var_name(x))
-      if (Solution.logic_var_name(x) === "from") {
-        console.dir(y)
-      }
+      // DEBUG
+      // console.dir(Solution.logic_var_name(x))
+      // if (Solution.logic_var_name(x) === "from") {
+      //   console.dir(y)
+      // }
 
       // TODO occur check
       return this.extend(Solution.logic_var_name(x), y)
