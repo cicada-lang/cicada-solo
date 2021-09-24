@@ -6,7 +6,7 @@ import { readback } from "../../value"
 import { evaluate } from "../../core"
 import { infer } from "../../exp"
 import { check } from "../../exp"
-import { Value, solve, expect } from "../../value"
+import { Value, expect } from "../../value"
 import { Closure } from "../closure"
 import { Trace } from "../../errors"
 import * as ut from "../../ut"
@@ -154,11 +154,11 @@ export class BaseImPiValue extends Exps.ImPiValue {
     const ret_t = expect(ctx, this.ret_t_cl.apply(not_yet_value), Exps.PiValue)
 
     const inferred_arg = infer(ctx, arg)
-    const im_arg = solve(not_yet_value, {
-      ctx,
-      left: ret_t.arg_t,
-      right: inferred_arg.t,
-    })
+
+    const im_arg = Solution.empty
+      .unifyOrFail(ctx, ret_t.arg_t, inferred_arg.t)
+      .findOrFail(ctx, not_yet_value)
+
     const im_arg_core = readback(ctx, this.arg_t, im_arg)
     const real_ret_t = expect(ctx, this.ret_t_cl.apply(im_arg), Exps.PiValue)
 
