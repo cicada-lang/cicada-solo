@@ -27,11 +27,6 @@ id3
 id1(1)
 id2(1)
 id3(1)
-
-// TODO
-// id1(implicit { A: Nat }, 1)
-// id2(implicit { A: Nat }, 1)
-// id3(implicit { A: Nat }, 1)
 ```
 
 # return implicit value
@@ -55,8 +50,6 @@ k(
   x
 }
 
-// TODO
-// k(implicit { A: Nat }, 100, implicit { A: Nat }, 101)
 k(100, 101)
 ```
 

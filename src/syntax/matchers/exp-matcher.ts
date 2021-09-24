@@ -70,48 +70,14 @@ export function exp_matcher(tree: pt.Tree): Exp {
 export function operator_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "operator:var": ({ name }) => new Exps.Var(pt.str(name)),
-    "operator:ap": ({ target, args }) => {
-      const arg_entries = pt.matchers
+    "operator:ap": ({ target, args }) =>
+      pt.matchers
         .one_or_more_matcher(args)
         .flatMap((args) => args_matcher(args))
-
-      let result = operator_matcher(target)
-
-      for (let i = 0; i < arg_entries.length; i++) {
-        const arg_entry = arg_entries[i]
-        if (arg_entry.kind === "arg") {
-          result = new Exps.Ap(result, arg_entry.exp)
-        } else if (arg_entry.kind === "implicit") {
-          const next_arg_entry = arg_entries[i + 1]
-          i = i + 1
-          if (next_arg_entry.kind === "implicit") {
-            throw new Error(
-              [
-                "When matching a function application,",
-                "I expect a normal arg after an implicit arg.",
-              ].join("\n")
-            )
-          } else if (next_arg_entry.kind === "arg") {
-            result = new Exps.ImAp(
-              result,
-              [
-                ...arg_entry.entries.map((entry) => ({
-                  name: entry.name,
-                  arg: entry.exp,
-                })),
-                {
-                  name: arg_entry.last_entry.name,
-                  arg: arg_entry.last_entry.exp,
-                },
-              ],
-              next_arg_entry.exp
-            )
-          }
-        }
-      }
-
-      return result
-    },
+        .reduce(
+          (result, arg) => new Exps.Ap(result, arg),
+          operator_matcher(target)
+        ),
     "operator:fn": ({ names, ret }) =>
       names_matcher(names)
         .reverse()
@@ -545,36 +511,12 @@ export function exps_matcher(tree: pt.Tree): Array<Exp> {
   })(tree)
 }
 
-export function args_matcher(tree: pt.Tree): Array<ArgEntry> {
+export function args_matcher(tree: pt.Tree): Array<Exp> {
   return pt.matcher({
     "args:args": ({ entries, last_entry }) => [
-      ...pt.matchers.zero_or_more_matcher(entries).map(arg_entry_matcher),
-      arg_entry_matcher(last_entry),
+      ...pt.matchers.zero_or_more_matcher(entries).map(exp_matcher),
+      exp_matcher(last_entry),
     ],
-  })(tree)
-}
-
-type ArgEntry =
-  | { kind: "arg"; exp: Exp }
-  | {
-      kind: "implicit"
-      entries: Array<{ name: string; exp: Exp }>
-      last_entry: { name: string; exp: Exp }
-    }
-
-export function arg_entry_matcher(tree: pt.Tree): ArgEntry {
-  return pt.matcher<ArgEntry>({
-    "arg_entry:arg_entry": ({ exp }) => ({
-      kind: "arg",
-      exp: exp_matcher(exp),
-    }),
-    "arg_entry:implicit_arg_entry": ({ name, entries, last_entry }) => ({
-      kind: "implicit",
-      entries: pt.matchers
-        .zero_or_more_matcher(entries)
-        .map(arg_implicit_entry_matcher),
-      last_entry: arg_implicit_entry_matcher(last_entry),
-    }),
   })(tree)
 }
 
