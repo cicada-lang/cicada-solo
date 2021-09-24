@@ -6,7 +6,7 @@ import { Solution } from "../../solution"
 import { check } from "../../exp"
 import { evaluate } from "../../core"
 import { Trace } from "../../errors"
-import * as Exps from ".."
+import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class BaseImPi extends Exps.ImPi {
