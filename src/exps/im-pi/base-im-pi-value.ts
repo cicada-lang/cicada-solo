@@ -137,12 +137,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
     return new Exps.ImFnCore(this.field_name, fresh_name, fn_core)
   }
 
-  insert_im_ap(
-    ctx: Ctx,
-    arg: Exp,
-    core: Core,
-    args: Array<{ name: string; arg: Exp }>
-  ): { t: Value; core: Core } {
+  insert_im_ap(ctx: Ctx, arg: Exp, core: Core): { t: Value; core: Core } {
     const inferred_arg = infer(ctx, arg)
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)

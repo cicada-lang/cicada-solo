@@ -5,12 +5,7 @@ import { Value } from "../../value"
 import * as Exps from "../../exps"
 
 export interface ImApInsertion {
-  insert_im_ap(
-    ctx: Ctx,
-    arg: Exp,
-    core: Core,
-    args: Array<{ name: string; arg: Exp }>
-  ): { t: Value; core: Core }
+  insert_im_ap(ctx: Ctx, arg: Exp, core: Core): { t: Value; core: Core }
 }
 
 export const ImApInsertion = {
