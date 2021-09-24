@@ -24,9 +24,14 @@ id1
 id2
 id3
 
-id1(implicit { A: Nat }, 1)
-id2(implicit { A: Nat }, 1)
-id3(implicit { A: Nat }, 1)
+id1(1)
+id2(1)
+id3(1)
+
+// TODO
+// id1(implicit { A: Nat }, 1)
+// id2(implicit { A: Nat }, 1)
+// id3(implicit { A: Nat }, 1)
 ```
 
 # return implicit value
@@ -50,7 +55,8 @@ k(
   x
 }
 
-k(implicit { A: Nat }, 100, implicit { A: Nat }, 101)
+// TODO
+// k(implicit { A: Nat }, 100, implicit { A: Nat }, 101)
 k(100, 101)
 ```
 
@@ -63,11 +69,24 @@ car_type_t = (
 
 car_type_t
 
-// car_type(
-//   implicit { A: Type, B: Type }, pair: (A) * B,
-// ): Type {
-//   A
-// }
+car_type(
+  implicit { A: Type, B: Type }, pair: (A) * B,
+): Type {
+  A
+}
+
+car_type
+
+car_type_again: (
+  implicit { A: Type, B: Type }, pair: (A) * B,
+) -> Type =
+  (implicit { A, B }, pair) {
+    A
+  }
+
+car_type_again
+
+// car_type(is(cons(1, "a"), (Nat) * String))
 ```
 
 # do *not* support implicit argument over implicit argument

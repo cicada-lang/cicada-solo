@@ -3,7 +3,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
-import * as Exps from ".."
+import * as Exps from "../../exps"
 
 export class NilCls extends Exps.Cls {
   field_names: Array<string> = []

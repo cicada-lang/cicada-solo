@@ -4,7 +4,7 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { Closure } from "../closure"
 import { evaluate } from "../../core"
-import * as Exps from ".."
+import * as Exps from "../../exps"
 
 export class ConsImPiCore extends Exps.ImPiCore {
   field_name: string

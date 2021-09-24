@@ -344,7 +344,6 @@ export const binding = {
       '"{"',
       { entries: { $ap: ["zero_or_more", "binding_implicit_entry"] } },
       { last_entry: "binding_implicit_entry" },
-      { $ap: ["optional", '","'] },
       '"}"',
     ],
   },
@@ -384,8 +383,18 @@ export const name_entry = {
     "name_entry:implicit_name_entry": [
       '"implicit"',
       '"{"',
-      { name: "identifier" },
+      { names: { $ap: ["zero_or_more", "name_implicit_entry"] } },
+      { last_name: "name_implicit_entry" },
       '"}"',
+    ],
+  },
+}
+
+export const name_implicit_entry = {
+  $grammar: {
+    "name_implicit_entry:name_implicit_entry": [
+      { name: "identifier" },
+      { $ap: ["optional", '","'] },
     ],
   },
 }
@@ -416,10 +425,20 @@ export const arg_entry = {
     "arg_entry:implicit_arg_entry": [
       '"implicit"',
       '"{"',
+      { entries: { $ap: ["zero_or_more", "arg_implicit_entry"] } },
+      { last_entry: "arg_implicit_entry" },
+      '"}"',
+    ],
+  },
+}
+
+export const arg_implicit_entry = {
+  $grammar: {
+    "arg_implicit_entry:arg_implicit_entry": [
       { name: "identifier" },
       '":"',
       { exp: "exp" },
-      '"}"',
+      { $ap: ["optional", '","'] },
     ],
   },
 }

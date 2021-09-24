@@ -1,4 +1,5 @@
 import { Ctx } from "../../ctx"
+import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Solution } from "../../solution"
 import { readback } from "../../value"
@@ -21,10 +22,20 @@ export abstract class ImPiValue
   instanceofImPiValue = true
 
   abstract readback_eta_expansion(ctx: Ctx, value: Value): Core
-  abstract insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core
+
+  abstract insert_im_fn(
+    ctx: Ctx,
+    fn: Exps.Fn,
+    renaming: Array<{
+      field_name: string
+      local_name: string
+    }>
+  ): Core
+
   abstract insert_im_ap(
     ctx: Ctx,
-    ap: Exps.Ap,
-    core: Core
+    arg: Exp,
+    core: Core,
+    args: Array<{ name: string; arg: Exp }>
   ): { t: Value; core: Core }
 }

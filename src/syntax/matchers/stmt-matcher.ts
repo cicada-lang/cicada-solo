@@ -45,7 +45,19 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                   ].join("\n")
                 )
               }
-              return new Exps.ImFn(binding.last_entry.name, result)
+              return new Exps.ImFn(
+                [
+                  ...binding.entries.map(({ name }) => ({
+                    field_name: name,
+                    local_name: name,
+                  })),
+                  {
+                    field_name: binding.last_entry.name,
+                    local_name: binding.last_entry.name,
+                  },
+                ],
+                result
+              )
             }
           }
         }, exp_matcher(ret))

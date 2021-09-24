@@ -8,66 +8,73 @@ import { expect } from "../../value"
 import { Trace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
+import { ImFnInsertion } from "./im-fn-insertion"
 
 export class ImFn extends Exp {
-  name: string
+  names: Array<{
+    field_name: string
+    local_name: string
+  }>
   ret: Exps.Fn
 
-  constructor(name: string, ret: Exps.Fn) {
+  constructor(
+    names: Array<{
+      field_name: string
+      local_name: string
+    }>,
+    ret: Exps.Fn
+  ) {
     super()
-    this.name = name
+    this.names = names
     this.ret = ret
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    return new Set([
-      ...this.ret.free_names(new Set([...bound_names, this.name])),
-    ])
+    return new Set(
+      this.ret.free_names(
+        new Set([
+          ...bound_names,
+          ...this.names.map(({ local_name }) => local_name),
+        ])
+      )
+    )
   }
 
   subst(name: string, exp: Exp): ImFn {
-    if (name === this.name) {
+    if (this.names.some(({ local_name }) => name === local_name)) {
       return this
     } else {
-      const free_names = exp.free_names(new Set())
-      const fresh_name = ut.freshen(free_names, this.name)
-      const ret = subst(
-        this.ret,
-        this.name,
-        new Exps.Var(fresh_name)
-      ) as Exps.Fn
-      return new ImFn(fresh_name, subst(ret, name, exp) as Exps.Fn)
+      let ret = this.ret
+      let names = []
+
+      for (const { field_name, local_name } of this.names) {
+        const free_names = exp.free_names(new Set())
+        const fresh_name = ut.freshen(free_names, local_name)
+        ret = subst(ret, local_name, new Exps.Var(fresh_name)) as Exps.Fn
+        names.push({ field_name, local_name: fresh_name })
+      }
+
+      return new ImFn(names, subst(ret, name, exp) as Exps.Fn)
     }
   }
 
   check(ctx: Ctx, t: Value): Core {
-    // NOTE We need to insert im-fn here,
+    // NOTE We already need to insert im-fn here,
     //   because the arguments can be partly given.
-    // NOTE During insertion we also reorder the arguments.
-    const fresh_name = ctx.freshen(this.name)
-    const im_pi = expect(ctx, t, Exps.BaseImPiValue)
-    const variable = new Exps.VarNeutral(fresh_name)
-    const arg = new Exps.NotYetValue(im_pi.arg_t, variable)
-    const ret_t = im_pi.ret_t_cl.apply(arg)
-    const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
-    const ret_core = check(ctx.extend(fresh_name, im_pi.arg_t), ret, ret_t)
+    // NOTE The insertion will reorder the arguments.
 
-    if (
-      !(ret_core instanceof Exps.FnCore || ret_core instanceof Exps.ImFnCore)
-    ) {
+    if (!ImFnInsertion.based_on(t)) {
       throw new Trace(
-        [
-          `I expect ret_core to be Exps.FnCore or Exps.ImFnCore`,
-          `  class name: ${ret_core.constructor.name}`,
-        ].join("\n") + "\n"
+        `I can not do im-fn insertion based on: ${t.constructor.name}`
       )
     }
 
-    return new Exps.ImFnCore(fresh_name, ret_core)
+    return t.insert_im_fn(ctx, this.ret, this.names)
   }
 
   fn_args_repr(): Array<string> {
-    return [`given ${this.name}`, ...this.ret.fn_args_repr()]
+    const names = this.names.map(({ field_name }) => field_name).join(", ")
+    return [`implicit { ${names} }`, ...this.ret.fn_args_repr()]
   }
 
   fn_ret_repr(): string {

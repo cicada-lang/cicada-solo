@@ -9,51 +9,65 @@ import { Solution } from "../../solution"
 import { Trace, InternalError } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
+import { ImApInsertion } from "./im-ap-insertion"
 
 export class ImAp extends Exp {
   target: Exp
-  arg: Exp
+  args: Array<{ name: string; arg: Exp }>
 
-  constructor(target: Exp, arg: Exp) {
+  constructor(target: Exp, args: Array<{ name: string; arg: Exp }>) {
     super()
     this.target = target
-    this.arg = arg
+    this.args = args
   }
 
   free_names(bound_names: Set<string>): Set<string> {
     return new Set([
       ...this.target.free_names(bound_names),
-      ...this.arg.free_names(bound_names),
+      ...this.args.flatMap(({ arg }) => [...arg.free_names(bound_names)]),
     ])
   }
 
   subst(name: string, exp: Exp): ImAp {
-    return new ImAp(subst(this.target, name, exp), subst(this.arg, name, exp))
+    return new ImAp(
+      subst(this.target, name, exp),
+      this.args.map((entry) => ({
+        name: entry.name,
+        arg: subst(entry.arg, name, exp),
+      }))
+    )
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const inferred_target = infer(ctx, this.target)
-    if (inferred_target.t instanceof Exps.BaseImPiValue) {
-      const im_pi = inferred_target.t
-      const arg_core = check(ctx, this.arg, im_pi.arg_t)
-      const arg_value = evaluate(ctx.to_env(), arg_core)
+    // NOTE We already need to insert im-ap here.
+    // NOTE The insertion will reorder the arguments (reverse of im-fn insertion).
 
-      return {
-        t: im_pi.ret_t_cl.apply(arg_value),
-        core: new Exps.ImApCore(inferred_target.core, arg_core),
-      }
+    const { t, core } = infer(ctx, this.target)
+
+    if (!ImApInsertion.based_on(t)) {
+      throw new Trace(
+        `I can not do im-ap insertion based on: ${t.constructor.name}`
+      )
     }
 
-    throw new Trace(`I am expecting value of type: ImPiValue`)
+    throw new Error("TODO")
+
+    // TODO should take `this.arg`
+
+    // return t.insert_im_ap(ctx, ap, core, this.args)
   }
 
   ap_args_repr(): Array<string> {
-    const arg = `given ${this.arg.repr()}`
+    const entries = this.args
+      .map(({ name, arg }) => `${name}: ${arg.repr()}`)
+      .join(", ")
+
+    const args = `implicit { ${entries} }`
 
     if (has_ap_args_repr(this.target)) {
-      return [...this.target.ap_args_repr(), arg]
+      return [...this.target.ap_args_repr(), args]
     } else {
-      return [arg]
+      return [args]
     }
   }
 

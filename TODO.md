@@ -1,29 +1,20 @@
-- `im-fn` -- array of `field_name` and `local_name`
+- `im-ap` has `arg` beside implicit `args`
 
-- `im-fn` -- `free_names`
-- `im-fn` -- `subst`
-- `im-fn` -- `check`
-- `im-fn` -- `repr`
+- `im-ap` fix system for taking `arg`
 
-- `im-fn` -- syntax
+- fix `im-fn-value`'s `apply`
 
-- test syntax
+- `im-ap-core`
 
-- `im-fn-core`
-- `im-fn-value`
+- `im-ap-neutral`
 
 # implicit
 
-- `im-ap`
-
-- fix `im-ap` --`ap_args_repr`  by `im_ap_args_repr`
-
-- `im-ap` -- syntax
-- `im-ap-core`
-- `im-ap-neutral`
-
-- `cons-im-pi-value` -- `insert_im_fn`
 - `cons-im-pi-value` -- `insert_im_ap`
+
+- [maybe] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
+
+  - create `ImFnInserter` and `ImApInserter` from `im-pi`'s `ret_t`
 
 - refactor interface about `solve`
 

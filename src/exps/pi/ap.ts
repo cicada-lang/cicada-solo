@@ -32,19 +32,19 @@ export class Ap extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const inferred_target = infer(ctx, this.target)
+    const { t, core } = infer(ctx, this.target)
 
-    if (inferred_target.t instanceof Exps.PiValue) {
-      return this.infer_for_pi(ctx, inferred_target.t, inferred_target.core)
+    if (t instanceof Exps.PiValue) {
+      return this.infer_for_pi(ctx, t, core)
     }
 
-    if (ImApInsertion.based_on(inferred_target.t)) {
-      return inferred_target.t.insert_im_ap(ctx, this, inferred_target.core)
+    if (ImApInsertion.based_on(t)) {
+      return t.insert_im_ap(ctx, this.arg, core, [])
     }
 
-    const target_value = evaluate(ctx.to_env(), inferred_target.core)
+    const target_value = evaluate(ctx.to_env(), core)
     if (target_value instanceof Exps.ClsValue) {
-      return this.infer_for_cls(ctx, target_value, inferred_target.core)
+      return this.infer_for_cls(ctx, target_value, core)
     }
 
     throw new Trace(

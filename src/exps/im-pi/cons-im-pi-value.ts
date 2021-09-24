@@ -1,4 +1,5 @@
 import { Ctx } from "../../ctx"
+import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Solution } from "../../solution"
 import { readback } from "../../value"
@@ -7,9 +8,9 @@ import { infer } from "../../exp"
 import { check } from "../../exp"
 import { Value, solve } from "../../value"
 import { Closure } from "../closure"
-import { Trace } from "../../errors"
+import { Trace, InternalError } from "../../errors"
 import * as ut from "../../ut"
-import * as Exps from ".."
+import * as Exps from "../../exps"
 import { ImApInsertion } from "./im-ap-insertion"
 import { ImFnInsertion } from "./im-fn-insertion"
 import { ReadbackEtaExpansion } from "../../value"
@@ -70,16 +71,16 @@ export class ConsImPiValue extends Exps.ImPiValue {
       Exps.ImApCore.apply(value, not_yet_value)
     )
 
-    if (!(result instanceof Exps.FnCore)) {
+    if (!(result instanceof Exps.FnCore || result instanceof Exps.ImFnCore)) {
       throw new Trace(
         [
-          `I expect result to be Exps.FnCore`,
+          `I expect result to be Exps.FnCore or Exps.ImFnCore`,
           `but the constructor name I meet is: ${result.constructor.name}`,
         ].join("\n") + "\n"
       )
     }
 
-    return new Exps.ImFnCore(fresh_name, result)
+    return new Exps.ImFnCore(this.field_name, fresh_name, result)
   }
 
   unify(solution: Solution, that: Value): Solution {
@@ -104,11 +105,58 @@ export class ConsImPiValue extends Exps.ImPiValue {
     }
   }
 
-  insert_im_ap(ctx: Ctx, ap: Exps.Ap, core: Core): { t: Value; core: Core } {
-    throw new Error("TODO")
+  insert_im_fn(
+    ctx: Ctx,
+    fn: Exps.Fn,
+    renaming: Array<{
+      field_name: string
+      local_name: string
+    }>
+  ): Core {
+    const found = renaming.find(
+      ({ field_name }) => field_name === this.field_name
+    )
+    const local_name = found ? found.local_name : this.field_name
+    const fresh_name = ctx.freshen(local_name)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const arg = new Exps.NotYetValue(this.arg_t, variable)
+    const ret_t = this.ret_t_cl.apply(arg)
+    const fn_core = check(ctx.extend(fresh_name, this.arg_t), fn, ret_t)
+
+    if (!(fn_core instanceof Exps.FnCore || fn_core instanceof Exps.ImFnCore)) {
+      throw new Trace(
+        [
+          `ConsImPiValue.insert_im_fn expecting the result of elab to be Exps.FnCore or Exps.ImFnCore`,
+          `  class name: ${fn_core.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    return new Exps.ImFnCore(this.field_name, fresh_name, fn_core)
   }
 
-  insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core {
+  insert_im_ap(
+    ctx: Ctx,
+    arg: Exp,
+    core: Core,
+    args: Array<{ name: string; arg: Exp }>
+  ): { t: Value; core: Core } {
     throw new Error("TODO")
+
+    // // im-pi is infer without im-ap insertion
+
+    // const inferred_target = infer(ctx, this.target)
+    // if (inferred_target.t instanceof Exps.BaseImPiValue) {
+    //   const im_pi = inferred_target.t
+    //   const arg_core = check(ctx, this.arg, im_pi.arg_t)
+    //   const arg_value = evaluate(ctx.to_env(), arg_core)
+
+    //   return {
+    //     t: im_pi.ret_t_cl.apply(arg_value),
+    //     core: new Exps.ImApCore(inferred_target.core, arg_core),
+    //   }
+    // }
+
+    // throw new Trace(`I am expecting value of type: ImPiValue`)
   }
 }

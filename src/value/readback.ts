@@ -27,8 +27,8 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
 
   throw new Trace(
     [
-      `I can not readback value: ${ut.inspect(value)},`,
-      `  type: ${ut.inspect(t)}.`,
+      `I can not readback value: ${JSON.stringify(value)},`,
+      `  type: ${JSON.stringify(t)}.`,
     ].join("\n ")
   )
 }
