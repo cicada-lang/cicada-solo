@@ -155,7 +155,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
 
     const inferred_arg = infer(ctx, arg)
     const im_arg = solve(not_yet_value, {
-      ctx: ctx.extend(fresh_name, this.arg_t, not_yet_value),
+      ctx,
       left: ret_t.arg_t,
       right: inferred_arg.t,
     })

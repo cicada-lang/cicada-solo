@@ -1,4 +1,7 @@
-import { Value } from "../value"
+import { Ctx } from "../ctx"
+import { Value, readback } from "../value"
+import { Core } from "../core"
+import { Trace } from "../errors"
 import * as Exps from "../exps"
 
 export abstract class Solution {
@@ -74,6 +77,41 @@ export abstract class Solution {
       //   the case where the argument is a logic variable is already handled.
       return x.unify(this, y)
     }
+  }
+
+  unifyOrFail(ctx: Ctx, left: Value, right: Value): Solution {
+    const solution = this.unify(left, right)
+
+    if (Solution.failure_p(solution)) {
+      const left_repr = readback(ctx, new Exps.TypeValue(), left).repr()
+      const right_repr = readback(ctx, new Exps.TypeValue(), right).repr()
+
+      throw new Trace(
+        [
+          `Unification fail`,
+          `  left: ${left_repr}`,
+          `  right: ${right_repr}`,
+        ].join("\n")
+      )
+    }
+
+    return solution
+  }
+
+  findOrFail(ctx: Ctx, not_yet_value: Exps.NotYetValue): Value {
+    const value = this.find(Solution.logic_var_name(not_yet_value))
+
+    if (value === undefined) {
+      const not_yet_value_repr = readback(
+        ctx,
+        not_yet_value.t,
+        not_yet_value
+      ).repr()
+
+      throw new Trace(`Fail to find logic variable: ${not_yet_value_repr}`)
+    }
+
+    return value
   }
 }
 
