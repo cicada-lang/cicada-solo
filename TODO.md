@@ -1,3 +1,10 @@
+- how to build tools for understanding?
+  - how to make it easier to debug?
+  - how to make it easier to understand?
+    not just the structure of the code, but also the behavior of the system.
+  - how to make it easier to test?
+  - how about "when in doubt, evaluate."?
+
 - `solution.deep_walk`
 
 - use implicit to implement `cong` by `replace` -- `from` and `to`
