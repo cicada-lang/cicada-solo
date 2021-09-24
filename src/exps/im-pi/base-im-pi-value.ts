@@ -6,7 +6,7 @@ import { readback } from "../../value"
 import { evaluate } from "../../core"
 import { infer } from "../../exp"
 import { check } from "../../exp"
-import { Value, solve } from "../../value"
+import { Value, solve, expect } from "../../value"
 import { Closure } from "../closure"
 import { Trace } from "../../errors"
 import * as ut from "../../ut"
@@ -147,17 +147,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
-    const ret_t = this.ret_t_cl.apply(not_yet_value)
-
-    if (!(ret_t instanceof Exps.PiValue)) {
-      throw new Trace(
-        [
-          `When Exps.Ap.infer meet target of type Exps.BaseImPiValue,`,
-          `It expects the result of applying ret_t_cl to logic variable to be Exps.PiValue,`,
-          `  class name: ${ret_t.constructor.name}`,
-        ].join("\n")
-      )
-    }
+    const ret_t = expect(ctx, this.ret_t_cl.apply(not_yet_value), Exps.PiValue)
 
     const result = solve(not_yet_value, {
       ctx: ctx.extend(fresh_name, this.arg_t, not_yet_value),
@@ -165,18 +155,11 @@ export class BaseImPiValue extends Exps.ImPiValue {
       right: { t: new Exps.TypeValue(), value: inferred_arg.t },
     })
 
-    const real_ret_t = this.ret_t_cl.apply(result.value)
-
-    if (!(real_ret_t instanceof Exps.PiValue)) {
-      throw new Trace(
-        [
-          `When Exps.Ap.infer meet target of type Exps.BaseImPiValue,`,
-          `and when ret_t is Exps.PiValue,`,
-          `it expects real_ret_t to also be Exps.PiValue,`,
-          `  class name: ${real_ret_t.constructor.name}`,
-        ].join("\n")
-      )
-    }
+    const real_ret_t = expect(
+      ctx,
+      this.ret_t_cl.apply(result.value),
+      Exps.PiValue
+    )
 
     return {
       t: real_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
