@@ -1,3 +1,4 @@
+- simplify `ImApInsertionEntry`
 - `base-im-pi-value` -- fix `insert_im_ap` -- use accumulated info from `cons-im-pi-value`
 
 # implicit

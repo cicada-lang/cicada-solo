@@ -4,17 +4,19 @@ import { Core } from "../../core"
 import { Value } from "../../value"
 import * as Exps from "../../exps"
 
+export interface ImApInsertionEntry {
+  field_name: string
+  fresh_name: string
+  arg_t: Value
+  not_yet_value: Exps.NotYetValue
+}
+
 export interface ImApInsertion {
   insert_im_ap(
     ctx: Ctx,
     arg: Exp,
     core: Core,
-    entries: Array<{
-      field_name: string
-      fresh_name: string
-      arg_t: Value
-      not_yet_value: Exps.NotYetValue
-    }>
+    entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core }
 }
 

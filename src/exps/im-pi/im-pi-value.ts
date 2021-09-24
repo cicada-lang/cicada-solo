@@ -6,12 +6,12 @@ import { readback } from "../../value"
 import { evaluate } from "../../core"
 import { infer } from "../../exp"
 import { check } from "../../exp"
-import { Value, solve } from "../../value"
+import { Value } from "../../value"
 import { Closure } from "../closure"
 import { Trace } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
-import { ImApInsertion } from "./im-ap-insertion"
+import { ImApInsertion, ImApInsertionEntry } from "./im-ap-insertion"
 import { ImFnInsertion } from "./im-fn-insertion"
 import { ReadbackEtaExpansion } from "../../value"
 
@@ -36,11 +36,6 @@ export abstract class ImPiValue
     ctx: Ctx,
     arg: Exp,
     core: Core,
-    entries: Array<{
-      field_name: string
-      fresh_name: string
-      arg_t: Value
-      not_yet_value: Exps.NotYetValue
-    }>
+    entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core }
 }

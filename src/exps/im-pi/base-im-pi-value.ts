@@ -11,7 +11,7 @@ import { Closure } from "../closure"
 import { Trace } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
-import { ImApInsertion } from "./im-ap-insertion"
+import { ImApInsertion, ImApInsertionEntry } from "./im-ap-insertion"
 import { ImFnInsertion } from "./im-fn-insertion"
 import { ReadbackEtaExpansion } from "../../value"
 
@@ -141,12 +141,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
     ctx: Ctx,
     arg: Exp,
     core: Core,
-    entries: Array<{
-      field_name: string
-      fresh_name: string
-      arg_t: Value
-      not_yet_value: Exps.NotYetValue
-    }>
+    entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core } {
     const fresh_name = ctx.freshen(this.field_name)
     const variable = new Exps.VarNeutral(fresh_name)
