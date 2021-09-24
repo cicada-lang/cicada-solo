@@ -66,7 +66,7 @@ export class ImAp extends Exp {
       .map(({ name, arg }) => `${name}: ${arg.repr()}`)
       .join(", ")
 
-    const args = `implicit { ${entries} }`
+    const args = `implicit { ${entries} }, ${this.arg.repr()}`
 
     if (has_ap_args_repr(this.target)) {
       return [...this.target.ap_args_repr(), args]

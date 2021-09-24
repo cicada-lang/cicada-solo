@@ -1,5 +1,3 @@
-- `im-ap` fix `repr`
-
 - fix `im-fn-value`'s `apply`
 
 - `im-ap-core`
