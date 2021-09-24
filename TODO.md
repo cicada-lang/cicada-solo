@@ -13,8 +13,6 @@
 
   - create `ImFnInserter` and `ImApInserter` from `im-pi`'s `ret_t`
 
-- refactor interface about `solve`
-
 - use implicit to implement `cong` by `replace` -- `from` and `to`
 
 - [stdlib] try implicit argument in `stdlib`

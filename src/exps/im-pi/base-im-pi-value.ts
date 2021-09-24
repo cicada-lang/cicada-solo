@@ -148,23 +148,18 @@ export class BaseImPiValue extends Exps.ImPiValue {
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = expect(ctx, this.ret_t_cl.apply(not_yet_value), Exps.PiValue)
-
-    const result = solve(not_yet_value, {
+    const im_arg = solve(not_yet_value, {
       ctx: ctx.extend(fresh_name, this.arg_t, not_yet_value),
       left: ret_t.arg_t,
       right: inferred_arg.t,
     })
-
-    const real_ret_t = expect(
-      ctx,
-      this.ret_t_cl.apply(result.value),
-      Exps.PiValue
-    )
+    const im_arg_core = readback(ctx, this.arg_t, im_arg)
+    const real_ret_t = expect(ctx, this.ret_t_cl.apply(im_arg), Exps.PiValue)
 
     return {
       t: real_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
       core: new Exps.ApCore(
-        new Exps.ImApCore(core, result.core),
+        new Exps.ImApCore(core, im_arg_core),
         inferred_arg.core
       ),
     }

@@ -12,7 +12,7 @@ export function solve(
     left: Value
     right: Value
   }
-): { value: Value; core: Core } {
+): Value {
   const { ctx, left, right } = opts
 
   const solution = Solution.empty.unify(left, right)
@@ -41,6 +41,7 @@ export function solve(
   }
 
   const value = solution.find(Solution.logic_var_name(not_yet_value))
+
   if (value === undefined) {
     const not_yet_value_repr = readback(
       ctx,
@@ -50,8 +51,5 @@ export function solve(
     throw new Trace(`Fail to solve logic variable: ${not_yet_value_repr}`)
   }
 
-  return {
-    value,
-    core: readback(ctx, not_yet_value.t, value),
-  }
+  return value
 }
