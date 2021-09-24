@@ -79,7 +79,18 @@ car_type_again: (
 
 car_type_again
 
-// car_type(is(cons(1, "a"), (Nat) * String))
+car_type(is(cons(1, "a"), (Nat) * String))
+car_type_again(is(cons(1, "a"), (Nat) * String))
+
+// `cdr_type` -- only the idiomatic way:
+
+cdr_type(
+  implicit { A: Type, B: Type }, pair: (A) * B,
+): Type {
+  B
+}
+
+cdr_type(is(cons(1, "a"), (Nat) * String))
 ```
 
 # do *not* support implicit argument over implicit argument

@@ -150,17 +150,26 @@ export class BaseImPiValue extends Exps.ImPiValue {
 
     const inferred_arg = infer(ctx, arg)
 
-    const im_arg = Solution.empty
-      .unifyOrFail(ctx, ret_t.arg_t, inferred_arg.t)
-      .findOrFail(ctx, not_yet_value)
-
-    const im_arg_core = readback(ctx, this.arg_t, im_arg)
-    const real_ret_t = expect(ctx, this.ret_t_cl.apply(im_arg), Exps.PiValue)
-
-    const core = new Exps.ApCore(
-      new Exps.ImApCore(target_core, im_arg_core),
-      inferred_arg.core
+    const solution = Solution.empty.unifyOrFail(
+      ctx,
+      ret_t.arg_t,
+      inferred_arg.t
     )
+
+    let target = target_core
+
+    for (const entry of entries) {
+      const im_arg = solution.findOrFail(ctx, entry.not_yet_value)
+      const im_arg_core = readback(ctx, entry.arg_t, im_arg)
+      target = new Exps.ImApCore(target, im_arg_core)
+    }
+
+    const im_arg = solution.findOrFail(ctx, not_yet_value)
+    const im_arg_core = readback(ctx, this.arg_t, im_arg)
+    target = new Exps.ImApCore(target, im_arg_core)
+
+    const core = new Exps.ApCore(target, inferred_arg.core)
+    const real_ret_t = expect(ctx, this.ret_t_cl.apply(im_arg), Exps.PiValue)
 
     return {
       t: real_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),

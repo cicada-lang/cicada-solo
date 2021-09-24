@@ -1,8 +1,6 @@
-- `base-im-pi-value` -- fix `insert_im_ap` -- use accumulated info from `cons-im-pi-value`
+- use implicit to implement `cong` by `replace` -- `from` and `to`
 
 # implicit
-
-- use implicit to implement `cong` by `replace` -- `from` and `to`
 
 - [stdlib] try implicit argument in `stdlib`
 
