@@ -59,10 +59,9 @@ export class ImFn extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    // NOTE We need to insert im-fn here, because the arguments can be partly given.
-    // - Pass this.names as renaming to `insert_im_fn`.
-    // - The insertion will reorder the arguments.
-    // - After the insertion we need to add the require names into scope.
+    // NOTE We already need to insert im-fn here,
+    //   because the arguments can be partly given.
+    // NOTE The insertion will reorder the arguments.
 
     if (!ImFnInsertion.based_on(t)) {
       throw new Trace(

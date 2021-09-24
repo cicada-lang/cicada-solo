@@ -136,5 +136,21 @@ export class ConsImPiValue extends Exps.ImPiValue {
 
   insert_im_ap(ctx: Ctx, ap: Exps.Ap, core: Core): { t: Value; core: Core } {
     throw new Error("TODO")
+
+    // // im-pi is infer without im-ap insertion
+
+    // const inferred_target = infer(ctx, this.target)
+    // if (inferred_target.t instanceof Exps.BaseImPiValue) {
+    //   const im_pi = inferred_target.t
+    //   const arg_core = check(ctx, this.arg, im_pi.arg_t)
+    //   const arg_value = evaluate(ctx.to_env(), arg_core)
+
+    //   return {
+    //     t: im_pi.ret_t_cl.apply(arg_value),
+    //     core: new Exps.ImApCore(inferred_target.core, arg_core),
+    //   }
+    // }
+
+    // throw new Trace(`I am expecting value of type: ImPiValue`)
   }
 }

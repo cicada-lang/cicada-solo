@@ -9,6 +9,7 @@ import { Solution } from "../../solution"
 import { Trace, InternalError } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
+import { ImApInsertion } from "./im-ap-insertion"
 
 export class ImAp extends Exp {
   target: Exp
@@ -38,21 +39,31 @@ export class ImAp extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    throw new Error("TODO")
+    // NOTE We already need to insert im-ap here.
+    // NOTE The insertion will reorder the arguments (reverse of im-fn insertion).
 
-    // const inferred_target = infer(ctx, this.target)
-    // if (inferred_target.t instanceof Exps.BaseImPiValue) {
-    //   const im_pi = inferred_target.t
-    //   const arg_core = check(ctx, this.arg, im_pi.arg_t)
-    //   const arg_value = evaluate(ctx.to_env(), arg_core)
+    const { t, core } = infer(ctx, this.target)
 
-    //   return {
-    //     t: im_pi.ret_t_cl.apply(arg_value),
-    //     core: new Exps.ImApCore(inferred_target.core, arg_core),
-    //   }
-    // }
+    if (!ImApInsertion.based_on(t)) {
+      throw new Trace(
+        `I can not do im-ap insertion based on: ${t.constructor.name}`
+      )
+    }
 
-    // throw new Trace(`I am expecting value of type: ImPiValue`)
+    // TODO limit target type
+
+    const ap = this.target
+
+    if (!(ap instanceof Exps.Ap)) {
+      throw new Trace(
+        [
+          `I expect that target of ImAp to be Ap.`,
+          `  class name: ${ap.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    return t.insert_im_ap(ctx, ap, core, this.args)
   }
 
   ap_args_repr(): Array<string> {
