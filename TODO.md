@@ -1,5 +1,3 @@
-- `Parser` instead of `Syntax`
-
 - `ParserTester` instead of `tester` module
 
   - no template string, just method

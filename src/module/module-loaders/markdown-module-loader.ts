@@ -1,14 +1,15 @@
 import { ModuleLoader } from "../module-loader"
 import { Library } from "../../library"
 import { Module } from "../../module"
-import * as Syntax from "../../syntax"
+import { Parser } from "../../parser"
 import * as commonmark from "commonmark"
 
 export class MarkdownModuleLoader extends ModuleLoader {
   async load(library: Library, path: string): Promise<Module> {
     const text = await library.files.get(path)
+    const parser = new Parser()
     const stmts = code_blocks(text).flatMap((code_block) =>
-      Syntax.parse_stmts(code_block.text, code_block.offset)
+      parser.parse_stmts(code_block.text, code_block.offset)
     )
     return new Module({ library, path, stmts })
   }

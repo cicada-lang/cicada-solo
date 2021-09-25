@@ -2,7 +2,7 @@ import { Library } from "../library"
 import { Stmt } from "../stmt"
 import { Env } from "../env"
 import { Ctx } from "../ctx"
-import * as Syntax from "../syntax"
+import { Parser } from "../parser"
 
 // NOTE
 // - A module belongs to a library.
@@ -36,7 +36,8 @@ export class Module {
   }
 
   append(text: string): this {
-    const stmts = Syntax.parse_stmts(text)
+    const parser = new Parser()
+    const stmts = parser.parse_stmts(text)
     this.entries.push(...stmts.map((stmt) => ({ stmt })))
     return this
   }

@@ -1,23 +1,25 @@
 import { Exp } from "../exp"
 import { Stmt } from "../stmt"
-import { parse_exp } from "./parse-exp"
-import { parse_stmts } from "./parse-stmts"
+import { Parser } from "../parser"
 import pt from "@cicada-lang/partech"
 
 export function stmts(strs: TemplateStringsArray): Array<Stmt> {
   const [text] = strs
-  return parse_stmts(text)
+  const parser = new Parser()
+  return parser.parse_stmts(text)
 }
 
 export function exp(strs: TemplateStringsArray): Exp {
   const [text] = strs
-  return parse_exp(text)
+  const parser = new Parser()
+  return parser.parse_exp(text)
 }
 
 export function not_stmts(strs: TemplateStringsArray): void {
   try {
     const [text] = strs
-    parse_stmts(text)
+    const parser = new Parser()
+    parser.parse_stmts(text)
     throw new Error(
       [
         `I (Syntax tester) expect the text to not be stmts, but they are.`,
@@ -38,7 +40,8 @@ export function not_stmts(strs: TemplateStringsArray): void {
 export function not_exp(strs: TemplateStringsArray): void {
   try {
     const [text] = strs
-    parse_exp(text)
+    const parser = new Parser()
+    parser.parse_exp(text)
     throw new Error(
       [
         `I (Syntax tester) expect the text to not be exp, but it is.`,
@@ -58,7 +61,8 @@ export function not_exp(strs: TemplateStringsArray): void {
 
 export function echo_stmts(strs: TemplateStringsArray): void {
   const [text] = strs
-  const stmts = parse_stmts(text)
+  const parser = new Parser()
+  const stmts = parser.parse_stmts(text)
   for (const stmt of stmts) {
     console.log(stmt.repr())
   }
@@ -66,6 +70,7 @@ export function echo_stmts(strs: TemplateStringsArray): void {
 
 export function echo_exp(strs: TemplateStringsArray): void {
   const [text] = strs
-  const exp = parse_exp(text)
+  const parser = new Parser()
+  const exp = parser.parse_exp(text)
   console.log(exp.repr())
 }
