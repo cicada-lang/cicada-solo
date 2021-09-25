@@ -1,3 +1,6 @@
+- `Parser` instead of `Syntax`
+- `ParserTester` instead of `tester` module
+
 - how to build tools for understanding?
   - how to make it easier to debug?
   - how to make it easier to understand?
