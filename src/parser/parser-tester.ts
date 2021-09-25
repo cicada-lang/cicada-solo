@@ -6,19 +6,16 @@ import pt from "@cicada-lang/partech"
 export class ParserTester {
   parser = new Parser()
 
-  stmts(strs: TemplateStringsArray): Array<Stmt> {
-    const [text] = strs
+  stmts(text: string): Array<Stmt> {
     return this.parser.parse_stmts(text)
   }
 
-  exp(strs: TemplateStringsArray): Exp {
-    const [text] = strs
+  exp(text: string): Exp {
     return this.parser.parse_exp(text)
   }
 
-  not_stmts(strs: TemplateStringsArray): void {
+  not_stmts(text: string): void {
     try {
-      const [text] = strs
       this.parser.parse_stmts(text)
       throw new Error(
         [
@@ -37,9 +34,8 @@ export class ParserTester {
     }
   }
 
-  not_exp(strs: TemplateStringsArray): void {
+  not_exp(text: string): void {
     try {
-      const [text] = strs
       this.parser.parse_exp(text)
       throw new Error(
         [
@@ -58,16 +54,14 @@ export class ParserTester {
     }
   }
 
-  echo_stmts(strs: TemplateStringsArray): void {
-    const [text] = strs
+  echo_stmts(text: string): void {
     const stmts = this.parser.parse_stmts(text)
     for (const stmt of stmts) {
       console.log(stmt.repr())
     }
   }
 
-  echo_exp(strs: TemplateStringsArray): void {
-    const [text] = strs
+  echo_exp(text: string): void {
     const exp = this.parser.parse_exp(text)
     console.log(exp.repr())
   }

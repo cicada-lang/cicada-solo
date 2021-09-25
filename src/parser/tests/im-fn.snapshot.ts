@@ -1,6 +1,6 @@
 import { tester } from "./utilities"
 
-tester.echo_stmts`
+tester.echo_stmts(`
 
 car_type(
   implicit { A: Type, B: Type }, pair: (A) * B,
@@ -8,9 +8,9 @@ car_type(
   A
 }
 
-`
+`)
 
-tester.echo_stmts`
+tester.echo_stmts(`
 
 car_type: (
   implicit { A: Type, B: Type }, pair: (A) * B,
@@ -19,9 +19,9 @@ car_type: (
     A
   }
 
-`
+`)
 
-tester.echo_stmts`
+tester.echo_stmts(`
 
 car_type: (
   implicit { A: Type, B: Type }, pair: (A) * B,
@@ -30,4 +30,4 @@ car_type: (
     A
   }
 
-`
+`)

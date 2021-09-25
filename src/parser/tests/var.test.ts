@@ -2,18 +2,8 @@ import { tester } from "./utilities"
 
 // preserved keywords
 
-tester.not_exp`
-implicit
-`
+tester.not_exp(`implicit`)
 
-tester.exp`
-123
-`
-
-tester.exp`
-"abc"
-`
-
-tester.exp`
-x
-`
+tester.exp(`123`)
+tester.exp(`"abc"`)
+tester.exp(`x`)

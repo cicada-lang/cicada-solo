@@ -1,5 +1,3 @@
-- `ParserTester` no template string, just method
-
 - how to build tools for understanding?
   - how to make it easier to debug?
   - how to make it easier to understand?

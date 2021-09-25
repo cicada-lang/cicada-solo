@@ -1,6 +1,6 @@
 import { tester } from "./utilities"
 
-tester.echo_stmts`
+tester.echo_stmts(`
 
 cong(
   implicit {
@@ -18,9 +18,9 @@ cong(
     same)
 }
 
-`
+`)
 
-tester.echo_stmts`
+tester.echo_stmts(`
 
 cong(
   implicit {
@@ -39,4 +39,4 @@ cong(
     same)
 }
 
-`
+`)
