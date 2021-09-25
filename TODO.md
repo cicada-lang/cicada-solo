@@ -1,5 +1,8 @@
 - `Parser` instead of `Syntax`
+
 - `ParserTester` instead of `tester` module
+
+  - no template string, just method
 
 - how to build tools for understanding?
   - how to make it easier to debug?
