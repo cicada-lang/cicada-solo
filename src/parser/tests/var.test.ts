@@ -1,6 +1,6 @@
 import { tester } from "./utilities"
 
-// preserved keywords
+// NOTE preserved keywords
 
 tester.not_exp(`implicit`)
 
