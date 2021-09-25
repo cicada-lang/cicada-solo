@@ -150,7 +150,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
 
     const inferred_arg = infer(ctx, arg)
 
-    const solution = Solution.empty.unifyOrFail(
+    const solution = Solution.empty.unify_or_fail(
       ctx,
       ret_t.arg_t,
       inferred_arg.t
@@ -162,14 +162,14 @@ export class BaseImPiValue extends Exps.ImPiValue {
       ctx = ctx.extend(
         Solution.logic_var_name(entry.not_yet_value),
         entry.arg_t,
-        solution.findOrFail(ctx, entry.not_yet_value)
+        solution.find_or_fail(ctx, entry.not_yet_value)
       )
     }
 
     ctx = ctx.extend(
       Solution.logic_var_name(not_yet_value),
       this.arg_t,
-      solution.findOrFail(ctx, not_yet_value)
+      solution.find_or_fail(ctx, not_yet_value)
     )
 
     let target = target_core
@@ -177,12 +177,12 @@ export class BaseImPiValue extends Exps.ImPiValue {
     // TODO should we deep walk `entry.arg_t`?
 
     for (const entry of entries) {
-      const im_arg = solution.findOrFail(ctx, entry.not_yet_value)
+      const im_arg = solution.find_or_fail(ctx, entry.not_yet_value)
       const im_arg_core = readback(ctx, entry.arg_t, im_arg)
       target = new Exps.ImApCore(target, im_arg_core)
     }
 
-    const im_arg = solution.findOrFail(ctx, not_yet_value)
+    const im_arg = solution.find_or_fail(ctx, not_yet_value)
     const im_arg_core = readback(ctx, this.arg_t, im_arg)
     target = new Exps.ImApCore(target, im_arg_core)
 

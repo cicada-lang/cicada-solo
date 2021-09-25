@@ -85,7 +85,7 @@ export abstract class Solution {
     }
   }
 
-  unifyOrFail(ctx: Ctx, left: Value, right: Value): Solution {
+  unify_or_fail(ctx: Ctx, left: Value, right: Value): Solution {
     const solution = this.unify(left, right)
 
     if (Solution.failure_p(solution)) {
@@ -104,7 +104,7 @@ export abstract class Solution {
     return solution
   }
 
-  findOrFail(ctx: Ctx, not_yet_value: Exps.NotYetValue): Value {
+  find_or_fail(ctx: Ctx, not_yet_value: Exps.NotYetValue): Value {
     const value = this.find(Solution.logic_var_name(not_yet_value))
 
     if (value === undefined) {
