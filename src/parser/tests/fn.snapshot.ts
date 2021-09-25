@@ -1,4 +1,4 @@
-import * as tester from "../tester"
+import { tester } from "./utilities"
 
 // suger for not repeating argument list
 

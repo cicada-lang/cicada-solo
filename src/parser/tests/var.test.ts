@@ -1,4 +1,4 @@
-import * as tester from "../tester"
+import { tester } from "./utilities"
 
 // preserved keywords
 
