@@ -32,12 +32,12 @@ id3(1)
 # return implicit value
 
 ``` cicada
-type_of(implicit { T: Type }, T): Type {
+typeof(implicit { T: Type }, T): Type {
   T
 }
 
-type_of(123)
-type_of("abc")
+typeof(123)
+typeof("abc")
 ```
 
 # multiple implicit arguments
