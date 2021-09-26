@@ -1,20 +1,14 @@
-- `ch11` use `cong` with implicit arguments
-- `ch12` use `cong` with implicit arguments
-- `ch16` use `cong` with implicit arguments
-
-- [refactor] `base-im-pi-value` -- `isnert_im_ap`
-
 - [refactor] `unify` of `Value`, `Neutral` and `Normal`
 
 - `not-yet-value ` -- fix `unify`
 
-# implicit
-
-- [stdlib] try implicit argument in `stdlib`
+- [refactor] `base-im-pi-value` -- `isnert_im_ap`
 
 - [maybe] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
 
   - create `ImFnInserter` and `ImApInserter` from `im-pi`'s `ret_t`
+
+# implicit
 
 - Value.unify -- pi/fn-value.ts & pi/im-fn-value.ts
 
@@ -30,9 +24,13 @@
 - Value.unify -- cls/obj-value.ts
 - Value.unify -- cls/fulfilled-cls-value.ts
 
-- `Subst.unify` occur check
+- `Subst.unify` occur check -- use `free_names`
 
-- `Value.occur` handle each case
+- [stdlib] try implicit argument in `stdlib`
+
+- [tlt] `ch11` use `cong` with implicit arguments
+- [tlt] `ch12` use `cong` with implicit arguments
+- [tlt] `ch16` use `cong` with implicit arguments
 
 # use `unify` to replace `readback`
 
