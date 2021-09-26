@@ -1,4 +1,5 @@
 - [refactor] `base-im-pi-value` -- `isnert_im_ap`
+- [refactor] `cons-im-pi-value` -- `isnert_im_ap`
 
 - [refactor] `unify` of `Value`, `Neutral` and `Normal`
 
