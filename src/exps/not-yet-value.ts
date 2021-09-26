@@ -28,4 +28,8 @@ export class NotYetValue extends Value {
       return Solution.failure
     }
   }
+
+  deep_walk(ctx: Ctx, solution: Solution): Value {
+    return solution.walk(this)
+  }
 }
