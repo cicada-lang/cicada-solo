@@ -14,13 +14,17 @@ export abstract class Value {
     )
   }
 
+
+  // TODO should be abstract
   // NOTE take `ctx` for `readback`
   deep_walk(ctx: Ctx, solution: Solution): Value {
-    throw new Error(
-      [
-        `Method not implemented: Value.deep_walk`,
-        `  class name: ${this.constructor.name}`,
-      ].join("\n")
-    )
+    return this
+
+    // throw new Error(
+    //   [
+    //     `Method not implemented: Value.deep_walk`,
+    //     `  class name: ${this.constructor.name}`,
+    //   ].join("\n")
+    // )
   }
 }

@@ -1,3 +1,6 @@
+- equal/equal-value -- `deep_walk`
+- nat/add1-value -- `deep_walk`
+
 - absurd/absurd-value -- `deep_walk`
 - cls/fulfilled-cls-value -- `deep_walk`
 - cls/cons-cls-value -- `deep_walk`
@@ -11,7 +14,7 @@
 - list/nil-value -- `deep_walk`
 - pi/fn-value -- `deep_walk`
 - pi/pi-value -- `deep_walk`
-- equal/equal-value -- `deep_walk`
+
 - equal/same-value -- `deep_walk`
 - type-value -- `deep_walk`
 - vector/vector-value -- `deep_walk`
@@ -19,7 +22,7 @@
 - vector/vec-value -- `deep_walk`
 - str/str-value -- `deep_walk`
 - str/quote-value -- `deep_walk`
-- nat/add1-value -- `deep_walk`
+
 - nat/nat-value -- `deep_walk`
 - nat/zero-value -- `deep_walk`
 - im-pi/im-pi-value -- `deep_walk`

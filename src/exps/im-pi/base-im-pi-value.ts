@@ -191,9 +191,10 @@ export class BaseImPiValue extends Exps.ImPiValue {
 
     // TODO We need to `deep_walk` the result type.
 
-    return {
-      t: real_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
-      core,
-    }
+    const t = real_ret_t.ret_t_cl
+      .apply(evaluate(ctx.to_env(), inferred_arg.core))
+      .deep_walk(ctx, solution)
+
+    return { t, core }
   }
 }
