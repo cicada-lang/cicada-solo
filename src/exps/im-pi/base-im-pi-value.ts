@@ -167,7 +167,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
       ctx = ctx.extend(
         Solution.logic_var_name(entry.not_yet_value),
         entry.arg_t,
-        solution.find_or_fail(ctx, entry.not_yet_value)
+        entry.im_arg
       )
     }
 
@@ -182,8 +182,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
     // TODO should we deep walk `entry.arg_t`?
 
     for (const entry of entries) {
-      const im_arg = solution.find_or_fail(ctx, entry.not_yet_value)
-      const im_arg_core = readback(ctx, entry.arg_t, im_arg)
+      const im_arg_core = readback(ctx, entry.arg_t, entry.im_arg)
       // DEBUG
       // console.log("- inserting im-ap arg:", im_arg_core.repr())
       target = new Exps.ImApCore(target, im_arg_core)

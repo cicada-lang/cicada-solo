@@ -135,12 +135,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
     return new Exps.ImFnCore(this.field_name, fresh_name, fn_core)
   }
 
-  insert_im_ap(
-    ctx: Ctx,
-    arg: Exp,
-    target_core: Core,
-    entries: Array<ImApInsertionEntry>
-  ): { t: Value; core: Core } {
+  solve_im_ap(ctx: Ctx, arg: Exp): Solution {
     const fresh_name = ctx.freshen(this.field_name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
@@ -155,10 +150,36 @@ export class ConsImPiValue extends Exps.ImPiValue {
       )
     }
 
+    return ret_t.solve_im_ap(ctx, arg)
+  }
+
+  insert_im_ap(
+    ctx: Ctx,
+    arg: Exp,
+    target_core: Core,
+    entries: Array<ImApInsertionEntry>
+  ): { t: Value; core: Core } {
+    const fresh_name = ctx.freshen(this.field_name)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
+    const solution = this.solve_im_ap(ctx, arg)
+    const im_arg = solution.find_or_fail(ctx, not_yet_value)
+    const ret_t = this.ret_t_cl.apply(im_arg)
+
+    if (!(ret_t instanceof Exps.ImPiValue)) {
+      throw new Trace(
+        [
+          `I expect ret_t to be Exps.ImPiValue,`,
+          `  class name: ${ret_t.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
     return ret_t.insert_im_ap(ctx, arg, target_core, [
       ...entries,
       {
         arg_t: this.arg_t,
+        im_arg,
         not_yet_value,
       },
     ])

@@ -40,4 +40,6 @@ export abstract class ImPiValue
     target_core: Core,
     entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core }
+
+  abstract solve_im_ap(ctx: Ctx, arg: Exp): Solution
 }

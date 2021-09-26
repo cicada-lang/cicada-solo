@@ -2,6 +2,7 @@ import { Neutral } from "../../neutral"
 import { Normal } from "../../normal"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
+import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class NatIndNeutral extends Neutral {
@@ -25,5 +26,17 @@ export class NatIndNeutral extends Neutral {
       this.base.readback_normal(ctx),
       this.step.readback_normal(ctx)
     )
+  }
+
+  unify(solution: Solution, that: Neutral): Solution {
+    if (that instanceof NatIndNeutral) {
+      solution = this.target.unify(solution, that.target)
+      solution = this.motive.unify(solution, that.motive)
+      solution = this.base.unify(solution, that.base)
+      solution = this.step.unify(solution, that.step)
+      return solution
+    } else {
+      return Solution.failure
+    }
   }
 }

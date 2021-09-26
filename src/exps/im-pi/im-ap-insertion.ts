@@ -7,6 +7,7 @@ import { Closure } from "../closure"
 
 export interface ImApInsertionEntry {
   arg_t: Value
+  im_arg: Value
   not_yet_value: Exps.NotYetValue
 }
 

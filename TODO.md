@@ -1,3 +1,7 @@
+- refactor `unify` of `Value`, `Neutral` and `Normal`
+
+- [refactor] `base-im-pi-value` -- `isnert_im_ap`
+
 - `im-pi-value` -- return solution back
 
 - [maybe] we do not need `deep_walk`

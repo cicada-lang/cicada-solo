@@ -23,7 +23,8 @@ export class NotYetValue extends Value {
 
   unify(solution: Solution, that: Value): Solution {
     if (that instanceof Exps.NotYetValue) {
-      return this.neutral.unify(solution.unify(this.t, that.t), that.neutral)
+      return solution
+      // return this.neutral.unify(solution.unify(this.t, that.t), that.neutral)
     } else {
       return Solution.failure
     }
