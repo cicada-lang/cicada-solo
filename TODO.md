@@ -1,8 +1,8 @@
+- [refactor] `base-im-pi-value` -- `isnert_im_ap`
+
 - [refactor] `unify` of `Value`, `Neutral` and `Normal`
 
 - `not-yet-value ` -- fix `unify`
-
-- [refactor] `base-im-pi-value` -- `isnert_im_ap`
 
 - [maybe] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
 
