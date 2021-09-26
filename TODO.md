@@ -1,8 +1,12 @@
-- refactor `unify` of `Value`, `Neutral` and `Normal`
+- `ch11` use `cong` with implicit arguments
+- `ch12` use `cong` with implicit arguments
+- `ch16` use `cong` with implicit arguments
 
 - [refactor] `base-im-pi-value` -- `isnert_im_ap`
 
-- use implicit to implement `cong` by `replace` -- `from` and `to`
+- [refactor] `unify` of `Value`, `Neutral` and `Normal`
+
+- `not-yet-value ` -- fix `unify`
 
 # implicit
 
