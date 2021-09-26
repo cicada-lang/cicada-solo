@@ -26,4 +26,8 @@ export class Add1Value extends Value {
       return Solution.failure
     }
   }
+
+  deep_walk(ctx: Ctx, solution: Solution): Value {
+    return new Add1Value(this.prev.deep_walk(ctx, solution))
+  }
 }

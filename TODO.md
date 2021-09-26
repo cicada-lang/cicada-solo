@@ -1,4 +1,3 @@
-- nat/add1-value -- `deep_walk`
 - not-yet-value -- `deep_walk`
 
 - absurd/absurd-value -- `deep_walk`
