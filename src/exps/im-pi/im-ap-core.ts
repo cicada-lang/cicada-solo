@@ -22,7 +22,7 @@ export class ImApCore extends Core {
   }
 
   ap_args_repr(): Array<string> {
-    const arg = `given ${this.arg.repr()}`
+    const arg = `implicit ${this.arg.repr()}`
 
     if (has_ap_args_repr(this.target)) {
       return [...this.target.ap_args_repr(), arg]

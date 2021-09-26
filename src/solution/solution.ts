@@ -57,25 +57,40 @@ export abstract class Solution {
   }
 
   unify(x: Value, y: Value): Solution {
+    // DEBUG
+    // if (Solution.logic_var_p(x) && Solution.logic_var_name(x) === "from") {
+    //   console.dir({
+    //     x,
+    //     y,
+    //     x_walk: this.walk(x),
+    //     y_walk: this.walk(y),
+    //   }, {depth: 4})
+    // }
+
     x = this.walk(x)
     y = this.walk(y)
 
-    if (Solution.logic_var_p(x) && Solution.logic_var_p(y)) {
-      if (Solution.logic_var_name(x) === Solution.logic_var_name(x)) {
-        return this
-      } else {
-        return Solution.failure
-      }
+    if (
+      Solution.logic_var_p(x) &&
+      Solution.logic_var_p(y) &&
+      Solution.logic_var_name(x) === Solution.logic_var_name(x)
+    ) {
+      return this
     } else if (Solution.logic_var_p(x)) {
       // DEBUG
-      // console.dir(Solution.logic_var_name(x))
       // if (Solution.logic_var_name(x) === "from") {
+      //   console.log("logic_var_name(x) === from")
       //   console.dir(y)
       // }
 
       // TODO occur check
       return this.extend(Solution.logic_var_name(x), y)
     } else if (Solution.logic_var_p(y)) {
+      // DEBUG
+      // if (Solution.logic_var_name(y) === "from") {
+      //   console.dir(x)
+      // }
+
       // TODO occur check
       return this.extend(Solution.logic_var_name(y), x)
     } else {
