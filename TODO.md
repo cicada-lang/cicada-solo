@@ -1,5 +1,5 @@
-- equal/equal-value -- `deep_walk`
 - nat/add1-value -- `deep_walk`
+- not-yet-value -- `deep_walk`
 
 - absurd/absurd-value -- `deep_walk`
 - cls/fulfilled-cls-value -- `deep_walk`
@@ -32,7 +32,7 @@
 - either/inr-value -- `deep_walk`
 - either/inl-value -- `deep_walk`
 - either/either-value -- `deep_walk`
-- not-yet-value -- `deep_walk`
+
 - trivial/sole-value -- `deep_walk`
 - trivial/trivial-value -- `deep_walk`
 
