@@ -161,25 +161,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
 
     const solution = this.solve_im_ap(ctx, arg)
 
-    // TODO should we extend `ctx`?
-
-    for (const entry of entries) {
-      ctx = ctx.extend(
-        Solution.logic_var_name(entry.not_yet_value),
-        entry.arg_t,
-        entry.im_arg
-      )
-    }
-
-    ctx = ctx.extend(
-      Solution.logic_var_name(not_yet_value),
-      this.arg_t,
-      solution.find_or_fail(ctx, not_yet_value)
-    )
-
     let target = target_core
-
-    // TODO should we deep walk `entry.arg_t`?
 
     for (const entry of entries) {
       const im_arg_core = readback(ctx, entry.arg_t, entry.im_arg)
