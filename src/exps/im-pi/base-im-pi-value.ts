@@ -179,12 +179,17 @@ export class BaseImPiValue extends Exps.ImPiValue {
     for (const entry of entries) {
       const im_arg = solution.find_or_fail(ctx, entry.not_yet_value)
       const im_arg_core = readback(ctx, entry.arg_t, im_arg)
+      // DEBUG
+      // console.log("- inserting im-ap arg:", im_arg_core.repr())
       target = new Exps.ImApCore(target, im_arg_core)
     }
 
     const im_arg = solution.find_or_fail(ctx, not_yet_value)
     const im_arg_core = readback(ctx, this.arg_t, im_arg)
+      // DEBUG
+      // console.log("- inserting im-ap arg:", im_arg_core.repr())
     target = new Exps.ImApCore(target, im_arg_core)
+
 
     const core = new Exps.ApCore(target, inferred_arg.core)
     const real_ret_t = expect(ctx, this.ret_t_cl.apply(im_arg), Exps.PiValue)
