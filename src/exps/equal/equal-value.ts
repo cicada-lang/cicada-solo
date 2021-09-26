@@ -37,12 +37,4 @@ export class EqualValue extends Value {
       return Solution.failure
     }
   }
-
-  deep_walk(ctx: Ctx, solution: Solution): Value {
-    return new EqualValue(
-      this.t.deep_walk(ctx, solution),
-      this.from.deep_walk(ctx, solution),
-      this.to.deep_walk(ctx, solution)
-    )
-  }
 }

@@ -2,47 +2,6 @@
 
 - [refactor] `base-im-pi-value` -- `isnert_im_ap`
 
-- `im-pi-value` -- return solution back
-
-- [maybe] we do not need `deep_walk`
-
-- not-yet-value -- `deep_walk`
-
-- absurd/absurd-value -- `deep_walk`
-- cls/fulfilled-cls-value -- `deep_walk`
-- cls/cons-cls-value -- `deep_walk`
-- cls/cls-value -- `deep_walk`
-- cls/obj-value -- `deep_walk`
-- cls/nil-cls-value -- `deep_walk`
-- sigma/cons-value -- `deep_walk`
-- sigma/sigma-value -- `deep_walk`
-- list/li-value -- `deep_walk`
-- list/list-value -- `deep_walk`
-- list/nil-value -- `deep_walk`
-- pi/fn-value -- `deep_walk`
-- pi/pi-value -- `deep_walk`
-
-- equal/same-value -- `deep_walk`
-- type-value -- `deep_walk`
-- vector/vector-value -- `deep_walk`
-- vector/vecnil-value -- `deep_walk`
-- vector/vec-value -- `deep_walk`
-- str/str-value -- `deep_walk`
-- str/quote-value -- `deep_walk`
-
-- nat/nat-value -- `deep_walk`
-- nat/zero-value -- `deep_walk`
-- im-pi/im-pi-value -- `deep_walk`
-- im-pi/base-im-pi-value -- `deep_walk`
-- im-pi/im-fn-value -- `deep_walk`
-- im-pi/cons-im-pi-value -- `deep_walk`
-- either/inr-value -- `deep_walk`
-- either/inl-value -- `deep_walk`
-- either/either-value -- `deep_walk`
-
-- trivial/sole-value -- `deep_walk`
-- trivial/trivial-value -- `deep_walk`
-
 - use implicit to implement `cong` by `replace` -- `from` and `to`
 
 # implicit
