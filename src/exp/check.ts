@@ -20,10 +20,10 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
         const t_exp = readback(ctx, new Exps.TypeValue(), t)
 
         // DEBUG
-        console.log("inferred:", u_exp.repr())
-        console.dir(u, { depth: 4 })
-        console.log("expected:", t_exp.repr())
-        console.dir(t, { depth: 4 })
+        // console.log("inferred:", u_exp.repr())
+        // console.dir(u, { depth: 4 })
+        // console.log("expected:", t_exp.repr())
+        // console.dir(t, { depth: 4 })
 
         throw new Trace(
           [
