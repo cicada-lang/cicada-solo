@@ -14,7 +14,6 @@ export abstract class Value {
     )
   }
 
-
   // TODO should be abstract
   // NOTE take `ctx` for `readback`
   deep_walk(ctx: Ctx, solution: Solution): Value {

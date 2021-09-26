@@ -1,6 +1,4 @@
-- `im-pi-value` -- `insert_im_ap` -- pass `outmost_ret_t_cl` down
-
-- [refactoring] `im-pi-value` -- return solution back
+- `im-pi-value` -- return solution back
 
 - [maybe] we do not need `deep_walk`
 

@@ -137,6 +137,15 @@ export class BaseImPiValue extends Exps.ImPiValue {
     return new Exps.ImFnCore(this.field_name, fresh_name, fn_core)
   }
 
+  solve_im_ap(ctx: Ctx, arg: Exp): Solution {
+    const fresh_name = ctx.freshen(this.field_name)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
+    const ret_t = expect(ctx, this.ret_t_cl.apply(not_yet_value), Exps.PiValue)
+    const inferred_arg = infer(ctx, arg)
+    return Solution.empty.unify_or_fail(ctx, ret_t.arg_t, inferred_arg.t)
+  }
+
   insert_im_ap(
     ctx: Ctx,
     arg: Exp,
@@ -150,11 +159,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
 
     const inferred_arg = infer(ctx, arg)
 
-    const solution = Solution.empty.unify_or_fail(
-      ctx,
-      ret_t.arg_t,
-      inferred_arg.t
-    )
+    const solution = this.solve_im_ap(ctx, arg)
 
     // TODO should we extend `ctx`?
 
@@ -186,20 +191,15 @@ export class BaseImPiValue extends Exps.ImPiValue {
 
     const im_arg = solution.find_or_fail(ctx, not_yet_value)
     const im_arg_core = readback(ctx, this.arg_t, im_arg)
-      // DEBUG
-      // console.log("- inserting im-ap arg:", im_arg_core.repr())
+    // DEBUG
+    // console.log("- inserting im-ap arg:", im_arg_core.repr())
     target = new Exps.ImApCore(target, im_arg_core)
 
+    const final_ret_t = expect(ctx, this.ret_t_cl.apply(im_arg), Exps.PiValue)
 
-    const core = new Exps.ApCore(target, inferred_arg.core)
-    const real_ret_t = expect(ctx, this.ret_t_cl.apply(im_arg), Exps.PiValue)
-
-    // TODO We need to `deep_walk` the result type.
-
-    const t = real_ret_t.ret_t_cl
-      .apply(evaluate(ctx.to_env(), inferred_arg.core))
-      .deep_walk(ctx, solution)
-
-    return { t, core }
+    return {
+      t: final_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
+      core: new Exps.ApCore(target, inferred_arg.core),
+    }
   }
 }

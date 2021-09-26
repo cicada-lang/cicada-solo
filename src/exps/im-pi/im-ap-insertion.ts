@@ -3,6 +3,7 @@ import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import * as Exps from "../../exps"
+import { Closure } from "../closure"
 
 export interface ImApInsertionEntry {
   arg_t: Value

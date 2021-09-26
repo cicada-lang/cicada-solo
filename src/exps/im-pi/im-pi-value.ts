@@ -21,6 +21,8 @@ export abstract class ImPiValue
 {
   instanceofImPiValue = true
 
+  abstract ret_t_cl: Closure
+
   abstract readback_eta_expansion(ctx: Ctx, value: Value): Core
 
   abstract insert_im_fn(
