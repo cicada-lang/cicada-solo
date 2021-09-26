@@ -1,5 +1,3 @@
-- [tlt] `ch16` use `cong` with implicit arguments
-
 - `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
 
 - [refactor] `base-im-pi-value` -- `isnert_im_ap`
