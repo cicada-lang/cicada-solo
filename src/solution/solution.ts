@@ -57,14 +57,19 @@ export abstract class Solution {
   }
 
   unify(x: Value, y: Value): Solution {
-    // DEBUG
-    // if (Solution.logic_var_p(x) && Solution.logic_var_name(x) === "from") {
-    //   console.dir({
-    //     x,
-    //     y,
-    //     x_walk: this.walk(x),
-    //     y_walk: this.walk(y),
-    //   }, {depth: 4})
+    // {
+    //   // DEBUG
+    //   if (Solution.logic_var_p(x) && Solution.logic_var_name(x) === "from") {
+    //     console.dir(
+    //       {
+    //         x,
+    //         y,
+    //         x_walk: this.walk(x),
+    //         y_walk: this.walk(y),
+    //       },
+    //       { depth: 4 }
+    //     )
+    //   }
     // }
 
     x = this.walk(x)
@@ -73,22 +78,27 @@ export abstract class Solution {
     if (
       Solution.logic_var_p(x) &&
       Solution.logic_var_p(y) &&
-      Solution.logic_var_name(x) === Solution.logic_var_name(x)
+      Solution.logic_var_name(x) === Solution.logic_var_name(y)
     ) {
       return this
     } else if (Solution.logic_var_p(x)) {
-      // DEBUG
-      // if (Solution.logic_var_name(x) === "from") {
-      //   console.log("logic_var_name(x) === from")
-      //   console.dir(y)
+      // {
+      //   // DEBUG
+      //   if (Solution.logic_var_name(x) === "from") {
+      //     console.log("We know x === from, showing y:")
+      //     console.dir(y)
+      //   }
       // }
 
       // TODO occur check
       return this.extend(Solution.logic_var_name(x), y)
     } else if (Solution.logic_var_p(y)) {
-      // DEBUG
-      // if (Solution.logic_var_name(y) === "from") {
-      //   console.dir(x)
+      // {
+      //   // DEBUG
+      //   if (Solution.logic_var_name(y) === "from") {
+      //     console.log("We know y === from, showing x:")
+      //     console.dir(x)
+      //   }
       // }
 
       // TODO occur check

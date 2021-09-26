@@ -1,3 +1,6 @@
+- [tlt] `ch12` use `cong` with implicit arguments
+- [tlt] `ch16` use `cong` with implicit arguments
+
 - `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
 
 - [refactor] `base-im-pi-value` -- `isnert_im_ap`
@@ -30,10 +33,6 @@
 - `Subst.unify` occur check -- use `free_names`
 
 - [stdlib] try implicit argument in `stdlib`
-
-- [tlt] `ch11` use `cong` with implicit arguments
-- [tlt] `ch12` use `cong` with implicit arguments
-- [tlt] `ch16` use `cong` with implicit arguments
 
 # use `unify` to replace `readback`
 
