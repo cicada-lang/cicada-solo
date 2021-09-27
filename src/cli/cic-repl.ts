@@ -28,7 +28,7 @@ export class CicRepl extends Repl {
     this.files.faked[this.path] += text
   }
 
-  async execute(text: string): Promise<void> {
+  private async execute(text: string): Promise<void> {
     const mod = await this.library.load(this.path)
 
     try {
