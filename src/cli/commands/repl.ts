@@ -1,4 +1,5 @@
 import { CicRepl } from "../cic-repl"
+
 export const command = "repl [dir]"
 export const description = "Run interactive REPL"
 export const builder = {}
