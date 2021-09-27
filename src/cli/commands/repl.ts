@@ -1,4 +1,4 @@
-import { Repl } from "../repl"
+import { CicRepl } from "../cic-repl"
 export const command = "repl [dir]"
 export const description = "Run interactive REPL"
 export const builder = {}
@@ -9,6 +9,6 @@ type Argv = {
 
 export const handler = async (argv: Argv) => {
   const dir = argv["dir"] || process.cwd()
-  const repl = new Repl({ dir })
+  const repl = new CicRepl({ dir })
   await repl.run()
 }
