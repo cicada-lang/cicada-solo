@@ -1,10 +1,10 @@
 import { Library } from "../../library"
 import { FakeFileResource } from "../../library/file-resources"
 import pt from "@cicada-lang/partech"
-const pkg = require("../../../package.json")
 import Readline from "readline"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
+const pkg = require("../../../package.json")
 
 export class Repl {
   rl = Readline.createInterface({
@@ -23,7 +23,7 @@ export class Repl {
       faked: { [this.path]: "" },
     })
     this.library = new Library({ files: this.files })
-    this.listen()
+    this.rl.on("line", (line) => this.handle_line(line))
   }
 
   greeting(): void {
@@ -36,11 +36,11 @@ export class Repl {
 
   prompt(): void {
     const depth = pt.lexers.common.parens_depth(this.text)
-    this.rl.setPrompt(this.createPrompt(depth))
+    this.rl.setPrompt(this.create_prompt(depth))
     this.rl.prompt()
   }
 
-  private createPrompt(depth: number): string {
+  private create_prompt(depth: number): string {
     if (depth === 0) {
       return "> "
     } else {
@@ -72,49 +72,47 @@ export class Repl {
     this.files.faked[this.path] += text
   }
 
-  private listen(): void {
-    let lock = false
+  lock = false
 
-    this.rl.on("line", async (line) => {
-      const text = (this.text + "\n" + line).trim()
+  private async handle_line(line: string): Promise<void> {
+    const text = (this.text + "\n" + line).trim()
 
-      const result = pt.lexers.common.parens_check(text)
+    const result = pt.lexers.common.parens_check(text)
 
-      if (lock) {
-        this.lines.push(line)
-        return
-      }
+    if (this.lock) {
+      this.lines.push(line)
+      return
+    }
 
-      if (result.kind === "lack") {
-        this.lines.push(line)
-      } else {
-        this.lines = []
-      }
+    if (result.kind === "lack") {
+      this.lines.push(line)
+    } else {
+      this.lines = []
+    }
 
-      if (result.kind === "balance") {
-        lock = true
-        await this.commit(text)
-        lock = false
-      }
+    if (result.kind === "balance") {
+      this.lock = true
+      await this.commit(text)
+      this.lock = false
+    }
 
-      if (result.kind === "mismatch") {
-        this.log_parens_error({
-          msg: "Parentheses mismatch",
-          token: result.token,
-          text,
-        })
-      }
+    if (result.kind === "mismatch") {
+      this.log_parens_error({
+        msg: "Parentheses mismatch",
+        token: result.token,
+        text,
+      })
+    }
 
-      if (result.kind === "excess") {
-        this.log_parens_error({
-          msg: "Parentheses mismatch",
-          token: result.token,
-          text,
-        })
-      }
+    if (result.kind === "excess") {
+      this.log_parens_error({
+        msg: "Parentheses mismatch",
+        token: result.token,
+        text,
+      })
+    }
 
-      this.prompt()
-    })
+    this.prompt()
   }
 
   private log_parens_error(opts: {
