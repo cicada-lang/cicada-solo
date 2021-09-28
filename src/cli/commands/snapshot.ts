@@ -1,7 +1,7 @@
 import { Library } from "../../library"
 import { LocalFileResource } from "../../library/file-resources"
 import { FakeFileResource } from "../../library/file-resources"
-import { Runners } from "../../api"
+import * as Runners from "../../runners"
 import find_up from "find-up"
 import Path from "path"
 import fs from "fs"

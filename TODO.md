@@ -1,7 +1,3 @@
-- [refactor] move `cli/runners` to `api/`
-- [refactor] move `runner` & `runners` to top level
-- [refactor] move `logger` to `runner`
-
 - [refactor] `repls/readline-repl` queue lines
 - [refactor] `repls/readline-repl` inject ParensChecker
 

@@ -1,8 +1,8 @@
-import { Library } from "../../library"
-import { LocalFileResource } from "../../library/file-resources"
+import { Library } from "../library"
+import { LocalFileResource } from "../library/file-resources"
 import { Runner } from "../runner"
 import { SnapshotRunner, ErrorRunner } from "../runners"
-import { Logger } from "../logger"
+import { Logger } from "../runner/logger"
 
 export function createSpecialRunner(opts: {
   path: string

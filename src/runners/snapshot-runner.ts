@@ -1,16 +1,19 @@
-import { Library } from "../../library"
-import { FileResource } from "../../library/file-resource"
-import { Logger } from "../logger"
+import { Library } from "../library"
+import { LocalFileResource } from "../library/file-resources"
+import { Logger } from "../runner/logger"
 import { Runner } from "../runner"
+import fs from "fs"
 
-export class DefaultRunner extends Runner {
+export class SnapshotRunner extends Runner {
+  static extensions = [".cic", ".md"]
+
   library: Library
-  files: FileResource
+  files: LocalFileResource
   logger?: Logger
 
   constructor(opts: {
     library: Library
-    files: FileResource
+    files: LocalFileResource
     logger?: Logger
   }) {
     super()
@@ -23,11 +26,12 @@ export class DefaultRunner extends Runner {
     try {
       const mod = await this.library.load(path)
       await mod.run()
+      const file = this.files.src(path + ".out")
+      if (mod.all_output) {
+        await fs.promises.writeFile(file, mod.all_output)
+      }
       if (this.logger) {
         this.logger.info(path)
-      }
-      if (mod.all_output) {
-        console.log(mod.all_output)
       }
       return { error: undefined }
     } catch (error) {

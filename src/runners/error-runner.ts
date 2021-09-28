@@ -1,11 +1,11 @@
-import { Library } from "../../library"
-import { LocalFileResource } from "../../library/file-resources"
-import { Logger } from "../logger"
+import { Library } from "../library"
+import { LocalFileResource } from "../library/file-resources"
+import { Logger } from "../runner/logger"
 import { Runner } from "../runner"
 import fs from "fs"
 
-export class SnapshotRunner extends Runner {
-  static extensions = [".cic", ".md"]
+export class ErrorRunner extends Runner {
+  static extensions = [".error.cic", ".error.md"]
 
   library: Library
   files: LocalFileResource
@@ -26,21 +26,18 @@ export class SnapshotRunner extends Runner {
     try {
       const mod = await this.library.load(path)
       await mod.run()
-      const file = this.files.src(path + ".out")
-      if (mod.all_output) {
-        await fs.promises.writeFile(file, mod.all_output)
-      }
       if (this.logger) {
         this.logger.info(path)
       }
-      return { error: undefined }
+      return { error: new Error(`I expect to find error in the path: ${path}`) }
     } catch (error) {
       const report = await this.library.reporter.error(error, path)
-      console.error(report)
+      const file = this.files.src(path + ".out")
+      await fs.promises.writeFile(file, report)
       if (this.logger) {
         this.logger.error(path)
       }
-      return { error }
+      return { error: undefined }
     }
   }
 }
