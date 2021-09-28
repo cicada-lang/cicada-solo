@@ -1,2 +1,2 @@
 export * from "./module-loader"
-export * from "./module-loaders" // NOTE side-effect `ModuleLoader.register`
+export * from "../module-loaders" // NOTE side-effect `ModuleLoader.register`
