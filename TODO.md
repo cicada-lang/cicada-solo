@@ -1,7 +1,3 @@
-- `Repl` as an abstract class -- to use composition instead of inheritance
-
-  - take `handler` `Repl.run`
-
 - [refactor] `repls/readline-repl` queue lines
 - [refactor] `repls/readline-repl` inject ParensChecker
 

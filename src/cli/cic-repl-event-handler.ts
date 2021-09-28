@@ -1,11 +1,12 @@
-import { ReadlineRepl, ReplEvent } from "../repls/readline-repl"
+import { ReadlineRepl } from "../repls/readline-repl"
+import { ReplEvent, ReplEventHandler } from "../repl"
 import { FakeFileResource } from "../library/file-resources"
 import { Library } from "../library"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
 const pkg = require("../../package.json")
 
-export class CicRepl extends ReadlineRepl {
+export class CicReplEventHandler extends ReplEventHandler {
   files: FakeFileResource
   library: Library
   path: string

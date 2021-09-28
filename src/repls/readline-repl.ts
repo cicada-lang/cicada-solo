@@ -1,13 +1,14 @@
+import { Repl, ReplEvent, ReplEventHandler } from "../repl"
 import Readline from "readline"
 import pt from "@cicada-lang/partech"
 
-export type ReplEvent = {
-  text: string
-}
+export class ReadlineRepl extends Repl {
+  handler: ReplEventHandler
 
-export abstract class ReadlineRepl {
-  abstract greeting(): void
-  abstract handle(event: ReplEvent): Promise<void>
+  constructor(opts: { handler: ReplEventHandler }) {
+    super()
+    this.handler = opts.handler
+  }
 
   readline_cache?: Readline.Interface
 
@@ -15,7 +16,7 @@ export abstract class ReadlineRepl {
 
   run(): void {
     this.readline.on("line", (line) => this.handle_line(line))
-    this.greeting()
+    this.handler.greeting()
     this.prompt()
   }
 
@@ -68,7 +69,7 @@ export abstract class ReadlineRepl {
 
     if (result.kind === "balance") {
       this.lock = true
-      await this.handle({ text })
+      await this.handler.handle({ text })
       this.lock = false
     }
 
