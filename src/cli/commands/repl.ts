@@ -1,4 +1,4 @@
-import { CicReplEventHandler } from "../../api"
+import { CicReplEventHandler } from "../../repl-event-handlers"
 import { ReadlineRepl } from "../../repls/readline-repl"
 
 export const command = "repl [dir]"
