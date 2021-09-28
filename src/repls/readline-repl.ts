@@ -10,17 +10,9 @@ export class ReadlineRepl extends Repl {
     this.handler = opts.handler
   }
 
-  readline_cache?: Readline.Interface
+  private readline_cache?: Readline.Interface
 
-  lines: Array<string> = []
-
-  run(): void {
-    this.readline.on("line", (line) => this.handle_line(line))
-    this.handler.greeting()
-    this.prompt()
-  }
-
-  get readline(): Readline.Interface {
+  private get readline(): Readline.Interface {
     if (this.readline_cache) {
       return this.readline_cache
     } else {
@@ -31,12 +23,16 @@ export class ReadlineRepl extends Repl {
     }
   }
 
-  get text(): string {
-    return this.lines.join("\n")
+  run(): void {
+    this.readline.on("line", (line) => this.handle_line(line))
+    this.handler.greeting()
+    this.prompt()
   }
 
-  prompt(): void {
-    const depth = pt.lexers.common.parens_depth(this.text)
+  private lines: Array<string> = []
+
+  private prompt(): void {
+    const depth = pt.lexers.common.parens_depth(this.lines.join("\n"))
     this.readline.setPrompt(this.create_prompt(depth))
     this.readline.prompt()
   }
@@ -49,10 +45,10 @@ export class ReadlineRepl extends Repl {
     }
   }
 
-  lock = false
+  private lock = false
 
   private async handle_line(line: string): Promise<void> {
-    const text = (this.text + "\n" + line).trim()
+    const text = [...this.lines, line].join("\n")
 
     const result = pt.lexers.common.parens_check(text)
 
@@ -63,36 +59,27 @@ export class ReadlineRepl extends Repl {
 
     if (result.kind === "lack") {
       this.lines.push(line)
-    } else {
-      this.lines = []
-    }
-
-    if (result.kind === "balance") {
+    } else if (result.kind === "balance") {
       this.lock = true
       await this.handler.handle({ text })
       this.lock = false
-    }
 
-    if (result.kind === "mismatch") {
-      this.log_parens_error({
-        msg: "Parentheses mismatch",
-        token: result.token,
-        text,
-      })
-    }
+      this.lines = []
+      this.prompt()
+    } else if (result.kind === "mismatch") {
+      this.log_error({ msg: "Parentheses mismatch", token: result.token, text })
 
-    if (result.kind === "excess") {
-      this.log_parens_error({
-        msg: "Parentheses mismatch",
-        token: result.token,
-        text,
-      })
-    }
+      this.lines = []
+      this.prompt()
+    } else if (result.kind === "excess") {
+      this.log_error({ msg: "Parentheses mismatch", token: result.token, text })
 
-    this.prompt()
+      this.lines = []
+      this.prompt()
+    }
   }
 
-  private log_parens_error(opts: {
+  private log_error(opts: {
     msg: string
     token: pt.Token
     text: string

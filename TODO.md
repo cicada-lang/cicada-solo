@@ -1,6 +1,5 @@
 - [refactor] `repls/readline-repl` queue lines
 - [refactor] `repls/readline-repl` inject ParensChecker
-
 - [bugfix] `repls/readline-repl` multiple line input require an extra enter
 
 - `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`

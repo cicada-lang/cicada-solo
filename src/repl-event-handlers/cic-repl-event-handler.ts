@@ -33,12 +33,16 @@ export class CicReplEventHandler extends ReplEventHandler {
 
     try {
       const output = await mod.append(text).run()
-      console.log(output.trim())
+      if (output.trim()) {
+        console.log(output.trim())
+      }
     } catch (error) {
+      mod.undo(mod.index)
       const reporter = this.library.reporter
       const report = await reporter.error(error, this.path, { text })
-      console.error(report.trim())
-      mod.undo(mod.index)
+      if (report.trim()) {
+        console.error(report.trim())
+      }
     }
   }
 }
