@@ -1,4 +1,3 @@
-import { ReadlineRepl } from "../repls/readline-repl"
 import { ReplEvent, ReplEventHandler } from "../repl"
 import { FakeFileResource } from "../file-resources"
 import { Library } from "../library"
