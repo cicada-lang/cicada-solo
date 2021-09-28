@@ -24,7 +24,7 @@ export class ReadlineRepl extends Repl {
   }
 
   run(): void {
-    this.readline.on("line", (line) => this.handle_line(line))
+    this.readline.on("line", (line) => this.receive_line(line))
     this.handler.greeting()
     this.prompt()
   }
@@ -47,39 +47,64 @@ export class ReadlineRepl extends Repl {
 
   private lock = false
 
-  private async handle_line(line: string): Promise<void> {
-    const text = [...this.lines, line].join("\n")
-
-    const result = pt.lexers.common.parens_check(text)
-
-    if (this.lock) {
-      this.lines.push(line)
-      return
-    }
-
-    if (result.kind === "lack") {
-      this.lines.push(line)
-    } else if (result.kind === "balance") {
+  private async receive_line(line: string): Promise<void> {
+    this.lines.push(line)
+    if (!this.lock) {
       this.lock = true
-      await this.handler.handle({ text })
+      await this.process_lines()
       this.lock = false
-
-      this.lines = []
-      this.prompt()
-    } else if (result.kind === "mismatch") {
-      this.log_error({ msg: "Parentheses mismatch", token: result.token, text })
-
-      this.lines = []
-      this.prompt()
-    } else if (result.kind === "excess") {
-      this.log_error({ msg: "Parentheses mismatch", token: result.token, text })
-
-      this.lines = []
-      this.prompt()
     }
   }
 
-  private log_error(opts: {
+  private async process_lines(): Promise<void> {
+    while (true) {
+      const text = this.next_text_or_report_error()
+      if (text) {
+        await this.handler.handle({ text })
+      } else {
+        this.prompt()
+        return
+      }
+    }
+  }
+
+  private next_text_or_report_error(): string | undefined {
+    let text = ""
+    for (const [i, line] of this.lines.entries()) {
+      text += line + "\n"
+
+      const result = pt.lexers.common.parens_check(text)
+
+      if (result.kind === "lack") {
+        // go on next loop
+      } else if (result.kind === "balance") {
+        if (text.trim() === "") {
+          // go on next loop
+        } else {
+          this.lines = this.lines.splice(i + 1)
+          return text
+        }
+      } else if (result.kind === "mismatch") {
+        this.lines = [] // TODO report ignored lines
+        this.report_error({
+          msg: "Parentheses mismatch",
+          token: result.token,
+          text,
+        })
+        return
+      } else if (result.kind === "excess") {
+        this.lines = [] // TODO report ignored lines
+        this.report_error({
+          msg: "Parentheses mismatch",
+          token: result.token,
+          text,
+        })
+        return
+      }
+    }
+  }
+
+  private report_error(opts: {
     msg: string
     token: pt.Token
     text: string
