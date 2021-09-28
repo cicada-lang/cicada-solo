@@ -32,7 +32,8 @@ export const handler = async (argv: Argv) => {
   const files = await LocalFileResource.build(config)
   const library = new Library({ files })
 
-  console.log(library.info())
+  console.log(library.files.info())
+  console.log()
 
   if (argv.watch) {
     await watch(library, files)
@@ -70,7 +71,7 @@ async function watch(
   library: Library,
   files: LocalFileResource
 ): Promise<void> {
-  const src_dir = Path.resolve(files.root_dir, files.config.src)
+  const src_dir = Path.resolve(files.root, files.config.src)
   const watcher = chokidar.watch(src_dir)
 
   watcher.on("all", async (event, file) => {

@@ -5,37 +5,48 @@ import fs from "fs"
 import readdirp from "readdirp"
 
 export class LocalFileResource extends FileResource {
-  root_dir: string
+  root: string
   config: LibraryConfig
 
-  constructor(opts: { root_dir: string; config: LibraryConfig }) {
+  constructor(opts: { root: string; config: LibraryConfig }) {
     super()
-    this.root_dir = opts.root_dir
+    this.root = opts.root
     this.config = opts.config
   }
 
   static async build(file: string): Promise<LocalFileResource> {
     const text = await fs.promises.readFile(file, "utf8")
     return new LocalFileResource({
-      root_dir: Path.dirname(file),
+      root: Path.dirname(file),
       config: libraryConfigSchema.validate(JSON.parse(text)),
     })
+  }
+
+  info(): string {
+    return [
+      `file_resource:`,
+      `  kind: LocalFileResource`,
+      `  name: ${this.config.name}`,
+      `  version: ${this.config.version}`,
+      `  root: ${this.root}`,
+      `  src: ${this.config.src}`,
+    ].join("\n")
   }
 
   async get(path: string): Promise<string> {
     const file = Path.isAbsolute(path)
       ? path
-      : Path.resolve(this.root_dir, this.config.src, path)
+      : Path.resolve(this.root, this.config.src, path)
     return await fs.promises.readFile(file, "utf8")
   }
 
   async list(): Promise<Array<string>> {
-    const src_dir = Path.resolve(this.root_dir, this.config.src)
+    const src_dir = Path.resolve(this.root, this.config.src)
     const entries = await readdirp.promise(src_dir)
     return entries.map(({ path }) => path)
   }
 
   src(path: string): string {
-    return Path.resolve(this.root_dir, this.config.src, path)
+    return Path.resolve(this.root, this.config.src, path)
   }
 }

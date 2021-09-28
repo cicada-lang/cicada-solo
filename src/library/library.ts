@@ -26,13 +26,4 @@ export class Library {
   get reporter(): Reporter {
     return new Reporter({ files: this.files })
   }
-
-  info(): string {
-    return [
-      `file-resource:`,
-      `  name: ${this.files.config.name}`,
-      `  version: ${this.files.config.version}`,
-      ``,
-    ].join("\n")
-  }
 }

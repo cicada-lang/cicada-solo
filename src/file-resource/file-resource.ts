@@ -4,6 +4,8 @@ import { LibraryConfig } from "../library/library-config"
 export abstract class FileResource {
   abstract config: LibraryConfig
 
+  abstract info(): string
+
   abstract list(): Promise<Array<string>>
 
   abstract get(path: string): Promise<string>

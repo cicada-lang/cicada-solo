@@ -1,5 +1,3 @@
-- `FileResource.info`
-
 - [refactor] `FileResource` use `FileResourceConfig` instead of `LibraryConfig`
 - [maybe] `LibraryConfig` extends `FileResourceConfig`
 

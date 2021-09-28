@@ -18,11 +18,22 @@ export class FakeFileResource extends LocalFileResource {
       src: "src",
     })
 
-    super({ root_dir: dir, config })
+    super({ root: dir, config })
 
     this.dir = dir
     this.config = config
     this.faked = opts.faked || {}
+  }
+
+  info(): string {
+    return [
+      `file_resource:`,
+      `  kind: FakeFileResource`,
+      `  name: ${this.config.name}`,
+      `  version: ${this.config.version}`,
+      `  root: ${this.root}`,
+      `  src: ${this.config.src}`,
+    ].join("\n")
   }
 
   async list(): Promise<Array<string>> {
