@@ -7,11 +7,9 @@ import { Reporter } from "./reporter"
 export class Library {
   files: FileResource
   cache: Map<string, Module> = new Map()
-  config: LibraryConfig
 
   constructor(opts: { files: FileResource }) {
     this.files = opts.files
-    this.config = opts.files.config
   }
 
   async load(path: string): Promise<Module> {
@@ -31,9 +29,9 @@ export class Library {
 
   info(): string {
     return [
-      `library:`,
-      `  name: ${this.config.name}`,
-      `  version: ${this.config.version}`,
+      `file-resource:`,
+      `  name: ${this.files.config.name}`,
+      `  version: ${this.files.config.version}`,
       ``,
     ].join("\n")
   }

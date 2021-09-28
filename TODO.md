@@ -1,10 +1,13 @@
+- `FileResource.info`
+
+- [refactor] `FileResource` use `FileResourceConfig` instead of `LibraryConfig`
+- [maybe] `LibraryConfig` extends `FileResourceConfig`
+
 - [refactor] `repls/readline-repl` queue lines
 - [refactor] `repls/readline-repl` inject ParensChecker
 
 - [bugfix] `repls/readline-repl` multiple line input require an extra enter
 
-- [refactor] `FileResource` use `FileResourceConfig` instead of `LibraryConfig`
-- [refactor] `LibraryConfig` extends `FileResourceConfig`
 
 - `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
 
