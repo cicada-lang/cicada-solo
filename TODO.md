@@ -1,9 +1,14 @@
-- move `FileResource` up
-- `FileResource` use `FileResourceConfig` instead of `LibraryConfig`
+- `Repl` as an abstract class -- to use composition instead of inheritance
 
-- [refactor] `infra/repl` queue lines
-- [refactor] `infra/repl` inject ParensChecker
-- [bugfix] `repl` multiple line input require an extra enter
+  - take `handler` `Repl.run`
+
+- [refactor] `repls/readline-repl` queue lines
+- [refactor] `repls/readline-repl` inject ParensChecker
+
+- [bugfix] `repls/readline-repl` multiple line input require an extra enter
+
+- [refactor] move `FileResource` up
+- [refactor] `FileResource` use `FileResourceConfig` instead of `LibraryConfig`
 
 - `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
 

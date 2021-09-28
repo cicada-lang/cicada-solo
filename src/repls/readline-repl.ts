@@ -5,7 +5,7 @@ export type ReplEvent = {
   text: string
 }
 
-export abstract class Repl {
+export abstract class ReadlineRepl {
   abstract greeting(): void
   abstract handle(event: ReplEvent): Promise<void>
 
