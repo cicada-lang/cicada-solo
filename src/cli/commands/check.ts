@@ -49,7 +49,7 @@ async function check(
   let errors: Array<unknown> = []
   for (const path of Object.keys(await files.all())) {
     const logger = new Logger({ tag: "check" })
-    const runner = Runners.createSpecialRunner({ path, library, files, logger })
+    const runner = Runners.create_special_runner({ path, library, files, logger })
     const { error } = await runner.run(path)
     if (error) {
       if (error instanceof Error) {
@@ -84,7 +84,7 @@ async function watch(
     library.cache.delete(path)
 
     const logger = new Logger({ tag: event })
-    const runner = Runners.createSpecialRunner({ path, library, files, logger })
+    const runner = Runners.create_special_runner({ path, library, files, logger })
     await runner.run(path)
   })
 }

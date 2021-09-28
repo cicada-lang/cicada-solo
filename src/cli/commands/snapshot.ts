@@ -33,7 +33,7 @@ export const handler = async (argv: Argv) => {
     : new FakeFileResource({ dir })
   const library = new Library({ files })
 
-  const runner = Runners.createSpecialRunner({ path, library, files })
+  const runner = Runners.create_special_runner({ path, library, files })
   const { error } = await runner.run(path)
   if (error) {
     process.exit(1)
