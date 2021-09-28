@@ -1,8 +1,8 @@
 import { ModuleLoader } from "../module"
-import { LibraryConfig } from "../library/library-config"
+import { FileResourceConfig } from "../file-resource"
 
 export abstract class FileResource {
-  abstract config: LibraryConfig
+  abstract config: FileResourceConfig
 
   abstract info(): string
 

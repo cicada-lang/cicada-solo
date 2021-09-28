@@ -1,14 +1,14 @@
 import { FileResource } from "../file-resource"
-import { LibraryConfig, libraryConfigSchema } from "../library"
+import { FileResourceConfig, fileResourceConfigSchema } from "../file-resource"
 import Path from "path"
 import fs from "fs"
 import readdirp from "readdirp"
 
 export class LocalFileResource extends FileResource {
   root: string
-  config: LibraryConfig
+  config: FileResourceConfig
 
-  constructor(opts: { root: string; config: LibraryConfig }) {
+  constructor(opts: { root: string; config: FileResourceConfig }) {
     super()
     this.root = opts.root
     this.config = opts.config
@@ -18,7 +18,7 @@ export class LocalFileResource extends FileResource {
     const text = await fs.promises.readFile(file, "utf8")
     return new LocalFileResource({
       root: Path.dirname(file),
-      config: libraryConfigSchema.validate(JSON.parse(text)),
+      config: fileResourceConfigSchema.validate(JSON.parse(text)),
     })
   }
 

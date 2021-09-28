@@ -1,18 +1,18 @@
 import { LocalFileResource } from "./local-file-resource"
-import { LibraryConfig, libraryConfigSchema } from "../library"
+import { FileResourceConfig, fileResourceConfigSchema } from "../file-resource"
 import fs from "fs"
 import Path from "path"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
 
 export class FakeFileResource extends LocalFileResource {
-  config: LibraryConfig
+  config: FileResourceConfig
   dir: string
   faked: Record<string, string>
 
   constructor(opts: { dir: string; faked?: Record<string, string> }) {
     const dir = Path.resolve(opts.dir)
-    const config = libraryConfigSchema.validate({
+    const config = fileResourceConfigSchema.validate({
       name: `<fake-library-${nanoid()}>`,
       version: "0.0.0",
       src: "src",
