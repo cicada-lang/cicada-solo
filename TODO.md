@@ -1,5 +1,4 @@
-- [refactor] `repls/readline-repl` inject ParensChecker
-- [bugfix] `repls/readline-repl` multiple line input require an extra enter
+- [refactor] `repls/readline-repl` inject `ParensChecker`
 
 - update version to 0.2.0
 
