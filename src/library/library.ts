@@ -1,5 +1,5 @@
 import { Module } from "../module"
-import { ModuleLoader } from "../module-loader"
+import * as ModuleLoaders from "../module-loaders"
 import { FileResource } from "../file-resource"
 import { Reporter } from "./reporter"
 
@@ -17,7 +17,8 @@ export class Library {
       return cached
     }
 
-    const mod = await ModuleLoader.load(this, path)
+    const loader = ModuleLoaders.from_path(path)
+    const mod = await loader.load(this, path)
     this.cache.set(path, mod)
     return mod
   }

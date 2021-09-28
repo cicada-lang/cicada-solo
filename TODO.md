@@ -1,5 +1,3 @@
-- remove some of `ModuleLoader`'s static methods
-
 - `ModuleLoaders.can_handle_extension`
 
 - remove all of `ModuleLoader`'s static methods

@@ -14,23 +14,4 @@ export abstract class ModuleLoader {
   static can_handle(path: string): boolean {
     return this.loaders.some(({ extension }) => path.endsWith(extension))
   }
-
-  private static create(path: string): ModuleLoader {
-    for (const { extension, loader } of this.loaders) {
-      if (path.endsWith(extension)) {
-        return loader
-      }
-    }
-
-    throw new Error(
-      [
-        `When try to create ModuleLoader, I met unknown ext.`,
-        `  path: ${path}`,
-      ].join("\n")
-    )
-  }
-
-  static load(library: Library, path: string): Promise<Module> {
-    return this.create(path).load(library, path)
-  }
 }
