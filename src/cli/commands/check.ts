@@ -1,6 +1,6 @@
 import { Library } from "../../library"
 import { LocalFileResource } from "../../file-resources"
-import { ModuleLoader } from "../../module"
+import { ModuleLoader } from "../../module-loader"
 import { Logger } from "../../runner/logger"
 import * as Runners from "../../runners"
 import chokidar from "chokidar"

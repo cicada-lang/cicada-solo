@@ -1,5 +1,5 @@
 import { Module } from "../module"
-import { ModuleLoader } from "../module"
+import { ModuleLoader } from "../module-loader"
 import { FileResource } from "../file-resource"
 import { Reporter } from "./reporter"
 

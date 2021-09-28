@@ -1,4 +1,4 @@
-import { ModuleLoader } from "../module"
+import { ModuleLoader } from "../module-loader"
 import { FileResourceConfig } from "../file-resource"
 
 export abstract class FileResource {
