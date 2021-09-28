@@ -1,5 +1,5 @@
 import { LocalFileResource } from "./local-file-resource"
-import { FileResourceConfig, fileResourceConfigSchema } from "../file-resource"
+import { FileResource, FileResourceConfig } from "../file-resource"
 import fs from "fs"
 import Path from "path"
 import { customAlphabet } from "nanoid"
@@ -12,7 +12,7 @@ export class FakeFileResource extends LocalFileResource {
 
   constructor(opts: { dir: string; faked?: Record<string, string> }) {
     const dir = Path.resolve(opts.dir)
-    const config = fileResourceConfigSchema.validate({
+    const config = FileResource.configSchema.validate({
       name: `<fake-library-${nanoid()}>`,
       version: "0.0.0",
       src: "src",

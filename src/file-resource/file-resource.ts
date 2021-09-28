@@ -1,8 +1,20 @@
 import * as ModuleLoaders from "../module-loaders"
-import { FileResourceConfig } from "../file-resource"
+import ty from "@xieyuheng/ty"
+
+export type FileResourceConfig = {
+  name: string
+  version: string
+  src: string
+}
 
 export abstract class FileResource {
   abstract config: FileResourceConfig
+
+  static configSchema = ty.object<FileResourceConfig>({
+    name: ty.string(),
+    version: ty.semver(),
+    src: ty.string(),
+  })
 
   abstract info(): string
 
