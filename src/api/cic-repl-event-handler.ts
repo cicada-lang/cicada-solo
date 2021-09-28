@@ -1,6 +1,6 @@
 import { ReadlineRepl } from "../repls/readline-repl"
 import { ReplEvent, ReplEventHandler } from "../repl"
-import { FakeFileResource } from "../library/file-resources"
+import { FakeFileResource } from "../file-resources"
 import { Library } from "../library"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)

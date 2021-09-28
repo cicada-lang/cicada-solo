@@ -1,5 +1,5 @@
 import { Library } from "../library"
-import { LocalFileResource } from "../library/file-resources"
+import { LocalFileResource } from "../file-resources"
 import { Logger } from "../runner/logger"
 import { Runner } from "../runner"
 import fs from "fs"

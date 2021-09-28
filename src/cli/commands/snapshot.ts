@@ -1,6 +1,6 @@
 import { Library } from "../../library"
-import { LocalFileResource } from "../../library/file-resources"
-import { FakeFileResource } from "../../library/file-resources"
+import { LocalFileResource } from "../../file-resources"
+import { FakeFileResource } from "../../file-resources"
 import * as Runners from "../../runners"
 import find_up from "find-up"
 import Path from "path"

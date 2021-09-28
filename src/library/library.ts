@@ -1,6 +1,6 @@
 import { Module } from "../module"
 import { ModuleLoader } from "../module"
-import { FileResource } from "./file-resource"
+import { FileResource } from "../file-resource"
 import { LibraryConfig } from "./library-config"
 import { Reporter } from "./reporter"
 

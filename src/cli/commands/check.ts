@@ -1,5 +1,5 @@
 import { Library } from "../../library"
-import { LocalFileResource } from "../../library/file-resources"
+import { LocalFileResource } from "../../file-resources"
 import { ModuleLoader } from "../../module"
 import { Logger } from "../../runner/logger"
 import * as Runners from "../../runners"

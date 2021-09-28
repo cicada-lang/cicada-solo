@@ -1,5 +1,5 @@
 import { Library } from "../library"
-import { FileResource } from "../library/file-resource"
+import { FileResource } from "../file-resource"
 
 export abstract class Runner {
   abstract library: Library

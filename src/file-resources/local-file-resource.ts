@@ -1,5 +1,5 @@
 import { FileResource } from "../file-resource"
-import { LibraryConfig, libraryConfigSchema } from ".."
+import { LibraryConfig, libraryConfigSchema } from "../library"
 import Path from "path"
 import fs from "fs"
 import readdirp from "readdirp"

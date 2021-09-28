@@ -1,4 +1,4 @@
-import { FileResource } from "./file-resource"
+import { FileResource } from "../file-resource"
 import { Trace } from "../errors"
 import pt from "@cicada-lang/partech"
 
