@@ -11,8 +11,3 @@ export class CicModuleLoader extends ModuleLoader {
     return new Module({ library, path, stmts })
   }
 }
-
-ModuleLoader.register({
-  extension: ".cic",
-  loader: new CicModuleLoader(),
-})

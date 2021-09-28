@@ -15,11 +15,6 @@ export class MarkdownModuleLoader extends ModuleLoader {
   }
 }
 
-ModuleLoader.register({
-  extension: ".md",
-  loader: new MarkdownModuleLoader(),
-})
-
 function code_blocks(text: string): Array<{
   info: string
   text: string

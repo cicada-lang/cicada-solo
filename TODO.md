@@ -1,7 +1,3 @@
-- `ModuleLoaders.can_handle_extension`
-
-- remove all of `ModuleLoader`'s static methods
-
 - [refactor] `repls/readline-repl` queue lines
 - [refactor] `repls/readline-repl` inject ParensChecker
 

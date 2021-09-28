@@ -1,4 +1,4 @@
-import { ModuleLoader } from "../module-loader"
+import * as ModuleLoaders from "../module-loaders"
 import { FileResourceConfig } from "../file-resource"
 
 export abstract class FileResource {
@@ -13,7 +13,7 @@ export abstract class FileResource {
   async all(): Promise<Record<string, string>> {
     const files: Record<string, string> = {}
     for (const path of await this.list()) {
-      if (ModuleLoader.can_handle(path)) {
+      if (ModuleLoaders.can_handle_extension(path)) {
         files[path] = await this.get(path)
       }
     }
