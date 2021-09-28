@@ -4,7 +4,7 @@ import { Runner } from "./runner"
 import { SnapshotRunner, ErrorRunner } from "./runners"
 import { Logger } from "./logger"
 
-export function createRunner(opts: {
+export function createSpecialRunner(opts: {
   path: string
   library: Library
   files: LocalFileResource

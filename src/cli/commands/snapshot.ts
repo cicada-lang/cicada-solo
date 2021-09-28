@@ -1,7 +1,7 @@
 import { Library } from "../../library"
 import { LocalFileResource } from "../../library/file-resources"
 import { FakeFileResource } from "../../library/file-resources"
-import { createRunner } from "../create-runner"
+import { createSpecialRunner } from "../create-special-runner"
 import find_up from "find-up"
 import Path from "path"
 import fs from "fs"
@@ -33,7 +33,7 @@ export const handler = async (argv: Argv) => {
     : new FakeFileResource({ dir })
   const library = new Library({ files })
 
-  const runner = createRunner({ path, library, files })
+  const runner = createSpecialRunner({ path, library, files })
   const { error } = await runner.run(path)
   if (error) {
     process.exit(1)
