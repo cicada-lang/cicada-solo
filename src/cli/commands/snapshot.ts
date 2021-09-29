@@ -1,6 +1,7 @@
 import { Library } from "../../library"
 import { LocalFileResource } from "../../file-resources"
 import { FakeFileResource } from "../../file-resources"
+import { libraryConfigSchema } from "../../library"
 import * as Runners from "../../runners"
 import find_up from "find-up"
 import Path from "path"
@@ -27,11 +28,17 @@ export const handler = async (argv: Argv) => {
 
   const path = Path.resolve(argv["file"])
   const dir = Path.dirname(path)
-  const config = await find_up("library.json", { cwd: dir })
-  const files = config
-    ? await LocalFileResource.build(config)
+  const config_file = await find_up("library.json", { cwd: dir })
+  const config = config_file
+    ? libraryConfigSchema.validate(
+        JSON.parse(await fs.promises.readFile(config_file, "utf8"))
+      )
+    : FakeFileResource.fakeLibraryConfig()
+  const files = config_file
+    ? await LocalFileResource.build(config_file)
     : new FakeFileResource({ dir })
-  const library = new Library({ files })
+
+  const library = new Library({ files, config })
 
   const runner = Runners.create_special_runner({ path, library, files })
   const { error } = await runner.run(path)

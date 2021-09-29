@@ -1,6 +1,7 @@
 import { Library } from "../../library"
 import { LocalFileResource } from "../../file-resources"
 import { Logger } from "../../runner/logger"
+import { libraryConfigSchema } from "../../library"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
 import chokidar from "chokidar"
@@ -24,13 +25,16 @@ export const handler = async (argv: Argv) => {
     process.exit(1)
   }
 
-  const config = argv["library"]
+  const config_file = argv["library"]
     ? fs.lstatSync(argv["library"]).isFile()
       ? argv["library"]
       : argv["library"] + "/library.json"
     : process.cwd() + "/library.json"
-  const files = await LocalFileResource.build(config)
-  const library = new Library({ files })
+
+  const text = await fs.promises.readFile(config_file, "utf8")
+  const config = libraryConfigSchema.validate(JSON.parse(text))
+  const files = await LocalFileResource.build(config_file)
+  const library = new Library({ files, config })
 
   console.log(library.files.info())
   console.log()

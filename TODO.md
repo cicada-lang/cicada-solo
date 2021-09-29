@@ -1,6 +1,4 @@
-- [refactor] `Library` take `LibraryConfig`
-
-  - fix `Library.info`
+- fix `Library.info`
 
 - [refactor] no `LibraryConfig` in concrete `LocalFileResource` & `FakeFileResource`
 

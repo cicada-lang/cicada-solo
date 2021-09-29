@@ -11,6 +11,14 @@ export class FakeFileResource extends LocalFileResource {
   dir: string
   faked: Record<string, string>
 
+  static fakeLibraryConfig(): LibraryConfig {
+    return libraryConfigSchema.validate({
+      name: `<fake-library-${nanoid()}>`,
+      version: "0.0.0",
+      src: "src",
+    })
+  }
+
   constructor(opts: { dir: string; faked?: Record<string, string> }) {
     const dir = Path.resolve(opts.dir)
     const config = libraryConfigSchema.validate({

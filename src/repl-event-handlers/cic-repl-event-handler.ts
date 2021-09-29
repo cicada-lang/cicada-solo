@@ -16,7 +16,10 @@ export class CicReplEventHandler extends ReplEventHandler {
     super()
     this.path = `repl-file-${nanoid()}.cic`
     this.files = new FakeFileResource({ dir, faked: { [this.path]: "" } })
-    this.library = new Library({ files: this.files })
+    this.library = new Library({
+      config: FakeFileResource.fakeLibraryConfig(),
+      files: this.files,
+    })
   }
 
   greeting(): void {

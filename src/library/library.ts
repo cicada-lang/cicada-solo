@@ -1,13 +1,16 @@
+import { LibraryConfig } from "../library"
 import { Module } from "../module"
 import * as ModuleLoaders from "../module-loaders"
 import { FileResource } from "../file-resource"
 import { Reporter } from "./reporter"
 
 export class Library {
+  config: LibraryConfig
   files: FileResource
   cache: Map<string, Module> = new Map()
 
-  constructor(opts: { files: FileResource }) {
+  constructor(opts: { config: LibraryConfig; files: FileResource }) {
+    this.config = opts.config
     this.files = opts.files
   }
 
