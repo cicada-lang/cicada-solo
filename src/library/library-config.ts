@@ -14,7 +14,7 @@ export const libraryConfigSchema = ty.object<LibraryConfig>({
   src: ty.string(),
 })
 
-export function fakeLibraryConfig(): LibraryConfig {
+export function fake_library_config(): LibraryConfig {
   return libraryConfigSchema.validate({
     name: `<fake-library-${nanoid()}>`,
     version: "0.0.0",

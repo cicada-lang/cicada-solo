@@ -1,6 +1,6 @@
 import { ReplEvent, ReplEventHandler } from "../repl"
 import { FakeFileResource } from "../file-resources"
-import { Library, fakeLibraryConfig } from "../library"
+import { Library, fake_library_config } from "../library"
 import * as StmtOutputs from "../stmt-outputs"
 import chalk from "chalk"
 import { customAlphabet } from "nanoid"
@@ -18,7 +18,7 @@ export class CicReplEventHandler extends ReplEventHandler {
     this.path = `repl-file-${nanoid()}.cic`
     this.files = new FakeFileResource({ dir, faked: { [this.path]: "" } })
     this.library = new Library({
-      config: fakeLibraryConfig(),
+      config: fake_library_config(),
       files: this.files,
     })
   }
