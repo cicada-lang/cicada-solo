@@ -1,8 +1,10 @@
+- [refactor] `Library` take `LibraryConfig`
+
+  - fix `Library.info`
+
 - [refactor] no `LibraryConfig` in concrete `LocalFileResource` & `FakeFileResource`
 
   - should not build `FileResource` from config -- from `dir` instead
-
-- [refactor] fix `Library.info`
 
 - [refactor] `FileResource` should not depend on `ModuleLoaders.can_handle_extension`
 

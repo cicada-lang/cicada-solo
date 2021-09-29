@@ -1,6 +1,6 @@
 import { LocalFileResource } from "./local-file-resource"
 import { FileResource } from "../file-resource"
-import { LibraryConfig, libraryConfigSchema } from "../library/library-config"
+import { LibraryConfig, libraryConfigSchema } from "../library"
 import fs from "fs"
 import Path from "path"
 import { customAlphabet } from "nanoid"
