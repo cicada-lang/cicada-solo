@@ -12,10 +12,10 @@
   e: Trivial
   f: Nat
   g: String
-} 
-sole: Trivial 
-2: Nat 
-"c": String 
-sole: Trivial 
-5: Nat 
-"g": String 
+}
+sole: Trivial
+2: Nat
+"c": String
+sole: Trivial
+5: Nat
+"g": String

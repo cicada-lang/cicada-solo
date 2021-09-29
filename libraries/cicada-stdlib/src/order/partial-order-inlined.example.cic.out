@@ -10,4 +10,4 @@ same: Equal(Type, class {
   reflexive: (x: Element) -> Under(x, x)
   transitive: (x: Element, y: Element, z: Element, _: Under(x, y), _1: Under(y, z)) -> Under(x, z)
   antisymmetric: (x: Element, y: Element, _: Under(x, y), _1: Under(y, x)) -> Equal(Element, x, y)
-}) 
+})

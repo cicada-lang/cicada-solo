@@ -99,7 +99,7 @@ class {
   }
   component: (x: dom.Object) -> cod.Morphism(src.map(x), tar.map(x))
   naturality: (x: dom.Object, y: dom.Object, f: dom.Morphism(x, y)) -> Equal(cod.Morphism(src.map(x), tar.map(y)), cod.compose(src.map(x), tar.map(x), tar.map(y), component(x), tar.fmap(x, y, f)), cod.compose(src.map(x), src.map(y), tar.map(y), src.fmap(x, y, f), component(y)))
-}: Type 
+}: Type
 class {
   dom: class {
     Object: Type
@@ -201,7 +201,7 @@ class {
   }
   component: (x: dom.Object) -> cod.Morphism(src.map(x), tar.map(x))
   naturality: (x: dom.Object, y: dom.Object, f: dom.Morphism(x, y)) -> Equal(cod.Morphism(src.map(x), tar.map(y)), cod.compose(src.map(x), tar.map(x), tar.map(y), component(x), tar.fmap(x, y, f)), cod.compose(src.map(x), src.map(y), tar.map(y), src.fmap(x, y, f), component(y)))
-}: Type 
+}: Type
 same: Equal(Type, class {
   dom: class {
     Object: Type
@@ -404,4 +404,4 @@ same: Equal(Type, class {
   }
   component: (x: dom.Object) -> cod.Morphism(src.map(x), tar.map(x))
   naturality: (x: dom.Object, y: dom.Object, f: dom.Morphism(x, y)) -> Equal(cod.Morphism(src.map(x), tar.map(y)), cod.compose(src.map(x), tar.map(x), tar.map(y), component(x), tar.fmap(x, y, f)), cod.compose(src.map(x), src.map(y), tar.map(y), src.fmap(x, y, f), component(y)))
-}) 
+})

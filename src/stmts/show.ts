@@ -5,6 +5,7 @@ import { infer } from "../exp"
 import { evaluate } from "../core"
 import { readback } from "../value"
 import * as Exps from "../exps"
+import * as StmtOutputs from "../stmt-outputs"
 
 export class Show extends Stmt {
   exp: Exp
@@ -18,10 +19,13 @@ export class Show extends Stmt {
     const inferred = infer(mod.ctx, this.exp)
     const t = inferred.t
     const value = evaluate(mod.env, inferred.core)
-    const value_repr = readback(mod.ctx, t, value).repr()
-    const t_repr = readback(mod.ctx, new Exps.TypeValue(), t).repr()
-    const output = `${value_repr}: ${t_repr} `
-    mod.output(output)
+
+    mod.output(
+      new StmtOutputs.NormalTerm({
+        exp: readback(mod.ctx, t, value),
+        t: readback(mod.ctx, new Exps.TypeValue(), t),
+      })
+    )
   }
 
   repr(): string {

@@ -6,10 +6,10 @@
   a: Trivial = sole
   b: Nat = 2
   c: String
-} 
-sole: Trivial 
-2: Nat 
-"c": String 
+}
+sole: Trivial
+2: Nat
+"c": String
 {
   a: sole
   b: 2
@@ -22,9 +22,9 @@ sole: Trivial
   c: String = "c"
   d: String
   e: String
-} 
-sole: Trivial 
-2: Nat 
-"c": String 
-"d": String 
-"e": String 
+}
+sole: Trivial
+2: Nat
+"c": String
+"d": String
+"e": String

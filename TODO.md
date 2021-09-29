@@ -1,4 +1,4 @@
-- `Module` use structured output -- for color in repl
+- `cic-repl-event-handler` color `NormalTerm`
 
 - update version to 0.2.0
 

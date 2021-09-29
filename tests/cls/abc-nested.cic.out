@@ -14,7 +14,7 @@
     b: Nat
     c: String
   }
-} 
+}
 {
   a: sole
   b: 2
@@ -23,7 +23,7 @@
   a: Trivial
   b: Nat
   c: String
-} 
-sole: Trivial 
-2: Nat 
-"c": String 
+}
+sole: Trivial
+2: Nat
+"c": String

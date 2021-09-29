@@ -3,6 +3,7 @@ import { Stmt } from "../stmt"
 import { Env } from "../env"
 import { Ctx } from "../ctx"
 import { Parser } from "../parser"
+import { StmtOutput } from "../stmt-output"
 
 // NOTE
 // - A module belongs to a library.
@@ -14,7 +15,7 @@ import { Parser } from "../parser"
 
 interface ModuleEntry {
   stmt: Stmt
-  output?: string
+  output?: StmtOutput
 }
 
 export class Module {
@@ -64,24 +65,26 @@ export class Module {
       const entry = this.entries[this.index - 1]
 
       if (entry && entry.output) {
-        s += entry.output + "\n"
+        s += entry.output.repr() + "\n"
       }
     }
 
     return s
   }
 
-  output(output: string): void {
+  output(output: StmtOutput): void {
     const entry = this.entries[this.index]
     entry.output = output
   }
 
   get all_output(): string {
-    const output = this.entries
-      .filter((entry) => entry.output)
-      .map((entry) => entry.output)
-      .join("\n")
+    let s = ""
+    for (const entry of this.entries) {
+      if (entry.output) {
+        s += entry.output.repr() + "\n"
+      }
+    }
 
-    return output ? output + "\n" : ""
+    return s.trim() ? s : ""
   }
 }

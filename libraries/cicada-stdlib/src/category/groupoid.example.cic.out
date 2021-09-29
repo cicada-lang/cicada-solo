@@ -32,4 +32,4 @@ class {
     inverse_left: Equal(Morphism(x, x), compose(x, y, x, f, inv(x, y, f)), id(x))
     inverse_right: Equal(Morphism(y, y), compose(y, x, y, inv(x, y, f), f), id(y))
   }
-}: Type 
+}: Type
