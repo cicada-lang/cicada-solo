@@ -83,8 +83,14 @@ export class ReadlineRepl extends Repl {
         }
       } else {
         if (this.readline.line) {
+          const line = this.readline.line
           this.readline.write("", { ctrl: true, name: "a" })
           this.readline.write("", { ctrl: true, name: "k" })
+          // NOTE We should not erase last line on multi-line ctrl-c exit,
+          //   we implement this by write the line back, in the case of multi-line.
+          if (this.lines.length > 0) {
+            process.stdout.write(line)
+          }
         }
         if (this.lines.length > 0) {
           this.lines = []
@@ -105,6 +111,8 @@ export class ReadlineRepl extends Repl {
 
       for (const command of this.commands) {
         if (command.match(text)) {
+          // NOTE We do not call `this.prompt` here,
+          //   we let the command decide whether to call it.
           await command.run(this, text)
           return
         }
