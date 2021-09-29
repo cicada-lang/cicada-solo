@@ -1,5 +1,3 @@
-- update version to 0.2.0
-
 - `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
 
 - [refactor] `base-im-pi-value` -- `isnert_im_ap`
