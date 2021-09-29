@@ -1,8 +1,10 @@
 import { Repl, ReplEvent, ReplEventHandler } from "../repl"
 import Readline from "readline"
+import fs from "fs"
 
 export class ReadlineRepl extends Repl {
   handler: ReplEventHandler
+  executed_statements: Array<string> = []
 
   constructor(opts: { handler: ReplEventHandler }) {
     super()
@@ -22,11 +24,46 @@ export class ReadlineRepl extends Repl {
     }
   }
 
+  private prompt(): void {
+    const depth = this.parens_checker.depth(this.lines.join("\n"))
+    this.readline.setPrompt(this.create_prompt(depth))
+    this.readline.prompt()
+  }
+
+  private create_prompt(depth: number): string {
+    if (depth === 0) {
+      return "> "
+    } else {
+      return "." + "..".repeat(depth) + " "
+    }
+  }
+
   run(): void {
-    this.readline.on("line", (line) => this.receive_line(line))
+    this.listen_line()
     this.listen_sigint()
+    this.listen_history()
     this.handler.greeting()
     this.prompt()
+  }
+
+  private lines: Array<string> = []
+  private lock = false
+
+  private listen_line(): void {
+    this.readline.on("line", async (line) => {
+      this.lines.push(line)
+      if (!this.lock) {
+        this.lock = true
+        await this.process_lines()
+        this.lock = false
+      }
+    })
+  }
+
+  private listen_history(): void {
+    this.readline.on("history", (history) => {
+      // TODO
+    })
   }
 
   private listen_sigint(): void {
@@ -58,43 +95,24 @@ export class ReadlineRepl extends Repl {
     })
   }
 
-  private lines: Array<string> = []
-
-  private prompt(): void {
-    const depth = this.parens_checker.depth(this.lines.join("\n"))
-    this.readline.setPrompt(this.create_prompt(depth))
-    this.readline.prompt()
-  }
-
-  private create_prompt(depth: number): string {
-    if (depth === 0) {
-      return "> "
-    } else {
-      return "." + "..".repeat(depth) + " "
-    }
-  }
-
-  private lock = false
-
-  private async receive_line(line: string): Promise<void> {
-    this.lines.push(line)
-    if (!this.lock) {
-      this.lock = true
-      await this.process_lines()
-      this.lock = false
-    }
-  }
-
   private async process_lines(): Promise<void> {
     while (true) {
       const text = this.next_text_or_report_error()
       if (text) {
         if (text.trim() === ".help") {
-          console.log()
-          console.log("Press Ctrl+C to abort current statement, Ctrl+D to exit the REPL")
+          console.log(
+            [
+              ".help   Print this help message",
+              // ".load   Load a file into the REPL session",
+              // ".save   Save all executed statements in this REPL session to a file",
+              "",
+              "Press Ctrl+C to abort current statement, Ctrl+D to exit the REPL",
+            ].join("\n")
+          )
         } else {
           const event: ReplEvent = { text }
           await this.handler.handle(event)
+          this.executed_statements.push(text)
         }
       } else {
         this.prompt()
