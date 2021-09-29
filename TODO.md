@@ -1,3 +1,5 @@
+- [repl] helper commands in repl
+
 - `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
 
 - [refactor] `base-im-pi-value` -- `isnert_im_ap`
@@ -10,10 +12,6 @@
 - [maybe] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
 
   - create `ImFnInserter` and `ImApInserter` from `im-pi`'s `ret_t`
-
-# repl
-
-- helper commands in repl
 
 # narrator of elaboration
 

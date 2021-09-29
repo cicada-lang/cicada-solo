@@ -1,26 +1,17 @@
 import { ReplEvent, ReplEventHandler } from "../repl"
-import { FakeFileResource } from "../file-resources"
 import { Library } from "../library"
 import * as StmtOutputs from "../stmt-outputs"
 import chalk from "chalk"
-import { customAlphabet } from "nanoid"
-const nanoid = customAlphabet("1234567890abcdef", 16)
 const pkg = require("../../package.json")
 
 export class CicReplEventHandler extends ReplEventHandler {
-  files: FakeFileResource
   library: Library
   path: string
 
-  constructor(opts: { dir: string }) {
-    const { dir } = opts
+  constructor(opts: { library: Library; path: string }) {
     super()
-    this.path = `repl-file-${nanoid()}.cic`
-    this.files = new FakeFileResource({ dir, faked: { [this.path]: "" } })
-    this.library = new Library({
-      config: Library.fake_config(),
-      files: this.files,
-    })
+    this.path = opts.path
+    this.library = opts.library
   }
 
   greeting(): void {
@@ -30,7 +21,6 @@ export class CicReplEventHandler extends ReplEventHandler {
   async handle(event: ReplEvent): Promise<void> {
     const { text } = event
     await this.execute(text)
-    this.files.faked[this.path] += text
   }
 
   private async execute(text: string): Promise<void> {
