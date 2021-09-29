@@ -17,9 +17,7 @@ export abstract class FileResource {
   })
 
   abstract info(): string
-
   abstract list(): Promise<Array<string>>
-
   abstract get(path: string): Promise<string>
 
   async all(): Promise<Record<string, string>> {
