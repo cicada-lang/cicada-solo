@@ -1,11 +1,15 @@
+- [refactor] rename `FileResourceConfig` back to `LibraryConfig`
+
 - [refactor] no `FileResourceConfig` in concrete `LocalFileResource` & `FakeFileResource`
 
   - should not build `FileResource` from config -- from `dir` instead
 
-- [refactor] rename `FileResourceConfig` back to `LibraryConfig`
+- [refactor] fix `Library.info`
 
 - [refactor] `FileResource` should not depend on `ModuleLoaders.can_handle_extension`
+
 - [refactor] `repls/readline-repl` report ignored lines on error
+
 - `Module` use structured output -- for color in repl
 
 - update version to 0.2.0
