@@ -4,8 +4,9 @@ import fs from "fs"
 
 export class ReadlineRepl extends Repl {
   handler: ReplEventHandler
-  executed_statements: Array<string> = []
-  commands: Array<Command> = [new Help(), new Load(), new SaveAll()]
+  all_statements: Array<string> = []
+  successful_statements: Array<string> = []
+  commands: Array<Command> = [new Help(), new Load(), new Save(), new SaveAll()]
 
   constructor(opts: { handler: ReplEventHandler }) {
     super()
@@ -119,8 +120,11 @@ export class ReadlineRepl extends Repl {
       }
 
       const event: ReplEvent = { text }
-      await this.handler.handle(event)
-      this.executed_statements.push(text)
+      const successful = await this.handler.handle(event)
+      this.all_statements.push(text)
+      if (successful) {
+        this.successful_statements.push(text)
+      }
     }
   }
 
@@ -164,7 +168,7 @@ class Help extends Command {
     const lines = text.trim().split("\n")
     if (lines.length !== 1) return false
     const [line] = lines
-    return line.startsWith(".help")
+    return Boolean(line.match(/\.help\b/))
   }
 
   async run(repl: ReadlineRepl, text: string): Promise<void> {
@@ -180,7 +184,8 @@ class Help extends Command {
 
     console.log(
       [
-        ...commands,
+        "REPL commands:",
+        ...commands.map((command) => "  " + command),
         "",
         "Press Ctrl+C to abort current statement, Ctrl+D to exit the REPL",
       ].join("\n")
@@ -192,13 +197,13 @@ class Help extends Command {
 
 class SaveAll extends Command {
   name = "save_all"
-  description = "Save all executed statements in this REPL session to a file"
+  description = "Save all statements in this REPL session to a file"
 
   match(text: string): boolean {
     const lines = text.trim().split("\n")
     if (lines.length !== 1) return false
     const [line] = lines
-    return line.startsWith(".save_all")
+    return Boolean(line.match(/\.save_all\b/))
   }
 
   async run(repl: ReadlineRepl, text: string): Promise<void> {
@@ -210,7 +215,34 @@ class SaveAll extends Command {
       return
     }
 
-    await fs.promises.writeFile(path, repl.executed_statements.join("\n"))
+    await fs.promises.writeFile(path, repl.all_statements.join("\n"))
+    console.log(`Session saved to file: "${path}"`)
+
+    repl.prompt()
+  }
+}
+
+class Save extends Command {
+  name = "save"
+  description = "Save successful statements in this REPL session to a file"
+
+  match(text: string): boolean {
+    const lines = text.trim().split("\n")
+    if (lines.length !== 1) return false
+    const [line] = lines
+    return Boolean(line.match(/\.save\b/))
+  }
+
+  async run(repl: ReadlineRepl, text: string): Promise<void> {
+    const line = text.trim()
+    const path = line.slice(".save".length).trim()
+    if (!path) {
+      console.log("No file specified")
+      console.log("  .save <file>")
+      return
+    }
+
+    await fs.promises.writeFile(path, repl.successful_statements.join("\n"))
     console.log(`Session saved to file: "${path}"`)
 
     repl.prompt()
@@ -225,7 +257,7 @@ class Load extends Command {
     const lines = text.trim().split("\n")
     if (lines.length !== 1) return false
     const [line] = lines
-    return line.startsWith(".load")
+    return Boolean(line.match(/\.load\b/))
   }
 
   async run(repl: ReadlineRepl, text: string): Promise<void> {

@@ -19,12 +19,12 @@ export class CicReplEventHandler extends ReplEventHandler {
     console.log(`Type ".help" for more information`)
   }
 
-  async handle(event: ReplEvent): Promise<void> {
+  async handle(event: ReplEvent): Promise<boolean> {
     const { text } = event
-    await this.execute(text)
+    return await this.execute(text)
   }
 
-  private async execute(text: string): Promise<void> {
+  private async execute(text: string): Promise<boolean> {
     const mod = await this.library.load(this.path)
 
     try {
@@ -38,6 +38,7 @@ export class CicReplEventHandler extends ReplEventHandler {
           console.log(output.repr().trim())
         }
       }
+      return true
     } catch (error) {
       mod.undo(mod.index)
       const reporter = this.library.reporter
@@ -45,6 +46,7 @@ export class CicReplEventHandler extends ReplEventHandler {
       if (report.trim()) {
         console.error(report.trim())
       }
+      return false
     }
   }
 }

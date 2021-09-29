@@ -1,4 +1,3 @@
-- [repl] `readline-repl` -- `.save` -- do no save statements with error
 - [repl] `readline-repl` -- indent inputed line by `depth`
 
 - `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
