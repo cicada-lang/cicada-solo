@@ -47,7 +47,7 @@ export class ReadlineRepl extends Repl {
   }
 
   private lines: Array<string> = []
-  private lock = false
+  private lock: boolean = false
 
   private listen_line(): void {
     this.readline.on("line", async (line) => {
