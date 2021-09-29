@@ -24,6 +24,29 @@ export class ReadlineRepl extends Repl {
 
   run(): void {
     this.readline.on("line", (line) => this.receive_line(line))
+
+    let exit_attempt_count = 0
+    this.readline.on("SIGINT", () => {
+      if (this.lines.length === 0 && this.readline.line === "") {
+        exit_attempt_count++
+        if (exit_attempt_count === 1) {
+          console.log()
+          console.log("(To exit, press Ctrl+C again or Ctrl+D)")
+        } else if (exit_attempt_count > 1) {
+          this.readline.close()
+        }
+      } else {
+        if (this.readline.line) {
+          this.readline.write("", { ctrl: true, name: "a" })
+          this.readline.write("", { ctrl: true, name: "k" })
+        }
+        if (this.lines.length > 0) {
+          this.lines = []
+          this.readline.write("\n")
+        }
+      }
+    })
+
     this.handler.greeting()
     this.prompt()
   }
