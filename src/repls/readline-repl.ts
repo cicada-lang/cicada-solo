@@ -5,7 +5,7 @@ import fs from "fs"
 export class ReadlineRepl extends Repl {
   handler: ReplEventHandler
   executed_statements: Array<string> = []
-  commands: Array<Command> = [new Help()]
+  commands: Array<Command> = [new Help(), new Save()]
 
   constructor(opts: { handler: ReplEventHandler }) {
     super()
@@ -107,7 +107,7 @@ export class ReadlineRepl extends Repl {
 
       for (const command of this.commands) {
         if (command.match(text)) {
-          command.run(this, text)
+          await command.run(this, text)
           this.prompt()
           return
         }
@@ -148,7 +148,7 @@ abstract class Command {
   abstract name: string
   abstract description: string
   abstract match(text: string): boolean
-  abstract run(repl: ReadlineRepl, text: string): void
+  abstract run(repl: ReadlineRepl, text: string): Promise<void>
 }
 
 class Help extends Command {
@@ -162,7 +162,7 @@ class Help extends Command {
     return line.startsWith(".help")
   }
 
-  run(repl: ReadlineRepl, text: string): void {
+  async run(repl: ReadlineRepl, text: string): Promise<void> {
     const commands = repl.commands.map(
       ({ name, description }) => `.${name}   ${description}`
     )
@@ -176,5 +176,23 @@ class Help extends Command {
   }
 }
 
+class Save extends Command {
+  name = "save"
+  description = "Save all executed statements in this REPL session to a file"
+
+  match(text: string): boolean {
+    const lines = text.trim().split("\n")
+    if (lines.length !== 1) return false
+    const [line] = lines
+    return line.startsWith(".save")
+  }
+
+  async run(repl: ReadlineRepl, text: string): Promise<void> {
+    const line = text.trim()
+    const path = line.slice(".save".length).trim()
+    await fs.promises.writeFile(path, repl.executed_statements.join("\n"))
+    console.log(`Session saved to file: "${path}"`)
+  }
+}
+
 // ".load   Load a file into the REPL session",
-// ".save   Save all executed statements in this REPL session to a file",
