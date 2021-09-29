@@ -5,7 +5,7 @@ import fs from "fs"
 export class ReadlineRepl extends Repl {
   handler: ReplEventHandler
   executed_statements: Array<string> = []
-  commands: Array<Command> = [new Help(), new Save()]
+  commands: Array<Command> = [new Help(), new Load(), new Save()]
 
   constructor(opts: { handler: ReplEventHandler }) {
     super()
@@ -14,7 +14,7 @@ export class ReadlineRepl extends Repl {
 
   private readline_cache?: Readline.Interface
 
-  private get readline(): Readline.Interface {
+  get readline(): Readline.Interface {
     if (this.readline_cache) {
       return this.readline_cache
     } else {
@@ -25,7 +25,7 @@ export class ReadlineRepl extends Repl {
     }
   }
 
-  private prompt(): void {
+  prompt(): void {
     const depth = this.parens_checker.depth(this.lines.join("\n"))
     this.readline.setPrompt(this.create_prompt(depth))
     this.readline.prompt()
@@ -40,7 +40,7 @@ export class ReadlineRepl extends Repl {
   }
 
   run(): void {
-    this.listen_line()
+    this.readline.on("line", (line) => this.handle_line(line))
     this.listen_sigint()
     this.listen_history()
     this.handler.greeting()
@@ -50,15 +50,13 @@ export class ReadlineRepl extends Repl {
   private lines: Array<string> = []
   private lock: boolean = false
 
-  private listen_line(): void {
-    this.readline.on("line", async (line) => {
-      this.lines.push(line)
-      if (!this.lock) {
-        this.lock = true
-        await this.process_lines()
-        this.lock = false
-      }
-    })
+  async handle_line(line: string): Promise<void> {
+    this.lines.push(line)
+    if (!this.lock) {
+      this.lock = true
+      await this.process_lines()
+      this.lock = false
+    }
   }
 
   private listen_history(): void {
@@ -108,7 +106,6 @@ export class ReadlineRepl extends Repl {
       for (const command of this.commands) {
         if (command.match(text)) {
           await command.run(this, text)
-          this.prompt()
           return
         }
       }
@@ -166,6 +163,7 @@ class Help extends Command {
     const commands = repl.commands.map(
       ({ name, description }) => `.${name}   ${description}`
     )
+
     console.log(
       [
         ...commands,
@@ -173,6 +171,8 @@ class Help extends Command {
         "Press Ctrl+C to abort current statement, Ctrl+D to exit the REPL",
       ].join("\n")
     )
+
+    repl.prompt()
   }
 }
 
@@ -190,9 +190,39 @@ class Save extends Command {
   async run(repl: ReadlineRepl, text: string): Promise<void> {
     const line = text.trim()
     const path = line.slice(".save".length).trim()
+    if (!path) {
+      console.log("No file specified")
+      console.log("  .save <file>")
+      return
+    }
+
     await fs.promises.writeFile(path, repl.executed_statements.join("\n"))
     console.log(`Session saved to file: "${path}"`)
+
+    repl.prompt()
   }
 }
 
-// ".load   Load a file into the REPL session",
+class Load extends Command {
+  name = "load"
+  description = "Load a file into the REPL session"
+
+  match(text: string): boolean {
+    const lines = text.trim().split("\n")
+    if (lines.length !== 1) return false
+    const [line] = lines
+    return line.startsWith(".load")
+  }
+
+  async run(repl: ReadlineRepl, text: string): Promise<void> {
+    const line = text.trim()
+    const path = line.slice(".load".length).trim()
+    if (!path) {
+      console.log("No file specified")
+      console.log("  .load <file>")
+      return
+    }
+
+    repl.readline.write(await fs.promises.readFile(path, "utf8"))
+  }
+}

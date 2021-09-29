@@ -1,4 +1,3 @@
-- [repl] `readline-repl` -- `.load` Load a file into the REPL session
 - [repl] `readline-repl` -- indent inputed line by `depth`
 - [repl] `readline-repl` -- should not erase last line on multi-line ctrl-c exit
 - [repl] `readline-repl` -- `.save` -- save all statements vs save only good statements
