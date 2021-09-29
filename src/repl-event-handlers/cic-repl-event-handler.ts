@@ -1,6 +1,7 @@
 import { ReplEvent, ReplEventHandler } from "../repl"
 import { FakeFileResource } from "../file-resources"
 import { Library, fakeLibraryConfig } from "../library"
+import * as StmtOutputs from "../stmt-outputs"
 import chalk from "chalk"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
@@ -36,10 +37,15 @@ export class CicReplEventHandler extends ReplEventHandler {
     const mod = await this.library.load(this.path)
 
     try {
-      const output = await mod.append(text).run()
-      if (output.trim()) {
-        console.log(output.trim())
-        // console.log(chalk.yellow(output.trim()))
+      const outputs = await mod.append(text).run()
+      for (const output of outputs) {
+        if (output instanceof StmtOutputs.NormalTerm) {
+          const exp = output.exp.repr()
+          const t = output.t.repr()
+          console.log(`${chalk.yellow(exp)}: ${chalk.blue(t)}`)
+        } else {
+          console.log(output.repr().trim())
+        }
       }
     } catch (error) {
       mod.undo(mod.index)

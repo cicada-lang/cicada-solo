@@ -58,18 +58,17 @@ export class Module {
     this.entries = this.entries.slice(0, index)
   }
 
-  async run(): Promise<string> {
-    let s = ""
+  async run(): Promise<Array<StmtOutput>> {
+    const outputs = []
     while (!this.end_p()) {
       await this.step()
       const entry = this.entries[this.index - 1]
-
       if (entry && entry.output) {
-        s += entry.output.repr() + "\n"
+        outputs.push(entry.output)
       }
     }
 
-    return s
+    return outputs
   }
 
   output(output: StmtOutput): void {
@@ -81,7 +80,8 @@ export class Module {
     let s = ""
     for (const entry of this.entries) {
       if (entry.output) {
-        s += entry.output.repr() + "\n"
+        s += entry.output.repr()
+        s += "\n"
       }
     }
 
