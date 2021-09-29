@@ -34,7 +34,7 @@ export const handler = async (argv: Argv) => {
   const config = libraryConfigSchema.validate(
     JSON.parse(await fs.promises.readFile(config_file, "utf8"))
   )
-  const files = await LocalFileResource.build(config_file)
+  const files = new LocalFileResource({ dir: Path.dirname(config_file) })
   const library = new Library({ files, config })
 
   console.log(library.info())
@@ -81,14 +81,13 @@ async function watch(
   library: Library,
   files: LocalFileResource
 ): Promise<void> {
-  const src_dir = Path.resolve(files.root, files.config.src)
-  const watcher = chokidar.watch(src_dir)
+  const watcher = chokidar.watch(files.dir)
 
   watcher.on("all", async (event, file) => {
     if (event !== "add" && event !== "change") return
     if (!ModuleLoaders.can_handle_extension(file)) return
 
-    const prefix = `${src_dir}/`
+    const prefix = `${files.dir}/`
     const path = file.slice(prefix.length)
 
     library.cache.delete(path)

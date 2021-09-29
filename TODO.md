@@ -1,7 +1,3 @@
-- [refactor] no `LibraryConfig` in concrete `LocalFileResource` & `FakeFileResource`
-
-  - should not build `FileResource` from config -- from `dir` instead
-
 - [refactor] `FileResource` should not depend on `ModuleLoaders.can_handle_extension`
 
 - [refactor] `repls/readline-repl` report ignored lines on error

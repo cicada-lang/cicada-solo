@@ -43,7 +43,7 @@ export const handler = async (argv: Argv) => {
     : fakeLibraryConfig()
 
   const files = config_file
-    ? await LocalFileResource.build(config_file)
+    ? new LocalFileResource({ dir })
     : new FakeFileResource({ dir })
 
   const library = new Library({ config, files })
