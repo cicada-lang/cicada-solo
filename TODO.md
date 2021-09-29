@@ -11,6 +11,34 @@
 
   - create `ImFnInserter` and `ImApInserter` from `im-pi`'s `ret_t`
 
+# repl
+
+- helper commands in repl
+
+# narrator of elaboration
+
+- inject `Narrator` to `check` and `infer`
+
+# error report
+
+- [repl] fix not catched parsing error for repl
+- [cli] improve validation and error report
+
+- good error report like elm
+
+  - https://elm-lang.org/news/compiler-errors-for-humans
+  - https://elm-lang.org/news/the-syntax-cliff
+
+- get information about location from parser
+
+# git-based wiki system
+
+# library manager
+
+- library registry server
+- download library from registry -- and cli support
+- library can be used as a module  -- like package manager
+
 # implicit
 
 - Value.unify -- pi/fn-value.ts & pi/im-fn-value.ts
@@ -36,29 +64,6 @@
 # refactor
 
 - [refactor] `Reporter.error` -- take `path` or `text`?
-
-- [refactor] relation between `Library`, `Module` and `ModuleLoader`
-
-  - if `Module` knows how to parse stmts, it must also knows the offset -- thus the text
-  - `FakeFileResource` should be able to be used as REPL history file
-
-# error report
-
-- [cli] improve validation and error report
-
-- good error report like elm
-  - https://elm-lang.org/news/compiler-errors-for-humans
-  - https://elm-lang.org/news/the-syntax-cliff
-
-- get information about location from parser
-
-# git-based wiki system
-
-# library manager
-
-- library registry server
-- download library from registry -- and cli support
-- library can be used as a module  -- like package manager
 
 # subtype
 
