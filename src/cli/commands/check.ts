@@ -31,12 +31,13 @@ export const handler = async (argv: Argv) => {
       : argv["library"] + "/library.json"
     : process.cwd() + "/library.json"
 
-  const text = await fs.promises.readFile(config_file, "utf8")
-  const config = libraryConfigSchema.validate(JSON.parse(text))
+  const config = libraryConfigSchema.validate(
+    JSON.parse(await fs.promises.readFile(config_file, "utf8"))
+  )
   const files = await LocalFileResource.build(config_file)
   const library = new Library({ files, config })
 
-  console.log(library.files.info())
+  console.log(library.info())
   console.log()
 
   if (argv.watch) {

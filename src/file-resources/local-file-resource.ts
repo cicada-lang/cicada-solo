@@ -22,17 +22,6 @@ export class LocalFileResource extends FileResource {
     })
   }
 
-  info(): string {
-    return [
-      `file_resource:`,
-      `  kind: LocalFileResource`,
-      `  name: ${this.config.name}`,
-      `  version: ${this.config.version}`,
-      `  root: ${this.root}`,
-      `  src: ${this.config.src}`,
-    ].join("\n")
-  }
-
   async get(path: string): Promise<string> {
     const file = Path.isAbsolute(path)
       ? path

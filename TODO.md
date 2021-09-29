@@ -1,5 +1,3 @@
-- fix `Library.info`
-
 - [refactor] no `LibraryConfig` in concrete `LocalFileResource` & `FakeFileResource`
 
   - should not build `FileResource` from config -- from `dir` instead

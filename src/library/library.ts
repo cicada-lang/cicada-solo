@@ -29,4 +29,12 @@ export class Library {
   get reporter(): Reporter {
     return new Reporter({ files: this.files })
   }
+
+  info(): string {
+    return [
+      `library:`,
+      `  name: ${this.config.name}`,
+      `  version: ${this.config.version}`,
+    ].join("\n")
+  }
 }

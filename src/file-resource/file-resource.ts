@@ -1,7 +1,6 @@
 import * as ModuleLoaders from "../module-loaders"
 
 export abstract class FileResource {
-  abstract info(): string
   abstract list(): Promise<Array<string>>
   abstract get(path: string): Promise<string>
 
