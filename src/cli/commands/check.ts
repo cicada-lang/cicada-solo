@@ -63,12 +63,13 @@ async function check(
       })
       const { error } = await runner.run(path)
       if (error) {
+        errors.push(error)
+
         if (error instanceof Error) {
           console.error(error.message)
         } else {
           console.error(error)
         }
-        errors.push(error)
       }
     }
   }
