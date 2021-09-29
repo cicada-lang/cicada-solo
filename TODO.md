@@ -1,5 +1,3 @@
-- [refactor] `repls/readline-repl` report ignored lines on error
-
 - `Module` use structured output -- for color in repl
 
 - update version to 0.2.0

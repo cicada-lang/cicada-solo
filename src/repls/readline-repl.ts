@@ -76,7 +76,7 @@ export class ReadlineRepl extends Repl {
       const result = this.parens_checker.check(text)
 
       if (result instanceof Error) {
-        this.lines = [] // TODO report ignored lines
+        this.lines = []
         this.parens_checker.report_error(result)
         return
       } else if (result.kind === "lack") {
