@@ -1,12 +1,12 @@
 import ty from "@xieyuheng/ty"
 
-export type FileResourceConfig = {
+export type LibraryConfig = {
   name: string
   version: string
   src: string
 }
 
-export const fileResourceConfigSchema = ty.object<FileResourceConfig>({
+export const libraryConfigSchema = ty.object<LibraryConfig>({
   name: ty.string(),
   version: ty.semver(),
   src: ty.string(),

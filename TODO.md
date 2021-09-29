@@ -1,6 +1,4 @@
-- [refactor] rename `FileResourceConfig` back to `LibraryConfig`
-
-- [refactor] no `FileResourceConfig` in concrete `LocalFileResource` & `FakeFileResource`
+- [refactor] no `LibraryConfig` in concrete `LocalFileResource` & `FakeFileResource`
 
   - should not build `FileResource` from config -- from `dir` instead
 
