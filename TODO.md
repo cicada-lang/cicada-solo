@@ -1,4 +1,5 @@
 - [refactor] no `FileResourceConfig` in `FileResource`
+- [refactor] `FileResource` should not depend on `ModuleLoaders.can_handle_extension`
 - [refactor] `repls/readline-repl` report ignored lines on error
 - `Module` use structured output -- for color in repl
 
