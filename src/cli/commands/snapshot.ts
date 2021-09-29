@@ -1,7 +1,6 @@
-import { Library, fake_library_config } from "../../library"
+import { Library } from "../../library"
 import { LocalFileResource } from "../../file-resources"
 import { FakeFileResource } from "../../file-resources"
-import { libraryConfigSchema } from "../../library"
 import * as Runners from "../../runners"
 import find_up from "find-up"
 import Path from "path"
@@ -30,10 +29,10 @@ export const handler = async (argv: Argv) => {
   const dir = Path.dirname(path)
   const config_file = await find_up("library.json", { cwd: dir })
   const config = config_file
-    ? libraryConfigSchema.validate(
+    ? Library.config_schema.validate(
         JSON.parse(await fs.promises.readFile(config_file, "utf8"))
       )
-    : fake_library_config()
+    : Library.fake_config()
   const files = config_file
     ? new LocalFileResource({ dir })
     : new FakeFileResource({ dir })

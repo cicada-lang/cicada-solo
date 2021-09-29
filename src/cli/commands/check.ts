@@ -1,7 +1,6 @@
 import { Library } from "../../library"
 import { LocalFileResource } from "../../file-resources"
 import { Logger } from "../../runner/logger"
-import { libraryConfigSchema } from "../../library"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
 import chokidar from "chokidar"
@@ -31,7 +30,7 @@ export const handler = async (argv: Argv) => {
       : argv["library"] + "/library.json"
     : process.cwd() + "/library.json"
 
-  const config = libraryConfigSchema.validate(
+  const config = Library.config_schema.validate(
     JSON.parse(await fs.promises.readFile(config_file, "utf8"))
   )
   const files = new LocalFileResource({ dir: Path.dirname(config_file) })
