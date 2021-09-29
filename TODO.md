@@ -1,3 +1,4 @@
+- [repl] `readline-repl` -- rename `.save` to `.save_all` -- need to format help message
 - [repl] `readline-repl` -- `.save` -- do no save statements with error
 - [repl] `readline-repl` -- indent inputed line by `depth`
 
