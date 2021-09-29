@@ -5,6 +5,7 @@ import fs from "fs"
 export class ReadlineRepl extends Repl {
   handler: ReplEventHandler
   executed_statements: Array<string> = []
+  commands: Array<Command> = [new Help()]
 
   constructor(opts: { handler: ReplEventHandler }) {
     super()
@@ -98,26 +99,23 @@ export class ReadlineRepl extends Repl {
   private async process_lines(): Promise<void> {
     while (true) {
       const text = this.next_text_or_report_error()
-      if (text) {
-        if (text.trim() === ".help") {
-          console.log(
-            [
-              ".help   Print this help message",
-              // ".load   Load a file into the REPL session",
-              // ".save   Save all executed statements in this REPL session to a file",
-              "",
-              "Press Ctrl+C to abort current statement, Ctrl+D to exit the REPL",
-            ].join("\n")
-          )
-        } else {
-          const event: ReplEvent = { text }
-          await this.handler.handle(event)
-          this.executed_statements.push(text)
-        }
-      } else {
+
+      if (!text) {
         this.prompt()
         return
       }
+
+      for (const command of this.commands) {
+        if (command.match(text)) {
+          command.run(this, text)
+          this.prompt()
+          return
+        }
+      }
+
+      const event: ReplEvent = { text }
+      await this.handler.handle(event)
+      this.executed_statements.push(text)
     }
   }
 
@@ -145,3 +143,38 @@ export class ReadlineRepl extends Repl {
     }
   }
 }
+
+abstract class Command {
+  abstract name: string
+  abstract description: string
+  abstract match(text: string): boolean
+  abstract run(repl: ReadlineRepl, text: string): void
+}
+
+class Help extends Command {
+  name = "help"
+  description = "Print this help message"
+
+  match(text: string): boolean {
+    const lines = text.trim().split("\n")
+    if (lines.length !== 1) return false
+    const [line] = lines
+    return line.startsWith(".help")
+  }
+
+  run(repl: ReadlineRepl, text: string): void {
+    const commands = repl.commands.map(
+      ({ name, description }) => `.${name}   ${description}`
+    )
+    console.log(
+      [
+        ...commands,
+        "",
+        "Press Ctrl+C to abort current statement, Ctrl+D to exit the REPL",
+      ].join("\n")
+    )
+  }
+}
+
+// ".load   Load a file into the REPL session",
+// ".save   Save all executed statements in this REPL session to a file",

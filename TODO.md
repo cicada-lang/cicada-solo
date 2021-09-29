@@ -1,7 +1,7 @@
-- [repl] `readline-repl` dispatch to commands
 - [repl] `readline-repl` -- `.save` Save all executed statements in this repl session to a file
 - [repl] `readline-repl` -- `.load` Load a file into the REPL session
 - [repl] `readline-repl` -- indent inputed line by `depth`
+- [repl] `readline-repl` -- should not erase last line on multi-line ctrl-c exit
 
 - `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
 
