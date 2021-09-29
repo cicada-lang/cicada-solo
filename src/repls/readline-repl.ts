@@ -5,7 +5,7 @@ import fs from "fs"
 export class ReadlineRepl extends Repl {
   handler: ReplEventHandler
   executed_statements: Array<string> = []
-  commands: Array<Command> = [new Help(), new Load(), new Save()]
+  commands: Array<Command> = [new Help(), new Load(), new SaveAll()]
 
   constructor(opts: { handler: ReplEventHandler }) {
     super()
@@ -168,8 +168,14 @@ class Help extends Command {
   }
 
   async run(repl: ReadlineRepl, text: string): Promise<void> {
+    function right_pad(line: string, size: number): string {
+      return line + " ".repeat(size - line.length)
+    }
+
+    const size = Math.max(...repl.commands.map(({ name }) => name.length))
+
     const commands = repl.commands.map(
-      ({ name, description }) => `.${name}   ${description}`
+      ({ name, description }) => `.${right_pad(name, size)}   ${description}`
     )
 
     console.log(
@@ -184,23 +190,23 @@ class Help extends Command {
   }
 }
 
-class Save extends Command {
-  name = "save"
+class SaveAll extends Command {
+  name = "save_all"
   description = "Save all executed statements in this REPL session to a file"
 
   match(text: string): boolean {
     const lines = text.trim().split("\n")
     if (lines.length !== 1) return false
     const [line] = lines
-    return line.startsWith(".save")
+    return line.startsWith(".save_all")
   }
 
   async run(repl: ReadlineRepl, text: string): Promise<void> {
     const line = text.trim()
-    const path = line.slice(".save".length).trim()
+    const path = line.slice(".save_all".length).trim()
     if (!path) {
       console.log("No file specified")
-      console.log("  .save <file>")
+      console.log("  .save_all <file>")
       return
     }
 
