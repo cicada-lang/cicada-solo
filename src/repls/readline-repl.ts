@@ -131,7 +131,9 @@ export class ReadlineRepl extends Repl {
   private next_text_or_report_error(): string | undefined {
     let text = ""
     for (const [i, line] of this.lines.entries()) {
-      text += line + "\n"
+      const prefix = "  ".repeat(this.parens_checker.depth(text))
+
+      text += prefix + line + "\n"
 
       const result = this.parens_checker.check(text)
 
