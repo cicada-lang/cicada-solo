@@ -24,10 +24,20 @@ export class ReadlineRepl extends Repl {
 
   run(): void {
     this.readline.on("line", (line) => this.receive_line(line))
+    this.listen_sigint()
+    this.handler.greeting()
+    this.prompt()
+  }
 
+  private listen_sigint(): void {
     let exit_attempt_count = 0
+
+    this.readline.on("line", () => {
+      exit_attempt_count = 0
+    })
+
     this.readline.on("SIGINT", () => {
-      if (this.lines.length === 0 && this.readline.line === "") {
+      if (this.lines.join("").trim() === "" && this.readline.line === "") {
         exit_attempt_count++
         if (exit_attempt_count === 1) {
           console.log()
@@ -46,9 +56,6 @@ export class ReadlineRepl extends Repl {
         }
       }
     })
-
-    this.handler.greeting()
-    this.prompt()
   }
 
   private lines: Array<string> = []
