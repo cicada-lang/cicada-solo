@@ -53,22 +53,23 @@ async function check(
 ): Promise<void> {
   let errors: Array<unknown> = []
   for (const path of Object.keys(await files.all())) {
-    const logger = new Logger({ tag: "check" })
-    const runner = Runners.create_special_runner({
-      path,
-      library,
-      files,
-      logger,
-    })
-    const { error } = await runner.run(path)
-    if (error) {
-      if (error instanceof Error) {
-        console.error(error.message)
-      } else {
-        console.error(error)
+    if (ModuleLoaders.can_handle_extension(path)) {
+      const logger = new Logger({ tag: "check" })
+      const runner = Runners.create_special_runner({
+        path,
+        library,
+        files,
+        logger,
+      })
+      const { error } = await runner.run(path)
+      if (error) {
+        if (error instanceof Error) {
+          console.error(error.message)
+        } else {
+          console.error(error)
+        }
+        errors.push(error)
       }
-
-      errors.push(error)
     }
   }
 
