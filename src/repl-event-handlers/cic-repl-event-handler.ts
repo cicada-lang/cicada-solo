@@ -16,6 +16,7 @@ export class CicReplEventHandler extends ReplEventHandler {
 
   greeting(): void {
     console.log(`Welcome to Cicada ${pkg.version} *^-^*/`)
+    console.log(`Type ".help" for more information`)
   }
 
   async handle(event: ReplEvent): Promise<void> {

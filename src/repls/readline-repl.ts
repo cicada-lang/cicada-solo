@@ -89,8 +89,13 @@ export class ReadlineRepl extends Repl {
     while (true) {
       const text = this.next_text_or_report_error()
       if (text) {
-        const event: ReplEvent = { text }
-        await this.handler.handle(event)
+        if (text.trim() === ".help") {
+          console.log()
+          console.log("Press Ctrl+C to abort current statement, Ctrl+D to exit the REPL")
+        } else {
+          const event: ReplEvent = { text }
+          await this.handler.handle(event)
+        }
       } else {
         this.prompt()
         return

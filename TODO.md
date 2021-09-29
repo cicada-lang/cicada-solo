@@ -1,11 +1,5 @@
-- [repl] helper commands in repl
-
-- [repl] Type ".help" for more information
-
-  - print "Press Ctrl+C to abort current statement, Ctrl+D to exit the REPL"
-
 - [repl] .load   Load a file into the REPL session
-- [repl] .save   Save all evaluated statements in this REPL session to a file
+- [repl] .save   Save all executed statements in this REPL session to a file
 
 - `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
 
