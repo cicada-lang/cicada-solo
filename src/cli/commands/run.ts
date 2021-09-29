@@ -1,4 +1,4 @@
-import { Library } from "../../library"
+import { Library, fakeLibraryConfig } from "../../library"
 import { LocalFileResource } from "../../file-resources"
 import { FakeFileResource } from "../../file-resources"
 import { libraryConfigSchema } from "../../library"
@@ -40,7 +40,7 @@ export const handler = async (argv: Argv) => {
     ? libraryConfigSchema.validate(
         JSON.parse(await fs.promises.readFile(config_file, "utf8"))
       )
-    : FakeFileResource.fakeLibraryConfig()
+    : fakeLibraryConfig()
 
   const files = config_file
     ? await LocalFileResource.build(config_file)
