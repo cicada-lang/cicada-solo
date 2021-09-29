@@ -1,4 +1,4 @@
-- [refactor] `repls/readline-repl` inject `ParensChecker`
+- [refactor] `repls/readline-repl` report ignored lines on error
 
 - update version to 0.2.0
 

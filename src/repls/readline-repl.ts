@@ -1,6 +1,5 @@
 import { Repl, ReplEvent, ReplEventHandler } from "../repl"
 import Readline from "readline"
-import pt from "@cicada-lang/partech"
 
 export class ReadlineRepl extends Repl {
   handler: ReplEventHandler
@@ -32,7 +31,7 @@ export class ReadlineRepl extends Repl {
   private lines: Array<string> = []
 
   private prompt(): void {
-    const depth = pt.lexers.common.parens_depth(this.lines.join("\n"))
+    const depth = this.parens_checker.depth(this.lines.join("\n"))
     this.readline.setPrompt(this.create_prompt(depth))
     this.readline.prompt()
   }
@@ -60,7 +59,8 @@ export class ReadlineRepl extends Repl {
     while (true) {
       const text = this.next_text_or_report_error()
       if (text) {
-        await this.handler.handle({ text })
+        const event: ReplEvent = { text }
+        await this.handler.handle(event)
       } else {
         this.prompt()
         return
@@ -73,9 +73,13 @@ export class ReadlineRepl extends Repl {
     for (const [i, line] of this.lines.entries()) {
       text += line + "\n"
 
-      const result = pt.lexers.common.parens_check(text)
+      const result = this.parens_checker.check(text)
 
-      if (result.kind === "lack") {
+      if (result instanceof Error) {
+        this.lines = [] // TODO report ignored lines
+        this.parens_checker.report_error(result)
+        return
+      } else if (result.kind === "lack") {
         // go on next loop
       } else if (result.kind === "balance") {
         if (text.trim() === "") {
@@ -84,35 +88,7 @@ export class ReadlineRepl extends Repl {
           this.lines = this.lines.splice(i + 1)
           return text
         }
-      } else if (result.kind === "mismatch") {
-        this.lines = [] // TODO report ignored lines
-        this.report_error({
-          msg: "Parentheses mismatch",
-          token: result.token,
-          text,
-        })
-        return
-      } else if (result.kind === "excess") {
-        this.lines = [] // TODO report ignored lines
-        this.report_error({
-          msg: "Parentheses mismatch",
-          token: result.token,
-          text,
-        })
-        return
       }
     }
-  }
-
-  private report_error(opts: {
-    msg: string
-    token: pt.Token
-    text: string
-  }): void {
-    const { msg, token, text } = opts
-
-    console.error()
-    console.error(`${msg}:`)
-    console.error(pt.report(token.span, text))
   }
 }
