@@ -1,6 +1,7 @@
 import { ReplEvent, ReplEventHandler } from "../repl"
 import { FakeFileResource } from "../file-resources"
 import { Library } from "../library"
+import chalk from "chalk"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
 const pkg = require("../../package.json")
@@ -35,6 +36,7 @@ export class CicReplEventHandler extends ReplEventHandler {
       const output = await mod.append(text).run()
       if (output.trim()) {
         console.log(output.trim())
+        // console.log(chalk.yellow(output.trim()))
       }
     } catch (error) {
       mod.undo(mod.index)
