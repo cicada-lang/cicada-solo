@@ -1,4 +1,4 @@
-- `cicada-file-resource` -- for `~/.cicada` dir
+- `local-file-resource` rename `src` to `resolve`
 
 - `app/generic` -- stub
 - `app/node` -- inject instance of `cicada-file-resource`
