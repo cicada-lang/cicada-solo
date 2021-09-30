@@ -6,8 +6,6 @@
 
   - `get` and `put` `~/.cicada/repl/history` using `AppFileStore`
 
-- `readline-repl` -- use `app/node` dependency injection container
-
 # error report
 
 - get information about location from parser -- maybe rewrite `partech`

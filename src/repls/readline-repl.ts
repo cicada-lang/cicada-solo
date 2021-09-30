@@ -1,4 +1,6 @@
 import { Repl, ReplEvent, ReplEventHandler } from "../repl"
+import { AppFileStore } from "../app-file-store"
+import app from "../app/node-app"
 import Readline from "readline"
 import fs from "fs"
 
@@ -7,10 +9,12 @@ export class ReadlineRepl extends Repl {
   all_statements: Array<string> = []
   successful_statements: Array<string> = []
   commands: Array<Command> = [new Help(), new Load(), new Save(), new SaveAll()]
+  app_files: AppFileStore
 
-  constructor(opts: { handler: ReplEventHandler }) {
+  constructor(opts: { handler: ReplEventHandler; app_files?: AppFileStore }) {
     super()
     this.handler = opts.handler
+    this.app_files = opts.app_files || app.files
   }
 
   private readline_cache?: Readline.Interface
