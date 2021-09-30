@@ -1,6 +1,8 @@
-import { Repl, ReplEvent, ReplEventHandler } from "../repl"
-import { AppFileStore } from "../app-file-store"
-import app from "../app/node-app"
+import { Repl, ReplEvent, ReplEventHandler } from "../../repl"
+import { AppFileStore } from "../../app-file-store"
+import { Command } from "./command"
+import * as Commands from "./commands"
+import app from "../../app/node-app"
 import Readline from "readline"
 import fs from "fs"
 
@@ -9,7 +11,12 @@ export class ReadlineRepl extends Repl {
   handler: ReplEventHandler
   all_statements: Array<string> = []
   successful_statements: Array<string> = []
-  commands: Array<Command> = [new Help(), new Load(), new Save(), new SaveAll()]
+  commands: Array<Command> = [
+    new Commands.Help(),
+    new Commands.Load(),
+    new Commands.Save(),
+    new Commands.SaveAll(),
+  ]
   files: AppFileStore
   readline: Readline.Interface
 
@@ -175,125 +182,5 @@ export class ReadlineRepl extends Repl {
         }
       }
     }
-  }
-}
-
-abstract class Command {
-  abstract name: string
-  abstract description: string
-  abstract match(text: string): boolean
-  abstract run(repl: ReadlineRepl, text: string): Promise<void>
-}
-
-class Help extends Command {
-  name = "help"
-  description = "Print this help message"
-
-  match(text: string): boolean {
-    const lines = text.trim().split("\n")
-    if (lines.length !== 1) return false
-    const [line] = lines
-    return Boolean(line.match(/\.help\b/))
-  }
-
-  async run(repl: ReadlineRepl, text: string): Promise<void> {
-    function right_pad(line: string, size: number): string {
-      return line + " ".repeat(size - line.length)
-    }
-
-    const size = Math.max(...repl.commands.map(({ name }) => name.length))
-
-    const commands = repl.commands.map(
-      ({ name, description }) => `.${right_pad(name, size)}   ${description}`
-    )
-
-    console.log(
-      [
-        "REPL commands:",
-        ...commands.map((command) => "  " + command),
-        "",
-        "Press Ctrl+C to abort current statement, Ctrl+D to exit the REPL",
-      ].join("\n")
-    )
-
-    repl.prompt()
-  }
-}
-
-class SaveAll extends Command {
-  name = "save_all"
-  description = "Save all statements in this REPL session to a file"
-
-  match(text: string): boolean {
-    const lines = text.trim().split("\n")
-    if (lines.length !== 1) return false
-    const [line] = lines
-    return Boolean(line.match(/\.save_all\b/))
-  }
-
-  async run(repl: ReadlineRepl, text: string): Promise<void> {
-    const line = text.trim()
-    const path = line.slice(".save_all".length).trim()
-    if (!path) {
-      console.log("No file specified")
-      console.log("  .save_all <file>")
-      return
-    }
-
-    await fs.promises.writeFile(path, repl.all_statements.join("\n"))
-    console.log(`Session saved to file: "${path}"`)
-
-    repl.prompt()
-  }
-}
-
-class Save extends Command {
-  name = "save"
-  description = "Save successful statements in this REPL session to a file"
-
-  match(text: string): boolean {
-    const lines = text.trim().split("\n")
-    if (lines.length !== 1) return false
-    const [line] = lines
-    return Boolean(line.match(/\.save\b/))
-  }
-
-  async run(repl: ReadlineRepl, text: string): Promise<void> {
-    const line = text.trim()
-    const path = line.slice(".save".length).trim()
-    if (!path) {
-      console.log("No file specified")
-      console.log("  .save <file>")
-      return
-    }
-
-    await fs.promises.writeFile(path, repl.successful_statements.join("\n"))
-    console.log(`Session saved to file: "${path}"`)
-
-    repl.prompt()
-  }
-}
-
-class Load extends Command {
-  name = "load"
-  description = "Load a file into the REPL session"
-
-  match(text: string): boolean {
-    const lines = text.trim().split("\n")
-    if (lines.length !== 1) return false
-    const [line] = lines
-    return Boolean(line.match(/\.load\b/))
-  }
-
-  async run(repl: ReadlineRepl, text: string): Promise<void> {
-    const line = text.trim()
-    const path = line.slice(".load".length).trim()
-    if (!path) {
-      console.log("No file specified")
-      console.log("  .load <file>")
-      return
-    }
-
-    repl.readline.write(await fs.promises.readFile(path, "utf8"))
   }
 }

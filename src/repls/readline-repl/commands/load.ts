@@ -1,0 +1,27 @@
+import { Command } from "../command"
+import { ReadlineRepl } from "../readline-repl"
+import fs from "fs"
+
+export class Load extends Command {
+  name = "load"
+  description = "Load a file into the REPL session"
+
+  match(text: string): boolean {
+    const lines = text.trim().split("\n")
+    if (lines.length !== 1) return false
+    const [line] = lines
+    return Boolean(line.match(/\.load\b/))
+  }
+
+  async run(repl: ReadlineRepl, text: string): Promise<void> {
+    const line = text.trim()
+    const path = line.slice(".load".length).trim()
+    if (!path) {
+      console.log("No file specified")
+      console.log("  .load <file>")
+      return
+    }
+
+    repl.readline.write(await fs.promises.readFile(path, "utf8"))
+  }
+}

@@ -1,3 +1,5 @@
+- `readline-repl` improve command parser
+
 # error report
 
 - get information about location from parser -- maybe rewrite `partech`
