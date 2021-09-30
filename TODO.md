@@ -1,6 +1,4 @@
-- `readline-repl` be able to write history and load history back
-
-  - `get` and `put` `~/.cicada/repl/history` using `AppFileStore`
+- `readline-repl` -- history statement by statement
 
 # error report
 

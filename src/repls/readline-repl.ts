@@ -35,18 +35,20 @@ export class ReadlineRepl extends Repl {
   static async create(opts: {
     dir: string
     handler: ReplEventHandler
-    files?: AppFileStore
   }): Promise<ReadlineRepl> {
-    const { dir, handler } = opts
-    const files = opts.files || app.files
+    const text = await app.files.get_or_fail("repl/history")
+    const history = text.split("\n")
 
-    const { stdin: input, stdout: output } = process
-    const readline = Readline.createInterface({ input, output })
+    const readline = Readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+      history,
+    })
 
     return new ReadlineRepl({
-      dir,
-      handler,
-      files,
+      dir: opts.dir,
+      handler: opts.handler,
+      files: app.files,
       readline,
     })
   }
