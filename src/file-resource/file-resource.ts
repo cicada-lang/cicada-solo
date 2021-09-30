@@ -1,6 +1,8 @@
 import { Resource } from "../resource"
 
 export abstract class FileResource extends Resource<string, string> {
+  abstract keys(): Promise<Array<string>>
+
   async all(): Promise<Record<string, string>> {
     const files: Record<string, string> = {}
     for (const path of await this.keys()) {

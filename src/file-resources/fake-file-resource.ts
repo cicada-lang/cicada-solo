@@ -14,15 +14,16 @@ export class FakeFileResource extends LocalFileResource {
   }
 
   async keys(): Promise<Array<string>> {
-    return Object.keys(this.faked)
+    return Array.from(
+      new Set([...(await super.keys()), ...Object.keys(this.faked)])
+    )
   }
 
-  async get_or_fail(path: string): Promise<string> {
+  async get(path: string): Promise<string | undefined> {
     if (this.faked[path] !== undefined) {
       return this.faked[path]
+    } else {
+      return await super.get(path)
     }
-
-    const resolved_path = Path.resolve(this.dir, path)
-    return fs.readFileSync(resolved_path, { encoding: "utf-8" })
   }
 }
