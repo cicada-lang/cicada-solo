@@ -17,6 +17,7 @@ export class ReadlineRepl extends Repl {
   successful_statements: Array<string> = []
   commands: Array<Command> = [new Help(), new Load(), new Save(), new SaveAll()]
   files: AppFileStore
+  readline: Readline.Interface
 
   constructor(opts: {
     dir: string
@@ -27,19 +28,8 @@ export class ReadlineRepl extends Repl {
     this.dir = opts.dir
     this.handler = opts.handler
     this.files = opts.files || app.files
-  }
-
-  private readline_cache?: Readline.Interface
-
-  get readline(): Readline.Interface {
-    if (this.readline_cache) {
-      return this.readline_cache
-    } else {
-      const { stdin: input, stdout: output } = process
-      const readline = Readline.createInterface({ input, output })
-      this.readline_cache = readline
-      return readline
-    }
+    const { stdin: input, stdout: output } = process
+    this.readline = Readline.createInterface({ input, output })
   }
 
   prompt(): void {

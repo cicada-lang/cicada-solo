@@ -23,6 +23,7 @@ export const handler = async (argv: Argv) => {
     files: new FakeFileStore({ dir, faked: { [path]: "" } }),
   })
   const handler = new CicReplEventHandler({ path, library })
+  // const repl = await ReadlineRepl.create({ dir, handler })
   const repl = new ReadlineRepl({ dir, handler })
   await repl.run()
 }
