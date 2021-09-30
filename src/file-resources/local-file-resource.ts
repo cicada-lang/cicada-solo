@@ -11,7 +11,7 @@ export class LocalFileResource extends FileResource {
     this.dir = opts.dir
   }
 
-  async get(path: string): Promise<string> {
+  async get_or_fail(path: string): Promise<string> {
     const file = Path.isAbsolute(path) ? path : Path.resolve(this.dir, path)
     return await fs.promises.readFile(file, "utf8")
   }

@@ -17,7 +17,7 @@ export class FakeFileResource extends LocalFileResource {
     return Object.keys(this.faked)
   }
 
-  async get(path: string): Promise<string> {
+  async get_or_fail(path: string): Promise<string> {
     if (this.faked[path] !== undefined) {
       return this.faked[path]
     }
