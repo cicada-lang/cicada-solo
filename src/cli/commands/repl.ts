@@ -4,6 +4,7 @@ import { Library } from "../../library"
 import { FakeFileStore } from "../../file-stores"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
+import Path from "path"
 
 export const command = "repl [dir]"
 export const description = "Run interactive REPL"
@@ -14,7 +15,7 @@ type Argv = {
 }
 
 export const handler = async (argv: Argv) => {
-  const dir = argv["dir"] || process.cwd()
+  const dir = Path.resolve(argv["dir"] || process.cwd())
 
   const path = `repl-file-${nanoid()}.cic`
   const library = new Library({
@@ -22,6 +23,6 @@ export const handler = async (argv: Argv) => {
     files: new FakeFileStore({ dir, faked: { [path]: "" } }),
   })
   const handler = new CicReplEventHandler({ path, library })
-  const repl = new ReadlineRepl({ handler })
+  const repl = new ReadlineRepl({ dir, handler })
   await repl.run()
 }

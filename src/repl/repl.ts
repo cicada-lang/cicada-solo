@@ -12,6 +12,6 @@ export abstract class ReplEventHandler {
 
 export abstract class Repl {
   abstract handler: ReplEventHandler
-  abstract run(): void
+  abstract run(): Promise<void>
   parens_checker: ParensChecker = new CommonParensChecker()
 }

@@ -4,17 +4,29 @@ import app from "../app/node-app"
 import Readline from "readline"
 import fs from "fs"
 
+type HistoryEntry = {
+  statement: string
+  when: number
+  where: string
+}
+
 export class ReadlineRepl extends Repl {
+  dir: string
   handler: ReplEventHandler
   all_statements: Array<string> = []
   successful_statements: Array<string> = []
   commands: Array<Command> = [new Help(), new Load(), new Save(), new SaveAll()]
-  app_files: AppFileStore
+  files: AppFileStore
 
-  constructor(opts: { handler: ReplEventHandler; app_files?: AppFileStore }) {
+  constructor(opts: {
+    dir: string
+    handler: ReplEventHandler
+    files?: AppFileStore
+  }) {
     super()
+    this.dir = opts.dir
     this.handler = opts.handler
-    this.app_files = opts.app_files || app.files
+    this.files = opts.files || app.files
   }
 
   private readline_cache?: Readline.Interface
@@ -44,7 +56,7 @@ export class ReadlineRepl extends Repl {
     }
   }
 
-  run(): void {
+  async run(): Promise<void> {
     this.readline.on("line", (line) => this.handle_line(line))
     this.listen_sigint()
     this.listen_history()
@@ -66,7 +78,8 @@ export class ReadlineRepl extends Repl {
 
   private listen_history(): void {
     this.readline.on("history", (history) => {
-      // TODO
+      const text = history.join("\n")
+      this.files.put("repl/history", text)
     })
   }
 
