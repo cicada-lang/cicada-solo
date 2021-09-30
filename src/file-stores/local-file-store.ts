@@ -13,7 +13,7 @@ export class LocalFileStore extends FileStore {
 
   async get(path: string): Promise<string | undefined> {
     const file = Path.isAbsolute(path) ? path : Path.resolve(this.dir, path)
-    if (fs.lstatSync(file).isFile()) {
+    if (fs.existsSync(file) && fs.lstatSync(file).isFile()) {
       return await fs.promises.readFile(file, "utf8")
     } else {
       return undefined
