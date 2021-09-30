@@ -1,5 +1,3 @@
-- `FileResource` extends generic `Resource`
-
 - `app-file-resource` be able to `put` new file
 
 - `app/generic` -- stub

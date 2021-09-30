@@ -11,9 +11,13 @@ export class LocalFileResource extends FileResource {
     this.dir = opts.dir
   }
 
-  async get_or_fail(path: string): Promise<string> {
+  async get(path: string): Promise<string | undefined> {
     const file = Path.isAbsolute(path) ? path : Path.resolve(this.dir, path)
-    return await fs.promises.readFile(file, "utf8")
+    if (fs.lstatSync(file).isFile()) {
+      return await fs.promises.readFile(file, "utf8")
+    } else {
+      return undefined
+    }
   }
 
   async keys(): Promise<Array<string>> {
