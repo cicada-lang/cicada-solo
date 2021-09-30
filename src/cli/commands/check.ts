@@ -1,5 +1,5 @@
 import { Library } from "../../library"
-import { LocalFileResource } from "../../file-resources"
+import { LocalFileStore } from "../../file-stores"
 import { Logger } from "../../runner/logger"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
@@ -33,7 +33,7 @@ export const handler = async (argv: Argv) => {
   const config = Library.config_schema.validate(
     JSON.parse(await fs.promises.readFile(config_file, "utf8"))
   )
-  const files = new LocalFileResource({ dir: Path.dirname(config_file) })
+  const files = new LocalFileStore({ dir: Path.dirname(config_file) })
   const library = new Library({ files, config })
 
   console.log(library.info())
@@ -46,10 +46,7 @@ export const handler = async (argv: Argv) => {
   }
 }
 
-async function check(
-  library: Library,
-  files: LocalFileResource
-): Promise<void> {
+async function check(library: Library, files: LocalFileStore): Promise<void> {
   let errors: Array<unknown> = []
   for (const path of Object.keys(await files.all())) {
     if (ModuleLoaders.can_handle_extension(path)) {
@@ -78,10 +75,7 @@ async function check(
   }
 }
 
-async function watch(
-  library: Library,
-  files: LocalFileResource
-): Promise<void> {
+async function watch(library: Library, files: LocalFileStore): Promise<void> {
   const watcher = chokidar.watch(files.dir)
 
   watcher.on("all", async (event, file) => {

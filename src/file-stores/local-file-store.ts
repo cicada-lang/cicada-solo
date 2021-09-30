@@ -1,9 +1,9 @@
-import { FileResource } from "../file-resource"
+import { FileStore } from "../file-store"
 import Path from "path"
 import fs from "fs"
 import readdirp from "readdirp"
 
-export class LocalFileResource extends FileResource {
+export class LocalFileStore extends FileStore {
   dir: string
 
   constructor(opts: { dir: string }) {

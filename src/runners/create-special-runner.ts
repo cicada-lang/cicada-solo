@@ -1,5 +1,5 @@
 import { Library } from "../library"
-import { LocalFileResource } from "../file-resources"
+import { LocalFileStore } from "../file-stores"
 import { Runner } from "../runner"
 import { SnapshotRunner, ErrorRunner } from "../runners"
 import { Logger } from "../runner/logger"
@@ -7,7 +7,7 @@ import { Logger } from "../runner/logger"
 export function create_special_runner(opts: {
   path: string
   library: Library
-  files: LocalFileResource
+  files: LocalFileStore
   logger?: Logger
 }): Runner {
   const { path } = opts

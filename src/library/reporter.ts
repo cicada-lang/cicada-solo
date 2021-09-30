@@ -1,11 +1,11 @@
-import { FileResource } from "../file-resource"
+import { FileStore } from "../file-store"
 import { Trace } from "../errors"
 import pt from "@cicada-lang/partech"
 
 export class Reporter {
-  files: FileResource
+  files: FileStore
 
-  constructor(opts: { files: FileResource }) {
+  constructor(opts: { files: FileStore }) {
     this.files = opts.files
   }
 

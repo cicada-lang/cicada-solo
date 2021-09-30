@@ -1,6 +1,6 @@
 import { Library } from "../../library"
-import { LocalFileResource } from "../../file-resources"
-import { FakeFileResource } from "../../file-resources"
+import { LocalFileStore } from "../../file-stores"
+import { FakeFileStore } from "../../file-stores"
 import * as Runners from "../../runners"
 import find_up from "find-up"
 import Path from "path"
@@ -34,8 +34,8 @@ export const handler = async (argv: Argv) => {
       )
     : Library.fake_config()
   const files = config_file
-    ? new LocalFileResource({ dir })
-    : new FakeFileResource({ dir })
+    ? new LocalFileStore({ dir })
+    : new FakeFileStore({ dir })
 
   const library = new Library({ files, config })
 

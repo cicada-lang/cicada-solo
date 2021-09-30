@@ -1,6 +1,6 @@
-import { Resource } from "../resource"
+import { Store } from "../store"
 
-export abstract class FileResource extends Resource<string, string> {
+export abstract class FileStore extends Store<string, string> {
   abstract keys(): Promise<Array<string>>
 
   async all(): Promise<Record<string, string>> {

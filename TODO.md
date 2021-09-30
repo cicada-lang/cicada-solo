@@ -1,19 +1,19 @@
-- `app-file-resource` be able to config `dir` by env variable
+- `app-file-store` be able to config `dir` by env variable
 
   - default to `~/.cicada` -- with the help of `os.homedir()`
 
-- `app-file-resource` be able to `put` new file
+- `app-file-store` be able to `put` new file
 
-  - by implementing `put` in `local-file-resource`
+  - by implementing `put` in `local-file-store`
 
 - `readline-repl` be able to write history and load history back
 
-  - `get` and `put` `~/.cicada/repl/history` using `AppFileResource`
+  - `get` and `put` `~/.cicada/repl/history` using `AppFileStore`
 
 - `readline-repl` -- use `app/node` dependency injection container
 
 - `app/generic` -- stub
-- `app/node` -- inject instance of `cicada-file-resource`
+- `app/node` -- inject instance of `cicada-file-store`
 - `app/browser` -- stub
 
 # error report
@@ -42,9 +42,9 @@
 
 - load web library from gitlab and github
 
-  - `GitFileResource`
-  - `GitLabFileResource`
-  - `GitHubFileResource`
+  - `GitFileStore`
+  - `GitLabFileStore`
+  - `GitHubFileStore`
 
 - web REPL
 

@@ -1,8 +1,8 @@
-import { LocalFileResource } from "./local-file-resource"
+import { LocalFileStore } from "./local-file-store"
 import fs from "fs"
 import Path from "path"
 
-export class FakeFileResource extends LocalFileResource {
+export class FakeFileStore extends LocalFileStore {
   dir: string
   faked: Record<string, string>
 

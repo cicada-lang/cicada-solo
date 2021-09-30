@@ -1,7 +1,7 @@
 import { CicReplEventHandler } from "../../repl-event-handlers"
 import { ReadlineRepl } from "../../repls/readline-repl"
 import { Library } from "../../library"
-import { FakeFileResource } from "../../file-resources"
+import { FakeFileStore } from "../../file-stores"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
 
@@ -19,7 +19,7 @@ export const handler = async (argv: Argv) => {
   const path = `repl-file-${nanoid()}.cic`
   const library = new Library({
     config: Library.fake_config(),
-    files: new FakeFileResource({ dir, faked: { [path]: "" } }),
+    files: new FakeFileStore({ dir, faked: { [path]: "" } }),
   })
   const handler = new CicReplEventHandler({ path, library })
   const repl = new ReadlineRepl({ handler })

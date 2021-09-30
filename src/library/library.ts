@@ -1,6 +1,6 @@
 import { Module } from "../module"
 import * as ModuleLoaders from "../module-loaders"
-import { FileResource } from "../file-resource"
+import { FileStore } from "../file-store"
 import { Reporter } from "./reporter"
 import ty from "@xieyuheng/ty"
 import { customAlphabet } from "nanoid"
@@ -14,10 +14,10 @@ export type LibraryConfig = {
 
 export class Library {
   config: LibraryConfig
-  files: FileResource
+  files: FileStore
   cache: Map<string, Module> = new Map()
 
-  constructor(opts: { config: LibraryConfig; files: FileResource }) {
+  constructor(opts: { config: LibraryConfig; files: FileStore }) {
     this.config = opts.config
     this.files = opts.files
   }

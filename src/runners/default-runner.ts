@@ -1,18 +1,14 @@
 import { Library } from "../library"
-import { FileResource } from "../file-resource"
+import { FileStore } from "../file-store"
 import { Logger } from "../runner/logger"
 import { Runner } from "../runner"
 
 export class DefaultRunner extends Runner {
   library: Library
-  files: FileResource
+  files: FileStore
   logger?: Logger
 
-  constructor(opts: {
-    library: Library
-    files: FileResource
-    logger?: Logger
-  }) {
+  constructor(opts: { library: Library; files: FileStore; logger?: Logger }) {
     super()
     this.library = opts.library
     this.files = opts.files
