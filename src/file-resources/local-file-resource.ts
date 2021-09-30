@@ -21,7 +21,7 @@ export class LocalFileResource extends FileResource {
     return entries.map(({ path }) => path)
   }
 
-  src(path: string): string {
+  resolve(path: string): string {
     return Path.resolve(this.dir, path)
   }
 }
