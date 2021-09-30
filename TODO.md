@@ -1,3 +1,7 @@
+- `app-file-resource` be able to config `dir` by env variable
+
+  - default to `~/.cicada` -- with the help of `os.homedir()`
+
 - `app-file-resource` be able to `put` new file
 
   - by implementing `put` in `local-file-resource`
@@ -5,8 +9,6 @@
 - `readline-repl` be able to write history and load history back
 
   - `get` and `put` `~/.cicada/repl/history` using `AppFileResource`
-
-- `app-file-resource` be able to conf which dir to use by env variable
 
 - `readline-repl` -- use `app/node` dependency injection container
 
