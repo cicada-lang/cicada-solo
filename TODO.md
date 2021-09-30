@@ -1,5 +1,3 @@
-- `app/browser-app` -- stub
-
 - `app-file-store` be able to `put` new file
 
   - by implementing `put` in `local-file-store`
