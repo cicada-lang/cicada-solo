@@ -1,4 +1,4 @@
-- load `config` from `config` module instead of `process.env`
+- `app/browser-app` -- stub
 
 - `app-file-store` be able to `put` new file
 
@@ -9,10 +9,6 @@
   - `get` and `put` `~/.cicada/repl/history` using `AppFileStore`
 
 - `readline-repl` -- use `app/node` dependency injection container
-
-- `app/generic` -- stub
-- `app/node` -- inject instance of `cicada-file-store`
-- `app/browser` -- stub
 
 # error report
 
