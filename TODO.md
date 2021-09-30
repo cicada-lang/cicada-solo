@@ -1,3 +1,13 @@
+- `cicada-file-resource` -- for `~/.cicada` dir
+
+- `app/generic` -- stub
+- `app/node` -- inject instance of `cicada-file-resource`
+- `app/browser` -- stub
+
+- `~/.cicada/repl/history` use `FileResource`
+
+- [repl] write history and load history back
+
 - `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
 
 - [refactor] `base-im-pi-value` -- `isnert_im_ap`
