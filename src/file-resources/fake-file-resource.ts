@@ -13,7 +13,7 @@ export class FakeFileResource extends LocalFileResource {
     this.faked = faked || {}
   }
 
-  async list(): Promise<Array<string>> {
+  async keys(): Promise<Array<string>> {
     return Object.keys(this.faked)
   }
 

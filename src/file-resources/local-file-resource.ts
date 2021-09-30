@@ -16,7 +16,7 @@ export class LocalFileResource extends FileResource {
     return await fs.promises.readFile(file, "utf8")
   }
 
-  async list(): Promise<Array<string>> {
+  async keys(): Promise<Array<string>> {
     const entries = await readdirp.promise(this.dir)
     return entries.map(({ path }) => path)
   }
