@@ -1,51 +1,73 @@
 - `app-file-resource` be able to `put` new file
 
+  - by implementing `put` in `local-file-resource`
+
+- `readline-repl` be able to write history and load history back
+
+  - `get` and `put` `~/.cicada/repl/history` using `AppFileResource`
+
+- `app-file-resource` be able to conf which dir to use by env variable
+
+- `readline-repl` -- use `app/node` dependency injection container
+
 - `app/generic` -- stub
 - `app/node` -- inject instance of `cicada-file-resource`
 - `app/browser` -- stub
 
-- `~/.cicada/repl/history` use `FileResource`
+# error report
 
-- [repl] write history and load history back
+- get information about location from parser -- maybe rewrite `partech`
 
-- `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
+- framework for good error report
 
-- [refactor] `base-im-pi-value` -- `isnert_im_ap`
-- [refactor] `cons-im-pi-value` -- `isnert_im_ap`
+  - learn from elm
+    - https://elm-lang.org/news/compiler-errors-for-humans
+    - https://elm-lang.org/news/the-syntax-cliff
 
-- [refactor] `unify` of `Value`, `Neutral` and `Normal`
+- `parser/matchers` fix not catched parsing error -- for repl
 
-- `not-yet-value ` -- fix `unify`
-
-- [maybe] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
-
-  - create `ImFnInserter` and `ImApInserter` from `im-pi`'s `ret_t`
+- [cli] improve validation and error report
 
 # narrator of elaboration
 
 - inject `Narrator` to `check` and `infer`
 
-# error report
+# cicade-lang.com
 
-- [repl] fix not catched parsing error for repl
-- [cli] improve validation and error report
+- landing page
 
-- good error report like elm
+- landing page -- setup mailing list
 
-  - https://elm-lang.org/news/compiler-errors-for-humans
-  - https://elm-lang.org/news/the-syntax-cliff
+- load web library from gitlab and github
 
-- get information about location from parser
+  - `GitFileResource`
+  - `GitLabFileResource`
+  - `GitHubFileResource`
 
-# git-based wiki system
+- web REPL
+
+- [later] wiki of formal proofs
 
 # library manager
 
-- library registry server
+- library registry server -- `@cicada-lang/cicada-librarian`
 - download library from registry -- and cli support
 - library can be used as a module  -- like package manager
 
 # implicit
+
+- [error message] `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
+
+- [refactor] `base-im-pi-value` -- `isnert_im_ap`
+- [refactor] `cons-im-pi-value` -- `isnert_im_ap`
+
+- [refactor] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
+
+  - create `ImFnInserter` and `ImApInserter` from `im-pi`'s `ret_t`
+
+- [refactor] `unify` of `Value`, `Neutral` and `Normal`
+
+- `not-yet-value ` -- fix `unify`
 
 - Value.unify -- pi/fn-value.ts & pi/im-fn-value.ts
 
