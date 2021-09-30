@@ -1,5 +1,3 @@
-- `readline-repl` -- history statement by statement
-
 # error report
 
 - get information about location from parser -- maybe rewrite `partech`

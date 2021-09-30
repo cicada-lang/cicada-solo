@@ -4,12 +4,6 @@ import app from "../app/node-app"
 import Readline from "readline"
 import fs from "fs"
 
-type HistoryEntry = {
-  statement: string
-  when: number
-  where: string
-}
-
 export class ReadlineRepl extends Repl {
   dir: string
   handler: ReplEventHandler
@@ -36,13 +30,14 @@ export class ReadlineRepl extends Repl {
     dir: string
     handler: ReplEventHandler
   }): Promise<ReadlineRepl> {
-    const text = await app.files.get_or_fail("repl/history")
-    const history = text.split("\n")
+    const text = await app.files.get("repl/history")
+    const history = text ? text.trim().split("\n").reverse() : []
 
     const readline = Readline.createInterface({
       input: process.stdin,
       output: process.stdout,
       history,
+      historySize: 1000,
     })
 
     return new ReadlineRepl({
@@ -89,7 +84,7 @@ export class ReadlineRepl extends Repl {
 
   private listen_history(): void {
     this.readline.on("history", (history) => {
-      const text = history.join("\n")
+      const text = history.reverse().join("\n") + "\n"
       this.files.put("repl/history", text)
     })
   }
