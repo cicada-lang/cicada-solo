@@ -11,8 +11,12 @@ export class LocalFileStore extends FileStore {
     this.dir = opts.dir
   }
 
+  resolve(path: string): string {
+    return Path.resolve(this.dir, path)
+  }
+
   async get(path: string): Promise<string | undefined> {
-    const file = Path.isAbsolute(path) ? path : Path.resolve(this.dir, path)
+    const file = this.resolve(path)
     if (fs.existsSync(file) && fs.lstatSync(file).isFile()) {
       return await fs.promises.readFile(file, "utf8")
     } else {
@@ -20,12 +24,21 @@ export class LocalFileStore extends FileStore {
     }
   }
 
+  async put(path: string, text: string): Promise<boolean> {
+    const file = this.resolve(path)
+    if (!fs.existsSync(file)) {
+      await fs.promises.writeFile(file, text)
+      return false
+    } else if (fs.existsSync(file) && fs.lstatSync(file).isFile()) {
+      await fs.promises.writeFile(file, text)
+      return true
+    } else {
+      throw new Error(`I can not write to file: ${file}`)
+    }
+  }
+
   async keys(): Promise<Array<string>> {
     const entries = await readdirp.promise(this.dir)
     return entries.map(({ path }) => path)
-  }
-
-  resolve(path: string): string {
-    return Path.resolve(this.dir, path)
   }
 }

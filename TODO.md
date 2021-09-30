@@ -1,7 +1,3 @@
-- `app-file-store` be able to `put` new file
-
-  - by implementing `put` in `local-file-store`
-
 - `readline-repl` be able to write history and load history back
 
   - `get` and `put` `~/.cicada/repl/history` using `AppFileStore`
