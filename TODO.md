@@ -1,4 +1,10 @@
-- `app-file-resource` be able to `create` new file
+- `Resource` default implementation
+
+  - with the help of `ResourceError`
+
+- `FileResource` extends generic `Resource`
+
+- `app-file-resource` be able to `put` new file
 
 - `app/generic` -- stub
 - `app/node` -- inject instance of `cicada-file-resource`

@@ -1,10 +1,4 @@
-export abstract class Resource<T> {
-  abstract keys(): Promise<Array<string>>
-  abstract get_or_fail(key: string): Promise<T>
-  abstract all(): Promise<Record<string, T>>
-}
-
-export abstract class FileResource extends Resource<string> {
+export abstract class FileResource {
   abstract keys(): Promise<Array<string>>
   abstract get_or_fail(key: string): Promise<string>
 
