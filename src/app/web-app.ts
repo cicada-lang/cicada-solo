@@ -4,4 +4,4 @@ export class WebApp extends App {
   // TODO
 }
 
-export const app = new WebApp()
+export default new WebApp()

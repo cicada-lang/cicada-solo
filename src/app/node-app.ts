@@ -5,4 +5,4 @@ export class NodeApp extends App {
   files: AppFileStore = new AppFileStore()
 }
 
-export const app = new NodeApp()
+export default new NodeApp()
