@@ -2,7 +2,7 @@
 
 - get information about location from parser -- maybe rewrite `partech`
 
-- framework for good error report
+- infrastructure for good error report
 
   - learn from elm
     - https://elm-lang.org/news/compiler-errors-for-humans
