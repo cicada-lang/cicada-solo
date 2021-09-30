@@ -6,10 +6,7 @@ export class Load extends Command {
   name = "load"
   description = "Load a file into the REPL session"
 
-  match(text: string): boolean {
-    const lines = text.trim().split("\n")
-    if (lines.length !== 1) return false
-    const [line] = lines
+  match_line(line: string): boolean {
     return Boolean(line.match(/\.load\b/))
   }
 

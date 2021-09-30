@@ -5,10 +5,7 @@ export class Help extends Command {
   name = "help"
   description = "Print this help message"
 
-  match(text: string): boolean {
-    const lines = text.trim().split("\n")
-    if (lines.length !== 1) return false
-    const [line] = lines
+  match_line(line: string): boolean {
     return Boolean(line.match(/\.help\b/))
   }
 

@@ -6,10 +6,7 @@ export class SaveAll extends Command {
   name = "save_all"
   description = "Save all statements in this REPL session to a file"
 
-  match(text: string): boolean {
-    const lines = text.trim().split("\n")
-    if (lines.length !== 1) return false
-    const [line] = lines
+  match_line(line: string): boolean {
     return Boolean(line.match(/\.save_all\b/))
   }
 
