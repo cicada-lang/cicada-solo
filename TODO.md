@@ -1,6 +1,4 @@
-- `app-file-store` be able to config `dir` by env variable
-
-  - default to `~/.cicada` -- with the help of `os.homedir()`
+- load `config` from `config` module instead of `process.env`
 
 - `app-file-store` be able to `put` new file
 
