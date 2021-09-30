@@ -22,14 +22,33 @@ export class ReadlineRepl extends Repl {
   constructor(opts: {
     dir: string
     handler: ReplEventHandler
-    files?: AppFileStore
+    files: AppFileStore
+    readline: Readline.Interface
   }) {
     super()
     this.dir = opts.dir
     this.handler = opts.handler
-    this.files = opts.files || app.files
+    this.files = opts.files
+    this.readline = opts.readline
+  }
+
+  static async create(opts: {
+    dir: string
+    handler: ReplEventHandler
+    files?: AppFileStore
+  }): Promise<ReadlineRepl> {
+    const { dir, handler } = opts
+    const files = opts.files || app.files
+
     const { stdin: input, stdout: output } = process
-    this.readline = Readline.createInterface({ input, output })
+    const readline = Readline.createInterface({ input, output })
+
+    return new ReadlineRepl({
+      dir,
+      handler,
+      files,
+      readline,
+    })
   }
 
   prompt(): void {

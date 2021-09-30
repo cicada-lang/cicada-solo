@@ -1,5 +1,3 @@
-- `readline-repl` -- `ReadlineRepl.create` async builder
-
 - `readline-repl` be able to write history and load history back
 
   - `get` and `put` `~/.cicada/repl/history` using `AppFileStore`
