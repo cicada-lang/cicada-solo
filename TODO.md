@@ -1,10 +1,6 @@
 # implicit
 
-- `cons-im-pi` and `base-im-pi` inherit `im-pi`
-
-- remove `cons-im-pi-core` and `base-im-pi-core` just use `im-pi-core`
-
-- remove `cons-im-pi` and `base-im-pi` just use  `im-pi`
+- merge `cons-im-pi` and `base-im-pi` into `im-pi`
 
 - [refactor] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
 

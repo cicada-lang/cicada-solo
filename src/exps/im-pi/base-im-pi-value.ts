@@ -48,12 +48,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
         )
       }
 
-      return new Exps.BaseImPiCore(
-        this.field_name,
-        fresh_name,
-        arg_t,
-        ret_t_core
-      )
+      return new Exps.ImPiCore(this.field_name, fresh_name, arg_t, ret_t_core)
     }
   }
 

@@ -48,12 +48,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
         )
       }
 
-      return new Exps.ConsImPiCore(
-        this.field_name,
-        fresh_name,
-        arg_t,
-        ret_t_core
-      )
+      return new Exps.ImPiCore(this.field_name, fresh_name, arg_t, ret_t_core)
     }
   }
 
@@ -176,6 +171,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
         ].join("\n")
       )
     }
+
     const ret_t = this.ret_t_cl.apply(im_arg)
 
     if (!(ret_t instanceof Exps.ImPiValue)) {
