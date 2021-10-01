@@ -1,5 +1,11 @@
 # implicit
 
+- `cons-im-pi` and `base-im-pi` inherit `im-pi`
+
+- remove `cons-im-pi-core` and `base-im-pi-core` just use `im-pi-core`
+
+- remove `cons-im-pi` and `base-im-pi` just use  `im-pi`
+
 - [refactor] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
 
   - (A) create `ImFnInserter` and `ImApInserter` from `Exp`
@@ -37,6 +43,10 @@
     ...
   ]
   ```
+
+# cli
+
+- use `@xieyuheng/cildev` for beautiful help message
 
 # error report
 
