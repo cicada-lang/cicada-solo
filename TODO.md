@@ -1,9 +1,3 @@
-# implicit
-
-- [stdlib] try implicit argument in `stdlib`
-
-  - `category/implicit`
-
 # syntax
 
 - [syntax] back to `=>` lambda syntex -- for js familiarity
@@ -30,6 +24,12 @@
 # cli
 
 - use `@xieyuheng/cildev` for beautiful help message
+
+# implicit
+
+- [stdlib] try implicit argument in `stdlib`
+
+  - `category/implicit`
 
 # error report
 
