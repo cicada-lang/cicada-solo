@@ -20,7 +20,7 @@
 - [syntax] design syntex to help "same-as" charts
 
   ``` cicada
-  same! String [
+  the_same! String [
     "ratatouille",
     car(the((String) * String, cons("ratatouille", "baguette"))),
     ...
