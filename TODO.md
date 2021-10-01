@@ -1,3 +1,43 @@
+# implicit
+
+- [error message] `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
+
+- [refactor] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
+
+  - (A) create `ImFnInserter` and `ImApInserter` from `Exp`
+
+    - for last im-pi
+    - for more im-pi
+
+  - (B) `cons-im-pi-value` and `base-im-pi-value` inherit `im-pi-value`
+
+    - `im-pi-core` evaluate to different subclass of `im-pi-value`
+
+  - We choose (B)
+
+- [stdlib] try implicit argument in `stdlib`
+
+# syntax
+
+- [syntax] back to `=>` lambda syntex -- for js familiarity
+
+- rename `same` to `refl`
+
+- `same(x)` with one argument
+
+  - this will not effect normalization,
+    because `same(from)` and `same(to)` will always be definitional or computational equal.
+
+- [syntax] design syntex to help "same-as" charts
+
+  ``` cicada
+  same! String [
+    "ratatouille",
+    car(the((String) * String, cons("ratatouille", "baguette"))),
+    ...
+  ]
+  ```
+
 # error report
 
 - get information about location from parser
@@ -31,31 +71,11 @@
 
 - [optimization] use native `number` as `Nat`
 
-- it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
-
-  - this will not effect normalization, because `same(from)` and `same(to)` will always be definitional or computational equal.
-
-# syntax
-
-- design syntex to help "same-as" charts
-
-- back up `=>` lambda syntex -- for familiarity
-
 # library manager
 
-- library registry server -- `@cicada-lang/cicada-librarian`
-- download library from registry -- and cli support
-- library can be used as a module  -- like package manager
+- [cli] download library from registry -- `libraries.cicada-lang.com`
 
-# implicit
-
-- [error message] `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
-
-- [refactor] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
-
-  - create `ImFnInserter` and `ImApInserter` from `im-pi`'s `ret_t`
-
-- [stdlib] try implicit argument in `stdlib`
+- library can be used as a module
 
 # use `unify` to replace `readback`
 
