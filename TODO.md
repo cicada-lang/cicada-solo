@@ -1,36 +1,45 @@
 # error report
 
-- get information about location from parser -- maybe rewrite `partech`
+- get information about location from parser
 
 - infrastructure for good error report
 
-  - learn from elm
-    - https://elm-lang.org/news/compiler-errors-for-humans
-    - https://elm-lang.org/news/the-syntax-cliff
+  - structure of error:
+    - kind
+    - context
+    - message
+    - hint
 
 - `parser/matchers` fix not catched parsing error -- for repl
 
 - [cli] improve validation and error report
 
+- [refactor] `Reporter.error` -- take `path` or `text`?
+
 # narrator of elaboration
 
 - inject `Narrator` to `check` and `infer`
 
-# cicade-lang.com
+  - how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
+  - how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
 
-- landing page
+# core features
 
-- landing page -- setup mailing list
+- support to use `=` to do local definitions in class
 
-- load web library from gitlab and github
+- `Fn` be able to annotate argument type and return type
 
-  - `GitFileStore`
-  - `GitLabFileStore`
-  - `GitHubFileStore`
+- [optimization] use native `number` as `Nat`
 
-- web REPL
+- it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
 
-- [later] wiki of formal proofs
+  - this will not effect normalization, because `same(from)` and `same(to)` will always be definitional or computational equal.
+
+# syntax
+
+- design syntex to help "same-as" charts
+
+- back up `=>` lambda syntex -- for familiarity
 
 # library manager
 
@@ -42,12 +51,13 @@
 
 - [error message] `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
 
-- [refactor] `base-im-pi-value` -- `isnert_im_ap`
-- [refactor] `cons-im-pi-value` -- `isnert_im_ap`
-
 - [refactor] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
 
   - create `ImFnInserter` and `ImApInserter` from `im-pi`'s `ret_t`
+
+- [stdlib] try implicit argument in `stdlib`
+
+# use `unify` to replace `readback`
 
 - [refactor] `unify` of `Value`, `Neutral` and `Normal`
 
@@ -68,14 +78,6 @@
 - Value.unify -- cls/fulfilled-cls-value.ts
 
 - `Subst.unify` occur check -- use `free_names`
-
-- [stdlib] try implicit argument in `stdlib`
-
-# use `unify` to replace `readback`
-
-# refactor
-
-- [refactor] `Reporter.error` -- take `path` or `text`?
 
 # subtype
 
@@ -100,28 +102,9 @@
   (how to use introduction rule to generate elimination rule and all other rules?)
   - adjoint functors -- category theory
 
-- how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
-- how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
-
 # quotient type
 
 - learn from lean
-
-# core features
-
-- [requirement] support to use `=` to do local definitions in class
-- [optimization] use native `number` as `Nat`
-
-# syntax
-
-- as our syntax become more and more complicated,
-  we need to improve the API of `@cicada-lang/partech`,
-  to manage the complexity.
-
-- [maybe] design syntex to help "same-as" charts
-- [maybe] explicit `apply` -- to help non-elim in syntex
-- [maybe] it will be good to have a form of explicit `same(x)` -- use `refl` for the zero argument version
-  - this will not effect normalization, because `same(from)` and `same(to)` will always be definitional or computational equal.
 
 # stdlib
 
