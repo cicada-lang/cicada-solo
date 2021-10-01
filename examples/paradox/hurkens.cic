@@ -25,50 +25,28 @@ U2(X: Type): Type {
 U: Type = (X: Type) -> U2(X)
 
 tauon(t: P(P(U))): U {
-  (X) {
-    (f) {
-      (p) {
-        t((x) {
-          p(f(x(X, f)))
-        })
-      }
-    }
-  }
+  (X, f, p) => t((x) => p(f(x(X, f))))
 }
 
 sigma(s: U): P(P(U)) {
-  s(U, (t) { tauon(t) })
+  s(U, (t) => tauon(t))
 }
 
-delta: P(U) = (y) {
-  Not((p: P(U), _: sigma(y, p)) -> p(tauon(sigma(y))))
-}
+delta: P(U) = (y) => Not((p: P(U), _: sigma(y, p)) -> p(tauon(sigma(y))))
 
-omega: U = tauon((p) {
- (x: U, _: sigma(x, p)) -> p(x)
-})
+omega: U = tauon((p) => (x: U, _: sigma(x, p)) -> p(x))
 
 D: Type = (p: P(U), _: sigma(omega, p)) -> p(tauon(sigma(omega)))
 
 lem1(p: P(U), H1: (x: U, _: sigma(x, p)) -> p(x)): p(omega) {
-  H1(omega, (x) {
-    H1(tauon(sigma(x)))
-  })
+  H1(omega, (x) => H1(tauon(sigma(x))))
 }
 
-lem2: Not(D) = lem1(delta, (x, H2, H3) {
-  H3(delta, H2, (p) {
-    H3((y) {
-      p(tauon(sigma(y)))
-    })
-  })
+lem2: Not(D) = lem1(delta, (x, H2, H3) => {
+  H3(delta, H2, (p) => H3((y) => p(tauon(sigma(y)))))
 })
 
-lem3: D = (p) {
-  lem1((y) {
-    p(tauon(sigma(y)))
-  })
-}
+lem3: D = (p) => lem1((y) => p(tauon(sigma(y))))
 
 // NOTE The checker will run into infinite loop
 // loop: Bottom = lem2(lem3)

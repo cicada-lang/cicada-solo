@@ -10,15 +10,8 @@ id1(implicit { A: Type }, x: A): A {
   x
 }
 
-id2: (implicit { A: Type }, x: A) -> A =
-  (x) {
-    x
-  }
-
-id3: (implicit { A: Type }, x: A) -> A =
-  (implicit { A }, x) {
-    x
-  }
+id2: (implicit { A: Type }, x: A) -> A = (x) => x
+id3: (implicit { A: Type }, x: A) -> A = (implicit { A }, x) => x
 
 id1
 id2
@@ -72,10 +65,8 @@ car_type
 
 car_type_again: (
   implicit { A: Type, B: Type }, pair: (A) * B,
-) -> Type =
-  (implicit { A, B }, pair) {
-    A
-  }
+) -> Type = (implicit { A, B }, pair) => A
+
 
 car_type_again
 

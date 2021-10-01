@@ -9,6 +9,8 @@ export const operator = {
       '"("',
       { names: "names" },
       '")"',
+      '"="',
+      '">"',
       '"{"',
       { ret: "exp" },
       '"}"',
@@ -141,6 +143,14 @@ export const operand = {
       '"-"',
       '">"',
       { ret_t: "exp" },
+    ],
+    "operand:fn": [
+      '"("',
+      { names: "names" },
+      '")"',
+      '"="',
+      '">"',
+      { ret: "exp" },
     ],
     "operand:sigma": [
       '"("',
@@ -366,13 +376,6 @@ export const names = {
       { entries: { $ap: ["zero_or_more", "name_entry", '","'] } },
       { last_entry: "name_entry" },
       { $ap: ["optional", '","'] },
-    ],
-    // NOTE The following allow us to write `x, y` as `x) (y`,
-    //   thus allow us to write `(x, y)` as `(x) (y)`,
-    //   thus this grammar is only meaningful when used in between `(` ... `)`.
-    "names:names_bracket_separated": [
-      { entries: { $ap: ["zero_or_more", "name_entry", '")"', '"("'] } },
-      { last_entry: "name_entry" },
     ],
   },
 }

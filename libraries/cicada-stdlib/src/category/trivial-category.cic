@@ -2,12 +2,12 @@ import { Category } from "./category.cic"
 
 trivial_category: Category = {
   Object: Trivial
-  Morphism: (dom, cod) { Trivial }
+  Morphism: (dom, cod) => Trivial
 
-  id: (x) { sole }
-  compose: (x, y, z, f, g) { sole }
-  id_left: (x, y, f) { same }
-  id_right: (x, y, f) { same }
+  id: (x) => sole
+  compose: (x, y, z, f, g) => sole
+  id_left: (x, y, f) => same
+  id_right: (x, y, f) => same
 
-  compose_associative: (x, y, z, w, f, g, h) { same }
+  compose_associative: (x, y, z, w, f, g, h) => same
 }

@@ -42,6 +42,45 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
     }, exp_matcher(ret_t))
 }
 
+export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
+  const { names, ret } = body
+
+  return names_matcher(names)
+    .reverse()
+    .reduce((result, name_entry) => {
+      switch (name_entry.kind) {
+        case "name": {
+          return new Exps.Fn(name_entry.name, result)
+        }
+        case "implicit": {
+          if (!(result instanceof Exps.Fn)) {
+            throw new Error(
+              [
+                `When reducing implicit names,`,
+                `the names_matcher expects the result to be Exps.Fn`,
+                `class name: ${result.constructor.name}`,
+              ].join("\n")
+            )
+          }
+
+          return new Exps.ImFn(
+            [
+              ...name_entry.names.map((name) => ({
+                field_name: name,
+                local_name: name,
+              })),
+              {
+                field_name: name_entry.last_name,
+                local_name: name_entry.last_name,
+              },
+            ],
+            result
+          )
+        }
+      }
+    }, exp_matcher(ret))
+}
+
 export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
   const { bindings, cdr_t } = body
 
@@ -78,41 +117,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
           (result, arg) => new Exps.Ap(result, arg),
           operator_matcher(target)
         ),
-    "operator:fn": ({ names, ret }) =>
-      names_matcher(names)
-        .reverse()
-        .reduce((result, name_entry) => {
-          switch (name_entry.kind) {
-            case "name": {
-              return new Exps.Fn(name_entry.name, result)
-            }
-            case "implicit": {
-              if (!(result instanceof Exps.Fn)) {
-                throw new Error(
-                  [
-                    `When reducing implicit names,`,
-                    `the names_matcher expects the result to be Exps.Fn`,
-                    `class name: ${result.constructor.name}`,
-                  ].join("\n")
-                )
-              }
-
-              return new Exps.ImFn(
-                [
-                  ...name_entry.names.map((name) => ({
-                    field_name: name,
-                    local_name: name,
-                  })),
-                  {
-                    field_name: name_entry.last_name,
-                    local_name: name_entry.last_name,
-                  },
-                ],
-                result
-              )
-            }
-          }
-        }, exp_matcher(ret)),
+    "operator:fn": fn_handler,
     "operator:car": ({ target }) => new Exps.Car(exp_matcher(target)),
     "operator:cdr": ({ target }) => new Exps.Cdr(exp_matcher(target)),
     "operator:dot_field": ({ target, name }) =>
@@ -188,6 +193,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
 export function operand_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "operand:pi": pi_handler,
+    "operand:fn": fn_handler,
     "operand:sigma": sigma_handler,
     "operand:cons": ({ car, cdr }) =>
       new Exps.Cons(exp_matcher(car), exp_matcher(cdr)),

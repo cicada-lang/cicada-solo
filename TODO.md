@@ -1,8 +1,8 @@
+- [syntex] fix `Fn` and `ImFn` `repr` for `=>` syntex
+
+- [cli] `check` avoid checking files not in `src` -- like `README.md`
+
 # syntax
-
-- [syntax] back to `=>` lambda syntex -- for js familiarity
-
-  - support both `=> exp` and `=> { exp }`
 
 - rename `same` to `refl`
 

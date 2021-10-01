@@ -14,13 +14,9 @@ cong(
 ): Equal(Result, f(from), f(to)) {
   replace(
     target,
-    (to) { Equal(Result, f(from), f(to)) },
+    (to) => Equal(Result, f(from), f(to)),
     same)
 }
-
-`)
-
-tester.echo_stmts(`
 
 cong(
   implicit {
@@ -35,7 +31,7 @@ cong(
 ): Equal(Result, f(from), f(to)) {
   replace(
     target,
-    (to) { Equal(Result, f(from), f(to)) },
+    (to) => Equal(Result, f(from), f(to)),
     same)
 }
 

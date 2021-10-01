@@ -1,5 +1,5 @@
 add(x: Nat, y: Nat): Nat {
-  nat_rec(x, y, (_prev, almost) { add1(almost) })
+  nat_rec(x, y, (_prev, almost) => add1(almost))
 }
 
 class Integer {

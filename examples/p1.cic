@@ -1,9 +1,9 @@
-add: (Nat, Nat) -> Nat = (x, y) {
-  nat_rec(x, y, (_prev, almost) { add1(almost) })
+add: (Nat, Nat) -> Nat = (x, y) => {
+  nat_rec(x, y, (_prev, almost) => { add1(almost) })
 }
 
-mul: (Nat, Nat) -> Nat = (x, y) {
-  nat_rec(x, 0, (_prev, almost) { add(almost, y) })
+mul: (Nat, Nat) -> Nat = (x, y) => {
+  nat_rec(x, 0, (_prev, almost) => { add(almost, y) })
 }
 
 Prime(n: Nat): Type {

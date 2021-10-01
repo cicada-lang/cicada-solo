@@ -1,13 +1,13 @@
 add(x: Nat, y: Nat): Nat {
-  nat_rec(y, x, (prev, almost) { add1(almost) })
+  nat_rec(y, x, (prev, almost) => add1(almost))
 }
 
 mul(x: Nat, y: Nat): Nat {
-  nat_rec(y, 0, (prev, almost) { add(almost, x) })
+  nat_rec(y, 0, (prev, almost) => add(almost, x))
 }
 
 pow(x: Nat, y: Nat): Nat {
-  nat_rec(y, 1, (prev, almost) { mul(almost, x) })
+  nat_rec(y, 1, (prev, almost) => mul(almost, x))
 }
 
 eight =
