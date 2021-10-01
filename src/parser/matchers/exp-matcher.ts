@@ -29,8 +29,8 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
             .reverse()
             .reduce<Exps.ImPi>(
               (result, entry) =>
-                new Exps.ConsImPi(entry.name, entry.name, entry.exp, result),
-              new Exps.BaseImPi(
+                new Exps.ImPi(entry.name, entry.name, entry.exp, result),
+              new Exps.ImPi(
                 binding.last_entry.name,
                 binding.last_entry.name,
                 binding.last_entry.exp,

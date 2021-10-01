@@ -1,7 +1,5 @@
 # implicit
 
-- merge `cons-im-pi` and `base-im-pi` into `im-pi`
-
 - [refactor] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
 
   - (A) create `ImFnInserter` and `ImApInserter` from `Exp`
