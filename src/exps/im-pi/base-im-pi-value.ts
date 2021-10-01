@@ -179,7 +179,20 @@ export class BaseImPiValue extends Exps.ImPiValue {
       // console.log("- im-ap insertion :", core.repr())
     }
 
-    const im_arg = solution.find_or_fail(ctx, not_yet_value)
+    const im_arg = solution.find(fresh_name)
+    if (im_arg === undefined) {
+      throw new Trace(
+        [
+          `Fail to find ${fresh_name} in solution`,
+          `  solution names: ${solution.names}`,
+          `  this.arg_t class name: ${this.arg_t.constructor.name}`,
+          `  this.field_name: ${this.field_name}`,
+          `  arg: ${arg.repr()}`,
+          `  target_core: ${target_core.repr()}`,
+        ].join("\n")
+      )
+    }
+
     const im_arg_core = readback(ctx, this.arg_t, im_arg)
     // DEBUG
     // console.log("- inserting im-ap arg:", im_arg_core.repr())

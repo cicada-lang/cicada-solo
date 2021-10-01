@@ -128,22 +128,6 @@ export abstract class Solution {
 
     return solution
   }
-
-  find_or_fail(ctx: Ctx, not_yet_value: Exps.NotYetValue): Value {
-    const value = this.find(Solution.logic_var_name(not_yet_value))
-
-    if (value === undefined) {
-      const not_yet_value_repr = readback(
-        ctx,
-        not_yet_value.t,
-        not_yet_value
-      ).repr()
-
-      throw new Trace(`Fail to find logic variable: ${not_yet_value_repr}`)
-    }
-
-    return value
-  }
 }
 
 class ExtendSolution extends Solution {

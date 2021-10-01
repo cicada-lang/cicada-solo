@@ -1,7 +1,5 @@
 # implicit
 
-- [error message] `base-im-pi-value` -- `isnert_im_ap` should not use `find_or_fail`
-
 - [refactor] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
 
   - (A) create `ImFnInserter` and `ImApInserter` from `Exp`
@@ -16,6 +14,8 @@
   - We choose (B)
 
 - [stdlib] try implicit argument in `stdlib`
+
+  - `category/implicit`
 
 # syntax
 
