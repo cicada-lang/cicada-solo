@@ -82,6 +82,6 @@ export class ImFn extends Exp {
   repr(): string {
     const args = this.fn_args_repr().join(", ")
     const ret = this.fn_ret_repr()
-    return `(${args}) { ${ret} }`
+    return `(${args}) => { ${ret} }`
   }
 }

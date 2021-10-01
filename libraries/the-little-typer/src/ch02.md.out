@@ -1,9 +1,9 @@
-(x) { cons(x, (_1) { _1 }) }: (x: String) -> (_: String) * (_1: String) -> String
-cons("x", (_1) { _1 }): (_: String) * (_1: String) -> String
-same: Equal((_: String) * (_1: String) -> String, cons("x", (_1) { _1 }), cons("x", (_1) { _1 }))
-same: Equal((_: Nat) -> (_1: Nat) * Nat, (_) { cons(_, _) }, (_) { cons(_, _) })
-same: Equal((_: Nat) -> Nat, (_) { _ }, (_) { _ })
-same: Equal((_: (_: Nat) * Nat) -> Nat, (_) { car(_) }, (_) { car(_) })
+(x) => { cons(x, (_1) => { _1 }) }: (x: String) -> (_: String) * (_1: String) -> String
+cons("x", (_1) => { _1 }): (_: String) * (_1: String) -> String
+same: Equal((_: String) * (_1: String) -> String, cons("x", (_1) => { _1 }), cons("x", (_1) => { _1 }))
+same: Equal((_: Nat) -> (_1: Nat) * Nat, (_) => { cons(_, _) }, (_) => { cons(_, _) })
+same: Equal((_: Nat) -> Nat, (_) => { _ }, (_) => { _ })
+same: Equal((_: (_: Nat) * Nat) -> Nat, (_) => { car(_) }, (_) => { car(_) })
 same: Equal((_: String) * String, cons("celery", "carrot"), cons("celery", "carrot"))
 same: Equal(String, "naught", "naught")
 same: Equal(String, "more", "more")

@@ -52,11 +52,11 @@ export class ImFnCore extends Core {
   repr(): string {
     const args = this.fn_args_repr().join(", ")
     const ret = this.fn_ret_repr()
-    return `(${args}) { ${ret} }`
+    return `(${args}) => { ${ret} }`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
     const fn_repr = this.ret.alpha_repr(ctx.extend(this.local_name))
-    return `(implicit ${this.field_name}) { ${fn_repr} }`
+    return `(implicit ${this.field_name}) => { ${fn_repr} }`
   }
 }

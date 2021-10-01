@@ -2,9 +2,9 @@ I am expecting the following two values to be the same (_: Nat) -> Nat.
 But they are not.
 
 from left hand side:
-  (_) { add1(_) }
+  (_) => { add1(_) }
 to right hand side:
-  (_) { nat_ind(_, (target_nat) { Nat }, 1, (prev, almost) { add1(almost) }) }
+  (_) => { nat_ind(_, (target_nat) => { Nat }, 1, (prev, almost) => { add1(almost) }) }
 
 previous:
 - same

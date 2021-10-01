@@ -1,5 +1,3 @@
-- [syntex] fix `Fn` and `ImFn` `repr` for `=>` syntex
-
 - [cli] `check` avoid checking files not in `src` -- like `README.md`
 
 # syntax

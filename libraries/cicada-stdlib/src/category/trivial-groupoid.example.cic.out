@@ -1,21 +1,21 @@
 {
   Object: Trivial
-  Morphism: (dom, cod) { Trivial }
-  id: (x) { sole }
-  compose: (x, y, z, f, g) { sole }
-  id_left: (x, y, f) { same }
-  id_right: (x, y, f) { same }
-  compose_associative: (x, y, z, w, f, g, h) { same }
-  inv: (x, y, f) { sole }
-  inv_iso: (x, y, f) { {
+  Morphism: (dom, cod) => { Trivial }
+  id: (x) => { sole }
+  compose: (x, y, z, f, g) => { sole }
+  id_left: (x, y, f) => { same }
+  id_right: (x, y, f) => { same }
+  compose_associative: (x, y, z, w, f, g, h) => { same }
+  inv: (x, y, f) => { sole }
+  inv_iso: (x, y, f) => { {
     cat: {
       Object: Trivial
-      Morphism: (dom, cod) { Trivial }
-      id: (x1) { sole }
-      compose: (x1, y1, z, f1, g) { sole }
-      id_left: (x1, y1, f1) { same }
-      id_right: (x1, y1, f1) { same }
-      compose_associative: (x1, y1, z, w, f1, g, h) { same }
+      Morphism: (dom, cod) => { Trivial }
+      id: (x1) => { sole }
+      compose: (x1, y1, z, f1, g) => { sole }
+      id_left: (x1, y1, f1) => { same }
+      id_right: (x1, y1, f1) => { same }
+      compose_associative: (x1, y1, z, w, f1, g, h) => { same }
     }
     dom: sole
     cod: sole
@@ -44,12 +44,12 @@
       compose_associative: (x1: Object1, y1: Object1, z: Object1, w: Object1, f1: Morphism1(x1, y1), g: Morphism1(y1, z), h: Morphism1(z, w)) -> Equal(Morphism1(x1, w), compose1(x1, y1, w, f1, compose1(y1, z, w, g, h)), compose1(x1, z, w, compose1(x1, y1, z, f1, g), h))
     } = {
       Object: Object
-      Morphism: (dom, cod) { Morphism(dom, cod) }
-      id: (x1) { id(x1) }
-      compose: (x1, y1, z, f1, g) { compose(x1, y1, z, f1, g) }
-      id_left: (x1, y1, f1) { id_left(x1, y1, f1) }
-      id_right: (x1, y1, f1) { id_right(x1, y1, f1) }
-      compose_associative: (x1, y1, z, w, f1, g, h) { compose_associative(x1, y1, z, w, f1, g, h) }
+      Morphism: (dom, cod) => { Morphism(dom, cod) }
+      id: (x1) => { id(x1) }
+      compose: (x1, y1, z, f1, g) => { compose(x1, y1, z, f1, g) }
+      id_left: (x1, y1, f1) => { id_left(x1, y1, f1) }
+      id_right: (x1, y1, f1) => { id_right(x1, y1, f1) }
+      compose_associative: (x1, y1, z, w, f1, g, h) => { compose_associative(x1, y1, z, w, f1, g, h) }
     }
     dom: Object = x
     cod: Object = y
