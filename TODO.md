@@ -1,5 +1,3 @@
-- [cli] `check` avoid checking files not in `src` -- like `README.md`
-
 # syntax
 
 - rename `same` to `refl`

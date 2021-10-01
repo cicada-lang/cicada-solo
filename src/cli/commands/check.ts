@@ -33,7 +33,11 @@ export const handler = async (argv: Argv) => {
   const config = Library.config_schema.validate(
     JSON.parse(await fs.promises.readFile(config_file, "utf8"))
   )
-  const files = new LocalFileStore({ dir: Path.dirname(config_file) })
+
+  const files = new LocalFileStore({
+    dir: Path.resolve(Path.dirname(config_file), config.src),
+  })
+
   const library = new Library({ files, config })
 
   console.log(library.info())
