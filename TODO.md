@@ -1,18 +1,5 @@
 # implicit
 
-- [refactor] merge `cons-im-pi` and `base-im-pi` back to `im-pi`
-
-  - (A) create `ImFnInserter` and `ImApInserter` from `Exp`
-
-    - for last im-pi
-    - for more im-pi
-
-  - (B) `cons-im-pi-value` and `base-im-pi-value` inherit `im-pi-value`
-
-    - `im-pi-core` evaluate to different subclass of `im-pi-value`
-
-  - We choose (B)
-
 - [stdlib] try implicit argument in `stdlib`
 
   - `category/implicit`
@@ -20,6 +7,8 @@
 # syntax
 
 - [syntax] back to `=>` lambda syntex -- for js familiarity
+
+  - support both `=> exp` and `=> { exp }`
 
 - rename `same` to `refl`
 
