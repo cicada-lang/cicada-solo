@@ -13,7 +13,7 @@
   - this will not effect normalization,
     because `same(from)` and `same(to)` will always be definitional or computational equal.
 
-- [syntax] design syntex to help "same-as" charts
+- "same-as" charts
 
   ``` cicada
   the_same! String [
