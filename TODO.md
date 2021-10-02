@@ -1,6 +1,6 @@
 # cli
 
-- [cli] replace `yargv`
+- [cli] replace `yargs`
 - [cli] move `cli/command` and `cli/command-runner` to `infra`
 
 # implicit
