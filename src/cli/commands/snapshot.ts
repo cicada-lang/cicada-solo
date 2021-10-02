@@ -33,8 +33,8 @@ export class SnapshotCommand extends Command<Argv> {
 
     const config = config_file
       ? Library.config_schema.validate(
-        JSON.parse(await fs.promises.readFile(config_file, "utf8"))
-      )
+          JSON.parse(await fs.promises.readFile(config_file, "utf8"))
+        )
       : Library.fake_config()
     const files = config_file
       ? new LocalFileStore({ dir })
@@ -48,8 +48,3 @@ export class SnapshotCommand extends Command<Argv> {
     }
   }
 }
-
-export const command = new SnapshotCommand().command
-export const description = new SnapshotCommand().description
-export const builder = new SnapshotCommand().builder
-export const handler = new SnapshotCommand().handler

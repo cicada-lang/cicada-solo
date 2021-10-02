@@ -55,9 +55,3 @@ export class RunCommand extends Command<Argv> {
     }
   }
 }
-
-export const aliases = ["$0"]
-export const command = new RunCommand().command
-export const description = new RunCommand().description
-export const builder = new RunCommand().builder
-export const handler = new RunCommand().handler

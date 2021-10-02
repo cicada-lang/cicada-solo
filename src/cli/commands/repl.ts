@@ -30,8 +30,3 @@ export class ReplCommand extends Command<Argv> {
     await repl.run()
   }
 }
-
-export const command = new ReplCommand().command
-export const description = new ReplCommand().description
-export const builder = new ReplCommand().builder
-export const handler = new ReplCommand().handler

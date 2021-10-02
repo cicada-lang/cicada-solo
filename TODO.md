@@ -1,6 +1,6 @@
 # cli
 
-- [cli] do not load commands from files -- register commands by hand
+- [cli] rename `Command.command` to `Command.signature`
 
 - [cli] refactor commands
 

@@ -16,7 +16,7 @@ type Argv = {
 export class CheckCommand extends Command<Argv> {
   command = "check [library]"
   description = "Check a library -- by cwd, dir or library.json"
-  builder = {
+  builder: any = {
     watch: { type: "boolean", default: false },
   }
 
@@ -50,11 +50,6 @@ export class CheckCommand extends Command<Argv> {
     }
   }
 }
-
-export const command = new CheckCommand().command
-export const description = new CheckCommand().description
-export const builder = new CheckCommand().builder
-export const handler = new CheckCommand().handler
 
 async function check(library: Library, files: LocalFileStore): Promise<void> {
   let errors: Array<unknown> = []
