@@ -1,8 +1,8 @@
-import { CommandRunner } from "./command-runner"
+import { YargsCommandRunner } from "./command-runners"
 import * as Commands from "./commands"
 
 export function run(): void {
-  const runner = new CommandRunner()
+  const runner = new YargsCommandRunner()
 
   runner.register(new Commands.RunCommand(), { default: true })
   runner.register(new Commands.ReplCommand())

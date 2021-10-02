@@ -1,7 +1,9 @@
 # cli
 
-- [cli] refactor commands
+- [cli] `CommandRunner` abstract class
+- [cli] `YargsCommandRunner` extends `CommandRunner`
 
+- [cli] refactor commands
 - [cli] use `infra/clidev` for beautiful help message
 
 # syntax

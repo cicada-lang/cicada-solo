@@ -1,7 +1,7 @@
 import yargs from "yargs"
-import { Command } from "./command"
+import { Command } from "../command"
 
-export class CommandRunner {
+export class YargsCommandRunner {
   run(): void {
     yargs.demandCommand()
     yargs.strict()
