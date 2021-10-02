@@ -1,8 +1,7 @@
 # cli
 
-- [cli] `YargsCommandRunner` extends `CommandRunner`
-
 - [cli] refactor commands
+
 - [cli] use `infra/clidev` for beautiful help message
 
 # syntax
