@@ -49,6 +49,6 @@ export class Same extends Exp {
   }
 
   repr(): string {
-    return `same(${this.exp.repr()}`
+    return `same(${this.exp.repr()})`
   }
 }

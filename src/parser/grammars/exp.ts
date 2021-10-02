@@ -231,6 +231,7 @@ export const operand = {
       '")"',
     ],
     "operand:refl": ['"refl"'],
+    "operand:same": ['"same"', '"("', { exp: "exp" }, '")"'],
     "operand:trivial": ['"Trivial"'],
     "operand:sole": ['"sole"'],
     "operand:absurd": ['"Absurd"'],

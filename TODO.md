@@ -1,6 +1,8 @@
 # syntax
 
-- `Exps.Same` syntax
+- `Exps.TheSame`
+
+- `Exps.TheSame` -- syntax `the_same(t, exp)`
 
 - "same-as" charts
 
