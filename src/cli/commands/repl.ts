@@ -14,9 +14,8 @@ type Argv = {
 export class ReplCommand extends Command<Argv> {
   signature = "repl [dir]"
   description = "Run interactive REPL"
-  builder = {}
 
-  async handler(argv: Argv): Promise<void> {
+  async execute(argv: Argv): Promise<void> {
     const dir = Path.resolve(argv["dir"] || process.cwd())
 
     const path = `repl-file-${nanoid()}.cic`

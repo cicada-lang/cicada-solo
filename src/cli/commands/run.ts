@@ -15,12 +15,11 @@ type Argv = {
 export class RunCommand extends Command<Argv> {
   signature = "run [file]"
   description = "Run a file -- support .md or .cic"
-  builder = {}
 
-  async handler(argv: Argv): Promise<void> {
+  async execute(argv: Argv): Promise<void> {
     if (argv["file"] === undefined) {
       const command = new ReplCommand()
-      await command.handler({ dir: process.cwd() })
+      await command.execute({ dir: process.cwd() })
       return
     }
 

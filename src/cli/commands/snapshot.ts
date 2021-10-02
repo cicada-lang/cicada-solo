@@ -14,9 +14,8 @@ type Argv = {
 export class SnapshotCommand extends Command<Argv> {
   signature = "snapshot <file>"
   description = "Snapshot a file -- write to <file>.out"
-  builder = {}
 
-  async handler(argv: Argv): Promise<void> {
+  async execute(argv: Argv): Promise<void> {
     if (!fs.existsSync(argv["file"])) {
       console.error(`The given file does not exist: ${argv["file"]}`)
       process.exit(1)

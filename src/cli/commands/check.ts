@@ -16,11 +16,11 @@ type Argv = {
 export class CheckCommand extends Command<Argv> {
   signature = "check [library]"
   description = "Check a library -- by cwd, dir or library.json"
-  builder: any = {
+  options: any = {
     watch: { type: "boolean", default: false },
   }
 
-  async handler(argv: Argv): Promise<void> {
+  async execute(argv: Argv): Promise<void> {
     if (argv["library"] && !fs.existsSync(argv["library"])) {
       console.error(`The given file or dir does not exist: ${argv["library"]}`)
       process.exit(1)

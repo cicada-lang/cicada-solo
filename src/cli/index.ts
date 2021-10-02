@@ -21,14 +21,16 @@ function register(
     yargs.command({
       ...command,
       command: command.signature,
-      handler: command.handler,
+      builder: command.options,
+      handler: command.execute,
       aliases: ["$0"],
     })
   } else {
     yargs.command({
       ...command,
       command: command.signature,
-      handler: command.handler,
+      builder: command.options,
+      handler: command.execute,
     })
   }
 }
