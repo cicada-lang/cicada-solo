@@ -284,7 +284,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
         .reduce((vector, exp) => new Exps.Vec(exp, vector), new Exps.Vecnil()),
     "operand:equal": ({ t, from, to }) =>
       new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
-    "operand:same": () => new Exps.Same(),
+    "operand:refl": () => new Exps.Refl(),
     "operand:trivial": () => new Exps.Trivial(),
     "operand:sole": () => new Exps.Sole(),
     "operand:absurd": () => new Exps.Absurd(),

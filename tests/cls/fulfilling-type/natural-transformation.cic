@@ -112,4 +112,4 @@ the(
     Type,
     NaturalTransformation,
     NaturalTransformation2),
-  same)
+  refl)

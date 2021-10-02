@@ -15,7 +15,7 @@ cong(
   replace(
     target,
     (to) => Equal(Result, f(from), f(to)),
-    same)
+    refl)
 }
 
 cong(
@@ -32,7 +32,7 @@ cong(
   replace(
     target,
     (to) => Equal(Result, f(from), f(to)),
-    same)
+    refl)
 }
 
 `)

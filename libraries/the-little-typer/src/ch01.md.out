@@ -1,18 +1,18 @@
 "ratatouille": String
 cons("ratatouille", "baguette"): (_: String) * String
-same: Equal(String, "ratatouille", "ratatouille")
-same: Equal((_: String) * String, cons("ratatouille", "baguette"), cons("ratatouille", "baguette"))
+refl: Equal(String, "ratatouille", "ratatouille")
+refl: Equal((_: String) * String, cons("ratatouille", "baguette"), cons("ratatouille", "baguette"))
 "ratatouille": String
-same: Equal(String, "ratatouille", "ratatouille")
+refl: Equal(String, "ratatouille", "ratatouille")
 (_: String) * String: Type
 String: Type
 Type: Type
-same: Equal(Type, String, String)
+refl: Equal(Type, String, String)
 (_: String) * String: Type
 cons("olive", "oil"): (_: String) * String
 172: Nat
 0: Nat
 0: Nat
-same: Equal(Nat, 0, 0)
-same: Equal(Nat, 0, 0)
+refl: Equal(Nat, 0, 0)
+refl: Equal(Nat, 0, 0)
 2: Nat

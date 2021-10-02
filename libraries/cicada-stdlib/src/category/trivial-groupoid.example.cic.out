@@ -3,9 +3,9 @@
   Morphism: (dom, cod) => { Trivial }
   id: (x) => { sole }
   compose: (x, y, z, f, g) => { sole }
-  id_left: (x, y, f) => { same }
-  id_right: (x, y, f) => { same }
-  compose_associative: (x, y, z, w, f, g, h) => { same }
+  id_left: (x, y, f) => { refl }
+  id_right: (x, y, f) => { refl }
+  compose_associative: (x, y, z, w, f, g, h) => { refl }
   inv: (x, y, f) => { sole }
   inv_iso: (x, y, f) => { {
     cat: {
@@ -13,16 +13,16 @@
       Morphism: (dom, cod) => { Trivial }
       id: (x1) => { sole }
       compose: (x1, y1, z, f1, g) => { sole }
-      id_left: (x1, y1, f1) => { same }
-      id_right: (x1, y1, f1) => { same }
-      compose_associative: (x1, y1, z, w, f1, g, h) => { same }
+      id_left: (x1, y1, f1) => { refl }
+      id_right: (x1, y1, f1) => { refl }
+      compose_associative: (x1, y1, z, w, f1, g, h) => { refl }
     }
     dom: sole
     cod: sole
     morphism: sole
     inverse: sole
-    inverse_left: same
-    inverse_right: same
+    inverse_left: refl
+    inverse_right: refl
   } }
 }: class {
   Object: Type

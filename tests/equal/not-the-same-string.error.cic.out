@@ -7,5 +7,5 @@ to right hand side:
   "baguette"
 
 previous:
-- same
-- the(Equal(String, "ratatouille", "baguette"), same)
+- refl
+- the(Equal(String, "ratatouille", "baguette"), refl)

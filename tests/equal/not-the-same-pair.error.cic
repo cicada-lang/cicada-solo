@@ -3,4 +3,4 @@ the(
     (String) * String,
     cons("ratatouille", "baguette"),
     cons("baguette", "ratatouille")),
-  same)
+  refl)

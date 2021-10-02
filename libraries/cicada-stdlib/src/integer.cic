@@ -15,4 +15,4 @@ the(
   IntegerEqual(
     { left: 10, right: 6 },
     { left: 11, right: 7 }),
-  same)
+  refl)

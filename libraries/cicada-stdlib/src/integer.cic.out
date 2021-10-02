@@ -1,1 +1,1 @@
-same: Equal(Nat, 17, 17)
+refl: Equal(Nat, 17, 17)

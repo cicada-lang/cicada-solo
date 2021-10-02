@@ -7,5 +7,5 @@ to right hand side:
   (_) => { nat_ind(_, (target_nat) => { Nat }, 1, (prev, almost) => { add1(almost) }) }
 
 previous:
-- same
-- the(Equal((_: Nat) -> Nat, add(1), incr), same)
+- refl
+- the(Equal((_: Nat) -> Nat, add(1), incr), refl)

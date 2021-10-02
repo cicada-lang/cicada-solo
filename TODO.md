@@ -1,12 +1,4 @@
-# cli
-
-- use `infra/cildev` for beautiful help message
-
-- [cli] refactor commands by `app` dependency injection container
-
 # syntax
-
-- rename `same` to `refl`
 
 - `same(x)` with one argument
 
@@ -22,6 +14,12 @@
     ...
   ]
   ```
+
+# cli
+
+- use `infra/cildev` for beautiful help message
+
+- [cli] refactor commands by `app` dependency injection container
 
 # implicit
 

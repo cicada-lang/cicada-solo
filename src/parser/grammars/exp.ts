@@ -230,7 +230,7 @@ export const operand = {
       { to: "exp" },
       '")"',
     ],
-    "operand:same": ['"same"'],
+    "operand:refl": ['"refl"'],
     "operand:trivial": ['"Trivial"'],
     "operand:sole": ['"sole"'],
     "operand:absurd": ['"Absurd"'],

@@ -7,5 +7,5 @@ to right hand side:
   cons("baguette", "ratatouille")
 
 previous:
-- same
-- the(Equal((_: String) * String, cons("ratatouille", "baguette"), cons("baguette", "ratatouille")), same)
+- refl
+- the(Equal((_: String) * String, cons("ratatouille", "baguette"), cons("baguette", "ratatouille")), refl)

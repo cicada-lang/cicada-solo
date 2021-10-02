@@ -12,8 +12,8 @@ trivial_isomorphism: trivial_isomorphism_t = {
   morphism: sole
   inverse: sole
 
-  inverse_left: same
-  inverse_right: same
+  inverse_left: refl
+  inverse_right: refl
 }
 
 trivial_groupoid: Groupoid = {

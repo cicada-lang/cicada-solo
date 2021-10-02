@@ -5,9 +5,9 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { expect } from "../../value"
 import { check_conversion } from "../../value"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 
-export class Same extends Exp {
+export class Refl extends Exp {
   free_names(bound_names: Set<string>): Set<string> {
     return new Set()
   }
@@ -24,10 +24,10 @@ export class Same extends Exp {
         to: "right hand side",
       },
     })
-    return new Exps.SameCore()
+    return new Exps.ReflCore()
   }
 
   repr(): string {
-    return "same"
+    return "refl"
   }
 }

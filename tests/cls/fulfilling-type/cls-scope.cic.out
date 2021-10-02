@@ -2,7 +2,7 @@
   X: String
   a: 1
   b: "b"
-  equal: same
+  equal: refl
 }: class {
   X: Type
   a: Nat

@@ -6,8 +6,8 @@ trivial_category: Category = {
 
   id: (x) => sole
   compose: (x, y, z, f, g) => sole
-  id_left: (x, y, f) => same
-  id_right: (x, y, f) => same
+  id_left: (x, y, f) => refl
+  id_right: (x, y, f) => refl
 
-  compose_associative: (x, y, z, w, f, g, h) => same
+  compose_associative: (x, y, z, w, f, g, h) => refl
 }

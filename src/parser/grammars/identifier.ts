@@ -29,7 +29,7 @@ const preserved = [
   "vector_tail",
   "vector_ind",
   "Equal",
-  "same",
+  "refl",
   "replace",
   "Trivial",
   "sole",

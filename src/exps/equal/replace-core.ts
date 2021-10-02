@@ -49,7 +49,7 @@ export class ReplaceCore extends Core {
   }
 
   static apply(target: Value, motive: Value, base: Value): Value {
-    if (target instanceof Exps.SameValue) {
+    if (target instanceof Exps.ReflValue) {
       return base
     } else if (target instanceof Exps.NotYetValue) {
       const { t, neutral } = target
@@ -75,7 +75,7 @@ export class ReplaceCore extends Core {
       }
     } else {
       throw InternalError.wrong_target(target, {
-        expected: [Exps.SameValue],
+        expected: [Exps.ReflValue],
       })
     }
   }
