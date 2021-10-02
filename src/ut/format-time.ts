@@ -1,4 +1,4 @@
-export function format_time(t: Date): string {
+export function formatTime(t: Date): string {
   const hh = leftpad(t.getHours().toString())
   const mm = leftpad(t.getMinutes().toString())
   const ss = leftpad(t.getSeconds().toString())

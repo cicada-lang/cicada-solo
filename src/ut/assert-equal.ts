@@ -1,6 +1,6 @@
 import * as ut from "../ut"
 
-export function assert_equal(x: any, y: any): void {
+export function assertEqual(x: any, y: any): void {
   if (!ut.equal(x, y)) {
     throw new Error(
       [

@@ -1,5 +1,3 @@
-- `ut` use camlCase
-
 # cli
 
 - [cli] replace `yargv`
