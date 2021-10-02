@@ -281,6 +281,15 @@ export const declaration = {
       { exp: "exp" },
       { ret: "exp" },
     ],
+    "declaration:let_the_flower_bracket": [
+      { name: "identifier" },
+      '":"',
+      { t: "exp" },
+      '"{"',
+      { exp: "exp" },
+      '"}"',
+      { ret: "exp" },
+    ],
     "declaration:let_fn": [
       { name: "identifier" },
       '"("',

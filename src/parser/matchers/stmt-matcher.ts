@@ -27,6 +27,11 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         pt.str(name),
         new Exps.The(exp_matcher(t), exp_matcher(exp))
       ),
+    "stmt:def_the_flower_bracket": ({ name, t, exp }) =>
+      new Stmts.Def(
+        pt.str(name),
+        new Exps.The(exp_matcher(t), exp_matcher(exp))
+      ),
     "stmt:def_fn": ({ name, bindings, ret_t, ret }) => {
       const fn = bindings_matcher(bindings)
         .reverse()

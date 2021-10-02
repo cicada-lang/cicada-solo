@@ -314,6 +314,12 @@ export function declaration_matcher(tree: pt.Tree): Exp {
         new Exps.The(exp_matcher(t), exp_matcher(exp)),
         exp_matcher(ret)
       ),
+    "declaration:let_the_flower_bracket": ({ name, t, exp, ret }) =>
+      new Exps.Let(
+        pt.str(name),
+        new Exps.The(exp_matcher(t), exp_matcher(exp)),
+        exp_matcher(ret)
+      ),
     "declaration:let_fn": ({ name, bindings, ret_t, ret, body }) => {
       const fn = bindings_matcher(bindings)
         .reverse()

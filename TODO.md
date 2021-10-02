@@ -1,3 +1,6 @@
+- support zero-arity flower-bracket function syntax in `let`
+- support zero-arity flower-bracket function syntax in class method
+
 # cli
 
 - [cli] refactor commands by `app` dependency injection container
@@ -22,25 +25,6 @@
   _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(1)), add1(2)))
   _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(2), 3))
   _
-  ```
-
-- support zero-arity function syntax -- to use flower bracket
-
-  ``` cicada
-  expanded: Equal(Nat, add1(add1(add1(0))), 3) {
-    _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(add1(0))), add1(add1(1))))
-    _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(1)), add1(2)))
-    _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(2), 3))
-    _
-  }
-
-  // NOTE the same as
-
-  expanded: Equal(Nat, add1(add1(add1(0))), 3) =
-    _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(add1(0))), add1(add1(1))))
-    _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(1)), add1(2)))
-    _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(2), 3))
-    _
   ```
 
 # implicit
