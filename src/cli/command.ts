@@ -3,11 +3,14 @@ import ty, { Schema } from "@xieyuheng/ty"
 
 type SchemaObject<T> = { [P in keyof T]: Schema<T[P]> }
 
-export abstract class Command<Args extends Object, Options extends Object> {
+export abstract class Command<
+  Args extends Object,
+  Options extends Object = {}
+> {
   abstract description: string
 
   abstract args: SchemaObject<Args>
-  abstract options: SchemaObject<Options>
+  options: SchemaObject<Options> = {} as SchemaObject<Options>
 
   abstract execute(argv: Args & Options): Promise<void>
 

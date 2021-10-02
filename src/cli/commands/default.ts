@@ -4,10 +4,10 @@ import ty from "@xieyuheng/ty"
 
 type Args = { file?: string }
 
-export class DefaultCommand extends Command<Args, {}> {
+export class DefaultCommand extends Command<Args> {
   description = "Open REPL or run a file"
+
   args = { file: ty.optional(ty.string()) }
-  options = {}
 
   async execute(argv: Args): Promise<void> {
     const file = argv["file"]

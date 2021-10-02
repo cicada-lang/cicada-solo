@@ -4,6 +4,9 @@ import * as Commands from "../commands"
 import parse from "yargs-parser"
 import ty, { Schema, Errors } from "@xieyuheng/ty"
 
+// export class HelpCommand extends Command<> {
+// }
+
 export class CommonCommandRunner extends CommandRunner {
   commands: Record<string, Command<any, any>> = {}
   defaultCommand?: Command<any, any>
@@ -14,21 +17,6 @@ export class CommonCommandRunner extends CommandRunner {
 
   registerDefault(command: Command<any, any>): void {
     this.defaultCommand = command
-  }
-
-  private pruneArgs(
-    schemas: Record<string, Schema<any>>,
-    array: Array<any>
-  ): any {
-    const args: any = {}
-
-    let i = 0
-    for (const [key, schema] of Object.entries(schemas)) {
-      args[key] = schema.prune(array[i])
-      i++
-    }
-
-    return args
   }
 
   async run(): Promise<void> {
@@ -63,5 +51,20 @@ export class CommonCommandRunner extends CommandRunner {
         throw error
       }
     }
+  }
+
+  private pruneArgs(
+    schemas: Record<string, Schema<any>>,
+    array: Array<any>
+  ): any {
+    const args: any = {}
+
+    let i = 0
+    for (const [key, schema] of Object.entries(schemas)) {
+      args[key] = schema.prune(array[i])
+      i++
+    }
+
+    return args
   }
 }

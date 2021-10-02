@@ -6,10 +6,10 @@ import Path from "path"
 
 type Args = { file: string }
 
-export class SnapshotCommand extends Command<Args, {}> {
+export class SnapshotCommand extends Command<Args> {
   description = "Snapshot a file -- write to <file>.out"
+
   args = { file: ty.string() }
-  options = {}
 
   async execute(argv: Args): Promise<void> {
     Command.assertFile(argv["file"])

@@ -7,10 +7,10 @@ import Path from "path"
 
 type Args = { dir?: string }
 
-export class ReplCommand extends Command<Args, {}> {
+export class ReplCommand extends Command<Args> {
   description = "Run interactive REPL"
+
   args = { dir: ty.optional(ty.string()) }
-  options = {}
 
   async execute(argv: Args): Promise<void> {
     const dir = Path.resolve(argv["dir"] || process.cwd())

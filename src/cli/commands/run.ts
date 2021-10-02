@@ -6,10 +6,10 @@ import Path from "path"
 
 type Args = { file: string }
 
-export class RunCommand extends Command<Args, {}> {
+export class RunCommand extends Command<Args> {
   description = "Run a file -- support .md or .cic"
+
   args = { file: ty.string() }
-  options = {}
 
   async execute(argv: Args): Promise<void> {
     Command.assertFile(argv["file"])
