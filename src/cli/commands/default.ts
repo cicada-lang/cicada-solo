@@ -1,9 +1,7 @@
 import { Command } from "../command"
 import { ReplCommand, RunCommand } from "../commands"
 
-type Argv = {
-  file?: string
-}
+type Argv = { file?: string }
 
 export class DefaultCommand extends Command<Argv> {
   signature = "$0 [file]"

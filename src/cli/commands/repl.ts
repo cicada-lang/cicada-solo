@@ -4,9 +4,7 @@ import { ReadlineRepl } from "../../repls/readline-repl"
 import app from "../../app/node-app"
 import Path from "path"
 
-type Argv = {
-  dir?: string
-}
+type Argv = { dir?: string }
 
 export class ReplCommand extends Command<Argv> {
   signature = "repl [dir]"

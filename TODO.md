@@ -1,5 +1,3 @@
-- [cli] improve `check` helper functions signature
-
 # cli
 
 - [cli] replace `yargv`

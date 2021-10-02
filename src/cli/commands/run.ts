@@ -3,15 +3,9 @@ import * as Runners from "../../runners"
 import app from "../../app/node-app"
 import Path from "path"
 
-type Argv = {
-  file: string
-}
+type Argv = { file: string }
 
 export class RunCommand extends Command<Argv> {
-  constructor() {
-    super()
-  }
-
   signature = "run <file>"
   description = "Run a file -- support .md or .cic"
 

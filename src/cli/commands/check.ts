@@ -1,63 +1,40 @@
 import { Command } from "../command"
 import { Library } from "../../library"
-import { LocalFileStore } from "../../file-stores"
 import { Logger } from "../../runner/logger"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
+import app from "../../app/node-app"
 import chokidar from "chokidar"
-import Path from "path"
 import fs from "fs"
 
-type Argv = {
-  library?: string
-  watch: boolean
-}
+type Argv = { library?: string; watch: boolean }
 
 export class CheckCommand extends Command<Argv> {
   signature = "check [library]"
   description = "Check a library -- by cwd, dir or library.json"
-  options: any = {
-    watch: { type: "boolean", default: false },
-  }
+  options: any = { watch: { type: "boolean", default: false } }
 
   async execute(argv: Argv): Promise<void> {
-    const path = argv["library"]
-    if (path) {
-      Command.assertExists(path)
-    }
-
-    const config_file = path
-      ? find_config_file(path)
-      : process.cwd() + "/library.json"
-
-    const config = Library.config_schema.validate(
-      JSON.parse(await fs.promises.readFile(config_file, "utf8"))
-    )
-
-    const files = new LocalFileStore({
-      dir: Path.resolve(Path.dirname(config_file), config.src),
-    })
-
-    const library = new Library({ files, config })
-
+    const path = argv["library"] || process.cwd() + "/library.json"
+    Command.assertExists(path)
+    const config_file = fs.lstatSync(path).isFile()
+      ? path
+      : path + "/library.json"
+    const library = await app.libraries.get(config_file)
     console.log(library.info())
     console.log()
 
     if (argv.watch) {
-      await watch(library, files)
+      await watch(library)
     } else {
-      await check(library, files)
+      await check(library)
     }
   }
 }
 
-function find_config_file(path: string): string {
-  return fs.lstatSync(path).isFile() ? path : path + "/library.json"
-}
-
-async function check(library: Library, files: LocalFileStore): Promise<void> {
+async function check(library: Library): Promise<void> {
   let errors: Array<unknown> = []
-  for (const path of Object.keys(await files.all())) {
+  for (const path of Object.keys(await library.files.all())) {
     if (ModuleLoaders.can_handle_extension(path)) {
       const logger = new Logger({ tag: "check" })
       const runner = Runners.create_special_runner({ path, library, logger })
@@ -78,13 +55,14 @@ async function check(library: Library, files: LocalFileStore): Promise<void> {
   }
 }
 
-async function watch(library: Library, files: LocalFileStore): Promise<void> {
-  const watcher = chokidar.watch(files.dir)
+async function watch(library: Library): Promise<void> {
+  const dir = library.files.root
+  const watcher = chokidar.watch(dir)
 
   watcher.on("all", async (event, file) => {
     if (event !== "add" && event !== "change") return
     if (!ModuleLoaders.can_handle_extension(file)) return
-    const prefix = `${files.dir}/`
+    const prefix = `${dir}/`
     const path = file.slice(prefix.length)
     library.cache.delete(path)
     const logger = new Logger({ tag: event })
