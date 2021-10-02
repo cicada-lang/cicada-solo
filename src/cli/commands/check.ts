@@ -1,3 +1,4 @@
+import { Command } from "../command"
 import { Library } from "../../library"
 import { LocalFileStore } from "../../file-stores"
 import { Logger } from "../../runner/logger"
@@ -7,48 +8,53 @@ import chokidar from "chokidar"
 import Path from "path"
 import fs from "fs"
 
-export const command = "check [library]"
-export const description = "Check a library -- by cwd, dir or library.json"
-export const builder = {
-  watch: { type: "boolean", default: false },
-}
-
 type Argv = {
   library?: string
   watch: boolean
 }
 
-export const handler = async (argv: Argv) => {
-  if (argv["library"] && !fs.existsSync(argv["library"])) {
-    console.error(`The given file or dir does not exist: ${argv["library"]}`)
-    process.exit(1)
+export class CheckCommand extends Command<Argv> {
+  command = "check [library]"
+  description = "Check a library -- by cwd, dir or library.json"
+  builder = {
+    watch: { type: "boolean", default: false },
   }
 
-  const config_file = argv["library"]
-    ? fs.lstatSync(argv["library"]).isFile()
-      ? argv["library"]
-      : argv["library"] + "/library.json"
-    : process.cwd() + "/library.json"
+  async handler(argv: Argv): Promise<void> {
+    if (argv["library"] && !fs.existsSync(argv["library"])) {
+      console.error(`The given file or dir does not exist: ${argv["library"]}`)
+      process.exit(1)
+    }
 
-  const config = Library.config_schema.validate(
-    JSON.parse(await fs.promises.readFile(config_file, "utf8"))
-  )
+    const config_file = argv["library"]
+      ? fs.lstatSync(argv["library"]).isFile()
+        ? argv["library"]
+        : argv["library"] + "/library.json"
+      : process.cwd() + "/library.json"
 
-  const files = new LocalFileStore({
-    dir: Path.resolve(Path.dirname(config_file), config.src),
-  })
+    const config = Library.config_schema.validate(
+      JSON.parse(await fs.promises.readFile(config_file, "utf8"))
+    )
+    const files = new LocalFileStore({
+      dir: Path.resolve(Path.dirname(config_file), config.src),
+    })
+    const library = new Library({ files, config })
 
-  const library = new Library({ files, config })
+    console.log(library.info())
+    console.log()
 
-  console.log(library.info())
-  console.log()
-
-  if (argv.watch) {
-    await watch(library, files)
-  } else {
-    await check(library, files)
+    if (argv.watch) {
+      await watch(library, files)
+    } else {
+      await check(library, files)
+    }
   }
 }
+
+export const command = new CheckCommand().command
+export const description = new CheckCommand().description
+export const builder = new CheckCommand().builder
+export const handler = new CheckCommand().handler
 
 async function check(library: Library, files: LocalFileStore): Promise<void> {
   let errors: Array<unknown> = []
@@ -98,6 +104,7 @@ async function watch(library: Library, files: LocalFileStore): Promise<void> {
       files,
       logger,
     })
+
     await runner.run(path)
   })
 }

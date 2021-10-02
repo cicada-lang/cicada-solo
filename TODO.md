@@ -1,6 +1,8 @@
 # cli
 
-- [cli] refactor commands by `app` dependency injection container
+- [cli] do not load commands from files -- register commands by hand
+
+- [cli] refactor commands
 
 - [cli] use `infra/clidev` for beautiful help message
 

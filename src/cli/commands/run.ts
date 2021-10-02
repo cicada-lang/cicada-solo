@@ -1,3 +1,4 @@
+import { Command } from "../command"
 import { Library } from "../../library"
 import { LocalFileStore } from "../../file-stores"
 import { FakeFileStore } from "../../file-stores"
@@ -5,51 +6,58 @@ import * as Runners from "../../runners"
 import find_up from "find-up"
 import Path from "path"
 import fs from "fs"
-import { handler as repl_handler } from "./repl"
-
-export const aliases = ["$0"]
-export const command = "run [file]"
-export const description = "Run a file -- support .md or .cic"
-export const builder = {}
+import { ReplCommand } from "./repl"
 
 type Argv = {
   file?: string
 }
 
-export const handler = async (argv: Argv) => {
-  if (argv["file"] === undefined) {
-    await repl_handler({ dir: process.cwd() })
-    return
-  }
+export class RunCommand extends Command<Argv> {
+  command = "run [file]"
+  description = "Run a file -- support .md or .cic"
+  builder = {}
 
-  if (!fs.existsSync(argv["file"])) {
-    console.error(`The given file does not exist: ${argv["file"]}`)
-    process.exit(1)
-  }
+  async handler(argv: Argv): Promise<void> {
+    if (argv["file"] === undefined) {
+      const command = new ReplCommand()
+      await command.handler({ dir: process.cwd() })
+      return
+    }
 
-  if (!fs.lstatSync(argv["file"]).isFile()) {
-    console.error(`The given path does not refer to a file: ${argv["file"]}`)
-    process.exit(1)
-  }
+    if (!fs.existsSync(argv["file"])) {
+      console.error(`The given file does not exist: ${argv["file"]}`)
+      process.exit(1)
+    }
 
-  const path = Path.resolve(argv["file"])
-  const dir = Path.dirname(path)
-  const config_file = await find_up("library.json", { cwd: dir })
-  const config = config_file
-    ? Library.config_schema.validate(
-        JSON.parse(await fs.promises.readFile(config_file, "utf8"))
-      )
-    : Library.fake_config()
+    if (!fs.lstatSync(argv["file"]).isFile()) {
+      console.error(`The given path does not refer to a file: ${argv["file"]}`)
+      process.exit(1)
+    }
 
-  const files = config_file
-    ? new LocalFileStore({ dir })
-    : new FakeFileStore({ dir })
+    const path = Path.resolve(argv["file"])
+    const dir = Path.dirname(path)
+    const config_file = await find_up("library.json", { cwd: dir })
 
-  const library = new Library({ config, files })
+    const config = config_file
+      ? Library.config_schema.validate(
+          JSON.parse(await fs.promises.readFile(config_file, "utf8"))
+        )
+      : Library.fake_config()
+    const files = config_file
+      ? new LocalFileStore({ dir })
+      : new FakeFileStore({ dir })
+    const library = new Library({ config, files })
+    const runner = new Runners.DefaultRunner({ library, files })
 
-  const runner = new Runners.DefaultRunner({ library, files })
-  const { error } = await runner.run(path)
-  if (error) {
-    process.exit(1)
+    const { error } = await runner.run(path)
+    if (error) {
+      process.exit(1)
+    }
   }
 }
+
+export const aliases = ["$0"]
+export const command = new RunCommand().command
+export const description = new RunCommand().description
+export const builder = new RunCommand().builder
+export const handler = new RunCommand().handler
