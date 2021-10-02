@@ -11,10 +11,11 @@ npm i -g @cicada-lang/cicada
 ### Command Line Interface
 
 ```
-cic check [library]  Check a library -- by cwd, dir or library.json
+cic [file]           Open REPL or run a file                [default]
+cic run <file>       Run a file -- support .md or .cic
 cic repl [dir]       Run interactive REPL
-cic run [file]       Run a file -- support .md or .cic               [default]
-cic snapshot <file>  Snapshot a file -- write to <file>.out
+cic check [library]  Check a library -- by cwd, dir or library.json
+cic snapshot <file>  Snapshot a file -- write to .out
 ```
 
 ## Development
