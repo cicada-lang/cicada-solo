@@ -1,9 +1,9 @@
 import { Command } from "../command"
-import { Library } from "../../library"
+import { Library, LibraryConfig } from "../../library"
 import { LocalFileStore } from "../../file-stores"
 import { FakeFileStore } from "../../file-stores"
 import * as Runners from "../../runners"
-import find_up from "find-up"
+import findUp from "find-up"
 import Path from "path"
 import fs from "fs"
 
@@ -12,30 +12,41 @@ type Argv = {
 }
 
 export class RunCommand extends Command<Argv> {
+  constructor() {
+    super()
+  }
+
   signature = "run <file>"
   description = "Run a file -- support .md or .cic"
 
   async execute(argv: Argv): Promise<void> {
-    this.assertFile(argv["file"])
+    Command.assertFile(argv["file"])
 
     const path = Path.resolve(argv["file"])
-    const dir = Path.dirname(path)
-    const config_file = await find_up("library.json", { cwd: dir })
 
-    const config = config_file
-      ? Library.config_schema.validate(
-          JSON.parse(await fs.promises.readFile(config_file, "utf8"))
-        )
-      : Library.fake_config()
-    const files = config_file
-      ? new LocalFileStore({ dir })
-      : new FakeFileStore({ dir })
-    const library = new Library({ config, files })
-    const runner = new Runners.DefaultRunner({ library, files })
+    const library = await find_library(Path.dirname(path))
+    const runner = new Runners.DefaultRunner({ library })
 
     const { error } = await runner.run(path)
     if (error) {
       process.exit(1)
     }
+  }
+}
+
+async function find_library(dir: string): Promise<Library> {
+  const config_file = await findUp("library.json", { cwd: dir })
+
+  if (config_file) {
+    const text = await fs.promises.readFile(config_file, "utf8")
+    return new Library({
+      config: Library.config_schema.validate(JSON.parse(text)),
+      files: new LocalFileStore({ dir }),
+    })
+  } else {
+    return new Library({
+      config: Library.fake_config(),
+      files: new FakeFileStore({ dir }),
+    })
   }
 }

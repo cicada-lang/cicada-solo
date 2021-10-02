@@ -7,7 +7,7 @@ export abstract class Command<Argv> {
   options: any = {}
   abstract execute(argv: Argv): Promise<void>
 
-  assertFile(file: string): void {
+  static assertFile(file: string): void {
     if (!fs.existsSync(file)) {
       console.error(`The given file does not exist: ${file}`)
       process.exit(1)
@@ -19,7 +19,7 @@ export abstract class Command<Argv> {
     }
   }
 
-  assertExists(path: string): void {
+  static assertExists(path: string): void {
     if (!fs.existsSync(path)) {
       console.error(`The given path does not exist: ${path}`)
       process.exit(1)

@@ -1,5 +1,5 @@
 import { Library } from "../library"
-import { LocalFileStore } from "../file-stores"
+import { FileStore } from "../file-store"
 import { Logger } from "../runner/logger"
 import { Runner } from "../runner"
 import fs from "fs"
@@ -8,17 +8,13 @@ export class ErrorRunner extends Runner {
   static extensions = [".error.cic", ".error.md"]
 
   library: Library
-  files: LocalFileStore
+  files: FileStore
   logger?: Logger
 
-  constructor(opts: {
-    library: Library
-    files: LocalFileStore
-    logger?: Logger
-  }) {
+  constructor(opts: { library: Library; logger?: Logger }) {
     super()
     this.library = opts.library
-    this.files = opts.files
+    this.files = opts.library.files
     this.logger = opts.logger
   }
 

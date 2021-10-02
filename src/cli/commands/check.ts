@@ -21,14 +21,13 @@ export class CheckCommand extends Command<Argv> {
   }
 
   async execute(argv: Argv): Promise<void> {
-    if (argv["library"]) {
-      this.assertExists(argv["library"])
+    const path = argv["library"]
+    if (path) {
+      Command.assertExists(path)
     }
 
-    const config_file = argv["library"]
-      ? fs.lstatSync(argv["library"]).isFile()
-        ? argv["library"]
-        : argv["library"] + "/library.json"
+    const config_file = path
+      ? find_config_file(path)
       : process.cwd() + "/library.json"
 
     const config = Library.config_schema.validate(
@@ -52,17 +51,16 @@ export class CheckCommand extends Command<Argv> {
   }
 }
 
+function find_config_file(path: string): string {
+  return fs.lstatSync(path).isFile() ? path : path + "/library.json"
+}
+
 async function check(library: Library, files: LocalFileStore): Promise<void> {
   let errors: Array<unknown> = []
   for (const path of Object.keys(await files.all())) {
     if (ModuleLoaders.can_handle_extension(path)) {
       const logger = new Logger({ tag: "check" })
-      const runner = Runners.create_special_runner({
-        path,
-        library,
-        files,
-        logger,
-      })
+      const runner = Runners.create_special_runner({ path, library, logger })
       const { error } = await runner.run(path)
       if (error) {
         errors.push(error)
@@ -94,12 +92,7 @@ async function watch(library: Library, files: LocalFileStore): Promise<void> {
     library.cache.delete(path)
 
     const logger = new Logger({ tag: event })
-    const runner = Runners.create_special_runner({
-      path,
-      library,
-      files,
-      logger,
-    })
+    const runner = Runners.create_special_runner({ path, library, logger })
 
     await runner.run(path)
   })

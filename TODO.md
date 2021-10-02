@@ -1,3 +1,6 @@
+- [cli] refactor commands
+- [cli] replace `yargv`
+
 # syntax
 
 - "same-as" charts -- `the_same! <t> [ exp, ... ]` syntax sugar

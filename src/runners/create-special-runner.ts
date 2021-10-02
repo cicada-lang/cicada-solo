@@ -7,7 +7,6 @@ import { Logger } from "../runner/logger"
 export function create_special_runner(opts: {
   path: string
   library: Library
-  files: LocalFileStore
   logger?: Logger
 }): Runner {
   const { path } = opts

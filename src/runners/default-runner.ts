@@ -8,10 +8,10 @@ export class DefaultRunner extends Runner {
   files: FileStore
   logger?: Logger
 
-  constructor(opts: { library: Library; files: FileStore; logger?: Logger }) {
+  constructor(opts: { library: Library; logger?: Logger }) {
     super()
     this.library = opts.library
-    this.files = opts.files
+    this.files = opts.library.files
     this.logger = opts.logger
   }
 
