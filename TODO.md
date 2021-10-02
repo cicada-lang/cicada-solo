@@ -1,6 +1,5 @@
 # cli
 
-- [cli] `CommandRunner` abstract class
 - [cli] `YargsCommandRunner` extends `CommandRunner`
 
 - [cli] refactor commands
