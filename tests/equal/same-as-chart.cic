@@ -1,15 +1,15 @@
-// the_same! Nat [
-//   add1(add1(add1(0))),
-//   add1(add1(1)),
-//   add1(2),
-//   3,
-// ]
+same_as_chart! Nat [
+  add1(add1(add1(0))),
+  add1(add1(1)),
+  add1(2),
+  3,
+]
 
-expanded: Equal(Nat, add1(add1(add1(0))), 3) {
+_: Equal(Nat, add1(add1(add1(0))), 3) {
   _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(add1(0))), add1(add1(1))))
   _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(1)), add1(2)))
   _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(2), 3))
   _
 }
 
-expanded
+_

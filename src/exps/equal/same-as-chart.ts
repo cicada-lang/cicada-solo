@@ -57,12 +57,14 @@ export class SameAsChart extends Exp {
       const value = values[i]
       const next = values[i + 1]
 
-      check_conversion(ctx, t, value, next, {
-        description: {
-          from: `value at ${i}`,
-          to: `value at ${i + 1}`,
-        },
-      })
+      if (next !== undefined) {
+        check_conversion(ctx, t, value, next, {
+          description: {
+            from: `value at ${i}`,
+            to: `value at ${i + 1}`,
+          },
+        })
+      }
     }
 
     return {

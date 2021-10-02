@@ -1,5 +1,3 @@
-- `Exps.SameAsChart` -- syntax
-
 - [library manager] [cli] download library from registry
 
   - `libraries.cicada-lang.com`
