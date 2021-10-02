@@ -6,8 +6,6 @@
 
 # syntax
 
-- `Exps.TheSame` can be inferred
-
 - `Exps.TheSame` -- syntax `the_same(t, exp)`
 
 - "same-as" charts -- `the_same! <t> [ exp, ... ]` syntax sugar
