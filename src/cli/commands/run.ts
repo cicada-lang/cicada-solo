@@ -6,23 +6,16 @@ import * as Runners from "../../runners"
 import find_up from "find-up"
 import Path from "path"
 import fs from "fs"
-import { ReplCommand } from "./repl"
 
 type Argv = {
-  file?: string
+  file: string
 }
 
 export class RunCommand extends Command<Argv> {
-  signature = "run [file]"
+  signature = "run <file>"
   description = "Run a file -- support .md or .cic"
 
   async execute(argv: Argv): Promise<void> {
-    if (argv["file"] === undefined) {
-      const command = new ReplCommand()
-      await command.execute({ dir: process.cwd() })
-      return
-    }
-
     if (!fs.existsSync(argv["file"])) {
       console.error(`The given file does not exist: ${argv["file"]}`)
       process.exit(1)
