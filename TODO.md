@@ -1,13 +1,6 @@
-- [library manager] [cli] download library from registry
+- `app/node-app` -- `app.libraries` instance of `LocalLibraryStore`
 
-  - `libraries.cicada-lang.com`
-  - `registry.cicada-lang.com`
-
-- [library manager] library can be used as a module
-
-- `LibraryStore` or `LibraryResouce`
-
-  - library can be find in local file system or remove registry
+# cli
 
 - [cli] refactor commands -- by `LibraryStore`
 
@@ -75,6 +68,15 @@
 - Value.unify -- cls/fulfilled-cls-value.ts
 
 - `Subst.unify` occur check -- use `free_names`
+
+# library manager
+
+- [library manager] [cli] download library from registry
+
+  - `libraries.cicada-lang.com`
+  - `registry.cicada-lang.com`
+
+- [library manager] library can be used as a module
 
 # subtype
 

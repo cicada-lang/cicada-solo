@@ -3,7 +3,7 @@ import { Library, LibraryConfig } from "../../library"
 import { LocalFileStore } from "../../file-stores"
 import { FakeFileStore } from "../../file-stores"
 import * as Runners from "../../runners"
-import findUp from "find-up"
+import find_up from "find-up"
 import Path from "path"
 import fs from "fs"
 
@@ -35,7 +35,7 @@ export class RunCommand extends Command<Argv> {
 }
 
 async function find_library(dir: string): Promise<Library> {
-  const config_file = await findUp("library.json", { cwd: dir })
+  const config_file = await find_up("library.json", { cwd: dir })
 
   if (config_file) {
     const text = await fs.promises.readFile(config_file, "utf8")

@@ -1,6 +1,6 @@
 import { Store } from "../infra/store"
 
-export abstract class FileStore extends Store<string, string> {
+export abstract class FileStore extends Store<string> {
   abstract keys(): Promise<Array<string>>
   abstract resolve(path: string): string
 

@@ -1,4 +1,4 @@
-export abstract class Store<T, Key extends string | number | symbol> {
+export abstract class Store<T, Key extends string | number | symbol = string> {
   create(data: T): Promise<Key> {
     throw new StoreError(
       [
@@ -34,7 +34,14 @@ export abstract class Store<T, Key extends string | number | symbol> {
     }
   }
 
-  abstract all(): Promise<Record<string, T>>
+  all(): Promise<Record<string, T>> {
+    throw new StoreError(
+      [
+        `The method is not implemented: all`,
+        `  class name: ${this.constructor.name}`,
+      ].join("\n")
+    )
+  }
 
   async keys(): Promise<Array<string>> {
     return Object.keys(await this.all())
