@@ -1,5 +1,5 @@
 import { Command } from "../command"
-import { ReplCommand, RunCommand } from "../commands"
+import * as Commands from "../commands"
 
 type Argv = { file?: string }
 
@@ -12,10 +12,10 @@ export class DefaultCommand extends Command<Argv> {
 
     if (file === undefined) {
       const dir = process.cwd()
-      const command = new ReplCommand()
+      const command = new Commands.ReplCommand()
       await command.execute({ dir })
     } else {
-      const command = new RunCommand()
+      const command = new Commands.RunCommand()
       await command.execute({ file })
     }
   }

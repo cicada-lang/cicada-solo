@@ -62,15 +62,16 @@ async function watch(library: Library): Promise<void> {
     if (!file) return
     if (!ModuleLoaders.can_handle_extension(file)) return
 
+    const prefix = `${dir}/`
+    const path = file.slice(prefix.length)
+
     if (event === "remove") {
-      const prefix = `${dir}/`
-      const path = file.slice(prefix.length)
       library.cache.delete(path)
+      const logger = new Logger({ tag: event })
+      logger.info(path)
     }
 
     if (event === "update") {
-      const prefix = `${dir}/`
-      const path = file.slice(prefix.length)
       library.cache.delete(path)
       const logger = new Logger({ tag: event })
       const runner = Runners.create_special_runner({ path, library, logger })
