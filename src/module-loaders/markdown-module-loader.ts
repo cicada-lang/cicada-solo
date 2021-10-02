@@ -6,7 +6,7 @@ import * as commonmark from "commonmark"
 
 export class MarkdownModuleLoader extends ModuleLoader {
   async load(library: Library, path: string): Promise<Module> {
-    const text = await library.files.get_or_fail(path)
+    const text = await library.files.getOrFail(path)
     const parser = new Parser()
     const stmts = code_blocks(text).flatMap((code_block) =>
       parser.parse_stmts(code_block.text, code_block.offset)

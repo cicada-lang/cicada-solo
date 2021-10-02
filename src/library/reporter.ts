@@ -17,7 +17,7 @@ export class Reporter {
     if (error instanceof Trace) {
       return error.repr((exp) => exp.repr())
     } else if (error instanceof pt.ParsingError) {
-      const text = opts?.text || (await this.files.get_or_fail(path))
+      const text = opts?.text || (await this.files.getOrFail(path))
       if (!text) {
         return `Unknown path: ${path}`
       } else {

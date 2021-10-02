@@ -1,5 +1,3 @@
-- [refactor] `Store`'s methods use camlCase
-
 # cli
 
 - [cli] refactor commands by `app` dependency injection container

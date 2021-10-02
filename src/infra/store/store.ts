@@ -8,10 +8,10 @@ export abstract class Store<T, Key extends string | number | symbol> {
     )
   }
 
-  create_many(array: Array<T>): Promise<Array<Key>> {
+  createMany(array: Array<T>): Promise<Array<Key>> {
     throw new StoreError(
       [
-        `The method is not implemented: create_many`,
+        `The method is not implemented: createMany`,
         `  class name: ${this.constructor.name}`,
       ].join("\n")
     )
@@ -19,7 +19,7 @@ export abstract class Store<T, Key extends string | number | symbol> {
 
   abstract get(key: Key): Promise<T | undefined>
 
-  async get_or_fail(key: Key): Promise<T> {
+  async getOrFail(key: Key): Promise<T> {
     const data = await this.get(key)
     if (data === undefined) {
       throw new StoreError(
@@ -49,18 +49,18 @@ export abstract class Store<T, Key extends string | number | symbol> {
     )
   }
 
-  async find_first(query: Partial<T>): Promise<[string, T] | undefined> {
+  async findFirst(query: Partial<T>): Promise<[string, T] | undefined> {
     const results = await this.find(query)
     const entries = Object.entries<T>(results)
     return entries[0]
   }
 
-  async find_first_or_fail(query: Partial<T>): Promise<[string, T]> {
-    const data = await this.find_first(query)
+  async findFirstOrFail(query: Partial<T>): Promise<[string, T]> {
+    const data = await this.findFirst(query)
     if (data === undefined) {
       throw new StoreError(
         [
-          `I can not find_first data`,
+          `I can not find first data`,
           `  class name: ${this.constructor.name}`,
           `  query: ${JSON.stringify(query)}`,
         ].join("\n")
