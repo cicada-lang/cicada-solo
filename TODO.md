@@ -1,5 +1,3 @@
-- support zero-arity flower-bracket function syntax in class method
-
 # cli
 
 - [cli] refactor commands by `app` dependency injection container

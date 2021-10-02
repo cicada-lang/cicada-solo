@@ -329,6 +329,15 @@ export const cls_entry = {
       { exp: "exp" },
       { $ap: ["optional", '","'] },
     ],
+    "cls_entry:field_fulfilled_flower_bracket": [
+      { name: "identifier" },
+      '":"',
+      { t: "exp" },
+      '"{"',
+      { exp: "exp" },
+      '"}"',
+      { $ap: ["optional", '","'] },
+    ],
     "cls_entry:method_demanded": [
       { name: "identifier" },
       '"("',

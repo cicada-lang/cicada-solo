@@ -379,6 +379,11 @@ export function cls_entry_matcher(tree: pt.Tree): {
       field_t: exp_matcher(t),
       field: exp_matcher(exp),
     }),
+    "cls_entry:field_fulfilled_flower_bracket": ({ name, t, exp }) => ({
+      field_name: pt.str(name),
+      field_t: exp_matcher(t),
+      field: exp_matcher(exp),
+    }),
     "cls_entry:method_demanded": ({ name, bindings, ret_t }) => ({
       field_name: pt.str(name),
       field_t: pi_handler({ bindings, ret_t }),

@@ -8,7 +8,6 @@ a: Nat {
   x
 }
 
-
 b: Nat {
   x: Nat {
     1
@@ -19,5 +18,15 @@ b: Nat {
   x
 }
 
+class ABC {
+  a: String = "a"
+
+  b: String {
+    str = "b"
+    str
+  }
+
+  c: String
+}
 
 `)
