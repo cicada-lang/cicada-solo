@@ -8,7 +8,7 @@ import ty from "@xieyuheng/ty"
 import watcher from "node-watch"
 import fs from "fs"
 
-type Argv = { library?: string; watch: boolean }
+type Argv = { library?: string; watch?: boolean }
 
 export class CheckCommand extends Command<Argv> {
   signature = "check [library]"
@@ -16,6 +16,7 @@ export class CheckCommand extends Command<Argv> {
   options: any = { watch: { type: "boolean", default: false } }
 
   positional = ["library"]
+
   schemas = {
     library: ty.optional(ty.string()),
     watch: ty.optional(ty.boolean()),
