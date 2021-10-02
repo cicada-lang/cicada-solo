@@ -1,5 +1,3 @@
-- `app/node-app` -- `app.libraries` instance of `LocalLibraryStore`
-
 # cli
 
 - [cli] refactor commands -- by `LibraryStore`
