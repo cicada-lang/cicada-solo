@@ -4,8 +4,8 @@ import { Logger } from "../../runner/logger"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
 import app from "../../app/node-app"
-import chokidar from "chokidar"
 import fs from "fs"
+import watcher from "node-watch"
 
 type Argv = { library?: string; watch: boolean }
 
@@ -24,10 +24,10 @@ export class CheckCommand extends Command<Argv> {
     console.log(library.info())
     console.log()
 
+    await check(library)
+
     if (argv.watch) {
       await watch(library)
-    } else {
-      await check(library)
     }
   }
 }
@@ -57,16 +57,24 @@ async function check(library: Library): Promise<void> {
 
 async function watch(library: Library): Promise<void> {
   const dir = library.files.root
-  const watcher = chokidar.watch(dir)
 
-  watcher.on("all", async (event, file) => {
-    if (event !== "add" && event !== "change") return
+  watcher(dir, { recursive: true }, async (event, file) => {
+    if (!file) return
     if (!ModuleLoaders.can_handle_extension(file)) return
-    const prefix = `${dir}/`
-    const path = file.slice(prefix.length)
-    library.cache.delete(path)
-    const logger = new Logger({ tag: event })
-    const runner = Runners.create_special_runner({ path, library, logger })
-    await runner.run(path)
+
+    if (event === "remove") {
+      const prefix = `${dir}/`
+      const path = file.slice(prefix.length)
+      library.cache.delete(path)
+    }
+
+    if (event === "update") {
+      const prefix = `${dir}/`
+      const path = file.slice(prefix.length)
+      library.cache.delete(path)
+      const logger = new Logger({ tag: event })
+      const runner = Runners.create_special_runner({ path, library, logger })
+      await runner.run(path)
+    }
   })
 }
