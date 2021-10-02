@@ -1,7 +1,7 @@
 import { LibraryStore } from "../library-store"
 import { Library } from "../library"
 import { LocalFileStore, FakeFileStore } from "../file-stores"
-import find_up from "find-up"
+import findUp from "find-up"
 import Path from "path"
 import fs from "fs"
 
@@ -24,8 +24,8 @@ export class LocalLibraryStore extends LibraryStore {
     })
   }
 
-  async find_up_or_fake(dir: string): Promise<Library> {
-    const config_file = await find_up("library.json", { cwd: dir })
+  async findUpOrFake(dir: string): Promise<Library> {
+    const config_file = await findUp("library.json", { cwd: dir })
     return config_file ? await this.get(config_file) : this.fake(dir)
   }
 }
