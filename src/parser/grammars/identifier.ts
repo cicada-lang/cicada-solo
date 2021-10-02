@@ -31,6 +31,7 @@ const preserved = [
   "Equal",
   "refl",
   "same",
+  "the_same",
   "replace",
   "Trivial",
   "sole",

@@ -286,6 +286,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
       new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
     "operand:refl": () => new Exps.Refl(),
     "operand:same": ({ exp }) => new Exps.Same(exp_matcher(exp)),
+    "operand:the_same": ({ t, exp }) =>
+      new Exps.TheSame(exp_matcher(t), exp_matcher(exp)),
     "operand:trivial": () => new Exps.Trivial(),
     "operand:sole": () => new Exps.Sole(),
     "operand:absurd": () => new Exps.Absurd(),
