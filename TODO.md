@@ -1,4 +1,3 @@
-- support zero-arity flower-bracket function syntax in `let`
 - support zero-arity flower-bracket function syntax in class method
 
 # cli
