@@ -1,9 +1,9 @@
 import { LibraryStore } from "../library-store"
 import { Library } from "../library"
 import { LocalFileStore, FakeFileStore } from "../file-stores"
-import findUp from "find-up"
 import Path from "path"
 import fs from "fs"
+import * as ut from "../ut"
 
 export class LocalLibraryStore extends LibraryStore {
   async get(config_file: string): Promise<Library> {
@@ -25,7 +25,7 @@ export class LocalLibraryStore extends LibraryStore {
   }
 
   async findUpOrFake(dir: string): Promise<Library> {
-    const config_file = await findUp("library.json", { cwd: dir })
+    const config_file = ut.findUp("library.json", { from: dir })
     return config_file ? await this.get(config_file) : this.fake(dir)
   }
 }
