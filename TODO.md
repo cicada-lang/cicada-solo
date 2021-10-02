@@ -1,9 +1,6 @@
 # syntax
 
-- `same(x)` with one argument
-
-  - this will not effect normalization,
-    because `same(from)` and `same(to)` will always be definitional or computational equal.
+- `Exps.Same` syntax
 
 - "same-as" charts
 

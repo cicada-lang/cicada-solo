@@ -30,6 +30,7 @@ const preserved = [
   "vector_ind",
   "Equal",
   "refl",
+  "same",
   "replace",
   "Trivial",
   "sole",
