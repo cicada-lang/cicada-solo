@@ -1,4 +1,3 @@
-- [cli] `YargsCommandRunner` improve help message
 - [cli] refactor commands
 
 # syntax

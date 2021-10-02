@@ -21,10 +21,12 @@ export class Reporter {
       if (!text) {
         return `Unknown path: ${path}`
       } else {
-        let message = error.message
-        message += "\n"
-        message += pt.report(error.span, text)
-        return message
+        return [
+          "I found syntax error in the following text:",
+          "",
+          pt.report(error.span, text),
+          error.concise_message,
+        ].join("\n")
       }
     } else {
       throw error
