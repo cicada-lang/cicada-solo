@@ -1,5 +1,3 @@
-- [cli] `CommonCommandRunner` clean up
-
 - [cli] `CommonCommandRunner` print help message on `--help`
 
 - [cli] move `cli/command` and `cli/command-runner` to `infra`

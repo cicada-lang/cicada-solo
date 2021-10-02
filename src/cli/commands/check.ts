@@ -8,21 +8,15 @@ import ty from "@xieyuheng/ty"
 import watcher from "node-watch"
 import fs from "fs"
 
-type Argv = { library?: string; watch?: boolean }
+type Args = { library?: string }
+type Options = { watch?: boolean }
 
-export class CheckCommand extends Command<Argv> {
-  signature = "check [library]"
+export class CheckCommand extends Command<Args, Options> {
   description = "Check a library -- by cwd, dir or library.json"
-  options: any = { watch: { type: "boolean", default: false } }
+  args = { library: ty.optional(ty.string()) }
+  options = { watch: ty.optional(ty.boolean()) }
 
-  positional = ["library"]
-
-  schemas = {
-    library: ty.optional(ty.string()),
-    watch: ty.optional(ty.boolean()),
-  }
-
-  async execute(argv: Argv): Promise<void> {
+  async execute(argv: Args & Options): Promise<void> {
     const path = argv["library"] || process.cwd() + "/library.json"
     Command.assertExists(path)
     const config_file = fs.lstatSync(path).isFile()

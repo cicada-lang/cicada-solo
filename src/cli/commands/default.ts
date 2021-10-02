@@ -2,18 +2,14 @@ import { Command } from "../command"
 import * as Commands from "../commands"
 import ty from "@xieyuheng/ty"
 
-type Argv = { file?: string }
+type Args = { file?: string }
 
-export class DefaultCommand extends Command<Argv> {
-  signature = "$0 [file]"
+export class DefaultCommand extends Command<Args, {}> {
   description = "Open REPL or run a file"
+  args = { file: ty.optional(ty.string()) }
+  options = {}
 
-  positional = ["file"]
-  schemas = {
-    file: ty.optional(ty.string())
-  }
-
-  async execute(argv: Argv): Promise<void> {
+  async execute(argv: Args): Promise<void> {
     const file = argv["file"]
 
     if (file === undefined) {

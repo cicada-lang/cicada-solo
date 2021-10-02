@@ -3,16 +3,13 @@ import ty, { Schema } from "@xieyuheng/ty"
 
 type SchemaObject<T> = { [P in keyof T]: Schema<T[P]> }
 
-export abstract class Command<Argv> {
-  abstract signature: string
+export abstract class Command<Args extends Object, Options extends Object> {
   abstract description: string
-  // NOTE The schema for options
-  options: any = {}
 
-  abstract positional: Array<string>
-  abstract schemas: SchemaObject<Argv>
+  abstract args: SchemaObject<Args>
+  abstract options: SchemaObject<Options>
 
-  abstract execute(argv: Argv): Promise<void>
+  abstract execute(argv: Args & Options): Promise<void>
 
   static assertFile(file: string): void {
     if (!fs.existsSync(file)) {

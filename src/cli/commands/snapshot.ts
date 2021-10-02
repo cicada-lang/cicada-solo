@@ -4,18 +4,14 @@ import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"
 import Path from "path"
 
-type Argv = { file: string }
+type Args = { file: string }
 
-export class SnapshotCommand extends Command<Argv> {
-  signature = "snapshot <file>"
+export class SnapshotCommand extends Command<Args, {}> {
   description = "Snapshot a file -- write to <file>.out"
+  args = { file: ty.string() }
+  options = {}
 
-  positional = ["file"]
-  schemas = {
-    file: ty.string()
-  }
-
-  async execute(argv: Argv): Promise<void> {
+  async execute(argv: Args): Promise<void> {
     Command.assertFile(argv["file"])
     const path = Path.resolve(argv["file"])
     const library = await app.libraries.findUpOrFake(Path.dirname(path))
