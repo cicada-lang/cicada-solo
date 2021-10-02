@@ -9,11 +9,13 @@ export function findUp(
   return findUpFromDir(file, dir)
 }
 
+const ROOT = Path.resolve("/")
+
 export function findUpFromDir(file: string, dir: string): string | undefined {
   const result = Path.resolve(dir, file)
   if (fs.existsSync(result) && fs.lstatSync(result).isFile()) {
     return result
-  } else if (dir === Path.resolve("/")) {
+  } else if (dir === ROOT) {
     return undefined
   } else {
     return findUpFromDir(file, Path.dirname(dir))
