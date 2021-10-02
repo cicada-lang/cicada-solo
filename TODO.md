@@ -1,5 +1,3 @@
-- [cli] refactor commands
-
 # syntax
 
 - "same-as" charts -- `the_same! <t> [ exp, ... ]` syntax sugar

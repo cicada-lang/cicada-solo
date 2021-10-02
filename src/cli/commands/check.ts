@@ -21,9 +21,8 @@ export class CheckCommand extends Command<Argv> {
   }
 
   async execute(argv: Argv): Promise<void> {
-    if (argv["library"] && !fs.existsSync(argv["library"])) {
-      console.error(`The given file or dir does not exist: ${argv["library"]}`)
-      process.exit(1)
+    if (argv["library"]) {
+      this.assertExists(argv["library"])
     }
 
     const config_file = argv["library"]
@@ -35,9 +34,11 @@ export class CheckCommand extends Command<Argv> {
     const config = Library.config_schema.validate(
       JSON.parse(await fs.promises.readFile(config_file, "utf8"))
     )
+
     const files = new LocalFileStore({
       dir: Path.resolve(Path.dirname(config_file), config.src),
     })
+
     const library = new Library({ files, config })
 
     console.log(library.info())

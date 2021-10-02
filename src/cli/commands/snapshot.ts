@@ -16,15 +16,7 @@ export class SnapshotCommand extends Command<Argv> {
   description = "Snapshot a file -- write to <file>.out"
 
   async execute(argv: Argv): Promise<void> {
-    if (!fs.existsSync(argv["file"])) {
-      console.error(`The given file does not exist: ${argv["file"]}`)
-      process.exit(1)
-    }
-
-    if (!fs.lstatSync(argv["file"]).isFile()) {
-      console.error(`The given path does not refer to a file: ${argv["file"]}`)
-      process.exit(1)
-    }
+    this.assertFile(argv["file"])
 
     const path = Path.resolve(argv["file"])
     const dir = Path.dirname(path)
