@@ -9,7 +9,7 @@ export class YargsCommandRunner extends CommandRunner {
     yargs.parse()
   }
 
-  register(command: Command<unknown>): void {
+  register(name: string, command: Command<unknown>): void {
     yargs.command({
       ...command,
       command: command.signature,

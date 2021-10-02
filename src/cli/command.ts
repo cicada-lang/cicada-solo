@@ -1,10 +1,17 @@
 import fs from "fs"
+import ty, { Schema } from "@xieyuheng/ty"
+
+type SchemaObject<T> = { [P in keyof T]: Schema<T[P]> }
 
 export abstract class Command<Argv> {
   abstract signature: string
   abstract description: string
   // NOTE The schema for options
   options: any = {}
+
+  abstract positional: Array<string>
+  abstract schemas: SchemaObject<Argv>
+
   abstract execute(argv: Argv): Promise<void>
 
   static assertFile(file: string): void {

@@ -1,6 +1,6 @@
-# cli
+- [cli] remove `yargs`
+- [cli] `CommonCommandRunner` support default
 
-- [cli] replace `yargs`
 - [cli] move `cli/command` and `cli/command-runner` to `infra`
 
 # implicit

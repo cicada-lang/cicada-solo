@@ -1,6 +1,7 @@
 import { Command } from "../command"
 import * as Runners from "../../runners"
 import app from "../../app/node-app"
+import ty from "@xieyuheng/ty"
 import Path from "path"
 
 type Argv = { file: string }
@@ -8,6 +9,11 @@ type Argv = { file: string }
 export class SnapshotCommand extends Command<Argv> {
   signature = "snapshot <file>"
   description = "Snapshot a file -- write to <file>.out"
+
+  positional = ["file"]
+  schemas = {
+    file: ty.string()
+  }
 
   async execute(argv: Argv): Promise<void> {
     Command.assertFile(argv["file"])

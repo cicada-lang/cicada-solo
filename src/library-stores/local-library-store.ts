@@ -1,9 +1,9 @@
 import { LibraryStore } from "../library-store"
 import { Library } from "../library"
 import { LocalFileStore, FakeFileStore } from "../file-stores"
+import * as ut from "../ut"
 import Path from "path"
 import fs from "fs"
-import * as ut from "../ut"
 
 export class LocalLibraryStore extends LibraryStore {
   async get(config_file: string): Promise<Library> {

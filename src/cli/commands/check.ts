@@ -4,8 +4,9 @@ import { Logger } from "../../runner/logger"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
 import app from "../../app/node-app"
-import fs from "fs"
+import ty from "@xieyuheng/ty"
 import watcher from "node-watch"
+import fs from "fs"
 
 type Argv = { library?: string; watch: boolean }
 
@@ -13,6 +14,12 @@ export class CheckCommand extends Command<Argv> {
   signature = "check [library]"
   description = "Check a library -- by cwd, dir or library.json"
   options: any = { watch: { type: "boolean", default: false } }
+
+  positional = ["library"]
+  schemas = {
+    library: ty.optional(ty.string()),
+    watch: ty.optional(ty.boolean()),
+  }
 
   async execute(argv: Argv): Promise<void> {
     const path = argv["library"] || process.cwd() + "/library.json"

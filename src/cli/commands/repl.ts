@@ -2,6 +2,7 @@ import { Command } from "../command"
 import { CicReplEventHandler } from "../../repl-event-handlers"
 import { ReadlineRepl } from "../../repls/readline-repl"
 import app from "../../app/node-app"
+import ty from "@xieyuheng/ty"
 import Path from "path"
 
 type Argv = { dir?: string }
@@ -9,6 +10,11 @@ type Argv = { dir?: string }
 export class ReplCommand extends Command<Argv> {
   signature = "repl [dir]"
   description = "Run interactive REPL"
+
+  positional = ["dir"]
+  schemas = {
+    dir: ty.optional(ty.string())
+  }
 
   async execute(argv: Argv): Promise<void> {
     const dir = Path.resolve(argv["dir"] || process.cwd())
