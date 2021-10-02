@@ -12,7 +12,7 @@ type Argv = {
 }
 
 export class ReplCommand extends Command<Argv> {
-  command = "repl [dir]"
+  signature = "repl [dir]"
   description = "Run interactive REPL"
   builder = {}
 

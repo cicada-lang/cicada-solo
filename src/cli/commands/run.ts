@@ -13,7 +13,7 @@ type Argv = {
 }
 
 export class RunCommand extends Command<Argv> {
-  command = "run [file]"
+  signature = "run [file]"
   description = "Run a file -- support .md or .cic"
   builder = {}
 

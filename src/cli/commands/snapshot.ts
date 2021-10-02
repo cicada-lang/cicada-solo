@@ -12,7 +12,7 @@ type Argv = {
 }
 
 export class SnapshotCommand extends Command<Argv> {
-  command = "snapshot <file>"
+  signature = "snapshot <file>"
   description = "Snapshot a file -- write to <file>.out"
   builder = {}
 

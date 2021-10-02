@@ -14,7 +14,7 @@ type Argv = {
 }
 
 export class CheckCommand extends Command<Argv> {
-  command = "check [library]"
+  signature = "check [library]"
   description = "Check a library -- by cwd, dir or library.json"
   builder: any = {
     watch: { type: "boolean", default: false },

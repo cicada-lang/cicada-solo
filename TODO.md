@@ -1,6 +1,6 @@
 # cli
 
-- [cli] rename `Command.command` to `Command.signature`
+- [cli] `CommandRunner` class
 
 - [cli] refactor commands
 

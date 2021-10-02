@@ -18,8 +18,17 @@ function register(
   opts?: { default?: boolean }
 ): void {
   if (opts?.default) {
-    yargs.command({ ...command, handler: command.handler, aliases: ["$0"] })
+    yargs.command({
+      ...command,
+      command: command.signature,
+      handler: command.handler,
+      aliases: ["$0"],
+    })
   } else {
-    yargs.command({ ...command, handler: command.handler })
+    yargs.command({
+      ...command,
+      command: command.signature,
+      handler: command.handler,
+    })
   }
 }
