@@ -17,10 +17,10 @@ export class LocalLibraryStore extends LibraryStore {
     })
   }
 
-  fake(dir: string): Library {
+  fake(dir: string, faked?: Record<string, string>): Library {
     return new Library({
       config: Library.fake_config(),
-      files: new FakeFileStore({ dir }),
+      files: new FakeFileStore({ dir, faked }),
     })
   }
 

@@ -13,6 +13,10 @@ export class FakeFileStore extends LocalFileStore {
     this.faked = faked || {}
   }
 
+  fake(path: string, text: string): void {
+    this.faked[path] = text
+  }
+
   async keys(): Promise<Array<string>> {
     return Array.from(
       new Set([...(await super.keys()), ...Object.keys(this.faked)])

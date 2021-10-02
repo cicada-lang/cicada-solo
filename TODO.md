@@ -1,9 +1,9 @@
+- [helper] `app.nanoid()`
+- [cli] improve `check` helper functions signature
+
 # cli
 
-- [cli] refactor commands -- by `LibraryStore`
-
 - [cli] replace `yargv`
-
 - [cli] move `cli/command` and `cli/command-runner` to `infra`
 
 # implicit
