@@ -64,7 +64,6 @@ async function check(library: Library, files: LocalFileStore): Promise<void> {
       const { error } = await runner.run(path)
       if (error) {
         errors.push(error)
-
         if (error instanceof Error) {
           console.error(error.message)
         } else {
@@ -85,15 +84,11 @@ async function watch(library: Library, files: LocalFileStore): Promise<void> {
   watcher.on("all", async (event, file) => {
     if (event !== "add" && event !== "change") return
     if (!ModuleLoaders.can_handle_extension(file)) return
-
     const prefix = `${files.dir}/`
     const path = file.slice(prefix.length)
-
     library.cache.delete(path)
-
     const logger = new Logger({ tag: event })
     const runner = Runners.create_special_runner({ path, library, logger })
-
     await runner.run(path)
   })
 }

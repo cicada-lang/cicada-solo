@@ -1,4 +1,3 @@
-- [helper] `app.nanoid()`
 - [cli] improve `check` helper functions signature
 
 # cli
