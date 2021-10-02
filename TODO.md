@@ -1,24 +1,53 @@
-# syntax
-
-- `Exps.TheSame`
-
-- `Exps.TheSame` -- syntax `the_same(t, exp)`
-
-- "same-as" charts
-
-  ``` cicada
-  the_same! String [
-    "ratatouille",
-    car(the((String) * String, cons("ratatouille", "baguette"))),
-    ...
-  ]
-  ```
+- [refactor] `Store`'s methods use camlCase
 
 # cli
 
-- use `infra/cildev` for beautiful help message
-
 - [cli] refactor commands by `app` dependency injection container
+
+- [cli] use `infra/clidev` for beautiful help message
+
+# syntax
+
+- `Exps.TheSame` can be inferred
+
+- `Exps.TheSame` -- syntax `the_same(t, exp)`
+
+- "same-as" charts -- `the_same! <t> [ exp, ... ]` syntax sugar
+
+  ``` cicada
+  the_same! Nat [
+    add1(add1(add1(0))),
+    add1(add1(1)),
+    add1(2),
+    3,
+  ]
+
+  // => expand to
+
+  _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(add1(0))), add1(add1(1))))
+  _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(1)), add1(2)))
+  _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(2), 3))
+  _
+  ```
+
+- support zero-arity function syntax -- to use flower bracket
+
+  ``` cicada
+  expanded: Equal(Nat, add1(add1(add1(0))), 3) {
+    _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(add1(0))), add1(add1(1))))
+    _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(1)), add1(2)))
+    _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(2), 3))
+    _
+  }
+
+  // NOTE the same as
+
+  expanded: Equal(Nat, add1(add1(add1(0))), 3) =
+    _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(add1(0))), add1(add1(1))))
+    _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(1)), add1(2)))
+    _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(2), 3))
+    _
+  ```
 
 # implicit
 
