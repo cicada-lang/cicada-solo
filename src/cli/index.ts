@@ -1,36 +1,13 @@
-import yargs from "yargs"
-import { Command } from "./command"
+import { CommandRunner } from "./command-runner"
 import * as Commands from "./commands"
 
 export function run(): void {
-  register(new Commands.RunCommand(), { default: true })
-  register(new Commands.ReplCommand())
-  register(new Commands.CheckCommand())
-  register(new Commands.SnapshotCommand())
+  const runner = new CommandRunner()
 
-  yargs.demandCommand()
-  yargs.strict()
-  yargs.parse()
-}
+  runner.register(new Commands.RunCommand(), { default: true })
+  runner.register(new Commands.ReplCommand())
+  runner.register(new Commands.CheckCommand())
+  runner.register(new Commands.SnapshotCommand())
 
-function register(
-  command: Command<unknown>,
-  opts?: { default?: boolean }
-): void {
-  if (opts?.default) {
-    yargs.command({
-      ...command,
-      command: command.signature,
-      builder: command.options,
-      handler: command.execute,
-      aliases: ["$0"],
-    })
-  } else {
-    yargs.command({
-      ...command,
-      command: command.signature,
-      builder: command.options,
-      handler: command.execute,
-    })
-  }
+  runner.run()
 }
