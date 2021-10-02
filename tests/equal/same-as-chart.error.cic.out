@@ -1,0 +1,10 @@
+I am expecting the following two values to be the same Nat.
+But they are not.
+
+from value at 4:
+  3
+to value at 5:
+  6
+
+previous:
+- same_as_chart! Nat [ 3, 3, 3, 3, 3, 6, 3, 3 ]

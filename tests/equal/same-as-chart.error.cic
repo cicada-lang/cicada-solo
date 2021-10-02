@@ -1,0 +1,10 @@
+same_as_chart! Nat [
+  add1(add1(add1(0))),
+  add1(add1(1)),
+  add1(2),
+  3,
+  3,
+  6,
+  3,
+  3,
+]
