@@ -1,4 +1,5 @@
 import { Command } from "../../infra/command"
+import { CommandRunner } from "../../infra/command-runner"
 import * as Runners from "../../runners"
 import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"
@@ -12,13 +13,13 @@ export class RunCommand extends Command<Args> {
 
   args = { file: ty.string() }
 
-  help(): string {
+  help(runner: CommandRunner): string {
     const name = chalk.blue("run")
 
     return [
       `The ${name} command runs file, and print top-level expressions.`,
       ``,
-      chalk.blue(`  run tests/trivial/sole.cic`),
+      chalk.blue(`  ${runner.name} run tests/trivial/sole.cic`),
     ].join("\n")
   }
 

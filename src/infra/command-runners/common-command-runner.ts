@@ -2,6 +2,7 @@ import { CommandRunner } from "../command-runner"
 import { Command } from "../command"
 import yargsParser from "yargs-parser"
 import { Schema, Errors } from "@xieyuheng/ty"
+import Path from "path"
 
 export class CommonCommandRunner extends CommandRunner {
   commands: Record<string, Command<any, any>>
@@ -16,9 +17,12 @@ export class CommonCommandRunner extends CommandRunner {
     this.default = opts.default
   }
 
-  getCommandName(): string {
-    const argv = yargsParser(process.argv.slice(2))
-    return argv["_"][0]
+  get name(): string {
+    return Path.basename(process.argv[1])
+  }
+
+  get commandName(): string {
+    return process.argv[2]
   }
 
   parseArgv(command: Command): Record<string, any> {
@@ -27,7 +31,7 @@ export class CommonCommandRunner extends CommandRunner {
   }
 
   async run(): Promise<void> {
-    const name = this.getCommandName()
+    const name = this.commandName
 
     if (this.commands[name]) {
       const command = this.commands[name]

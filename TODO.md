@@ -1,4 +1,4 @@
-- [cli] `CommandRunner.name` -- can be used `Command.help`
+- [cli] move `HelpCommand` to `CommonHelpCommand`
 
 - `logger` improve interface
 

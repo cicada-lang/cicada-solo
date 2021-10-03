@@ -15,7 +15,7 @@ export abstract class Command<
 
   alias: Record<string, Array<string>> = {}
 
-  help?(): string
+  help?(runner: CommandRunner): string
 
   abstract execute(argv: Args & Opts, runner: CommandRunner): Promise<void>
 

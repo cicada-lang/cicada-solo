@@ -12,13 +12,13 @@ export class HelpCommand extends Command<Args> {
 
   args = { name: ty.optional(ty.string()) }
 
-  help(): string {
+  help(runner: CommandRunner): string {
     const name = chalk.blue("help")
 
     return [
       `The ${name} command displays help for a given command.`,
       ``,
-      chalk.blue(`  help check`),
+      chalk.blue(`  ${runner.name} help check`),
     ].join("\n")
   }
 
@@ -35,7 +35,7 @@ export class HelpCommand extends Command<Args> {
         [
           //
           chalk.yellow(`Help:`),
-          ut.indent(this.help(), "  "),
+          ut.indent(this.help(runner), "  "),
         ].join("\n")
       )
     }
@@ -89,7 +89,7 @@ export class HelpCommand extends Command<Args> {
         [
           //
           chalk.yellow(`Help:`),
-          ut.indent(command.help(), "  "),
+          ut.indent(command.help(runner), "  "),
         ].join("\n")
       )
     }
