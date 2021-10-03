@@ -49,9 +49,9 @@ async function check(library: Library): Promise<{ errors: Array<unknown> }> {
       if (error) errors.push(error)
 
       if (error) {
-        app.logger.error(`check: ${path}`)
+        app.logger.error(`(check) ${path}`)
       } else {
-        app.logger.info(`check: ${path}`)
+        app.logger.info(`(check) ${path}`)
       }
     }
   }
@@ -71,7 +71,7 @@ async function watch(library: Library): Promise<void> {
 
     if (event === "remove") {
       library.cache.delete(path)
-      app.logger.info(`${event}: ${path}`)
+      app.logger.info(`(${event}) ${path}`)
     }
 
     if (event === "update") {
@@ -80,9 +80,9 @@ async function watch(library: Library): Promise<void> {
       const { error } = await runner.run(path)
 
       if (error) {
-        app.logger.error(`${event}: ${path}`)
+        app.logger.error(`(${event}) ${path}`)
       } else {
-        app.logger.info(`${event}: ${path}`)
+        app.logger.info(`(${event}) ${path}`)
       }
     }
   })
