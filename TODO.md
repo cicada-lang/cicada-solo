@@ -1,6 +1,3 @@
-- `app.logger`
-- no `logger` in runner -- use logger in `check-command` instead
-
 # error report
 
 - get information about location from parser

@@ -7,7 +7,6 @@ import { Logger } from "../logger"
 export function create_special_runner(opts: {
   path: string
   library: Library
-  logger?: Logger
 }): Runner {
   const { path } = opts
 

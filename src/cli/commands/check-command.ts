@@ -1,6 +1,5 @@
 import { Command } from "../../infra/command"
 import { Library } from "../../library"
-import { Logger } from "../../logger"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
 import app from "../../app/node-app"
@@ -15,7 +14,6 @@ export class CheckCommand extends Command<Args, Opts> {
   description = "Check a library -- by cwd, dir or library.json"
 
   args = { library: ty.optional(ty.string()) }
-
   opts = { watch: ty.optional(ty.boolean()) }
 
   async execute(argv: Args & Opts): Promise<void> {
@@ -31,8 +29,10 @@ export class CheckCommand extends Command<Args, Opts> {
     await check(library)
 
     if (argv["watch"]) {
-      const logger = new Logger({ tag: "info" })
-      logger.info({ msg: `Initial check complete, now watching for changes.` })
+      app.logger.info({
+        tag: "info",
+        msg: `Initial check complete, now watching for changes.`,
+      })
       await watch(library)
     }
   }
@@ -42,9 +42,15 @@ async function check(library: Library): Promise<void> {
   let errors: Array<unknown> = []
   for (const path of Object.keys(await library.files.all())) {
     if (ModuleLoaders.can_handle_extension(path)) {
-      const logger = new Logger({ tag: "check" })
-      const runner = Runners.create_special_runner({ path, library, logger })
+      const runner = Runners.create_special_runner({ path, library })
       const { error } = await runner.run(path)
+
+      if (error) {
+        app.logger.error({ tag: "check", msg: path })
+      } else {
+        app.logger.info({ tag: "check", msg: path })
+      }
+
       if (error) {
         errors.push(error)
         if (error instanceof Error) {
@@ -73,15 +79,19 @@ async function watch(library: Library): Promise<void> {
 
     if (event === "remove") {
       library.cache.delete(path)
-      const logger = new Logger({ tag: event })
-      logger.info({ msg: path })
+      app.logger.info({ tag: event, msg: path })
     }
 
     if (event === "update") {
       library.cache.delete(path)
-      const logger = new Logger({ tag: event })
-      const runner = Runners.create_special_runner({ path, library, logger })
-      await runner.run(path)
+      const runner = Runners.create_special_runner({ path, library })
+      const { error } = await runner.run(path)
+
+      if (error) {
+        app.logger.error({ tag: "event", msg: path })
+      } else {
+        app.logger.info({ tag: "event", msg: path })
+      }
     }
   })
 }
