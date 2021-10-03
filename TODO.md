@@ -1,7 +1,5 @@
 # error report
 
-- stmt -- with abstract `span`
-
 - exps/absurd/absurd -- with `span`
 - exps/absurd/absurd-ind -- with `span`
 - exps/cls/nil-cls -- with `span`
