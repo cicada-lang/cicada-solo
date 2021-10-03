@@ -1,19 +1,19 @@
 import fs from "fs"
-import ty, { Schema } from "@xieyuheng/ty"
+import { Schema } from "@xieyuheng/ty"
 import { CommandRunner } from "../command-runner"
 
 type SchemaObject<T> = { [P in keyof T]: Schema<T[P]> }
 
 export abstract class Command<
   Args extends Object = {},
-  Options extends Object = {}
+  Opts extends Object = {}
 > {
   abstract description: string
 
   args: SchemaObject<Args> = {} as SchemaObject<Args>
-  options: SchemaObject<Options> = {} as SchemaObject<Options>
+  opts: SchemaObject<Opts> = {} as SchemaObject<Opts>
 
-  abstract execute(argv: Args & Options, runner: CommandRunner): Promise<void>
+  abstract execute(argv: Args & Opts, runner: CommandRunner): Promise<void>
 
   static assertFile(file: string): void {
     if (!fs.existsSync(file)) {

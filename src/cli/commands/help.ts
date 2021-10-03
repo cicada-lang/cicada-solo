@@ -12,6 +12,8 @@ export class HelpCommand extends Command<Args> {
   args = { name: ty.optional(ty.string()) }
 
   async execute(argv: Args, runner: CommandRunner): Promise<void> {
+    // TODO use argv["name"]
+
     const size = Math.max(
       ...Object.keys(runner.commands).map((name) => name.length)
     )

@@ -37,11 +37,11 @@ export class CommonCommandRunner extends CommandRunner {
   ): Promise<void> {
     try {
       const args = this.pruneArgs(command.args, array)
-      const options = ty.object(command.options).prune(obj)
+      const options = ty.object(command.opts).prune(obj)
       return await command.execute({ ...args, ...options }, this)
     } catch (error) {
       if (error instanceof Errors.InvalidData) {
-        console.error(error)
+        console.error(error.message)
         process.exit(1)
         return
       } else {

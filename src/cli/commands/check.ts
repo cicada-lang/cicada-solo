@@ -9,14 +9,14 @@ import watcher from "node-watch"
 import fs from "fs"
 
 type Args = { library?: string }
-type Options = { watch?: boolean }
+type Opts = { watch?: boolean }
 
-export class CheckCommand extends Command<Args, Options> {
+export class CheckCommand extends Command<Args, Opts> {
   description = "Check a library -- by cwd, dir or library.json"
   args = { library: ty.optional(ty.string()) }
-  options = { watch: ty.optional(ty.boolean()) }
+  opts = { watch: ty.optional(ty.boolean()) }
 
-  async execute(argv: Args & Options): Promise<void> {
+  async execute(argv: Args & Opts): Promise<void> {
     const path = argv["library"] || process.cwd() + "/library.json"
     Command.assertExists(path)
     const config_file = fs.lstatSync(path).isFile()
@@ -28,7 +28,7 @@ export class CheckCommand extends Command<Args, Options> {
 
     await check(library)
 
-    if (argv.watch) {
+    if (argv["watch"]) {
       await watch(library)
     }
   }
