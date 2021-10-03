@@ -79,7 +79,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
       new Stmts.Show(operator_matcher(operator), { span }),
     "stmt:show_operand": ({ operand }, { span }) =>
       new Stmts.Show(operand_matcher(operand), { span }),
-    "stmt:class": ({ name, entries }) =>
+    "stmt:class": ({ name, entries }, { span }) =>
       new Stmts.Class(
         pt.str(name),
         pt.matchers
@@ -95,7 +95,8 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                 rest_t
               ),
             new Exps.NilCls()
-          )
+          ),
+        { span }
       ),
     "stmt:class_extends": ({ name, parent, entries }) =>
       new Stmts.ClassExtends(

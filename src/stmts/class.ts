@@ -3,15 +3,18 @@ import { Module } from "../module"
 import { infer } from "../exp"
 import { evaluate } from "../core"
 import * as Exps from "../exps"
+import pt from "@cicada-lang/partech"
 
 export class Class extends Stmt {
   name: string
   cls: Exps.Cls
+  meta: { span: pt.Span }
 
-  constructor(name: string, cls: Exps.Cls) {
+  constructor(name: string, cls: Exps.Cls, meta: { span: pt.Span }) {
     super()
     this.name = name
     this.cls = cls
+    this.meta = meta
   }
 
   async execute(mod: Module): Promise<void> {
