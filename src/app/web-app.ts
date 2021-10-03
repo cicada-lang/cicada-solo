@@ -1,6 +1,6 @@
-import { App } from "../app"
+import { GenericApp } from "./generic-app"
 
-export class WebApp extends App {
+export class WebApp extends GenericApp {
   // TODO
 }
 

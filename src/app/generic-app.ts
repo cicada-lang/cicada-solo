@@ -4,7 +4,7 @@ import { Library } from "../library"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
 
-export class App {
+export class GenericApp {
   config = new AppConfig()
 
   createReplEventHandler(opts: {
@@ -19,4 +19,4 @@ export class App {
   }
 }
 
-export default new App()
+export default new GenericApp()

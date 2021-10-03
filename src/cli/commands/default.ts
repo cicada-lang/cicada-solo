@@ -1,7 +1,7 @@
 import { Command } from "../../infra/command"
 import { CommandRunner } from "../../infra/command-runner"
 import * as Commands from "../commands"
-import app from "../../app/app"
+import app from "../../app/generic-app"
 import ty from "@xieyuheng/ty"
 
 type Args = { file?: string }

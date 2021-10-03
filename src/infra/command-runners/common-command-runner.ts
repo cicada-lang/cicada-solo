@@ -1,7 +1,7 @@
 import { CommandRunner } from "../command-runner"
 import { Command } from "../command"
 import yargsParser from "yargs-parser"
-import ty, { Schema, Errors } from "@xieyuheng/ty"
+import { Schema, Errors } from "@xieyuheng/ty"
 
 export class CommonCommandRunner extends CommandRunner {
   commands: Record<string, Command<any, any>>
