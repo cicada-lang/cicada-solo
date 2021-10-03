@@ -6,9 +6,9 @@ import * as Exps from "../exps"
 import pt from "@cicada-lang/partech"
 
 export class Type extends Exp {
-  meta?: { span: pt.Span }
+  meta?: { span?: pt.Span }
 
-  constructor(meta?: { span: pt.Span }) {
+  constructor(meta?: { span?: pt.Span }) {
     super()
     this.meta = meta
   }
