@@ -1,6 +1,4 @@
-- [cli] `cli/commands/help` -- be able to print help message of each command
-
-  - `Command.help`
+- [cli] `CommandRunner.name` -- can be used `Command.help`
 
 - `logger` improve interface
 
