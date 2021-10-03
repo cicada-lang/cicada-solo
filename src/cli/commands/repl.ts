@@ -16,7 +16,7 @@ export class ReplCommand extends Command<Args> {
     const path = `repl-file-${app.nanoid()}.cic`
     const library = app.libraries.fake(dir, { [path]: "" })
     const handler = app.createReplEventHandler({ path, library })
-    const repl = await ReadlineRepl.create({ dir, handler, files: app.files })
+    const repl = await ReadlineRepl.create({ dir, handler, files: app.home })
     await repl.run()
   }
 }

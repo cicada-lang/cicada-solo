@@ -1,5 +1,3 @@
-- rename `AppFileStore` to `AppHomeFileStore`
-
 - [cli] `cli/commands/help` -- be able to print help message of each command
 
   - `Command.help`

@@ -1,9 +1,9 @@
 import { GenericApp } from "./generic-app"
-import { AppFileStore } from "./app-file-store"
+import { AppHomeFileStore } from "./app-home-file-store"
 import { LocalLibraryStore } from "../library-stores"
 
 export class NodeApp extends GenericApp {
-  files: AppFileStore = new AppFileStore()
+  home: AppHomeFileStore = new AppHomeFileStore()
   libraries: LocalLibraryStore = new LocalLibraryStore()
 }
 
