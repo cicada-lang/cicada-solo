@@ -15,6 +15,8 @@ export abstract class Command<
 
   alias: Record<string, Array<string>> = {}
 
+  help?: string
+
   abstract execute(argv: Args & Opts, runner: CommandRunner): Promise<void>
 
   static assertFile(path: string): void {

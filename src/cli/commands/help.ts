@@ -15,6 +15,12 @@ export class HelpCommand extends Command<Args> {
   async execute(argv: Args, runner: CommandRunner): Promise<void> {
     // TODO use argv["name"]
 
+    this.usage()
+    this.defaultCommand(runner)
+    this.listCommands(runner)
+  }
+
+  usage(): void {
     console.log(
       [
         //
@@ -23,7 +29,9 @@ export class HelpCommand extends Command<Args> {
         ``,
       ].join("\n")
     )
+  }
 
+  defaultCommand(runner: CommandRunner): void {
     if (runner.default) {
       const command = runner.default
 
@@ -35,7 +43,9 @@ export class HelpCommand extends Command<Args> {
         ].join("\n")
       )
     }
+  }
 
+  listCommands(runner: CommandRunner): void {
     const size = Math.max(
       ...Object.entries(runner.commands).map(
         ([name, command]) => `${name} ${this.signature(command)}`.length
