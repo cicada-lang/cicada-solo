@@ -1,5 +1,4 @@
-- [cli] `cli/commands/default` -- print version on `--version` and `-v`
-
+- move `app-config` with `package.json` in `package`
 - [cli] `cli/commands/help` -- be able to print help message of each command
 
   - `Command.help`

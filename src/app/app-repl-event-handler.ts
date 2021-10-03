@@ -2,6 +2,8 @@ import { ReplEvent, ReplEventHandler } from "../infra/repl"
 import { Library } from "../library"
 import * as StmtOutputs from "../stmt-outputs"
 import chalk from "chalk"
+// NOTE We should not use import for module not in `src/`,
+//   otherwise `lib/` will have a extra level.
 const pkg = require("../../package.json")
 
 export class AppReplEventHandler extends ReplEventHandler {

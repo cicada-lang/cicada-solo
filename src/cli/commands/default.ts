@@ -1,23 +1,31 @@
 import { Command } from "../../infra/command"
 import { CommandRunner } from "../../infra/command-runner"
 import * as Commands from "../commands"
+// NOTE We should not use import for module not in `src/`,
+//   otherwise `lib/` will have a extra level.
+const pkg = require("../../../package.json")
 import ty from "@xieyuheng/ty"
 
 type Args = { file?: string }
-type Opts = { help?: boolean }
+type Opts = { help?: boolean; version?: boolean }
 
 export class DefaultCommand extends Command<Args, Opts> {
   description = "Open REPL or run a file"
 
   args = { file: ty.optional(ty.string()) }
-  opts = { help: ty.optional(ty.boolean()) }
+  opts = { help: ty.optional(ty.boolean()), version: ty.optional(ty.boolean()) }
 
-  alias = { help: ["h"] }
+  alias = { help: ["h"], version: ["v"] }
 
   async execute(argv: Args & Opts, runner: CommandRunner): Promise<void> {
     if (argv["help"]) {
       const command = new Commands.HelpCommand()
       await command.execute({}, runner)
+      return
+    }
+
+    if (argv["version"]) {
+      console.log(pkg.version)
       return
     }
 
