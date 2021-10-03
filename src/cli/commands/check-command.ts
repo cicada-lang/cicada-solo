@@ -26,45 +26,40 @@ export class CheckCommand extends Command<Args, Opts> {
     console.log(library.info())
     console.log()
 
-    await check(library)
-
     if (argv["watch"]) {
+      await check(library)
       app.logger.info({
         tag: "info",
         msg: `Initial check complete, now watching for changes.`,
       })
       await watch(library)
+    } else {
+      const { errors } = await check(library)
+      if (errors.length > 0) {
+        process.exit()
+      }
     }
   }
 }
 
-async function check(library: Library): Promise<void> {
+async function check(library: Library): Promise<{ errors: Array<unknown> }> {
   let errors: Array<unknown> = []
+
   for (const path of Object.keys(await library.files.all())) {
     if (ModuleLoaders.can_handle_extension(path)) {
       const runner = Runners.create_special_runner({ path, library })
       const { error } = await runner.run(path)
+      if (error) errors.push(error)
 
       if (error) {
         app.logger.error({ tag: "check", msg: path })
       } else {
         app.logger.info({ tag: "check", msg: path })
       }
-
-      if (error) {
-        errors.push(error)
-        if (error instanceof Error) {
-          console.error(error.message)
-        } else {
-          console.error(error)
-        }
-      }
     }
   }
 
-  if (errors.length !== 0) {
-    process.exit(1)
-  }
+  return { errors }
 }
 
 async function watch(library: Library): Promise<void> {

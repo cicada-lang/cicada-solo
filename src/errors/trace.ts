@@ -1,7 +1,11 @@
-export class Trace<T> {
-  previous: Array<T> = Array.of()
+export class Trace<T> extends Error {
+  message: string
+  previous: Array<T> = []
 
-  constructor(public message: string) {}
+  constructor(message: string) {
+    super()
+    this.message = message
+  }
 
   trail(x: T): this {
     this.previous.push(x)
