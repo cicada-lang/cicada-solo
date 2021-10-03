@@ -1,4 +1,3 @@
-- [cli] `CommonCommandRunner` improve error message for invalid input
 - [cli] `CommonCommandRunner` be able to print signature of each command
 - [cli] `CommonCommandRunner` be able to print help message of each command
 - [cli] improve validation and error report

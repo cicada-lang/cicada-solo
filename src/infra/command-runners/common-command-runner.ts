@@ -25,7 +25,7 @@ export class CommonCommandRunner extends CommandRunner {
     } else if (this.default) {
       await this.apply(this.default, argv["_"], argv)
     } else {
-      console.error(`Unknown command: ${name}`)
+      console.error(`I was given unknown command: ${name}`)
       process.exit(1)
     }
   }
@@ -33,33 +33,70 @@ export class CommonCommandRunner extends CommandRunner {
   async apply(
     command: Command<any, any>,
     array: Array<any>,
-    obj: Record<string, any>
+    record: Record<string, any>
   ): Promise<void> {
-    try {
-      const args = this.pruneArgs(command.args, array)
-      const options = ty.object(command.opts).prune(obj)
-      return await command.execute({ ...args, ...options }, this)
-    } catch (error) {
-      if (error instanceof Errors.InvalidData) {
-        console.error(error.message)
-        process.exit(1)
-        return
-      } else {
-        throw error
+    const args = this.pruneArgs(command.args, array)
+    const opts = this.pruneOpts(command.opts, record)
+    return await command.execute({ ...args, ...opts }, this)
+  }
+
+  private pruneOpts(
+    schemas: Record<string, Schema<any>>,
+    record: Record<string, any>
+  ): any {
+    const opts: any = {}
+    for (const [key, schema] of Object.entries(schemas)) {
+      try {
+        opts[key] = schema.prune(record[key])
+      } catch (error) {
+        if (error instanceof Errors.InvalidData) {
+          console.error(
+            [
+              `I found invalid input in options:`,
+              `  key: ${key}`,
+              `  give: ${record[key]}`,
+              `  expect: ${JSON.stringify(schema.json())}`,
+            ].join("\n")
+          )
+          process.exit(1)
+          return
+        } else {
+          throw error
+        }
       }
     }
+
+    return opts
   }
 
   private pruneArgs(
     schemas: Record<string, Schema<any>>,
     array: Array<any>
   ): any {
-    const args: any = {}
-
     let i = 0
+
+    const args: any = {}
     for (const [key, schema] of Object.entries(schemas)) {
-      args[key] = schema.prune(array[i])
-      i++
+      try {
+        args[key] = schema.prune(array[i])
+        i++
+      } catch (error) {
+        if (error instanceof Errors.InvalidData) {
+          console.error(
+            [
+              `I found invalid input in positional args:`,
+              `  name: ${key}`,
+              `  index: ${i}`,
+              `  give: ${array[i]}`,
+              `  expect: ${JSON.stringify(schema.json())}`,
+            ].join("\n")
+          )
+          process.exit(1)
+          return
+        } else {
+          throw error
+        }
+      }
     }
 
     return args
