@@ -1,7 +1,5 @@
 # error report
 
-- stmts/class-extends -- with `span`
-
 - stmt -- with abstract `span`
 
 - exps/absurd/absurd -- with `span`

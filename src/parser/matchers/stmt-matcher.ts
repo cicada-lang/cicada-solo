@@ -98,7 +98,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           ),
         { span }
       ),
-    "stmt:class_extends": ({ name, parent, entries }) =>
+    "stmt:class_extends": ({ name, parent, entries }, { span }) =>
       new Stmts.ClassExtends(
         pt.str(name),
         new Exps.Ext(
@@ -117,7 +117,8 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                 ),
               new Exps.NilCls()
             )
-        )
+        ),
+        { span }
       ),
     "stmt:import": ({ path, entries }, { span }) => {
       return new Stmts.Import(
