@@ -1,10 +1,12 @@
 import { Command } from "../../infra/command"
+import { CommandRunner } from "../../infra/command-runner"
 import { Library } from "../../library"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
 import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"
 import watcher from "node-watch"
+import chalk from "chalk"
 import fs from "fs"
 
 type Args = { library?: string }
@@ -15,6 +17,21 @@ export class CheckCommand extends Command<Args, Opts> {
 
   args = { library: ty.optional(ty.string()) }
   opts = { watch: ty.optional(ty.boolean()) }
+
+  help(runner: CommandRunner): string {
+    const name = chalk.blue("check")
+
+    return [
+      `The ${name} command checks a library.`,
+      `You can specify a library by a path to its library.json config file,`,
+      `or a path to a directory which contains the config file,`,
+      `and if no path are given, the current working directory will be used.`,
+      ``,
+      chalk.blue(`  ${runner.name} check libraries/cicada-stdlib`),
+      chalk.blue(`  ${runner.name} check libraries/cicada-stdlib/library.json`),
+      chalk.blue(`  ${runner.name} check libraries/the-little-typer --watch`),
+    ].join("\n")
+  }
 
   async execute(argv: Args & Opts): Promise<void> {
     const path = argv["library"] || process.cwd() + "/library.json"
