@@ -1,5 +1,3 @@
-- use `pino` -- remove `logger`
-
 # error report
 
 - get information about location from parser
