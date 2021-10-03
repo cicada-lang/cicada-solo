@@ -1,5 +1,4 @@
 import { Command } from "../../infra/command"
-import { CicReplEventHandler } from "../../repl-event-handlers"
 import { ReadlineRepl } from "../../infra/repls/readline-repl"
 import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"
@@ -16,7 +15,7 @@ export class ReplCommand extends Command<Args> {
     const dir = Path.resolve(argv["dir"] || process.cwd())
     const path = `repl-file-${app.nanoid()}.cic`
     const library = app.libraries.fake(dir, { [path]: "" })
-    const handler = new CicReplEventHandler({ path, library })
+    const handler = app.createReplEventHandler({ path, library })
     const repl = await ReadlineRepl.create({ dir, handler })
     await repl.run()
   }

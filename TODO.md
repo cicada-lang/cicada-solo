@@ -1,4 +1,3 @@
-- move `cic-repl-event-handler` to `app/app-repl-event-handler`
 - move `FileStore` to `infra`
 - inject `FileStore` to `ReadlineRepl` instead of using `AppFileStore`
 

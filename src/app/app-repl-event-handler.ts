@@ -4,7 +4,7 @@ import * as StmtOutputs from "../stmt-outputs"
 import chalk from "chalk"
 const pkg = require("../../package.json")
 
-export class CicReplEventHandler extends ReplEventHandler {
+export class AppReplEventHandler extends ReplEventHandler {
   library: Library
   path: string
 
