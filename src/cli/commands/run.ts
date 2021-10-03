@@ -8,7 +8,7 @@ import chalk from "chalk"
 type Args = { file: string }
 
 export class RunCommand extends Command<Args> {
-  description = "Run a file -- support .md or .cic"
+  description = "Run a file -- support .md and .cic"
 
   args = { file: ty.string() }
 
