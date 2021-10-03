@@ -19,7 +19,7 @@ export class SaveAll extends Command {
       return
     }
 
-    await fs.promises.writeFile(path, repl.all_statements.join("\n"))
+    await fs.promises.writeFile(path, repl.allStmts.join("\n"))
     console.log(`Session saved to file: "${path}"`)
 
     repl.prompt()

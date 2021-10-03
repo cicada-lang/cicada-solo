@@ -8,8 +8,8 @@ import Readline from "readline"
 export class ReadlineRepl extends Repl {
   dir: string
   handler: ReplEventHandler
-  all_statements: Array<string> = []
-  successful_statements: Array<string> = []
+  allStmts: Array<string> = []
+  successfulStmts: Array<string> = []
   commands: Array<Command> = [
     new Commands.Help(),
     new Commands.Load(),
@@ -56,11 +56,11 @@ export class ReadlineRepl extends Repl {
 
   prompt(): void {
     const depth = this.parensChecker.depth(this.lines.join("\n"))
-    this.readline.setPrompt(this.create_prompt(depth))
+    this.readline.setPrompt(this.createPrompt(depth))
     this.readline.prompt()
   }
 
-  private create_prompt(depth: number): string {
+  private createPrompt(depth: number): string {
     if (depth === 0) {
       return "> "
     } else {
@@ -69,9 +69,9 @@ export class ReadlineRepl extends Repl {
   }
 
   async run(): Promise<void> {
-    this.readline.on("line", (line) => this.handle_line(line))
-    this.listen_sigint()
-    this.listen_history()
+    this.readline.on("line", (line) => this.handleLine(line))
+    this.listenSigint()
+    this.listenHistory()
     this.handler.greeting()
     this.prompt()
   }
@@ -79,36 +79,36 @@ export class ReadlineRepl extends Repl {
   private lines: Array<string> = []
   private lock: boolean = false
 
-  private async handle_line(line: string): Promise<void> {
+  private async handleLine(line: string): Promise<void> {
     this.lines.push(line)
     if (!this.lock) {
       this.lock = true
-      await this.process_lines()
+      await this.processLines()
       this.lock = false
     }
   }
 
-  private listen_history(): void {
+  private listenHistory(): void {
     this.readline.on("history", (history) => {
       const text = history.reverse().join("\n") + "\n"
       this.files.put("repl/history", text)
     })
   }
 
-  private listen_sigint(): void {
-    let exit_attempt_count = 0
+  private listenSigint(): void {
+    let exitAttemptCount = 0
 
     this.readline.on("line", () => {
-      exit_attempt_count = 0
+      exitAttemptCount = 0
     })
 
     this.readline.on("SIGINT", () => {
       if (this.lines.join("").trim() === "" && this.readline.line === "") {
-        exit_attempt_count++
-        if (exit_attempt_count === 1) {
+        exitAttemptCount++
+        if (exitAttemptCount === 1) {
           console.log()
           console.log("(To exit, press Ctrl+C again or Ctrl+D)")
-        } else if (exit_attempt_count > 1) {
+        } else if (exitAttemptCount > 1) {
           this.readline.close()
         }
       } else {
@@ -130,9 +130,9 @@ export class ReadlineRepl extends Repl {
     })
   }
 
-  private async process_lines(): Promise<void> {
+  private async processLines(): Promise<void> {
     while (true) {
-      const text = this.next_text_or_report_error()
+      const text = this.nextTextOrReportError()
 
       if (!text) {
         this.prompt()
@@ -150,14 +150,14 @@ export class ReadlineRepl extends Repl {
 
       const event: ReplEvent = { text }
       const successful = await this.handler.handle(event)
-      this.all_statements.push(text)
+      this.allStmts.push(text)
       if (successful) {
-        this.successful_statements.push(text)
+        this.successfulStmts.push(text)
       }
     }
   }
 
-  private next_text_or_report_error(): string | undefined {
+  private nextTextOrReportError(): string | undefined {
     let text = ""
     for (const [i, line] of this.lines.entries()) {
       const prefix = "  ".repeat(this.parensChecker.depth(text))
