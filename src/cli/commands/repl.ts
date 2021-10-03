@@ -1,4 +1,4 @@
-import { Command } from "../command"
+import { Command } from "../../infra/command"
 import { CicReplEventHandler } from "../../repl-event-handlers"
 import { ReadlineRepl } from "../../repls/readline-repl"
 import app from "../../app/node-app"

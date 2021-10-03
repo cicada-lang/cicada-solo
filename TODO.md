@@ -1,6 +1,7 @@
-- [cli] `CommonCommandRunner` be able to print help message for each command
+- [cli] move `repl` and `repls` to `infra`
+- [cli] move `app-file-store` to `app`
 
-- [cli] move `cli/command` and `cli/command-runner` to `infra`
+- [cli] `CommonCommandRunner` be able to print help message for each command
 
 # implicit
 

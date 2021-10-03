@@ -1,6 +1,6 @@
 import fs from "fs"
 import ty, { Schema } from "@xieyuheng/ty"
-import { CommandRunner } from "./command-runner"
+import { CommandRunner } from "../command-runner"
 
 type SchemaObject<T> = { [P in keyof T]: Schema<T[P]> }
 

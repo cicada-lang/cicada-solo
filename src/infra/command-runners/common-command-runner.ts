@@ -1,6 +1,5 @@
 import { CommandRunner } from "../command-runner"
 import { Command } from "../command"
-import * as Commands from "../commands"
 import parse from "yargs-parser"
 import ty, { Schema, Errors } from "@xieyuheng/ty"
 

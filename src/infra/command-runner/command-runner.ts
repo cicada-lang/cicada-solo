@@ -1,4 +1,4 @@
-import { Command } from "./command"
+import { Command } from "../command"
 
 export abstract class CommandRunner {
   abstract commands: Record<string, Command<any, any>>

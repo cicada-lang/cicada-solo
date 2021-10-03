@@ -1,4 +1,4 @@
-import * as CommandRunners from "./command-runners"
+import * as CommandRunners from "../infra/command-runners"
 import * as Commands from "./commands"
 
 export function run(): void {

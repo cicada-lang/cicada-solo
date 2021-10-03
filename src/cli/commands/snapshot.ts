@@ -1,4 +1,4 @@
-import { Command } from "../command"
+import { Command } from "../../infra/command"
 import * as Runners from "../../runners"
 import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"

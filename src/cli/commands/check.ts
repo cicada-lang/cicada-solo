@@ -1,4 +1,4 @@
-import { Command } from "../command"
+import { Command } from "../../infra/command"
 import { Library } from "../../library"
 import { Logger } from "../../runner/logger"
 import * as ModuleLoaders from "../../module-loaders"
