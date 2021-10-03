@@ -1,6 +1,6 @@
 import { LibraryStore } from "../library-store"
 import { Library } from "../library"
-import { LocalFileStore, FakeFileStore } from "../file-stores"
+import { LocalFileStore, FakeFileStore } from "../infra/file-stores"
 import * as ut from "../ut"
 import Path from "path"
 import fs from "fs"

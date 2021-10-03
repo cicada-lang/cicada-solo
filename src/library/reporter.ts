@@ -1,4 +1,4 @@
-import { FileStore } from "../file-store"
+import { FileStore } from "../infra/file-store"
 import { Trace } from "../errors"
 import pt from "@cicada-lang/partech"
 

@@ -1,6 +1,6 @@
 import { Module } from "../module"
 import * as ModuleLoaders from "../module-loaders"
-import { FileStore } from "../file-store"
+import { FileStore } from "../infra/file-store"
 import { Reporter } from "./reporter"
 import ty from "@xieyuheng/ty"
 import { customAlphabet } from "nanoid"

@@ -1,5 +1,5 @@
 import { Library } from "../library"
-import { FileStore } from "../file-store"
+import { FileStore } from "../infra/file-store"
 import { Logger } from "../runner/logger"
 import { Runner } from "../runner"
 import fs from "fs"

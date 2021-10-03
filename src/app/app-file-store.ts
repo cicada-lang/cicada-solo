@@ -1,4 +1,4 @@
-import { LocalFileStore } from "../file-stores"
+import { LocalFileStore } from "../infra/file-stores"
 import os from "os"
 import Path from "path"
 import process from "process"

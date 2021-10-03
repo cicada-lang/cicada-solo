@@ -1,4 +1,3 @@
-- move `FileStore` to `infra`
 - inject `FileStore` to `ReadlineRepl` instead of using `AppFileStore`
 
 - [cli] `CommonCommandRunner` be able to print help message for each command
