@@ -1,6 +1,6 @@
 import { CommandRunner } from "../command-runner"
 import { Command } from "../command"
-import parse from "yargs-parser"
+import yargsParser from "yargs-parser"
 import ty, { Schema, Errors } from "@xieyuheng/ty"
 
 export class CommonCommandRunner extends CommandRunner {
@@ -16,13 +16,26 @@ export class CommonCommandRunner extends CommandRunner {
     this.default = opts.default
   }
 
+  getCommandName(): string {
+    const argv = yargsParser(process.argv.slice(2))
+    return argv["_"][0]
+  }
+
+  parseArgv(command: Command): Record<string, any> {
+    const argv = yargsParser(process.argv.slice(2), { alias: command.alias })
+    return argv
+  }
+
   async run(): Promise<void> {
-    const argv = parse(process.argv.slice(2))
-    const name = argv["_"][0]
+    const name = this.getCommandName()
 
     if (this.commands[name]) {
-      await this.apply(this.commands[name], argv["_"].slice(1), argv)
+      const command = this.commands[name]
+      const argv = this.parseArgv(command)
+      await this.apply(command, argv["_"].slice(1), argv)
     } else if (this.default) {
+      const command = this.default
+      const argv = this.parseArgv(command)
       await this.apply(this.default, argv["_"], argv)
     } else {
       console.error(

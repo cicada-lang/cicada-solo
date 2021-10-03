@@ -1,9 +1,10 @@
-- [cli] `CommonCommandRunner` be able to print version
-- [cli] `CommonCommandRunner` be able to print help message of each command
+- [cli] `cli/commands/default` -- print version on `--version` and `-v`
+
+- [cli] `cli/commands/help` -- be able to print help message of each command
+
+  - `Command.help`
 
 - `logger` improve interface
-
-- [cli] improve validation and error report
 
 # error report
 

@@ -13,6 +13,8 @@ export abstract class Command<
   args: SchemaObject<Args> = {} as SchemaObject<Args>
   opts: SchemaObject<Opts> = {} as SchemaObject<Opts>
 
+  alias: Record<string, Array<string>> = {}
+
   abstract execute(argv: Args & Opts, runner: CommandRunner): Promise<void>
 
   static assertFile(path: string): void {
