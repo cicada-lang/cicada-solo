@@ -8,7 +8,7 @@ export function run(): void {
       repl: new Commands.ReplCommand(),
       check: new Commands.CheckCommand(),
       snapshot: new Commands.SnapshotCommand(),
-      help: new Commands.HelpCommand(),      
+      help: new Commands.HelpCommand(),
     },
     default: new Commands.DefaultCommand(),
   })
