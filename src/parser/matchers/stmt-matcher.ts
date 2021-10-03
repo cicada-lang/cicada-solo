@@ -115,10 +115,11 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
             )
         )
       ),
-    "stmt:import": ({ path, entries }) => {
+    "stmt:import": ({ path, entries }, { span }) => {
       return new Stmts.Import(
         pt.trim_boundary(pt.str(path), 1),
-        pt.matchers.zero_or_more_matcher(entries).map(import_entry_matcher)
+        pt.matchers.zero_or_more_matcher(entries).map(import_entry_matcher),
+        { span }
       )
     },
   })(tree)

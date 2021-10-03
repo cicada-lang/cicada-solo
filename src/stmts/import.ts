@@ -2,6 +2,7 @@ import { Stmt } from "../stmt"
 import { Module } from "../module"
 import { Trace } from "../errors"
 import Path from "path"
+import pt from "@cicada-lang/partech"
 
 export type ImportEntry = {
   name: string
@@ -11,11 +12,13 @@ export type ImportEntry = {
 export class Import extends Stmt {
   path: string
   entries: Array<ImportEntry>
+  meta: { span: pt.Span }
 
-  constructor(path: string, entries: Array<ImportEntry>) {
+  constructor(path: string, entries: Array<ImportEntry>, meta: { span: pt.Span }) {
     super()
     this.path = path
     this.entries = entries
+    this.meta = meta
   }
 
   async execute(mod: Module): Promise<void> {

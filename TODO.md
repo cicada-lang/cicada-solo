@@ -3,7 +3,6 @@
 - stmts/class-extends -- with `span`
 - stmts/class -- with `span`
 - stmts/def -- with `span`
-- stmts/import -- with `span`
 
 - stmt -- with abstract `span`
 
