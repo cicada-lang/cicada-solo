@@ -1,6 +1,6 @@
 import { Command } from "../../infra/command"
 import { CicReplEventHandler } from "../../repl-event-handlers"
-import { ReadlineRepl } from "../../repls/readline-repl"
+import { ReadlineRepl } from "../../infra/repls/readline-repl"
 import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"
 import Path from "path"

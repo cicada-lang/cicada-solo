@@ -1,4 +1,4 @@
-import { ReplEvent, ReplEventHandler } from "../repl"
+import { ReplEvent, ReplEventHandler } from "../infra/repl"
 import { Library } from "../library"
 import * as StmtOutputs from "../stmt-outputs"
 import chalk from "chalk"

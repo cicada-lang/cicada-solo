@@ -1,4 +1,7 @@
-- [cli] move `repl` and `repls` to `infra`
+- `infra` use camlCase naming convention
+- move `cic-repl-event-handler` to `app/app-repl-event-handler`
+- move `FileStore` to `infra`
+- inject `FileStore` to `ReadlineRepl` instead of using `AppFileStore`
 
 - [cli] `CommonCommandRunner` be able to print help message for each command
 

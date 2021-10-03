@@ -1,8 +1,8 @@
 import { Repl, ReplEvent, ReplEventHandler } from "../../repl"
-import { AppFileStore } from "../../app"
+import { AppFileStore } from "../../../app"
 import { Command } from "./command"
 import * as Commands from "./commands"
-import app from "../../app/node-app"
+import app from "../../../app/node-app"
 import Readline from "readline"
 import fs from "fs"
 
