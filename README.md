@@ -1,5 +1,15 @@
 # 蝉语 / Cicada Language
 
+Welcome to cicada language --
+a dependently typed programming language
+and interactive theorem prover.
+
+The aim of cicada project is to help people understand that
+developing software and developing mathematics
+are the same kind of activity,
+and people who practices these developments,
+can learn from each other, and help each other in very good ways.
+
 ## Install
 
 ```
