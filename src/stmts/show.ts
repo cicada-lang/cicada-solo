@@ -6,13 +6,16 @@ import { evaluate } from "../core"
 import { readback } from "../value"
 import * as Exps from "../exps"
 import * as StmtOutputs from "../stmt-outputs"
+import pt from "@cicada-lang/partech"
 
 export class Show extends Stmt {
   exp: Exp
+  meta: { span: pt.Span }
 
-  constructor(exp: Exp) {
+  constructor(exp: Exp, meta: { span: pt.Span }) {
     super()
     this.exp = exp
+    this.meta = meta
   }
 
   async execute(mod: Module): Promise<void> {

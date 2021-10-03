@@ -4,11 +4,16 @@ import { Ctx } from "../ctx"
 import { Value } from "../value"
 import { Trace } from "../errors"
 import * as Exps from "../exps"
+import pt from "@cicada-lang/partech"
 
 export class Var extends Exp {
+  // span: pt.Span
   name: string
 
-  constructor(name: string) {
+  constructor(
+    name: string
+    // opts: { span: pt.Span }
+  ) {
     super()
     this.name = name
   }

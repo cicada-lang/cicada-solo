@@ -1,6 +1,65 @@
 # error report
 
-- get information about location from parser
+- stmts/class-extends -- with `span`
+- stmts/class -- with `span`
+- stmts/def -- with `span`
+- stmts/import -- with `span`
+
+- stmt -- with abstract `span`
+
+- exps/absurd/absurd -- with `span`
+- exps/absurd/absurd-ind -- with `span`
+- exps/cls/nil-cls -- with `span`
+- exps/cls/fulfilled-cls -- with `span`
+- exps/cls/dot -- with `span`
+- exps/cls/obj -- with `span`
+- exps/cls/cls -- with `span`
+- exps/cls/cons-cls -- with `span`
+- exps/cls/ext -- with `span`
+- exps/sigma/car -- with `span`
+- exps/sigma/cons -- with `span`
+- exps/sigma/cdr -- with `span`
+- exps/sigma/sigma -- with `span`
+- exps/list/list-rec -- with `span`
+- exps/list/li -- with `span`
+- exps/list/list-ind -- with `span`
+- exps/list/list -- with `span`
+- exps/list/nil -- with `span`
+- exps/pi/ap -- with `span`
+- exps/pi/fn -- with `span`
+- exps/pi/pi -- with `span`
+- exps/type -- with `span`
+- exps/equal/refl -- with `span`
+- exps/equal/the-same -- with `span`
+- exps/equal/same -- with `span`
+- exps/equal/replace -- with `span`
+- exps/equal/same-as-chart -- with `span`
+- exps/equal/equal -- with `span`
+- exps/vector/vector-head -- with `span`
+- exps/vector/vector-ind -- with `span`
+- exps/vector/vector -- with `span`
+- exps/vector/vecnil -- with `span`
+- exps/vector/vec -- with `span`
+- exps/vector/vector-tail -- with `span`
+- exps/str/quote -- with `span`
+- exps/str/str -- with `span`
+- exps/the -- with `span`
+- exps/nat/nat -- with `span`
+- exps/nat/nat-ind -- with `span`
+- exps/nat/zero -- with `span`
+- exps/nat/add1 -- with `span`
+- exps/nat/nat-rec -- with `span`
+- exps/im-pi/im-pi -- with `span`
+- exps/im-pi/im-fn -- with `span`
+- exps/todo -- with `span`
+- exps/var -- with `span`
+- exps/let -- with `span`
+- exps/either/either -- with `span`
+- exps/either/either-ind -- with `span`
+- exps/either/inl -- with `span`
+- exps/either/inr -- with `span`
+- exps/trivial/sole -- with `span`
+- exps/trivial/trivial -- with `span`
 
 - infrastructure for good error report
 

@@ -3,8 +3,16 @@ import { Exp, subst } from "../exp"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import * as Exps from "../exps"
+import pt from "@cicada-lang/partech"
 
 export class Type extends Exp {
+  // span: pt.Span
+
+  // constructor(opts: { span: pt.Span }) {
+  //   super()
+  //   this.span = opts.span
+  // }
+
   free_names(bound_names: Set<string>): Set<string> {
     return new Set()
   }
