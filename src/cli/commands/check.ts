@@ -29,6 +29,8 @@ export class CheckCommand extends Command<Args, Opts> {
     await check(library)
 
     if (argv["watch"]) {
+      const logger = new Logger({ tag: "info" })
+      logger.info(`Initial check complete, now watching for changes.`)
       await watch(library)
     }
   }

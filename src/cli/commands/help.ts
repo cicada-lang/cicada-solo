@@ -18,12 +18,33 @@ export class HelpCommand extends Command<Args> {
       ...Object.keys(runner.commands).map((name) => name.length)
     )
 
+    console.log(
+      [
+        //
+        `Usage:`,
+        `  command [arguments] [options]`,
+        ``,
+      ].join("\n")
+    )
+
+    if (runner.default) {
+      const command = runner.default
+
+      console.log(
+        [
+          //
+          `Default command:`,
+          `  ${command.description}`,
+          ``,
+        ].join("\n")
+      )
+    }
+
     console.log("Commands:")
     for (const [name, command] of Object.entries(runner.commands)) {
-      const message = `  ${ut.rightPad(name, size)}  ${command.description}`
-      console.log(message)
+      console.log(`  ${ut.rightPad(name, size)}  ${command.description}`)
     }
   }
 
-  // signature(name: string, command: Commands): 
+  // signature(name: string, command: Commands):
 }

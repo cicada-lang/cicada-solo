@@ -1,5 +1,8 @@
+- [cli] `CommonCommandRunner` colorful help message
 - [cli] `CommonCommandRunner` be able to print signature of each command
+- `logger` improve interface
 - [cli] `CommonCommandRunner` be able to print help message of each command
+
 - [cli] improve validation and error report
 
 # error report
