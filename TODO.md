@@ -1,4 +1,5 @@
 - [cli] `CommonCommandRunner` be able to print help message for each command
+- [cli] improve validation and error report
 
 # error report
 
@@ -6,17 +7,16 @@
 
 - infrastructure for good error report
 
-  - structure of error:
+  - [maybe] quit using `Trace`
+
+  - improve structure of error:
+
     - kind
     - context
     - message
     - hint
 
 - `parser/matchers` fix not catched parsing error -- for repl
-
-- [cli] improve validation and error report
-
-- [refactor] `Reporter.error` -- take `path` or `text`?
 
 # narrator of elaboration
 

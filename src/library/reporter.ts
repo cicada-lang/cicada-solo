@@ -19,11 +19,15 @@ export class Reporter {
     } else if (error instanceof pt.ParsingError) {
       const text = opts?.text || (await this.files.getOrFail(path))
       if (!text) {
-        return `Unknown path: ${path}`
+        return [
+          `I found syntax error in path: ${path}`,
+          ``,
+          error.concise_message,
+        ].join("\n")
       } else {
         return [
-          "I found syntax error in the following text:",
-          "",
+          `I found syntax error in text:`,
+          ``,
           pt.report(error.span, text),
           error.concise_message,
         ].join("\n")
