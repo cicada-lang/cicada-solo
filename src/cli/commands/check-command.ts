@@ -23,6 +23,7 @@ export class CheckCommand extends Command<Args, Opts> {
 
     return [
       `The ${name} command checks a library.`,
+      ``,
       `You can specify a library by a path to its library.json config file,`,
       `or a path to a directory which contains the config file,`,
       `and if no path are given, the current working directory will be used.`,
