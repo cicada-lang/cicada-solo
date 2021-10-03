@@ -1,5 +1,6 @@
 import { Command } from "../command"
 import { ReadlineRepl } from "../readline-repl"
+import * as ut from "../../../ut"
 
 export class Help extends Command {
   name = "help"
@@ -10,14 +11,10 @@ export class Help extends Command {
   }
 
   async run(repl: ReadlineRepl, text: string): Promise<void> {
-    function right_pad(line: string, size: number): string {
-      return line + " ".repeat(size - line.length)
-    }
-
     const size = Math.max(...repl.commands.map(({ name }) => name.length))
 
     const commands = repl.commands.map(
-      ({ name, description }) => `.${right_pad(name, size)}   ${description}`
+      ({ name, description }) => `.${ut.rightPad(name, size)}   ${description}`
     )
 
     console.log(

@@ -4,19 +4,17 @@ import * as Commands from "../commands"
 import parse from "yargs-parser"
 import ty, { Schema, Errors } from "@xieyuheng/ty"
 
-// export class HelpCommand extends Command<> {
-// }
-
 export class CommonCommandRunner extends CommandRunner {
-  commands: Record<string, Command<any, any>> = {}
-  defaultCommand?: Command<any, any>
+  commands: Record<string, Command<any, any>>
+  default?: Command<any, any>
 
-  register(name: string, command: Command<any, any>): void {
-    this.commands[name] = command
-  }
-
-  registerDefault(command: Command<any, any>): void {
-    this.defaultCommand = command
+  constructor(opts: {
+    commands: Record<string, Command<any, any>>
+    default?: Command<any, any>
+  }) {
+    super()
+    this.commands = opts.commands
+    this.default = opts.default
   }
 
   async run(): Promise<void> {
@@ -25,8 +23,8 @@ export class CommonCommandRunner extends CommandRunner {
 
     if (this.commands[name]) {
       await this.apply(this.commands[name], argv["_"].slice(1), argv)
-    } else if (this.defaultCommand) {
-      await this.apply(this.defaultCommand, argv["_"], argv)
+    } else if (this.default) {
+      await this.apply(this.default, argv["_"], argv)
     } else {
       console.error(`Unknown command: ${name}`)
       process.exit(1)
@@ -41,7 +39,7 @@ export class CommonCommandRunner extends CommandRunner {
     try {
       const args = this.pruneArgs(command.args, array)
       const options = ty.object(command.options).prune(obj)
-      return await command.execute({ ...args, ...options })
+      return await command.execute({ ...args, ...options }, this)
     } catch (error) {
       if (error instanceof Errors.InvalidData) {
         console.error(error)

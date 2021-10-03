@@ -1,4 +1,4 @@
-- [cli] `CommonCommandRunner` print help message on `help`
+- [cli] `CommonCommandRunner` be able to print help message for each command
 
 - [cli] move `cli/command` and `cli/command-runner` to `infra`
 
