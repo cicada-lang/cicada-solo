@@ -3,6 +3,7 @@ import { CommandRunner } from "../../infra/command-runner"
 import * as Commands from "../commands"
 import * as ut from "../../ut"
 import ty from "@xieyuheng/ty"
+import chalk from "chalk"
 
 type Args = { name?: string }
 
@@ -21,7 +22,7 @@ export class HelpCommand extends Command<Args> {
     console.log(
       [
         //
-        `Usage:`,
+        chalk.yellow(`Usage:`),
         `  command [arguments] [options]`,
         ``,
       ].join("\n")
@@ -33,18 +34,23 @@ export class HelpCommand extends Command<Args> {
       console.log(
         [
           //
-          `Default command:`,
+          chalk.yellow(`Default command:`),
           `  ${command.description}`,
           ``,
         ].join("\n")
       )
     }
 
-    console.log("Commands:")
+    console.log(chalk.yellow(`Commands:`))
     for (const [name, command] of Object.entries(runner.commands)) {
-      console.log(`  ${ut.rightPad(name, size)}  ${command.description}`)
+      console.log(
+        `  ${chalk.blue(ut.rightPad(name, size))}  ${command.description}`
+      )
     }
   }
 
-  // signature(name: string, command: Commands):
+  signature(name: string, command: Command): string {
+    // TODO
+    return name
+  }
 }
