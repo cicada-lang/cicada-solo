@@ -2,11 +2,10 @@ import { ReplEvent, ReplEventHandler } from "../infra/repl"
 import { Library } from "../library"
 import * as StmtOutputs from "../stmt-outputs"
 import chalk from "chalk"
-// NOTE We should not use import for module not in `src/`,
-//   otherwise `lib/` will have a extra level.
-const pkg = require("../../package.json")
+import { AppConfig } from "./app-config"
 
 export class AppReplEventHandler extends ReplEventHandler {
+  config = new AppConfig()
   library: Library
   path: string
 
@@ -17,7 +16,7 @@ export class AppReplEventHandler extends ReplEventHandler {
   }
 
   greeting(): void {
-    console.log(`Welcome to Cicada ${pkg.version} *^-^*/`)
+    console.log(`Welcome to Cicada ${this.config.pkg.version} *^-^*/`)
     console.log(`Type ".help" for more information`)
   }
 

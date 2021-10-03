@@ -1,4 +1,6 @@
-- move `app-config` with `package.json` in `package`
+- rename `App` to `GenericApp`
+- rename `AppFileStore` to `AppHomeFileStore`
+
 - [cli] `cli/commands/help` -- be able to print help message of each command
 
   - `Command.help`

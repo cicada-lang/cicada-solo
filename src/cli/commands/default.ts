@@ -1,9 +1,7 @@
 import { Command } from "../../infra/command"
 import { CommandRunner } from "../../infra/command-runner"
 import * as Commands from "../commands"
-// NOTE We should not use import for module not in `src/`,
-//   otherwise `lib/` will have a extra level.
-const pkg = require("../../../package.json")
+import app from "../../app/app"
 import ty from "@xieyuheng/ty"
 
 type Args = { file?: string }
@@ -25,7 +23,7 @@ export class DefaultCommand extends Command<Args, Opts> {
     }
 
     if (argv["version"]) {
-      console.log(pkg.version)
+      console.log(app.config.pkg.version)
       return
     }
 
