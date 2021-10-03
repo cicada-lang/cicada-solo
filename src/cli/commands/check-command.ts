@@ -1,6 +1,6 @@
 import { Command } from "../../infra/command"
 import { Library } from "../../library"
-import { Logger } from "../../runner/logger"
+import { Logger } from "../../logger"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
 import app from "../../app/node-app"
@@ -13,7 +13,9 @@ type Opts = { watch?: boolean }
 
 export class CheckCommand extends Command<Args, Opts> {
   description = "Check a library -- by cwd, dir or library.json"
+
   args = { library: ty.optional(ty.string()) }
+
   opts = { watch: ty.optional(ty.boolean()) }
 
   async execute(argv: Args & Opts): Promise<void> {

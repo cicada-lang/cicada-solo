@@ -12,6 +12,7 @@ export class DefaultCommand extends Command<Args, Opts> {
   description = "Open REPL or run a file"
 
   args = { file: ty.optional(ty.string()) }
+
   opts = { help: ty.optional(ty.boolean()), version: ty.optional(ty.boolean()) }
 
   alias = { help: ["h"], version: ["v"] }

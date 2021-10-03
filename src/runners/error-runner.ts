@@ -1,6 +1,6 @@
 import { Library } from "../library"
 import { FileStore } from "../infra/file-store"
-import { Logger } from "../runner/logger"
+import { Logger } from "../logger"
 import { Runner } from "../runner"
 import fs from "fs"
 
