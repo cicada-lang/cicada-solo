@@ -23,7 +23,7 @@ export class ErrorRunner extends Runner {
       const mod = await this.library.load(path)
       await mod.run()
       if (this.logger) {
-        this.logger.info(path)
+        this.logger.info({ msg: path })
       }
       return { error: new Error(`I expect to find error in the path: ${path}`) }
     } catch (error) {
@@ -31,7 +31,7 @@ export class ErrorRunner extends Runner {
       const file = this.files.resolve(path + ".out")
       await fs.promises.writeFile(file, report)
       if (this.logger) {
-        this.logger.error(path)
+        this.logger.error({ msg: path })
       }
       return { error: undefined }
     }

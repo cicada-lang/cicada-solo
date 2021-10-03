@@ -12,21 +12,25 @@ export class Logger {
     this.tag = opts?.tag
   }
 
-  info(msg: string): void {
+  info(opts: { msg: string; tag?: string }): void {
+    const { msg, tag } = opts
+
     const time = chalk.green(`[${ut.formatTime(new Date())}]`)
-    if (this.tag) {
-      const tag = chalk(`(${this.tag})`)
-      console.log(tag, time, msg)
+
+    if (tag || this.tag) {
+      console.log(chalk(`(${tag || this.tag})`), time, msg)
     } else {
       console.log(time, msg)
     }
   }
 
-  error(msg: string): void {
+  error(opts: { msg: string; tag?: string }): void {
+    const { msg, tag } = opts
+
     const time = chalk.red(`[${ut.formatTime(new Date())}]`)
-    if (this.tag) {
-      const tag = chalk(`(${this.tag})`)
-      console.log(tag, time, msg)
+
+    if (tag || this.tag) {
+      console.log(chalk(`(${tag || this.tag})`), time, msg)
     } else {
       console.log(time, msg)
     }

@@ -20,7 +20,7 @@ export class DefaultRunner extends Runner {
       const mod = await this.library.load(path)
       await mod.run()
       if (this.logger) {
-        this.logger.info(path)
+        this.logger.info({ msg: path })
       }
       if (mod.all_output) {
         console.log(mod.all_output)
@@ -30,7 +30,7 @@ export class DefaultRunner extends Runner {
       const report = await this.library.reporter.error(error, path)
       console.error(report)
       if (this.logger) {
-        this.logger.error(path)
+        this.logger.error({ msg: path })
       }
       return { error }
     }

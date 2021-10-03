@@ -30,7 +30,7 @@ export class CheckCommand extends Command<Args, Opts> {
 
     if (argv["watch"]) {
       const logger = new Logger({ tag: "info" })
-      logger.info(`Initial check complete, now watching for changes.`)
+      logger.info({ msg: `Initial check complete, now watching for changes.` })
       await watch(library)
     }
   }
@@ -72,7 +72,7 @@ async function watch(library: Library): Promise<void> {
     if (event === "remove") {
       library.cache.delete(path)
       const logger = new Logger({ tag: event })
-      logger.info(path)
+      logger.info({ msg: path })
     }
 
     if (event === "update") {

@@ -27,14 +27,14 @@ export class SnapshotRunner extends Runner {
         await fs.promises.writeFile(file, mod.all_output)
       }
       if (this.logger) {
-        this.logger.info(path)
+        this.logger.info({ msg: path })
       }
       return { error: undefined }
     } catch (error) {
       const report = await this.library.reporter.error(error, path)
       console.error(report)
       if (this.logger) {
-        this.logger.error(path)
+        this.logger.error({ msg: path })
       }
       return { error }
     }

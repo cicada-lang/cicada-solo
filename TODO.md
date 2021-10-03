@@ -1,4 +1,5 @@
-- `logger` improve interface
+- no `logger` in runner -- use logger in `check-command` instead
+- `app.logger`
 
 # error report
 
