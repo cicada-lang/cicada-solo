@@ -1,5 +1,3 @@
-- [cli] move `HelpCommand` to `CommonHelpCommand`
-
 - `logger` improve interface
 
 # error report

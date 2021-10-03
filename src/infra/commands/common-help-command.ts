@@ -1,13 +1,12 @@
 import { Command } from "../../infra/command"
 import { CommandRunner } from "../../infra/command-runner"
-import * as Commands from "../commands"
 import * as ut from "../../ut"
 import ty from "@xieyuheng/ty"
 import chalk from "chalk"
 
 type Args = { name?: string }
 
-export class HelpCommand extends Command<Args> {
+export class CommonHelpCommand extends Command<Args> {
   description = "Display help for a command"
 
   args = { name: ty.optional(ty.string()) }
@@ -18,7 +17,7 @@ export class HelpCommand extends Command<Args> {
     return [
       `The ${name} command displays help for a given command.`,
       ``,
-      chalk.blue(`  ${runner.name} help check`),
+      chalk.blue(`  ${runner.name} help help`),
     ].join("\n")
   }
 

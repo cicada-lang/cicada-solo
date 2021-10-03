@@ -1,5 +1,6 @@
 import * as CommandRunners from "../infra/command-runners"
 import * as Commands from "./commands"
+import { CommonHelpCommand } from "../infra/commands"
 
 export function run(): void {
   const runner = new CommandRunners.CommonCommandRunner({
@@ -8,7 +9,7 @@ export function run(): void {
       repl: new Commands.ReplCommand(),
       check: new Commands.CheckCommand(),
       snapshot: new Commands.SnapshotCommand(),
-      help: new Commands.HelpCommand(),
+      help: new CommonHelpCommand(),
     },
     default: new Commands.DefaultCommand(),
   })

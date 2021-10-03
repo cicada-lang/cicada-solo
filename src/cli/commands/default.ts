@@ -1,5 +1,6 @@
 import { Command } from "../../infra/command"
 import { CommandRunner } from "../../infra/command-runner"
+import { CommonHelpCommand } from "../../infra/commands"
 import * as Commands from "../commands"
 import app from "../../app/generic-app"
 import ty from "@xieyuheng/ty"
@@ -17,7 +18,7 @@ export class DefaultCommand extends Command<Args, Opts> {
 
   async execute(argv: Args & Opts, runner: CommandRunner): Promise<void> {
     if (argv["help"]) {
-      const command = new Commands.HelpCommand()
+      const command = new CommonHelpCommand()
       await command.execute({}, runner)
       return
     }
