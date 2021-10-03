@@ -15,7 +15,7 @@ export class SnapshotCommand extends Command<Args> {
     Command.assertFile(argv["file"])
     const path = Path.resolve(argv["file"])
     const library = await app.libraries.findUpOrFake(Path.dirname(path))
-    const runner = Runners.create_special_runner({ path, library })
+    const runner = Runners.createSpecialRunner({ path, library })
     const { error } = await runner.run(path)
     if (error) {
       process.exit(1)

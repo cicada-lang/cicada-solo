@@ -1,10 +1,8 @@
 import { Library } from "../library"
-import { LocalFileStore } from "../infra/file-stores"
 import { Runner } from "../runner"
 import { SnapshotRunner, ErrorRunner } from "../runners"
-import { Logger } from "../logger"
 
-export function create_special_runner(opts: {
+export function createSpecialRunner(opts: {
   path: string
   library: Library
 }): Runner {

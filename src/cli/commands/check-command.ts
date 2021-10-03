@@ -23,15 +23,12 @@ export class CheckCommand extends Command<Args, Opts> {
       ? path
       : path + "/library.json"
     const library = await app.libraries.get(config_file)
-    console.log(library.info())
-    console.log()
+
+    app.logger.info(library.config)
 
     if (argv["watch"]) {
       await check(library)
-      app.logger.info({
-        tag: "info",
-        msg: `Initial check complete, now watching for changes.`,
-      })
+      app.logger.info(`Initial check complete, now watching for changes.`)
       await watch(library)
     } else {
       const { errors } = await check(library)
@@ -47,14 +44,14 @@ async function check(library: Library): Promise<{ errors: Array<unknown> }> {
 
   for (const path of Object.keys(await library.files.all())) {
     if (ModuleLoaders.can_handle_extension(path)) {
-      const runner = Runners.create_special_runner({ path, library })
+      const runner = Runners.createSpecialRunner({ path, library })
       const { error } = await runner.run(path)
       if (error) errors.push(error)
 
       if (error) {
-        app.logger.error({ tag: "check", msg: path })
+        app.logger.error(`check: ${path}`)
       } else {
-        app.logger.info({ tag: "check", msg: path })
+        app.logger.info(`check: ${path}`)
       }
     }
   }
@@ -74,18 +71,18 @@ async function watch(library: Library): Promise<void> {
 
     if (event === "remove") {
       library.cache.delete(path)
-      app.logger.info({ tag: event, msg: path })
+      app.logger.info(`${event}: ${path}`)
     }
 
     if (event === "update") {
       library.cache.delete(path)
-      const runner = Runners.create_special_runner({ path, library })
+      const runner = Runners.createSpecialRunner({ path, library })
       const { error } = await runner.run(path)
 
       if (error) {
-        app.logger.error({ tag: "event", msg: path })
+        app.logger.error(`${event}: ${path}`)
       } else {
-        app.logger.info({ tag: "event", msg: path })
+        app.logger.info(`${event}: ${path}`)
       }
     }
   })
