@@ -1,5 +1,4 @@
 import { LocalFileStore } from "../file-stores"
-import fs from "fs"
 import os from "os"
 import Path from "path"
 import process from "process"
