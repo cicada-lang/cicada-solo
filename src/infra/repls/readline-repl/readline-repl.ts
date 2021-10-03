@@ -4,7 +4,6 @@ import { Command } from "./command"
 import * as Commands from "./commands"
 import app from "../../../app/node-app"
 import Readline from "readline"
-import fs from "fs"
 
 export class ReadlineRepl extends Repl {
   dir: string
@@ -56,7 +55,7 @@ export class ReadlineRepl extends Repl {
   }
 
   prompt(): void {
-    const depth = this.parens_checker.depth(this.lines.join("\n"))
+    const depth = this.parensChecker.depth(this.lines.join("\n"))
     this.readline.setPrompt(this.create_prompt(depth))
     this.readline.prompt()
   }
@@ -80,7 +79,7 @@ export class ReadlineRepl extends Repl {
   private lines: Array<string> = []
   private lock: boolean = false
 
-  async handle_line(line: string): Promise<void> {
+  private async handle_line(line: string): Promise<void> {
     this.lines.push(line)
     if (!this.lock) {
       this.lock = true
@@ -161,15 +160,15 @@ export class ReadlineRepl extends Repl {
   private next_text_or_report_error(): string | undefined {
     let text = ""
     for (const [i, line] of this.lines.entries()) {
-      const prefix = "  ".repeat(this.parens_checker.depth(text))
+      const prefix = "  ".repeat(this.parensChecker.depth(text))
 
       text += prefix + line + "\n"
 
-      const result = this.parens_checker.check(text)
+      const result = this.parensChecker.check(text)
 
       if (result instanceof Error) {
         this.lines = []
-        this.parens_checker.report_error(result)
+        this.parensChecker.reportError(result)
         return
       } else if (result.kind === "lack") {
         // go on next loop

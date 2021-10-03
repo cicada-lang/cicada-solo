@@ -8,9 +8,9 @@ export abstract class Command {
     const lines = text.trim().split("\n")
     if (lines.length !== 1) return false
     const [line] = lines
-    return this.match_line(line)
+    return this.matchLine(line)
   }
 
-  abstract match_line(line: string): boolean
+  abstract matchLine(line: string): boolean
   abstract run(repl: ReadlineRepl, text: string): Promise<void>
 }

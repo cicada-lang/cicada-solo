@@ -6,7 +6,7 @@ export class Save extends Command {
   name = "save"
   description = "Save successful statements in this REPL session to a file"
 
-  match_line(line: string): boolean {
+  matchLine(line: string): boolean {
     return Boolean(line.match(/\.save\b/))
   }
 

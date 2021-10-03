@@ -6,7 +6,7 @@ export class Help extends Command {
   name = "help"
   description = "Print this help message"
 
-  match_line(line: string): boolean {
+  matchLine(line: string): boolean {
     return Boolean(line.match(/\.help\b/))
   }
 

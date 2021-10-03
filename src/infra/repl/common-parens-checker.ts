@@ -17,7 +17,7 @@ export class CommonParensChecker extends ParensChecker {
     }
   }
 
-  report_error(error: Error): void {
+  reportError(error: Error): void {
     if (error instanceof CommonParensCheckError) {
       const { kind, token, text } = error
       console.error()

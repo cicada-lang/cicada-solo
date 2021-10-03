@@ -6,7 +6,7 @@ export class Load extends Command {
   name = "load"
   description = "Load a file into the REPL session"
 
-  match_line(line: string): boolean {
+  matchLine(line: string): boolean {
     return Boolean(line.match(/\.load\b/))
   }
 
