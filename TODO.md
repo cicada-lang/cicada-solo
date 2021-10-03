@@ -1,4 +1,3 @@
-- [cli] `CommonCommandRunner` be able to print signature of each command
 - [cli] `CommonCommandRunner` be able to print version
 - [cli] `CommonCommandRunner` be able to print help message of each command
 

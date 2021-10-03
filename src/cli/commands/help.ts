@@ -15,10 +15,6 @@ export class HelpCommand extends Command<Args> {
   async execute(argv: Args, runner: CommandRunner): Promise<void> {
     // TODO use argv["name"]
 
-    const size = Math.max(
-      ...Object.keys(runner.commands).map((name) => name.length)
-    )
-
     console.log(
       [
         //
@@ -33,24 +29,33 @@ export class HelpCommand extends Command<Args> {
 
       console.log(
         [
-          //
           chalk.yellow(`Default command:`),
-          `  ${command.description}`,
+          `  ${chalk.blue(this.signature(command))}  ${command.description}`,
           ``,
         ].join("\n")
       )
     }
 
+    const size = Math.max(
+      ...Object.entries(runner.commands).map(
+        ([name, command]) => `${name} ${this.signature(command)}`.length
+      )
+    )
+
     console.log(chalk.yellow(`Commands:`))
     for (const [name, command] of Object.entries(runner.commands)) {
+      const head = `${name} ${this.signature(command)}`
       console.log(
-        `  ${chalk.blue(ut.rightPad(name, size))}  ${command.description}`
+        [
+          `  ${chalk.blue(ut.rightPad(head, size))}  ${command.description}`,
+        ].join("\n")
       )
     }
   }
 
-  signature(name: string, command: Command): string {
-    // TODO
-    return name
+  signature(command: Command): string {
+    return Object.keys(command.args)
+      .map((key) => `[${key}]`)
+      .join(" ")
   }
 }
