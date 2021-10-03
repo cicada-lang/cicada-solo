@@ -1,11 +1,5 @@
 - [cli] `CommonCommandRunner` be able to print help message for each command
 
-# implicit
-
-- [stdlib] try implicit argument in `stdlib`
-
-  - `category/implicit`
-
 # error report
 
 - get information about location from parser
@@ -39,11 +33,17 @@
 
 - [optimization] use native `number` as `Nat`
 
-# use `unify` to replace `readback`
+# implicit
 
 - [refactor] `unify` of `Value`, `Neutral` and `Normal`
 
 - `not-yet-value ` -- fix `unify`
+
+- [stdlib] try implicit argument in `stdlib`
+
+  - `category/implicit`
+
+# use `unify` to replace `readback`
 
 - Value.unify -- pi/fn-value.ts & pi/im-fn-value.ts
 
@@ -60,15 +60,6 @@
 - Value.unify -- cls/fulfilled-cls-value.ts
 
 - `Subst.unify` occur check -- use `free_names`
-
-# library manager
-
-- [library manager] [cli] download library from registry
-
-  - `libraries.cicada-lang.com`
-  - `registry.cicada-lang.com`
-
-- [library manager] library can be used as a module
 
 # subtype
 
@@ -111,13 +102,17 @@
   - Learn from the story line for teaching.
 
 - [stdlib] Algebraic structures -- https://en.wikipedia.org/wiki/Algebraic_structure
-
 - [stdlib] Lattice theory
-
 - [stdlib] Closure system -- for FCA
-
 - [stdlib] Topology theory
-
 - [stdlib] Category of Groups
-
 - [stdlib] Number theroy -- https://en.wikipedia.org/wiki/Number_theory
+
+# library manager
+
+- [library manager] [cli] download library from registry
+
+  - `libraries.cicada-lang.com`
+  - `registry.cicada-lang.com`
+
+- [library manager] library can be used as a module
