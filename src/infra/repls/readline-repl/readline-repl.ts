@@ -1,8 +1,7 @@
 import { Repl, ReplEvent, ReplEventHandler } from "../../repl"
-import { AppFileStore } from "../../../app"
+import { FileStore } from "../../file-store"
 import { Command } from "./command"
 import * as Commands from "./commands"
-import app from "../../../app/node-app"
 import Readline from "readline"
 
 export class ReadlineRepl extends Repl {
@@ -16,13 +15,13 @@ export class ReadlineRepl extends Repl {
     new Commands.Save(),
     new Commands.SaveAll(),
   ]
-  files: AppFileStore
+  files: FileStore
   readline: Readline.Interface
 
   constructor(opts: {
     dir: string
     handler: ReplEventHandler
-    files: AppFileStore
+    files: FileStore
     readline: Readline.Interface
   }) {
     super()
@@ -35,8 +34,9 @@ export class ReadlineRepl extends Repl {
   static async create(opts: {
     dir: string
     handler: ReplEventHandler
+    files: FileStore
   }): Promise<ReadlineRepl> {
-    const text = await app.files.get("repl/history")
+    const text = await opts.files.get("repl/history")
     const history = text ? text.trim().split("\n").reverse() : []
 
     const readline = Readline.createInterface({
@@ -49,7 +49,7 @@ export class ReadlineRepl extends Repl {
     return new ReadlineRepl({
       dir: opts.dir,
       handler: opts.handler,
-      files: app.files,
+      files: opts.files,
       readline,
     })
   }
