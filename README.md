@@ -1,6 +1,6 @@
 # 蝉语 / Cicada Language
 
-Welcome ***^-^*/**
+Welcome \*^-^\*/
 
 Cicada language is a dependently typed programming language and interactive theorem prover.
 
