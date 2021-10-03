@@ -1,5 +1,5 @@
 import { App } from "../app"
-import { AppFileStore } from "../app-file-store"
+import { AppFileStore } from "./app-file-store"
 import { LocalLibraryStore } from "../library-stores"
 
 export class NodeApp extends App {
