@@ -14,7 +14,11 @@ export class Import extends Stmt {
   entries: Array<ImportEntry>
   meta: { span: pt.Span }
 
-  constructor(path: string, entries: Array<ImportEntry>, meta: { span: pt.Span }) {
+  constructor(
+    path: string,
+    entries: Array<ImportEntry>,
+    meta: { span: pt.Span }
+  ) {
     super()
     this.path = path
     this.entries = entries

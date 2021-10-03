@@ -60,13 +60,10 @@ export class ParserTester {
     for (const stmt of stmts) {
       console.log(stmt.repr())
 
-    if (stmt instanceof Stmts.Show) {
-      console.error(pt.report(stmt.meta.span, text))
+      if (stmt instanceof Stmts.Show) {
+        console.error(pt.report(stmt.meta.span, text))
+      }
     }
-    }
-
-
-
   }
 
   echo_exp(text: string): void {

@@ -4,15 +4,18 @@ import { Exp } from "../exp"
 import { infer } from "../exp"
 import { evaluate } from "../core"
 import { Trace } from "../errors"
+import pt from "@cicada-lang/partech"
 
 export class Def extends Stmt {
   name: string
   exp: Exp
+  meta: { span: pt.Span }
 
-  constructor(name: string, exp: Exp) {
+  constructor(name: string, exp: Exp, meta: { span: pt.Span }) {
     super()
     this.name = name
     this.exp = exp
+    this.meta = meta
   }
 
   async execute(mod: Module): Promise<void> {

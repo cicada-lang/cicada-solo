@@ -20,19 +20,21 @@ export function stmts_matcher(tree: pt.Tree): Array<Stmt> {
 
 export function stmt_matcher(tree: pt.Tree): Stmt {
   return pt.matcher<Stmt>({
-    "stmt:def": ({ name, exp }) =>
-      new Stmts.Def(pt.str(name), exp_matcher(exp)),
-    "stmt:def_the": ({ name, t, exp }) =>
+    "stmt:def": ({ name, exp }, { span }) =>
+      new Stmts.Def(pt.str(name), exp_matcher(exp), { span }),
+    "stmt:def_the": ({ name, t, exp }, { span }) =>
       new Stmts.Def(
         pt.str(name),
-        new Exps.The(exp_matcher(t), exp_matcher(exp))
+        new Exps.The(exp_matcher(t), exp_matcher(exp)),
+        { span }
       ),
-    "stmt:def_the_flower_bracket": ({ name, t, exp }) =>
+    "stmt:def_the_flower_bracket": ({ name, t, exp }, { span }) =>
       new Stmts.Def(
         pt.str(name),
-        new Exps.The(exp_matcher(t), exp_matcher(exp))
+        new Exps.The(exp_matcher(t), exp_matcher(exp)),
+        { span }
       ),
-    "stmt:def_fn": ({ name, bindings, ret_t, ret }) => {
+    "stmt:def_fn": ({ name, bindings, ret_t, ret }, { span }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
         .reduce((result, binding) => {
@@ -69,7 +71,8 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
 
       return new Stmts.Def(
         pt.str(name),
-        new Exps.The(pi_handler({ bindings, ret_t }), fn)
+        new Exps.The(pi_handler({ bindings, ret_t }), fn),
+        { span }
       )
     },
     "stmt:show_operator": ({ operator }, { span }) =>
