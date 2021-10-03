@@ -25,7 +25,12 @@ export class CommonCommandRunner extends CommandRunner {
     } else if (this.default) {
       await this.apply(this.default, argv["_"], argv)
     } else {
-      console.error(`I was given unknown command: ${name}`)
+      console.error(
+        [
+          `I was given a command name that I do not know how to handle.`,
+          `  name: ${name}`,
+        ].join("\n")
+      )
       process.exit(1)
     }
   }
@@ -52,7 +57,7 @@ export class CommonCommandRunner extends CommandRunner {
         if (error instanceof Errors.InvalidData) {
           console.error(
             [
-              `I found invalid input in options:`,
+              `I found invalid input in options.`,
               `  key: ${key}`,
               `  give: ${record[key]}`,
               `  expect: ${JSON.stringify(schema.json())}`,
@@ -84,7 +89,7 @@ export class CommonCommandRunner extends CommandRunner {
         if (error instanceof Errors.InvalidData) {
           console.error(
             [
-              `I found invalid input in positional args:`,
+              `I found invalid input in positional args.`,
               `  name: ${key}`,
               `  index: ${i}`,
               `  give: ${array[i]}`,

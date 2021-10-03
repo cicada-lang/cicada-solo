@@ -15,21 +15,36 @@ export abstract class Command<
 
   abstract execute(argv: Args & Opts, runner: CommandRunner): Promise<void>
 
-  static assertFile(file: string): void {
-    if (!fs.existsSync(file)) {
-      console.error(`The given file does not exist: ${file}`)
+  static assertFile(path: string): void {
+    if (!fs.existsSync(path)) {
+      console.error(
+        [
+          `I expect the given path to refer to a file, but it does not exist.`,
+          `  path: ${path}`,
+        ].join("\n")
+      )
       process.exit(1)
     }
 
-    if (!fs.lstatSync(file).isFile()) {
-      console.error(`The given path does not refer to a file: ${file}`)
+    if (!fs.lstatSync(path).isFile()) {
+      console.error(
+        [
+          `I expect the given path to refer to a file, but it refers to something else.`,
+          `  path: ${path}`,
+        ].join("\n")
+      )
       process.exit(1)
     }
   }
 
   static assertExists(path: string): void {
     if (!fs.existsSync(path)) {
-      console.error(`The given path does not exist: ${path}`)
+      console.error(
+        [
+          `I expect the given path to exist, but it does not exist.`,
+          `  path: ${path}`,
+        ].join("\n")
+      )
       process.exit(1)
     }
   }

@@ -18,9 +18,12 @@ export class HelpCommand extends Command<Args> {
       ...Object.keys(runner.commands).map((name) => name.length)
     )
 
+    console.log("Commands:")
     for (const [name, command] of Object.entries(runner.commands)) {
       const message = `  ${ut.rightPad(name, size)}  ${command.description}`
       console.log(message)
     }
   }
+
+  // signature(name: string, command: Commands): 
 }
