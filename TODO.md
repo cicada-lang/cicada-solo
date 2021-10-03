@@ -1,5 +1,16 @@
 # error report
 
+- `Trace` use `meta.span` when `exp` has `meta`
+
+  - [maybe] rename `Trace` to `ExpTrace`
+
+  - improve structure of error:
+
+    - kind
+    - context
+    - message
+    - hint
+
 - exps/absurd/absurd -- with `span`
 - exps/absurd/absurd-ind -- with `span`
 - exps/cls/nil-cls -- with `span`
@@ -21,7 +32,7 @@
 - exps/pi/ap -- with `span`
 - exps/pi/fn -- with `span`
 - exps/pi/pi -- with `span`
-- exps/type -- with `span`
+
 - exps/equal/refl -- with `span`
 - exps/equal/the-same -- with `span`
 - exps/equal/same -- with `span`
@@ -53,17 +64,6 @@
 - exps/either/inr -- with `span`
 - exps/trivial/sole -- with `span`
 - exps/trivial/trivial -- with `span`
-
-- infrastructure for good error report
-
-  - [maybe] quit using `Trace`
-
-  - improve structure of error:
-
-    - kind
-    - context
-    - message
-    - hint
 
 - `parser/matchers` fix not catched parsing error -- for repl
 
