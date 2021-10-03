@@ -1,6 +1,8 @@
 - [cli] `CommonCommandRunner` be able to print signature of each command
-- `logger` improve interface
+- [cli] `CommonCommandRunner` be able to print version
 - [cli] `CommonCommandRunner` be able to print help message of each command
+
+- `logger` improve interface
 
 - [cli] improve validation and error report
 
