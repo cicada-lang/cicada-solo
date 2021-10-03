@@ -43,7 +43,8 @@ npm run test   // Run test
 
 ## Community
 
-- IRC Channel: `#cicada-lang` at [libera.chat](https://libera.chat)
+- IRC channel: `#cicada-lang` at [libera.chat](https://libera.chat)
+- Telegram group: [CicadaLanguage](https://t.me/CicadaLanguage)
 
 ## Contributions
 
