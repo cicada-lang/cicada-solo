@@ -10,6 +10,7 @@ import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class ConsCls extends Exps.Cls {
+  meta: ExpMeta
   field_names: Array<string>
   // NOTE We can not only use `field_name` we also need `local_name`,
   //   because of `subst` might rename bound variables.
@@ -22,9 +23,11 @@ export class ConsCls extends Exps.Cls {
     field_name: string,
     local_name: string,
     field_t: Exp,
-    rest_t: Exps.Cls
+    rest_t: Exps.Cls,
+    meta: ExpMeta
   ) {
     super()
+    this.meta = meta
     this.field_name = field_name
     this.local_name = local_name
     this.field_t = field_t
@@ -58,7 +61,8 @@ export class ConsCls extends Exps.Cls {
         this.field_name,
         this.local_name,
         subst(this.field_t, name, exp),
-        this.rest_t
+        this.rest_t,
+        this.meta
       )
     } else {
       const free_names = exp.free_names(new Set())
@@ -72,7 +76,8 @@ export class ConsCls extends Exps.Cls {
           subst(this.rest_t, this.local_name, new Exps.Var(fresh_name)),
           name,
           exp
-        ) as Exps.Cls
+        ) as Exps.Cls,
+        this.meta
       )
     }
   }

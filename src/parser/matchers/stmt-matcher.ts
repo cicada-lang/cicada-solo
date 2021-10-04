@@ -103,7 +103,8 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                 entry.field_name,
                 entry.field_name,
                 entry.field_t,
-                rest_t
+                rest_t,
+                { span: entry.span }
               ),
             new Exps.NilCls()
           ),
@@ -124,7 +125,8 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                   entry.field_name,
                   entry.field_name,
                   entry.field_t,
-                  rest_t
+                  rest_t,
+                  { span: entry.span }
                 ),
               new Exps.NilCls()
             ),

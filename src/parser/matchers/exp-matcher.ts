@@ -244,7 +244,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
                   entry.field_name,
                   entry.field_name,
                   entry.field_t,
-                  rest_t
+                  rest_t,
+                  { span: entry.span }
                 ),
           new Exps.NilCls()
         ),
@@ -269,7 +270,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
                     entry.field_name,
                     entry.field_name,
                     entry.field_t,
-                    rest_t
+                    rest_t,
+                    { span: entry.span }
                   ),
             new Exps.NilCls()
           ),
@@ -424,25 +426,33 @@ export function cls_entry_matcher(tree: pt.Tree): {
   field_name: string
   field_t: Exp
   field?: Exp
+  span: pt.Span
 } {
   return pt.matcher({
-    "cls_entry:field_demanded": ({ name, t }) => ({
+    "cls_entry:field_demanded": ({ name, t }, { span }) => ({
       field_name: pt.str(name),
       field_t: exp_matcher(t),
+      span,
     }),
-    "cls_entry:field_fulfilled": ({ name, t, exp }) => ({
+    "cls_entry:field_fulfilled": ({ name, t, exp }, { span }) => ({
       field_name: pt.str(name),
       field_t: exp_matcher(t),
       field: exp_matcher(exp),
+      span,
     }),
-    "cls_entry:field_fulfilled_flower_bracket": ({ name, t, exp }) => ({
+    "cls_entry:field_fulfilled_flower_bracket": (
+      { name, t, exp },
+      { span }
+    ) => ({
       field_name: pt.str(name),
       field_t: exp_matcher(t),
       field: exp_matcher(exp),
+      span,
     }),
     "cls_entry:method_demanded": ({ name, bindings, ret_t }, { span }) => ({
       field_name: pt.str(name),
       field_t: pi_handler({ bindings, ret_t }, { span }),
+      span,
     }),
     "cls_entry:method_fulfilled": (
       { name, bindings, ret_t, ret },
@@ -491,6 +501,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
         field_name: pt.str(name),
         field_t: pi_handler({ bindings, ret_t }, { span }),
         field: fn,
+        span,
       }
     },
   })(tree)
