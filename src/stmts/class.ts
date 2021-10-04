@@ -5,15 +5,15 @@ import { evaluate } from "../core"
 import * as Exps from "../exps"
 
 export class Class extends Stmt {
+  meta: StmtMeta
   name: string
   cls: Exps.Cls
-  meta: StmtMeta
 
   constructor(name: string, cls: Exps.Cls, meta: StmtMeta) {
     super()
+    this.meta = meta
     this.name = name
     this.cls = cls
-    this.meta = meta
   }
 
   async execute(mod: Module): Promise<void> {

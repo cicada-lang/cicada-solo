@@ -6,13 +6,13 @@ import { TodoCore } from "./todo-core"
 import { QuoteCore } from "./str/quote-core"
 
 export class Todo extends Exp {
-  meta?: ExpMeta
+  meta: ExpMeta
   message: string
 
-  constructor(message: string, meta?: ExpMeta) {
+  constructor(message: string, meta: ExpMeta) {
     super()
-    this.message = message
     this.meta = meta
+    this.message = message
   }
 
   free_names(bound_names: Set<string>): Set<string> {

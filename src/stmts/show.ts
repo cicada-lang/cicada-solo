@@ -8,13 +8,14 @@ import * as Exps from "../exps"
 import * as StmtOutputs from "../stmt-outputs"
 
 export class Show extends Stmt {
-  exp: Exp
   meta: StmtMeta
+  exp: Exp
+
 
   constructor(exp: Exp, meta: StmtMeta) {
     super()
-    this.exp = exp
     this.meta = meta
+    this.exp = exp
   }
 
   async execute(mod: Module): Promise<void> {

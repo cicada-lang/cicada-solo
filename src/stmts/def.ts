@@ -6,16 +6,17 @@ import { evaluate } from "../core"
 import { Trace } from "../errors"
 
 export class Def extends Stmt {
+  meta: StmtMeta
   name: string
   exp: Exp
-  meta: StmtMeta
+
 
   constructor(name: string, exp: Exp, meta: StmtMeta) {
     super()
+    this.meta = meta
     this.name = name
     this.exp = exp
-    this.meta = meta
-  }
+    }
 
   async execute(mod: Module): Promise<void> {
     const inferred = infer(mod.ctx, this.exp)

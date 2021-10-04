@@ -9,15 +9,15 @@ export type ImportEntry = {
 }
 
 export class Import extends Stmt {
+  meta: StmtMeta
   path: string
   entries: Array<ImportEntry>
-  meta: StmtMeta
 
   constructor(path: string, entries: Array<ImportEntry>, meta: StmtMeta) {
     super()
+    this.meta = meta
     this.path = path
     this.entries = entries
-    this.meta = meta
   }
 
   async execute(mod: Module): Promise<void> {
