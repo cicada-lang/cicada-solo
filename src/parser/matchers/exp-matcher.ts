@@ -174,8 +174,8 @@ export function operator_matcher(tree: pt.Tree): Exp {
         exp_matcher(motive),
         exp_matcher(base)
       ),
-    "operator:absurd_ind": ({ target, motive }) =>
-      new Exps.AbsurdInd(exp_matcher(target), exp_matcher(motive)),
+    "operator:absurd_ind": ({ target, motive }, { span }) =>
+      new Exps.AbsurdInd(exp_matcher(target), exp_matcher(motive), { span }),
     "operator:either_ind": ({ target, motive, base_left, base_right }) =>
       new Exps.EitherInd(
         exp_matcher(target),
