@@ -106,8 +106,8 @@ export class CommonHelpCommand extends Command<Args> {
   }
 
   defaultCommand(runner: CommandRunner): void {
-    if (runner.default) {
-      const command = runner.default
+    if (runner.defaultCommand) {
+      const command = runner.defaultCommand
 
       console.log(
         [

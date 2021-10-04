@@ -1,4 +1,4 @@
-- `CommonCommandRunner` rename `default` to `defaultCommand`
+- move `createSpecialRunner` to `app`
 - [error report] `ExpTrace` improve format
 - [error report] `parser/matchers` fix not catched parsing error -- for REPL
 - [optimization] use native `number` as `Nat`

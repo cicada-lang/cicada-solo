@@ -4,7 +4,7 @@ import { CommonHelpCommand } from "../infra/commands"
 
 export function run(): void {
   const runner = new CommandRunners.CommonCommandRunner({
-    default: new Commands.DefaultCommand(),
+    defaultCommand: new Commands.DefaultCommand(),
     commands: {
       run: new Commands.RunCommand(),
       repl: new Commands.ReplCommand(),

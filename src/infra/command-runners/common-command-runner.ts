@@ -6,15 +6,15 @@ import Path from "path"
 
 export class CommonCommandRunner extends CommandRunner {
   commands: Record<string, Command<any, any>>
-  default?: Command<any, any>
+  defaultCommand?: Command<any, any>
 
   constructor(opts: {
     commands: Record<string, Command<any, any>>
-    default?: Command<any, any>
+    defaultCommand?: Command<any, any>
   }) {
     super()
     this.commands = opts.commands
-    this.default = opts.default
+    this.defaultCommand = opts.defaultCommand
   }
 
   get name(): string {
@@ -37,10 +37,10 @@ export class CommonCommandRunner extends CommandRunner {
       const command = this.commands[name]
       const argv = this.parseArgv(command)
       await this.apply(command, argv["_"].slice(1), argv)
-    } else if (this.default) {
-      const command = this.default
+    } else if (this.defaultCommand) {
+      const command = this.defaultCommand
       const argv = this.parseArgv(command)
-      await this.apply(this.default, argv["_"], argv)
+      await this.apply(this.defaultCommand, argv["_"], argv)
     } else {
       console.error(
         [
