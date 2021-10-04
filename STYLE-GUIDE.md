@@ -15,13 +15,3 @@ Top-level syntax of module is statement oriented -- `Stmt`.
 Use first-order syntax to implement `Exp`.
 
 When necessary, use `Exp.subst` to do substitution.
-
-# Dependency injection containers
-
-Use `app` module and its sub-modules as dependency injection containers.
-
-Sub-modules for different platforms:
-
-- `app/generic`
-- `app/node`
-- `app/browser`
