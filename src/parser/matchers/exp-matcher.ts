@@ -25,21 +25,19 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
             )
           }
 
-          return binding.entries
-            .reverse()
-            .reduce<Exps.ImPi>(
-              (result, entry) =>
-                new Exps.ImPi(entry.name, entry.name, entry.exp, result, {
-                  span: binding.span,
-                }),
-              new Exps.ImPi(
-                binding.last_entry.name,
-                binding.last_entry.name,
-                binding.last_entry.exp,
-                result,
-                { span: binding.span }
-              )
+          return binding.entries.reverse().reduce<Exps.ImPi>(
+            (result, entry) =>
+              new Exps.ImPi(entry.name, entry.name, entry.exp, result, {
+                span: pt.span_closure([binding.span, ret_t.span]),
+              }),
+            new Exps.ImPi(
+              binding.last_entry.name,
+              binding.last_entry.name,
+              binding.last_entry.exp,
+              result,
+              { span: pt.span_closure([binding.span, ret_t.span]) }
             )
+          )
         }
       }
     }, exp_matcher(ret_t))
@@ -77,7 +75,10 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
                 local_name: name_entry.last_name,
               },
             ],
-            result
+            result,
+            {
+              span: pt.span_closure([name_entry.span, ret.span]),
+            }
           )
         }
       }
@@ -381,7 +382,10 @@ export function declaration_matcher(tree: pt.Tree): Exp {
                     local_name: binding.last_entry.name,
                   },
                 ],
-                result
+                result,
+                {
+                  span: pt.span_closure([binding.span, ret.span]),
+                }
               )
             }
           }
@@ -451,7 +455,10 @@ export function cls_entry_matcher(tree: pt.Tree): {
                     local_name: binding.last_entry.name,
                   },
                 ],
-                result
+                result,
+                {
+                  span: pt.span_closure([binding.span, ret.span]),
+                }
               )
             }
           }
@@ -535,21 +542,23 @@ export function names_matcher(tree: pt.Tree): Array<NameEntry> {
 }
 
 type NameEntry =
-  | { kind: "name"; name: string }
-  | { kind: "implicit"; names: Array<string>; last_name: string }
+  | { kind: "name"; name: string; span: pt.Span }
+  | { kind: "implicit"; names: Array<string>; last_name: string; span: pt.Span }
 
 export function name_entry_matcher(tree: pt.Tree): NameEntry {
   return pt.matcher<NameEntry>({
-    "name_entry:name_entry": ({ name }) => ({
+    "name_entry:name_entry": ({ name }, { span }) => ({
       kind: "name",
       name: pt.str(name),
+      span,
     }),
-    "name_entry:implicit_name_entry": ({ names, last_name }) => ({
+    "name_entry:implicit_name_entry": ({ names, last_name }, { span }) => ({
       kind: "implicit",
       names: pt.matchers
         .zero_or_more_matcher(names)
         .map(name_implicit_entry_matcher),
       last_name: name_implicit_entry_matcher(last_name),
+      span,
     }),
   })(tree)
 }

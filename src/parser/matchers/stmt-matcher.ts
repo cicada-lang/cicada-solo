@@ -67,7 +67,10 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                     local_name: binding.last_entry.name,
                   },
                 ],
-                result
+                result,
+                {
+                  span: pt.span_closure([binding.span, ret.span]),
+                }
               )
             }
           }

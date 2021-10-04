@@ -1,7 +1,5 @@
 # error report
 
-- exps/im-pi/im-fn -- with `span`
-
 - exps/let -- with `span`
 
 - exps/var -- with `span`

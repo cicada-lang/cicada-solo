@@ -9,20 +9,17 @@ import * as ut from "../../ut"
 import { ImFnInsertion } from "./im-fn-insertion"
 
 export class ImFn extends Exp {
-  names: Array<{
-    field_name: string
-    local_name: string
-  }>
+  meta: ExpMeta
+  names: Array<{ field_name: string; local_name: string }>
   ret: Exps.Fn
 
   constructor(
-    names: Array<{
-      field_name: string
-      local_name: string
-    }>,
-    ret: Exps.Fn
+    names: Array<{ field_name: string; local_name: string }>,
+    ret: Exps.Fn,
+    meta: ExpMeta
   ) {
     super()
+    this.meta = meta
     this.names = names
     this.ret = ret
   }
@@ -52,7 +49,7 @@ export class ImFn extends Exp {
         names.push({ field_name, local_name: fresh_name })
       }
 
-      return new ImFn(names, subst(ret, name, exp) as Exps.Fn)
+      return new ImFn(names, subst(ret, name, exp) as Exps.Fn, this.meta)
     }
   }
 
