@@ -7,11 +7,13 @@ import { check } from "../exp"
 import * as Exps from "../exps"
 
 export class The extends Exp {
+  meta?: ExpMeta
   t: Exp
   exp: Exp
 
-  constructor(t: Exp, exp: Exp) {
+  constructor(t: Exp, exp: Exp, meta?: ExpMeta) {
     super()
+    this.meta = meta
     this.t = t
     this.exp = exp
   }
@@ -24,7 +26,11 @@ export class The extends Exp {
   }
 
   subst(name: string, exp: Exp): The {
-    return new The(subst(this.t, name, exp), subst(this.exp, name, exp))
+    return new The(
+      subst(this.t, name, exp),
+      subst(this.exp, name, exp),
+      this.meta
+    )
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

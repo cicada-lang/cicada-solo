@@ -187,10 +187,10 @@ export function operator_matcher(tree: pt.Tree): Exp {
         exp_matcher(base_right),
         { span }
       ),
-    "operator:the": ({ t, exp }) =>
-      new Exps.The(exp_matcher(t), exp_matcher(exp)),
-    "operator:is": ({ t, exp }) =>
-      new Exps.The(exp_matcher(t), exp_matcher(exp)),
+    "operator:the": ({ t, exp }, { span }) =>
+      new Exps.The(exp_matcher(t), exp_matcher(exp), { span }),
+    "operator:is": ({ t, exp }, { span }) =>
+      new Exps.The(exp_matcher(t), exp_matcher(exp), { span }),
   })(tree)
 }
 
@@ -316,16 +316,20 @@ export function declaration_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "declaration:let": ({ name, exp, ret }) =>
       new Exps.Let(pt.str(name), exp_matcher(exp), exp_matcher(ret)),
-    "declaration:let_the": ({ name, t, exp, ret }) =>
+    "declaration:let_the": ({ name, t, exp, ret }, { span }) =>
       new Exps.Let(
         pt.str(name),
-        new Exps.The(exp_matcher(t), exp_matcher(exp)),
+        new Exps.The(exp_matcher(t), exp_matcher(exp), {
+          span: pt.span_closure([t.span, exp.span]),
+        }),
         exp_matcher(ret)
       ),
     "declaration:let_the_flower_bracket": ({ name, t, exp, ret }) =>
       new Exps.Let(
         pt.str(name),
-        new Exps.The(exp_matcher(t), exp_matcher(exp)),
+        new Exps.The(exp_matcher(t), exp_matcher(exp), {
+          span: pt.span_closure([t.span, exp.span]),
+        }),
         exp_matcher(ret)
       ),
     "declaration:let_fn": ({ name, bindings, ret_t, ret, body }) => {
@@ -365,7 +369,9 @@ export function declaration_matcher(tree: pt.Tree): Exp {
 
       return new Exps.Let(
         pt.str(name),
-        new Exps.The(pi_handler({ bindings, ret_t }), fn),
+        new Exps.The(pi_handler({ bindings, ret_t }), fn, {
+          span: pt.span_closure([bindings.span, ret_t.span, ret.span]),
+        }),
         exp_matcher(body)
       )
     },

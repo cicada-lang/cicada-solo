@@ -25,13 +25,17 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     "stmt:def_the": ({ name, t, exp }, { span }) =>
       new Stmts.Def(
         pt.str(name),
-        new Exps.The(exp_matcher(t), exp_matcher(exp)),
+        new Exps.The(exp_matcher(t), exp_matcher(exp), {
+          span: pt.span_closure([t.span, exp.span]),
+        }),
         { span }
       ),
     "stmt:def_the_flower_bracket": ({ name, t, exp }, { span }) =>
       new Stmts.Def(
         pt.str(name),
-        new Exps.The(exp_matcher(t), exp_matcher(exp)),
+        new Exps.The(exp_matcher(t), exp_matcher(exp), {
+          span: pt.span_closure([t.span, exp.span]),
+        }),
         { span }
       ),
     "stmt:def_fn": ({ name, bindings, ret_t, ret }, { span }) => {
@@ -71,7 +75,9 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
 
       return new Stmts.Def(
         pt.str(name),
-        new Exps.The(pi_handler({ bindings, ret_t }), fn),
+        new Exps.The(pi_handler({ bindings, ret_t }), fn, {
+          span: pt.span_closure([bindings.span, ret_t.span, ret.span]),
+        }),
         { span }
       )
     },

@@ -17,7 +17,7 @@ export class Class extends Stmt {
   }
 
   async execute(mod: Module): Promise<void> {
-    const exp = new Exps.The(new Exps.Type(), this.cls)
+    const exp = new Exps.The(new Exps.Type(), this.cls, this.cls.meta)
     const inferred = infer(mod.ctx, exp)
     const inferred_value = evaluate(mod.ctx.to_env(), inferred.core)
     mod.ctx.assert_not_redefine(this.name, inferred.t, inferred_value)
