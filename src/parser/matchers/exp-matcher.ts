@@ -145,12 +145,13 @@ export function operator_matcher(tree: pt.Tree): Exp {
         exp_matcher(step),
         { span }
       ),
-    "operator:list_ind": ({ target, motive, base, step }) =>
+    "operator:list_ind": ({ target, motive, base, step }, { span }) =>
       new Exps.ListInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base),
-        exp_matcher(step)
+        exp_matcher(step),
+        { span }
       ),
     "operator:list_rec": ({ target, base, step }, { span }) =>
       new Exps.ListRec(
