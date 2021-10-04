@@ -1,6 +1,5 @@
 # error report
 
-- exps/equal/replace -- with `span`
 - exps/equal/same-as-chart -- with `span`
 - exps/equal/equal -- with `span`
 
