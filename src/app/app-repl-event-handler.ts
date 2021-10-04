@@ -1,5 +1,6 @@
 import { ReplEvent, ReplEventHandler } from "../infra/repl"
 import { Library } from "../library"
+import { ErrorReporter } from "../error-reporter"
 import * as StmtOutputs from "../stmt-outputs"
 import chalk from "chalk"
 import { AppConfig } from "./app-config"
@@ -42,8 +43,9 @@ export class AppReplEventHandler extends ReplEventHandler {
       return true
     } catch (error) {
       mod.undo(mod.index)
-      const reporter = this.library.reporter
-      const report = await reporter.error(error, {
+
+      const reporter = new ErrorReporter()
+      const report = reporter.report(error, {
         path: this.path,
         text,
       })

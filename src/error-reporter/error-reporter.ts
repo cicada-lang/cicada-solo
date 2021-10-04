@@ -1,18 +1,8 @@
-import { FileStore } from "../infra/file-store"
 import * as Errors from "../errors"
 import pt from "@cicada-lang/partech"
 
-export class Reporter {
-  files: FileStore
-
-  constructor(opts: { files: FileStore }) {
-    this.files = opts.files
-  }
-
-  async error(
-    error: unknown,
-    opts: { path: string; text: string }
-  ): Promise<string> {
+export class ErrorReporter {
+  report(error: unknown, opts: { path: string; text: string }): string {
     const { path, text } = opts
 
     if (error instanceof Errors.ExpTrace) {

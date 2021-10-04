@@ -1,7 +1,6 @@
 import { Module } from "../module"
 import * as ModuleLoaders from "../module-loaders"
 import { FileStore } from "../infra/file-store"
-import { Reporter } from "./reporter"
 import ty from "@xieyuheng/ty"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
@@ -46,9 +45,5 @@ export class Library {
     const mod = await loader.load(this, path)
     this.cache.set(path, mod)
     return mod
-  }
-
-  get reporter(): Reporter {
-    return new Reporter({ files: this.files })
   }
 }

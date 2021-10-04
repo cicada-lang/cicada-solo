@@ -1,5 +1,5 @@
 import { Library } from "../library"
-import { FileStore } from "../infra/file-store"
+import { ErrorReporter } from "../error-reporter"
 import { Runner } from "../runner"
 import fs from "fs"
 
@@ -23,7 +23,8 @@ export class SnapshotRunner extends Runner {
       }
       return { error: undefined }
     } catch (error) {
-      const report = await this.library.reporter.error(error, {
+      const reporter = new ErrorReporter()
+      const report = reporter.report(error, {
         path,
         text: await this.library.files.getOrFail(path),
       })
