@@ -1,4 +1,3 @@
-- [error report] `parser/matchers` fix not catched parsing error -- for REPL
 - [optimization] use native `number` as `Nat`
 
 # narrator of elaboration

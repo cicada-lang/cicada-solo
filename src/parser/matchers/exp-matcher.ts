@@ -21,12 +21,13 @@ export function pi_handler(
         }
         case "implicit": {
           if (!(result instanceof Exps.Pi)) {
-            throw new Error(
+            throw new pt.ParsingError(
               [
                 `When reducing implicit names,`,
                 `I expects the result to be Exps.Pi`,
                 `  class name: ${result.constructor.name}`,
-              ].join("\n")
+              ].join("\n"),
+              { span: binding.span }
             )
           }
 
@@ -62,12 +63,13 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
         }
         case "implicit": {
           if (!(result instanceof Exps.Fn)) {
-            throw new Error(
+            throw new pt.ParsingError(
               [
                 `When reducing implicit names,`,
                 `the names_matcher expects the result to be Exps.Fn`,
                 `class name: ${result.constructor.name}`,
-              ].join("\n")
+              ].join("\n"),
+              { span: name_entry.span }
             )
           }
 
@@ -391,12 +393,13 @@ export function declaration_matcher(tree: pt.Tree): Exp {
             }
             case "implicit": {
               if (!(result instanceof Exps.Fn)) {
-                throw new Error(
+                throw new pt.ParsingError(
                   [
                     `When reducing implicit names,`,
                     `I expects the result to be Exps.Fn`,
                     `  class name: ${result.constructor.name}`,
-                  ].join("\n")
+                  ].join("\n"),
+                  { span }
                 )
               }
               return new Exps.ImFn(
@@ -478,12 +481,13 @@ export function cls_entry_matcher(tree: pt.Tree): {
             }
             case "implicit": {
               if (!(result instanceof Exps.Fn)) {
-                throw new Error(
+                throw new pt.ParsingError(
                   [
                     `When reducing implicit names,`,
                     `I expects the result to be Exps.Fn`,
                     `  class name: ${result.constructor.name}`,
-                  ].join("\n")
+                  ].join("\n"),
+                  { span }
                 )
               }
               return new Exps.ImFn(

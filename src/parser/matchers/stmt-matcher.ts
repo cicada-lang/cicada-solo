@@ -50,12 +50,13 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
             }
             case "implicit": {
               if (!(result instanceof Exps.Fn)) {
-                throw new Error(
+                throw new pt.ParsingError(
                   [
                     `When reducing implicit names,`,
                     `I expects the result to be Exps.Fn`,
                     `  class name: ${result.constructor.name}`,
-                  ].join("\n")
+                  ].join("\n"),
+                  { span: binding.span }
                 )
               }
               return new Exps.ImFn(
