@@ -10,11 +10,13 @@ import { check_conversion } from "../../value"
 import * as Exps from ".."
 
 export class SameAsChart extends Exp {
+  meta: ExpMeta
   t: Exp
   exps: Array<Exp>
 
-  constructor(t: Exp, exps: Array<Exp>) {
+  constructor(t: Exp, exps: Array<Exp>, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.t = t
     this.exps = exps
   }
@@ -29,7 +31,8 @@ export class SameAsChart extends Exp {
   subst(name: string, exp: Exp): Exp {
     return new SameAsChart(
       subst(this.t, name, exp),
-      this.exps.map((exp) => subst(exp, name, exp))
+      this.exps.map((exp) => subst(exp, name, exp)),
+      this.meta
     )
   }
 

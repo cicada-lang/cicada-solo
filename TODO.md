@@ -1,7 +1,5 @@
 # error report
 
-- exps/equal/same-as-chart -- with `span`
-
 - exps/let -- with `span`
 
 - exps/var -- with `span`
