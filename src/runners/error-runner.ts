@@ -1,5 +1,6 @@
 import { Library } from "../library"
 import { Runner } from "../runner"
+import * as ut from "../ut"
 import fs from "fs"
 
 export class ErrorRunner extends Runner {
@@ -21,7 +22,7 @@ export class ErrorRunner extends Runner {
       const text = await this.library.files.getOrFail(path)
       const report = this.reporter.report(error, { path, text })
       const file = this.library.files.resolve(path + ".out")
-      await fs.promises.writeFile(file, report)
+      await fs.promises.writeFile(file, ut.stripAnsi(report))
       return { error: undefined }
     }
   }

@@ -1,5 +1,6 @@
 import { Library } from "../library"
 import { Runner } from "../runner"
+import * as ut from "../ut"
 import fs from "fs"
 
 export class SnapshotRunner extends Runner {
@@ -18,7 +19,7 @@ export class SnapshotRunner extends Runner {
       await mod.run()
       const file = this.library.files.resolve(path + ".out")
       if (mod.all_output) {
-        await fs.promises.writeFile(file, mod.all_output)
+        await fs.promises.writeFile(file, ut.stripAnsi(mod.all_output))
       }
       return { error: undefined }
     } catch (error) {
