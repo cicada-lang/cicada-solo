@@ -7,11 +7,11 @@ import { check } from "../exp"
 import * as Exps from "../exps"
 
 export class The extends Exp {
-  meta?: ExpMeta
+  meta: ExpMeta
   t: Exp
   exp: Exp
 
-  constructor(t: Exp, exp: Exp, meta?: ExpMeta) {
+  constructor(t: Exp, exp: Exp, meta: ExpMeta) {
     super()
     this.meta = meta
     this.t = t
