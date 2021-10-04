@@ -2,7 +2,6 @@
 
 - exps/vector/vector-ind -- with `span`
 - exps/vector/vec -- with `span`
-- exps/vector/vector-tail -- with `span`
 
 - exps/equal/refl -- with `span`
 - exps/equal/the-same -- with `span`

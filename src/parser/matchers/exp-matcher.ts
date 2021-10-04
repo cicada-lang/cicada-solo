@@ -162,8 +162,8 @@ export function operator_matcher(tree: pt.Tree): Exp {
       ),
     "operator:vector_head": ({ target }, { span }) =>
       new Exps.VectorHead(exp_matcher(target), { span }),
-    "operator:vector_tail": ({ target }) =>
-      new Exps.VectorTail(exp_matcher(target)),
+    "operator:vector_tail": ({ target }, { span }) =>
+      new Exps.VectorTail(exp_matcher(target), { span }),
     "operator:vector_ind": ({ length, target, motive, base, step }) =>
       new Exps.VectorInd(
         exp_matcher(length),
