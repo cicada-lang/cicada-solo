@@ -9,12 +9,14 @@ import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class Pi extends Exp {
+  meta: ExpMeta
   name: string
   arg_t: Exp
   ret_t: Exp
 
-  constructor(name: string, arg_t: Exp, ret_t: Exp) {
+  constructor(name: string, arg_t: Exp, ret_t: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.name = name
     this.arg_t = arg_t
     this.ret_t = ret_t
@@ -29,7 +31,12 @@ export class Pi extends Exp {
 
   subst(name: string, exp: Exp): Pi {
     if (name === this.name) {
-      return new Pi(this.name, subst(this.arg_t, name, exp), this.ret_t)
+      return new Pi(
+        this.name,
+        subst(this.arg_t, name, exp),
+        this.ret_t,
+        this.meta
+      )
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen(free_names, this.name)
@@ -38,7 +45,8 @@ export class Pi extends Exp {
       return new Pi(
         fresh_name,
         subst(this.arg_t, name, exp),
-        subst(ret_t, name, exp)
+        subst(ret_t, name, exp),
+        this.meta
       )
     }
   }

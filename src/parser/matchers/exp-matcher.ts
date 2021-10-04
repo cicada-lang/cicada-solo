@@ -15,7 +15,9 @@ export function pi_handler(
     .reduce((result, binding) => {
       switch (binding.kind) {
         case "named": {
-          return new Exps.Pi(binding.name, binding.exp, result)
+          return new Exps.Pi(binding.name, binding.exp, result, {
+            span: pt.span_closure([binding.span, ret_t.span]),
+          })
         }
         case "implicit": {
           if (!(result instanceof Exps.Pi)) {
