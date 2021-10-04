@@ -12,11 +12,13 @@ import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class Ext extends Exp {
+  meta: ExpMeta
   parent: Exp
   rest_t: Exps.Cls
 
-  constructor(parent: Exp, rest_t: Exps.Cls) {
+  constructor(parent: Exp, rest_t: Exps.Cls, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.parent = parent
     this.rest_t = rest_t
   }
@@ -31,7 +33,8 @@ export class Ext extends Exp {
   subst(name: string, exp: Exp): Exp {
     return new Ext(
       subst(this.parent, name, exp),
-      subst(this.rest_t, name, exp) as Exps.Cls
+      subst(this.rest_t, name, exp) as Exps.Cls,
+      this.meta
     )
   }
 

@@ -127,7 +127,8 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                   rest_t
                 ),
               new Exps.NilCls()
-            )
+            ),
+          { span }
         ),
         { span }
       ),

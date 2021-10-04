@@ -248,7 +248,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
                 ),
           new Exps.NilCls()
         ),
-    "operand:ext": ({ parent, entries }) =>
+    "operand:ext": ({ parent, entries }, { span }) =>
       new Exps.Ext(
         operator_matcher(parent),
         pt.matchers
@@ -272,7 +272,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
                     rest_t
                   ),
             new Exps.NilCls()
-          )
+          ),
+        { span }
       ),
     "operand:obj": ({ properties }, { span }) =>
       new Exps.Obj(

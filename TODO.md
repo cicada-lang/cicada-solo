@@ -6,8 +6,6 @@
 
 - exps/cls/cls -- with `span`
 
-- exps/cls/ext -- with `span`
-
 - exps/let -- with `span`
 
 - exps/var -- with `span`
