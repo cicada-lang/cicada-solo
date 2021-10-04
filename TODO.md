@@ -105,3 +105,5 @@
 # optimization
 
 - [optimization] use native `BigInt` as `Nat`
+
+  - learn from constraint logic programming (CLP)
