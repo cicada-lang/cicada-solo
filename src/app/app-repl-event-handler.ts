@@ -43,7 +43,10 @@ export class AppReplEventHandler extends ReplEventHandler {
     } catch (error) {
       mod.undo(mod.index)
       const reporter = this.library.reporter
-      const report = await reporter.error(error, this.path, { text })
+      const report = await reporter.error(error, {
+        path: this.path,
+        text,
+      })
       if (report.trim()) {
         console.error(report.trim())
       }

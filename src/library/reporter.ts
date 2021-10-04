@@ -11,28 +11,19 @@ export class Reporter {
 
   async error(
     error: unknown,
-    path: string,
-    opts?: { text?: string }
+    opts: { path: string; text: string }
   ): Promise<string> {
-    const text = opts?.text || (await this.files.getOrFail(path))
+    const { path, text } = opts
 
     if (error instanceof Errors.ExpTrace) {
       return error.report({ text })
     } else if (error instanceof pt.ParsingError) {
-      if (!text) {
-        return [
-          `I found syntax error in path: ${path}`,
-          ``,
-          error.concise_message,
-        ].join("\n")
-      } else {
-        return [
-          `I found syntax error in text:`,
-          ``,
-          pt.report(error.span, text),
-          error.concise_message,
-        ].join("\n")
-      }
+      return [
+        `I found syntax error in file: ${path}`,
+        ``,
+        pt.report(error.span, text),
+        error.concise_message,
+      ].join("\n")
     } else {
       throw error
     }

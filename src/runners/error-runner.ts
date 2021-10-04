@@ -21,7 +21,10 @@ export class ErrorRunner extends Runner {
       await mod.run()
       return { error: new Error(`I expect to find error in the path: ${path}`) }
     } catch (error) {
-      const report = await this.library.reporter.error(error, path)
+      const report = await this.library.reporter.error(error, {
+        path,
+        text: await this.files.getOrFail(path),
+      })
       const file = this.files.resolve(path + ".out")
       await fs.promises.writeFile(file, report)
       return { error: undefined }

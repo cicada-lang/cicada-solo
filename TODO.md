@@ -1,10 +1,10 @@
 # error report
 
-- `Library.report` always take `text`
+- `ExpTrace` improve format
 
-- `parser/matchers` fix not catched parsing error -- for repl
+- `parser/matchers` fix not catched parsing error -- for REPL
 
-- `exps/var` -- how to handle `span` when doing a `subst`?
+- [problem] `exps/var` -- how to handle `span` when doing a `subst`?
 
 # narrator of elaboration
 

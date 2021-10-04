@@ -25,7 +25,10 @@ export class SnapshotRunner extends Runner {
       }
       return { error: undefined }
     } catch (error) {
-      const report = await this.library.reporter.error(error, path)
+      const report = await this.library.reporter.error(error, {
+        path,
+        text: await this.files.getOrFail(path),
+      })
       console.error(report)
       return { error }
     }
