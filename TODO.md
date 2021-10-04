@@ -1,7 +1,5 @@
 # error report
 
-- exps/cls/cls -- with `span` -- `meta` instead of `meta?`
-
 - exps/let -- with `span`
 
 - exps/var -- with `span`
