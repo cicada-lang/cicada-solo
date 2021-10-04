@@ -2,7 +2,6 @@
 
 - exps/either/either -- with `span`
 - exps/either/either-ind -- with `span`
-- exps/either/inl -- with `span`
 
 - exps/let -- with `span`
 

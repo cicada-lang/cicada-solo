@@ -13,8 +13,8 @@ export class Inr extends Exp {
 
   constructor(right: Exp, meta: ExpMeta) {
     super()
-    this.right = right
     this.meta = meta
+    this.right = right
   }
 
   free_names(bound_names: Set<string>): Set<string> {
