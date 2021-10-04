@@ -1,7 +1,6 @@
 # error report
 
 - exps/nat/nat-ind -- with `span`
-- exps/nat/add1 -- with `span`
 - exps/nat/nat-rec -- with `span`
 
 - exps/list/list-rec -- with `span`

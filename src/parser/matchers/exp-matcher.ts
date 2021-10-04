@@ -256,7 +256,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
       ),
     "operand:nat": (_, { span }) => new Exps.Nat({ span }),
     "operand:zero": (_, { span }) => new Exps.Zero({ span }),
-    "operand:add1": ({ prev }) => new Exps.Add1(exp_matcher(prev)),
+    "operand:add1": ({ prev }, { span }) =>
+      new Exps.Add1(exp_matcher(prev), { span }),
     "operand:number": ({ value }, { span }) => {
       const n = Number.parseInt(pt.str(value))
       if (Number.isNaN(n)) {
