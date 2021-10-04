@@ -122,7 +122,8 @@ export function exp_matcher(tree: pt.Tree): Exp {
 
 export function operator_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
-    "operator:var": ({ name }) => new Exps.Var(pt.str(name)),
+    "operator:var": ({ name }, { span }) =>
+      new Exps.Var(pt.str(name), { span }),
     "operator:ap": ({ target, args }, { span }) =>
       pt.matchers
         .one_or_more_matcher(args)

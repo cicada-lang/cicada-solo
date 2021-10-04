@@ -6,14 +6,12 @@ import { Trace } from "../errors"
 import * as Exps from "../exps"
 
 export class Var extends Exp {
-  // span: pt.Span
+  meta?: ExpMeta
   name: string
 
-  constructor(
-    name: string
-    // opts: { span: pt.Span }
-  ) {
+  constructor(name: string, meta?: ExpMeta) {
     super()
+    this.meta = meta
     this.name = name
   }
 
@@ -27,6 +25,7 @@ export class Var extends Exp {
 
   subst(name: string, exp: Exp): Exp {
     if (name === this.name) {
+      // TODO How to handle `span` when doing a `subst`
       return exp
     } else {
       return this
