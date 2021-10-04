@@ -8,11 +8,13 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class Li extends Exp {
+  meta: ExpMeta
   head: Exp
   tail: Exp
 
-  constructor(head: Exp, tail: Exp) {
+  constructor(head: Exp, tail: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.head = head
     this.tail = tail
   }
@@ -25,7 +27,11 @@ export class Li extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Li(subst(this.head, name, exp), subst(this.tail, name, exp))
+    return new Li(
+      subst(this.head, name, exp),
+      subst(this.tail, name, exp),
+      this.meta
+    )
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

@@ -277,12 +277,15 @@ export function operand_matcher(tree: pt.Tree): Exp {
       new Exps.List(exp_matcher(elem_t), { span }),
     "operand:nil": (_, { span }) => new Exps.Nil({ span }),
     "operand:nil_sugar": (_, { span }) => new Exps.Nil({ span }),
-    "operand:li": ({ head, tail }) =>
-      new Exps.Li(exp_matcher(head), exp_matcher(tail)),
+    "operand:li": ({ head, tail }, { span }) =>
+      new Exps.Li(exp_matcher(head), exp_matcher(tail), { span }),
     "operand:li_sugar": ({ exps }, { span }) =>
       exps_matcher(exps)
         .reverse()
-        .reduce((list, exp) => new Exps.Li(exp, list), new Exps.Nil({ span })),
+        .reduce(
+          (list, exp) => new Exps.Li(exp, list, { span }),
+          new Exps.Nil({ span })
+        ),
     "operand:vector": ({ elem_t, length }) =>
       new Exps.Vector(exp_matcher(elem_t), exp_matcher(length)),
     "operand:vecnil": () => new Exps.Vecnil(),

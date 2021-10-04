@@ -1,7 +1,5 @@
 # error report
 
-- exps/list/li -- with `span`
-
 - exps/vector/vector-head -- with `span`
 - exps/vector/vector-ind -- with `span`
 - exps/vector/vector -- with `span`
