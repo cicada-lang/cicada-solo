@@ -11,11 +11,13 @@ import * as ut from "../../ut"
 import { ImFnInsertion } from "../im-pi/im-fn-insertion"
 
 export class Fn extends Exp {
+  meta: ExpMeta
   name: string
   ret: Exp
 
-  constructor(name: string, ret: Exp) {
+  constructor(name: string, ret: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.name = name
     this.ret = ret
   }
@@ -33,7 +35,7 @@ export class Fn extends Exp {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen(free_names, this.name)
       const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
-      return new Fn(fresh_name, subst(ret, name, exp))
+      return new Fn(fresh_name, subst(ret, name, exp), this.meta)
     }
   }
 

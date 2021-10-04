@@ -56,7 +56,9 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
     .reduce((result, name_entry) => {
       switch (name_entry.kind) {
         case "name": {
-          return new Exps.Fn(name_entry.name, result)
+          return new Exps.Fn(name_entry.name, result, {
+            span: pt.span_closure([name_entry.span, ret.span]),
+          })
         }
         case "implicit": {
           if (!(result instanceof Exps.Fn)) {
@@ -369,7 +371,9 @@ export function declaration_matcher(tree: pt.Tree): Exp {
         .reduce((result, binding) => {
           switch (binding.kind) {
             case "named": {
-              return new Exps.Fn(binding.name, result)
+              return new Exps.Fn(binding.name, result, {
+                span: pt.span_closure([binding.span, ret.span]),
+              })
             }
             case "implicit": {
               if (!(result instanceof Exps.Fn)) {
@@ -445,7 +449,9 @@ export function cls_entry_matcher(tree: pt.Tree): {
         .reduce((result, binding) => {
           switch (binding.kind) {
             case "named": {
-              return new Exps.Fn(binding.name, result)
+              return new Exps.Fn(binding.name, result, {
+                span: pt.span_closure([binding.span, ret.span]),
+              })
             }
             case "implicit": {
               if (!(result instanceof Exps.Fn)) {

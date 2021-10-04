@@ -44,7 +44,9 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         .reduce((result, binding) => {
           switch (binding.kind) {
             case "named": {
-              return new Exps.Fn(binding.name, result)
+              return new Exps.Fn(binding.name, result, {
+                span: pt.span_closure([binding.span, ret.span]),
+              })
             }
             case "implicit": {
               if (!(result instanceof Exps.Fn)) {
