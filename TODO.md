@@ -1,7 +1,5 @@
 # error report
 
-- exps/trivial/sole -- with `span`
-
 - exps/let -- with `span`
 
 - exps/the -- with `span`
