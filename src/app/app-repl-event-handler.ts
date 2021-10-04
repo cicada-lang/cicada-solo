@@ -45,10 +45,7 @@ export class AppReplEventHandler extends ReplEventHandler {
       mod.undo(mod.index)
 
       const reporter = new ErrorReporter()
-      const report = reporter.report(error, {
-        path: this.path,
-        text,
-      })
+      const report = reporter.report(error, { text })
       if (report.trim()) {
         console.error(report.trim())
       }
