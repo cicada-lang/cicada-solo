@@ -8,11 +8,13 @@ import { expect } from "../../value"
 import * as Exps from "../../exps"
 
 export class Inr extends Exp {
+  meta: ExpMeta
   right: Exp
 
-  constructor(right: Exp) {
+  constructor(right: Exp, meta: ExpMeta) {
     super()
     this.right = right
+    this.meta = meta
   }
 
   free_names(bound_names: Set<string>): Set<string> {
@@ -20,7 +22,7 @@ export class Inr extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Inr(subst(this.right, name, exp))
+    return new Inr(subst(this.right, name, exp), this.meta)
   }
 
   check(ctx: Ctx, t: Value): Core {

@@ -1,5 +1,9 @@
 # error report
 
+- exps/either/either -- with `span`
+- exps/either/either-ind -- with `span`
+- exps/either/inl -- with `span`
+
 - exps/let -- with `span`
 
 - exps/the -- with `span`
@@ -59,11 +63,6 @@
 - exps/nat/zero -- with `span`
 - exps/nat/add1 -- with `span`
 - exps/nat/nat-rec -- with `span`
-
-- exps/either/either -- with `span`
-- exps/either/either-ind -- with `span`
-- exps/either/inl -- with `span`
-- exps/either/inr -- with `span`
 
 - exps/im-pi/im-pi -- with `span`
 - exps/im-pi/im-fn -- with `span`
