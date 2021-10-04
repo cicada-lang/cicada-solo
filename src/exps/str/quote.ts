@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
@@ -6,10 +6,12 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class Quote extends Exp {
+  meta: ExpMeta
   str: string
 
-  constructor(str: string) {
+  constructor(str: string, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.str = str
   }
 

@@ -1,11 +1,11 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { check } from "../../exp"
 import { evaluate } from "../../core"
-import { Trace } from "../../errors"
+import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
@@ -14,6 +14,7 @@ import * as ut from "../../ut"
 //   we need `field_name` and `local_name` just like `Cls`.
 
 export class ImPi extends Exp {
+  meta: ExpMeta
   field_name: string
   local_name: string
   arg_t: Exp
@@ -23,9 +24,11 @@ export class ImPi extends Exp {
     field_name: string,
     local_name: string,
     arg_t: Exp,
-    ret_t: Exps.Pi | Exps.ImPi
+    ret_t: Exps.Pi | Exps.ImPi,
+    meta: ExpMeta
   ) {
     super()
+    this.meta = meta
     this.field_name = field_name
     this.local_name = local_name
     this.arg_t = arg_t
@@ -45,7 +48,8 @@ export class ImPi extends Exp {
         this.local_name,
         this.field_name,
         subst(this.arg_t, name, exp),
-        this.ret_t
+        this.ret_t,
+        this.meta
       )
     } else {
       const free_names = exp.free_names(new Set())
@@ -60,7 +64,8 @@ export class ImPi extends Exp {
         this.field_name,
         fresh_name,
         subst(this.arg_t, name, exp),
-        subst(ret_t, name, exp) as Exps.Pi | Exps.ImPi
+        subst(ret_t, name, exp) as Exps.Pi | Exps.ImPi,
+        this.meta
       )
     }
   }
@@ -81,7 +86,7 @@ export class ImPi extends Exp {
         ret_t_core instanceof Exps.PiCore || ret_t_core instanceof Exps.ImPiCore
       )
     ) {
-      throw new Trace(
+      throw new ExpTrace(
         [
           `I expect ret_t_core to be Exps.PiCore or Exps.ImPiCore`,
           `  class name: ${ret_t_core.constructor.name}`,

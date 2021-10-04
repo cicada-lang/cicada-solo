@@ -5,7 +5,7 @@ import { Solution } from "../../solution"
 import { readback } from "../../value"
 import { Value } from "../../value"
 import { Closure } from "../closure"
-import { Trace } from "../../errors"
+import { ExpTrace } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
 import { ImApInsertion, ImApInsertionEntry } from "./im-ap-insertion"
@@ -45,7 +45,7 @@ export abstract class ImPiValue
           ret_t_core instanceof Exps.ImPiCore
         )
       ) {
-        throw new Trace(
+        throw new ExpTrace(
           [
             `I expect ret_t_core to be of type Exps.PiCore or Exps.ImPiCore.`,
             `  class name: ${ret_t_core.constructor.name}`,
@@ -72,7 +72,7 @@ export abstract class ImPiValue
     )
 
     if (!(result instanceof Exps.FnCore || result instanceof Exps.ImFnCore)) {
-      throw new Trace(
+      throw new ExpTrace(
         [
           `I expect result to be Exps.FnCore or Exps.ImFnCore`,
           `but the constructor name I meet is: ${result.constructor.name}`,

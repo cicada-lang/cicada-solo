@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
@@ -6,6 +6,13 @@ import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
 
 export class Trivial extends Exp {
+  meta: ExpMeta
+
+  constructor(meta: ExpMeta) {
+    super()
+    this.meta = meta
+  }
+
   free_names(bound_names: Set<string>): Set<string> {
     return new Set()
   }

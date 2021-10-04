@@ -1,7 +1,7 @@
 import { Value } from "../value"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
-import { Trace } from "../errors"
+import { ExpTrace } from "../errors"
 import * as ut from "../ut"
 import * as Exps from "../exps"
 
@@ -45,7 +45,7 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
 
   if (exp) return exp
 
-  throw new Trace(
+  throw new ExpTrace(
     [
       `I can not readback value.`,
       `  value class name: ${value.constructor.name}`,

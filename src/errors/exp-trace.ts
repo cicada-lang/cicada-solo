@@ -1,18 +1,20 @@
-export class Trace<T> extends Error {
+import { Exp } from "../exp"
+
+export class ExpTrace extends Error {
   message: string
-  previous: Array<T> = []
+  previous: Array<Exp> = []
 
   constructor(message: string) {
     super()
     this.message = message
   }
 
-  trail(x: T): this {
+  trail(x: Exp): this {
     this.previous.push(x)
     return this
   }
 
-  repr(formater: (x: T) => string): string {
+  repr(formater: (x: Exp) => string): string {
     let s = ""
     s += this.message
     s += "\n"

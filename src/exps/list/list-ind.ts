@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -11,13 +11,15 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class ListInd extends Exp {
+  meta: ExpMeta
   target: Exp
   motive: Exp
   base: Exp
   step: Exp
 
-  constructor(target: Exp, motive: Exp, base: Exp, step: Exp) {
+  constructor(target: Exp, motive: Exp, base: Exp, step: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.target = target
     this.motive = motive
     this.base = base
@@ -38,7 +40,8 @@ export class ListInd extends Exp {
       subst(this.target, name, exp),
       subst(this.motive, name, exp),
       subst(this.base, name, exp),
-      subst(this.step, name, exp)
+      subst(this.step, name, exp),
+      this.meta
     )
   }
 

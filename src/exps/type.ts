@@ -1,10 +1,17 @@
 import { Core } from "../core"
-import { Exp, subst } from "../exp"
+import { Exp, ExpMeta, subst } from "../exp"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import * as Exps from "../exps"
 
 export class Type extends Exp {
+  meta?: ExpMeta
+
+  constructor(meta?: ExpMeta) {
+    super()
+    this.meta = meta
+  }
+
   free_names(bound_names: Set<string>): Set<string> {
     return new Set()
   }

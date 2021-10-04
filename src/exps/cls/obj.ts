@@ -1,17 +1,19 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value, expect } from "../../value"
-import { Trace } from "../../errors"
+import { ExpTrace } from "../../errors"
 import { infer } from "../../exp"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
 
 export class Obj extends Exp {
+  meta?: ExpMeta
   properties: Array<Prop>
 
-  constructor(properties: Array<Prop>) {
+  constructor(properties: Array<Prop>, meta?: ExpMeta) {
     super()
+    this.meta = meta
     this.properties = properties
   }
 
@@ -25,7 +27,8 @@ export class Obj extends Exp {
 
   subst(name: string, exp: Exp): Exp {
     return new Obj(
-      this.properties.map((property) => property.solution(name, exp))
+      this.properties.map((property) => property.solution(name, exp)),
+      this.meta
     )
   }
 
@@ -38,7 +41,7 @@ export class Obj extends Exp {
 
     for (const field_name of field_names) {
       if (occurred.has(field_name)) {
-        throw new Trace(
+        throw new ExpTrace(
           [
             `I found duplicated field name in object`,
             `field name:`,
@@ -65,7 +68,7 @@ export class Obj extends Exp {
       return new Exps.ObjCore(core_properties)
     }
 
-    throw new Trace(
+    throw new ExpTrace(
       [
         `I expect t to be ClsValue`,
         `but the constructor name I meet is: ${t.constructor.name}`,
@@ -109,10 +112,13 @@ export class SpreadProp extends Prop {
 
     if (inferred.t instanceof Exps.ClsValue) {
       const cls = inferred.t
-      return cls.field_names.map((name) => [name, new Exps.Dot(this.exp, name)])
+      return cls.field_names.map((name) => [
+        name,
+        new Exps.Dot(this.exp, name, this.exp.meta),
+      ])
     }
 
-    throw new Trace(
+    throw new ExpTrace(
       [
         `I expect inferred.t to be an instance of ClsValue`,
         `but the constructor name I meet is: ${inferred.t.constructor.name}`,

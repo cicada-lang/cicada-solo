@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
@@ -7,11 +7,13 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class Vector extends Exp {
+  meta: ExpMeta
   elem_t: Exp
   length: Exp
 
-  constructor(elem_t: Exp, length: Exp) {
+  constructor(elem_t: Exp, length: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.elem_t = elem_t
     this.length = length
   }
@@ -26,7 +28,8 @@ export class Vector extends Exp {
   subst(name: string, exp: Exp): Vector {
     return new Vector(
       subst(this.elem_t, name, exp),
-      subst(this.length, name, exp)
+      subst(this.length, name, exp),
+      this.meta
     )
   }
 

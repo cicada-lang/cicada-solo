@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { expect } from "../../value"
@@ -9,11 +9,13 @@ import { check } from "../../exp"
 import * as Exps from "../../exps"
 
 export class Cons extends Exp {
+  meta: ExpMeta
   car: Exp
   cdr: Exp
 
-  constructor(car: Exp, cdr: Exp) {
+  constructor(car: Exp, cdr: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.car = car
     this.cdr = cdr
   }
@@ -26,7 +28,11 @@ export class Cons extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Cons(subst(this.car, name, exp), subst(this.cdr, name, exp))
+    return new Cons(
+      subst(this.car, name, exp),
+      subst(this.cdr, name, exp),
+      this.meta
+    )
   }
 
   check(ctx: Ctx, t: Value): Core {

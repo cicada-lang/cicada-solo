@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
@@ -8,10 +8,12 @@ import { expect } from "../../value"
 import * as Exps from "../../exps"
 
 export class Inl extends Exp {
+  meta: ExpMeta
   left: Exp
 
-  constructor(left: Exp) {
+  constructor(left: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.left = left
   }
 
@@ -20,7 +22,7 @@ export class Inl extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Inl(subst(this.left, name, exp))
+    return new Inl(subst(this.left, name, exp), this.meta)
   }
 
   check(ctx: Ctx, t: Value): Core {

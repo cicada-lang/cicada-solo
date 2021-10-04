@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { evaluate } from "../../core"
 import { check } from "../../exp"
@@ -8,11 +8,13 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class AbsurdInd extends Exp {
+  meta: ExpMeta
   target: Exp
   motive: Exp
 
-  constructor(target: Exp, motive: Exp) {
+  constructor(target: Exp, motive: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.target = target
     this.motive = motive
   }
@@ -27,7 +29,8 @@ export class AbsurdInd extends Exp {
   subst(name: string, exp: Exp): Exp {
     return new AbsurdInd(
       subst(this.target, name, exp),
-      subst(this.motive, name, exp)
+      subst(this.motive, name, exp),
+      this.meta
     )
   }
 

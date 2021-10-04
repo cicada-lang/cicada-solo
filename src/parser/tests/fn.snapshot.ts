@@ -21,7 +21,6 @@ id: (A: Type, x: A) -> A =
   //   thus the name of bound variables
   //   does not need to be the same.
   (B, y) => y
-
 `)
 
 // NOTE suger for multi-argument function

@@ -1,13 +1,14 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import * as Exps from "../../exps"
+import pt from "@cicada-lang/partech"
 
-export function nat_from_number(n: number): Exp {
+export function nat_from_number(n: number, meta: ExpMeta): Exp {
   if (n <= 0) {
-    return new Exps.Zero()
+    return new Exps.Zero(meta)
   } else {
-    const almost = nat_from_number(n - 1)
-    return new Exps.Add1(almost)
+    const almost = nat_from_number(n - 1, meta)
+    return new Exps.Add1(almost, meta)
   }
 }
 

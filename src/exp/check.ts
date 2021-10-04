@@ -4,7 +4,7 @@ import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { conversion } from "../value"
 import { readback } from "../value"
-import { Trace } from "../errors"
+import { ExpTrace } from "../errors"
 import * as ut from "../ut"
 import * as Exps from "../exps"
 
@@ -25,7 +25,7 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
         // console.log("expected:", t_exp.repr())
         // console.dir(t, { depth: 4 })
 
-        throw new Trace(
+        throw new ExpTrace(
           [
             `I infer the type to be:`,
             `  ${u_exp.repr()}`,
@@ -37,7 +37,7 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
 
       return inferred.core
     } else {
-      throw new Trace(
+      throw new ExpTrace(
         [
           `I can not check the type of:`,
           `  ${exp.repr()}`,
@@ -47,7 +47,7 @@ export function check(ctx: Ctx, exp: Exp, t: Value): Core {
       )
     }
   } catch (error) {
-    if (error instanceof Trace) throw error.trail(exp)
+    if (error instanceof ExpTrace) throw error.trail(exp)
     throw error
   }
 }

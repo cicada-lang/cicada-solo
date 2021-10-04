@@ -1,5 +1,6 @@
 import { Exp } from "../exp"
 import { Stmt } from "../stmt"
+import * as Stmts from "../stmts"
 import { Parser } from "../parser"
 import pt from "@cicada-lang/partech"
 
@@ -58,6 +59,10 @@ export class ParserTester {
     const stmts = this.parser.parse_stmts(text)
     for (const stmt of stmts) {
       console.log(stmt.repr())
+
+      if (stmt instanceof Stmts.Show) {
+        console.error(pt.report(stmt.meta.span, text))
+      }
     }
   }
 

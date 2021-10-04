@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
@@ -8,10 +8,12 @@ import { nat_to_number } from "./nat-util"
 import * as Exps from "../../exps"
 
 export class Add1 extends Exp {
+  meta: ExpMeta
   prev: Exp
 
-  constructor(prev: Exp) {
+  constructor(prev: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.prev = prev
   }
 
@@ -20,7 +22,7 @@ export class Add1 extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Add1(subst(this.prev, name, exp))
+    return new Add1(subst(this.prev, name, exp), this.meta)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

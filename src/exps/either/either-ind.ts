@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -11,13 +11,21 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class EitherInd extends Exp {
+  meta: ExpMeta
   target: Exp
   motive: Exp
   base_left: Exp
   base_right: Exp
 
-  constructor(target: Exp, motive: Exp, base_left: Exp, base_right: Exp) {
+  constructor(
+    target: Exp,
+    motive: Exp,
+    base_left: Exp,
+    base_right: Exp,
+    meta: ExpMeta
+  ) {
     super()
+    this.meta = meta
     this.target = target
     this.motive = motive
     this.base_left = base_left
@@ -38,7 +46,8 @@ export class EitherInd extends Exp {
       subst(this.target, name, exp),
       subst(this.motive, name, exp),
       subst(this.base_left, name, exp),
-      subst(this.base_right, name, exp)
+      subst(this.base_right, name, exp),
+      this.meta
     )
   }
 

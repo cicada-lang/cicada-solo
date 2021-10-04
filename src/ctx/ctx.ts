@@ -1,6 +1,6 @@
 import { Env } from "../env"
 import { Value } from "../value"
-import { Trace } from "../errors"
+import { ExpTrace } from "../errors"
 import { readback } from "../value"
 import * as Exps from "../exps"
 import * as ut from "../ut"
@@ -20,7 +20,7 @@ export abstract class Ctx {
 
   extend(name: string, t: Value, value?: Value): Ctx {
     if (this.names.includes(name)) {
-      throw new Trace(
+      throw new ExpTrace(
         [
           `The names in ctx must be distinct.`,
           `But I found duplicated name:`,
@@ -48,7 +48,7 @@ export abstract class Ctx {
     if (old_t) {
       const old_t_repr = readback(this, new Exps.TypeValue(), old_t).repr()
       const t_repr = readback(this, new Exps.TypeValue(), t).repr()
-      throw new Trace(
+      throw new ExpTrace(
         [
           `I can not redefine name:`,
           `  ${name}`,

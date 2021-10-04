@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { infer } from "../../exp"
@@ -8,10 +8,12 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class VectorTail extends Exp {
+  meta: ExpMeta
   target: Exp
 
-  constructor(target: Exp) {
+  constructor(target: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.target = target
   }
 
@@ -20,7 +22,7 @@ export class VectorTail extends Exp {
   }
 
   subst(name: string, exp: Exp): VectorTail {
-    return new VectorTail(subst(this.target, name, exp))
+    return new VectorTail(subst(this.target, name, exp), this.meta)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

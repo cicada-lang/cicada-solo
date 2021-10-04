@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
@@ -10,10 +10,12 @@ import { check_conversion } from "../../value"
 import * as Exps from ".."
 
 export class Same extends Exp {
+  meta: ExpMeta
   exp: Exp
 
-  constructor(exp: Exp) {
+  constructor(exp: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.exp = exp
   }
 
@@ -22,7 +24,7 @@ export class Same extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Same(subst(this.exp, name, exp))
+    return new Same(subst(this.exp, name, exp), this.meta)
   }
 
   check(ctx: Ctx, t: Value): Core {

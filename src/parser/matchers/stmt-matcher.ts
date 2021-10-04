@@ -20,25 +20,33 @@ export function stmts_matcher(tree: pt.Tree): Array<Stmt> {
 
 export function stmt_matcher(tree: pt.Tree): Stmt {
   return pt.matcher<Stmt>({
-    "stmt:def": ({ name, exp }) =>
-      new Stmts.Def(pt.str(name), exp_matcher(exp)),
-    "stmt:def_the": ({ name, t, exp }) =>
+    "stmt:def": ({ name, exp }, { span }) =>
+      new Stmts.Def(pt.str(name), exp_matcher(exp), { span }),
+    "stmt:def_the": ({ name, t, exp }, { span }) =>
       new Stmts.Def(
         pt.str(name),
-        new Exps.The(exp_matcher(t), exp_matcher(exp))
+        new Exps.The(exp_matcher(t), exp_matcher(exp), {
+          span: pt.span_closure([t.span, exp.span]),
+        }),
+        { span }
       ),
-    "stmt:def_the_flower_bracket": ({ name, t, exp }) =>
+    "stmt:def_the_flower_bracket": ({ name, t, exp }, { span }) =>
       new Stmts.Def(
         pt.str(name),
-        new Exps.The(exp_matcher(t), exp_matcher(exp))
+        new Exps.The(exp_matcher(t), exp_matcher(exp), {
+          span: pt.span_closure([t.span, exp.span]),
+        }),
+        { span }
       ),
-    "stmt:def_fn": ({ name, bindings, ret_t, ret }) => {
+    "stmt:def_fn": ({ name, bindings, ret_t, ret }, { span }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
         .reduce((result, binding) => {
           switch (binding.kind) {
             case "named": {
-              return new Exps.Fn(binding.name, result)
+              return new Exps.Fn(binding.name, result, {
+                span: pt.span_closure([binding.span, ret.span]),
+              })
             }
             case "implicit": {
               if (!(result instanceof Exps.Fn)) {
@@ -61,7 +69,10 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                     local_name: binding.last_entry.name,
                   },
                 ],
-                result
+                result,
+                {
+                  span: pt.span_closure([binding.span, ret.span]),
+                }
               )
             }
           }
@@ -69,14 +80,17 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
 
       return new Stmts.Def(
         pt.str(name),
-        new Exps.The(pi_handler({ bindings, ret_t }), fn)
+        new Exps.The(pi_handler({ bindings, ret_t }, { span }), fn, {
+          span: pt.span_closure([bindings.span, ret_t.span, ret.span]),
+        }),
+        { span }
       )
     },
-    "stmt:show_operator": ({ operator }) =>
-      new Stmts.Show(operator_matcher(operator)),
-    "stmt:show_operand": ({ operand }) =>
-      new Stmts.Show(operand_matcher(operand)),
-    "stmt:class": ({ name, entries }) =>
+    "stmt:show_operator": ({ operator }, { span }) =>
+      new Stmts.Show(operator_matcher(operator), { span }),
+    "stmt:show_operand": ({ operand }, { span }) =>
+      new Stmts.Show(operand_matcher(operand), { span }),
+    "stmt:class": ({ name, entries }, { span }) =>
       new Stmts.Class(
         pt.str(name),
         pt.matchers
@@ -89,12 +103,14 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                 entry.field_name,
                 entry.field_name,
                 entry.field_t,
-                rest_t
+                rest_t,
+                { span: entry.span }
               ),
-            new Exps.NilCls()
-          )
+            new Exps.NilCls({ span })
+          ),
+        { span }
       ),
-    "stmt:class_extends": ({ name, parent, entries }) =>
+    "stmt:class_extends": ({ name, parent, entries }, { span }) =>
       new Stmts.ClassExtends(
         pt.str(name),
         new Exps.Ext(
@@ -109,16 +125,20 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                   entry.field_name,
                   entry.field_name,
                   entry.field_t,
-                  rest_t
+                  rest_t,
+                  { span: entry.span }
                 ),
-              new Exps.NilCls()
-            )
-        )
+              new Exps.NilCls({ span })
+            ),
+          { span }
+        ),
+        { span }
       ),
-    "stmt:import": ({ path, entries }) => {
+    "stmt:import": ({ path, entries }, { span }) => {
       return new Stmts.Import(
         pt.trim_boundary(pt.str(path), 1),
-        pt.matchers.zero_or_more_matcher(entries).map(import_entry_matcher)
+        pt.matchers.zero_or_more_matcher(entries).map(import_entry_matcher),
+        { span }
       )
     },
   })(tree)

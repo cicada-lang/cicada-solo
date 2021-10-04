@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { check } from "../../exp"
@@ -9,11 +9,13 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class Vec extends Exp {
+  meta: ExpMeta
   head: Exp
   tail: Exp
 
-  constructor(head: Exp, tail: Exp) {
+  constructor(head: Exp, tail: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.head = head
     this.tail = tail
   }
@@ -26,7 +28,11 @@ export class Vec extends Exp {
   }
 
   subst(name: string, exp: Exp): Vec {
-    return new Vec(subst(this.head, name, exp), subst(this.tail, name, exp))
+    return new Vec(
+      subst(this.head, name, exp),
+      subst(this.tail, name, exp),
+      this.meta
+    )
   }
 
   check(ctx: Ctx, t: Value): Core {

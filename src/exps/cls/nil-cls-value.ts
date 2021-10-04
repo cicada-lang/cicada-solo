@@ -1,9 +1,9 @@
 import { Ctx } from "../../ctx"
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
-import { Trace } from "../../errors"
+import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
 
 export class NilClsValue extends Exps.ClsValue {
@@ -22,7 +22,7 @@ export class NilClsValue extends Exps.ClsValue {
   }
 
   dot_value(target: Value, field_name: string): Value {
-    throw new Trace(
+    throw new ExpTrace(
       [
         `I can not dot the value out of class`,
         `because I meet an unknown field name:`,
@@ -32,7 +32,7 @@ export class NilClsValue extends Exps.ClsValue {
   }
 
   dot_type(target: Value, field_name: string): Value {
-    throw new Trace(
+    throw new ExpTrace(
       [
         `I can not dot the type out of class`,
         `because I meet an unknown field name:`,
@@ -56,7 +56,7 @@ export class NilClsValue extends Exps.ClsValue {
   }
 
   apply(arg: Value): Exps.ClsValue {
-    throw new Trace(
+    throw new ExpTrace(
       [
         `I meet the end of ClsValue`,
         `I can not apply arg to it anymore`,

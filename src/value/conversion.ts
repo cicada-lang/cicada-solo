@@ -2,7 +2,7 @@ import { Core, AlphaCtx } from "../core"
 import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { readback } from "../value"
-import { Trace } from "../errors"
+import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
 import * as ut from "../ut"
 
@@ -36,7 +36,7 @@ export function check_conversion(
     const from_description = opts.description?.from || ""
     const to_repr = readback(ctx, t, to).repr()
     const to_description = opts.description?.to || ""
-    throw new Trace(
+    throw new ExpTrace(
       [
         `I am expecting the following two values to be the same ${t_repr}.`,
         `But they are not.`,

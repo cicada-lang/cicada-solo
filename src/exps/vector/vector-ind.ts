@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -12,14 +12,23 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class VectorInd extends Exp {
+  meta: ExpMeta
   length: Exp
   target: Exp
   motive: Exp
   base: Exp
   step: Exp
 
-  constructor(length: Exp, target: Exp, motive: Exp, base: Exp, step: Exp) {
+  constructor(
+    length: Exp,
+    target: Exp,
+    motive: Exp,
+    base: Exp,
+    step: Exp,
+    meta: ExpMeta
+  ) {
     super()
+    this.meta = meta
     this.length = length
     this.target = target
     this.motive = motive
@@ -43,7 +52,8 @@ export class VectorInd extends Exp {
       subst(this.target, name, exp),
       subst(this.motive, name, exp),
       subst(this.base, name, exp),
-      subst(this.step, name, exp)
+      subst(this.step, name, exp),
+      this.meta
     )
   }
 

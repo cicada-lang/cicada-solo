@@ -1,4 +1,4 @@
-import { Exp, subst } from "../exp"
+import { Exp, ExpMeta, subst } from "../exp"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import { Core } from "../core"
@@ -6,10 +6,12 @@ import { TodoCore } from "./todo-core"
 import { QuoteCore } from "./str/quote-core"
 
 export class Todo extends Exp {
+  meta: ExpMeta
   message: string
 
-  constructor(message: string) {
+  constructor(message: string, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.message = message
   }
 

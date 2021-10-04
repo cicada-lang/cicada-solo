@@ -1,19 +1,18 @@
-import { Stmt } from "../stmt"
+import { Stmt, StmtMeta } from "../stmt"
 import { Module } from "../module"
-import { Trace } from "../errors"
+import * as Errors from "../errors"
 import Path from "path"
 
-export type ImportEntry = {
-  name: string
-  alias?: string
-}
+export type ImportEntry = { name: string; alias?: string }
 
 export class Import extends Stmt {
+  meta: StmtMeta
   path: string
   entries: Array<ImportEntry>
 
-  constructor(path: string, entries: Array<ImportEntry>) {
+  constructor(path: string, entries: Array<ImportEntry>, meta: StmtMeta) {
     super()
+    this.meta = meta
     this.path = path
     this.entries = entries
   }
@@ -21,7 +20,7 @@ export class Import extends Stmt {
   async execute(mod: Module): Promise<void> {
     const path = resolve_path(mod.path, this.path)
     if (path === mod.path) {
-      throw new Trace(
+      throw new Errors.ExpTrace(
         [`I can not do circular import.`, `  path: ${path}`].join("\n")
       )
     }
@@ -31,7 +30,7 @@ export class Import extends Stmt {
     try {
       await imported_mod.run()
     } catch (error) {
-      throw new Trace(
+      throw new Errors.ExpTrace(
         [
           `I fail to import from path: ${this.path}`,
           `because there are errors in that module.`,
@@ -43,7 +42,7 @@ export class Import extends Stmt {
       const t = imported_mod.ctx.find_type(name)
       const value = imported_mod.env.find_value(name)
       if (!t || !value) {
-        throw new Trace(
+        throw new Errors.ExpTrace(
           [
             `I meet undefined name:`,
             `  ${name}`,

@@ -1,16 +1,18 @@
-import { Stmt } from "../stmt"
+import { Stmt, StmtMeta } from "../stmt"
 import { Module } from "../module"
 import { Exp } from "../exp"
 import { infer } from "../exp"
 import { evaluate } from "../core"
-import { Trace } from "../errors"
+import * as Errors from "../errors"
 
 export class Def extends Stmt {
+  meta: StmtMeta
   name: string
   exp: Exp
 
-  constructor(name: string, exp: Exp) {
+  constructor(name: string, exp: Exp, meta: StmtMeta) {
     super()
+    this.meta = meta
     this.name = name
     this.exp = exp
   }

@@ -1,19 +1,10 @@
 # error report
 
-- get information about location from parser
-
-- infrastructure for good error report
-
-  - [maybe] quit using `Trace`
-
-  - improve structure of error:
-
-    - kind
-    - context
-    - message
-    - hint
-
+- `ExpTrace` use `meta.span` when `exp` has `meta`
+- `ExpTrace` improve structure of error -- `kind, context, message, hint`
 - `parser/matchers` fix not catched parsing error -- for repl
+
+- `exps/var` -- how to handle `span` when doing a `subst`?
 
 # narrator of elaboration
 
@@ -112,4 +103,7 @@
   - `libraries.cicada-lang.com`
   - `registry.cicada-lang.com`
 
-- [library manager] library can be used as a module
+- [library manager] be able to resolve module in library of `dependencies`
+
+  - we do not need to use library as module,
+    we only need to be able to resolve module.

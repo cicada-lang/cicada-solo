@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
@@ -11,12 +11,14 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class Replace extends Exp {
+  meta: ExpMeta
   target: Exp
   motive: Exp
   base: Exp
 
-  constructor(target: Exp, motive: Exp, base: Exp) {
+  constructor(target: Exp, motive: Exp, base: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.target = target
     this.motive = motive
     this.base = base
@@ -34,7 +36,8 @@ export class Replace extends Exp {
     return new Replace(
       subst(this.target, name, exp),
       subst(this.motive, name, exp),
-      subst(this.base, name, exp)
+      subst(this.base, name, exp),
+      this.meta
     )
   }
 

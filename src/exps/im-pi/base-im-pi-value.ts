@@ -8,7 +8,7 @@ import { infer } from "../../exp"
 import { check } from "../../exp"
 import { Value, expect } from "../../value"
 import { Closure } from "../closure"
-import { Trace } from "../../errors"
+import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
 import { ImApInsertionEntry } from "./im-ap-insertion"
 
@@ -45,7 +45,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
     const fn_core = check(ctx.extend(fresh_name, this.arg_t), fn, ret_t)
 
     if (!(fn_core instanceof Exps.FnCore)) {
-      throw new Trace(
+      throw new ExpTrace(
         [
           `BaseImPiValue.insert_im_fn expecting the result of elab to be Exps.FnCore`,
           `  class name: ${fn_core.constructor.name}`,
@@ -100,7 +100,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
 
     const im_arg = solution.find(fresh_name)
     if (im_arg === undefined) {
-      throw new Trace(
+      throw new ExpTrace(
         [
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,

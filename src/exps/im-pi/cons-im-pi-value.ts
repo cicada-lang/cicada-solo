@@ -5,7 +5,7 @@ import { Solution } from "../../solution"
 import { check } from "../../exp"
 import { Value } from "../../value"
 import { Closure } from "../closure"
-import { Trace } from "../../errors"
+import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
 import { ImApInsertionEntry } from "./im-ap-insertion"
 
@@ -40,7 +40,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
     const fn_core = check(ctx.extend(fresh_name, this.arg_t), fn, ret_t)
 
     if (!(fn_core instanceof Exps.FnCore || fn_core instanceof Exps.ImFnCore)) {
-      throw new Trace(
+      throw new ExpTrace(
         [
           `ConsImPiValue.insert_im_fn expecting the result of elab to be Exps.FnCore or Exps.ImFnCore`,
           `  class name: ${fn_core.constructor.name}`,
@@ -58,7 +58,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
     const ret_t = this.ret_t_cl.apply(not_yet_value)
 
     if (!(ret_t instanceof Exps.ImPiValue)) {
-      throw new Trace(
+      throw new ExpTrace(
         [
           `I expect ret_t to be Exps.ImPiValue,`,
           `  class name: ${ret_t.constructor.name}`,
@@ -81,7 +81,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
     const solution = this.solve_im_ap(ctx, arg)
     const im_arg = solution.find(fresh_name)
     if (im_arg === undefined) {
-      throw new Trace(
+      throw new ExpTrace(
         [
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
@@ -96,7 +96,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
     const ret_t = this.ret_t_cl.apply(im_arg)
 
     if (!(ret_t instanceof Exps.ImPiValue)) {
-      throw new Trace(
+      throw new ExpTrace(
         [
           `I expect ret_t to be Exps.ImPiValue,`,
           `  class name: ${ret_t.constructor.name}`,

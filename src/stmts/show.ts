@@ -1,4 +1,4 @@
-import { Stmt } from "../stmt"
+import { Stmt, StmtMeta } from "../stmt"
 import { Module } from "../module"
 import { Exp } from "../exp"
 import { infer } from "../exp"
@@ -8,10 +8,12 @@ import * as Exps from "../exps"
 import * as StmtOutputs from "../stmt-outputs"
 
 export class Show extends Stmt {
+  meta: StmtMeta
   exp: Exp
 
-  constructor(exp: Exp) {
+  constructor(exp: Exp, meta: StmtMeta) {
     super()
+    this.meta = meta
     this.exp = exp
   }
 

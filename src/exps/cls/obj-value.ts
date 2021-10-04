@@ -2,7 +2,7 @@ import { Ctx } from "../../ctx"
 import { Core } from "../../core"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
-import { Trace } from "../../errors"
+import { ExpTrace } from "../../errors"
 import * as ut from "../../ut"
 
 export class ObjValue extends Value {
@@ -21,7 +21,7 @@ export class ObjValue extends Value {
   dot_value(name: string): Value {
     const value = this.properties.get(name)
     if (value === undefined) {
-      throw new Trace(`The property name: ${name} of object is undefined.`)
+      throw new ExpTrace(`The property name: ${name} of object is undefined.`)
     }
 
     return value
