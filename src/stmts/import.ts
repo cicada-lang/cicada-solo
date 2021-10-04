@@ -3,7 +3,6 @@ import { Module } from "../module"
 import { Trace } from "../errors"
 import Path from "path"
 
-
 export type ImportEntry = {
   name: string
   alias?: string
@@ -14,11 +13,7 @@ export class Import extends Stmt {
   entries: Array<ImportEntry>
   meta: StmtMeta
 
-  constructor(
-    path: string,
-    entries: Array<ImportEntry>,
-    meta: StmtMeta
-  ) {
+  constructor(path: string, entries: Array<ImportEntry>, meta: StmtMeta) {
     super()
     this.path = path
     this.entries = entries

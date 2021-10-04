@@ -7,7 +7,6 @@ import { readback } from "../value"
 import * as Exps from "../exps"
 import * as StmtOutputs from "../stmt-outputs"
 
-
 export class Show extends Stmt {
   exp: Exp
   meta: StmtMeta

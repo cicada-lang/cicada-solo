@@ -5,7 +5,6 @@ import { infer } from "../exp"
 import { evaluate } from "../core"
 import { Trace } from "../errors"
 
-
 export class Def extends Stmt {
   name: string
   exp: Exp
