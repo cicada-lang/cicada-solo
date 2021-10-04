@@ -8,10 +8,12 @@ import * as ut from "../../ut"
 import * as Exps from "../../exps"
 
 export class Obj extends Exp {
+  meta?: ExpMeta
   properties: Array<Prop>
 
-  constructor(properties: Array<Prop>) {
+  constructor(properties: Array<Prop>, meta?: ExpMeta) {
     super()
+    this.meta = meta
     this.properties = properties
   }
 
@@ -25,7 +27,8 @@ export class Obj extends Exp {
 
   subst(name: string, exp: Exp): Exp {
     return new Obj(
-      this.properties.map((property) => property.solution(name, exp))
+      this.properties.map((property) => property.solution(name, exp)),
+      this.meta
     )
   }
 

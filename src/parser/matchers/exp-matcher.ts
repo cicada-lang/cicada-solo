@@ -274,9 +274,10 @@ export function operand_matcher(tree: pt.Tree): Exp {
             new Exps.NilCls()
           )
       ),
-    "operand:obj": ({ properties }) =>
+    "operand:obj": ({ properties }, { span }) =>
       new Exps.Obj(
-        pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
+        pt.matchers.zero_or_more_matcher(properties).map(property_matcher),
+        { span }
       ),
     "operand:nat": (_, { span }) => new Exps.Nat({ span }),
     "operand:zero": (_, { span }) => new Exps.Zero({ span }),

@@ -2,9 +2,10 @@
 
 - exps/cls/nil-cls -- with `span`
 - exps/cls/fulfilled-cls -- with `span`
-- exps/cls/obj -- with `span`
-- exps/cls/cls -- with `span`
 - exps/cls/cons-cls -- with `span`
+
+- exps/cls/cls -- with `span`
+
 - exps/cls/ext -- with `span`
 
 - exps/let -- with `span`
