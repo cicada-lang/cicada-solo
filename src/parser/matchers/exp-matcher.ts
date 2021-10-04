@@ -300,8 +300,10 @@ export function operand_matcher(tree: pt.Tree): Exp {
           (vector, exp) => new Exps.Vec(exp, vector, { span }),
           new Exps.Vecnil({ span })
         ),
-    "operand:equal": ({ t, from, to }) =>
-      new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
+    "operand:equal": ({ t, from, to }, { span }) =>
+      new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to), {
+        span,
+      }),
     "operand:refl": (_, { span }) => new Exps.Refl({ span }),
     "operand:same": ({ exp }, { span }) =>
       new Exps.Same(exp_matcher(exp), { span }),

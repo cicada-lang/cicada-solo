@@ -8,12 +8,14 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class Equal extends Exp {
+  meta: ExpMeta
   t: Exp
   from: Exp
   to: Exp
 
-  constructor(t: Exp, from: Exp, to: Exp) {
+  constructor(t: Exp, from: Exp, to: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.t = t
     this.from = from
     this.to = to
@@ -31,7 +33,8 @@ export class Equal extends Exp {
     return new Equal(
       subst(this.t, name, exp),
       subst(this.from, name, exp),
-      subst(this.to, name, exp)
+      subst(this.to, name, exp),
+      this.meta
     )
   }
 
