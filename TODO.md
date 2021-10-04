@@ -1,6 +1,5 @@
 # error report
 
-- exps/pi/ap -- with `span`
 - exps/pi/fn -- with `span`
 - exps/pi/pi -- with `span`
 

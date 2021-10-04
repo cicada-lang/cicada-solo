@@ -11,11 +11,13 @@ import * as Exps from "../../exps"
 import { ImApInsertion } from "../im-pi/im-ap-insertion"
 
 export class Ap extends Exp {
+  meta: ExpMeta
   target: Exp
   arg: Exp
 
-  constructor(target: Exp, arg: Exp) {
+  constructor(target: Exp, arg: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.target = target
     this.arg = arg
   }
@@ -28,7 +30,11 @@ export class Ap extends Exp {
   }
 
   subst(name: string, exp: Exp): Ap {
-    return new Ap(subst(this.target, name, exp), subst(this.arg, name, exp))
+    return new Ap(
+      subst(this.target, name, exp),
+      subst(this.arg, name, exp),
+      this.meta
+    )
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

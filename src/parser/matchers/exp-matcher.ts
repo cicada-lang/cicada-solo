@@ -119,12 +119,12 @@ export function exp_matcher(tree: pt.Tree): Exp {
 export function operator_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "operator:var": ({ name }) => new Exps.Var(pt.str(name)),
-    "operator:ap": ({ target, args }) =>
+    "operator:ap": ({ target, args }, { span }) =>
       pt.matchers
         .one_or_more_matcher(args)
         .flatMap((args) => args_matcher(args))
         .reduce(
-          (result, arg) => new Exps.Ap(result, arg),
+          (result, arg) => new Exps.Ap(result, arg, { span }),
           operator_matcher(target)
         ),
     "operator:fn": fn_handler,
@@ -134,12 +134,12 @@ export function operator_matcher(tree: pt.Tree): Exp {
       new Exps.Cdr(exp_matcher(target), { span }),
     "operator:dot_field": ({ target, name }) =>
       new Exps.Dot(operator_matcher(target), pt.str(name)),
-    "operator:dot_method": ({ target, name, args }) =>
+    "operator:dot_method": ({ target, name, args }, { span }) =>
       pt.matchers
         .one_or_more_matcher(args)
         .flatMap((arg) => exps_matcher(arg))
         .reduce(
-          (result, exp) => new Exps.Ap(result, exp),
+          (result, exp) => new Exps.Ap(result, exp, { span }),
           new Exps.Dot(operator_matcher(target), pt.str(name))
         ),
     "operator:nat_ind": ({ target, motive, base, step }, { span }) =>
