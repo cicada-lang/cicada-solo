@@ -9,12 +9,14 @@ import * as Exps from "../exps"
 import * as ut from "../ut"
 
 export class Let extends Exp {
+  meta: ExpMeta
   name: string
   exp: Exp
   ret: Exp
 
-  constructor(name: string, exp: Exp, ret: Exp) {
+  constructor(name: string, exp: Exp, ret: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.name = name
     this.exp = exp
     this.ret = ret
@@ -29,7 +31,7 @@ export class Let extends Exp {
 
   subst(name: string, exp: Exp): Let {
     if (name === this.name) {
-      return new Let(this.name, subst(this.exp, name, exp), this.ret)
+      return new Let(this.name, subst(this.exp, name, exp), this.ret, this.meta)
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen(free_names, this.name)
@@ -37,7 +39,8 @@ export class Let extends Exp {
       return new Let(
         fresh_name,
         subst(this.exp, name, exp),
-        subst(subst(this.ret, this.name, new Exps.Var(fresh_name)), name, exp)
+        subst(subst(this.ret, this.name, new Exps.Var(fresh_name)), name, exp),
+        this.meta
       )
     }
   }

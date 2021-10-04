@@ -1,7 +1,5 @@
 # error report
 
-- exps/let -- with `span`
-
 - exps/var -- with `span`
 
 - `Trace` use `meta.span` when `exp` has `meta`
