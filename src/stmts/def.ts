@@ -1,17 +1,17 @@
-import { Stmt } from "../stmt"
+import { Stmt, StmtMeta } from "../stmt"
 import { Module } from "../module"
 import { Exp } from "../exp"
 import { infer } from "../exp"
 import { evaluate } from "../core"
 import { Trace } from "../errors"
-import pt from "@cicada-lang/partech"
+
 
 export class Def extends Stmt {
   name: string
   exp: Exp
-  meta: { span: pt.Span }
+  meta: StmtMeta
 
-  constructor(name: string, exp: Exp, meta: { span: pt.Span }) {
+  constructor(name: string, exp: Exp, meta: StmtMeta) {
     super()
     this.name = name
     this.exp = exp

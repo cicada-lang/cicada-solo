@@ -1,8 +1,8 @@
-import { Stmt } from "../stmt"
+import { Stmt, StmtMeta } from "../stmt"
 import { Module } from "../module"
 import { Trace } from "../errors"
 import Path from "path"
-import pt from "@cicada-lang/partech"
+
 
 export type ImportEntry = {
   name: string
@@ -12,12 +12,12 @@ export type ImportEntry = {
 export class Import extends Stmt {
   path: string
   entries: Array<ImportEntry>
-  meta: { span: pt.Span }
+  meta: StmtMeta
 
   constructor(
     path: string,
     entries: Array<ImportEntry>,
-    meta: { span: pt.Span }
+    meta: StmtMeta
   ) {
     super()
     this.path = path

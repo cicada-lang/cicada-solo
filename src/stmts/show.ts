@@ -1,4 +1,4 @@
-import { Stmt } from "../stmt"
+import { Stmt, StmtMeta } from "../stmt"
 import { Module } from "../module"
 import { Exp } from "../exp"
 import { infer } from "../exp"
@@ -6,13 +6,13 @@ import { evaluate } from "../core"
 import { readback } from "../value"
 import * as Exps from "../exps"
 import * as StmtOutputs from "../stmt-outputs"
-import pt from "@cicada-lang/partech"
+
 
 export class Show extends Stmt {
   exp: Exp
-  meta: { span: pt.Span }
+  meta: StmtMeta
 
-  constructor(exp: Exp, meta: { span: pt.Span }) {
+  constructor(exp: Exp, meta: StmtMeta) {
     super()
     this.exp = exp
     this.meta = meta

@@ -1,16 +1,16 @@
-import { Stmt } from "../stmt"
+import { Stmt, StmtMeta } from "../stmt"
 import { Module } from "../module"
 import { infer } from "../exp"
 import { evaluate } from "../core"
 import * as Exps from "../exps"
-import pt from "@cicada-lang/partech"
+
 
 export class Class extends Stmt {
   name: string
   cls: Exps.Cls
-  meta: { span: pt.Span }
+  meta: StmtMeta
 
-  constructor(name: string, cls: Exps.Cls, meta: { span: pt.Span }) {
+  constructor(name: string, cls: Exps.Cls, meta: StmtMeta) {
     super()
     this.name = name
     this.cls = cls
