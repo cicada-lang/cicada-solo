@@ -255,7 +255,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
         pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
       ),
     "operand:nat": (_, { span }) => new Exps.Nat({ span }),
-    "operand:zero": () => new Exps.Zero(),
+    "operand:zero": (_, { span }) => new Exps.Zero({ span }),
     "operand:add1": ({ prev }) => new Exps.Add1(exp_matcher(prev)),
     "operand:number": ({ value }, { span }) => {
       const n = Number.parseInt(pt.str(value))
@@ -265,7 +265,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
           { span }
         )
       } else {
-        return nat_from_number(n)
+        return nat_from_number(n, { span })
       }
     },
     "operand:list": ({ elem_t }) => new Exps.List(exp_matcher(elem_t)),
