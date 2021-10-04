@@ -7,10 +7,10 @@ import { QuoteCore } from "./str/quote-core"
 import pt from "@cicada-lang/partech"
 
 export class Todo extends Exp {
-  meta: { span: pt.Span }
+  meta?: { span?: pt.Span }
   message: string
 
-  constructor(message: string, meta: { span: pt.Span }) {
+  constructor(message: string, meta?: { span?: pt.Span }) {
     super()
     this.message = message
     this.meta = meta

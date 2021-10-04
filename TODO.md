@@ -1,5 +1,7 @@
 # error report
 
+- replace `{ meta: span: pt.Span }` by `ExpMeta`
+
 - exps/var -- with `span`
 - exps/let -- with `span`
 
