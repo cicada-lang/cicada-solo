@@ -1,4 +1,4 @@
-- [optimization] use native `number` as `Nat`
+- [optimization] use native `BigInt` as `Nat`
 
 # narrator of elaboration
 

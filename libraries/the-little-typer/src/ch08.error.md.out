@@ -6,10 +6,10 @@ from left hand side:
 to right hand side:
   (_) => { nat_ind(_, (target_nat) => { Nat }, 1, (prev, almost) => { add1(almost) }) }
 
-[33mch08.error.md:[39m
+ch08.error.md:
  16 |incr(3)
  17 |
  18 |// NOTE `add(1)` is not equal to `incr` by reflection, we need to prove it.
- 19 |the(Equal((Nat) -> Nat, add(1), incr), [41mr[49m[41me[49m[41mf[49m[41ml[49m)
+ 19 |the(Equal((Nat) -> Nat, add(1), incr), refl)
  20 |```
  21 |
