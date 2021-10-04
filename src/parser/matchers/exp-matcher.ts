@@ -286,8 +286,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
           (list, exp) => new Exps.Li(exp, list, { span }),
           new Exps.Nil({ span })
         ),
-    "operand:vector": ({ elem_t, length }) =>
-      new Exps.Vector(exp_matcher(elem_t), exp_matcher(length)),
+    "operand:vector": ({ elem_t, length }, { span }) =>
+      new Exps.Vector(exp_matcher(elem_t), exp_matcher(length), { span }),
     "operand:vecnil": () => new Exps.Vecnil(),
     "operand:vec": ({ head, tail }) =>
       new Exps.Vec(exp_matcher(head), exp_matcher(tail)),
