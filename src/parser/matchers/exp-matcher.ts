@@ -288,13 +288,16 @@ export function operand_matcher(tree: pt.Tree): Exp {
         ),
     "operand:vector": ({ elem_t, length }, { span }) =>
       new Exps.Vector(exp_matcher(elem_t), exp_matcher(length), { span }),
-    "operand:vecnil": () => new Exps.Vecnil(),
+    "operand:vecnil": (_, { span }) => new Exps.Vecnil({ span }),
     "operand:vec": ({ head, tail }) =>
       new Exps.Vec(exp_matcher(head), exp_matcher(tail)),
-    "operand:vec_sugar": ({ exps }) =>
+    "operand:vec_sugar": ({ exps }, { span }) =>
       exps_matcher(exps)
         .reverse()
-        .reduce((vector, exp) => new Exps.Vec(exp, vector), new Exps.Vecnil()),
+        .reduce(
+          (vector, exp) => new Exps.Vec(exp, vector),
+          new Exps.Vecnil({ span })
+        ),
     "operand:equal": ({ t, from, to }) =>
       new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to)),
     "operand:refl": () => new Exps.Refl(),
