@@ -1,4 +1,4 @@
-import { Exp, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import * as Exps from "../../exps"
 
