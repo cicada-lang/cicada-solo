@@ -254,7 +254,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
       new Exps.Obj(
         pt.matchers.zero_or_more_matcher(properties).map(property_matcher)
       ),
-    "operand:nat": () => new Exps.Nat(),
+    "operand:nat": (_, { span }) => new Exps.Nat({ span }),
     "operand:zero": () => new Exps.Zero(),
     "operand:add1": ({ prev }) => new Exps.Add1(exp_matcher(prev)),
     "operand:number": ({ value }, { span }) => {

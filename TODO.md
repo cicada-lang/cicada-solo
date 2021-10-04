@@ -1,5 +1,30 @@
 # error report
 
+- exps/nat/nat-ind -- with `span`
+- exps/nat/zero -- with `span`
+- exps/nat/add1 -- with `span`
+- exps/nat/nat-rec -- with `span`
+
+- exps/list/list-rec -- with `span`
+- exps/list/li -- with `span`
+- exps/list/list-ind -- with `span`
+- exps/list/list -- with `span`
+- exps/list/nil -- with `span`
+
+- exps/equal/refl -- with `span`
+- exps/equal/the-same -- with `span`
+- exps/equal/same -- with `span`
+- exps/equal/replace -- with `span`
+- exps/equal/same-as-chart -- with `span`
+- exps/equal/equal -- with `span`
+
+- exps/vector/vector-head -- with `span`
+- exps/vector/vector-ind -- with `span`
+- exps/vector/vector -- with `span`
+- exps/vector/vecnil -- with `span`
+- exps/vector/vec -- with `span`
+- exps/vector/vector-tail -- with `span`
+
 - exps/let -- with `span`
 
 - exps/var -- with `span`
@@ -28,35 +53,9 @@
 - exps/sigma/cdr -- with `span`
 - exps/sigma/sigma -- with `span`
 
-- exps/list/list-rec -- with `span`
-- exps/list/li -- with `span`
-- exps/list/list-ind -- with `span`
-- exps/list/list -- with `span`
-- exps/list/nil -- with `span`
-
 - exps/pi/ap -- with `span`
 - exps/pi/fn -- with `span`
 - exps/pi/pi -- with `span`
-
-- exps/equal/refl -- with `span`
-- exps/equal/the-same -- with `span`
-- exps/equal/same -- with `span`
-- exps/equal/replace -- with `span`
-- exps/equal/same-as-chart -- with `span`
-- exps/equal/equal -- with `span`
-
-- exps/vector/vector-head -- with `span`
-- exps/vector/vector-ind -- with `span`
-- exps/vector/vector -- with `span`
-- exps/vector/vecnil -- with `span`
-- exps/vector/vec -- with `span`
-- exps/vector/vector-tail -- with `span`
-
-- exps/nat/nat -- with `span`
-- exps/nat/nat-ind -- with `span`
-- exps/nat/zero -- with `span`
-- exps/nat/add1 -- with `span`
-- exps/nat/nat-rec -- with `span`
 
 - exps/im-pi/im-pi -- with `span`
 - exps/im-pi/im-fn -- with `span`
