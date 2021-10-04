@@ -12,12 +12,14 @@ import * as Exps from "../../exps"
 import { nanoid } from "nanoid"
 
 export class NatRec extends Exp {
+  meta: ExpMeta
   target: Exp
   base: Exp
   step: Exp
 
-  constructor(target: Exp, base: Exp, step: Exp) {
+  constructor(target: Exp, base: Exp, step: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.target = target
     this.base = base
     this.step = step
@@ -35,7 +37,8 @@ export class NatRec extends Exp {
     return new NatRec(
       subst(this.target, name, exp),
       subst(this.base, name, exp),
-      subst(this.step, name, exp)
+      subst(this.step, name, exp),
+      this.meta
     )
   }
 
