@@ -225,7 +225,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:sigma": sigma_handler,
     "operand:cons": ({ car, cdr }, { span }) =>
       new Exps.Cons(exp_matcher(car), exp_matcher(cdr), { span }),
-    "operand:cls": ({ entries }) =>
+    "operand:cls": ({ entries }, { span }) =>
       pt.matchers
         .zero_or_more_matcher(entries)
         .map(cls_entry_matcher)
@@ -248,7 +248,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
                   rest_t,
                   { span: entry.span }
                 ),
-          new Exps.NilCls()
+          new Exps.NilCls({ span })
         ),
     "operand:ext": ({ parent, entries }, { span }) =>
       new Exps.Ext(
@@ -275,7 +275,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
                     rest_t,
                     { span: entry.span }
                   ),
-            new Exps.NilCls()
+            new Exps.NilCls({ span })
           ),
         { span }
       ),

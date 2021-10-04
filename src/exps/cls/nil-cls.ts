@@ -6,7 +6,13 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class NilCls extends Exps.Cls {
+  meta: ExpMeta
   field_names: Array<string> = []
+
+  constructor(meta: ExpMeta) {
+    super()
+    this.meta = meta
+  }
 
   free_names(bound_names: Set<string>): Set<string> {
     return new Set()
