@@ -10,11 +10,13 @@ import { check_conversion } from "../../value"
 import * as Exps from ".."
 
 export class TheSame extends Exp {
+  meta: ExpMeta
   t: Exp
   exp: Exp
 
-  constructor(t: Exp, exp: Exp) {
+  constructor(t: Exp, exp: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.t = t
     this.exp = exp
   }
@@ -27,7 +29,11 @@ export class TheSame extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new TheSame(subst(this.t, name, exp), subst(this.exp, name, exp))
+    return new TheSame(
+      subst(this.t, name, exp),
+      subst(this.exp, name, exp),
+      this.meta
+    )
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
