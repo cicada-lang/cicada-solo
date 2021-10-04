@@ -1,5 +1,13 @@
 # error report
 
+- exps/sigma/cons -- with `span`
+- exps/sigma/cdr -- with `span`
+- exps/sigma/sigma -- with `span`
+
+- exps/pi/ap -- with `span`
+- exps/pi/fn -- with `span`
+- exps/pi/pi -- with `span`
+
 - exps/let -- with `span`
 
 - exps/var -- with `span`
@@ -22,15 +30,6 @@
 - exps/cls/cls -- with `span`
 - exps/cls/cons-cls -- with `span`
 - exps/cls/ext -- with `span`
-
-- exps/sigma/car -- with `span`
-- exps/sigma/cons -- with `span`
-- exps/sigma/cdr -- with `span`
-- exps/sigma/sigma -- with `span`
-
-- exps/pi/ap -- with `span`
-- exps/pi/fn -- with `span`
-- exps/pi/pi -- with `span`
 
 - `parser/matchers` fix not catched parsing error -- for repl
 

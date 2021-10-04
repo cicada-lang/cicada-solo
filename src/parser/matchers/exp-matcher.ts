@@ -122,7 +122,8 @@ export function operator_matcher(tree: pt.Tree): Exp {
           operator_matcher(target)
         ),
     "operator:fn": fn_handler,
-    "operator:car": ({ target }) => new Exps.Car(exp_matcher(target)),
+    "operator:car": ({ target }, { span }) =>
+      new Exps.Car(exp_matcher(target), { span }),
     "operator:cdr": ({ target }) => new Exps.Cdr(exp_matcher(target)),
     "operator:dot_field": ({ target, name }) =>
       new Exps.Dot(operator_matcher(target), pt.str(name)),

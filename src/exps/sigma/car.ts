@@ -8,10 +8,12 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class Car extends Exp {
+  meta: ExpMeta
   target: Exp
 
-  constructor(target: Exp) {
+  constructor(target: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.target = target
   }
 
@@ -20,7 +22,7 @@ export class Car extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Car(subst(this.target, name, exp))
+    return new Car(subst(this.target, name, exp), this.meta)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
