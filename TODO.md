@@ -3,7 +3,6 @@
 - exps/list/list-rec -- with `span`
 - exps/list/li -- with `span`
 - exps/list/list-ind -- with `span`
-- exps/list/nil -- with `span`
 
 - exps/vector/vector-head -- with `span`
 - exps/vector/vector-ind -- with `span`

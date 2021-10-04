@@ -7,6 +7,13 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class Nil extends Exp {
+  meta: ExpMeta
+
+  constructor(meta: ExpMeta) {
+    super()
+    this.meta = meta
+  }
+
   free_names(bound_names: Set<string>): Set<string> {
     return new Set()
   }
