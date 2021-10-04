@@ -1,12 +1,12 @@
 # error report
 
-- exps/var -- with `span`
-- exps/let -- with `span`
-
-- exps/str/quote -- with `span`
 - exps/str/str -- with `span`
 
+- exps/let -- with `span`
+
 - exps/the -- with `span`
+
+- exps/var -- with `span`
 
 - exps/trivial/sole -- with `span`
 - exps/trivial/trivial -- with `span`

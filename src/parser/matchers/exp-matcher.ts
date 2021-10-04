@@ -294,8 +294,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:sole": () => new Exps.Sole(),
     "operand:absurd": () => new Exps.Absurd(),
     "operand:str": () => new Exps.Str(),
-    "operand:quote": ({ value }) =>
-      new Exps.Quote(pt.trim_boundary(pt.str(value), 1)),
+    "operand:quote": ({ value }, { span }) =>
+      new Exps.Quote(pt.trim_boundary(pt.str(value), 1), { span }),
     "operand:todo": ({ value }, { span }) =>
       new Exps.Todo(pt.trim_boundary(pt.str(value), 1), { span }),
     "operand:either": ({ left_t, right_t }) =>
