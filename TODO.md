@@ -1,5 +1,3 @@
-- [optimization] use native `BigInt` as `Nat`
-
 # narrator of elaboration
 
 - inject `Narrator` to `check` and `infer`
@@ -103,3 +101,7 @@
 # error report
 
 - [problem] `exps/var` -- how to handle `span` when doing a `subst`?
+
+# optimization
+
+- [optimization] use native `BigInt` as `Nat`
