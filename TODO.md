@@ -1,5 +1,7 @@
 # error report
 
+- exps/im-pi/im-fn -- with `span`
+
 - exps/let -- with `span`
 
 - exps/var -- with `span`
@@ -31,9 +33,6 @@
 - exps/pi/ap -- with `span`
 - exps/pi/fn -- with `span`
 - exps/pi/pi -- with `span`
-
-- exps/im-pi/im-pi -- with `span`
-- exps/im-pi/im-fn -- with `span`
 
 - `parser/matchers` fix not catched parsing error -- for repl
 

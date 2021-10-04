@@ -29,12 +29,15 @@ export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
             .reverse()
             .reduce<Exps.ImPi>(
               (result, entry) =>
-                new Exps.ImPi(entry.name, entry.name, entry.exp, result),
+                new Exps.ImPi(entry.name, entry.name, entry.exp, result, {
+                  span: binding.span,
+                }),
               new Exps.ImPi(
                 binding.last_entry.name,
                 binding.last_entry.name,
                 binding.last_entry.exp,
-                result
+                result,
+                { span: binding.span }
               )
             )
         }
@@ -464,11 +467,12 @@ export function cls_entry_matcher(tree: pt.Tree): {
 }
 
 type Binding =
-  | { kind: "named"; name: string; exp: Exp }
+  | { kind: "named"; name: string; exp: Exp; span: pt.Span }
   | {
       kind: "implicit"
       entries: Array<{ name: string; exp: Exp }>
       last_entry: { name: string; exp: Exp }
+      span: pt.Span
     }
 
 export function bindings_matcher(tree: pt.Tree): Array<Binding> {
@@ -482,22 +486,25 @@ export function bindings_matcher(tree: pt.Tree): Array<Binding> {
 
 export function binding_matcher(tree: pt.Tree): Binding {
   return pt.matcher<Binding>({
-    "binding:nameless": ({ exp }) => ({
+    "binding:nameless": ({ exp }, { span }) => ({
       kind: "named",
       name: "_",
       exp: exp_matcher(exp),
+      span,
     }),
-    "binding:named": ({ name, exp }) => ({
+    "binding:named": ({ name, exp }, { span }) => ({
       kind: "named",
       name: pt.str(name),
       exp: exp_matcher(exp),
+      span,
     }),
-    "binding:implicit": ({ entries, last_entry }) => ({
+    "binding:implicit": ({ entries, last_entry }, { span }) => ({
       kind: "implicit",
       entries: pt.matchers
         .zero_or_more_matcher(entries)
         .map(binding_implicit_entry_matcher),
       last_entry: binding_implicit_entry_matcher(last_entry),
+      span,
     }),
   })(tree)
 }
