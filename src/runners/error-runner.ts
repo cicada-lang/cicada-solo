@@ -7,12 +7,10 @@ export class ErrorRunner extends Runner {
   static extensions = [".error.cic", ".error.md"]
 
   library: Library
-  files: FileStore
 
   constructor(opts: { library: Library }) {
     super()
     this.library = opts.library
-    this.files = opts.library.files
   }
 
   async run(path: string): Promise<{ error?: unknown }> {
@@ -23,9 +21,9 @@ export class ErrorRunner extends Runner {
     } catch (error) {
       const report = await this.library.reporter.error(error, {
         path,
-        text: await this.files.getOrFail(path),
+        text: await this.library.files.getOrFail(path),
       })
-      const file = this.files.resolve(path + ".out")
+      const file = this.library.files.resolve(path + ".out")
       await fs.promises.writeFile(file, report)
       return { error: undefined }
     }
