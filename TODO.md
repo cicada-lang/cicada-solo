@@ -1,6 +1,5 @@
 # error report
 
-- exps/vector/vector-head -- with `span`
 - exps/vector/vector-ind -- with `span`
 - exps/vector/vec -- with `span`
 - exps/vector/vector-tail -- with `span`
