@@ -9,10 +9,12 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class Cdr extends Exp {
+  meta: ExpMeta
   target: Exp
 
-  constructor(target: Exp) {
+  constructor(target: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.target = target
   }
 
@@ -21,7 +23,7 @@ export class Cdr extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Cdr(subst(this.target, name, exp))
+    return new Cdr(subst(this.target, name, exp), this.meta)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

@@ -1,7 +1,6 @@
 # error report
 
 - exps/sigma/cons -- with `span`
-- exps/sigma/cdr -- with `span`
 - exps/sigma/sigma -- with `span`
 
 - exps/pi/ap -- with `span`
