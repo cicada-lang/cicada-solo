@@ -10,6 +10,7 @@ import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class FulfilledCls extends Exps.Cls {
+  meta: ExpMeta
   field_names: Array<string>
   field_name: string
   local_name: string
@@ -22,9 +23,11 @@ export class FulfilledCls extends Exps.Cls {
     local_name: string,
     field_t: Exp,
     field: Exp,
-    rest_t: Exps.Cls
+    rest_t: Exps.Cls,
+    meta: ExpMeta
   ) {
     super()
+    this.meta = meta
     this.field_name = field_name
     this.local_name = local_name
     this.field_t = field_t
@@ -61,7 +64,8 @@ export class FulfilledCls extends Exps.Cls {
         this.local_name,
         subst(this.field_t, name, exp),
         subst(this.field, name, exp),
-        this.rest_t
+        this.rest_t,
+        this.meta
       )
     } else {
       const free_names = exp.free_names(new Set())
@@ -76,7 +80,8 @@ export class FulfilledCls extends Exps.Cls {
           subst(this.rest_t, this.local_name, new Exps.Var(fresh_name)),
           name,
           exp
-        ) as Exps.Cls
+        ) as Exps.Cls,
+        this.meta
       )
     }
   }

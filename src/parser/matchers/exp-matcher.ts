@@ -238,7 +238,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
                   entry.field_name,
                   entry.field_t,
                   entry.field,
-                  rest_t
+                  rest_t,
+                  { span: entry.span }
                 )
               : new Exps.ConsCls(
                   entry.field_name,
@@ -264,7 +265,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
                     entry.field_name,
                     entry.field_t,
                     entry.field,
-                    rest_t
+                    rest_t,
+                    { span: entry.span }
                   )
                 : new Exps.ConsCls(
                     entry.field_name,
