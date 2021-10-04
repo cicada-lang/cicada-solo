@@ -4,13 +4,16 @@ import { Value } from "../value"
 import { Core } from "../core"
 import { TodoCore } from "./todo-core"
 import { QuoteCore } from "./str/quote-core"
+import pt from "@cicada-lang/partech"
 
 export class Todo extends Exp {
+  meta: { span: pt.Span }
   message: string
 
-  constructor(message: string) {
+  constructor(message: string, meta: { span: pt.Span }) {
     super()
     this.message = message
+    this.meta = meta
   }
 
   free_names(bound_names: Set<string>): Set<string> {

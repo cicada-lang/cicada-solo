@@ -1,6 +1,5 @@
 # error report
 
-- exps/todo -- with `span`
 - exps/var -- with `span`
 - exps/let -- with `span`
 
