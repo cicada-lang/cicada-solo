@@ -176,4 +176,7 @@
   - `libraries.cicada-lang.com`
   - `registry.cicada-lang.com`
 
-- [library manager] library can be used as a module
+- [library manager] be able to resolve module in library of `dependencies`
+
+  - we do not need to use library as module,
+    we only need to be able to resolve module.
