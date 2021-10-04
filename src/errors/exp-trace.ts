@@ -15,40 +15,31 @@ export class ExpTrace extends Error {
     return this
   }
 
-  report(opts: { text?: string }): string {
-    const { text } = opts
+  report(opts: { path?: string; text: string }): string {
+    const { path, text } = opts
 
-    if (text === undefined) {
-      let s = ""
-      s += this.message
+    let s = ""
+
+    s += this.message
+    s += "\n"
+
+    if (this.previous.length > 0) {
       s += "\n"
 
-      if (this.previous.length > 0) {
-        s += "\n"
-        s += "previous expressions:\n"
-        for (const exp of this.previous) {
-          s += `- ${exp.repr()}\n`
-        }
-      }
-
-      return s
-    } else {
-      let s = ""
-      s += this.message
-      s += "\n"
-
-      if (this.previous.length > 0) {
-        s += "\n"
-
-        for (const exp of this.previous) {
-          if (exp.meta?.span) {
-            s += pt.report(exp.meta?.span, text)
-            break
+      for (const exp of this.previous) {
+        if (exp.meta?.span) {
+          if (path) {
+            s += path
+            s += "\n"
           }
+
+          s += pt.report(exp.meta?.span, text)
+
+          break
         }
       }
-
-      return s
     }
+
+    return s
   }
 }

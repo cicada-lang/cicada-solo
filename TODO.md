@@ -1,4 +1,4 @@
-- [error report] `ExpTrace` report might take optional `path`
+- `CommonCommandRunner` rename `default` to `defaultCommand`
 - [error report] `ExpTrace` improve format
 - [error report] `parser/matchers` fix not catched parsing error -- for REPL
 - [optimization] use native `number` as `Nat`

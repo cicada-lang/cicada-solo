@@ -6,7 +6,7 @@ export function findUp(
   opts?: { from?: string }
 ): string | undefined {
   const dir = opts?.from || process.cwd()
-  return findUpFromDir(file, dir)
+  return findUpFromDir(file, Path.resolve(dir))
 }
 
 const ROOT = Path.resolve("/")

@@ -6,7 +6,7 @@ export class ErrorReporter {
     const { path, text } = opts
 
     if (error instanceof Errors.ExpTrace) {
-      return error.report({ text })
+      return error.report({ path, text })
     } else if (error instanceof pt.ParsingError) {
       return [
         path

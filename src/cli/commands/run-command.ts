@@ -25,9 +25,9 @@ export class RunCommand extends Command<Args> {
 
   async execute(argv: Args): Promise<void> {
     Command.assertFile(argv["file"])
-    const path = Path.resolve(argv["file"])
-    const library = await app.libraries.findUpOrFake(Path.dirname(path))
+    const library = await app.libraries.findUpOrFake(Path.dirname(argv["file"]))
     const runner = new Runners.DefaultRunner({ library })
+    const path = Path.basename(argv["file"])
     const { error } = await runner.run(path)
     if (error) {
       process.exit(1)

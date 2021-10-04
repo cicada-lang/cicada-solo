@@ -10,11 +10,9 @@ export function createSpecialRunner(opts: {
 
   if (ErrorRunner.extensions.some((e) => path.endsWith(e))) {
     return new ErrorRunner(opts)
-  }
-
-  if (SnapshotRunner.extensions.some((e) => path.endsWith(e))) {
+  } else if (SnapshotRunner.extensions.some((e) => path.endsWith(e))) {
     return new SnapshotRunner(opts)
+  } else {
+    throw new Error(`I can not handle file extension: ${path}`)
   }
-
-  throw new Error(`I can not handle file extension: ${path}`)
 }
