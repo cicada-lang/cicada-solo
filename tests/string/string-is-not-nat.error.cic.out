@@ -3,6 +3,5 @@ I infer the type to be:
 But the expected type is:
   Nat
 
-previous:
-- "ratatouille"
-- the(Nat, "ratatouille")
+ 1 |the(Nat, "ratatouille")
+ 2 |

@@ -2,5 +2,5 @@ I see unexpected value class: ZeroValue,
 but the asserted class is: Add1Value.
 
 
-previous:
-- vector_tail(the(Vector(String, 0), vecnil))
+ 1 |vector_tail(the(Vector(String, 0), vecnil))
+ 2 |

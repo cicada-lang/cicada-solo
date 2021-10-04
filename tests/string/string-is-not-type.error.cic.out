@@ -3,6 +3,5 @@ I infer the type to be:
 But the expected type is:
   Type
 
-previous:
-- "courgette"
-- the(Type, "courgette")
+ 1 |the(Type, "courgette")
+ 2 |

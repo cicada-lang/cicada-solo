@@ -3,6 +3,5 @@ I infer the type to be:
 But the expected type is:
   Type
 
-previous:
-- "oil"
-- (_: "oil") * String
+ 1 |("oil") * String
+ 2 |

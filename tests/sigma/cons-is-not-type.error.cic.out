@@ -2,6 +2,5 @@ I see unexpected value class: TypeValue,
 but the asserted class is: SigmaValue.
 
 
-previous:
-- cons(String, String)
-- the(Type, cons(String, String))
+ 1 |the(Type, cons(String, String))
+ 2 |

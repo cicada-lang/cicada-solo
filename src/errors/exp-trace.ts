@@ -1,4 +1,5 @@
 import { Exp } from "../exp"
+import pt from "@cicada-lang/partech"
 
 export class ExpTrace extends Error {
   message: string
@@ -24,9 +25,9 @@ export class ExpTrace extends Error {
 
       if (this.previous.length > 0) {
         s += "\n"
-        s += "previous:\n"
-        for (const x of this.previous) {
-          s += `- ${x.repr()}\n`
+        s += "previous expressions:\n"
+        for (const exp of this.previous) {
+          s += `- ${exp.repr()}\n`
         }
       }
 
@@ -38,9 +39,12 @@ export class ExpTrace extends Error {
 
       if (this.previous.length > 0) {
         s += "\n"
-        s += "previous:\n"
-        for (const x of this.previous) {
-          s += `- ${x.repr()}\n`
+
+        for (const exp of this.previous) {
+          if (exp.meta?.span) {
+            s += pt.report(exp.meta?.span, text)
+            break
+          }
         }
       }
 

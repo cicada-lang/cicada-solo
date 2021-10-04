@@ -6,6 +6,5 @@ from left hand side:
 to right hand side:
   "baguette"
 
-previous:
-- refl
-- the(Equal(String, "ratatouille", "baguette"), refl)
+ 1 |the(Equal(String, "ratatouille", "baguette"), refl)
+ 2 |

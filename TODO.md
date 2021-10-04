@@ -1,7 +1,5 @@
 # error report
 
-- `ExpTrace` use `meta.span` when `exp` has `meta`
-
 - `Library.report` always take `text`
 
 - `parser/matchers` fix not catched parsing error -- for repl

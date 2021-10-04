@@ -6,18 +6,15 @@ from given field value:
 to already fulfilled value:
   "d"
 
-previous:
-- {
-  a: sole
-  b: 2
-  c: "c"
-  d: "d"
-  e: "e"
-}
-- the(ABCDE(sole, 2, "d"), {
-  a: sole
-  b: 2
-  c: "c"
-  d: "d"
-  e: "e"
-})
+ 27 |  e: String
+ 28 |}
+ 29 |
+ 30 |abcde: ABCDE(sole, 2, "d") = {
+ 31 |  a: sole
+ 32 |  b: 2
+ 33 |  c: "c" // NOTE "c" is not equal to "d"
+ 34 |  d: "d"
+ 35 |  e: "e"
+ 36 |}
+ 37 |
+ 38 |abcde
