@@ -9,12 +9,14 @@ import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
 export class Sigma extends Exp {
+  meta: ExpMeta
   name: string
   car_t: Exp
   cdr_t: Exp
 
-  constructor(name: string, car_t: Exp, cdr_t: Exp) {
+  constructor(name: string, car_t: Exp, cdr_t: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.name = name
     this.car_t = car_t
     this.cdr_t = cdr_t
@@ -29,7 +31,12 @@ export class Sigma extends Exp {
 
   subst(name: string, exp: Exp): Exp {
     if (name === this.name) {
-      return new Sigma(this.name, subst(this.car_t, name, exp), this.cdr_t)
+      return new Sigma(
+        this.name,
+        subst(this.car_t, name, exp),
+        this.cdr_t,
+        this.meta
+      )
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen(free_names, this.name)
@@ -37,7 +44,12 @@ export class Sigma extends Exp {
       return new Sigma(
         fresh_name,
         subst(this.car_t, name, exp),
-        subst(subst(this.cdr_t, this.name, new Exps.Var(fresh_name)), name, exp)
+        subst(
+          subst(this.cdr_t, this.name, new Exps.Var(fresh_name)),
+          name,
+          exp
+        ),
+        this.meta
       )
     }
   }

@@ -4,7 +4,10 @@ import { nat_from_number } from "../../exps/nat/nat-util"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
-export function pi_handler(body: { [key: string]: pt.Tree }): Exp {
+export function pi_handler(
+  body: { [key: string]: pt.Tree },
+  meta: { span: pt.Span }
+): Exp {
   const { bindings, ret_t } = body
 
   return bindings_matcher(bindings)
@@ -85,7 +88,10 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
     }, exp_matcher(ret))
 }
 
-export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
+export function sigma_handler(
+  body: { [key: string]: pt.Tree },
+  meta: { span: pt.Span }
+): Exp {
   const { bindings, cdr_t } = body
 
   return bindings_matcher(bindings)
@@ -93,7 +99,7 @@ export function sigma_handler(body: { [key: string]: pt.Tree }): Exp {
     .reduce((result, binding) => {
       switch (binding.kind) {
         case "named": {
-          return new Exps.Sigma(binding.name, binding.exp, result)
+          return new Exps.Sigma(binding.name, binding.exp, result, meta)
         }
         case "implicit": {
           throw new Error(`The "implicit" keyword should not be used in sigma`)
@@ -355,7 +361,7 @@ export function declaration_matcher(tree: pt.Tree): Exp {
         }),
         exp_matcher(ret)
       ),
-    "declaration:let_fn": ({ name, bindings, ret_t, ret, body }) => {
+    "declaration:let_fn": ({ name, bindings, ret_t, ret, body }, { span }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
         .reduce((result, binding) => {
@@ -395,7 +401,7 @@ export function declaration_matcher(tree: pt.Tree): Exp {
 
       return new Exps.Let(
         pt.str(name),
-        new Exps.The(pi_handler({ bindings, ret_t }), fn, {
+        new Exps.The(pi_handler({ bindings, ret_t }, { span }), fn, {
           span: pt.span_closure([bindings.span, ret_t.span, ret.span]),
         }),
         exp_matcher(body)
@@ -424,11 +430,14 @@ export function cls_entry_matcher(tree: pt.Tree): {
       field_t: exp_matcher(t),
       field: exp_matcher(exp),
     }),
-    "cls_entry:method_demanded": ({ name, bindings, ret_t }) => ({
+    "cls_entry:method_demanded": ({ name, bindings, ret_t }, { span }) => ({
       field_name: pt.str(name),
-      field_t: pi_handler({ bindings, ret_t }),
+      field_t: pi_handler({ bindings, ret_t }, { span }),
     }),
-    "cls_entry:method_fulfilled": ({ name, bindings, ret_t, ret }) => {
+    "cls_entry:method_fulfilled": (
+      { name, bindings, ret_t, ret },
+      { span }
+    ) => {
       const fn = bindings_matcher(bindings)
         .reverse()
         .reduce((result, binding) => {
@@ -468,7 +477,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
 
       return {
         field_name: pt.str(name),
-        field_t: pi_handler({ bindings, ret_t }),
+        field_t: pi_handler({ bindings, ret_t }, { span }),
         field: fn,
       }
     },
@@ -607,8 +616,11 @@ export function property_matcher(tree: pt.Tree): Exps.Prop {
       new Exps.FieldShorthandProp(pt.str(name)),
     "property:field": ({ name, exp }) =>
       new Exps.FieldProp(pt.str(name), exp_matcher(exp)),
-    "property:method": ({ name, bindings, ret_t }) =>
-      new Exps.FieldProp(pt.str(name), pi_handler({ bindings, ret_t })),
+    "property:method": ({ name, bindings, ret_t }, { span }) =>
+      new Exps.FieldProp(
+        pt.str(name),
+        pi_handler({ bindings, ret_t }, { span })
+      ),
     "property:spread": ({ exp }) => new Exps.SpreadProp(exp_matcher(exp)),
   })(tree)
 }

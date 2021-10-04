@@ -78,7 +78,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
 
       return new Stmts.Def(
         pt.str(name),
-        new Exps.The(pi_handler({ bindings, ret_t }), fn, {
+        new Exps.The(pi_handler({ bindings, ret_t }, { span }), fn, {
           span: pt.span_closure([bindings.span, ret_t.span, ret.span]),
         }),
         { span }
