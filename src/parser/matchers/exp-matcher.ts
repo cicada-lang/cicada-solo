@@ -292,7 +292,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
       new Exps.SameAsChart(exp_matcher(t), exps_matcher(exps)),
     "operand:trivial": (_, { span }) => new Exps.Trivial({ span }),
     "operand:sole": (_, { span }) => new Exps.Sole({ span }),
-    "operand:absurd": () => new Exps.Absurd(),
+    "operand:absurd": (_, { span }) => new Exps.Absurd({ span }),
     "operand:str": (_, { span }) => new Exps.Str({ span }),
     "operand:quote": ({ value }, { span }) =>
       new Exps.Quote(pt.trim_boundary(pt.str(value), 1), { span }),

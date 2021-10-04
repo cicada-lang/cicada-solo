@@ -1,5 +1,7 @@
 # error report
 
+- exps/absurd/absurd-ind -- with `span`
+
 - exps/let -- with `span`
 
 - exps/the -- with `span`
@@ -16,9 +18,6 @@
     - context
     - message
     - hint
-
-- exps/absurd/absurd -- with `span`
-- exps/absurd/absurd-ind -- with `span`
 
 - exps/cls/nil-cls -- with `span`
 - exps/cls/fulfilled-cls -- with `span`
