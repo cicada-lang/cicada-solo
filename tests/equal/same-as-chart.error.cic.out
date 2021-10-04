@@ -6,7 +6,7 @@ from value at 4:
 to value at 5:
   6
 
-same-as-chart.error.cic
+same-as-chart.error.cic:
   1 |same_as_chart! Nat [
   2 |  add1(add1(add1(0))),
   3 |  add1(add1(1)),

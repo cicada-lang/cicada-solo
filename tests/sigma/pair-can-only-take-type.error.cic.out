@@ -3,6 +3,6 @@ I infer the type to be:
 But the expected type is:
   Type
 
-pair-can-only-take-type.error.cic
+pair-can-only-take-type.error.cic:
  1 |("oil") * String
  2 |

@@ -3,6 +3,6 @@ I infer the type to be:
 But the expected type is:
   Nat
 
-string-is-not-nat.error.cic
+string-is-not-nat.error.cic:
  1 |the(Nat, "ratatouille")
  2 |

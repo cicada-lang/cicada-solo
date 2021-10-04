@@ -4,7 +4,7 @@ field name:
 field name list:
   a, b, b, c
 
-duplicated-object-field-names.error.cic
+duplicated-object-field-names.error.cic:
   4 |  b: Nat
   5 |}
   6 |

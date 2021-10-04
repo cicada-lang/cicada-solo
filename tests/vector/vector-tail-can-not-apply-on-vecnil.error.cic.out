@@ -2,6 +2,6 @@ I see unexpected value class: ZeroValue,
 but the asserted class is: Add1Value.
 
 
-vector-tail-can-not-apply-on-vecnil.error.cic
+vector-tail-can-not-apply-on-vecnil.error.cic:
  1 |vector_tail(the(Vector(String, 0), vecnil))
  2 |

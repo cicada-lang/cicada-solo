@@ -3,10 +3,10 @@ I infer the type to be:
 But the expected type is:
   Vector(E, j1)
 
-ch15.error.md
+[33mch15.error.md:[39m
  30 |      //   - Pie ensures this by adding a `renaming` argument to all type checking functions,
  31 |      //     and use `reanming` during `readback`.
  32 |      //   - I handle this by using `subst` to rename bound variables.
- 33 |      (j, head, tail, almost) => (j, equal) => tail
+ 33 |      (j, head, tail, almost) => (j, equal) => [41mt[49m[41ma[49m[41mi[49m[41ml[49m
  34 |    )
  35 |

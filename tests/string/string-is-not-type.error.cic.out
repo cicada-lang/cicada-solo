@@ -3,6 +3,6 @@ I infer the type to be:
 But the expected type is:
   Type
 
-string-is-not-type.error.cic
+string-is-not-type.error.cic:
  1 |the(Type, "courgette")
  2 |
