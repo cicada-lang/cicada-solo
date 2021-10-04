@@ -15,7 +15,7 @@ export class Reporter {
     opts?: { text?: string }
   ): Promise<string> {
     if (error instanceof Errors.ExpTrace) {
-      return error.repr((exp) => exp.repr())
+      return error.repr()
     } else if (error instanceof pt.ParsingError) {
       const text = opts?.text || (await this.files.getOrFail(path))
       if (!text) {

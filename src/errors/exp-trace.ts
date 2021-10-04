@@ -14,7 +14,7 @@ export class ExpTrace extends Error {
     return this
   }
 
-  repr(formater: (x: Exp) => string): string {
+  repr(): string {
     let s = ""
     s += this.message
     s += "\n"
@@ -23,7 +23,7 @@ export class ExpTrace extends Error {
       s += "\n"
       s += "previous:\n"
       for (const x of this.previous) {
-        s += `- ${formater(x)}\n`
+        s += `- ${x.repr()}\n`
       }
     }
 
