@@ -19,11 +19,8 @@ export class DefaultRunner extends Runner {
       }
       return { error: undefined }
     } catch (error) {
-      const reporter = new ErrorReporter()
-      const report = reporter.report(error, {
-        path,
-        text: await this.library.files.getOrFail(path),
-      })
+      const text = await this.library.files.getOrFail(path)
+      const report = this.reporter.report(error, { path, text })
       console.error(report)
       return { error }
     }

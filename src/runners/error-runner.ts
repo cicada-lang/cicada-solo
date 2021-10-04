@@ -1,5 +1,4 @@
 import { Library } from "../library"
-import { ErrorReporter } from "../error-reporter"
 import { Runner } from "../runner"
 import fs from "fs"
 
@@ -19,11 +18,8 @@ export class ErrorRunner extends Runner {
       await mod.run()
       return { error: new Error(`I expect to find error in the path: ${path}`) }
     } catch (error) {
-      const reporter = new ErrorReporter()
-      const report = reporter.report(error, {
-        path,
-        text: await this.library.files.getOrFail(path),
-      })
+      const text = await this.library.files.getOrFail(path)
+      const report = this.reporter.report(error, { path, text })
       const file = this.library.files.resolve(path + ".out")
       await fs.promises.writeFile(file, report)
       return { error: undefined }

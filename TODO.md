@@ -1,4 +1,3 @@
-- [error report] `app.errorReportor`
 - [error report] `ExpTrace` report might take optional `path`
 - [error report] `ExpTrace` improve format
 - [error report] `parser/matchers` fix not catched parsing error -- for REPL
