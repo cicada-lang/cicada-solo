@@ -62,7 +62,7 @@ async function check(library: Library): Promise<{ errors: Array<unknown> }> {
 
   for (const path of Object.keys(await library.files.all())) {
     if (ModuleLoaders.can_handle_extension(path)) {
-      const runner = Runners.createSpecialRunner({ path, library })
+      const runner = app.createSpecialRunner({ path, library })
       const { error } = await runner.run(path)
       if (error) errors.push(error)
 
@@ -94,7 +94,7 @@ async function watch(library: Library): Promise<void> {
 
     if (event === "update") {
       library.cache.delete(path)
-      const runner = Runners.createSpecialRunner({ path, library })
+      const runner = app.createSpecialRunner({ path, library })
       const { error } = await runner.run(path)
 
       if (error) {
