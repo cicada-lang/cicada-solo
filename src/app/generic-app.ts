@@ -6,6 +6,7 @@ import pino from "pino"
 
 export class GenericApp {
   nanoid = customAlphabet("1234567890abcdef", 16)
+
   config = new AppConfig()
 
   logger = pino(
