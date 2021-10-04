@@ -1,5 +1,12 @@
 # error report
 
+- exps/cls/nil-cls -- with `span`
+- exps/cls/fulfilled-cls -- with `span`
+- exps/cls/obj -- with `span`
+- exps/cls/cls -- with `span`
+- exps/cls/cons-cls -- with `span`
+- exps/cls/ext -- with `span`
+
 - exps/let -- with `span`
 
 - exps/var -- with `span`
@@ -14,14 +21,6 @@
     - context
     - message
     - hint
-
-- exps/cls/nil-cls -- with `span`
-- exps/cls/fulfilled-cls -- with `span`
-- exps/cls/dot -- with `span`
-- exps/cls/obj -- with `span`
-- exps/cls/cls -- with `span`
-- exps/cls/cons-cls -- with `span`
-- exps/cls/ext -- with `span`
 
 - `parser/matchers` fix not catched parsing error -- for repl
 

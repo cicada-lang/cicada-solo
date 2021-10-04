@@ -11,11 +11,13 @@ import * as ut from "../../ut"
 import * as Exps from "../../exps"
 
 export class Dot extends Exp {
+  meta?: ExpMeta
   target: Exp
   name: string
 
-  constructor(target: Exp, name: string) {
+  constructor(target: Exp, name: string, meta?: ExpMeta) {
     super()
+    this.meta = meta
     this.target = target
     this.name = name
   }
@@ -25,7 +27,7 @@ export class Dot extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new Dot(subst(this.target, name, exp), this.name)
+    return new Dot(subst(this.target, name, exp), this.name, this.meta)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

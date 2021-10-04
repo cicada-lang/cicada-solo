@@ -136,15 +136,17 @@ export function operator_matcher(tree: pt.Tree): Exp {
       new Exps.Car(exp_matcher(target), { span }),
     "operator:cdr": ({ target }, { span }) =>
       new Exps.Cdr(exp_matcher(target), { span }),
-    "operator:dot_field": ({ target, name }) =>
-      new Exps.Dot(operator_matcher(target), pt.str(name)),
+    "operator:dot_field": ({ target, name }, { span }) =>
+      new Exps.Dot(operator_matcher(target), pt.str(name), { span }),
     "operator:dot_method": ({ target, name, args }, { span }) =>
       pt.matchers
         .one_or_more_matcher(args)
         .flatMap((arg) => exps_matcher(arg))
         .reduce(
           (result, exp) => new Exps.Ap(result, exp, { span }),
-          new Exps.Dot(operator_matcher(target), pt.str(name))
+          new Exps.Dot(operator_matcher(target), pt.str(name), {
+            span: pt.span_closure([target.span, name.span]),
+          })
         ),
     "operator:nat_ind": ({ target, motive, base, step }, { span }) =>
       new Exps.NatInd(

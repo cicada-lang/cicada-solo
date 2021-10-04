@@ -109,7 +109,10 @@ export class SpreadProp extends Prop {
 
     if (inferred.t instanceof Exps.ClsValue) {
       const cls = inferred.t
-      return cls.field_names.map((name) => [name, new Exps.Dot(this.exp, name)])
+      return cls.field_names.map((name) => [
+        name,
+        new Exps.Dot(this.exp, name, this.exp.meta),
+      ])
     }
 
     throw new Trace(
