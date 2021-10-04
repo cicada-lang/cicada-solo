@@ -7,10 +7,12 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class List extends Exp {
+  meta: ExpMeta
   elem_t: Exp
 
-  constructor(elem_t: Exp) {
+  constructor(elem_t: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.elem_t = elem_t
   }
 
@@ -19,7 +21,7 @@ export class List extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new List(subst(this.elem_t, name, exp))
+    return new List(subst(this.elem_t, name, exp), this.meta)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

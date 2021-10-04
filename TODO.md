@@ -3,15 +3,7 @@
 - exps/list/list-rec -- with `span`
 - exps/list/li -- with `span`
 - exps/list/list-ind -- with `span`
-- exps/list/list -- with `span`
 - exps/list/nil -- with `span`
-
-- exps/equal/refl -- with `span`
-- exps/equal/the-same -- with `span`
-- exps/equal/same -- with `span`
-- exps/equal/replace -- with `span`
-- exps/equal/same-as-chart -- with `span`
-- exps/equal/equal -- with `span`
 
 - exps/vector/vector-head -- with `span`
 - exps/vector/vector-ind -- with `span`
@@ -19,6 +11,13 @@
 - exps/vector/vecnil -- with `span`
 - exps/vector/vec -- with `span`
 - exps/vector/vector-tail -- with `span`
+
+- exps/equal/refl -- with `span`
+- exps/equal/the-same -- with `span`
+- exps/equal/same -- with `span`
+- exps/equal/replace -- with `span`
+- exps/equal/same-as-chart -- with `span`
+- exps/equal/equal -- with `span`
 
 - exps/let -- with `span`
 

@@ -271,7 +271,8 @@ export function operand_matcher(tree: pt.Tree): Exp {
         return nat_from_number(n, { span })
       }
     },
-    "operand:list": ({ elem_t }) => new Exps.List(exp_matcher(elem_t)),
+    "operand:list": ({ elem_t }, { span }) =>
+      new Exps.List(exp_matcher(elem_t), { span }),
     "operand:nil": () => new Exps.Nil(),
     "operand:nil_sugar": () => new Exps.Nil(),
     "operand:li": ({ head, tail }) =>
