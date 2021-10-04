@@ -10,13 +10,12 @@ export class Def extends Stmt {
   name: string
   exp: Exp
 
-
   constructor(name: string, exp: Exp, meta: StmtMeta) {
     super()
     this.meta = meta
     this.name = name
     this.exp = exp
-    }
+  }
 
   async execute(mod: Module): Promise<void> {
     const inferred = infer(mod.ctx, this.exp)

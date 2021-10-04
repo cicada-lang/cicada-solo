@@ -11,7 +11,6 @@ export class Show extends Stmt {
   meta: StmtMeta
   exp: Exp
 
-
   constructor(exp: Exp, meta: StmtMeta) {
     super()
     this.meta = meta

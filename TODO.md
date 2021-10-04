@@ -1,7 +1,5 @@
 # error report
 
-- exps/str/str -- with `span`
-
 - exps/let -- with `span`
 
 - exps/the -- with `span`
