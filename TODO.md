@@ -1,6 +1,5 @@
 # error report
 
-- exps/equal/refl -- with `span`
 - exps/equal/the-same -- with `span`
 - exps/equal/same -- with `span`
 - exps/equal/replace -- with `span`
