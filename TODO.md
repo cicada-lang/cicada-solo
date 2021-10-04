@@ -1,6 +1,8 @@
 # error report
 
-- replace `{ meta: span: pt.Span }` by `ExpMeta`
+- `StmtMeta` in `stmt/`
+
+- replace `{ meta: span: pt.Span }` by `StmtMeta`
 
 - exps/var -- with `span`
 - exps/let -- with `span`

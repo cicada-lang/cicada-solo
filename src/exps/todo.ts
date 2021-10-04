@@ -1,16 +1,15 @@
-import { Exp, subst } from "../exp"
+import { Exp, ExpMeta, subst } from "../exp"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import { Core } from "../core"
 import { TodoCore } from "./todo-core"
 import { QuoteCore } from "./str/quote-core"
-import pt from "@cicada-lang/partech"
 
 export class Todo extends Exp {
-  meta?: { span?: pt.Span }
+  meta?: ExpMeta
   message: string
 
-  constructor(message: string, meta?: { span?: pt.Span }) {
+  constructor(message: string, meta?: ExpMeta) {
     super()
     this.message = message
     this.meta = meta

@@ -1,14 +1,13 @@
 import { Core } from "../core"
-import { Exp, subst } from "../exp"
+import { Exp, ExpMeta, subst } from "../exp"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import * as Exps from "../exps"
-import pt from "@cicada-lang/partech"
 
 export class Type extends Exp {
-  meta?: { span?: pt.Span }
+  meta?: ExpMeta
 
-  constructor(meta?: { span?: pt.Span }) {
+  constructor(meta?: ExpMeta) {
     super()
     this.meta = meta
   }

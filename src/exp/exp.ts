@@ -8,11 +8,11 @@ export interface ExpMeta {
 }
 
 export abstract class Exp {
+  meta?: ExpMeta
+
   abstract free_names(bound_names: Set<string>): Set<string>
   abstract subst(name: string, exp: Exp): Exp
   abstract repr(): string
-
-  meta?: ExpMeta
 
   check?(ctx: Ctx, t: Value): Core
   infer?(ctx: Ctx): { t: Value; core: Core }

@@ -4,7 +4,6 @@ import { Ctx } from "../ctx"
 import { Value } from "../value"
 import { Trace } from "../errors"
 import * as Exps from "../exps"
-import pt from "@cicada-lang/partech"
 
 export class Var extends Exp {
   // span: pt.Span
