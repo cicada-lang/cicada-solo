@@ -41,6 +41,11 @@ npm run watch  // Watch the compilation
 npm run test   // Run test
 ```
 
+## Libraries
+
+- [Cicada Standard Library](libraries/cicada-stdlib)
+- [The Little Typer](libraries/the-little-typer)
+
 ## Community
 
 - IRC channel: `#cicada-lang` at [libera.chat](https://libera.chat)

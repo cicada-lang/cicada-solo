@@ -1,3 +1,3 @@
-# 小小类型家 / The little typer
+# The Little Typer
 
-- [来学习室学习吧 / Study in studyroom](https://cicada-studyroom.vercel.app/studyroom?s=github&p=xieyuheng/the-little-typer)
+By Daniel P. Friedman and David Thrane Christiansen.
