@@ -7,11 +7,13 @@ import { check } from "../../exp"
 import * as Exps from "../../exps"
 
 export class Either extends Exp {
+  meta: ExpMeta
   left_t: Exp
   right_t: Exp
 
-  constructor(left_t: Exp, right_t: Exp) {
+  constructor(left_t: Exp, right_t: Exp, meta: ExpMeta) {
     super()
+    this.meta = meta
     this.left_t = left_t
     this.right_t = right_t
   }
@@ -26,7 +28,8 @@ export class Either extends Exp {
   subst(name: string, exp: Exp): Exp {
     return new Either(
       subst(this.left_t, name, exp),
-      subst(this.right_t, name, exp)
+      subst(this.right_t, name, exp),
+      this.meta
     )
   }
 
