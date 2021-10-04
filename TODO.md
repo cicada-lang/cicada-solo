@@ -1,13 +1,12 @@
 # error report
 
+- exps/trivial/sole -- with `span`
+
 - exps/let -- with `span`
 
 - exps/the -- with `span`
 
 - exps/var -- with `span`
-
-- exps/trivial/sole -- with `span`
-- exps/trivial/trivial -- with `span`
 
 - `Trace` use `meta.span` when `exp` has `meta`
 

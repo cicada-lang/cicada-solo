@@ -3,10 +3,7 @@ import { Module } from "../module"
 import { Trace } from "../errors"
 import Path from "path"
 
-export type ImportEntry = {
-  name: string
-  alias?: string
-}
+export type ImportEntry = { name: string; alias?: string }
 
 export class Import extends Stmt {
   meta: StmtMeta
