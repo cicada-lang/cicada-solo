@@ -1,7 +1,5 @@
 # error report
 
-- exps/either/either-ind -- with `span`
-
 - exps/let -- with `span`
 
 - exps/the -- with `span`

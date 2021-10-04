@@ -176,12 +176,16 @@ export function operator_matcher(tree: pt.Tree): Exp {
       ),
     "operator:absurd_ind": ({ target, motive }, { span }) =>
       new Exps.AbsurdInd(exp_matcher(target), exp_matcher(motive), { span }),
-    "operator:either_ind": ({ target, motive, base_left, base_right }) =>
+    "operator:either_ind": (
+      { target, motive, base_left, base_right },
+      { span }
+    ) =>
       new Exps.EitherInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base_left),
-        exp_matcher(base_right)
+        exp_matcher(base_right),
+        { span }
       ),
     "operator:the": ({ t, exp }) =>
       new Exps.The(exp_matcher(t), exp_matcher(exp)),
