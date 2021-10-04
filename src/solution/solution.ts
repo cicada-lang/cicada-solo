@@ -1,7 +1,7 @@
 import { Ctx } from "../ctx"
 import { Value, readback } from "../value"
 import { Core } from "../core"
-import { Trace } from "../errors"
+import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
 
 export abstract class Solution {
@@ -117,7 +117,7 @@ export abstract class Solution {
       const left_repr = readback(ctx, new Exps.TypeValue(), left).repr()
       const right_repr = readback(ctx, new Exps.TypeValue(), right).repr()
 
-      throw new Trace(
+      throw new ExpTrace(
         [
           `Unification fail`,
           `  left: ${left_repr}`,

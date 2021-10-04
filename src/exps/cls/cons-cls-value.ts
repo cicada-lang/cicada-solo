@@ -6,7 +6,7 @@ import { Solution } from "../../solution"
 import { readback } from "../../value"
 import { evaluate } from "../../core"
 import { check } from "../../exp"
-import { Trace } from "../../errors"
+import { ExpTrace } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
 import { ClsClosure } from "./cls-closure"
@@ -31,7 +31,7 @@ export class ConsClsValue extends Exps.ClsValue {
     const exp = properties.get(this.field_name)
 
     if (exp === undefined) {
-      throw new Trace(`I expect to find field: ${this.field_name}`)
+      throw new ExpTrace(`I expect to find field: ${this.field_name}`)
     }
 
     const field_core = check(ctx, exp, this.field_t)
@@ -63,7 +63,7 @@ export class ConsClsValue extends Exps.ClsValue {
       )
 
       if (!(rest_t instanceof Exps.ClsCore)) {
-        throw new Trace(
+        throw new ExpTrace(
           `I expect rest_t to be an instance of ${Exps.ClsCore.name}`
         )
       }

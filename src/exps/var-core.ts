@@ -1,7 +1,7 @@
 import { Core, AlphaCtx } from "../core"
 import { Env } from "../env"
 import { Value } from "../value"
-import { Trace } from "../errors"
+import { ExpTrace } from "../errors"
 
 export class VarCore extends Core {
   name: string
@@ -14,7 +14,7 @@ export class VarCore extends Core {
   evaluate(env: Env): Value {
     const result = env.find_value(this.name)
     if (result === undefined) {
-      throw new Trace(
+      throw new ExpTrace(
         [
           `Fail to evaluate a variable.`,
           `The name ${this.name} is undefined.`,

@@ -1,6 +1,5 @@
 # error report
 
-- rename `Trace` to `ExpTrace`
 - `ExpTrace` use `meta.span` when `exp` has `meta`
 - `ExpTrace` improve structure of error -- `kind, context, message, hint`
 - `parser/matchers` fix not catched parsing error -- for repl

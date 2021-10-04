@@ -1,6 +1,6 @@
 import { Value } from "../value"
 import { Ctx } from "../ctx"
-import { Trace } from "../errors"
+import { ExpTrace } from "../errors"
 import { readback } from "../value"
 import * as Exps from "../exps"
 
@@ -16,7 +16,7 @@ export function expect<T>(ctx: Ctx, value: Value, TheClass: Class<T>): T {
         `I see unexpected value class: ${value.constructor.name},\n` +
         `which reads back to exp: ${exp.repr()},\n` +
         `but the asserted class is: ${TheClass.name}.\n`
-      throw new Trace(message)
+      throw new ExpTrace(message)
     } catch (error) {
       // NOTE If the error makes us
       //   not be able to readback the value as `TypeValue`,
@@ -24,7 +24,7 @@ export function expect<T>(ctx: Ctx, value: Value, TheClass: Class<T>): T {
       const message =
         `I see unexpected value class: ${value.constructor.name},\n` +
         `but the asserted class is: ${TheClass.name}.\n`
-      throw new Trace(message)
+      throw new ExpTrace(message)
     }
   }
 }

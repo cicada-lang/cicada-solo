@@ -1,23 +1,18 @@
-import { Trace } from "../errors"
+import { ExpTrace } from "../errors"
 import { Value } from "../value"
+import { Exp } from "../exp"
 
 type Class<T> = new (...args: any[]) => T
 
-export class InternalError<T> extends Trace<T> {
-  previous: Array<T> = Array.of()
-
+export class InternalError extends Error {
   constructor(public message: string) {
     super(message)
   }
 
-  repr(formater: (x: T) => string): string {
-    return ["[InternalError]", super.repr(formater)].join("\n")
-  }
-
-  static wrong_target<T>(
+  static wrong_target(
     target: Value,
     opts: { expected: Array<Class<Value>> }
-  ): InternalError<T> {
+  ): InternalError {
     const expected = opts.expected.map((c) => c.name).join(", ")
 
     return new InternalError(
@@ -29,10 +24,10 @@ export class InternalError<T> extends Trace<T> {
     )
   }
 
-  static wrong_target_t<T>(
+  static wrong_target_t(
     target_t: Value,
     opts: { expected: Array<Class<Value>> }
-  ): InternalError<T> {
+  ): InternalError {
     const expected = opts.expected.map((c) => c.name).join(", ")
 
     return new InternalError(

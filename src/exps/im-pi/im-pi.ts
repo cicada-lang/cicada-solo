@@ -5,7 +5,7 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { check } from "../../exp"
 import { evaluate } from "../../core"
-import { Trace } from "../../errors"
+import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
@@ -86,7 +86,7 @@ export class ImPi extends Exp {
         ret_t_core instanceof Exps.PiCore || ret_t_core instanceof Exps.ImPiCore
       )
     ) {
-      throw new Trace(
+      throw new ExpTrace(
         [
           `I expect ret_t_core to be Exps.PiCore or Exps.ImPiCore`,
           `  class name: ${ret_t_core.constructor.name}`,

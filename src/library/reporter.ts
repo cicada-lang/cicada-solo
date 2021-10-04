@@ -1,5 +1,5 @@
 import { FileStore } from "../infra/file-store"
-import { Trace } from "../errors"
+import * as Errors from "../errors"
 import pt from "@cicada-lang/partech"
 
 export class Reporter {
@@ -14,7 +14,7 @@ export class Reporter {
     path: string,
     opts?: { text?: string }
   ): Promise<string> {
-    if (error instanceof Trace) {
+    if (error instanceof Errors.ExpTrace) {
       return error.repr((exp) => exp.repr())
     } else if (error instanceof pt.ParsingError) {
       const text = opts?.text || (await this.files.getOrFail(path))

@@ -3,7 +3,7 @@ import { Module } from "../module"
 import { Exp } from "../exp"
 import { infer } from "../exp"
 import { evaluate } from "../core"
-import { Trace } from "../errors"
+import * as Errors from "../errors"
 
 export class Def extends Stmt {
   meta: StmtMeta

@@ -5,7 +5,7 @@ import { check } from "../../exp"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
-import { Trace } from "../../errors"
+import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 
@@ -35,7 +35,7 @@ export class FulfilledCls extends Exps.Cls {
     this.rest_t = rest_t
 
     if (rest_t.field_names.includes(field_name)) {
-      throw new Trace(
+      throw new ExpTrace(
         [
           `I found duplicated field name in class`,
           `field name:`,
@@ -112,7 +112,7 @@ export class FulfilledCls extends Exps.Cls {
     )
 
     if (!(rest_t_core instanceof Exps.ClsCore)) {
-      throw new Trace("I expect rest_t_core to be Exps.Cls")
+      throw new ExpTrace("I expect rest_t_core to be Exps.Cls")
     }
 
     return {

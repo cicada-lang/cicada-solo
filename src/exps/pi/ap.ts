@@ -5,7 +5,7 @@ import { evaluate } from "../../core"
 import { infer } from "../../exp"
 import { check } from "../../exp"
 import { Value } from "../../value"
-import { Trace, InternalError } from "../../errors"
+import { ExpTrace, InternalError } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
 import { ImApInsertion } from "../im-pi/im-ap-insertion"
@@ -53,7 +53,7 @@ export class Ap extends Exp {
       return this.infer_for_cls(ctx, target_value, core)
     }
 
-    throw new Trace(
+    throw new ExpTrace(
       [
         `I am expecting target value of type PiValue or ClsValue`,
         `  class name: ${target_value.constructor.name}`,
@@ -89,7 +89,7 @@ export class Ap extends Exp {
     } else if (cls instanceof Exps.FulfilledClsValue) {
       return this.infer_for_cls(ctx, cls.rest_t, target_core)
     } else if (cls instanceof Exps.NilClsValue) {
-      throw new Trace(`The telescope is full.`)
+      throw new ExpTrace(`The telescope is full.`)
     } else {
       throw new InternalError(
         [

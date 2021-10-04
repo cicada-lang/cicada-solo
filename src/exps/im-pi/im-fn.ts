@@ -3,7 +3,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
-import { Trace } from "../../errors"
+import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../ut"
 import { ImFnInsertion } from "./im-fn-insertion"
@@ -59,7 +59,7 @@ export class ImFn extends Exp {
     // NOTE The insertion will reorder the arguments.
 
     if (!ImFnInsertion.based_on(t)) {
-      throw new Trace(
+      throw new ExpTrace(
         `I can not do im-fn insertion based on: ${t.constructor.name}`
       )
     }

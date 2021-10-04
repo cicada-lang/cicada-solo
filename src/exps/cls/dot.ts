@@ -6,7 +6,7 @@ import { Solution } from "../../solution"
 import { evaluate } from "../../core"
 import { readback } from "../../value"
 import { infer } from "../../exp"
-import { Trace } from "../../errors"
+import { ExpTrace } from "../../errors"
 import * as ut from "../../ut"
 import * as Exps from "../../exps"
 
@@ -49,7 +49,7 @@ export class Dot extends Exp {
       }
     }
 
-    throw new Trace(
+    throw new ExpTrace(
       [
         `Expecting target type to be a class.`,
         `  ${JSON.stringify(inferred_target.t)}`,

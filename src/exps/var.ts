@@ -2,7 +2,7 @@ import { Exp, ExpMeta, subst } from "../exp"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
-import { Trace } from "../errors"
+import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
 
 export class Var extends Exp {
@@ -35,7 +35,7 @@ export class Var extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const t = ctx.find_type(this.name)
     if (t === undefined) {
-      throw new Trace(
+      throw new ExpTrace(
         `Fail to infer the type of a variable.\n` +
           `The name ${this.name} is undefined.`
       )
