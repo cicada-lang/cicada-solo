@@ -130,12 +130,13 @@ export function operator_matcher(tree: pt.Tree): Exp {
           (result, exp) => new Exps.Ap(result, exp),
           new Exps.Dot(operator_matcher(target), pt.str(name))
         ),
-    "operator:nat_ind": ({ target, motive, base, step }) =>
+    "operator:nat_ind": ({ target, motive, base, step }, { span }) =>
       new Exps.NatInd(
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base),
-        exp_matcher(step)
+        exp_matcher(step),
+        { span }
       ),
     "operator:nat_rec": ({ target, base, step }, { span }) =>
       new Exps.NatRec(
