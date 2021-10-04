@@ -14,10 +14,11 @@ export class Reporter {
     path: string,
     opts?: { text?: string }
   ): Promise<string> {
+    const text = opts?.text || (await this.files.getOrFail(path))
+
     if (error instanceof Errors.ExpTrace) {
-      return error.repr()
+      return error.report({ text })
     } else if (error instanceof pt.ParsingError) {
-      const text = opts?.text || (await this.files.getOrFail(path))
       if (!text) {
         return [
           `I found syntax error in path: ${path}`,

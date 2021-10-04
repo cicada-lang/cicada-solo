@@ -14,19 +14,37 @@ export class ExpTrace extends Error {
     return this
   }
 
-  repr(): string {
-    let s = ""
-    s += this.message
-    s += "\n"
+  report(opts: { text?: string }): string {
+    const { text } = opts
 
-    if (this.previous.length > 0) {
+    if (text === undefined) {
+      let s = ""
+      s += this.message
       s += "\n"
-      s += "previous:\n"
-      for (const x of this.previous) {
-        s += `- ${x.repr()}\n`
-      }
-    }
 
-    return s
+      if (this.previous.length > 0) {
+        s += "\n"
+        s += "previous:\n"
+        for (const x of this.previous) {
+          s += `- ${x.repr()}\n`
+        }
+      }
+
+      return s
+    } else {
+      let s = ""
+      s += this.message
+      s += "\n"
+
+      if (this.previous.length > 0) {
+        s += "\n"
+        s += "previous:\n"
+        for (const x of this.previous) {
+          s += `- ${x.repr()}\n`
+        }
+      }
+
+      return s
+    }
   }
 }
