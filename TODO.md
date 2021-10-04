@@ -1,14 +1,8 @@
-# error report
-
-- `app.errorReportor`
-
-- `ExpTrace` report might take `path`
-
-- `ExpTrace` improve format
-
-- `parser/matchers` fix not catched parsing error -- for REPL
-
-- [problem] `exps/var` -- how to handle `span` when doing a `subst`?
+- [error report] `app.errorReportor`
+- [error report] `ExpTrace` report might take `path`
+- [error report] `ExpTrace` improve format
+- [error report] `parser/matchers` fix not catched parsing error -- for REPL
+- [optimization] use native `number` as `Nat`
 
 # narrator of elaboration
 
@@ -22,8 +16,6 @@
 - support to use `=` to do local definitions in class
 
 - `Fn` be able to annotate argument type and return type
-
-- [optimization] use native `number` as `Nat`
 
 # implicit
 
@@ -111,3 +103,7 @@
 
   - we do not need to use library as module,
     we only need to be able to resolve module.
+
+# error report
+
+- [problem] `exps/var` -- how to handle `span` when doing a `subst`?
