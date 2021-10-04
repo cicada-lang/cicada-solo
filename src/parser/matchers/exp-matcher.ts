@@ -106,7 +106,10 @@ export function sigma_handler(
           return new Exps.Sigma(binding.name, binding.exp, result, meta)
         }
         case "implicit": {
-          throw new Error(`The "implicit" keyword should not be used in sigma`)
+          throw new pt.ParsingError(
+            `The "implicit" keyword should not be used in sigma`,
+            { span: meta.span }
+          )
         }
       }
     }, exp_matcher(cdr_t))
