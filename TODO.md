@@ -1,7 +1,5 @@
 # error report
 
-- exps/vector/vector-ind -- with `span`
-
 - exps/equal/refl -- with `span`
 - exps/equal/the-same -- with `span`
 - exps/equal/same -- with `span`

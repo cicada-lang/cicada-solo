@@ -164,13 +164,14 @@ export function operator_matcher(tree: pt.Tree): Exp {
       new Exps.VectorHead(exp_matcher(target), { span }),
     "operator:vector_tail": ({ target }, { span }) =>
       new Exps.VectorTail(exp_matcher(target), { span }),
-    "operator:vector_ind": ({ length, target, motive, base, step }) =>
+    "operator:vector_ind": ({ length, target, motive, base, step }, { span }) =>
       new Exps.VectorInd(
         exp_matcher(length),
         exp_matcher(target),
         exp_matcher(motive),
         exp_matcher(base),
-        exp_matcher(step)
+        exp_matcher(step),
+        { span }
       ),
     "operator:replace": ({ target, motive, base }) =>
       new Exps.Replace(
