@@ -1,6 +1,5 @@
 # error report
 
-- exps/list/list-rec -- with `span`
 - exps/list/li -- with `span`
 - exps/list/list-ind -- with `span`
 

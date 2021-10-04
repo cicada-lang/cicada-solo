@@ -152,11 +152,12 @@ export function operator_matcher(tree: pt.Tree): Exp {
         exp_matcher(base),
         exp_matcher(step)
       ),
-    "operator:list_rec": ({ target, base, step }) =>
+    "operator:list_rec": ({ target, base, step }, { span }) =>
       new Exps.ListRec(
         exp_matcher(target),
         exp_matcher(base),
-        exp_matcher(step)
+        exp_matcher(step),
+        { span }
       ),
     "operator:vector_head": ({ target }) =>
       new Exps.VectorHead(exp_matcher(target)),
