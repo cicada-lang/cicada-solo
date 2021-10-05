@@ -1,6 +1,6 @@
 # narrator of elaboration
 
-- `exps/*` -- `check` & `infer` -- when `ElaborationNarrator.active`, narrate
+- `exps/*` -- use `narrator`
 
 - note about narration and interaction
 
