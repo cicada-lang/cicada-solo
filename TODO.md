@@ -1,7 +1,5 @@
 # narrator of elaboration
 
-- [syntax] `@elaborate` -- use `@` to denotes interaction
-
 - `exps/*` -- `check` & `infer` -- when `ElaborationNarrator.active`, narrate
 
 - note about narration and interaction
