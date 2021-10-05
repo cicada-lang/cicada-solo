@@ -17,6 +17,8 @@
   - if the `watch` mode will be used as main feedback for the interaction of our system,
     we need to design it gooder.
 
+    - be able to watch single file
+
 - rules are made to be spoken
 
   - how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
