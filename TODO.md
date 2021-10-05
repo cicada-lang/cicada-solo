@@ -1,8 +1,16 @@
 # narrator of elaboration
 
-- [syntax] use `@` to denotes interaction
+- `ElaborationNarrator`
 
-- inject `Narrator` to `check` and `infer` -- not only log, but also interaction
+- `check` & `infer` take `ElaborationOptions` which might has a `ElaborationNarrator`
+
+- `Exps.Elaborate`
+
+- [syntax] `@elaborate` -- use `@` to denotes interaction
+
+- `exps/*` -- `check` & `infer` -- when `ElaborationNarrator.active`, narrate
+
+- note about narration and interaction
 
   - interaction should be achieved by editing code,
     the program simply watch for file changes and print different messages as feedback,
@@ -14,8 +22,18 @@
     and suggests different choices by matching on the argument
     (or apply any other computation on the argument).
 
+- rules are made to be spoken
+
   - how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
   - how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
+
+# typed hole
+
+- use `@TODO` or `@TODO "...."` -- instead of `TODO("...")`
+
+  - `@` for interaction
+
+- print type of todo during elaboration
 
 # core features
 
