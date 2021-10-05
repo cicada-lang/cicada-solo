@@ -4,6 +4,16 @@
 
 - inject `Narrator` to `check` and `infer` -- not only log, but also interaction
 
+  - interaction should be achieved by editing code,
+    the program simply watch for file changes and print different messages as feedback,
+    in the message, the program can suggests different choices of next editing.
+
+  - user must be able to authoring interactions -- define new `@`.
+    the key of interaction is choices,
+    a user defined interaction can take argument,
+    and suggests different choices by matching on the argument
+    (or apply any other computation on the argument).
+
   - how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
   - how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
 
