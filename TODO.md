@@ -1,8 +1,6 @@
 # narrator of elaboration
 
-- `Exps.Elaborate`
-
-  - [syntax] `@elaborate` -- use `@` to denotes interaction
+- [syntax] `@elaborate` -- use `@` to denotes interaction
 
 - `exps/*` -- `check` & `infer` -- when `ElaborationNarrator.active`, narrate
 
