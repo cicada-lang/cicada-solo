@@ -1,12 +1,8 @@
 # narrator of elaboration
 
-- `ElaborationNarrator`
-
-- `check` & `infer` take `ElaborationOptions` which might has a `ElaborationNarrator`
-
 - `Exps.Elaborate`
 
-- [syntax] `@elaborate` -- use `@` to denotes interaction
+  - [syntax] `@elaborate` -- use `@` to denotes interaction
 
 - `exps/*` -- `check` & `infer` -- when `ElaborationNarrator.active`, narrate
 
@@ -22,6 +18,9 @@
     and suggests different choices by matching on the argument
     (or apply any other computation on the argument).
 
+  - if the `watch` mode will be used as main feedback for the interaction of our system,
+    we need to design it gooder.
+
 - rules are made to be spoken
 
   - how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
@@ -34,6 +33,10 @@
   - `@` for interaction
 
 - print type of todo during elaboration
+
+# repl
+
+- repl commands should be implemented like cli commands
 
 # core features
 

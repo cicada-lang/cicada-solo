@@ -1,14 +1,18 @@
-import { Exp } from "../exp"
+import { Exp, ElaborationOptions } from "../exp"
 import { Core } from "../core"
 import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { ExpTrace } from "../errors"
 import * as ut from "../ut"
 
-export function infer(ctx: Ctx, exp: Exp): { t: Value; core: Core } {
+export function infer(
+  ctx: Ctx,
+  exp: Exp,
+  opts?: ElaborationOptions
+): { t: Value; core: Core } {
   try {
     if (exp.infer) {
-      return exp.infer(ctx)
+      return exp.infer(ctx, opts)
     }
 
     throw new ExpTrace(
