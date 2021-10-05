@@ -1,6 +1,8 @@
 # narrator of elaboration
 
-- inject `Narrator` to `check` and `infer`
+- [syntax] use `@` to denotes interaction
+
+- inject `Narrator` to `check` and `infer` -- not only log, but also interaction
 
   - how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
   - how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
@@ -107,3 +109,7 @@
 - [optimization] use native `BigInt` as `Nat`
 
   - learn from constraint logic programming (CLP)
+
+# bug
+
+- `Library` -- the use of cached modules in `Library.load` is not safe in concurrent environment
