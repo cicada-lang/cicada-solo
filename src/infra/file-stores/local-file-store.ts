@@ -24,7 +24,7 @@ export class LocalFileStore extends FileStore {
     }
   }
 
-  async put(path: string, text: string): Promise<boolean> {
+  async set(path: string, text: string): Promise<boolean> {
     const file = this.resolve(path)
     if (!fs.existsSync(file)) {
       await fs.promises.mkdir(Path.dirname(file), { recursive: true })

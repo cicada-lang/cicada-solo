@@ -91,7 +91,7 @@ export class ReadlineRepl extends Repl {
   private listenHistory(): void {
     this.readline.on("history", (history) => {
       const text = history.reverse().join("\n") + "\n"
-      this.files.put("repl/history", text)
+      this.files.set("repl/history", text)
     })
   }
 

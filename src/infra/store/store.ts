@@ -86,15 +86,15 @@ export abstract class Store<T, Key extends string | number | symbol = string> {
     }
   }
 
-  // NOTE The returnd boolean of `put` and `patch`:
+  // NOTE The returnd boolean of `set` and `patch`:
   // - true  -- update -- already `has`
   // - false -- insert
 
-  async put(key: Key, data: T): Promise<boolean> {
-    return this.patch(key, data)
+  async set(key: Key, data: T): Promise<boolean> {
+    return this.update(key, data)
   }
 
-  patch(key: Key, data: Partial<T>): Promise<boolean> {
+  update(key: Key, data: Partial<T>): Promise<boolean> {
     throw new StoreError(
       [
         `The method is not implemented: patch`,
