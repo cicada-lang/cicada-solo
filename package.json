@@ -12,8 +12,7 @@
     "test": "./dev t",
     "dist:linux": "pkg package.json --no-bytecode --public --public-packages '*' --target linux --output dist/cic && pushd dist && sha256sum cic > cic.sha256sum && popd",
     "dist:macos": "pkg package.json --no-bytecode --public --public-packages '*' --target macos --output dist/cic-macos && pushd dist && sha256sum cic-macos > cic-macos.sha256sum && popd",
-    "dist:win": "pkg package.json --no-bytecode --public --public-packages '*' --target win --output dist/cic-win.exe && pushd dist && sha256sum cic-win.exe > cic-win.exe.sha256sum && popd",
-    "vercel-build": "npm run build && npm run test"
+    "dist:win": "pkg package.json --no-bytecode --public --public-packages '*' --target win --output dist/cic-win.exe && pushd dist && sha256sum cic-win.exe > cic-win.exe.sha256sum && popd"
   },
   "prettier": {
     "semi": false,
