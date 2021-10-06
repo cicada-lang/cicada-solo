@@ -1,4 +1,4 @@
-import { Exp, ExpMeta, subst } from "../../exp"
+import { Exp, ExpMeta, ElaborationOptions, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
@@ -23,7 +23,13 @@ export class Quote extends Exp {
     return this
   }
 
-  infer(ctx: Ctx): { t: Value; core: Core } {
+  infer(ctx: Ctx, opts: ElaborationOptions): { t: Value; core: Core } {
+    if (opts?.narrator) {
+      opts.narrator.narrate([
+        `I infer the literal string: ${this.str}, to have type String`,
+      ])
+    }
+
     return {
       t: new Exps.StrValue(),
       core: new Exps.QuoteCore(this.str),

@@ -12,6 +12,8 @@ export * from "./let-core"
 export * from "./the"
 export * from "./the-core"
 
+export * from "./elaborate"
+
 export * from "./todo"
 export * from "./todo-core"
 export * from "./todo-neutral"

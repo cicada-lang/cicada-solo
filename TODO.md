@@ -1,8 +1,12 @@
 # narrator of elaboration
 
-- [syntax] use `@` to denotes interaction
+- also be able to use `@elab` as a short hand
 
-- inject `Narrator` to `check` and `infer` -- not only log, but also interaction
+- `exps/*` -- use `narrator`
+
+- note about narration and interaction
+
+  - narration-of-elaboration-in-during-type-checking.md
 
   - interaction should be achieved by editing code,
     the program simply watch for file changes and print different messages as feedback,
@@ -14,8 +18,27 @@
     and suggests different choices by matching on the argument
     (or apply any other computation on the argument).
 
+  - if the `watch` mode will be used as main feedback for the interaction of our system,
+    we need to design it gooder.
+
+- [cli] `run` be able to watch single file
+
+- rules are made to be spoken
+
   - how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
   - how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
+
+# typed hole
+
+- use `@TODO` or `@TODO "...."` -- instead of `TODO("...")`
+
+  - `@` for interaction
+
+- print type of todo during elaboration
+
+# repl
+
+- repl commands should be implemented like cli commands
 
 # core features
 
