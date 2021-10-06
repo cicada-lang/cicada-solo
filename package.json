@@ -24,7 +24,7 @@
   "devDependencies": {
     "@types/commonmark": "^0.27.5",
     "@types/nanoid": "^2.1.0",
-    "@types/node": "^16.10.2",
+    "@types/node": "^16.10.3",
     "@types/yargs-parser": "^20.2.1",
     "@xieyuheng/test-runner": "^0.1.23",
     "change-case": "^4.1.2",
@@ -39,7 +39,7 @@
     "commonmark": "^0.30.0",
     "fast-deep-equal": "^3.1.3",
     "nanocolors": "^0.2.12",
-    "nanoid": "^3.1.28",
+    "nanoid": "^3.1.29",
     "node-watch": "^0.7.2",
     "pino": "^7.0.0-rc.8",
     "pino-pretty": "^7.0.1",
