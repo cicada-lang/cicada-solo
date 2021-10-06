@@ -18,6 +18,7 @@ and print different messages as feedback.
 
 In the feedback message, the program can suggests
 different choices of next editing action.
+(Imagine a type system based logic adventure role play game.)
 
 We consistently prefix a syntactic keyword by `@`
 to denote "interaction".
@@ -33,8 +34,8 @@ User must be able to authoring interactions
 
 The key of interaction is choices,
 a user defined interaction can take argument,
-and suggests different choices by matching on the argument
-(or apply any other computation on the argument).
+and suggests different choices by matching on the argument.
+(Or apply any other computation on the argument.)
 
 # References
 
