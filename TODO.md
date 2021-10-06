@@ -1,8 +1,12 @@
 # narrator of elaboration
 
+- also be able to use `@elab` as a short hand
+
 - `exps/*` -- use `narrator`
 
 - note about narration and interaction
+
+  - narration-of-elaboration-in-during-type-checking.md
 
   - interaction should be achieved by editing code,
     the program simply watch for file changes and print different messages as feedback,
@@ -17,7 +21,7 @@
   - if the `watch` mode will be used as main feedback for the interaction of our system,
     we need to design it gooder.
 
-    - be able to watch single file
+- [cli] `run` be able to watch single file
 
 - rules are made to be spoken
 
