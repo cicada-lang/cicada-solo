@@ -1,5 +1,5 @@
 export abstract class Store<T, Key extends string | number | symbol = string> {
-  create(data: T): Promise<Key> {
+  create(value: T): Promise<Key> {
     throw new StoreError(
       [
         `The method is not implemented: create`,
@@ -20,17 +20,17 @@ export abstract class Store<T, Key extends string | number | symbol = string> {
   abstract get(key: Key): Promise<T | undefined>
 
   async getOrFail(key: Key): Promise<T> {
-    const data = await this.get(key)
-    if (data === undefined) {
+    const value = await this.get(key)
+    if (value === undefined) {
       throw new StoreError(
         [
-          `I can not get data`,
+          `I can not get value`,
           `  class name: ${this.constructor.name}`,
           `  key: ${key}`,
         ].join("\n")
       )
     } else {
-      return data
+      return value
     }
   }
 
@@ -63,34 +63,34 @@ export abstract class Store<T, Key extends string | number | symbol = string> {
   }
 
   async findFirstOrFail(query: Partial<T>): Promise<[string, T]> {
-    const data = await this.findFirst(query)
-    if (data === undefined) {
+    const value = await this.findFirst(query)
+    if (value === undefined) {
       throw new StoreError(
         [
-          `I can not find first data`,
+          `I can not find first value`,
           `  class name: ${this.constructor.name}`,
           `  query: ${JSON.stringify(query)}`,
         ].join("\n")
       )
     } else {
-      return data
+      return value
     }
   }
 
   async has(key: Key): Promise<boolean> {
-    const data = await this.get(key)
-    if (data === undefined) {
+    const value = await this.get(key)
+    if (value === undefined) {
       return false
     } else {
       return true
     }
   }
 
-  async set(key: Key, data: T): Promise<boolean> {
-    return this.update(key, data)
+  async set(key: Key, value: T): Promise<boolean> {
+    return this.update(key, value)
   }
 
-  update(key: Key, data: Partial<T>): Promise<boolean> {
+  update(key: Key, value: Partial<T>): Promise<boolean> {
     throw new StoreError(
       [
         `The method is not implemented: patch`,
