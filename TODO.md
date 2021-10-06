@@ -4,29 +4,17 @@
 
 - `exps/*` -- use `narrator`
 
-- note about narration and interaction
-
-  - narration-of-elaboration-in-during-type-checking.md
-
-  - interaction should be achieved by editing code,
-    the program simply watch for file changes and print different messages as feedback,
-    in the message, the program can suggests different choices of next editing.
-
-  - user must be able to authoring interactions -- define new `@`.
-    the key of interaction is choices,
-    a user defined interaction can take argument,
-    and suggests different choices by matching on the argument
-    (or apply any other computation on the argument).
-
-  - if the `watch` mode will be used as main feedback for the interaction of our system,
-    we need to design it gooder.
-
 - [cli] `run` be able to watch single file
 
 - rules are made to be spoken
 
-  - how to read the formation rule, reading introduction rule and elimination rule as little book style laws?
-  - how to read the computation rule, reading eta rule and sameness rules as little book style commandments?
+  - reading the formation rules (laws of the little book)
+    - introduction rules
+    - elimination rules
+
+  - reading the computation rules (commandments of the little book)
+    - eta rule
+    - sameness rule
 
 # typed hole
 
