@@ -48,6 +48,7 @@ npm run test   // Run test
 
 ## Community
 
+- GitHub Organization: [github.com/cicada-lang](https://github.com/cicada-lang)
 - IRC channel: `#cicada-lang` at [libera.chat](https://libera.chat)
 - Telegram group: [CicadaLanguage](https://t.me/CicadaLanguage)
 
