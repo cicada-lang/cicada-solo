@@ -1,6 +1,8 @@
-# Syntax Summary
+---
+title: Syntax Summary
+---
 
-## stmts
+# stmts
 
 def:
 - def name = exp
@@ -10,7 +12,7 @@ def:
 show:
 - exp
 
-## exps
+# exps
 
 type:
 - Type

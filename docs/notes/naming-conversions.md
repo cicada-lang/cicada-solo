@@ -1,6 +1,8 @@
-# naming convention
+---
+title: Naming conventions
+---
 
-## name of variable and function
+# name of variable and function
 
 - in some case, we use type as postfix to name variable of this type,
   - `nat_equal_consequence_t` -- `_t` for `Type`

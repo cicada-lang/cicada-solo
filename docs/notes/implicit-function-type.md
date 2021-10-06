@@ -1,6 +1,8 @@
-# Implicit function type
+---
+title: Implicit function type
+---
 
-## Review rules about non-implicit `Fn` and `Ap`
+# Review rules about non-implicit `Fn` and `Ap`
 
 ``` typescript
 Pi(name: string, arg_t: Exp, ret_t: Exp)
@@ -24,7 +26,7 @@ infer(ctx, Ap(target, arg)) {
 }
 ```
 
-## The rules about implicit `Fn` and `Ap`
+# The rules about implicit `Fn` and `Ap`
 
 ``` typescript
 ImPi(given: { name: string, arg_t }, name: string, arg_t: Exp, ret_t: Exp)
@@ -56,9 +58,9 @@ infer(ctx, Ap(target, arg)) {
 }
 ```
 
-## Understand
+# Understanding
 
-### Implicit lambda insertion
+## Implicit lambda insertion
 
 Check `(x) { x }` against `(given A: Type, A) -> A`
 
@@ -76,7 +78,7 @@ Check `(x) { x }` against `(given Type) -> (closure A) => (A) -> A`
 3. Check `(x) { x }` against `(fresh_name) -> fresh_name`
 4. Return `(given fresh_name, x) { x }`
 
-### Implicit argument insertion
+## Implicit argument insertion
 
 Assume `id: (given A: Type, A) -> A`
 
@@ -116,7 +118,7 @@ Infer `id(true)`
 
 Maybe we can simply use the `ctx` instead of `Reify`.
 
-### What can go wrong
+## What can go wrong
 
 ```
 poly: Maybe((given A: Type, A) -> A) =
@@ -131,7 +133,7 @@ poly: Maybe((given A: Type, A) -> A) =
 3. Infer `Maybe((b) -> b)` for `just((x) { x })`
 4. Fail to unify with `Maybe((given A: Type, A) -> A)`
 
-## Look back
+# Look back
 
 When we want to make something implicit, we use unification.
 

@@ -1,6 +1,8 @@
-# Traditional semantics vs Algebraic semantics
+---
+title: Traditional semantics vs Algebraic semantics
+---
 
-## Traditional type theory semantics
+# Traditional type theory semantics
 
 This kind of semantics is description of implementation.
 Just like pseudocode of algorithm,
@@ -15,7 +17,7 @@ To assert the judgement `x : A`,
 we must have a successful checking that `x` is of the type `A`.
 or say, apply the function `check` to `x` and `A` will be success.
 
-## Algebraic semantics
+# Algebraic semantics
 
 This kind of semantics is to specify
 how the implementation can be viewed as
