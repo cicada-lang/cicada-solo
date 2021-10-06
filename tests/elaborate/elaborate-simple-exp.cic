@@ -1,3 +1,9 @@
 @elaborate 123
 @elaborate "abc"
 @elaborate add1(123)
+
+// use `@elab` as a short hand
+
+@elab 123
+@elab "abc"
+@elab add1(123)

@@ -221,6 +221,8 @@ export function operator_matcher(tree: pt.Tree): Exp {
       new Exps.The(exp_matcher(t), exp_matcher(exp), { span }),
     "operator:is": ({ t, exp }, { span }) =>
       new Exps.The(exp_matcher(t), exp_matcher(exp), { span }),
+  "operator:elab": ({ exp }, { span }) =>
+      new Exps.Elaborate(exp_matcher(exp), { span }),
     "operator:elaborate": ({ exp }, { span }) =>
       new Exps.Elaborate(exp_matcher(exp), { span }),
   })(tree)

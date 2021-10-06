@@ -1,7 +1,5 @@
 # narrator of elaboration
 
-- also be able to use `@elab` as a short hand
-
 - `exps/*` -- use `narrator`
 
 - [cli] `run` be able to watch single file
