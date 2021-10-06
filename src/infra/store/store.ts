@@ -1,3 +1,12 @@
+export class StoreError extends Error {
+  message: string
+
+  constructor(message: string) {
+    super(message)
+    this.message = message
+  }
+}
+
 export abstract class Store<T, Key extends string | number | symbol = string> {
   create(value: T): Promise<Key> {
     throw new StoreError(
@@ -106,14 +115,5 @@ export abstract class Store<T, Key extends string | number | symbol = string> {
         `  class name: ${this.constructor.name}`,
       ].join("\n")
     )
-  }
-}
-
-export class StoreError extends Error {
-  message: string
-
-  constructor(message: string) {
-    super(message)
-    this.message = message
   }
 }
