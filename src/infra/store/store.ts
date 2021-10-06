@@ -86,10 +86,6 @@ export abstract class Store<T, Key extends string | number | symbol = string> {
     }
   }
 
-  // NOTE The returnd boolean of `set` and `patch`:
-  // - true  -- update -- already `has`
-  // - false -- insert
-
   async set(key: Key, data: T): Promise<boolean> {
     return this.update(key, data)
   }
