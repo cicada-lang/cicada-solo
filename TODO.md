@@ -1,5 +1,3 @@
-- [logger] `node-logger` improve formating
-
 # narrator of elaboration
 
 - `exps/*` -- use `narrator`
