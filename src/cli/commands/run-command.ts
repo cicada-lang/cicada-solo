@@ -52,7 +52,7 @@ async function watch(runner: Runner, path: string): Promise<void> {
   watcher(runner.library.files.resolve(path), async (event, file) => {
     if (event === "remove") {
       runner.library.cache.delete(path)
-      app.logger.info(`(${event}) ${path}`)
+      app.logger.info({ tag: event, msg: path })
       process.exit(1)
     }
 
@@ -61,9 +61,9 @@ async function watch(runner: Runner, path: string): Promise<void> {
       const { error } = await runner.run(path)
 
       if (error) {
-        app.logger.error(`(${event}) ${path}`)
+        app.logger.error({ tag: event, msg: path })
       } else {
-        app.logger.info(`(${event}) ${path}`)
+        app.logger.info({ tag: event, msg: path })
       }
     }
   })
