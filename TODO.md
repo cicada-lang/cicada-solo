@@ -1,4 +1,3 @@
-- [cli] `run --watch` -- extract `watch` function
 - [cli] `run --watch` -- fix exit on `remove` event
 
 # narrator of elaboration

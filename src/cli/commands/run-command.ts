@@ -1,6 +1,7 @@
 import { Command } from "../../infra/command"
 import { CommandRunner } from "../../infra/command-runner"
 import * as Runners from "../../runners"
+import { Runner } from "../../runner"
 import app from "../../app/node-app"
 import * as ut from "../../ut"
 import watcher from "node-watch"
@@ -37,24 +38,7 @@ export class RunCommand extends Command<Args, Opts> {
     if (argv["watch"]) {
       await runner.run(path)
       app.logger.info(`Initial run complete, now watching for file changes.`)
-      watcher(library.files.resolve(path), async (event, file) => {
-        if (event === "remove") {
-          library.cache.delete(path)
-          app.logger.info(`(${event}) ${path}`)
-          process.exit(1)
-        }
-
-        if (event === "update") {
-          library.cache.delete(path)
-          const { error } = await runner.run(path)
-
-          if (error) {
-            app.logger.error(`(${event}) ${path}`)
-          } else {
-            app.logger.info(`(${event}) ${path}`)
-          }
-        }
-      })
+      await watch(runner, path)
     } else {
       const { error } = await runner.run(path)
       if (error) {
@@ -62,4 +46,25 @@ export class RunCommand extends Command<Args, Opts> {
       }
     }
   }
+}
+
+async function watch(runner: Runner, path: string): Promise<void> {
+  watcher(runner.library.files.resolve(path), async (event, file) => {
+    if (event === "remove") {
+      runner.library.cache.delete(path)
+      app.logger.info(`(${event}) ${path}`)
+      process.exit(1)
+    }
+
+    if (event === "update") {
+      runner.library.cache.delete(path)
+      const { error } = await runner.run(path)
+
+      if (error) {
+        app.logger.error(`(${event}) ${path}`)
+      } else {
+        app.logger.info(`(${event}) ${path}`)
+      }
+    }
+  })
 }
