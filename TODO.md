@@ -1,4 +1,3 @@
-- pino can only be used in `node-app`
 - [cli] `run --watch` -- extract `watch` function
 - [cli] `run --watch` -- fix exit on `remove` event
 
