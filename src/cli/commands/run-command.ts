@@ -4,7 +4,7 @@ import * as Runners from "../../runners"
 import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"
 import Path from "path"
-import Colors from "picocolors"
+import * as ut from "../../ut"
 
 type Args = { file: string }
 
@@ -16,12 +16,12 @@ export class RunCommand extends Command<Args> {
   args = { file: ty.string() }
 
   help(runner: CommandRunner): string {
-    const name = Colors.blue("run")
+    const name = ut.colors.blue("run")
 
     return [
       `The ${name} command runs file, and print top-level expressions.`,
       ``,
-      Colors.blue(`  ${runner.name} run tests/trivial/sole.cic`),
+      ut.colors.blue(`  ${runner.name} run tests/trivial/sole.cic`),
     ].join("\n")
   }
 

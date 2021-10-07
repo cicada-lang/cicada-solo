@@ -4,9 +4,9 @@ import { Library } from "../../library"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
 import app from "../../app/node-app"
+import * as ut from "../../ut"
 import ty from "@xieyuheng/ty"
 import watcher from "node-watch"
-import Colors from "picocolors"
 import fs from "fs"
 
 type Args = { library?: string }
@@ -21,7 +21,7 @@ export class CheckCommand extends Command<Args, Opts> {
   opts = { watch: ty.optional(ty.boolean()) }
 
   help(runner: CommandRunner): string {
-    const name = Colors.blue(this.name)
+    const name = ut.colors.blue(this.name)
 
     return [
       `The ${name} command checks a library.`,
@@ -30,11 +30,13 @@ export class CheckCommand extends Command<Args, Opts> {
       `or a path to a directory which contains the config file,`,
       `and if no path are given, the current working directory will be used.`,
       ``,
-      Colors.blue(`  ${runner.name} check libraries/cicada-stdlib`),
-      Colors.blue(
+      ut.colors.blue(`  ${runner.name} check libraries/cicada-stdlib`),
+      ut.colors.blue(
         `  ${runner.name} check libraries/cicada-stdlib/library.json`
       ),
-      Colors.blue(`  ${runner.name} check libraries/the-little-typer --watch`),
+      ut.colors.blue(
+        `  ${runner.name} check libraries/the-little-typer --watch`
+      ),
     ].join("\n")
   }
 
