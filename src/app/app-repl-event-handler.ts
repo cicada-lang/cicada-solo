@@ -2,7 +2,7 @@ import { ReplEvent, ReplEventHandler } from "../infra/repl"
 import { Library } from "../library"
 import { ErrorReporter } from "../error-reporter"
 import * as StmtOutputs from "../stmt-outputs"
-import Colors from "Colors"
+import Colors from "picocolors"
 import { AppConfig } from "./app-config"
 
 export class AppReplEventHandler extends ReplEventHandler {

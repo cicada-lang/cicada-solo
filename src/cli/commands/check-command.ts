@@ -6,7 +6,7 @@ import * as Runners from "../../runners"
 import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"
 import watcher from "node-watch"
-import Colors from "Colors"
+import Colors from "picocolors"
 import fs from "fs"
 
 type Args = { library?: string }

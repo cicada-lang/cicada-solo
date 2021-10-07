@@ -2,7 +2,7 @@ import { Command } from "../../infra/command"
 import { CommandRunner } from "../../infra/command-runner"
 import * as ut from "../../ut"
 import ty from "@xieyuheng/ty"
-import Colors from "Colors"
+import Colors from "picocolors"
 
 type Args = { name?: string }
 

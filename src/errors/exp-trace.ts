@@ -1,6 +1,6 @@
 import { Exp } from "../exp"
 import pt from "@cicada-lang/partech"
-import Colors from "Colors"
+import Colors from "picocolors"
 
 export class ExpTrace extends Error {
   message: string

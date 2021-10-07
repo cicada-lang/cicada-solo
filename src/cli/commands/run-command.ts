@@ -4,7 +4,7 @@ import * as Runners from "../../runners"
 import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"
 import Path from "path"
-import Colors from "Colors"
+import Colors from "picocolors"
 
 type Args = { file: string }
 
