@@ -1,4 +1,4 @@
-- use `Library<LocalFileStore>`
+- `FileStore` should do not know about `root` and `resolve`
 
 # narrator of elaboration
 

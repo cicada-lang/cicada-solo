@@ -1,6 +1,7 @@
 import { Command } from "@xieyuheng/enchanter/lib/command"
 import { CommandRunner } from "@xieyuheng/enchanter/lib/command-runner"
 import { Library } from "../../library"
+import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
 import app from "../../app/node-app"
@@ -63,7 +64,9 @@ export class CheckCommand extends Command<Args, Opts> {
   }
 }
 
-async function check(library: Library): Promise<{ errors: Array<unknown> }> {
+async function check(
+  library: Library<LocalFileStore>
+): Promise<{ errors: Array<unknown> }> {
   let errors: Array<unknown> = []
 
   for (const path of Object.keys(await library.files.all())) {
@@ -83,7 +86,7 @@ async function check(library: Library): Promise<{ errors: Array<unknown> }> {
   return { errors }
 }
 
-async function watch(library: Library): Promise<void> {
+async function watch(library: Library<LocalFileStore>): Promise<void> {
   const dir = library.files.root
 
   watcher(dir, { recursive: true }, async (event, file) => {
