@@ -1,5 +1,5 @@
-import { Command } from "../../infra/command"
-import { ReadlineRepl } from "../../infra/repls/readline-repl"
+import { Command } from "@xieyuheng/enchanter/lib/command"
+import { ReadlineRepl } from "@xieyuheng/enchanter/lib/repls/readline-repl"
 import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"
 import Path from "path"

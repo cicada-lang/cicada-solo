@@ -1,4 +1,4 @@
-import { ReplEvent, ReplEventHandler } from "../infra/repl"
+import { ReplEvent, ReplEventHandler } from "@xieyuheng/enchanter/lib/repl"
 import { Library } from "../library"
 import { ErrorReporter } from "../error-reporter"
 import * as StmtOutputs from "../stmt-outputs"

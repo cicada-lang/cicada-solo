@@ -1,5 +1,3 @@
-extract `@xieyuheng/enchanter`
-
 # narrator of elaboration
 
 - `exps/*` -- use `narrator`

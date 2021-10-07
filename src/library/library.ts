@@ -1,6 +1,6 @@
 import { Module } from "../module"
 import * as ModuleLoaders from "../module-loaders"
-import { FileStore } from "../infra/file-store"
+import { FileStore } from "@xieyuheng/enchanter/lib/file-store"
 import ty from "@xieyuheng/ty"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)

@@ -1,5 +1,5 @@
-import { Command } from "../../infra/command"
-import { CommandRunner } from "../../infra/command-runner"
+import { Command } from "@xieyuheng/enchanter/lib/command"
+import { CommandRunner } from "@xieyuheng/enchanter/lib/command-runner"
 import { Library } from "../../library"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"

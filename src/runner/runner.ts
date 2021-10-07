@@ -1,5 +1,5 @@
 import { Library } from "../library"
-import { FileStore } from "../infra/file-store"
+import { FileStore } from "@xieyuheng/enchanter/lib/file-store"
 import { ErrorReporter } from "../error-reporter"
 
 export abstract class Runner {
