@@ -1,7 +1,9 @@
 import { Command } from "@xieyuheng/enchanter/lib/command"
 import { CommandRunner } from "@xieyuheng/enchanter/lib/command-runner"
+import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
 import * as Runners from "../../runners"
 import { Runner } from "../../runner"
+import { Library } from "../../library"
 import app from "../../app/node-app"
 import * as ut from "../../ut"
 import watcher from "node-watch"
@@ -38,7 +40,7 @@ export class RunCommand extends Command<Args, Opts> {
     if (argv["watch"]) {
       await runner.run(path)
       app.logger.info(`Initial run complete, now watching for file changes.`)
-      await watch(runner, path)
+      await watch(runner, library, path)
     } else {
       const { error } = await runner.run(path)
       if (error) {
@@ -48,16 +50,20 @@ export class RunCommand extends Command<Args, Opts> {
   }
 }
 
-async function watch(runner: Runner, path: string): Promise<void> {
-  watcher(runner.library.files.resolve(path), async (event, file) => {
+async function watch(
+  runner: Runner,
+  library: Library<LocalFileStore>,
+  path: string
+): Promise<void> {
+  watcher(library.files.resolve(path), async (event, file) => {
     if (event === "remove") {
-      runner.library.cache.delete(path)
+      library.cache.delete(path)
       app.logger.info({ tag: event, msg: path })
       process.exit(1)
     }
 
     if (event === "update") {
-      runner.library.cache.delete(path)
+      library.cache.delete(path)
       const { error } = await runner.run(path)
 
       if (error) {

@@ -1,4 +1,5 @@
 import { Library } from "../library"
+import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
 import { Runner } from "../runner"
 import * as ut from "../ut"
 import fs from "fs"
@@ -6,9 +7,9 @@ import fs from "fs"
 export class SnapshotRunner extends Runner {
   static extensions = [".cic", ".md"]
 
-  library: Library
+  library: Library<LocalFileStore>
 
-  constructor(opts: { library: Library }) {
+  constructor(opts: { library: Library<LocalFileStore> }) {
     super()
     this.library = opts.library
   }

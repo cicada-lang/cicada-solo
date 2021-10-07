@@ -12,7 +12,7 @@ export class NodeApp extends GenericApp {
   libraries: LocalLibraryStore = new LocalLibraryStore()
   logger = new Loggers.NodeLogger()
 
-  createSpecialRunner(opts: {
+  createLocalRunner(opts: {
     path: string
     library: Library<LocalFileStore>
   }): Runner {

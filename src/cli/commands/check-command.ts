@@ -71,7 +71,7 @@ async function check(
 
   for (const path of Object.keys(await library.files.all())) {
     if (ModuleLoaders.can_handle_extension(path)) {
-      const runner = app.createSpecialRunner({ path, library })
+      const runner = app.createLocalRunner({ path, library })
       const { error } = await runner.run(path)
       if (error) errors.push(error)
 
@@ -103,7 +103,7 @@ async function watch(library: Library<LocalFileStore>): Promise<void> {
 
     if (event === "update") {
       library.cache.delete(path)
-      const runner = app.createSpecialRunner({ path, library })
+      const runner = app.createLocalRunner({ path, library })
       const { error } = await runner.run(path)
 
       if (error) {

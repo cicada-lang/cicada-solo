@@ -1,5 +1,3 @@
-- `FileStore` should do not know about `root` and `resolve`
-
 # narrator of elaboration
 
 - `exps/*` -- use `narrator`
