@@ -1,4 +1,3 @@
-- `CheckCommand` use `tag` in log
 - [logger] `node-logger` improve formating
 
 # narrator of elaboration
