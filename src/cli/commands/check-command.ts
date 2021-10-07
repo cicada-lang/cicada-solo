@@ -5,8 +5,8 @@ import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
 import app from "../../app/node-app"
 import * as ut from "../../ut"
-import ty from "@xieyuheng/ty"
 import watcher from "node-watch"
+import ty from "@xieyuheng/ty"
 import fs from "fs"
 
 type Args = { library?: string }
@@ -52,7 +52,7 @@ export class CheckCommand extends Command<Args, Opts> {
 
     if (argv["watch"]) {
       await check(library)
-      app.logger.info(`Initial check complete, now watching for changes.`)
+      app.logger.info(`Initial check complete, now watching for file changes.`)
       await watch(library)
     } else {
       const { errors } = await check(library)

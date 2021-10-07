@@ -1,10 +1,10 @@
-- [repl] commands should have `name`
+- pino can only be used in `node-app`
+- [cli] `run --watch` -- extract `watch` function
+- [cli] `run --watch` -- fix exit on `remove` event
 
 # narrator of elaboration
 
 - `exps/*` -- use `narrator`
-
-- [cli] `run` be able to watch single file
 
 - rules are made to be spoken
 
