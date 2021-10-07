@@ -1,4 +1,5 @@
-- [cli] `run --watch` -- fix exit on `remove` event
+- `CheckCommand` use `tag` in log
+- [logger] `node-logger` improve formating
 
 # narrator of elaboration
 

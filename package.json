@@ -41,8 +41,6 @@
     "nanoid": "^3.1.29",
     "node-watch": "^0.7.2",
     "picocolors": "^0.2.1",
-    "pino": "^7.0.0-rc.8",
-    "pino-pretty": "^7.0.1",
     "readdirp": "^3.6.0",
     "yargs-parser": "^20.2.9"
   },

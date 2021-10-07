@@ -1,11 +1,18 @@
-export function formatTime(t: Date): string {
-  const hh = leftPadZero(t.getHours().toString())
-  const mm = leftPadZero(t.getMinutes().toString())
-  const ss = leftPadZero(t.getSeconds().toString())
+import { leftPad } from "./left-pad"
 
-  return `${hh}:${mm}:${ss}`
-}
+export function formatTime(
+  t: Date,
+  opts?: { withMilliseconds?: boolean }
+): string {
+  const hh = leftPad(t.getHours().toString(), 2, "0")
+  const mm = leftPad(t.getMinutes().toString(), 2, "0")
+  const ss = leftPad(t.getSeconds().toString(), 2, "0")
 
-function leftPadZero(s: string): string {
-  return s.length === 1 ? "0" + s : s
+  const mi = leftPad((t.getTime() % 1000).toString(), 3, "0")
+
+  if (opts?.withMilliseconds) {
+    return `${hh}:${mm}:${ss}.${mi}`
+  } else {
+    return `${hh}:${mm}:${ss}`
+  }
 }
