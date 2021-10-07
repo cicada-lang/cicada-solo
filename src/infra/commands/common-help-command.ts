@@ -2,7 +2,7 @@ import { Command } from "../../infra/command"
 import { CommandRunner } from "../../infra/command-runner"
 import * as ut from "../../ut"
 import ty from "@xieyuheng/ty"
-import picocolors from "picocolors"
+import Colors from "Colors"
 
 type Args = { name?: string }
 
@@ -14,12 +14,12 @@ export class CommonHelpCommand extends Command<Args> {
   args = { name: ty.optional(ty.string()) }
 
   help(runner: CommandRunner): string {
-    const name = picocolors.blue(this.name)
+    const name = Colors.blue(this.name)
 
     return [
       `The ${name} command displays help for a given command.`,
       ``,
-      picocolors.blue(`  ${runner.name} help help`),
+      Colors.blue(`  ${runner.name} help help`),
     ].join("\n")
   }
 
@@ -35,7 +35,7 @@ export class CommonHelpCommand extends Command<Args> {
       console.log(
         [
           //
-          picocolors.yellow(`Help:`),
+          Colors.yellow(`Help:`),
           ut.indent(this.help(runner), "  "),
         ].join("\n")
       )
@@ -55,7 +55,7 @@ export class CommonHelpCommand extends Command<Args> {
     console.log(
       [
         //
-        picocolors.yellow(`Description:`),
+        Colors.yellow(`Description:`),
         `  ${command.description}`,
         ``,
       ].join("\n")
@@ -64,21 +64,21 @@ export class CommonHelpCommand extends Command<Args> {
     console.log(
       [
         //
-        picocolors.yellow(`Usage:`),
-        `  ${picocolors.blue(`${name} ${this.signature(command)}`)}`,
+        Colors.yellow(`Usage:`),
+        `  ${Colors.blue(`${name} ${this.signature(command)}`)}`,
         ``,
       ].join("\n")
     )
 
     if (Object.entries(command.opts).length > 0) {
       const options = Object.entries(command.opts)
-        .map(([key, schema]) => picocolors.blue(`--${key}`))
+        .map(([key, schema]) => Colors.blue(`--${key}`))
         .join("\n")
 
       console.log(
         [
           //
-          picocolors.yellow(`Options:`),
+          Colors.yellow(`Options:`),
           ut.indent(options, "  "),
           ``,
         ].join("\n")
@@ -89,7 +89,7 @@ export class CommonHelpCommand extends Command<Args> {
       console.log(
         [
           //
-          picocolors.yellow(`Help:`),
+          Colors.yellow(`Help:`),
           ut.indent(command.help(runner), "  "),
         ].join("\n")
       )
@@ -100,7 +100,7 @@ export class CommonHelpCommand extends Command<Args> {
     console.log(
       [
         //
-        picocolors.yellow(`Usage:`),
+        Colors.yellow(`Usage:`),
         `  command [arguments] [options]`,
         ``,
       ].join("\n")
@@ -113,10 +113,8 @@ export class CommonHelpCommand extends Command<Args> {
 
       console.log(
         [
-          picocolors.yellow(`Default command:`),
-          `  ${picocolors.blue(this.signature(command))}  ${
-            command.description
-          }`,
+          Colors.yellow(`Default command:`),
+          `  ${Colors.blue(this.signature(command))}  ${command.description}`,
           ``,
         ].join("\n")
       )
@@ -130,14 +128,12 @@ export class CommonHelpCommand extends Command<Args> {
       )
     )
 
-    console.log(picocolors.yellow(`Commands:`))
+    console.log(Colors.yellow(`Commands:`))
     for (const command of runner.commands) {
       const head = `${command.name} ${this.signature(command)}`
       console.log(
         [
-          `  ${picocolors.blue(ut.rightPad(head, size))}  ${
-            command.description
-          }`,
+          `  ${Colors.blue(ut.rightPad(head, size))}  ${command.description}`,
         ].join("\n")
       )
     }

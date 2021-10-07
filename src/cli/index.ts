@@ -3,7 +3,7 @@ import * as Commands from "./commands"
 import { CommonHelpCommand } from "../infra/commands"
 
 export function run(): void {
-  const runner = new CommandRunners.CommonCommandRunner({
+  new CommandRunners.CommonCommandRunner({
     defaultCommand: new Commands.DefaultCommand(),
     commands: [
       new Commands.RunCommand(),
@@ -12,7 +12,5 @@ export function run(): void {
       new Commands.SnapshotCommand(),
       new CommonHelpCommand(),
     ],
-  })
-
-  runner.run()
+  }).run()
 }
