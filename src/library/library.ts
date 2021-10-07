@@ -11,12 +11,12 @@ export type LibraryConfig = {
   src: string
 }
 
-export class Library {
+export class Library<Files extends FileStore = FileStore> {
   config: LibraryConfig
-  files: FileStore
+  files: Files
   cache: Map<string, Module> = new Map()
 
-  constructor(opts: { config: LibraryConfig; files: FileStore }) {
+  constructor(opts: { config: LibraryConfig; files: Files }) {
     this.config = opts.config
     this.files = opts.files
   }
