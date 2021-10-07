@@ -1,4 +1,3 @@
-- `LocalLibraryStore` return `Library<LocalFileStore>`
 - use `Library<LocalFileStore>`
 
 # narrator of elaboration
