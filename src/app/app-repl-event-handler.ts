@@ -2,7 +2,7 @@ import { ReplEvent, ReplEventHandler } from "../infra/repl"
 import { Library } from "../library"
 import { ErrorReporter } from "../error-reporter"
 import * as StmtOutputs from "../stmt-outputs"
-import nanocolors from "nanocolors"
+import picocolors from "picocolors"
 import { AppConfig } from "./app-config"
 
 export class AppReplEventHandler extends ReplEventHandler {
@@ -35,7 +35,7 @@ export class AppReplEventHandler extends ReplEventHandler {
         if (output instanceof StmtOutputs.NormalTerm) {
           const exp = output.exp.repr()
           const t = output.t.repr()
-          console.log(`${nanocolors.yellow(exp)}: ${nanocolors.blue(t)}`)
+          console.log(`${picocolors.yellow(exp)}: ${picocolors.blue(t)}`)
         } else {
           console.log(output.repr().trim())
         }

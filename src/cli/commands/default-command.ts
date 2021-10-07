@@ -9,6 +9,8 @@ type Args = { file?: string }
 type Opts = { help?: boolean; version?: boolean }
 
 export class DefaultCommand extends Command<Args, Opts> {
+  name = "default"
+
   description = "Open REPL or run a file"
 
   args = { file: ty.optional(ty.string()) }

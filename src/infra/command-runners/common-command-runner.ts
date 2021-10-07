@@ -5,11 +5,11 @@ import { Schema, Errors } from "@xieyuheng/ty"
 import Path from "path"
 
 export class CommonCommandRunner extends CommandRunner {
-  commands: Record<string, Command<any, any>>
+  commands: Array<Command<any, any>>
   defaultCommand?: Command<any, any>
 
   constructor(opts: {
-    commands: Record<string, Command<any, any>>
+    commands: Array<Command<any, any>>
     defaultCommand?: Command<any, any>
   }) {
     super()
@@ -32,14 +32,13 @@ export class CommonCommandRunner extends CommandRunner {
 
   async run(): Promise<void> {
     const name = this.commandName
+    const command = this.commands.find((command) => command.name === name)
 
-    if (this.commands[name]) {
-      const command = this.commands[name]
+    if (command) {
       const argv = this.parseArgv(command)
       await this.apply(command, argv["_"].slice(1), argv)
     } else if (this.defaultCommand) {
-      const command = this.defaultCommand
-      const argv = this.parseArgv(command)
+      const argv = this.parseArgv(this.defaultCommand)
       await this.apply(this.defaultCommand, argv["_"], argv)
     } else {
       console.error(

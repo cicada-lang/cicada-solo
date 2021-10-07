@@ -1,6 +1,6 @@
 import { Exp } from "../exp"
 import pt from "@cicada-lang/partech"
-import nanocolors from "nanocolors"
+import picocolors from "picocolors"
 
 export class ExpTrace extends Error {
   message: string
@@ -30,7 +30,7 @@ export class ExpTrace extends Error {
       for (const exp of this.previous) {
         if (exp.meta?.span) {
           if (path) {
-            s += nanocolors.yellow(path + ":")
+            s += picocolors.yellow(path + ":")
             s += "\n"
           }
 

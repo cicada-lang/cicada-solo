@@ -7,6 +7,8 @@ import Path from "path"
 type Args = { dir?: string }
 
 export class ReplCommand extends Command<Args> {
+  name = "repl"
+
   description = "Run interactive REPL"
 
   args = { dir: ty.optional(ty.string()) }

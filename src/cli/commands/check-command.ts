@@ -6,20 +6,22 @@ import * as Runners from "../../runners"
 import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"
 import watcher from "node-watch"
-import nanocolors from "nanocolors"
+import picocolors from "picocolors"
 import fs from "fs"
 
 type Args = { library?: string }
 type Opts = { watch?: boolean }
 
 export class CheckCommand extends Command<Args, Opts> {
+  name = "check"
+
   description = "Check a library -- by cwd, dir or library.json"
 
   args = { library: ty.optional(ty.string()) }
   opts = { watch: ty.optional(ty.boolean()) }
 
   help(runner: CommandRunner): string {
-    const name = nanocolors.blue("check")
+    const name = picocolors.blue(this.name)
 
     return [
       `The ${name} command checks a library.`,
@@ -28,11 +30,11 @@ export class CheckCommand extends Command<Args, Opts> {
       `or a path to a directory which contains the config file,`,
       `and if no path are given, the current working directory will be used.`,
       ``,
-      nanocolors.blue(`  ${runner.name} check libraries/cicada-stdlib`),
-      nanocolors.blue(
+      picocolors.blue(`  ${runner.name} check libraries/cicada-stdlib`),
+      picocolors.blue(
         `  ${runner.name} check libraries/cicada-stdlib/library.json`
       ),
-      nanocolors.blue(
+      picocolors.blue(
         `  ${runner.name} check libraries/the-little-typer --watch`
       ),
     ].join("\n")

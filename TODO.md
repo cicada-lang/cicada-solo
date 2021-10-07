@@ -1,3 +1,5 @@
+- [repl] commands should have `name`
+
 # narrator of elaboration
 
 - `exps/*` -- use `narrator`
@@ -21,10 +23,6 @@
   - `@` for interaction
 
 - print type of todo during elaboration
-
-# repl
-
-- repl commands should be implemented like cli commands
 
 # core features
 

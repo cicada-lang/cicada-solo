@@ -7,6 +7,8 @@ import Path from "path"
 type Args = { file: string }
 
 export class SnapshotCommand extends Command<Args> {
+  name = "snapshot"
+
   description = "Snapshot a file -- write to <file>.out"
 
   args = { file: ty.string() }

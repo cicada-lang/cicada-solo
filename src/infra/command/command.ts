@@ -8,6 +8,7 @@ export abstract class Command<
   Args extends Object = {},
   Opts extends Object = {}
 > {
+  abstract name: string
   abstract description: string
 
   args: SchemaObject<Args> = {} as SchemaObject<Args>

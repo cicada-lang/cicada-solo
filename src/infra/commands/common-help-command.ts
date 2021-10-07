@@ -2,22 +2,24 @@ import { Command } from "../../infra/command"
 import { CommandRunner } from "../../infra/command-runner"
 import * as ut from "../../ut"
 import ty from "@xieyuheng/ty"
-import nanocolors from "nanocolors"
+import picocolors from "picocolors"
 
 type Args = { name?: string }
 
 export class CommonHelpCommand extends Command<Args> {
+  name = "help"
+
   description = "Display help for a command"
 
   args = { name: ty.optional(ty.string()) }
 
   help(runner: CommandRunner): string {
-    const name = nanocolors.blue("help")
+    const name = picocolors.blue(this.name)
 
     return [
       `The ${name} command displays help for a given command.`,
       ``,
-      nanocolors.blue(`  ${runner.name} help help`),
+      picocolors.blue(`  ${runner.name} help help`),
     ].join("\n")
   }
 
@@ -33,7 +35,7 @@ export class CommonHelpCommand extends Command<Args> {
       console.log(
         [
           //
-          nanocolors.yellow(`Help:`),
+          picocolors.yellow(`Help:`),
           ut.indent(this.help(runner), "  "),
         ].join("\n")
       )
@@ -41,7 +43,7 @@ export class CommonHelpCommand extends Command<Args> {
   }
 
   helpCommand(name: string, runner: CommandRunner): void {
-    const command = runner.commands[name]
+    const command = runner.commands.find((command) => command.name === name)
 
     if (command === undefined) {
       console.log(`  I do not know a command named: ${name}`)
@@ -53,7 +55,7 @@ export class CommonHelpCommand extends Command<Args> {
     console.log(
       [
         //
-        nanocolors.yellow(`Description:`),
+        picocolors.yellow(`Description:`),
         `  ${command.description}`,
         ``,
       ].join("\n")
@@ -62,21 +64,21 @@ export class CommonHelpCommand extends Command<Args> {
     console.log(
       [
         //
-        nanocolors.yellow(`Usage:`),
-        `  ${nanocolors.blue(`${name} ${this.signature(command)}`)}`,
+        picocolors.yellow(`Usage:`),
+        `  ${picocolors.blue(`${name} ${this.signature(command)}`)}`,
         ``,
       ].join("\n")
     )
 
     if (Object.entries(command.opts).length > 0) {
       const options = Object.entries(command.opts)
-        .map(([key, schema]) => nanocolors.blue(`--${key}`))
+        .map(([key, schema]) => picocolors.blue(`--${key}`))
         .join("\n")
 
       console.log(
         [
           //
-          nanocolors.yellow(`Options:`),
+          picocolors.yellow(`Options:`),
           ut.indent(options, "  "),
           ``,
         ].join("\n")
@@ -87,7 +89,7 @@ export class CommonHelpCommand extends Command<Args> {
       console.log(
         [
           //
-          nanocolors.yellow(`Help:`),
+          picocolors.yellow(`Help:`),
           ut.indent(command.help(runner), "  "),
         ].join("\n")
       )
@@ -98,7 +100,7 @@ export class CommonHelpCommand extends Command<Args> {
     console.log(
       [
         //
-        nanocolors.yellow(`Usage:`),
+        picocolors.yellow(`Usage:`),
         `  command [arguments] [options]`,
         ``,
       ].join("\n")
@@ -111,8 +113,8 @@ export class CommonHelpCommand extends Command<Args> {
 
       console.log(
         [
-          nanocolors.yellow(`Default command:`),
-          `  ${nanocolors.blue(this.signature(command))}  ${
+          picocolors.yellow(`Default command:`),
+          `  ${picocolors.blue(this.signature(command))}  ${
             command.description
           }`,
           ``,
@@ -123,17 +125,17 @@ export class CommonHelpCommand extends Command<Args> {
 
   listCommands(runner: CommandRunner): void {
     const size = Math.max(
-      ...Object.entries(runner.commands).map(
-        ([name, command]) => `${name} ${this.signature(command)}`.length
+      ...runner.commands.map(
+        (command) => `${command.name} ${this.signature(command)}`.length
       )
     )
 
-    console.log(nanocolors.yellow(`Commands:`))
-    for (const [name, command] of Object.entries(runner.commands)) {
-      const head = `${name} ${this.signature(command)}`
+    console.log(picocolors.yellow(`Commands:`))
+    for (const command of runner.commands) {
+      const head = `${command.name} ${this.signature(command)}`
       console.log(
         [
-          `  ${nanocolors.blue(ut.rightPad(head, size))}  ${
+          `  ${picocolors.blue(ut.rightPad(head, size))}  ${
             command.description
           }`,
         ].join("\n")
