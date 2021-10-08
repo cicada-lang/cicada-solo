@@ -1,7 +1,7 @@
 import { Logger } from "../logger"
 import * as ut from "../ut"
 
-export class NodeLogger extends Logger {
+export class PrettyLogger extends Logger {
   info(input: string | Record<string, any>): void {
     if (typeof input === "string") {
       this.log({ msg: input, level: "info" })

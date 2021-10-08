@@ -1,1 +1,1 @@
-export * from "./node-logger"
+export * from "./pretty-logger"

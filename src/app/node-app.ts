@@ -10,7 +10,7 @@ import * as Loggers from "../loggers"
 export class NodeApp extends GenericApp {
   home: AppHomeFileStore = new AppHomeFileStore()
   libraries: LocalLibraryStore = new LocalLibraryStore()
-  logger = new Loggers.NodeLogger()
+  logger = new Loggers.PrettyLogger()
 
   createLocalRunner(opts: {
     path: string
