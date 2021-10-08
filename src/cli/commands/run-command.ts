@@ -21,13 +21,13 @@ export class RunCommand extends Command<Args, Opts> {
   args = { file: ty.string() }
   opts = { watch: ty.optional(ty.boolean()) }
 
+  // prettier-ignore
   help(runner: CommandRunner): string {
-    const name = ut.colors.blue("run")
-
     return [
-      `The ${name} command runs file, and print top-level expressions.`,
+      `The ${ut.colors.blue(this.name)} command runs file, and print top-level expressions.`,
       ``,
-      ut.colors.blue(`  ${runner.name} run tests/trivial/sole.cic`),
+      ut.colors.blue(`  ${runner.name} ${this.name} tests/trivial/sole.cic`),
+      ``,
     ].join("\n")
   }
 

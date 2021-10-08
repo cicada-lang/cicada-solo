@@ -21,23 +21,19 @@ export class CheckCommand extends Command<Args, Opts> {
   args = { library: ty.optional(ty.string()) }
   opts = { watch: ty.optional(ty.boolean()) }
 
+  // prettier-ignore
   help(runner: CommandRunner): string {
-    const name = ut.colors.blue(this.name)
-
     return [
-      `The ${name} command checks a library.`,
+      `The ${ut.colors.blue(this.name)} command checks a library.`,
       ``,
       `You can specify a library by a path to its library.json config file,`,
       `or a path to a directory which contains the config file,`,
       `and if no path are given, the current working directory will be used.`,
       ``,
-      ut.colors.blue(`  ${runner.name} check libraries/cicada-stdlib`),
-      ut.colors.blue(
-        `  ${runner.name} check libraries/cicada-stdlib/library.json`
-      ),
-      ut.colors.blue(
-        `  ${runner.name} check libraries/the-little-typer --watch`
-      ),
+      ut.colors.blue(`  ${runner.name} ${this.name} libraries/cicada-stdlib`),
+      ut.colors.blue(`  ${runner.name} ${this.name} libraries/cicada-stdlib/library.json`),
+      ut.colors.blue(`  ${runner.name} ${this.name} libraries/the-little-typer --watch`),
+      ``,
     ].join("\n")
   }
 
