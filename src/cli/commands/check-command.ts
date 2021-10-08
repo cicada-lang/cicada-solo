@@ -67,14 +67,16 @@ async function check(
 
   for (const path of Object.keys(await library.files.all())) {
     if (ModuleLoaders.can_handle_extension(path)) {
+      const t0 = Date.now()
       const runner = app.createLocalRunner({ path, library })
       const { error } = await runner.run(path)
       if (error) errors.push(error)
-
+      const t1 = Date.now()
+      const elapse = t1 - t0
       if (error) {
-        app.logger.error({ tag: "check", msg: path })
+        app.logger.error({ tag: "check", elapse, msg: path })
       } else {
-        app.logger.info({ tag: "check", msg: path })
+        app.logger.info({ tag: "check", elapse, msg: path })
       }
     }
   }
@@ -98,14 +100,16 @@ async function watch(library: Library<LocalFileStore>): Promise<void> {
     }
 
     if (event === "update") {
+      const t0 = Date.now()
       library.cache.delete(path)
       const runner = app.createLocalRunner({ path, library })
       const { error } = await runner.run(path)
-
+      const t1 = Date.now()
+      const elapse = t1 - t0
       if (error) {
-        app.logger.error({ tag: event, msg: path })
+        app.logger.error({ tag: event, elapse, msg: path })
       } else {
-        app.logger.info({ tag: event, msg: path })
+        app.logger.info({ tag: event, elapse, msg: path })
       }
     }
   })
