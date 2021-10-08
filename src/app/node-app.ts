@@ -2,10 +2,10 @@ import { GenericApp } from "./generic-app"
 import { AppHomeFileStore } from "./app-home-file-store"
 import { LocalLibraryStore } from "../library-stores"
 import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
+import * as Loggers from "@xieyuheng/enchanter/lib/loggers"
 import { Library } from "../library"
 import { Runner } from "../runner"
 import { SnapshotRunner, ErrorRunner } from "../runners"
-import * as Loggers from "../loggers"
 
 export class NodeApp extends GenericApp {
   home: AppHomeFileStore = new AppHomeFileStore()
