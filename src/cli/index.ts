@@ -6,10 +6,10 @@ export function run(): void {
   new CommandRunners.CommonCommandRunner({
     defaultCommand: new Commands.DefaultCommand(),
     commands: [
-      new Commands.RunCommand(),
       new Commands.ReplCommand(),
-      new Commands.CheckCommand(),
+      new Commands.RunCommand(),
       new Commands.SnapshotCommand(),
+      new Commands.CheckCommand(),
       new CommonHelpCommand(),
     ],
   }).run()

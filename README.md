@@ -20,16 +20,27 @@ npm i -g @cicada-lang/cicada
 
 ### Command Line Interface
 
+After installed the `@cicada-lang/cicada` package, <br>
+you can run `cic help`, and you will see the following help messages:
+
 ```
+Usage:
+  command [arguments] [options]
+
 Default command:
-  [file]  Open REPL or run a file
+  [paper]  Open REPL or run a paper
 
 Commands:
-  run [file]       Run a file -- support .md and .cic
-  repl [dir]       Run interactive REPL
-  check [book]  Check a book -- by cwd, dir or book.json
-  snapshot [file]  Snapshot a file -- write to <file>.out
-  help [name]      Display help for a command
+  repl [dir]        Open an interactive REPL
+  run [paper]       Run a paper or a page of book
+  snapshot [paper]  Take a snapshot of a paper
+  check [book]      Check the typing of a book
+  help [name]       Display help for a command
+
+Help:
+  The help command displays help for a given command.
+
+    cic help help
 ```
 
 ## Development

@@ -5,7 +5,6 @@ import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
 import app from "../../app/node-app"
-import * as ut from "../../ut"
 import watcher from "node-watch"
 import ty from "@xieyuheng/ty"
 import fs from "fs"
@@ -16,23 +15,28 @@ type Opts = { watch?: boolean }
 export class CheckCommand extends Command<Args, Opts> {
   name = "check"
 
-  description = "Check a book -- by cwd, dir or book.json"
+  description = "Check the typing of a book"
 
   args = { book: ty.optional(ty.string()) }
   opts = { watch: ty.optional(ty.boolean()) }
 
   // prettier-ignore
   help(runner: CommandRunner): string {
+    const { blue } = this.colors
+
     return [
-      `The ${ut.colors.blue(this.name)} command checks a book.`,
+      `The ${blue(this.name)} command checks a book.`,
       ``,
-      `You can specify a book by a path to its book.json config file,`,
+      `You can specify a book by a path to its ${blue("book.json")},`,
       `or a path to a directory which contains the config file,`,
       `and if no path are given, the current working directory will be used.`,
       ``,
-      ut.colors.blue(`  ${runner.name} ${this.name} books/cicada-stdlib`),
-      ut.colors.blue(`  ${runner.name} ${this.name} books/cicada-stdlib/book.json`),
-      ut.colors.blue(`  ${runner.name} ${this.name} books/the-little-typer --watch`),
+      blue(`  ${runner.name} ${this.name} books/group`),
+      blue(`  ${runner.name} ${this.name} books/group/book.json`),
+      ``,
+      `You can use ${blue("--watch")} to let the program stand by, and react to changes.`,
+      ``,
+      blue(`  ${runner.name} ${this.name} books/the-little-typer --watch`),
       ``,
     ].join("\n")
   }

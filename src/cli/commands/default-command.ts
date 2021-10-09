@@ -5,15 +5,15 @@ import * as Commands from "../commands"
 import app from "../../app/generic-app"
 import ty from "@xieyuheng/ty"
 
-type Args = { file?: string }
+type Args = { paper?: string }
 type Opts = { help?: boolean; version?: boolean }
 
 export class DefaultCommand extends Command<Args, Opts> {
   name = "default"
 
-  description = "Open REPL or run a file"
+  description = "Open REPL or run a paper"
 
-  args = { file: ty.optional(ty.string()) }
+  args = { paper: ty.optional(ty.string()) }
   opts = { help: ty.optional(ty.boolean()), version: ty.optional(ty.boolean()) }
   alias = { help: ["h"], version: ["v"] }
 
@@ -29,15 +29,15 @@ export class DefaultCommand extends Command<Args, Opts> {
       return
     }
 
-    const file = argv["file"]
+    const paper = argv["paper"]
 
-    if (file === undefined) {
+    if (paper === undefined) {
       const dir = process.cwd()
       const command = new Commands.ReplCommand()
       await command.execute({ dir })
     } else {
       const command = new Commands.RunCommand()
-      await command.execute({ file })
+      await command.execute({ paper })
     }
   }
 }

@@ -1,4 +1,5 @@
 import { Command } from "@xieyuheng/enchanter/lib/command"
+import { CommandRunner } from "@xieyuheng/enchanter/lib/command-runner"
 import { ReadlineRepl } from "@xieyuheng/enchanter/lib/repls/readline-repl"
 import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"
@@ -9,9 +10,24 @@ type Args = { dir?: string }
 export class ReplCommand extends Command<Args> {
   name = "repl"
 
-  description = "Run interactive REPL"
+  description = "Open an interactive REPL"
 
   args = { dir: ty.optional(ty.string()) }
+
+  // prettier-ignore
+  help(runner: CommandRunner): string {
+    const { blue } = this.colors
+
+    return [
+      `The ${blue(this.name)} command take you into a REPL,`,
+      `-- Read Evaluate Print Loop`,
+      ``,
+      `In which you can try some ideas real quick.`,
+      ``,
+      blue(`  ${runner.name} ${this.name}`),
+      ``,
+    ].join("\n")
+  }
 
   async execute(argv: Args): Promise<void> {
     const dir = Path.resolve(argv["dir"] || process.cwd())

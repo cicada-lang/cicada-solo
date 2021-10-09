@@ -5,41 +5,49 @@ import * as Runners from "../../runners"
 import { Runner } from "../../runner"
 import { Book } from "../../book"
 import app from "../../app/node-app"
-import * as ut from "../../ut"
 import watcher from "node-watch"
 import ty from "@xieyuheng/ty"
 import Path from "path"
 
-type Args = { file: string }
+type Args = { paper: string }
 type Opts = { watch?: boolean }
 
 export class RunCommand extends Command<Args, Opts> {
   name = "run"
 
-  description = "Run a file -- support .md and .cic"
+  description = "Run a paper or a page of book"
 
-  args = { file: ty.string() }
+  args = { paper: ty.string() }
   opts = { watch: ty.optional(ty.boolean()) }
 
   // prettier-ignore
   help(runner: CommandRunner): string {
+    const { blue } = this.colors
+
     return [
-      `The ${ut.colors.blue(this.name)} command runs file, and print top-level expressions.`,
+      `The ${blue(this.name)} command runs through a paper or a page of book,`,
+      `evaluating top-level expressions, and prints the results.`,
       ``,
-      ut.colors.blue(`  ${runner.name} ${this.name} tests/trivial/sole.cic`),
+      `It supports ${blue(".md")} and ${blue(".cic")} file extensions.`,
+      ``,
+      blue(`  ${runner.name} ${this.name} tests/trivial/sole.cic`),
+      ``,
+      `You can use ${blue("--watch")} to let the program stand by, and react to changes.`,
+      ``,
+      blue(`  ${runner.name} ${this.name} tests/trivial/sole.cic --watch`),
       ``,
     ].join("\n")
   }
 
   async execute(argv: Args & Opts): Promise<void> {
-    Command.assertFile(argv["file"])
-    const book = await app.books.findUpOrFake(Path.dirname(argv["file"]))
+    Command.assertFile(argv["paper"])
+    const book = await app.books.findUpOrFake(Path.dirname(argv["paper"]))
     const runner = new Runners.DefaultRunner({ book })
-    const path = Path.basename(argv["file"])
+    const path = Path.basename(argv["paper"])
 
     if (argv["watch"]) {
       await runner.run(path)
-      app.logger.info(`Initial run complete, now watching for file changes.`)
+      app.logger.info(`Initial run complete, now watching for changes.`)
       await watch(runner, book, path)
     } else {
       const { error } = await runner.run(path)

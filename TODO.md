@@ -1,8 +1,3 @@
-> Use the concept of book and paper instead of library.
-
-- merge `cic check` and `cic run`
-- sometimes  `process.stdout.write` instead of `console.log` for output
-
 # narration
 
 - `exps/*` -- use `narrator`
