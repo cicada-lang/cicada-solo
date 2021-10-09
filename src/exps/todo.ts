@@ -7,12 +7,12 @@ import { QuoteCore } from "./str/quote-core"
 
 export class Todo extends Exp {
   meta: ExpMeta
-  message: string
+  note: string
 
-  constructor(message: string, meta: ExpMeta) {
+  constructor(note: string, meta: ExpMeta) {
     super()
     this.meta = meta
-    this.message = message
+    this.note = note
   }
 
   free_names(bound_names: Set<string>): Set<string> {
@@ -24,10 +24,10 @@ export class Todo extends Exp {
   }
 
   repr(): string {
-    return `@TODO ${new QuoteCore(this.message).repr()}`
+    return `@TODO ${new QuoteCore(this.note).repr()}`
   }
 
   check(ctx: Ctx, t: Value): Core {
-    return new TodoCore(this.message, t)
+    return new TodoCore(this.note, t)
   }
 }

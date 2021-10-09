@@ -5,21 +5,21 @@ import * as Exps from "../exps"
 import { QuoteCore, TodoNeutral } from "../exps"
 
 export class TodoCore extends Core {
-  message: string
+  note: string
   t: Value
 
-  constructor(message: string, type: Value) {
+  constructor(note: string, type: Value) {
     super()
-    this.message = message
+    this.note = note
     this.t = type
   }
 
   evaluate(env: Env): Value {
-    return new Exps.NotYetValue(this.t, new TodoNeutral(this.message, this.t))
+    return new Exps.NotYetValue(this.t, new TodoNeutral(this.note, this.t))
   }
 
   repr(): string {
-    return `@TODO ${new QuoteCore(this.message).repr()}`
+    return `@TODO ${new QuoteCore(this.note).repr()}`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
