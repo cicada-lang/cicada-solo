@@ -98,10 +98,7 @@
 
 # library manager
 
-- [library manager] [cli] download library from registry
-
-  - `libraries.cicada-lang.com`
-  - `registry.cicada-lang.com`
+- [library manager] [cli] download library from `references` specified in `library.json`
 
 - [library manager] be able to resolve module in library of `dependencies`
 
