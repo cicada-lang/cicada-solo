@@ -27,7 +27,7 @@ Default command:
 Commands:
   run [file]       Run a file -- support .md and .cic
   repl [dir]       Run interactive REPL
-  check [library]  Check a library -- by cwd, dir or library.json
+  check [library]  Check a library -- by cwd, dir or book.json
   snapshot [file]  Snapshot a file -- write to <file>.out
   help [name]      Display help for a command
 ```

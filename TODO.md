@@ -1,6 +1,6 @@
 > Use the concept of book and paper instead of library.
 
-- rename `library.json/` to `book.json`
+- rename `library` to `book`
 - rename `cicada-stdlib` to ???
 
 # narration
@@ -103,7 +103,7 @@
 
 # library manager
 
-- [library manager] [cli] download library from `references` specified in `library.json`
+- [library manager] [cli] download library from `references` specified in `book.json`
 
 - [library manager] be able to resolve module in library of `dependencies`
 

@@ -28,7 +28,7 @@ export class LocalBookStore extends BookStore {
   }
 
   async findUpOrFake(dir: string): Promise<Book<LocalFileStore>> {
-    const config_file = ut.findUp("library.json", { from: dir })
+    const config_file = ut.findUp("book.json", { from: dir })
     return config_file ? await this.get(config_file) : this.fake(dir)
   }
 }
