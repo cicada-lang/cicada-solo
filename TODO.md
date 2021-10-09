@@ -1,16 +1,17 @@
-# narrator of elaboration
+# narration
 
 - `exps/*` -- use `narrator`
 
-- rules are made to be spoken
+- narration the formation rules
 
-  - reading the formation rules (laws of the little book)
-    - introduction rules
-    - elimination rules
+  - introduction rule & elimination rule
 
-  - reading the computation rules (commandments of the little book)
-    - eta rule
-    - sameness rule
+- narration for the computation rules
+
+  - eta rule & sameness rule
+
+  - These rules can not be narrated in our implementation of NbE,
+    maybe will be able to narrate them, if we use unification instead of NbE.
 
 - be able to inject different `Narrator` at app level -- for the web
 
