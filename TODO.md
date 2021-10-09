@@ -1,3 +1,5 @@
+- print type of `@TODO` during elaboration
+
 # narrator of elaboration
 
 - `exps/*` -- use `narrator`
@@ -11,14 +13,6 @@
   - reading the computation rules (commandments of the little book)
     - eta rule
     - sameness rule
-
-# typed hole
-
-- use `@TODO` or `@TODO "...."` -- instead of `TODO("...")`
-
-  - `@` for interaction
-
-- print type of todo during elaboration
 
 # core features
 

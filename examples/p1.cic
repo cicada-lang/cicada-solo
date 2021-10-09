@@ -7,7 +7,7 @@ mul: (Nat, Nat) -> Nat = (x, y) => {
 }
 
 Prime(n: Nat): Type {
-  TODO("Prime")
+  @TODO "Prime"
 }
 
 euler_s_conjecture(n: Nat): (
@@ -17,5 +17,5 @@ euler_s_conjecture(n: Nat): (
   add(mul(8, n), 3),
   add(mul(x, x), add(p, p))
 ) {
-  TODO("euler_s_conjecture")
+  @TODO "euler_s_conjecture"
 }

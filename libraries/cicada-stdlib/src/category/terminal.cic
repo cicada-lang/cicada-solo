@@ -24,7 +24,7 @@ terminal_object_isomorphism(
     morphism: y_terminal.morphism(x_terminal.object)
     inverse: x_terminal.morphism(y_terminal.object)
 
-    inverse_left: TODO("")
+    inverse_left: @TODO "inverse_left"
 
     // Equal(
     // cat.Morphism(dom, dom),
@@ -58,7 +58,7 @@ terminal_object_isomorphism(
     //   ): Equal(cat.Morphism(x_terminal, object), f, g)
 
 
-    inverse_right: TODO("asd")
+    inverse_right: @TODO "inverse_right"
 
     //   : Equal(
     // cat.Morphism(cod, cod),
