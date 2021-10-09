@@ -7,13 +7,13 @@ import { AppConfig } from "./app-config"
 
 export class AppReplEventHandler extends ReplEventHandler {
   config = new AppConfig()
-  library: Book
+  book: Book
   path: string
 
-  constructor(opts: { library: Book; path: string }) {
+  constructor(opts: { book: Book; path: string }) {
     super()
     this.path = opts.path
-    this.library = opts.library
+    this.book = opts.book
   }
 
   greeting(): void {
@@ -27,7 +27,7 @@ export class AppReplEventHandler extends ReplEventHandler {
   }
 
   private async execute(text: string): Promise<boolean> {
-    const mod = await this.library.load(this.path)
+    const mod = await this.book.load(this.path)
 
     try {
       const outputs = await mod.append(text).run()

@@ -7,24 +7,24 @@ import fs from "fs"
 export class SnapshotRunner extends Runner {
   static extensions = [".cic", ".md"]
 
-  library: Book<LocalFileStore>
+  book: Book<LocalFileStore>
 
-  constructor(opts: { library: Book<LocalFileStore> }) {
+  constructor(opts: { book: Book<LocalFileStore> }) {
     super()
-    this.library = opts.library
+    this.book = opts.book
   }
 
   async run(path: string): Promise<{ error?: unknown }> {
     try {
-      const mod = await this.library.load(path)
+      const mod = await this.book.load(path)
       await mod.run()
-      const file = this.library.files.resolve(path + ".out")
+      const file = this.book.files.resolve(path + ".out")
       if (mod.all_output) {
         await fs.promises.writeFile(file, ut.stripAnsi(mod.all_output))
       }
       return { error: undefined }
     } catch (error) {
-      const text = await this.library.files.getOrFail(path)
+      const text = await this.book.files.getOrFail(path)
       const report = this.reporter.report(error, { path, text })
       console.error(report)
       return { error }

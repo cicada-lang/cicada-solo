@@ -29,7 +29,7 @@ export class Book<Files extends FileStore = FileStore> {
 
   static fake_config(): BookConfig {
     return Book.config_schema.validate({
-      name: `<fake-library-${nanoid()}>`,
+      name: `<fake-book-${nanoid()}>`,
       version: "0.0.0",
       src: "src",
     })

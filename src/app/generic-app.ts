@@ -9,7 +9,7 @@ export class GenericApp {
   config = new AppConfig()
 
   createReplEventHandler(opts: {
-    library: Book
+    book: Book
     path: string
   }): AppReplEventHandler {
     return new AppReplEventHandler(opts)

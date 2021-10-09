@@ -25,7 +25,7 @@ export class Import extends Stmt {
       )
     }
 
-    const imported_mod = await mod.library.load(path)
+    const imported_mod = await mod.book.load(path)
 
     try {
       await imported_mod.run()

@@ -33,14 +33,14 @@ export class RunCommand extends Command<Args, Opts> {
 
   async execute(argv: Args & Opts): Promise<void> {
     Command.assertFile(argv["file"])
-    const library = await app.libraries.findUpOrFake(Path.dirname(argv["file"]))
-    const runner = new Runners.DefaultRunner({ library })
+    const book = await app.books.findUpOrFake(Path.dirname(argv["file"]))
+    const runner = new Runners.DefaultRunner({ book })
     const path = Path.basename(argv["file"])
 
     if (argv["watch"]) {
       await runner.run(path)
       app.logger.info(`Initial run complete, now watching for file changes.`)
-      await watch(runner, library, path)
+      await watch(runner, book, path)
     } else {
       const { error } = await runner.run(path)
       if (error) {
@@ -52,18 +52,18 @@ export class RunCommand extends Command<Args, Opts> {
 
 async function watch(
   runner: Runner,
-  library: Book<LocalFileStore>,
+  book: Book<LocalFileStore>,
   path: string
 ): Promise<void> {
-  watcher(library.files.resolve(path), async (event, file) => {
+  watcher(book.files.resolve(path), async (event, file) => {
     if (event === "remove") {
-      library.cache.delete(path)
+      book.cache.delete(path)
       app.logger.info({ tag: event, msg: path })
       process.exit(1)
     }
 
     if (event === "update") {
-      library.cache.delete(path)
+      book.cache.delete(path)
       const { error } = await runner.run(path)
 
       if (error) {

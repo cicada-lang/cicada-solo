@@ -9,12 +9,12 @@ import { SnapshotRunner, ErrorRunner } from "../runners"
 
 export class NodeApp extends GenericApp {
   home: AppHomeFileStore = new AppHomeFileStore()
-  libraries: LocalBookStore = new LocalBookStore()
+  books: LocalBookStore = new LocalBookStore()
   logger = new Loggers.PrettyLogger()
 
   createLocalRunner(opts: {
     path: string
-    library: Book<LocalFileStore>
+    book: Book<LocalFileStore>
   }): Runner {
     const { path } = opts
 

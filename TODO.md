@@ -1,7 +1,7 @@
 > Use the concept of book and paper instead of library.
 
-- rename `library` to `book`
 - rename `cicada-stdlib` to ???
+- merge `cic check` and `cic run`
 
 # narration
 
@@ -101,13 +101,13 @@
 - [stdlib] Category of Groups
 - [stdlib] Number theroy -- https://en.wikipedia.org/wiki/Number_theory
 
-# library manager
+# book manager
 
-- [library manager] [cli] download library from `references` specified in `book.json`
+- [book manager] [cli] download book from `references` specified in `book.json`
 
-- [library manager] be able to resolve module in library of `dependencies`
+- [book manager] be able to resolve module in book of `dependencies`
 
-  - we do not need to use library as module,
+  - we do not need to use book as module,
     we only need to be able to resolve module.
 
 # error report
@@ -122,4 +122,4 @@
 
 # bug
 
-- `Library` -- the use of cached modules in `Library.load` is not safe in concurrent environment
+- `Book` -- the use of cached modules in `Book.load` is not safe in concurrent environment

@@ -5,13 +5,13 @@ import { Parser } from "../parser"
 import * as commonmark from "commonmark"
 
 export class MarkdownModuleLoader extends ModuleLoader {
-  async load(library: Book, path: string): Promise<Module> {
-    const text = await library.files.getOrFail(path)
+  async load(book: Book, path: string): Promise<Module> {
+    const text = await book.files.getOrFail(path)
     const parser = new Parser()
     const stmts = code_blocks(text).flatMap((code_block) =>
       parser.parse_stmts(code_block.text, code_block.offset)
     )
-    return new Module({ library, path, stmts })
+    return new Module({ book, path, stmts })
   }
 }
 

@@ -27,7 +27,7 @@ Default command:
 Commands:
   run [file]       Run a file -- support .md and .cic
   repl [dir]       Run interactive REPL
-  check [library]  Check a library -- by cwd, dir or book.json
+  check [book]  Check a book -- by cwd, dir or book.json
   snapshot [file]  Snapshot a file -- write to <file>.out
   help [name]      Display help for a command
 ```
@@ -41,10 +41,10 @@ npm run watch  // Watch the compilation
 npm run test   // Run test
 ```
 
-## Libraries
+## Books
 
-- [Cicada Standard Library](libraries/cicada-stdlib)
-- [The Little Typer](libraries/the-little-typer)
+- [Cicada Standard book](books/cicada-stdlib)
+- [The Little Typer](books/the-little-typer)
 
 ## Community
 

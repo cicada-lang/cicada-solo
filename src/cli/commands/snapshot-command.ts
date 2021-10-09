@@ -15,9 +15,9 @@ export class SnapshotCommand extends Command<Args> {
 
   async execute(argv: Args): Promise<void> {
     Command.assertFile(argv["file"])
-    const library = await app.libraries.findUpOrFake(Path.dirname(argv["file"]))
+    const book = await app.books.findUpOrFake(Path.dirname(argv["file"]))
     const path = Path.basename(argv["file"])
-    const runner = app.createLocalRunner({ path, library })
+    const runner = app.createLocalRunner({ path, book })
     const { error } = await runner.run(path)
     if (error) {
       process.exit(1)
