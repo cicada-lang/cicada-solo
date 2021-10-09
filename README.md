@@ -43,8 +43,10 @@ npm run test   // Run test
 
 ## Books
 
-- [Cicada Standard book](books/cicada-stdlib)
 - [The Little Typer](books/the-little-typer)
+- [Category Theory](books/category)
+- [Group Theory](books/group)
+- [Order Theory](books/order)
 
 ## Community
 

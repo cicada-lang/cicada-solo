@@ -1,7 +1,7 @@
 > Use the concept of book and paper instead of library.
 
-- rename `cicada-stdlib` to ???
 - merge `cic check` and `cic run`
+- sometimes  `process.stdout.write` instead of `console.log` for output
 
 # narration
 
