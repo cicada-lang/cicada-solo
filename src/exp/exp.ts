@@ -1,7 +1,7 @@
 import { Ctx } from "../ctx"
 import { Core } from "../core"
 import { Value } from "../value"
-import { ElaborationNarrator } from "../elaboration-narrator"
+import { Narrator } from "../narrator"
 import pt from "@cicada-lang/partech"
 
 export interface ExpMeta {
@@ -9,7 +9,7 @@ export interface ExpMeta {
 }
 
 export interface ElaborationOptions {
-  narrator?: ElaborationNarrator
+  narrator?: Narrator
 }
 
 export abstract class Exp {

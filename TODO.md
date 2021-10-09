@@ -12,6 +12,8 @@
     - eta rule
     - sameness rule
 
+- be able to inject different `Narrator` at app level -- for the web
+
 # core features
 
 - support to use `=` to do local definitions in class

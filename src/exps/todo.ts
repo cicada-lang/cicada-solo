@@ -1,5 +1,5 @@
 import { Exp, ExpMeta, subst } from "../exp"
-import { ElaborationNarrator } from "../elaboration-narrator"
+import { Narrator } from "../narrator"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import { readback } from "../value"
@@ -29,7 +29,7 @@ export class Todo extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const narrator = new ElaborationNarrator()
+    const narrator = new Narrator()
     const t_core = readback(ctx, new Exps.TypeValue(), t)
     narrator.narrate([
       //
