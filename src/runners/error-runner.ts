@@ -1,4 +1,4 @@
-import { Library } from "../library"
+import { Book } from "../book"
 import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
 import { Runner } from "../runner"
 import * as ut from "../ut"
@@ -7,9 +7,9 @@ import fs from "fs"
 export class ErrorRunner extends Runner {
   static extensions = [".error.cic", ".error.md"]
 
-  library: Library<LocalFileStore>
+  library: Book<LocalFileStore>
 
-  constructor(opts: { library: Library<LocalFileStore> }) {
+  constructor(opts: { library: Book<LocalFileStore> }) {
     super()
     this.library = opts.library
   }

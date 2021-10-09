@@ -1,5 +1,5 @@
-import { LibraryStore } from "../library-store"
-import { Library } from "../library"
+import { BookStore } from "../book-store"
+import { Book } from "../book"
 import {
   LocalFileStore,
   FakeFileStore,
@@ -8,11 +8,11 @@ import * as ut from "../ut"
 import Path from "path"
 import fs from "fs"
 
-export class LocalLibraryStore extends LibraryStore {
-  async get(config_file: string): Promise<Library<LocalFileStore>> {
+export class LocalBookStore extends BookStore {
+  async get(config_file: string): Promise<Book<LocalFileStore>> {
     const text = await fs.promises.readFile(config_file, "utf8")
-    const config = Library.config_schema.validate(JSON.parse(text))
-    return new Library({
+    const config = Book.config_schema.validate(JSON.parse(text))
+    return new Book({
       config,
       files: new LocalFileStore({
         dir: Path.resolve(Path.dirname(config_file), config.src),
@@ -20,14 +20,14 @@ export class LocalLibraryStore extends LibraryStore {
     })
   }
 
-  fake(dir: string, faked?: Record<string, string>): Library<LocalFileStore> {
-    return new Library({
-      config: Library.fake_config(),
+  fake(dir: string, faked?: Record<string, string>): Book<LocalFileStore> {
+    return new Book({
+      config: Book.fake_config(),
       files: new FakeFileStore({ dir, faked }),
     })
   }
 
-  async findUpOrFake(dir: string): Promise<Library<LocalFileStore>> {
+  async findUpOrFake(dir: string): Promise<Book<LocalFileStore>> {
     const config_file = ut.findUp("library.json", { from: dir })
     return config_file ? await this.get(config_file) : this.fake(dir)
   }

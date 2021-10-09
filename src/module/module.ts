@@ -1,4 +1,4 @@
-import { Library } from "../library"
+import { Book } from "../book"
 import { Stmt } from "../stmt"
 import { Env } from "../env"
 import { Ctx } from "../ctx"
@@ -19,14 +19,14 @@ interface ModuleEntry {
 }
 
 export class Module {
-  library: Library
+  library: Book
   path: string
   entries: Array<ModuleEntry>
   index: number = 0
   env: Env = Env.empty
   ctx: Ctx = Ctx.empty
 
-  constructor(opts: { library: Library; path: string; stmts: Array<Stmt> }) {
+  constructor(opts: { library: Book; path: string; stmts: Array<Stmt> }) {
     this.library = opts.library
     this.path = opts.path
     this.entries = opts.stmts.map((stmt) => ({ stmt }))

@@ -1,6 +1,6 @@
 import { Command } from "@xieyuheng/enchanter/lib/command"
 import { CommandRunner } from "@xieyuheng/enchanter/lib/command-runner"
-import { Library } from "../../library"
+import { Book } from "../../book"
 import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
 import * as ModuleLoaders from "../../module-loaders"
 import * as Runners from "../../runners"
@@ -61,7 +61,7 @@ export class CheckCommand extends Command<Args, Opts> {
 }
 
 async function check(
-  library: Library<LocalFileStore>
+  library: Book<LocalFileStore>
 ): Promise<{ errors: Array<unknown> }> {
   let errors: Array<unknown> = []
 
@@ -84,7 +84,7 @@ async function check(
   return { errors }
 }
 
-async function watch(library: Library<LocalFileStore>): Promise<void> {
+async function watch(library: Book<LocalFileStore>): Promise<void> {
   const dir = library.files.root
 
   watcher(dir, { recursive: true }, async (event, file) => {

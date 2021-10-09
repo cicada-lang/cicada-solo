@@ -1,20 +1,20 @@
 import { GenericApp } from "./generic-app"
 import { AppHomeFileStore } from "./app-home-file-store"
-import { LocalLibraryStore } from "../library-stores"
+import { LocalBookStore } from "../book-stores"
 import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
 import * as Loggers from "@xieyuheng/enchanter/lib/loggers"
-import { Library } from "../library"
+import { Book } from "../book"
 import { Runner } from "../runner"
 import { SnapshotRunner, ErrorRunner } from "../runners"
 
 export class NodeApp extends GenericApp {
   home: AppHomeFileStore = new AppHomeFileStore()
-  libraries: LocalLibraryStore = new LocalLibraryStore()
+  libraries: LocalBookStore = new LocalBookStore()
   logger = new Loggers.PrettyLogger()
 
   createLocalRunner(opts: {
     path: string
-    library: Library<LocalFileStore>
+    library: Book<LocalFileStore>
   }): Runner {
     const { path } = opts
 

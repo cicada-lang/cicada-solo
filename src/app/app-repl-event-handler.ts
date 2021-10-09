@@ -1,5 +1,5 @@
 import { ReplEvent, ReplEventHandler } from "@xieyuheng/enchanter/lib/repl"
-import { Library } from "../library"
+import { Book } from "../book"
 import { ErrorReporter } from "../error-reporter"
 import * as StmtOutputs from "../stmt-outputs"
 import * as ut from "../ut"
@@ -7,10 +7,10 @@ import { AppConfig } from "./app-config"
 
 export class AppReplEventHandler extends ReplEventHandler {
   config = new AppConfig()
-  library: Library
+  library: Book
   path: string
 
-  constructor(opts: { library: Library; path: string }) {
+  constructor(opts: { library: Book; path: string }) {
     super()
     this.path = opts.path
     this.library = opts.library

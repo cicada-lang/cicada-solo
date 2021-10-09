@@ -1,4 +1,4 @@
-import { Library } from "../library"
+import { Book } from "../book"
 import { AppConfig } from "./app-config"
 import { AppReplEventHandler } from "./app-repl-event-handler"
 import { customAlphabet } from "nanoid"
@@ -9,7 +9,7 @@ export class GenericApp {
   config = new AppConfig()
 
   createReplEventHandler(opts: {
-    library: Library
+    library: Book
     path: string
   }): AppReplEventHandler {
     return new AppReplEventHandler(opts)

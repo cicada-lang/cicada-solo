@@ -3,7 +3,7 @@ import { CommandRunner } from "@xieyuheng/enchanter/lib/command-runner"
 import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
 import * as Runners from "../../runners"
 import { Runner } from "../../runner"
-import { Library } from "../../library"
+import { Book } from "../../book"
 import app from "../../app/node-app"
 import * as ut from "../../ut"
 import watcher from "node-watch"
@@ -52,7 +52,7 @@ export class RunCommand extends Command<Args, Opts> {
 
 async function watch(
   runner: Runner,
-  library: Library<LocalFileStore>,
+  library: Book<LocalFileStore>,
   path: string
 ): Promise<void> {
   watcher(library.files.resolve(path), async (event, file) => {

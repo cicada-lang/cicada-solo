@@ -1,11 +1,11 @@
-import { Library } from "../library"
+import { Book } from "../book"
 import { ErrorReporter } from "../error-reporter"
 import { Runner } from "../runner"
 
 export class DefaultRunner extends Runner {
-  library: Library
+  library: Book
 
-  constructor(opts: { library: Library }) {
+  constructor(opts: { library: Book }) {
     super()
     this.library = opts.library
   }
