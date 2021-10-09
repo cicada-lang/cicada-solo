@@ -24,7 +24,7 @@ export class Todo extends Exp {
   }
 
   repr(): string {
-    return `TODO(${new QuoteCore(this.message).repr()})`
+    return `@TODO ${new QuoteCore(this.message).repr()}`
   }
 
   check(ctx: Ctx, t: Value): Core {

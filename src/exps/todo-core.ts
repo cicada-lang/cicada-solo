@@ -19,7 +19,7 @@ export class TodoCore extends Core {
   }
 
   repr(): string {
-    return `TODO(${new QuoteCore(this.message).repr()})`
+    return `@TODO ${new QuoteCore(this.message).repr()}`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
