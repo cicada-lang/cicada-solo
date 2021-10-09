@@ -13,7 +13,7 @@
     "test:snapshot": "enchanter snapshot node 'lib/**/*.snapshot.js' --extern snapshot",
     "test:cicada": "enchanter test './bin/cic.js snapshot' 'tests/**/*.(cic|md)'",
     "test:examples": "enchanter test './bin/cic.js' 'examples/**/*.(cic|md)'",
-    "test:libraries": "enchanter test './bin/cic.js check' 'libraries/**/library.json'",
+    "test:books": "enchanter test './bin/cic.js check' 'books/**/library.json'",
     "test": "npm-run-all test:*",
     "dist:linux": "pkg package.json --no-bytecode --public --public-packages '*' --target linux --output dist/cic && pushd dist && sha256sum cic > cic.sha256sum && popd",
     "dist:macos": "pkg package.json --no-bytecode --public --public-packages '*' --target macos --output dist/cic-macos && pushd dist && sha256sum cic-macos > cic-macos.sha256sum && popd",

@@ -1,3 +1,10 @@
+> Use the concept of book and paper instead of library.
+
+- rename `examples/` to `papers/`
+- rename `Library` to `Book`
+- rename `library.json/` to `book.json`
+- rename `cicada-stdlib` to ???
+
 # narration
 
 - `exps/*` -- use `narrator`
