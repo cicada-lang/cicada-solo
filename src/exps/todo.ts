@@ -1,9 +1,10 @@
 import { Exp, ExpMeta, subst } from "../exp"
+import { ElaborationNarrator } from "../elaboration-narrator"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
+import { readback } from "../value"
 import { Core } from "../core"
-import { TodoCore } from "./todo-core"
-import { QuoteCore } from "./str/quote-core"
+import * as Exps from "../exps"
 
 export class Todo extends Exp {
   meta: ExpMeta
@@ -24,10 +25,19 @@ export class Todo extends Exp {
   }
 
   repr(): string {
-    return `@TODO ${new QuoteCore(this.note).repr()}`
+    return `@TODO ${new Exps.QuoteCore(this.note).repr()}`
   }
 
   check(ctx: Ctx, t: Value): Core {
-    return new TodoCore(this.note, t)
+    const narrator = new ElaborationNarrator()
+    const t_core = readback(ctx, new Exps.TypeValue(), t)
+    narrator.narrate([
+      //
+      `@TODO ${this.note}`,
+      `  ${t_core.repr()}`,
+      ``,
+    ])
+
+    return new Exps.TodoCore(this.note, t)
   }
 }

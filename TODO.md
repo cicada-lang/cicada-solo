@@ -1,5 +1,3 @@
-- print type of `@TODO` during elaboration
-
 # narrator of elaboration
 
 - `exps/*` -- use `narrator`
