@@ -54,10 +54,10 @@ npm run test   // Run test
 
 ## Books
 
-- [The Little Typer](books/the-little-typer)
-- [Category Theory](books/category)
 - [Group Theory](books/group)
 - [Order Theory](books/order)
+- [Category Theory](books/category)
+- [The Little Typer](books/the-little-typer)
 
 ## Community
 
