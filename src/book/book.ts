@@ -17,7 +17,7 @@ const book_config_schema = ty.object<BookConfig>({
   title: ty.string(),
   version: ty.semver(),
   src: ty.string(),
-  authors: ty.optional(ty.array(ty.string)),
+  authors: ty.optional(ty.array(ty.string())),
   date: ty.optional(ty.string()),
 })
 
