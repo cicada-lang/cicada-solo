@@ -67,7 +67,7 @@ async function check(
 ): Promise<{ errors: Array<unknown> }> {
   let errors: Array<unknown> = []
 
-  for (const path of Object.keys(await book.files.all())) {
+  for (const path of await book.files.keys()) {
     if (ModuleLoaders.can_handle_extension(path)) {
       const t0 = Date.now()
       const runner = app.createLocalRunner({ path, book })
