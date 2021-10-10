@@ -1,5 +1,7 @@
 {
   "title": "The Little Typer",
   "version": "0.0.1",
+  "authors": ["Daniel P. Friedman", "David Thrane Christiansen"],
+  "date": "2018",
   "src": "src"
 }
