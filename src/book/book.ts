@@ -6,10 +6,20 @@ import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
 
 export type BookConfig = {
-  name: string
+  title: string
   version: string
   src: string
+  authors?: Array<string>
+  date?: string
 }
+
+const book_config_schema = ty.object<BookConfig>({
+  title: ty.string(),
+  version: ty.semver(),
+  src: ty.string(),
+  authors: ty.optional(ty.array(ty.string)),
+  date: ty.optional(ty.string()),
+})
 
 export class Book<Files extends FileStore = FileStore> {
   config: BookConfig
@@ -21,15 +31,11 @@ export class Book<Files extends FileStore = FileStore> {
     this.files = opts.files
   }
 
-  static config_schema = ty.object<BookConfig>({
-    name: ty.string(),
-    version: ty.semver(),
-    src: ty.string(),
-  })
+  static book_config_schema = book_config_schema
 
   static fake_config(): BookConfig {
-    return Book.config_schema.validate({
-      name: `<fake-book-${nanoid()}>`,
+    return book_config_schema.validate({
+      title: `<fake-book-${nanoid()}>`,
       version: "0.0.0",
       src: "src",
     })

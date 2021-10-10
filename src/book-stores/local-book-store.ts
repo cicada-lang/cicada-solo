@@ -11,7 +11,7 @@ import fs from "fs"
 export class LocalBookStore extends BookStore {
   async get(config_file: string): Promise<Book<LocalFileStore>> {
     const text = await fs.promises.readFile(config_file, "utf8")
-    const config = Book.config_schema.validate(JSON.parse(text))
+    const config = Book.book_config_schema.validate(JSON.parse(text))
     return new Book({
       config,
       files: new LocalFileStore({
