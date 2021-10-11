@@ -7,6 +7,7 @@ const nanoid = customAlphabet("1234567890abcdef", 16)
 
 export type BookConfig = {
   title: string
+  subtitle?: string
   version: string
   src: string
   authors?: Array<string>
@@ -15,6 +16,7 @@ export type BookConfig = {
 
 const book_config_schema = ty.object<BookConfig>({
   title: ty.string(),
+  subtitle: ty.optional(ty.string()),
   version: ty.semver(),
   src: ty.string(),
   authors: ty.optional(ty.array(ty.string())),
