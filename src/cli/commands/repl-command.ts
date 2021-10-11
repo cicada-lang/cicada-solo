@@ -19,8 +19,8 @@ export class ReplCommand extends Command<Args> {
     const { blue } = this.colors
 
     return [
-      `The ${blue(this.name)} command take you into a REPL,`,
-      `-- Read Evaluate Print Loop`,
+      `The ${blue(this.name)} command takes you into a rabbit hole`,
+      `  called REPL -- "Read Evaluate Print Loop".`,
       ``,
       `In which you can try some ideas real quick.`,
       ``,

@@ -1,6 +1,6 @@
 import * as CommandRunners from "@xieyuheng/enchanter/lib/command-runners"
-import * as Commands from "./commands"
 import { CommonHelpCommand } from "@xieyuheng/enchanter/lib/commands"
+import * as Commands from "./commands"
 
 export function run(): void {
   new CommandRunners.CommonCommandRunner({
