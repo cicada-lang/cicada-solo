@@ -1,7 +1,7 @@
 import { ModuleLoader } from "../module-loader"
-import { Book } from "../book"
-import { Module } from "../module"
-import { Parser } from "../parser"
+import { Book } from "../../book"
+import { Module } from "../../module"
+import { Parser } from "../../parser"
 
 export class CicModuleLoader extends ModuleLoader {
   async load(book: Book, path: string): Promise<Module> {

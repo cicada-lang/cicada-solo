@@ -1,7 +1,7 @@
 import { ModuleLoader } from "../module-loader"
-import { Book } from "../book"
-import { Module } from "../module"
-import { Parser } from "../parser"
+import { Book } from "../../book"
+import { Module } from "../../module"
+import { Parser } from "../../parser"
 import * as commonmark from "commonmark"
 
 export class MarkdownModuleLoader extends ModuleLoader {

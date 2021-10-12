@@ -1,5 +1,3 @@
-- move `module-loader` under `book/`
-
 - `module-loader` should be `stmts-parser`
 
 - `observer` in `ctx`
