@@ -1,5 +1,3 @@
-- `book.json` support single `author`
-
 # narration
 
 - `exps/*` -- use `narrator`
