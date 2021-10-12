@@ -1,14 +1,19 @@
-- `observer` in `ctx`
+- inline `Narrator.narrate`
 
-  - learn the observer pattern first
+- remove `Narrator` class
 
-- `narrator` use the `observer` in `ctx`
+- `ElaborationOptions.narrate_elaboration_p` instead of `ElaborationOptions.narrator`
 
-  - `TodoExp` just use `observer`
+- `ctx` -- `CtxObserver`
+
+- rename `Ctx.empty` to `Ctx.init`
+- rename `Env.empty` to `Env.init`
+
+- use `ctx.narration` to send event to `CtxObserver`
 
 # narration
 
-- `exps/*` -- use `narrator`
+- `exps/*` -- narration
 
 - narration the formation rules
 
@@ -20,8 +25,6 @@
 
   - These rules can not be narrated in our implementation of NbE,
     maybe will be able to narrate them, if we use unification instead of NbE.
-
-- be able to inject different `Narrator` at app level -- for the web
 
 # core features
 
