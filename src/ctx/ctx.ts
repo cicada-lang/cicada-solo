@@ -26,6 +26,12 @@ export abstract class Ctx {
     return new EmptyCtx(opts)
   }
 
+  send(event: CtxEvent): void {
+    for (const observer of this.observers) {
+      observer.receive(event)
+    }
+  }
+
   freshen(name: string): string {
     return ut.freshen(new Set(this.names), name)
   }
