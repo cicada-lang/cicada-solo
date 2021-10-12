@@ -23,7 +23,7 @@ export class Module {
   entries: Array<ModuleEntry>
   index: number = 0
   env: Env = Env.init()
-  ctx: Ctx = Ctx.init()
+  ctx: Ctx = Ctx.init({ observers: [] })
 
   constructor(opts: { book: Book; path: string; stmts: Array<Stmt> }) {
     this.book = opts.book

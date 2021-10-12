@@ -16,8 +16,14 @@ export abstract class Ctx {
   abstract find_entry(name: string): undefined | { t: Value; value?: Value }
   abstract to_env(): Env
 
-  static init(): EmptyCtx {
-    return new EmptyCtx()
+  observers: Array<CtxObserver>
+
+  constructor(opts: { observers: Array<CtxObserver> }) {
+    this.observers = opts.observers
+  }
+
+  static init(opts: { observers: Array<CtxObserver> }): EmptyCtx {
+    return new EmptyCtx(opts)
   }
 
   freshen(name: string): string {
@@ -37,7 +43,13 @@ export abstract class Ctx {
       )
     }
 
-    return new ExtendCtx({ name, t, value, rest: this })
+    return new ExtendCtx({
+      name,
+      t,
+      value,
+      rest: this,
+      observers: this.observers,
+    })
   }
 
   find_type(name: string): undefined | Value {
@@ -74,8 +86,14 @@ class ExtendCtx extends Ctx {
   value?: Value
   rest: Ctx
 
-  constructor(opts: { name: string; t: Value; value?: Value; rest: Ctx }) {
-    super()
+  constructor(opts: {
+    name: string
+    t: Value
+    value?: Value
+    rest: Ctx
+    observers: Array<CtxObserver>
+  }) {
+    super(opts)
     this.name = opts.name
     this.t = opts.t
     this.value = opts.value
@@ -103,6 +121,10 @@ class ExtendCtx extends Ctx {
 }
 
 class EmptyCtx extends Ctx {
+  constructor(opts: { observers: Array<CtxObserver> }) {
+    super(opts)
+  }
+
   names = []
 
   find_entry(name: string): undefined | { t: Value; value?: Value } {

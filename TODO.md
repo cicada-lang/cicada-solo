@@ -1,5 +1,3 @@
-- `ctx.observers`
-
 - `ctx.narration`
 
   - `ctx.send` -- `{ tag: "narration", msg: "..." }`
