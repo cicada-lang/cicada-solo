@@ -1,7 +1,6 @@
-- `ctx` -- `CtxObserver`
+- rename `Env.empty` to `Env.init` -- to be symmetry with `Ctx`
 
-- rename `Ctx.empty` to `Ctx.init` -- with optional `CtxObserver`
-- rename `Env.empty` to `Env.init`
+- `ctx` -- `CtxObserver`
 
 - use `ctx.narration` to send event to `CtxObserver`
 

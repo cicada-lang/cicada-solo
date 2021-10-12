@@ -5,7 +5,6 @@ import { Ctx } from "../ctx"
 import { conversion } from "../value"
 import { readback } from "../value"
 import { ExpTrace } from "../errors"
-import * as ut from "../ut"
 import * as Exps from "../exps"
 
 export function check(

@@ -10,7 +10,7 @@ export abstract class Ctx {
   abstract find_entry(name: string): undefined | { t: Value; value?: Value }
   abstract to_env(): Env
 
-  static get empty(): EmptyCtx {
+  static get init(): EmptyCtx {
     return new EmptyCtx()
   }
 

@@ -3,7 +3,6 @@ import { Core } from "../core"
 import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { ExpTrace } from "../errors"
-import * as ut from "../ut"
 
 export function infer(
   ctx: Ctx,
