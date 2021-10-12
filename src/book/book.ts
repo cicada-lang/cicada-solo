@@ -1,5 +1,5 @@
 import { Module } from "../module"
-import * as ModuleLoaders from "./module-loaders"
+import * as FileParsers from "./file-parsers"
 import { FileStore } from "@xieyuheng/enchanter/lib/file-store"
 import ty from "@xieyuheng/ty"
 import { customAlphabet } from "nanoid"
@@ -49,8 +49,11 @@ export class Book<Files extends FileStore = FileStore> {
       return cached
     }
 
-    const loader = ModuleLoaders.from_path(path)
-    const mod = await loader.load(this, path)
+    const parser = FileParsers.from_path(path)
+    const text = await this.files.getOrFail(path)
+    const stmts = parser.parse_stmts(text)
+    const mod = new Module({ book: this, path, stmts })
+
     this.cache.set(path, mod)
     return mod
   }

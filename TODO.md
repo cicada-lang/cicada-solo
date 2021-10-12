@@ -1,5 +1,3 @@
-- `module-loader` should be `stmts-parser`
-
 - `observer` in `ctx`
 
   - learn the observer pattern first

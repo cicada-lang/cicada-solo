@@ -1,5 +1,5 @@
-export * from "./cic-module-loader"
-export * from "./markdown-module-loader"
+export * from "./cic-file-parser"
+export * from "./markdown-file-parser"
 
 // NOTE factory method
 export * from "./from-path"

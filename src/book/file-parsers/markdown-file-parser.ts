@@ -1,12 +1,10 @@
-import { ModuleLoader } from "../module-loader"
-import { Book } from "../../book"
-import { Module } from "../../module"
+import { FileParser } from "../file-parser"
 import { Parser } from "../../parser"
 import { Stmt } from "../../stmt"
 import * as commonmark from "commonmark"
 
-export class MarkdownModuleLoader extends ModuleLoader {
-  parse(text: string): Array<Stmt> {
+export class MarkdownFileParser extends FileParser {
+  parse_stmts(text: string): Array<Stmt> {
     const parser = new Parser()
     const stmts = code_blocks(text).flatMap((code_block) =>
       parser.parse_stmts(code_block.text, code_block.offset)
