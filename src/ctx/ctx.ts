@@ -5,6 +5,12 @@ import { readback } from "../value"
 import * as Exps from "../exps"
 import * as ut from "../ut"
 
+export type CtxEvent = { tag: string; msg: string }
+
+export abstract class CtxObserver {
+  abstract receive(event: CtxEvent): void
+}
+
 export abstract class Ctx {
   abstract names: Array<string>
   abstract find_entry(name: string): undefined | { t: Value; value?: Value }
