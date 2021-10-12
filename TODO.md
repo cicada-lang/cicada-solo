@@ -1,5 +1,3 @@
-- remove `Narrator` class
-
 - `ctx` -- `CtxObserver`
 
 - rename `Ctx.empty` to `Ctx.init` -- with optional `CtxObserver`

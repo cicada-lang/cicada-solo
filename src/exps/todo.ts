@@ -1,5 +1,4 @@
 import { Exp, ExpMeta, subst } from "../exp"
-import { Narrator } from "../narrator"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import { readback } from "../value"
