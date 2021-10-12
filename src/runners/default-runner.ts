@@ -1,5 +1,4 @@
 import { Book } from "../book"
-import { ErrorReporter } from "../error-reporter"
 import { Runner } from "../runner"
 
 export class DefaultRunner extends Runner {

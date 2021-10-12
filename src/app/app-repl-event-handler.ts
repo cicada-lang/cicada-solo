@@ -1,9 +1,9 @@
 import { ReplEvent, ReplEventHandler } from "@xieyuheng/enchanter/lib/repl"
-import { Book } from "../book"
-import { ErrorReporter } from "../error-reporter"
-import * as StmtOutputs from "../stmt/stmt-outputs"
-import * as ut from "../ut"
 import { AppConfig } from "./app-config"
+import { Book } from "../book"
+import * as StmtOutputs from "../stmt/stmt-outputs"
+import * as Errors from "../errors"
+import * as ut from "../ut"
 
 export class AppReplEventHandler extends ReplEventHandler {
   config = new AppConfig()
@@ -44,7 +44,7 @@ export class AppReplEventHandler extends ReplEventHandler {
     } catch (error) {
       mod.undo(mod.index)
 
-      const reporter = new ErrorReporter()
+      const reporter = new Errors.ErrorReporter()
       const report = reporter.report(error, { text })
       if (report.trim()) {
         console.error(report.trim())
