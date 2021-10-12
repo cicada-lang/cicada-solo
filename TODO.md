@@ -1,5 +1,3 @@
-- use `ctx.narration` to send event to `CtxObserver`
-
 # narration
 
 - `exps/*` -- narration

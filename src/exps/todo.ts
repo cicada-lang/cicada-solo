@@ -29,17 +29,12 @@ export class Todo extends Exp {
 
   check(ctx: Ctx, t: Value): Core {
     const t_core = readback(ctx, new Exps.TypeValue(), t)
-
-    {
-      const lines = [
-        //
-        `@TODO ${this.note}`,
-        `  ${t_core.repr()}`,
-        ``,
-      ]
-      const story = lines.join("\n")
-      console.log(story)
-    }
+    ctx.narration([
+      //
+      `@TODO ${this.note}`,
+      `  ${t_core.repr()}`,
+      ``,
+    ])
 
     return new Exps.TodoCore(this.note, t)
   }
