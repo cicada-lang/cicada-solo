@@ -1,6 +1,8 @@
 import { Module } from "../module"
 import * as FileParsers from "./file-parsers"
 import { FileStore } from "@xieyuheng/enchanter/lib/file-store"
+import { Env } from "../env"
+import { Ctx } from "../ctx"
 import ty from "@xieyuheng/ty"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
@@ -51,8 +53,14 @@ export class Book<Files extends FileStore = FileStore> {
 
     const parser = FileParsers.createFileParser(path)
     const text = await this.files.getOrFail(path)
-    const stmts = parser.parse_stmts(text)
-    const mod = new Module({ book: this, path, stmts })
+
+    const mod = new Module({
+      book: this,
+      path,
+      stmts: parser.parse_stmts(text),
+      env: Env.init(),
+      ctx: Ctx.init({ observers: [] }),
+    })
 
     this.cache.set(path, mod)
     return mod

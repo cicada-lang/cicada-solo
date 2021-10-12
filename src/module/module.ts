@@ -22,13 +22,21 @@ export class Module {
   path: string
   entries: Array<ModuleEntry>
   index: number = 0
-  env: Env = Env.init()
-  ctx: Ctx = Ctx.init({ observers: [] })
+  env: Env
+  ctx: Ctx
 
-  constructor(opts: { book: Book; path: string; stmts: Array<Stmt> }) {
+  constructor(opts: {
+    book: Book
+    path: string
+    stmts: Array<Stmt>
+    env: Env
+    ctx: Ctx
+  }) {
     this.book = opts.book
     this.path = opts.path
     this.entries = opts.stmts.map((stmt) => ({ stmt }))
+    this.env = opts.env
+    this.ctx = opts.ctx
   }
 
   get stmts(): Array<Stmt> {
