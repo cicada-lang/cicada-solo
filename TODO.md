@@ -1,12 +1,10 @@
-- inline `Narrator.narrate`
+- `ElaborationOptions.narrate_elaboration_p` instead of `ElaborationOptions.narrator`
 
 - remove `Narrator` class
 
-- `ElaborationOptions.narrate_elaboration_p` instead of `ElaborationOptions.narrator`
-
 - `ctx` -- `CtxObserver`
 
-- rename `Ctx.empty` to `Ctx.init`
+- rename `Ctx.empty` to `Ctx.init` -- with optional `CtxObserver`
 - rename `Env.empty` to `Env.init`
 
 - use `ctx.narration` to send event to `CtxObserver`
