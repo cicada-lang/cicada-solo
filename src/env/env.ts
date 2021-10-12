@@ -3,7 +3,7 @@ import { Value } from "../value"
 export abstract class Env {
   abstract find_value(name: string): undefined | Value
 
-  static get empty(): EmptyEnv {
+  static get init(): EmptyEnv {
     return new EmptyEnv()
   }
 

@@ -104,6 +104,6 @@ class EmptyCtx extends Ctx {
   }
 
   to_env(): Env {
-    return Env.empty
+    return Env.init
   }
 }

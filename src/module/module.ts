@@ -22,7 +22,7 @@ export class Module {
   path: string
   entries: Array<ModuleEntry>
   index: number = 0
-  env: Env = Env.empty
+  env: Env = Env.init
   ctx: Ctx = Ctx.init
 
   constructor(opts: { book: Book; path: string; stmts: Array<Stmt> }) {
