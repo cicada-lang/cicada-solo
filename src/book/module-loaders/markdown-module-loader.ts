@@ -2,16 +2,16 @@ import { ModuleLoader } from "../module-loader"
 import { Book } from "../../book"
 import { Module } from "../../module"
 import { Parser } from "../../parser"
+import { Stmt } from "../../stmt"
 import * as commonmark from "commonmark"
 
 export class MarkdownModuleLoader extends ModuleLoader {
-  async load(book: Book, path: string): Promise<Module> {
-    const text = await book.files.getOrFail(path)
+  parse(text: string): Array<Stmt> {
     const parser = new Parser()
     const stmts = code_blocks(text).flatMap((code_block) =>
       parser.parse_stmts(code_block.text, code_block.offset)
     )
-    return new Module({ book, path, stmts })
+    return stmts
   }
 }
 
