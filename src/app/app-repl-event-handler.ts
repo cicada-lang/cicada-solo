@@ -1,7 +1,7 @@
 import { ReplEvent, ReplEventHandler } from "@xieyuheng/enchanter/lib/repl"
 import { Book } from "../book"
 import { ErrorReporter } from "../error-reporter"
-import * as StmtOutputs from "../stmt-outputs"
+import * as StmtOutputs from "../stmt/stmt-outputs"
 import * as ut from "../ut"
 import { AppConfig } from "./app-config"
 

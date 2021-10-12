@@ -1,5 +1,5 @@
 import { StmtOutput } from "../stmt-output"
-import { Core } from "../core"
+import { Core } from "../../core"
 
 export class NormalTerm extends StmtOutput {
   exp: Core

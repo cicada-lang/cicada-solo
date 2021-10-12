@@ -5,7 +5,7 @@ import { infer } from "../exp"
 import { evaluate } from "../core"
 import { readback } from "../value"
 import * as Exps from "../exps"
-import * as StmtOutputs from "../stmt-outputs"
+import * as StmtOutputs from "../stmt/stmt-outputs"
 
 export class Show extends Stmt {
   meta: StmtMeta

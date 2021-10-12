@@ -1,9 +1,8 @@
 import { Book } from "../book"
-import { Stmt } from "../stmt"
+import { Stmt, StmtOutput } from "../stmt"
 import { Env } from "../env"
 import { Ctx } from "../ctx"
 import { Parser } from "../parser"
-import { StmtOutput } from "../stmt-output"
 
 // NOTE
 // - A module belongs to a book.

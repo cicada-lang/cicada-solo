@@ -1,3 +1,15 @@
+- move `module-loader` under `book/`
+
+- `module-loader` should be `stmts-parser`
+
+- `observer` in `ctx`
+
+  - learn the observer pattern first
+
+- `narrator` use the `observer` in `ctx`
+
+  - `TodoExp` just use `observer`
+
 # narration
 
 - `exps/*` -- use `narrator`
