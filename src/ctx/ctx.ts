@@ -32,6 +32,11 @@ export abstract class Ctx {
     }
   }
 
+  narration(lines: Array<string>): void {
+    const story = lines.join("\n")
+    this.send({ tag: "narration", msg: story })
+  }
+
   freshen(name: string): string {
     return ut.freshen(new Set(this.names), name)
   }

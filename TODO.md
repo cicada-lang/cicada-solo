@@ -1,7 +1,3 @@
-- `ctx.narration`
-
-  - `ctx.send` -- `{ tag: "narration", msg: "..." }`
-
 - use `ctx.narration` to send event to `CtxObserver`
 
 # narration
