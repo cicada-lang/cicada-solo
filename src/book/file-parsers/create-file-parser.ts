@@ -1,7 +1,7 @@
-import * as FileParsers from "."
+import * as FileParsers from "../file-parsers"
 import { FileParser } from "../file-parser"
 
-export function from_path(path: string): FileParser {
+export function createFileParser(path: string): FileParser {
   if (path.endsWith(".cic")) {
     return new FileParsers.CicFileParser()
   } else if (path.endsWith(".md")) {

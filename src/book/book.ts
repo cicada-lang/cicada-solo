@@ -49,7 +49,7 @@ export class Book<Files extends FileStore = FileStore> {
       return cached
     }
 
-    const parser = FileParsers.from_path(path)
+    const parser = FileParsers.createFileParser(path)
     const text = await this.files.getOrFail(path)
     const stmts = parser.parse_stmts(text)
     const mod = new Module({ book: this, path, stmts })

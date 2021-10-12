@@ -68,7 +68,7 @@ async function check(
   let errors: Array<unknown> = []
 
   for (const path of await book.files.keys()) {
-    if (FileParsers.can_handle_extension(path)) {
+    if (FileParsers.canHandle(path)) {
       const t0 = Date.now()
       const runner = app.createLocalRunner({ path, book })
       const { error } = await runner.run(path)
@@ -91,7 +91,7 @@ async function watch(book: Book<LocalFileStore>): Promise<void> {
 
   watcher(dir, { recursive: true }, async (event, file) => {
     if (!file) return
-    if (!FileParsers.can_handle_extension(file)) return
+    if (!FileParsers.canHandle(file)) return
 
     const prefix = `${dir}/`
     const path = file.slice(prefix.length)
