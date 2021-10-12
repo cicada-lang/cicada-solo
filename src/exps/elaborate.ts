@@ -1,5 +1,4 @@
 import { Exp, ExpMeta, ElaborationOptions, subst } from "../exp"
-import { Narrator } from "../narrator"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
@@ -27,13 +26,13 @@ export class Elaborate extends Exp {
 
   check(ctx: Ctx, t: Value): Core {
     return check(ctx, this.exp, t, {
-      narrator: new Narrator(),
+      narrate_elaboration_p: true,
     })
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     return infer(ctx, this.exp, {
-      narrator: new Narrator(),
+      narrate_elaboration_p: true,
     })
   }
 

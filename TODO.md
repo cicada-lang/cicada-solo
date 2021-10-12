@@ -1,5 +1,3 @@
-- `ElaborationOptions.narrate_elaboration_p` instead of `ElaborationOptions.narrator`
-
 - remove `Narrator` class
 
 - `ctx` -- `CtxObserver`

@@ -24,7 +24,7 @@ export class Quote extends Exp {
   }
 
   infer(ctx: Ctx, opts: ElaborationOptions): { t: Value; core: Core } {
-    if (opts?.narrator) {
+    if (opts?.narrate_elaboration_p) {
       const lines = [
         `I infer the literal string: ${this.str}, to have type String`,
       ]
