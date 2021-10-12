@@ -11,6 +11,10 @@ export abstract class CtxObserver {
   abstract receive(event: CtxEvent): void
 }
 
+export type CtxOptions = {
+  observers: Array<CtxObserver>
+}
+
 export abstract class Ctx {
   abstract names: Array<string>
   abstract find_entry(name: string): undefined | { t: Value; value?: Value }
@@ -18,11 +22,11 @@ export abstract class Ctx {
 
   observers: Array<CtxObserver>
 
-  constructor(opts: { observers: Array<CtxObserver> }) {
+  constructor(opts: CtxOptions) {
     this.observers = opts.observers
   }
 
-  static init(opts: { observers: Array<CtxObserver> }): EmptyCtx {
+  static init(opts: CtxOptions): EmptyCtx {
     return new EmptyCtx(opts)
   }
 
@@ -132,7 +136,7 @@ class ExtendCtx extends Ctx {
 }
 
 class EmptyCtx extends Ctx {
-  constructor(opts: { observers: Array<CtxObserver> }) {
+  constructor(opts: CtxOptions) {
     super(opts)
   }
 

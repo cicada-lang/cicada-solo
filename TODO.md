@@ -1,5 +1,3 @@
-- `book` -- be able to inject `observers` into `ctx`
-
 - use `ctx.narration` to send event to `CtxObserver`
 
 # narration

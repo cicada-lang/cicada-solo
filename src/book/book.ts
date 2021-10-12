@@ -2,7 +2,7 @@ import { Module } from "../module"
 import * as FileParsers from "./file-parsers"
 import { FileStore } from "@xieyuheng/enchanter/lib/file-store"
 import { Env } from "../env"
-import { Ctx } from "../ctx"
+import { Ctx, CtxOptions } from "../ctx"
 import ty from "@xieyuheng/ty"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
@@ -45,7 +45,7 @@ export class Book<Files extends FileStore = FileStore> {
     })
   }
 
-  async load(path: string): Promise<Module> {
+  async load(path: string, opts?: { ctx?: CtxOptions }): Promise<Module> {
     const cached = this.cache.get(path)
     if (cached) {
       return cached
@@ -59,7 +59,7 @@ export class Book<Files extends FileStore = FileStore> {
       path,
       stmts: parser.parse_stmts(text),
       env: Env.init(),
-      ctx: Ctx.init({ observers: [] }),
+      ctx: Ctx.init(opts?.ctx || { observers: [] }),
     })
 
     this.cache.set(path, mod)
