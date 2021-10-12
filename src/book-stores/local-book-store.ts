@@ -1,12 +1,19 @@
 import { BookStore } from "../book-store"
 import { Book } from "../book"
-import {
-  LocalFileStore,
-  FakeFileStore,
-} from "@xieyuheng/enchanter/lib/file-stores"
+import { CtxEvent, CtxObserver } from "../ctx"
+import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
+import { FakeFileStore } from "@xieyuheng/enchanter/lib/file-stores"
 import * as ut from "../ut"
 import Path from "path"
 import fs from "fs"
+
+export class CtxNarrator extends CtxObserver {
+  receive(event: CtxEvent): void {
+    if (event.tag === "narration") {
+      console.log(event.msg)
+    }
+  }
+}
 
 export class LocalBookStore extends BookStore {
   async get(config_file: string): Promise<Book<LocalFileStore>> {
@@ -17,6 +24,7 @@ export class LocalBookStore extends BookStore {
       files: new LocalFileStore({
         dir: Path.resolve(Path.dirname(config_file), config.src),
       }),
+      ctx: { observers: [new CtxNarrator()] },
     })
   }
 
@@ -24,6 +32,7 @@ export class LocalBookStore extends BookStore {
     return new Book({
       config: Book.fake_config(),
       files: new FakeFileStore({ dir, faked }),
+      ctx: { observers: [new CtxNarrator()] },
     })
   }
 

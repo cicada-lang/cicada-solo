@@ -29,10 +29,12 @@ export class Book<Files extends FileStore = FileStore> {
   config: BookConfig
   files: Files
   cache: Map<string, Module> = new Map()
+  ctx: CtxOptions
 
-  constructor(opts: { config: BookConfig; files: Files }) {
+  constructor(opts: { config: BookConfig; files: Files; ctx: CtxOptions }) {
     this.config = opts.config
     this.files = opts.files
+    this.ctx = opts.ctx
   }
 
   static book_config_schema = book_config_schema
@@ -59,7 +61,7 @@ export class Book<Files extends FileStore = FileStore> {
       path,
       stmts: parser.parse_stmts(text),
       env: Env.init(),
-      ctx: Ctx.init(opts?.ctx || { observers: [] }),
+      ctx: Ctx.init(opts?.ctx || this.ctx),
     })
 
     this.cache.set(path, mod)
