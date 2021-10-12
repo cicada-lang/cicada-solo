@@ -16,7 +16,7 @@ export abstract class Ctx {
   abstract find_entry(name: string): undefined | { t: Value; value?: Value }
   abstract to_env(): Env
 
-  static get init(): EmptyCtx {
+  static init(): EmptyCtx {
     return new EmptyCtx()
   }
 
@@ -110,6 +110,6 @@ class EmptyCtx extends Ctx {
   }
 
   to_env(): Env {
-    return Env.init
+    return Env.init()
   }
 }

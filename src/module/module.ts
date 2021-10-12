@@ -22,8 +22,8 @@ export class Module {
   path: string
   entries: Array<ModuleEntry>
   index: number = 0
-  env: Env = Env.init
-  ctx: Ctx = Ctx.init
+  env: Env = Env.init()
+  ctx: Ctx = Ctx.init()
 
   constructor(opts: { book: Book; path: string; stmts: Array<Stmt> }) {
     this.book = opts.book

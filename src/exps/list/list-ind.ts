@@ -86,7 +86,7 @@ export class ListInd extends Exp {
 
 export function list_ind_motive_t(elem_t: Value): Value {
   return evaluate(
-    Env.init.extend("elem_t", elem_t),
+    Env.init().extend("elem_t", elem_t),
     new Exps.PiCore(
       "target_list",
       new Exps.ListCore(new Exps.VarCore("elem_t")),
@@ -97,7 +97,7 @@ export function list_ind_motive_t(elem_t: Value): Value {
 
 export function list_ind_step_t(motive: Value, elem_t: Value): Value {
   return evaluate(
-    Env.init.extend("motive", motive).extend("elem_t", elem_t),
+    Env.init().extend("motive", motive).extend("elem_t", elem_t),
     new Exps.PiCore(
       "head",
       new Exps.VarCore("elem_t"),

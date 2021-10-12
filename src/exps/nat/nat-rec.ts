@@ -71,7 +71,7 @@ export class NatRec extends Exp {
 
 function nat_ind_step_t(base_t: Value): Value {
   return evaluate(
-    Env.init.extend("base_t", base_t),
+    Env.init().extend("base_t", base_t),
     new Exps.PiCore(
       "prev",
       new Exps.NatCore(),
