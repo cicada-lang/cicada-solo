@@ -1,17 +1,74 @@
 # narration
 
-- `exps/*` -- narration
+- `exps/elaborate` -- narration
+- `exps/todo` -- narration
+- `exps/type` -- narration
+- `exps/the` -- narration
+- `exps/var` -- narration
+- `exps/let` -- narration
 
-- narration the formation rules
+- `exps/absurd/absurd` -- narration
+- `exps/absurd/absurd-ind` -- narration
 
-  - introduction rule & elimination rule
+- `exps/cls/cls-closure` -- narration
+- `exps/cls/nil-cls` -- narration
+- `exps/cls/fulfilled-cls` -- narration
+- `exps/cls/dot` -- narration
+- `exps/cls/obj` -- narration
+- `exps/cls/cls` -- narration
+- `exps/cls/cons-cls` -- narration
+- `exps/cls/ext` -- narration
 
-- narration for the computation rules
+- `exps/sigma/car` -- narration
+- `exps/sigma/cons` -- narration
+- `exps/sigma/cdr` -- narration
+- `exps/sigma/sigma` -- narration
 
-  - eta rule & sameness rule
+- `exps/list/list-rec` -- narration
+- `exps/list/li` -- narration
+- `exps/list/list-ind` -- narration
+- `exps/list/list` -- narration
+- `exps/list/nil` -- narration
 
-  - These rules can not be narrated in our implementation of NbE,
-    maybe will be able to narrate them, if we use unification instead of NbE.
+- `exps/pi/ap` -- narration
+- `exps/pi/fn` -- narration
+- `exps/pi/pi` -- narration
+
+- `exps/equal/refl` -- narration
+- `exps/equal/the-same` -- narration
+- `exps/equal/same` -- narration
+- `exps/equal/replace` -- narration
+- `exps/equal/same-as-chart` -- narration
+- `exps/equal/equal` -- narration
+
+- `exps/vector/vector-head` -- narration
+- `exps/vector/vector-ind` -- narration
+- `exps/vector/vector` -- narration
+- `exps/vector/vecnil` -- narration
+- `exps/vector/vec` -- narration
+- `exps/vector/vector-tail` -- narration
+
+- `exps/str/quote` -- narration
+- `exps/str/str` -- narration
+
+- `exps/nat/nat` -- narration
+- `exps/nat/nat-ind` -- narration
+- `exps/nat/zero` -- narration
+- `exps/nat/add1` -- narration
+- `exps/nat/nat-rec` -- narration
+
+- `exps/im-pi/im-ap-insertion` -- narration
+- `exps/im-pi/im-pi` -- narration
+- `exps/im-pi/im-fn-insertion` -- narration
+- `exps/im-pi/im-fn` -- narration
+
+- `exps/either/either` -- narration
+- `exps/either/either-ind` -- narration
+- `exps/either/inl` -- narration
+- `exps/either/inr` -- narration
+
+- `exps/trivial/sole` -- narration
+- `exps/trivial/trivial` -- narration
 
 # core features
 
@@ -93,6 +150,15 @@
 - [stdlib] Topology theory
 - [stdlib] Category of Groups
 - [stdlib] Number theroy -- https://en.wikipedia.org/wiki/Number_theory
+
+# narration
+
+- narration for the computation rules
+
+  - eta rule & sameness rule
+
+  - These rules can not be narrated in our implementation of NbE,
+    maybe will be able to narrate them, if we use unification instead of NbE.
 
 # book manager
 
