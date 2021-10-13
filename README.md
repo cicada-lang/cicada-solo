@@ -57,7 +57,7 @@ npm run test   // Run test
 - [Group Theory](books/group)
 - [Order Theory](books/order)
 - [Category Theory](books/category)
-- [The Little Typer](books/the-little-typer)
+- [Logic and Judgment](books/logic-and-judgment)
 
 ## Community
 
