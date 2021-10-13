@@ -28,14 +28,14 @@ Usage:
   command [arguments] [options]
 
 Default command:
-  [paper]  Open REPL or run a paper
+  [article]  Open REPL or run an article
 
 Commands:
-  repl [dir]        Open an interactive REPL
-  run [paper]       Run a paper or a page of book
-  snapshot [paper]  Take a snapshot of a paper
-  check [book]      Check the typing of a book
-  help [name]       Display help for a command
+  repl [dir]          Open an interactive REPL
+  run [article]       Run through an article
+  snapshot [article]  Take a snapshot of an article
+  check [book]        Check the typing of a book
+  help [name]         Display help for a command
 
 Help:
   The help command displays help for a given command.

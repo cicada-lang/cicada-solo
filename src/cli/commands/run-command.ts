@@ -9,15 +9,15 @@ import watcher from "node-watch"
 import ty from "@xieyuheng/ty"
 import Path from "path"
 
-type Args = { paper: string }
+type Args = { article: string }
 type Opts = { watch?: boolean }
 
 export class RunCommand extends Command<Args, Opts> {
   name = "run"
 
-  description = "Run a paper or a page of book"
+  description = "Run through an article"
 
-  args = { paper: ty.string() }
+  args = { article: ty.string() }
   opts = { watch: ty.optional(ty.boolean()) }
 
   // prettier-ignore
@@ -25,7 +25,7 @@ export class RunCommand extends Command<Args, Opts> {
     const { blue } = this.colors
 
     return [
-      `The ${blue(this.name)} command runs through a paper or a page of book,`,
+      `The ${blue(this.name)} command runs through an article,`,
       `evaluating top-level expressions, and prints the results.`,
       ``,
       `It supports ${blue(".md")} and ${blue(".cic")} file extensions.`,
@@ -40,10 +40,10 @@ export class RunCommand extends Command<Args, Opts> {
   }
 
   async execute(argv: Args & Opts): Promise<void> {
-    Command.assertFile(argv["paper"])
-    const book = await app.books.findUpOrFake(Path.dirname(argv["paper"]))
+    Command.assertFile(argv["article"])
+    const book = await app.books.findUpOrFake(Path.dirname(argv["article"]))
     const runner = new Runners.DefaultRunner({ book })
-    const path = Path.basename(argv["paper"])
+    const path = Path.basename(argv["article"])
 
     if (argv["watch"]) {
       await runner.run(path)

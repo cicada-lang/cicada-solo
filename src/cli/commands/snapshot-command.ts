@@ -6,23 +6,23 @@ import * as ut from "../../ut"
 import ty from "@xieyuheng/ty"
 import Path from "path"
 
-type Args = { paper: string }
+type Args = { article: string }
 
 export class SnapshotCommand extends Command<Args> {
   name = "snapshot"
 
-  description = "Take a snapshot of a paper"
+  description = "Take a snapshot of an article"
 
-  args = { paper: ty.string() }
+  args = { article: ty.string() }
 
   // prettier-ignore
   help(runner: CommandRunner): string {
     const { blue } = this.colors
 
     return [
-      `The ${blue(this.name)} command take a snapshot of a paper,`,
+      `The ${blue(this.name)} command take a snapshot of an article,`,
       `recording its results into an output file,`,
-      `named after the paper plus ${blue(".out")}`,
+      `named after the article plus ${blue(".out")}`,
       ``,
       `It supports ${blue(".md")} and ${blue(".cic")} file extensions.`,
       ``,
@@ -32,9 +32,9 @@ export class SnapshotCommand extends Command<Args> {
   }
 
   async execute(argv: Args): Promise<void> {
-    Command.assertFile(argv["paper"])
-    const book = await app.books.findUpOrFake(Path.dirname(argv["paper"]))
-    const path = Path.basename(argv["paper"])
+    Command.assertFile(argv["article"])
+    const book = await app.books.findUpOrFake(Path.dirname(argv["article"]))
+    const path = Path.basename(argv["article"])
     const runner = app.createLocalRunner({ path, book })
     const { error } = await runner.run(path)
     if (error) {
