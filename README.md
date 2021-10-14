@@ -54,10 +54,10 @@ npm run test   // Run test
 
 ## Books
 
-- [Group Theory](books/group)
-- [Order Theory](books/order)
-- [Category Theory](books/category)
-- [Logic and Judgment](books/logic-and-judgment)
+- [Group Theory](books/group/README.md)
+- [Order Theory](books/order/README.md)
+- [Category Theory](books/category/README.md)
+- [Logic and Judgment](books/logic-and-judgment/README.md)
 
 ## Community
 
