@@ -30,7 +30,7 @@
   "devDependencies": {
     "@types/commonmark": "^0.27.5",
     "@types/nanoid": "^2.1.0",
-    "@types/node": "^16.10.4",
+    "@types/node": "^16.10.9",
     "npm-run-all": "^4.1.5",
     "pkg": "^5.3.3",
     "prettier": "^2.4.1",
@@ -38,13 +38,13 @@
   },
   "dependencies": {
     "@cicada-lang/partech": "^0.1.15",
-    "@xieyuheng/enchanter": "^0.0.23",
+    "@xieyuheng/enchanter": "^0.0.29",
     "@xieyuheng/ty": "^0.1.7",
     "commonmark": "^0.30.0",
     "fast-deep-equal": "^3.1.3",
-    "nanoid": "^3.1.29",
+    "nanoid": "^3.1.30",
     "node-watch": "^0.7.2",
-    "picocolors": "^0.2.1",
+    "picocolors": "^1.0.0",
     "readdirp": "^3.6.0"
   },
   "license": "GPL-3.0-or-later"
