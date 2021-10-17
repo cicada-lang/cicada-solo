@@ -1,5 +1,3 @@
-- `GitBookStore`
-
 - `books/mathematical-structures`
 
 # narration
