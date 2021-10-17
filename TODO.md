@@ -1,3 +1,7 @@
+- `GitBookStore`
+
+- `books/mathematical-structures`
+
 # narration
 
 - `exps/elaborate` -- narration

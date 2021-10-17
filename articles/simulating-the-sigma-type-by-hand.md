@@ -9,37 +9,37 @@ This example is found in [an issue of the-little-typer/pie](https://github.com/t
 ``` scheme
 (claim my-cons
   (Π ((A U)
-       (B (→ A U))
+       (B (-> A U))
        (x A)(y (B x))
        (E U)
-       (f (Π ((x A)) (→ (B x) E))))
+       (f (Π ((x A)) (-> (B x) E))))
       E))
 
 (define my-cons
-  (λ (A B x y)
-    (λ (E f) (f x y))))
+  (lambda (A B x y)
+    (lambda (E f) (f x y))))
 
 
 (claim my-car
   (Π ((A U)
-       (B (→ A U))
-       (p (Π ((E U)(f (→ A (B x) E))) E)))
+       (B (-> A U))
+       (p (Π ((E U)(f (-> A (B x) E))) E)))
       A))
 
 (define my-car
-  (λ (A B p)
-    (p A (λ (a b) a))))
+  (lambda (A B p)
+    (p A (lambda (a b) a))))
 
 
 (claim my-car1
   (Π ((A U)
-       (B (→ A U))
-       (p (Π ((E U)(f (Π ((x A)) (→ (B x) E)))) E)))
+       (B (-> A U))
+       (p (Π ((E U)(f (Π ((x A)) (-> (B x) E)))) E)))
       A))
 
 (define my-car1
-  (λ (A B p)
-    (p A (λ (a b) a))))
+  (lambda (A B p)
+    (p A (lambda (a b) a))))
 ```
 
 # Simulating the Sigma type in Cicada
