@@ -1,19 +1,24 @@
 import { CodeBlockParser } from "../code-block-parser"
+import { CodeBlock } from "../code-block"
 import { Parser } from "../../parser"
 import { Stmt } from "../../stmt"
 import * as commonmark from "commonmark"
 
 export class MarkdownCodeBlockParser extends CodeBlockParser {
-  parse_stmts(text: string): Array<Stmt> {
+  parse_code_blocks(text: string): Array<CodeBlock> {
     const parser = new Parser()
-    const stmts = code_blocks(text).flatMap((code_block) =>
-      parser.parse_stmts(code_block.text, code_block.offset)
-    )
-    return stmts
+    return collect_code_blocks(text)
+      .filter(({ info }) => info === "cicada")
+      .map(({ index, text, offset }) => ({
+        index,
+        text,
+        stmts: parser.parse_stmts(text, offset),
+      }))
   }
 }
 
-function code_blocks(text: string): Array<{
+function collect_code_blocks(text: string): Array<{
+  index: number
   info: string
   text: string
   offset: number
@@ -26,20 +31,21 @@ function code_blocks(text: string): Array<{
 
   const walker = parsed.walker()
 
+  let counter = 0
+
   let event, node
   while ((event = walker.next())) {
     node = event.node
 
     if (event.entering && node.type === "code_block") {
-      if (node.literal && node.info === "cicada") {
-        const [start_pos, _end_pos] = node.sourcepos
-        const [row, col] = start_pos
-        code_blocks.push({
-          info: node.info,
-          text: node.literal,
-          offset: offset_from_pos(text, row, col),
-        })
-      }
+      const [start_pos, _end_pos] = node.sourcepos
+      const [row, col] = start_pos
+      code_blocks.push({
+        index: counter++,
+        info: node.info || "",
+        text: node.literal || "",
+        offset: offset_from_pos(text, row, col),
+      })
     }
   }
 
