@@ -1,5 +1,3 @@
-- rename `book/file-parser` to `book/code-block-parser`
-
 - move `book/code-block-parser` to `module/code-block-parser`
 
 - `code_blocks` in `Module` -- the running step should be "block by block" instead of "stmt by stmt"

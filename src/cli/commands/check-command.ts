@@ -2,7 +2,7 @@ import { Command } from "@xieyuheng/enchanter/lib/command"
 import { CommandRunner } from "@xieyuheng/enchanter/lib/command-runner"
 import { Book } from "../../book"
 import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
-import * as FileParsers from "../../book/file-parsers"
+import * as CodeBlockParsers from "../../book/code-block-parsers"
 import * as Runners from "../../runners"
 import app from "../../app/node-app"
 import watcher from "node-watch"
@@ -68,7 +68,7 @@ async function check(
   let errors: Array<unknown> = []
 
   for (const path of await book.files.keys()) {
-    if (FileParsers.canHandle(path)) {
+    if (CodeBlockParsers.canHandle(path)) {
       const t0 = Date.now()
       const runner = app.createLocalRunner({ path, book })
       const { error } = await runner.run(path)
@@ -91,7 +91,7 @@ async function watch(book: Book<LocalFileStore>): Promise<void> {
 
   watcher(dir, { recursive: true }, async (event, file) => {
     if (!file) return
-    if (!FileParsers.canHandle(file)) return
+    if (!CodeBlockParsers.canHandle(file)) return
 
     const prefix = `${dir}/`
     const path = file.slice(prefix.length)

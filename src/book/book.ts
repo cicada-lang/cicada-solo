@@ -1,5 +1,5 @@
 import { Module } from "../module"
-import * as FileParsers from "./file-parsers"
+import * as CodeBlockParsers from "./code-block-parsers"
 import { FileStore } from "@xieyuheng/enchanter/lib/file-store"
 import { Env } from "../env"
 import { Ctx, CtxOptions } from "../ctx"
@@ -53,7 +53,7 @@ export class Book<Files extends FileStore = FileStore> {
       return cached
     }
 
-    const parser = FileParsers.createFileParser(path)
+    const parser = CodeBlockParsers.createCodeBlockParser(path)
     const text = await this.files.getOrFail(path)
 
     const mod = new Module({

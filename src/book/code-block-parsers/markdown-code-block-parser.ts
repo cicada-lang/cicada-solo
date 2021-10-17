@@ -1,9 +1,9 @@
-import { FileParser } from "../file-parser"
+import { CodeBlockParser } from "../code-block-parser"
 import { Parser } from "../../parser"
 import { Stmt } from "../../stmt"
 import * as commonmark from "commonmark"
 
-export class MarkdownFileParser extends FileParser {
+export class MarkdownCodeBlockParser extends CodeBlockParser {
   parse_stmts(text: string): Array<Stmt> {
     const parser = new Parser()
     const stmts = code_blocks(text).flatMap((code_block) =>
