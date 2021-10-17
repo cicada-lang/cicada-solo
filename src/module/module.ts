@@ -61,11 +61,6 @@ export class Module {
     this.index++
   }
 
-  undo(index: number): void {
-    this.index = index
-    this.code_blocks = this.code_blocks.slice(0, index)
-  }
-
   async run(): Promise<Array<StmtOutput>> {
     const outputs = []
     while (!this.end_p()) {
