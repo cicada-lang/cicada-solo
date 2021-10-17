@@ -1,3 +1,5 @@
+- `blocks` in `Module` -- "block by block" instead of "stmt by stmt"
+
 - `books/mathematical-structures`
 
 # narration
@@ -133,25 +135,25 @@
 
 - learn from lean
 
-# stdlib
+# books
 
-- [stdlib] `Set` -- Bishop's set theory -- with notes
+- [books] `Set` -- Bishop's set theory -- with notes
 
-- [stdlib] use `hom_set` in category theory
-- [stdlib] prove theory about terminal object
-- [stdlib] prove theory about initial object
+- [books] use `hom_set` in category theory
+- [books] prove theory about terminal object
+- [books] prove theory about initial object
 
-- [stdlib] [EWD1240a] A little bit of lattice theory
+- [books] [EWD1240a] A little bit of lattice theory
   - To test our system.
   - This paper is about the relation between PartialOrder and Lattice.
   - Learn from the story line for teaching.
 
-- [stdlib] Algebraic structures -- https://en.wikipedia.org/wiki/Algebraic_structure
-- [stdlib] Lattice theory
-- [stdlib] Closure system -- for FCA
-- [stdlib] Topology theory
-- [stdlib] Category of Groups
-- [stdlib] Number theroy -- https://en.wikipedia.org/wiki/Number_theory
+- [books] Algebraic structures -- https://en.wikipedia.org/wiki/Algebraic_structure
+- [books] Lattice theory
+- [books] Closure system -- for FCA
+- [books] Topology theory
+- [books] Category of Groups
+- [books] Number theroy -- https://en.wikipedia.org/wiki/Number_theory
 
 # narration
 
