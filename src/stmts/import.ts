@@ -28,7 +28,7 @@ export class Import extends Stmt {
     const imported_mod = await mod.book.load(path)
 
     try {
-      await imported_mod.run()
+      await imported_mod.run_to_the_end()
     } catch (error) {
       throw new Errors.ExpTrace(
         [

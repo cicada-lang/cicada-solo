@@ -17,7 +17,7 @@ export class ErrorRunner extends Runner {
   async run(path: string): Promise<{ error?: unknown }> {
     try {
       const mod = await this.book.load(path)
-      await mod.run()
+      await mod.run_to_the_end()
       return { error: new Error(`I expect to find error in the path: ${path}`) }
     } catch (error) {
       const text = await this.book.files.getOrFail(path)

@@ -67,7 +67,7 @@ export class Module {
     return this.index === this.code_blocks.length
   }
 
-  async run(): Promise<Array<StmtOutput>> {
+  async run_to_the_end(): Promise<Array<StmtOutput>> {
     const outputs = []
     while (!this.end_p()) {
       outputs.push(...(await this.step()))
