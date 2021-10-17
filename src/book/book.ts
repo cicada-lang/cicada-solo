@@ -1,5 +1,5 @@
 import { Module } from "../module"
-import * as CodeBlockParsers from "./code-block-parsers"
+import * as CodeBlockParsers from "../module/code-block-parsers"
 import { FileStore } from "@xieyuheng/enchanter/lib/file-store"
 import { Env } from "../env"
 import { Ctx, CtxOptions } from "../ctx"
