@@ -17,7 +17,7 @@ export class Module {
   book: Book
   path: string
   private code_blocks: Array<CodeBlock>
-  index: number = 0
+  counter: number = 0
   env: Env
   ctx: Ctx
 
@@ -50,7 +50,7 @@ export class Module {
 
   async step(): Promise<Array<StmtOutput>> {
     const outputs = []
-    const { stmts } = this.code_blocks[this.index]
+    const { stmts } = this.code_blocks[this.counter]
     for (const stmt of stmts) {
       const output = await stmt.execute(this)
       if (output) {
@@ -58,22 +58,32 @@ export class Module {
       }
     }
 
-    this.code_blocks[this.index].outputs = outputs
-    this.index++
+    this.code_blocks[this.counter].outputs = outputs
+    this.counter++
     return outputs
   }
 
   async run_to(index: number): Promise<Array<StmtOutput>> {
+    // NOTE The `index` can NOT be used to index `this.code_blocks`,
+    //   `counter` is used to index `this.code_blocks`.
     const outputs = []
-    while (this.index <= index) {
+    for (const code_block of this.code_blocks) {
       outputs.push(...(await this.step()))
+      if (code_block.index === index) {
+        break
+      }
     }
 
     return outputs
   }
 
   async run_to_the_end(): Promise<Array<StmtOutput>> {
-    return await this.run_to(this.code_blocks.length - 1)
+    const outputs = []
+    while (this.counter < this.code_blocks.length) {
+      outputs.push(...(await this.step()))
+    }
+
+    return outputs
   }
 
   get all_output(): string {
@@ -95,7 +105,6 @@ export class Module {
   }
 
   drop_code_block(): void {
-    // TODO should use side-effect on `this.code_blocks`
-    this.code_blocks = this.code_blocks.slice(0, this.index)
+    this.code_blocks.pop()
   }
 }
