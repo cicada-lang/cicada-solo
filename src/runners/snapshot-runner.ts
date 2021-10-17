@@ -16,7 +16,8 @@ export class SnapshotRunner extends Runner {
 
   async run(path: string): Promise<{ error?: unknown }> {
     try {
-      const mod = await this.book.load(path)
+      const text = await this.book.files.getOrFail(path)
+      const mod = this.book.load(path, text)
       await mod.run_to_the_end()
       const file = this.book.files.resolve(path + ".out")
       if (mod.all_output) {
