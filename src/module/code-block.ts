@@ -4,5 +4,5 @@ export interface CodeBlock {
   index: number
   text: string
   stmts: Array<Stmt>
-  output?: StmtOutput
+  outputs: Array<StmtOutput>
 }

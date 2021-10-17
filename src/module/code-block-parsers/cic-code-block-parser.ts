@@ -7,6 +7,6 @@ export class CicCodeBlockParser extends CodeBlockParser {
   parse_code_blocks(text: string): Array<CodeBlock> {
     const parser = new Parser()
     const stmts = parser.parse_stmts(text)
-    return [{ index: 0, text, stmts }]
+    return [{ index: 0, text, stmts, outputs: [] }]
   }
 }
