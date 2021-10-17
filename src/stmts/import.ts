@@ -1,4 +1,4 @@
-import { Stmt, StmtMeta } from "../stmt"
+import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 import { Module } from "../module"
 import * as Errors from "../errors"
 import Path from "path"
@@ -17,7 +17,7 @@ export class Import extends Stmt {
     this.entries = entries
   }
 
-  async execute(mod: Module): Promise<void> {
+  async execute(mod: Module): Promise<StmtOutput | undefined> {
     const path = resolve_path(mod.path, this.path)
     if (path === mod.path) {
       throw new Errors.ExpTrace(
@@ -56,6 +56,8 @@ export class Import extends Stmt {
       mod.ctx = mod.ctx.extend(alias || name, t, value)
       mod.env = mod.env.extend(alias || name, value)
     }
+
+    return undefined
   }
 
   repr(): string {

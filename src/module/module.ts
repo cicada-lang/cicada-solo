@@ -48,34 +48,32 @@ export class Module {
     return this
   }
 
-  private end_p(): boolean {
-    return this.index === this.code_blocks.length
-  }
-
-  async step(): Promise<void> {
+  async step(): Promise<Array<StmtOutput>> {
+    const outputs = []
     const { stmts } = this.code_blocks[this.index]
     for (const stmt of stmts) {
-      await stmt.execute(this)
+      const output = await stmt.execute(this)
+      if (output) {
+        outputs.push(output)
+      }
     }
 
+    this.code_blocks[this.index].outputs = outputs
     this.index++
+    return outputs
+  }
+
+  private end_p(): boolean {
+    return this.index === this.code_blocks.length
   }
 
   async run(): Promise<Array<StmtOutput>> {
     const outputs = []
     while (!this.end_p()) {
-      await this.step()
-      const code_block = this.code_blocks[this.index - 1]
-      if (code_block && code_block.outputs) {
-        outputs.push(...code_block.outputs)
-      }
+      outputs.push(...(await this.step()))
     }
 
     return outputs
-  }
-
-  output(output: StmtOutput): void {
-    this.code_blocks[this.index].outputs.push(output)
   }
 
   get all_output(): string {

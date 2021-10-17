@@ -1,4 +1,4 @@
-import { Stmt, StmtMeta } from "../stmt"
+import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 import { Module } from "../module"
 import { Exp } from "../exp"
 import { infer } from "../exp"
@@ -17,17 +17,14 @@ export class Show extends Stmt {
     this.exp = exp
   }
 
-  async execute(mod: Module): Promise<void> {
+  async execute(mod: Module): Promise<StmtOutput | undefined> {
     const inferred = infer(mod.ctx, this.exp)
     const t = inferred.t
     const value = evaluate(mod.env, inferred.core)
-
-    mod.output(
-      new StmtOutputs.NormalTerm({
-        exp: readback(mod.ctx, t, value),
-        t: readback(mod.ctx, new Exps.TypeValue(), t),
-      })
-    )
+    return new StmtOutputs.NormalTerm({
+      exp: readback(mod.ctx, t, value),
+      t: readback(mod.ctx, new Exps.TypeValue(), t),
+    })
   }
 
   repr(): string {
