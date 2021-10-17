@@ -63,17 +63,17 @@ export class Module {
     return outputs
   }
 
-  private end_p(): boolean {
-    return this.index === this.code_blocks.length
-  }
-
-  async run_to_the_end(): Promise<Array<StmtOutput>> {
+  async run_to(index: number): Promise<Array<StmtOutput>> {
     const outputs = []
-    while (!this.end_p()) {
+    while (this.index <= index) {
       outputs.push(...(await this.step()))
     }
 
     return outputs
+  }
+
+  async run_to_the_end(): Promise<Array<StmtOutput>> {
+    return await this.run_to(this.code_blocks.length - 1)
   }
 
   get all_output(): string {
