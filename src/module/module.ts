@@ -80,10 +80,8 @@ export class Module {
     let s = ""
     for (const { outputs } of this.code_blocks) {
       for (const output of outputs) {
-        if (output) {
-          s += output.repr()
-          s += "\n"
-        }
+        s += output.repr()
+        s += "\n"
       }
     }
 
