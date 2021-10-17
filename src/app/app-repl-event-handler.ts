@@ -45,7 +45,7 @@ export class AppReplEventHandler extends ReplEventHandler {
       }
       return true
     } catch (error) {
-      mod.code_blocks = mod.code_blocks.slice(0, mod.index)
+      mod.drop_code_block()
 
       const reporter = new Errors.ErrorReporter()
       const report = reporter.report(error, { text })

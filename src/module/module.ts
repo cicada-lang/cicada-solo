@@ -16,7 +16,7 @@ import { CodeBlock } from "./code-block"
 export class Module {
   book: Book
   path: string
-  code_blocks: Array<CodeBlock>
+  private code_blocks: Array<CodeBlock>
   index: number = 0
   env: Env
   ctx: Ctx
@@ -88,5 +88,15 @@ export class Module {
     }
 
     return s.trim() ? s : ""
+  }
+
+  // NOTE The index is not index into the array `this.code_blocks`,
+  //   but the `index` in the `code_block`.
+  get_code_block(index: number): CodeBlock | undefined {
+    return this.code_blocks.find((code_block) => code_block.index === index)
+  }
+
+  drop_code_block(): void {
+    this.code_blocks = this.code_blocks.slice(0, this.index)
   }
 }
