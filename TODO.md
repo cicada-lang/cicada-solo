@@ -1,5 +1,6 @@
-- `code_blocks` in `Module` -- the running step should be "block by block" instead of "stmt by stmt"
+- `code_blocks` in `Module`
 
+  - the running step should be "block by block" instead of "stmt by stmt"
   - quit using `parse_stmts`
 
 - `books/mathematical-structures`

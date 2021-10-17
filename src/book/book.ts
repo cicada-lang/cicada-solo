@@ -59,7 +59,7 @@ export class Book<Files extends FileStore = FileStore> {
     const mod = new Module({
       book: this,
       path,
-      stmts: parser.parse_stmts(text),
+      code_blocks: parser.parse_code_blocks(text),
       env: Env.init(),
       ctx: Ctx.init(opts?.ctx || this.ctx),
     })

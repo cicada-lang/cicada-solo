@@ -7,11 +7,11 @@ import { CodeBlock } from "./code-block"
 
 // NOTE
 // - A module belongs to a book.
+// - A module is statement-oriented,
+//   instead of expression-oriented.
 // - Loaded modules are cached.
-// - The loading order matters.
+// - The loading order of statements matters.
 // - Recursion is not an option.
-
-// NOTE top-level syntax of `Module` is statement-oriented
 
 interface ModuleEntry {
   stmt: Stmt
@@ -21,7 +21,7 @@ interface ModuleEntry {
 export class Module {
   book: Book
   path: string
-  entries: Array<ModuleEntry>
+  private entries: Array<ModuleEntry>
   index: number = 0
   env: Env
   ctx: Ctx
@@ -29,19 +29,17 @@ export class Module {
   constructor(opts: {
     book: Book
     path: string
-    stmts: Array<Stmt>
+    code_blocks: Array<CodeBlock>
     env: Env
     ctx: Ctx
   }) {
     this.book = opts.book
     this.path = opts.path
-    this.entries = opts.stmts.map((stmt) => ({ stmt }))
+    this.entries = opts.code_blocks.flatMap(({ stmts }) =>
+      stmts.map((stmt) => ({ stmt }))
+    )
     this.env = opts.env
     this.ctx = opts.ctx
-  }
-
-  get stmts(): Array<Stmt> {
-    return this.entries.map((entry) => entry.stmt)
   }
 
   append(text: string): this {
