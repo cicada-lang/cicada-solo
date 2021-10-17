@@ -95,6 +95,7 @@ export class Module {
   }
 
   drop_code_block(): void {
+    // TODO should use side-effect on `this.code_blocks`
     this.code_blocks = this.code_blocks.slice(0, this.index)
   }
 }
