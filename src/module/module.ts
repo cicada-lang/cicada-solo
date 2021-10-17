@@ -3,6 +3,7 @@ import { Stmt, StmtOutput } from "../stmt"
 import { Env } from "../env"
 import { Ctx } from "../ctx"
 import { Parser } from "../parser"
+import { CodeBlock } from "./code-block"
 
 // NOTE
 // - A module belongs to a book.
