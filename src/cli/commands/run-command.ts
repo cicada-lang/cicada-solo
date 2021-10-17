@@ -41,7 +41,9 @@ export class RunCommand extends Command<Args, Opts> {
 
   async execute(argv: Args & Opts): Promise<void> {
     Command.assertFile(argv["article"])
-    const book = await app.books.findUpOrFake(Path.dirname(argv["article"]))
+    const book = await app.localBooks.findUpOrFake(
+      Path.dirname(argv["article"])
+    )
     const runner = new Runners.DefaultRunner({ book })
     const path = Path.basename(argv["article"])
 
