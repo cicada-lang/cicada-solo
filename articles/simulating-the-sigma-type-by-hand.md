@@ -60,7 +60,7 @@ my_cons(
 //   B: (A) -> Type,
 //   p: (E: Type, f: (A, B(x)) -> E) -> E
 // ): A {
-//   (A, B, p) => { p(A, (a, b) => a) }
+//   (A, B, p) => p(A, (a, b) => a)
 // }
 
 my_car1(
