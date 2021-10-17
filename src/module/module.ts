@@ -35,7 +35,7 @@ export class Module {
     this.ctx = opts.ctx
   }
 
-  append(text: string): this {
+  append_code_block(text: string): this {
     const parser = new Parser()
     const stmts = parser.parse_stmts(text)
     this.code_blocks.push({
@@ -48,7 +48,7 @@ export class Module {
     return this
   }
 
-  end_p(): boolean {
+  private end_p(): boolean {
     return this.index === this.code_blocks.length
   }
 

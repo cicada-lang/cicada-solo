@@ -30,7 +30,7 @@ export class AppReplEventHandler extends ReplEventHandler {
     const mod = await this.book.load(this.path)
 
     try {
-      const outputs = await mod.append(text).run()
+      const outputs = await mod.append_code_block(text).run()
       for (const output of outputs) {
         if (output instanceof StmtOutputs.NormalTerm) {
           const exp = output.exp.repr()
