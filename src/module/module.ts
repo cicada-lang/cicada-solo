@@ -33,7 +33,7 @@ export class Module {
     this.code_blocks.push(
       new CodeBlock({
         index: this.code_blocks.length,
-        text,
+        code: text,
         stmts,
       })
     )

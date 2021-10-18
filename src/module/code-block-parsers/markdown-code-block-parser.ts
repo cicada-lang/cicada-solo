@@ -13,7 +13,7 @@ export class MarkdownCodeBlockParser extends CodeBlockParser {
         ({ index, text, offset }) =>
           new CodeBlock({
             index,
-            text,
+            code: text,
             stmts: parser.parse_stmts(text, offset),
           })
       )

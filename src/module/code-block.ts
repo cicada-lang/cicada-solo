@@ -1,16 +1,14 @@
 import { Stmt, StmtOutput } from "../stmt"
 
 export class CodeBlock {
-  instanceofCodeBlock = true
-
   index: number
-  text: string
+  code: string
   stmts: Array<Stmt>
   outputs: Array<StmtOutput> = []
 
-  constructor(opts: { index: number; text: string; stmts: Array<Stmt> }) {
+  constructor(opts: { index: number; code: string; stmts: Array<Stmt> }) {
     this.index = opts.index
-    this.text = opts.text
+    this.code = opts.code
     this.stmts = opts.stmts
   }
 }

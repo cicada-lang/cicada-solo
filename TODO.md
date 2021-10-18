@@ -1,5 +1,6 @@
-- [maybe] offset in `CodeBlock`
+- `CodeBlock.updateCode()`
 
+- [maybe] offset in `CodeBlock`
 - [maybe] `mod.code_blocks` as store
 
 - `books/mathematical-structures`
