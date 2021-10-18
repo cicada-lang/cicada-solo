@@ -5,14 +5,6 @@ import { Ctx } from "../ctx"
 import { Parser } from "../parser"
 import { CodeBlock } from "./code-block"
 
-// NOTE
-// - A module belongs to a book.
-// - A module is statement-oriented,
-//   instead of expression-oriented.
-// - Loaded modules are cached.
-// - The loading order of statements matters.
-// - Recursion is not an option.
-
 export class Module {
   book: Book
   path: string
@@ -38,12 +30,13 @@ export class Module {
   append_code_block(text: string): this {
     const parser = new Parser()
     const stmts = parser.parse_stmts(text)
-    this.code_blocks.push({
-      index: this.code_blocks.length,
-      text,
-      stmts,
-      outputs: [],
-    })
+    this.code_blocks.push(
+      new CodeBlock({
+        index: this.code_blocks.length,
+        text,
+        stmts,
+      })
+    )
 
     return this
   }

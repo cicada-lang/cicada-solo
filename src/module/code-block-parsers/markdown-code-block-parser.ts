@@ -9,12 +9,14 @@ export class MarkdownCodeBlockParser extends CodeBlockParser {
     const parser = new Parser()
     return collect_code_blocks(text)
       .filter(({ info }) => info === "cicada")
-      .map(({ index, text, offset }) => ({
-        index,
-        text,
-        stmts: parser.parse_stmts(text, offset),
-        outputs: [],
-      }))
+      .map(
+        ({ index, text, offset }) =>
+          new CodeBlock({
+            index,
+            text,
+            stmts: parser.parse_stmts(text, offset),
+          })
+      )
   }
 }
 
