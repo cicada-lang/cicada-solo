@@ -1,4 +1,5 @@
 import { Stmt, StmtOutput } from "../stmt"
+import { Parser } from "../parser"
 
 export class CodeBlock {
   index: number
@@ -10,5 +11,11 @@ export class CodeBlock {
     this.index = opts.index
     this.code = opts.code
     this.stmts = opts.stmts
+  }
+
+  updateCode(code: string): void {
+    this.code = code
+    const parser = new Parser()
+    this.stmts = parser.parse_stmts(code)
   }
 }
