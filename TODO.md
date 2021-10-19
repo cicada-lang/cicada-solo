@@ -1,7 +1,25 @@
-- [maybe] offset in `CodeBlock`
-- [maybe] `mod.code_blocks` as store
+- `Module.load` should not take `text`
+
+- should only inject `CtxOptions` on `Module.load`
+
+- `FakeFileStore` need to be able to work on the web
 
 - `books/mathematical-structures`
+
+- `books/the-little-typer-exercises` hide error files from the book
+
+  - by using `.cic` instead of `.md`
+
+- [bug] fix type check error report on wrong number of elements
+
+  in `ch07.md`:
+
+  ``` cicada
+  drop_last(String, 3, vec! ["1", "2", "3", "LAST"])
+  drop_last(String, 3, vec! ["1", "2", "LAST"])
+  ```
+
+- [maybe] offset in `CodeBlock`
 
 # narration
 
