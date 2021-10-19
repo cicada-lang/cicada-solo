@@ -2,7 +2,7 @@ import { Module } from "../module"
 import * as CodeBlockParsers from "../module/code-block-parsers"
 import { FileStore } from "@xieyuheng/enchanter/lib/file-store"
 import { Env } from "../env"
-import { Ctx, CtxOptions } from "../ctx"
+import { Ctx, CtxObserver } from "../ctx"
 import ty from "@xieyuheng/ty"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
@@ -29,12 +29,16 @@ export class Book<Files extends FileStore = FileStore> {
   config: BookConfig
   files: Files
   cache: Map<string, Module> = new Map()
-  ctx: CtxOptions
+  observers: Array<CtxObserver>
 
-  constructor(opts: { config: BookConfig; files: Files; ctx: CtxOptions }) {
+  constructor(opts: {
+    config: BookConfig
+    files: Files
+    observers: Array<CtxObserver>
+  }) {
     this.config = opts.config
     this.files = opts.files
-    this.ctx = opts.ctx
+    this.observers = opts.observers
   }
 
   static book_config_schema = book_config_schema
@@ -47,7 +51,10 @@ export class Book<Files extends FileStore = FileStore> {
     })
   }
 
-  async load(path: string, opts?: { ctx?: CtxOptions }): Promise<Module> {
+  async load(
+    path: string,
+    opts?: { observers?: Array<CtxObserver> }
+  ): Promise<Module> {
     const cached = this.cache.get(path)
     if (cached) {
       return cached
@@ -62,7 +69,9 @@ export class Book<Files extends FileStore = FileStore> {
       path,
       code_blocks: parser.parse_code_blocks(text),
       env: Env.init(),
-      ctx: Ctx.init(opts?.ctx || this.ctx),
+      ctx: Ctx.init({
+        observers: opts?.observers || this.observers,
+      }),
     })
 
     this.cache.set(path, mod)

@@ -16,7 +16,7 @@ export class LocalBookStore extends BookStore {
       files: new LocalFileStore({
         dir: Path.resolve(Path.dirname(config_file), config.src),
       }),
-      ctx: { observers: [new CtxObservers.NarrationLogger()] },
+      observers: [new CtxObservers.NarrationLogger()],
     })
   }
 
@@ -24,7 +24,7 @@ export class LocalBookStore extends BookStore {
     return new Book({
       config: Book.fake_config(),
       files: new FakeFileStore({ dir, faked }),
-      ctx: { observers: [new CtxObservers.NarrationLogger()] },
+      observers: [new CtxObservers.NarrationLogger()],
     })
   }
 

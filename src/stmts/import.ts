@@ -26,7 +26,7 @@ export class Import extends Stmt {
     }
 
     const imported_mod = await mod.book.load(path, {
-      ctx: { observers: mod.ctx.observers },
+      observers: mod.ctx.observers,
     })
 
     try {

@@ -1,5 +1,3 @@
-- inject `observers: Array<Observer>` instead of `ctx: CtxOptions`
-
 - inject `observers` into `Runner.run`
 
 - `app.defaultCtxObservers`
