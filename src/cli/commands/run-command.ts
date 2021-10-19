@@ -74,7 +74,9 @@ async function watch(
 
     if (event === "update") {
       book.cache.delete(path)
-      const { error } = await runner.run(path)
+      const { error } = await runner.run(path, {
+        observers: app.defaultCtxObservers,
+      })
 
       if (error) {
         app.logger.error({ tag: event, msg: path })

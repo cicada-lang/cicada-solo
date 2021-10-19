@@ -1,5 +1,6 @@
 import { Book } from "../book"
 import { Runner } from "../runner"
+import { CtxObserver } from "../ctx"
 
 export class DefaultRunner extends Runner {
   book: Book

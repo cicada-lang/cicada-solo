@@ -71,7 +71,9 @@ async function check(
     if (CodeBlockParsers.canHandle(path)) {
       const t0 = Date.now()
       const runner = app.createLocalRunner({ path, book })
-      const { error } = await runner.run(path)
+      const { error } = await runner.run(path, {
+        observers: app.defaultCtxObservers,
+      })
       if (error) errors.push(error)
       const t1 = Date.now()
       const elapse = t1 - t0
@@ -105,7 +107,9 @@ async function watch(book: Book<LocalFileStore>): Promise<void> {
       const t0 = Date.now()
       book.cache.delete(path)
       const runner = app.createLocalRunner({ path, book })
-      const { error } = await runner.run(path)
+      const { error } = await runner.run(path, {
+        observers: app.defaultCtxObservers,
+      })
       const t1 = Date.now()
       const elapse = t1 - t0
       if (error) {
