@@ -30,10 +30,6 @@ export class Book<Files extends FileStore = FileStore> {
   files: Files
   cache: Map<string, Module> = new Map()
 
-  file_cache_p: boolean = false
-
-  file_cache: Map<string, string> = new Map()
-
   constructor(opts: { config: BookConfig; files: Files }) {
     this.config = opts.config
     this.files = opts.files
@@ -49,19 +45,6 @@ export class Book<Files extends FileStore = FileStore> {
     })
   }
 
-  private async getFile(path: string): Promise<string> {
-    if (this.file_cache_p) {
-      const found = this.file_cache.get(path)
-      if (found !== undefined) return found
-
-      const text = await this.files.getOrFail(path)
-      this.file_cache.set(path, text)
-      return text
-    } else {
-      return await this.files.getOrFail(path)
-    }
-  }
-
   async load(
     path: string,
     opts: { observers: Array<CtxObserver> }
@@ -73,7 +56,7 @@ export class Book<Files extends FileStore = FileStore> {
 
     const parser = CodeBlockParsers.createCodeBlockParser(path)
 
-    const text = await this.getFile(path)
+    const text = await this.files.getOrFail(path)
 
     const mod = new Module({
       book: this,
