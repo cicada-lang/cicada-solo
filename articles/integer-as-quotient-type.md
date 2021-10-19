@@ -1,6 +1,7 @@
 ---
 title: Integer as quotient type
 author: Xie Yuheng
+date: 2021-10-19
 ---
 
 Firstly, we define `Integer` as a class (record type).
