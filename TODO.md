@@ -1,5 +1,7 @@
 - `books/mathematical-structures` merge `category`, `group` and `order`
 
+- refactor `Module.rerun_with`
+
 - [bug] fix type check error report on wrong number of elements
 
   in `ch07.md`:

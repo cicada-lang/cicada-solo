@@ -103,7 +103,7 @@ export class Module {
       }
     }
 
-    for (const code_block of this.code_blocks) {
+    for (const code_block of this.code_blocks.slice(this.counter)) {
       if (code_block.id === id) {
         code_block.updateCode(code)
         return await this.step()
