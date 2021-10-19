@@ -30,7 +30,7 @@ export abstract class Ctx {
     return new EmptyCtx(opts)
   }
 
-  send(event: CtxEvent): void {
+  broadcast(event: CtxEvent): void {
     for (const observer of this.observers) {
       observer.receive(event)
     }
@@ -38,7 +38,7 @@ export abstract class Ctx {
 
   narration(lines: Array<string>): void {
     const story = lines.join("\n")
-    this.send({ tag: "narration", msg: story })
+    this.broadcast({ tag: "narration", msg: story })
   }
 
   freshen(name: string): string {

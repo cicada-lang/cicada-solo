@@ -1,8 +1,10 @@
-- inject `CtxOptions` into `Runner.run`
+- inject `observers: Array<Observer>` instead of `ctx: CtxOptions`
 
-- `app.defaultCtxOptions`
+- inject `observers` into `Runner.run`
 
-- should only inject `CtxOptions` on `Book.load`
+- `app.defaultCtxObservers`
+
+- should only inject `observers` on `Book.load`
 
 - `FakeFileStore` need to be able to work on the web
 
