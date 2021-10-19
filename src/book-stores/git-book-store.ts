@@ -13,9 +13,6 @@ export class GitBookStore extends BookStore {
     const files = gitPath.createGitFileStore()
     const text = await files.getOrFail("book.json")
     const config = Book.book_config_schema.validate(JSON.parse(text))
-    return new Book({
-      config,
-      files: files.cd(config.src),
-    })
+    return new Book({ config, files: files.cd(config.src) })
   }
 }
