@@ -87,18 +87,6 @@ export class Module {
     throw new Error(`I can not find code block with id: ${id}`)
   }
 
-  async run_to(id: number): Promise<Array<StmtOutput>> {
-    const outputs = []
-    for (const code_block of this.code_blocks) {
-      outputs.push(...(await this.step()))
-      if (code_block.id === id) {
-        break
-      }
-    }
-
-    return outputs
-  }
-
   async run_to_the_end(): Promise<Array<StmtOutput>> {
     const outputs = []
     while (this.counter < this.code_blocks.length) {
