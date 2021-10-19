@@ -1,6 +1,7 @@
-- `FakeFileStore` need to be able to work on the web
+- `books/mathematical-structures` merge `category`, `group` and `order`
+- `articles/integer-as-an-example-of-quotient-type.md`
 
-- `books/mathematical-structures`
+- `FakeFileStore` need to be able to work on the web -- for running code block in article
 
 - [bug] fix type check error report on wrong number of elements
 
