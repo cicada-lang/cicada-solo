@@ -1,3 +1,7 @@
+- inject `CtxOptions` into `Runner.run`
+
+- `app.defaultCtxOptions`
+
 - should only inject `CtxOptions` on `Book.load`
 
 - `FakeFileStore` need to be able to work on the web
