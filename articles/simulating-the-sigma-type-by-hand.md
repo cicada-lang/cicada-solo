@@ -1,5 +1,6 @@
 ---
 title: Simulating the Sigma type by hand
+author: Xie Yuheng
 ---
 
 This example is found in [an issue of the-little-typer/pie](https://github.com/the-little-typer/pie/issues/42)

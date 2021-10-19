@@ -1,5 +1,4 @@
 - `books/mathematical-structures` merge `category`, `group` and `order`
-- `articles/integer-as-an-example-of-quotient-type.md`
 
 - `FakeFileStore` need to be able to work on the web -- for running code block in article
 
