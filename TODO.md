@@ -1,4 +1,4 @@
-- test `GitBookStore` by checking git book
+- move `runner` & `runners` to `cli`
 
 - `FakeFileStore` need to be able to work on the web -- for running code block in article
 
