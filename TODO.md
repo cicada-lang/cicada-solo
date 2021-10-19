@@ -1,6 +1,12 @@
-- `books/mathematical-structures` merge `category`, `group` and `order`
+- `cic check` support git book -- to test `GitBookStore` -- without cache for now
 
 - `FakeFileStore` need to be able to work on the web -- for running code block in article
+
+- `GitBookStore.fake`
+
+- `cic run` support git article -- to test `GitBookStore`
+
+- `books/mathematical-structures` merge `category`, `group` and `order`
 
 - [bug] fix type check error report on wrong number of elements
 
@@ -177,9 +183,9 @@
 
 # book manager
 
-- [book manager] [cli] download book from `references` specified in `book.json`
+- [book manager] [cli] download (or clone?) book from `references` specified in `book.json`
 
-- [book manager] be able to resolve module in book of `dependencies`
+- [book manager] be able to resolve module in book of `references`
 
   - we do not need to use book as module,
     we only need to be able to resolve module.
