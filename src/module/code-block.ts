@@ -2,13 +2,13 @@ import { Stmt, StmtOutput } from "../stmt"
 import { Parser } from "../parser"
 
 export class CodeBlock {
-  index: number
+  id: number
   code: string
   stmts: Array<Stmt>
   outputs: Array<StmtOutput> = []
 
-  constructor(opts: { index: number; code: string; stmts: Array<Stmt> }) {
-    this.index = opts.index
+  constructor(opts: { id: number; code: string; stmts: Array<Stmt> }) {
+    this.id = opts.id
     this.code = opts.code
     this.stmts = opts.stmts
   }

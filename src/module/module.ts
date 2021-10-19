@@ -9,7 +9,7 @@ export class Module {
   book: Book
   path: string
   code_blocks: Array<CodeBlock>
-  counter: number = 0
+  private counter: number = 0
   env: Env
   ctx: Ctx
 
@@ -32,7 +32,7 @@ export class Module {
     const stmts = parser.parse_stmts(text)
     this.code_blocks.push(
       new CodeBlock({
-        index: this.code_blocks.length,
+        id: this.code_blocks.length,
         code: text,
         stmts,
       })
@@ -41,13 +41,20 @@ export class Module {
     return this
   }
 
-  // NOTE The index is not index into the array `this.code_blocks`,
-  //   but the `index` in the `code_block`.
-  get_code_block(index: number): CodeBlock | undefined {
-    return this.code_blocks.find((code_block) => code_block.index === index)
+  get_code_block(id: number): CodeBlock | undefined {
+    return this.code_blocks.find((code_block) => code_block.id === id)
   }
 
-  async step(): Promise<Array<StmtOutput>> {
+  update_code_block(id: number, code: string): void {
+    const code_block = this.get_code_block(id)
+    if (code_block) {
+      code_block.updateCode(code)
+    } else {
+      console.warn(`I can not update non-existing code block of id: ${id}`)
+    }
+  }
+
+  private async step(): Promise<Array<StmtOutput>> {
     const outputs = []
     const { stmts } = this.code_blocks[this.counter]
     for (const stmt of stmts) {
@@ -62,13 +69,29 @@ export class Module {
     return outputs
   }
 
-  async run_to(index: number): Promise<Array<StmtOutput>> {
-    // NOTE The `index` can NOT be used to index `this.code_blocks`,
-    //   `counter` is used to index `this.code_blocks`.
+  async rerun_with_new_code_block(opts: {
+    id: number
+    code: string
+  }): Promise<Array<StmtOutput>> {
+    const { id, code } = opts
+
+    for (const code_block of this.code_blocks) {
+      if (code_block.id === id) {
+        code_block.updateCode(code)
+        return await this.step()
+      } else {
+        await this.step()
+      }
+    }
+
+    throw new Error(`I can not find code block with id: ${id}`)
+  }
+
+  async run_to(id: number): Promise<Array<StmtOutput>> {
     const outputs = []
     for (const code_block of this.code_blocks) {
       outputs.push(...(await this.step()))
-      if (code_block.index === index) {
+      if (code_block.id === id) {
         break
       }
     }
