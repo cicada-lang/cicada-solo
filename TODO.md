@@ -1,5 +1,3 @@
-- test `GitBookStore.fake` by running git article
-
 - `books/mathematical-structures` merge `category`, `group` and `order`
 
 - [bug] fix type check error report on wrong number of elements

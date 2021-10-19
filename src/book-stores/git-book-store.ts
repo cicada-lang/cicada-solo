@@ -17,7 +17,8 @@ export class GitBookStore extends BookStore {
     return new Book({ config, files: files.cd(config.src) })
   }
 
-  fake(
+
+  fakeFromGitPath(
     gitPath: GitPath,
     faked?: Record<string, string>
   ): Book<FakeGitFileStore> {
