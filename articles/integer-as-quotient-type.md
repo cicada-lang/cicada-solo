@@ -7,7 +7,7 @@ date: 2021-10-19
 Firstly, we define `Integer` as a class (record type).
 
 An integer is defined as a pair of natural numbers, `left` and `right`.
-After our definition, the actual integer will be equal to `left` minus `right`.
+The intention of our definition, is to view the integer as equal to `left` minus `right`.
 
 ``` cicada
 class Integer {
@@ -18,8 +18,10 @@ class Integer {
 
 Secondly, we need the help of `add` to define the equivalence between `Integer`.
 
-Given `x: Integer, y: Integer`, `x` is equivalent to `y`,
-iff `x.left` minus `x.right` equal to `y.left` minus `y.right`,
+Given `x: Integer` and `y: Integer`.
+
+We say `x` is equivalent to `y`,
+iff `x.left` minus `x.right` is equal to `y.left` minus `y.right`,
 after transposition, we have `add(x.left, y.right)` equal `add(y.left, x.right)`.
 
 ``` cicada
