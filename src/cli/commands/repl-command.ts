@@ -1,6 +1,7 @@
 import { Command } from "@xieyuheng/enchanter/lib/command"
 import { CommandRunner } from "@xieyuheng/enchanter/lib/command-runner"
 import { ReadlineRepl } from "@xieyuheng/enchanter/lib/repls/readline-repl"
+import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores/local-file-store"
 import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"
 import Path from "path"
@@ -32,7 +33,10 @@ export class ReplCommand extends Command<Args> {
   async execute(argv: Args): Promise<void> {
     const dir = Path.resolve(argv["dir"] || process.cwd())
     const path = `repl-file-${app.nanoid()}.cic`
-    const book = app.localBooks.fake(dir, { [path]: "" })
+    const book = app.localBooks.fake({
+      fallback: new LocalFileStore({ dir }),
+      faked: { [path]: "" },
+    })
     const handler = app.createReplEventHandler({ path, book })
     const repl = await ReadlineRepl.create({ dir, handler, files: app.home })
     await repl.run()

@@ -17,16 +17,14 @@ export class GitBookStore extends BookStore {
     return new Book({ config, files: files.cd(config.src) })
   }
 
-  fakeFromGitPath(
-    gitPath: GitPath,
+  fake(opts: {
+    fallback: GitFileStore
     faked?: Record<string, string>
-  ): Book<FakeGitFileStore> {
+  }): Book<FakeGitFileStore> {
+    const { fallback, faked } = opts
     return new Book({
       config: Book.fake_config(),
-      files: new FakeGitFileStore({
-        faked,
-        fallback: gitPath.createGitFileStore(),
-      }),
+      files: new FakeGitFileStore({ faked, fallback }),
     })
   }
 }

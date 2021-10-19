@@ -40,8 +40,9 @@ ut.test("git article", async () => {
   const url =
     "https://gitlab.com/cicada-lang/cicada/-/tree/master/books/the-little-typer-exercises"
   const path = "article.cic"
-  const book = await app.gitBooks.fakeFromGitPath(GitPath.fromURL(url), {
-    [path]: "123",
+  const book = await app.gitBooks.fake({
+    fallback: GitPath.fromURL(url).createGitFileStore(),
+    faked: { [path]: "123" },
   })
 
   const t0 = Date.now()

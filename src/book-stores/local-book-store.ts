@@ -19,18 +19,23 @@ export class LocalBookStore extends BookStore {
     })
   }
 
-  fake(dir: string, faked?: Record<string, string>): Book<LocalFileStore> {
+  fake(opts: {
+    fallback: LocalFileStore
+    faked?: Record<string, string>
+  }): Book<LocalFileStore> {
+    const { fallback, faked } = opts
     return new Book({
       config: Book.fake_config(),
-      files: new FakeLocalFileStore({
-        faked,
-        fallback: new LocalFileStore({ dir }),
-      }),
+      files: new FakeLocalFileStore({ faked, fallback }),
     })
   }
 
   async findUpOrFake(dir: string): Promise<Book<LocalFileStore>> {
     const config_file = ut.findUp("book.json", { from: dir })
-    return config_file ? await this.get(config_file) : this.fake(dir)
+    return config_file
+      ? await this.get(config_file)
+      : this.fake({
+          fallback: new LocalFileStore({ dir }),
+        })
   }
 }
