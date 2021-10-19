@@ -2,10 +2,6 @@
 
 - `books/mathematical-structures`
 
-- `books/the-little-typer-exercises` hide error files from the book
-
-  - by using `.cic` instead of `.md`
-
 - [bug] fix type check error report on wrong number of elements
 
   in `ch07.md`:

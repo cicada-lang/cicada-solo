@@ -1,8 +1,3 @@
----
-title: 8. Pick a Number, Any Number
----
-
-``` cicada
 add(x: Nat, y: Nat): Nat {
   nat_rec(x, y, (_prev, almost) => add1(almost))
 }
@@ -17,4 +12,3 @@ incr(3)
 
 // NOTE `add(1)` is not equal to `incr` by reflection, we need to prove it.
 the(Equal((Nat) -> Nat, add(1), incr), refl)
-```
