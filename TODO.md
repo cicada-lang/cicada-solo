@@ -1,6 +1,4 @@
-- no `app.createLocalRunner`
-
-- `FakeFileStore` need to be able to work on the web -- for running code block in article
+- update `enchanter` for new `FakeFileStore`
 
 - `GitBookStore.fake`
 
