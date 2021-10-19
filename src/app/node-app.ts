@@ -1,7 +1,7 @@
 import { GenericApp } from "./generic-app"
 import { AppHomeFileStore } from "./app-home-file-store"
 import { LocalBookStore } from "../book-stores/local-book-store"
-import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
+import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores/local-file-store"
 import * as Loggers from "@xieyuheng/enchanter/lib/loggers"
 import { Book } from "../book"
 import { Runner } from "../cli/runner"

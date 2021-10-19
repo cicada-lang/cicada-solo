@@ -1,7 +1,8 @@
 import { BookStore } from "../book-store"
 import { Book } from "../book"
-import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
-import { FakeFileStore } from "@xieyuheng/enchanter/lib/file-stores"
+import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores/local-file-store"
+import { FakeLocalFileStore } from "@xieyuheng/enchanter/lib/file-stores/fake-local-file-store"
+import { FileStore } from "@xieyuheng/enchanter/lib/file-store"
 import * as ut from "../ut"
 import Path from "path"
 import fs from "fs"
@@ -21,7 +22,7 @@ export class LocalBookStore extends BookStore {
   fake(dir: string, faked?: Record<string, string>): Book<LocalFileStore> {
     return new Book({
       config: Book.fake_config(),
-      files: new FakeFileStore({ dir, faked }),
+      files: new FakeLocalFileStore({ faked, dir }),
     })
   }
 

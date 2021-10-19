@@ -1,4 +1,4 @@
-- update `enchanter` for new `FakeFileStore`
+- `FakeGitBookStore`
 
 - `GitBookStore.fake`
 

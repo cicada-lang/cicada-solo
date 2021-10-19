@@ -1,6 +1,6 @@
 import { Command } from "@xieyuheng/enchanter/lib/command"
 import { CommandRunner } from "@xieyuheng/enchanter/lib/command-runner"
-import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
+import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores/local-file-store"
 import * as Runners from "../runners"
 import { Runner } from "../runner"
 import { Book } from "../../book"
