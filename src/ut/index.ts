@@ -9,3 +9,5 @@ export * from "./right-pad"
 export * from "./left-pad"
 export * from "./ansi"
 export * from "./colors"
+
+export { test } from "@xieyuheng/enchanter/lib/ut"

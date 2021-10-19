@@ -1,10 +1,10 @@
-- `cic check` support git book -- to test `GitBookStore` -- without cache for now
+- test `GitBookStore` by checking git book
 
 - `FakeFileStore` need to be able to work on the web -- for running code block in article
 
 - `GitBookStore.fake`
 
-- `cic run` support git article -- to test `GitBookStore`
+- test `GitBookStore.fake` by running git article
 
 - `books/mathematical-structures` merge `category`, `group` and `order`
 
