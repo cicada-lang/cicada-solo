@@ -25,8 +25,7 @@ export class Import extends Stmt {
       )
     }
 
-    const text = await mod.book.files.getOrFail(path)
-    const imported_mod = mod.book.load(path, text)
+    const imported_mod = await mod.book.load(path)
 
     try {
       await imported_mod.run_to_the_end()

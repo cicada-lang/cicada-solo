@@ -47,13 +47,15 @@ export class Book<Files extends FileStore = FileStore> {
     })
   }
 
-  load(path: string, text: string, opts?: { ctx?: CtxOptions }): Module {
+  async load(path: string, opts?: { ctx?: CtxOptions }): Promise<Module> {
     const cached = this.cache.get(path)
     if (cached) {
       return cached
     }
 
     const parser = CodeBlockParsers.createCodeBlockParser(path)
+
+    const text = await this.files.getOrFail(path)
 
     const mod = new Module({
       book: this,

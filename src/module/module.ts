@@ -41,6 +41,12 @@ export class Module {
     return this
   }
 
+  // NOTE The index is not index into the array `this.code_blocks`,
+  //   but the `index` in the `code_block`.
+  get_code_block(index: number): CodeBlock | undefined {
+    return this.code_blocks.find((code_block) => code_block.index === index)
+  }
+
   async step(): Promise<Array<StmtOutput>> {
     const outputs = []
     const { stmts } = this.code_blocks[this.counter]
@@ -89,11 +95,5 @@ export class Module {
     }
 
     return s.trim() ? s : ""
-  }
-
-  // NOTE The index is not index into the array `this.code_blocks`,
-  //   but the `index` in the `code_block`.
-  get_code_block(index: number): CodeBlock | undefined {
-    return this.code_blocks.find((code_block) => code_block.index === index)
   }
 }

@@ -1,6 +1,4 @@
-- `Module.load` should not take `text`
-
-- should only inject `CtxOptions` on `Module.load`
+- should only inject `CtxOptions` on `Book.load`
 
 - `FakeFileStore` need to be able to work on the web
 
