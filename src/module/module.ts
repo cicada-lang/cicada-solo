@@ -9,9 +9,14 @@ export class Module {
   book: Book
   path: string
   code_blocks: Array<CodeBlock>
-  private counter: number = 0
   env: Env
   ctx: Ctx
+
+  private backups: Array<{ env: Env; ctx: Ctx }> = []
+
+  private get counter(): number {
+    return this.backups.length
+  }
 
   constructor(opts: {
     book: Book
@@ -27,13 +32,13 @@ export class Module {
     this.ctx = opts.ctx
   }
 
-  append_code_block(text: string): this {
+  append_code_block(code: string): this {
     const parser = new Parser()
-    const stmts = parser.parse_stmts(text)
+    const stmts = parser.parse_stmts(code)
     this.code_blocks.push(
       new CodeBlock({
         id: this.code_blocks.length,
-        code: text,
+        code,
         stmts,
       })
     )
@@ -56,6 +61,9 @@ export class Module {
 
   private async step(): Promise<Array<StmtOutput>> {
     const outputs = []
+
+    const backup = { env: this.env, ctx: this.ctx }
+
     const { stmts } = this.code_blocks[this.counter]
     for (const stmt of stmts) {
       const output = await stmt.execute(this)
@@ -65,15 +73,35 @@ export class Module {
     }
 
     this.code_blocks[this.counter].outputs = outputs
-    this.counter++
+    this.backups.push(backup)
     return outputs
   }
 
-  async rerun_with_new_code_block(opts: {
+  async rerun_with(opts: {
     id: number
     code: string
   }): Promise<Array<StmtOutput>> {
     const { id, code } = opts
+
+    const index = this.code_blocks.findIndex(
+      (code_block) => code_block.id === id
+    )
+
+    if (index === -1) {
+      throw new Error(`I can not find code block with id: ${id}`)
+    }
+
+    if (index < this.counter) {
+      const backup = this.backups[index]
+      this.env = backup.env
+      this.ctx = backup.ctx
+      this.backups = this.backups.slice(0, index)
+      for (const [i, code_block] of this.code_blocks.entries()) {
+        if (i >= index) {
+          code_block.outputs = []
+        }
+      }
+    }
 
     for (const code_block of this.code_blocks) {
       if (code_block.id === id) {
