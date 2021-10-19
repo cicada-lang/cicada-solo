@@ -10,9 +10,12 @@ export class DefaultRunner extends Runner {
     this.book = opts.book
   }
 
-  async run(path: string): Promise<{ error?: unknown }> {
+  async run(
+    path: string,
+    opts: { observers: Array<CtxObserver> }
+  ): Promise<{ error?: unknown }> {
     try {
-      const mod = await this.book.load(path)
+      const mod = await this.book.load(path, opts)
       await mod.run_to_the_end()
       if (mod.all_output) {
         console.log(mod.all_output)

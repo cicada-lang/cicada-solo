@@ -1,6 +1,7 @@
 import { ReplEvent, ReplEventHandler } from "@xieyuheng/enchanter/lib/repl"
 import { AppConfig } from "./app-config"
 import { Book } from "../book"
+import { CtxObserver } from "../ctx"
 import * as StmtOutputs from "../stmt/stmt-outputs"
 import * as Errors from "../errors"
 import * as ut from "../ut"
@@ -9,11 +10,17 @@ export class AppReplEventHandler extends ReplEventHandler {
   config = new AppConfig()
   book: Book
   path: string
+  observers: Array<CtxObserver>
 
-  constructor(opts: { book: Book; path: string }) {
+  constructor(opts: {
+    book: Book
+    path: string
+    observers: Array<CtxObserver>
+  }) {
     super()
     this.path = opts.path
     this.book = opts.book
+    this.observers = opts.observers
   }
 
   greeting(): void {
@@ -29,7 +36,7 @@ export class AppReplEventHandler extends ReplEventHandler {
   private async execute(text: string): Promise<boolean> {
     text = text.trim()
 
-    const mod = await this.book.load(this.path)
+    const mod = await this.book.load(this.path, { observers: this.observers })
 
     try {
       const outputs = await mod.append_code_block(text).run_to_the_end()

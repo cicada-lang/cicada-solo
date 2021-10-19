@@ -15,7 +15,10 @@ export class GenericApp {
     book: Book
     path: string
   }): AppReplEventHandler {
-    return new AppReplEventHandler(opts)
+    return new AppReplEventHandler({
+      ...opts,
+      observers: this.defaultCtxObservers,
+    })
   }
 }
 

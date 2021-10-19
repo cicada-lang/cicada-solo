@@ -48,11 +48,13 @@ export class RunCommand extends Command<Args, Opts> {
     const path = Path.basename(argv["article"])
 
     if (argv["watch"]) {
-      await runner.run(path)
+      await runner.run(path, { observers: app.defaultCtxObservers })
       app.logger.info(`Initial run complete, now watching for changes.`)
       await watch(runner, book, path)
     } else {
-      const { error } = await runner.run(path)
+      const { error } = await runner.run(path, {
+        observers: app.defaultCtxObservers,
+      })
       if (error) {
         process.exit(1)
       }

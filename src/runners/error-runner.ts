@@ -15,9 +15,12 @@ export class ErrorRunner extends Runner {
     this.book = opts.book
   }
 
-  async run(path: string): Promise<{ error?: unknown }> {
+  async run(
+    path: string,
+    opts: { observers: Array<CtxObserver> }
+  ): Promise<{ error?: unknown }> {
     try {
-      const mod = await this.book.load(path)
+      const mod = await this.book.load(path, opts)
       await mod.run_to_the_end()
       return { error: new Error(`I expect to find error in the path: ${path}`) }
     } catch (error) {

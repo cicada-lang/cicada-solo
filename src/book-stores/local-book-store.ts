@@ -1,6 +1,5 @@
 import { BookStore } from "../book-store"
 import { Book } from "../book"
-import * as CtxObservers from "../ctx/ctx-observers"
 import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores"
 import { FakeFileStore } from "@xieyuheng/enchanter/lib/file-stores"
 import * as ut from "../ut"
@@ -16,7 +15,6 @@ export class LocalBookStore extends BookStore {
       files: new LocalFileStore({
         dir: Path.resolve(Path.dirname(config_file), config.src),
       }),
-      observers: [new CtxObservers.NarrationLogger()],
     })
   }
 
@@ -24,7 +22,6 @@ export class LocalBookStore extends BookStore {
     return new Book({
       config: Book.fake_config(),
       files: new FakeFileStore({ dir, faked }),
-      observers: [new CtxObservers.NarrationLogger()],
     })
   }
 

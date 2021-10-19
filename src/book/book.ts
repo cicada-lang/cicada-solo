@@ -29,16 +29,10 @@ export class Book<Files extends FileStore = FileStore> {
   config: BookConfig
   files: Files
   cache: Map<string, Module> = new Map()
-  observers: Array<CtxObserver>
 
-  constructor(opts: {
-    config: BookConfig
-    files: Files
-    observers: Array<CtxObserver>
-  }) {
+  constructor(opts: { config: BookConfig; files: Files }) {
     this.config = opts.config
     this.files = opts.files
-    this.observers = opts.observers
   }
 
   static book_config_schema = book_config_schema
@@ -53,7 +47,7 @@ export class Book<Files extends FileStore = FileStore> {
 
   async load(
     path: string,
-    opts?: { observers?: Array<CtxObserver> }
+    opts: { observers: Array<CtxObserver> }
   ): Promise<Module> {
     const cached = this.cache.get(path)
     if (cached) {
@@ -69,9 +63,7 @@ export class Book<Files extends FileStore = FileStore> {
       path,
       code_blocks: parser.parse_code_blocks(text),
       env: Env.init(),
-      ctx: Ctx.init({
-        observers: opts?.observers || this.observers,
-      }),
+      ctx: Ctx.init({ observers: opts.observers }),
     })
 
     this.cache.set(path, mod)

@@ -1,19 +1,10 @@
 import { BookStore } from "../book-store"
 import { Book } from "../book"
-import * as CtxObservers from "../ctx/ctx-observers"
-import { CtxObserver, CtxOptions } from "../ctx"
 import { GitFileStore } from "@xieyuheng/enchanter/lib/git-file-store"
 import { GitPath } from "@xieyuheng/enchanter/lib/git-path"
 import * as ut from "../ut"
 
 export class GitBookStore extends BookStore {
-  observers: Array<CtxObserver>
-
-  constructor(opts: { observers: Array<CtxObserver> }) {
-    super()
-    this.observers = opts.observers
-  }
-
   async get(url: string): Promise<Book<GitFileStore>> {
     return this.getFromGitPath(GitPath.fromURL(url))
   }
@@ -25,7 +16,6 @@ export class GitBookStore extends BookStore {
     return new Book({
       config,
       files: files.cd(config.src),
-      observers: this.observers,
     })
   }
 }
