@@ -1,4 +1,4 @@
-- move `runner` & `runners` to `cli`
+- no `app.createLocalRunner`
 
 - `FakeFileStore` need to be able to work on the web -- for running code block in article
 

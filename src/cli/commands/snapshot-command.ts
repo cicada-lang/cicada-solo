@@ -1,6 +1,6 @@
 import { Command } from "@xieyuheng/enchanter/lib/command"
 import { CommandRunner } from "@xieyuheng/enchanter/lib/command-runner"
-import * as Runners from "../../runners"
+import * as Runners from "../runners"
 import app from "../../app/node-app"
 import * as ut from "../../ut"
 import ty from "@xieyuheng/ty"

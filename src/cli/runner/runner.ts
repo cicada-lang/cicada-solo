@@ -1,7 +1,7 @@
-import { Book } from "../book"
-import { CtxObserver } from "../ctx"
+import { Book } from "../../book"
+import { CtxObserver } from "../../ctx"
 import { FileStore } from "@xieyuheng/enchanter/lib/file-store"
-import * as Errors from "../errors"
+import * as Errors from "../../errors"
 
 export abstract class Runner {
   abstract book: Book
