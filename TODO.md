@@ -1,7 +1,3 @@
-- `FakeGitBookStore`
-
-- `GitBookStore.fake`
-
 - test `GitBookStore.fake` by running git article
 
 - `books/mathematical-structures` merge `category`, `group` and `order`

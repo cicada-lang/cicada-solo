@@ -22,7 +22,10 @@ export class LocalBookStore extends BookStore {
   fake(dir: string, faked?: Record<string, string>): Book<LocalFileStore> {
     return new Book({
       config: Book.fake_config(),
-      files: new FakeLocalFileStore({ faked, dir }),
+      files: new FakeLocalFileStore({
+        faked,
+        fallback: new LocalFileStore({ dir }),
+      }),
     })
   }
 
