@@ -27,6 +27,8 @@ export class AppReplEventHandler extends ReplEventHandler {
   }
 
   private async execute(text: string): Promise<boolean> {
+    text = text.trim()
+
     const mod = this.book.load(
       this.path,
       await this.book.files.getOrFail(this.path)
@@ -45,7 +47,7 @@ export class AppReplEventHandler extends ReplEventHandler {
       }
       return true
     } catch (error) {
-      mod.drop_code_block()
+      mod.code_blocks.pop()
 
       const reporter = new Errors.ErrorReporter()
       const report = reporter.report(error, { text })

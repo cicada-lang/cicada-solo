@@ -8,7 +8,7 @@ import { CodeBlock } from "./code-block"
 export class Module {
   book: Book
   path: string
-  private code_blocks: Array<CodeBlock>
+  code_blocks: Array<CodeBlock>
   counter: number = 0
   env: Env
   ctx: Ctx
@@ -95,9 +95,5 @@ export class Module {
   //   but the `index` in the `code_block`.
   get_code_block(index: number): CodeBlock | undefined {
     return this.code_blocks.find((code_block) => code_block.index === index)
-  }
-
-  drop_code_block(): void {
-    this.code_blocks.pop()
   }
 }
