@@ -45,18 +45,17 @@ export class Book<Files extends FileStore = FileStore> {
     })
   }
 
-  async load(
+  load(
     path: string,
+    text: string,
     opts: { observers: Array<CtxObserver> }
-  ): Promise<Module> {
+  ): Module {
     const cached = this.cache.get(path)
     if (cached) {
       return cached
     }
 
     const parser = CodeBlockParsers.createCodeBlockParser(path)
-
-    const text = await this.files.getOrFail(path)
 
     const mod = new Module({
       book: this,

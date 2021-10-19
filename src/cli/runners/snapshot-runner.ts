@@ -20,7 +20,11 @@ export class SnapshotRunner extends Runner {
     opts: { observers: Array<CtxObserver> }
   ): Promise<{ error?: unknown }> {
     try {
-      const mod = await this.book.load(path, opts)
+      const mod = this.book.load(
+        path,
+        await this.book.files.getOrFail(path),
+        opts
+      )
       await mod.run_to_the_end()
       const file = this.book.files.resolve(path + ".out")
       if (mod.all_output) {

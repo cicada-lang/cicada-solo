@@ -36,7 +36,11 @@ export class AppReplEventHandler extends ReplEventHandler {
   private async execute(text: string): Promise<boolean> {
     text = text.trim()
 
-    const mod = await this.book.load(this.path, { observers: this.observers })
+    const mod = this.book.load(
+      this.path,
+      await this.book.files.getOrFail(this.path),
+      { observers: this.observers }
+    )
 
     try {
       const outputs = await mod.append_code_block(text).run_to_the_end()

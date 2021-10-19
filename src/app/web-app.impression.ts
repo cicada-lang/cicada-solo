@@ -16,7 +16,8 @@ ut.test("git book", async () => {
       !path.endsWith(".error.cic")
     ) {
       const t0 = Date.now()
-      const mod = await book.load(path, {
+      const file = await book.files.getOrFail(path)
+      const mod = book.load(path, file, {
         observers: app.defaultCtxObservers,
       })
       await mod.run_to_the_end()
@@ -46,7 +47,8 @@ ut.test("git article", async () => {
   })
 
   const t0 = Date.now()
-  const mod = await book.load(path, {
+  const file = await book.files.getOrFail(path)
+  const mod = book.load(path, file, {
     observers: app.defaultCtxObservers,
   })
   await mod.run_to_the_end()
