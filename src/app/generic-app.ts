@@ -9,9 +9,7 @@ export class GenericApp {
 
   config = new AppConfig()
 
-  defaultCtxOptions = {
-    observers: [new CtxObservers.NarrationLogger()],
-  }
+  defaultCtxObservers = [new CtxObservers.NarrationLogger()]
 
   createReplEventHandler(opts: {
     book: Book

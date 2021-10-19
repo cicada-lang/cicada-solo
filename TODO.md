@@ -1,7 +1,5 @@
 - inject `observers` into `Runner.run`
 
-- `app.defaultCtxObservers`
-
 - should only inject `observers` on `Book.load`
 
 - `FakeFileStore` need to be able to work on the web
