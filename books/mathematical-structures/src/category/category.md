@@ -133,9 +133,9 @@ class Functor {
 # NaturalTransformation
 
 To each natural translation
-from a construction `F : A -> B`
-to a construction `G : A -> B`
-there corresponds a natural transformation `F => G`.
+- from a construction `F : A -> B`
+- to a construction `G : A -> B`
+- there corresponds a natural transformation `F => G`.
 
 This captures the concept of "natural translation".
 
