@@ -1,4 +1,3 @@
-- `books/mathematical-structures` -- `group`
 - `books/mathematical-structures` -- `category`
 
 - merge the little book report
