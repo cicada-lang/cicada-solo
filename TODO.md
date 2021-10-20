@@ -1,5 +1,8 @@
-- merge the little book report
 - `books/mathematical-structures` merge `category`, `group` and `order`
+
+- merge the little book report
+
+- use `lang/` dir
 
 - refactor `Module.rerun_with`
 

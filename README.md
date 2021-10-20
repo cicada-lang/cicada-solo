@@ -18,6 +18,12 @@ npm i -g @cicada-lang/cicada
 
 ## Usage
 
+### Web Services
+
+Cicada project supports many web services.
+
+For details, please visit: [cicada-lang.org](https://cicada-lang.org)
+
 ### Command Line Interface
 
 After installed the `@cicada-lang/cicada` package, <br>
@@ -55,9 +61,7 @@ npm run test   // Run test
 ## Books
 
 - [The Little Typer Exercises](books/the-little-typer-exercises)
-- [Category Theory](books/category)
-- [Group Theory](books/group)
-- [Order Theory](books/order)
+- [Mathematical Structures](books/mathematical-structures)
 
 ## Community
 
