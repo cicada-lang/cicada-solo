@@ -1,3 +1,0 @@
-import { PreOrder } from "./pre-order.cic"
-
-PreOrder

@@ -1,6 +1,0 @@
-class {
-  Element: Type
-  Under: (_: Element, _1: Element) -> Type
-  reflexive: (x: Element) -> Under(x, x)
-  transitive: (x: Element, y: Element, z: Element, _: Under(x, y), _1: Under(y, z)) -> Under(x, z)
-}: Type

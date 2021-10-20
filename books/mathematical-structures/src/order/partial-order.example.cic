@@ -1,3 +1,0 @@
-import { PartialOrder } from "./partial-order.cic"
-
-PartialOrder

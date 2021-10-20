@@ -1,8 +1,0 @@
-import { PreOrder } from "./pre-order.cic"
-
-// NOTE No cycle.
-// NOTE Can implement:
-// - topological sort
-class PartialOrder extends PreOrder {
-  antisymmetric(x: Element, y: Element, Under(x, y), Under(y, x)): Equal(Element, x, y)
-}

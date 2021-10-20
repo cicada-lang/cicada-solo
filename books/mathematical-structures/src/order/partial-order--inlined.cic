@@ -1,6 +1,3 @@
-import { PartialOrder } from "./partial-order.cic"
-import { PreOrder } from "./pre-order.cic"
-
 class PartialOrderInlined {
   Element: Type
   Under(Element, Element): Type
@@ -10,5 +7,8 @@ class PartialOrderInlined {
   antisymmetric(x: Element, y: Element, Under(x, y), Under(y, x)): Equal(Element, x, y)
 }
 
+// NOTE Inlined definition is the equal to definition by inheritance.
+
+import { PartialOrder } from "./order.md"
 
 the(Equal(Type, PartialOrder, PartialOrderInlined), refl)

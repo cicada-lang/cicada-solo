@@ -1,9 +1,0 @@
-// NOTE Thin category.
-// NOTE hom_set(A, B).size <= 1
-class PreOrder {
-  Element: Type
-  Under(Element, Element): Type
-
-  reflexive(x: Element): Under(x, x)
-  transitive(x: Element, y: Element, z: Element, Under(x, y), Under(y, z)): Under(x, z)
-}

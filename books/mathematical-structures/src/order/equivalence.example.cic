@@ -1,3 +1,0 @@
-import { Equivalence } from "./equivalence.cic"
-
-Equivalence
