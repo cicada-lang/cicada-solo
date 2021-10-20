@@ -13,10 +13,10 @@ title: Order Theory
 >
 > -- [wikipedia / Order theory](https://en.wikipedia.org/wiki/Order_theory)
 
-
 # PreOrder
 
-We Start our definitions from `PreOrder`.
+Order theory focus on transitive binary relations,
+we Start our definitions from a basic one -- `PreOrder`.
 
 ``` cicada
 class PreOrder {
@@ -56,12 +56,15 @@ and we can implement topological sort for a partial order.
 
 # Equivalence
 
-Again from `PreOrder`, we can get equivalence relation by adding symmetric.
+From `PreOrder` again, we can get equivalence relation by adding symmetric.
 
 ``` cicada
-
 class Equivalence extends PreOrder {
-  symmetric(x: Element, y: Element, Under(x, y)): Under(y, x)
+  symmetric(
+    x: Element,
+    y: Element,
+    Under(x, y),
+  ): Under(y, x)
 
   // TODO Maybe we should rename `Under` to `Eq`
   // Eq: Type = Under
