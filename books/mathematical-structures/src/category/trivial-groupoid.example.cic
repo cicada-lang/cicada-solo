@@ -1,3 +1,0 @@
-import { trivial_groupoid } from "./trivial-groupoid.cic"
-
-trivial_groupoid

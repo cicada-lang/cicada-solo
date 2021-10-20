@@ -1,6 +1,33 @@
-import { Category } from "./category.cic"
-import { Isomorphism } from "./isomorphism.cic"
+---
+title: Initial and Terminal Objects
+author: Xie Yuheng
+date: 2021-10-20
+---
 
+# Dependences
+
+``` cicada
+import { Category } from "./category.md"
+```
+
+# Initial
+
+``` cicada
+class Initial {
+  cat: Category
+
+  object: cat.Object
+  morphism(x: cat.Object): cat.Morphism(object, x)
+  morphism_unique(
+    x: cat.Object,
+    f: cat.Morphism(object, x),
+  ): Equal(cat.Morphism(object, x), f, morphism(x))
+}
+```
+
+# Terminal
+
+``` cicada
 class Terminal {
   cat: Category
 
@@ -11,6 +38,12 @@ class Terminal {
     f: cat.Morphism(x, object),
   ): Equal(cat.Morphism(x, object), f, morphism(x))
 }
+```
+
+If a terminal object exists, it is unique up to unique isomorphism.
+
+``` cicada
+import { Isomorphism } from "./category.md"
 
 terminal_object_isomorphism(
   cat: Category,
@@ -66,3 +99,4 @@ terminal_object_isomorphism(
     // cat.id(cod))
   }
 }
+```

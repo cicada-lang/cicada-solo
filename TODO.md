@@ -1,5 +1,3 @@
-- `books/mathematical-structures` -- `category`
-
 - merge the little book report
 
 - use `lang/` dir

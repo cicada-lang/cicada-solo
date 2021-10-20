@@ -1,0 +1,3 @@
+import { trivial_groupoid } from "./groupoid.md"
+
+trivial_groupoid
