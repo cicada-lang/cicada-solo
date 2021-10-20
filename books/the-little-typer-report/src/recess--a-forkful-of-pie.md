@@ -1,5 +1,5 @@
 ---
-title: Recess: A Forkful of Pie
+title: Recess -- A Forkful of Pie
 date: 2020-09-16
 ---
 
