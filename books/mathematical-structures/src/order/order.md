@@ -13,7 +13,7 @@ date: 2021-10-20
 > provides basic definitions. A list of order-theoretic terms can be
 > found in the order theory glossary.
 >
-> -- [wikipedia / Order theory](https://en.wikipedia.org/wiki/Order_theory)
+> -- [Wikipedia / Order theory](https://en.wikipedia.org/wiki/Order_theory)
 
 # PreOrder
 
