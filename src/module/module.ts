@@ -62,18 +62,19 @@ export class Module {
   private async step(): Promise<Array<StmtOutput>> {
     const outputs = []
 
-    const backup = { env: this.env, ctx: this.ctx }
+    const code_block = this.code_blocks[this.counter]
 
-    const { stmts } = this.code_blocks[this.counter]
-    for (const stmt of stmts) {
+    this.backups.push({ env: this.env, ctx: this.ctx })
+
+    for (const stmt of code_block.stmts) {
       const output = await stmt.execute(this)
       if (output) {
         outputs.push(output)
       }
     }
 
-    this.code_blocks[this.counter].outputs = outputs
-    this.backups.push(backup)
+    code_block.outputs = outputs
+
     return outputs
   }
 
