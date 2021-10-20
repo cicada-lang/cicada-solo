@@ -14,8 +14,8 @@ many applications in physics and chemistry.
 
 # Semigroup
 
-Before build up our definition of group step by step
--- from `Semigroup` to `Monoid` to `Group`.
+We build up our definition of group step by step,
+from `Semigroup` to `Monoid` to `Group`.
 
 A semigroup is simply a set together with an associative binary operation.
 Only associative is required, nothing else.
