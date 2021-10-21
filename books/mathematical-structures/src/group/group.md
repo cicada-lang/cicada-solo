@@ -58,8 +58,8 @@ Adding inversion operation and its axioms to `Monoid`, we get `Group`.
 class Group extends Monoid {
   inv(x: Element): Element
 
-  left_inv(x: Element): Equal(Element, mul(inv(x), x), id)
-  right_inv(x: Element): Equal(Element, mul(x, inv(x)), id)
+  inv_left(x: Element): Equal(Element, mul(inv(x), x), id)
+  inv_right(x: Element): Equal(Element, mul(x, inv(x)), id)
 
   div(x: Element, y: Element): Element {
     mul(x, inv(y))
