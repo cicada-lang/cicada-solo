@@ -1,17 +1,6 @@
-- merge the little book report
+- merge "the little book report" to exercises
 
 - refactor `Module.rerunWith`
-
-- [bug] fix type check error report on wrong number of elements
-
-  in `ch07.md`:
-
-  ``` cicada
-  drop_last(String, 3, vec! ["1", "2", "3", "LAST"])
-  drop_last(String, 3, vec! ["1", "2", "LAST"])
-  ```
-
-- [maybe] offset in `CodeBlock`
 
 # narration
 
@@ -197,3 +186,16 @@
 # bug
 
 - `Book` -- the use of cached modules in `Book.load` is not safe in concurrent environment
+
+- [bug] fix type check error report on wrong number of elements
+
+  in `ch07.md`:
+
+  ``` cicada
+  drop_last(String, 3, vec! ["1", "2", "3", "LAST"])
+  drop_last(String, 3, vec! ["1", "2", "LAST"])
+  ```
+
+# maybe
+
+- [maybe] offset in `CodeBlock`
