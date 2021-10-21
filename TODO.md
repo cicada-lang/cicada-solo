@@ -1,6 +1,6 @@
 - merge the little book report
 
-- refactor `Module.rerun_with`
+- refactor `Module.rerunWith`
 
 - [bug] fix type check error report on wrong number of elements
 
