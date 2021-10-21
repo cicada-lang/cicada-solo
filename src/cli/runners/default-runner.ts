@@ -21,8 +21,9 @@ export class DefaultRunner extends Runner {
         opts
       )
       await mod.runAll()
-      if (mod.formatAllOutputs) {
-        console.log(mod.formatAllOutputs)
+      const output = mod.formatAllOutputs()
+      if (output) {
+        console.log(output)
       }
       return { error: undefined }
     } catch (error) {
