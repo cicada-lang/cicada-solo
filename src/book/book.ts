@@ -1,8 +1,8 @@
 import { Module } from "../module"
 import * as CodeBlockParsers from "../module/code-block-parsers"
 import { FileStore } from "@xieyuheng/enchanter/lib/file-store"
-import { Env } from "../env"
-import { Ctx, CtxObserver } from "../ctx"
+import { Env } from "../lang/env"
+import { Ctx, CtxObserver } from "../lang/ctx"
 import ty from "@xieyuheng/ty"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)

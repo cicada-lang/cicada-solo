@@ -1,7 +1,6 @@
 import { CodeBlockParser } from "../code-block-parser"
 import { CodeBlock } from "../code-block"
-import { Parser } from "../../parser"
-import { Stmt } from "../../stmt"
+import { Parser } from "../../lang/parser"
 import * as commonmark from "commonmark"
 
 export class MarkdownCodeBlockParser extends CodeBlockParser {

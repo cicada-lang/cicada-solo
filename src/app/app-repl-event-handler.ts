@@ -1,9 +1,9 @@
 import { ReplEvent, ReplEventHandler } from "@xieyuheng/enchanter/lib/repl"
 import { AppConfig } from "./app-config"
 import { Book } from "../book"
-import { CtxObserver } from "../ctx"
-import * as StmtOutputs from "../stmt/stmt-outputs"
-import * as Errors from "../errors"
+import { CtxObserver } from "../lang/ctx"
+import * as StmtOutputs from "../lang/stmt/stmt-outputs"
+import * as Errors from "../lang/errors"
 import * as ut from "../ut"
 
 export class AppReplEventHandler extends ReplEventHandler {

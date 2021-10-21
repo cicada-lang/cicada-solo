@@ -1,7 +1,6 @@
 import { CodeBlockParser } from "../code-block-parser"
 import { CodeBlock } from "../code-block"
-import { Parser } from "../../parser"
-import { Stmt } from "../../stmt"
+import { Parser } from "../../lang/parser"
 
 export class CicCodeBlockParser extends CodeBlockParser {
   parse_code_blocks(text: string): Array<CodeBlock> {

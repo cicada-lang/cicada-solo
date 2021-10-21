@@ -1,6 +1,6 @@
-- merge the little book report
+- fix naming convention outside out `lang/`
 
-- use `lang/` dir
+- merge the little book report
 
 - refactor `Module.rerun_with`
 

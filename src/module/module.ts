@@ -1,8 +1,8 @@
 import { Book } from "../book"
-import { Stmt, StmtOutput } from "../stmt"
-import { Env } from "../env"
-import { Ctx } from "../ctx"
-import { Parser } from "../parser"
+import { Stmt, StmtOutput } from "../lang/stmt"
+import { Env } from "../lang/env"
+import { Ctx } from "../lang/ctx"
+import { Parser } from "../lang/parser"
 import { CodeBlock } from "./code-block"
 
 export class Module {
