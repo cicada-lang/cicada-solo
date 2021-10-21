@@ -20,34 +20,12 @@ npm i -g @cicada-lang/cicada
 
 ### Web Services
 
-Cicada project supports many web services.
-
-For details, please visit: [cicada-lang.org](https://cicada-lang.org)
+The [cicada-lang.org](https://cicada-lang.org) website provides many web services,
+to help authors organize their projects and share with others.
 
 ### Command Line Interface
 
-After installed the `@cicada-lang/cicada` package, <br>
-you can run `cic help`, and you will see the following help messages:
-
-```
-Usage:
-  command [arguments] [options]
-
-Default command:
-  [article]  Open REPL or run an article
-
-Commands:
-  repl [dir]          Open an interactive REPL
-  run [article]       Run through an article
-  snapshot [article]  Take a snapshot of an article
-  check [book]        Check the typing of a book
-  help [name]         Display help for a command
-
-Help:
-  The help command displays help for a given command.
-
-    cic help help
-```
+After installed the `@cicada-lang/cicada` package, you can run `cic help` to see help messages.
 
 ## Development
 
@@ -57,11 +35,6 @@ npm run build  // Compile `src/` to `lib/`
 npm run watch  // Watch the compilation
 npm run test   // Run test
 ```
-
-## Books
-
-- [The Little Typer Exercises](books/the-little-typer-exercises)
-- [Mathematical Structures](books/mathematical-structures)
 
 ## Community
 
