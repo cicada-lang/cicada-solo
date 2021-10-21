@@ -1,5 +1,3 @@
-- move `book-store/` and `book-stores/` to `book/`
-
 - merge the little book report
 
 - refactor `Module.rerunWith`

@@ -3,7 +3,7 @@ import { Book } from "../book"
 import { GitFileStore } from "@xieyuheng/enchanter/lib/git-file-store"
 import { FakeGitFileStore } from "@xieyuheng/enchanter/lib/git-file-stores/fake-git-file-store"
 import { GitPath } from "@xieyuheng/enchanter/lib/git-path"
-import * as ut from "../ut"
+import * as ut from "../../ut"
 
 export class GitBookStore extends BookStore {
   async get(url: string): Promise<Book<GitFileStore>> {
