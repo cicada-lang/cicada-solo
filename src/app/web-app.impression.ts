@@ -20,7 +20,7 @@ ut.test("git book", async () => {
       const mod = book.load(path, file, {
         observers: app.defaultCtxObservers,
       })
-      await mod.run_to_the_end()
+      await mod.runAll()
       const t1 = Date.now()
 
       logger.info({
@@ -29,8 +29,8 @@ ut.test("git book", async () => {
         msg: path,
       })
 
-      if (mod.all_output) {
-        console.log(mod.all_output)
+      if (mod.formatAllOutputs()) {
+        console.log(mod.formatAllOutputs())
       }
     }
   }
@@ -51,7 +51,7 @@ ut.test("git article", async () => {
   const mod = book.load(path, file, {
     observers: app.defaultCtxObservers,
   })
-  await mod.run_to_the_end()
+  await mod.runAll()
   const t1 = Date.now()
 
   logger.info({
@@ -60,7 +60,7 @@ ut.test("git article", async () => {
     msg: path,
   })
 
-  if (mod.all_output) {
-    console.log(mod.all_output)
+  if (mod.formatAllOutputs()) {
+    console.log(mod.formatAllOutputs())
   }
 })

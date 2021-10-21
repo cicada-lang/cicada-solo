@@ -10,7 +10,7 @@ import fs from "fs"
 export class LocalBookStore extends BookStore {
   async get(config_file: string): Promise<Book<LocalFileStore>> {
     const text = await fs.promises.readFile(config_file, "utf8")
-    const config = Book.book_config_schema.validate(JSON.parse(text))
+    const config = Book.bookConfigSchema.validate(JSON.parse(text))
     return new Book({
       config,
       files: new LocalFileStore({
@@ -25,7 +25,7 @@ export class LocalBookStore extends BookStore {
   }): Book<LocalFileStore> {
     const { fallback, faked } = opts
     return new Book({
-      config: Book.fake_config(),
+      config: Book.fakeConfig(),
       files: new FakeLocalFileStore({ faked, fallback }),
     })
   }

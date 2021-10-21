@@ -16,7 +16,7 @@ export type BookConfig = {
   date?: string
 }
 
-const book_config_schema = ty.object<BookConfig>({
+const bookConfigSchema = ty.object<BookConfig>({
   title: ty.string(),
   subtitle: ty.optional(ty.string()),
   version: ty.semver(),
@@ -35,10 +35,10 @@ export class Book<Files extends FileStore = FileStore> {
     this.files = opts.files
   }
 
-  static book_config_schema = book_config_schema
+  static bookConfigSchema = bookConfigSchema
 
-  static fake_config(): BookConfig {
-    return book_config_schema.validate({
+  static fakeConfig(): BookConfig {
+    return bookConfigSchema.validate({
       title: `<fake-book-${nanoid()}>`,
       version: "0.0.0",
       src: "src",
@@ -60,7 +60,7 @@ export class Book<Files extends FileStore = FileStore> {
     const mod = new Module({
       book: this,
       path,
-      code_blocks: parser.parse_code_blocks(text),
+      codeBlocks: parser.parseCodeBlocks(text),
       env: Env.init(),
       ctx: Ctx.init({ observers: opts.observers }),
     })

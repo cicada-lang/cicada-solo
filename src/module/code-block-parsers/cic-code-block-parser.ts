@@ -3,7 +3,7 @@ import { CodeBlock } from "../code-block"
 import { Parser } from "../../lang/parser"
 
 export class CicCodeBlockParser extends CodeBlockParser {
-  parse_code_blocks(text: string): Array<CodeBlock> {
+  parseCodeBlocks(text: string): Array<CodeBlock> {
     const parser = new Parser()
     const stmts = parser.parse_stmts(text)
     return [new CodeBlock({ id: 0, code: text, stmts })]

@@ -1,5 +1,3 @@
-- fix naming convention outside out `lang/`
-
 - merge the little book report
 
 - refactor `Module.rerun_with`

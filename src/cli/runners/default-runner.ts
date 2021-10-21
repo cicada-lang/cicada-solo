@@ -20,9 +20,9 @@ export class DefaultRunner extends Runner {
         await this.book.files.getOrFail(path),
         opts
       )
-      await mod.run_to_the_end()
-      if (mod.all_output) {
-        console.log(mod.all_output)
+      await mod.runAll()
+      if (mod.formatAllOutputs) {
+        console.log(mod.formatAllOutputs)
       }
       return { error: undefined }
     } catch (error) {

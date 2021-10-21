@@ -31,7 +31,7 @@ export class Import extends Stmt {
     })
 
     try {
-      await imported_mod.run_to_the_end()
+      await imported_mod.runAll()
     } catch (error) {
       throw new Errors.ExpTrace(
         [

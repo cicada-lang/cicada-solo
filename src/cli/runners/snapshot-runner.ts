@@ -25,10 +25,10 @@ export class SnapshotRunner extends Runner {
         await this.book.files.getOrFail(path),
         opts
       )
-      await mod.run_to_the_end()
+      await mod.runAll()
       const file = this.book.files.resolve(path + ".out")
-      if (mod.all_output) {
-        await fs.promises.writeFile(file, ut.stripAnsi(mod.all_output))
+      if (mod.formatAllOutputs) {
+        await fs.promises.writeFile(file, ut.stripAnsi(mod.formatAllOutputs()))
       }
       return { error: undefined }
     } catch (error) {

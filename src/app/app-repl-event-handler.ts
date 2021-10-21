@@ -43,7 +43,7 @@ export class AppReplEventHandler extends ReplEventHandler {
     )
 
     try {
-      const outputs = await mod.append_code_block(text).run_to_the_end()
+      const outputs = await mod.appendCodeBlock(text).runAll()
       for (const output of outputs) {
         if (output instanceof StmtOutputs.NormalTerm) {
           const exp = output.exp.repr()
@@ -55,7 +55,7 @@ export class AppReplEventHandler extends ReplEventHandler {
       }
       return true
     } catch (error) {
-      mod.code_blocks.pop()
+      mod.codeBlocks.pop()
 
       const reporter = new Errors.ErrorReporter()
       const report = reporter.report(error, { text })

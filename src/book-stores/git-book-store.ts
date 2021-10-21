@@ -13,7 +13,7 @@ export class GitBookStore extends BookStore {
   async getFromGitPath(gitPath: GitPath): Promise<Book<GitFileStore>> {
     const files = gitPath.createGitFileStore()
     const text = await files.getOrFail("book.json")
-    const config = Book.book_config_schema.validate(JSON.parse(text))
+    const config = Book.bookConfigSchema.validate(JSON.parse(text))
     return new Book({ config, files: files.cd(config.src) })
   }
 
@@ -23,7 +23,7 @@ export class GitBookStore extends BookStore {
   }): Book<FakeGitFileStore> {
     const { fallback, faked } = opts
     return new Book({
-      config: Book.fake_config(),
+      config: Book.fakeConfig(),
       files: new FakeGitFileStore({ faked, fallback }),
     })
   }

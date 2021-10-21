@@ -8,7 +8,7 @@ import { CodeBlock } from "./code-block"
 export class Module {
   book: Book
   path: string
-  code_blocks: Array<CodeBlock>
+  codeBlocks: Array<CodeBlock>
   env: Env
   ctx: Ctx
 
@@ -21,23 +21,23 @@ export class Module {
   constructor(opts: {
     book: Book
     path: string
-    code_blocks: Array<CodeBlock>
+    codeBlocks: Array<CodeBlock>
     env: Env
     ctx: Ctx
   }) {
     this.book = opts.book
     this.path = opts.path
-    this.code_blocks = opts.code_blocks
+    this.codeBlocks = opts.codeBlocks
     this.env = opts.env
     this.ctx = opts.ctx
   }
 
-  append_code_block(code: string): this {
+  appendCodeBlock(code: string): this {
     const parser = new Parser()
     const stmts = parser.parse_stmts(code)
-    this.code_blocks.push(
+    this.codeBlocks.push(
       new CodeBlock({
-        id: this.code_blocks.length,
+        id: this.codeBlocks.length,
         code,
         stmts,
       })
@@ -46,14 +46,14 @@ export class Module {
     return this
   }
 
-  get_code_block(id: number): CodeBlock | undefined {
-    return this.code_blocks.find((code_block) => code_block.id === id)
+  getCodeBlock(id: number): CodeBlock | undefined {
+    return this.codeBlocks.find((codeBlock) => codeBlock.id === id)
   }
 
-  update_code_block(id: number, code: string): void {
-    const code_block = this.get_code_block(id)
-    if (code_block) {
-      code_block.updateCode(code)
+  updateCodeBlock(id: number, code: string): void {
+    const codeBlock = this.getCodeBlock(id)
+    if (codeBlock) {
+      codeBlock.updateCode(code)
     } else {
       console.warn(`I can not update non-existing code block of id: ${id}`)
     }
@@ -62,31 +62,29 @@ export class Module {
   private async step(): Promise<Array<StmtOutput>> {
     const outputs = []
 
-    const code_block = this.code_blocks[this.counter]
+    const codeBlock = this.codeBlocks[this.counter]
 
     this.backups.push({ env: this.env, ctx: this.ctx })
 
-    for (const stmt of code_block.stmts) {
+    for (const stmt of codeBlock.stmts) {
       const output = await stmt.execute(this)
       if (output) {
         outputs.push(output)
       }
     }
 
-    code_block.outputs = outputs
+    codeBlock.outputs = outputs
 
     return outputs
   }
 
-  async rerun_with(opts: {
+  async rerunWith(opts: {
     id: number
     code: string
   }): Promise<Array<StmtOutput>> {
     const { id, code } = opts
 
-    const index = this.code_blocks.findIndex(
-      (code_block) => code_block.id === id
-    )
+    const index = this.codeBlocks.findIndex((codeBlock) => codeBlock.id === id)
 
     if (index === -1) {
       throw new Error(`I can not find code block with id: ${id}`)
@@ -97,16 +95,16 @@ export class Module {
       this.env = backup.env
       this.ctx = backup.ctx
       this.backups = this.backups.slice(0, index)
-      for (const [i, code_block] of this.code_blocks.entries()) {
+      for (const [i, codeBlock] of this.codeBlocks.entries()) {
         if (i >= index) {
-          code_block.outputs = []
+          codeBlock.outputs = []
         }
       }
     }
 
-    for (const code_block of this.code_blocks.slice(this.counter)) {
-      if (code_block.id === id) {
-        code_block.updateCode(code)
+    for (const codeBlock of this.codeBlocks.slice(this.counter)) {
+      if (codeBlock.id === id) {
+        codeBlock.updateCode(code)
         return await this.step()
       } else {
         await this.step()
@@ -116,18 +114,18 @@ export class Module {
     throw new Error(`I can not find code block with id: ${id}`)
   }
 
-  async run_to_the_end(): Promise<Array<StmtOutput>> {
+  async runAll(): Promise<Array<StmtOutput>> {
     const outputs = []
-    while (this.counter < this.code_blocks.length) {
+    while (this.counter < this.codeBlocks.length) {
       outputs.push(...(await this.step()))
     }
 
     return outputs
   }
 
-  get all_output(): string {
+  formatAllOutputs(): string {
     let s = ""
-    for (const { outputs } of this.code_blocks) {
+    for (const { outputs } of this.codeBlocks) {
       for (const output of outputs) {
         s += output.repr()
         s += "\n"

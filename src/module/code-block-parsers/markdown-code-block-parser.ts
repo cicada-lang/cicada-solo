@@ -4,9 +4,9 @@ import { Parser } from "../../lang/parser"
 import * as commonmark from "commonmark"
 
 export class MarkdownCodeBlockParser extends CodeBlockParser {
-  parse_code_blocks(text: string): Array<CodeBlock> {
+  parseCodeBlocks(text: string): Array<CodeBlock> {
     const parser = new Parser()
-    return collect_code_blocks(text)
+    return collectCodeBlocks(text)
       .filter(({ info }) => info === "cicada")
       .map(
         ({ index, text, offset }) =>
@@ -19,17 +19,16 @@ export class MarkdownCodeBlockParser extends CodeBlockParser {
   }
 }
 
-function collect_code_blocks(text: string): Array<{
+function collectCodeBlocks(text: string): Array<{
   index: number
   info: string
   text: string
   offset: number
 }> {
   const reader = new commonmark.Parser()
-  const writer = new commonmark.HtmlRenderer()
   const parsed: commonmark.Node = reader.parse(text)
 
-  const code_blocks = []
+  const codeBlocks = []
 
   const walker = parsed.walker()
 
@@ -42,19 +41,19 @@ function collect_code_blocks(text: string): Array<{
     if (event.entering && node.type === "code_block") {
       const [start_pos, _end_pos] = node.sourcepos
       const [row, col] = start_pos
-      code_blocks.push({
+      codeBlocks.push({
         index: counter++,
         info: node.info || "",
         text: node.literal || "",
-        offset: offset_from_pos(text, row, col),
+        offset: offsetFromPosition(text, row, col),
       })
     }
   }
 
-  return code_blocks
+  return codeBlocks
 }
 
-function offset_from_pos(text: string, row: number, col: number): number {
+function offsetFromPosition(text: string, row: number, col: number): number {
   const lines = text.split("\n")
   return lines.slice(0, row).join("\n").length + col
 }

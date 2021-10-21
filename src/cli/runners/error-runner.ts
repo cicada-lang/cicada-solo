@@ -22,7 +22,7 @@ export class ErrorRunner extends Runner {
     try {
       const file = await this.book.files.getOrFail(path)
       const mod = this.book.load(path, file, opts)
-      await mod.run_to_the_end()
+      await mod.runAll()
       return { error: new Error(`I expect to find error in the path: ${path}`) }
     } catch (error) {
       const text = await this.book.files.getOrFail(path)
