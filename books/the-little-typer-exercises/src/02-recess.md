@@ -20,6 +20,8 @@ What if they are not meaningful?
 Pie explains what is wrong with them,
 and sometimes adds a helpful hint.
 
-What might be wrong with an expression?
+- Xie: A type system interact with people by providing feedback about ones reasoning.
+  It is upon this feedback, we design the user experience of our services.
 
-- Xie: User experience might be designed out of the narrative above.
+  - Good error messages.
+  - Let the checker explain the process of its type checking.
