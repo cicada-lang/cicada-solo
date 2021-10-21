@@ -1,7 +1,6 @@
 - refactor `Module.rerunWith`
 
-- sort file name by given weight on chars
-- sort file name for table of contents
+- merge the little book reports
 
 # narration
 
