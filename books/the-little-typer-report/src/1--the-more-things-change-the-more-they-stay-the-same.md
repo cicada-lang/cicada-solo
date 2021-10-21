@@ -152,19 +152,19 @@ then they are the same.
 - 用 reduction step 定义有方向的 (multi-step) reduction。
 - 用有方向的 reduction 定义无方向的 equivalent。
 
-``` cicada
-@datatype Jo {
+```
+datatype Jo {
   v(name: String)
   let(name: String)
   jojo(list: Array(Jo))
   exe()
 }
 
-@datatype Value {
+datatype Value {
   jojo(list: Array(Jo), env: Env)
 }
 
-@datatype Neutral {
+datatype Neutral {
   jojo(list: Array(Jo), env: Env)
 }
 ```
