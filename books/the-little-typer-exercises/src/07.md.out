@@ -1,0 +1,3 @@
+vec("pea", vec("pea", vec("pea", vec("pea", vec("pea", vec("pea", vecnil)))))): Vector(String, 6)
+"LAST": String
+vec("1", vec("2", vec("3", vecnil))): Vector(String, 3)

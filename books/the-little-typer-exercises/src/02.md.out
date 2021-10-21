@@ -1,0 +1,12 @@
+(x) => { cons(x, (_1) => { _1 }) }: (x: String) -> (_: String) * (_1: String) -> String
+cons("x", (_1) => { _1 }): (_: String) * (_1: String) -> String
+refl: Equal((_: String) * (_1: String) -> String, cons("x", (_1) => { _1 }), cons("x", (_1) => { _1 }))
+refl: Equal((_: Nat) -> (_1: Nat) * Nat, (_) => { cons(_, _) }, (_) => { cons(_, _) })
+refl: Equal((_: Nat) -> Nat, (_) => { _ }, (_) => { _ })
+refl: Equal((_: (_: Nat) * Nat) -> Nat, (_) => { car(_) }, (_) => { car(_) })
+refl: Equal((_: String) * String, cons("celery", "carrot"), cons("celery", "carrot"))
+refl: Equal(String, "naught", "naught")
+refl: Equal(String, "more", "more")
+refl: Equal(String, "more", "more")
+cons(String, String): (_: Type) * Type
+cons(1, 2): (_: Nat) * Nat

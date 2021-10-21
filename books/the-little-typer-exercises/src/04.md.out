@@ -1,0 +1,7 @@
+cons("abc", 123): (_: String) * Nat
+cons(123, "abc"): (_: Nat) * String
+refl: Equal(Type, (A: Type, D: Type, pair: (_: A) * D) -> (_: D) * A, (Lemon: Type, Meringue: Type, _: (_: Lemon) * Meringue) -> (_1: Meringue) * Lemon)
+refl: Equal(Type, (A: Type, D: Type, _: (_: A) * D) -> (_1: D) * A, (A: Type, D: Type, _: (_: A) * D) -> (_1: D) * A)
+cons("abc", 123): (_: String) * Nat
+cons(123, 123): (_: Nat) * Nat
+cons("abc", "abc"): (_: String) * String

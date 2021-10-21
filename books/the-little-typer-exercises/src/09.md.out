@@ -1,0 +1,16 @@
+refl: Equal(Nat, 4, 4)
+refl: Equal(Nat, 1, 1)
+refl: Equal(Nat, 2, 2)
+refl: Equal(Nat, 3, 3)
+refl: Equal(Nat, 4, 4)
+2: Nat
+4: Nat
+6: Nat
+8: Nat
+2: Nat
+4: Nat
+6: Nat
+8: Nat
+refl: Equal(Nat, 34, 34)
+vec("a", vec("a", vec("b", vec("b", vec("c", vec("c", vecnil)))))): Vector(String, 6)
+vec("a", vec("a", vec("b", vec("b", vec("c", vec("c", vecnil)))))): Vector(String, 6)

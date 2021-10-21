@@ -1,0 +1,12 @@
+I infer the type to be:
+  Vector(E, j)
+But the expected type is:
+  Vector(E, j1)
+
+15.error.cic:
+ 24 |      //   - Pie ensures this by adding a `renaming` argument to all type checking functions,
+ 25 |      //     and use `reanming` during `readback`.
+ 26 |      //   - I handle this by using `subst` to rename bound variables.
+ 27 |      (j, head, tail, almost) => (j, equal) => tail
+ 28 |    )
+ 29 |

@@ -1,0 +1,11 @@
+Vector(String, 0): Type
+Vector(String, 1): Type
+Vector(List(String), 0): Type
+Vector(List(String), 1): Type
+vecnil: Vector(String, 0)
+vecnil: Vector(List(String), 0)
+vecnil: Vector(List(List(String)), 0)
+vec("a", vecnil): Vector(String, 1)
+vec("a", vec("b", vecnil)): Vector(String, 2)
+"a": String
+vec("b", vec("c", vecnil)): Vector(String, 2)

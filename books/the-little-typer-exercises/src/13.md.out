@@ -1,0 +1,13 @@
+Either(Nat, String): Type
+inl(6): Either(Nat, String)
+inr("abc"): Either(Nat, String)
+3: Nat
+3: Nat
+inl(cons(0, refl)): Either((half: Nat) * Equal(Nat, 0, nat_ind(half, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) })), (haf: Nat) * Equal(Nat, 0, add1(nat_ind(haf, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) }))))
+inr(cons(0, refl)): Either((half: Nat) * Equal(Nat, 1, nat_ind(half, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) })), (haf: Nat) * Equal(Nat, 1, add1(nat_ind(haf, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) }))))
+inl(cons(1, refl)): Either((half: Nat) * Equal(Nat, 2, nat_ind(half, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) })), (haf: Nat) * Equal(Nat, 2, add1(nat_ind(haf, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) }))))
+inr(cons(1, refl)): Either((half: Nat) * Equal(Nat, 3, nat_ind(half, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) })), (haf: Nat) * Equal(Nat, 3, add1(nat_ind(haf, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) }))))
+inl(cons(2, refl)): Either((half: Nat) * Equal(Nat, 4, nat_ind(half, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) })), (haf: Nat) * Equal(Nat, 4, add1(nat_ind(haf, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) }))))
+inr(cons(2, refl)): Either((half: Nat) * Equal(Nat, 5, nat_ind(half, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) })), (haf: Nat) * Equal(Nat, 5, add1(nat_ind(haf, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) }))))
+inl(cons(3, refl)): Either((half: Nat) * Equal(Nat, 6, nat_ind(half, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) })), (haf: Nat) * Equal(Nat, 6, add1(nat_ind(haf, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) }))))
+inr(cons(3, refl)): Either((half: Nat) * Equal(Nat, 7, nat_ind(half, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) })), (haf: Nat) * Equal(Nat, 7, add1(nat_ind(haf, (target_nat) => { Nat }, 0, (prev, almost) => { add1(add1(almost)) }))))
