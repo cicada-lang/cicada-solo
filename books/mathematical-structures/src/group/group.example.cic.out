@@ -6,7 +6,7 @@ class {
   id_left: (x: Element) -> Equal(Element, mul(id, x), x)
   id_right: (x: Element) -> Equal(Element, mul(x, id), x)
   inv: (x: Element) -> Element
-  left_inv: (x: Element) -> Equal(Element, mul(inv(x), x), id)
-  right_inv: (x: Element) -> Equal(Element, mul(x, inv(x)), id)
+  inv_left: (x: Element) -> Equal(Element, mul(inv(x), x), id)
+  inv_right: (x: Element) -> Equal(Element, mul(x, inv(x)), id)
   div: (x: Element, y: Element) -> Element
 }: Type
