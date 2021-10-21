@@ -1,2 +1,0 @@
-vec(1, vec(2, vec(3, vec(4, vec(5, vecnil))))): Vector(Nat, 5)
-li(1, li(2, li(3, nil))): List(Nat)

@@ -1,5 +1,3 @@
-- merge "the little book report" to exercises
-
 - refactor `Module.rerunWith`
 
 # narration

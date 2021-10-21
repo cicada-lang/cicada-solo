@@ -1,7 +1,7 @@
 // NOTE There was a scope BUG revealed by this example.
 //   Thus we keep this as a regression test.
 
-import { zero_add1_equal_absurd, sub1_equal } from "./ch15.md"
+import { zero_add1_equal_absurd, sub1_equal } from "./15.md"
 
 rest_bug(E: Type, n: Nat, vector: Vector(E, add1(n))): Vector(E, n) {
   motive(length: Nat, target: Vector(E, length)): Type {

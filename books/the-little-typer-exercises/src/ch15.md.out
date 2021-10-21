@@ -1,8 +1,0 @@
-1: Nat
-1: Nat
-1: Nat
-1: Nat
-vecnil: Vector(Nat, 0)
-vec(2, vecnil): Vector(Nat, 1)
-vec(2, vec(3, vecnil)): Vector(Nat, 2)
-vec(2, vec(3, vec(4, vecnil))): Vector(Nat, 3)
