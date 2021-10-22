@@ -1,4 +1,4 @@
-export class AppConfig {
+export class Config {
   pkg: any
 
   constructor() {

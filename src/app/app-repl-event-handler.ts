@@ -1,5 +1,5 @@
 import { ReplEvent, ReplEventHandler } from "@enchanterjs/enchanter/lib/repl"
-import { AppConfig } from "./app-config"
+import { Config } from "../config"
 import { Book } from "../book"
 import { CtxObserver } from "../lang/ctx"
 import * as StmtOutputs from "../lang/stmt/stmt-outputs"
@@ -7,17 +7,19 @@ import * as Errors from "../lang/errors"
 import * as ut from "../ut"
 
 export class AppReplEventHandler extends ReplEventHandler {
-  config = new AppConfig()
+  config: Config
   book: Book
   path: string
   observers: Array<CtxObserver>
 
   constructor(opts: {
+    config: Config
     book: Book
     path: string
     observers: Array<CtxObserver>
   }) {
     super()
+    this.config = opts.config
     this.path = opts.path
     this.book = opts.book
     this.observers = opts.observers

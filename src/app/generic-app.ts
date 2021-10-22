@@ -1,5 +1,5 @@
 import { Book } from "../book"
-import { AppConfig } from "./app-config"
+import { Config } from "../config"
 import { AppReplEventHandler } from "./app-repl-event-handler"
 import { customAlphabet } from "nanoid"
 import * as CtxObservers from "../lang/ctx/ctx-observers"
@@ -7,7 +7,7 @@ import * as CtxObservers from "../lang/ctx/ctx-observers"
 export class GenericApp {
   nanoid = customAlphabet("1234567890abcdef", 16)
 
-  config = new AppConfig()
+  config = new Config()
 
   defaultCtxObservers = [new CtxObservers.NarrationLogger()]
 
@@ -15,8 +15,12 @@ export class GenericApp {
     book: Book
     path: string
   }): AppReplEventHandler {
+    const { book, path } = opts
+
     return new AppReplEventHandler({
-      ...opts,
+      book,
+      path,
+      config: this.config,
       observers: this.defaultCtxObservers,
     })
   }
