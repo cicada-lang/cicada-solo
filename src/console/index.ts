@@ -1,9 +1,10 @@
 import * as CommandRunners from "@enchanterjs/enchanter/lib/command-runners"
+import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
 import { CommonHelpCommand } from "@enchanterjs/enchanter/lib/commands"
 import * as Commands from "./commands"
 
-export function run(): void {
-  new CommandRunners.CommonCommandRunner({
+export function createCommandRunner(): CommandRunner {
+  return new CommandRunners.CommonCommandRunner({
     defaultCommand: new Commands.DefaultCommand(),
     commands: [
       new Commands.ReplCommand(),
@@ -12,5 +13,5 @@ export function run(): void {
       new Commands.CheckCommand(),
       new CommonHelpCommand(),
     ],
-  }).run()
+  })
 }

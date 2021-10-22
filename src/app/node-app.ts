@@ -4,8 +4,8 @@ import { LocalBookStore } from "../book/book-stores/local-book-store"
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import * as Loggers from "@enchanterjs/enchanter/lib/loggers"
 import { Book } from "../book"
-import { Runner } from "../cli/runner"
-import { SnapshotRunner, ErrorRunner } from "../cli/runners"
+import { SnapshotRunner, ErrorRunner } from "../console/runners"
+import { Runner } from "../console/runner"
 
 export class NodeApp extends GenericApp {
   home: AppHomeFileStore = new AppHomeFileStore()

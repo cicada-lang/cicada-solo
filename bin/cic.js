@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-const cli = require("../lib/cli")
 const process = require("process")
 
 process.on("unhandledRejection", (error) => {
@@ -8,4 +7,6 @@ process.on("unhandledRejection", (error) => {
   process.exit(1)
 })
 
-cli.run()
+const { createCommandRunner } = require("../lib/console")
+
+createCommandRunner().run()
