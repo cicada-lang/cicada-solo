@@ -1,8 +1,8 @@
 import { BookStore } from "../book-store"
 import { Book } from "../book"
-import { GitFileStore } from "@xieyuheng/enchanter/lib/git-file-store"
-import { FakeGitFileStore } from "@xieyuheng/enchanter/lib/git-file-stores/fake-git-file-store"
-import { GitPath } from "@xieyuheng/enchanter/lib/git-path"
+import { GitFileStore } from "@enchanterjs/enchanter/lib/git-file-store"
+import { FakeGitFileStore } from "@enchanterjs/enchanter/lib/git-file-stores/fake-git-file-store"
+import { GitPath } from "@enchanterjs/enchanter/lib/git-path"
 import * as ut from "../../ut"
 
 export class GitBookStore extends BookStore {

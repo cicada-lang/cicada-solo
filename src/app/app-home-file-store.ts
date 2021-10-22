@@ -1,4 +1,4 @@
-import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores/local-file-store"
+import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import os from "os"
 import Path from "path"
 import process from "process"

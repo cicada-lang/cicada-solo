@@ -1,5 +1,5 @@
-import { Command } from "@xieyuheng/enchanter/lib/command"
-import { CommandRunner } from "@xieyuheng/enchanter/lib/command-runner"
+import { Command } from "@enchanterjs/enchanter/lib/command"
+import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
 import * as Runners from "../runners"
 import app from "../../app/node-app"
 import * as ut from "../../ut"

@@ -1,4 +1,4 @@
-import { ReplEvent, ReplEventHandler } from "@xieyuheng/enchanter/lib/repl"
+import { ReplEvent, ReplEventHandler } from "@enchanterjs/enchanter/lib/repl"
 import { AppConfig } from "./app-config"
 import { Book } from "../book"
 import { CtxObserver } from "../lang/ctx"

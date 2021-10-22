@@ -1,6 +1,6 @@
 import { Runner } from "../runner"
 import { Book } from "../../book"
-import { LocalFileStore } from "@xieyuheng/enchanter/lib/file-stores/local-file-store"
+import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import { CtxObserver } from "../../lang/ctx"
 import * as ut from "../../ut"
 import fs from "fs"
