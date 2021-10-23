@@ -93,7 +93,7 @@ requires an annotation to check against.
 ```
 is_type(ctx, X) ~> X^o
 check(ctx, X^o, exp) ~> exp^o
----------------------------------------- [the]
+-------------------------------------------- [the]
 infer(ctx, the(X, exp)) ~> the(X^o, exp^o)
 ```
 
