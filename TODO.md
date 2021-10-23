@@ -1,5 +1,3 @@
-- merge the little book reports
-
 # narration
 
 - `exps/elaborate` -- narration
@@ -137,6 +135,8 @@
 - learn from lean
 
 # books
+
+- [books] revise the little book exercises
 
 - [books] `Set` -- Bishop's set theory -- with notes
 
