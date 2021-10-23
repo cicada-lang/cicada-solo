@@ -172,14 +172,27 @@ the rules fall into one of a few categories:
 
 TODO
 
+A sameness rule is a specification for the normalization algorithm,
+not a implementation of the normalization algorithm.
+
 # Variables
 
 ```
 lookup(ctx, x) ~> X
----------------------------- [Hypothesis]
+---------------------------- [hypothesis]
 infer(ctx, x) ~> the(X, x)
 ```
 
-> To infer a type for a variable `x`, look it up in the context `ctx`.
+> To infer a type for a variable `x`,
+> look it up in the context `ctx`.
 > If the lookup succeeds with type `X`,
 > infer succeeds with the `Core` expression `the(X, x)`.
+
+```
+lookup(ctx, x) ~> X
+------------------------ [hypothesis same]
+the_same(ctx, X, x, x)
+```
+
+> If a variable `x` is given type `X` by the context `ctx`,
+> then conversion checking must find that `x` is the same `X` as `x`.

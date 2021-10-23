@@ -2,11 +2,12 @@
 
 # narration
 
+- `exps/var` -- narration
+
 - `exps/elaborate` -- narration
 - `exps/todo` -- narration
 - `exps/type` -- narration
 - `exps/the` -- narration
-- `exps/var` -- narration
 - `exps/let` -- narration
 
 - `exps/absurd/absurd` -- narration
