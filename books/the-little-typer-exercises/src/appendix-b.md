@@ -3,6 +3,8 @@ title: B. Rules Are Made to Be Spoken
 date: 2021-10-12
 ---
 
+# Forms of judgment
+
 A Type system is a system for guiding human judgment,
 In an implementation, each **form of judgment**
 corresponds to a function that determines
@@ -32,3 +34,10 @@ The use of [Hungarian notation][] in the table above:
 | `Core` | `c1`, `c2`, `ct`, `ce` |
 
 [Hungarian notation]: https://en.wikipedia.org/wiki/Hungarian_notation
+
+# Inference rules
+
+Forms of judgment occur within inference rules.
+An inference rule consists of a horizontal line.
+Below the line is a conclusion, and above the line
+is any number of premises.
