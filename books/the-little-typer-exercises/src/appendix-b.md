@@ -101,6 +101,12 @@ In bidirectional type checking,
 we can read the above inference rule as a function
 implementing `infer` in the case of the `the` expression.
 
+Note that:
+- The input of the conclusion is read as arguments of the function.
+- The output of the conclusion is read as return value of the function.
+- The input of a promise is read as arguments of recursive call to form of judgments.
+- The output of a promise is read as return value of recursive call to form of judgments.
+
 ```
 infer(ctx, the(X, exp)) {
   X^o = is_type(ctx, X)
