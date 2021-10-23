@@ -1,4 +1,3 @@
-- refactor `Module.rerunWith`
 - merge the little book reports
 
 # narration
@@ -72,6 +71,10 @@
 
 - `exps/trivial/sole` -- narration
 - `exps/trivial/trivial` -- narration
+
+# refactor
+
+- refactor `Module.rerunWith`
 
 # core features
 
