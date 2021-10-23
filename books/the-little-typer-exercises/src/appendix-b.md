@@ -139,3 +139,31 @@ check(ctx, exp, X2) {
 - Xie: Knowing how to read bidirectional type inference rules as functions,
   it almost does not make sense to keep using the traditional syntax of inference rules,
   but people in the community are so familiar with it.
+
+A the-expression is the same as its second argument.
+
+```
+the_same(ctx, X, exp1, exp2)
+------------------------------------ [the same]
+the_same(ctx, X, the(X, exp1), exp2)
+```
+
+Read as a function implementing in the case of the `the` expression.
+
+```
+the_same(ctx, X, the(X, exp1), exp2) {
+  the_same(ctx, X, exp1, exp2)
+}
+```
+
+# Categories of inference rules
+
+Aside from [The], [Switch], and one of the rules for `Type`,
+the rules fall into one of a few categories:
+
+1. *formation rules*, which describe the conditions under which an expression is a type;
+2. *introduction rules*, which describe the constructors for a type;
+3. *elimination rules*, which describe the eliminators for a type;
+4. *computation rules*, which describe the behavior of eliminators whose targets are constructors;
+5. *eta-rules*, which describe how to turn neutral expressions into values for some types;
+6. *other sameness rules*, which describe when sameness of subexpressions implies sameness.
