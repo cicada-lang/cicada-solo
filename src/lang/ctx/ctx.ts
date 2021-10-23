@@ -11,6 +11,15 @@ export abstract class CtxObserver {
   abstract receive(event: CtxEvent): void
 }
 
+export class SimpleCtxObserver extends CtxObserver {
+  receive: (event: CtxEvent) => void
+
+  constructor(opts: { receive: (event: CtxEvent) => void }) {
+    super()
+    this.receive = opts.receive
+  }
+}
+
 export type CtxOptions = {
   observers: Array<CtxObserver>
 }
