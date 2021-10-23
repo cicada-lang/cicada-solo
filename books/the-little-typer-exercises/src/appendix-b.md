@@ -6,7 +6,7 @@ date: 2021-10-12
 # Forms of judgment
 
 A Type system is a system for guiding human judgment,
-In an implementation, each **form of judgment**
+In an implementation, each *form of judgment*
 corresponds to a function that determines
 whether a particular judgment is believable
 by the Laws and Commandments.
@@ -37,7 +37,38 @@ The use of [Hungarian notation][] in the table above:
 
 # Inference rules
 
-Forms of judgment occur within inference rules.
+Forms of judgment occur within *inference rules*.
 An inference rule consists of a horizontal line.
-Below the line is a conclusion, and above the line
-is any number of premises.
+Below the line is a *conclusion*, and above the line
+is any number of *premises*.
+
+The meaning of a inference rule is that,
+if one believes in the premises,
+then one should also believe in the conclusion.
+
+Because the same conclusion can occur in multiple rules,
+belief in the premises cannot be derived from belief in the conclusion.
+
+Each rule has a name, written in `[...]` to the right of the rule.
+
+# The interactions between checking and inferring
+
+Changing from inferring to checking (implement `infer` by `check`),
+requires an annotation to check against.
+
+```
+is_type(ctx, X) ~> X^o
+check(ctx, X^o, exp) ~> exp^o
+---------------------------------------- [the]
+infer(ctx, the(X, exp)) ~> the(X^o, exp^o)
+```
+
+Changing from checking to inferring (implement `check` by `infer`),
+requires an equality comparison.
+
+```
+infer(ctx, exp) ~> the(X1, exp^o)
+the_same_type(ctx, X1, X2)
+------------------------------------ [switch]
+check(ctx, exp, X2) ~> exp^o
+```
