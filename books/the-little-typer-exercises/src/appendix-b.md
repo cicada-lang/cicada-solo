@@ -53,6 +53,8 @@ The use of [Hungarian notation][] in the table below:
 
 [Hungarian notation]: https://en.wikipedia.org/wiki/Hungarian_notation
 
+The forms of judgment for implementations of Pie:
+
 | Form of judgment               | Reading                                          |
 |--------------------------------|--------------------------------------------------|
 | `is_ctx(ctx)`                  | `ctx` is a context.                              |
