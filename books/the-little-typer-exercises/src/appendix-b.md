@@ -11,7 +11,43 @@ corresponds to a function that determines
 whether a particular judgment is believable
 by the Laws and Commandments.
 
-The forms of judgment for implementations of Pie:
+# Implementation patterns
+
+## Bidirectional type checking
+
+Not just `check` or `infer`, but both.
+
+```
+check(ctx, e, ct)
+infer(ctx, e) ~> ct
+```
+
+## Elaboratation
+
+Not only `Exp`, but also use a `Core`.
+
+```
+// Not:
+check(ctx, e, ct)
+infer(ctx, e) ~> ct
+
+// But:
+check(ctx, e, ct) ~> ce
+infer(ctx, e) ~> the(ct, ce)
+```
+
+# The forms of judgment for implementations of Pie
+
+The use of [Hungarian notation][] in the table below:
+
+| Type   | Variable name          |
+|--------|------------------------|
+| `Ctx`  | `ctx`                  |
+| `Var`  | `x`                    |
+| `Exp`  | `e`, `et`              |
+| `Core` | `c1`, `c2`, `ct`, `ce` |
+
+[Hungarian notation]: https://en.wikipedia.org/wiki/Hungarian_notation
 
 | Form of judgment               | Reading                                          |
 |--------------------------------|--------------------------------------------------|
@@ -20,20 +56,9 @@ The forms of judgment for implementations of Pie:
 | `lookup(ctx, x) ~> ct`         | looking up `x` in `ctx` yields the type `ct`.    |
 | `is_type(ctx, et) ~> ct`       | `et` represents the type `ct`.                   |
 | `the_same_type(ctx, c1, c2)`   | `c1` and `c2` are the same type.                 |
-| `chech(ctx, e, ct) ~> ce`      | checking `e` can have type `ct` results in `ce`. |
+| `check(ctx, e, ct) ~> ce`      | checking `e` can have type `ct` results in `ce`. |
 | `infer(ctx, e) ~> the(ct, ce)` | from `e`, infer the `ct` `ce`.                   |
 | `the_same(ctx, ct, c1, c2)`    | `c1` is the same `ct` as `c2`.                   |
-
-The use of [Hungarian notation][] in the table above:
-
-| Type   | variable name          |
-|--------|------------------------|
-| `Ctx`  | `ctx`                  |
-| `Var`  | `x`                    |
-| `Exp`  | `e`, `et`              |
-| `Core` | `c1`, `c2`, `ct`, `ce` |
-
-[Hungarian notation]: https://en.wikipedia.org/wiki/Hungarian_notation
 
 # Inference rules
 
@@ -63,6 +88,18 @@ check(ctx, X^o, exp) ~> exp^o
 infer(ctx, the(X, exp)) ~> the(X^o, exp^o)
 ```
 
+In bidirectional type checking,
+we can read the above inference rule as a function
+implementing `infer` in the case of the `the` expression.
+
+```
+infer(ctx, the(X, exp)) {
+  X^o = is_type(ctx, X)
+  exp^o = check(ctx, X^o, exp)
+  the(X^o, exp^o)
+}
+```
+
 Changing from checking to inferring (implement `check` by `infer`),
 requires an equality comparison.
 
@@ -72,3 +109,18 @@ the_same_type(ctx, X1, X2)
 ------------------------------------ [switch]
 check(ctx, exp, X2) ~> exp^o
 ```
+
+Read as a function implementing `check` by `infer`
+when `infer` is implemented for `exp`.
+
+```
+check(ctx, exp, X2) {
+  the(X1, exp^o) = infer(ctx, exp)
+  the_same_type(ctx, X1, X2)
+  exp^o
+}
+```
+
+- Xie: Knowing how to read bidirectional type inference rules as functions,
+  it almost does not make sense to keep using the traditional syntax of inference rules,
+  but people in the community are so familiar with it.
