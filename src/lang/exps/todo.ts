@@ -1,4 +1,4 @@
-import { Exp, ExpMeta, subst } from "../exp"
+import { Exp, ExpMeta, ElaborationOptions, subst } from "../exp"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
 import { readback } from "../value"

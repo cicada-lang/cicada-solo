@@ -1,4 +1,4 @@
-import { Exp, ExpMeta, subst } from "../../exp"
+import { Exp, ExpMeta, ElaborationOptions, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value, expect } from "../../value"

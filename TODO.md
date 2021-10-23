@@ -2,8 +2,6 @@
 
 # narration
 
-- `exps/var` -- narration
-
 - `exps/elaborate` -- narration
 - `exps/todo` -- narration
 - `exps/type` -- narration

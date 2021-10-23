@@ -1,7 +1,8 @@
-import { Exp, ExpMeta, subst } from "../exp"
+import { Exp, ExpMeta, ElaborationOptions, subst } from "../exp"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { Value } from "../value"
+import { readback } from "../value"
 import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
 
@@ -32,7 +33,7 @@ export class Var extends Exp {
     }
   }
 
-  infer(ctx: Ctx): { t: Value; core: Core } {
+  infer(ctx: Ctx, opts: ElaborationOptions): { t: Value; core: Core } {
     const t = ctx.find_type(this.name)
     if (t === undefined) {
       throw new ExpTrace(
@@ -41,10 +42,23 @@ export class Var extends Exp {
       )
     }
 
-    return {
-      t,
-      core: new Exps.VarCore(this.name),
+    const core = new Exps.VarCore(this.name)
+
+    if (opts?.narrate_elaboration_p) {
+      const t_core = readback(ctx, new Exps.TypeValue(), t)
+      const t_repr = t_core.repr()
+      const core_repr = core.repr()
+      ctx.narration([
+        `To infer a type for the variable ${this.name},`,
+        `I look it up in the context.`,
+        `The lookup succeeds with type ${t_repr},`,
+        `thus I elaborate the variable to:`,
+        `  core expression: ${core_repr}`,
+        `  of type : ${t_repr}`,
+      ])
     }
+
+    return { t, core }
   }
 
   repr(): string {
