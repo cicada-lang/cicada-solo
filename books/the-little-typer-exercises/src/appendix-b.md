@@ -15,25 +15,29 @@ by the Laws and Commandments.
 
 ## Bidirectional type checking
 
-Not just `check` or `infer`, but both.
+To translate inference rules to type checking functions,
+we do not just implement `check` or `infer`, but both.
 
 ```
-check(ctx, e, ct)
-infer(ctx, e) ~> ct
+check(ctx: Ctx, e: Exp, t: Type)
+infer(ctx: Ctx, e: Exp): Type
 ```
 
 ## Elaboratation
 
-Not only `Exp`, but also use a `Core`.
+During the process of type checking, we can get a lot of information as by-product,
+we should not waste them, we should use a extra data type to capture them.
+
+We not only using the data type `Exp`, but also use a data type `Core`.
 
 ```
 // Not:
-check(ctx, e, ct)
-infer(ctx, e) ~> ct
+check(ctx: Ctx, e: Exp, t: Type)
+infer(ctx: Ctx, e: Exp): Type
 
 // But:
-check(ctx, e, ct) ~> ce
-infer(ctx, e) ~> the(ct, ce)
+check(ctx: Ctx, e: Exp, t: Type): Core
+infer(ctx: Ctx, e: Exp): { t: Type, core: Core }
 ```
 
 # The forms of judgment for implementations of Pie
