@@ -167,3 +167,19 @@ the rules fall into one of a few categories:
 4. *computation rules*, which describe the behavior of eliminators whose targets are constructors;
 5. *eta-rules*, which describe how to turn neutral expressions into values for some types;
 6. *other sameness rules*, which describe when sameness of subexpressions implies sameness.
+
+# Sameness
+
+TODO
+
+# Variables
+
+```
+lookup(ctx, x) ~> X
+---------------------------- [Hypothesis]
+infer(ctx, x) ~> the(X, x)
+```
+
+> To infer a type for a variable `x`, look it up in the context `ctx`.
+> If the lookup succeeds with type `X`,
+> infer succeeds with the `Core` expression `the(X, x)`.
