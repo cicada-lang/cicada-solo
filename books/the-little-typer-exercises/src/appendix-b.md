@@ -84,6 +84,9 @@ Each rule has a name, written in `[...]` to the right of the rule.
 
 # The interactions between checking and inferring
 
+In the following examples, we use `^o` as postfix superscript,
+to denote elaboratation result of the corresponding variable.
+
 Changing from inferring to checking (implement `infer` by `check`),
 requires an annotation to check against.
 
