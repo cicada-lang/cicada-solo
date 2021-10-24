@@ -1,4 +1,5 @@
 import { Neutral } from "../../neutral"
+import { Solution } from "../../solution"
 import { Normal } from "../../normal"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"

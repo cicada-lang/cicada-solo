@@ -1,8 +1,8 @@
 import { Neutral } from "../../neutral"
+import { Solution } from "../../solution"
 import { Normal } from "../../normal"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class NatIndNeutral extends Neutral {
@@ -30,11 +30,12 @@ export class NatIndNeutral extends Neutral {
 
   unify(solution: Solution, that: Neutral): Solution {
     if (that instanceof NatIndNeutral) {
-      solution = this.target.unify(solution, that.target)
-      solution = this.motive.unify(solution, that.motive)
-      solution = this.base.unify(solution, that.base)
-      solution = this.step.unify(solution, that.step)
       return solution
+        .unify_neutral(this.target, that.target)
+        .unify_normal(this.motive, that.motive)
+        .unify_normal(this.motive, that.motive)
+        .unify_normal(this.base, that.base)
+        .unify_normal(this.step, that.step)
     } else {
       return Solution.failure
     }
