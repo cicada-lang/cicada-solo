@@ -1,7 +1,6 @@
 # implicit
 
 - `Neutral.unify` -- `absurd/absurd-ind-neutral`
-- `Neutral.unify` -- `cls/dot-neutral`
 - `Neutral.unify` -- `sigma/cdr-neutral`
 - `Neutral.unify` -- `sigma/car-neutral`
 - `Neutral.unify` -- `list/list-ind-neutral`
@@ -10,8 +9,6 @@
 - `Neutral.unify` -- `vector/vector-head-neutral`
 - `Neutral.unify` -- `vector/vector-tail-neutral`
 - `Neutral.unify` -- `either/either-ind-neutral`
-
-- `Value.unify` -- `not-yet-value`
 
 - [stdlib] try implicit argument in `stdlib`
 

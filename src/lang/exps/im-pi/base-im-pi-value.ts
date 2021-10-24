@@ -93,15 +93,19 @@ export class BaseImPiValue extends Exps.ImPiValue {
     for (const entry of entries) {
       const im_arg_core = readback(ctx, entry.arg_t, entry.im_arg)
       target = new Exps.ImApCore(target, im_arg_core)
-      // DEBUG
-      // const core = new Exps.ApCore(target, inferred_arg.core)
-      // console.log("- im-ap insertion :", core.repr())
+
+      // {
+      //   // DEBUG
+      //   const core = new Exps.ApCore(target, inferred_arg.core)
+      //   console.log("- im-ap insertion :", core.repr())
+      // }
     }
 
     const im_arg = solution.find(fresh_name)
     if (im_arg === undefined) {
       throw new ExpTrace(
         [
+          `[BaseImPiValue.insert_im_ap]`,
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
@@ -113,8 +117,12 @@ export class BaseImPiValue extends Exps.ImPiValue {
     }
 
     const im_arg_core = readback(ctx, this.arg_t, im_arg)
-    // DEBUG
-    // console.log("- inserting im-ap arg:", im_arg_core.repr())
+
+    // {
+    //   // DEBUG
+    //   console.log("- inserting im-ap arg:", im_arg_core.repr())
+    // }
+
     target = new Exps.ImApCore(target, im_arg_core)
 
     const final_ret_t = expect(ctx, this.ret_t_cl.apply(im_arg), Exps.PiValue)

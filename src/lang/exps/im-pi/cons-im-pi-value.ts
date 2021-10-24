@@ -83,6 +83,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
     if (im_arg === undefined) {
       throw new ExpTrace(
         [
+          `[ConsImPiValue.insert_im_ap]`,
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
