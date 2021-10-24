@@ -9,7 +9,6 @@
 - `Neutral.unify` -- `vector/vector-ind-neutral`
 - `Neutral.unify` -- `vector/vector-head-neutral`
 - `Neutral.unify` -- `vector/vector-tail-neutral`
-- `Neutral.unify` -- `im-pi/im-ap-neutral`
 - `Neutral.unify` -- `either/either-ind-neutral`
 
 - `Value.unify` -- `not-yet-value`

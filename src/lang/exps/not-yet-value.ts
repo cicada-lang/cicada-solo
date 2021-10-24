@@ -22,19 +22,10 @@ export class NotYetValue extends Value {
   }
 
   unify(solution: Solution, that: Value): Solution {
-    if (that instanceof Exps.NotYetValue) {
-      // DEBUG
-      // console.log([
-      //   `I give up Value.unify on Exps.NotYetValue`,
-      //   `  this.t class name: ${this.t.constructor.name}`,
-      //   `  that.t class name: ${that.t.constructor.name}`,
-      //   `  this.neutral class name: ${this.neutral.constructor.name}`,
-      //   `  that.neutral class name: ${that.neutral.constructor.name}`,
-      // ].join("\n"))
+    if (that instanceof NotYetValue) {
       return solution
-      // return solution
-      //   .unify(this.t, that.t)
-      //   .unify_neutral(this.neutral, that.neutral)
+        .unify(this.t, that.t)
+        .unify_neutral(this.neutral, that.neutral)
     } else {
       return Solution.failure
     }

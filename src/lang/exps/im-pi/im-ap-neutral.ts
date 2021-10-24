@@ -21,4 +21,14 @@ export class ImApNeutral extends Neutral {
       this.arg.readback_normal(ctx)
     )
   }
+
+  unify(solution: Solution, that: Neutral): Solution {
+    if (that instanceof ImApNeutral) {
+      return solution
+        .unify_neutral(this.target, that.target)
+        .unify_normal(this.arg, that.arg)
+    } else {
+      return Solution.failure
+    }
+  }
 }
