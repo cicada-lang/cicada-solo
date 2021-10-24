@@ -1,7 +1,3 @@
-# implicit
-
-- `Neutral.unify` -- `either/either-ind-neutral`
-
 # narration
 
 - `exps/elaborate` -- narration

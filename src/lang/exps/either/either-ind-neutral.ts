@@ -32,4 +32,16 @@ export class EitherIndNeutral extends Neutral {
       this.base_right.readback_normal(ctx)
     )
   }
+
+  unify(solution: Solution, that: Neutral): Solution {
+    if (that instanceof EitherIndNeutral) {
+      return solution
+        .unify_neutral(this.target, that.target)
+        .unify_normal(this.motive, that.motive)
+        .unify_normal(this.base_left, that.base_left)
+        .unify_normal(this.base_right, that.base_right)
+    } else {
+      return Solution.failure
+    }
+  }
 }
