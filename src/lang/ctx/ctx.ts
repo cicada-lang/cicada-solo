@@ -41,8 +41,17 @@ export abstract class Ctx {
   }
 
   narration(lines: Array<string>): void {
-    const story = lines.join("\n")
-    this.broadcast({ tag: "narration", msg: story })
+    this.broadcast({
+      tag: "narration",
+      msg: lines.join("\n"),
+    })
+  }
+
+  todo(lines: Array<string>): void {
+    this.broadcast({
+      tag: "todo",
+      msg: lines.join("\n"),
+    })
   }
 
   freshen(name: string): string {

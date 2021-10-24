@@ -29,11 +29,13 @@ export class Todo extends Exp {
 
   check(ctx: Ctx, t: Value): Core {
     const t_core = readback(ctx, new Exps.TypeValue(), t)
-    ctx.narration([
+    const t_repr = ctx.highlight("code", t_core.repr())
+    const head = ctx.highlight("warn", "@TODO")
+    const note = ctx.highlight("note", this.note)
+    ctx.todo([
       //
-      `@TODO ${this.note}`,
-      `  ${t_core.repr()}`,
-      ``,
+      `${head} ${note}`,
+      `  ${t_repr}`,
     ])
 
     return new Exps.TodoCore(this.note, t)

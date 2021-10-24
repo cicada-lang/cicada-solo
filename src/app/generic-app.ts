@@ -15,8 +15,12 @@ export class GenericApp {
   defaultCtxObservers = [
     this.createCtxObserver({
       receive: (event) => {
-        if (event.tag === "narration") {
+        if (event.tag === "todo") {
           console.log(event.msg)
+          console.log()
+        } else if (event.tag === "narration") {
+          console.log("  ------ $ ------  ")
+          console.log(ut.indent(event.msg, "  "))
           console.log()
         }
       },
@@ -30,6 +34,10 @@ export class GenericApp {
       switch (tag) {
         case "code":
           return ut.colors.blue(text)
+        case "warn":
+          return ut.colors.red(text)
+        case "note":
+          return ut.colors.yellow(text)
         default:
           return text
       }
