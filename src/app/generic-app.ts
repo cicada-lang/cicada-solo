@@ -19,7 +19,7 @@ export class GenericApp {
           console.log(event.msg)
           console.log()
         } else if (event.tag === "narration") {
-          console.log("  ------ $ ------  ")
+          console.log("  ------------ $ ------------  ")
           console.log(ut.indent(event.msg, "  "))
           console.log()
         }
