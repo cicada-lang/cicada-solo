@@ -12,7 +12,7 @@ export class GenericApp {
   config = new Config()
 
   createCtxObserver = SimpleCtxObserver.create
-  defaultCtxObservers = [new CtxObservers.NarrationLogger()]
+  defaultCtxObservers = [new CtxObservers.ConsoleNarrator()]
 
   createHighlighter = SimpleHighlighter.create
   defaultHighlighter = this.createHighlighter({

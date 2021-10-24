@@ -1,6 +1,6 @@
 import { CtxEvent, CtxObserver } from "../../ctx"
 
-export class NarrationLogger extends CtxObserver {
+export class ConsoleNarrator extends CtxObserver {
   receive(event: CtxEvent): void {
     if (event.tag === "narration") {
       console.log(event.msg)

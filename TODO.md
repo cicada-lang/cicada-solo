@@ -1,5 +1,3 @@
-- rename `NarrationLogger` to `ConsoleNarrator`
-
 # narration
 
 - `exps/elaborate` -- narration

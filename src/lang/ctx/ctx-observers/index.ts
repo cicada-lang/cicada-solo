@@ -1,1 +1,1 @@
-export * from "./narration-logger"
+export * from "./console-narrator"
