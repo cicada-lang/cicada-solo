@@ -158,6 +158,8 @@
 
 # narration
 
+- `@elab` support `@elab(<name>, <exp>)`
+
 - narration for the computation rules
 
   - eta rule & sameness rule
@@ -167,12 +169,11 @@
 
 # book manager
 
-- [book manager] [cli] download (or clone?) book from `references` specified in `book.json`
+- [book manager] [cli] download book from `references` specified in `book.json`
 
 - [book manager] be able to resolve module in book of `references`
 
-  - we do not need to use book as module,
-    we only need to be able to resolve module.
+  - we do not need to use book as module, we only need to be able to resolve module.
 
 # error report
 
