@@ -1,6 +1,5 @@
 # implicit
 
-- `Neutral.unify` -- `list/list-ind-neutral`
 - `Neutral.unify` -- `equal/replace-neutral`
 - `Neutral.unify` -- `vector/vector-ind-neutral`
 - `Neutral.unify` -- `vector/vector-head-neutral`
