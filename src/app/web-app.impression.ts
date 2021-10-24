@@ -19,6 +19,7 @@ ut.test("git book", async () => {
       const file = await book.files.getOrFail(path)
       const mod = book.load(path, file, {
         observers: app.defaultCtxObservers,
+        highlighter: app.defaultHighlighter,
       })
       await mod.runAll()
       const t1 = Date.now()
@@ -50,6 +51,7 @@ ut.test("git article", async () => {
   const file = await book.files.getOrFail(path)
   const mod = book.load(path, file, {
     observers: app.defaultCtxObservers,
+    highlighter: app.defaultHighlighter,
   })
   await mod.runAll()
   const t1 = Date.now()

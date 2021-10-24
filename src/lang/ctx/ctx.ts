@@ -20,8 +20,13 @@ export class SimpleCtxObserver extends CtxObserver {
   }
 }
 
+export type Highlighter = {
+  highlight(tag: string, text: string): string
+}
+
 export type CtxOptions = {
   observers: Array<CtxObserver>
+  highlighter: Highlighter
 }
 
 export abstract class Ctx {
@@ -30,13 +35,19 @@ export abstract class Ctx {
   abstract to_env(): Env
 
   observers: Array<CtxObserver>
+  highlighter: Highlighter
 
   constructor(opts: CtxOptions) {
     this.observers = opts.observers
+    this.highlighter = opts.highlighter
   }
 
   static init(opts: CtxOptions): EmptyCtx {
     return new EmptyCtx(opts)
+  }
+
+  highlight(tag: string, text: string): string {
+    return this.highlighter.highlight(tag, text)
   }
 
   broadcast(event: CtxEvent): void {
@@ -73,6 +84,7 @@ export abstract class Ctx {
       value,
       rest: this,
       observers: this.observers,
+      highlighter: this.highlighter,
     })
   }
 
@@ -116,6 +128,7 @@ class ExtendCtx extends Ctx {
     value?: Value
     rest: Ctx
     observers: Array<CtxObserver>
+    highlighter: Highlighter
   }) {
     super(opts)
     this.name = opts.name

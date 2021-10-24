@@ -38,6 +38,7 @@ export class SnapshotCommand extends Command<Args> {
     const runner = app.createLocalRunner({ path, book })
     const { error } = await runner.run(path, {
       observers: app.defaultCtxObservers,
+      highlighter: app.defaultHighlighter,
     })
     if (error) {
       process.exit(1)

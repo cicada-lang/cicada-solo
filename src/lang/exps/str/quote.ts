@@ -28,8 +28,9 @@ export class Quote extends Exp {
     const core = new Exps.QuoteCore(this.str)
 
     if (opts?.narrate_elaboration_p) {
-      const t_repr = readback(ctx, new Exps.TypeValue(), t).repr()
-      const core_repr = core.repr()
+      const t_core = readback(ctx, new Exps.TypeValue(), t)
+      const t_repr = ctx.highlight("code", t_core.repr())
+      const core_repr = ctx.highlight("code", core.repr())
       ctx.narration([
         `Given a doublequoted literal value ${core_repr},`,
         `I can inter its type to be ${t_repr},`,

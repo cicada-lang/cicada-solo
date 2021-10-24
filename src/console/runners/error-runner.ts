@@ -1,7 +1,7 @@
 import { Runner } from "../runner"
 import { Book } from "../../book"
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
-import { CtxObserver } from "../../lang/ctx"
+import { CtxOptions } from "../../lang/ctx"
 import * as ut from "../../ut"
 import fs from "fs"
 
@@ -15,10 +15,7 @@ export class ErrorRunner extends Runner {
     this.book = opts.book
   }
 
-  async run(
-    path: string,
-    opts: { observers: Array<CtxObserver> }
-  ): Promise<{ error?: unknown }> {
+  async run(path: string, opts: CtxOptions): Promise<{ error?: unknown }> {
     try {
       const file = await this.book.files.getOrFail(path)
       const mod = this.book.load(path, file, opts)

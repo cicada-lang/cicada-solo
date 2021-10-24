@@ -1,6 +1,6 @@
 import { Runner } from "../runner"
 import { Book } from "../../book"
-import { CtxObserver } from "../../lang/ctx"
+import { CtxOptions } from "../../lang/ctx"
 
 export class DefaultRunner extends Runner {
   book: Book
@@ -10,10 +10,7 @@ export class DefaultRunner extends Runner {
     this.book = opts.book
   }
 
-  async run(
-    path: string,
-    opts: { observers: Array<CtxObserver> }
-  ): Promise<{ error?: unknown }> {
+  async run(path: string, opts: CtxOptions): Promise<{ error?: unknown }> {
     try {
       const mod = this.book.load(
         path,

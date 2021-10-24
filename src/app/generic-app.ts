@@ -3,7 +3,8 @@ import { Config } from "../config"
 import { AppReplEventHandler } from "./app-repl-event-handler"
 import { customAlphabet } from "nanoid"
 import * as CtxObservers from "../lang/ctx/ctx-observers"
-import { CtxEvent, SimpleCtxObserver } from "../lang/ctx"
+import { CtxEvent, Highlighter, SimpleCtxObserver } from "../lang/ctx"
+import * as ut from "../ut"
 
 export class GenericApp {
   nanoid = customAlphabet("1234567890abcdef", 16)
@@ -18,6 +19,17 @@ export class GenericApp {
     return new SimpleCtxObserver(opts)
   }
 
+  defaultHighlighter: Highlighter = {
+    highlight: (tag, text) => {
+      switch (tag) {
+        case "code":
+          return ut.colors.blue(text)
+        default:
+          return text
+      }
+    },
+  }
+
   createReplEventHandler(opts: {
     book: Book
     path: string
@@ -29,6 +41,7 @@ export class GenericApp {
       path,
       config: this.config,
       observers: this.defaultCtxObservers,
+      highlighter: this.defaultHighlighter,
     })
   }
 }

@@ -72,6 +72,7 @@ async function check(
       const runner = app.createLocalRunner({ path, book })
       const { error } = await runner.run(path, {
         observers: app.defaultCtxObservers,
+        highlighter: app.defaultHighlighter,
       })
       if (error) errors.push(error)
       const t1 = Date.now()
@@ -108,6 +109,7 @@ async function watch(book: Book<LocalFileStore>): Promise<void> {
       const runner = app.createLocalRunner({ path, book })
       const { error } = await runner.run(path, {
         observers: app.defaultCtxObservers,
+        highlighter: app.defaultHighlighter,
       })
       const t1 = Date.now()
       const elapse = t1 - t0

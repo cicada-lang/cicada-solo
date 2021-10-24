@@ -1,7 +1,7 @@
 import { ReplEvent, ReplEventHandler } from "@enchanterjs/enchanter/lib/repl"
 import { Config } from "../config"
 import { Book } from "../book"
-import { CtxObserver } from "../lang/ctx"
+import { CtxObserver, Highlighter } from "../lang/ctx"
 import * as StmtOutputs from "../lang/stmt/stmt-outputs"
 import * as Errors from "../lang/errors"
 import * as ut from "../ut"
@@ -11,18 +11,21 @@ export class AppReplEventHandler extends ReplEventHandler {
   book: Book
   path: string
   observers: Array<CtxObserver>
+  highlighter: Highlighter
 
   constructor(opts: {
     config: Config
     book: Book
     path: string
     observers: Array<CtxObserver>
+    highlighter: Highlighter
   }) {
     super()
     this.config = opts.config
     this.path = opts.path
     this.book = opts.book
     this.observers = opts.observers
+    this.highlighter = opts.highlighter
   }
 
   greeting(): void {
@@ -41,7 +44,7 @@ export class AppReplEventHandler extends ReplEventHandler {
     const mod = this.book.load(
       this.path,
       await this.book.files.getOrFail(this.path),
-      { observers: this.observers }
+      { observers: this.observers, highlighter: this.highlighter }
     )
 
     try {

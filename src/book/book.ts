@@ -2,7 +2,7 @@ import { Module } from "../module"
 import * as CodeBlockParsers from "../module/code-block-parsers"
 import { FileStore } from "@enchanterjs/enchanter/lib/file-store"
 import { Env } from "../lang/env"
-import { Ctx, CtxObserver } from "../lang/ctx"
+import { Ctx, CtxObserver, Highlighter } from "../lang/ctx"
 import ty from "@xieyuheng/ty"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
@@ -48,7 +48,7 @@ export class Book<Files extends FileStore = FileStore> {
   load(
     path: string,
     text: string,
-    opts: { observers: Array<CtxObserver> }
+    opts: { observers: Array<CtxObserver>; highlighter: Highlighter }
   ): Module {
     const cached = this.cache.get(path)
     if (cached) {
@@ -62,7 +62,10 @@ export class Book<Files extends FileStore = FileStore> {
       path,
       codeBlocks: parser.parseCodeBlocks(text),
       env: Env.init(),
-      ctx: Ctx.init({ observers: opts.observers }),
+      ctx: Ctx.init({
+        observers: opts.observers,
+        highlighter: opts.highlighter,
+      }),
     })
 
     this.cache.set(path, mod)

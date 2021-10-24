@@ -48,12 +48,16 @@ export class RunCommand extends Command<Args, Opts> {
     const path = Path.basename(argv["article"])
 
     if (argv["watch"]) {
-      await runner.run(path, { observers: app.defaultCtxObservers })
+      await runner.run(path, {
+        observers: app.defaultCtxObservers,
+        highlighter: app.defaultHighlighter,
+      })
       app.logger.info(`Initial run complete, now watching for changes.`)
       await watch(runner, book, path)
     } else {
       const { error } = await runner.run(path, {
         observers: app.defaultCtxObservers,
+        highlighter: app.defaultHighlighter,
       })
       if (error) {
         process.exit(1)
@@ -78,6 +82,7 @@ async function watch(
       book.cache.delete(path)
       const { error } = await runner.run(path, {
         observers: app.defaultCtxObservers,
+        highlighter: app.defaultHighlighter,
       })
 
       if (error) {
