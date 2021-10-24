@@ -32,7 +32,7 @@ export class Quote extends Exp {
       const core_repr = core.repr()
       ctx.narration([
         `Given a doublequoted literal value ${core_repr},`,
-        `I inter its type to be ${t_repr},`,
+        `I can inter its type to be ${t_repr},`,
         `and elaborate it to ${core_repr}.`,
       ])
     }
