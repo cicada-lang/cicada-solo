@@ -1,3 +1,13 @@
+# implicit
+
+- [refactor] `unify` of `Value`, `Neutral` and `Normal`
+
+- `not-yet-value ` -- fix `unify`
+
+- [stdlib] try implicit argument in `stdlib`
+
+  - `category/implicit`
+
 # narration
 
 - `exps/elaborate` -- narration
@@ -75,19 +85,9 @@
 
 # core features
 
-- support to use `=` to do local definitions in class
+- support using `=` to do local definitions in class
 
 - `Fn` be able to annotate argument type and return type
-
-# implicit
-
-- [refactor] `unify` of `Value`, `Neutral` and `Normal`
-
-- `not-yet-value ` -- fix `unify`
-
-- [stdlib] try implicit argument in `stdlib`
-
-  - `category/implicit`
 
 # use `unify` to replace `readback`
 
