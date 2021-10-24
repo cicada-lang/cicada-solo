@@ -1,6 +1,5 @@
 # implicit
 
-- `Neutral.unify` -- `absurd/absurd-ind-neutral`
 - `Neutral.unify` -- `sigma/cdr-neutral`
 - `Neutral.unify` -- `sigma/car-neutral`
 - `Neutral.unify` -- `list/list-ind-neutral`

@@ -21,4 +21,14 @@ export class AbsurdIndNeutral extends Neutral {
       this.motive.readback_normal(ctx)
     )
   }
+
+  unify(solution: Solution, that: Neutral): Solution {
+    if (that instanceof AbsurdIndNeutral) {
+      return solution
+        .unify_neutral(this.target, that.target)
+        .unify_normal(this.motive, that.motive)
+    } else {
+      return Solution.failure
+    }
+  }
 }
