@@ -22,6 +22,8 @@ export class FnValue extends Value {
   }
 
   unify(solution: Solution, that: Value): Solution {
-    throw new Error("unify is not implemented for Exps.FnValue")
+    // TODO
+    // throw new Error("unify is not implemented for Exps.FnValue")
+    return solution
   }
 }
