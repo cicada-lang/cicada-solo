@@ -22,5 +22,5 @@ export class CarNeutral extends Neutral {
     } else {
       return Solution.failure
     }
-  }  
+  }
 }
