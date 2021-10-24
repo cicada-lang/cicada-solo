@@ -30,8 +30,12 @@ ut.test("git book", async () => {
         msg: path,
       })
 
-      if (mod.formatAllOutputs()) {
-        console.log(mod.formatAllOutputs())
+      const output = mod.allOutputs
+        .map((output) => output.formatForConsole())
+        .join("\n")
+
+      if (output) {
+        console.log(output)
       }
     }
   }
@@ -62,7 +66,11 @@ ut.test("git article", async () => {
     msg: path,
   })
 
-  if (mod.formatAllOutputs()) {
-    console.log(mod.formatAllOutputs())
+  const output = mod.allOutputs
+    .map((output) => output.formatForConsole())
+    .join("\n")
+
+  if (output) {
+    console.log(output)
   }
 })

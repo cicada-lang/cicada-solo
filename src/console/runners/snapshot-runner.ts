@@ -24,7 +24,9 @@ export class SnapshotRunner extends Runner {
       )
       await mod.runAll()
       const file = this.book.files.resolve(path + ".out")
-      const output = mod.formatAllOutputs()
+      const output = mod.allOutputs
+        .map((output) => output.formatForConsole())
+        .join("\n")
       if (output) {
         await fs.promises.writeFile(file, ut.stripAnsi(output))
       }

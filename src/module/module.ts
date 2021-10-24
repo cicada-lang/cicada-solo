@@ -123,15 +123,7 @@ export class Module {
     return outputs
   }
 
-  formatAllOutputs(): string {
-    let s = ""
-    for (const { outputs } of this.codeBlocks) {
-      for (const output of outputs) {
-        s += output.repr()
-        s += "\n"
-      }
-    }
-
-    return s.trim() ? s : ""
+  get allOutputs(): Array<StmtOutput> {
+    return this.codeBlocks.flatMap(({ outputs }) => outputs)
   }
 }

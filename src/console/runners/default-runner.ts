@@ -18,7 +18,10 @@ export class DefaultRunner extends Runner {
         opts
       )
       await mod.runAll()
-      const output = mod.formatAllOutputs()
+      const output = mod.allOutputs
+        .map((output) => output.formatForConsole())
+        .join("\n")
+
       if (output) {
         console.log(output)
       }
