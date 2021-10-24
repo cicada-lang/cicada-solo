@@ -1,3 +1,7 @@
+- support syntax highlighting in narration
+
+  - learn from codemirror highligh
+
 # narration
 
 - `exps/elaborate` -- narration

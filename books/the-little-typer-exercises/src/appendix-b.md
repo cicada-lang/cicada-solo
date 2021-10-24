@@ -82,7 +82,7 @@ belief in the premises cannot be derived from belief in the conclusion.
 
 Each rule has a name, written in `[...]` to the right of the rule.
 
-# The interactions between checking and inferring
+## The interactions between checking and inferring
 
 In the following examples, we use `^o` as postfix superscript,
 to denote elaboratation result of the corresponding variable.
@@ -156,7 +156,7 @@ the_same(ctx, X, the(X, exp1), exp2) {
 }
 ```
 
-# Categories of inference rules
+## Categories of inference rules
 
 Aside from [the], [switch], and one of the rules for `Type`,
 the rules fall into one of a few categories:
@@ -168,7 +168,7 @@ the rules fall into one of a few categories:
 5. *eta-rules*, which describe how to turn neutral expressions into values for some types;
 6. *other sameness rules*, which describe when sameness of subexpressions implies sameness.
 
-# Sameness
+## Sameness
 
 It is important to remember that
 rules whose conclusions are sameness judgments
@@ -177,18 +177,18 @@ rather than a description of the algorithm itself.
 
 ```
 the_same(ctx, X, exp2, exp1)
----------------------------- [same_symm]
+---------------------------- [same_symmetric]
 the_same(ctx, X, exp1, exp2)
 ```
 
 ```
 the_same(ctx, X, exp1, exp2)
 the_same(ctx, X, exp2, exp3)
----------------------------- [same_trans]
+---------------------------- [same_transitive]
 the_same(ctx, X, exp1, exp3)
 ```
 
-# Variables
+## Variables
 
 ```
 lookup(ctx, x) ~> X
@@ -209,3 +209,29 @@ the_same(ctx, X, x, x)
 
 > If a variable `x` is given type `X` by the context `ctx`,
 > then conversion checking must find that `x` is the same `X` as `x`.
+
+## String
+
+```
+-------------------------------- [string formation]
+is_type(ctx, String) ~> String
+```
+
+```
+------------------------------------ [string same type]
+the_same_type(ctx, String, String)
+```
+
+```
+------------------------------------ [string intro]
+infer(ctx, str) ~> the(String, str)
+```
+
+> Given a doublequoted literal value `str`,
+> I inter its type to be `String`,
+> and its core to be the literal value `str` itself.
+
+```
+------------------------------------ [string same quote]
+the_same(ctx, String, str, str)
+```

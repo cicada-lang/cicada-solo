@@ -1,7 +1,7 @@
 import { Exp, ExpMeta, ElaborationOptions, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Value } from "../../value"
+import { Value, readback } from "../../value"
 import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
@@ -24,16 +24,20 @@ export class Quote extends Exp {
   }
 
   infer(ctx: Ctx, opts: ElaborationOptions): { t: Value; core: Core } {
+    const t = new Exps.StrValue()
+    const core = new Exps.QuoteCore(this.str)
+
     if (opts?.narrate_elaboration_p) {
+      const t_repr = readback(ctx, new Exps.TypeValue(), t).repr()
+      const core_repr = core.repr()
       ctx.narration([
-        `I infer the literal string: ${this.str} to have type String`,
+        `Given a doublequoted literal value ${core_repr},`,
+        `I inter its type to be ${t_repr},`,
+        `and elaborate it to ${core_repr}.`,
       ])
     }
 
-    return {
-      t: new Exps.StrValue(),
-      core: new Exps.QuoteCore(this.str),
-    }
+    return { t, core }
   }
 
   repr(): string {

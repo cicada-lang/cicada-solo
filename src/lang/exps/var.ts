@@ -45,16 +45,14 @@ export class Var extends Exp {
     const core = new Exps.VarCore(this.name)
 
     if (opts?.narrate_elaboration_p) {
-      const t_core = readback(ctx, new Exps.TypeValue(), t)
-      const t_repr = t_core.repr()
+      const t_repr = readback(ctx, new Exps.TypeValue(), t).repr()
       const core_repr = core.repr()
       ctx.narration([
         `To infer a type for the variable ${this.name},`,
         `I look it up in the context.`,
         `The lookup succeeds with type ${t_repr},`,
-        `thus I elaborate the variable to:`,
-        `  core expression: ${core_repr}`,
-        `  of type : ${t_repr}`,
+        `thus I infer its type to be ${t_repr},`,
+        `and elaborate the variable to ${core_repr}.`,
       ])
     }
 
