@@ -1,8 +1,20 @@
 # implicit
 
-- Value.unify -- not-yet-value.ts
+- `Neutral.unify` -- `absurd/absurd-ind-neutral`
+- `Neutral.unify` -- `cls/dot-neutral`
+- `Neutral.unify` -- `sigma/cdr-neutral`
+- `Neutral.unify` -- `sigma/car-neutral`
+- `Neutral.unify` -- `list/list-ind-neutral`
+- `Neutral.unify` -- `pi/ap-neutral`
+- `Neutral.unify` -- `equal/replace-neutral`
+- `Neutral.unify` -- `vector/vector-ind-neutral`
+- `Neutral.unify` -- `vector/vector-head-neutral`
+- `Neutral.unify` -- `vector/vector-tail-neutral`
+- `Neutral.unify` -- `nat/nat-ind-neutral`
+- `Neutral.unify` -- `im-pi/im-ap-neutral`
+- `Neutral.unify` -- `either/either-ind-neutral`
 
-- `not-yet-value ` -- fix `unify`
+- `Value.unify` -- `not-yet-value`
 
 - [stdlib] try implicit argument in `stdlib`
 

@@ -32,7 +32,9 @@ export class NotYetValue extends Value {
       //   `  that.neutral class name: ${that.neutral.constructor.name}`,
       // ].join("\n"))
       return solution
-      // return this.neutral.unify(solution.unify(this.t, that.t), that.neutral)
+      // return solution
+      //   .unify(this.t, that.t)
+      //   .unify_neutral(this.neutral, that.neutral)
     } else {
       return Solution.failure
     }
