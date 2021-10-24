@@ -15,4 +15,12 @@ export class VectorHeadNeutral extends Neutral {
   readback_neutral(ctx: Ctx): Core {
     return new Exps.VectorHeadCore(this.target.readback_neutral(ctx))
   }
+
+  unify(solution: Solution, that: Neutral): Solution {
+    if (that instanceof VectorHeadNeutral) {
+      return solution.unify_neutral(this.target, that.target)
+    } else {
+      return Solution.failure
+    }
+  } 
 }
