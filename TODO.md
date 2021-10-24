@@ -1,6 +1,5 @@
 # implicit
 
-- `Neutral.unify` -- `vector/vector-ind-neutral`
 - `Neutral.unify` -- `either/either-ind-neutral`
 
 # narration

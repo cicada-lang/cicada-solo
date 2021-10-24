@@ -16,12 +16,11 @@ export class VectorTailNeutral extends Neutral {
     return new Exps.VectorTailCore(this.target.readback_neutral(ctx))
   }
 
-
   unify(solution: Solution, that: Neutral): Solution {
     if (that instanceof VectorTailNeutral) {
       return solution.unify_neutral(this.target, that.target)
     } else {
       return Solution.failure
     }
-  }  
+  }
 }
