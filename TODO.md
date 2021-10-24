@@ -1,4 +1,4 @@
-- extract `highlighter` module
+- rename `NarrationLogger` to `ConsoleNarrator`
 
 # narration
 

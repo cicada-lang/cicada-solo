@@ -1,15 +1,12 @@
 import { CtxEvent } from "./ctx-event"
 import { CtxObserver } from "./ctx-observer"
+import { Highlighter } from "./highlighter"
 import { Env } from "../env"
 import { Value } from "../value"
 import { ExpTrace } from "../errors"
 import { readback } from "../value"
 import * as Exps from "../exps"
 import * as ut from "../../ut"
-
-export type Highlighter = {
-  highlight(tag: string, text: string): string
-}
 
 export type CtxOptions = {
   observers: Array<CtxObserver>
