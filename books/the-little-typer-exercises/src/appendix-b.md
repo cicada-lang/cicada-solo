@@ -144,7 +144,7 @@ A the-expression is the same as its second argument.
 
 ```
 the_same(ctx, X, exp1, exp2)
------------------------------------- [the same]
+------------------------------------ [the_same]
 the_same(ctx, X, the(X, exp1), exp2)
 ```
 
@@ -158,7 +158,7 @@ the_same(ctx, X, the(X, exp1), exp2) {
 
 # Categories of inference rules
 
-Aside from [The], [Switch], and one of the rules for `Type`,
+Aside from [the], [switch], and one of the rules for `Type`,
 the rules fall into one of a few categories:
 
 1. *formation rules*, which describe the conditions under which an expression is a type;
@@ -170,10 +170,23 @@ the rules fall into one of a few categories:
 
 # Sameness
 
-TODO
+It is important to remember that
+rules whose conclusions are sameness judgments
+are *specifications* for a normalization algorithm,
+rather than a description of the algorithm itself.
 
-A sameness rule is a specification for the normalization algorithm,
-not a implementation of the normalization algorithm.
+```
+the_same(ctx, X, exp2, exp1)
+---------------------------- [same_symm]
+the_same(ctx, X, exp1, exp2)
+```
+
+```
+the_same(ctx, X, exp1, exp2)
+the_same(ctx, X, exp2, exp3)
+---------------------------- [same_trans]
+the_same(ctx, X, exp1, exp3)
+```
 
 # Variables
 
@@ -190,7 +203,7 @@ infer(ctx, x) ~> the(X, x)
 
 ```
 lookup(ctx, x) ~> X
------------------------- [hypothesis same]
+------------------------ [hypothesis_same]
 the_same(ctx, X, x, x)
 ```
 
