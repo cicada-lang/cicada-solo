@@ -24,4 +24,15 @@ export class ReplaceNeutral extends Neutral {
       this.base.readback_normal(ctx)
     )
   }
+
+  unify(solution: Solution, that: Neutral): Solution {
+    if (that instanceof ReplaceNeutral) {
+      return solution
+        .unify_neutral(this.target, that.target)
+        .unify_normal(this.motive, that.motive)
+        .unify_normal(this.base, that.base)
+    } else {
+      return Solution.failure
+    }
+  }
 }
