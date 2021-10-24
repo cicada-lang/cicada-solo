@@ -2,7 +2,6 @@ import { Book } from "../book"
 import { Config } from "../config"
 import { AppReplEventHandler } from "./app-repl-event-handler"
 import { customAlphabet } from "nanoid"
-import * as CtxObservers from "../lang/ctx/ctx-observers"
 import { CtxEvent, SimpleHighlighter, SimpleCtxObserver } from "../lang/ctx"
 import * as ut from "../ut"
 
@@ -12,9 +11,20 @@ export class GenericApp {
   config = new Config()
 
   createCtxObserver = SimpleCtxObserver.create
-  defaultCtxObservers = [new CtxObservers.ConsoleNarrator()]
+
+  defaultCtxObservers = [
+    this.createCtxObserver({
+      receive: (event) => {
+        if (event.tag === "narration") {
+          console.log(event.msg)
+          console.log()
+        }
+      },
+    }),
+  ]
 
   createHighlighter = SimpleHighlighter.create
+
   defaultHighlighter = this.createHighlighter({
     highlight: (tag, text) => {
       switch (tag) {
