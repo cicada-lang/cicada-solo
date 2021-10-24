@@ -10,10 +10,6 @@
 - `Neutral.unify` -- `vector/vector-tail-neutral`
 - `Neutral.unify` -- `either/either-ind-neutral`
 
-- [stdlib] try implicit argument in `stdlib`
-
-  - `category/implicit`
-
 # narration
 
 - `exps/elaborate` -- narration

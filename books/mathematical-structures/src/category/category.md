@@ -162,7 +162,6 @@ they had to define categories.
 from the category of topology spaces
 to the category of abelian-groups.)
 
-
 ``` cicada
 class NaturalTransformation {
   dom: Category

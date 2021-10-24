@@ -62,15 +62,23 @@ export class BaseImPiValue extends Exps.ImPiValue {
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = expect(ctx, this.ret_t_cl.apply(not_yet_value), Exps.PiValue)
     const inferred_arg = infer(ctx, arg)
+    const solution = Solution.empty.unify_or_fail(
+      ctx,
+      ret_t.arg_t,
+      inferred_arg.t
+    )
+
+    // prettier-ignore
     // {
     //   // DEBUG
     //   console.log("solving")
     //   console.log("  this  pi arg_t:", readback(ctx, new Exps.TypeValue, ret_t.arg_t).repr())
     //   console.log("  inferred arg.t:", readback(ctx, new Exps.TypeValue, inferred_arg.t).repr())
-    //   console.log("  solved names:", Solution.empty.unify_or_fail(ctx, ret_t.arg_t, inferred_arg.t).names)
+    //   console.log("  solved names:", solution.names)
     //   console.log()
     // }
-    return Solution.empty.unify_or_fail(ctx, ret_t.arg_t, inferred_arg.t)
+
+    return solution
   }
 
   insert_im_ap(
