@@ -148,6 +148,8 @@
 
 - `@elab` support `@elab(<name>, <exp>)`
 
+  - maybe use this to fix repeated output of `@elab`
+
 - narration for the computation rules
 
   - eta rule & sameness rule
