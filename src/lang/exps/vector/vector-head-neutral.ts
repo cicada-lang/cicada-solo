@@ -22,5 +22,5 @@ export class VectorHeadNeutral extends Neutral {
     } else {
       return Solution.failure
     }
-  } 
+  }
 }
