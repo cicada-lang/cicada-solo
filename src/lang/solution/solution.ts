@@ -1,5 +1,7 @@
 import { Ctx } from "../ctx"
 import { Value, readback } from "../value"
+import { Neutral } from "../neutral"
+import { Normal } from "../normal"
 import { Core } from "../core"
 import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
@@ -108,6 +110,14 @@ export abstract class Solution {
       //   the case where the argument is a logic variable is already handled.
       return x.unify(this, y)
     }
+  }
+
+  unify_neutral(x: Neutral, y: Neutral): Solution {
+    return x.unify(this, y)
+  }
+
+  unify_normal(x: Normal, y: Normal): Solution {
+    return x.unify(this, y)
   }
 
   unify_or_fail(ctx: Ctx, left: Value, right: Value): Solution {

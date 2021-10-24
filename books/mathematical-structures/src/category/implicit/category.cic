@@ -1,46 +1,46 @@
-// class Category {
-//   Object: Type
-//   Morphism(dom: Object, cod: Object): Type
-//   id(x: Object): Morphism(x, x)
+class Category {
+  Object: Type
+  Morphism(dom: Object, cod: Object): Type
+  id(x: Object): Morphism(x, x)
 
-//   compose(
-//     implicit {
-//       x: Object,
-//       y: Object,
-//       z: Object,
-//     },
-//     f: Morphism(x, y),
-//     g: Morphism(y, z),
-//   ): Morphism(x, z)
+  compose(
+    implicit {
+      x: Object,
+      y: Object,
+      z: Object,
+    },
+    f: Morphism(x, y),
+    g: Morphism(y, z),
+  ): Morphism(x, z)
 
-//   id_left(
-//     implicit {
-//       x: Object,
-//       y: Object,
-//     },
-//     f: Morphism(x, y)
-//   ): Equal(Morphism(x, y), compose(id(x), f), f)
+  id_left(
+    implicit {
+      x: Object,
+      y: Object,
+    },
+    f: Morphism(x, y)
+  ): Equal(Morphism(x, y), compose(id(x), f), f)
 
-//   id_right(
-//     implicit {
-//       x: Object,
-//       y: Object,
-//     },
-//     f: Morphism(x, y),
-//   ): Equal(Morphism(x, y), compose(f, id(y)), f)
+  // id_right(
+  //   implicit {
+  //     x: Object,
+  //     y: Object,
+  //   },
+  //   f: Morphism(x, y),
+  // ): Equal(Morphism(x, y), compose(f, id(y)), f)
 
-//   compose_associative(
-//     implicit {
-//       x: Object,
-//       y: Object,
-//       w: Object,
-//       z: Object,
-//     },
-//     f: Morphism(x, y),
-//     g: Morphism(y, z),
-//     h: Morphism(z, w),
-//   ): Equal(
-//     Morphism(x, w),
-//     compose(f, compose(g, h)),
-//     compose(compose(f, g), h))
-// }
+  // compose_associative(
+  //   implicit {
+  //     x: Object,
+  //     y: Object,
+  //     w: Object,
+  //     z: Object,
+  //   },
+  //   f: Morphism(x, y),
+  //   g: Morphism(y, z),
+  //   h: Morphism(z, w),
+  // ): Equal(
+  //   Morphism(x, w),
+  //   compose(f, compose(g, h)),
+  //   compose(compose(f, g), h))
+}

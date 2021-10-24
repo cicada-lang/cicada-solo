@@ -1,6 +1,6 @@
 # implicit
 
-- [refactor] `unify` of `Value`, `Neutral` and `Normal`
+- Value.unify -- not-yet-value.ts
 
 - `not-yet-value ` -- fix `unify`
 
@@ -96,8 +96,6 @@
   - typed directed `unify`
   - bidirectional `unify`
   - handle eta-expansion in `unify`
-
-- Value.unify -- not-yet-value.ts
 
 - Value.unify -- cls/nil-cls-value.ts
 - Value.unify -- cls/cls-value.ts
