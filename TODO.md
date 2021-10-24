@@ -1,7 +1,5 @@
 # implicit
 
-- `Neutral.unify` -- `pi/ap-neutral`
-
 - `Neutral.unify` -- `absurd/absurd-ind-neutral`
 - `Neutral.unify` -- `cls/dot-neutral`
 - `Neutral.unify` -- `sigma/cdr-neutral`

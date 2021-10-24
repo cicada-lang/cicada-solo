@@ -21,7 +21,7 @@ export class TodoNeutral extends Neutral {
   }
 
   unify(solution: Solution, that: Neutral): Solution {
-    if (that instanceof Exps.TodoNeutral) {
+    if (that instanceof TodoNeutral) {
       return solution.unify(this.t, that.t)
     } else {
       return Solution.failure
