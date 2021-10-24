@@ -1,3 +1,5 @@
+- extract `highlighter` module
+
 # narration
 
 - `exps/elaborate` -- narration

@@ -1,24 +1,11 @@
+import { CtxEvent } from "./ctx-event"
+import { CtxObserver } from "./ctx-observer"
 import { Env } from "../env"
 import { Value } from "../value"
 import { ExpTrace } from "../errors"
 import { readback } from "../value"
 import * as Exps from "../exps"
 import * as ut from "../../ut"
-
-export type CtxEvent = { tag: string; msg: string }
-
-export abstract class CtxObserver {
-  abstract receive(event: CtxEvent): void
-}
-
-export class SimpleCtxObserver extends CtxObserver {
-  receive: (event: CtxEvent) => void
-
-  constructor(opts: { receive: (event: CtxEvent) => void }) {
-    super()
-    this.receive = opts.receive
-  }
-}
 
 export type Highlighter = {
   highlight(tag: string, text: string): string

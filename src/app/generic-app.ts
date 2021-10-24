@@ -13,11 +13,7 @@ export class GenericApp {
 
   defaultCtxObservers = [new CtxObservers.NarrationLogger()]
 
-  createCtxObserver(opts: {
-    receive: (event: CtxEvent) => void
-  }): SimpleCtxObserver {
-    return new SimpleCtxObserver(opts)
-  }
+  createCtxObserver = SimpleCtxObserver.create
 
   defaultHighlighter: Highlighter = {
     highlight: (tag, text) => {
