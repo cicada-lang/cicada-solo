@@ -54,13 +54,30 @@ ind_nat_t = (
 ) -> motive(target)
 ```
 
-Suppose we have `induction (target, motive) { ... }`.
+Suppose we have `induction (motive) { ... }`.
 
 ``` cicada not-yet
-induction (target, motive) {
+induction (motive) {
   case zero => ...
   case add1(prev) (almost_on_prev) => ...
 }
+```
+
+Maybe we should use curried version,
+to emphasize the result of induction proof is of the form "forall".
+
+``` cicada
+curry_ind_nat_t = (
+  motive: (Nat) -> Type,
+  // NOTE [hypothesis cases]
+  //   One case one callback,
+  //   which take all constructor arguments.
+  case_zero: motive(zero),
+  case_add1: (
+    prev: Nat,
+    almost_on_prev: motive(prev),
+  ) -> motive(add1(prev)),
+) -> (target: Nat) -> motive(target)
 ```
 
 ## List
@@ -88,8 +105,23 @@ ind_list_t = (
 ) -> motive(target)
 ```
 
+``` cicada
+curry_ind_list_t = (
+  implicit { E: Type },
+  motive: (List(E)) -> Type,
+  case_nil: motive(nil),
+  // NOTE [hypothesis almost]
+  //   One recursive occurrence of the defined type one almost for case,
+  //   whose type is the `motive` applied to the recursive occurrence parameter.
+  case_li: (
+    head: E, tail: List(E),
+    almost_on_tail: motive(tail),
+  ) -> motive(li(head, tail)),
+) -> (target: List(E)) -> motive(target)
+```
+
 ``` cicada not-yet
-induction (target, motive) {
+induction (motive) {
   case nil => ...
   case li(head, tail) (almost_on_tail) => ...
 }
@@ -132,6 +164,28 @@ vector_ind_t: Type = (
 ) -> motive(length, target)
 ```
 
+``` cicada
+curry_vector_ind_t: Type = (
+  // NOTE parameters
+  implicit { E: Type },
+  motive: (
+    length: Nat,
+    target: Vector(E, length),
+  ) -> Type,
+  case_vecnil: motive(0, vecnil),
+  case_vec: (
+    head: E,
+    implicit { prev: Nat },
+    tail: Vector(E, prev),
+    almost_on_tail: motive(prev, tail),
+  ) -> motive(add1(prev), vec(head, tail)),
+) -> (
+  // NOTE indices
+  implicit { length: Nat },
+  target: Vector(E, length),
+) -> motive(length, target)
+```
+
 ## Either
 
 ``` cicada not-yet
@@ -151,8 +205,17 @@ either_ind_t = (
 ) -> motive(target)
 ```
 
+``` cicada
+curry_either_ind_t = (
+  implicit { L: Type, R: Type },
+  motive: (Either(L, R)) -> Type,
+  case_inl: (left: L) -> motive(inl(left)),
+  case_inr: (right: R) -> motive(inr(right)),
+) -> (target: Either(L, R)) -> motive(target)
+```
+
 ``` cicada not-yet
-induction (target, motive) {
+induction (motive) {
   case inl(left) => ...
   case inr(right) => ...
 }
@@ -196,10 +259,22 @@ ind_less_than_t = (
     almost_on_prev_smaller: motive(j, k, prev_smaller),
   ) -> motive(add1(j), add1(k), add1_smaller(j, k, prev_smaller)),
 ) -> motive(j, k, target)
+
+curry_ind_less_than_t = (
+  motive: (j: Nat, k: Nat, LessThan(j, k)) -> Type,
+  case_zero_smallest: (n: Nat) -> motive(zero, add1(n), zero_smallest(n)),
+  case_add1_smallest: (
+    j: Nat, k: Nat, prev_smaller: LessThan(j, k),
+    almost_on_prev_smaller: motive(j, k, prev_smaller),
+  ) -> motive(add1(j), add1(k), add1_smaller(j, k, prev_smaller)),
+) -> (
+  implicit { j: Nat, k: Nat },
+  target: LessThan(j, k),
+) -> motive(j, k, target)
 ```
 
 ``` cicada not-yet
-induction (target, motive) {
+induction (motive) {
   case zero_smallest(n) => ...
   case add1_smaller(j, k, prev_smaller) (almost_on_prev_smaller) => ...
 }
