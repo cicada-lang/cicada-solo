@@ -141,6 +141,9 @@
   - https://en.wikipedia.org/wiki/Mathematical_induction#Infinite_descent
   - https://en.wikipedia.org/wiki/Proof_by_infinite_descent
 
+- [book] formalize complete induction as a consequence of induction on natural number:
+  - https://en.wikipedia.org/wiki/Mathematical_induction#Complete_(strong)_induction
+
 - [books] Algebraic structures -- https://en.wikipedia.org/wiki/Algebraic_structure
 - [books] Lattice theory
 - [books] Closure system -- for FCA
