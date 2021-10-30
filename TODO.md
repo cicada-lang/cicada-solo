@@ -177,11 +177,16 @@
 
 # bug
 
+- [bug] `11.md` -- the socpe of implicit argument `length` is wrong
+
+  - if we move definition of `our_vector_ind` after `import { length } ...`,
+    lexical scope will fail.
+
 - [bug] fix input two lines of error expressions in REPL
 
 - [bug] fix type check error report on wrong number of elements
 
-  in `ch07.md`:
+  in `07.md`:
 
   ``` cicada
   drop_last(String, 3, vec! ["1", "2", "3", "LAST"])
