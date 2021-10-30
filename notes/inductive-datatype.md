@@ -23,7 +23,12 @@ title: Inductive datatype
 
 [Mathematical induction]: https://en.wikipedia.org/wiki/Mathematical_induction
 
-# 例子
+# Mathematical induction in constructive
+
+The informations provided to induction eliminator,
+allow us to construct proofs of the motive for any element of the type.
+
+# Examples
 
 ## Nat
 
