@@ -53,7 +53,7 @@ export class Var extends Exp {
         `Given the variable ${name},`,
         `I look up the context to find its type.`,
         `The lookup succeeds with type ${t_repr},`,
-        `thus I infer its type to be ${t_repr},`,
+        `thus I infer its type to be this type,`,
         `and elaborate the variable to ${core_repr}.`,
       ])
     }
