@@ -177,7 +177,7 @@
 
 # bug
 
-- `Book` -- the use of cached modules in `Book.load` is not safe in concurrent environment
+- [bug] fix input two lines of error expressions in REPL
 
 - [bug] fix type check error report on wrong number of elements
 
@@ -187,6 +187,8 @@
   drop_last(String, 3, vec! ["1", "2", "3", "LAST"])
   drop_last(String, 3, vec! ["1", "2", "LAST"])
   ```
+
+- `Book` -- the use of cached modules in `Book.load` is not safe in concurrent environment
 
 # maybe
 
