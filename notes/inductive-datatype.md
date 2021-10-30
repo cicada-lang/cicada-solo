@@ -189,7 +189,7 @@ ind_less_than_t = (
   case_add1_smallest: (
     j: Nat, k: Nat, prev_smaller: LessThan(j, k),
     almost_on_prev_smaller: motive(j, k, prev_smaller),
-  ) -> motive(add1(j), add1(k), prev_smaller),
+  ) -> motive(add1(j), add1(k), add1_smaller(j, k, prev_smaller)),
 ) -> motive(j, k, target)
 ```
 
