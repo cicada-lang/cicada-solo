@@ -49,6 +49,15 @@ ind_nat_t = (
 ) -> motive(target)
 ```
 
+Suppose we have `induction (target, motive) { ... }`.
+
+``` cicada not-yet
+induction (target, motive) {
+  case zero => ...
+  case add1(prev) (almost_on_prev) => ...
+}
+```
+
 ## List
 
 ``` cicada not-yet
@@ -72,6 +81,13 @@ ind_list_t = (
     almost_on_tail: motive(tail),
   ) -> motive(li(head, tail)),
 ) -> motive(target)
+```
+
+``` cicada not-yet
+induction (target, motive) {
+  case nil => ...
+  case li(head, tail) (almost_on_tail) => ...
+}
 ```
 
 ## Vector
@@ -114,15 +130,72 @@ vector_ind_t: Type = (
 ## Either
 
 ``` cicada not-yet
+datatype Either(L, R) {
+  inl(left: L): Either(L, R)
+  inr(right: R): Either(L, R)
+}
 ```
 
 ``` cicada
+either_ind_t = (
+  implicit { L: Type, R: Type },
+  target: Either(L, R),
+  motive: (Either(L, R)) -> Type,
+  case_inl: (left: L) -> motive(inl(left)),
+  case_inr: (right: R) -> motive(inr(right)),
+) -> motive(target)
+```
+
+``` cicada not-yet
+induction (target, motive) {
+  case inl(left) => ...
+  case inr(right) => ...
+}
 ```
 
 ## LessThan
 
 ``` cicada not-yet
+datatype LessThan(j: Nat, k: Nat) {
+  zero_smallest: (n: Nat) -> LessThan(zero, add1(n))
+  add1_smaller: (
+    j: Nat, k: Nat,
+    prev_smaller: LessThan(j, k),
+  ) -> LessThan(add1(j), add1(k))
+}
 ```
 
 ``` cicada
+LessThan(j: Nat, k: Nat): Type {
+  @TODO "LessThan"
+}
+
+zero_smallest(n: Nat): LessThan(zero, add1(n)) {
+  @TODO "zero_smallest"
+}
+
+add1_smaller(
+  j: Nat, k: Nat,
+  prev_smaller: LessThan(j, k),
+): LessThan(add1(j), add1(k)) {
+  @TODO "add1_smaller"
+}
+
+ind_less_than_t = (
+  implicit { j: Nat, k: Nat },
+  target: LessThan(j, k),
+  motive: (j: Nat, k: Nat, LessThan(j, k)) -> Type,
+  case_zero_smallest: (n: Nat) -> motive(zero, add1(n), zero_smallest(n)),
+  case_add1_smallest: (
+    j: Nat, k: Nat, prev_smaller: LessThan(j, k),
+    almost_on_prev_smaller: motive(j, k, prev_smaller),
+  ) -> motive(add1(j), add1(k), prev_smaller),
+) -> motive(j, k, target)
+```
+
+``` cicada not-yet
+induction (target, motive) {
+  case zero_smallest(n) => ...
+  case add1_smaller(j, k, prev_smaller) (almost) => ...
+}
 ```
