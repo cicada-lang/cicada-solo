@@ -137,6 +137,10 @@
   - This paper is about the relation between PartialOrder and Lattice.
   - Learn from the story line for teaching.
 
+- [book] formalize infinite descent as a consequence of induction on natural number:
+  - https://en.wikipedia.org/wiki/Mathematical_induction#Infinite_descent
+  - https://en.wikipedia.org/wiki/Proof_by_infinite_descent
+
 - [books] Algebraic structures -- https://en.wikipedia.org/wiki/Algebraic_structure
 - [books] Lattice theory
 - [books] Closure system -- for FCA
