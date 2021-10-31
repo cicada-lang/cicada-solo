@@ -1,5 +1,5 @@
 ---
-title: Implicit function type
+title: Implicit arguments
 ---
 
 # Review rules about non-implicit `Fn` and `Ap`
