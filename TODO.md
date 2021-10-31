@@ -1,14 +1,18 @@
 # inductive datatype
 
-> Inductive type can reduce the number of exps.
+> Inductive type can greatly reduce the number of expressions,
+> after then all other works would be easier.
 
-- [inductive datatype] generate `ind` from `datatype` definitions
+- structural induction as a special case of Noetherian induction
 
-> questions
+- [prepare test] `Nat` as `datatype`
+- [prepare test] `List` as `datatype`
+- [prepare test] `Vector` as `datatype`
+- [prepare test] `Either` as `datatype`
+- [prepare test] `Fin` as `datatype`
+- [prepare test] `LessThan` as `datatype`
 
-- what is the duality between introduction rule and elimination rule?
-  (how to use introduction rule to generate elimination rule and all other rules?)
-  - adjoint functors -- category theory
+- `Stmt.Datatype` -- `datatype` definition
 
 # refactor
 

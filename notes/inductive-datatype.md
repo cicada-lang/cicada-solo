@@ -156,6 +156,9 @@ vector_ind_t: Type = (
   case_vecnil: motive(0, vecnil),
   // NOTE [problem indices in case argument]
   //   Should we make the indices implicit?
+  //   - I think we should make indices implicit,
+  //     because we tried this version of `our_vector_ind` in the little book,
+  //     and it works. it simplified the proofs.
   case_vec: (
     head: E,
     implicit { prev: Nat },
@@ -281,10 +284,10 @@ induction (motive) {
 }
 ```
 
-# Well-founded relation
+# Well-founded relation and Noetherian induction
 
-It seems a generalization of induction is [Well-founded relation][],
-of which the structural induction is a special case.
+It seems a generalization of structural induction is Noetherian induction,
+which depends on the concept of [Well-founded relation][].
 
 [Well-founded relation]: https://en.wikipedia.org/wiki/Well-founded_relation
 
@@ -304,3 +307,9 @@ When `R` is "less than", `(R(s, m)) -> Absurd` reads:
 - `s` greater than or equal to `m`
 - `m` less than or equal to `s`
 - `m` is the minimal element of `S`
+
+# The duality between intro and elim rules and Adjoint functor
+
+How to view the duality between intro and elim rules as a special case of adjoint functor?
+
+TODO
