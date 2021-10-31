@@ -1,3 +1,54 @@
+# inductive datatype
+
+> Inductive type can reduce the number of exps.
+
+- [inductive datatype] generate `ind` from `datatype` definitions
+
+> questions
+
+- what is the duality between introduction rule and elimination rule?
+  (how to use introduction rule to generate elimination rule and all other rules?)
+  - adjoint functors -- category theory
+
+# refactor
+
+- refactor `Module.rerunWith`
+
+  - [bug] fix input two lines of error expressions in REPL
+
+# core features
+
+- support using `=` to do local definitions in class
+
+- `Fn` be able to annotate argument type and return type
+
+# use `unify` to replace `readback`
+
+- Value.unify -- pi/fn-value.ts & pi/im-fn-value.ts
+
+  - typed directed `unify`
+  - bidirectional `unify`
+  - handle eta-expansion in `unify`
+
+- Value.unify -- cls/nil-cls-value.ts
+- Value.unify -- cls/cls-value.ts
+- Value.unify -- cls/cons-cls-value.ts
+- Value.unify -- cls/obj-value.ts
+- Value.unify -- cls/fulfilled-cls-value.ts
+
+- `Subst.unify` occur check -- use `free_names`
+
+# subtype
+
+- `check` use `subtype` instead of `conversion`
+  - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
+  - `subtype` function default to `conversion`
+  - `Value.subtype` call `subtype` for recursion
+
+- when we do a typed binding, we need to be able to refine the declared type
+  - this is specially needed for `<var>: <fulfilled class> = <object>`
+  - this must also recurse into the structure of nested class and object, maybe even for pi type
+
 # narration
 
 - `exps/elaborate` -- narration
@@ -68,55 +119,6 @@
 
 - `exps/trivial/sole` -- narration
 - `exps/trivial/trivial` -- narration
-
-# refactor
-
-- refactor `Module.rerunWith`
-
-# core features
-
-- support using `=` to do local definitions in class
-
-- `Fn` be able to annotate argument type and return type
-
-# use `unify` to replace `readback`
-
-- Value.unify -- pi/fn-value.ts & pi/im-fn-value.ts
-
-  - typed directed `unify`
-  - bidirectional `unify`
-  - handle eta-expansion in `unify`
-
-- Value.unify -- cls/nil-cls-value.ts
-- Value.unify -- cls/cls-value.ts
-- Value.unify -- cls/cons-cls-value.ts
-- Value.unify -- cls/obj-value.ts
-- Value.unify -- cls/fulfilled-cls-value.ts
-
-- `Subst.unify` occur check -- use `free_names`
-
-# subtype
-
-- `check` use `subtype` instead of `conversion`
-  - `subtype` should be implemented as a `subtype` function and `Value.subtype` method
-  - `subtype` function default to `conversion`
-  - `Value.subtype` call `subtype` for recursion
-
-- when we do a typed binding, we need to be able to refine the declared type
-  - this is specially needed for `<var>: <fulfilled class> = <object>`
-  - this must also recurse into the structure of nested class and object, maybe even for pi type
-
-# inductive datatype
-
-> Inductive type can reduce the number of exps.
-
-- [inductive datatype] generate `ind` from `datatype` definitions
-
-> questions
-
-- what is the duality between introduction rule and elimination rule?
-  (how to use introduction rule to generate elimination rule and all other rules?)
-  - adjoint functors -- category theory
 
 # quotient type
 
@@ -190,8 +192,6 @@
 
   - if we move definition of `our_vector_ind` after `import { length } ...`,
     lexical scope will fail.
-
-- [bug] fix input two lines of error expressions in REPL
 
 - [bug] fix type check error report on wrong number of elements
 
