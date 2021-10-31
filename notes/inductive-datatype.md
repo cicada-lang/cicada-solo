@@ -279,3 +279,27 @@ induction (motive) {
   case add1_smaller(j, k, prev_smaller) (almost_on_prev_smaller) => ...
 }
 ```
+
+# Well-founded relation
+
+It seems a generalization of induction is [Well-founded relation][],
+of which the structural induction is a special case.
+
+[Well-founded relation]: https://en.wikipedia.org/wiki/Well-founded_relation
+
+``` cicada not-yet
+class WellFounded {
+  X: Set
+  R(X, X): Type
+  minimal_element(
+    S <: X, NotEmpty(S),
+  ): (m: S) * (s: S) -> (R(s, m)) -> Absurd
+}
+```
+
+When `R` is "less than", `(R(s, m)) -> Absurd` reads:
+
+- `s` not less than `m`
+- `s` greater than or equal to `m`
+- `m` less than or equal to `s`
+- `m` is the minimal element of `S`
