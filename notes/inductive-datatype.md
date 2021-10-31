@@ -329,39 +329,64 @@ But we do not yet have `<:`.
 
 Maybe we can view a property over `X` as a subset of `X`.
 
-We also need to describe `NonEmpty` property:
+We also need to describe `NonEmptyProperty`:
 
 ``` cicada
-NonEmpty(implicit { X: Type }, P: (X) -> Type): Type {
+NonEmptyProperty(implicit { X: Type }, P: (X) -> Type): Type {
   (x: X) * P(x)
-}
-
-class Subset {
-  X: Type
-  P: (X) -> Type
-  element: X
-  property: P(element)
 }
 
 class WellFounded {
   X: Type
   Relation(X, X): Type
-  minimal(P: (X) -> Type, NonEmpty(P)): class {
+  minimal(P: (X) -> Type, NonEmptyProperty(P)): class {
     element: X,
     property: P(element)
   }
   minimality(
-    P: (X) -> Type, non_empty_ness: NonEmpty(P),
+    P: (X) -> Type, non_empty_property: NonEmptyProperty(P),
     s: X, P(s),
-  ): Not(Relation(s, minimal(P, non_empty_ness).element))
+  ): Not(Relation(s, minimal(P, non_empty_property).element))
 
   // TODO [bug] The following wrong definition of `minimality` will throw
   //   RangeError: Invalid string length
   //       at JSON.stringify (<anonymous>)
   // minimality(
-  //   P: (X) -> Type, NonEmpty(P),
+  //   P: (X) -> Type, NonEmptyProperty(P),
   //   s: X, P(s),
   // ): Not(Relation(s, minimal(P).element))
+}
+```
+
+Maybe we should abstract `Subset` and `NonEmptySubset` first:
+
+``` cicada
+class Subset {
+  X: Type
+  Property: (X) -> Type
+  element: X
+  element_included: Property(element)
+}
+
+class NonEmptySubset {
+  X: Type
+  Property: (X) -> Type
+
+  exists_element: X
+  exists_element_included: Property(exists_element)
+
+  element: X
+  element_included: Property(element)
+}
+
+class WellFounded2 {
+  X: Type
+  Relation(X, X): Type
+  minimal(S: NonEmptySubset(X)): NonEmptySubset(X, S.Property)
+  minimality(
+    S: NonEmptySubset(X),
+    s: NonEmptySubset(X, S.Property),
+  ): Not(Relation(s.element, minimal(S).element))
 }
 ```
 
@@ -396,13 +421,17 @@ Can you explain the intuition of Noetherian induction as a deduction rule?
 
 TODO
 
-Can you view structural induction as a special case of Noetherian induction?
+Can you view *structural induction* as a special case of Noetherian induction?
 
-Maybe we should try the usual mathematical induction first:
+Maybe we should try the usual *mathematical induction* first:
 
 TODO
 
-Now view structural induction as a special case of Noetherian induction.
+And we also should try *complete induction*, before we goes on:
+
+TODO
+
+Now view *structural induction* as a special case of Noetherian induction.
 
 TODO
 
