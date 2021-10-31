@@ -311,12 +311,18 @@ class WellFounded {
 }
 ```
 
-When `R` is "less than", `(R(s, m)) -> Absurd` reads:
+When `R` is "less than",
+`R(s, m)` reads "s less than m",
+and `(R(s, m)) -> Absurd` reads:
 
 - `s` not less than `m`
 - `s` greater than or equal to `m`
 - `m` less than or equal to `s`
 - `m` is the minimal element of `S`
+
+If minimal element exists,
+there is no infinite sequence `x0, x1, x2, ...` of elements of `X`,
+such that `x0 > x1 > x2 > ...`
 
 # The duality between intro and elim rules and Adjoint functor
 
