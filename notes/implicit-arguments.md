@@ -1,5 +1,6 @@
 ---
 title: Implicit arguments
+author: Xie Yuheng
 ---
 
 # Review rules about non-implicit `Fn` and `Ap`

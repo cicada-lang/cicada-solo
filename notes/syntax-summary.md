@@ -4,10 +4,10 @@ title: Syntax Summary
 
 # stmts
 
-def:
-- def name = exp
-- def name: t = exp
-- def name(arg: arg_t, ...): ret_t = exp
+define:
+- name = exp
+- name: t = exp
+- name(arg: arg_t, ...): ret_t = exp
 
 show:
 - exp
