@@ -24,9 +24,7 @@ is to generate `ind`s type, and the type can be read as [Mathematical induction]
 
 - What about non strict positive recursions? How will them read like?
 
-# Mathematical induction in constructive
-
-The informations provided to induction eliminator,
+Also note that the informations provided to induction eliminator,
 allow us to construct proofs of the motive for any element of the type.
 
 # Examples
