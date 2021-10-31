@@ -403,6 +403,7 @@ and `(Relation(s, m)) -> Absurd` reads:
 
 If minimal element exists,
 there is no infinite sequence `x0, x1, x2, ...` of elements of `X`,
+
 such that `x0 > x1 > x2 > ...`
 
 Now! Noetherian induction!
@@ -418,6 +419,11 @@ noetherian_induction_t = (
   ) -> motive(x),
 ) -> (target: X) -> motive(target)
 ```
+
+Seeing how Noether can observe the general pattern of induction,
+and make a beautiful abstraction to capture the essence of the concept,
+just like a seasoned programmer, who has a lot of experience in the domain,
+designing a beautiful API.
 
 Can you explain the intuition of Noetherian induction as a deduction rule?
 
