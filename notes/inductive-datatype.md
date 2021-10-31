@@ -301,7 +301,7 @@ induction (motive) {
 
 # Well-founded relation and Noetherian induction
 
-It seems a generalization of structural induction is Noetherian induction,
+It seems a generalization of structural induction is *Noetherian induction*,
 which depends on the concept of [Well-founded relation][].
 
 [Well-founded relation]: https://en.wikipedia.org/wiki/Well-founded_relation
@@ -329,15 +329,15 @@ But let's move forward anyways, and use `<:` to denotes non-empty subset.
 ``` cicada not-yet
 class WellFounded {
   X: Type
-  R(X, X): Type
+  relation(X, X): Type
   minimal(S <: X): S
-  minimality(S <: X): (s: S) -> Not(R(s, minimal))
+  minimality(S <: X): (s: S) -> Not(relation(s, minimal))
 }
 ```
 
-When `R` is "less than",
-`R(s, m)` reads "s less than m",
-and `(R(s, m)) -> Absurd` reads:
+When `relation` is "less than",
+`relation(s, m)` reads "s less than m",
+and `(relation(s, m)) -> Absurd` reads:
 
 - `s` not less than `m`
 - `s` greater than or equal to `m`
@@ -347,6 +347,31 @@ and `(R(s, m)) -> Absurd` reads:
 If minimal element exists,
 there is no infinite sequence `x0, x1, x2, ...` of elements of `X`,
 such that `x0 > x1 > x2 > ...`
+
+Let's prepare a fake `WellFounded`:
+
+``` cicada
+class WellFounded {
+  X: Type
+  relation(X, X): Type
+  // minimal(S <: X): S
+  // minimality(S <: X): (s: S) -> Not(relation(s, minimal))
+}
+```
+
+Now! Noetherian induction!
+
+``` cicada
+noetherian_induction_t = (
+  implicit { X: Type },
+  well_founded: WellFounded(X),
+  motive: (X) -> Type,
+  step: (
+    x: X, y: X,
+    (well_founded.relation(y, x)) -> motive(y),
+  ) -> motive(x),
+) -> (target: X) -> motive(target)
+```
 
 # The duality between intro and elim rules and Adjoint functor
 
