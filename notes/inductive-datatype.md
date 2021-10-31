@@ -320,14 +320,18 @@ NonEmptySubset(X: Type): Type {
 
 Even with the preparation above,
 we still can not yet define `WellFounded`,
-but let's move forward anyways.
+because even if we define `NonEmptySubset`,
+and say `S: NonEmptySubset(X)`,
+we can not use `S` as a `Type`.
+
+But let's move forward anyways, and use `<:` to denotes non-empty subset.
 
 ``` cicada not-yet
 class WellFounded {
   X: Type
   R(X, X): Type
-  minimal(S: NonEmptySubset(X)): S
-  minimality(S: NonEmptySubset(X)): (s: S) -> Not(R(s, minimal))
+  minimal(S <: X): S
+  minimality(S <: X): (s: S) -> Not(R(s, minimal))
 }
 ```
 
