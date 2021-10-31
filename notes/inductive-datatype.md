@@ -419,7 +419,7 @@ noetherian_induction_t = (
 
 Can you explain the intuition of Noetherian induction as a deduction rule?
 
-TODO
+- Maybe it is about the finiteness guaranteed by well-founded-ness?
 
 Can you view *structural induction* as a special case of Noetherian induction?
 
