@@ -2,26 +2,27 @@
 title: Inductive datatype
 ---
 
-# Note
+# Intro
 
-已有的 inductive type 是什么？
-如果把它们写成 data 的定义，会是什么样的？
+- What inductive datatypes we already have?
+- How will they look like, if we write them as `datatype` definitions?
+- Can we from a general abstraction from these examples?
+- Can we from some hypotheses from these examples?
 
-尝试从这些例子里形成假说，做抽象，以求一个一般规则。
+Instead of learning about how to implement inductive datatype from a book a paper,
+take it as a mathematical research practice will be more fun.
 
-与其去看教科书中如何实现 inductive type，
-自己去研究的过程要有价值的多。
+Just like Alain Connes said about "mathematician's wake"?
 
-阿兰 孔涅（Alain Connes）所说的「数学家的觉醒」。
+See Euler, we will find that his mathematics is all about
+the art of inductive reasoning and discovering pattern.
 
-看欧拉的数学，就会发现，他所表达的，正是这种发现模式以及归纳的艺术。
-
-其实，生成 ind 就是生成 ind 的 type，
-而 ind 的 type 读出来就是对所定义的 data 的[数学归纳法][Mathematical induction]。
-所以我们可以尝试不是 strict positive 的 inductive type，
-看看为什么读为数学归纳法的时候会失败。
+Remember that, to generate the eliminator `ind` from constructors,
+is to generate `ind`s type, and the type can be read as [Mathematical induction][].
 
 [Mathematical induction]: https://en.wikipedia.org/wiki/Mathematical_induction
+
+- What about non strict positive recursions? How will them read like?
 
 # Mathematical induction in constructive
 
