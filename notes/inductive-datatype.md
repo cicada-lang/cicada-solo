@@ -336,6 +336,13 @@ NonEmpty(implicit { X: Type }, P: (X) -> Type): Type {
   (x: X) * P(x)
 }
 
+class Subset {
+  X: Type
+  P: (X) -> Type
+  element: X
+  property: P(element)
+}
+
 class WellFounded {
   X: Type
   Relation(X, X): Type
@@ -344,9 +351,17 @@ class WellFounded {
     property: P(element)
   }
   minimality(
-    P: (X) -> Type, NonEmpty(P),
+    P: (X) -> Type, non_empty_ness: NonEmpty(P),
     s: X, P(s),
-  ): Not(Relation(s, minimal(P).element))
+  ): Not(Relation(s, minimal(P, non_empty_ness).element))
+
+  // TODO [bug] The following wrong definition of `minimality` will throw
+  //   RangeError: Invalid string length
+  //       at JSON.stringify (<anonymous>)
+  // minimality(
+  //   P: (X) -> Type, NonEmpty(P),
+  //   s: X, P(s),
+  // ): Not(Relation(s, minimal(P).element))
 }
 ```
 
