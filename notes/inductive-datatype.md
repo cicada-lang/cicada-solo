@@ -33,7 +33,7 @@ allow us to construct proofs of the motive for any element of the type.
 
 ## Nat
 
-``` cicada wishful
+``` cicada wishful-thinking
 datatype Nat {
   zero: Nat
   add1(prev: Nat): Nat
@@ -58,7 +58,7 @@ ind_nat_t = (
 
 Suppose we have `induction (motive) { ... }`.
 
-``` cicada wishful
+``` cicada wishful-thinking
 induction (motive) {
   case zero => ...
   case add1(prev) (almost_on_prev) => ...
@@ -81,7 +81,7 @@ curried_ind_nat_t = (
 
 ## List
 
-``` cicada wishful
+``` cicada wishful-thinking
 datatype List(E: Type) {
   nil: List(E)
   li(head: E, tail: List(E)): List(E)
@@ -118,7 +118,7 @@ curried_ind_list_t = (
 ) -> (target: List(E)) -> motive(target)
 ```
 
-``` cicada wishful
+``` cicada wishful-thinking
 induction (motive) {
   case nil => ...
   case li(head, tail) (almost_on_tail) => ...
@@ -127,7 +127,7 @@ induction (motive) {
 
 ## Vector
 
-``` cicada wishful
+``` cicada wishful-thinking
 datatype Vector(E: Type, length: Nat) {
   vecnil: Vector(E, zero)
   vec(head: E, tail: Vector(E, prev)): Vector(E, zero)
@@ -200,7 +200,7 @@ curried_vector_ind_t: Type = (
 
 ## Either
 
-``` cicada wishful
+``` cicada wishful-thinking
 datatype Either(L, R) {
   inl(left: L): Either(L, R)
   inr(right: R): Either(L, R)
@@ -226,7 +226,7 @@ curried_either_ind_t = (
 ) -> (target: Either(L, R)) -> motive(target)
 ```
 
-``` cicada wishful
+``` cicada wishful-thinking
 induction (motive) {
   case inl(left) => ...
   case inr(right) => ...
@@ -235,7 +235,7 @@ induction (motive) {
 
 ## LessThan
 
-``` cicada wishful
+``` cicada wishful-thinking
 datatype LessThan(j: Nat, k: Nat) {
   zero_smallest: (n: Nat) -> LessThan(zero, add1(n))
   add1_smaller: (
@@ -294,7 +294,7 @@ curried_ind_less_than_t = (
 ) -> motive(j, k, target)
 ```
 
-``` cicada wishful
+``` cicada wishful-thinking
 induction (motive) {
   case zero_smallest(n) => ...
   case add1_smaller(j, k, prev_smaller) (almost_on_prev_smaller) => ...
@@ -318,7 +318,7 @@ Not(X: Type): Type {
 
 Ideally we want to use subtype relation `<:` to denotes non-empty subset.
 
-``` cicada wishful
+``` cicada wishful-thinking
 class WellFounded {
   X: Type
   Relation(X, X): Type
