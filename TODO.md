@@ -3,6 +3,8 @@
 > Inductive type can greatly reduce the number of expressions,
 > after then all other works would be easier.
 
+- note about the intuition of Noetherian induction
+
 - structural induction as a special case of Noetherian induction
 
 - [prepare test] `Nat` as `datatype`

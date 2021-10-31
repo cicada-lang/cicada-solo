@@ -329,15 +329,15 @@ But let's move forward anyways, and use `<:` to denotes non-empty subset.
 ``` cicada not-yet
 class WellFounded {
   X: Type
-  relation(X, X): Type
+  Relation(X, X): Type
   minimal(S <: X): S
-  minimality(S <: X): (s: S) -> Not(relation(s, minimal))
+  minimality(S <: X): (s: S) -> Not(Relation(s, minimal))
 }
 ```
 
-When `relation` is "less than",
-`relation(s, m)` reads "s less than m",
-and `(relation(s, m)) -> Absurd` reads:
+When `Relation` is "less than",
+`Relation(s, m)` reads "s less than m",
+and `(Relation(s, m)) -> Absurd` reads:
 
 - `s` not less than `m`
 - `s` greater than or equal to `m`
@@ -353,9 +353,9 @@ Let's prepare a fake `WellFounded`:
 ``` cicada
 class WellFounded {
   X: Type
-  relation(X, X): Type
+  Relation(X, X): Type
   // minimal(S <: X): S
-  // minimality(S <: X): (s: S) -> Not(relation(s, minimal))
+  // minimality(S <: X): (s: S) -> Not(Relation(s, minimal))
 }
 ```
 
@@ -368,10 +368,24 @@ noetherian_induction_t = (
   motive: (X) -> Type,
   step: (
     x: X, y: X,
-    (well_founded.relation(y, x)) -> motive(y),
+    (well_founded.Relation(y, x)) -> motive(y),
   ) -> motive(x),
 ) -> (target: X) -> motive(target)
 ```
+
+Can you explain the intuition of Noetherian induction as a deduction rule?
+
+TODO
+
+Can you view structural induction as a special case of Noetherian induction?
+
+Maybe we should try the usual mathematical induction first:
+
+TODO
+
+Now view structural induction as a special case of Noetherian induction.
+
+TODO
 
 # The duality between intro and elim rules and Adjoint functor
 
