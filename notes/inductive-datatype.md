@@ -312,26 +312,41 @@ Preparing some partial definitions:
 Not(X: Type): Type {
   (X) -> Absurd
 }
-
-NonEmptySubset(X: Type): Type {
-  @TODO "NonEmptySubset"
-}
 ```
 
-Even with the preparation above,
-we still can not yet define `WellFounded`,
-because even if we define `NonEmptySubset`,
-and say `S: NonEmptySubset(X)`,
-we can not use `S` as a `Type`.
-
-But let's move forward anyways, and use `<:` to denotes non-empty subset.
+Ideally we want to use subtype relation `<:` to denotes non-empty subset.
 
 ``` cicada not-yet
 class WellFounded {
   X: Type
   Relation(X, X): Type
   minimal(S <: X): S
-  minimality(S <: X): (s: S) -> Not(Relation(s, minimal))
+  minimality(S <: X, s: S) -> Not(Relation(s, minimal))
+}
+```
+
+But we do not yet have `<:`.
+
+Maybe we can view a property over `X` as a subset of `X`.
+
+We also need to describe `NonEmpty` property:
+
+``` cicada
+NonEmpty(implicit { X: Type }, P: (X) -> Type): Type {
+  (x: X) * P(x)
+}
+
+class WellFounded {
+  X: Type
+  Relation(X, X): Type
+  minimal(P: (X) -> Type, NonEmpty(P)): class {
+    element: X,
+    property: P(element)
+  }
+  minimality(
+    P: (X) -> Type, NonEmpty(P),
+    s: X, P(s),
+  ): Not(Relation(s, minimal(P).element))
 }
 ```
 
@@ -347,17 +362,6 @@ and `(Relation(s, m)) -> Absurd` reads:
 If minimal element exists,
 there is no infinite sequence `x0, x1, x2, ...` of elements of `X`,
 such that `x0 > x1 > x2 > ...`
-
-Let's prepare a fake `WellFounded`:
-
-``` cicada
-class WellFounded {
-  X: Type
-  Relation(X, X): Type
-  // minimal(S <: X): S
-  // minimality(S <: X): (s: S) -> Not(Relation(s, minimal))
-}
-```
 
 Now! Noetherian induction!
 
