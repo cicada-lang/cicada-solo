@@ -243,6 +243,9 @@ datatype LessThan(j: Nat, k: Nat) {
 }
 ```
 
+We can not define `LessThan` as a datatype yet,
+let's prepare some partial definitions:
+
 ``` cicada
 LessThan(j: Nat, k: Nat): Type {
   @TODO "LessThan"
@@ -259,6 +262,8 @@ add1_smaller(
   @TODO "add1_smaller"
 }
 ```
+
+Then we can define `ind_less_than_t`:
 
 ``` cicada
 ind_less_than_t = (
@@ -301,13 +306,28 @@ which depends on the concept of [Well-founded relation][].
 
 [Well-founded relation]: https://en.wikipedia.org/wiki/Well-founded_relation
 
+Preparing some partial definitions:
+
+``` cicada
+Not(X: Type): Type {
+  (X) -> Absurd
+}
+
+NonEmptySubset(X: Type): Type {
+  @TODO "NonEmptySubset"
+}
+```
+
+Even with the preparation above,
+we still can not yet define `WellFounded`,
+but let's move forward anyways.
+
 ``` cicada not-yet
 class WellFounded {
-  X: Set
+  X: Type
   R(X, X): Type
-  minimal_element(
-    S <: X, NotEmpty(S),
-  ): (m: S) * (s: S) -> (R(s, m)) -> Absurd
+  minimal(S: NonEmptySubset(X)): S
+  minimality(S: NonEmptySubset(X)): (s: S) -> Not(R(s, minimal))
 }
 ```
 
