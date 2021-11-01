@@ -130,9 +130,12 @@
 
   - inline all the motive, and see will the proofs read better.
 
-- [books] `Set` -- Bishop's set theory -- with notes
+
 
 - [books] use `hom_set` in category theory
+
+  - `Set` -- Bishop's set theory -- with notes
+
 - [books] prove theory about terminal object
 - [books] prove theory about initial object
 

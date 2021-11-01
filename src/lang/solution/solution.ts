@@ -130,8 +130,8 @@ export abstract class Solution {
       throw new ExpTrace(
         [
           `Unification fail`,
-          `  left: ${left_repr}`,
-          `  right: ${right_repr}`,
+          `  left  : ${left_repr}`,
+          `  right : ${right_repr}`,
         ].join("\n")
       )
     }
@@ -190,6 +190,6 @@ class FailureSolution extends Solution {
   }
 
   find(name: string): Value | undefined {
-    throw new Error(`Can not find name: ${name}, from a FailureSubst.`)
+    return undefined
   }
 }

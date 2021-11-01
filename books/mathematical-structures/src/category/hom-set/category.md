@@ -6,24 +6,37 @@ date: 2021-10-20
 
 # Set
 
+Bishop's set theory:
+
+> A set is not an entity which has an ideal existence.
+> A set exists only when it has been defined.
+>
+> To define a set we prescribe, at least implicitly,
+> 1. what we (the constructing intelligence) must do
+>    in order to construct an element of the set,
+> 2. and what we must do to show that
+>    two elements of the set are equal.
+>
+> Errett Bishop, A Constructivist Manifesto
+
 ``` cicada
 class Set {
   Element: Type
-  Eqv(Element, Element): Type
+  Eq(Element, Element): Type
 
-  reflexive(x: Element): Eqv(x, x)
+  reflexive(x: Element): Eq(x, x)
 
   transitive(
     implicit { x: Element, y: Element },
-    Eqv(x, y),
+    Eq(x, y),
     implicit { z: Element },
-    Eqv(y, z),
-  ): Eqv(x, z)
+    Eq(y, z),
+  ): Eq(x, z)
 
   symmetric(
     implicit { x: Element, y: Element },
-    Eqv(x, y),
-  ): Eqv(y, x)
+    Eq(x, y),
+  ): Eq(y, x)
 }
 ```
 
@@ -47,12 +60,12 @@ class Category {
   id_left(
     implicit { x: Object, y: Object },
     f: Morphism(x, y)
-  ): hom_set(x, y).Eqv(compose(id(x), f), f)
+  ): hom_set(x, y).Eq(compose(id(x), f), f)
 
   id_right(
     implicit { x: Object, y: Object },
     f: Morphism(x, y),
-  ): hom_set(x, y).Eqv(compose(f, id(y)), f)
+  ): hom_set(x, y).Eq(compose(f, id(y)), f)
 
   compose_associative(
     implicit { x: Object, y: Object },
@@ -61,7 +74,7 @@ class Category {
     g: Morphism(y, z),
     implicit { w: Object },
     h: Morphism(z, w),
-  ): hom_set(x, w).Eqv(
+  ): hom_set(x, w).Eq(
     compose(f, compose(g, h)),
     compose(compose(f, g), h)
   )
@@ -75,15 +88,21 @@ trivial_category: Category = {
   Object: Trivial
   Morphism: (dom, cod) => Trivial
 
-  hom_set: (x, y) => @TODO "hom_set"
+  hom_set: (x, y) => {
+    Element: Trivial
+    Eq: (x, y) => Equal(Trivial, x, y)
+    reflexive: (x) => refl
+    transitive: (x_eq_y, y_eq_z) => refl
+    symmetric: (x_eq_y) => refl
+  }
 
   id: (x) => sole
 
   compose: (f, g) => sole
-  id_left: (f) => @TODO "id_left"
-  id_right: (f) => @TODO "id_right"
+  id_left: (f) => refl
+  id_right: (f) => refl
 
-  compose_associative: (f, g, h) => @TODO "compose_associative"
+  compose_associative: (f, g, h) => refl
 }
 ```
 
@@ -105,16 +124,14 @@ class Functor {
     f: dom.Morphism(x, y),
     implicit { z: dom.Object },
     g: dom.Morphism(y, z),
-  ): Equal(
-    cod.Morphism(map(x), map(z)),
+  ): cod.hom_set(map(x), map(z)).Eq(
     fmap(dom.compose(f, g)),
     cod.compose(fmap(f), fmap(g))
   )
 
   fmap_respect_id(
     x: dom.Object
-  ): Equal(
-    cod.Morphism(map(x), map(x)),
+  ): cod.hom_set(map(x), map(x)).Eq(
     fmap(dom.id(x)),
     cod.id(map(x)))
 }
@@ -137,8 +154,7 @@ class NaturalTransformation {
   naturality(
     implicit { x: dom.Object, y: dom.Object },
     f: dom.Morphism(x, y),
-  ): Equal(
-    cod.Morphism(src.map(x), tar.map(y)),
+  ): cod.hom_set(src.map(x), tar.map(y)).Eq(
     cod.compose(component(x), tar.fmap(f)),
     cod.compose(src.fmap(f), component(y))
   )
@@ -160,11 +176,10 @@ class Epimorphism {
       f: cat.Morphism(cod, x),
       g: cat.Morphism(cod, x),
     },
-    Equal(
-      cat.Morphism(dom, x),
+    cat.hom_set(dom, x).Eq(
       cat.compose(morphism, f),
       cat.compose(morphism, g)),
-  ): Equal(cat.Morphism(cod, x), f, g)
+  ): cat.hom_set(cod, x).Eq(f, g)
 }
 ```
 
@@ -183,11 +198,10 @@ class Monomorphism {
       f: cat.Morphism(x, dom),
       g: cat.Morphism(x, dom),
     },
-    Equal(
-      cat.Morphism(x, cod),
+    cat.hom_set(x, cod).Eq(
       cat.compose(f, morphism),
       cat.compose(g, morphism)),
-  ): Equal(cat.Morphism(x, dom), f, g)
+  ): cat.hom_set(x, dom).Eq(f, g)
 }
 ```
 
@@ -201,14 +215,14 @@ class Isomorphism {
   morphism: cat.Morphism(dom, cod)
   inverse: cat.Morphism(cod, dom)
 
-  inverse_left: Equal(
-    cat.Morphism(dom, dom),
+  inverse_left: cat.hom_set(dom, dom).Eq(
     cat.compose(morphism, inverse),
-    cat.id(dom))
+    cat.id(dom)
+  )
 
-  inverse_right: Equal(
-    cat.Morphism(cod, cod),
+  inverse_right: cat.hom_set(cod, cod).Eq(
     cat.compose(inverse, morphism),
-    cat.id(cod))
+    cat.id(cod)
+  )
 }
 ```
