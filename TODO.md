@@ -1,5 +1,3 @@
-- `Module` move logic about "backup" into `CodeBlockResource`
-
 - refactor `Module.rerunWith`
 
 # inductive datatype

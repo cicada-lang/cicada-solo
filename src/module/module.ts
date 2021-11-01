@@ -13,8 +13,6 @@ export class Module {
   env: Env
   ctx: Ctx
 
-  private backups: Array<{ env: Env; ctx: Ctx }> = []
-
   constructor(opts: {
     book: Book
     path: string
@@ -31,8 +29,10 @@ export class Module {
 
   private async step(): Promise<Array<StmtOutput>> {
     const outputs = []
-    const codeBlock = this.codeBlocks.nextOrFail()
-    this.backups.push({ env: this.env, ctx: this.ctx })
+    const codeBlock = this.codeBlocks.nextOrFail({
+      env: this.env,
+      ctx: this.ctx,
+    })
     for (const stmt of codeBlock.stmts) {
       const output = await stmt.execute(this)
       if (output) {
@@ -50,28 +50,24 @@ export class Module {
   }): Promise<Array<StmtOutput>> {
     const { id, code } = opts
 
-    if (!this.codeBlocks.has(id)) {
-      throw new Error(`I can not find code block with id: ${id}`)
-    }
-
-    const index = id
-
-    if (index < this.codeBlocks.counter) {
-      const backup = this.backups[index]
-      this.env = backup.env
+    if (this.codeBlocks.encountered(id)) {
+      const backup = this.codeBlocks.backTo(id)
       this.ctx = backup.ctx
-      this.backups = this.backups.slice(0, index)
-      this.codeBlocks.eraseOutputFrom(index)
+      this.env = backup.env
     }
 
-    for (const codeBlock of this.codeBlocks.array.slice(
-      this.codeBlocks.counter
-    )) {
+    const codeBlock = this.codeBlocks.getOrFail(id)
+    codeBlock.updateCode(code)
+
+    return await this.runTo(id)
+  }
+
+  async runTo(id: number): Promise<Array<StmtOutput>> {
+    for (const codeBlock of this.codeBlocks.remain()) {
+      const outputs = await this.step()
+
       if (codeBlock.id === id) {
-        codeBlock.updateCode(code)
-        return await this.step()
-      } else {
-        await this.step()
+        return outputs
       }
     }
 

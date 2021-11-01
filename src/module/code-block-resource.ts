@@ -1,10 +1,13 @@
 import { CodeBlock } from "./code-block"
+import { Env } from "../lang/env"
+import { Ctx } from "../lang/ctx"
 import { Parser } from "../lang/parser"
-import { Stmt, StmtOutput } from "../lang/stmt"
+import { StmtOutput } from "../lang/stmt"
 
 export class CodeBlockResource {
   array: Array<CodeBlock> = []
   counter: number = 0
+  backups: Array<{ env: Env; ctx: Ctx }> = []
 
   constructor(array: Array<CodeBlock>) {
     this.array = array
@@ -14,12 +17,13 @@ export class CodeBlockResource {
     return this.array.length
   }
 
-  next(): CodeBlock | undefined {
+  next(backup: { env: Env; ctx: Ctx }): CodeBlock | undefined {
+    this.backups.push(backup)
     return this.array[this.counter++]
   }
 
-  nextOrFail(): CodeBlock {
-    const codeBlock = this.next()
+  nextOrFail(backup: { env: Env; ctx: Ctx }): CodeBlock {
+    const codeBlock = this.next(backup)
     if (codeBlock === undefined) {
       throw new Error(`No more code blocks, length: ${this.length}`)
     }
@@ -29,6 +33,38 @@ export class CodeBlockResource {
 
   isEnd(): boolean {
     return this.counter >= this.length
+  }
+
+  remain(): Array<CodeBlock> {
+    return this.array.slice(this.counter)
+  }
+
+  encountered(id: number): boolean {
+    const index = this.array.findIndex((codeBlock) => codeBlock.id === id)
+    return index !== -1 && index < this.counter
+  }
+
+  backTo(id: number): { env: Env; ctx: Ctx } {
+    if (!this.encountered(id)) {
+      throw new Error(
+        `I can not go back to id: ${id}, we have not encountered it yet.`
+      )
+    }
+
+    const index = this.array.findIndex((codeBlock) => codeBlock.id === id)
+    this.counter = index
+    const backup = this.backups[index]
+    this.backups = this.backups.slice(0, index)
+    this.eraseOutputFrom(index)
+    return backup
+  }
+
+  private eraseOutputFrom(index: number): void {
+    for (const [i, codeBlock] of this.array.entries()) {
+      if (i >= index) {
+        codeBlock.outputs = []
+      }
+    }
   }
 
   nextId(): number {
@@ -67,14 +103,6 @@ export class CodeBlockResource {
       codeBlock.updateCode(code)
     } else {
       console.warn(`I can not update non-existing code block of id: ${id}`)
-    }
-  }
-
-  eraseOutputFrom(index: number): void {
-    for (const [i, codeBlock] of this.array.entries()) {
-      if (i >= index) {
-        codeBlock.outputs = []
-      }
     }
   }
 
