@@ -24,7 +24,7 @@ export class SnapshotRunner extends Runner {
       )
       await mod.runAll()
       const file = this.book.files.resolve(path + ".out")
-      const output = mod.allOutputs
+      const output = mod.codeBlocks.allOutputs
         .map((output) => output.formatForConsole())
         .join("\n")
       if (output) {

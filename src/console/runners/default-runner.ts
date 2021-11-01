@@ -18,7 +18,7 @@ export class DefaultRunner extends Runner {
         opts
       )
       await mod.runAll()
-      const output = mod.allOutputs
+      const output = mod.codeBlocks.allOutputs
         .map((output) => output.formatForConsole())
         .join("\n")
 

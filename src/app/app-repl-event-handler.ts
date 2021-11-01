@@ -48,7 +48,8 @@ export class AppReplEventHandler extends ReplEventHandler {
     )
 
     try {
-      const outputs = await mod.appendCodeBlock(text).runAll()
+      mod.codeBlocks.appendCode(text)
+      const outputs = await mod.runAll()
       for (const output of outputs) {
         if (output instanceof StmtOutputs.NormalTerm) {
           const exp = output.exp.repr()

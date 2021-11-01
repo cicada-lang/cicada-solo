@@ -1,5 +1,6 @@
 import { Module } from "../module"
 import * as CodeBlockParsers from "../module/code-block-parsers"
+import { CodeBlockResource } from "../module/code-block-resource"
 import { FileStore } from "@enchanterjs/enchanter/lib/file-store"
 import { Env } from "../lang/env"
 import { Ctx, CtxObserver, Highlighter } from "../lang/ctx"
@@ -60,7 +61,7 @@ export class Book<Files extends FileStore = FileStore> {
     const mod = new Module({
       book: this,
       path,
-      codeBlocks: parser.parseCodeBlocks(text),
+      codeBlocks: new CodeBlockResource(parser.parseCodeBlocks(text)),
       env: Env.init(),
       ctx: Ctx.init({
         observers: opts.observers,

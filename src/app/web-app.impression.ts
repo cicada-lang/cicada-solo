@@ -30,7 +30,7 @@ ut.test("git book", async () => {
         msg: path,
       })
 
-      const output = mod.allOutputs
+      const output = mod.codeBlocks.allOutputs
         .map((output) => output.formatForConsole())
         .join("\n")
 
@@ -66,7 +66,7 @@ ut.test("git article", async () => {
     msg: path,
   })
 
-  const output = mod.allOutputs
+  const output = mod.codeBlocks.allOutputs
     .map((output) => output.formatForConsole())
     .join("\n")
 
