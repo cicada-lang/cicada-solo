@@ -130,15 +130,6 @@
 
   - inline all the motive, and see will the proofs read better.
 
-
-
-- [books] use `hom_set` in category theory
-
-  - `Set` -- Bishop's set theory -- with notes
-
-- [books] prove theory about terminal object
-- [books] prove theory about initial object
-
 - [books] [EWD1240a] A little bit of lattice theory
   - To test our system.
   - This paper is about the relation between PartialOrder and Lattice.
