@@ -1,5 +1,3 @@
-- refactor `Module.rerunWith`
-
 # inductive datatype
 
 > Inductive type can greatly reduce the number of expressions,

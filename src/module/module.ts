@@ -44,21 +44,14 @@ export class Module {
     return outputs
   }
 
-  async rerunWith(opts: {
-    id: number
-    code: string
-  }): Promise<Array<StmtOutput>> {
-    const { id, code } = opts
-
+  async runWithNewCode(id: number, code: string): Promise<Array<StmtOutput>> {
     if (this.codeBlocks.encountered(id)) {
       const backup = this.codeBlocks.backTo(id)
       this.ctx = backup.ctx
       this.env = backup.env
     }
 
-    const codeBlock = this.codeBlocks.getOrFail(id)
-    codeBlock.updateCode(code)
-
+    this.codeBlocks.updateCode(id, code)
     return await this.runTo(id)
   }
 
@@ -76,7 +69,7 @@ export class Module {
 
   async runAll(): Promise<Array<StmtOutput>> {
     const outputs = []
-    while (!this.codeBlocks.isEnd()) {
+    while (!this.codeBlocks.finished()) {
       outputs.push(...(await this.step()))
     }
 

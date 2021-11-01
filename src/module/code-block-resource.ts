@@ -31,7 +31,7 @@ export class CodeBlockResource {
     return codeBlock
   }
 
-  isEnd(): boolean {
+  finished(): boolean {
     return this.counter >= this.length
   }
 
