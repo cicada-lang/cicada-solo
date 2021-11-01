@@ -60,8 +60,6 @@ export class AppReplEventHandler extends ReplEventHandler {
       }
       return true
     } catch (error) {
-      mod.codeBlocks.pop()
-
       const reporter = new Errors.ErrorReporter()
       const report = reporter.report(error, { text })
       if (report.trim()) {

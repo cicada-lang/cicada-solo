@@ -1,3 +1,7 @@
+# refactor
+
+- refactor `Module.rerunWith`
+
 # inductive datatype
 
 > Inductive type can greatly reduce the number of expressions,
@@ -15,12 +19,6 @@
 - [prepare test] `LessThan` as `datatype`
 
 - `Stmt.Datatype` -- `datatype` definition
-
-# refactor
-
-- refactor `Module.rerunWith`
-
-  - [bug] fix input two lines of error expressions in REPL
 
 # core features
 
