@@ -47,40 +47,40 @@ import { Isomorphism } from "./category.md"
 
 terminal_object_isomorphism(
   cat: Category,
-  x_terminal: Terminal(cat),
-  y_terminal: Terminal(cat),
-): Isomorphism(cat, x_terminal.object, y_terminal.object) {
+  x: Terminal(cat),
+  y: Terminal(cat),
+): Isomorphism(cat, x.object, y.object) {
   {
     cat
-    dom: x_terminal.object
-    cod: y_terminal.object
-    morphism: y_terminal.morphism(x_terminal.object)
-    inverse: x_terminal.morphism(y_terminal.object)
+    dom: x.object
+    cod: y.object
+    morphism: y.morphism(x.object)
+    inverse: x.morphism(y.object)
 
-    inverse_left: cat.hom_set(x_terminal.object, x_terminal.object).transitive(
-      x_terminal.morphism_unique(
+    inverse_left: cat.hom_set(x.object, x.object).transitive(
+      x.morphism_unique(
         cat.compose(
-          y_terminal.morphism(x_terminal.object),
-          x_terminal.morphism(y_terminal.object),
+          y.morphism(x.object),
+          x.morphism(y.object),
         ),
       ),
-      cat.hom_set(x_terminal.object, x_terminal.object).symmetric(
-        x_terminal.morphism_unique(
-          cat.id(x_terminal.object)
+      cat.hom_set(x.object, x.object).symmetric(
+        x.morphism_unique(
+          cat.id(x.object)
         )
       )
     )
 
-    inverse_right: cat.hom_set(y_terminal.object, y_terminal.object).transitive(
-      y_terminal.morphism_unique(
+    inverse_right: cat.hom_set(y.object, y.object).transitive(
+      y.morphism_unique(
         cat.compose(
-          x_terminal.morphism(y_terminal.object),
-          y_terminal.morphism(x_terminal.object),
+          x.morphism(y.object),
+          y.morphism(x.object),
         ),
       ),
-      cat.hom_set(y_terminal.object, y_terminal.object).symmetric(
-        y_terminal.morphism_unique(
-          cat.id(y_terminal.object)
+      cat.hom_set(y.object, y.object).symmetric(
+        y.morphism_unique(
+          cat.id(y.object)
         )
       )
     )
