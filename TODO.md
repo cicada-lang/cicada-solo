@@ -1,3 +1,13 @@
+# syntax
+
+- require comma in object literal
+- be able to write method in object literal
+
+# core features
+
+- `Fn` be able to annotate argument type and return type
+- support using `=` to do local definitions in class
+
 # inductive datatype
 
 > Inductive type can greatly reduce the number of expressions,
@@ -15,12 +25,6 @@
 - [prepare test] `LessThan` as `datatype`
 
 - `Stmt.Datatype` -- `datatype` definition
-
-# core features
-
-- support using `=` to do local definitions in class
-
-- `Fn` be able to annotate argument type and return type
 
 # use `unify` to replace `readback`
 
