@@ -40,9 +40,9 @@ datatype Nat {
 }
 ```
 
-**Hypothesis: cases**
-
-One case one callback, which take all constructor arguments.
+> **Hypothesis: cases**
+>
+> One case one callback, which take all constructor arguments.
 
 ``` cicada
 ind_nat_t = (
@@ -88,10 +88,10 @@ datatype List(E: Type) {
 }
 ```
 
-**Hypothesis: almost**
-
-One recursive occurrence of the defined type one almost for case,
-whose type is the `motive` applied to the recursive occurrence parameter.
+> **Hypothesis: almost**
+>
+> One recursive occurrence of the defined type one almost for case,
+> whose type is the `motive` applied to the recursive occurrence parameter.
 
 ``` cicada
 ind_list_t = (
@@ -140,13 +140,13 @@ and *indices*, which can vary between them.
 
 In the definition of `Vector`, `E` is a parameter, `length` is an index.
 
-**Hypothesis: motive**
+> **Hypothesis: motive**
+>
+> The `motive` does not take parameter, but take index.
 
-The `motive` does not take parameter, but take index.
-
-**Problem: indices in case argument**
-
-Should we make the indices implicit?
+> **Problem: indices in case argument**
+>
+> Should we make the indices implicit?
 
 - I think we should make indices implicit,
   because we tried this version of `our_vector_ind` in the little book,
@@ -170,11 +170,11 @@ vector_ind_t: Type = (
 ) -> motive(length, target)
 ```
 
-**Hypothesis: implicit parameters and indices**
-
-In the curried version,
-we can write implicit parameters over `motive`,
-and implicit indices over `target`.
+> **Hypothesis: implicit parameters and indices**
+>
+> In the curried version,
+> we can write implicit parameters over `motive`,
+> and implicit indices over `target`.
 
 ``` cicada
 curried_vector_ind_t: Type = (
