@@ -57,9 +57,6 @@
 - `exps/the` -- narration
 - `exps/let` -- narration
 
-- `exps/absurd/absurd` -- narration
-- `exps/absurd/absurd-ind` -- narration
-
 - `exps/cls/cls-closure` -- narration
 - `exps/cls/nil-cls` -- narration
 - `exps/cls/fulfilled-cls` -- narration
@@ -74,15 +71,14 @@
 - `exps/sigma/cdr` -- narration
 - `exps/sigma/sigma` -- narration
 
-- `exps/list/list-rec` -- narration
-- `exps/list/li` -- narration
-- `exps/list/list-ind` -- narration
-- `exps/list/list` -- narration
-- `exps/list/nil` -- narration
-
 - `exps/pi/ap` -- narration
 - `exps/pi/fn` -- narration
 - `exps/pi/pi` -- narration
+
+- `exps/im-pi/im-ap-insertion` -- narration
+- `exps/im-pi/im-pi` -- narration
+- `exps/im-pi/im-fn-insertion` -- narration
+- `exps/im-pi/im-fn` -- narration
 
 - `exps/equal/refl` -- narration
 - `exps/equal/the-same` -- narration
@@ -91,15 +87,16 @@
 - `exps/equal/same-as-chart` -- narration
 - `exps/equal/equal` -- narration
 
-- `exps/vector/vector-head` -- narration
-- `exps/vector/vector-ind` -- narration
-- `exps/vector/vector` -- narration
-- `exps/vector/vecnil` -- narration
-- `exps/vector/vec` -- narration
-- `exps/vector/vector-tail` -- narration
-
 - `exps/str/quote` -- narration
 - `exps/str/str` -- narration
+
+## inductive datatype
+
+- `exps/absurd/absurd` -- narration
+- `exps/absurd/absurd-ind` -- narration
+
+- `exps/trivial/sole` -- narration
+- `exps/trivial/trivial` -- narration
 
 - `exps/nat/nat` -- narration
 - `exps/nat/nat-ind` -- narration
@@ -107,18 +104,23 @@
 - `exps/nat/add1` -- narration
 - `exps/nat/nat-rec` -- narration
 
-- `exps/im-pi/im-ap-insertion` -- narration
-- `exps/im-pi/im-pi` -- narration
-- `exps/im-pi/im-fn-insertion` -- narration
-- `exps/im-pi/im-fn` -- narration
+- `exps/list/list-rec` -- narration
+- `exps/list/li` -- narration
+- `exps/list/list-ind` -- narration
+- `exps/list/list` -- narration
+- `exps/list/nil` -- narration
+
+- `exps/vector/vector-head` -- narration
+- `exps/vector/vector-ind` -- narration
+- `exps/vector/vector` -- narration
+- `exps/vector/vecnil` -- narration
+- `exps/vector/vec` -- narration
+- `exps/vector/vector-tail` -- narration
 
 - `exps/either/either` -- narration
 - `exps/either/either-ind` -- narration
 - `exps/either/inl` -- narration
 - `exps/either/inr` -- narration
-
-- `exps/trivial/sole` -- narration
-- `exps/trivial/trivial` -- narration
 
 # quotient type
 
