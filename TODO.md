@@ -1,4 +1,4 @@
-- `Module` move logic about "next code block" into `CodeBlockResource`
+- `Module` move logic about "backup" into `CodeBlockResource`
 
 - refactor `Module.rerunWith`
 

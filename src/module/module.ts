@@ -15,10 +15,6 @@ export class Module {
 
   private backups: Array<{ env: Env; ctx: Ctx }> = []
 
-  private get counter(): number {
-    return this.backups.length
-  }
-
   constructor(opts: {
     book: Book
     path: string
@@ -35,7 +31,7 @@ export class Module {
 
   private async step(): Promise<Array<StmtOutput>> {
     const outputs = []
-    const codeBlock = this.codeBlocks.array[this.counter]
+    const codeBlock = this.codeBlocks.nextOrFail()
     this.backups.push({ env: this.env, ctx: this.ctx })
     for (const stmt of codeBlock.stmts) {
       const output = await stmt.execute(this)
@@ -60,7 +56,7 @@ export class Module {
 
     const index = id
 
-    if (index < this.counter) {
+    if (index < this.codeBlocks.counter) {
       const backup = this.backups[index]
       this.env = backup.env
       this.ctx = backup.ctx
@@ -68,7 +64,9 @@ export class Module {
       this.codeBlocks.eraseOutputFrom(index)
     }
 
-    for (const codeBlock of this.codeBlocks.array.slice(this.counter)) {
+    for (const codeBlock of this.codeBlocks.array.slice(
+      this.codeBlocks.counter
+    )) {
       if (codeBlock.id === id) {
         codeBlock.updateCode(code)
         return await this.step()
@@ -82,7 +80,7 @@ export class Module {
 
   async runAll(): Promise<Array<StmtOutput>> {
     const outputs = []
-    while (this.counter < this.codeBlocks.length) {
+    while (!this.codeBlocks.isEnd()) {
       outputs.push(...(await this.step()))
     }
 

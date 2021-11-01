@@ -4,6 +4,7 @@ import { Stmt, StmtOutput } from "../lang/stmt"
 
 export class CodeBlockResource {
   array: Array<CodeBlock> = []
+  counter: number = 0
 
   constructor(array: Array<CodeBlock>) {
     this.array = array
@@ -11,6 +12,23 @@ export class CodeBlockResource {
 
   get length(): number {
     return this.array.length
+  }
+
+  next(): CodeBlock | undefined {
+    return this.array[this.counter++]
+  }
+
+  nextOrFail(): CodeBlock {
+    const codeBlock = this.next()
+    if (codeBlock === undefined) {
+      throw new Error(`No more code blocks, length: ${this.length}`)
+    }
+
+    return codeBlock
+  }
+
+  isEnd(): boolean {
+    return this.counter >= this.length
   }
 
   nextId(): number {
