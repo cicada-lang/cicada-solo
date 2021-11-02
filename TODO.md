@@ -1,5 +1,11 @@
 # syntax
 
+- improve syntax of sigma
+
+  - `[a: A, b: B | C]`
+  - `there exists [a: A, b: B such that C]`
+
+- optional `;` for `let`
 - require comma in object literal
 - be able to write method in object literal
 
