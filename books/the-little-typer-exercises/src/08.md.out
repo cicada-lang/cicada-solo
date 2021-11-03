@@ -1,5 +1,0 @@
-refl: Equal(Nat, 4, 4)
-refl: Equal(Nat, 1, 1)
-refl: Equal(Nat, 2, 2)
-refl: Equal(Nat, 3, 3)
-refl: Equal(Nat, 4, 4)

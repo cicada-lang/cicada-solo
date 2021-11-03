@@ -1,5 +1,3 @@
-- move books to their own repos
-
 # syntax
 
 - improve syntax of sigma

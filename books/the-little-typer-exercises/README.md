@@ -1,1 +1,0 @@
-# The Little Typer Exercises
