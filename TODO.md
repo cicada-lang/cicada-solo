@@ -1,15 +1,13 @@
 # syntax
 
-- [syntax] optional `return` in last expression of function body
-
-- [syntax] optional `;` for `let`
 - [syntax] let -- fix `repr` -- print the optional `;`
 
 - [syntax] cons -- `[car | cdr]`
 - [syntax] cons -- `[a, b | c]`
 
-- [syntax] require comma in object literal
-- [syntax] be able to write method in object literal
+- [syntax] require comma -- `,` in object literal
+
+- [syntax] be able to write method in object literal -- `{ f(x: A): B { body } }`
 
 # core features
 

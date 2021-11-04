@@ -304,6 +304,7 @@ export const declaration = {
       { name: "identifier" },
       '"="',
       { exp: "exp" },
+      { $ap: ["optional", '";"'] },
       { ret: "exp" },
     ],
     "declaration:let_the": [
@@ -312,6 +313,7 @@ export const declaration = {
       { t: "exp" },
       '"="',
       { exp: "exp" },
+      { $ap: ["optional", '";"'] },
       { ret: "exp" },
     ],
     "declaration:let_the_flower_bracket": [
@@ -321,6 +323,7 @@ export const declaration = {
       '"{"',
       { exp: "exp" },
       '"}"',
+      { $ap: ["optional", '";"'] },
       { ret: "exp" },
     ],
     "declaration:let_fn": [
@@ -333,6 +336,7 @@ export const declaration = {
       '"{"',
       { ret: "exp" },
       '"}"',
+      { $ap: ["optional", '";"'] },
       { body: "exp" },
     ],
   },
