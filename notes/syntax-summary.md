@@ -29,6 +29,7 @@ the:
 
 pi:
 - (name: arg_t) -> ret_t
+- for all (a: A, b: B) -> C
 - (arg_t) -> ret_t
 - (name) => ret
 - target(arg, ...)
@@ -45,13 +46,10 @@ sigma:
 - [car | cdr]
 - [a: A | [b: B | C]]
 - [a: A, b: B | C]
+- there exists [a: A, b: B such that C]
 - [a, b | c]
 - car(target)
 - cdr(target)
-
-problems about sigma:
-- should we allow `there exists [a: A, b: B such that C]`?
-  - if we do so, we also need `for all (a: A, b: B) => C`
 
 class:
 - class { name: t, ... }
