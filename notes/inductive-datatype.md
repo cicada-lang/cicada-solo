@@ -20,7 +20,7 @@ See Euler, we will find that his mathematics is all about
 the art of inductive reasoning and discovering pattern.
 
 Remember that, to generate the eliminator `ind` from constructors,
-is to generate `ind`s type, and the type can be read as [Mathematical induction][].
+is to generate `ind`'s type, and the type can be read as [Mathematical induction][].
 
 [Mathematical induction]: https://en.wikipedia.org/wiki/Mathematical_induction
 
