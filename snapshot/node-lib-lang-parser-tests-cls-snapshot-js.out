@@ -8,9 +8,11 @@ class {
   b: B(a)
   c: C(a, b)
 }
+{ a, b, c }
+{ a, b, c }
 { a: f(x), b: g(y), c: z }
-{ a, b, c }
-{ a, b, c }
+{ a: (x) => { f(x) } }
+{ a: (x) => { f(x) } }
 object.field
 object.method(x)
 object.method(x, y)

@@ -1,7 +1,3 @@
-# syntax
-
-- [syntax] be able to write method in object literal -- `{ f(x: A): B { body } }`
-
 # core features
 
 - `Fn` be able to annotate argument type and return type
