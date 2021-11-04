@@ -129,7 +129,7 @@ curried_ind_list_t = (
 ```
 
 ``` cicada wishful-thinking
-induction List (motive) {
+induction List(list) => ... {
   case nil => ...
   case li(head, tail) (almost_on_tail) => ...
 }
@@ -237,7 +237,7 @@ curried_either_ind_t = (
 ```
 
 ``` cicada wishful-thinking
-induction Either (motive) {
+induction Either(target) => ... {
   case inl(left) => ...
   case inr(right) => ...
 }
@@ -305,7 +305,7 @@ curried_ind_less_than_t = (
 ```
 
 ``` cicada wishful-thinking
-induction LessThan (motive) {
+induction LessThan(j, k, lt) => ... {
   case zero_smallest(n) => ...
   case add1_smaller(j, k, prev_smaller) (almost_on_prev_smaller) => ...
 }
