@@ -1,7 +1,5 @@
 # syntax
 
-- [syntax] let -- fix `repr` -- print the optional `;`
-
 - [syntax] cons -- `[car | cdr]`
 - [syntax] cons -- `[a, b | c]`
 
