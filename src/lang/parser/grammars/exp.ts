@@ -171,6 +171,16 @@ export const operand = {
       { cdr_t: "exp" },
       '"]"',
     ],
+    "operand:sigma_there_exists": [
+      '"there"',
+      '"exists"',
+      '"["',
+      { bindings: "sigma_bindings" },
+      '"such"',
+      '"that"',
+      { cdr_t: "exp" },
+      '"]"',
+    ],
     "operand:cons": [
       '"cons"',
       '"("',

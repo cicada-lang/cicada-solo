@@ -234,6 +234,7 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:pi_for_all": pi_handler,
     "operand:fn": fn_handler,
     "operand:sigma": sigma_handler,
+    "operand:sigma_there_exists": sigma_handler,
     "operand:cons": ({ car, cdr }, { span }) =>
       new Exps.Cons(exp_matcher(car), exp_matcher(cdr), { span }),
     "operand:cls": ({ entries }, { span }) =>

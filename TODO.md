@@ -1,7 +1,5 @@
 # syntax
 
-- [syntax] sigma -- `there exists [a: A, b: B such that C]`
-
 - [syntax] sigma sugar -- `Pair(A, B)`
 
 - [syntax] cons -- `[car | cdr]`
