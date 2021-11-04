@@ -4,16 +4,19 @@ three = add1(two)
 four = add1(three)
 
 [_: Nat | Nat]
+Pair(Nat, Nat)
 
 one_two: [_: Nat | Nat] = cons(one, two)
 cdr(one_two)
 
 [_: Nat, _: Nat | Nat]
+Pair(Nat, Pair(Nat, Nat))
 
 one_two_three: [_: Nat, _: Nat | Nat] = cons(one, cons(two, three))
 cdr(cdr(one_two_three))
 
 [_: Nat, _: Nat, _: Nat | Nat]
+Pair(Nat, Pair(Nat, Pair(Nat, Nat)))
 
 one_two_three_four: [_: Nat, _: Nat, _: Nat | Nat] = cons(one, cons(two, cons(three, four)))
 cdr(cdr(cdr(one_two_three_four)))

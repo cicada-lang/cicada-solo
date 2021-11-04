@@ -1,7 +1,5 @@
 # syntax
 
-- [syntax] sigma sugar -- `Pair(A, B)`
-
 - [syntax] cons -- `[car | cdr]`
 
 - [syntax] cons -- `[a, b | c]`

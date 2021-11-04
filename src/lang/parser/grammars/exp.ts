@@ -181,6 +181,14 @@ export const operand = {
       { cdr_t: "exp" },
       '"]"',
     ],
+    "operand:pair": [
+      '"Pair"',
+      '"("',
+      { car_t: "exp" },
+      '","',
+      { cdr_t: "exp" },
+      '")"',
+    ],
     "operand:cons": [
       '"cons"',
       '"("',

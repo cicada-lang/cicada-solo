@@ -50,13 +50,13 @@ k(100, 101)
 
 ``` cicada
 car_type_t = (
-  implicit { A: Type, B: Type }, pair: [_: A | B],
+  implicit { A: Type, B: Type }, pair: Pair(A, B),
 ) -> Type
 
 car_type_t
 
 car_type(
-  implicit { A: Type, B: Type }, pair: [_: A | B],
+  implicit { A: Type, B: Type }, pair: Pair(A, B),
 ): Type {
   A
 }
@@ -64,24 +64,24 @@ car_type(
 car_type
 
 car_type_again: (
-  implicit { A: Type, B: Type }, pair: [_: A | B],
+  implicit { A: Type, B: Type }, pair: Pair(A, B),
 ) -> Type = (implicit { A, B }, pair) => A
 
 
 car_type_again
 
-car_type(is(cons(1, "a"), [_: Nat | String]))
-car_type_again(is(cons(1, "a"), [_: Nat | String]))
+car_type(is(cons(1, "a"), Pair(Nat, String)))
+car_type_again(is(cons(1, "a"), Pair(Nat, String)))
 
 // `cdr_type` -- only the idiomatic way:
 
 cdr_type(
-  implicit { A: Type, B: Type }, pair: [_: A | B],
+  implicit { A: Type, B: Type }, pair: Pair(A, B),
 ): Type {
   B
 }
 
-cdr_type(is(cons(1, "a"), [_: Nat | String]))
+cdr_type(is(cons(1, "a"), Pair(Nat, String)))
 ```
 
 # do *not* support implicit argument over implicit argument
