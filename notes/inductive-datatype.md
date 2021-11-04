@@ -11,8 +11,8 @@ date: 2021-10-31
 - Can we from a general abstraction from these examples?
 - Can we from some hypotheses from these examples?
 
-Instead of learning about how to implement inductive datatype from a book a paper,
-take it as a mathematical research practice will be more fun.
+Instead of learning about how to implement inductive datatype from a book or a paper,
+taking it as a mathematical research practice might be more fun.
 
 Just like Alain Connes said about "mathematician's wake"?
 
