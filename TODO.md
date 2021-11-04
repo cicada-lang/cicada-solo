@@ -1,11 +1,10 @@
 # syntax
 
-- [syntax] sigma -- fix `repr`
-
 - parser/tests/pi.snapshot.ts
-- parser/tests/sigma.snapshot.ts
 
 - [syntax] sigma -- `there exists [a: A, b: B such that C]`
+
+- parser/tests/sigma.snapshot.ts
 
 - [syntax] sigma sugar -- `Pair(A, B)`
 

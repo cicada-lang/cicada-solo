@@ -92,7 +92,7 @@ export class Sigma extends Exp {
   repr(): string {
     const cars = this.sigma_cars_repr().join(", ")
     const cdr_t = this.sigma_cdr_t_repr()
-    return `(${cars}) * ${cdr_t}`
+    return `[${cars} | ${cdr_t}]`
   }
 }
 

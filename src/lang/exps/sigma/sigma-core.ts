@@ -44,12 +44,12 @@ export class SigmaCore extends Core {
   repr(): string {
     const cars = this.sigma_cars_repr().join(", ")
     const cdr_t = this.sigma_cdr_t_repr()
-    return `(${cars}) * ${cdr_t}`
+    return `[${cars} | ${cdr_t}]`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
     const cdr_t_repr = this.cdr_t.alpha_repr(ctx.extend(this.name))
-    return `(${this.car_t.alpha_repr(ctx)}) * ${cdr_t_repr}`
+    return `[${this.car_t.alpha_repr(ctx)} | ${cdr_t_repr}]`
   }
 }
 

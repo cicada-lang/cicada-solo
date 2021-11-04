@@ -1,1 +1,1 @@
-cons(1, 2): (_: Nat) * Nat
+cons(1, 2): [_: Nat | Nat]

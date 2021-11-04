@@ -1,4 +1,4 @@
-I am expecting the following two values to be the same (_: String, _1: String) -> (_2: String) * String.
+I am expecting the following two values to be the same (_: String, _1: String) -> [_2: String | String].
 But they are not.
 
 from left hand side:

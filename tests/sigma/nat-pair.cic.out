@@ -1,6 +1,6 @@
-(_: Nat) * Nat: Type
+[_: Nat | Nat]: Type
 2: Nat
-(_: Nat, _1: Nat) * Nat: Type
+[_: Nat, _1: Nat | Nat]: Type
 3: Nat
-(_: Nat, _1: Nat, _2: Nat) * Nat: Type
+[_: Nat, _1: Nat, _2: Nat | Nat]: Type
 4: Nat

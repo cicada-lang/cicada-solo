@@ -1,2 +1,2 @@
 Type: Type
-(_: Type) * Type: Type
+[_: Type | Type]: Type
