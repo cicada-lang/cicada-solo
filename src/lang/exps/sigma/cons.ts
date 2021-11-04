@@ -44,6 +44,6 @@ export class Cons extends Exp {
   }
 
   repr(): string {
-    return `cons(${this.car.repr()}, ${this.cdr.repr()})`
+    return `[${this.car.repr()} | ${this.cdr.repr()}]`
   }
 }

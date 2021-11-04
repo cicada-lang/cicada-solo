@@ -2,9 +2,9 @@ I am expecting the following two values to be the same [_: String | String].
 But they are not.
 
 from left hand side:
-  cons("ratatouille", "baguette")
+  ["ratatouille" | "baguette"]
 to right hand side:
-  cons("baguette", "ratatouille")
+  ["baguette" | "ratatouille"]
 
 not-the-same-pair.error.cic:
  3 |    [_: String | String],

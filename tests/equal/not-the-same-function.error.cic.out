@@ -2,9 +2,9 @@ I am expecting the following two values to be the same (_: String, _1: String) -
 But they are not.
 
 from left hand side:
-  (_, _1) => { cons(_, _1) }
+  (_, _1) => { [_ | _1] }
 to right hand side:
-  (_, _1) => { cons(_1, _) }
+  (_, _1) => { [_1 | _] }
 
 not-the-same-function.error.cic:
  3 |    (String) -> (String) -> [_: String | String],

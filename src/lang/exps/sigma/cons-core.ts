@@ -20,10 +20,10 @@ export class ConsCore extends Core {
   }
 
   repr(): string {
-    return `cons(${this.car.repr()}, ${this.cdr.repr()})`
+    return `[${this.car.repr()} | ${this.cdr.repr()}]`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    return `cons(${this.car.alpha_repr(ctx)}, ${this.cdr.alpha_repr(ctx)})`
+    return `[${this.car.alpha_repr(ctx)} | ${this.cdr.alpha_repr(ctx)}]`
   }
 }

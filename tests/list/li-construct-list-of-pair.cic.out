@@ -1,1 +1,1 @@
-li(cons("cooked", "cooked"), li(cons("eaten", "eaten"), li(cons("tried-cleaning", "tried-cleaning"), li(cons("understood", "understood"), li(cons("slept", "slept"), nil))))): List([_: String | String])
+li(["cooked" | "cooked"], li(["eaten" | "eaten"], li(["tried-cleaning" | "tried-cleaning"], li(["understood" | "understood"], li(["slept" | "slept"], nil))))): List([_: String | String])
