@@ -4,3 +4,9 @@
 [a: A, b: B | C(a, b)]
 [a: A, b: B | C(a, b)]
 [_: A | B]
+cons(a, b)
+cons(a, cons(b, c))
+cons(a, b)
+cons(a, cons(b, c))
+car(target)
+cdr(target)

@@ -239,6 +239,13 @@ export function operand_matcher(tree: pt.Tree): Exp {
       new Exps.Sigma("_", exp_matcher(car_t), exp_matcher(cdr_t), { span }),
     "operand:cons": ({ car, cdr }, { span }) =>
       new Exps.Cons(exp_matcher(car), exp_matcher(cdr), { span }),
+    "operand:cons_sugar": ({ exps, tail }, { span }) =>
+      exps_matcher(exps)
+        .reverse()
+        .reduce(
+          (result, exp) => new Exps.Cons(exp, result, { span }),
+          exp_matcher(tail)
+        ),
     "operand:cls": ({ entries }, { span }) =>
       pt.matchers
         .zero_or_more_matcher(entries)

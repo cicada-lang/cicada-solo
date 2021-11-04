@@ -1,8 +1,5 @@
 # syntax
 
-- [syntax] cons -- `[car | cdr]`
-- [syntax] cons -- `[a, b | c]`
-
 - [syntax] require comma -- `,` in object literal
 
 - [syntax] be able to write method in object literal -- `{ f(x: A): B { body } }`
