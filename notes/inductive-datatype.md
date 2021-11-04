@@ -335,7 +335,7 @@ We also need to describe `NonEmptyProperty`:
 
 ``` cicada
 NonEmptyProperty(implicit { X: Type }, P: (X) -> Type): Type {
-  (x: X) * P(x)
+  there exists [x: X such that P(x)]
 }
 
 class WellFounded {
