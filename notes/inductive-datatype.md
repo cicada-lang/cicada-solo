@@ -46,15 +46,17 @@ datatype Nat {
 
 ``` cicada
 ind_nat_t = (
-  target: Nat,
   motive: (Nat) -> Type,
   case_zero: motive(zero),
   case_add1: (
     prev: Nat,
     almost_on_prev: motive(prev),
   ) -> motive(add1(prev)),
-) -> motive(target)
+) -> for all (target: Nat) -> motive(target)
 ```
+
+Note that we make `target` the last argument,
+to emphasize the result of induction proof is of the form "for all".
 
 Suppose we have the following syntax for applying induction:
 
@@ -80,7 +82,10 @@ Note that:
   })
   ```
 
-Take `Nat` as an example, we have:
+We should support both special syntax `induction <type>`,
+and generate syntax `<type>.induction`.
+
+Take `Nat` as an example, we have special syntax:
 
 ``` cicada wishful-thinking
 induction Nat (n) => ... {
@@ -89,18 +94,14 @@ induction Nat (n) => ... {
 }
 ```
 
-Maybe we should use curried version,
-to emphasize the result of induction proof is of the form "forall".
+And generate syntax:
 
-``` cicada
-curried_ind_nat_t = (
-  motive: (Nat) -> Type,
-  case_zero: motive(zero),
-  case_add1: (
-    prev: Nat,
-    almost_on_prev: motive(prev),
-  ) -> motive(add1(prev)),
-) -> (target: Nat) -> motive(target)
+``` cicada wishful-thinking
+Nat.induction({
+  motive: (n) => ...,
+  zero: ...,
+  add1: (prev) (almost_on_prev) => ...,
+})
 ```
 
 ## List
@@ -119,19 +120,6 @@ datatype List(E: Type) {
 
 ``` cicada
 ind_list_t = (
-  implicit { E: Type },
-  target: List(E),
-  motive: (List(E)) -> Type,
-  case_nil: motive(nil),
-  case_li: (
-    head: E, tail: List(E),
-    almost_on_tail: motive(tail),
-  ) -> motive(li(head, tail)),
-) -> motive(target)
-```
-
-``` cicada
-curried_ind_list_t = (
   implicit { E: Type },
   motive: (List(E)) -> Type,
   case_nil: motive(nil),
@@ -176,32 +164,13 @@ In the definition of `Vector`, `E` is a parameter, `length` is an index.
   because we tried this version of `our_vector_ind` in the little book,
   it works, and it simplifies the proofs.
 
-``` cicada
-vector_ind_t: Type = (
-  implicit { E: Type, length: Nat },
-  target: Vector(E, length),
-  motive: (
-    length: Nat,
-    target: Vector(E, length),
-  ) -> Type,
-  case_vecnil: motive(0, vecnil),
-  case_vec: (
-    head: E,
-    implicit { prev: Nat },
-    tail: Vector(E, prev),
-    almost_on_tail: motive(prev, tail),
-  ) -> motive(add1(prev), vec(head, tail)),
-) -> motive(length, target)
-```
-
 > **Hypothesis: implicit parameters and indices**
 >
-> In the curried version,
-> we can write implicit parameters over `motive`,
+> We can write implicit parameters over `motive`,
 > and implicit indices over `target`.
 
 ``` cicada
-curried_vector_ind_t: Type = (
+vector_ind_t: Type = (
   // NOTE parameters
   implicit { E: Type },
   motive: (
@@ -240,16 +209,6 @@ datatype Either(L, R) {
 
 ``` cicada
 either_ind_t = (
-  implicit { L: Type, R: Type },
-  target: Either(L, R),
-  motive: (Either(L, R)) -> Type,
-  case_inl: (left: L) -> motive(inl(left)),
-  case_inr: (right: R) -> motive(inr(right)),
-) -> motive(target)
-```
-
-``` cicada
-curried_either_ind_t = (
   implicit { L: Type, R: Type },
   motive: (Either(L, R)) -> Type,
   case_inl: (left: L) -> motive(inl(left)),
@@ -300,19 +259,6 @@ Then we can define `ind_less_than_t`:
 
 ``` cicada
 ind_less_than_t = (
-  implicit { j: Nat, k: Nat },
-  target: LessThan(j, k),
-  motive: (j: Nat, k: Nat, LessThan(j, k)) -> Type,
-  case_zero_smallest: (n: Nat) -> motive(zero, add1(n), zero_smallest(n)),
-  case_add1_smallest: (
-    j: Nat, k: Nat, prev_smaller: LessThan(j, k),
-    almost_on_prev_smaller: motive(j, k, prev_smaller),
-  ) -> motive(add1(j), add1(k), add1_smaller(j, k, prev_smaller)),
-) -> motive(j, k, target)
-```
-
-``` cicada
-curried_ind_less_than_t = (
   motive: (j: Nat, k: Nat, LessThan(j, k)) -> Type,
   case_zero_smallest: (n: Nat) -> motive(zero, add1(n), zero_smallest(n)),
   case_add1_smallest: (
