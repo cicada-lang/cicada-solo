@@ -1,8 +1,3 @@
-# core features
-
-- `Fn` be able to annotate argument type and return type
-- support using `=` to do local definitions in class
-
 # inductive datatype
 
 > Inductive type can greatly reduce the number of expressions,
@@ -202,3 +197,8 @@
 # maybe
 
 - [maybe] offset in `CodeBlock`
+- [maybe] support using `let name = exp` to do local definitions in class
+
+# later
+
+- [later] `Fn` be able to annotate argument type and return type
