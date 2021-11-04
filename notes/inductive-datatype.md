@@ -59,7 +59,8 @@ ind_nat_t = (
 Suppose we have the following syntax for applying induction:
 
 ``` cicada wishful-thinking
-induction <type>(<arg>, ...) => ... {
+induction <type> {
+  motive (<arg>, ...) => ...
   case <cons>(<arg>, ...) => ...
   case <cons>(<arg>, ...) => ...
   ...
@@ -69,7 +70,8 @@ induction <type>(<arg>, ...) => ... {
 Take `Nat` as an example, we have:
 
 ``` cicada wishful-thinking
-induction Nat(n) => ... {
+induction Nat {
+  motive (n) => ...
   case zero => ...
   case add1(prev) (almost_on_prev) => ...
 }
@@ -129,7 +131,8 @@ curried_ind_list_t = (
 ```
 
 ``` cicada wishful-thinking
-induction List(list) => ... {
+induction List {
+  motive (list) => ...
   case nil => ...
   case li(head, tail) (almost_on_tail) => ...
 }
@@ -208,6 +211,14 @@ curried_vector_ind_t: Type = (
 ) -> motive(length, target)
 ```
 
+``` cicada wishful-thinking
+induction Vector {
+  motive (length, target) => ...
+  case vecnil => ...
+  case vec(head, tail) (almost_on_tail) => ...
+}
+```
+
 ## Either
 
 ``` cicada wishful-thinking
@@ -237,7 +248,8 @@ curried_either_ind_t = (
 ```
 
 ``` cicada wishful-thinking
-induction Either(target) => ... {
+induction Either {
+  motive (target) => ...
   case inl(left) => ...
   case inr(right) => ...
 }
@@ -305,7 +317,8 @@ curried_ind_less_than_t = (
 ```
 
 ``` cicada wishful-thinking
-induction LessThan(j, k, lt) => ... {
+induction LessThan {
+  motive (j, k, lt) => ...
   case zero_smallest(n) => ...
   case add1_smaller(j, k, prev_smaller) (almost_on_prev_smaller) => ...
 }
