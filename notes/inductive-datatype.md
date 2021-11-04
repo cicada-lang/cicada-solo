@@ -56,10 +56,20 @@ ind_nat_t = (
 ) -> motive(target)
 ```
 
-Suppose we have `induction (motive) { ... }`.
+Suppose we have the following syntax for applying induction:
 
 ``` cicada wishful-thinking
-induction (motive) {
+induction <type>(<arg>, ...) => ... {
+  case <cons>(<arg>, ...) => ...
+  case <cons>(<arg>, ...) => ...
+  ...
+}
+```
+
+Take `Nat` as an example, we have:
+
+``` cicada wishful-thinking
+induction Nat(n) => ... {
   case zero => ...
   case add1(prev) (almost_on_prev) => ...
 }
@@ -119,7 +129,7 @@ curried_ind_list_t = (
 ```
 
 ``` cicada wishful-thinking
-induction (motive) {
+induction List (motive) {
   case nil => ...
   case li(head, tail) (almost_on_tail) => ...
 }
@@ -227,7 +237,7 @@ curried_either_ind_t = (
 ```
 
 ``` cicada wishful-thinking
-induction (motive) {
+induction Either (motive) {
   case inl(left) => ...
   case inr(right) => ...
 }
@@ -295,7 +305,7 @@ curried_ind_less_than_t = (
 ```
 
 ``` cicada wishful-thinking
-induction (motive) {
+induction LessThan (motive) {
   case zero_smallest(n) => ...
   case add1_smaller(j, k, prev_smaller) (almost_on_prev_smaller) => ...
 }
