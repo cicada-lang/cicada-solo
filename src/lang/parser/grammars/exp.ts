@@ -146,6 +146,16 @@ export const operand = {
       '">"',
       { ret_t: "exp" },
     ],
+    "operand:pi_for_all": [
+      '"for"',
+      '"all"',
+      '"("',
+      { bindings: "bindings" },
+      '")"',
+      '"-"',
+      '">"',
+      { ret_t: "exp" },
+    ],
     "operand:fn": [
       '"("',
       { names: "names" },

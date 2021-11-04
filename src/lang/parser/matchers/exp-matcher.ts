@@ -231,6 +231,7 @@ export function operator_matcher(tree: pt.Tree): Exp {
 export function operand_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "operand:pi": pi_handler,
+    "operand:pi_for_all": pi_handler,
     "operand:fn": fn_handler,
     "operand:sigma": sigma_handler,
     "operand:cons": ({ car, cdr }, { span }) =>

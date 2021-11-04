@@ -4,35 +4,50 @@ title: Syntax Summary
 
 # stmts
 
-define:
-- name = exp
-- name: t = exp
-- name(arg: arg_t, ...): ret_t = exp
+## define
 
-show:
-- exp
+``` cicada impression
+name = exp
+name: t = exp
+name(arg: arg_t, ...): ret_t = exp
+```
+
+## show
+
+``` cicada impression
+exp
+```
 
 # exps
 
-type:
-- Type
+## type
 
-let:
-- name = exp; exp
+``` cicada impression
+Type
+```
 
-problems about let:
-- `name = exp; exp` is like python, should we use `let name = exp; exp`?
+## let
 
-the:
-- the(t, exp)
-- is(exp, t)
+``` cicada impression
+name = exp; exp
+```
 
-pi:
-- (name: arg_t) -> ret_t
-- for all (a: A, b: B) -> C
-- (arg_t) -> ret_t
-- (name) => ret
-- target(arg, ...)
+## the
+
+``` cicada impression
+the(t, exp)
+is(exp, t)
+```
+
+## pi
+
+``` cicada impression
+(name: arg_t) -> ret_t
+for all (a: A, b: B) -> C
+(arg_t) -> ret_t
+(name) => ret
+target(arg, ...)
+```
 
 old sigma:
 - (name: car_t) * cdr_t

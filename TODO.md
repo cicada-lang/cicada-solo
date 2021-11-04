@@ -1,7 +1,5 @@
 # syntax
 
-- [syntax] `for all (a: A, b: B) -> C`
-
 - [syntax] improve syntax of sigma
 
   - `[a: A, b: B | C]`
