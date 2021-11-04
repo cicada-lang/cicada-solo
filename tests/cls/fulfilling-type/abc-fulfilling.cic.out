@@ -1,8 +1,4 @@
-{
-  a: sole
-  b: 2
-  c: "c"
-}: class {
+{ a: sole, b: 2, c: "c" }: class {
   a: Trivial = sole
   b: Nat = 2
   c: String
@@ -10,11 +6,7 @@
 sole: Trivial
 2: Nat
 "c": String
-{
-  a: sole
-  b: 2
-  c: "c"
-}: class {
+{ a: sole, b: 2, c: "c" }: class {
   a: Trivial = sole
   b: Nat = 2
   c: String = "c"

@@ -1,7 +1,5 @@
 # syntax
 
-- [syntax] obj -- fix `repr` -- add `,`
-
 - [syntax] be able to write method in object literal -- `{ f(x: A): B { body } }`
 
 # core features

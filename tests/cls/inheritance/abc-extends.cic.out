@@ -1,11 +1,4 @@
-{
-  a: sole
-  b: 2
-  c: "c"
-  e: sole
-  f: 5
-  g: "g"
-}: class {
+{ a: sole, b: 2, c: "c", e: sole, f: 5, g: "g" }: class {
   a: Trivial
   b: Nat
   c: String

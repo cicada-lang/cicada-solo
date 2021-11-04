@@ -77,8 +77,8 @@ export class Obj extends Exp {
   }
 
   repr(): string {
-    const s = this.properties.map((prop) => prop.repr()).join("\n")
-    return `{\n${ut.indent(s, "  ")}\n}`
+    const s = this.properties.map((prop) => prop.repr()).join(", ")
+    return `{ ${s} }`
   }
 }
 

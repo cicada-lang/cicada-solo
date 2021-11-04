@@ -1,9 +1,4 @@
-{
-  X: String
-  a: 1
-  b: "b"
-  equal: refl
-}: class {
+{ X: String, a: 1, b: "b", equal: refl }: class {
   X: Type
   a: Nat
   b: X

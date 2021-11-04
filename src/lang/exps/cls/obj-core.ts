@@ -27,14 +27,14 @@ export class ObjCore extends Core {
   repr(): string {
     const s = Array.from(this.properties)
       .map(([name, exp]) => `${name}: ${exp.repr()}`)
-      .join("\n")
-    return `{\n${ut.indent(s, "  ")}\n}`
+      .join(", ")
+    return `{ ${s} }`
   }
 
   alpha_repr(ctx: AlphaCtx): string {
     const s = Array.from(this.properties)
       .map(([name, exp]) => `${name}: ${exp.alpha_repr(ctx)}`)
-      .join("\n")
-    return `{\n${ut.indent(s, "  ")}\n}`
+      .join(", ")
+    return `{ ${s} }`
   }
 }
