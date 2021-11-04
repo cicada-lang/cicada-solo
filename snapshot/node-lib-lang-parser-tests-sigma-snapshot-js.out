@@ -1,5 +1,6 @@
-[a: A, b: B | C]
+[a: A | C(a)]
+[_: A | C]
 [a: A, b: B | C(a, b)]
-[a: A, b: B | C]
+[a: A, b: B | C(a, b)]
 [a: A, b: B | C(a, b)]
 [_: A | B]

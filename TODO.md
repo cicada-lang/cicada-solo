@@ -1,13 +1,16 @@
 # syntax
 
-- [syntax] cons -- `[car | cdr]`
+- parser-tester-instance.ts
 
-- [syntax] cons -- `[a, b | c]`
+- [syntax] optional `return` in last expression of function body
 
 - [syntax] optional `;` for `let`
+- [syntax] let -- fix `repr` -- print the optional `;`
+
+- [syntax] cons -- `[car | cdr]`
+- [syntax] cons -- `[a, b | c]`
 
 - [syntax] require comma in object literal
-
 - [syntax] be able to write method in object literal
 
 # core features

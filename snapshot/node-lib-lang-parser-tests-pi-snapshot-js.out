@@ -1,4 +1,9 @@
-(a: A, b: B) -> C
-(a: A, b: B) -> C
+(_: A) -> C
+(_: A, _: B) -> C
 (a: A, b: B) -> C(a, b)
 (a: A, b: B) -> C(a, b)
+(x) => { body }
+(x) => { body }
+f(x)
+f(x, y)
+f(x, y)

@@ -1,0 +1,4 @@
+Equal(t, from, to)
+refl
+same(x)
+replace(target, motive, base)

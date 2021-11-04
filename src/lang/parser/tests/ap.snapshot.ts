@@ -1,3 +1,3 @@
 import { tester } from "./utilities"
 
-tester.exp(`add1(123)`)
+tester.echo_exp(`add1(123)`)

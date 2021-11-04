@@ -4,6 +4,6 @@ import { tester } from "./utilities"
 
 tester.not_exp(`implicit`)
 
-tester.exp(`123`)
-tester.exp(`"abc"`)
-tester.exp(`x`)
+tester.echo_exp(`123`)
+tester.echo_exp(`"abc"`)
+tester.echo_exp(`x`)
