@@ -1,7 +1,5 @@
 # syntax
 
-- parser-tester-instance.ts
-
 - [syntax] optional `return` in last expression of function body
 
 - [syntax] optional `;` for `let`

@@ -1,4 +1,4 @@
-import { tester } from "./utilities"
+import { tester } from "../parser-tester-instance"
 
 tester.echo_exp(`(A) -> C`)
 tester.echo_exp(`(A, B) -> C`)

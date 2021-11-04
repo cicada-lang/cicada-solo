@@ -1,4 +1,4 @@
-import { tester } from "./utilities"
+import { tester } from "../parser-tester-instance"
 
 tester.echo_exp(`class { a: A, b: B(a), c: C(a, b) }`)
 

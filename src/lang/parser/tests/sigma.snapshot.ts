@@ -1,4 +1,4 @@
-import { tester } from "./utilities"
+import { tester } from "../parser-tester-instance"
 
 tester.echo_exp(`[a: A | C(a)]`)
 tester.echo_exp(`[_: A | C]`)
