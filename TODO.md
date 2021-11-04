@@ -2,14 +2,12 @@
 
 - [syntax] sigma -- fix `repr`
 
-- ambr suger sugar
-
 - parser/tests/pi.snapshot.ts
 - parser/tests/sigma.snapshot.ts
 
 - [syntax] sigma -- `there exists [a: A, b: B such that C]`
 
-- [syntax] sigma suger -- `Pair(A, B)`
+- [syntax] sigma sugar -- `Pair(A, B)`
 
 - [syntax] cons -- `[car | cdr]`
 

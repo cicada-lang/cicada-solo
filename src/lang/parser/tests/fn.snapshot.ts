@@ -1,6 +1,6 @@
 import { tester } from "./utilities"
 
-// NOTE suger for not repeating argument list
+// NOTE sugar for not repeating argument list
 
 tester.echo_stmts(`
 
@@ -23,7 +23,7 @@ id: (A: Type, x: A) -> A =
   (B, y) => y
 `)
 
-// NOTE suger for multi-argument function
+// NOTE sugar for multi-argument function
 
 tester.echo_stmts(`
 

@@ -1,6 +1,6 @@
-# suger for not repeating argument list
+# sugar for not repeating argument list
 
-This is a C language family syntax suger.
+This is a C language family syntax sugar.
 
 ``` cicada
 id1(A: Type, x: A): A {
@@ -23,7 +23,7 @@ id2(Nat, 1)
 id3(Nat, 1)
 ```
 
-# suger for multi-argument function
+# sugar for multi-argument function
 
 We can write both `(x, y)` and `(x) (y)` for function of two arguments.
 
