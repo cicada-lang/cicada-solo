@@ -1,21 +1,16 @@
-I am expecting the following two values to be the same String.
-But they are not.
+I found syntax error in file: abc-pre-filled.error.cic
 
-from given field value:
-  "c"
-to already fulfilled value:
-  "d"
-
-abc-pre-filled.error.cic:
- 27 |  e: String
- 28 |}
- 29 |
- 30 |abcde: ABCDE(sole, 2, "d") = {
- 31 |  a: sole
- 32 |  b: 2
- 33 |  c: "c" // NOTE "c" is not equal to "d"
- 34 |  d: "d"
- 35 |  e: "e"
- 36 |}
- 37 |
- 38 |abcde
+  8 |
+  9 |abc: ABC(sole, 2) = {
+ 10 |  a: sole
+ 11 |  b: 2
+ 12 |  c: "c"
+ 13 |}
+Found the identifier "b" in [142, 143], while expecting:
+ ",":
+     zero_or_more:more@39 -> (head: property):field@42 > "," (tail: zero_or_more) 
+ ",":
+     optional:one@42 -> > "," 
+ "}":
+     operand:obj@38 -> "{"@39 (properties: zero_or_more):zero@39 (last_property: property):field@42 optional:zero@42 > "}" 
+ and so on ...

@@ -220,7 +220,9 @@ export const operand = {
     ],
     "operand:obj": [
       '"{"',
-      { properties: { $ap: ["zero_or_more", "property"] } },
+      { properties: { $ap: ["zero_or_more", "property", '","'] } },
+      { last_property: "property" },
+      { $ap: ["optional", '","'] },
       '"}"',
     ],
     "operand:nat": ['"Nat"'],
@@ -522,16 +524,8 @@ export const arg_implicit_entry = {
 
 export const property = {
   $grammar: {
-    "property:field_shorthand": [
-      { name: "identifier" },
-      { $ap: ["optional", '","'] },
-    ],
-    "property:field": [
-      { name: "identifier" },
-      '":"',
-      { exp: "exp" },
-      { $ap: ["optional", '","'] },
-    ],
+    "property:field_shorthand": [{ name: "identifier" }],
+    "property:field": [{ name: "identifier" }, '":"', { exp: "exp" }],
     "property:method": [
       { name: "identifier" },
       '"("',
@@ -539,14 +533,7 @@ export const property = {
       '")"',
       '":"',
       { ret_t: "exp" },
-      { $ap: ["optional", '","'] },
     ],
-    "property:spread": [
-      '"."',
-      '"."',
-      '"."',
-      { exp: "exp" },
-      { $ap: ["optional", '","'] },
-    ],
+    "property:spread": ['"."', '"."', '"."', { exp: "exp" }],
   },
 }

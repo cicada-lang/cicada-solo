@@ -13,12 +13,12 @@ class ABCEFG extends ABC {
 }
 
 abcefg: ABCEFG = {
-  a: sole
-  b: 2
-  c: "c"
-  e: sole
-  f: 5
-  g: "g"
+  a: sole,
+  b: 2,
+  c: "c",
+  e: sole,
+  f: 5,
+  g: "g",
 }
 
 abcefg

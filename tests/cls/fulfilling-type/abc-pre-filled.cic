@@ -7,9 +7,9 @@ class ABC {
 }
 
 abc: ABC(sole, 2) = {
-  a: sole
-  b: 2
-  c: "c"
+  a: sole,
+  b: 2,
+  c: "c",
 }
 
 abc
@@ -28,11 +28,11 @@ class ABCDE {
 }
 
 abcde: ABCDE(sole, 2, "c") = {
-  a: sole
-  b: 2
-  c: "c"
-  d: "d"
-  e: "e"
+  a: sole,
+  b: 2,
+  c: "c",
+  d: "d",
+  e: "e",
 }
 
 abcde

@@ -300,9 +300,12 @@ export function operand_matcher(tree: pt.Tree): Exp {
           ),
         { span }
       ),
-    "operand:obj": ({ properties }, { span }) =>
+    "operand:obj": ({ properties, last_property }, { span }) =>
       new Exps.Obj(
-        pt.matchers.zero_or_more_matcher(properties).map(property_matcher),
+        [
+          ...pt.matchers.zero_or_more_matcher(properties).map(property_matcher),
+          property_matcher(last_property),
+        ],
         { span }
       ),
     "operand:nat": (_, { span }) => new Exps.Nat({ span }),

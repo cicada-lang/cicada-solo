@@ -9,8 +9,8 @@ class Test {
 }
 
 the(Test, {
-  X: a
-  a: 1
-  b: "b"
-  equal: refl
+  X: a,
+  a: 1,
+  b: "b",
+  equal: refl,
 })
