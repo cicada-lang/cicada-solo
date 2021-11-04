@@ -691,10 +691,7 @@ export function property_matcher(tree: pt.Tree): Exps.Prop {
     "property:field": ({ name, exp }) =>
       new Exps.FieldProp(pt.str(name), exp_matcher(exp)),
     "property:method": ({ name, names, ret }, { span }) =>
-      new Exps.FieldProp(
-        pt.str(name),
-        fn_handler({ names, ret }, { span })
-      ),
+      new Exps.FieldProp(pt.str(name), fn_handler({ names, ret })),
     "property:spread": ({ exp }) => new Exps.SpreadProp(exp_matcher(exp)),
   })(tree)
 }
