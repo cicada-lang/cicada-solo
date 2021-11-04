@@ -1,7 +1,5 @@
 # syntax
 
-- parser/tests/pi.snapshot.ts
-
 - [syntax] sigma -- `there exists [a: A, b: B such that C]`
 
 - parser/tests/sigma.snapshot.ts
