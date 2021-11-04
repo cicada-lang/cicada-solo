@@ -60,11 +60,24 @@ Suppose we have the following syntax for applying induction:
 
 ``` cicada wishful-thinking
 induction <type> (<arg>, ...) => ... {
-  case <cons>(<arg>, ...) => ...
-  case <cons>(<arg>, ...) => ...
+  case <cons1>(<arg>, ...) => ...
+  case <cons2>(<arg>, ...) => ...
   ...
 }
 ```
+
+Note that:
+
+- `induction <type>` can be viewed as special case of dot `<type>.induction`.
+- `induction <type> ...` can be viewed as special case of named function application:
+
+  ``` cicada wishful-thinking
+  <type>.induction({
+    motive: ...,
+    cons1: ...,
+    cons2: ...,
+  })
+  ```
 
 Take `Nat` as an example, we have:
 
