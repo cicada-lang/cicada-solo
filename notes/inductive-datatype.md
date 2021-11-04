@@ -67,10 +67,8 @@ induction <type> (<arg>, ...) => ... {
 ```
 
 Note that:
-
 - `induction <type>` can be viewed as special case of dot `<type>.induction`.
 - `induction <type> ...` can be viewed as special case of named function application:
-
   ``` cicada wishful-thinking
   <type>.induction({
     motive: ...,
