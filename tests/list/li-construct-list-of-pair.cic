@@ -1,9 +1,9 @@
 the(
-  List((String) * String),
+  List([_: String | String]),
   li! [
-    the((String) * String, cons("cooked", "cooked")),
-    the((String) * String, cons("eaten", "eaten")),
-    the((String) * String, cons("tried-cleaning", "tried-cleaning")),
-    the((String) * String, cons("understood", "understood")),
-    the((String) * String, cons("slept", "slept")),
+    the([_: String | String], cons("cooked", "cooked")),
+    the([_: String | String], cons("eaten", "eaten")),
+    the([_: String | String], cons("tried-cleaning", "tried-cleaning")),
+    the([_: String | String], cons("understood", "understood")),
+    the([_: String | String], cons("slept", "slept")),
   ])

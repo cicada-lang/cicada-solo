@@ -3,17 +3,17 @@ two = add1(one)
 three = add1(two)
 four = add1(three)
 
-(Nat) * Nat
+[_: Nat | Nat]
 
-one_two: (Nat) * Nat = cons(one, two)
+one_two: [_: Nat | Nat] = cons(one, two)
 cdr(one_two)
 
-(Nat, Nat) * Nat
+[_: Nat, _: Nat | Nat]
 
-one_two_three: (Nat, Nat) * Nat = cons(one, cons(two, three))
+one_two_three: [_: Nat, _: Nat | Nat] = cons(one, cons(two, three))
 cdr(cdr(one_two_three))
 
-(Nat, Nat, Nat) * Nat
+[_: Nat, _: Nat, _: Nat | Nat]
 
-one_two_three_four: (Nat, Nat, Nat) * Nat = cons(one, cons(two, cons(three, four)))
+one_two_three_four: [_: Nat, _: Nat, _: Nat | Nat] = cons(one, cons(two, cons(three, four)))
 cdr(cdr(cdr(one_two_three_four)))

@@ -4,5 +4,5 @@ But the expected type is:
   Type
 
 pair-can-only-take-type.error.cic:
- 1 |("oil") * String
+ 1 |[_: "oil" | String]
  2 |

@@ -165,11 +165,11 @@ export const operand = {
       { ret: "exp" },
     ],
     "operand:sigma": [
-      '"("',
-      { bindings: "bindings" },
-      '")"',
-      '"*"',
+      '"["',
+      { bindings: "sigma_bindings" },
+      '"|"',
       { cdr_t: "exp" },
+      '"]"',
     ],
     "operand:cons": [
       '"cons"',
@@ -374,6 +374,22 @@ export const cls_entry = {
       '"}"',
       { $ap: ["optional", '","'] },
     ],
+  },
+}
+
+export const sigma_bindings = {
+  $grammar: {
+    "sigma_bindings:sigma_bindings": [
+      { entries: { $ap: ["zero_or_more", "sigma_binding", '","'] } },
+      { last_entry: "sigma_binding" },
+      { $ap: ["optional", '","'] },
+    ],
+  },
+}
+
+export const sigma_binding = {
+  $grammar: {
+    "sigma_binding:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
   },
 }
 

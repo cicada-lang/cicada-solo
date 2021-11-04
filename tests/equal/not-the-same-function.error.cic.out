@@ -7,7 +7,7 @@ to right hand side:
   (_, _1) => { cons(_1, _) }
 
 not-the-same-function.error.cic:
- 3 |    (String) -> (String) -> (String) * String,
+ 3 |    (String) -> (String) -> [_: String | String],
  4 |    (x, y) => cons(x, y),
  5 |    (y, x) => cons(x, y)),
  6 |  refl)

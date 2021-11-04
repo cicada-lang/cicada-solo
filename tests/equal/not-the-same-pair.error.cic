@@ -1,6 +1,6 @@
 the(
   Equal(
-    (String) * String,
+    [_: String | String],
     cons("ratatouille", "baguette"),
     cons("baguette", "ratatouille")),
   refl)

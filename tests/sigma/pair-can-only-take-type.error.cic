@@ -1,1 +1,1 @@
-("oil") * String
+[_: "oil" | String]

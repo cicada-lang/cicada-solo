@@ -1,9 +1,19 @@
 # syntax
 
-- [syntax] improve syntax of sigma
+- [syntax] sigma -- fix `repr`
 
-  - `[a: A, b: B | C]`
-  - `there exists [a: A, b: B such that C]`
+- ambr suger sugar
+
+- parser/tests/pi.snapshot.ts
+- parser/tests/sigma.snapshot.ts
+
+- [syntax] sigma -- `there exists [a: A, b: B such that C]`
+
+- [syntax] sigma suger -- `Pair(A, B)`
+
+- [syntax] cons -- `[car | cdr]`
+
+- [syntax] cons -- `[a, b | c]`
 
 - [syntax] optional `;` for `let`
 

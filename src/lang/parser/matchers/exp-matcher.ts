@@ -100,7 +100,7 @@ export function sigma_handler(
 ): Exp {
   const { bindings, cdr_t } = body
 
-  return bindings_matcher(bindings)
+  return sigma_bindings_matcher(bindings)
     .reverse()
     .reduce((result, binding) => {
       switch (binding.kind) {
@@ -563,6 +563,26 @@ export function binding_matcher(tree: pt.Tree): Binding {
         .zero_or_more_matcher(entries)
         .map(binding_implicit_entry_matcher),
       last_entry: binding_implicit_entry_matcher(last_entry),
+      span,
+    }),
+  })(tree)
+}
+
+export function sigma_bindings_matcher(tree: pt.Tree): Array<Binding> {
+  return pt.matcher({
+    "sigma_bindings:sigma_bindings": ({ entries, last_entry }) => [
+      ...pt.matchers.zero_or_more_matcher(entries).map(sigma_binding_matcher),
+      sigma_binding_matcher(last_entry),
+    ],
+  })(tree)
+}
+
+export function sigma_binding_matcher(tree: pt.Tree): Binding {
+  return pt.matcher<Binding>({
+    "sigma_binding:named": ({ name, exp }, { span }) => ({
+      kind: "named",
+      name: pt.str(name),
+      exp: exp_matcher(exp),
       span,
     }),
   })(tree)

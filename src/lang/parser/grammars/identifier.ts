@@ -9,6 +9,7 @@ const preserved = [
   "is",
   "implicit",
   // built-in
+  "Pair",
   "cons",
   "car",
   "cdr",

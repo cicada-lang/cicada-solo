@@ -7,7 +7,7 @@ to right hand side:
   cons("baguette", "ratatouille")
 
 not-the-same-pair.error.cic:
- 3 |    (String) * String,
+ 3 |    [_: String | String],
  4 |    cons("ratatouille", "baguette"),
  5 |    cons("baguette", "ratatouille")),
  6 |  refl)

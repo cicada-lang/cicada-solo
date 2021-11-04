@@ -49,13 +49,6 @@ for all (a: A, b: B) -> C
 target(arg, ...)
 ```
 
-old sigma:
-- (name: car_t) * cdr_t
-- (car_t) * cdr_t
-- cons(car, cdr)
-- car(target)
-- cdr(target)
-
 sigma:
 - [name: car_t | cdr_t]
 - [car | cdr]

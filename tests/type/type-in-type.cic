@@ -2,6 +2,6 @@ type: Type = Type
 
 type
 
-pair_of_types: Type = (Type) * Type
+pair_of_types: Type = [_:Type | Type]
 
 pair_of_types
