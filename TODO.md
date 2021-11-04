@@ -2,8 +2,6 @@
 
 - [syntax] sigma -- `there exists [a: A, b: B such that C]`
 
-- parser/tests/sigma.snapshot.ts
-
 - [syntax] sigma sugar -- `Pair(A, B)`
 
 - [syntax] cons -- `[car | cdr]`
