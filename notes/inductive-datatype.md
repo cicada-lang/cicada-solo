@@ -61,7 +61,8 @@ to emphasize the result of induction proof is of the form "for all".
 Suppose we have the following syntax for applying induction:
 
 ``` cicada wishful-thinking
-induction <type> (parameter, ...) (index, ...) => ... {
+induction <type> (parameter, ...) {
+  (index, ...) => ...
   case <cons1>(<arg>, ...) => ...
   case <cons2>(<arg>, ...) => ...
   ...
@@ -72,10 +73,11 @@ Note that:
 
 - `induction <type>` can be viewed as special case of dot `<type>.induction`.
 
-- `induction <type> ...` can be viewed as special case of named function application:
+- `induction <type> (parameter, ...) { ... }`
+  can be viewed as special case of named function application:
 
   ``` cicada wishful-thinking
-  <type>.induction({
+  <type>.induction((parameter, ...) => {
     motive: ...,
     cons1: ...,
     cons2: ...,
@@ -88,7 +90,8 @@ and generate syntax `<type>.induction`.
 Take `Nat` as an example, we have special syntax:
 
 ``` cicada wishful-thinking
-induction Nat (n) => ... {
+induction Nat {
+  (n) => ...
   case zero => ...
   case add1(prev) (almost_on_prev) => ...
 }
