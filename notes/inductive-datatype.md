@@ -141,7 +141,7 @@ induction List(E) {
 ## Vector
 
 ``` cicada wishful-thinking
-datatype Vector(E: Type) index (length: Nat) {
+datatype Vector(E: Type) (length: Nat) {
   vecnil: Vector(E, zero)
   vec(head: E, tail: Vector(E, prev)): Vector(E, zero)
 }
@@ -229,7 +229,7 @@ induction Either(L, R) {
 ## LessThan
 
 ``` cicada wishful-thinking
-datatype LessThan index (j: Nat, k: Nat) {
+datatype LessThan() (j: Nat, k: Nat) {
   zero_smallest: (n: Nat) -> LessThan(zero, add1(n))
   add1_smaller: (
     j: Nat, k: Nat,
