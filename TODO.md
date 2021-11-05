@@ -122,10 +122,6 @@
 
 # books
 
-- [books] revise the little book exercises
-
-  - inline all the motive, and see will the proofs read better.
-
 - [books] [EWD1240a] A little bit of lattice theory
   - To test our system.
   - This paper is about the relation between PartialOrder and Lattice.

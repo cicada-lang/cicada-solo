@@ -61,7 +61,7 @@ to emphasize the result of induction proof is of the form "for all".
 Suppose we have the following syntax for applying induction:
 
 ``` cicada wishful-thinking
-induction <type> (<arg>, ...) => ... {
+induction <type> (parameter, ...) (index, ...) => ... {
   case <cons1>(<arg>, ...) => ...
   case <cons2>(<arg>, ...) => ...
   ...
@@ -120,7 +120,7 @@ datatype List(E: Type) {
 
 ``` cicada
 ind_list_t = (
-  implicit { E: Type },
+  E: Type,
   motive: (List(E)) -> Type,
   case_nil: motive(nil),
   case_li: (
@@ -131,7 +131,8 @@ ind_list_t = (
 ```
 
 ``` cicada wishful-thinking
-induction List (list) => ... {
+induction List(E) {
+  (list) => ...
   case nil => ...
   case li(head, tail) (almost_on_tail) => ...
 }
@@ -140,7 +141,7 @@ induction List (list) => ... {
 ## Vector
 
 ``` cicada wishful-thinking
-datatype Vector(E: Type, length: Nat) {
+datatype Vector(E: Type) index (length: Nat) {
   vecnil: Vector(E, zero)
   vec(head: E, tail: Vector(E, prev)): Vector(E, zero)
 }
@@ -166,13 +167,13 @@ In the definition of `Vector`, `E` is a parameter, `length` is an index.
 
 > **Hypothesis: implicit parameters and indices**
 >
-> We can write implicit parameters over `motive`,
-> and implicit indices over `target`.
+> We should not write implicit parameters over `motive`,
+> we should write implicit indices over `target`.
 
 ``` cicada
 vector_ind_t: Type = (
   // NOTE parameters
-  implicit { E: Type },
+  E: Type,
   motive: (
     length: Nat,
     target: Vector(E, length),
@@ -192,7 +193,8 @@ vector_ind_t: Type = (
 ```
 
 ``` cicada wishful-thinking
-induction Vector (length, target) => ... {
+induction Vector(E) {
+  (length, target) => ...
   case vecnil => ...
   case vec(head, tail) (almost_on_tail) => ...
 }
@@ -209,7 +211,7 @@ datatype Either(L, R) {
 
 ``` cicada
 either_ind_t = (
-  implicit { L: Type, R: Type },
+  L: Type, R: Type,
   motive: (Either(L, R)) -> Type,
   case_inl: (left: L) -> motive(inl(left)),
   case_inr: (right: R) -> motive(inr(right)),
@@ -217,7 +219,8 @@ either_ind_t = (
 ```
 
 ``` cicada wishful-thinking
-induction Either (target) => ... {
+induction Either(L, R) {
+  (target) => ...
   case inl(left) => ...
   case inr(right) => ...
 }
@@ -226,7 +229,7 @@ induction Either (target) => ... {
 ## LessThan
 
 ``` cicada wishful-thinking
-datatype LessThan(j: Nat, k: Nat) {
+datatype LessThan index (j: Nat, k: Nat) {
   zero_smallest: (n: Nat) -> LessThan(zero, add1(n))
   add1_smaller: (
     j: Nat, k: Nat,
@@ -272,7 +275,8 @@ ind_less_than_t = (
 ```
 
 ``` cicada wishful-thinking
-induction LessThan (j, k, lt) => ... {
+induction LessThan {
+  (j, k, lt) => ...
   case zero_smallest(n) => ...
   case add1_smaller(j, k, prev_smaller) (almost_on_prev_smaller) => ...
 }
