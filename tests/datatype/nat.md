@@ -74,22 +74,22 @@ same_as_chart! Nat [
 # mul
 
 ``` cicada
-mul(x: Nat): (Nat) -> Nat {
+mul(x: Nat, y: Nat): Nat {
   induction_nat(
     (_) => Nat,
     0,
-    (_prev, almost) => add(almost, x)
-  )
+    (_prev, almost) => add(almost, y)
+  ) (x)
 }
 ```
 
 ``` cicada wishful-thinking
-mul(x: Nat): (Nat) -> Nat {
+mul(x: Nat, y: Nat): Nat {
   induction Nat {
     (_) => Nat
     case zero => 0
-    case add1(_prev, almost) => add(almost.prev, x)
-  }
+    case add1(_prev, almost) => add(almost.prev, y)
+  } (x)
 }
 ```
 
@@ -101,31 +101,38 @@ same_as_chart! Nat [
 ]
 ```
 
-# pow
+# power_of & power
 
 ``` cicada
-pow(x: Nat): (Nat) -> Nat {
+power_of(x: Nat, y: Nat): Nat {
   induction_nat(
     (_) => Nat,
     1,
-    (_prev, almost) => mul(almost, x),
-  )
+    (_prev, almost) => mul(almost, y),
+  ) (x)
 }
 ```
 
 ``` cicada wishful-thinking
-pow(x: Nat): (Nat) -> Nat {
+power(x: Nat, y: Nat): Nat {
   induction Nat {
     (_) => Nat
     case zero => 1
-    case add1(_prev, almost) => mul(almost.prev, x)
-  }
+    case add1(_prev, almost) => mul(almost.prev, y)
+  } (x)
+}
+```
+
+``` cicada
+power(base: Nat, n: Nat): Nat {
+  power_of(n, base)
 }
 ```
 
 ``` cicada
 same_as_chart! Nat [
-  pow(4, 3),
+  power(4, 3),
+  power_of(3, 4),
   64,
 ]
 ```

@@ -3,8 +3,6 @@
 > It can greatly reduce the number of expressions,
 > after then all other works would be easier.
 
-- [prepare test] `Nat` as `datatype` -- `power_of` and `power`
-
 - [prepare test] `Vector` as `datatype` -- `vector_append`
 - [prepare test] `Vector` as `datatype` -- more functions
 
@@ -18,6 +16,8 @@
     thus `dot` must be a interface,
     not just for class and object.
     and the same for `ap`.
+
+- [question] Why `target` should be first argument in `add`?
 
 - note about the intuition of Noetherian induction
 
