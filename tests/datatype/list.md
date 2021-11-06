@@ -75,7 +75,7 @@ append(implicit { E: Type }, x: List(E), y: List(E)): List(E) {
 
 ``` cicada wishful-thinking
 append(implicit { E: Type }, x: List(E), y: List(E)): List(E) {
-  induction x {
+  induction (x) {
     (_) => List(E)
     case nil => y
     case li(head, _tail, almost) => List.li(head, almost.tail)
