@@ -160,9 +160,9 @@ In the definition of `Vector`, `E` is a parameter, `length` is an index.
 >
 > The `motive` does not take parameter, but take index.
 
-> **Problem: indices in case argument**
->
-> Should we make the indices implicit?
+Why we should not make the indices in `motive` implicit?
+
+TODO
 
 - I think we should make indices implicit,
   because we tried this version of `our_vector_ind` in the little book,
@@ -194,6 +194,14 @@ vector_ind_t: Type = (
   target: Vector(E, length),
 ) -> motive(length, target)
 ```
+
+Why we can write implicit over `target`?
+
+TODO
+
+Why we can write implicit in cases' arguments?
+
+TODO
 
 ``` cicada wishful-thinking
 induction Vector(E) {
