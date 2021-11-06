@@ -1,4 +1,3 @@
-- vector -- keep `target` the first argument
 - remove `our_vector_ind` from book
 - update inductive datatype note
 
