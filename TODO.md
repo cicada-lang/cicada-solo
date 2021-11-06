@@ -1,5 +1,7 @@
 - nat -- keep `target` the first argument
 - vector -- keep `target` the first argument
+- remove `our_vector_ind` from book
+- update inductive datatype note
 
 > **Inductive type**
 >
