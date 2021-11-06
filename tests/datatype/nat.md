@@ -29,16 +29,6 @@ induction_nat(
 
 # add
 
-``` cicada wishful-thinking
-add(x: Nat): (Nat) -> Nat {
-  induction Nat {
-    (_) => Nat
-    case zero => x
-    case add1(_prev, almost) => add1(almost)
-  }
-}
-```
-
 ``` cicada
 add(x: Nat): (Nat) -> Nat {
   induction_nat (
@@ -46,6 +36,16 @@ add(x: Nat): (Nat) -> Nat {
     x,
     (_prev, almost) => add1(almost),
   )
+}
+```
+
+``` cicada wishful-thinking
+add(x: Nat): (Nat) -> Nat {
+  induction Nat {
+    (_) => Nat
+    case zero => x
+    case add1(_prev, almost) => add1(almost)
+  }
 }
 ```
 
@@ -59,16 +59,6 @@ same_as_chart! Nat [
 
 # mul
 
-``` cicada wishful-thinking
-mul(x: Nat): (Nat) -> Nat {
-  induction Nat {
-    (_) => Nat
-    case zero => 0
-    case add1(_prev, almost) => add(almost, x)
-  }
-}
-```
-
 ``` cicada
 mul(x: Nat): (Nat) -> Nat {
   induction_nat(
@@ -76,6 +66,16 @@ mul(x: Nat): (Nat) -> Nat {
     0,
     (_prev, almost) => add(almost, x)
   )
+}
+```
+
+``` cicada wishful-thinking
+mul(x: Nat): (Nat) -> Nat {
+  induction Nat {
+    (_) => Nat
+    case zero => 0
+    case add1(_prev, almost) => add(almost, x)
+  }
 }
 ```
 
@@ -89,24 +89,79 @@ same_as_chart! Nat [
 
 # pow
 
-``` cicada wishful-thinking
-pow(x: Nat, y: Nat): Nat {
-  nat_rec(x, 1, (_prev, almost) => mul(almost, y))
+``` cicada
+pow(x: Nat): (Nat) -> Nat {
+  induction_nat(
+    (_) => Nat,
+    1,
+    (_prev, almost) => mul(almost, x),
+  )
 }
+```
+
+``` cicada wishful-thinking
+pow(x: Nat): (Nat) -> Nat {
+  induction Nat {
+    (_) => Nat
+    case zero => 1
+    case add1(_prev, almost) => mul(almost, x)
+  }
+}
+```
+
+``` cicada
+same_as_chart! Nat [
+  pow(4, 3),
+  64,
+]
 ```
 
 # gauss
 
+``` cicada
+gauss = induction_nat(
+  (_) => Nat,
+  0,
+  (prev, almost) => add(add1(prev), almost),
+)
+```
+
 ``` cicada wishful-thinking
-gauss(n: Nat): Nat {
-  nat_rec(n, 0, (prev, almost) => add(add1(prev), almost))
+gauss = induction Nat {
+  (_) => Nat
+  case zero => 0
+  case add1(prev, almost) => add(add1(prev), almost)
 }
+```
+
+``` cicada
+same_as_chart! Nat [
+  gauss(10),
+  55,
+]
 ```
 
 # factorial
 
+``` cicada
+factorial = induction_nat(
+  (_) => Nat,
+  1,
+  (prev, almost) => mul(add1(prev), almost),
+)
+```
+
 ``` cicada wishful-thinking
-factorial(n: Nat): Nat {
-  nat_rec(n, 1, (prev, almost) => mul(add1(prev), almost))
+factorial = induction Nat {
+  (_) => Nat
+  case zero => 1
+  case add1(prev, almost) => mul(add1(prev), almost)
 }
+```
+
+``` cicada
+same_as_chart! Nat [
+  factorial(5),
+  120,
+]
 ```
