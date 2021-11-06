@@ -3,9 +3,6 @@
 > It can greatly reduce the number of expressions,
 > after then all other works would be easier.
 
-- [prepare test] `Vector` as `datatype` -- `vector_append`
-- [prepare test] `Vector` as `datatype` -- more functions
-
 - [prepare test] `LessThan` as `datatype`
 - [prepare test] `Either` as `datatype`
 - [prepare test] `Fin` as `datatype`
