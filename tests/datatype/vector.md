@@ -35,7 +35,7 @@ induction_vector(
     target,
     motive,
     case_vecnil,
-    (prev, head, tail, almost) => case_vec(head, tail, almost)
+    (_prev, head, tail, almost) => case_vec(head, tail, almost)
   )
 }
 ```
