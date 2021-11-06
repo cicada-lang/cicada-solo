@@ -15,14 +15,14 @@ datatype List(E: Type) {
 
 ``` cicada
 induction_list(
-  E: Type,
+  implicit { E: Type },
+  target: List(E),
   motive: (List(E)) -> Type,
   case_nil: motive(nil),
   case_li: (
     head: E, tail: List(E),
     almost_on_tail: motive(tail),
   ) -> motive(li(head, tail)),
-  target: List(E),
 ): motive(target) {
   list_ind(target, motive, case_nil, case_li)
 }
@@ -33,17 +33,17 @@ induction_list(
 ``` cicada
 length(implicit { E: Type }, x: List(E)): Nat {
   induction_list(
-    E,
+    x,
     (_) => Nat,
     0,
     (_head, _tail, almost) => add1(almost),
-  ) (x)
+  )
 }
 ```
 
 ``` cicada wishful-thinking
-length(E: Type): (List(E)) -> Nat {
-  induction List(E) {
+length(implicit { E: Type }, x: List(E)): Nat {
+  induction (x) {
     (_) => Nat
     case nil => 0
     case li(_head, _tail, almost) => Nat.add1(almost.tail)
@@ -59,32 +59,27 @@ same_as_chart! Nat [
 ]
 ```
 
-# prepend & append
+# append
+
 
 ``` cicada
-prepend(implicit { E: Type }, x: List(E)): (List(E)) -> List(E) {
+append(implicit { E: Type }, x: List(E), y: List(E)): List(E) {
   induction_list(
-    E,
-    (_) => List(E),
     x,
+    (_) => List(E),
+    y,
     (head, _tail, almost) => li(head, almost),
   )
 }
 ```
 
 ``` cicada wishful-thinking
-prepend(implicit { E: Type }, x: List(E)): (List(E)) -> List(E) {
-  induction List(E) {
+append(implicit { E: Type }, x: List(E), y: List(E)): List(E) {
+  induction x {
     (_) => List(E)
-    case nil => x
+    case nil => y
     case li(head, _tail, almost) => List.li(head, almost.tail)
   }
-}
-```
-
-``` cicada
-append(implicit { E: Type }, x: List(E), y: List(E)): List(E) {
-  prepend(y, x)
 }
 ```
 
@@ -98,9 +93,9 @@ same_as_chart! List(Nat) [
 # reverse
 
 ``` cicada
-li_end(implicit { E: Type }, e: E): (List(E)) -> List(E) {
+li_end(implicit { E: Type }, e: E, x: List(E)): List(E) {
   induction_list(
-    E,
+    x,
     (_) => List(E),
     li(e, nil),
     (head, _tail, almost) => li(head, almost)
@@ -109,17 +104,17 @@ li_end(implicit { E: Type }, e: E): (List(E)) -> List(E) {
 
 reverse(implicit { E: Type }, x: List(E)): List(E) {
   induction_list(
-    E,
+    x,
     (_) => List(E),
     nil,
     (head, _tail, almost) => li_end(head, almost),
-  ) (x)
+  )
 }
 ```
 
 ``` cicada wishful-thinking
-li_end(implicit { E: Type }, e: E): (List(E)) -> List(E) {
-  induction List(E) {
+li_end(implicit { E: Type }, e: E, x: List(E)): List(E) {
+  induction (x) {
     (_) => List(E)
     case nil => List.li(e, nil)
     case li(head, _tail, almost) => List.li(head, almost.tail)
@@ -127,11 +122,11 @@ li_end(implicit { E: Type }, e: E): (List(E)) -> List(E) {
 }
 
 reverse(implicit { E: Type }, x: List(E)): List(E) {
-  induction List(E) {
+  induction (x) {
     (_) => List(E)
     case nil => List.nil
-    case (head, _tail, almost) => li_end(head, almost.tail)
-  } (x)
+    case li(head, _tail, almost) => li_end(head, almost.tail)
+  }
 }
 ```
 

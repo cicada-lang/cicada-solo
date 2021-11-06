@@ -1,3 +1,6 @@
+- nat -- keep `target` the first argument
+- vector -- keep `target` the first argument
+
 > **Inductive type**
 >
 > It can greatly reduce the number of expressions,
