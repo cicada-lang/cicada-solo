@@ -1,1 +1,2 @@
 refl: Equal(Vector(Nat, 5), vec(1, vec(2, vec(3, vec(4, vec(5, vecnil))))), vec(1, vec(2, vec(3, vec(4, vec(5, vecnil))))))
+refl: Equal(List(Nat), li(1, li(2, li(3, nil))), li(1, li(2, li(3, nil))))

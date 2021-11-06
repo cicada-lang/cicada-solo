@@ -1,5 +1,11 @@
-// https://github.com/agda/agda/blob/master/test/Succeed/Hurkens.agda
+---
+title: Hurkens Paradox
+author: Zaoqi
+---
 
+Learned from [a agda test](https://github.com/agda/agda/blob/master/test/Succeed/Hurkens.agda).
+
+``` cicada
 Bottom: Type = (A: Type) -> A
 
 Not(A: Type): Type {
@@ -47,6 +53,10 @@ lem2: Not(D) = lem1(delta, (x, H2, H3) => {
 })
 
 lem3: D = (p) => lem1((y) => p(tauon(sigma(y))))
+```
 
-// NOTE The checker will run into infinite loop
-// loop: Bottom = lem2(lem3)
+The checker will run into infinite loop:
+
+``` cicada counterexample
+loop: Bottom = lem2(lem3)
+```

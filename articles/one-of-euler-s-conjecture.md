@@ -1,4 +1,7 @@
-# An example from "Patterns of plausible inference"
+---
+title: One of Euler's conjecture
+subtitle: An example from "Patterns of plausible inference"
+---
 
 ``` cicada
 add: (Nat, Nat) -> Nat = (x, y) => {

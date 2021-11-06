@@ -164,10 +164,6 @@ Why we should not make the indices in `motive` implicit?
 
 TODO
 
-- I think we should make indices implicit,
-  because we tried this version of `our_vector_ind` in the little book,
-  it works, and it simplifies the proofs.
-
 > **Hypothesis: implicit parameters and indices**
 >
 > We should not write implicit parameters over `motive`,
