@@ -45,7 +45,7 @@ datatype Nat {
 > One case one callback, which take all constructor arguments.
 
 ``` cicada
-ind_nat_t = (
+curried_ind_nat_t = (
   motive: (Nat) -> Type,
   case_zero: motive(zero),
   case_add1: (
@@ -55,56 +55,42 @@ ind_nat_t = (
 ) -> for all (target: Nat) -> motive(target)
 ```
 
-Note that we make `target` the last argument,
-to emphasize the result of induction proof is of the form "for all".
+Note that, if we make `target` the last argument,
+we can emphasize the result of induction proof is of the form "for all",
+but keeping the `target` the first argument will help implicit argument over `target`,
+and make the syntax more familiar.
+
+``` cicada
+ind_nat_t = (
+  target: Nat,
+  motive: (Nat) -> Type,
+  case_zero: motive(zero),
+  case_add1: (
+    prev: Nat,
+    almost_on_prev: motive(prev),
+  ) -> motive(add1(prev)),
+) -> motive(target)
+```
 
 Suppose we have the following syntax for applying induction:
 
 ``` cicada wishful-thinking
-induction <type> (parameter, ...) {
-  (index, ...) => ...
+induction (<target>) {
+  (index, ..., target) => ...
   case <cons1>(<arg>, ...) => ...
   case <cons2>(<arg>, ...) => ...
   ...
 }
 ```
 
-Note that:
-
-- `induction <type>` can be viewed as special case of dot `<type>.induction`.
-
-- `induction <type> (parameter, ...) { ... }`
-  can be viewed as special case of named function application:
-
-  ``` cicada wishful-thinking
-  <type>.induction((parameter, ...) => {
-    motive: ...,
-    cons1: ...,
-    cons2: ...,
-  })
-  ```
-
-We should support both special syntax `induction <type>`,
-and generate syntax `<type>.induction`.
-
 Take `Nat` as an example, we have special syntax:
 
 ``` cicada wishful-thinking
-induction Nat {
+induction (target) {
   (n) => ...
   case zero => ...
-  case add1(prev) (almost_on_prev) => ...
+  case add1(prev, almost) => ...
 }
-```
-
-And generate syntax:
-
-``` cicada wishful-thinking
-Nat.induction({
-  motive: (n) => ...,
-  zero: ...,
-  add1: (prev) (almost_on_prev) => ...,
-})
 ```
 
 ## List
@@ -124,17 +110,18 @@ datatype List(E: Type) {
 ``` cicada
 ind_list_t = (
   E: Type,
+  target: List(E),
   motive: (List(E)) -> Type,
   case_nil: motive(nil),
   case_li: (
     head: E, tail: List(E),
     almost_on_tail: motive(tail),
   ) -> motive(li(head, tail)),
-) -> (target: List(E)) -> motive(target)
+) -> motive(target)
 ```
 
 ``` cicada wishful-thinking
-induction List(E) {
+induction (target) {
   (list) => ...
   case nil => ...
   case li(head, tail) (almost_on_tail) => ...
@@ -146,7 +133,11 @@ induction List(E) {
 ``` cicada wishful-thinking
 datatype Vector(E: Type) (length: Nat) {
   vecnil: Vector(E, zero)
-  vec(head: E, implicit { prev: Nat }, tail: Vector(E, prev)): Vector(E, zero)
+  vec(
+    head: E,
+    implicit { prev: Nat },
+    tail: Vector(E, prev),
+  ): Vector(E, zero)
 }
 ```
 
@@ -171,12 +162,9 @@ TODO
 
 ``` cicada
 vector_ind_t: Type = (
-  // NOTE parameters
-  E: Type,
-  motive: (
-    length: Nat,
-    target: Vector(E, length),
-  ) -> Type,
+  implicit { E: Type, length: Nat },
+  target: Vector(E, length),
+  motive: (length: Nat, target: Vector(E, length)) -> Type,
   case_vecnil: motive(0, vecnil),
   case_vec: (
     head: E,
@@ -184,10 +172,6 @@ vector_ind_t: Type = (
     tail: Vector(E, prev),
     almost_on_tail: motive(prev, tail),
   ) -> motive(add1(prev), vec(head, tail)),
-) -> (
-  // NOTE indices
-  implicit { length: Nat },
-  target: Vector(E, length),
 ) -> motive(length, target)
 ```
 
@@ -200,7 +184,7 @@ Why we can write implicit in cases' arguments?
 TODO
 
 ``` cicada wishful-thinking
-induction Vector(E) {
+induction (target) {
   (length, target) => ...
   case vecnil => ...
   case vec(head, tail) (almost_on_tail) => ...
@@ -218,15 +202,16 @@ datatype Either(L, R) {
 
 ``` cicada
 either_ind_t = (
-  L: Type, R: Type,
+  implicit { L: Type, R: Type },
+  target: Either(L, R),
   motive: (Either(L, R)) -> Type,
   case_inl: (left: L) -> motive(inl(left)),
   case_inr: (right: R) -> motive(inr(right)),
-) -> (target: Either(L, R)) -> motive(target)
+) -> motive(target)
 ```
 
 ``` cicada wishful-thinking
-induction Either(L, R) {
+induction (target) {
   (target) => ...
   case inl(left) => ...
   case inr(right) => ...
@@ -269,20 +254,19 @@ Then we can define `ind_less_than_t`:
 
 ``` cicada
 ind_less_than_t = (
+  implicit { j: Nat, k: Nat },
+  target: LessThan(j, k),
   motive: (j: Nat, k: Nat, LessThan(j, k)) -> Type,
   case_zero_smallest: (n: Nat) -> motive(zero, add1(n), zero_smallest(n)),
   case_add1_smallest: (
     j: Nat, k: Nat, prev_smaller: LessThan(j, k),
     almost_on_prev_smaller: motive(j, k, prev_smaller),
   ) -> motive(add1(j), add1(k), add1_smaller(j, k, prev_smaller)),
-) -> (
-  implicit { j: Nat, k: Nat },
-  target: LessThan(j, k),
 ) -> motive(j, k, target)
 ```
 
 ``` cicada wishful-thinking
-induction LessThan {
+induction (target) {
   (j, k, lt) => ...
   case zero_smallest(n) => ...
   case add1_smaller(j, k, prev_smaller) (almost_on_prev_smaller) => ...
@@ -399,13 +383,14 @@ Now! Noetherian induction!
 ``` cicada
 noetherian_induction_t = (
   implicit { X: Type },
+  target: X,
   well_founded: WellFounded(X),
   motive: (X) -> Type,
   step: (
     x: X, y: X,
     (well_founded.Relation(y, x)) -> motive(y),
   ) -> motive(x),
-) -> (target: X) -> motive(target)
+) -> motive(target)
 ```
 
 Seeing how Noether can observe the general pattern of induction,

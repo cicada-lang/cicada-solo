@@ -1,5 +1,3 @@
-- update inductive datatype note
-
 > **Inductive type**
 >
 > It can greatly reduce the number of expressions,
