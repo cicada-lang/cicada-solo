@@ -56,9 +56,12 @@ curried_ind_nat_t = (
 ```
 
 Note that, if we make `target` the last argument,
-we can emphasize the result of induction proof is of the form "for all",
-but keeping the `target` the first argument will help implicit argument over `target`,
+we can emphasize the result of induction proof is of the form "for all".
+
+But keeping the `target` the first argument will help implicit argument over `target`,
 and make the syntax more familiar.
+Because when we use induction to implement a function, the `target` is often in scope,
+and when the `target` is in scope, the implicit arguments over it are often also in scope.
 
 ``` cicada
 ind_nat_t = (
