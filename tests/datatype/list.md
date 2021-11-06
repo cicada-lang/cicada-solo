@@ -94,3 +94,36 @@ same_as_chart! List(Nat) [
   li! [1, 2, 3, 4, 5, 6],
 ]
 ```
+
+# reverse
+
+``` cicada
+li_end(E: Type, x: List(E), e: E): List(E) {
+  list_rec(
+    x,
+    li(e, nil),
+    (head, _tail, almost) => li(head, almost)
+  )
+}
+
+li_end(Nat, li! [1, 2, 3], 4)
+
+reverse_step(E: Type, head: E, _tail: List(E), almost: List(E)): List(E) {
+  li_end(E, almost, head)
+}
+
+reverse(E: Type, x: List(E)): List(E) {
+  list_rec(x, the(List(E), nil), reverse_step(E))
+}
+```
+
+``` cicada wishful-thinking
+
+```
+
+``` cicada
+same_as_chart! List(Nat) [
+  reverse(Nat, li! [1, 2, 3]),
+  li! [3, 2, 1],
+]
+```
