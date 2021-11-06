@@ -1,20 +1,25 @@
-# inductive datatype
-
-> Inductive type can greatly reduce the number of expressions,
+> **Inductive type**
+>
+> It can greatly reduce the number of expressions,
 > after then all other works would be easier.
-
-- note about the intuition of Noetherian induction
-
-- structural induction as a special case of Noetherian induction
 
 - [prepare test] `Nat` as `datatype`
 - [prepare test] `List` as `datatype`
 - [prepare test] `Vector` as `datatype`
+- [prepare test] `LessThan` as `datatype`
 - [prepare test] `Either` as `datatype`
 - [prepare test] `Fin` as `datatype`
-- [prepare test] `LessThan` as `datatype`
 
 - `Stmt.Datatype` -- `datatype` definition
+
+  - maybe use `<datatype>.<cons>`,
+    thus `dot` must be a interface,
+    not just for class and object.
+    and the same for `ap`.
+
+- note about the intuition of Noetherian induction
+
+- structural induction as a special case of Noetherian induction
 
 # use `unify` to replace `readback`
 
