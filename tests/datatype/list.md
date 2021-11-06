@@ -98,32 +98,51 @@ same_as_chart! List(Nat) [
 # reverse
 
 ``` cicada
-li_end(E: Type, x: List(E), e: E): List(E) {
-  list_rec(
-    x,
+li_end(implicit { E: Type }, e: E): (List(E)) -> List(E) {
+  induction_list(
+    E,
+    (_) => List(E),
     li(e, nil),
     (head, _tail, almost) => li(head, almost)
   )
 }
 
-li_end(Nat, li! [1, 2, 3], 4)
-
-reverse_step(E: Type, head: E, _tail: List(E), almost: List(E)): List(E) {
-  li_end(E, almost, head)
-}
-
-reverse(E: Type, x: List(E)): List(E) {
-  list_rec(x, the(List(E), nil), reverse_step(E))
+reverse(implicit { E: Type }, x: List(E)): List(E) {
+  induction_list(
+    E,
+    (_) => List(E),
+    nil,
+    (head, _tail, almost) => li_end(head, almost),
+  ) (x)
 }
 ```
 
 ``` cicada wishful-thinking
+li_end(implicit { E: Type }, e: E): (List(E)) -> List(E) {
+  induction List(E) {
+    (_) => List(E)
+    case nil => List.li(e, nil)
+    case li(head, _tail, almost) => List.li(head, almost.tail)
+  }
+}
 
+reverse(implicit { E: Type }, x: List(E)): List(E) {
+  induction List(E) {
+    (_) => List(E)
+    case nil => List.nil
+    case (head, _tail, almost) => li_end(head, almost.tail)
+  } (x)
+}
 ```
 
 ``` cicada
 same_as_chart! List(Nat) [
-  reverse(Nat, li! [1, 2, 3]),
+  li_end(4, li! [1, 2, 3]),
+  li! [1, 2, 3, 4]
+]
+
+same_as_chart! List(Nat) [
+  reverse(li! [1, 2, 3]),
   li! [3, 2, 1],
 ]
 ```
