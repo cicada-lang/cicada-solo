@@ -3,9 +3,10 @@
 > It can greatly reduce the number of expressions,
 > after then all other works would be easier.
 
-- [prepare test] `Nat` as `datatype`
-- [prepare test] `List` as `datatype`
-- [prepare test] `Vector` as `datatype`
+- [prepare test] `Nat` as `datatype` -- define `induction_nat`
+- [prepare test] `List` as `datatype` -- define `induction_list`
+- [prepare test] `Vector` as `datatype` -- define `induction_vector` just like `our_vector_ind`
+
 - [prepare test] `LessThan` as `datatype`
 - [prepare test] `Either` as `datatype`
 - [prepare test] `Fin` as `datatype`
