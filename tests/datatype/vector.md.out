@@ -1,0 +1,1 @@
+refl: Equal(Vector(Nat, 5), vec(1, vec(2, vec(3, vec(4, vec(5, vecnil))))), vec(1, vec(2, vec(3, vec(4, vec(5, vecnil))))))

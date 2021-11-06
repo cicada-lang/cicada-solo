@@ -146,7 +146,7 @@ induction List(E) {
 ``` cicada wishful-thinking
 datatype Vector(E: Type) (length: Nat) {
   vecnil: Vector(E, zero)
-  vec(head: E, tail: Vector(E, prev)): Vector(E, zero)
+  vec(head: E, implicit { prev: Nat }, tail: Vector(E, prev)): Vector(E, zero)
 }
 ```
 

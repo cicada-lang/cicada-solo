@@ -30,22 +30,36 @@ induction_nat(
 # add
 
 ``` cicada
-add(x: Nat): (Nat) -> Nat {
-  induction_nat (
+add(x: Nat, y: Nat): Nat {
+  induction_nat(
+    (_) => Nat,
+    y,
+    (_prev, almost) => add1(almost),
+  ) (x)
+}
+```
+
+``` cicada alternative
+add_aux(x: Nat): (Nat) -> Nat {
+  induction_nat(
     (_) => Nat,
     x,
     (_prev, almost) => add1(almost),
   )
 }
+
+add(x: Nat, y: Nat): Nat {
+  add_aux(y, x)
+}
 ```
 
 ``` cicada wishful-thinking
-add(x: Nat): (Nat) -> Nat {
+add(x: Nat, y: Nat): Nat {
   induction Nat {
     (_) => Nat
-    case zero => x
+    case zero => y
     case add1(_prev, almost) => Nat.add1(almost.prev)
-  }
+  } (x)
 }
 ```
 
