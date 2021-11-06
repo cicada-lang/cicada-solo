@@ -19,6 +19,8 @@
 
 - [question] Why `target` should be first argument in `add`?
 
+  - How it influence the definition of `vector_append`?
+
 - note about the intuition of Noetherian induction
 
 - structural induction as a special case of Noetherian induction
