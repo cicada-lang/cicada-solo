@@ -60,9 +60,31 @@ same_as_chart! Nat [
 # mul
 
 ``` cicada wishful-thinking
-mul(x: Nat, y: Nat): Nat {
-  nat_rec(x, 0, (_prev, almost) => add(almost, y))
+mul(x: Nat): (Nat) -> Nat {
+  induction Nat {
+    (_) => Nat
+    case zero => 0
+    case add1(_prev, almost) => add(almost, x)
+  }
 }
+```
+
+``` cicada
+mul(x: Nat): (Nat) -> Nat {
+  induction_nat(
+    (_) => Nat,
+    0,
+    (_prev, almost) => add(almost, x)
+  )
+}
+```
+
+``` cicada
+same_as_chart! Nat [
+  mul(4, 3),
+  mul(3, 4),
+  12,
+]
 ```
 
 # pow
