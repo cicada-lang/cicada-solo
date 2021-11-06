@@ -3,7 +3,7 @@
 > It can greatly reduce the number of expressions,
 > after then all other works would be easier.
 
-- [prepare test] `List` as `datatype` -- append
+- [prepare test] `List` as `datatype` -- reverse
 
 - [prepare test] `Vector` as `datatype` -- define `induction_vector` just like `our_vector_ind`
 

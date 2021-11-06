@@ -30,6 +30,17 @@ induction_list(
 
 # length
 
+``` cicada
+length(implicit { E: Type }, x: List(E)): Nat {
+  induction_list(
+    E,
+    (_) => Nat,
+    0,
+    (_head, _tail, almost) => add1(almost),
+  ) (x)
+}
+```
+
 ``` cicada wishful-thinking
 length(E: Type): (List(E)) -> Nat {
   induction List(E) {
@@ -41,20 +52,45 @@ length(E: Type): (List(E)) -> Nat {
 ```
 
 ``` cicada
-length(E: Type): (List(E)) -> Nat {
+same_as_chart! Nat [
+  length(li! [1, 2, 3]),
+  length(li! ["a", "b", "c"]),
+  3,
+]
+```
+
+# prepend & append
+
+``` cicada
+prepend(implicit { E: Type }, x: List(E)): (List(E)) -> List(E) {
   induction_list(
     E,
-    (_) => Nat,
-    0,
-    (_head, _tail, almost) => add1(almost),
+    (_) => List(E),
+    x,
+    (head, _tail, almost) => li(head, almost),
   )
 }
 ```
 
+``` cicada wishful-thinking
+prepend(implicit { E: Type }, x: List(E)): (List(E)) -> List(E) {
+  induction List(E) {
+    (_) => List(E)
+    case nil => x
+    case li(head, _tail, almost) => List.li(head, almost.tail)
+  }
+}
+```
+
 ``` cicada
-same_as_chart! Nat [
-  length(Nat, li! [1, 2, 3]),
-  length(String, li! ["a", "b", "c"]),
-  3,
+append(implicit { E: Type }, x: List(E), y: List(E)): List(E) {
+  prepend(y, x)
+}
+```
+
+``` cicada
+same_as_chart! List(Nat) [
+  append(li! [1, 2, 3], li! [4, 5, 6]),
+  li! [1, 2, 3, 4, 5, 6],
 ]
 ```
