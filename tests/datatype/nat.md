@@ -44,7 +44,7 @@ add(x: Nat): (Nat) -> Nat {
   induction Nat {
     (_) => Nat
     case zero => x
-    case add1(_prev, almost) => add1(almost)
+    case add1(_prev, almost) => Nat.add1(almost.prev)
   }
 }
 ```
@@ -74,7 +74,7 @@ mul(x: Nat): (Nat) -> Nat {
   induction Nat {
     (_) => Nat
     case zero => 0
-    case add1(_prev, almost) => add(almost, x)
+    case add1(_prev, almost) => add(almost.prev, x)
   }
 }
 ```
@@ -104,7 +104,7 @@ pow(x: Nat): (Nat) -> Nat {
   induction Nat {
     (_) => Nat
     case zero => 1
-    case add1(_prev, almost) => mul(almost, x)
+    case add1(_prev, almost) => mul(almost.prev, x)
   }
 }
 ```
@@ -130,7 +130,7 @@ gauss = induction_nat(
 gauss = induction Nat {
   (_) => Nat
   case zero => 0
-  case add1(prev, almost) => add(add1(prev), almost)
+  case add1(prev, almost) => add(Nat.add1(prev), almost.prev)
 }
 ```
 
@@ -155,7 +155,7 @@ factorial = induction_nat(
 factorial = induction Nat {
   (_) => Nat
   case zero => 1
-  case add1(prev, almost) => mul(add1(prev), almost)
+  case add1(prev, almost) => mul(Nat.add1(prev), almost.prev)
 }
 ```
 
