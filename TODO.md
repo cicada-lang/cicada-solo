@@ -1,4 +1,3 @@
-- remove `our_vector_ind` from book
 - update inductive datatype note
 
 > **Inductive type**

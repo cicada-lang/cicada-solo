@@ -83,5 +83,44 @@ same_as_chart! Vector(Nat, 5) [
     the(Vector(Nat, 2), vec! [1, 2]),
     the(Vector(Nat, 3), vec! [3, 4, 5]),
   ),
+  vec! [1, 2, 3, 4, 5],
+]
+```
+
+# list_from_vector
+
+``` cicada
+list_from_vector(
+  implicit { E: Type, length: Nat },
+  vector: Vector(E, length),
+): List(E) {
+  induction_vector(
+    vector,
+    (length, target) => List(E),
+    nil,
+    (head, tail, almost) => li(head, almost),
+  )
+}
+```
+
+``` cicada wishful-thinking
+list_from_vector(
+  implicit { E: Type, length: Nat },
+  vector: Vector(E, length),
+): List(E) {
+  induction (vector) {
+    (length, target) => List(E)
+    case vecnil => List.nil
+    case vec(head, tail, almost) => List.li(head, almost.tail)
+  }
+}
+```
+
+``` cicada
+same_as_chart! List(Nat) [
+  list_from_vector(
+    the(Vector(Nat, 3), vec! [1, 2, 3])
+  ),
+  li! [1, 2, 3],
 ]
 ```
