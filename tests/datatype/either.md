@@ -17,7 +17,7 @@ datatype Either(L: Type, R: Type) {
 induction_either(
   implicit { L: Type, R: Type },
   target: Either(L, R),
-  motive: (Either(L, R),) -> Type,
+  motive: (Either(L, R)) -> Type,
   case_inl: (left: L) -> motive(inl(left)),
   case_inr: (right: R) -> motive(inr(right)),
 ): motive(target) {
@@ -48,14 +48,36 @@ datatype Maybe(E: Type) {
 }
 ```
 
+# induction Maybe
+
+``` cicada
+induction_maybe(
+  implicit { E: Type },
+  target: Maybe(E),
+  motive: (Maybe(E)) -> Type,
+  case_just: (x: E) -> motive(just(x)),
+  case_nothing: motive(nothing(E)),
+): motive(target) {
+  induction_either(
+    target,
+    motive,
+    case_just,
+    (_) => case_nothing,
+  )
+}
+```
+
 # maybe_head
 
 ``` cicada
+import { induction_list } from "./list.md"
+
 maybe_head(implicit { E: Type }, list: List(E)): Maybe(E) {
-  list_rec(
+  induction_list(
     list,
+    (_) => Maybe(E),
     nothing(E),
-    (head, _tail, _almost) => just(head)
+    (head, _tail, _almost) => just(head),
   )
 }
 ```
@@ -88,10 +110,11 @@ same_as_chart! Maybe(String) [
 
 ``` cicada
 maybe_tail(implicit { E: Type }, list: List(E)): Maybe(List(E)) {
-  list_rec(
+  induction_list(
     list,
+    (_) => Maybe(List(E)),
     nothing(List(E)),
-    (_head, tail, _almost) => just(tail)
+    (_head, tail, _almost) => just(tail),
   )
 }
 ```
@@ -126,4 +149,56 @@ same_as_chart! Maybe(List(String)) [
   maybe_tail(li! ["a", "b", "c"]),
   just(the(List(String), li! ["b", "c"])),
 ]
+```
+
+# list_ref
+
+``` cicada
+import { induction_nat } from "./nat.md"
+
+list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
+  induction_nat(
+    index,
+    (_) => (List(E)) -> Maybe(E),
+    (list) => maybe_head(list),
+    (prev, almost) => (list) => {
+      induction_maybe(
+        maybe_tail(list),
+        (_) => Maybe(E),
+        (tail) => almost(tail),
+        nothing(E),
+      )
+    }
+  )
+}
+```
+
+``` cicada wishful-thinking
+import { induction_nat } from "./nat.md"
+
+list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
+  induction (index) {
+    (_) => (List(E)) -> Maybe(E)
+    case zero => (list) => maybe_head(list)
+    case add1(prev, almost) => (list) => {
+      induction (maybe_tail(list)) {
+        (_) => Maybe(E)
+        case just(tail) => almost.prev(tail)
+        case nothing => Maybe.nothing
+      }
+    }
+  }
+}
+```
+
+``` cicada
+list_ref(index: Nat, implicit { E: Type }, list: List(E)): Maybe(E) {
+  list_ref_aux(E, index, list)
+}
+
+list_ref(0, li! ["a", "b", "c"])
+list_ref(1, li! ["a", "b", "c"])
+list_ref(2, li! ["a", "b", "c"])
+list_ref(3, li! ["a", "b", "c"])
+list_ref(4, li! ["a", "b", "c"])
 ```
