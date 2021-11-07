@@ -141,3 +141,10 @@ When we want to make something implicit, we use unification.
 Examples:
 - global type inference
 - implicit function type
+
+# Check mode and infer mode of implicit
+
+Maybe we also need to support implicit in check mode,
+where we can pick up implicit arguments from return type.
+
+TODO
