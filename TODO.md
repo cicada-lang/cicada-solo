@@ -1,9 +1,8 @@
 - `Stmt.Datatype` -- `datatype` definition
 
-  - maybe use `<datatype>.<cons>`,
-    thus `dot` must be a interface,
-    not just for class and object.
-    and the same for `ap`.
+  - use `<datatype>.<cons>` to get constructors
+    - thus `dot` must be a interface, not just for class and object
+      - the same is true for `ap`
 
 > **Inductive type**
 >
