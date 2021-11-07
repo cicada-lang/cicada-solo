@@ -1,7 +1,3 @@
-- [prepare test] `Fin` as `datatype`
-
-- [prepare test] `LessThan` as `datatype`
-
 - `Stmt.Datatype` -- `datatype` definition
 
   - maybe use `<datatype>.<cons>`,

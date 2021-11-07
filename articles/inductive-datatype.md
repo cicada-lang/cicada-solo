@@ -112,7 +112,7 @@ datatype List(E: Type) {
 
 ``` cicada
 ind_list_t = (
-  E: Type,
+  implicit { E: Type },
   target: List(E),
   motive: (List(E)) -> Type,
   case_nil: motive(nil),
