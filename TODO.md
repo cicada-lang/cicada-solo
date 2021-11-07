@@ -1,11 +1,6 @@
-> **Inductive type**
->
-> It can greatly reduce the number of expressions,
-> after then all other works would be easier.
+- [prepare test] `Fin` as `datatype`
 
 - [prepare test] `LessThan` as `datatype`
-- [prepare test] `Either` as `datatype`
-- [prepare test] `Fin` as `datatype`
 
 - `Stmt.Datatype` -- `datatype` definition
 
@@ -14,9 +9,10 @@
     not just for class and object.
     and the same for `ap`.
 
-- [question] Why `target` should be first argument in `add`?
-
-  - How it influence the definition of `vector_append`?
+> **Inductive type**
+>
+> It can greatly reduce the number of expressions,
+> after then all other works would be easier.
 
 - note about the intuition of Noetherian induction
 
