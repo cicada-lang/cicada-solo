@@ -195,7 +195,9 @@ list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
 list_ref(index: Nat, implicit { E: Type }, list: List(E)): Maybe(E) {
   list_ref_aux(E, index, list)
 }
+```
 
+``` cicada
 list_ref(0, li! ["a", "b", "c"])
 list_ref(1, li! ["a", "b", "c"])
 list_ref(2, li! ["a", "b", "c"])
