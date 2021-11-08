@@ -4,6 +4,9 @@
 - [book manager] be able to resolve module in book of `references`
   - we do not need to use book as module, we only need to be able to resolve module.
 
+- [book manager] [cli] `cic install` -- `help`
+- [book manager] [cli] `cic init` -- `help`
+
 - [book manager] a syntax for addressing value by full path and name -- preparing for nominal typing
 
 # inductive datatype
