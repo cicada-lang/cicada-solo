@@ -1,6 +1,6 @@
 - [book manager] [cli] `cic install <user/repo@tag>` -- should not download existing packages
 - [book manager] [cli] `cic install` -- download book from `references` specified in `book.json`
-- [book manager] [cli] `cic init`
+- [book manager] [cli] `cic init` -- learn from `npm init` and so on
 
 # book manager
 
