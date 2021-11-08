@@ -1,4 +1,14 @@
-- a syntax for addressing full path
+# book manager
+
+- [book manager] [cli] download book from `references` specified in `book.json`
+
+- [book manager] be able to resolve module in book of `references`
+
+  - we do not need to use book as module, we only need to be able to resolve module.
+
+- a syntax for addressing value by full path and name -- preparing for nominal typing
+
+# inductive datatype
 
 - `Value` -- `Datatype` -- nominal typing (need full path of the module)
 
@@ -154,14 +164,6 @@
 
   - These rules can not be narrated in our implementation of NbE,
     maybe will be able to narrate them, if we use unification instead of NbE.
-
-# book manager
-
-- [book manager] [cli] download book from `references` specified in `book.json`
-
-- [book manager] be able to resolve module in book of `references`
-
-  - we do not need to use book as module, we only need to be able to resolve module.
 
 # error report
 
