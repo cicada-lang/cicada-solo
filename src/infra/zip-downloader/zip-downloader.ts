@@ -1,3 +1,1 @@
-export class ZipDownloader {
-
-}
+export class ZipDownloader {}
