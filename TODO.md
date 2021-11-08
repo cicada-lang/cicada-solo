@@ -1,6 +1,4 @@
-- `local-runner` as a composition of `error-runner` and `snapshot-runner`
-
-- use `new LocalRunner` instead of `createLocalRunner`
+- rename `DefaultRunner` to `CommonRunner`
 
 - a syntax for addressing full path
 

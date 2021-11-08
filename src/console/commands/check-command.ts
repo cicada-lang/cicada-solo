@@ -4,7 +4,7 @@ import { Book } from "../../book"
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import * as CodeBlockParsers from "../../module/code-block-parsers"
 import app from "../../app/node-app"
-import { createLocalRunner } from "../create-local-runner"
+import { LocalRunner } from "../runners/local-runner"
 import watcher from "node-watch"
 import ty from "@xieyuheng/ty"
 import fs from "fs"
@@ -70,7 +70,7 @@ async function check(
   for (const path of await book.files.keys()) {
     if (CodeBlockParsers.canHandle(path)) {
       const t0 = Date.now()
-      const runner = createLocalRunner(path)
+      const runner = new LocalRunner()
       const { error } = await runner.run(book, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
@@ -107,7 +107,7 @@ async function watch(book: Book<LocalFileStore>): Promise<void> {
     if (event === "update") {
       const t0 = Date.now()
       book.cache.delete(path)
-      const runner = createLocalRunner(path)
+      const runner = new LocalRunner()
       const { error } = await runner.run(book, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
