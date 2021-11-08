@@ -1,5 +1,3 @@
-- `BookConfig.json`
-
 - [book manager] [cli] `cic install <user/repo@tag>` -- add references to `book.json`
   - `cic install <user/repo@tag>` requires `book.json` in current dir
 - [book manager] [cli] `cic install <user/repo@tag>` -- should not download existing packages

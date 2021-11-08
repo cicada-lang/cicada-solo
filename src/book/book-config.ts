@@ -59,4 +59,21 @@ export class BookConfig {
       src: "src",
     })
   }
+
+  json(): BookConfigJson {
+    return {
+      title: this.title,
+      subtitle: this.subtitle,
+      version: this.version,
+      src: this.src,
+      authors: this.authors,
+      date: this.date,
+      references: Object.fromEntries(
+        Object.entries(this.references).map(([key, reference]) => [
+          key,
+          reference.format(),
+        ])
+      ),
+    }
+  }
 }
