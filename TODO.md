@@ -1,5 +1,3 @@
-- remove `app/README`
-
 - `local-runner` as a composition of `error-runner` and `snapshot-runner`
 
 - `Runner.run` take `book`
