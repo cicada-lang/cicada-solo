@@ -1,13 +1,23 @@
+- remove `app/README`
+
+- `local-runner` as a composition of `error-runner` and `snapshot-runner`
+
+- `Runner.run` take `book`
+
+- a syntax for addressing full path
+
+- `Value` -- `Datatype` -- nominal typing (need full path of the module)
+
 - `Stmt.Datatype` -- `datatype` definition
+
+- notes about datatype
 
   - use `<datatype>.<cons>` to get constructors
     - thus `dot` must be a interface, not just for class and object
       - the same is true for `ap`
 
-> **Inductive type**
->
-> It can greatly reduce the number of expressions,
-> after then all other works would be easier.
+> **Inductive type** can greatly reduce the number of expressions,
+>   after then all other works would be easier.
 
 - note about the intuition of Noetherian induction
 

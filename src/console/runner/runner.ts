@@ -7,7 +7,10 @@ export abstract class Runner {
 
   abstract run(
     path: string,
-    opts: { observers: Array<CtxObserver>; highlighter: Highlighter }
+    opts: {
+      observers: Array<CtxObserver>
+      highlighter: Highlighter
+    }
   ): Promise<{ error?: unknown }>
 
   reporter = new Errors.ErrorReporter()

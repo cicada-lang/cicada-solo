@@ -2,7 +2,7 @@ import { Book } from "../book"
 import { Config } from "../config"
 import { AppReplEventHandler } from "./app-repl-event-handler"
 import { customAlphabet } from "nanoid"
-import { CtxEvent, SimpleHighlighter, SimpleCtxObserver } from "../lang/ctx"
+import { SimpleHighlighter, SimpleCtxObserver } from "../lang/ctx"
 import * as ut from "../ut"
 
 export class GenericApp {

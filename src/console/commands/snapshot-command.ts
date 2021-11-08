@@ -1,6 +1,7 @@
 import { Command } from "@enchanterjs/enchanter/lib/command"
 import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
-import app from "../../app/node-app"
+
+import { createLocalRunner } from "../create-local-runner"
 import ty from "@xieyuheng/ty"
 import Path from "path"
 
@@ -35,7 +36,7 @@ export class SnapshotCommand extends Command<Args> {
       Path.dirname(argv["article"])
     )
     const path = Path.basename(argv["article"])
-    const runner = app.createLocalRunner({ path, book })
+    const runner = createLocalRunner({ path, book })
     const { error } = await runner.run(path, {
       observers: app.defaultCtxObservers,
       highlighter: app.defaultHighlighter,
