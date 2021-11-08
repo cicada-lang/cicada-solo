@@ -44,8 +44,8 @@ export class CheckCommand extends Command<Args, Opts> {
   async execute(argv: Args & Opts): Promise<void> {
     const path = argv["book"] || process.cwd() + "/book.json"
     Command.assertExists(path)
-    const config_file = fs.lstatSync(path).isFile() ? path : path + "/book.json"
-    const book = await app.localBooks.get(config_file)
+    const configFile = fs.lstatSync(path).isFile() ? path : path + "/book.json"
+    const book = await app.localBooks.get(configFile)
 
     app.logger.info(book.config)
 

@@ -1,13 +1,18 @@
+export type BookReferenceJson = {
+  tag: string
+}
+
 export class BookReference {
   tag: string
 
-  constructor(opts: { tag: string }) {
+  constructor(opts: BookReferenceJson) {
     this.tag = opts.tag
   }
 
-  static parse(input: string): BookReference {
+  static parse(spec: string): BookReference {
+    // TODO `spec` only support literal `tag` for now.
     return new BookReference({
-      tag: input,
+      tag: spec,
     })
   }
 
@@ -15,8 +20,8 @@ export class BookReference {
     input: Record<string, string>
   ): Record<string, BookReference> {
     const references: Record<string, BookReference> = {}
-    for (const [key, value] of Object.entries(input)) {
-      references[key] = this.parse(value)
+    for (const [key, spec] of Object.entries(input)) {
+      references[key] = this.parse(spec)
     }
 
     return references

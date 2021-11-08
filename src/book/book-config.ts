@@ -1,4 +1,4 @@
-import { BookReference } from "./book-reference"
+import { BookReference, BookReferenceJson } from "./book-reference"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
 import ty from "@xieyuheng/ty"
@@ -60,14 +60,18 @@ export class BookConfig {
     })
   }
 
+  addReference(path: string, ref: BookReferenceJson): void {
+    this.references[path] = new BookReference(ref)
+  }
+
   json(): BookConfigJson {
     return {
       title: this.title,
       subtitle: this.subtitle,
       version: this.version,
-      src: this.src,
       authors: this.authors,
       date: this.date,
+      src: this.src,
       references: Object.fromEntries(
         Object.entries(this.references).map(([key, reference]) => [
           key,
