@@ -1,10 +1,18 @@
+- `BookConfig` should be a class
+
+- `BookConfig.schema`
+
+- `BookConfig.fakeConfig`
+
+- `BookConfig` support `references`
+
+- `BookReference`
+
 - [book manager] [cli] `cic install <user/repo@tag>` -- add references to `book.json`
-
   - `cic install <user/repo@tag>` requires `book.json` in current dir
-
-- [book manager] [cli] `cic init`
-
+- [book manager] [cli] `cic install <user/repo@tag>` -- should not download existing packages
 - [book manager] [cli] `cic install` -- download book from `references` specified in `book.json`
+- [book manager] [cli] `cic init`
 
 # book manager
 
