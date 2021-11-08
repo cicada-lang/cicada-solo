@@ -1,6 +1,6 @@
 import { Command } from "@enchanterjs/enchanter/lib/command"
 import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
-
+import app from "../../app/node-app"
 import { createLocalRunner } from "../create-local-runner"
 import ty from "@xieyuheng/ty"
 import Path from "path"
