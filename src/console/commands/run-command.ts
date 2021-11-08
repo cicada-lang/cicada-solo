@@ -1,7 +1,7 @@
 import { Command } from "@enchanterjs/enchanter/lib/command"
 import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
-import { DefaultRunner } from "../runners/default-runner"
+import { CommonRunner } from "../runners/common-runner"
 import { Runner } from "../runner"
 import { Book } from "../../book"
 import app from "../../app/node-app"
@@ -44,7 +44,7 @@ export class RunCommand extends Command<Args, Opts> {
     const book = await app.localBooks.findUpOrFake(
       Path.dirname(argv["article"])
     )
-    const runner = new DefaultRunner()
+    const runner = new CommonRunner()
     const path = Path.basename(argv["article"])
 
     if (argv["watch"]) {

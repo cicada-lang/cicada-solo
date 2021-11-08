@@ -2,7 +2,7 @@ import { Runner } from "../runner"
 import { Book } from "../../book"
 import { CtxOptions } from "../../lang/ctx"
 
-export class DefaultRunner extends Runner {
+export class CommonRunner extends Runner {
   async run(
     book: Book,
     path: string,

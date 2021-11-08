@@ -1,5 +1,3 @@
-- rename `DefaultRunner` to `CommonRunner`
-
 - a syntax for addressing full path
 
 - `Value` -- `Datatype` -- nominal typing (need full path of the module)

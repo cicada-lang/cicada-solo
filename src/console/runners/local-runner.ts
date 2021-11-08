@@ -4,8 +4,6 @@ import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-fil
 import { SnapshotRunner } from "./snapshot-runner"
 import { ErrorRunner } from "./error-runner"
 import { CtxOptions } from "../../lang/ctx"
-import * as ut from "../../ut"
-import fs from "fs"
 
 export class LocalRunner extends Runner {
   async run(
