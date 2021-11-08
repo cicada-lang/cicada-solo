@@ -1,4 +1,3 @@
-- `BookReference.format`
 - `BookConfig.json`
 
 - [book manager] [cli] `cic install <user/repo@tag>` -- add references to `book.json`

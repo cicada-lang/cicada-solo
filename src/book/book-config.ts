@@ -1,6 +1,7 @@
-import ty from "@xieyuheng/ty"
+import { BookReference } from "./book-reference"
 import { customAlphabet } from "nanoid"
 const nanoid = customAlphabet("1234567890abcdef", 16)
+import ty from "@xieyuheng/ty"
 
 export type BookConfigJson = {
   title: string
@@ -10,31 +11,6 @@ export type BookConfigJson = {
   authors?: Array<string>
   date?: string
   references?: Record<string, string>
-}
-
-export class BookReference {
-  tag: string
-
-  constructor(opts: { tag: string }) {
-    this.tag = opts.tag
-  }
-
-  static parse(input: string): BookReference {
-    return {
-      tag: input,
-    }
-  }
-
-  static parseReferences(
-    input: Record<string, string>
-  ): Record<string, BookReference> {
-    const references:  Record<string, BookReference> = {}
-    for (const [key, value] of Object.entries(input)) {
-      references[key] = this.parse(value)
-    }
-
-    return references
-  }
 }
 
 export class BookConfig {
