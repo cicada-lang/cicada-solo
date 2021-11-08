@@ -3,17 +3,14 @@ import { Book } from "../../book"
 import { CtxOptions } from "../../lang/ctx"
 
 export class DefaultRunner extends Runner {
-  book: Book
-
-  constructor(opts: { book: Book }) {
-    super()
-    this.book = opts.book
-  }
-
-  async run(path: string, opts: CtxOptions): Promise<{ error?: unknown }> {
+  async run(
+    book: Book,
+    path: string,
+    opts: CtxOptions
+  ): Promise<{ error?: unknown }> {
     try {
-      const file = await this.book.files.getOrFail(path)
-      const mod = this.book.load(path, file, opts)
+      const file = await book.files.getOrFail(path)
+      const mod = book.load(path, file, opts)
       await mod.runAll()
       const output = mod.codeBlocks.allOutputs
         .map((output) => output.formatForConsole())
@@ -25,7 +22,7 @@ export class DefaultRunner extends Runner {
 
       return { error: undefined }
     } catch (error) {
-      const text = await this.book.files.getOrFail(path)
+      const text = await book.files.getOrFail(path)
       const report = this.reporter.report(error, { path, text })
       console.error(report)
       return { error }

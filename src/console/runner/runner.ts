@@ -3,9 +3,8 @@ import { CtxObserver, Highlighter } from "../../lang/ctx"
 import * as Errors from "../../lang/errors"
 
 export abstract class Runner {
-  abstract book: Book
-
   abstract run(
+    book: Book,
     path: string,
     opts: {
       observers: Array<CtxObserver>

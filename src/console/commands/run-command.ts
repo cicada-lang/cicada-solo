@@ -44,18 +44,18 @@ export class RunCommand extends Command<Args, Opts> {
     const book = await app.localBooks.findUpOrFake(
       Path.dirname(argv["article"])
     )
-    const runner = new Runners.DefaultRunner({ book })
+    const runner = new Runners.DefaultRunner()
     const path = Path.basename(argv["article"])
 
     if (argv["watch"]) {
-      await runner.run(path, {
+      await runner.run(book, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
       app.logger.info(`Initial run complete, now watching for changes.`)
       await watch(runner, book, path)
     } else {
-      const { error } = await runner.run(path, {
+      const { error } = await runner.run(book, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
@@ -80,7 +80,7 @@ async function watch(
 
     if (event === "update") {
       book.cache.delete(path)
-      const { error } = await runner.run(path, {
+      const { error } = await runner.run(book, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })

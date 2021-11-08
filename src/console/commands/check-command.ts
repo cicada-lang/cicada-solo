@@ -70,8 +70,8 @@ async function check(
   for (const path of await book.files.keys()) {
     if (CodeBlockParsers.canHandle(path)) {
       const t0 = Date.now()
-      const runner = createLocalRunner({ path, book })
-      const { error } = await runner.run(path, {
+      const runner = createLocalRunner(path)
+      const { error } = await runner.run(book, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
@@ -107,8 +107,8 @@ async function watch(book: Book<LocalFileStore>): Promise<void> {
     if (event === "update") {
       const t0 = Date.now()
       book.cache.delete(path)
-      const runner = createLocalRunner({ path, book })
-      const { error } = await runner.run(path, {
+      const runner = createLocalRunner(path)
+      const { error } = await runner.run(book, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
