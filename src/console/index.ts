@@ -11,6 +11,7 @@ export function createCommandRunner(): CommandRunner {
       new Commands.RunCommand(),
       new Commands.SnapshotCommand(),
       new Commands.CheckCommand(),
+      new Commands.InstallCommand(),
       new CommonHelpCommand(),
     ],
   })

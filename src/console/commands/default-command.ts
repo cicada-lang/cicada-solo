@@ -2,7 +2,7 @@ import { Command } from "@enchanterjs/enchanter/lib/command"
 import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
 import { CommonHelpCommand } from "@enchanterjs/enchanter/lib/commands"
 import * as Commands from "../commands"
-import app from "../../app/generic-app"
+import app from "../../app/node-app"
 import ty from "@xieyuheng/ty"
 
 type Args = { article?: string }
