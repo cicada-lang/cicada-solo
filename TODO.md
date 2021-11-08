@@ -1,7 +1,4 @@
-- [book manager] extract `zip-downloader`
-
 - [book manager] [cli] `cic install <user/repo@tag>` -- add references to `book.json`
-
 - [book manager] [cli] `cic install` -- download book from `references` specified in `book.json`
 
 # book manager

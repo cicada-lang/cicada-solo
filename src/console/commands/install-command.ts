@@ -6,8 +6,8 @@ import ty from "@xieyuheng/ty"
 import axios from "axios"
 import Path from "path"
 import fs from "fs"
-import JSZip from "jszip"
 import contentDisposition from "content-disposition"
+import { GitHubZipDownloader } from "../../infra/zip-downloaders/github-zip-downloader"
 
 type Args = { target: string }
 type Opts = { help?: boolean; version?: boolean }
@@ -23,35 +23,23 @@ export class InstallCommand extends Command<Args, Opts> {
   async execute(argv: Args & Opts, runner: CommandRunner): Promise<void> {
     const { target } = argv
 
-    const [path, tag] = target.split("@")
-    const zipUrl = `https://github.com/${path}/archive/refs/tags/${tag}.zip`
+    const t0 = Date.now()
 
-    const response = await axios.get(zipUrl, {
-      responseType: "arraybuffer",
-    })
+    const zipDownloader = new GitHubZipDownloader()
+    const { path, filename, data } = await zipDownloader.download(target)
 
-    const {
-      parameters: { filename },
-    } = contentDisposition.parse(response.headers["content-disposition"])
+    const destination = `${app.home.dir}/references/github.com/${path}/${filename}`
+    await fs.promises.mkdir(Path.dirname(destination), { recursive: true })
+    await fs.promises.writeFile(destination, data)
 
-    const outputFile = `${app.home.dir}/references/github.com/${path}/${filename}`
-    await fs.promises.mkdir(Path.dirname(outputFile), { recursive: true })
-    await fs.promises.writeFile(outputFile, response.data)
+    const t1 = Date.now()
 
     app.logger.info({
       tag: "install",
+      msg: "add new reference",
       target,
-      zipUrl,
-      saveTo: outputFile,
+      destination,
+      elapse: t1 - t0,
     })
-
-    {
-      // const zip = new JSZip()
-      // await zip.loadAsync(response.data)
-      // const result = await zip
-      //   .file(`${Path.parse(filename).name}/book.json`)
-      //   ?.async("string")
-      // console.log(result)
-    }
   }
 }
