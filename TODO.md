@@ -1,5 +1,3 @@
-- `BookConfig` should be a class
-
 - `BookConfig.schema`
 
 - `BookConfig.fakeConfig`

@@ -1,4 +1,5 @@
 import { BookStore } from "../book-store"
+import { BookConfig } from "../book-config"
 import { Book } from "../book"
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import { FakeLocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/fake-local-file-store"
@@ -9,7 +10,7 @@ import fs from "fs"
 export class LocalBookStore extends BookStore {
   async get(config_file: string): Promise<Book<LocalFileStore>> {
     const text = await fs.promises.readFile(config_file, "utf8")
-    const config = Book.bookConfigSchema.validate(JSON.parse(text))
+    const config = BookConfig.create(JSON.parse(text))
     return new Book({
       config,
       files: new LocalFileStore({
@@ -24,7 +25,7 @@ export class LocalBookStore extends BookStore {
   }): Book<LocalFileStore> {
     const { fallback, faked } = opts
     return new Book({
-      config: Book.fakeConfig(),
+      config: BookConfig.fake(),
       files: new FakeLocalFileStore({ faked, fallback }),
     })
   }

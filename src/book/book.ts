@@ -4,10 +4,7 @@ import { CodeBlockResource } from "../module/code-block-resource"
 import { FileStore } from "@enchanterjs/enchanter/lib/file-store"
 import { Env } from "../lang/env"
 import { Ctx, CtxObserver, Highlighter } from "../lang/ctx"
-import ty from "@xieyuheng/ty"
-import { customAlphabet } from "nanoid"
-const nanoid = customAlphabet("1234567890abcdef", 16)
-import { BookConfig, bookConfigSchema } from "./book-config"
+import { BookConfig } from "./book-config"
 
 export class Book<Files extends FileStore = FileStore> {
   config: BookConfig
@@ -17,16 +14,6 @@ export class Book<Files extends FileStore = FileStore> {
   constructor(opts: { config: BookConfig; files: Files }) {
     this.config = opts.config
     this.files = opts.files
-  }
-
-  static bookConfigSchema = bookConfigSchema
-
-  static fakeConfig(): BookConfig {
-    return bookConfigSchema.validate({
-      title: `<fake-book-${nanoid()}>`,
-      version: "0.0.0",
-      src: "src",
-    })
   }
 
   load(
