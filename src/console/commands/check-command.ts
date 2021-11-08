@@ -47,7 +47,7 @@ export class CheckCommand extends Command<Args, Opts> {
     const configFile = fs.lstatSync(path).isFile() ? path : path + "/book.json"
     const book = await app.localBooks.get(configFile)
 
-    app.logger.info(book.config)
+    app.logger.info(book.config.json())
 
     if (argv["watch"]) {
       await check(book)

@@ -24,8 +24,6 @@ export class InstallCommand extends Command<Args, Opts> {
     Command.assertFile(configFile)
     const book = await app.localBooks.get(configFile)
 
-    // app.logger.info(book.config)
-
     const { target } = argv
 
     const t0 = Date.now()
