@@ -1,14 +1,10 @@
 - [book manager] [cli] `cic install <user/repo@tag>` -- should not download existing packages
 - [book manager] [cli] `cic install` -- download book from `references` specified in `book.json`
 - [book manager] [cli] `cic init` -- learn from `npm init` and so on
-
-# book manager
-
 - [book manager] be able to resolve module in book of `references`
-
   - we do not need to use book as module, we only need to be able to resolve module.
 
-- a syntax for addressing value by full path and name -- preparing for nominal typing
+- [book manager] a syntax for addressing value by full path and name -- preparing for nominal typing
 
 # inductive datatype
 
