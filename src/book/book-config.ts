@@ -9,6 +9,32 @@ export type BookConfigJson = {
   src: string
   authors?: Array<string>
   date?: string
+  references?: Record<string, string>
+}
+
+export class BookReference {
+  tag: string
+
+  constructor(opts: { tag: string }) {
+    this.tag = opts.tag
+  }
+
+  static parse(input: string): BookReference {
+    return {
+      tag: input,
+    }
+  }
+
+  static parseReferences(
+    input: Record<string, string>
+  ): Record<string, BookReference> {
+    const references:  Record<string, BookReference> = {}
+    for (const [key, value] of Object.entries(input)) {
+      references[key] = this.parse(value)
+    }
+
+    return references
+  }
 }
 
 export class BookConfig {
@@ -18,6 +44,7 @@ export class BookConfig {
   src: string
   authors?: Array<string>
   date?: string
+  references: Record<string, BookReference>
 
   constructor(opts: BookConfigJson) {
     this.title = opts.title
@@ -26,6 +53,9 @@ export class BookConfig {
     this.src = opts.src
     this.authors = opts.authors
     this.date = opts.date
+    this.references = opts.references
+      ? BookReference.parseReferences(opts.references)
+      : {}
   }
 
   static schema = ty.object<BookConfigJson>({
@@ -35,6 +65,7 @@ export class BookConfig {
     src: ty.string(),
     authors: ty.optional(ty.array(ty.string())),
     date: ty.optional(ty.string()),
+    references: ty.optional(ty.dict(ty.string())),
   })
 
   static validate(input: any): BookConfigJson {
