@@ -11,7 +11,7 @@
 
 # inductive datatype
 
-- `Value` -- `Datatype` -- nominal typing (need full path of the module)
+- `Value` -- `Datatype` -- structural typing (but print full path of the module)
 
 - `Stmt.Datatype` -- `datatype` definition
 
