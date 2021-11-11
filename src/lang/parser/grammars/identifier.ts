@@ -4,6 +4,7 @@ const preserved = [
   // stmts
   "class",
   "import",
+  "datatype",
   // keywords
   "the",
   "is",

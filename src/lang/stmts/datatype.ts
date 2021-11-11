@@ -29,6 +29,6 @@ export class Datatype extends Stmt {
   }
 
   repr(): string {
-    throw new Error("TODO")
+    return "TODO"
   }
 }

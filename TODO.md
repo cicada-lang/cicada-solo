@@ -1,9 +1,7 @@
 # inductive datatype
 
-- `Stmt.Datatype` -- syntax -- matcher
-
-- `Stmt.Datatype` -- `execute`
 - `Stmt.Datatype` -- `repr`
+- `Stmt.Datatype` -- `execute`
 
 - `Datatype` -- `free_names`
 - `Datatype` -- `subst`

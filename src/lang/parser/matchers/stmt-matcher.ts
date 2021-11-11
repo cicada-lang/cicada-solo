@@ -80,7 +80,6 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
             }
           }
         }, exp_matcher(ret))
-
       return new Stmts.Def(
         pt.str(name),
         new Exps.The(pi_handler({ bindings, ret_t }, { span }), fn, {
@@ -151,7 +150,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         {},
         Object.fromEntries(
           pt.matchers
-            .zero_or_more_matcher(ctors)
+            .one_or_more_matcher(ctors)
             .map(ctor_matcher)
             .map(({ name, t }) => [name, t])
         ),
@@ -161,11 +160,16 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     "stmt:datatype_parameters": ({ name, parameters, ctors }, { span }) => {
       return new Stmts.Datatype(
         pt.str(name),
-        {}, // simple_bindings_matcher(parameters),
+        Object.fromEntries(
+          simple_bindings_matcher(parameters).map(({ name, exp }) => [
+            name,
+            exp,
+          ])
+        ),
         {},
         Object.fromEntries(
           pt.matchers
-            .zero_or_more_matcher(ctors)
+            .one_or_more_matcher(ctors)
             .map(ctor_matcher)
             .map(({ name, t }) => [name, t])
         ),
@@ -178,11 +182,37 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
     ) => {
       return new Stmts.Datatype(
         pt.str(name),
-        {}, // simple_bindings_matcher(parameters),
-        {}, // simple_bindings_matcher(indexes),
+        Object.fromEntries(
+          simple_bindings_matcher(parameters).map(({ name, exp }) => [
+            name,
+            exp,
+          ])
+        ),
+        Object.fromEntries(
+          simple_bindings_matcher(indexes).map(({ name, exp }) => [name, exp])
+        ),
         Object.fromEntries(
           pt.matchers
-            .zero_or_more_matcher(ctors)
+            .one_or_more_matcher(ctors)
+            .map(ctor_matcher)
+            .map(({ name, t }) => [name, t])
+        ),
+        { span }
+      )
+    },
+    "stmt:datatype_indexes": (
+      { name, indexes, ctors },
+      { span }
+    ) => {
+      return new Stmts.Datatype(
+        pt.str(name),
+        {},
+        Object.fromEntries(
+          simple_bindings_matcher(indexes).map(({ name, exp }) => [name, exp])
+        ),
+        Object.fromEntries(
+          pt.matchers
+            .one_or_more_matcher(ctors)
             .map(ctor_matcher)
             .map(({ name, t }) => [name, t])
         ),
