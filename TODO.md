@@ -1,20 +1,31 @@
 # inductive datatype
 
-- `DatatypeCore` -- structural typing -- print `name` on `repr` but not `alpha_repr`
-
-- `DatatypeExp` -- structural typing
-
+- `Datatype` -- syntax
 - `Stmt.Datatype` -- `datatype` definition
+
+- `Datatype` -- `free_names`
+- `Datatype` -- `subst`
+- `Datatype` -- `infer`
+- `Datatype` -- `repr`
+
+- `DatatypeCore` -- `evaluate`
+- `DatatypeCore` -- `repr` -- print `name`
+- `DatatypeCore` -- `alpha_repr` -- structural typing (do not print `name`)
 
 - `DatatypeValue` -- `readback`
 - `DatatypeValue` -- `unify`
 
+- `DataValue`
+- `DataCore` -- structural typing (data contains datatype)
 
-- notes about datatype
+- no `Data` -- just apply of constructor
 
-  - use `<datatype>.<cons>` to get constructors
-    - thus `dot` must be a interface, not just for class and object
-      - the same is true for `ap`
+- use `<datatype>.<cons>` to get constructors
+
+  - thus `dot` must be a interface, not just for class and object
+    - the same is true for `ap`
+
+  - a constructor can be curried during application
 
 > **Inductive type** can greatly reduce the number of expressions,
 >   after then all other works would be easier.

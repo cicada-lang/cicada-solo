@@ -1,40 +1,38 @@
-import { Ctx } from "../../ctx"
+import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
-import { Core } from "../../core"
-import { readback } from "../../value"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
-import { Closure } from "../closure"
-import * as ut from "../../../ut"
+import { evaluate } from "../../core"
 import * as Exps from "../../exps"
 
-export class DatatypeValue extends Value {
+export class DatatypeCore extends Core {
   name: string
   parameters: Record<string, Core>
   indexes: Record<string, Core>
   ctors: Record<string, Core>
-  env: Env
 
   constructor(
     name: string,
     parameters: Record<string, Core>,
     indexes: Record<string, Core>,
-    ctors: Record<string, Core>,
-    env: Env
+    ctors: Record<string, Core>
   ) {
     super()
     this.name = name
     this.parameters = parameters
     this.indexes = indexes
     this.ctors = ctors
-    this.env = env
   }
 
-  readback(ctx: Ctx, t: Value): Core | undefined {
+  evaluate(env: Env): Value {
     throw new Error("TODO")
   }
 
-  unify(solution: Solution, that: Value): Solution {
+  repr(): string {
+    throw new Error("TODO")
+  }
+
+  alpha_repr(ctx: AlphaCtx): string {
     throw new Error("TODO")
   }
 }
