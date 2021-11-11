@@ -8,14 +8,22 @@ import * as ut from "../../../ut"
 import * as Exps from "../../exps"
 
 export class DatatypeValue extends Value {
-  // path
-  // name
-  // parameters
-  // indexes
-  // ctors
+  name: string
+  parameters: Array<{ name: string; t: Core }>
+  indexes: Array<{ name: string; t: Core }>
+  ctors: Array<{ name: string; t: Value }>
 
-  constructor() {
+  constructor(
+    name: string,
+    parameters: Array<{ name: string; t: Core }>,
+    indexes: Array<{ name: string; t: Core }>,
+    ctors: Array<{ name: string; t: Value }>
+  ) {
     super()
+    this.name = name
+    this.parameters = parameters
+    this.indexes = indexes
+    this.ctors = ctors
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {

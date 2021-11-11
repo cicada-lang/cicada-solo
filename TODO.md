@@ -1,19 +1,14 @@
-- [book manager] [cli] `cic install <user/repo@tag>` -- should not download existing packages
-- [book manager] [cli] `cic install` -- download book from `references` specified in `book.json`
-- [book manager] [cli] `cic init` -- learn from `npm init` and so on
-- [book manager] be able to resolve module in book of `references`
-  - we do not need to use book as module, we only need to be able to resolve module.
-
-- [book manager] [cli] `cic install` -- `help`
-- [book manager] [cli] `cic init` -- `help`
-
-- [book manager] a syntax for addressing value by full path and name -- preparing for nominal typing
-
 # inductive datatype
 
-- `Value` -- `Datatype` -- structural typing (but print full path of the module)
+- `DatatypeCore` -- structural typing -- print `name` on `repr` but not `alpha_repr`
+
+- `DatatypeExp` -- structural typing
 
 - `Stmt.Datatype` -- `datatype` definition
+
+- `DatatypeValue` -- `readback`
+- `DatatypeValue` -- `unify`
+
 
 - notes about datatype
 
@@ -27,6 +22,8 @@
 - note about the intuition of Noetherian induction
 
 - structural induction as a special case of Noetherian induction
+
+- `Value` -- `Datatype` -- `repr` but print full path of the module
 
 # use `unify` to replace `readback`
 
@@ -131,6 +128,19 @@
 # quotient type
 
 - learn from lean
+
+# book manager
+
+- [book manager] [cli] `cic install <user/repo@tag>` -- should not download existing packages
+- [book manager] [cli] `cic install` -- download book from `references` specified in `book.json`
+- [book manager] [cli] `cic init` -- learn from `npm init` and so on
+- [book manager] be able to resolve module in book of `references`
+  - we do not need to use book as module, we only need to be able to resolve module.
+
+- [book manager] [cli] `cic install` -- `help`
+- [book manager] [cli] `cic init` -- `help`
+
+- [book manager] a syntax for addressing value by full path and name -- preparing for nominal typing
 
 # books
 
