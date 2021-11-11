@@ -59,6 +59,27 @@ export const stmt = {
       '"from"',
       { path: { $pattern: ["string"] } },
     ],
+    // "stmt:datatype": [
+    //   '"datatype"',
+    //   { name: "identifier" },
+    //   '"("',
+    //   { parameters: { $ap: ["zero_or_more", "import_entry"] } },
+    //   '")"',
+    //   '"{"',
+    //   { entries: { $ap: ["zero_or_more", "import_entry"] } },
+    //   '"}"',
+    // ],
+    // "stmt:datatype_with_indexes": [
+    //   '"datatype"',
+    //   { name: "identifier" },
+    //   '"("',
+    //   '")"',
+    //   '"("',
+    //   '")"',
+    //   '"{"',
+    //   { entries: { $ap: ["zero_or_more", "import_entry"] } },
+    //   '"}"',
+    // ],
   },
 }
 

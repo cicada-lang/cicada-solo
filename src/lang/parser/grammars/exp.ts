@@ -166,7 +166,7 @@ export const operand = {
     ],
     "operand:sigma": [
       '"["',
-      { bindings: "sigma_bindings" },
+      { bindings: "simple_bindings" },
       '"|"',
       { cdr_t: "exp" },
       '"]"',
@@ -175,7 +175,7 @@ export const operand = {
       '"there"',
       '"exists"',
       '"["',
-      { bindings: "sigma_bindings" },
+      { bindings: "simple_bindings" },
       '"such"',
       '"that"',
       { cdr_t: "exp" },
@@ -408,19 +408,19 @@ export const cls_entry = {
   },
 }
 
-export const sigma_bindings = {
+export const simple_bindings = {
   $grammar: {
-    "sigma_bindings:sigma_bindings": [
-      { entries: { $ap: ["zero_or_more", "sigma_binding", '","'] } },
-      { last_entry: "sigma_binding" },
+    "simple_bindings:simple_bindings": [
+      { entries: { $ap: ["zero_or_more", "simple_binding", '","'] } },
+      { last_entry: "simple_binding" },
       { $ap: ["optional", '","'] },
     ],
   },
 }
 
-export const sigma_binding = {
+export const simple_binding = {
   $grammar: {
-    "sigma_binding:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
+    "simple_binding:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
   },
 }
 

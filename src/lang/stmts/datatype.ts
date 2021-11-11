@@ -17,7 +17,8 @@ export class Datatype extends Stmt {
   }
 
   async execute(mod: Module): Promise<StmtOutput | undefined> {
-    throw new Error("TODO")
+    // TODO
+    return undefined
   }
 
   repr(): string {
