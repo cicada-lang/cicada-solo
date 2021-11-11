@@ -102,19 +102,11 @@ export function sigma_handler(
 
   return simple_bindings_matcher(bindings)
     .reverse()
-    .reduce((result, binding) => {
-      switch (binding.kind) {
-        case "named": {
-          return new Exps.Sigma(binding.name, binding.exp, result, meta)
-        }
-        case "implicit": {
-          throw new pt.ParsingError(
-            `The "implicit" keyword should not be used in sigma`,
-            { span: meta.span }
-          )
-        }
-      }
-    }, exp_matcher(cdr_t))
+    .reduce(
+      (result, binding) =>
+        new Exps.Sigma(binding.name, binding.exp, result, meta),
+      exp_matcher(cdr_t)
+    )
 }
 
 export function exp_matcher(tree: pt.Tree): Exp {
@@ -581,7 +573,9 @@ export function binding_matcher(tree: pt.Tree): Binding {
   })(tree)
 }
 
-export function simple_bindings_matcher(tree: pt.Tree): Array<Binding> {
+export type SimpleBinding = { name: string; exp: Exp; span: pt.Span }
+
+export function simple_bindings_matcher(tree: pt.Tree): Array<SimpleBinding> {
   return pt.matcher({
     "simple_bindings:simple_bindings": ({ entries, last_entry }) => [
       ...pt.matchers.zero_or_more_matcher(entries).map(simple_binding_matcher),
@@ -590,10 +584,9 @@ export function simple_bindings_matcher(tree: pt.Tree): Array<Binding> {
   })(tree)
 }
 
-export function simple_binding_matcher(tree: pt.Tree): Binding {
-  return pt.matcher<Binding>({
+export function simple_binding_matcher(tree: pt.Tree): SimpleBinding {
+  return pt.matcher<SimpleBinding>({
     "simple_binding:named": ({ name, exp }, { span }) => ({
-      kind: "named",
       name: pt.str(name),
       exp: exp_matcher(exp),
       span,

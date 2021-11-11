@@ -63,7 +63,7 @@ export const stmt = {
       '"datatype"',
       { name: "identifier" },
       '"{"',
-      { entries: { $ap: ["zero_or_more", "ctor"] } },
+      { ctors: { $ap: ["zero_or_more", "ctor"] } },
       '"}"',
     ],
     "stmt:datatype_parameters": [
@@ -73,10 +73,10 @@ export const stmt = {
       { parameters: "simple_bindings" },
       '")"',
       '"{"',
-      { entries: { $ap: ["zero_or_more", "ctor"] } },
+      { ctors: { $ap: ["zero_or_more", "ctor"] } },
       '"}"',
     ],
-    "stmt:datatype_with_indexes": [
+    "stmt:datatype_parameters_indexes": [
       '"datatype"',
       { name: "identifier" },
       '"("',
@@ -86,7 +86,7 @@ export const stmt = {
       { indexes: "simple_bindings" },
       '")"',
       '"{"',
-      { entries: { $ap: ["zero_or_more", "ctor"] } },
+      { ctors: { $ap: ["zero_or_more", "ctor"] } },
       '"}"',
     ],
   },
