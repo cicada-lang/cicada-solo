@@ -59,27 +59,36 @@ export const stmt = {
       '"from"',
       { path: { $pattern: ["string"] } },
     ],
-    // "stmt:datatype": [
-    //   '"datatype"',
-    //   { name: "identifier" },
-    //   '"("',
-    //   { parameters: { $ap: ["zero_or_more", "import_entry"] } },
-    //   '")"',
-    //   '"{"',
-    //   { entries: { $ap: ["zero_or_more", "import_entry"] } },
-    //   '"}"',
-    // ],
-    // "stmt:datatype_with_indexes": [
-    //   '"datatype"',
-    //   { name: "identifier" },
-    //   '"("',
-    //   '")"',
-    //   '"("',
-    //   '")"',
-    //   '"{"',
-    //   { entries: { $ap: ["zero_or_more", "import_entry"] } },
-    //   '"}"',
-    // ],
+    "stmt:datatype": [
+      '"datatype"',
+      { name: "identifier" },
+      '"{"',
+      { entries: { $ap: ["zero_or_more", "ctor"] } },
+      '"}"',
+    ],
+    "stmt:datatype_parameters": [
+      '"datatype"',
+      { name: "identifier" },
+      '"("',
+      { parameters: "simple_bindings" },
+      '")"',
+      '"{"',
+      { entries: { $ap: ["zero_or_more", "ctor"] } },
+      '"}"',
+    ],
+    "stmt:datatype_with_indexes": [
+      '"datatype"',
+      { name: "identifier" },
+      '"("',
+      { parameters: "simple_bindings" },
+      '")"',
+      '"("',
+      { indexes: "simple_bindings" },
+      '")"',
+      '"{"',
+      { entries: { $ap: ["zero_or_more", "ctor"] } },
+      '"}"',
+    ],
   },
 }
 
@@ -91,6 +100,20 @@ export const import_entry = {
       '":"',
       { alias: "identifier" },
       { $ap: ["optional", '","'] },
+    ],
+  },
+}
+
+export const ctor = {
+  $grammar: {
+    "ctor:field": [{ name: "identifier" }, '":"', { t: "exp" }],
+    "ctor:method": [
+      { name: "identifier" },
+      '"("',
+      { bindings: "bindings" },
+      '")"',
+      '":"',
+      { ret_t: "exp" },
     ],
   },
 }

@@ -1,6 +1,6 @@
 # inductive datatype
 
-- `Stmt.Datatype` -- syntax
+- `Stmt.Datatype` -- syntax -- matcher
 
 - `Stmt.Datatype` -- `execute`
 - `Stmt.Datatype` -- `repr`
