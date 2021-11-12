@@ -138,7 +138,9 @@ datatype List(E: Type) {
 
 > **Hypothesis: parameters**
 >
-> During the definition of a inductive type, the parameters are in scope.
+> During the definition of a inductive type,
+> the parameters are in scope,
+> and the indexes are *not* in scope.
 
 > **Hypothesis: almost**
 >
