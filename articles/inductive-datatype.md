@@ -25,10 +25,10 @@ the art of inductive reasoning and discovering pattern.
 
 - We will generate `induction` eliminator from constructors of each datatype.
 
-  The input include one type constructor and many data constructors,
+  The input include one *type constructor* and many *data constructors*,
   the arguments of type constructor are splitted into two groups:
-  parameters that are the same for all constructors,
-  and indexes that varys from constructor to constructor.
+  *parameters* that are the same for all constructors,
+  and *indexes* that varys from constructor to constructor.
 
   The output is the eliminator.
 
