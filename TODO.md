@@ -1,9 +1,5 @@
 # inductive datatype
 
-- [maybe] extract `Parameters` `Indexes` and `Ctors`
-- [maybe] extract `ParametersCore` `IndexesCore` and `CtorsCore`
-
-- `Datatype` -- `subst`
 - `Datatype` -- `infer`
 - `Datatype` -- `repr`
 

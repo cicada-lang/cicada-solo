@@ -50,7 +50,9 @@ export class Datatype extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    throw new Error("TODO")
+    // NOTE datatype will always at top-level.
+    //   thus not need to subst.
+    return this
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
