@@ -94,6 +94,8 @@ and make the syntax more familiar.
 Because when we use induction to implement a function, the `target` is often in scope,
 and when the `target` is in scope, the implicit arguments over it are often also in scope.
 
+Thus we use the following type, instead of the type above.
+
 ``` cicada
 ind_nat_t = (
   target: Nat,
