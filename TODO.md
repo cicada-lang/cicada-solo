@@ -1,6 +1,5 @@
 # inductive datatype
 
-- `Datatype` -- `free_names`
 - `Datatype` -- `subst`
 - `Datatype` -- `infer`
 - `Datatype` -- `repr`

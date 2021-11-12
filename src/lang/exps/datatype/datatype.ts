@@ -26,7 +26,27 @@ export class Datatype extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    throw new Error("TODO")
+    let free_names: Set<string> = new Set()
+
+    for (const [name, exp] of Object.entries(this.parameters)) {
+      free_names = new Set([...free_names, ...exp.free_names(bound_names)])
+      bound_names = new Set([...bound_names, name])
+    }
+
+    // NOTE The `indexes` will not be in scope in constructor definitions.
+    let indexes_bound_names = bound_names
+    for (const [name, exp] of Object.entries(this.indexes)) {
+      free_names = new Set([...free_names, ...exp.free_names(indexes_bound_names)])
+      indexes_bound_names = new Set([...indexes_bound_names, name])
+    }
+
+    bound_names = new Set([...bound_names, this.name])
+
+    for (const exp of Object.values(this.ctors)) {
+      free_names = new Set([...free_names, ...exp.free_names(bound_names)])
+    }
+
+    return free_names
   }
 
   subst(name: string, exp: Exp): Exp {
