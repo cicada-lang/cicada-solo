@@ -1,4 +1,12 @@
-TODO
-TODO
-TODO
-TODO
+datatype __Nat TODOTODO{
+  TODO
+}
+datatype __List TODOTODO{
+  TODO
+}
+datatype __Vector TODOTODO{
+  TODO
+}
+datatype LessThan TODOTODO{
+  TODO
+}

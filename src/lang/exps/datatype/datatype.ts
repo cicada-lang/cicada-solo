@@ -5,6 +5,7 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { check } from "../../exp"
 import * as Exps from "../../exps"
+import * as ut from "../../../ut"
 
 export class Datatype extends Exp {
   name: string
@@ -36,7 +37,10 @@ export class Datatype extends Exp {
     // NOTE The `indexes` will not be in scope in constructor definitions.
     let indexes_bound_names = bound_names
     for (const [name, exp] of Object.entries(this.indexes)) {
-      free_names = new Set([...free_names, ...exp.free_names(indexes_bound_names)])
+      free_names = new Set([
+        ...free_names,
+        ...exp.free_names(indexes_bound_names),
+      ])
       indexes_bound_names = new Set([...indexes_bound_names, name])
     }
 
@@ -60,6 +64,13 @@ export class Datatype extends Exp {
   }
 
   repr(): string {
-    return "TODO"
+    const parameters = `TODO`
+    const indexes = `TODO`
+    const ctors = `TODO`
+
+    const head = `datatype ${this.name} ${parameters}${indexes}`
+    const body = ut.indent(ctors, "  ")
+
+    return `${head}{\n${body}\n}`
   }
 }
