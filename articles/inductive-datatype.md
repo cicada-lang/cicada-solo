@@ -23,15 +23,30 @@ the art of inductive reasoning and discovering pattern.
 
 ## Understanding the Problem
 
-- Remember that, to generate the eliminator `ind` from constructors,
-  is to generate `ind`'s type, and the type can be read as [Mathematical induction][].
+- We will generate `induction` eliminator from constructors of each datatype.
 
-  [Mathematical induction]: https://en.wikipedia.org/wiki/Mathematical_induction
+  The input include one type constructor and many data constructors,
+  the arguments of type constructor are splitted into two groups:
+  parameters that are the same for all constructors,
+  and indexes that varys from constructor to constructor.
 
-- What about non strict positive recursions? How will them read like?
+  The output is the eliminator.
 
-- Also note that the informations provided to induction eliminator,
-  allow us to construct proofs of the motive for any element of the type.
+  to generate the eliminator is to specify its type, and be able to apply it to target.
+
+  Condition of this problem includes:
+
+  - We must be able to read the type of an eliminator as [Mathematical induction](https://en.wikipedia.org/wiki/Mathematical_induction).
+
+    - What about non strict positive recursions? How will them read like?
+
+  - The data provided to eliminator must be sufficient,
+    allowing us to construct proofs of the motive for any element of the type.
+
+- We will be able to check the application of data constructors.
+
+  - The application of a data constructor should be checked instead of inferred.
+  - A data constructor might have implement arguments that are solved during checking.
 
 ## Devising a plan
 
