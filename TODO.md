@@ -1,11 +1,11 @@
 # inductive datatype
 
-- `Stmt.Datatype` -- `execute`
-
 - `Datatype` -- `free_names`
 - `Datatype` -- `subst`
 - `Datatype` -- `infer`
 - `Datatype` -- `repr`
+
+- `Stmt.Datatype` -- `execute`
 
 - `DatatypeCore` -- `evaluate`
 - `DatatypeCore` -- `repr` -- print `name`

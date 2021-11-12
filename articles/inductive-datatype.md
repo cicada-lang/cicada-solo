@@ -19,15 +19,31 @@ Just like Alain Connes said about "mathematician's wake"?
 See Euler, we will find that his mathematics is all about
 the art of inductive reasoning and discovering pattern.
 
-Remember that, to generate the eliminator `ind` from constructors,
-is to generate `ind`'s type, and the type can be read as [Mathematical induction][].
+# Our List
 
-[Mathematical induction]: https://en.wikipedia.org/wiki/Mathematical_induction
+## Understanding the Problem
+
+- Remember that, to generate the eliminator `ind` from constructors,
+  is to generate `ind`'s type, and the type can be read as [Mathematical induction][].
+
+  [Mathematical induction]: https://en.wikipedia.org/wiki/Mathematical_induction
 
 - What about non strict positive recursions? How will them read like?
 
-Also note that the informations provided to induction eliminator,
-allow us to construct proofs of the motive for any element of the type.
+- Also note that the informations provided to induction eliminator,
+  allow us to construct proofs of the motive for any element of the type.
+
+## Devising a plan
+
+TODO
+
+## Carrying out the plan
+
+TODO
+
+## Looking back
+
+TODO
 
 # Examples
 
@@ -104,6 +120,10 @@ datatype List(E: Type) {
   li(head: E, tail: List(E)): List(E)
 }
 ```
+
+> **Hypothesis: parameters**
+>
+> During the definition of a inductive type, the parameters are in scope.
 
 > **Hypothesis: almost**
 >
