@@ -60,7 +60,7 @@ TODO
 
 TODO
 
-# Examples
+# Example inductive datatypes
 
 ## Nat
 
