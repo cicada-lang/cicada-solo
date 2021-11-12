@@ -38,6 +38,6 @@ export class Datatype extends Exp {
   }
 
   repr(): string {
-    throw new Error("TODO")
+    return "TODO"
   }
 }

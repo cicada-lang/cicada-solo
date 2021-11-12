@@ -29,6 +29,6 @@ export class Datatype extends Stmt {
   }
 
   repr(): string {
-    return "TODO"
+    return this.datatype.repr()
   }
 }

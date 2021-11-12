@@ -1,6 +1,5 @@
 # inductive datatype
 
-- `Stmt.Datatype` -- `repr`
 - `Stmt.Datatype` -- `execute`
 
 - `Datatype` -- `free_names`
