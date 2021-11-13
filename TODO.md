@@ -1,8 +1,8 @@
 # inductive datatype
 
-- `DatatypeValue` -- helper methods to get values -- `self_type` & `ctor`
-
+- `DatatypeValue` -- helper methods to get values -- `self_type` & `ctor_type`
 - `DatatypeValue` -- `readback`
+
 - `DatatypeValue` -- `unify`
 
 - `DataValue`

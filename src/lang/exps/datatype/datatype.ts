@@ -32,9 +32,7 @@ export class Datatype extends Exp {
 
     return new Set([
       ...result.free_names,
-      // NOTE `parameters` in scope
       ...this.indexes_free_names(result.bound_names),
-      // NOTE `name` and `parameters` in scope
       ...this.ctors_free_names(new Set([...result.bound_names, this.name])),
     ])
   }
@@ -82,9 +80,7 @@ export class Datatype extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const result = this.parameters_infer(ctx)
-    // NOTE `parameters` in scope
     const indexes = this.indexes_infer(result.ctx)
-    // NOTE `name` and `parameters` in scope
     const self_type = evaluate(
       ctx.to_env(),
       this.self_type_core(result.parameters, indexes)
