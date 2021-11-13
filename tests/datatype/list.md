@@ -11,6 +11,13 @@ datatype List(E: Type) {
 }
 ```
 
+``` cicada
+datatype MyList(E: Type) {
+  my_null: MyList(E)
+  my_cons(head: E, tail: MyList(E)): MyList(E)
+}
+```
+
 # induction List
 
 ``` cicada

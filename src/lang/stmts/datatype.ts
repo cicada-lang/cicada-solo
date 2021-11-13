@@ -1,6 +1,7 @@
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 import { Module } from "../../module"
 import { infer } from "../exp"
+import { check } from "../exp"
 import { evaluate } from "../core"
 import { Exp } from "../exp"
 import * as Exps from "../exps"
@@ -24,7 +25,7 @@ export class Datatype extends Stmt {
   }
 
   async execute(mod: Module): Promise<StmtOutput | undefined> {
-    // TODO
+    const datatype_core = check(mod.ctx, this.datatype, new Exps.TypeValue())
     return undefined
   }
 

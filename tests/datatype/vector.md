@@ -15,6 +15,17 @@ datatype Vector(E: Type) (length: Nat) {
 }
 ```
 
+``` cicada
+datatype MyVector(E: Type) (length: Nat) {
+  my_null: MyVector(E, zero)
+  my_cons(
+    head: E,
+    implicit { prev: Nat },
+    tail: MyVector(E, prev),
+  ): MyVector(E, add1(prev))
+}
+```
+
 # induction Vector
 
 ``` cicada

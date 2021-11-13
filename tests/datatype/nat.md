@@ -11,6 +11,13 @@ datatype Nat {
 }
 ```
 
+``` cicada
+datatype MyNat {
+  my_zero: MyNat
+  my_add1(prev: MyNat): MyNat
+}
+```
+
 # induction Nat
 
 ``` cicada
