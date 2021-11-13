@@ -25,7 +25,11 @@ export class Datatype extends Stmt {
   }
 
   async execute(mod: Module): Promise<StmtOutput | undefined> {
-    const datatype_core = check(mod.ctx, this.datatype, new Exps.TypeValue())
+    const inferred = infer(mod.ctx, this.datatype)
+    const inferred_value = evaluate(mod.ctx.to_env(), inferred.core)
+    mod.ctx.assert_not_redefine(this.name, inferred.t, inferred_value)
+    mod.ctx = mod.ctx.extend(this.name, inferred.t, inferred_value)
+    mod.env = mod.env.extend(this.name, evaluate(mod.env, inferred.core))
     return undefined
   }
 

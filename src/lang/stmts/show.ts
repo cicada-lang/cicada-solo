@@ -19,11 +19,10 @@ export class Show extends Stmt {
 
   async execute(mod: Module): Promise<StmtOutput | undefined> {
     const inferred = infer(mod.ctx, this.exp)
-    const t = inferred.t
-    const value = evaluate(mod.env, inferred.core)
+    const inferred_value = evaluate(mod.env, inferred.core)
     return new StmtOutputs.NormalTerm({
-      exp: readback(mod.ctx, t, value),
-      t: readback(mod.ctx, new Exps.TypeValue(), t),
+      exp: readback(mod.ctx, inferred.t, inferred_value),
+      t: readback(mod.ctx, new Exps.TypeValue(), inferred.t),
     })
   }
 

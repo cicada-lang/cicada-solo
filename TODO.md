@@ -1,6 +1,6 @@
 # inductive datatype
 
-- `Stmt.Datatype` -- `execute` -- `evaluate`
+- `Stmt.extend_inferred`
 
 - `DatatypeCore` -- `repr` -- print `name`
 - `DatatypeCore` -- `alpha_repr` -- structural typing (do not print `name`)

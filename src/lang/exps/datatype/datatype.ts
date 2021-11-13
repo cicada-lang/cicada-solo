@@ -85,15 +85,14 @@ export class Datatype extends Exp {
     // NOTE `parameters` in scope
     const indexes = this.indexes_infer(result.ctx)
     // NOTE `name` and `parameters` in scope
-    const ctors = this.ctors_infer(
-      result.ctx.extend(
-        this.name,
-        evaluate(ctx.to_env(), this.self_type_core(result.parameters, indexes))
-      )
+    const self_type = evaluate(
+      ctx.to_env(),
+      this.self_type_core(result.parameters, indexes)
     )
+    const ctors = this.ctors_infer(result.ctx.extend(this.name, self_type))
 
     return {
-      t: new Exps.TypeValue(),
+      t: self_type,
       core: new Exps.DatatypeCore(this.name, result.parameters, indexes, ctors),
     }
   }
