@@ -13,13 +13,14 @@
 - `TypeCtorValue` -- `ctor_type`
 - `TypeCtorValue` -- `unify`
 
+- `TypeCtor` -- be able to apply to arguments and get `Datatype`
+  - `ap` interface
+
 - `Datatype`
 
-- `Ctor` -- `parameters`
-
-- use `<type-ctor>.<ctor>` to get constructors
-  - thus `dot` must be a interface, not just for class and object
-    - the same is true for `ap`
+- `Ctor` -- use a `parameters` field -- maybe we do not need check-mode implicit arguments to implement `Ctor`
+- `Ctor` -- use `<type-ctor>.<ctor>` to get constructors
+  - `dot` interface
   - a constructor can be curried during application
 
 - `DataValue`
