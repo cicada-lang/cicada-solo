@@ -1,9 +1,5 @@
 # inductive datatype
 
-- `DatatypeCore` -- `parameters_alpha_repr`
-- `DatatypeCore` -- `indexes_alpha_repr`
-- `DatatypeCore` -- `ctors_alpha_repr`
-
 - `DatatypeValue` -- helper methods to get values -- `self_type` & `ctor`
 
 - `DatatypeValue` -- `readback`

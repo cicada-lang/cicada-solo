@@ -49,15 +49,39 @@ export class DatatypeCore extends Core {
     return `${head}{\n${body}\n}`
   }
 
-  parameters_alpha_repr(ctx: AlphaCtx): string {
-    return "TODO"
+  private parameters_alpha_repr(ctx: AlphaCtx): string {
+    if (Object.entries(this.parameters).length > 0) {
+      return (
+        "(" +
+        Object.entries(this.parameters)
+          .map(([name, t]) => `${name}: ${t.alpha_repr(ctx)}`)
+          .join(", ") +
+        ") "
+      )
+    } else if (Object.entries(this.indexes).length > 0) {
+      return "() "
+    } else {
+      return ""
+    }
   }
 
-  indexes_alpha_repr(ctx: AlphaCtx): string {
-    return "TODO"
+  private indexes_alpha_repr(ctx: AlphaCtx): string {
+    if (Object.entries(this.indexes).length > 0) {
+      return (
+        "(" +
+        Object.entries(this.indexes)
+          .map(([name, t]) => `${name}: ${t.alpha_repr(ctx)}`)
+          .join(", ") +
+        ") "
+      )
+    } else {
+      return ""
+    }
   }
 
-  ctors_alpha_repr(ctx: AlphaCtx): string {
-    return "TODO"
+  private ctors_alpha_repr(ctx: AlphaCtx): string {
+    return Object.entries(this.ctors)
+      .map(([name, t]) => `${name}: ${t.alpha_repr(ctx)}`)
+      .join("\n")
   }
 }
