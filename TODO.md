@@ -18,6 +18,8 @@
 
 - `TypeCtorValue` -- `unify`
 
+- `TypeCtor` test by `Show`
+
 - `TypeCtor` -- be able to apply to arguments and get `Datatype`
   - `ap` interface
 
