@@ -1,10 +1,9 @@
 # inductive datatype
 
-- `Datatype` -- `infer`
-
 - `Datatype` -- `parameters_infer`
 - `Datatype` -- `indexes_infer`
 - `Datatype` -- `ctors_infer`
+- `Datatype` -- `self_type`
 
 - `Stmt.Datatype` -- `execute` -- `check`
 

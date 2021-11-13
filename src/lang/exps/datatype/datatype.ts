@@ -27,16 +27,18 @@ export class Datatype extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    const parameters = this.parameters_free_names(bound_names)
+    const result = this.parameters_free_names(bound_names)
 
     return new Set([
-      ...parameters.free_names,
-      ...this.indexes_free_names(parameters.bound_names),
-      ...this.ctors_free_names(new Set([...parameters.bound_names, this.name])),
+      ...result.free_names,
+      // NOTE `parameters` in scope
+      ...this.indexes_free_names(result.bound_names),
+      // NOTE `name` and `parameters` in scope
+      ...this.ctors_free_names(new Set([...result.bound_names, this.name])),
     ])
   }
 
-  parameters_free_names(bound_names: Set<string>): {
+  private parameters_free_names(bound_names: Set<string>): {
     bound_names: Set<string>
     free_names: Set<string>
   } {
@@ -49,7 +51,7 @@ export class Datatype extends Exp {
     return { free_names, bound_names }
   }
 
-  indexes_free_names(bound_names: Set<string>): Set<string> {
+  private indexes_free_names(bound_names: Set<string>): Set<string> {
     // NOTE The `indexes` will not be in scope in constructor definitions,
     //   thus we do not need to return new `bound_names`.
 
@@ -62,7 +64,7 @@ export class Datatype extends Exp {
     return free_names
   }
 
-  ctors_free_names(bound_names: Set<string>): Set<string> {
+  private ctors_free_names(bound_names: Set<string>): Set<string> {
     let free_names: Set<string> = new Set()
 
     for (const exp of Object.values(this.ctors)) {
@@ -79,7 +81,43 @@ export class Datatype extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    // NOTE The `name` and `parameters` are in scope when inferring `ctors`.
+    const result = this.parameters_infer(ctx)
+    // NOTE `parameters` in scope
+    const indexes = this.indexes_infer(result.ctx)
+    // NOTE `name` and `parameters` in scope
+    const ctors = this.ctors_infer(
+      result.ctx.extend(
+        this.name,
+        this.self_type(result.ctx, result.parameters, indexes)
+      )
+    )
+
+    return {
+      t: new Exps.TypeValue(),
+      core: new Exps.DatatypeCore(this.name, result.parameters, indexes, ctors),
+    }
+  }
+
+  private self_type(
+    ctx: Ctx,
+    parameters: Record<string, Core>,
+    indexes: Record<string, Core>
+  ): Value {
+    throw new Error("TODO")
+  }
+
+  private parameters_infer(ctx: Ctx): {
+    parameters: Record<string, Core>
+    ctx: Ctx
+  } {
+    throw new Error("TODO")
+  }
+
+  private indexes_infer(ctx: Ctx): Record<string, Core> {
+    throw new Error("TODO")
+  }
+
+  private ctors_infer(ctx: Ctx): Record<string, Core> {
     throw new Error("TODO")
   }
 
@@ -93,7 +131,7 @@ export class Datatype extends Exp {
     return `${head}{\n${body}\n}`
   }
 
-  parameters_repr(): string {
+  private parameters_repr(): string {
     if (Object.entries(this.parameters).length > 0) {
       return (
         "(" +
@@ -109,7 +147,7 @@ export class Datatype extends Exp {
     }
   }
 
-  indexes_repr(): string {
+  private indexes_repr(): string {
     if (Object.entries(this.indexes).length > 0) {
       return (
         "(" +
@@ -123,7 +161,7 @@ export class Datatype extends Exp {
     }
   }
 
-  ctors_repr(): string {
+  private ctors_repr(): string {
     return Object.entries(this.ctors)
       .map(([name, t]) => `${name}: ${t.repr()}`)
       .join("\n")
