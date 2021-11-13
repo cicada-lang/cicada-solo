@@ -43,17 +43,19 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
 
   const exp = value.readback(ctx, t)
 
-  if (exp) return exp
-
-  throw new ExpTrace(
-    [
-      `I can not readback value.`,
-      `  value class name: ${value.constructor.name}`,
-      `  type class name: ${t.constructor.name}`,
-      `  value json: ${JSON.stringify(value)}`,
-      `  type json: ${JSON.stringify(t)}`,
-    ].join("\n ")
-  )
+  if (exp) {
+    return exp
+  } else {
+    throw new ExpTrace(
+      [
+        `I can not readback value.`,
+        `  value class name: ${value.constructor.name}`,
+        `  type class name: ${t.constructor.name}`,
+        `  value json: ${JSON.stringify(value)}`,
+        `  type json: ${JSON.stringify(t)}`,
+      ].join("\n")
+    )
+  }
 }
 
 export interface ReadbackEtaExpansion {
