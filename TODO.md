@@ -1,7 +1,5 @@
 # inductive datatype
 
-- `DatatypeCore` -- `evaluate`
-
 - `Stmt.Datatype` -- `execute` -- `evaluate`
 
 - `DatatypeCore` -- `repr` -- print `name`

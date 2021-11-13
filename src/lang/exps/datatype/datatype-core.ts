@@ -25,7 +25,13 @@ export class DatatypeCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
+    return new Exps.DatatypeValue(
+      this.name,
+      this.parameters,
+      this.indexes,
+      this.ctors,
+      env
+    )
   }
 
   repr(): string {
