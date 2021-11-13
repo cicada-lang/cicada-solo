@@ -31,18 +31,26 @@ export class TypeCtorValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
+    // TODO compare `self_type`
+    const parameters = this.readback_parameters(ctx)
+    const indexes = this.readback_indexes(ctx)
+    const ctors = this.readback_ctors(ctx)
+    return new Exps.TypeCtorCore(this.name, parameters, indexes, ctors)
+  }
+
+  self_type(ctx: Ctx): Value {
     throw new Error("TODO")
   }
 
-  readback_parameters(): Record<string, Core> {
+  readback_parameters(ctx: Ctx): Record<string, Core> {
     throw new Error("TODO")
   }
 
-  readback_indexes(): Record<string, Core> {
+  readback_indexes(ctx: Ctx): Record<string, Core> {
     throw new Error("TODO")
   }
 
-  readback_ctors(): Record<string, Core> {
+  readback_ctors(ctx: Ctx): Record<string, Core> {
     throw new Error("TODO")
   }
 

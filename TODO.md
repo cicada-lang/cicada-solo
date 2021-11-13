@@ -3,14 +3,19 @@
 > NOTE First finish a version of `TypeCtorValue`, revise it later when implementing `Ctor`
 
 - `TypeCtorValue` -- `readback`
+
 - `TypeCtorValue` -- `self_type`
+
 - `TypeCtorValue` -- `readback_parameters`
 - `TypeCtorValue` -- `readback_indexes`
 - `TypeCtorValue` -- `readback_ctors`
 
-  - extends ctx with `not-yet-value`, to support recursive definition while avoiding infinite loop.
+  - extends `ctx` with `not-yet-value`, to support recursive definition while avoiding infinite loop.
 
-- `TypeCtorValue` -- `ctor_type`
+- `TypeCtorValue` -- `evaluate_parameters`
+- `TypeCtorValue` -- `evaluate_indexes`
+- `TypeCtorValue` -- `evaluate_ctors`
+
 - `TypeCtorValue` -- `unify`
 
 - `TypeCtor` -- be able to apply to arguments and get `Datatype`
