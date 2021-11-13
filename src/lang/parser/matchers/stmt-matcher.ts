@@ -200,10 +200,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         { span }
       )
     },
-    "stmt:datatype_indexes": (
-      { name, indexes, ctors },
-      { span }
-    ) => {
+    "stmt:datatype_indexes": ({ name, indexes, ctors }, { span }) => {
       return new Stmts.Datatype(
         pt.str(name),
         {},
