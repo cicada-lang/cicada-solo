@@ -1,18 +1,25 @@
 # inductive datatype
 
+- rename `Datatype` to `TypeCtor` -- `Datatype` should be the result of `TypeCtor` application
+
 > NOTE First finish a version of `DatatypeValue`, revise it later when implementing `Ctor`
 
 - `DatatypeValue` -- `readback`
+- `DatatypeValue` -- `self_type`
 - `DatatypeValue` -- `readback_parameters`
 - `DatatypeValue` -- `readback_indexes`
 - `DatatypeValue` -- `readback_ctors`
 
+  - extends ctx with `not-yet-value`, to support recursive definition while avoiding infinite loop.
+
 - `DatatypeValue` -- `ctor_type`
 - `DatatypeValue` -- `unify`
 
+- `Datatype`
+
 - `Ctor` -- `parameters`
 
-- use `<datatype>.<cons>` to get constructors
+- use `<type-ctor>.<ctor>` to get constructors
   - thus `dot` must be a interface, not just for class and object
     - the same is true for `ap`
   - a constructor can be curried during application

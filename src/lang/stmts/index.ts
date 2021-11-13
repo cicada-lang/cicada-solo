@@ -1,4 +1,4 @@
-export * from "./def"
+export * from "./define"
 export * from "./show"
 export * from "./class"
 export * from "./class-extends"

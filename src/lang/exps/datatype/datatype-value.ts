@@ -31,6 +31,19 @@ export class DatatypeValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
+
+    throw new Error("TODO")
+  }
+
+  readback_parameters(): Record<string, Core> {
+    throw new Error("TODO")
+  }
+
+  readback_indexes(): Record<string, Core> {
+    throw new Error("TODO")
+  }
+
+  readback_ctors(): Record<string, Core> {
     throw new Error("TODO")
   }
 
