@@ -1,12 +1,12 @@
-datatype __Nat TODOTODO{
+datatype __Nat {
   TODO
 }
-datatype __List TODOTODO{
+datatype __List (E: Type) {
   TODO
 }
-datatype __Vector TODOTODO{
+datatype __Vector (E: Type) (length: Nat) {
   TODO
 }
-datatype LessThan TODOTODO{
+datatype LessThan (j: Nat, k: Nat) {
   TODO
 }

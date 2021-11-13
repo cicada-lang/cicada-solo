@@ -63,12 +63,30 @@ export class Datatype extends Exp {
     throw new Error("TODO")
   }
 
+  parameters_repr(): string {
+    const entries = Object.entries(this.parameters)
+    return entries.length > 0
+      ? "(" +
+          entries.map(([name, t]) => `${name}: ${t.repr()}`).join(", ") +
+          ") "
+      : ""
+  }
+
+  indexes_repr(): string {
+    const entries = Object.entries(this.indexes)
+    return entries.length > 0
+      ? "(" +
+          entries.map(([name, t]) => `${name}: ${t.repr()}`).join(", ") +
+          ") "
+      : ""
+  }
+
   repr(): string {
-    const parameters = `TODO`
-    const indexes = `TODO`
+    const p = this.parameters_repr()
+    const i = this.indexes_repr()
     const ctors = `TODO`
 
-    const head = `datatype ${this.name} ${parameters}${indexes}`
+    const head = `datatype ${this.name} ${p}${i}`
     const body = ut.indent(ctors, "  ")
 
     return `${head}{\n${body}\n}`
