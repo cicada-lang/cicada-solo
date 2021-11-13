@@ -1,5 +1,7 @@
 # inductive datatype
 
+> NOTE re-read backhouse's paper about type theory
+
 > NOTE First finish a version of `TypeCtorValue`, revise it later when implementing `Ctor`
 
 - `TypeCtorValue` -- `readback`
