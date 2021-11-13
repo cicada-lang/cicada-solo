@@ -1,7 +1,5 @@
 # inductive datatype
 
-- `Datatype` -- `self_type`
-
 - `Stmt.Datatype` -- `execute` -- `check`
 
 - `DatatypeCore` -- `evaluate`

@@ -88,7 +88,7 @@ export class Datatype extends Exp {
     const ctors = this.ctors_infer(
       result.ctx.extend(
         this.name,
-        this.self_type(result.ctx, result.parameters, indexes)
+        evaluate(ctx.to_env(), this.self_type_core(result.parameters, indexes))
       )
     )
 
@@ -123,12 +123,16 @@ export class Datatype extends Exp {
     return indexes
   }
 
-  private self_type(
-    ctx: Ctx,
+  private self_type_core(
     parameters: Record<string, Core>,
     indexes: Record<string, Core>
-  ): Value {
-    throw new Error("TODO")
+  ): Core {
+    return [...Object.entries(parameters), ...Object.entries(indexes)]
+      .reverse()
+      .reduce(
+        (result, [name, t]) => new Exps.PiCore(name, t, result),
+        new Exps.TypeCore()
+      )
   }
 
   private ctors_infer(ctx: Ctx): Record<string, Core> {
