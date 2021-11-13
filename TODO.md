@@ -1,19 +1,19 @@
 # inductive datatype
 
-- rename `Datatype` to `TypeCtor` -- `Datatype` should be the result of `TypeCtor` application
+ambr stmt:def  stmt:define
 
-> NOTE First finish a version of `DatatypeValue`, revise it later when implementing `Ctor`
+> NOTE First finish a version of `TypeCtorValue`, revise it later when implementing `Ctor`
 
-- `DatatypeValue` -- `readback`
-- `DatatypeValue` -- `self_type`
-- `DatatypeValue` -- `readback_parameters`
-- `DatatypeValue` -- `readback_indexes`
-- `DatatypeValue` -- `readback_ctors`
+- `TypeCtorValue` -- `readback`
+- `TypeCtorValue` -- `self_type`
+- `TypeCtorValue` -- `readback_parameters`
+- `TypeCtorValue` -- `readback_indexes`
+- `TypeCtorValue` -- `readback_ctors`
 
   - extends ctx with `not-yet-value`, to support recursive definition while avoiding infinite loop.
 
-- `DatatypeValue` -- `ctor_type`
-- `DatatypeValue` -- `unify`
+- `TypeCtorValue` -- `ctor_type`
+- `TypeCtorValue` -- `unify`
 
 - `Datatype`
 

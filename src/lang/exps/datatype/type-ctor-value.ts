@@ -6,9 +6,9 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { Closure } from "../closure"
 import * as ut from "../../../ut"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 
-export class DatatypeValue extends Value {
+export class TypeCtorValue extends Value {
   name: string
   parameters: Record<string, Core>
   indexes: Record<string, Core>
@@ -31,7 +31,6 @@ export class DatatypeValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-
     throw new Error("TODO")
   }
 

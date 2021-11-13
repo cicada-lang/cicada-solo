@@ -8,7 +8,7 @@ import * as Exps from "../exps"
 export class Datatype extends Stmt {
   meta: StmtMeta
   name: string
-  datatype: Exps.Datatype
+  datatype: Exps.TypeCtor
 
   constructor(
     name: string,
@@ -20,7 +20,7 @@ export class Datatype extends Stmt {
     super()
     this.meta = meta
     this.name = name
-    this.datatype = new Exps.Datatype(name, parameters, indexes, ctors)
+    this.datatype = new Exps.TypeCtor(name, parameters, indexes, ctors)
   }
 
   async execute(mod: Module): Promise<StmtOutput | undefined> {

@@ -82,9 +82,9 @@ export * from "./str/quote"
 export * from "./str/quote-core"
 export * from "./str/quote-value"
 
-export * from "./datatype/datatype"
-export * from "./datatype/datatype-core"
-export * from "./datatype/datatype-value"
+export * from "./datatype/type-ctor"
+export * from "./datatype/type-ctor-core"
+export * from "./datatype/type-ctor-value"
 
 // NOTE subclass must follow abstract class
 export * from "./cls/cls"

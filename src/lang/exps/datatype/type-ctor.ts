@@ -8,7 +8,7 @@ import { check } from "../../exp"
 import * as Exps from "../../exps"
 import * as ut from "../../../ut"
 
-export class Datatype extends Exp {
+export class TypeCtor extends Exp {
   name: string
   parameters: Record<string, Exp>
   indexes: Record<string, Exp>
@@ -89,7 +89,7 @@ export class Datatype extends Exp {
 
     return {
       t: self_type,
-      core: new Exps.DatatypeCore(this.name, result.parameters, indexes, ctors),
+      core: new Exps.TypeCtorCore(this.name, result.parameters, indexes, ctors),
     }
   }
 

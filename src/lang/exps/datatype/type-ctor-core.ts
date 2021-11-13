@@ -6,7 +6,7 @@ import { evaluate } from "../../core"
 import * as Exps from "../../exps"
 import * as ut from "../../../ut"
 
-export class DatatypeCore extends Core {
+export class TypeCtorCore extends Core {
   name: string
   parameters: Record<string, Core>
   indexes: Record<string, Core>
@@ -26,7 +26,7 @@ export class DatatypeCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    return new Exps.DatatypeValue(
+    return new Exps.TypeCtorValue(
       this.name,
       this.parameters,
       this.indexes,
