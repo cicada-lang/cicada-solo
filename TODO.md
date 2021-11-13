@@ -1,9 +1,5 @@
 # inductive datatype
 
-- `Datatype` -- `parameters_free_names`
-- `Datatype` -- `indexes_free_names`
-- `Datatype` -- `ctors_free_names`
-
 - `Datatype` -- `infer`
 
 - `Datatype` -- `parameters_infer`
@@ -23,8 +19,6 @@
 
 - `DataValue`
 - `DataCore` -- structural typing (data contains datatype)
-
-- no `Data` -- just apply of constructor
 
 - use `<datatype>.<cons>` to get constructors
 
