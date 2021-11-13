@@ -22,9 +22,9 @@ export function stmts_matcher(tree: pt.Tree): Array<Stmt> {
 
 export function stmt_matcher(tree: pt.Tree): Stmt {
   return pt.matcher<Stmt>({
-    "stmt:def": ({ name, exp }, { span }) =>
+    "stmt:define": ({ name, exp }, { span }) =>
       new Stmts.Define(pt.str(name), exp_matcher(exp), { span }),
-    "stmt:def_the": ({ name, t, exp }, { span }) =>
+    "stmt:define_the": ({ name, t, exp }, { span }) =>
       new Stmts.Define(
         pt.str(name),
         new Exps.The(exp_matcher(t), exp_matcher(exp), {
@@ -32,7 +32,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         }),
         { span }
       ),
-    "stmt:def_the_flower_bracket": ({ name, t, exp }, { span }) =>
+    "stmt:define_the_flower_bracket": ({ name, t, exp }, { span }) =>
       new Stmts.Define(
         pt.str(name),
         new Exps.The(exp_matcher(t), exp_matcher(exp), {
@@ -40,7 +40,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         }),
         { span }
       ),
-    "stmt:def_fn": ({ name, bindings, ret_t, ret }, { span }) => {
+    "stmt:define_fn": ({ name, bindings, ret_t, ret }, { span }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
         .reduce((result, binding) => {

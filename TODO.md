@@ -1,7 +1,5 @@
 # inductive datatype
 
-ambr stmt:def  stmt:define
-
 > NOTE First finish a version of `TypeCtorValue`, revise it later when implementing `Ctor`
 
 - `TypeCtorValue` -- `readback`

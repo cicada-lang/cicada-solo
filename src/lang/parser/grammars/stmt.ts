@@ -6,15 +6,15 @@ export const stmts = {
 
 export const stmt = {
   $grammar: {
-    "stmt:def": [{ name: "identifier" }, '"="', { exp: "exp" }],
-    "stmt:def_the": [
+    "stmt:define": [{ name: "identifier" }, '"="', { exp: "exp" }],
+    "stmt:define_the": [
       { name: "identifier" },
       '":"',
       { t: "exp" },
       '"="',
       { exp: "exp" },
     ],
-    "stmt:def_the_flower_bracket": [
+    "stmt:define_the_flower_bracket": [
       { name: "identifier" },
       '":"',
       { t: "exp" },
@@ -22,7 +22,7 @@ export const stmt = {
       { exp: "exp" },
       '"}"',
     ],
-    "stmt:def_fn": [
+    "stmt:define_fn": [
       { name: "identifier" },
       '"("',
       { bindings: "bindings" },
