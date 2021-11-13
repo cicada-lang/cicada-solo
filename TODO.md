@@ -1,6 +1,5 @@
 # inductive datatype
 
-- `DatatypeCore` -- `repr` -- print `name`
 - `DatatypeCore` -- `alpha_repr` -- structural typing (do not print `name`)
 
 - `DatatypeValue` -- `readback`

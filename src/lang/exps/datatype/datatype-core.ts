@@ -35,7 +35,7 @@ export class DatatypeCore extends Core {
   }
 
   repr(): string {
-    throw new Error("TODO")
+    return this.name
   }
 
   alpha_repr(ctx: AlphaCtx): string {
