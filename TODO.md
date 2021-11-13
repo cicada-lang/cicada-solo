@@ -2,40 +2,35 @@
 
 - `DatatypeValue` -- helper methods to get values -- `self_type` & `ctor_type`
 - `DatatypeValue` -- `readback`
-
 - `DatatypeValue` -- `unify`
+
+- `Ctor`
+- use `<datatype>.<cons>` to get constructors
+  - thus `dot` must be a interface, not just for class and object
+    - the same is true for `ap`
+  - a constructor can be curried during application
 
 - `DataValue`
 - `DataCore` -- structural typing (data contains datatype)
 
-- use `<datatype>.<cons>` to get constructors
+# implicit argument in check mode
 
-  - thus `dot` must be a interface, not just for class and object
-    - the same is true for `ap`
+- be able to solve implicit arguments from return type
 
-  - a constructor can be curried during application
+  - an implicit function that only has implicit arguments can be used as value
 
-> **Inductive type** can greatly reduce the number of expressions,
->   after then all other works would be easier.
+    - we do not have zero-arity function, we use `c` instead of `c()`
 
-- note about the intuition of Noetherian induction
+  - insert implicit function in data constructor
+    - examples: `nil`, `vecnil`
 
-- structural induction as a special case of Noetherian induction
-
-- `Value` -- `Datatype` -- `repr` but print full path of the module
+  - we can fix `either.md`'s `list_ref`
 
 # prelude
 
 - a way to load prelude module
 
 - make `the` and `is` function of prelude
-
-# implicit argument in check mode
-
-- be able to solve implicit arguments from return type
-
-  - examples: `nil`, `vecnil`
-  - we can fix `either.md`'s `list_ref`
 
 # use `unify` to replace `readback`
 

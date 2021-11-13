@@ -440,23 +440,24 @@ and make a beautiful abstraction to capture the essence of the concept,
 just like a seasoned programmer, who has a lot of experience in the domain,
 designing a beautiful API.
 
-Can you explain the intuition of Noetherian induction as a deduction rule?
+**Exercise 1** Can you explain the intuition of Noetherian induction as a deduction rule?
 
+- TODO
 - Maybe it is about the finiteness guaranteed by well-founded-ness?
 
-Can you view *structural induction* as a special case of Noetherian induction?
+**Exercise 2** Can you view *structural induction* as a special case of Noetherian induction?
 
-Maybe we should try the usual *mathematical induction* first:
+**Exercise 2.1** Maybe we should try the usual *mathematical induction* first:
 
-TODO
+- TODO
 
-And we also should try *complete induction*, before we goes on:
+**Exercise 2.2** And we also should try *complete induction*, before we goes on:
 
-TODO
+- TODO
 
-Now view *structural induction* as a special case of Noetherian induction.
+**Exercise 2.3** Now view *structural induction* as a special case of Noetherian induction:
 
-TODO
+- TODO
 
 # The duality between intro and elim rules and Adjoint functor
 
