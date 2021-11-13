@@ -1,10 +1,11 @@
 # inductive datatype
 
 - `DatatypeCore` -- `evaluate`
-- `DatatypeCore` -- `repr` -- print `name`
-- `DatatypeCore` -- `alpha_repr` -- structural typing (do not print `name`)
 
 - `Stmt.Datatype` -- `execute` -- `evaluate`
+
+- `DatatypeCore` -- `repr` -- print `name`
+- `DatatypeCore` -- `alpha_repr` -- structural typing (do not print `name`)
 
 - `DatatypeValue` -- `readback`
 - `DatatypeValue` -- `unify`
