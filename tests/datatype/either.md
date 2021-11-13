@@ -197,6 +197,29 @@ list_ref(index: Nat, implicit { E: Type }, list: List(E)): Maybe(E) {
 }
 ```
 
+If we can solve implicit arguments from return type in check mode,
+we can define `list_ref` directly.
+
+``` cicada wishful-thinking
+import { induction_nat } from "./nat.md"
+
+list_ref(index: Nat, implicit { E: Type }): (List(E)) -> Maybe(E) {
+  induction_nat(
+    index,
+    (_) => (List(E)) -> Maybe(E),
+    (list) => maybe_head(list),
+    (prev, almost) => (list) => {
+      induction_maybe(
+        maybe_tail(list),
+        (_) => Maybe(E),
+        (tail) => almost(tail),
+        nothing(E),
+      )
+    }
+  )
+}
+```
+
 ``` cicada
 list_ref(0, li! ["a", "b", "c"])
 list_ref(1, li! ["a", "b", "c"])

@@ -35,6 +35,19 @@
 
 - `Value` -- `Datatype` -- `repr` but print full path of the module
 
+# prelude
+
+- a way to load prelude module
+
+- make `the` and `is` function of prelude
+
+# implicit argument in check mode
+
+- be able to solve implicit arguments from return type
+
+  - examples: `nil`, `vecnil`
+  - we can fix `either.md`'s `list_ref`
+
 # use `unify` to replace `readback`
 
 - Value.unify -- pi/fn-value.ts & pi/im-fn-value.ts
@@ -218,6 +231,9 @@
 
 - [maybe] offset in `CodeBlock`
 - [maybe] support using `let name = exp` to do local definitions in class
+
+- [general macro] `li! [...]` and `vec! [...]` can be general macro,
+  maybe `foldRight! (List.cons) [...]` and `foldRight! (Vecotr.cons) [...]`
 
 # later
 
