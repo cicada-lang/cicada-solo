@@ -1,5 +1,6 @@
 import { Exp, ExpMeta, ElaborationOptions, subst } from "../../exp"
 import { Core } from "../../core"
+import { evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
@@ -66,7 +67,6 @@ export class Datatype extends Exp {
 
   private ctors_free_names(bound_names: Set<string>): Set<string> {
     let free_names: Set<string> = new Set()
-
     for (const exp of Object.values(this.ctors)) {
       free_names = new Set([...free_names, ...exp.free_names(bound_names)])
     }
@@ -110,7 +110,14 @@ export class Datatype extends Exp {
     parameters: Record<string, Core>
     ctx: Ctx
   } {
-    throw new Error("TODO")
+    const parameters: Record<string, Core> = {}
+    for (const [name, t] of Object.entries(this.parameters)) {
+      const core = check(ctx, t, new Exps.TypeValue())
+      parameters[name] = core
+      ctx = ctx.extend(name, evaluate(ctx.to_env(), core))
+    }
+
+    return { parameters, ctx }
   }
 
   private indexes_infer(ctx: Ctx): Record<string, Core> {
