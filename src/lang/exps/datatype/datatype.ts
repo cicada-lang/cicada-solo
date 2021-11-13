@@ -60,6 +60,7 @@ export class Datatype extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
+    // NOTE The `name` and `parameters` are in scope when inferring `ctors`.
     throw new Error("TODO")
   }
 

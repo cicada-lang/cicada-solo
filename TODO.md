@@ -1,12 +1,22 @@
 # inductive datatype
 
+- `Datatype` -- `parameters_free_names`
+- `Datatype` -- `indexes_free_names`
+- `Datatype` -- `ctors_free_names`
+
 - `Datatype` -- `infer`
 
-- `Stmt.Datatype` -- `execute`
+- `Datatype` -- `parameters_infer`
+- `Datatype` -- `indexes_infer`
+- `Datatype` -- `ctors_infer`
+
+- `Stmt.Datatype` -- `execute` -- `check`
 
 - `DatatypeCore` -- `evaluate`
 - `DatatypeCore` -- `repr` -- print `name`
 - `DatatypeCore` -- `alpha_repr` -- structural typing (do not print `name`)
+
+- `Stmt.Datatype` -- `execute` -- `evaluate`
 
 - `DatatypeValue` -- `readback`
 - `DatatypeValue` -- `unify`
