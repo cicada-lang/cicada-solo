@@ -1,6 +1,5 @@
 # inductive datatype
 
-- `Datatype` -- `ctors_infer`
 - `Datatype` -- `self_type`
 
 - `Stmt.Datatype` -- `execute` -- `check`

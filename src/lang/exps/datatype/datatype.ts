@@ -98,14 +98,6 @@ export class Datatype extends Exp {
     }
   }
 
-  private self_type(
-    ctx: Ctx,
-    parameters: Record<string, Core>,
-    indexes: Record<string, Core>
-  ): Value {
-    throw new Error("TODO")
-  }
-
   private parameters_infer(ctx: Ctx): {
     parameters: Record<string, Core>
     ctx: Ctx
@@ -131,8 +123,21 @@ export class Datatype extends Exp {
     return indexes
   }
 
-  private ctors_infer(ctx: Ctx): Record<string, Core> {
+  private self_type(
+    ctx: Ctx,
+    parameters: Record<string, Core>,
+    indexes: Record<string, Core>
+  ): Value {
     throw new Error("TODO")
+  }
+
+  private ctors_infer(ctx: Ctx): Record<string, Core> {
+    const ctors: Record<string, Core> = {}
+    for (const [name, t] of Object.entries(this.ctors)) {
+      ctors[name] = check(ctx, t, new Exps.TypeValue())
+    }
+
+    return ctors
   }
 
   repr(): string {
