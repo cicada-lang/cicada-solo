@@ -64,30 +64,51 @@ export class Datatype extends Exp {
   }
 
   parameters_repr(): string {
-    const entries = Object.entries(this.parameters)
-    return entries.length > 0
-      ? "(" +
-          entries.map(([name, t]) => `${name}: ${t.repr()}`).join(", ") +
-          ") "
-      : ""
+    if (Object.entries(this.parameters).length > 0) {
+      return (
+        "(" +
+        Object.entries(this.parameters)
+          .map(([name, t]) => `${name}: ${t.repr()}`)
+          .join(", ") +
+        ") "
+      )
+    } else if (Object.entries(this.indexes).length > 0) {
+      return "() "
+    } else {
+      return ""
+    }
   }
 
   indexes_repr(): string {
-    const entries = Object.entries(this.indexes)
-    return entries.length > 0
-      ? "(" +
-          entries.map(([name, t]) => `${name}: ${t.repr()}`).join(", ") +
-          ") "
-      : ""
+    if (Object.entries(this.indexes).length > 0) {
+      return (
+        "(" +
+        Object.entries(this.indexes)
+          .map(([name, t]) => `${name}: ${t.repr()}`)
+          .join(", ") +
+        ") "
+      )
+    } else {
+      return ""
+    }
+  }
+
+  ctors_repr(): string {
+    return Object.entries(this.ctors)
+      .map(([name, t]) => `${name}: ${t.repr()}`)
+      .join("\n")
   }
 
   repr(): string {
+    const n = this.name
     const p = this.parameters_repr()
     const i = this.indexes_repr()
-    const ctors = `TODO`
 
-    const head = `datatype ${this.name} ${p}${i}`
-    const body = ut.indent(ctors, "  ")
+    const head = `datatype ${n} ${p}${i}`
+
+    const c = this.ctors_repr()
+
+    const body = ut.indent(c, "  ")
 
     return `${head}{\n${body}\n}`
   }

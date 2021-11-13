@@ -1,6 +1,5 @@
 # inductive datatype
 
-- `Datatype` -- `repr`
 - `Datatype` -- `infer`
 
 - `Stmt.Datatype` -- `execute`
