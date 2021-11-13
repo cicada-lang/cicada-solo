@@ -121,7 +121,14 @@ export class Datatype extends Exp {
   }
 
   private indexes_infer(ctx: Ctx): Record<string, Core> {
-    throw new Error("TODO")
+    const indexes: Record<string, Core> = {}
+    for (const [name, t] of Object.entries(this.indexes)) {
+      const core = check(ctx, t, new Exps.TypeValue())
+      indexes[name] = core
+      ctx = ctx.extend(name, evaluate(ctx.to_env(), core))
+    }
+
+    return indexes
   }
 
   private ctors_infer(ctx: Ctx): Record<string, Core> {

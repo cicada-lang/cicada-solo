@@ -1,6 +1,5 @@
 # inductive datatype
 
-- `Datatype` -- `indexes_infer`
 - `Datatype` -- `ctors_infer`
 - `Datatype` -- `self_type`
 
