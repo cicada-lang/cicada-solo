@@ -2,6 +2,9 @@ import { Book } from "../book"
 import { Stmt, StmtOutput } from "../lang/stmt"
 import { Env } from "../lang/env"
 import { Ctx } from "../lang/ctx"
+import { Value } from "../lang/value"
+import { Core } from "../lang/core"
+import { evaluate } from "../lang/core"
 import { Parser } from "../lang/parser"
 import { CodeBlock } from "./code-block"
 import { CodeBlockResource } from "./code-block-resource"
@@ -25,6 +28,13 @@ export class Module {
     this.codeBlocks = opts.codeBlocks
     this.env = opts.env
     this.ctx = opts.ctx
+  }
+
+  extendInferred(name: string, inferred: { t: Value; core: Core }): void {
+    const inferred_value = evaluate(this.ctx.to_env(), inferred.core)
+    this.ctx.assert_not_redefine(name, inferred.t, inferred_value)
+    this.ctx = this.ctx.extend(name, inferred.t, inferred_value)
+    this.env = this.env.extend(name, evaluate(this.env, inferred.core))
   }
 
   private async step(): Promise<Array<StmtOutput>> {
