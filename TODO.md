@@ -1,10 +1,17 @@
 # inductive datatype
 
-- `DatatypeValue` -- helper methods to get values -- `self_type` & `ctor_type`
+> NOTE First finish a version of `DatatypeValue`, revise it later when implementing `Ctor`
+
 - `DatatypeValue` -- `readback`
+- `DatatypeValue` -- `readback_parameters`
+- `DatatypeValue` -- `readback_indexes`
+- `DatatypeValue` -- `readback_ctors`
+
+- `DatatypeValue` -- `ctor_type`
 - `DatatypeValue` -- `unify`
 
-- `Ctor`
+- `Ctor` -- `parameters`
+
 - use `<datatype>.<cons>` to get constructors
   - thus `dot` must be a interface, not just for class and object
     - the same is true for `ap`

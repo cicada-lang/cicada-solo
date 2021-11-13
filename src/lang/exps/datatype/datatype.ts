@@ -79,13 +79,13 @@ export class Datatype extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const result = this.parameters_infer(ctx)
-    const indexes = this.indexes_infer(result.ctx)
+    const result = this.infer_parameters(ctx)
+    const indexes = this.infer_indexes(result.ctx)
     const self_type = evaluate(
       ctx.to_env(),
       this.self_type_core(result.parameters, indexes)
     )
-    const ctors = this.ctors_infer(result.ctx.extend(this.name, self_type))
+    const ctors = this.infer_ctors(result.ctx.extend(this.name, self_type))
 
     return {
       t: self_type,
@@ -93,7 +93,7 @@ export class Datatype extends Exp {
     }
   }
 
-  private parameters_infer(ctx: Ctx): {
+  private infer_parameters(ctx: Ctx): {
     parameters: Record<string, Core>
     ctx: Ctx
   } {
@@ -107,7 +107,7 @@ export class Datatype extends Exp {
     return { parameters, ctx }
   }
 
-  private indexes_infer(ctx: Ctx): Record<string, Core> {
+  private infer_indexes(ctx: Ctx): Record<string, Core> {
     const indexes: Record<string, Core> = {}
     for (const [name, t] of Object.entries(this.indexes)) {
       const core = check(ctx, t, new Exps.TypeValue())
@@ -130,7 +130,7 @@ export class Datatype extends Exp {
       )
   }
 
-  private ctors_infer(ctx: Ctx): Record<string, Core> {
+  private infer_ctors(ctx: Ctx): Record<string, Core> {
     const ctors: Record<string, Core> = {}
     for (const [name, t] of Object.entries(this.ctors)) {
       ctors[name] = check(ctx, t, new Exps.TypeValue())
