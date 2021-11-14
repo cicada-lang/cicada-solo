@@ -35,6 +35,20 @@
 - `DataValue`
 - `DataCore` -- structural typing (data contains datatype)
 
+# syntax
+
+- `Exps.Begin` for code block `{ ... }`
+
+  - contains list of stmt
+
+    - `Exps.LetStmt`
+    - `Exps.ShowStmt`
+    - `Exps.ReturnStmt`
+
+  - support show in code block,
+    to use `is(inl(x), Either(A, (A) -> B))`,
+    instead of `_ = is(inl(x), Either(A, (A) -> B))`
+
 # implicit argument in check mode
 
 - be able to solve implicit arguments from return type
