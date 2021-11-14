@@ -1,6 +1,7 @@
 # inductive datatype
 
-> NOTE re-read backhouse's paper about type theory
+- [read] On the Meaning and Construction of the Rules in Martin-Löf's Theory of Types
+- [read] Do-it-yourself Type Theory
 
 > NOTE First finish a version of `TypeCtorValue`, revise it later when implementing `Ctor`
 
