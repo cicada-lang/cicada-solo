@@ -41,8 +41,8 @@
 
   - contains list of stmt
 
-    - `Exps.LetStmt`
-    - `Exps.ShowStmt`
+    - `Exps.LetStmt` -- elaboration to `Exps.Let`
+    - `Exps.ShowStmt` -- will be checked (inferred) by dropped during elaboration
     - `Exps.ReturnStmt`
 
   - support show in code block,
