@@ -155,7 +155,39 @@ same_as_chart! Maybe(List(String)) [
 
 ``` cicada
 import { induction_nat } from "./nat.md"
+```
 
+## list_ref_direct
+
+``` cicada
+list_ref_direct(index: Nat, implicit { E: Type }, list: List(E)): Maybe(E) {
+  induction_nat(
+    index,
+    (_) => (List(E)) -> Maybe(E),
+    (list) => maybe_head(list),
+    (prev, almost) => (list) => {
+      induction_maybe(
+        maybe_tail(list),
+        (_) => Maybe(E),
+        (tail) => almost(tail),
+        nothing(E),
+      )
+    }
+  ) (list)
+}
+```
+
+``` cicada
+list_ref_direct(0, li! ["a", "b", "c"])
+list_ref_direct(1, li! ["a", "b", "c"])
+list_ref_direct(2, li! ["a", "b", "c"])
+list_ref_direct(3, li! ["a", "b", "c"])
+list_ref_direct(4, li! ["a", "b", "c"])
+```
+
+## list_ref_aux
+
+``` cicada
 list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
   induction_nat(
     index,
@@ -174,8 +206,6 @@ list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
 ```
 
 ``` cicada wishful-thinking
-import { induction_nat } from "./nat.md"
-
 list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
   induction (index) {
     (_) => (List(E)) -> Maybe(E)
@@ -191,11 +221,23 @@ list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
 }
 ```
 
+## list_ref by list_ref_aux
+
 ``` cicada
 list_ref(index: Nat, implicit { E: Type }, list: List(E)): Maybe(E) {
   list_ref_aux(E, index, list)
 }
 ```
+
+``` cicada
+list_ref(0, li! ["a", "b", "c"])
+list_ref(1, li! ["a", "b", "c"])
+list_ref(2, li! ["a", "b", "c"])
+list_ref(3, li! ["a", "b", "c"])
+list_ref(4, li! ["a", "b", "c"])
+```
+
+## list_ref -- check mode
 
 If we can solve implicit arguments from return type in check mode,
 we can define `list_ref` directly.
@@ -203,7 +245,7 @@ we can define `list_ref` directly.
 ``` cicada wishful-thinking
 import { induction_nat } from "./nat.md"
 
-list_ref(index: Nat, implicit { E: Type }): (List(E)) -> Maybe(E) {
+list_ref(parameter { E: Type }, index: Nat): (List(E)) -> Maybe(E) {
   induction_nat(
     index,
     (_) => (List(E)) -> Maybe(E),
@@ -220,10 +262,10 @@ list_ref(index: Nat, implicit { E: Type }): (List(E)) -> Maybe(E) {
 }
 ```
 
-``` cicada
-list_ref(0, li! ["a", "b", "c"])
-list_ref(1, li! ["a", "b", "c"])
-list_ref(2, li! ["a", "b", "c"])
-list_ref(3, li! ["a", "b", "c"])
-list_ref(4, li! ["a", "b", "c"])
+``` cicada wishful-thinking
+the(Maybe(String), list_ref(0, li! ["a", "b", "c"]))
+the(Maybe(String), list_ref(1, li! ["a", "b", "c"]))
+the(Maybe(String), list_ref(2, li! ["a", "b", "c"]))
+the(Maybe(String), list_ref(3, li! ["a", "b", "c"]))
+the(Maybe(String), list_ref(4, li! ["a", "b", "c"]))
 ```

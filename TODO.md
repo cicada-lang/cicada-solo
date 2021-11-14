@@ -1,3 +1,5 @@
+- fix repl history
+
 # inductive datatype
 
 - [read] On the Meaning and Construction of the Rules in Martin-Löf's Theory of Types
@@ -51,6 +53,12 @@
     instead of `_ = is(inl(x), Either(A, (A) -> B))`
 
 # implicit argument in check mode
+
+- maybe check mode implicit argument should be called parameter,
+  which decorates on top of pi type, making it can not be used in infer mode.
+
+  - we should try this for data constructor first,
+    and then maybe extract it as a top level syntax.
 
 - be able to solve implicit arguments from return type
 

@@ -144,7 +144,7 @@ Examples:
 
 # Check mode and infer mode of implicit
 
-Maybe we also need to support implicit in check mode,
+We also need to support implicit in check mode,
 where we can pick up implicit arguments from return type.
 
 TODO
