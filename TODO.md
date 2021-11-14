@@ -2,6 +2,8 @@
 
 - [read] On the Meaning and Construction of the Rules in Martin-Löf's Theory of Types
 - [read] Do-it-yourself Type Theory
+- [read] AndrasKovacs/implicit-fun-elaboration
+- [others] try implicit arguments in agda and arend
 
 > NOTE First finish a version of `TypeCtorValue`, revise it later when implementing `Ctor`
 
