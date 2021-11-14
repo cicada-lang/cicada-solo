@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "@cicada-lang/partech": "^0.1.15",
-    "@enchanterjs/enchanter": "^0.1.25",
+    "@enchanterjs/enchanter": "^0.1.28",
     "@xieyuheng/ty": "^0.1.7",
     "axios": "^0.24.0",
     "commonmark": "^0.30.0",

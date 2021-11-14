@@ -1,5 +1,3 @@
-- fix repl history
-
 # inductive datatype
 
 - [read] On the Meaning and Construction of the Rules in Martin-Löf's Theory of Types
