@@ -1,7 +1,5 @@
 # inductive datatype
 
-- `TypeCtorValue` -- `unify`
-
 - `Datatype`
 
 - `TypeCtor` -- be able to apply to arguments and get `Datatype`
