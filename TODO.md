@@ -1,3 +1,21 @@
+# syntax
+
+- use `let` keyword for top level and scoped binding
+
+- use `function` keyword for top level and scoped binding
+
+- `Exps.Begin` for code block `{ ... }`
+
+  - contains list of stmt
+
+    - `Exps.LetStmt` -- elaboration to `Exps.Let`
+    - `Exps.ShowStmt` -- will be checked (inferred) by dropped during elaboration
+    - `Exps.ReturnStmt`
+
+  - support show in code block,
+    to use `is(inl(x), Either(A, (A) -> B))`,
+    instead of `_ = is(inl(x), Either(A, (A) -> B))`
+
 # inductive datatype
 
 - [read] On the Meaning and Construction of the Rules in Martin-Löf's Theory of Types
@@ -37,20 +55,6 @@
 
 - `DataValue`
 - `DataCore` -- structural typing (data contains datatype)
-
-# syntax
-
-- `Exps.Begin` for code block `{ ... }`
-
-  - contains list of stmt
-
-    - `Exps.LetStmt` -- elaboration to `Exps.Let`
-    - `Exps.ShowStmt` -- will be checked (inferred) by dropped during elaboration
-    - `Exps.ReturnStmt`
-
-  - support show in code block,
-    to use `is(inl(x), Either(A, (A) -> B))`,
-    instead of `_ = is(inl(x), Either(A, (A) -> B))`
 
 # implicit argument in check mode
 

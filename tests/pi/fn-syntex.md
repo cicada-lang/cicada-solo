@@ -10,13 +10,11 @@ id1(A: Type, x: A): A {
 id2: (A: Type, x: A) -> A =
   (A, x) => x
 
-
 id3: (A: Type, x: A) -> A =
   // NOTE The scope is different,
   //   thus the name of bound variables
   //   does not need to be the same.
   (B, y) => y
-
 
 id1(Nat, 1)
 id2(Nat, 1)
@@ -37,7 +35,6 @@ f(sole, sole)
 
 g: (Trivial) -> (Trivial) -> Trivial =
   (x) => (y) => sole
-
 
 g
 g(sole)
