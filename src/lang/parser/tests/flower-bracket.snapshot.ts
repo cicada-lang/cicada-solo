@@ -1,32 +1,32 @@
-import { tester } from "../parser-tester-instance"
+// import { tester } from "../parser-tester-instance"
 
-tester.echo_stmts(`
+// tester.echo_stmts(`
 
-a: Nat {
-  x = 1
-  y = 2
-  x
-}
+// a: Nat = {
+//   x = 1
+//   y = 2
+//   x
+// }
 
-b: Nat {
-  x: Nat {
-    1
-  }
+// b: Nat = {
+//   x: Nat = {
+//     1
+//   }
 
-  y = 2
+//   y = 2
 
-  x
-}
+//   x
+// }
 
-class ABC {
-  a: String = "a"
+// class ABC {
+//   a: String = "a"
 
-  b: String {
-    str = "b"
-    str
-  }
+//   b: String = {
+//     str = "b"
+//     str
+//   }
 
-  c: String
-}
+//   c: String
+// }
 
-`)
+// `)

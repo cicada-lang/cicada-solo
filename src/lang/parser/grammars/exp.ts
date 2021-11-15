@@ -310,6 +310,7 @@ export const operand = {
 export const declaration = {
   $grammar: {
     "declaration:let": [
+      // '"let"',
       { name: "identifier" },
       '"="',
       { exp: "exp" },
@@ -317,6 +318,7 @@ export const declaration = {
       { ret: "exp" },
     ],
     "declaration:let_the": [
+      // '"let"',
       { name: "identifier" },
       '":"',
       { t: "exp" },
