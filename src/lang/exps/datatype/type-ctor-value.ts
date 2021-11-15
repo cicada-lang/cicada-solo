@@ -77,7 +77,13 @@ export class TypeCtorValue extends Value {
   }
 
   readback_ctors(ctx: Ctx): Record<string, Core> {
-    throw new Error("TODO")
+    const ctors: Record<string, Core> = {}
+
+    for (const [name, t] of Object.entries(this.value_of_ctors())) {
+      ctors[name] = readback(ctx, new Exps.TypeValue(), t)
+    }
+
+    return ctors
   }
 
   private value_of_parameters(): {
