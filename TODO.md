@@ -1,12 +1,12 @@
+- [maybe] extract `readback_type`
+- [maybe] extract `ctx.extend_type`
+
 # inductive datatype
 
 > NOTE First finish a version of `TypeCtorValue`, revise it later when implementing `Ctor`
 
 - `TypeCtorValue` -- `readback`
 
-  - [maybe] `TypeCtorValue` -- `value_of_ctors`
-
-  - `TypeCtorValue` -- `readback_parameters`
   - `TypeCtorValue` -- `readback_indexes`
   - `TypeCtorValue` -- `readback_ctors`
 
