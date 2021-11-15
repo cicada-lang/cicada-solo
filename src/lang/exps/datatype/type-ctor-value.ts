@@ -117,7 +117,20 @@ export class TypeCtorValue extends Value {
   }
 
   private value_of_ctors(): Record<string, Value> {
-    throw new Error("TODO")
+    const ctors: Record<string, Value> = {}
+    const result = this.value_of_parameters()
+
+    let env = result.env.extend(
+      this.name,
+      new Exps.NotYetValue(this.self_type(), new Exps.VarNeutral(this.name))
+    )
+
+    for (const [name, t_core] of Object.entries(this.ctors)) {
+      const t = evaluate(env, t_core)
+      ctors[name] = t
+    }
+
+    return ctors
   }
 
   unify(solution: Solution, that: Value): Solution {

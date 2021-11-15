@@ -2,11 +2,6 @@
 
 > NOTE First finish a version of `TypeCtorValue`, revise it later when implementing `Ctor`
 
-- `TypeCtorValue` -- `value_of_ctors`
-
-  - extends `env` with `not-yet-value`,
-    to support recursive definition while avoiding infinite loop.
-
 - `TypeCtorValue` -- `unify`
 
 - `TypeCtor` test by `Show`
