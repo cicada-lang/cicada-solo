@@ -142,6 +142,5 @@ export class TypeCtorValue extends Value {
     } else {
       return Solution.failure
     }
-
   }
 }
