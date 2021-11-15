@@ -1,23 +1,9 @@
-# syntax
-
-- `Exps.Begin` for code block `{ ... }`
-
-  - contains list of stmt
-
-    - `Exps.LetStmt` -- elaboration to `Exps.Let`
-    - `Exps.ShowStmt` -- will be checked (inferred) by dropped during elaboration
-    - `Exps.ReturnStmt`
-
-  - support show in code block,
-    to use `is(inl(x), Either(A, (A) -> B))`,
-    instead of `_ = is(inl(x), Either(A, (A) -> B))`
-
-# inductive datatype
-
 - [read] On the Meaning and Construction of the Rules in Martin-Löf's Theory of Types
 - [read] Do-it-yourself Type Theory
 - [read] AndrasKovacs/implicit-fun-elaboration
 - [others] try implicit arguments in agda and arend
+
+# inductive datatype
 
 > NOTE First finish a version of `TypeCtorValue`, revise it later when implementing `Ctor`
 
@@ -51,6 +37,20 @@
 
 - `DataValue`
 - `DataCore` -- structural typing (data contains datatype)
+
+# syntax
+
+- `Exps.Begin` for code block `{ ... }`
+
+  - contains list of stmt
+
+    - `Exps.LetStmt` -- elaboration to `Exps.Let`
+    - `Exps.ShowStmt` -- will be checked (inferred) by dropped during elaboration
+    - `Exps.ReturnStmt`
+
+  - support show in code block,
+    to use `is(inl(x), Either(A, (A) -> B))`,
+    instead of `_ = is(inl(x), Either(A, (A) -> B))`
 
 # implicit argument in check mode
 
