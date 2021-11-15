@@ -33,12 +33,12 @@ export class TypeCtorValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    if (conversion(ctx, new Exps.TypeValue(), t, this.self_type())) {
+    const self_type = this.self_type()
+
+    if (conversion(ctx, new Exps.TypeValue(), t, self_type)) {
       const result = this.readback_parameters(ctx)
       const indexes = this.readback_indexes(result.ctx)
-      // TODO extends `ctx` with `not-yet-value`,
-      //   to support recursive definition while avoiding infinite loop.
-      const ctors = this.readback_ctors(result.ctx)
+      const ctors = this.readback_ctors(result.ctx.extend(this.name, self_type))
       return new Exps.TypeCtorCore(this.name, result.parameters, indexes, ctors)
     }
   }
