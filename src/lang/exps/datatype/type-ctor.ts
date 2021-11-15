@@ -83,7 +83,7 @@ export class TypeCtor extends Exp {
     const indexes = this.infer_indexes(result.ctx)
     const self_type = evaluate(
       ctx.to_env(),
-      this.self_type_core(result.parameters, indexes)
+      TypeCtor.self_type_core(result.parameters, indexes)
     )
     const ctors = this.infer_ctors(result.ctx.extend(this.name, self_type))
 
@@ -118,7 +118,7 @@ export class TypeCtor extends Exp {
     return indexes
   }
 
-  private self_type_core(
+  static self_type_core(
     parameters: Record<string, Core>,
     indexes: Record<string, Core>
   ): Core {
