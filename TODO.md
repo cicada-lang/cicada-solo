@@ -1,6 +1,6 @@
-# inductive datatype
+- typed directed unification -- `unify` take `ctx` and `t` (type of `value`)
 
-> NOTE First finish a version of `TypeCtorValue`, revise it later when implementing `Ctor`
+# inductive datatype
 
 - `TypeCtorValue` -- `unify`
 
@@ -65,7 +65,6 @@
 
 - Value.unify -- pi/fn-value.ts & pi/im-fn-value.ts
 
-  - typed directed `unify`
   - bidirectional `unify`
   - handle eta-expansion in `unify`
 

@@ -135,6 +135,9 @@ export class TypeCtorValue extends Value {
   }
 
   unify(solution: Solution, that: Value): Solution {
+    // NOTE `TypeCtor` can only be defined at top-level,
+    //   thus we use simple conversion check here.
+    // TODO We need `ctx` to do `conversion` check.
     throw new Error("TODO")
   }
 }
