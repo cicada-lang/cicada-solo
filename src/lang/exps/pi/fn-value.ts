@@ -21,7 +21,7 @@ export class FnValue extends Value {
     return undefined
   }
 
-  unify(solution: Solution, that: Value): Solution {
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     // TODO
     // throw new Error("unify is not implemented for Exps.FnValue")
     return solution

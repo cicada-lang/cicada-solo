@@ -83,7 +83,7 @@ export abstract class ImPiValue
     return new Exps.ImFnCore(this.field_name, fresh_name, result)
   }
 
-  unify(solution: Solution, that: Value): Solution {
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.ImPiValue) {
       solution = solution.unify(this.arg_t, that.arg_t)
       if (Solution.failure_p(solution)) return solution

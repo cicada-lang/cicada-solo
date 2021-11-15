@@ -24,11 +24,11 @@ export class EitherValue extends Value {
     }
   }
 
-  unify(solution: Solution, that: Value): Solution {
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.EitherValue) {
       return solution
-        .unify(this.left_t, that.left_t)
-        .unify(this.right_t, that.right_t)
+        .unify_type(ctx, this.left_t, that.left_t)
+        .unify_type(ctx, this.right_t, that.right_t)
     } else {
       return Solution.failure
     }

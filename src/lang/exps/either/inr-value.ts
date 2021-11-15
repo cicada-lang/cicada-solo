@@ -1,6 +1,6 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
+import { expect, Value } from "../../value"
 import { Solution } from "../../solution"
 import { readback } from "../../value"
 import * as Exps from "../../exps"
@@ -19,9 +19,10 @@ export class InrValue extends Value {
     }
   }
 
-  unify(solution: Solution, that: Value): Solution {
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.InrValue) {
-      return solution.unify(this.right, that.right)
+      const either = expect(ctx, t, Exps.EitherValue)
+      return solution.unify(ctx, either.right_t, this.right, that.right)
     } else {
       return Solution.failure
     }

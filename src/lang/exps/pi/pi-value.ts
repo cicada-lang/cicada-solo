@@ -51,7 +51,7 @@ export class PiValue extends Value implements ReadbackEtaExpansion {
     return new Exps.FnCore(fresh_name, ret)
   }
 
-  unify(solution: Solution, that: Value): Solution {
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.PiValue) {
       solution = solution.unify(this.arg_t, that.arg_t)
       if (Solution.failure_p(solution)) return solution

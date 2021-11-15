@@ -11,7 +11,7 @@ export class NatValue extends Value {
     }
   }
 
-  unify(solution: Solution, that: Value): Solution {
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.NatValue) {
       return solution
     } else {

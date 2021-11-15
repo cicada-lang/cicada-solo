@@ -48,7 +48,7 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
     )
   }
 
-  unify(solution: Solution, that: Value): Solution {
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.SigmaValue) {
       solution = solution.unify(this.car_t, that.car_t)
       if (Solution.failure_p(solution)) return solution

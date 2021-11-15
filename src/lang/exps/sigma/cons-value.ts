@@ -19,7 +19,7 @@ export class ConsValue extends Value {
     return undefined
   }
 
-  unify(solution: Solution, that: Value): Solution {
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.ConsValue) {
       return solution.unify(this.car, that.car).unify(this.cdr, that.cdr)
     } else {

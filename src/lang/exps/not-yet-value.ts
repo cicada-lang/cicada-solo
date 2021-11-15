@@ -21,7 +21,7 @@ export class NotYetValue extends Value {
     return this.neutral.readback_neutral(ctx)
   }
 
-  unify(solution: Solution, that: Value): Solution {
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof NotYetValue) {
       return solution
         .unify(this.t, that.t)

@@ -58,7 +58,12 @@ export abstract class Solution {
     return value
   }
 
-  unify(x: Value, y: Value): Solution {
+  unify_type(ctx: Ctx, x: Value, y: Value): Solution {
+    const t = new Exps.TypeValue()
+    return unify(ctx, t, x, y)
+  }
+
+  unify(ctx: Ctx, t: Value, x: Value, y: Value): Solution {
     // {
     //   // DEBUG
     //   if (Solution.logic_var_p(x) && Solution.logic_var_name(x) === "from") {
@@ -108,7 +113,7 @@ export abstract class Solution {
     } else {
       // NOTE When implementing unify for a `Value` subclass,
       //   the case where the argument is a logic variable is already handled.
-      return x.unify(this, y)
+      return x.unify(this, ctx, t, y)
     }
   }
 

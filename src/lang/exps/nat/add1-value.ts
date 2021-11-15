@@ -19,7 +19,7 @@ export class Add1Value extends Value {
     }
   }
 
-  unify(solution: Solution, that: Value): Solution {
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.Add1Value) {
       return solution.unify(this.prev, that.prev)
     } else {
