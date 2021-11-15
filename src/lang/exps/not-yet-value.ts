@@ -24,8 +24,8 @@ export class NotYetValue extends Value {
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof NotYetValue) {
       return solution
-        .unify(this.t, that.t)
-        .unify_neutral(this.neutral, that.neutral)
+        .unify_type(ctx, this.t, that.t)
+        .unify_neutral(ctx, this.neutral, that.neutral)
     } else {
       return Solution.failure
     }

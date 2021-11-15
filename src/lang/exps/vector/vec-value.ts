@@ -1,6 +1,6 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
+import { expect, Value } from "../../value"
 import { Solution } from "../../solution"
 import { readback } from "../../value"
 import * as Exps from "../../exps"
@@ -26,7 +26,13 @@ export class VecValue extends Value {
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.VecValue) {
-      return solution.unify(this.head, that.head).unify(this.tail, that.tail)
+      const vector = expect(ctx, t, Exps.VectorValue)
+      return (
+        solution
+          .unify(ctx, vector.elem_t, this.head, that.head)
+          // TODO the following type lenght is wrong.
+          .unify(ctx, vector, this.tail, that.tail)
+      )
     } else {
       return Solution.failure
     }

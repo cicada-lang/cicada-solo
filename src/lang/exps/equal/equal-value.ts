@@ -30,9 +30,9 @@ export class EqualValue extends Value {
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.EqualValue) {
       return solution
-        .unify(this.t, that.t)
-        .unify(this.from, that.from)
-        .unify(this.to, that.to)
+        .unify_type(ctx, this.t, that.t)
+        .unify(ctx, this.t, this.from, that.from)
+        .unify(ctx, this.t, this.to, that.to)
     } else {
       return Solution.failure
     }

@@ -21,7 +21,7 @@ export class ListValue extends Value {
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.ListValue) {
-      return solution.unify(this.elem_t, that.elem_t)
+      return solution.unify_type(ctx, this.elem_t, that.elem_t)
     } else {
       return Solution.failure
     }

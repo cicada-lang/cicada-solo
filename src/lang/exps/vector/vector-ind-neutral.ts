@@ -37,14 +37,14 @@ export class VectorIndNeutral extends Neutral {
     )
   }
 
-  unify(solution: Solution, that: Neutral): Solution {
+  unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
     if (that instanceof VectorIndNeutral) {
       return solution
-        .unify_normal(this.length, that.length)
-        .unify_neutral(this.target, that.target)
-        .unify_normal(this.motive, that.motive)
-        .unify_normal(this.base, that.base)
-        .unify_normal(this.step, that.step)
+        .unify_normal(ctx, this.length, that.length)
+        .unify_neutral(ctx, this.target, that.target)
+        .unify_normal(ctx, this.motive, that.motive)
+        .unify_normal(ctx, this.base, that.base)
+        .unify_normal(ctx, this.step, that.step)
     } else {
       return Solution.failure
     }

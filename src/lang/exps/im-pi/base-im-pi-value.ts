@@ -64,6 +64,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
     const inferred_arg = infer(ctx, arg)
     const solution = Solution.empty.unify_or_fail(
       ctx,
+      new Exps.TypeValue(),
       ret_t.arg_t,
       inferred_arg.t
     )

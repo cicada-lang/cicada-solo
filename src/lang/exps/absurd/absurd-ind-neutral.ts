@@ -22,11 +22,11 @@ export class AbsurdIndNeutral extends Neutral {
     )
   }
 
-  unify(solution: Solution, that: Neutral): Solution {
+  unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
     if (that instanceof AbsurdIndNeutral) {
       return solution
-        .unify_neutral(this.target, that.target)
-        .unify_normal(this.motive, that.motive)
+        .unify_neutral(ctx, this.target, that.target)
+        .unify_normal(ctx, this.motive, that.motive)
     } else {
       return Solution.failure
     }

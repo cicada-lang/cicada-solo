@@ -1,6 +1,6 @@
 import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
+import { expect, Value } from "../../value"
 import { Solution } from "../../solution"
 import { readback } from "../../value"
 import * as Exps from "../../exps"
@@ -26,7 +26,10 @@ export class LiValue extends Value {
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.LiValue) {
-      return solution.unify(this.head, that.head).unify(this.tail, that.tail)
+      const list = expect(ctx, t, Exps.ListValue)
+      return solution
+        .unify(ctx, list.elem_t, this.head, that.head)
+        .unify(ctx, list, this.tail, that.tail)
     } else {
       return Solution.failure
     }

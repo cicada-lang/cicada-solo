@@ -33,13 +33,13 @@ export class EitherIndNeutral extends Neutral {
     )
   }
 
-  unify(solution: Solution, that: Neutral): Solution {
+  unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
     if (that instanceof EitherIndNeutral) {
       return solution
-        .unify_neutral(this.target, that.target)
-        .unify_normal(this.motive, that.motive)
-        .unify_normal(this.base_left, that.base_left)
-        .unify_normal(this.base_right, that.base_right)
+        .unify_neutral(ctx, this.target, that.target)
+        .unify_normal(ctx, this.motive, that.motive)
+        .unify_normal(ctx, this.base_left, that.base_left)
+        .unify_normal(ctx, this.base_right, that.base_right)
     } else {
       return Solution.failure
     }

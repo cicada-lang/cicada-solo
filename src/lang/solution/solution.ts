@@ -60,7 +60,7 @@ export abstract class Solution {
 
   unify_type(ctx: Ctx, x: Value, y: Value): Solution {
     const t = new Exps.TypeValue()
-    return unify(ctx, t, x, y)
+    return this.unify(ctx, t, x, y)
   }
 
   unify(ctx: Ctx, t: Value, x: Value, y: Value): Solution {
@@ -117,16 +117,16 @@ export abstract class Solution {
     }
   }
 
-  unify_neutral(x: Neutral, y: Neutral): Solution {
-    return x.unify(this, y)
+  unify_neutral(ctx: Ctx, x: Neutral, y: Neutral): Solution {
+    return x.unify(ctx, this, y)
   }
 
-  unify_normal(x: Normal, y: Normal): Solution {
-    return x.unify(this, y)
+  unify_normal(ctx: Ctx, x: Normal, y: Normal): Solution {
+    return x.unify(this, ctx, y)
   }
 
-  unify_or_fail(ctx: Ctx, left: Value, right: Value): Solution {
-    const solution = this.unify(left, right)
+  unify_or_fail(ctx: Ctx, t: Value, left: Value, right: Value): Solution {
+    const solution = this.unify(ctx, t, left, right)
 
     if (Solution.failure_p(solution)) {
       const left_repr = readback(ctx, new Exps.TypeValue(), left).repr()

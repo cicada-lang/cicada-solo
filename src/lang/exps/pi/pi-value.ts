@@ -53,7 +53,7 @@ export class PiValue extends Value implements ReadbackEtaExpansion {
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.PiValue) {
-      solution = solution.unify(this.arg_t, that.arg_t)
+      solution = solution.unify_type(ctx, this.arg_t, that.arg_t)
       if (Solution.failure_p(solution)) return solution
       const names = new Set([
         ...solution.names,
@@ -64,7 +64,8 @@ export class PiValue extends Value implements ReadbackEtaExpansion {
       const v = new Exps.VarNeutral(fresh_name)
       const this_v = new Exps.NotYetValue(this.arg_t, v)
       const that_v = new Exps.NotYetValue(that.arg_t, v)
-      return solution.unify(
+      return solution.unify_type(
+        ctx,
         this.ret_t_cl.apply(this_v),
         that.ret_t_cl.apply(that_v)
       )

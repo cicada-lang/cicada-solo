@@ -20,9 +20,9 @@ export class TodoNeutral extends Neutral {
     return new TodoCore(this.note, this.t)
   }
 
-  unify(solution: Solution, that: Neutral): Solution {
+  unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
     if (that instanceof TodoNeutral) {
-      return solution.unify(this.t, that.t)
+      return solution.unify_type(ctx, this.t, that.t)
     } else {
       return Solution.failure
     }

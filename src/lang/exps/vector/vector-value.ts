@@ -27,8 +27,8 @@ export class VectorValue extends Value {
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.VectorValue) {
       return solution
-        .unify(this.elem_t, that.elem_t)
-        .unify(this.length, that.length)
+        .unify_type(ctx, this.elem_t, that.elem_t)
+        .unify(ctx, new Exps.NatValue(), this.length, that.length)
     } else {
       return Solution.failure
     }

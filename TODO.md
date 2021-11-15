@@ -1,5 +1,3 @@
-- typed directed unification -- `unify` take `ctx` and `t` (type of `value`)
-
 # inductive datatype
 
 - `TypeCtorValue` -- `unify`
@@ -222,6 +220,8 @@
   - learn from constraint logic programming (CLP)
 
 # bug
+
+- [bug] When `Valee.unify` take `ctx` and `t`, the `length` if `VecValue.unify` is wrong
 
 - [bug] `11.md` -- the socpe of implicit argument `length` is wrong
 
