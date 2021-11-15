@@ -1,9 +1,5 @@
 # syntax
 
-- use `let` keyword for top level and scoped binding
-
-- use `function` keyword for top level and scoped binding
-
 - `Exps.Begin` for code block `{ ... }`
 
   - contains list of stmt

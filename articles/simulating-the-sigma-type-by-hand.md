@@ -55,10 +55,10 @@ my_cons(
   f(x, y)
 }
 
-// my_car (
+// my_car(
 //   A: Type,
 //   B: (A) -> Type,
-//   p: (E: Type, f: (A, B(x)) -> E) -> E
+//   p: (E: Type, f: (A, B(x)) -> E) -> E // The name `x` is undefined.
 // ): A {
 //   (A, B, p) => p(A, (a, b) => a)
 // }
