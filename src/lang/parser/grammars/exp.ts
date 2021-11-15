@@ -327,16 +327,6 @@ export const declaration = {
       { $ap: ["optional", '";"'] },
       { ret: "exp" },
     ],
-    "declaration:let_the_flower_bracket": [
-      { name: "identifier" },
-      '":"',
-      { t: "exp" },
-      '"{"',
-      { exp: "exp" },
-      '"}"',
-      { $ap: ["optional", '";"'] },
-      { ret: "exp" },
-    ],
     "declaration:let_fn": [
       { name: "identifier" },
       '"("',
@@ -375,15 +365,6 @@ export const cls_entry = {
       { t: "exp" },
       '"="',
       { exp: "exp" },
-      { $ap: ["optional", '","'] },
-    ],
-    "cls_entry:field_fulfilled_flower_bracket": [
-      { name: "identifier" },
-      '":"',
-      { t: "exp" },
-      '"{"',
-      { exp: "exp" },
-      '"}"',
       { $ap: ["optional", '","'] },
     ],
     "cls_entry:method_demanded": [
