@@ -66,7 +66,14 @@ export class TypeCtorValue extends Value {
   }
 
   readback_indexes(ctx: Ctx): Record<string, Core> {
-    throw new Error("TODO")
+    const indexes: Record<string, Core> = {}
+
+    for (const [name, t] of Object.entries(this.value_of_indexes())) {
+      indexes[name] = readback(ctx, new Exps.TypeValue(), t)
+      ctx = ctx.extend(name, t)
+    }
+
+    return indexes
   }
 
   readback_ctors(ctx: Ctx): Record<string, Core> {

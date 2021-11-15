@@ -7,7 +7,6 @@
 
 - `TypeCtorValue` -- `readback`
 
-  - `TypeCtorValue` -- `readback_indexes`
   - `TypeCtorValue` -- `readback_ctors`
 
     - extends `ctx` with `not-yet-value`, to support recursive definition while avoiding infinite loop.
