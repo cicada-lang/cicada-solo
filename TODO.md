@@ -4,7 +4,6 @@
 
 - `TypeCtorValue` -- `readback`
 
-  - `TypeCtorValue` -- `value_of_indexes`
   - `TypeCtorValue` -- `value_of_ctors`
 
   - `TypeCtorValue` -- `self_type`

@@ -31,7 +31,7 @@ export class TypeCtorValue extends Value {
     this.env = env
   }
 
-  value_of_parameters(ctx: Ctx): {
+  value_of_parameters(): {
     parameters: Record<string, Value>
     env: Env
   } {
@@ -47,11 +47,22 @@ export class TypeCtorValue extends Value {
     return { parameters, env }
   }
 
-  value_of_indexes(ctx: Ctx): Record<string, Value> {
-    throw new Error("TODO")
+  value_of_indexes(): Record<string, Value> {
+    const result = this.value_of_parameters()
+
+    const indexes: Record<string, Value> = {}
+
+    let env = result.env
+    for (const [name, t_core] of Object.entries(this.indexes)) {
+      const t = evaluate(env, t_core)
+      indexes[name] = t
+      env = env.extend(name, new Exps.NotYetValue(t, new Exps.VarNeutral(name)))
+    }
+
+    return indexes
   }
 
-  value_of_ctors(ctx: Ctx): Record<string, Value> {
+  value_of_ctors(): Record<string, Value> {
     throw new Error("TODO")
   }
 
