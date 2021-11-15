@@ -3,6 +3,7 @@ import { Env } from "../../env"
 import { Core } from "../../core"
 import { readback } from "../../value"
 import { Value } from "../../value"
+import { evaluate } from "../../core"
 import { Solution } from "../../solution"
 import { Closure } from "../closure"
 import * as ut from "../../../ut"
@@ -28,6 +29,30 @@ export class TypeCtorValue extends Value {
     this.indexes = indexes
     this.ctors = ctors
     this.env = env
+  }
+
+  value_of_parameters(ctx: Ctx): {
+    parameters: Record<string, Value>
+    env: Env
+  } {
+    const parameters: Record<string, Value> = {}
+
+    let env = this.env
+    for (const [name, t_core] of Object.entries(this.parameters)) {
+      const t = evaluate(env, t_core)
+      parameters[name] = t
+      env = env.extend(name, new Exps.NotYetValue(t, new Exps.VarNeutral(name)))
+    }
+
+    return { parameters, env }
+  }
+
+  value_of_indexes(ctx: Ctx): Record<string, Value> {
+    throw new Error("TODO")
+  }
+
+  value_of_ctors(ctx: Ctx): Record<string, Value> {
+    throw new Error("TODO")
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {

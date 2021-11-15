@@ -4,17 +4,16 @@
 
 - `TypeCtorValue` -- `readback`
 
-- `TypeCtorValue` -- `self_type`
+  - `TypeCtorValue` -- `value_of_indexes`
+  - `TypeCtorValue` -- `value_of_ctors`
 
-- `TypeCtorValue` -- `readback_parameters`
-- `TypeCtorValue` -- `readback_indexes`
-- `TypeCtorValue` -- `readback_ctors`
+  - `TypeCtorValue` -- `self_type`
 
-  - extends `ctx` with `not-yet-value`, to support recursive definition while avoiding infinite loop.
+  - `TypeCtorValue` -- `readback_parameters`
+  - `TypeCtorValue` -- `readback_indexes`
+  - `TypeCtorValue` -- `readback_ctors`
 
-- `TypeCtorValue` -- `evaluate_parameters`
-- `TypeCtorValue` -- `evaluate_indexes`
-- `TypeCtorValue` -- `evaluate_ctors`
+    - extends `ctx` with `not-yet-value`, to support recursive definition while avoiding infinite loop.
 
 - `TypeCtorValue` -- `unify`
 
