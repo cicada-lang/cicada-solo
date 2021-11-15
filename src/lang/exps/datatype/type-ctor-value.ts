@@ -38,7 +38,8 @@ export class TypeCtorValue extends Value {
     if (conversion(ctx, new Exps.TypeValue(), t, self_type)) {
       const result = this.readback_parameters(ctx)
       const indexes = this.readback_indexes(result.ctx)
-      const ctors = this.readback_ctors(result.ctx.extend(this.name, self_type))
+      // NOTE Assuming `name` is already bound to this `TypeCtorValue` in `ctx`.
+      const ctors = this.readback_ctors(result.ctx)
       return new Exps.TypeCtorCore(this.name, result.parameters, indexes, ctors)
     }
   }

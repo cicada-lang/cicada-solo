@@ -22,4 +22,6 @@ datatype LessThan() (j: Nat, k: Nat) {
     prev_smaller: LessThan(j, k),
   ): LessThan(add1(j), add1(k))
 }
+
+// LessThan
 ```
