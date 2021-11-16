@@ -7,7 +7,7 @@ import { Value } from "../../value"
 import { Closure } from "../closure"
 import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
-import { ImApInsertionEntry } from "./im-ap-insertion"
+import { ImApInsertionEntry } from "./im-pi-value"
 
 export class ConsImPiValue extends Exps.ImPiValue {
   field_name: string

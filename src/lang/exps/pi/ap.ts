@@ -8,7 +8,6 @@ import { Value } from "../../value"
 import { ExpTrace, InternalError } from "../../errors"
 import * as ut from "../../../ut"
 import * as Exps from "../../exps"
-import { ImApInsertion } from "../im-pi/im-ap-insertion"
 
 export class Ap extends Exp {
   meta: ExpMeta
@@ -44,7 +43,7 @@ export class Ap extends Exp {
       return this.infer_for_pi(ctx, t, core)
     }
 
-    if (ImApInsertion.based_on(t)) {
+    if (t instanceof Exps.ImPiValue) {
       return t.insert_im_ap(ctx, this.arg, core, [])
     }
 

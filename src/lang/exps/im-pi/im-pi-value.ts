@@ -8,7 +8,6 @@ import { Closure } from "../closure"
 import { ExpTrace } from "../../errors"
 import * as ut from "../../../ut"
 import * as Exps from "../../exps"
-import { ImApInsertionEntry } from "./im-ap-insertion"
 import { ReadbackEtaExpansion } from "../../value"
 
 export abstract class ImPiValue extends Value implements ReadbackEtaExpansion {
@@ -119,4 +118,10 @@ export abstract class ImPiValue extends Value implements ReadbackEtaExpansion {
   ): { t: Value; core: Core }
 
   abstract solve_im_ap(ctx: Ctx, arg: Exp): Solution
+}
+
+export interface ImApInsertionEntry {
+  arg_t: Value
+  im_arg: Value
+  not_yet_value: Exps.NotYetValue
 }
