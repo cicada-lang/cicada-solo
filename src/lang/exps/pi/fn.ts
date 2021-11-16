@@ -8,7 +8,6 @@ import { ExpTrace } from "../../errors"
 import { expect } from "../../value"
 import * as Exps from "../../exps"
 import * as ut from "../../../ut"
-import { ImFnInsertion } from "../im-pi/im-fn-insertion"
 
 export class Fn extends Exp {
   meta: ExpMeta
@@ -40,7 +39,7 @@ export class Fn extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    if (ImFnInsertion.based_on(t)) {
+    if (t instanceof Exps.ImPiValue) {
       return t.insert_im_fn(ctx, this, [])
     }
 

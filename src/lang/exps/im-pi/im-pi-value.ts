@@ -8,14 +8,10 @@ import { Closure } from "../closure"
 import { ExpTrace } from "../../errors"
 import * as ut from "../../../ut"
 import * as Exps from "../../exps"
-import { ImApInsertion, ImApInsertionEntry } from "./im-ap-insertion"
-import { ImFnInsertion } from "./im-fn-insertion"
+import { ImApInsertionEntry } from "./im-ap-insertion"
 import { ReadbackEtaExpansion } from "../../value"
 
-export abstract class ImPiValue
-  extends Value
-  implements ReadbackEtaExpansion, ImFnInsertion, ImApInsertion
-{
+export abstract class ImPiValue extends Value implements ReadbackEtaExpansion {
   field_name: string
   arg_t: Value
   ret_t_cl: Closure

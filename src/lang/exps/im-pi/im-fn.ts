@@ -6,7 +6,6 @@ import { Solution } from "../../solution"
 import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../../ut"
-import { ImFnInsertion } from "./im-fn-insertion"
 
 export class ImFn extends Exp {
   meta: ExpMeta
@@ -58,7 +57,7 @@ export class ImFn extends Exp {
     //   because the arguments can be partly given.
     // NOTE The insertion will reorder the arguments.
 
-    if (!ImFnInsertion.based_on(t)) {
+    if (!(t instanceof Exps.ImPiValue)) {
       throw new ExpTrace(
         `I can not do im-fn insertion based on: ${t.constructor.name}`
       )

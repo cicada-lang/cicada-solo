@@ -1,12 +1,21 @@
 # inductive datatype
 
+- maybe we should use composition instead of implementing an interface
+
+  - merge `ImApInsertion` into `ImPiValue`
+
+  - use `ImFnInserter` instead of `ImFnInsertion`
+
+  - `ImApInsertion`
+  - `ReadbackEtaExpansion`
+
+- extract `ap` interface for both `ApCore.apply` and `Ap.infer`
+
 ## TypeCtor & Datatype
 
 - `DatatypeCore`
 
 - `TypeCtor` -- be able to apply to arguments and get `Datatype`
-
-  - `ap` interface
 
 - `DatatypeValue.readback`
 - `DatatypeValue.unify`
