@@ -1,10 +1,12 @@
+- `ApHandler`
+
+  - `ApHandler.apply` & `ApHandler.infer`
+
+- extract `ApHandler` for `Ap.infer`
+
+- extract `ApHandler` for `ApCore.apply`
+
 # inductive datatype
-
-- maybe we should use composition instead of implementing an interface
-
-  - [maybe] use composition -- instead of `ReadbackEtaExpansion`
-
-- extract `ap` interface for both `ApCore.apply` and `Ap.infer`
 
 ## TypeCtor & Datatype
 
@@ -24,7 +26,7 @@
 
 - `Ctor` -- use a `parameters` field -- maybe we do not need check-mode implicit arguments to implement `Ctor`
 - `Ctor` -- use `<type-ctor>.<ctor>` to get constructors
-  - `dot` interface
+  - `DotHandler` -- `apply` & `infer`
   - a constructor can be curried during application
 
 - `DataValue`
