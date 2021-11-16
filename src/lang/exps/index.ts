@@ -85,6 +85,8 @@ export * from "./str/quote-value"
 export * from "./datatype/type-ctor"
 export * from "./datatype/type-ctor-core"
 export * from "./datatype/type-ctor-value"
+export * from "./datatype/datatype-core"
+export * from "./datatype/datatype-value"
 
 // NOTE subclass must follow abstract class
 export * from "./cls/cls"
