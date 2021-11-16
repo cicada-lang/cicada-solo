@@ -1,10 +1,7 @@
-- `ApHandler`
-
-  - `ApHandler.apply` & `ApHandler.infer`
-
+- `ApHandler` -- `apply` & `infer`
 - extract `ApHandler` for `Ap.infer`
-
 - extract `ApHandler` for `ApCore.apply`
+- `DotHandler` -- `apply` & `infer`
 
 # inductive datatype
 
@@ -26,7 +23,6 @@
 
 - `Ctor` -- use a `parameters` field -- maybe we do not need check-mode implicit arguments to implement `Ctor`
 - `Ctor` -- use `<type-ctor>.<ctor>` to get constructors
-  - `DotHandler` -- `apply` & `infer`
   - a constructor can be curried during application
 
 - `DataValue`
