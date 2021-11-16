@@ -2,12 +2,14 @@
 
 ## TypeCtor & Datatype
 
-- `DatatypeValue`
 - `DatatypeCore`
 
 - `TypeCtor` -- be able to apply to arguments and get `Datatype`
 
   - `ap` interface
+
+- `DatatypeValue.readback`
+- `DatatypeValue.unify`
 
 - `TypeCtor` test by `Show` in `tests/datatype/less-than`
 

@@ -11,11 +11,15 @@ import * as ut from "../../../ut"
 import * as Exps from ".."
 
 export class DatatypeValue extends Value {
+  type_ctor: Exps.TypeCtorValue
   name: string
+  args: Array<Value>
 
-  constructor(name: string) {
+  constructor(type_ctor: Exps.TypeCtorValue, name: string, args: Array<Value>) {
     super()
+    this.type_ctor = type_ctor
     this.name = name
+    this.args = args
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
