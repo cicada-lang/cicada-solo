@@ -1,5 +1,3 @@
-- `DotHandler` -- `apply` & `infer`
-
 # inductive datatype
 
 ## TypeCtor & Datatype
@@ -20,6 +18,8 @@
 
 - `Ctor` -- use a `parameters` field -- maybe we do not need check-mode implicit arguments to implement `Ctor`
 - `Ctor` -- use `<type-ctor>.<ctor>` to get constructors
+  - `DotHandler` -- `apply` & `infer`
+  - `TypeCtor.dot_handler`
   - a constructor can be curried during application
 
 - `DataValue`

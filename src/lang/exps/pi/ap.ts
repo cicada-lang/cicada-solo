@@ -39,17 +39,17 @@ export class Ap extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const { t, core } = infer(ctx, this.target)
 
+    const target = evaluate(ctx.to_env(), core)
+    if (target.ap_handler?.infer_by_target) {
+      return target.ap_handler.infer_by_target(ctx, core, this.arg)
+    }
+
     if (t instanceof Exps.PiValue) {
       return this.infer_for_pi(ctx, t, core)
     }
 
     if (t instanceof Exps.ImPiValue) {
       return t.insert_im_ap(ctx, this.arg, core, [])
-    }
-
-    const target = evaluate(ctx.to_env(), core)
-    if (target.ap_handler?.infer_by_target) {
-      return target.ap_handler.infer_by_target(ctx, core, this.arg)
     }
 
     throw new ExpTrace(
