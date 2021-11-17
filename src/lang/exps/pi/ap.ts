@@ -48,13 +48,8 @@ export class Ap extends Exp {
     }
 
     const target = evaluate(ctx.to_env(), core)
-
     if (target.ap_handler?.infer_by_target) {
-      return target.ap_handler.infer_by_target(ctx, core)
-    }
-
-    if (target instanceof Exps.ClsValue) {
-      return this.infer_for_cls(ctx, target, core)
+      return target.ap_handler.infer_by_target(ctx, core, this.arg)
     }
 
     throw new ExpTrace(
@@ -76,31 +71,6 @@ export class Ap extends Exp {
     return {
       t: ret_t_cl.apply(arg_value),
       core: new Exps.ApCore(target_core, arg_core),
-    }
-  }
-
-  private infer_for_cls(
-    ctx: Ctx,
-    cls: Exps.ClsValue,
-    target_core: Core
-  ): { t: Value; core: Core } {
-    if (cls instanceof Exps.ConsClsValue) {
-      const arg_core = check(ctx, this.arg, cls.field_t)
-      return {
-        t: new Exps.TypeValue(),
-        core: new Exps.ApCore(target_core, arg_core),
-      }
-    } else if (cls instanceof Exps.FulfilledClsValue) {
-      return this.infer_for_cls(ctx, cls.rest_t, target_core)
-    } else if (cls instanceof Exps.NilClsValue) {
-      throw new ExpTrace(`The telescope is full.`)
-    } else {
-      throw new InternalError(
-        [
-          `Unknown subclass of Exps.ClsValue`,
-          `  class name: ${cls.constructor.name}`,
-        ].join("\n")
-      )
     }
   }
 

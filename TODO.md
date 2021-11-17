@@ -1,5 +1,3 @@
-- move `Ap.infer_for_cls` to `ClsApHandler.infer_by_target`
-
 - `DotHandler` -- `apply` & `infer`
 
 # inductive datatype
