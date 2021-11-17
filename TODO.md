@@ -4,6 +4,10 @@
 
 - `TypeCtorApHandler.apply` -- return `DatatypeValue`
 
+  - we need to handle curried `TypeCtor` application
+
+    - [maybe] `CurriedTypeCtor`
+
 - `DatatypeValue.readback` -- readbach to `Ap` -- no `DatatypeCore`
 
 - `DatatypeValue.unify`

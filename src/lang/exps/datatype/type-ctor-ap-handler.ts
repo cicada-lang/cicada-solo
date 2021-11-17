@@ -11,6 +11,6 @@ export class TypeCtorApHandler extends ApHandler {
   }
 
   apply(arg: Value): Exps.DatatypeValue {
-    throw new Error()
+    throw new Error("TODO")
   }
 }
