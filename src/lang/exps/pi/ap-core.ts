@@ -52,10 +52,6 @@ export class ApCore extends Core {
       return target.ap_handler.apply(arg)
     }
 
-    if (target instanceof Exps.ClsValue) {
-      return target.apply(arg)
-    }
-
     if (target instanceof Exps.NotYetValue) {
       const { t, neutral } = target
       if (t instanceof Exps.PiValue) {

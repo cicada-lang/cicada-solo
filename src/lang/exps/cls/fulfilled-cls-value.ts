@@ -10,6 +10,7 @@ import { readback } from "../../value"
 import { ExpTrace } from "../../errors"
 import * as ut from "../../../ut"
 import * as Exps from "../../exps"
+import { FulfilledClsApHandler } from "./fulfilled-cls-ap-handler"
 
 export class FulfilledClsValue extends Exps.ClsValue {
   field_name: string
@@ -32,6 +33,8 @@ export class FulfilledClsValue extends Exps.ClsValue {
     this.field = field
     this.rest_t = rest_t
   }
+
+  ap_handler = new FulfilledClsApHandler(this)
 
   get field_names(): Array<string> {
     return [this.field_name, ...this.rest_t.field_names]
@@ -124,16 +127,6 @@ export class FulfilledClsValue extends Exps.ClsValue {
     return this.rest_t.extend_ctx(
       ctx.extend(fresh_name, this.field_t, this.field),
       [...renamings, { field_name: this.field_name, local_name: fresh_name }]
-    )
-  }
-
-  apply(arg: Value): Exps.ClsValue {
-    return new Exps.FulfilledClsValue(
-      this.field_name,
-      this.local_name,
-      this.field_t,
-      this.field,
-      this.rest_t.apply(arg)
     )
   }
 }

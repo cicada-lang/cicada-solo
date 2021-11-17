@@ -10,6 +10,7 @@ import { ExpTrace } from "../../errors"
 import * as ut from "../../../ut"
 import * as Exps from "../../exps"
 import { ClsClosure } from "./cls-closure"
+import { ConsClsApHandler } from "./cons-cls-ap-handler"
 
 export class ConsClsValue extends Exps.ClsValue {
   field_name: string
@@ -22,6 +23,8 @@ export class ConsClsValue extends Exps.ClsValue {
     this.field_t = field_t
     this.rest_t_cl = rest_t_cl
   }
+
+  ap_handler = new ConsClsApHandler(this)
 
   get field_names(): Array<string> {
     return [this.field_name, ...this.rest_t_cl.rest_t.field_names]
@@ -120,15 +123,5 @@ export class ConsClsValue extends Exps.ClsValue {
         ...renamings,
         { field_name: this.field_name, local_name: fresh_name },
       ])
-  }
-
-  apply(arg: Value): Exps.ClsValue {
-    return new Exps.FulfilledClsValue(
-      this.field_name,
-      this.rest_t_cl.local_name,
-      this.field_t,
-      arg,
-      this.rest_t_cl.apply(arg)
-    )
   }
 }

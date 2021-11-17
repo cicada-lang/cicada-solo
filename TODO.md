@@ -1,5 +1,7 @@
 - `ApHandler` interface -- `infer`
 
+- move `Ap.infer_for_cls` to `ClsApHandler.infer`
+
 - extract `ApHandler` for `Ap.infer`
 - extract `ApHandler` for `ApCore.apply`
 

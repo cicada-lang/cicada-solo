@@ -5,11 +5,14 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
+import { NilClsApHandler } from "./nil-cls-ap-handler"
 
 export class NilClsValue extends Exps.ClsValue {
   get field_names(): Array<string> {
     return []
   }
+
+  ap_handler = new NilClsApHandler()
 
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
     return new Map()
@@ -53,15 +56,5 @@ export class NilClsValue extends Exps.ClsValue {
     renamings: Array<{ field_name: string; local_name: string }>
   } {
     return { ctx, renamings }
-  }
-
-  apply(arg: Value): Exps.ClsValue {
-    throw new ExpTrace(
-      [
-        `I meet the end of ClsValue`,
-        `I can not apply arg to it anymore`,
-        `arg class name: ${arg.constructor.name}`,
-      ].join("\n") + "\n"
-    )
   }
 }

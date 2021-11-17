@@ -5,6 +5,7 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 import { ReadbackEtaExpansion } from "../../value"
+import { ClsApHandler } from "./cls-ap-handler"
 
 export abstract class ClsValue extends Value implements ReadbackEtaExpansion {
   instanceofExpsClsValue = true
@@ -12,6 +13,8 @@ export abstract class ClsValue extends Value implements ReadbackEtaExpansion {
   constructor() {
     super()
   }
+
+  abstract ap_handler: ClsApHandler
 
   abstract field_names: Array<string>
   abstract readback(ctx: Ctx, t: Value): Core | undefined
@@ -36,6 +39,4 @@ export abstract class ClsValue extends Value implements ReadbackEtaExpansion {
     ctx: Ctx
     renamings: Array<{ field_name: string; local_name: string }>
   }
-
-  abstract apply(arg: Value): ClsValue
 }
