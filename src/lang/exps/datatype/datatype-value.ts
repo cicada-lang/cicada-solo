@@ -22,6 +22,17 @@ export class DatatypeValue extends Value {
     this.args = args
   }
 
+  get ctor(): Value {
+    const ctors = this.type_ctor.value_of_ctors()
+    const ctor = ctors[this.name]
+
+    if (!ctor) {
+      throw new Error(`I can not find ctor ${this.name} in type_ctor.ctors`)
+    }
+
+    return ctor
+  }
+
   readback(ctx: Ctx, t: Value): Core | undefined {
     throw new Error("TODO")
   }

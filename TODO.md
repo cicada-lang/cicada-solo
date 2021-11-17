@@ -1,6 +1,8 @@
 - `ApHandler` -- `apply` & `infer`
+
 - extract `ApHandler` for `Ap.infer`
 - extract `ApHandler` for `ApCore.apply`
+
 - `DotHandler` -- `apply` & `infer`
 
 # inductive datatype
