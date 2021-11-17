@@ -9,6 +9,7 @@ import { Closure } from "../closure"
 import { conversion } from "../../value"
 import * as ut from "../../../ut"
 import * as Exps from ".."
+import { TypeCtorApHandler } from "./type-ctor-ap-handler"
 
 export class TypeCtorValue extends Value {
   name: string
@@ -31,6 +32,8 @@ export class TypeCtorValue extends Value {
     this.ctors = ctors
     this.env = env
   }
+
+  ap_handler = new TypeCtorApHandler(this)
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     const self_type = this.self_type()

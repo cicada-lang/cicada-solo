@@ -24,7 +24,11 @@ export class ConsClsApHandler extends ApHandler {
     )
   }
 
-  infer_by_target(ctx: Ctx, target_core: Core, arg: Exp): { t: Value; core: Core } {
+  infer_by_target(
+    ctx: Ctx,
+    target_core: Core,
+    arg: Exp
+  ): { t: Value; core: Core } {
     const arg_core = check(ctx, arg, this.target.field_t)
     return {
       t: new Exps.TypeValue(),

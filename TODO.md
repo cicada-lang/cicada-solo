@@ -2,11 +2,10 @@
 
 ## TypeCtor & Datatype
 
-- `DatatypeCore`
+- `TypeCtorApHandler.apply` -- return `DatatypeValue`
 
-- `TypeCtor` -- be able to apply to arguments and get `Datatype`
+- `DatatypeValue.readback` -- readbach to `Ap` -- no `DatatypeCore`
 
-- `DatatypeValue.readback`
 - `DatatypeValue.unify`
 
 - `TypeCtor` test by `Show` in `tests/datatype/less-than`
