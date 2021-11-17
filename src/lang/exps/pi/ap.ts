@@ -47,15 +47,20 @@ export class Ap extends Exp {
       return t.insert_im_ap(ctx, this.arg, core, [])
     }
 
-    const target_value = evaluate(ctx.to_env(), core)
-    if (target_value instanceof Exps.ClsValue) {
-      return this.infer_for_cls(ctx, target_value, core)
+    const target = evaluate(ctx.to_env(), core)
+
+    if (target.ap_handler?.infer_by_target) {
+      return target.ap_handler.infer_by_target(ctx, core)
+    }
+
+    if (target instanceof Exps.ClsValue) {
+      return this.infer_for_cls(ctx, target, core)
     }
 
     throw new ExpTrace(
       [
         `I am expecting target value of type PiValue or ClsValue`,
-        `  class name: ${target_value.constructor.name}`,
+        `  class name: ${target.constructor.name}`,
       ].join("\n")
     )
   }
