@@ -48,11 +48,15 @@ export class ApCore extends Core {
   }
 
   static apply(target: Value, arg: Value): Value {
-    if (target instanceof Exps.FnValue) {
+    if (target.ap_handler) {
+      return target.ap_handler.apply(arg)
+    }
+
+    if (target instanceof Exps.ClsValue) {
       return target.apply(arg)
-    } else if (target instanceof Exps.ClsValue) {
-      return target.apply(arg)
-    } else if (target instanceof Exps.NotYetValue) {
+    }
+
+    if (target instanceof Exps.NotYetValue) {
       const { t, neutral } = target
       if (t instanceof Exps.PiValue) {
         return new Exps.NotYetValue(
@@ -64,11 +68,11 @@ export class ApCore extends Core {
           expected: [Exps.PiValue],
         })
       }
-    } else {
-      throw InternalError.wrong_target(target, {
-        expected: [Exps.FnValue, Exps.NilClsValue, Exps.ConsClsValue],
-      })
     }
+
+    throw InternalError.wrong_target(target, {
+      expected: [Exps.FnValue, Exps.NilClsValue, Exps.ConsClsValue],
+    })
   }
 }
 

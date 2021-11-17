@@ -3,6 +3,7 @@ import { Core } from "../../core"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { Closure } from "../closure"
+import { FnApHandler } from "./fn-ap-handler"
 
 export class FnValue extends Value {
   ret_cl: Closure
@@ -12,9 +13,7 @@ export class FnValue extends Value {
     this.ret_cl = ret_cl
   }
 
-  apply(arg: Value): Value {
-    return this.ret_cl.apply(arg)
-  }
+  ap_handler = new FnApHandler(this)
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     // NOTE eta expand

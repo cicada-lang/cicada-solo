@@ -1,5 +1,3 @@
-- `Value` might has `ap_handler`
-
 - `ApHandler` interface -- `infer`
 
 - extract `ApHandler` for `Ap.infer`
