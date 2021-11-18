@@ -24,6 +24,7 @@ export class VecValue extends Value {
     }
   }
 
+
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (that instanceof Exps.VecValue) {
       const vector = expect(ctx, t, Exps.VectorValue)

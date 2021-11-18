@@ -1,3 +1,4 @@
+MyNat: Type
 refl: Equal(Nat, 7, 7)
 refl: Equal(Nat, 12, 12)
 refl: Equal(Nat, 64, 64)

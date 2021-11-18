@@ -33,6 +33,37 @@ export class DatatypeValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    throw new Error("TODO")
+    if (that instanceof Exps.DatatypeValue) {
+      // TODO `t` in the arguments is not used here.
+      solution = solution.unify(
+        ctx,
+        this.type_ctor.self_type(),
+        this.type_ctor,
+        that.type_ctor
+      )
+
+      if (this.args.length !== that.args.length) {
+        throw new Error(
+          [
+            `I expect args length to be equal.`,
+            `  this.args.length: ${this.args.length}`,
+            `  that.args.length: ${that.args.length}`,
+          ].join("\n")
+        )
+      }
+
+      for (const [index, arg] of this.args.entries()) {
+        solution = solution.unify(
+          ctx,
+          this.type_ctor.get_arg_t(index),
+          arg,
+          that.args[index]
+        )
+      }
+
+      return solution
+    } else {
+      return Solution.failure
+    }
   }
 }

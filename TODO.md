@@ -2,13 +2,16 @@
 
 ## TypeCtor & Datatype
 
-- `DatatypeValue.unify`
-
 - `TypeCtorApHandler.apply` -- handle arity > 1 -- return `CurriedTypeCtorValue`
+
 - `CurriedTypeCtorValue` -- curried application of `TypeCtorValue`
+
+  - `CurriedTypeCtorValue.readback` -- readback to `ApCore`
+  - `CurriedTypeCtorValue.unify`
+
 - `curried-type-ctor-ap-handler` -- curried application of `CurriedTypeCtorValue`
 
-- `TypeCtor` test by `Show` in `tests/datatype/less-than`
+- `TypeCtor` test by `Show` in `tests/datatype/*`
 
    - need to do this test aftr be able to apply `TypeCtor` to arguments,
      because of `PiValue.readback_eta_expansion`
