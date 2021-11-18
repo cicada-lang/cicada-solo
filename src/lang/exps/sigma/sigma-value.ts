@@ -49,25 +49,25 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.SigmaValue) {
-      solution = solution.unify_type(ctx, this.car_t, that.car_t)
-      if (Solution.failure_p(solution)) return solution
-      const names = new Set([
-        ...solution.names,
-        this.cdr_t_cl.name,
-        that.cdr_t_cl.name,
-      ])
-      const fresh_name = ut.freshen(names, this.cdr_t_cl.name)
-      const v = new Exps.VarNeutral(fresh_name)
-      const this_v = new Exps.NotYetValue(this.car_t, v)
-      const that_v = new Exps.NotYetValue(that.car_t, v)
-      return solution.unify_type(
-        ctx,
-        this.cdr_t_cl.apply(this_v),
-        that.cdr_t_cl.apply(that_v)
-      )
-    } else {
+    if (!(that instanceof Exps.SigmaValue)) {
       return Solution.failure
     }
+
+    solution = solution.unify_type(ctx, this.car_t, that.car_t)
+    if (Solution.failure_p(solution)) return solution
+    const names = new Set([
+      ...solution.names,
+      this.cdr_t_cl.name,
+      that.cdr_t_cl.name,
+    ])
+    const fresh_name = ut.freshen(names, this.cdr_t_cl.name)
+    const v = new Exps.VarNeutral(fresh_name)
+    const this_v = new Exps.NotYetValue(this.car_t, v)
+    const that_v = new Exps.NotYetValue(that.car_t, v)
+    return solution.unify_type(
+      ctx,
+      this.cdr_t_cl.apply(this_v),
+      that.cdr_t_cl.apply(that_v)
+    )
   }
 }

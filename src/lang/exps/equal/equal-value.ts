@@ -28,13 +28,13 @@ export class EqualValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.EqualValue) {
-      return solution
-        .unify_type(ctx, this.t, that.t)
-        .unify(ctx, this.t, this.from, that.from)
-        .unify(ctx, this.t, this.to, that.to)
-    } else {
+    if (!(that instanceof Exps.EqualValue)) {
       return Solution.failure
     }
+
+    return solution
+      .unify_type(ctx, this.t, that.t)
+      .unify(ctx, this.t, this.from, that.from)
+      .unify(ctx, this.t, this.to, that.to)
   }
 }

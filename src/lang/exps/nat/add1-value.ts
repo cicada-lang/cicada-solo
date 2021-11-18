@@ -20,10 +20,10 @@ export class Add1Value extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.Add1Value) {
-      return solution.unify(ctx, new Exps.NatValue(), this.prev, that.prev)
-    } else {
+    if (!(that instanceof Exps.Add1Value)) {
       return Solution.failure
     }
+
+    return solution.unify(ctx, new Exps.NatValue(), this.prev, that.prev)
   }
 }

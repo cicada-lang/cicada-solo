@@ -79,26 +79,26 @@ export abstract class ImPiValue extends Value implements ReadbackEtaExpansion {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.ImPiValue) {
-      solution = solution.unify_type(ctx, this.arg_t, that.arg_t)
-      if (Solution.failure_p(solution)) return solution
-      const names = new Set([
-        ...solution.names,
-        this.ret_t_cl.name,
-        that.ret_t_cl.name,
-      ])
-      const fresh_name = ut.freshen(names, this.ret_t_cl.name)
-      const v = new Exps.VarNeutral(fresh_name)
-      const this_v = new Exps.NotYetValue(this.arg_t, v)
-      const that_v = new Exps.NotYetValue(that.arg_t, v)
-      return solution.unify_type(
-        ctx,
-        this.ret_t_cl.apply(this_v),
-        that.ret_t_cl.apply(that_v)
-      )
-    } else {
+    if (!(that instanceof Exps.ImPiValue)) {
       return Solution.failure
     }
+
+    solution = solution.unify_type(ctx, this.arg_t, that.arg_t)
+    if (Solution.failure_p(solution)) return solution
+    const names = new Set([
+      ...solution.names,
+      this.ret_t_cl.name,
+      that.ret_t_cl.name,
+    ])
+    const fresh_name = ut.freshen(names, this.ret_t_cl.name)
+    const v = new Exps.VarNeutral(fresh_name)
+    const this_v = new Exps.NotYetValue(this.arg_t, v)
+    const that_v = new Exps.NotYetValue(that.arg_t, v)
+    return solution.unify_type(
+      ctx,
+      this.ret_t_cl.apply(this_v),
+      that.ret_t_cl.apply(that_v)
+    )
   }
 
   abstract insert_im_fn(

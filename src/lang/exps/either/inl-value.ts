@@ -20,11 +20,11 @@ export class InlValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.InlValue) {
-      const either = expect(ctx, t, Exps.EitherValue)
-      return solution.unify(ctx, either.left_t, this.left, that.left)
-    } else {
+    if (!(that instanceof Exps.InlValue)) {
       return Solution.failure
     }
+
+    const either = expect(ctx, t, Exps.EitherValue)
+    return solution.unify(ctx, either.left_t, this.left, that.left)
   }
 }

@@ -12,10 +12,10 @@ export class VecnilValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.VecnilValue) {
-      return solution
-    } else {
+    if (!(that instanceof Exps.VecnilValue)) {
       return Solution.failure
     }
+
+    return solution
   }
 }

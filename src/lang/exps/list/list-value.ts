@@ -20,10 +20,10 @@ export class ListValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.ListValue) {
-      return solution.unify_type(ctx, this.elem_t, that.elem_t)
-    } else {
+    if (!(that instanceof Exps.ListValue)) {
       return Solution.failure
     }
+
+    return solution.unify_type(ctx, this.elem_t, that.elem_t)
   }
 }

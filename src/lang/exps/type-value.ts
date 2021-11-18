@@ -12,10 +12,10 @@ export class TypeValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.TypeValue) {
-      return solution
-    } else {
+    if (!(that instanceof Exps.TypeValue)) {
       return Solution.failure
     }
+
+    return solution
   }
 }

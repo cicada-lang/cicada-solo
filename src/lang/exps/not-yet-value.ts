@@ -22,13 +22,13 @@ export class NotYetValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof NotYetValue) {
-      return solution
-        .unify_type(ctx, this.t, that.t)
-        .unify_neutral(ctx, this.neutral, that.neutral)
-    } else {
+    if (!(that instanceof NotYetValue)) {
       return Solution.failure
     }
+
+    return solution
+      .unify_type(ctx, this.t, that.t)
+      .unify_neutral(ctx, this.neutral, that.neutral)
   }
 
   deep_walk(ctx: Ctx, solution: Solution): Value {

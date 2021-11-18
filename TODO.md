@@ -1,5 +1,3 @@
-- unify use guard clause
-
 # inductive datatype
 
 ## TypeCtor & Datatype

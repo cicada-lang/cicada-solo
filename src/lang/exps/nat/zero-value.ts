@@ -12,10 +12,10 @@ export class ZeroValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.ZeroValue) {
-      return solution
-    } else {
+    if (!(that instanceof Exps.ZeroValue)) {
       return Solution.failure
     }
+
+    return solution
   }
 }

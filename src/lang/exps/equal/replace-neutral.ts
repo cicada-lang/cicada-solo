@@ -26,13 +26,13 @@ export class ReplaceNeutral extends Neutral {
   }
 
   unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
-    if (that instanceof ReplaceNeutral) {
-      return solution
-        .unify_neutral(ctx, this.target, that.target)
-        .unify_normal(ctx, this.motive, that.motive)
-        .unify_normal(ctx, this.base, that.base)
-    } else {
+    if (!(that instanceof ReplaceNeutral)) {
       return Solution.failure
     }
+
+    return solution
+      .unify_neutral(ctx, this.target, that.target)
+      .unify_normal(ctx, this.motive, that.motive)
+      .unify_normal(ctx, this.base, that.base)
   }
 }

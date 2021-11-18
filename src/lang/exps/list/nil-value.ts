@@ -12,10 +12,10 @@ export class NilValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.NilValue) {
-      return solution
-    } else {
+    if (!(that instanceof Exps.NilValue)) {
       return Solution.failure
     }
+
+    return solution
   }
 }

@@ -17,10 +17,10 @@ export class CdrNeutral extends Neutral {
   }
 
   unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
-    if (that instanceof CdrNeutral) {
-      return solution.unify_neutral(ctx, this.target, that.target)
-    } else {
+    if (!(that instanceof CdrNeutral)) {
       return Solution.failure
     }
+
+    return solution.unify_neutral(ctx, this.target, that.target)
   }
 }

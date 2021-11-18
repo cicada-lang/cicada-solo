@@ -19,10 +19,10 @@ export class DotNeutral extends Neutral {
   }
 
   unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
-    if (that instanceof DotNeutral && this.name === that.name) {
-      return solution.unify_neutral(ctx, this.target, that.target)
-    } else {
+    if (!(that instanceof DotNeutral && this.name === that.name)) {
       return Solution.failure
     }
+
+    return solution.unify_neutral(ctx, this.target, that.target)
   }
 }

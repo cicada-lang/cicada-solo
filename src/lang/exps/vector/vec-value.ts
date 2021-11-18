@@ -25,16 +25,16 @@ export class VecValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.VecValue) {
-      const vector = expect(ctx, t, Exps.VectorValue)
-      return (
-        solution
-          .unify(ctx, vector.elem_t, this.head, that.head)
-          // TODO the following type lenght is wrong.
-          .unify(ctx, vector, this.tail, that.tail)
-      )
-    } else {
+    if (!(that instanceof Exps.VecValue)) {
       return Solution.failure
     }
+
+    const vector = expect(ctx, t, Exps.VectorValue)
+    return (
+      solution
+        .unify(ctx, vector.elem_t, this.head, that.head)
+        // TODO the following type lenght is wrong.
+        .unify(ctx, vector, this.tail, that.tail)
+    )
   }
 }

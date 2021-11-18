@@ -17,10 +17,10 @@ export class CarNeutral extends Neutral {
   }
 
   unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
-    if (that instanceof CarNeutral) {
-      return solution.unify_neutral(ctx, this.target, that.target)
-    } else {
+    if (!(that instanceof CarNeutral)) {
       return Solution.failure
     }
+
+    return solution.unify_neutral(ctx, this.target, that.target)
   }
 }

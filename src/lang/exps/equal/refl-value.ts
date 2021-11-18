@@ -12,10 +12,10 @@ export class ReflValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.ReflValue) {
-      return solution
-    } else {
+    if (!(that instanceof Exps.ReflValue)) {
       return Solution.failure
     }
+
+    return solution
   }
 }

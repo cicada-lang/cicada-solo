@@ -20,10 +20,10 @@ export class TrivialValue extends Value implements ReadbackEtaExpansion {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.TrivialValue) {
-      return solution
-    } else {
+    if (!(that instanceof Exps.TrivialValue)) {
       return Solution.failure
     }
+
+    return solution
   }
 }

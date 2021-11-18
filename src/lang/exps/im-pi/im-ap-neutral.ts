@@ -23,12 +23,12 @@ export class ImApNeutral extends Neutral {
   }
 
   unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
-    if (that instanceof ImApNeutral) {
-      return solution
-        .unify_neutral(ctx, this.target, that.target)
-        .unify_normal(ctx, this.arg, that.arg)
-    } else {
+    if (!(that instanceof ImApNeutral)) {
       return Solution.failure
     }
+
+    return solution
+      .unify_neutral(ctx, this.target, that.target)
+      .unify_normal(ctx, this.arg, that.arg)
   }
 }

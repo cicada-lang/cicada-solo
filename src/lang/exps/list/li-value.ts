@@ -25,13 +25,13 @@ export class LiValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.LiValue) {
-      const list = expect(ctx, t, Exps.ListValue)
-      return solution
-        .unify(ctx, list.elem_t, this.head, that.head)
-        .unify(ctx, list, this.tail, that.tail)
-    } else {
+    if (!(that instanceof Exps.LiValue)) {
       return Solution.failure
     }
+
+    const list = expect(ctx, t, Exps.ListValue)
+    return solution
+      .unify(ctx, list.elem_t, this.head, that.head)
+      .unify(ctx, list, this.tail, that.tail)
   }
 }

@@ -20,13 +20,13 @@ export class ConsValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (that instanceof Exps.ConsValue) {
-      const sigma = expect(ctx, t, Exps.SigmaValue)
-      return solution
-        .unify(ctx, sigma.car_t, this.car, that.car)
-        .unify(ctx, sigma.cdr_t_cl.apply(this.car), this.cdr, that.cdr)
-    } else {
+    if (!(that instanceof Exps.ConsValue)) {
       return Solution.failure
     }
+
+    const sigma = expect(ctx, t, Exps.SigmaValue)
+    return solution
+      .unify(ctx, sigma.car_t, this.car, that.car)
+      .unify(ctx, sigma.cdr_t_cl.apply(this.car), this.cdr, that.cdr)
   }
 }

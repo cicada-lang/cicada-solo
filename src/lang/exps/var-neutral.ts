@@ -17,10 +17,10 @@ export class VarNeutral extends Neutral {
   }
 
   unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
-    if (that instanceof VarNeutral && this.name === that.name) {
-      return solution
-    } else {
+    if (!(that instanceof VarNeutral && this.name === that.name)) {
       return Solution.failure
     }
+
+    return solution
   }
 }

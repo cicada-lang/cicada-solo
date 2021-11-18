@@ -155,10 +155,10 @@ export class TypeCtorValue extends Value {
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     // NOTE `TypeCtor` can only be defined at top-level,
     //   thus we use simple conversion check here.
-    if (conversion(ctx, t, this, that)) {
-      return solution
-    } else {
+    if (!conversion(ctx, t, this, that)) {
       return Solution.failure
     }
+
+    return solution
   }
 }
