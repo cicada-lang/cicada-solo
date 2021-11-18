@@ -76,6 +76,8 @@ export class TypeCtorValue extends Value {
   }
 
   self_type(): Value {
+    // NOTE Since the `self_type` is `PiValue`,
+    //   `PiValue.readback_eta_expansion` can handle it.
     return evaluate(
       this.env,
       Exps.TypeCtor.self_type_core(this.parameters, this.indexes)

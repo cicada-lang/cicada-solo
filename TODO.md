@@ -2,8 +2,12 @@
 
 ## TypeCtor & Datatype
 
-- `CurriedTypeCtorValue.arity` -- readback to `ApCore`
+- `CurriedTypeCtorValue.arity`
+- `CurriedTypeCtorValue.self_type`
+
 - `CurriedTypeCtorValue.readback` -- readback to `ApCore`
+  - `conversion` on `self_type`
+
 - `CurriedTypeCtorValue.unify`
 
 - `CurriedTypeCtorApHandler` -- curried application of `CurriedTypeCtorValue`

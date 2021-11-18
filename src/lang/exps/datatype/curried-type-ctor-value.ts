@@ -13,12 +13,12 @@ import { CurriedTypeCtorApHandler } from "./curried-type-ctor-ap-handler"
 
 export class CurriedTypeCtorValue extends Value {
   type_ctor: Exps.TypeCtorValue
-  arg: Value
+  args: Array<Value>
 
-  constructor(type_ctor: Exps.TypeCtorValue, arg: Value) {
+  constructor(type_ctor: Exps.TypeCtorValue, args: Array<Value>) {
     super()
     this.type_ctor = type_ctor
-    this.arg = arg
+    this.args = args
   }
 
   ap_handler = new CurriedTypeCtorApHandler(this)

@@ -16,7 +16,7 @@ export class TypeCtorApHandler extends ApHandler {
     } else if (this.target.arity === 1) {
       return new Exps.DatatypeValue(this.target, [arg])
     } else {
-      return new Exps.CurriedTypeCtorValue(this.target, arg)
+      return new Exps.CurriedTypeCtorValue(this.target, [arg])
     }
   }
 }
