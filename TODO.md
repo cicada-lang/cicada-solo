@@ -2,11 +2,9 @@
 
 ## TypeCtor & Datatype
 
-- `TypeCtorApHandler.apply` -- return `DatatypeValue`
+- `TypeCtorApHandler.apply` -- return `DatatypeValue` -- handle zero-arity and 1-arity first
 
-  - we need to handle curried `TypeCtor` application
-
-    - [maybe] `CurriedTypeCtor`
+- `CurriedTypeCtorValue` -- curried application of `TypeCtor`
 
 - `DatatypeValue.readback` -- readbach to `Ap` -- no `DatatypeCore`
 

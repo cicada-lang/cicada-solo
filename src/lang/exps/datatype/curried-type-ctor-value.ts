@@ -9,17 +9,9 @@ import { Closure } from "../closure"
 import { conversion } from "../../value"
 import * as ut from "../../../ut"
 import * as Exps from ".."
+import { TypeCtorApHandler } from "./type-ctor-ap-handler"
 
-export class DatatypeValue extends Value {
-  type_ctor: Exps.TypeCtorValue
-  args: Array<Value>
-
-  constructor(type_ctor: Exps.TypeCtorValue, args: Array<Value>) {
-    super()
-    this.type_ctor = type_ctor
-    this.args = args
-  }
-
+export class CurriedTypeCtorValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
     throw new Error("TODO")
   }

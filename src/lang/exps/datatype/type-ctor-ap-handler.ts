@@ -10,7 +10,11 @@ export class TypeCtorApHandler extends ApHandler {
     this.target = target
   }
 
-  apply(arg: Value): Exps.DatatypeValue {
+  apply(arg: Value): Value {
     throw new Error("TODO")
+    // TODO We also need to handle `TypeCtor` of `arity > 1`.
+    // return new Exps.CurriedTypeCtorValue()
+
+
   }
 }
