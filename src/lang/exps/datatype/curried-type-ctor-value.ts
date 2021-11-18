@@ -12,6 +12,15 @@ import * as Exps from ".."
 import { TypeCtorApHandler } from "./type-ctor-ap-handler"
 
 export class CurriedTypeCtorValue extends Value {
+  type_ctor: Exps.TypeCtorValue
+  arg: Value
+
+  constructor(type_ctor: Exps.TypeCtorValue, arg: Value) {
+    super()
+    this.type_ctor = type_ctor
+    this.arg = arg
+  }
+
   readback(ctx: Ctx, t: Value): Core | undefined {
     throw new Error("TODO")
   }

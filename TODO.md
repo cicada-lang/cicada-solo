@@ -2,12 +2,8 @@
 
 ## TypeCtor & Datatype
 
-- `TypeCtorApHandler.apply` -- handle `arity > 1` -- return `CurriedTypeCtorValue`
-
-- `CurriedTypeCtorValue` -- curried application of `TypeCtorValue`
-
-  - `CurriedTypeCtorValue.readback` -- readback to `ApCore`
-  - `CurriedTypeCtorValue.unify`
+- `CurriedTypeCtorValue.readback` -- readback to `ApCore`
+- `CurriedTypeCtorValue.unify`
 
 - `curried-type-ctor-ap-handler` -- curried application of `CurriedTypeCtorValue`
 
