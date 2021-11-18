@@ -2,10 +2,11 @@
 
 ## TypeCtor & Datatype
 
+- `CurriedTypeCtorValue.arity` -- readback to `ApCore`
 - `CurriedTypeCtorValue.readback` -- readback to `ApCore`
 - `CurriedTypeCtorValue.unify`
 
-- `curried-type-ctor-ap-handler` -- curried application of `CurriedTypeCtorValue`
+- `CurriedTypeCtorApHandler` -- curried application of `CurriedTypeCtorValue`
 
 - `TypeCtor` test by `Show` in `tests/datatype/*`
 

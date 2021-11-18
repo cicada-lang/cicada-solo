@@ -9,7 +9,7 @@ import { Closure } from "../closure"
 import { conversion } from "../../value"
 import * as ut from "../../../ut"
 import * as Exps from ".."
-import { TypeCtorApHandler } from "./type-ctor-ap-handler"
+import { CurriedTypeCtorApHandler } from "./curried-type-ctor-ap-handler"
 
 export class CurriedTypeCtorValue extends Value {
   type_ctor: Exps.TypeCtorValue
@@ -20,6 +20,8 @@ export class CurriedTypeCtorValue extends Value {
     this.type_ctor = type_ctor
     this.arg = arg
   }
+
+  ap_handler = new CurriedTypeCtorApHandler(this)
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     throw new Error("TODO")
