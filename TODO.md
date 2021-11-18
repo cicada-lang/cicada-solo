@@ -1,13 +1,25 @@
+- extract `check_by_infer`
+
+- `Ap.check` call `check_by_infer` when `target.ap_handler?.check_by_target` is not implemented
+
 # inductive datatype
 
 ## Ctor & Data
 
-- `DataCtor` -- use a `parameters` field -- like implicit but resolve from return type in check-mode
+- `DataCtorValue`
 
-- `DataCtor` -- use `<type-ctor>.<data-ctor>` to get constructors
+  - use a `parameters` field
+
+    - like implicit but resolve from return type in check-mode
+
+  - `readback` to `DotCore`
+
+- `DataCtorValue` -- use `<type-ctor>.<data-ctor>` to get `DataCtorValue`
+
   - `DotHandler` -- `apply` & `infer`
   - `TypeCtor.dot_handler`
-  - a constructor can be curried during application
+
+- `CurriedDataCtorValue` -- a data constructor can be curried during application
 
 - `DataValue`
 - `DataCore` -- structural typing (data contains datatype)
