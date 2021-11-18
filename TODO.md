@@ -2,9 +2,9 @@
 
 ## TypeCtor & Datatype
 
-- `TypeCtorValue.get_arg_t`
-
 - `DatatypeValue.unify`
+
+- `TypeCtor` test by `Show` in `tests/datatype/nat` & `tests/datatype/list`
 
 - `TypeCtorApHandler.apply` -- handle arity > 1 -- return `CurriedTypeCtorValue`
 - `CurriedTypeCtorValue` -- curried application of `TypeCtorValue`
