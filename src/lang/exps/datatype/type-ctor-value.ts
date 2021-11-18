@@ -33,6 +33,12 @@ export class TypeCtorValue extends Value {
     this.env = env
   }
 
+  get arity(): number {
+    return (
+      Object.keys(this.parameters).length + Object.keys(this.indexes).length
+    )
+  }
+
   ap_handler = new TypeCtorApHandler(this)
 
   readback(ctx: Ctx, t: Value): Core | undefined {

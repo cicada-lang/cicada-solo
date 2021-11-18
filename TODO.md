@@ -2,13 +2,11 @@
 
 ## TypeCtor & Datatype
 
-- `TypeCtorApHandler.apply` -- return `DatatypeValue` -- handle zero-arity and 1-arity first
-
-- `CurriedTypeCtorValue` -- curried application of `TypeCtor`
-
 - `DatatypeValue.readback` -- readbach to `Ap` -- no `DatatypeCore`
-
 - `DatatypeValue.unify`
+
+- `TypeCtorApHandler.apply` -- handle arity > 1 -- return `CurriedTypeCtorValue`
+- `CurriedTypeCtorValue` -- curried application of `TypeCtor`
 
 - `TypeCtor` test by `Show` in `tests/datatype/less-than`
 
