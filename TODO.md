@@ -2,8 +2,7 @@
 
 ## TypeCtor & Datatype
 
-- `CurriedTypeCtorValue.readback` -- readback to `ApCore`
-  - `conversion` on `self_type`
+- fix `type_ctor.get_arg_t` to handle dependent pi type
 
 - `CurriedTypeCtorValue.unify`
 
@@ -26,6 +25,9 @@
 - `DataCore` -- structural typing (data contains datatype)
 
 ## Questions
+
+- [question] Is it ok that `TypeCtorValue` can be `readback` to `TypeCtor`,
+  while `DatatypeValue` and `CurriedTypeCtorValue` can only be `readback` to `ApCore`?
 
 - [question] From the type of `List` -- `(E: Type) -> Type`,
   we know we can apply `List` to get a type,

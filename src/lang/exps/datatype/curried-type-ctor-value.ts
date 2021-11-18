@@ -50,7 +50,17 @@ export class CurriedTypeCtorValue extends Value {
   ap_handler = new CurriedTypeCtorApHandler(this)
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    throw new Error("TODO")
+    const self_type = this.self_type()
+
+    if (conversion(ctx, new Exps.TypeValue(), t, self_type)) {
+      let result: Core = new Exps.VarCore(this.type_ctor.name)
+      for (const [index, arg] of this.args.entries()) {
+        const arg_t = readback(ctx, this.type_ctor.get_arg_t(index), arg)
+        result = new Exps.ApCore(result, arg_t)
+      }
+
+      return result
+    }
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
