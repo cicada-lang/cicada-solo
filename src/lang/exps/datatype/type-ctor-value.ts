@@ -39,6 +39,10 @@ export class TypeCtorValue extends Value {
     )
   }
 
+  get_arg_t(index: number): Value {
+    throw new Error("TODO")
+  }
+  
   ap_handler = new TypeCtorApHandler(this)
 
   readback(ctx: Ctx, t: Value): Core | undefined {

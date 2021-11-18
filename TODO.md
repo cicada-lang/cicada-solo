@@ -2,7 +2,8 @@
 
 ## TypeCtor & Datatype
 
-- `DatatypeValue.readback` -- readbach to `Ap` -- no `DatatypeCore`
+- `TypeCtorValue.get_arg_t`
+
 - `DatatypeValue.unify`
 
 - `TypeCtorApHandler.apply` -- handle arity > 1 -- return `CurriedTypeCtorValue`

@@ -14,14 +14,24 @@ export class DatatypeValue extends Value {
   type_ctor: Exps.TypeCtorValue
   args: Array<Value>
 
-  constructor(type_ctor: Exps.TypeCtorValue, args: Array<Value>) {
+  constructor(type_ctor: Exps.TypeCtorValue, args: Array<Value>) { 
     super()
     this.type_ctor = type_ctor
     this.args = args
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    throw new Error("TODO")
+    if (t instanceof Exps.TypeValue) {
+      let result: Core = new Exps.VarCore(this.type_ctor.name)
+      for (const [index, arg] of this.args.entries()) {
+        result = new Exps.ApCore(
+          result,
+          readback(ctx, this.type_ctor.get_arg_t(index), arg)
+        )
+      }
+
+      return result
+    }
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
