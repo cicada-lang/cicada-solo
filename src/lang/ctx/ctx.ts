@@ -58,6 +58,17 @@ export abstract class Ctx {
     return ut.freshen(new Set(this.names), name)
   }
 
+  define(name: string, t: Value, value?: Value): Ctx {
+    return new ExtendCtx({
+      name,
+      t,
+      value,
+      rest: this,
+      observers: this.observers,
+      highlighter: this.highlighter,
+    })
+  }
+
   extend(name: string, t: Value, value?: Value): Ctx {
     if (this.names.includes(name)) {
       throw new ExpTrace(
@@ -71,14 +82,7 @@ export abstract class Ctx {
       )
     }
 
-    return new ExtendCtx({
-      name,
-      t,
-      value,
-      rest: this,
-      observers: this.observers,
-      highlighter: this.highlighter,
-    })
+    return this.define(name, t, value)
   }
 
   find_type(name: string): undefined | Value {

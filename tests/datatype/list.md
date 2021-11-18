@@ -16,6 +16,9 @@ datatype MyList(E: Type) {
   my_null: MyList(E)
   my_cons(head: E, tail: MyList(E)): MyList(E)
 }
+
+MyList
+MyList(Nat)
 ```
 
 # induction List

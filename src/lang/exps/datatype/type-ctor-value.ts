@@ -62,8 +62,15 @@ export class TypeCtorValue extends Value {
     if (conversion(ctx, new Exps.TypeValue(), t, self_type)) {
       const result = this.readback_parameters(ctx)
       const indexes = this.readback_indexes(result.ctx)
-      // NOTE Assuming `name` is already bound to this `TypeCtorValue` in `ctx`.
-      const ctors = this.readback_ctors(result.ctx)
+      // NOTE The `name` is already bound to this `TypeCtorValue` in `ctx`,
+      //   we need to make it `NotYetValue` to avoid infinite recursion.
+      const ctors = this.readback_ctors(
+        result.ctx.define(
+          this.name,
+          self_type,
+          new Exps.NotYetValue(self_type, new Exps.VarNeutral(this.name))
+        )
+      )
       return new Exps.TypeCtorCore(this.name, result.parameters, indexes, ctors)
     }
   }

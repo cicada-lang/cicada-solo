@@ -16,6 +16,8 @@ datatype MyNat {
   my_zero: MyNat
   my_add1(prev: MyNat): MyNat
 }
+
+MyNat
 ```
 
 # induction Nat
