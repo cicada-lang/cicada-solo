@@ -6,7 +6,8 @@
 - `DatatypeValue.unify`
 
 - `TypeCtorApHandler.apply` -- handle arity > 1 -- return `CurriedTypeCtorValue`
-- `CurriedTypeCtorValue` -- curried application of `TypeCtor`
+- `CurriedTypeCtorValue` -- curried application of `TypeCtorValue`
+- `curried-type-ctor-ap-handler` -- curried application of `CurriedTypeCtorValue`
 
 - `TypeCtor` test by `Show` in `tests/datatype/less-than`
 
