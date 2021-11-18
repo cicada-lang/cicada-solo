@@ -14,7 +14,7 @@ export class DatatypeValue extends Value {
   type_ctor: Exps.TypeCtorValue
   args: Array<Value>
 
-  constructor(type_ctor: Exps.TypeCtorValue, args: Array<Value>) { 
+  constructor(type_ctor: Exps.TypeCtorValue, args: Array<Value>) {
     super()
     this.type_ctor = type_ctor
     this.args = args
@@ -24,10 +24,8 @@ export class DatatypeValue extends Value {
     if (t instanceof Exps.TypeValue) {
       let result: Core = new Exps.VarCore(this.type_ctor.name)
       for (const [index, arg] of this.args.entries()) {
-        result = new Exps.ApCore(
-          result,
-          readback(ctx, this.type_ctor.get_arg_t(index), arg)
-        )
+        const arg_t = readback(ctx, this.type_ctor.get_arg_t(index), arg)
+        result = new Exps.ApCore(result, arg_t)
       }
 
       return result
