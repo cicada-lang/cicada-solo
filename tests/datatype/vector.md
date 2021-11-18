@@ -24,6 +24,10 @@ datatype MyVector(E: Type) (length: Nat) {
     tail: MyVector(E, prev),
   ): MyVector(E, add1(prev))
 }
+
+MyVector
+MyVector(String)
+MyVector(String, 3)
 ```
 
 # induction Vector

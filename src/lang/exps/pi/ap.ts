@@ -54,7 +54,7 @@ export class Ap extends Exp {
 
     throw new ExpTrace(
       [
-        `I am expecting target value of type PiValue or ClsValue`,
+        `I expect the type to be PiValue or ImPiValue`,
         `  class name: ${target.constructor.name}`,
       ].join("\n")
     )

@@ -1,14 +1,5 @@
 # inductive datatype
 
-## TypeCtor & Datatype
-
-- `CurriedTypeCtorApHandler` -- curried application of `CurriedTypeCtorValue`
-
-- `TypeCtor` test by `Show` in `tests/datatype/*`
-
-   - need to do this test aftr be able to apply `TypeCtor` to arguments,
-     because of `PiValue.readback_eta_expansion`
-
 ## Ctor & Data
 
 - `Ctor` -- use a `parameters` field -- maybe we do not need check-mode implicit arguments to implement `Ctor`
