@@ -2,7 +2,7 @@
 
 ## TypeCtor & Datatype
 
-- `TypeCtorApHandler.apply` -- handle arity > 1 -- return `CurriedTypeCtorValue`
+- `TypeCtorApHandler.apply` -- handle `arity > 1` -- return `CurriedTypeCtorValue`
 
 - `CurriedTypeCtorValue` -- curried application of `TypeCtorValue`
 
