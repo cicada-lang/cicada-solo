@@ -39,21 +39,6 @@ export class TypeCtorValue extends Value {
     )
   }
 
-  get_arg_t(index: number): Value {
-    const result = this.value_of_parameters()
-    const array = [
-      ...Object.values(result.parameters),
-      ...Object.values(this.value_of_indexes()),
-    ]
-
-    const arg_t = array[index]
-    if (arg_t === undefined) {
-      throw new Error("index out of bound")
-    }
-
-    return arg_t
-  }
-
   ap_handler = new TypeCtorApHandler(this)
 
   readback(ctx: Ctx, t: Value): Core | undefined {

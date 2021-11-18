@@ -2,8 +2,6 @@
 
 ## TypeCtor & Datatype
 
-- fix `type_ctor.get_arg_t` to handle dependent pi type
-
 - `CurriedTypeCtorValue.unify`
 
 - `CurriedTypeCtorApHandler` -- curried application of `CurriedTypeCtorValue`

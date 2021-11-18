@@ -3,6 +3,7 @@ import { Env } from "../../env"
 import { Core } from "../../core"
 import { readback } from "../../value"
 import { Value } from "../../value"
+import { expect } from "../../value"
 import { evaluate } from "../../core"
 import { Solution } from "../../solution"
 import { Closure } from "../closure"
@@ -23,8 +24,11 @@ export class DatatypeValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
       let result: Core = new Exps.VarCore(this.type_ctor.name)
+      let self_type = this.type_ctor.self_type()
       for (const [index, arg] of this.args.entries()) {
-        const arg_t = readback(ctx, this.type_ctor.get_arg_t(index), arg)
+        const pi = expect(ctx, self_type, Exps.PiValue)
+        self_type = Exps.PiValue.apply(pi, arg)
+        const arg_t = readback(ctx, pi.arg_t, arg)
         result = new Exps.ApCore(result, arg_t)
       }
 
@@ -52,13 +56,11 @@ export class DatatypeValue extends Value {
         )
       }
 
+      let self_type = this.type_ctor.self_type()
       for (const [index, arg] of this.args.entries()) {
-        solution = solution.unify(
-          ctx,
-          this.type_ctor.get_arg_t(index),
-          arg,
-          that.args[index]
-        )
+        const pi = expect(ctx, self_type, Exps.PiValue)
+        self_type = Exps.PiValue.apply(pi, arg)
+        solution = solution.unify(ctx, pi.arg_t, arg, that.args[index])
       }
 
       return solution
