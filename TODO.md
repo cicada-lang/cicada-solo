@@ -2,8 +2,9 @@
 
 ## Ctor & Data
 
-- `Ctor` -- use a `parameters` field -- maybe we do not need check-mode implicit arguments to implement `Ctor`
-- `Ctor` -- use `<type-ctor>.<ctor>` to get constructors
+- `DataCtor` -- use a `parameters` field -- like implicit but resolve from return type in check-mode
+
+- `DataCtor` -- use `<type-ctor>.<data-ctor>` to get constructors
   - `DotHandler` -- `apply` & `infer`
   - `TypeCtor.dot_handler`
   - a constructor can be curried during application
