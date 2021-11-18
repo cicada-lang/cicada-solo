@@ -20,6 +20,19 @@ export class PiValue extends Value implements ReadbackEtaExpansion {
     this.ret_t_cl = ret_t_cl
   }
 
+  static apply(pi: Value, arg: Value): Value {
+    if (!(pi instanceof Exps.PiValue)) {
+      throw new Error(
+        [
+          `I expect pi to be PiValue`,
+          `  class name: ${pi.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    return pi.ret_t_cl.apply(arg)
+  }
+
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
       const fresh_name = ctx.freshen(this.ret_t_cl.name)

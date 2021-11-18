@@ -120,7 +120,7 @@ export class TypeCtorValue extends Value {
     return ctors
   }
 
-  value_of_parameters(): {
+  private value_of_parameters(): {
     parameters: Record<string, Value>
     env: Env
   } {
@@ -136,7 +136,7 @@ export class TypeCtorValue extends Value {
     return { parameters, env }
   }
 
-  value_of_indexes(): Record<string, Value> {
+  private value_of_indexes(): Record<string, Value> {
     const indexes: Record<string, Value> = {}
     const result = this.value_of_parameters()
 
@@ -150,7 +150,7 @@ export class TypeCtorValue extends Value {
     return indexes
   }
 
-  value_of_ctors(): Record<string, Value> {
+  private value_of_ctors(): Record<string, Value> {
     const ctors: Record<string, Value> = {}
     const result = this.value_of_parameters()
 
