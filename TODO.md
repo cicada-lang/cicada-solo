@@ -2,8 +2,6 @@
 
 ## TypeCtor & Datatype
 
-- `CurriedTypeCtorValue.self_type`
-
 - `CurriedTypeCtorValue.readback` -- readback to `ApCore`
   - `conversion` on `self_type`
 

@@ -25,6 +25,28 @@ export class CurriedTypeCtorValue extends Value {
     return this.type_ctor.arity - this.args.length
   }
 
+  self_type(): Value {
+    let result = this.type_ctor.self_type()
+    for (const arg of this.args) {
+      result = this.apply_pi_type(result, arg)
+    }
+
+    return result
+  }
+
+  private apply_pi_type(pi: Value, arg: Value): Value {
+    if (!(pi instanceof Exps.PiValue)) {
+      throw new Error(
+        [
+          `I expect type_ctor.self_type to be PiValue`,
+          `  class name: ${this.type_ctor.self_type.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    return pi.ret_t_cl.apply(arg)
+  }
+
   ap_handler = new CurriedTypeCtorApHandler(this)
 
   readback(ctx: Ctx, t: Value): Core | undefined {
