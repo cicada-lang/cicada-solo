@@ -22,6 +22,10 @@
 - `DataValue`
 - `DataCore` -- structural typing (data contains datatype)
 
+## induction
+
+- [syntax] `induction () { ... }`
+
 ## Questions
 
 - [question] Is it ok that `TypeCtorValue` can be `readback` to `TypeCtor`,
