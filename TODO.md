@@ -2,7 +2,6 @@
 
 ## TypeCtor & Datatype
 
-- `CurriedTypeCtorValue.arity`
 - `CurriedTypeCtorValue.self_type`
 
 - `CurriedTypeCtorValue.readback` -- readback to `ApCore`

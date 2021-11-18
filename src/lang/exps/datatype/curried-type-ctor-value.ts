@@ -21,6 +21,10 @@ export class CurriedTypeCtorValue extends Value {
     this.args = args
   }
 
+  get arity(): number {
+    return this.type_ctor.arity - this.args.length
+  }
+
   ap_handler = new CurriedTypeCtorApHandler(this)
 
   readback(ctx: Ctx, t: Value): Core | undefined {
