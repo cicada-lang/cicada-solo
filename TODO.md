@@ -1,8 +1,8 @@
+- unify use guard clause
+
 # inductive datatype
 
 ## TypeCtor & Datatype
-
-- `CurriedTypeCtorValue.unify`
 
 - `CurriedTypeCtorApHandler` -- curried application of `CurriedTypeCtorValue`
 

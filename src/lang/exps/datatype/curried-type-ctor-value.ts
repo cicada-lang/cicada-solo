@@ -55,6 +55,14 @@ export class CurriedTypeCtorValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    throw new Error("TODO")
+    if (!(that instanceof Exps.CurriedTypeCtorValue)) {
+      return Solution.failure
+    }
+
+    // TODO `t` in the arguments is not used here.
+    const self_type = this.type_ctor.self_type()
+    return solution
+      .unify(ctx, self_type, this.type_ctor, that.type_ctor)
+      .unify_args(ctx, self_type, this.args, that.args)
   }
 }

@@ -53,7 +53,6 @@ export class TypeCtor extends Exp {
   private indexes_free_names(bound_names: Set<string>): Set<string> {
     // NOTE The `indexes` will not be in scope in constructor definitions,
     //   thus we do not need to return new `bound_names`.
-
     let free_names: Set<string> = new Set()
     for (const [name, exp] of Object.entries(this.indexes)) {
       free_names = new Set([...free_names, ...exp.free_names(bound_names)])

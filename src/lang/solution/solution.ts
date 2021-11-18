@@ -2,6 +2,7 @@ import { Ctx } from "../ctx"
 import { Value, readback } from "../value"
 import { Neutral } from "../neutral"
 import { Normal } from "../normal"
+import { expect } from "../value"
 import { Core } from "../core"
 import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
@@ -139,6 +140,33 @@ export abstract class Solution {
           `  right : ${right_repr}`,
         ].join("\n")
       )
+    }
+
+    return solution
+  }
+
+  unify_args(
+    ctx: Ctx,
+    maybe_pi: Value,
+    this_args: Array<Value>,
+    that_args: Array<Value>
+  ): Solution {
+    let solution: Solution = this
+
+    if (this_args.length !== that_args.length) {
+      throw new Error(
+        [
+          `I expect args length to be equal.`,
+          `  this_args.length: ${this_args.length}`,
+          `  that_args.length: ${that_args.length}`,
+        ].join("\n")
+      )
+    }
+
+    for (const [index, arg] of this_args.entries()) {
+      const pi = expect(ctx, maybe_pi, Exps.PiValue)
+      maybe_pi = Exps.PiValue.apply(pi, arg)
+      solution = solution.unify(ctx, pi.arg_t, arg, that_args[index])
     }
 
     return solution
