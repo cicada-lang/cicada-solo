@@ -27,6 +27,16 @@
 - `DataValue`
 - `DataCore` -- structural typing (data contains datatype)
 
+## Questions
+
+- [question] From the type of `List` -- `(E: Type) -> Type`,
+  we know we can apply `List` to get a type,
+  but we can also `List.null` & `List.cons` to get its constructors,
+  should we and how should we show this in the type of `List`?
+
+  - The same situation occurs for fulfilling type, which is of `Type`,
+    but can also be applied to get partly fulfilled types.
+
 # syntax
 
 - `Exps.Begin` for code block `{ ... }`
