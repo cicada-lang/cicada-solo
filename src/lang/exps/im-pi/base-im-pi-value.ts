@@ -27,13 +27,13 @@ export class BaseImPiValue extends Exps.ImPiValue {
   insert_im_fn(
     ctx: Ctx,
     fn: Exps.Fn,
-    renaming: {
+    renaming?: {
       field_name: string
       local_name: string
     }
   ): Core {
     const local_name =
-      this.field_name === renaming.field_name
+      renaming && renaming.field_name === this.field_name
         ? renaming.local_name
         : this.field_name
 
