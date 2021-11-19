@@ -1,14 +1,11 @@
-- `im-fn` -- fix `format`
+- `im-pi` -- change syntax -- do not use record syntax
+- `im-fn` -- change syntax -- do not use record syntax
 
-# syntax
-
-- change syntax of `im-pi` -- do not use record syntax
-- change syntax of `im-fn` -- do not use record syntax
-
-# im-ap
+- `im-fn` -- fix `format` -- change the structure of `im-fn`
 
 - `im-ap` -- `format`
 - `im-ap` -- `infer`
+
 - [syntax] `im-ap` -- `f(implicit g(x), a, b)`
 
 # fixed pi
