@@ -23,7 +23,7 @@ id3(Nat, 1)
 
 # sugar for multi-argument function
 
-We can write both `(x, y)` and `(x) (y)` for function of two arguments.
+We can write both `(x, y) => ...` and `(x) => (y) => ...` for function of two arguments.
 
 ``` cicada
 f: (Trivial) -> (Trivial) -> Trivial =
