@@ -65,12 +65,10 @@ export class ImFn extends Exp {
       )
     }
 
-    return t.insert_im_fn(ctx, this.ret, [
-      {
-        field_name: this.field_name,
-        local_name: this.local_name,
-      },
-    ])
+    return t.insert_im_fn(ctx, this.ret, {
+      field_name: this.field_name,
+      local_name: this.local_name,
+    })
   }
 
   fn_formater: FnFormater = new FnFormater(this, {

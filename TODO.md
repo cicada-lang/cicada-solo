@@ -1,5 +1,3 @@
-- `im-pi/im-fn` -- fix the use of `t.insert_im_fn`
-
 - `im-ap` -- `format`
 - `im-ap` -- `infer`
 

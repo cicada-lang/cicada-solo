@@ -104,10 +104,10 @@ export abstract class ImPiValue extends Value implements ReadbackEtaExpansion {
   abstract insert_im_fn(
     ctx: Ctx,
     fn: Exps.Fn,
-    renaming: Array<{
+    renaming?: {
       field_name: string
       local_name: string
-    }>
+    }
   ): Core
 
   abstract insert_im_ap(

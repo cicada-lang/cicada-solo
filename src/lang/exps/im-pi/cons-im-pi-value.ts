@@ -24,15 +24,16 @@ export class ConsImPiValue extends Exps.ImPiValue {
   insert_im_fn(
     ctx: Ctx,
     fn: Exps.Fn,
-    renaming: Array<{
+    renaming: {
       field_name: string
       local_name: string
-    }>
+    }
   ): Core {
-    const found = renaming.find(
-      ({ field_name }) => field_name === this.field_name
-    )
-    const local_name = found ? found.local_name : this.field_name
+    const local_name =
+      this.field_name === renaming.field_name
+        ? renaming.local_name
+        : this.field_name
+
     const fresh_name = ctx.freshen(local_name)
     const variable = new Exps.VarNeutral(fresh_name)
     const arg = new Exps.NotYetValue(this.arg_t, variable)
