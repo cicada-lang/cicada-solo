@@ -11,7 +11,7 @@
   ``` cicada
   // Insert arguments in check mode:
 
-  List.cons: (fixed { E: Type }, head: E, tail: MyList(E)) -> MyList(E)
+  List.cons: (fixed E: Type, head: E, tail: MyList(E)) -> MyList(E)
 
   List.cons(head, almost.tail): List(E)
   List.cons(fixed E, head, almost.tail): List(E)
