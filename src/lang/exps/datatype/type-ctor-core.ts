@@ -8,19 +8,19 @@ import * as ut from "../../../ut"
 
 export class TypeCtorCore extends Core {
   name: string
-  parameters: Record<string, Core>
+  fixed: Record<string, Core>
   indexes: Record<string, Core>
   ctors: Record<string, Core>
 
   constructor(
     name: string,
-    parameters: Record<string, Core>,
+    fixed: Record<string, Core>,
     indexes: Record<string, Core>,
     ctors: Record<string, Core>
   ) {
     super()
     this.name = name
-    this.parameters = parameters
+    this.fixed = fixed
     this.indexes = indexes
     this.ctors = ctors
   }
@@ -28,7 +28,7 @@ export class TypeCtorCore extends Core {
   evaluate(env: Env): Value {
     return new Exps.TypeCtorValue(
       this.name,
-      this.parameters,
+      this.fixed,
       this.indexes,
       this.ctors,
       env
@@ -40,7 +40,7 @@ export class TypeCtorCore extends Core {
   }
 
   alpha_repr(ctx: AlphaCtx): string {
-    const p = this.parameters_alpha_repr(ctx)
+    const p = this.fixed_alpha_repr(ctx)
     const i = this.indexes_alpha_repr(ctx)
     // NOTE structural typing (do not print `name`)
     const head = `datatype # ${p}${i}`
@@ -49,11 +49,11 @@ export class TypeCtorCore extends Core {
     return `${head}{\n${body}\n}`
   }
 
-  private parameters_alpha_repr(ctx: AlphaCtx): string {
-    if (Object.entries(this.parameters).length > 0) {
+  private fixed_alpha_repr(ctx: AlphaCtx): string {
+    if (Object.entries(this.fixed).length > 0) {
       return (
         "(" +
-        Object.entries(this.parameters)
+        Object.entries(this.fixed)
           .map(([name, t]) => `${name}: ${t.alpha_repr(ctx)}`)
           .join(", ") +
         ") "

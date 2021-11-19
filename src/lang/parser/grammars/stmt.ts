@@ -66,21 +66,21 @@ export const stmt = {
       { ctors: { $ap: ["one_or_more", "ctor"] } },
       '"}"',
     ],
-    "stmt:datatype_parameters": [
+    "stmt:datatype_fixed": [
       '"datatype"',
       { name: "identifier" },
       '"("',
-      { parameters: "simple_bindings" },
+      { fixed: "simple_bindings" },
       '")"',
       '"{"',
       { ctors: { $ap: ["one_or_more", "ctor"] } },
       '"}"',
     ],
-    "stmt:datatype_parameters_indexes": [
+    "stmt:datatype_fixed_and_indexes": [
       '"datatype"',
       { name: "identifier" },
       '"("',
-      { parameters: "simple_bindings" },
+      { fixed: "simple_bindings" },
       '")"',
       '"("',
       { indexes: "simple_bindings" },

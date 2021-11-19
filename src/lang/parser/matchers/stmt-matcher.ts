@@ -157,14 +157,11 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         { span }
       )
     },
-    "stmt:datatype_parameters": ({ name, parameters, ctors }, { span }) => {
+    "stmt:datatype_fixed": ({ name, fixed, ctors }, { span }) => {
       return new Stmts.Datatype(
         pt.str(name),
         Object.fromEntries(
-          simple_bindings_matcher(parameters).map(({ name, exp }) => [
-            name,
-            exp,
-          ])
+          simple_bindings_matcher(fixed).map(({ name, exp }) => [name, exp])
         ),
         {},
         Object.fromEntries(
@@ -176,17 +173,14 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         { span }
       )
     },
-    "stmt:datatype_parameters_indexes": (
-      { name, parameters, indexes, ctors },
+    "stmt:datatype_fixed_and_indexes": (
+      { name, fixed, indexes, ctors },
       { span }
     ) => {
       return new Stmts.Datatype(
         pt.str(name),
         Object.fromEntries(
-          simple_bindings_matcher(parameters).map(({ name, exp }) => [
-            name,
-            exp,
-          ])
+          simple_bindings_matcher(fixed).map(({ name, exp }) => [name, exp])
         ),
         Object.fromEntries(
           simple_bindings_matcher(indexes).map(({ name, exp }) => [name, exp])

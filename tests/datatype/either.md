@@ -245,7 +245,7 @@ we can define `list_ref` directly.
 ``` cicada wishful-thinking
 import { induction_nat } from "./nat.md"
 
-list_ref(parameter { E: Type }, index: Nat): (List(E)) -> Maybe(E) {
+list_ref(fixed { E: Type }, index: Nat): (List(E)) -> Maybe(E) {
   induction_nat(
     index,
     (_) => (List(E)) -> Maybe(E),

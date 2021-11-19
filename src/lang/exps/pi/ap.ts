@@ -36,16 +36,6 @@ export class Ap extends Exp {
     )
   }
 
-  // check(ctx: Ctx, t: Value): Core {
-  //   const core = check(ctx, this.target, t)
-  //   const target = evaluate(ctx.to_env(), core)
-  //   if (target.ap_handler?.check_by_target) {
-  //     return target.ap_handler.check_by_target(ctx, core, this.arg)
-  //   }
-
-  //   return check_by_infer(ctx, this, t)
-  // }
-
   infer(ctx: Ctx): { t: Value; core: Core } {
     const { t, core } = infer(ctx, this.target)
 

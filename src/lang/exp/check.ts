@@ -59,7 +59,7 @@ export function check(
 export function check_by_infer(
   ctx: Ctx,
   exp: Exp & {
-    infer(ctx: Ctx, opts?: ElaborationOptions):{ t: Value; core: Core }
+    infer(ctx: Ctx, opts?: ElaborationOptions): { t: Value; core: Core }
   },
   t: Value,
   opts?: ElaborationOptions

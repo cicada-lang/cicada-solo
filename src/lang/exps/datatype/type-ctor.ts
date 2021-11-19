@@ -10,25 +10,25 @@ import * as ut from "../../../ut"
 
 export class TypeCtor extends Exp {
   name: string
-  parameters: Record<string, Exp>
+  fixed: Record<string, Exp>
   indexes: Record<string, Exp>
   ctors: Record<string, Exp>
 
   constructor(
     name: string,
-    parameters: Record<string, Exp>,
+    fixed: Record<string, Exp>,
     indexes: Record<string, Exp>,
     ctors: Record<string, Exp>
   ) {
     super()
     this.name = name
-    this.parameters = parameters
+    this.fixed = fixed
     this.indexes = indexes
     this.ctors = ctors
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    const result = this.parameters_free_names(bound_names)
+    const result = this.fixed_free_names(bound_names)
 
     return new Set([
       ...result.free_names,
@@ -37,12 +37,12 @@ export class TypeCtor extends Exp {
     ])
   }
 
-  private parameters_free_names(bound_names: Set<string>): {
+  private fixed_free_names(bound_names: Set<string>): {
     bound_names: Set<string>
     free_names: Set<string>
   } {
     let free_names: Set<string> = new Set()
-    for (const [name, exp] of Object.entries(this.parameters)) {
+    for (const [name, exp] of Object.entries(this.fixed)) {
       free_names = new Set([...free_names, ...exp.free_names(bound_names)])
       bound_names = new Set([...bound_names, name])
     }
@@ -78,32 +78,32 @@ export class TypeCtor extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const result = this.infer_parameters(ctx)
+    const result = this.infer_fixed(ctx)
     const indexes = this.infer_indexes(result.ctx)
     const self_type = evaluate(
       ctx.to_env(),
-      TypeCtor.self_type_core(result.parameters, indexes)
+      TypeCtor.self_type_core(result.fixed, indexes)
     )
     const ctors = this.infer_ctors(result.ctx.extend(this.name, self_type))
 
     return {
       t: self_type,
-      core: new Exps.TypeCtorCore(this.name, result.parameters, indexes, ctors),
+      core: new Exps.TypeCtorCore(this.name, result.fixed, indexes, ctors),
     }
   }
 
-  private infer_parameters(ctx: Ctx): {
-    parameters: Record<string, Core>
+  private infer_fixed(ctx: Ctx): {
+    fixed: Record<string, Core>
     ctx: Ctx
   } {
-    const parameters: Record<string, Core> = {}
-    for (const [name, t] of Object.entries(this.parameters)) {
+    const fixed: Record<string, Core> = {}
+    for (const [name, t] of Object.entries(this.fixed)) {
       const core = check(ctx, t, new Exps.TypeValue())
-      parameters[name] = core
+      fixed[name] = core
       ctx = ctx.extend(name, evaluate(ctx.to_env(), core))
     }
 
-    return { parameters, ctx }
+    return { fixed, ctx }
   }
 
   private infer_indexes(ctx: Ctx): Record<string, Core> {
@@ -118,10 +118,10 @@ export class TypeCtor extends Exp {
   }
 
   static self_type_core(
-    parameters: Record<string, Core>,
+    fixed: Record<string, Core>,
     indexes: Record<string, Core>
   ): Core {
-    return [...Object.entries(parameters), ...Object.entries(indexes)]
+    return [...Object.entries(fixed), ...Object.entries(indexes)]
       .reverse()
       .reduce(
         (result, [name, t]) => new Exps.PiCore(name, t, result),
@@ -140,7 +140,7 @@ export class TypeCtor extends Exp {
 
   repr(): string {
     const n = this.name
-    const p = this.parameters_repr()
+    const p = this.fixed_repr()
     const i = this.indexes_repr()
     const head = `datatype ${n} ${p}${i}`
     const c = this.ctors_repr()
@@ -148,11 +148,11 @@ export class TypeCtor extends Exp {
     return `${head}{\n${body}\n}`
   }
 
-  private parameters_repr(): string {
-    if (Object.entries(this.parameters).length > 0) {
+  private fixed_repr(): string {
+    if (Object.entries(this.fixed).length > 0) {
       return (
         "(" +
-        Object.entries(this.parameters)
+        Object.entries(this.fixed)
           .map(([name, t]) => `${name}: ${t.repr()}`)
           .join(", ") +
         ") "

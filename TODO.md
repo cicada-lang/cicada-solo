@@ -1,12 +1,20 @@
 - `Ap.check` call `check_by_infer` when `target.ap_handler?.check_by_target` is not implemented
 
+- fx-pi
+
+```
+List.cons(head, almost.tail): List(E)
+
+List.cons: (fixed { E: Type }, head: E, tail: MyList(E)) -> MyList(E)
+```
+
 # inductive datatype
 
 ## Ctor & Data
 
 - `DataCtorValue`
 
-  - use a `parameters` field
+  - use a `fixed` field
 
     - like implicit but resolve from return type in check-mode
 
@@ -55,7 +63,7 @@
 
 # implicit argument in check mode
 
-- maybe check mode implicit argument should be called parameter,
+- maybe check mode implicit argument should be called "fixed",
   which decorates on top of pi type, making it can not be used in infer mode.
 
   - we should try this for data constructor first,
