@@ -7,6 +7,7 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 import * as ut from "../../../ut"
+import { SigmaFormater } from "./sigma-formater"
 
 export class Sigma extends Exp {
   meta: ExpMeta
@@ -71,39 +72,9 @@ export class Sigma extends Exp {
     }
   }
 
-  sigma_cars_format(): Array<string> {
-    const entry = `${this.name}: ${this.car_t.format()}`
-
-    if (has_sigma_cars_format(this.cdr_t)) {
-      return [entry, ...this.cdr_t.sigma_cars_format()]
-    } else {
-      return [entry]
-    }
-  }
-
-  sigma_cdr_t_format(): string {
-    if (has_sigma_cdr_t_format(this.cdr_t)) {
-      return this.cdr_t.sigma_cdr_t_format()
-    } else {
-      return this.cdr_t.format()
-    }
-  }
+  sigma_formater = new SigmaFormater(this)
 
   format(): string {
-    const cars = this.sigma_cars_format().join(", ")
-    const cdr_t = this.sigma_cdr_t_format()
-    return `[${cars} | ${cdr_t}]`
+    return this.sigma_formater.format()
   }
-}
-
-function has_sigma_cars_format(
-  exp: Exp
-): exp is Exp & { sigma_cars_format(): Array<string> } {
-  return (exp as any).sigma_cars_format instanceof Function
-}
-
-function has_sigma_cdr_t_format(
-  exp: Exp
-): exp is Exp & { sigma_cdr_t_format(): string } {
-  return (exp as any).sigma_cdr_t_format instanceof Function
 }
