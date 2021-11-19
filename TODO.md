@@ -32,9 +32,8 @@
 
 - we can define a version of `list_ref` in `either.md` which use `fixed` keyword
 
-# inductive datatype
 
-## Ctor & Data
+# inductive datatype -- DataCtor & Data
 
 - `DataCtorValue`
 
@@ -54,11 +53,11 @@
 - `DataValue`
 - `DataCore` -- structural typing (data contains datatype)
 
-## induction
+# inductive datatype -- induction
 
 - [syntax] `induction () { ... }`
 
-## Questions
+# inductive datatype -- questions
 
 - [question] Is it ok that `TypeCtorValue` can be `readback` to `TypeCtor`,
   while `DatatypeValue` and `CurriedTypeCtorValue` can only be `readback` to `ApCore`?
