@@ -8,6 +8,7 @@ import { Solution } from "../../solution"
 import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
+import { ApFormater } from "../pi/ap-formater"
 
 export class ImAp extends Exp {
   meta: ExpMeta
@@ -40,7 +41,11 @@ export class ImAp extends Exp {
     throw new Error("TODO")
   }
 
+  ap_formater = new ApFormater(this, {
+    decorate_arg: (arg) => `implicit ${arg}`,
+  })
+
   format(): string {
-    throw new Error("TODO")
+    return this.ap_formater.format()
   }
 }
