@@ -40,22 +40,24 @@ export class ImAp extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const { t, core } = infer(ctx, this.target)
+    const inferred = infer(ctx, this.target)
 
-    if (!(t instanceof Exps.ImPiValue)) {
-      throw new ExpTrace(
-        [
-          `I expect the type to be ImPiValue`,
-          `  class name: ${t.constructor.name}`,
-        ].join("\n")
-      )
+    if (inferred.t instanceof Exps.ImPiValue) {
+      const { arg_t, ret_t_cl } = inferred.t
+      const arg_core = check(ctx, this.arg, arg_t)
+      const arg_value = evaluate(ctx.to_env(), arg_core)
+      return {
+        t: ret_t_cl.apply(arg_value),
+        core: new Exps.ImApCore(inferred.core, arg_core),
+      }
     }
 
-    // field_name: string
-    // arg_t: Value
-    // ret_t_cl: Closure
-
-    throw new Error("TODO")
+    throw new ExpTrace(
+      [
+        `I expect the inferred type to be ImPiValue`,
+        `  class name: ${inferred.t.constructor.name}`,
+      ].join("\n")
+    )
   }
 
   ap_formater = new ApFormater(this, {
