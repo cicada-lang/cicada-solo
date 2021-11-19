@@ -1,3 +1,7 @@
+- `im-ap` -- `repr`
+- `im-ap` -- `infer`
+- [syntax] `im-ap` -- `f(implicit g(x), a, b)`
+
 # fixed pi
 
 > implicit argument in check mode, be able to solve implicit arguments from return type
@@ -12,7 +16,7 @@
   List.cons: (fixed { E: Type }, head: E, tail: MyList(E)) -> MyList(E)
 
   List.cons(head, almost.tail): List(E)
-  List.cons(fixed { E }, head, almost.tail): List(E)
+  List.cons(fixed E, head, almost.tail): List(E)
   ```
 
 - `Ap.check` call `check_by_infer` when `inferred.t` is `FixedPiValue`
