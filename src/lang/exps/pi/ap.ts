@@ -56,12 +56,18 @@ export class Ap extends Exp {
       return target.ap_handler.infer_by_target(ctx, inferred.core, this.arg)
     }
 
-    if (inferred.t instanceof Exps.PiValue) {
-      return this.infer_for_pi(ctx, inferred.t, inferred.core)
-    }
-
     if (inferred.t instanceof Exps.ImPiValue) {
       return inferred.t.insert_im_ap(ctx, this.arg, inferred.core, [])
+    }
+
+    if (inferred.t instanceof Exps.PiValue) {
+      const { arg_t, ret_t_cl } = inferred.t
+      const arg_core = check(ctx, this.arg, arg_t)
+      const arg_value = evaluate(ctx.to_env(), arg_core)
+      return {
+        t: ret_t_cl.apply(arg_value),
+        core: new Exps.ApCore(inferred.core, arg_core),
+      }
     }
 
     throw new ExpTrace(
@@ -70,20 +76,6 @@ export class Ap extends Exp {
         `  class name: ${inferred.t.constructor.name}`,
       ].join("\n")
     )
-  }
-
-  private infer_for_pi(
-    ctx: Ctx,
-    t: Exps.PiValue,
-    core: Core
-  ): { t: Value; core: Core } {
-    const { arg_t, ret_t_cl } = t
-    const arg_core = check(ctx, this.arg, arg_t)
-    const arg_value = evaluate(ctx.to_env(), arg_core)
-    return {
-      t: ret_t_cl.apply(arg_value),
-      core: new Exps.ApCore(core, arg_core),
-    }
   }
 
   ap_formater = new ApFormater(this)
