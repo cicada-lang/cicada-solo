@@ -22,7 +22,7 @@ export class SigmaFormater {
     return `[${cars} | ${cdr_t}]`
   }
 
-  sigma_cars_format(): Array<string> {
+  private sigma_cars_format(): Array<string> {
     const binding = `${this.sigma.name}: ${this.sigma.car_t.format()}`
 
     if (this.sigma.cdr_t.sigma_formater) {
@@ -32,7 +32,7 @@ export class SigmaFormater {
     }
   }
 
-  sigma_cdr_t_format(): string {
+  private sigma_cdr_t_format(): string {
     if (this.sigma.cdr_t.sigma_formater) {
       return this.sigma.cdr_t.sigma_formater.sigma_cdr_t_format()
     } else {

@@ -74,10 +74,10 @@ export class ImFn extends Exp {
 
   fn_args_format(): Array<string> {
     const names = this.names.map(({ field_name }) => field_name).join(", ")
-    return [`implicit { ${names} }`, ...this.ret.fn_formater.fn_args_format()]
+    return [`implicit { ${names} }`, ...this.ret.fn_formater.format_names()]
   }
 
   fn_ret_format(): string {
-    return this.ret.fn_formater.fn_ret_format()
+    return this.ret.fn_formater.format_ret()
   }
 }

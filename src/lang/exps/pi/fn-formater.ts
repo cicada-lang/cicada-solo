@@ -21,25 +21,25 @@ export class FnFormater {
   }
 
   format(): string {
-    const args = this.fn_args_format().join(", ")
-    const ret = this.fn_ret_format()
+    const args = this.format_names().join(", ")
+    const ret = this.format_ret()
     return `(${args}) => { ${ret} }`
   }
 
-  fn_args_format(): Array<string> {
+  format_names(): Array<string> {
     const name = this.decorate_name
       ? this.decorate_name(this.fn.name)
       : this.fn.name
     if (this.fn.ret.fn_formater) {
-      return [name, ...this.fn.ret.fn_formater.fn_args_format()]
+      return [name, ...this.fn.ret.fn_formater.format_names()]
     } else {
       return [name]
     }
   }
 
-  fn_ret_format(): string {
+  format_ret(): string {
     if (this.fn.ret.fn_formater) {
-      return this.fn.ret.fn_formater.fn_ret_format()
+      return this.fn.ret.fn_formater.format_ret()
     } else {
       return this.fn.ret.format()
     }
