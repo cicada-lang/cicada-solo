@@ -47,7 +47,7 @@ export class ImPiCore extends Core {
   }
 
   pi_formater: PiFormater = new PiFormater(this, {
-    decorate_binding: (binding) => `implicit ${binding}`
+    decorate_binding: (binding) => `implicit ${binding}`,
   })
 
   format(): string {

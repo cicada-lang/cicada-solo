@@ -24,24 +24,24 @@ export class PiFormater {
   }
 
   format(): string {
-    const args = this.format_args().join(", ")
+    const bindings = this.format_bindings().join(", ")
     const ret_t = this.format_ret_t()
-    return `(${args}) -> ${ret_t}`
+    return `(${bindings}) -> ${ret_t}`
   }
 
-  format_args(): Array<string> {
+  private format_bindings(): Array<string> {
     const binding = this.decorate_binding
       ? this.decorate_binding(`${this.pi.name}: ${this.pi.arg_t.format()}`)
       : `${this.pi.name}: ${this.pi.arg_t.format()}`
 
     if (this.pi.ret_t.pi_formater) {
-      return [binding, ...this.pi.ret_t.pi_formater.format_args()]
+      return [binding, ...this.pi.ret_t.pi_formater.format_bindings()]
     } else {
       return [binding]
     }
   }
 
-  format_ret_t(): string {
+  private format_ret_t(): string {
     if (this.pi.ret_t.pi_formater) {
       return this.pi.ret_t.pi_formater.format_ret_t()
     } else {

@@ -106,7 +106,7 @@ export class ImPi extends Exp {
   }
 
   pi_formater: PiFormater = new PiFormater(this, {
-    decorate_binding: (binding) => `implicit ${binding}`
+    decorate_binding: (binding) => `implicit ${binding}`,
   })
 
   format(): string {
