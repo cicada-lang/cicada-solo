@@ -1,5 +1,3 @@
-- [syntax] `im-ap` -- `f(implicit g(x), a, b)`
-
 # fixed pi
 
 > implicit argument in check mode, be able to solve implicit arguments from return type

@@ -39,6 +39,7 @@ export * from "./im-pi/cons-im-pi-value"
 export * from "./im-pi/im-fn"
 export * from "./im-pi/im-fn-core"
 export * from "./im-pi/im-fn-value"
+export * from "./im-pi/im-ap"
 export * from "./im-pi/im-ap-core"
 export * from "./im-pi/im-ap-neutral"
 

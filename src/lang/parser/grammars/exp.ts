@@ -458,10 +458,17 @@ export const exps = {
 export const args = {
   $grammar: {
     "args:args": [
-      { entries: { $ap: ["zero_or_more", "exp", '","'] } },
-      { last_entry: "exp" },
+      { entries: { $ap: ["zero_or_more", "arg_entry", '","'] } },
+      { last_entry: "arg_entry" },
       { $ap: ["optional", '","'] },
     ],
+  },
+}
+
+export const arg_entry = {
+  $grammar: {
+    "arg_entry:plain": [{ exp: "exp" }],
+    "arg_entry:implicit": ['"implicit"', { exp: "exp" }],
   },
 }
 
