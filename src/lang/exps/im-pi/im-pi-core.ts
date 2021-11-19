@@ -5,6 +5,7 @@ import { Solution } from "../../solution"
 import { Closure } from "../closure"
 import { evaluate } from "../../core"
 import * as Exps from "../../exps"
+import { PiFormater } from "../pi/pi-formater"
 
 export class ImPiCore extends Core {
   field_name: string
@@ -25,6 +26,10 @@ export class ImPiCore extends Core {
     this.ret_t = ret_t
   }
 
+  get name(): string {
+    return this.field_name
+  }
+
   evaluate(env: Env): Value {
     if (this.ret_t instanceof Exps.PiCore) {
       return new Exps.BaseImPiValue(
@@ -41,36 +46,35 @@ export class ImPiCore extends Core {
     }
   }
 
-  im_pi_args_format(): Array<string> {
-    if (this.ret_t instanceof Exps.PiCore) {
-      return [`${this.field_name}: ${this.arg_t.format()}`]
-    } else {
-      return [
-        `${this.field_name}: ${this.arg_t.format()}`,
-        ...this.ret_t.im_pi_args_format(),
-      ]
-    }
-  }
-
-  pi_args_format(): Array<string> {
-    if (this.ret_t instanceof Exps.PiCore) {
-      const entry = `implicit { ${this.im_pi_args_format().join(", ")} }`
-      return [entry, ...this.ret_t.pi_args_format()]
-    } else {
-      const entry = `implicit { ${this.im_pi_args_format().join(", ")} }`
-      // NOTE replace the head of the `entries`.
-      return [entry, ...this.ret_t.pi_args_format().slice(1)]
-    }
-  }
-
-  pi_ret_t_format(): string {
-    return this.ret_t.pi_ret_t_format()
-  }
+  pi_formater: PiFormater = new PiFormater(this, {
+    decorate_binding: (binding) => `implicit ${binding}`
+  })
 
   format(): string {
-    const args = this.pi_args_format().join(", ")
-    const ret_t = this.pi_ret_t_format()
-    return `(${args}) -> ${ret_t}`
+    return this.pi_formater.format()
+
+    // const args = this.format_args().join(", ")
+    // const ret_t = this.ret_t.pi_formater.format_ret_t()
+    // return `(${args}) -> ${ret_t}`
+  }
+
+  format_args(): Array<string> {
+    const entry = `implicit { ${this.format_im_args().join(", ")} }`
+    if (this.ret_t instanceof Exps.PiCore) {
+      return [entry, ...this.ret_t.pi_formater.format_args()]
+    } else {
+      // NOTE replace the head of the `entries`.
+      return [entry, ...this.ret_t.format_args().slice(1)]
+    }
+  }
+
+  format_im_args(): Array<string> {
+    const entry = `${this.field_name}: ${this.arg_t.format()}`
+    if (this.ret_t instanceof Exps.PiCore) {
+      return [entry]
+    } else {
+      return [entry, ...this.ret_t.format_im_args()]
+    }
   }
 
   alpha_format(ctx: AlphaCtx): string {

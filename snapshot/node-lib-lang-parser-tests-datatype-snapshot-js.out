@@ -8,7 +8,7 @@ datatype __List (E: Type) {
 }
 datatype __Vector (E: Type) (length: Nat) {
   __vecnil: Vector(E, __Nat.__zero)
-  __vec: (head: E, implicit { prev: Nat }, tail: Vector(E, prev)) -> Vector(E, __Nat.__add1(prev))
+  __vec: (head: E, implicit prev: Nat, tail: Vector(E, prev)) -> Vector(E, __Nat.__add1(prev))
 }
 datatype LessThan () (j: Nat, k: Nat) {
   zero_smallest: (n: Nat) -> LessThan(__Nat.__zero, __Nat.__add1(n))

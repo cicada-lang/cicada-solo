@@ -7,6 +7,7 @@ import { check } from "../../exp"
 import { evaluate } from "../../core"
 import * as Exps from "../../exps"
 import * as ut from "../../../ut"
+import { PiFormater } from "./pi-formater"
 
 export class Pi extends Exp {
   meta: ExpMeta
@@ -68,38 +69,9 @@ export class Pi extends Exp {
     }
   }
 
-  pi_args_format(): Array<string> {
-    const entry = `${this.name}: ${this.arg_t.format()}`
-    if (has_pi_args_format(this.ret_t)) {
-      return [entry, ...this.ret_t.pi_args_format()]
-    } else {
-      return [entry]
-    }
-  }
-
-  pi_ret_t_format(): string {
-    if (has_pi_ret_t_format(this.ret_t)) {
-      return this.ret_t.pi_ret_t_format()
-    } else {
-      return this.ret_t.format()
-    }
-  }
+  pi_formater = new PiFormater(this)
 
   format(): string {
-    const args = this.pi_args_format().join(", ")
-    const ret_t = this.pi_ret_t_format()
-    return `(${args}) -> ${ret_t}`
+    return this.pi_formater.format()
   }
-}
-
-function has_pi_args_format(
-  exp: Exp
-): exp is Exp & { pi_args_format(): Array<string> } {
-  return (exp as any).pi_args_format instanceof Function
-}
-
-function has_pi_ret_t_format(
-  exp: Exp
-): exp is Exp & { pi_ret_t_format(): string } {
-  return (exp as any).pi_ret_t_format instanceof Function
 }

@@ -1,9 +1,9 @@
+- change syntax of `im-pi` and `im-fn` -- do not use record syntax
+
 # formaters
 
 - `fn-formater`
-- `pi-formater`
 - `sigma-formater`
-- `cons-formater`
 
 # im-ap
 

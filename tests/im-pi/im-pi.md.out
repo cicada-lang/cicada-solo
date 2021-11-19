@@ -1,15 +1,15 @@
-(implicit { A }, x) => { x }: (implicit { A: Type }, x: A) -> A
-(implicit { A }, x) => { x }: (implicit { A: Type }, x: A) -> A
-(implicit { A }, x) => { x }: (implicit { A: Type }, x: A) -> A
+(implicit { A }, x) => { x }: (implicit A: Type, x: A) -> A
+(implicit { A }, x) => { x }: (implicit A: Type, x: A) -> A
+(implicit { A }, x) => { x }: (implicit A: Type, x: A) -> A
 1: Nat
 1: Nat
 1: Nat
 Nat: Type
 String: Type
 100: Nat
-(implicit { A: Type, B: Type }, pair: [_: A | B]) -> Type: Type
-(implicit { A, B }, pair) => { A }: (implicit { A: Type, B: Type }, pair: [_: A | B]) -> Type
-(implicit { A, B }, pair) => { A }: (implicit { A: Type, B: Type }, pair: [_: A | B]) -> Type
+(implicit A: Type, implicit B: Type, pair: [_: A | B]) -> Type: Type
+(implicit { A, B }, pair) => { A }: (implicit A: Type, implicit B: Type, pair: [_: A | B]) -> Type
+(implicit { A, B }, pair) => { A }: (implicit A: Type, implicit B: Type, pair: [_: A | B]) -> Type
 Nat: Type
 Nat: Type
 String: Type
