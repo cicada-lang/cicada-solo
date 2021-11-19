@@ -55,3 +55,36 @@ export function check(
     throw error
   }
 }
+
+export function check_by_infer(
+  ctx: Ctx,
+  exp: Exp & {
+    infer(ctx: Ctx, opts?: ElaborationOptions):{ t: Value; core: Core }
+  },
+  t: Value,
+  opts?: ElaborationOptions
+): Core {
+  const inferred = exp.infer(ctx, opts)
+  const u = inferred.t
+  if (!conversion(ctx, new Exps.TypeValue(), t, u)) {
+    const u_exp = readback(ctx, new Exps.TypeValue(), u)
+    const t_exp = readback(ctx, new Exps.TypeValue(), t)
+
+    // DEBUG
+    // console.log("inferred:", u_exp.repr())
+    // console.dir(u, { depth: 4 })
+    // console.log("expected:", t_exp.repr())
+    // console.dir(t, { depth: 4 })
+
+    throw new ExpTrace(
+      [
+        `I infer the type to be:`,
+        `  ${u_exp.repr()}`,
+        `But the expected type is:`,
+        `  ${t_exp.repr()}`,
+      ].join("\n")
+    )
+  }
+
+  return inferred.core
+}

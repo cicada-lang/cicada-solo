@@ -1,5 +1,3 @@
-- extract `check_by_infer`
-
 - `Ap.check` call `check_by_infer` when `target.ap_handler?.check_by_target` is not implemented
 
 # inductive datatype
