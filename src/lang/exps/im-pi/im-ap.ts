@@ -2,11 +2,13 @@ import { Exp, ExpMeta, ElaborationOptions, subst } from "../../exp"
 import { Core } from "../../core"
 import { Env } from "../../env"
 import { Ctx } from "../../ctx"
+import { infer } from "../../exp"
+import { check } from "../../exp"
 import { evaluate } from "../../core"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { Normal } from "../../normal"
-import { InternalError } from "../../errors"
+import { ExpTrace, InternalError } from "../../errors"
 import * as Exps from "../../exps"
 import { ApFormater } from "../pi/ap-formater"
 
@@ -38,6 +40,21 @@ export class ImAp extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
+    const { t, core } = infer(ctx, this.target)
+
+    if (!(t instanceof Exps.ImPiValue)) {
+      throw new ExpTrace(
+        [
+          `I expect the type to be ImPiValue`,
+          `  class name: ${t.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    // field_name: string
+    // arg_t: Value
+    // ret_t_cl: Closure
+
     throw new Error("TODO")
   }
 

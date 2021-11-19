@@ -31,17 +31,17 @@ export class Dot extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const inferred_target = infer(ctx, this.target)
+    const inferred = infer(ctx, this.target)
 
-    if (inferred_target.t instanceof Exps.ClsValue) {
+    if (inferred.t instanceof Exps.ClsValue) {
       // NOTE `infer` need to return normalized value as core.
       // Because of `ClsValue` can be partially fulfilled by value,
       // during `infer` of `Exps.Dot`, we have opportunity to get those value back,
       // and return them as core.
 
-      const target_value = evaluate(ctx.to_env(), inferred_target.core)
-      const value = inferred_target.t.dot_value(target_value, this.name)
-      const t = inferred_target.t.dot_type(target_value, this.name)
+      const target_value = evaluate(ctx.to_env(), inferred.core)
+      const value = inferred.t.dot_value(target_value, this.name)
+      const t = inferred.t.dot_type(target_value, this.name)
 
       return {
         t,
@@ -51,8 +51,8 @@ export class Dot extends Exp {
 
     throw new ExpTrace(
       [
-        `Expecting target type to be a class.`,
-        `  ${JSON.stringify(inferred_target.t)}`,
+        `I expect the inferred type to be a class.`,
+        `  class name: ${inferred.t.constructor.name}`,
       ].join("\n")
     )
   }

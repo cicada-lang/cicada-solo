@@ -49,40 +49,40 @@ export class Ap extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const { t, core } = infer(ctx, this.target)
+    const inferred = infer(ctx, this.target)
 
-    const target = evaluate(ctx.to_env(), core)
+    const target = evaluate(ctx.to_env(), inferred.core)
     if (target.ap_handler?.infer_by_target) {
-      return target.ap_handler.infer_by_target(ctx, core, this.arg)
+      return target.ap_handler.infer_by_target(ctx, inferred.core, this.arg)
     }
 
-    if (t instanceof Exps.PiValue) {
-      return this.infer_for_pi(ctx, t, core)
+    if (inferred.t instanceof Exps.PiValue) {
+      return this.infer_for_pi(ctx, inferred.t, inferred.core)
     }
 
-    if (t instanceof Exps.ImPiValue) {
-      return t.insert_im_ap(ctx, this.arg, core, [])
+    if (inferred.t instanceof Exps.ImPiValue) {
+      return inferred.t.insert_im_ap(ctx, this.arg, inferred.core, [])
     }
 
     throw new ExpTrace(
       [
-        `I expect the type to be PiValue or ImPiValue`,
-        `  class name: ${target.constructor.name}`,
+        `I expect the inferred type to be PiValue or ImPiValue`,
+        `  class name: ${inferred.t.constructor.name}`,
       ].join("\n")
     )
   }
 
   private infer_for_pi(
     ctx: Ctx,
-    target_t: Exps.PiValue,
-    target_core: Core
+    t: Exps.PiValue,
+    core: Core
   ): { t: Value; core: Core } {
-    const { arg_t, ret_t_cl } = target_t
+    const { arg_t, ret_t_cl } = t
     const arg_core = check(ctx, this.arg, arg_t)
     const arg_value = evaluate(ctx.to_env(), arg_core)
     return {
       t: ret_t_cl.apply(arg_value),
-      core: new Exps.ApCore(target_core, arg_core),
+      core: new Exps.ApCore(core, arg_core),
     }
   }
 
