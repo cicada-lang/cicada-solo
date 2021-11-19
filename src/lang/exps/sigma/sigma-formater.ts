@@ -17,24 +17,24 @@ export class SigmaFormater {
   }
 
   format(): string {
-    const cars = this.sigma_cars_format().join(", ")
-    const cdr_t = this.sigma_cdr_t_format()
-    return `[${cars} | ${cdr_t}]`
+    const bindings = this.format_bindings().join(", ")
+    const cdr_t = this.format_cdr_t()
+    return `[${bindings} | ${cdr_t}]`
   }
 
-  private sigma_cars_format(): Array<string> {
+  private format_bindings(): Array<string> {
     const binding = `${this.sigma.name}: ${this.sigma.car_t.format()}`
 
     if (this.sigma.cdr_t.sigma_formater) {
-      return [binding, ...this.sigma.cdr_t.sigma_formater.sigma_cars_format()]
+      return [binding, ...this.sigma.cdr_t.sigma_formater.format_bindings()]
     } else {
       return [binding]
     }
   }
 
-  private sigma_cdr_t_format(): string {
+  private format_cdr_t(): string {
     if (this.sigma.cdr_t.sigma_formater) {
-      return this.sigma.cdr_t.sigma_formater.sigma_cdr_t_format()
+      return this.sigma.cdr_t.sigma_formater.format_cdr_t()
     } else {
       return this.sigma.cdr_t.format()
     }

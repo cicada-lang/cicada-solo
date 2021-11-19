@@ -1,5 +1,3 @@
-- `sigma-formater` -- rename methods
-
 - `im-fn` -- fix `format`
 
 # syntax
