@@ -6,49 +6,51 @@ import { Solution } from "../../solution"
 import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
 import * as ut from "../../../ut"
+import { FnFormater } from "../pi/fn-formater"
 
 export class ImFn extends Exp {
   meta: ExpMeta
-  names: Array<{ field_name: string; local_name: string }>
-  ret: Exps.Fn
+  field_name: string
+  local_name: string
+  ret: Exps.Fn | Exps.ImFn
 
   constructor(
-    names: Array<{ field_name: string; local_name: string }>,
-    ret: Exps.Fn,
+    field_name: string,
+    local_name: string,
+    ret: Exps.Fn | Exps.ImFn,
     meta: ExpMeta
   ) {
     super()
     this.meta = meta
-    this.names = names
+    this.field_name = field_name
+    this.local_name = local_name
     this.ret = ret
+  }
+
+  get name(): string {
+    return this.local_name
   }
 
   free_names(bound_names: Set<string>): Set<string> {
     return new Set(
-      this.ret.free_names(
-        new Set([
-          ...bound_names,
-          ...this.names.map(({ local_name }) => local_name),
-        ])
-      )
+      this.ret.free_names(new Set([...bound_names, this.local_name]))
     )
   }
 
   subst(name: string, exp: Exp): ImFn {
-    if (this.names.some(({ local_name }) => name === local_name)) {
+    if (this.local_name === name) {
       return this
     } else {
-      let ret = this.ret
-      let names = []
+      const free_names = exp.free_names(new Set())
+      const fresh_name = ut.freshen(free_names, this.local_name)
+      const ret = subst(this.ret, this.local_name, new Exps.Var(fresh_name))
 
-      for (const { field_name, local_name } of this.names) {
-        const free_names = exp.free_names(new Set())
-        const fresh_name = ut.freshen(free_names, local_name)
-        ret = subst(ret, local_name, new Exps.Var(fresh_name)) as Exps.Fn
-        names.push({ field_name, local_name: fresh_name })
-      }
-
-      return new ImFn(names, subst(ret, name, exp) as Exps.Fn, this.meta)
+      return new ImFn(
+        this.field_name,
+        fresh_name,
+        subst(ret, name, exp) as Exps.Fn | Exps.ImFn,
+        this.meta
+      )
     }
   }
 
@@ -63,21 +65,19 @@ export class ImFn extends Exp {
       )
     }
 
-    return t.insert_im_fn(ctx, this.ret, this.names)
+    return t.insert_im_fn(ctx, this.ret, [
+      {
+        field_name: this.field_name,
+        local_name: this.local_name,
+      },
+    ])
   }
+
+  fn_formater: FnFormater = new FnFormater(this, {
+    decorate_name: (name) => `implicit ${name}`,
+  })
 
   format(): string {
-    const args = this.fn_args_format().join(", ")
-    const ret = this.fn_ret_format()
-    return `(${args}) => { ${ret} }`
-  }
-
-  fn_args_format(): Array<string> {
-    const names = this.names.map(({ field_name }) => field_name).join(", ")
-    return [`implicit { ${names} }`, ...this.ret.fn_formater.format_names()]
-  }
-
-  fn_ret_format(): string {
-    return this.ret.fn_formater.format_ret()
+    return this.fn_formater.format()
   }
 }

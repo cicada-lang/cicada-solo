@@ -25,7 +25,7 @@ MyList(Nat)
 
 ``` cicada
 induction_list(
-  implicit { E: Type },
+  implicit E: Type,
   target: List(E),
   motive: (List(E)) -> Type,
   case_nil: motive(nil),
@@ -41,7 +41,7 @@ induction_list(
 # length
 
 ``` cicada
-length(implicit { E: Type }, x: List(E)): Nat {
+length(implicit E: Type, x: List(E)): Nat {
   induction_list(
     x,
     (_) => Nat,
@@ -52,7 +52,7 @@ length(implicit { E: Type }, x: List(E)): Nat {
 ```
 
 ``` cicada wishful-thinking
-length(implicit { E: Type }, x: List(E)): Nat {
+length(implicit E: Type, x: List(E)): Nat {
   induction (x) {
     (_) => Nat
     case nil => 0
@@ -73,7 +73,7 @@ same_as_chart! Nat [
 
 
 ``` cicada
-append(implicit { E: Type }, x: List(E), y: List(E)): List(E) {
+append(implicit E: Type, x: List(E), y: List(E)): List(E) {
   induction_list(
     x,
     (_) => List(E),
@@ -84,7 +84,7 @@ append(implicit { E: Type }, x: List(E), y: List(E)): List(E) {
 ```
 
 ``` cicada wishful-thinking
-append(implicit { E: Type }, x: List(E), y: List(E)): List(E) {
+append(implicit E: Type, x: List(E), y: List(E)): List(E) {
   induction (x) {
     (_) => List(E)
     case nil => y
@@ -103,7 +103,7 @@ same_as_chart! List(Nat) [
 # reverse
 
 ``` cicada
-li_end(implicit { E: Type }, e: E, x: List(E)): List(E) {
+li_end(implicit E: Type, e: E, x: List(E)): List(E) {
   induction_list(
     x,
     (_) => List(E),
@@ -112,7 +112,7 @@ li_end(implicit { E: Type }, e: E, x: List(E)): List(E) {
   )
 }
 
-reverse(implicit { E: Type }, x: List(E)): List(E) {
+reverse(implicit E: Type, x: List(E)): List(E) {
   induction_list(
     x,
     (_) => List(E),
@@ -123,7 +123,7 @@ reverse(implicit { E: Type }, x: List(E)): List(E) {
 ```
 
 ``` cicada wishful-thinking
-li_end(implicit { E: Type }, e: E, x: List(E)): List(E) {
+li_end(implicit E: Type, e: E, x: List(E)): List(E) {
   induction (x) {
     (_) => List(E)
     case nil => List.li(e, nil)
@@ -131,7 +131,7 @@ li_end(implicit { E: Type }, e: E, x: List(E)): List(E) {
   }
 }
 
-reverse(implicit { E: Type }, x: List(E)): List(E) {
+reverse(implicit E: Type, x: List(E)): List(E) {
   induction (x) {
     (_) => List(E)
     case nil => List.nil

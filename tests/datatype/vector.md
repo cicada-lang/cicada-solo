@@ -9,7 +9,7 @@ datatype Vector(E: Type) (length: Nat) {
   vecnil: Vector(E, Nat.zero)
   vec(
     head: E,
-    implicit { prev: Nat },
+    implicit prev: Nat,
     tail: Vector(E, prev),
   ): Vector(E, Nat.add1(prev))
 }
@@ -20,7 +20,7 @@ datatype MyVector(E: Type) (length: Nat) {
   my_null: MyVector(E, zero)
   my_cons(
     head: E,
-    implicit { prev: Nat },
+    implicit prev: Nat,
     tail: MyVector(E, prev),
   ): MyVector(E, add1(prev))
 }
@@ -34,13 +34,14 @@ MyVector(String, 3)
 
 ``` cicada
 induction_vector(
-  implicit { E: Type, length: Nat },
+  implicit E: Type,
+  implicit length: Nat,
   target: Vector(E, length),
   motive: (length: Nat, target: Vector(E, length)) -> Type,
   case_vecnil: motive(0, vecnil),
   case_vec: (
     head: E,
-    implicit { prev: Nat },
+    implicit prev: Nat,
     tail: Vector(E, prev),
     almost_on_tail: motive(prev, tail),
   ) -> motive(add1(prev), vec(head, tail)),
@@ -61,9 +62,10 @@ induction_vector(
 import { add } from "./nat.md"
 
 vector_append(
-  implicit { E: Type, xl: Nat },
+  implicit E: Type,
+  implicit xl: Nat,
   x: Vector(E, xl),
-  implicit { yl: Nat },
+  implicit yl: Nat,
   y: Vector(E, yl),
 ): Vector(E, add(xl, yl)) {
   induction_vector(
@@ -79,9 +81,10 @@ vector_append(
 import { add } from "./nat.md"
 
 vector_append(
-  implicit { E: Type, xl: Nat },
+  implicit E: Type,
+  implicit xl: Nat,
   x: Vector(E, xl),
-  implicit { yl: Nat },
+  implicit yl: Nat,
   y: Vector(E, yl),
 ): Vector(E, add(xl, yl)) {
   induction (x) {
@@ -106,7 +109,8 @@ same_as_chart! Vector(Nat, 5) [
 
 ``` cicada
 list_from_vector(
-  implicit { E: Type, length: Nat },
+  implicit E: Type,
+  implicit length: Nat,
   vector: Vector(E, length),
 ): List(E) {
   induction_vector(
@@ -120,7 +124,8 @@ list_from_vector(
 
 ``` cicada wishful-thinking
 list_from_vector(
-  implicit { E: Type, length: Nat },
+  implicit E: Type,
+  implicit length: Nat,
   vector: Vector(E, length),
 ): List(E) {
   induction (vector) {

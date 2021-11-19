@@ -3,13 +3,11 @@ import { tester } from "../parser-tester-instance"
 tester.echo_stmts(`
 
 cong(
-  implicit {
-    X: Type,
-    from: X,
-    to: X,
-  },
+  implicit X: Type,
+  implicit from: X,
+  implicit to: X,
   target: Equal(X, from, to),
-  implicit { Result: Type },
+  implicit Result: Type,
   f: (X) -> Result,
 ): Equal(Result, f(from), f(to)) {
   replace(
@@ -19,14 +17,11 @@ cong(
 }
 
 cong(
-  implicit {
-    // NOTE In a record, comma is optional.
-    X: Type
-    from: X
-    to: X
-  },
+  implicit X: Type,
+  implicit from: X,
+  implicit to: X,
   target: Equal(X, from, to),
-  implicit { Result: Type },
+  implicit Result: Type,
   f: (X) -> Result,
 ): Equal(Result, f(from), f(to)) {
   replace(

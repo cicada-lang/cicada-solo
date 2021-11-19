@@ -421,21 +421,9 @@ export const binding = {
     "binding:named": [{ name: "identifier" }, '":"', { exp: "exp" }],
     "binding:implicit": [
       '"implicit"',
-      '"{"',
-      { entries: { $ap: ["zero_or_more", "binding_implicit_entry"] } },
-      { last_entry: "binding_implicit_entry" },
-      '"}"',
-    ],
-  },
-}
-
-export const binding_implicit_entry = {
-  $grammar: {
-    "binding_implicit_entry:binding_implicit_entry": [
       { name: "identifier" },
       '":"',
       { exp: "exp" },
-      { $ap: ["optional", '","'] },
     ],
   },
 }
@@ -453,22 +441,7 @@ export const names = {
 export const name_entry = {
   $grammar: {
     "name_entry:name_entry": [{ name: "identifier" }],
-    "name_entry:implicit_name_entry": [
-      '"implicit"',
-      '"{"',
-      { names: { $ap: ["zero_or_more", "name_implicit_entry"] } },
-      { last_name: "name_implicit_entry" },
-      '"}"',
-    ],
-  },
-}
-
-export const name_implicit_entry = {
-  $grammar: {
-    "name_implicit_entry:name_implicit_entry": [
-      { name: "identifier" },
-      { $ap: ["optional", '","'] },
-    ],
+    "name_entry:implicit_name_entry": ['"implicit"', { name: "identifier" }],
   },
 }
 

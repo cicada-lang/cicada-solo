@@ -20,29 +20,25 @@ export function pi_handler(
           })
         }
         case "implicit": {
-          if (!(result instanceof Exps.Pi)) {
+          if (!(result instanceof Exps.Pi || result instanceof Exps.ImPi)) {
             throw new pt.ParsingError(
               [
                 `When reducing implicit names,`,
-                `I expects the result to be Exps.Pi`,
+                `I expects the result to be Exps.Pi or Exps.ImPi`,
                 `  class name: ${result.constructor.name}`,
               ].join("\n"),
               { span: binding.span }
             )
           }
 
-          return binding.entries.reverse().reduce<Exps.ImPi>(
-            (result, entry) =>
-              new Exps.ImPi(entry.name, entry.name, entry.exp, result, {
-                span: pt.span_closure([binding.span, ret_t.span]),
-              }),
-            new Exps.ImPi(
-              binding.last_entry.name,
-              binding.last_entry.name,
-              binding.last_entry.exp,
-              result,
-              { span: pt.span_closure([binding.span, ret_t.span]) }
-            )
+          return new Exps.ImPi(
+            binding.name,
+            binding.name,
+            binding.exp,
+            result,
+            {
+              span: pt.span_closure([binding.span, ret_t.span]),
+            }
           )
         }
       }
@@ -62,33 +58,20 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
           })
         }
         case "implicit": {
-          if (!(result instanceof Exps.Fn)) {
+          if (!(result instanceof Exps.Fn || result instanceof Exps.ImFn)) {
             throw new pt.ParsingError(
               [
                 `When reducing implicit names,`,
-                `the names_matcher expects the result to be Exps.Fn`,
+                `the names_matcher expects the result to be Exps.Fn or Exps.ImFn`,
                 `class name: ${result.constructor.name}`,
               ].join("\n"),
               { span: name_entry.span }
             )
           }
 
-          return new Exps.ImFn(
-            [
-              ...name_entry.names.map((name) => ({
-                field_name: name,
-                local_name: name,
-              })),
-              {
-                field_name: name_entry.last_name,
-                local_name: name_entry.last_name,
-              },
-            ],
-            result,
-            {
-              span: pt.span_closure([name_entry.span, ret.span]),
-            }
-          )
+          return new Exps.ImFn(name_entry.name, name_entry.name, result, {
+            span: pt.span_closure([name_entry.span, ret.span]),
+          })
         }
       }
     }, exp_matcher(ret))
@@ -401,33 +384,22 @@ export function declaration_matcher(tree: pt.Tree): Exp {
                 span: pt.span_closure([binding.span, ret.span]),
               })
             }
+
             case "implicit": {
-              if (!(result instanceof Exps.Fn)) {
+              if (!(result instanceof Exps.Fn || result instanceof Exps.ImFn)) {
                 throw new pt.ParsingError(
                   [
                     `When reducing implicit names,`,
-                    `I expects the result to be Exps.Fn`,
+                    `I expects the result to be Exps.Fn or Exps.Fn`,
                     `  class name: ${result.constructor.name}`,
                   ].join("\n"),
                   { span }
                 )
               }
-              return new Exps.ImFn(
-                [
-                  ...binding.entries.map(({ name }) => ({
-                    field_name: name,
-                    local_name: name,
-                  })),
-                  {
-                    field_name: binding.last_entry.name,
-                    local_name: binding.last_entry.name,
-                  },
-                ],
-                result,
-                {
-                  span: pt.span_closure([binding.span, ret.span]),
-                }
-              )
+
+              return new Exps.ImFn(binding.name, binding.name, result, {
+                span: pt.span_closure([binding.span, ret.span]),
+              })
             }
           }
         }, exp_matcher(ret))
@@ -490,32 +462,20 @@ export function cls_entry_matcher(tree: pt.Tree): {
               })
             }
             case "implicit": {
-              if (!(result instanceof Exps.Fn)) {
+              if (!(result instanceof Exps.Fn || result instanceof Exps.ImFn)) {
                 throw new pt.ParsingError(
                   [
                     `When reducing implicit names,`,
-                    `I expects the result to be Exps.Fn`,
+                    `I expects the result to be Exps.Fn or Exps.ImFn`,
                     `  class name: ${result.constructor.name}`,
                   ].join("\n"),
                   { span }
                 )
               }
-              return new Exps.ImFn(
-                [
-                  ...binding.entries.map(({ name }) => ({
-                    field_name: name,
-                    local_name: name,
-                  })),
-                  {
-                    field_name: binding.last_entry.name,
-                    local_name: binding.last_entry.name,
-                  },
-                ],
-                result,
-                {
-                  span: pt.span_closure([binding.span, ret.span]),
-                }
-              )
+
+              return new Exps.ImFn(binding.name, binding.name, result, {
+                span: pt.span_closure([binding.span, ret.span]),
+              })
             }
           }
         }, exp_matcher(ret))
@@ -532,12 +492,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
 
 type Binding =
   | { kind: "named"; name: string; exp: Exp; span: pt.Span }
-  | {
-      kind: "implicit"
-      entries: Array<{ name: string; exp: Exp }>
-      last_entry: { name: string; exp: Exp }
-      span: pt.Span
-    }
+  | { kind: "implicit"; name: string; exp: Exp; span: pt.Span }
 
 export function bindings_matcher(tree: pt.Tree): Array<Binding> {
   return pt.matcher({
@@ -562,12 +517,10 @@ export function binding_matcher(tree: pt.Tree): Binding {
       exp: exp_matcher(exp),
       span,
     }),
-    "binding:implicit": ({ entries, last_entry }, { span }) => ({
+    "binding:implicit": ({ name, exp }, { span }) => ({
       kind: "implicit",
-      entries: pt.matchers
-        .zero_or_more_matcher(entries)
-        .map(binding_implicit_entry_matcher),
-      last_entry: binding_implicit_entry_matcher(last_entry),
+      name: pt.str(name),
+      exp: exp_matcher(exp),
       span,
     }),
   })(tree)
@@ -594,18 +547,6 @@ export function simple_binding_matcher(tree: pt.Tree): SimpleBinding {
   })(tree)
 }
 
-export function binding_implicit_entry_matcher(tree: pt.Tree): {
-  name: string
-  exp: Exp
-} {
-  return pt.matcher({
-    "binding_implicit_entry:binding_implicit_entry": ({ name, exp }) => ({
-      name: pt.str(name),
-      exp: exp_matcher(exp),
-    }),
-  })(tree)
-}
-
 export function names_matcher(tree: pt.Tree): Array<NameEntry> {
   return pt.matcher({
     "names:names": ({ entries, last_entry }) => [
@@ -621,7 +562,7 @@ export function names_matcher(tree: pt.Tree): Array<NameEntry> {
 
 type NameEntry =
   | { kind: "name"; name: string; span: pt.Span }
-  | { kind: "implicit"; names: Array<string>; last_name: string; span: pt.Span }
+  | { kind: "implicit"; name: string; span: pt.Span }
 
 export function name_entry_matcher(tree: pt.Tree): NameEntry {
   return pt.matcher<NameEntry>({
@@ -630,20 +571,11 @@ export function name_entry_matcher(tree: pt.Tree): NameEntry {
       name: pt.str(name),
       span,
     }),
-    "name_entry:implicit_name_entry": ({ names, last_name }, { span }) => ({
+    "name_entry:implicit_name_entry": ({ name }, { span }) => ({
       kind: "implicit",
-      names: pt.matchers
-        .zero_or_more_matcher(names)
-        .map(name_implicit_entry_matcher),
-      last_name: name_implicit_entry_matcher(last_name),
+      name: pt.str(name),
       span,
     }),
-  })(tree)
-}
-
-export function name_implicit_entry_matcher(tree: pt.Tree): string {
-  return pt.matcher({
-    "name_implicit_entry:name_implicit_entry": ({ name }) => pt.str(name),
   })(tree)
 }
 

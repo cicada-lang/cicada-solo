@@ -16,7 +16,7 @@ datatype __Vector(E: Type) (length: Nat) {
   __vecnil: Vector(E, __Nat.__zero)
   __vec(
     head: E,
-    implicit { prev: Nat },
+    implicit prev: Nat,
     tail: Vector(E, prev),
   ): Vector(E, __Nat.__add1(prev))
 }

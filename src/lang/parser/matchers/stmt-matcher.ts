@@ -51,32 +51,20 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
               })
             }
             case "implicit": {
-              if (!(result instanceof Exps.Fn)) {
+              if (!(result instanceof Exps.Fn || result instanceof Exps.ImFn)) {
                 throw new pt.ParsingError(
                   [
                     `When reducing implicit names,`,
-                    `I expects the result to be Exps.Fn`,
+                    `I expects the result to be Exps.Fn or Exps.ImFn`,
                     `  class name: ${result.constructor.name}`,
                   ].join("\n"),
                   { span: binding.span }
                 )
               }
-              return new Exps.ImFn(
-                [
-                  ...binding.entries.map(({ name }) => ({
-                    field_name: name,
-                    local_name: name,
-                  })),
-                  {
-                    field_name: binding.last_entry.name,
-                    local_name: binding.last_entry.name,
-                  },
-                ],
-                result,
-                {
-                  span: pt.span_closure([binding.span, ret.span]),
-                }
-              )
+
+              return new Exps.ImFn(binding.name, binding.name, result, {
+                span: pt.span_closure([binding.span, ret.span]),
+              })
             }
           }
         }, exp_matcher(ret))

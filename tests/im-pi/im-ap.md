@@ -1,7 +1,7 @@
 # implicit argument insertion when applying implicit function
 
 ``` cicada
-id(implicit { A: Type }, x: A): A {
+id(implicit A: Type, x: A): A {
   x
 }
 
@@ -13,8 +13,8 @@ id("a")
 
 ``` cicada
 k(
-  implicit { A: Type }, x: A,
-  implicit { B: Type }, y: B,
+  implicit A: Type, x: A,
+  implicit B: Type, y: B,
 ): A {
   x
 }

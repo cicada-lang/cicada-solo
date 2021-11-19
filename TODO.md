@@ -1,7 +1,4 @@
-- `im-pi` -- change syntax -- do not use record syntax
-- `im-fn` -- change syntax -- do not use record syntax
-
-- `im-fn` -- fix `format` -- change the structure of `im-fn`
+- `im-pi/im-fn` -- fix the use of `t.insert_im_fn`
 
 - `im-ap` -- `format`
 - `im-ap` -- `infer`

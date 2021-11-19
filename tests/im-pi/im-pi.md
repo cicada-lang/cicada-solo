@@ -6,12 +6,12 @@ Let's write the identity function with implicit type argument.
 - for `id1` and `id2`, an implicit function will be inserted to get `id3`.
 
 ``` cicada
-id1(implicit { A: Type }, x: A): A {
+id1(implicit A: Type, x: A): A {
   x
 }
 
-id2: (implicit { A: Type }, x: A) -> A = (x) => x
-id3: (implicit { A: Type }, x: A) -> A = (implicit { A }, x) => x
+id2: (implicit A: Type, x: A) -> A = (x) => x
+id3: (implicit A: Type, x: A) -> A = (implicit A, x) => x
 
 id1
 id2
@@ -25,7 +25,7 @@ id3(1)
 # return implicit value
 
 ``` cicada
-typeof(implicit { T: Type }, T): Type {
+typeof(implicit T: Type, T): Type {
   T
 }
 
@@ -37,8 +37,8 @@ typeof("abc")
 
 ``` cicada
 k(
-  implicit { A: Type }, x: A,
-  implicit { B: Type }, y: B,
+  implicit A: Type, x: A,
+  implicit B: Type, y: B,
 ): A {
   x
 }
@@ -50,13 +50,17 @@ k(100, 101)
 
 ``` cicada
 car_type_t = (
-  implicit { A: Type, B: Type }, pair: Pair(A, B),
+  implicit A: Type,
+  implicit B: Type,
+  pair: Pair(A, B),
 ) -> Type
 
 car_type_t
 
 car_type(
-  implicit { A: Type, B: Type }, pair: Pair(A, B),
+  implicit A: Type,
+  implicit B: Type,
+  pair: Pair(A, B),
 ): Type {
   A
 }
@@ -64,8 +68,10 @@ car_type(
 car_type
 
 car_type_again: (
-  implicit { A: Type, B: Type }, pair: Pair(A, B),
-) -> Type = (implicit { A, B }, pair) => A
+  implicit A: Type,
+  implicit B: Type,
+  pair: Pair(A, B),
+) -> Type = (implicit A, implicit B, pair) => A
 
 
 car_type_again
@@ -76,7 +82,9 @@ car_type_again(is(cons(1, "a"), Pair(Nat, String)))
 // `cdr_type` -- only the idiomatic way:
 
 cdr_type(
-  implicit { A: Type, B: Type }, pair: Pair(A, B),
+  implicit A: Type,
+  implicit B: Type,
+  pair: Pair(A, B),
 ): Type {
   B
 }
@@ -88,8 +96,8 @@ cdr_type(is(cons(1, "a"), Pair(Nat, String)))
 
 ``` cicada counterexample
 k(
-  implicit { A: Type },
-  implicit { B: Type },
+  implicit A: Type,
+  implicit B: Type,
   x: A,
   y: B,
 ): A {
@@ -101,7 +109,7 @@ k(
 
 ``` cicada counterexample
 k(
-  implicit { A: Type },
+  implicit A: Type,
   Trivial,
   x: A,
 ): A {

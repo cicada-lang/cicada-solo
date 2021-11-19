@@ -151,7 +151,7 @@ datatype List(E: Type) {
 
 ``` cicada
 ind_list_t = (
-  implicit { E: Type },
+  implicit E: Type,
   target: List(E),
   motive: (List(E)) -> Type,
   case_nil: motive(nil),
@@ -177,7 +177,7 @@ datatype Vector(E: Type) (length: Nat) {
   vecnil: Vector(E, zero)
   vec(
     head: E,
-    implicit { prev: Nat },
+    implicit prev: Nat,
     tail: Vector(E, prev),
   ): Vector(E, zero)
 }
@@ -204,13 +204,14 @@ TODO
 
 ``` cicada
 vector_ind_t: Type = (
-  implicit { E: Type, length: Nat },
+  implicit E: Type,
+  implicit length: Nat,
   target: Vector(E, length),
   motive: (length: Nat, target: Vector(E, length)) -> Type,
   case_vecnil: motive(0, vecnil),
   case_vec: (
     head: E,
-    implicit { prev: Nat },
+    implicit prev: Nat,
     tail: Vector(E, prev),
     almost_on_tail: motive(prev, tail),
   ) -> motive(add1(prev), vec(head, tail)),
@@ -244,7 +245,8 @@ datatype Either(L, R) {
 
 ``` cicada
 either_ind_t = (
-  implicit { L: Type, R: Type },
+  implicit L: Type,
+  implicit R: Type,
   target: Either(L, R),
   motive: (Either(L, R)) -> Type,
   case_inl: (left: L) -> motive(inl(left)),
@@ -296,7 +298,8 @@ Then we can define `ind_less_than_t`:
 
 ``` cicada
 ind_less_than_t = (
-  implicit { j: Nat, k: Nat },
+  implicit j: Nat,
+  implicit k: Nat,
   target: LessThan(j, k),
   motive: (j: Nat, k: Nat, LessThan(j, k)) -> Type,
   case_zero_smallest: (n: Nat) -> motive(zero, add1(n), zero_smallest(n)),
@@ -348,7 +351,7 @@ Maybe we can view a property over `X` as a subset of `X`.
 We also need to describe `NonEmptyProperty`:
 
 ``` cicada
-NonEmptyProperty(implicit { X: Type }, P: (X) -> Type): Type {
+NonEmptyProperty(implicit X: Type, P: (X) -> Type): Type {
   there exists [x: X such that P(x)]
 }
 
@@ -424,7 +427,7 @@ Now! Noetherian induction!
 
 ``` cicada
 noetherian_induction_t = (
-  implicit { X: Type },
+  implicit X: Type,
   target: X,
   well_founded: WellFounded(X),
   motive: (X) -> Type,
