@@ -52,29 +52,6 @@ export class ImPiCore extends Core {
 
   format(): string {
     return this.pi_formater.format()
-
-    // const args = this.format_args().join(", ")
-    // const ret_t = this.ret_t.pi_formater.format_ret_t()
-    // return `(${args}) -> ${ret_t}`
-  }
-
-  format_args(): Array<string> {
-    const entry = `implicit { ${this.format_im_args().join(", ")} }`
-    if (this.ret_t instanceof Exps.PiCore) {
-      return [entry, ...this.ret_t.pi_formater.format_args()]
-    } else {
-      // NOTE replace the head of the `entries`.
-      return [entry, ...this.ret_t.format_args().slice(1)]
-    }
-  }
-
-  format_im_args(): Array<string> {
-    const entry = `${this.field_name}: ${this.arg_t.format()}`
-    if (this.ret_t instanceof Exps.PiCore) {
-      return [entry]
-    } else {
-      return [entry, ...this.ret_t.format_im_args()]
-    }
   }
 
   alpha_format(ctx: AlphaCtx): string {
