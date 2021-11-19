@@ -6,6 +6,8 @@
 - `fixed-pi/fixed-ap`
 - `fixed-pi/fixed-fn`
 
+- example:
+
   ``` cicada
   // Insert arguments in check mode:
 
