@@ -1,12 +1,31 @@
-- `Ap.check` call `check_by_infer` when `target.ap_handler?.check_by_target` is not implemented
+# fixed pi
 
-- fx-pi
+> implicit argument in check mode, be able to solve implicit arguments from return type
 
-```
-List.cons(head, almost.tail): List(E)
+- `fixed-pi/fixed-pi`
+- `fixed-pi/fixed-ap`
+- `fixed-pi/fixed-fn`
 
-List.cons: (fixed { E: Type }, head: E, tail: MyList(E)) -> MyList(E)
-```
+  ``` cicada
+  // Insert arguments in check mode:
+
+  List.cons: (fixed { E: Type }, head: E, tail: MyList(E)) -> MyList(E)
+
+  List.cons(head, almost.tail): List(E)
+  List.cons(fixed { E }, head, almost.tail): List(E)
+  ```
+
+- `Ap.check` call `check_by_infer` when `inferred.t` is `FixedPiValue`
+
+- an implicit function that only has implicit arguments can be used as value
+
+  - we do not have zero-arity function, we use `c` instead of `c()`
+
+- insert implicit function in data constructor
+
+  - examples: `nil`, `vecnil`
+
+- we can define a version of `list_ref` in `either.md` which use `fixed` keyword
 
 # inductive datatype
 
@@ -60,25 +79,6 @@ List.cons: (fixed { E: Type }, head: E, tail: MyList(E)) -> MyList(E)
   - support show in code block,
     to use `is(inl(x), Either(A, (A) -> B))`,
     instead of `_ = is(inl(x), Either(A, (A) -> B))`
-
-# implicit argument in check mode
-
-- maybe check mode implicit argument should be called "fixed",
-  which decorates on top of pi type, making it can not be used in infer mode.
-
-  - we should try this for data constructor first,
-    and then maybe extract it as a top level syntax.
-
-- be able to solve implicit arguments from return type
-
-  - an implicit function that only has implicit arguments can be used as value
-
-    - we do not have zero-arity function, we use `c` instead of `c()`
-
-  - insert implicit function in data constructor
-    - examples: `nil`, `vecnil`
-
-  - we can fix `either.md`'s `list_ref`
 
 # prelude
 

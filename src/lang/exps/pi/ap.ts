@@ -4,6 +4,7 @@ import { Ctx } from "../../ctx"
 import { evaluate } from "../../core"
 import { infer } from "../../exp"
 import { check } from "../../exp"
+import { check_by_infer } from "../../exp"
 import { Value } from "../../value"
 import { ExpTrace, InternalError } from "../../errors"
 import * as ut from "../../../ut"
@@ -34,6 +35,17 @@ export class Ap extends Exp {
       subst(this.arg, name, exp),
       this.meta
     )
+  }
+
+  check(ctx: Ctx, t: Value): Core {
+    const inferred = infer(ctx, this.target)
+    const target = evaluate(ctx.to_env(), inferred.core)
+
+    // if (inferred.t instanceof Exps.FixedPiValue) {
+    //   // TODO
+    // }
+
+    return check_by_infer(ctx, this, t)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
