@@ -8,6 +8,7 @@ import { ExpTrace } from "../../errors"
 import { expect } from "../../value"
 import * as Exps from "../../exps"
 import * as ut from "../../../ut"
+import { FnFormater } from "./fn-formater"
 
 export class Fn extends Exp {
   meta: ExpMeta
@@ -52,35 +53,9 @@ export class Fn extends Exp {
     return new Exps.FnCore(fresh_name, ret_core)
   }
 
+  fn_formater = new FnFormater(this)
+
   format(): string {
-    const args = this.fn_args_format().join(", ")
-    const ret = this.fn_ret_format()
-    return `(${args}) => { ${ret} }`
+    return this.fn_formater.format()
   }
-
-  fn_args_format(): Array<string> {
-    if (has_fn_args_format(this.ret)) {
-      return [this.name, ...this.ret.fn_args_format()]
-    } else {
-      return [this.name]
-    }
-  }
-
-  fn_ret_format(): string {
-    if (has_fn_ret_format(this.ret)) {
-      return this.ret.fn_ret_format()
-    } else {
-      return this.ret.format()
-    }
-  }
-}
-
-function has_fn_args_format(
-  exp: Exp
-): exp is Exp & { fn_args_format(): Array<string> } {
-  return (exp as any).fn_args_format instanceof Function
-}
-
-function has_fn_ret_format(exp: Exp): exp is Exp & { fn_ret_format(): string } {
-  return (exp as any).fn_ret_format instanceof Function
 }

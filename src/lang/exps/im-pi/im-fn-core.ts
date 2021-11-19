@@ -4,6 +4,7 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { Closure } from "../closure"
 import * as Exps from "../../exps"
+import { FnFormater } from "../pi/fn-formater"
 
 export class ImFnCore extends Core {
   field_name: string
@@ -21,6 +22,10 @@ export class ImFnCore extends Core {
     this.ret = ret
   }
 
+  get name(): string {
+    return this.field_name
+  }
+
   evaluate(env: Env): Value {
     return new Exps.ImFnValue(
       this.field_name,
@@ -28,31 +33,12 @@ export class ImFnCore extends Core {
     )
   }
 
-  im_fn_args_format(): Array<string> {
-    if (this.ret instanceof Exps.ImFnCore) {
-      return [this.field_name, ...this.ret.im_fn_args_format()]
-    } else {
-      return [this.field_name]
-    }
-  }
-
-  fn_args_format(): Array<string> {
-    const entries = this.im_fn_args_format().join(", ")
-    if (this.ret instanceof Exps.ImFnCore) {
-      return [`implicit { ${entries} }`, ...this.ret.fn_args_format().slice(1)]
-    } else {
-      return [`implicit { ${entries} }`, ...this.ret.fn_args_format()]
-    }
-  }
-
-  fn_ret_format(): string {
-    return this.ret.fn_ret_format()
-  }
+  fn_formater: FnFormater = new FnFormater(this, {
+    decorate_name: (name) => `implicit ${name}`,
+  })
 
   format(): string {
-    const args = this.fn_args_format().join(", ")
-    const ret = this.fn_ret_format()
-    return `(${args}) => { ${ret} }`
+    return this.fn_formater.format()
   }
 
   alpha_format(ctx: AlphaCtx): string {

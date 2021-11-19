@@ -4,6 +4,7 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { Closure } from "../closure"
 import * as Exps from "../../exps"
+import { FnFormater } from "./fn-formater"
 
 export class FnCore extends Core {
   name: string
@@ -19,42 +20,14 @@ export class FnCore extends Core {
     return new Exps.FnValue(new Closure(env, this.name, this.ret))
   }
 
+  fn_formater = new FnFormater(this)
+
   format(): string {
-    const args = this.fn_args_format().join(", ")
-    const ret = this.fn_ret_format()
-    return `(${args}) => { ${ret} }`
-  }
-
-  fn_args_format(): Array<string> {
-    if (has_fn_args_format(this.ret)) {
-      return [this.name, ...this.ret.fn_args_format()]
-    } else {
-      return [this.name]
-    }
-  }
-
-  fn_ret_format(): string {
-    if (has_fn_ret_format(this.ret)) {
-      return this.ret.fn_ret_format()
-    } else {
-      return this.ret.format()
-    }
+    return this.fn_formater.format()
   }
 
   alpha_format(ctx: AlphaCtx): string {
     const ret_format = this.ret.alpha_format(ctx.extend(this.name))
     return `(#) => { ${ret_format} }`
   }
-}
-
-function has_fn_args_format(
-  core: Core
-): core is Core & { fn_args_format(): Array<string> } {
-  return (core as any).fn_args_format instanceof Function
-}
-
-function has_fn_ret_format(
-  core: Core
-): core is Core & { fn_ret_format(): string } {
-  return (core as any).fn_ret_format instanceof Function
 }

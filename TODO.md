@@ -1,12 +1,11 @@
-
-
-# formaters
-
-- `fn-formater`
 - `sigma-formater`
 
+- `im-fn` -- fix `format`
+
 # syntax
-- change syntax of `im-pi` and `im-fn` -- do not use record syntax
+
+- change syntax of `im-pi` -- do not use record syntax
+- change syntax of `im-fn` -- do not use record syntax
 
 # im-ap
 
