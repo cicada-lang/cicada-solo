@@ -29,7 +29,6 @@
 
 - we can define a version of `list_ref` in `either.md` which use `fixed` keyword
 
-
 # inductive datatype -- DataCtor & Data
 
 - `DataCtorValue`
