@@ -465,17 +465,6 @@ export const args = {
   },
 }
 
-export const arg_implicit_entry = {
-  $grammar: {
-    "arg_implicit_entry:arg_implicit_entry": [
-      { name: "identifier" },
-      '":"',
-      { exp: "exp" },
-      { $ap: ["optional", '","'] },
-    ],
-  },
-}
-
 export const property = {
   $grammar: {
     "property:field_shorthand": [{ name: "identifier" }],

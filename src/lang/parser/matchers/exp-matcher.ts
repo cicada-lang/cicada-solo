@@ -597,18 +597,6 @@ export function args_matcher(tree: pt.Tree): Array<Exp> {
   })(tree)
 }
 
-export function arg_implicit_entry_matcher(tree: pt.Tree): {
-  name: string
-  exp: Exp
-} {
-  return pt.matcher({
-    "arg_implicit_entry:arg_implicit_entry": ({ name, exp }) => ({
-      name: pt.str(name),
-      exp: exp_matcher(exp),
-    }),
-  })(tree)
-}
-
 export function property_matcher(tree: pt.Tree): Exps.Prop {
   return pt.matcher<Exps.Prop>({
     "property:field_shorthand": ({ name }) =>
