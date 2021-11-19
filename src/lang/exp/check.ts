@@ -50,11 +50,12 @@ export function check_by_infer(
     const u_exp = readback(ctx, new Exps.TypeValue(), u)
     const t_exp = readback(ctx, new Exps.TypeValue(), t)
 
-    // DEBUG
-    // console.log("inferred:", u_exp.format())
-    // console.dir(u, { depth: 4 })
-    // console.log("expected:", t_exp.format())
-    // console.dir(t, { depth: 4 })
+    // { // DEBUG
+    //   console.log("inferred:", u_exp.format())
+    //   console.dir(u, { depth: 4 })
+    //   console.log("expected:", t_exp.format())
+    //   console.dir(t, { depth: 4 })
+    // }
 
     throw new ExpTrace(
       [
