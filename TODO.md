@@ -1,6 +1,9 @@
-# format
+# formaters
 
-- ap-format
+- `fn-formater`
+- `pi-formater`
+- `sigma-formater`
+- `cons-formater`
 
 # im-ap
 

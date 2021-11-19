@@ -6,6 +6,7 @@ import { Solution } from "../../solution"
 import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
+import { ApFormater } from "../pi/ap-formater"
 
 export class ImApCore extends Core {
   target: Core
@@ -21,28 +22,12 @@ export class ImApCore extends Core {
     return ImApCore.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
-  ap_args_format(): Array<string> {
-    const arg = `implicit ${this.arg.format()}`
-
-    if (has_ap_args_format(this.target)) {
-      return [...this.target.ap_args_format(), arg]
-    } else {
-      return [arg]
-    }
-  }
-
-  ap_target_format(): string {
-    if (has_ap_target_format(this.target)) {
-      return this.target.ap_target_format()
-    } else {
-      return this.target.format()
-    }
-  }
+  ap_formater = new ApFormater(this, {
+    decorate_arg: (arg) => `implicit ${arg}`,
+  })
 
   format(): string {
-    const target = this.ap_target_format()
-    const args = this.ap_args_format().join(", ")
-    return `${target}(${args})`
+    return this.ap_formater.format()
   }
 
   alpha_format(ctx: AlphaCtx): string {
@@ -70,16 +55,4 @@ export class ImApCore extends Core {
       })
     }
   }
-}
-
-function has_ap_args_format(
-  core: Core
-): core is Core & { ap_args_format(): Array<string> } {
-  return (core as any).ap_args_format instanceof Function
-}
-
-function has_ap_target_format(
-  core: Core
-): core is Core & { ap_target_format(): string } {
-  return (core as any).ap_target_format instanceof Function
 }

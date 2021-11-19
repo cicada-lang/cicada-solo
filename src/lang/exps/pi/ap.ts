@@ -9,6 +9,7 @@ import { Value } from "../../value"
 import { ExpTrace, InternalError } from "../../errors"
 import * as ut from "../../../ut"
 import * as Exps from "../../exps"
+import { ApFormater } from "./ap-formater"
 
 export class Ap extends Exp {
   meta: ExpMeta
@@ -85,37 +86,9 @@ export class Ap extends Exp {
     }
   }
 
+  ap_formater = new ApFormater(this)
+
   format(): string {
-    const target = this.ap_target_format()
-    const args = this.ap_args_format().join(", ")
-    return `${target}(${args})`
+    return this.ap_formater.format()
   }
-
-  ap_args_format(): Array<string> {
-    if (has_ap_args_format(this.target)) {
-      return [...this.target.ap_args_format(), this.arg.format()]
-    } else {
-      return [this.arg.format()]
-    }
-  }
-
-  ap_target_format(): string {
-    if (has_ap_target_format(this.target)) {
-      return this.target.ap_target_format()
-    } else {
-      return this.target.format()
-    }
-  }
-}
-
-function has_ap_args_format(
-  exp: Exp
-): exp is Exp & { ap_args_format(): Array<string> } {
-  return (exp as any).ap_args_format instanceof Function
-}
-
-function has_ap_target_format(
-  exp: Exp
-): exp is Exp & { ap_target_format(): string } {
-  return (exp as any).ap_target_format instanceof Function
 }
