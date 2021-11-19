@@ -73,8 +73,8 @@ export class BaseImPiValue extends Exps.ImPiValue {
     // {
     //   // DEBUG
     //   console.log("solving")
-    //   console.log("  this  pi arg_t:", readback(ctx, new Exps.TypeValue, ret_t.arg_t).repr())
-    //   console.log("  inferred arg.t:", readback(ctx, new Exps.TypeValue, inferred_arg.t).repr())
+    //   console.log("  this  pi arg_t:", readback(ctx, new Exps.TypeValue, ret_t.arg_t).format())
+    //   console.log("  inferred arg.t:", readback(ctx, new Exps.TypeValue, inferred_arg.t).format())
     //   console.log("  solved names:", solution.names)
     //   console.log()
     // }
@@ -106,7 +106,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
       // {
       //   // DEBUG
       //   const core = new Exps.ApCore(target, inferred_arg.core)
-      //   console.log("- im-ap insertion :", core.repr())
+      //   console.log("- im-ap insertion :", core.format())
       // }
     }
 
@@ -119,8 +119,8 @@ export class BaseImPiValue extends Exps.ImPiValue {
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
           `  this.field_name: ${this.field_name}`,
-          `  arg: ${arg.repr()}`,
-          `  target_core: ${target_core.repr()}`,
+          `  arg: ${arg.format()}`,
+          `  target_core: ${target_core.format()}`,
         ].join("\n")
       )
     }
@@ -129,7 +129,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
 
     // {
     //   // DEBUG
-    //   console.log("- inserting im-ap arg:", im_arg_core.repr())
+    //   console.log("- inserting im-ap arg:", im_arg_core.format())
     // }
 
     target = new Exps.ImApCore(target, im_arg_core)

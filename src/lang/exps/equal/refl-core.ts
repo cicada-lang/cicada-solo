@@ -9,11 +9,11 @@ export class ReflCore extends Core {
     return new Exps.ReflValue()
   }
 
-  repr(): string {
+  format(): string {
     return "refl"
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     return "refl"
   }
 }

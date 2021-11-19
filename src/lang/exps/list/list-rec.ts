@@ -72,8 +72,8 @@ export class ListRec extends Exp {
     }
   }
 
-  repr(): string {
-    return `list_rec(${this.target.repr()}, ${this.base.repr()}, ${this.step.repr()})`
+  format(): string {
+    return `list_rec(${this.target.format()}, ${this.base.format()}, ${this.step.format()})`
   }
 }
 

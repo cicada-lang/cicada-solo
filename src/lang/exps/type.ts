@@ -27,7 +27,7 @@ export class Type extends Exp {
     }
   }
 
-  repr(): string {
+  format(): string {
     return "Type"
   }
 }

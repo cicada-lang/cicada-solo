@@ -19,11 +19,11 @@ export class ConsCore extends Core {
     return new Exps.ConsValue(evaluate(env, this.car), evaluate(env, this.cdr))
   }
 
-  repr(): string {
-    return `[${this.car.repr()} | ${this.cdr.repr()}]`
+  format(): string {
+    return `[${this.car.format()} | ${this.cdr.format()}]`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    return `[${this.car.alpha_repr(ctx)} | ${this.cdr.alpha_repr(ctx)}]`
+  alpha_format(ctx: AlphaCtx): string {
+    return `[${this.car.alpha_format(ctx)} | ${this.cdr.alpha_format(ctx)}]`
   }
 }

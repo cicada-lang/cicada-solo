@@ -17,14 +17,14 @@ export class InrCore extends Core {
     return new Exps.InrValue(evaluate(env, this.right))
   }
 
-  repr(): string {
-    const args = [this.right.repr()].join(", ")
+  format(): string {
+    const args = [this.right.format()].join(", ")
 
     return `inr(${args})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    const args = [this.right.alpha_repr(ctx)].join(", ")
+  alpha_format(ctx: AlphaCtx): string {
+    const args = [this.right.alpha_format(ctx)].join(", ")
 
     return `inr(${args})`
   }

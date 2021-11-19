@@ -35,7 +35,7 @@ export class Car extends Exp {
     }
   }
 
-  repr(): string {
-    return `car(${this.target.repr()})`
+  format(): string {
+    return `car(${this.target.format()})`
   }
 }

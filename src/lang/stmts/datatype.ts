@@ -28,7 +28,7 @@ export class Datatype extends Stmt {
     return undefined
   }
 
-  repr(): string {
-    return this.datatype.repr()
+  format(): string {
+    return this.datatype.format()
   }
 }

@@ -50,7 +50,7 @@ export class Same extends Exp {
     return new Exps.ReflCore()
   }
 
-  repr(): string {
-    return `same(${this.exp.repr()})`
+  format(): string {
+    return `same(${this.exp.format()})`
   }
 }

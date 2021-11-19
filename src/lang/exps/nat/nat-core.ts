@@ -9,11 +9,11 @@ export class NatCore extends Core {
     return new Exps.NatValue()
   }
 
-  repr(): string {
+  format(): string {
     return "Nat"
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     return "Nat"
   }
 }

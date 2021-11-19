@@ -6,8 +6,8 @@ export abstract class Core {
   instanceofCore = true
 
   abstract evaluate(env: Env): Value
-  abstract repr(): string
-  abstract alpha_repr(ctx: AlphaCtx): string
+  abstract format(): string
+  abstract alpha_format(ctx: AlphaCtx): string
 }
 
 export class AlphaCtx {

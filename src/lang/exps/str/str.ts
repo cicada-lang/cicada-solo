@@ -28,7 +28,7 @@ export class Str extends Exp {
     }
   }
 
-  repr(): string {
+  format(): string {
     return "String"
   }
 }

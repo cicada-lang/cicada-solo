@@ -26,7 +26,7 @@ export class Show extends Stmt {
     })
   }
 
-  repr(): string {
-    return this.exp.repr()
+  format(): string {
+    return this.exp.format()
   }
 }

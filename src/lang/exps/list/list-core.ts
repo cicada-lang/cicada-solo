@@ -17,11 +17,11 @@ export class ListCore extends Core {
     return new Exps.ListValue(evaluate(env, this.elem_t))
   }
 
-  repr(): string {
-    return `List(${this.elem_t.repr()})`
+  format(): string {
+    return `List(${this.elem_t.format()})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    return `List(${this.elem_t.alpha_repr(ctx)})`
+  alpha_format(ctx: AlphaCtx): string {
+    return `List(${this.elem_t.alpha_format(ctx)})`
   }
 }

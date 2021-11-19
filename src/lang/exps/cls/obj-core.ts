@@ -24,16 +24,16 @@ export class ObjCore extends Core {
     return new Exps.ObjValue(properties)
   }
 
-  repr(): string {
+  format(): string {
     const s = Array.from(this.properties)
-      .map(([name, exp]) => `${name}: ${exp.repr()}`)
+      .map(([name, exp]) => `${name}: ${exp.format()}`)
       .join(", ")
     return `{ ${s} }`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     const s = Array.from(this.properties)
-      .map(([name, exp]) => `${name}: ${exp.alpha_repr(ctx)}`)
+      .map(([name, exp]) => `${name}: ${exp.alpha_format(ctx)}`)
       .join(", ")
     return `{ ${s} }`
   }

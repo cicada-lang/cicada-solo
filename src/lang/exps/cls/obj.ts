@@ -76,8 +76,8 @@ export class Obj extends Exp {
     )
   }
 
-  repr(): string {
-    const s = this.properties.map((prop) => prop.repr()).join(", ")
+  format(): string {
+    const s = this.properties.map((prop) => prop.format()).join(", ")
     return `{ ${s} }`
   }
 }
@@ -88,7 +88,7 @@ export abstract class Prop {
   abstract free_names(bound_names: Set<string>): Set<string>
   abstract solution(name: string, exp: Exp): Prop
   abstract to_entries(ctx: Ctx): Array<[string, Exp]>
-  abstract repr(): string
+  abstract format(): string
 }
 
 export class SpreadProp extends Prop {
@@ -126,8 +126,8 @@ export class SpreadProp extends Prop {
     )
   }
 
-  repr(): string {
-    return `...${this.exp.repr()}`
+  format(): string {
+    return `...${this.exp.format()}`
   }
 }
 
@@ -153,8 +153,8 @@ export class FieldProp extends Prop {
     return [[this.name, this.exp]]
   }
 
-  repr(): string {
-    return `${this.name}: ${this.exp.repr()}`
+  format(): string {
+    return `${this.name}: ${this.exp.format()}`
   }
 }
 
@@ -178,7 +178,7 @@ export class FieldShorthandProp extends Prop {
     return [[this.name, new Exps.Var(this.name)]]
   }
 
-  repr(): string {
+  format(): string {
     return `${this.name}`
   }
 }

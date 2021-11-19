@@ -48,7 +48,7 @@ export class AbsurdInd extends Exp {
     }
   }
 
-  repr(): string {
-    return `absurd_ind(${this.target.repr()}, ${this.motive.repr()})`
+  format(): string {
+    return `absurd_ind(${this.target.format()}, ${this.motive.format()})`
   }
 }

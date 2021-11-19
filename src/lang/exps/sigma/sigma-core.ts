@@ -23,44 +23,44 @@ export class SigmaCore extends Core {
     return new Exps.SigmaValue(car_t, new Closure(env, this.name, this.cdr_t))
   }
 
-  sigma_cars_repr(): Array<string> {
-    const entry = `${this.name}: ${this.car_t.repr()}`
+  sigma_cars_format(): Array<string> {
+    const entry = `${this.name}: ${this.car_t.format()}`
 
-    if (has_sigma_cars_repr(this.cdr_t)) {
-      return [entry, ...this.cdr_t.sigma_cars_repr()]
+    if (has_sigma_cars_format(this.cdr_t)) {
+      return [entry, ...this.cdr_t.sigma_cars_format()]
     } else {
       return [entry]
     }
   }
 
-  sigma_cdr_t_repr(): string {
-    if (has_sigma_cdr_t_repr(this.cdr_t)) {
-      return this.cdr_t.sigma_cdr_t_repr()
+  sigma_cdr_t_format(): string {
+    if (has_sigma_cdr_t_format(this.cdr_t)) {
+      return this.cdr_t.sigma_cdr_t_format()
     } else {
-      return this.cdr_t.repr()
+      return this.cdr_t.format()
     }
   }
 
-  repr(): string {
-    const cars = this.sigma_cars_repr().join(", ")
-    const cdr_t = this.sigma_cdr_t_repr()
+  format(): string {
+    const cars = this.sigma_cars_format().join(", ")
+    const cdr_t = this.sigma_cdr_t_format()
     return `[${cars} | ${cdr_t}]`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    const cdr_t_repr = this.cdr_t.alpha_repr(ctx.extend(this.name))
-    return `[${this.car_t.alpha_repr(ctx)} | ${cdr_t_repr}]`
+  alpha_format(ctx: AlphaCtx): string {
+    const cdr_t_format = this.cdr_t.alpha_format(ctx.extend(this.name))
+    return `[${this.car_t.alpha_format(ctx)} | ${cdr_t_format}]`
   }
 }
 
-function has_sigma_cars_repr(
+function has_sigma_cars_format(
   core: Core
-): core is Core & { sigma_cars_repr(): Array<string> } {
-  return (core as any).sigma_cars_repr instanceof Function
+): core is Core & { sigma_cars_format(): Array<string> } {
+  return (core as any).sigma_cars_format instanceof Function
 }
 
-function has_sigma_cdr_t_repr(
+function has_sigma_cdr_t_format(
   core: Core
-): core is Core & { sigma_cdr_t_repr(): string } {
-  return (core as any).sigma_cdr_t_repr instanceof Function
+): core is Core & { sigma_cdr_t_format(): string } {
+  return (core as any).sigma_cdr_t_format instanceof Function
 }

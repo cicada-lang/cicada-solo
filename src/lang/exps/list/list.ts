@@ -31,7 +31,7 @@ export class List extends Exp {
     }
   }
 
-  repr(): string {
-    return `List(${this.elem_t.repr()})`
+  format(): string {
+    return `List(${this.elem_t.format()})`
   }
 }

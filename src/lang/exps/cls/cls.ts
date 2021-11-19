@@ -9,7 +9,7 @@ import { Solution } from "../../solution"
 export abstract class Cls extends Exp {
   abstract meta: ExpMeta
   abstract field_names: Array<string>
-  abstract fields_repr(): Array<string>
+  abstract fields_format(): Array<string>
   abstract subst(name: string, exp: Exp): Cls
   abstract infer(ctx: Ctx): { t: Value; core: Core }
 }

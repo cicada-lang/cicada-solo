@@ -50,7 +50,7 @@ export class Equal extends Exp {
     }
   }
 
-  repr(): string {
-    return `Equal(${this.t.repr()}, ${this.from.repr()}, ${this.to.repr()})`
+  format(): string {
+    return `Equal(${this.t.format()}, ${this.from.format()}, ${this.to.format()})`
   }
 }

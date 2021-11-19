@@ -16,7 +16,7 @@ export function infer(
 
     throw new ExpTrace(
       [
-        `I can not infer the type of ${exp.repr()}.`,
+        `I can not infer the type of ${exp.format()}.`,
         `I suggest you add a type annotation to the expression.`,
       ].join("\n")
     )

@@ -64,7 +64,7 @@ export class Import extends Stmt {
     return undefined
   }
 
-  repr(): string {
+  format(): string {
     const entries = this.entries
       .map(({ name, alias }) => (alias ? `${name} as ${alias}` : name))
       .join(", ")

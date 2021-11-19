@@ -8,11 +8,11 @@ export class TypeCore extends Core {
     return new Exps.TypeValue()
   }
 
-  repr(): string {
+  format(): string {
     return "Type"
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     return "Type"
   }
 }

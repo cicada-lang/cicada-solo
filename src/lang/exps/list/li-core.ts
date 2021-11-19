@@ -19,11 +19,11 @@ export class LiCore extends Core {
     return new Exps.LiValue(evaluate(env, this.head), evaluate(env, this.tail))
   }
 
-  repr(): string {
-    return `li(${this.head.repr()}, ${this.tail.repr()})`
+  format(): string {
+    return `li(${this.head.format()}, ${this.tail.format()})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    return `li(${this.head.alpha_repr(ctx)}, ${this.tail.alpha_repr(ctx)})`
+  alpha_format(ctx: AlphaCtx): string {
+    return `li(${this.head.alpha_format(ctx)}, ${this.tail.alpha_format(ctx)})`
   }
 }

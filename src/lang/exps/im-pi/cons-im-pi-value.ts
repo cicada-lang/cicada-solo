@@ -88,8 +88,8 @@ export class ConsImPiValue extends Exps.ImPiValue {
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
           `  this.field_name: ${this.field_name}`,
-          `  arg: ${arg.repr()}`,
-          `  target_core: ${target_core.repr()}`,
+          `  arg: ${arg.format()}`,
+          `  target_core: ${target_core.format()}`,
         ].join("\n")
       )
     }

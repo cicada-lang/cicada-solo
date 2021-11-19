@@ -21,30 +21,30 @@ export class ApCore extends Core {
     return ApCore.apply(evaluate(env, this.target), evaluate(env, this.arg))
   }
 
-  ap_args_repr(): Array<string> {
-    if (has_ap_args_repr(this.target)) {
-      return [...this.target.ap_args_repr(), this.arg.repr()]
-    } else {
-      return [this.arg.repr()]
-    }
-  }
-
-  ap_target_repr(): string {
-    if (has_ap_target_repr(this.target)) {
-      return this.target.ap_target_repr()
-    } else {
-      return this.target.repr()
-    }
-  }
-
-  repr(): string {
-    const target = this.ap_target_repr()
-    const args = this.ap_args_repr().join(", ")
+  format(): string {
+    const target = this.ap_target_format()
+    const args = this.ap_args_format().join(", ")
     return `${target}(${args})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    return `${this.target.alpha_repr(ctx)}(${this.arg.alpha_repr(ctx)})`
+  ap_args_format(): Array<string> {
+    if (has_ap_args_format(this.target)) {
+      return [...this.target.ap_args_format(), this.arg.format()]
+    } else {
+      return [this.arg.format()]
+    }
+  }
+
+  ap_target_format(): string {
+    if (has_ap_target_format(this.target)) {
+      return this.target.ap_target_format()
+    } else {
+      return this.target.format()
+    }
+  }
+
+  alpha_format(ctx: AlphaCtx): string {
+    return `${this.target.alpha_format(ctx)}(${this.arg.alpha_format(ctx)})`
   }
 
   static apply(target: Value, arg: Value): Value {
@@ -72,14 +72,14 @@ export class ApCore extends Core {
   }
 }
 
-function has_ap_args_repr(
+function has_ap_args_format(
   core: Core
-): core is Core & { ap_args_repr(): Array<string> } {
-  return (core as any).ap_args_repr instanceof Function
+): core is Core & { ap_args_format(): Array<string> } {
+  return (core as any).ap_args_format instanceof Function
 }
 
-function has_ap_target_repr(
+function has_ap_target_format(
   core: Core
-): core is Core & { ap_target_repr(): string } {
-  return (core as any).ap_target_repr instanceof Function
+): core is Core & { ap_target_format(): string } {
+  return (core as any).ap_target_format instanceof Function
 }

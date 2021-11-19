@@ -22,12 +22,12 @@ export class VectorCore extends Core {
     )
   }
 
-  repr(): string {
-    return `Vector(${this.elem_t.repr()}, ${this.length.repr()})`
+  format(): string {
+    return `Vector(${this.elem_t.format()}, ${this.length.format()})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    return `Vector(${this.elem_t.alpha_repr(ctx)}, ${this.length.alpha_repr(
+  alpha_format(ctx: AlphaCtx): string {
+    return `Vector(${this.elem_t.alpha_format(ctx)}, ${this.length.alpha_format(
       ctx
     )})`
   }

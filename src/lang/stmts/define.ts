@@ -20,7 +20,7 @@ export class Define extends Stmt {
     return undefined
   }
 
-  repr(): string {
-    return `${this.name} = ${this.exp.repr()}`
+  format(): string {
+    return `${this.name} = ${this.exp.format()}`
   }
 }

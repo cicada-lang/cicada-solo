@@ -58,7 +58,7 @@ export class ParserTester {
   echo_stmts(text: string): void {
     const stmts = this.parser.parse_stmts(text)
     for (const stmt of stmts) {
-      console.log(stmt.repr())
+      console.log(stmt.format())
 
       if (stmt instanceof Stmts.Show) {
         console.error(pt.report(stmt.meta.span, text))
@@ -68,6 +68,6 @@ export class ParserTester {
 
   echo_exp(text: string): void {
     const exp = this.parser.parse_exp(text)
-    console.log(exp.repr())
+    console.log(exp.format())
   }
 }

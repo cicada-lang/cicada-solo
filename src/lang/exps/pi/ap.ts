@@ -40,7 +40,6 @@ export class Ap extends Exp {
   check(ctx: Ctx, t: Value): Core {
     const inferred = infer(ctx, this.target)
     const target = evaluate(ctx.to_env(), inferred.core)
-
     // if (inferred.t instanceof Exps.FixedPiValue) {
     //   // TODO
     // }
@@ -86,37 +85,37 @@ export class Ap extends Exp {
     }
   }
 
-  ap_args_repr(): Array<string> {
-    if (has_ap_args_repr(this.target)) {
-      return [...this.target.ap_args_repr(), this.arg.repr()]
-    } else {
-      return [this.arg.repr()]
-    }
-  }
-
-  ap_target_repr(): string {
-    if (has_ap_target_repr(this.target)) {
-      return this.target.ap_target_repr()
-    } else {
-      return this.target.repr()
-    }
-  }
-
-  repr(): string {
-    const target = this.ap_target_repr()
-    const args = this.ap_args_repr().join(", ")
+  format(): string {
+    const target = this.ap_target_format()
+    const args = this.ap_args_format().join(", ")
     return `${target}(${args})`
   }
+
+  ap_args_format(): Array<string> {
+    if (has_ap_args_format(this.target)) {
+      return [...this.target.ap_args_format(), this.arg.format()]
+    } else {
+      return [this.arg.format()]
+    }
+  }
+
+  ap_target_format(): string {
+    if (has_ap_target_format(this.target)) {
+      return this.target.ap_target_format()
+    } else {
+      return this.target.format()
+    }
+  }
 }
 
-function has_ap_args_repr(
+function has_ap_args_format(
   exp: Exp
-): exp is Exp & { ap_args_repr(): Array<string> } {
-  return (exp as any).ap_args_repr instanceof Function
+): exp is Exp & { ap_args_format(): Array<string> } {
+  return (exp as any).ap_args_format instanceof Function
 }
 
-function has_ap_target_repr(
+function has_ap_target_format(
   exp: Exp
-): exp is Exp & { ap_target_repr(): string } {
-  return (exp as any).ap_target_repr instanceof Function
+): exp is Exp & { ap_target_format(): string } {
+  return (exp as any).ap_target_format instanceof Function
 }

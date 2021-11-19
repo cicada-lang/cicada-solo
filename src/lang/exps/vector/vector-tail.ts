@@ -36,7 +36,7 @@ export class VectorTail extends Exp {
     }
   }
 
-  repr(): string {
-    return `vector_tail(${this.target.repr()})`
+  format(): string {
+    return `vector_tail(${this.target.format()})`
   }
 }

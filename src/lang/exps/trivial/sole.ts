@@ -28,7 +28,7 @@ export class Sole extends Exp {
     }
   }
 
-  repr(): string {
+  format(): string {
     return "sole"
   }
 }

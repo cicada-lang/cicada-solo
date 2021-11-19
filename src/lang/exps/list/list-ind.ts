@@ -72,12 +72,12 @@ export class ListInd extends Exp {
     }
   }
 
-  repr(): string {
+  format(): string {
     const args = [
-      this.target.repr(),
-      this.motive.repr(),
-      this.base.repr(),
-      this.step.repr(),
+      this.target.format(),
+      this.motive.format(),
+      this.base.format(),
+      this.step.format(),
     ].join(", ")
 
     return `list_ind(${args})`

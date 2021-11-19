@@ -24,14 +24,14 @@ export class AbsurdIndCore extends Core {
     )
   }
 
-  repr(): string {
-    return `absurd_ind(${this.target.repr()}, ${this.motive.repr()})`
+  format(): string {
+    return `absurd_ind(${this.target.format()}, ${this.motive.format()})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    return `absurd_ind(${this.target.alpha_repr(ctx)}, ${this.motive.alpha_repr(
+  alpha_format(ctx: AlphaCtx): string {
+    return `absurd_ind(${this.target.alpha_format(
       ctx
-    )})`
+    )}, ${this.motive.alpha_format(ctx)})`
   }
 
   static apply(target: Value, motive: Value): Value {

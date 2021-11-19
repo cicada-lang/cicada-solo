@@ -9,11 +9,11 @@ export class AbsurdCore extends Core {
     return new Exps.AbsurdValue()
   }
 
-  repr(): string {
+  format(): string {
     return "Absurd"
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     return "Absurd"
   }
 }

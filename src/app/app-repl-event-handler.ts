@@ -52,11 +52,11 @@ export class AppReplEventHandler extends ReplEventHandler {
       const outputs = await mod.runAll()
       for (const output of outputs) {
         if (output instanceof StmtOutputs.NormalTerm) {
-          const exp = output.exp.repr()
-          const t = output.t.repr()
+          const exp = output.exp.format()
+          const t = output.t.format()
           console.log(`${ut.colors.yellow(exp)}: ${ut.colors.blue(t)}`)
         } else {
-          console.log(output.repr().trim())
+          console.log(output.format().trim())
         }
       }
       return true

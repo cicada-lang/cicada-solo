@@ -66,18 +66,18 @@ export class ImFn extends Exp {
     return t.insert_im_fn(ctx, this.ret, this.names)
   }
 
-  fn_args_repr(): Array<string> {
+  fn_args_format(): Array<string> {
     const names = this.names.map(({ field_name }) => field_name).join(", ")
-    return [`implicit { ${names} }`, ...this.ret.fn_args_repr()]
+    return [`implicit { ${names} }`, ...this.ret.fn_args_format()]
   }
 
-  fn_ret_repr(): string {
-    return this.ret.fn_ret_repr()
+  fn_ret_format(): string {
+    return this.ret.fn_ret_format()
   }
 
-  repr(): string {
-    const args = this.fn_args_repr().join(", ")
-    const ret = this.fn_ret_repr()
+  format(): string {
+    const args = this.fn_args_format().join(", ")
+    const ret = this.fn_ret_format()
     return `(${args}) => { ${ret} }`
   }
 }

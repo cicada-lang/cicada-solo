@@ -15,19 +15,19 @@ export class NilClsCore extends Exps.ClsCore {
     return new Exps.NilClsValue()
   }
 
-  fields_repr(): Array<string> {
+  fields_format(): Array<string> {
     return []
   }
 
-  repr(): string {
+  format(): string {
     return `class {}`
   }
 
-  fields_alpha_repr(ctx: AlphaCtx): Array<string> {
+  fields_alpha_format(ctx: AlphaCtx): Array<string> {
     return []
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     return `class {}`
   }
 }

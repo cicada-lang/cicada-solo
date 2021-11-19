@@ -38,9 +38,9 @@ export class Ext extends Exp {
     )
   }
 
-  repr(): string {
-    const parent = this.parent.repr()
-    const fields = this.rest_t.fields_repr().join("\n")
+  format(): string {
+    const parent = this.parent.format()
+    const fields = this.rest_t.fields_format().join("\n")
     return `class extends ${parent} {\n${ut.indent(fields, "  ")}\n}`
   }
 

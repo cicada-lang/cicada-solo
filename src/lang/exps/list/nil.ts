@@ -27,7 +27,7 @@ export class Nil extends Exp {
     return new Exps.NilCore()
   }
 
-  repr(): string {
+  format(): string {
     return "nil"
   }
 }

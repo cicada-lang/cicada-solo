@@ -17,13 +17,15 @@ export class TheCore extends Core {
     return evaluate(env, this.exp)
   }
 
-  repr(): string {
-    const args = [this.t.repr(), this.exp.repr()].join(", ")
+  format(): string {
+    const args = [this.t.format(), this.exp.format()].join(", ")
     return `the(${args})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    const args = [this.t.alpha_repr(ctx), this.exp.alpha_repr(ctx)].join(", ")
+  alpha_format(ctx: AlphaCtx): string {
+    const args = [this.t.alpha_format(ctx), this.exp.alpha_format(ctx)].join(
+      ", "
+    )
     return `the(${args})`
   }
 }

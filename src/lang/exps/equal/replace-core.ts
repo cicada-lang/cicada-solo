@@ -28,21 +28,21 @@ export class ReplaceCore extends Core {
     )
   }
 
-  repr(): string {
+  format(): string {
     const args = [
-      this.target.repr(),
-      this.motive.repr(),
-      this.base.repr(),
+      this.target.format(),
+      this.motive.format(),
+      this.base.format(),
     ].join(", ")
 
     return `replace(${args})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     const args = [
-      this.target.alpha_repr(ctx),
-      this.motive.alpha_repr(ctx),
-      this.base.alpha_repr(ctx),
+      this.target.alpha_format(ctx),
+      this.motive.alpha_format(ctx),
+      this.base.alpha_format(ctx),
     ].join(", ")
 
     return `replace(${args})`

@@ -32,8 +32,8 @@ export class Inr extends Exp {
     return new Exps.InrCore(right_core)
   }
 
-  repr(): string {
-    const args = [this.right.repr()].join(", ")
+  format(): string {
+    const args = [this.right.format()].join(", ")
 
     return `inr(${args})`
   }

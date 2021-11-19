@@ -25,13 +25,13 @@ export class EqualCore extends Core {
     )
   }
 
-  repr(): string {
-    return `Equal(${this.t.repr()}, ${this.from.repr()}, ${this.to.repr()})`
+  format(): string {
+    return `Equal(${this.t.format()}, ${this.from.format()}, ${this.to.format()})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    return `Equal(${this.t.alpha_repr(ctx)}, ${this.from.alpha_repr(
+  alpha_format(ctx: AlphaCtx): string {
+    return `Equal(${this.t.alpha_format(ctx)}, ${this.from.alpha_format(
       ctx
-    )}, ${this.to.alpha_repr(ctx)})`
+    )}, ${this.to.alpha_format(ctx)})`
   }
 }

@@ -18,12 +18,12 @@ export class VectorTailCore extends Core {
     return VectorTailCore.apply(evaluate(env, this.target))
   }
 
-  repr(): string {
-    return `vector_tail(${this.target.repr()})`
+  format(): string {
+    return `vector_tail(${this.target.format()})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    return `vector_tail(${this.target.alpha_repr(ctx)})`
+  alpha_format(ctx: AlphaCtx): string {
+    return `vector_tail(${this.target.alpha_format(ctx)})`
   }
 
   static apply(target: Value): Value {

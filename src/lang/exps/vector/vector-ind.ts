@@ -101,13 +101,13 @@ export class VectorInd extends Exp {
     }
   }
 
-  repr(): string {
+  format(): string {
     const args = [
-      this.length.repr(),
-      this.target.repr(),
-      this.motive.repr(),
-      this.base.repr(),
-      this.step.repr(),
+      this.length.format(),
+      this.target.format(),
+      this.motive.format(),
+      this.base.format(),
+      this.step.format(),
     ].join(", ")
 
     return `vector_ind(${args})`

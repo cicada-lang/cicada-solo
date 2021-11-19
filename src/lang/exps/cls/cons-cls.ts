@@ -82,15 +82,15 @@ export class ConsCls extends Exps.Cls {
     }
   }
 
-  fields_repr(): Array<string> {
+  fields_format(): Array<string> {
     return [
-      `${this.field_name}: ${this.field_t.repr()}`,
-      ...this.rest_t.fields_repr(),
+      `${this.field_name}: ${this.field_t.format()}`,
+      ...this.rest_t.fields_format(),
     ]
   }
 
-  repr(): string {
-    const fields = this.fields_repr().join("\n")
+  format(): string {
+    const fields = this.fields_format().join("\n")
     return `class {\n${ut.indent(fields, "  ")}\n}`
   }
 

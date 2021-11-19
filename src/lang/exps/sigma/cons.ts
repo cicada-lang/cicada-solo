@@ -43,7 +43,7 @@ export class Cons extends Exp {
     return new Exps.ConsCore(car_core, cdr_core)
   }
 
-  repr(): string {
-    return `[${this.car.repr()} | ${this.cdr.repr()}]`
+  format(): string {
+    return `[${this.car.format()} | ${this.cdr.format()}]`
   }
 }

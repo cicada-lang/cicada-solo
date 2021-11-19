@@ -9,11 +9,11 @@ export class TrivialCore extends Core {
     return new Exps.TrivialValue()
   }
 
-  repr(): string {
+  format(): string {
     return "Trivial"
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     return "Trivial"
   }
 }

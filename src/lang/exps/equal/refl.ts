@@ -34,7 +34,7 @@ export class Refl extends Exp {
     return new Exps.ReflCore()
   }
 
-  repr(): string {
+  format(): string {
     return "refl"
   }
 }

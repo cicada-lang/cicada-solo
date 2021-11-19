@@ -76,8 +76,8 @@ export class SameAsChart extends Exp {
     }
   }
 
-  repr(): string {
-    const exps = this.exps.map((exp) => exp.repr()).join(", ")
-    return `same_as_chart! ${this.t.repr()} [ ${exps} ]`
+  format(): string {
+    const exps = this.exps.map((exp) => exp.format()).join(", ")
+    return `same_as_chart! ${this.t.format()} [ ${exps} ]`
   }
 }

@@ -16,11 +16,11 @@ export class QuoteCore extends Core {
     return new Exps.QuoteValue(this.str)
   }
 
-  repr(): string {
+  format(): string {
     return `"${this.str}"`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     return `"${this.str}"`
   }
 }

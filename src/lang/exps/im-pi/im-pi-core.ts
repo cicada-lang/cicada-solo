@@ -41,41 +41,41 @@ export class ImPiCore extends Core {
     }
   }
 
-  im_pi_args_repr(): Array<string> {
+  im_pi_args_format(): Array<string> {
     if (this.ret_t instanceof Exps.PiCore) {
-      return [`${this.field_name}: ${this.arg_t.repr()}`]
+      return [`${this.field_name}: ${this.arg_t.format()}`]
     } else {
       return [
-        `${this.field_name}: ${this.arg_t.repr()}`,
-        ...this.ret_t.im_pi_args_repr(),
+        `${this.field_name}: ${this.arg_t.format()}`,
+        ...this.ret_t.im_pi_args_format(),
       ]
     }
   }
 
-  pi_args_repr(): Array<string> {
+  pi_args_format(): Array<string> {
     if (this.ret_t instanceof Exps.PiCore) {
-      const entry = `implicit { ${this.im_pi_args_repr().join(", ")} }`
-      return [entry, ...this.ret_t.pi_args_repr()]
+      const entry = `implicit { ${this.im_pi_args_format().join(", ")} }`
+      return [entry, ...this.ret_t.pi_args_format()]
     } else {
-      const entry = `implicit { ${this.im_pi_args_repr().join(", ")} }`
+      const entry = `implicit { ${this.im_pi_args_format().join(", ")} }`
       // NOTE replace the head of the `entries`.
-      return [entry, ...this.ret_t.pi_args_repr().slice(1)]
+      return [entry, ...this.ret_t.pi_args_format().slice(1)]
     }
   }
 
-  pi_ret_t_repr(): string {
-    return this.ret_t.pi_ret_t_repr()
+  pi_ret_t_format(): string {
+    return this.ret_t.pi_ret_t_format()
   }
 
-  repr(): string {
-    const args = this.pi_args_repr().join(", ")
-    const ret_t = this.pi_ret_t_repr()
+  format(): string {
+    const args = this.pi_args_format().join(", ")
+    const ret_t = this.pi_ret_t_format()
     return `(${args}) -> ${ret_t}`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    const arg_t_repr = this.arg_t.alpha_repr(ctx)
-    const pi_repr = this.ret_t.alpha_repr(ctx.extend(this.local_name))
-    return `(implicit ${arg_t_repr}) -> ${pi_repr}`
+  alpha_format(ctx: AlphaCtx): string {
+    const arg_t_format = this.arg_t.alpha_format(ctx)
+    const pi_format = this.ret_t.alpha_format(ctx.extend(this.local_name))
+    return `(implicit ${arg_t_format}) -> ${pi_format}`
   }
 }

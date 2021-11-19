@@ -1,4 +1,4 @@
 export abstract class StmtOutput {
-  abstract repr(): string
+  abstract format(): string
   abstract formatForConsole(): string
 }

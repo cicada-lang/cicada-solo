@@ -28,35 +28,35 @@ export class ImFnCore extends Core {
     )
   }
 
-  im_fn_args_repr(): Array<string> {
+  im_fn_args_format(): Array<string> {
     if (this.ret instanceof Exps.ImFnCore) {
-      return [this.field_name, ...this.ret.im_fn_args_repr()]
+      return [this.field_name, ...this.ret.im_fn_args_format()]
     } else {
       return [this.field_name]
     }
   }
 
-  fn_args_repr(): Array<string> {
-    const entries = this.im_fn_args_repr().join(", ")
+  fn_args_format(): Array<string> {
+    const entries = this.im_fn_args_format().join(", ")
     if (this.ret instanceof Exps.ImFnCore) {
-      return [`implicit { ${entries} }`, ...this.ret.fn_args_repr().slice(1)]
+      return [`implicit { ${entries} }`, ...this.ret.fn_args_format().slice(1)]
     } else {
-      return [`implicit { ${entries} }`, ...this.ret.fn_args_repr()]
+      return [`implicit { ${entries} }`, ...this.ret.fn_args_format()]
     }
   }
 
-  fn_ret_repr(): string {
-    return this.ret.fn_ret_repr()
+  fn_ret_format(): string {
+    return this.ret.fn_ret_format()
   }
 
-  repr(): string {
-    const args = this.fn_args_repr().join(", ")
-    const ret = this.fn_ret_repr()
+  format(): string {
+    const args = this.fn_args_format().join(", ")
+    const ret = this.fn_ret_format()
     return `(${args}) => { ${ret} }`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    const fn_repr = this.ret.alpha_repr(ctx.extend(this.local_name))
-    return `(implicit ${this.field_name}) => { ${fn_repr} }`
+  alpha_format(ctx: AlphaCtx): string {
+    const fn_format = this.ret.alpha_format(ctx.extend(this.local_name))
+    return `(implicit ${this.field_name}) => { ${fn_format} }`
   }
 }

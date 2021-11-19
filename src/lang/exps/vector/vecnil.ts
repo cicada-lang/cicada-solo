@@ -28,7 +28,7 @@ export class Vecnil extends Exp {
     return new Exps.VecnilCore()
   }
 
-  repr(): string {
+  format(): string {
     return "vecnil"
   }
 }

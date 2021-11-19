@@ -28,7 +28,7 @@ export class Trivial extends Exp {
     }
   }
 
-  repr(): string {
+  format(): string {
     return "Trivial"
   }
 }

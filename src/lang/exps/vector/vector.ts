@@ -43,7 +43,7 @@ export class Vector extends Exp {
     }
   }
 
-  repr(): string {
-    return `Vector(${this.elem_t.repr()}, ${this.length.repr()})`
+  format(): string {
+    return `Vector(${this.elem_t.format()}, ${this.length.format()})`
   }
 }

@@ -35,23 +35,23 @@ export class EitherIndCore extends Core {
     )
   }
 
-  repr(): string {
+  format(): string {
     const args = [
-      this.target.repr(),
-      this.motive.repr(),
-      this.base_left.repr(),
-      this.base_right.repr(),
+      this.target.format(),
+      this.motive.format(),
+      this.base_left.format(),
+      this.base_right.format(),
     ].join(", ")
 
     return `either_ind(${args})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     const args = [
-      this.target.alpha_repr(ctx),
-      this.motive.alpha_repr(ctx),
-      this.base_left.alpha_repr(ctx),
-      this.base_right.alpha_repr(ctx),
+      this.target.alpha_format(ctx),
+      this.motive.alpha_format(ctx),
+      this.base_left.alpha_format(ctx),
+      this.base_right.alpha_format(ctx),
     ].join(", ")
 
     return `either_ind(${args})`

@@ -21,7 +21,7 @@ export class Class extends Stmt {
     return undefined
   }
 
-  repr(): string {
-    return `${this.name} = ${this.cls.repr()}`
+  format(): string {
+    return `${this.name} = ${this.cls.format()}`
   }
 }

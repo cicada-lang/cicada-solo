@@ -16,7 +16,7 @@ export abstract class Exp {
 
   abstract free_names(bound_names: Set<string>): Set<string>
   abstract subst(name: string, exp: Exp): Exp
-  abstract repr(): string
+  abstract format(): string
 
   check?(ctx: Ctx, t: Value, opts?: ElaborationOptions): Core
   infer?(ctx: Ctx, opts?: ElaborationOptions): { t: Value; core: Core }

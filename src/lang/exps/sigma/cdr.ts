@@ -38,7 +38,7 @@ export class Cdr extends Exp {
     }
   }
 
-  repr(): string {
-    return `cdr(${this.target.repr()})`
+  format(): string {
+    return `cdr(${this.target.format()})`
   }
 }

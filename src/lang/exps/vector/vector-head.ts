@@ -36,7 +36,7 @@ export class VectorHead extends Exp {
     }
   }
 
-  repr(): string {
-    return `vector_head(${this.target.repr()})`
+  format(): string {
+    return `vector_head(${this.target.format()})`
   }
 }

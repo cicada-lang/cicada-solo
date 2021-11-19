@@ -1,4 +1,10 @@
-- `im-ap` -- `repr`
+# format
+
+- ap-format
+
+# im-ap
+
+- `im-ap` -- `format`
 - `im-ap` -- `infer`
 - [syntax] `im-ap` -- `f(implicit g(x), a, b)`
 

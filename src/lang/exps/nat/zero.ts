@@ -33,7 +33,7 @@ export class Zero extends Exp {
     }
   }
 
-  repr(): string {
+  format(): string {
     return "0"
   }
 }

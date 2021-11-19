@@ -9,11 +9,11 @@ export class VecnilCore extends Core {
     return new Exps.VecnilValue()
   }
 
-  repr(): string {
+  format(): string {
     return "vecnil"
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     return "vecnil"
   }
 }

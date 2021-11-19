@@ -68,36 +68,38 @@ export class Pi extends Exp {
     }
   }
 
-  pi_args_repr(): Array<string> {
-    const entry = `${this.name}: ${this.arg_t.repr()}`
-    if (has_pi_args_repr(this.ret_t)) {
-      return [entry, ...this.ret_t.pi_args_repr()]
+  pi_args_format(): Array<string> {
+    const entry = `${this.name}: ${this.arg_t.format()}`
+    if (has_pi_args_format(this.ret_t)) {
+      return [entry, ...this.ret_t.pi_args_format()]
     } else {
       return [entry]
     }
   }
 
-  pi_ret_t_repr(): string {
-    if (has_pi_ret_t_repr(this.ret_t)) {
-      return this.ret_t.pi_ret_t_repr()
+  pi_ret_t_format(): string {
+    if (has_pi_ret_t_format(this.ret_t)) {
+      return this.ret_t.pi_ret_t_format()
     } else {
-      return this.ret_t.repr()
+      return this.ret_t.format()
     }
   }
 
-  repr(): string {
-    const args = this.pi_args_repr().join(", ")
-    const ret_t = this.pi_ret_t_repr()
+  format(): string {
+    const args = this.pi_args_format().join(", ")
+    const ret_t = this.pi_ret_t_format()
     return `(${args}) -> ${ret_t}`
   }
 }
 
-function has_pi_args_repr(
+function has_pi_args_format(
   exp: Exp
-): exp is Exp & { pi_args_repr(): Array<string> } {
-  return (exp as any).pi_args_repr instanceof Function
+): exp is Exp & { pi_args_format(): Array<string> } {
+  return (exp as any).pi_args_format instanceof Function
 }
 
-function has_pi_ret_t_repr(exp: Exp): exp is Exp & { pi_ret_t_repr(): string } {
-  return (exp as any).pi_ret_t_repr instanceof Function
+function has_pi_ret_t_format(
+  exp: Exp
+): exp is Exp & { pi_ret_t_format(): string } {
+  return (exp as any).pi_ret_t_format instanceof Function
 }

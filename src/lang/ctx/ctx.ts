@@ -97,16 +97,16 @@ export abstract class Ctx {
   assert_not_redefine(name: string, t: Value, value?: Value): void {
     const old_t = this.find_type(name)
     if (old_t) {
-      const old_t_repr = readback(this, new Exps.TypeValue(), old_t).repr()
-      const t_repr = readback(this, new Exps.TypeValue(), t).repr()
+      const old_t_format = readback(this, new Exps.TypeValue(), old_t).format()
+      const t_format = readback(this, new Exps.TypeValue(), t).format()
       throw new ExpTrace(
         [
           `I can not redefine name:`,
           `  ${name}`,
           `to a value of type:`,
-          `  ${old_t_repr}`,
+          `  ${old_t_format}`,
           `It is already define to a value of type:`,
-          `  ${t_repr}`,
+          `  ${t_format}`,
         ].join("\n")
       )
     }

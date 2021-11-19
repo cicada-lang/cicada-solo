@@ -20,12 +20,12 @@ export class DotCore extends Core {
     return Exps.DotCore.apply(evaluate(env, this.target), this.name)
   }
 
-  repr(): string {
-    return `${this.target.repr()}.${this.name}`
+  format(): string {
+    return `${this.target.format()}.${this.name}`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    return `${this.target.alpha_repr(ctx)}.${this.name}`
+  alpha_format(ctx: AlphaCtx): string {
+    return `${this.target.alpha_format(ctx)}.${this.name}`
   }
 
   static apply(target: Value, name: string): Value {

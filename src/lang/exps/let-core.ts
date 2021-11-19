@@ -20,13 +20,13 @@ export class LetCore extends Core {
     return evaluate(env.extend(this.name, value), this.ret)
   }
 
-  repr(): string {
-    return `${this.name} = ${this.exp.repr()}; ${this.ret.repr()}`
+  format(): string {
+    return `${this.name} = ${this.exp.format()}; ${this.ret.format()}`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    const exp_repr = this.exp.alpha_repr(ctx)
-    const ret_repr = this.ret.alpha_repr(ctx.extend(this.name))
-    return `${this.name} = ${exp_repr}; ${ret_repr}`
+  alpha_format(ctx: AlphaCtx): string {
+    const exp_format = this.exp.alpha_format(ctx)
+    const ret_format = this.ret.alpha_format(ctx.extend(this.name))
+    return `${this.name} = ${exp_format}; ${ret_format}`
   }
 }

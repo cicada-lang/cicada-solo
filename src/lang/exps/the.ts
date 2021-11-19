@@ -40,8 +40,8 @@ export class The extends Exp {
     return { t, core }
   }
 
-  repr(): string {
-    const args = [this.t.repr(), this.exp.repr()].join(", ")
+  format(): string {
+    const args = [this.t.format(), this.exp.format()].join(", ")
     return `the(${args})`
   }
 }

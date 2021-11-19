@@ -24,17 +24,17 @@ export function check(
         const t_exp = readback(ctx, new Exps.TypeValue(), t)
 
         // DEBUG
-        // console.log("inferred:", u_exp.repr())
+        // console.log("inferred:", u_exp.format())
         // console.dir(u, { depth: 4 })
-        // console.log("expected:", t_exp.repr())
+        // console.log("expected:", t_exp.format())
         // console.dir(t, { depth: 4 })
 
         throw new ExpTrace(
           [
             `I infer the type to be:`,
-            `  ${u_exp.repr()}`,
+            `  ${u_exp.format()}`,
             `But the expected type is:`,
-            `  ${t_exp.repr()}`,
+            `  ${t_exp.format()}`,
           ].join("\n")
         )
       }
@@ -44,7 +44,7 @@ export function check(
       throw new ExpTrace(
         [
           `I can not check the type of:`,
-          `  ${exp.repr()}`,
+          `  ${exp.format()}`,
           `I also can not check it by infer.`,
           `I suggest you add a type annotation to the expression.`,
         ].join("\n")
@@ -71,17 +71,17 @@ export function check_by_infer(
     const t_exp = readback(ctx, new Exps.TypeValue(), t)
 
     // DEBUG
-    // console.log("inferred:", u_exp.repr())
+    // console.log("inferred:", u_exp.format())
     // console.dir(u, { depth: 4 })
-    // console.log("expected:", t_exp.repr())
+    // console.log("expected:", t_exp.format())
     // console.dir(t, { depth: 4 })
 
     throw new ExpTrace(
       [
         `I infer the type to be:`,
-        `  ${u_exp.repr()}`,
+        `  ${u_exp.format()}`,
         `But the expected type is:`,
-        `  ${t_exp.repr()}`,
+        `  ${t_exp.format()}`,
       ].join("\n")
     )
   }

@@ -18,11 +18,11 @@ export class TodoCore extends Core {
     return new Exps.NotYetValue(this.t, new TodoNeutral(this.note, this.t))
   }
 
-  repr(): string {
-    return `@TODO ${new QuoteCore(this.note).repr()}`
+  format(): string {
+    return `@TODO ${new QuoteCore(this.note).format()}`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    return this.repr()
+  alpha_format(ctx: AlphaCtx): string {
+    return this.format()
   }
 }

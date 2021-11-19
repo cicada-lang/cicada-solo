@@ -18,12 +18,12 @@ export class CdrCore extends Core {
     return CdrCore.apply(evaluate(env, this.target))
   }
 
-  repr(): string {
-    return `cdr(${this.target.repr()})`
+  format(): string {
+    return `cdr(${this.target.format()})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    return `cdr(${this.target.alpha_repr(ctx)})`
+  alpha_format(ctx: AlphaCtx): string {
+    return `cdr(${this.target.alpha_format(ctx)})`
   }
 
   static apply(target: Value): Value {

@@ -81,12 +81,12 @@ export class EitherInd extends Exp {
     }
   }
 
-  repr(): string {
+  format(): string {
     const args = [
-      this.target.repr(),
-      this.motive.repr(),
-      this.base_left.repr(),
-      this.base_right.repr(),
+      this.target.format(),
+      this.motive.format(),
+      this.base_left.format(),
+      this.base_right.format(),
     ].join(", ")
 
     return `either_ind(${args})`

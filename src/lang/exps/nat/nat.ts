@@ -33,7 +33,7 @@ export class Nat extends Exp {
     }
   }
 
-  repr(): string {
+  format(): string {
     return "Nat"
   }
 }

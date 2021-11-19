@@ -13,9 +13,9 @@ export function conversion(ctx: Ctx, t: Value, x: Value, y: Value): boolean {
 function alpha_equivalent(ctx: Ctx, x: Core, y: Core): boolean {
   const names = ctx.names
   const alpha_ctx = new AlphaCtx()
-  const x_repr = x.alpha_repr(alpha_ctx)
-  const y_repr = y.alpha_repr(alpha_ctx)
-  return x_repr === y_repr
+  const x_format = x.alpha_format(alpha_ctx)
+  const y_format = y.alpha_format(alpha_ctx)
+  return x_format === y_format
 }
 
 export function check_conversion(
@@ -31,20 +31,20 @@ export function check_conversion(
   }
 ): void {
   if (!conversion(ctx, t, from, to)) {
-    const t_repr = readback(ctx, new Exps.TypeValue(), t).repr()
-    const from_repr = readback(ctx, t, from).repr()
+    const t_format = readback(ctx, new Exps.TypeValue(), t).format()
+    const from_format = readback(ctx, t, from).format()
     const from_description = opts.description?.from || ""
-    const to_repr = readback(ctx, t, to).repr()
+    const to_format = readback(ctx, t, to).format()
     const to_description = opts.description?.to || ""
     throw new ExpTrace(
       [
-        `I am expecting the following two values to be the same ${t_repr}.`,
+        `I am expecting the following two values to be the same ${t_format}.`,
         `But they are not.`,
         ``,
         `from ${from_description}:`,
-        `  ${from_repr}`,
+        `  ${from_format}`,
         `to ${to_description}:`,
-        `  ${to_repr}`,
+        `  ${to_format}`,
       ].join("\n")
     )
   }

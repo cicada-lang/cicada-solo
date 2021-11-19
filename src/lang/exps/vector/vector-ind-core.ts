@@ -40,25 +40,25 @@ export class VectorIndCore extends Core {
     )
   }
 
-  repr(): string {
+  format(): string {
     const args = [
-      this.length.repr(),
-      this.target.repr(),
-      this.motive.repr(),
-      this.base.repr(),
-      this.step.repr(),
+      this.length.format(),
+      this.target.format(),
+      this.motive.format(),
+      this.base.format(),
+      this.step.format(),
     ].join(", ")
 
     return `vector_ind(${args})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     const args = [
-      this.length.alpha_repr(ctx),
-      this.target.alpha_repr(ctx),
-      this.motive.alpha_repr(ctx),
-      this.base.alpha_repr(ctx),
-      this.step.alpha_repr(ctx),
+      this.length.alpha_format(ctx),
+      this.target.alpha_format(ctx),
+      this.motive.alpha_format(ctx),
+      this.base.alpha_format(ctx),
+      this.step.alpha_format(ctx),
     ].join(", ")
 
     return `vector_ind(${args})`

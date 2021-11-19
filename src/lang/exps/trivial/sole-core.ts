@@ -9,11 +9,11 @@ export class SoleCore extends Core {
     return new Exps.SoleValue()
   }
 
-  repr(): string {
+  format(): string {
     return "sole"
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     return "sole"
   }
 }

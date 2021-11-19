@@ -62,7 +62,7 @@ export class Replace extends Exp {
     }
   }
 
-  repr(): string {
-    return `replace(${this.target.repr()}, ${this.motive.repr()}, ${this.base.repr()})`
+  format(): string {
+    return `replace(${this.target.format()}, ${this.motive.format()}, ${this.base.format()})`
   }
 }

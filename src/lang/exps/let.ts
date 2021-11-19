@@ -67,7 +67,7 @@ export class Let extends Exp {
     return new Exps.LetCore(fresh_name, inferred.core, ret_core)
   }
 
-  repr(): string {
-    return `${this.name} = ${this.exp.repr()}; ${this.ret.repr()}`
+  format(): string {
+    return `${this.name} = ${this.exp.format()}; ${this.ret.format()}`
   }
 }

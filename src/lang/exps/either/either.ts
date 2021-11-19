@@ -43,8 +43,8 @@ export class Either extends Exp {
     }
   }
 
-  repr(): string {
-    const args = [this.left_t.repr(), this.right_t.repr()].join(", ")
+  format(): string {
+    const args = [this.left_t.format(), this.right_t.format()].join(", ")
 
     return `Either(${args})`
   }

@@ -40,7 +40,7 @@ export class ImAp extends Exp {
     throw new Error("TODO")
   }
 
-  repr(): string {
+  format(): string {
     throw new Error("TODO")
   }
 }

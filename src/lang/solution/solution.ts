@@ -130,14 +130,14 @@ export abstract class Solution {
     const solution = this.unify(ctx, t, left, right)
 
     if (Solution.failure_p(solution)) {
-      const left_repr = readback(ctx, new Exps.TypeValue(), left).repr()
-      const right_repr = readback(ctx, new Exps.TypeValue(), right).repr()
+      const left_format = readback(ctx, new Exps.TypeValue(), left).format()
+      const right_format = readback(ctx, new Exps.TypeValue(), right).format()
 
       throw new ExpTrace(
         [
           `Unification fail`,
-          `  left  : ${left_repr}`,
-          `  right : ${right_repr}`,
+          `  left  : ${left_format}`,
+          `  right : ${right_format}`,
         ].join("\n")
       )
     }

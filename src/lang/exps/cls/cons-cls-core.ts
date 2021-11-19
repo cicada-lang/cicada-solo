@@ -45,27 +45,27 @@ export class ConsClsCore extends Exps.ClsCore {
     )
   }
 
-  fields_repr(): Array<string> {
+  fields_format(): Array<string> {
     return [
-      `${this.field_name}: ${this.field_t.repr()}`,
-      ...this.rest_t.fields_repr(),
+      `${this.field_name}: ${this.field_t.format()}`,
+      ...this.rest_t.fields_format(),
     ]
   }
 
-  repr(): string {
-    const fields = this.fields_repr().join("\n")
+  format(): string {
+    const fields = this.fields_format().join("\n")
     return `class {\n${ut.indent(fields, "  ")}\n}`
   }
 
-  fields_alpha_repr(ctx: AlphaCtx): Array<string> {
+  fields_alpha_format(ctx: AlphaCtx): Array<string> {
     return [
-      `${this.field_name}: ${this.field_t.alpha_repr(ctx)}`,
-      ...this.rest_t.fields_alpha_repr(ctx.extend(this.local_name)),
+      `${this.field_name}: ${this.field_t.alpha_format(ctx)}`,
+      ...this.rest_t.fields_alpha_format(ctx.extend(this.local_name)),
     ]
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    const fields = this.fields_alpha_repr(ctx).join("\n")
+  alpha_format(ctx: AlphaCtx): string {
+    const fields = this.fields_alpha_format(ctx).join("\n")
     return `class {\n${ut.indent(fields, "  ")}\n}`
   }
 }

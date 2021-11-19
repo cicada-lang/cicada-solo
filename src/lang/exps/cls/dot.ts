@@ -57,7 +57,7 @@ export class Dot extends Exp {
     )
   }
 
-  repr(): string {
-    return `${this.target.repr()}.${this.name}`
+  format(): string {
+    return `${this.target.format()}.${this.name}`
   }
 }

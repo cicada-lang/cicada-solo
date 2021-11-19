@@ -45,7 +45,7 @@ export class Li extends Exp {
     }
   }
 
-  repr(): string {
-    return `li(${this.head.repr()}, ${this.tail.repr()})`
+  format(): string {
+    return `li(${this.head.format()}, ${this.tail.format()})`
   }
 }

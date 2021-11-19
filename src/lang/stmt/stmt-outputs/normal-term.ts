@@ -12,13 +12,13 @@ export class NormalTerm extends StmtOutput {
     this.t = opts.t
   }
 
-  repr(): string {
-    return `${this.exp.repr()}: ${this.t.repr()}`
+  format(): string {
+    return `${this.exp.format()}: ${this.t.format()}`
   }
 
   formatForConsole(): string {
-    const exp_repr = ut.colors.yellow(this.exp.repr())
-    const t_repr = ut.colors.blue(this.t.repr())
-    return `${exp_repr}: ${t_repr}`
+    const exp_format = ut.colors.yellow(this.exp.format())
+    const t_format = ut.colors.blue(this.t.format())
+    return `${exp_format}: ${t_format}`
   }
 }

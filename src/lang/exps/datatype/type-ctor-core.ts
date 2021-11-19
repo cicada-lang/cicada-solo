@@ -35,26 +35,26 @@ export class TypeCtorCore extends Core {
     )
   }
 
-  repr(): string {
+  format(): string {
     return this.name
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
-    const p = this.fixed_alpha_repr(ctx)
-    const i = this.indexes_alpha_repr(ctx)
+  alpha_format(ctx: AlphaCtx): string {
+    const p = this.fixed_alpha_format(ctx)
+    const i = this.indexes_alpha_format(ctx)
     // NOTE structural typing (do not print `name`)
     const head = `datatype # ${p}${i}`
-    const c = this.ctors_alpha_repr(ctx.extend(this.name))
+    const c = this.ctors_alpha_format(ctx.extend(this.name))
     const body = ut.indent(c, "  ")
     return `${head}{\n${body}\n}`
   }
 
-  private fixed_alpha_repr(ctx: AlphaCtx): string {
+  private fixed_alpha_format(ctx: AlphaCtx): string {
     if (Object.entries(this.fixed).length > 0) {
       return (
         "(" +
         Object.entries(this.fixed)
-          .map(([name, t]) => `${name}: ${t.alpha_repr(ctx)}`)
+          .map(([name, t]) => `${name}: ${t.alpha_format(ctx)}`)
           .join(", ") +
         ") "
       )
@@ -65,12 +65,12 @@ export class TypeCtorCore extends Core {
     }
   }
 
-  private indexes_alpha_repr(ctx: AlphaCtx): string {
+  private indexes_alpha_format(ctx: AlphaCtx): string {
     if (Object.entries(this.indexes).length > 0) {
       return (
         "(" +
         Object.entries(this.indexes)
-          .map(([name, t]) => `${name}: ${t.alpha_repr(ctx)}`)
+          .map(([name, t]) => `${name}: ${t.alpha_format(ctx)}`)
           .join(", ") +
         ") "
       )
@@ -79,9 +79,9 @@ export class TypeCtorCore extends Core {
     }
   }
 
-  private ctors_alpha_repr(ctx: AlphaCtx): string {
+  private ctors_alpha_format(ctx: AlphaCtx): string {
     return Object.entries(this.ctors)
-      .map(([name, t]) => `${name}: ${t.alpha_repr(ctx)}`)
+      .map(([name, t]) => `${name}: ${t.alpha_format(ctx)}`)
       .join("\n")
   }
 }

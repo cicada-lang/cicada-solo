@@ -10,5 +10,5 @@ export abstract class Stmt {
   abstract meta: StmtMeta
 
   abstract execute(mod: Module): Promise<StmtOutput | undefined>
-  abstract repr(): string
+  abstract format(): string
 }

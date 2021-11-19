@@ -9,11 +9,11 @@ export class ZeroCore extends Core {
     return new Exps.ZeroValue()
   }
 
-  repr(): string {
+  format(): string {
     return "0"
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     return "0"
   }
 }

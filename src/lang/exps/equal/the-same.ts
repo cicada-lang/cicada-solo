@@ -49,7 +49,7 @@ export class TheSame extends Exp {
     }
   }
 
-  repr(): string {
-    return `the_same(${this.t.repr()}, ${this.exp.repr()})`
+  format(): string {
+    return `the_same(${this.t.format()}, ${this.exp.format()})`
   }
 }

@@ -25,11 +25,11 @@ export class VarCore extends Core {
     return result
   }
 
-  repr(): string {
+  format(): string {
     return this.name
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     const depth = ctx.find_depth(this.name)
     if (depth === undefined) {
       return this.name

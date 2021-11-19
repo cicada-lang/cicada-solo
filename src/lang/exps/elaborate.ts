@@ -36,7 +36,7 @@ export class Elaborate extends Exp {
     })
   }
 
-  repr(): string {
-    return `@elaborate ${this.exp.repr()}`
+  format(): string {
+    return `@elaborate ${this.exp.format()}`
   }
 }

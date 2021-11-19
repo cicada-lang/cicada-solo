@@ -18,21 +18,21 @@ export class Add1Core extends Core {
     return new Exps.Add1Value(evaluate(env, this.prev))
   }
 
-  repr(): string {
+  format(): string {
     const n = nat_to_number(this)
     if (n !== undefined) {
       return n.toString()
     } else {
-      return `add1(${this.prev.repr()})`
+      return `add1(${this.prev.format()})`
     }
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     const n = nat_to_number(this)
     if (n !== undefined) {
       return n.toString()
     } else {
-      return `add1(${this.prev.alpha_repr(ctx)})`
+      return `add1(${this.prev.alpha_format(ctx)})`
     }
   }
 }

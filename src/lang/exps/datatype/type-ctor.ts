@@ -138,22 +138,22 @@ export class TypeCtor extends Exp {
     return ctors
   }
 
-  repr(): string {
+  format(): string {
     const n = this.name
-    const p = this.fixed_repr()
-    const i = this.indexes_repr()
+    const p = this.fixed_format()
+    const i = this.indexes_format()
     const head = `datatype ${n} ${p}${i}`
-    const c = this.ctors_repr()
+    const c = this.ctors_format()
     const body = ut.indent(c, "  ")
     return `${head}{\n${body}\n}`
   }
 
-  private fixed_repr(): string {
+  private fixed_format(): string {
     if (Object.entries(this.fixed).length > 0) {
       return (
         "(" +
         Object.entries(this.fixed)
-          .map(([name, t]) => `${name}: ${t.repr()}`)
+          .map(([name, t]) => `${name}: ${t.format()}`)
           .join(", ") +
         ") "
       )
@@ -164,12 +164,12 @@ export class TypeCtor extends Exp {
     }
   }
 
-  private indexes_repr(): string {
+  private indexes_format(): string {
     if (Object.entries(this.indexes).length > 0) {
       return (
         "(" +
         Object.entries(this.indexes)
-          .map(([name, t]) => `${name}: ${t.repr()}`)
+          .map(([name, t]) => `${name}: ${t.format()}`)
           .join(", ") +
         ") "
       )
@@ -178,9 +178,9 @@ export class TypeCtor extends Exp {
     }
   }
 
-  private ctors_repr(): string {
+  private ctors_format(): string {
     return Object.entries(this.ctors)
-      .map(([name, t]) => `${name}: ${t.repr()}`)
+      .map(([name, t]) => `${name}: ${t.format()}`)
       .join("\n")
   }
 }

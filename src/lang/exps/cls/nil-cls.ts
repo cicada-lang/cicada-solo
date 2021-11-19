@@ -22,11 +22,11 @@ export class NilCls extends Exps.Cls {
     return this
   }
 
-  fields_repr(): Array<string> {
+  fields_format(): Array<string> {
     return []
   }
 
-  repr(): string {
+  format(): string {
     return `class {}`
   }
 

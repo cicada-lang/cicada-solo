@@ -22,16 +22,16 @@ export class EitherCore extends Core {
     )
   }
 
-  repr(): string {
-    const args = [this.left_t.repr(), this.right_t.repr()].join(", ")
+  format(): string {
+    const args = [this.left_t.format(), this.right_t.format()].join(", ")
 
     return `Either(${args})`
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     const args = [
-      this.left_t.alpha_repr(ctx),
-      this.right_t.alpha_repr(ctx),
+      this.left_t.alpha_format(ctx),
+      this.right_t.alpha_format(ctx),
     ].join(", ")
 
     return `Either(${args})`

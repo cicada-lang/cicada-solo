@@ -19,40 +19,42 @@ export class FnCore extends Core {
     return new Exps.FnValue(new Closure(env, this.name, this.ret))
   }
 
-  fn_args_repr(): Array<string> {
-    if (has_fn_args_repr(this.ret)) {
-      return [this.name, ...this.ret.fn_args_repr()]
+  format(): string {
+    const args = this.fn_args_format().join(", ")
+    const ret = this.fn_ret_format()
+    return `(${args}) => { ${ret} }`
+  }
+
+  fn_args_format(): Array<string> {
+    if (has_fn_args_format(this.ret)) {
+      return [this.name, ...this.ret.fn_args_format()]
     } else {
       return [this.name]
     }
   }
 
-  fn_ret_repr(): string {
-    if (has_fn_ret_repr(this.ret)) {
-      return this.ret.fn_ret_repr()
+  fn_ret_format(): string {
+    if (has_fn_ret_format(this.ret)) {
+      return this.ret.fn_ret_format()
     } else {
-      return this.ret.repr()
+      return this.ret.format()
     }
   }
 
-  repr(): string {
-    const args = this.fn_args_repr().join(", ")
-    const ret = this.fn_ret_repr()
-    return `(${args}) => { ${ret} }`
-  }
-
-  alpha_repr(ctx: AlphaCtx): string {
-    const ret_repr = this.ret.alpha_repr(ctx.extend(this.name))
-    return `(#) => { ${ret_repr} }`
+  alpha_format(ctx: AlphaCtx): string {
+    const ret_format = this.ret.alpha_format(ctx.extend(this.name))
+    return `(#) => { ${ret_format} }`
   }
 }
 
-function has_fn_args_repr(
+function has_fn_args_format(
   core: Core
-): core is Core & { fn_args_repr(): Array<string> } {
-  return (core as any).fn_args_repr instanceof Function
+): core is Core & { fn_args_format(): Array<string> } {
+  return (core as any).fn_args_format instanceof Function
 }
 
-function has_fn_ret_repr(core: Core): core is Core & { fn_ret_repr(): string } {
-  return (core as any).fn_ret_repr instanceof Function
+function has_fn_ret_format(
+  core: Core
+): core is Core & { fn_ret_format(): string } {
+  return (core as any).fn_ret_format instanceof Function
 }

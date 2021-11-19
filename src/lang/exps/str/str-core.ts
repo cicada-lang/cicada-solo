@@ -9,11 +9,11 @@ export class StrCore extends Core {
     return new Exps.StrValue()
   }
 
-  repr(): string {
+  format(): string {
     return "String"
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     return "String"
   }
 }

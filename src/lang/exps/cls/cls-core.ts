@@ -8,6 +8,6 @@ export abstract class ClsCore extends Core {
   abstract append(cls: Exps.ClsCore): Exps.ClsCore
   abstract field_names: Array<string>
   abstract evaluate(env: Env): Exps.ClsValue
-  abstract fields_repr(): Array<string>
-  abstract fields_alpha_repr(ctx: AlphaCtx): Array<string>
+  abstract fields_format(): Array<string>
+  abstract fields_alpha_format(ctx: AlphaCtx): Array<string>
 }

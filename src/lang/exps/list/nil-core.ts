@@ -9,11 +9,11 @@ export class NilCore extends Core {
     return new Exps.NilValue()
   }
 
-  repr(): string {
+  format(): string {
     return "nil"
   }
 
-  alpha_repr(ctx: AlphaCtx): string {
+  alpha_format(ctx: AlphaCtx): string {
     return "nil"
   }
 }

@@ -46,7 +46,7 @@ export class Vec extends Exp {
     return new Exps.VecCore(head_core, tail_core)
   }
 
-  repr(): string {
-    return `vec(${this.head.repr()}, ${this.tail.repr()})`
+  format(): string {
+    return `vec(${this.head.format()}, ${this.tail.format()})`
   }
 }

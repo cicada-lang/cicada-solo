@@ -32,12 +32,12 @@ export class Add1 extends Exp {
     }
   }
 
-  repr(): string {
+  format(): string {
     const n = nat_to_number(this)
     if (n !== undefined) {
       return n.toString()
     } else {
-      return `add1(${this.prev.repr()})`
+      return `add1(${this.prev.format()})`
     }
   }
 }

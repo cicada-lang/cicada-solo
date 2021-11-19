@@ -29,19 +29,19 @@ export class Quote extends Exp {
 
     if (opts?.narrate_elaboration_p) {
       const t_core = readback(ctx, new Exps.TypeValue(), t)
-      const t_repr = ctx.highlight("code", t_core.repr())
-      const core_repr = ctx.highlight("code", core.repr())
+      const t_format = ctx.highlight("code", t_core.format())
+      const core_format = ctx.highlight("code", core.format())
       ctx.narration([
-        `Given a doublequoted literal value ${core_repr},`,
-        `I can inter its type to be ${t_repr},`,
-        `and elaborate it to ${core_repr}.`,
+        `Given a doublequoted literal value ${core_format},`,
+        `I can inter its type to be ${t_format},`,
+        `and elaborate it to ${core_format}.`,
       ])
     }
 
     return { t, core }
   }
 
-  repr(): string {
+  format(): string {
     return `"${this.str}"`
   }
 }
