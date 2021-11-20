@@ -10,9 +10,15 @@ import { PiFormater } from "../pi/pi-formater"
 export class ImPiCore extends Core {
   name: string
   arg_t: Core
-  ret_t: Exps.PiCore | Exps.ImPiCore
+  // ret_t: Exps.PiCore | Exps.ImPiCore
+  ret_t: Core
 
-  constructor(name: string, arg_t: Core, ret_t: Exps.PiCore | Exps.ImPiCore) {
+  constructor(
+    name: string,
+    arg_t: Core,
+    // ret_t: Exps.PiCore | Exps.ImPiCore
+    ret_t: Core
+  ) {
     super()
     this.name = name
     this.arg_t = arg_t

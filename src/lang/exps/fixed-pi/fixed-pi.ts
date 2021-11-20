@@ -19,14 +19,9 @@ export class FixedPi extends Exp {
   meta: ExpMeta
   name: string
   arg_t: Exp
-  ret_t: Exps.Pi | Exps.ImPi | Exps.FixedPi
+  ret_t: Exp
 
-  constructor(
-    name: string,
-    arg_t: Exp,
-    ret_t: Exps.Pi | Exps.ImPi | Exps.FixedPi,
-    meta: ExpMeta
-  ) {
+  constructor(name: string, arg_t: Exp, ret_t: Exp, meta: ExpMeta) {
     super()
     this.meta = meta
     this.name = name
@@ -57,7 +52,7 @@ export class FixedPi extends Exp {
       return new FixedPi(
         fresh_name,
         subst(this.arg_t, name, exp),
-        subst(ret_t, name, exp) as Exps.Pi | Exps.ImPi | Exps.FixedPi,
+        subst(ret_t, name, exp),
         this.meta
       )
     }

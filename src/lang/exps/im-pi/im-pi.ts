@@ -18,14 +18,9 @@ export class ImPi extends Exp {
   meta: ExpMeta
   name: string
   arg_t: Exp
-  ret_t: Exps.Pi | Exps.ImPi
+  ret_t: Exp
 
-  constructor(
-    name: string,
-    arg_t: Exp,
-    ret_t: Exps.Pi | Exps.ImPi,
-    meta: ExpMeta
-  ) {
+  constructor(name: string, arg_t: Exp, ret_t: Exp, meta: ExpMeta) {
     super()
     this.meta = meta
     this.name = name
@@ -56,7 +51,7 @@ export class ImPi extends Exp {
       return new ImPi(
         fresh_name,
         subst(this.arg_t, name, exp),
-        subst(ret_t, name, exp) as Exps.Pi | Exps.ImPi,
+        subst(ret_t, name, exp),
         this.meta
       )
     }
@@ -72,19 +67,6 @@ export class ImPi extends Exp {
       ret_t,
       new Exps.TypeValue()
     )
-
-    if (
-      !(
-        ret_t_core instanceof Exps.PiCore || ret_t_core instanceof Exps.ImPiCore
-      )
-    ) {
-      throw new ExpTrace(
-        [
-          `I expect ret_t_core to be Exps.PiCore or Exps.ImPiCore`,
-          `  class name: ${ret_t_core.constructor.name}`,
-        ].join("\n")
-      )
-    }
 
     return {
       t: new Exps.TypeValue(),

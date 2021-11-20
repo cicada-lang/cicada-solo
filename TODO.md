@@ -31,10 +31,6 @@
 
   - we do not have zero-arity function, we use `c` instead of `c()`
 
-- insert implicit function in data constructor
-
-  - examples: `nil`, `vecnil`
-
 - we can define a version of `list_ref` in `either.md` which use `fixed` keyword
 
 # inductive datatype -- DataCtor & Data
