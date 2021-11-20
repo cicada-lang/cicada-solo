@@ -1,0 +1,2 @@
+(fixed E: Type) -> Type
+(fixed E: Type, n: Nat) -> Type

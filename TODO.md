@@ -1,8 +1,8 @@
+- move `old/` to `prelude/`
+
 # fixed pi
 
 > implicit argument in check mode, be able to solve implicit arguments from return type
-
-- `fixed-pi/fixed-pi` -- syntax test
 
 - `fixed-pi/fixed-ap`
 - `fixed-pi/fixed-ap-core`
