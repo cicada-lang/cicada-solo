@@ -1,5 +1,3 @@
-- replace `im-inserter` by `im-fn-inserter` & `im-ap-inserter`
-
 # syntax
 
 - `Exps.Begin` for code block `{ ... }`
