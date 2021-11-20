@@ -1,11 +1,16 @@
+> split `im-inserter` to `im-fn-inserter` & `im-ap-inserter`
+
+- `im-fn-inserter`
+- `im-ap-inserter`
+
+- replace `im-inserter` by `im-fn-inserter` & `im-ap-inserter`
+
 # fixed pi
 
 > We need implicit argument in check mode,
 > be able to solve implicit arguments from return type.
 
-- `fixed-pi/fixed-fn` -- `check` -- maybe we need `fixed_inserter`?
-
-- [maybe] split `im-inserter` to `im-fn-inserter` and `im-pi-inserter`
+- `fixed-pi/fixed-fn` -- `check` -- maybe we need `fixed_fn_inserter`?
 
 - `fixed-pi/fixed-ap`
 - `fixed-pi/fixed-ap-core`
@@ -13,6 +18,14 @@
 - `fixed-pi/fixed-ap` -- syntax
 
 - `fixed-pi/fixed-pi-value` -- `readback_eta_expansion`
+
+- `Ap.check` call `check_by_infer` when `inferred.t` is `FixedPiValue`
+
+- an implicit function that only has implicit arguments can be used as value
+
+  - we do not have zero-arity function, we use `c` instead of `c()`
+
+- we can define a version of `list_ref` in `either.md` which use `fixed` keyword
 
 - example:
 
@@ -24,14 +37,6 @@
   List.cons(head, almost.tail): List(E)
   List.cons(fixed E, head, almost.tail): List(E)
   ```
-
-- `Ap.check` call `check_by_infer` when `inferred.t` is `FixedPiValue`
-
-- an implicit function that only has implicit arguments can be used as value
-
-  - we do not have zero-arity function, we use `c` instead of `c()`
-
-- we can define a version of `list_ref` in `either.md` which use `fixed` keyword
 
 # inductive datatype -- DataCtor & Data
 
