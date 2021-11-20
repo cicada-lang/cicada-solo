@@ -1,6 +1,7 @@
-x =
+x = {
   one = add1(zero)
   two = add1(one)
-  two
+  return two
+}
 
 x

@@ -78,7 +78,6 @@ export function exp_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "exp:operator": ({ operator }) => operator_matcher(operator),
     "exp:operand": ({ operand }) => operand_matcher(operand),
-    "exp:declaration": ({ declaration }) => declaration_matcher(declaration),
   })(tree)
 }
 
@@ -339,62 +338,14 @@ export function operand_matcher(tree: pt.Tree): Exp {
   })(tree)
 }
 
-export function declaration_matcher(tree: pt.Tree): Exp {
-  return pt.matcher<Exp>({
-    "declaration:let": ({ name, exp, ret }, { span }) =>
-      new Exps.Let(pt.str(name), exp_matcher(exp), exp_matcher(ret), { span }),
-    "declaration:let_the": ({ name, t, exp, ret }, { span }) =>
-      new Exps.Let(
-        pt.str(name),
-        new Exps.The(exp_matcher(t), exp_matcher(exp), {
-          span: pt.span_closure([t.span, exp.span]),
-        }),
-        exp_matcher(ret),
-        { span }
-      ),
-    "declaration:let_fn": ({ name, bindings, ret_t, ret, body }, { span }) => {
-      const fn = bindings_matcher(bindings)
-        .reverse()
-        .reduce((result, binding) => {
-          switch (binding.kind) {
-            case "named": {
-              return new Exps.Fn(binding.name, result, {
-                span: pt.span_closure([binding.span, ret.span]),
-              })
-            }
-
-            case "implicit": {
-              return new Exps.ImFn(binding.name, result, {
-                span: pt.span_closure([binding.span, ret.span]),
-              })
-            }
-            case "fixed": {
-              return new Exps.FixedFn(binding.name, result, {
-                span: pt.span_closure([binding.span, ret.span]),
-              })
-            }
-          }
-        }, exp_matcher(ret))
-
-      return new Exps.Let(
-        pt.str(name),
-        new Exps.The(pi_handler({ bindings, ret_t }, { span }), fn, {
-          span: pt.span_closure([bindings.span, ret_t.span, ret.span]),
-        }),
-        exp_matcher(body),
-        { span }
-      )
-    },
-  })(tree)
-}
-
 export function sequence_matcher(tree: pt.Tree): Exps.Begin {
   return pt.matcher({
     "sequence:sequence": ({ entries, ret }, { span }) => {
       let result = exp_matcher(ret)
       for (const { name, exp, span } of pt.matchers
         .zero_or_more_matcher(entries)
-        .map(sequence_entry_matcher)) {
+        .map(sequence_entry_matcher)
+        .reverse()) {
         result = new Exps.Let(name, exp, result, { span })
       }
       return new Exps.Begin(result, { span })

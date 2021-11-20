@@ -1,5 +1,3 @@
-- remove `declaration` from expression
-
 - require `return` for `"property:method"`
 
 - require `return` for `cls_entry:method_fulfilled`

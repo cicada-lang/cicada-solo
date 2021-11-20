@@ -310,40 +310,6 @@ export const operand = {
   },
 }
 
-export const declaration = {
-  $grammar: {
-    "declaration:let": [
-      { name: "identifier" },
-      '"="',
-      { exp: "exp" },
-      { $ap: ["optional", '";"'] },
-      { ret: "exp" },
-    ],
-    "declaration:let_the": [
-      { name: "identifier" },
-      '":"',
-      { t: "exp" },
-      '"="',
-      { exp: "exp" },
-      { $ap: ["optional", '";"'] },
-      { ret: "exp" },
-    ],
-    "declaration:let_fn": [
-      { name: "identifier" },
-      '"("',
-      { bindings: "bindings" },
-      '")"',
-      '":"',
-      { ret_t: "exp" },
-      '"{"',
-      { ret: "exp" },
-      '"}"',
-      { $ap: ["optional", '";"'] },
-      { body: "exp" },
-    ],
-  },
-}
-
 export const sequence_entry = {
   $grammar: {
     "sequence_entry:let": [
@@ -379,7 +345,6 @@ export const exp = {
   $grammar: {
     "exp:operator": [{ operator: "operator" }],
     "exp:operand": [{ operand: "operand" }],
-    "exp:declaration": [{ declaration: "declaration" }],
   },
 }
 

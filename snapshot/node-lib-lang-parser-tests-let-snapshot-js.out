@@ -1,3 +1,4 @@
-x = a; f(x)
-x = a; f(x)
-x = a; f(x)
+{ x = a; f(x) }
+{ x = a; f(x) }
+{ x = a; f(x) }
+{ x = a; f(x) }

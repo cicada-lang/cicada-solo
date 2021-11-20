@@ -1,5 +1,5 @@
-a = the(Nat, { y = 2; x = 1; x })
-b = the(Nat, { y = 2; x = the(Nat, { 1 }); x })
+a = the(Nat, { x = 1; y = 2; x })
+b = the(Nat, { x = the(Nat, { 1 }); y = 2; x })
 ABC = class {
   a: String
   b: String
