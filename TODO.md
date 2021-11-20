@@ -2,7 +2,6 @@
 
 > implicit argument in check mode, be able to solve implicit arguments from return type
 
-- `fixed-pi/fixed-pi` -- `subst`
 - `fixed-pi/fixed-pi` -- `infer`
 - `fixed-pi/fixed-ap`
 - `fixed-pi/fixed-fn`

@@ -24,7 +24,7 @@ export class FixedPi extends Exp {
   constructor(
     name: string,
     arg_t: Exp,
-    ret_t: Exps.Pi | Exps.ImPi,
+    ret_t: Exps.Pi | Exps.ImPi | Exps.FixedPi,
     meta: ExpMeta
   ) {
     super()
@@ -42,7 +42,25 @@ export class FixedPi extends Exp {
   }
 
   subst(name: string, exp: Exp): FixedPi {
-    throw new Error()
+    if (name === this.name) {
+      return new FixedPi(
+        this.name,
+        subst(this.arg_t, name, exp),
+        this.ret_t,
+        this.meta
+      )
+    } else {
+      const free_names = exp.free_names(new Set())
+      const fresh_name = ut.freshen(free_names, this.name)
+      const ret_t = subst(this.ret_t, this.name, new Exps.Var(fresh_name))
+
+      return new FixedPi(
+        fresh_name,
+        subst(this.arg_t, name, exp),
+        subst(ret_t, name, exp) as Exps.Pi | Exps.ImPi | Exps.FixedPi,
+        this.meta
+      )
+    }
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

@@ -51,9 +51,7 @@ export class ImPi extends Exp {
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen(free_names, this.name)
-      const ret_t = subst(this.ret_t, this.name, new Exps.Var(fresh_name)) as
-        | Exps.Pi
-        | Exps.ImPi
+      const ret_t = subst(this.ret_t, this.name, new Exps.Var(fresh_name))
 
       return new ImPi(
         fresh_name,
