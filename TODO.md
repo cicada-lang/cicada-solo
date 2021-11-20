@@ -5,8 +5,6 @@
     - because there is not structural difference between `base-im-pi-value` & `cons-im-pi-value`,
       the only difference is about insertion
 
-  - `more-im-inserter` extends `im-inserter`
-
 # fixed pi
 
 > implicit argument in check mode, be able to solve implicit arguments from return type
