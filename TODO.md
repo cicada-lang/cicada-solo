@@ -1,5 +1,3 @@
-- require `return` for `cls_entry:method_fulfilled`
-
 - `sequence/let` -- `format` print `return`
 
   - need an clear example as test

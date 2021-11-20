@@ -443,30 +443,31 @@ export function cls_entry_matcher(tree: pt.Tree): {
       span,
     }),
     "cls_entry:method_fulfilled": (
-      { name, bindings, ret_t, ret },
+      { name, bindings, ret_t, sequence },
       { span }
     ) => {
+      const init: Exp = sequence_matcher(sequence)
       const fn = bindings_matcher(bindings)
         .reverse()
         .reduce((result, binding) => {
           switch (binding.kind) {
             case "named": {
               return new Exps.Fn(binding.name, result, {
-                span: pt.span_closure([binding.span, ret.span]),
+                span: pt.span_closure([binding.span, sequence.span]),
               })
             }
             case "implicit": {
               return new Exps.ImFn(binding.name, result, {
-                span: pt.span_closure([binding.span, ret.span]),
+                span: pt.span_closure([binding.span, sequence.span]),
               })
             }
             case "fixed": {
               return new Exps.FixedFn(binding.name, result, {
-                span: pt.span_closure([binding.span, ret.span]),
+                span: pt.span_closure([binding.span, sequence.span]),
               })
             }
           }
-        }, exp_matcher(ret))
+        }, init)
 
       return {
         field_name: pt.str(name),

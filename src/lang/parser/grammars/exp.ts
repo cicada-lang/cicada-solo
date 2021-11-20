@@ -378,10 +378,7 @@ export const cls_entry = {
       '")"',
       '":"',
       { ret_t: "exp" },
-      // TODO
-      '"{"',
-      { ret: "exp" },
-      '"}"',
+      { sequence: "sequence" },
       { $ap: ["optional", '","'] },
     ],
   },

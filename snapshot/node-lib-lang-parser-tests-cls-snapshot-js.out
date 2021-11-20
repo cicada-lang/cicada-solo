@@ -8,6 +8,11 @@ class {
   b: B(a)
   c: C(a, b)
 }
+class {
+  a: A
+  b: B(a)
+  c: (E: Type) -> C(a, b) = (E) => { f(a, b) }
+}
 { a, b, c }
 { a, b, c }
 { a: f(x), b: g(y), c: z }

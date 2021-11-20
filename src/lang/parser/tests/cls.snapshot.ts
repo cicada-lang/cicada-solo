@@ -10,6 +10,17 @@ class {
 }
 `)
 
+tester.echo_exp(`
+class {
+  a: A
+  b: B(a)
+
+  c(E: Type): C(a, b) {
+    return f(a, b)
+  }
+}
+`)
+
 tester.echo_exp(`{ a, b, c }`)
 tester.echo_exp(`{ a, b, c, }`)
 tester.not_exp(`{ a b c }`)
