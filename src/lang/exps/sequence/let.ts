@@ -7,6 +7,7 @@ import { infer } from "../../exp"
 import { check } from "../../exp"
 import * as Exps from "../../exps"
 import * as ut from "../../../ut"
+import { LetFormater } from "./let-formater"
 
 export class Let extends Exp {
   meta: ExpMeta
@@ -51,7 +52,6 @@ export class Let extends Exp {
     const value = evaluate(ctx.to_env(), inferred.core)
     const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
     const inferred_ret = infer(ctx.extend(fresh_name, inferred.t, value), ret)
-
     return {
       t: inferred_ret.t,
       core: new Exps.LetCore(fresh_name, inferred.core, inferred_ret.core),
@@ -67,7 +67,9 @@ export class Let extends Exp {
     return new Exps.LetCore(fresh_name, inferred.core, ret_core)
   }
 
+  let_formater = new LetFormater(this)
+
   format(): string {
-    return `${this.name} = ${this.exp.format()}; ${this.ret.format()}`
+    return this.let_formater.format()
   }
 }

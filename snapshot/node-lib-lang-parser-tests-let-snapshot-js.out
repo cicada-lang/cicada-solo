@@ -1,4 +1,4 @@
-{ x = a; f(x) }
-{ x = a; f(x) }
-{ x = a; f(x) }
-{ x = a; f(x) }
+{ x = a; return f(x) }
+{ x = a; return f(x) }
+{ x = a; return f(x) }
+{ x = a; return f(x) }

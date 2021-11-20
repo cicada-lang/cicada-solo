@@ -1,7 +1,3 @@
-- `sequence/let` -- `format` print `return`
-
-  - need an clear example as test
-
 - maybe
 
   - `sequence/check`
@@ -11,7 +7,7 @@
   to use `is(inl(x), Either(A, (A) -> B))`,
   instead of `_ = is(inl(x), Either(A, (A) -> B))`
 
-  - maybe `check inl(x): Either(A, (A) -> B)`
+  - maybe `inl(x): Either(A, (A) -> B)`
 
 # fixed pi
 
