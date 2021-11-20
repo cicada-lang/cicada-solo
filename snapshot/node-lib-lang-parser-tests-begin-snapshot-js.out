@@ -1,6 +1,6 @@
-a = the(Nat, { x = 1; y = 2; return x })
-b = the(Nat, { x = the(Nat, { 1 }); y = 2; return x })
-ABC = class {
+let a = the(Nat, { x = 1; y = 2; return x })
+let b = the(Nat, { x = the(Nat, { 1 }); y = 2; return x })
+let ABC = class {
   a: String
   b: String
   c: String
