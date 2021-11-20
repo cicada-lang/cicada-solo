@@ -65,10 +65,8 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         { span }
       )
     },
-    "stmt:show_operator": ({ operator }, { span }) =>
-      new Stmts.Show(operator_matcher(operator), { span }),
-    "stmt:show_operand": ({ operand }, { span }) =>
-      new Stmts.Show(operand_matcher(operand), { span }),
+    "stmt:exp": ({ exp }, { span }) =>
+      new Stmts.Show(exp_matcher(exp), { span }),
     "stmt:class": ({ name, entries }, { span }) =>
       new Stmts.Class(
         pt.str(name),

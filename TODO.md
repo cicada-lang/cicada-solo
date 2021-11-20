@@ -3,18 +3,17 @@
 - `let` keyword at top level
 - `let` keyword in function scope (in sequence)
 
-- merge `stmt:show_operator` & `stmt:show_operand` to `stmt:show_exp`
+- support `check`
 
-- maybe
+  - example `check inl(x): Either(A, (A) -> B)`
 
   - `sequence/check`
   - `sequence/check-core`
 
-- support show in code block,
-  to use `is(inl(x), Either(A, (A) -> B))`,
-  instead of `_ = is(inl(x), Either(A, (A) -> B))`
+- support show in code block
 
-  - maybe `check inl(x): Either(A, (A) -> B)`
+  be able to use `is(inl(x), Either(A, (A) -> B))`,
+  instead of `_ = is(inl(x), Either(A, (A) -> B))`
 
 # fixed pi
 
