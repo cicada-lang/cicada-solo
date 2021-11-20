@@ -32,20 +32,6 @@ export abstract class ImPiValue extends Value implements ReadbackEtaExpansion {
         this.ret_t_cl.apply(not_yet_value)
       )
 
-      if (
-        !(
-          ret_t_core instanceof Exps.PiCore ||
-          ret_t_core instanceof Exps.ImPiCore
-        )
-      ) {
-        throw new ExpTrace(
-          [
-            `I expect ret_t_core to be of type Exps.PiCore or Exps.ImPiCore.`,
-            `  class name: ${ret_t_core.constructor.name}`,
-          ].join("\n")
-        )
-      }
-
       return new Exps.ImPiCore(fresh_name, arg_t, ret_t_core)
     }
   }
