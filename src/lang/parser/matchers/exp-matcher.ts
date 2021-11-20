@@ -99,16 +99,8 @@ export function operator_matcher(tree: pt.Tree): Exp {
           }
         }, operator_matcher(target)),
     "operator:fn": fn_handler,
-    "operator:sequence_begin": ({ entries, ret }, { span }) => {
-      let result = exp_matcher(ret)
-      for (const { name, exp, span } of pt.matchers
-        .zero_or_more_matcher(entries)
-        .map(sequence_entry_matcher)) {
-        result = new Exps.Let(name, exp, result, { span })
-      }
-
-      return new Exps.Begin(result, { span })
-    },
+    "operator:sequence_begin": ({ sequence }, { span }) =>
+      sequence_matcher(sequence),
     "operator:car": ({ target }, { span }) =>
       new Exps.Car(exp_matcher(target), { span }),
     "operator:cdr": ({ target }, { span }) =>
@@ -393,6 +385,20 @@ export function declaration_matcher(tree: pt.Tree): Exp {
         exp_matcher(body),
         { span }
       )
+    },
+  })(tree)
+}
+
+export function sequence_matcher(tree: pt.Tree): Exps.Begin {
+  return pt.matcher({
+    "sequence:sequence": ({ entries, ret }, { span }) => {
+      let result = exp_matcher(ret)
+      for (const { name, exp, span } of pt.matchers
+        .zero_or_more_matcher(entries)
+        .map(sequence_entry_matcher)) {
+        result = new Exps.Let(name, exp, result, { span })
+      }
+      return new Exps.Begin(result, { span })
     },
   })(tree)
 }

@@ -15,13 +15,7 @@ export const operator = {
       { ret: "exp" },
       '"}"',
     ],
-    "operator:sequence_begin": [
-      '"{"',
-      { entries: { $ap: ["zero_or_more", "sequence_entry"] } },
-      '"return"',
-      { ret: "exp" },
-      '"}"',
-    ],
+    "operator:sequence_begin": [{ sequence: "sequence" }],
     "operator:car": ['"car"', '"("', { target: "exp" }, '")"'],
     "operator:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
     "operator:dot_field": [
@@ -140,6 +134,18 @@ export const operator = {
     "operator:is": ['"is"', '"("', { exp: "exp" }, '","', { t: "exp" }, '")"'],
     "operator:elab": ['"@"', '"elab"', { exp: "exp" }],
     "operator:elaborate": ['"@"', '"elaborate"', { exp: "exp" }],
+  },
+}
+
+export const sequence = {
+  $grammar: {
+    "sequence:sequence": [
+      '"{"',
+      { entries: { $ap: ["zero_or_more", "sequence_entry"] } },
+      '"return"',
+      { ret: "exp" },
+      '"}"',
+    ],
   },
 }
 
