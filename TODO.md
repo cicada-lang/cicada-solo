@@ -1,8 +1,10 @@
-# fixed pi
-simplim-pi
+# simplify-im-pi
+
 - `im-pi` merge `field_name` and `local_name` into name
 
   - since the semantic is not record any more
+
+# fixed pi
 
 > implicit argument in check mode, be able to solve implicit arguments from return type
 
