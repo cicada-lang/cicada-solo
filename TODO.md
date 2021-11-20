@@ -1,5 +1,3 @@
-- `function` keyword in function scope (in sequence)
-
 - `let` keyword at top level
 - `let` keyword in function scope (in sequence)
 

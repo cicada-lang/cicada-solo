@@ -327,6 +327,7 @@ export const sequence_entry = {
       { $ap: ["optional", '";"'] },
     ],
     "sequence_entry:let_fn": [
+      '"function"',
       { name: "identifier" },
       '"("',
       { bindings: "bindings" },
