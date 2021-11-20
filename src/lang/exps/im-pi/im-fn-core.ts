@@ -23,7 +23,7 @@ export class ImFnCore extends Core {
   }
 
   get name(): string {
-    return this.field_name
+    return this.local_name
   }
 
   evaluate(env: Env): Value {

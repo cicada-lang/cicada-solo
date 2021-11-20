@@ -37,7 +37,7 @@ export class ImPi extends Exp {
   }
 
   get name(): string {
-    return this.field_name
+    return this.local_name
   }
 
   free_names(bound_names: Set<string>): Set<string> {
