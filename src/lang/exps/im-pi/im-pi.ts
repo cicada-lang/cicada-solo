@@ -10,10 +10,6 @@ import * as Exps from "../../exps"
 import * as ut from "../../../ut"
 import { PiFormater } from "../pi/pi-formater"
 
-// NOTE We are implementing named argument,
-//   thus we can not just use `name`,
-//   we need `field_name` and `local_name` just like `Cls`.
-
 export class ImPi extends Exp {
   meta: ExpMeta
   name: string

@@ -10,15 +10,9 @@ import { PiFormater } from "../pi/pi-formater"
 export class ImPiCore extends Core {
   name: string
   arg_t: Core
-  // ret_t: Exps.PiCore | Exps.ImPiCore
   ret_t: Core
 
-  constructor(
-    name: string,
-    arg_t: Core,
-    // ret_t: Exps.PiCore | Exps.ImPiCore
-    ret_t: Core
-  ) {
+  constructor(name: string, arg_t: Core, ret_t: Core) {
     super()
     this.name = name
     this.arg_t = arg_t
@@ -26,17 +20,15 @@ export class ImPiCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    if (this.ret_t instanceof Exps.PiCore) {
-      return new Exps.BaseImPiValue(
-        evaluate(env, this.arg_t),
-        new Closure(env, this.name, this.ret_t)
-      )
-    } else {
-      return new Exps.ConsImPiValue(
-        evaluate(env, this.arg_t),
-        new Closure(env, this.name, this.ret_t)
-      )
-    }
+    return this.ret_t instanceof Exps.ImPiCore
+      ? new Exps.ConsImPiValue(
+          evaluate(env, this.arg_t),
+          new Closure(env, this.name, this.ret_t)
+        )
+      : new Exps.BaseImPiValue(
+          evaluate(env, this.arg_t),
+          new Closure(env, this.name, this.ret_t)
+        )
   }
 
   pi_formater: PiFormater = new PiFormater(this, {

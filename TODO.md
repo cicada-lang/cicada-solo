@@ -5,6 +5,7 @@
 - `fixed-pi/fixed-pi` -- `infer`
 - `fixed-pi/fixed-pi-core`
 - `fixed-pi/fixed-pi-value`
+- `fixed-pi/fixed-pi` -- `syntax`
 
 - `fixed-pi/fixed-ap`
 - `fixed-pi/fixed-ap-core`
