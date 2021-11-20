@@ -20,8 +20,8 @@ function Prime(n: Nat): Type {
   return @TODO "Prime"
 }
 
-function euler_s_conjecture(n: Nat): there exists [
-  x: Nat, p: Nat, _: Prime(p) such that
+function euler_s_conjecture(n: Nat): [
+  x: Nat, p: Nat, _: Prime(p) |
   Equal(
     Nat,
     add(mul(8, n), 3),

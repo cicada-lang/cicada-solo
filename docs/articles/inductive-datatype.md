@@ -83,7 +83,7 @@ let curried_ind_nat_t = (
     prev: Nat,
     almost_on_prev: motive(prev),
   ) -> motive(add1(prev)),
-) -> for all (target: Nat) -> motive(target)
+) -> (target: Nat) -> motive(target)
 ```
 
 Note that, if we make `target` the last argument,
@@ -352,7 +352,7 @@ We also need to describe `NonEmptyProperty`:
 
 ``` cicada
 function NonEmptyProperty(implicit X: Type, P: (X) -> Type): Type {
-  return there exists [x: X such that P(x)]
+  return [x: X | P(x)]
 }
 
 class WellFounded {

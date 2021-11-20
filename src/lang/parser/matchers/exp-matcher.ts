@@ -192,10 +192,8 @@ export function operator_matcher(tree: pt.Tree): Exp {
 export function operand_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "operand:pi": pi_handler,
-    "operand:pi_for_all": pi_handler,
     "operand:fn": fn_handler,
     "operand:sigma": sigma_handler,
-    "operand:sigma_there_exists": sigma_handler,
     "operand:pair": ({ car_t, cdr_t }, { span }) =>
       new Exps.Sigma("_", exp_matcher(car_t), exp_matcher(cdr_t), { span }),
     "operand:cons": ({ car, cdr }, { span }) =>
