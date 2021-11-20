@@ -415,6 +415,7 @@ export const cls_entry = {
       '")"',
       '":"',
       { ret_t: "exp" },
+      // TODO
       '"{"',
       { ret: "exp" },
       '"}"',
@@ -517,6 +518,7 @@ export const property = {
       '"("',
       { names: "names" },
       '")"',
+      // TODO
       '"{"',
       { ret: "exp" },
       '"}"',

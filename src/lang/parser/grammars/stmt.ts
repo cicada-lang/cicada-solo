@@ -14,14 +14,6 @@ export const stmt = {
       '"="',
       { exp: "exp" },
     ],
-    "stmt:define_the_flower_bracket": [
-      { name: "identifier" },
-      '":"',
-      { t: "exp" },
-      '"{"',
-      { exp: "exp" },
-      '"}"',
-    ],
     "stmt:define_fn": [
       { name: "identifier" },
       '"("',

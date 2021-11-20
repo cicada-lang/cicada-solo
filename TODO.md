@@ -1,8 +1,14 @@
-- require `return` for top level function definition
+- require `return` for top level stmts
 
-  - remove top-level `declaration`
+  - remove `declaration` from expression
+
+- require `return` for `"property:method"`
+
+- require `return` for `cls_entry:method_fulfilled`
 
 - `sequence/let` -- `format` print `return`
+
+  - need an clear example as test
 
 - maybe
 
