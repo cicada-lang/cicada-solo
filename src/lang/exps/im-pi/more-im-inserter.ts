@@ -25,16 +25,6 @@ export class MoreImInserter extends ImInserter {
     const arg = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = this.ret_t_cl.apply(arg)
     const fn_core = check(ctx.extend(fresh_name, this.arg_t), fn, ret_t)
-
-    if (!(fn_core instanceof Exps.FnCore || fn_core instanceof Exps.ImFnCore)) {
-      throw new ExpTrace(
-        [
-          `ConsImPiValue.insert_im_fn expecting the result of elab to be Exps.FnCore or Exps.ImFnCore`,
-          `  class name: ${fn_core.constructor.name}`,
-        ].join("\n")
-      )
-    }
-
     return new Exps.ImFnCore(fresh_name, fn_core)
   }
 

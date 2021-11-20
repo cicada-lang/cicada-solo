@@ -30,16 +30,6 @@ export class LastImInserter extends ImInserter {
     )
     const ret_t = this.ret_t_cl.apply(arg)
     const fn_core = check(ctx.extend(fresh_name, this.arg_t), fn, ret_t)
-
-    if (!(fn_core instanceof Exps.FnCore)) {
-      throw new ExpTrace(
-        [
-          `BaseImPiValue.insert_im_fn expecting the result of elab to be Exps.FnCore`,
-          `  class name: ${fn_core.constructor.name}`,
-        ].join("\n")
-      )
-    }
-
     return new Exps.ImFnCore(fresh_name, fn_core)
   }
 
