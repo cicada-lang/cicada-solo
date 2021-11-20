@@ -17,8 +17,7 @@ export class FixedFnCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
-    // return new Exps.FixedFnValue(new Closure(env, this.name, this.ret))
+    return new Exps.FixedFnValue(new Closure(env, this.name, this.ret))
   }
 
   fn_formater: FnFormater = new FnFormater(this, {
