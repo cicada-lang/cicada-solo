@@ -1,3 +1,5 @@
+- [syntax] `fn` and `im-fn` should `{ ... }` when `ret` is not `let`
+
 > split `im-inserter` to `im-fn-inserter` & `im-ap-inserter`
 
 - `im-fn-inserter`
