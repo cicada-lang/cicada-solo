@@ -3,8 +3,16 @@
 > implicit argument in check mode, be able to solve implicit arguments from return type
 
 - `fixed-pi/fixed-pi` -- `infer`
+- `fixed-pi/fixed-pi-core`
+- `fixed-pi/fixed-pi-value`
+
 - `fixed-pi/fixed-ap`
+- `fixed-pi/fixed-ap-core`
+- `fixed-pi/fixed-ap-neutral`
+
 - `fixed-pi/fixed-fn`
+- `fixed-pi/fixed-fn-core`
+- `fixed-pi/fixed-fn-value`
 
 - example:
 
