@@ -52,7 +52,7 @@ export class FixedFn extends Exp {
   }
 
   fn_formater: FnFormater = new FnFormater(this, {
-    decorate_name: (name) => `implicit ${name}`,
+    decorate_name: (name) => `fixed ${name}`,
   })
 
   format(): string {
