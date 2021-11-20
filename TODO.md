@@ -1,6 +1,8 @@
 # fixed pi
+simplim-pi
+- `im-pi` merge `field_name` and `local_name` into name
 
-- why `ImPi` need `field_name` vs `local_name`?
+  - since the semantic is not record any more
 
 > implicit argument in check mode, be able to solve implicit arguments from return type
 
