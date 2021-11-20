@@ -22,6 +22,6 @@ export class ClassExtends extends Stmt {
   }
 
   format(): string {
-    return `${this.name} = ${this.ext.format()}`
+    return `let ${this.name} = ${this.ext.format()}`
   }
 }

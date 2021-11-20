@@ -1,5 +1,3 @@
-- fix `Stmt.format`
-
 - support `check`
 
   - example `check inl(x): Either(A, (A) -> B)`

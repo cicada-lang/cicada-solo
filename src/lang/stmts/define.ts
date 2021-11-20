@@ -21,6 +21,6 @@ export class Define extends Stmt {
   }
 
   format(): string {
-    return `${this.name} = ${this.exp.format()}`
+    return `let ${this.name} = ${this.exp.format()}`
   }
 }
