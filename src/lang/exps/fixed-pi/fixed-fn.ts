@@ -8,7 +8,7 @@ import * as Exps from "../../exps"
 import * as ut from "../../../ut"
 import { FnFormater } from "../pi/fn-formater"
 
-export class ImFn extends Exp {
+export class FixedFn extends Exp {
   meta: ExpMeta
   name: string
   ret: Exp
@@ -24,29 +24,31 @@ export class ImFn extends Exp {
     return new Set(this.ret.free_names(new Set([...bound_names, this.name])))
   }
 
-  subst(name: string, exp: Exp): ImFn {
+  subst(name: string, exp: Exp): FixedFn {
     if (this.name === name) {
       return this
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen(free_names, this.name)
       const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
-      return new ImFn(fresh_name, subst(ret, name, exp), this.meta)
+      return new FixedFn(fresh_name, subst(ret, name, exp), this.meta)
     }
   }
 
   check(ctx: Ctx, t: Value): Core {
-    // NOTE We already need to insert im-fn here,
-    //   because the arguments can be partly given.
-    // NOTE The insertion will reorder the arguments.
+    throw new Error("TODO")
 
-    if (!(t instanceof Exps.ImPiValue)) {
-      throw new ExpTrace(
-        `I can not do im-fn insertion based on: ${t.constructor.name}`
-      )
-    }
+    // // NOTE We already need to insert im-fn here,
+    // //   because the arguments can be partly given.
+    // // NOTE The insertion will reorder the arguments.
 
-    return t.im_inserter.insert_im_fn(ctx, this.ret)
+    // if (!(t instanceof Exps.FixedPiValue)) {
+    //   throw new ExpTrace(
+    //     `I can not do im-fn insertion based on: ${t.constructor.name}`
+    //   )
+    // }
+
+    // return t.im_inserter.insert_im_fn(ctx, this.ret)
   }
 
   fn_formater: FnFormater = new FnFormater(this, {
