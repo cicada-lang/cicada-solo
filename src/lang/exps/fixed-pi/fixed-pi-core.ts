@@ -25,7 +25,6 @@ export class FixedPiCore extends Core {
     return new Exps.FixedPiValue(arg_t, ret_t_cl)
   }
 
-
   pi_formater: PiFormater = new PiFormater(this, {
     decorate_binding: (binding) => `fixed ${binding}`,
   })

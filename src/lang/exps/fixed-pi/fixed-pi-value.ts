@@ -14,10 +14,7 @@ export class FixedPiValue extends Value implements ReadbackEtaExpansion {
   arg_t: Value
   ret_t_cl: Closure
 
-  constructor(
-    arg_t: Value,
-    ret_t_cl: Closure,
-  ) {
+  constructor(arg_t: Value, ret_t_cl: Closure) {
     super()
     this.arg_t = arg_t
     this.ret_t_cl = ret_t_cl
