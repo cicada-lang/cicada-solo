@@ -38,7 +38,6 @@ export class ImFn extends Exp {
   check(ctx: Ctx, t: Value): Core {
     // NOTE We already need to insert im-fn here,
     //   because the arguments can be partly given.
-    // NOTE The insertion will reorder the arguments.
 
     if (!(t instanceof Exps.ImPiValue)) {
       throw new ExpTrace(

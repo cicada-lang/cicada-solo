@@ -40,7 +40,6 @@ export class FixedFn extends Exp {
 
     // // NOTE We already need to insert im-fn here,
     // //   because the arguments can be partly given.
-    // // NOTE The insertion will reorder the arguments.
 
     // if (!(t instanceof Exps.FixedPiValue)) {
     //   throw new ExpTrace(
