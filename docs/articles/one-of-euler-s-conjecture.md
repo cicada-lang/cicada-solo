@@ -4,13 +4,13 @@ subtitle: An example from "Patterns of plausible inference"
 ---
 
 ``` cicada
-let add: (Nat, Nat) -> Nat = (x, y) => {
+function add(x: Nat, y: Nat): Nat {
   return nat_rec(x, y, (_prev, almost) => {
     return add1(almost)
   })
 }
 
-let mul: (Nat, Nat) -> Nat = (x, y) => {
+function mul(x: Nat, y: Nat): Nat {
   return nat_rec(x, 0, (_prev, almost) => {
     return add(almost, y)
   })
