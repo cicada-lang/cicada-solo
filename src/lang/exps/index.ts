@@ -6,11 +6,8 @@ export * from "./type"
 export * from "./type-core"
 export * from "./type-value"
 
-export * from "./let"
-export * from "./let-core"
-
-export * from "./sequence/sequence"
-export * from "./sequence/sequence-core"
+export * from "./sequence/let"
+export * from "./sequence/let-core"
 
 export * from "./the"
 export * from "./the-core"

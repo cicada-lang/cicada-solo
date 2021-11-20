@@ -1,19 +1,14 @@
-- `sequence/local-stmts`
-
-  - `LocalStmts.Let`
-  - `LocalStmts.Show` -- will be checked (inferred) by dropped during elaboration
-
-- `sequence` -- `free_names`
-- `sequence` -- `subst`
-- `sequence` -- `infer`
-- `sequence` -- `check`
-- `sequence` -- `format`
-
-- `sequence-core` -- `evaluate`
-- `sequence-core` -- `format`
-
+- `sequence/begin`
+- `sequence/begin-core`
 
 - `sequence` -- syntax `{ ..., return ... }`
+
+- `sequence-formater`
+
+- maybe
+
+  - `sequence/check`
+  - `sequence/check-core`
 
 - support show in code block,
   to use `is(inl(x), Either(A, (A) -> B))`,
