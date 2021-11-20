@@ -2,7 +2,6 @@
 
 > split `im-inserter` to `im-fn-inserter` & `im-ap-inserter`
 
-- `im-fn-inserter`
 - `im-ap-inserter`
 
 - replace `im-inserter` by `im-fn-inserter` & `im-ap-inserter`
