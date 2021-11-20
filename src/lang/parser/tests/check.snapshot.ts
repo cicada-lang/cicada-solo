@@ -20,7 +20,6 @@ function example(
 
 `)
 
-
 tester.echo_stmts(`
 
 check! inl(x): Either(A, (A) -> B)
