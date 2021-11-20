@@ -1,3 +1,9 @@
+- `function` keyword at top level
+- `let` keyword at top level
+
+- `function` keyword in function scope (in sequence)
+- `let` keyword in function scope (in sequence)
+
 - maybe
 
   - `sequence/check`
@@ -7,7 +13,7 @@
   to use `is(inl(x), Either(A, (A) -> B))`,
   instead of `_ = is(inl(x), Either(A, (A) -> B))`
 
-  - maybe `inl(x): Either(A, (A) -> B)`
+  - maybe `check inl(x): Either(A, (A) -> B)`
 
 # fixed pi
 
