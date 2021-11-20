@@ -1,10 +1,15 @@
+- `im-pi-value` use composition instead of inheritance
+
+  - remove `base-im-pi-value` & `cons-im-pi-value`
+    and use `last-im-inserter` & `more-im-inserter`
+
+    - because the only difference is about insertion
+
 # fixed pi
 
 > implicit argument in check mode, be able to solve implicit arguments from return type
 
 - `fixed-pi/fixed-pi-value` -- stab
-- `fixed-pi/base-fixed-pi-value` -- stab
-- `fixed-pi/cons-fixed-pi-value` -- stab
 
 - `fixed-pi/fixed-pi-core` -- `evaluate`
 
