@@ -10,8 +10,8 @@ function pow(x: Nat, y: Nat): Nat {
   return nat_rec(y, 1, (prev, almost) => mul(almost, x))
 }
 
-eight = {
-  four = add(2, 2)
+let eight = {
+  let four = add(2, 2)
   return add(four, four)
 }
 

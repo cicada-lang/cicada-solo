@@ -8,7 +8,7 @@ class ABC {
   c: String
 }
 
-abc: ABC(sole, 2) = {
+let abc: ABC(sole, 2) = {
   a: sole,
   b: 2,
   c: "c",
@@ -29,7 +29,7 @@ class ABCDE {
   e: String
 }
 
-abcde: ABCDE(sole, 2, "c") = {
+let abcde: ABCDE(sole, 2, "c") = {
   a: sole,
   b: 2,
   c: "c",

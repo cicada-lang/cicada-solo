@@ -5,8 +5,8 @@ class Test {
 }
 
 the(Test, {
-  a: 1
-  b: 2
-  b: 6
-  c: 3
+  a: 1,
+  b: 2,
+  b: 6,
+  c: 3,
 })

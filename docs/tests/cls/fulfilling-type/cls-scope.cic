@@ -1,4 +1,4 @@
-a = String
+let a = String
 
 class Test {
   X: Type = a

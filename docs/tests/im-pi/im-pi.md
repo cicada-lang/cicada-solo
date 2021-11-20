@@ -10,8 +10,8 @@ function id1(implicit A: Type, x: A): A {
   return x
 }
 
-id2: (implicit A: Type, x: A) -> A = (x) => x
-id3: (implicit A: Type, x: A) -> A = (implicit A, x) => x
+let id2: (implicit A: Type, x: A) -> A = (x) => x
+let id3: (implicit A: Type, x: A) -> A = (implicit A, x) => x
 
 id1
 id2
@@ -49,7 +49,7 @@ k(100, 101)
 # record of implicit arguments
 
 ``` cicada
-car_type_t = (
+let car_type_t = (
   implicit A: Type,
   implicit B: Type,
   pair: Pair(A, B),
@@ -67,7 +67,7 @@ function car_type(
 
 car_type
 
-car_type_again: (
+let car_type_again: (
   implicit A: Type,
   implicit B: Type,
   pair: Pair(A, B),

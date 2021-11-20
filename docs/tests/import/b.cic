@@ -1,6 +1,6 @@
 import { a } from "./a.cic"
 
-b = "b"
+let b = "b"
 
 a
 b

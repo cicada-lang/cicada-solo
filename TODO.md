@@ -1,5 +1,4 @@
-- `let` keyword at top level
-- `let` keyword in function scope (in sequence)
+- fix `Stmt.format`
 
 - support `check`
 
@@ -11,7 +10,7 @@
 - support show in code block
 
   be able to use `is(inl(x), Either(A, (A) -> B))`,
-  instead of `_ = is(inl(x), Either(A, (A) -> B))`
+  instead of `let _ = is(inl(x), Either(A, (A) -> B))`
 
 # fixed pi
 

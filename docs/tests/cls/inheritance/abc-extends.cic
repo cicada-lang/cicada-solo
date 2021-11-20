@@ -14,7 +14,7 @@ class ABCEFG extends ABC {
   g: String
 }
 
-abcefg: ABCEFG = {
+let abcefg: ABCEFG = {
   a: sole,
   b: 2,
   c: "c",

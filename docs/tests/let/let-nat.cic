@@ -1,6 +1,6 @@
-x = {
-  one = add1(zero)
-  two = add1(one)
+let x = {
+  let one = add1(zero)
+  let two = add1(one)
   return two
 }
 

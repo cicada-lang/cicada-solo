@@ -76,7 +76,7 @@ datatype Nat {
 > One case one callback, which take all constructor arguments.
 
 ``` cicada
-curried_ind_nat_t = (
+let curried_ind_nat_t = (
   motive: (Nat) -> Type,
   case_zero: motive(zero),
   case_add1: (
@@ -97,7 +97,7 @@ and when the `target` is in scope, the implicit arguments over it are often also
 Thus we use the following type, instead of the type above.
 
 ``` cicada
-ind_nat_t = (
+let ind_nat_t = (
   target: Nat,
   motive: (Nat) -> Type,
   case_zero: motive(zero),
@@ -150,7 +150,7 @@ datatype List(E: Type) {
 > whose type is the `motive` applied to the recursive occurrence parameter.
 
 ``` cicada
-ind_list_t = (
+let ind_list_t = (
   implicit E: Type,
   target: List(E),
   motive: (List(E)) -> Type,
@@ -203,7 +203,7 @@ TODO
 > we should write implicit indices over `target`.
 
 ``` cicada
-vector_ind_t: Type = (
+let vector_ind_t: Type = (
   implicit E: Type,
   implicit length: Nat,
   target: Vector(E, length),
@@ -244,7 +244,7 @@ datatype Either(L, R) {
 ```
 
 ``` cicada
-either_ind_t = (
+let either_ind_t = (
   implicit L: Type,
   implicit R: Type,
   target: Either(L, R),
@@ -297,7 +297,7 @@ function add1_smaller(
 Then we can define `ind_less_than_t`:
 
 ``` cicada
-ind_less_than_t = (
+let ind_less_than_t = (
   implicit j: Nat,
   implicit k: Nat,
   target: LessThan(j, k),
@@ -426,7 +426,7 @@ such that `x0 > x1 > x2 > ...`
 Now! Noetherian induction!
 
 ``` cicada
-noetherian_induction_t = (
+let noetherian_induction_t = (
   implicit X: Type,
   target: X,
   well_founded: WellFounded(X),

@@ -1,7 +1,7 @@
-x: [_: Nat | Nat] = {
-  one = add1(zero)
-  two = add1(one)
-  three = add1(two)
+let x: [_: Nat | Nat] = {
+  let one = add1(zero)
+  let two = add1(one)
+  let three = add1(two)
   return cons(one, two)
 }
 

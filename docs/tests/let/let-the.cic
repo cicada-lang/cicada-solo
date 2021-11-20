@@ -1,6 +1,6 @@
-x = {
-  one: Nat = add1(zero)
-  two: Nat = add1(one)
+let x = {
+  let one: Nat = add1(zero)
+  let two: Nat = add1(one)
   return two
 }
 

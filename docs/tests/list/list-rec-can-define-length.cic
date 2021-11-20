@@ -6,7 +6,7 @@ function length(E: Type, x: List(E)): Nat {
   return list_rec(x, 0, step_length(E))
 }
 
-expectations: List(String) = li! [
+let expectations: List(String) = li! [
   "cooked",
   "eaten",
   "tried-cleaning",

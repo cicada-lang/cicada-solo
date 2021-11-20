@@ -313,12 +313,14 @@ export const operand = {
 export const sequence_entry = {
   $grammar: {
     "sequence_entry:let": [
+      '"let"',
       { name: "identifier" },
       '"="',
       { exp: "exp" },
       { $ap: ["optional", '";"'] },
     ],
     "sequence_entry:let_the": [
+      '"let"',
       { name: "identifier" },
       '":"',
       { t: "exp" },

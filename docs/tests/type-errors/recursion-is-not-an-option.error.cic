@@ -1,14 +1,14 @@
-add: (Nat, Nat) -> Nat =
+let add: (Nat, Nat) -> Nat =
   (x, y) => {
-    nat_ind(y, (_) => Nat, x, (prev, almost) => add1(almost))
+    return nat_ind(y, (_) => Nat, x, (prev, almost) => add1(almost))
   }
 
-my_nat_which: (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T =
+let my_nat_which: (target: Nat) -> (T: Type) -> (base: T) -> (step: (prev: Nat) -> T) -> T =
   (target, T, base, step) => {
-    nat_ind(target, (_) => T, base, (prev, _almost) => step(prev))
+    return nat_ind(target, (_) => T, base, (prev, _almost) => step(prev))
   }
 
-gauss: (Nat) -> Nat =
+let gauss: (Nat) -> Nat =
   (n) => {
-    my_nat_which(n, Nat, 0, (prev) => add(add1(prev), gauss(prev)))
+    return my_nat_which(n, Nat, 0, (prev) => add(add1(prev), gauss(prev)))
   }

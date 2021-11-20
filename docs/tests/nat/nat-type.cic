@@ -1,5 +1,5 @@
-t: Type = Nat
-n: t = zero
-one: Nat = add1(n)
+let t: Type = Nat
+let n: t = zero
+let one: Nat = add1(n)
 
 one

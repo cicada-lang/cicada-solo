@@ -1,4 +1,4 @@
-expectations: List(String) = li! [
+let expectations: List(String) = li! [
   "cooked",
   "eaten",
   "tried-cleaning",

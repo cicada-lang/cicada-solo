@@ -1,7 +1,7 @@
-one = add1(zero)
-two = add1(one)
-three = add1(two)
-four = add1(three)
+let one = add1(zero)
+let two = add1(one)
+let three = add1(two)
+let four = add1(three)
 
 same_as_chart! Type [
   [_: Nat | Nat],
@@ -13,7 +13,7 @@ same_as_chart! [_: Nat | Nat] [
   [one | two],
 ]
 
-one_two: [_: Nat | Nat] = cons(one, two)
+let one_two: [_: Nat | Nat] = cons(one, two)
 
 same_as_chart! Nat [
   cdr(one_two),
@@ -30,7 +30,7 @@ same_as_chart! [_: Nat, _: Nat | Nat] [
   [one, two, | three],
 ]
 
-one_two_three: [_: Nat, _: Nat | Nat] = cons(one, cons(two, three))
+let one_two_three: [_: Nat, _: Nat | Nat] = cons(one, cons(two, three))
 
 same_as_chart! Nat [
   cdr(cdr(one_two_three)),
@@ -47,7 +47,7 @@ same_as_chart! [_: Nat, _: Nat, _: Nat | Nat] [
   [one, two, three | four],
 ]
 
-one_two_three_four: [_: Nat, _: Nat, _: Nat | Nat] = cons(one, cons(two, cons(three, four)))
+let one_two_three_four: [_: Nat, _: Nat, _: Nat | Nat] = cons(one, cons(two, cons(three, four)))
 
 same_as_chart! Nat [
   cdr(cdr(cdr(one_two_three_four))),

@@ -1,16 +1,17 @@
-I found syntax error in file: duplicated-object-field-names.error.cic
+I found duplicated field name in object
+field name:
+  b
+field name list:
+  a, b, b, c
 
+duplicated-object-field-names.error.cic:
+  4 |  b: Nat
+  5 |}
   6 |
   7 |the(Test, {
-  8 |  a: 1
-  9 |  b: 2
- 10 |  b: 6
- 11 |  c: 3
-Found the identifier "b" in [64, 65], while expecting:
- "=":
-     sequence_entry:let_the@18 -> (name: identifier)@19 ":"@20 (t: exp):operand@21 > "=" (exp: exp) optional 
- ",":
-     zero_or_more:more@18 -> (head: property):field@21 > "," (tail: zero_or_more) 
- ",":
-     optional:one@21 -> > "," 
- and so on ...
+  8 |  a: 1,
+  9 |  b: 2,
+ 10 |  b: 6,
+ 11 |  c: 3,
+ 12 |})
+ 13 |

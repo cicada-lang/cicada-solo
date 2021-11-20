@@ -5,10 +5,10 @@ same_as_chart! Nat [
   3,
 ]
 
-_: Equal(Nat, add1(add1(add1(0))), 3) = {
-  _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(add1(0))), add1(add1(1))))
-  _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(1)), add1(2)))
-  _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(2), 3))
+let _: Equal(Nat, add1(add1(add1(0))), 3) = {
+  let _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(add1(0))), add1(add1(1))))
+  let _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(1)), add1(2)))
+  let _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(2), 3))
   return _
 }
 

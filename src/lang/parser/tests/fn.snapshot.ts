@@ -8,15 +8,15 @@ function id(A: Type, x: A): A {
   return x
 }
 
-id: (A: Type, x: A) -> A =
+let id: (A: Type, x: A) -> A =
   (A, x) => {
     return x
   }
 
-id: (A: Type, x: A) -> A =
+let id: (A: Type, x: A) -> A =
   (A, x) => x
 
-id: (A: Type, x: A) -> A =
+let id: (A: Type, x: A) -> A =
   // NOTE The scope is different,
   //   thus the name of bound variables
   //   does not need to be the same.
@@ -27,13 +27,13 @@ id: (A: Type, x: A) -> A =
 
 tester.echo_stmts(`
 
-f: (Trivial) -> (Trivial) -> Trivial =
+let f: (Trivial) -> (Trivial) -> Trivial =
   (x, y) => sole
 
-g: (Trivial) -> (Trivial) -> Trivial =
+let g: (Trivial) -> (Trivial) -> Trivial =
   (x) => (y) => sole
 
-g: (Trivial) -> (Trivial) -> Trivial =
+let g: (Trivial) -> (Trivial) -> Trivial =
   (x) => (y) => {
     return sole
   }

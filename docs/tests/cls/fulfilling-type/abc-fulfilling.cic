@@ -13,15 +13,15 @@ class ABC { a: Trivial, b: the_nat_type(a), c: String }
 
 // NOTE Maybe we can support named fulfilling.
 
-// abc: ABC(a = sole, b = 2) = {
+// let abc: ABC(a = sole, b = 2) = {
 //   a: sole, b: 2, c: "c"
 // }
 
-// abc: ABC(c = "c") = {
+// let abc: ABC(c = "c") = {
 //   a: sole, b: 2, c: "c"
 // }
 
-abc: ABC(sole, 2) = {
+let abc: ABC(sole, 2) = {
   a: sole, b: 2, c: "c"
 }
 
@@ -31,7 +31,7 @@ abc.a
 abc.b
 abc.c
 
-fulled: ABC(sole, 2, "c") = {
+let fulled: ABC(sole, 2, "c") = {
   a: sole, b: 2, c: "c"
 }
 

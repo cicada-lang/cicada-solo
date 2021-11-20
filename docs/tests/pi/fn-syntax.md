@@ -7,10 +7,10 @@ function id1(A: Type, x: A): A {
   return x
 }
 
-id2: (A: Type, x: A) -> A =
+let id2: (A: Type, x: A) -> A =
   (A, x) => x
 
-id3: (A: Type, x: A) -> A =
+let id3: (A: Type, x: A) -> A =
   // NOTE The scope is different,
   //   thus the name of bound variables
   //   does not need to be the same.
@@ -26,14 +26,14 @@ id3(Nat, 1)
 We can write both `(x, y) => ...` and `(x) => (y) => ...` for function of two arguments.
 
 ``` cicada
-f: (Trivial) -> (Trivial) -> Trivial =
+let f: (Trivial) -> (Trivial) -> Trivial =
   (x, y) => sole
 
 f
 f(sole)
 f(sole, sole)
 
-g: (Trivial) -> (Trivial) -> Trivial =
+let g: (Trivial) -> (Trivial) -> Trivial =
   (x) => (y) => sole
 
 g

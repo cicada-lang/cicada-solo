@@ -10,14 +10,14 @@ function car_type(
   return A
 }
 
-car_type: (
+let car_type: (
   implicit A: Type,
   implicit B: Type,
   pair: [_: A | B],
 ) -> Type =
   (implicit A, pair) => A
 
-car_type: (
+let car_type: (
   implicit A: Type,
   implicit B: Type,
   pair: [_: A | B],

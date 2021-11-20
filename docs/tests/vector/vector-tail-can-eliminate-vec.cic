@@ -1,4 +1,4 @@
-abc: Vector(String, 3) = vec! ["a", "b", "c"]
+let abc: Vector(String, 3) = vec! ["a", "b", "c"]
 
 vector_tail(abc)
 vector_tail(vector_tail(abc))

@@ -1,7 +1,7 @@
-type: Type = Type
+let t: Type = Type
 
-type
+t
 
-pair_of_types: Type = [_:Type | Type]
+let pair_of_types: Type = [_: Type | Type]
 
 pair_of_types

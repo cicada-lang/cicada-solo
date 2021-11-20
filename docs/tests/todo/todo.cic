@@ -1,8 +1,6 @@
-a: Nat = @TODO "A trivial Nat"
-
-b: Trivial = @TODO "It's not Trivial"
-
-c: Absurd = @TODO "Absurd!"
+let a: Nat = @TODO "A trivial Nat"
+let b: Trivial = @TODO "It's not Trivial"
+let c: Absurd = @TODO "Absurd!"
 
 function law_of_excluded_middle(A: Type): Either(A, (A) -> Absurd) {
   return @TODO "tertium non datur"
