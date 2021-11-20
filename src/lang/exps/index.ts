@@ -44,7 +44,7 @@ export * from "./im-pi/im-ap-core"
 export * from "./im-pi/im-ap-neutral"
 
 export * from "./fixed-pi/fixed-pi"
-// export * from "./fixed-pi/fixed-pi-core"
+export * from "./fixed-pi/fixed-pi-core"
 // export * from "./fixed-pi/fixed-pi-value"
 // export * from "./fixed-pi/fixed-fn"
 // export * from "./fixed-pi/fixed-fn-core"
