@@ -10,6 +10,10 @@ import * as Exps from "../../exps"
 import * as ut from "../../../ut"
 import { PiFormater } from "../pi/pi-formater"
 
+// NOTE In infer-mode elaboration,
+//   we can use implicit arguments, which decorates on top of pi type,
+//   and will be resolved from the type of next non-implicit argument.
+
 export class ImPi extends Exp {
   meta: ExpMeta
   name: string

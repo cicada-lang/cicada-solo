@@ -10,10 +10,9 @@ import * as Exps from "../../exps"
 import * as ut from "../../../ut"
 import { PiFormater } from "../pi/pi-formater"
 
-// NOTE In check-mode, implicit arguments is called "fixed",
-//   which decorates on top of pi type,
-//   and will be resolved from return type,
-//   making it can not be used in infer-mode.
+// NOTE In check-mode of elaboration,
+//   implicit arguments is called "fixed", which decorates on top of pi type,
+//   and will be resolved from return type, making it can not be used in infer-mode.
 
 export class FixedPi extends Exp {
   meta: ExpMeta
@@ -59,7 +58,20 @@ export class FixedPi extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    throw new Error()
+    const fresh_name = ctx.freshen(this.name)
+    const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
+    const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
+    const ret_t = subst(this.ret_t, this.name, new Exps.Var(fresh_name))
+    const ret_t_core = check(
+      ctx.extend(fresh_name, arg_t_value),
+      ret_t,
+      new Exps.TypeValue()
+    )
+
+    return {
+      t: new Exps.TypeValue(),
+      core: new Exps.FixedPiCore(fresh_name, arg_t_core, ret_t_core),
+    }
   }
 
   pi_formater: PiFormater = new PiFormater(this, {
