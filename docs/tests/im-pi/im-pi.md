@@ -7,7 +7,7 @@ Let's write the identity function with implicit type argument.
 
 ``` cicada
 id1(implicit A: Type, x: A): A {
-  x
+  return x
 }
 
 id2: (implicit A: Type, x: A) -> A = (x) => x
@@ -26,7 +26,7 @@ id3(1)
 
 ``` cicada
 typeof(implicit T: Type, T): Type {
-  T
+  return T
 }
 
 typeof(123)
@@ -40,7 +40,7 @@ k(
   implicit A: Type, x: A,
   implicit B: Type, y: B,
 ): A {
-  x
+  return x
 }
 
 k(100, 101)
@@ -62,7 +62,7 @@ car_type(
   implicit B: Type,
   pair: Pair(A, B),
 ): Type {
-  A
+  return A
 }
 
 car_type
@@ -86,7 +86,7 @@ cdr_type(
   implicit B: Type,
   pair: Pair(A, B),
 ): Type {
-  B
+  return B
 }
 
 cdr_type(is(cons(1, "a"), Pair(Nat, String)))
@@ -101,7 +101,7 @@ k(
   x: A,
   y: B,
 ): A {
-  x
+  return x
 }
 ```
 
@@ -113,6 +113,6 @@ k(
   Trivial,
   x: A,
 ): A {
-  x
+  return x
 }
 ```

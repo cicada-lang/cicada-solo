@@ -279,18 +279,18 @@ let's prepare some partial definitions:
 
 ``` cicada
 LessThan(j: Nat, k: Nat): Type {
-  @TODO "LessThan"
+  return @TODO "LessThan"
 }
 
 zero_smallest(n: Nat): LessThan(zero, add1(n)) {
-  @TODO "zero_smallest"
+  return @TODO "zero_smallest"
 }
 
 add1_smaller(
   j: Nat, k: Nat,
   prev_smaller: LessThan(j, k),
 ): LessThan(add1(j), add1(k)) {
-  @TODO "add1_smaller"
+  return @TODO "add1_smaller"
 }
 ```
 
@@ -329,7 +329,7 @@ Preparing some partial definitions:
 
 ``` cicada
 Not(X: Type): Type {
-  (X) -> Absurd
+  return (X) -> Absurd
 }
 ```
 
@@ -352,7 +352,7 @@ We also need to describe `NonEmptyProperty`:
 
 ``` cicada
 NonEmptyProperty(implicit X: Type, P: (X) -> Type): Type {
-  there exists [x: X such that P(x)]
+  return there exists [x: X such that P(x)]
 }
 
 class WellFounded {

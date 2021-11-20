@@ -52,7 +52,7 @@ my_cons(
   E: Type,
   f: (x: A, B(x)) -> E,
 ): E {
-  f(x, y)
+  return f(x, y)
 }
 
 // my_car(
@@ -60,7 +60,7 @@ my_cons(
 //   B: (A) -> Type,
 //   p: (E: Type, f: (A, B(x)) -> E) -> E // The name `x` is undefined.
 // ): A {
-//   (A, B, p) => p(A, (a, b) => a)
+//   return (A, B, p) => p(A, (a, b) => a)
 // }
 
 my_car1(
@@ -68,6 +68,6 @@ my_car1(
   B: (A) -> Type,
   p: (E: Type, f: (x: A, B(x)) -> E) -> E
 ): A {
-  p(A, (a, b) => a)
+  return p(A, (a, b) => a)
 }
 ```

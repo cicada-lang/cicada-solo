@@ -1,4 +1,4 @@
-id = the((A: Type, x: A) -> A, (A, x) => x)
+id = the((A: Type, x: A) -> A, (A, x) => { x })
 id = the((A: Type, x: A) -> A, (A, x) => { x })
 id = the((A: Type, x: A) -> A, (A, x) => x)
 id = the((A: Type, x: A) -> A, (B, y) => y)

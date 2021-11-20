@@ -32,7 +32,7 @@ induction_nat(
     almost_on_prev: motive(prev),
   ) -> motive(add1(prev)),
 ): motive(target) {
-  nat_ind(target, motive, case_zero, case_add1)
+  return nat_ind(target, motive, case_zero, case_add1)
 }
 ```
 
@@ -40,7 +40,7 @@ induction_nat(
 
 ``` cicada
 add(x: Nat, y: Nat): Nat {
-  induction_nat(
+  return induction_nat(
     x,
     (_) => Nat,
     y,
@@ -51,7 +51,7 @@ add(x: Nat, y: Nat): Nat {
 
 ``` cicada wishful-thinking
 add(x: Nat, y: Nat): Nat {
-  induction (x) {
+  return induction (x) {
     (_) => Nat
     case zero => y
     case add1(_prev, almost) => Nat.add1(almost.prev)
@@ -71,7 +71,7 @@ same_as_chart! Nat [
 
 ``` cicada
 mul(x: Nat, y: Nat): Nat {
-  induction_nat(
+  return induction_nat(
     x,
     (_) => Nat,
     0,
@@ -82,7 +82,7 @@ mul(x: Nat, y: Nat): Nat {
 
 ``` cicada wishful-thinking
 mul(x: Nat, y: Nat): Nat {
-  induction (x) {
+  return induction (x) {
     (_) => Nat
     case zero => 0
     case add1(_prev, almost) => add(almost.prev, y)
@@ -102,7 +102,7 @@ same_as_chart! Nat [
 
 ``` cicada
 power_of(x: Nat, y: Nat): Nat {
-  induction_nat(
+  return induction_nat(
     x,
     (_) => Nat,
     1,
@@ -113,7 +113,7 @@ power_of(x: Nat, y: Nat): Nat {
 
 ``` cicada wishful-thinking
 power_of(x: Nat, y: Nat): Nat {
-  induction (x) {
+  return induction (x) {
     (_) => Nat
     case zero => 1
     case add1(_prev, almost) => mul(almost.prev, y)
@@ -123,7 +123,7 @@ power_of(x: Nat, y: Nat): Nat {
 
 ``` cicada
 power(base: Nat, n: Nat): Nat {
-  power_of(n, base)
+  return power_of(n, base)
 }
 ```
 
@@ -139,7 +139,7 @@ same_as_chart! Nat [
 
 ``` cicada
 gauss(x: Nat): Nat {
-  induction_nat(
+  return induction_nat(
     x,
     (_) => Nat,
     0,
@@ -150,7 +150,7 @@ gauss(x: Nat): Nat {
 
 ``` cicada wishful-thinking
 gauss(x: Nat): Nat {
-  induction (x) {
+  return induction (x) {
     (_) => Nat
     case zero => 0
     case add1(prev, almost) => add(Nat.add1(prev), almost.prev)
@@ -169,7 +169,7 @@ same_as_chart! Nat [
 
 ``` cicada
 factorial(x: Nat): Nat {
-  induction_nat(
+  return induction_nat(
     x,
     (_) => Nat,
     1,
@@ -180,7 +180,7 @@ factorial(x: Nat): Nat {
 
 ``` cicada wishful-thinking
 factorial(x: Nat): Nat {
-  induction (x) {
+  return induction (x) {
     (_) => Nat
     case zero => 1
     case add1(prev, almost) => mul(Nat.add1(prev), almost.prev)

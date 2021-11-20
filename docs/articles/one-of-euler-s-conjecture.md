@@ -17,7 +17,7 @@ mul: (Nat, Nat) -> Nat = (x, y) => {
 }
 
 Prime(n: Nat): Type {
-  @TODO "Prime"
+  return @TODO "Prime"
 }
 
 euler_s_conjecture(n: Nat): there exists [
@@ -28,6 +28,6 @@ euler_s_conjecture(n: Nat): there exists [
     add(mul(x, x), add(p, p))
   )
 ] {
-  @TODO "euler_s_conjecture"
+  return @TODO "euler_s_conjecture"
 }
 ```

@@ -11,6 +11,7 @@ import {
   pi_handler,
   bindings_matcher,
   simple_bindings_matcher,
+  sequence_matcher,
 } from "../matchers"
 
 export function stmts_matcher(tree: pt.Tree): Array<Stmt> {
@@ -32,40 +33,34 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         }),
         { span }
       ),
-    // "stmt:define_the_flower_bracket": ({ name, t, exp }, { span }) =>
-    //   new Stmts.Define(
-    //     pt.str(name),
-    //     new Exps.The(exp_matcher(t), exp_matcher(exp), {
-    //       span: pt.span_closure([t.span, exp.span]),
-    //     }),
-    //     { span }
-    //   ),
-    "stmt:define_fn": ({ name, bindings, ret_t, ret }, { span }) => {
+    "stmt:define_fn": ({ name, bindings, ret_t, sequence }, { span }) => {
+      const init: Exp = sequence_matcher(sequence)
       const fn = bindings_matcher(bindings)
         .reverse()
         .reduce((result, binding) => {
           switch (binding.kind) {
             case "named": {
               return new Exps.Fn(binding.name, result, {
-                span: pt.span_closure([binding.span, ret.span]),
+                span: pt.span_closure([binding.span, sequence.span]),
               })
             }
             case "implicit": {
               return new Exps.ImFn(binding.name, result, {
-                span: pt.span_closure([binding.span, ret.span]),
+                span: pt.span_closure([binding.span, sequence.span]),
               })
             }
             case "fixed": {
               return new Exps.FixedFn(binding.name, result, {
-                span: pt.span_closure([binding.span, ret.span]),
+                span: pt.span_closure([binding.span, sequence.span]),
               })
             }
           }
-        }, exp_matcher(ret))
+        }, init)
+
       return new Stmts.Define(
         pt.str(name),
         new Exps.The(pi_handler({ bindings, ret_t }, { span }), fn, {
-          span: pt.span_closure([bindings.span, ret_t.span, ret.span]),
+          span: pt.span_closure([bindings.span, ret_t.span, sequence.span]),
         }),
         { span }
       )

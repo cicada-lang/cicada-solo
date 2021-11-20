@@ -4,7 +4,7 @@ This is a C language family syntax sugar.
 
 ``` cicada
 id1(A: Type, x: A): A {
-  x
+  return x
 }
 
 id2: (A: Type, x: A) -> A =

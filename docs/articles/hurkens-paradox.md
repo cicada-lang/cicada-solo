@@ -9,33 +9,33 @@ Learned from [a agda test](https://github.com/agda/agda/blob/master/test/Succeed
 Bottom: Type = (A: Type) -> A
 
 Not(A: Type): Type {
-  (A) -> Bottom
+  return (A) -> Bottom
 }
 
 P(A: Type): Type {
-  (A) -> Type
+  return (A) -> Type
 }
 
 U0(X: Type): Type {
-  P(P(X))
+  return P(P(X))
 }
 
 U1(X: Type): Type {
-  (U0(X)) -> X
+  return (U0(X)) -> X
 }
 
 U2(X: Type): Type {
-  (U1(X)) -> U0(X)
+  return (U1(X)) -> U0(X)
 }
 
 U: Type = (X: Type) -> U2(X)
 
 tauon(t: P(P(U))): U {
-  (X, f, p) => t((x) => p(f(x(X, f))))
+  return (X, f, p) => t((x) => p(f(x(X, f))))
 }
 
 sigma(s: U): P(P(U)) {
-  s(U, (t) => tauon(t))
+  return s(U, (t) => tauon(t))
 }
 
 delta: P(U) = (y) => Not((p: P(U), _: sigma(y, p)) -> p(tauon(sigma(y))))
@@ -45,7 +45,7 @@ omega: U = tauon((p) => (x: U, _: sigma(x, p)) -> p(x))
 D: Type = (p: P(U), _: sigma(omega, p)) -> p(tauon(sigma(omega)))
 
 lem1(p: P(U), H1: (x: U, _: sigma(x, p)) -> p(x)): p(omega) {
-  H1(omega, (x) => H1(tauon(sigma(x))))
+  return H1(omega, (x) => H1(tauon(sigma(x))))
 }
 
 lem2: Not(D) = lem1(delta, (x, H2, H3) => {

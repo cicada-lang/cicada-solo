@@ -1,4 +1,6 @@
-the_nat_type(_: Trivial): Type { Nat }
+the_nat_type(_: Trivial): Type {
+  return Nat
+}
 
 class ABC {
   a: Trivial = sole

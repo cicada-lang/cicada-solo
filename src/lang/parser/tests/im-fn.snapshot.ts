@@ -7,7 +7,7 @@ car_type(
   implicit B: Type,
   pair: [_: A | B],
 ): Type {
-  A
+  return A
 }
 
 car_type: (

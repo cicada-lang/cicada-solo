@@ -34,7 +34,7 @@ induction_list(
     almost_on_tail: motive(tail),
   ) -> motive(li(head, tail)),
 ): motive(target) {
-  list_ind(target, motive, case_nil, case_li)
+  return list_ind(target, motive, case_nil, case_li)
 }
 ```
 
@@ -42,7 +42,7 @@ induction_list(
 
 ``` cicada
 length(implicit E: Type, x: List(E)): Nat {
-  induction_list(
+  return induction_list(
     x,
     (_) => Nat,
     0,
@@ -53,7 +53,7 @@ length(implicit E: Type, x: List(E)): Nat {
 
 ``` cicada wishful-thinking
 length(implicit E: Type, x: List(E)): Nat {
-  induction (x) {
+  return induction (x) {
     (_) => Nat
     case nil => 0
     case li(_head, _tail, almost) => Nat.add1(almost.tail)
@@ -74,7 +74,7 @@ same_as_chart! Nat [
 
 ``` cicada
 append(implicit E: Type, x: List(E), y: List(E)): List(E) {
-  induction_list(
+  return induction_list(
     x,
     (_) => List(E),
     y,
@@ -85,7 +85,7 @@ append(implicit E: Type, x: List(E), y: List(E)): List(E) {
 
 ``` cicada wishful-thinking
 append(implicit E: Type, x: List(E), y: List(E)): List(E) {
-  induction (x) {
+  return induction (x) {
     (_) => List(E)
     case nil => y
     case li(head, _tail, almost) => List.li(head, almost.tail)
@@ -104,7 +104,7 @@ same_as_chart! List(Nat) [
 
 ``` cicada
 li_end(implicit E: Type, e: E, x: List(E)): List(E) {
-  induction_list(
+  return induction_list(
     x,
     (_) => List(E),
     li(e, nil),
@@ -113,7 +113,7 @@ li_end(implicit E: Type, e: E, x: List(E)): List(E) {
 }
 
 reverse(implicit E: Type, x: List(E)): List(E) {
-  induction_list(
+  return induction_list(
     x,
     (_) => List(E),
     nil,
@@ -124,7 +124,7 @@ reverse(implicit E: Type, x: List(E)): List(E) {
 
 ``` cicada wishful-thinking
 li_end(implicit E: Type, e: E, x: List(E)): List(E) {
-  induction (x) {
+  return induction (x) {
     (_) => List(E)
     case nil => List.li(e, nil)
     case li(head, _tail, almost) => List.li(head, almost.tail)
@@ -132,7 +132,7 @@ li_end(implicit E: Type, e: E, x: List(E)): List(E) {
 }
 
 reverse(implicit E: Type, x: List(E)): List(E) {
-  induction (x) {
+  return induction (x) {
     (_) => List(E)
     case nil => List.nil
     case li(head, _tail, almost) => li_end(head, almost.tail)

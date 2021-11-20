@@ -46,7 +46,7 @@ induction_vector(
     almost_on_tail: motive(prev, tail),
   ) -> motive(add1(prev), vec(head, tail)),
 ): motive(length, target) {
-  vector_ind(
+  return vector_ind(
     length,
     target,
     motive,
@@ -68,7 +68,7 @@ vector_append(
   implicit yl: Nat,
   y: Vector(E, yl),
 ): Vector(E, add(xl, yl)) {
-  induction_vector(
+  return induction_vector(
     x,
     (length, _target) => Vector(E, add(length, yl)),
     y,
@@ -87,7 +87,7 @@ vector_append(
   implicit yl: Nat,
   y: Vector(E, yl),
 ): Vector(E, add(xl, yl)) {
-  induction (x) {
+  return induction (x) {
     (length, _target) => Vector(E, add(length, yl))
     case vecnil => y
     case vec(head, _tail, almost) => Vector.vec(head, almost.tail)
@@ -113,7 +113,7 @@ list_from_vector(
   implicit length: Nat,
   vector: Vector(E, length),
 ): List(E) {
-  induction_vector(
+  return induction_vector(
     vector,
     (length, target) => List(E),
     nil,
@@ -128,7 +128,7 @@ list_from_vector(
   implicit length: Nat,
   vector: Vector(E, length),
 ): List(E) {
-  induction (vector) {
+  return induction (vector) {
     (length, target) => List(E)
     case vecnil => List.nil
     case vec(head, tail, almost) => List.li(head, almost.tail)

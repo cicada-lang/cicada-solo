@@ -1,16 +1,16 @@
 I found syntax error in file: abc-pre-filled.error.cic
 
-  8 |
-  9 |abc: ABC(sole, 2) = {
- 10 |  a: sole
- 11 |  b: 2
- 12 |  c: "c"
- 13 |}
-Found the identifier "b" in [142, 143], while expecting:
+ 10 |
+ 11 |abc: ABC(sole, 2) = {
+ 12 |  a: sole
+ 13 |  b: 2
+ 14 |  c: "c"
+ 15 |}
+Found the identifier "b" in [151, 152], while expecting:
  "=":
-     sequence_entry:let_the@39 -> (name: identifier)@40 ":"@41 (t: exp):operand@42 > "=" (exp: exp) optional 
+     sequence_entry:let_the@40 -> (name: identifier)@41 ":"@42 (t: exp):operand@43 > "=" (exp: exp) optional 
  ",":
-     zero_or_more:more@39 -> (head: property):field@42 > "," (tail: zero_or_more) 
+     zero_or_more:more@40 -> (head: property):field@43 > "," (tail: zero_or_more) 
  ",":
-     optional:one@42 -> > "," 
+     optional:one@43 -> > "," 
  and so on ...

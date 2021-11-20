@@ -10,7 +10,7 @@ cong(
   implicit Result: Type,
   f: (X) -> Result,
 ): Equal(Result, f(from), f(to)) {
-  replace(
+  return replace(
     target,
     (to) => Equal(Result, f(from), f(to)),
     refl)
@@ -24,7 +24,7 @@ cong(
   implicit Result: Type,
   f: (X) -> Result,
 ): Equal(Result, f(from), f(to)) {
-  replace(
+  return replace(
     target,
     (to) => Equal(Result, f(from), f(to)),
     refl)

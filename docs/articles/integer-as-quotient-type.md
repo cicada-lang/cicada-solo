@@ -26,11 +26,11 @@ after transposition, we have `add(x.left, y.right)` equal `add(y.left, x.right)`
 
 ``` cicada
 add(x: Nat, y: Nat): Nat {
-  nat_rec(x, y, (_prev, almost) => add1(almost))
+  return nat_rec(x, y, (_prev, almost) => add1(almost))
 }
 
 IntegerEqual(x: Integer, y: Integer): Type {
-  Equal(Nat, add(x.left, y.right), add(y.left, x.right))
+  return Equal(Nat, add(x.left, y.right), add(y.left, x.right))
 }
 ```
 

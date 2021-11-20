@@ -2,7 +2,7 @@
 
 ``` cicada
 id(implicit A: Type, x: A): A {
-  x
+  return x
 }
 
 id(1)
@@ -19,7 +19,7 @@ k(
   implicit A: Type, x: A,
   implicit B: Type, y: B,
 ): A {
-  x
+  return x
 }
 
 k(123, "abc")

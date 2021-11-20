@@ -5,7 +5,7 @@ import { tester } from "../parser-tester-instance"
 tester.echo_stmts(`
 
 id(A: Type, x: A): A {
-  x
+  return x
 }
 
 id: (A: Type, x: A) -> A =

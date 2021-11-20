@@ -1,17 +1,18 @@
 add(x: Nat, y: Nat): Nat {
-  nat_rec(y, x, (prev, almost) => add1(almost))
+  return nat_rec(y, x, (prev, almost) => add1(almost))
 }
 
 mul(x: Nat, y: Nat): Nat {
-  nat_rec(y, 0, (prev, almost) => add(almost, x))
+  return nat_rec(y, 0, (prev, almost) => add(almost, x))
 }
 
 pow(x: Nat, y: Nat): Nat {
-  nat_rec(y, 1, (prev, almost) => mul(almost, x))
+  return nat_rec(y, 1, (prev, almost) => mul(almost, x))
 }
 
-eight =
+eight = {
   four = add(2, 2)
-  add(four, four)
+  return add(four, four)
+}
 
 the(Equal(Nat, eight, pow(2, 3)), refl)

@@ -1,6 +1,4 @@
-- require `return` for top level stmts
-
-  - remove `declaration` from expression
+- remove `declaration` from expression
 
 - require `return` for `"property:method"`
 
@@ -264,6 +262,8 @@
   - learn from constraint logic programming (CLP)
 
 # bug
+
+- [bug] When error is in an imported file, error report fail to report the right context.
 
 - [bug] When `Valee.unify` take `ctx` and `t`, the `length` if `VecValue.unify` is wrong
 
