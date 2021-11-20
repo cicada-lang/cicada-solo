@@ -481,10 +481,7 @@ export const property = {
       '"("',
       { names: "names" },
       '")"',
-      // TODO
-      '"{"',
-      { ret: "exp" },
-      '"}"',
+      { sequence: "sequence" },
     ],
     "property:spread": ['"."', '"."', '"."', { exp: "exp" }],
   },

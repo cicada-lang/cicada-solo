@@ -619,8 +619,32 @@ export function property_matcher(tree: pt.Tree): Exps.Prop {
       new Exps.FieldShorthandProp(pt.str(name)),
     "property:field": ({ name, exp }) =>
       new Exps.FieldProp(pt.str(name), exp_matcher(exp)),
-    "property:method": ({ name, names, ret }, { span }) =>
-      new Exps.FieldProp(pt.str(name), fn_handler({ names, ret })),
+    "property:method": ({ name, names, sequence }, { span }) => {
+      const init: Exp = sequence_matcher(sequence)
+      const result = names_matcher(names)
+        .reverse()
+        .reduce((result, name_entry) => {
+          switch (name_entry.kind) {
+            case "name": {
+              return new Exps.Fn(name_entry.name, result, {
+                span: pt.span_closure([name_entry.span, sequence.span]),
+              })
+            }
+            case "implicit": {
+              return new Exps.ImFn(name_entry.name, result, {
+                span: pt.span_closure([name_entry.span, sequence.span]),
+              })
+            }
+            case "fixed": {
+              return new Exps.FixedFn(name_entry.name, result, {
+                span: pt.span_closure([name_entry.span, sequence.span]),
+              })
+            }
+          }
+        }, init)
+
+      return new Exps.FieldProp(pt.str(name), result)
+    },
     "property:spread": ({ exp }) => new Exps.SpreadProp(exp_matcher(exp)),
   })(tree)
 }

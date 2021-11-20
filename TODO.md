@@ -1,5 +1,3 @@
-- require `return` for `"property:method"`
-
 - require `return` for `cls_entry:method_fulfilled`
 
 - `sequence/let` -- `format` print `return`
