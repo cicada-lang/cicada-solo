@@ -1,16 +1,17 @@
 - `im-pi-value` use composition instead of inheritance
 
-  - remove `base-im-pi-value` & `cons-im-pi-value`
-    and use `last-im-inserter` & `more-im-inserter`
+  - should not use `base-im-pi-value` & `cons-im-pi-value`
 
-    - because the only difference is about insertion
+    - because there is not structural difference between `base-im-pi-value` & `cons-im-pi-value`,
+      the only difference is about insertion
+
+  - `last-im-inserter` & `more-im-inserter` extends `im-inserter`
 
 # fixed pi
 
 > implicit argument in check mode, be able to solve implicit arguments from return type
 
 - `fixed-pi/fixed-pi-value` -- stab
-
 - `fixed-pi/fixed-pi-core` -- `evaluate`
 
 - `fixed-pi/fixed-pi-value`
