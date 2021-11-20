@@ -5,12 +5,10 @@ import { Solution } from "../../solution"
 import { Closure } from "../closure"
 
 export class ImFnValue extends Value {
-  field_name: string
   fn_cl: Closure
 
-  constructor(field_name: string, fn_cl: Closure) {
+  constructor(fn_cl: Closure) {
     super()
-    this.field_name = field_name
     this.fn_cl = fn_cl
   }
 

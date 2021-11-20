@@ -16,20 +16,13 @@ export class BaseImPiValue extends Exps.ImPiValue {
   arg_t: Value
   ret_t_cl: Closure
 
-  constructor(field_name: string, arg_t: Value, ret_t_cl: Closure) {
-    super(field_name, arg_t, ret_t_cl)
+  constructor(arg_t: Value, ret_t_cl: Closure) {
+    super(arg_t, ret_t_cl)
     this.arg_t = arg_t
     this.ret_t_cl = ret_t_cl
   }
 
-  insert_im_fn(
-    ctx: Ctx,
-    fn: Exps.Fn,
-    renaming?: {
-      field_name: string
-      local_name: string
-    }
-  ): Core {
+  insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const arg = new Exps.NotYetValue(
       this.arg_t,
@@ -47,7 +40,7 @@ export class BaseImPiValue extends Exps.ImPiValue {
       )
     }
 
-    return new Exps.ImFnCore(this.ret_t_cl.name, fresh_name, fn_core)
+    return new Exps.ImFnCore(fresh_name, fn_core)
   }
 
   solve_im_ap(ctx: Ctx, arg: Exp): Solution {

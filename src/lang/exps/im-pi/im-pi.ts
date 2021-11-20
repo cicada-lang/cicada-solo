@@ -16,13 +16,11 @@ import { PiFormater } from "../pi/pi-formater"
 
 export class ImPi extends Exp {
   meta: ExpMeta
-  field_name: string
   name: string
   arg_t: Exp
   ret_t: Exps.Pi | Exps.ImPi
 
   constructor(
-    field_name: string,
     name: string,
     arg_t: Exp,
     ret_t: Exps.Pi | Exps.ImPi,
@@ -30,7 +28,6 @@ export class ImPi extends Exp {
   ) {
     super()
     this.meta = meta
-    this.field_name = field_name
     this.name = name
     this.arg_t = arg_t
     this.ret_t = ret_t
@@ -47,7 +44,6 @@ export class ImPi extends Exp {
     if (name === this.name) {
       return new ImPi(
         this.name,
-        this.field_name,
         subst(this.arg_t, name, exp),
         this.ret_t,
         this.meta
@@ -60,7 +56,6 @@ export class ImPi extends Exp {
         | Exps.ImPi
 
       return new ImPi(
-        this.field_name,
         fresh_name,
         subst(this.arg_t, name, exp),
         subst(ret_t, name, exp) as Exps.Pi | Exps.ImPi,
@@ -95,7 +90,7 @@ export class ImPi extends Exp {
 
     return {
       t: new Exps.TypeValue(),
-      core: new Exps.ImPiCore(fresh_name, fresh_name, arg_t_core, ret_t_core),
+      core: new Exps.ImPiCore(fresh_name, arg_t_core, ret_t_core),
     }
   }
 

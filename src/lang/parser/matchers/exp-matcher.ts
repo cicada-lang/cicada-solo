@@ -31,15 +31,9 @@ export function pi_handler(
             )
           }
 
-          return new Exps.ImPi(
-            binding.name,
-            binding.name,
-            binding.exp,
-            result,
-            {
-              span: pt.span_closure([binding.span, ret_t.span]),
-            }
-          )
+          return new Exps.ImPi(binding.name, binding.exp, result, {
+            span: pt.span_closure([binding.span, ret_t.span]),
+          })
         }
       }
     }, exp_matcher(ret_t))
@@ -69,7 +63,7 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
             )
           }
 
-          return new Exps.ImFn(name_entry.name, name_entry.name, result, {
+          return new Exps.ImFn(name_entry.name, result, {
             span: pt.span_closure([name_entry.span, ret.span]),
           })
         }
@@ -401,7 +395,7 @@ export function declaration_matcher(tree: pt.Tree): Exp {
                 )
               }
 
-              return new Exps.ImFn(binding.name, binding.name, result, {
+              return new Exps.ImFn(binding.name, result, {
                 span: pt.span_closure([binding.span, ret.span]),
               })
             }
@@ -477,7 +471,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
                 )
               }
 
-              return new Exps.ImFn(binding.name, binding.name, result, {
+              return new Exps.ImFn(binding.name, result, {
                 span: pt.span_closure([binding.span, ret.span]),
               })
             }

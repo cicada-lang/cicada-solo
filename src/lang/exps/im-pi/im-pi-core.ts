@@ -8,19 +8,12 @@ import * as Exps from "../../exps"
 import { PiFormater } from "../pi/pi-formater"
 
 export class ImPiCore extends Core {
-  field_name: string
   name: string
   arg_t: Core
   ret_t: Exps.PiCore | Exps.ImPiCore
 
-  constructor(
-    field_name: string,
-    name: string,
-    arg_t: Core,
-    ret_t: Exps.PiCore | Exps.ImPiCore
-  ) {
+  constructor(name: string, arg_t: Core, ret_t: Exps.PiCore | Exps.ImPiCore) {
     super()
-    this.field_name = field_name
     this.name = name
     this.arg_t = arg_t
     this.ret_t = ret_t
@@ -29,13 +22,11 @@ export class ImPiCore extends Core {
   evaluate(env: Env): Value {
     if (this.ret_t instanceof Exps.PiCore) {
       return new Exps.BaseImPiValue(
-        this.field_name,
         evaluate(env, this.arg_t),
         new Closure(env, this.name, this.ret_t)
       )
     } else {
       return new Exps.ConsImPiValue(
-        this.field_name,
         evaluate(env, this.arg_t),
         new Closure(env, this.name, this.ret_t)
       )

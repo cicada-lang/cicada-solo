@@ -10,43 +10,29 @@ import { FnFormater } from "../pi/fn-formater"
 
 export class ImFn extends Exp {
   meta: ExpMeta
-  field_name: string
-  local_name: string
+  name: string
   ret: Exps.Fn | Exps.ImFn
 
-  constructor(
-    field_name: string,
-    local_name: string,
-    ret: Exps.Fn | Exps.ImFn,
-    meta: ExpMeta
-  ) {
+  constructor(name: string, ret: Exps.Fn | Exps.ImFn, meta: ExpMeta) {
     super()
     this.meta = meta
-    this.field_name = field_name
-    this.local_name = local_name
+    this.name = name
     this.ret = ret
   }
 
-  get name(): string {
-    return this.local_name
-  }
-
   free_names(bound_names: Set<string>): Set<string> {
-    return new Set(
-      this.ret.free_names(new Set([...bound_names, this.local_name]))
-    )
+    return new Set(this.ret.free_names(new Set([...bound_names, this.name])))
   }
 
   subst(name: string, exp: Exp): ImFn {
-    if (this.local_name === name) {
+    if (this.name === name) {
       return this
     } else {
       const free_names = exp.free_names(new Set())
-      const fresh_name = ut.freshen(free_names, this.local_name)
-      const ret = subst(this.ret, this.local_name, new Exps.Var(fresh_name))
+      const fresh_name = ut.freshen(free_names, this.name)
+      const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
 
       return new ImFn(
-        this.field_name,
         fresh_name,
         subst(ret, name, exp) as Exps.Fn | Exps.ImFn,
         this.meta
@@ -65,10 +51,7 @@ export class ImFn extends Exp {
       )
     }
 
-    return t.insert_im_fn(ctx, this.ret, {
-      field_name: this.field_name,
-      local_name: this.local_name,
-    })
+    return t.insert_im_fn(ctx, this.ret)
   }
 
   fn_formater: FnFormater = new FnFormater(this, {

@@ -62,7 +62,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                 )
               }
 
-              return new Exps.ImFn(binding.name, binding.name, result, {
+              return new Exps.ImFn(binding.name, result, {
                 span: pt.span_closure([binding.span, ret.span]),
               })
             }

@@ -1,11 +1,3 @@
-# simplify-im-pi
-
-- `im-pi` merge `field_name` and `local_name` into name
-
-  - since the semantic is not record any more
-
-  - `im-pi` -- core and exp should not use `field_name`
-
 # fixed pi
 
 > implicit argument in check mode, be able to solve implicit arguments from return type

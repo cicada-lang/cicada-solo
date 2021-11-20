@@ -11,13 +11,11 @@ import * as Exps from "../../exps"
 import { ReadbackEtaExpansion } from "../../value"
 
 export abstract class ImPiValue extends Value implements ReadbackEtaExpansion {
-  field_name: string
   arg_t: Value
   ret_t_cl: Closure
 
-  constructor(field_name: string, arg_t: Value, ret_t_cl: Closure) {
+  constructor(arg_t: Value, ret_t_cl: Closure) {
     super()
-    this.field_name = field_name
     this.arg_t = arg_t
     this.ret_t_cl = ret_t_cl
   }
@@ -48,7 +46,7 @@ export abstract class ImPiValue extends Value implements ReadbackEtaExpansion {
         )
       }
 
-      return new Exps.ImPiCore(this.field_name, fresh_name, arg_t, ret_t_core)
+      return new Exps.ImPiCore(fresh_name, arg_t, ret_t_core)
     }
   }
 
@@ -75,7 +73,7 @@ export abstract class ImPiValue extends Value implements ReadbackEtaExpansion {
       )
     }
 
-    return new Exps.ImFnCore(this.field_name, fresh_name, result)
+    return new Exps.ImFnCore(fresh_name, result)
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
@@ -101,14 +99,7 @@ export abstract class ImPiValue extends Value implements ReadbackEtaExpansion {
     )
   }
 
-  abstract insert_im_fn(
-    ctx: Ctx,
-    fn: Exps.Fn,
-    renaming?: {
-      field_name: string
-      local_name: string
-    }
-  ): Core
+  abstract insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core
 
   abstract insert_im_ap(
     ctx: Ctx,
