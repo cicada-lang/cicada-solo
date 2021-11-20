@@ -51,20 +51,12 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
               })
             }
             case "implicit": {
-              if (!(result instanceof Exps.Fn || result instanceof Exps.ImFn)) {
-                throw new pt.ParsingError(
-                  [
-                    `When reducing implicit names,`,
-                    `I expects the result to be Exps.Fn or Exps.ImFn`,
-                    `  class name: ${result.constructor.name}`,
-                  ].join("\n"),
-                  { span: binding.span }
-                )
-              }
-
               return new Exps.ImFn(binding.name, result, {
                 span: pt.span_closure([binding.span, ret.span]),
               })
+            }
+            case "fixed": {
+              throw new Error("TODO")
             }
           }
         }, exp_matcher(ret))

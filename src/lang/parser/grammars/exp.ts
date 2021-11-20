@@ -425,6 +425,7 @@ export const binding = {
       '":"',
       { exp: "exp" },
     ],
+    "binding:fixed": ['"fixed"', { name: "identifier" }, '":"', { exp: "exp" }],
   },
 }
 

@@ -2,15 +2,19 @@
 
 > implicit argument in check mode, be able to solve implicit arguments from return type
 
-- `fixed-pi/fixed-pi` -- `syntax`
+- `fixed-pi/fixed-pi` -- syntax test
 
 - `fixed-pi/fixed-ap`
 - `fixed-pi/fixed-ap-core`
 - `fixed-pi/fixed-ap-neutral`
 
+- `fixed-pi/fixed-ap` -- syntax
+
 - `fixed-pi/fixed-fn`
 - `fixed-pi/fixed-fn-core`
 - `fixed-pi/fixed-fn-value`
+
+- `fixed-pi/fixed-fn` -- syntax
 
 - `fixed-pi/fixed-pi-value` -- `readback_eta_expansion`
 

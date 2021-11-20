@@ -20,18 +20,12 @@ export function pi_handler(
           })
         }
         case "implicit": {
-          if (!(result instanceof Exps.Pi || result instanceof Exps.ImPi)) {
-            throw new pt.ParsingError(
-              [
-                `When reducing implicit names,`,
-                `I expects the result to be Exps.Pi or Exps.ImPi`,
-                `  class name: ${result.constructor.name}`,
-              ].join("\n"),
-              { span: binding.span }
-            )
-          }
-
           return new Exps.ImPi(binding.name, binding.exp, result, {
+            span: pt.span_closure([binding.span, ret_t.span]),
+          })
+        }
+        case "fixed": {
+          return new Exps.FixedPi(binding.name, binding.exp, result, {
             span: pt.span_closure([binding.span, ret_t.span]),
           })
         }
@@ -52,17 +46,6 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
           })
         }
         case "implicit": {
-          if (!(result instanceof Exps.Fn || result instanceof Exps.ImFn)) {
-            throw new pt.ParsingError(
-              [
-                `When reducing implicit names,`,
-                `the names_matcher expects the result to be Exps.Fn or Exps.ImFn`,
-                `class name: ${result.constructor.name}`,
-              ].join("\n"),
-              { span: name_entry.span }
-            )
-          }
-
           return new Exps.ImFn(name_entry.name, result, {
             span: pt.span_closure([name_entry.span, ret.span]),
           })
@@ -384,20 +367,12 @@ export function declaration_matcher(tree: pt.Tree): Exp {
             }
 
             case "implicit": {
-              if (!(result instanceof Exps.Fn || result instanceof Exps.ImFn)) {
-                throw new pt.ParsingError(
-                  [
-                    `When reducing implicit names,`,
-                    `I expects the result to be Exps.Fn or Exps.Fn`,
-                    `  class name: ${result.constructor.name}`,
-                  ].join("\n"),
-                  { span }
-                )
-              }
-
               return new Exps.ImFn(binding.name, result, {
                 span: pt.span_closure([binding.span, ret.span]),
               })
+            }
+            case "fixed": {
+              throw new Error("TODO")
             }
           }
         }, exp_matcher(ret))
@@ -460,20 +435,12 @@ export function cls_entry_matcher(tree: pt.Tree): {
               })
             }
             case "implicit": {
-              if (!(result instanceof Exps.Fn || result instanceof Exps.ImFn)) {
-                throw new pt.ParsingError(
-                  [
-                    `When reducing implicit names,`,
-                    `I expects the result to be Exps.Fn or Exps.ImFn`,
-                    `  class name: ${result.constructor.name}`,
-                  ].join("\n"),
-                  { span }
-                )
-              }
-
               return new Exps.ImFn(binding.name, result, {
                 span: pt.span_closure([binding.span, ret.span]),
               })
+            }
+            case "fixed": {
+              throw new Error("TODO")
             }
           }
         }, exp_matcher(ret))
@@ -491,6 +458,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
 type Binding =
   | { kind: "named"; name: string; exp: Exp; span: pt.Span }
   | { kind: "implicit"; name: string; exp: Exp; span: pt.Span }
+  | { kind: "fixed"; name: string; exp: Exp; span: pt.Span }
 
 export function bindings_matcher(tree: pt.Tree): Array<Binding> {
   return pt.matcher({
@@ -517,6 +485,12 @@ export function binding_matcher(tree: pt.Tree): Binding {
     }),
     "binding:implicit": ({ name, exp }, { span }) => ({
       kind: "implicit",
+      name: pt.str(name),
+      exp: exp_matcher(exp),
+      span,
+    }),
+    "binding:fixed": ({ name, exp }, { span }) => ({
+      kind: "fixed",
       name: pt.str(name),
       exp: exp_matcher(exp),
       span,
