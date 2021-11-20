@@ -5,7 +5,7 @@
     - because there is not structural difference between `base-im-pi-value` & `cons-im-pi-value`,
       the only difference is about insertion
 
-  - `last-im-inserter` & `more-im-inserter` extends `im-inserter`
+  - `more-im-inserter` extends `im-inserter`
 
 # fixed pi
 

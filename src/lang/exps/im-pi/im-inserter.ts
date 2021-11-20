@@ -2,13 +2,8 @@ import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Core } from "../../core"
 import { Solution } from "../../solution"
-import { readback } from "../../value"
 import { Value } from "../../value"
-import { Closure } from "../closure"
-import { ExpTrace } from "../../errors"
-import * as ut from "../../../ut"
 import * as Exps from "../../exps"
-import { ReadbackEtaExpansion } from "../../value"
 
 export interface ImApInsertionEntry {
   arg_t: Value
