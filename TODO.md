@@ -3,9 +3,8 @@
 > We need implicit argument in check mode,
 > be able to solve implicit arguments from return type.
 
-- `fixed-pi/fixed-fn-value`
-- `fixed-pi/fixed-fn` -- `check`
 - `fixed-pi/fixed-fn-core` -- `evaluate`
+- `fixed-pi/fixed-fn` -- `check`
 - `fixed-pi/fixed-fn` -- syntax
 
 - `fixed-pi/fixed-ap`
