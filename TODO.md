@@ -1,6 +1,6 @@
 # syntax
 
-- `Exps.Begin` for code block `{ ... }`
+- `Exps.Sequence` for code block `{ ... }`
 
   - remove `Exp.is_sequence` & `Core.is_sequence`
 
@@ -19,7 +19,11 @@
 > We need implicit argument in check mode,
 > be able to solve implicit arguments from return type.
 
-- `fixed-pi/fixed-fn` -- `check` -- maybe we need `fixed_fn_inserter`?
+- `fixed-pi/fixed-fn` -- `check`
+
+  - why we need `im_inserter.insert_im_fn` for `im-fn.check`?
+
+  - maybe we need `fixed_inserter.insert_fixed_fn`?
 
 - `fixed-pi/fixed-ap`
 - `fixed-pi/fixed-ap-core`
