@@ -7,10 +7,10 @@ I found syntax error in file: abc-pre-filled.error.cic
  12 |  c: "c"
  13 |}
 Found the identifier "b" in [142, 143], while expecting:
+ "=":
+     sequence_entry:let_the@39 -> (name: identifier)@40 ":"@41 (t: exp):operand@42 > "=" (exp: exp) optional 
  ",":
      zero_or_more:more@39 -> (head: property):field@42 > "," (tail: zero_or_more) 
  ",":
      optional:one@42 -> > "," 
- "}":
-     operand:obj@38 -> "{"@39 (properties: zero_or_more):zero@39 (last_property: property):field@42 optional:zero@42 > "}" 
  and so on ...

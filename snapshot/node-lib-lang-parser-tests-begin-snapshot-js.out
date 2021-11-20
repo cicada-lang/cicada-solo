@@ -1,0 +1,7 @@
+a = the(Nat, { y = 2; x = 1; x })
+b = the(Nat, { y = 2; x = the(Nat, { 1 }); x })
+ABC = class {
+  a: String
+  b: String
+  c: String
+}

@@ -99,6 +99,16 @@ export function operator_matcher(tree: pt.Tree): Exp {
           }
         }, operator_matcher(target)),
     "operator:fn": fn_handler,
+    "operator:sequence_begin": ({ entries, ret }, { span }) => {
+      let result = exp_matcher(ret)
+      for (const { name, exp, span } of pt.matchers
+        .zero_or_more_matcher(entries)
+        .map(sequence_entry_matcher)) {
+        result = new Exps.Let(name, exp, result, { span })
+      }
+
+      return new Exps.Begin(result, { span })
+    },
     "operator:car": ({ target }, { span }) =>
       new Exps.Car(exp_matcher(target), { span }),
     "operator:cdr": ({ target }, { span }) =>
@@ -351,15 +361,6 @@ export function declaration_matcher(tree: pt.Tree): Exp {
         exp_matcher(ret),
         { span }
       ),
-    "declaration:let_the_flower_bracket": ({ name, t, exp, ret }, { span }) =>
-      new Exps.Let(
-        pt.str(name),
-        new Exps.The(exp_matcher(t), exp_matcher(exp), {
-          span: pt.span_closure([t.span, exp.span]),
-        }),
-        exp_matcher(ret),
-        { span }
-      ),
     "declaration:let_fn": ({ name, bindings, ret_t, ret, body }, { span }) => {
       const fn = bindings_matcher(bindings)
         .reverse()
@@ -392,6 +393,62 @@ export function declaration_matcher(tree: pt.Tree): Exp {
         exp_matcher(body),
         { span }
       )
+    },
+  })(tree)
+}
+
+export function sequence_entry_matcher(tree: pt.Tree): {
+  name: string
+  exp: Exp
+  span: pt.Span
+} {
+  return pt.matcher({
+    "sequence_entry:let": ({ name, exp, ret }, { span }) => ({
+      name: pt.str(name),
+      exp: exp_matcher(exp),
+      span,
+    }),
+    "sequence_entry:let_the": ({ name, t, exp, ret }, { span }) => ({
+      name: pt.str(name),
+      exp: new Exps.The(exp_matcher(t), exp_matcher(exp), {
+        span: pt.span_closure([t.span, exp.span]),
+      }),
+      span,
+    }),
+    "sequence_entry:let_fn": (
+      { name, bindings, ret_t, ret, body },
+      { span }
+    ) => {
+      const fn = bindings_matcher(bindings)
+        .reverse()
+        .reduce((result, binding) => {
+          switch (binding.kind) {
+            case "named": {
+              return new Exps.Fn(binding.name, result, {
+                span: pt.span_closure([binding.span, ret.span]),
+              })
+            }
+
+            case "implicit": {
+              return new Exps.ImFn(binding.name, result, {
+                span: pt.span_closure([binding.span, ret.span]),
+              })
+            }
+            case "fixed": {
+              return new Exps.FixedFn(binding.name, result, {
+                span: pt.span_closure([binding.span, ret.span]),
+              })
+            }
+          }
+        }, exp_matcher(ret))
+
+      return {
+        name: pt.str(name),
+        exp: new Exps.The(pi_handler({ bindings, ret_t }, { span }), fn, {
+          span: pt.span_closure([bindings.span, ret_t.span, ret.span]),
+        }),
+        span,
+      }
     },
   })(tree)
 }

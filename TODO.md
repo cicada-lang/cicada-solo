@@ -1,6 +1,8 @@
-- `sequence` -- syntax `{ ..., return ... }`
+- require `return` for top level function definition
 
-- `sequence-formater`
+  - remove top-level `declaration`
+
+- `sequence/let` -- `format` print `return`
 
 - maybe
 

@@ -15,6 +15,13 @@ export const operator = {
       { ret: "exp" },
       '"}"',
     ],
+    "operator:sequence_begin": [
+      '"{"',
+      { entries: { $ap: ["zero_or_more", "sequence_entry"] } },
+      '"return"',
+      { ret: "exp" },
+      '"}"',
+    ],
     "operator:car": ['"car"', '"("', { target: "exp" }, '")"'],
     "operator:cdr": ['"cdr"', '"("', { target: "exp" }, '")"'],
     "operator:dot_field": [
@@ -337,6 +344,37 @@ export const declaration = {
       '"}"',
       { $ap: ["optional", '";"'] },
       { body: "exp" },
+    ],
+  },
+}
+
+export const sequence_entry = {
+  $grammar: {
+    "sequence_entry:let": [
+      { name: "identifier" },
+      '"="',
+      { exp: "exp" },
+      { $ap: ["optional", '";"'] },
+    ],
+    "sequence_entry:let_the": [
+      { name: "identifier" },
+      '":"',
+      { t: "exp" },
+      '"="',
+      { exp: "exp" },
+      { $ap: ["optional", '";"'] },
+    ],
+    "sequence_entry:let_fn": [
+      { name: "identifier" },
+      '"("',
+      { bindings: "bindings" },
+      '")"',
+      '":"',
+      { ret_t: "exp" },
+      '"{"',
+      { ret: "exp" },
+      '"}"',
+      { $ap: ["optional", '";"'] },
     ],
   },
 }
