@@ -20,8 +20,11 @@ export class FixedPiCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
+    const arg_t = evaluate(env, this.arg_t)
+    const ret_t_cl = new Closure(env, this.name, this.ret_t)
+    return new Exps.FixedPiValue(arg_t, ret_t_cl)
   }
+
 
   pi_formater: PiFormater = new PiFormater(this, {
     decorate_binding: (binding) => `fixed ${binding}`,

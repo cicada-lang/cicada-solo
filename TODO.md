@@ -2,9 +2,6 @@
 
 > implicit argument in check mode, be able to solve implicit arguments from return type
 
-- `fixed-pi/fixed-pi-core` -- `evaluate`
-- `fixed-pi/fixed-pi-value` -- `readback_eta_expansion`
-
 - `fixed-pi/fixed-pi` -- `syntax`
 
 - `fixed-pi/fixed-ap`
@@ -14,6 +11,8 @@
 - `fixed-pi/fixed-fn`
 - `fixed-pi/fixed-fn-core`
 - `fixed-pi/fixed-fn-value`
+
+- `fixed-pi/fixed-pi-value` -- `readback_eta_expansion`
 
 - example:
 
