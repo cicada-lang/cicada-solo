@@ -11,9 +11,7 @@
   to use `is(inl(x), Either(A, (A) -> B))`,
   instead of `_ = is(inl(x), Either(A, (A) -> B))`
 
-- remove `Exps.Let`
-
-- remove `Exp.is_sequence` & `Core.is_sequence`
+  - maybe `check inl(x): Either(A, (A) -> B)`
 
 # fixed pi
 

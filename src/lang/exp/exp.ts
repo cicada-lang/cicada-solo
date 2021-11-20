@@ -20,7 +20,4 @@ export abstract class Exp {
 
   check?(ctx: Ctx, t: Value, opts?: ElaborationOptions): Core
   infer?(ctx: Ctx, opts?: ElaborationOptions): { t: Value; core: Core }
-
-  // TODO should be removed after improving syntax
-  is_sequence: boolean = false
 }

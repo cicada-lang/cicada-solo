@@ -15,8 +15,6 @@ export class LetCore extends Core {
     this.ret = ret
   }
 
-  is_sequence = true
-
   evaluate(env: Env): Value {
     const value = evaluate(env, this.exp)
     return evaluate(env.extend(this.name, value), this.ret)
