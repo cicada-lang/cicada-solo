@@ -443,6 +443,7 @@ export const name_entry = {
   $grammar: {
     "name_entry:name_entry": [{ name: "identifier" }],
     "name_entry:implicit_name_entry": ['"implicit"', { name: "identifier" }],
+    "name_entry:fixed_name_entry": ['"fixed"', { name: "identifier" }],
   },
 }
 

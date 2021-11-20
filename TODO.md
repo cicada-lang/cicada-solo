@@ -3,10 +3,11 @@
 > We need implicit argument in check mode,
 > be able to solve implicit arguments from return type.
 
-- `fixed-pi/fixed-fn` -- syntax
 - `fixed-pi/fixed-fn` -- syntax -- test
 
-- `fixed-pi/fixed-fn` -- `check`
+- `fixed-pi/fixed-fn` -- `check` -- maybe we need `fixed_inserter`?
+
+- [maybe] split `im-inserter` to `im-fn-inserter` and `im-pi-inserter`
 
 - `fixed-pi/fixed-ap`
 - `fixed-pi/fixed-ap-core`

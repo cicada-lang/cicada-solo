@@ -56,7 +56,9 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
               })
             }
             case "fixed": {
-              throw new Error("TODO")
+              return new Exps.FixedFn(binding.name, result, {
+                span: pt.span_closure([binding.span, ret.span]),
+              })
             }
           }
         }, exp_matcher(ret))

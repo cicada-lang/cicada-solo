@@ -50,6 +50,11 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
             span: pt.span_closure([name_entry.span, ret.span]),
           })
         }
+        case "fixed": {
+          return new Exps.FixedFn(name_entry.name, result, {
+            span: pt.span_closure([name_entry.span, ret.span]),
+          })
+        }
       }
     }, exp_matcher(ret))
 }
@@ -372,7 +377,9 @@ export function declaration_matcher(tree: pt.Tree): Exp {
               })
             }
             case "fixed": {
-              throw new Error("TODO")
+              return new Exps.FixedFn(binding.name, result, {
+                span: pt.span_closure([binding.span, ret.span]),
+              })
             }
           }
         }, exp_matcher(ret))
@@ -440,7 +447,9 @@ export function cls_entry_matcher(tree: pt.Tree): {
               })
             }
             case "fixed": {
-              throw new Error("TODO")
+              return new Exps.FixedFn(binding.name, result, {
+                span: pt.span_closure([binding.span, ret.span]),
+              })
             }
           }
         }, exp_matcher(ret))
@@ -535,6 +544,7 @@ export function names_matcher(tree: pt.Tree): Array<NameEntry> {
 type NameEntry =
   | { kind: "name"; name: string; span: pt.Span }
   | { kind: "implicit"; name: string; span: pt.Span }
+  | { kind: "fixed"; name: string; span: pt.Span }
 
 export function name_entry_matcher(tree: pt.Tree): NameEntry {
   return pt.matcher<NameEntry>({
@@ -545,6 +555,11 @@ export function name_entry_matcher(tree: pt.Tree): NameEntry {
     }),
     "name_entry:implicit_name_entry": ({ name }, { span }) => ({
       kind: "implicit",
+      name: pt.str(name),
+      span,
+    }),
+    "name_entry:fixed_name_entry": ({ name }, { span }) => ({
+      kind: "fixed",
       name: pt.str(name),
       span,
     }),
