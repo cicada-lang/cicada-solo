@@ -33,6 +33,14 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         }),
         { span }
       ),
+    "stmt:check": ({ t, exp }, { span }) =>
+      new Stmts.Define(
+        "_",
+        new Exps.The(exp_matcher(t), exp_matcher(exp), {
+          span: pt.span_closure([t.span, exp.span]),
+        }),
+        { span }
+      ),
     "stmt:define_fn": ({ name, bindings, ret_t, sequence }, { span }) => {
       const init: Exp = sequence_matcher(sequence)
       const fn = bindings_matcher(bindings)

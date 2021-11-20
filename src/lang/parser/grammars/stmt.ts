@@ -15,6 +15,7 @@ export const stmt = {
       '"="',
       { exp: "exp" },
     ],
+    "stmt:check": ['"check"', '"!"', { exp: "exp" }, '":"', { t: "exp" }],
     "stmt:define_fn": [
       '"function"',
       { name: "identifier" },

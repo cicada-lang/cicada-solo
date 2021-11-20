@@ -371,6 +371,13 @@ export function sequence_entry_matcher(tree: pt.Tree): {
       }),
       span,
     }),
+    "sequence_entry:check": ({ t, exp, ret }, { span }) => ({
+      name: "_",
+      exp: new Exps.The(exp_matcher(t), exp_matcher(exp), {
+        span: pt.span_closure([t.span, exp.span]),
+      }),
+      span,
+    }),
     "sequence_entry:let_fn": (
       { name, bindings, ret_t, sequence, body },
       { span }

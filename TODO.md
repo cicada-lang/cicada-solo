@@ -1,11 +1,3 @@
-> support `check`
-> - example `check inl(x): Either(A, (A) -> B)`
-
-- `sequence/check`
-- `sequence/check-core`
-
-- fix roland backhouse example
-
 # fixed pi
 
 > We need implicit argument in check mode,

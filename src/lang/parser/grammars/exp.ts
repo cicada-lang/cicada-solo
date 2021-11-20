@@ -328,6 +328,14 @@ export const sequence_entry = {
       { exp: "exp" },
       { $ap: ["optional", '";"'] },
     ],
+    "sequence_entry:check": [
+      '"check"',
+      '"!"',
+      { exp: "exp" },
+      '":"',
+      { t: "exp" },
+      { $ap: ["optional", '";"'] },
+    ],
     "sequence_entry:let_fn": [
       '"function"',
       { name: "identifier" },
