@@ -59,10 +59,6 @@ export class ParserTester {
     const stmts = this.parser.parse_stmts(text)
     for (const stmt of stmts) {
       console.log(stmt.format())
-
-      if (stmt instanceof Stmts.Show) {
-        console.error(pt.report(stmt.meta.span, text))
-      }
     }
   }
 

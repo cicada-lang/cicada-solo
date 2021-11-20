@@ -23,10 +23,10 @@ export function stmts_matcher(tree: pt.Tree): Array<Stmt> {
 
 export function stmt_matcher(tree: pt.Tree): Stmt {
   return pt.matcher<Stmt>({
-    "stmt:define": ({ name, exp }, { span }) =>
-      new Stmts.Define(pt.str(name), exp_matcher(exp), { span }),
-    "stmt:define_the": ({ name, t, exp }, { span }) =>
-      new Stmts.Define(
+    "stmt:let": ({ name, exp }, { span }) =>
+      new Stmts.Let(pt.str(name), exp_matcher(exp), { span }),
+    "stmt:let_the": ({ name, t, exp }, { span }) =>
+      new Stmts.Let(
         pt.str(name),
         new Exps.The(exp_matcher(t), exp_matcher(exp), {
           span: pt.span_closure([t.span, exp.span]),
@@ -40,7 +40,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
         }),
         { span }
       ),
-    "stmt:define_fn": ({ name, bindings, ret_t, sequence }, { span }) => {
+    "stmt:let_fn": ({ name, bindings, ret_t, sequence }, { span }) => {
       const init: Exp = sequence_matcher(sequence)
       const fn = bindings_matcher(bindings)
         .reverse()
@@ -64,7 +64,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
           }
         }, init)
 
-      return new Stmts.Define(
+      return new Stmts.Let(
         pt.str(name),
         new Exps.The(pi_handler({ bindings, ret_t }, { span }), fn, {
           span: pt.span_closure([bindings.span, ret_t.span, sequence.span]),

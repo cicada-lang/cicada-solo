@@ -1,3 +1,5 @@
+- remove `there exists` and `for all` syntax
+
 # fixed pi
 
 > We need implicit argument in check mode,

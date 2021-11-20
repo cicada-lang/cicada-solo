@@ -3,7 +3,7 @@ import { Module } from "../../module"
 import { Exp } from "../exp"
 import { infer } from "../exp"
 
-export class Define extends Stmt {
+export class Let extends Stmt {
   meta: StmtMeta
   name: string
   exp: Exp

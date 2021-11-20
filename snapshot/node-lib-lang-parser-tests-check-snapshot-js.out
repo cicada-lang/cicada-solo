@@ -1,3 +1,3 @@
 let example = the((implicit A: Type, implicit B: Type, f: (_: Either(A, (_: A) -> B)) -> B) -> B, (implicit A, implicit B, f) => { g = the((x: A) -> B, (x) => { _ = the(Either(A, (_: A) -> B), inl(x)); _ = the(B, f(inl(x))); return f(inl(x)) }); _ = the(Either(A, (_: A) -> B), inr(g)); _ = the(B, f(inr(g))); return f(inr(g)) })
-let _ = the(Either(A, (_: A) -> B), inl(x))
-let _ = the(B, f(inl(x)))
+the(Either(A, (_: A) -> B), inl(x))
+the(B, f(inl(x)))
