@@ -22,6 +22,8 @@ export class Let extends Exp {
     this.ret = ret
   }
 
+  is_sequence = true
+
   free_names(bound_names: Set<string>): Set<string> {
     return new Set([
       ...this.exp.free_names(bound_names),

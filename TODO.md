@@ -1,4 +1,4 @@
-- [syntax] `fn` and `im-fn` should `{ ... }` when `ret` is not `let`
+# refactor
 
 > split `im-inserter` to `im-fn-inserter` & `im-ap-inserter`
 
@@ -6,6 +6,22 @@
 - `im-ap-inserter`
 
 - replace `im-inserter` by `im-fn-inserter` & `im-ap-inserter`
+
+# syntax
+
+- `Exps.Begin` for code block `{ ... }`
+
+  - remove `Exp.is_sequence` & `Core.is_sequence`
+
+  - contains sequence of stmt
+
+    - `Exps.LetStmt` -- elaboration to `Exps.Let`
+    - `Exps.ShowStmt` -- will be checked (inferred) by dropped during elaboration
+    - `Exps.ReturnStmt`
+
+  - support show in code block,
+    to use `is(inl(x), Either(A, (A) -> B))`,
+    instead of `_ = is(inl(x), Either(A, (A) -> B))`
 
 # fixed pi
 
@@ -76,20 +92,6 @@
 
   - The same situation occurs for fulfilling type, which is of `Type`,
     but can also be applied to get partly fulfilled types.
-
-# syntax
-
-- `Exps.Begin` for code block `{ ... }`
-
-  - contains list of stmt
-
-    - `Exps.LetStmt` -- elaboration to `Exps.Let`
-    - `Exps.ShowStmt` -- will be checked (inferred) by dropped during elaboration
-    - `Exps.ReturnStmt`
-
-  - support show in code block,
-    to use `is(inl(x), Either(A, (A) -> B))`,
-    instead of `_ = is(inl(x), Either(A, (A) -> B))`
 
 # prelude
 

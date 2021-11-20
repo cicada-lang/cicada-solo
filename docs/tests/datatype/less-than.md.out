@@ -1,3 +1,3 @@
-(j, k) => { LessThan(j, k) }: (j: Nat, k: Nat) -> Type
-(k) => { LessThan(1, k) }: (k: Nat) -> Type
+(j, k) => LessThan(j, k): (j: Nat, k: Nat) -> Type
+(k) => LessThan(1, k): (k: Nat) -> Type
 LessThan(1, 2): Type

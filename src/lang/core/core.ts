@@ -8,6 +8,9 @@ export abstract class Core {
   abstract evaluate(env: Env): Value
   abstract format(): string
   abstract alpha_format(ctx: AlphaCtx): string
+
+  // TODO should be removed after improving syntax
+  is_sequence: boolean = false
 }
 
 export class AlphaCtx {

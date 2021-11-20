@@ -1,4 +1,4 @@
-(E) => { MyList(E) }: (E: Type) -> Type
+(E) => MyList(E): (E: Type) -> Type
 MyList(Nat): Type
 refl: Equal(Nat, 3, 3)
 refl: Equal(List(Nat), li(1, li(2, li(3, li(4, li(5, li(6, nil)))))), li(1, li(2, li(3, li(4, li(5, li(6, nil)))))))

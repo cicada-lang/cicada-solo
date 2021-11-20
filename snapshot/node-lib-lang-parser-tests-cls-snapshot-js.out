@@ -11,8 +11,8 @@ class {
 { a, b, c }
 { a, b, c }
 { a: f(x), b: g(y), c: z }
-{ a: (x) => { f(x) } }
-{ a: (x) => { f(x) } }
+{ a: (x) => f(x) }
+{ a: (x) => f(x) }
 object.field
 object.method(x)
 object.method(x, y)
