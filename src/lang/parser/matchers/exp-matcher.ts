@@ -372,36 +372,37 @@ export function sequence_entry_matcher(tree: pt.Tree): {
       span,
     }),
     "sequence_entry:let_fn": (
-      { name, bindings, ret_t, ret, body },
+      { name, bindings, ret_t, sequence, body },
       { span }
     ) => {
+      const init: Exp = sequence_matcher(sequence)
       const fn = bindings_matcher(bindings)
         .reverse()
         .reduce((result, binding) => {
           switch (binding.kind) {
             case "named": {
               return new Exps.Fn(binding.name, result, {
-                span: pt.span_closure([binding.span, ret.span]),
+                span: pt.span_closure([binding.span, sequence.span]),
               })
             }
 
             case "implicit": {
               return new Exps.ImFn(binding.name, result, {
-                span: pt.span_closure([binding.span, ret.span]),
+                span: pt.span_closure([binding.span, sequence.span]),
               })
             }
             case "fixed": {
               return new Exps.FixedFn(binding.name, result, {
-                span: pt.span_closure([binding.span, ret.span]),
+                span: pt.span_closure([binding.span, sequence.span]),
               })
             }
           }
-        }, exp_matcher(ret))
+        }, init)
 
       return {
         name: pt.str(name),
         exp: new Exps.The(pi_handler({ bindings, ret_t }, { span }), fn, {
-          span: pt.span_closure([bindings.span, ret_t.span, ret.span]),
+          span: pt.span_closure([bindings.span, ret_t.span, sequence.span]),
         }),
         span,
       }
