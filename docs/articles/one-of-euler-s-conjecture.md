@@ -5,11 +5,15 @@ subtitle: An example from "Patterns of plausible inference"
 
 ``` cicada
 add: (Nat, Nat) -> Nat = (x, y) => {
-  nat_rec(x, y, (_prev, almost) => { add1(almost) })
+  return nat_rec(x, y, (_prev, almost) => {
+    return add1(almost)
+  })
 }
 
 mul: (Nat, Nat) -> Nat = (x, y) => {
-  nat_rec(x, 0, (_prev, almost) => { add(almost, y) })
+  return nat_rec(x, 0, (_prev, almost) => {
+    return add(almost, y)
+  })
 }
 
 Prime(n: Nat): Type {

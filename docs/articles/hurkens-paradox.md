@@ -49,7 +49,7 @@ lem1(p: P(U), H1: (x: U, _: sigma(x, p)) -> p(x)): p(omega) {
 }
 
 lem2: Not(D) = lem1(delta, (x, H2, H3) => {
-  H3(delta, H2, (p) => H3((y) => p(tauon(sigma(y)))))
+  return H3(delta, H2, (p) => H3((y) => p(tauon(sigma(y)))))
 })
 
 lem3: D = (p) => lem1((y) => p(tauon(sigma(y))))

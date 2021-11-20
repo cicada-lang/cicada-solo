@@ -167,7 +167,7 @@ list_ref_direct(index: Nat, implicit E: Type, list: List(E)): Maybe(E) {
     (_) => (List(E)) -> Maybe(E),
     (list) => maybe_head(list),
     (prev, almost) => (list) => {
-      induction_maybe(
+      return induction_maybe(
         maybe_tail(list),
         (_) => Maybe(E),
         (tail) => almost(tail),
@@ -195,7 +195,7 @@ list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
     (_) => (List(E)) -> Maybe(E),
     (list) => maybe_head(list),
     (prev, almost) => (list) => {
-      induction_maybe(
+      return induction_maybe(
         maybe_tail(list),
         (_) => Maybe(E),
         (tail) => almost(tail),
@@ -252,7 +252,7 @@ list_ref(fixed { E: Type }, index: Nat): (List(E)) -> Maybe(E) {
     (_) => (List(E)) -> Maybe(E),
     (list) => maybe_head(list),
     (prev, almost) => (list) => {
-      induction_maybe(
+      return induction_maybe(
         maybe_tail(list),
         (_) => Maybe(E),
         (tail) => almost(tail),

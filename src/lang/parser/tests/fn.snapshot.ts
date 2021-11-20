@@ -10,7 +10,7 @@ id(A: Type, x: A): A {
 
 id: (A: Type, x: A) -> A =
   (A, x) => {
-    x
+    return x
   }
 
 id: (A: Type, x: A) -> A =
@@ -35,7 +35,7 @@ g: (Trivial) -> (Trivial) -> Trivial =
 
 g: (Trivial) -> (Trivial) -> Trivial =
   (x) => (y) => {
-    sole
+    return sole
   }
 
 `)

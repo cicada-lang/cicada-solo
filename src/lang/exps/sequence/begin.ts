@@ -23,7 +23,7 @@ export class Begin extends Exp {
   }
 
   subst(name: string, exp: Exp): Begin {
-    return new Begin(this.ret, this.meta)
+    return new Begin(subst(this.ret, name, exp), this.meta)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

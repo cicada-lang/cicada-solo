@@ -98,7 +98,6 @@ export function operator_matcher(tree: pt.Tree): Exp {
               return new Exps.ImAp(result, arg.exp, { span })
           }
         }, operator_matcher(target)),
-    "operator:fn": fn_handler,
     "operator:sequence_begin": ({ sequence }, { span }) =>
       sequence_matcher(sequence),
     "operator:car": ({ target }, { span }) =>

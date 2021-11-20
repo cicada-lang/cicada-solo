@@ -3,7 +3,7 @@
 (a: A, b: B) -> C(a, b)
 (a: A, b: B) -> C(a, b)
 (x) => body
-(x) => body
+(x) => { body }
 f(x)
 f(x, y)
 f(x, y)
