@@ -9,15 +9,22 @@ import { ExpTrace } from "../../errors"
 import * as ut from "../../../ut"
 import * as Exps from "../../exps"
 import { ReadbackEtaExpansion } from "../../value"
+import { ImInserter } from "./im-inserter"
 
-export abstract class ImPiValue extends Value implements ReadbackEtaExpansion {
+export class ImPiValue extends Value implements ReadbackEtaExpansion {
   arg_t: Value
   ret_t_cl: Closure
+  im_inserter: ImInserter
 
-  constructor(arg_t: Value, ret_t_cl: Closure) {
+  constructor(
+    arg_t: Value,
+    ret_t_cl: Closure,
+    opts: { im_inserter: ImInserter }
+  ) {
     super()
     this.arg_t = arg_t
     this.ret_t_cl = ret_t_cl
+    this.im_inserter = opts.im_inserter
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
@@ -84,21 +91,4 @@ export abstract class ImPiValue extends Value implements ReadbackEtaExpansion {
       that.ret_t_cl.apply(that_v)
     )
   }
-
-  abstract insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core
-
-  abstract insert_im_ap(
-    ctx: Ctx,
-    arg: Exp,
-    target_core: Core,
-    entries: Array<ImApInsertionEntry>
-  ): { t: Value; core: Core }
-
-  abstract solve_im_ap(ctx: Ctx, arg: Exp): Solution
-}
-
-export interface ImApInsertionEntry {
-  arg_t: Value
-  im_arg: Value
-  not_yet_value: Exps.NotYetValue
 }

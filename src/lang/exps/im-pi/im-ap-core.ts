@@ -46,7 +46,7 @@ export class ImApCore extends Core {
         )
       } else {
         throw InternalError.wrong_target_t(target.t, {
-          expected: [Exps.BaseImPiValue],
+          expected: [Exps.ImPiValue],
         })
       }
     } else {

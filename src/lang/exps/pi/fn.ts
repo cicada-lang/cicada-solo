@@ -41,7 +41,7 @@ export class Fn extends Exp {
 
   check(ctx: Ctx, t: Value): Core {
     if (t instanceof Exps.ImPiValue) {
-      return t.insert_im_fn(ctx, this)
+      return t.im_inserter.insert_im_fn(ctx, this)
     }
 
     const { arg_t, ret_t_cl } = expect(ctx, t, Exps.PiValue)

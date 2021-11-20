@@ -1,10 +1,3 @@
-- `im-pi-value` use composition instead of inheritance
-
-  - should not use `base-im-pi-value` & `cons-im-pi-value`
-
-    - because there is not structural difference between `base-im-pi-value` & `cons-im-pi-value`,
-      the only difference is about insertion
-
 # fixed pi
 
 > implicit argument in check mode, be able to solve implicit arguments from return type

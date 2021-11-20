@@ -57,7 +57,12 @@ export class Ap extends Exp {
     }
 
     if (inferred.t instanceof Exps.ImPiValue) {
-      return inferred.t.insert_im_ap(ctx, this.arg, inferred.core, [])
+      return inferred.t.im_inserter.insert_im_ap(
+        ctx,
+        this.arg,
+        inferred.core,
+        []
+      )
     }
 
     if (inferred.t instanceof Exps.PiValue) {

@@ -51,7 +51,7 @@ export class ImFn extends Exp {
       )
     }
 
-    return t.insert_im_fn(ctx, this.ret)
+    return t.im_inserter.insert_im_fn(ctx, this.ret)
   }
 
   fn_formater: FnFormater = new FnFormater(this, {

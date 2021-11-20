@@ -13,21 +13,23 @@ import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
 
 export class LastImInserter extends ImInserter {
-  im_pi: Exps.ImPiValue
+  arg_t: Value
+  ret_t_cl: Closure
 
-  constructor(im_pi: Exps.ImPiValue) {
+  constructor(arg_t: Value, ret_t_cl: Closure) {
     super()
-    this.im_pi = im_pi
+    this.arg_t = arg_t
+    this.ret_t_cl = ret_t_cl
   }
 
   insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core {
-    const fresh_name = ctx.freshen(this.im_pi.ret_t_cl.name)
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const arg = new Exps.NotYetValue(
-      this.im_pi.arg_t,
+      this.arg_t,
       new Exps.VarNeutral(fresh_name)
     )
-    const ret_t = this.im_pi.ret_t_cl.apply(arg)
-    const fn_core = check(ctx.extend(fresh_name, this.im_pi.arg_t), fn, ret_t)
+    const ret_t = this.ret_t_cl.apply(arg)
+    const fn_core = check(ctx.extend(fresh_name, this.arg_t), fn, ret_t)
 
     if (!(fn_core instanceof Exps.FnCore)) {
       throw new ExpTrace(
@@ -42,14 +44,10 @@ export class LastImInserter extends ImInserter {
   }
 
   solve_im_ap(ctx: Ctx, arg: Exp): Solution {
-    const fresh_name = ctx.freshen(this.im_pi.ret_t_cl.name)
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
-    const not_yet_value = new Exps.NotYetValue(this.im_pi.arg_t, variable)
-    const ret_t = expect(
-      ctx,
-      this.im_pi.ret_t_cl.apply(not_yet_value),
-      Exps.PiValue
-    )
+    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
+    const ret_t = expect(ctx, this.ret_t_cl.apply(not_yet_value), Exps.PiValue)
     const inferred_arg = infer(ctx, arg)
     const solution = Solution.empty.unify_or_fail(
       ctx,
@@ -77,14 +75,10 @@ export class LastImInserter extends ImInserter {
     target_core: Core,
     entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core } {
-    const fresh_name = ctx.freshen(this.im_pi.ret_t_cl.name)
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
-    const not_yet_value = new Exps.NotYetValue(this.im_pi.arg_t, variable)
-    const ret_t = expect(
-      ctx,
-      this.im_pi.ret_t_cl.apply(not_yet_value),
-      Exps.PiValue
-    )
+    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
+    const ret_t = expect(ctx, this.ret_t_cl.apply(not_yet_value), Exps.PiValue)
 
     const inferred_arg = infer(ctx, arg)
 
@@ -110,14 +104,14 @@ export class LastImInserter extends ImInserter {
           `[BaseImPiValue.insert_im_ap]`,
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
-          `  this.im_pi.arg_t class name: ${this.im_pi.arg_t.constructor.name}`,
+          `  this.arg_t class name: ${this.arg_t.constructor.name}`,
           `  arg: ${arg.format()}`,
           `  target_core: ${target_core.format()}`,
         ].join("\n")
       )
     }
 
-    const im_arg_core = readback(ctx, this.im_pi.arg_t, im_arg)
+    const im_arg_core = readback(ctx, this.arg_t, im_arg)
 
     // {
     //   // DEBUG
@@ -126,11 +120,7 @@ export class LastImInserter extends ImInserter {
 
     target = new Exps.ImApCore(target, im_arg_core)
 
-    const final_ret_t = expect(
-      ctx,
-      this.im_pi.ret_t_cl.apply(im_arg),
-      Exps.PiValue
-    )
+    const final_ret_t = expect(ctx, this.ret_t_cl.apply(im_arg), Exps.PiValue)
 
     return {
       t: final_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),

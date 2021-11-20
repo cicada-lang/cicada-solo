@@ -6,6 +6,9 @@ import { Closure } from "../closure"
 import { evaluate } from "../../core"
 import * as Exps from "../../exps"
 import { PiFormater } from "../pi/pi-formater"
+import { ImInserter } from "./im-inserter"
+import { LastImInserter } from "./last-im-inserter"
+import { MoreImInserter } from "./more-im-inserter"
 
 export class ImPiCore extends Core {
   name: string
@@ -20,15 +23,15 @@ export class ImPiCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    return this.ret_t instanceof Exps.ImPiCore
-      ? new Exps.ConsImPiValue(
-          evaluate(env, this.arg_t),
-          new Closure(env, this.name, this.ret_t)
-        )
-      : new Exps.BaseImPiValue(
-          evaluate(env, this.arg_t),
-          new Closure(env, this.name, this.ret_t)
-        )
+    const arg_t = evaluate(env, this.arg_t)
+    const ret_t_cl = new Closure(env, this.name, this.ret_t)
+
+    const im_inserter =
+      this.ret_t instanceof Exps.ImPiCore
+        ? new MoreImInserter(arg_t, ret_t_cl)
+        : new LastImInserter(arg_t, ret_t_cl)
+
+    return new Exps.ImPiValue(arg_t, ret_t_cl, { im_inserter })
   }
 
   pi_formater: PiFormater = new PiFormater(this, {
