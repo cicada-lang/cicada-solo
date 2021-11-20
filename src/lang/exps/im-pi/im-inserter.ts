@@ -12,7 +12,7 @@ export interface ImApInsertionEntry {
 }
 
 export abstract class ImInserter {
-  abstract insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core
+  abstract insert_im_fn(ctx: Ctx, fn: Exp): Core
 
   abstract insert_im_ap(
     ctx: Ctx,

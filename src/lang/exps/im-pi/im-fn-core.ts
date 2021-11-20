@@ -8,9 +8,9 @@ import { FnFormater } from "../pi/fn-formater"
 
 export class ImFnCore extends Core {
   name: string
-  ret: Exps.FnCore | Exps.ImFnCore
+  ret: Core
 
-  constructor(name: string, ret: Exps.FnCore | Exps.ImFnCore) {
+  constructor(name: string, ret: Core) {
     super()
     this.name = name
     this.ret = ret

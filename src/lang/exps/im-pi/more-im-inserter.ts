@@ -19,7 +19,7 @@ export class MoreImInserter extends ImInserter {
     this.ret_t_cl = ret_t_cl
   }
 
-  insert_im_fn(ctx: Ctx, fn: Exps.Fn): Core {
+  insert_im_fn(ctx: Ctx, fn: Exp): Core {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const arg = new Exps.NotYetValue(this.arg_t, variable)

@@ -55,15 +55,6 @@ export class FixedPiValue extends Value implements ReadbackEtaExpansion {
     //   Exps.FixedApCore.apply(value, not_yet_value)
     // )
 
-    // if (!(result instanceof Exps.FnCore || result instanceof Exps.FixedFnCore)) {
-    //   throw new ExpTrace(
-    //     [
-    //       `I expect result to be Exps.FnCore or Exps.FixedFnCore`,
-    //       `but the constructor name I meet is: ${result.constructor.name}`,
-    //     ].join("\n") + "\n"
-    //   )
-    // }
-
     // return new Exps.FixedFnCore(fresh_name, result)
   }
 

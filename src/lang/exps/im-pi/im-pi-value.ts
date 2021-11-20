@@ -57,15 +57,6 @@ export class ImPiValue extends Value implements ReadbackEtaExpansion {
       Exps.ImApCore.apply(value, not_yet_value)
     )
 
-    if (!(result instanceof Exps.FnCore || result instanceof Exps.ImFnCore)) {
-      throw new ExpTrace(
-        [
-          `I expect result to be Exps.FnCore or Exps.ImFnCore`,
-          `but the constructor name I meet is: ${result.constructor.name}`,
-        ].join("\n") + "\n"
-      )
-    }
-
     return new Exps.ImFnCore(fresh_name, result)
   }
 

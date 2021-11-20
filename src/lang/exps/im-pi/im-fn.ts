@@ -11,9 +11,9 @@ import { FnFormater } from "../pi/fn-formater"
 export class ImFn extends Exp {
   meta: ExpMeta
   name: string
-  ret: Exps.Fn | Exps.ImFn
+  ret: Exp
 
-  constructor(name: string, ret: Exps.Fn | Exps.ImFn, meta: ExpMeta) {
+  constructor(name: string, ret: Exp, meta: ExpMeta) {
     super()
     this.meta = meta
     this.name = name
