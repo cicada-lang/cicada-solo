@@ -10,13 +10,11 @@ import * as Exps from "../../exps"
 import { ImApInsertionEntry } from "./im-pi-value"
 
 export class ConsImPiValue extends Exps.ImPiValue {
-  field_name: string
   arg_t: Value
   ret_t_cl: Closure
 
   constructor(field_name: string, arg_t: Value, ret_t_cl: Closure) {
     super(field_name, arg_t, ret_t_cl)
-    this.field_name = field_name
     this.arg_t = arg_t
     this.ret_t_cl = ret_t_cl
   }
@@ -29,12 +27,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
       local_name: string
     }
   ): Core {
-    const local_name =
-      renaming && renaming.field_name === this.field_name
-        ? renaming.local_name
-        : this.field_name
-
-    const fresh_name = ctx.freshen(local_name)
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const arg = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = this.ret_t_cl.apply(arg)
@@ -49,11 +42,11 @@ export class ConsImPiValue extends Exps.ImPiValue {
       )
     }
 
-    return new Exps.ImFnCore(this.field_name, fresh_name, fn_core)
+    return new Exps.ImFnCore(this.ret_t_cl.name, fresh_name, fn_core)
   }
 
   solve_im_ap(ctx: Ctx, arg: Exp): Solution {
-    const fresh_name = ctx.freshen(this.field_name)
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = this.ret_t_cl.apply(not_yet_value)
@@ -76,7 +69,7 @@ export class ConsImPiValue extends Exps.ImPiValue {
     target_core: Core,
     entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core } {
-    const fresh_name = ctx.freshen(this.field_name)
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const solution = this.solve_im_ap(ctx, arg)
@@ -88,7 +81,6 @@ export class ConsImPiValue extends Exps.ImPiValue {
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
-          `  this.field_name: ${this.field_name}`,
           `  arg: ${arg.format()}`,
           `  target_core: ${target_core.format()}`,
         ].join("\n")
