@@ -1,7 +1,3 @@
-- `sequence/local-stmt`
-
-- `sequence` -- has `local_stmts` and `ret`
-
 - `sequence/local-stmts`
 
   - `LocalStmts.Let`
