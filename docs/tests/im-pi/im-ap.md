@@ -1,7 +1,7 @@
 # implicit argument insertion when applying implicit function
 
 ``` cicada
-id(implicit A: Type, x: A): A {
+function id(implicit A: Type, x: A): A {
   return x
 }
 
@@ -15,7 +15,7 @@ id(implicit String, "a")
 # multiple implicit arguments
 
 ``` cicada
-k(
+function k(
   implicit A: Type, x: A,
   implicit B: Type, y: B,
 ): A {

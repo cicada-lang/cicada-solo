@@ -8,6 +8,7 @@ export const stmt = {
   $grammar: {
     "stmt:define": [{ name: "identifier" }, '"="', { exp: "exp" }],
     "stmt:define_the": [
+
       { name: "identifier" },
       '":"',
       { t: "exp" },
@@ -15,6 +16,7 @@ export const stmt = {
       { exp: "exp" },
     ],
     "stmt:define_fn": [
+      '"function"',
       { name: "identifier" },
       '"("',
       { bindings: "bindings" },

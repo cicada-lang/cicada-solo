@@ -2,7 +2,7 @@ import { tester } from "../parser-tester-instance"
 
 tester.echo_stmts(`
 
-cong(
+function cong(
   implicit X: Type,
   implicit from: X,
   implicit to: X,
@@ -16,7 +16,7 @@ cong(
     refl)
 }
 
-cong(
+function cong(
   implicit X: Type,
   implicit from: X,
   implicit to: X,

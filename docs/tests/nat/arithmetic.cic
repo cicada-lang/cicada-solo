@@ -1,12 +1,12 @@
-add(x: Nat, y: Nat): Nat {
+function add(x: Nat, y: Nat): Nat {
   return nat_ind(y, (_) => Nat, x, (prev, almost) => add1(almost))
 }
 
-mul(x: Nat, y: Nat): Nat {
+function mul(x: Nat, y: Nat): Nat {
   return nat_ind(y, (_) => Nat, 0, (prev, almost) => add(almost, x))
 }
 
-pow(x: Nat, y: Nat): Nat {
+function pow(x: Nat, y: Nat): Nat {
   return nat_ind(y, (_) => Nat, 1, (prev, almost) => mul(almost, x))
 }
 

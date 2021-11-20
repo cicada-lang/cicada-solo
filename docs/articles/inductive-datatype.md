@@ -278,15 +278,15 @@ We can not define `LessThan` as a datatype yet,
 let's prepare some partial definitions:
 
 ``` cicada
-LessThan(j: Nat, k: Nat): Type {
+function LessThan(j: Nat, k: Nat): Type {
   return @TODO "LessThan"
 }
 
-zero_smallest(n: Nat): LessThan(zero, add1(n)) {
+function zero_smallest(n: Nat): LessThan(zero, add1(n)) {
   return @TODO "zero_smallest"
 }
 
-add1_smaller(
+function add1_smaller(
   j: Nat, k: Nat,
   prev_smaller: LessThan(j, k),
 ): LessThan(add1(j), add1(k)) {
@@ -328,7 +328,7 @@ which depends on the concept of [Well-founded relation][].
 Preparing some partial definitions:
 
 ``` cicada
-Not(X: Type): Type {
+function Not(X: Type): Type {
   return (X) -> Absurd
 }
 ```
@@ -351,7 +351,7 @@ Maybe we can view a property over `X` as a subset of `X`.
 We also need to describe `NonEmptyProperty`:
 
 ``` cicada
-NonEmptyProperty(implicit X: Type, P: (X) -> Type): Type {
+function NonEmptyProperty(implicit X: Type, P: (X) -> Type): Type {
   return there exists [x: X such that P(x)]
 }
 

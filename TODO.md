@@ -1,8 +1,9 @@
-- `function` keyword at top level
-- `let` keyword at top level
-
 - `function` keyword in function scope (in sequence)
+
+- `let` keyword at top level
 - `let` keyword in function scope (in sequence)
+
+- merge `stmt:show_operator` & `stmt:show_operand` to `stmt:show_exp`
 
 - maybe
 

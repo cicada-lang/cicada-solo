@@ -3,7 +3,7 @@
 This is a C language family syntax sugar.
 
 ``` cicada
-id1(A: Type, x: A): A {
+function id1(A: Type, x: A): A {
   return x
 }
 

@@ -6,11 +6,11 @@ I found syntax error in file: abc-pre-filled.error.cic
  13 |  b: 2
  14 |  c: "c"
  15 |}
-Found the identifier "b" in [151, 152], while expecting:
+Found the identifier "b" in [160, 161], while expecting:
  "=":
-     sequence_entry:let_the@40 -> (name: identifier)@41 ":"@42 (t: exp):operand@43 > "=" (exp: exp) optional 
+     sequence_entry:let_the@41 -> (name: identifier)@42 ":"@43 (t: exp):operand@44 > "=" (exp: exp) optional 
  ",":
-     zero_or_more:more@40 -> (head: property):field@43 > "," (tail: zero_or_more) 
+     zero_or_more:more@41 -> (head: property):field@44 > "," (tail: zero_or_more) 
  ",":
-     optional:one@43 -> > "," 
+     optional:one@44 -> > "," 
  and so on ...

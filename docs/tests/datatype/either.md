@@ -14,7 +14,7 @@ datatype Either(L: Type, R: Type) {
 # induction Either
 
 ``` cicada
-induction_either(
+function induction_either(
   implicit L: Type,
   implicit R: Type,
   target: Either(L, R),
@@ -29,15 +29,15 @@ induction_either(
 # Maybe
 
 ``` cicada
-Maybe(E: Type): Type {
+function Maybe(E: Type): Type {
   return Either(E, Trivial)
 }
 
-nothing(E: Type): Maybe(E) {
+function nothing(E: Type): Maybe(E) {
   return inr(sole)
 }
 
-just(implicit E: Type, x: E): Maybe(E) {
+function just(implicit E: Type, x: E): Maybe(E) {
   return inl(x)
 }
 ```
@@ -52,7 +52,7 @@ datatype Maybe(E: Type) {
 # induction Maybe
 
 ``` cicada
-induction_maybe(
+function induction_maybe(
   implicit E: Type,
   target: Maybe(E),
   motive: (Maybe(E)) -> Type,
@@ -73,7 +73,7 @@ induction_maybe(
 ``` cicada
 import { induction_list } from "./list.md"
 
-maybe_head(implicit E: Type, list: List(E)): Maybe(E) {
+function maybe_head(implicit E: Type, list: List(E)): Maybe(E) {
   return induction_list(
     list,
     (_) => Maybe(E),
@@ -84,7 +84,7 @@ maybe_head(implicit E: Type, list: List(E)): Maybe(E) {
 ```
 
 ``` cicada wishful-thinking
-maybe_head(implicit E: Type, list: List(E)): Maybe(E) {
+function maybe_head(implicit E: Type, list: List(E)): Maybe(E) {
   return induction (list) {
     () => Maybe(E)
     case nil => Maybe.nothing
@@ -110,7 +110,7 @@ same_as_chart! Maybe(String) [
 # maybe_tail
 
 ``` cicada
-maybe_tail(implicit E: Type, list: List(E)): Maybe(List(E)) {
+function maybe_tail(implicit E: Type, list: List(E)): Maybe(List(E)) {
   return induction_list(
     list,
     (_) => Maybe(List(E)),
@@ -121,7 +121,7 @@ maybe_tail(implicit E: Type, list: List(E)): Maybe(List(E)) {
 ```
 
 ``` cicada wishful-thinking
-maybe_tail(implicit E: Type, list: List(E)): Maybe(List(E)) {
+function maybe_tail(implicit E: Type, list: List(E)): Maybe(List(E)) {
   return induction (list) {
     (_) => Maybe(List(E))
     case nil => Maybe.nothing
@@ -161,7 +161,7 @@ import { induction_nat } from "./nat.md"
 ## list_ref_direct
 
 ``` cicada
-list_ref_direct(index: Nat, implicit E: Type, list: List(E)): Maybe(E) {
+function list_ref_direct(index: Nat, implicit E: Type, list: List(E)): Maybe(E) {
   return induction_nat(
     index,
     (_) => (List(E)) -> Maybe(E),
@@ -189,7 +189,7 @@ list_ref_direct(4, li! ["a", "b", "c"])
 ## list_ref_aux
 
 ``` cicada
-list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
+function list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
   return induction_nat(
     index,
     (_) => (List(E)) -> Maybe(E),
@@ -207,7 +207,7 @@ list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
 ```
 
 ``` cicada wishful-thinking
-list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
+function list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
   return induction (index) {
     (_) => (List(E)) -> Maybe(E)
     case zero => (list) => maybe_head(list)
@@ -225,7 +225,7 @@ list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
 ## list_ref by list_ref_aux
 
 ``` cicada
-list_ref(index: Nat, implicit E: Type, list: List(E)): Maybe(E) {
+function list_ref(index: Nat, implicit E: Type, list: List(E)): Maybe(E) {
   return list_ref_aux(E, index, list)
 }
 ```
@@ -246,7 +246,7 @@ we can define `list_ref` directly.
 ``` cicada wishful-thinking
 import { induction_nat } from "./nat.md"
 
-list_ref(fixed { E: Type }, index: Nat): (List(E)) -> Maybe(E) {
+function list_ref(fixed { E: Type }, index: Nat): (List(E)) -> Maybe(E) {
   return induction_nat(
     index,
     (_) => (List(E)) -> Maybe(E),

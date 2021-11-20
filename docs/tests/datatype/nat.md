@@ -23,7 +23,7 @@ MyNat
 # induction Nat
 
 ``` cicada
-induction_nat(
+function induction_nat(
   target: Nat,
   motive: (Nat) -> Type,
   case_zero: motive(zero),
@@ -39,7 +39,7 @@ induction_nat(
 # add
 
 ``` cicada
-add(x: Nat, y: Nat): Nat {
+function add(x: Nat, y: Nat): Nat {
   return induction_nat(
     x,
     (_) => Nat,
@@ -50,7 +50,7 @@ add(x: Nat, y: Nat): Nat {
 ```
 
 ``` cicada wishful-thinking
-add(x: Nat, y: Nat): Nat {
+function add(x: Nat, y: Nat): Nat {
   return induction (x) {
     (_) => Nat
     case zero => y
@@ -70,7 +70,7 @@ same_as_chart! Nat [
 # mul
 
 ``` cicada
-mul(x: Nat, y: Nat): Nat {
+function mul(x: Nat, y: Nat): Nat {
   return induction_nat(
     x,
     (_) => Nat,
@@ -81,7 +81,7 @@ mul(x: Nat, y: Nat): Nat {
 ```
 
 ``` cicada wishful-thinking
-mul(x: Nat, y: Nat): Nat {
+function mul(x: Nat, y: Nat): Nat {
   return induction (x) {
     (_) => Nat
     case zero => 0
@@ -101,7 +101,7 @@ same_as_chart! Nat [
 # power_of & power
 
 ``` cicada
-power_of(x: Nat, y: Nat): Nat {
+function power_of(x: Nat, y: Nat): Nat {
   return induction_nat(
     x,
     (_) => Nat,
@@ -112,7 +112,7 @@ power_of(x: Nat, y: Nat): Nat {
 ```
 
 ``` cicada wishful-thinking
-power_of(x: Nat, y: Nat): Nat {
+function power_of(x: Nat, y: Nat): Nat {
   return induction (x) {
     (_) => Nat
     case zero => 1
@@ -122,7 +122,7 @@ power_of(x: Nat, y: Nat): Nat {
 ```
 
 ``` cicada
-power(base: Nat, n: Nat): Nat {
+function power(base: Nat, n: Nat): Nat {
   return power_of(n, base)
 }
 ```
@@ -138,7 +138,7 @@ same_as_chart! Nat [
 # gauss
 
 ``` cicada
-gauss(x: Nat): Nat {
+function gauss(x: Nat): Nat {
   return induction_nat(
     x,
     (_) => Nat,
@@ -149,7 +149,7 @@ gauss(x: Nat): Nat {
 ```
 
 ``` cicada wishful-thinking
-gauss(x: Nat): Nat {
+function gauss(x: Nat): Nat {
   return induction (x) {
     (_) => Nat
     case zero => 0
@@ -168,7 +168,7 @@ same_as_chart! Nat [
 # factorial
 
 ``` cicada
-factorial(x: Nat): Nat {
+function factorial(x: Nat): Nat {
   return induction_nat(
     x,
     (_) => Nat,
@@ -179,7 +179,7 @@ factorial(x: Nat): Nat {
 ```
 
 ``` cicada wishful-thinking
-factorial(x: Nat): Nat {
+function factorial(x: Nat): Nat {
   return induction (x) {
     (_) => Nat
     case zero => 1

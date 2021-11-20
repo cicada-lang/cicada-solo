@@ -6,7 +6,7 @@ Let's write the identity function with implicit type argument.
 - for `id1` and `id2`, an implicit function will be inserted to get `id3`.
 
 ``` cicada
-id1(implicit A: Type, x: A): A {
+function id1(implicit A: Type, x: A): A {
   return x
 }
 
@@ -25,7 +25,7 @@ id3(1)
 # return implicit value
 
 ``` cicada
-typeof(implicit T: Type, T): Type {
+function typeof(implicit T: Type, T): Type {
   return T
 }
 
@@ -36,7 +36,7 @@ typeof("abc")
 # multiple implicit arguments
 
 ``` cicada
-k(
+function k(
   implicit A: Type, x: A,
   implicit B: Type, y: B,
 ): A {
@@ -57,7 +57,7 @@ car_type_t = (
 
 car_type_t
 
-car_type(
+function car_type(
   implicit A: Type,
   implicit B: Type,
   pair: Pair(A, B),
@@ -81,7 +81,7 @@ car_type_again(is(cons(1, "a"), Pair(Nat, String)))
 
 // `cdr_type` -- only the idiomatic way:
 
-cdr_type(
+function cdr_type(
   implicit A: Type,
   implicit B: Type,
   pair: Pair(A, B),
@@ -95,7 +95,7 @@ cdr_type(is(cons(1, "a"), Pair(Nat, String)))
 # do *not* support implicit argument over implicit argument
 
 ``` cicada counterexample
-k(
+function k(
   implicit A: Type,
   implicit B: Type,
   x: A,
@@ -108,7 +108,7 @@ k(
 # do *not* support implicit argument over one argument
 
 ``` cicada counterexample
-k(
+function k(
   implicit A: Type,
   Trivial,
   x: A,

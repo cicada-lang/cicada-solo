@@ -25,7 +25,7 @@ export class LetFormater {
   }
 
   format_bindings(): Array<string> {
-    const binding = `${this.target.name} = ${this.target.exp.format()}` 
+    const binding = `${this.target.name} = ${this.target.exp.format()}`
 
     if (this.target.ret.let_formater) {
       return [binding, ...this.target.ret.let_formater.format_bindings()]

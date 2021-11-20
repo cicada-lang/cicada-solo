@@ -33,7 +33,7 @@ MyVector(String, 3)
 # induction Vector
 
 ``` cicada
-induction_vector(
+function induction_vector(
   implicit E: Type,
   implicit length: Nat,
   target: Vector(E, length),
@@ -61,7 +61,7 @@ induction_vector(
 ``` cicada
 import { add } from "./nat.md"
 
-vector_append(
+function vector_append(
   implicit E: Type,
   implicit xl: Nat,
   x: Vector(E, xl),
@@ -80,7 +80,7 @@ vector_append(
 ``` cicada wishful-thinking
 import { add } from "./nat.md"
 
-vector_append(
+function vector_append(
   implicit E: Type,
   implicit xl: Nat,
   x: Vector(E, xl),
@@ -108,7 +108,7 @@ same_as_chart! Vector(Nat, 5) [
 # list_from_vector
 
 ``` cicada
-list_from_vector(
+function list_from_vector(
   implicit E: Type,
   implicit length: Nat,
   vector: Vector(E, length),
@@ -123,7 +123,7 @@ list_from_vector(
 ```
 
 ``` cicada wishful-thinking
-list_from_vector(
+function list_from_vector(
   implicit E: Type,
   implicit length: Nat,
   vector: Vector(E, length),

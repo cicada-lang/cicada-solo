@@ -16,11 +16,11 @@ mul: (Nat, Nat) -> Nat = (x, y) => {
   })
 }
 
-Prime(n: Nat): Type {
+function Prime(n: Nat): Type {
   return @TODO "Prime"
 }
 
-euler_s_conjecture(n: Nat): there exists [
+function euler_s_conjecture(n: Nat): there exists [
   x: Nat, p: Nat, _: Prime(p) such that
   Equal(
     Nat,

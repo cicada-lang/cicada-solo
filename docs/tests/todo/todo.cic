@@ -4,7 +4,7 @@ b: Trivial = @TODO "It's not Trivial"
 
 c: Absurd = @TODO "Absurd!"
 
-law_of_excluded_middle(A: Type): Either(A, (A) -> Absurd) {
+function law_of_excluded_middle(A: Type): Either(A, (A) -> Absurd) {
   return @TODO "tertium non datur"
 }
 

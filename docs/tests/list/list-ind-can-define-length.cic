@@ -1,8 +1,8 @@
-step_length(E: Type, e: E, es: List(E), almost: Nat): Nat {
+function step_length(E: Type, e: E, es: List(E), almost: Nat): Nat {
   return add1(almost)
 }
 
-length(E: Type, x: List(E)): Nat {
+function length(E: Type, x: List(E)): Nat {
   return list_ind(x, (_) => Nat, 0, step_length(E))
 }
 

@@ -45,7 +45,7 @@ This example is found in [an issue of the-little-typer/pie](https://github.com/t
 # Simulating the Sigma type in Cicada
 
 ``` cicada
-my_cons(
+function my_cons(
   A: Type,
   B: (A) -> Type,
   x: A, y: B(x),
@@ -55,7 +55,7 @@ my_cons(
   return f(x, y)
 }
 
-// my_car(
+// function my_car(
 //   A: Type,
 //   B: (A) -> Type,
 //   p: (E: Type, f: (A, B(x)) -> E) -> E // The name `x` is undefined.
@@ -63,7 +63,7 @@ my_cons(
 //   return (A, B, p) => p(A, (a, b) => a)
 // }
 
-my_car1(
+function my_car1(
   A: Type,
   B: (A) -> Type,
   p: (E: Type, f: (x: A, B(x)) -> E) -> E

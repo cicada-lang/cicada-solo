@@ -4,7 +4,7 @@ import { tester } from "../parser-tester-instance"
 
 tester.echo_stmts(`
 
-id(A: Type, x: A): A {
+function id(A: Type, x: A): A {
   return x
 }
 

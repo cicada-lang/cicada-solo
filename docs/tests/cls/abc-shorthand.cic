@@ -1,4 +1,4 @@
-the_nat_type(_: Trivial): Type {
+function the_nat_type(_: Trivial): Type {
   return Nat
 }
 

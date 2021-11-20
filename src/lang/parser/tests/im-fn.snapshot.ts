@@ -2,7 +2,7 @@ import { tester } from "../parser-tester-instance"
 
 tester.echo_stmts(`
 
-car_type(
+function car_type(
   implicit A: Type,
   implicit B: Type,
   pair: [_: A | B],
