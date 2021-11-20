@@ -1,6 +1,3 @@
-- `sequence/begin`
-- `sequence/begin-core`
-
 - `sequence` -- syntax `{ ..., return ... }`
 
 - `sequence-formater`
