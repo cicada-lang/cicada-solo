@@ -1,0 +1,3 @@
+(fixed E) => { Nat }
+(fixed E, n) => { Nat }
+(fixed E, fixed f, n) => { Nat }
