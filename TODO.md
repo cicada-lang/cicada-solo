@@ -1,18 +1,31 @@
-# syntax
+- `sequence/local-stmt`
 
-- `Exps.Sequence` for code block `{ ... }`
+- `sequence` -- has `local_stmts` and `ret`
 
-  - remove `Exp.is_sequence` & `Core.is_sequence`
+- `sequence/local-stmts`
 
-  - contains sequence of stmt
+  - `LocalStmts.Let`
+  - `LocalStmts.Show` -- will be checked (inferred) by dropped during elaboration
 
-    - `Exps.LetStmt` -- elaboration to `Exps.Let`
-    - `Exps.ShowStmt` -- will be checked (inferred) by dropped during elaboration
-    - `Exps.ReturnStmt`
+- `sequence` -- `free_names`
+- `sequence` -- `subst`
+- `sequence` -- `infer`
+- `sequence` -- `check`
+- `sequence` -- `format`
 
-  - support show in code block,
-    to use `is(inl(x), Either(A, (A) -> B))`,
-    instead of `_ = is(inl(x), Either(A, (A) -> B))`
+- `sequence-core` -- `evaluate`
+- `sequence-core` -- `format`
+
+
+- `sequence` -- syntax `{ ..., return ... }`
+
+- support show in code block,
+  to use `is(inl(x), Either(A, (A) -> B))`,
+  instead of `_ = is(inl(x), Either(A, (A) -> B))`
+
+- remove `Exps.Let`
+
+- remove `Exp.is_sequence` & `Core.is_sequence`
 
 # fixed pi
 

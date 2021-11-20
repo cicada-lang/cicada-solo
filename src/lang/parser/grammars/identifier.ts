@@ -5,6 +5,7 @@ const preserved = [
   "class",
   "import",
   "datatype",
+  "return",
   // keywords
   "the",
   "is",

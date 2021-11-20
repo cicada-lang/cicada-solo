@@ -1,7 +1,6 @@
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 import { Module } from "../../module"
 import { infer } from "../exp"
-
 import { Exp } from "../exp"
 import * as Exps from "../exps"
 

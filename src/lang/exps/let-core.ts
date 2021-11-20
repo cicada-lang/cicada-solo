@@ -27,8 +27,9 @@ export class LetCore extends Core {
   }
 
   alpha_format(ctx: AlphaCtx): string {
-    const exp_format = this.exp.alpha_format(ctx)
-    const ret_format = this.ret.alpha_format(ctx.extend(this.name))
-    return `${this.name} = ${exp_format}; ${ret_format}`
+    throw new Error(
+      "We should not call LetCore.alpha_format, " +
+        "because Let expressions should be removed after readback."
+    )
   }
 }
