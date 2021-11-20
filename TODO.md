@@ -1,14 +1,10 @@
-- support `check`
+> support `check`
+> - example `check inl(x): Either(A, (A) -> B)`
 
-  - example `check inl(x): Either(A, (A) -> B)`
+- `sequence/check`
+- `sequence/check-core`
 
-  - `sequence/check`
-  - `sequence/check-core`
-
-- support show in code block
-
-  be able to use `is(inl(x), Either(A, (A) -> B))`,
-  instead of `let _ = is(inl(x), Either(A, (A) -> B))`
+- fix roland backhouse example
 
 # fixed pi
 
