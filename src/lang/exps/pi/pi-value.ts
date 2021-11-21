@@ -52,7 +52,12 @@ export class PiValue extends Value implements ReadbackEtaExpansion {
     // NOTE everything with a function type
     //   is immediately read back as having a Lambda on top.
     //   This implements the η-rule for functions.
-    const fresh_name = ctx.freshen(this.ret_t_cl.name)
+
+    const fresh_name =
+      value instanceof Exps.FnValue
+        ? ctx.freshen(value.ret_cl.name)
+        : ctx.freshen(this.ret_t_cl.name)
+
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = this.ret_t_cl.apply(not_yet_value)

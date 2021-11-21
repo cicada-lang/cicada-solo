@@ -10,7 +10,6 @@ import { expect } from "../../value"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
 import * as Exps from "../../exps"
-import { nanoid } from "nanoid"
 
 export class ListRec extends Exp {
   meta: ExpMeta
@@ -50,7 +49,7 @@ export class ListRec extends Exp {
     const inferred_base = infer(ctx, this.base)
     const target_t_core = readback(ctx, new Exps.TypeValue(), inferred_target.t)
     const base_t_core = readback(ctx, new Exps.TypeValue(), inferred_base.t)
-    const target_name = "list_rec_target_list_" + nanoid().toString()
+    const target_name = ctx.freshen("target_list")
     const motive_core = new Exps.TheCore(
       new Exps.PiCore(target_name, new Exps.TypeCore(), target_t_core),
       new Exps.FnCore(target_name, base_t_core)

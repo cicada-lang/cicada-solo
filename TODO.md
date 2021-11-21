@@ -1,5 +1,3 @@
-- use function `name` as base during `PiValue.readback_eta_expansion`
-
 # fixed pi
 
 > We need implicit argument in check mode,
@@ -11,6 +9,7 @@
 - `fixed-pi/fixed-ap` -- syntax
 
 - `fixed-pi/fixed-pi-value` -- `readback_eta_expansion`
+  - need `FixedApCore.apply`
 
 - `Ap.check` call `check_by_infer` when `inferred.t` is `FixedPiValue`
 

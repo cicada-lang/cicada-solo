@@ -9,7 +9,6 @@ import { readback } from "../../value"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
 import * as Exps from "../../exps"
-import { nanoid } from "nanoid"
 
 export class NatRec extends Exp {
   meta: ExpMeta
@@ -46,7 +45,7 @@ export class NatRec extends Exp {
     const target_core = check(ctx, this.target, new Exps.NatValue())
     const inferred_base = infer(ctx, this.base)
     const base_t_core = readback(ctx, new Exps.TypeValue(), inferred_base.t)
-    const target_name = "nat_rec_target_nat_" + nanoid().toString()
+    const target_name = ctx.freshen("target_nat")
     const motive_core = new Exps.TheCore(
       new Exps.PiCore(target_name, new Exps.TypeCore(), new Exps.NatCore()),
       new Exps.FnCore(target_name, base_t_core)
