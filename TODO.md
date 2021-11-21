@@ -1,7 +1,5 @@
 # inductive datatype -- Data
 
-- `Data` -- `check` -- extend `ctx` and `env` to include `fixed` names
-
 - `TypeCtor` -- improve structure -- use `bindings: Array<{ name: string, arg_t: Exp }>`
 
 - `Data` -- `check` -- finish
