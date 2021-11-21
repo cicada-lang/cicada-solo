@@ -1,9 +1,10 @@
 # inductive datatype -- Data
 
-- `Data` -- `check`
+- `Data` -- `check` -- extend `ctx` and `env` to include `fixed` names
 
-  - get the `fixed` parameters from `TypeCtorValue`
-  - like implicit but resolve from return type in check-mode
+- `TypeCtor` -- improve structure -- use `bindings: Array<{ name: string, arg_t: Exp }>`
+
+- `Data` -- `check` -- finish
 
 - `DataValue`
 - `DataValue` -- `readback`

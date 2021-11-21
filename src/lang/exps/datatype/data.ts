@@ -3,6 +3,8 @@ import { Core } from "../../core"
 import { evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
+import { expect } from "../../value"
+import { ExpTrace } from "../../errors"
 import { Solution } from "../../solution"
 import { check } from "../../exp"
 import * as Exps from "../../exps"
@@ -43,7 +45,41 @@ export class Data extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
+    const datatype = expect(ctx, t, Exps.DatatypeValue)
+
+    if (this.type_ctor_name !== datatype.type_ctor.name) {
+      throw new ExpTrace(
+        [
+          `I expect the type constructor name to be ${datatype.type_ctor.name}`,
+          `  given type constructor: ${this.type_ctor_name}`,
+        ].join("\n")
+      )
+    }
+
+    const ctor_t_core = datatype.type_ctor.ctors[this.name]
+
+    if (ctor_t_core === undefined) {
+      const names = Object.keys(datatype.type_ctor.ctors).join(", ")
+      throw new ExpTrace(
+        [
+          `I meet unknown data constructor name ${this.name}`,
+          `  type constructor name: ${this.type_ctor_name}`,
+          `  existing names: ${names}`,
+        ].join("\n")
+      )
+    }
+
+    let env = datatype.type_ctor.env
+
+    datatype.args
+    datatype.type_ctor.fixed
+
+    const ctor_t = evaluate(env, ctor_t_core)
+
     throw new Error("TODO")
+
+    // const args =
+    // return new Exps.DataCore(this.type_ctor_name, this.name, args)
   }
 
   format(): string {
