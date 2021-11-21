@@ -41,7 +41,7 @@ export class ImFn extends Exp {
 
     if (!(t instanceof Exps.ImPiValue)) {
       throw new ExpTrace(
-        `I can not do im-fn insertion based on: ${t.constructor.name}`
+        `I can not do im-fn insertion based on type: ${t.constructor.name}`
       )
     }
 
