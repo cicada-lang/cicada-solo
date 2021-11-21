@@ -37,7 +37,25 @@ export class FixedPiValue extends Value implements ReadbackEtaExpansion {
   }
 
   readback_eta_expansion(ctx: Ctx, value: Value): Core {
-    throw new Error("TODO")
+    // NOTE everything with a function type
+    //   is immediately read back as having a Lambda on top.
+    //   This implements the η-rule for functions.
+
+    const fresh_name =
+      value instanceof Exps.FixedFnValue
+        ? ctx.freshen(value.ret_cl.name)
+        : ctx.freshen(this.ret_t_cl.name)
+
+    const variable = new Exps.VarNeutral(fresh_name)
+    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
+    const pi = this.ret_t_cl.apply(not_yet_value)
+    const result = readback(
+      ctx.extend(fresh_name, this.arg_t),
+      pi,
+      Exps.FixedApCore.apply(value, not_yet_value)
+    )
+
+    return new Exps.FixedFnCore(fresh_name, result)
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {

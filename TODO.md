@@ -1,7 +1,5 @@
 - `fixed-pi/fixed-ap` -- syntax
 
-- `fixed-pi/fixed-pi-value` -- `readback_eta_expansion`
-
   - need `FixedApCore.apply`
 
 # fixed pi
