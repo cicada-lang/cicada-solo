@@ -1,22 +1,18 @@
-# inductive datatype -- DataCtor & Data
+# inductive datatype -- Data
 
-- `DataCtorValue`
+- `TypeCtor` -- rename `indexes` to `varied`
 
-  - use a `fixed` field
+- `Data`
+- `Data` -- `check`
 
-    - like implicit but resolve from return type in check-mode
+  - get the `fixed` parameters from `TypeCtorValue`
+  - like implicit but resolve from return type in check-mode
 
-  - `readback` to `DotCore`
+- `Data` -- syntax -- `List::cons` (can not be curried)
 
-- `DataCtorValue` -- use `<type-ctor>.<data-ctor>` to get `DataCtorValue`
-
-  - `DotHandler` -- `apply` & `infer`
-  - `TypeCtor.dot_handler`
-
-- `CurriedDataCtorValue` -- a data constructor can be curried during application
+- `DataCore` -- structural typing (data contains datatype)
 
 - `DataValue`
-- `DataCore` -- structural typing (data contains datatype)
 
 # inductive datatype -- induction
 
