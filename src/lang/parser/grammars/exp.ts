@@ -411,7 +411,6 @@ export const binding = {
       '":"',
       { exp: "exp" },
     ],
-    "binding:fixed": ['"fixed"', { name: "identifier" }, '":"', { exp: "exp" }],
   },
 }
 
@@ -429,7 +428,6 @@ export const name_entry = {
   $grammar: {
     "name_entry:name_entry": [{ name: "identifier" }],
     "name_entry:implicit_name_entry": ['"implicit"', { name: "identifier" }],
-    "name_entry:fixed_name_entry": ['"fixed"', { name: "identifier" }],
   },
 }
 
@@ -457,7 +455,6 @@ export const arg_entry = {
   $grammar: {
     "arg_entry:plain": [{ exp: "exp" }],
     "arg_entry:implicit": ['"implicit"', { exp: "exp" }],
-    "arg_entry:fixed": ['"fixed"', { exp: "exp" }],
   },
 }
 

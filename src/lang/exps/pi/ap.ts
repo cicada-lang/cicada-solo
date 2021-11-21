@@ -38,22 +38,6 @@ export class Ap extends Exp {
     )
   }
 
-  check(ctx: Ctx, t: Value): Core {
-    const inferred = infer(ctx, this.target)
-
-    if (inferred.t instanceof Exps.FixedPiValue) {
-      throw new Error("TODO")
-      // return inferred.t.fixed_inserter.insert_fixed_ap(
-      //   ctx,
-      //   inferred.core,
-      //   this.arg,
-      //   t
-      // )
-    }
-
-    return check_by_infer(ctx, this, t)
-  }
-
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred = infer(ctx, this.target)
 

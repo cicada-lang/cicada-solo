@@ -24,11 +24,6 @@ export function pi_handler(
             span: pt.span_closure([binding.span, ret_t.span]),
           })
         }
-        case "fixed": {
-          return new Exps.FixedPi(binding.name, binding.exp, result, {
-            span: pt.span_closure([binding.span, ret_t.span]),
-          })
-        }
       }
     }, exp_matcher(ret_t))
 }
@@ -47,11 +42,6 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
         }
         case "implicit": {
           return new Exps.ImFn(name_entry.name, result, {
-            span: pt.span_closure([name_entry.span, ret.span]),
-          })
-        }
-        case "fixed": {
-          return new Exps.FixedFn(name_entry.name, result, {
             span: pt.span_closure([name_entry.span, ret.span]),
           })
         }
@@ -95,8 +85,6 @@ export function operator_matcher(tree: pt.Tree): Exp {
               return new Exps.Ap(result, arg.exp, { span })
             case "implicit":
               return new Exps.ImAp(result, arg.exp, { span })
-            case "fixed":
-              return new Exps.FixedAp(result, arg.exp, { span })
           }
         }, operator_matcher(target)),
     "operator:sequence_begin": ({ sequence }, { span }) =>
@@ -398,11 +386,6 @@ export function sequence_entry_matcher(tree: pt.Tree): {
                 span: pt.span_closure([binding.span, sequence.span]),
               })
             }
-            case "fixed": {
-              return new Exps.FixedFn(binding.name, result, {
-                span: pt.span_closure([binding.span, sequence.span]),
-              })
-            }
           }
         }, init)
 
@@ -468,11 +451,6 @@ export function cls_entry_matcher(tree: pt.Tree): {
                 span: pt.span_closure([binding.span, sequence.span]),
               })
             }
-            case "fixed": {
-              return new Exps.FixedFn(binding.name, result, {
-                span: pt.span_closure([binding.span, sequence.span]),
-              })
-            }
           }
         }, init)
 
@@ -489,7 +467,6 @@ export function cls_entry_matcher(tree: pt.Tree): {
 type Binding =
   | { kind: "named"; name: string; exp: Exp; span: pt.Span }
   | { kind: "implicit"; name: string; exp: Exp; span: pt.Span }
-  | { kind: "fixed"; name: string; exp: Exp; span: pt.Span }
 
 export function bindings_matcher(tree: pt.Tree): Array<Binding> {
   return pt.matcher({
@@ -516,12 +493,6 @@ export function binding_matcher(tree: pt.Tree): Binding {
     }),
     "binding:implicit": ({ name, exp }, { span }) => ({
       kind: "implicit",
-      name: pt.str(name),
-      exp: exp_matcher(exp),
-      span,
-    }),
-    "binding:fixed": ({ name, exp }, { span }) => ({
-      kind: "fixed",
       name: pt.str(name),
       exp: exp_matcher(exp),
       span,
@@ -566,7 +537,6 @@ export function names_matcher(tree: pt.Tree): Array<NameEntry> {
 type NameEntry =
   | { kind: "name"; name: string; span: pt.Span }
   | { kind: "implicit"; name: string; span: pt.Span }
-  | { kind: "fixed"; name: string; span: pt.Span }
 
 export function name_entry_matcher(tree: pt.Tree): NameEntry {
   return pt.matcher<NameEntry>({
@@ -577,11 +547,6 @@ export function name_entry_matcher(tree: pt.Tree): NameEntry {
     }),
     "name_entry:implicit_name_entry": ({ name }, { span }) => ({
       kind: "implicit",
-      name: pt.str(name),
-      span,
-    }),
-    "name_entry:fixed_name_entry": ({ name }, { span }) => ({
-      kind: "fixed",
       name: pt.str(name),
       span,
     }),
@@ -597,10 +562,7 @@ export function exps_matcher(tree: pt.Tree): Array<Exp> {
   })(tree)
 }
 
-type ArgEntry =
-  | { kind: "plain"; exp: Exp }
-  | { kind: "implicit"; exp: Exp }
-  | { kind: "fixed"; exp: Exp }
+type ArgEntry = { kind: "plain"; exp: Exp } | { kind: "implicit"; exp: Exp }
 
 export function args_matcher(tree: pt.Tree): Array<ArgEntry> {
   return pt.matcher({
@@ -619,10 +581,6 @@ export function arg_entry_matcher(tree: pt.Tree): ArgEntry {
     }),
     "arg_entry:implicit": ({ exp }) => ({
       kind: "implicit",
-      exp: exp_matcher(exp),
-    }),
-    "arg_entry:fixed": ({ exp }) => ({
-      kind: "fixed",
       exp: exp_matcher(exp),
     }),
   })(tree)
@@ -647,11 +605,6 @@ export function property_matcher(tree: pt.Tree): Exps.Prop {
             }
             case "implicit": {
               return new Exps.ImFn(name_entry.name, result, {
-                span: pt.span_closure([name_entry.span, sequence.span]),
-              })
-            }
-            case "fixed": {
-              return new Exps.FixedFn(name_entry.name, result, {
                 span: pt.span_closure([name_entry.span, sequence.span]),
               })
             }
