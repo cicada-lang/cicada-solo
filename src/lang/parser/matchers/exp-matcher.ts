@@ -323,6 +323,14 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:inr": ({ right }, { span }) =>
       new Exps.Inr(exp_matcher(right), { span }),
     "operand:type": (_, { span }) => new Exps.Type({ span }),
+    "operand:data": ({ type_ctor_name, name, exps }, { span }) =>
+      new Exps.Data(pt.str(type_ctor_name), pt.str(name), exps_matcher(exps), {
+        span,
+      }),
+    "operand:data_no_args": ({ type_ctor_name, name }, { span }) =>
+      new Exps.Data(pt.str(type_ctor_name), pt.str(name), [], {
+        span,
+      }),
   })(tree)
 }
 

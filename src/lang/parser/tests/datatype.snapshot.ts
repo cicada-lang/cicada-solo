@@ -1,5 +1,7 @@
 import { tester } from "../parser-tester-instance"
 
+// TODO The examples should be fixed after the `prelude` feature.
+
 tester.echo_stmts(`
 
 datatype __Nat {

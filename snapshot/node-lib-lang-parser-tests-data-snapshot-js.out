@@ -1,0 +1,2 @@
+MyList::my_cons(x, y)
+MyList::my_null

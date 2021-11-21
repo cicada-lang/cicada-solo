@@ -9,12 +9,19 @@ import * as Exps from "../../exps"
 import * as ut from "../../../ut"
 
 export class Data extends Exp {
+  meta: ExpMeta
   type_ctor_name: string
   name: string
   args: Array<Exp>
 
-  constructor(type_ctor_name: string, name: string, args: Array<Exp>) {
+  constructor(
+    type_ctor_name: string,
+    name: string,
+    args: Array<Exp>,
+    meta: ExpMeta
+  ) {
     super()
+    this.meta = meta
     this.type_ctor_name = type_ctor_name
     this.name = name
     this.args = args
@@ -30,7 +37,8 @@ export class Data extends Exp {
     return new Data(
       this.type_ctor_name,
       this.name,
-      this.args.map((arg) => subst(arg, name, exp))
+      this.args.map((arg) => subst(arg, name, exp)),
+      this.meta
     )
   }
 

@@ -127,18 +127,6 @@ export const operator = {
   },
 }
 
-export const sequence = {
-  $grammar: {
-    "sequence:sequence": [
-      '"{"',
-      { entries: { $ap: ["zero_or_more", "sequence_entry"] } },
-      '"return"',
-      { ret: "exp" },
-      '"}"',
-    ],
-  },
-}
-
 export const operand = {
   $grammar: {
     "operand:pi": [
@@ -287,6 +275,40 @@ export const operand = {
     "operand:inl": ['"inl"', '"("', { left: "exp" }, '")"'],
     "operand:inr": ['"inr"', '"("', { right: "exp" }, '")"'],
     "operand:type": ['"Type"'],
+    "operand:data": [
+      { type_ctor_name: "identifier" },
+      '":"',
+      '":"',
+      { name: "identifier" },
+      '"("',
+      { exps: "exps" },
+      '")"',
+    ],
+    "operand:data_no_args": [
+      { type_ctor_name: "identifier" },
+      '":"',
+      '":"',
+      { name: "identifier" },
+    ],
+  },
+}
+
+export const exp = {
+  $grammar: {
+    "exp:operator": [{ operator: "operator" }],
+    "exp:operand": [{ operand: "operand" }],
+  },
+}
+
+export const sequence = {
+  $grammar: {
+    "sequence:sequence": [
+      '"{"',
+      { entries: { $ap: ["zero_or_more", "sequence_entry"] } },
+      '"return"',
+      { ret: "exp" },
+      '"}"',
+    ],
   },
 }
 
@@ -327,13 +349,6 @@ export const sequence_entry = {
       { sequence: "sequence" },
       { $ap: ["optional", '";"'] },
     ],
-  },
-}
-
-export const exp = {
-  $grammar: {
-    "exp:operator": [{ operator: "operator" }],
-    "exp:operand": [{ operand: "operand" }],
   },
 }
 
