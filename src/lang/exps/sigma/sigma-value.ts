@@ -61,13 +61,13 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
       that.cdr_t_cl.name,
     ])
     const fresh_name = ut.freshen(names, this.cdr_t_cl.name)
-    const v = new Exps.VarNeutral(fresh_name)
-    const this_v = new Exps.NotYetValue(this.car_t, v)
-    const that_v = new Exps.NotYetValue(that.car_t, v)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const this_variable = new Exps.NotYetValue(this.car_t, variable)
+    const that_variable = new Exps.NotYetValue(that.car_t, variable)
     return solution.unify_type(
       ctx,
-      this.cdr_t_cl.apply(this_v),
-      that.cdr_t_cl.apply(that_v)
+      this.cdr_t_cl.apply(this_variable),
+      that.cdr_t_cl.apply(that_variable)
     )
   }
 }

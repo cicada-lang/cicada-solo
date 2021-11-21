@@ -77,13 +77,13 @@ export class PiValue extends Value implements ReadbackEtaExpansion {
       that.ret_t_cl.name,
     ])
     const fresh_name = ut.freshen(names, this.ret_t_cl.name)
-    const v = new Exps.VarNeutral(fresh_name)
-    const this_v = new Exps.NotYetValue(this.arg_t, v)
-    const that_v = new Exps.NotYetValue(that.arg_t, v)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const this_variable = new Exps.NotYetValue(this.arg_t, variable)
+    const that_variable = new Exps.NotYetValue(that.arg_t, variable)
     return solution.unify_type(
       ctx,
-      this.ret_t_cl.apply(this_v),
-      that.ret_t_cl.apply(that_v)
+      this.ret_t_cl.apply(this_variable),
+      that.ret_t_cl.apply(that_variable)
     )
   }
 }
