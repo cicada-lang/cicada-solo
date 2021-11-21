@@ -3,6 +3,8 @@
 > We need implicit argument in check mode,
 > be able to solve implicit arguments from return type.
 
+- `insert_im_fn` take optional `name`
+
 - `fixed-pi/fixed-fn` -- `check`
   - why we need `im_inserter.insert_im_fn` for `im-fn.check`?
   - maybe we need `fixed_inserter.insert_fixed_fn`?
