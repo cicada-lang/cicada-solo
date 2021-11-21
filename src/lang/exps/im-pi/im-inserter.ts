@@ -1,6 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { check } from "../../exp"
+import { subst } from "../../exp"
 import { Core } from "../../core"
 import { Solution } from "../../solution"
 import { Value } from "../../value"
@@ -22,11 +23,13 @@ export abstract class ImInserter {
     this.ret_t_cl = ret_t_cl
   }
 
-  insert_im_fn(ctx: Ctx, fn: Exp): Core {
-    const fresh_name = ctx.freshen(this.ret_t_cl.name)
+  insert_im_fn(ctx: Ctx, fn: Exp, opts?: { name: string }): Core {
+    const name = opts?.name || this.ret_t_cl.name
+    const fresh_name = ctx.freshen(name)
     const variable = new Exps.VarNeutral(fresh_name)
     const arg = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = this.ret_t_cl.apply(arg)
+    fn = subst(fn, name, new Exps.Var(fresh_name))
     const fn_core = check(ctx.extend(fresh_name, this.arg_t), fn, ret_t)
     return new Exps.ImFnCore(fresh_name, fn_core)
   }

@@ -45,7 +45,13 @@ export class ImFn extends Exp {
       )
     }
 
-    return t.im_inserter.insert_im_fn(ctx, this.ret)
+    // { // DEBUG
+    //   console.log(`I am elaborating implicit function in check-mode.`)
+    //   console.log(`  bound variable : ${this.name}`)
+    //   console.log(`  function body  : ${this.ret.format()}`)
+    // }
+
+    return t.im_inserter.insert_im_fn(ctx, this.ret, { name: this.name })
   }
 
   fn_formater: FnFormater = new FnFormater(this, {
