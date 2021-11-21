@@ -2,7 +2,13 @@
 
 # fixed pi
 
-- `Ap.check` -- when `inferred.t` is `FixedPiValue`
+- `Ap.check` -- when `inferred.t instanceof FixedPiValue`
+
+  - [problem] We are using `inferred.t instanceof FixedPiValue` as the signal for check-mode resolution,
+    but in nested application, we can not infer partially applied `fixed-fn`.
+
+    - (A) use other signal for check-mode resolution.
+    - (B) enrich the structure of `fixed-fn` so that we can infer partially applied `fixed-fn`.
 
   - solve fixed arguments from return type, and insert `FixedAp`
 

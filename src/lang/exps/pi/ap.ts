@@ -41,15 +41,15 @@ export class Ap extends Exp {
   check(ctx: Ctx, t: Value): Core {
     const inferred = infer(ctx, this.target)
 
-    // if (inferred.t instanceof Exps.FixedPiValue) {
-    //   throw new Error("TODO")
-    //   // return inferred.t.fixed_inserter.insert_fixed_ap(
-    //   //   ctx,
-    //   //   inferred.core,
-    //   //   this.arg,
-    //   //   t
-    //   // )
-    // }
+    if (inferred.t instanceof Exps.FixedPiValue) {
+      throw new Error("TODO")
+      // return inferred.t.fixed_inserter.insert_fixed_ap(
+      //   ctx,
+      //   inferred.core,
+      //   this.arg,
+      //   t
+      // )
+    }
 
     return check_by_infer(ctx, this, t)
   }
@@ -70,26 +70,6 @@ export class Ap extends Exp {
         []
       )
     }
-
-    // if (inferred.t instanceof Exps.FixedPiValue) {
-    //   // NOTE We do something like a eta-expansion,
-    //   //   while keep the fixed as the first argument.
-    //   const name = ctx.freshen(inferred.t.ret_t_cl.name)
-
-    //   const arg_core = check(ctx, this.arg, inferred.t.arg_t)
-    //   const arg_value = evaluate(ctx.to_env(), arg_core)
-
-    //   return {
-    //     t: new Exps.FixedPiValue(inferred.t.arg_t, inferred.t.ret_t_cl.apply(arg_value)),
-    //     core: new Exps.FixedFnCore(
-    //       name,
-    //       new Exps.FixedApCore(
-    //         new Exps.FixedApCore(inferred.core, new Exps.VarCore(name)),
-    //         arg_core
-    //       )
-    //     ),
-    //   }
-    // }
 
     if (inferred.t instanceof Exps.PiValue) {
       const { arg_t, ret_t_cl } = inferred.t
