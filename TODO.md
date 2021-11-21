@@ -1,12 +1,14 @@
 # inductive datatype -- Data
 
-- `Data`
+- `Data` -- `free_names`
+- `Data` -- `subst`
+- `Data` -- `format` -- format to `List::cons(...)`
 - `Data` -- `check`
 
   - get the `fixed` parameters from `TypeCtorValue`
   - like implicit but resolve from return type in check-mode
 
-- `Data` -- syntax -- `List::cons` (can not be curried)
+- `Data` -- syntax -- `List::cons(...)` (can not be curried)
 
 - `DataCore` -- structural typing (data contains datatype)
 
