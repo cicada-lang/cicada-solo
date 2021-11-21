@@ -27,7 +27,11 @@ export class Data extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    throw new Error("TODO")
+    return new Data(
+      this.type_ctor_name,
+      this.name,
+      this.args.map((arg) => subst(arg, name, exp))
+    )
   }
 
   check(ctx: Ctx, t: Value): Core {
