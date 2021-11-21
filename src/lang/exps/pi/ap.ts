@@ -40,10 +40,11 @@ export class Ap extends Exp {
 
   check(ctx: Ctx, t: Value): Core {
     const inferred = infer(ctx, this.target)
-    const target = evaluate(ctx.to_env(), inferred.core)
-    // if (inferred.t instanceof Exps.FixedPiValue) {
-    //   // TODO
-    // }
+
+    if (inferred.t instanceof Exps.FixedPiValue) {
+      const target = evaluate(ctx.to_env(), inferred.core)
+      throw new Error("TODO")
+    }
 
     return check_by_infer(ctx, this, t)
   }

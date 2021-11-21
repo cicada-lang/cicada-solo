@@ -1,8 +1,5 @@
 # fixed pi
 
-> We need implicit argument in check mode,
-> be able to solve implicit arguments from return type.
-
 - `fixed-pi/fixed-ap`
 - `fixed-pi/fixed-ap-core`
 - `fixed-pi/fixed-ap-neutral`
@@ -11,11 +8,13 @@
 - `fixed-pi/fixed-pi-value` -- `readback_eta_expansion`
   - need `FixedApCore.apply`
 
-- `Ap.check` call `check_by_infer` when `inferred.t` is `FixedPiValue`
+- `Ap.check` -- when `inferred.t` is `FixedPiValue`
 
-- an implicit function that only has implicit arguments can be used as value
+  - solve fixed arguments from return type, and insert `FixedAp`
 
-  - we do not have zero-arity function, we use `c` instead of `c()`
+- an function that only has fixed arguments can be used as value
+
+  - we do not have zero-arity function -- never `c()`
 
 - we can define a version of `list_ref` in `either.md` which use `fixed` keyword
 
