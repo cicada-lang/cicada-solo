@@ -1,5 +1,3 @@
-- `im_inserter.insert_im_fn` rename argument name from `fn` to `exp`
-
 - use function `name` as base during `Pi.readback_eta_expansion`
 
 # fixed pi
