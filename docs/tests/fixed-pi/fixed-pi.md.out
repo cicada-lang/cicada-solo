@@ -1,0 +1,1 @@
+(fixed E) => vecnil: (fixed E: Type) -> Vector(E, 0)

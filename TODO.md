@@ -252,7 +252,7 @@
 - [maybe] support using `let name = exp` to do local definitions in class
 
 - [general macro] `li! [...]` and `vec! [...]` can be general macro,
-  maybe `foldRight! (List.cons) [...]` and `foldRight! (Vecotr.cons) [...]`
+  maybe `foldRight! (List.cons) [...]` and `foldRight! (Vector.cons) [...]`
 
 - [maybe] extract `readback_type`
 - [maybe] extract `ctx.extend_type`
