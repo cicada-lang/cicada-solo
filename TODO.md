@@ -1,12 +1,10 @@
-# fixed pi
-
-- `fixed-pi/fixed-ap`
-- `fixed-pi/fixed-ap-core`
-- `fixed-pi/fixed-ap-neutral`
 - `fixed-pi/fixed-ap` -- syntax
 
 - `fixed-pi/fixed-pi-value` -- `readback_eta_expansion`
+
   - need `FixedApCore.apply`
+
+# fixed pi
 
 - `Ap.check` -- when `inferred.t` is `FixedPiValue`
 
