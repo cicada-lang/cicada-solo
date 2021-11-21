@@ -1,4 +1,4 @@
-- `fixed-pi/fixed-ap` -- syntax
+- `fixed-pi/fixed-ap` -- syntax -- test
 
 # fixed pi
 

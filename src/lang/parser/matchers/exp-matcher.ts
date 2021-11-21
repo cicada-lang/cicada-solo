@@ -95,6 +95,8 @@ export function operator_matcher(tree: pt.Tree): Exp {
               return new Exps.Ap(result, arg.exp, { span })
             case "implicit":
               return new Exps.ImAp(result, arg.exp, { span })
+            case "fixed":
+              return new Exps.FixedAp(result, arg.exp, { span })
           }
         }, operator_matcher(target)),
     "operator:sequence_begin": ({ sequence }, { span }) =>
@@ -595,7 +597,10 @@ export function exps_matcher(tree: pt.Tree): Array<Exp> {
   })(tree)
 }
 
-type ArgEntry = { kind: "plain"; exp: Exp } | { kind: "implicit"; exp: Exp }
+type ArgEntry =
+  | { kind: "plain"; exp: Exp }
+  | { kind: "implicit"; exp: Exp }
+  | { kind: "fixed"; exp: Exp }
 
 export function args_matcher(tree: pt.Tree): Array<ArgEntry> {
   return pt.matcher({
@@ -614,6 +619,10 @@ export function arg_entry_matcher(tree: pt.Tree): ArgEntry {
     }),
     "arg_entry:implicit": ({ exp }) => ({
       kind: "implicit",
+      exp: exp_matcher(exp),
+    }),
+    "arg_entry:fixed": ({ exp }) => ({
+      kind: "fixed",
       exp: exp_matcher(exp),
     }),
   })(tree)

@@ -457,6 +457,7 @@ export const arg_entry = {
   $grammar: {
     "arg_entry:plain": [{ exp: "exp" }],
     "arg_entry:implicit": ['"implicit"', { exp: "exp" }],
+    "arg_entry:fixed": ['"fixed"', { exp: "exp" }],
   },
 }
 
