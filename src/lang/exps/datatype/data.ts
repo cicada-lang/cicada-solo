@@ -56,19 +56,6 @@ export class Data extends Exp {
       )
     }
 
-    const ctor_t_core = datatype.type_ctor.ctors[this.name]
-
-    if (ctor_t_core === undefined) {
-      const names = Object.keys(datatype.type_ctor.ctors).join(", ")
-      throw new ExpTrace(
-        [
-          `I meet unknown data constructor name ${this.name}`,
-          `  type constructor name: ${this.type_ctor_name}`,
-          `  existing names: ${names}`,
-        ].join("\n")
-      )
-    }
-
     const fixed = datatype.type_ctor.fixed
     let env = datatype.type_ctor.env
 
@@ -79,7 +66,10 @@ export class Data extends Exp {
       ctx = ctx.extend(name, arg_t, arg)
     }
 
-    const ctor_t = evaluate(env, ctor_t_core)
+    // const ctor_bindings = datatype.ctor_bindings(this.name)
+
+    // const ctor_ret_t_core = datatype.ctor_ret_t(this.name)
+    // const ctor_ret_t = evaluate(env, ctor_ret_t_core)
 
     throw new Error("TODO")
 

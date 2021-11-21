@@ -1,6 +1,7 @@
 # inductive datatype -- Data
 
-- `TypeCtor` -- improve structure -- use `bindings: Array<{ name: string, arg_t: Exp }>`
+- `TypeCtorValue` -- `ctor_bindings(name: string): Array<{ kind: "plain" | "implicit", name: string, arg_t: Core }>`
+- `TypeCtorValue` -- `ctor_ret_t(name: string): Core`
 
 - `Data` -- `check` -- finish
 
