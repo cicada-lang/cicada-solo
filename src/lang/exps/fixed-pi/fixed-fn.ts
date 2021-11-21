@@ -1,7 +1,9 @@
 import { Exp, ExpMeta, ElaborationOptions, subst } from "../../exp"
+import { check } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
+import { expect } from "../../value"
 import { Solution } from "../../solution"
 import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
@@ -36,18 +38,13 @@ export class FixedFn extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    throw new Error("TODO")
-
-    // // NOTE We already need to insert im-fn here,
-    // //   because the arguments can be partly given.
-
-    // if (!(t instanceof Exps.FixedPiValue)) {
-    //   throw new ExpTrace(
-    //     `I can not do im-fn insertion based on: ${t.constructor.name}`
-    //   )
-    // }
-
-    // return t.im_inserter.insert_im_fn(ctx, this.ret)
+    const { arg_t, ret_t_cl } = expect(ctx, t, Exps.FixedPiValue)
+    const fresh_name = ctx.freshen(this.name)
+    const arg = new Exps.NotYetValue(arg_t, new Exps.VarNeutral(fresh_name))
+    const ret_t = ret_t_cl.apply(arg)
+    const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
+    const ret_core = check(ctx.extend(fresh_name, arg_t), ret, ret_t)
+    return new Exps.FixedFnCore(fresh_name, ret_core)
   }
 
   fn_formater: FnFormater = new FnFormater(this, {

@@ -5,8 +5,6 @@
 > We need implicit argument in check mode,
 > be able to solve implicit arguments from return type.
 
-- `fixed-pi/fixed-fn` -- `check`
-
 - `fixed-pi/fixed-ap`
 - `fixed-pi/fixed-ap-core`
 - `fixed-pi/fixed-ap-neutral`
