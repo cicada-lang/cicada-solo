@@ -238,15 +238,13 @@ list_ref(3, li! ["a", "b", "c"])
 list_ref(4, li! ["a", "b", "c"])
 ```
 
-## list_ref -- check mode
+## list_ref_fixed -- check-mode
 
-If we can solve implicit arguments from return type in check mode,
-we can define `list_ref` directly.
+If we can solve implicit arguments from return type in check-mode,
+we can define `list_ref_fixed` directly.
 
-``` cicada wishful-thinking
-import { induction_nat } from "./nat.md"
-
-function list_ref(fixed { E: Type }, index: Nat): (List(E)) -> Maybe(E) {
+``` cicada
+function list_ref_fixed(fixed E: Type, index: Nat): (List(E)) -> Maybe(E) {
   return induction_nat(
     index,
     (_) => (List(E)) -> Maybe(E),
@@ -261,12 +259,16 @@ function list_ref(fixed { E: Type }, index: Nat): (List(E)) -> Maybe(E) {
     }
   )
 }
+
+check! list_ref_fixed: (fixed E: Type, index: Nat) -> (List(E)) -> Maybe(E)
 ```
 
 ``` cicada wishful-thinking
-the(Maybe(String), list_ref(0, li! ["a", "b", "c"]))
-the(Maybe(String), list_ref(1, li! ["a", "b", "c"]))
-the(Maybe(String), list_ref(2, li! ["a", "b", "c"]))
-the(Maybe(String), list_ref(3, li! ["a", "b", "c"]))
-the(Maybe(String), list_ref(4, li! ["a", "b", "c"]))
+check! list_ref_fixed(0): (fixed E: Type) -> (List(E)) -> Maybe(E)
+
+the(Maybe(String), list_ref_fixed(0, li! ["a", "b", "c"]))
+the(Maybe(String), list_ref_fixed(1, li! ["a", "b", "c"]))
+the(Maybe(String), list_ref_fixed(2, li! ["a", "b", "c"]))
+the(Maybe(String), list_ref_fixed(3, li! ["a", "b", "c"]))
+the(Maybe(String), list_ref_fixed(4, li! ["a", "b", "c"]))
 ```

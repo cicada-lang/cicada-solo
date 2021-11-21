@@ -50,8 +50,8 @@ export class LastImInserter extends ImInserter {
 
   insert_im_ap(
     ctx: Ctx,
-    arg: Exp,
     target_core: Core,
+    arg: Exp,
     entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core } {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)

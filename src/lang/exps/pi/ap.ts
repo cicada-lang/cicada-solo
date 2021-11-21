@@ -42,8 +42,13 @@ export class Ap extends Exp {
     const inferred = infer(ctx, this.target)
 
     if (inferred.t instanceof Exps.FixedPiValue) {
-      const target = evaluate(ctx.to_env(), inferred.core)
       throw new Error("TODO")
+      // return inferred.t.fixed_inserter.insert_fixed_ap(
+      //   ctx,
+      //   inferred.core,
+      //   this.arg,
+      //   t
+      // )
     }
 
     return check_by_infer(ctx, this, t)
@@ -60,8 +65,8 @@ export class Ap extends Exp {
     if (inferred.t instanceof Exps.ImPiValue) {
       return inferred.t.im_inserter.insert_im_ap(
         ctx,
-        this.arg,
         inferred.core,
+        this.arg,
         []
       )
     }

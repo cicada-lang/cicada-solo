@@ -39,8 +39,8 @@ export class MoreImInserter extends ImInserter {
 
   insert_im_ap(
     ctx: Ctx,
-    arg: Exp,
     target_core: Core,
+    arg: Exp,
     entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core } {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
@@ -72,7 +72,7 @@ export class MoreImInserter extends ImInserter {
       )
     }
 
-    return ret_t.im_inserter.insert_im_ap(ctx, arg, target_core, [
+    return ret_t.im_inserter.insert_im_ap(ctx, target_core, arg, [
       ...entries,
       {
         arg_t: this.arg_t,

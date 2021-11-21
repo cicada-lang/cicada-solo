@@ -4,7 +4,11 @@
 
   - solve fixed arguments from return type, and insert `FixedAp`
 
+- `Exps.FixedPiValue.insert_fixed_ap`
+
 - an function that only has fixed arguments can be used as value
+
+  - `Var` also need a check-mode -- `Var.check`
 
   - we do not have zero-arity function -- never `c()`
 
