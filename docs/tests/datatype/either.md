@@ -261,14 +261,18 @@ function list_ref_fixed(fixed E: Type, index: Nat): (List(E)) -> Maybe(E) {
 }
 
 check! list_ref_fixed: (fixed E: Type, index: Nat) -> (List(E)) -> Maybe(E)
+
+same_as_chart! (fixed E: Type) -> (List(E)) -> Maybe(E) [
+  (fixed E) => list_ref_fixed(fixed E)(0),
+  // list_ref_fixed(0),
+]
 ```
 
 ``` cicada wishful-thinking
 check! list_ref_fixed(0): (fixed E: Type) -> (List(E)) -> Maybe(E)
-
-the(Maybe(String), list_ref_fixed(0, li! ["a", "b", "c"]))
-the(Maybe(String), list_ref_fixed(1, li! ["a", "b", "c"]))
-the(Maybe(String), list_ref_fixed(2, li! ["a", "b", "c"]))
-the(Maybe(String), list_ref_fixed(3, li! ["a", "b", "c"]))
-the(Maybe(String), list_ref_fixed(4, li! ["a", "b", "c"]))
+check! list_ref_fixed(0, li! ["a", "b", "c"]): Maybe(String)
+check! list_ref_fixed(1, li! ["a", "b", "c"]): Maybe(String)
+check! list_ref_fixed(2, li! ["a", "b", "c"]): Maybe(String)
+check! list_ref_fixed(3, li! ["a", "b", "c"]): Maybe(String)
+check! list_ref_fixed(4, li! ["a", "b", "c"]): Maybe(String)
 ```

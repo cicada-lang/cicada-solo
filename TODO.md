@@ -1,4 +1,4 @@
-- refactor `insert_im_ap`
+- [maybe] refactor `insert_im_ap`
 
 # fixed pi
 
@@ -15,17 +15,6 @@
   - we do not have zero-arity function -- never `c()`
 
 - we can define a version of `list_ref` in `either.md` which use `fixed` keyword
-
-- example:
-
-  ``` cicada
-  // Insert arguments in check mode:
-
-  List.cons: (fixed E: Type, head: E, tail: MyList(E)) -> MyList(E)
-
-  List.cons(head, almost.tail): List(E)
-  List.cons(fixed E, head, almost.tail): List(E)
-  ```
 
 # inductive datatype -- DataCtor & Data
 

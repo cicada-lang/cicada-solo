@@ -40,7 +40,7 @@ export abstract class ImInserter {
 
   abstract insert_im_ap(
     ctx: Ctx,
-    target_core: Core,
+    target: Core,
     arg: Exp,
     entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core }
