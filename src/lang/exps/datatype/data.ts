@@ -39,6 +39,10 @@ export class Data extends Exp {
   }
 
   format(): string {
-    throw new Error("TODO")
+    const args = this.args.map((arg) => arg.format()).join(", ")
+
+    return args.length > 0
+      ? `${this.type_ctor_name}::${this.name}(${args})`
+      : `${this.type_ctor_name}::${this.name}`
   }
 }

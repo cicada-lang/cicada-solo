@@ -1,6 +1,5 @@
 # inductive datatype -- Data
 
-- `Data` -- `format` -- format to `List::cons(...)`
 - `Data` -- `check`
 
   - get the `fixed` parameters from `TypeCtorValue`
