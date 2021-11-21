@@ -1,5 +1,3 @@
-- `fixed-pi/fixed-ap` -- syntax -- test
-
 # fixed pi
 
 - `Ap.check` -- when `inferred.t` is `FixedPiValue`
