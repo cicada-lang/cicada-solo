@@ -5,14 +5,12 @@
   - get the `fixed` parameters from `TypeCtorValue`
   - like implicit but resolve from return type in check-mode
 
-- `DataCore` -- `evaluate`
-- `DataCore` -- `format`
-- `DataCore` -- `alpha_format`
-- `DataCore` -- `alpha_format` -- use structural typing (data contains datatype)
-
 - `DataValue`
 - `DataValue` -- `readback`
 - `DataValue` -- `unify`
+
+- `DataCore` -- `evaluate`
+- `DataCore` -- `alpha_format` -- use structural typing (data contains datatype)
 
 # inductive datatype -- induction
 

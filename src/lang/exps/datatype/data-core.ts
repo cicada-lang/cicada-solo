@@ -30,12 +30,18 @@ export class DataCore extends Core {
   }
 
   format(): string {
-    throw new Error("TODO")
-    // return `vec(${this.head.format()}, ${this.tail.format()})`
+    const args = this.args.map((arg) => arg.format()).join(", ")
+
+    return args.length > 0
+      ? `${this.type_ctor_name}::${this.name}(${args})`
+      : `${this.type_ctor_name}::${this.name}`
   }
 
   alpha_format(ctx: AlphaCtx): string {
-    throw new Error("TODO")
-    // return `vec(${this.head.alpha_format(ctx)}, ${this.tail.alpha_format(ctx)})`
+    const args = this.args.map((arg) => arg.alpha_format(ctx)).join(", ")
+
+    return args.length > 0
+      ? `${this.type_ctor_name}::${this.name}(${args})`
+      : `${this.type_ctor_name}::${this.name}`
   }
 }
