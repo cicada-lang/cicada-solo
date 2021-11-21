@@ -11,19 +11,19 @@ import * as ut from "../../../ut"
 export class TypeCtor extends Exp {
   name: string
   fixed: Record<string, Exp>
-  indexes: Record<string, Exp>
+  varied: Record<string, Exp>
   ctors: Record<string, Exp>
 
   constructor(
     name: string,
     fixed: Record<string, Exp>,
-    indexes: Record<string, Exp>,
+    varied: Record<string, Exp>,
     ctors: Record<string, Exp>
   ) {
     super()
     this.name = name
     this.fixed = fixed
-    this.indexes = indexes
+    this.varied = varied
     this.ctors = ctors
   }
 
@@ -32,7 +32,7 @@ export class TypeCtor extends Exp {
 
     return new Set([
       ...result.free_names,
-      ...this.indexes_free_names(result.bound_names),
+      ...this.varied_free_names(result.bound_names),
       ...this.ctors_free_names(new Set([...result.bound_names, this.name])),
     ])
   }
@@ -50,11 +50,11 @@ export class TypeCtor extends Exp {
     return { free_names, bound_names }
   }
 
-  private indexes_free_names(bound_names: Set<string>): Set<string> {
-    // NOTE The `indexes` will not be in scope in constructor definitions,
+  private varied_free_names(bound_names: Set<string>): Set<string> {
+    // NOTE The `varied` will not be in scope in constructor definitions,
     //   thus we do not need to return new `bound_names`.
     let free_names: Set<string> = new Set()
-    for (const [name, exp] of Object.entries(this.indexes)) {
+    for (const [name, exp] of Object.entries(this.varied)) {
       free_names = new Set([...free_names, ...exp.free_names(bound_names)])
       bound_names = new Set([...bound_names, name])
     }
@@ -79,16 +79,16 @@ export class TypeCtor extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const result = this.infer_fixed(ctx)
-    const indexes = this.infer_indexes(result.ctx)
+    const varied = this.infer_varied(result.ctx)
     const self_type = evaluate(
       ctx.to_env(),
-      TypeCtor.self_type_core(result.fixed, indexes)
+      TypeCtor.self_type_core(result.fixed, varied)
     )
     const ctors = this.infer_ctors(result.ctx.extend(this.name, self_type))
 
     return {
       t: self_type,
-      core: new Exps.TypeCtorCore(this.name, result.fixed, indexes, ctors),
+      core: new Exps.TypeCtorCore(this.name, result.fixed, varied, ctors),
     }
   }
 
@@ -106,22 +106,22 @@ export class TypeCtor extends Exp {
     return { fixed, ctx }
   }
 
-  private infer_indexes(ctx: Ctx): Record<string, Core> {
-    const indexes: Record<string, Core> = {}
-    for (const [name, t] of Object.entries(this.indexes)) {
+  private infer_varied(ctx: Ctx): Record<string, Core> {
+    const varied: Record<string, Core> = {}
+    for (const [name, t] of Object.entries(this.varied)) {
       const core = check(ctx, t, new Exps.TypeValue())
-      indexes[name] = core
+      varied[name] = core
       ctx = ctx.extend(name, evaluate(ctx.to_env(), core))
     }
 
-    return indexes
+    return varied
   }
 
   static self_type_core(
     fixed: Record<string, Core>,
-    indexes: Record<string, Core>
+    varied: Record<string, Core>
   ): Core {
-    return [...Object.entries(fixed), ...Object.entries(indexes)]
+    return [...Object.entries(fixed), ...Object.entries(varied)]
       .reverse()
       .reduce(
         (result, [name, t]) => new Exps.PiCore(name, t, result),
@@ -141,7 +141,7 @@ export class TypeCtor extends Exp {
   format(): string {
     const n = this.name
     const p = this.fixed_format()
-    const i = this.indexes_format()
+    const i = this.varied_format()
     const head = `datatype ${n} ${p}${i}`
     const c = this.ctors_format()
     const body = ut.indent(c, "  ")
@@ -157,18 +157,18 @@ export class TypeCtor extends Exp {
           .join(", ") +
         ") "
       )
-    } else if (Object.entries(this.indexes).length > 0) {
+    } else if (Object.entries(this.varied).length > 0) {
       return "() "
     } else {
       return ""
     }
   }
 
-  private indexes_format(): string {
-    if (Object.entries(this.indexes).length > 0) {
+  private varied_format(): string {
+    if (Object.entries(this.varied).length > 0) {
       return (
         "(" +
-        Object.entries(this.indexes)
+        Object.entries(this.varied)
           .map(([name, t]) => `${name}: ${t.format()}`)
           .join(", ") +
         ") "

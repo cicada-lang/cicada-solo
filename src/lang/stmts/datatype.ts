@@ -12,14 +12,14 @@ export class Datatype extends Stmt {
   constructor(
     name: string,
     fixed: Record<string, Exp>,
-    indexes: Record<string, Exp>,
+    varied: Record<string, Exp>,
     ctors: Record<string, Exp>,
     meta: StmtMeta
   ) {
     super()
     this.meta = meta
     this.name = name
-    this.datatype = new Exps.TypeCtor(name, fixed, indexes, ctors)
+    this.datatype = new Exps.TypeCtor(name, fixed, varied, ctors)
   }
 
   async execute(mod: Module): Promise<StmtOutput | undefined> {

@@ -1,7 +1,5 @@
 # inductive datatype -- Data
 
-- `TypeCtor` -- rename `indexes` to `varied`
-
 - `Data`
 - `Data` -- `check`
 

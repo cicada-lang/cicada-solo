@@ -14,27 +14,27 @@ import { TypeCtorApHandler } from "./type-ctor-ap-handler"
 export class TypeCtorValue extends Value {
   name: string
   fixed: Record<string, Core>
-  indexes: Record<string, Core>
+  varied: Record<string, Core>
   ctors: Record<string, Core>
   env: Env
 
   constructor(
     name: string,
     fixed: Record<string, Core>,
-    indexes: Record<string, Core>,
+    varied: Record<string, Core>,
     ctors: Record<string, Core>,
     env: Env
   ) {
     super()
     this.name = name
     this.fixed = fixed
-    this.indexes = indexes
+    this.varied = varied
     this.ctors = ctors
     this.env = env
   }
 
   get arity(): number {
-    return Object.keys(this.fixed).length + Object.keys(this.indexes).length
+    return Object.keys(this.fixed).length + Object.keys(this.varied).length
   }
 
   ap_handler = new TypeCtorApHandler(this)
@@ -44,7 +44,7 @@ export class TypeCtorValue extends Value {
 
     if (conversion(ctx, new Exps.TypeValue(), t, self_type)) {
       const result = this.readback_fixed(ctx)
-      const indexes = this.readback_indexes(result.ctx)
+      const varied = this.readback_varied(result.ctx)
       // NOTE The `name` is already bound to this `TypeCtorValue` in `ctx`,
       //   we need to make it `NotYetValue` to avoid infinite recursion.
       const ctors = this.readback_ctors(
@@ -54,7 +54,7 @@ export class TypeCtorValue extends Value {
           new Exps.NotYetValue(self_type, new Exps.VarNeutral(this.name))
         )
       )
-      return new Exps.TypeCtorCore(this.name, result.fixed, indexes, ctors)
+      return new Exps.TypeCtorCore(this.name, result.fixed, varied, ctors)
     }
   }
 
@@ -63,7 +63,7 @@ export class TypeCtorValue extends Value {
     //   `PiValue.readback_eta_expansion` can handle it.
     return evaluate(
       this.env,
-      Exps.TypeCtor.self_type_core(this.fixed, this.indexes)
+      Exps.TypeCtor.self_type_core(this.fixed, this.varied)
     )
   }
 
@@ -82,15 +82,15 @@ export class TypeCtorValue extends Value {
     return { fixed, ctx }
   }
 
-  readback_indexes(ctx: Ctx): Record<string, Core> {
-    const indexes: Record<string, Core> = {}
+  readback_varied(ctx: Ctx): Record<string, Core> {
+    const varied: Record<string, Core> = {}
 
-    for (const [name, t] of Object.entries(this.value_of_indexes())) {
-      indexes[name] = readback(ctx, new Exps.TypeValue(), t)
+    for (const [name, t] of Object.entries(this.value_of_varied())) {
+      varied[name] = readback(ctx, new Exps.TypeValue(), t)
       ctx = ctx.extend(name, t)
     }
 
-    return indexes
+    return varied
   }
 
   readback_ctors(ctx: Ctx): Record<string, Core> {
@@ -119,18 +119,18 @@ export class TypeCtorValue extends Value {
     return { fixed, env }
   }
 
-  private value_of_indexes(): Record<string, Value> {
-    const indexes: Record<string, Value> = {}
+  private value_of_varied(): Record<string, Value> {
+    const varied: Record<string, Value> = {}
     const result = this.value_of_fixed()
 
     let env = result.env
-    for (const [name, t_core] of Object.entries(this.indexes)) {
+    for (const [name, t_core] of Object.entries(this.varied)) {
       const t = evaluate(env, t_core)
-      indexes[name] = t
+      varied[name] = t
       env = env.extend(name, new Exps.NotYetValue(t, new Exps.VarNeutral(name)))
     }
 
-    return indexes
+    return varied
   }
 
   private value_of_ctors(): Record<string, Value> {

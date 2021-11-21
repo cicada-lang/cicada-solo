@@ -9,19 +9,19 @@ import * as ut from "../../../ut"
 export class TypeCtorCore extends Core {
   name: string
   fixed: Record<string, Core>
-  indexes: Record<string, Core>
+  varied: Record<string, Core>
   ctors: Record<string, Core>
 
   constructor(
     name: string,
     fixed: Record<string, Core>,
-    indexes: Record<string, Core>,
+    varied: Record<string, Core>,
     ctors: Record<string, Core>
   ) {
     super()
     this.name = name
     this.fixed = fixed
-    this.indexes = indexes
+    this.varied = varied
     this.ctors = ctors
   }
 
@@ -29,7 +29,7 @@ export class TypeCtorCore extends Core {
     return new Exps.TypeCtorValue(
       this.name,
       this.fixed,
-      this.indexes,
+      this.varied,
       this.ctors,
       env
     )
@@ -41,7 +41,7 @@ export class TypeCtorCore extends Core {
 
   alpha_format(ctx: AlphaCtx): string {
     const p = this.fixed_alpha_format(ctx)
-    const i = this.indexes_alpha_format(ctx)
+    const i = this.varied_alpha_format(ctx)
     // NOTE structural typing (do not print `name`)
     const head = `datatype # ${p}${i}`
     const c = this.ctors_alpha_format(ctx.extend(this.name))
@@ -58,18 +58,18 @@ export class TypeCtorCore extends Core {
           .join(", ") +
         ") "
       )
-    } else if (Object.entries(this.indexes).length > 0) {
+    } else if (Object.entries(this.varied).length > 0) {
       return "() "
     } else {
       return ""
     }
   }
 
-  private indexes_alpha_format(ctx: AlphaCtx): string {
-    if (Object.entries(this.indexes).length > 0) {
+  private varied_alpha_format(ctx: AlphaCtx): string {
+    if (Object.entries(this.varied).length > 0) {
       return (
         "(" +
-        Object.entries(this.indexes)
+        Object.entries(this.varied)
           .map(([name, t]) => `${name}: ${t.alpha_format(ctx)}`)
           .join(", ") +
         ") "
