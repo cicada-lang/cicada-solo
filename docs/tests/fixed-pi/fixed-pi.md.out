@@ -1,2 +1,4 @@
 (fixed E) => vecnil: (fixed E: Type) -> Vector(E, 0)
 (fixed E) => vecnil: (fixed E: Type) -> Vector(E, 0)
+(fixed E, head, tail) => li(head, tail): (fixed E: Type, head: E, tail: List(E)) -> List(E)
+(fixed E, head, tail) => li(head, tail): (fixed E: Type, head: E, tail: List(E)) -> List(E)
