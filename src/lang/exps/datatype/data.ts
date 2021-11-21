@@ -21,7 +21,9 @@ export class Data extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    throw new Error("TODO")
+    return new Set(
+      this.args.flatMap((arg) => Array.from(arg.free_names(bound_names)))
+    )
   }
 
   subst(name: string, exp: Exp): Exp {

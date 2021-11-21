@@ -1,6 +1,5 @@
 # inductive datatype -- Data
 
-- `Data` -- `free_names`
 - `Data` -- `subst`
 - `Data` -- `format` -- format to `List::cons(...)`
 - `Data` -- `check`
