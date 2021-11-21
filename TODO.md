@@ -1,3 +1,5 @@
+- refactor `insert_im_ap`
+
 # fixed pi
 
 - `Ap.check` -- when `inferred.t` is `FixedPiValue`

@@ -19,7 +19,10 @@ export class FixedApCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    return FixedApCore.apply(evaluate(env, this.target), evaluate(env, this.arg))
+    return FixedApCore.apply(
+      evaluate(env, this.target),
+      evaluate(env, this.arg)
+    )
   }
 
   ap_formater = new ApFormater(this, {

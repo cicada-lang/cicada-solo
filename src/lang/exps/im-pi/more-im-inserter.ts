@@ -39,7 +39,7 @@ export class MoreImInserter extends ImInserter {
 
   insert_im_ap(
     ctx: Ctx,
-    target_core: Core,
+    target: Core,
     arg: Exp,
     entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core } {
@@ -56,7 +56,7 @@ export class MoreImInserter extends ImInserter {
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
           `  arg: ${arg.format()}`,
-          `  target_core: ${target_core.format()}`,
+          `  target: ${target.format()}`,
         ].join("\n")
       )
     }
@@ -72,7 +72,7 @@ export class MoreImInserter extends ImInserter {
       )
     }
 
-    return ret_t.im_inserter.insert_im_ap(ctx, target_core, arg, [
+    return ret_t.im_inserter.insert_im_ap(ctx, target, arg, [
       ...entries,
       {
         arg_t: this.arg_t,

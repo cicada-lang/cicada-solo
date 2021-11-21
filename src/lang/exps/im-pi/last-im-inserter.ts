@@ -50,7 +50,7 @@ export class LastImInserter extends ImInserter {
 
   insert_im_ap(
     ctx: Ctx,
-    target_core: Core,
+    target: Core,
     arg: Exp,
     entries: Array<ImApInsertionEntry>
   ): { t: Value; core: Core } {
@@ -58,12 +58,8 @@ export class LastImInserter extends ImInserter {
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = expect(ctx, this.ret_t_cl.apply(not_yet_value), Exps.PiValue)
-
     const inferred_arg = infer(ctx, arg)
-
     const solution = this.solve_im_ap(ctx, arg)
-
-    let target = target_core
 
     for (const entry of entries) {
       const im_arg_core = readback(ctx, entry.arg_t, entry.im_arg)
@@ -85,7 +81,7 @@ export class LastImInserter extends ImInserter {
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
           `  arg: ${arg.format()}`,
-          `  target_core: ${target_core.format()}`,
+          `  target: ${target.format()}`,
         ].join("\n")
       )
     }
