@@ -1,7 +1,5 @@
 - `fixed-pi/fixed-ap` -- syntax
 
-  - need `FixedApCore.apply`
-
 # fixed pi
 
 - `Ap.check` -- when `inferred.t` is `FixedPiValue`
