@@ -1,5 +1,3 @@
-- [maybe] refactor `insert_im_ap`
-
 # fixed pi
 
 - `Ap.check` -- when `inferred.t instanceof FixedPiValue`
@@ -8,7 +6,19 @@
     but in nested application, we can not infer partially applied `fixed-fn`.
 
     - (A) use other signal for check-mode resolution.
+
+      - data construction syntax should be different from function application.
+
+        - c++, rust: `Type::Ctor`
+        - js, c++: `new Type.Ctor()`
+        - `<ctor> [ ... ]` as data construction, such as `List.cons [ ... ]` -- can not be curried
+
     - (B) enrich the structure of `fixed-fn` so that we can infer partially applied `fixed-fn`.
+
+      - `curried-fixed-fn`
+      - `curried-fixed-pi`
+
+    - we choose plan (B)
 
   - solve fixed arguments from return type, and insert `FixedAp`
 

@@ -20,12 +20,6 @@ function my_list_cons(fixed E: Type, head: E, tail: List(E)): List(E) {
 my_list_cons
 
 check! my_list_cons: (fixed E: Type, head: E, tail: List(E)) -> List(E)
-
-// same_as_chart! (fixed E: Type, tail: List(E)) -> List(E) [
-//   (fixed E) => my_list_cons(fixed E)("a"),
-//   // my_list_cons("a"),
-// ]
-
-// check! my_list_cons("a"): (tail: List(String)) -> List(String)
+// check! my_list_cons("a"): (fixed E: Type, curried head: E = "a", tail: List(E)) -> List(E)
 // check! my_list_cons("a", nil): List(String)
 ```
