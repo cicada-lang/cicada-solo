@@ -27,3 +27,116 @@ function typeof_triple(
 check! (implicit A, implicit B, implicit C, _pair) => cons(A, cons(B, C)): (implicit A: Type, implicit B: Type, implicit C: Type, triple: Pair(A, Pair(B, C))) -> Pair(Type, Pair(Type, Type))
 check! (implicit X, implicit Y, implicit Z, _pair) => cons(X, cons(Y, Z)): (implicit A: Type, implicit B: Type, implicit C: Type, triple: Pair(A, Pair(B, C))) -> Pair(Type, Pair(Type, Type))
 ```
+
+# insert im-fn on im-fn
+
+## pick_second_type
+
+``` cicada
+function pick_second_type(
+  implicit A: Type,
+  implicit B: Type,
+  implicit C: Type,
+  implicit D: Type,
+  target: Pair(A, Pair(B, Pair(C, D))),
+): Type {
+  return B
+}
+
+pick_second_type
+
+check! (
+  implicit A,
+  implicit B,
+  implicit C,
+  implicit D,
+  triple,
+) => B : (
+  implicit A: Type,
+  implicit B: Type,
+  implicit C: Type,
+  implicit D: Type,
+  target: Pair(A, Pair(B, Pair(C, D))),
+) -> Type
+
+check! (
+  implicit A,
+  implicit B,
+  implicit C,
+  triple,
+) => B : (
+  implicit A: Type,
+  implicit B: Type,
+  implicit C: Type,
+  implicit D: Type,
+  target: Pair(A, Pair(B, Pair(C, D))),
+) -> Type
+
+check! (
+  implicit A,
+  implicit B,
+  triple,
+) => B : (
+  implicit A: Type,
+  implicit B: Type,
+  implicit C: Type,
+  implicit D: Type,
+  target: Pair(A, Pair(B, Pair(C, D))),
+) -> Type
+```
+
+## pick_third_type
+
+``` cicada
+function pick_third_type(
+  implicit A: Type,
+  implicit B: Type,
+  implicit C: Type,
+  implicit D: Type,
+  target: Pair(A, Pair(B, Pair(C, D))),
+): Type {
+  return C
+}
+
+pick_third_type
+
+check! (
+  implicit A,
+  implicit B,
+  implicit C,
+  implicit D,
+  triple,
+) => C : (
+  implicit A: Type,
+  implicit B: Type,
+  implicit C: Type,
+  implicit D: Type,
+  target: Pair(A, Pair(B, Pair(C, D))),
+) -> Type
+
+check! (
+  implicit A,
+  implicit B,
+  implicit C,
+  triple,
+) => C : (
+  implicit A: Type,
+  implicit B: Type,
+  implicit C: Type,
+  implicit D: Type,
+  target: Pair(A, Pair(B, Pair(C, D))),
+) -> Type
+
+// TODO BUG C should not be in scope.
+check! (
+  implicit A,
+  implicit B,
+  triple,
+) => C : (
+  implicit A: Type,
+  implicit B: Type,
+  implicit C: Type,
+  implicit D: Type,
+  target: Pair(A, Pair(B, Pair(C, D))),
+) -> Type
+```

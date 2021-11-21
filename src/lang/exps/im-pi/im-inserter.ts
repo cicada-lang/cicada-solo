@@ -23,15 +23,15 @@ export abstract class ImInserter {
     this.ret_t_cl = ret_t_cl
   }
 
-  insert_im_fn(ctx: Ctx, fn: Exp, opts?: { name: string }): Core {
-    const name = opts?.name || this.ret_t_cl.name
-    const fresh_name = ctx.freshen(name)
+  insert_im_fn(ctx: Ctx, exp: Exp): Core {
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const arg = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = this.ret_t_cl.apply(arg)
-    fn = subst(fn, name, new Exps.Var(fresh_name))
-    const fn_core = check(ctx.extend(fresh_name, this.arg_t), fn, ret_t)
-    return new Exps.ImFnCore(fresh_name, fn_core)
+    // NOTE We do not need to subst `exp` for the `fresh_name`,
+    //   because inserted `fresh_name` must not occur in `exp`.
+    const core = check(ctx.extend(fresh_name, this.arg_t), exp, ret_t)
+    return new Exps.ImFnCore(fresh_name, core)
   }
 
   abstract insert_im_ap(
