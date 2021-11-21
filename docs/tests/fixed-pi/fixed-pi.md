@@ -6,4 +6,6 @@ function vector_null(fixed E: Type): Vector(E, zero) {
 }
 
 vector_null
+
+check! vector_null: Vector(String, zero)
 ```
