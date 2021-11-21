@@ -1,4 +1,4 @@
-- use function `name` as base during `Pi.readback_eta_expansion`
+- use function `name` as base during `PiValue.readback_eta_expansion`
 
 # fixed pi
 
@@ -6,8 +6,6 @@
 > be able to solve implicit arguments from return type.
 
 - `fixed-pi/fixed-fn` -- `check`
-
-  - maybe we need `fixed_inserter.insert_fixed_fn`?
 
 - `fixed-pi/fixed-ap`
 - `fixed-pi/fixed-ap-core`

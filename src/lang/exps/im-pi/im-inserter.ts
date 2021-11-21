@@ -6,6 +6,7 @@ import { Core } from "../../core"
 import { Solution } from "../../solution"
 import { Value } from "../../value"
 import * as Exps from "../../exps"
+import * as ut from "../../../ut"
 import { Closure } from "../closure"
 
 export interface ImApInsertionEntry {
@@ -24,7 +25,10 @@ export abstract class ImInserter {
   }
 
   insert_im_fn(ctx: Ctx, exp: Exp): Core {
-    const fresh_name = ctx.freshen(this.ret_t_cl.name)
+    const fresh_name = ut.freshen(
+      exp.free_names(new Set()),
+      ctx.freshen(this.ret_t_cl.name)
+    )
     const variable = new Exps.VarNeutral(fresh_name)
     const arg = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = this.ret_t_cl.apply(arg)

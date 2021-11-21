@@ -4,3 +4,10 @@
 (implicit A, implicit B, pair) => [A | B]: (implicit A: Type, implicit B: Type, pair: [_: A | B]) -> [_: Type | Type]
 (implicit A, implicit B, implicit C, triple) => [A | [B | C]]: (implicit A: Type, implicit B: Type, implicit C: Type, triple: [_: A, _1: B | C]) -> [_: Type, _1: Type | Type]
 (implicit A, implicit B, implicit C, triple) => [A | [B | C]]: (implicit A: Type, implicit B: Type, implicit C: Type, triple: [_: A, _1: B | C]) -> [_: Type, _1: Type | Type]
+(implicit A, implicit B, implicit C, implicit D, target) => B: (implicit A: Type, implicit B: Type, implicit C: Type, implicit D: Type, target: [_: A, _1: B, _2: C | D]) -> Type
+(implicit A, implicit B, implicit C, implicit D, target) => B: (implicit A: Type, implicit B: Type, implicit C: Type, implicit D: Type, target: [_: A, _1: B, _2: C | D]) -> Type
+(implicit A, implicit B, implicit C, implicit D, target) => B: (implicit A: Type, implicit B: Type, implicit C: Type, implicit D: Type, target: [_: A, _1: B, _2: C | D]) -> Type
+(implicit A, implicit B, implicit C, implicit D, target) => B: (implicit A: Type, implicit B: Type, implicit C: Type, implicit D: Type, target: [_: A, _1: B, _2: C | D]) -> Type
+(implicit A, implicit B, implicit C, implicit D, target) => C: (implicit A: Type, implicit B: Type, implicit C: Type, implicit D: Type, target: [_: A, _1: B, _2: C | D]) -> Type
+(implicit A, implicit B, implicit C, implicit D, target) => C: (implicit A: Type, implicit B: Type, implicit C: Type, implicit D: Type, target: [_: A, _1: B, _2: C | D]) -> Type
+(implicit A, implicit B, implicit C, implicit D, target) => C: (implicit A: Type, implicit B: Type, implicit C: Type, implicit D: Type, target: [_: A, _1: B, _2: C | D]) -> Type

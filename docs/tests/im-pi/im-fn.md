@@ -126,17 +126,4 @@ check! (
   implicit D: Type,
   target: Pair(A, Pair(B, Pair(C, D))),
 ) -> Type
-
-// TODO BUG C should not be in scope.
-check! (
-  implicit A,
-  implicit B,
-  triple,
-) => C : (
-  implicit A: Type,
-  implicit B: Type,
-  implicit C: Type,
-  implicit D: Type,
-  target: Pair(A, Pair(B, Pair(C, D))),
-) -> Type
 ```
