@@ -4,6 +4,7 @@ import { evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 import { expect } from "../../value"
+import { check_conversion } from "../../value"
 import { ExpTrace } from "../../errors"
 import { Solution } from "../../solution"
 import { check } from "../../exp"
@@ -66,15 +67,29 @@ export class Data extends Exp {
       ctx = ctx.extend(name, arg_t, arg)
     }
 
-    // const ctor_bindings = datatype.ctor_bindings(this.name)
+    const ctor_bindings = datatype.type_ctor.ctor_bindings(this.name)
+    const args: Array<Core> = []
+    for (const [index, binding] of ctor_bindings.entries()) {
+      const name = binding.name
+      const arg_t = evaluate(env, binding.arg_t)
+      const arg_core = check(ctx, this.args[index], arg_t)
+      const arg = evaluate(env, arg_core)
+      args.push(arg_core)
+      env = env.extend(name, arg)
+      ctx = ctx.extend(name, arg_t, arg)
+    }
 
-    // const ctor_ret_t_core = datatype.ctor_ret_t(this.name)
-    // const ctor_ret_t = evaluate(env, ctor_ret_t_core)
+    const ctor_ret_t_core = datatype.type_ctor.ctor_ret_t(this.name)
+    const ctor_ret_t = evaluate(env, ctor_ret_t_core)
 
-    throw new Error("TODO")
+    check_conversion(ctx, new Exps.TypeValue(), ctor_ret_t, datatype, {
+      description: {
+        from: "data constructor return type",
+        to: "given datatype",
+      },
+    })
 
-    // const args =
-    // return new Exps.DataCore(this.type_ctor_name, this.name, args)
+    return new Exps.DataCore(this.type_ctor_name, this.name, args)
   }
 
   format(): string {

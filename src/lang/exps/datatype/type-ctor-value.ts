@@ -33,6 +33,14 @@ export class TypeCtorValue extends Value {
     this.env = env
   }
 
+  ctor_bindings(name: string): Array<{ name: string; arg_t: Core }> {
+    throw new Error("TODO")
+  }
+
+  ctor_ret_t(name: string): Core {
+    throw new Error("TODO")
+  }
+
   get arity(): number {
     return Object.keys(this.fixed).length + Object.keys(this.varied).length
   }

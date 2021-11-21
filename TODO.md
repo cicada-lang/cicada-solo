@@ -1,9 +1,7 @@
 # inductive datatype -- Data
 
-- `TypeCtorValue` -- `ctor_bindings(name: string): Array<{ kind: "plain" | "implicit", name: string, arg_t: Core }>`
+- `TypeCtorValue` -- `ctor_bindings(name: string): Array<{ name: string, arg_t: Core }>`
 - `TypeCtorValue` -- `ctor_ret_t(name: string): Core`
-
-- `Data` -- `check` -- finish
 
 - `DataValue`
 - `DataValue` -- `readback`
@@ -11,6 +9,12 @@
 
 - `DataCore` -- `evaluate`
 - `DataCore` -- `alpha_format` -- use structural typing (data contains datatype)
+
+- data construction test by `List`, `Nat`, ... (without `implicit`)
+
+- `TypeCtorValue` -- `ctor_bindings` -- `Binding` has `kind: "plain" | "implicit"`
+
+- data construction test by `Vector`, ... (with `implicit`)
 
 # inductive datatype -- induction
 

@@ -1,4 +1,4 @@
-import { Exp, ExpMeta, ElaborationOptions, subst } from "../../exp"
+import { Exp } from "../../exp"
 import { Core, AlphaCtx } from "../../core"
 import { Env } from "../../env"
 import { evaluate } from "../../core"
@@ -7,22 +7,15 @@ import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
 export class DataCore extends Core {
-  meta: ExpMeta
   type_ctor_name: string
   name: string
   args: Array<Core>
 
-  constructor(
-    type_ctor_name: string,
-    name: string,
-    args: Array<Core>,
-    meta: ExpMeta
-  ) {
+  constructor(type_ctor_name: string, name: string, args: Array<Core>) {
     super()
     this.type_ctor_name = type_ctor_name
     this.name = name
     this.args = args
-    this.meta = meta
   }
 
   evaluate(env: Env): Value {
