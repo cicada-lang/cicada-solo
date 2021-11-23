@@ -46,22 +46,26 @@ export class DataValue extends Value {
     }
 
     const datatype = expect(ctx, t, Exps.DatatypeValue)
+    const ctor_arg_t_values = datatype.get_ctor_arg_t_values(
+      this.name,
+      this.args
+    )
 
     if (
-      datatype.args.length !== this.args.length ||
-      datatype.args.length !== that.args.length
+      ctor_arg_t_values.length !== this.args.length ||
+      ctor_arg_t_values.length !== that.args.length
     ) {
       throw new ExpTrace(
         [
           `I expect the following lengths to be the same.`,
-          `  datatype.args.length: ${datatype.args.length}`,
+          `  ctor_arg_t_values.length: ${ctor_arg_t_values.length}`,
           `  this.args.length: ${this.args.length}`,
           `  that.args.length: ${that.args.length}`,
         ].join("\n")
       )
     }
 
-    for (const [index, arg_t] of datatype.args.entries()) {
+    for (const [index, arg_t] of ctor_arg_t_values.entries()) {
       solution = solution.unify(ctx, arg_t, this.args[index], that.args[index])
     }
 
