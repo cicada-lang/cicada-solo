@@ -1,8 +1,6 @@
 # inductive datatype -- Data
 
-- `DataValue` -- `readback`
 - `DataValue` -- `unify`
-- `DataValue` -- `readback_eta_expansion`
 
 - `DataCore` -- `alpha_format` -- use structural typing (data contains datatype)
 

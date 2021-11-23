@@ -18,11 +18,14 @@ export class DataValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    throw new Error("TODO")
-  }
+    if (t instanceof Exps.DatatypeValue && t.args.length === this.args.length) {
+      const args = []
+      for (const [index, arg] of this.args.entries()) {
+        args.push(readback(ctx, t.args[index], arg))
+      }
 
-  readback_eta_expansion(ctx: Ctx, value: Value): Core {
-    throw new Error("TODO")
+      return new Exps.DataCore(this.type_ctor_name, this.name, args)
+    }
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
