@@ -1,8 +1,8 @@
 # inductive datatype -- Data
 
-- refactor `Data.check` & `DatatypeValue.get_ctor_arg_t_values`
+- refactor `get_ctor_ret_t_core`
 
-  - note about data construction telescope
+- refactor `Data.check`
 
 - `TypeCtorValue` -- `get_ctor_binding_cores` -- `CtorBinding` has `kind: "plain" | "implicit"`
 

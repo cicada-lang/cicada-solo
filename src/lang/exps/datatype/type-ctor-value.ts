@@ -38,7 +38,7 @@ export class TypeCtorValue extends Value {
     this.env = env.extend(this.name, this)
   }
 
-  apply_fixed(args: Array<Value>): Env {
+  private apply_fixed(args: Array<Value>): Env {
     const fixed_entries = Array.from(Object.entries(this.fixed).entries())
 
     if (args.length < fixed_entries.length) {
@@ -87,7 +87,7 @@ export class TypeCtorValue extends Value {
     return { env, arg_t_values }
   }
 
-  get_ctor_core(name: string): Core {
+  private get_ctor_core(name: string): Core {
     const ctor = this.ctors[name]
     if (ctor === undefined) {
       const names = Object.keys(this.ctors).join(", ")
@@ -103,7 +103,7 @@ export class TypeCtorValue extends Value {
     return ctor
   }
 
-  get_ctor_binding_cores(name: string): Array<CtorBinding> {
+  private get_ctor_binding_cores(name: string): Array<CtorBinding> {
     const bindings: Array<{ name: string; arg_t: Core }> = []
     let t = this.get_ctor_core(name)
     // TODO We should also handle `Exps.ImPiCore`.
@@ -169,7 +169,7 @@ export class TypeCtorValue extends Value {
     )
   }
 
-  readback_fixed(ctx: Ctx): {
+  private readback_fixed(ctx: Ctx): {
     fixed: Record<string, Core>
     ctx: Ctx
   } {
@@ -184,7 +184,7 @@ export class TypeCtorValue extends Value {
     return { fixed, ctx }
   }
 
-  readback_varied(ctx: Ctx): Record<string, Core> {
+  private readback_varied(ctx: Ctx): Record<string, Core> {
     const varied: Record<string, Core> = {}
 
     for (const [name, t] of Object.entries(this.value_of_varied())) {
@@ -195,7 +195,7 @@ export class TypeCtorValue extends Value {
     return varied
   }
 
-  readback_ctors(ctx: Ctx): Record<string, Core> {
+  private readback_ctors(ctx: Ctx): Record<string, Core> {
     const ctors: Record<string, Core> = {}
 
     for (const [name, t] of Object.entries(this.value_of_ctors())) {

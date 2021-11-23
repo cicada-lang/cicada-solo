@@ -24,16 +24,17 @@ export class DataValue extends Value {
     }
 
     if (t instanceof Exps.DatatypeValue) {
-      const ctor_arg_t_values = t.get_ctor_arg_t_values(this.name, this.args)
+      const { arg_t_values } = t.type_ctor.apply_ctor(this.name, {
+        fixed_args: t.args,
+        args: (index) => this.args[index],
+      })
 
-      if (ctor_arg_t_values.length === this.args.length) {
-        const args = []
-
-        for (const [index, arg] of this.args.entries()) {
-          args.push(readback(ctx, ctor_arg_t_values[index], arg))
-        }
-
-        return new Exps.DataCore(this.type_ctor_name, this.name, args)
+      if (arg_t_values.length === this.args.length) {
+        return new Exps.DataCore(
+          this.type_ctor_name,
+          this.name,
+          this.args.map((arg, index) => readback(ctx, arg_t_values[index], arg))
+        )
       }
     }
   }
@@ -48,26 +49,27 @@ export class DataValue extends Value {
     }
 
     const datatype = expect(ctx, t, Exps.DatatypeValue)
-    const ctor_arg_t_values = datatype.get_ctor_arg_t_values(
-      this.name,
-      this.args
-    )
+
+    const { arg_t_values } = datatype.type_ctor.apply_ctor(this.name, {
+      fixed_args: datatype.args,
+      args: (index) => this.args[index],
+    })
 
     if (
-      ctor_arg_t_values.length !== this.args.length ||
-      ctor_arg_t_values.length !== that.args.length
+      arg_t_values.length !== this.args.length ||
+      arg_t_values.length !== that.args.length
     ) {
       throw new ExpTrace(
         [
           `I expect the following lengths to be the same.`,
-          `  ctor_arg_t_values.length: ${ctor_arg_t_values.length}`,
+          `  arg_t_values.length: ${arg_t_values.length}`,
           `  this.args.length: ${this.args.length}`,
           `  that.args.length: ${that.args.length}`,
         ].join("\n")
       )
     }
 
-    for (const [index, arg_t] of ctor_arg_t_values.entries()) {
+    for (const [index, arg_t] of arg_t_values.entries()) {
       solution = solution.unify(ctx, arg_t, this.args[index], that.args[index])
     }
 
