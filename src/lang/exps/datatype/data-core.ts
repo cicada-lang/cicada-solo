@@ -19,7 +19,11 @@ export class DataCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
+    return new Exps.DataValue(
+      this.type_ctor_name,
+      this.name,
+      this.args.map((arg) => evaluate(env, arg))
+    )
   }
 
   format(): string {

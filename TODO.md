@@ -1,7 +1,5 @@
 # inductive datatype -- Data
 
-- `DataCore` -- `evaluate`
-
 - `DataValue` -- `readback`
 - `DataValue` -- `unify`
 - `DataValue` -- `readback_eta_expansion`
