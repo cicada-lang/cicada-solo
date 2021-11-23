@@ -75,7 +75,7 @@ export class TypeCtorValue extends Value {
 
     let env = this.apply_fixed(fixed_args)
     const arg_t_values: Array<Value> = []
-    const bindings_cores = this.get_ctor_binding_cores(ctor_name).entries()
+    const bindings_cores = this.get_ctor_bindings(ctor_name).entries()
     for (const [index, binding] of bindings_cores) {
       // TODO handle implicit bindings
       const arg_t = evaluate(env, binding.arg_t)
@@ -87,7 +87,7 @@ export class TypeCtorValue extends Value {
     return { env, arg_t_values }
   }
 
-  private get_ctor_binding_cores(name: string): Array<CtorBinding> {
+  private get_ctor_bindings(name: string): Array<CtorBinding> {
     const bindings: Array<{ name: string; arg_t: Core }> = []
     let t = this.get_ctor_core(name)
     // TODO We should also handle `Exps.ImPiCore`.
@@ -98,6 +98,11 @@ export class TypeCtorValue extends Value {
     }
 
     return bindings
+  }
+
+  ctor_arity(name: string): number {
+    const bindings = this.get_ctor_bindings(name)
+    return bindings.length
   }
 
   evaluate_ctor_ret_t(env: Env, name: string): Value {

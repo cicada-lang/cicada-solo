@@ -1,8 +1,6 @@
 # inductive datatype -- Data
 
-- refactor `Data.check`
-
-- `TypeCtorValue` -- `get_ctor_binding_cores` -- `CtorBinding` has `kind: "plain" | "implicit"`
+- `TypeCtorValue` -- `get_ctor_bindings` -- `CtorBinding` has `kind: "plain" | "implicit"`
 
 - refactor `insert_im_ap`
 
@@ -14,7 +12,7 @@
 
 # inductive datatype -- questions
 
-- [maybe] extract `Ctor`
+- [maybe] extract `DataCtor` class (not an `Exp`) to simplify `TypeCtorValue`
 
 - [question] Is it ok that `TypeCtorValue` can be `readback` to `TypeCtor`,
   while `DatatypeValue` and `CurriedTypeCtorValue` can only be `readback` to `ApCore`?
