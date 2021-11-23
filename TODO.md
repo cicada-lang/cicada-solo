@@ -2,9 +2,9 @@
 
 - refactor `Data.check` & `DatatypeValue.get_ctor_arg_t_values`
 
-  - be sure about telescope
+  - note about data construction telescope
 
-- `TypeCtorValue` -- `ctor_bindings` -- `CtorBinding` has `kind: "plain" | "implicit"`
+- `TypeCtorValue` -- `get_ctor_binding_cores` -- `CtorBinding` has `kind: "plain" | "implicit"`
 
 - data construction test by `Vector` (with `implicit`)
 
