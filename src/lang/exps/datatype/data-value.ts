@@ -22,10 +22,17 @@ export class DataValue extends Value {
     t = t instanceof Exps.TypeCtorValue ? new Exps.DatatypeValue(t, []) : t
 
     if (t instanceof Exps.DatatypeValue) {
-      if (t.args.length === this.args.length) {
+      const ctor_arg_t_values = t.get_ctor_arg_t_values(
+        ctx,
+        this.name,
+        this.args
+      )
+
+      if (ctor_arg_t_values.length === this.args.length) {
         const args = []
+
         for (const [index, arg] of this.args.entries()) {
-          args.push(readback(ctx, t.args[index], arg))
+          args.push(readback(ctx, ctor_arg_t_values[index], arg))
         }
 
         return new Exps.DataCore(this.type_ctor_name, this.name, args)

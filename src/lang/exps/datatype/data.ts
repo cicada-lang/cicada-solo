@@ -71,9 +71,10 @@ export class Data extends Exp {
       ctx = ctx.extend(name, arg_t, arg)
     }
 
-    const ctor_bindings = datatype.type_ctor.get_ctor_binding_cores(this.name)
     const args: Array<Core> = []
-    for (const [index, binding] of ctor_bindings.entries()) {
+    for (const [index, binding] of datatype.type_ctor
+      .get_ctor_binding_cores(this.name)
+      .entries()) {
       const name = binding.name
       const arg_t = evaluate(env, binding.arg_t)
       const arg_core = check(ctx, this.args[index], arg_t)

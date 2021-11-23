@@ -1,9 +1,10 @@
 # inductive datatype -- Data
 
-- `Datatype.get_ctor_arg_t_values`
+- `Data` fix `check` -- use `fresh_name` when extending `ctx`
 
-- `DataValue` fix `readback` -- use the right `arg_t`
 - `DataValue` fix `unify` -- use the right `arg_t`
+
+- refactor `Datatype.check` & `DatatypeValue.get_ctor_arg_t_values`
 
 - refactor normalization between zero-arity `TypeCtorValue` and `DatatypeValue`
 

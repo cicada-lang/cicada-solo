@@ -1,6 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import { Core } from "../../core"
+import { check } from "../../exp"
 import { readback } from "../../value"
 import { Value } from "../../value"
 import { expect } from "../../value"
@@ -21,10 +22,34 @@ export class DatatypeValue extends Value {
     this.args = args
   }
 
-  get_ctor_arg_t_array(name: string): Array<Value> {
-    const ctor = this.type_ctor.get_ctor_core(name)
+  get_ctor_arg_t_values(
+    ctx: Ctx,
+    name: string,
+    args: Array<Value>
+  ): Array<Value> {
+    const fixed = this.type_ctor.fixed
+    let env = this.type_ctor.env
 
-    throw new Error("TODO")
+    for (const [index, [name, arg_t_core]] of Object.entries(fixed).entries()) {
+      const arg_t = evaluate(env, arg_t_core)
+      const arg = this.args[index]
+      env = env.extend(name, arg)
+      ctx = ctx.extend(name, arg_t, arg)
+    }
+
+    const ctor_arg_t_values: Array<Value> = []
+    for (const [index, binding] of this.type_ctor
+      .get_ctor_binding_cores(name)
+      .entries()) {
+      // TODO ignore implicit `CtorBinding`
+      const arg_t = evaluate(env, binding.arg_t)
+      const arg = args[index]
+      ctor_arg_t_values.push(arg_t)
+      env = env.extend(binding.name, arg)
+      ctx = ctx.extend(binding.name, arg_t, arg)
+    }
+
+    return ctor_arg_t_values
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
