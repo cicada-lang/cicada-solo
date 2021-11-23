@@ -58,15 +58,23 @@ export class TypeCtorValue extends Value {
     let t = this.get_ctor(name)
     // TODO We should also handle `Exps.ImPiCore`.
     while (t instanceof Exps.PiCore) {
-      const { name, arg_t } = t
+      const { name, arg_t, ret_t } = t
       bindings.push({ name, arg_t })
+      t = ret_t
     }
 
     return bindings
   }
 
   ctor_ret_t(name: string): Core {
-    throw new Error("TODO")
+    let t = this.get_ctor(name)
+    // TODO We should also handle `Exps.ImPiCore`.
+    while (t instanceof Exps.PiCore) {
+      const { ret_t } = t
+      t = ret_t
+    }
+
+    return t
   }
 
   get arity(): number {

@@ -1,7 +1,5 @@
 # inductive datatype -- Data
 
-- `TypeCtorValue` -- `ctor_ret_t(name: string): Core`
-
 - `DataValue`
 - `DataValue` -- `readback`
 - `DataValue` -- `unify`
