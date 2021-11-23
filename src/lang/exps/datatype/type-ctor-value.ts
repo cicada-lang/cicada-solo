@@ -5,6 +5,7 @@ import { readback } from "../../value"
 import { Value } from "../../value"
 import { evaluate } from "../../core"
 import { Solution } from "../../solution"
+import { ExpTrace } from "../../errors"
 import { Closure } from "../closure"
 import { conversion } from "../../value"
 import * as ut from "../../../ut"
@@ -31,6 +32,22 @@ export class TypeCtorValue extends Value {
     this.varied = varied
     this.ctors = ctors
     this.env = env
+  }
+
+  private get_ctor(name: string): Core {
+    const ctor = this.ctors[name]
+    if (ctor) {
+      const names = Object.keys(this.ctors).join(", ")
+      throw new ExpTrace(
+        [
+          `I can not find the data constructor named: ${name}`,
+          `  type constructor name: ${this.name}`,
+          `  existing data constructor names: ${names}`,
+        ].join("\n")
+      )
+    }
+
+    return ctor
   }
 
   ctor_bindings(name: string): Array<{ name: string; arg_t: Core }> {
