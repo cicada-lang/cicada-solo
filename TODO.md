@@ -1,8 +1,30 @@
+# multi-ap
+
+- `MultiAp` -- elaborate to `Ap`
+
+  - `MultiAp` should not be handled as sugar,
+    using an explicit `MultiAp` expression will give us
+    an opportunity to do check-mode application (which can not be curried)
+
+    - thus we can unify the syntax of data construction and function application
+
+# checked-pi
+
+- checked-pi
+- checked-fn
+- checked-ap
+
+# refactor
+
+- refactor `insert_im_ap`
+
 # inductive datatype -- Data
+
+- unify the syntax of data construction and function application
 
 - `TypeCtorValue` -- `ctor_bindings` -- `CtorBinding` has `kind: "plain" | "implicit"`
 
-- refactor `insert_im_ap`
+  - we use `returned` (instead of `implicit`) to mark a function as check-mode only.
 
 - data construction test by `Vector` (with `implicit`)
 
