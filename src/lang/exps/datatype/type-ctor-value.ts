@@ -67,16 +67,12 @@ export class TypeCtorValue extends Value {
       fixed_args: Array<Value>
       args: (index: number, opts: { arg_t: Value; env: Env }) => Value
     }
-  ): {
-    env: Env
-    arg_t_values: Array<Value>
-  } {
+  ): { env: Env; arg_t_values: Array<Value> } {
     const { fixed_args, args } = opts
 
     let env = this.apply_fixed(fixed_args)
     const arg_t_values: Array<Value> = []
-    const bindings_cores = this.get_ctor_bindings(ctor_name).entries()
-    for (const [index, binding] of bindings_cores) {
+    for (const [index, binding] of this.ctor_bindings(ctor_name).entries()) {
       // TODO handle implicit bindings
       const arg_t = evaluate(env, binding.arg_t)
       const arg = args(index, { arg_t, env })
@@ -87,9 +83,9 @@ export class TypeCtorValue extends Value {
     return { env, arg_t_values }
   }
 
-  private get_ctor_bindings(name: string): Array<CtorBinding> {
+  private ctor_bindings(name: string): Array<CtorBinding> {
     const bindings: Array<{ name: string; arg_t: Core }> = []
-    let t = this.get_ctor_core(name)
+    let t = this.ctor_core(name)
     // TODO We should also handle `Exps.ImPiCore`.
     while (t instanceof Exps.PiCore) {
       const { name, arg_t, ret_t } = t
@@ -101,17 +97,17 @@ export class TypeCtorValue extends Value {
   }
 
   ctor_arity(name: string): number {
-    const bindings = this.get_ctor_bindings(name)
+    const bindings = this.ctor_bindings(name)
     return bindings.length
   }
 
   evaluate_ctor_ret_t(env: Env, name: string): Value {
-    const ctor_ret_t_core = this.get_ctor_ret_t_core(name)
+    const ctor_ret_t_core = this.ctor_ret_t_core(name)
     return evaluate(env, ctor_ret_t_core)
   }
 
-  private get_ctor_ret_t_core(name: string): Core {
-    let t = this.get_ctor_core(name)
+  private ctor_ret_t_core(name: string): Core {
+    let t = this.ctor_core(name)
     // TODO We should also handle `Exps.ImPiCore`.
     while (t instanceof Exps.PiCore) {
       const { ret_t } = t
@@ -121,7 +117,7 @@ export class TypeCtorValue extends Value {
     return t
   }
 
-  private get_ctor_core(name: string): Core {
+  private ctor_core(name: string): Core {
     const ctor = this.ctors[name]
     if (ctor === undefined) {
       const names = Object.keys(this.ctors).join(", ")

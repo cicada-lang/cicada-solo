@@ -1,6 +1,6 @@
 # inductive datatype -- Data
 
-- `TypeCtorValue` -- `get_ctor_bindings` -- `CtorBinding` has `kind: "plain" | "implicit"`
+- `TypeCtorValue` -- `ctor_bindings` -- `CtorBinding` has `kind: "plain" | "implicit"`
 
 - refactor `insert_im_ap`
 
