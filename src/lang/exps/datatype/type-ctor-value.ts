@@ -38,6 +38,29 @@ export class TypeCtorValue extends Value {
     this.env = env.extend(this.name, this)
   }
 
+  apply_fixed(args: Array<Value>): Env {
+    const fixed_entries = Array.from(Object.entries(this.fixed).entries())
+
+    if (args.length < fixed_entries.length) {
+      throw new ExpTrace(
+        [
+          `I expect number of arguments to be not less than fixed entries`,
+          `  args.length: ${args.length}`,
+          `  fixed_entries.length: ${fixed_entries.length}`,
+        ].join("\n")
+      )
+    }
+
+    let env = this.env
+    for (const [index, [name, arg_t_core]] of fixed_entries) {
+      const arg_t = evaluate(env, arg_t_core)
+      const arg = args[index]
+      env = env.extend(name, arg)
+    }
+
+    return env
+  }
+
   get_ctor_core(name: string): Core {
     const ctor = this.ctors[name]
     if (ctor === undefined) {

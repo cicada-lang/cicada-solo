@@ -1,10 +1,14 @@
 # inductive datatype -- Data
 
+- [refactor] extract `TypeCtorValue.apply_ctor` -- to encapsulate `TypeCtorValue.env`
+
 - refactor `Data.check` & `DatatypeValue.get_ctor_arg_t_values`
 
   - note about data construction telescope
 
 - `TypeCtorValue` -- `get_ctor_binding_cores` -- `CtorBinding` has `kind: "plain" | "implicit"`
+
+- refactor `insert_im_ap`
 
 - data construction test by `Vector` (with `implicit`)
 

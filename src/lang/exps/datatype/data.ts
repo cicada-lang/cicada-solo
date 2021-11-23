@@ -62,13 +62,7 @@ export class Data extends Exp {
     }
 
     const fixed = datatype.type_ctor.fixed
-    let env = datatype.type_ctor.env
-
-    for (const [index, [name, arg_t_core]] of Object.entries(fixed).entries()) {
-      const arg_t = evaluate(env, arg_t_core)
-      const arg = datatype.args[index]
-      env = env.extend(name, arg)
-    }
+    let env = datatype.type_ctor.apply_fixed(datatype.args)
 
     const args: Array<Core> = []
     for (const [index, binding] of datatype.type_ctor

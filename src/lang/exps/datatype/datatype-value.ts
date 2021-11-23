@@ -24,13 +24,7 @@ export class DatatypeValue extends Value {
 
   get_ctor_arg_t_values(name: string, args: Array<Value>): Array<Value> {
     const fixed = this.type_ctor.fixed
-    let env = this.type_ctor.env
-
-    for (const [index, [name, arg_t_core]] of Object.entries(fixed).entries()) {
-      const arg_t = evaluate(env, arg_t_core)
-      const arg = this.args[index]
-      env = env.extend(name, arg)
-    }
+    let env = this.type_ctor.apply_fixed(this.args)
 
     const ctor_arg_t_values: Array<Value> = []
     for (const [index, binding] of this.type_ctor
