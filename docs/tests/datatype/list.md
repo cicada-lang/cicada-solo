@@ -32,6 +32,27 @@ check! MyList::my_cons("a", MyList::my_cons("b", MyList::my_null)): MyList(Strin
 check! MyList::my_cons("a", MyList::my_cons("b", MyList::my_cons("c", MyList::my_null))): MyList(String)
 ```
 
+``` cicada wishful-thinking
+datatype List(E: Type) {
+  null: List(E)
+  cons(head: E, tail: List(E)): List(E)
+}
+
+check! List: (Type) -> Type
+check! List(Nat): Type
+
+check! List::null: List(Nat)
+check! List::null: List(String)
+
+check! List::cons(1, List::null): List(Nat)
+check! List::cons(1, List::cons(2, List::null)): List(Nat)
+check! List::cons(1, List::cons(2, List::cons(3, List::null))): List(Nat)
+
+check! List::cons("a", List::null): List(String)
+check! List::cons("a", List::cons("b", List::null)): List(String)
+check! List::cons("a", List::cons("b", List::cons("c", List::null))): List(String)
+```
+
 # induction List
 
 ``` cicada

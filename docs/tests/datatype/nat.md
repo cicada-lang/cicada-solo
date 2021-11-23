@@ -23,6 +23,18 @@ check! MyNat::my_add1(MyNat::my_zero): MyNat
 check! MyNat::my_add1(MyNat::my_add1(MyNat::my_zero)): MyNat
 ```
 
+``` cicada wishful-thinking
+datatype Nat {
+  zero: Nat
+  add1(prev: Nat): Nat
+}
+
+check! Nat: Type
+check! Nat::zero: Nat
+check! Nat::add1(Nat::zero): Nat
+check! Nat::add1(Nat::add1(Nat::zero)): Nat
+```
+
 # induction Nat
 
 ``` cicada
