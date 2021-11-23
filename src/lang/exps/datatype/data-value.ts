@@ -4,6 +4,7 @@ import { expect, Value } from "../../value"
 import { Solution } from "../../solution"
 import { readback } from "../../value"
 import * as Exps from "../../exps"
+import { ExpTrace } from "../../errors"
 
 export class DataValue extends Value {
   type_ctor_name: string
@@ -29,6 +30,34 @@ export class DataValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    throw new Error("TODO")
+    if (
+      !(that instanceof Exps.DataValue) ||
+      !(this.type_ctor_name === that.type_ctor_name) ||
+      !(this.name === that.name)
+    ) {
+      return Solution.failure
+    }
+
+    const datatype = expect(ctx, t, Exps.DatatypeValue)
+
+    if (
+      datatype.args.length !== this.args.length ||
+      datatype.args.length !== that.args.length
+    ) {
+      throw new ExpTrace(
+        [
+          `I expect the following lengths to be the same.`,
+          `  datatype.args.length: ${datatype.args.length}`,
+          `  this.args.length: ${this.args.length}`,
+          `  that.args.length: ${that.args.length}`,
+        ].join("\n")
+      )
+    }
+
+    for (const [index, arg_t] of datatype.args.entries()) {
+      solution = solution.unify(ctx, arg_t, this.args[index], that.args[index])
+    }
+
+    return solution
   }
 }
