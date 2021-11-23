@@ -1,10 +1,11 @@
 # inductive datatype -- Data
 
-- `DataValue`
+- `DataCore` -- `evaluate`
+
 - `DataValue` -- `readback`
 - `DataValue` -- `unify`
+- `DataValue` -- `readback_eta_expansion`
 
-- `DataCore` -- `evaluate`
 - `DataCore` -- `alpha_format` -- use structural typing (data contains datatype)
 
 - data construction test by `List`, `Nat`, ... (without `implicit`)
