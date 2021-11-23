@@ -34,7 +34,8 @@ export class TypeCtorValue extends Value {
     this.fixed = fixed
     this.varied = varied
     this.ctors = ctors
-    this.env = env
+    // NOTE The type constructor itself might be referenced in its `ctors`.
+    this.env = env.extend(this.name, this)
   }
 
   private get_ctor(name: string): Core {

@@ -17,10 +17,9 @@ datatype MyNat {
   my_add1(prev: MyNat): MyNat
 }
 
-
 check! MyNat: Type
+check! MyNat::my_zero: MyNat
 // check! MyNat::my_add1(MyNat::my_zero): MyNat
-// check! MyNat::my_zero: MyNat
 ```
 
 # induction Nat

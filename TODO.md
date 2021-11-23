@@ -3,6 +3,10 @@
 - data construction test by `List` (without `implicit`)
 - data construction test by `Nat` (without `implicit`)
 
+- `DataValue` fix `readback`
+
+- refactor normalization between zero-arity `TypeCtorValue` and `DatatypeValue`
+
 - `TypeCtorValue` -- `ctor_bindings` -- `CtorBinding` has `kind: "plain" | "implicit"`
 
 - data construction test by `Vector` (with `implicit`)

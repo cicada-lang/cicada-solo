@@ -46,7 +46,10 @@ export class Data extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const datatype = expect(ctx, t, Exps.DatatypeValue)
+    const datatype =
+      t instanceof Exps.TypeCtorValue
+        ? new Exps.DatatypeValue(t, [])
+        : expect(ctx, t, Exps.DatatypeValue)
 
     if (this.type_ctor_name !== datatype.type_ctor.name) {
       throw new ExpTrace(
@@ -80,7 +83,12 @@ export class Data extends Exp {
     }
 
     const ctor_ret_t_core = datatype.type_ctor.ctor_ret_t(this.name)
-    const ctor_ret_t = evaluate(env, ctor_ret_t_core)
+    let ctor_ret_t = evaluate(env, ctor_ret_t_core)
+
+    ctor_ret_t =
+      ctor_ret_t instanceof Exps.TypeCtorValue
+        ? new Exps.DatatypeValue(ctor_ret_t, [])
+        : ctor_ret_t
 
     check_conversion(ctx, new Exps.TypeValue(), ctor_ret_t, datatype, {
       description: {

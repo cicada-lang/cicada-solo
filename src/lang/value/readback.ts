@@ -51,8 +51,6 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
         `I can not readback value.`,
         `  value class name: ${value.constructor.name}`,
         `  type class name: ${t.constructor.name}`,
-        `  value json: ${JSON.stringify(value)}`,
-        `  type json: ${JSON.stringify(t)}`,
       ].join("\n")
     )
   }
