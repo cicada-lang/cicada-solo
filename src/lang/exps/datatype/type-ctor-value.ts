@@ -87,6 +87,35 @@ export class TypeCtorValue extends Value {
     return { env, arg_t_values }
   }
 
+  private get_ctor_binding_cores(name: string): Array<CtorBinding> {
+    const bindings: Array<{ name: string; arg_t: Core }> = []
+    let t = this.get_ctor_core(name)
+    // TODO We should also handle `Exps.ImPiCore`.
+    while (t instanceof Exps.PiCore) {
+      const { name, arg_t, ret_t } = t
+      bindings.push({ name, arg_t })
+      t = ret_t
+    }
+
+    return bindings
+  }
+
+  evaluate_ctor_ret_t(env: Env, name: string): Value {
+    const ctor_ret_t_core = this.get_ctor_ret_t_core(name)
+    return evaluate(env, ctor_ret_t_core)
+  }
+
+  private get_ctor_ret_t_core(name: string): Core {
+    let t = this.get_ctor_core(name)
+    // TODO We should also handle `Exps.ImPiCore`.
+    while (t instanceof Exps.PiCore) {
+      const { ret_t } = t
+      t = ret_t
+    }
+
+    return t
+  }
+
   private get_ctor_core(name: string): Core {
     const ctor = this.ctors[name]
     if (ctor === undefined) {
@@ -101,30 +130,6 @@ export class TypeCtorValue extends Value {
     }
 
     return ctor
-  }
-
-  private get_ctor_binding_cores(name: string): Array<CtorBinding> {
-    const bindings: Array<{ name: string; arg_t: Core }> = []
-    let t = this.get_ctor_core(name)
-    // TODO We should also handle `Exps.ImPiCore`.
-    while (t instanceof Exps.PiCore) {
-      const { name, arg_t, ret_t } = t
-      bindings.push({ name, arg_t })
-      t = ret_t
-    }
-
-    return bindings
-  }
-
-  get_ctor_ret_t_core(name: string): Core {
-    let t = this.get_ctor_core(name)
-    // TODO We should also handle `Exps.ImPiCore`.
-    while (t instanceof Exps.PiCore) {
-      const { ret_t } = t
-      t = ret_t
-    }
-
-    return t
   }
 
   get arity(): number {
