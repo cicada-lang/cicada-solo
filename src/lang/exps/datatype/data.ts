@@ -46,11 +46,11 @@ export class Data extends Exp {
   }
 
   check(ctx: Ctx, t: Value): Core {
-    // TODO refactor normalization between zero-arity `TypeCtorValue` and `DatatypeValue`
-    const datatype =
-      t instanceof Exps.TypeCtorValue
-        ? new Exps.DatatypeValue(t, [])
-        : expect(ctx, t, Exps.DatatypeValue)
+    if (t instanceof Exps.TypeCtorValue && t.arity === 0) {
+      t = t.as_datatype()
+    }
+
+    const datatype = expect(ctx, t, Exps.DatatypeValue)
 
     if (this.type_ctor_name !== datatype.type_ctor.name) {
       throw new ExpTrace(
@@ -85,11 +85,9 @@ export class Data extends Exp {
     const ctor_ret_t_core = datatype.type_ctor.get_ctor_ret_t_core(this.name)
     let ctor_ret_t = evaluate(env, ctor_ret_t_core)
 
-    // TODO refactor normalization between zero-arity `TypeCtorValue` and `DatatypeValue`
-    ctor_ret_t =
-      ctor_ret_t instanceof Exps.TypeCtorValue
-        ? new Exps.DatatypeValue(ctor_ret_t, [])
-        : ctor_ret_t
+    if (ctor_ret_t instanceof Exps.TypeCtorValue && ctor_ret_t.arity === 0) {
+      ctor_ret_t = ctor_ret_t.as_datatype()
+    }
 
     check_conversion(ctx, new Exps.TypeValue(), ctor_ret_t, datatype, {
       description: {

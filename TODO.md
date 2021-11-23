@@ -4,8 +4,6 @@
 
   - be sure about telescope
 
-- refactor normalization between zero-arity `TypeCtorValue` and `DatatypeValue`
-
 - `TypeCtorValue` -- `ctor_bindings` -- `CtorBinding` has `kind: "plain" | "implicit"`
 
 - data construction test by `Vector` (with `implicit`)

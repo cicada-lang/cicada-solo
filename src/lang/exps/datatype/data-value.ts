@@ -19,7 +19,9 @@ export class DataValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    t = t instanceof Exps.TypeCtorValue ? new Exps.DatatypeValue(t, []) : t
+    if (t instanceof Exps.TypeCtorValue && t.arity === 0) {
+      t = t.as_datatype()
+    }
 
     if (t instanceof Exps.DatatypeValue) {
       const ctor_arg_t_values = t.get_ctor_arg_t_values(this.name, this.args)

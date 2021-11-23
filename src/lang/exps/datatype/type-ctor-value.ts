@@ -82,6 +82,14 @@ export class TypeCtorValue extends Value {
     return Object.keys(this.fixed).length + Object.keys(this.varied).length
   }
 
+  as_datatype(): Exps.DatatypeValue {
+    if (this.arity !== 0) {
+      throw new Error(`I expect the arity of type constructor to be zero.`)
+    }
+
+    return new Exps.DatatypeValue(this, [])
+  }
+
   ap_handler = new TypeCtorApHandler(this)
 
   readback(ctx: Ctx, t: Value): Core | undefined {
