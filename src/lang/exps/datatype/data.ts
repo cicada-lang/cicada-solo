@@ -68,7 +68,6 @@ export class Data extends Exp {
       const arg_t = evaluate(env, arg_t_core)
       const arg = datatype.args[index]
       env = env.extend(name, arg)
-      ctx = ctx.extend(name, arg_t, arg)
     }
 
     const args: Array<Core> = []
@@ -81,7 +80,6 @@ export class Data extends Exp {
       const arg = evaluate(env, arg_core)
       args.push(arg_core)
       env = env.extend(name, arg)
-      ctx = ctx.extend(name, arg_t, arg)
     }
 
     const ctor_ret_t_core = datatype.type_ctor.get_ctor_ret_t_core(this.name)

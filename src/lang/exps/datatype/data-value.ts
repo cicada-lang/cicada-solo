@@ -22,11 +22,7 @@ export class DataValue extends Value {
     t = t instanceof Exps.TypeCtorValue ? new Exps.DatatypeValue(t, []) : t
 
     if (t instanceof Exps.DatatypeValue) {
-      const ctor_arg_t_values = t.get_ctor_arg_t_values(
-        ctx,
-        this.name,
-        this.args
-      )
+      const ctor_arg_t_values = t.get_ctor_arg_t_values(this.name, this.args)
 
       if (ctor_arg_t_values.length === this.args.length) {
         const args = []

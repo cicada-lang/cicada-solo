@@ -22,11 +22,7 @@ export class DatatypeValue extends Value {
     this.args = args
   }
 
-  get_ctor_arg_t_values(
-    ctx: Ctx,
-    name: string,
-    args: Array<Value>
-  ): Array<Value> {
+  get_ctor_arg_t_values(name: string, args: Array<Value>): Array<Value> {
     const fixed = this.type_ctor.fixed
     let env = this.type_ctor.env
 
@@ -34,7 +30,6 @@ export class DatatypeValue extends Value {
       const arg_t = evaluate(env, arg_t_core)
       const arg = this.args[index]
       env = env.extend(name, arg)
-      ctx = ctx.extend(name, arg_t, arg)
     }
 
     const ctor_arg_t_values: Array<Value> = []
@@ -46,7 +41,6 @@ export class DatatypeValue extends Value {
       const arg = args[index]
       ctor_arg_t_values.push(arg_t)
       env = env.extend(binding.name, arg)
-      ctx = ctx.extend(binding.name, arg_t, arg)
     }
 
     return ctor_arg_t_values

@@ -1,10 +1,10 @@
 # inductive datatype -- Data
 
-- `Data` fix `check` -- use `fresh_name` when extending `ctx`
-
 - `DataValue` fix `unify` -- use the right `arg_t`
 
-- refactor `Datatype.check` & `DatatypeValue.get_ctor_arg_t_values`
+- refactor `Data.check` & `DatatypeValue.get_ctor_arg_t_values`
+
+  - be sure about telescope
 
 - refactor normalization between zero-arity `TypeCtorValue` and `DatatypeValue`
 

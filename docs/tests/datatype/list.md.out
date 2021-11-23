@@ -1,5 +1,6 @@
 (_) => MyList(_): (_: Type) -> Type
 MyList(Nat): Type
+MyList::my_null: MyList(Nat)
 refl: Equal(Nat, 3, 3)
 refl: Equal(List(Nat), li(1, li(2, li(3, li(4, li(5, li(6, nil)))))), li(1, li(2, li(3, li(4, li(5, li(6, nil)))))))
 refl: Equal(List(Nat), li(1, li(2, li(3, li(4, nil)))), li(1, li(2, li(3, li(4, nil)))))
