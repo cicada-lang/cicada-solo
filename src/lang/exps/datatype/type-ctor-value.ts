@@ -38,7 +38,7 @@ export class TypeCtorValue extends Value {
     this.env = env.extend(this.name, this)
   }
 
-  private get_ctor(name: string): Core {
+  get_ctor_core(name: string): Core {
     const ctor = this.ctors[name]
     if (ctor === undefined) {
       const names = Object.keys(this.ctors).join(", ")
@@ -54,9 +54,9 @@ export class TypeCtorValue extends Value {
     return ctor
   }
 
-  ctor_bindings(name: string): Array<CtorBinding> {
+  get_ctor_binding_cores(name: string): Array<CtorBinding> {
     const bindings: Array<{ name: string; arg_t: Core }> = []
-    let t = this.get_ctor(name)
+    let t = this.get_ctor_core(name)
     // TODO We should also handle `Exps.ImPiCore`.
     while (t instanceof Exps.PiCore) {
       const { name, arg_t, ret_t } = t
@@ -67,8 +67,8 @@ export class TypeCtorValue extends Value {
     return bindings
   }
 
-  ctor_ret_t(name: string): Core {
-    let t = this.get_ctor(name)
+  get_ctor_ret_t_core(name: string): Core {
+    let t = this.get_ctor_core(name)
     // TODO We should also handle `Exps.ImPiCore`.
     while (t instanceof Exps.PiCore) {
       const { ret_t } = t

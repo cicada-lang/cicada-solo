@@ -21,13 +21,15 @@ export class DataValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {
     t = t instanceof Exps.TypeCtorValue ? new Exps.DatatypeValue(t, []) : t
 
-    if (t instanceof Exps.DatatypeValue && t.args.length === this.args.length) {
-      const args = []
-      for (const [index, arg] of this.args.entries()) {
-        args.push(readback(ctx, t.args[index], arg))
-      }
+    if (t instanceof Exps.DatatypeValue) {
+      if (t.args.length === this.args.length) {
+        const args = []
+        for (const [index, arg] of this.args.entries()) {
+          args.push(readback(ctx, t.args[index], arg))
+        }
 
-      return new Exps.DataCore(this.type_ctor_name, this.name, args)
+        return new Exps.DataCore(this.type_ctor_name, this.name, args)
+      }
     }
   }
 

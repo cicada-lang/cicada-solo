@@ -1,11 +1,14 @@
 # inductive datatype -- Data
 
-- data construction test by `List` (without `implicit`)
-- data construction test by `Nat` (without `implicit`)
+- `Datatype.get_ctor_arg_t_values`
 
-- `DataValue` fix `readback`
+- `DataValue` fix `readback` -- use the right `arg_t`
+- `DataValue` fix `unify` -- use the right `arg_t`
 
 - refactor normalization between zero-arity `TypeCtorValue` and `DatatypeValue`
+
+- data construction test by `List` (without `implicit`)
+- data construction test by `Nat` (without `implicit`)
 
 - `TypeCtorValue` -- `ctor_bindings` -- `CtorBinding` has `kind: "plain" | "implicit"`
 
