@@ -1,8 +1,5 @@
 # inductive datatype -- Data
 
-- data construction test by `Nat` (without `implicit`)
-- data construction test by `List` (without `implicit`)
-
 - refactor `Data.check` & `DatatypeValue.get_ctor_arg_t_values`
 
   - be sure about telescope

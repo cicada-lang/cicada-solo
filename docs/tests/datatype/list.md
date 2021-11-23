@@ -21,7 +21,15 @@ check! MyList: (Type) -> Type
 check! MyList(Nat): Type
 
 check! MyList::my_null: MyList(Nat)
+check! MyList::my_null: MyList(String)
+
 check! MyList::my_cons(1, MyList::my_null): MyList(Nat)
+check! MyList::my_cons(1, MyList::my_cons(2, MyList::my_null)): MyList(Nat)
+check! MyList::my_cons(1, MyList::my_cons(2, MyList::my_cons(3, MyList::my_null))): MyList(Nat)
+
+check! MyList::my_cons("a", MyList::my_null): MyList(String)
+check! MyList::my_cons("a", MyList::my_cons("b", MyList::my_null)): MyList(String)
+check! MyList::my_cons("a", MyList::my_cons("b", MyList::my_cons("c", MyList::my_null))): MyList(String)
 ```
 
 # induction List
