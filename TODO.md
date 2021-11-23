@@ -1,10 +1,11 @@
 # inductive datatype -- Data
 
-- data construction test by `List`, `Nat`, ... (without `implicit`)
+- data construction test by `List` (without `implicit`)
+- data construction test by `Nat` (without `implicit`)
 
 - `TypeCtorValue` -- `ctor_bindings` -- `CtorBinding` has `kind: "plain" | "implicit"`
 
-- data construction test by `Vector`, ... (with `implicit`)
+- data construction test by `Vector` (with `implicit`)
 
 - `DataCore` -- `alpha_format` -- use structural typing (data contains datatype)
 

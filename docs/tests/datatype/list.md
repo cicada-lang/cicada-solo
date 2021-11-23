@@ -17,8 +17,11 @@ datatype MyList(E: Type) {
   my_cons(head: E, tail: MyList(E)): MyList(E)
 }
 
-MyList
-MyList(Nat)
+check! MyList: (Type) -> Type
+check! MyList(Nat): Type
+
+// check! MyList::my_null: MyList(Nat)
+// check! MyList::my_cons(1, MyList::my_null): MyList(Nat)
 ```
 
 # induction List

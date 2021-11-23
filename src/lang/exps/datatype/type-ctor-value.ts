@@ -39,7 +39,7 @@ export class TypeCtorValue extends Value {
 
   private get_ctor(name: string): Core {
     const ctor = this.ctors[name]
-    if (ctor) {
+    if (ctor === undefined) {
       const names = Object.keys(this.ctors).join(", ")
       throw new ExpTrace(
         [
