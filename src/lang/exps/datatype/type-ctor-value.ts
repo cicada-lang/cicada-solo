@@ -61,6 +61,32 @@ export class TypeCtorValue extends Value {
     return env
   }
 
+  apply_ctor(
+    ctor_name: string,
+    opts: {
+      fixed_args: Array<Value>
+      args: (index: number, opts: { arg_t: Value; env: Env }) => Value
+    }
+  ): {
+    env: Env
+    arg_t_values: Array<Value>
+  } {
+    const { fixed_args, args } = opts
+
+    let env = this.apply_fixed(fixed_args)
+    const arg_t_values: Array<Value> = []
+    const bindings_cores = this.get_ctor_binding_cores(ctor_name).entries()
+    for (const [index, binding] of bindings_cores) {
+      // TODO handle implicit bindings
+      const arg_t = evaluate(env, binding.arg_t)
+      const arg = args(index, { arg_t, env })
+      env = env.extend(binding.name, arg)
+      arg_t_values.push(arg_t)
+    }
+
+    return { env, arg_t_values }
+  }
+
   get_ctor_core(name: string): Core {
     const ctor = this.ctors[name]
     if (ctor === undefined) {

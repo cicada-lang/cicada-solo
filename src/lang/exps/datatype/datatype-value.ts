@@ -23,21 +23,12 @@ export class DatatypeValue extends Value {
   }
 
   get_ctor_arg_t_values(name: string, args: Array<Value>): Array<Value> {
-    const fixed = this.type_ctor.fixed
-    let env = this.type_ctor.apply_fixed(this.args)
+    const result = this.type_ctor.apply_ctor(name, {
+      fixed_args: this.args,
+      args: (index) => args[index],
+    })
 
-    const ctor_arg_t_values: Array<Value> = []
-    for (const [index, binding] of this.type_ctor
-      .get_ctor_binding_cores(name)
-      .entries()) {
-      // TODO ignore implicit `CtorBinding`
-      const arg_t = evaluate(env, binding.arg_t)
-      const arg = args[index]
-      ctor_arg_t_values.push(arg_t)
-      env = env.extend(binding.name, arg)
-    }
-
-    return ctor_arg_t_values
+    return result.arg_t_values
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {

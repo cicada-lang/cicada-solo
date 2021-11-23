@@ -61,23 +61,20 @@ export class Data extends Exp {
       )
     }
 
-    const fixed = datatype.type_ctor.fixed
-    let env = datatype.type_ctor.apply_fixed(datatype.args)
-
     const args: Array<Core> = []
-    for (const [index, binding] of datatype.type_ctor
-      .get_ctor_binding_cores(this.name)
-      .entries()) {
-      const name = binding.name
-      const arg_t = evaluate(env, binding.arg_t)
-      const arg_core = check(ctx, this.args[index], arg_t)
-      const arg = evaluate(env, arg_core)
-      args.push(arg_core)
-      env = env.extend(name, arg)
-    }
+
+    const result = datatype.type_ctor.apply_ctor(this.name, {
+      fixed_args: datatype.args,
+      args: (index, { arg_t, env }) => {
+        const arg_core = check(ctx, this.args[index], arg_t)
+        const arg = evaluate(env, arg_core)
+        args.push(arg_core)
+        return arg
+      },
+    })
 
     const ctor_ret_t_core = datatype.type_ctor.get_ctor_ret_t_core(this.name)
-    let ctor_ret_t = evaluate(env, ctor_ret_t_core)
+    let ctor_ret_t = evaluate(result.env, ctor_ret_t_core)
 
     if (ctor_ret_t instanceof Exps.TypeCtorValue && ctor_ret_t.arity === 0) {
       ctor_ret_t = ctor_ret_t.as_datatype()
