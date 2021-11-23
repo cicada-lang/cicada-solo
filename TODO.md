@@ -10,8 +10,6 @@
 
 - data construction test by `Vector` (with `implicit`)
 
-- `DataCore` -- `alpha_format` -- use structural typing (data contains datatype)
-
 # inductive datatype -- induction
 
 - [syntax] `induction () { ... }`

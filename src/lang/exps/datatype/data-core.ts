@@ -35,6 +35,8 @@ export class DataCore extends Core {
   }
 
   alpha_format(ctx: AlphaCtx): string {
+    // NOTE Maybe we should use structural typing instead of using type constructor name.
+
     const args = this.args.map((arg) => arg.alpha_format(ctx)).join(", ")
 
     return args.length > 0
