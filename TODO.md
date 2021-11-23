@@ -1,6 +1,5 @@
 # inductive datatype -- Data
 
-- `TypeCtorValue` -- `ctor_bindings(name: string): Array<{ name: string, arg_t: Core }>`
 - `TypeCtorValue` -- `ctor_ret_t(name: string): Core`
 
 - `DataValue`
@@ -12,7 +11,7 @@
 
 - data construction test by `List`, `Nat`, ... (without `implicit`)
 
-- `TypeCtorValue` -- `ctor_bindings` -- `Binding` has `kind: "plain" | "implicit"`
+- `TypeCtorValue` -- `ctor_bindings` -- `CtorBinding` has `kind: "plain" | "implicit"`
 
 - data construction test by `Vector`, ... (with `implicit`)
 

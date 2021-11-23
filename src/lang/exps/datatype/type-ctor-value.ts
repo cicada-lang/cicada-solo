@@ -12,6 +12,9 @@ import * as ut from "../../../ut"
 import * as Exps from ".."
 import { TypeCtorApHandler } from "./type-ctor-ap-handler"
 
+// TODO `CtorBinding` should have `kind: "plain" | "implicit"`
+export type CtorBinding = { name: string; arg_t: Core }
+
 export class TypeCtorValue extends Value {
   name: string
   fixed: Record<string, Core>
@@ -50,8 +53,16 @@ export class TypeCtorValue extends Value {
     return ctor
   }
 
-  ctor_bindings(name: string): Array<{ name: string; arg_t: Core }> {
-    throw new Error("TODO")
+  ctor_bindings(name: string): Array<CtorBinding> {
+    const bindings: Array<{ name: string; arg_t: Core }> = []
+    let t = this.get_ctor(name)
+    // TODO We should also handle `Exps.ImPiCore`.
+    while (t instanceof Exps.PiCore) {
+      const { name, arg_t } = t
+      bindings.push({ name, arg_t })
+    }
+
+    return bindings
   }
 
   ctor_ret_t(name: string): Core {
