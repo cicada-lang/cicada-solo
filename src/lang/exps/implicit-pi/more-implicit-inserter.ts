@@ -90,14 +90,7 @@ export class MoreImplicitInserter extends ImplicitInserter {
       target_core,
       inferred_arg_t,
       inferred_arg_core,
-      [
-        ...entries,
-        {
-          arg_t: this.arg_t,
-          implicit_arg: implicit_arg,
-          not_yet_value,
-        },
-      ]
+      [...entries, { arg_t: this.arg_t, implicit_arg: implicit_arg }]
     )
   }
 }

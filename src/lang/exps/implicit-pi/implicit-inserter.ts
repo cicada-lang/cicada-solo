@@ -12,7 +12,6 @@ import { Closure } from "../closure"
 export interface ImplicitApInsertionEntry {
   arg_t: Value
   implicit_arg: Value
-  not_yet_value: Exps.NotYetValue
 }
 
 export abstract class ImplicitInserter {
