@@ -6,7 +6,6 @@ import { Closure } from "../closure"
 import { evaluate } from "../../core"
 import * as Exps from ".."
 import { PiFormater } from "../pi/pi-formater"
-import { ReturnedInserter } from "./returned-inserter"
 
 export class ReturnedPiCore extends Core {
   name: string
