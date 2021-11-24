@@ -8,6 +8,7 @@ import { Value } from "../../value"
 import * as Exps from ".."
 import * as ut from "../../../ut"
 import { Closure } from "../closure"
+import { ExpTrace } from "../../errors"
 
 export interface ImplicitApEntry {
   arg_t: Value
@@ -28,6 +29,27 @@ export abstract class ImplicitInserter {
     inferred_arg_t: Value,
     entries: Array<ImplicitApEntry>
   ): { entries: Array<ImplicitApEntry>; ret_t_cl: Closure }
+
+  implicit_ap_entry(ctx: Ctx, inferred_arg_t: Value): ImplicitApEntry {
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
+    const solution = this.solve_implicit_ap(ctx, inferred_arg_t)
+
+    const implicit_arg = solution.find(fresh_name)
+
+    if (implicit_arg === undefined) {
+      throw new ExpTrace(
+        [
+          `Fail to find ${fresh_name} in solution`,
+          `  solution names: ${solution.names}`,
+          `  this.arg_t class name: ${this.arg_t.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    return { arg_t: this.arg_t, implicit_arg }
+  }
 
   abstract solve_implicit_ap(ctx: Ctx, inferred_arg_t: Value): Solution
 

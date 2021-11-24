@@ -44,25 +44,13 @@ export class LastImplicitInserter extends ImplicitInserter {
     inferred_arg_t: Value,
     entries: Array<ImplicitApEntry>
   ): { entries: Array<ImplicitApEntry>; ret_t_cl: Closure } {
-    const fresh_name = ctx.freshen(this.ret_t_cl.name)
-    const variable = new Exps.VarNeutral(fresh_name)
-    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
-    const solution = this.solve_implicit_ap(ctx, inferred_arg_t)
+    const entry = this.implicit_ap_entry(ctx, inferred_arg_t)
 
-    const implicit_arg = solution.find(fresh_name)
-    if (implicit_arg === undefined) {
-      throw new ExpTrace(
-        [
-          `Fail to find ${fresh_name} in solution`,
-          `  solution names: ${solution.names}`,
-          `  this.arg_t class name: ${this.arg_t.constructor.name}`,
-        ].join("\n")
-      )
-    }
-
-    const entry = { arg_t: this.arg_t, implicit_arg }
-
-    const pi = expect(ctx, this.ret_t_cl.apply(implicit_arg), Exps.PiValue)
+    const pi = expect(
+      ctx,
+      this.ret_t_cl.apply(entry.implicit_arg),
+      Exps.PiValue
+    )
 
     return {
       entries: [...entries, entry],
