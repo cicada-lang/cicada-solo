@@ -62,7 +62,7 @@ export class ImplicitPiValue extends Value implements ReadbackEtaExpansion {
       Exps.ImplicitApCore.apply(value, not_yet_value)
     )
 
-    return new Exps.ImFnCore(fresh_name, result)
+    return new Exps.ImplicitFnCore(fresh_name, result)
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {

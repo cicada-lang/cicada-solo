@@ -44,7 +44,7 @@ export class ImplicitFn extends Exp {
     const ret_t = ret_t_cl.apply(arg)
     const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
     const ret_core = check(ctx.extend(fresh_name, arg_t), ret, ret_t)
-    return new Exps.ImFnCore(fresh_name, ret_core)
+    return new Exps.ImplicitFnCore(fresh_name, ret_core)
   }
 
   fn_formater: FnFormater = new FnFormater(this, {

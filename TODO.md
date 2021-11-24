@@ -4,10 +4,6 @@
 - `returned-fn`
 - `returned-ap`
 
-# refactor
-
-- refactor `insert_implicit_ap`
-
 # inductive datatype -- Data
 
 - unify the syntax of data construction and function application
@@ -21,6 +17,7 @@
 
   - handle `returned` check-mode only
   - handle `implicit` infer-mode only
+    - refactor `insert_implicit_ap`
 
 - data construction test by `Vector` (with `returned`)
 

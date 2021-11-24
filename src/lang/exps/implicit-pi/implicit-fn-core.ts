@@ -6,7 +6,7 @@ import { Closure } from "../closure"
 import * as Exps from ".."
 import { FnFormater } from "../pi/fn-formater"
 
-export class ImFnCore extends Core {
+export class ImplicitFnCore extends Core {
   name: string
   ret: Core
 
