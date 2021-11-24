@@ -30,6 +30,7 @@ export * from "./pi/fn-value"
 export * from "./pi/ap"
 export * from "./pi/ap-core"
 export * from "./pi/ap-neutral"
+export * from "./pi/multi-ap"
 
 export * from "./im-pi/im-pi"
 export * from "./im-pi/im-pi-core"

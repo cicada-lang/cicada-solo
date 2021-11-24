@@ -1,12 +1,13 @@
 # multi-ap
 
-- `MultiAp` -- elaborate to `Ap`
+- `multi-ap` -- `free_names`
+- `multi-ap` -- `subst`
+- `multi-ap` -- `format`
+- `multi-ap` -- `infer`
 
-  - `MultiAp` should not be handled as sugar,
-    using an explicit `MultiAp` expression will give us
-    an opportunity to do check-mode application (which can not be curried)
+- `multi-ap` -- syntax
 
-    - thus we can unify the syntax of data construction and function application
+- [maybe] we also need `multi-fn` & `multi-pi` to be symmetric with `multi-ap`
 
 # checked-pi
 
