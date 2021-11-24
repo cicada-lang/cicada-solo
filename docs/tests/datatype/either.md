@@ -265,6 +265,8 @@ function list_ref_returned(returned E: Type, index: Nat): (List(E)) -> Maybe(E) 
 
 list_ref_returned(returned String, 0, li! ["a", "b", "c"])
 check! list_ref_returned(returned String, 0, li! ["a", "b", "c"]): Either(String, Trivial)
+
+check! list_ref_returned(0, li! ["a", "b", "c"]): Either(String, Trivial)
 ```
 
 ``` cicada wishful-thinking

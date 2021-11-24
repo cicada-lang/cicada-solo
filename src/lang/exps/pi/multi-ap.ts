@@ -53,6 +53,17 @@ export class MultiAp extends Exp {
     )
   }
 
+  check(ctx: Ctx, t: Value): Core {
+    const inferred = infer(ctx, this.target)
+    if (inferred.t instanceof Exps.ReturnedPiValue) {
+      // TODO
+      console.log(`Checking Exps.ReturnedPiValue`)
+      console.log(`  target: ${this.target.format()}`)
+    }
+
+    return check_by_infer(ctx, this, t)
+  }
+
   infer(ctx: Ctx): { t: Value; core: Core } {
     let result: Exp = this.target
     for (const entry of this.entries) {

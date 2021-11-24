@@ -1,7 +1,6 @@
 # returned-pi
 
-- `multi-ap` -- check-mode call infer-mode
-- `multi-ap` -- check-mode handle `inferred.t instanceof ReturnedPiValue`
+- `multi-ap` -- check-mode handle `inferred.t instanceof Exps.ReturnedPiValue`
 
 - `datatype/either.md` test `returned-fn`
 
