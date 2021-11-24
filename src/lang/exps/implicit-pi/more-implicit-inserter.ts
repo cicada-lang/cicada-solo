@@ -1,4 +1,4 @@
-import { ImplicitInserter, ImplicitApInsertionEntry } from "./implicit-inserter"
+import { ImplicitInserter, ImplicitApEntry } from "./implicit-inserter"
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Core } from "../../core"
@@ -45,13 +45,12 @@ export class MoreImplicitInserter extends ImplicitInserter {
     )
   }
 
-  insert_implicit_ap(
+  collect_implicit_ap_entries(
     ctx: Ctx,
-    target_core: Core,
     inferred_arg_t: Value,
     inferred_arg_core: Core,
-    entries: Array<ImplicitApInsertionEntry>
-  ): { t: Value; core: Core } {
+    entries: Array<ImplicitApEntry>
+  ): { entries: Array<ImplicitApEntry>; ret_t_cl: Closure } {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
@@ -64,11 +63,9 @@ export class MoreImplicitInserter extends ImplicitInserter {
     if (implicit_arg === undefined) {
       throw new ExpTrace(
         [
-          `[ConsImPiValue.insert_implicit_ap]`,
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
-          `  target_core: ${target_core.format()}`,
           `  inferred_arg_core: ${inferred_arg_core.format()}`,
         ].join("\n")
       )
@@ -85,9 +82,8 @@ export class MoreImplicitInserter extends ImplicitInserter {
       )
     }
 
-    return ret_t.implicit_inserter.insert_implicit_ap(
+    return ret_t.implicit_inserter.collect_implicit_ap_entries(
       ctx,
-      target_core,
       inferred_arg_t,
       inferred_arg_core,
       [...entries, { arg_t: this.arg_t, implicit_arg: implicit_arg }]

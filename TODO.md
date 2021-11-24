@@ -1,4 +1,3 @@
-- [refactor] `insert_implicit_ap` -- return collected insertion entries and `ret_t_cl`
 - [refactor] `insert_implicit_ap` -- extract function about one insertion entry
 
 # returned-pi

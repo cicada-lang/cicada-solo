@@ -6,6 +6,7 @@ import { infer } from "../../exp"
 import { check } from "../../exp"
 import { check_by_infer } from "../../exp"
 import { Value } from "../../value"
+import { readback } from "../../value"
 import { ExpTrace, InternalError } from "../../errors"
 import * as ut from "../../../ut"
 import * as Exps from "../../exps"
@@ -48,13 +49,23 @@ export class Ap extends Exp {
 
     if (inferred.t instanceof Exps.ImplicitPiValue) {
       const inferred_arg = infer(ctx, this.arg)
-      return inferred.t.implicit_inserter.insert_implicit_ap(
+      const result = inferred.t.implicit_inserter.collect_implicit_ap_entries(
         ctx,
-        inferred.core,
         inferred_arg.t,
         inferred_arg.core,
         []
       )
+
+      let target_core = inferred.core
+      for (const entry of result.entries) {
+        const implicit_arg_core = readback(ctx, entry.arg_t, entry.implicit_arg)
+        target_core = new Exps.ImplicitApCore(target_core, implicit_arg_core)
+      }
+
+      return {
+        t: result.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
+        core: new Exps.ApCore(target_core, inferred_arg.core),
+      }
     }
 
     if (inferred.t instanceof Exps.PiValue) {

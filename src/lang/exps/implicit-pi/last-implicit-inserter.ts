@@ -1,4 +1,4 @@
-import { ImplicitInserter, ImplicitApInsertionEntry } from "./implicit-inserter"
+import { ImplicitInserter, ImplicitApEntry } from "./implicit-inserter"
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Core } from "../../core"
@@ -40,13 +40,12 @@ export class LastImplicitInserter extends ImplicitInserter {
     return solution
   }
 
-  insert_implicit_ap(
+  collect_implicit_ap_entries(
     ctx: Ctx,
-    target_core: Core,
     inferred_arg_t: Value,
     inferred_arg_core: Core,
-    entries: Array<ImplicitApInsertionEntry>
-  ): { t: Value; core: Core } {
+    entries: Array<ImplicitApEntry>
+  ): { entries: Array<ImplicitApEntry>; ret_t_cl: Closure } {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
@@ -57,38 +56,24 @@ export class LastImplicitInserter extends ImplicitInserter {
       inferred_arg_core
     )
 
-    for (const entry of entries) {
-      const implicit_arg_core = readback(ctx, entry.arg_t, entry.implicit_arg)
-      target_core = new Exps.ImplicitApCore(target_core, implicit_arg_core)
-    }
-
     const implicit_arg = solution.find(fresh_name)
+
     if (implicit_arg === undefined) {
       throw new ExpTrace(
         [
-          `[BaseImPiValue.insert_implicit_ap]`,
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
-          `  target_core: ${target_core.format()}`,
           `  inferred_arg_core: ${inferred_arg_core.format()}`,
         ].join("\n")
       )
     }
 
-    const implicit_arg_core = readback(ctx, this.arg_t, implicit_arg)
-
-    target_core = new Exps.ImplicitApCore(target_core, implicit_arg_core)
-
-    const final_ret_t = expect(
-      ctx,
-      this.ret_t_cl.apply(implicit_arg),
-      Exps.PiValue
-    )
+    const pi = expect(ctx, this.ret_t_cl.apply(implicit_arg), Exps.PiValue)
 
     return {
-      t: final_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg_core)),
-      core: new Exps.ApCore(target_core, inferred_arg_core),
+      entries: [...entries, { arg_t: this.arg_t, implicit_arg }],
+      ret_t_cl: pi.ret_t_cl,
     }
   }
 }

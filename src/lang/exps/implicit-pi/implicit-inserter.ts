@@ -9,7 +9,7 @@ import * as Exps from ".."
 import * as ut from "../../../ut"
 import { Closure } from "../closure"
 
-export interface ImplicitApInsertionEntry {
+export interface ImplicitApEntry {
   arg_t: Value
   implicit_arg: Value
 }
@@ -23,13 +23,12 @@ export abstract class ImplicitInserter {
     this.ret_t_cl = ret_t_cl
   }
 
-  abstract insert_implicit_ap(
+  abstract collect_implicit_ap_entries(
     ctx: Ctx,
-    target_core: Core,
     inferred_arg_t: Value,
     inferred_arg_core: Core,
-    entries: Array<ImplicitApInsertionEntry>
-  ): { t: Value; core: Core }
+    entries: Array<ImplicitApEntry>
+  ): { entries: Array<ImplicitApEntry>; ret_t_cl: Closure }
 
   abstract solve_implicit_ap(
     ctx: Ctx,
