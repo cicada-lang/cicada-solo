@@ -236,4 +236,38 @@ list_ref(1, li! ["a", "b", "c"])
 list_ref(2, li! ["a", "b", "c"])
 list_ref(3, li! ["a", "b", "c"])
 list_ref(4, li! ["a", "b", "c"])
+
+check! list_ref(0, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref(1, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref(2, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref(3, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref(4, li! ["a", "b", "c"]): Either(String, Trivial)
+```
+
+## list_ref_returned
+
+``` cicada wishful-thinking
+function list_ref_returned(returned E: Type, index: Nat): (List(E)) -> Maybe(E) {
+  return induction_nat(
+    index,
+    (_) => (List(E)) -> Maybe(E),
+    (list) => maybe_head(list),
+    (prev, almost) => (list) => {
+      return induction_maybe(
+        maybe_tail(list),
+        (_) => Maybe(E),
+        (tail) => almost(tail),
+        nothing(E),
+      )
+    }
+  )
+}
+```
+
+``` cicada wishful-thinking
+check! list_ref_returned(0, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref_returned(1, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref_returned(2, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref_returned(3, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref_returned(4, li! ["a", "b", "c"]): Either(String, Trivial)
 ```
