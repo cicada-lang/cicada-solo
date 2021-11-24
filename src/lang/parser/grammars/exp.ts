@@ -468,8 +468,8 @@ export const args = {
 
 export const arg_entry = {
   $grammar: {
-    "arg_entry:plain": [{ exp: "exp" }],
-    "arg_entry:implicit": ['"implicit"', { exp: "exp" }],
+    "arg_entry:plain": [{ arg: "exp" }],
+    "arg_entry:implicit": ['"implicit"', { arg: "exp" }],
   },
 }
 

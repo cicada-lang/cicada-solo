@@ -1,8 +1,9 @@
 # multi-ap
 
-- `multi-ap` -- `infer`
 - `multi-ap` -- syntax
 - `multi-ap` -- syntax test
+
+- `multi-ap` -- `infer`
 
 # checked-pi
 

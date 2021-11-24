@@ -16,7 +16,7 @@ import { ApFormater } from "./ap-formater"
 //   an opportunity to do check-mode application (which can not be curried).
 //   - For example, we can unify the syntax of data construction and function application.
 
-type ArgEntry = {
+export type ArgEntry = {
   kind: "plain" | "implicit"
   arg: Exp
 }
