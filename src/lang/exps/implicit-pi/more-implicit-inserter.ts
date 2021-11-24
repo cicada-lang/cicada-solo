@@ -19,7 +19,11 @@ export class MoreImplicitInserter extends ImplicitInserter {
     this.ret_t_cl = ret_t_cl
   }
 
-  solve_implicit_ap(ctx: Ctx, arg: Exp): Solution {
+  solve_implicit_ap(
+    ctx: Ctx,
+    inferred_arg_t: Value,
+    inferred_arg_core: Core
+  ): Solution {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
@@ -34,19 +38,28 @@ export class MoreImplicitInserter extends ImplicitInserter {
       )
     }
 
-    return ret_t.implicit_inserter.solve_implicit_ap(ctx, arg)
+    return ret_t.implicit_inserter.solve_implicit_ap(
+      ctx,
+      inferred_arg_t,
+      inferred_arg_core
+    )
   }
 
   insert_implicit_ap(
     ctx: Ctx,
-    target: Core,
-    arg: Exp,
+    target_core: Core,
+    inferred_arg_t: Value,
+    inferred_arg_core: Core,
     entries: Array<ImplicitApInsertionEntry>
   ): { t: Value; core: Core } {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
-    const solution = this.solve_implicit_ap(ctx, arg)
+    const solution = this.solve_implicit_ap(
+      ctx,
+      inferred_arg_t,
+      inferred_arg_core
+    )
     const implicit_arg = solution.find(fresh_name)
     if (implicit_arg === undefined) {
       throw new ExpTrace(
@@ -55,8 +68,8 @@ export class MoreImplicitInserter extends ImplicitInserter {
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
-          `  arg: ${arg.format()}`,
-          `  target: ${target.format()}`,
+          `  target_core: ${target_core.format()}`,
+          `  inferred_arg_core: ${inferred_arg_core.format()}`,
         ].join("\n")
       )
     }
@@ -72,13 +85,19 @@ export class MoreImplicitInserter extends ImplicitInserter {
       )
     }
 
-    return ret_t.implicit_inserter.insert_implicit_ap(ctx, target, arg, [
-      ...entries,
-      {
-        arg_t: this.arg_t,
-        implicit_arg: implicit_arg,
-        not_yet_value,
-      },
-    ])
+    return ret_t.implicit_inserter.insert_implicit_ap(
+      ctx,
+      target_core,
+      inferred_arg_t,
+      inferred_arg_core,
+      [
+        ...entries,
+        {
+          arg_t: this.arg_t,
+          implicit_arg: implicit_arg,
+          not_yet_value,
+        },
+      ]
+    )
   }
 }

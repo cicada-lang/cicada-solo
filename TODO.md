@@ -1,10 +1,11 @@
-- refactor `insert_implicit_ap`
+- [refactor] `insert_implicit_ap` -- return collected insertion entries and `ret_t_cl`
+- [refactor] `insert_implicit_ap` -- extract function about one insertion entry
 
 # returned-pi
 
 - `multi-ap` -- check-mode handle `inferred.t instanceof Exps.ReturnedPiValue`
 
-- `datatype/either.md` test `returned-fn`
+- `datatype/either.md` test `returned-fn` -- by `list_ref_returned`
 
 - `returned-[pi|fn|ap]` -- syntax test
 

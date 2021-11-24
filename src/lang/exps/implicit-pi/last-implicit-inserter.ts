@@ -22,54 +22,44 @@ export class LastImplicitInserter extends ImplicitInserter {
     this.ret_t_cl = ret_t_cl
   }
 
-  solve_implicit_ap(ctx: Ctx, arg: Exp): Solution {
+  solve_implicit_ap(
+    ctx: Ctx,
+    inferred_arg_t: Value,
+    inferred_arg_core: Core
+  ): Solution {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = expect(ctx, this.ret_t_cl.apply(not_yet_value), Exps.PiValue)
-    const inferred_arg = infer(ctx, arg)
     const solution = Solution.empty.unify_or_fail(
       ctx,
       new Exps.TypeValue(),
       ret_t.arg_t,
-      inferred_arg.t
+      inferred_arg_t
     )
-
-    // prettier-ignore
-    // {
-    //   // DEBUG
-    //   console.log("solving")
-    //   console.log("  this  pi arg_t:", readback(ctx, new Exps.TypeValue, ret_t.arg_t).format())
-    //   console.log("  inferred arg.t:", readback(ctx, new Exps.TypeValue, inferred_arg.t).format())
-    //   console.log("  solved names:", solution.names)
-    //   console.log()
-    // }
-
     return solution
   }
 
   insert_implicit_ap(
     ctx: Ctx,
-    target: Core,
-    arg: Exp,
+    target_core: Core,
+    inferred_arg_t: Value,
+    inferred_arg_core: Core,
     entries: Array<ImplicitApInsertionEntry>
   ): { t: Value; core: Core } {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = expect(ctx, this.ret_t_cl.apply(not_yet_value), Exps.PiValue)
-    const inferred_arg = infer(ctx, arg)
-    const solution = this.solve_implicit_ap(ctx, arg)
+    const solution = this.solve_implicit_ap(
+      ctx,
+      inferred_arg_t,
+      inferred_arg_core
+    )
 
     for (const entry of entries) {
       const implicit_arg_core = readback(ctx, entry.arg_t, entry.implicit_arg)
-      target = new Exps.ImplicitApCore(target, implicit_arg_core)
-
-      // {
-      //   // DEBUG
-      //   const core = new Exps.ApCore(target, inferred_arg.core)
-      //   console.log("- im-ap insertion :", core.format())
-      // }
+      target_core = new Exps.ImplicitApCore(target_core, implicit_arg_core)
     }
 
     const implicit_arg = solution.find(fresh_name)
@@ -80,20 +70,15 @@ export class LastImplicitInserter extends ImplicitInserter {
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
-          `  arg: ${arg.format()}`,
-          `  target: ${target.format()}`,
+          `  target_core: ${target_core.format()}`,
+          `  inferred_arg_core: ${inferred_arg_core.format()}`,
         ].join("\n")
       )
     }
 
     const implicit_arg_core = readback(ctx, this.arg_t, implicit_arg)
 
-    // {
-    //   // DEBUG
-    //   console.log("- inserting im-ap arg:", implicit_arg_core.format())
-    // }
-
-    target = new Exps.ImplicitApCore(target, implicit_arg_core)
+    target_core = new Exps.ImplicitApCore(target_core, implicit_arg_core)
 
     const final_ret_t = expect(
       ctx,
@@ -102,8 +87,8 @@ export class LastImplicitInserter extends ImplicitInserter {
     )
 
     return {
-      t: final_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
-      core: new Exps.ApCore(target, inferred_arg.core),
+      t: final_ret_t.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg_core)),
+      core: new Exps.ApCore(target_core, inferred_arg_core),
     }
   }
 }

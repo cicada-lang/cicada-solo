@@ -64,7 +64,7 @@ Examples:
 
 # We should distinguish between check-mode and infer-mode implicit arguments
 
-We also need to support implicit in check mode,
+We also need to support implicit in check-mode,
 where we can pick up implicit arguments from return type.
 
 TODO

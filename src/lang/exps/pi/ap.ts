@@ -47,10 +47,12 @@ export class Ap extends Exp {
     }
 
     if (inferred.t instanceof Exps.ImplicitPiValue) {
+      const inferred_arg = infer(ctx, this.arg)
       return inferred.t.implicit_inserter.insert_implicit_ap(
         ctx,
         inferred.core,
-        this.arg,
+        inferred_arg.t,
+        inferred_arg.core,
         []
       )
     }

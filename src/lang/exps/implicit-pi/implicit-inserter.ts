@@ -24,6 +24,20 @@ export abstract class ImplicitInserter {
     this.ret_t_cl = ret_t_cl
   }
 
+  abstract insert_implicit_ap(
+    ctx: Ctx,
+    target_core: Core,
+    inferred_arg_t: Value,
+    inferred_arg_core: Core,
+    entries: Array<ImplicitApInsertionEntry>
+  ): { t: Value; core: Core }
+
+  abstract solve_implicit_ap(
+    ctx: Ctx,
+    inferred_arg_t: Value,
+    inferred_arg_core: Core
+  ): Solution
+
   insert_implicit_fn(ctx: Ctx, exp: Exp): Core {
     const fresh_name = ut.freshen(
       exp.free_names(new Set()),
@@ -37,13 +51,4 @@ export abstract class ImplicitInserter {
     const core = check(ctx.extend(fresh_name, this.arg_t), exp, ret_t)
     return new Exps.ImplicitFnCore(fresh_name, core)
   }
-
-  abstract insert_implicit_ap(
-    ctx: Ctx,
-    target: Core,
-    arg: Exp,
-    entries: Array<ImplicitApInsertionEntry>
-  ): { t: Value; core: Core }
-
-  abstract solve_implicit_ap(ctx: Ctx, arg: Exp): Solution
 }
