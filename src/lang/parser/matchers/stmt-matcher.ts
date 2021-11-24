@@ -56,6 +56,11 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
                 span: pt.span_closure([binding.span, sequence.span]),
               })
             }
+            case "returned": {
+              return new Exps.ReturnedFn(binding.name, result, {
+                span: pt.span_closure([binding.span, sequence.span]),
+              })
+            }
           }
         }, init)
 

@@ -17,7 +17,7 @@ import { ApFormater } from "./ap-formater"
 //   - For example, we can unify the syntax of data construction and function application.
 
 export type ArgEntry = {
-  kind: "plain" | "implicit"
+  kind: "plain" | "implicit" | "returned"
   arg: Exp
 }
 
@@ -58,6 +58,8 @@ export class MultiAp extends Exp {
     for (const entry of this.entries) {
       if (entry.kind === "implicit") {
         result = new Exps.ImplicitAp(result, entry.arg, this.meta)
+      } else if (entry.kind === "returned") {
+        result = new Exps.ReturnedAp(result, entry.arg, this.meta)
       } else {
         result = new Exps.Ap(result, entry.arg, this.meta)
       }

@@ -1,13 +1,11 @@
 # returned-pi
 
-- `returned-pi` -- syntax
-- `returned-fn` -- syntax
-- `returned-ap` -- syntax
-
 - `multi-ap` -- check-mode call infer-mode
 - `multi-ap` -- check-mode handle `inferred.t instanceof ReturnedPiValue`
 
 - `datatype/either.md` test `returned-fn`
+
+- `returned-[pi|fn|ap]` -- syntax test
 
 # inductive datatype -- Data
 

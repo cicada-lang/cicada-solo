@@ -24,6 +24,11 @@ export function pi_handler(
             span: pt.span_closure([binding.span, ret_t.span]),
           })
         }
+        case "returned": {
+          return new Exps.ReturnedPi(binding.name, binding.exp, result, {
+            span: pt.span_closure([binding.span, ret_t.span]),
+          })
+        }
       }
     }, exp_matcher(ret_t))
 }
@@ -42,6 +47,11 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
         }
         case "implicit": {
           return new Exps.ImplicitFn(name_entry.name, result, {
+            span: pt.span_closure([name_entry.span, ret.span]),
+          })
+        }
+        case "returned": {
+          return new Exps.ReturnedFn(name_entry.name, result, {
             span: pt.span_closure([name_entry.span, ret.span]),
           })
         }
@@ -386,9 +396,13 @@ export function sequence_entry_matcher(tree: pt.Tree): {
                 span: pt.span_closure([binding.span, sequence.span]),
               })
             }
-
             case "implicit": {
               return new Exps.ImplicitFn(binding.name, result, {
+                span: pt.span_closure([binding.span, sequence.span]),
+              })
+            }
+            case "returned": {
+              return new Exps.ReturnedFn(binding.name, result, {
                 span: pt.span_closure([binding.span, sequence.span]),
               })
             }
@@ -457,6 +471,11 @@ export function cls_entry_matcher(tree: pt.Tree): {
                 span: pt.span_closure([binding.span, sequence.span]),
               })
             }
+            case "returned": {
+              return new Exps.ReturnedFn(binding.name, result, {
+                span: pt.span_closure([binding.span, sequence.span]),
+              })
+            }
           }
         }, init)
 
@@ -470,9 +489,12 @@ export function cls_entry_matcher(tree: pt.Tree): {
   })(tree)
 }
 
-type Binding =
-  | { kind: "named"; name: string; exp: Exp; span: pt.Span }
-  | { kind: "implicit"; name: string; exp: Exp; span: pt.Span }
+type Binding = {
+  kind: "named" | "implicit" | "returned"
+  name: string
+  exp: Exp
+  span: pt.Span
+}
 
 export function bindings_matcher(tree: pt.Tree): Array<Binding> {
   return pt.matcher({
@@ -499,6 +521,12 @@ export function binding_matcher(tree: pt.Tree): Binding {
     }),
     "binding:implicit": ({ name, exp }, { span }) => ({
       kind: "implicit",
+      name: pt.str(name),
+      exp: exp_matcher(exp),
+      span,
+    }),
+    "binding:returned": ({ name, exp }, { span }) => ({
+      kind: "returned",
       name: pt.str(name),
       exp: exp_matcher(exp),
       span,
@@ -540,9 +568,11 @@ export function names_matcher(tree: pt.Tree): Array<NameEntry> {
   })(tree)
 }
 
-type NameEntry =
-  | { kind: "name"; name: string; span: pt.Span }
-  | { kind: "implicit"; name: string; span: pt.Span }
+type NameEntry = {
+  kind: "name" | "implicit" | "returned"
+  name: string
+  span: pt.Span
+}
 
 export function name_entry_matcher(tree: pt.Tree): NameEntry {
   return pt.matcher<NameEntry>({
@@ -553,6 +583,11 @@ export function name_entry_matcher(tree: pt.Tree): NameEntry {
     }),
     "name_entry:implicit_name_entry": ({ name }, { span }) => ({
       kind: "implicit",
+      name: pt.str(name),
+      span,
+    }),
+    "name_entry:returned_name_entry": ({ name }, { span }) => ({
+      kind: "returned",
       name: pt.str(name),
       span,
     }),
@@ -587,6 +622,10 @@ export function arg_entry_matcher(tree: pt.Tree): Exps.ArgEntry {
       kind: "implicit",
       arg: exp_matcher(arg),
     }),
+    "arg_entry:returned": ({ arg }) => ({
+      kind: "returned",
+      arg: exp_matcher(arg),
+    }),
   })(tree)
 }
 
@@ -609,6 +648,11 @@ export function property_matcher(tree: pt.Tree): Exps.Prop {
             }
             case "implicit": {
               return new Exps.ImplicitFn(name_entry.name, result, {
+                span: pt.span_closure([name_entry.span, sequence.span]),
+              })
+            }
+            case "returned": {
+              return new Exps.ReturnedFn(name_entry.name, result, {
                 span: pt.span_closure([name_entry.span, sequence.span]),
               })
             }

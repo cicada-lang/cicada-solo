@@ -246,7 +246,7 @@ check! list_ref(4, li! ["a", "b", "c"]): Either(String, Trivial)
 
 ## list_ref_returned
 
-``` cicada wishful-thinking
+``` cicada
 function list_ref_returned(returned E: Type, index: Nat): (List(E)) -> Maybe(E) {
   return induction_nat(
     index,
@@ -262,6 +262,9 @@ function list_ref_returned(returned E: Type, index: Nat): (List(E)) -> Maybe(E) 
     }
   )
 }
+
+list_ref_returned(returned String, 0, li! ["a", "b", "c"])
+check! list_ref_returned(returned String, 0, li! ["a", "b", "c"]): Either(String, Trivial)
 ```
 
 ``` cicada wishful-thinking
