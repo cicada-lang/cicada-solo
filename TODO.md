@@ -1,4 +1,5 @@
-- [refactor] `insert_implicit_ap` -- extract function about one insertion entry
+- [refactor] `collect_implicit_ap_entries` -- extract function about collecting one implicit ap entry
+- [refactor] `solve_implicit_ap` -- extract common function to abstract class
 
 # returned-pi
 

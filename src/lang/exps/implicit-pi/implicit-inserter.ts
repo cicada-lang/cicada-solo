@@ -26,15 +26,10 @@ export abstract class ImplicitInserter {
   abstract collect_implicit_ap_entries(
     ctx: Ctx,
     inferred_arg_t: Value,
-    inferred_arg_core: Core,
     entries: Array<ImplicitApEntry>
   ): { entries: Array<ImplicitApEntry>; ret_t_cl: Closure }
 
-  abstract solve_implicit_ap(
-    ctx: Ctx,
-    inferred_arg_t: Value,
-    inferred_arg_core: Core
-  ): Solution
+  abstract solve_implicit_ap(ctx: Ctx, inferred_arg_t: Value): Solution
 
   insert_implicit_fn(ctx: Ctx, exp: Exp): Core {
     const fresh_name = ut.freshen(

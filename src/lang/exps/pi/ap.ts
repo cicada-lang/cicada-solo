@@ -52,7 +52,6 @@ export class Ap extends Exp {
       const result = inferred.t.implicit_inserter.collect_implicit_ap_entries(
         ctx,
         inferred_arg.t,
-        inferred_arg.core,
         []
       )
 
