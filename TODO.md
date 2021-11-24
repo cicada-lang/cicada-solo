@@ -1,6 +1,5 @@
 # multi-ap
 
-- `multi-ap` -- `format`
 - `multi-ap` -- `infer`
 
 - `multi-ap` -- syntax

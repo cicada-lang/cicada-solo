@@ -48,6 +48,8 @@ export class MultiAp extends Exp {
   }
 
   format(): string {
-    throw new Error("TODO")
+    const target = this.target.format()
+    const args = this.args.map((arg) => arg.format()).join(", ")
+    return `${target}(${args})`
   }
 }
