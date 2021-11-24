@@ -19,22 +19,20 @@ import { ApFormater } from "./ap-formater"
 export class MultiAp extends Exp {
   meta: ExpMeta
   target: Exp
-  arg: Exp
+  args: Array<Exp>
 
-  constructor(target: Exp, arg: Exp, meta: ExpMeta) {
+  constructor(target: Exp, args: Array<Exp>, meta: ExpMeta) {
     super()
     this.meta = meta
     this.target = target
-    this.arg = arg
+    this.args = args
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    throw new Error("TODO")
-
-    // return new Set([
-    //   ...this.target.free_names(bound_names),
-    //   ...this.arg.free_names(bound_names),
-    // ])
+    return new Set([
+      ...this.target.free_names(bound_names),
+      ...this.args.flatMap((arg) => Array.from(arg.free_names(bound_names))),
+    ])
   }
 
   subst(name: string, exp: Exp): MultiAp {
