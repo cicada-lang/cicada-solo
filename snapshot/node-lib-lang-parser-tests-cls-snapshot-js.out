@@ -21,4 +21,4 @@ class {
 object.field
 object.method(x)
 object.method(x, y)
-object.method(x, y)
+object.method(x)(y)

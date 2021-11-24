@@ -75,18 +75,15 @@ export function operator_matcher(tree: pt.Tree): Exp {
   return pt.matcher<Exp>({
     "operator:var": ({ name }, { span }) =>
       new Exps.Var(pt.str(name), { span }),
-    "operator:ap": ({ target, args }, { span }) =>
+    "operator:ap": ({ target, arg_entries_group }, { span }) =>
       pt.matchers
-        .one_or_more_matcher(args)
-        .flatMap((args) => args_matcher(args))
-        .reduce((result, entry) => {
-          switch (entry.kind) {
-            case "plain":
-              return new Exps.Ap(result, entry.arg, { span })
-            case "implicit":
-              return new Exps.ImAp(result, entry.arg, { span })
-          }
-        }, operator_matcher(target)),
+        .one_or_more_matcher(arg_entries_group)
+        .map((arg_entries) => arg_entries_matcher(arg_entries))
+        .reduce(
+          (result, arg_entries) =>
+            new Exps.MultiAp(result, arg_entries, { span }),
+          operator_matcher(target)
+        ),
     "operator:sequence_begin": ({ sequence }, { span }) =>
       sequence_matcher(sequence),
     "operator:car": ({ target }, { span }) =>
@@ -95,15 +92,16 @@ export function operator_matcher(tree: pt.Tree): Exp {
       new Exps.Cdr(exp_matcher(target), { span }),
     "operator:dot_field": ({ target, name }, { span }) =>
       new Exps.Dot(operator_matcher(target), pt.str(name), { span }),
-    "operator:dot_method": ({ target, name, args }, { span }) =>
+    "operator:dot_method": ({ target, name, arg_entries_group }, { span }) =>
       pt.matchers
-        .one_or_more_matcher(args)
-        .flatMap((arg) => exps_matcher(arg))
+        .one_or_more_matcher(arg_entries_group)
+        .map((arg_entries) => arg_entries_matcher(arg_entries))
         .reduce(
-          (result, exp) => new Exps.Ap(result, exp, { span }),
+          (result, arg_entries) =>
+            new Exps.MultiAp(result, arg_entries, { span }),
           new Exps.Dot(operator_matcher(target), pt.str(name), {
             span: pt.span_closure([target.span, name.span]),
-          })
+          }) as Exp
         ),
     "operator:nat_ind": ({ target, motive, base, step }, { span }) =>
       new Exps.NatInd(
@@ -570,9 +568,9 @@ export function exps_matcher(tree: pt.Tree): Array<Exp> {
   })(tree)
 }
 
-export function args_matcher(tree: pt.Tree): Array<Exps.ArgEntry> {
+export function arg_entries_matcher(tree: pt.Tree): Array<Exps.ArgEntry> {
   return pt.matcher({
-    "args:args": ({ entries, last_entry }) => [
+    "arg_entries:arg_entries": ({ entries, last_entry }) => [
       ...pt.matchers.zero_or_more_matcher(entries).map(arg_entry_matcher),
       arg_entry_matcher(last_entry),
     ],

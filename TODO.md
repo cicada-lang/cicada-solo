@@ -1,8 +1,3 @@
-# multi-ap
-
-- `multi-ap` -- syntax
-- `multi-ap` -- syntax test
-
 # checked-pi
 
 - checked-pi

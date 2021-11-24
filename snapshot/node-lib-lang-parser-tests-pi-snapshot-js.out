@@ -4,5 +4,5 @@
 (x) => body
 (x) => { body }
 f(x)
-f(x, y)
+f(x)(y)
 f(x, y)

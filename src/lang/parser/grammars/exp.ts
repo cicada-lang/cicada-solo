@@ -3,7 +3,11 @@ export const operator = {
     "operator:var": [{ name: "identifier" }],
     "operator:ap": [
       { target: "operator" },
-      { args: { $ap: ["one_or_more", '"("', "args", '")"'] } },
+      {
+        arg_entries_group: {
+          $ap: ["one_or_more", '"("', "arg_entries", '")"'],
+        },
+      },
     ],
     "operator:sequence_begin": [{ sequence: "sequence" }],
     "operator:car": ['"car"', '"("', { target: "exp" }, '")"'],
@@ -17,7 +21,11 @@ export const operator = {
       { target: "operator" },
       '"."',
       { name: "identifier" },
-      { args: { $ap: ["one_or_more", '"("', "exps", '")"'] } },
+      {
+        arg_entries_group: {
+          $ap: ["one_or_more", '"("', "arg_entries", '")"'],
+        },
+      },
     ],
     "operator:nat_ind": [
       '"nat_ind"',
@@ -456,9 +464,9 @@ export const exps = {
   },
 }
 
-export const args = {
+export const arg_entries = {
   $grammar: {
-    "args:args": [
+    "arg_entries:arg_entries": [
       { entries: { $ap: ["zero_or_more", "arg_entry", '","'] } },
       { last_entry: "arg_entry" },
       { $ap: ["optional", '","'] },
