@@ -1,3 +1,5 @@
+- refactor `insert_implicit_ap`
+
 # returned-pi
 
 - `multi-ap` -- check-mode handle `inferred.t instanceof Exps.ReturnedPiValue`
@@ -19,7 +21,6 @@
 
   - handle `returned` check-mode only
   - handle `implicit` infer-mode only
-    - refactor `insert_implicit_ap`
 
 - data construction test by `Vector` (with `returned`)
 
