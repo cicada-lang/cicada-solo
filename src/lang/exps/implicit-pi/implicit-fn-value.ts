@@ -4,7 +4,7 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { Closure } from "../closure"
 
-export class ImFnValue extends Value {
+export class ImplicitFnValue extends Value {
   ret_cl: Closure
 
   constructor(fn_cl: Closure) {

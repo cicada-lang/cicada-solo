@@ -57,7 +57,7 @@ export class MultiAp extends Exp {
     let result: Exp = this.target
     for (const entry of this.entries) {
       if (entry.kind === "implicit") {
-        result = new Exps.ImAp(result, entry.arg, this.meta)
+        result = new Exps.ImplicitAp(result, entry.arg, this.meta)
       } else {
         result = new Exps.Ap(result, entry.arg, this.meta)
       }

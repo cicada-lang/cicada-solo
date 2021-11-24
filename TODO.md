@@ -1,22 +1,28 @@
-# checked-pi
+# returned-pi
 
-- checked-pi
-- checked-fn
-- checked-ap
+- `returned-pi`
+- `returned-fn`
+- `returned-ap`
 
 # refactor
 
-- refactor `insert_im_ap`
+- refactor `insert_implicit_ap`
 
 # inductive datatype -- Data
 
 - unify the syntax of data construction and function application
 
-- `TypeCtorValue` -- `ctor_bindings` -- `CtorBinding` has `kind: "plain" | "implicit"`
+  - `DotHandler` interface
+  - `TypeCtorDotHandler` interface
 
-  - we use `returned` (instead of `implicit`) to mark a function as check-mode only.
+  - we can inter the type of data constructor now
 
-- data construction test by `Vector` (with `implicit`)
+- `TypeCtorValue` -- `ctor_bindings` -- `CtorBinding` has `kind: "plain" | "implicit" | "returned"`
+
+  - handle `returned` check-mode only
+  - handle `implicit` infer-mode only
+
+- data construction test by `Vector` (with `returned`)
 
 # inductive datatype -- induction
 
@@ -45,7 +51,7 @@
 
 # use `unify` to replace `readback`
 
-- Value.unify -- pi/fn-value.ts & pi/im-fn-value.ts
+- Value.unify -- pi/fn-value.ts & pi/implicit-fn-value.ts
 
   - bidirectional `unify`
   - handle eta-expansion in `unify`
@@ -95,10 +101,10 @@
 - `exps/pi/fn` -- narration
 - `exps/pi/pi` -- narration
 
-- `exps/im-pi/im-ap-insertion` -- narration
-- `exps/im-pi/im-pi` -- narration
-- `exps/im-pi/im-fn-insertion` -- narration
-- `exps/im-pi/im-fn` -- narration
+- `exps/implicit-pi/implicit-ap-insertion` -- narration
+- `exps/implicit-pi/implicit-pi` -- narration
+- `exps/implicit-pi/implicit-fn-insertion` -- narration
+- `exps/implicit-pi/implicit-fn` -- narration
 
 - `exps/equal/refl` -- narration
 - `exps/equal/the-same` -- narration

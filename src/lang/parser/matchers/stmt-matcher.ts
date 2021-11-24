@@ -52,7 +52,7 @@ export function stmt_matcher(tree: pt.Tree): Stmt {
               })
             }
             case "implicit": {
-              return new Exps.ImFn(binding.name, result, {
+              return new Exps.ImplicitFn(binding.name, result, {
                 span: pt.span_closure([binding.span, sequence.span]),
               })
             }

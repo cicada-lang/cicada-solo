@@ -5,17 +5,17 @@ import { subst } from "../../exp"
 import { Core } from "../../core"
 import { Solution } from "../../solution"
 import { Value } from "../../value"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 import * as ut from "../../../ut"
 import { Closure } from "../closure"
 
-export interface ImApInsertionEntry {
+export interface ImplicitApInsertionEntry {
   arg_t: Value
-  im_arg: Value
+  implicit_arg: Value
   not_yet_value: Exps.NotYetValue
 }
 
-export abstract class ImInserter {
+export abstract class ImplicitInserter {
   arg_t: Value
   ret_t_cl: Closure
 
@@ -24,7 +24,7 @@ export abstract class ImInserter {
     this.ret_t_cl = ret_t_cl
   }
 
-  insert_im_fn(ctx: Ctx, exp: Exp): Core {
+  insert_implicit_fn(ctx: Ctx, exp: Exp): Core {
     const fresh_name = ut.freshen(
       exp.free_names(new Set()),
       ctx.freshen(this.ret_t_cl.name)
@@ -38,12 +38,12 @@ export abstract class ImInserter {
     return new Exps.ImFnCore(fresh_name, core)
   }
 
-  abstract insert_im_ap(
+  abstract insert_implicit_ap(
     ctx: Ctx,
     target: Core,
     arg: Exp,
-    entries: Array<ImApInsertionEntry>
+    entries: Array<ImplicitApInsertionEntry>
   ): { t: Value; core: Core }
 
-  abstract solve_im_ap(ctx: Ctx, arg: Exp): Solution
+  abstract solve_implicit_ap(ctx: Ctx, arg: Exp): Solution
 }

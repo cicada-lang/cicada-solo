@@ -3,7 +3,7 @@ import { Env } from "../../env"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { Closure } from "../closure"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 import { FnFormater } from "../pi/fn-formater"
 
 export class ImFnCore extends Core {
@@ -17,7 +17,7 @@ export class ImFnCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    return new Exps.ImFnValue(new Closure(env, this.name, this.ret))
+    return new Exps.ImplicitFnValue(new Closure(env, this.name, this.ret))
   }
 
   fn_formater: FnFormater = new FnFormater(this, {

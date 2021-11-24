@@ -9,10 +9,10 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { Normal } from "../../normal"
 import { ExpTrace, InternalError } from "../../errors"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 import { ApFormater } from "../pi/ap-formater"
 
-export class ImAp extends Exp {
+export class ImplicitAp extends Exp {
   meta: ExpMeta
   target: Exp
   arg: Exp
@@ -31,8 +31,8 @@ export class ImAp extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): ImAp {
-    return new ImAp(
+  subst(name: string, exp: Exp): ImplicitAp {
+    return new ImplicitAp(
       subst(this.target, name, exp),
       subst(this.arg, name, exp),
       this.meta
@@ -42,13 +42,13 @@ export class ImAp extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred = infer(ctx, this.target)
 
-    if (inferred.t instanceof Exps.ImPiValue) {
+    if (inferred.t instanceof Exps.ImplicitPiValue) {
       const { arg_t, ret_t_cl } = inferred.t
       const arg_core = check(ctx, this.arg, arg_t)
       const arg_value = evaluate(ctx.to_env(), arg_core)
       return {
         t: ret_t_cl.apply(arg_value),
-        core: new Exps.ImApCore(inferred.core, arg_core),
+        core: new Exps.ImplicitApCore(inferred.core, arg_core),
       }
     }
 

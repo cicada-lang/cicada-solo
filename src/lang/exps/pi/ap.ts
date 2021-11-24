@@ -46,8 +46,8 @@ export class Ap extends Exp {
       return target.ap_handler.infer_by_target(ctx, inferred.core, this.arg)
     }
 
-    if (inferred.t instanceof Exps.ImPiValue) {
-      return inferred.t.im_inserter.insert_im_ap(
+    if (inferred.t instanceof Exps.ImplicitPiValue) {
+      return inferred.t.implicit_inserter.insert_implicit_ap(
         ctx,
         inferred.core,
         this.arg,

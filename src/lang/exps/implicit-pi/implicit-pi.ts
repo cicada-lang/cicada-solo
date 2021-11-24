@@ -6,7 +6,7 @@ import { Solution } from "../../solution"
 import { check } from "../../exp"
 import { evaluate } from "../../core"
 import { ExpTrace } from "../../errors"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 import * as ut from "../../../ut"
 import { PiFormater } from "../pi/pi-formater"
 
@@ -14,7 +14,7 @@ import { PiFormater } from "../pi/pi-formater"
 //   we can use implicit arguments, which decorates on top of pi type,
 //   and will be resolved from the type of next non-implicit argument.
 
-export class ImPi extends Exp {
+export class ImplicitPi extends Exp {
   meta: ExpMeta
   name: string
   arg_t: Exp
@@ -35,9 +35,9 @@ export class ImPi extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): ImPi {
+  subst(name: string, exp: Exp): ImplicitPi {
     if (name === this.name) {
-      return new ImPi(
+      return new ImplicitPi(
         this.name,
         subst(this.arg_t, name, exp),
         this.ret_t,
@@ -48,7 +48,7 @@ export class ImPi extends Exp {
       const fresh_name = ut.freshen(free_names, this.name)
       const ret_t = subst(this.ret_t, this.name, new Exps.Var(fresh_name))
 
-      return new ImPi(
+      return new ImplicitPi(
         fresh_name,
         subst(this.arg_t, name, exp),
         subst(ret_t, name, exp),
@@ -70,7 +70,7 @@ export class ImPi extends Exp {
 
     return {
       t: new Exps.TypeValue(),
-      core: new Exps.ImPiCore(fresh_name, arg_t_core, ret_t_core),
+      core: new Exps.ImplicitPiCore(fresh_name, arg_t_core, ret_t_core),
     }
   }
 

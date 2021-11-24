@@ -7,24 +7,24 @@ import { Value } from "../../value"
 import { Closure } from "../closure"
 import { ExpTrace } from "../../errors"
 import * as ut from "../../../ut"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 import { ReadbackEtaExpansion } from "../../value"
-import { ImInserter } from "./im-inserter"
+import { ImplicitInserter } from "./implicit-inserter"
 
-export class ImPiValue extends Value implements ReadbackEtaExpansion {
+export class ImplicitPiValue extends Value implements ReadbackEtaExpansion {
   arg_t: Value
   ret_t_cl: Closure
-  im_inserter: ImInserter
+  implicit_inserter: ImplicitInserter
 
   constructor(
     arg_t: Value,
     ret_t_cl: Closure,
-    opts: { im_inserter: ImInserter }
+    opts: { implicit_inserter: ImplicitInserter }
   ) {
     super()
     this.arg_t = arg_t
     this.ret_t_cl = ret_t_cl
-    this.im_inserter = opts.im_inserter
+    this.implicit_inserter = opts.implicit_inserter
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
@@ -39,7 +39,7 @@ export class ImPiValue extends Value implements ReadbackEtaExpansion {
         this.ret_t_cl.apply(not_yet_value)
       )
 
-      return new Exps.ImPiCore(fresh_name, arg_t, ret_t_core)
+      return new Exps.ImplicitPiCore(fresh_name, arg_t, ret_t_core)
     }
   }
 
@@ -49,7 +49,7 @@ export class ImPiValue extends Value implements ReadbackEtaExpansion {
     //   This implements the η-rule for functions.
 
     const fresh_name =
-      value instanceof Exps.ImFnValue
+      value instanceof Exps.ImplicitFnValue
         ? ctx.freshen(value.ret_cl.name)
         : ctx.freshen(this.ret_t_cl.name)
 
@@ -59,14 +59,14 @@ export class ImPiValue extends Value implements ReadbackEtaExpansion {
     const result = readback(
       ctx.extend(fresh_name, this.arg_t),
       pi,
-      Exps.ImApCore.apply(value, not_yet_value)
+      Exps.ImplicitApCore.apply(value, not_yet_value)
     )
 
     return new Exps.ImFnCore(fresh_name, result)
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (!(that instanceof Exps.ImPiValue)) {
+    if (!(that instanceof Exps.ImplicitPiValue)) {
       return Solution.failure
     }
 

@@ -20,7 +20,7 @@ export function pi_handler(
           })
         }
         case "implicit": {
-          return new Exps.ImPi(binding.name, binding.exp, result, {
+          return new Exps.ImplicitPi(binding.name, binding.exp, result, {
             span: pt.span_closure([binding.span, ret_t.span]),
           })
         }
@@ -41,7 +41,7 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
           })
         }
         case "implicit": {
-          return new Exps.ImFn(name_entry.name, result, {
+          return new Exps.ImplicitFn(name_entry.name, result, {
             span: pt.span_closure([name_entry.span, ret.span]),
           })
         }
@@ -388,7 +388,7 @@ export function sequence_entry_matcher(tree: pt.Tree): {
             }
 
             case "implicit": {
-              return new Exps.ImFn(binding.name, result, {
+              return new Exps.ImplicitFn(binding.name, result, {
                 span: pt.span_closure([binding.span, sequence.span]),
               })
             }
@@ -453,7 +453,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
               })
             }
             case "implicit": {
-              return new Exps.ImFn(binding.name, result, {
+              return new Exps.ImplicitFn(binding.name, result, {
                 span: pt.span_closure([binding.span, sequence.span]),
               })
             }
@@ -608,7 +608,7 @@ export function property_matcher(tree: pt.Tree): Exps.Prop {
               })
             }
             case "implicit": {
-              return new Exps.ImFn(name_entry.name, result, {
+              return new Exps.ImplicitFn(name_entry.name, result, {
                 span: pt.span_closure([name_entry.span, sequence.span]),
               })
             }

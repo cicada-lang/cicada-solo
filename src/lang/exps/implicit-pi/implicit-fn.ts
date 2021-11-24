@@ -6,11 +6,11 @@ import { Value } from "../../value"
 import { expect } from "../../value"
 import { Solution } from "../../solution"
 import { ExpTrace } from "../../errors"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 import * as ut from "../../../ut"
 import { FnFormater } from "../pi/fn-formater"
 
-export class ImFn extends Exp {
+export class ImplicitFn extends Exp {
   meta: ExpMeta
   name: string
   ret: Exp
@@ -26,19 +26,19 @@ export class ImFn extends Exp {
     return new Set(this.ret.free_names(new Set([...bound_names, this.name])))
   }
 
-  subst(name: string, exp: Exp): ImFn {
+  subst(name: string, exp: Exp): ImplicitFn {
     if (this.name === name) {
       return this
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen(free_names, this.name)
       const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
-      return new ImFn(fresh_name, subst(ret, name, exp), this.meta)
+      return new ImplicitFn(fresh_name, subst(ret, name, exp), this.meta)
     }
   }
 
   check(ctx: Ctx, t: Value): Core {
-    const { arg_t, ret_t_cl } = expect(ctx, t, Exps.ImPiValue)
+    const { arg_t, ret_t_cl } = expect(ctx, t, Exps.ImplicitPiValue)
     const fresh_name = ctx.freshen(this.name)
     const arg = new Exps.NotYetValue(arg_t, new Exps.VarNeutral(fresh_name))
     const ret_t = ret_t_cl.apply(arg)

@@ -5,10 +5,10 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 import { ApFormater } from "../pi/ap-formater"
 
-export class ImApCore extends Core {
+export class ImplicitApCore extends Core {
   target: Core
   arg: Core
 
@@ -19,7 +19,10 @@ export class ImApCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    return ImApCore.apply(evaluate(env, this.target), evaluate(env, this.arg))
+    return ImplicitApCore.apply(
+      evaluate(env, this.target),
+      evaluate(env, this.arg)
+    )
   }
 
   ap_formater = new ApFormater(this, {
@@ -35,23 +38,23 @@ export class ImApCore extends Core {
   }
 
   static apply(target: Value, arg: Value): Value {
-    if (target instanceof Exps.ImFnValue) {
+    if (target instanceof Exps.ImplicitFnValue) {
       return target.apply(arg)
     } else if (target instanceof Exps.NotYetValue) {
       const { t, neutral } = target
-      if (t instanceof Exps.ImPiValue) {
+      if (t instanceof Exps.ImplicitPiValue) {
         return new Exps.NotYetValue(
           t.ret_t_cl.apply(arg),
-          new Exps.ImApNeutral(neutral, new Normal(t.arg_t, arg))
+          new Exps.ImplicitApNeutral(neutral, new Normal(t.arg_t, arg))
         )
       } else {
         throw InternalError.wrong_target_t(target.t, {
-          expected: [Exps.ImPiValue],
+          expected: [Exps.ImplicitPiValue],
         })
       }
     } else {
       throw InternalError.wrong_target(target, {
-        expected: [Exps.ImFnValue],
+        expected: [Exps.ImplicitFnValue],
       })
     }
   }

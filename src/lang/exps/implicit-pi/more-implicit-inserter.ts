@@ -1,4 +1,4 @@
-import { ImInserter, ImApInsertionEntry } from "./im-inserter"
+import { ImplicitInserter, ImplicitApInsertionEntry } from "./implicit-inserter"
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { Core } from "../../core"
@@ -7,9 +7,9 @@ import { check } from "../../exp"
 import { Value } from "../../value"
 import { Closure } from "../closure"
 import { ExpTrace } from "../../errors"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 
-export class MoreImInserter extends ImInserter {
+export class MoreImplicitInserter extends ImplicitInserter {
   arg_t: Value
   ret_t_cl: Closure
 
@@ -19,13 +19,13 @@ export class MoreImInserter extends ImInserter {
     this.ret_t_cl = ret_t_cl
   }
 
-  solve_im_ap(ctx: Ctx, arg: Exp): Solution {
+  solve_implicit_ap(ctx: Ctx, arg: Exp): Solution {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = this.ret_t_cl.apply(not_yet_value)
 
-    if (!(ret_t instanceof Exps.ImPiValue)) {
+    if (!(ret_t instanceof Exps.ImplicitPiValue)) {
       throw new ExpTrace(
         [
           `I expect ret_t to be Exps.ImPiValue,`,
@@ -34,24 +34,24 @@ export class MoreImInserter extends ImInserter {
       )
     }
 
-    return ret_t.im_inserter.solve_im_ap(ctx, arg)
+    return ret_t.implicit_inserter.solve_implicit_ap(ctx, arg)
   }
 
-  insert_im_ap(
+  insert_implicit_ap(
     ctx: Ctx,
     target: Core,
     arg: Exp,
-    entries: Array<ImApInsertionEntry>
+    entries: Array<ImplicitApInsertionEntry>
   ): { t: Value; core: Core } {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
-    const solution = this.solve_im_ap(ctx, arg)
-    const im_arg = solution.find(fresh_name)
-    if (im_arg === undefined) {
+    const solution = this.solve_implicit_ap(ctx, arg)
+    const implicit_arg = solution.find(fresh_name)
+    if (implicit_arg === undefined) {
       throw new ExpTrace(
         [
-          `[ConsImPiValue.insert_im_ap]`,
+          `[ConsImPiValue.insert_implicit_ap]`,
           `Fail to find ${fresh_name} in solution`,
           `  solution names: ${solution.names}`,
           `  this.arg_t class name: ${this.arg_t.constructor.name}`,
@@ -61,9 +61,9 @@ export class MoreImInserter extends ImInserter {
       )
     }
 
-    const ret_t = this.ret_t_cl.apply(im_arg)
+    const ret_t = this.ret_t_cl.apply(implicit_arg)
 
-    if (!(ret_t instanceof Exps.ImPiValue)) {
+    if (!(ret_t instanceof Exps.ImplicitPiValue)) {
       throw new ExpTrace(
         [
           `I expect ret_t to be Exps.ImPiValue,`,
@@ -72,11 +72,11 @@ export class MoreImInserter extends ImInserter {
       )
     }
 
-    return ret_t.im_inserter.insert_im_ap(ctx, target, arg, [
+    return ret_t.implicit_inserter.insert_implicit_ap(ctx, target, arg, [
       ...entries,
       {
         arg_t: this.arg_t,
-        im_arg,
+        implicit_arg: implicit_arg,
         not_yet_value,
       },
     ])

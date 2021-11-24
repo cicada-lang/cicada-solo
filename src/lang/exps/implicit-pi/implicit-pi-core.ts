@@ -4,13 +4,13 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import { Closure } from "../closure"
 import { evaluate } from "../../core"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 import { PiFormater } from "../pi/pi-formater"
-import { ImInserter } from "./im-inserter"
-import { LastImInserter } from "./last-im-inserter"
-import { MoreImInserter } from "./more-im-inserter"
+import { ImplicitInserter } from "./implicit-inserter"
+import { LastImplicitInserter } from "./last-implicit-inserter"
+import { MoreImplicitInserter } from "./more-implicit-inserter"
 
-export class ImPiCore extends Core {
+export class ImplicitPiCore extends Core {
   name: string
   arg_t: Core
   ret_t: Core
@@ -26,12 +26,12 @@ export class ImPiCore extends Core {
     const arg_t = evaluate(env, this.arg_t)
     const ret_t_cl = new Closure(env, this.name, this.ret_t)
 
-    const im_inserter =
-      this.ret_t instanceof Exps.ImPiCore
-        ? new MoreImInserter(arg_t, ret_t_cl)
-        : new LastImInserter(arg_t, ret_t_cl)
+    const implicit_inserter =
+      this.ret_t instanceof Exps.ImplicitPiCore
+        ? new MoreImplicitInserter(arg_t, ret_t_cl)
+        : new LastImplicitInserter(arg_t, ret_t_cl)
 
-    return new Exps.ImPiValue(arg_t, ret_t_cl, { im_inserter })
+    return new Exps.ImplicitPiValue(arg_t, ret_t_cl, { implicit_inserter })
   }
 
   pi_formater: PiFormater = new PiFormater(this, {

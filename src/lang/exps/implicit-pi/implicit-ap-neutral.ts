@@ -3,9 +3,9 @@ import { Solution } from "../../solution"
 import { Normal } from "../../normal"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import * as Exps from "../../exps"
+import * as Exps from ".."
 
-export class ImApNeutral extends Neutral {
+export class ImplicitApNeutral extends Neutral {
   target: Neutral
   arg: Normal
 
@@ -16,14 +16,14 @@ export class ImApNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Exps.ImApCore(
+    return new Exps.ImplicitApCore(
       this.target.readback_neutral(ctx),
       this.arg.readback_normal(ctx)
     )
   }
 
   unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
-    if (!(that instanceof ImApNeutral)) {
+    if (!(that instanceof ImplicitApNeutral)) {
       return Solution.failure
     }
 
