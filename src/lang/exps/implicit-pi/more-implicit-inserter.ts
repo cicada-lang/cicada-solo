@@ -40,15 +40,11 @@ export class MoreImplicitInserter extends ImplicitInserter {
   ): { entries: Array<ImplicitApEntry>; ret_t_cl: Closure } {
     const entry = this.implicit_ap_entry(ctx, inferred_arg_t)
 
-    const ret_t = this.ret_t_cl.apply(entry.implicit_arg)
-    if (!(ret_t instanceof Exps.ImplicitPiValue)) {
-      throw new ExpTrace(
-        [
-          `I expect ret_t to be Exps.ImPiValue,`,
-          `  class name: ${ret_t.constructor.name}`,
-        ].join("\n")
-      )
-    }
+    const ret_t = expect(
+      ctx,
+      this.ret_t_cl.apply(entry.implicit_arg),
+      Exps.ImplicitPiValue
+    )
 
     return ret_t.implicit_inserter.collect_implicit_ap_entries(
       ctx,
