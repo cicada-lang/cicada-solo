@@ -3,8 +3,6 @@
 - `multi-ap` -- syntax
 - `multi-ap` -- syntax test
 
-- `multi-ap` -- `infer`
-
 # checked-pi
 
 - checked-pi

@@ -54,7 +54,16 @@ export class MultiAp extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    throw new Error("TODO")
+    let result: Exp = this.target
+    for (const entry of this.entries) {
+      if (entry.kind === "implicit") {
+        result = new Exps.ImAp(result, entry.arg, this.meta)
+      } else {
+        result = new Exps.Ap(result, entry.arg, this.meta)
+      }
+    }
+
+    return infer(ctx, result)
   }
 
   format(): string {
