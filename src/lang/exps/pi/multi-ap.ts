@@ -36,13 +36,11 @@ export class MultiAp extends Exp {
   }
 
   subst(name: string, exp: Exp): MultiAp {
-    throw new Error("TODO")
-
-    // return new Ap(
-    //   subst(this.target, name, exp),
-    //   subst(this.arg, name, exp),
-    //   this.meta
-    // )
+    return new MultiAp(
+      subst(this.target, name, exp),
+      this.args.map((arg) => subst(arg, name, exp)),
+      this.meta
+    )
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
