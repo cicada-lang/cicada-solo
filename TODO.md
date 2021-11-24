@@ -1,10 +1,8 @@
 # multi-ap
 
 - `multi-ap` -- `infer`
-
 - `multi-ap` -- syntax
-
-- [maybe] we also need `multi-fn` & `multi-pi` to be symmetric with `multi-ap`
+- `multi-ap` -- syntax test
 
 # checked-pi
 
@@ -234,6 +232,8 @@
 - `Book` -- the use of cached modules in `Book.load` is not safe in concurrent environment
 
 # maybe
+
+- [maybe] we also need `multi-fn` & `multi-pi` to be symmetric with `multi-ap`
 
 - [maybe] offset in `CodeBlock`
 - [maybe] support using `let name = exp` to do local definitions in class

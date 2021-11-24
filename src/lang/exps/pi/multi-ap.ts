@@ -16,29 +16,39 @@ import { ApFormater } from "./ap-formater"
 //   an opportunity to do check-mode application (which can not be curried).
 //   - For example, we can unify the syntax of data construction and function application.
 
+type ArgEntry = {
+  kind: "plain" | "implicit"
+  arg: Exp
+}
+
 export class MultiAp extends Exp {
   meta: ExpMeta
   target: Exp
-  args: Array<Exp>
+  entries: Array<ArgEntry>
 
-  constructor(target: Exp, args: Array<Exp>, meta: ExpMeta) {
+  constructor(target: Exp, entries: Array<ArgEntry>, meta: ExpMeta) {
     super()
     this.meta = meta
     this.target = target
-    this.args = args
+    this.entries = entries
   }
 
   free_names(bound_names: Set<string>): Set<string> {
     return new Set([
       ...this.target.free_names(bound_names),
-      ...this.args.flatMap((arg) => Array.from(arg.free_names(bound_names))),
+      ...this.entries.flatMap((entry) =>
+        Array.from(entry.arg.free_names(bound_names))
+      ),
     ])
   }
 
   subst(name: string, exp: Exp): MultiAp {
     return new MultiAp(
       subst(this.target, name, exp),
-      this.args.map((arg) => subst(arg, name, exp)),
+      this.entries.map((entry) => ({
+        ...entry,
+        arg: subst(entry.arg, name, exp),
+      })),
       this.meta
     )
   }
@@ -49,7 +59,17 @@ export class MultiAp extends Exp {
 
   format(): string {
     const target = this.target.format()
-    const args = this.args.map((arg) => arg.format()).join(", ")
-    return `${target}(${args})`
+    const entries = this.entries
+      .map((entry) => {
+        switch (entry.kind) {
+          case "plain":
+            return entry.arg.format()
+          case "implicit":
+            return `implicit ${entry.arg.format()}`
+        }
+      })
+      .join(", ")
+
+    return `${target}(${entries})`
   }
 }
