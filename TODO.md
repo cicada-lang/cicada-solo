@@ -6,6 +6,8 @@
 
 - `returned-[pi|fn|ap]` -- syntax test
 
+- `ReturnedInserter.insert_returned_ap` handle given `returned` arg entry
+
 # inductive datatype -- Data
 
 - unify the syntax of data construction and function application
