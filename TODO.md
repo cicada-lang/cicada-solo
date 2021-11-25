@@ -1,7 +1,6 @@
 # returned-pi
 
 - `ReturnedInserter.returned_ap_entry`
-- `ReturnedInserter.finial_ret_t`
 - `ReturnedInserter.check_arg_entries`
 
 - `datatype/either.md` test `returned-fn` -- by `list_ref_returned`

@@ -32,11 +32,17 @@ export class ReturnedInserter {
     arg_entries: Array<Exps.ArgEntry>,
     t: Value
   ): Core {
-    const finial_ret_t = this.finial_ret_t(ctx)
+    const finial_ret_t = this.finial_ret_t(ctx, this.arg_t, this.ret_t_cl)
+    const solution = Solution.empty.unify_or_fail(
+      ctx,
+      new Exps.TypeValue(),
+      this.finial_ret_t(ctx, this.arg_t, this.ret_t_cl),
+      t
+    )
+
     const returned_ap_entries = this.collect_returned_ap_entries(
       ctx,
-      finial_ret_t,
-      t,
+      solution,
       []
     )
 
@@ -59,24 +65,35 @@ export class ReturnedInserter {
     return result_core
   }
 
-  private finial_ret_t(ctx: Ctx): Value {
-    throw new Error("TODO")
+  private finial_ret_t(ctx: Ctx, arg_t: Value, ret_t_cl: Closure): Value {
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
+    const ret_t = this.ret_t_cl.apply(not_yet_value)
+
+    if (
+      ret_t instanceof Exps.ReturnedPiValue ||
+      ret_t instanceof Exps.ImplicitPiValue ||
+      ret_t instanceof Exps.PiValue
+    ) {
+      return this.finial_ret_t(ctx, ret_t.arg_t, ret_t.ret_t_cl)
+    } else {
+      return ret_t
+    }
   }
 
   private collect_returned_ap_entries(
     ctx: Ctx,
-    finial_ret_t: Value,
-    t: Value,
+    solution: Solution,
     entries: Array<ReturnedApEntry>
   ): Array<ReturnedApEntry> {
-    const entry = this.returned_ap_entry(ctx, t)
+    const entry = this.returned_ap_entry(ctx, solution)
     const ret_t = this.ret_t_cl.apply(entry.returned_arg)
 
     if (ret_t instanceof Exps.ReturnedPiValue) {
       return ret_t.returned_inserter.collect_returned_ap_entries(
         ctx,
-        finial_ret_t,
-        t,
+        solution,
         [...entries, entry]
       )
     } else if (ret_t instanceof Exps.PiValue) {
@@ -92,7 +109,7 @@ export class ReturnedInserter {
     }
   }
 
-  private returned_ap_entry(ctx: Ctx, t: Value): ReturnedApEntry {
+  private returned_ap_entry(ctx: Ctx, solution: Solution): ReturnedApEntry {
     throw new Error("TODO")
   }
 
