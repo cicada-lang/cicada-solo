@@ -2,6 +2,9 @@
 
 - `returned-[pi|fn|ap]` -- syntax test
 
+- `returned-pi` move example in `implicit-arguments.md` to `returned-pi`'s test
+- `returned-pi` test nested `returned`
+
 - `ReturnedInserter.insert_returned_ap` handle given `returned` arg entry
 
   - start inserting returned application from the first non-`returned` argument
@@ -234,6 +237,10 @@
 - `Book` -- the use of cached modules in `Book.load` is not safe in concurrent environment
 
 # maybe
+
+- [maybe] currently `implicit-pi` and `returned-pi` has the same structure,
+  only the inserters are different, if we need the third such feature,
+  and the structures are still the same, we should do an abstraction (maybe `decorated-pi`).
 
 - [maybe] we also need `multi-fn` & `multi-pi` to be symmetric with `multi-ap`
 
