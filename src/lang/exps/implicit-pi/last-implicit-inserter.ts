@@ -35,23 +35,4 @@ export class LastImplicitInserter extends ImplicitInserter {
 
     return solution
   }
-
-  collect_implicit_ap_entries(
-    ctx: Ctx,
-    inferred_arg_t: Value,
-    entries: Array<ImplicitApEntry>
-  ): { entries: Array<ImplicitApEntry>; ret_t_cl: Closure } {
-    const entry = this.implicit_ap_entry(ctx, inferred_arg_t)
-
-    const pi = expect(
-      ctx,
-      this.ret_t_cl.apply(entry.implicit_arg),
-      Exps.PiValue
-    )
-
-    return {
-      entries: [...entries, entry],
-      ret_t_cl: pi.ret_t_cl,
-    }
-  }
 }

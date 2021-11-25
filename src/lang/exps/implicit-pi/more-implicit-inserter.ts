@@ -29,24 +29,4 @@ export class MoreImplicitInserter extends ImplicitInserter {
 
     return ret_t.implicit_inserter.solve_implicit_ap(ctx, inferred_arg_t)
   }
-
-  collect_implicit_ap_entries(
-    ctx: Ctx,
-    inferred_arg_t: Value,
-    entries: Array<ImplicitApEntry>
-  ): { entries: Array<ImplicitApEntry>; ret_t_cl: Closure } {
-    const entry = this.implicit_ap_entry(ctx, inferred_arg_t)
-
-    const ret_t = expect(
-      ctx,
-      this.ret_t_cl.apply(entry.implicit_arg),
-      Exps.ImplicitPiValue
-    )
-
-    return ret_t.implicit_inserter.collect_implicit_ap_entries(
-      ctx,
-      inferred_arg_t,
-      [...entries, entry]
-    )
-  }
 }

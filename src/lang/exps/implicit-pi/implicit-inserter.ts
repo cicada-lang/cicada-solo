@@ -24,11 +24,35 @@ export abstract class ImplicitInserter {
     this.ret_t_cl = ret_t_cl
   }
 
-  abstract collect_implicit_ap_entries(
+  collect_implicit_ap_entries(
     ctx: Ctx,
     inferred_arg_t: Value,
     entries: Array<ImplicitApEntry>
-  ): { entries: Array<ImplicitApEntry>; ret_t_cl: Closure }
+  ): { entries: Array<ImplicitApEntry>; ret_t_cl: Closure } {
+    const entry = this.implicit_ap_entry(ctx, inferred_arg_t)
+    const ret_t = this.ret_t_cl.apply(entry.implicit_arg)
+
+    if (ret_t instanceof Exps.PiValue) {
+      return {
+        entries: [...entries, entry],
+        ret_t_cl: ret_t.ret_t_cl,
+      }
+    } else if (ret_t instanceof Exps.ImplicitPiValue) {
+      return ret_t.implicit_inserter.collect_implicit_ap_entries(
+        ctx,
+        inferred_arg_t,
+        [...entries, entry]
+      )
+    } else {
+      throw new ExpTrace(
+        [
+          `During application insertion`,
+          `I expect the return type to be Exps.PiValue or Exps.ImplicitPiValue`,
+          `  class name: ${ret_t.constructor.name}`,
+        ].join("\n")
+      )
+    }
+  }
 
   implicit_ap_entry(ctx: Ctx, inferred_arg_t: Value): ImplicitApEntry {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
