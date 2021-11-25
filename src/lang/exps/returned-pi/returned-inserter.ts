@@ -32,8 +32,16 @@ export class ReturnedInserter {
     arg_entries: Array<Exps.ArgEntry>,
     t: Value
   ): Core {
+    const finial_ret_t = this.finial_ret_t(ctx)
+    const returned_ap_entries = this.collect_returned_ap_entries(
+      ctx,
+      finial_ret_t,
+      t,
+      []
+    )
+
     let result_core = target_core
-    for (const entry of this.collect_returned_ap_entries(ctx, [], t)) {
+    for (const entry of returned_ap_entries) {
       const arg_core = readback(ctx, entry.arg_t, entry.returned_arg)
       result_core = new Exps.ReturnedApCore(result_core, arg_core)
     }
@@ -51,11 +59,40 @@ export class ReturnedInserter {
     return result_core
   }
 
+  private finial_ret_t(ctx: Ctx): Value {
+    throw new Error("TODO")
+  }
+
   private collect_returned_ap_entries(
     ctx: Ctx,
-    entries: Array<ReturnedApEntry>,
-    t: Value
+    finial_ret_t: Value,
+    t: Value,
+    entries: Array<ReturnedApEntry>
   ): Array<ReturnedApEntry> {
+    const entry = this.returned_ap_entry(ctx, t)
+    const ret_t = this.ret_t_cl.apply(entry.returned_arg)
+
+    if (ret_t instanceof Exps.ReturnedPiValue) {
+      return ret_t.returned_inserter.collect_returned_ap_entries(
+        ctx,
+        finial_ret_t,
+        t,
+        [...entries, entry]
+      )
+    } else if (ret_t instanceof Exps.PiValue) {
+      return [...entries, entry]
+    } else {
+      throw new ExpTrace(
+        [
+          `During application insertion`,
+          `I expect the return type to be Exps.PiValue or Exps.ReturnedPiValue`,
+          `  class name: ${ret_t.constructor.name}`,
+        ].join("\n")
+      )
+    }
+  }
+
+  private returned_ap_entry(ctx: Ctx, t: Value): ReturnedApEntry {
     throw new Error("TODO")
   }
 
