@@ -49,22 +49,12 @@ export class Ap extends Exp {
 
     if (inferred.t instanceof Exps.ImplicitPiValue) {
       const inferred_arg = infer(ctx, this.arg)
-      const result = inferred.t.implicit_inserter.collect_implicit_ap_entries(
+      return inferred.t.implicit_inserter.insert_implicit_ap(
         ctx,
+        inferred.core,
         inferred_arg.t,
-        []
+        inferred_arg.core
       )
-
-      let target_core = inferred.core
-      for (const entry of result.entries) {
-        const arg_core = readback(ctx, entry.arg_t, entry.implicit_arg)
-        target_core = new Exps.ImplicitApCore(target_core, arg_core)
-      }
-
-      return {
-        t: result.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
-        core: new Exps.ApCore(target_core, inferred_arg.core),
-      }
     }
 
     if (inferred.t instanceof Exps.PiValue) {

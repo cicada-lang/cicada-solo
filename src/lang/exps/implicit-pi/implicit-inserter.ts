@@ -3,8 +3,10 @@ import { Exp } from "../../exp"
 import { check } from "../../exp"
 import { subst } from "../../exp"
 import { Core } from "../../core"
+import { evaluate } from "../../core"
 import { Solution } from "../../solution"
 import { Value } from "../../value"
+import { readback } from "../../value"
 import * as Exps from ".."
 import * as ut from "../../../ut"
 import { Closure } from "../closure"
@@ -38,7 +40,26 @@ export class ImplicitInserter {
     return new Exps.ImplicitFnCore(fresh_name, core)
   }
 
-  collect_implicit_ap_entries(
+  insert_implicit_ap(
+    ctx: Ctx,
+    target_core: Core,
+    inferred_arg_t: Value,
+    inferred_arg_core: Core
+  ): { t: Value; core: Core } {
+    const result = this.collect_implicit_ap_entries(ctx, inferred_arg_t, [])
+
+    for (const entry of result.entries) {
+      const arg_core = readback(ctx, entry.arg_t, entry.implicit_arg)
+      target_core = new Exps.ImplicitApCore(target_core, arg_core)
+    }
+
+    return {
+      t: result.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg_core)),
+      core: new Exps.ApCore(target_core, inferred_arg_core),
+    }
+  }
+
+  private collect_implicit_ap_entries(
     ctx: Ctx,
     inferred_arg_t: Value,
     entries: Array<ImplicitApEntry>
