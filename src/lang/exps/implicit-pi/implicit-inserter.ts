@@ -70,8 +70,6 @@ export class ImplicitInserter {
 
   private implicit_ap_entry(ctx: Ctx, inferred_arg_t: Value): ImplicitApEntry {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
-    const variable = new Exps.VarNeutral(fresh_name)
-    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const solution = this.solve_implicit_ap(ctx, inferred_arg_t)
     const implicit_arg = solution.find(fresh_name)
     if (implicit_arg === undefined) {
