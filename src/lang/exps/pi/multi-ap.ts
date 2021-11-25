@@ -76,6 +76,16 @@ export class MultiAp extends Exp {
     return check_by_infer(ctx, this, t)
   }
 
+  infer(ctx: Ctx): { t: Value; core: Core } {
+    return infer(
+      ctx,
+      this.arg_entries.reduce(
+        (result, arg_entry) => this.wrap_arg_entry(result, arg_entry),
+        this.target
+      )
+    )
+  }
+
   private wrap_arg_entry(target: Exp, arg_entry: ArgEntry): Exp {
     switch (arg_entry.kind) {
       case "implicit": {
@@ -88,16 +98,6 @@ export class MultiAp extends Exp {
         return new Exps.Ap(target, arg_entry.arg, this.meta)
       }
     }
-  }
-
-  infer(ctx: Ctx): { t: Value; core: Core } {
-    return infer(
-      ctx,
-      this.arg_entries.reduce(
-        (result, arg_entry) => this.wrap_arg_entry(result, arg_entry),
-        this.target
-      )
-    )
   }
 
   format(): string {
