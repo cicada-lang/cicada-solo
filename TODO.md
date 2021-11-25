@@ -1,5 +1,3 @@
-- [refactor] inline `ImplicitInserter` to `ImplicitPiValue`
-
 # returned-pi
 
 - `multi-ap` -- check-mode handle `inferred.t instanceof Exps.ReturnedPiValue`

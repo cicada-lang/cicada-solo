@@ -10,7 +10,7 @@ import * as ut from "../../../ut"
 import { Closure } from "../closure"
 import { ExpTrace } from "../../errors"
 
-export interface ImplicitApEntry {
+interface ImplicitApEntry {
   arg_t: Value
   implicit_arg: Value
 }
