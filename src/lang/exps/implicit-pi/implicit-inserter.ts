@@ -88,32 +88,18 @@ export class ImplicitInserter {
   }
 
   private solve_implicit_ap(ctx: Ctx, inferred_arg_t: Value): Solution {
-    const ret_t = this.next_ret_t(ctx, inferred_arg_t)
+    const ret_t = this.implicit_ret_t(ctx, inferred_arg_t)
 
     if (ret_t instanceof Exps.ImplicitPiValue) {
       return ret_t.implicit_inserter.solve_implicit_ap(ctx, inferred_arg_t)
-    } else {
+    } else if (ret_t instanceof Exps.PiValue) {
       return Solution.empty.unify_or_fail(
         ctx,
         new Exps.TypeValue(),
         ret_t.arg_t,
         inferred_arg_t
       )
-    }
-  }
-
-  private next_ret_t(
-    ctx: Ctx,
-    inferred_arg_t: Value
-  ): Exps.PiValue | Exps.ImplicitPiValue {
-    const fresh_name = ctx.freshen(this.ret_t_cl.name)
-    const variable = new Exps.VarNeutral(fresh_name)
-    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
-    const ret_t = this.ret_t_cl.apply(not_yet_value)
-
-    if (
-      !(ret_t instanceof Exps.PiValue || ret_t instanceof Exps.ImplicitPiValue)
-    ) {
+    } else {
       throw new ExpTrace(
         [
           `During application insertion`,
@@ -122,7 +108,13 @@ export class ImplicitInserter {
         ].join("\n")
       )
     }
+  }
 
+  private implicit_ret_t(ctx: Ctx, inferred_arg_t: Value): Value {
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
+    const ret_t = this.ret_t_cl.apply(not_yet_value)
     return ret_t
   }
 }
