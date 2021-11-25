@@ -89,7 +89,7 @@ export class MultiAp extends Exp {
           case "implicit":
             return `implicit ${entry.arg.format()}`
           case "returned":
-            return `returned ${entry.arg.format()}`            
+            return `returned ${entry.arg.format()}`
         }
       })
       .join(", ")
