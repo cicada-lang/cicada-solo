@@ -2,6 +2,7 @@ import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { check } from "../../exp"
 import { subst } from "../../exp"
+import { infer } from "../../exp"
 import { Core } from "../../core"
 import { evaluate } from "../../core"
 import { Solution } from "../../solution"
@@ -43,10 +44,11 @@ export class ImplicitInserter {
   insert_implicit_ap(
     ctx: Ctx,
     target_core: Core,
-    inferred_arg_t: Value,
-    inferred_arg_core: Core
+    arg: Exp
   ): { t: Value; core: Core } {
-    const result = this.collect_implicit_ap_entries(ctx, inferred_arg_t, [])
+    const inferred_arg = infer(ctx, arg)
+
+    const result = this.collect_implicit_ap_entries(ctx, inferred_arg.t, [])
 
     for (const entry of result.entries) {
       const arg_core = readback(ctx, entry.arg_t, entry.implicit_arg)
@@ -54,8 +56,8 @@ export class ImplicitInserter {
     }
 
     return {
-      t: result.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg_core)),
-      core: new Exps.ApCore(target_core, inferred_arg_core),
+      t: result.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
+      core: new Exps.ApCore(target_core, inferred_arg.core),
     }
   }
 
