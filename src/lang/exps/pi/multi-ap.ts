@@ -55,8 +55,14 @@ export class MultiAp extends Exp {
 
   check(ctx: Ctx, t: Value): Core {
     const inferred = infer(ctx, this.target)
+
     if (inferred.t instanceof Exps.ReturnedPiValue) {
-      // return inferred.t.returned_inserter.insert_returned_ap(ctx, t, entries)
+      return inferred.t.returned_inserter.insert_returned_ap(
+        ctx,
+        inferred.core,
+        this.entries,
+        t
+      )
     }
 
     return check_by_infer(ctx, this, t)

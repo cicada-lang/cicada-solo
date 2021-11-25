@@ -21,7 +21,12 @@ export class ReturnedInserter {
     this.ret_t_cl = ret_t_cl
   }
 
-  insert_returned_ap(): void {
-    // TODO
+  insert_returned_ap(
+    ctx: Ctx,
+    inferred_core: Core,
+    entries: Array<Exps.ArgEntry>,
+    t: Value
+  ): Core {
+    throw new Error("TODO")
   }
 }
