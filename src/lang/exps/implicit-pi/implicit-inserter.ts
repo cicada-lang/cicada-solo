@@ -92,8 +92,8 @@ export class ImplicitInserter {
   }
 
   private implicit_ap_entry(ctx: Ctx, inferred_arg_t: Value): ImplicitApEntry {
-    const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const solution = this.solve_implicit_ap(ctx, inferred_arg_t)
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const implicit_arg = solution.find(fresh_name)
     if (implicit_arg === undefined) {
       throw new ExpTrace(

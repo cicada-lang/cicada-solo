@@ -67,20 +67,23 @@ Examples:
 # We should distinguish between check-mode and infer-mode implicit arguments
 
 We also need to support check-mode implicit arguments,
-where we can resolve implicit arguments from return type.
+where we can resolve implicit arguments from (and only from) return type.
 
 We mark a pi type by the `returned` keyword
 to denote it can only be elaborated in check-mode,
 and such function application can not be curried.
 
 ``` cicada
-function my_list_cons(returned A: Type, x: A): List(A) {
-  return li(x, nil)
+function my_list_cons(returned A: Type, head: A, tail: List(A)): List(A) {
+  return li(head, tail)
 }
 
-check! my_list_cons(returned Nat, 123): List(Nat)
-check! my_list_cons(returned Nat): (Nat) -> List(Nat)
-check! my_list_cons(returned Nat)(123): List(Nat)
+check! my_list_cons(returned Nat, 123, nil): List(Nat)
+check! my_list_cons(returned Nat): (Nat, List(Nat)) -> List(Nat)
+check! my_list_cons(returned Nat)(123, nil): List(Nat)
 
-// check! my_list_cons(123): List(Nat)
+check! my_list_cons(123, nil): List(Nat)
+check! my_list_cons("a", nil): List(String)
+check! my_list_cons("a", my_list_cons("b", nil)): List(String)
+check! my_list_cons("a", my_list_cons("b", my_list_cons("c", nil))): List(String)
 ```

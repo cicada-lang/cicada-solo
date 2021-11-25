@@ -1,12 +1,14 @@
 # returned-pi
 
-- `ReturnedInserter.check_arg_entries`
-
-- `datatype/either.md` test `returned-fn` -- by `list_ref_returned`
-
 - `returned-[pi|fn|ap]` -- syntax test
 
 - `ReturnedInserter.insert_returned_ap` handle given `returned` arg entry
+
+  - start inserting returned application from the first non-`returned` argument
+
+    - this behavior is the same as the behavior of `implicit`
+
+- `ReturnedInserter.check_arg_entries` handle `implicit` under `returned`
 
 # inductive datatype -- Data
 

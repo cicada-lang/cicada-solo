@@ -21,7 +21,7 @@ export type ArgEntry = {
   arg: Exp
 }
 
-export type ArgEntryCore = {
+export type ArgCoreEntry = {
   kind: "plain" | "implicit" | "returned"
   arg: Core
 }

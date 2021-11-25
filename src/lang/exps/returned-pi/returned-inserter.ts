@@ -51,7 +51,13 @@ export class ReturnedInserter {
       result_core = new Exps.ReturnedApCore(result_core, arg_core)
     }
 
-    for (const arg_entry of this.check_arg_entries(ctx, arg_entries)) {
+    const half_ret_t = this.half_ret_t(ctx, this.ret_t_cl, returned_ap_entries)
+
+    for (const arg_entry of this.check_arg_entries(
+      ctx,
+      half_ret_t,
+      arg_entries
+    )) {
       if (arg_entry.kind === "implicit") {
         result_core = new Exps.ImplicitApCore(result_core, arg_entry.arg)
       } else if (arg_entry.kind === "returned") {
@@ -65,10 +71,10 @@ export class ReturnedInserter {
   }
 
   private finial_ret_t(ctx: Ctx, arg_t: Value, ret_t_cl: Closure): Value {
-    const fresh_name = ctx.freshen(this.ret_t_cl.name)
+    const fresh_name = ctx.freshen(ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
-    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
-    const ret_t = this.ret_t_cl.apply(not_yet_value)
+    const not_yet_value = new Exps.NotYetValue(arg_t, variable)
+    const ret_t = ret_t_cl.apply(not_yet_value)
 
     if (
       ret_t instanceof Exps.ReturnedPiValue ||
@@ -76,6 +82,21 @@ export class ReturnedInserter {
       ret_t instanceof Exps.PiValue
     ) {
       return this.finial_ret_t(ctx, ret_t.arg_t, ret_t.ret_t_cl)
+    } else {
+      return ret_t
+    }
+  }
+
+  private half_ret_t(
+    ctx: Ctx,
+    ret_t_cl: Closure,
+    returned_ap_entries: Array<ReturnedApEntry>
+  ): Value {
+    const [entry, ...rest] = returned_ap_entries
+    const ret_t = ret_t_cl.apply(entry.returned_arg)
+
+    if (ret_t instanceof Exps.ReturnedPiValue) {
+      return this.half_ret_t(ctx, ret_t.ret_t_cl, rest)
     } else {
       return ret_t
     }
@@ -126,8 +147,32 @@ export class ReturnedInserter {
 
   private check_arg_entries(
     ctx: Ctx,
+    pi: Value,
     arg_entries: Array<Exps.ArgEntry>
-  ): Array<Exps.ArgEntryCore> {
-    throw new Error("TODO")
+  ): Array<Exps.ArgCoreEntry> {
+    const arg_core_entries: Array<Exps.ArgCoreEntry> = []
+    for (const arg_entry of arg_entries) {
+      if (pi instanceof Exps.PiValue) {
+        const arg_core = check(ctx, arg_entry.arg, pi.arg_t)
+        arg_core_entries.push({
+          kind: arg_entry.kind,
+          arg: arg_core,
+        })
+        pi = pi.ret_t_cl.apply(evaluate(ctx.to_env(), arg_core))
+      } else if (pi instanceof Exps.ImplicitPiValue) {
+        throw new ExpTrace(`I can not handle implicit under returned yet.`)
+      } else if (pi instanceof Exps.ReturnedPiValue) {
+        throw new ExpTrace(`I expect pi to NOT be Exps.ReturnedPiValue.`)
+      } else {
+        throw new ExpTrace(
+          [
+            `I expect pi to be Exps.PiValue or Exps.ImplicitPiValue`,
+            `  class name: ${pi.constructor.name}`,
+          ].join("\n")
+        )
+      }
+    }
+
+    return arg_core_entries
   }
 }
