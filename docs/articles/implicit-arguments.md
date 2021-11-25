@@ -21,7 +21,9 @@ check! (implicit A, x) => x: (implicit A: Type, A) -> A
 
 ``` cicada
 // Assume
-let id: (implicit A: Type, A) -> A = (implicit A, x) => x
+function id(implicit A: Type, x: A): A {
+  return x
+}
 
 // Infer
 id(123)
