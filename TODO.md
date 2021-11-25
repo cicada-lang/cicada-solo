@@ -1,6 +1,10 @@
 # returned-pi
 
-- `ReturnedInserter.insert_returned_ap`
+- [refactor] rename `MultiAp.entries` to `MultiAp.arg_entries`
+
+- `ReturnedInserter.collect_returned_ap_entries`
+
+- `ReturnedInserter.check_arg_entries`
 
 - `datatype/either.md` test `returned-fn` -- by `list_ref_returned`
 

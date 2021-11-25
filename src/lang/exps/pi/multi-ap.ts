@@ -21,6 +21,11 @@ export type ArgEntry = {
   arg: Exp
 }
 
+export type ArgEntryCore = {
+  kind: "plain" | "implicit" | "returned"
+  arg: Core
+}
+
 export class MultiAp extends Exp {
   meta: ExpMeta
   target: Exp
@@ -58,7 +63,7 @@ export class MultiAp extends Exp {
 
     if (
       inferred.t instanceof Exps.ReturnedPiValue &&
-        this.entries[0].kind !== "returned"
+      this.entries[0].kind !== "returned"
     ) {
       return inferred.t.returned_inserter.insert_returned_ap(
         ctx,

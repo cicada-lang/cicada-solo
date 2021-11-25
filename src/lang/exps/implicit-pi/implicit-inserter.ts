@@ -47,17 +47,17 @@ export class ImplicitInserter {
     arg: Exp
   ): { t: Value; core: Core } {
     const inferred_arg = infer(ctx, arg)
-
     const result = this.collect_implicit_ap_entries(ctx, inferred_arg.t, [])
 
+    let result_core = target_core
     for (const entry of result.entries) {
       const arg_core = readback(ctx, entry.arg_t, entry.implicit_arg)
-      target_core = new Exps.ImplicitApCore(target_core, arg_core)
+      result_core = new Exps.ImplicitApCore(result_core, arg_core)
     }
 
     return {
       t: result.ret_t_cl.apply(evaluate(ctx.to_env(), inferred_arg.core)),
-      core: new Exps.ApCore(target_core, inferred_arg.core),
+      core: new Exps.ApCore(result_core, inferred_arg.core),
     }
   }
 
