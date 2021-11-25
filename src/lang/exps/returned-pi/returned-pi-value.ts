@@ -14,11 +14,13 @@ import { ReturnedInserter } from "./returned-inserter"
 export class ReturnedPiValue extends Value implements ReadbackEtaExpansion {
   arg_t: Value
   ret_t_cl: Closure
+  returned_inserter: ReturnedInserter
 
   constructor(arg_t: Value, ret_t_cl: Closure) {
     super()
     this.arg_t = arg_t
     this.ret_t_cl = ret_t_cl
+    this.returned_inserter = new ReturnedInserter(arg_t, ret_t_cl)
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
