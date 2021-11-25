@@ -53,6 +53,30 @@ export abstract class ImplicitInserter {
 
   abstract solve_implicit_ap(ctx: Ctx, inferred_arg_t: Value): Solution
 
+  next_ret_t(
+    ctx: Ctx,
+    inferred_arg_t: Value
+  ): Exps.PiValue | Exps.ImplicitPiValue {
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
+    const ret_t = this.ret_t_cl.apply(not_yet_value)
+
+    if (
+      !(ret_t instanceof Exps.PiValue || ret_t instanceof Exps.ImplicitPiValue)
+    ) {
+      throw new ExpTrace(
+        [
+          `During application insertion`,
+          `I expect the return type to be Exps.PiValue or Exps.ImplicitPiValue`,
+          `  class name: ${ret_t.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    return ret_t
+  }
+
   insert_implicit_fn(ctx: Ctx, exp: Exp): Core {
     const fresh_name = ut.freshen(
       exp.free_names(new Set()),

@@ -1,4 +1,3 @@
-- [refactor] `solve_implicit_ap` -- extract common function to abstract class
 - [refactor] merge `collect_implicit_ap_entries` from sub class to parent class
 - [refactor] merge `solve_implicit_ap` from sub class to parent class
 - [refactor] make `ImplicitInserter` concrete class
