@@ -15,13 +15,27 @@ export interface ImplicitApEntry {
   implicit_arg: Value
 }
 
-export abstract class ImplicitInserter {
+export class ImplicitInserter {
   arg_t: Value
   ret_t_cl: Closure
 
   constructor(arg_t: Value, ret_t_cl: Closure) {
     this.arg_t = arg_t
     this.ret_t_cl = ret_t_cl
+  }
+
+  insert_implicit_fn(ctx: Ctx, exp: Exp): Core {
+    const fresh_name = ut.freshen(
+      exp.free_names(new Set()),
+      ctx.freshen(this.ret_t_cl.name)
+    )
+    const variable = new Exps.VarNeutral(fresh_name)
+    const arg = new Exps.NotYetValue(this.arg_t, variable)
+    const ret_t = this.ret_t_cl.apply(arg)
+    // NOTE We do not need to subst `exp` for the `fresh_name`,
+    //   because inserted `fresh_name` must not occur in `exp`.
+    const core = check(ctx.extend(fresh_name, this.arg_t), exp, ret_t)
+    return new Exps.ImplicitFnCore(fresh_name, core)
   }
 
   collect_implicit_ap_entries(
@@ -54,7 +68,7 @@ export abstract class ImplicitInserter {
     }
   }
 
-  implicit_ap_entry(ctx: Ctx, inferred_arg_t: Value): ImplicitApEntry {
+  private implicit_ap_entry(ctx: Ctx, inferred_arg_t: Value): ImplicitApEntry {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
@@ -73,7 +87,7 @@ export abstract class ImplicitInserter {
     return { arg_t: this.arg_t, implicit_arg }
   }
 
-  solve_implicit_ap(ctx: Ctx, inferred_arg_t: Value): Solution {
+  private solve_implicit_ap(ctx: Ctx, inferred_arg_t: Value): Solution {
     const ret_t = this.next_ret_t(ctx, inferred_arg_t)
 
     if (ret_t instanceof Exps.ImplicitPiValue) {
@@ -88,7 +102,7 @@ export abstract class ImplicitInserter {
     }
   }
 
-  next_ret_t(
+  private next_ret_t(
     ctx: Ctx,
     inferred_arg_t: Value
   ): Exps.PiValue | Exps.ImplicitPiValue {
@@ -110,19 +124,5 @@ export abstract class ImplicitInserter {
     }
 
     return ret_t
-  }
-
-  insert_implicit_fn(ctx: Ctx, exp: Exp): Core {
-    const fresh_name = ut.freshen(
-      exp.free_names(new Set()),
-      ctx.freshen(this.ret_t_cl.name)
-    )
-    const variable = new Exps.VarNeutral(fresh_name)
-    const arg = new Exps.NotYetValue(this.arg_t, variable)
-    const ret_t = this.ret_t_cl.apply(arg)
-    // NOTE We do not need to subst `exp` for the `fresh_name`,
-    //   because inserted `fresh_name` must not occur in `exp`.
-    const core = check(ctx.extend(fresh_name, this.arg_t), exp, ret_t)
-    return new Exps.ImplicitFnCore(fresh_name, core)
   }
 }

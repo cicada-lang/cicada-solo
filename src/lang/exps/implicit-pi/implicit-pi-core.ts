@@ -7,8 +7,6 @@ import { evaluate } from "../../core"
 import * as Exps from ".."
 import { PiFormater } from "../pi/pi-formater"
 import { ImplicitInserter } from "./implicit-inserter"
-import { LastImplicitInserter } from "./last-implicit-inserter"
-import { MoreImplicitInserter } from "./more-implicit-inserter"
 
 export class ImplicitPiCore extends Core {
   name: string
@@ -25,12 +23,7 @@ export class ImplicitPiCore extends Core {
   evaluate(env: Env): Value {
     const arg_t = evaluate(env, this.arg_t)
     const ret_t_cl = new Closure(env, this.name, this.ret_t)
-
-    const implicit_inserter =
-      this.ret_t instanceof Exps.ImplicitPiCore
-        ? new MoreImplicitInserter(arg_t, ret_t_cl)
-        : new LastImplicitInserter(arg_t, ret_t_cl)
-
+    const implicit_inserter = new ImplicitInserter(arg_t, ret_t_cl)
     return new Exps.ImplicitPiValue(arg_t, ret_t_cl, { implicit_inserter })
   }
 

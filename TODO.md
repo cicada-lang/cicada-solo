@@ -1,4 +1,3 @@
-- [refactor] make `ImplicitInserter` concrete class
 - [refactor] inline `ImplicitInserter` to `ImplicitPiValue`
 
 # returned-pi
