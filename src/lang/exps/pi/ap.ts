@@ -57,8 +57,8 @@ export class Ap extends Exp {
 
       let target_core = inferred.core
       for (const entry of result.entries) {
-        const implicit_arg_core = readback(ctx, entry.arg_t, entry.implicit_arg)
-        target_core = new Exps.ImplicitApCore(target_core, implicit_arg_core)
+        const arg_core = readback(ctx, entry.arg_t, entry.implicit_arg)
+        target_core = new Exps.ImplicitApCore(target_core, arg_core)
       }
 
       return {

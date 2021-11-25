@@ -1,5 +1,7 @@
 # returned-pi
 
+- extract `insert_implicit_ap` -- instead of using `collect_implicit_ap_entries` directly
+
 - `multi-ap` -- check-mode handle `inferred.t instanceof Exps.ReturnedPiValue`
 
 - `datatype/either.md` test `returned-fn` -- by `list_ref_returned`
