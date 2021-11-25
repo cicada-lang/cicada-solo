@@ -110,7 +110,19 @@ export class ReturnedInserter {
   }
 
   private returned_ap_entry(ctx: Ctx, solution: Solution): ReturnedApEntry {
-    throw new Error("TODO")
+    const fresh_name = ctx.freshen(this.ret_t_cl.name)
+    const returned_arg = solution.find(fresh_name)
+    if (returned_arg === undefined) {
+      throw new ExpTrace(
+        [
+          `Fail to find ${fresh_name} in solution`,
+          `  solution names: ${solution.names}`,
+          `  this.arg_t class name: ${this.arg_t.constructor.name}`,
+        ].join("\n")
+      )
+    }
+
+    return { arg_t: this.arg_t, returned_arg }
   }
 
   private check_arg_entries(
