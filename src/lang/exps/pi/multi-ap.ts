@@ -76,19 +76,28 @@ export class MultiAp extends Exp {
     return check_by_infer(ctx, this, t)
   }
 
-  infer(ctx: Ctx): { t: Value; core: Core } {
-    let result: Exp = this.target
-    for (const entry of this.arg_entries) {
-      if (entry.kind === "implicit") {
-        result = new Exps.ImplicitAp(result, entry.arg, this.meta)
-      } else if (entry.kind === "returned") {
-        result = new Exps.ReturnedAp(result, entry.arg, this.meta)
-      } else {
-        result = new Exps.Ap(result, entry.arg, this.meta)
+  private wrap_arg_entry(target: Exp, arg_entry: ArgEntry): Exp {
+    switch (arg_entry.kind) {
+      case "implicit": {
+        return new Exps.ImplicitAp(target, arg_entry.arg, this.meta)
+      }
+      case "returned": {
+        return new Exps.ReturnedAp(target, arg_entry.arg, this.meta)
+      }
+      case "plain": {
+        return new Exps.Ap(target, arg_entry.arg, this.meta)
       }
     }
+  }
 
-    return infer(ctx, result)
+  infer(ctx: Ctx): { t: Value; core: Core } {
+    return infer(
+      ctx,
+      this.arg_entries.reduce(
+        (result, arg_entry) => this.wrap_arg_entry(result, arg_entry),
+        this.target
+      )
+    )
   }
 
   format(): string {

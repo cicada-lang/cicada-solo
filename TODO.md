@@ -1,9 +1,5 @@
 # returned-pi
 
-- `ImplicitInserter.fresh_name`
-
-- `ReturnedInserter.fresh_name`
-
 - `ReturnedInserter.check_arg_entries`
 
 - `datatype/either.md` test `returned-fn` -- by `list_ref_returned`

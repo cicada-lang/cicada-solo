@@ -32,7 +32,6 @@ export class ReturnedInserter {
     arg_entries: Array<Exps.ArgEntry>,
     t: Value
   ): Core {
-    const finial_ret_t = this.finial_ret_t(ctx, this.arg_t, this.ret_t_cl)
     const solution = Solution.empty.unify_or_fail(
       ctx,
       new Exps.TypeValue(),
