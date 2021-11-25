@@ -29,19 +29,19 @@ export type ArgEntryCore = {
 export class MultiAp extends Exp {
   meta: ExpMeta
   target: Exp
-  entries: Array<ArgEntry>
+  arg_entries: Array<ArgEntry>
 
-  constructor(target: Exp, entries: Array<ArgEntry>, meta: ExpMeta) {
+  constructor(target: Exp, arg_entries: Array<ArgEntry>, meta: ExpMeta) {
     super()
     this.meta = meta
     this.target = target
-    this.entries = entries
+    this.arg_entries = arg_entries
   }
 
   free_names(bound_names: Set<string>): Set<string> {
     return new Set([
       ...this.target.free_names(bound_names),
-      ...this.entries.flatMap((entry) =>
+      ...this.arg_entries.flatMap((entry) =>
         Array.from(entry.arg.free_names(bound_names))
       ),
     ])
@@ -50,7 +50,7 @@ export class MultiAp extends Exp {
   subst(name: string, exp: Exp): MultiAp {
     return new MultiAp(
       subst(this.target, name, exp),
-      this.entries.map((entry) => ({
+      this.arg_entries.map((entry) => ({
         ...entry,
         arg: subst(entry.arg, name, exp),
       })),
@@ -63,12 +63,12 @@ export class MultiAp extends Exp {
 
     if (
       inferred.t instanceof Exps.ReturnedPiValue &&
-      this.entries[0].kind !== "returned"
+      this.arg_entries[0].kind !== "returned"
     ) {
       return inferred.t.returned_inserter.insert_returned_ap(
         ctx,
         inferred.core,
-        this.entries,
+        this.arg_entries,
         t
       )
     }
@@ -78,7 +78,7 @@ export class MultiAp extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     let result: Exp = this.target
-    for (const entry of this.entries) {
+    for (const entry of this.arg_entries) {
       if (entry.kind === "implicit") {
         result = new Exps.ImplicitAp(result, entry.arg, this.meta)
       } else if (entry.kind === "returned") {
@@ -93,7 +93,7 @@ export class MultiAp extends Exp {
 
   format(): string {
     const target = this.target.format()
-    const entries = this.entries
+    const entries = this.arg_entries
       .map((entry) => {
         switch (entry.kind) {
           case "plain":

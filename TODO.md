@@ -1,7 +1,5 @@
 # returned-pi
 
-- [refactor] rename `MultiAp.entries` to `MultiAp.arg_entries`
-
 - `ReturnedInserter.collect_returned_ap_entries`
 
 - `ReturnedInserter.check_arg_entries`

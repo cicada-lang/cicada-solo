@@ -29,7 +29,7 @@ export class ReturnedInserter {
   insert_returned_ap(
     ctx: Ctx,
     target_core: Core,
-    entries: Array<Exps.ArgEntry>,
+    arg_entries: Array<Exps.ArgEntry>,
     t: Value
   ): Core {
     let result_core = target_core
@@ -38,13 +38,13 @@ export class ReturnedInserter {
       result_core = new Exps.ReturnedApCore(result_core, arg_core)
     }
 
-    for (const entry of this.check_arg_entries(ctx, entries)) {
-      if (entry.kind === "implicit") {
-        result_core = new Exps.ImplicitApCore(result_core, entry.arg)
-      } else if (entry.kind === "returned") {
-        result_core = new Exps.ReturnedApCore(result_core, entry.arg)
+    for (const arg_entry of this.check_arg_entries(ctx, arg_entries)) {
+      if (arg_entry.kind === "implicit") {
+        result_core = new Exps.ImplicitApCore(result_core, arg_entry.arg)
+      } else if (arg_entry.kind === "returned") {
+        result_core = new Exps.ReturnedApCore(result_core, arg_entry.arg)
       } else {
-        result_core = new Exps.ApCore(result_core, entry.arg)
+        result_core = new Exps.ApCore(result_core, arg_entry.arg)
       }
     }
 
@@ -61,7 +61,7 @@ export class ReturnedInserter {
 
   private check_arg_entries(
     ctx: Ctx,
-    entries: Array<Exps.ArgEntry>
+    arg_entries: Array<Exps.ArgEntry>
   ): Array<Exps.ArgEntryCore> {
     throw new Error("TODO")
   }
