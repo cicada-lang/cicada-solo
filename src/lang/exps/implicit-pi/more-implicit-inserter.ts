@@ -20,13 +20,13 @@ export class MoreImplicitInserter extends ImplicitInserter {
     this.ret_t_cl = ret_t_cl
   }
 
-  solve_implicit_ap(ctx: Ctx, inferred_arg_t: Value): Solution {
-    const ret_t = expect(
-      ctx,
-      this.next_ret_t(ctx, inferred_arg_t),
-      Exps.ImplicitPiValue
-    )
+  // solve_implicit_ap(ctx: Ctx, inferred_arg_t: Value): Solution {
+  //   const ret_t = expect(
+  //     ctx,
+  //     this.next_ret_t(ctx, inferred_arg_t),
+  //     Exps.ImplicitPiValue
+  //   )
 
-    return ret_t.implicit_inserter.solve_implicit_ap(ctx, inferred_arg_t)
-  }
+  //   return ret_t.implicit_inserter.solve_implicit_ap(ctx, inferred_arg_t)
+  // }
 }

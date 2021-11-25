@@ -32,17 +32,17 @@ export abstract class ImplicitInserter {
     const entry = this.implicit_ap_entry(ctx, inferred_arg_t)
     const ret_t = this.ret_t_cl.apply(entry.implicit_arg)
 
-    if (ret_t instanceof Exps.PiValue) {
-      return {
-        entries: [...entries, entry],
-        ret_t_cl: ret_t.ret_t_cl,
-      }
-    } else if (ret_t instanceof Exps.ImplicitPiValue) {
+    if (ret_t instanceof Exps.ImplicitPiValue) {
       return ret_t.implicit_inserter.collect_implicit_ap_entries(
         ctx,
         inferred_arg_t,
         [...entries, entry]
       )
+    } else if (ret_t instanceof Exps.PiValue) {
+      return {
+        entries: [...entries, entry],
+        ret_t_cl: ret_t.ret_t_cl,
+      }
     } else {
       throw new ExpTrace(
         [
@@ -59,9 +59,7 @@ export abstract class ImplicitInserter {
     const variable = new Exps.VarNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const solution = this.solve_implicit_ap(ctx, inferred_arg_t)
-
     const implicit_arg = solution.find(fresh_name)
-
     if (implicit_arg === undefined) {
       throw new ExpTrace(
         [
@@ -75,7 +73,20 @@ export abstract class ImplicitInserter {
     return { arg_t: this.arg_t, implicit_arg }
   }
 
-  abstract solve_implicit_ap(ctx: Ctx, inferred_arg_t: Value): Solution
+  solve_implicit_ap(ctx: Ctx, inferred_arg_t: Value): Solution {
+    const ret_t = this.next_ret_t(ctx, inferred_arg_t)
+
+    if (ret_t instanceof Exps.ImplicitPiValue) {
+      return ret_t.implicit_inserter.solve_implicit_ap(ctx, inferred_arg_t)
+    } else {
+      return Solution.empty.unify_or_fail(
+        ctx,
+        new Exps.TypeValue(),
+        ret_t.arg_t,
+        inferred_arg_t
+      )
+    }
+  }
 
   next_ret_t(
     ctx: Ctx,

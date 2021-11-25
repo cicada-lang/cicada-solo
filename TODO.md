@@ -1,4 +1,3 @@
-- [refactor] merge `solve_implicit_ap` from sub class to parent class
 - [refactor] make `ImplicitInserter` concrete class
 - [refactor] inline `ImplicitInserter` to `ImplicitPiValue`
 

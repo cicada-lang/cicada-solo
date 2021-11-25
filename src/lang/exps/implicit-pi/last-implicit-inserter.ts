@@ -23,16 +23,16 @@ export class LastImplicitInserter extends ImplicitInserter {
     this.ret_t_cl = ret_t_cl
   }
 
-  solve_implicit_ap(ctx: Ctx, inferred_arg_t: Value): Solution {
-    const ret_t = this.next_ret_t(ctx, inferred_arg_t)
+  // solve_implicit_ap(ctx: Ctx, inferred_arg_t: Value): Solution {
+  //   const ret_t = this.next_ret_t(ctx, inferred_arg_t)
 
-    const solution = Solution.empty.unify_or_fail(
-      ctx,
-      new Exps.TypeValue(),
-      ret_t.arg_t,
-      inferred_arg_t
-    )
+  //   const solution = Solution.empty.unify_or_fail(
+  //     ctx,
+  //     new Exps.TypeValue(),
+  //     ret_t.arg_t,
+  //     inferred_arg_t
+  //   )
 
-    return solution
-  }
+  //   return solution
+  // }
 }
