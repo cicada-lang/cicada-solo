@@ -1,5 +1,9 @@
 # returned-pi
 
+- `ReturnedPiValue` has `returned_inserter: ReturnedInserter`
+
+- `ReturnedInserter.insert_returned_ap`
+
 - `multi-ap` -- check-mode handle `inferred.t instanceof Exps.ReturnedPiValue`
 
 - `datatype/either.md` test `returned-fn` -- by `list_ref_returned`

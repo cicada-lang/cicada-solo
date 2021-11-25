@@ -16,15 +16,11 @@ export class ImplicitPiValue extends Value implements ReadbackEtaExpansion {
   ret_t_cl: Closure
   implicit_inserter: ImplicitInserter
 
-  constructor(
-    arg_t: Value,
-    ret_t_cl: Closure,
-    opts: { implicit_inserter: ImplicitInserter }
-  ) {
+  constructor(arg_t: Value, ret_t_cl: Closure) {
     super()
     this.arg_t = arg_t
     this.ret_t_cl = ret_t_cl
-    this.implicit_inserter = opts.implicit_inserter
+    this.implicit_inserter = new ImplicitInserter(arg_t, ret_t_cl)
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {

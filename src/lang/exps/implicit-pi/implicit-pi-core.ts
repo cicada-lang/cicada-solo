@@ -6,7 +6,6 @@ import { Closure } from "../closure"
 import { evaluate } from "../../core"
 import * as Exps from ".."
 import { PiFormater } from "../pi/pi-formater"
-import { ImplicitInserter } from "./implicit-inserter"
 
 export class ImplicitPiCore extends Core {
   name: string
@@ -23,8 +22,7 @@ export class ImplicitPiCore extends Core {
   evaluate(env: Env): Value {
     const arg_t = evaluate(env, this.arg_t)
     const ret_t_cl = new Closure(env, this.name, this.ret_t)
-    const implicit_inserter = new ImplicitInserter(arg_t, ret_t_cl)
-    return new Exps.ImplicitPiValue(arg_t, ret_t_cl, { implicit_inserter })
+    return new Exps.ImplicitPiValue(arg_t, ret_t_cl)
   }
 
   pi_formater: PiFormater = new PiFormater(this, {

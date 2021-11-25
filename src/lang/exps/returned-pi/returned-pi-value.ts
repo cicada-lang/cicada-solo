@@ -9,6 +9,7 @@ import { ExpTrace } from "../../errors"
 import * as ut from "../../../ut"
 import * as Exps from ".."
 import { ReadbackEtaExpansion } from "../../value"
+import { ReturnedInserter } from "./returned-inserter"
 
 export class ReturnedPiValue extends Value implements ReadbackEtaExpansion {
   arg_t: Value
