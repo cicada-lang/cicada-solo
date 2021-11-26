@@ -41,4 +41,8 @@ check! my_list_null_pair(returned Nat, returned String): Pair(List(Nat), List(St
 // NOTE zero-arity and nested returned application
 check! my_list_null_pair: Pair(List(Nat), List(String))
 check! my_list_null_pair: Pair(List(String), List(Nat))
+
+// TODO start inserting returned application from the first non-`returned` argument
+// - this behavior is the same as the behavior of `implicit`
+// check! my_list_null_pair(returned String): Pair(List(String), List(Nat))
 ```
