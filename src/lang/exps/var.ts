@@ -1,6 +1,9 @@
 import { Exp, ExpMeta, ElaborationOptions, subst } from "../exp"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
+import { infer } from "../exp"
+import { check } from "../exp"
+import { check_by_infer } from "../exp"
 import { Value } from "../value"
 import { readback } from "../value"
 import { ExpTrace } from "../errors"
@@ -31,6 +34,21 @@ export class Var extends Exp {
     } else {
       return this
     }
+  }
+
+  check(ctx: Ctx, t: Value): Core {
+    const found_t = ctx.find_type(this.name)
+
+    if (found_t instanceof Exps.ReturnedPiValue) {
+      return found_t.returned_inserter.insert_returned_ap(
+        ctx,
+        new Exps.VarCore(this.name),
+        [],
+        t
+      )
+    }
+
+    return check_by_infer(ctx, this, t)
   }
 
   infer(ctx: Ctx, opts: ElaborationOptions): { t: Value; core: Core } {

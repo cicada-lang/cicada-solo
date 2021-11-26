@@ -8,8 +8,6 @@
 
 - `ReturnedInserter.check_arg_entries` handle `implicit` under `returned`
 
-- `returned-pi` test nested `returned`
-
 # inductive datatype -- Data
 
 - unify the syntax of data construction and function application

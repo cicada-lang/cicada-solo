@@ -7,8 +7,9 @@ function my_list_null(returned A: Type): List(A) {
 
 check! my_list_null(returned Nat): List(Nat)
 
-// TODO zero-arity returned application
-// check! my_list_null: List(Nat)
+// NOTE zero-arity returned application
+check! my_list_null: List(Nat)
+check! my_list_null: List(String)
 ```
 
 # my_list_cons
@@ -36,6 +37,8 @@ function my_list_null_pair(returned A: Type, returned B: Type): Pair(List(A), Li
 }
 
 check! my_list_null_pair(returned Nat, returned String): Pair(List(Nat), List(String))
-// TODO zero-arity and nested returned application
-// check! my_list_null_pair: Pair(List(Nat), List(String))
+
+// NOTE zero-arity and nested returned application
+check! my_list_null_pair: Pair(List(Nat), List(String))
+check! my_list_null_pair: Pair(List(String), List(Nat))
 ```

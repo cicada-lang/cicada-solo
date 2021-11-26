@@ -1,0 +1,13 @@
+nil: List(Nat)
+nil: List(Nat)
+nil: List(String)
+li(123, nil): List(Nat)
+(head, tail) => li(head, tail): (_: Nat, _1: List(Nat)) -> List(Nat)
+li(123, nil): List(Nat)
+li(123, nil): List(Nat)
+li("a", nil): List(String)
+li("a", li("b", nil)): List(String)
+li("a", li("b", li("c", nil))): List(String)
+[nil | nil]: [_: List(Nat) | List(String)]
+[nil | nil]: [_: List(Nat) | List(String)]
+[nil | nil]: [_: List(String) | List(Nat)]

@@ -116,16 +116,8 @@ export class ReturnedInserter {
         solution,
         [...entries, entry]
       )
-    } else if (ret_t instanceof Exps.PiValue) {
-      return [...entries, entry]
     } else {
-      throw new ExpTrace(
-        [
-          `During application insertion`,
-          `I expect the return type to be Exps.PiValue or Exps.ReturnedPiValue`,
-          `  class name: ${ret_t.constructor.name}`,
-        ].join("\n")
-      )
+      return [...entries, entry]
     }
   }
 
