@@ -8,7 +8,7 @@ author: Xie Yuheng
 ``` cicada
 check! (x) => x: (implicit A: Type, A) -> A
 
-// Elaborate to:
+// Elaboration
 check! (implicit A, x) => x: (implicit A: Type, A) -> A
 ```
 
@@ -28,20 +28,20 @@ function id(implicit A: Type, x: A): A {
 // Infer
 id(123)
 
-// Elaborate to:
+// Elaboration
 id(implicit Nat, 123)
 ```
 
 1. Infer `(implicit A: Type, A) -> A` for `id`
 2. The implicit `A` will be viewed as a pattern variable
 3. Under the implicit pi, is the pi type `(A) -> A`
-3. Infer `Nat` for `123`
-4. Unify `Nat` with `A` (the pi type's argument type)
+4. Infer `Nat` for `123`
+5. Unify `Nat` with `A` (the pi type's argument type)
 6. Return elaborated core expression by reifying `id(implicit A, 123)` to `id(implicit Nat, 123)`
 7. Return elaborated type by reifying `(A) -> A` to `(Nat) -> Nat`
    - We can do this by applying the closure to the solution of `A`
 
-# What can go wrong
+## What can go wrong
 
 ``` cicada counterexample
 let poly: Maybe((implicit A: Type, A) -> A) =
@@ -56,34 +56,39 @@ let poly: Maybe((implicit A: Type, A) -> A) =
 3. Infer `Maybe((b) -> b)` for `just((x) => x)`
 4. Fail to unify with `Maybe((implicit A: Type, A) -> A)`
 
-# Look back
+# Implicit application insertion in *check-mode*
 
-When we want to make something implicit, we use unification.
+We should distinguish between *check-mode* and *infer-mode* implicit arguments.
 
-Examples:
-- global type inference
-- implicit function type
-
-# We should distinguish between check-mode and infer-mode implicit arguments
-
-We also need to support check-mode implicit arguments,
-where we can resolve implicit arguments from (and only from) return type.
+For check-mode implicit arguments,
+we can implicit arguments from (and only from) return type.
 
 We mark a pi type by the `returned` keyword
 to denote it can only be elaborated in check-mode,
 and such function application can not be curried.
 
 ``` cicada
+// Assume
 function my_list_cons(returned A: Type, head: A, tail: List(A)): List(A) {
   return li(head, tail)
 }
 
-check! my_list_cons(returned Nat, 123, nil): List(Nat)
-check! my_list_cons(returned Nat): (Nat, List(Nat)) -> List(Nat)
-check! my_list_cons(returned Nat)(123, nil): List(Nat)
-
+// Check
 check! my_list_cons(123, nil): List(Nat)
-check! my_list_cons("a", nil): List(String)
-check! my_list_cons("a", my_list_cons("b", nil)): List(String)
-check! my_list_cons("a", my_list_cons("b", my_list_cons("c", nil))): List(String)
+
+// Elaboration
+check! my_list_cons(returned Nat, 123, nil): List(Nat)
 ```
+
+1. Infer `(returned A: Type, head: A, tail: List(A)) -> List(A)` for `my_list_cons`
+2. Unify the given type `List(Nat)` with `List(A)` (the pi type's return type)
+3. The solution of `A` is `Nat`
+4. Return elaborated core expression by reifying `my_list_cons(123, nil)` to `my_list_cons(returned Nat, 123, nil)`
+
+# Looking back
+
+When we want to make something implicit, we use unification.
+
+Examples:
+- global type inference
+- implicit function type

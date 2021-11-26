@@ -1,8 +1,5 @@
 # returned-pi
 
-- `returned-pi` move example in `implicit-arguments.md` to `returned-pi`'s test
-- `returned-pi` test nested `returned`
-
 - `ReturnedInserter.insert_returned_ap` handle given `returned` arg entry
 
   - start inserting returned application from the first non-`returned` argument
@@ -10,6 +7,8 @@
     - this behavior is the same as the behavior of `implicit`
 
 - `ReturnedInserter.check_arg_entries` handle `implicit` under `returned`
+
+- `returned-pi` test nested `returned`
 
 # inductive datatype -- Data
 
