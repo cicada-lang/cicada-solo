@@ -1,7 +1,5 @@
 # returned-pi
 
-- `returned-[pi|fn|ap]` -- syntax test
-
 - `returned-pi` move example in `implicit-arguments.md` to `returned-pi`'s test
 - `returned-pi` test nested `returned`
 
