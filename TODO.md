@@ -1,5 +1,3 @@
-- [refactor] `ReturnedInserter` -- extract `check_arg_entry` from `check_arg_entries`
-
 # inductive datatype -- Data
 
 - `data-ctor-value`

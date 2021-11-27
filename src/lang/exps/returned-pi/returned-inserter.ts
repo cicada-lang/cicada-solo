@@ -179,58 +179,65 @@ function wrap_arg_core_entry(
 
 function check_arg_entries(
   ctx: Ctx,
-  pi: Value,
+  t: Value,
   arg_entries: Array<Exps.ArgEntry>
 ): Array<Exps.ArgCoreEntry> {
   const arg_core_entries: Array<Exps.ArgCoreEntry> = []
   for (const arg_entry of arg_entries) {
-    if (
-      pi instanceof Exps.PiValue ||
-      (pi instanceof Exps.ImplicitPiValue && arg_entry.kind === "implicit")
-    ) {
-      const arg_core = check(ctx, arg_entry.arg, pi.arg_t)
-      const arg_value = evaluate(ctx.to_env(), arg_core)
-      arg_core_entries.push({
-        kind: arg_entry.kind,
-        arg: arg_core,
-      })
-      pi = pi.ret_t_cl.apply(arg_value)
-    } else if (pi instanceof Exps.ImplicitPiValue) {
-      const inferred_arg = infer(ctx, arg_entry.arg)
-      const arg_core = inferred_arg.core
-      const arg_value = evaluate(ctx.to_env(), arg_core)
-      const { entries, ret_t_cl } =
-        pi.implicit_inserter.collect_implicit_ap_entries(
-          ctx,
-          inferred_arg.t,
-          []
-        )
-      for (const implicit_ap_entry of entries) {
-        arg_core_entries.push({
-          kind: "implicit",
+    const result = check_arg_entry(ctx, t, arg_entry)
+    arg_core_entries.push(...result.arg_core_entries)
+    t = result.t
+  }
+
+  return arg_core_entries
+}
+
+function check_arg_entry(
+  ctx: Ctx,
+  t: Value,
+  arg_entry: Exps.ArgEntry
+): { arg_core_entries: Array<Exps.ArgCoreEntry>; t: Value } {
+  if (
+    t instanceof Exps.PiValue ||
+    (t instanceof Exps.ImplicitPiValue && arg_entry.kind === "implicit")
+  ) {
+    const arg_core = check(ctx, arg_entry.arg, t.arg_t)
+    const arg_value = evaluate(ctx.to_env(), arg_core)
+    return {
+      arg_core_entries: [{ kind: arg_entry.kind, arg: arg_core }],
+      t: t.ret_t_cl.apply(arg_value),
+    }
+  } else if (t instanceof Exps.ImplicitPiValue) {
+    const inferred_arg = infer(ctx, arg_entry.arg)
+    const arg_core = inferred_arg.core
+    const arg_value = evaluate(ctx.to_env(), arg_core)
+    const result = t.implicit_inserter.collect_implicit_ap_entries(
+      ctx,
+      inferred_arg.t,
+      []
+    )
+    return {
+      arg_core_entries: [
+        ...result.entries.map((implicit_ap_entry) => ({
+          kind: "implicit" as const,
           arg: readback(
             ctx,
             implicit_ap_entry.arg_t,
             implicit_ap_entry.implicit_arg
           ),
-        })
-      }
-      arg_core_entries.push({
-        kind: arg_entry.kind,
-        arg: arg_core,
-      })
-      pi = ret_t_cl.apply(arg_value)
-    } else {
-      throw new ExpTrace(
-        [
-          `I expect pi to be Exps.PiValue or Exps.ImplicitPiValue`,
-          `  class name: ${pi.constructor.name}`,
-          `  arg_entry.kind: ${arg_entry.kind}`,
-          `  arg_entry.arg: ${arg_entry.arg.format()}`,
-        ].join("\n")
-      )
+        })),
+        { kind: arg_entry.kind, arg: arg_core },
+      ],
+      t: result.ret_t_cl.apply(arg_value),
     }
+  } else {
+    throw new ExpTrace(
+      [
+        `I expect pi to be Exps.PiValue or Exps.ImplicitPiValue`,
+        `  class name: ${t.constructor.name}`,
+        `  arg_entry.kind: ${arg_entry.kind}`,
+        `  arg_entry.arg: ${arg_entry.arg.format()}`,
+      ].join("\n")
+    )
   }
-
-  return arg_core_entries
 }
