@@ -61,7 +61,7 @@ export class ImplicitInserter {
     }
   }
 
-  private collect_implicit_ap_entries(
+  collect_implicit_ap_entries(
     ctx: Ctx,
     inferred_arg_t: Value,
     entries: Array<ImplicitApEntry>

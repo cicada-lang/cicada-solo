@@ -67,10 +67,9 @@ function my_list_null_and_typeof_pair(
   return cons(nil, T)
 }
 
+check! my_list_null_and_typeof_pair(123): Pair(List(String), Type)
+check! my_list_null_and_typeof_pair(implicit Nat, 123): Pair(List(String), Type)
 
-// check! my_list_null_and_typeof_pair(123): Pair(List(String), Type)
-// check! my_list_null_and_typeof_pair(implicit Nat, 123): Pair(List(String), Type)
-
-// check! my_list_null_and_typeof_pair("abc"): Pair(List(String), Type)
-// check! my_list_null_and_typeof_pair(implicit String, "abc"): Pair(List(String), Type)
+check! my_list_null_and_typeof_pair("abc"): Pair(List(String), Type)
+check! my_list_null_and_typeof_pair(implicit String, "abc"): Pair(List(String), Type)
 ```

@@ -1,6 +1,7 @@
 import { Ctx } from "../../ctx"
 import { Exp } from "../../exp"
 import { check } from "../../exp"
+import { infer } from "../../exp"
 import { subst } from "../../exp"
 import { Core } from "../../core"
 import { evaluate } from "../../core"
@@ -116,22 +117,49 @@ export class ReturnedInserter {
   ): Array<Exps.ArgCoreEntry> {
     const arg_core_entries: Array<Exps.ArgCoreEntry> = []
     for (const arg_entry of arg_entries) {
-      if (pi instanceof Exps.PiValue) {
+      if (
+        pi instanceof Exps.PiValue ||
+        (pi instanceof Exps.ImplicitPiValue && arg_entry.kind === "implicit")
+      ) {
         const arg_core = check(ctx, arg_entry.arg, pi.arg_t)
+        const arg_value = evaluate(ctx.to_env(), arg_core)
         arg_core_entries.push({
           kind: arg_entry.kind,
           arg: arg_core,
         })
-        pi = pi.ret_t_cl.apply(evaluate(ctx.to_env(), arg_core))
+        pi = pi.ret_t_cl.apply(arg_value)
       } else if (pi instanceof Exps.ImplicitPiValue) {
-        throw new ExpTrace(`I can not handle implicit under returned yet.`)
-      } else if (pi instanceof Exps.ReturnedPiValue) {
-        throw new ExpTrace(`I expect pi to NOT be Exps.ReturnedPiValue.`)
+        const inferred_arg = infer(ctx, arg_entry.arg)
+        const arg_core = inferred_arg.core
+        const arg_value = evaluate(ctx.to_env(), arg_core)
+        const { entries, ret_t_cl } =
+          pi.implicit_inserter.collect_implicit_ap_entries(
+            ctx,
+            inferred_arg.t,
+            []
+          )
+        for (const implicit_ap_entry of entries) {
+          arg_core_entries.push({
+            kind: "implicit",
+            arg: readback(
+              ctx,
+              implicit_ap_entry.arg_t,
+              implicit_ap_entry.implicit_arg
+            ),
+          })
+        }
+        arg_core_entries.push({
+          kind: arg_entry.kind,
+          arg: arg_core,
+        })
+        pi = ret_t_cl.apply(arg_value)
       } else {
         throw new ExpTrace(
           [
             `I expect pi to be Exps.PiValue or Exps.ImplicitPiValue`,
             `  class name: ${pi.constructor.name}`,
+            `  arg_entry.kind: ${arg_entry.kind}`,
+            `  arg_entry.arg: ${arg_entry.arg.format()}`,
           ].join("\n")
         )
       }
