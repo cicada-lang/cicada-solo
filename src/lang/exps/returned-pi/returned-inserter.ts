@@ -32,7 +32,7 @@ export class ReturnedInserter {
     arg_entries: Array<Exps.ArgEntry>,
     t: Value
   ): Core {
-    const solution = ReturnedInserter.unify_ret_t(
+    const solution = unify_ret_t(
       ctx,
       new Exps.ReturnedPiValue(this.arg_t, this.ret_t_cl),
       t
@@ -50,75 +50,17 @@ export class ReturnedInserter {
       result_core = new Exps.ReturnedApCore(result_core, arg_core)
     }
 
-    const half_ret_t = ReturnedInserter.half_ret_t(
-      ctx,
-      this.ret_t_cl,
-      returned_ap_entries
-    )
     const arg_core_entries = this.check_arg_entries(
       ctx,
-      half_ret_t,
+      half_ret_t(ctx, this.ret_t_cl, returned_ap_entries),
       arg_entries
     )
 
     for (const arg_core_entry of arg_core_entries) {
-      result_core = this.wrap_arg_core_entry(result_core, arg_core_entry)
+      result_core = wrap_arg_core_entry(result_core, arg_core_entry)
     }
 
     return result_core
-  }
-
-  private wrap_arg_core_entry(
-    target_core: Core,
-    arg_core_entry: Exps.ArgCoreEntry
-  ): Core {
-    switch (arg_core_entry.kind) {
-      case "implicit": {
-        return new Exps.ImplicitApCore(target_core, arg_core_entry.arg)
-      }
-      case "returned": {
-        return new Exps.ReturnedApCore(target_core, arg_core_entry.arg)
-      }
-      case "plain": {
-        return new Exps.ApCore(target_core, arg_core_entry.arg)
-      }
-    }
-  }
-
-  static unify_ret_t(ctx: Ctx, ret_t: Value, t: Value): Solution {
-    if (
-      ret_t instanceof Exps.ReturnedPiValue ||
-      ret_t instanceof Exps.ImplicitPiValue ||
-      ret_t instanceof Exps.PiValue
-    ) {
-      const solution = Solution.empty.unify(ctx, new Exps.TypeValue(), ret_t, t)
-      if (Solution.failure_p(solution)) {
-        const fresh_name = ctx.freshen(ret_t.ret_t_cl.name)
-        const variable = new Exps.VarNeutral(fresh_name)
-        const not_yet_value = new Exps.NotYetValue(ret_t.arg_t, variable)
-        const next_ret_t = ret_t.ret_t_cl.apply(not_yet_value)
-        return ReturnedInserter.unify_ret_t(ctx, next_ret_t, t)
-      } else {
-        return solution
-      }
-    } else {
-      return Solution.empty.unify_or_fail(ctx, new Exps.TypeValue(), ret_t, t)
-    }
-  }
-
-  static half_ret_t(
-    ctx: Ctx,
-    ret_t_cl: Closure,
-    returned_ap_entries: Array<ReturnedApEntry>
-  ): Value {
-    const [entry, ...rest] = returned_ap_entries
-    const ret_t = ret_t_cl.apply(entry.returned_arg)
-
-    if (ret_t instanceof Exps.ReturnedPiValue) {
-      return ReturnedInserter.half_ret_t(ctx, ret_t.ret_t_cl, rest)
-    } else {
-      return ret_t
-    }
   }
 
   private collect_returned_ap_entries(
@@ -185,5 +127,58 @@ export class ReturnedInserter {
     }
 
     return arg_core_entries
+  }
+}
+
+function unify_ret_t(ctx: Ctx, ret_t: Value, t: Value): Solution {
+  if (
+    ret_t instanceof Exps.ReturnedPiValue ||
+    ret_t instanceof Exps.ImplicitPiValue ||
+    ret_t instanceof Exps.PiValue
+  ) {
+    const solution = Solution.empty.unify(ctx, new Exps.TypeValue(), ret_t, t)
+    if (Solution.failure_p(solution)) {
+      const fresh_name = ctx.freshen(ret_t.ret_t_cl.name)
+      const variable = new Exps.VarNeutral(fresh_name)
+      const not_yet_value = new Exps.NotYetValue(ret_t.arg_t, variable)
+      const next_ret_t = ret_t.ret_t_cl.apply(not_yet_value)
+      return unify_ret_t(ctx, next_ret_t, t)
+    } else {
+      return solution
+    }
+  } else {
+    return Solution.empty.unify_or_fail(ctx, new Exps.TypeValue(), ret_t, t)
+  }
+}
+
+function half_ret_t(
+  ctx: Ctx,
+  ret_t_cl: Closure,
+  returned_ap_entries: Array<ReturnedApEntry>
+): Value {
+  const [entry, ...rest] = returned_ap_entries
+  const ret_t = ret_t_cl.apply(entry.returned_arg)
+
+  if (ret_t instanceof Exps.ReturnedPiValue) {
+    return half_ret_t(ctx, ret_t.ret_t_cl, rest)
+  } else {
+    return ret_t
+  }
+}
+
+function wrap_arg_core_entry(
+  target_core: Core,
+  arg_core_entry: Exps.ArgCoreEntry
+): Core {
+  switch (arg_core_entry.kind) {
+    case "implicit": {
+      return new Exps.ImplicitApCore(target_core, arg_core_entry.arg)
+    }
+    case "returned": {
+      return new Exps.ReturnedApCore(target_core, arg_core_entry.arg)
+    }
+    case "plain": {
+      return new Exps.ApCore(target_core, arg_core_entry.arg)
+    }
   }
 }
