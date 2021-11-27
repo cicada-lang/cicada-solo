@@ -1,10 +1,6 @@
 # returned-pi
 
-- `ReturnedInserter.insert_returned_ap` handle given `returned` arg entry
-
-  - start inserting returned application from the first non-`returned` argument
-
-    - this behavior is the same as the behavior of `implicit`
+- `ReturnedInserter.insert_returned_ap` handle returned pi as given type
 
 - `ReturnedInserter.check_arg_entries` handle `implicit` under `returned`
 

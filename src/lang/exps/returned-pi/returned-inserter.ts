@@ -32,10 +32,9 @@ export class ReturnedInserter {
     arg_entries: Array<Exps.ArgEntry>,
     t: Value
   ): Core {
-    const solution = Solution.empty.unify_or_fail(
+    const solution = ReturnedInserter.unify_ret_t(
       ctx,
-      new Exps.TypeValue(),
-      this.finial_ret_t(ctx, this.arg_t, this.ret_t_cl),
+      new Exps.ReturnedPiValue(this.arg_t, this.ret_t_cl),
       t
     )
 
@@ -51,7 +50,11 @@ export class ReturnedInserter {
       result_core = new Exps.ReturnedApCore(result_core, arg_core)
     }
 
-    const half_ret_t = this.half_ret_t(ctx, this.ret_t_cl, returned_ap_entries)
+    const half_ret_t = ReturnedInserter.half_ret_t(
+      ctx,
+      this.ret_t_cl,
+      returned_ap_entries
+    )
     const arg_core_entries = this.check_arg_entries(
       ctx,
       half_ret_t,
@@ -82,24 +85,28 @@ export class ReturnedInserter {
     }
   }
 
-  private finial_ret_t(ctx: Ctx, arg_t: Value, ret_t_cl: Closure): Value {
-    const fresh_name = ctx.freshen(ret_t_cl.name)
-    const variable = new Exps.VarNeutral(fresh_name)
-    const not_yet_value = new Exps.NotYetValue(arg_t, variable)
-    const ret_t = ret_t_cl.apply(not_yet_value)
-
+  static unify_ret_t(ctx: Ctx, ret_t: Value, t: Value): Solution {
     if (
       ret_t instanceof Exps.ReturnedPiValue ||
       ret_t instanceof Exps.ImplicitPiValue ||
       ret_t instanceof Exps.PiValue
     ) {
-      return this.finial_ret_t(ctx, ret_t.arg_t, ret_t.ret_t_cl)
+      const solution = Solution.empty.unify(ctx, new Exps.TypeValue(), ret_t, t)
+      if (Solution.failure_p(solution)) {
+        const fresh_name = ctx.freshen(ret_t.ret_t_cl.name)
+        const variable = new Exps.VarNeutral(fresh_name)
+        const not_yet_value = new Exps.NotYetValue(ret_t.arg_t, variable)
+        const next_ret_t = ret_t.ret_t_cl.apply(not_yet_value)
+        return ReturnedInserter.unify_ret_t(ctx, next_ret_t, t)
+      } else {
+        return solution
+      }
     } else {
-      return ret_t
+      return Solution.empty.unify_or_fail(ctx, new Exps.TypeValue(), ret_t, t)
     }
   }
 
-  private half_ret_t(
+  static half_ret_t(
     ctx: Ctx,
     ret_t_cl: Closure,
     returned_ap_entries: Array<ReturnedApEntry>
@@ -108,7 +115,7 @@ export class ReturnedInserter {
     const ret_t = ret_t_cl.apply(entry.returned_arg)
 
     if (ret_t instanceof Exps.ReturnedPiValue) {
-      return this.half_ret_t(ctx, ret_t.ret_t_cl, rest)
+      return ReturnedInserter.half_ret_t(ctx, ret_t.ret_t_cl, rest)
     } else {
       return ret_t
     }
