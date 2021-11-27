@@ -73,3 +73,23 @@ check! my_list_null_and_typeof_pair(implicit Nat, 123): Pair(List(String), Type)
 check! my_list_null_and_typeof_pair("abc"): Pair(List(String), Type)
 check! my_list_null_and_typeof_pair(implicit String, "abc"): Pair(List(String), Type)
 ```
+
+# my_list_cons_and_typeof_pair
+
+``` cicada
+function my_list_cons_and_typeof_pair(
+  returned A: Type,
+  head: A,
+  tail: List(A),
+  implicit T: Type,
+  x: T,
+): Pair(List(A), Type) {
+  return cons(li(head, tail), T)
+}
+
+check! my_list_cons_and_typeof_pair("a", nil, 123): Pair(List(String), Type)
+check! my_list_cons_and_typeof_pair("a", nil, implicit Nat, 123): Pair(List(String), Type)
+
+check! my_list_cons_and_typeof_pair(1, nil, "abc"): Pair(List(Nat), Type)
+check! my_list_cons_and_typeof_pair(1, nil, implicit String, "abc"): Pair(List(Nat), Type)
+```

@@ -65,10 +65,14 @@ export class Ap extends Exp {
       }
     }
 
+    const inferred_t_core = readback(ctx, new Exps.TypeValue(), inferred.t)
+    const inferred_t_format = inferred_t_core.format()
     throw new ExpTrace(
       [
         `I expect the inferred type to be PiValue or ImPiValue`,
         `  class name: ${inferred.t.constructor.name}`,
+        `  application: ${this.format()}`,
+        `  inferred.t: ${inferred_t_format}`,
       ].join("\n")
     )
   }
