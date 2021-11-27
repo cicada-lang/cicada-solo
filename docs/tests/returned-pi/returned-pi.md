@@ -55,3 +55,22 @@ check! my_list_null_pair: (returned A: Type, returned B: Type) -> Pair(List(A), 
 check! my_list_null_pair(returned String): Pair(List(String), List(Nat))
 check! my_list_null_pair(returned String): (returned B: Type) -> Pair(List(String), List(B))
 ```
+
+# my_list_null_and_typeof_pair
+
+``` cicada
+function my_list_null_and_typeof_pair(
+  returned A: Type,
+  implicit T: Type,
+  x: T,
+): Pair(List(A), Type) {
+  return cons(nil, T)
+}
+
+
+// check! my_list_null_and_typeof_pair(123): Pair(List(String), Type)
+// check! my_list_null_and_typeof_pair(implicit Nat, 123): Pair(List(String), Type)
+
+// check! my_list_null_and_typeof_pair("abc"): Pair(List(String), Type)
+// check! my_list_null_and_typeof_pair(implicit String, "abc"): Pair(List(String), Type)
+```
