@@ -37,6 +37,7 @@ function my_list_null_pair(returned A: Type, returned B: Type): Pair(List(A), Li
 }
 
 check! my_list_null_pair(returned Nat, returned String): Pair(List(Nat), List(String))
+check! my_list_null_pair(returned Nat)(returned String): Pair(List(Nat), List(String))
 
 // NOTE zero-arity and nested returned application
 check! my_list_null_pair: Pair(List(Nat), List(String))
