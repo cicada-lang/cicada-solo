@@ -52,7 +52,7 @@ export class ReturnedInserter {
       result_core = new Exps.ReturnedApCore(result_core, arg_core)
     }
 
-    const arg_core_entries = this.check_arg_entries(
+    const arg_core_entries = check_arg_entries(
       ctx,
       drop_returned_pi(
         ctx,
@@ -69,7 +69,7 @@ export class ReturnedInserter {
     return result_core
   }
 
-  private collect_returned_ap_entries(
+  collect_returned_ap_entries(
     ctx: Ctx,
     solution: Solution,
     number_of_solved_args: number,
@@ -108,64 +108,6 @@ export class ReturnedInserter {
     }
 
     return { arg_t: this.arg_t, returned_arg }
-  }
-
-  private check_arg_entries(
-    ctx: Ctx,
-    pi: Value,
-    arg_entries: Array<Exps.ArgEntry>
-  ): Array<Exps.ArgCoreEntry> {
-    const arg_core_entries: Array<Exps.ArgCoreEntry> = []
-    for (const arg_entry of arg_entries) {
-      if (
-        pi instanceof Exps.PiValue ||
-        (pi instanceof Exps.ImplicitPiValue && arg_entry.kind === "implicit")
-      ) {
-        const arg_core = check(ctx, arg_entry.arg, pi.arg_t)
-        const arg_value = evaluate(ctx.to_env(), arg_core)
-        arg_core_entries.push({
-          kind: arg_entry.kind,
-          arg: arg_core,
-        })
-        pi = pi.ret_t_cl.apply(arg_value)
-      } else if (pi instanceof Exps.ImplicitPiValue) {
-        const inferred_arg = infer(ctx, arg_entry.arg)
-        const arg_core = inferred_arg.core
-        const arg_value = evaluate(ctx.to_env(), arg_core)
-        const { entries, ret_t_cl } =
-          pi.implicit_inserter.collect_implicit_ap_entries(
-            ctx,
-            inferred_arg.t,
-            []
-          )
-        for (const implicit_ap_entry of entries) {
-          arg_core_entries.push({
-            kind: "implicit",
-            arg: readback(
-              ctx,
-              implicit_ap_entry.arg_t,
-              implicit_ap_entry.implicit_arg
-            ),
-          })
-        }
-        arg_core_entries.push({
-          kind: arg_entry.kind,
-          arg: arg_core,
-        })
-        pi = ret_t_cl.apply(arg_value)
-      } else {
-        throw new ExpTrace(
-          [
-            `I expect pi to be Exps.PiValue or Exps.ImplicitPiValue`,
-            `  class name: ${pi.constructor.name}`,
-            `  arg_entry.kind: ${arg_entry.kind}`,
-            `  arg_entry.arg: ${arg_entry.arg.format()}`,
-          ].join("\n")
-        )
-      }
-    }
-
-    return arg_core_entries
   }
 }
 
@@ -233,4 +175,62 @@ function wrap_arg_core_entry(
       return new Exps.ApCore(target_core, arg_core_entry.arg)
     }
   }
+}
+
+function check_arg_entries(
+  ctx: Ctx,
+  pi: Value,
+  arg_entries: Array<Exps.ArgEntry>
+): Array<Exps.ArgCoreEntry> {
+  const arg_core_entries: Array<Exps.ArgCoreEntry> = []
+  for (const arg_entry of arg_entries) {
+    if (
+      pi instanceof Exps.PiValue ||
+      (pi instanceof Exps.ImplicitPiValue && arg_entry.kind === "implicit")
+    ) {
+      const arg_core = check(ctx, arg_entry.arg, pi.arg_t)
+      const arg_value = evaluate(ctx.to_env(), arg_core)
+      arg_core_entries.push({
+        kind: arg_entry.kind,
+        arg: arg_core,
+      })
+      pi = pi.ret_t_cl.apply(arg_value)
+    } else if (pi instanceof Exps.ImplicitPiValue) {
+      const inferred_arg = infer(ctx, arg_entry.arg)
+      const arg_core = inferred_arg.core
+      const arg_value = evaluate(ctx.to_env(), arg_core)
+      const { entries, ret_t_cl } =
+        pi.implicit_inserter.collect_implicit_ap_entries(
+          ctx,
+          inferred_arg.t,
+          []
+        )
+      for (const implicit_ap_entry of entries) {
+        arg_core_entries.push({
+          kind: "implicit",
+          arg: readback(
+            ctx,
+            implicit_ap_entry.arg_t,
+            implicit_ap_entry.implicit_arg
+          ),
+        })
+      }
+      arg_core_entries.push({
+        kind: arg_entry.kind,
+        arg: arg_core,
+      })
+      pi = ret_t_cl.apply(arg_value)
+    } else {
+      throw new ExpTrace(
+        [
+          `I expect pi to be Exps.PiValue or Exps.ImplicitPiValue`,
+          `  class name: ${pi.constructor.name}`,
+          `  arg_entry.kind: ${arg_entry.kind}`,
+          `  arg_entry.arg: ${arg_entry.arg.format()}`,
+        ].join("\n")
+      )
+    }
+  }
+
+  return arg_core_entries
 }

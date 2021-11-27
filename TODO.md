@@ -1,4 +1,4 @@
-- [refactor] `ReturnedInserter.check_arg_entries` -- extract `check_arg_entry`
+- [refactor] `ReturnedInserter` -- extract `check_arg_entry` from `check_arg_entries`
 
 # inductive datatype -- Data
 
