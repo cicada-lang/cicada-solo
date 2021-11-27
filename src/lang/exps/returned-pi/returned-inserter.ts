@@ -52,22 +52,34 @@ export class ReturnedInserter {
     }
 
     const half_ret_t = this.half_ret_t(ctx, this.ret_t_cl, returned_ap_entries)
-
-    for (const arg_entry of this.check_arg_entries(
+    const arg_core_entries = this.check_arg_entries(
       ctx,
       half_ret_t,
       arg_entries
-    )) {
-      if (arg_entry.kind === "implicit") {
-        result_core = new Exps.ImplicitApCore(result_core, arg_entry.arg)
-      } else if (arg_entry.kind === "returned") {
-        result_core = new Exps.ReturnedApCore(result_core, arg_entry.arg)
-      } else {
-        result_core = new Exps.ApCore(result_core, arg_entry.arg)
-      }
+    )
+
+    for (const arg_core_entry of arg_core_entries) {
+      result_core = this.wrap_arg_core_entry(result_core, arg_core_entry)
     }
 
     return result_core
+  }
+
+  private wrap_arg_core_entry(
+    target_core: Core,
+    arg_core_entry: Exps.ArgCoreEntry
+  ): Core {
+    switch (arg_core_entry.kind) {
+      case "implicit": {
+        return new Exps.ImplicitApCore(target_core, arg_core_entry.arg)
+      }
+      case "returned": {
+        return new Exps.ReturnedApCore(target_core, arg_core_entry.arg)
+      }
+      case "plain": {
+        return new Exps.ApCore(target_core, arg_core_entry.arg)
+      }
+    }
   }
 
   private finial_ret_t(ctx: Ctx, arg_t: Value, ret_t_cl: Closure): Value {
