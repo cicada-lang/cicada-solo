@@ -1,20 +1,17 @@
 # inductive datatype -- Data
 
+- `DotHandler` interface
+- `ObjDotHandler` interface
+
 - `data-ctor-value`
 - `data-ctor-value` -- readback to `ApCore`
 
-- `DotHandler` interface
-
 - `TypeCtorDotHandler` interface -- use `<TypeCtor>.<DataCtor>` to get `DataCtorValue`
-
-  - we can inter the type of data constructor now
 
 - unify the syntax of data construction and function application -- remove `<TypeCtor>::<DataCtor>` syntax
 
-- `TypeCtorValue` -- `ctor_bindings` -- `CtorBinding` has `kind: "plain" | "implicit" | "returned"`
-
-  - handle `returned` check-mode only
-  - handle `implicit` infer-mode only
+- `TypeCtorValue` -- `ctor_bindings` -- handle `returned`
+- `TypeCtorValue` -- `ctor_bindings` -- handle `implicit`
 
 - data construction test by `Vector` (with `returned`)
 
