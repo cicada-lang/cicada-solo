@@ -92,7 +92,7 @@ export class ImplicitInserter {
   }
 
   private implicit_ap_entry(ctx: Ctx, inferred_arg_t: Value): ImplicitApEntry {
-    const solution = this.solve_implicit_arg(ctx, inferred_arg_t)
+    const solution = this.solve_implicit_args(ctx, inferred_arg_t)
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
     const implicit_arg = solution.find(fresh_name)
     if (implicit_arg === undefined) {
@@ -108,11 +108,11 @@ export class ImplicitInserter {
     return { arg_t: this.arg_t, implicit_arg }
   }
 
-  private solve_implicit_arg(ctx: Ctx, inferred_arg_t: Value): Solution {
+  private solve_implicit_args(ctx: Ctx, inferred_arg_t: Value): Solution {
     const ret_t = this.implicit_ret_t(ctx, inferred_arg_t)
 
     if (ret_t instanceof Exps.ImplicitPiValue) {
-      return ret_t.implicit_inserter.solve_implicit_arg(ctx, inferred_arg_t)
+      return ret_t.implicit_inserter.solve_implicit_args(ctx, inferred_arg_t)
     } else if (ret_t instanceof Exps.PiValue) {
       return Solution.empty.unify_or_fail(
         ctx,

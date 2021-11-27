@@ -32,7 +32,7 @@ export class ReturnedInserter {
     arg_entries: Array<Exps.ArgEntry>,
     t: Value
   ): Core {
-    const solution = unify_ret_t(
+    const { solution, number_of_solved_args } = solve_returned_args(
       ctx,
       new Exps.ReturnedPiValue(this.arg_t, this.ret_t_cl),
       t
@@ -41,6 +41,7 @@ export class ReturnedInserter {
     const returned_ap_entries = this.collect_returned_ap_entries(
       ctx,
       solution,
+      number_of_solved_args,
       []
     )
 
@@ -70,8 +71,13 @@ export class ReturnedInserter {
   private collect_returned_ap_entries(
     ctx: Ctx,
     solution: Solution,
+    number_of_solved_args: number,
     entries: Array<ReturnedApEntry>
   ): Array<ReturnedApEntry> {
+    if (entries.length === number_of_solved_args) {
+      return entries
+    }
+
     const entry = this.returned_ap_entry(ctx, solution)
     const ret_t = this.ret_t_cl.apply(entry.returned_arg)
 
@@ -79,6 +85,7 @@ export class ReturnedInserter {
       return ret_t.returned_inserter.collect_returned_ap_entries(
         ctx,
         solution,
+        number_of_solved_args,
         [...entries, entry]
       )
     } else {
@@ -134,24 +141,38 @@ export class ReturnedInserter {
   }
 }
 
-function unify_ret_t(ctx: Ctx, ret_t: Value, t: Value): Solution {
+function solve_returned_args(
+  ctx: Ctx,
+  ret_t: Value,
+  t: Value,
+  number_of_solved_args: number = 0
+): { solution: Solution; number_of_solved_args: number } {
   if (
     ret_t instanceof Exps.ReturnedPiValue ||
     ret_t instanceof Exps.ImplicitPiValue ||
     ret_t instanceof Exps.PiValue
   ) {
+    // NOTE if the given type is also a returned pi, we can also handle it,
+    //   because we try each possible case during unification.
     const solution = Solution.empty.unify(ctx, new Exps.TypeValue(), ret_t, t)
     if (Solution.failure_p(solution)) {
       const fresh_name = ctx.freshen(ret_t.ret_t_cl.name)
       const variable = new Exps.VarNeutral(fresh_name)
       const not_yet_value = new Exps.NotYetValue(ret_t.arg_t, variable)
       const next_ret_t = ret_t.ret_t_cl.apply(not_yet_value)
-      return unify_ret_t(ctx, next_ret_t, t)
+      return solve_returned_args(ctx, next_ret_t, t, number_of_solved_args + 1)
     } else {
-      return solution
+      return { solution, number_of_solved_args }
     }
   } else {
-    return Solution.empty.unify_or_fail(ctx, new Exps.TypeValue(), ret_t, t)
+    const solution = Solution.empty.unify_or_fail(
+      ctx,
+      new Exps.TypeValue(),
+      ret_t,
+      t
+    )
+
+    return { solution, number_of_solved_args }
   }
 }
 

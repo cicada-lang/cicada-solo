@@ -47,11 +47,11 @@ check! my_list_null_pair: Pair(List(String), List(Nat))
 // - this behavior is the same as the behavior of `implicit`
 check! my_list_null_pair(returned String): Pair(List(String), List(Nat))
 
-// TODO if the given type is also a returned pi, we can also handle it,
+// NOTE if the given type is also a returned pi, we can also handle it,
 //   because we try each possible case during unification.
 check! my_list_null_pair: Pair(List(Nat), List(String))
-// check! my_list_null_pair: (returned B: Type) -> Pair(List(Nat), List(B))
-// check! my_list_null_pair: (returned A: Type, returned B: Type) -> Pair(List(A), List(B))
+check! my_list_null_pair: (returned B: Type) -> Pair(List(Nat), List(B))
+check! my_list_null_pair: (returned A: Type, returned B: Type) -> Pair(List(A), List(B))
 check! my_list_null_pair(returned String): Pair(List(String), List(Nat))
-// check! my_list_null_pair(returned String): (returned B: Type) -> Pair(List(String), List(B))
+check! my_list_null_pair(returned String): (returned B: Type) -> Pair(List(String), List(B))
 ```

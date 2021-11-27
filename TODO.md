@@ -1,7 +1,5 @@
 # returned-pi
 
-- `ReturnedInserter.insert_returned_ap` handle returned pi as given type
-
 - `ReturnedInserter.check_arg_entries` handle `implicit` under `returned`
 
 # inductive datatype -- Data
