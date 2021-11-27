@@ -52,7 +52,11 @@ export class ReturnedInserter {
 
     const arg_core_entries = this.check_arg_entries(
       ctx,
-      half_ret_t(ctx, this.ret_t_cl, returned_ap_entries),
+      drop_returned_pi(
+        ctx,
+        new Exps.ReturnedPiValue(this.arg_t, this.ret_t_cl),
+        returned_ap_entries
+      ),
       arg_entries
     )
 
@@ -151,16 +155,15 @@ function unify_ret_t(ctx: Ctx, ret_t: Value, t: Value): Solution {
   }
 }
 
-function half_ret_t(
+function drop_returned_pi(
   ctx: Ctx,
-  ret_t_cl: Closure,
+  ret_t: Value,
   returned_ap_entries: Array<ReturnedApEntry>
 ): Value {
-  const [entry, ...rest] = returned_ap_entries
-  const ret_t = ret_t_cl.apply(entry.returned_arg)
-
-  if (ret_t instanceof Exps.ReturnedPiValue) {
-    return half_ret_t(ctx, ret_t.ret_t_cl, rest)
+  if (ret_t instanceof Exps.ReturnedPiValue && returned_ap_entries.length > 0) {
+    const [entry, ...rest] = returned_ap_entries
+    const next_ret_t = ret_t.ret_t_cl.apply(entry.returned_arg)
+    return drop_returned_pi(ctx, next_ret_t, rest)
   } else {
     return ret_t
   }
