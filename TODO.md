@@ -1,8 +1,9 @@
 # inductive datatype -- Data
 
-- `TypeCtorDotHandler` interface -- use `<TypeCtor>.<DataCtor>` to get `DataCtorValue`
-
 - `data-ctor-value` -- `readback` -- to `ApCore`
+- `data-ctor-value` -- setup some test
+
+- extract some methods to `data-ctor-value`
 
 - `DotHandler` -- abstract method `infer_by_target`
 - `TypeCtorDotHandler` -- implement `infer_by_target`
