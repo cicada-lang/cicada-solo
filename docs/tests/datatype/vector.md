@@ -19,8 +19,8 @@ datatype Vector(E: Type) (length: Nat) {
 datatype MyVector(E: Type) (length: Nat) {
   my_null: MyVector(E, zero)
   my_cons(
+    vague prev: Nat,
     head: E,
-    implicit prev: Nat,
     tail: MyVector(E, prev),
   ): MyVector(E, add1(prev))
 }
@@ -28,6 +28,14 @@ datatype MyVector(E: Type) (length: Nat) {
 MyVector
 MyVector(String)
 MyVector(String, 3)
+
+MyVector.my_null
+MyVector.my_null(vague Nat)
+
+check! MyVector.my_null: MyVector(Nat, 0)
+check! MyVector.my_null: MyVector(String, 0)
+
+// check! MyVector.my_cons(1, MyVector.my_null): MyVector(Nat, 1)
 ```
 
 # induction Vector

@@ -1,12 +1,12 @@
 # inductive datatype -- Data
 
-- [refactor] `CurriedDataCtorApHandler`
-- [refactor] `DataCtorApHandler`
+- `VagueApCore` -- fix `evaluate`
 
-- [refactor] `CurriedTypeCtorApHandler`
-- [refactor] `TypeCtorApHandler`
+  - test: `check! MyVector.my_cons(1, MyVector.my_null): MyVector(Nat, 1)`
 
 - `CurriedDataCtorValue` -- `readback` to `ApCore`, `VagueApCore` or `ImplicitApCore`
+
+  - test by bind partly applied data constructor to local variable
 
 - `DataValue` -- fix `unify` -- compare kind of `arg_value_entry`
 
