@@ -10,6 +10,7 @@ import { Closure } from "../closure"
 import { conversion } from "../../value"
 import * as ut from "../../../ut"
 import * as Exps from ".."
+import { DataCtorApHandler } from "./data-ctor-ap-handler"
 
 // TODO need `kind: "plain" | "implicit" | "returned"`
 export type DataCtorBinding = { name: string; arg_t: Core }
@@ -26,6 +27,8 @@ export class DataCtorValue extends Value {
     this.ret_t = ret_t
   }
 
+  ap_handler = new DataCtorApHandler(this)
+
   readback(ctx: Ctx, t: Value): Core | undefined {
     return new Exps.DotCore(new Exps.VarCore(this.type_ctor.name), this.name)
   }
@@ -41,7 +44,11 @@ export class DataCtorValue extends Value {
     args:
       | Array<Value>
       | ((index: number, opts: { arg_t: Value; env: Env }) => Value)
-  }): { env: Env; arg_t_values: Array<Value> } {
+  }): {
+    env: Env
+    fixed_arg_t_values: Array<Value>
+    arg_t_values: Array<Value>
+  } {
     const { fixed_args, args } = opts
 
     const result = this.type_ctor.apply_fixed({ fixed_args })
@@ -56,7 +63,11 @@ export class DataCtorValue extends Value {
       arg_t_values.push(arg_t)
     }
 
-    return { env, arg_t_values }
+    return {
+      env,
+      fixed_arg_t_values: Object.values(result.arg_t_values),
+      arg_t_values,
+    }
   }
 
   get bindings(): Array<DataCtorBinding> {

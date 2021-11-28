@@ -1,20 +1,17 @@
 # inductive datatype -- Data
 
 - `DataCtorApHandler` -- `implicit_apply`
-- `DataCtorApHandler` -- `returned_apply`
-
+- `DataValue` -- fix `readback` -- should not use `DataCore`
 - `DataValue` has `arg_value_entries` instead of `args`
-
-- `Dot.check` -- test by `check! MyList.my_null: MyList(Nat)` -- depends on `returned_apply`
-
-- `CurriedDataCtorValue` -- `readback` to `ApCore`, `ReturnedApCore` or `ImplicitApCore`
 
 - `CurriedDataCtorApHandler` -- `apply`
 - `CurriedDataCtorApHandler` -- `implicit_apply`
 - `CurriedDataCtorApHandler` -- `returned_apply`
 
-- remove `Data` expression
+- `CurriedDataCtorValue` -- `readback` to `ApCore`, `ReturnedApCore` or `ImplicitApCore`
 
+- remove `Data`
+- remove `DataCore`
 - remove `<TypeCtor>::<DataCtor>` syntax
 
   - we have successfully unified the syntax of data construction and function application

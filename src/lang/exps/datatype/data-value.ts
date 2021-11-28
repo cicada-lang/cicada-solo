@@ -25,10 +25,31 @@ export class DataValue extends Value {
 
     if (t instanceof Exps.DatatypeValue) {
       const data_ctor = t.type_ctor.get_data_ctor(this.name)
-      const { arg_t_values } = data_ctor.apply({
+      const result = data_ctor.apply({
         fixed_args: t.args,
         args: this.args,
       })
+
+      // let result_core = new Exps.DotCore(
+      //   new Exps.VarCore(this.type_ctor_name),
+      //   this.name
+      // )
+
+      // for (
+      //   arg_result.fixed_arg_t_values
+
+      // ) {}
+
+      //   for (result.arg_t_values) {}
+
+      // return result_core
+
+      const arg_t_values = [
+        ...result.fixed_arg_t_values,
+        ...result.arg_t_values,
+      ]
+
+      // const arg_t_values = result.arg_t_values
 
       if (arg_t_values.length === this.args.length) {
         return new Exps.DataCore(
