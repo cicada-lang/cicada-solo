@@ -1,15 +1,10 @@
 # inductive datatype -- Data
 
-- `TypeCtorValue` -- `value_of_fixed` call `apply_fixed`
+- move `TypeCtorValue.apply_data_ctor` to `DataCtorValue.apply`
 
-- `TypeCtorValue` -- remove `ctors: Record<string, Core>`
+- `TypeCtorValue` remove `ctors: Record<string, Core>`
 
-- `DataCtorValue.readback ???`
-
-- `DataCtorValue` -- `arity`
-
-  - `fixed` argument of type constructor does not count
-  - handle `returned` and `implicit`
+- `DataCtorValue` -- `arity` -- `fixed` argument of type constructor does not count
 
 - `DataCtorApHandler` -- return `CurriedDataCtorValue` or `DataValue`
 

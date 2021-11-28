@@ -24,8 +24,7 @@ export class DataValue extends Value {
     }
 
     if (t instanceof Exps.DatatypeValue) {
-      const data_ctor = t.type_ctor.get_data_ctor(this.name)
-      const { arg_t_values } = data_ctor.apply_with_fixed({
+      const { arg_t_values } = t.type_ctor.apply_data_ctor(this.name, {
         fixed_args: t.args,
         args: (index) => this.args[index],
       })
@@ -51,8 +50,7 @@ export class DataValue extends Value {
 
     const datatype = expect(ctx, t, Exps.DatatypeValue)
 
-    const data_ctor = datatype.type_ctor.get_data_ctor(this.name)
-    const { arg_t_values } = data_ctor.apply_with_fixed({
+    const { arg_t_values } = datatype.type_ctor.apply_data_ctor(this.name, {
       fixed_args: datatype.args,
       args: (index) => this.args[index],
     })

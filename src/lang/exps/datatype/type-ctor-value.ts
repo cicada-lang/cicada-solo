@@ -39,7 +39,12 @@ export class TypeCtorValue extends Value {
 
     this.data_ctors = {}
     for (const [name, ret_t] of Object.entries(data_ctors)) {
-      this.data_ctors[name] = new Exps.DataCtorValue(this, name, ret_t)
+      this.data_ctors[name] = new Exps.DataCtorValue(
+        this,
+        name,
+        ret_t,
+        this.env
+      )
     }
   }
 
@@ -62,7 +67,7 @@ export class TypeCtorValue extends Value {
     return data_ctor
   }
 
-  apply_fixed(args: Array<Value>): { env: Env; arg_t_values: Array<Value> } {
+  private apply_fixed(args: Array<Value>): Env {
     const fixed_entries = Array.from(Object.entries(this.fixed).entries())
 
     if (args.length < fixed_entries.length) {
@@ -76,15 +81,69 @@ export class TypeCtorValue extends Value {
     }
 
     let env = this.env
-    const arg_t_values: Array<Value> = []
     for (const [index, [name, arg_t_core]] of fixed_entries) {
       const arg_t = evaluate(env, arg_t_core)
       const arg = args[index]
       env = env.extend(name, arg)
+    }
+
+    return env
+  }
+
+  apply_data_ctor(
+    data_ctor_name: string,
+    opts: {
+      fixed_args: Array<Value>
+      args: (index: number, opts: { arg_t: Value; env: Env }) => Value
+    }
+  ): { env: Env; arg_t_values: Array<Value> } {
+    const { fixed_args, args } = opts
+
+    let env = this.apply_fixed(fixed_args)
+    const arg_t_values: Array<Value> = []
+    for (const [index, binding] of this.get_data_ctor(
+      data_ctor_name
+    ).bindings.entries()) {
+      // TODO handle implicit bindings
+      const arg_t = evaluate(env, binding.arg_t)
+      const arg = args(index, { arg_t, env })
+      env = env.extend(binding.name, arg)
       arg_t_values.push(arg_t)
     }
 
     return { env, arg_t_values }
+  }
+
+  evaluate_data_ctor_ret_t(env: Env, name: string): Value {
+    const data_ctor_ret_t_core = this.data_ctor_ret_t_core(name)
+    return evaluate(env, data_ctor_ret_t_core)
+  }
+
+  private data_ctor_ret_t_core(name: string): Core {
+    let t = this.data_ctor_core(name)
+    // TODO We should also handle `Exps.ImPiCore`.
+    while (t instanceof Exps.PiCore) {
+      const { ret_t } = t
+      t = ret_t
+    }
+
+    return t
+  }
+
+  private data_ctor_core(name: string): Core {
+    const data_ctor = this.ctors[name]
+    if (data_ctor === undefined) {
+      const names = Object.keys(this.ctors).join(", ")
+      throw new ExpTrace(
+        [
+          `I can not find the data constructor named: ${name}`,
+          `  type constructor name: ${this.name}`,
+          `  existing data constructor names: ${names}`,
+        ].join("\n")
+      )
+    }
+
+    return data_ctor
   }
 
   get arity(): number {
@@ -142,6 +201,27 @@ export class TypeCtorValue extends Value {
     return { fixed, ctx }
   }
 
+  private readback_varied(ctx: Ctx): Record<string, Core> {
+    const varied: Record<string, Core> = {}
+
+    for (const [name, t] of Object.entries(this.value_of_varied())) {
+      varied[name] = readback(ctx, new Exps.TypeValue(), t)
+      ctx = ctx.extend(name, t)
+    }
+
+    return varied
+  }
+
+  private readback_data_ctors(ctx: Ctx): Record<string, Core> {
+    const data_ctors: Record<string, Core> = {}
+
+    for (const [name, t] of Object.entries(this.value_of_data_ctors())) {
+      data_ctors[name] = readback(ctx, new Exps.TypeValue(), t)
+    }
+
+    return data_ctors
+  }
+
   private value_of_fixed(): {
     fixed: Record<string, Value>
     env: Env
@@ -158,17 +238,6 @@ export class TypeCtorValue extends Value {
     return { fixed, env }
   }
 
-  private readback_varied(ctx: Ctx): Record<string, Core> {
-    const varied: Record<string, Core> = {}
-
-    for (const [name, t] of Object.entries(this.value_of_varied())) {
-      varied[name] = readback(ctx, new Exps.TypeValue(), t)
-      ctx = ctx.extend(name, t)
-    }
-
-    return varied
-  }
-
   private value_of_varied(): Record<string, Value> {
     const varied: Record<string, Value> = {}
     const result = this.value_of_fixed()
@@ -181,16 +250,6 @@ export class TypeCtorValue extends Value {
     }
 
     return varied
-  }
-
-  private readback_data_ctors(ctx: Ctx): Record<string, Core> {
-    const data_ctors: Record<string, Core> = {}
-
-    for (const [name, t] of Object.entries(this.value_of_data_ctors())) {
-      data_ctors[name] = readback(ctx, new Exps.TypeValue(), t)
-    }
-
-    return data_ctors
   }
 
   private value_of_data_ctors(): Record<string, Value> {
