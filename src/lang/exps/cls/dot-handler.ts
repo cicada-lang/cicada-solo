@@ -4,5 +4,5 @@ import { Core } from "../../core"
 import { Value } from "../../value"
 
 export abstract class DotHandler {
-  abstract get(field: string): Value
+  abstract get(name: string): Value
 }

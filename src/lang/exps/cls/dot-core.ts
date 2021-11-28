@@ -29,8 +29,8 @@ export class DotCore extends Core {
   }
 
   static apply(target: Value, name: string): Value {
-    if (target instanceof Exps.ObjValue) {
-      return target.dot_value(name)
+    if (target.dot_handler) {
+      return target.dot_handler.get(name)
     }
 
     if (!(target instanceof Exps.NotYetValue)) {

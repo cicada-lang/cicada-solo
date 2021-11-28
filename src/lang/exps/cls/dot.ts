@@ -38,11 +38,9 @@ export class Dot extends Exp {
       // Because of `ClsValue` can be partially fulfilled by value,
       // during `infer` of `Exps.Dot`, we have opportunity to get those value back,
       // and return them as core.
-
       const target_value = evaluate(ctx.to_env(), inferred.core)
       const value = inferred.t.dot_value(target_value, this.name)
       const t = inferred.t.dot_type(target_value, this.name)
-
       return {
         t,
         core: readback(ctx, t, value),

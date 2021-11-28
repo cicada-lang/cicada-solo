@@ -1,11 +1,11 @@
 # inductive datatype -- Data
 
-- `ObjDotHandler`
-
-- `DotHandler` -- abstract method about infer
+- [refactor] rename `dot_type` & `dot_value` to `get_type` & `get_value`
 
 - `data-ctor-value`
 - `data-ctor-value` -- readback to `ApCore`
+
+- `DotHandler` -- abstract method `infer_by_target`
 
 - `TypeCtorDotHandler` interface -- use `<TypeCtor>.<DataCtor>` to get `DataCtorValue`
 
