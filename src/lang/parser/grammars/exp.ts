@@ -283,21 +283,6 @@ export const operand = {
     "operand:inl": ['"inl"', '"("', { left: "exp" }, '")"'],
     "operand:inr": ['"inr"', '"("', { right: "exp" }, '")"'],
     "operand:type": ['"Type"'],
-    "operand:data": [
-      { type_ctor_name: "identifier" },
-      '":"',
-      '":"',
-      { name: "identifier" },
-      '"("',
-      { exps: "exps" },
-      '")"',
-    ],
-    "operand:data_no_args": [
-      { type_ctor_name: "identifier" },
-      '":"',
-      '":"',
-      { name: "identifier" },
-    ],
   },
 }
 

@@ -1,6 +1,9 @@
 # inductive datatype -- Data
 
 - `DataValue` -- fix `readback` -- should not use `DataCore`
+
+- remove `DataCore`
+
 - `DataValue` has `arg_value_entries` instead of `args`
 
 - `CurriedDataCtorApHandler` -- `apply`
@@ -8,12 +11,6 @@
 - `CurriedDataCtorApHandler` -- `returned_apply`
 
 - `CurriedDataCtorValue` -- `readback` to `ApCore`, `ReturnedApCore` or `ImplicitApCore`
-
-- remove `Data`
-- remove `DataCore`
-- remove `<TypeCtor>::<DataCtor>` syntax
-
-  - we have successfully unified the syntax of data construction and function application
 
 - `DataCtorValue` -- `unify`
 - `CurriedDataCtorValue` -- `unify`
