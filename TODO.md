@@ -1,7 +1,5 @@
 # inductive datatype -- Data
 
-- extract `arg-entry` module
-
 - `CurriedDataCtorValue` -- `readback` to `ApCore`, `ReturnedApCore` or `ImplicitApCore`
 
 - `DataCtorApHandler` -- return `CurriedDataCtorValue` or `DataValue`

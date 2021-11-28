@@ -16,27 +16,12 @@ import { ApFormater } from "./ap-formater"
 //   an opportunity to do check-mode application (which can not be curried).
 //   - For example, we can unify the syntax of data construction and function application.
 
-export type ArgEntry = {
-  kind: "plain" | "implicit" | "returned"
-  arg: Exp
-}
-
-export type ArgCoreEntry = {
-  kind: "plain" | "implicit" | "returned"
-  arg: Core
-}
-
-export type ArgValueEntry = {
-  kind: "plain" | "implicit" | "returned"
-  arg: Value
-}
-
 export class MultiAp extends Exp {
   meta: ExpMeta
   target: Exp
-  arg_entries: Array<ArgEntry>
+  arg_entries: Array<Exps.ArgEntry>
 
-  constructor(target: Exp, arg_entries: Array<ArgEntry>, meta: ExpMeta) {
+  constructor(target: Exp, arg_entries: Array<Exps.ArgEntry>, meta: ExpMeta) {
     super()
     this.meta = meta
     this.target = target
@@ -98,7 +83,7 @@ export class MultiAp extends Exp {
     )
   }
 
-  private wrap_arg_entry(target: Exp, arg_entry: ArgEntry): Exp {
+  private wrap_arg_entry(target: Exp, arg_entry: Exps.ArgEntry): Exp {
     switch (arg_entry.kind) {
       case "implicit": {
         return new Exps.ImplicitAp(target, arg_entry.arg, this.meta)
