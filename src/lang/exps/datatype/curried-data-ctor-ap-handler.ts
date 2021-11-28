@@ -2,10 +2,10 @@ import { ApHandler } from "../pi/ap-handler"
 import { Value } from "../../value"
 import * as Exps from "../../exps"
 
-export class DataCtorApHandler extends ApHandler {
-  target: Exps.DataCtorValue
+export class CurriedDataCtorApHandler extends ApHandler {
+  target: Exps.CurriedDataCtorValue
 
-  constructor(target: Exps.DataCtorValue) {
+  constructor(target: Exps.CurriedDataCtorValue) {
     super()
     this.target = target
   }
@@ -16,6 +16,7 @@ export class DataCtorApHandler extends ApHandler {
     }
 
     const arg_value_entries: Array<Exps.ArgValueEntry> = [
+      ...this.target.arg_value_entries,
       { kind: "plain", arg },
     ]
 
@@ -27,7 +28,10 @@ export class DataCtorApHandler extends ApHandler {
       )
     }
 
-    return new Exps.CurriedDataCtorValue(this.target, arg_value_entries)
+    return new Exps.CurriedDataCtorValue(
+      this.target.data_ctor,
+      arg_value_entries
+    )
   }
 
   implicit_apply(arg: Value): Value {
@@ -36,6 +40,7 @@ export class DataCtorApHandler extends ApHandler {
     }
 
     const arg_value_entries: Array<Exps.ArgValueEntry> = [
+      ...this.target.arg_value_entries,
       { kind: "implicit", arg },
     ]
 
@@ -47,7 +52,10 @@ export class DataCtorApHandler extends ApHandler {
       )
     }
 
-    return new Exps.CurriedDataCtorValue(this.target, arg_value_entries)
+    return new Exps.CurriedDataCtorValue(
+      this.target.data_ctor,
+      arg_value_entries
+    )
   }
 
   returned_apply(arg: Value): Value {
@@ -56,6 +64,7 @@ export class DataCtorApHandler extends ApHandler {
     }
 
     const arg_value_entries: Array<Exps.ArgValueEntry> = [
+      ...this.target.arg_value_entries,
       { kind: "returned", arg },
     ]
 
@@ -67,6 +76,9 @@ export class DataCtorApHandler extends ApHandler {
       )
     }
 
-    return new Exps.CurriedDataCtorValue(this.target, arg_value_entries)
+    return new Exps.CurriedDataCtorValue(
+      this.target.data_ctor,
+      arg_value_entries
+    )
   }
 }

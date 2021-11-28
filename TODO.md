@@ -1,9 +1,5 @@
 # inductive datatype -- Data
 
-- `CurriedDataCtorApHandler` -- `apply`
-- `CurriedDataCtorApHandler` -- `implicit_apply`
-- `CurriedDataCtorApHandler` -- `returned_apply`
-
 - `CurriedDataCtorValue` -- `readback` to `ApCore`, `ReturnedApCore` or `ImplicitApCore`
 
 - `DataCtorValue` -- `unify`
