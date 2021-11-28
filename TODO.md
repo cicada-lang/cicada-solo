@@ -16,7 +16,7 @@
 
 - remove `<TypeCtor>::<DataCtor>` syntax
 
-  - unify the syntax of data construction and function application
+  - we have successfully unified the syntax of data construction and function application
 
 - `DataCtorValue` -- `unify`
 - `CurriedDataCtorValue` -- `unify`

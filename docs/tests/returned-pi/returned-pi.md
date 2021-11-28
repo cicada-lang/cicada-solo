@@ -93,3 +93,43 @@ check! my_list_cons_and_typeof_pair("a", nil, implicit Nat, 123): Pair(List(Stri
 check! my_list_cons_and_typeof_pair(1, nil, "abc"): Pair(List(Nat), Type)
 check! my_list_cons_and_typeof_pair(1, nil, implicit String, "abc"): Pair(List(Nat), Type)
 ```
+
+# my_list_null_pair_and_typeof_pair
+
+``` cicada
+function my_list_null_pair_and_typeof_pair(
+  returned A: Type,
+  returned B: Type,
+  implicit T: Type,
+  x: T,
+): Pair(Pair(List(A), List(B)), Type) {
+  return cons(cons(nil, nil), T)
+}
+
+check! my_list_null_pair_and_typeof_pair(123): Pair(Pair(List(String), List(String)), Type)
+check! my_list_null_pair_and_typeof_pair(returned String, 123): Pair(Pair(List(String), List(String)), Type)
+check! my_list_null_pair_and_typeof_pair(returned String, returned String, 123): Pair(Pair(List(String), List(String)), Type)
+
+// NOTE partly applied `returned-fn` can be bound to variable
+
+check! {
+  let f: (
+    returned B: Type,
+    implicit T: Type,
+    x: T,
+  ) -> Pair(Pair(List(String), List(B)), Type) =
+    my_list_null_pair_and_typeof_pair(returned String)
+
+  return f(returned Nat, 123)
+}: Pair(Pair(List(String), List(Nat)), Type)
+
+check! {
+  let f = my_list_null_pair_and_typeof_pair(returned String)
+  return f(returned Nat, 123)
+}: Pair(Pair(List(String), List(Nat)), Type)
+
+check! {
+  let f = my_list_null_pair_and_typeof_pair(returned String)
+  return f(123)
+}: Pair(Pair(List(String), List(Nat)), Type)
+```
