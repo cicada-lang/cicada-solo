@@ -1,10 +1,24 @@
 # inductive datatype -- Data
 
-- `DataCtorApHandler`
+- [refactor] `ReturnedApCore.apply` -- guard clauses instead of nested conditional
+
+- `ApHandler` has `implicit_apply` & `returned_apply`
+
+- `CurriedDataCtorValue`
+
+- `DataCtorApHandler` -- return `CurriedDataCtorValue` or `DataValue`
+
+  - implement `apply`, `implicit_apply` & `returned_apply`
+
+- `CurriedDataCtorAphandler` -- return `CurriedDataCtorValue` or `DataValue`
+
+  - implement `apply`, `implicit_apply` & `returned_apply`
 
 - unify the syntax of data construction and function application -- remove `<TypeCtor>::<DataCtor>` syntax
 
 - extract some methods to `data-ctor-value`
+
+- `DataCtorValue` -- `unify`
 
 - `TypeCtorValue` -- `ctor_bindings` -- handle `returned`
 - `TypeCtorValue` -- `ctor_bindings` -- handle `implicit`
