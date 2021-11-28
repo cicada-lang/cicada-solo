@@ -49,10 +49,13 @@ export class DataValue extends Value {
         switch (kind) {
           case "plain":
             result_core = new Exps.ApCore(result_core, arg_core)
+            break
           case "implicit":
             result_core = new Exps.ImplicitApCore(result_core, arg_core)
+            break
           case "returned":
             result_core = new Exps.ReturnedApCore(result_core, arg_core)
+            break
         }
       }
 

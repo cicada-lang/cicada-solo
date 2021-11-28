@@ -1,6 +1,14 @@
 # inductive datatype -- Data
 
+- [refactor] `CurriedDataCtorApHandler`
+- [refactor] `DataCtorApHandler`
+
+- [refactor] `CurriedTypeCtorApHandler`
+- [refactor] `TypeCtorApHandler`
+
 - `CurriedDataCtorValue` -- `readback` to `ApCore`, `ReturnedApCore` or `ImplicitApCore`
+
+- `DataValue` -- fix `unify` -- compare kind of `arg_value_entry`
 
 - `DataCtorValue` -- `unify`
 - `CurriedDataCtorValue` -- `unify`
