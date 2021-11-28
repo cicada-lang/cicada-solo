@@ -62,6 +62,7 @@ export class Data extends Exp {
     }
 
     const data_ctor = datatype.type_ctor.get_data_ctor(this.name)
+
     if (this.args.length !== data_ctor.arity) {
       throw new ExpTrace(
         [
@@ -84,10 +85,7 @@ export class Data extends Exp {
       },
     })
 
-    let ctor_ret_t = datatype.type_ctor.evaluate_data_ctor_ret_t(
-      result.env,
-      this.name
-    )
+    let ctor_ret_t = evaluate(result.env, data_ctor.ret_t)
 
     if (ctor_ret_t instanceof Exps.TypeCtorValue && ctor_ret_t.arity === 0) {
       ctor_ret_t = ctor_ret_t.as_datatype()

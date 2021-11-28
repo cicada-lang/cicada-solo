@@ -81,20 +81,4 @@ export class DataCtorValue extends Value {
   get arity(): number {
     return this.bindings.length
   }
-
-  // evaluate_data_ctor_ret_t(env: Env, name: string): Value {
-  //   const data_ctor_ret_t_core = this.data_ctor_ret_t_core(name)
-  //   return evaluate(env, data_ctor_ret_t_core)
-  // }
-
-  // private data_ctor_ret_t_core(name: string): Core {
-  //   let t = this.data_ctor_core(name)
-  //   // TODO We should also handle `Exps.ImPiCore`.
-  //   while (t instanceof Exps.PiCore) {
-  //     const { ret_t } = t
-  //     t = ret_t
-  //   }
-
-  //   return t
-  // }
 }
