@@ -22,6 +22,6 @@ export class DataCtorValue extends Value {
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    throw new Error("TODO")
+    return new Exps.DotCore(new Exps.VarCore(this.type_ctor.name), this.name)
   }
 }
