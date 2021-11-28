@@ -114,38 +114,6 @@ export class TypeCtorValue extends Value {
     return { env, arg_t_values }
   }
 
-  evaluate_data_ctor_ret_t(env: Env, name: string): Value {
-    const data_ctor_ret_t_core = this.data_ctor_ret_t_core(name)
-    return evaluate(env, data_ctor_ret_t_core)
-  }
-
-  private data_ctor_ret_t_core(name: string): Core {
-    let t = this.data_ctor_core(name)
-    // TODO We should also handle `Exps.ImPiCore`.
-    while (t instanceof Exps.PiCore) {
-      const { ret_t } = t
-      t = ret_t
-    }
-
-    return t
-  }
-
-  private data_ctor_core(name: string): Core {
-    const data_ctor = this.ctors[name]
-    if (data_ctor === undefined) {
-      const names = Object.keys(this.ctors).join(", ")
-      throw new ExpTrace(
-        [
-          `I can not find the data constructor named: ${name}`,
-          `  type constructor name: ${this.name}`,
-          `  existing data constructor names: ${names}`,
-        ].join("\n")
-      )
-    }
-
-    return data_ctor
-  }
-
   get arity(): number {
     return Object.keys(this.fixed).length + Object.keys(this.varied).length
   }

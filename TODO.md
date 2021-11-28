@@ -1,5 +1,11 @@
 # inductive datatype -- Data
 
+- `DataCtorValue` -- remove `env` for now
+- move `TypeCtorValue.apply_data_ctor` to `DataCtorValue.apply_with_fixed`
+- `TypeCtorValue` -- `apply_fixed` also return `arg_t_values`
+
+- `DataCtorValue.readback_ret_t`
+
 - move `TypeCtorValue.apply_data_ctor` to `DataCtorValue.apply`
 
 - `TypeCtorValue` remove `ctors: Record<string, Core>`

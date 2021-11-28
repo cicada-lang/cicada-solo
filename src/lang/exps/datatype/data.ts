@@ -84,10 +84,7 @@ export class Data extends Exp {
       },
     })
 
-    let ctor_ret_t = datatype.type_ctor.evaluate_data_ctor_ret_t(
-      result.env,
-      this.name
-    )
+    let ctor_ret_t = evaluate(result.env, data_ctor.finial_ret_t_core)
 
     if (ctor_ret_t instanceof Exps.TypeCtorValue && ctor_ret_t.arity === 0) {
       ctor_ret_t = ctor_ret_t.as_datatype()
