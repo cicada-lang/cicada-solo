@@ -92,19 +92,19 @@ export class FulfilledClsValue extends Exps.ClsValue {
     }
   }
 
-  dot_value(target: Value, field_name: string): Value {
+  get_value(target: Value, field_name: string): Value {
     if (field_name === this.field_name) {
       return this.field
     } else {
-      return this.rest_t.dot_value(target, field_name)
+      return this.rest_t.get_value(target, field_name)
     }
   }
 
-  dot_type(target: Value, field_name: string): Value {
+  get_type(target: Value, field_name: string): Value {
     if (field_name === this.field_name) {
       return this.field_t
     } else {
-      return this.rest_t.dot_type(target, field_name)
+      return this.rest_t.get_type(target, field_name)
     }
   }
 

@@ -24,7 +24,7 @@ export class NilClsValue extends Exps.ClsValue {
     }
   }
 
-  dot_value(target: Value, field_name: string): Value {
+  get_value(target: Value, field_name: string): Value {
     throw new ExpTrace(
       [
         `I can not dot the value out of class`,
@@ -34,7 +34,7 @@ export class NilClsValue extends Exps.ClsValue {
     )
   }
 
-  dot_type(target: Value, field_name: string): Value {
+  get_type(target: Value, field_name: string): Value {
     throw new ExpTrace(
       [
         `I can not dot the type out of class`,

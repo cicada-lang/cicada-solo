@@ -46,7 +46,7 @@ export class DotCore extends Core {
     }
 
     return new Exps.NotYetValue(
-      target.t.dot_type(target, name),
+      target.t.get_type(target, name),
       new Exps.DotNeutral(target.neutral, name)
     )
   }

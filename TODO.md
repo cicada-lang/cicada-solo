@@ -1,7 +1,5 @@
 # inductive datatype -- Data
 
-- [refactor] rename `dot_type` & `dot_value` to `get_type` & `get_value`
-
 - `data-ctor-value`
 - `data-ctor-value` -- readback to `ApCore`
 

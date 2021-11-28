@@ -23,8 +23,8 @@ export abstract class ClsValue extends Value implements ReadbackEtaExpansion {
     properties: Map<string, Exp>
   ): Map<string, Core>
 
-  abstract dot_value(target: Value, field_name: string): Value
-  abstract dot_type(target: Value, field_name: string): Value
+  abstract get_value(target: Value, field_name: string): Value
+  abstract get_type(target: Value, field_name: string): Value
 
   abstract eta_expand_properties(ctx: Ctx, value: Value): Map<string, Core>
 
