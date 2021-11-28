@@ -1,9 +1,6 @@
 # inductive datatype -- Data
 
-- `data-ctor-value` -- setup some test
-
-- `DotHandler` -- abstract method `infer_by_target`
-- `TypeCtorDotHandler` -- implement `infer_by_target`
+- `TypeCtorDotHandler` -- implement `infer_by_target` -- return `returned-pi`
 
 - extract some methods to `data-ctor-value`
 

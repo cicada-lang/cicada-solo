@@ -33,6 +33,11 @@ export class Dot extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred = infer(ctx, this.target)
 
+    const target = evaluate(ctx.to_env(), inferred.core)
+    if (target.dot_handler?.infer_by_target) {
+      return target.dot_handler.infer_by_target(ctx, inferred.core, this.name)
+    }
+
     if (inferred.t instanceof Exps.ClsValue) {
       // NOTE `infer` need to return normalized value as core.
       // Because of `ClsValue` can be partially fulfilled by value,
@@ -49,7 +54,7 @@ export class Dot extends Exp {
 
     throw new ExpTrace(
       [
-        `I expect the inferred type to be a class.`,
+        `I expect the inferred type to be Exps.ClsValue`,
         `  class name: ${inferred.t.constructor.name}`,
       ].join("\n")
     )
