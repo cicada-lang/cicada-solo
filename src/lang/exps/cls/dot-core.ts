@@ -5,6 +5,7 @@ import { Solution } from "../../solution"
 import { evaluate } from "../../core"
 import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
+import { ExpTrace } from "../../errors"
 
 export class DotCore extends Core {
   target: Core
@@ -31,6 +32,15 @@ export class DotCore extends Core {
   static apply(target: Value, name: string): Value {
     if (target.dot_handler) {
       return target.dot_handler.get(name)
+    }
+
+    if (target instanceof Exps.ObjValue) {
+      const value = target.properties.get(name)
+      if (value === undefined) {
+        throw new ExpTrace(`The property name: ${name} of object is undefined.`)
+      }
+
+      return value
     }
 
     if (!(target instanceof Exps.NotYetValue)) {

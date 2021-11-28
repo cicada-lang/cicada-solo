@@ -1,7 +1,5 @@
 # inductive datatype -- Data
 
-- [refactor] inline `ObjDotHandler`
-
 - `CurriedDataCtorValue`
 
 - `DataCtorApHandler` -- return `CurriedDataCtorValue` or `DataValue`
