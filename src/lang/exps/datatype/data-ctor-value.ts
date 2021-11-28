@@ -35,14 +35,16 @@ export class DataCtorValue extends Value {
   }
 
   apply(opts: {
-    fixed_args: Array<Value>
+    fixed_args:
+      | Array<Value>
+      | ((index: number, opts: { arg_t: Value; env: Env }) => Value)
     args:
       | Array<Value>
       | ((index: number, opts: { arg_t: Value; env: Env }) => Value)
   }): { env: Env; arg_t_values: Array<Value> } {
     const { fixed_args, args } = opts
 
-    const result = this.type_ctor.apply_fixed(fixed_args)
+    const result = this.type_ctor.apply_fixed({ fixed_args })
     let env = result.env
     const arg_t_values: Array<Value> = []
     for (const [index, binding] of this.bindings.entries()) {

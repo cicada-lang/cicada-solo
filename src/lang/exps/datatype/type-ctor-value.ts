@@ -62,17 +62,22 @@ export class TypeCtorValue extends Value {
     return data_ctor
   }
 
-  apply_fixed(args: Array<Value>): {
+  apply_fixed(opts: {
+    fixed_args:
+      | Array<Value>
+      | ((index: number, opts: { arg_t: Value; env: Env }) => Value)
+  }): {
     env: Env
     arg_t_values: Record<string, Value>
   } {
+    const { fixed_args } = opts
     const fixed_entries = Array.from(Object.entries(this.fixed).entries())
 
-    if (args.length < fixed_entries.length) {
+    if (fixed_args.length < fixed_entries.length) {
       throw new ExpTrace(
         [
           `I expect number of arguments to be not less than fixed entries`,
-          `  args.length: ${args.length}`,
+          `  fixed_args.length: ${fixed_args.length}`,
           `  fixed_entries.length: ${fixed_entries.length}`,
         ].join("\n")
       )
@@ -82,7 +87,10 @@ export class TypeCtorValue extends Value {
     const arg_t_values: Record<string, Value> = {}
     for (const [index, [name, arg_t_core]] of fixed_entries) {
       const arg_t = evaluate(env, arg_t_core)
-      const arg = args[index]
+      const arg =
+        fixed_args instanceof Array
+          ? fixed_args[index]
+          : fixed_args(index, { arg_t, env })
       env = env.extend(name, arg)
       arg_t_values[name] = arg_t
     }
@@ -137,7 +145,7 @@ export class TypeCtorValue extends Value {
     const fixed: Record<string, Core> = {}
     const result = this.value_of_fixed()
 
-    for (const [name, t] of Object.entries(result.fixed)) {
+    for (const [name, t] of Object.entries(result.arg_t_values)) {
       fixed[name] = readback(ctx, new Exps.TypeValue(), t)
       ctx = ctx.extend(name, t)
     }
@@ -145,29 +153,8 @@ export class TypeCtorValue extends Value {
     return { fixed, ctx }
   }
 
-  private readback_varied(ctx: Ctx): Record<string, Core> {
-    const varied: Record<string, Core> = {}
-
-    for (const [name, t] of Object.entries(this.value_of_varied())) {
-      varied[name] = readback(ctx, new Exps.TypeValue(), t)
-      ctx = ctx.extend(name, t)
-    }
-
-    return varied
-  }
-
-  private readback_data_ctors(ctx: Ctx): Record<string, Core> {
-    const data_ctors: Record<string, Core> = {}
-
-    for (const [name, t] of Object.entries(this.value_of_data_ctors())) {
-      data_ctors[name] = readback(ctx, new Exps.TypeValue(), t)
-    }
-
-    return data_ctors
-  }
-
   private value_of_fixed(): {
-    fixed: Record<string, Value>
+    arg_t_values: Record<string, Value>
     env: Env
   } {
     const fixed: Record<string, Value> = {}
@@ -179,7 +166,18 @@ export class TypeCtorValue extends Value {
       env = env.extend(name, new Exps.NotYetValue(t, new Exps.VarNeutral(name)))
     }
 
-    return { fixed, env }
+    return { arg_t_values: fixed, env }
+  }
+
+  private readback_varied(ctx: Ctx): Record<string, Core> {
+    const varied: Record<string, Core> = {}
+
+    for (const [name, t] of Object.entries(this.value_of_varied())) {
+      varied[name] = readback(ctx, new Exps.TypeValue(), t)
+      ctx = ctx.extend(name, t)
+    }
+
+    return varied
   }
 
   private value_of_varied(): Record<string, Value> {
@@ -194,6 +192,16 @@ export class TypeCtorValue extends Value {
     }
 
     return varied
+  }
+
+  private readback_data_ctors(ctx: Ctx): Record<string, Core> {
+    const data_ctors: Record<string, Core> = {}
+
+    for (const [name, t] of Object.entries(this.value_of_data_ctors())) {
+      data_ctors[name] = readback(ctx, new Exps.TypeValue(), t)
+    }
+
+    return data_ctors
   }
 
   private value_of_data_ctors(): Record<string, Value> {
