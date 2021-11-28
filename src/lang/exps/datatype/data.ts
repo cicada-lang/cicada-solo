@@ -75,7 +75,7 @@ export class Data extends Exp {
 
     const args: Array<Core> = []
 
-    const result = datatype.type_ctor.apply_data_ctor(this.name, {
+    const result = data_ctor.apply_with_fixed({
       fixed_args: datatype.args,
       args: (index, { arg_t, env }) => {
         const arg_core = check(ctx, this.args[index], arg_t)

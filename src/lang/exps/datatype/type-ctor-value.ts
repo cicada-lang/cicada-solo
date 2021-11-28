@@ -67,7 +67,7 @@ export class TypeCtorValue extends Value {
     return data_ctor
   }
 
-  private apply_fixed(args: Array<Value>): Env {
+  apply_fixed(args: Array<Value>): Env {
     const fixed_entries = Array.from(Object.entries(this.fixed).entries())
 
     if (args.length < fixed_entries.length) {
@@ -88,34 +88,6 @@ export class TypeCtorValue extends Value {
     }
 
     return env
-  }
-
-  apply_data_ctor(
-    data_ctor_name: string,
-    opts: {
-      fixed_args: Array<Value>
-      args: (index: number, opts: { arg_t: Value; env: Env }) => Value
-    }
-  ): { env: Env; arg_t_values: Array<Value> } {
-    const { fixed_args, args } = opts
-
-    let env = this.apply_fixed(fixed_args)
-    const arg_t_values: Array<Value> = []
-    for (const [index, binding] of this.get_data_ctor(
-      data_ctor_name
-    ).bindings.entries()) {
-      // TODO handle implicit bindings
-      const arg_t = evaluate(env, binding.arg_t)
-      const arg = args(index, { arg_t, env })
-      env = env.extend(binding.name, arg)
-      arg_t_values.push(arg_t)
-    }
-
-    return { env, arg_t_values }
-  }
-
-  evaluate_data_ctor_ret_t(env: Env, name: string): Value {
-    return evaluate(env, this.get_data_ctor(name).ret_t)
   }
 
   get arity(): number {
