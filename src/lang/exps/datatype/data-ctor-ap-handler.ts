@@ -11,20 +11,16 @@ export class DataCtorApHandler extends ApHandler {
   }
 
   apply(arg: Value): Value {
-    // NOTE it is assumed that during application of data constructor,
-    //   all arguments (including fixed arguments) are inserted.
-    throw new Error("TODO")
+    if (this.target.arity === 0) {
+      throw new Error("I can not apply data constructor of arity 0.")
+    }
 
-    // if (this.target.arity === 0) {
-    //   throw new Error("I can not apply TypeCtorValue of arity 0.")
-    // }
+    if (this.target.arity === 1) {
+      return new Exps.DataValue(this.target.type_ctor.name, this.target.name, [
+        arg,
+      ])
+    }
 
-    // const args = [arg]
-
-    // if (this.target.arity === 1) {
-    //   return new Exps.DatatypeValue(this.target, args)
-    // }
-
-    // return new Exps.CurriedTypeCtorValue(this.target, args)
+    return new Exps.CurriedDataCtorValue(this.target, [{ kind: "plain", arg }])
   }
 }

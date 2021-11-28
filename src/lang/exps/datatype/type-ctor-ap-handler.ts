@@ -12,15 +12,13 @@ export class TypeCtorApHandler extends ApHandler {
 
   apply(arg: Value): Value {
     if (this.target.arity === 0) {
-      throw new Error("I can not apply TypeCtorValue of arity 0.")
+      throw new Error("I can not apply type constructor of arity 0.")
     }
-
-    const args = [arg]
 
     if (this.target.arity === 1) {
-      return new Exps.DatatypeValue(this.target, args)
+      return new Exps.DatatypeValue(this.target, [arg])
     }
 
-    return new Exps.CurriedTypeCtorValue(this.target, args)
+    return new Exps.CurriedTypeCtorValue(this.target, [arg])
   }
 }

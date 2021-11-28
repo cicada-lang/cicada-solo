@@ -1,16 +1,17 @@
 # inductive datatype -- Data
 
-- `DataCtorApHandler` -- return `CurriedDataCtorValue` or `DataValue`
+- `DataCtorApHandler` -- `implicit_apply`
+- `DataCtorApHandler` -- `returned_apply`
 
-  - implement `apply`, `implicit_apply` & `returned_apply`
+- `DataValue` has `arg_value_entries` instead of `args`
 
 - `Dot.check` -- test by `check! MyList.my_null: MyList(Nat)` -- depends on `returned_apply`
 
 - `CurriedDataCtorValue` -- `readback` to `ApCore`, `ReturnedApCore` or `ImplicitApCore`
 
-- `CurriedDataCtorAphandler` -- return `CurriedDataCtorValue` or `DataValue`
-
-  - implement `apply`, `implicit_apply` & `returned_apply`
+- `CurriedDataCtorApHandler` -- `apply`
+- `CurriedDataCtorApHandler` -- `implicit_apply`
+- `CurriedDataCtorApHandler` -- `returned_apply`
 
 - remove `Data` expression
 
