@@ -39,12 +39,7 @@ export class TypeCtorValue extends Value {
 
     this.data_ctors = {}
     for (const [name, ret_t] of Object.entries(data_ctors)) {
-      this.data_ctors[name] = new Exps.DataCtorValue(
-        this,
-        name,
-        ret_t,
-        this.env
-      )
+      this.data_ctors[name] = new Exps.DataCtorValue(this, name, ret_t)
     }
   }
 

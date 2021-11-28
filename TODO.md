@@ -1,6 +1,5 @@
 # inductive datatype -- Data
 
-- `DataCtorValue` -- remove `env` for now
 - move `TypeCtorValue.apply_data_ctor` to `DataCtorValue.apply_with_fixed`
 - `TypeCtorValue` -- `apply_fixed` also return `arg_t_values`
 
