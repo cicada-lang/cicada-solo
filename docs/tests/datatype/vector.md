@@ -8,7 +8,7 @@ title: Vector
 datatype Vector(E: Type) (length: Nat) {
   vecnil: Vector(E, Nat.zero)
   vec(
-    returned prev: Nat,
+    vague prev: Nat,
     head: E,
     tail: Vector(E, prev),
   ): Vector(E, Nat.add1(prev))

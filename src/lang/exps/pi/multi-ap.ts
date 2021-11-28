@@ -52,16 +52,16 @@ export class MultiAp extends Exp {
     const inferred = infer(ctx, this.target)
     const first_arg_entry = this.arg_entries[0]
 
-    if (inferred.t instanceof Exps.ReturnedPiValue) {
-      if (first_arg_entry && first_arg_entry.kind === "returned") {
+    if (inferred.t instanceof Exps.VaguePiValue) {
+      if (first_arg_entry && first_arg_entry.kind === "vague") {
         const next_multi_ap = new Exps.MultiAp(
-          new Exps.ReturnedAp(this.target, first_arg_entry.arg, this.meta),
+          new Exps.VagueAp(this.target, first_arg_entry.arg, this.meta),
           this.arg_entries.slice(1),
           this.meta
         )
         return check(ctx, next_multi_ap, t)
       } else {
-        return inferred.t.returned_inserter.insert_returned_ap(
+        return inferred.t.vague_inserter.insert_vague_ap(
           ctx,
           inferred.core,
           this.arg_entries,
@@ -88,8 +88,8 @@ export class MultiAp extends Exp {
       case "implicit": {
         return new Exps.ImplicitAp(target, arg_entry.arg, this.meta)
       }
-      case "returned": {
-        return new Exps.ReturnedAp(target, arg_entry.arg, this.meta)
+      case "vague": {
+        return new Exps.VagueAp(target, arg_entry.arg, this.meta)
       }
       case "plain": {
         return new Exps.Ap(target, arg_entry.arg, this.meta)
@@ -106,8 +106,8 @@ export class MultiAp extends Exp {
             return entry.arg.format()
           case "implicit":
             return `implicit ${entry.arg.format()}`
-          case "returned":
-            return `returned ${entry.arg.format()}`
+          case "vague":
+            return `vague ${entry.arg.format()}`
         }
       })
       .join(", ")

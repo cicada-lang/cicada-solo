@@ -4,7 +4,6 @@ import { Value } from "../value"
 
 export abstract class Core {
   instanceofCore = true
-
   abstract evaluate(env: Env): Value
   abstract format(): string
   abstract alpha_format(ctx: AlphaCtx): string

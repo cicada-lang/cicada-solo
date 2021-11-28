@@ -6,7 +6,7 @@ import { Closure } from "../closure"
 import * as Exps from ".."
 import { FnFormater } from "../pi/fn-formater"
 
-export class ReturnedFnCore extends Core {
+export class VagueFnCore extends Core {
   name: string
   ret: Core
 
@@ -17,11 +17,11 @@ export class ReturnedFnCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    return new Exps.ReturnedFnValue(new Closure(env, this.name, this.ret))
+    return new Exps.VagueFnValue(new Closure(env, this.name, this.ret))
   }
 
   fn_formater: FnFormater = new FnFormater(this, {
-    decorate_name: (name) => `returned ${name}`,
+    decorate_name: (name) => `vague ${name}`,
   })
 
   format(): string {
@@ -30,6 +30,6 @@ export class ReturnedFnCore extends Core {
 
   alpha_format(ctx: AlphaCtx): string {
     const fn_format = this.ret.alpha_format(ctx.extend(this.name))
-    return `(returned ${this.name}) => { ${fn_format} }`
+    return `(vague ${this.name}) => { ${fn_format} }`
   }
 }

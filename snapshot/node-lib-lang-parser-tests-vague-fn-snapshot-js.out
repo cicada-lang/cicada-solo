@@ -1,0 +1,1 @@
+(vague A, head, tail) => { li(head, tail) }

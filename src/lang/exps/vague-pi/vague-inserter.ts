@@ -13,12 +13,12 @@ import * as ut from "../../../ut"
 import { Closure } from "../closure"
 import { ExpTrace } from "../../errors"
 
-interface ReturnedApEntry {
+interface VagueApEntry {
   arg_t: Value
-  returned_arg: Value
+  vague_arg: Value
 }
 
-export class ReturnedInserter {
+export class VagueInserter {
   arg_t: Value
   ret_t_cl: Closure
 
@@ -27,19 +27,19 @@ export class ReturnedInserter {
     this.ret_t_cl = ret_t_cl
   }
 
-  insert_returned_ap(
+  insert_vague_ap(
     ctx: Ctx,
     target_core: Core,
     arg_entries: Array<Exps.ArgEntry>,
     t: Value
   ): Core {
-    const { solution, number_of_solved_args } = solve_returned_args(
+    const { solution, number_of_solved_args } = solve_vague_args(
       ctx,
-      new Exps.ReturnedPiValue(this.arg_t, this.ret_t_cl),
+      new Exps.VaguePiValue(this.arg_t, this.ret_t_cl),
       t
     )
 
-    const returned_ap_entries = this.collect_returned_ap_entries(
+    const vague_ap_entries = this.collect_vague_ap_entries(
       ctx,
       solution,
       number_of_solved_args,
@@ -47,17 +47,17 @@ export class ReturnedInserter {
     )
 
     let result_core = target_core
-    for (const entry of returned_ap_entries) {
-      const arg_core = readback(ctx, entry.arg_t, entry.returned_arg)
-      result_core = new Exps.ReturnedApCore(result_core, arg_core)
+    for (const entry of vague_ap_entries) {
+      const arg_core = readback(ctx, entry.arg_t, entry.vague_arg)
+      result_core = new Exps.VagueApCore(result_core, arg_core)
     }
 
     const arg_core_entries = check_arg_entries(
       ctx,
-      drop_returned_pi(
+      drop_vague_pi(
         ctx,
-        new Exps.ReturnedPiValue(this.arg_t, this.ret_t_cl),
-        returned_ap_entries
+        new Exps.VaguePiValue(this.arg_t, this.ret_t_cl),
+        vague_ap_entries
       ),
       arg_entries
     )
@@ -69,21 +69,21 @@ export class ReturnedInserter {
     return result_core
   }
 
-  collect_returned_ap_entries(
+  collect_vague_ap_entries(
     ctx: Ctx,
     solution: Solution,
     number_of_solved_args: number,
-    entries: Array<ReturnedApEntry>
-  ): Array<ReturnedApEntry> {
+    entries: Array<VagueApEntry>
+  ): Array<VagueApEntry> {
     if (entries.length === number_of_solved_args) {
       return entries
     }
 
-    const entry = this.returned_ap_entry(ctx, solution)
-    const ret_t = this.ret_t_cl.apply(entry.returned_arg)
+    const entry = this.vague_ap_entry(ctx, solution)
+    const ret_t = this.ret_t_cl.apply(entry.vague_arg)
 
-    if (ret_t instanceof Exps.ReturnedPiValue) {
-      return ret_t.returned_inserter.collect_returned_ap_entries(
+    if (ret_t instanceof Exps.VaguePiValue) {
+      return ret_t.vague_inserter.collect_vague_ap_entries(
         ctx,
         solution,
         number_of_solved_args,
@@ -94,10 +94,10 @@ export class ReturnedInserter {
     }
   }
 
-  private returned_ap_entry(ctx: Ctx, solution: Solution): ReturnedApEntry {
+  private vague_ap_entry(ctx: Ctx, solution: Solution): VagueApEntry {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
-    const returned_arg = solution.find(fresh_name)
-    if (returned_arg === undefined) {
+    const vague_arg = solution.find(fresh_name)
+    if (vague_arg === undefined) {
       throw new ExpTrace(
         [
           `Fail to find ${fresh_name} in solution`,
@@ -107,22 +107,22 @@ export class ReturnedInserter {
       )
     }
 
-    return { arg_t: this.arg_t, returned_arg }
+    return { arg_t: this.arg_t, vague_arg }
   }
 }
 
-function solve_returned_args(
+function solve_vague_args(
   ctx: Ctx,
   ret_t: Value,
   t: Value,
   number_of_solved_args: number = 0
 ): { solution: Solution; number_of_solved_args: number } {
   if (
-    ret_t instanceof Exps.ReturnedPiValue ||
+    ret_t instanceof Exps.VaguePiValue ||
     ret_t instanceof Exps.ImplicitPiValue ||
     ret_t instanceof Exps.PiValue
   ) {
-    // NOTE if the given type is also a returned pi, we can also handle it,
+    // NOTE if the given type is also a vague pi, we can also handle it,
     //   because we try each possible case during unification.
     const solution = Solution.empty.unify(ctx, new Exps.TypeValue(), ret_t, t)
     if (Solution.failure_p(solution)) {
@@ -130,7 +130,7 @@ function solve_returned_args(
       const variable = new Exps.VarNeutral(fresh_name)
       const not_yet_value = new Exps.NotYetValue(ret_t.arg_t, variable)
       const next_ret_t = ret_t.ret_t_cl.apply(not_yet_value)
-      return solve_returned_args(ctx, next_ret_t, t, number_of_solved_args + 1)
+      return solve_vague_args(ctx, next_ret_t, t, number_of_solved_args + 1)
     } else {
       return { solution, number_of_solved_args }
     }
@@ -146,15 +146,15 @@ function solve_returned_args(
   }
 }
 
-function drop_returned_pi(
+function drop_vague_pi(
   ctx: Ctx,
   ret_t: Value,
-  returned_ap_entries: Array<ReturnedApEntry>
+  vague_ap_entries: Array<VagueApEntry>
 ): Value {
-  if (ret_t instanceof Exps.ReturnedPiValue && returned_ap_entries.length > 0) {
-    const [entry, ...rest] = returned_ap_entries
-    const next_ret_t = ret_t.ret_t_cl.apply(entry.returned_arg)
-    return drop_returned_pi(ctx, next_ret_t, rest)
+  if (ret_t instanceof Exps.VaguePiValue && vague_ap_entries.length > 0) {
+    const [entry, ...rest] = vague_ap_entries
+    const next_ret_t = ret_t.ret_t_cl.apply(entry.vague_arg)
+    return drop_vague_pi(ctx, next_ret_t, rest)
   } else {
     return ret_t
   }
@@ -168,8 +168,8 @@ function wrap_arg_core_entry(
     case "implicit": {
       return new Exps.ImplicitApCore(target_core, arg_core_entry.arg)
     }
-    case "returned": {
-      return new Exps.ReturnedApCore(target_core, arg_core_entry.arg)
+    case "vague": {
+      return new Exps.VagueApCore(target_core, arg_core_entry.arg)
     }
     case "plain": {
       return new Exps.ApCore(target_core, arg_core_entry.arg)

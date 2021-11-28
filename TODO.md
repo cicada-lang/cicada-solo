@@ -6,17 +6,17 @@
 - [refactor] `CurriedTypeCtorApHandler`
 - [refactor] `TypeCtorApHandler`
 
-- `CurriedDataCtorValue` -- `readback` to `ApCore`, `ReturnedApCore` or `ImplicitApCore`
+- `CurriedDataCtorValue` -- `readback` to `ApCore`, `VagueApCore` or `ImplicitApCore`
 
 - `DataValue` -- fix `unify` -- compare kind of `arg_value_entry`
 
 - `DataCtorValue` -- `unify`
 - `CurriedDataCtorValue` -- `unify`
 
-- `TypeCtorValue` -- `data_ctor_bindings` -- handle `returned`
+- `TypeCtorValue` -- `data_ctor_bindings` -- handle `vague`
 - `TypeCtorValue` -- `data_ctor_bindings` -- handle `implicit`
 
-- data construction test by `Vector` (with `returned`)
+- data construction test by `Vector` (with `vague`)
 
 # inductive datatype -- induction
 
@@ -227,7 +227,7 @@
 
 # maybe
 
-- [maybe] currently `implicit-pi` and `returned-pi` has the same structure,
+- [maybe] currently `implicit-pi` and `vague-pi` has the same structure,
   only the inserters are different, if we need the third such feature,
   and the structures are still the same, we should do an abstraction (maybe `decorated-pi`).
 

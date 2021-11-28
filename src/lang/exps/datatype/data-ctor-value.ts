@@ -12,7 +12,7 @@ import * as ut from "../../../ut"
 import * as Exps from ".."
 import { DataCtorApHandler } from "./data-ctor-ap-handler"
 
-// TODO need `kind: "plain" | "implicit" | "returned"`
+// TODO need `kind: "plain" | "implicit" | "vague"`
 export type DataCtorBinding = { name: string; arg_t: Core }
 
 export class DataCtorValue extends Value {

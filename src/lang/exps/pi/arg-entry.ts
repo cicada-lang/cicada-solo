@@ -3,16 +3,16 @@ import { Core } from "../../core"
 import { Value } from "../../value"
 
 export type ArgEntry = {
-  kind: "plain" | "implicit" | "returned"
+  kind: "plain" | "implicit" | "vague"
   arg: Exp
 }
 
 export type ArgCoreEntry = {
-  kind: "plain" | "implicit" | "returned"
+  kind: "plain" | "implicit" | "vague"
   arg: Core
 }
 
 export type ArgValueEntry = {
-  kind: "plain" | "implicit" | "returned"
+  kind: "plain" | "implicit" | "vague"
   arg: Value
 }

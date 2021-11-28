@@ -5,7 +5,7 @@ import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import * as Exps from ".."
 
-export class ReturnedApNeutral extends Neutral {
+export class VagueApNeutral extends Neutral {
   target: Neutral
   arg: Normal
 
@@ -16,14 +16,14 @@ export class ReturnedApNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Exps.ReturnedApCore(
+    return new Exps.VagueApCore(
       this.target.readback_neutral(ctx),
       this.arg.readback_normal(ctx)
     )
   }
 
   unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
-    if (!(that instanceof ReturnedApNeutral)) {
+    if (!(that instanceof VagueApNeutral)) {
       return Solution.failure
     }
 

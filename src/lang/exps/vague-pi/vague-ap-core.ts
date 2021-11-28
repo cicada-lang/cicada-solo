@@ -8,7 +8,7 @@ import { InternalError } from "../../errors"
 import * as Exps from ".."
 import { ApFormater } from "../pi/ap-formater"
 
-export class ReturnedApCore extends Core {
+export class VagueApCore extends Core {
   target: Core
   arg: Core
 
@@ -19,14 +19,14 @@ export class ReturnedApCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    return ReturnedApCore.apply(
+    return VagueApCore.apply(
       evaluate(env, this.target),
       evaluate(env, this.arg)
     )
   }
 
   ap_formater = new ApFormater(this, {
-    decorate_arg: (arg) => `returned ${arg}`,
+    decorate_arg: (arg) => `vague ${arg}`,
   })
 
   format(): string {
@@ -38,32 +38,29 @@ export class ReturnedApCore extends Core {
   }
 
   static apply(target: Value, arg: Value): Value {
-    if (target.ap_handler?.returned_apply) {
-      return target.ap_handler.returned_apply(arg)
+    if (target.ap_handler?.vague_apply) {
+      return target.ap_handler.vague_apply(arg)
     }
 
-    if (target instanceof Exps.ReturnedFnValue) {
+    if (target instanceof Exps.VagueFnValue) {
       return target.ret_cl.apply(arg)
     }
 
     if (!(target instanceof Exps.NotYetValue)) {
       throw InternalError.wrong_target(target, {
-        expected: [Exps.ReturnedFnValue],
+        expected: [Exps.VagueFnValue],
       })
     }
 
-    if (!(target.t instanceof Exps.ReturnedPiValue)) {
+    if (!(target.t instanceof Exps.VaguePiValue)) {
       throw InternalError.wrong_target_t(target.t, {
-        expected: [Exps.ReturnedPiValue],
+        expected: [Exps.VaguePiValue],
       })
     }
 
     return new Exps.NotYetValue(
       target.t.ret_t_cl.apply(arg),
-      new Exps.ReturnedApNeutral(
-        target.neutral,
-        new Normal(target.t.arg_t, arg)
-      )
+      new Exps.VagueApNeutral(target.neutral, new Normal(target.t.arg_t, arg))
     )
   }
 }

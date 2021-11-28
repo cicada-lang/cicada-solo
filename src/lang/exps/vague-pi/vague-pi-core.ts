@@ -7,7 +7,7 @@ import { evaluate } from "../../core"
 import * as Exps from ".."
 import { PiFormater } from "../pi/pi-formater"
 
-export class ReturnedPiCore extends Core {
+export class VaguePiCore extends Core {
   name: string
   arg_t: Core
   ret_t: Core
@@ -23,11 +23,11 @@ export class ReturnedPiCore extends Core {
     const arg_t = evaluate(env, this.arg_t)
     const ret_t_cl = new Closure(env, this.name, this.ret_t)
 
-    return new Exps.ReturnedPiValue(arg_t, ret_t_cl)
+    return new Exps.VaguePiValue(arg_t, ret_t_cl)
   }
 
   pi_formater: PiFormater = new PiFormater(this, {
-    decorate_binding: (binding) => `returned ${binding}`,
+    decorate_binding: (binding) => `vague ${binding}`,
   })
 
   format(): string {
@@ -37,6 +37,6 @@ export class ReturnedPiCore extends Core {
   alpha_format(ctx: AlphaCtx): string {
     const arg_t_format = this.arg_t.alpha_format(ctx)
     const pi_format = this.ret_t.alpha_format(ctx.extend(this.name))
-    return `(returned ${arg_t_format}) -> ${pi_format}`
+    return `(vague ${arg_t_format}) -> ${pi_format}`
   }
 }

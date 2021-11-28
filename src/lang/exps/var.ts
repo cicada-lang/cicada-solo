@@ -39,8 +39,8 @@ export class Var extends Exp {
   check(ctx: Ctx, t: Value): Core {
     const found_t = ctx.find_type(this.name)
 
-    if (found_t instanceof Exps.ReturnedPiValue) {
-      return found_t.returned_inserter.insert_returned_ap(
+    if (found_t instanceof Exps.VaguePiValue) {
+      return found_t.vague_inserter.insert_vague_ap(
         ctx,
         new Exps.VarCore(this.name),
         [],

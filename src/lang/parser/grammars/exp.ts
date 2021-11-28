@@ -419,12 +419,7 @@ export const binding = {
       '":"',
       { exp: "exp" },
     ],
-    "binding:returned": [
-      '"returned"',
-      { name: "identifier" },
-      '":"',
-      { exp: "exp" },
-    ],
+    "binding:vague": ['"vague"', { name: "identifier" }, '":"', { exp: "exp" }],
   },
 }
 
@@ -442,7 +437,7 @@ export const name_entry = {
   $grammar: {
     "name_entry:name_entry": [{ name: "identifier" }],
     "name_entry:implicit_name_entry": ['"implicit"', { name: "identifier" }],
-    "name_entry:returned_name_entry": ['"returned"', { name: "identifier" }],
+    "name_entry:vague_name_entry": ['"vague"', { name: "identifier" }],
   },
 }
 
@@ -470,7 +465,7 @@ export const arg_entry = {
   $grammar: {
     "arg_entry:plain": [{ arg: "exp" }],
     "arg_entry:implicit": ['"implicit"', { arg: "exp" }],
-    "arg_entry:returned": ['"returned"', { arg: "exp" }],
+    "arg_entry:vague": ['"vague"', { arg: "exp" }],
   },
 }
 

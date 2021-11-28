@@ -12,7 +12,7 @@ import { ExpTrace, InternalError } from "../../errors"
 import * as Exps from ".."
 import { ApFormater } from "../pi/ap-formater"
 
-export class ReturnedAp extends Exp {
+export class VagueAp extends Exp {
   meta: ExpMeta
   target: Exp
   arg: Exp
@@ -31,8 +31,8 @@ export class ReturnedAp extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): ReturnedAp {
-    return new ReturnedAp(
+  subst(name: string, exp: Exp): VagueAp {
+    return new VagueAp(
       subst(this.target, name, exp),
       subst(this.arg, name, exp),
       this.meta
@@ -42,13 +42,13 @@ export class ReturnedAp extends Exp {
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred = infer(ctx, this.target)
 
-    if (inferred.t instanceof Exps.ReturnedPiValue) {
+    if (inferred.t instanceof Exps.VaguePiValue) {
       const { arg_t, ret_t_cl } = inferred.t
       const arg_core = check(ctx, this.arg, arg_t)
       const arg_value = evaluate(ctx.to_env(), arg_core)
       return {
         t: ret_t_cl.apply(arg_value),
-        core: new Exps.ReturnedApCore(inferred.core, arg_core),
+        core: new Exps.VagueApCore(inferred.core, arg_core),
       }
     }
 
@@ -61,7 +61,7 @@ export class ReturnedAp extends Exp {
   }
 
   ap_formater = new ApFormater(this, {
-    decorate_arg: (arg) => `returned ${arg}`,
+    decorate_arg: (arg) => `vague ${arg}`,
   })
 
   format(): string {

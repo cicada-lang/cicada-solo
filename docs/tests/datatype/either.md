@@ -244,10 +244,10 @@ check! list_ref(3, li! ["a", "b", "c"]): Either(String, Trivial)
 check! list_ref(4, li! ["a", "b", "c"]): Either(String, Trivial)
 ```
 
-## list_ref_returned
+## list_ref_vague
 
 ``` cicada
-function list_ref_returned(returned E: Type, index: Nat): (List(E)) -> Maybe(E) {
+function list_ref_vague(vague E: Type, index: Nat): (List(E)) -> Maybe(E) {
   return induction_nat(
     index,
     (_) => (List(E)) -> Maybe(E),
@@ -263,16 +263,16 @@ function list_ref_returned(returned E: Type, index: Nat): (List(E)) -> Maybe(E) 
   )
 }
 
-list_ref_returned(returned String, 0, li! ["a", "b", "c"])
-check! list_ref_returned(returned String, 0, li! ["a", "b", "c"]): Either(String, Trivial)
+list_ref_vague(vague String, 0, li! ["a", "b", "c"])
+check! list_ref_vague(vague String, 0, li! ["a", "b", "c"]): Either(String, Trivial)
 
-check! list_ref_returned(0, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref_vague(0, li! ["a", "b", "c"]): Either(String, Trivial)
 ```
 
 ``` cicada
-check! list_ref_returned(0, li! ["a", "b", "c"]): Either(String, Trivial)
-check! list_ref_returned(1, li! ["a", "b", "c"]): Either(String, Trivial)
-check! list_ref_returned(2, li! ["a", "b", "c"]): Either(String, Trivial)
-check! list_ref_returned(3, li! ["a", "b", "c"]): Either(String, Trivial)
-check! list_ref_returned(4, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref_vague(0, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref_vague(1, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref_vague(2, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref_vague(3, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref_vague(4, li! ["a", "b", "c"]): Either(String, Trivial)
 ```

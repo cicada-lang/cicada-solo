@@ -1,3 +1,0 @@
-(returned A: Type, head: A, tail: List(A)) -> List(A)
-(returned A: Type) -> List(A)
-(returned A: Type, returned B: Type) -> [_: List(A) | List(B)]

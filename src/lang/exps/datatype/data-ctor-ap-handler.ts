@@ -50,13 +50,13 @@ export class DataCtorApHandler extends ApHandler {
     return new Exps.CurriedDataCtorValue(this.target, arg_value_entries)
   }
 
-  returned_apply(arg: Value): Value {
+  vague_apply(arg: Value): Value {
     if (this.target.arity === 0) {
-      throw new Error("I can not (returned) apply data constructor of arity 0.")
+      throw new Error("I can not (vague) apply data constructor of arity 0.")
     }
 
     const arg_value_entries: Array<Exps.ArgValueEntry> = [
-      { kind: "returned", arg },
+      { kind: "vague", arg },
     ]
 
     if (this.target.arity === 1) {

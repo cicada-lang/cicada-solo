@@ -24,8 +24,8 @@ export function pi_handler(
             span: pt.span_closure([binding.span, ret_t.span]),
           })
         }
-        case "returned": {
-          return new Exps.ReturnedPi(binding.name, binding.exp, result, {
+        case "vague": {
+          return new Exps.VaguePi(binding.name, binding.exp, result, {
             span: pt.span_closure([binding.span, ret_t.span]),
           })
         }
@@ -50,8 +50,8 @@ export function fn_handler(body: { [key: string]: pt.Tree }): Exp {
             span: pt.span_closure([name_entry.span, ret.span]),
           })
         }
-        case "returned": {
-          return new Exps.ReturnedFn(name_entry.name, result, {
+        case "vague": {
+          return new Exps.VagueFn(name_entry.name, result, {
             span: pt.span_closure([name_entry.span, ret.span]),
           })
         }
@@ -393,8 +393,8 @@ export function sequence_entry_matcher(tree: pt.Tree): {
                 span: pt.span_closure([binding.span, sequence.span]),
               })
             }
-            case "returned": {
-              return new Exps.ReturnedFn(binding.name, result, {
+            case "vague": {
+              return new Exps.VagueFn(binding.name, result, {
                 span: pt.span_closure([binding.span, sequence.span]),
               })
             }
@@ -463,8 +463,8 @@ export function cls_entry_matcher(tree: pt.Tree): {
                 span: pt.span_closure([binding.span, sequence.span]),
               })
             }
-            case "returned": {
-              return new Exps.ReturnedFn(binding.name, result, {
+            case "vague": {
+              return new Exps.VagueFn(binding.name, result, {
                 span: pt.span_closure([binding.span, sequence.span]),
               })
             }
@@ -482,7 +482,7 @@ export function cls_entry_matcher(tree: pt.Tree): {
 }
 
 type Binding = {
-  kind: "named" | "implicit" | "returned"
+  kind: "named" | "implicit" | "vague"
   name: string
   exp: Exp
   span: pt.Span
@@ -517,8 +517,8 @@ export function binding_matcher(tree: pt.Tree): Binding {
       exp: exp_matcher(exp),
       span,
     }),
-    "binding:returned": ({ name, exp }, { span }) => ({
-      kind: "returned",
+    "binding:vague": ({ name, exp }, { span }) => ({
+      kind: "vague",
       name: pt.str(name),
       exp: exp_matcher(exp),
       span,
@@ -561,7 +561,7 @@ export function names_matcher(tree: pt.Tree): Array<NameEntry> {
 }
 
 type NameEntry = {
-  kind: "name" | "implicit" | "returned"
+  kind: "name" | "implicit" | "vague"
   name: string
   span: pt.Span
 }
@@ -578,8 +578,8 @@ export function name_entry_matcher(tree: pt.Tree): NameEntry {
       name: pt.str(name),
       span,
     }),
-    "name_entry:returned_name_entry": ({ name }, { span }) => ({
-      kind: "returned",
+    "name_entry:vague_name_entry": ({ name }, { span }) => ({
+      kind: "vague",
       name: pt.str(name),
       span,
     }),
@@ -614,8 +614,8 @@ export function arg_entry_matcher(tree: pt.Tree): Exps.ArgEntry {
       kind: "implicit",
       arg: exp_matcher(arg),
     }),
-    "arg_entry:returned": ({ arg }) => ({
-      kind: "returned",
+    "arg_entry:vague": ({ arg }) => ({
+      kind: "vague",
       arg: exp_matcher(arg),
     }),
   })(tree)
@@ -643,8 +643,8 @@ export function property_matcher(tree: pt.Tree): Exps.Prop {
                 span: pt.span_closure([name_entry.span, sequence.span]),
               })
             }
-            case "returned": {
-              return new Exps.ReturnedFn(name_entry.name, result, {
+            case "vague": {
+              return new Exps.VagueFn(name_entry.name, result, {
                 span: pt.span_closure([name_entry.span, sequence.span]),
               })
             }

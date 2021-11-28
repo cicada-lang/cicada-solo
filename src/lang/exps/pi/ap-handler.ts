@@ -9,5 +9,5 @@ export abstract class ApHandler {
   infer_by_target?(ctx: Ctx, core: Core, arg: Exp): { t: Value; core: Core }
 
   implicit_apply?(arg: Value): Value
-  returned_apply?(arg: Value): Value
+  vague_apply?(arg: Value): Value
 }

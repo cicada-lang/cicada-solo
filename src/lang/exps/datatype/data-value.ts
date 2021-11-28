@@ -53,8 +53,8 @@ export class DataValue extends Value {
           case "implicit":
             result_core = new Exps.ImplicitApCore(result_core, arg_core)
             break
-          case "returned":
-            result_core = new Exps.ReturnedApCore(result_core, arg_core)
+          case "vague":
+            result_core = new Exps.VagueApCore(result_core, arg_core)
             break
         }
       }

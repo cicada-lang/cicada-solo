@@ -9,18 +9,18 @@ import { ExpTrace } from "../../errors"
 import * as ut from "../../../ut"
 import * as Exps from ".."
 import { ReadbackEtaExpansion } from "../../value"
-import { ReturnedInserter } from "./returned-inserter"
+import { VagueInserter } from "./vague-inserter"
 
-export class ReturnedPiValue extends Value implements ReadbackEtaExpansion {
+export class VaguePiValue extends Value implements ReadbackEtaExpansion {
   arg_t: Value
   ret_t_cl: Closure
-  returned_inserter: ReturnedInserter
+  vague_inserter: VagueInserter
 
   constructor(arg_t: Value, ret_t_cl: Closure) {
     super()
     this.arg_t = arg_t
     this.ret_t_cl = ret_t_cl
-    this.returned_inserter = new ReturnedInserter(arg_t, ret_t_cl)
+    this.vague_inserter = new VagueInserter(arg_t, ret_t_cl)
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
@@ -35,7 +35,7 @@ export class ReturnedPiValue extends Value implements ReadbackEtaExpansion {
         this.ret_t_cl.apply(not_yet_value)
       )
 
-      return new Exps.ReturnedPiCore(fresh_name, arg_t, ret_t_core)
+      return new Exps.VaguePiCore(fresh_name, arg_t, ret_t_core)
     }
   }
 
@@ -45,7 +45,7 @@ export class ReturnedPiValue extends Value implements ReadbackEtaExpansion {
     //   This implements the η-rule for functions.
 
     const fresh_name =
-      value instanceof Exps.ReturnedFnValue
+      value instanceof Exps.VagueFnValue
         ? ctx.freshen(value.ret_cl.name)
         : ctx.freshen(this.ret_t_cl.name)
 
@@ -55,14 +55,14 @@ export class ReturnedPiValue extends Value implements ReadbackEtaExpansion {
     const result = readback(
       ctx.extend(fresh_name, this.arg_t),
       pi,
-      Exps.ReturnedApCore.apply(value, not_yet_value)
+      Exps.VagueApCore.apply(value, not_yet_value)
     )
 
-    return new Exps.ReturnedFnCore(fresh_name, result)
+    return new Exps.VagueFnCore(fresh_name, result)
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (!(that instanceof Exps.ReturnedPiValue)) {
+    if (!(that instanceof Exps.VaguePiValue)) {
       return Solution.failure
     }
 

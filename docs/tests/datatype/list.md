@@ -21,10 +21,10 @@ check! MyList: (Type) -> Type
 check! MyList(Nat): Type
 
 check! MyList.my_null: MyList(Nat)
-check! MyList.my_null(returned Nat): MyList(Nat)
+check! MyList.my_null(vague Nat): MyList(Nat)
 
 check! MyList.my_null: MyList(String)
-check! MyList.my_null(returned String): MyList(String)
+check! MyList.my_null(vague String): MyList(String)
 check! MyList.my_cons(1, MyList.my_null): MyList(Nat)
 
 check! MyList.my_cons(1, MyList.my_null): MyList(Nat)

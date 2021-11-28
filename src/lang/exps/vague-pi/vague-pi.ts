@@ -11,10 +11,10 @@ import * as ut from "../../../ut"
 import { PiFormater } from "../pi/pi-formater"
 
 // NOTE In infer-mode elaboration,
-//   we can use returned arguments, which decorates on top of pi type,
-//   and will be resolved from the type of next non-returned argument.
+//   we can use vague arguments, which decorates on top of pi type,
+//   and will be resolved from the type of next non-vague argument.
 
-export class ReturnedPi extends Exp {
+export class VaguePi extends Exp {
   meta: ExpMeta
   name: string
   arg_t: Exp
@@ -35,9 +35,9 @@ export class ReturnedPi extends Exp {
     ])
   }
 
-  subst(name: string, exp: Exp): ReturnedPi {
+  subst(name: string, exp: Exp): VaguePi {
     if (name === this.name) {
-      return new ReturnedPi(
+      return new VaguePi(
         this.name,
         subst(this.arg_t, name, exp),
         this.ret_t,
@@ -48,7 +48,7 @@ export class ReturnedPi extends Exp {
       const fresh_name = ut.freshen(free_names, this.name)
       const ret_t = subst(this.ret_t, this.name, new Exps.Var(fresh_name))
 
-      return new ReturnedPi(
+      return new VaguePi(
         fresh_name,
         subst(this.arg_t, name, exp),
         subst(ret_t, name, exp),
@@ -70,12 +70,12 @@ export class ReturnedPi extends Exp {
 
     return {
       t: new Exps.TypeValue(),
-      core: new Exps.ReturnedPiCore(fresh_name, arg_t_core, ret_t_core),
+      core: new Exps.VaguePiCore(fresh_name, arg_t_core, ret_t_core),
     }
   }
 
   pi_formater: PiFormater = new PiFormater(this, {
-    decorate_binding: (binding) => `returned ${binding}`,
+    decorate_binding: (binding) => `vague ${binding}`,
   })
 
   format(): string {

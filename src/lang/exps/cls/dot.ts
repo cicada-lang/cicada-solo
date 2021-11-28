@@ -35,8 +35,8 @@ export class Dot extends Exp {
   check(ctx: Ctx, t: Value): Core {
     const inferred = infer(ctx, this)
 
-    if (inferred.t instanceof Exps.ReturnedPiValue) {
-      return inferred.t.returned_inserter.insert_returned_ap(
+    if (inferred.t instanceof Exps.VaguePiValue) {
+      return inferred.t.vague_inserter.insert_vague_ap(
         ctx,
         inferred.core,
         [],
