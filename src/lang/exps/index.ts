@@ -100,7 +100,6 @@ export * from "./datatype/curried-type-ctor-value"
 export * from "./datatype/datatype-value"
 export * from "./datatype/data-ctor-value"
 export * from "./datatype/curried-data-ctor-value"
-export * from "./datatype/data-core"
 export * from "./datatype/data-value"
 
 // NOTE subclass must follow abstract class

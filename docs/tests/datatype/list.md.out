@@ -1,9 +1,9 @@
 (_) => MyList(_): (_: Type) -> Type
 MyList(Nat): Type
-MyList::my_null(Nat): MyList(Nat)
-MyList::my_null(Nat): MyList(Nat)
-MyList::my_null(String): MyList(String)
-MyList::my_null(String): MyList(String)
+MyList.my_null(returned Nat): MyList(Nat)
+MyList.my_null(returned Nat): MyList(Nat)
+MyList.my_null(returned String): MyList(String)
+MyList.my_null(returned String): MyList(String)
 refl: Equal(Nat, 3, 3)
 refl: Equal(List(Nat), li(1, li(2, li(3, li(4, li(5, li(6, nil)))))), li(1, li(2, li(3, li(4, li(5, li(6, nil)))))))
 refl: Equal(List(Nat), li(1, li(2, li(3, li(4, nil)))), li(1, li(2, li(3, li(4, nil)))))

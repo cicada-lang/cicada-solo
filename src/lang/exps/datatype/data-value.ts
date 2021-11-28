@@ -9,13 +9,17 @@ import { ExpTrace } from "../../errors"
 export class DataValue extends Value {
   type_ctor_name: string
   name: string
-  args: Array<Value>
+  arg_value_entries: Array<Exps.ArgValueEntry>
 
-  constructor(type_ctor_name: string, name: string, args: Array<Value>) {
+  constructor(
+    type_ctor_name: string,
+    name: string,
+    arg_value_entries: Array<Exps.ArgValueEntry>
+  ) {
     super()
     this.type_ctor_name = type_ctor_name
     this.name = name
-    this.args = args
+    this.arg_value_entries = arg_value_entries
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
@@ -27,37 +31,32 @@ export class DataValue extends Value {
       const data_ctor = t.type_ctor.get_data_ctor(this.name)
       const result = data_ctor.apply({
         fixed_args: t.args,
-        args: this.args,
+        args: this.arg_value_entries.map(({ arg }) => arg),
       })
 
-      // let result_core = new Exps.DotCore(
-      //   new Exps.VarCore(this.type_ctor_name),
-      //   this.name
-      // )
-
-      // for (
-      //   arg_result.fixed_arg_t_values
-
-      // ) {}
-
-      //   for (result.arg_t_values) {}
-
-      // return result_core
+      let result_core: Core = new Exps.DotCore(
+        new Exps.VarCore(this.type_ctor_name),
+        this.name
+      )
 
       const arg_t_values = [
         ...result.fixed_arg_t_values,
         ...result.arg_t_values,
       ]
 
-      // const arg_t_values = result.arg_t_values
-
-      if (arg_t_values.length === this.args.length) {
-        return new Exps.DataCore(
-          this.type_ctor_name,
-          this.name,
-          this.args.map((arg, index) => readback(ctx, arg_t_values[index], arg))
-        )
+      for (const [index, { kind, arg }] of this.arg_value_entries.entries()) {
+        const arg_core = readback(ctx, arg_t_values[index], arg)
+        switch (kind) {
+          case "plain":
+            result_core = new Exps.ApCore(result_core, arg_core)
+          case "implicit":
+            result_core = new Exps.ImplicitApCore(result_core, arg_core)
+          case "returned":
+            result_core = new Exps.ReturnedApCore(result_core, arg_core)
+        }
       }
+
+      return result_core
     }
   }
 
@@ -75,25 +74,30 @@ export class DataValue extends Value {
     const data_ctor = datatype.type_ctor.get_data_ctor(this.name)
     const { arg_t_values } = data_ctor.apply({
       fixed_args: datatype.args,
-      args: this.args,
+      args: this.arg_value_entries.map(({ arg }) => arg),
     })
 
     if (
-      arg_t_values.length !== this.args.length ||
-      arg_t_values.length !== that.args.length
+      arg_t_values.length !== this.arg_value_entries.length ||
+      arg_t_values.length !== that.arg_value_entries.length
     ) {
       throw new ExpTrace(
         [
           `I expect the following lengths to be the same.`,
           `  arg_t_values.length: ${arg_t_values.length}`,
-          `  this.args.length: ${this.args.length}`,
-          `  that.args.length: ${that.args.length}`,
+          `  this.arg_value_entries.length: ${this.arg_value_entries.length}`,
+          `  that.arg_value_entries.length: ${that.arg_value_entries.length}`,
         ].join("\n")
       )
     }
 
     for (const [index, arg_t] of arg_t_values.entries()) {
-      solution = solution.unify(ctx, arg_t, this.args[index], that.args[index])
+      solution = solution.unify(
+        ctx,
+        arg_t,
+        this.arg_value_entries.map(({ arg }) => arg)[index],
+        that.arg_value_entries.map(({ arg }) => arg)[index]
+      )
     }
 
     return solution

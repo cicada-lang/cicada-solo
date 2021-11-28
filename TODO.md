@@ -1,11 +1,5 @@
 # inductive datatype -- Data
 
-- `DataValue` -- fix `readback` -- should not use `DataCore`
-
-- remove `DataCore`
-
-- `DataValue` has `arg_value_entries` instead of `args`
-
 - `CurriedDataCtorApHandler` -- `apply`
 - `CurriedDataCtorApHandler` -- `implicit_apply`
 - `CurriedDataCtorApHandler` -- `returned_apply`
