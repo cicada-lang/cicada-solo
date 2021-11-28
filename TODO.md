@@ -1,6 +1,10 @@
 # inductive datatype -- Data
 
-- `TypeCtorValue` remove `ctors: Record<string, Core>`
+- `TypeCtorValue` -- `value_of_fixed` call `apply_fixed`
+
+- `TypeCtorValue` -- remove `ctors: Record<string, Core>`
+
+- `DataCtorValue.readback ???`
 
 - `DataCtorValue` -- `arity`
 

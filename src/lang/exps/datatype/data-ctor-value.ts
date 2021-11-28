@@ -19,11 +19,7 @@ export class DataCtorValue extends Value {
   name: string
   ret_t: Core
 
-  constructor(
-    type_ctor: Exps.TypeCtorValue,
-    name: string,
-    ret_t: Core,
-  ) {
+  constructor(type_ctor: Exps.TypeCtorValue, name: string, ret_t: Core) {
     super()
     this.type_ctor = type_ctor
     this.name = name
@@ -44,7 +40,7 @@ export class DataCtorValue extends Value {
   }): { env: Env; arg_t_values: Array<Value> } {
     const { fixed_args, args } = opts
 
-    let env = this.type_ctor.apply_fixed(fixed_args)
+    let { env } = this.type_ctor.apply_fixed(fixed_args)
     const arg_t_values: Array<Value> = []
     for (const [index, binding] of this.bindings.entries()) {
       // TODO handle implicit bindings

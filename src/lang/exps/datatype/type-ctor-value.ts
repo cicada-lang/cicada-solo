@@ -62,7 +62,7 @@ export class TypeCtorValue extends Value {
     return data_ctor
   }
 
-  apply_fixed(args: Array<Value>): Env {
+  apply_fixed(args: Array<Value>): { env: Env; arg_t_values: Array<Value> } {
     const fixed_entries = Array.from(Object.entries(this.fixed).entries())
 
     if (args.length < fixed_entries.length) {
@@ -76,13 +76,15 @@ export class TypeCtorValue extends Value {
     }
 
     let env = this.env
+    const arg_t_values: Array<Value> = []
     for (const [index, [name, arg_t_core]] of fixed_entries) {
       const arg_t = evaluate(env, arg_t_core)
       const arg = args[index]
       env = env.extend(name, arg)
+      arg_t_values.push(arg_t)
     }
 
-    return env
+    return { env, arg_t_values }
   }
 
   get arity(): number {
