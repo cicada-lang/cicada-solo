@@ -35,6 +35,24 @@ export class DataCtorApHandler extends ApHandler {
       ])
     }
 
-    return new Exps.CurriedDataCtorValue(this.target, [{ kind: "returned", arg }])
-  }  
+    return new Exps.CurriedDataCtorValue(this.target, [
+      { kind: "returned", arg },
+    ])
+  }
+
+  implicit_apply(arg: Value): Value {
+    if (this.target.arity === 0) {
+      throw new Error("I can not (implicit) apply data constructor of arity 0.")
+    }
+
+    if (this.target.arity === 1) {
+      return new Exps.DataValue(this.target.type_ctor.name, this.target.name, [
+        arg,
+      ])
+    }
+
+    return new Exps.CurriedDataCtorValue(this.target, [
+      { kind: "implicit", arg },
+    ])
+  }
 }

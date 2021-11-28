@@ -1,6 +1,5 @@
 # inductive datatype -- Data
 
-- `DataCtorApHandler` -- `implicit_apply`
 - `DataValue` -- fix `readback` -- should not use `DataCore`
 - `DataValue` has `arg_value_entries` instead of `args`
 
