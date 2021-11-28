@@ -1,7 +1,5 @@
 # inductive datatype -- Data
 
-- [refactor] `ReturnedApCore.apply` -- guard clauses instead of nested conditional
-
 - `ApHandler` has `implicit_apply` & `returned_apply`
 
 - `CurriedDataCtorValue`

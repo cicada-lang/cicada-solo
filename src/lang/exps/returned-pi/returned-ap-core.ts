@@ -40,22 +40,26 @@ export class ReturnedApCore extends Core {
   static apply(target: Value, arg: Value): Value {
     if (target instanceof Exps.ReturnedFnValue) {
       return target.apply(arg)
-    } else if (target instanceof Exps.NotYetValue) {
-      const { t, neutral } = target
-      if (t instanceof Exps.ReturnedPiValue) {
-        return new Exps.NotYetValue(
-          t.ret_t_cl.apply(arg),
-          new Exps.ReturnedApNeutral(neutral, new Normal(t.arg_t, arg))
-        )
-      } else {
-        throw InternalError.wrong_target_t(target.t, {
-          expected: [Exps.ReturnedPiValue],
-        })
-      }
-    } else {
+    }
+
+    if (!(target instanceof Exps.NotYetValue)) {
       throw InternalError.wrong_target(target, {
         expected: [Exps.ReturnedFnValue],
       })
     }
+
+    if (!(target.t instanceof Exps.ReturnedPiValue)) {
+      throw InternalError.wrong_target_t(target.t, {
+        expected: [Exps.ReturnedPiValue],
+      })
+    }
+
+    return new Exps.NotYetValue(
+      target.t.ret_t_cl.apply(arg),
+      new Exps.ReturnedApNeutral(
+        target.neutral,
+        new Normal(target.t.arg_t, arg)
+      )
+    )
   }
 }
