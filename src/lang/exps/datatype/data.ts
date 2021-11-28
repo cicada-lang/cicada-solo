@@ -62,6 +62,7 @@ export class Data extends Exp {
     }
 
     const data_ctor = datatype.type_ctor.get_data_ctor(this.name)
+
     if (this.args.length !== data_ctor.arity) {
       throw new ExpTrace(
         [
@@ -73,8 +74,7 @@ export class Data extends Exp {
     }
 
     const args: Array<Core> = []
-
-    const result = datatype.type_ctor.apply_data_ctor(this.name, {
+    const result = data_ctor.apply({
       fixed_args: datatype.args,
       args: (index, { arg_t, env }) => {
         const arg_core = check(ctx, this.args[index], arg_t)

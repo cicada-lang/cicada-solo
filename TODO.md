@@ -1,9 +1,6 @@
 # inductive datatype -- Data
 
-- move `TypeCtorValue.apply_data_ctor` to `DataCtorValue.apply_with_fixed`
 - `DataCtorValue.readback_ret_t`
-
-- move `TypeCtorValue.apply_data_ctor` to `DataCtorValue.apply`
 
 - `TypeCtorValue` remove `ctors: Record<string, Core>`
 

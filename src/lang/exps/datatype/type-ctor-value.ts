@@ -62,7 +62,7 @@ export class TypeCtorValue extends Value {
     return data_ctor
   }
 
-  private apply_fixed(args: Array<Value>): {
+  apply_fixed(args: Array<Value>): {
     env: Env
     arg_t_values: Record<string, Value>
   } {
@@ -85,31 +85,6 @@ export class TypeCtorValue extends Value {
       const arg = args[index]
       env = env.extend(name, arg)
       arg_t_values[name] = arg_t
-    }
-
-    return { env, arg_t_values }
-  }
-
-  apply_data_ctor(
-    data_ctor_name: string,
-    opts: {
-      fixed_args: Array<Value>
-      args: (index: number, opts: { arg_t: Value; env: Env }) => Value
-    }
-  ): { env: Env; arg_t_values: Array<Value> } {
-    const { fixed_args, args } = opts
-
-    const result = this.apply_fixed(fixed_args)
-    let env = result.env
-    const arg_t_values: Array<Value> = []
-    for (const [index, binding] of this.get_data_ctor(
-      data_ctor_name
-    ).bindings.entries()) {
-      // TODO handle implicit bindings
-      const arg_t = evaluate(env, binding.arg_t)
-      const arg = args(index, { arg_t, env })
-      env = env.extend(binding.name, arg)
-      arg_t_values.push(arg_t)
     }
 
     return { env, arg_t_values }
