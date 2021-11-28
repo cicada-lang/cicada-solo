@@ -38,6 +38,10 @@ export class ReturnedApCore extends Core {
   }
 
   static apply(target: Value, arg: Value): Value {
+    if (target.ap_handler?.returned_apply) {
+      return target.ap_handler.returned_apply(arg)
+    }
+
     if (target instanceof Exps.ReturnedFnValue) {
       return target.apply(arg)
     }
