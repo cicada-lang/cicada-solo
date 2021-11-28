@@ -18,7 +18,6 @@ export class TypeCtorValue extends Value {
   name: string
   fixed: Record<string, Core>
   varied: Record<string, Core>
-  ctors: Record<string, Core>
   data_ctors: Record<string, Exps.DataCtorValue>
   env: Env
 
@@ -33,7 +32,7 @@ export class TypeCtorValue extends Value {
     this.name = name
     this.fixed = fixed
     this.varied = varied
-    this.ctors = data_ctors
+
     // NOTE The type constructor itself might be referenced in its `ctors`.
     this.env = env.extend(this.name, this)
 

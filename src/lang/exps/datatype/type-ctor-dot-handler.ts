@@ -15,8 +15,8 @@ export class TypeCtorDotHandler extends DotHandler {
   }
 
   get(name: string): Value {
-    const ret_t = this.target.ctors[name]
-    if (ret_t === undefined) {
+    const data_ctor = this.target.data_ctors[name]
+    if (data_ctor === undefined) {
       throw new ExpTrace(
         [
           `I can not find data constructor on type constructor.`,
@@ -26,7 +26,7 @@ export class TypeCtorDotHandler extends DotHandler {
       )
     }
 
-    return new Exps.DataCtorValue(this.target, name, ret_t)
+    return new Exps.DataCtorValue(this.target, name, data_ctor.ret_t)
   }
 
   infer_by_target(
@@ -34,8 +34,8 @@ export class TypeCtorDotHandler extends DotHandler {
     core: Core,
     name: string
   ): { t: Value; core: Core } {
-    const ctor = this.target.ctors[name]
-    if (ctor === undefined) {
+    const data_ctor = this.target.data_ctors[name]
+    if (data_ctor === undefined) {
       throw new ExpTrace(
         [
           `I can not find data constructor on type constructor.`,
@@ -45,7 +45,7 @@ export class TypeCtorDotHandler extends DotHandler {
       )
     }
 
-    let t_core = ctor
+    let t_core = data_ctor.ret_t
     for (const [name, arg_t] of Object.entries(this.target.fixed)) {
       t_core = new Exps.ReturnedPiCore(name, arg_t, t_core)
     }
