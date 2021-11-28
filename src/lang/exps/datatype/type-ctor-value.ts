@@ -39,12 +39,7 @@ export class TypeCtorValue extends Value {
 
     this.data_ctors = {}
     for (const [name, ret_t] of Object.entries(data_ctors)) {
-      this.data_ctors[name] = new Exps.DataCtorValue(
-        this,
-        name,
-        ret_t,
-        this.env
-      )
+      this.data_ctors[name] = new Exps.DataCtorValue(this, name, ret_t)
     }
   }
 
@@ -145,27 +140,6 @@ export class TypeCtorValue extends Value {
     return { fixed, ctx }
   }
 
-  private readback_varied(ctx: Ctx): Record<string, Core> {
-    const varied: Record<string, Core> = {}
-
-    for (const [name, t] of Object.entries(this.value_of_varied())) {
-      varied[name] = readback(ctx, new Exps.TypeValue(), t)
-      ctx = ctx.extend(name, t)
-    }
-
-    return varied
-  }
-
-  private readback_data_ctors(ctx: Ctx): Record<string, Core> {
-    const data_ctors: Record<string, Core> = {}
-
-    for (const [name, t] of Object.entries(this.value_of_data_ctors())) {
-      data_ctors[name] = readback(ctx, new Exps.TypeValue(), t)
-    }
-
-    return data_ctors
-  }
-
   private value_of_fixed(): {
     fixed: Record<string, Value>
     env: Env
@@ -182,6 +156,17 @@ export class TypeCtorValue extends Value {
     return { fixed, env }
   }
 
+  private readback_varied(ctx: Ctx): Record<string, Core> {
+    const varied: Record<string, Core> = {}
+
+    for (const [name, t] of Object.entries(this.value_of_varied())) {
+      varied[name] = readback(ctx, new Exps.TypeValue(), t)
+      ctx = ctx.extend(name, t)
+    }
+
+    return varied
+  }
+
   private value_of_varied(): Record<string, Value> {
     const varied: Record<string, Value> = {}
     const result = this.value_of_fixed()
@@ -194,6 +179,16 @@ export class TypeCtorValue extends Value {
     }
 
     return varied
+  }
+
+  private readback_data_ctors(ctx: Ctx): Record<string, Core> {
+    const data_ctors: Record<string, Core> = {}
+
+    for (const [name, t] of Object.entries(this.value_of_data_ctors())) {
+      data_ctors[name] = readback(ctx, new Exps.TypeValue(), t)
+    }
+
+    return data_ctors
   }
 
   private value_of_data_ctors(): Record<string, Value> {

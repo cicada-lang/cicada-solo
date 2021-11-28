@@ -26,7 +26,7 @@ export class TypeCtorDotHandler extends DotHandler {
       )
     }
 
-    return new Exps.DataCtorValue(this.target, name, ret_t, this.target.env)
+    return new Exps.DataCtorValue(this.target, name, ret_t)
   }
 
   infer_by_target(

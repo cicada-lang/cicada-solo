@@ -2,7 +2,10 @@
 
 - `TypeCtorValue` remove `ctors: Record<string, Core>`
 
-- `DataCtorValue` -- `arity` -- `fixed` argument of type constructor does not count
+- `DataCtorValue` -- `arity`
+
+  - `fixed` argument of type constructor does not count
+  - handle `returned` and `implicit`
 
 - `DataCtorApHandler` -- return `CurriedDataCtorValue` or `DataValue`
 
