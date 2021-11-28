@@ -1,8 +1,8 @@
 # inductive datatype -- Data
 
-- `TypeCtorValue` has `data_ctors: Record<string, DataCtorValue>`
+- move method about data constructor from `TypeCtorValue` to `DataCtorValue`
 
-  - move method about data constructor to `DataCtorValue`
+- `TypeCtorValue` remove `ctors: Record<string, Core>`
 
 - `DataCtorValue` -- `arity` -- `fixed` argument of type constructor does not count
 
@@ -21,8 +21,8 @@
 - `DataCtorValue` -- `unify`
 - `CurriedDataCtorValue` -- `unify`
 
-- `TypeCtorValue` -- `ctor_bindings` -- handle `returned`
-- `TypeCtorValue` -- `ctor_bindings` -- handle `implicit`
+- `TypeCtorValue` -- `data_ctor_bindings` -- handle `returned`
+- `TypeCtorValue` -- `data_ctor_bindings` -- handle `implicit`
 
 - data construction test by `Vector` (with `returned`)
 

@@ -15,8 +15,8 @@ export class TypeCtorDotHandler extends DotHandler {
   }
 
   get(name: string): Value {
-    const ctor = this.target.data_ctors[name]
-    if (ctor === undefined) {
+    const ret_t = this.target.ctors[name]
+    if (ret_t === undefined) {
       throw new ExpTrace(
         [
           `I can not find data constructor on type constructor.`,
@@ -26,7 +26,7 @@ export class TypeCtorDotHandler extends DotHandler {
       )
     }
 
-    return new Exps.DataCtorValue(this.target, name)
+    return new Exps.DataCtorValue(this.target, name, ret_t, this.target.env)
   }
 
   infer_by_target(
@@ -34,7 +34,7 @@ export class TypeCtorDotHandler extends DotHandler {
     core: Core,
     name: string
   ): { t: Value; core: Core } {
-    const ctor = this.target.data_ctors[name]
+    const ctor = this.target.ctors[name]
     if (ctor === undefined) {
       throw new ExpTrace(
         [

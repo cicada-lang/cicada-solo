@@ -13,14 +13,15 @@ import * as Exps from ".."
 import { TypeCtorApHandler } from "./type-ctor-ap-handler"
 import { TypeCtorDotHandler } from "./type-ctor-dot-handler"
 
-// TODO `DataCtorBinding` should have `kind: "plain" | "implicit"`
+// TODO need `kind: "plain" | "implicit" | "returned"`
 export type DataCtorBinding = { name: string; arg_t: Core }
 
 export class TypeCtorValue extends Value {
   name: string
   fixed: Record<string, Core>
   varied: Record<string, Core>
-  data_ctors: Record<string, Core>
+  ctors: Record<string, Core>
+  data_ctors: Record<string, Exps.DataCtorValue>
   env: Env
 
   constructor(
@@ -34,9 +35,19 @@ export class TypeCtorValue extends Value {
     this.name = name
     this.fixed = fixed
     this.varied = varied
-    this.data_ctors = data_ctors
+    this.ctors = data_ctors
     // NOTE The type constructor itself might be referenced in its `ctors`.
     this.env = env.extend(this.name, this)
+
+    this.data_ctors = {}
+    for (const [name, ret_t] of Object.entries(data_ctors)) {
+      this.data_ctors[name] = new Exps.DataCtorValue(
+        this,
+        name,
+        ret_t,
+        this.env
+      )
+    }
   }
 
   ap_handler = new TypeCtorApHandler(this)
@@ -124,9 +135,9 @@ export class TypeCtorValue extends Value {
   }
 
   private data_ctor_core(name: string): Core {
-    const data_ctor = this.data_ctors[name]
+    const data_ctor = this.ctors[name]
     if (data_ctor === undefined) {
-      const names = Object.keys(this.data_ctors).join(", ")
+      const names = Object.keys(this.ctors).join(", ")
       throw new ExpTrace(
         [
           `I can not find the data constructor named: ${name}`,
@@ -254,7 +265,7 @@ export class TypeCtorValue extends Value {
       new Exps.NotYetValue(this.self_type(), new Exps.VarNeutral(this.name))
     )
 
-    for (const [name, t_core] of Object.entries(this.data_ctors)) {
+    for (const [name, t_core] of Object.entries(this.ctors)) {
       const t = evaluate(env, t_core)
       data_ctors[name] = t
     }

@@ -14,11 +14,20 @@ import * as Exps from ".."
 export class DataCtorValue extends Value {
   type_ctor: Exps.TypeCtorValue
   name: string
+  ret_t: Core
+  env: Env
 
-  constructor(type_ctor: Exps.TypeCtorValue, name: string) {
+  constructor(
+    type_ctor: Exps.TypeCtorValue,
+    name: string,
+    ret_t: Core,
+    env: Env
+  ) {
     super()
     this.type_ctor = type_ctor
     this.name = name
+    this.ret_t = ret_t
+    this.env = env
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
