@@ -3,26 +3,29 @@ import { Env } from "../../env"
 import { Core } from "../../core"
 import { readback } from "../../value"
 import { Value } from "../../value"
+import { expect } from "../../value"
 import { evaluate } from "../../core"
 import { Solution } from "../../solution"
-import { ExpTrace } from "../../errors"
 import { Closure } from "../closure"
 import { conversion } from "../../value"
 import * as ut from "../../../ut"
 import * as Exps from ".."
 
-export class DataCtorValue extends Value {
-  type_ctor: Exps.TypeCtorValue
-  name: string
+export class CurriedDataCtorValue extends Value {
+  data_ctor: Exps.DataCtorValue
+  arg_value_entries: Array<Exps.ArgValueEntry>
 
-  constructor(type_ctor: Exps.TypeCtorValue, name: string) {
+  constructor(
+    data_ctor: Exps.DataCtorValue,
+    arg_value_entries: Array<Exps.ArgValueEntry>
+  ) {
     super()
-    this.type_ctor = type_ctor
-    this.name = name
+    this.data_ctor = data_ctor
+    this.arg_value_entries = arg_value_entries
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
-    return new Exps.DotCore(new Exps.VarCore(this.type_ctor.name), this.name)
+    throw new Error("TODO")
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {

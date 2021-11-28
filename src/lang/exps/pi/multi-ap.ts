@@ -26,6 +26,11 @@ export type ArgCoreEntry = {
   arg: Core
 }
 
+export type ArgValueEntry = {
+  kind: "plain" | "implicit" | "returned"
+  arg: Value
+}
+
 export class MultiAp extends Exp {
   meta: ExpMeta
   target: Exp
