@@ -37,22 +37,21 @@ export class ApCore extends Core {
       return target.ap_handler.apply(arg)
     }
 
-    if (target instanceof Exps.NotYetValue) {
-      const { t, neutral } = target
-      if (t instanceof Exps.PiValue) {
-        return new Exps.NotYetValue(
-          t.ret_t_cl.apply(arg),
-          new Exps.ApNeutral(neutral, new Normal(t.arg_t, arg))
-        )
-      } else {
-        throw InternalError.wrong_target_t(target.t, {
-          expected: [Exps.PiValue],
-        })
-      }
+    if (!(target instanceof Exps.NotYetValue)) {
+      throw InternalError.wrong_target(target, {
+        expected: [Exps.FnValue, Exps.NilClsValue, Exps.ConsClsValue],
+      })
     }
 
-    throw InternalError.wrong_target(target, {
-      expected: [Exps.FnValue, Exps.NilClsValue, Exps.ConsClsValue],
-    })
+    if (!(target.t instanceof Exps.PiValue)) {
+      throw InternalError.wrong_target_t(target.t, {
+        expected: [Exps.PiValue],
+      })
+    }
+
+    return new Exps.NotYetValue(
+      target.t.ret_t_cl.apply(arg),
+      new Exps.ApNeutral(target.neutral, new Normal(target.t.arg_t, arg))
+    )
   }
 }

@@ -31,23 +31,23 @@ export class DotCore extends Core {
   static apply(target: Value, name: string): Value {
     if (target instanceof Exps.ObjValue) {
       return target.dot_value(name)
-    } else if (target instanceof Exps.NotYetValue) {
-      const { t, neutral } = target
+    }
 
-      if (t instanceof Exps.ClsValue) {
-        return new Exps.NotYetValue(
-          t.dot_type(target, name),
-          new Exps.DotNeutral(neutral, name)
-        )
-      } else {
-        throw InternalError.wrong_target_t(t, {
-          expected: [Exps.NilClsValue, Exps.ConsClsValue],
-        })
-      }
-    } else {
+    if (!(target instanceof Exps.NotYetValue)) {
       throw InternalError.wrong_target(target, {
         expected: [Exps.ObjValue],
       })
     }
+
+    if (!(target.t instanceof Exps.ClsValue)) {
+      throw InternalError.wrong_target_t(target.t, {
+        expected: [Exps.NilClsValue, Exps.ConsClsValue],
+      })
+    }
+
+    return new Exps.NotYetValue(
+      target.t.dot_type(target, name),
+      new Exps.DotNeutral(target.neutral, name)
+    )
   }
 }

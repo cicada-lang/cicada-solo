@@ -1,7 +1,8 @@
 # inductive datatype -- Data
 
-- `DotHandler` interface
-- `ObjDotHandler` interface
+- `ObjDotHandler`
+
+- `DotHandler` -- abstract method about infer
 
 - `data-ctor-value`
 - `data-ctor-value` -- readback to `ApCore`
