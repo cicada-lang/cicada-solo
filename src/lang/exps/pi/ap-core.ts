@@ -37,6 +37,10 @@ export class ApCore extends Core {
       return target.ap_handler.apply(arg)
     }
 
+    if (target instanceof Exps.FnValue) {
+      return target.ret_cl.apply(arg)
+    }
+
     if (!(target instanceof Exps.NotYetValue)) {
       throw InternalError.wrong_target(target, {
         expected: [Exps.FnValue, Exps.NilClsValue, Exps.ConsClsValue],
