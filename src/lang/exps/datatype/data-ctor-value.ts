@@ -11,6 +11,9 @@ import { conversion } from "../../value"
 import * as ut from "../../../ut"
 import * as Exps from ".."
 
+// TODO need `kind: "plain" | "implicit" | "returned"`
+export type DataCtorBinding = { name: string; arg_t: Core }
+
 export class DataCtorValue extends Value {
   type_ctor: Exps.TypeCtorValue
   name: string
@@ -37,4 +40,62 @@ export class DataCtorValue extends Value {
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     throw new Error("TODO")
   }
+
+  // apply_data_ctor(
+  //   data_ctor_name: string,
+  //   opts: {
+  //     fixed_args: Array<Value>
+  //     args: (index: number, opts: { arg_t: Value; env: Env }) => Value
+  //   }
+  // ): { env: Env; arg_t_values: Array<Value> } {
+  //   const { fixed_args, args } = opts
+
+  //   let env = this.apply_fixed(fixed_args)
+  //   const arg_t_values: Array<Value> = []
+  //   for (const [index, binding] of this.data_ctor_bindings(
+  //     data_ctor_name
+  //   ).entries()) {
+  //     // TODO handle implicit bindings
+  //     const arg_t = evaluate(env, binding.arg_t)
+  //     const arg = args(index, { arg_t, env })
+  //     env = env.extend(binding.name, arg)
+  //     arg_t_values.push(arg_t)
+  //   }
+
+  //   return { env, arg_t_values }
+  // }
+
+  get bindings(): Array<DataCtorBinding> {
+    const bindings: Array<DataCtorBinding> = []
+    let t = this.ret_t
+    // TODO We should also handle `Exps.ImPiCore`.
+    while (t instanceof Exps.PiCore) {
+      const { name, arg_t, ret_t } = t
+      bindings.push({ name, arg_t })
+      t = ret_t
+    }
+
+    return bindings
+  }
+
+  // data_ctor_arity(name: string): number {
+  //   const bindings = this.data_ctor_bindings(name)
+  //   return bindings.length
+  // }
+
+  // evaluate_data_ctor_ret_t(env: Env, name: string): Value {
+  //   const data_ctor_ret_t_core = this.data_ctor_ret_t_core(name)
+  //   return evaluate(env, data_ctor_ret_t_core)
+  // }
+
+  // private data_ctor_ret_t_core(name: string): Core {
+  //   let t = this.data_ctor_core(name)
+  //   // TODO We should also handle `Exps.ImPiCore`.
+  //   while (t instanceof Exps.PiCore) {
+  //     const { ret_t } = t
+  //     t = ret_t
+  //   }
+
+  //   return t
+  // }
 }

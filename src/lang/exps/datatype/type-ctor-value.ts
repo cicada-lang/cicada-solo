@@ -12,9 +12,7 @@ import * as ut from "../../../ut"
 import * as Exps from ".."
 import { TypeCtorApHandler } from "./type-ctor-ap-handler"
 import { TypeCtorDotHandler } from "./type-ctor-dot-handler"
-
-// TODO need `kind: "plain" | "implicit" | "returned"`
-export type DataCtorBinding = { name: string; arg_t: Core }
+import { DataCtorBinding } from "./data-ctor-value"
 
 export class TypeCtorValue extends Value {
   name: string
@@ -53,6 +51,22 @@ export class TypeCtorValue extends Value {
   ap_handler = new TypeCtorApHandler(this)
   dot_handler = new TypeCtorDotHandler(this)
 
+  get_data_ctor(name: string): Exps.DataCtorValue {
+    const data_ctor = this.data_ctors[name]
+    if (data_ctor === undefined) {
+      const names = Object.keys(this.data_ctors).join(", ")
+      throw new ExpTrace(
+        [
+          `I can not find the data constructor named: ${name}`,
+          `  type constructor name: ${this.name}`,
+          `  existing data constructor names: ${names}`,
+        ].join("\n")
+      )
+    }
+
+    return data_ctor
+  }
+
   private apply_fixed(args: Array<Value>): Env {
     const fixed_entries = Array.from(Object.entries(this.fixed).entries())
 
@@ -87,9 +101,9 @@ export class TypeCtorValue extends Value {
 
     let env = this.apply_fixed(fixed_args)
     const arg_t_values: Array<Value> = []
-    for (const [index, binding] of this.data_ctor_bindings(
+    for (const [index, binding] of this.get_data_ctor(
       data_ctor_name
-    ).entries()) {
+    ).bindings.entries()) {
       // TODO handle implicit bindings
       const arg_t = evaluate(env, binding.arg_t)
       const arg = args(index, { arg_t, env })
@@ -100,21 +114,8 @@ export class TypeCtorValue extends Value {
     return { env, arg_t_values }
   }
 
-  private data_ctor_bindings(name: string): Array<DataCtorBinding> {
-    const bindings: Array<DataCtorBinding> = []
-    let t = this.data_ctor_core(name)
-    // TODO We should also handle `Exps.ImPiCore`.
-    while (t instanceof Exps.PiCore) {
-      const { name, arg_t, ret_t } = t
-      bindings.push({ name, arg_t })
-      t = ret_t
-    }
-
-    return bindings
-  }
-
   data_ctor_arity(name: string): number {
-    const bindings = this.data_ctor_bindings(name)
+    const bindings = this.get_data_ctor(name).bindings
     return bindings.length
   }
 
