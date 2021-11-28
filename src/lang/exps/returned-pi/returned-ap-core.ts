@@ -43,7 +43,7 @@ export class ReturnedApCore extends Core {
     }
 
     if (target instanceof Exps.ReturnedFnValue) {
-      return target.apply(arg)
+      return target.ret_cl.apply(arg)
     }
 
     if (!(target instanceof Exps.NotYetValue)) {

@@ -1,8 +1,5 @@
 # inductive datatype -- Data
 
-- [refactor] inline `ImplicitFnValue.apply`
-- [refactor] inline `ReturnedFnValue.apply`
-
 - [refactor] inline `FnApHandler`
 - [refactor] inline `ObjDotHandler`
 
