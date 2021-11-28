@@ -1,18 +1,22 @@
 # inductive datatype -- Data
 
-- `CurriedDataCtorValue` -- `readback` to `ApCore`, `ReturnedApCore` or `ImplicitApCore`
+- `TypeCtorValue` has `data_ctors: Record<string, DataCtorValue>`
+
+  - move method about data constructor to `DataCtorValue`
+
+- `DataCtorValue` -- `arity` -- `fixed` argument of type constructor does not count
 
 - `DataCtorApHandler` -- return `CurriedDataCtorValue` or `DataValue`
 
   - implement `apply`, `implicit_apply` & `returned_apply`
+
+- `CurriedDataCtorValue` -- `readback` to `ApCore`, `ReturnedApCore` or `ImplicitApCore`
 
 - `CurriedDataCtorAphandler` -- return `CurriedDataCtorValue` or `DataValue`
 
   - implement `apply`, `implicit_apply` & `returned_apply`
 
 - unify the syntax of data construction and function application -- remove `<TypeCtor>::<DataCtor>` syntax
-
-- extract some methods to `data-ctor-value`
 
 - `DataCtorValue` -- `unify`
 - `CurriedDataCtorValue` -- `unify`

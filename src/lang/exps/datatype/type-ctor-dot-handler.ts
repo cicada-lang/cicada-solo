@@ -15,7 +15,7 @@ export class TypeCtorDotHandler extends DotHandler {
   }
 
   get(name: string): Value {
-    const ctor = this.target.ctors[name]
+    const ctor = this.target.data_ctors[name]
     if (ctor === undefined) {
       throw new ExpTrace(
         [
@@ -34,7 +34,7 @@ export class TypeCtorDotHandler extends DotHandler {
     core: Core,
     name: string
   ): { t: Value; core: Core } {
-    const ctor = this.target.ctors[name]
+    const ctor = this.target.data_ctors[name]
     if (ctor === undefined) {
       throw new ExpTrace(
         [

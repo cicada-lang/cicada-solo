@@ -13,28 +13,28 @@ import * as Exps from ".."
 import { TypeCtorApHandler } from "./type-ctor-ap-handler"
 import { TypeCtorDotHandler } from "./type-ctor-dot-handler"
 
-// TODO `CtorBinding` should have `kind: "plain" | "implicit"`
-export type CtorBinding = { name: string; arg_t: Core }
+// TODO `DataCtorBinding` should have `kind: "plain" | "implicit"`
+export type DataCtorBinding = { name: string; arg_t: Core }
 
 export class TypeCtorValue extends Value {
   name: string
   fixed: Record<string, Core>
   varied: Record<string, Core>
-  ctors: Record<string, Core>
+  data_ctors: Record<string, Core>
   env: Env
 
   constructor(
     name: string,
     fixed: Record<string, Core>,
     varied: Record<string, Core>,
-    ctors: Record<string, Core>,
+    data_ctors: Record<string, Core>,
     env: Env
   ) {
     super()
     this.name = name
     this.fixed = fixed
     this.varied = varied
-    this.ctors = ctors
+    this.data_ctors = data_ctors
     // NOTE The type constructor itself might be referenced in its `ctors`.
     this.env = env.extend(this.name, this)
   }
@@ -65,8 +65,8 @@ export class TypeCtorValue extends Value {
     return env
   }
 
-  apply_ctor(
-    ctor_name: string,
+  apply_data_ctor(
+    data_ctor_name: string,
     opts: {
       fixed_args: Array<Value>
       args: (index: number, opts: { arg_t: Value; env: Env }) => Value
@@ -76,7 +76,9 @@ export class TypeCtorValue extends Value {
 
     let env = this.apply_fixed(fixed_args)
     const arg_t_values: Array<Value> = []
-    for (const [index, binding] of this.ctor_bindings(ctor_name).entries()) {
+    for (const [index, binding] of this.data_ctor_bindings(
+      data_ctor_name
+    ).entries()) {
       // TODO handle implicit bindings
       const arg_t = evaluate(env, binding.arg_t)
       const arg = args(index, { arg_t, env })
@@ -87,9 +89,9 @@ export class TypeCtorValue extends Value {
     return { env, arg_t_values }
   }
 
-  private ctor_bindings(name: string): Array<CtorBinding> {
-    const bindings: Array<{ name: string; arg_t: Core }> = []
-    let t = this.ctor_core(name)
+  private data_ctor_bindings(name: string): Array<DataCtorBinding> {
+    const bindings: Array<DataCtorBinding> = []
+    let t = this.data_ctor_core(name)
     // TODO We should also handle `Exps.ImPiCore`.
     while (t instanceof Exps.PiCore) {
       const { name, arg_t, ret_t } = t
@@ -100,18 +102,18 @@ export class TypeCtorValue extends Value {
     return bindings
   }
 
-  ctor_arity(name: string): number {
-    const bindings = this.ctor_bindings(name)
+  data_ctor_arity(name: string): number {
+    const bindings = this.data_ctor_bindings(name)
     return bindings.length
   }
 
-  evaluate_ctor_ret_t(env: Env, name: string): Value {
-    const ctor_ret_t_core = this.ctor_ret_t_core(name)
-    return evaluate(env, ctor_ret_t_core)
+  evaluate_data_ctor_ret_t(env: Env, name: string): Value {
+    const data_ctor_ret_t_core = this.data_ctor_ret_t_core(name)
+    return evaluate(env, data_ctor_ret_t_core)
   }
 
-  private ctor_ret_t_core(name: string): Core {
-    let t = this.ctor_core(name)
+  private data_ctor_ret_t_core(name: string): Core {
+    let t = this.data_ctor_core(name)
     // TODO We should also handle `Exps.ImPiCore`.
     while (t instanceof Exps.PiCore) {
       const { ret_t } = t
@@ -121,10 +123,10 @@ export class TypeCtorValue extends Value {
     return t
   }
 
-  private ctor_core(name: string): Core {
-    const ctor = this.ctors[name]
-    if (ctor === undefined) {
-      const names = Object.keys(this.ctors).join(", ")
+  private data_ctor_core(name: string): Core {
+    const data_ctor = this.data_ctors[name]
+    if (data_ctor === undefined) {
+      const names = Object.keys(this.data_ctors).join(", ")
       throw new ExpTrace(
         [
           `I can not find the data constructor named: ${name}`,
@@ -134,7 +136,7 @@ export class TypeCtorValue extends Value {
       )
     }
 
-    return ctor
+    return data_ctor
   }
 
   get arity(): number {
@@ -157,7 +159,7 @@ export class TypeCtorValue extends Value {
       const varied = this.readback_varied(result.ctx)
       // NOTE The `name` is already bound to this `TypeCtorValue` in `ctx`,
       //   we need to make it `NotYetValue` to avoid infinite recursion.
-      const ctors = this.readback_ctors(
+      const ctors = this.readback_data_ctors(
         result.ctx.define(
           this.name,
           self_type,
@@ -203,14 +205,14 @@ export class TypeCtorValue extends Value {
     return varied
   }
 
-  private readback_ctors(ctx: Ctx): Record<string, Core> {
-    const ctors: Record<string, Core> = {}
+  private readback_data_ctors(ctx: Ctx): Record<string, Core> {
+    const data_ctors: Record<string, Core> = {}
 
-    for (const [name, t] of Object.entries(this.value_of_ctors())) {
-      ctors[name] = readback(ctx, new Exps.TypeValue(), t)
+    for (const [name, t] of Object.entries(this.value_of_data_ctors())) {
+      data_ctors[name] = readback(ctx, new Exps.TypeValue(), t)
     }
 
-    return ctors
+    return data_ctors
   }
 
   private value_of_fixed(): {
@@ -243,8 +245,8 @@ export class TypeCtorValue extends Value {
     return varied
   }
 
-  private value_of_ctors(): Record<string, Value> {
-    const ctors: Record<string, Value> = {}
+  private value_of_data_ctors(): Record<string, Value> {
+    const data_ctors: Record<string, Value> = {}
     const result = this.value_of_fixed()
 
     let env = result.env.extend(
@@ -252,12 +254,12 @@ export class TypeCtorValue extends Value {
       new Exps.NotYetValue(this.self_type(), new Exps.VarNeutral(this.name))
     )
 
-    for (const [name, t_core] of Object.entries(this.ctors)) {
+    for (const [name, t_core] of Object.entries(this.data_ctors)) {
       const t = evaluate(env, t_core)
-      ctors[name] = t
+      data_ctors[name] = t
     }
 
-    return ctors
+    return data_ctors
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {

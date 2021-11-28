@@ -61,8 +61,8 @@ export class Data extends Exp {
       )
     }
 
-    if (this.args.length !== datatype.type_ctor.ctor_arity(this.name)) {
-      const arity = datatype.type_ctor.ctor_arity(this.name)
+    if (this.args.length !== datatype.type_ctor.data_ctor_arity(this.name)) {
+      const arity = datatype.type_ctor.data_ctor_arity(this.name)
       throw new ExpTrace(
         [
           `I expect the number of arguments the same as the data constructor arity`,
@@ -74,7 +74,7 @@ export class Data extends Exp {
 
     const args: Array<Core> = []
 
-    const result = datatype.type_ctor.apply_ctor(this.name, {
+    const result = datatype.type_ctor.apply_data_ctor(this.name, {
       fixed_args: datatype.args,
       args: (index, { arg_t, env }) => {
         const arg_core = check(ctx, this.args[index], arg_t)
@@ -84,7 +84,7 @@ export class Data extends Exp {
       },
     })
 
-    let ctor_ret_t = datatype.type_ctor.evaluate_ctor_ret_t(
+    let ctor_ret_t = datatype.type_ctor.evaluate_data_ctor_ret_t(
       result.env,
       this.name
     )
