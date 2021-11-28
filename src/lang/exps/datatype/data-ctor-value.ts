@@ -72,10 +72,6 @@ export class DataCtorValue extends Value {
     return bindings
   }
 
-  get arity(): number {
-    return this.bindings.length
-  }
-
   get finial_ret_t_core(): Core {
     let ret_t = this.ret_t
     // TODO We should also handle `Exps.ImPiCore`.

@@ -1,6 +1,6 @@
 # inductive datatype -- Data
 
-- `DataCtorValue` -- `arity` -- `fixed` argument of type constructor does not count
+- `DataCtorValue` -- `arity`
 
 - `DataCtorApHandler` -- return `CurriedDataCtorValue` or `DataValue`
 
@@ -12,7 +12,11 @@
 
   - implement `apply`, `implicit_apply` & `returned_apply`
 
-- unify the syntax of data construction and function application -- remove `<TypeCtor>::<DataCtor>` syntax
+- remove `Data` expression
+
+- remove `<TypeCtor>::<DataCtor>` syntax
+
+  - unify the syntax of data construction and function application
 
 - `DataCtorValue` -- `unify`
 - `CurriedDataCtorValue` -- `unify`
