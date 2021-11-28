@@ -27,7 +27,7 @@ export class DataValue extends Value {
       const data_ctor = t.type_ctor.get_data_ctor(this.name)
       const { arg_t_values } = data_ctor.apply({
         fixed_args: t.args,
-        args: (index) => this.args[index],
+        args: this.args,
       })
 
       if (arg_t_values.length === this.args.length) {
@@ -54,7 +54,7 @@ export class DataValue extends Value {
     const data_ctor = datatype.type_ctor.get_data_ctor(this.name)
     const { arg_t_values } = data_ctor.apply({
       fixed_args: datatype.args,
-      args: (index) => this.args[index],
+      args: this.args,
     })
 
     if (

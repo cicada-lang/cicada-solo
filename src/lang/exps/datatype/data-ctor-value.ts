@@ -36,7 +36,9 @@ export class DataCtorValue extends Value {
 
   apply(opts: {
     fixed_args: Array<Value>
-    args: (index: number, opts: { arg_t: Value; env: Env }) => Value
+    args:
+      | Array<Value>
+      | ((index: number, opts: { arg_t: Value; env: Env }) => Value)
   }): { env: Env; arg_t_values: Array<Value> } {
     const { fixed_args, args } = opts
 
@@ -46,7 +48,8 @@ export class DataCtorValue extends Value {
     for (const [index, binding] of this.bindings.entries()) {
       // TODO handle implicit bindings
       const arg_t = evaluate(env, binding.arg_t)
-      const arg = args(index, { arg_t, env })
+      const arg =
+        args instanceof Array ? args[index] : args(index, { arg_t, env })
       env = env.extend(binding.name, arg)
       arg_t_values.push(arg_t)
     }
