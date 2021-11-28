@@ -11,6 +11,7 @@ import { conversion } from "../../value"
 import * as ut from "../../../ut"
 import * as Exps from ".."
 import { TypeCtorApHandler } from "./type-ctor-ap-handler"
+import { TypeCtorDotHandler } from "./type-ctor-dot-handler"
 
 // TODO `CtorBinding` should have `kind: "plain" | "implicit"`
 export type CtorBinding = { name: string; arg_t: Core }
@@ -37,6 +38,9 @@ export class TypeCtorValue extends Value {
     // NOTE The type constructor itself might be referenced in its `ctors`.
     this.env = env.extend(this.name, this)
   }
+
+  ap_handler = new TypeCtorApHandler(this)
+  dot_handler = new TypeCtorDotHandler(this)
 
   private apply_fixed(args: Array<Value>): Env {
     const fixed_entries = Array.from(Object.entries(this.fixed).entries())
@@ -144,8 +148,6 @@ export class TypeCtorValue extends Value {
 
     return new Exps.DatatypeValue(this, [])
   }
-
-  ap_handler = new TypeCtorApHandler(this)
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     const self_type = this.self_type()

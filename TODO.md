@@ -1,12 +1,10 @@
 # inductive datatype -- Data
 
-- `TypeCtorDotHandler` -- implement `infer_by_target` -- return `returned-pi`
-
-- extract some methods to `data-ctor-value`
-
 - `DataCtorApHandler`
 
 - unify the syntax of data construction and function application -- remove `<TypeCtor>::<DataCtor>` syntax
+
+- extract some methods to `data-ctor-value`
 
 - `TypeCtorValue` -- `ctor_bindings` -- handle `returned`
 - `TypeCtorValue` -- `ctor_bindings` -- handle `implicit`

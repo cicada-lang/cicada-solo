@@ -17,7 +17,8 @@ datatype MyNat {
   my_add1(prev: MyNat): MyNat
 }
 
-// MyNat.my_zero
+MyNat.my_zero
+// MyNat.my_add1
 
 check! MyNat: Type
 check! MyNat::my_zero: MyNat

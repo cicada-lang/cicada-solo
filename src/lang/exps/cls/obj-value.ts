@@ -14,10 +14,10 @@ export class ObjValue extends Value {
     this.properties = properties
   }
 
+  dot_handler = new ObjDotHandler(this)
+
   readback(ctx: Ctx, t: Value): Core | undefined {
     // NOTE eta expand
     return undefined
   }
-
-  dot_handler = new ObjDotHandler(this)
 }
