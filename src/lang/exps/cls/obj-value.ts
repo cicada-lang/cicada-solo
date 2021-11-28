@@ -17,4 +17,13 @@ export class ObjValue extends Value {
     // NOTE eta expand
     return undefined
   }
+
+  get(name: string): Value {
+    const value = this.properties.get(name)
+    if (value === undefined) {
+      throw new ExpTrace(`The property name: ${name} of object is undefined.`)
+    }
+
+    return value
+  }
 }

@@ -35,12 +35,7 @@ export class DotCore extends Core {
     }
 
     if (target instanceof Exps.ObjValue) {
-      const value = target.properties.get(name)
-      if (value === undefined) {
-        throw new ExpTrace(`The property name: ${name} of object is undefined.`)
-      }
-
-      return value
+      return target.get(name)
     }
 
     if (!(target instanceof Exps.NotYetValue)) {
