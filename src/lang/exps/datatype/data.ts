@@ -61,13 +61,13 @@ export class Data extends Exp {
       )
     }
 
-    if (this.args.length !== datatype.type_ctor.data_ctor_arity(this.name)) {
-      const arity = datatype.type_ctor.data_ctor_arity(this.name)
+    const data_ctor = datatype.type_ctor.get_data_ctor(this.name)
+    if (this.args.length !== data_ctor.arity) {
       throw new ExpTrace(
         [
           `I expect the number of arguments the same as the data constructor arity`,
           `  numebr of arguments: ${this.args.length}`,
-          `  data constructor arity: ${arity}`,
+          `  data constructor arity: ${data_ctor.arity}`,
         ].join("\n")
       )
     }

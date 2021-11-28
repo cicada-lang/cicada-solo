@@ -78,10 +78,9 @@ export class DataCtorValue extends Value {
     return bindings
   }
 
-  // data_ctor_arity(name: string): number {
-  //   const bindings = this.data_ctor_bindings(name)
-  //   return bindings.length
-  // }
+  get arity(): number {
+    return this.bindings.length
+  }
 
   // evaluate_data_ctor_ret_t(env: Env, name: string): Value {
   //   const data_ctor_ret_t_core = this.data_ctor_ret_t_core(name)

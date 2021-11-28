@@ -114,11 +114,6 @@ export class TypeCtorValue extends Value {
     return { env, arg_t_values }
   }
 
-  data_ctor_arity(name: string): number {
-    const bindings = this.get_data_ctor(name).bindings
-    return bindings.length
-  }
-
   evaluate_data_ctor_ret_t(env: Env, name: string): Value {
     const data_ctor_ret_t_core = this.data_ctor_ret_t_core(name)
     return evaluate(env, data_ctor_ret_t_core)

@@ -1,6 +1,5 @@
 # inductive datatype -- Data
 
-- move `TypeCtorValue.data_ctor_arity` to `DataCtorValue.arity`
 - move `TypeCtorValue.apply_data_ctor` to `DataCtorValue.apply`
 
 - `TypeCtorValue` remove `ctors: Record<string, Core>`
