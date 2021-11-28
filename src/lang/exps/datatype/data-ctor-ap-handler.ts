@@ -11,6 +11,8 @@ export class DataCtorApHandler extends ApHandler {
   }
 
   apply(arg: Value): Value {
+    // NOTE it is assumed that during application of data constructor,
+    //   all arguments (including fixed arguments) are inserted.
     throw new Error("TODO")
 
     // if (this.target.arity === 0) {

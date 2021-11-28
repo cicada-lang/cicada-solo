@@ -1,4 +1,5 @@
 MyNat.my_zero: MyNat
+MyNat.my_zero: MyNat
 MyNat: Type
 MyNat::my_zero: MyNat
 MyNat::my_add1(MyNat::my_zero): MyNat
