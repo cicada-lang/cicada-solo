@@ -1,11 +1,13 @@
 # inductive datatype -- Data
 
-- `data-ctor-value`
-- `data-ctor-value` -- readback to `ApCore`
+- `TypeCtorDotHandler` interface -- use `<TypeCtor>.<DataCtor>` to get `DataCtorValue`
+
+- `data-ctor-value` -- `readback` -- to `ApCore`
 
 - `DotHandler` -- abstract method `infer_by_target`
+- `TypeCtorDotHandler` -- implement `infer_by_target`
 
-- `TypeCtorDotHandler` interface -- use `<TypeCtor>.<DataCtor>` to get `DataCtorValue`
+- `DataCtorApHandler`
 
 - unify the syntax of data construction and function application -- remove `<TypeCtor>::<DataCtor>` syntax
 
