@@ -1,10 +1,14 @@
 # inductive datatype -- Data
 
-- `DataCtorValue` -- `arity`
-
 - `DataCtorApHandler` -- return `CurriedDataCtorValue` or `DataValue`
 
+  - with the help of `DataCtorValue.arity`
+
+  - it is assumed that during application of data constructor, all arguments are inserted
+
   - implement `apply`, `implicit_apply` & `returned_apply`
+
+- `Dot.check` -- test by `check! MyList.my_null: MyList(Nat)` -- depends on `returned_apply`
 
 - `CurriedDataCtorValue` -- `readback` to `ApCore`, `ReturnedApCore` or `ImplicitApCore`
 

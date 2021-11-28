@@ -20,6 +20,9 @@ datatype MyList(E: Type) {
 check! MyList: (Type) -> Type
 check! MyList(Nat): Type
 
+// check! MyList.my_null: MyList(Nat)
+// check! MyList.my_null(returned Nat): MyList(Nat)
+
 check! MyList::my_null: MyList(Nat)
 check! MyList::my_null: MyList(String)
 

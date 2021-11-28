@@ -6,6 +6,8 @@ import { Solution } from "../../solution"
 import { evaluate } from "../../core"
 import { readback } from "../../value"
 import { infer } from "../../exp"
+import { check } from "../../exp"
+import { check_by_infer } from "../../exp"
 import { ExpTrace } from "../../errors"
 import * as ut from "../../../ut"
 import * as Exps from "../../exps"
@@ -28,6 +30,21 @@ export class Dot extends Exp {
 
   subst(name: string, exp: Exp): Exp {
     return new Dot(subst(this.target, name, exp), this.name, this.meta)
+  }
+
+  check(ctx: Ctx, t: Value): Core {
+    const inferred = infer(ctx, this)
+
+    if (inferred.t instanceof Exps.ReturnedPiValue) {
+      return inferred.t.returned_inserter.insert_returned_ap(
+        ctx,
+        inferred.core,
+        [],
+        t
+      )
+    }
+
+    return check_by_infer(ctx, this, t)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {

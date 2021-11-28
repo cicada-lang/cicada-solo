@@ -18,6 +18,9 @@ datatype MyNat {
 }
 
 MyNat.my_zero
+
+check! MyNat.my_zero: MyNat
+
 // MyNat.my_add1
 
 check! MyNat: Type
