@@ -85,4 +85,20 @@ export class DataCtorValue extends Value {
 
     return ret_t
   }
+
+  readback_ret_t(ctx: Ctx): Core {
+    const result = this.type_ctor.apply_fixed_to_not_yet_values()
+
+    let env = result.env.extend(
+      this.type_ctor.name,
+      new Exps.NotYetValue(
+        this.type_ctor.self_type(),
+        new Exps.VarNeutral(this.type_ctor.name)
+      )
+    )
+
+    const ret_t_value = evaluate(env, this.ret_t)
+    const ret_t_core = readback(ctx, new Exps.TypeValue(), ret_t_value)
+    return ret_t_core
+  }
 }

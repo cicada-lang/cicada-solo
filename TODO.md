@@ -1,7 +1,5 @@
 # inductive datatype -- Data
 
-- `DataCtorValue.readback_ret_t`
-
 - `TypeCtorValue` remove `ctors: Record<string, Core>`
 
 - `DataCtorValue` -- `arity` -- `fixed` argument of type constructor does not count
