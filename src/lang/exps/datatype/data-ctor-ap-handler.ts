@@ -10,14 +10,12 @@ export class DataCtorApHandler extends ApHandler {
     this.target = target
   }
 
-  apply(arg: Value): Value {
+  private apply_by_kind(kind: Exps.ArgKind, arg: Value): Value {
     if (this.target.arity === 0) {
-      throw new Error("I can not apply data constructor of arity 0.")
+      throw new Error(`I can not (${kind}) apply data constructor of arity 0.`)
     }
 
-    const arg_value_entries: Array<Exps.ArgValueEntry> = [
-      { kind: "plain", arg },
-    ]
+    const arg_value_entries = [{ kind, arg }]
 
     if (this.target.arity === 1) {
       return new Exps.DataValue(
@@ -28,45 +26,17 @@ export class DataCtorApHandler extends ApHandler {
     }
 
     return new Exps.CurriedDataCtorValue(this.target, arg_value_entries)
+  }
+
+  apply(arg: Value): Value {
+    return this.apply_by_kind("plain", arg)
   }
 
   implicit_apply(arg: Value): Value {
-    if (this.target.arity === 0) {
-      throw new Error("I can not (implicit) apply data constructor of arity 0.")
-    }
-
-    const arg_value_entries: Array<Exps.ArgValueEntry> = [
-      { kind: "implicit", arg },
-    ]
-
-    if (this.target.arity === 1) {
-      return new Exps.DataValue(
-        this.target.type_ctor.name,
-        this.target.name,
-        arg_value_entries
-      )
-    }
-
-    return new Exps.CurriedDataCtorValue(this.target, arg_value_entries)
+    return this.apply_by_kind("implicit", arg)
   }
 
   vague_apply(arg: Value): Value {
-    if (this.target.arity === 0) {
-      throw new Error("I can not (vague) apply data constructor of arity 0.")
-    }
-
-    const arg_value_entries: Array<Exps.ArgValueEntry> = [
-      { kind: "vague", arg },
-    ]
-
-    if (this.target.arity === 1) {
-      return new Exps.DataValue(
-        this.target.type_ctor.name,
-        this.target.name,
-        arg_value_entries
-      )
-    }
-
-    return new Exps.CurriedDataCtorValue(this.target, arg_value_entries)
+    return this.apply_by_kind("vague", arg)
   }
 }
