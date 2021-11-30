@@ -38,6 +38,12 @@ check! MyVector.my_null: MyVector(String, 0)
 check! MyVector.my_cons(1, MyVector.my_null): MyVector(Nat, 1)
 check! MyVector.my_cons(vague Nat, 1, MyVector.my_null): MyVector(Nat, 1)
 check! MyVector.my_cons(vague Nat, vague 0, 1, MyVector.my_null): MyVector(Nat, 1)
+
+check! MyVector.my_cons("a", MyVector.my_null): MyVector(String, 1)
+check! MyVector.my_cons(vague String, "a", MyVector.my_null): MyVector(String, 1)
+check! MyVector.my_cons(vague String, vague 0, "a", MyVector.my_null): MyVector(String, 1)
+
+check! MyVector.my_cons("a", MyVector.my_cons("b", MyVector.my_cons("c", MyVector.my_null))): MyVector(String, 3)
 ```
 
 # induction Vector
