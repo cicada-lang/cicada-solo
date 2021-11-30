@@ -64,16 +64,16 @@ check! {
 // NOTE Although we can *not* get a curried data constructor for free,
 //   we can define a vague function by hand,
 //   as an abstraction over data construction.
-// check! {
-//   function f(
-//     vague prev: Nat,
-//     tail: MyVector(String, prev),
-//   ): MyVector(String, add1(prev)) {
-//     return MyVector.my_cons("a")
-//   }
-//
-//   return f(MyVector.my_null)
-// }: MyVector(String, 1)
+check! {
+  function f(
+    vague prev: Nat,
+    tail: MyVector(String, prev),
+  ): MyVector(String, add1(prev)) {
+    return MyVector.my_cons("a")
+  }
+
+  return f(MyVector.my_null)
+}: MyVector(String, 1)
 ```
 
 ``` cicada

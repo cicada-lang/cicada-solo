@@ -47,17 +47,22 @@ export class DataCtorValue extends Value {
     args:
       | Array<Value>
       | ((index: number, opts: { arg_t: Value; env: Env }) => Value)
+    // NOTE Application can be partial,
+    //   which will be used by `CurriedDataCtorValue.readback`
+    length?: number
   }): {
     env: Env
     fixed_arg_t_values: Array<Value>
     arg_t_values: Array<Value>
   } {
-    const { fixed_args, args } = opts
+    const { fixed_args, args, length } = opts
 
     const result = this.type_ctor.apply_fixed({ fixed_args })
+
     let env = result.env
     const arg_t_values: Array<Value> = []
     for (const [index, binding] of this.bindings.entries()) {
+      if (length && index >= length - this.type_ctor.fixed_arity) break
       // TODO handle implicit bindings -- `binding.kind`
       const arg_t = evaluate(env, binding.arg_t)
       const arg =

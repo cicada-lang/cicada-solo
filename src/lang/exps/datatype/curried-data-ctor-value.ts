@@ -37,10 +37,31 @@ export class CurriedDataCtorValue extends Value {
     }
 
     if (t instanceof Exps.DatatypeValue) {
-      throw new Error("TODO")
-    }
+      const result = this.data_ctor.apply({
+        fixed_args: t.args,
+        args: this.arg_value_entries.map(({ arg }) => arg),
+        length: t.args.length + this.arg_value_entries.length,
+      })
 
-    throw new Error("TODO")
+      let result_core: Core = new Exps.DotCore(
+        new Exps.VarCore(this.data_ctor.type_ctor.name),
+        this.data_ctor.name
+      )
+
+      const arg_t_values = [
+        ...result.fixed_arg_t_values,
+        ...result.arg_t_values,
+      ]
+
+      for (const [index, { kind, arg }] of this.arg_value_entries.entries()) {
+        result_core = Exps.wrap_arg_core_entry(result_core, {
+          kind,
+          arg: readback(ctx, arg_t_values[index], arg),
+        })
+      }
+
+      return result_core
+    }
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {

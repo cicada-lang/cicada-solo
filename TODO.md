@@ -1,9 +1,5 @@
 # inductive datatype -- Data
 
-- `CurriedDataCtorValue` -- `readback` to `ApCore`, `VagueApCore` or `ImplicitApCore`
-
-  - test by abstraction over data construction
-
 - note about the use of `number_of_solved_args` in `VagueInserter`
 
   - maybe we should refactor the code to avoid comments
