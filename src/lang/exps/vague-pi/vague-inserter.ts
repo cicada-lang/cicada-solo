@@ -33,6 +33,12 @@ export class VagueInserter {
     arg_entries: Array<Exps.ArgEntry>,
     t: Value
   ): Core {
+    // NOTE The `number_of_solved_args` depends on the given type -- `t`,
+    //   which might be a vague-pi type or pi type.
+    //   i.e. not only,
+    //       check! ...: ...
+    //   but also,
+    //       check! ...: (vague ...) -> ...
     const { solution, number_of_solved_args } = solve_vague_args(
       ctx,
       new Exps.VaguePiValue(this.arg_t, this.ret_t_cl),

@@ -63,7 +63,7 @@ export class DataCtorValue extends Value {
     const arg_t_values: Array<Value> = []
     for (const [index, binding] of this.bindings.entries()) {
       if (length && index >= length - this.type_ctor.fixed_arity) break
-      // TODO handle implicit bindings -- `binding.kind`
+      // TODO maybe also return `binding.kind: ArgKind` to the result.
       const arg_t = evaluate(env, binding.arg_t)
       const arg =
         args instanceof Array ? args[index] : args(index, { arg_t, env })

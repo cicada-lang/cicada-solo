@@ -13,6 +13,7 @@ MyVector.my_cons(vague String, vague 0, "a", MyVector.my_null(vague String)): My
 MyVector.my_cons(vague String, vague 0, "a", MyVector.my_null(vague String)): MyVector(String, 1)
 MyVector.my_cons(vague String, vague 2, "a", MyVector.my_cons(vague String, vague 1, "b", MyVector.my_cons(vague String, vague 0, "c", MyVector.my_null(vague String)))): MyVector(String, 3)
 MyVector.my_cons(vague Nat, vague 0, 1, MyVector.my_null(vague Nat)): MyVector(Nat, 1)
+MyVector.my_cons(vague String, vague 0, "a"): MyVector(String, 1)
 (vague prev, head, tail) => MyVector.my_cons(vague String, vague prev, head, tail): (vague prev: Nat, head: String, tail: MyVector(String, prev)) -> MyVector(String, add1(prev))
 MyVector.my_cons(vague String, vague 0, "a", MyVector.my_null(vague String)): MyVector(String, 1)
 refl: Equal(Vector(Nat, 5), vec(1, vec(2, vec(3, vec(4, vec(5, vecnil))))), vec(1, vec(2, vec(3, vec(4, vec(5, vecnil))))))
