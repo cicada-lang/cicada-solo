@@ -12,7 +12,6 @@ import * as ut from "../../../ut"
 import * as Exps from ".."
 import { TypeCtorApHandler } from "./type-ctor-ap-handler"
 import { TypeCtorDotHandler } from "./type-ctor-dot-handler"
-import { DataCtorBinding } from "./data-ctor-value"
 
 export class TypeCtorValue extends Value {
   name: string

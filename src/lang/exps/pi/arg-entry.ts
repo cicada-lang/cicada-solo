@@ -3,18 +3,20 @@ import { Core } from "../../core"
 import { Value } from "../../value"
 import * as Exps from "../../exps"
 
+export type ArgKind = "plain" | "implicit" | "vague"
+
 export type ArgEntry = {
-  kind: "plain" | "implicit" | "vague"
+  kind: ArgKind
   arg: Exp
 }
 
 export type ArgCoreEntry = {
-  kind: "plain" | "implicit" | "vague"
+  kind: ArgKind
   arg: Core
 }
 
 export type ArgValueEntry = {
-  kind: "plain" | "implicit" | "vague"
+  kind: ArgKind
   arg: Value
 }
 

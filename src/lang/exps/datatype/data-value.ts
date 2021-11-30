@@ -45,18 +45,10 @@ export class DataValue extends Value {
       ]
 
       for (const [index, { kind, arg }] of this.arg_value_entries.entries()) {
-        const arg_core = readback(ctx, arg_t_values[index], arg)
-        switch (kind) {
-          case "plain":
-            result_core = new Exps.ApCore(result_core, arg_core)
-            break
-          case "implicit":
-            result_core = new Exps.ImplicitApCore(result_core, arg_core)
-            break
-          case "vague":
-            result_core = new Exps.VagueApCore(result_core, arg_core)
-            break
-        }
+        result_core = Exps.wrap_arg_core_entry(result_core, {
+          kind,
+          arg: readback(ctx, arg_t_values[index], arg),
+        })
       }
 
       return result_core

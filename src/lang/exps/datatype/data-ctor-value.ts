@@ -12,8 +12,11 @@ import * as ut from "../../../ut"
 import * as Exps from ".."
 import { DataCtorApHandler } from "./data-ctor-ap-handler"
 
-// TODO need `kind: "plain" | "implicit" | "vague"`
-export type DataCtorBinding = { name: string; arg_t: Core }
+export type DataCtorBinding = {
+  kind: Exps.ArgKind
+  name: string
+  arg_t: Core
+}
 
 export class DataCtorValue extends Value {
   type_ctor: Exps.TypeCtorValue
@@ -55,7 +58,7 @@ export class DataCtorValue extends Value {
     let env = result.env
     const arg_t_values: Array<Value> = []
     for (const [index, binding] of this.bindings.entries()) {
-      // TODO handle implicit bindings
+      // TODO handle implicit bindings -- `binding.kind`
       const arg_t = evaluate(env, binding.arg_t)
       const arg =
         args instanceof Array ? args[index] : args(index, { arg_t, env })
@@ -72,12 +75,24 @@ export class DataCtorValue extends Value {
 
   get bindings(): Array<DataCtorBinding> {
     const bindings: Array<DataCtorBinding> = []
-    let t = this.ret_t
-    // TODO We should also handle `Exps.ImPiCore`.
-    while (t instanceof Exps.PiCore) {
-      const { name, arg_t, ret_t } = t
-      bindings.push({ name, arg_t })
-      t = ret_t
+    let ret_t = this.ret_t
+    while (true) {
+      if (ret_t instanceof Exps.PiCore) {
+        bindings.push({ kind: "plain", name: ret_t.name, arg_t: ret_t.arg_t })
+        ret_t = ret_t.ret_t
+      } else if (ret_t instanceof Exps.ImplicitPiCore) {
+        bindings.push({
+          kind: "implicit",
+          name: ret_t.name,
+          arg_t: ret_t.arg_t,
+        })
+        ret_t = ret_t.ret_t
+      } else if (ret_t instanceof Exps.VaguePiCore) {
+        bindings.push({ kind: "vague", name: ret_t.name, arg_t: ret_t.arg_t })
+        ret_t = ret_t.ret_t
+      } else {
+        break
+      }
     }
 
     return bindings
@@ -85,16 +100,6 @@ export class DataCtorValue extends Value {
 
   get arity(): number {
     return this.type_ctor.fixed_arity + this.bindings.length
-  }
-
-  get finial_ret_t_core(): Core {
-    let ret_t = this.ret_t
-    // TODO We should also handle `Exps.ImPiCore`.
-    while (ret_t instanceof Exps.PiCore) {
-      ret_t = ret_t.ret_t
-    }
-
-    return ret_t
   }
 
   readback_ret_t(ctx: Ctx): Core {
