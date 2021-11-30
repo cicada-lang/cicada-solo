@@ -1,10 +1,14 @@
 # inductive datatype -- Data
 
+- [refactor] make the structure of `DataValue` to be the same as `CurriedDataCtorValue`
+
 - `CurriedDataCtorValue` -- `readback` to `ApCore`, `VagueApCore` or `ImplicitApCore`
 
   - test by abstraction over data construction
 
 - note about the use of `number_of_solved_args` in `VagueInserter`
+
+  - maybe we should refactor the code to avoid comments
 
 - `DataValue` -- fix `unify` -- compare kind of `arg_value_entry`
   - `DataCtorValue.apply` should return `ArgKind`

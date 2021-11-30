@@ -25,14 +25,6 @@ export class CurriedDataCtorValue extends Value {
     this.arg_value_entries = arg_value_entries
   }
 
-  get type_ctor(): Exps.TypeCtorValue {
-    return this.data_ctor.type_ctor
-  }
-
-  get name(): string {
-    return this.data_ctor.name
-  }
-
   get arity(): number {
     return this.data_ctor.arity - this.arg_value_entries.length
   }
@@ -40,6 +32,14 @@ export class CurriedDataCtorValue extends Value {
   ap_handler = new CurriedDataCtorApHandler(this)
 
   readback(ctx: Ctx, t: Value): Core | undefined {
+    if (t instanceof Exps.TypeCtorValue && t.arity === 0) {
+      t = t.as_datatype()
+    }
+
+    if (t instanceof Exps.DatatypeValue) {
+      throw new Error("TODO")
+    }
+
     throw new Error("TODO")
   }
 

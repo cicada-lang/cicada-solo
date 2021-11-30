@@ -19,8 +19,8 @@ export class CurriedDataCtorApHandler extends ApHandler {
 
     if (this.target.arity === 1) {
       return new Exps.DataValue(
-        this.target.type_ctor.name,
-        this.target.name,
+        this.target.data_ctor.type_ctor.name,
+        this.target.data_ctor.name,
         arg_value_entries
       )
     }
