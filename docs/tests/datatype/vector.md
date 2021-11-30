@@ -46,6 +46,53 @@ check! MyVector.my_cons(vague String, vague 0, "a", MyVector.my_null): MyVector(
 check! MyVector.my_cons("a", MyVector.my_cons("b", MyVector.my_cons("c", MyVector.my_null))): MyVector(String, 3)
 ```
 
+We can bind partly applied data constructor to local variable.
+
+``` cicada
+check! {
+  let f = MyVector.my_cons(vague Nat, vague 0, 1)
+  return f(MyVector.my_null)
+}: MyVector(Nat, 1)
+
+// NOTE But remind that vague function can not be (auto) curried.
+//   thus the following code is not valid.
+// check! {
+//   let f = MyVector.my_cons(1)
+//   return f(MyVector.my_null)
+// }: MyVector(Nat, 1)
+
+// NOTE Although we can *not* get a curried data constructor for free,
+//   we can define a vague function by hand,
+//   as an abstraction over data construction.
+// check! {
+//   function f(
+//     vague prev: Nat,
+//     tail: MyVector(String, prev),
+//   ): MyVector(String, add1(prev)) {
+//     return MyVector.my_cons("a")
+//   }
+//
+//   return f(MyVector.my_null)
+// }: MyVector(String, 1)
+```
+
+``` cicada
+// NOTE Application to given vague argument can be curried.
+check! {
+  let f = MyVector.my_cons(vague String)
+  return f
+}: (
+  vague prev: Nat,
+  head: String,
+  tail: MyVector(String, prev),
+) -> MyVector(String, add1(prev))
+
+check! {
+  let f = MyVector.my_cons(vague String)
+  return f("a", MyVector.my_null)
+}: MyVector(String, 1)
+```
+
 # induction Vector
 
 ``` cicada

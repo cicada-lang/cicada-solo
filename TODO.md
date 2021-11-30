@@ -1,12 +1,10 @@
 # inductive datatype -- Data
 
-- note about the use of `number_of_solved_args` in `VagueInserter`
-
 - `CurriedDataCtorValue` -- `readback` to `ApCore`, `VagueApCore` or `ImplicitApCore`
 
-  - test by bind partly applied data constructor to local variable
+  - test by abstraction over data construction
 
-    - test first, implement then
+- note about the use of `number_of_solved_args` in `VagueInserter`
 
 - `DataValue` -- fix `unify` -- compare kind of `arg_value_entry`
   - `DataCtorValue.apply` should return `ArgKind`
