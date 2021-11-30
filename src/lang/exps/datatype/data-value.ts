@@ -7,18 +7,15 @@ import * as Exps from "../../exps"
 import { ExpTrace } from "../../errors"
 
 export class DataValue extends Value {
-  type_ctor_name: string
-  name: string
+  data_ctor: Exps.DataCtorValue
   arg_value_entries: Array<Exps.ArgValueEntry>
 
   constructor(
-    type_ctor_name: string,
-    name: string,
+    data_ctor: Exps.DataCtorValue,
     arg_value_entries: Array<Exps.ArgValueEntry>
   ) {
     super()
-    this.type_ctor_name = type_ctor_name
-    this.name = name
+    this.data_ctor = data_ctor
     this.arg_value_entries = arg_value_entries
   }
 
@@ -28,15 +25,14 @@ export class DataValue extends Value {
     }
 
     if (t instanceof Exps.DatatypeValue) {
-      const data_ctor = t.type_ctor.get_data_ctor(this.name)
-      const result = data_ctor.apply({
+      const result = this.data_ctor.apply({
         fixed_args: t.args,
         args: this.arg_value_entries.map(({ arg }) => arg),
       })
 
       let result_core: Core = new Exps.DotCore(
-        new Exps.VarCore(this.type_ctor_name),
-        this.name
+        new Exps.VarCore(this.data_ctor.type_ctor.name),
+        this.data_ctor.name
       )
 
       const arg_t_values = [
@@ -58,35 +54,34 @@ export class DataValue extends Value {
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (
       !(that instanceof Exps.DataValue) ||
-      !(this.type_ctor_name === that.type_ctor_name) ||
-      !(this.name === that.name)
+      !(this.data_ctor.type_ctor.name === that.data_ctor.type_ctor.name) ||
+      !(this.data_ctor.name === that.data_ctor.name)
     ) {
       return Solution.failure
     }
 
     const datatype = expect(ctx, t, Exps.DatatypeValue)
 
-    const data_ctor = datatype.type_ctor.get_data_ctor(this.name)
-    const { arg_t_values } = data_ctor.apply({
+    const result = this.data_ctor.apply({
       fixed_args: datatype.args,
       args: this.arg_value_entries.map(({ arg }) => arg),
     })
 
     if (
-      arg_t_values.length !== this.arg_value_entries.length ||
-      arg_t_values.length !== that.arg_value_entries.length
+      result.arg_t_values.length !== this.arg_value_entries.length ||
+      result.arg_t_values.length !== that.arg_value_entries.length
     ) {
       throw new ExpTrace(
         [
           `I expect the following lengths to be the same.`,
-          `  arg_t_values.length: ${arg_t_values.length}`,
+          `  result.arg_t_values.length: ${result.arg_t_values.length}`,
           `  this.arg_value_entries.length: ${this.arg_value_entries.length}`,
           `  that.arg_value_entries.length: ${that.arg_value_entries.length}`,
         ].join("\n")
       )
     }
 
-    for (const [index, arg_t] of arg_t_values.entries()) {
+    for (const [index, arg_t] of result.arg_t_values.entries()) {
       solution = solution.unify(
         ctx,
         arg_t,

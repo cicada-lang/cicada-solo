@@ -1,7 +1,5 @@
 # inductive datatype -- Data
 
-- [refactor] make the structure of `DataValue` to be the same as `CurriedDataCtorValue`
-
 - `CurriedDataCtorValue` -- `readback` to `ApCore`, `VagueApCore` or `ImplicitApCore`
 
   - test by abstraction over data construction

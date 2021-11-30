@@ -18,14 +18,10 @@ export class DataCtorApHandler extends ApHandler {
     const arg_value_entries = [{ kind, arg }]
 
     if (this.target.arity === 1) {
-      return new Exps.DataValue(
-        this.target.type_ctor.name,
-        this.target.name,
-        arg_value_entries
-      )
+      return new Exps.DataValue(this.target, arg_value_entries)
+    } else {
+      return new Exps.CurriedDataCtorValue(this.target, arg_value_entries)
     }
-
-    return new Exps.CurriedDataCtorValue(this.target, arg_value_entries)
   }
 
   apply(arg: Value): Value {
