@@ -36,6 +36,7 @@ check! MyVector.my_null: MyVector(Nat, 0)
 check! MyVector.my_null: MyVector(String, 0)
 
 // check! MyVector.my_cons(1, MyVector.my_null): MyVector(Nat, 1)
+// check! MyVector.my_cons(vague Nat, 1, MyVector.my_null): MyVector(Nat, 1)
 ```
 
 # induction Vector

@@ -77,24 +77,11 @@ export class MultiAp extends Exp {
     return infer(
       ctx,
       this.arg_entries.reduce(
-        (result, arg_entry) => this.wrap_arg_entry(result, arg_entry),
+        (result, arg_entry) =>
+          Exps.wrap_arg_entry(result, arg_entry, this.meta),
         this.target
       )
     )
-  }
-
-  private wrap_arg_entry(target: Exp, arg_entry: Exps.ArgEntry): Exp {
-    switch (arg_entry.kind) {
-      case "implicit": {
-        return new Exps.ImplicitAp(target, arg_entry.arg, this.meta)
-      }
-      case "vague": {
-        return new Exps.VagueAp(target, arg_entry.arg, this.meta)
-      }
-      case "plain": {
-        return new Exps.Ap(target, arg_entry.arg, this.meta)
-      }
-    }
   }
 
   format(): string {

@@ -63,7 +63,7 @@ export class VagueInserter {
     )
 
     for (const arg_core_entry of arg_core_entries) {
-      result_core = wrap_arg_core_entry(result_core, arg_core_entry)
+      result_core = Exps.wrap_arg_core_entry(result_core, arg_core_entry)
     }
 
     return result_core
@@ -157,23 +157,6 @@ function drop_vague_pi(
     return drop_vague_pi(ctx, next_ret_t, rest)
   } else {
     return ret_t
-  }
-}
-
-function wrap_arg_core_entry(
-  target_core: Core,
-  arg_core_entry: Exps.ArgCoreEntry
-): Core {
-  switch (arg_core_entry.kind) {
-    case "implicit": {
-      return new Exps.ImplicitApCore(target_core, arg_core_entry.arg)
-    }
-    case "vague": {
-      return new Exps.VagueApCore(target_core, arg_core_entry.arg)
-    }
-    case "plain": {
-      return new Exps.ApCore(target_core, arg_core_entry.arg)
-    }
   }
 }
 

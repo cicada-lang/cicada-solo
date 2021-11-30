@@ -16,8 +16,6 @@
 - `TypeCtorValue` -- `data_ctor_bindings` -- handle `vague`
 - `TypeCtorValue` -- `data_ctor_bindings` -- handle `implicit`
 
-- data construction test by `Vector` (with `vague`)
-
 # inductive datatype -- induction
 
 - [syntax] `induction () { ... }`
