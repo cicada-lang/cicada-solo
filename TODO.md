@@ -1,6 +1,8 @@
 # inductive datatype -- induction
 
-- `induction`
+- `induction` -- `free_names`
+- `induction` -- `subst`
+- `induction` -- `format`
 
 - `induction` -- syntax
 
