@@ -19,9 +19,7 @@ Just like Alain Connes said about "mathematician's wake"?
 See Euler, we will find that his mathematics is all about
 the art of inductive reasoning and discovering pattern.
 
-# Our List
-
-## Understanding the Problem
+# Understand the Problem
 
 - We will generate `induction` eliminator from constructors of each datatype.
 
@@ -47,18 +45,6 @@ the art of inductive reasoning and discovering pattern.
 
   - The application of a data constructor should be checked instead of inferred.
   - A data constructor might have implement arguments that are solved during checking.
-
-## Devising a plan
-
-TODO
-
-## Carrying out the plan
-
-TODO
-
-## Looking back
-
-TODO
 
 # Example inductive datatypes
 
