@@ -11,6 +11,7 @@ import { conversion } from "../../value"
 import * as ut from "../../../ut"
 import * as Exps from ".."
 import { CurriedDataCtorApHandler } from "./curried-data-ctor-ap-handler"
+import { ExpTrace } from "../../errors"
 
 export class CurriedDataCtorValue extends Value {
   data_ctor: Exps.DataCtorValue
@@ -65,6 +66,32 @@ export class CurriedDataCtorValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    throw new Error("TODO")
+    if (
+      !(that instanceof Exps.CurriedDataCtorValue) ||
+      this.data_ctor.type_ctor.name !== that.data_ctor.type_ctor.name ||
+      this.data_ctor.name !== that.data_ctor.name ||
+      this.arity !== that.arity
+    ) {
+      return Solution.failure
+    }
+
+    const datatype = expect(ctx, t, Exps.DatatypeValue)
+
+    const result = this.data_ctor.apply({
+      fixed_args: datatype.args,
+      args: this.arg_value_entries.map(({ arg }) => arg),
+      length: this.arity,
+    })
+
+    for (const [index, entry] of result.arg_t_value_entries.entries()) {
+      solution = solution.unify(
+        ctx,
+        entry.arg_t,
+        this.arg_value_entries.map(({ arg }) => arg)[index],
+        that.arg_value_entries.map(({ arg }) => arg)[index]
+      )
+    }
+
+    return solution
   }
 }

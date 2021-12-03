@@ -1,9 +1,3 @@
-# inductive datatype -- Data
-
-- `DataValue` -- fix `unify` -- compare kind of `arg_value_entry`
-
-- `CurriedDataCtorValue` -- `unify`
-
 # inductive datatype -- induction
 
 - `induction`

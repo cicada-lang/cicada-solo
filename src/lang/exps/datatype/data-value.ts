@@ -54,8 +54,8 @@ export class DataValue extends Value {
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (
       !(that instanceof Exps.DataValue) ||
-      !(this.data_ctor.type_ctor.name === that.data_ctor.type_ctor.name) ||
-      !(this.data_ctor.name === that.data_ctor.name)
+      this.data_ctor.type_ctor.name !== that.data_ctor.type_ctor.name ||
+      this.data_ctor.name !== that.data_ctor.name
     ) {
       return Solution.failure
     }
@@ -66,20 +66,6 @@ export class DataValue extends Value {
       fixed_args: datatype.args,
       args: this.arg_value_entries.map(({ arg }) => arg),
     })
-
-    if (
-      result.arg_t_value_entries.length !== this.arg_value_entries.length ||
-      result.arg_t_value_entries.length !== that.arg_value_entries.length
-    ) {
-      throw new ExpTrace(
-        [
-          `I expect the following lengths to be the same.`,
-          `  result.arg_t_value_entries.length: ${result.arg_t_value_entries.length}`,
-          `  this.arg_value_entries.length: ${this.arg_value_entries.length}`,
-          `  that.arg_value_entries.length: ${that.arg_value_entries.length}`,
-        ].join("\n")
-      )
-    }
 
     for (const [index, entry] of result.arg_t_value_entries.entries()) {
       solution = solution.unify(
