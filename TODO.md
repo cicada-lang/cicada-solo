@@ -1,6 +1,5 @@
 # inductive datatype -- induction
 
-- `induction` -- `subst`
 - `induction` -- `format`
 
 - `induction` -- syntax

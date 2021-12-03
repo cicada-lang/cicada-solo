@@ -37,7 +37,14 @@ export class Induction extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    throw new Error("TODO")
+    return new Induction(
+      subst(this.target, name, exp),
+      subst(this.motive, name, exp),
+      Object.fromEntries(
+        Object.entries(this.cases).map(([key, c]) => [key, subst(c, name, exp)])
+      ),
+      this.meta
+    )
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
