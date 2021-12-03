@@ -1,10 +1,10 @@
 # inductive datatype -- induction
 
-- `induction` -- `free_names`
 - `induction` -- `subst`
 - `induction` -- `format`
 
 - `induction` -- syntax
+- `induction` -- syntax test
 
   - example `induction () { ... }`
 

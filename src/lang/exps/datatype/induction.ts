@@ -27,7 +27,13 @@ export class Induction extends Exp {
   }
 
   free_names(bound_names: Set<string>): Set<string> {
-    throw new Error("TODO")
+    return new Set([
+      ...this.target.free_names(bound_names),
+      ...this.motive.free_names(bound_names),
+      ...Object.values(this.cases).flatMap((c) =>
+        Array.from(c.free_names(bound_names))
+      ),
+    ])
   }
 
   subst(name: string, exp: Exp): Exp {
