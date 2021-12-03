@@ -11,8 +11,6 @@
 
 # inductive datatype -- questions
 
-- [maybe] extract `DataCtor` class (not an `Exp`) to simplify `TypeCtorValue`
-
 - [question] Is it ok that `TypeCtorValue` can be `readback` to `TypeCtor`,
   while `DatatypeValue` and `CurriedTypeCtorValue` can only be `readback` to `ApCore`?
 
