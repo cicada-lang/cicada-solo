@@ -56,14 +56,16 @@ export class Induction extends Exp {
   }
 
   format(): string {
-    throw new Error("TODO")
+    const target = this.target.format()
+    const motive = this.motive.format()
+    const cases = this.cases
+      .map((entry) =>
+        entry.nullary
+          ? `case ${entry.name} => ${entry.exp.format()}`
+          : `case ${entry.name}${entry.exp.format()}`
+      )
+      .join(" ")
 
-    // const target = this.target.format()
-    // const motive = this.motive.format()
-    // const cases = Object.entries(this.cases)
-    //   .map(([name, c]) => `case ${name}${c.format()}`)
-    //   .join(" ")
-
-    // return `induction (${target}) { ${motive} ${cases} }`
+    return `induction (${target}) { ${motive} ${cases} }`
   }
 }

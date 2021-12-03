@@ -1,7 +1,5 @@
 # inductive datatype -- induction
 
-- `induction` -- `format`
-
 - `induction` -- syntax
 - `induction` -- syntax test
 
