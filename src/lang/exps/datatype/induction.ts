@@ -7,16 +7,22 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
+export type CaseEntry = {
+  nullary: boolean
+  name: string
+  exp: Exp
+}
+
 export class Induction extends Exp {
   meta: ExpMeta
   target: Exp
   motive: Exp
-  cases: Record<string, Exp>
+  cases: Array<CaseEntry>
 
   constructor(
     target: Exp,
     motive: Exp,
-    cases: Record<string, Exp>,
+    cases: Array<CaseEntry>,
     meta: ExpMeta
   ) {
     super()
@@ -30,8 +36,8 @@ export class Induction extends Exp {
     return new Set([
       ...this.target.free_names(bound_names),
       ...this.motive.free_names(bound_names),
-      ...Object.values(this.cases).flatMap((c) =>
-        Array.from(c.free_names(bound_names))
+      ...this.cases.flatMap(({ exp }) =>
+        Array.from(exp.free_names(bound_names))
       ),
     ])
   }
@@ -40,9 +46,7 @@ export class Induction extends Exp {
     return new Induction(
       subst(this.target, name, exp),
       subst(this.motive, name, exp),
-      Object.fromEntries(
-        Object.entries(this.cases).map(([key, c]) => [key, subst(c, name, exp)])
-      ),
+      this.cases.map((entry) => ({ ...entry, exp: subst(exp, name, exp) })),
       this.meta
     )
   }
@@ -53,5 +57,13 @@ export class Induction extends Exp {
 
   format(): string {
     throw new Error("TODO")
+
+    // const target = this.target.format()
+    // const motive = this.motive.format()
+    // const cases = Object.entries(this.cases)
+    //   .map(([name, c]) => `case ${name}${c.format()}`)
+    //   .join(" ")
+
+    // return `induction (${target}) { ${motive} ${cases} }`
   }
 }

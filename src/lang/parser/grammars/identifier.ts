@@ -9,6 +9,7 @@ const preserved = [
   "import",
   "datatype",
   // keywords
+  "induction",
   "the",
   "is",
   // built-in
