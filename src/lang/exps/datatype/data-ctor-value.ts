@@ -32,14 +32,6 @@ export class DataCtorValue extends Value {
 
   ap_handler = new DataCtorApHandler(this)
 
-  readback(ctx: Ctx, t: Value): Core | undefined {
-    return new Exps.DotCore(new Exps.VarCore(this.type_ctor.name), this.name)
-  }
-
-  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    throw new Error("TODO")
-  }
-
   apply(opts: {
     fixed_args:
       | Array<Value>
@@ -121,5 +113,29 @@ export class DataCtorValue extends Value {
     const ret_t_value = evaluate(env, this.ret_t)
     const ret_t_core = readback(ctx, new Exps.TypeValue(), ret_t_value)
     return ret_t_core
+  }
+
+  readback(ctx: Ctx, t: Value): Core | undefined {
+    return new Exps.DotCore(new Exps.VarCore(this.type_ctor.name), this.name)
+  }
+
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
+    // NOTE `TypeCtor` can only be defined at top-level,
+    //   thus `DataCtor` must also be defined at top-level,
+    //   thus we do not need to handle scope here.
+    if (!(that instanceof Exps.DataCtorValue)) {
+      return Solution.failure
+    }
+
+    if (this.name !== that.name) {
+      return Solution.failure
+    }
+
+    const this_type_ctor_t = this.type_ctor.self_type()
+    const that_type_ctor_t = that.type_ctor.self_type()
+
+    return solution
+      .unify_type(ctx, this_type_ctor_t, that_type_ctor_t)
+      .unify(ctx, this_type_ctor_t, this.type_ctor, this.type_ctor)
   }
 }

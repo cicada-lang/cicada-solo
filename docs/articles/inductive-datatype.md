@@ -30,7 +30,13 @@ the art of inductive reasoning and discovering pattern.
 
   The output is the eliminator.
 
-  to generate the eliminator is to specify its type, and be able to apply it to target.
+  to generate the eliminator is to specify its type,
+
+  - infer application of eliminator.
+
+  and be able to apply it to target.
+
+  - evaluate application of eliminator.
 
   Condition of this problem includes:
 

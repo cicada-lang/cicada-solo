@@ -2,12 +2,22 @@
 
 - `DataValue` -- fix `unify` -- compare kind of `arg_value_entry`
   - `DataCtorValue.apply` should return `ArgKind`
-- `DataCtorValue` -- `unify`
+
 - `CurriedDataCtorValue` -- `unify`
 
 # inductive datatype -- induction
 
-- [syntax] `induction () { ... }`
+- `induction`
+
+- `induction` -- syntax
+
+  - example `induction () { ... }`
+
+- `induction` -- `infer`
+
+- `induction-core` -- `evaluate`
+
+- `induction-neutral` -- `readback_neutral`
 
 # inductive datatype -- questions
 
