@@ -1,7 +1,6 @@
 # inductive datatype -- Data
 
 - `DataValue` -- fix `unify` -- compare kind of `arg_value_entry`
-  - `DataCtorValue.apply` should return `ArgKind`
 
 - `CurriedDataCtorValue` -- `unify`
 

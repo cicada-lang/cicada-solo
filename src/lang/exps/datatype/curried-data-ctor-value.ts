@@ -50,7 +50,7 @@ export class CurriedDataCtorValue extends Value {
 
       const arg_t_values = [
         ...result.fixed_arg_t_values,
-        ...result.arg_t_values,
+        ...result.arg_t_value_entries.map(({ arg_t }) => arg_t),
       ]
 
       for (const [index, { kind, arg }] of this.arg_value_entries.entries()) {

@@ -37,7 +37,7 @@ export class DataValue extends Value {
 
       const arg_t_values = [
         ...result.fixed_arg_t_values,
-        ...result.arg_t_values,
+        ...result.arg_t_value_entries.map(({ arg_t }) => arg_t),
       ]
 
       for (const [index, { kind, arg }] of this.arg_value_entries.entries()) {
@@ -68,23 +68,23 @@ export class DataValue extends Value {
     })
 
     if (
-      result.arg_t_values.length !== this.arg_value_entries.length ||
-      result.arg_t_values.length !== that.arg_value_entries.length
+      result.arg_t_value_entries.length !== this.arg_value_entries.length ||
+      result.arg_t_value_entries.length !== that.arg_value_entries.length
     ) {
       throw new ExpTrace(
         [
           `I expect the following lengths to be the same.`,
-          `  result.arg_t_values.length: ${result.arg_t_values.length}`,
+          `  result.arg_t_value_entries.length: ${result.arg_t_value_entries.length}`,
           `  this.arg_value_entries.length: ${this.arg_value_entries.length}`,
           `  that.arg_value_entries.length: ${that.arg_value_entries.length}`,
         ].join("\n")
       )
     }
 
-    for (const [index, arg_t] of result.arg_t_values.entries()) {
+    for (const [index, entry] of result.arg_t_value_entries.entries()) {
       solution = solution.unify(
         ctx,
-        arg_t,
+        entry.arg_t,
         this.arg_value_entries.map(({ arg }) => arg)[index],
         that.arg_value_entries.map(({ arg }) => arg)[index]
       )

@@ -45,28 +45,27 @@ export class DataCtorValue extends Value {
   }): {
     env: Env
     fixed_arg_t_values: Array<Value>
-    arg_t_values: Array<Value>
+    arg_t_value_entries: Array<{ kind: Exps.ArgKind; arg_t: Value }>
   } {
     const { fixed_args, args, length } = opts
 
     const result = this.type_ctor.apply_fixed({ fixed_args })
 
     let env = result.env
-    const arg_t_values: Array<Value> = []
+    const arg_t_value_entries: Array<{ kind: Exps.ArgKind; arg_t: Value }> = []
     for (const [index, binding] of this.bindings.entries()) {
       if (length && index >= length - this.type_ctor.fixed_arity) break
-      // TODO maybe also return `binding.kind: ArgKind` to the result.
       const arg_t = evaluate(env, binding.arg_t)
       const arg =
         args instanceof Array ? args[index] : args(index, { arg_t, env })
       env = env.extend(binding.name, arg)
-      arg_t_values.push(arg_t)
+      arg_t_value_entries.push({ kind: binding.kind, arg_t })
     }
 
     return {
       env,
       fixed_arg_t_values: Object.values(result.arg_t_values),
-      arg_t_values,
+      arg_t_value_entries,
     }
   }
 
