@@ -12,7 +12,7 @@ export type ArgEntry = {
 
 export type ArgCoreEntry = {
   kind: ArgKind
-  arg: Core
+  core: Core
 }
 
 export type ArgValueEntry = {
@@ -44,13 +44,13 @@ export function wrap_arg_core_entry(
 ): Core {
   switch (arg_core_entry.kind) {
     case "implicit": {
-      return new Exps.ImplicitApCore(target_core, arg_core_entry.arg)
+      return new Exps.ImplicitApCore(target_core, arg_core_entry.core)
     }
     case "vague": {
-      return new Exps.VagueApCore(target_core, arg_core_entry.arg)
+      return new Exps.VagueApCore(target_core, arg_core_entry.core)
     }
     case "plain": {
-      return new Exps.ApCore(target_core, arg_core_entry.arg)
+      return new Exps.ApCore(target_core, arg_core_entry.core)
     }
   }
 }

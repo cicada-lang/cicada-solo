@@ -193,7 +193,7 @@ function check_arg_entry(
     const arg_core = check(ctx, arg_entry.arg, t.arg_t)
     const arg_value = evaluate(ctx.to_env(), arg_core)
     return {
-      arg_core_entries: [{ kind: arg_entry.kind, arg: arg_core }],
+      arg_core_entries: [{ kind: arg_entry.kind, core: arg_core }],
       t: t.ret_t_cl.apply(arg_value),
     }
   } else if (t instanceof Exps.ImplicitPiValue) {
@@ -209,13 +209,13 @@ function check_arg_entry(
       arg_core_entries: [
         ...result.entries.map((implicit_ap_entry) => ({
           kind: "implicit" as const,
-          arg: readback(
+          core: readback(
             ctx,
             implicit_ap_entry.arg_t,
             implicit_ap_entry.implicit_arg
           ),
         })),
-        { kind: arg_entry.kind, arg: arg_core },
+        { kind: arg_entry.kind, core: arg_core },
       ],
       t: result.ret_t_cl.apply(arg_value),
     }

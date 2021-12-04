@@ -43,7 +43,7 @@ export class DataValue extends Value {
       for (const [index, { kind, arg }] of this.arg_value_entries.entries()) {
         result_core = Exps.wrap_arg_core_entry(result_core, {
           kind,
-          arg: readback(ctx, arg_t_values[index], arg),
+          core: readback(ctx, arg_t_values[index], arg),
         })
       }
 
