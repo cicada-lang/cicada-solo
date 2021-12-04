@@ -1,7 +1,5 @@
-> remove the `narration` feature for now
-
-- remove syntax of `elab`
 - remove `Elaborate` expresses
+- remove `ElaborationOptions` expresses
 
 # inductive datatype -- induction
 

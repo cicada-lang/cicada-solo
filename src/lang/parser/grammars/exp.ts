@@ -130,8 +130,6 @@ export const operator = {
     // the first letter of the word ἐστί, which means "is".
     // - https://en.wikipedia.org/wiki/Element_(mathematics)
     "operator:is": ['"is"', '"("', { exp: "exp" }, '","', { t: "exp" }, '")"'],
-    "operator:elab": ['"@"', '"elab"', { exp: "exp" }],
-    "operator:elaborate": ['"@"', '"elaborate"', { exp: "exp" }],
     "operator:induction": [
       '"induction"',
       '"("',
