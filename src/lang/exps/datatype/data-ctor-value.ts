@@ -123,13 +123,17 @@ export class DataCtorValue extends Value {
     return data_core
   }
 
-  build_case_ret_t(motive: Core): Core {
+  build_ret_t(motive: Core): Core {
+    const target = this.build_data_pattern()
+    return this.build_case_ret_t(motive, this.ret_t, target)
+  }
+
+  private build_case_ret_t(motive: Core, datatype: Core, target: Core): Core {
     // NOTE The `varied_args` of application of type constructor,
     //   if exists, they should be used as
     //   the first few arguments of the application of `motive`.
     //   - The same for building `almost`.
-    const { varied_args } = this.type_ctor.analyze_datatype(this.ret_t)
-    const target = this.build_data_pattern()
+    const { varied_args } = this.type_ctor.analyze_datatype(datatype)
     let case_ret_t: Core = motive
     for (const arg of [...varied_args, target]) {
       case_ret_t = new Exps.ApCore(case_ret_t, arg)
@@ -139,13 +143,13 @@ export class DataCtorValue extends Value {
   }
 
   get is_direct_positive_recursive(): boolean {
-    for (const binding of this.bindings) {
-      if (this.is_direct_positive_recursive_arg_t(binding.arg_t)) {
-        return true
-      }
-    }
+    return this.direct_positive_recursive_bindings.length > 0
+  }
 
-    return false
+  private get direct_positive_recursive_bindings(): Array<DataCtorBinding> {
+    return this.bindings.filter((binding) =>
+      this.is_direct_positive_recursive_arg_t(binding.arg_t)
+    )
   }
 
   private is_direct_positive_recursive_arg_t(arg_t: Core): boolean {
@@ -162,8 +166,22 @@ export class DataCtorValue extends Value {
     }
   }
 
-  build_almost_t(motive: Core): Core {
-    throw new Error("TODO")
+  build_almost_t(motive: Core): Exps.ClsCore {
+    let almost_t: Exps.ClsCore = new Exps.NilClsCore()
+    for (const binding of [
+      ...this.direct_positive_recursive_bindings,
+    ].reverse()) {
+      const target = new Exps.VarCore(binding.name)
+      const case_ret_t = this.build_case_ret_t(motive, binding.arg_t, target)
+      almost_t = new Exps.ConsClsCore(
+        binding.name,
+        binding.name,
+        case_ret_t,
+        almost_t
+      )
+    }
+
+    return almost_t
   }
 
   private build_ap_from_binding(core: Core, binding: DataCtorBinding): Core {

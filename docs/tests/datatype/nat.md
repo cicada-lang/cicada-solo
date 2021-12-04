@@ -97,12 +97,12 @@ same_as_chart! Nat [
 
 # my_add
 
-``` cicada todo
+``` cicada
 function my_add(x: MyNat, y: MyNat): MyNat {
   return induction (x) {
     (_) => MyNat
     case my_zero => y
-    case my_add1(_prev, almost) => MyNat.my_add1(almost.prev)
+    case my_add1(prev, almost) => MyNat.my_add1(almost.prev)
   }
 }
 ```

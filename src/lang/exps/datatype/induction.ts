@@ -112,13 +112,11 @@ export class Induction extends Exp {
     env = env.extend("motive", motive)
     const motive_core = new Exps.VarCore("motive")
 
-    let case_t = data_ctor.build_case_ret_t(motive_core)
-
+    let case_t = data_ctor.build_ret_t(motive_core)
     if (data_ctor.is_direct_positive_recursive) {
       const almost_t = data_ctor.build_almost_t(motive_core)
       case_t = new Exps.PiCore("almost", almost_t, case_t)
     }
-
     for (const binding of [...data_ctor.bindings].reverse()) {
       case_t = this.build_pi_from_binding(case_t, binding)
     }

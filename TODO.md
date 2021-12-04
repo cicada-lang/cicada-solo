@@ -1,14 +1,11 @@
-# inductive datatype -- induction
-
-- `DataCtorValue.build_almost_t`
-
-- `induction` -- `build_case_t` -- fix the use of the name `motive`
-
 - `vague-inserter` -- `insert_vague_fn`
 
   - can be tested by `induction_vector`
-
   - checking induction case entry depends on this
+
+# inductive datatype -- induction
+
+- `induction` -- `build_case_t` -- fix the use of the name `motive`
 
 - `induction-core` -- `evaluate`
 
