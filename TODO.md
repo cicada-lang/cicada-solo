@@ -1,6 +1,5 @@
 # inductive datatype -- induction
 
-- `DataCtorValue.recursive_p`
 - `DataCtorValue.build_almost_t`
 
 - `induction` -- `build_case_t` -- fix the use of the name `motive`

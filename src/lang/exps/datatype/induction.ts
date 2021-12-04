@@ -114,7 +114,7 @@ export class Induction extends Exp {
 
     let case_t = data_ctor.build_case_ret_t(motive_core)
 
-    if (data_ctor.is_recursive) {
+    if (data_ctor.is_direct_positive_recursive) {
       const almost_t = data_ctor.build_almost_t(motive_core)
       case_t = new Exps.PiCore("almost", almost_t, case_t)
     }

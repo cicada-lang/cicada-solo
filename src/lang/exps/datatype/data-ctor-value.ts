@@ -138,8 +138,28 @@ export class DataCtorValue extends Value {
     return case_ret_t
   }
 
-  get is_recursive(): boolean {
-    throw new Error("TODO")
+  get is_direct_positive_recursive(): boolean {
+    for (const binding of this.bindings) {
+      if (this.is_direct_positive_recursive_arg_t(binding.arg_t)) {
+        return true
+      }
+    }
+
+    return false
+  }
+
+  private is_direct_positive_recursive_arg_t(arg_t: Core): boolean {
+    if (arg_t instanceof Exps.VarCore) {
+      if (arg_t.name === this.type_ctor.name) {
+        return true
+      } else {
+        return false
+      }
+    } else if (arg_t instanceof Exps.ApCore) {
+      return this.is_direct_positive_recursive_arg_t(arg_t.target)
+    } else {
+      return false
+    }
   }
 
   build_almost_t(motive: Core): Core {
