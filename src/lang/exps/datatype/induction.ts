@@ -79,13 +79,22 @@ export class Induction extends Exp {
     datatype: Exps.DatatypeValue
   ): Array<Exps.CaseCoreEntry> {
     this.ensure_no_extra_cases(ctx, datatype)
-    for (const [name, data_ctor] of Object.entries(
-      datatype.type_ctor.data_ctors
-    )) {
-      const case_entry = this.get_case_entry(name)
-    }
 
-    throw new Error("TODO")
+    return Object.entries(datatype.type_ctor.data_ctors).map(
+      ([name, data_ctor]) => {
+        const case_entry = this.get_case_entry(name)
+        return this.check_case(ctx, datatype, case_entry.exp, data_ctor)
+      }
+    )
+  }
+
+  private check_case(
+    ctx: Ctx,
+    datatype: Exps.DatatypeValue,
+    exp: Exp,
+    data_ctor: Exps.DataCtorValue
+  ): Exps.CaseCoreEntry {
+    throw new Error()
   }
 
   private get_case_entry(name: string): Exps.CaseEntry {
