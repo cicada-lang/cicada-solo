@@ -7,9 +7,18 @@ import { readback } from "../value"
 import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
 import * as ut from "../../ut"
+import { VagueFnCore } from "../exps"
 
 export function check(ctx: Ctx, exp: Exp, t: Value): Core {
   try {
+    // NOTE Different from implicit-fn insertion,
+    //   which is handled in `Fn.check`,
+    //   vague-fn insertion is handle here,
+    //   because the underlying expression might not be a `Fn`.
+    if (t instanceof Exps.VaguePiValue && !(exp instanceof Exps.VagueFn)) {
+      return t.vague_inserter.insert_vague_fn(ctx, exp)
+    }
+
     if (exp.check) {
       return exp.check(ctx, t)
     } else if (exp.infer) {

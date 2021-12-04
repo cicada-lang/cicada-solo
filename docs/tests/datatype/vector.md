@@ -116,7 +116,7 @@ function induction_vector(
     target,
     motive,
     case_of_vecnil,
-    (prev, head, tail, almost_of_tail) => case_of_vec(vague prev, head, tail, { tail: almost_of_tail })
+    (prev, head, tail, almost_of_tail) => case_of_vec(head, tail, { tail: almost_of_tail })
   )
 }
 ```

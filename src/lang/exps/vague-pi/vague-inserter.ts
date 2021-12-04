@@ -27,6 +27,20 @@ export class VagueInserter {
     this.ret_t_cl = ret_t_cl
   }
 
+  insert_vague_fn(ctx: Ctx, exp: Exp): Core {
+    const fresh_name = ut.freshen(
+      exp.free_names(new Set()),
+      ctx.freshen(this.ret_t_cl.name)
+    )
+    const variable = new Exps.VarNeutral(fresh_name)
+    const arg = new Exps.NotYetValue(this.arg_t, variable)
+    const ret_t = this.ret_t_cl.apply(arg)
+    // NOTE We do not need to subst `exp` for the `fresh_name`,
+    //   because inserted `fresh_name` must not occur in `exp`.
+    const core = check(ctx.extend(fresh_name, this.arg_t), exp, ret_t)
+    return new Exps.VagueFnCore(fresh_name, core)
+  }
+
   insert_vague_ap(
     ctx: Ctx,
     target_core: Core,

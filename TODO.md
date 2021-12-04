@@ -1,9 +1,3 @@
-- `vague-inserter` -- `insert_vague_fn`
-
-  - can be tested by `induction_vector`
-
-  - checking induction case entry depends on this
-
 # inductive datatype -- induction
 
 - `induction-core` -- `evaluate`
