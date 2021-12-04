@@ -22,7 +22,14 @@ export class InductionNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    throw new Error("TODO")
+    return new Exps.InductionCore(
+      this.target.readback_neutral(ctx),
+      this.motive.readback_normal(ctx),
+      this.case_entries.map((case_entry) => ({
+        ...case_entry,
+        core: case_entry.normal.readback_normal(ctx),
+      }))
+    )
   }
 
   unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {

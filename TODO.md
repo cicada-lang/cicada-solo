@@ -7,7 +7,6 @@
 - `induction-core` -- `format`
 - `induction-core` -- `alpha_format`
 
-- `induction-neutral` -- `readback_neutral`
 - `induction-neutral` -- `unify`
 
 # inductive datatype -- questions
