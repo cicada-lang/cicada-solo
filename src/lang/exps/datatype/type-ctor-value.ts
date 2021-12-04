@@ -44,6 +44,14 @@ export class TypeCtorValue extends Value {
   ap_handler = new TypeCtorApHandler(this)
   dot_handler = new TypeCtorDotHandler(this)
 
+  get fixed_arity(): number {
+    return Object.keys(this.fixed).length
+  }
+
+  get varied_arity(): number {
+    return Object.keys(this.varied).length
+  }
+
   get_data_ctor(name: string): Exps.DataCtorValue {
     const data_ctor = this.data_ctors[name]
     if (data_ctor === undefined) {
@@ -58,11 +66,6 @@ export class TypeCtorValue extends Value {
     }
 
     return data_ctor
-  }
-
-  get fixed_arity(): number {
-    const fixed_arg_names = Object.keys(this.fixed)
-    return fixed_arg_names.length
   }
 
   apply_fixed(opts: {

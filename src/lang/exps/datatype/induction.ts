@@ -54,6 +54,9 @@ export class Induction extends Exp {
     const inferred_target = infer(ctx, this.target)
     const datatype = expect(ctx, inferred_target.t, Exps.DatatypeValue)
 
+    // datatype.fixed_args
+    // datatype.varied_args
+
     // datatype.type_ctor
     // datatype.args
 
