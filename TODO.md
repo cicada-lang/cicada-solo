@@ -1,7 +1,5 @@
 # inductive datatype -- induction
 
-- `Exps.ApCore.multi_apply`
-
 - `induction` -- `infer` -- `check_cases`
 
 - `induction` -- `infer`

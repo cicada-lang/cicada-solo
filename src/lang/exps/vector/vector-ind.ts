@@ -87,10 +87,7 @@ export class VectorInd extends Exp {
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
 
     return {
-      t: Exps.ApCore.apply(
-        Exps.ApCore.apply(motive_value, length_value),
-        target_value
-      ),
+      t: Exps.ApCore.multi_apply(motive_value, [length_value, target_value]),
       core: new Exps.VectorIndCore(
         length_core,
         inferred_target.core,

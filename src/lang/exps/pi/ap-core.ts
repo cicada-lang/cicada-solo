@@ -33,7 +33,12 @@ export class ApCore extends Core {
   }
 
   static multi_apply(target: Value, args: Array<Value>): Value {
-    throw new Error("TODO")
+    let result: Value = target
+    for (const arg of args) {
+      result = Exps.ApCore.apply(result, arg)
+    }
+
+    return result
   }
 
   static apply(target: Value, arg: Value): Value {
