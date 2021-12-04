@@ -53,7 +53,17 @@ export class Induction extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const inferred_target = infer(ctx, this.target)
-    const datatype = expect(ctx, inferred_target.t, Exps.DatatypeValue)
+
+    let inferred_target_t = inferred_target.t
+
+    if (
+      inferred_target_t instanceof Exps.TypeCtorValue &&
+      inferred_target_t.arity === 0
+    ) {
+      inferred_target_t = inferred_target_t.as_datatype()
+    }
+
+    const datatype = expect(ctx, inferred_target_t, Exps.DatatypeValue)
 
     const motive_t = this.build_motive_t(datatype)
     const motive_core = check(ctx, this.motive, motive_t)
@@ -101,23 +111,34 @@ export class Induction extends Exp {
     //   it is a free variable.
     env = env.extend("motive", motive)
 
-    const { bindings, ret_t } = data_ctor.split_type()
-
-    // TODO analyze `ret_t` to get the init `case_t`
-
-    // NOTE Analyze application of data to get `varied_args`,
+    // NOTE The `varied_args` of application of type constructor,
     //   if exists, they should be used as
     //   the first few arguments of the application of `motive`.
-    //   - the same for properties of `almost`
+    //   - The same for building `almost`.
+    let case_ret_t: Core = new Exps.VarCore("motive")
+    const varied_args = this.analyze_datatype(data_ctor.ret_t).varied_args
+    const target = data_ctor.build_data_pattern()
+    for (const arg of [...varied_args, target]) {
+      case_ret_t = new Exps.ApCore(case_ret_t, arg)
+    }
 
-    let case_t = new Exps.VarCore("TODO")
-
-    for (const binding of bindings) {
+    let case_t = case_ret_t
+    for (const binding of data_ctor.bindings) {
       // TODO extend `case_t` by `binding`
       // TODO analyze `direct_recursively_occurred_datatype` to build `almost`
     }
 
     return evaluate(env, case_t)
+  }
+
+  // NOTE Analyze full application of type constructor.
+  // - Throw elaboration error if the argument is not valid full application.
+  // - To get `fixed_args` and `varied_args`.
+  analyze_datatype(datatype: Core): {
+    fixed_args: Array<Core>
+    varied_args: Array<Core>
+  } {
+    throw new Error("TODO")
   }
 
   private get_case_entry(name: string): Exps.CaseEntry {
@@ -175,6 +196,7 @@ export class Induction extends Exp {
       datatype_core,
       new Exps.TypeCore()
     )
+
     const varied_entries = Object.entries(datatype.type_ctor.varied)
     for (const [varied_arg_name, varied_arg_t_core] of varied_entries) {
       motive_core = new Exps.PiCore(

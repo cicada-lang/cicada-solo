@@ -110,6 +110,33 @@ export class DataCtorValue extends Value {
     return { bindings, ret_t: t }
   }
 
+  build_data_pattern(): Core {
+    let data_core: Core = new Exps.DotCore(
+      new Exps.VarCore(this.type_ctor.name),
+      this.name
+    )
+
+    for (const binding of this.bindings) {
+      data_core = this.wrap_binding(data_core, binding)
+    }
+
+    return data_core
+  }
+
+  private wrap_binding(data_core: Core, binding: DataCtorBinding): Core {
+    switch (binding.kind) {
+      case "plain":
+        return new Exps.ApCore(data_core, new Exps.VarCore(binding.name))
+      case "implicit":
+        return new Exps.ImplicitApCore(
+          data_core,
+          new Exps.VarCore(binding.name)
+        )
+      case "vague":
+        return new Exps.VagueApCore(data_core, new Exps.VarCore(binding.name))
+    }
+  }
+
   get arity(): number {
     return this.type_ctor.fixed_arity + this.bindings.length
   }

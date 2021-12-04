@@ -11,6 +11,8 @@ datatype Nat {
 }
 ```
 
+# MyNat
+
 ``` cicada
 datatype MyNat {
   my_zero: MyNat
@@ -91,6 +93,18 @@ same_as_chart! Nat [
   add(3, 4),
   7,
 ]
+```
+
+# my_add
+
+``` cicada todo
+function my_add(x: MyNat, y: MyNat): MyNat {
+  return induction (x) {
+    (_) => MyNat
+    case my_zero => y
+    case my_add1(_prev, almost) => MyNat.my_add1(almost.prev)
+  }
+}
 ```
 
 # mul
