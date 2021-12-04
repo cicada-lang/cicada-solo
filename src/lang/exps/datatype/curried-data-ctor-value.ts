@@ -40,7 +40,7 @@ export class CurriedDataCtorValue extends Value {
     if (t instanceof Exps.DatatypeValue) {
       const result = this.data_ctor.apply({
         fixed_args: t.args,
-        args: this.arg_value_entries.map(({ arg }) => arg),
+        args: this.arg_value_entries.map((entry) => entry.value),
         length: t.args.length + this.arg_value_entries.length,
       })
 
@@ -54,7 +54,10 @@ export class CurriedDataCtorValue extends Value {
         ...result.arg_t_value_entries.map(({ arg_t }) => arg_t),
       ]
 
-      for (const [index, { kind, arg }] of this.arg_value_entries.entries()) {
+      for (const [
+        index,
+        { kind, value: arg },
+      ] of this.arg_value_entries.entries()) {
         result_core = Exps.wrap_arg_core_entry(result_core, {
           kind,
           core: readback(ctx, arg_t_values[index], arg),
@@ -79,7 +82,7 @@ export class CurriedDataCtorValue extends Value {
 
     const result = this.data_ctor.apply({
       fixed_args: datatype.args,
-      args: this.arg_value_entries.map(({ arg }) => arg),
+      args: this.arg_value_entries.map((entry) => entry.value),
       length: this.arity,
     })
 
@@ -87,8 +90,8 @@ export class CurriedDataCtorValue extends Value {
       solution = solution.unify(
         ctx,
         entry.arg_t,
-        this.arg_value_entries.map(({ arg }) => arg)[index],
-        that.arg_value_entries.map(({ arg }) => arg)[index]
+        this.arg_value_entries.map((entry) => entry.value)[index],
+        that.arg_value_entries.map((entry) => entry.value)[index]
       )
     }
 

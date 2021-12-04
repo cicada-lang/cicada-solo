@@ -17,7 +17,7 @@ export type ArgCoreEntry = {
 
 export type ArgValueEntry = {
   kind: ArgKind
-  arg: Value
+  value: Value
 }
 
 export function wrap_arg_entry(

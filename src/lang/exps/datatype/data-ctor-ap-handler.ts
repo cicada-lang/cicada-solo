@@ -15,7 +15,7 @@ export class DataCtorApHandler extends ApHandler {
       throw new Error(`I can not (${kind}) apply data constructor of arity 0.`)
     }
 
-    const arg_value_entries = [{ kind, arg }]
+    const arg_value_entries = [{ kind, value: arg }]
 
     if (this.target.arity === 1) {
       return new Exps.DataValue(this.target, arg_value_entries)
