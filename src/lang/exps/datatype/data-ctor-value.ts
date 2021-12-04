@@ -123,20 +123,14 @@ export class DataCtorValue extends Value {
     return data_core
   }
 
-  private build_ap_from_binding(
-    data_core: Core,
-    binding: DataCtorBinding
-  ): Core {
+  private build_ap_from_binding(core: Core, binding: DataCtorBinding): Core {
     switch (binding.kind) {
       case "plain":
-        return new Exps.ApCore(data_core, new Exps.VarCore(binding.name))
+        return new Exps.ApCore(core, new Exps.VarCore(binding.name))
       case "implicit":
-        return new Exps.ImplicitApCore(
-          data_core,
-          new Exps.VarCore(binding.name)
-        )
+        return new Exps.ImplicitApCore(core, new Exps.VarCore(binding.name))
       case "vague":
-        return new Exps.VagueApCore(data_core, new Exps.VarCore(binding.name))
+        return new Exps.VagueApCore(core, new Exps.VarCore(binding.name))
     }
   }
 

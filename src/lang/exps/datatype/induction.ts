@@ -123,12 +123,26 @@ export class Induction extends Exp {
     }
 
     let case_t = case_ret_t
+    // TODO analyze `direct_recursively_occurred_datatype` to build `almost`
     for (const binding of [...data_ctor.bindings].reverse()) {
-      // TODO extend `case_t` by `binding`
-      // TODO analyze `direct_recursively_occurred_datatype` to build `almost`
+      case_t = this.build_pi_from_binding(case_t, binding)
     }
 
     return evaluate(env, case_t)
+  }
+
+  private build_pi_from_binding(
+    core: Core,
+    binding: Exps.DataCtorBinding
+  ): Core {
+    switch (binding.kind) {
+      case "plain":
+        return new Exps.PiCore(binding.name, binding.arg_t, core)
+      case "implicit":
+        return new Exps.ImplicitPiCore(binding.name, binding.arg_t, core)
+      case "vague":
+        return new Exps.VaguePiCore(binding.name, binding.arg_t, core)
+    }
   }
 
   // NOTE Analyze full application of type constructor.
