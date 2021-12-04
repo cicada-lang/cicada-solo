@@ -1,7 +1,5 @@
 # inductive datatype -- induction
 
-- `induction-core` -- `alpha_format`
-
 - `induction` -- `infer`
 - `induction` -- `infer` -- `cover_all_cases` & `no_extra_cases`
 
