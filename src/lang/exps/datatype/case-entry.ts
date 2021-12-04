@@ -1,5 +1,6 @@
 import { Exp } from "../../exp"
 import { Core } from "../../core"
+import { Value } from "../../value"
 import { Normal } from "../../normal"
 
 export type CaseEntry = {
@@ -12,6 +13,12 @@ export type CaseCoreEntry = {
   nullary: boolean
   name: string
   core: Core
+}
+
+export type CaseValueEntry = {
+  nullary: boolean
+  name: string
+  value: Value
 }
 
 export type CaseNormalEntry = {

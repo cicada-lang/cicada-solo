@@ -23,7 +23,14 @@ export class InductionCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    throw new Error("TODO")
+    return InductionCore.apply(
+      evaluate(env, this.target),
+      evaluate(env, this.motive),
+      this.case_entries.map((case_entry) => ({
+        ...case_entry,
+        value: evaluate(env, case_entry.core),
+      }))
+    )
   }
 
   format(): string {
@@ -52,5 +59,13 @@ export class InductionCore extends Core {
       .join(" ")
 
     return `induction (${target}) { ${motive} ${case_entries} }`
+  }
+
+  static apply(
+    target: Value,
+    motive: Value,
+    case_entries: Array<Exps.CaseValueEntry>
+  ): Value {
+    throw new Error("TODO")
   }
 }

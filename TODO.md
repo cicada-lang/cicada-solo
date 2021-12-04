@@ -1,6 +1,6 @@
 # inductive datatype -- induction
 
-- `induction-core` -- `evaluate`
+- `induction-core` -- `apply`
 
   - [if possible] use loop instead of recursion
 
