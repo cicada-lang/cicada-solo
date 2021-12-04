@@ -1,12 +1,9 @@
 # inductive datatype -- induction
 
-- `induction` -- `build_case_t`
-
-  - build return type of the `case_t` from recursively occured datatype application data constructor
-
-    - `varied_args` of the datatype, should be used as arguments of `motive`
-
-      - the same for properties of `almost`
+- `induction` -- `build_case_t` -- analyze `ret_t` to get the init `case_t`
+- `induction` -- `build_case_t` -- extend `case_t` by `binding`
+- `induction` -- `build_case_t` -- analyze `direct_recursively_occurred_datatype` to build `almost`
+- `induction` -- `build_case_t` -- fix the use of name `"motive"`
 
 - `vague-inserter` -- `insert_vague_fn`
 

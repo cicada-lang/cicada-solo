@@ -55,7 +55,7 @@ export class Induction extends Exp {
     const inferred_target = infer(ctx, this.target)
     const datatype = expect(ctx, inferred_target.t, Exps.DatatypeValue)
 
-    const motive_t = this.motive_t(datatype)
+    const motive_t = this.build_motive_t(datatype)
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)
 
@@ -66,11 +66,7 @@ export class Induction extends Exp {
     const case_core_entries = Object.entries(datatype.type_ctor.data_ctors).map(
       ([name, data_ctor]) => {
         const case_entry = this.get_case_entry(name)
-        const case_t = this.build_case_t(
-          data_ctor,
-          motive_value,
-          datatype.fixed_args
-        )
+        const case_t = this.build_case_t(data_ctor, datatype, motive_value)
         const core = check(ctx, case_entry.exp, case_t)
         return { ...case_entry, core }
       }
@@ -91,10 +87,37 @@ export class Induction extends Exp {
 
   private build_case_t(
     data_ctor: Exps.DataCtorValue,
-    motive: Value,
-    fixed_args: Array<Value>
+    datatype: Exps.DatatypeValue,
+    motive: Value
   ): Value {
-    throw new Error("TODO")
+    let env = datatype.type_ctor.env
+    for (const [index, fixed_arg] of datatype.fixed_args.entries()) {
+      const fixed_arg_name = datatype.type_ctor.fixed_arg_names[index]
+      env = env.extend(fixed_arg_name, fixed_arg)
+    }
+
+    // TODO The use of name `motive` should be fix,
+    //   because in our generated core expression,
+    //   it is a free variable.
+    env = env.extend("motive", motive)
+
+    const { bindings, ret_t } = data_ctor.split_type()
+
+    // TODO analyze `ret_t` to get the init `case_t`
+
+    // NOTE Analyze application of data to get `varied_args`,
+    //   if exists, they should be used as
+    //   the first few arguments of the application of `motive`.
+    //   - the same for properties of `almost`
+
+    let case_t = new Exps.VarCore("TODO")
+
+    for (const binding of bindings) {
+      // TODO extend `case_t` by `binding`
+      // TODO analyze `direct_recursively_occurred_datatype` to build `almost`
+    }
+
+    return evaluate(env, case_t)
   }
 
   private get_case_entry(name: string): Exps.CaseEntry {
@@ -132,7 +155,7 @@ export class Induction extends Exp {
     }
   }
 
-  private motive_t(datatype: Exps.DatatypeValue): Value {
+  private build_motive_t(datatype: Exps.DatatypeValue): Value {
     let env = datatype.type_ctor.env
     for (const [index, fixed_arg] of datatype.fixed_args.entries()) {
       const fixed_arg_name = datatype.type_ctor.fixed_arg_names[index]
@@ -145,6 +168,9 @@ export class Induction extends Exp {
     }
 
     let motive_core = new Exps.PiCore(
+      // NOTE The use of name `_target` is ok,
+      //   because it is a bound variable
+      //   that does not occur in the return type.
       "_target",
       datatype_core,
       new Exps.TypeCore()
