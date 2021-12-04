@@ -1,7 +1,5 @@
 # inductive datatype -- induction
 
-- `induction-neutral` -- fix structure
-
 - `induction` -- `infer`
 - `induction` -- `infer` -- `cover_all_cases` & `no_extra_cases`
 

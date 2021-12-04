@@ -8,11 +8,17 @@ import * as Exps from "../../exps"
 export class InductionNeutral extends Neutral {
   target: Neutral
   motive: Normal
+  case_entries: Array<Exps.CaseNormalEntry>
 
-  constructor(target: Neutral, motive: Normal) {
+  constructor(
+    target: Neutral,
+    motive: Normal,
+    case_entries: Array<Exps.CaseNormalEntry>
+  ) {
     super()
     this.target = target
     this.motive = motive
+    this.case_entries = case_entries
   }
 
   readback_neutral(ctx: Ctx): Core {
