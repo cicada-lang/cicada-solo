@@ -1,7 +1,5 @@
 # inductive datatype -- induction
 
-- stab `induction-neutral`
-
 - `induction` -- `infer`
 - `induction` -- `infer` -- `cover_all_cases` & `no_extra_cases`
 
@@ -10,6 +8,7 @@
 - `induction-core` -- `alpha_format`
 
 - `induction-neutral` -- `readback_neutral`
+- `induction-neutral` -- `unify`
 
 # inductive datatype -- questions
 
