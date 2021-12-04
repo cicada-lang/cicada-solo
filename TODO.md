@@ -1,6 +1,4 @@
-- `tests/datatype/list` use class as `almost`
 - `tests/datatype/vector` use class as `almost`
-- `tests/datatype/either` use class as `almost`
 
 # inductive datatype -- induction
 

@@ -67,10 +67,15 @@ function induction_list(
   case_of_nil: motive(nil),
   case_of_li: (
     head: E, tail: List(E),
-    almost_of_tail: motive(tail),
+    almost: class { tail: motive(tail) },
   ) -> motive(li(head, tail)),
 ): motive(target) {
-  return list_ind(target, motive, case_of_nil, case_of_li)
+  return list_ind(
+    target,
+    motive,
+    case_of_nil,
+    (head, tail, almost_of_tail) => case_of_li(head, tail, { tail: almost_of_tail })
+  )
 }
 ```
 
@@ -82,7 +87,7 @@ function length(implicit E: Type, x: List(E)): Nat {
     x,
     (_) => Nat,
     0,
-    (_head, _tail, almost) => add1(almost),
+    (_head, _tail, almost) => add1(almost.tail),
   )
 }
 ```
@@ -114,7 +119,7 @@ function append(implicit E: Type, x: List(E), y: List(E)): List(E) {
     x,
     (_) => List(E),
     y,
-    (head, _tail, almost) => li(head, almost),
+    (head, _tail, almost) => li(head, almost.tail),
   )
 }
 ```
@@ -144,7 +149,7 @@ function li_end(implicit E: Type, e: E, x: List(E)): List(E) {
     x,
     (_) => List(E),
     li(e, nil),
-    (head, _tail, almost) => li(head, almost)
+    (head, _tail, almost) => li(head, almost.tail)
   )
 }
 
@@ -153,7 +158,7 @@ function reverse(implicit E: Type, x: List(E)): List(E) {
     x,
     (_) => List(E),
     nil,
-    (head, _tail, almost) => li_end(head, almost),
+    (head, _tail, almost) => li_end(head, almost.tail),
   )
 }
 ```

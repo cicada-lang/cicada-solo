@@ -57,9 +57,8 @@ function induction_nat(
     target,
     motive,
     case_of_zero,
-    (prev, almost_of_prev) => {
-      return case_of_add1(prev, { prev: almost_of_prev })
-    })
+    (prev, almost_of_prev) => case_of_add1(prev, { prev: almost_of_prev })
+  )
 }
 ```
 
