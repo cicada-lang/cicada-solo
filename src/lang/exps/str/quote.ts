@@ -1,4 +1,4 @@
-import { Exp, ExpMeta, ElaborationOptions, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Value, readback } from "../../value"
@@ -23,22 +23,11 @@ export class Quote extends Exp {
     return this
   }
 
-  infer(ctx: Ctx, opts: ElaborationOptions): { t: Value; core: Core } {
-    const t = new Exps.StrValue()
-    const core = new Exps.QuoteCore(this.str)
-
-    if (opts?.narrate_elaboration_p) {
-      const t_core = readback(ctx, new Exps.TypeValue(), t)
-      const t_format = ctx.highlight("code", t_core.format())
-      const core_format = ctx.highlight("code", core.format())
-      ctx.narration([
-        `Given a doublequoted literal value ${core_format},`,
-        `I can inter its type to be ${t_format},`,
-        `and elaborate it to ${core_format}.`,
-      ])
+  infer(ctx: Ctx): { t: Value; core: Core } {
+    return {
+      t: new Exps.StrValue(),
+      core: new Exps.QuoteCore(this.str),
     }
-
-    return { t, core }
   }
 
   format(): string {

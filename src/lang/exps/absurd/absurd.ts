@@ -1,6 +1,6 @@
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Exp, ExpMeta, ElaborationOptions, subst } from "../../exp"
+import { Exp, ExpMeta, subst } from "../../exp"
 import { Value } from "../../value"
 import { Solution } from "../../solution"
 import * as Exps from "../../exps"

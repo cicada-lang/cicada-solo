@@ -1,4 +1,4 @@
-import { Exp, ExpMeta, ElaborationOptions, subst } from "../exp"
+import { Exp, ExpMeta, subst } from "../exp"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { infer } from "../exp"
@@ -51,7 +51,7 @@ export class Var extends Exp {
     return check_by_infer(ctx, this, t)
   }
 
-  infer(ctx: Ctx, opts: ElaborationOptions): { t: Value; core: Core } {
+  infer(ctx: Ctx): { t: Value; core: Core } {
     const t = ctx.find_type(this.name)
     if (t === undefined) {
       throw new ExpTrace(
@@ -60,23 +60,7 @@ export class Var extends Exp {
       )
     }
 
-    const core = new Exps.VarCore(this.name)
-
-    if (opts?.narrate_elaboration_p) {
-      const name = ctx.highlight("code", this.name)
-      const t_core = readback(ctx, new Exps.TypeValue(), t)
-      const t_format = ctx.highlight("code", t_core.format())
-      const core_format = ctx.highlight("code", core.format())
-      ctx.narration([
-        `Given the variable ${name},`,
-        `I look up the context to find its type.`,
-        `The lookup succeeds with type ${t_format},`,
-        `thus I infer its type to be this type,`,
-        `and elaborate the variable to ${core_format}.`,
-      ])
-    }
-
-    return { t, core }
+    return { t, core: new Exps.VarCore(this.name) }
   }
 
   format(): string {
