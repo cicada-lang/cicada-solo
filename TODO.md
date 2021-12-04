@@ -1,8 +1,18 @@
+- remove `narration` for now
+
 # inductive datatype -- induction
 
 - `induction` -- `infer`
 
-- `induction` -- `check_cases` -- `cover_all_cases` & `no_extra_cases`
+- `induction` -- `infer` -- `fixed_args` & `varied_args` -- from inferred `datatype`
+- `induction` -- `infer` -- `motive_t` -- depends on `fixed_args` but not on `varied_args`
+- `induction` -- `infer` -- `ret_t` -- apply `motive_value` to `varied_args` and `target_value`
+
+- `induction` -- `infer` -- `check_cases`
+- `induction` -- `infer` -- `check_cases` -- `cover_all_cases`
+- `induction` -- `infer` -- `check_cases` -- `no_extra_cases`
+- `induction` -- `infer` -- `check_cases` -- `check_case`
+- `induction` -- `infer` -- `case_t`
 
 - `induction-core` -- `evaluate`
 
@@ -174,6 +184,14 @@
 
   - These rules can not be narrated in our implementation of NbE,
     maybe will be able to narrate them, if we use unification instead of NbE.
+
+# the `todo` keyword
+
+- drop the `@` in the syntax of `TODO`
+
+  - [maybe] use function application syntax
+
+    - what is the type of `TODO` ?
 
 # error report
 
