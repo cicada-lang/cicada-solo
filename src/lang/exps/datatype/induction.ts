@@ -58,6 +58,13 @@ export class Induction extends Exp {
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)
 
+    const target_value = evaluate(ctx.to_env(), inferred_target.core)
+
+    const ret_t = Exps.ApCore.multi_apply(motive_value, [
+      ...datatype.varied_args,
+      target_value,
+    ])
+
     // datatype.fixed_args
     // datatype.varied_args
 
@@ -69,7 +76,7 @@ export class Induction extends Exp {
     // const case_core_entries = "TODO"
 
     // return {
-    //   t: "TODO",
+    //   t: ret_t,
     //   core: new Exps.InductionCore(
     //     inferred_target.core,
     //     motive_core,

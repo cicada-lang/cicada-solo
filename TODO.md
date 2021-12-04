@@ -1,6 +1,6 @@
 # inductive datatype -- induction
 
-- `induction` -- `infer` -- `ret_t` -- apply `motive_value` to `varied_args` and `target_value`
+- `Exps.ApCore.multi_apply`
 
 - `induction` -- `infer` -- `check_cases`
 

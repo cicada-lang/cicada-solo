@@ -32,6 +32,10 @@ export class ApCore extends Core {
     return `${this.target.alpha_format(ctx)}(${this.arg.alpha_format(ctx)})`
   }
 
+  static multi_apply(target: Value, args: Array<Value>): Value {
+    throw new Error("TODO")
+  }
+
   static apply(target: Value, arg: Value): Value {
     if (target.ap_handler) {
       return target.ap_handler.apply(arg)
