@@ -139,8 +139,7 @@ export const operator = {
       '")"',
       '"{"',
       { motive: "exp" },
-      // TODO
-      // { case_entries: "case_entry" },
+      { case_entries: { $ap: ["zero_or_more", "case_entry"] } },
       '"}"',
     ],
   },
@@ -477,6 +476,19 @@ export const arg_entry = {
     "arg_entry:plain": [{ arg: "exp" }],
     "arg_entry:implicit": ['"implicit"', { arg: "exp" }],
     "arg_entry:vague": ['"vague"', { arg: "exp" }],
+  },
+}
+
+export const case_entry = {
+  $grammar: {
+    "case_entry:normal": ['"case"', { name: "identifier" }, { exp: "exp" }],
+    "case_entry:nullary": [
+      '"case"',
+      { name: "identifier" },
+      '"="',
+      '">"',
+      { exp: "exp" },
+    ],
   },
 }
 

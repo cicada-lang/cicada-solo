@@ -1,11 +1,7 @@
 # inductive datatype -- induction
 
-- `induction` -- syntax
-- `induction` -- syntax test
-
-  - example `induction () { ... }`
-
 - `induction` -- `infer`
+- `induction` -- `infer` -- `cover_all_cases` & `no_extra_cases`
 
 - `induction-core` -- `evaluate`
 

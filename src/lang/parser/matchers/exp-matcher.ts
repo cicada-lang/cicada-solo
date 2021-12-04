@@ -184,6 +184,13 @@ export function operator_matcher(tree: pt.Tree): Exp {
       new Exps.Elaborate(exp_matcher(exp), { span }),
     "operator:elaborate": ({ exp }, { span }) =>
       new Exps.Elaborate(exp_matcher(exp), { span }),
+    "operator:induction": ({ target, motive, case_entries }, { span }) =>
+      new Exps.Induction(
+        exp_matcher(target),
+        exp_matcher(motive),
+        pt.matchers.zero_or_more_matcher(case_entries).map(case_entry_matcher),
+        { span }
+      ),
   })(tree)
 }
 
@@ -617,6 +624,21 @@ export function arg_entry_matcher(tree: pt.Tree): Exps.ArgEntry {
     "arg_entry:vague": ({ arg }) => ({
       kind: "vague",
       arg: exp_matcher(arg),
+    }),
+  })(tree)
+}
+
+export function case_entry_matcher(tree: pt.Tree): Exps.CaseEntry {
+  return pt.matcher<Exps.CaseEntry>({
+    "case_entry:normal": ({ name, exp }) => ({
+      nullary: false,
+      name: pt.str(name),
+      exp: exp_matcher(exp),
+    }),
+    "case_entry:nullary": ({ name, exp }) => ({
+      nullary: true,
+      name: pt.str(name),
+      exp: exp_matcher(exp),
     }),
   })(tree)
 }
