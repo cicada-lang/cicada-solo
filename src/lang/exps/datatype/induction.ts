@@ -17,27 +17,27 @@ export class Induction extends Exp {
   meta: ExpMeta
   target: Exp
   motive: Exp
-  cases: Array<CaseEntry>
+  case_entries: Array<CaseEntry>
 
   constructor(
     target: Exp,
     motive: Exp,
-    cases: Array<CaseEntry>,
+    case_entries: Array<CaseEntry>,
     meta: ExpMeta
   ) {
     super()
     this.meta = meta
     this.target = target
     this.motive = motive
-    this.cases = cases
+    this.case_entries = case_entries
   }
 
   free_names(bound_names: Set<string>): Set<string> {
     return new Set([
       ...this.target.free_names(bound_names),
       ...this.motive.free_names(bound_names),
-      ...this.cases.flatMap(({ exp }) =>
-        Array.from(exp.free_names(bound_names))
+      ...this.case_entries.flatMap((case_entry) =>
+        Array.from(case_entry.exp.free_names(bound_names))
       ),
     ])
   }
@@ -46,7 +46,10 @@ export class Induction extends Exp {
     return new Induction(
       subst(this.target, name, exp),
       subst(this.motive, name, exp),
-      this.cases.map((entry) => ({ ...entry, exp: subst(exp, name, exp) })),
+      this.case_entries.map((case_entry) => ({
+        ...case_entry,
+        exp: subst(case_entry.exp, name, exp),
+      })),
       this.meta
     )
   }
@@ -58,14 +61,14 @@ export class Induction extends Exp {
   format(): string {
     const target = this.target.format()
     const motive = this.motive.format()
-    const cases = this.cases
-      .map((entry) =>
-        entry.nullary
-          ? `case ${entry.name} => ${entry.exp.format()}`
-          : `case ${entry.name}${entry.exp.format()}`
+    const case_entries = this.case_entries
+      .map((case_entry) =>
+        case_entry.nullary
+          ? `case ${case_entry.name} => ${case_entry.exp.format()}`
+          : `case ${case_entry.name}${case_entry.exp.format()}`
       )
       .join(" ")
 
-    return `induction (${target}) { ${motive} ${cases} }`
+    return `induction (${target}) { ${motive} ${case_entries} }`
   }
 }

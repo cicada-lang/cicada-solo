@@ -132,6 +132,17 @@ export const operator = {
     "operator:is": ['"is"', '"("', { exp: "exp" }, '","', { t: "exp" }, '")"'],
     "operator:elab": ['"@"', '"elab"', { exp: "exp" }],
     "operator:elaborate": ['"@"', '"elaborate"', { exp: "exp" }],
+    "operator:induction": [
+      '"induction"',
+      '"("',
+      { target: "exp" },
+      '")"',
+      '"{"',
+      { motive: "exp" },
+      // TODO
+      // { case_entries: "case_entry" },
+      '"}"',
+    ],
   },
 }
 
