@@ -108,7 +108,7 @@ function my_list_null_pair_and_typeof_pair(
 
 check! my_list_null_pair_and_typeof_pair(123): Pair(Pair(List(String), List(String)), Type)
 check! my_list_null_pair_and_typeof_pair(vague String, 123): Pair(Pair(List(String), List(String)), Type)
-check! my_list_null_pair_and_typeof_pair(vague String, vague String, 123): Pair(Pair(List(String), List(String)), Type)
+check! my_list_null_pair_and_typeof_pair(vague String, vague Nat, 123): Pair(Pair(List(String), List(Nat)), Type)
 
 // NOTE partly applied `vague-fn` can be bound to variable
 
