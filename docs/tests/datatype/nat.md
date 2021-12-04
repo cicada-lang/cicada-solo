@@ -47,13 +47,19 @@ check! Nat.add1(Nat.add1(Nat.zero)): Nat
 function induction_nat(
   target: Nat,
   motive: (Nat) -> Type,
-  case_zero: motive(zero),
-  case_add1: (
+  case_of_zero: motive(zero),
+  case_of_add1: (
     prev: Nat,
-    almost_on_prev: motive(prev),
+    almost: class { prev: motive(prev) },
   ) -> motive(add1(prev)),
 ): motive(target) {
-  return nat_ind(target, motive, case_zero, case_add1)
+  return nat_ind(
+    target,
+    motive,
+    case_of_zero,
+    (prev, almost_of_prev) => {
+      return case_of_add1(prev, { prev: almost_of_prev })
+    })
 }
 ```
 
@@ -65,7 +71,7 @@ function add(x: Nat, y: Nat): Nat {
     x,
     (_) => Nat,
     y,
-    (_prev, almost) => add1(almost),
+    (_prev, almost) => add1(almost.prev),
   )
 }
 ```
@@ -96,7 +102,7 @@ function mul(x: Nat, y: Nat): Nat {
     x,
     (_) => Nat,
     0,
-    (_prev, almost) => add(almost, y),
+    (_prev, almost) => add(almost.prev, y),
   )
 }
 ```
@@ -127,7 +133,7 @@ function power_of(x: Nat, y: Nat): Nat {
     x,
     (_) => Nat,
     1,
-    (_prev, almost) => mul(almost, y),
+    (_prev, almost) => mul(almost.prev, y),
   )
 }
 ```
@@ -164,7 +170,7 @@ function gauss(x: Nat): Nat {
     x,
     (_) => Nat,
     0,
-    (prev, almost) => add(add1(prev), almost),
+    (prev, almost) => add(add1(prev), almost.prev),
   )
 }
 ```
@@ -194,7 +200,7 @@ function factorial(x: Nat): Nat {
     x,
     (_) => Nat,
     1,
-    (prev, almost) => mul(add1(prev), almost),
+    (prev, almost) => mul(add1(prev), almost.prev),
   )
 }
 ```

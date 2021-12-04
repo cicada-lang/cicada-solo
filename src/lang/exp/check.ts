@@ -6,6 +6,7 @@ import { conversion } from "../value"
 import { readback } from "../value"
 import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
+import * as ut from "../../ut"
 
 export function check(
   ctx: Ctx,
@@ -22,7 +23,7 @@ export function check(
       throw new ExpTrace(
         [
           `I can not check the type of:`,
-          `  ${exp.format()}`,
+          `${ut.indent(exp.format(), "  ")}`,
           `I also can not check it by infer.`,
           `I suggest you add a type annotation to the expression.`,
         ].join("\n")
@@ -60,9 +61,9 @@ export function check_by_infer(
     throw new ExpTrace(
       [
         `I infer the type to be:`,
-        `  ${u_exp.format()}`,
+        `${ut.indent(u_exp.format(), "  ")}`,
         `But the expected type is:`,
-        `  ${t_exp.format()}`,
+        `${ut.indent(t_exp.format(), "  ")}`,
       ].join("\n")
     )
   }

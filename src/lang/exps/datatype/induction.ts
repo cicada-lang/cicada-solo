@@ -1,9 +1,11 @@
 import { Exp, ExpMeta, ElaborationOptions, subst } from "../../exp"
 import { Core } from "../../core"
 import { evaluate } from "../../core"
+import { infer } from "../../exp"
 import { check } from "../../exp"
 import { Ctx } from "../../ctx"
 import { Value } from "../../value"
+import { expect } from "../../value"
 import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
@@ -49,7 +51,24 @@ export class Induction extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
+    const inferred_target = infer(ctx, this.target)
+    const datatype = expect(ctx, inferred_target.t, Exps.DatatypeValue)
+
+    // datatype.type_ctor
+    // datatype.args
+
     throw new Error("TODO")
+
+    // const case_core_entries = "TODO"
+
+    // return {
+    //   t: "TODO",
+    //   core: new Exps.InductionCore(
+    //     inferred_target.core,
+    //     motive_core,
+    //     case_core_entries,
+    //   ),
+    // }
   }
 
   format(): string {

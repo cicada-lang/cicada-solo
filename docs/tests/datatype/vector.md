@@ -101,20 +101,20 @@ function induction_vector(
   implicit length: Nat,
   target: Vector(E, length),
   motive: (length: Nat, target: Vector(E, length)) -> Type,
-  case_vecnil: motive(0, vecnil),
-  case_vec: (
+  case_of_vecnil: motive(0, vecnil),
+  case_of_vec: (
     head: E,
     implicit prev: Nat,
     tail: Vector(E, prev),
-    almost_on_tail: motive(prev, tail),
+    almost_of_tail: motive(prev, tail),
   ) -> motive(add1(prev), vec(head, tail)),
 ): motive(length, target) {
   return vector_ind(
     length,
     target,
     motive,
-    case_vecnil,
-    (_prev, head, tail, almost) => case_vec(head, tail, almost)
+    case_of_vecnil,
+    (_prev, head, tail, almost) => case_of_vec(head, tail, almost)
   )
 }
 ```

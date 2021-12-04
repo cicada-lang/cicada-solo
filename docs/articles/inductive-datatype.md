@@ -70,10 +70,10 @@ datatype Nat {
 ``` cicada
 let curried_ind_nat_t = (
   motive: (Nat) -> Type,
-  case_zero: motive(zero),
-  case_add1: (
+  case_of_zero: motive(zero),
+  case_of_add1: (
     prev: Nat,
-    almost_on_prev: motive(prev),
+    almost_of_prev: motive(prev),
   ) -> motive(add1(prev)),
 ) -> (target: Nat) -> motive(target)
 ```
@@ -92,10 +92,10 @@ Thus we use the following type, instead of the type above.
 let ind_nat_t = (
   target: Nat,
   motive: (Nat) -> Type,
-  case_zero: motive(zero),
-  case_add1: (
+  case_of_zero: motive(zero),
+  case_of_add1: (
     prev: Nat,
-    almost_on_prev: motive(prev),
+    almost_of_prev: motive(prev),
   ) -> motive(add1(prev)),
 ) -> motive(target)
 ```
@@ -146,10 +146,10 @@ let ind_list_t = (
   implicit E: Type,
   target: List(E),
   motive: (List(E)) -> Type,
-  case_nil: motive(nil),
-  case_li: (
+  case_of_nil: motive(nil),
+  case_of_li: (
     head: E, tail: List(E),
-    almost_on_tail: motive(tail),
+    almost_of_tail: motive(tail),
   ) -> motive(li(head, tail)),
 ) -> motive(target)
 ```
@@ -158,7 +158,7 @@ let ind_list_t = (
 induction (target) {
   (list) => ...
   case nil => ...
-  case li(head, tail) (almost_on_tail) => ...
+  case li(head, tail) (almost_of_tail) => ...
 }
 ```
 
@@ -200,12 +200,12 @@ let vector_ind_t: Type = (
   implicit length: Nat,
   target: Vector(E, length),
   motive: (length: Nat, target: Vector(E, length)) -> Type,
-  case_vecnil: motive(0, vecnil),
-  case_vec: (
+  case_of_vecnil: motive(0, vecnil),
+  case_of_vec: (
     head: E,
     implicit prev: Nat,
     tail: Vector(E, prev),
-    almost_on_tail: motive(prev, tail),
+    almost_of_tail: motive(prev, tail),
   ) -> motive(add1(prev), vec(head, tail)),
 ) -> motive(length, target)
 ```
@@ -222,7 +222,7 @@ TODO
 induction (target) {
   (length, target) => ...
   case vecnil => ...
-  case vec(head, tail) (almost_on_tail) => ...
+  case vec(head, tail) (almost_of_tail) => ...
 }
 ```
 
@@ -241,8 +241,8 @@ let either_ind_t = (
   implicit R: Type,
   target: Either(L, R),
   motive: (Either(L, R)) -> Type,
-  case_inl: (left: L) -> motive(inl(left)),
-  case_inr: (right: R) -> motive(inr(right)),
+  case_of_inl: (left: L) -> motive(inl(left)),
+  case_of_inr: (right: R) -> motive(inr(right)),
 ) -> motive(target)
 ```
 
@@ -294,10 +294,10 @@ let ind_less_than_t = (
   implicit k: Nat,
   target: LessThan(j, k),
   motive: (j: Nat, k: Nat, LessThan(j, k)) -> Type,
-  case_zero_smallest: (n: Nat) -> motive(zero, add1(n), zero_smallest(n)),
-  case_add1_smallest: (
+  case_of_zero_smallest: (n: Nat) -> motive(zero, add1(n), zero_smallest(n)),
+  case_of_add1_smallest: (
     j: Nat, k: Nat, prev_smaller: LessThan(j, k),
-    almost_on_prev_smaller: motive(j, k, prev_smaller),
+    almost_of_prev_smaller: motive(j, k, prev_smaller),
   ) -> motive(add1(j), add1(k), add1_smaller(j, k, prev_smaller)),
 ) -> motive(j, k, target)
 ```
@@ -306,7 +306,7 @@ let ind_less_than_t = (
 induction (target) {
   (j, k, lt) => ...
   case zero_smallest(n) => ...
-  case add1_smaller(j, k, prev_smaller) (almost_on_prev_smaller) => ...
+  case add1_smaller(j, k, prev_smaller) (almost_of_prev_smaller) => ...
 }
 ```
 

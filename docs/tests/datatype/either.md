@@ -19,10 +19,10 @@ function induction_either(
   implicit R: Type,
   target: Either(L, R),
   motive: (Either(L, R)) -> Type,
-  case_inl: (left: L) -> motive(inl(left)),
-  case_inr: (right: R) -> motive(inr(right)),
+  case_of_inl: (left: L) -> motive(inl(left)),
+  case_of_inr: (right: R) -> motive(inr(right)),
 ): motive(target) {
-  return either_ind(target, motive, case_inl, case_inr)
+  return either_ind(target, motive, case_of_inl, case_of_inr)
 }
 ```
 
@@ -56,14 +56,14 @@ function induction_maybe(
   implicit E: Type,
   target: Maybe(E),
   motive: (Maybe(E)) -> Type,
-  case_just: (x: E) -> motive(just(x)),
-  case_nothing: motive(nothing(E)),
+  case_of_just: (x: E) -> motive(just(x)),
+  case_of_nothing: motive(nothing(E)),
 ): motive(target) {
   return induction_either(
     target,
     motive,
-    case_just,
-    (_) => case_nothing,
+    case_of_just,
+    (_) => case_of_nothing,
   )
 }
 ```
@@ -170,7 +170,7 @@ function list_ref_direct(index: Nat, implicit E: Type, list: List(E)): Maybe(E) 
       return induction_maybe(
         maybe_tail(list),
         (_) => Maybe(E),
-        (tail) => almost(tail),
+        (tail) => almost.prev(tail),
         nothing(E),
       )
     }
@@ -198,7 +198,7 @@ function list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
       return induction_maybe(
         maybe_tail(list),
         (_) => Maybe(E),
-        (tail) => almost(tail),
+        (tail) => almost.prev(tail),
         nothing(E),
       )
     }
@@ -256,7 +256,7 @@ function list_ref_vague(vague E: Type, index: Nat): (List(E)) -> Maybe(E) {
       return induction_maybe(
         maybe_tail(list),
         (_) => Maybe(E),
-        (tail) => almost(tail),
+        (tail) => almost.prev(tail),
         nothing(E),
       )
     }

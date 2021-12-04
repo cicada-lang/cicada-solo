@@ -64,13 +64,13 @@ function induction_list(
   implicit E: Type,
   target: List(E),
   motive: (List(E)) -> Type,
-  case_nil: motive(nil),
-  case_li: (
+  case_of_nil: motive(nil),
+  case_of_li: (
     head: E, tail: List(E),
-    almost_on_tail: motive(tail),
+    almost_of_tail: motive(tail),
   ) -> motive(li(head, tail)),
 ): motive(target) {
-  return list_ind(target, motive, case_nil, case_li)
+  return list_ind(target, motive, case_of_nil, case_of_li)
 }
 ```
 

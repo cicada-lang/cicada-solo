@@ -1,7 +1,12 @@
+- `tests/datatype/list` use class as `almost`
+- `tests/datatype/vector` use class as `almost`
+- `tests/datatype/either` use class as `almost`
+
 # inductive datatype -- induction
 
 - `induction` -- `infer`
-- `induction` -- `infer` -- `cover_all_cases` & `no_extra_cases`
+
+- `induction` -- `check_cases` -- `cover_all_cases` & `no_extra_cases`
 
 - `induction-core` -- `evaluate`
 
