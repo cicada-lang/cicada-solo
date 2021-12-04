@@ -1,4 +1,8 @@
-- remove `narration` for now
+> remove the `narration` feature for now
+
+- remove note `narration-of-elaboration-in-during-type-checking.md`
+- remove syntax of `elab`
+- remove `Elaborate` expresses
 
 # inductive datatype -- induction
 
