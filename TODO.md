@@ -4,8 +4,6 @@
 
   - [if possible] use loop instead of recursion
 
-- `induction` -- `build_case_t` -- fix the use of the name `motive`
-
 # inductive datatype -- questions
 
 - [question] Is it ok that `TypeCtorValue` can be `readback` to `TypeCtor`,
@@ -182,6 +180,12 @@
 
 # bug
 
+- [bug] `induction` -- `build_case_t` -- fix the use of the generated names -- `motive` and `almost`
+
+  - (A) is it enough to generate name that is not valid identifier?
+  - (B) pass `free_names` from `TypeCtor` to `TypeCtorCore` and `TypeCtorValue`
+  - (C) use `nanoid`
+
 - [bug] When error is in an imported file, error report fail to report the right context.
 
 - [bug] When `Valee.unify` take `ctx` and `t`, the `length` if `VecValue.unify` is wrong
@@ -203,6 +207,10 @@
 - `Book` -- the use of cached modules in `Book.load` is not safe in concurrent environment
 
 # maybe
+
+- [maybe] `implicit-fn` insertion is handled in `Fn.check`,
+  but `vague-fn` insertion is handled in `check`,
+  maybe we should make them symmetric.
 
 - [maybe] currently `implicit-pi` and `vague-pi` has the same structure,
   only the inserters are different, if we need the third such feature,
