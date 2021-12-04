@@ -1,6 +1,5 @@
 # inductive datatype -- induction
 
-- `induction` -- `infer` -- `motive_t` -- depends on `fixed_args` but not on `varied_args`
 - `induction` -- `infer` -- `ret_t` -- apply `motive_value` to `varied_args` and `target_value`
 
 - `induction` -- `infer` -- `check_cases`

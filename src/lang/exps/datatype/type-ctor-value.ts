@@ -52,6 +52,22 @@ export class TypeCtorValue extends Value {
     return Object.keys(this.varied).length
   }
 
+  get arity(): number {
+    return this.fixed_arity + this.varied_arity
+  }
+
+  get fixed_arg_names(): Array<string> {
+    return Object.keys(this.fixed)
+  }
+
+  get varied_arg_names(): Array<string> {
+    return Object.keys(this.varied)
+  }
+
+  get arg_names(): Array<string> {
+    return [...this.fixed_arg_names, ...this.varied_arg_names]
+  }
+
   get_data_ctor(name: string): Exps.DataCtorValue {
     const data_ctor = this.data_ctors[name]
     if (data_ctor === undefined) {
@@ -104,10 +120,6 @@ export class TypeCtorValue extends Value {
     return { env, arg_t_values }
   }
 
-  get arity(): number {
-    return Object.keys(this.fixed).length + Object.keys(this.varied).length
-  }
-
   as_datatype(): Exps.DatatypeValue {
     if (this.arity !== 0) {
       throw new Error(`I expect the arity of type constructor to be zero.`)
@@ -148,9 +160,8 @@ export class TypeCtorValue extends Value {
     fixed: Record<string, Core>
     ctx: Ctx
   } {
-    const fixed: Record<string, Core> = {}
     const result = this.apply_fixed_to_not_yet_values()
-
+    const fixed: Record<string, Core> = {}
     for (const [name, t] of Object.entries(result.arg_t_values)) {
       fixed[name] = readback(ctx, new Exps.TypeValue(), t)
       ctx = ctx.extend(name, t)
@@ -163,12 +174,11 @@ export class TypeCtorValue extends Value {
     arg_t_values: Record<string, Value>
     env: Env
   } {
-    const fixed_arg_names = Object.keys(this.fixed)
     return this.apply_fixed({
       fixed_args: (index, { arg_t }) =>
         new Exps.NotYetValue(
           arg_t,
-          new Exps.VarNeutral(fixed_arg_names[index])
+          new Exps.VarNeutral(this.fixed_arg_names[index])
         ),
     })
   }

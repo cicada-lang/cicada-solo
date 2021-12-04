@@ -54,6 +54,10 @@ export class Induction extends Exp {
     const inferred_target = infer(ctx, this.target)
     const datatype = expect(ctx, inferred_target.t, Exps.DatatypeValue)
 
+    const motive_t = this.motive_t(datatype)
+    const motive_core = check(ctx, this.motive, motive_t)
+    const motive_value = evaluate(ctx.to_env(), motive_core)
+
     // datatype.fixed_args
     // datatype.varied_args
 
@@ -72,6 +76,35 @@ export class Induction extends Exp {
     //     case_core_entries,
     //   ),
     // }
+  }
+
+  motive_t(datatype: Exps.DatatypeValue): Value {
+    let env = datatype.type_ctor.env
+    for (const [index, fixed_arg] of datatype.fixed_args.entries()) {
+      const fixed_arg_name = datatype.type_ctor.fixed_arg_names[index]
+      env = env.extend(fixed_arg_name, fixed_arg)
+    }
+
+    let datatype_core: Core = new Exps.VarCore(datatype.type_ctor.name)
+    for (const arg_name of [...datatype.type_ctor.arg_names].reverse()) {
+      datatype_core = new Exps.ApCore(datatype_core, new Exps.VarCore(arg_name))
+    }
+
+    let motive_core = new Exps.PiCore(
+      "target",
+      datatype_core,
+      new Exps.TypeCore()
+    )
+    const varied_entries = Object.entries(datatype.type_ctor.varied)
+    for (const [varied_arg_name, varied_arg_t_core] of varied_entries) {
+      motive_core = new Exps.PiCore(
+        varied_arg_name,
+        varied_arg_t_core,
+        motive_core
+      )
+    }
+
+    return evaluate(env, motive_core)
   }
 
   format(): string {
