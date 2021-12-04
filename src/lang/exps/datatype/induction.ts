@@ -110,6 +110,7 @@ export class Induction extends Exp {
     //   because in our generated core expression,
     //   it is a free variable.
     env = env.extend("motive", motive)
+    const motive_core = new Exps.VarCore("motive")
 
     // NOTE The `varied_args` of application of type constructor,
     //   if exists, they should be used as
@@ -121,20 +122,23 @@ export class Induction extends Exp {
       data_ctor.type_ctor.varied_arity
     )
     const target = data_ctor.build_data_pattern()
-    let case_ret_t: Core = new Exps.VarCore("motive")
+    let case_ret_t: Core = motive_core
     for (const arg of [...varied_args, target]) {
       case_ret_t = new Exps.ApCore(case_ret_t, arg)
     }
 
-    console.log(case_ret_t.format())
-
     let case_t = case_ret_t
-    // TODO analyze `direct_recursively_occurred_datatype` to build `almost`
+    if (data_ctor.is_recursive) {
+      case_t = new Exps.PiCore(
+        "almost",
+        data_ctor.build_almost_t(motive_core),
+        case_t
+      )
+    }
+
     for (const binding of [...data_ctor.bindings].reverse()) {
       case_t = this.build_pi_from_binding(case_t, binding)
     }
-
-    console.log(case_t.format())
 
     return evaluate(env, case_t)
   }

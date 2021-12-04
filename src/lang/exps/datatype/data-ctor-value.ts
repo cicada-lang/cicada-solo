@@ -123,6 +123,14 @@ export class DataCtorValue extends Value {
     return data_core
   }
 
+  get is_recursive(): boolean {
+    throw new Error("TODO")
+  }
+
+  build_almost_t(motive: Core): Core {
+    throw new Error("TODO")
+  }
+
   private build_ap_from_binding(core: Core, binding: DataCtorBinding): Core {
     switch (binding.kind) {
       case "plain":

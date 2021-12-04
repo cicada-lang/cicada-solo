@@ -1,6 +1,11 @@
 # inductive datatype -- induction
 
-- `induction` -- `build_case_t` -- analyze `direct_recursively_occurred_datatype` to build `almost`
+- [refactor] move `analyze_datatype` to `DataCtorValue`
+- [refactor] extract `DataCtorValue.case_ret_t`
+
+- `DataCtorValue.recursive_p`
+- `DataCtorValue.build_almost_t`
+
 - `induction` -- `build_case_t` -- fix the use of the name `motive`
 
 - `vague-inserter` -- `insert_vague_fn`
