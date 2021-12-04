@@ -123,7 +123,7 @@ export class Induction extends Exp {
     }
 
     let case_t = case_ret_t
-    for (const binding of data_ctor.bindings) {
+    for (const binding of [...data_ctor.bindings].reverse()) {
       // TODO extend `case_t` by `binding`
       // TODO analyze `direct_recursively_occurred_datatype` to build `almost`
     }

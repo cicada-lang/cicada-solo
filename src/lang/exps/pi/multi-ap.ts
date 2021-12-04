@@ -78,7 +78,7 @@ export class MultiAp extends Exp {
       ctx,
       this.arg_entries.reduce(
         (result, arg_entry) =>
-          Exps.wrap_arg_entry(result, arg_entry, this.meta),
+          Exps.build_ap_from_arg_entry(result, arg_entry, this.meta),
         this.target
       )
     )

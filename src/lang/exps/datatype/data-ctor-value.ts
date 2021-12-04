@@ -117,13 +117,16 @@ export class DataCtorValue extends Value {
     )
 
     for (const binding of this.bindings) {
-      data_core = this.wrap_binding(data_core, binding)
+      data_core = this.build_ap_from_binding(data_core, binding)
     }
 
     return data_core
   }
 
-  private wrap_binding(data_core: Core, binding: DataCtorBinding): Core {
+  private build_ap_from_binding(
+    data_core: Core,
+    binding: DataCtorBinding
+  ): Core {
     switch (binding.kind) {
       case "plain":
         return new Exps.ApCore(data_core, new Exps.VarCore(binding.name))

@@ -44,7 +44,7 @@ export class DataValue extends Value {
         index,
         { kind, value: arg },
       ] of this.arg_value_entries.entries()) {
-        result_core = Exps.wrap_arg_core_entry(result_core, {
+        result_core = Exps.build_ap_from_arg_core_entry(result_core, {
           kind,
           core: readback(ctx, arg_t_values[index], arg),
         })

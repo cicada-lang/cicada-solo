@@ -20,7 +20,7 @@ export type ArgValueEntry = {
   value: Value
 }
 
-export function wrap_arg_entry(
+export function build_ap_from_arg_entry(
   target: Exp,
   arg_entry: ArgEntry,
   meta: ExpMeta
@@ -38,7 +38,7 @@ export function wrap_arg_entry(
   }
 }
 
-export function wrap_arg_core_entry(
+export function build_ap_from_arg_core_entry(
   target_core: Core,
   arg_core_entry: ArgCoreEntry
 ): Core {

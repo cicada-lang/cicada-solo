@@ -69,7 +69,10 @@ export class VagueInserter {
     )
 
     for (const arg_core_entry of arg_core_entries) {
-      result_core = Exps.wrap_arg_core_entry(result_core, arg_core_entry)
+      result_core = Exps.build_ap_from_arg_core_entry(
+        result_core,
+        arg_core_entry
+      )
     }
 
     return result_core
