@@ -7,8 +7,19 @@ import * as Exps from "../../exps"
 import * as ut from "../../../ut"
 
 export class InductionCore extends Core {
-  constructor() {
+  target: Core
+  motive: Core
+  case_entries: Array<Exps.CaseCoreEntry>
+
+  constructor(
+    target: Core,
+    motive: Core,
+    case_entries: Array<Exps.CaseCoreEntry>
+  ) {
     super()
+    this.target = target
+    this.motive = motive
+    this.case_entries = case_entries
   }
 
   evaluate(env: Env): Value {

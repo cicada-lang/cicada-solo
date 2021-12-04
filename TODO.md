@@ -1,6 +1,5 @@
 # inductive datatype -- induction
 
-- `induction-core` -- fix structure
 - `induction-neutral` -- fix structure
 
 - `induction` -- `infer`
