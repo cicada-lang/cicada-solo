@@ -1,5 +1,3 @@
-- `tests/datatype/vector` use class as `almost`
-
 # inductive datatype -- induction
 
 - `induction` -- `infer`

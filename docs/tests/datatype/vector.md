@@ -106,7 +106,7 @@ function induction_vector(
     head: E,
     implicit prev: Nat,
     tail: Vector(E, prev),
-    almost_of_tail: motive(prev, tail),
+    almost_of_tail: class { tail: motive(prev, tail) },
   ) -> motive(add1(prev), vec(head, tail)),
 ): motive(length, target) {
   return vector_ind(
@@ -114,7 +114,7 @@ function induction_vector(
     target,
     motive,
     case_of_vecnil,
-    (_prev, head, tail, almost) => case_of_vec(head, tail, almost)
+    (_prev, head, tail, almost_of_tail) => case_of_vec(head, tail, { tail: almost_of_tail })
   )
 }
 ```
@@ -135,7 +135,7 @@ function vector_append(
     x,
     (length, _target) => Vector(E, add(length, yl)),
     y,
-    (head, _tail, almost) => vec(head, almost),
+    (head, _tail, almost) => vec(head, almost.tail),
   )
 }
 ```
@@ -180,7 +180,7 @@ function list_from_vector(
     vector,
     (length, target) => List(E),
     nil,
-    (head, tail, almost) => li(head, almost),
+    (head, tail, almost) => li(head, almost.tail),
   )
 }
 ```
