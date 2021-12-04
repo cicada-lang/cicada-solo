@@ -8,6 +8,7 @@ import { Value } from "../../value"
 import { expect } from "../../value"
 import { Solution } from "../../solution"
 import * as Exps from "../../exps"
+import { ExpTrace } from "../../errors"
 
 export class Induction extends Exp {
   meta: ExpMeta
@@ -68,16 +69,37 @@ export class Induction extends Exp {
       core: new Exps.InductionCore(
         inferred_target.core,
         motive_core,
-        this.check_cases(ctx)
+        this.check_cases(ctx, datatype)
       ),
     }
   }
 
-  check_cases(ctx: Ctx): Array<Exps.CaseCoreEntry> {
+  private check_cases(
+    ctx: Ctx,
+    datatype: Exps.DatatypeValue
+  ): Array<Exps.CaseCoreEntry> {
+    this.ensure_no_extra_cases(ctx, datatype)
+
     throw new Error("TODO")
   }
 
-  motive_t(datatype: Exps.DatatypeValue): Value {
+  private ensure_no_extra_cases(ctx: Ctx, datatype: Exps.DatatypeValue): void {
+    for (const case_entry of this.case_entries) {
+      const data_ctor = datatype.type_ctor.data_ctors[case_entry.name]
+      if (data_ctor === undefined) {
+        const data_ctor_names = Object.keys(datatype.type_ctor.data_ctors)
+        throw new ExpTrace(
+          [
+            `I can not find data constructor from given case name.`,
+            `  case name: ${case_entry.name}`,
+            `  data constructor names: ${data_ctor_names.join(", ")}`,
+          ].join("\n")
+        )
+      }
+    }
+  }
+
+  private motive_t(datatype: Exps.DatatypeValue): Value {
     let env = datatype.type_ctor.env
     for (const [index, fixed_arg] of datatype.fixed_args.entries()) {
       const fixed_arg_name = datatype.type_ctor.fixed_arg_names[index]
