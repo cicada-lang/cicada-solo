@@ -101,9 +101,10 @@ export * from "./datatype/datatype-value"
 export * from "./datatype/data-ctor-value"
 export * from "./datatype/curried-data-ctor-value"
 export * from "./datatype/data-value"
+export * from "./datatype/case-entry"
 export * from "./datatype/induction"
-// export * from "./datatype/induction-core"
-// export * from "./datatype/induction-neutral"
+export * from "./datatype/induction-core"
+export * from "./datatype/induction-neutral"
 
 // NOTE subclass must follow abstract class
 export * from "./cls/cls"

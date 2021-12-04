@@ -1,5 +1,10 @@
 # inductive datatype -- induction
 
+- [refactor] rename `ArgEntry`'s `arg` field to `exp`, `core` & `value`
+
+- `induction-core` -- fix structure
+- `induction-neutral` -- fix structure
+
 - `induction` -- `infer`
 - `induction` -- `infer` -- `cover_all_cases` & `no_extra_cases`
 

@@ -7,22 +7,16 @@ import { Value } from "../../value"
 import { Solution } from "../../solution"
 import * as Exps from "../../exps"
 
-export type CaseEntry = {
-  nullary: boolean
-  name: string
-  exp: Exp
-}
-
 export class Induction extends Exp {
   meta: ExpMeta
   target: Exp
   motive: Exp
-  case_entries: Array<CaseEntry>
+  case_entries: Array<Exps.CaseEntry>
 
   constructor(
     target: Exp,
     motive: Exp,
-    case_entries: Array<CaseEntry>,
+    case_entries: Array<Exps.CaseEntry>,
     meta: ExpMeta
   ) {
     super()
