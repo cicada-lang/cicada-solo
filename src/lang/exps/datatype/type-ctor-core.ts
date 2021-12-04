@@ -44,7 +44,7 @@ export class TypeCtorCore extends Core {
     const i = this.varied_alpha_format(ctx)
     // NOTE structural typing (do not print `name`)
     const head = `datatype # ${p}${i}`
-    const c = this.ctors_alpha_format(ctx.extend(this.name))
+    const c = this.data_ctors_alpha_format(ctx.extend(this.name))
     const body = ut.indent(c, "  ")
     return `${head}{\n${body}\n}`
   }
@@ -79,7 +79,7 @@ export class TypeCtorCore extends Core {
     }
   }
 
-  private ctors_alpha_format(ctx: AlphaCtx): string {
+  private data_ctors_alpha_format(ctx: AlphaCtx): string {
     return Object.entries(this.data_ctors)
       .map(([name, t]) => `${name}: ${t.alpha_format(ctx)}`)
       .join("\n")

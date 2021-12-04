@@ -1,8 +1,7 @@
 # inductive datatype -- induction
 
-- [refactor] rename `TypeCtor.ctor` to `TypeCtor.data_ctor`
+- [refactor] rename `DataCtorValue.ret_t` to `DataCtorValue.t`
 
-- [refactor] rename `DataCtorValue.ret_t` to `DataCtorValue.case_t_core`
 - [refactor] rename `DataCtorValue.bindings` to `DataCtorValue.binding_core_entries`
 - [refactor] `DataCtorValue.ret_t_core`
 

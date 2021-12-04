@@ -12,19 +12,19 @@ export class TypeCtor extends Exp {
   name: string
   fixed: Record<string, Exp>
   varied: Record<string, Exp>
-  ctors: Record<string, Exp>
+  data_ctors: Record<string, Exp>
 
   constructor(
     name: string,
     fixed: Record<string, Exp>,
     varied: Record<string, Exp>,
-    ctors: Record<string, Exp>
+    data_ctors: Record<string, Exp>
   ) {
     super()
     this.name = name
     this.fixed = fixed
     this.varied = varied
-    this.ctors = ctors
+    this.data_ctors = data_ctors
   }
 
   free_names(bound_names: Set<string>): Set<string> {
@@ -33,7 +33,9 @@ export class TypeCtor extends Exp {
     return new Set([
       ...result.free_names,
       ...this.varied_free_names(result.bound_names),
-      ...this.ctors_free_names(new Set([...result.bound_names, this.name])),
+      ...this.data_ctors_free_names(
+        new Set([...result.bound_names, this.name])
+      ),
     ])
   }
 
@@ -62,9 +64,9 @@ export class TypeCtor extends Exp {
     return free_names
   }
 
-  private ctors_free_names(bound_names: Set<string>): Set<string> {
+  private data_ctors_free_names(bound_names: Set<string>): Set<string> {
     let free_names: Set<string> = new Set()
-    for (const exp of Object.values(this.ctors)) {
+    for (const exp of Object.values(this.data_ctors)) {
       free_names = new Set([...free_names, ...exp.free_names(bound_names)])
     }
 
@@ -84,11 +86,13 @@ export class TypeCtor extends Exp {
       ctx.to_env(),
       TypeCtor.self_type_core(result.fixed, varied)
     )
-    const ctors = this.infer_ctors(result.ctx.extend(this.name, self_type))
+    const data_ctors = this.infer_data_ctors(
+      result.ctx.extend(this.name, self_type)
+    )
 
     return {
       t: self_type,
-      core: new Exps.TypeCtorCore(this.name, result.fixed, varied, ctors),
+      core: new Exps.TypeCtorCore(this.name, result.fixed, varied, data_ctors),
     }
   }
 
@@ -129,13 +133,13 @@ export class TypeCtor extends Exp {
       )
   }
 
-  private infer_ctors(ctx: Ctx): Record<string, Core> {
-    const ctors: Record<string, Core> = {}
-    for (const [name, t] of Object.entries(this.ctors)) {
-      ctors[name] = check(ctx, t, new Exps.TypeValue())
+  private infer_data_ctors(ctx: Ctx): Record<string, Core> {
+    const data_ctors: Record<string, Core> = {}
+    for (const [name, t] of Object.entries(this.data_ctors)) {
+      data_ctors[name] = check(ctx, t, new Exps.TypeValue())
     }
 
-    return ctors
+    return data_ctors
   }
 
   format(): string {
@@ -143,7 +147,7 @@ export class TypeCtor extends Exp {
     const p = this.fixed_format()
     const i = this.varied_format()
     const head = `datatype ${n} ${p}${i}`
-    const c = this.ctors_format()
+    const c = this.data_ctors_format()
     const body = ut.indent(c, "  ")
     return `${head}{\n${body}\n}`
   }
@@ -178,8 +182,8 @@ export class TypeCtor extends Exp {
     }
   }
 
-  private ctors_format(): string {
-    return Object.entries(this.ctors)
+  private data_ctors_format(): string {
+    return Object.entries(this.data_ctors)
       .map(([name, t]) => `${name}: ${t.format()}`)
       .join("\n")
   }
