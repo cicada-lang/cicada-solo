@@ -79,8 +79,32 @@ export class Induction extends Exp {
     datatype: Exps.DatatypeValue
   ): Array<Exps.CaseCoreEntry> {
     this.ensure_no_extra_cases(ctx, datatype)
+    for (const [name, data_ctor] of Object.entries(
+      datatype.type_ctor.data_ctors
+    )) {
+      const case_entry = this.get_case_entry(name)
+    }
 
     throw new Error("TODO")
+  }
+
+  private get_case_entry(name: string): Exps.CaseEntry {
+    const found = this.case_entries.find(
+      (case_entry) => case_entry.name === name
+    )
+
+    if (found === undefined) {
+      const case_names = this.case_entries.map((case_entry) => case_entry.name)
+      throw new ExpTrace(
+        [
+          `I can not find case of given data constructor name.`,
+          `  data constructor name: ${name}`,
+          `  case names: ${case_names.join(", ")}`,
+        ].join("\n")
+      )
+    }
+
+    return found
   }
 
   private ensure_no_extra_cases(ctx: Ctx, datatype: Exps.DatatypeValue): void {

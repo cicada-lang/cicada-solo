@@ -1,6 +1,7 @@
 # inductive datatype -- induction
 
 - `induction` -- `check_cases` -- `check_case`
+- `induction` -- `check_case`
 - `induction` -- `case_t`
 
 - `induction-core` -- `evaluate`
