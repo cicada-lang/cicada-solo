@@ -25,13 +25,15 @@ export class AbsurdIndCore extends Core {
   }
 
   format(): string {
-    return `absurd_ind(${this.target.format()}, ${this.motive.format()})`
+    const target = this.target.format()
+    const motive = this.motive.format()
+    return `absurd_ind(${target}, ${motive})`
   }
 
   alpha_format(ctx: AlphaCtx): string {
-    return `absurd_ind(${this.target.alpha_format(
-      ctx
-    )}, ${this.motive.alpha_format(ctx)})`
+    const target = this.target.alpha_format(ctx)
+    const motive = this.motive.alpha_format(ctx)
+    return `absurd_ind(${target}, ${motive})`
   }
 
   static apply(target: Value, motive: Value): Value {
