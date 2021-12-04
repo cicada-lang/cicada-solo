@@ -74,7 +74,11 @@ export class DataCtorValue extends Value {
     let ret_t = this.ret_t
     while (true) {
       if (ret_t instanceof Exps.PiCore) {
-        bindings.push({ kind: "plain", name: ret_t.name, arg_t: ret_t.arg_t })
+        bindings.push({
+          kind: "plain",
+          name: ret_t.name,
+          arg_t: ret_t.arg_t,
+        })
         ret_t = ret_t.ret_t
       } else if (ret_t instanceof Exps.ImplicitPiCore) {
         bindings.push({
@@ -84,7 +88,11 @@ export class DataCtorValue extends Value {
         })
         ret_t = ret_t.ret_t
       } else if (ret_t instanceof Exps.VaguePiCore) {
-        bindings.push({ kind: "vague", name: ret_t.name, arg_t: ret_t.arg_t })
+        bindings.push({
+          kind: "vague",
+          name: ret_t.name,
+          arg_t: ret_t.arg_t,
+        })
         ret_t = ret_t.ret_t
       } else {
         break

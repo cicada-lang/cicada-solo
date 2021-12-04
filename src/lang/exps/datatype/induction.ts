@@ -61,6 +61,21 @@ export class Induction extends Exp {
 
     const target_value = evaluate(ctx.to_env(), inferred_target.core)
 
+    this.ensure_no_extra_cases(ctx, datatype)
+
+    const case_core_entries = Object.entries(datatype.type_ctor.data_ctors).map(
+      ([name, data_ctor]) => {
+        const case_entry = this.get_case_entry(name)
+        const case_t = this.build_case_t(
+          data_ctor,
+          motive_value,
+          datatype.fixed_args
+        )
+        const core = check(ctx, case_entry.exp, case_t)
+        return { ...case_entry, core }
+      }
+    )
+
     return {
       t: Exps.ApCore.multi_apply(motive_value, [
         ...datatype.varied_args,
@@ -69,32 +84,17 @@ export class Induction extends Exp {
       core: new Exps.InductionCore(
         inferred_target.core,
         motive_core,
-        this.check_cases(ctx, datatype)
+        case_core_entries
       ),
     }
   }
 
-  private check_cases(
-    ctx: Ctx,
-    datatype: Exps.DatatypeValue
-  ): Array<Exps.CaseCoreEntry> {
-    this.ensure_no_extra_cases(ctx, datatype)
-
-    return Object.entries(datatype.type_ctor.data_ctors).map(
-      ([name, data_ctor]) => {
-        const case_entry = this.get_case_entry(name)
-        return this.check_case(ctx, datatype, case_entry.exp, data_ctor)
-      }
-    )
-  }
-
-  private check_case(
-    ctx: Ctx,
-    datatype: Exps.DatatypeValue,
-    exp: Exp,
-    data_ctor: Exps.DataCtorValue
-  ): Exps.CaseCoreEntry {
-    throw new Error()
+  private build_case_t(
+    data_ctor: Exps.DataCtorValue,
+    motive: Value,
+    fixed_args: Array<Value>
+  ): Value {
+    throw new Error("TODO")
   }
 
   private get_case_entry(name: string): Exps.CaseEntry {

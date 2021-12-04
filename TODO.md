@@ -1,9 +1,28 @@
 # inductive datatype -- induction
 
-- `induction` -- `check_case`
-- `induction` -- `case_t`
+- [refactor] rename `TypeCtor.ctor` to `TypeCtor.data_ctor`
+
+- [refactor] rename `DataCtorValue.ret_t` to `DataCtorValue.case_t_core`
+- [refactor] rename `DataCtorValue.bindings` to `DataCtorValue.binding_core_entries`
+- [refactor] `DataCtorValue.ret_t_core`
+
+- `induction` -- `build_case_t`
+
+  - build return type of the `case_t` from recursively occured datatype application data constructor
+
+    - `varied_args` of the datatype, should be used as arguments of `motive`
+
+      - the same for properties of `almost`
+
+- `vague-inserter` -- `insert_vague_fn`
+
+  - can be tested by `induction_vector`
+
+  - checking induction case entry depends on this
 
 - `induction-core` -- `evaluate`
+
+  - [if possible] use loop instead of recursion
 
 # inductive datatype -- questions
 

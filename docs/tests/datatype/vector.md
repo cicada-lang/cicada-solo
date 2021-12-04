@@ -15,6 +15,8 @@ datatype Vector(E: Type) (length: Nat) {
 }
 ```
 
+# MyVector
+
 ``` cicada
 datatype MyVector(E: Type) (length: Nat) {
   my_null: MyVector(E, zero)
@@ -103,8 +105,8 @@ function induction_vector(
   motive: (length: Nat, Vector(E, length)) -> Type,
   case_of_vecnil: motive(0, vecnil),
   case_of_vec: (
+    vague prev: Nat,
     head: E,
-    implicit prev: Nat,
     tail: Vector(E, prev),
     almost: class { tail: motive(prev, tail) },
   ) -> motive(add1(prev), vec(head, tail)),
@@ -114,7 +116,7 @@ function induction_vector(
     target,
     motive,
     case_of_vecnil,
-    (_prev, head, tail, almost_of_tail) => case_of_vec(head, tail, { tail: almost_of_tail })
+    (prev, head, tail, almost_of_tail) => case_of_vec(vague prev, head, tail, { tail: almost_of_tail })
   )
 }
 ```
@@ -135,7 +137,7 @@ function vector_append(
     x,
     (length, _target) => Vector(E, add(length, yl)),
     y,
-    (head, _tail, almost) => vec(head, almost.tail),
+    (vague E, head, _tail, almost) => vec(head, almost.tail),
   )
 }
 ```
@@ -180,7 +182,7 @@ function list_from_vector(
     vector,
     (length, target) => List(E),
     nil,
-    (head, tail, almost) => li(head, almost.tail),
+    (vague E, head, tail, almost) => li(head, almost.tail),
   )
 }
 ```
