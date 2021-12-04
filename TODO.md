@@ -1,4 +1,3 @@
-- remove `Elaborate` expresses
 - remove `ElaborationOptions` expresses
 
 # inductive datatype -- induction
