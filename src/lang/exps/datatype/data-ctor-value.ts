@@ -70,6 +70,14 @@ export class DataCtorValue extends Value {
   }
 
   get bindings(): Array<DataCtorBinding> {
+    return this.split_type().bindings
+  }
+
+  get ret_t(): Core {
+    return this.split_type().ret_t
+  }
+
+  split_type(): { bindings: Array<DataCtorBinding>; ret_t: Core } {
     const bindings: Array<DataCtorBinding> = []
     let t = this.t
     while (true) {
@@ -99,7 +107,7 @@ export class DataCtorValue extends Value {
       }
     }
 
-    return bindings
+    return { bindings, ret_t: t }
   }
 
   get arity(): number {

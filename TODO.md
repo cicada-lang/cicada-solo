@@ -1,7 +1,5 @@
 # inductive datatype -- induction
 
-- [refactor] `DataCtorValue.ret_t`
-
 - `induction` -- `build_case_t`
 
   - build return type of the `case_t` from recursively occured datatype application data constructor
