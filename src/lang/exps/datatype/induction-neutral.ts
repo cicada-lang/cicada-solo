@@ -58,5 +58,47 @@ function unify_case_entries(
   this_case_entries: Array<Exps.CaseNormalEntry>,
   that_case_entries: Array<Exps.CaseNormalEntry>
 ): Solution {
-  throw new Error("TODO")
+  this_case_entries = this_case_entries.sort(compare_case_entries)
+  that_case_entries = that_case_entries.sort(compare_case_entries)
+
+  if (this_case_entries.length !== that_case_entries.length) {
+    return Solution.failure
+  }
+
+  for (const [index] of this_case_entries.entries()) {
+    solution = unify_case_entry(
+      solution,
+      ctx,
+      this_case_entries[index],
+      that_case_entries[index]
+    )
+  }
+
+  return solution
+}
+
+function compare_case_entries(
+  this_case_entry: Exps.CaseNormalEntry,
+  that_case_entry: Exps.CaseNormalEntry
+): -1 | 0 | 1 {
+  if (this_case_entry.name < that_case_entry.name) return -1
+  if (this_case_entry.name > that_case_entry.name) return 1
+  else return 0
+}
+
+function unify_case_entry(
+  solution: Solution,
+  ctx: Ctx,
+  this_case_entry: Exps.CaseNormalEntry,
+  that_case_entry: Exps.CaseNormalEntry
+): Solution {
+  if (this_case_entry.name !== that_case_entry.name) {
+    return Solution.failure
+  }
+
+  return solution.unify_normal(
+    ctx,
+    this_case_entry.normal,
+    that_case_entry.normal
+  )
 }

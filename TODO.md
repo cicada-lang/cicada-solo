@@ -1,7 +1,5 @@
 # inductive datatype -- induction
 
-- `induction-neutral` -- `unify_case_entries`
-
 - `induction-core` -- `format`
 - `induction-core` -- `alpha_format`
 
