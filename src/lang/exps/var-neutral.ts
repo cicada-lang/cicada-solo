@@ -16,7 +16,7 @@ export class VarNeutral extends Neutral {
     return new Exps.VarCore(this.name)
   }
 
-  unify_neutral(ctx: Ctx, solution: Solution, that: Neutral): Solution {
+  unify_neutral(solution: Solution, ctx: Ctx, that: Neutral): Solution {
     if (!(that instanceof VarNeutral && this.name === that.name)) {
       return Solution.failure
     }

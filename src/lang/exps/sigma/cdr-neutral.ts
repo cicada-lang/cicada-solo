@@ -16,7 +16,7 @@ export class CdrNeutral extends Neutral {
     return new Exps.CdrCore(this.target.readback_neutral(ctx))
   }
 
-  unify_neutral(ctx: Ctx, solution: Solution, that: Neutral): Solution {
+  unify_neutral(solution: Solution, ctx: Ctx, that: Neutral): Solution {
     if (!(that instanceof CdrNeutral)) {
       return Solution.failure
     }

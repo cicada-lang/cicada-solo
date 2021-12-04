@@ -5,7 +5,7 @@ import { Solution } from "../solution"
 export abstract class Neutral {
   abstract readback_neutral(ctx: Ctx): Core
 
-  unify_neutral(ctx: Ctx, solution: Solution, that: Neutral): Solution {
+  unify_neutral(solution: Solution, ctx: Ctx, that: Neutral): Solution {
     throw new Error(
       [
         `Method not implemented for Neutral.`,

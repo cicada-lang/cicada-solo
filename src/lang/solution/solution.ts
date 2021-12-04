@@ -119,7 +119,7 @@ export abstract class Solution {
   }
 
   unify_neutral(ctx: Ctx, x: Neutral, y: Neutral): Solution {
-    return x.unify_neutral(ctx, this, y)
+    return x.unify_neutral(this, ctx, y)
   }
 
   unify_normal(ctx: Ctx, x: Normal, y: Normal): Solution {

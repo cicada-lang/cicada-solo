@@ -25,7 +25,7 @@ export class ReplaceNeutral extends Neutral {
     )
   }
 
-  unify_neutral(ctx: Ctx, solution: Solution, that: Neutral): Solution {
+  unify_neutral(solution: Solution, ctx: Ctx, that: Neutral): Solution {
     if (!(that instanceof ReplaceNeutral)) {
       return Solution.failure
     }

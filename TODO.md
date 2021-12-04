@@ -1,7 +1,5 @@
 # inductive datatype -- induction
 
-- [refactor] `neutral` -- fix argument order -- `solution` should be the first argument
-
 - `induction-neutral` -- `unify_case_entries`
 
 - `induction-core` -- `format`

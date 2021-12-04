@@ -16,7 +16,7 @@ export class CarNeutral extends Neutral {
     return new Exps.CarCore(this.target.readback_neutral(ctx))
   }
 
-  unify_neutral(ctx: Ctx, solution: Solution, that: Neutral): Solution {
+  unify_neutral(solution: Solution, ctx: Ctx, that: Neutral): Solution {
     if (!(that instanceof CarNeutral)) {
       return Solution.failure
     }
