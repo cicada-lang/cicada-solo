@@ -1,5 +1,3 @@
-- remove `ElaborationOptions`
-
 # inductive datatype -- induction
 
 - `induction` -- `infer`
@@ -171,19 +169,6 @@
 - [books] Topology theory
 - [books] Category of Groups
 - [books] Number theroy -- https://en.wikipedia.org/wiki/Number_theory
-
-# narration
-
-- `@elab` support `@elab(<name>, <exp>)`
-
-  - maybe use this to fix repeated output of `@elab`
-
-- narration for the computation rules
-
-  - eta rule & sameness rule
-
-  - These rules can not be narrated in our implementation of NbE,
-    maybe will be able to narrate them, if we use unification instead of NbE.
 
 # the `todo` keyword
 

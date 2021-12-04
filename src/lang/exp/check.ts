@@ -1,4 +1,4 @@
-import { Exp, ElaborationOptions } from "../exp"
+import { Exp } from "../exp"
 import { Core } from "../core"
 import { Value } from "../value"
 import { Ctx } from "../ctx"
@@ -8,17 +8,12 @@ import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
 import * as ut from "../../ut"
 
-export function check(
-  ctx: Ctx,
-  exp: Exp,
-  t: Value,
-  opts?: ElaborationOptions
-): Core {
+export function check(ctx: Ctx, exp: Exp, t: Value): Core {
   try {
     if (exp.check) {
-      return exp.check(ctx, t, opts)
+      return exp.check(ctx, t)
     } else if (exp.infer) {
-      return check_by_infer(ctx, exp as ExpWithInfer, t, opts)
+      return check_by_infer(ctx, exp as ExpWithInfer, t)
     } else {
       throw new ExpTrace(
         [
@@ -36,16 +31,11 @@ export function check(
 }
 
 type ExpWithInfer = Exp & {
-  infer(ctx: Ctx, opts?: ElaborationOptions): { t: Value; core: Core }
+  infer(ctx: Ctx): { t: Value; core: Core }
 }
 
-export function check_by_infer(
-  ctx: Ctx,
-  exp: ExpWithInfer,
-  t: Value,
-  opts?: ElaborationOptions
-): Core {
-  const inferred = exp.infer(ctx, opts)
+export function check_by_infer(ctx: Ctx, exp: ExpWithInfer, t: Value): Core {
+  const inferred = exp.infer(ctx)
   const u = inferred.t
   if (!conversion(ctx, new Exps.TypeValue(), t, u)) {
     const u_exp = readback(ctx, new Exps.TypeValue(), u)
