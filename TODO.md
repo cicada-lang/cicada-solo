@@ -1,9 +1,5 @@
 # inductive datatype -- induction
 
-- `induction` -- `build_case_t` -- analyze `ret_t` to get the init `case_t`
-
-  - with the help of `analyze_datatype`
-
 - `induction` -- `build_case_t` -- analyze `direct_recursively_occurred_datatype` to build `almost`
 - `induction` -- `build_case_t` -- fix the use of the name `motive`
 
