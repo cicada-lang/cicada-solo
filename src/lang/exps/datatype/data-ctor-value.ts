@@ -123,6 +123,21 @@ export class DataCtorValue extends Value {
     return data_core
   }
 
+  build_case_ret_t(motive: Core): Core {
+    // NOTE The `varied_args` of application of type constructor,
+    //   if exists, they should be used as
+    //   the first few arguments of the application of `motive`.
+    //   - The same for building `almost`.
+    const { varied_args } = this.type_ctor.analyze_datatype(this.ret_t)
+    const target = this.build_data_pattern()
+    let case_ret_t: Core = motive
+    for (const arg of [...varied_args, target]) {
+      case_ret_t = new Exps.ApCore(case_ret_t, arg)
+    }
+
+    return case_ret_t
+  }
+
   get is_recursive(): boolean {
     throw new Error("TODO")
   }

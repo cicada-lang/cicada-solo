@@ -1,7 +1,5 @@
 # inductive datatype -- induction
 
-- [refactor] extract `DataCtorValue.case_ret_t`
-
 - `DataCtorValue.recursive_p`
 - `DataCtorValue.build_almost_t`
 

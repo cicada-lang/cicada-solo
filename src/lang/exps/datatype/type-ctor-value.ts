@@ -230,7 +230,7 @@ export class TypeCtorValue extends Value {
   // NOTE Analyze full application of type constructor.
   // - Throw elaboration error if the argument is not valid full application.
   // - To get `fixed_args` and `varied_args`.
-  private analyze_datatype(datatype: Core): {
+  analyze_datatype(datatype: Core): {
     fixed_args: Array<Core>
     varied_args: Array<Core>
   } {

@@ -112,28 +112,11 @@ export class Induction extends Exp {
     env = env.extend("motive", motive)
     const motive_core = new Exps.VarCore("motive")
 
-    // NOTE The `varied_args` of application of type constructor,
-    //   if exists, they should be used as
-    //   the first few arguments of the application of `motive`.
-    //   - The same for building `almost`.
-    const { varied_args } = this.analyze_datatype(
-      data_ctor.ret_t,
-      data_ctor.type_ctor.fixed_arity,
-      data_ctor.type_ctor.varied_arity
-    )
-    const target = data_ctor.build_data_pattern()
-    let case_ret_t: Core = motive_core
-    for (const arg of [...varied_args, target]) {
-      case_ret_t = new Exps.ApCore(case_ret_t, arg)
-    }
+    let case_t = data_ctor.build_case_ret_t(motive_core)
 
-    let case_t = case_ret_t
     if (data_ctor.is_recursive) {
-      case_t = new Exps.PiCore(
-        "almost",
-        data_ctor.build_almost_t(motive_core),
-        case_t
-      )
+      const almost_t = data_ctor.build_almost_t(motive_core)
+      case_t = new Exps.PiCore("almost", almost_t, case_t)
     }
 
     for (const binding of [...data_ctor.bindings].reverse()) {
@@ -155,59 +138,6 @@ export class Induction extends Exp {
       case "vague":
         return new Exps.VaguePiCore(binding.name, binding.arg_t, core)
     }
-  }
-
-  // NOTE Analyze full application of type constructor.
-  // - Throw elaboration error if the argument is not valid full application.
-  // - To get `fixed_args` and `varied_args`.
-  private analyze_datatype(
-    datatype: Core,
-    fixed_arity: number,
-    varied_arity: number
-  ): {
-    fixed_args: Array<Core>
-    varied_args: Array<Core>
-  } {
-    const total_arity = fixed_arity + varied_arity
-
-    const fixed_args: Array<Core> = []
-    const varied_args: Array<Core> = []
-
-    let counter = 0
-    while (true) {
-      if (datatype instanceof Exps.VarCore) break
-      if (!(datatype instanceof Exps.ApCore)) {
-        throw new ExpTrace(
-          [
-            `I expect a full type constructor application to be ApCore.`,
-            `  datatype: ${datatype.format()}`,
-          ].join("\n")
-        )
-      }
-
-      // NOTE Remind that application associate to right.
-
-      if (counter < varied_arity) {
-        varied_args.unshift(datatype.arg)
-      } else if (counter < total_arity) {
-        fixed_args.unshift(datatype.arg)
-      } else {
-        throw new ExpTrace(
-          [
-            `I found that the type constructor application exceed the total arity.`,
-            `  datatype: ${datatype.format()}`,
-            `  fixed_arity: ${fixed_arity}`,
-            `  varied_arity: ${varied_arity}`,
-            `  total_arity: ${total_arity}`,
-          ].join("\n")
-        )
-      }
-
-      datatype = datatype.target
-      counter++
-    }
-
-    return { fixed_args, varied_args }
   }
 
   private get_case_entry(name: string): Exps.CaseEntry {
