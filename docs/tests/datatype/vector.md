@@ -106,7 +106,7 @@ function induction_vector(
     head: E,
     implicit prev: Nat,
     tail: Vector(E, prev),
-    almost_of_tail: class { tail: motive(prev, tail) },
+    almost: class { tail: motive(prev, tail) },
   ) -> motive(add1(prev), vec(head, tail)),
 ): motive(length, target) {
   return vector_ind(
