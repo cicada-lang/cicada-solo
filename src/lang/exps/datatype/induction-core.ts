@@ -27,7 +27,17 @@ export class InductionCore extends Core {
   }
 
   format(): string {
-    throw new Error("TODO")
+    const target = this.target.format()
+    const motive = this.motive.format()
+    const case_entries = this.case_entries
+      .map((case_entry) =>
+        case_entry.nullary
+          ? `case ${case_entry.name} => ${case_entry.core.format()}`
+          : `case ${case_entry.name}${case_entry.core.format()}`
+      )
+      .join(" ")
+
+    return `induction (${target}) { ${motive} ${case_entries} }`
   }
 
   alpha_format(ctx: AlphaCtx): string {

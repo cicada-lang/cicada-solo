@@ -1,6 +1,5 @@
 # inductive datatype -- induction
 
-- `induction-core` -- `format`
 - `induction-core` -- `alpha_format`
 
 - `induction` -- `infer`
