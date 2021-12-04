@@ -1,6 +1,5 @@
 # inductive datatype -- induction
 
-- [refactor] move `analyze_datatype` to `DataCtorValue`
 - [refactor] extract `DataCtorValue.case_ret_t`
 
 - `DataCtorValue.recursive_p`

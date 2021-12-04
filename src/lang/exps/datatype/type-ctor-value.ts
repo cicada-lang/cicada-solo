@@ -226,4 +226,51 @@ export class TypeCtorValue extends Value {
 
     return solution
   }
+
+  // NOTE Analyze full application of type constructor.
+  // - Throw elaboration error if the argument is not valid full application.
+  // - To get `fixed_args` and `varied_args`.
+  private analyze_datatype(datatype: Core): {
+    fixed_args: Array<Core>
+    varied_args: Array<Core>
+  } {
+    const fixed_args: Array<Core> = []
+    const varied_args: Array<Core> = []
+
+    let counter = 0
+    while (true) {
+      if (datatype instanceof Exps.VarCore) break
+      if (!(datatype instanceof Exps.ApCore)) {
+        throw new ExpTrace(
+          [
+            `I expect a full type constructor application to be ApCore.`,
+            `  datatype: ${datatype.format()}`,
+          ].join("\n")
+        )
+      }
+
+      // NOTE Remind that application associate to right.
+
+      if (counter < this.varied_arity) {
+        varied_args.unshift(datatype.arg)
+      } else if (counter < this.arity) {
+        fixed_args.unshift(datatype.arg)
+      } else {
+        throw new ExpTrace(
+          [
+            `I found that the type constructor application exceed the total arity.`,
+            `  datatype: ${datatype.format()}`,
+            `  fixed_arity: ${this.fixed_arity}`,
+            `  varied_arity: ${this.varied_arity}`,
+            `  total_arity: ${this.arity}`,
+          ].join("\n")
+        )
+      }
+
+      datatype = datatype.target
+      counter++
+    }
+
+    return { fixed_args, varied_args }
+  }
 }
