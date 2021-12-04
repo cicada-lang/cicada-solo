@@ -22,6 +22,14 @@ export class DatatypeValue extends Value {
     this.args = args
   }
 
+  get fixed_args(): Array<Value> {
+    return this.args.slice(0, this.type_ctor.fixed_arity)
+  }
+
+  get varied_args(): Array<Value> {
+    return this.args.slice(this.type_ctor.fixed_arity)
+  }
+
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
       let result: Core = new Exps.VarCore(this.type_ctor.name)
