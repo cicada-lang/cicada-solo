@@ -1,8 +1,10 @@
 # inductive datatype -- induction
 
-- `induction` -- `check_cases` -- `cover_all_cases`
 - `induction` -- `check_cases` -- `no_extra_cases`
+
+- `induction` -- `check_cases` -- `get_case`
 - `induction` -- `check_cases` -- `check_case`
+
 - `induction` -- `case_t`
 
 - `induction-core` -- `evaluate`

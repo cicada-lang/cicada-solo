@@ -90,7 +90,7 @@ export class Induction extends Exp {
     }
 
     let motive_core = new Exps.PiCore(
-      "target",
+      "_target",
       datatype_core,
       new Exps.TypeCore()
     )

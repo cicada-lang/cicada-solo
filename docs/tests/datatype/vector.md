@@ -100,7 +100,7 @@ function induction_vector(
   implicit E: Type,
   implicit length: Nat,
   target: Vector(E, length),
-  motive: (length: Nat, target: Vector(E, length)) -> Type,
+  motive: (length: Nat, Vector(E, length)) -> Type,
   case_of_vecnil: motive(0, vecnil),
   case_of_vec: (
     head: E,
