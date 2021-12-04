@@ -21,13 +21,13 @@ export type DataCtorBinding = {
 export class DataCtorValue extends Value {
   type_ctor: Exps.TypeCtorValue
   name: string
-  ret_t: Core
+  t: Core
 
-  constructor(type_ctor: Exps.TypeCtorValue, name: string, ret_t: Core) {
+  constructor(type_ctor: Exps.TypeCtorValue, name: string, t: Core) {
     super()
     this.type_ctor = type_ctor
     this.name = name
-    this.ret_t = ret_t
+    this.t = t
   }
 
   ap_handler = new DataCtorApHandler(this)
@@ -71,29 +71,29 @@ export class DataCtorValue extends Value {
 
   get bindings(): Array<DataCtorBinding> {
     const bindings: Array<DataCtorBinding> = []
-    let ret_t = this.ret_t
+    let t = this.t
     while (true) {
-      if (ret_t instanceof Exps.PiCore) {
+      if (t instanceof Exps.PiCore) {
         bindings.push({
           kind: "plain",
-          name: ret_t.name,
-          arg_t: ret_t.arg_t,
+          name: t.name,
+          arg_t: t.arg_t,
         })
-        ret_t = ret_t.ret_t
-      } else if (ret_t instanceof Exps.ImplicitPiCore) {
+        t = t.ret_t
+      } else if (t instanceof Exps.ImplicitPiCore) {
         bindings.push({
           kind: "implicit",
-          name: ret_t.name,
-          arg_t: ret_t.arg_t,
+          name: t.name,
+          arg_t: t.arg_t,
         })
-        ret_t = ret_t.ret_t
-      } else if (ret_t instanceof Exps.VaguePiCore) {
+        t = t.ret_t
+      } else if (t instanceof Exps.VaguePiCore) {
         bindings.push({
           kind: "vague",
-          name: ret_t.name,
-          arg_t: ret_t.arg_t,
+          name: t.name,
+          arg_t: t.arg_t,
         })
-        ret_t = ret_t.ret_t
+        t = t.ret_t
       } else {
         break
       }
@@ -106,7 +106,7 @@ export class DataCtorValue extends Value {
     return this.type_ctor.fixed_arity + this.bindings.length
   }
 
-  readback_ret_t(ctx: Ctx): Core {
+  readback_t(ctx: Ctx): Core {
     const result = this.type_ctor.apply_fixed_to_not_yet_values()
 
     let env = result.env.extend(
@@ -117,9 +117,9 @@ export class DataCtorValue extends Value {
       )
     )
 
-    const ret_t_value = evaluate(env, this.ret_t)
-    const ret_t_core = readback(ctx, new Exps.TypeValue(), ret_t_value)
-    return ret_t_core
+    const t = evaluate(env, this.t)
+    const t_core = readback(ctx, new Exps.TypeValue(), t)
+    return t_core
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {

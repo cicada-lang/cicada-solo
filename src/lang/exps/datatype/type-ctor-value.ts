@@ -211,7 +211,7 @@ export class TypeCtorValue extends Value {
   private readback_data_ctors(ctx: Ctx): Record<string, Core> {
     const data_ctors: Record<string, Core> = {}
     for (const [name, data_ctor] of Object.entries(this.data_ctors)) {
-      data_ctors[name] = data_ctor.readback_ret_t(ctx)
+      data_ctors[name] = data_ctor.readback_t(ctx)
     }
 
     return data_ctors

@@ -26,7 +26,7 @@ export class TypeCtorDotHandler extends DotHandler {
       )
     }
 
-    return new Exps.DataCtorValue(this.target, name, data_ctor.ret_t)
+    return new Exps.DataCtorValue(this.target, name, data_ctor.t)
   }
 
   infer_by_target(
@@ -45,7 +45,7 @@ export class TypeCtorDotHandler extends DotHandler {
       )
     }
 
-    let t_core = data_ctor.ret_t
+    let t_core = data_ctor.t
     for (const [name, arg_t] of Object.entries(this.target.fixed)) {
       t_core = new Exps.VaguePiCore(name, arg_t, t_core)
     }
