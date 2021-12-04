@@ -615,15 +615,15 @@ export function arg_entry_matcher(tree: pt.Tree): Exps.ArgEntry {
   return pt.matcher<Exps.ArgEntry>({
     "arg_entry:plain": ({ arg }) => ({
       kind: "plain",
-      arg: exp_matcher(arg),
+      exp: exp_matcher(arg),
     }),
     "arg_entry:implicit": ({ arg }) => ({
       kind: "implicit",
-      arg: exp_matcher(arg),
+      exp: exp_matcher(arg),
     }),
     "arg_entry:vague": ({ arg }) => ({
       kind: "vague",
-      arg: exp_matcher(arg),
+      exp: exp_matcher(arg),
     }),
   })(tree)
 }

@@ -7,7 +7,7 @@ export type ArgKind = "plain" | "implicit" | "vague"
 
 export type ArgEntry = {
   kind: ArgKind
-  arg: Exp
+  exp: Exp
 }
 
 export type ArgCoreEntry = {
@@ -27,13 +27,13 @@ export function wrap_arg_entry(
 ): Exp {
   switch (arg_entry.kind) {
     case "implicit": {
-      return new Exps.ImplicitAp(target, arg_entry.arg, meta)
+      return new Exps.ImplicitAp(target, arg_entry.exp, meta)
     }
     case "vague": {
-      return new Exps.VagueAp(target, arg_entry.arg, meta)
+      return new Exps.VagueAp(target, arg_entry.exp, meta)
     }
     case "plain": {
-      return new Exps.Ap(target, arg_entry.arg, meta)
+      return new Exps.Ap(target, arg_entry.exp, meta)
     }
   }
 }

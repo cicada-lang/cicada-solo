@@ -1,7 +1,5 @@
 # inductive datatype -- induction
 
-- [refactor] rename `ArgEntry`'s `arg` field to `exp`
-
 - `induction-core` -- fix structure
 - `induction-neutral` -- fix structure
 

@@ -32,7 +32,7 @@ export class MultiAp extends Exp {
     return new Set([
       ...this.target.free_names(bound_names),
       ...this.arg_entries.flatMap((entry) =>
-        Array.from(entry.arg.free_names(bound_names))
+        Array.from(entry.exp.free_names(bound_names))
       ),
     ])
   }
@@ -42,7 +42,7 @@ export class MultiAp extends Exp {
       subst(this.target, name, exp),
       this.arg_entries.map((entry) => ({
         ...entry,
-        arg: subst(entry.arg, name, exp),
+        exp: subst(entry.exp, name, exp),
       })),
       this.meta
     )
@@ -55,7 +55,7 @@ export class MultiAp extends Exp {
     if (inferred.t instanceof Exps.VaguePiValue) {
       if (first_arg_entry && first_arg_entry.kind === "vague") {
         const next_multi_ap = new Exps.MultiAp(
-          new Exps.VagueAp(this.target, first_arg_entry.arg, this.meta),
+          new Exps.VagueAp(this.target, first_arg_entry.exp, this.meta),
           this.arg_entries.slice(1),
           this.meta
         )
@@ -90,11 +90,11 @@ export class MultiAp extends Exp {
       .map((entry) => {
         switch (entry.kind) {
           case "plain":
-            return entry.arg.format()
+            return entry.exp.format()
           case "implicit":
-            return `implicit ${entry.arg.format()}`
+            return `implicit ${entry.exp.format()}`
           case "vague":
-            return `vague ${entry.arg.format()}`
+            return `vague ${entry.exp.format()}`
         }
       })
       .join(", ")
