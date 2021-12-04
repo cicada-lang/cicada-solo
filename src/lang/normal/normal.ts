@@ -18,7 +18,7 @@ export class Normal {
     return readback(ctx, this.t, this.value)
   }
 
-  unify(solution: Solution, ctx: Ctx, that: Normal): Solution {
+  unify_normal(solution: Solution, ctx: Ctx, that: Normal): Solution {
     return solution
       .unify_type(ctx, this.t, that.t)
       .unify(ctx, this.t, this.value, that.value)

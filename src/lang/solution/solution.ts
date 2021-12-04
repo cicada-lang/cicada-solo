@@ -123,7 +123,7 @@ export abstract class Solution {
   }
 
   unify_normal(ctx: Ctx, x: Normal, y: Normal): Solution {
-    return x.unify(this, ctx, y)
+    return x.unify_normal(this, ctx, y)
   }
 
   unify_or_fail(ctx: Ctx, t: Value, left: Value, right: Value): Solution {
