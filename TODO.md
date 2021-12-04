@@ -1,6 +1,5 @@
 # inductive datatype -- induction
 
-- [refactor] `NatIndCore.apply` -- guard clauses instead of nested conditional
 - [refactor] `ListIndCore.apply` -- guard clauses instead of nested conditional
 - [refactor] `EitherIndCore.apply` -- guard clauses instead of nested conditional
 - [refactor] `VectorIndCore.apply` -- guard clauses instead of nested conditional

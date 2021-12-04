@@ -56,38 +56,36 @@ export class NatIndCore extends Core {
   static apply(target: Value, motive: Value, base: Value, step: Value): Value {
     if (target instanceof Exps.ZeroValue) {
       return base
-    } else if (target instanceof Exps.Add1Value) {
-      const { prev } = target
+    }
 
-      return Exps.ApCore.apply(
-        Exps.ApCore.apply(step, prev),
-        Exps.NatIndCore.apply(prev, motive, base, step)
-      )
-    } else if (target instanceof Exps.NotYetValue) {
-      const { t, neutral } = target
+    if (target instanceof Exps.Add1Value) {
+      const almost = Exps.NatIndCore.apply(target.prev, motive, base, step)
+      return Exps.ApCore.multi_apply(step, [target.prev, almost])
+    }
 
-      if (t instanceof Exps.NatValue) {
-        const motive_t = nat_ind_motive_t
-        const base_t = Exps.ApCore.apply(motive, new Exps.ZeroValue())
-        const step_t = nat_ind_step_t(motive)
-        return new Exps.NotYetValue(
-          Exps.ApCore.apply(motive, target),
-          new Exps.NatIndNeutral(
-            neutral,
-            new Normal(motive_t, motive),
-            new Normal(base_t, base),
-            new Normal(step_t, step)
-          )
-        )
-      } else {
-        throw InternalError.wrong_target_t(target.t, {
-          expected: [Exps.NatValue],
-        })
-      }
-    } else {
+    if (!(target instanceof Exps.NotYetValue)) {
       throw InternalError.wrong_target(target, {
         expected: [Exps.ZeroValue, Exps.Add1Value],
       })
     }
+
+    if (!(target.t instanceof Exps.NatValue)) {
+      throw InternalError.wrong_target_t(target.t, {
+        expected: [Exps.NatValue],
+      })
+    }
+
+    const motive_t = nat_ind_motive_t
+    const base_t = Exps.ApCore.apply(motive, new Exps.ZeroValue())
+    const step_t = nat_ind_step_t(motive)
+    return new Exps.NotYetValue(
+      Exps.ApCore.apply(motive, target),
+      new Exps.NatIndNeutral(
+        target.neutral,
+        new Normal(motive_t, motive),
+        new Normal(base_t, base),
+        new Normal(step_t, step)
+      )
+    )
   }
 }

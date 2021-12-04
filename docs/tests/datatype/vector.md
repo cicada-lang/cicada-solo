@@ -125,7 +125,9 @@ function induction_vector(
 
 ``` cicada
 import { add } from "./nat.md"
+```
 
+``` cicada
 function vector_append(
   implicit E: Type,
   implicit xl: Nat,
@@ -142,20 +144,18 @@ function vector_append(
 }
 ```
 
-``` cicada wishful-thinking
-import { add } from "./nat.md"
-
-function vector_append(
+``` cicada
+function my_vector_append(
   implicit E: Type,
   implicit xl: Nat,
-  x: Vector(E, xl),
+  x: MyVector(E, xl),
   implicit yl: Nat,
-  y: Vector(E, yl),
-): Vector(E, add(xl, yl)) {
+  y: MyVector(E, yl),
+): MyVector(E, add(xl, yl)) {
   return induction (x) {
-    (length, _target) => Vector(E, add(length, yl))
-    case vecnil => y
-    case vec(head, _tail, almost) => Vector.vec(head, almost.tail)
+    (length, _target) => MyVector(E, add(length, yl))
+    case my_null => y
+    case my_cons(head, _tail, almost) => MyVector.my_cons(head, almost.tail)
   }
 }
 ```
