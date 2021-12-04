@@ -1,13 +1,16 @@
 # inductive datatype -- induction
 
+- `neutral` -- fix argument order -- `solution` should be the first argument
+
+- `induction-neutral` -- `unify_case_entries`
+
+- `induction-core` -- `format`
+- `induction-core` -- `alpha_format`
+
 - `induction` -- `infer`
 - `induction` -- `infer` -- `cover_all_cases` & `no_extra_cases`
 
 - `induction-core` -- `evaluate`
-- `induction-core` -- `format`
-- `induction-core` -- `alpha_format`
-
-- `induction-neutral` -- `unify`
 
 # inductive datatype -- questions
 

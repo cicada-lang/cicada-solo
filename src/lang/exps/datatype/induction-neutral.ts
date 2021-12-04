@@ -33,6 +33,30 @@ export class InductionNeutral extends Neutral {
   }
 
   unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
-    throw new Error("TODO")
+    if (!(that instanceof InductionNeutral)) {
+      return Solution.failure
+    }
+
+    solution = solution
+      .unify_neutral(ctx, this.target, that.target)
+      .unify_normal(ctx, this.motive, that.motive)
+
+    solution = unify_case_entries(
+      solution,
+      ctx,
+      this.case_entries,
+      that.case_entries
+    )
+
+    return solution
   }
+}
+
+function unify_case_entries(
+  solution: Solution,
+  ctx: Ctx,
+  this_case_entries: Array<Exps.CaseNormalEntry>,
+  that_case_entries: Array<Exps.CaseNormalEntry>
+): Solution {
+  throw new Error("TODO")
 }
