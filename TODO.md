@@ -1,6 +1,5 @@
 # inductive datatype -- induction
 
-- [refactor] rename `Neutral.unify` to `Neutral.unify_neutral`
 - [refactor] `neutral` -- fix argument order -- `solution` should be the first argument
 
 - `induction-neutral` -- `unify_case_entries`

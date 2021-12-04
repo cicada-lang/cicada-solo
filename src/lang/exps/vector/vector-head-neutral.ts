@@ -16,7 +16,7 @@ export class VectorHeadNeutral extends Neutral {
     return new Exps.VectorHeadCore(this.target.readback_neutral(ctx))
   }
 
-  unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
+  unify_neutral(ctx: Ctx, solution: Solution, that: Neutral): Solution {
     if (!(that instanceof VectorHeadNeutral)) {
       return Solution.failure
     }

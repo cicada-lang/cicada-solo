@@ -16,7 +16,7 @@ export class VectorTailNeutral extends Neutral {
     return new Exps.VectorTailCore(this.target.readback_neutral(ctx))
   }
 
-  unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
+  unify_neutral(ctx: Ctx, solution: Solution, that: Neutral): Solution {
     if (!(that instanceof VectorTailNeutral)) {
       return Solution.failure
     }

@@ -18,7 +18,7 @@ export class DotNeutral extends Neutral {
     return new Exps.DotCore(this.target.readback_neutral(ctx), this.name)
   }
 
-  unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
+  unify_neutral(ctx: Ctx, solution: Solution, that: Neutral): Solution {
     if (!(that instanceof DotNeutral && this.name === that.name)) {
       return Solution.failure
     }

@@ -32,7 +32,7 @@ export class InductionNeutral extends Neutral {
     )
   }
 
-  unify(ctx: Ctx, solution: Solution, that: Neutral): Solution {
+  unify_neutral(ctx: Ctx, solution: Solution, that: Neutral): Solution {
     if (!(that instanceof InductionNeutral)) {
       return Solution.failure
     }
