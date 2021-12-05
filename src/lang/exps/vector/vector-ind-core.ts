@@ -112,7 +112,7 @@ export class VectorIndCore extends Core {
     )
     const step_t = vector_ind_step_t(motive, elem_t)
     return new Exps.NotYetValue(
-      Exps.ApCore.apply(Exps.ApCore.apply(motive, length), target),
+      Exps.apply_args(motive, [length, target]),
       new Exps.VectorIndNeutral(
         new Normal(length_t, length),
         target.neutral,

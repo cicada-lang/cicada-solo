@@ -60,7 +60,7 @@ export class Induction extends Exp {
 
     const datatype = expect(ctx, inferred_target_t, Exps.DatatypeValue)
 
-    const motive_t = this.build_motive_t(datatype)
+    const motive_t = datatype.build_motive_t()
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)
 
@@ -163,39 +163,6 @@ export class Induction extends Exp {
         )
       }
     }
-  }
-
-  private build_motive_t(datatype: Exps.DatatypeValue): Value {
-    let env = datatype.type_ctor.env
-    for (const [index, fixed_arg] of datatype.fixed_args.entries()) {
-      const fixed_arg_name = datatype.type_ctor.fixed_arg_names[index]
-      env = env.extend(fixed_arg_name, fixed_arg)
-    }
-
-    let datatype_core: Core = new Exps.VarCore(datatype.type_ctor.name)
-    for (const arg_name of [...datatype.type_ctor.arg_names].reverse()) {
-      datatype_core = new Exps.ApCore(datatype_core, new Exps.VarCore(arg_name))
-    }
-
-    let motive_core = new Exps.PiCore(
-      // NOTE The use of name `_target` is ok,
-      //   because it is a bound variable
-      //   that does not occur in the return type.
-      "_target",
-      datatype_core,
-      new Exps.TypeCore()
-    )
-
-    const varied_entries = Object.entries(datatype.type_ctor.varied)
-    for (const [varied_arg_name, varied_arg_t_core] of varied_entries) {
-      motive_core = new Exps.PiCore(
-        varied_arg_name,
-        varied_arg_t_core,
-        motive_core
-      )
-    }
-
-    return evaluate(env, motive_core)
   }
 
   format(): string {

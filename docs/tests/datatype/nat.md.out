@@ -9,6 +9,8 @@ refl: Equal(Nat, 7, 7)
 (y) => y: (y: MyNat) -> MyNat
 MyNat.my_zero: MyNat
 MyNat.my_add1(MyNat.my_zero): MyNat
+MyNat.my_add1(MyNat.my_zero): MyNat
+MyNat.my_add1(MyNat.my_add1(MyNat.my_zero)): MyNat
 refl: Equal(Nat, 12, 12)
 refl: Equal(Nat, 64, 64)
 refl: Equal(Nat, 55, 55)

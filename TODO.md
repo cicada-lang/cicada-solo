@@ -1,6 +1,8 @@
 # inductive datatype -- induction
 
-- `induction-core` -- `apply` -- handle `target instanceof Exps.NotYetValue`
+- `induction-core` -- `apply` -- build `motive_t`
+
+- `induction-core` -- `apply` -- build `case_t` for each `case_entry`
 
 # inductive datatype -- questions
 
