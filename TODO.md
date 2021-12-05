@@ -1,10 +1,8 @@
-- inductive datatype -- test by `MyVector`
-
-- remove built-in `Vector`
-
+- remove built-in `List`
+- remove built-in `Either`
 - remove built-in `Nat`
-
-  - fix syntax sugar of `Nat`
+  - no syntax sugar for `Nat`
+- remove built-in `Vector`
 
 # prelude
 
@@ -13,6 +11,11 @@
 - implement `the`, `is` and `TODO` in prelude
 
 # inductive datatype -- questions
+
+- [question] Note that, when we have built-in `Vector`,
+  it is easy to implement `vector_head` and `vector_tail` directly,
+  but when we try to use `induction` to define `vector_head` and `vector_tail`,
+  it became very complicated. Why?
 
 - [question] Is it ok that `TypeCtorValue` can be `readback` to `TypeCtor`,
   while `DatatypeValue` and `CurriedTypeCtorValue` can only be `readback` to `ApCore`?
