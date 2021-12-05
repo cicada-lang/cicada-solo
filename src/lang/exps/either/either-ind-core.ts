@@ -63,33 +63,35 @@ export class EitherIndCore extends Core {
   ): Value {
     if (target instanceof Exps.InlValue) {
       return Exps.ApCore.apply(base_left, target.left)
-    } else if (target instanceof Exps.InrValue) {
-      return Exps.ApCore.apply(base_right, target.right)
-    } else if (target instanceof Exps.NotYetValue) {
-      const { t, neutral } = target
+    }
 
-      if (t instanceof Exps.EitherValue) {
-        const motive_t = either_ind_motive_t(t)
-        const base_left_t = either_ind_base_left_t(t.left_t, motive)
-        const base_right_t = either_ind_base_right_t(t.right_t, motive)
-        return new Exps.NotYetValue(
-          Exps.ApCore.apply(motive, target),
-          new Exps.EitherIndNeutral(
-            neutral,
-            new Normal(motive_t, motive),
-            new Normal(base_left_t, base_left),
-            new Normal(base_right_t, base_right)
-          )
-        )
-      } else {
-        throw InternalError.wrong_target_t(target.t, {
-          expected: [Exps.EitherValue],
-        })
-      }
-    } else {
+    if (target instanceof Exps.InrValue) {
+      return Exps.ApCore.apply(base_right, target.right)
+    }
+
+    if (!(target instanceof Exps.NotYetValue)) {
       throw InternalError.wrong_target(target, {
         expected: [Exps.InlValue, Exps.InrValue],
       })
     }
+
+    if (!(target.t instanceof Exps.EitherValue)) {
+      throw InternalError.wrong_target_t(target.t, {
+        expected: [Exps.EitherValue],
+      })
+    }
+
+    const motive_t = either_ind_motive_t(target.t)
+    const base_left_t = either_ind_base_left_t(target.t.left_t, motive)
+    const base_right_t = either_ind_base_right_t(target.t.right_t, motive)
+    return new Exps.NotYetValue(
+      Exps.ApCore.apply(motive, target),
+      new Exps.EitherIndNeutral(
+        target.neutral,
+        new Normal(motive_t, motive),
+        new Normal(base_left_t, base_left),
+        new Normal(base_right_t, base_right)
+      )
+    )
   }
 }
