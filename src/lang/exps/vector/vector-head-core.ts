@@ -27,33 +27,33 @@ export class VectorHeadCore extends Core {
   static apply(target: Value): Value {
     if (target instanceof Exps.VecValue) {
       return target.head
-    } else if (target instanceof Exps.NotYetValue) {
-      const { t, neutral } = target
+    }
 
-      if (t instanceof Exps.VectorValue) {
-        if (t.length instanceof Exps.Add1Value) {
-          return new Exps.NotYetValue(
-            t.elem_t,
-            new Exps.VectorHeadNeutral(neutral)
-          )
-        } else {
-          throw new InternalError(
-            [
-              `To apply vector_head`,
-              `I expect length of vector to be an instance of Add1Value`,
-              `but the given class name is: ${t.length.constructor.name}`,
-            ].join("\n") + "\n"
-          )
-        }
-      } else {
-        throw InternalError.wrong_target_t(target.t, {
-          expected: [Exps.VectorValue],
-        })
-      }
-    } else {
+    if (!(target instanceof Exps.NotYetValue)) {
       throw InternalError.wrong_target(target, {
         expected: [Exps.VecValue],
       })
     }
+
+    if (!(target.t instanceof Exps.VectorValue)) {
+      throw InternalError.wrong_target_t(target.t, {
+        expected: [Exps.VectorValue],
+      })
+    }
+
+    if (!(target.t.length instanceof Exps.Add1Value)) {
+      throw new InternalError(
+        [
+          `To apply vector_head`,
+          `I expect length of vector to be an instance of Add1Value`,
+          `  given class name: ${target.t.length.constructor.name}`,
+        ].join("\n") + "\n"
+      )
+    }
+
+    return new Exps.NotYetValue(
+      target.t.elem_t,
+      new Exps.VectorHeadNeutral(target.neutral)
+    )
   }
 }
