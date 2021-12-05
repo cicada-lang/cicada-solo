@@ -77,20 +77,18 @@ export class VectorIndCore extends Core {
       if (!(length instanceof Exps.Add1Value)) {
         throw new InternalError(
           [
-            `To apply vector_ind`,
             `I expect the length to be Add1Value`,
-            `but the given class name is: ${length.constructor.name}`,
+            `  given class name: ${length.constructor.name}`,
           ].join("\n") + "\n"
         )
       }
 
-      return Exps.ApCore.apply(
-        Exps.ApCore.apply(
-          Exps.ApCore.apply(Exps.ApCore.apply(step, length), target.head),
-          target.tail
-        ),
-        Exps.VectorIndCore.apply(length.prev, target.tail, motive, base, step)
-      )
+      return Exps.ApCore.multi_apply(step, [
+        length,
+        target.head,
+        target.tail,
+        Exps.VectorIndCore.apply(length.prev, target.tail, motive, base, step),
+      ])
     }
 
     if (!(target instanceof Exps.NotYetValue)) {

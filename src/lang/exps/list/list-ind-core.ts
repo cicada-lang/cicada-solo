@@ -57,10 +57,11 @@ export class ListIndCore extends Core {
     }
 
     if (target instanceof Exps.LiValue) {
-      return Exps.ApCore.apply(
-        Exps.ApCore.apply(Exps.ApCore.apply(step, target.head), target.tail),
-        Exps.ListIndCore.apply(target.tail, motive, base, step)
-      )
+      return Exps.ApCore.multi_apply(step, [
+        target.head,
+        target.tail,
+        Exps.ListIndCore.apply(target.tail, motive, base, step),
+      ])
     }
 
     if (!(target instanceof Exps.NotYetValue)) {

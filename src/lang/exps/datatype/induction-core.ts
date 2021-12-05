@@ -1,5 +1,6 @@
 import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
+import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
 
@@ -63,6 +64,42 @@ export class InductionCore extends Core {
     motive: Value,
     case_entries: Array<Exps.CaseValueEntry>
   ): Value {
+    if (target instanceof Exps.DataValue) {
+      const case_entry = case_entries.find(
+        (case_entry) => case_entry.name === target.data_ctor.name
+      )
+
+      if (case_entry === undefined) {
+        const case_entries_names = case_entries.map(
+          (case_entry) => case_entry.name
+        )
+        throw new InternalError(
+          [
+            `I can not find case entry from target data constructor name.`,
+            `  target data constructor name: ${target.data_ctor.name}`,
+            `  case entries names: ${case_entries_names.join(", ")}`,
+          ].join("\n")
+        )
+      }
+
+      // TODO apply function of case entry to arguments
+      case_entry
+      target.data_ctor
+      target.arg_value_entries
+    }
+
+    if (!(target instanceof Exps.NotYetValue)) {
+      throw InternalError.wrong_target(target, {
+        expected: [Exps.DataValue],
+      })
+    }
+
+    if (!(target.t instanceof Exps.DatatypeValue)) {
+      throw InternalError.wrong_target_t(target.t, {
+        expected: [Exps.DatatypeValue],
+      })
+    }
+
     throw new Error("TODO")
   }
 }

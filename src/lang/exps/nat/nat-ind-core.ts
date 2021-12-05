@@ -57,8 +57,10 @@ export class NatIndCore extends Core {
     }
 
     if (target instanceof Exps.Add1Value) {
-      const almost = Exps.NatIndCore.apply(target.prev, motive, base, step)
-      return Exps.ApCore.multi_apply(step, [target.prev, almost])
+      return Exps.ApCore.multi_apply(step, [
+        target.prev,
+        Exps.NatIndCore.apply(target.prev, motive, base, step),
+      ])
     }
 
     if (!(target instanceof Exps.NotYetValue)) {

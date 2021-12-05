@@ -1,6 +1,10 @@
 # inductive datatype -- induction
 
-- `induction-core` -- `apply`
+- `induction-core` -- `apply` -- handle `target instanceof Exps.DataValue`
+
+  - apply function of case entry to arguments
+
+- `induction-core` -- `apply` -- handle `target instanceof Exps.NotYetValue`
 
 # inductive datatype -- questions
 
