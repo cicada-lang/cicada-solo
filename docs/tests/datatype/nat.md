@@ -77,16 +77,6 @@ function add(x: Nat, y: Nat): Nat {
 }
 ```
 
-``` cicada wishful-thinking
-function add(x: Nat, y: Nat): Nat {
-  return induction (x) {
-    (_) => Nat
-    case zero => y
-    case add1(_prev, almost) => Nat.add1(almost.prev)
-  }
-}
-```
-
 ``` cicada
 same_as_chart! Nat [
   add(4, 3),
@@ -105,7 +95,9 @@ function my_add(x: MyNat, y: MyNat): MyNat {
     case my_add1(prev, almost) => MyNat.my_add1(almost.prev)
   }
 }
+```
 
+``` cicada
 my_add(MyNat.my_zero)
 my_add(MyNat.my_zero, MyNat.my_zero)
 my_add(MyNat.my_zero, MyNat.my_add1(MyNat.my_zero))
@@ -140,22 +132,39 @@ function mul(x: Nat, y: Nat): Nat {
 }
 ```
 
-``` cicada wishful-thinking
-function mul(x: Nat, y: Nat): Nat {
-  return induction (x) {
-    (_) => Nat
-    case zero => 0
-    case add1(_prev, almost) => add(almost.prev, y)
-  }
-}
-```
-
 ``` cicada
 same_as_chart! Nat [
   mul(4, 3),
   mul(3, 4),
   12,
 ]
+```
+
+# my_mul
+
+``` cicada
+function my_mul(x: MyNat, y: MyNat): MyNat {
+  return induction (x) {
+    (_) => MyNat
+    case my_zero => MyNat.my_zero
+    case my_add1(_prev, almost) => my_add(almost.prev, y)
+  }
+}
+```
+
+``` cicada
+{
+  let one = MyNat.my_add1(MyNat.my_zero)
+  let two = MyNat.my_add1(one)
+  let three = MyNat.my_add1(two)
+  let four = MyNat.my_add1(three)
+  let twelve = my_add(four, my_add(four, four))
+  return same_as_chart! MyNat [
+    my_mul(four, three),
+    my_mul(three, four),
+    twelve,
+  ]
+}
 ```
 
 # power_of & power

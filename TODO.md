@@ -1,6 +1,10 @@
-- inductive datatype -- test by `MyNat` and `MyVector`
+- inductive datatype -- test by `MyVector`
 
-- replace `Vector` by `MyVector`
+- remove built-in `Vector`
+
+- remove built-in `Nat`
+
+  - fix syntax sugar of `Nat`
 
 # prelude
 
