@@ -98,13 +98,22 @@ export class DatatypeValue extends Value {
     const motive_core = new Exps.VarCore("motive")
 
     let case_t = data_ctor.build_ret_t(motive_core)
+
     if (data_ctor.is_direct_positive_recursive) {
-      const almost_t = data_ctor.build_almost_t(motive_core)
-      case_t = new Exps.PiCore("almost", almost_t, case_t)
+      case_t = new Exps.PiCore(
+        "almost",
+        data_ctor.build_almost_t(motive_core),
+        case_t
+      )
     }
+
     for (const binding of [...data_ctor.bindings].reverse()) {
       case_t = this.build_pi_from_binding(case_t, binding)
     }
+
+    // NOTE We do not add `data_ctor.type_ctor.fixed` to `case_t` as vague-pi,
+    // - This must be consistent with the implementation of `InductionCore.apply`,
+    //   we need to drop fixed arguments before applying the target.
 
     return evaluate(env, case_t)
   }

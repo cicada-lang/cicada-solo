@@ -1,4 +1,6 @@
-- inductive datatype -- test
+- inductive datatype -- test by `MyNat` and `MyVector`
+
+- replace `Vector` by `MyVector`
 
 # inductive datatype -- questions
 

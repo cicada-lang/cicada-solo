@@ -88,17 +88,19 @@ export class InductionCore extends Core {
         )
       }
 
+      // NOTE We need to drop fixed arguments before applying target.
+      // - This must be consistent with the implementation of `build_case_t`.
+      const arg_value_entries = target.arg_value_entries.slice(
+        data_ctor.type_ctor.fixed_arity
+      )
+
       if (!data_ctor.is_direct_positive_recursive) {
-        return Exps.apply_arg_value_entries(
-          case_entry.value,
-          target.arg_value_entries
-        )
+        return Exps.apply_arg_value_entries(case_entry.value, arg_value_entries)
       }
 
       const properties: Map<string, Value> = new Map()
       const almost = new Exps.ObjValue(properties)
-      const entries = target.arg_value_entries.entries()
-      for (const [index, arg_value_entry] of entries) {
+      for (const [index, arg_value_entry] of arg_value_entries.entries()) {
         if (data_ctor.is_direct_positive_recursive_position(index)) {
           properties.set(
             data_ctor.direct_positive_recursive_position_name(index),
@@ -112,7 +114,7 @@ export class InductionCore extends Core {
       }
 
       return Exps.apply_arg_value_entries(case_entry.value, [
-        ...target.arg_value_entries,
+        ...arg_value_entries,
         { kind: "plain", value: almost },
       ])
     }

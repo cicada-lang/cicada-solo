@@ -145,6 +145,20 @@ function vector_append(
 ```
 
 ``` cicada
+same_as_chart! Vector(Nat, 5) [
+  vector_append(
+    the(Vector(Nat, 2), vec! [1, 2]),
+    the(Vector(Nat, 3), vec! [3, 4, 5]),
+  ),
+  vec! [1, 2, 3, 4, 5],
+]
+```
+
+# my_vector_append
+
+``` cicada
+import { MyNat, my_add } from "./nat.md"
+
 function my_vector_append(
   implicit E: Type,
   implicit xl: Nat,
@@ -160,13 +174,22 @@ function my_vector_append(
 }
 ```
 
-``` cicada
-same_as_chart! Vector(Nat, 5) [
-  vector_append(
-    the(Vector(Nat, 2), vec! [1, 2]),
-    the(Vector(Nat, 3), vec! [3, 4, 5]),
+``` cicada 
+same_as_chart! MyVector(Nat, 5) [
+  my_vector_append(
+    the(
+      MyVector(Nat, 2),
+      MyVector.my_cons(1, MyVector.my_cons(2, MyVector.my_null))),
+    the(
+      MyVector(Nat, 3),
+      MyVector.my_cons(3, MyVector.my_cons(4, MyVector.my_cons(5, MyVector.my_null)))
+    ),
   ),
-  vec! [1, 2, 3, 4, 5],
+  the(
+    MyVector(Nat, 5),
+    MyVector.my_cons(1, MyVector.my_cons(2, MyVector.my_cons(3, MyVector.my_cons(4, MyVector.my_cons(5, MyVector.my_null)))))
+  ),
+  MyVector.my_cons(1, MyVector.my_cons(2, MyVector.my_cons(3, MyVector.my_cons(4, MyVector.my_cons(5, MyVector.my_null))))),
 ]
 ```
 

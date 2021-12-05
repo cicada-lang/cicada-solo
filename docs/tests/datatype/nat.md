@@ -113,6 +113,20 @@ my_add(MyNat.my_add1(MyNat.my_zero), MyNat.my_zero)
 my_add(MyNat.my_add1(MyNat.my_zero), MyNat.my_add1(MyNat.my_zero))
 ```
 
+``` cicada
+same_as_chart! MyNat [
+  my_add(
+    MyNat.my_add1(MyNat.my_add1(MyNat.my_zero)),
+    MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero))),
+  ),
+  my_add(
+    MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero))),
+    MyNat.my_add1(MyNat.my_add1(MyNat.my_zero)),
+  ),
+  MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero))))),
+]
+```
+
 # mul
 
 ``` cicada
