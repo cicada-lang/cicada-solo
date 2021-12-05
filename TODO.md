@@ -2,6 +2,12 @@
 
 - replace `Vector` by `MyVector`
 
+# prelude
+
+- a way to load prelude module
+
+- implement `the`, `is` and `TODO` in prelude
+
 # inductive datatype -- questions
 
 - [question] Is it ok that `TypeCtorValue` can be `readback` to `TypeCtor`,
@@ -23,12 +29,6 @@
     - `ElaborationError`
     - `EvaluationError`
   - `InternalError`
-
-# prelude
-
-- a way to load prelude module
-
-- make `the` and `is` function of prelude
 
 # use `unify` to replace `readback`
 

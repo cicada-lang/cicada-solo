@@ -174,7 +174,7 @@ function my_vector_append(
 }
 ```
 
-``` cicada 
+``` cicada
 same_as_chart! MyVector(Nat, 5) [
   my_vector_append(
     the(
