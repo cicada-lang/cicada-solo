@@ -35,25 +35,24 @@ export class AbsurdIndCore extends Core {
   }
 
   static apply(target: Value, motive: Value): Value {
-    if (target instanceof Exps.NotYetValue) {
-      const { t, neutral } = target
-      if (t instanceof Exps.AbsurdValue) {
-        return new Exps.NotYetValue(
-          motive,
-          new Exps.AbsurdIndNeutral(
-            neutral,
-            new Normal(new Exps.TypeValue(), motive)
-          )
-        )
-      } else {
-        throw InternalError.wrong_target_t(target.t, {
-          expected: [Exps.AbsurdValue],
-        })
-      }
-    } else {
+    if (!(target instanceof Exps.NotYetValue)) {
       throw InternalError.wrong_target(target, {
         expected: [Exps.NotYetValue],
       })
     }
+
+    if (!(target.t instanceof Exps.AbsurdValue)) {
+      throw InternalError.wrong_target_t(target.t, {
+        expected: [Exps.AbsurdValue],
+      })
+    }
+
+    return new Exps.NotYetValue(
+      motive,
+      new Exps.AbsurdIndNeutral(
+        target.neutral,
+        new Normal(new Exps.TypeValue(), motive)
+      )
+    )
   }
 }

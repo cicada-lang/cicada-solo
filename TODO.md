@@ -1,7 +1,5 @@
 # inductive datatype -- induction
 
-- [refactor] `AbsurdIndCore.apply` -- guard clauses instead of nested conditional
-
 - `induction-core` -- `apply`
 
 # inductive datatype -- questions
