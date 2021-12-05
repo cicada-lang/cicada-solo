@@ -27,19 +27,23 @@ export class CarCore extends Core {
   static apply(target: Value): Value {
     if (target instanceof Exps.ConsValue) {
       return target.car
-    } else if (target instanceof Exps.NotYetValue) {
-      const { t, neutral } = target
-      if (t instanceof Exps.SigmaValue) {
-        return new Exps.NotYetValue(t.car_t, new Exps.CarNeutral(neutral))
-      } else {
-        throw InternalError.wrong_target_t(target.t, {
-          expected: [Exps.SigmaValue],
-        })
-      }
-    } else {
+    }
+
+    if (!(target instanceof Exps.NotYetValue)) {
       throw InternalError.wrong_target(target, {
         expected: [Exps.ConsValue],
       })
     }
+
+    if (!(target.t instanceof Exps.SigmaValue)) {
+      throw InternalError.wrong_target_t(target.t, {
+        expected: [Exps.SigmaValue],
+      })
+    }
+
+    return new Exps.NotYetValue(
+      target.t.car_t,
+      new Exps.CarNeutral(target.neutral)
+    )
   }
 }
