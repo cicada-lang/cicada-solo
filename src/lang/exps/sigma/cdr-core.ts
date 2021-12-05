@@ -27,20 +27,23 @@ export class CdrCore extends Core {
   static apply(target: Value): Value {
     if (target instanceof Exps.ConsValue) {
       return target.cdr
-    } else if (target instanceof Exps.NotYetValue) {
-      const { t, neutral } = target
-      if (t instanceof Exps.SigmaValue) {
-        return new Exps.NotYetValue(
-          t.cdr_t_cl.apply(Exps.CarCore.apply(target)),
-          new Exps.CdrNeutral(neutral)
-        )
-      } else {
-        throw InternalError.wrong_target_t(target.t, {
-          expected: [Exps.SigmaValue],
-        })
-      }
-    } else {
-      throw InternalError.wrong_target(target, { expected: [Exps.ConsValue] })
     }
+
+    if (!(target instanceof Exps.NotYetValue)) {
+      throw InternalError.wrong_target(target, {
+        expected: [Exps.ConsValue],
+      })
+    }
+
+    if (!(target.t instanceof Exps.SigmaValue)) {
+      throw InternalError.wrong_target_t(target.t, {
+        expected: [Exps.SigmaValue],
+      })
+    }
+
+    return new Exps.NotYetValue(
+      target.t.cdr_t_cl.apply(Exps.CarCore.apply(target)),
+      new Exps.CdrNeutral(target.neutral)
+    )
   }
 }
