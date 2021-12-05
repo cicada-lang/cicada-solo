@@ -71,7 +71,7 @@ export class Induction extends Exp {
     const case_core_entries = Object.entries(datatype.type_ctor.data_ctors).map(
       ([name, data_ctor]) => {
         const case_entry = this.get_case_entry(name)
-        const case_t = this.build_case_t(data_ctor, datatype, motive_value)
+        const case_t = datatype.build_case_t(data_ctor, motive_value)
         const core = check(ctx, case_entry.exp, case_t)
         return { ...case_entry, core }
       }
@@ -84,49 +84,6 @@ export class Induction extends Exp {
         motive_core,
         case_core_entries
       ),
-    }
-  }
-
-  private build_case_t(
-    data_ctor: Exps.DataCtorValue,
-    datatype: Exps.DatatypeValue,
-    motive: Value
-  ): Value {
-    let env = datatype.type_ctor.env
-    for (const [index, fixed_arg] of datatype.fixed_args.entries()) {
-      const fixed_arg_name = datatype.type_ctor.fixed_arg_names[index]
-      env = env.extend(fixed_arg_name, fixed_arg)
-    }
-
-    // TODO The use of name `motive` should be fix,
-    //   because in our generated core expression,
-    //   it is a free variable.
-    env = env.extend("motive", motive)
-    const motive_core = new Exps.VarCore("motive")
-
-    let case_t = data_ctor.build_ret_t(motive_core)
-    if (data_ctor.is_direct_positive_recursive) {
-      const almost_t = data_ctor.build_almost_t(motive_core)
-      case_t = new Exps.PiCore("almost", almost_t, case_t)
-    }
-    for (const binding of [...data_ctor.bindings].reverse()) {
-      case_t = this.build_pi_from_binding(case_t, binding)
-    }
-
-    return evaluate(env, case_t)
-  }
-
-  private build_pi_from_binding(
-    core: Core,
-    binding: Exps.DataCtorBinding
-  ): Core {
-    switch (binding.kind) {
-      case "plain":
-        return new Exps.PiCore(binding.name, binding.arg_t, core)
-      case "implicit":
-        return new Exps.ImplicitPiCore(binding.name, binding.arg_t, core)
-      case "vague":
-        return new Exps.VaguePiCore(binding.name, binding.arg_t, core)
     }
   }
 

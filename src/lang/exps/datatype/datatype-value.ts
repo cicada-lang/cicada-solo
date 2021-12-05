@@ -81,4 +81,43 @@ export class DatatypeValue extends Value {
 
     return evaluate(env, motive_core)
   }
+
+  build_case_t(data_ctor: Exps.DataCtorValue, motive: Value): Value {
+    let env = this.type_ctor.env
+    for (const [index, fixed_arg] of this.fixed_args.entries()) {
+      const fixed_arg_name = this.type_ctor.fixed_arg_names[index]
+      env = env.extend(fixed_arg_name, fixed_arg)
+    }
+
+    // TODO The use of name `motive` should be fix,
+    //   because in our generated core expression,
+    //   it is a free variable.
+    env = env.extend("motive", motive)
+    const motive_core = new Exps.VarCore("motive")
+
+    let case_t = data_ctor.build_ret_t(motive_core)
+    if (data_ctor.is_direct_positive_recursive) {
+      const almost_t = data_ctor.build_almost_t(motive_core)
+      case_t = new Exps.PiCore("almost", almost_t, case_t)
+    }
+    for (const binding of [...data_ctor.bindings].reverse()) {
+      case_t = this.build_pi_from_binding(case_t, binding)
+    }
+
+    return evaluate(env, case_t)
+  }
+
+  private build_pi_from_binding(
+    core: Core,
+    binding: Exps.DataCtorBinding
+  ): Core {
+    switch (binding.kind) {
+      case "plain":
+        return new Exps.PiCore(binding.name, binding.arg_t, core)
+      case "implicit":
+        return new Exps.ImplicitPiCore(binding.name, binding.arg_t, core)
+      case "vague":
+        return new Exps.VaguePiCore(binding.name, binding.arg_t, core)
+    }
+  }
 }

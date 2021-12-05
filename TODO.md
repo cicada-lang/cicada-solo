@@ -1,9 +1,5 @@
 # inductive datatype -- induction
 
-- [refactor] move `build_case_t` from `Induction` to `DatatypeValue`
-
-  - to be reused by `InductionCore.apply`
-
 - `induction-core` -- `apply` -- build `case_t` for each `case_entry`
 
 # inductive datatype -- questions
