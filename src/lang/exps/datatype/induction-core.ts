@@ -2,6 +2,7 @@ import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
 import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
+import { Normal } from "../../normal"
 import { Value } from "../../value"
 
 export class InductionCore extends Core {
@@ -137,13 +138,13 @@ export class InductionCore extends Core {
 
     throw new Error("TODO")
 
-    // const motive_t = 1
+    Normal
 
     // return new Exps.NotYetValue(
     //   Exps.apply_args(motive, [...datatype.varied_args, target]),
     //   new Exps.InductionNeutral(
     //     target.neutral,
-    //     new Normal(motive_t, motive),
+    //     new Normal(datatype.build_motive_t(), motive),
     //     case_entries.map((case_entry) => ({
     //       ...case_entry,
     //       normal: new Normal(case_t, case_entry.value),

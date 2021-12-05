@@ -1,6 +1,8 @@
 # inductive datatype -- induction
 
-- `induction-core` -- `apply` -- build `motive_t`
+- [refactor] move `build_case_t` from `Induction` to `DatatypeValue`
+
+  - to be reused by `InductionCore.apply`
 
 - `induction-core` -- `apply` -- build `case_t` for each `case_entry`
 
@@ -189,7 +191,7 @@
 
 # bug
 
-- [bug] `induction` -- `build_case_t` -- fix the use of the generated names -- `motive` and `almost`
+- [bug] `DatatypeValue.build_case_t` -- fix the use of the generated names -- `motive` and `almost`
 
   - (A) is it enough to generate name that is not valid identifier?
   - (B) pass `free_names` from `TypeCtor` to `TypeCtorCore` and `TypeCtorValue`
