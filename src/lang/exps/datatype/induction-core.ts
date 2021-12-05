@@ -136,20 +136,19 @@ export class InductionCore extends Core {
 
     const datatype = target_t
 
-    throw new Error("TODO")
-
-    Normal
-
-    // return new Exps.NotYetValue(
-    //   Exps.apply_args(motive, [...datatype.varied_args, target]),
-    //   new Exps.InductionNeutral(
-    //     target.neutral,
-    //     new Normal(datatype.build_motive_t(), motive),
-    //     case_entries.map((case_entry) => ({
-    //       ...case_entry,
-    //       normal: new Normal(case_t, case_entry.value),
-    //     }))
-    //   )
-    // )
+    return new Exps.NotYetValue(
+      Exps.apply_args(motive, [...datatype.varied_args, target]),
+      new Exps.InductionNeutral(
+        target.neutral,
+        new Normal(datatype.build_motive_t(), motive),
+        case_entries.map((case_entry) => {
+          const case_t = datatype.build_case_t(case_entry.name, motive)
+          return {
+            ...case_entry,
+            normal: new Normal(case_t, case_entry.value),
+          }
+        })
+      )
+    )
   }
 }

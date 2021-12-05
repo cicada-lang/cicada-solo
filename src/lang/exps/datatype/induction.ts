@@ -68,10 +68,10 @@ export class Induction extends Exp {
 
     this.ensure_no_extra_cases(ctx, datatype)
 
-    const case_core_entries = Object.entries(datatype.type_ctor.data_ctors).map(
-      ([name, data_ctor]) => {
+    const case_core_entries = Object.keys(datatype.type_ctor.data_ctors).map(
+      (name) => {
         const case_entry = this.get_case_entry(name)
-        const case_t = datatype.build_case_t(data_ctor, motive_value)
+        const case_t = datatype.build_case_t(name, motive_value)
         const core = check(ctx, case_entry.exp, case_t)
         return { ...case_entry, core }
       }

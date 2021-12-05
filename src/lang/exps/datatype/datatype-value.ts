@@ -82,7 +82,9 @@ export class DatatypeValue extends Value {
     return evaluate(env, motive_core)
   }
 
-  build_case_t(data_ctor: Exps.DataCtorValue, motive: Value): Value {
+  build_case_t(name: string, motive: Value): Value {
+    const data_ctor = this.type_ctor.get_data_ctor(name)
+
     let env = this.type_ctor.env
     for (const [index, fixed_arg] of this.fixed_args.entries()) {
       const fixed_arg_name = this.type_ctor.fixed_arg_names[index]

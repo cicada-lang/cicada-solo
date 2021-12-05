@@ -1,6 +1,4 @@
-# inductive datatype -- induction
-
-- `induction-core` -- `apply` -- build `case_t` for each `case_entry`
+- inductive datatype -- test
 
 # inductive datatype -- questions
 
