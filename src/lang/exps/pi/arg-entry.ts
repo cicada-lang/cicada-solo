@@ -33,14 +33,26 @@ export function apply_arg_value_entries(
   target: Value,
   arg_value_entries: Array<ArgValueEntry>
 ): Value {
-  throw new Error("TODO")
+  let result: Value = target
+  for (const arg_value_entry of arg_value_entries) {
+    result = apply_arg_value_entry(result, arg_value_entry)
+  }
+
+  return result
 }
 
 export function apply_arg_value_entry(
   target: Value,
   arg_value_entry: ArgValueEntry
 ): Value {
-  throw new Error("TODO")
+  switch (arg_value_entry.kind) {
+    case "plain":
+      return Exps.ApCore.apply(target, arg_value_entry.value)
+    case "implicit":
+      return Exps.ImplicitApCore.apply(target, arg_value_entry.value)
+    case "vague":
+      return Exps.VagueApCore.apply(target, arg_value_entry.value)
+  }
 }
 
 export function build_ap_from_arg_entry(
