@@ -82,10 +82,10 @@ export class InductionCore extends Core {
         )
       }
 
-      // TODO apply function of case entry to arguments
-      case_entry
-      target.data_ctor
-      target.arg_value_entries
+      return Exps.apply_arg_value_entries(
+        case_entry.value,
+        target.arg_value_entries
+      )
     }
 
     if (!(target instanceof Exps.NotYetValue)) {

@@ -78,10 +78,7 @@ export class Induction extends Exp {
     )
 
     return {
-      t: Exps.ApCore.apply_args(motive_value, [
-        ...datatype.varied_args,
-        target_value,
-      ]),
+      t: Exps.apply_args(motive_value, [...datatype.varied_args, target_value]),
       core: new Exps.InductionCore(
         inferred_target.core,
         motive_core,

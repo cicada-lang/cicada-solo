@@ -20,6 +20,29 @@ export type ArgValueEntry = {
   value: Value
 }
 
+export function apply_args(target: Value, args: Array<Value>): Value {
+  let result: Value = target
+  for (const arg of args) {
+    result = Exps.ApCore.apply(result, arg)
+  }
+
+  return result
+}
+
+export function apply_arg_value_entries(
+  target: Value,
+  arg_value_entries: Array<ArgValueEntry>
+): Value {
+  throw new Error("TODO")
+}
+
+export function apply_arg_value_entry(
+  target: Value,
+  arg_value_entry: ArgValueEntry
+): Value {
+  throw new Error("TODO")
+}
+
 export function build_ap_from_arg_entry(
   target: Exp,
   arg_entry: ArgEntry,

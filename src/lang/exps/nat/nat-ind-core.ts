@@ -57,7 +57,7 @@ export class NatIndCore extends Core {
     }
 
     if (target instanceof Exps.Add1Value) {
-      return Exps.ApCore.apply_args(step, [
+      return Exps.apply_args(step, [
         target.prev,
         Exps.NatIndCore.apply(target.prev, motive, base, step),
       ])

@@ -4,6 +4,10 @@
 
   - apply function of case entry to arguments
 
+    - with the help of `apply_arg_value_entries`
+
+- `induction-core` -- `apply` -- test the happy path
+
 - `induction-core` -- `apply` -- handle `target instanceof Exps.NotYetValue`
 
 # inductive datatype -- questions
