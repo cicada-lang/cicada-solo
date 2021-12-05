@@ -1,9 +1,7 @@
-import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
+import { Ctx } from "../../ctx"
 import { ExpTrace } from "../../errors"
-import * as ut from "../../../ut"
+import { Value } from "../../value"
 
 export class ObjValue extends Value {
   properties: Map<string, Value>

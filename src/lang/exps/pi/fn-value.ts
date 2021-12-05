@@ -1,7 +1,7 @@
-import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
+import { Ctx } from "../../ctx"
 import { Solution } from "../../solution"
+import { Value } from "../../value"
 import { Closure } from "../closure"
 
 export class FnValue extends Value {

@@ -1,8 +1,8 @@
-import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
+import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
+import { Solution } from "../../solution"
+import { Value } from "../../value"
 
 export class ReflValue extends Value {
   readback(ctx: Ctx, t: Value): Core | undefined {

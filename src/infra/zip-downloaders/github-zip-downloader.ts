@@ -1,8 +1,6 @@
-import { ZipDownloader, ZipResult } from "../zip-downloader"
-import contentDisposition from "content-disposition"
 import axios from "axios"
-import Path from "path"
-import fs from "fs"
+import contentDisposition from "content-disposition"
+import { ZipDownloader, ZipResult } from "../zip-downloader"
 
 export class GitHubZipDownloader extends ZipDownloader {
   private parseTarget(target: string): { path: string; tag: string } {

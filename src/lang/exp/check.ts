@@ -1,13 +1,10 @@
-import { Exp } from "../exp"
-import { Core } from "../core"
-import { Value } from "../value"
-import { Ctx } from "../ctx"
-import { conversion } from "../value"
-import { readback } from "../value"
-import { ExpTrace } from "../errors"
-import * as Exps from "../exps"
 import * as ut from "../../ut"
-import { VagueFnCore } from "../exps"
+import { Core } from "../core"
+import { Ctx } from "../ctx"
+import { ExpTrace } from "../errors"
+import { Exp } from "../exp"
+import * as Exps from "../exps"
+import { conversion, readback, Value } from "../value"
 
 export function check(ctx: Ctx, exp: Exp, t: Value): Core {
   try {

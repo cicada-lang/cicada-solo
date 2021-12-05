@@ -1,6 +1,5 @@
-import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
 import { Core } from "../../core"
+import { Ctx } from "../../ctx"
 import { Value } from "../../value"
 
 export abstract class DotHandler {

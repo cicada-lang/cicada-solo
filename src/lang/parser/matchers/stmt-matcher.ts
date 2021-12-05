@@ -1,17 +1,16 @@
 import pt from "@cicada-lang/partech"
-import { Stmt } from "../../stmt"
-import * as Stmts from "../../stmts"
 import { Exp } from "../../exp"
 import * as Exps from "../../exps"
+import { Stmt } from "../../stmt"
+import * as Stmts from "../../stmts"
 import {
+  bindings_matcher,
+  cls_entry_matcher,
   exp_matcher,
   operator_matcher,
-  operand_matcher,
-  cls_entry_matcher,
   pi_handler,
-  bindings_matcher,
-  simple_bindings_matcher,
   sequence_matcher,
+  simple_bindings_matcher,
 } from "../matchers"
 
 export function stmts_matcher(tree: pt.Tree): Array<Stmt> {

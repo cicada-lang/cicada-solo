@@ -1,8 +1,7 @@
-import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
+import { Exp, ExpMeta } from "../../exp"
 import { Value } from "../../value"
-import { Solution } from "../../solution"
 
 // NOTE We use null object pattern for `Cls`'s subclasses.
 

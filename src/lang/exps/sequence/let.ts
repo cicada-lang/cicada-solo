@@ -1,12 +1,9 @@
-import { Exp, ExpMeta, subst } from "../../exp"
-import { Core } from "../../core"
-import { Value } from "../../value"
-import { Ctx } from "../../ctx"
-import { evaluate } from "../../core"
-import { infer } from "../../exp"
-import { check } from "../../exp"
-import * as Exps from "../../exps"
 import * as ut from "../../../ut"
+import { Core, evaluate } from "../../core"
+import { Ctx } from "../../ctx"
+import { check, Exp, ExpMeta, infer, subst } from "../../exp"
+import * as Exps from "../../exps"
+import { Value } from "../../value"
 import { LetFormater } from "./let-formater"
 
 export class Let extends Exp {

@@ -1,10 +1,8 @@
-import { Exp, ExpMeta, subst } from "../exp"
-import { Core } from "../core"
+import { Core, evaluate } from "../core"
 import { Ctx } from "../ctx"
-import { Value } from "../value"
-import { evaluate } from "../core"
-import { check } from "../exp"
+import { check, Exp, ExpMeta, subst } from "../exp"
 import * as Exps from "../exps"
+import { Value } from "../value"
 
 export class The extends Exp {
   meta: ExpMeta

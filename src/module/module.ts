@@ -1,12 +1,9 @@
 import { Book } from "../book"
-import { Stmt, StmtOutput } from "../lang/stmt"
-import { Env } from "../lang/env"
+import { Core, evaluate } from "../lang/core"
 import { Ctx } from "../lang/ctx"
+import { Env } from "../lang/env"
+import { StmtOutput } from "../lang/stmt"
 import { Value } from "../lang/value"
-import { Core } from "../lang/core"
-import { evaluate } from "../lang/core"
-import { Parser } from "../lang/parser"
-import { CodeBlock } from "./code-block"
 import { CodeBlockResource } from "./code-block-resource"
 
 export class Module {

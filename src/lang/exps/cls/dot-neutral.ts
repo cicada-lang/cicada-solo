@@ -1,8 +1,8 @@
-import { Neutral } from "../../neutral"
-import { Solution } from "../../solution"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
+import { Neutral } from "../../neutral"
+import { Solution } from "../../solution"
 
 export class DotNeutral extends Neutral {
   target: Neutral

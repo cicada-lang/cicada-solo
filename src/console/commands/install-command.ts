@@ -1,11 +1,9 @@
 import { Command } from "@enchanterjs/enchanter/lib/command"
 import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
-import * as Commands from "../commands"
-import app from "../../app/node-app"
-import { BookConfig } from "../../book/book-config"
 import ty from "@xieyuheng/ty"
-import Path from "path"
 import fs from "fs"
+import Path from "path"
+import app from "../../app/node-app"
 import { GitHubZipDownloader } from "../../infra/zip-downloaders/github-zip-downloader"
 
 type Args = { target: string }

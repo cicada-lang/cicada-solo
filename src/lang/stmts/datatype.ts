@@ -1,8 +1,7 @@
-import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 import { Module } from "../../module"
-import { infer } from "../exp"
-import { Exp } from "../exp"
+import { Exp, infer } from "../exp"
 import * as Exps from "../exps"
+import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 
 export class Datatype extends Stmt {
   meta: StmtMeta

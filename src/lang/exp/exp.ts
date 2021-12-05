@@ -1,7 +1,7 @@
-import { Ctx } from "../ctx"
-import { Core } from "../core"
-import { Value } from "../value"
 import pt from "@cicada-lang/partech"
+import { Core } from "../core"
+import { Ctx } from "../ctx"
+import { Value } from "../value"
 
 export interface ExpMeta {
   span?: pt.Span

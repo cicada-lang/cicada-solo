@@ -1,13 +1,9 @@
-import { Exp, ExpMeta, subst } from "../../exp"
-import { check } from "../../exp"
-import { Core } from "../../core"
-import { Ctx } from "../../ctx"
-import { Value } from "../../value"
-import { expect } from "../../value"
-import { Solution } from "../../solution"
-import { ExpTrace } from "../../errors"
 import * as Exps from ".."
 import * as ut from "../../../ut"
+import { Core } from "../../core"
+import { Ctx } from "../../ctx"
+import { check, Exp, ExpMeta, subst } from "../../exp"
+import { expect, Value } from "../../value"
 import { FnFormater } from "../pi/fn-formater"
 
 export class VagueFn extends Exp {

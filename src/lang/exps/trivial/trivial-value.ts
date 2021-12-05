@@ -1,9 +1,8 @@
-import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
+import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
-import { ReadbackEtaExpansion } from "../../value"
+import { Solution } from "../../solution"
+import { ReadbackEtaExpansion, Value } from "../../value"
 
 export class TrivialValue extends Value implements ReadbackEtaExpansion {
   readback(ctx: Ctx, t: Value): Core | undefined {

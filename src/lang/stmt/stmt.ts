@@ -1,6 +1,6 @@
+import pt from "@cicada-lang/partech"
 import { Module } from "../../module"
 import { StmtOutput } from "./stmt-output"
-import pt from "@cicada-lang/partech"
 
 export interface StmtMeta {
   span: pt.Span

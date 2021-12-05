@@ -1,8 +1,7 @@
 import pt from "@cicada-lang/partech"
 import { Exp } from "../../exp"
-import { nat_from_number } from "../../exps/nat/nat-util"
 import * as Exps from "../../exps"
-import * as ut from "../../../ut"
+import { nat_from_number } from "../../exps/nat/nat-util"
 
 export function pi_handler(
   body: { [key: string]: pt.Tree },

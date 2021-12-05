@@ -1,15 +1,9 @@
+import * as Exps from ".."
+import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import { Core } from "../../core"
-import { readback } from "../../value"
-import { Value } from "../../value"
-import { evaluate } from "../../core"
 import { Solution } from "../../solution"
-import { ExpTrace } from "../../errors"
-import { Closure } from "../closure"
-import { conversion } from "../../value"
-import * as ut from "../../../ut"
-import * as Exps from ".."
+import { readback, Value } from "../../value"
 import { DataCtorApHandler } from "./data-ctor-ap-handler"
 
 export type DataCtorBinding = {

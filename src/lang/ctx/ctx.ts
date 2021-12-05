@@ -1,12 +1,11 @@
+import * as ut from "../../ut"
+import { Env } from "../env"
+import { ExpTrace } from "../errors"
+import * as Exps from "../exps"
+import { readback, Value } from "../value"
 import { CtxEvent } from "./ctx-event"
 import { CtxObserver } from "./ctx-observer"
 import { Highlighter } from "./highlighter"
-import { Env } from "../env"
-import { Value } from "../value"
-import { ExpTrace } from "../errors"
-import { readback } from "../value"
-import * as Exps from "../exps"
-import * as ut from "../../ut"
 
 export type CtxOptions = {
   observers: Array<CtxObserver>

@@ -1,15 +1,8 @@
-import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { evaluate } from "../../core"
-import { infer } from "../../exp"
-import { check } from "../../exp"
-import { check_by_infer } from "../../exp"
-import { Value } from "../../value"
-import { ExpTrace, InternalError } from "../../errors"
-import * as ut from "../../../ut"
+import { check, check_by_infer, Exp, ExpMeta, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
-import { ApFormater } from "./ap-formater"
+import { Value } from "../../value"
 
 // NOTE The `multi-ap` should not be handled as syntax sugar,
 //   using an explicit `multi-ap` expression will give us

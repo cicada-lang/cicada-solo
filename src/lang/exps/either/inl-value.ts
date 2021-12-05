@@ -1,9 +1,8 @@
-import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { expect, Value } from "../../value"
-import { Solution } from "../../solution"
-import { readback } from "../../value"
+import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
+import { Solution } from "../../solution"
+import { expect, readback, Value } from "../../value"
 
 export class InlValue extends Value {
   left: Value

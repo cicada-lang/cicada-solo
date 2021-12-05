@@ -1,12 +1,10 @@
-import { Core, AlphaCtx } from "../../core"
+import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
-import { evaluate } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { Closure } from "../closure"
-import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
+import { Normal } from "../../normal"
+import { Value } from "../../value"
+import { Closure } from "../closure"
 
 export class ReplaceCore extends Core {
   target: Core

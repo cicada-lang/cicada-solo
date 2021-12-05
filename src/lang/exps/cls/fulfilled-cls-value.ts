@@ -1,15 +1,9 @@
+import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { Exp, ExpMeta, subst } from "../../exp"
-import { Core } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { check } from "../../exp"
-import { evaluate } from "../../core"
-import { check_conversion } from "../../value"
-import { readback } from "../../value"
 import { ExpTrace } from "../../errors"
-import * as ut from "../../../ut"
+import { check, Exp } from "../../exp"
 import * as Exps from "../../exps"
+import { check_conversion, readback, Value } from "../../value"
 import { FulfilledClsApHandler } from "./fulfilled-cls-ap-handler"
 
 export class FulfilledClsValue extends Exps.ClsValue {

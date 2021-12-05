@@ -1,8 +1,8 @@
 import { Core } from "../core"
-import { Exp, ExpMeta, subst } from "../exp"
 import { Ctx } from "../ctx"
-import { Value } from "../value"
+import { Exp, ExpMeta } from "../exp"
 import * as Exps from "../exps"
+import { Value } from "../value"
 
 export class Type extends Exp {
   meta?: ExpMeta

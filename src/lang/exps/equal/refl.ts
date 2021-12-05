@@ -1,11 +1,8 @@
-import { Exp, ExpMeta, subst } from "../../exp"
+import * as Exps from ".."
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { expect } from "../../value"
-import { check_conversion } from "../../value"
-import * as Exps from ".."
+import { Exp, ExpMeta } from "../../exp"
+import { check_conversion, expect, Value } from "../../value"
 
 export class Refl extends Exp {
   meta: ExpMeta

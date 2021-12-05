@@ -1,10 +1,8 @@
-import { Core, AlphaCtx } from "../../core"
-import { Env } from "../../env"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { evaluate } from "../../core"
-import * as Exps from "../../exps"
 import * as ut from "../../../ut"
+import { AlphaCtx, Core } from "../../core"
+import { Env } from "../../env"
+import * as Exps from "../../exps"
+import { Value } from "../../value"
 
 export class TypeCtorCore extends Core {
   name: string

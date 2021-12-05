@@ -1,7 +1,7 @@
-import { Stmt, StmtMeta, StmtOutput } from "../stmt"
+import Path from "path"
 import { Module } from "../../module"
 import * as Errors from "../errors"
-import Path from "path"
+import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 
 export type ImportEntry = { name: string; alias?: string }
 

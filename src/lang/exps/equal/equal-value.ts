@@ -1,9 +1,8 @@
-import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { readback } from "../../value"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
+import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
+import { Solution } from "../../solution"
+import { readback, Value } from "../../value"
 
 export class EqualValue extends Value {
   t: Value

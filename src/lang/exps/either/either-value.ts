@@ -1,9 +1,8 @@
-import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { readback } from "../../value"
+import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
+import { Solution } from "../../solution"
+import { readback, Value } from "../../value"
 
 export class EitherValue extends Value {
   left_t: Value

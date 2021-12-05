@@ -1,11 +1,9 @@
-import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Value, expect } from "../../value"
 import { ExpTrace } from "../../errors"
-import { infer } from "../../exp"
-import * as ut from "../../../ut"
+import { Exp, ExpMeta, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
 
 export class Obj extends Exp {
   meta?: ExpMeta

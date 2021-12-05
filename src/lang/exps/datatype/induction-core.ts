@@ -1,10 +1,7 @@
-import { Core, AlphaCtx } from "../../core"
+import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { evaluate } from "../../core"
 import * as Exps from "../../exps"
-import * as ut from "../../../ut"
+import { Value } from "../../value"
 
 export class InductionCore extends Core {
   target: Core

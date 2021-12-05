@@ -1,6 +1,6 @@
-import { Exp } from "../exp"
 import pt from "@cicada-lang/partech"
 import * as ut from "../../ut"
+import { Exp } from "../exp"
 
 export class ExpTrace extends Error {
   message: string

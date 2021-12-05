@@ -1,14 +1,9 @@
-import { Exp, ExpMeta, subst } from "../../exp"
-import { Core } from "../../core"
+import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import { evaluate } from "../../core"
-import { check } from "../../exp"
-import { infer } from "../../exp"
-import { expect } from "../../value"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
+import { check, Exp, ExpMeta, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
+import { expect, Value } from "../../value"
 
 export class EitherInd extends Exp {
   meta: ExpMeta

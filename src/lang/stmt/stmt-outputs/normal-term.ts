@@ -1,6 +1,6 @@
-import { StmtOutput } from "../stmt-output"
-import { Core } from "../../core"
 import * as ut from "../../../ut"
+import { Core } from "../../core"
+import { StmtOutput } from "../stmt-output"
 
 export class NormalTerm extends StmtOutput {
   exp: Core

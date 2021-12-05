@@ -1,13 +1,9 @@
-import { Exp, ExpMeta, subst } from "../exp"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
-import { infer } from "../exp"
-import { check } from "../exp"
-import { check_by_infer } from "../exp"
-import { Value } from "../value"
-import { readback } from "../value"
 import { ExpTrace } from "../errors"
+import { check_by_infer, Exp, ExpMeta } from "../exp"
 import * as Exps from "../exps"
+import { Value } from "../value"
 
 export class Var extends Exp {
   meta?: ExpMeta

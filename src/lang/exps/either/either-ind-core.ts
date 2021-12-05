@@ -1,15 +1,13 @@
-import { Core, AlphaCtx } from "../../core"
+import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
-import { evaluate } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
+import { Normal } from "../../normal"
+import { Value } from "../../value"
 import {
-  either_ind_motive_t,
   either_ind_base_left_t,
   either_ind_base_right_t,
+  either_ind_motive_t,
 } from "./either-ind"
 
 export class EitherIndCore extends Core {

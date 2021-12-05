@@ -1,7 +1,6 @@
-import { Ctx } from "../../ctx"
 import { Core } from "../../core"
+import { Ctx } from "../../ctx"
 import { Value } from "../../value"
-import { Solution } from "../../solution"
 import { Closure } from "../closure"
 
 export class ImplicitFnValue extends Value {

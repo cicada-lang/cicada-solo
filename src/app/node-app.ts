@@ -1,7 +1,7 @@
-import { GenericApp } from "./generic-app"
-import { AppHomeFileStore } from "./app-home-file-store"
-import { LocalBookStore } from "../book/book-stores/local-book-store"
 import * as Loggers from "@enchanterjs/enchanter/lib/loggers"
+import { LocalBookStore } from "../book/book-stores/local-book-store"
+import { AppHomeFileStore } from "./app-home-file-store"
+import { GenericApp } from "./generic-app"
 
 export class NodeApp extends GenericApp {
   home: AppHomeFileStore = new AppHomeFileStore()

@@ -1,17 +1,9 @@
-import { Ctx } from "../../ctx"
-import { Env } from "../../env"
-import { Core } from "../../core"
-import { readback } from "../../value"
-import { Value } from "../../value"
-import { expect } from "../../value"
-import { evaluate } from "../../core"
-import { Solution } from "../../solution"
-import { Closure } from "../closure"
-import { conversion } from "../../value"
-import * as ut from "../../../ut"
 import * as Exps from ".."
+import { Core } from "../../core"
+import { Ctx } from "../../ctx"
+import { Solution } from "../../solution"
+import { expect, readback, Value } from "../../value"
 import { CurriedDataCtorApHandler } from "./curried-data-ctor-ap-handler"
-import { ExpTrace } from "../../errors"
 
 export class CurriedDataCtorValue extends Value {
   data_ctor: Exps.DataCtorValue

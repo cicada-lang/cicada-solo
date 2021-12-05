@@ -1,9 +1,9 @@
+import { FileStore } from "@enchanterjs/enchanter/lib/file-store"
+import { Ctx, CtxObserver, Highlighter } from "../lang/ctx"
+import { Env } from "../lang/env"
 import { Module } from "../module"
 import * as CodeBlockParsers from "../module/code-block-parsers"
 import { CodeBlockResource } from "../module/code-block-resource"
-import { FileStore } from "@enchanterjs/enchanter/lib/file-store"
-import { Env } from "../lang/env"
-import { Ctx, CtxObserver, Highlighter } from "../lang/ctx"
 import { BookConfig } from "./book-config"
 
 export class Book<Files extends FileStore = FileStore> {

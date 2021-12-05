@@ -1,9 +1,9 @@
+import { customAlphabet } from "nanoid"
 import { Book } from "../book"
 import { Config } from "../config"
-import { AppReplEventHandler } from "./app-repl-event-handler"
-import { customAlphabet } from "nanoid"
-import { SimpleHighlighter, SimpleCtxObserver } from "../lang/ctx"
+import { SimpleCtxObserver, SimpleHighlighter } from "../lang/ctx"
 import * as ut from "../ut"
+import { AppReplEventHandler } from "./app-repl-event-handler"
 
 export class GenericApp {
   nanoid = customAlphabet("1234567890abcdef", 16)

@@ -1,11 +1,9 @@
 import { Ctx } from "../ctx"
-import { Value, readback } from "../value"
-import { Neutral } from "../neutral"
-import { Normal } from "../normal"
-import { expect } from "../value"
-import { Core } from "../core"
 import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
+import { Neutral } from "../neutral"
+import { Normal } from "../normal"
+import { expect, readback, Value } from "../value"
 
 export abstract class Solution {
   abstract extend(name: string, value: Value): Solution

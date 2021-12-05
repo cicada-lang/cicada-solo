@@ -1,14 +1,9 @@
-import { Exp, ExpMeta, subst } from "../../exp"
-import { Core } from "../../core"
-import { evaluate } from "../../core"
-import { infer } from "../../exp"
-import { check } from "../../exp"
+import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { Value } from "../../value"
-import { expect } from "../../value"
-import { Solution } from "../../solution"
-import * as Exps from "../../exps"
 import { ExpTrace } from "../../errors"
+import { check, Exp, ExpMeta, infer, subst } from "../../exp"
+import * as Exps from "../../exps"
+import { expect, Value } from "../../value"
 
 export class Induction extends Exp {
   meta: ExpMeta

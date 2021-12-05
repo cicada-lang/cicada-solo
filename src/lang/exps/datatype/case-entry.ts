@@ -1,7 +1,7 @@
-import { Exp } from "../../exp"
 import { Core } from "../../core"
-import { Value } from "../../value"
+import { Exp } from "../../exp"
 import { Normal } from "../../normal"
+import { Value } from "../../value"
 
 export type CaseEntry = {
   nullary: boolean

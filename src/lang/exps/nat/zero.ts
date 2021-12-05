@@ -1,10 +1,9 @@
-import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
+import { Exp, ExpMeta } from "../../exp"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
 
 export class Zero extends Exp {
   meta: ExpMeta

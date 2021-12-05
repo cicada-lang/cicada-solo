@@ -1,7 +1,6 @@
-import { Core, AlphaCtx } from "../../core"
-import { Value } from "../../value"
+import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
-import { evaluate } from "../../core"
+import { Value } from "../../value"
 import { LetFormater } from "./let-formater"
 
 export class LetCore extends Core {

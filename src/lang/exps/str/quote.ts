@@ -1,9 +1,8 @@
-import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Value, readback } from "../../value"
-import { Solution } from "../../solution"
+import { Exp, ExpMeta } from "../../exp"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
 
 export class Quote extends Exp {
   meta: ExpMeta

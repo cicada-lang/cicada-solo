@@ -1,8 +1,7 @@
-import { Core, AlphaCtx } from "../../core"
-import { evaluate } from "../../core"
+import * as ut from "../../../ut"
+import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
-import * as ut from "../../../ut"
 import { ClsClosure } from "./cls-closure"
 
 export class ConsClsCore extends Exps.ClsCore {

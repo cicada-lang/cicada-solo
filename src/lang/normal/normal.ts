@@ -1,9 +1,7 @@
-import { Exp } from "../exp"
 import { Core } from "../core"
-import { Value } from "../value"
 import { Ctx } from "../ctx"
-import { readback } from "../value"
 import { Solution } from "../solution"
+import { readback, Value } from "../value"
 
 export class Normal {
   t: Value

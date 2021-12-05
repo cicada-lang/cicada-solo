@@ -1,12 +1,8 @@
-import { Exp, ExpMeta, subst } from "../../exp"
-import { Core } from "../../core"
+import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { infer } from "../../exp"
-import { expect } from "../../value"
-import { evaluate } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
+import { Exp, ExpMeta, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
+import { expect, Value } from "../../value"
 
 export class Cdr extends Exp {
   meta: ExpMeta

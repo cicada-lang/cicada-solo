@@ -1,13 +1,13 @@
 import { Command } from "@enchanterjs/enchanter/lib/command"
 import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
-import { CommonRunner } from "../runners/common-runner"
-import { Runner } from "../runner"
-import { Book } from "../../book"
-import app from "../../app/node-app"
-import watcher from "node-watch"
 import ty from "@xieyuheng/ty"
+import watcher from "node-watch"
 import Path from "path"
+import app from "../../app/node-app"
+import { Book } from "../../book"
+import { Runner } from "../runner"
+import { CommonRunner } from "../runners/common-runner"
 
 type Args = { article: string }
 type Opts = { watch?: boolean }

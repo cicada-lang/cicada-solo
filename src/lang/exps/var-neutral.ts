@@ -1,8 +1,8 @@
 import { Core } from "../core"
-import { Neutral } from "../neutral"
 import { Ctx } from "../ctx"
-import { Solution } from "../solution"
 import * as Exps from "../exps"
+import { Neutral } from "../neutral"
+import { Solution } from "../solution"
 
 export class VarNeutral extends Neutral {
   name: string

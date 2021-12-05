@@ -1,7 +1,7 @@
-import { CodeBlockParser } from "../code-block-parser"
-import { CodeBlock } from "../code-block"
-import { Parser } from "../../lang/parser"
 import * as commonmark from "commonmark"
+import { Parser } from "../../lang/parser"
+import { CodeBlock } from "../code-block"
+import { CodeBlockParser } from "../code-block-parser"
 
 export class MarkdownCodeBlockParser extends CodeBlockParser {
   parseCodeBlocks(text: string): Array<CodeBlock> {

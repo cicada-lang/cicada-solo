@@ -1,9 +1,7 @@
-import { Core, AlphaCtx } from "../../core"
+import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
-import { evaluate } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
 
 export class VectorCore extends Core {
   elem_t: Core

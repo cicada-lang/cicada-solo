@@ -1,7 +1,7 @@
-import { BookReference, BookReferenceJson } from "./book-reference"
-import { customAlphabet } from "nanoid"
-const nanoid = customAlphabet("1234567890abcdef", 16)
 import ty from "@xieyuheng/ty"
+import { customAlphabet } from "nanoid"
+import { BookReference, BookReferenceJson } from "./book-reference"
+const nanoid = customAlphabet("1234567890abcdef", 16)
 
 export type BookConfigJson = {
   title: string

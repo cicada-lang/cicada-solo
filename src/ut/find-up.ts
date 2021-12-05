@@ -1,5 +1,5 @@
-import Path from "path"
 import fs from "fs"
+import Path from "path"
 
 export function findUp(
   file: string,

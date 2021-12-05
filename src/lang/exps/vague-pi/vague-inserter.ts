@@ -1,17 +1,12 @@
-import { Ctx } from "../../ctx"
-import { Exp } from "../../exp"
-import { check } from "../../exp"
-import { infer } from "../../exp"
-import { subst } from "../../exp"
-import { Core } from "../../core"
-import { evaluate } from "../../core"
-import { Solution } from "../../solution"
-import { Value } from "../../value"
-import { readback } from "../../value"
 import * as Exps from ".."
 import * as ut from "../../../ut"
-import { Closure } from "../closure"
+import { Core, evaluate } from "../../core"
+import { Ctx } from "../../ctx"
 import { ExpTrace } from "../../errors"
+import { check, Exp, infer } from "../../exp"
+import { Solution } from "../../solution"
+import { readback, Value } from "../../value"
+import { Closure } from "../closure"
 
 interface VagueApEntry {
   arg_t: Value

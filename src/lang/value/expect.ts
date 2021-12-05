@@ -1,8 +1,7 @@
-import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { ExpTrace } from "../errors"
-import { readback } from "../value"
 import * as Exps from "../exps"
+import { readback, Value } from "../value"
 
 type Class<T> = new (...args: any[]) => T
 

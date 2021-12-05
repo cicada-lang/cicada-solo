@@ -1,10 +1,7 @@
-import { Core, AlphaCtx } from "../../core"
+import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { evaluate } from "../../core"
-import * as ut from "../../../ut"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
 
 export class ObjCore extends Core {
   properties: Map<string, Core>

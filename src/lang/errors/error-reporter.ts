@@ -1,5 +1,5 @@
-import * as Errors from "../errors"
 import pt from "@cicada-lang/partech"
+import * as Errors from "../errors"
 
 export class ErrorReporter {
   report(error: unknown, opts: { path?: string; text: string }): string {

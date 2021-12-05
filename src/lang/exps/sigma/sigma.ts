@@ -1,12 +1,9 @@
-import { Exp, ExpMeta, subst } from "../../exp"
-import { Core } from "../../core"
-import { Ctx } from "../../ctx"
-import { check } from "../../exp"
-import { evaluate } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import * as Exps from "../../exps"
 import * as ut from "../../../ut"
+import { Core, evaluate } from "../../core"
+import { Ctx } from "../../ctx"
+import { check, Exp, ExpMeta, subst } from "../../exp"
+import * as Exps from "../../exps"
+import { Value } from "../../value"
 import { SigmaFormater } from "./sigma-formater"
 
 export class Sigma extends Exp {

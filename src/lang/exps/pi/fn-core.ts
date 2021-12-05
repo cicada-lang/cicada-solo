@@ -1,9 +1,8 @@
-import { Core, AlphaCtx } from "../../core"
+import { AlphaCtx, Core } from "../../core"
 import { Env } from "../../env"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { Closure } from "../closure"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
+import { Closure } from "../closure"
 import { FnFormater } from "./fn-formater"
 
 export class FnCore extends Core {

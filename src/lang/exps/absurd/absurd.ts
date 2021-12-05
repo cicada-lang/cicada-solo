@@ -1,9 +1,8 @@
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Exp, ExpMeta, subst } from "../../exp"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
+import { Exp, ExpMeta } from "../../exp"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
 
 export class Absurd extends Exp {
   meta: ExpMeta

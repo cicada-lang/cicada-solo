@@ -1,7 +1,6 @@
-import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 import { Module } from "../../module"
-import { Exp } from "../exp"
-import { infer } from "../exp"
+import { Exp, infer } from "../exp"
+import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 
 export class Let extends Stmt {
   meta: StmtMeta

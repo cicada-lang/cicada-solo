@@ -1,9 +1,9 @@
-import { ApHandler } from "../pi/ap-handler"
-import { Value } from "../../value"
 import { Core } from "../../core"
-import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
+import { Exp } from "../../exp"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
+import { ApHandler } from "../pi/ap-handler"
 
 export class FulfilledClsApHandler extends ApHandler {
   target: Exps.FulfilledClsValue

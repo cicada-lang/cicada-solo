@@ -1,11 +1,9 @@
-import { Core, AlphaCtx } from "../../core"
+import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
-import { evaluate } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
+import { Normal } from "../../normal"
+import { Value } from "../../value"
 import { vector_ind_motive_t, vector_ind_step_t } from "./vector-ind"
 
 export class VectorIndCore extends Core {

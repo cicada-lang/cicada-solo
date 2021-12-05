@@ -1,5 +1,5 @@
-import { Exp, ExpMeta } from "../../exp"
 import { Core } from "../../core"
+import { Exp, ExpMeta } from "../../exp"
 import * as Exps from "../../exps"
 
 export function nat_from_number(n: number, meta: ExpMeta): Exp {

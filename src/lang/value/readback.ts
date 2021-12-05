@@ -1,9 +1,8 @@
-import { Value } from "../value"
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { ExpTrace } from "../errors"
-import * as ut from "../../ut"
 import * as Exps from "../exps"
+import { Value } from "../value"
 
 export function readback(ctx: Ctx, t: Value, value: Value): Core {
   // NOTE The following two `find_entry`s are like `deep_walk`

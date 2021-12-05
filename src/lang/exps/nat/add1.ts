@@ -1,11 +1,9 @@
-import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { check } from "../../exp"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { nat_to_number } from "./nat-util"
+import { check, Exp, ExpMeta, subst } from "../../exp"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
+import { nat_to_number } from "./nat-util"
 
 export class Add1 extends Exp {
   meta: ExpMeta

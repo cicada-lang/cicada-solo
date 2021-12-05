@@ -1,9 +1,9 @@
-import { BookStore } from "../book-store"
-import { BookConfig } from "../book-config"
-import { Book } from "../book"
 import { GitFileStore } from "@enchanterjs/enchanter/lib/git-file-store"
 import { FakeGitFileStore } from "@enchanterjs/enchanter/lib/git-file-stores/fake-git-file-store"
 import { GitPath } from "@enchanterjs/enchanter/lib/git-path"
+import { Book } from "../book"
+import { BookConfig } from "../book-config"
+import { BookStore } from "../book-store"
 
 export class GitBookStore extends BookStore {
   async get(url: string): Promise<Book<GitFileStore>> {

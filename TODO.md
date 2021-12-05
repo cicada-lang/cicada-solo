@@ -7,8 +7,6 @@
 
 - `induction-core` -- `apply`
 
-  - [if possible] use loop instead of recursion
-
 # inductive datatype -- questions
 
 - [question] Is it ok that `TypeCtorValue` can be `readback` to `TypeCtor`,
@@ -21,6 +19,15 @@
 
   - The same situation occurs for fulfilling type, which is of `Type`,
     but can also be applied to get partly fulfilled types.
+
+# errors
+
+- improve error classes
+
+  - `SemanticError`
+    - `ElaborationError`
+    - `EvaluationError`
+  - `InternalError`
 
 # prelude
 

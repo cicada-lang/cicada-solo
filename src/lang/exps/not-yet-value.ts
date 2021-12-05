@@ -1,9 +1,8 @@
-import { Ctx } from "../ctx"
 import { Core } from "../core"
-import { Value } from "../value"
+import { Ctx } from "../ctx"
 import { Neutral } from "../neutral"
 import { Solution } from "../solution"
-import * as Exps from "../exps"
+import { Value } from "../value"
 
 export class NotYetValue extends Value {
   t: Value

@@ -1,9 +1,8 @@
-import { Core, AlphaCtx } from "../../core"
+import * as Exps from ".."
+import { AlphaCtx, Core } from "../../core"
 import { Env } from "../../env"
 import { Value } from "../../value"
-import { Solution } from "../../solution"
 import { Closure } from "../closure"
-import * as Exps from ".."
 import { FnFormater } from "../pi/fn-formater"
 
 export class VagueFnCore extends Core {

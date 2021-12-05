@@ -1,9 +1,9 @@
-import { Neutral } from "../../neutral"
-import { Solution } from "../../solution"
-import { Normal } from "../../normal"
+import * as Exps from ".."
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import * as Exps from ".."
+import { Neutral } from "../../neutral"
+import { Normal } from "../../normal"
+import { Solution } from "../../solution"
 
 export class ImplicitApNeutral extends Neutral {
   target: Neutral

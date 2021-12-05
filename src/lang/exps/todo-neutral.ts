@@ -1,10 +1,9 @@
+import { Core } from "../core"
+import { Ctx } from "../ctx"
 import { Neutral } from "../neutral"
 import { Solution } from "../solution"
-import { Ctx } from "../ctx"
-import { Core } from "../core"
-import * as Exps from "../exps"
-import { TodoCore } from "./todo-core"
 import { Value } from "../value"
+import { TodoCore } from "./todo-core"
 
 export class TodoNeutral extends Neutral {
   note: string

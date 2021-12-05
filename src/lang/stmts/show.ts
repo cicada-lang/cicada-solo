@@ -1,11 +1,10 @@
-import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 import { Module } from "../../module"
-import { Exp } from "../exp"
-import { infer } from "../exp"
 import { evaluate } from "../core"
-import { readback } from "../value"
+import { Exp, infer } from "../exp"
 import * as Exps from "../exps"
+import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 import * as StmtOutputs from "../stmt/stmt-outputs"
+import { readback } from "../value"
 
 export class Show extends Stmt {
   meta: StmtMeta

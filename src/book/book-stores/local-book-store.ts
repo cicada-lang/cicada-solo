@@ -1,11 +1,11 @@
-import { BookStore } from "../book-store"
-import { BookConfig } from "../book-config"
-import { Book } from "../book"
-import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import { FakeLocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/fake-local-file-store"
-import * as ut from "../../ut"
-import Path from "path"
+import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import fs from "fs"
+import Path from "path"
+import * as ut from "../../ut"
+import { Book } from "../book"
+import { BookConfig } from "../book-config"
+import { BookStore } from "../book-store"
 
 export class LocalBookStore extends BookStore {
   async get(config_file: string): Promise<Book<LocalFileStore>> {

@@ -1,10 +1,8 @@
-import { Core, AlphaCtx } from "../../core"
+import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
-import { evaluate } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
 import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
 
 export class CdrCore extends Core {
   target: Core

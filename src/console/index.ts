@@ -1,5 +1,5 @@
-import * as CommandRunners from "@enchanterjs/enchanter/lib/command-runners"
 import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
+import * as CommandRunners from "@enchanterjs/enchanter/lib/command-runners"
 import { CommonHelpCommand } from "@enchanterjs/enchanter/lib/commands"
 import * as Commands from "./commands"
 

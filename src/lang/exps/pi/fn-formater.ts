@@ -1,5 +1,3 @@
-import * as Exps from "../../exps"
-
 interface FnOptions {
   name: string
   ret: {

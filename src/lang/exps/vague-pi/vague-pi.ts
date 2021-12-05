@@ -1,13 +1,9 @@
-import { Exp, ExpMeta, subst } from "../../exp"
-import { Core } from "../../core"
-import { Ctx } from "../../ctx"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { check } from "../../exp"
-import { evaluate } from "../../core"
-import { ExpTrace } from "../../errors"
 import * as Exps from ".."
 import * as ut from "../../../ut"
+import { Core, evaluate } from "../../core"
+import { Ctx } from "../../ctx"
+import { check, Exp, ExpMeta, subst } from "../../exp"
+import { Value } from "../../value"
 import { PiFormater } from "../pi/pi-formater"
 
 // NOTE In infer-mode elaboration,

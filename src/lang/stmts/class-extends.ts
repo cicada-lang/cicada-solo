@@ -1,7 +1,7 @@
-import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 import { Module } from "../../module"
 import { infer } from "../exp"
 import * as Exps from "../exps"
+import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 
 export class ClassExtends extends Stmt {
   meta: StmtMeta

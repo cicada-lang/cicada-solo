@@ -1,10 +1,8 @@
-import { Ctx } from "../../ctx"
-import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
+import { Ctx } from "../../ctx"
+import { Exp } from "../../exp"
 import * as Exps from "../../exps"
-import { ReadbackEtaExpansion } from "../../value"
+import { ReadbackEtaExpansion, Value } from "../../value"
 import { ClsApHandler } from "./cls-ap-handler"
 
 export abstract class ClsValue extends Value implements ReadbackEtaExpansion {

@@ -1,8 +1,7 @@
-import { Exp } from "../exp"
-import { Stmt } from "../stmt"
-import * as Stmts from "../stmts"
-import { Parser } from "../parser"
 import pt from "@cicada-lang/partech"
+import { Exp } from "../exp"
+import { Parser } from "../parser"
+import { Stmt } from "../stmt"
 
 export class ParserTester {
   parser = new Parser()

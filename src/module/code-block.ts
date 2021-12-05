@@ -1,5 +1,5 @@
-import { Stmt, StmtOutput } from "../lang/stmt"
 import { Parser } from "../lang/parser"
+import { Stmt, StmtOutput } from "../lang/stmt"
 
 export class CodeBlock {
   id: number

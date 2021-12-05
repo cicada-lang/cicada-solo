@@ -1,11 +1,9 @@
-import { Core, AlphaCtx } from "../../core"
-import { Env } from "../../env"
-import { evaluate } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { Normal } from "../../normal"
-import { InternalError } from "../../errors"
 import * as Exps from ".."
+import { AlphaCtx, Core, evaluate } from "../../core"
+import { Env } from "../../env"
+import { InternalError } from "../../errors"
+import { Normal } from "../../normal"
+import { Value } from "../../value"
 import { ApFormater } from "../pi/ap-formater"
 
 export class VagueApCore extends Core {

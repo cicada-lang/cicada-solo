@@ -1,8 +1,8 @@
-import { Ctx } from "../../ctx"
 import { Core } from "../../core"
-import { expect, Value } from "../../value"
-import { Solution } from "../../solution"
+import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
+import { Solution } from "../../solution"
+import { expect, Value } from "../../value"
 
 export class ConsValue extends Value {
   car: Value

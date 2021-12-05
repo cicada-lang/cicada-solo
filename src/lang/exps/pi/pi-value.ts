@@ -1,14 +1,10 @@
-import { Ctx } from "../../ctx"
-import { Core } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { evaluate } from "../../core"
-import { check } from "../../exp"
-import { readback } from "../../value"
-import { Closure } from "../closure"
 import * as ut from "../../../ut"
+import { Core } from "../../core"
+import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
-import { ReadbackEtaExpansion } from "../../value"
+import { Solution } from "../../solution"
+import { readback, ReadbackEtaExpansion, Value } from "../../value"
+import { Closure } from "../closure"
 
 export class PiValue extends Value implements ReadbackEtaExpansion {
   arg_t: Value

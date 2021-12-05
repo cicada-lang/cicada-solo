@@ -1,11 +1,8 @@
-import { Core, AlphaCtx } from "../../core"
+import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { evaluate } from "../../core"
 import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
-import { ExpTrace } from "../../errors"
+import { Value } from "../../value"
 
 export class DotCore extends Core {
   target: Core

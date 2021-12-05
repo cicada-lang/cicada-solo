@@ -1,10 +1,10 @@
-import { ClsApHandler } from "./cls-ap-handler"
-import { Value } from "../../value"
 import { Core } from "../../core"
-import { Exp } from "../../exp"
 import { Ctx } from "../../ctx"
-import * as Exps from "../../exps"
 import { ExpTrace } from "../../errors"
+import { Exp } from "../../exp"
+import * as Exps from "../../exps"
+import { Value } from "../../value"
+import { ClsApHandler } from "./cls-ap-handler"
 
 export class NilClsApHandler extends ClsApHandler {
   apply(arg: Value): Exps.ClsValue {

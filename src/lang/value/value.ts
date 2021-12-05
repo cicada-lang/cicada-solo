@@ -1,8 +1,8 @@
-import { Ctx } from "../ctx"
 import { Core } from "../core"
-import { Solution } from "../solution"
-import { ApHandler } from "../exps/pi/ap-handler"
+import { Ctx } from "../ctx"
 import { DotHandler } from "../exps/cls/dot-handler"
+import { ApHandler } from "../exps/pi/ap-handler"
+import { Solution } from "../solution"
 
 export abstract class Value {
   abstract readback(ctx: Ctx, t: Value): Core | undefined

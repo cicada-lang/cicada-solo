@@ -1,10 +1,8 @@
-import { Core, AlphaCtx } from "../../core"
+import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { Closure } from "../closure"
-import { evaluate } from "../../core"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
+import { Closure } from "../closure"
 import { PiFormater } from "./pi-formater"
 
 export class PiCore extends Core {

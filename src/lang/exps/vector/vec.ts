@@ -1,12 +1,8 @@
-import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { check } from "../../exp"
-import { expect } from "../../value"
-import { infer } from "../../exp"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
+import { check, Exp, ExpMeta, subst } from "../../exp"
 import * as Exps from "../../exps"
+import { expect, Value } from "../../value"
 
 export class Vec extends Exp {
   meta: ExpMeta

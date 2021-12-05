@@ -1,8 +1,8 @@
-import app from "./web-app"
-import * as ut from "../ut"
-import * as CodeBlockParsers from "../module/code-block-parsers"
-import * as Loggers from "@enchanterjs/enchanter/lib/loggers"
 import { GitPath } from "@enchanterjs/enchanter/lib/git-path"
+import * as Loggers from "@enchanterjs/enchanter/lib/loggers"
+import * as CodeBlockParsers from "../module/code-block-parsers"
+import * as ut from "../ut"
+import app from "./web-app"
 
 ut.test("git book", async () => {
   const logger = new Loggers.PrettyLogger()

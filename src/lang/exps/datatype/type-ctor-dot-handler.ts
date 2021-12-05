@@ -1,10 +1,9 @@
-import { DotHandler } from "../cls/dot-handler"
-import { Value } from "../../value"
-import * as Exps from "../../exps"
+import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { Core } from "../../core"
-import { evaluate } from "../../core"
 import { ExpTrace } from "../../errors"
+import * as Exps from "../../exps"
+import { Value } from "../../value"
+import { DotHandler } from "../cls/dot-handler"
 
 export class TypeCtorDotHandler extends DotHandler {
   target: Exps.TypeCtorValue

@@ -1,13 +1,13 @@
 import { Command } from "@enchanterjs/enchanter/lib/command"
 import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
-import { Book } from "../../book"
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
-import * as CodeBlockParsers from "../../module/code-block-parsers"
-import app from "../../app/node-app"
-import { LocalRunner } from "../runners/local-runner"
-import watcher from "node-watch"
 import ty from "@xieyuheng/ty"
 import fs from "fs"
+import watcher from "node-watch"
+import app from "../../app/node-app"
+import { Book } from "../../book"
+import * as CodeBlockParsers from "../../module/code-block-parsers"
+import { LocalRunner } from "../runners/local-runner"
 
 type Args = { book?: string }
 type Opts = { watch?: boolean }

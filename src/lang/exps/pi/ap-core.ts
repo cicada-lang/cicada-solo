@@ -1,11 +1,9 @@
-import { Core, AlphaCtx } from "../../core"
+import { AlphaCtx, Core, evaluate } from "../../core"
 import { Env } from "../../env"
-import { evaluate } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { Normal } from "../../normal"
 import { InternalError } from "../../errors"
 import * as Exps from "../../exps"
+import { Normal } from "../../normal"
+import { Value } from "../../value"
 import { ApFormater } from "./ap-formater"
 
 export class ApCore extends Core {

@@ -1,12 +1,9 @@
-import { Exp, ExpMeta, subst } from "../../exp"
-import { Core } from "../../core"
+import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import { evaluate } from "../../core"
-import { check } from "../../exp"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
+import { check, Exp, ExpMeta, subst } from "../../exp"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
 
 export class NatInd extends Exp {
   meta: ExpMeta

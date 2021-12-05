@@ -1,8 +1,8 @@
-import { Exp } from "../exp"
 import { Core } from "../core"
-import { Value } from "../value"
 import { Ctx } from "../ctx"
 import { ExpTrace } from "../errors"
+import { Exp } from "../exp"
+import { Value } from "../value"
 
 export function infer(ctx: Ctx, exp: Exp): { t: Value; core: Core } {
   try {

@@ -1,9 +1,9 @@
-import { Runner } from "../runner"
-import { Book } from "../../book"
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
-import { SnapshotRunner } from "./snapshot-runner"
-import { ErrorRunner } from "./error-runner"
+import { Book } from "../../book"
 import { CtxOptions } from "../../lang/ctx"
+import { Runner } from "../runner"
+import { ErrorRunner } from "./error-runner"
+import { SnapshotRunner } from "./snapshot-runner"
 
 export class LocalRunner extends Runner {
   async run(

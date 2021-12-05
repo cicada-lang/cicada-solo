@@ -1,10 +1,9 @@
-import { Ctx } from "../../ctx"
-import { Exp, ExpMeta, subst } from "../../exp"
 import { Core } from "../../core"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
+import { Ctx } from "../../ctx"
 import { ExpTrace } from "../../errors"
+import { Exp } from "../../exp"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
 import { NilClsApHandler } from "./nil-cls-ap-handler"
 
 export class NilClsValue extends Exps.ClsValue {

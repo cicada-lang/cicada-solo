@@ -1,10 +1,8 @@
-import { Core, AlphaCtx } from "../core"
-import { Value } from "../value"
+import { AlphaCtx, Core } from "../core"
 import { Ctx } from "../ctx"
-import { readback } from "../value"
 import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
-import * as ut from "../../ut"
+import { readback, Value } from "../value"
 
 export function conversion(ctx: Ctx, t: Value, x: Value, y: Value): boolean {
   return alpha_equivalent(ctx, readback(ctx, t, x), readback(ctx, t, y))

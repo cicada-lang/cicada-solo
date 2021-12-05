@@ -1,13 +1,9 @@
-import { Exp, ExpMeta, subst } from "../../exp"
+import * as ut from "../../../ut"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { check } from "../../exp"
-import { ExpTrace } from "../../errors"
-import { expect } from "../../value"
+import { check, Exp, ExpMeta, subst } from "../../exp"
 import * as Exps from "../../exps"
-import * as ut from "../../../ut"
+import { expect, Value } from "../../value"
 import { FnFormater } from "./fn-formater"
 
 export class Fn extends Exp {

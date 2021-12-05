@@ -1,16 +1,9 @@
-import { Exp, ExpMeta, subst } from "../../exp"
-import { Core } from "../../core"
+import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
-import { evaluate } from "../../core"
-import { readback } from "../../value"
-import { infer } from "../../exp"
-import { check } from "../../exp"
-import { check_by_infer } from "../../exp"
 import { ExpTrace } from "../../errors"
-import * as ut from "../../../ut"
+import { check_by_infer, Exp, ExpMeta, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
+import { readback, Value } from "../../value"
 
 export class Dot extends Exp {
   meta?: ExpMeta

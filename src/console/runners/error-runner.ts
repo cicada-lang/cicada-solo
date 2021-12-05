@@ -1,9 +1,9 @@
-import { Runner } from "../runner"
-import { Book } from "../../book"
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
+import fs from "fs"
+import { Book } from "../../book"
 import { CtxOptions } from "../../lang/ctx"
 import * as ut from "../../ut"
-import fs from "fs"
+import { Runner } from "../runner"
 
 export class ErrorRunner extends Runner {
   static extensions = [".error.cic", ".error.md"]

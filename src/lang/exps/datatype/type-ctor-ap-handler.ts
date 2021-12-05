@@ -1,6 +1,6 @@
-import { ApHandler } from "../pi/ap-handler"
-import { Value } from "../../value"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
+import { ApHandler } from "../pi/ap-handler"
 
 export class TypeCtorApHandler extends ApHandler {
   target: Exps.TypeCtorValue

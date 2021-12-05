@@ -1,8 +1,7 @@
-import { Core, AlphaCtx } from "../../core"
+import { AlphaCtx, Core } from "../../core"
 import { Env } from "../../env"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
 import * as Exps from "../../exps"
+import { Value } from "../../value"
 
 export class AbsurdCore extends Core {
   evaluate(env: Env): Value {

@@ -1,6 +1,4 @@
-import { ExpTrace } from "../errors"
 import { Value } from "../value"
-import { Exp } from "../exp"
 
 type Class<T> = new (...args: any[]) => T
 

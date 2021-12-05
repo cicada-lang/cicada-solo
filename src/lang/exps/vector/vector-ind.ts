@@ -1,15 +1,9 @@
-import { Exp, ExpMeta, subst } from "../../exp"
-import { Core } from "../../core"
+import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
-import { infer } from "../../exp"
-import { check } from "../../exp"
-import { expect } from "../../value"
-import { evaluate } from "../../core"
-import { check_conversion } from "../../value"
-import { Value } from "../../value"
-import { Solution } from "../../solution"
+import { check, Exp, ExpMeta, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
+import { check_conversion, expect, Value } from "../../value"
 
 export class VectorInd extends Exp {
   meta: ExpMeta

@@ -1,8 +1,6 @@
+import pt from "@cicada-lang/partech"
 import * as grammars from "./grammars"
 import * as matchers from "./matchers"
-import pt from "@cicada-lang/partech"
-import { Exp } from "../exp"
-import { Stmt } from "../stmt"
 
 export class Parser {
   parse_stmts = pt.gen_parse({
