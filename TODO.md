@@ -1,6 +1,11 @@
 # inductive datatype -- induction
 
-- [refactor] `VectorIndCore.apply` -- guard clauses instead of nested conditional
+- [refactor] `VectorHeadCore.apply` -- guard clauses instead of nested conditional
+- [refactor] `VectorTailCore.apply` -- guard clauses instead of nested conditional
+
+- [refactor] `CarCore.apply` -- guard clauses instead of nested conditional
+- [refactor] `CdrCore.apply` -- guard clauses instead of nested conditional
+
 - [refactor] `AbsurdIndCore.apply` -- guard clauses instead of nested conditional
 
 - `induction-core` -- `apply`

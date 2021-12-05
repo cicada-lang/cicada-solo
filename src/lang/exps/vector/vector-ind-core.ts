@@ -71,18 +71,10 @@ export class VectorIndCore extends Core {
   ): Value {
     if (target instanceof Exps.VecnilValue) {
       return base
-    } else if (target instanceof Exps.VecValue) {
-      const { head, tail } = target
+    }
 
-      if (length instanceof Exps.Add1Value) {
-        return Exps.ApCore.apply(
-          Exps.ApCore.apply(
-            Exps.ApCore.apply(Exps.ApCore.apply(step, length), head),
-            tail
-          ),
-          Exps.VectorIndCore.apply(length.prev, tail, motive, base, step)
-        )
-      } else {
+    if (target instanceof Exps.VecValue) {
+      if (!(length instanceof Exps.Add1Value)) {
         throw new InternalError(
           [
             `To apply vector_ind`,
@@ -91,37 +83,45 @@ export class VectorIndCore extends Core {
           ].join("\n") + "\n"
         )
       }
-    } else if (target instanceof Exps.NotYetValue) {
-      const { t, neutral } = target
 
-      if (t instanceof Exps.VectorValue) {
-        const elem_t = t.elem_t
-        const length_t = new Exps.NatValue()
-        const motive_t = vector_ind_motive_t(elem_t)
-        const base_t = Exps.ApCore.apply(
-          Exps.ApCore.apply(motive, new Exps.ZeroValue()),
-          new Exps.VecnilValue()
-        )
-        const step_t = vector_ind_step_t(motive, elem_t)
-        return new Exps.NotYetValue(
-          Exps.ApCore.apply(Exps.ApCore.apply(motive, length), target),
-          new Exps.VectorIndNeutral(
-            new Normal(length_t, length),
-            neutral,
-            new Normal(motive_t, motive),
-            new Normal(base_t, base),
-            new Normal(step_t, step)
-          )
-        )
-      } else {
-        throw InternalError.wrong_target_t(target.t, {
-          expected: [Exps.VectorValue],
-        })
-      }
-    } else {
+      return Exps.ApCore.apply(
+        Exps.ApCore.apply(
+          Exps.ApCore.apply(Exps.ApCore.apply(step, length), target.head),
+          target.tail
+        ),
+        Exps.VectorIndCore.apply(length.prev, target.tail, motive, base, step)
+      )
+    }
+
+    if (!(target instanceof Exps.NotYetValue)) {
       throw InternalError.wrong_target(target, {
         expected: [Exps.VecnilValue, Exps.VecValue],
       })
     }
+
+    if (!(target.t instanceof Exps.VectorValue)) {
+      throw InternalError.wrong_target_t(target.t, {
+        expected: [Exps.VectorValue],
+      })
+    }
+
+    const elem_t = target.t.elem_t
+    const length_t = new Exps.NatValue()
+    const motive_t = vector_ind_motive_t(elem_t)
+    const base_t = Exps.ApCore.apply(
+      Exps.ApCore.apply(motive, new Exps.ZeroValue()),
+      new Exps.VecnilValue()
+    )
+    const step_t = vector_ind_step_t(motive, elem_t)
+    return new Exps.NotYetValue(
+      Exps.ApCore.apply(Exps.ApCore.apply(motive, length), target),
+      new Exps.VectorIndNeutral(
+        new Normal(length_t, length),
+        target.neutral,
+        new Normal(motive_t, motive),
+        new Normal(base_t, base),
+        new Normal(step_t, step)
+      )
+    )
   }
 }
