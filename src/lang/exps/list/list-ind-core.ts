@@ -57,7 +57,7 @@ export class ListIndCore extends Core {
     }
 
     if (target instanceof Exps.LiValue) {
-      return Exps.ApCore.multi_apply(step, [
+      return Exps.ApCore.apply_args(step, [
         target.head,
         target.tail,
         Exps.ListIndCore.apply(target.tail, motive, base, step),

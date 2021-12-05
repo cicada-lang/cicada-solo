@@ -83,7 +83,7 @@ export class VectorIndCore extends Core {
         )
       }
 
-      return Exps.ApCore.multi_apply(step, [
+      return Exps.ApCore.apply_args(step, [
         length,
         target.head,
         target.tail,

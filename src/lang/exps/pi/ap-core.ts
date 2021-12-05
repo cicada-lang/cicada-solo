@@ -30,7 +30,7 @@ export class ApCore extends Core {
     return `${this.target.alpha_format(ctx)}(${this.arg.alpha_format(ctx)})`
   }
 
-  static multi_apply(target: Value, args: Array<Value>): Value {
+  static apply_args(target: Value, args: Array<Value>): Value {
     let result: Value = target
     for (const arg of args) {
       result = Exps.ApCore.apply(result, arg)

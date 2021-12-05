@@ -78,7 +78,7 @@ export class Induction extends Exp {
     )
 
     return {
-      t: Exps.ApCore.multi_apply(motive_value, [
+      t: Exps.ApCore.apply_args(motive_value, [
         ...datatype.varied_args,
         target_value,
       ]),
