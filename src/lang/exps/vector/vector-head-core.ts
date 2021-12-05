@@ -44,7 +44,6 @@ export class VectorHeadCore extends Core {
     if (!(target.t.length instanceof Exps.Add1Value)) {
       throw new InternalError(
         [
-          `To apply vector_head`,
           `I expect length of vector to be an instance of Add1Value`,
           `  given class name: ${target.t.length.constructor.name}`,
         ].join("\n") + "\n"
