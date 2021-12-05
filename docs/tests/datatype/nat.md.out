@@ -13,6 +13,7 @@ MyNat.my_add1(MyNat.my_zero): MyNat
 MyNat.my_add1(MyNat.my_add1(MyNat.my_zero)): MyNat
 refl: Equal(MyNat, MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero))))), MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero))))))
 refl: Equal(Nat, 12, 12)
+refl: Equal(MyNat, MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero)))))))))))), MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero)))))))))))))
 refl: Equal(Nat, 64, 64)
 refl: Equal(Nat, 55, 55)
 refl: Equal(Nat, 120, 120)
