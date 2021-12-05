@@ -148,6 +148,25 @@ export class DataCtorValue extends Value {
     return this.direct_positive_recursive_bindings.length > 0
   }
 
+  is_direct_positive_recursive_position(index: number): boolean {
+    const binding = this.bindings[index]
+    return this.is_direct_positive_recursive_arg_t(binding.arg_t)
+  }
+
+  direct_positive_recursive_position_name(index: number): string {
+    const binding = this.bindings[index]
+    if (!this.is_direct_positive_recursive_position(index)) {
+      throw new Error(
+        [
+          `I expect position to be direct positive recursive.`,
+          `  position index: ${index}`,
+        ].join("\n")
+      )
+    }
+
+    return binding.name
+  }
+
   private get direct_positive_recursive_bindings(): Array<DataCtorBinding> {
     return this.bindings.filter((binding) =>
       this.is_direct_positive_recursive_arg_t(binding.arg_t)

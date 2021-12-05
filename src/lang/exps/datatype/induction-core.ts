@@ -69,10 +69,12 @@ export class InductionCore extends Core {
     }
 
     if (target instanceof Exps.DataValue) {
-      const data: Exps.DataValue = target
-
+      const data_ctor = target.data_ctor
       const case_entry = case_entries.find(
-        (case_entry) => case_entry.name === data.data_ctor.name
+        (case_entry) =>
+          // NOTE The following use of `as Exps.DataValue`
+          //   is due to typescript behavior.
+          case_entry.name === data_ctor.name
       )
 
       if (case_entry === undefined) {
@@ -82,16 +84,39 @@ export class InductionCore extends Core {
         throw new InternalError(
           [
             `I can not find case entry from target data constructor name.`,
-            `  target data constructor name: ${data.data_ctor.name}`,
+            `  target data constructor name: ${data_ctor.name}`,
             `  case entries names: ${case_entries_names.join(", ")}`,
           ].join("\n")
         )
       }
 
-      return Exps.apply_arg_value_entries(
-        case_entry.value,
-        target.arg_value_entries
-      )
+      if (data_ctor.is_direct_positive_recursive) {
+        const properties: Map<string, Value> = new Map()
+        const almost = new Exps.ObjValue(properties)
+        const entries = target.arg_value_entries.entries()
+        for (const [index, arg_value_entry] of entries) {
+          if (data_ctor.is_direct_positive_recursive_position(index)) {
+            properties.set(
+              data_ctor.direct_positive_recursive_position_name(index),
+              Exps.InductionCore.apply(
+                arg_value_entry.value,
+                motive,
+                case_entries
+              )
+            )
+          }
+        }
+
+        return Exps.apply_arg_value_entries(case_entry.value, [
+          ...target.arg_value_entries,
+          { kind: "plain", value: almost },
+        ])
+      } else {
+        return Exps.apply_arg_value_entries(
+          case_entry.value,
+          target.arg_value_entries
+        )
+      }
     }
 
     if (!(target instanceof Exps.NotYetValue)) {

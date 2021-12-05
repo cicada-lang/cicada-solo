@@ -109,8 +109,8 @@ function my_add(x: MyNat, y: MyNat): MyNat {
 my_add(MyNat.my_zero)
 my_add(MyNat.my_zero, MyNat.my_zero)
 my_add(MyNat.my_zero, MyNat.my_add1(MyNat.my_zero))
-// my_add(MyNat.my_add1(MyNat.my_zero), MyNat.my_zero)
-// my_add(MyNat.my_add1(MyNat.my_zero), MyNat.my_add1(MyNat.my_zero))
+my_add(MyNat.my_add1(MyNat.my_zero), MyNat.my_zero)
+my_add(MyNat.my_add1(MyNat.my_zero), MyNat.my_add1(MyNat.my_zero))
 ```
 
 # mul
