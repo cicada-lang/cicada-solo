@@ -26,6 +26,14 @@ export class DataCtorValue extends Value {
 
   ap_handler = new DataCtorApHandler(this)
 
+  as_data(): Exps.DataValue {
+    if (this.arity !== 0) {
+      throw new Error(`I expect the arity of data constructor to be zero.`)
+    }
+
+    return new Exps.DataValue(this, [])
+  }
+
   apply(opts: {
     fixed_args:
       | Array<Value>

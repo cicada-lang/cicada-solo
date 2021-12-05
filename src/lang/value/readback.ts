@@ -45,11 +45,13 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
   if (exp) {
     return exp
   } else {
+    const t_core = readback(ctx, new Exps.TypeValue(), t)
     throw new ExpTrace(
       [
         `I can not readback value.`,
         `  value class name: ${value.constructor.name}`,
         `  type class name: ${t.constructor.name}`,
+        `  type: ${t_core.format()}`,
       ].join("\n")
     )
   }

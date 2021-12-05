@@ -1,6 +1,8 @@
 # inductive datatype -- induction
 
-- `induction-core` -- `apply` -- test the "happy path"
+- `induction-core` -- `apply` -- handle `almost`
+
+- `induction-core` -- `apply` -- test the "happy path" with `almost` -- by `my_add`
 
 - `induction-core` -- `apply` -- handle `target instanceof Exps.NotYetValue`
 

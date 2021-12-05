@@ -64,9 +64,15 @@ export class InductionCore extends Core {
     motive: Value,
     case_entries: Array<Exps.CaseValueEntry>
   ): Value {
+    if (target instanceof Exps.DataCtorValue && target.arity === 0) {
+      target = target.as_data()
+    }
+
     if (target instanceof Exps.DataValue) {
+      const data: Exps.DataValue = target
+
       const case_entry = case_entries.find(
-        (case_entry) => case_entry.name === target.data_ctor.name
+        (case_entry) => case_entry.name === data.data_ctor.name
       )
 
       if (case_entry === undefined) {
@@ -76,7 +82,7 @@ export class InductionCore extends Core {
         throw new InternalError(
           [
             `I can not find case entry from target data constructor name.`,
-            `  target data constructor name: ${target.data_ctor.name}`,
+            `  target data constructor name: ${data.data_ctor.name}`,
             `  case entries names: ${case_entries_names.join(", ")}`,
           ].join("\n")
         )
@@ -94,8 +100,13 @@ export class InductionCore extends Core {
       })
     }
 
-    if (!(target.t instanceof Exps.DatatypeValue)) {
-      throw InternalError.wrong_target_t(target.t, {
+    let target_t = target.t
+    if (target_t instanceof Exps.TypeCtorValue && target_t.arity === 0) {
+      target_t = target_t.as_datatype()
+    }
+
+    if (!(target_t instanceof Exps.DatatypeValue)) {
+      throw InternalError.wrong_target_t(target_t, {
         expected: [Exps.DatatypeValue],
       })
     }
