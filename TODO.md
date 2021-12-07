@@ -1,10 +1,5 @@
 - syntax add `()` to the target type of `same_as_chart!`
 
-- [refactor] improve normalization from `TypeCtorValue` to `DatatypeValue`
-- [refactor] improve normalization from `DataCtorValue` to `DataValue`
-
-- [refactor] improve `expect` error report
-
 # unify
 
 - `Value.unify` -- cls/nil-cls-value.ts
@@ -22,6 +17,12 @@
 - implement `the`, `is` and `TODO` in prelude
 
 # inductive datatype -- questions
+
+> If the ambition of this project is too much pressure,
+>   use refactoring as a therapy.
+
+- [question] Is it ok that `TypeCtorValue` can be `readback` to `TypeCtor`,
+  while `DatatypeValue` and `CurriedTypeCtorValue` can only be `readback` to `ApCore`?
 
 - [question] Note that, when we have built-in `Vector`,
   it is easy to implement `vector_head` and `vector_tail` directly,
@@ -42,9 +43,6 @@
   }
   ```
 
-- [question] Is it ok that `TypeCtorValue` can be `readback` to `TypeCtor`,
-  while `DatatypeValue` and `CurriedTypeCtorValue` can only be `readback` to `ApCore`?
-
 - [question] From the type of `List` -- `(E: Type) -> Type`,
   we know we can apply `List` to get a type,
   but we can also `List.null` & `List.cons` to get its constructors,
@@ -61,6 +59,8 @@
     - `ElaborationError`
     - `EvaluationError`
   - `InternalError`
+
+- improve `expect` error report -- use new error classes
 
 # use `unify` to replace `readback`
 
@@ -132,9 +132,14 @@
 
 # optimization
 
-- [optimization] use native `BigInt` as `Nat`
+- [optimization] be able to use native `BigInt`
 
   - learn from constraint logic programming (CLP)
+
+# refactor
+
+- [refactor] improve normalization from `TypeCtorValue` to `DatatypeValue`
+- [refactor] improve normalization from `DataCtorValue` to `DataValue`
 
 # bug
 
