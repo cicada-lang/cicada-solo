@@ -1,7 +1,0 @@
-I see unexpected value class: ZeroValue,
-but the asserted class is: Add1Value.
-
-
-vec-wrong-length.error.cic:
- 1 |the(Vector(String, 2), vec("a", vec("b", vec("c", vecnil))))
- 2 |

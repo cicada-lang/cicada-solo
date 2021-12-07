@@ -1,6 +1,6 @@
 import { tester } from "../parser-tester-instance"
 
-// TODO The examples should be fixed after the `prelude` feature.
+// TODO The examples should be fixed after remove built-in datatypes
 
 tester.echo_stmts(`
 
@@ -14,7 +14,7 @@ datatype List(E: Type) {
   cons(head: E, tail: List(E)): List(E)
 }
 
-datatype MyVector(E: Type) (length: Nat) {
+datatype Vector(E: Type) (length: Nat) {
   null: Vector(E, MyNat.my_zero)
   cons(
     head: E,

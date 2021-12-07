@@ -9,9 +9,9 @@ induction (x) {
 }
 
 induction (x) {
-  (length, _target) => MyVector(E, add(length, yl))
-  case my_null => y
-  case my_cons(head, _tail, almost) => MyVector.my_cons(head, almost.tail)
+  (length, _target) => Vector(E, add(length, yl))
+  case null => y
+  case cons(head, _tail, almost) => Vector.cons(head, almost.tail)
 }
 
 `)

@@ -1,4 +1,3 @@
-- remove built-in `Vector`
 - remove built-in `Nat`
 
 # prelude

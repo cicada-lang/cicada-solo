@@ -127,15 +127,6 @@ export function operator_matcher(tree: pt.Tree): Exp {
         exp_matcher(step),
         { span }
       ),
-    "operator:vector_ind": ({ length, target, motive, base, step }, { span }) =>
-      new Exps.VectorInd(
-        exp_matcher(length),
-        exp_matcher(target),
-        exp_matcher(motive),
-        exp_matcher(base),
-        exp_matcher(step),
-        { span }
-      ),
     "operator:replace": ({ target, motive, base }, { span }) =>
       new Exps.Replace(
         exp_matcher(target),
@@ -252,18 +243,6 @@ export function operand_matcher(tree: pt.Tree): Exp {
         return nat_from_number(n, { span })
       }
     },
-    "operand:vector": ({ elem_t, length }, { span }) =>
-      new Exps.Vector(exp_matcher(elem_t), exp_matcher(length), { span }),
-    "operand:vecnil": (_, { span }) => new Exps.Vecnil({ span }),
-    "operand:vec": ({ head, tail }, { span }) =>
-      new Exps.Vec(exp_matcher(head), exp_matcher(tail), { span }),
-    "operand:vec_sugar": ({ exps }, { span }) =>
-      exps_matcher(exps)
-        .reverse()
-        .reduce(
-          (vector, exp) => new Exps.Vec(exp, vector, { span }),
-          new Exps.Vecnil({ span })
-        ),
     "operand:equal": ({ t, from, to }, { span }) =>
       new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to), {
         span,

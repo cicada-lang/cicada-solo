@@ -1,5 +1,0 @@
-the(Vector(String, 1), vec("a", vecnil))
-the(Vector(String, 2), vec("a", vec("b", vecnil)))
-
-the(Vector(String, 1), vec! ["a"])
-the(Vector(String, 2), vec! ["a", "b"])

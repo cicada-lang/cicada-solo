@@ -4,64 +4,51 @@ title: Vector
 
 # Vector
 
-``` cicada wishful-thinking
+``` cicada
 datatype Vector(E: Type) (length: Nat) {
-  vecnil: Vector(E, Nat.zero)
-  vec(
+  null: Vector(E, zero)
+  cons(
     vague prev: Nat,
     head: E,
     tail: Vector(E, prev),
-  ): Vector(E, Nat.add1(prev))
-}
-```
-
-# MyVector
-
-``` cicada
-datatype MyVector(E: Type) (length: Nat) {
-  my_null: MyVector(E, zero)
-  my_cons(
-    vague prev: Nat,
-    head: E,
-    tail: MyVector(E, prev),
-  ): MyVector(E, add1(prev))
+  ): Vector(E, add1(prev))
 }
 
-MyVector
-MyVector(String)
-MyVector(String, 3)
+Vector
+Vector(String)
+Vector(String, 3)
 
-MyVector.my_null
-MyVector.my_null(vague Nat)
+Vector.null
+Vector.null(vague Nat)
 
-check! MyVector.my_null: MyVector(Nat, 0)
-check! MyVector.my_null: MyVector(String, 0)
+check! Vector.null: Vector(Nat, 0)
+check! Vector.null: Vector(String, 0)
 
-check! MyVector.my_cons(1, MyVector.my_null): MyVector(Nat, 1)
-check! MyVector.my_cons(vague Nat, 1, MyVector.my_null): MyVector(Nat, 1)
-check! MyVector.my_cons(vague Nat, vague 0, 1, MyVector.my_null): MyVector(Nat, 1)
+check! Vector.cons(1, Vector.null): Vector(Nat, 1)
+check! Vector.cons(vague Nat, 1, Vector.null): Vector(Nat, 1)
+check! Vector.cons(vague Nat, vague 0, 1, Vector.null): Vector(Nat, 1)
 
-check! MyVector.my_cons("a", MyVector.my_null): MyVector(String, 1)
-check! MyVector.my_cons(vague String, "a", MyVector.my_null): MyVector(String, 1)
-check! MyVector.my_cons(vague String, vague 0, "a", MyVector.my_null): MyVector(String, 1)
+check! Vector.cons("a", Vector.null): Vector(String, 1)
+check! Vector.cons(vague String, "a", Vector.null): Vector(String, 1)
+check! Vector.cons(vague String, vague 0, "a", Vector.null): Vector(String, 1)
 
-check! MyVector.my_cons("a", MyVector.my_cons("b", MyVector.my_cons("c", MyVector.my_null))): MyVector(String, 3)
+check! Vector.cons("a", Vector.cons("b", Vector.cons("c", Vector.null))): Vector(String, 3)
 ```
 
 We can bind partly applied data constructor to local variable.
 
 ``` cicada
 check! {
-  let f = MyVector.my_cons(vague Nat, vague 0, 1)
-  return f(MyVector.my_null)
-}: MyVector(Nat, 1)
+  let f = Vector.cons(vague Nat, vague 0, 1)
+  return f(Vector.null)
+}: Vector(Nat, 1)
 
 // NOTE But remind that vague function can not be (auto) curried.
 //   thus the following code is not valid.
 // check! {
-//   let f = MyVector.my_cons(1)
-//   return f(MyVector.my_null)
-// }: MyVector(Nat, 1)
+//   let f = Vector.cons(1)
+//   return f(Vector.null)
+// }: Vector(Nat, 1)
 
 // NOTE Although we can *not* get a curried data constructor for free,
 //   we can define a vague function by hand,
@@ -69,30 +56,30 @@ check! {
 check! {
   function f(
     vague prev: Nat,
-    tail: MyVector(String, prev),
-  ): MyVector(String, add1(prev)) {
-    return MyVector.my_cons("a")
+    tail: Vector(String, prev),
+  ): Vector(String, add1(prev)) {
+    return Vector.cons("a")
   }
 
-  return f(MyVector.my_null)
-}: MyVector(String, 1)
+  return f(Vector.null)
+}: Vector(String, 1)
 ```
 
 ``` cicada
 // NOTE Application to given vague argument can be curried.
 check! {
-  let f = MyVector.my_cons(vague String)
+  let f = Vector.cons(vague String)
   return f
 }: (
   vague prev: Nat,
   head: String,
-  tail: MyVector(String, prev),
-) -> MyVector(String, add1(prev))
+  tail: Vector(String, prev),
+) -> Vector(String, add1(prev))
 
 check! {
-  let f = MyVector.my_cons(vague String)
-  return f("a", MyVector.my_null)
-}: MyVector(String, 1)
+  let f = Vector.cons(vague String)
+  return f("a", Vector.null)
+}: Vector(String, 1)
 ```
 
 # induction Vector
@@ -103,21 +90,19 @@ function induction_vector(
   implicit length: Nat,
   target: Vector(E, length),
   motive: (length: Nat, Vector(E, length)) -> Type,
-  case_of_vecnil: motive(0, vecnil),
-  case_of_vec: (
+  case_of_null: motive(0, Vector.null),
+  case_of_cons: (
     vague prev: Nat,
     head: E,
     tail: Vector(E, prev),
     almost: class { tail: motive(prev, tail) },
-  ) -> motive(add1(prev), vec(head, tail)),
+  ) -> motive(add1(prev), Vector.cons(head, tail)),
 ): motive(length, target) {
-  return vector_ind(
-    length,
-    target,
-    motive,
-    case_of_vecnil,
-    (prev, head, tail, almost_of_tail) => case_of_vec(head, tail, { tail: almost_of_tail })
-  )
+  return induction (target) {
+    motive
+    case null => case_of_null
+    case cons(head, tail, almost) => case_of_cons(head, tail, almost)
+  }
 }
 ```
 
@@ -125,9 +110,7 @@ function induction_vector(
 
 ``` cicada
 import { add } from "./nat.md"
-```
 
-``` cicada
 function vector_append(
   implicit E: Type,
   implicit xl: Nat,
@@ -135,61 +118,30 @@ function vector_append(
   implicit yl: Nat,
   y: Vector(E, yl),
 ): Vector(E, add(xl, yl)) {
-  return induction_vector(
-    x,
-    (length, _target) => Vector(E, add(length, yl)),
-    y,
-    (vague E, head, _tail, almost) => vec(head, almost.tail),
-  )
+  return induction (x) {
+    (length, _target) => Vector(E, add(length, yl))
+    case null => y
+    case cons(head, _tail, almost) => Vector.cons(head, almost.tail)
+  }
 }
 ```
 
 ``` cicada
 same_as_chart! Vector(Nat, 5) [
   vector_append(
-    the(Vector(Nat, 2), vec! [1, 2]),
-    the(Vector(Nat, 3), vec! [3, 4, 5]),
-  ),
-  vec! [1, 2, 3, 4, 5],
-]
-```
-
-# my_vector_append
-
-``` cicada
-import { MyNat, my_add } from "./nat.md"
-
-function my_vector_append(
-  implicit E: Type,
-  implicit xl: Nat,
-  x: MyVector(E, xl),
-  implicit yl: Nat,
-  y: MyVector(E, yl),
-): MyVector(E, add(xl, yl)) {
-  return induction (x) {
-    (length, _target) => MyVector(E, add(length, yl))
-    case my_null => y
-    case my_cons(head, _tail, almost) => MyVector.my_cons(head, almost.tail)
-  }
-}
-```
-
-``` cicada
-same_as_chart! MyVector(Nat, 5) [
-  my_vector_append(
     the(
-      MyVector(Nat, 2),
-      MyVector.my_cons(1, MyVector.my_cons(2, MyVector.my_null))),
+      Vector(Nat, 2),
+      Vector.cons(1, Vector.cons(2, Vector.null))),
     the(
-      MyVector(Nat, 3),
-      MyVector.my_cons(3, MyVector.my_cons(4, MyVector.my_cons(5, MyVector.my_null)))
+      Vector(Nat, 3),
+      Vector.cons(3, Vector.cons(4, Vector.cons(5, Vector.null)))
     ),
   ),
   the(
-    MyVector(Nat, 5),
-    MyVector.my_cons(1, MyVector.my_cons(2, MyVector.my_cons(3, MyVector.my_cons(4, MyVector.my_cons(5, MyVector.my_null)))))
+    Vector(Nat, 5),
+    Vector.cons(1, Vector.cons(2, Vector.cons(3, Vector.cons(4, Vector.cons(5, Vector.null)))))
   ),
-  MyVector.my_cons(1, MyVector.my_cons(2, MyVector.my_cons(3, MyVector.my_cons(4, MyVector.my_cons(5, MyVector.my_null))))),
+  Vector.cons(1, Vector.cons(2, Vector.cons(3, Vector.cons(4, Vector.cons(5, Vector.null))))),
 ]
 ```
 
@@ -203,25 +155,10 @@ function list_from_vector(
   implicit length: Nat,
   vector: Vector(E, length),
 ): List(E) {
-  return induction_vector(
-    vector,
-    (length, target) => List(E),
-    List.null,
-    (vague E, head, tail, almost) => List.cons(head, almost.tail),
-  )
-}
-```
-
-``` cicada wishful-thinking
-function list_from_vector(
-  implicit E: Type,
-  implicit length: Nat,
-  vector: Vector(E, length),
-): List(E) {
   return induction (vector) {
     (length, target) => List(E)
-    case vecnil => List.null
-    case vec(head, tail, almost) => List.cons(head, almost.tail)
+    case null => List.null
+    case cons(head, tail, almost) => List.cons(head, almost.tail)
   }
 }
 ```
@@ -229,7 +166,7 @@ function list_from_vector(
 ``` cicada
 same_as_chart! List(Nat) [
   list_from_vector(
-    the(Vector(Nat, 3), vec! [1, 2, 3])
+    the(Vector(Nat, 3), Vector.cons(1, Vector.cons(2, Vector.cons(3, Vector.null))))
   ),
   List.cons(1, List.cons(2, List.cons(3, List.null))),
 ]

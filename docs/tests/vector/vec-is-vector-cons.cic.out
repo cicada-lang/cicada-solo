@@ -1,4 +1,0 @@
-vec("a", vecnil): Vector(String, 1)
-vec("a", vec("b", vecnil)): Vector(String, 2)
-vec("a", vecnil): Vector(String, 1)
-vec("a", vec("b", vecnil)): Vector(String, 2)

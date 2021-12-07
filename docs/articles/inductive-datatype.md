@@ -164,14 +164,14 @@ induction (target) {
 
 ## Vector
 
-``` cicada wishful-thinking
+``` cicada
 datatype Vector(E: Type) (length: Nat) {
-  vecnil: Vector(E, zero)
-  vec(
+  null: Vector(E, zero)
+  cons(
+    vague prev: Nat,
     head: E,
-    implicit prev: Nat,
     tail: Vector(E, prev),
-  ): Vector(E, zero)
+  ): Vector(E, add1(prev))
 }
 ```
 
@@ -195,18 +195,18 @@ TODO
 > we should write implicit indices over `target`.
 
 ``` cicada
-let vector_ind_t: Type = (
+let induction_vector_t = (
   implicit E: Type,
   implicit length: Nat,
   target: Vector(E, length),
-  motive: (length: Nat, target: Vector(E, length)) -> Type,
-  case_of_vecnil: motive(0, vecnil),
-  case_of_vec: (
+  motive: (length: Nat, Vector(E, length)) -> Type,
+  case_of_null: motive(0, Vector.null),
+  case_of_cons: (
+    vague prev: Nat,
     head: E,
-    implicit prev: Nat,
     tail: Vector(E, prev),
-    almost_of_tail: motive(prev, tail),
-  ) -> motive(add1(prev), vec(head, tail)),
+    almost: class { tail: motive(prev, tail) },
+  ) -> motive(add1(prev), Vector.cons(head, tail)),
 ) -> motive(length, target)
 ```
 
