@@ -1,3 +1,0 @@
-let abc: Vector(String, 3) = vec! ["a", "b", "c"]
-
-vector_head(abc)

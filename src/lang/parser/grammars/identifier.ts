@@ -24,8 +24,6 @@ const preserved = [
   "Vector",
   "vecnil",
   "vec",
-  "vector_head",
-  "vector_tail",
   "vector_ind",
   "Equal",
   "refl",

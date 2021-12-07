@@ -49,8 +49,6 @@ export const operator = {
       { step: "exp" },
       '")"',
     ],
-    "operator:vector_head": ['"vector_head"', '"("', { target: "exp" }, '")"'],
-    "operator:vector_tail": ['"vector_tail"', '"("', { target: "exp" }, '")"'],
     "operator:vector_ind": [
       '"vector_ind"',
       '"("',

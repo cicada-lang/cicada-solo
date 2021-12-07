@@ -1,7 +1,0 @@
-I see unexpected value class: ZeroValue,
-but the asserted class is: Add1Value.
-
-
-vector-head-can-not-apply-on-vecnil.error.cic:
- 1 |vector_head(the(Vector(String, 0), vecnil))
- 2 |

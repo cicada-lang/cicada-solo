@@ -14,6 +14,20 @@
   but when we try to use `induction` to define `vector_head` and `vector_tail`,
   it became very complicated. Why?
 
+  ``` typescript
+  // NOTE `infer` of `vector_head`
+  infer(ctx: Ctx): { t: Value; core: Core } {
+    const inferred_target = infer(ctx, this.target)
+    const vector_t = expect(ctx, inferred_target.t, Exps.VectorValue)
+    expect(ctx, vector_t.length, Exps.Add1Value)
+
+    return {
+      t: vector_t.elem_t,
+      core: new Exps.VectorHeadCore(inferred_target.core),
+    }
+  }
+  ```
+
 - [question] Is it ok that `TypeCtorValue` can be `readback` to `TypeCtor`,
   while `DatatypeValue` and `CurriedTypeCtorValue` can only be `readback` to `ApCore`?
 
