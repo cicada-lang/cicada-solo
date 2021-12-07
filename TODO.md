@@ -5,6 +5,16 @@
 
 - [refactor] improve `expect` error report
 
+# unify
+
+- `Value.unify` -- cls/nil-cls-value.ts
+- `Value.unify` -- cls/cls-value.ts
+- `Value.unify` -- cls/cons-cls-value.ts -- fix `08.md`
+- `Value.unify` -- cls/obj-value.ts
+- `Value.unify` -- cls/fulfilled-cls-value.ts
+
+- `Subst.unify` occur check -- use `free_names`
+
 # prelude
 
 - a way to load prelude module
@@ -54,18 +64,10 @@
 
 # use `unify` to replace `readback`
 
-- Value.unify -- pi/fn-value.ts & pi/implicit-fn-value.ts
+- `Value.unify` -- pi/fn-value.ts & pi/implicit-fn-value.ts
 
   - bidirectional `unify`
   - handle eta-expansion in `unify`
-
-- Value.unify -- cls/nil-cls-value.ts
-- Value.unify -- cls/cls-value.ts
-- Value.unify -- cls/cons-cls-value.ts
-- Value.unify -- cls/obj-value.ts
-- Value.unify -- cls/fulfilled-cls-value.ts
-
-- `Subst.unify` occur check -- use `free_names`
 
 # subtype
 
