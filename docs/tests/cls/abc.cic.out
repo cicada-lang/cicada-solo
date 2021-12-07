@@ -1,8 +1,8 @@
-{ a: sole, b: 2, c: "c" }: class {
-  a: Trivial
-  b: Nat
+{ a: Trivial, b: sole, c: "c" }: class {
+  a: Type
+  b: a
   c: String
 }
+Trivial: Type
 sole: Trivial
-2: Nat
 "c": String

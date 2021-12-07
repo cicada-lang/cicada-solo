@@ -1,17 +1,17 @@
-{ x: "x", y: "y", z: { a: sole, b: 2, c: "c" } }: class {
+{ x: "x", y: "y", z: { a: Trivial, b: sole, c: "c" } }: class {
   x: String
   y: String
   z: class {
-    a: Trivial
-    b: Nat
+    a: Type
+    b: a
     c: String
   }
 }
-{ a: sole, b: 2, c: "c" }: class {
-  a: Trivial
-  b: Nat
+{ a: Trivial, b: sole, c: "c" }: class {
+  a: Type
+  b: a
   c: String
 }
+Trivial: Type
 sole: Trivial
-2: Nat
 "c": String

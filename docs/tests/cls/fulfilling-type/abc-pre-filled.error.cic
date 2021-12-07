@@ -1,17 +1,9 @@
-function the_nat_type(_: Trivial): Type {
-  return Nat
-}
+class ABC { a: Type = Trivial, b: a, c: String }
 
-class ABC {
-  a: Trivial = sole
-  b: the_nat_type(a)
-  c: String
-}
-
-let abc: ABC(sole, 2) = {
-  a: sole
-  b: 2
-  c: "c"
+let abc: ABC(Trivial, sole) = {
+  a: Trivial,
+  b: sole,
+  c: "c",
 }
 
 abc
@@ -20,21 +12,20 @@ abc.a
 abc.b
 abc.c
 
-
 class ABCDE {
-  a: Trivial
-  b: the_nat_type(a)
+  a: Type
+  b: a
   c: String = "c"
   d: String
   e: String
 }
 
-let abcde: ABCDE(sole, 2, "d") = {
-  a: sole
-  b: 2
-  c: "c" // NOTE "c" is not equal to "d"
-  d: "d"
-  e: "e"
+let abcde: ABCDE(Trivial, sole, "d") = {
+  a: Trivial,
+  b: sole,
+  c: "c", // NOTE "c" is not equal to "d"
+  d: "d",
+  e: "e",
 }
 
 abcde

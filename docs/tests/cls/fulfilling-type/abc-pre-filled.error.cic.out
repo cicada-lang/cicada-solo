@@ -1,16 +1,21 @@
-I found syntax error in file: abc-pre-filled.error.cic
+I am expecting the following two values to be the same String.
+But they are not.
 
- 10 |
- 11 |let abc: ABC(sole, 2) = {
- 12 |  a: sole
- 13 |  b: 2
- 14 |  c: "c"
- 15 |}
-Found the identifier "b" in [164, 165], while expecting:
- ",":
-     zero_or_more:more@42 -> (head: property):field@45 > "," (tail: zero_or_more) 
- ",":
-     optional:one@45 -> > "," 
- "}":
-     operand:obj@41 -> "{"@42 (properties: zero_or_more):zero@42 (last_property: property):field@45 optional:zero@45 > "}" 
- and so on ...
+from given field value:
+  "c"
+to already fulfilled value:
+  "d"
+
+abc-pre-filled.error.cic:
+ 20 |  e: String
+ 21 |}
+ 22 |
+ 23 |let abcde: ABCDE(Trivial, sole, "d") = {
+ 24 |  a: Trivial,
+ 25 |  b: sole,
+ 26 |  c: "c", // NOTE "c" is not equal to "d"
+ 27 |  d: "d",
+ 28 |  e: "e",
+ 29 |}
+ 30 |
+ 31 |abcde

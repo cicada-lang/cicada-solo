@@ -2,7 +2,7 @@ let a = String
 
 class Test {
   X: Type = a
-  a: Nat
+  a: String
   b: X
 
   equal: Equal(Type, String, X)
@@ -10,7 +10,7 @@ class Test {
 
 the(Test, {
   X: a,
-  a: 1,
+  a: "a",
   b: "b",
   equal: refl,
 })

@@ -1,16 +1,36 @@
-{ a: sole, b: 2, c: "c" }: class {
-  a: Trivial = sole
-  b: Nat = 2
+class {
+  a: Type
+  b: a
+  c: String
+}: Type
+class {
+  a: Type = Trivial
+  b: Trivial
+  c: String
+}: Type
+class {
+  a: Type = Trivial
+  b: Trivial = sole
+  c: String
+}: Type
+class {
+  a: Type = Trivial
+  b: Trivial = sole
+  c: String = "c"
+}: Type
+{ a: Trivial, b: sole, c: "c" }: class {
+  a: Type = Trivial
+  b: Trivial = sole
   c: String
 }
+Trivial: Type
 sole: Trivial
-2: Nat
 "c": String
-{ a: sole, b: 2, c: "c" }: class {
-  a: Trivial = sole
-  b: Nat = 2
+{ a: Trivial, b: sole, c: "c" }: class {
+  a: Type = Trivial
+  b: Trivial = sole
   c: String = "c"
 }
+Trivial: Type
 sole: Trivial
-2: Nat
 "c": String

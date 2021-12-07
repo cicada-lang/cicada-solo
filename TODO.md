@@ -1,6 +1,5 @@
-- remove syntax sugar for `Nat`
-- remove built-in `Nat`
 - remove built-in `Vector`
+- remove built-in `Nat`
 
 # prelude
 

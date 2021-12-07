@@ -1,6 +1,6 @@
-{ X: String, a: 1, b: "b", equal: refl }: class {
+{ X: String, a: "a", b: "b", equal: refl }: class {
   X: Type
-  a: Nat
+  a: String
   b: X
   equal: Equal(Type, String, X)
 }

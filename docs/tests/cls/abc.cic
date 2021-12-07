@@ -1,11 +1,7 @@
-function the_nat_type(_: Trivial): Type {
-  return Nat
-}
-
-class ABC { a: Trivial, b: the_nat_type(a), c: String }
+class ABC { a: Type, b: a, c: String }
 
 let abc: ABC = {
-  a: sole, b: 2, c: "c"
+  a: Trivial, b: sole, c: "c"
 }
 
 abc
