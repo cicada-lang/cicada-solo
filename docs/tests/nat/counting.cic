@@ -1,6 +1,0 @@
-let n = zero
-let one = add1(n)
-
-one
-
-the(Nat, add1(add1(zero)))

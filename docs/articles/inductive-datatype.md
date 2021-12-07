@@ -56,7 +56,7 @@ the art of inductive reasoning and discovering pattern.
 
 ## Nat
 
-``` cicada wishful-thinking
+``` cicada
 datatype Nat {
   zero: Nat
   add1(prev: Nat): Nat
@@ -70,11 +70,11 @@ datatype Nat {
 ``` cicada
 let curried_ind_nat_t = (
   motive: (Nat) -> Type,
-  case_of_zero: motive(zero),
+  case_of_zero: motive(Nat.zero),
   case_of_add1: (
     prev: Nat,
     almost_of_prev: motive(prev),
-  ) -> motive(add1(prev)),
+  ) -> motive(Nat.add1(prev)),
 ) -> (target: Nat) -> motive(target)
 ```
 
@@ -92,11 +92,11 @@ Thus we use the following type, instead of the type above.
 let ind_nat_t = (
   target: Nat,
   motive: (Nat) -> Type,
-  case_of_zero: motive(zero),
+  case_of_zero: motive(Nat.zero),
   case_of_add1: (
     prev: Nat,
     almost_of_prev: motive(prev),
-  ) -> motive(add1(prev)),
+  ) -> motive(Nat.add1(prev)),
 ) -> motive(target)
 ```
 
@@ -166,12 +166,12 @@ induction (target) {
 
 ``` cicada
 datatype Vector(E: Type) (length: Nat) {
-  null: Vector(E, zero)
+  null: Vector(E, Nat.zero)
   cons(
     vague prev: Nat,
     head: E,
     tail: Vector(E, prev),
-  ): Vector(E, add1(prev))
+  ): Vector(E, Nat.add1(prev))
 }
 ```
 
@@ -200,13 +200,13 @@ let induction_vector_t = (
   implicit length: Nat,
   target: Vector(E, length),
   motive: (length: Nat, Vector(E, length)) -> Type,
-  case_of_null: motive(0, Vector.null),
+  case_of_null: motive(Nat.zero, Vector.null),
   case_of_cons: (
     vague prev: Nat,
     head: E,
     tail: Vector(E, prev),
     almost: class { tail: motive(prev, tail) },
-  ) -> motive(add1(prev), Vector.cons(head, tail)),
+  ) -> motive(Nat.add1(prev), Vector.cons(head, tail)),
 ) -> motive(length, target)
 ```
 
@@ -258,11 +258,11 @@ induction (target) {
 
 ``` cicada wishful-thinking
 datatype LessThan() (j: Nat, k: Nat) {
-  zero_smallest: (n: Nat) -> LessThan(zero, add1(n))
+  zero_smallest: (n: Nat) -> LessThan(Nat.zero, Nat.add1(n))
   add1_smaller: (
     j: Nat, k: Nat,
     prev_smaller: LessThan(j, k),
-  ) -> LessThan(add1(j), add1(k))
+  ) -> LessThan(Nat.add1(j), Nat.add1(k))
 }
 ```
 
@@ -274,14 +274,14 @@ function LessThan(j: Nat, k: Nat): Type {
   return @TODO "LessThan"
 }
 
-function zero_smallest(n: Nat): LessThan(zero, add1(n)) {
+function zero_smallest(n: Nat): LessThan(Nat.zero, Nat.add1(n)) {
   return @TODO "zero_smallest"
 }
 
 function add1_smaller(
   j: Nat, k: Nat,
   prev_smaller: LessThan(j, k),
-): LessThan(add1(j), add1(k)) {
+): LessThan(Nat.add1(j), Nat.add1(k)) {
   return @TODO "add1_smaller"
 }
 ```
@@ -294,11 +294,11 @@ let ind_less_than_t = (
   implicit k: Nat,
   target: LessThan(j, k),
   motive: (j: Nat, k: Nat, LessThan(j, k)) -> Type,
-  case_of_zero_smallest: (n: Nat) -> motive(zero, add1(n), zero_smallest(n)),
+  case_of_zero_smallest: (n: Nat) -> motive(Nat.zero, Nat.add1(n), zero_smallest(n)),
   case_of_add1_smallest: (
     j: Nat, k: Nat, prev_smaller: LessThan(j, k),
     almost_of_prev_smaller: motive(j, k, prev_smaller),
-  ) -> motive(add1(j), add1(k), add1_smaller(j, k, prev_smaller)),
+  ) -> motive(Nat.add1(j), Nat.add1(k), add1_smaller(j, k, prev_smaller)),
 ) -> motive(j, k, target)
 ```
 

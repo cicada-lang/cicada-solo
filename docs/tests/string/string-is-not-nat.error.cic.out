@@ -1,8 +1,0 @@
-I infer the type to be:
-  String
-But the expected type is:
-  Nat
-
-string-is-not-nat.error.cic:
- 1 |the(Nat, "ratatouille")
- 2 |

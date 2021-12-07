@@ -12,5 +12,5 @@ datatype Id(T: Type) (x: T, y: T) {
 
 ``` cicada
 Id.my_refl
-check! Id.my_refl(1): Id(Nat, 1, 1)
+check! Id.my_refl("1"): Id(String, "a", "a")
 ```

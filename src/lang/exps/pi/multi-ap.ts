@@ -54,6 +54,16 @@ export class MultiAp extends Exp {
         )
         return check(ctx, next_multi_ap, t)
       } else {
+        // { // DEBUG
+        //   console.log({
+        //     msg: "[MultiAp.check] before",
+        //     target: this.target.format(),
+        //     arg_entries: this.arg_entries
+        //       .map((arg_entry) => `${arg_entry.kind} ${arg_entry.exp.format()}`)
+        //       .join(", "),
+        //   })
+        // }
+
         const result = inferred.t.vague_inserter.insert_vague_ap(
           ctx,
           inferred.core,
@@ -63,7 +73,7 @@ export class MultiAp extends Exp {
 
         // { // DEBUG
         //   console.log({
-        //     msg: "[MultiAp.check]",
+        //     msg: "[MultiAp.check] after",
         //     target: this.target.format(),
         //     arg_entries: this.arg_entries
         //       .map((arg_entry) => `${arg_entry.kind} ${arg_entry.exp.format()}`)

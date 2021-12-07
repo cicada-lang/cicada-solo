@@ -1,4 +1,9 @@
-- remove built-in `Nat`
+- syntax add `()` to the target type of `same_as_chart!`
+
+- [refactor] improve normalization from `TypeCtorValue` to `DatatypeValue`
+- [refactor] improve normalization from `DataCtorValue` to `DataValue`
+
+- [refactor] improve `expect` error report
 
 # prelude
 

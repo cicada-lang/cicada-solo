@@ -1,5 +1,0 @@
-let t: Type = Nat
-let n: t = zero
-let one: Nat = add1(n)
-
-one

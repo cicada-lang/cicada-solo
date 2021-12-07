@@ -2,18 +2,18 @@ import { tester } from "../parser-tester-instance"
 
 tester.echo_stmts(`
 
-let a: Nat = {
-  let x = 1
-  let y = 2
+let a: String = {
+  let x = "x"
+  let y = "y"
   return x
 }
 
-let b: Nat = {
-  let x: Nat = {
-    return 1
+let b: String = {
+  let x: String = {
+    return "x"
   }
 
-  let y = 2
+  let y = "y"
 
   return x
 }

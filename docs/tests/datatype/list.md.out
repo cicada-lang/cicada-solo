@@ -1,17 +1,11 @@
 (_) => List(_): (_: Type) -> Type
-List(Nat): Type
-List.null(vague Nat): List(Nat)
-List.null(vague Nat): List(Nat)
+List(String): Type
 List.null(vague String): List(String)
 List.null(vague String): List(String)
-List.cons(vague Nat, 1, List.null(vague Nat)): List(Nat)
-List.cons(vague Nat, 1, List.null(vague Nat)): List(Nat)
-List.cons(vague Nat, 1, List.cons(vague Nat, 2, List.null(vague Nat))): List(Nat)
-List.cons(vague Nat, 1, List.cons(vague Nat, 2, List.cons(vague Nat, 3, List.null(vague Nat)))): List(Nat)
 List.cons(vague String, "a", List.null(vague String)): List(String)
 List.cons(vague String, "a", List.cons(vague String, "b", List.null(vague String))): List(String)
 List.cons(vague String, "a", List.cons(vague String, "b", List.cons(vague String, "c", List.null(vague String)))): List(String)
-refl: Equal(Nat, 3, 3)
-refl: Equal(List(Nat), List.cons(vague Nat, 1, List.cons(vague Nat, 2, List.cons(vague Nat, 3, List.cons(vague Nat, 4, List.cons(vague Nat, 5, List.cons(vague Nat, 6, List.null(vague Nat))))))), List.cons(vague Nat, 1, List.cons(vague Nat, 2, List.cons(vague Nat, 3, List.cons(vague Nat, 4, List.cons(vague Nat, 5, List.cons(vague Nat, 6, List.null(vague Nat))))))))
-refl: Equal(List(Nat), List.cons(vague Nat, 1, List.cons(vague Nat, 2, List.cons(vague Nat, 3, List.cons(vague Nat, 4, List.null(vague Nat))))), List.cons(vague Nat, 1, List.cons(vague Nat, 2, List.cons(vague Nat, 3, List.cons(vague Nat, 4, List.null(vague Nat))))))
-refl: Equal(List(Nat), List.cons(vague Nat, 3, List.cons(vague Nat, 2, List.cons(vague Nat, 1, List.null(vague Nat)))), List.cons(vague Nat, 3, List.cons(vague Nat, 2, List.cons(vague Nat, 1, List.null(vague Nat)))))
+refl: Equal(Nat, Nat.add1(Nat.add1(Nat.add1(Nat.zero))), Nat.add1(Nat.add1(Nat.add1(Nat.zero))))
+refl: Equal(List(String), List.cons(vague String, "a", List.cons(vague String, "b", List.cons(vague String, "c", List.cons(vague String, "a", List.cons(vague String, "b", List.cons(vague String, "c", List.null(vague String))))))), List.cons(vague String, "a", List.cons(vague String, "b", List.cons(vague String, "c", List.cons(vague String, "a", List.cons(vague String, "b", List.cons(vague String, "c", List.null(vague String))))))))
+refl: Equal(List(String), List.cons(vague String, "a", List.cons(vague String, "b", List.cons(vague String, "c", List.cons(vague String, "d", List.null(vague String))))), List.cons(vague String, "a", List.cons(vague String, "b", List.cons(vague String, "c", List.cons(vague String, "d", List.null(vague String))))))
+refl: Equal(List(String), List.cons(vague String, "c", List.cons(vague String, "b", List.cons(vague String, "a", List.null(vague String)))), List.cons(vague String, "c", List.cons(vague String, "b", List.cons(vague String, "a", List.null(vague String)))))

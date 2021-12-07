@@ -1,35 +1,34 @@
-List.null(vague Nat): List(Nat)
-List.null(vague Nat): List(Nat)
 List.null(vague String): List(String)
-List.cons(vague Nat, 123, List.null(vague Nat)): List(Nat)
-(head, tail) => List.cons(vague Nat, head, tail): (_: Nat, _1: List(Nat)) -> List(Nat)
-List.cons(vague Nat, 123, List.null(vague Nat)): List(Nat)
-List.cons(vague Nat, 123, List.null(vague Nat)): List(Nat)
+List.null(vague String): List(String)
+List.cons(vague String, "abc", List.null(vague String)): List(String)
+(head, tail) => List.cons(vague String, head, tail): (_: String, _1: List(String)) -> List(String)
+List.cons(vague String, "abc", List.null(vague String)): List(String)
+List.cons(vague String, "abc", List.null(vague String)): List(String)
 List.cons(vague String, "a", List.null(vague String)): List(String)
 List.cons(vague String, "a", List.cons(vague String, "b", List.null(vague String))): List(String)
 List.cons(vague String, "a", List.cons(vague String, "b", List.cons(vague String, "c", List.null(vague String)))): List(String)
-[List.null(vague Nat) | List.null(vague String)]: [_: List(Nat) | List(String)]
-[List.null(vague Nat) | List.null(vague String)]: [_: List(Nat) | List(String)]
-[List.null(vague Nat) | List.null(vague String)]: [_: List(Nat) | List(String)]
-[List.null(vague String) | List.null(vague Nat)]: [_: List(String) | List(Nat)]
-[List.null(vague String) | List.null(vague Nat)]: [_: List(String) | List(Nat)]
-[List.null(vague Nat) | List.null(vague String)]: [_: List(Nat) | List(String)]
-(vague B) => [List.null(vague Nat) | List.null(vague B)]: (vague B: Type) -> [_: List(Nat) | List(B)]
-(vague A, vague B) => [List.null(vague A) | List.null(vague B)]: (vague A: Type, vague B: Type) -> [_: List(A) | List(B)]
-[List.null(vague String) | List.null(vague Nat)]: [_: List(String) | List(Nat)]
+[List.null(vague String) | List.null(vague String)]: [_: List(String) | List(String)]
+[List.null(vague String) | List.null(vague String)]: [_: List(String) | List(String)]
+[List.null(vague String) | List.null(vague String)]: [_: List(String) | List(String)]
+[List.null(vague String) | List.null(vague String)]: [_: List(String) | List(String)]
+[List.null(vague String) | List.null(vague String)]: [_: List(String) | List(String)]
+[List.null(vague String) | List.null(vague String)]: [_: List(String) | List(String)]
 (vague B) => [List.null(vague String) | List.null(vague B)]: (vague B: Type) -> [_: List(String) | List(B)]
-[List.null(vague String) | Nat]: [_: List(String) | Type]
-[List.null(vague String) | Nat]: [_: List(String) | Type]
+(vague A, vague B) => [List.null(vague A) | List.null(vague B)]: (vague A: Type, vague B: Type) -> [_: List(A) | List(B)]
+[List.null(vague String) | List.null(vague String)]: [_: List(String) | List(String)]
+(vague B) => [List.null(vague String) | List.null(vague B)]: (vague B: Type) -> [_: List(String) | List(B)]
 [List.null(vague String) | String]: [_: List(String) | Type]
 [List.null(vague String) | String]: [_: List(String) | Type]
-[List.cons(vague String, "a", List.null(vague String)) | Nat]: [_: List(String) | Type]
-[List.cons(vague String, "a", List.null(vague String)) | Nat]: [_: List(String) | Type]
-[List.cons(vague Nat, 1, List.null(vague Nat)) | String]: [_: List(Nat) | Type]
-[List.cons(vague Nat, 1, List.null(vague Nat)) | String]: [_: List(Nat) | Type]
-[[List.null(vague String) | List.null(vague String)] | Nat]: [_: [_: List(String) | List(String)] | Type]
-[[List.null(vague String) | List.null(vague String)] | Nat]: [_: [_: List(String) | List(String)] | Type]
-[[List.null(vague String) | List.null(vague Nat)] | Nat]: [_: [_: List(String) | List(Nat)] | Type]
-[[List.null(vague String) | List.null(vague Nat)] | Nat]: [_: [_: List(String) | List(Nat)] | Type]
-[[List.null(vague String) | List.null(vague Nat)] | Nat]: [_: [_: List(String) | List(Nat)] | Type]
-[[List.null(vague String) | List.null(vague Nat)] | Nat]: [_: [_: List(String) | List(Nat)] | Type]
-[[List.null(vague String) | List.null(vague Nat)] | Nat]: [_: [_: List(String) | List(Nat)] | Type]
+[List.null(vague String) | String]: [_: List(String) | Type]
+[List.null(vague String) | String]: [_: List(String) | Type]
+[List.cons(vague String, "a", List.null(vague String)) | String]: [_: List(String) | Type]
+[List.cons(vague String, "a", List.null(vague String)) | String]: [_: List(String) | Type]
+[List.cons(vague String, "a", List.null(vague String)) | String]: [_: List(String) | Type]
+[List.cons(vague String, "a", List.null(vague String)) | String]: [_: List(String) | Type]
+[[List.null(vague String) | List.null(vague String)] | String]: [_: [_: List(String) | List(String)] | Type]
+[[List.null(vague String) | List.null(vague String)] | String]: [_: [_: List(String) | List(String)] | Type]
+[[List.null(vague String) | List.null(vague String)] | String]: [_: [_: List(String) | List(String)] | Type]
+[[List.null(vague String) | List.null(vague String)] | String]: [_: [_: List(String) | List(String)] | Type]
+[[List.null(vague String) | List.null(vague String)] | String]: [_: [_: List(String) | List(String)] | Type]
+[[List.null(vague String) | List.null(vague String)] | String]: [_: [_: List(String) | List(String)] | Type]
+[[List.null(vague String) | List.null(vague String)] | String]: [_: [_: List(String) | List(String)] | Type]

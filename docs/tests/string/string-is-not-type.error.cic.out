@@ -1,8 +1,0 @@
-I infer the type to be:
-  String
-But the expected type is:
-  Type
-
-string-is-not-type.error.cic:
- 1 |the(Type, "courgette")
- 2 |

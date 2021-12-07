@@ -61,6 +61,10 @@ export class DataValue extends Value {
       return Solution.failure
     }
 
+    if (t instanceof Exps.TypeCtorValue && t.arity === 0) {
+      t = t.as_datatype()
+    }
+
     const datatype = expect(ctx, t, Exps.DatatypeValue)
 
     const result = this.data_ctor.apply({

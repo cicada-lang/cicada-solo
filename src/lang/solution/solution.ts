@@ -63,21 +63,6 @@ export abstract class Solution {
   }
 
   unify(ctx: Ctx, t: Value, x: Value, y: Value): Solution {
-    // {
-    //   // DEBUG
-    //   if (Solution.logic_var_p(x) && Solution.logic_var_name(x) === "from") {
-    //     console.dir(
-    //       {
-    //         x,
-    //         y,
-    //         x_walk: this.walk(x),
-    //         y_walk: this.walk(y),
-    //       },
-    //       { depth: 4 }
-    //     )
-    //   }
-    // }
-
     x = this.walk(x)
     y = this.walk(y)
 
@@ -126,11 +111,9 @@ export abstract class Solution {
 
   unify_or_fail(ctx: Ctx, t: Value, left: Value, right: Value): Solution {
     const solution = this.unify(ctx, t, left, right)
-
     if (Solution.failure_p(solution)) {
       const left_format = readback(ctx, new Exps.TypeValue(), left).format()
       const right_format = readback(ctx, new Exps.TypeValue(), right).format()
-
       throw new ExpTrace(
         [
           `Unification fail`,

@@ -1,1 +1,1 @@
-the(Equal(Nat, 1, 1), same(1))
+the(Equal(String, "a", "a"), same("a"))

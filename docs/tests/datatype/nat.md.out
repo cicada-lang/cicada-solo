@@ -1,19 +1,17 @@
-MyNat.my_zero: MyNat
-MyNat.my_zero: MyNat
-(prev) => MyNat.my_add1(prev): (prev: MyNat) -> MyNat
-MyNat: Type
-MyNat.my_zero: MyNat
-MyNat.my_add1(MyNat.my_zero): MyNat
-MyNat.my_add1(MyNat.my_add1(MyNat.my_zero)): MyNat
-refl: Equal(Nat, 7, 7)
-(y) => y: (y: MyNat) -> MyNat
-MyNat.my_zero: MyNat
-MyNat.my_add1(MyNat.my_zero): MyNat
-MyNat.my_add1(MyNat.my_zero): MyNat
-MyNat.my_add1(MyNat.my_add1(MyNat.my_zero)): MyNat
-refl: Equal(MyNat, MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero))))), MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero))))))
-refl: Equal(Nat, 12, 12)
-refl: Equal(MyNat, MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero)))))))))))), MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero)))))))))))))
-refl: Equal(Nat, 64, 64)
-refl: Equal(Nat, 55, 55)
-refl: Equal(Nat, 120, 120)
+Nat.zero: Nat
+Nat.zero: Nat
+(prev) => Nat.add1(prev): (prev: Nat) -> Nat
+Nat: Type
+Nat.zero: Nat
+Nat.add1(Nat.zero): Nat
+Nat.add1(Nat.add1(Nat.zero)): Nat
+(y) => y: (y: Nat) -> Nat
+Nat.zero: Nat
+Nat.add1(Nat.zero): Nat
+Nat.add1(Nat.zero): Nat
+Nat.add1(Nat.add1(Nat.zero)): Nat
+refl: Equal(Nat, Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))), Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))))
+refl: Equal(Nat, Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))))))))))), Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))))))))))))
+refl: Equal(Nat, Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))), Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+refl: Equal(Nat, Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))))))))))))))))))))))))))))))))))))))))))))))))))))), Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+refl: Equal(Nat, Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))), Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))

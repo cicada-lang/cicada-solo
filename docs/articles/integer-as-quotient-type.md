@@ -10,6 +10,11 @@ An integer is defined as a pair of natural numbers, `left` and `right`.
 The intention of our definition, is to view the integer as equal to `left` minus `right`.
 
 ``` cicada
+datatype Nat {
+  zero: Nat
+  add1(prev: Nat): Nat
+}
+
 class Integer {
   left: Nat
   right: Nat
@@ -26,7 +31,11 @@ after transposition, we have `add(x.left, y.right)` equal `add(y.left, x.right)`
 
 ``` cicada
 function add(x: Nat, y: Nat): Nat {
-  return nat_rec(x, y, (_prev, almost) => add1(almost))
+  return induction (x) {
+    (_) => Nat
+    case zero => y
+    case add1(prev, almost) => Nat.add1(almost.prev)
+  }
 }
 
 function IntegerEqual(x: Integer, y: Integer): Type {
@@ -37,10 +46,22 @@ function IntegerEqual(x: Integer, y: Integer): Type {
 Example of equivalent integers:
 
 ``` cicada
+let zero = Nat.zero
+let one = Nat.add1(zero)
+let two = Nat.add1(one)
+let three = Nat.add1(two)
+let four = Nat.add1(three)
+let five = Nat.add1(four)
+let six = Nat.add1(five)
+let seven = Nat.add1(six)
+let eight = Nat.add1(seven)
+let nine = Nat.add1(eight)
+let ten = Nat.add1(nine)
+
 the(
   IntegerEqual(
-    { left: 10, right: 6 },
-    { left: 11, right: 7 }),
+    { left: eight, right: five },
+    { left: ten, right: seven }),
   refl)
 ```
 

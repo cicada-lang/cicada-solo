@@ -7,7 +7,7 @@ date: 2021-11-11
 We can apply a class like it is a function.
 
 ``` cicada
-class C { T: Type, x: Nat }
+class C { T: Type, x: String }
 ```
 
 Take `C` as an example,  the type of `C` is `Type`:
@@ -19,7 +19,7 @@ C
 ``` cicada output
 class {
   T: Type
-  x: Nat
+  x: String
 }: Type
 ```
 
@@ -32,25 +32,25 @@ C(String)
 ``` cicada output
 class {
   T: Type = String
-  x: Nat
+  x: String
 }: Type
 ```
 
-And we can also use `C` as a `(Type, Nat) -> Type`:
+And we can also use `C` as a `(Type, String) -> Type`:
 
 
 ``` cicada
-C(String, 1)
+C(String, "a")
 ```
 
 ``` cicada output
 class {
   T: Type = String
-  x: Nat = 1
+  x: String = "a"
 }: Type
 ```
 
 This is an inconsistency of current design of fulfilling type.
 
 The function application syntax is overloaded,
-leading a reader to think that `C` has type `(Type) -> Type` or `(Type, Nat) -> Type`.
+leading a reader to think that `C` has type `(Type) -> Type` or `(Type, String) -> Type`.

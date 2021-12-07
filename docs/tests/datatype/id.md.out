@@ -1,2 +1,2 @@
 (vague T, x) => Id.my_refl(vague T, x): (vague T: Type, x: T) -> Id(T, x, x)
-Id.my_refl(vague Nat, 1): Id(Nat, 1, 1)
+Id.my_refl(vague String, "1"): Id(String, "a", "a")

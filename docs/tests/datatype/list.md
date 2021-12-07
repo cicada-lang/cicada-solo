@@ -11,18 +11,10 @@ datatype List(E: Type) {
 }
 
 check! List: (Type) -> Type
-check! List(Nat): Type
-
-check! List.null: List(Nat)
-check! List.null(vague Nat): List(Nat)
+check! List(String): Type
 
 check! List.null: List(String)
 check! List.null(vague String): List(String)
-check! List.cons(1, List.null): List(Nat)
-
-check! List.cons(1, List.null): List(Nat)
-check! List.cons(1, List.cons(2, List.null)): List(Nat)
-check! List.cons(1, List.cons(2, List.cons(3, List.null))): List(Nat)
 
 check! List.cons("a", List.null): List(String)
 check! List.cons("a", List.cons("b", List.null)): List(String)
@@ -53,20 +45,21 @@ function induction_list(
 # length
 
 ``` cicada
+import { Nat } from "./nat.md"
+
 function length(implicit E: Type, x: List(E)): Nat {
   return induction (x) {
     (_) => Nat
-    case null => 0
-    case cons(_head, _tail, almost) => add1(almost.tail)
+    case null => Nat.zero
+    case cons(_head, _tail, almost) => Nat.add1(almost.tail)
   }
 }
 ```
 
 ``` cicada
 same_as_chart! Nat [
-  length(the(List(Nat), List.cons(1, List.cons(2, List.cons(3, List.null))))),
   length(the(List(String), List.cons("a", List.cons("b", List.cons("c", List.null))))),
-  3,
+  Nat.add1(Nat.add1(Nat.add1(Nat.zero))),
 ]
 ```
 
@@ -83,12 +76,12 @@ function append(implicit E: Type, x: List(E), y: List(E)): List(E) {
 ```
 
 ``` cicada
-same_as_chart! List(Nat) [
+same_as_chart! List(String) [
   append(
-    the(List(Nat), List.cons(1, List.cons(2, List.cons(3, List.null)))),
-    the(List(Nat), List.cons(4, List.cons(5, List.cons(6, List.null)))),
+    the(List(String), List.cons("a", List.cons("b", List.cons("c", List.null)))),
+    the(List(String), List.cons("a", List.cons("b", List.cons("c", List.null)))),
   ),
-  List.cons(1, List.cons(2, List.cons(3, List.cons(4, List.cons(5, List.cons(6, List.null)))))),
+  List.cons("a", List.cons("b", List.cons("c", List.cons("a", List.cons("b", List.cons("c", List.null)))))),
 ]
 ```
 
@@ -113,13 +106,13 @@ function reverse(implicit E: Type, x: List(E)): List(E) {
 ```
 
 ``` cicada
-same_as_chart! List(Nat) [
-  list_cons_back(4, List.cons(1, List.cons(2, List.cons(3, List.null)))),
-  List.cons(1, List.cons(2, List.cons(3, List.cons(4, List.null))))
+same_as_chart! List(String) [
+  list_cons_back("d", List.cons("a", List.cons("b", List.cons("c", List.null)))),
+  List.cons("a", List.cons("b", List.cons("c", List.cons("d", List.null))))
 ]
 
-same_as_chart! List(Nat) [
-  reverse(the(List(Nat), List.cons(1, List.cons(2, List.cons(3, List.null))))),
-  List.cons(3, List.cons(2, List.cons(1, List.null))),
+same_as_chart! List(String) [
+  reverse(the(List(String), List.cons("a", List.cons("b", List.cons("c", List.null))))),
+  List.cons("c", List.cons("b", List.cons("a", List.null))),
 ]
 ```

@@ -1,5 +1,5 @@
-let a = the(Nat, { x = 1; y = 2; return x })
-let b = the(Nat, { x = the(Nat, { 1 }); y = 2; return x })
+let a = the(String, { x = "x"; y = "y"; return x })
+let b = the(String, { x = the(String, { "x" }); y = "y"; return x })
 let ABC = class {
   a: String
   b: String

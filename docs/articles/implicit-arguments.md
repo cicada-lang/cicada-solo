@@ -26,19 +26,19 @@ function id(implicit A: Type, x: A): A {
 }
 
 // Infer
-id(123)
+id("abc")
 
 // Elaboration
-id(implicit Nat, 123)
+id(implicit String, "abc")
 ```
 
 1. Infer `(implicit A: Type, A) -> A` for `id`
 2. The implicit `A` will be viewed as a pattern variable
 3. Under the implicit pi, is the pi type `(A) -> A`
-4. Infer `Nat` for `123`
-5. Unify `Nat` with `A` (the pi type's argument type)
-6. Return elaborated core expression by reifying `id(implicit A, 123)` to `id(implicit Nat, 123)`
-7. Return elaborated type by reifying `(A) -> A` to `(Nat) -> Nat`
+4. Infer `String` for `"abc"`
+5. Unify `String` with `A` (the pi type's argument type)
+6. Return elaborated core expression by reifying `id(implicit A, "abc")` to `id(implicit String, "abc")`
+7. Return elaborated type by reifying `(A) -> A` to `(String) -> String`
    - We can do this by applying the closure to the solution of `A`
 
 ## What can go wrong
@@ -79,16 +79,16 @@ function my_list_cons(vague A: Type, head: A, tail: List(A)): List(A) {
 }
 
 // Check
-check! my_list_cons(123, List.null): List(Nat)
+check! my_list_cons("abc", List.null): List(String)
 
 // Elaboration
-check! my_list_cons(vague Nat, 123, List.null): List(Nat)
+check! my_list_cons(vague String, "abc", List.null): List(String)
 ```
 
 1. Infer `(vague A: Type, head: A, tail: List(A)) -> List(A)` for `my_list_cons`
-2. Unify the given type `List(Nat)` with `List(A)` (the pi type's return type)
-3. The solution of `A` is `Nat`
-4. Return elaborated core expression by reifying `my_list_cons(123, List.null)` to `my_list_cons(vague Nat, 123, List.null)`
+2. Unify the given type `List(String)` with `List(A)` (the pi type's return type)
+3. The solution of `A` is `String`
+4. Return elaborated core expression by reifying `my_list_cons("abc", List.null)` to `my_list_cons(vague String, "abc", List.null)`
 
 # Looking back
 

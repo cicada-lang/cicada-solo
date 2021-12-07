@@ -1,0 +1,6 @@
+let x = {
+  let y = sole
+  return y
+}
+
+x

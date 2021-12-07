@@ -3,7 +3,7 @@ datatype Either(L: Type, R: Type) {
   inr(right: R): Either(L, R)
 }
 
-let a: Nat = @TODO "A trivial Nat"
+let a: String = @TODO "A trivial String"
 let b: Trivial = @TODO "It's not Trivial"
 let c: Absurd = @TODO "Absurd!"
 

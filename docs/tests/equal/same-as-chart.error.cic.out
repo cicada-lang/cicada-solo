@@ -1,20 +1,15 @@
-I am expecting the following two values to be the same Nat.
+I am expecting the following two values to be the same String.
 But they are not.
 
-from value at 4:
-  3
-to value at 5:
-  6
+from value at 0:
+  "abc"
+to value at 1:
+  "abcd"
 
 same-as-chart.error.cic:
-  1 |same_as_chart! Nat [
-  2 |  add1(add1(add1(0))),
-  3 |  add1(add1(1)),
-  4 |  add1(2),
-  5 |  3,
-  6 |  3,
-  7 |  6,
-  8 |  3,
-  9 |  3,
- 10 |]
- 11 |
+ 1 |same_as_chart! String [
+ 2 |  "abc",
+ 3 |  "abcd",
+ 4 |  "abc",
+ 5 |]
+ 6 |

@@ -17,9 +17,9 @@ id1
 id2
 id3
 
-id1(1)
-id2(1)
-id3(1)
+id1("a")
+id2("a")
+id3("a")
 ```
 
 # return implicit value
@@ -29,7 +29,7 @@ function typeof(implicit T: Type, T): Type {
   return T
 }
 
-typeof(123)
+typeof(sole)
 typeof("abc")
 ```
 
@@ -43,7 +43,7 @@ function k(
   return x
 }
 
-k(100, 101)
+k("abc", sole)
 ```
 
 # record of implicit arguments
@@ -76,8 +76,8 @@ let car_type_again: (
 
 car_type_again
 
-car_type(is(cons(1, "a"), Pair(Nat, String)))
-car_type_again(is(cons(1, "a"), Pair(Nat, String)))
+car_type(is(cons(sole, "a"), Pair(Trivial, String)))
+car_type_again(is(cons(sole, "a"), Pair(Trivial, String)))
 
 // `cdr_type` -- only the idiomatic way:
 
@@ -89,7 +89,7 @@ function cdr_type(
   return B
 }
 
-cdr_type(is(cons(1, "a"), Pair(Nat, String)))
+cdr_type(is(cons(sole, "a"), Pair(Trivial, String)))
 ```
 
 # do *not* support implicit argument over implicit argument

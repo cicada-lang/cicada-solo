@@ -1,8 +1,0 @@
-let x: [_: Nat | Nat] = {
-  let one = add1(zero)
-  let two = add1(one)
-  let three = add1(two)
-  return cons(one, two)
-}
-
-x

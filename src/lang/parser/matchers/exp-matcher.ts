@@ -1,7 +1,6 @@
 import pt from "@cicada-lang/partech"
 import { Exp } from "../../exp"
 import * as Exps from "../../exps"
-import { nat_from_number } from "../../exps/nat/nat-util"
 
 export function pi_handler(
   body: { [key: string]: pt.Tree },
@@ -112,21 +111,6 @@ export function operator_matcher(tree: pt.Tree): Exp {
             span: pt.span_closure([target.span, name.span]),
           }) as Exp
         ),
-    "operator:nat_ind": ({ target, motive, base, step }, { span }) =>
-      new Exps.NatInd(
-        exp_matcher(target),
-        exp_matcher(motive),
-        exp_matcher(base),
-        exp_matcher(step),
-        { span }
-      ),
-    "operator:nat_rec": ({ target, base, step }, { span }) =>
-      new Exps.NatRec(
-        exp_matcher(target),
-        exp_matcher(base),
-        exp_matcher(step),
-        { span }
-      ),
     "operator:replace": ({ target, motive, base }, { span }) =>
       new Exps.Replace(
         exp_matcher(target),
@@ -228,21 +212,6 @@ export function operand_matcher(tree: pt.Tree): Exp {
         ],
         { span }
       ),
-    "operand:nat": (_, { span }) => new Exps.Nat({ span }),
-    "operand:zero": (_, { span }) => new Exps.Zero({ span }),
-    "operand:add1": ({ prev }, { span }) =>
-      new Exps.Add1(exp_matcher(prev), { span }),
-    "operand:number": ({ value }, { span }) => {
-      const n = Number.parseInt(pt.str(value))
-      if (Number.isNaN(n)) {
-        throw new pt.ParsingError(
-          `Expecting number, instead of: ${JSON.stringify(n)}`,
-          { span }
-        )
-      } else {
-        return nat_from_number(n, { span })
-      }
-    },
     "operand:equal": ({ t, from, to }, { span }) =>
       new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to), {
         span,

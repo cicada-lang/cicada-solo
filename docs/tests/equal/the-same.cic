@@ -1,4 +1,1 @@
-the_same(Nat, add1(add1(add1(0))))
-the_same(Nat, add1(add1(1)))
-the_same(Nat, add1(2))
-the_same(Nat, 3)
+the_same(String, "a")

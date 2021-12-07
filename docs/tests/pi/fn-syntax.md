@@ -16,9 +16,9 @@ let id3: (A: Type, x: A) -> A =
   //   does not need to be the same.
   (B, y) => y
 
-id1(Nat, 1)
-id2(Nat, 1)
-id3(Nat, 1)
+id1(String, "a")
+id2(String, "a")
+id3(String, "a")
 ```
 
 # sugar for multi-argument function

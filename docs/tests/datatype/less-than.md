@@ -5,6 +5,9 @@ title: LessThan
 # LessThan
 
 ``` cicada wishful-thinking
+
+import { Nat } from "./nat.md"
+
 datatype LessThan() (j: Nat, k: Nat) {
   zero_smallest(n: Nat): LessThan(Nat.zero, Nat.add1(n))
   add1_smaller(
@@ -12,18 +15,8 @@ datatype LessThan() (j: Nat, k: Nat) {
     prev_smaller: LessThan(j, k),
   ): LessThan(Nat.add1(j), Nat.add1(k))
 }
-```
-
-``` cicada
-datatype LessThan() (j: Nat, k: Nat) {
-  zero_smallest(n: Nat): LessThan(zero, add1(n))
-  add1_smaller(
-    j: Nat, k: Nat,
-    prev_smaller: LessThan(j, k),
-  ): LessThan(add1(j), add1(k))
-}
 
 LessThan
-LessThan(1)
-LessThan(1, 2)
+LessThan(Nat.add1(Nat.zero))
+LessThan(Nat.add1(Nat.zero), Nat.add1(Nat.add1(Nat.zero)))
 ```

@@ -1,1 +1,1 @@
-refl: Equal(Nat, 1, 1)
+refl: Equal(String, "a", "a")

@@ -4,43 +4,36 @@ title: Natural number
 
 # Nat
 
-``` cicada wishful-thinking
-datatype Nat {
-  zero: Nat
-  add1(prev: Nat): Nat
-}
-```
-
-# MyNat
-
 ``` cicada
-datatype MyNat {
-  my_zero: MyNat
-  my_add1(prev: MyNat): MyNat
-}
-
-MyNat.my_zero
-
-check! MyNat.my_zero: MyNat
-
-MyNat.my_add1
-
-check! MyNat: Type
-check! MyNat.my_zero: MyNat
-check! MyNat.my_add1(MyNat.my_zero): MyNat
-check! MyNat.my_add1(MyNat.my_add1(MyNat.my_zero)): MyNat
-```
-
-``` cicada wishful-thinking
 datatype Nat {
   zero: Nat
   add1(prev: Nat): Nat
 }
+
+Nat.zero
+
+check! Nat.zero: Nat
+
+Nat.add1
 
 check! Nat: Type
 check! Nat.zero: Nat
 check! Nat.add1(Nat.zero): Nat
 check! Nat.add1(Nat.add1(Nat.zero)): Nat
+```
+
+``` cicada
+let zero = Nat.zero
+let one = Nat.add1(zero)
+let two = Nat.add1(one)
+let three = Nat.add1(two)
+let four = Nat.add1(three)
+let five = Nat.add1(four)
+let six = Nat.add1(five)
+let seven = Nat.add1(six)
+let eight = Nat.add1(seven)
+let nine = Nat.add1(eight)
+let ten = Nat.add1(nine)
 ```
 
 # induction Nat
@@ -49,18 +42,17 @@ check! Nat.add1(Nat.add1(Nat.zero)): Nat
 function induction_nat(
   target: Nat,
   motive: (Nat) -> Type,
-  case_of_zero: motive(zero),
+  case_of_zero: motive(Nat.zero),
   case_of_add1: (
     prev: Nat,
     almost: class { prev: motive(prev) },
-  ) -> motive(add1(prev)),
+  ) -> motive(Nat.add1(prev)),
 ): motive(target) {
-  return nat_ind(
-    target,
-    motive,
-    case_of_zero,
-    (prev, almost_of_prev) => case_of_add1(prev, { prev: almost_of_prev })
-  )
+  return induction (target) {
+    motive
+    case zero => case_of_zero
+    case add1(prev, almost) => case_of_add1(prev, almost)
+  }
 }
 ```
 
@@ -68,54 +60,33 @@ function induction_nat(
 
 ``` cicada
 function add(x: Nat, y: Nat): Nat {
-  return induction_nat(
-    x,
-    (_) => Nat,
-    y,
-    (_prev, almost) => add1(almost.prev),
-  )
-}
-```
-
-``` cicada
-same_as_chart! Nat [
-  add(4, 3),
-  add(3, 4),
-  7,
-]
-```
-
-# my_add
-
-``` cicada
-function my_add(x: MyNat, y: MyNat): MyNat {
   return induction (x) {
-    (_) => MyNat
-    case my_zero => y
-    case my_add1(prev, almost) => MyNat.my_add1(almost.prev)
+    (_) => Nat
+    case zero => y
+    case add1(prev, almost) => Nat.add1(almost.prev)
   }
 }
 ```
 
 ``` cicada
-my_add(MyNat.my_zero)
-my_add(MyNat.my_zero, MyNat.my_zero)
-my_add(MyNat.my_zero, MyNat.my_add1(MyNat.my_zero))
-my_add(MyNat.my_add1(MyNat.my_zero), MyNat.my_zero)
-my_add(MyNat.my_add1(MyNat.my_zero), MyNat.my_add1(MyNat.my_zero))
+add(Nat.zero)
+add(Nat.zero, Nat.zero)
+add(Nat.zero, Nat.add1(Nat.zero))
+add(Nat.add1(Nat.zero), Nat.zero)
+add(Nat.add1(Nat.zero), Nat.add1(Nat.zero))
 ```
 
 ``` cicada
-same_as_chart! MyNat [
-  my_add(
-    MyNat.my_add1(MyNat.my_add1(MyNat.my_zero)),
-    MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero))),
+same_as_chart! Nat [
+  add(
+    Nat.add1(Nat.add1(Nat.zero)),
+    Nat.add1(Nat.add1(Nat.add1(Nat.zero))),
   ),
-  my_add(
-    MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero))),
-    MyNat.my_add1(MyNat.my_add1(MyNat.my_zero)),
+  add(
+    Nat.add1(Nat.add1(Nat.add1(Nat.zero))),
+    Nat.add1(Nat.add1(Nat.zero)),
   ),
-  MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_add1(MyNat.my_zero))))),
+  Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))),
 ]
 ```
 
@@ -123,45 +94,20 @@ same_as_chart! MyNat [
 
 ``` cicada
 function mul(x: Nat, y: Nat): Nat {
-  return induction_nat(
-    x,
-    (_) => Nat,
-    0,
-    (_prev, almost) => add(almost.prev, y),
-  )
-}
-```
-
-``` cicada
-same_as_chart! Nat [
-  mul(4, 3),
-  mul(3, 4),
-  12,
-]
-```
-
-# my_mul
-
-``` cicada
-function my_mul(x: MyNat, y: MyNat): MyNat {
   return induction (x) {
-    (_) => MyNat
-    case my_zero => MyNat.my_zero
-    case my_add1(_prev, almost) => my_add(almost.prev, y)
+    (_) => Nat
+    case zero => Nat.zero
+    case add1(_prev, almost) => add(almost.prev, y)
   }
 }
 ```
 
 ``` cicada
 {
-  let one = MyNat.my_add1(MyNat.my_zero)
-  let two = MyNat.my_add1(one)
-  let three = MyNat.my_add1(two)
-  let four = MyNat.my_add1(three)
-  let twelve = my_add(four, my_add(four, four))
-  return same_as_chart! MyNat [
-    my_mul(four, three),
-    my_mul(three, four),
+  let twelve = add(ten, two)
+  return same_as_chart! Nat [
+    mul(four, three),
+    mul(three, four),
     twelve,
   ]
 }
@@ -171,21 +117,10 @@ function my_mul(x: MyNat, y: MyNat): MyNat {
 
 ``` cicada
 function power_of(x: Nat, y: Nat): Nat {
-  return induction_nat(
-    x,
-    (_) => Nat,
-    1,
-    (_prev, almost) => mul(almost.prev, y),
-  )
-}
-```
-
-``` cicada wishful-thinking
-function power_of(x: Nat, y: Nat): Nat {
   return induction (x) {
     (_) => Nat
-    case zero => 1
-    case add1(_prev, almost) => mul(almost.prev, y)
+    case zero => Nat.add1(Nat.zero)
+    case add1(prev, almost) => mul(almost.prev, y)
   }
 }
 ```
@@ -198,9 +133,9 @@ function power(base: Nat, n: Nat): Nat {
 
 ``` cicada
 same_as_chart! Nat [
-  power(4, 3),
-  power_of(3, 4),
-  64,
+  power(four, three),
+  power_of(three, four),
+  add(mul(six, ten), four),
 ]
 ```
 
@@ -208,20 +143,9 @@ same_as_chart! Nat [
 
 ``` cicada
 function gauss(x: Nat): Nat {
-  return induction_nat(
-    x,
-    (_) => Nat,
-    0,
-    (prev, almost) => add(add1(prev), almost.prev),
-  )
-}
-```
-
-``` cicada wishful-thinking
-function gauss(x: Nat): Nat {
   return induction (x) {
     (_) => Nat
-    case zero => 0
+    case zero => Nat.zero
     case add1(prev, almost) => add(Nat.add1(prev), almost.prev)
   }
 }
@@ -229,8 +153,8 @@ function gauss(x: Nat): Nat {
 
 ``` cicada
 same_as_chart! Nat [
-  gauss(10),
-  55,
+  gauss(ten),
+  add(mul(five, ten), five),
 ]
 ```
 
@@ -238,20 +162,9 @@ same_as_chart! Nat [
 
 ``` cicada
 function factorial(x: Nat): Nat {
-  return induction_nat(
-    x,
-    (_) => Nat,
-    1,
-    (prev, almost) => mul(add1(prev), almost.prev),
-  )
-}
-```
-
-``` cicada wishful-thinking
-function factorial(x: Nat): Nat {
   return induction (x) {
     (_) => Nat
-    case zero => 1
+    case zero => Nat.add1(Nat.zero)
     case add1(prev, almost) => mul(Nat.add1(prev), almost.prev)
   }
 }
@@ -259,7 +172,7 @@ function factorial(x: Nat): Nat {
 
 ``` cicada
 same_as_chart! Nat [
-  factorial(5),
-  120,
+  factorial(five),
+  add(mul(ten, ten), mul(two, ten))
 ]
 ```

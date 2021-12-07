@@ -5,9 +5,6 @@ function id(implicit A: Type, x: A): A {
   return x
 }
 
-id(1)
-id(implicit Nat, 1)
-
 id("a")
 id(implicit String, "a")
 ```
@@ -22,8 +19,8 @@ function k(
   return x
 }
 
-k(123, "abc")
-k(implicit Nat, 123, "abc")
-k(123, implicit String, "abc")
-k(implicit Nat, 123, implicit String, "abc")
+k(sole, "abc")
+k(implicit Trivial, sole, "abc")
+k(sole, implicit String, "abc")
+k(implicit Trivial, sole, implicit String, "abc")
 ```

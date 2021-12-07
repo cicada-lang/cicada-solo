@@ -1,8 +1,6 @@
-1: Nat
-1: Nat
 "a": String
 "a": String
-123: Nat
-123: Nat
-123: Nat
-123: Nat
+sole: Trivial
+sole: Trivial
+sole: Trivial
+sole: Trivial

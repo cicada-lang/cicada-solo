@@ -1,4 +1,1 @@
-refl: Equal(Nat, 3, 3)
-refl: Equal(Nat, 3, 3)
-refl: Equal(Nat, 3, 3)
-refl: Equal(Nat, 3, 3)
+refl: Equal(String, "a", "a")

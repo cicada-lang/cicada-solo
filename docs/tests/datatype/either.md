@@ -112,56 +112,38 @@ same_as_chart! Maybe(List(String)) [
 # list_ref
 
 ``` cicada
-import { induction_nat } from "./nat.md"
+import { Nat, zero, one, two, three, four } from "./nat.md"
 ```
 
 ## list_ref_direct
 
 ``` cicada
 function list_ref_direct(index: Nat, implicit E: Type, list: List(E)): Maybe(E) {
-  return induction_nat(
-    index,
-    (_) => (List(E)) -> Maybe(E),
-    (list) => maybe_head(list),
-    (prev, almost) => (list) => {
+  return induction (index) {
+    (_) => (List(E)) -> Maybe(E)
+    case zero => (list) => maybe_head(list)
+    case add1(prev, almost) => (list) => {
       return induction (maybe_tail(list)) {
         (_) => Maybe(E)
         case nothing => Maybe.nothing
         case just(tail) => almost.prev(tail)
       }
     }
-  ) (list)
+  } (list)
 }
 ```
 
 ``` cicada
-list_ref_direct(0, abc)
-list_ref_direct(1, abc)
-list_ref_direct(2, abc)
-list_ref_direct(3, abc)
-list_ref_direct(4, abc)
+list_ref_direct(zero, abc)
+list_ref_direct(one, abc)
+list_ref_direct(two, abc)
+list_ref_direct(three, abc)
+list_ref_direct(four, abc)
 ```
 
 ## list_ref_aux
 
 ``` cicada
-function list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
-  return induction_nat(
-    index,
-    (_) => (List(E)) -> Maybe(E),
-    (list) => maybe_head(list),
-    (prev, almost) => (list) => {
-      return induction (maybe_tail(list)) {
-        (_) => Maybe(E)
-        case nothing => Maybe.nothing
-        case just(tail) => almost.prev(tail)
-      }
-    }
-  )
-}
-```
-
-``` cicada wishful-thinking
 function list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
   return induction (index) {
     (_) => (List(E)) -> Maybe(E)
@@ -186,47 +168,46 @@ function list_ref(index: Nat, implicit E: Type, list: List(E)): Maybe(E) {
 ```
 
 ``` cicada
-list_ref(0, abc)
-list_ref(1, abc)
-list_ref(2, abc)
-list_ref(3, abc)
-list_ref(4, abc)
+list_ref(zero, abc)
+list_ref(one, abc)
+list_ref(two, abc)
+list_ref(three, abc)
+list_ref(four, abc)
 
-check! list_ref(0, abc): Maybe(String)
-check! list_ref(1, abc): Maybe(String)
-check! list_ref(2, abc): Maybe(String)
-check! list_ref(3, abc): Maybe(String)
-check! list_ref(4, abc): Maybe(String)
+check! list_ref(zero, abc): Maybe(String)
+check! list_ref(one, abc): Maybe(String)
+check! list_ref(two, abc): Maybe(String)
+check! list_ref(three, abc): Maybe(String)
+check! list_ref(four, abc): Maybe(String)
 ```
 
 ## list_ref_vague
 
 ``` cicada
 function list_ref_vague(vague E: Type, index: Nat): (List(E)) -> Maybe(E) {
-  return induction_nat(
-    index,
-    (_) => (List(E)) -> Maybe(E),
-    (list) => maybe_head(list),
-    (prev, almost) => (list) => {
+  return induction (index) {
+    (_) => (List(E)) -> Maybe(E)
+    case zero => (list) => maybe_head(list)
+    case add1(prev, almost) => (list) => {
       return induction (maybe_tail(list)) {
         (_) => Maybe(E)
         case nothing => Maybe.nothing
         case just(tail) => almost.prev(tail)
       }
     }
-  )
+  }
 }
 
-list_ref_vague(vague String, 0, abc)
-check! list_ref_vague(vague String, 0, abc): Maybe(String)
+list_ref_vague(vague String, zero, abc)
+check! list_ref_vague(vague String, zero, abc): Maybe(String)
 
-check! list_ref_vague(0, abc): Maybe(String)
+check! list_ref_vague(zero, abc): Maybe(String)
 ```
 
 ``` cicada
-check! list_ref_vague(0, abc): Maybe(String)
-check! list_ref_vague(1, abc): Maybe(String)
-check! list_ref_vague(2, abc): Maybe(String)
-check! list_ref_vague(3, abc): Maybe(String)
-check! list_ref_vague(4, abc): Maybe(String)
+check! list_ref_vague(zero, abc): Maybe(String)
+check! list_ref_vague(one, abc): Maybe(String)
+check! list_ref_vague(two, abc): Maybe(String)
+check! list_ref_vague(three, abc): Maybe(String)
+check! list_ref_vague(four, abc): Maybe(String)
 ```
