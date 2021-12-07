@@ -196,6 +196,8 @@ same_as_chart! MyVector(Nat, 5) [
 # list_from_vector
 
 ``` cicada
+import { List } from "./list.md"
+
 function list_from_vector(
   implicit E: Type,
   implicit length: Nat,
@@ -204,8 +206,8 @@ function list_from_vector(
   return induction_vector(
     vector,
     (length, target) => List(E),
-    nil,
-    (vague E, head, tail, almost) => li(head, almost.tail),
+    List.null,
+    (vague E, head, tail, almost) => List.cons(head, almost.tail),
   )
 }
 ```
@@ -218,8 +220,8 @@ function list_from_vector(
 ): List(E) {
   return induction (vector) {
     (length, target) => List(E)
-    case vecnil => List.nil
-    case vec(head, tail, almost) => List.li(head, almost.tail)
+    case vecnil => List.null
+    case vec(head, tail, almost) => List.cons(head, almost.tail)
   }
 }
 ```
@@ -229,6 +231,6 @@ same_as_chart! List(Nat) [
   list_from_vector(
     the(Vector(Nat, 3), vec! [1, 2, 3])
   ),
-  li! [1, 2, 3],
+  List.cons(1, List.cons(2, List.cons(3, List.null))),
 ]
 ```

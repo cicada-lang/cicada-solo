@@ -68,18 +68,25 @@ function induction_maybe(
 }
 ```
 
+# example data
+
+``` cicada
+import { List } from "./list.md"
+
+let a: List(String) = List.cons("a", List.null)
+let ab: List(String) = List.cons("a", List.cons("b", List.null))
+let abc: List(String) = List.cons("a", List.cons("b", List.cons("c", List.null)))
+```
+
 # maybe_head
 
 ``` cicada
-import { induction_list } from "./list.md"
-
 function maybe_head(implicit E: Type, list: List(E)): Maybe(E) {
-  return induction_list(
-    list,
-    (_) => Maybe(E),
-    nothing(E),
-    (head, _tail, _almost) => just(head),
-  )
+  return induction (list) {
+    (_) => Maybe(E)
+    case null => nothing(E)
+    case cons(head, _tail, _almost) => just(head)
+  }
 }
 ```
 
@@ -95,14 +102,14 @@ function maybe_head(implicit E: Type, list: List(E)): Maybe(E) {
 
 ``` cicada
 same_as_chart! Maybe(String) [
-  maybe_head(the(List(String), li! [])),
+  maybe_head(the(List(String), List.null)),
   nothing(String),
 ]
 
 same_as_chart! Maybe(String) [
-  maybe_head(li! ["a"]),
-  maybe_head(li! ["a", "b"]),
-  maybe_head(li! ["a", "b", "c"]),
+  maybe_head(a),
+  maybe_head(ab),
+  maybe_head(abc),
   just("a"),
 ]
 ```
@@ -111,12 +118,11 @@ same_as_chart! Maybe(String) [
 
 ``` cicada
 function maybe_tail(implicit E: Type, list: List(E)): Maybe(List(E)) {
-  return induction_list(
-    list,
-    (_) => Maybe(List(E)),
-    nothing(List(E)),
-    (_head, tail, _almost) => just(tail),
-  )
+  return induction (list) {
+    (_) => Maybe(List(E))
+    case null => nothing(List(E))
+    case cons(_head, tail, _almost) => just(tail)
+  }
 }
 ```
 
@@ -132,23 +138,23 @@ function maybe_tail(implicit E: Type, list: List(E)): Maybe(List(E)) {
 
 ``` cicada
 same_as_chart! Maybe(List(String)) [
-  maybe_tail(the(List(String), li! [])),
+  maybe_tail(the(List(String), List.null)),
   nothing(List(String)),
 ]
 
 same_as_chart! Maybe(List(String)) [
-  maybe_tail(li! ["a"]),
-  just(the(List(String), li! [])),
+  maybe_tail(a),
+  just(the(List(String), List.null)),
 ]
 
 same_as_chart! Maybe(List(String)) [
-  maybe_tail(li! ["a", "b"]),
-  just(the(List(String), li! ["b"])),
+  maybe_tail(ab),
+  just(the(List(String), List.cons("b", List.null))),
 ]
 
 same_as_chart! Maybe(List(String)) [
-  maybe_tail(li! ["a", "b", "c"]),
-  just(the(List(String), li! ["b", "c"])),
+  maybe_tail(abc),
+  just(the(List(String), List.cons("b", List.cons("c", List.null)))),
 ]
 ```
 
@@ -179,11 +185,11 @@ function list_ref_direct(index: Nat, implicit E: Type, list: List(E)): Maybe(E) 
 ```
 
 ``` cicada
-list_ref_direct(0, li! ["a", "b", "c"])
-list_ref_direct(1, li! ["a", "b", "c"])
-list_ref_direct(2, li! ["a", "b", "c"])
-list_ref_direct(3, li! ["a", "b", "c"])
-list_ref_direct(4, li! ["a", "b", "c"])
+list_ref_direct(0, abc)
+list_ref_direct(1, abc)
+list_ref_direct(2, abc)
+list_ref_direct(3, abc)
+list_ref_direct(4, abc)
 ```
 
 ## list_ref_aux
@@ -231,17 +237,17 @@ function list_ref(index: Nat, implicit E: Type, list: List(E)): Maybe(E) {
 ```
 
 ``` cicada
-list_ref(0, li! ["a", "b", "c"])
-list_ref(1, li! ["a", "b", "c"])
-list_ref(2, li! ["a", "b", "c"])
-list_ref(3, li! ["a", "b", "c"])
-list_ref(4, li! ["a", "b", "c"])
+list_ref(0, abc)
+list_ref(1, abc)
+list_ref(2, abc)
+list_ref(3, abc)
+list_ref(4, abc)
 
-check! list_ref(0, li! ["a", "b", "c"]): Either(String, Trivial)
-check! list_ref(1, li! ["a", "b", "c"]): Either(String, Trivial)
-check! list_ref(2, li! ["a", "b", "c"]): Either(String, Trivial)
-check! list_ref(3, li! ["a", "b", "c"]): Either(String, Trivial)
-check! list_ref(4, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref(0, abc): Either(String, Trivial)
+check! list_ref(1, abc): Either(String, Trivial)
+check! list_ref(2, abc): Either(String, Trivial)
+check! list_ref(3, abc): Either(String, Trivial)
+check! list_ref(4, abc): Either(String, Trivial)
 ```
 
 ## list_ref_vague
@@ -263,16 +269,16 @@ function list_ref_vague(vague E: Type, index: Nat): (List(E)) -> Maybe(E) {
   )
 }
 
-list_ref_vague(vague String, 0, li! ["a", "b", "c"])
-check! list_ref_vague(vague String, 0, li! ["a", "b", "c"]): Either(String, Trivial)
+list_ref_vague(vague String, 0, abc)
+check! list_ref_vague(vague String, 0, abc): Either(String, Trivial)
 
-check! list_ref_vague(0, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref_vague(0, abc): Either(String, Trivial)
 ```
 
 ``` cicada
-check! list_ref_vague(0, li! ["a", "b", "c"]): Either(String, Trivial)
-check! list_ref_vague(1, li! ["a", "b", "c"]): Either(String, Trivial)
-check! list_ref_vague(2, li! ["a", "b", "c"]): Either(String, Trivial)
-check! list_ref_vague(3, li! ["a", "b", "c"]): Either(String, Trivial)
-check! list_ref_vague(4, li! ["a", "b", "c"]): Either(String, Trivial)
+check! list_ref_vague(0, abc): Either(String, Trivial)
+check! list_ref_vague(1, abc): Either(String, Trivial)
+check! list_ref_vague(2, abc): Either(String, Trivial)
+check! list_ref_vague(3, abc): Either(String, Trivial)
+check! list_ref_vague(4, abc): Either(String, Trivial)
 ```

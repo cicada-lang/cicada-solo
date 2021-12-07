@@ -1,1 +1,0 @@
-li(["cooked" | "cooked"], li(["eaten" | "eaten"], li(["tried-cleaning" | "tried-cleaning"], li(["understood" | "understood"], li(["slept" | "slept"], nil))))): List([_: String | String])

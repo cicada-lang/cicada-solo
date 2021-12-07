@@ -4,31 +4,31 @@ import { tester } from "../parser-tester-instance"
 
 tester.echo_stmts(`
 
-datatype __Nat {
-  __zero: __Nat
-  __add1(prev: __Nat): Nat
+datatype MyNat {
+  my_zero: MyNat
+  my_add1(prev: MyNat): Nat
 }
 
-datatype __List(E: Type) {
-  __nil: List(E)
-  __li(head: E, tail: List(E)): List(E)
+datatype List(E: Type) {
+  null: List(E)
+  cons(head: E, tail: List(E)): List(E)
 }
 
-datatype __Vector(E: Type) (length: Nat) {
-  __vecnil: Vector(E, __Nat.__zero)
-  __vec(
+datatype MyVector(E: Type) (length: Nat) {
+  null: Vector(E, MyNat.my_zero)
+  cons(
     head: E,
     implicit prev: Nat,
     tail: Vector(E, prev),
-  ): Vector(E, __Nat.__add1(prev))
+  ): Vector(E, MyNat.my_add1(prev))
 }
 
 datatype LessThan() (j: Nat, k: Nat) {
-  zero_smallest(n: Nat): LessThan(__Nat.__zero, __Nat.__add1(n))
+  zero_smallest(n: Nat): LessThan(MyNat.my_zero, MyNat.my_add1(n))
   add1_smaller(
     j: Nat, k: Nat,
     prev_smaller: LessThan(j, k),
-  ): LessThan(__Nat.__add1(j), __Nat.__add1(k))
+  ): LessThan(MyNat.my_add1(j), MyNat.my_add1(k))
 }
 
 `)

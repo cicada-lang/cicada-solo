@@ -1,2 +1,0 @@
-li("cooked", li("eaten", li("tried-cleaning", li("understood", li("slept", nil))))): List(String)
-li("cooked", li("eaten", li("tried-cleaning", li("understood", li("slept", nil))))): List(String)

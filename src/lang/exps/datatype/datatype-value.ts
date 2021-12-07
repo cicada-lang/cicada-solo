@@ -97,7 +97,10 @@ export class DatatypeValue extends Value {
     env = env.extend("motive", motive)
     const motive_core = new Exps.VarCore("motive")
 
-    let case_t = data_ctor.build_ret_t(motive_core)
+    let case_t = data_ctor.build_ret_t(
+      motive_core,
+      this.type_ctor.fixed_arg_names
+    )
 
     if (data_ctor.is_direct_positive_recursive) {
       case_t = new Exps.PiCore(

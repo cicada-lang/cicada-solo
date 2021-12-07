@@ -69,6 +69,12 @@ export class InductionCore extends Core {
       target = target.as_data()
     }
 
+    if (target instanceof Exps.DataCtorValue && target.arity !== 0) {
+      console.log(target.constructor.name)
+      console.log(target.name)
+      throw new Error("DEBUG")
+    }
+
     if (target instanceof Exps.DataValue) {
       const data_ctor = target.data_ctor
       const case_entry = case_entries.find(

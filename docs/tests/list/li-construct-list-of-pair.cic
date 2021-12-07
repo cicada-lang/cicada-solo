@@ -1,9 +1,0 @@
-the(
-  List([_: String | String]),
-  li! [
-    the([_: String | String], cons("cooked", "cooked")),
-    the([_: String | String], cons("eaten", "eaten")),
-    the([_: String | String], cons("tried-cleaning", "tried-cleaning")),
-    the([_: String | String], cons("understood", "understood")),
-    the([_: String | String], cons("slept", "slept")),
-  ])

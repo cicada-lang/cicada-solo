@@ -68,22 +68,27 @@ to denote it can only be elaborated in check-mode,
 and such function application can not be curried.
 
 ``` cicada
+datatype List(E: Type) {
+  null: List(E)
+  cons(head: E, tail: List(E)): List(E)
+}
+
 // Assume
 function my_list_cons(vague A: Type, head: A, tail: List(A)): List(A) {
-  return li(head, tail)
+  return List.cons(head, tail)
 }
 
 // Check
-check! my_list_cons(123, nil): List(Nat)
+check! my_list_cons(123, List.null): List(Nat)
 
 // Elaboration
-check! my_list_cons(vague Nat, 123, nil): List(Nat)
+check! my_list_cons(vague Nat, 123, List.null): List(Nat)
 ```
 
 1. Infer `(vague A: Type, head: A, tail: List(A)) -> List(A)` for `my_list_cons`
 2. Unify the given type `List(Nat)` with `List(A)` (the pi type's return type)
 3. The solution of `A` is `Nat`
-4. Return elaborated core expression by reifying `my_list_cons(123, nil)` to `my_list_cons(vague Nat, 123, nil)`
+4. Return elaborated core expression by reifying `my_list_cons(123, List.null)` to `my_list_cons(vague Nat, 123, List.null)`
 
 # Looking back
 

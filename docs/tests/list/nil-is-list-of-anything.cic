@@ -1,4 +1,0 @@
-the(List(Nat), nil)
-the(List(Nat), li! [])
-the(List(List(Nat)), nil)
-the(List(List(Nat)), li! [])

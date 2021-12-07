@@ -1,3 +1,12 @@
+# List
+
+``` cicada
+datatype List(E: Type) {
+  null: List(E)
+  cons(head: E, tail: List(E)): List(E)
+}
+```
+
 # vague-fn insertion -- on implicit-fn
 
 ``` cicada
@@ -7,7 +16,7 @@ check! (
   vague C,
   implicit T,
   x,
-) => cons(nil, cons(nil, cons(nil, T))): (
+) => cons(List.null, cons(List.null, cons(List.null, T))): (
   vague A: Type,
   vague B: Type,
   vague C: Type,
@@ -20,7 +29,7 @@ check! (
   vague B,
   implicit T,
   x,
-) => cons(nil, cons(nil, cons(nil, T))): (
+) => cons(List.null, cons(List.null, cons(List.null, T))): (
   vague A: Type,
   vague B: Type,
   vague C: Type,
@@ -32,7 +41,7 @@ check! (
   vague A,
   implicit T,
   x,
-) => cons(nil, cons(nil, cons(nil, T))): (
+) => cons(List.null, cons(List.null, cons(List.null, T))): (
   vague A: Type,
   vague B: Type,
   vague C: Type,
@@ -43,7 +52,7 @@ check! (
 check! (
   implicit T,
   x,
-) => cons(nil, cons(nil, cons(nil, T))): (
+) => cons(List.null, cons(List.null, cons(List.null, T))): (
   vague A: Type,
   vague B: Type,
   vague C: Type,
@@ -60,7 +69,7 @@ check! (
   vague B,
   vague C,
   vague D,
-) => cons(nil, cons(nil, cons(nil, nil))) : (
+) => cons(List.null, cons(List.null, cons(List.null, List.null))) : (
   vague A: Type,
   vague B: Type,
   vague C: Type,
@@ -71,7 +80,7 @@ check! (
   vague A,
   vague B,
   vague C,
-) => cons(nil, cons(nil, cons(nil, nil))) : (
+) => cons(List.null, cons(List.null, cons(List.null, List.null))) : (
   vague A: Type,
   vague B: Type,
   vague C: Type,
@@ -81,7 +90,7 @@ check! (
 check! (
   vague A,
   vague B,
-) => cons(nil, cons(nil, cons(nil, nil))) : (
+) => cons(List.null, cons(List.null, cons(List.null, List.null))) : (
   vague A: Type,
   vague B: Type,
   vague C: Type,
@@ -90,14 +99,14 @@ check! (
 
 check! (
   vague A,
-) => cons(nil, cons(nil, cons(nil, nil))) : (
+) => cons(List.null, cons(List.null, cons(List.null, List.null))) : (
   vague A: Type,
   vague B: Type,
   vague C: Type,
   vague D: Type,
 ) -> Pair(List(A), Pair(List(B), Pair(List(C), List(D))))
 
-check! cons(nil, cons(nil, cons(nil, nil))): (
+check! cons(List.null, cons(List.null, cons(List.null, List.null))): (
   vague A: Type,
   vague B: Type,
   vague C: Type,

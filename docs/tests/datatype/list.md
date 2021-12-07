@@ -4,39 +4,7 @@ title: List
 
 # List
 
-``` cicada wishful-thinking
-datatype List(E: Type) {
-  nil: List(E)
-  li(head: E, tail: List(E)): List(E)
-}
-```
-
 ``` cicada
-datatype MyList(E: Type) {
-  my_null: MyList(E)
-  my_cons(head: E, tail: MyList(E)): MyList(E)
-}
-
-check! MyList: (Type) -> Type
-check! MyList(Nat): Type
-
-check! MyList.my_null: MyList(Nat)
-check! MyList.my_null(vague Nat): MyList(Nat)
-
-check! MyList.my_null: MyList(String)
-check! MyList.my_null(vague String): MyList(String)
-check! MyList.my_cons(1, MyList.my_null): MyList(Nat)
-
-check! MyList.my_cons(1, MyList.my_null): MyList(Nat)
-check! MyList.my_cons(1, MyList.my_cons(2, MyList.my_null)): MyList(Nat)
-check! MyList.my_cons(1, MyList.my_cons(2, MyList.my_cons(3, MyList.my_null))): MyList(Nat)
-
-check! MyList.my_cons("a", MyList.my_null): MyList(String)
-check! MyList.my_cons("a", MyList.my_cons("b", MyList.my_null)): MyList(String)
-check! MyList.my_cons("a", MyList.my_cons("b", MyList.my_cons("c", MyList.my_null))): MyList(String)
-```
-
-``` cicada wishful-thinking
 datatype List(E: Type) {
   null: List(E)
   cons(head: E, tail: List(E)): List(E)
@@ -46,7 +14,11 @@ check! List: (Type) -> Type
 check! List(Nat): Type
 
 check! List.null: List(Nat)
+check! List.null(vague Nat): List(Nat)
+
 check! List.null: List(String)
+check! List.null(vague String): List(String)
+check! List.cons(1, List.null): List(Nat)
 
 check! List.cons(1, List.null): List(Nat)
 check! List.cons(1, List.cons(2, List.null)): List(Nat)
@@ -64,18 +36,17 @@ function induction_list(
   implicit E: Type,
   target: List(E),
   motive: (List(E)) -> Type,
-  case_of_nil: motive(nil),
-  case_of_li: (
+  case_of_null: motive(List.null),
+  case_of_cons: (
     head: E, tail: List(E),
     almost: class { tail: motive(tail) },
-  ) -> motive(li(head, tail)),
+  ) -> motive(List.cons(head, tail)),
 ): motive(target) {
-  return list_ind(
-    target,
-    motive,
-    case_of_nil,
-    (head, tail, almost_of_tail) => case_of_li(head, tail, { tail: almost_of_tail })
-  )
+  return induction (target) {
+    motive
+    case null => case_of_null
+    case cons(head, tail, almost) => case_of_cons(head, tail, almost)
+  }
 }
 ```
 
@@ -83,112 +54,72 @@ function induction_list(
 
 ``` cicada
 function length(implicit E: Type, x: List(E)): Nat {
-  return induction_list(
-    x,
-    (_) => Nat,
-    0,
-    (_head, _tail, almost) => add1(almost.tail),
-  )
-}
-```
-
-``` cicada wishful-thinking
-function length(implicit E: Type, x: List(E)): Nat {
   return induction (x) {
     (_) => Nat
-    case nil => 0
-    case li(_head, _tail, almost) => Nat.add1(almost.tail)
+    case null => 0
+    case cons(_head, _tail, almost) => add1(almost.tail)
   }
 }
 ```
 
 ``` cicada
 same_as_chart! Nat [
-  length(li! [1, 2, 3]),
-  length(li! ["a", "b", "c"]),
+  length(the(List(Nat), List.cons(1, List.cons(2, List.cons(3, List.null))))),
+  length(the(List(String), List.cons("a", List.cons("b", List.cons("c", List.null))))),
   3,
 ]
 ```
 
 # append
 
-
 ``` cicada
-function append(implicit E: Type, x: List(E), y: List(E)): List(E) {
-  return induction_list(
-    x,
-    (_) => List(E),
-    y,
-    (head, _tail, almost) => li(head, almost.tail),
-  )
-}
-```
-
-``` cicada wishful-thinking
 function append(implicit E: Type, x: List(E), y: List(E)): List(E) {
   return induction (x) {
     (_) => List(E)
-    case nil => y
-    case li(head, _tail, almost) => List.li(head, almost.tail)
+    case null => y
+    case cons(head, _tail, almost) => List.cons(head, almost.tail)
   }
 }
 ```
 
 ``` cicada
 same_as_chart! List(Nat) [
-  append(li! [1, 2, 3], li! [4, 5, 6]),
-  li! [1, 2, 3, 4, 5, 6],
+  append(
+    the(List(Nat), List.cons(1, List.cons(2, List.cons(3, List.null)))),
+    the(List(Nat), List.cons(4, List.cons(5, List.cons(6, List.null)))),
+  ),
+  List.cons(1, List.cons(2, List.cons(3, List.cons(4, List.cons(5, List.cons(6, List.null)))))),
 ]
 ```
 
 # reverse
 
 ``` cicada
-function li_end(implicit E: Type, e: E, x: List(E)): List(E) {
-  return induction_list(
-    x,
-    (_) => List(E),
-    li(e, nil),
-    (head, _tail, almost) => li(head, almost.tail)
-  )
-}
-
-function reverse(implicit E: Type, x: List(E)): List(E) {
-  return induction_list(
-    x,
-    (_) => List(E),
-    nil,
-    (head, _tail, almost) => li_end(head, almost.tail),
-  )
-}
-```
-
-``` cicada wishful-thinking
-function li_end(implicit E: Type, e: E, x: List(E)): List(E) {
+function list_cons_back(implicit E: Type, e: E, x: List(E)): List(E) {
   return induction (x) {
     (_) => List(E)
-    case nil => List.li(e, nil)
-    case li(head, _tail, almost) => List.li(head, almost.tail)
+    case null => List.cons(e, List.null)
+    case cons(head, _tail, almost) => List.cons(head, almost.tail)
   }
 }
 
 function reverse(implicit E: Type, x: List(E)): List(E) {
   return induction (x) {
     (_) => List(E)
-    case nil => List.nil
-    case li(head, _tail, almost) => li_end(head, almost.tail)
+    case null => List.null
+    case cons(head, _tail, almost) => list_cons_back(head, almost.tail)
   }
 }
 ```
 
 ``` cicada
 same_as_chart! List(Nat) [
-  li_end(4, li! [1, 2, 3]),
-  li! [1, 2, 3, 4]
+  list_cons_back(4, List.cons(1, List.cons(2, List.cons(3, List.null)))),
+  List.cons(1, List.cons(2, List.cons(3, List.cons(4, List.null))))
 ]
 
 same_as_chart! List(Nat) [
-  reverse(li! [1, 2, 3]),
-  li! [3, 2, 1],
+  reverse(the(List(Nat), List.cons(1, List.cons(2, List.cons(3, List.null))))),
+  List.cons(3, List.cons(2, List.cons(1, List.null))),
 ]
 ```

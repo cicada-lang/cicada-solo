@@ -1,3 +1,0 @@
-the(Type, List(Nat))
-the(Type, List(List(Nat)))
-the(Type, List(List(List(Nat))))

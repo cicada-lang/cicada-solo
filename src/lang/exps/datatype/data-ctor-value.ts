@@ -112,11 +112,15 @@ export class DataCtorValue extends Value {
     return { bindings, ret_t: t }
   }
 
-  build_data_pattern(): Core {
+  private build_data_pattern(fixed_arg_names: Array<string>): Core {
     let data_core: Core = new Exps.DotCore(
       new Exps.VarCore(this.type_ctor.name),
       this.name
     )
+
+    for (const fixed_arg_name of fixed_arg_names) {
+      data_core = new Exps.ApCore(data_core, new Exps.VarCore(fixed_arg_name))
+    }
 
     for (const binding of this.bindings) {
       data_core = this.build_ap_from_binding(data_core, binding)
@@ -125,8 +129,8 @@ export class DataCtorValue extends Value {
     return data_core
   }
 
-  build_ret_t(motive: Core): Core {
-    const target = this.build_data_pattern()
+  build_ret_t(motive: Core, fixed_arg_names: Array<string>): Core {
+    const target = this.build_data_pattern(fixed_arg_names)
     return this.build_case_ret_t(motive, this.ret_t, target)
   }
 

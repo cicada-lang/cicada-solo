@@ -73,6 +73,14 @@ export class Induction extends Exp {
         const case_entry = this.get_case_entry(name)
         const case_t = datatype.build_case_t(name, motive_value)
         const core = check(ctx, case_entry.exp, case_t)
+        // { // DEBUG
+        //   console.log({
+        //     msg: "[Induction.infer] checking case core entry",
+        //     name,
+        //     exp: case_entry.exp.format(),
+        //     core: core.format(),
+        //   })
+        // }
         return { ...case_entry, core }
       }
     )

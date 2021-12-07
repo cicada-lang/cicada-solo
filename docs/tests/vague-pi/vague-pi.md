@@ -1,8 +1,17 @@
+# List
+
+``` cicada
+datatype List(E: Type) {
+  null: List(E)
+  cons(head: E, tail: List(E)): List(E)
+}
+```
+
 # my_list_null
 
 ``` cicada
 function my_list_null(vague A: Type): List(A) {
-  return nil
+  return List.null
 }
 
 check! my_list_null(vague Nat): List(Nat)
@@ -16,24 +25,24 @@ check! my_list_null: List(String)
 
 ``` cicada
 function my_list_cons(vague A: Type, head: A, tail: List(A)): List(A) {
-  return li(head, tail)
+  return List.cons(head, tail)
 }
 
-check! my_list_cons(vague Nat, 123, nil): List(Nat)
+check! my_list_cons(vague Nat, 123, List.null): List(Nat)
 check! my_list_cons(vague Nat): (Nat, List(Nat)) -> List(Nat)
-check! my_list_cons(vague Nat)(123, nil): List(Nat)
+check! my_list_cons(vague Nat)(123, List.null): List(Nat)
 
-check! my_list_cons(123, nil): List(Nat)
-check! my_list_cons("a", nil): List(String)
-check! my_list_cons("a", my_list_cons("b", nil)): List(String)
-check! my_list_cons("a", my_list_cons("b", my_list_cons("c", nil))): List(String)
+check! my_list_cons(123, List.null): List(Nat)
+check! my_list_cons("a", List.null): List(String)
+check! my_list_cons("a", my_list_cons("b", List.null)): List(String)
+check! my_list_cons("a", my_list_cons("b", my_list_cons("c", List.null))): List(String)
 ```
 
 # my_list_null_pair
 
 ``` cicada
 function my_list_null_pair(vague A: Type, vague B: Type): Pair(List(A), List(B)) {
-  return cons(nil, nil)
+  return cons(List.null, List.null)
 }
 
 check! my_list_null_pair(vague Nat, vague String): Pair(List(Nat), List(String))
@@ -64,7 +73,7 @@ function my_list_null_and_typeof_pair(
   implicit T: Type,
   x: T,
 ): Pair(List(A), Type) {
-  return cons(nil, T)
+  return cons(List.null, T)
 }
 
 check! my_list_null_and_typeof_pair(123): Pair(List(String), Type)
@@ -84,14 +93,14 @@ function my_list_cons_and_typeof_pair(
   implicit T: Type,
   x: T,
 ): Pair(List(A), Type) {
-  return cons(li(head, tail), T)
+  return cons(List.cons(head, tail), T)
 }
 
-check! my_list_cons_and_typeof_pair("a", nil, 123): Pair(List(String), Type)
-check! my_list_cons_and_typeof_pair("a", nil, implicit Nat, 123): Pair(List(String), Type)
+check! my_list_cons_and_typeof_pair("a", List.null, 123): Pair(List(String), Type)
+check! my_list_cons_and_typeof_pair("a", List.null, implicit Nat, 123): Pair(List(String), Type)
 
-check! my_list_cons_and_typeof_pair(1, nil, "abc"): Pair(List(Nat), Type)
-check! my_list_cons_and_typeof_pair(1, nil, implicit String, "abc"): Pair(List(Nat), Type)
+check! my_list_cons_and_typeof_pair(1, List.null, "abc"): Pair(List(Nat), Type)
+check! my_list_cons_and_typeof_pair(1, List.null, implicit String, "abc"): Pair(List(Nat), Type)
 ```
 
 # my_list_null_pair_and_typeof_pair
@@ -103,7 +112,7 @@ function my_list_null_pair_and_typeof_pair(
   implicit T: Type,
   x: T,
 ): Pair(Pair(List(A), List(B)), Type) {
-  return cons(cons(nil, nil), T)
+  return cons(cons(List.null, List.null), T)
 }
 
 check! my_list_null_pair_and_typeof_pair(123): Pair(Pair(List(String), List(String)), Type)

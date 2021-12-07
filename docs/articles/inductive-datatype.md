@@ -123,10 +123,10 @@ induction (target) {
 
 ## List
 
-``` cicada wishful-thinking
+``` cicada
 datatype List(E: Type) {
-  nil: List(E)
-  li(head: E, tail: List(E)): List(E)
+  null: List(E)
+  cons(head: E, tail: List(E)): List(E)
 }
 ```
 
@@ -146,11 +146,11 @@ let ind_list_t = (
   implicit E: Type,
   target: List(E),
   motive: (List(E)) -> Type,
-  case_of_nil: motive(nil),
-  case_of_li: (
+  case_of_null: motive(List.null),
+  case_of_cons: (
     head: E, tail: List(E),
     almost_of_tail: motive(tail),
-  ) -> motive(li(head, tail)),
+  ) -> motive(List.cons(head, tail)),
 ) -> motive(target)
 ```
 

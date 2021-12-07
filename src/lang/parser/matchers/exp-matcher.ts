@@ -127,21 +127,6 @@ export function operator_matcher(tree: pt.Tree): Exp {
         exp_matcher(step),
         { span }
       ),
-    "operator:list_ind": ({ target, motive, base, step }, { span }) =>
-      new Exps.ListInd(
-        exp_matcher(target),
-        exp_matcher(motive),
-        exp_matcher(base),
-        exp_matcher(step),
-        { span }
-      ),
-    "operator:list_rec": ({ target, base, step }, { span }) =>
-      new Exps.ListRec(
-        exp_matcher(target),
-        exp_matcher(base),
-        exp_matcher(step),
-        { span }
-      ),
     "operator:vector_head": ({ target }, { span }) =>
       new Exps.VectorHead(exp_matcher(target), { span }),
     "operator:vector_tail": ({ target }, { span }) =>
@@ -282,19 +267,6 @@ export function operand_matcher(tree: pt.Tree): Exp {
         return nat_from_number(n, { span })
       }
     },
-    "operand:list": ({ elem_t }, { span }) =>
-      new Exps.List(exp_matcher(elem_t), { span }),
-    "operand:nil": (_, { span }) => new Exps.Nil({ span }),
-    "operand:nil_sugar": (_, { span }) => new Exps.Nil({ span }),
-    "operand:li": ({ head, tail }, { span }) =>
-      new Exps.Li(exp_matcher(head), exp_matcher(tail), { span }),
-    "operand:li_sugar": ({ exps }, { span }) =>
-      exps_matcher(exps)
-        .reverse()
-        .reduce(
-          (list, exp) => new Exps.Li(exp, list, { span }),
-          new Exps.Nil({ span })
-        ),
     "operand:vector": ({ elem_t, length }, { span }) =>
       new Exps.Vector(exp_matcher(elem_t), exp_matcher(length), { span }),
     "operand:vecnil": (_, { span }) => new Exps.Vecnil({ span }),

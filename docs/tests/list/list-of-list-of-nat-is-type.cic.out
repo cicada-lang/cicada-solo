@@ -1,3 +1,0 @@
-List(Nat): Type
-List(List(Nat)): Type
-List(List(List(Nat))): Type
