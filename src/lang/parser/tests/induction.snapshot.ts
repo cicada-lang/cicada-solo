@@ -3,9 +3,9 @@ import { tester } from "../parser-tester-instance"
 tester.echo_stmts(`
 
 induction (x) {
-  (_) => MyNat
-  case my_zero => y
-  case my_add1(_prev, almost) => MyNat.my_add1(almost.prev)
+  (_) => Nat
+  case zero => y
+  case add1(_prev, almost) => Nat.add1(almost.prev)
 }
 
 induction (x) {
