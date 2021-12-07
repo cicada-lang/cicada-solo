@@ -1,4 +1,3 @@
-- remove built-in `Either`
 - remove syntax sugar for `Nat`
 - remove built-in `Nat`
 - remove built-in `Vector`

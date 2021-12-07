@@ -54,12 +54,25 @@ export class MultiAp extends Exp {
         )
         return check(ctx, next_multi_ap, t)
       } else {
-        return inferred.t.vague_inserter.insert_vague_ap(
+        const result = inferred.t.vague_inserter.insert_vague_ap(
           ctx,
           inferred.core,
           this.arg_entries,
           t
         )
+
+        // { // DEBUG
+        //   console.log({
+        //     msg: "[MultiAp.check]",
+        //     target: this.target.format(),
+        //     arg_entries: this.arg_entries
+        //       .map((arg_entry) => `${arg_entry.kind} ${arg_entry.exp.format()}`)
+        //       .join(", "),
+        //     result: result.format(),
+        //   })
+        // }
+
+        return result
       }
     }
 

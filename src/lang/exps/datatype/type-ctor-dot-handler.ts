@@ -45,7 +45,7 @@ export class TypeCtorDotHandler extends DotHandler {
     }
 
     let t_core = data_ctor.t
-    for (const [name, arg_t] of Object.entries(this.target.fixed)) {
+    for (const [name, arg_t] of Object.entries(this.target.fixed).reverse()) {
       t_core = new Exps.VaguePiCore(name, arg_t, t_core)
     }
 

@@ -57,7 +57,7 @@ export class DatatypeValue extends Value {
     }
 
     let datatype_core: Core = new Exps.VarCore(this.type_ctor.name)
-    for (const arg_name of [...this.type_ctor.arg_names].reverse()) {
+    for (const arg_name of this.type_ctor.arg_names) {
       datatype_core = new Exps.ApCore(datatype_core, new Exps.VarCore(arg_name))
     }
 

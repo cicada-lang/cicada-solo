@@ -87,7 +87,7 @@ export class VagueInserter {
     return result_core
   }
 
-  collect_vague_ap_entries(
+  private collect_vague_ap_entries(
     ctx: Ctx,
     solution: Solution,
     number_of_solved_args: number,

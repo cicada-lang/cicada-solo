@@ -228,8 +228,8 @@ induction (target) {
 
 ## Either
 
-``` cicada wishful-thinking
-datatype Either(L, R) {
+``` cicada
+datatype Either(L: Type, R: Type) {
   inl(left: L): Either(L, R)
   inr(right: R): Either(L, R)
 }
@@ -241,8 +241,8 @@ let either_ind_t = (
   implicit R: Type,
   target: Either(L, R),
   motive: (Either(L, R)) -> Type,
-  case_of_inl: (left: L) -> motive(inl(left)),
-  case_of_inr: (right: R) -> motive(inr(right)),
+  case_of_inl: (left: L) -> motive(Either.inl(left)),
+  case_of_inr: (right: R) -> motive(Either.inr(right)),
 ) -> motive(target)
 ```
 

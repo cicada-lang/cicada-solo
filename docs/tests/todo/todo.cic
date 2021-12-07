@@ -1,3 +1,8 @@
+datatype Either(L: Type, R: Type) {
+  inl(left: L): Either(L, R)
+  inr(right: R): Either(L, R)
+}
+
 let a: Nat = @TODO "A trivial Nat"
 let b: Trivial = @TODO "It's not Trivial"
 let c: Absurd = @TODO "Absurd!"

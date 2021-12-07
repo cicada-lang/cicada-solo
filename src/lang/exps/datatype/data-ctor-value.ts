@@ -119,7 +119,10 @@ export class DataCtorValue extends Value {
     )
 
     for (const fixed_arg_name of fixed_arg_names) {
-      data_core = new Exps.ApCore(data_core, new Exps.VarCore(fixed_arg_name))
+      data_core = new Exps.VagueApCore(
+        data_core,
+        new Exps.VarCore(fixed_arg_name)
+      )
     }
 
     for (const binding of this.bindings) {

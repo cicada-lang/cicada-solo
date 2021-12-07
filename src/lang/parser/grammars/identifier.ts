@@ -36,10 +36,6 @@ const preserved = [
   "sole",
   "Absurd",
   "absurd_ind",
-  "Either",
-  "inl",
-  "inr",
-  "either_ind",
   "String",
   "Type",
 ]

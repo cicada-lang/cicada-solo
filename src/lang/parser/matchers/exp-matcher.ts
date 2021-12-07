@@ -149,17 +149,6 @@ export function operator_matcher(tree: pt.Tree): Exp {
       ),
     "operator:absurd_ind": ({ target, motive }, { span }) =>
       new Exps.AbsurdInd(exp_matcher(target), exp_matcher(motive), { span }),
-    "operator:either_ind": (
-      { target, motive, base_left, base_right },
-      { span }
-    ) =>
-      new Exps.EitherInd(
-        exp_matcher(target),
-        exp_matcher(motive),
-        exp_matcher(base_left),
-        exp_matcher(base_right),
-        { span }
-      ),
     "operator:the": ({ t, exp }, { span }) =>
       new Exps.The(exp_matcher(t), exp_matcher(exp), { span }),
     "operator:is": ({ t, exp }, { span }) =>
@@ -298,12 +287,6 @@ export function operand_matcher(tree: pt.Tree): Exp {
       new Exps.Quote(pt.trim_boundary(pt.str(value), 1), { span }),
     "operand:todo": ({ value }, { span }) =>
       new Exps.Todo(pt.trim_boundary(pt.str(value), 1), { span }),
-    "operand:either": ({ left_t, right_t }, { span }) =>
-      new Exps.Either(exp_matcher(left_t), exp_matcher(right_t), { span }),
-    "operand:inl": ({ left }, { span }) =>
-      new Exps.Inl(exp_matcher(left), { span }),
-    "operand:inr": ({ right }, { span }) =>
-      new Exps.Inr(exp_matcher(right), { span }),
     "operand:type": (_, { span }) => new Exps.Type({ span }),
   })(tree)
 }
