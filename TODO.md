@@ -139,7 +139,7 @@
 # bug
 
 - [bug] in `02.md`, in `nat_ind`'s definition, if return `T` instead of `motive(n)`,
-  the error report show some bug about the scope.
+  the error report show some bugs about the scope.
 
 - [bug] `DatatypeValue.build_case_t` -- fix the use of the generated names -- `motive` and `almost`
 
