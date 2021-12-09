@@ -1,6 +1,7 @@
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ExpTrace } from "../../errors"
+import { Solution } from "../../solution"
 import { check, Exp } from "../../exp"
 import * as Exps from "../../exps"
 import { check_conversion, readback, Value } from "../../value"
@@ -122,5 +123,20 @@ export class FulfilledClsValue extends Exps.ClsValue {
       ctx.extend(fresh_name, this.field_t, this.field),
       [...renamings, { field_name: this.field_name, local_name: fresh_name }]
     )
+  }
+
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
+    if (!(that instanceof Exps.FulfilledClsValue)) {
+      return Solution.failure
+    }
+
+    if (!(this.field_name !== that.field_name)) {
+      return Solution.failure
+    }
+
+    return solution
+      .unify_type(ctx, this.field_t, that.field_t)
+      .unify(ctx, this.field_t, this.field, that.field)
+      .unify_type(ctx, this.rest_t, that.rest_t)
   }
 }

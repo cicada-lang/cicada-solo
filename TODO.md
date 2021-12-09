@@ -1,7 +1,5 @@
 # unify
 
-- `Value.unify` -- cls/fulfilled-cls-value.ts
-
 - `Value.unify` -- cls/obj-value.ts
 
 # prelude
