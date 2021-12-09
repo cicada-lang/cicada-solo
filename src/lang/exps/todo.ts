@@ -31,12 +31,7 @@ export class Todo extends Exp {
     const t_format = ctx.highlight("code", t_core.format())
     const head = ctx.highlight("warn", "@TODO")
     const note = ctx.highlight("note", this.note)
-    ctx.todo([
-      //
-      `${head} ${note}`,
-      `  ${t_format}`,
-    ])
-
+    ctx.todo(`${head} ${note}\n  ${t_format}`)
     return new Exps.TodoCore(this.note, t)
   }
 }

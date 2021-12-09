@@ -39,11 +39,8 @@ export abstract class Ctx {
     }
   }
 
-  todo(lines: Array<string>): void {
-    this.broadcast({
-      tag: "todo",
-      msg: lines.join("\n"),
-    })
+  todo(msg: string): void {
+    this.broadcast({ tag: "todo", msg })
   }
 
   freshen(name: string): string {
