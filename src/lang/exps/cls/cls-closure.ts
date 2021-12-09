@@ -1,19 +1,21 @@
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
+import { Closure } from "../closure"
 
-export class ClsClosure {
+export class ClsClosure extends Closure {
   env: Env
-  local_name: string
-  rest_t: Exps.ClsCore
+  name: string
+  ret_t: Exps.ClsCore
 
-  constructor(env: Env, local_name: string, rest_t: Exps.ClsCore) {
+  constructor(env: Env, name: string, ret_t: Exps.ClsCore) {
+    super(env, name, ret_t)
     this.env = env
-    this.local_name = local_name
-    this.rest_t = rest_t
+    this.name = name
+    this.ret_t = ret_t
   }
 
   apply(value: Value): Exps.ClsValue {
-    return this.rest_t.evaluate(this.env.extend(this.local_name, value))
+    return this.ret_t.evaluate(this.env.extend(this.name, value))
   }
 }

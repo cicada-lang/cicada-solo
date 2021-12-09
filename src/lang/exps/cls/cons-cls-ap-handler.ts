@@ -16,7 +16,7 @@ export class ConsClsApHandler extends ApHandler {
   apply(arg: Value): Exps.ClsValue {
     return new Exps.FulfilledClsValue(
       this.target.field_name,
-      this.target.rest_t_cl.local_name,
+      this.target.rest_t_cl.name,
       this.target.field_t,
       arg,
       this.target.rest_t_cl.apply(arg)

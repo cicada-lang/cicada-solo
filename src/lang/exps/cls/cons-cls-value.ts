@@ -24,7 +24,7 @@ export class ConsClsValue extends Exps.ClsValue {
   ap_handler = new ConsClsApHandler(this)
 
   get field_names(): Array<string> {
-    return [this.field_name, ...this.rest_t_cl.rest_t.field_names]
+    return [this.field_name, ...this.rest_t_cl.ret_t.field_names]
   }
 
   check_properties(ctx: Ctx, properties: Map<string, Exp>): Map<string, Core> {
@@ -47,10 +47,7 @@ export class ConsClsValue extends Exps.ClsValue {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
-      const fresh_name = ut.freshen(
-        new Set(ctx.names),
-        this.rest_t_cl.local_name
-      )
+      const fresh_name = ut.freshen(new Set(ctx.names), this.rest_t_cl.name)
       const variable = new Exps.NotYetValue(
         this.field_t,
         new Exps.VarNeutral(fresh_name)
@@ -127,8 +124,16 @@ export class ConsClsValue extends Exps.ClsValue {
       return Solution.failure
     }
 
-    throw new Error("TODO")
+    // TODO check `field_name`
 
-    // return solution
+    return solution
+      .unify_type(ctx, this.field_t, that.field_t)
+      .unify_type_closure(
+        ctx,
+        this.field_t,
+        this.rest_t_cl,
+        that.field_t,
+        that.rest_t_cl
+      )
   }
 }

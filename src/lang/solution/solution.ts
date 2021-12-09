@@ -167,14 +167,11 @@ export abstract class Solution {
     const names = new Set([...this.names, x.name, y.name])
     const fresh_name = ut.freshen(names, x.name)
     const variable = new Exps.VarNeutral(fresh_name)
-    const this_variable = new Exps.NotYetValue(x_arg_t, variable)
-    const that_variable = new Exps.NotYetValue(y_arg_t, variable)
-
     return this.unify_type(ctx, x_arg_t, y_arg_t).unify(
       ctx,
       ret_t,
-      x.apply(this_variable),
-      y.apply(that_variable)
+      x.apply(new Exps.NotYetValue(x_arg_t, variable)),
+      y.apply(new Exps.NotYetValue(y_arg_t, variable))
     )
   }
 
