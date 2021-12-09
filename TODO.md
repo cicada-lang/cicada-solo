@@ -1,4 +1,3 @@
-- extract module `data-ctor-binding`
 - save original bindings in `TypeCtorCore.data_ctors`
 - `DataCtorValue.build_almost_t` should use name from original bindings
 

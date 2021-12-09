@@ -93,6 +93,7 @@ export * from "./str/quote"
 export * from "./str/quote-core"
 export * from "./str/quote-value"
 
+export * from "./datatype/data-ctor-binding"
 export * from "./datatype/type-ctor"
 export * from "./datatype/type-ctor-core"
 export * from "./datatype/type-ctor-value"

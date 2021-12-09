@@ -6,12 +6,6 @@ import { Solution } from "../../solution"
 import { readback, Value } from "../../value"
 import { DataCtorApHandler } from "./data-ctor-ap-handler"
 
-export type DataCtorCoreBinding = {
-  kind: Exps.ArgKind
-  name: string
-  core: Core
-}
-
 export class DataCtorValue extends Value {
   type_ctor: Exps.TypeCtorValue
   name: string
@@ -71,7 +65,7 @@ export class DataCtorValue extends Value {
     }
   }
 
-  get bindings(): Array<DataCtorCoreBinding> {
+  get bindings(): Array<Exps.DataCtorCoreBinding> {
     return this.split_type().bindings
   }
 
@@ -79,8 +73,8 @@ export class DataCtorValue extends Value {
     return this.split_type().ret_t
   }
 
-  split_type(): { bindings: Array<DataCtorCoreBinding>; ret_t: Core } {
-    const bindings: Array<DataCtorCoreBinding> = []
+  split_type(): { bindings: Array<Exps.DataCtorCoreBinding>; ret_t: Core } {
+    const bindings: Array<Exps.DataCtorCoreBinding> = []
     let t = this.t
     while (true) {
       if (t instanceof Exps.PiCore) {
@@ -174,7 +168,7 @@ export class DataCtorValue extends Value {
     return binding.name
   }
 
-  private get direct_positive_recursive_bindings(): Array<DataCtorCoreBinding> {
+  private get direct_positive_recursive_bindings(): Array<Exps.DataCtorCoreBinding> {
     return this.bindings.filter((binding) =>
       this.is_direct_positive_recursive_arg_t(binding.core)
     )
@@ -214,7 +208,7 @@ export class DataCtorValue extends Value {
 
   private build_ap_from_binding(
     core: Core,
-    binding: DataCtorCoreBinding
+    binding: Exps.DataCtorCoreBinding
   ): Core {
     switch (binding.kind) {
       case "plain":
