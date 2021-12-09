@@ -130,10 +130,10 @@ export class TypeCtor extends Exp {
       )
   }
 
-  private infer_data_ctors(ctx: Ctx): Record<string, Core> {
-    const data_ctors: Record<string, Core> = {}
+  private infer_data_ctors(ctx: Ctx): Record<string, { t: Core }> {
+    const data_ctors: Record<string, { t: Core }> = {}
     for (const [name, t] of Object.entries(this.data_ctors)) {
-      data_ctors[name] = check(ctx, t, new Exps.TypeValue())
+      data_ctors[name] = { t: check(ctx, t, new Exps.TypeValue()) }
     }
 
     return data_ctors

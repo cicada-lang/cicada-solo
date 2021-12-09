@@ -1,4 +1,4 @@
-- save original bindings in `TypeCtorCore.data_ctors`
+- `TypeCtorCore.data_ctors` has `original_bindings`
 - `DataCtorValue.build_almost_t` should use name from original bindings
 
 # prelude
@@ -11,7 +11,7 @@
 > If the ambition of this project is too much pressure,
 >   use refactoring as a therapy.
 
-- [question] Is it ok that `TypeCtorValue` can be `readback` to `TypeCtor`,
+- [question] Is it ok that `TypeCtorValue` should be `readback` to `TypeCtorCore`,
   while `DatatypeValue` and `CurriedTypeCtorValue` can only be `readback` to `ApCore`?
 
 - [question] Note that, when we have built-in `Vector`,

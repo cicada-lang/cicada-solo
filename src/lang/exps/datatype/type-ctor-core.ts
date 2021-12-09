@@ -8,13 +8,13 @@ export class TypeCtorCore extends Core {
   name: string
   fixed: Record<string, Core>
   varied: Record<string, Core>
-  data_ctors: Record<string, Core>
+  data_ctors: Record<string, { t: Core }>
 
   constructor(
     name: string,
     fixed: Record<string, Core>,
     varied: Record<string, Core>,
-    data_ctors: Record<string, Core>
+    data_ctors: Record<string, { t: Core }>
   ) {
     super()
     this.name = name
@@ -79,7 +79,7 @@ export class TypeCtorCore extends Core {
 
   private data_ctors_alpha_format(ctx: AlphaCtx): string {
     return Object.entries(this.data_ctors)
-      .map(([name, t]) => `${name}: ${t.alpha_format(ctx)}`)
+      .map(([name, { t }]) => `${name}: ${t.alpha_format(ctx)}`)
       .join("\n")
   }
 }

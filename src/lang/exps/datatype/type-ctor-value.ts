@@ -19,7 +19,7 @@ export class TypeCtorValue extends Value {
     name: string,
     fixed: Record<string, Core>,
     varied: Record<string, Core>,
-    data_ctors: Record<string, Core>,
+    data_ctors: Record<string, { t: Core }>,
     env: Env
   ) {
     super()
@@ -31,8 +31,8 @@ export class TypeCtorValue extends Value {
     this.env = env.extend(this.name, this)
 
     this.data_ctors = {}
-    for (const [name, ret_t] of Object.entries(data_ctors)) {
-      this.data_ctors[name] = new Exps.DataCtorValue(this, name, ret_t)
+    for (const [name, { t }] of Object.entries(data_ctors)) {
+      this.data_ctors[name] = new Exps.DataCtorValue(this, name, t)
     }
   }
 
@@ -131,14 +131,15 @@ export class TypeCtorValue extends Value {
       const varied = this.readback_varied(result.ctx)
       // NOTE The `name` is already bound to this `TypeCtorValue` in `ctx`,
       //   we need to make it `NotYetValue` to avoid infinite recursion.
-      const ctors = this.readback_data_ctors(
+      const data_ctors = this.readback_data_ctors(
         result.ctx.define(
           this.name,
           self_type,
           new Exps.NotYetValue(self_type, new Exps.VarNeutral(this.name))
         )
       )
-      return new Exps.TypeCtorCore(this.name, result.fixed, varied, ctors)
+
+      return new Exps.TypeCtorCore(this.name, result.fixed, varied, data_ctors)
     }
   }
 
@@ -203,10 +204,10 @@ export class TypeCtorValue extends Value {
     return varied
   }
 
-  private readback_data_ctors(ctx: Ctx): Record<string, Core> {
-    const data_ctors: Record<string, Core> = {}
+  private readback_data_ctors(ctx: Ctx): Record<string, { t: Core }> {
+    const data_ctors: Record<string, { t: Core }> = {}
     for (const [name, data_ctor] of Object.entries(this.data_ctors)) {
-      data_ctors[name] = data_ctor.readback_t(ctx)
+      data_ctors[name] = { t: data_ctor.readback_t(ctx) }
     }
 
     return data_ctors
