@@ -1,5 +1,12 @@
+- `TypeCtor.data_ctor_bindings`
 - `TypeCtorCore.data_ctors` has `original_bindings`
 - `DataCtorValue.build_almost_t` should use name from original bindings
+
+  - Note about the `almost` field name.
+
+    When you define a recursive `datatype`
+    the name of the **direct positive recursive** argument
+    will be exposed as part of the public interface of the `datatype`.
 
 # prelude
 
