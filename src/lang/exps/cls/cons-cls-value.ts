@@ -124,7 +124,9 @@ export class ConsClsValue extends Exps.ClsValue {
       return Solution.failure
     }
 
-    // TODO check `field_name`
+    if (!(this.field_name !== that.field_name)) {
+      return Solution.failure
+    }
 
     return solution
       .unify_type(ctx, this.field_t, that.field_t)

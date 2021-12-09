@@ -1,6 +1,5 @@
 # unify
 
-- `Value.unify` -- cls/cons-cls-value.ts -- fix `08.md`
 - `Value.unify` -- cls/fulfilled-cls-value.ts
 
 - `Value.unify` -- cls/obj-value.ts
