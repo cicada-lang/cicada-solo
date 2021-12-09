@@ -1,7 +1,5 @@
 # unify
 
-- extract `Solution.unify_closure` & `Solution.unify_type_closure`
-
 - `Value.unify` -- cls/cons-cls-value.ts -- fix `08.md`
 - `Value.unify` -- cls/fulfilled-cls-value.ts
 

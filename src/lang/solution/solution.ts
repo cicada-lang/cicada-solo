@@ -1,3 +1,4 @@
+import * as ut from "../../ut"
 import { Ctx } from "../ctx"
 import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
@@ -155,11 +156,35 @@ export abstract class Solution {
     return solution
   }
 
-  unify_closure(ctx: Ctx, t: Value, x: Closure, y: Closure): Solution {
-    throw new Error("TODO")
+  unify_closure(
+    ctx: Ctx,
+    ret_t: Value,
+    x_arg_t: Value,
+    x: Closure,
+    y_arg_t: Value,
+    y: Closure
+  ): Solution {
+    const names = new Set([...this.names, x.name, y.name])
+    const fresh_name = ut.freshen(names, x.name)
+    const variable = new Exps.VarNeutral(fresh_name)
+    const this_variable = new Exps.NotYetValue(x_arg_t, variable)
+    const that_variable = new Exps.NotYetValue(y_arg_t, variable)
+
+    return this.unify_type(ctx, x_arg_t, y_arg_t).unify(
+      ctx,
+      ret_t,
+      x.apply(this_variable),
+      y.apply(that_variable)
+    )
   }
 
-  unify_type_closure(ctx: Ctx, x: Closure, y: Closure): Solution {
-    throw new Error("TODO")
+  unify_type_closure(
+    ctx: Ctx,
+    x_arg_t: Value,
+    x: Closure,
+    y_arg_t: Value,
+    y: Closure
+  ): Solution {
+    return this.unify_closure(ctx, new Exps.TypeValue(), x_arg_t, x, y_arg_t, y)
   }
 }

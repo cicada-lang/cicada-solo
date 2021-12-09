@@ -1,5 +1,4 @@
 import * as Exps from ".."
-import * as ut from "../../../ut"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import { Solution } from "../../solution"
@@ -62,21 +61,14 @@ export class ImplicitPiValue extends Value implements ReadbackEtaExpansion {
       return Solution.failure
     }
 
-    solution = solution.unify_type(ctx, this.arg_t, that.arg_t)
-    if (Solution.failure_p(solution)) return solution
-    const names = new Set([
-      ...solution.names,
-      this.ret_t_cl.name,
-      that.ret_t_cl.name,
-    ])
-    const fresh_name = ut.freshen(names, this.ret_t_cl.name)
-    const variable = new Exps.VarNeutral(fresh_name)
-    const this_variable = new Exps.NotYetValue(this.arg_t, variable)
-    const that_variable = new Exps.NotYetValue(that.arg_t, variable)
-    return solution.unify_type(
-      ctx,
-      this.ret_t_cl.apply(this_variable),
-      that.ret_t_cl.apply(that_variable)
-    )
+    return solution
+      .unify_type(ctx, this.arg_t, that.arg_t)
+      .unify_type_closure(
+        ctx,
+        this.arg_t,
+        this.ret_t_cl,
+        that.arg_t,
+        that.ret_t_cl
+      )
   }
 }

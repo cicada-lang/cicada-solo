@@ -1,4 +1,3 @@
-import * as ut from "../../../ut"
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
@@ -51,22 +50,14 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
       return Solution.failure
     }
 
-    const names = new Set([
-      ...solution.names,
-      this.cdr_t_cl.name,
-      that.cdr_t_cl.name,
-    ])
-    const fresh_name = ut.freshen(names, this.cdr_t_cl.name)
-    const variable = new Exps.VarNeutral(fresh_name)
-    const this_variable = new Exps.NotYetValue(this.car_t, variable)
-    const that_variable = new Exps.NotYetValue(that.car_t, variable)
-
     return solution
       .unify_type(ctx, this.car_t, that.car_t)
-      .unify_type(
+      .unify_type_closure(
         ctx,
-        this.cdr_t_cl.apply(this_variable),
-        that.cdr_t_cl.apply(that_variable)
+        this.car_t,
+        this.cdr_t_cl,
+        that.car_t,
+        that.cdr_t_cl
       )
   }
 }
