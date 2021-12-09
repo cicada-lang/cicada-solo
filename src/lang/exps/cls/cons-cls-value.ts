@@ -4,6 +4,7 @@ import { Ctx } from "../../ctx"
 import { ExpTrace } from "../../errors"
 import { check, Exp } from "../../exp"
 import * as Exps from "../../exps"
+import { Solution } from "../../solution"
 import { readback, Value } from "../../value"
 import { ClsClosure } from "./cls-closure"
 import { ConsClsApHandler } from "./cons-cls-ap-handler"
@@ -119,5 +120,15 @@ export class ConsClsValue extends Exps.ClsValue {
         ...renamings,
         { field_name: this.field_name, local_name: fresh_name },
       ])
+  }
+
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
+    if (!(that instanceof Exps.ConsClsValue)) {
+      return Solution.failure
+    }
+
+    throw new Error("TODO")
+
+    // return solution
   }
 }

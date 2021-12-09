@@ -51,8 +51,6 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
       return Solution.failure
     }
 
-    solution = solution.unify_type(ctx, this.car_t, that.car_t)
-    if (Solution.failure_p(solution)) return solution
     const names = new Set([
       ...solution.names,
       this.cdr_t_cl.name,
@@ -62,10 +60,13 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
     const variable = new Exps.VarNeutral(fresh_name)
     const this_variable = new Exps.NotYetValue(this.car_t, variable)
     const that_variable = new Exps.NotYetValue(that.car_t, variable)
-    return solution.unify_type(
-      ctx,
-      this.cdr_t_cl.apply(this_variable),
-      that.cdr_t_cl.apply(that_variable)
-    )
+
+    return solution
+      .unify_type(ctx, this.car_t, that.car_t)
+      .unify_type(
+        ctx,
+        this.cdr_t_cl.apply(this_variable),
+        that.cdr_t_cl.apply(that_variable)
+      )
   }
 }

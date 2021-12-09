@@ -1,9 +1,11 @@
 import { Ctx } from "../ctx"
 import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
+import { Closure } from "../exps/closure"
 import { Neutral } from "../neutral"
 import { Normal } from "../normal"
 import { expect, readback, Value } from "../value"
+import { FailureSolution } from "../solution"
 
 export abstract class Solution {
   abstract extend(name: string, value: Value): Solution
@@ -101,14 +103,6 @@ export abstract class Solution {
     }
   }
 
-  unify_neutral(ctx: Ctx, x: Neutral, y: Neutral): Solution {
-    return x.unify_neutral(this, ctx, y)
-  }
-
-  unify_normal(ctx: Ctx, x: Normal, y: Normal): Solution {
-    return x.unify_normal(this, ctx, y)
-  }
-
   unify_or_fail(ctx: Ctx, t: Value, left: Value, right: Value): Solution {
     const solution = this.unify(ctx, t, left, right)
     if (Solution.failure_p(solution)) {
@@ -124,6 +118,14 @@ export abstract class Solution {
     }
 
     return solution
+  }
+
+  unify_neutral(ctx: Ctx, x: Neutral, y: Neutral): Solution {
+    return x.unify_neutral(this, ctx, y)
+  }
+
+  unify_normal(ctx: Ctx, x: Normal, y: Normal): Solution {
+    return x.unify_normal(this, ctx, y)
   }
 
   unify_args(
@@ -152,10 +154,18 @@ export abstract class Solution {
 
     return solution
   }
+
+  unify_closure(ctx: Ctx, t: Value, x: Closure, y: Closure): Solution {
+    throw new Error("TODO")
+  }
+
+  unify_type_closure(ctx: Ctx, x: Closure, y: Closure): Solution {
+    throw new Error("TODO")
+  }
 }
 
 class ExtendSolution extends Solution {
-  // TODO Should `Subst` also contains type of value -- like `Ctx`?
+  // TODO Should `Solution` also contains type of value -- like `Ctx`?
   name: string
   value: Value
   rest: Solution
@@ -189,18 +199,6 @@ class EmptySolution extends Solution {
 
   extend(name: string, value: Value): Solution {
     return new ExtendSolution(name, value, this)
-  }
-
-  find(name: string): Value | undefined {
-    return undefined
-  }
-}
-
-class FailureSolution extends Solution {
-  names = []
-
-  extend(name: string, value: Value): Solution {
-    return this
   }
 
   find(name: string): Value | undefined {
