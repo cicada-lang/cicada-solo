@@ -1,10 +1,9 @@
 # unify
 
-- `Value.unify` -- cls/nil-cls-value.ts
-- `Value.unify` -- cls/cls-value.ts
 - `Value.unify` -- cls/cons-cls-value.ts -- fix `08.md`
-- `Value.unify` -- cls/obj-value.ts
 - `Value.unify` -- cls/fulfilled-cls-value.ts
+
+- `Value.unify` -- cls/obj-value.ts
 
 # prelude
 

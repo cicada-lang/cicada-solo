@@ -3,6 +3,7 @@ import { Ctx } from "../../ctx"
 import { ExpTrace } from "../../errors"
 import { Exp } from "../../exp"
 import * as Exps from "../../exps"
+import { Solution } from "../../solution"
 import { Value } from "../../value"
 import { NilClsApHandler } from "./nil-cls-ap-handler"
 
@@ -55,5 +56,13 @@ export class NilClsValue extends Exps.ClsValue {
     renamings: Array<{ field_name: string; local_name: string }>
   } {
     return { ctx, renamings }
+  }
+
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
+    if (!(that instanceof Exps.NilClsValue)) {
+      return Solution.failure
+    }
+
+    return solution
   }
 }
