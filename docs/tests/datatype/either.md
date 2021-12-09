@@ -62,12 +62,12 @@ function maybe_head(implicit E: Type, list: List(E)): Maybe(E) {
 ```
 
 ``` cicada
-same_as_chart! Maybe(String) [
+same_as_chart! (Maybe(String)) [
   maybe_head(the(List(String), List.null)),
   Maybe.nothing,
 ]
 
-same_as_chart! Maybe(String) [
+same_as_chart! (Maybe(String)) [
   maybe_head(a),
   maybe_head(ab),
   maybe_head(abc),
@@ -88,22 +88,22 @@ function maybe_tail(implicit E: Type, list: List(E)): Maybe(List(E)) {
 ```
 
 ``` cicada
-same_as_chart! Maybe(List(String)) [
+same_as_chart! (Maybe(List(String))) [
   maybe_tail(the(List(String), List.null)),
   Maybe.nothing(vague List(String)),
 ]
 
-same_as_chart! Maybe(List(String)) [
+same_as_chart! (Maybe(List(String))) [
   maybe_tail(a),
   Maybe.just(the(List(String), List.null)),
 ]
 
-same_as_chart! Maybe(List(String)) [
+same_as_chart! (Maybe(List(String))) [
   maybe_tail(ab),
   Maybe.just(the(List(String), List.cons("b", List.null))),
 ]
 
-same_as_chart! Maybe(List(String)) [
+same_as_chart! (Maybe(List(String))) [
   maybe_tail(abc),
   Maybe.just(the(List(String), List.cons("b", List.cons("c", List.null)))),
 ]

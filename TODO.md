@@ -1,5 +1,3 @@
-- syntax add `()` to the target type of `same_as_chart!`
-
 # unify
 
 - `Value.unify` -- cls/nil-cls-value.ts
@@ -7,8 +5,6 @@
 - `Value.unify` -- cls/cons-cls-value.ts -- fix `08.md`
 - `Value.unify` -- cls/obj-value.ts
 - `Value.unify` -- cls/fulfilled-cls-value.ts
-
-- `Subst.unify` occur check -- use `free_names`
 
 # prelude
 
@@ -68,6 +64,10 @@
 
   - bidirectional `unify`
   - handle eta-expansion in `unify`
+
+- `Solution.unify` -- occur check
+
+  - not that there is no `free_names` on `Value`
 
 # subtype
 

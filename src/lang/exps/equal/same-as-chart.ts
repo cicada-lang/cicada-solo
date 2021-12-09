@@ -32,7 +32,7 @@ export class SameAsChart extends Exp {
   }
 
   // NOTE
-  // same_as_chart! Nat [
+  // same_as_chart! (Nat) [
   //   add1(add1(add1(0))),
   //   add1(add1(1)),
   //   add1(2),
@@ -73,6 +73,6 @@ export class SameAsChart extends Exp {
 
   format(): string {
     const exps = this.exps.map((exp) => exp.format()).join(", ")
-    return `same_as_chart! ${this.t.format()} [ ${exps} ]`
+    return `same_as_chart! (${this.t.format()}) [ ${exps} ]`
   }
 }

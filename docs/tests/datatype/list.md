@@ -57,7 +57,7 @@ function length(implicit E: Type, x: List(E)): Nat {
 ```
 
 ``` cicada
-same_as_chart! Nat [
+same_as_chart! (Nat) [
   length(the(List(String), List.cons("a", List.cons("b", List.cons("c", List.null))))),
   Nat.add1(Nat.add1(Nat.add1(Nat.zero))),
 ]
@@ -76,7 +76,7 @@ function append(implicit E: Type, x: List(E), y: List(E)): List(E) {
 ```
 
 ``` cicada
-same_as_chart! List(String) [
+same_as_chart! (List(String)) [
   append(
     the(List(String), List.cons("a", List.cons("b", List.cons("c", List.null)))),
     the(List(String), List.cons("a", List.cons("b", List.cons("c", List.null)))),
@@ -106,12 +106,12 @@ function reverse(implicit E: Type, x: List(E)): List(E) {
 ```
 
 ``` cicada
-same_as_chart! List(String) [
+same_as_chart! (List(String)) [
   list_cons_back("d", List.cons("a", List.cons("b", List.cons("c", List.null)))),
   List.cons("a", List.cons("b", List.cons("c", List.cons("d", List.null))))
 ]
 
-same_as_chart! List(String) [
+same_as_chart! (List(String)) [
   reverse(the(List(String), List.cons("a", List.cons("b", List.cons("c", List.null))))),
   List.cons("c", List.cons("b", List.cons("a", List.null))),
 ]

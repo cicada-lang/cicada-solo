@@ -77,7 +77,7 @@ add(Nat.add1(Nat.zero), Nat.add1(Nat.zero))
 ```
 
 ``` cicada
-same_as_chart! Nat [
+same_as_chart! (Nat) [
   add(
     Nat.add1(Nat.add1(Nat.zero)),
     Nat.add1(Nat.add1(Nat.add1(Nat.zero))),
@@ -105,7 +105,7 @@ function mul(x: Nat, y: Nat): Nat {
 ``` cicada
 {
   let twelve = add(ten, two)
-  return same_as_chart! Nat [
+  return same_as_chart! (Nat) [
     mul(four, three),
     mul(three, four),
     twelve,
@@ -132,7 +132,7 @@ function power(base: Nat, n: Nat): Nat {
 ```
 
 ``` cicada
-same_as_chart! Nat [
+same_as_chart! (Nat) [
   power(four, three),
   power_of(three, four),
   add(mul(six, ten), four),
@@ -152,7 +152,7 @@ function gauss(x: Nat): Nat {
 ```
 
 ``` cicada
-same_as_chart! Nat [
+same_as_chart! (Nat) [
   gauss(ten),
   add(mul(five, ten), five),
 ]
@@ -171,7 +171,7 @@ function factorial(x: Nat): Nat {
 ```
 
 ``` cicada
-same_as_chart! Nat [
+same_as_chart! (Nat) [
   factorial(five),
   add(mul(ten, ten), mul(two, ten))
 ]
