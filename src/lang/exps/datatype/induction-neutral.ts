@@ -58,8 +58,8 @@ function unify_case_entries(
   this_case_entries: Array<Exps.CaseNormalEntry>,
   that_case_entries: Array<Exps.CaseNormalEntry>
 ): Solution {
-  this_case_entries = this_case_entries.sort(compare_case_entries)
-  that_case_entries = that_case_entries.sort(compare_case_entries)
+  this_case_entries = this_case_entries.sort(Exps.compare_case_entries)
+  that_case_entries = that_case_entries.sort(Exps.compare_case_entries)
 
   if (this_case_entries.length !== that_case_entries.length) {
     return Solution.failure(
@@ -82,15 +82,6 @@ function unify_case_entries(
   }
 
   return solution
-}
-
-function compare_case_entries(
-  this_case_entry: Exps.CaseNormalEntry,
-  that_case_entry: Exps.CaseNormalEntry
-): -1 | 0 | 1 {
-  if (this_case_entry.name < that_case_entry.name) return -1
-  if (this_case_entry.name > that_case_entry.name) return 1
-  else return 0
 }
 
 function unify_case_entry(

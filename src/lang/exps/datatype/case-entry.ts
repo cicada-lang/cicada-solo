@@ -26,3 +26,12 @@ export type CaseNormalEntry = {
   name: string
   normal: Normal
 }
+
+export function compare_case_entries(
+  this_case_entry: { name: string },
+  that_case_entry: { name: string }
+): -1 | 0 | 1 {
+  if (this_case_entry.name < that_case_entry.name) return -1
+  if (this_case_entry.name > that_case_entry.name) return 1
+  else return 0
+}
