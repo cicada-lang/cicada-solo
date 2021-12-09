@@ -10,12 +10,19 @@ export class DataCtorValue extends Value {
   type_ctor: Exps.TypeCtorValue
   name: string
   t: Core
+  original_bindings: Array<Exps.DataCtorBinding>
 
-  constructor(type_ctor: Exps.TypeCtorValue, name: string, t: Core) {
+  constructor(
+    type_ctor: Exps.TypeCtorValue,
+    name: string,
+    t: Core,
+    original_bindings: Array<Exps.DataCtorBinding>
+  ) {
     super()
     this.type_ctor = type_ctor
     this.name = name
     this.t = t
+    this.original_bindings = original_bindings
   }
 
   ap_handler = new DataCtorApHandler(this)

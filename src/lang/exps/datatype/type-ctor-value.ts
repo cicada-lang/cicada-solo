@@ -19,7 +19,10 @@ export class TypeCtorValue extends Value {
     name: string,
     fixed: Record<string, Core>,
     varied: Record<string, Core>,
-    data_ctors: Record<string, { t: Core }>,
+    data_ctors: Record<
+      string,
+      { t: Core; original_bindings: Array<Exps.DataCtorBinding> }
+    >,
     env: Env
   ) {
     super()
@@ -31,8 +34,13 @@ export class TypeCtorValue extends Value {
     this.env = env.extend(this.name, this)
 
     this.data_ctors = {}
-    for (const [name, { t }] of Object.entries(data_ctors)) {
-      this.data_ctors[name] = new Exps.DataCtorValue(this, name, t)
+    for (const [name, { t, original_bindings }] of Object.entries(data_ctors)) {
+      this.data_ctors[name] = new Exps.DataCtorValue(
+        this,
+        name,
+        t,
+        original_bindings
+      )
     }
   }
 
@@ -204,13 +212,21 @@ export class TypeCtorValue extends Value {
     return varied
   }
 
-  private readback_data_ctors(ctx: Ctx): Record<string, { t: Core }> {
-    const data_ctors: Record<string, { t: Core }> = {}
-    for (const [name, data_ctor] of Object.entries(this.data_ctors)) {
-      data_ctors[name] = { t: data_ctor.readback_t(ctx) }
-    }
-
-    return data_ctors
+  private readback_data_ctors(
+    ctx: Ctx
+  ): Record<
+    string,
+    { t: Core; original_bindings: Array<Exps.DataCtorBinding> }
+  > {
+    return Object.fromEntries(
+      Object.entries(this.data_ctors).map(([name, data_ctor]) => [
+        name,
+        {
+          t: data_ctor.readback_t(ctx),
+          original_bindings: data_ctor.original_bindings,
+        },
+      ])
+    )
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {

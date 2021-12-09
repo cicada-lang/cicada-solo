@@ -1,10 +1,10 @@
 import * as ut from "../../../ut"
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
+import { ExpTrace } from "../../errors"
 import { check, Exp } from "../../exp"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
-import { ExpTrace } from "../../errors"
 
 export class TypeCtor extends Exp {
   name: string
@@ -131,13 +131,21 @@ export class TypeCtor extends Exp {
       )
   }
 
-  private infer_data_ctors(ctx: Ctx): Record<string, { t: Core }> {
-    const data_ctors: Record<string, { t: Core }> = {}
-    for (const [name, t] of Object.entries(this.data_ctors)) {
-      data_ctors[name] = { t: check(ctx, t, new Exps.TypeValue()) }
-    }
-
-    return data_ctors
+  private infer_data_ctors(
+    ctx: Ctx
+  ): Record<
+    string,
+    { t: Core; original_bindings: Array<Exps.DataCtorBinding> }
+  > {
+    return Object.fromEntries(
+      Object.entries(this.data_ctors).map(([name, t]) => [
+        name,
+        {
+          t: check(ctx, t, new Exps.TypeValue()),
+          original_bindings: this.data_ctor_bindings(name),
+        },
+      ])
+    )
   }
 
   private data_ctor_bindings(name: string): Array<Exps.DataCtorBinding> {

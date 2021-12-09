@@ -8,13 +8,19 @@ export class TypeCtorCore extends Core {
   name: string
   fixed: Record<string, Core>
   varied: Record<string, Core>
-  data_ctors: Record<string, { t: Core }>
+  data_ctors: Record<
+    string,
+    { t: Core; original_bindings: Array<Exps.DataCtorBinding> }
+  >
 
   constructor(
     name: string,
     fixed: Record<string, Core>,
     varied: Record<string, Core>,
-    data_ctors: Record<string, { t: Core }>
+    data_ctors: Record<
+      string,
+      { t: Core; original_bindings: Array<Exps.DataCtorBinding> }
+    >
   ) {
     super()
     this.name = name

@@ -1,4 +1,3 @@
-- `TypeCtorCore.data_ctors` has `original_bindings`
 - `DataCtorValue.build_almost_t` should use name from original bindings
 
   - Note about the `almost` field name.
