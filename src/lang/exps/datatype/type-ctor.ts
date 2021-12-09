@@ -4,6 +4,7 @@ import { Ctx } from "../../ctx"
 import { check, Exp } from "../../exp"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
+import { ExpTrace } from "../../errors"
 
 export class TypeCtor extends Exp {
   name: string
@@ -137,6 +138,44 @@ export class TypeCtor extends Exp {
     }
 
     return data_ctors
+  }
+
+  private data_ctor_bindings(name: string): Array<Exps.DataCtorBinding> {
+    const data_ctor = this.data_ctors[name]
+    if (data_ctor === undefined) {
+      throw new ExpTrace(`I find undefined data constructor: ${name}`)
+    }
+
+    const bindings: Array<Exps.DataCtorBinding> = []
+    let t = data_ctor
+    while (true) {
+      if (t instanceof Exps.Pi) {
+        bindings.push({
+          kind: "plain",
+          name: t.name,
+          exp: t.arg_t,
+        })
+        t = t.ret_t
+      } else if (t instanceof Exps.ImplicitPi) {
+        bindings.push({
+          kind: "implicit",
+          name: t.name,
+          exp: t.arg_t,
+        })
+        t = t.ret_t
+      } else if (t instanceof Exps.VaguePi) {
+        bindings.push({
+          kind: "vague",
+          name: t.name,
+          exp: t.arg_t,
+        })
+        t = t.ret_t
+      } else {
+        break
+      }
+    }
+
+    return bindings
   }
 
   format(): string {
