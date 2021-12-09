@@ -1,5 +1,3 @@
-- `Solution.failure` take `message` argument to report why Unification failed.
-
 # prelude
 
 - a way to load prelude module

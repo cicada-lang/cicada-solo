@@ -216,7 +216,12 @@ export class TypeCtorValue extends Value {
     // NOTE `TypeCtor` can only be defined at top-level,
     //   thus we use simple conversion check here.
     if (!conversion(ctx, t, this, that)) {
-      return Solution.failure
+      return Solution.failure(
+        [
+          `I expect this and that to the same TypeCtorValue,`,
+          `but they are not.`,
+        ].join("\n")
+      )
     }
 
     return solution

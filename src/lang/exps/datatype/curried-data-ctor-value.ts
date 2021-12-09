@@ -67,7 +67,7 @@ export class CurriedDataCtorValue extends Value {
       this.data_ctor.name !== that.data_ctor.name ||
       this.arity !== that.arity
     ) {
-      return Solution.failure
+      return Solution.fail_to_be_the_same_value(ctx, t, this, that)
     }
 
     const datatype = expect(ctx, t, Exps.DatatypeValue)

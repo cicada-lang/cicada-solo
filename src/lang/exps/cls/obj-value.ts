@@ -1,9 +1,9 @@
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
-import { Solution } from "../../solution"
 import { ExpTrace } from "../../errors"
-import { Value } from "../../value"
 import * as Exps from "../../exps"
+import { Solution } from "../../solution"
+import { Value } from "../../value"
 
 export class ObjValue extends Value {
   properties: Map<string, Value>
@@ -29,7 +29,7 @@ export class ObjValue extends Value {
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (!(that instanceof Exps.ObjValue)) {
-      return Solution.failure
+      return Solution.fail_to_be_the_same_value(ctx, t, this, that)
     }
 
     for (const [name, this_property] of this.properties) {

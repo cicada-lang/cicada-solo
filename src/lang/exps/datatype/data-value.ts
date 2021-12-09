@@ -58,7 +58,7 @@ export class DataValue extends Value {
       this.data_ctor.type_ctor.name !== that.data_ctor.type_ctor.name ||
       this.data_ctor.name !== that.data_ctor.name
     ) {
-      return Solution.failure
+      return Solution.fail_to_be_the_same_value(ctx, t, this, that)
     }
 
     if (t instanceof Exps.TypeCtorValue && t.arity === 0) {

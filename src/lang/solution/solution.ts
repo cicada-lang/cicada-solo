@@ -39,8 +39,43 @@ export abstract class Solution {
     return solution instanceof EmptySolution
   }
 
-  static get failure(): FailureSolution {
-    return new FailureSolution()
+  static failure(message: string): FailureSolution {
+    return new FailureSolution(message)
+  }
+
+  static fail_to_be_the_same_value(
+    ctx: Ctx,
+    t: Value,
+    x: Value,
+    y: Value
+  ): FailureSolution {
+    const t_core = readback(ctx, new Exps.TypeValue(), t)
+    const x_core = readback(ctx, t, x)
+    const y_core = readback(ctx, t, y)
+    const message = [
+      `I expect this and that to be the same value`,
+      `  t: ${t_core.format()}`,
+      `  this: ${x_core.format()}`,
+      `  that: ${y_core.format()}`,
+    ].join("\n")
+
+    return new FailureSolution(message)
+  }
+
+  static fail_to_be_the_same_neutral(
+    ctx: Ctx,
+    x: Neutral,
+    y: Neutral
+  ): FailureSolution {
+    const x_core = x.readback_neutral(ctx)
+    const y_core = y.readback_neutral(ctx)
+    const message = [
+      `I expect this and that to be the same neutral`,
+      `  this: ${x_core.format()}`,
+      `  that: ${y_core.format()}`,
+    ].join("\n")
+
+    return new FailureSolution(message)
   }
 
   static failure_p(solution: Solution): solution is FailureSolution {
@@ -76,27 +111,9 @@ export abstract class Solution {
     ) {
       return this
     } else if (Solution.logic_var_p(x)) {
-      // {
-      //   // DEBUG
-      //   if (Solution.logic_var_name(x) === "from") {
-      //     console.log("We know x === from, showing y:")
-      //     console.dir(y)
-      //   }
-      // }
-
-      // TODO occur check
-      return this.extend(Solution.logic_var_name(x), y)
+      return this.extend(Solution.logic_var_name(x), y) // TODO occur check
     } else if (Solution.logic_var_p(y)) {
-      // {
-      //   // DEBUG
-      //   if (Solution.logic_var_name(y) === "from") {
-      //     console.log("We know y === from, showing x:")
-      //     console.dir(x)
-      //   }
-      // }
-
-      // TODO occur check
-      return this.extend(Solution.logic_var_name(y), x)
+      return this.extend(Solution.logic_var_name(y), x) // TODO occur check
     } else {
       // NOTE When implementing unify for a `Value` subclass,
       //   the case where the argument is a logic variable is already handled.
@@ -114,6 +131,8 @@ export abstract class Solution {
           `Unification fail`,
           `  left  : ${left_core.format()}`,
           `  right : ${right_core.format()}`,
+          ``,
+          solution.message,
         ].join("\n")
       )
     }

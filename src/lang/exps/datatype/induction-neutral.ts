@@ -34,7 +34,7 @@ export class InductionNeutral extends Neutral {
 
   unify_neutral(solution: Solution, ctx: Ctx, that: Neutral): Solution {
     if (!(that instanceof InductionNeutral)) {
-      return Solution.failure
+      return Solution.fail_to_be_the_same_neutral(ctx, this, that)
     }
 
     solution = solution
@@ -62,7 +62,14 @@ function unify_case_entries(
   that_case_entries = that_case_entries.sort(compare_case_entries)
 
   if (this_case_entries.length !== that_case_entries.length) {
-    return Solution.failure
+    return Solution.failure(
+      [
+        `When unifying InductionNeutral,`,
+        `I expect case entries have the same length.`,
+        `  this case entries length: ${this_case_entries.length}`,
+        `  that case entries length: ${that_case_entries.length}`,
+      ].join("\n")
+    )
   }
 
   for (const [index] of this_case_entries.entries()) {
@@ -93,7 +100,14 @@ function unify_case_entry(
   that_case_entry: Exps.CaseNormalEntry
 ): Solution {
   if (this_case_entry.name !== that_case_entry.name) {
-    return Solution.failure
+    return Solution.failure(
+      [
+        `When unifying InductionNeutral,`,
+        `I expect case entry to be the same.`,
+        `  this case entry name: ${this_case_entry.name}`,
+        `  that case entry name: ${that_case_entry.name}`,
+      ].join("\n")
+    )
   }
 
   return solution.unify_normal(

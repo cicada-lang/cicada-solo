@@ -252,11 +252,11 @@ export class DataCtorValue extends Value {
     //   thus `DataCtor` must also be defined at top-level,
     //   thus we do not need to handle scope here.
     if (!(that instanceof Exps.DataCtorValue)) {
-      return Solution.failure
+      return Solution.fail_to_be_the_same_value(ctx, t, this, that)
     }
 
     if (this.name !== that.name) {
-      return Solution.failure
+      return Solution.fail_to_be_the_same_value(ctx, t, this, that)
     }
 
     const this_type_ctor_t = this.type_ctor.self_type()

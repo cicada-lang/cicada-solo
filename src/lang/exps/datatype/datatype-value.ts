@@ -39,7 +39,9 @@ export class DatatypeValue extends Value {
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (!(that instanceof Exps.DatatypeValue)) {
-      return Solution.failure
+      return Solution.failure(
+        `I expect that to also be DatatypeValue, just like this.`
+      )
     }
 
     // TODO `t` in the arguments is not used here.

@@ -21,7 +21,7 @@ export class ConsValue extends Value {
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (!(that instanceof Exps.ConsValue)) {
-      return Solution.failure
+      return Solution.fail_to_be_the_same_value(ctx, t, this, that)
     }
 
     const sigma = expect(ctx, t, Exps.SigmaValue)

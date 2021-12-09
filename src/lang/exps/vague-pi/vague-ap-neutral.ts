@@ -24,7 +24,7 @@ export class VagueApNeutral extends Neutral {
 
   unify_neutral(solution: Solution, ctx: Ctx, that: Neutral): Solution {
     if (!(that instanceof VagueApNeutral)) {
-      return Solution.failure
+      return Solution.fail_to_be_the_same_neutral(ctx, this, that)
     }
 
     return solution

@@ -18,7 +18,9 @@ export class CdrNeutral extends Neutral {
 
   unify_neutral(solution: Solution, ctx: Ctx, that: Neutral): Solution {
     if (!(that instanceof CdrNeutral)) {
-      return Solution.failure
+      return Solution.failure(
+        `I expect that to also be CdrNeutral, just like this.`
+      )
     }
 
     return solution.unify_neutral(ctx, this.target, that.target)

@@ -47,7 +47,7 @@ export class SigmaValue extends Value implements ReadbackEtaExpansion {
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (!(that instanceof Exps.SigmaValue)) {
-      return Solution.failure
+      return Solution.fail_to_be_the_same_value(ctx, t, this, that)
     }
 
     return solution

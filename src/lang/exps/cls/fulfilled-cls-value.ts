@@ -1,9 +1,9 @@
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { ExpTrace } from "../../errors"
-import { Solution } from "../../solution"
 import { check, Exp } from "../../exp"
 import * as Exps from "../../exps"
+import { Solution } from "../../solution"
 import { check_conversion, readback, Value } from "../../value"
 import { FulfilledClsApHandler } from "./fulfilled-cls-ap-handler"
 
@@ -127,11 +127,18 @@ export class FulfilledClsValue extends Exps.ClsValue {
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
     if (!(that instanceof Exps.FulfilledClsValue)) {
-      return Solution.failure
+      return Solution.fail_to_be_the_same_value(ctx, t, this, that)
     }
 
     if (!(this.field_name !== that.field_name)) {
-      return Solution.failure
+      return Solution.failure(
+        [
+          `When unifying FulfilledClsValue,`,
+          `I expect this and that to have the same field name`,
+          `  this field name: ${this.field_name}`,
+          `  that field name: ${that.field_name}`,
+        ].join("\n")
+      )
     }
 
     return solution

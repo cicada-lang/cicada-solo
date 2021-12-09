@@ -21,7 +21,7 @@ export class TodoNeutral extends Neutral {
 
   unify_neutral(solution: Solution, ctx: Ctx, that: Neutral): Solution {
     if (!(that instanceof TodoNeutral)) {
-      return Solution.failure
+      return Solution.fail_to_be_the_same_neutral(ctx, this, that)
     }
 
     return solution.unify_type(ctx, this.t, that.t)
