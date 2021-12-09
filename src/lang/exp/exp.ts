@@ -7,10 +7,6 @@ export interface ExpMeta {
   span?: pt.Span
 }
 
-export interface ElaborationOptions {
-  narrate_elaboration_p?: boolean
-}
-
 export abstract class Exp {
   meta?: ExpMeta
 
@@ -18,6 +14,6 @@ export abstract class Exp {
   abstract subst(name: string, exp: Exp): Exp
   abstract format(): string
 
-  check?(ctx: Ctx, t: Value, opts?: ElaborationOptions): Core
-  infer?(ctx: Ctx, opts?: ElaborationOptions): { t: Value; core: Core }
+  check?(ctx: Ctx, t: Value): Core
+  infer?(ctx: Ctx): { t: Value; core: Core }
 }

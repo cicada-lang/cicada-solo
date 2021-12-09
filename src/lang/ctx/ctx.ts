@@ -39,13 +39,6 @@ export abstract class Ctx {
     }
   }
 
-  narration(lines: Array<string>): void {
-    this.broadcast({
-      tag: "narration",
-      msg: lines.join("\n"),
-    })
-  }
-
   todo(lines: Array<string>): void {
     this.broadcast({
       tag: "todo",
