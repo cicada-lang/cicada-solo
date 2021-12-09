@@ -1,7 +1,31 @@
 # prelude
 
-- a way to load prelude module
+- support `TODO_NOTE("...")`
+
+  - `(vague T: Type, optional note: String) -> T`
+
+- support `TODO` -- without note
+
+  - `(vague T: Type) -> T`
+
+- prelude -- bindings that are loaded at the beginning of every module.
+
+  - can not be redefined at top level, but can be scoped in local function scope.
+
 - implement `the`, `is` and `TODO` in prelude
+
+# book manager
+
+- [book manager] [cli] `cic install <user/repo@tag>` -- should not download existing packages
+- [book manager] [cli] `cic install` -- download book from `references` specified in `book.json`
+- [book manager] [cli] `cic init` -- learn from `npm init` and so on
+- [book manager] be able to resolve module in book of `references`
+  - we do not need to use book as module, we only need to be able to resolve module.
+
+- [book manager] [cli] `cic install` -- `help`
+- [book manager] [cli] `cic init` -- `help`
+
+- [book manager] a syntax for addressing value by full path and name -- preparing for nominal typing
 
 # inductive datatype -- questions
 
@@ -37,6 +61,10 @@
 
   - The same situation occurs for fulfilling type, which is of `Type`,
     but can also be applied to get partly fulfilled types.
+
+    - Which can be solved by special `apply` field.
+
+  - Should we support "every thing is object"?
 
 # errors
 
@@ -74,52 +102,6 @@
 # quotient type
 
 - learn from lean
-
-# book manager
-
-- [book manager] [cli] `cic install <user/repo@tag>` -- should not download existing packages
-- [book manager] [cli] `cic install` -- download book from `references` specified in `book.json`
-- [book manager] [cli] `cic init` -- learn from `npm init` and so on
-- [book manager] be able to resolve module in book of `references`
-  - we do not need to use book as module, we only need to be able to resolve module.
-
-- [book manager] [cli] `cic install` -- `help`
-- [book manager] [cli] `cic init` -- `help`
-
-- [book manager] a syntax for addressing value by full path and name -- preparing for nominal typing
-
-# books
-
-- [books] [EWD1240a] A little bit of lattice theory
-  - To test our system.
-  - This paper is about the relation between PartialOrder and Lattice.
-  - Learn from the story line for teaching.
-
-- [book] formalize infinite descent as a consequence of induction on natural number:
-  - https://en.wikipedia.org/wiki/Mathematical_induction#Infinite_descent
-  - https://en.wikipedia.org/wiki/Proof_by_infinite_descent
-
-- [book] formalize complete induction as a consequence of induction on natural number:
-  - https://en.wikipedia.org/wiki/Mathematical_induction#Complete_(strong)_induction
-
-- [books] Algebraic structures -- https://en.wikipedia.org/wiki/Algebraic_structure
-- [books] Lattice theory
-- [books] Closure system -- for FCA
-- [books] Topology theory
-- [books] Category of Groups
-- [books] Number theroy -- https://en.wikipedia.org/wiki/Number_theory
-
-# the `todo` keyword
-
-- drop the `@` in the syntax of `TODO`
-
-  - [maybe] use function application syntax
-
-    - what is the type of `TODO` ?
-
-# error report
-
-- [problem] `exps/var` -- how to handle `span` when doing a `subst`?
 
 # optimization
 
@@ -187,3 +169,28 @@
 # later
 
 - [later] `Fn` be able to annotate argument type and return type
+
+# problem
+
+- [problem] `exps/var` -- how to handle `span` when doing a `subst`?
+
+# books
+
+- [books] [EWD1240a] A little bit of lattice theory
+  - To test our system.
+  - This paper is about the relation between PartialOrder and Lattice.
+  - Learn from the story line for teaching.
+
+- [book] formalize infinite descent as a consequence of induction on natural number:
+  - https://en.wikipedia.org/wiki/Mathematical_induction#Infinite_descent
+  - https://en.wikipedia.org/wiki/Proof_by_infinite_descent
+
+- [book] formalize complete induction as a consequence of induction on natural number:
+  - https://en.wikipedia.org/wiki/Mathematical_induction#Complete_(strong)_induction
+
+- [books] Algebraic structures -- https://en.wikipedia.org/wiki/Algebraic_structure
+- [books] Lattice theory
+- [books] Closure system -- for FCA
+- [books] Topology theory
+- [books] Category of Groups
+- [books] Number theroy -- https://en.wikipedia.org/wiki/Number_theory
