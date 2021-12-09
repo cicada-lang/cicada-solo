@@ -2,6 +2,7 @@ import * as Exps from ".."
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
+import { ExpTrace } from "../../errors"
 import { Solution } from "../../solution"
 import { readback, Value } from "../../value"
 import { DataCtorApHandler } from "./data-ctor-ap-handler"
@@ -175,10 +176,30 @@ export class DataCtorValue extends Value {
     return binding.name
   }
 
-  private get direct_positive_recursive_bindings(): Array<Exps.DataCtorCoreBinding> {
-    return this.bindings.filter((binding) =>
-      this.is_direct_positive_recursive_arg_t(binding.core)
-    )
+  private get direct_positive_recursive_bindings(): Array<
+    Exps.DataCtorCoreBinding & { original_name: string }
+  > {
+    const enriched_bindings: Array<
+      Exps.DataCtorCoreBinding & { original_name: string }
+    > = []
+
+    for (const [index, binding] of this.bindings.entries()) {
+      if (this.is_direct_positive_recursive_arg_t(binding.core)) {
+        const original_binding = this.original_bindings[index]
+        if (original_binding === undefined) {
+          throw new ExpTrace(
+            `I can not find original binding from binding of name: ${binding.name}`
+          )
+        }
+
+        enriched_bindings.push({
+          ...binding,
+          original_name: original_binding.name,
+        })
+      }
+    }
+
+    return enriched_bindings
   }
 
   private is_direct_positive_recursive_arg_t(arg_t: Core): boolean {
@@ -195,6 +216,10 @@ export class DataCtorValue extends Value {
     }
   }
 
+  // NOTE About the field names of `almost`.
+  //   When you define a recursive `datatype`
+  //   the name of the **direct positive recursive** argument
+  //   will be exposed as part of the public interface of the `datatype`.
   build_almost_t(motive: Core): Exps.ClsCore {
     let almost_t: Exps.ClsCore = new Exps.NilClsCore()
     for (const binding of [
@@ -203,7 +228,7 @@ export class DataCtorValue extends Value {
       const target = new Exps.VarCore(binding.name)
       const case_ret_t = this.build_case_ret_t(motive, binding.core, target)
       almost_t = new Exps.ConsClsCore(
-        binding.name,
+        binding.original_name,
         binding.name,
         case_ret_t,
         almost_t
