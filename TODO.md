@@ -1,7 +1,3 @@
-# unify
-
-- `Value.unify` -- cls/obj-value.ts
-
 # prelude
 
 - a way to load prelude module

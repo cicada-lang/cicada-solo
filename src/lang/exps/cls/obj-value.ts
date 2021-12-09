@@ -1,7 +1,9 @@
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
+import { Solution } from "../../solution"
 import { ExpTrace } from "../../errors"
 import { Value } from "../../value"
+import * as Exps from "../../exps"
 
 export class ObjValue extends Value {
   properties: Map<string, Value>
@@ -23,5 +25,25 @@ export class ObjValue extends Value {
     }
 
     return value
+  }
+
+  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
+    if (!(that instanceof Exps.ObjValue)) {
+      return Solution.failure
+    }
+
+    for (const [name, this_property] of this.properties) {
+      const that_property = that.properties.get(name)
+      if (that_property) {
+        solution = solution.unify(
+          ctx,
+          Exps.DotCore.apply(t, name),
+          this_property,
+          that_property
+        )
+      }
+    }
+
+    return solution
   }
 }
