@@ -1,7 +1,10 @@
+- extract module `data-ctor-binding`
+- save original bindings in `TypeCtorCore.data_ctors`
+- `DataCtorValue.build_almost_t` should use name from original bindings
+
 # prelude
 
 - a way to load prelude module
-
 - implement `the`, `is` and `TODO` in prelude
 
 # inductive datatype -- questions

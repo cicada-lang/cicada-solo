@@ -125,15 +125,15 @@ export class DatatypeValue extends Value {
 
   private build_pi_from_binding(
     core: Core,
-    binding: Exps.DataCtorBinding
+    binding: Exps.DataCtorCoreBinding
   ): Core {
     switch (binding.kind) {
       case "plain":
-        return new Exps.PiCore(binding.name, binding.arg_t, core)
+        return new Exps.PiCore(binding.name, binding.core, core)
       case "implicit":
-        return new Exps.ImplicitPiCore(binding.name, binding.arg_t, core)
+        return new Exps.ImplicitPiCore(binding.name, binding.core, core)
       case "vague":
-        return new Exps.VaguePiCore(binding.name, binding.arg_t, core)
+        return new Exps.VaguePiCore(binding.name, binding.core, core)
     }
   }
 }

@@ -6,10 +6,10 @@ import { Solution } from "../../solution"
 import { readback, Value } from "../../value"
 import { DataCtorApHandler } from "./data-ctor-ap-handler"
 
-export type DataCtorBinding = {
+export type DataCtorCoreBinding = {
   kind: Exps.ArgKind
   name: string
-  arg_t: Core
+  core: Core
 }
 
 export class DataCtorValue extends Value {
@@ -57,7 +57,7 @@ export class DataCtorValue extends Value {
     const arg_t_value_entries: Array<{ kind: Exps.ArgKind; arg_t: Value }> = []
     for (const [index, binding] of this.bindings.entries()) {
       if (length && index >= length - this.type_ctor.fixed_arity) break
-      const arg_t = evaluate(env, binding.arg_t)
+      const arg_t = evaluate(env, binding.core)
       const arg =
         args instanceof Array ? args[index] : args(index, { arg_t, env })
       env = env.extend(binding.name, arg)
@@ -71,7 +71,7 @@ export class DataCtorValue extends Value {
     }
   }
 
-  get bindings(): Array<DataCtorBinding> {
+  get bindings(): Array<DataCtorCoreBinding> {
     return this.split_type().bindings
   }
 
@@ -79,29 +79,29 @@ export class DataCtorValue extends Value {
     return this.split_type().ret_t
   }
 
-  split_type(): { bindings: Array<DataCtorBinding>; ret_t: Core } {
-    const bindings: Array<DataCtorBinding> = []
+  split_type(): { bindings: Array<DataCtorCoreBinding>; ret_t: Core } {
+    const bindings: Array<DataCtorCoreBinding> = []
     let t = this.t
     while (true) {
       if (t instanceof Exps.PiCore) {
         bindings.push({
           kind: "plain",
           name: t.name,
-          arg_t: t.arg_t,
+          core: t.arg_t,
         })
         t = t.ret_t
       } else if (t instanceof Exps.ImplicitPiCore) {
         bindings.push({
           kind: "implicit",
           name: t.name,
-          arg_t: t.arg_t,
+          core: t.arg_t,
         })
         t = t.ret_t
       } else if (t instanceof Exps.VaguePiCore) {
         bindings.push({
           kind: "vague",
           name: t.name,
-          arg_t: t.arg_t,
+          core: t.arg_t,
         })
         t = t.ret_t
       } else {
@@ -157,7 +157,7 @@ export class DataCtorValue extends Value {
 
   is_direct_positive_recursive_position(index: number): boolean {
     const binding = this.bindings[index]
-    return this.is_direct_positive_recursive_arg_t(binding.arg_t)
+    return this.is_direct_positive_recursive_arg_t(binding.core)
   }
 
   direct_positive_recursive_position_name(index: number): string {
@@ -174,9 +174,9 @@ export class DataCtorValue extends Value {
     return binding.name
   }
 
-  private get direct_positive_recursive_bindings(): Array<DataCtorBinding> {
+  private get direct_positive_recursive_bindings(): Array<DataCtorCoreBinding> {
     return this.bindings.filter((binding) =>
-      this.is_direct_positive_recursive_arg_t(binding.arg_t)
+      this.is_direct_positive_recursive_arg_t(binding.core)
     )
   }
 
@@ -200,7 +200,7 @@ export class DataCtorValue extends Value {
       ...this.direct_positive_recursive_bindings,
     ].reverse()) {
       const target = new Exps.VarCore(binding.name)
-      const case_ret_t = this.build_case_ret_t(motive, binding.arg_t, target)
+      const case_ret_t = this.build_case_ret_t(motive, binding.core, target)
       almost_t = new Exps.ConsClsCore(
         binding.name,
         binding.name,
@@ -212,7 +212,10 @@ export class DataCtorValue extends Value {
     return almost_t
   }
 
-  private build_ap_from_binding(core: Core, binding: DataCtorBinding): Core {
+  private build_ap_from_binding(
+    core: Core,
+    binding: DataCtorCoreBinding
+  ): Core {
     switch (binding.kind) {
       case "plain":
         return new Exps.ApCore(core, new Exps.VarCore(binding.name))
