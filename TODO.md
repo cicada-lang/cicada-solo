@@ -1,6 +1,5 @@
 # built-in
 
-- `BuiltInValue` -- `curried_arg_t_values`
 - `BuiltInValue` -- fix `unify`
 
 - remove `exps/the`

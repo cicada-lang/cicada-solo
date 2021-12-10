@@ -1,8 +1,9 @@
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
+import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
 import { Solution } from "../../solution"
-import { Value, readback } from "../../value"
+import { readback, Value } from "../../value"
 
 export abstract class BuiltInValue extends Value {
   name: string
@@ -17,6 +18,8 @@ export abstract class BuiltInValue extends Value {
     this.curried_arg_value_entries = curried_arg_value_entries
   }
 
+  abstract arity: number
+
   abstract self_type(): Value
 
   abstract curry(arg_value_entry: Exps.ArgValueEntry): BuiltInValue
@@ -25,24 +28,46 @@ export abstract class BuiltInValue extends Value {
     return this.curried_arg_value_entries.length
   }
 
-  get curried_arg_t_values(): Array<Value> {
-    throw new Error("TODO")
+  get max_curried_length(): number {
+    return this.arity - 1
+  }
+
+  private curried_arg_t_values(): Array<Value> {
+    const curried_arg_t_values: Array<Value> = []
+    let t = this.self_type()
+    for (const arg_value_entry of this.curried_arg_value_entries) {
+      if (
+        !(
+          t instanceof Exps.PiValue ||
+          t instanceof Exps.ImplicitPiValue ||
+          t instanceof Exps.VaguePiValue
+        )
+      ) {
+        throw new ExpTrace(
+          [
+            `I expect t to be pi-like type`,
+            `  class name: ${t.constructor.name}`,
+          ].join("\n")
+        )
+      }
+
+      curried_arg_t_values.push(t.arg_t)
+      t = Exps.apply_arg_value_entry(t, arg_value_entry)
+    }
+
+    return curried_arg_t_values
   }
 
   readback(ctx: Ctx, t: Value): Core | undefined {
+    const curried_arg_t_values = this.curried_arg_t_values()
     let core: Core = new Exps.BuiltInCore(this.name)
-
     for (const [
       index,
       arg_value_entry,
     ] of this.curried_arg_value_entries.entries()) {
       core = Exps.build_ap_from_arg_core_entry(core, {
         ...arg_value_entry,
-        core: readback(
-          ctx,
-          this.curried_arg_t_values[index],
-          arg_value_entry.value
-        ),
+        core: readback(ctx, curried_arg_t_values[index], arg_value_entry.value),
       })
     }
 
