@@ -4,15 +4,24 @@ import { Value } from "../../value"
 // NOTE The `built-ins` can not be redefined at top level,
 //   but can be scoped in local function scope.
 
+interface BuiltInEntry {
+  t: Value
+  value: Exps.BuiltInValue
+}
+
 class BuiltIns {
-  values: Map<string, Exps.BuiltInValue> = new Map()
+  entries: Map<string, BuiltInEntry> = new Map()
 
   find_value(name: string): Exps.BuiltInValue | undefined {
-    return this.values.get(name)
+    const entry = this.entries.get(name)
+    if (entry === undefined) return undefined
+    return entry.value
   }
 
   find_type(name: string): Value | undefined {
-    throw new Error("TODO")
+    const entry = this.entries.get(name)
+    if (entry === undefined) return undefined
+    return entry.t
   }
 }
 

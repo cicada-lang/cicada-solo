@@ -1,8 +1,6 @@
 # built-in
 
-- `built-in/built-ins` -- `find_type` -- references concrete `BuiltInValue`
-
-- `built-in/built-ins` -- `register` concrete `BuiltInValue`
+- `built-in/built-ins` -- `register` concrete `BuiltInEntry`
 
 - `built-in/the-value` -- `the: (T: Type, x: T) -> T`
 
