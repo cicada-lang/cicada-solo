@@ -12,17 +12,12 @@ export class VariableCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    const result = env.find_value(this.name)
-    if (result === undefined) {
-      throw new ExpTrace(
-        [
-          `Fail to evaluate a variable.`,
-          `The name ${this.name} is undefined.`,
-        ].join("\n")
-      )
+    const value = env.find_value(this.name)
+    if (value === undefined) {
+      throw new ExpTrace(`I meet undefined variable name: ${this.name}`)
     }
 
-    return result
+    return value
   }
 
   format(): string {

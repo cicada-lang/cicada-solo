@@ -1,16 +1,23 @@
 # built-in
 
-- `built-in-variables` -- references `built-in-values/`
+- `built-in/built-in-value` -- `readback` to `BuiltInCore`
+- `built-in/built-in-value` -- `unify` by `name`
 
-- `built-in-value` -- has `name` and might has `ap_handler` & `dot_handler`
+- `built-in/built-ins` -- `find_value`
 
-- `built-in-values/the-value`
+  - references concrete `BuiltInValue`
 
-- `built-in-core` -- if can not find a variable in scope, try to elaborate it to `BuiltInCore`
+- `built-in/built-ins` -- `find_type`
 
-  - NOTE `built-ins` can not be redefined at top level, but can be scoped in local function scope.
+  - references concrete `BuiltInValue`
 
-- [built-in] `the: (T: Type, x: T) -> T`
+- `variable` -- `infer` use `built-in/built-ins`
+
+  - if can not find a variable in scope,
+    try to find its type by `built-in/built-ins`,
+    and elaborate it to a `BuiltInCore`
+
+- `built-in/the-value` -- `the: (T: Type, x: T) -> T`
 
 - [built-in] `TODO: (vague T: Type) -> T`
 - [built-in] `TODO_NOTE: (vague T: Type, optional note: String) -> T`
