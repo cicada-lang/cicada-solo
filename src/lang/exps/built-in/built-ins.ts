@@ -7,7 +7,7 @@ import { Value } from "../../value"
 class BuiltIns {
   values: Map<string, Exps.BuiltInValue>
 
-  constructor(values: Map<string, Exps.BuiltInValue>) {
+  constructor(values: Map<string, Exps.BuiltInValue> = new Map()) {
     this.values = values
   }
 
@@ -18,10 +18,18 @@ class BuiltIns {
   find_type(name: string): Value | undefined {
     return this.values.get(name)?.self_type()
   }
+
+  register(value: Exps.BuiltInValue): this {
+    const found = this.find_value(value.name)
+    if (found !== undefined) {
+      throw new Error(
+        `I can not re-register built-in value of name: ${value.name}`
+      )
+    }
+
+    this.values.set(value.name, value)
+    return this
+  }
 }
 
-export const built_ins = new BuiltIns(
-  new Map([
-    // ["the", new Exps.TheValue()]
-  ])
-)
+export const built_ins = new BuiltIns().register(new Exps.TheValue())

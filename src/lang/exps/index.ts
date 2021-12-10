@@ -6,6 +6,9 @@ export * from "./variable-neutral"
 
 export * from "./built-in/built-in-core"
 export * from "./built-in/built-in-value"
+export * from "./built-in/the-value"
+// NOTE `built-ins` imports concrete built-in-values,
+//   thus must follow them.
 export * from "./built-in/built-ins"
 
 export * from "./type"

@@ -48,14 +48,14 @@ export class Variable extends Exp {
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const t = ctx.find_type(this.name)
-    if (t !== undefined) {
-      return { t, core: new Exps.VariableCore(this.name) }
-    }
-
     const built_in_t = Exps.built_ins.find_type(this.name)
     if (built_in_t !== undefined) {
       return { t: built_in_t, core: new Exps.BuiltInCore(this.name) }
+    }
+
+    const t = ctx.find_type(this.name)
+    if (t !== undefined) {
+      return { t, core: new Exps.VariableCore(this.name) }
     }
 
     throw new ExpTrace(`I meet undefined variable name: ${this.name}`)
