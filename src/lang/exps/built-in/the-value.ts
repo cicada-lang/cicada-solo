@@ -5,11 +5,17 @@ import { Value } from "../../value"
 import { TheApHandler } from "./the-ap-handler"
 
 export class TheValue extends Exps.BuiltInValue {
-  constructor() {
-    super("the")
+  arity = 2
+
+  constructor(curried_arg_value_entries: Array<Exps.ArgValueEntry>) {
+    super("the", curried_arg_value_entries)
   }
 
   ap_handler = new TheApHandler(this)
+
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+    return new TheValue([...this.curried_arg_value_entries, arg_value_entry])
+  }
 
   // NOTE `the: (T: Type, x: T) -> T`
   self_type(): Value {

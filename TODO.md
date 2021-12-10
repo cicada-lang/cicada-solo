@@ -1,11 +1,7 @@
 # built-in
 
-- `TheValue` has `args` -- for currying
-
-  - I do not want to define separate `CurriedTheValue` this time,
-    becasue there might be too many `BuiltInValue`s like `TheValue`.
-
-- `built-in/the-ap-handler` -- `apply`
+- `BuiltInValue` -- `curried_arg_t_values`
+- `BuiltInValue` -- fix `unify`
 
 - remove `exps/the`
 
@@ -159,9 +155,6 @@
 - `Book` -- the use of cached modules in `Book.load` is not safe in concurrent environment
 
 # maybe
-
-- [maybe] merge `CurriedTypeCtorValue` into `TypeCtorValue` -- just like `TheValue`
-- [maybe] merge `CurriedDataCtorValue` into `DataCtorValue` -- just like `TheValue`
 
 - [maybe] `implicit-fn` insertion is handled in `Fn.check`,
   but `vague-fn` insertion is handled in `check`,

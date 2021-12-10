@@ -11,6 +11,11 @@ export class TheApHandler extends ApHandler {
   }
 
   apply(arg: Value): Value {
-    throw new Error("TODO")
+    if (this.target.curried_length < this.target.arity) {
+      return this.target.curry({ kind: "plain", value: arg })
+    } else {
+      const arg_value_entry = this.target.curried_arg_value_entries[1]
+      return arg_value_entry.value
+    }
   }
 }
