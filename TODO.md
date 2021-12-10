@@ -1,7 +1,5 @@
 # built-in
 
-- `BuiltInValue` -- fix `unify`
-
 - remove `exps/the`
 
 - `built-in/the-todo-value` -- `self_type` -- `TODO: (vague T: Type) -> T`

@@ -75,8 +75,40 @@ export abstract class BuiltInValue extends Value {
   }
 
   unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (!(that instanceof Exps.BuiltInValue && this.name === that.name)) {
+    if (
+      !(
+        that instanceof Exps.BuiltInValue &&
+        this.name === that.name &&
+        this.arity === that.arity &&
+        this.curried_length === that.curried_length
+      )
+    ) {
       return Solution.fail_to_be_the_same_value(ctx, t, this, that)
+    }
+
+    const this_curried_arg_t_values = this.curried_arg_t_values()
+    const that_curried_arg_t_values = that.curried_arg_t_values()
+
+    for (const [
+      index,
+      this_curried_arg_value_entry,
+    ] of this.curried_arg_value_entries.entries()) {
+      const that_curried_arg_value_entry = that.curried_arg_value_entries[index]
+
+      solution = solution.unify_type(
+        ctx,
+        this_curried_arg_t_values[index],
+        that_curried_arg_t_values[index]
+      )
+
+      const curried_arg_t = this_curried_arg_t_values[index]
+
+      solution = solution.unify(
+        ctx,
+        curried_arg_t,
+        this_curried_arg_value_entry.value,
+        that_curried_arg_value_entry.value
+      )
     }
 
     return solution
