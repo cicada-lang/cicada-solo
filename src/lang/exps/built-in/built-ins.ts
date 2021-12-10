@@ -15,10 +15,6 @@ class BuiltIns {
     return this.values.get(name)
   }
 
-  find_type(name: string): Value | undefined {
-    return this.values.get(name)?.self_type()
-  }
-
   register(value: Exps.BuiltInValue): this {
     const found = this.find_value(value.name)
     if (found !== undefined) {
