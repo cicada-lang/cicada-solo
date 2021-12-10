@@ -53,11 +53,6 @@ export const operator = {
       { exp: "exp" },
       '")"',
     ],
-    // NOTE about `is(exp, t)`
-    // In set theory, the symbol "∈" is a stylized lowercase Greek letter epsilon ("ϵ"),
-    // the first letter of the word ἐστί, which means "is".
-    // - https://en.wikipedia.org/wiki/Element_(mathematics)
-    "operator:is": ['"is"', '"("', { exp: "exp" }, '","', { t: "exp" }, '")"'],
     "operator:induction": [
       '"induction"',
       '"("',

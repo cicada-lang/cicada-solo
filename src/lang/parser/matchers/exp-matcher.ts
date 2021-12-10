@@ -122,8 +122,6 @@ export function operator_matcher(tree: pt.Tree): Exp {
       new Exps.AbsurdInd(exp_matcher(target), exp_matcher(motive), { span }),
     "operator:the": ({ t, exp }, { span }) =>
       new Exps.The(exp_matcher(t), exp_matcher(exp), { span }),
-    "operator:is": ({ t, exp }, { span }) =>
-      new Exps.The(exp_matcher(t), exp_matcher(exp), { span }),
     "operator:induction": ({ target, motive, case_entries }, { span }) =>
       new Exps.Induction(
         exp_matcher(target),

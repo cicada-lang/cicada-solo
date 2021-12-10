@@ -1,2 +1,0 @@
-is(sole, Trivial)
-is("abc", String)

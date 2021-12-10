@@ -4,11 +4,25 @@
 
   - can not be redefined at top level, but can be scoped in local function scope.
 
-- implement `the`, `is` and `TODO` in prelude
+- [prelude] `the: (T: Type, x: T) -> T`
 
-  - `TODO_NOTE: (vague T: Type, optional note: String) -> T`
+- [prelude] `TODO: (vague T: Type) -> T`
+- [prelude] `TODO_NOTE: (vague T: Type, optional note: String) -> T`
 
-  - `TODO: (vague T: Type) -> T`
+- [prelude] Pair
+- [prelude] car
+- [prelude] cdr
+- [prelude] Equal
+- [prelude] refl
+- [prelude] same
+- [prelude] the_same
+- [prelude] replace
+- [prelude] Trivial
+- [prelude] sole
+- [prelude] Absurd
+- [prelude] absurd_ind
+- [prelude] String
+- [prelude] Type
 
 # book manager
 

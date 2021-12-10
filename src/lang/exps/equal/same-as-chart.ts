@@ -39,9 +39,9 @@ export class SameAsChart extends Exp {
   //   3,
   // ]
   // expand to:
-  // _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(add1(0))), add1(add1(1))))
-  // _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(add1(1)), add1(2)))
-  // _ = is(same(add1(add1(add1(0)))), Equal(Nat, add1(2), 3))
+  // _ = the(Equal(Nat, add1(add1(add1(0))), add1(add1(1))), same(add1(add1(add1(0)))))
+  // _ = the(Equal(Nat, add1(add1(1)), add1(2)), same(add1(add1(add1(0)))))
+  // _ = the(Equal(Nat, add1(2), 3), same(add1(add1(add1(0)))))
   // _
 
   infer(ctx: Ctx): { t: Value; core: Core } {

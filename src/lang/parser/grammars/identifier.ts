@@ -11,7 +11,6 @@ const preserved = [
   "induction",
   // built-in
   "the",
-  "is",
   "TODO",
   "Pair",
   "car",

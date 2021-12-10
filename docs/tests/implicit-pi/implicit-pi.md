@@ -76,8 +76,8 @@ let car_type_again: (
 
 car_type_again
 
-car_type(is(cons(sole, "a"), Pair(Trivial, String)))
-car_type_again(is(cons(sole, "a"), Pair(Trivial, String)))
+car_type(the(Pair(Trivial, String), cons(sole, "a")))
+car_type_again(the(Pair(Trivial, String), cons(sole, "a")))
 
 // `cdr_type` -- only the idiomatic way:
 
@@ -89,7 +89,7 @@ function cdr_type(
   return B
 }
 
-cdr_type(is(cons(sole, "a"), Pair(Trivial, String)))
+cdr_type(the(Pair(Trivial, String), cons(sole, "a")))
 ```
 
 # do *not* support implicit argument over implicit argument
