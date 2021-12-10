@@ -1,6 +1,6 @@
 # built-in
 
-- `built-in/the-value` -- `self_type` -- `the: (T: Type, x: T) -> T`
+- `built-in/the-value` -- `ap_handler`
 
 - `built-in/the-todo-value` -- `self_type` -- `TODO: (vague T: Type) -> T`
 - `built-in/the-todo` -- `self_type` -- `TODO_NOTE: (vague T: Type, optional note: String) -> T`
