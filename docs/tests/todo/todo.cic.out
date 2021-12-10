@@ -1,4 +1,4 @@
-@TODO "A trivial String": String
+TODO_NOTE("A trivial String"): String
 sole: Trivial
-the(Absurd, @TODO "Absurd!"): Absurd
-(A) => @TODO "tertium non datur": (A: Type) -> Either(A, (_: A) -> Absurd)
+the(Absurd, TODO_NOTE("Absurd!")): Absurd
+(A) => TODO_NOTE("tertium non datur"): (A: Type) -> Either(A, (_: A) -> Absurd)

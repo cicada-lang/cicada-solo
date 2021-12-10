@@ -26,7 +26,7 @@ function mul(x: Nat, y: Nat): Nat {
 }
 
 function Prime(n: Nat): Type {
-  return @TODO "Prime"
+  return TODO_NOTE("Prime")
 }
 
 let zero = Nat.zero
@@ -49,6 +49,6 @@ function euler_s_conjecture(n: Nat): [
     add(mul(x, x), add(p, p))
   )
 ] {
-  return @TODO "euler_s_conjecture"
+  return TODO_NOTE("euler_s_conjecture")
 }
 ```

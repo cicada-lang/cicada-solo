@@ -1,10 +1,10 @@
+import * as Exps from "."
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { Exp, ExpMeta } from "../exp"
-import * as Exps from "../exps"
 import { readback, Value } from "../value"
 
-export class Todo extends Exp {
+export class TodoNote extends Exp {
   meta: ExpMeta
   note: string
 
@@ -23,15 +23,15 @@ export class Todo extends Exp {
   }
 
   format(): string {
-    return `@TODO ${new Exps.QuoteCore(this.note).format()}`
+    return `TODO_NOTE(${new Exps.QuoteCore(this.note).format()})`
   }
 
   check(ctx: Ctx, t: Value): Core {
     const t_core = readback(ctx, new Exps.TypeValue(), t)
     const t_format = ctx.highlight("code", t_core.format())
-    const head = ctx.highlight("warn", "@TODO")
+    const head = ctx.highlight("warn", "TODO_NOTE")
     const note = ctx.highlight("note", this.note)
-    ctx.todo(`${head} ${note}\n  ${t_format}`)
-    return new Exps.TodoCore(this.note, t)
+    ctx.todo(`${head}(${note})\n  ${t_format}`)
+    return new Exps.TodoNoteCore(this.note, t)
   }
 }

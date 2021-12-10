@@ -3,12 +3,12 @@ datatype Either(L: Type, R: Type) {
   inr(right: R): Either(L, R)
 }
 
-let a: String = @TODO "A trivial String"
-let b: Trivial = @TODO "It's not Trivial"
-let c: Absurd = @TODO "Absurd!"
+let a: String = TODO_NOTE("A trivial String")
+let b: Trivial = TODO_NOTE("It's not Trivial")
+let c: Absurd = TODO_NOTE("Absurd!")
 
 function law_of_excluded_middle(A: Type): Either(A, (A) -> Absurd) {
-  return @TODO "tertium non datur"
+  return TODO_NOTE("tertium non datur")
 }
 
 a

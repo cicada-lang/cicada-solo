@@ -3,9 +3,9 @@ import { Ctx } from "../ctx"
 import { Neutral } from "../neutral"
 import { Solution } from "../solution"
 import { Value } from "../value"
-import { TodoCore } from "./todo-core"
+import { TodoNoteCore } from "./todo-note-core"
 
-export class TodoNeutral extends Neutral {
+export class TodoNoteNeutral extends Neutral {
   note: string
   t: Value
 
@@ -16,11 +16,11 @@ export class TodoNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new TodoCore(this.note, this.t)
+    return new TodoNoteCore(this.note, this.t)
   }
 
   unify_neutral(solution: Solution, ctx: Ctx, that: Neutral): Solution {
-    if (!(that instanceof TodoNeutral)) {
+    if (!(that instanceof TodoNoteNeutral)) {
       return Solution.fail_to_be_the_same_neutral(ctx, this, that)
     }
 
