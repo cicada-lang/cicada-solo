@@ -1,18 +1,8 @@
 # built-in
 
-- `built-in/built-ins` -- `find_value`
+- `built-in/built-ins` -- `find_type` -- references concrete `BuiltInValue`
 
-  - references concrete `BuiltInValue`
-
-- `built-in/built-ins` -- `find_type`
-
-  - references concrete `BuiltInValue`
-
-- `variable` -- `infer` use `built-in/built-ins`
-
-  - if can not find a variable in scope,
-    try to find its type by `built-in/built-ins`,
-    and elaborate it to a `BuiltInCore`
+- `built-in/built-ins` -- `register` concrete `BuiltInValue`
 
 - `built-in/the-value` -- `the: (T: Type, x: T) -> T`
 
