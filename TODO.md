@@ -1,8 +1,7 @@
 # built-in
 
-- `built-in/built-ins` -- `register` concrete `BuiltInEntry`
-
 - `built-in/the-value` -- `the: (T: Type, x: T) -> T`
+- `built-in/built-ins` -- register `TheValue`
 
 - [built-in] `TODO: (vague T: Type) -> T`
 - [built-in] `TODO_NOTE: (vague T: Type, optional note: String) -> T`

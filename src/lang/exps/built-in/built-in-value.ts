@@ -12,6 +12,8 @@ export abstract class BuiltInValue extends Value {
     this.name = name
   }
 
+  abstract self_type(): Value
+
   readback(ctx: Ctx, t: Value): Core | undefined {
     return new Exps.BuiltInCore(this.name)
   }
