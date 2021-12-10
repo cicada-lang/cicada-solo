@@ -1,16 +1,14 @@
 # prelude
 
-- support `TODO` -- without note
-
 - prelude -- bindings that are loaded at the beginning of every module.
 
   - can not be redefined at top level, but can be scoped in local function scope.
 
 - implement `the`, `is` and `TODO` in prelude
 
-  - `TODO_NOTE("...")` -- `(vague T: Type, optional note: String) -> T`
+  - `TODO_NOTE: (vague T: Type, optional note: String) -> T`
 
-  - `TODO` -- `(vague T: Type) -> T`
+  - `TODO: (vague T: Type) -> T`
 
 # book manager
 

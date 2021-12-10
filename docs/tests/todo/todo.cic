@@ -6,12 +6,15 @@ datatype Either(L: Type, R: Type) {
 let a: String = TODO_NOTE("A trivial String")
 let b: Trivial = TODO_NOTE("It's not Trivial")
 let c: Absurd = TODO_NOTE("Absurd!")
+let d: Absurd = TODO // NOTE Even without a note?
+
+a
+b
+c
+d
 
 function law_of_excluded_middle(A: Type): Either(A, (A) -> Absurd) {
   return TODO_NOTE("tertium non datur")
 }
 
-a
-b
-c
 law_of_excluded_middle

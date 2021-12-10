@@ -1,18 +1,18 @@
 import pt from "@cicada-lang/partech"
 
 const preserved = [
-  // stmts
+  // keywords
   "let",
   "function",
   "return",
   "class",
   "import",
   "datatype",
-  // keywords
   "induction",
+  // built-in
   "the",
   "is",
-  // built-in
+  "TODO",
   "Pair",
   "car",
   "cdr",

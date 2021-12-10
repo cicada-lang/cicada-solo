@@ -271,18 +271,18 @@ let's prepare some partial definitions:
 
 ``` cicada
 function LessThan(j: Nat, k: Nat): Type {
-  return TODO_NOTE("LessThan")
+  return TODO
 }
 
 function zero_smallest(n: Nat): LessThan(Nat.zero, Nat.add1(n)) {
-  return TODO_NOTE("zero_smallest")
+  return TODO
 }
 
 function add1_smaller(
   j: Nat, k: Nat,
   prev_smaller: LessThan(j, k),
 ): LessThan(Nat.add1(j), Nat.add1(k)) {
-  return TODO_NOTE("add1_smaller")
+  return TODO
 }
 ```
 
