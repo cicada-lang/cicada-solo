@@ -1,7 +1,5 @@
 # built-in
 
-- `built-in/built-in-value` -- `unify` by `name`
-
 - `built-in/built-ins` -- `find_value`
 
   - references concrete `BuiltInValue`
