@@ -1,8 +1,8 @@
 // organize-imports-ignore
 
-export * from "./var"
-export * from "./var-core"
-export * from "./var-neutral"
+export * from "./variable"
+export * from "./variable-core"
+export * from "./variable-neutral"
 
 export * from "./type"
 export * from "./type-core"

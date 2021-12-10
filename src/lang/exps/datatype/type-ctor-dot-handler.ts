@@ -56,7 +56,7 @@ export class TypeCtorDotHandler extends DotHandler {
 
     return {
       t: evaluate(this.target.env, t_core),
-      core: new Exps.DotCore(new Exps.VarCore(this.target.name), name),
+      core: new Exps.DotCore(new Exps.VariableCore(this.target.name), name),
     }
   }
 }

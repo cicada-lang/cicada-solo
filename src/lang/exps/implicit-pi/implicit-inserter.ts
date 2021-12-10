@@ -27,7 +27,7 @@ export class ImplicitInserter {
       exp.free_names(new Set()),
       ctx.freshen(this.ret_t_cl.name)
     )
-    const variable = new Exps.VarNeutral(fresh_name)
+    const variable = new Exps.VariableNeutral(fresh_name)
     const arg = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = this.ret_t_cl.apply(arg)
     // NOTE We do not need to subst `exp` for the `fresh_name`,
@@ -128,7 +128,7 @@ export class ImplicitInserter {
 
   private implicit_ret_t(ctx: Ctx, inferred_arg_t: Value): Value {
     const fresh_name = ctx.freshen(this.ret_t_cl.name)
-    const variable = new Exps.VarNeutral(fresh_name)
+    const variable = new Exps.VariableNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = this.ret_t_cl.apply(not_yet_value)
     return ret_t

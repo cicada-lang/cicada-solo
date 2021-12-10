@@ -21,7 +21,7 @@ export class VaguePiValue extends Value implements ReadbackEtaExpansion {
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
       const fresh_name = ctx.freshen(this.ret_t_cl.name)
-      const variable = new Exps.VarNeutral(fresh_name)
+      const variable = new Exps.VariableNeutral(fresh_name)
       const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
       const arg_t = readback(ctx, new Exps.TypeValue(), this.arg_t)
       const ret_t_core = readback(
@@ -44,7 +44,7 @@ export class VaguePiValue extends Value implements ReadbackEtaExpansion {
         ? ctx.freshen(value.ret_cl.name)
         : ctx.freshen(this.ret_t_cl.name)
 
-    const variable = new Exps.VarNeutral(fresh_name)
+    const variable = new Exps.VariableNeutral(fresh_name)
     const not_yet_value = new Exps.NotYetValue(this.arg_t, variable)
     const pi = this.ret_t_cl.apply(not_yet_value)
     const result = readback(

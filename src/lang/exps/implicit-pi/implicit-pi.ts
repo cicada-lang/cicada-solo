@@ -42,7 +42,7 @@ export class ImplicitPi extends Exp {
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen(free_names, this.name)
-      const ret_t = subst(this.ret_t, this.name, new Exps.Var(fresh_name))
+      const ret_t = subst(this.ret_t, this.name, new Exps.Variable(fresh_name))
 
       return new ImplicitPi(
         fresh_name,
@@ -57,7 +57,7 @@ export class ImplicitPi extends Exp {
     const fresh_name = ctx.freshen(this.name)
     const arg_t_core = check(ctx, this.arg_t, new Exps.TypeValue())
     const arg_t_value = evaluate(ctx.to_env(), arg_t_core)
-    const ret_t = subst(this.ret_t, this.name, new Exps.Var(fresh_name))
+    const ret_t = subst(this.ret_t, this.name, new Exps.Variable(fresh_name))
     const ret_t_core = check(
       ctx.extend(fresh_name, arg_t_value),
       ret_t,

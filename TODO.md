@@ -1,28 +1,34 @@
-# prelude
+# built-in
 
-- prelude -- bindings that are loaded at the beginning of every module.
+- `built-in-variables` -- references `built-in-values/`
 
-  - can not be redefined at top level, but can be scoped in local function scope.
+- `built-in-value` -- has `name` and might has `ap_handler` & `dot_handler`
 
-- [prelude] `the: (T: Type, x: T) -> T`
+- `built-in-values/the-value`
 
-- [prelude] `TODO: (vague T: Type) -> T`
-- [prelude] `TODO_NOTE: (vague T: Type, optional note: String) -> T`
+- `built-in-core` -- if can not find a variable in scope, try to elaborate it to `BuiltInCore`
 
-- [prelude] Pair
-- [prelude] car
-- [prelude] cdr
-- [prelude] Equal
-- [prelude] refl
-- [prelude] same
-- [prelude] the_same
-- [prelude] replace
-- [prelude] Trivial
-- [prelude] sole
-- [prelude] Absurd
-- [prelude] absurd_ind
-- [prelude] String
-- [prelude] Type
+  - NOTE `built-ins` can not be redefined at top level, but can be scoped in local function scope.
+
+- [built-in] `the: (T: Type, x: T) -> T`
+
+- [built-in] `TODO: (vague T: Type) -> T`
+- [built-in] `TODO_NOTE: (vague T: Type, optional note: String) -> T`
+
+- [built-in] Pair
+- [built-in] car
+- [built-in] cdr
+- [built-in] Equal
+- [built-in] refl
+- [built-in] same
+- [built-in] the_same
+- [built-in] replace
+- [built-in] Trivial
+- [built-in] sole
+- [built-in] Absurd
+- [built-in] absurd_ind -- rename this eliminator
+- [built-in] String
+- [built-in] Type
 
 # book manager
 

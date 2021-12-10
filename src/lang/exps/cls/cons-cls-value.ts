@@ -50,7 +50,7 @@ export class ConsClsValue extends Exps.ClsValue {
       const fresh_name = ut.freshen(new Set(ctx.names), this.rest_t_cl.name)
       const variable = new Exps.NotYetValue(
         this.field_t,
-        new Exps.VarNeutral(fresh_name)
+        new Exps.VariableNeutral(fresh_name)
       )
       const field_t = readback(ctx, new Exps.TypeValue(), this.field_t)
       const rest_t = readback(
@@ -108,7 +108,7 @@ export class ConsClsValue extends Exps.ClsValue {
     const fresh_name = ctx.freshen(this.field_name)
     const variable = new Exps.NotYetValue(
       this.field_t,
-      new Exps.VarNeutral(fresh_name)
+      new Exps.VariableNeutral(fresh_name)
     )
 
     return this.rest_t_cl

@@ -137,7 +137,8 @@ class ExtendCtx extends Ctx {
 
   to_env(): Env {
     const value =
-      this.value || new Exps.NotYetValue(this.t, new Exps.VarNeutral(this.name))
+      this.value ||
+      new Exps.NotYetValue(this.t, new Exps.VariableNeutral(this.name))
 
     return this.rest.to_env().extend(this.name, value)
   }

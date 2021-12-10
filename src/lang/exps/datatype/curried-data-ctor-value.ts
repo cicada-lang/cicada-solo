@@ -37,7 +37,7 @@ export class CurriedDataCtorValue extends Value {
       })
 
       let result_core: Core = new Exps.DotCore(
-        new Exps.VarCore(this.data_ctor.type_ctor.name),
+        new Exps.VariableCore(this.data_ctor.type_ctor.name),
         this.data_ctor.name
       )
 

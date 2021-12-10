@@ -44,7 +44,11 @@ export class Ext extends Exp {
     const result = parent_value.extend_ctx(ctx, [])
     const rest_t = result.renamings.reduce(
       (rest_t, renaming) =>
-        subst(rest_t, renaming.field_name, new Exps.Var(renaming.local_name)),
+        subst(
+          rest_t,
+          renaming.field_name,
+          new Exps.Variable(renaming.local_name)
+        ),
       subst(
         this.rest_t,
         "super",

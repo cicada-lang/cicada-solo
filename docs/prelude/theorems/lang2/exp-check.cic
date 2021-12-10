@@ -3,7 +3,7 @@
 Exp.check(Map(String, Value), Exp, Value): Trivial
 
 Exp.check(ctx, Exp.fn(name, ret), new PiValue(arg_t, ret_t_cl)) = {
-  arg_value = new NotYetValue(arg_t, new VarNeutral(name))
+  arg_value = new NotYetValue(arg_t, new VariableNeutral(name))
   ret_t = Closure.apply(ret_t_cl, arg_value)
   Exp.check(ctx.extend(name, arg_t), ret, ret_t)
 }

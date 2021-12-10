@@ -8,7 +8,10 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
   // NOTE The following two `find_entry`s are like `deep_walk`
   //   (before `readback` `arg_t` in `ImApInsertion`).
 
-  if (t instanceof Exps.NotYetValue && t.neutral instanceof Exps.VarNeutral) {
+  if (
+    t instanceof Exps.NotYetValue &&
+    t.neutral instanceof Exps.VariableNeutral
+  ) {
     const entry = ctx.find_entry(t.neutral.name)
     if (entry && entry.value) {
       t = entry.value
@@ -17,7 +20,7 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
 
   if (
     value instanceof Exps.NotYetValue &&
-    value.neutral instanceof Exps.VarNeutral
+    value.neutral instanceof Exps.VariableNeutral
   ) {
     const entry = ctx.find_entry(value.neutral.name)
     if (entry && entry.value) {

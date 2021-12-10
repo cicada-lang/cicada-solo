@@ -34,7 +34,7 @@ export class CurriedTypeCtorValue extends Value {
     const self_type = this.self_type()
 
     if (conversion(ctx, new Exps.TypeValue(), t, self_type)) {
-      let result: Core = new Exps.VarCore(this.type_ctor.name)
+      let result: Core = new Exps.VariableCore(this.type_ctor.name)
       let self_type = this.type_ctor.self_type()
       for (const [index, arg] of this.args.entries()) {
         const pi = expect(ctx, self_type, Exps.PiValue)

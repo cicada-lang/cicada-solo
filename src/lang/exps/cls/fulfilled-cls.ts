@@ -74,7 +74,7 @@ export class FulfilledCls extends Exps.Cls {
         subst(this.field_t, name, exp),
         subst(this.field, name, exp),
         subst(
-          subst(this.rest_t, this.local_name, new Exps.Var(fresh_name)),
+          subst(this.rest_t, this.local_name, new Exps.Variable(fresh_name)),
           name,
           exp
         ) as Exps.Cls,
@@ -101,7 +101,11 @@ export class FulfilledCls extends Exps.Cls {
     const field_t_value = evaluate(ctx.to_env(), field_t_core)
     const field_core = check(ctx, this.field, field_t_value)
     const field_value = evaluate(ctx.to_env(), field_core)
-    const rest_t = subst(this.rest_t, this.local_name, new Exps.Var(fresh_name))
+    const rest_t = subst(
+      this.rest_t,
+      this.local_name,
+      new Exps.Variable(fresh_name)
+    )
     const rest_t_core = check(
       ctx.extend(fresh_name, field_t_value, field_value),
       rest_t,

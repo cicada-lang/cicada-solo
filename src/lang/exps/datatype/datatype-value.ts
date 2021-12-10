@@ -24,7 +24,7 @@ export class DatatypeValue extends Value {
 
   readback(ctx: Ctx, t: Value): Core | undefined {
     if (t instanceof Exps.TypeValue) {
-      let result: Core = new Exps.VarCore(this.type_ctor.name)
+      let result: Core = new Exps.VariableCore(this.type_ctor.name)
       let self_type = this.type_ctor.self_type()
       for (const [index, arg] of this.args.entries()) {
         const pi = expect(ctx, self_type, Exps.PiValue)
@@ -58,9 +58,12 @@ export class DatatypeValue extends Value {
       env = env.extend(fixed_arg_name, fixed_arg)
     }
 
-    let datatype_core: Core = new Exps.VarCore(this.type_ctor.name)
+    let datatype_core: Core = new Exps.VariableCore(this.type_ctor.name)
     for (const arg_name of this.type_ctor.arg_names) {
-      datatype_core = new Exps.ApCore(datatype_core, new Exps.VarCore(arg_name))
+      datatype_core = new Exps.ApCore(
+        datatype_core,
+        new Exps.VariableCore(arg_name)
+      )
     }
 
     let motive_core = new Exps.PiCore(
@@ -97,7 +100,7 @@ export class DatatypeValue extends Value {
     //   because in our generated core expression,
     //   it is a free variable.
     env = env.extend("motive", motive)
-    const motive_core = new Exps.VarCore("motive")
+    const motive_core = new Exps.VariableCore("motive")
 
     let case_t = data_ctor.build_ret_t(
       motive_core,

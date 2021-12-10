@@ -28,7 +28,7 @@ export class VagueFn extends Exp {
     } else {
       const free_names = exp.free_names(new Set())
       const fresh_name = ut.freshen(free_names, this.name)
-      const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
+      const ret = subst(this.ret, this.name, new Exps.Variable(fresh_name))
       return new VagueFn(fresh_name, subst(ret, name, exp), this.meta)
     }
   }
@@ -36,9 +36,12 @@ export class VagueFn extends Exp {
   check(ctx: Ctx, t: Value): Core {
     const { arg_t, ret_t_cl } = expect(ctx, t, Exps.VaguePiValue)
     const fresh_name = ctx.freshen(this.name)
-    const arg = new Exps.NotYetValue(arg_t, new Exps.VarNeutral(fresh_name))
+    const arg = new Exps.NotYetValue(
+      arg_t,
+      new Exps.VariableNeutral(fresh_name)
+    )
     const ret_t = ret_t_cl.apply(arg)
-    const ret = subst(this.ret, this.name, new Exps.Var(fresh_name))
+    const ret = subst(this.ret, this.name, new Exps.Variable(fresh_name))
     const ret_core = check(ctx.extend(fresh_name, arg_t), ret, ret_t)
     return new Exps.VagueFnCore(fresh_name, ret_core)
   }

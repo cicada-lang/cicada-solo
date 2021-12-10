@@ -1,11 +1,11 @@
+import * as Exps from "."
 import { Core } from "../core"
 import { Ctx } from "../ctx"
 import { ExpTrace } from "../errors"
 import { check_by_infer, Exp, ExpMeta } from "../exp"
-import * as Exps from "../exps"
 import { Value } from "../value"
 
-export class Var extends Exp {
+export class Variable extends Exp {
   meta?: ExpMeta
   name: string
 
@@ -38,7 +38,7 @@ export class Var extends Exp {
     if (found_t instanceof Exps.VaguePiValue) {
       return found_t.vague_inserter.insert_vague_ap(
         ctx,
-        new Exps.VarCore(this.name),
+        new Exps.VariableCore(this.name),
         [],
         t
       )
@@ -56,7 +56,7 @@ export class Var extends Exp {
       )
     }
 
-    return { t, core: new Exps.VarCore(this.name) }
+    return { t, core: new Exps.VariableCore(this.name) }
   }
 
   format(): string {

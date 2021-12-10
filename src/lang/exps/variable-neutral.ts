@@ -4,7 +4,7 @@ import * as Exps from "../exps"
 import { Neutral } from "../neutral"
 import { Solution } from "../solution"
 
-export class VarNeutral extends Neutral {
+export class VariableNeutral extends Neutral {
   name: string
 
   constructor(name: string) {
@@ -13,11 +13,11 @@ export class VarNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Exps.VarCore(this.name)
+    return new Exps.VariableCore(this.name)
   }
 
   unify_neutral(solution: Solution, ctx: Ctx, that: Neutral): Solution {
-    if (!(that instanceof VarNeutral && this.name === that.name)) {
+    if (!(that instanceof VariableNeutral && this.name === that.name)) {
       return Solution.fail_to_be_the_same_neutral(ctx, this, that)
     }
 

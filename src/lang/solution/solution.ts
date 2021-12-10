@@ -16,14 +16,14 @@ export abstract class Solution {
   static logic_var_p(value: Value): boolean {
     return (
       value instanceof Exps.NotYetValue &&
-      value.neutral instanceof Exps.VarNeutral
+      value.neutral instanceof Exps.VariableNeutral
     )
   }
 
   static logic_var_name(value: Value): string {
     if (
       value instanceof Exps.NotYetValue &&
-      value.neutral instanceof Exps.VarNeutral
+      value.neutral instanceof Exps.VariableNeutral
     ) {
       return value.neutral.name
     } else {
@@ -185,7 +185,7 @@ export abstract class Solution {
   ): Solution {
     const names = new Set([...this.names, x.name, y.name])
     const fresh_name = ut.freshen(names, x.name)
-    const variable = new Exps.VarNeutral(fresh_name)
+    const variable = new Exps.VariableNeutral(fresh_name)
     return this.unify_type(ctx, x_arg_t, y_arg_t).unify(
       ctx,
       ret_t,

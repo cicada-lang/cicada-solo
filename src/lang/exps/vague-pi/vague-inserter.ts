@@ -27,7 +27,7 @@ export class VagueInserter {
       exp.free_names(new Set()),
       ctx.freshen(this.ret_t_cl.name)
     )
-    const variable = new Exps.VarNeutral(fresh_name)
+    const variable = new Exps.VariableNeutral(fresh_name)
     const arg = new Exps.NotYetValue(this.arg_t, variable)
     const ret_t = this.ret_t_cl.apply(arg)
     // NOTE We do not need to subst `exp` for the `fresh_name`,
@@ -145,7 +145,7 @@ function solve_vague_args(
     const solution = Solution.empty.unify(ctx, new Exps.TypeValue(), ret_t, t)
     if (Solution.failure_p(solution)) {
       const fresh_name = ctx.freshen(ret_t.ret_t_cl.name)
-      const variable = new Exps.VarNeutral(fresh_name)
+      const variable = new Exps.VariableNeutral(fresh_name)
       const not_yet_value = new Exps.NotYetValue(ret_t.arg_t, variable)
       const next_ret_t = ret_t.ret_t_cl.apply(not_yet_value)
       return solve_vague_args(ctx, next_ret_t, t, number_of_solved_args + 1)
