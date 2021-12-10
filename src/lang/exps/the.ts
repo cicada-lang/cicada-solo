@@ -33,11 +33,9 @@ export class The extends Exp {
 
   infer(ctx: Ctx): { t: Value; core: Core } {
     const t_core = check(ctx, this.t, new Exps.TypeValue())
-
-    return {
-      t: evaluate(ctx.to_env(), t_core),
-      core: check(ctx, this.x, t),
-    }
+    const t = evaluate(ctx.to_env(), t_core)
+    const core = check(ctx, this.x, t)
+    return { t, core }
   }
 
   format(): string {

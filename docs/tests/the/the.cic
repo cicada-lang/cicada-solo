@@ -1,0 +1,6 @@
+the(Type, String)
+
+{
+  let the: String = "the"
+  return the
+}
