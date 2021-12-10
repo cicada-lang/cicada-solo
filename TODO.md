@@ -1,7 +1,5 @@
 # built-in
 
-- remove `exps/the`
-
 - `built-in/the-todo-value` -- `self_type` -- `TODO: (vague T: Type) -> T`
 - `built-in/the-todo` -- `self_type` -- `TODO_NOTE: (vague T: Type, optional note: String) -> T`
 

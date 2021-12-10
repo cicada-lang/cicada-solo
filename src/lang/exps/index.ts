@@ -11,6 +11,15 @@ export * from "./built-in/the-value"
 //   thus must follow them.
 export * from "./built-in/built-ins"
 
+// NOTE Even with built-in `the`, well still need the following
+// - `Exps.The` -- used by matchers to handle `let_the`
+// - `Exps.TheCore` -- used by `Value.readback` to handle special case on `AbsurdValue`
+// TODO Maybe we should improve this by
+// - handle `let_the` in different way
+// - handle `Value.readback` special case on `AbsurdValue` in different way
+export * from "./the"
+export * from "./the-core"
+
 export * from "./type"
 export * from "./type-core"
 export * from "./type-value"
@@ -18,9 +27,6 @@ export * from "./type-value"
 export * from "./sequence/begin"
 export * from "./sequence/let"
 export * from "./sequence/let-core"
-
-export * from "./the"
-export * from "./the-core"
 
 export * from "./todo"
 export * from "./todo-core"

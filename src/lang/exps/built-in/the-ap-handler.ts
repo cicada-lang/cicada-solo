@@ -14,8 +14,7 @@ export class TheApHandler extends ApHandler {
     if (this.target.curried_length < this.target.max_curried_length) {
       return this.target.curry({ kind: "plain", value: arg })
     } else {
-      const arg_value_entry = this.target.curried_arg_value_entries[1]
-      return arg_value_entry.value
+      return arg
     }
   }
 }

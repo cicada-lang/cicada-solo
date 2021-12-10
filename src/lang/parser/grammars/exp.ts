@@ -45,14 +45,14 @@ export const operator = {
       { motive: "exp" },
       '")"',
     ],
-    "operator:the": [
-      '"the"',
-      '"("',
-      { t: "exp" },
-      '","',
-      { exp: "exp" },
-      '")"',
-    ],
+    // "operator:the": [
+    //   '"the"',
+    //   '"("',
+    //   { t: "exp" },
+    //   '","',
+    //   { exp: "exp" },
+    //   '")"',
+    // ],
     "operator:induction": [
       '"induction"',
       '"("',
