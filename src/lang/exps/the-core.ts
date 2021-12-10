@@ -4,27 +4,31 @@ import { Value } from "../value"
 
 export class TheCore extends Core {
   t: Core
-  exp: Core
+  x: Core
 
-  constructor(t: Core, exp: Core) {
+  constructor(t: Core, x: Core) {
     super()
     this.t = t
-    this.exp = exp
+    this.x = x
   }
 
   evaluate(env: Env): Value {
-    return evaluate(env, this.exp)
+    return evaluate(env, this.x)
   }
 
   format(): string {
-    const args = [this.t.format(), this.exp.format()].join(", ")
+    const t = this.t.format()
+    const x = this.x.format()
+    const args = [t, x].join(", ")
+
     return `the(${args})`
   }
 
   alpha_format(ctx: AlphaCtx): string {
-    const args = [this.t.alpha_format(ctx), this.exp.alpha_format(ctx)].join(
-      ", "
-    )
+    const t = this.t.alpha_format(ctx)
+    const x = this.x.alpha_format(ctx)
+    const args = [t, x].join(", ")
+
     return `the(${args})`
   }
 }
