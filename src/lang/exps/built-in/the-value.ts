@@ -1,13 +1,15 @@
-import * as Exps from "../../exps"
-import { Env } from "../../env"
 import { evaluate } from "../../core"
-import { Ctx } from "../../ctx"
+import { Env } from "../../env"
+import * as Exps from "../../exps"
 import { Value } from "../../value"
+import { TheApHandler } from "./the-ap-handler"
 
 export class TheValue extends Exps.BuiltInValue {
   constructor() {
     super("the")
   }
+
+  ap_handler = new TheApHandler(this)
 
   // NOTE `the: (T: Type, x: T) -> T`
   self_type(): Value {

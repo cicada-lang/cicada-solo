@@ -1,5 +1,4 @@
 import * as Exps from "../../exps"
-import { Value } from "../../value"
 
 // NOTE The `built-ins` can not be redefined at top level,
 //   but can be scoped in local function scope.
