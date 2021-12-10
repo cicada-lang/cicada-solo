@@ -29,8 +29,6 @@
 - [book manager] [cli] `cic install` -- `help`
 - [book manager] [cli] `cic init` -- `help`
 
-- [book manager] a syntax for addressing value by full path and name -- preparing for nominal typing
-
 # inductive datatype -- questions
 
 > If the ambition of this project is too much pressure,
@@ -170,13 +168,11 @@
 - [maybe] extract `readback_type`
 - [maybe] extract `ctx.extend_type`
 
-# later
-
-- [later] `Fn` be able to annotate argument type and return type
+- [maybe] `Fn` be able to annotate argument type and return type
 
 # problem
 
-- [problem] `exps/var` -- how to handle `span` when doing a `subst`?
+- [problem] `exps/variable` -- how to handle `span` when doing a `subst`?
 
 # books
 
