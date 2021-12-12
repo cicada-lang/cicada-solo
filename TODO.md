@@ -1,7 +1,11 @@
 # built-in
 
+- `built-in/built-in-value` have a interface to add hooks -- `before_check` & `after_check`
+
+  - value directed interface
+
 - `built-in/the-todo-value` -- `self_type` -- `TODO: (vague T: Type) -> T`
-- `built-in/the-todo` -- `self_type` -- `TODO_NOTE: (vague T: Type, optional note: String) -> T`
+- `built-in/the-todo` -- `self_type` -- `TODO_NOTE: (vague T: Type, note: String) -> T`
 
 - [built-in] Pair
 - [built-in] car
