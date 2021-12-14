@@ -31,7 +31,7 @@ export class ApCore extends Core {
   }
 
   static apply(target: Value, arg: Value): Value {
-    if (target.ap_handler) {
+    if (target.ap_handler?.apply) {
       return target.ap_handler.apply(arg)
     }
 
