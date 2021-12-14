@@ -1,6 +1,6 @@
 # built-in
 
-- `built-in/todo-note-value` -- `before_check` -- be able to log `note`
+- [maybe] extract `built-in/built-in-ap-handler`
 
 - [built-in] Pair
 - [built-in] car

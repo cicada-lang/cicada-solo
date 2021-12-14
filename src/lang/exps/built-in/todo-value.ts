@@ -16,12 +16,13 @@ export class TodoValue extends Exps.BuiltInValue {
 
   before_check(ctx: Ctx, arg_entries: Array<Exps.ArgEntry>, t: Value): void {
     const t_core = readback(ctx, new Exps.TypeValue(), t)
-    const t_format = ctx.highlight("code", t_core.format())
-    const head = ctx.highlight("warn", "TODO")
 
     ctx.broadcast({
       tag: "todo",
-      msg: `${head}\n  ${t_format}`,
+      msg: [
+        `${ctx.highlight("warn", "TODO")}`,
+        `  ${ctx.highlight("code", t_core.format())}`,
+      ].join("\n"),
     })
   }
 
