@@ -22,8 +22,6 @@ export abstract class BuiltInValue extends Value {
 
   abstract self_type(): Value
 
-  curry?(arg_value_entry: Exps.ArgValueEntry): BuiltInValue
-
   // NOTE This is a value directed interface (v.s. type directed interface).
   before_check(ctx: Ctx, arg_entries: Array<Exps.ArgEntry>, t: Value): void {
     // NOTE Nothing by default.
@@ -42,22 +40,20 @@ export abstract class BuiltInValue extends Value {
     let t = this.self_type()
     for (const arg_value_entry of this.curried_arg_value_entries) {
       if (
-        !(
-          t instanceof Exps.PiValue ||
-          t instanceof Exps.ImplicitPiValue ||
-          t instanceof Exps.VaguePiValue
-        )
+        t instanceof Exps.PiValue ||
+        t instanceof Exps.ImplicitPiValue ||
+        t instanceof Exps.VaguePiValue
       ) {
-        throw new ExpTrace(
-          [
-            `I expect t to be pi-like type`,
-            `  class name: ${t.constructor.name}`,
-          ].join("\n")
-        )
+        curried_arg_t_values.push(t.arg_t)
+        t = t.ret_t_cl.apply(arg_value_entry.value)
       }
 
-      curried_arg_t_values.push(t.arg_t)
-      t = t.ret_t_cl.apply(arg_value_entry.value)
+      throw new ExpTrace(
+        [
+          `I expect t to be pi-like type`,
+          `  class name: ${t.constructor.name}`,
+        ].join("\n")
+      )
     }
 
     return curried_arg_t_values
