@@ -39,10 +39,6 @@ export abstract class Ctx {
     }
   }
 
-  todo(msg: string): void {
-    this.broadcast({ tag: "todo", msg })
-  }
-
   freshen(name: string): string {
     return ut.freshen(new Set(this.names), name)
   }

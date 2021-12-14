@@ -1,7 +1,5 @@
 # built-in
 
-- inline `Ctx.todo`
-
 - `built-in/todo-note-value` -- `self_type` -- `(vague T: Type, note: String) -> T`
 - `built-in/todo-note-ap-handler`
 - `built-in/todo-note-value` -- `before_check`

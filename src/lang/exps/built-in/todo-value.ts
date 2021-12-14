@@ -18,7 +18,11 @@ export class TodoValue extends Exps.BuiltInValue {
     const t_core = readback(ctx, new Exps.TypeValue(), t)
     const t_format = ctx.highlight("code", t_core.format())
     const head = ctx.highlight("warn", "TODO")
-    ctx.todo(`${head}\n  ${t_format}`)
+
+    ctx.broadcast({
+      tag: "todo",
+      msg: `${head}\n  ${t_format}`,
+    })
   }
 
   curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {

@@ -31,7 +31,12 @@ export class TodoNote extends Exp {
     const t_format = ctx.highlight("code", t_core.format())
     const head = ctx.highlight("warn", "TODO_NOTE")
     const note = ctx.highlight("note", this.note)
-    ctx.todo(`${head}(${note})\n  ${t_format}`)
+
+    ctx.broadcast({
+      tag: "todo",
+      msg: `${head}(${note})\n  ${t_format}`,
+    })
+
     return new Exps.TodoNoteCore(this.note, t)
   }
 }
