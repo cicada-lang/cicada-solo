@@ -35,25 +35,31 @@ export abstract class BuiltInValue extends Value {
     return this.arity - 1
   }
 
+  private is_pi_like_value(
+    value: Value
+  ): value is Exps.PiValue | Exps.ImplicitPiValue | Exps.VaguePiValue {
+    return (
+      value instanceof Exps.PiValue ||
+      value instanceof Exps.ImplicitPiValue ||
+      value instanceof Exps.VaguePiValue
+    )
+  }
+
   private curried_arg_t_values(): Array<Value> {
     const curried_arg_t_values: Array<Value> = []
     let t = this.self_type()
     for (const arg_value_entry of this.curried_arg_value_entries) {
-      if (
-        t instanceof Exps.PiValue ||
-        t instanceof Exps.ImplicitPiValue ||
-        t instanceof Exps.VaguePiValue
-      ) {
-        curried_arg_t_values.push(t.arg_t)
-        t = t.ret_t_cl.apply(arg_value_entry.value)
+      if (!this.is_pi_like_value(t)) {
+        throw new ExpTrace(
+          [
+            `I expect t to be pi-like type`,
+            `  class name: ${t.constructor.name}`,
+          ].join("\n")
+        )
       }
 
-      throw new ExpTrace(
-        [
-          `I expect t to be pi-like type`,
-          `  class name: ${t.constructor.name}`,
-        ].join("\n")
-      )
+      curried_arg_t_values.push(t.arg_t)
+      t = t.ret_t_cl.apply(arg_value_entry.value)
     }
 
     return curried_arg_t_values
