@@ -15,14 +15,15 @@ export class TodoNoteValue extends Exps.BuiltInValue {
   ap_handler = new TodoNoteApHandler(this)
 
   before_check(ctx: Ctx, arg_entries: Array<Exps.ArgEntry>, t: Value): void {
+    const t_core = readback(ctx, new Exps.TypeValue(), t)
+    const t_format = ctx.highlight("code", t_core.format())
+    const head = ctx.highlight("warn", "TODO_NOTE")
     // TODO
-    // const t_core = readback(ctx, new Exps.TypeValue(), t)
-    // const t_format = ctx.highlight("code", t_core.format())
-    // const head = ctx.highlight("warn", "TODO")
-    // ctx.broadcast({
-    //   tag: "todo",
-    //   msg: `${head}\n  ${t_format}`,
-    // })
+    // const note = ctx.highlight("note", this.note)
+    ctx.broadcast({
+      tag: "todo",
+      msg: `${head}\n  ${t_format}`,
+    })
   }
 
   curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
