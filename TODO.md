@@ -1,21 +1,26 @@
 # built-in
 
-- [maybe] extract `built-in/built-in-ap-handler`
+- `built-in/pair`
+- `built-in/car`
+- `built-in/cdr`
 
-- [built-in] Pair
-- [built-in] car
-- [built-in] cdr
-- [built-in] Equal
-- [built-in] refl
-- [built-in] same
-- [built-in] the_same
-- [built-in] replace
-- [built-in] Trivial
-- [built-in] sole
-- [built-in] Absurd
-- [built-in] absurd_ind -- rename this eliminator
-- [built-in] String
-- [built-in] Type
+- [maybe] extract `built-in/built-in-ap-handler` -- handle default behavior of currying (like data constructor)
+
+- `built-in/equal`
+- `built-in/refl`
+- `built-in/same`
+- `built-in/the_same`
+- `built-in/replace`
+
+- `built-in/trivial`
+- `built-in/sole`
+
+- `built-in/absurd`
+- `built-in/absurd_ind` -- rename this eliminator
+
+- `built-in/str`
+
+- `built-in/type`
 
 # book manager
 
