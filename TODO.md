@@ -1,10 +1,12 @@
 # built-in
 
-- `built-in/the-todo-value` -- `self_type` -- `TODO: (vague T: Type) -> T`
-- `built-in/the-todo-value` -- `before_check`
+- `built-in/todo-ap-handler`
+- `built-in/todo-value` -- `before_check`
+- remove `exps/todo`
 
-- `built-in/the-todo` -- `self_type` -- `TODO_NOTE: (vague T: Type, note: String) -> T`
-- `built-in/the-todo` -- `before_check`
+- `built-in/todo-note-value` -- `self_type` -- `TODO_NOTE: (vague T: Type, note: String) -> T`
+- `built-in/todo-note-ap-handler`
+- `built-in/todo-note-value` -- `before_check`
 
 - [built-in] Pair
 - [built-in] car
