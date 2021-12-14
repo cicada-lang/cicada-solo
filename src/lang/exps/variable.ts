@@ -49,7 +49,7 @@ export class Variable extends Exp {
 
     const built_in_value = Exps.built_ins.find_value(this.name)
     if (built_in_value !== undefined) {
-      // TODO built in check hook
+      built_in_value.before_check(ctx, [], t)
 
       const built_in_t = built_in_value.self_type()
       if (built_in_t instanceof Exps.VaguePiValue) {

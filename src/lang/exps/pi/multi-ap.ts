@@ -47,7 +47,7 @@ export class MultiAp extends Exp {
 
     const inferred_value = evaluate(ctx.to_env(), inferred.core)
     if (inferred_value instanceof Exps.BuiltInValue) {
-      // TODO built in check hook
+      inferred_value.before_check(ctx, this.arg_entries, t)
     }
 
     if (inferred.t instanceof Exps.VaguePiValue) {

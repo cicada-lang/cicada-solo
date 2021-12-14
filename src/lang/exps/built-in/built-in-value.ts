@@ -24,6 +24,11 @@ export abstract class BuiltInValue extends Value {
 
   abstract curry(arg_value_entry: Exps.ArgValueEntry): BuiltInValue
 
+  // NOTE This is a value directed interface (v.s. type directed interface).
+  before_check(ctx: Ctx, arg_entries: Array<Exps.ArgEntry>, t: Value): void {
+    // NOTE Nothing by default.
+  }
+
   get curried_length(): number {
     return this.curried_arg_value_entries.length
   }
