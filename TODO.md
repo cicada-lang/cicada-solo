@@ -1,8 +1,11 @@
 # built-in
 
-- `built-in/todo-note-value` -- `self_type` -- `(vague T: Type, note: String) -> T`
 - `built-in/todo-note-ap-handler`
 - `built-in/todo-note-value` -- `before_check`
+
+- remove `exps/todo-note`
+
+- `built-in/built-in-value` -- `readback` full application -- example: `TODO(vague String)`
 
 - [built-in] Pair
 - [built-in] car
