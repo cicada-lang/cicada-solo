@@ -2,7 +2,7 @@ import { evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
-import { Value } from "../../value"
+import { readback, Value } from "../../value"
 import { TodoApHandler } from "./todo-ap-handler"
 
 export class TodoValue extends Exps.BuiltInValue {
@@ -15,7 +15,10 @@ export class TodoValue extends Exps.BuiltInValue {
   ap_handler = new TodoApHandler(this)
 
   before_check(ctx: Ctx, arg_entries: Array<Exps.ArgEntry>, t: Value): void {
-    // TODO
+    const t_core = readback(ctx, new Exps.TypeValue(), t)
+    const t_format = ctx.highlight("code", t_core.format())
+    const head = ctx.highlight("warn", "TODO")
+    ctx.todo(`${head}\n  ${t_format}`)
   }
 
   curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {

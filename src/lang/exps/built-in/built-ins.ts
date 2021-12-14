@@ -1,7 +1,6 @@
 import * as Exps from "../../exps"
 
-// NOTE The `built-ins` can not be redefined at top level,
-//   but can be scoped in local function scope.
+// NOTE A built-in name can be redefined at top level, or in local scope.
 
 class BuiltIns {
   values: Map<string, Exps.BuiltInValue>

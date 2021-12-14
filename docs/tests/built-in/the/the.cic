@@ -1,0 +1,9 @@
+the(Type, String)
+
+{
+  let the: String = "redefine the in local scope"
+  return the
+}
+
+let the: String = "redefine the at top-level"
+the
