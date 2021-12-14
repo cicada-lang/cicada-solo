@@ -1,10 +1,8 @@
 # built-in
 
-- remove `exps/todo`
-
 - `built-in/todo-value` -- `before_check`
 
-- `built-in/todo-note-value` -- `self_type` -- `TODO_NOTE: (vague T: Type, note: String) -> T`
+- `built-in/todo-note-value` -- `self_type` -- `(vague T: Type, note: String) -> T`
 - `built-in/todo-note-ap-handler`
 - `built-in/todo-note-value` -- `before_check`
 

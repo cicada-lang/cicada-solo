@@ -17,7 +17,7 @@ export class TheValue extends Exps.BuiltInValue {
     return new TheValue([...this.curried_arg_value_entries, arg_value_entry])
   }
 
-  // NOTE `the: (T: Type, x: T) -> T`
+  // NOTE `(T: Type, x: T) -> T`
   self_type(): Value {
     const env = Env.init()
 

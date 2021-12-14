@@ -22,7 +22,7 @@ export class TodoValue extends Exps.BuiltInValue {
     return new TodoValue([...this.curried_arg_value_entries, arg_value_entry])
   }
 
-  // NOTE `TODO: (vague T: Type) -> T`
+  // NOTE `(vague T: Type) -> T`
   self_type(): Value {
     const env = Env.init()
 
