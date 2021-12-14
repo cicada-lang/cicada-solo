@@ -1,6 +1,5 @@
 # built-in
 
-- `built-in/todo-note-ap-handler`
 - `built-in/todo-note-value` -- `before_check`
 
 - remove `exps/todo-note`

@@ -3,7 +3,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { readback, Value } from "../../value"
-// import { TodoNoteApHandler } from "./todo-note-ap-handler"
+import { TodoNoteApHandler } from "./todo-note-ap-handler"
 
 export class TodoNoteValue extends Exps.BuiltInValue {
   arity = 2
@@ -12,7 +12,7 @@ export class TodoNoteValue extends Exps.BuiltInValue {
     super("TODO_NOTE", curried_arg_value_entries)
   }
 
-  // ap_handler = new TodoNoteApHandler(this)
+  ap_handler = new TodoNoteApHandler(this)
 
   before_check(ctx: Ctx, arg_entries: Array<Exps.ArgEntry>, t: Value): void {
     // TODO
