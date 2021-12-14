@@ -27,10 +27,7 @@ export class TodoNoteValue extends Exps.BuiltInValue {
   }
 
   curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
-    return new TodoNoteValue([
-      ...this.curried_arg_value_entries,
-      arg_value_entry,
-    ])
+    return new TodoNoteValue([...this.arg_value_entries, arg_value_entry])
   }
 
   // NOTE `(vague T: Type, note: String) -> T`

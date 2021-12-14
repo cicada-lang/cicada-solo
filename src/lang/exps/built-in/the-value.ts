@@ -14,7 +14,7 @@ export class TheValue extends Exps.BuiltInValue {
   ap_handler = new TheApHandler(this)
 
   curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
-    return new TheValue([...this.curried_arg_value_entries, arg_value_entry])
+    return new TheValue([...this.arg_value_entries, arg_value_entry])
   }
 
   // NOTE `(T: Type, x: T) -> T`

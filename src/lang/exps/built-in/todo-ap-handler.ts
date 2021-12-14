@@ -11,6 +11,6 @@ export class TodoApHandler extends ApHandler {
   }
 
   vague_apply(arg: Value): Value {
-    return this.target
+    return this.target.curry({ kind: "vague", value: arg })
   }
 }

@@ -1,5 +1,5 @@
-TODO_NOTE(vague String): String
+TODO_NOTE(vague String, "A trivial String"): String
 sole: Trivial
-TODO_NOTE(vague Absurd): Absurd
-TODO: Absurd
-(A) => TODO_NOTE(vague Either(A, (_: A) -> Absurd)): (A: Type) -> Either(A, (_: A) -> Absurd)
+TODO_NOTE(vague Absurd, "Absurd!"): Absurd
+TODO(vague Absurd): Absurd
+(A) => TODO_NOTE(vague Either(A, (_: A) -> Absurd), "tertium non datur"): (A: Type) -> Either(A, (_: A) -> Absurd)

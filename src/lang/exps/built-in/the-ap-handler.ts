@@ -11,7 +11,7 @@ export class TheApHandler extends ApHandler {
   }
 
   apply(arg: Value): Value {
-    if (this.target.curried_length < this.target.max_curried_length) {
+    if (this.target.arg_value_entries.length < this.target.arity - 1) {
       return this.target.curry({ kind: "plain", value: arg })
     } else {
       return arg

@@ -11,18 +11,10 @@ export class TodoNoteApHandler extends ApHandler {
   }
 
   apply(arg: Value): Value {
-    if (this.target.curried_length < this.target.max_curried_length) {
-      return this.target.curry({ kind: "plain", value: arg })
-    } else {
-      return this.target
-    }
+    return this.target.curry({ kind: "plain", value: arg })
   }
 
   vague_apply(arg: Value): Value {
-    if (this.target.curried_length < this.target.max_curried_length) {
-      return this.target.curry({ kind: "vague", value: arg })
-    } else {
-      return this.target
-    }
+    return this.target.curry({ kind: "vague", value: arg })
   }
 }

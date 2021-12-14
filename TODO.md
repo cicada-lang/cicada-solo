@@ -1,6 +1,5 @@
 # built-in
 
-- `built-in/built-in-value` -- `readback` full application -- example: `TODO(vague String)`
 - `built-in/todo-note-value` -- `before_check` -- be able to log `note`
 
 - [built-in] Pair
