@@ -34,23 +34,46 @@ export class Variable extends Exp {
 
   check(ctx: Ctx, t: Value): Core {
     const found_t = ctx.find_type(this.name)
+    if (found_t !== undefined) {
+      if (found_t instanceof Exps.VaguePiValue) {
+        return found_t.vague_inserter.insert_vague_ap(
+          ctx,
+          new Exps.VariableCore(this.name),
+          [],
+          t
+        )
+      }
 
-    if (found_t instanceof Exps.VaguePiValue) {
-      return found_t.vague_inserter.insert_vague_ap(
-        ctx,
-        new Exps.VariableCore(this.name),
-        [],
-        t
-      )
+      return check_by_infer(ctx, this, t)
     }
 
-    return check_by_infer(ctx, this, t)
+    const built_in_value = Exps.built_ins.find_value(this.name)
+    if (built_in_value !== undefined) {
+      // TODO built in check hook
+
+      const built_in_t = built_in_value.self_type()
+      if (built_in_t instanceof Exps.VaguePiValue) {
+        return built_in_t.vague_inserter.insert_vague_ap(
+          ctx,
+          new Exps.BuiltInCore(this.name),
+          [],
+          t
+        )
+      }
+
+      return check_by_infer(ctx, this, t)
+    }
+
+    throw new ExpTrace(`I meet undefined variable name: ${this.name}`)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
-    const t = ctx.find_type(this.name)
-    if (t !== undefined) {
-      return { t, core: new Exps.VariableCore(this.name) }
+    const found_t = ctx.find_type(this.name)
+    if (found_t !== undefined) {
+      return {
+        t: found_t,
+        core: new Exps.VariableCore(this.name),
+      }
     }
 
     const built_in_value = Exps.built_ins.find_value(this.name)

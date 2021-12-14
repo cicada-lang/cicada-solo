@@ -1,4 +1,4 @@
-import { Core } from "../../core"
+import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { check, check_by_infer, Exp, ExpMeta, infer, subst } from "../../exp"
 import * as Exps from "../../exps"
@@ -45,6 +45,11 @@ export class MultiAp extends Exp {
     const inferred = infer(ctx, this.target)
     const first_arg_entry = this.arg_entries[0]
 
+    const inferred_value = evaluate(ctx.to_env(), inferred.core)
+    if (inferred_value instanceof Exps.BuiltInValue) {
+      // TODO built in check hook
+    }
+
     if (inferred.t instanceof Exps.VaguePiValue) {
       if (first_arg_entry && first_arg_entry.kind === "vague") {
         const next_multi_ap = new Exps.MultiAp(
@@ -54,35 +59,12 @@ export class MultiAp extends Exp {
         )
         return check(ctx, next_multi_ap, t)
       } else {
-        // { // DEBUG
-        //   console.log({
-        //     msg: "[MultiAp.check] before",
-        //     target: this.target.format(),
-        //     arg_entries: this.arg_entries
-        //       .map((arg_entry) => `${arg_entry.kind} ${arg_entry.exp.format()}`)
-        //       .join(", "),
-        //   })
-        // }
-
-        const result = inferred.t.vague_inserter.insert_vague_ap(
+        return inferred.t.vague_inserter.insert_vague_ap(
           ctx,
           inferred.core,
           this.arg_entries,
           t
         )
-
-        // { // DEBUG
-        //   console.log({
-        //     msg: "[MultiAp.check] after",
-        //     target: this.target.format(),
-        //     arg_entries: this.arg_entries
-        //       .map((arg_entry) => `${arg_entry.kind} ${arg_entry.exp.format()}`)
-        //       .join(", "),
-        //     result: result.format(),
-        //   })
-        // }
-
-        return result
       }
     }
 
