@@ -227,8 +227,6 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:str": (_, { span }) => new Exps.Str({ span }),
     "operand:quote": ({ value }, { span }) =>
       new Exps.Quote(pt.trim_boundary(pt.str(value), 1), { span }),
-    "operand:todo_note": ({ value }, { span }) =>
-      new Exps.TodoNote(pt.trim_boundary(pt.str(value), 1), { span }),
     "operand:type": (_, { span }) => new Exps.Type({ span }),
   })(tree)
 }

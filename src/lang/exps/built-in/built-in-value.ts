@@ -57,7 +57,7 @@ export abstract class BuiltInValue extends Value {
       }
 
       curried_arg_t_values.push(t.arg_t)
-      t = Exps.apply_arg_value_entry(t, arg_value_entry)
+      t = t.ret_t_cl.apply(arg_value_entry.value)
     }
 
     return curried_arg_t_values

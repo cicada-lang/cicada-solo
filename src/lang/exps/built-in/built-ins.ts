@@ -29,3 +29,4 @@ class BuiltIns {
 export const built_ins = new BuiltIns()
   .register(new Exps.TheValue([]))
   .register(new Exps.TodoValue([]))
+  .register(new Exps.TodoNoteValue([]))
