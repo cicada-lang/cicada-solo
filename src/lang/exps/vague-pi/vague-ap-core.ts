@@ -36,8 +36,8 @@ export class VagueApCore extends Core {
   }
 
   static apply(target: Value, arg: Value): Value {
-    if (target.ap_handler?.vague_apply) {
-      return target.ap_handler.vague_apply(arg)
+    if (target.ap_handler?.apply) {
+      return target.ap_handler.apply({ kind: "vague", value: arg })
     }
 
     if (target instanceof Exps.VagueFnValue) {

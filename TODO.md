@@ -1,9 +1,11 @@
 # built-in
 
+- [refactor] extract `built-in/built-in-ap-handler` -- handle default behavior of currying
+
+  - concrete class only need to handle the `finial_apply`
+
 - `built-in/car`
 - `built-in/cdr`
-
-- [maybe] extract `built-in/built-in-ap-handler` -- handle default behavior of currying (like data constructor)
 
 - `built-in/equal`
 - `built-in/refl`
@@ -24,6 +26,8 @@
 # book manager
 
 - refactor `Book` and `BookStore`
+
+  - `Book` having a type argument seems like code smell
 
 - references should represent a book store
 

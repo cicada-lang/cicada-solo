@@ -10,11 +10,11 @@ export class TheApHandler extends ApHandler {
     this.target = target
   }
 
-  apply(arg: Value): Value {
+  apply(arg_value_entry: Exps.ArgValueEntry): Value {
     if (this.target.arg_value_entries.length < this.target.arity - 1) {
-      return this.target.curry({ kind: "plain", value: arg })
+      return this.target.curry(arg_value_entry)
     } else {
-      return arg
+      return arg_value_entry.value
     }
   }
 }

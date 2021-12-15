@@ -10,29 +10,19 @@ export class DataCtorApHandler extends ApHandler {
     this.target = target
   }
 
-  private apply_by_kind(kind: Exps.ArgKind, arg: Value): Value {
+  apply(arg_value_entry: Exps.ArgValueEntry): Value {
+    const { kind, value } = arg_value_entry
+
     if (this.target.arity === 0) {
       throw new Error(`I can not (${kind}) apply data constructor of arity 0.`)
     }
 
-    const arg_value_entries = [{ kind, value: arg }]
+    const arg_value_entries = [{ kind, value }]
 
     if (this.target.arity === 1) {
       return new Exps.DataValue(this.target, arg_value_entries)
     } else {
       return new Exps.CurriedDataCtorValue(this.target, arg_value_entries)
     }
-  }
-
-  apply(arg: Value): Value {
-    return this.apply_by_kind("plain", arg)
-  }
-
-  implicit_apply(arg: Value): Value {
-    return this.apply_by_kind("implicit", arg)
-  }
-
-  vague_apply(arg: Value): Value {
-    return this.apply_by_kind("vague", arg)
   }
 }

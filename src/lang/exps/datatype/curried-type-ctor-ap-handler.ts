@@ -10,12 +10,12 @@ export class CurriedTypeCtorApHandler extends ApHandler {
     this.target = target
   }
 
-  apply(arg: Value): Value {
+  apply(arg_value_entry: Exps.ArgValueEntry): Value {
     if (this.target.arity === 0) {
       throw new Error("I can not apply TypeCtorValue of arity 0.")
     }
 
-    const args = [...this.target.args, arg]
+    const args = [...this.target.args, arg_value_entry.value]
 
     if (this.target.arity === 1) {
       return new Exps.DatatypeValue(this.target.type_ctor, args)

@@ -10,11 +10,7 @@ export class TodoNoteApHandler extends ApHandler {
     this.target = target
   }
 
-  apply(arg: Value): Value {
-    return this.target.curry({ kind: "plain", value: arg })
-  }
-
-  vague_apply(arg: Value): Value {
-    return this.target.curry({ kind: "vague", value: arg })
+  apply(arg_value_entry: Exps.ArgValueEntry): Value {
+    return this.target.curry(arg_value_entry)
   }
 }

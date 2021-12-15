@@ -7,12 +7,12 @@ import { Value } from "../../value"
 import { ClsApHandler } from "./cls-ap-handler"
 
 export class NilClsApHandler extends ClsApHandler {
-  apply(arg: Value): Exps.ClsValue {
+  apply(arg_value_entry: Exps.ArgValueEntry): Exps.ClsValue {
     throw new ExpTrace(
       [
         `I meet the end of ClsValue`,
         `I can not apply arg to it anymore`,
-        `arg class name: ${arg.constructor.name}`,
+        `arg class name: ${arg_value_entry.value.constructor.name}`,
       ].join("\n") + "\n"
     )
   }

@@ -6,7 +6,7 @@ import { Value } from "../../value"
 import { ApHandler } from "../pi/ap-handler"
 
 export abstract class ClsApHandler extends ApHandler {
-  abstract apply(arg: Value): Exps.ClsValue
+  abstract apply(arg_value_entry: Exps.ArgValueEntry): Exps.ClsValue
 
   abstract infer_by_target(
     ctx: Ctx,

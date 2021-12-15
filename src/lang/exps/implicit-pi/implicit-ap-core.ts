@@ -36,8 +36,8 @@ export class ImplicitApCore extends Core {
   }
 
   static apply(target: Value, arg: Value): Value {
-    if (target.ap_handler?.implicit_apply) {
-      return target.ap_handler.implicit_apply(arg)
+    if (target.ap_handler?.apply) {
+      return target.ap_handler.apply({ kind: "implicit", value: arg })
     }
 
     if (target instanceof Exps.ImplicitFnValue) {

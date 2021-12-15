@@ -13,13 +13,13 @@ export class FulfilledClsApHandler extends ApHandler {
     this.target = target
   }
 
-  apply(arg: Value): Exps.ClsValue {
+  apply(arg_value_entry: Exps.ArgValueEntry): Exps.ClsValue {
     return new Exps.FulfilledClsValue(
       this.target.field_name,
       this.target.local_name,
       this.target.field_t,
       this.target.field,
-      this.target.rest_t.ap_handler.apply(arg)
+      this.target.rest_t.ap_handler.apply(arg_value_entry)
     )
   }
 

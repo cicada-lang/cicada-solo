@@ -32,7 +32,7 @@ export class ApCore extends Core {
 
   static apply(target: Value, arg: Value): Value {
     if (target.ap_handler?.apply) {
-      return target.ap_handler.apply(arg)
+      return target.ap_handler.apply({ kind: "plain", value: arg })
     }
 
     if (target instanceof Exps.FnValue) {
