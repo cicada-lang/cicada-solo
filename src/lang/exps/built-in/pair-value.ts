@@ -3,7 +3,7 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { readback, Value } from "../../value"
-// import { TodoApHandler } from "./todo-ap-handler"
+import { PairApHandler } from "./pair-ap-handler"
 
 export class PairValue extends Exps.BuiltInValue {
   arity = 2
@@ -12,7 +12,7 @@ export class PairValue extends Exps.BuiltInValue {
     super("Pair", curried_arg_value_entries)
   }
 
-  // ap_handler = new TodoApHandler(this)
+  ap_handler = new PairApHandler(this)
 
   curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
     return new PairValue([...this.arg_value_entries, arg_value_entry])

@@ -2,7 +2,7 @@
 [_: A | C]
 [a: A, b: B | C(a, b)]
 [a: A, b: B | C(a, b)]
-[_: A | B]
+Pair(A, B)
 [a | b]
 [a | [b | c]]
 [a | b]

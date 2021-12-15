@@ -137,8 +137,6 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:pi": pi_handler,
     "operand:fn": fn_handler,
     "operand:sigma": sigma_handler,
-    "operand:pair": ({ car_t, cdr_t }, { span }) =>
-      new Exps.Sigma("_", exp_matcher(car_t), exp_matcher(cdr_t), { span }),
     "operand:cons": ({ car, cdr }, { span }) =>
       new Exps.Cons(exp_matcher(car), exp_matcher(cdr), { span }),
     "operand:cons_sugar": ({ exps, tail }, { span }) =>

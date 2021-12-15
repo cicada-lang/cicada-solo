@@ -10,7 +10,6 @@ const preserved = [
   "datatype",
   "induction",
   // built-in
-  "Pair",
   "car",
   "cdr",
   "Equal",

@@ -1,9 +1,5 @@
 # built-in
 
-- `built-in/pair-ap-handler`
-
-- remove `Pair` syntax
-
 - `built-in/car`
 - `built-in/cdr`
 
