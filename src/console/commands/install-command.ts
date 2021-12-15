@@ -20,6 +20,7 @@ export class InstallCommand extends Command<Args, Opts> {
   async execute(argv: Args & Opts, runner: CommandRunner): Promise<void> {
     const configFile = process.cwd() + "/book.json"
     Command.assertFile(configFile)
+
     const book = await app.localBooks.get(configFile)
 
     const { target } = argv
