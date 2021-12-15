@@ -31,19 +31,6 @@ export class SameAsChart extends Exp {
     )
   }
 
-  // NOTE
-  // same_as_chart! (Nat) [
-  //   add1(add1(add1(0))),
-  //   add1(add1(1)),
-  //   add1(2),
-  //   3,
-  // ]
-  // expand to:
-  // _ = the(Equal(Nat, add1(add1(add1(0))), add1(add1(1))), same(add1(add1(add1(0)))))
-  // _ = the(Equal(Nat, add1(add1(1)), add1(2)), same(add1(add1(add1(0)))))
-  // _ = the(Equal(Nat, add1(2), 3), same(add1(add1(add1(0)))))
-  // _
-
   infer(ctx: Ctx): { t: Value; core: Core } {
     const t_core = check(ctx, this.t, new Exps.TypeValue())
     const t = evaluate(ctx.to_env(), t_core)

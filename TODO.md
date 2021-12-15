@@ -1,10 +1,21 @@
 # built-in
 
-- `built-in/equal`
-- `built-in/refl`
-- `built-in/same`
-- `built-in/the_same`
+- `built-in/equal` -- `(T: Type, from: T, to: T) -> Type`
+- `built-in/refl` -- `(vague T: Type, x: T) -> Equal(T, x, x)`
+- `built-in/same` -- `(implicit T: Type, x: T) -> Equal(T, x, x)`
+- `built-in/the_same` -- `(T: Type, x: T) -> Equal(T, x, x)`
 - `built-in/replace`
+
+  ``` cicada
+  (
+    implicit X: Type,
+    implicit from: X,
+    implicit to: X,
+    target: Equal(X, from, to),
+    motive: (X) -> Type,
+    base: motive(from),
+  ) -> motive(to)
+  ```
 
 - `built-in/trivial`
 - `built-in/sole`
