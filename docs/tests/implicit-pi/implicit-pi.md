@@ -116,3 +116,26 @@ function k(
   return x
 }
 ```
+
+# my_car & my_cdr
+
+Definition is ok, but unification will fail, during the use of `my_car` and `my_cdr`,
+because we can not unify function yet.
+
+``` cicada
+function my_car(
+  implicit A: Type,
+  implicit B: (x: A) -> Type,
+  pair: [x: A | B(x)],
+): A {
+  return car(pair)
+}
+
+function my_cdr(
+  implicit A: Type,
+  implicit B: (x: A) -> Type,
+  pair: [x: A | B(x)],
+): B(car(pair)) {
+  return cdr(pair)
+}
+```

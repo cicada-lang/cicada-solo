@@ -1,8 +1,5 @@
 # built-in
 
-- `built-in/car`
-- `built-in/cdr`
-
 - `built-in/equal`
 - `built-in/refl`
 - `built-in/same`
@@ -98,6 +95,12 @@
   - not that there is no `free_names` on `Value`
 
 - maybe using `unify` instead of `readback` can handle equivalence between recursive functions.
+
+# built-in
+
+- `built-in/car` and `built-in/cdr`
+
+  - see `docs/tests/implicit-pi.md` -- section "my_car & my_cdr"
 
 # subtype
 

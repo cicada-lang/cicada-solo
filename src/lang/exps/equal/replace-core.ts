@@ -49,32 +49,32 @@ export class ReplaceCore extends Core {
   static apply(target: Value, motive: Value, base: Value): Value {
     if (target instanceof Exps.ReflValue) {
       return base
-    } else if (target instanceof Exps.NotYetValue) {
-      const { t, neutral } = target
+    }
 
-      if (t instanceof Exps.EqualValue) {
-        const base_t = Exps.ApCore.apply(motive, t.from)
-        const motive_t = new Exps.PiValue(
-          t.t,
-          new Closure(Env.init(), "x", new Exps.TypeCore())
-        )
-        return new Exps.NotYetValue(
-          Exps.ApCore.apply(motive, t.to),
-          new Exps.ReplaceNeutral(
-            neutral,
-            new Normal(motive_t, motive),
-            new Normal(base_t, base)
-          )
-        )
-      } else {
-        throw InternalError.wrong_target_t(target.t, {
-          expected: [Exps.EqualValue],
-        })
-      }
-    } else {
+    if (!(target instanceof Exps.NotYetValue)) {
       throw InternalError.wrong_target(target, {
         expected: [Exps.ReflValue],
       })
     }
+
+    if (!(target.t instanceof Exps.EqualValue)) {
+      throw InternalError.wrong_target_t(target.t, {
+        expected: [Exps.EqualValue],
+      })
+    }
+
+    const base_t = Exps.ApCore.apply(motive, target.t.from)
+    const motive_t = new Exps.PiValue(
+      target.t.t,
+      new Closure(Env.init(), "x", new Exps.TypeCore())
+    )
+    return new Exps.NotYetValue(
+      Exps.ApCore.apply(motive, target.t.to),
+      new Exps.ReplaceNeutral(
+        target.neutral,
+        new Normal(motive_t, motive),
+        new Normal(base_t, base)
+      )
+    )
   }
 }
