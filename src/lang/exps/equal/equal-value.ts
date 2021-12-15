@@ -1,39 +1,53 @@
-import { Core } from "../../core"
-import { Ctx } from "../../ctx"
+import { evaluate } from "../../core"
+import { Env } from "../../env"
 import * as Exps from "../../exps"
-import { Solution } from "../../solution"
-import { readback, Value } from "../../value"
+import { Value } from "../../value"
 
-export class EqualValue extends Value {
-  t: Value
-  from: Value
-  to: Value
+export class EqualValue extends Exps.BuiltInValue {
+  arity = 3
 
-  constructor(t: Value, from: Value, to: Value) {
-    super()
-    this.t = t
-    this.from = from
-    this.to = to
+  constructor(...values: Array<Value>) {
+    super(
+      "Equal",
+      values.map((value) => ({ kind: "plain", value }))
+    )
   }
 
-  readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof Exps.TypeValue) {
-      return new Exps.EqualCore(
-        readback(ctx, new Exps.TypeValue(), this.t),
-        readback(ctx, this.t, this.from),
-        readback(ctx, this.t, this.to)
+  get t(): Value {
+    return this.arg_value_entries[0].value
+  }
+
+  get from(): Value {
+    return this.arg_value_entries[1].value
+  }
+
+  get to(): Value {
+    return this.arg_value_entries[2].value
+  }
+
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+    const values = [
+      ...this.arg_value_entries.map(({ value }) => value),
+      arg_value_entry.value,
+    ]
+
+    return new EqualValue(...values)
+  }
+
+  // NOTE `(T: Type, from: T, to: T) -> Type`
+  self_type(): Value {
+    const env = Env.init()
+
+    const t = new Exps.PiCore(
+      "T",
+      new Exps.TypeCore(),
+      new Exps.PiCore(
+        "from",
+        new Exps.VariableCore("T"),
+        new Exps.PiCore("to", new Exps.VariableCore("T"), new Exps.TypeCore())
       )
-    }
-  }
+    )
 
-  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (!(that instanceof Exps.EqualValue)) {
-      return Solution.fail_to_be_the_same_value(ctx, t, this, that)
-    }
-
-    return solution
-      .unify_type(ctx, this.t, that.t)
-      .unify(ctx, this.t, this.from, that.from)
-      .unify(ctx, this.t, this.to, that.to)
+    return evaluate(env, t)
   }
 }

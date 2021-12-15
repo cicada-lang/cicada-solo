@@ -1,7 +1,5 @@
 # built-in
 
-- `equal/equal` -- `(T: Type, from: T, to: T) -> Type`
-
 - `equal/refl` -- `(vague T: Type, x: T) -> Equal(T, x, x)`
 - `equal/same` -- `(implicit T: Type, x: T) -> Equal(T, x, x)`
 - `equal/the_same` -- `(T: Type, x: T) -> Equal(T, x, x)`

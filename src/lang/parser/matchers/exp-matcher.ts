@@ -208,10 +208,6 @@ export function operand_matcher(tree: pt.Tree): Exp {
         ],
         { span }
       ),
-    "operand:equal": ({ t, from, to }, { span }) =>
-      new Exps.Equal(exp_matcher(t), exp_matcher(from), exp_matcher(to), {
-        span,
-      }),
     "operand:refl": (_, { span }) => new Exps.Refl({ span }),
     "operand:same": ({ exp }, { span }) =>
       new Exps.Same(exp_matcher(exp), { span }),

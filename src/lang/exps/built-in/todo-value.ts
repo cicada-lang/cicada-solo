@@ -7,8 +7,8 @@ import { readback, Value } from "../../value"
 export class TodoValue extends Exps.BuiltInValue {
   arity = 1
 
-  constructor(curried_arg_value_entries: Array<Exps.ArgValueEntry>) {
-    super("TODO", curried_arg_value_entries)
+  constructor(arg_value_entries: Array<Exps.ArgValueEntry>) {
+    super("TODO", arg_value_entries)
   }
 
   curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {

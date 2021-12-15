@@ -7,8 +7,8 @@ import { BuiltInApHandler } from "../built-in/built-in-ap-handler"
 export class PairValue extends Exps.BuiltInValue {
   arity = 2
 
-  constructor(curried_arg_value_entries: Array<Exps.ArgValueEntry>) {
-    super("Pair", curried_arg_value_entries)
+  constructor(arg_value_entries: Array<Exps.ArgValueEntry>) {
+    super("Pair", arg_value_entries)
   }
 
   ap_handler: BuiltInApHandler = new BuiltInApHandler(this, {

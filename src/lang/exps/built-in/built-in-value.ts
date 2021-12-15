@@ -10,13 +10,10 @@ export abstract class BuiltInValue extends Value {
   name: string
   arg_value_entries: Array<Exps.ArgValueEntry>
 
-  constructor(
-    name: string,
-    curried_arg_value_entries: Array<Exps.ArgValueEntry>
-  ) {
+  constructor(name: string, arg_value_entries: Array<Exps.ArgValueEntry>) {
     super()
     this.name = name
-    this.arg_value_entries = curried_arg_value_entries
+    this.arg_value_entries = arg_value_entries
   }
 
   abstract arity: number
