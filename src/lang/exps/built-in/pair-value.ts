@@ -1,8 +1,7 @@
 import { evaluate } from "../../core"
-import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
-import { readback, Value } from "../../value"
+import { Value } from "../../value"
 import { PairApHandler } from "./pair-ap-handler"
 
 export class PairValue extends Exps.BuiltInValue {

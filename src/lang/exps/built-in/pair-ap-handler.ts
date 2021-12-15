@@ -1,7 +1,7 @@
-import * as Exps from "../../exps"
-import { Value } from "../../value"
 import { evaluate } from "../../core"
 import { Env } from "../../env"
+import * as Exps from "../../exps"
+import { Value } from "../../value"
 import { ApHandler } from "../pi/ap-handler"
 
 export class PairApHandler extends ApHandler {
