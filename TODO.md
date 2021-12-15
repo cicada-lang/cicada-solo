@@ -1,10 +1,12 @@
 # built-in
 
-- `built-in/equal` -- `(T: Type, from: T, to: T) -> Type`
-- `built-in/refl` -- `(vague T: Type, x: T) -> Equal(T, x, x)`
-- `built-in/same` -- `(implicit T: Type, x: T) -> Equal(T, x, x)`
-- `built-in/the_same` -- `(T: Type, x: T) -> Equal(T, x, x)`
-- `built-in/replace`
+- `equal/equal` -- `(T: Type, from: T, to: T) -> Type`
+
+- `equal/refl` -- `(vague T: Type, x: T) -> Equal(T, x, x)`
+- `equal/same` -- `(implicit T: Type, x: T) -> Equal(T, x, x)`
+- `equal/the_same` -- `(T: Type, x: T) -> Equal(T, x, x)`
+
+- `equal/replace`
 
   ``` cicada
   (
@@ -17,15 +19,15 @@
   ) -> motive(to)
   ```
 
-- `built-in/trivial`
-- `built-in/sole`
+- `trivial/trivial`
+- `trivial/sole`
 
-- `built-in/absurd`
-- `built-in/absurd_ind` -- rename this eliminator
+- `absurd/absurd`
+- `absurd/absurd_ind` -- rename this eliminator
 
-- `built-in/str`
+- `str/str`
 
-- `built-in/type`
+- `type`
 
 # book manager
 
@@ -109,7 +111,7 @@
 
 # built-in
 
-- `built-in/car` and `built-in/cdr`
+- `sigma/car` and `sigma/cdr`
 
   - see `docs/tests/implicit-pi.md` -- section "my_car & my_cdr"
 

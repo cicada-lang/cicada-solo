@@ -6,14 +6,6 @@ export * from "./variable-neutral"
 
 export * from "./built-in/built-in-core"
 export * from "./built-in/built-in-value"
-export * from "./built-in/the-value"
-export * from "./built-in/todo-value"
-export * from "./built-in/todo-note-value"
-export * from "./built-in/pair-value"
-
-// NOTE `built-ins` imports concrete built-in-values,
-//   thus must follow them.
-export * from "./built-in/built-ins"
 
 // NOTE Even with built-in `the`, well still need the following
 // - `Exps.The` -- used by matchers to handle `let_the`
@@ -69,6 +61,7 @@ export * from "./vague-pi/vague-ap-neutral"
 export * from "./sigma/sigma"
 export * from "./sigma/sigma-core"
 export * from "./sigma/sigma-value"
+export * from "./sigma/pair-value"
 export * from "./sigma/cons"
 export * from "./sigma/cons-core"
 export * from "./sigma/cons-value"
@@ -147,3 +140,11 @@ export * from "./trivial/trivial-value"
 export * from "./trivial/sole"
 export * from "./trivial/sole-core"
 export * from "./trivial/sole-value"
+
+export * from "./built-in/the-value"
+export * from "./built-in/todo-value"
+export * from "./built-in/todo-note-value"
+
+// NOTE `built-ins` imports concrete built-in-values,
+//   thus must follow them.
+export * from "./built-in/built-ins"

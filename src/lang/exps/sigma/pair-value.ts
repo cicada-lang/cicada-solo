@@ -2,7 +2,7 @@ import { evaluate } from "../../core"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
-import { BuiltInApHandler } from "./built-in-ap-handler"
+import { BuiltInApHandler } from "../built-in/built-in-ap-handler"
 
 export class PairValue extends Exps.BuiltInValue {
   arity = 2
