@@ -1,21 +1,9 @@
-# book manager
-
-- refactor `Book` and `BookStore`
-
-- references should represent a book store
-
-- [book manager] [cli] `cic install <user/repo@tag>` -- should not download existing packages
-- [book manager] [cli] `cic install` -- download book from `references` specified in `book.json`
-- [book manager] [cli] `cic init` -- learn from `npm init` and so on
-- [book manager] be able to resolve module in book of `references`
-  - we do not need to use book as module, we only need to be able to resolve module.
-
-- [book manager] [cli] `cic install` -- `help`
-- [book manager] [cli] `cic init` -- `help`
-
 # built-in
 
-- `built-in/pair`
+- `built-in/pair-ap-handler`
+
+- remove `Pair` syntax
+
 - `built-in/car`
 - `built-in/cdr`
 
@@ -36,6 +24,21 @@
 - `built-in/str`
 
 - `built-in/type`
+
+# book manager
+
+- refactor `Book` and `BookStore`
+
+- references should represent a book store
+
+- [book manager] [cli] `cic install <user/repo@tag>` -- should not download existing packages
+- [book manager] [cli] `cic install` -- download book from `references` specified in `book.json`
+- [book manager] [cli] `cic init` -- learn from `npm init` and so on
+- [book manager] be able to resolve module in book of `references`
+  - we do not need to use book as module, we only need to be able to resolve module.
+
+- [book manager] [cli] `cic install` -- `help`
+- [book manager] [cli] `cic init` -- `help`
 
 # inductive datatype -- questions
 
@@ -97,6 +100,8 @@
 - `Solution.unify` -- occur check
 
   - not that there is no `free_names` on `Value`
+
+- maybe using `unify` instead of `readback` can handle equivalence between recursive functions.
 
 # subtype
 
