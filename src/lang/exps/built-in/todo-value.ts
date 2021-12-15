@@ -3,7 +3,6 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { readback, Value } from "../../value"
-import { TodoApHandler } from "./todo-ap-handler"
 
 export class TodoValue extends Exps.BuiltInValue {
   arity = 1
@@ -12,7 +11,9 @@ export class TodoValue extends Exps.BuiltInValue {
     super("TODO", curried_arg_value_entries)
   }
 
-  ap_handler = new TodoApHandler(this)
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+    return new TodoValue([...this.arg_value_entries, arg_value_entry])
+  }
 
   before_check(ctx: Ctx, arg_entries: Array<Exps.ArgEntry>, t: Value): void {
     const t_core = readback(ctx, new Exps.TypeValue(), t)
@@ -24,10 +25,6 @@ export class TodoValue extends Exps.BuiltInValue {
         `  ${ctx.highlight("code", t_core.format())}`,
       ].join("\n"),
     })
-  }
-
-  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
-    return new TodoValue([...this.arg_value_entries, arg_value_entry])
   }
 
   // NOTE `(vague T: Type) -> T`

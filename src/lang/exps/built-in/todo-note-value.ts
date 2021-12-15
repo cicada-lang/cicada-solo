@@ -3,7 +3,6 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { readback, Value } from "../../value"
-import { TodoNoteApHandler } from "./todo-note-ap-handler"
 
 export class TodoNoteValue extends Exps.BuiltInValue {
   arity = 2
@@ -12,7 +11,9 @@ export class TodoNoteValue extends Exps.BuiltInValue {
     super("TODO_NOTE", curried_arg_value_entries)
   }
 
-  ap_handler = new TodoNoteApHandler(this)
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+    return new TodoNoteValue([...this.arg_value_entries, arg_value_entry])
+  }
 
   before_check(ctx: Ctx, arg_entries: Array<Exps.ArgEntry>, t: Value): void {
     const t_core = readback(ctx, new Exps.TypeValue(), t)
@@ -39,10 +40,6 @@ export class TodoNoteValue extends Exps.BuiltInValue {
         ].join("\n"),
       })
     }
-  }
-
-  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
-    return new TodoNoteValue([...this.arg_value_entries, arg_value_entry])
   }
 
   // NOTE `(vague T: Type, note: String) -> T`

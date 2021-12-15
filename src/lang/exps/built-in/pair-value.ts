@@ -2,7 +2,7 @@ import { evaluate } from "../../core"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { Value } from "../../value"
-import { PairApHandler } from "./pair-ap-handler"
+import { BuiltInApHandler } from "./built-in-ap-handler"
 
 export class PairValue extends Exps.BuiltInValue {
   arity = 2
@@ -11,7 +11,21 @@ export class PairValue extends Exps.BuiltInValue {
     super("Pair", curried_arg_value_entries)
   }
 
-  ap_handler = new PairApHandler(this)
+  ap_handler: BuiltInApHandler = new BuiltInApHandler(this, {
+    finial_apply: (arg_value_entries) => {
+      const env = Env.init()
+        .extend("A", arg_value_entries[0].value)
+        .extend("B", arg_value_entries[1].value)
+
+      const t = new Exps.SigmaCore(
+        "_",
+        new Exps.VariableCore("A"),
+        new Exps.VariableCore("B")
+      )
+
+      return evaluate(env, t)
+    },
+  })
 
   curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
     return new PairValue([...this.arg_value_entries, arg_value_entry])

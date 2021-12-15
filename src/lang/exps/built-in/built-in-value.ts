@@ -4,6 +4,7 @@ import { ExpTrace } from "../../errors"
 import * as Exps from "../../exps"
 import { Solution } from "../../solution"
 import { readback, Value } from "../../value"
+import { BuiltInApHandler } from "./built-in-ap-handler"
 
 export abstract class BuiltInValue extends Value {
   name: string
@@ -19,6 +20,10 @@ export abstract class BuiltInValue extends Value {
   }
 
   abstract arity: number
+
+  abstract curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue
+
+  ap_handler = new BuiltInApHandler(this)
 
   abstract self_type(): Value
 

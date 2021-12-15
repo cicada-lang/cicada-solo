@@ -1,9 +1,5 @@
 # built-in
 
-- [refactor] extract `built-in/built-in-ap-handler` -- handle default behavior of currying
-
-  - concrete class only need to handle the `finial_apply`
-
 - `built-in/car`
 - `built-in/cdr`
 
