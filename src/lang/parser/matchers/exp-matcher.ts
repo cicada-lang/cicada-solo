@@ -129,6 +129,12 @@ export function operator_matcher(tree: pt.Tree): Exp {
         pt.matchers.zero_or_more_matcher(case_entries).map(case_entry_matcher),
         { span }
       ),
+    "operator:recursion": ({ target, case_entries }, { span }) =>
+      new Exps.Recursion(
+        exp_matcher(target),
+        pt.matchers.zero_or_more_matcher(case_entries).map(case_entry_matcher),
+        { span }
+      ),
   })(tree)
 }
 

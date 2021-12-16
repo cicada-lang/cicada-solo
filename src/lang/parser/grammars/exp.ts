@@ -55,6 +55,15 @@ export const operator = {
       { case_entries: { $ap: ["zero_or_more", "case_entry"] } },
       '"}"',
     ],
+    "operator:recursion": [
+      '"recursion"',
+      '"("',
+      { target: "exp" },
+      '")"',
+      '"{"',
+      { case_entries: { $ap: ["zero_or_more", "case_entry"] } },
+      '"}"',
+    ],
   },
 }
 

@@ -60,8 +60,7 @@ function induction_nat(
 
 ``` cicada
 function add(x: Nat, y: Nat): Nat {
-  return induction (x) {
-    (_) => Nat
+  return recursion (x) {
     case zero => y
     case add1(prev, almost) => Nat.add1(almost.prev)
   }
@@ -94,8 +93,7 @@ same_as_chart! (Nat) [
 
 ``` cicada
 function mul(x: Nat, y: Nat): Nat {
-  return induction (x) {
-    (_) => Nat
+  return recursion (x) {
     case zero => Nat.zero
     case add1(_prev, almost) => add(almost.prev, y)
   }
@@ -117,8 +115,7 @@ function mul(x: Nat, y: Nat): Nat {
 
 ``` cicada
 function power_of(x: Nat, y: Nat): Nat {
-  return induction (x) {
-    (_) => Nat
+  return recursion (x) {
     case zero => Nat.add1(Nat.zero)
     case add1(prev, almost) => mul(almost.prev, y)
   }
@@ -143,8 +140,7 @@ same_as_chart! (Nat) [
 
 ``` cicada
 function gauss(x: Nat): Nat {
-  return induction (x) {
-    (_) => Nat
+  return recursion (x) {
     case zero => Nat.zero
     case add1(prev, almost) => add(Nat.add1(prev), almost.prev)
   }
@@ -162,8 +158,7 @@ same_as_chart! (Nat) [
 
 ``` cicada
 function factorial(x: Nat): Nat {
-  return induction (x) {
-    (_) => Nat
+  return recursion (x) {
     case zero => Nat.add1(Nat.zero)
     case add1(prev, almost) => mul(Nat.add1(prev), almost.prev)
   }

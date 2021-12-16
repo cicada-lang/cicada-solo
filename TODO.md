@@ -1,3 +1,5 @@
+- [refactor] `induction` & `recursion` extract common functions
+
 # built-in
 
 - `equal/refl` -- `(vague T: Type, x: T) -> Equal(T, x, x)`

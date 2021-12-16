@@ -9,6 +9,7 @@ const preserved = [
   "import",
   "datatype",
   "induction",
+  "recursion",
   // built-in
   "car",
   "cdr",

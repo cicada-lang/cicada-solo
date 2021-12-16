@@ -53,8 +53,7 @@ let abc: List(String) = List.cons("a", List.cons("b", List.cons("c", List.null))
 
 ``` cicada
 function maybe_head(implicit E: Type, list: List(E)): Maybe(E) {
-  return induction (list) {
-    (_) => Maybe(E)
+  return recursion (list) {
     case null => Maybe.nothing
     case cons(head, _tail, _almost) => Maybe.just(head)
   }
@@ -79,8 +78,7 @@ same_as_chart! (Maybe(String)) [
 
 ``` cicada
 function maybe_tail(implicit E: Type, list: List(E)): Maybe(List(E)) {
-  return induction (list) {
-    (_) => Maybe(List(E))
+  return recursion (list) {
     case null => Maybe.nothing
     case cons(_head, tail, _almost) => Maybe.just(tail)
   }
@@ -123,8 +121,7 @@ function list_ref_direct(index: Nat, implicit E: Type, list: List(E)): Maybe(E) 
     (_) => (List(E)) -> Maybe(E)
     case zero => (list) => maybe_head(list)
     case add1(prev, almost) => (list) => {
-      return induction (maybe_tail(list)) {
-        (_) => Maybe(E)
+      return recursion (maybe_tail(list)) {
         case nothing => Maybe.nothing
         case just(tail) => almost.prev(tail)
       }
@@ -149,8 +146,7 @@ function list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
     (_) => (List(E)) -> Maybe(E)
     case zero => (list) => maybe_head(list)
     case add1(prev, almost) => (list) => {
-      return induction (maybe_tail(list)) {
-        (_) => Maybe(E)
+      return recursion (maybe_tail(list)) {
         case nothing => Maybe.nothing
         case just(tail) => almost.prev(tail)
       }
@@ -185,12 +181,10 @@ check! list_ref(four, abc): Maybe(String)
 
 ``` cicada
 function list_ref_vague(vague E: Type, index: Nat): (List(E)) -> Maybe(E) {
-  return induction (index) {
-    (_) => (List(E)) -> Maybe(E)
+  return recursion (index) {
     case zero => (list) => maybe_head(list)
     case add1(prev, almost) => (list) => {
-      return induction (maybe_tail(list)) {
-        (_) => Maybe(E)
+      return recursion (maybe_tail(list)) {
         case nothing => Maybe.nothing
         case just(tail) => almost.prev(tail)
       }

@@ -48,8 +48,7 @@ function induction_list(
 import { Nat } from "./nat.md"
 
 function length(implicit E: Type, x: List(E)): Nat {
-  return induction (x) {
-    (_) => Nat
+  return recursion (x) {
     case null => Nat.zero
     case cons(_head, _tail, almost) => Nat.add1(almost.tail)
   }
@@ -67,8 +66,7 @@ same_as_chart! (Nat) [
 
 ``` cicada
 function append(implicit E: Type, x: List(E), y: List(E)): List(E) {
-  return induction (x) {
-    (_) => List(E)
+  return recursion (x) {
     case null => y
     case cons(head, _tail, almost) => List.cons(head, almost.tail)
   }
@@ -89,16 +87,14 @@ same_as_chart! (List(String)) [
 
 ``` cicada
 function list_cons_back(implicit E: Type, e: E, x: List(E)): List(E) {
-  return induction (x) {
-    (_) => List(E)
+  return recursion (x) {
     case null => List.cons(e, List.null)
     case cons(head, _tail, almost) => List.cons(head, almost.tail)
   }
 }
 
 function reverse(implicit E: Type, x: List(E)): List(E) {
-  return induction (x) {
-    (_) => List(E)
+  return recursion (x) {
     case null => List.null
     case cons(head, _tail, almost) => list_cons_back(head, almost.tail)
   }
