@@ -1,7 +1,3 @@
-# built-in
-
-- [built-in] `absurd/from-falsehood-anything`
-
 # book manager
 
 - refactor `Book` and `BookStore`

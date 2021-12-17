@@ -27,14 +27,6 @@ export const operator = {
         },
       },
     ],
-    "operator:from_falsehood_anything": [
-      '"from_falsehood_anything"',
-      '"("',
-      { target: "exp" },
-      '","',
-      { motive: "exp" },
-      '")"',
-    ],
     "operator:induction": [
       '"induction"',
       '"("',

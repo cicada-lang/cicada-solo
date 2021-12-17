@@ -83,9 +83,8 @@ export * from "./equal/replace-neutral"
 export * from "./equal/replace-value"
 
 export * from "./absurd/absurd-value"
-export * from "./absurd/from-falsehood-anything"
-export * from "./absurd/from-falsehood-anything-core"
 export * from "./absurd/from-falsehood-anything-neutral"
+export * from "./absurd/from-falsehood-anything-value"
 
 export * from "./str/str-value"
 export * from "./str/quote"

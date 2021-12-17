@@ -12,5 +12,4 @@ export const identifier = pt.grammars.pattern_unless_preserved("identifier", [
   // built-in
   "car",
   "cdr",
-  "from_falsehood_anything",
 ])
