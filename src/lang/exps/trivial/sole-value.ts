@@ -1,19 +1,19 @@
-import { Core } from "../../core"
-import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
-import { Solution } from "../../solution"
 import { Value } from "../../value"
 
-export class SoleValue extends Value {
-  readback(ctx: Ctx, t: Value): Core | undefined {
-    return new Exps.SoleCore()
+export class SoleValue extends Exps.BuiltInValue {
+  arity = 0
+
+  constructor(arg_value_entries: Array<Exps.ArgValueEntry> = []) {
+    super("sole", arg_value_entries)
   }
 
-  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (!(that instanceof Exps.SoleValue)) {
-      return Solution.fail_to_be_the_same_value(ctx, t, this, that)
-    }
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+    return new SoleValue([...this.arg_value_entries, arg_value_entry])
+  }
 
-    return solution
+  // NOTE `Trivial`
+  self_type(): Value {
+    return new Exps.TrivialValue()
   }
 }

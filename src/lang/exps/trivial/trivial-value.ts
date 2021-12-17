@@ -1,28 +1,31 @@
 import { Core } from "../../core"
 import { Ctx } from "../../ctx"
 import * as Exps from "../../exps"
-import { Solution } from "../../solution"
 import { ReadbackEtaExpansion, Value } from "../../value"
 
-export class TrivialValue extends Value implements ReadbackEtaExpansion {
-  readback(ctx: Ctx, t: Value): Core | undefined {
-    if (t instanceof Exps.TypeValue) {
-      return new Exps.TrivialCore()
-    }
+export class TrivialValue
+  extends Exps.BuiltInValue
+  implements ReadbackEtaExpansion
+{
+  arity = 0
+
+  constructor(arg_value_entries: Array<Exps.ArgValueEntry> = []) {
+    super("Trivial", arg_value_entries)
   }
 
   readback_eta_expansion(ctx: Ctx, value: Value): Core {
     // NOTE the η-rule for trivial states that
     //   all of its inhabitants are the same as sole.
     //   This is implemented by reading the all back as sole.
-    return new Exps.SoleCore()
+    return new Exps.BuiltInCore("sole")
   }
 
-  unify(solution: Solution, ctx: Ctx, t: Value, that: Value): Solution {
-    if (!(that instanceof Exps.TrivialValue)) {
-      return Solution.fail_to_be_the_same_value(ctx, t, this, that)
-    }
+  curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
+    return new TrivialValue([...this.arg_value_entries, arg_value_entry])
+  }
 
-    return solution
+  // NOTE `Type`
+  self_type(): Value {
+    return new Exps.TypeValue()
   }
 }

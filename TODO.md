@@ -1,8 +1,5 @@
 # built-in
 
-- `trivial/trivial`
-- `trivial/sole`
-
 - `type`
 
 - `equal/replace`

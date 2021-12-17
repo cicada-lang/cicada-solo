@@ -132,11 +132,7 @@ export * from "./cls/dot"
 export * from "./cls/dot-core"
 export * from "./cls/dot-neutral"
 
-export * from "./trivial/trivial"
-export * from "./trivial/trivial-core"
 export * from "./trivial/trivial-value"
-export * from "./trivial/sole"
-export * from "./trivial/sole-core"
 export * from "./trivial/sole-value"
 
 // NOTE `built-ins` imports concrete built-in-values,

@@ -138,8 +138,6 @@ export const operand = {
       { exps: "exps" },
       '"]"',
     ],
-    "operand:trivial": ['"Trivial"'],
-    "operand:sole": ['"sole"'],
     "operand:absurd": ['"Absurd"'],
     "operand:quote": [{ value: { $pattern: ["string"] } }],
     "operand:type": ['"Type"'],
