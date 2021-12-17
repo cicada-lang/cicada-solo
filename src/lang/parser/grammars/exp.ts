@@ -128,14 +128,6 @@ export const operand = {
       { $ap: ["optional", '","'] },
       '"}"',
     ],
-    "operand:the_same": [
-      '"the_same"',
-      '"("',
-      { t: "exp" },
-      '","',
-      { exp: "exp" },
-      '")"',
-    ],
     "operand:same_as_chart": [
       '"same_as_chart"',
       '"!"',
