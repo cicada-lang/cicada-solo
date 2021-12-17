@@ -1,7 +1,5 @@
 # built-in
 
-- `absurd/absurd`
-
 - `equal/replace`
 
   ``` cicada

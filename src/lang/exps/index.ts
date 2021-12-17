@@ -83,8 +83,6 @@ export * from "./equal/replace"
 export * from "./equal/replace-core"
 export * from "./equal/replace-neutral"
 
-export * from "./absurd/absurd"
-export * from "./absurd/absurd-core"
 export * from "./absurd/absurd-value"
 export * from "./absurd/absurd-ind"
 export * from "./absurd/absurd-ind-core"

@@ -13,7 +13,6 @@ const preserved = [
   "car",
   "cdr",
   "replace",
-  "Absurd",
   "absurd_ind",
 ]
 

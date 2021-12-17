@@ -38,7 +38,7 @@ export function readback(ctx: Ctx, t: Value, value: Value): Core {
     value.t instanceof Exps.AbsurdValue
   ) {
     return new Exps.TheCore(
-      new Exps.AbsurdCore(),
+      new Exps.BuiltInCore("Absurd"),
       value.neutral.readback_neutral(ctx)
     )
   }
