@@ -15,7 +15,7 @@ export class Let extends Stmt {
   }
 
   async execute(mod: Module): Promise<StmtOutput | undefined> {
-    mod.extendInferred(this.name, infer(mod.ctx, this.exp))
+    mod.extendTypedCore(this.name, infer(mod.ctx, this.exp))
     return undefined
   }
 

@@ -22,7 +22,7 @@ export class Datatype extends Stmt {
   }
 
   async execute(mod: Module): Promise<StmtOutput | undefined> {
-    mod.extendInferred(this.name, infer(mod.ctx, this.datatype))
+    mod.extendTypedCore(this.name, infer(mod.ctx, this.datatype))
     return undefined
   }
 

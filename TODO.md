@@ -1,5 +1,3 @@
-- [refactor] rename `Module.extendInferred` to `Module.extendTypedCore`
-
 # built-in
 
 - `absurd/absurd`

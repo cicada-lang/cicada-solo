@@ -18,7 +18,7 @@ export class Class extends Stmt {
   async execute(mod: Module): Promise<StmtOutput | undefined> {
     const t = new Exps.TypeValue()
     const core = check(mod.ctx, this.cls, t)
-    mod.extendInferred(this.name, { t, core })
+    mod.extendTypedCore(this.name, { t, core })
     return undefined
   }
 

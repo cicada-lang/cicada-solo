@@ -27,7 +27,7 @@ export class Module {
     this.ctx = opts.ctx
   }
 
-  extendInferred(name: string, inferred: { t: Value; core: Core }): void {
+  extendTypedCore(name: string, inferred: { t: Value; core: Core }): void {
     const inferred_value = evaluate(this.ctx.to_env(), inferred.core)
     this.ctx.assert_not_redefine(name, inferred.t, inferred_value)
     this.ctx = this.ctx.extend(name, inferred.t, inferred_value)
