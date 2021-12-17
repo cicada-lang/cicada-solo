@@ -42,7 +42,7 @@ export class Same extends Exp {
       },
     })
 
-    return new Exps.ReflCore()
+    return new Exps.BuiltInCore("refl")
   }
 
   format(): string {

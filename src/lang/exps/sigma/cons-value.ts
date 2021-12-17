@@ -24,7 +24,10 @@ export class ConsValue extends Value {
       return Solution.fail_to_be_the_same_value(ctx, t, this, that)
     }
 
+    t = solution.walk(t)
+
     const sigma = expect(ctx, t, Exps.SigmaValue)
+
     return solution
       .unify(ctx, sigma.car_t, this.car, that.car)
       .unify(ctx, sigma.cdr_t_cl.apply(this.car), this.cdr, that.cdr)

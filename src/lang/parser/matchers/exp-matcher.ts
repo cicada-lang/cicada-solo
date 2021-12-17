@@ -215,7 +215,6 @@ export function operand_matcher(tree: pt.Tree): Exp {
         ],
         { span }
       ),
-    "operand:refl": (_, { span }) => new Exps.Refl({ span }),
     "operand:same": ({ exp }, { span }) =>
       new Exps.Same(exp_matcher(exp), { span }),
     "operand:the_same": ({ t, exp }, { span }) =>

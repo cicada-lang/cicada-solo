@@ -70,6 +70,8 @@ export class CurriedDataCtorValue extends Value {
       return Solution.fail_to_be_the_same_value(ctx, t, this, that)
     }
 
+    t = solution.walk(t)
+
     const datatype = expect(ctx, t, Exps.DatatypeValue)
 
     const result = this.data_ctor.apply({

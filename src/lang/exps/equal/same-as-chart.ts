@@ -54,7 +54,7 @@ export class SameAsChart extends Exp {
 
     return {
       t: new Exps.EqualValue(t, values[0], values[values.length - 1]),
-      core: new Exps.ReflCore(),
+      core: new Exps.BuiltInCore("refl")
     }
   }
 

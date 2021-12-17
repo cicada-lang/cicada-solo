@@ -130,7 +130,7 @@ export class FulfilledClsValue extends Exps.ClsValue {
       return Solution.fail_to_be_the_same_value(ctx, t, this, that)
     }
 
-    if (!(this.field_name !== that.field_name)) {
+    if (!(this.field_name === that.field_name)) {
       return Solution.failure(
         [
           `When unifying FulfilledClsValue,`,

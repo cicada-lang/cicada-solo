@@ -61,6 +61,8 @@ export class DataValue extends Value {
       return Solution.fail_to_be_the_same_value(ctx, t, this, that)
     }
 
+    t = solution.walk(t)
+
     if (t instanceof Exps.TypeCtorValue && t.arity === 0) {
       t = t.as_datatype()
     }

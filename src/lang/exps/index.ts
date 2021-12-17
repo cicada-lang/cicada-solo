@@ -73,8 +73,6 @@ export * from "./sigma/cdr-core"
 export * from "./sigma/cdr-neutral"
 
 export * from "./equal/equal-value"
-export * from "./equal/refl"
-export * from "./equal/refl-core"
 export * from "./equal/refl-value"
 export * from "./equal/same"
 export * from "./equal/the-same"

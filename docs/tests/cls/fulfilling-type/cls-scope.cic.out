@@ -1,4 +1,4 @@
-{ X: String, a: "a", b: "b", equal: refl }: class {
+{ X: String, a: "a", b: "b", equal: refl(vague Type, vague String) }: class {
   X: Type
   a: String
   b: X

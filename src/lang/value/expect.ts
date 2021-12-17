@@ -20,6 +20,7 @@ export function expect<T>(ctx: Ctx, value: Value, TheClass: Class<T>): T {
       // NOTE If the error makes us
       //   not be able to readback the value as `TypeValue`,
       //   we report error without `exp.format()`.
+
       const message =
         `I see unexpected value class: ${value.constructor.name},\n` +
         `but the asserted class is: ${TheClass.name}.\n`
