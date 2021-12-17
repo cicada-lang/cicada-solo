@@ -51,18 +51,7 @@ export class Induction extends Exp {
       return check_by_infer(ctx, this, t)
     }
 
-    const inferred_target = infer(ctx, this.target)
-
-    let inferred_target_t = inferred_target.t
-
-    if (
-      inferred_target_t instanceof Exps.TypeCtorValue &&
-      inferred_target_t.arity === 0
-    ) {
-      inferred_target_t = inferred_target_t.as_datatype()
-    }
-
-    const datatype = expect(ctx, inferred_target_t, Exps.DatatypeValue)
+    const { datatype, target_core } = this.infer_target(ctx)
 
     const motive_t = datatype.build_motive_t()
 
@@ -75,8 +64,6 @@ export class Induction extends Exp {
 
     const motive_value = evaluate(ctx.to_env(), motive_core)
 
-    const target_value = evaluate(ctx.to_env(), inferred_target.core)
-
     this.ensure_no_extra_cases(ctx, datatype)
 
     const case_core_entries = Object.keys(datatype.type_ctor.data_ctors).map(
@@ -96,11 +83,7 @@ export class Induction extends Exp {
       }
     )
 
-    return new Exps.InductionCore(
-      inferred_target.core,
-      motive_core,
-      case_core_entries
-    )
+    return new Exps.InductionCore(target_core, motive_core, case_core_entries)
   }
 
   infer(ctx: Ctx): { t: Value; core: Core } {
@@ -113,24 +96,11 @@ export class Induction extends Exp {
       )
     }
 
-    const inferred_target = infer(ctx, this.target)
-
-    let inferred_target_t = inferred_target.t
-
-    if (
-      inferred_target_t instanceof Exps.TypeCtorValue &&
-      inferred_target_t.arity === 0
-    ) {
-      inferred_target_t = inferred_target_t.as_datatype()
-    }
-
-    const datatype = expect(ctx, inferred_target_t, Exps.DatatypeValue)
+    const { datatype, target_core } = this.infer_target(ctx)
 
     const motive_t = datatype.build_motive_t()
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)
-
-    const target_value = evaluate(ctx.to_env(), inferred_target.core)
 
     this.ensure_no_extra_cases(ctx, datatype)
 
@@ -139,27 +109,41 @@ export class Induction extends Exp {
         const case_entry = this.get_case_entry(name)
         const case_t = datatype.build_case_t(name, motive_value)
         const core = check(ctx, case_entry.exp, case_t)
-        // { // DEBUG
-        //   console.log({
-        //     msg: "[Induction.infer] checking case core entry",
-        //     name,
-        //     exp: case_entry.exp.format(),
-        //     core: core.format(),
-        //   })
-        // }
         return { ...case_entry, core }
       }
     )
 
     return {
-      t: Exps.apply_args(motive_value, [...datatype.varied_args, target_value]),
-      core: new Exps.InductionCore(
-        inferred_target.core,
-        motive_core,
-        case_core_entries
-      ),
+      t: Exps.apply_args(motive_value, [
+        ...datatype.varied_args,
+        evaluate(ctx.to_env(), target_core),
+      ]),
+      core: new Exps.InductionCore(target_core, motive_core, case_core_entries),
     }
   }
+
+  private infer_target(ctx: Ctx): {
+    datatype: Exps.DatatypeValue
+    target_core: Core
+  } {
+    const inferred_target = infer(ctx, this.target)
+    let inferred_target_t = inferred_target.t
+    if (
+      inferred_target_t instanceof Exps.TypeCtorValue &&
+      inferred_target_t.arity === 0
+    ) {
+      inferred_target_t = inferred_target_t.as_datatype()
+    }
+
+    const datatype = expect(ctx, inferred_target_t, Exps.DatatypeValue)
+    const target_core = inferred_target.core
+
+    return { datatype, target_core }
+  }
+
+  // private check_case_entries(): Array<Exps.CaseCoreEntry> {
+
+  // }
 
   private get_case_entry(name: string): Exps.CaseEntry {
     const found = this.case_entries.find(

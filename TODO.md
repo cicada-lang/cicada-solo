@@ -1,4 +1,4 @@
-- [refactor] `induction` extract common functions for `check` and `infer`
+- [refactor] `induction` extract `check_case_entries`
 
 # built-in
 
