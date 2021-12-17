@@ -40,7 +40,7 @@ export class TheSame extends Exp {
 
     return {
       t: new Exps.EqualValue(t, value, value),
-      core: new Exps.BuiltInCore("refl")
+      core: new Exps.BuiltInCore("refl"),
     }
   }
 

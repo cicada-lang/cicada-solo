@@ -1,9 +1,8 @@
-import { Core, evaluate } from "../../core"
+import { evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
-import { Solution } from "../../solution"
-import { Value, expect, check_conversion } from "../../value"
+import { check_conversion, expect, Value } from "../../value"
 
 export class ReflValue extends Exps.BuiltInValue {
   arity = 2

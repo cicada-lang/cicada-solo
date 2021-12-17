@@ -15,6 +15,10 @@ export * from "./built-in/built-in-value"
 // - handle `Value.readback` special case on `AbsurdValue` in different way
 export * from "./the"
 export * from "./the-core"
+export * from "./the-value"
+
+export * from "./todo-value"
+export * from "./todo-note-value"
 
 export * from "./type"
 export * from "./type-core"
@@ -136,10 +140,6 @@ export * from "./trivial/trivial-value"
 export * from "./trivial/sole"
 export * from "./trivial/sole-core"
 export * from "./trivial/sole-value"
-
-export * from "./built-in/the-value"
-export * from "./built-in/todo-value"
-export * from "./built-in/todo-note-value"
 
 // NOTE `built-ins` imports concrete built-in-values,
 //   thus must follow them.
