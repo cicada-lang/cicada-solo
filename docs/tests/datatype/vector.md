@@ -157,7 +157,7 @@ function list_from_vector(
   implicit length: Nat,
   vector: Vector(E, length),
 ): List(E) {
-  return recursion (vector) {
+  return induction (vector) {
     case null => List.null
     case cons(head, tail, almost) => List.cons(head, almost.tail)
   }

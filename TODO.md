@@ -1,4 +1,4 @@
-- [refactor] `induction` & `recursion` extract common functions
+- [refactor] `induction` extract common functions for `check` and `infer`
 
 # built-in
 
