@@ -1,5 +1,10 @@
 # built-in
 
+- `trivial/trivial`
+- `trivial/sole`
+
+- `type`
+
 - `equal/replace`
 
   ``` cicada
@@ -13,15 +18,8 @@
   ) -> motive(to)
   ```
 
-- `trivial/trivial`
-- `trivial/sole`
-
 - `absurd/absurd`
 - `absurd/absurd_ind` -- rename this eliminator
-
-- `str/str`
-
-- `type`
 
 # book manager
 

@@ -17,7 +17,6 @@ const preserved = [
   "sole",
   "Absurd",
   "absurd_ind",
-  "String",
   "Type",
 ]
 

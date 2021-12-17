@@ -92,8 +92,6 @@ export * from "./absurd/absurd-ind"
 export * from "./absurd/absurd-ind-core"
 export * from "./absurd/absurd-ind-neutral"
 
-export * from "./str/str"
-export * from "./str/str-core"
 export * from "./str/str-value"
 export * from "./str/quote"
 export * from "./str/quote-core"
