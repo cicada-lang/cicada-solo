@@ -36,18 +36,17 @@ export class EqualValue extends Exps.BuiltInValue {
 
   // NOTE `(T: Type, from: T, to: T) -> Type`
   self_type(): Value {
-    const env = Env.init()
-
-    const t = new Exps.PiCore(
-      "T",
-      new Exps.TypeCore(),
+    return evaluate(
+      Env.init(),
       new Exps.PiCore(
-        "from",
-        new Exps.VariableCore("T"),
-        new Exps.PiCore("to", new Exps.VariableCore("T"), new Exps.TypeCore())
+        "T",
+        new Exps.TypeCore(),
+        new Exps.PiCore(
+          "from",
+          new Exps.VariableCore("T"),
+          new Exps.PiCore("to", new Exps.VariableCore("T"), new Exps.TypeCore())
+        )
       )
     )
-
-    return evaluate(env, t)
   }
 }

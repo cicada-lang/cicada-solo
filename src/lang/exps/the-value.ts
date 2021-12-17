@@ -21,18 +21,17 @@ export class TheValue extends Exps.BuiltInValue {
 
   // NOTE `(T: Type, x: T) -> T`
   self_type(): Value {
-    const env = Env.init()
-
-    const t = new Exps.PiCore(
-      "T",
-      new Exps.TypeCore(),
+    return evaluate(
+      Env.init(),
       new Exps.PiCore(
-        "x",
-        new Exps.VariableCore("T"),
-        new Exps.VariableCore("T")
+        "T",
+        new Exps.TypeCore(),
+        new Exps.PiCore(
+          "x",
+          new Exps.VariableCore("T"),
+          new Exps.VariableCore("T")
+        )
       )
     )
-
-    return evaluate(env, t)
   }
 }

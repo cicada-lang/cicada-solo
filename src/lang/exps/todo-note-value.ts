@@ -44,14 +44,13 @@ export class TodoNoteValue extends Exps.BuiltInValue {
 
   // NOTE `(vague T: Type, note: String) -> T`
   self_type(): Value {
-    const env = Env.init()
-
-    const t = new Exps.VaguePiCore(
-      "T",
-      new Exps.TypeCore(),
-      new Exps.PiCore("note", new Exps.StrCore(), new Exps.VariableCore("T"))
+    return evaluate(
+      Env.init(),
+      new Exps.VaguePiCore(
+        "T",
+        new Exps.TypeCore(),
+        new Exps.PiCore("note", new Exps.StrCore(), new Exps.VariableCore("T"))
+      )
     )
-
-    return evaluate(env, t)
   }
 }

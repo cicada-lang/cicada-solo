@@ -29,14 +29,9 @@ export class TodoValue extends Exps.BuiltInValue {
 
   // NOTE `(vague T: Type) -> T`
   self_type(): Value {
-    const env = Env.init()
-
-    const t = new Exps.VaguePiCore(
-      "T",
-      new Exps.TypeCore(),
-      new Exps.VariableCore("T")
+    return evaluate(
+      Env.init(),
+      new Exps.VaguePiCore("T", new Exps.TypeCore(), new Exps.VariableCore("T"))
     )
-
-    return evaluate(env, t)
   }
 }

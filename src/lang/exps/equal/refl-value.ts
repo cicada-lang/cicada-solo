@@ -28,27 +28,26 @@ export class ReflValue extends Exps.BuiltInValue {
 
   // NOTE `(vague T: Type, vague x: T) -> Equal(T, x, x)`
   self_type(): Value {
-    const env = Env.init()
-
-    const t = new Exps.VaguePiCore(
-      "T",
-      new Exps.TypeCore(),
+    return evaluate(
+      Env.init(),
       new Exps.VaguePiCore(
-        "x",
-        new Exps.VariableCore("T"),
-        new Exps.ApCore(
+        "T",
+        new Exps.TypeCore(),
+        new Exps.VaguePiCore(
+          "x",
+          new Exps.VariableCore("T"),
           new Exps.ApCore(
             new Exps.ApCore(
-              new Exps.BuiltInCore("Equal"),
-              new Exps.VariableCore("T")
+              new Exps.ApCore(
+                new Exps.BuiltInCore("Equal"),
+                new Exps.VariableCore("T")
+              ),
+              new Exps.VariableCore("x")
             ),
             new Exps.VariableCore("x")
-          ),
-          new Exps.VariableCore("x")
+          )
         )
       )
     )
-
-    return evaluate(env, t)
   }
 }

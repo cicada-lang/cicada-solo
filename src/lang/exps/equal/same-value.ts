@@ -13,21 +13,13 @@ export class SameValue extends Exps.BuiltInValue {
   }
 
   ap_handler: BuiltInApHandler = new BuiltInApHandler(this, {
-    finial_apply: (arg_value_entries) => {
-      const env = Env.init()
-        .extend("T", arg_value_entries[0].value)
-        .extend("x", arg_value_entries[1].value)
-
-      const t = new Exps.VagueApCore(
-        new Exps.VagueApCore(
-          new Exps.BuiltInCore("refl"),
-          new Exps.VariableCore("T")
-        ),
-        new Exps.VariableCore("x")
-      )
-
-      return evaluate(env, t)
-    },
+    finial_apply: (arg_value_entries) =>
+      new Exps.ReflValue(
+        ...([
+          { kind: "vague", value: arg_value_entries[0].value },
+          { kind: "vague", value: arg_value_entries[1].value },
+        ] as const)
+      ),
   })
 
   curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
@@ -47,27 +39,26 @@ export class SameValue extends Exps.BuiltInValue {
 
   // NOTE `(implicit T: Type, x: T) -> Equal(T, x, x)`
   self_type(): Value {
-    const env = Env.init()
-
-    const t = new Exps.ImplicitPiCore(
-      "T",
-      new Exps.TypeCore(),
-      new Exps.PiCore(
-        "x",
-        new Exps.VariableCore("T"),
-        new Exps.ApCore(
+    return evaluate(
+      Env.init(),
+      new Exps.ImplicitPiCore(
+        "T",
+        new Exps.TypeCore(),
+        new Exps.PiCore(
+          "x",
+          new Exps.VariableCore("T"),
           new Exps.ApCore(
             new Exps.ApCore(
-              new Exps.BuiltInCore("Equal"),
-              new Exps.VariableCore("T")
+              new Exps.ApCore(
+                new Exps.BuiltInCore("Equal"),
+                new Exps.VariableCore("T")
+              ),
+              new Exps.VariableCore("x")
             ),
             new Exps.VariableCore("x")
-          ),
-          new Exps.VariableCore("x")
+          )
         )
       )
     )
-
-    return evaluate(env, t)
   }
 }
