@@ -1,10 +1,10 @@
+import * as Exps from ".."
 import { Core, evaluate } from "../../core"
 import { Ctx } from "../../ctx"
 import { check, Exp, ExpMeta, subst } from "../../exp"
-import * as Exps from "../../exps"
 import { Value } from "../../value"
 
-export class AbsurdInd extends Exp {
+export class FromFalsehoodAnything extends Exp {
   meta: ExpMeta
   target: Exp
   motive: Exp
@@ -24,7 +24,7 @@ export class AbsurdInd extends Exp {
   }
 
   subst(name: string, exp: Exp): Exp {
-    return new AbsurdInd(
+    return new FromFalsehoodAnything(
       subst(this.target, name, exp),
       subst(this.motive, name, exp),
       this.meta
@@ -41,11 +41,11 @@ export class AbsurdInd extends Exp {
 
     return {
       t: evaluate(ctx.to_env(), motive_core),
-      core: new Exps.AbsurdIndCore(target_core, motive_core),
+      core: new Exps.FromFalsehoodAnythingCore(target_core, motive_core),
     }
   }
 
   format(): string {
-    return `absurd_ind(${this.target.format()}, ${this.motive.format()})`
+    return `from_falsehood_anything(${this.target.format()}, ${this.motive.format()})`
   }
 }

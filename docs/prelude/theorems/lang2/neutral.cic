@@ -12,5 +12,5 @@
 
   replace(target: Neutral, motive: Normal, base: Normal): Neutral
 
-  absurd_ind(target: Neutral, motive: Normal): Neutral
+  from_falsehood_anything(target: Neutral, motive: Normal): Neutral
 }

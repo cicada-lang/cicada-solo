@@ -1,6 +1,6 @@
 # built-in
 
-- `absurd/absurd_ind` -- rename this eliminator
+- [built-in] `absurd/from-falsehood-anything`
 
 # book manager
 

@@ -5,7 +5,7 @@ import * as Exps from "../../exps"
 import { Normal } from "../../normal"
 import { Value } from "../../value"
 
-export class AbsurdIndCore extends Core {
+export class FromFalsehoodAnythingCore extends Core {
   target: Core
   motive: Core
 
@@ -16,7 +16,7 @@ export class AbsurdIndCore extends Core {
   }
 
   evaluate(env: Env): Value {
-    return AbsurdIndCore.apply(
+    return FromFalsehoodAnythingCore.apply(
       evaluate(env, this.target),
       evaluate(env, this.motive)
     )
@@ -25,13 +25,13 @@ export class AbsurdIndCore extends Core {
   format(): string {
     const target = this.target.format()
     const motive = this.motive.format()
-    return `absurd_ind(${target}, ${motive})`
+    return `from_falsehood_anything(${target}, ${motive})`
   }
 
   alpha_format(ctx: AlphaCtx): string {
     const target = this.target.alpha_format(ctx)
     const motive = this.motive.alpha_format(ctx)
-    return `absurd_ind(${target}, ${motive})`
+    return `from_falsehood_anything(${target}, ${motive})`
   }
 
   static apply(target: Value, motive: Value): Value {
@@ -49,7 +49,7 @@ export class AbsurdIndCore extends Core {
 
     return new Exps.NotYetValue(
       motive,
-      new Exps.AbsurdIndNeutral(
+      new Exps.FromFalsehoodAnythingNeutral(
         target.neutral,
         new Normal(new Exps.TypeValue(), motive)
       )

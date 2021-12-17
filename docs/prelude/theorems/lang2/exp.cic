@@ -27,7 +27,7 @@
   sole: Exp
 
   absurd: Exp
-  absurd_ind(target: Exp, motive: Exp): Exp
+  from_falsehood_anything(target: Exp, motive: Exp): Exp
 
   str: Exp
   quote(str: String): Exp

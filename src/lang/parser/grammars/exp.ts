@@ -27,8 +27,8 @@ export const operator = {
         },
       },
     ],
-    "operator:absurd_ind": [
-      '"absurd_ind"',
+    "operator:from_falsehood_anything": [
+      '"from_falsehood_anything"',
       '"("',
       { target: "exp" },
       '","',

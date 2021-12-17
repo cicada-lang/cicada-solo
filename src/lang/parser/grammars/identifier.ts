@@ -1,6 +1,6 @@
 import pt from "@cicada-lang/partech"
 
-const preserved = [
+export const identifier = pt.grammars.pattern_unless_preserved("identifier", [
   // keywords
   "let",
   "function",
@@ -12,10 +12,5 @@ const preserved = [
   // built-in
   "car",
   "cdr",
-  "absurd_ind",
-]
-
-export const identifier = pt.grammars.pattern_unless_preserved(
-  "identifier",
-  preserved
-)
+  "from_falsehood_anything",
+])

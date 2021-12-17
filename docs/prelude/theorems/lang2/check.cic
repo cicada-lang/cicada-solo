@@ -129,8 +129,8 @@
   Check(ctx, Exp.absurd, Value.type)
   ---------------------------------- absurd
 
-  Check(ctx, Exp.absurd_ind(target, motive), motive_value)
-  -------------------------------------------------- absurd_ind
+  Check(ctx, Exp.from_falsehood_anything(target, motive), motive_value)
+  -------------------------------------------------- from_falsehood_anything
   Check(ctx, target, Value.absurd)
   Check(ctx, motive, Value.type)
   @where {

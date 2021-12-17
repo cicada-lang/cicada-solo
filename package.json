@@ -40,7 +40,7 @@
   "dependencies": {
     "@cicada-lang/partech": "^0.1.15",
     "@enchanterjs/enchanter": "^0.1.30",
-    "@xieyuheng/ty": "^0.1.9",
+    "@xieyuheng/ty": "^0.1.10",
     "axios": "^0.24.0",
     "commonmark": "^0.30.0",
     "content-disposition": "^0.5.4",

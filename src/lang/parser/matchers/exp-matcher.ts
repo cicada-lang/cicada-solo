@@ -111,8 +111,10 @@ export function operator_matcher(tree: pt.Tree): Exp {
             span: pt.span_closure([target.span, name.span]),
           }) as Exp
         ),
-    "operator:absurd_ind": ({ target, motive }, { span }) =>
-      new Exps.AbsurdInd(exp_matcher(target), exp_matcher(motive), { span }),
+    "operator:from_falsehood_anything": ({ target, motive }, { span }) =>
+      new Exps.FromFalsehoodAnything(exp_matcher(target), exp_matcher(motive), {
+        span,
+      }),
     "operator:the": ({ t, exp }, { span }) =>
       new Exps.The(exp_matcher(t), exp_matcher(exp), { span }),
     "operator:induction": ({ target, case_entries }, { span }) =>
