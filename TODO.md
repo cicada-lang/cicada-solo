@@ -1,5 +1,3 @@
-- [refactor] `induction` extract `check_case_entries`
-
 # built-in
 
 - `equal/refl` -- `(vague T: Type, x: T) -> Equal(T, x, x)`
