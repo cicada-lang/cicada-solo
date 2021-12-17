@@ -111,13 +111,6 @@ export function operator_matcher(tree: pt.Tree): Exp {
             span: pt.span_closure([target.span, name.span]),
           }) as Exp
         ),
-    "operator:replace": ({ target, motive, base }, { span }) =>
-      new Exps.Replace(
-        exp_matcher(target),
-        exp_matcher(motive),
-        exp_matcher(base),
-        { span }
-      ),
     "operator:absurd_ind": ({ target, motive }, { span }) =>
       new Exps.AbsurdInd(exp_matcher(target), exp_matcher(motive), { span }),
     "operator:the": ({ t, exp }, { span }) =>

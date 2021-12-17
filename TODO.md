@@ -1,18 +1,5 @@
 # built-in
 
-- `equal/replace`
-
-  ``` cicada
-  (
-    implicit X: Type,
-    implicit from: X,
-    implicit to: X,
-    target: Equal(X, from, to),
-    motive: (X) -> Type,
-    base: motive(from),
-  ) -> motive(to)
-  ```
-
 - `absurd/absurd_ind` -- rename this eliminator
 
 # book manager

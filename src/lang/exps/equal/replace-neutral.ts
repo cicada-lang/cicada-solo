@@ -18,9 +18,14 @@ export class ReplaceNeutral extends Neutral {
   }
 
   readback_neutral(ctx: Ctx): Core {
-    return new Exps.ReplaceCore(
-      this.target.readback_neutral(ctx),
-      this.motive.readback_normal(ctx),
+    return new Exps.ApCore(
+      new Exps.ApCore(
+        new Exps.ApCore(
+          new Exps.BuiltInCore("replace"),
+          this.target.readback_neutral(ctx)
+        ),
+        this.motive.readback_normal(ctx)
+      ),
       this.base.readback_normal(ctx)
     )
   }

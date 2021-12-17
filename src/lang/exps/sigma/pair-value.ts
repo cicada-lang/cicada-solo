@@ -12,19 +12,17 @@ export class PairValue extends Exps.BuiltInValue {
   }
 
   ap_handler: BuiltInApHandler = new BuiltInApHandler(this, {
-    finial_apply: (arg_value_entries) => {
-      const env = Env.init()
-        .extend("A", arg_value_entries[0].value)
-        .extend("B", arg_value_entries[1].value)
-
-      const t = new Exps.SigmaCore(
-        "_",
-        new Exps.VariableCore("A"),
-        new Exps.VariableCore("B")
-      )
-
-      return evaluate(env, t)
-    },
+    finial_apply: (arg_value_entries) =>
+      evaluate(
+        Env.init()
+          .extend("A", arg_value_entries[0].value)
+          .extend("B", arg_value_entries[1].value),
+        new Exps.SigmaCore(
+          "_",
+          new Exps.VariableCore("A"),
+          new Exps.VariableCore("B")
+        )
+      ),
   })
 
   curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
@@ -33,18 +31,17 @@ export class PairValue extends Exps.BuiltInValue {
 
   // NOTE `(A: Type, B: Type) -> Type`
   self_type(): Value {
-    const env = Env.init()
-
-    const t = new Exps.PiCore(
-      "A",
-      new Exps.BuiltInCore("Type"),
+    return evaluate(
+      Env.init(),
       new Exps.PiCore(
-        "B",
+        "A",
         new Exps.BuiltInCore("Type"),
-        new Exps.BuiltInCore("Type")
+        new Exps.PiCore(
+          "B",
+          new Exps.BuiltInCore("Type"),
+          new Exps.BuiltInCore("Type")
+        )
       )
     )
-
-    return evaluate(env, t)
   }
 }

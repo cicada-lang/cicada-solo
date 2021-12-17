@@ -27,16 +27,6 @@ export const operator = {
         },
       },
     ],
-    "operator:replace": [
-      '"replace"',
-      '"("',
-      { target: "exp" },
-      '","',
-      { motive: "exp" },
-      '","',
-      { base: "exp" },
-      '")"',
-    ],
     "operator:absurd_ind": [
       '"absurd_ind"',
       '"("',
