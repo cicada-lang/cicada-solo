@@ -12,7 +12,6 @@ const preserved = [
   // built-in
   "car",
   "cdr",
-  "same",
   "the_same",
   "replace",
   "Trivial",

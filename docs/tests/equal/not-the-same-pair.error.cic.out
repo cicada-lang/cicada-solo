@@ -1,9 +1,9 @@
 I am expecting the following two values to be the same [_: String | String].
 But they are not.
 
-from left hand side:
+from left hand side (from) of Equal:
   ["ratatouille" | "baguette"]
-to right hand side:
+to right hand side (to) of Equal:
   ["baguette" | "ratatouille"]
 
 not-the-same-pair.error.cic:

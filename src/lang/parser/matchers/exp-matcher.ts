@@ -215,8 +215,6 @@ export function operand_matcher(tree: pt.Tree): Exp {
         ],
         { span }
       ),
-    "operand:same": ({ exp }, { span }) =>
-      new Exps.Same(exp_matcher(exp), { span }),
     "operand:the_same": ({ t, exp }, { span }) =>
       new Exps.TheSame(exp_matcher(t), exp_matcher(exp), { span }),
     "operand:same_as_chart": ({ t, exps }, { span }) =>

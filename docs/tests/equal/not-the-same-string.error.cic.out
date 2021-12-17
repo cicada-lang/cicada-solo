@@ -1,9 +1,9 @@
 I am expecting the following two values to be the same String.
 But they are not.
 
-from left hand side:
+from left hand side (from) of Equal:
   "ratatouille"
-to right hand side:
+to right hand side (to) of Equal:
   "baguette"
 
 not-the-same-string.error.cic:

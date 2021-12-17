@@ -78,7 +78,7 @@ export * from "./sigma/cdr-neutral"
 
 export * from "./equal/equal-value"
 export * from "./equal/refl-value"
-export * from "./equal/same"
+export * from "./equal/same-value"
 export * from "./equal/the-same"
 export * from "./equal/same-as-chart"
 export * from "./equal/replace"

@@ -128,7 +128,6 @@ export const operand = {
       { $ap: ["optional", '","'] },
       '"}"',
     ],
-    "operand:same": ['"same"', '"("', { exp: "exp" }, '")"'],
     "operand:the_same": [
       '"the_same"',
       '"("',

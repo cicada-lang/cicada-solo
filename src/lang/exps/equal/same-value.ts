@@ -3,16 +3,35 @@ import { Ctx } from "../../ctx"
 import { Env } from "../../env"
 import * as Exps from "../../exps"
 import { check_conversion, expect, Value } from "../../value"
+import { BuiltInApHandler } from "../built-in/built-in-ap-handler"
 
-export class ReflValue extends Exps.BuiltInValue {
+export class SameValue extends Exps.BuiltInValue {
   arity = 2
 
   constructor(...arg_value_entries: Array<Exps.ArgValueEntry>) {
-    super("refl", arg_value_entries)
+    super("same", arg_value_entries)
   }
 
+  ap_handler: BuiltInApHandler = new BuiltInApHandler(this, {
+    finial_apply: (arg_value_entries) => {
+      const env = Env.init()
+        .extend("T", arg_value_entries[0].value)
+        .extend("x", arg_value_entries[1].value)
+
+      const t = new Exps.VagueApCore(
+        new Exps.VagueApCore(
+          new Exps.BuiltInCore("refl"),
+          new Exps.VariableCore("T")
+        ),
+        new Exps.VariableCore("x")
+      )
+
+      return evaluate(env, t)
+    },
+  })
+
   curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {
-    return new ReflValue(...[...this.arg_value_entries, arg_value_entry])
+    return new SameValue(...[...this.arg_value_entries, arg_value_entry])
   }
 
   before_check(ctx: Ctx, arg_entries: Array<Exps.ArgEntry>, t: Value): void {
@@ -26,14 +45,14 @@ export class ReflValue extends Exps.BuiltInValue {
     })
   }
 
-  // NOTE `(vague T: Type, vague x: T) -> Equal(T, x, x)`
+  // NOTE `(implicit T: Type, x: T) -> Equal(T, x, x)`
   self_type(): Value {
     const env = Env.init()
 
-    const t = new Exps.VaguePiCore(
+    const t = new Exps.ImplicitPiCore(
       "T",
       new Exps.TypeCore(),
-      new Exps.VaguePiCore(
+      new Exps.PiCore(
         "x",
         new Exps.VariableCore("T"),
         new Exps.ApCore(
