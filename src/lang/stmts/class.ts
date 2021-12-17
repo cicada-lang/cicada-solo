@@ -1,5 +1,5 @@
 import { Module } from "../../module"
-import { infer } from "../exp"
+import { check } from "../exp"
 import * as Exps from "../exps"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 
@@ -16,8 +16,9 @@ export class Class extends Stmt {
   }
 
   async execute(mod: Module): Promise<StmtOutput | undefined> {
-    const exp = new Exps.The(new Exps.Type(), this.cls, this.cls.meta)
-    mod.extendInferred(this.name, infer(mod.ctx, exp))
+    const t = new Exps.TypeValue()
+    const core = check(mod.ctx, this.cls, t)
+    mod.extendInferred(this.name, { t, core })
     return undefined
   }
 

@@ -37,8 +37,12 @@ export class PairValue extends Exps.BuiltInValue {
 
     const t = new Exps.PiCore(
       "A",
-      new Exps.TypeCore(),
-      new Exps.PiCore("B", new Exps.TypeCore(), new Exps.TypeCore())
+      new Exps.BuiltInCore("Type"),
+      new Exps.PiCore(
+        "B",
+        new Exps.BuiltInCore("Type"),
+        new Exps.BuiltInCore("Type")
+      )
     )
 
     return evaluate(env, t)

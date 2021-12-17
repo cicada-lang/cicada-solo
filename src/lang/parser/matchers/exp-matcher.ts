@@ -220,7 +220,6 @@ export function operand_matcher(tree: pt.Tree): Exp {
     "operand:absurd": (_, { span }) => new Exps.Absurd({ span }),
     "operand:quote": ({ value }, { span }) =>
       new Exps.Quote(pt.trim_boundary(pt.str(value), 1), { span }),
-    "operand:type": (_, { span }) => new Exps.Type({ span }),
   })(tree)
 }
 

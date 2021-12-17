@@ -15,7 +15,6 @@ const preserved = [
   "replace",
   "Absurd",
   "absurd_ind",
-  "Type",
 ]
 
 export const identifier = pt.grammars.pattern_unless_preserved(

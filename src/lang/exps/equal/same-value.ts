@@ -43,7 +43,7 @@ export class SameValue extends Exps.BuiltInValue {
       Env.init(),
       new Exps.ImplicitPiCore(
         "T",
-        new Exps.TypeCore(),
+        new Exps.BuiltInCore("Type"),
         new Exps.PiCore(
           "x",
           new Exps.VariableCore("T"),

@@ -66,7 +66,7 @@ export class ReplaceCore extends Core {
     const base_t = Exps.ApCore.apply(motive, target.t.from)
     const motive_t = new Exps.PiValue(
       target.t.t,
-      new Closure(Env.init(), "x", new Exps.TypeCore())
+      new Closure(Env.init(), "x", new Exps.BuiltInCore("Type"))
     )
     return new Exps.NotYetValue(
       Exps.ApCore.apply(motive, target.t.to),

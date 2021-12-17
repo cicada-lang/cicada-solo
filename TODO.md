@@ -1,6 +1,8 @@
+- [refactor] rename `Module.extendInferred` to `Module.extendTypedCore`
+
 # built-in
 
-- `type`
+- `absurd/absurd`
 
 - `equal/replace`
 
@@ -15,7 +17,6 @@
   ) -> motive(to)
   ```
 
-- `absurd/absurd`
 - `absurd/absurd_ind` -- rename this eliminator
 
 # book manager

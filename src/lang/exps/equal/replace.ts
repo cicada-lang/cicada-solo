@@ -41,7 +41,11 @@ export class Replace extends Exp {
     const equal = expect(ctx, inferred_target.t, Exps.EqualValue)
     const motive_t = evaluate(
       Env.init().extend("t", equal.t),
-      new Exps.PiCore("x", new Exps.VariableCore("t"), new Exps.TypeCore())
+      new Exps.PiCore(
+        "x",
+        new Exps.VariableCore("t"),
+        new Exps.BuiltInCore("Type")
+      )
     )
     const motive_core = check(ctx, this.motive, motive_t)
     const motive_value = evaluate(ctx.to_env(), motive_core)

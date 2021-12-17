@@ -20,8 +20,6 @@ export * from "./the-value"
 export * from "./todo-value"
 export * from "./todo-note-value"
 
-export * from "./type"
-export * from "./type-core"
 export * from "./type-value"
 
 export * from "./sequence/begin"
