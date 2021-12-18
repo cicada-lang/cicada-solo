@@ -4,6 +4,7 @@ import { Book } from "../../book"
 import { CtxOptions } from "../../lang/ctx"
 import * as ut from "../../ut"
 import { Runner } from "../runner"
+import Path from "path"
 
 export class ErrorRunner extends Runner {
   static extensions = [".error.cic", ".error.md"]
@@ -23,7 +24,10 @@ export class ErrorRunner extends Runner {
       }
     } catch (error) {
       const text = await book.files.getOrFail(path)
-      const report = this.reporter.report(error, { path, text })
+      const report = this.reporter.report(error, {
+        path: Path.relative(process.cwd(), path),
+        text,
+      })
       const file = book.files.resolve(path + ".out")
       await fs.promises.writeFile(file, ut.stripAnsi(report))
       return { error: undefined }

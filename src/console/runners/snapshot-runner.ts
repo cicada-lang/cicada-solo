@@ -4,6 +4,7 @@ import { Book } from "../../book"
 import { CtxOptions } from "../../lang/ctx"
 import * as ut from "../../ut"
 import { Runner } from "../runner"
+import Path from "path"
 
 export class SnapshotRunner extends Runner {
   static extensions = [".cic", ".md"]
@@ -29,7 +30,10 @@ export class SnapshotRunner extends Runner {
       return { error: undefined }
     } catch (error) {
       const text = await book.files.getOrFail(path)
-      const report = this.reporter.report(error, { path, text })
+      const report = this.reporter.report(error, {
+        path: Path.relative(process.cwd(), path),
+        text,
+      })
       console.error(report)
       return { error }
     }

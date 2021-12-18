@@ -4,6 +4,7 @@ import { CtxOptions } from "../../lang/ctx"
 import { Runner } from "../runner"
 import { ErrorRunner } from "./error-runner"
 import { SnapshotRunner } from "./snapshot-runner"
+import Path from "path"
 
 export class LocalRunner extends Runner {
   async run(

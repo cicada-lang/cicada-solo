@@ -45,8 +45,7 @@ export class RunCommand extends Command<Args, Opts> {
       Path.dirname(argv["article"])
     )
     const runner = new CommonRunner()
-    const path = Path.basename(argv["article"])
-
+    const path = Path.resolve(argv["article"])
     if (argv["watch"]) {
       await runner.run(book, path, {
         observers: app.defaultCtxObservers,

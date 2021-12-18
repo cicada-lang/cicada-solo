@@ -1,15 +1,13 @@
+> We do not need to use `book.json` for package management anymore.
+
+- `Module` has `fileLoader` -- use `file` url
+- `Module` remove `book`
+- `Book` remove `files`
+
 - `import` url support local cache
 - default `book.json` `src` to root dir -- for good cdn url
 
-# book manager
-
-- [book manager] [cli] `cic init` -- learn from `npm init` and so on
-- [book manager] [cli] `cic init` -- `help`
-
-- [refactor] `Book` having a type argument seems like code smell
-
-- [book manager] be able to resolve module in book of `references`
-  - we do not need to use book as module, we only need to be able to resolve module.
+- [cli] `cic init` -- learn from `npm init` and so on
 
 # inductive datatype -- questions
 

@@ -8,6 +8,7 @@ import app from "../../app/node-app"
 import { Book } from "../../book"
 import * as CodeBlockParsers from "../../module/code-block-parsers"
 import { LocalRunner } from "../runners/local-runner"
+import Path from "path"
 
 type Args = { book?: string }
 type Opts = { watch?: boolean }
@@ -69,9 +70,10 @@ async function check(
 
   for (const path of await book.files.keys()) {
     if (CodeBlockParsers.canHandle(path)) {
+      const fullPath = Path.resolve(book.files.root, path)
       const t0 = Date.now()
       const runner = new LocalRunner()
-      const { error } = await runner.run(book, path, {
+      const { error } = await runner.run(book, fullPath, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
@@ -108,7 +110,8 @@ async function watch(book: Book<LocalFileStore>): Promise<void> {
       const t0 = Date.now()
       book.cache.delete(path)
       const runner = new LocalRunner()
-      const { error } = await runner.run(book, path, {
+      const fullPath = Path.resolve(book.files.root, path)
+      const { error } = await runner.run(book, fullPath, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })

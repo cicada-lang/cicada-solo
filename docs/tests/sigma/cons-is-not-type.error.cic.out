@@ -2,6 +2,6 @@ I see unexpected value class: TypeValue,
 but the asserted class is: SigmaValue.
 
 
-cons-is-not-type.error.cic:
+docs/tests/sigma/cons-is-not-type.error.cic:
  1 |the(Type, cons(String, String))
  2 |

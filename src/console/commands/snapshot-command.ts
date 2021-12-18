@@ -35,7 +35,7 @@ export class SnapshotCommand extends Command<Args> {
     const book = await app.localBooks.findUpOrFake(
       Path.dirname(argv["article"])
     )
-    const path = Path.basename(argv["article"])
+    const path = Path.resolve(argv["article"])
     const runner = new LocalRunner()
     const { error } = await runner.run(book, path, {
       observers: app.defaultCtxObservers,
