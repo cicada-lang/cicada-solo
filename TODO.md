@@ -1,12 +1,10 @@
 # book manager
 
-- dispatch target to `ZipDownloader`
-
-- [book manager] zip name should ends with `@version` instead of `-version`
-
 - [book manager] [cli] `cic install <host/repo@version> "name"` -- instead of `<user/repo@tag>`
 
   - default name is repo
+
+- dispatch target to `ZipDownloader`
 
 - [book manager] [cli] `cic install` -- should not download existing packages
 

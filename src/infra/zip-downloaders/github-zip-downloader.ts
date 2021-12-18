@@ -1,12 +1,11 @@
 import { GitLink } from "@enchanterjs/enchanter/lib/git-link"
 import axios from "axios"
 import contentDisposition from "content-disposition"
+import JSZip from "jszip"
 
 export type GitHubZipResult = {
-  repo: string
-  tag: string
-  filename: string
-  data: Buffer
+  link: GitLink
+  zip: JSZip
 }
 
 export class GitHubZipDownloader {
@@ -21,17 +20,23 @@ export class GitHubZipDownloader {
 
     const zipUrl = this.formatZipUrl(link)
 
-    const response = await axios.get(zipUrl, { responseType: "arraybuffer" })
+    const { data, headers } = await axios.get(zipUrl, {
+      responseType: "arraybuffer",
+    })
 
     const { parameters } = contentDisposition.parse(
-      response.headers["content-disposition"]
+      headers["content-disposition"]
     )
 
+    let zip: null | JSZip = await JSZip.loadAsync(data)
+    zip = zip?.folder(parameters.filename)
+    if (zip === null) {
+      throw new Error(`fail to load zip`)
+    }
+
     return {
-      repo: link.repo,
-      tag: link.tag,
-      filename: parameters.filename,
-      data: response.data,
+      link,
+      zip,
     }
   }
 
