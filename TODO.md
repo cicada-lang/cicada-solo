@@ -1,7 +1,5 @@
 > We do not need to use `book.json` for package management anymore.
 
-- `Book` remove `files`
-
 - avoid using `FileStore` -- use url instead
 
 - `import` url support local cache

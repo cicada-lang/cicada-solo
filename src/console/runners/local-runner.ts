@@ -7,14 +7,15 @@ import { SnapshotRunner } from "./snapshot-runner"
 
 export class LocalRunner extends Runner {
   async run(
-    book: Book<LocalFileStore>,
+    book: Book,
+    files: LocalFileStore,
     path: string,
     opts: CtxOptions
   ): Promise<{ error?: unknown }> {
     if (ErrorRunner.extensions.some((e) => path.endsWith(e))) {
-      return await new ErrorRunner().run(book, path, opts)
+      return await new ErrorRunner().run(book, files, path, opts)
     } else if (SnapshotRunner.extensions.some((e) => path.endsWith(e))) {
-      return await new SnapshotRunner().run(book, path, opts)
+      return await new SnapshotRunner().run(book, files, path, opts)
     } else {
       throw new Error(`I can not handle file extension: ${path}`)
     }

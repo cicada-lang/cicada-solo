@@ -51,11 +51,11 @@ export class CheckCommand extends Command<Args, Opts> {
     app.logger.info(book.config)
 
     if (argv["watch"]) {
-      await check(book)
+      await check(book, files)
       app.logger.info(`Initial check complete, now watching for file changes.`)
-      await watch(book)
+      await watch(book, files)
     } else {
-      const { errors } = await check(book)
+      const { errors } = await check(book, files)
       if (errors.length > 0) {
         process.exit()
       }
@@ -64,16 +64,17 @@ export class CheckCommand extends Command<Args, Opts> {
 }
 
 async function check(
-  book: Book<LocalFileStore>
+  book: Book,
+  files: LocalFileStore
 ): Promise<{ errors: Array<unknown> }> {
   let errors: Array<unknown> = []
 
-  for (const path of await book.files.keys()) {
+  for (const path of await files.keys()) {
     if (CodeBlockParsers.canHandle(path)) {
-      const fullPath = Path.resolve(book.files.root, path)
+      const fullPath = Path.resolve(files.root, path)
       const t0 = Date.now()
       const runner = new LocalRunner()
-      const { error } = await runner.run(book, fullPath, {
+      const { error } = await runner.run(book, files, fullPath, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
@@ -91,8 +92,8 @@ async function check(
   return { errors }
 }
 
-async function watch(book: Book<LocalFileStore>): Promise<void> {
-  const dir = book.files.root
+async function watch(book: Book, files: LocalFileStore): Promise<void> {
+  const dir = files.root
 
   watcher(dir, { recursive: true }, async (event, file) => {
     if (!file) return
@@ -110,8 +111,8 @@ async function watch(book: Book<LocalFileStore>): Promise<void> {
       const t0 = Date.now()
       book.cache.delete(path)
       const runner = new LocalRunner()
-      const fullPath = Path.resolve(book.files.root, path)
-      const { error } = await runner.run(book, fullPath, {
+      const fullPath = Path.resolve(files.root, path)
+      const { error } = await runner.run(book, files, fullPath, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })

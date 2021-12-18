@@ -7,33 +7,27 @@ import * as ut from "../../ut"
 import { Book } from "../book"
 import { BookConfigSchema } from "../book-config"
 
-export class LocalBookStore extends Store<
-  [Book<LocalFileStore>, LocalFileStore]
-> {
-  async get(
-    config_file: string
-  ): Promise<[Book<LocalFileStore>, LocalFileStore]> {
+export class LocalBookStore extends Store<[Book, LocalFileStore]> {
+  async get(config_file: string): Promise<[Book, LocalFileStore]> {
     const text = await fs.promises.readFile(config_file, "utf8")
     const config = BookConfigSchema.validate(JSON.parse(text))
     const dir = Path.resolve(Path.dirname(config_file), config.src)
     const files = new LocalFileStore({ dir })
-    const book = new Book({ config, files })
+    const book = new Book({ config })
     return [book, files]
   }
 
   fake(opts: {
     fallback: LocalFileStore
     faked?: Record<string, string>
-  }): [Book<LocalFileStore>, LocalFileStore] {
+  }): [Book, LocalFileStore] {
     const { fallback, faked } = opts
     const files = new FakeLocalFileStore({ faked, fallback })
-    const book = new Book({ config: Book.fakeConfig(), files })
+    const book = new Book({ config: Book.fakeConfig() })
     return [book, files]
   }
 
-  async findUpOrFake(
-    dir: string
-  ): Promise<[Book<LocalFileStore>, LocalFileStore]> {
+  async findUpOrFake(dir: string): Promise<[Book, LocalFileStore]> {
     const config_file = ut.findUp("book.json", { from: dir })
     return config_file
       ? await this.get(config_file)

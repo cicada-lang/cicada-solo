@@ -37,7 +37,7 @@ export class SnapshotCommand extends Command<Args> {
     )
     const path = Path.resolve(argv["article"])
     const runner = new LocalRunner()
-    const { error } = await runner.run(book, path, {
+    const { error } = await runner.run(book, files, path, {
       observers: app.defaultCtxObservers,
       highlighter: app.defaultHighlighter,
     })

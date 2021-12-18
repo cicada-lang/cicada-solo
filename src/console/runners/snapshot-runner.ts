@@ -10,12 +10,13 @@ export class SnapshotRunner extends Runner {
   static extensions = [".cic", ".md"]
 
   async run(
-    book: Book<LocalFileStore>,
+    book: Book,
+    files: LocalFileStore,
     path: string,
     opts: CtxOptions
   ): Promise<{ error?: unknown }> {
     try {
-      const file = await book.files.getOrFail(path)
+      const file = await files.getOrFail(path)
       const url = new URL(`file:${path}`)
       const mod = book.load(url, file, opts)
       await mod.runAll()
@@ -24,13 +25,13 @@ export class SnapshotRunner extends Runner {
         .join("\n")
 
       if (output) {
-        const file = book.files.resolve(path + ".out")
+        const file = files.resolve(path + ".out")
         await fs.promises.writeFile(file, ut.stripAnsi(output))
       }
 
       return { error: undefined }
     } catch (error) {
-      const text = await book.files.getOrFail(path)
+      const text = await files.getOrFail(path)
       const report = this.reporter.report(error, {
         path: Path.relative(process.cwd(), path),
         text,

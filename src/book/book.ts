@@ -1,4 +1,3 @@
-import { FileStore } from "@enchanterjs/enchanter/lib/file-store"
 import { customAlphabet } from "nanoid"
 import { Ctx, CtxObserver, Highlighter } from "../lang/ctx"
 import { Env } from "../lang/env"
@@ -9,14 +8,12 @@ import { BookConfig } from "./book-config"
 
 const nanoid = customAlphabet("1234567890abcdef", 16)
 
-export class Book<Files extends FileStore = FileStore> {
+export class Book {
   config: BookConfig
-  files: Files
   cache: Map<string, Module> = new Map()
 
-  constructor(opts: { config: BookConfig; files: Files }) {
+  constructor(opts: { config: BookConfig }) {
     this.config = opts.config
-    this.files = opts.files
   }
 
   static fakeConfig(): BookConfig {

@@ -47,14 +47,14 @@ export class RunCommand extends Command<Args, Opts> {
     const runner = new CommonRunner()
     const path = Path.resolve(argv["article"])
     if (argv["watch"]) {
-      await runner.run(book, path, {
+      await runner.run(book, files, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
       app.logger.info(`Initial run complete, now watching for changes.`)
-      await watch(runner, book, path)
+      await watch(runner, book, files, path)
     } else {
-      const { error } = await runner.run(book, path, {
+      const { error } = await runner.run(book, files, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
@@ -67,10 +67,11 @@ export class RunCommand extends Command<Args, Opts> {
 
 async function watch(
   runner: Runner,
-  book: Book<LocalFileStore>,
+  book: Book,
+  files: LocalFileStore,
   path: string
 ): Promise<void> {
-  watcher(book.files.resolve(path), async (event, file) => {
+  watcher(files.resolve(path), async (event, file) => {
     if (event === "remove") {
       book.cache.delete(path)
       app.logger.info({ tag: event, msg: path })
@@ -79,7 +80,7 @@ async function watch(
 
     if (event === "update") {
       book.cache.delete(path)
-      const { error } = await runner.run(book, path, {
+      const { error } = await runner.run(book, files, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })

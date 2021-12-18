@@ -10,12 +10,13 @@ export class ErrorRunner extends Runner {
   static extensions = [".error.cic", ".error.md"]
 
   async run(
-    book: Book<LocalFileStore>,
+    book: Book,
+    files: LocalFileStore,
     path: string,
     opts: CtxOptions
   ): Promise<{ error?: unknown }> {
     try {
-      const file = await book.files.getOrFail(path)
+      const file = await files.getOrFail(path)
       const url = new URL(`file:${path}`)
       const mod = book.load(url, file, opts)
       await mod.runAll()
@@ -24,12 +25,12 @@ export class ErrorRunner extends Runner {
         error: new Error(`I expect to find error in the path: ${path}`),
       }
     } catch (error) {
-      const text = await book.files.getOrFail(path)
+      const text = await files.getOrFail(path)
       const report = this.reporter.report(error, {
         path: Path.relative(process.cwd(), path),
         text,
       })
-      const file = book.files.resolve(path + ".out")
+      const file = files.resolve(path + ".out")
       await fs.promises.writeFile(file, ut.stripAnsi(report))
       return { error: undefined }
     }
