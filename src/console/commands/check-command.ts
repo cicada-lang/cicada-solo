@@ -7,6 +7,7 @@ import watcher from "node-watch"
 import Path from "path"
 import app from "../../app/node-app"
 import { Book } from "../../book"
+import { Module } from "../../module"
 import * as CodeBlockParsers from "../../module/code-block-parsers"
 import { LocalRunner } from "../runners/local-runner"
 
@@ -104,13 +105,13 @@ async function watch(book: Book, files: LocalFileStore): Promise<void> {
     const path = file.slice(prefix.length)
 
     if (event === "remove") {
-      book.cache.delete(path)
+      Module.cache.delete(path)
       app.logger.info({ tag: event, msg: path })
     }
 
     if (event === "update") {
       const t0 = Date.now()
-      book.cache.delete(path)
+      Module.cache.delete(path)
       const runner = new LocalRunner()
       const fullPath = Path.resolve(files.root, path)
       const { error } = await runner.run(book, files, fullPath, {

@@ -31,7 +31,7 @@ export class Import extends Stmt {
         ? (await axios.get(url.href)).data
         : await fs.promises.readFile(url.pathname, "utf8")
 
-    const imported_mod = mod.book.load(url, file, {
+    const imported_mod = Module.load(url, file, {
       observers: mod.ctx.observers,
       highlighter: mod.ctx.highlighter,
     })

@@ -1,31 +1,59 @@
 import ty from "@xieyuheng/ty"
-import { Book } from "../book"
 import { Core, evaluate } from "../lang/core"
-import { Ctx } from "../lang/ctx"
+import { Ctx, CtxObserver, Highlighter } from "../lang/ctx"
 import { Env } from "../lang/env"
 import { StmtOutput } from "../lang/stmt"
 import { Value } from "../lang/value"
+import * as CodeBlockParsers from "../module/code-block-parsers"
 import { CodeBlockResource } from "./code-block-resource"
 
 export class Module {
-  book: Book
   url: URL
   codeBlocks: CodeBlockResource
   env: Env
   ctx: Ctx
 
   constructor(opts: {
-    book: Book
     url: URL
     codeBlocks: CodeBlockResource
     env: Env
     ctx: Ctx
   }) {
-    this.book = opts.book
     this.url = opts.url
     this.codeBlocks = opts.codeBlocks
     this.env = opts.env
     this.ctx = opts.ctx
+  }
+
+  static cache: Map<string, Module> = new Map()
+
+  static load(
+    url: URL,
+    text: string,
+    opts: {
+      observers: Array<CtxObserver>
+      highlighter: Highlighter
+    }
+  ): Module {
+    const cached = this.cache.get(url.href)
+    if (cached) {
+      return cached
+    }
+
+    const parser = CodeBlockParsers.createCodeBlockParser(url.href)
+
+    const mod = new Module({
+      url: url,
+      codeBlocks: new CodeBlockResource(parser.parseCodeBlocks(text)),
+      env: Env.init(),
+      ctx: Ctx.init({
+        observers: opts.observers,
+        highlighter: opts.highlighter,
+      }),
+    })
+
+    this.cache.set(url.href, mod)
+    return mod
   }
 
   resolve(path: string): URL {

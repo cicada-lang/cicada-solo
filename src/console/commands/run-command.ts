@@ -6,6 +6,7 @@ import watcher from "node-watch"
 import Path from "path"
 import app from "../../app/node-app"
 import { Book } from "../../book"
+import { Module } from "../../module"
 import { Runner } from "../runner"
 import { CommonRunner } from "../runners/common-runner"
 
@@ -73,13 +74,13 @@ async function watch(
 ): Promise<void> {
   watcher(files.resolve(path), async (event, file) => {
     if (event === "remove") {
-      book.cache.delete(path)
+      Module.cache.delete(path)
       app.logger.info({ tag: event, msg: path })
       process.exit(1)
     }
 
     if (event === "update") {
-      book.cache.delete(path)
+      Module.cache.delete(path)
       const { error } = await runner.run(book, files, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,

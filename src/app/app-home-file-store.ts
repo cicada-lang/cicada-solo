@@ -5,9 +5,8 @@ import process from "process"
 
 export class AppHomeFileStore extends LocalFileStore {
   constructor() {
-    const dir =
-      process.env["CICADA_HOME"] || Path.resolve(os.homedir(), ".cicada")
-
-    super({ dir })
+    super({
+      dir: process.env["CICADA_HOME"] || Path.resolve(os.homedir(), ".cicada"),
+    })
   }
 }

@@ -3,6 +3,7 @@ import fs from "fs"
 import Path from "path"
 import { Book } from "../../book"
 import { CtxOptions } from "../../lang/ctx"
+import { Module } from "../../module"
 import * as ut from "../../ut"
 import { Runner } from "../runner"
 
@@ -18,7 +19,7 @@ export class SnapshotRunner extends Runner {
     try {
       const file = await files.getOrFail(path)
       const url = new URL(`file:${path}`)
-      const mod = book.load(url, file, opts)
+      const mod = Module.load(url, file, opts)
       await mod.runAll()
       const output = mod.codeBlocks.allOutputs
         .map((output) => output.formatForConsole())

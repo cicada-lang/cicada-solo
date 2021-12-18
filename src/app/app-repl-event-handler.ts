@@ -4,6 +4,7 @@ import { Config } from "../config"
 import { CtxObserver, Highlighter } from "../lang/ctx"
 import * as Errors from "../lang/errors"
 import * as StmtOutputs from "../lang/stmt/stmt-outputs"
+import { Module } from "../module"
 import * as ut from "../ut"
 
 export class AppReplEventHandler extends ReplEventHandler {
@@ -42,7 +43,7 @@ export class AppReplEventHandler extends ReplEventHandler {
     text = text.trim()
     const url = new URL(`file:${this.path}`)
 
-    const mod = this.book.load(url, "", {
+    const mod = Module.load(url, "", {
       observers: this.observers,
       highlighter: this.highlighter,
     })
