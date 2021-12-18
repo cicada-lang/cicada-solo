@@ -41,8 +41,8 @@ export class GitHubZipDownloader {
     }
   }
 
-  private formatZipUrl(opts: { repo: string; tag: string }): string {
-    const { repo, tag } = opts
-    return `https://github.com/${repo}/archive/refs/tags/${tag}.zip`
+  private formatZipUrl(opts: { repo: string; version: string }): string {
+    const { repo, version } = opts
+    return `https://github.com/${repo}/archive/refs/tags/${version}.zip`
   }
 }

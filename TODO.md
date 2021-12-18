@@ -1,7 +1,5 @@
 # book manager
 
-- [book manager] fix `BookReference`
-
 - dispatch target to `ZipDownloader`
 
 - [book manager] [cli] `cic install` -- should not download existing packages

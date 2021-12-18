@@ -30,14 +30,14 @@ export class InstallCommand extends Command<Args, Opts> {
     const zipDownloader = new GitHubZipDownloader()
     const { link, zip } = await zipDownloader.download(target)
 
-    const destination = `${app.home.dir}/references/github.com/${link.repo}/${link.tag}.zip`
+    const destination = `${app.home.dir}/references/github.com/${link.repo}/${link.version}.zip`
     await fs.promises.mkdir(Path.dirname(destination), { recursive: true })
     await fs.promises.writeFile(
       destination,
       await zip.generateAsync({ type: "nodebuffer" })
     )
 
-    book.config.addReference(argv.name || link.repo, { tag: link.tag })
+    book.config.addReference(argv.name || link.repo, link)
     await fs.promises.writeFile(
       configFile,
       JSON.stringify(book.config.json(), null, 2)

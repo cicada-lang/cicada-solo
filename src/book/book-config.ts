@@ -1,7 +1,12 @@
 import ty from "@xieyuheng/ty"
 import { customAlphabet } from "nanoid"
-import { BookReference, BookReferenceJson } from "./book-reference"
 const nanoid = customAlphabet("1234567890abcdef", 16)
+
+export interface BookReference {
+  host: string
+  repo: string
+  version: string
+}
 
 export type BookConfigJson = {
   title: string
@@ -10,7 +15,7 @@ export type BookConfigJson = {
   src: string
   authors?: Array<string>
   date?: string
-  references?: Record<string, string>
+  references?: Record<string, BookReference>
 }
 
 export class BookConfig {
@@ -29,9 +34,7 @@ export class BookConfig {
     this.src = opts.src
     this.authors = opts.authors
     this.date = opts.date
-    this.references = opts.references
-      ? BookReference.parseReferences(opts.references)
-      : {}
+    this.references = opts.references || {}
   }
 
   static schema = ty.object<BookConfigJson>({
@@ -41,7 +44,15 @@ export class BookConfig {
     src: ty.string(),
     authors: ty.optional(ty.array(ty.string())),
     date: ty.optional(ty.string()),
-    references: ty.optional(ty.dict(ty.string())),
+    references: ty.optional(
+      ty.dict(
+        ty.object({
+          host: ty.string(),
+          repo: ty.string(),
+          version: ty.string(),
+        })
+      )
+    ),
   })
 
   static validate(input: any): BookConfigJson {
@@ -60,8 +71,8 @@ export class BookConfig {
     })
   }
 
-  addReference(name: string, ref: BookReferenceJson): void {
-    this.references[name] = new BookReference(ref)
+  addReference(name: string, ref: BookReference): void {
+    this.references[name] = ref
   }
 
   json(): BookConfigJson {
@@ -72,12 +83,7 @@ export class BookConfig {
       authors: this.authors,
       date: this.date,
       src: this.src,
-      references: Object.fromEntries(
-        Object.entries(this.references).map(([key, reference]) => [
-          key,
-          reference.format(),
-        ])
-      ),
+      references: this.references,
     }
   }
 }
