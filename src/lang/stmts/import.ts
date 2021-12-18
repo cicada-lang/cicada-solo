@@ -1,4 +1,5 @@
-import Path from "path"
+import ty from "@xieyuheng/ty"
+import axios from "axios"
 import { Module } from "../../module"
 import * as Errors from "../errors"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
@@ -18,14 +19,17 @@ export class Import extends Stmt {
   }
 
   async execute(mod: Module): Promise<StmtOutput | undefined> {
-    const path = resolve_path(mod.path, this.path)
+    const path = mod.resolve(this.path)
     if (path === mod.path) {
       throw new Errors.ExpTrace(
         [`I can not do circular import.`, `  path: ${path}`].join("\n")
       )
     }
 
-    const file = await mod.book.files.getOrFail(path)
+    const file = ty.uri().isValid(path)
+      ? (await axios.get(path)).data
+      : await mod.book.files.getOrFail(path)
+
     const imported_mod = mod.book.load(path, file, {
       observers: mod.ctx.observers,
       highlighter: mod.ctx.highlighter,
@@ -70,15 +74,5 @@ export class Import extends Stmt {
       .join(", ")
 
     return `import { ${entries} } from "${this.path}"`
-  }
-}
-
-function resolve_path(base: string, path: string): string {
-  if (path.startsWith("@/")) {
-    return path.slice("@/".length)
-  } else if (Path.isAbsolute(base)) {
-    return Path.resolve(Path.dirname(base), path)
-  } else {
-    return Path.resolve(Path.dirname("/" + base), path).slice(1)
   }
 }

@@ -1,5 +1,4 @@
 - `import` url support local cache
-
 - default `book.json` `src` to root dir -- for good cdn url
 
 # book manager

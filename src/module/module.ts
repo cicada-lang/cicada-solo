@@ -1,3 +1,5 @@
+import ty from "@xieyuheng/ty"
+import Path from "path"
 import { Book } from "../book"
 import { Core, evaluate } from "../lang/core"
 import { Ctx } from "../lang/ctx"
@@ -25,6 +27,23 @@ export class Module {
     this.codeBlocks = opts.codeBlocks
     this.env = opts.env
     this.ctx = opts.ctx
+  }
+
+  resolve(path: string): string {
+    if (ty.uri().isValid(path)) {
+      return path
+    }
+
+    const base = this.path
+    if (ty.uri().isValid(base)) {
+      return new URL(path, base).href
+    }
+
+    if (Path.isAbsolute(base)) {
+      return Path.resolve(Path.dirname(base), path)
+    } else {
+      return Path.resolve(Path.dirname("/" + base), path).slice(1)
+    }
   }
 
   extendTypedCore(name: string, inferred: { t: Value; core: Core }): void {
