@@ -1,17 +1,17 @@
 import { GitFileStore } from "@enchanterjs/enchanter/lib/git-file-store"
 import { FakeGitFileStore } from "@enchanterjs/enchanter/lib/git-file-stores/fake-git-file-store"
-import { GitPath } from "@enchanterjs/enchanter/lib/git-path"
+import { GitLink } from "@enchanterjs/enchanter/lib/git-link"
 import { Book } from "../book"
 import { BookConfig } from "../book-config"
 import { BookStore } from "../book-store"
 
 export class GitBookStore extends BookStore {
   async get(url: string): Promise<Book<GitFileStore>> {
-    return this.getFromGitPath(GitPath.fromURL(url))
+    return this.getFromGitLink(GitLink.fromURL(url))
   }
 
-  async getFromGitPath(gitPath: GitPath): Promise<Book<GitFileStore>> {
-    const files = gitPath.createGitFileStore()
+  async getFromGitLink(link: GitLink): Promise<Book<GitFileStore>> {
+    const files = link.createGitFileStore()
     const text = await files.getOrFail("book.json")
     const config = BookConfig.create(JSON.parse(text))
     return new Book({ config, files: files.cd(config.src) })

@@ -1,5 +1,5 @@
 # book manager
-
+host/
 - refactor `Book` and `BookStore`
 
   - `Book` having a type argument seems like code smell
