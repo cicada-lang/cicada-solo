@@ -26,7 +26,7 @@ export class Import extends Stmt {
     }
 
     const file =
-      url.protocol === "https" || url.protocol === "http"
+      url.protocol === "https:" || url.protocol === "http:"
         ? (await axios.get(url.href)).data
         : await mod.book.files.getOrFail(url.pathname)
 

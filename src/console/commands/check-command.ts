@@ -4,11 +4,11 @@ import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-fil
 import ty from "@xieyuheng/ty"
 import fs from "fs"
 import watcher from "node-watch"
+import Path from "path"
 import app from "../../app/node-app"
 import { Book } from "../../book"
 import * as CodeBlockParsers from "../../module/code-block-parsers"
 import { LocalRunner } from "../runners/local-runner"
-import Path from "path"
 
 type Args = { book?: string }
 type Opts = { watch?: boolean }

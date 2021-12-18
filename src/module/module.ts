@@ -1,5 +1,4 @@
 import ty from "@xieyuheng/ty"
-import Path from "path"
 import { Book } from "../book"
 import { Core, evaluate } from "../lang/core"
 import { Ctx } from "../lang/ctx"
