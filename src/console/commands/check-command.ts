@@ -6,7 +6,6 @@ import fs from "fs"
 import watcher from "node-watch"
 import Path from "path"
 import app from "../../app/node-app"
-import { Book } from "../../book"
 import { Module } from "../../module"
 import * as CodeBlockParsers from "../../module/code-block-parsers"
 import { LocalRunner } from "../runners/local-runner"
@@ -48,16 +47,16 @@ export class CheckCommand extends Command<Args, Opts> {
     Command.assertExists(path)
     const configFile = fs.lstatSync(path).isFile() ? path : path + "/book.json"
     const config = await fs.promises.readFile(configFile, "utf8")
-    const [book, files] = await app.localBooks.get(configFile)
+    const files = await app.localBooks.get(configFile)
 
     app.logger.info(config)
 
     if (argv["watch"]) {
-      await check(book, files)
+      await check(files)
       app.logger.info(`Initial check complete, now watching for file changes.`)
-      await watch(book, files)
+      await watch(files)
     } else {
-      const { errors } = await check(book, files)
+      const { errors } = await check(files)
       if (errors.length > 0) {
         process.exit()
       }
@@ -66,7 +65,6 @@ export class CheckCommand extends Command<Args, Opts> {
 }
 
 async function check(
-  book: Book,
   files: LocalFileStore
 ): Promise<{ errors: Array<unknown> }> {
   let errors: Array<unknown> = []
@@ -76,7 +74,7 @@ async function check(
       const fullPath = Path.resolve(files.root, path)
       const t0 = Date.now()
       const runner = new LocalRunner()
-      const { error } = await runner.run(book, files, fullPath, {
+      const { error } = await runner.run(files, fullPath, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
@@ -94,7 +92,7 @@ async function check(
   return { errors }
 }
 
-async function watch(book: Book, files: LocalFileStore): Promise<void> {
+async function watch(files: LocalFileStore): Promise<void> {
   const dir = files.root
 
   watcher(dir, { recursive: true }, async (event, file) => {
@@ -114,7 +112,7 @@ async function watch(book: Book, files: LocalFileStore): Promise<void> {
       Module.cache.delete(path)
       const runner = new LocalRunner()
       const fullPath = Path.resolve(files.root, path)
-      const { error } = await runner.run(book, files, fullPath, {
+      const { error } = await runner.run(files, fullPath, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })

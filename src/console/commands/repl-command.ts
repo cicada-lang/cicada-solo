@@ -33,11 +33,11 @@ export class ReplCommand extends Command<Args> {
   async execute(argv: Args): Promise<void> {
     const dir = Path.resolve(argv["dir"] || process.cwd())
     const path = `repl-file-${app.nanoid()}.cic`
-    const [book, files] = app.localBooks.fake({
+    const files = app.localBooks.fake({
       fallback: new LocalFileStore({ dir }),
       faked: { [path]: "" },
     })
-    const handler = app.createReplEventHandler({ path, book })
+    const handler = app.createReplEventHandler({ path })
     const repl = await ReadlineRepl.create({ dir, handler, files: app.home })
     await repl.run()
   }

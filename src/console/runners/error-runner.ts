@@ -1,7 +1,6 @@
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import fs from "fs"
 import Path from "path"
-import { Book } from "../../book"
 import { CtxOptions } from "../../lang/ctx"
 import { Module } from "../../module"
 import * as ut from "../../ut"
@@ -11,7 +10,6 @@ export class ErrorRunner extends Runner {
   static extensions = [".error.cic", ".error.md"]
 
   async run(
-    book: Book,
     files: LocalFileStore,
     path: string,
     opts: CtxOptions

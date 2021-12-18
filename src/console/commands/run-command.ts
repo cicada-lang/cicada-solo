@@ -5,7 +5,6 @@ import ty from "@xieyuheng/ty"
 import watcher from "node-watch"
 import Path from "path"
 import app from "../../app/node-app"
-import { Book } from "../../book"
 import { Module } from "../../module"
 import { Runner } from "../runner"
 import { CommonRunner } from "../runners/common-runner"
@@ -42,20 +41,20 @@ export class RunCommand extends Command<Args, Opts> {
 
   async execute(argv: Args & Opts): Promise<void> {
     Command.assertFile(argv["article"])
-    const [book, files] = await app.localBooks.findUpOrFake(
+    const files = await app.localBooks.findUpOrFake(
       Path.dirname(argv["article"])
     )
     const runner = new CommonRunner()
     const path = Path.resolve(argv["article"])
     if (argv["watch"]) {
-      await runner.run(book, files, path, {
+      await runner.run(files, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
       app.logger.info(`Initial run complete, now watching for changes.`)
-      await watch(runner, book, files, path)
+      await watch(runner, files, path)
     } else {
-      const { error } = await runner.run(book, files, path, {
+      const { error } = await runner.run(files, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
@@ -68,7 +67,6 @@ export class RunCommand extends Command<Args, Opts> {
 
 async function watch(
   runner: Runner,
-  book: Book,
   files: LocalFileStore,
   path: string
 ): Promise<void> {
@@ -81,7 +79,7 @@ async function watch(
 
     if (event === "update") {
       Module.cache.delete(path)
-      const { error } = await runner.run(book, files, path, {
+      const { error } = await runner.run(files, path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })

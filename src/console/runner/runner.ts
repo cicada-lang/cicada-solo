@@ -1,11 +1,9 @@
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
-import { Book } from "../../book"
 import { CtxObserver, Highlighter } from "../../lang/ctx"
 import * as Errors from "../../lang/errors"
 
 export abstract class Runner {
   abstract run(
-    book: Book,
     files: LocalFileStore,
     path: string,
     opts: {

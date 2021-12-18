@@ -1,13 +1,11 @@
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import Path from "path"
-import { Book } from "../../book"
 import { CtxOptions } from "../../lang/ctx"
 import { Module } from "../../module"
 import { Runner } from "../runner"
 
 export class CommonRunner extends Runner {
   async run(
-    book: Book,
     files: LocalFileStore,
     path: string,
     opts: CtxOptions

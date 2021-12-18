@@ -32,12 +32,12 @@ export class SnapshotCommand extends Command<Args> {
 
   async execute(argv: Args): Promise<void> {
     Command.assertFile(argv["article"])
-    const [book, files] = await app.localBooks.findUpOrFake(
+    const files = await app.localBooks.findUpOrFake(
       Path.dirname(argv["article"])
     )
     const path = Path.resolve(argv["article"])
     const runner = new LocalRunner()
-    const { error } = await runner.run(book, files, path, {
+    const { error } = await runner.run(files, path, {
       observers: app.defaultCtxObservers,
       highlighter: app.defaultHighlighter,
     })

@@ -1,7 +1,5 @@
 > We do not need to use `book.json` for package management anymore.
 
-- remove `Book`
-
 - `Module.import`
 
 - avoid using `FileStore` -- use url instead

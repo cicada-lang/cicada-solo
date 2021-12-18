@@ -1,5 +1,4 @@
 import { customAlphabet } from "nanoid"
-import { Book } from "../book"
 import { Config } from "../config"
 import { SimpleCtxObserver, SimpleHighlighter } from "../lang/ctx"
 import * as ut from "../ut"
@@ -40,14 +39,10 @@ export class GenericApp {
     },
   })
 
-  createReplEventHandler(opts: {
-    book: Book
-    path: string
-  }): AppReplEventHandler {
-    const { book, path } = opts
+  createReplEventHandler(opts: { path: string }): AppReplEventHandler {
+    const { path } = opts
 
     return new AppReplEventHandler({
-      book,
       path,
       config: this.config,
       observers: this.defaultCtxObservers,
