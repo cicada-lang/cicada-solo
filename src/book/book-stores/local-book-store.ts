@@ -1,41 +1,42 @@
 import { FakeLocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/fake-local-file-store"
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
+import { Store } from "@enchanterjs/enchanter/lib/store"
 import fs from "fs"
 import Path from "path"
 import * as ut from "../../ut"
 import { Book } from "../book"
 import { BookConfigSchema } from "../book-config"
-import { Store } from "@enchanterjs/enchanter/lib/store"
 
-export class LocalBookStore extends Store<Book> {
-  async get(config_file: string): Promise<Book<LocalFileStore>> {
+export class LocalBookStore extends Store<
+  [Book<LocalFileStore>, LocalFileStore]
+> {
+  async get(
+    config_file: string
+  ): Promise<[Book<LocalFileStore>, LocalFileStore]> {
     const text = await fs.promises.readFile(config_file, "utf8")
     const config = BookConfigSchema.validate(JSON.parse(text))
-    return new Book({
-      config,
-      files: new LocalFileStore({
-        dir: Path.resolve(Path.dirname(config_file), config.src),
-      }),
-    })
+    const dir = Path.resolve(Path.dirname(config_file), config.src)
+    const files = new LocalFileStore({ dir })
+    const book = new Book({ config, files })
+    return [book, files]
   }
 
   fake(opts: {
     fallback: LocalFileStore
     faked?: Record<string, string>
-  }): Book<LocalFileStore> {
+  }): [Book<LocalFileStore>, LocalFileStore] {
     const { fallback, faked } = opts
-    return new Book({
-      config: Book.fakeConfig(),
-      files: new FakeLocalFileStore({ faked, fallback }),
-    })
+    const files = new FakeLocalFileStore({ faked, fallback })
+    const book = new Book({ config: Book.fakeConfig(), files })
+    return [book, files]
   }
 
-  async findUpOrFake(dir: string): Promise<Book<LocalFileStore>> {
+  async findUpOrFake(
+    dir: string
+  ): Promise<[Book<LocalFileStore>, LocalFileStore]> {
     const config_file = ut.findUp("book.json", { from: dir })
     return config_file
       ? await this.get(config_file)
-      : this.fake({
-          fallback: new LocalFileStore({ dir }),
-        })
+      : this.fake({ fallback: new LocalFileStore({ dir }) })
   }
 }

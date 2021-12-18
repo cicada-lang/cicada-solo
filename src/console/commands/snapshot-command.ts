@@ -32,7 +32,7 @@ export class SnapshotCommand extends Command<Args> {
 
   async execute(argv: Args): Promise<void> {
     Command.assertFile(argv["article"])
-    const book = await app.localBooks.findUpOrFake(
+    const [book, files] = await app.localBooks.findUpOrFake(
       Path.dirname(argv["article"])
     )
     const path = Path.resolve(argv["article"])

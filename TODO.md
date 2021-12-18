@@ -1,7 +1,7 @@
 > We do not need to use `book.json` for package management anymore.
 
-- `book-stores/` has `[Book, FileStore]` as value
 - `Book` remove `files`
+
 - avoid using `FileStore` -- use url instead
 
 - `import` url support local cache
