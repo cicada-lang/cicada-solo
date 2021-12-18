@@ -6,7 +6,7 @@ import Path from "path"
 import app from "../../app/node-app"
 import { GitHubZipDownloader } from "../../infra/zip-downloaders/github-zip-downloader"
 
-type Args = { target: string }
+type Args = { target: string; name?: string }
 type Opts = { help?: boolean; version?: boolean }
 
 export class InstallCommand extends Command<Args, Opts> {
@@ -14,7 +14,7 @@ export class InstallCommand extends Command<Args, Opts> {
 
   description = "Install references for a book"
 
-  args = { target: ty.string() }
+  args = { target: ty.string(), name: ty.optional(ty.string()) }
   opts = {}
 
   async execute(argv: Args & Opts, runner: CommandRunner): Promise<void> {
@@ -37,7 +37,7 @@ export class InstallCommand extends Command<Args, Opts> {
       await zip.generateAsync({ type: "nodebuffer" })
     )
 
-    book.config.addReference(link.repo, { tag: link.tag })
+    book.config.addReference(argv.name || link.repo, { tag: link.tag })
     await fs.promises.writeFile(
       configFile,
       JSON.stringify(book.config.json(), null, 2)

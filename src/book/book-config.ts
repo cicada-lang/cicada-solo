@@ -60,8 +60,8 @@ export class BookConfig {
     })
   }
 
-  addReference(path: string, ref: BookReferenceJson): void {
-    this.references[path] = new BookReference(ref)
+  addReference(name: string, ref: BookReferenceJson): void {
+    this.references[name] = new BookReference(ref)
   }
 
   json(): BookConfigJson {

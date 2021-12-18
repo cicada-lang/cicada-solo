@@ -1,8 +1,6 @@
 # book manager
 
-- [book manager] [cli] `cic install <host/repo@version> "name"` -- instead of `<user/repo@tag>`
-
-  - default name is repo
+- [book manager] fix `BookReference`
 
 - dispatch target to `ZipDownloader`
 

@@ -2,6 +2,7 @@ import { GitLink } from "@enchanterjs/enchanter/lib/git-link"
 import axios from "axios"
 import contentDisposition from "content-disposition"
 import JSZip from "jszip"
+import Path from "path"
 
 export type GitHubZipResult = {
   link: GitLink
@@ -29,7 +30,7 @@ export class GitHubZipDownloader {
     )
 
     let zip: null | JSZip = await JSZip.loadAsync(data)
-    zip = zip?.folder(parameters.filename)
+    zip = zip?.folder(Path.basename(parameters.filename, ".zip"))
     if (zip === null) {
       throw new Error(`fail to load zip`)
     }
