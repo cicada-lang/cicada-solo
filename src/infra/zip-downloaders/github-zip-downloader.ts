@@ -1,32 +1,42 @@
+import { GitLink } from "@enchanterjs/enchanter/lib/git-link"
 import axios from "axios"
 import contentDisposition from "content-disposition"
-import { ZipDownloader, ZipResult } from "../zip-downloader"
 
-export class GitHubZipDownloader extends ZipDownloader {
-  private parseTarget(target: string): { path: string; tag: string } {
-    const [path, tag] = target.split("@")
-    return { path, tag }
-  }
+export type GitHubZipResult = {
+  repo: string
+  tag: string
+  filename: string
+  data: Buffer
+}
 
-  private formatZipUrl(opts: { path: string; tag: string }): string {
-    const { path, tag } = opts
-    return `https://github.com/${path}/archive/refs/tags/${tag}.zip`
-  }
+export class GitHubZipDownloader {
+  // NOTE Example targets:
+  // - github.com/xieyuheng/mathematical-structures@0.0.1
+  async download(target: string): Promise<GitHubZipResult> {
+    const link = GitLink.decode(target)
 
-  async download(target: string): Promise<ZipResult> {
-    const { path, tag } = this.parseTarget(target)
-    const zipUrl = this.formatZipUrl({ path, tag })
+    if (link.host !== "github.com") {
+      throw new Error(`I expect host to be github.com`)
+    }
+
+    const zipUrl = this.formatZipUrl(link)
 
     const response = await axios.get(zipUrl, { responseType: "arraybuffer" })
+
     const { parameters } = contentDisposition.parse(
       response.headers["content-disposition"]
     )
 
     return {
-      path,
-      tag,
+      repo: link.repo,
+      tag: link.tag,
       filename: parameters.filename,
       data: response.data,
     }
+  }
+
+  private formatZipUrl(opts: { repo: string; tag: string }): string {
+    const { repo, tag } = opts
+    return `https://github.com/${repo}/archive/refs/tags/${tag}.zip`
   }
 }

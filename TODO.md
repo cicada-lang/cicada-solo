@@ -1,12 +1,15 @@
 # book manager
-host/
-- refactor `Book` and `BookStore`
 
-  - `Book` having a type argument seems like code smell
+- dispatch target to `ZipDownloader`
 
-- references should represent a book store
+- [book manager] zip name should ends with `@version` instead of `-version`
 
-- [book manager] [cli] `cic install <user/repo@tag>` -- should not download existing packages
+- [book manager] [cli] `cic install <host/repo@version> "name"` -- instead of `<user/repo@tag>`
+
+  - default name is repo
+
+- [book manager] [cli] `cic install` -- should not download existing packages
+
 - [book manager] [cli] `cic install` -- download book from `references` specified in `book.json`
 - [book manager] [cli] `cic init` -- learn from `npm init` and so on
 - [book manager] be able to resolve module in book of `references`
@@ -14,6 +17,9 @@ host/
 
 - [book manager] [cli] `cic install` -- `help`
 - [book manager] [cli] `cic init` -- `help`
+
+- [refactor] `Book` having a type argument seems like code smell
+- [refactor] references should represent a book store
 
 # inductive datatype -- questions
 

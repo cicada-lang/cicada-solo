@@ -28,7 +28,12 @@ export class InstallCommand extends Command<Args, Opts> {
     const t0 = Date.now()
 
     const zipDownloader = new GitHubZipDownloader()
-    const { path, tag, filename, data } = await zipDownloader.download(target)
+    const {
+      repo: path,
+      tag,
+      filename: filename,
+      data,
+    } = await zipDownloader.download(target)
 
     const destination = `${app.home.dir}/references/github.com/${path}/${filename}`
     await fs.promises.mkdir(Path.dirname(destination), { recursive: true })
