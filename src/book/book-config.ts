@@ -1,4 +1,6 @@
 import ty from "@xieyuheng/ty"
+import { customAlphabet } from "nanoid"
+const nanoid = customAlphabet("1234567890abcdef", 16)
 
 export interface BookConfig {
   title: string
@@ -17,3 +19,11 @@ export const BookConfigSchema = ty.object<BookConfig>({
   authors: ty.optional(ty.array(ty.string())),
   date: ty.optional(ty.string()),
 })
+
+export function fakeBookConfig(): BookConfig {
+  return {
+    title: `<fake-book-${nanoid()}>`,
+    version: "0.0.0",
+    src: "src",
+  }
+}

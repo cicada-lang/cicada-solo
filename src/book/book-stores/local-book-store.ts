@@ -5,7 +5,7 @@ import fs from "fs"
 import Path from "path"
 import * as ut from "../../ut"
 import { Book } from "../book"
-import { BookConfigSchema } from "../book-config"
+import { BookConfigSchema, fakeBookConfig } from "../book-config"
 
 export class LocalBookStore extends Store<[Book, LocalFileStore]> {
   async get(config_file: string): Promise<[Book, LocalFileStore]> {
@@ -23,7 +23,7 @@ export class LocalBookStore extends Store<[Book, LocalFileStore]> {
   }): [Book, LocalFileStore] {
     const { fallback, faked } = opts
     const files = new FakeLocalFileStore({ faked, fallback })
-    const book = new Book({ config: Book.fakeConfig() })
+    const book = new Book({ config: fakeBookConfig() })
     return [book, files]
   }
 

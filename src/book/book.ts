@@ -1,4 +1,3 @@
-import { customAlphabet } from "nanoid"
 import { Ctx, CtxObserver, Highlighter } from "../lang/ctx"
 import { Env } from "../lang/env"
 import { Module } from "../module"
@@ -6,28 +5,22 @@ import * as CodeBlockParsers from "../module/code-block-parsers"
 import { CodeBlockResource } from "../module/code-block-resource"
 import { BookConfig } from "./book-config"
 
-const nanoid = customAlphabet("1234567890abcdef", 16)
-
 export class Book {
   config: BookConfig
-  cache: Map<string, Module> = new Map()
+  cache: Map<string, Module>
 
-  constructor(opts: { config: BookConfig }) {
+  constructor(opts: { config: BookConfig; cache?: Map<string, Module> }) {
     this.config = opts.config
-  }
-
-  static fakeConfig(): BookConfig {
-    return {
-      title: `<fake-book-${nanoid()}>`,
-      version: "0.0.0",
-      src: "src",
-    }
+    this.cache = opts.cache || new Map()
   }
 
   load(
     url: URL,
     text: string,
-    opts: { observers: Array<CtxObserver>; highlighter: Highlighter }
+    opts: {
+      observers: Array<CtxObserver>
+      highlighter: Highlighter
+    }
   ): Module {
     const cached = this.cache.get(url.href)
     if (cached) {
