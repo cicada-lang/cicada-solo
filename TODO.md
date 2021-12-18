@@ -1,10 +1,8 @@
+- `import` url support local cache
+
+- default `book.json` `src` to root dir -- for good cdn url
+
 # book manager
-
-- dispatch target to `ZipDownloader`
-
-- [book manager] [cli] `cic install` -- should not download existing packages
-- [book manager] [cli] `cic install` -- download book from `references` specified in `book.json`
-- [book manager] [cli] `cic install` -- `help`
 
 - [book manager] [cli] `cic init` -- learn from `npm init` and so on
 - [book manager] [cli] `cic init` -- `help`

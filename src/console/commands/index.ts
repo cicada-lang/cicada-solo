@@ -1,6 +1,5 @@
 export * from "./check-command"
 export * from "./default-command"
-export * from "./install-command"
 export * from "./repl-command"
 export * from "./run-command"
 export * from "./snapshot-command"

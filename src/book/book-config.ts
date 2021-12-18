@@ -1,11 +1,5 @@
 import ty from "@xieyuheng/ty"
 
-export interface BookReference {
-  host: string
-  repo: string
-  version: string
-}
-
 export interface BookConfig {
   title: string
   subtitle?: string
@@ -13,7 +7,6 @@ export interface BookConfig {
   src: string
   authors?: Array<string>
   date?: string
-  references?: Record<string, BookReference>
 }
 
 export const BookConfigSchema = ty.object<BookConfig>({
@@ -23,13 +16,4 @@ export const BookConfigSchema = ty.object<BookConfig>({
   src: ty.string(),
   authors: ty.optional(ty.array(ty.string())),
   date: ty.optional(ty.string()),
-  references: ty.optional(
-    ty.dict(
-      ty.object({
-        host: ty.string(),
-        repo: ty.string(),
-        version: ty.string(),
-      })
-    )
-  ),
 })
