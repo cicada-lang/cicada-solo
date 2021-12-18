@@ -6,6 +6,8 @@ import { Module } from "../module"
 import * as CodeBlockParsers from "../module/code-block-parsers"
 import { CodeBlockResource } from "../module/code-block-resource"
 import { BookConfig } from "./book-config"
+import Path from "path"
+
 const nanoid = customAlphabet("1234567890abcdef", 16)
 
 export class Book<Files extends FileStore = FileStore> {
@@ -27,20 +29,21 @@ export class Book<Files extends FileStore = FileStore> {
   }
 
   load(
-    path: string,
+    url: URL,
     text: string,
     opts: { observers: Array<CtxObserver>; highlighter: Highlighter }
   ): Module {
-    const cached = this.cache.get(path)
+
+    const cached = this.cache.get(url.href)
     if (cached) {
       return cached
     }
 
-    const parser = CodeBlockParsers.createCodeBlockParser(path)
+    const parser = CodeBlockParsers.createCodeBlockParser(url.href)
 
     const mod = new Module({
       book: this,
-      path,
+      path: url.pathname,
       codeBlocks: new CodeBlockResource(parser.parseCodeBlocks(text)),
       env: Env.init(),
       ctx: Ctx.init({
@@ -49,7 +52,7 @@ export class Book<Files extends FileStore = FileStore> {
       }),
     })
 
-    this.cache.set(path, mod)
+    this.cache.set(url.href, mod)
     return mod
   }
 }

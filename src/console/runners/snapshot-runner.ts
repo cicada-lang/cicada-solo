@@ -1,10 +1,10 @@
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import fs from "fs"
+import Path from "path"
 import { Book } from "../../book"
 import { CtxOptions } from "../../lang/ctx"
 import * as ut from "../../ut"
 import { Runner } from "../runner"
-import Path from "path"
 
 export class SnapshotRunner extends Runner {
   static extensions = [".cic", ".md"]
@@ -16,7 +16,8 @@ export class SnapshotRunner extends Runner {
   ): Promise<{ error?: unknown }> {
     try {
       const file = await book.files.getOrFail(path)
-      const mod = book.load(path, file, opts)
+      const url = new URL(`file:${path}`)
+      const mod = book.load(url, file, opts)
       await mod.runAll()
       const output = mod.codeBlocks.allOutputs
         .map((output) => output.formatForConsole())

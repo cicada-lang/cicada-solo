@@ -1,6 +1,10 @@
 > We do not need to use `book.json` for package management anymore.
 
-- `Module` has `fileLoader` -- use `file` url
+- `Module` has `url: URL` instead of `path: string`
+
+  - simplify `Module.resolve`
+
+- `Module` has `fileLoader`
 - `Module` remove `book`
 - `Book` remove `files`
 

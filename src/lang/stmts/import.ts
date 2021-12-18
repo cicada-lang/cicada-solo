@@ -30,7 +30,11 @@ export class Import extends Stmt {
       ? (await axios.get(path)).data
       : await mod.book.files.getOrFail(path)
 
-    const imported_mod = mod.book.load(path, file, {
+    const url = ty.uri().isValid(path)
+      ? new URL(path)
+      : new URL(`file:${mod.resolve(path)}`)
+
+    const imported_mod = mod.book.load(url, file, {
       observers: mod.ctx.observers,
       highlighter: mod.ctx.highlighter,
     })

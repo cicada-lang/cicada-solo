@@ -1,7 +1,7 @@
+import Path from "path"
 import { Book } from "../../book"
 import { CtxOptions } from "../../lang/ctx"
 import { Runner } from "../runner"
-import Path from "path"
 
 export class CommonRunner extends Runner {
   async run(
@@ -11,7 +11,8 @@ export class CommonRunner extends Runner {
   ): Promise<{ error?: unknown }> {
     try {
       const file = await book.files.getOrFail(path)
-      const mod = book.load(path, file, opts)
+      const url = new URL(`file:${path}`)
+      const mod = book.load(url, file, opts)
       await mod.runAll()
       const output = mod.codeBlocks.allOutputs
         .map((output) => output.formatForConsole())
