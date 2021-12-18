@@ -4,13 +4,13 @@ import fs from "fs"
 import Path from "path"
 import * as ut from "../../ut"
 import { Book } from "../book"
-import { BookConfig } from "../book-config"
+import { BookConfigSchema } from "../book-config"
 import { BookStore } from "../book-store"
 
 export class LocalBookStore extends BookStore {
   async get(config_file: string): Promise<Book<LocalFileStore>> {
     const text = await fs.promises.readFile(config_file, "utf8")
-    const config = BookConfig.create(JSON.parse(text))
+    const config = BookConfigSchema.validate(JSON.parse(text))
     return new Book({
       config,
       files: new LocalFileStore({
@@ -25,7 +25,7 @@ export class LocalBookStore extends BookStore {
   }): Book<LocalFileStore> {
     const { fallback, faked } = opts
     return new Book({
-      config: BookConfig.fake(),
+      config: Book.fakeConfig(),
       files: new FakeLocalFileStore({ faked, fallback }),
     })
   }

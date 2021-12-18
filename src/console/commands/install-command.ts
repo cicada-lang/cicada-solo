@@ -37,10 +37,18 @@ export class InstallCommand extends Command<Args, Opts> {
       await zip.generateAsync({ type: "nodebuffer" })
     )
 
-    book.config.addReference(argv.name || link.repo, link)
+    book.config.references = {
+      ...book.config.references,
+      [argv.name || link.repo]: {
+        host: link.host,
+        repo: link.repo,
+        version: link.version,
+      },
+    }
+
     await fs.promises.writeFile(
       configFile,
-      JSON.stringify(book.config.json(), null, 2)
+      JSON.stringify(book.config, null, 2)
     )
 
     const t1 = Date.now()
