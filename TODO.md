@@ -3,17 +3,16 @@
 - dispatch target to `ZipDownloader`
 
 - [book manager] [cli] `cic install` -- should not download existing packages
-
 - [book manager] [cli] `cic install` -- download book from `references` specified in `book.json`
-- [book manager] [cli] `cic init` -- learn from `npm init` and so on
-- [book manager] be able to resolve module in book of `references`
-  - we do not need to use book as module, we only need to be able to resolve module.
-
 - [book manager] [cli] `cic install` -- `help`
+
+- [book manager] [cli] `cic init` -- learn from `npm init` and so on
 - [book manager] [cli] `cic init` -- `help`
 
 - [refactor] `Book` having a type argument seems like code smell
-- [refactor] references should represent a book store
+
+- [book manager] be able to resolve module in book of `references`
+  - we do not need to use book as module, we only need to be able to resolve module.
 
 # inductive datatype -- questions
 

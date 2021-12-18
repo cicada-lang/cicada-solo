@@ -35,10 +35,7 @@ export class GitHubZipDownloader {
       throw new Error(`fail to load zip`)
     }
 
-    return {
-      link,
-      zip,
-    }
+    return { link, zip }
   }
 
   private formatZipUrl(opts: { repo: string; version: string }): string {
