@@ -1,4 +1,3 @@
-import ty from "@xieyuheng/ty"
 import axios from "axios"
 import { Module } from "../../module"
 import * as Errors from "../errors"
@@ -19,20 +18,17 @@ export class Import extends Stmt {
   }
 
   async execute(mod: Module): Promise<StmtOutput | undefined> {
-    const path = mod.resolve(this.path)
-    if (path === mod.path) {
+    const url = mod.resolve(this.path)
+    if (url.href === mod.url.href) {
       throw new Errors.ExpTrace(
-        [`I can not do circular import.`, `  path: ${path}`].join("\n")
+        [`I can not do circular import.`, `  url: ${url}`].join("\n")
       )
     }
 
-    const file = ty.uri().isValid(path)
-      ? (await axios.get(path)).data
-      : await mod.book.files.getOrFail(path)
-
-    const url = ty.uri().isValid(path)
-      ? new URL(path)
-      : new URL(`file:${mod.resolve(path)}`)
+    const file =
+      url.protocol === "https" || url.protocol === "http"
+        ? (await axios.get(url.href)).data
+        : await mod.book.files.getOrFail(url.pathname)
 
     const imported_mod = mod.book.load(url, file, {
       observers: mod.ctx.observers,

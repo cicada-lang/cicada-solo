@@ -1,2 +1,2 @@
 I can not do circular import.
-  path: /home/xyh/cicada-lang/cicada/docs/tests/import/circular-import.error.cic
+  url: file:///home/xyh/cicada-lang/cicada/docs/tests/import/circular-import.error.cic

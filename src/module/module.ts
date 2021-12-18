@@ -10,40 +10,27 @@ import { CodeBlockResource } from "./code-block-resource"
 
 export class Module {
   book: Book
-  path: string
+  url: URL
   codeBlocks: CodeBlockResource
   env: Env
   ctx: Ctx
 
   constructor(opts: {
     book: Book
-    path: string
+    url: URL
     codeBlocks: CodeBlockResource
     env: Env
     ctx: Ctx
   }) {
     this.book = opts.book
-    this.path = opts.path
+    this.url = opts.url
     this.codeBlocks = opts.codeBlocks
     this.env = opts.env
     this.ctx = opts.ctx
   }
 
-  resolve(path: string): string {
-    if (ty.uri().isValid(path)) {
-      return path
-    }
-
-    const base = this.path
-    if (ty.uri().isValid(base)) {
-      return new URL(path, base).href
-    }
-
-    if (Path.isAbsolute(base)) {
-      return Path.resolve(Path.dirname(base), path)
-    } else {
-      return Path.resolve(Path.dirname("/" + base), path).slice(1)
-    }
+  resolve(path: string): URL {
+    return ty.uri().isValid(path) ? new URL(path) : new URL(path, this.url)
   }
 
   extendTypedCore(name: string, inferred: { t: Value; core: Core }): void {
