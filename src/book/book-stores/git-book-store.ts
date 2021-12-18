@@ -3,9 +3,9 @@ import { FakeGitFileStore } from "@enchanterjs/enchanter/lib/git-file-stores/fak
 import { GitLink } from "@enchanterjs/enchanter/lib/git-link"
 import { Book } from "../book"
 import { BookConfigSchema } from "../book-config"
-import { BookStore } from "../book-store"
+import { Store } from "@enchanterjs/enchanter/lib/store"
 
-export class GitBookStore extends BookStore {
+export class GitBookStore extends Store<Book> {
   async get(url: string): Promise<Book<GitFileStore>> {
     return this.getFromGitLink(GitLink.fromURL(url))
   }

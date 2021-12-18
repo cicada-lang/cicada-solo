@@ -5,9 +5,9 @@ import Path from "path"
 import * as ut from "../../ut"
 import { Book } from "../book"
 import { BookConfigSchema } from "../book-config"
-import { BookStore } from "../book-store"
+import { Store } from "@enchanterjs/enchanter/lib/store"
 
-export class LocalBookStore extends BookStore {
+export class LocalBookStore extends Store<Book> {
   async get(config_file: string): Promise<Book<LocalFileStore>> {
     const text = await fs.promises.readFile(config_file, "utf8")
     const config = BookConfigSchema.validate(JSON.parse(text))

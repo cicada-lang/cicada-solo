@@ -1,4 +1,5 @@
 import axios from "axios"
+import fs from "fs"
 import { Module } from "../../module"
 import * as Errors from "../errors"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
@@ -28,7 +29,7 @@ export class Import extends Stmt {
     const file =
       url.protocol === "https:" || url.protocol === "http:"
         ? (await axios.get(url.href)).data
-        : await mod.book.files.getOrFail(url.pathname)
+        : await fs.promises.readFile(url.pathname, "utf8")
 
     const imported_mod = mod.book.load(url, file, {
       observers: mod.ctx.observers,

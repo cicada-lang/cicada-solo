@@ -1,8 +1,8 @@
 > We do not need to use `book.json` for package management anymore.
 
-- `Module` has `fileLoader`
-- `Module` remove `book`
+- `book-stores/` has `[Book, FileStore]` as value
 - `Book` remove `files`
+- avoid using `FileStore` -- use url instead
 
 - `import` url support local cache
 - default `book.json` `src` to root dir -- for good cdn url
