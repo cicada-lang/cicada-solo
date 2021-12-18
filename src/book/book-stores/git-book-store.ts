@@ -3,7 +3,7 @@ import { FakeGitFileStore } from "@enchanterjs/enchanter/lib/git-file-stores/fak
 import { GitLink } from "@enchanterjs/enchanter/lib/git-link"
 import { Store } from "@enchanterjs/enchanter/lib/store"
 import { Book } from "../book"
-import { BookConfigSchema, fakeBookConfig } from "../book-config"
+import { BookConfigSchema } from "../book-config"
 
 export class GitBookStore extends Store<[Book, GitFileStore]> {
   async get(url: string): Promise<[Book, GitFileStore]> {
@@ -15,7 +15,7 @@ export class GitBookStore extends Store<[Book, GitFileStore]> {
     const text = await files.getOrFail("book.json")
     const config = BookConfigSchema.validate(JSON.parse(text))
     files = files.cd(config.src)
-    const book = new Book({ config })
+    const book = new Book()
     return [book, files]
   }
 
@@ -25,7 +25,7 @@ export class GitBookStore extends Store<[Book, GitFileStore]> {
   }): [Book, GitFileStore] {
     const { fallback, faked } = opts
     const files = new FakeGitFileStore({ faked, fallback })
-    const book = new Book({ config: fakeBookConfig() })
+    const book = new Book()
     return [book, files]
   }
 }

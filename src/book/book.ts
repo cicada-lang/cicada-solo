@@ -3,15 +3,12 @@ import { Env } from "../lang/env"
 import { Module } from "../module"
 import * as CodeBlockParsers from "../module/code-block-parsers"
 import { CodeBlockResource } from "../module/code-block-resource"
-import { BookConfig } from "./book-config"
 
 export class Book {
-  config: BookConfig
   cache: Map<string, Module>
 
-  constructor(opts: { config: BookConfig; cache?: Map<string, Module> }) {
-    this.config = opts.config
-    this.cache = opts.cache || new Map()
+  constructor(opts?: { cache?: Map<string, Module> }) {
+    this.cache = opts?.cache || new Map()
   }
 
   load(

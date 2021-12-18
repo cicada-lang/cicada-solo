@@ -46,9 +46,10 @@ export class CheckCommand extends Command<Args, Opts> {
     const path = argv["book"] || process.cwd() + "/book.json"
     Command.assertExists(path)
     const configFile = fs.lstatSync(path).isFile() ? path : path + "/book.json"
+    const config = await fs.promises.readFile(configFile, "utf8")
     const [book, files] = await app.localBooks.get(configFile)
 
-    app.logger.info(book.config)
+    app.logger.info(config)
 
     if (argv["watch"]) {
       await check(book, files)

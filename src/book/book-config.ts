@@ -19,11 +19,3 @@ export const BookConfigSchema = ty.object<BookConfig>({
   authors: ty.optional(ty.array(ty.string())),
   date: ty.optional(ty.string()),
 })
-
-export function fakeBookConfig(): BookConfig {
-  return {
-    title: `<fake-book-${nanoid()}>`,
-    version: "0.0.0",
-    src: "src",
-  }
-}
