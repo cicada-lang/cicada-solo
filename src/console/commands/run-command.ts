@@ -7,7 +7,6 @@ import Path from "path"
 import app from "../../app/node-app"
 import { Module } from "../../module"
 import { Runner } from "../runner"
-import { CommonRunner } from "../runners/common-runner"
 
 type Args = { article: string }
 type Opts = { watch?: boolean }
@@ -44,7 +43,7 @@ export class RunCommand extends Command<Args, Opts> {
     const files = await app.localBooks.findUpOrFake(
       Path.dirname(argv["article"])
     )
-    const runner = new CommonRunner()
+    const runner = new Runner()
     const path = Path.resolve(argv["article"])
     if (argv["watch"]) {
       await runner.run(files, path, {

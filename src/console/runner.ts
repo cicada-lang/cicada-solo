@@ -1,10 +1,12 @@
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import Path from "path"
-import { CtxOptions } from "../../lang/ctx"
-import { Module } from "../../module"
-import { Runner } from "../runner"
+import { CtxOptions } from "../lang/ctx"
+import * as Errors from "../lang/errors"
+import { Module } from "../module"
 
-export class CommonRunner extends Runner {
+export class Runner {
+  reporter = new Errors.ErrorReporter()
+
   async run(
     files: LocalFileStore,
     path: string,
