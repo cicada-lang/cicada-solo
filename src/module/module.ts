@@ -1,4 +1,6 @@
 import ty from "@xieyuheng/ty"
+import axios from "axios"
+import fs from "fs"
 import { Core, evaluate } from "../lang/core"
 import { Ctx, CtxObserver, Highlighter } from "../lang/ctx"
 import { Env } from "../lang/env"
@@ -27,14 +29,29 @@ export class Module {
 
   static cache: Map<string, Module> = new Map()
 
-  static load(
+  static async loadText(url: URL): Promise<string> {
+    switch (url.protocol) {
+      case "http:":
+      case "https:":
+        return (await axios.get(url.href)).data
+      case "file:":
+        return await fs.promises.readFile(url.pathname, "utf8")
+      case "repl:":
+        return ""
+      default:
+        throw new Error(`I meet unknown protocol: ${url.protocol}`)
+    }
+  }
+
+  static async load(
     url: URL,
-    text: string,
     opts: {
       observers: Array<CtxObserver>
       highlighter: Highlighter
     }
-  ): Module {
+  ): Promise<Module> {
+    const text = await this.loadText(url)
+
     const cached = this.cache.get(url.href)
     if (cached) {
       return cached

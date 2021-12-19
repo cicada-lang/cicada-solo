@@ -37,9 +37,9 @@ export class AppReplEventHandler extends ReplEventHandler {
 
   private async execute(text: string): Promise<boolean> {
     text = text.trim()
-    const url = new URL(`file:${this.path}`)
+    const url = new URL(`repl:${this.path}`)
 
-    const mod = Module.load(url, "", {
+    const mod = await Module.load(url, {
       observers: this.observers,
       highlighter: this.highlighter,
     })

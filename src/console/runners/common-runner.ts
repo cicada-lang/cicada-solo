@@ -11,9 +11,8 @@ export class CommonRunner extends Runner {
     opts: CtxOptions
   ): Promise<{ error?: unknown }> {
     try {
-      const file = await files.getOrFail(path)
       const url = new URL(`file:${path}`)
-      const mod = Module.load(url, file, opts)
+      const mod = await Module.load(url, opts)
       await mod.runAll()
       const output = mod.codeBlocks.allOutputs
         .map((output) => output.formatForConsole())

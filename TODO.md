@@ -1,8 +1,6 @@
 > We do not need to use `book.json` for package management anymore.
 
-- `Module.import`
-
-- avoid using `FileStore` -- use url instead
+- avoid using `FileStore` -- use `URL` instead
 
 - `import` url support local cache
 - default `book.json` `src` to root dir -- for good cdn url

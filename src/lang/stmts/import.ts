@@ -1,5 +1,3 @@
-import axios from "axios"
-import fs from "fs"
 import { Module } from "../../module"
 import * as Errors from "../errors"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
@@ -22,16 +20,15 @@ export class Import extends Stmt {
     const url = mod.resolve(this.path)
     if (url.href === mod.url.href) {
       throw new Errors.ExpTrace(
-        [`I can not do circular import.`, `  url: ${url}`].join("\n")
+        [
+          `I can not do circular import.`,
+          `  path: ${this.path}`,
+          `  resolved url: ${url}`,
+        ].join("\n")
       )
     }
 
-    const file =
-      url.protocol === "https:" || url.protocol === "http:"
-        ? (await axios.get(url.href)).data
-        : await fs.promises.readFile(url.pathname, "utf8")
-
-    const imported_mod = Module.load(url, file, {
+    const imported_mod = await Module.load(url, {
       observers: mod.ctx.observers,
       highlighter: mod.ctx.highlighter,
     })
