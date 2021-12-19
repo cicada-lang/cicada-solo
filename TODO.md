@@ -1,11 +1,6 @@
 > We do not need to use `book.json` for package management anymore.
 
-- [refactor] extract `empty-env` and `extend-env`
-- [refactor] extract `empty-ctx` and `extend-ctx`
-
 - `import` url support local cache
-- default `book.json` `src` to root dir -- for good cdn url
-
 - [cli] `cic init` -- learn from `npm init` and so on
 
 # inductive datatype -- questions

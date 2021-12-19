@@ -49,7 +49,7 @@ export class CheckCommand extends Command<Args, Opts> {
     const configFile = fs.lstatSync(path).isFile() ? path : path + "/book.json"
     const configText = await fs.promises.readFile(configFile, "utf8")
     const config = BookConfigSchema.validate(JSON.parse(configText))
-    const root = Path.resolve(Path.dirname(configFile), config.src)
+    const root = Path.resolve(Path.dirname(configFile), config.src || "")
 
     app.logger.info(config)
 
