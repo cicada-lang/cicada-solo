@@ -9,7 +9,6 @@ export function createCommandRunner(): CommandRunner {
     commands: [
       new Commands.ReplCommand(),
       new Commands.RunCommand(),
-      new Commands.SnapshotCommand(),
       new Commands.CheckCommand(),
       new CommonHelpCommand(),
     ],

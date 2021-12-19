@@ -1,6 +1,6 @@
 > We do not need to use `book.json` for package management anymore.
 
-- remove `snapshot` command
+- remove `SnapshotRunner` and `ErrorRunner`
 - `Runner.run` take `url: URL` instead of `path: string`
 
 - avoid using `FileStore` -- use `URL` instead
