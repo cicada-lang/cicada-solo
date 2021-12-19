@@ -12,3 +12,4 @@ docs/tests/equal/not-the-same-pair.error.cic:
  5 |    cons("baguette", "ratatouille")),
  6 |  refl)
  7 |
+

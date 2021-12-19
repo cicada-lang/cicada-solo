@@ -12,3 +12,4 @@ docs/tests/equal/not-the-same-function.error.cic:
  5 |    (y, x) => cons(x, y)),
  6 |  refl)
  7 |
+

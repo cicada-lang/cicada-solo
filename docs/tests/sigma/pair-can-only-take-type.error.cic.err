@@ -6,3 +6,4 @@ But the expected type is:
 docs/tests/sigma/pair-can-only-take-type.error.cic:
  1 |[_: "oil" | String]
  2 |
+

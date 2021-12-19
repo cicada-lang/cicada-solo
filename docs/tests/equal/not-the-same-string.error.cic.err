@@ -9,3 +9,4 @@ to right hand side (to) of Equal:
 docs/tests/equal/not-the-same-string.error.cic:
  1 |the(Equal(String, "ratatouille", "baguette"), refl)
  2 |
+

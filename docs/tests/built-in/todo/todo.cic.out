@@ -1,3 +1,18 @@
+TODO_NOTE("A trivial String")
+  String
+
+TODO_NOTE("It's not Trivial")
+  Trivial
+
+TODO_NOTE("Absurd!")
+  Absurd
+
+TODO
+  Absurd
+
+TODO_NOTE("tertium non datur")
+  Either(A, (_: A) -> Absurd)
+
 TODO_NOTE(vague String, "A trivial String"): String
 sole: Trivial
 TODO_NOTE(vague Absurd, "Absurd!"): Absurd

@@ -15,3 +15,4 @@ docs/tests/cls/duplicated-object-field-names.error.cic:
  11 |  c: "3",
  12 |})
  13 |
+
