@@ -1,11 +1,12 @@
 import { Command } from "@enchanterjs/enchanter/lib/command"
 import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
-import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import ty from "@xieyuheng/ty"
 import fs from "fs"
 import watcher from "node-watch"
 import Path from "path"
+import readdirp from "readdirp"
 import app from "../../app/node-app"
+import { BookConfigSchema } from "../../book/book-config"
 import { Module } from "../../module"
 import * as CodeBlockParsers from "../../module/code-block-parsers"
 import { Runner } from "../runner"
@@ -46,17 +47,18 @@ export class CheckCommand extends Command<Args, Opts> {
     const path = argv["book"] || process.cwd() + "/book.json"
     Command.assertExists(path)
     const configFile = fs.lstatSync(path).isFile() ? path : path + "/book.json"
-    const config = await fs.promises.readFile(configFile, "utf8")
-    const files = await app.localBooks.get(configFile)
+    const configText = await fs.promises.readFile(configFile, "utf8")
+    const config = BookConfigSchema.validate(JSON.parse(configText))
+    const root = Path.resolve(Path.dirname(configFile), config.src)
 
     app.logger.info(config)
 
     if (argv["watch"]) {
-      await check(files)
+      await check(root)
       app.logger.info(`Initial check complete, now watching for file changes.`)
-      await watch(files)
+      await watch(root)
     } else {
-      const { errors } = await check(files)
+      const { errors } = await check(root)
       if (errors.length > 0) {
         process.exit()
       }
@@ -64,14 +66,12 @@ export class CheckCommand extends Command<Args, Opts> {
   }
 }
 
-async function check(
-  files: LocalFileStore
-): Promise<{ errors: Array<unknown> }> {
+async function check(root: string): Promise<{ errors: Array<unknown> }> {
   let errors: Array<unknown> = []
 
-  for (const path of await files.keys()) {
+  for (const { path } of await readdirp.promise(root)) {
     if (CodeBlockParsers.canHandle(path)) {
-      const fullPath = Path.resolve(files.root, path)
+      const fullPath = Path.resolve(root, path)
       const t0 = Date.now()
       const runner = new Runner()
       const { error } = await runner.run(fullPath, {
@@ -93,9 +93,7 @@ async function check(
   return { errors }
 }
 
-async function watch(files: LocalFileStore): Promise<void> {
-  const dir = files.root
-
+async function watch(dir: string): Promise<void> {
   watcher(dir, { recursive: true }, async (event, file) => {
     if (!file) return
     if (!CodeBlockParsers.canHandle(file)) return
@@ -112,7 +110,7 @@ async function watch(files: LocalFileStore): Promise<void> {
       const t0 = Date.now()
       Module.cache.delete(path)
       const runner = new Runner()
-      const fullPath = Path.resolve(files.root, path)
+      const fullPath = Path.resolve(dir, path)
       const { error } = await runner.run(fullPath, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,

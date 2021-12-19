@@ -1,6 +1,5 @@
-import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
-import Path from "path"
 import fs from "fs"
+import Path from "path"
 import { CtxOptions } from "../lang/ctx"
 import * as Errors from "../lang/errors"
 import { Module } from "../module"

@@ -1,6 +1,5 @@
 > We do not need to use `book.json` for package management anymore.
 
-- avoid using `FileStore` -- we will use `URL` instead
 - `Runner.run` take `url: URL` instead of `path: string`
 
 - `import` url support local cache
