@@ -1,9 +1,9 @@
 > We do not need to use `book.json` for package management anymore.
 
-- `Runner.run` take `url: URL` instead of `path: string`
-- dispatch `code-block-parser` based on `url: URL` instead of `path: string`
-
-- use global variables to config `observers` and `highlighter`
+- [refactor] `Runner.run` take `url: URL` instead of `path: string`
+- docs about `cic run` be able to handle url
+- [refactor] dispatch `code-block-parser` based on `url: URL` instead of `path: string`
+- [refactor] use global variables to config `observers` and `highlighter`
 
 - `import` url support local cache
 - default `book.json` `src` to root dir -- for good cdn url
