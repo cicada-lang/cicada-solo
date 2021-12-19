@@ -3,8 +3,7 @@ import { Env } from "../env"
 import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
 import { readback, Value } from "../value"
-import { CtxEvent } from "./ctx-event"
-import { CtxObserver, SimpleCtxObserver } from "./ctx-observer"
+import { CtxEvent, CtxObserver } from "./ctx-observer"
 import { Highlighter, SimpleHighlighter } from "./highlighter"
 
 export abstract class Ctx {
@@ -13,14 +12,14 @@ export abstract class Ctx {
   abstract to_env(): Env
 
   static observers: Array<CtxObserver> = [
-    SimpleCtxObserver.create({
+    {
       receive: (event) => {
         if (event.tag === "todo") {
           console.log(event.msg)
           console.log()
         }
       },
-    }),
+    },
   ]
 
   static highlighter: Highlighter = new SimpleHighlighter({
