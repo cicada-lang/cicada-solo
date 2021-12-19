@@ -8,7 +8,7 @@ import Path from "path"
 import app from "../../app/node-app"
 import { Module } from "../../module"
 import * as CodeBlockParsers from "../../module/code-block-parsers"
-import { LocalRunner } from "../runners/local-runner"
+import { CommonRunner } from "../runners/common-runner"
 
 type Args = { book?: string }
 type Opts = { watch?: boolean }
@@ -73,7 +73,7 @@ async function check(
     if (CodeBlockParsers.canHandle(path)) {
       const fullPath = Path.resolve(files.root, path)
       const t0 = Date.now()
-      const runner = new LocalRunner()
+      const runner = new CommonRunner()
       const { error } = await runner.run(files, fullPath, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
@@ -110,7 +110,7 @@ async function watch(files: LocalFileStore): Promise<void> {
     if (event === "update") {
       const t0 = Date.now()
       Module.cache.delete(path)
-      const runner = new LocalRunner()
+      const runner = new CommonRunner()
       const fullPath = Path.resolve(files.root, path)
       const { error } = await runner.run(files, fullPath, {
         observers: app.defaultCtxObservers,

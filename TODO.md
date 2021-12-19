@@ -1,6 +1,6 @@
 > We do not need to use `book.json` for package management anymore.
 
-- remove `SnapshotRunner` and `ErrorRunner`
+- merge `CommonRunner` with `Runner`
 - `Runner.run` take `url: URL` instead of `path: string`
 
 - avoid using `FileStore` -- use `URL` instead
