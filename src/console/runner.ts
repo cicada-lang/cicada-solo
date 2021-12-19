@@ -10,7 +10,9 @@ export class Runner {
   async run(
     files: LocalFileStore,
     path: string,
-    opts: CtxOptions
+    opts: CtxOptions & {
+      silent?: boolean
+    }
   ): Promise<{ error?: unknown }> {
     try {
       const url = new URL(`file:${path}`)
@@ -20,7 +22,7 @@ export class Runner {
         .map((output) => output.formatForConsole())
         .join("\n")
 
-      if (output) {
+      if (output && !opts.silent) {
         console.log(output)
       }
 
@@ -31,7 +33,11 @@ export class Runner {
         path: Path.relative(process.cwd(), path),
         text,
       })
-      console.error(report)
+
+      if (!opts.silent) {
+        console.error(report)
+      }
+
       return { error }
     }
   }

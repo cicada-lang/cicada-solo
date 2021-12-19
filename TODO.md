@@ -1,6 +1,5 @@
 > We do not need to use `book.json` for package management anymore.
 
-- do not print output during `check`
 - `Runner.run` take `url: URL` instead of `path: string`
 
 - avoid using `FileStore` -- use `URL` instead

@@ -77,6 +77,7 @@ async function check(
       const { error } = await runner.run(files, fullPath, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
+        silent: true,
       })
       if (error) errors.push(error)
       const t1 = Date.now()
