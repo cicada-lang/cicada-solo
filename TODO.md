@@ -1,7 +1,6 @@
 > We do not need to use `book.json` for package management anymore.
 
- `reporter.report` take `url: URL` instead of `path: string`
-- docs about `cic run` be able to handle url
+- update `cic help run` about handling url
 - [refactor] dispatch `code-block-parser` based on `url: URL` instead of `path: string`
 - [refactor] use global variables to config `observers` and `highlighter`
 

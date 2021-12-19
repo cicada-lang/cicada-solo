@@ -1,6 +1,7 @@
 import { Command } from "@enchanterjs/enchanter/lib/command"
 import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
 import ty from "@xieyuheng/ty"
+import fs from "fs"
 import watcher from "node-watch"
 import Path from "path"
 import app from "../../app/node-app"
@@ -38,17 +39,20 @@ export class RunCommand extends Command<Args, Opts> {
   }
 
   async execute(argv: Args & Opts): Promise<void> {
-    Command.assertFile(argv["article"])
     const runner = new Runner()
-    const path = Path.resolve(argv["article"])
-    const url = new URL(`file:${path}`)
+    const url = createURL(argv["article"])
     if (argv["watch"]) {
       await runner.run(url, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
-      app.logger.info(`Initial run complete, now watching for changes.`)
-      await watch(runner, path)
+
+      if (url.protocol === "file:") {
+        app.logger.info(`Initial run complete, now watching for changes.`)
+        await watch(runner, url.pathname)
+      } else {
+        app.logger.info(`Can not watch non-local file.`)
+      }
     } else {
       const { error } = await runner.run(url, {
         observers: app.defaultCtxObservers,
@@ -59,6 +63,19 @@ export class RunCommand extends Command<Args, Opts> {
       }
     }
   }
+}
+
+function createURL(path: string): URL {
+  if (ty.uri().isValid(path)) {
+    return new URL(path)
+  }
+
+  if (fs.existsSync(path) && fs.lstatSync(path).isFile()) {
+    const fullPath = Path.resolve(path)
+    return new URL(`file:${fullPath}`)
+  }
+
+  throw new Error(`I can not create URL from path: ${path}`)
 }
 
 async function watch(runner: Runner, path: string): Promise<void> {
