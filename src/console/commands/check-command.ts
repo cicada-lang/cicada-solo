@@ -6,9 +6,9 @@ import watcher from "node-watch"
 import Path from "path"
 import readdirp from "readdirp"
 import app from "../../app/node-app"
-import { BookConfigSchema } from "../../book/book-config"
 import { Module } from "../../module"
 import * as CodeBlockParsers from "../../module/code-block-parsers"
+import { BookConfigSchema } from "../../types"
 import { Runner } from "../runner"
 
 type Args = { book?: string }
