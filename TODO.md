@@ -1,6 +1,5 @@
 > We do not need to use `book.json` for package management anymore.
 
-- [refactor] dispatch `code-block-parser` based on `url: URL` instead of `path: string`
 - [refactor] use global variables to config `observers` and `highlighter`
 
 - `import` url support local cache

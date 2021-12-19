@@ -42,7 +42,7 @@ export class Module {
       return cached
     }
 
-    const parser = CodeBlockParsers.createCodeBlockParser(url.href)
+    const parser = CodeBlockParsers.createCodeBlockParser(url)
 
     const mod = new Module({
       url: url,
