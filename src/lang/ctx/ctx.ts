@@ -4,7 +4,7 @@ import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
 import { readback, Value } from "../value"
 import { CtxEvent, CtxObserver } from "./ctx-observer"
-import { Highlighter, SimpleHighlighter } from "./highlighter"
+import { Highlighter } from "./highlighter"
 
 export abstract class Ctx {
   abstract names: Array<string>
@@ -22,7 +22,7 @@ export abstract class Ctx {
     },
   ]
 
-  static highlighter: Highlighter = new SimpleHighlighter({
+  static highlighter: Highlighter = {
     highlight: (tag, text) => {
       switch (tag) {
         case "code":
@@ -35,7 +35,7 @@ export abstract class Ctx {
           return text
       }
     },
-  })
+  }
 
   static init(): EmptyCtx {
     return new EmptyCtx()
