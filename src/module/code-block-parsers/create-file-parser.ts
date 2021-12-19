@@ -6,6 +6,8 @@ export function createCodeBlockParser(path: string): CodeBlockParser {
     return new CodeBlockParsers.CicCodeBlockParser()
   } else if (path.endsWith(".md")) {
     return new CodeBlockParsers.MarkdownCodeBlockParser()
+  } else if (path.startsWith("repl:")) {
+    return new CodeBlockParsers.CicCodeBlockParser()
   } else {
     throw new Error(
       [

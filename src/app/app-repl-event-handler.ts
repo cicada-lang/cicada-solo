@@ -8,19 +8,16 @@ import * as ut from "../ut"
 
 export class AppReplEventHandler extends ReplEventHandler {
   config: Config
-  path: string
   observers: Array<CtxObserver>
   highlighter: Highlighter
 
   constructor(opts: {
     config: Config
-    path: string
     observers: Array<CtxObserver>
     highlighter: Highlighter
   }) {
     super()
     this.config = opts.config
-    this.path = opts.path
     this.observers = opts.observers
     this.highlighter = opts.highlighter
   }
@@ -37,7 +34,7 @@ export class AppReplEventHandler extends ReplEventHandler {
 
   private async execute(text: string): Promise<boolean> {
     text = text.trim()
-    const url = new URL(`repl:${this.path}`)
+    const url = new URL("repl:")
 
     const mod = await Module.load(url, {
       observers: this.observers,
