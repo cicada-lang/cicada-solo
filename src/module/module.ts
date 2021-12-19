@@ -1,6 +1,6 @@
 import ty from "@xieyuheng/ty"
 import { Core, evaluate } from "../lang/core"
-import { Ctx, CtxObserver, Highlighter } from "../lang/ctx"
+import { Ctx } from "../lang/ctx"
 import { Env } from "../lang/env"
 import { StmtOutput } from "../lang/stmt"
 import { Value } from "../lang/value"
@@ -28,13 +28,7 @@ export class Module {
 
   static cache: Map<string, Module> = new Map()
 
-  static async load(
-    url: URL,
-    opts: {
-      observers: Array<CtxObserver>
-      highlighter: Highlighter
-    }
-  ): Promise<Module> {
+  static async load(url: URL): Promise<Module> {
     const text = await ut.readURL(url)
 
     const cached = this.cache.get(url.href)
@@ -48,10 +42,7 @@ export class Module {
       url: url,
       codeBlocks: new CodeBlockResource(parser.parseCodeBlocks(text)),
       env: Env.init(),
-      ctx: Ctx.init({
-        observers: opts.observers,
-        highlighter: opts.highlighter,
-      }),
+      ctx: Ctx.init(),
     })
 
     this.cache.set(url.href, mod)

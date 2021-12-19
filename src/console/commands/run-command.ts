@@ -46,10 +46,7 @@ export class RunCommand extends Command<Args, Opts> {
     const runner = new Runner()
     const url = createURL(argv["article"])
     if (argv["watch"]) {
-      await runner.run(url, {
-        observers: app.defaultCtxObservers,
-        highlighter: app.defaultHighlighter,
-      })
+      await runner.run(url)
 
       if (url.protocol === "file:") {
         app.logger.info(`Initial run complete, now watching for changes.`)
@@ -58,10 +55,7 @@ export class RunCommand extends Command<Args, Opts> {
         app.logger.info(`Can not watch non-local file.`)
       }
     } else {
-      const { error } = await runner.run(url, {
-        observers: app.defaultCtxObservers,
-        highlighter: app.defaultHighlighter,
-      })
+      const { error } = await runner.run(url)
       if (error) {
         process.exit(1)
       }
@@ -93,10 +87,7 @@ async function watch(runner: Runner, path: string): Promise<void> {
     if (event === "update") {
       Module.cache.delete(path)
       const url = new URL(`file:${path}`)
-      const { error } = await runner.run(url, {
-        observers: app.defaultCtxObservers,
-        highlighter: app.defaultHighlighter,
-      })
+      const { error } = await runner.run(url)
 
       if (error) {
         app.logger.error({ tag: event, msg: path })

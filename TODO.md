@@ -1,6 +1,7 @@
 > We do not need to use `book.json` for package management anymore.
 
-- [refactor] use global variables to config `observers` and `highlighter`
+- [refactor] simplify `CtxObserver`
+- [refactor] simplify `Highlighter`
 
 - `import` url support local cache
 - default `book.json` `src` to root dir -- for good cdn url

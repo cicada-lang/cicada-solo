@@ -4,37 +4,50 @@ import { ExpTrace } from "../errors"
 import * as Exps from "../exps"
 import { readback, Value } from "../value"
 import { CtxEvent } from "./ctx-event"
-import { CtxObserver } from "./ctx-observer"
-import { Highlighter } from "./highlighter"
-
-export type CtxOptions = {
-  observers: Array<CtxObserver>
-  highlighter: Highlighter
-}
+import { CtxObserver, SimpleCtxObserver } from "./ctx-observer"
+import { Highlighter, SimpleHighlighter } from "./highlighter"
 
 export abstract class Ctx {
   abstract names: Array<string>
   abstract find_entry(name: string): undefined | { t: Value; value?: Value }
   abstract to_env(): Env
 
-  observers: Array<CtxObserver>
-  highlighter: Highlighter
+  static observers: Array<CtxObserver> = [
+    SimpleCtxObserver.create({
+      receive: (event) => {
+        if (event.tag === "todo") {
+          console.log(event.msg)
+          console.log()
+        }
+      },
+    }),
+  ]
 
-  constructor(opts: CtxOptions) {
-    this.observers = opts.observers
-    this.highlighter = opts.highlighter
-  }
+  static highlighter: Highlighter = new SimpleHighlighter({
+    highlight: (tag, text) => {
+      switch (tag) {
+        case "code":
+          return ut.colors.blue(text)
+        case "warn":
+          return ut.colors.red(text)
+        case "note":
+          return ut.colors.yellow(text)
+        default:
+          return text
+      }
+    },
+  })
 
-  static init(opts: CtxOptions): EmptyCtx {
-    return new EmptyCtx(opts)
+  static init(): EmptyCtx {
+    return new EmptyCtx()
   }
 
   highlight(tag: string, text: string): string {
-    return this.highlighter.highlight(tag, text)
+    return Ctx.highlighter.highlight(tag, text)
   }
 
   broadcast(event: CtxEvent): void {
-    for (const observer of this.observers) {
+    for (const observer of Ctx.observers) {
       observer.receive(event)
     }
   }
@@ -44,14 +57,7 @@ export abstract class Ctx {
   }
 
   define(name: string, t: Value, value?: Value): Ctx {
-    return new ExtendCtx({
-      name,
-      t,
-      value,
-      rest: this,
-      observers: this.observers,
-      highlighter: this.highlighter,
-    })
+    return new ExtendCtx({ name, t, value, rest: this })
   }
 
   extend(name: string, t: Value, value?: Value): Ctx {
@@ -104,15 +110,8 @@ class ExtendCtx extends Ctx {
   value?: Value
   rest: Ctx
 
-  constructor(opts: {
-    name: string
-    t: Value
-    value?: Value
-    rest: Ctx
-    observers: Array<CtxObserver>
-    highlighter: Highlighter
-  }) {
-    super(opts)
+  constructor(opts: { name: string; t: Value; value?: Value; rest: Ctx }) {
+    super()
     this.name = opts.name
     this.t = opts.t
     this.value = opts.value
@@ -141,10 +140,6 @@ class ExtendCtx extends Ctx {
 }
 
 class EmptyCtx extends Ctx {
-  constructor(opts: CtxOptions) {
-    super(opts)
-  }
-
   names = []
 
   find_entry(name: string): undefined | { t: Value; value?: Value } {

@@ -1,5 +1,4 @@
 import Path from "path"
-import { CtxOptions } from "../lang/ctx"
 import * as Errors from "../lang/errors"
 import { Module } from "../module"
 import * as ut from "../ut"
@@ -9,16 +8,16 @@ export class Runner {
 
   async run(
     url: URL,
-    opts: CtxOptions & { silent?: boolean }
+    opts?: { silent?: boolean }
   ): Promise<{ error?: unknown }> {
     try {
-      const mod = await Module.load(url, opts)
+      const mod = await Module.load(url)
       await mod.runAll()
       const output = mod.codeBlocks.allOutputs
         .map((output) => output.formatForConsole())
         .join("\n")
 
-      if (output && !opts.silent) {
+      if (output && !opts?.silent) {
         console.log(output)
       }
 
@@ -28,7 +27,7 @@ export class Runner {
       const text = await ut.readURL(url)
       const report = this.reporter.report(error, { path, text })
 
-      if (!opts.silent) {
+      if (!opts?.silent) {
         console.error(report)
       }
 

@@ -75,11 +75,7 @@ async function check(root: string): Promise<{ errors: Array<unknown> }> {
       const url = new URL(`file:${fullPath}`)
       const t0 = Date.now()
       const runner = new Runner()
-      const { error } = await runner.run(url, {
-        observers: app.defaultCtxObservers,
-        highlighter: app.defaultHighlighter,
-        silent: true,
-      })
+      const { error } = await runner.run(url, { silent: true })
       if (error) errors.push(error)
       const t1 = Date.now()
       const elapse = t1 - t0
@@ -113,10 +109,7 @@ async function watch(dir: string): Promise<void> {
       const runner = new Runner()
       const fullPath = Path.resolve(dir, path)
       const url = new URL(`file:${fullPath}`)
-      const { error } = await runner.run(url, {
-        observers: app.defaultCtxObservers,
-        highlighter: app.defaultHighlighter,
-      })
+      const { error } = await runner.run(url)
       const t1 = Date.now()
       const elapse = t1 - t0
       if (error) {

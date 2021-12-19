@@ -1,6 +1,5 @@
 import { ReplEvent, ReplEventHandler } from "@enchanterjs/enchanter/lib/repl"
 import { Config } from "../config"
-import { CtxObserver, Highlighter } from "../lang/ctx"
 import * as Errors from "../lang/errors"
 import * as StmtOutputs from "../lang/stmt/stmt-outputs"
 import { Module } from "../module"
@@ -8,18 +7,10 @@ import * as ut from "../ut"
 
 export class AppReplEventHandler extends ReplEventHandler {
   config: Config
-  observers: Array<CtxObserver>
-  highlighter: Highlighter
 
-  constructor(opts: {
-    config: Config
-    observers: Array<CtxObserver>
-    highlighter: Highlighter
-  }) {
+  constructor(opts: { config: Config }) {
     super()
     this.config = opts.config
-    this.observers = opts.observers
-    this.highlighter = opts.highlighter
   }
 
   greeting(): void {
@@ -36,10 +27,7 @@ export class AppReplEventHandler extends ReplEventHandler {
     text = text.trim()
     const url = new URL("repl:")
 
-    const mod = await Module.load(url, {
-      observers: this.observers,
-      highlighter: this.highlighter,
-    })
+    const mod = await Module.load(url)
 
     try {
       mod.codeBlocks.appendCode(text)

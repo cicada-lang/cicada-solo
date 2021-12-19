@@ -28,10 +28,7 @@ export class Import extends Stmt {
       )
     }
 
-    const imported_mod = await Module.load(url, {
-      observers: mod.ctx.observers,
-      highlighter: mod.ctx.highlighter,
-    })
+    const imported_mod = await Module.load(url)
 
     try {
       await imported_mod.runAll()
