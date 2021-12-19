@@ -1,11 +1,3 @@
-> We do not need to use `book.json` for package management anymore.
-
-- `import` url support local cache
-
-- [cli] `cic init` -- learn from `npm init` and so on
-
-  - generate `book.json`
-
 # inductive datatype -- questions
 
 > If the ambition of this project is too much pressure,
@@ -129,8 +121,6 @@
   drop_last(String, 3, vec! ["1", "2", "3", "LAST"])
   drop_last(String, 3, vec! ["1", "2", "LAST"])
   ```
-
-- `Book` -- the use of cached modules in `Book.load` is not safe in concurrent environment
 
 # maybe
 
