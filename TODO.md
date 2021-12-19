@@ -1,7 +1,10 @@
 > We do not need to use `book.json` for package management anymore.
 
 - `import` url support local cache
+
 - [cli] `cic init` -- learn from `npm init` and so on
+
+  - generate `book.json`
 
 # inductive datatype -- questions
 

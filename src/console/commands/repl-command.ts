@@ -5,14 +5,14 @@ import ty from "@xieyuheng/ty"
 import Path from "path"
 import app from "../../app/node-app"
 
-type Args = { dir?: string }
+type Args = {}
 
 export class ReplCommand extends Command<Args> {
   name = "repl"
 
   description = "Open an interactive REPL"
 
-  args = { dir: ty.optional(ty.string()) }
+  args = {}
 
   // prettier-ignore
   help(runner: CommandRunner): string {
@@ -30,9 +30,12 @@ export class ReplCommand extends Command<Args> {
   }
 
   async execute(argv: Args): Promise<void> {
-    const dir = Path.resolve(argv["dir"] || process.cwd())
-    const handler = app.createReplEventHandler()
-    const repl = await ReadlineRepl.create({ dir, handler, files: app.home })
+    const repl = await ReadlineRepl.create({
+      dir: Path.resolve(process.cwd()),
+      handler: app.createReplEventHandler(),
+      files: app.home,
+    })
+
     await repl.run()
   }
 }
