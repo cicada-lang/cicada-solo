@@ -8,11 +8,10 @@ export class Runner {
   reporter = new Errors.ErrorReporter()
 
   async run(
-    path: string,
+    url: URL,
     opts: CtxOptions & { silent?: boolean }
   ): Promise<{ error?: unknown }> {
     try {
-      const url = new URL(`file:${path}`)
       const mod = await Module.load(url, opts)
       await mod.runAll()
       const output = mod.codeBlocks.allOutputs
@@ -25,6 +24,7 @@ export class Runner {
 
       return { error: undefined }
     } catch (error) {
+      const path = url.pathname
       const text = await fs.promises.readFile(path, "utf8")
       const report = this.reporter.report(error, {
         path: Path.relative(process.cwd(), path),

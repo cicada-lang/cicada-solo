@@ -41,15 +41,16 @@ export class RunCommand extends Command<Args, Opts> {
     Command.assertFile(argv["article"])
     const runner = new Runner()
     const path = Path.resolve(argv["article"])
+    const url = new URL(`file:${path}`)
     if (argv["watch"]) {
-      await runner.run(path, {
+      await runner.run(url, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
       app.logger.info(`Initial run complete, now watching for changes.`)
       await watch(runner, path)
     } else {
-      const { error } = await runner.run(path, {
+      const { error } = await runner.run(url, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
@@ -70,7 +71,8 @@ async function watch(runner: Runner, path: string): Promise<void> {
 
     if (event === "update") {
       Module.cache.delete(path)
-      const { error } = await runner.run(path, {
+      const url = new URL(`file:${path}`)
+      const { error } = await runner.run(url, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })

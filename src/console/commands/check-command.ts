@@ -72,9 +72,10 @@ async function check(root: string): Promise<{ errors: Array<unknown> }> {
   for (const { path } of await readdirp.promise(root)) {
     if (CodeBlockParsers.canHandle(path)) {
       const fullPath = Path.resolve(root, path)
+      const url = new URL(`file:${fullPath}`)
       const t0 = Date.now()
       const runner = new Runner()
-      const { error } = await runner.run(fullPath, {
+      const { error } = await runner.run(url, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
         silent: true,
@@ -111,7 +112,8 @@ async function watch(dir: string): Promise<void> {
       Module.cache.delete(path)
       const runner = new Runner()
       const fullPath = Path.resolve(dir, path)
-      const { error } = await runner.run(fullPath, {
+      const url = new URL(`file:${fullPath}`)
+      const { error } = await runner.run(url, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
