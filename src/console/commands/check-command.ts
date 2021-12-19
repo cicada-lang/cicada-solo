@@ -74,7 +74,7 @@ async function check(
       const fullPath = Path.resolve(files.root, path)
       const t0 = Date.now()
       const runner = new Runner()
-      const { error } = await runner.run(files, fullPath, {
+      const { error } = await runner.run(fullPath, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
         silent: true,
@@ -113,7 +113,7 @@ async function watch(files: LocalFileStore): Promise<void> {
       Module.cache.delete(path)
       const runner = new Runner()
       const fullPath = Path.resolve(files.root, path)
-      const { error } = await runner.run(files, fullPath, {
+      const { error } = await runner.run(fullPath, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })

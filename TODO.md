@@ -1,8 +1,7 @@
 > We do not need to use `book.json` for package management anymore.
 
+- avoid using `FileStore` -- we will use `URL` instead
 - `Runner.run` take `url: URL` instead of `path: string`
-
-- avoid using `FileStore` -- use `URL` instead
 
 - `import` url support local cache
 - default `book.json` `src` to root dir -- for good cdn url

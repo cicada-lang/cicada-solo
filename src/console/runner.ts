@@ -1,5 +1,6 @@
 import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import Path from "path"
+import fs from "fs"
 import { CtxOptions } from "../lang/ctx"
 import * as Errors from "../lang/errors"
 import { Module } from "../module"
@@ -8,11 +9,8 @@ export class Runner {
   reporter = new Errors.ErrorReporter()
 
   async run(
-    files: LocalFileStore,
     path: string,
-    opts: CtxOptions & {
-      silent?: boolean
-    }
+    opts: CtxOptions & { silent?: boolean }
   ): Promise<{ error?: unknown }> {
     try {
       const url = new URL(`file:${path}`)
@@ -28,7 +26,7 @@ export class Runner {
 
       return { error: undefined }
     } catch (error) {
-      const text = await files.getOrFail(path)
+      const text = await fs.promises.readFile(path, "utf8")
       const report = this.reporter.report(error, {
         path: Path.relative(process.cwd(), path),
         text,

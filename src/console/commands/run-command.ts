@@ -1,6 +1,5 @@
 import { Command } from "@enchanterjs/enchanter/lib/command"
 import { CommandRunner } from "@enchanterjs/enchanter/lib/command-runner"
-import { LocalFileStore } from "@enchanterjs/enchanter/lib/file-stores/local-file-store"
 import ty from "@xieyuheng/ty"
 import watcher from "node-watch"
 import Path from "path"
@@ -40,20 +39,17 @@ export class RunCommand extends Command<Args, Opts> {
 
   async execute(argv: Args & Opts): Promise<void> {
     Command.assertFile(argv["article"])
-    const files = await app.localBooks.findUpOrFake(
-      Path.dirname(argv["article"])
-    )
     const runner = new Runner()
     const path = Path.resolve(argv["article"])
     if (argv["watch"]) {
-      await runner.run(files, path, {
+      await runner.run(path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
       app.logger.info(`Initial run complete, now watching for changes.`)
-      await watch(runner, files, path)
+      await watch(runner, path)
     } else {
-      const { error } = await runner.run(files, path, {
+      const { error } = await runner.run(path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
@@ -64,12 +60,8 @@ export class RunCommand extends Command<Args, Opts> {
   }
 }
 
-async function watch(
-  runner: Runner,
-  files: LocalFileStore,
-  path: string
-): Promise<void> {
-  watcher(files.resolve(path), async (event, file) => {
+async function watch(runner: Runner, path: string): Promise<void> {
+  watcher(path, async (event, file) => {
     if (event === "remove") {
       Module.cache.delete(path)
       app.logger.info({ tag: event, msg: path })
@@ -78,7 +70,7 @@ async function watch(
 
     if (event === "update") {
       Module.cache.delete(path)
-      const { error } = await runner.run(files, path, {
+      const { error } = await runner.run(path, {
         observers: app.defaultCtxObservers,
         highlighter: app.defaultHighlighter,
       })
