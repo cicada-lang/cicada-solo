@@ -1,8 +1,8 @@
-import fs from "fs"
 import Path from "path"
 import { CtxOptions } from "../lang/ctx"
 import * as Errors from "../lang/errors"
 import { Module } from "../module"
+import * as ut from "../ut"
 
 export class Runner {
   reporter = new Errors.ErrorReporter()
@@ -24,12 +24,9 @@ export class Runner {
 
       return { error: undefined }
     } catch (error) {
-      const path = url.pathname
-      const text = await fs.promises.readFile(path, "utf8")
-      const report = this.reporter.report(error, {
-        path: Path.relative(process.cwd(), path),
-        text,
-      })
+      const path = Path.relative(process.cwd(), url.pathname)
+      const text = await ut.readURL(url)
+      const report = this.reporter.report(error, { path, text })
 
       if (!opts.silent) {
         console.error(report)
