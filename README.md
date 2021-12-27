@@ -40,6 +40,7 @@ npm run test   // Run test
 
 - GitHub: [github.com/cicada-lang](https://github.com/cicada-lang)
 - Telegram: [CicadaLanguage](https://t.me/CicadaLanguage)
+  - [CicadaLanguageCN](https://t.me/CicadaLanguageCN) (chat in Chinese)
 - IRC: `#cicada-lang` at [libera.chat](https://libera.chat)
 
 ## Contributions
