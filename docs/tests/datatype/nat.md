@@ -273,4 +273,7 @@ function add_commute(
       )
   }
 }
+
+add_commute(two, three)
+add_commute(three, two)
 ```
