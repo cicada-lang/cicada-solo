@@ -122,8 +122,7 @@
   in `07.md`:
 
   ``` cicada
-  drop_last(String, 3, vec! ["1", "2", "3", "LAST"])
-  drop_last(String, 3, vec! ["1", "2", "LAST"])
+  drop_last(String, three, Vector.cons("a", Vector.cons("b", Vector.cons("c", Vector.cons("d", Vector.null)))))
   ```
 
 # maybe
