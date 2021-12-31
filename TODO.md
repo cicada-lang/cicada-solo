@@ -99,6 +99,8 @@
 
 # bug
 
+- [bug] avoid using `constructor.name` for it will be changed during a build for frontend
+
 - [bug] in `02.md`, in `nat_ind`'s definition, if return `T` instead of `motive(n)`,
   the error report show some bugs about the scope.
 
