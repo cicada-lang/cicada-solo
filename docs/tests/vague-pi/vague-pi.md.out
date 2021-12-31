@@ -1,3 +1,4 @@
+(vague A, vague B, x, y) => [x | y]: (vague A: Type, vague B: (_: A) -> Type, x: A, y: B(x)) -> [x1: A | B(x1)]
 List.null(vague String): List(String)
 List.null(vague String): List(String)
 List.cons(vague String, "abc", List.null(vague String)): List(String)

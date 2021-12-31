@@ -1,3 +1,21 @@
+# my_cons
+
+``` cicada
+function my_cons(
+  vague A: Type,
+  vague B: (A) -> Type,
+  x: A,
+  y: B(x),
+): [x: A | B(x)] {
+  return cons(x, y)
+}
+
+my_cons
+
+// TODO unification fail
+// check! my_cons("ratatouille", "baguette"): Pair(String, String)
+```
+
 # List
 
 ``` cicada

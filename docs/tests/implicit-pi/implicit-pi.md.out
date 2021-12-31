@@ -13,3 +13,5 @@ String: Type
 Trivial: Type
 Trivial: Type
 String: Type
+(implicit A, implicit B, pair) => car(pair): (implicit A: Type, implicit B: (x: A) -> Type, pair: [x: A | B(x)]) -> A
+(implicit A, implicit B, pair) => cdr(pair): (implicit A: Type, implicit B: (x: A) -> Type, pair: [x: A | B(x)]) -> B(car(pair))

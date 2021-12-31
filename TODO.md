@@ -63,6 +63,10 @@
 
 # built-in
 
+- `sigma/cons`
+
+  - see `docs/tests/vague-pi.md` -- section "my_cons"
+
 - `sigma/car` and `sigma/cdr`
 
   - see `docs/tests/implicit-pi.md` -- section "my_car & my_cdr"

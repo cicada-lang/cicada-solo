@@ -131,6 +131,8 @@ function my_car(
   return car(pair)
 }
 
+my_car
+
 function my_cdr(
   implicit A: Type,
   implicit B: (x: A) -> Type,
@@ -138,4 +140,6 @@ function my_cdr(
 ): B(car(pair)) {
   return cdr(pair)
 }
+
+my_cdr
 ```
