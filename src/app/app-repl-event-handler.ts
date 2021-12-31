@@ -27,7 +27,9 @@ export class AppReplEventHandler extends ReplEventHandler {
     text = text.trim()
     const url = new URL("repl:")
 
-    const mod = await Module.load(url)
+    const mod = await Module.load(url, {
+      fileFetcher: { fetch: ut.readURL },
+    })
 
     try {
       mod.codeBlocks.appendCode(text)

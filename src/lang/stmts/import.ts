@@ -28,7 +28,7 @@ export class Import extends Stmt {
       )
     }
 
-    const imported_mod = await Module.load(url)
+    const imported_mod = await mod.import(url)
 
     try {
       await imported_mod.runAll()

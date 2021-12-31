@@ -5,22 +5,28 @@ import { Env } from "../lang/env"
 import { StmtOutput } from "../lang/stmt"
 import { Value } from "../lang/value"
 import * as CodeBlockParsers from "../module/code-block-parsers"
-import * as ut from "../ut"
 import { CodeBlockResource } from "./code-block-resource"
+
+export interface FileFetcher {
+  fetch(url: URL): Promise<string>
+}
 
 export class Module {
   url: URL
+  fileFetcher: FileFetcher
   codeBlocks: CodeBlockResource
   env: Env
   ctx: Ctx
 
   constructor(opts: {
     url: URL
+    fileFetcher: FileFetcher
     codeBlocks: CodeBlockResource
     env: Env
     ctx: Ctx
   }) {
     this.url = opts.url
+    this.fileFetcher = opts.fileFetcher
     this.codeBlocks = opts.codeBlocks
     this.env = opts.env
     this.ctx = opts.ctx
@@ -40,10 +46,15 @@ export class Module {
     return this.cache.set(url.href, mod)
   }
 
-  static async load(url: URL): Promise<Module> {
-    const text = await ut.readURL(url)
+  static async load(
+    url: URL,
+    opts: { fileFetcher: FileFetcher }
+  ): Promise<Module> {
+    const { fileFetcher } = opts
 
-    const cached = this.getCachedMod(url)
+    const text = await fileFetcher.fetch(url)
+
+    const cached = Module.getCachedMod(url)
     if (cached) {
       return cached
     }
@@ -52,13 +63,18 @@ export class Module {
 
     const mod = new Module({
       url: url,
+      fileFetcher,
       codeBlocks: new CodeBlockResource(parser.parseCodeBlocks(text)),
       env: Env.init(),
       ctx: Ctx.init(),
     })
 
-    this.setCachedMod(url, mod)
+    Module.setCachedMod(url, mod)
     return mod
+  }
+
+  async import(url: URL): Promise<Module> {
+    return await Module.load(url, { fileFetcher: this.fileFetcher })
   }
 
   resolve(path: string): URL {

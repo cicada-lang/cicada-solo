@@ -13,7 +13,10 @@ export class Runner {
     opts?: { silent?: boolean }
   ): Promise<{ error?: unknown }> {
     try {
-      const mod = await Module.load(url)
+      const mod = await Module.load(url, {
+        fileFetcher: { fetch: ut.readURL },
+      })
+
       await mod.runAll()
 
       const output = mod.codeBlocks.allOutputs
