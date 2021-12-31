@@ -174,27 +174,103 @@ same_as_chart! (Nat) [
 
 # add_commute
 
-``` agda
-nat-add-zero-commute :
-  (x : nat-t) ->
-  eqv-t
-    (nat-add zero x)
-    (nat-add x zero)
-nat-add-zero-commute zero = refl
-nat-add-zero-commute (succ x) =
-  eqv-apply succ (nat-add-zero-commute x)
+## equal_map
+
+``` cicada
+function equal_map(
+  implicit X: Type,
+  implicit from: X,
+  implicit to: X,
+  target: Equal(X, from, to),
+  implicit Y: Type,
+  f: (X) -> Y,
+): Equal(Y, f(from), f(to)) {
+  return replace(
+    target,
+    (x) => Equal(Y, f(from), f(x)),
+    refl,
+  )
+}
 ```
+
+## equal_swap
+
+``` cicada
+function equal_swap(
+  implicit A: Type,
+  implicit x: A,
+  implicit y: A,
+  xy_equal: Equal(A, x, y),
+): Equal(A, y, x) {
+  return replace(
+    xy_equal,
+    (w) => Equal(A, w, x),
+    refl,
+  )
+}
+```
+
+## equal_compose
+
+``` cicada
+function equal_compose(
+  implicit A: Type,
+  implicit x: A,
+  implicit y: A,
+  xy_equal: Equal(A, x, y),
+  implicit z: A,
+  yz_equal: Equal(A, y, z),
+): Equal(A, x, z) {
+  return replace(
+    yz_equal,
+    (w) => Equal(A, x, w),
+    xy_equal,
+  )
+}
+```
+
+## add_zero_commute
 
 ``` cicada
 function add_zero_commute(
   x: Nat
-): Equal(
-  Nat,
-  add(zero, x),
-  add(x, zero)
-) {
-  return TODO
+): Equal(Nat, add(zero, x), add(x, zero)) {
+  return induction (x) {
+    (x) => Equal(Nat, add(zero, x), add(x, zero))
+    case zero => refl
+    case add1(prev, almost) => equal_map(almost.prev, Nat.add1)
+  }
 }
+```
 
-add_zero_commute
+## add_add1_commute
+
+``` cicada
+function add_add1_commute(
+  x: Nat, y: Nat,
+): Equal(Nat, add(x, Nat.add1(y)), Nat.add1(add(x, y))) {
+  return induction (x) {
+    (x) => Equal(Nat, add(x, Nat.add1(y)), Nat.add1(add(x, y)))
+    case zero => refl
+    case add1(prev, almost) => equal_map(almost.prev, Nat.add1)
+  }
+}
+```
+
+## add_commute
+
+``` cicada
+function add_commute(
+  x: Nat, y: Nat,
+): Equal(Nat, add(x, y), add(y, x)) {
+  return induction (x) {
+    (x) => Equal(Nat, add(x, y), add(y, x))
+    case zero => add_zero_commute(y)
+    case add1(prev, almost) =>
+      equal_compose(
+        equal_map(almost.prev, Nat.add1),
+        equal_swap(add_add1_commute(y, prev)),
+      )
+  }
+}
 ```
