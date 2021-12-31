@@ -171,3 +171,30 @@ same_as_chart! (Nat) [
   add(mul(ten, ten), mul(two, ten))
 ]
 ```
+
+# add_commute
+
+``` agda
+nat-add-zero-commute :
+  (x : nat-t) ->
+  eqv-t
+    (nat-add zero x)
+    (nat-add x zero)
+nat-add-zero-commute zero = refl
+nat-add-zero-commute (succ x) =
+  eqv-apply succ (nat-add-zero-commute x)
+```
+
+``` cicada
+function add_zero_commute(
+  x: Nat
+): Equal(
+  Nat,
+  add(zero, x),
+  add(x, zero)
+) {
+  return TODO
+}
+
+add_zero_commute
+```

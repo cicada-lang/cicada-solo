@@ -97,18 +97,18 @@ async function watch(dir: string): Promise<void> {
 
     const prefix = `${dir}/`
     const path = file.slice(prefix.length)
+    const fullPath = Path.resolve(dir, path)
+    const url = new URL(`file:${fullPath}`)
 
     if (event === "remove") {
-      Module.cache.delete(path)
+      Module.deleteCachedMod(url)
       app.logger.info({ tag: event, msg: path })
     }
 
     if (event === "update") {
       const t0 = Date.now()
-      Module.cache.delete(path)
       const runner = new Runner()
-      const fullPath = Path.resolve(dir, path)
-      const url = new URL(`file:${fullPath}`)
+      Module.deleteCachedMod(url)
       const { error } = await runner.run(url)
       const t1 = Date.now()
       const elapse = t1 - t0

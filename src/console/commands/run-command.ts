@@ -78,15 +78,16 @@ function createURL(path: string): URL {
 
 async function watch(runner: Runner, path: string): Promise<void> {
   watcher(path, async (event, file) => {
+    const url = new URL(`file:${path}`)
+
     if (event === "remove") {
-      Module.cache.delete(path)
+      Module.deleteCachedMod(url)
       app.logger.info({ tag: event, msg: path })
       process.exit(1)
     }
 
     if (event === "update") {
-      Module.cache.delete(path)
-      const url = new URL(`file:${path}`)
+      Module.deleteCachedMod(url)
       const { error } = await runner.run(url)
 
       if (error) {

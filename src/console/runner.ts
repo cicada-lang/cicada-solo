@@ -3,6 +3,8 @@ import * as Errors from "../lang/errors"
 import { Module } from "../module"
 import * as ut from "../ut"
 
+let lastMod: any = null
+
 export class Runner {
   reporter = new Errors.ErrorReporter()
 
@@ -13,6 +15,7 @@ export class Runner {
     try {
       const mod = await Module.load(url)
       await mod.runAll()
+
       const output = mod.codeBlocks.allOutputs
         .map((output) => output.formatForConsole())
         .join("\n")

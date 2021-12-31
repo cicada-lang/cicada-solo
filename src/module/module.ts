@@ -26,12 +26,24 @@ export class Module {
     this.ctx = opts.ctx
   }
 
-  static cache: Map<string, Module> = new Map()
+  private static cache: Map<string, Module> = new Map()
+
+  static deleteCachedMod(url: URL): boolean {
+    return this.cache.delete(url.href)
+  }
+
+  static getCachedMod(url: URL): Module | undefined {
+    return this.cache.get(url.href)
+  }
+
+  static setCachedMod(url: URL, mod: Module): Map<string, Module> {
+    return this.cache.set(url.href, mod)
+  }
 
   static async load(url: URL): Promise<Module> {
     const text = await ut.readURL(url)
 
-    const cached = this.cache.get(url.href)
+    const cached = this.getCachedMod(url)
     if (cached) {
       return cached
     }
@@ -45,7 +57,7 @@ export class Module {
       ctx: Ctx.init(),
     })
 
-    this.cache.set(url.href, mod)
+    this.setCachedMod(url, mod)
     return mod
   }
 
