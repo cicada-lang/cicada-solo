@@ -52,12 +52,12 @@ export class Module {
   ): Promise<Module> {
     const { fileFetcher } = opts
 
-    const text = await fileFetcher.fetch(url)
-
     const cached = Module.getCachedMod(url)
     if (cached) {
       return cached
     }
+
+    const text = await fileFetcher.fetch(url)
 
     const parser = CodeBlockParsers.createCodeBlockParser(url)
 
