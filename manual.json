@@ -3,5 +3,15 @@
   "version": "0.1.0",
   "authors": ["Xie Yuheng"],
   "date": "2022",
-  "src": "manual"
+  "src": "manual",
+  "main": "00.1-introduction.md",
+  "sections": [
+    "default",
+    "Basic",
+    "Module",
+    "Datatype",
+    "Class",
+    "Implicit & Vague",
+    "Equality"
+  ]
 }
