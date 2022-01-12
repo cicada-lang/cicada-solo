@@ -1,3 +1,8 @@
+---
+section: Implicit & Vague
+title: Implicit Pi
+---
+
 # pi type with implicit argument and implicit function insertion
 
 Let's write the identity function with implicit type argument.

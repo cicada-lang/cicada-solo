@@ -1,3 +1,9 @@
+---
+section: Class
+title: ABC
+---
+
+``` cicada
 class ABC { a: Type, b: a, c: String }
 
 let abc: ABC = {
@@ -9,3 +15,4 @@ abc
 abc.a
 abc.b
 abc.c
+```

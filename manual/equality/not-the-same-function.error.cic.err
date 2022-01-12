@@ -6,7 +6,7 @@ from left hand side (from) of Equal:
 to right hand side (to) of Equal:
   (y, x) => [x | y]
 
-manual/equality/equal/not-the-same-function.error.cic:
+manual/equality/not-the-same-function.error.cic:
  3 |    (String) -> (String) -> [_: String | String],
  4 |    (x, y) => cons(x, y),
  5 |    (y, x) => cons(x, y)),

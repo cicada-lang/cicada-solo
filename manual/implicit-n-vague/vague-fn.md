@@ -1,3 +1,8 @@
+---
+section: Implicit & Vague
+title: Vague Function
+---
+
 # List
 
 ``` cicada

@@ -1,3 +1,8 @@
+---
+section: Implicit & Vague
+title: Implicit Application
+---
+
 # implicit argument insertion when applying implicit function
 
 ``` cicada

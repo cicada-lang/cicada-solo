@@ -1,3 +1,8 @@
+---
+section: Implicit & Vague
+title: Vague Pi
+---
+
 # my_cons
 
 ``` cicada
