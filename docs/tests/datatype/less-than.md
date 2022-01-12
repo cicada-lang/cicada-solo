@@ -4,8 +4,7 @@ title: LessThan
 
 # LessThan
 
-``` cicada wishful-thinking
-
+``` cicada
 import { Nat } from "./nat.md"
 
 datatype LessThan() (j: Nat, k: Nat) {
