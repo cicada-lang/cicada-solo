@@ -1,0 +1,2 @@
+(vague T, vague x) => MyEqual.refl(vague T, vague x): (vague T: Type, vague x: T) -> MyEqual(T, x, x)
+MyEqual.refl(vague String, vague "a"): MyEqual(String, "a", "a")
