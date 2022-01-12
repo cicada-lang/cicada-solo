@@ -1,4 +1,0 @@
-I can not do circular import.
-  path: ./circular-import.error.cic
-  resolved url: file:///home/xyh/cicada-lang/cicada/manual/import/circular-import.error.cic
-

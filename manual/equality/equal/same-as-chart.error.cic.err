@@ -6,7 +6,7 @@ from value at 0:
 to value at 1:
   "abcd"
 
-manual/equal/same-as-chart.error.cic:
+manual/equality/equal/same-as-chart.error.cic:
  1 |same_as_chart! (String) [
  2 |  "abc",
  3 |  "abcd",

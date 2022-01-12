@@ -6,7 +6,7 @@ from left hand side (from) of Equal:
 to right hand side (to) of Equal:
   ["baguette" | "ratatouille"]
 
-manual/equal/not-the-same-pair.error.cic:
+manual/equality/equal/not-the-same-pair.error.cic:
  3 |    [_: String | String],
  4 |    cons("ratatouille", "baguette"),
  5 |    cons("baguette", "ratatouille")),

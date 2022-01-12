@@ -1,6 +1,6 @@
 I meet undefined variable name: C
 
-manual/implicit-pi/implicit-fn.error.cic:
+manual/implicit-n-vague/implicit-pi/implicit-fn.error.cic:
   3 |  implicit A,
   4 |  implicit B,
   5 |  triple,

@@ -4,7 +4,7 @@ field name:
 field name list:
   a, b, b, c
 
-manual/cls/duplicated-object-field-names.error.cic:
+manual/class/duplicated-object-field-names.error.cic:
   4 |  b: String
   5 |}
   6 |

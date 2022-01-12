@@ -3,7 +3,7 @@ I infer the type to be:
 But the expected type is:
   dom.Morphism(x, y)
 
-manual/cls/functor-with-a-typo.error.cic:
+manual/class/functor-with-a-typo.error.cic:
  57 |  ): Equal(
  58 |    cod.Morphism(map(x), map(z)),
  59 |    // fmap(x, z)(dom.compose(x, y, z)(f, g)),
