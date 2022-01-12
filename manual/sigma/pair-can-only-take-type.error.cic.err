@@ -3,7 +3,7 @@ I infer the type to be:
 But the expected type is:
   Type
 
-docs/tests/sigma/pair-can-only-take-type.error.cic:
+manual/sigma/pair-can-only-take-type.error.cic:
  1 |[_: "oil" | String]
  2 |
 

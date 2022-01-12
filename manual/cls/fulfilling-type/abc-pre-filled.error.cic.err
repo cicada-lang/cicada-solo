@@ -6,7 +6,7 @@ from given field value:
 to already fulfilled value:
   "d"
 
-docs/tests/cls/fulfilling-type/abc-pre-filled.error.cic:
+manual/cls/fulfilling-type/abc-pre-filled.error.cic:
  20 |  e: String
  21 |}
  22 |
