@@ -224,7 +224,7 @@ when the argument expression is different.
 check! (T: Type) -> (T) -> T: Type
 ```
 
-The return type of the about `Pi` is `(T) -> T`,
+The return type of the above `Pi` is `(T) -> T`,
 it depends on the argument expression `T`.
 
 We have a built-in function of the above type,
@@ -259,3 +259,66 @@ you can use it to prove anything.
 ``` cicada
 check! from_falsehood_anything: (target: Absurd, motive: Type) -> motive
 ```
+
+When we want to express a proposition is not true,
+we say that proposition leads to absurd.
+
+``` cicada
+function Not(T: Type): Type {
+  return (T) -> Absurd
+}
+```
+
+# Equal
+
+Given a `Type`, and two expressions of that `Type`,
+we can create a new `Type` to express the two expressions are the same.
+
+``` cicada
+check! Equal(String, "abc", "abc"): Type
+check! Equal(Trivial, sole, sole): Type
+```
+
+We can use `the_same` to construct elements of this type.
+
+``` cicada
+check! the_same(String, "abc"): Equal(String, "abc", "abc")
+check! the_same(Trivial, sole): Equal(Trivial, sole, sole)
+```
+
+If we want to omit the first argument, we can use `same`.
+
+``` cicada
+check! same("abc"): Equal(String, "abc", "abc")
+check! same(sole): Equal(Trivial, sole, sole)
+```
+
+If we want to omit all arguments, we can use `refl`, which means "reflection".
+
+- We can omit all arguments, because after all, all the informations are already in the type.
+
+``` cicada
+check! refl: Equal(String, "abc", "abc")
+check! refl: Equal(Trivial, sole, sole)
+```
+
+If the two elements are actually not the same,
+we can still use `Equal` to create a `Type`,
+but we can not construct elements of this type.
+
+``` cicada
+check! Equal(String, "abc", "de"): Type
+```
+
+------
+
+# Summary
+
+Above are all the built-in types of cicada language!
+
+Not enough, right?
+
+Beside them, we will use `datatype` and `class` to construct new compound types.
+
+But before that, let's see how to view a file as `Module`,
+and use `import` to import published works.

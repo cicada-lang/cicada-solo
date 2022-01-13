@@ -1,14 +1,13 @@
-- extract `ModuleCache`
-
-# manual
-
-- [manual] Introduction
-- [manual] Basic -- built-in-types
 - [manual] Module -- import
+- [manual] Introduction
 - [manual] Datatype
 - [manual] Class -- ABC
 - [manual] Implicit & VagueClass
 - [manual] Equality
+
+# refactor
+
+- extract `ModuleCache`
 
 # inductive datatype -- questions
 
