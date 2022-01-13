@@ -1,2 +1,0 @@
-(k) => Fin.zero(k): (k: Nat) -> Fin(Nat.add1(k))
-(vague k, prev) => Fin.add1(vague k, prev): (vague k: Nat, prev: Fin(k)) -> Fin(Nat.add1(k))

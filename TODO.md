@@ -1,9 +1,7 @@
-- [manual] Module -- import
 - [manual] Introduction
 - [manual] Datatype
 - [manual] Class -- ABC
 - [manual] Implicit & VagueClass
-- [manual] Equality
 
 # refactor
 

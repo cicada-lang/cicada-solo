@@ -1,12 +1,11 @@
 ---
 section: Datatype
-title: LessThan
 ---
 
 # LessThan
 
 ``` cicada
-import { Nat } from "./nat.md"
+import { Nat } from "./01-nat.md"
 
 datatype LessThan() (j: Nat, k: Nat) {
   zero_smallest(n: Nat): LessThan(Nat.zero, Nat.add1(n))

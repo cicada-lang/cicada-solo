@@ -1,6 +1,5 @@
 ---
 section: Datatype
-title: MyEqual
 ---
 
 # MyEqual

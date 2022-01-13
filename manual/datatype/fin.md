@@ -1,12 +1,11 @@
 ---
 section: Datatype
-title: Fin
 ---
 
 # Fin
 
 ``` cicada
-import { Nat } from "./nat.md"
+import { Nat } from "./01-nat.md"
 
 datatype Fin() (n: Nat) {
   zero(k: Nat): Fin(Nat.add1(k))
