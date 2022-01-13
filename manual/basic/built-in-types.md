@@ -42,9 +42,9 @@ check! "Hello, World!": String
 We can use `let <name> = <exp>` to do assignment.
 
 ``` cicada
-let xyh = "Xie Yuheng"
+let my_name = "Xie Yuheng"
 
-xyh
+my_name
 ```
 
 # Trivial
