@@ -4,13 +4,11 @@ import * as Exps from "../../exps"
 import { Value } from "../../value"
 
 export class EqualValue extends Exps.BuiltInValue {
+  name = "Equal"
   arity = 3
 
   constructor(...values: Array<Value>) {
-    super(
-      "Equal",
-      values.map((value) => ({ kind: "plain", value }))
-    )
+    super(values.map((value) => ({ kind: "plain", value })))
   }
 
   get t(): Value {

@@ -1,0 +1,24 @@
+Type: Type
+Type: Type
+String: Type
+String: Type
+"Hello, World!": String
+"Hello, World!": String
+"Xie Yuheng": String
+Trivial: Type
+sole: Trivial
+sole: Trivial
+[_: String | Trivial]: Type
+["abc" | sole]: [_: String | Trivial]
+"abc": String
+sole: Trivial
+[_: String | Trivial]: Type
+[_: String | Trivial]: Type
+["abc" | sole]: [_: String | Trivial]
+[_: Type, _1: String | Trivial]: Type
+[String | ["abc" | sole]]: [_: Type, _1: String | Trivial]
+refl: Equal([_: Type, _1: String | Trivial], [String | ["abc" | sole]], [String | ["abc" | sole]])
+[x: [_: Type | Type] | car(x)]: Type
+[[String | Trivial] | "ABC"]: [x: [_: Type | Type] | car(x)]
+[[Trivial | String] | sole]: [x: [_: Type | Type] | car(x)]
+refl: Equal(Type, [_: String | Trivial], [_: String | Trivial])

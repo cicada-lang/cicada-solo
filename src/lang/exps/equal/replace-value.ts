@@ -8,10 +8,11 @@ import { BuiltInApHandler } from "../built-in/built-in-ap-handler"
 import { Closure } from "../closure"
 
 export class ReplaceValue extends Exps.BuiltInValue {
+  name = "replace"
   arity = 6
 
   constructor(arg_value_entries: Array<Exps.ArgValueEntry> = []) {
-    super("replace", arg_value_entries)
+    super(arg_value_entries)
   }
 
   ap_handler: BuiltInApHandler = new BuiltInApHandler(this, {

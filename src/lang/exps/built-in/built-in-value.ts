@@ -7,14 +7,14 @@ import { readback, Value } from "../../value"
 import { BuiltInApHandler } from "./built-in-ap-handler"
 
 export abstract class BuiltInValue extends Value {
-  name: string
   arg_value_entries: Array<Exps.ArgValueEntry>
 
-  constructor(name: string, arg_value_entries: Array<Exps.ArgValueEntry>) {
+  constructor(arg_value_entries: Array<Exps.ArgValueEntry>) {
     super()
-    this.name = name
     this.arg_value_entries = arg_value_entries
   }
+
+  abstract name: string
 
   abstract arity: number
 

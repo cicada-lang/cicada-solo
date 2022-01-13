@@ -5,10 +5,11 @@ import * as Exps from "../../exps"
 import { check_conversion, expect, Value } from "../../value"
 
 export class ReflValue extends Exps.BuiltInValue {
+  name = "refl"
   arity = 2
 
   constructor(...arg_value_entries: Array<Exps.ArgValueEntry>) {
-    super("refl", arg_value_entries)
+    super(arg_value_entries)
   }
 
   curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {

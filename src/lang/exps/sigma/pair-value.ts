@@ -5,10 +5,11 @@ import { Value } from "../../value"
 import { BuiltInApHandler } from "../built-in/built-in-ap-handler"
 
 export class PairValue extends Exps.BuiltInValue {
+  name = "Pair"
   arity = 2
 
   constructor(arg_value_entries: Array<Exps.ArgValueEntry>) {
-    super("Pair", arg_value_entries)
+    super(arg_value_entries)
   }
 
   ap_handler: BuiltInApHandler = new BuiltInApHandler(this, {
@@ -44,4 +45,8 @@ export class PairValue extends Exps.BuiltInValue {
       )
     )
   }
+}
+
+export class BothValue extends PairValue {
+  name = "Both"
 }

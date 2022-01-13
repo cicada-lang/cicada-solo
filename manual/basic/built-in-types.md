@@ -61,15 +61,17 @@ check! sole: Trivial
 ``` cicada
 let result = {
   let x = sole
-  return x
+  let y = x
+  let z = y
+  return z
 }
 
 result
 ```
 
-# Pair
+# Pair (Both)
 
-`Pair` taken two `Type`, is a `Type`.
+`Pair` taken two `Type`s, is a `Type`.
 
 ``` cicada
 check! Pair(String, Trivial): Type
@@ -81,7 +83,28 @@ We can use `cons` to construct `Pair`.
 check! cons("abc", sole): Pair(String, Trivial)
 ```
 
-Writing `cons(<exp>, <exp>)` is the same as `[<exp> | <exp>]`.
+And using `car` & `cdr` to take a `Pair`'s first and second element.
+
+``` cicada
+let pair: Pair(String, Trivial) = cons("abc", sole)
+
+check! car(pair): String
+check! cdr(pair): Trivial
+```
+
+We use `Both` as another name of `Pair`,
+because we read `Pair(A, C)` as
+
+> Both A and C are true.
+
+The following two expressions are the same `Type`.
+
+``` cicada
+Pair(String, Trivial)
+Both(String, Trivial)
+```
+
+Writing `cons(<exp>, <exp>)` is the same as writing `[<exp> | <exp>]`.
 
 ``` cicada
 check! ["abc" | sole]: Pair(String, Trivial)
@@ -115,6 +138,10 @@ We write `Sigma` type as `[x: A | C]`,
 where `x` might occur in `C`, or say, `C` depends on `x`.
 
 This is why `Sigma` is called **dependent pair type**.
+
+We read `[x: A | C]` as
+
+> There exists `x` in `A`, such that `C` is true.
 
 For `Pair` the second type is fixed,
 while for `Sigma` the second type can change,

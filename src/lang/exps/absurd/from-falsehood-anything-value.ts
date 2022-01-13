@@ -7,10 +7,11 @@ import { Value } from "../../value"
 import { BuiltInApHandler } from "../built-in/built-in-ap-handler"
 
 export class FromFalsehoodAnythingValue extends Exps.BuiltInValue {
+  name = "from_falsehood_anything"
   arity = 2
 
   constructor(arg_value_entries: Array<Exps.ArgValueEntry> = []) {
-    super("from_falsehood_anything", arg_value_entries)
+    super(arg_value_entries)
   }
 
   ap_handler: BuiltInApHandler = new BuiltInApHandler(this, {

@@ -5,10 +5,11 @@ import * as Exps from "../exps"
 import { readback, Value } from "../value"
 
 export class TodoNoteValue extends Exps.BuiltInValue {
+  name = "TODO_NOTE"
   arity = 2
 
   constructor(arg_value_entries: Array<Exps.ArgValueEntry>) {
-    super("TODO_NOTE", arg_value_entries)
+    super(arg_value_entries)
   }
 
   curry(arg_value_entry: Exps.ArgValueEntry): Exps.BuiltInValue {

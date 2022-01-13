@@ -6,10 +6,11 @@ import { check_conversion, expect, Value } from "../../value"
 import { BuiltInApHandler } from "../built-in/built-in-ap-handler"
 
 export class TheSameValue extends Exps.BuiltInValue {
+  name = "the_same"
   arity = 2
 
   constructor(...arg_value_entries: Array<Exps.ArgValueEntry>) {
-    super("the_same", arg_value_entries)
+    super(arg_value_entries)
   }
 
   ap_handler: BuiltInApHandler = new BuiltInApHandler(this, {

@@ -5,10 +5,11 @@ import { Value } from "../value"
 import { BuiltInApHandler } from "./built-in/built-in-ap-handler"
 
 export class TheValue extends Exps.BuiltInValue {
+  name = "the"
   arity = 2
 
   constructor(arg_value_entries: Array<Exps.ArgValueEntry>) {
-    super("the", arg_value_entries)
+    super(arg_value_entries)
   }
 
   ap_handler: BuiltInApHandler = new BuiltInApHandler(this, {

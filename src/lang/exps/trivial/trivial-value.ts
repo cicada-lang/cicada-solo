@@ -7,10 +7,11 @@ export class TrivialValue
   extends Exps.BuiltInValue
   implements ReadbackEtaExpansion
 {
+  name = "Trivial"
   arity = 0
 
   constructor(arg_value_entries: Array<Exps.ArgValueEntry> = []) {
-    super("Trivial", arg_value_entries)
+    super(arg_value_entries)
   }
 
   readback_eta_expansion(ctx: Ctx, value: Value): Core {
