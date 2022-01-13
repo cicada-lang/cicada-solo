@@ -3,10 +3,10 @@
 # manual
 
 - [manual] Introduction
-- [manual] Basic
-- [manual] Module
+- [manual] Basic -- built-in-types
+- [manual] Module -- import
 - [manual] Datatype
-- [manual] Class
+- [manual] Class -- ABC
 - [manual] Implicit & VagueClass
 - [manual] Equality
 

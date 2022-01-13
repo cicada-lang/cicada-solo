@@ -18,6 +18,9 @@ to make assertion about an expression's type.
 check! Type: Type
 ```
 
+Don't forget that code blocks on our website are interactive,
+hovering over them to see a menu button.
+
 # String
 
 `String` is a `Type`.
