@@ -83,7 +83,8 @@ We can use `cons` to construct `Pair`.
 check! cons("abc", sole): Pair(String, Trivial)
 ```
 
-And using `car` & `cdr` to take a `Pair`'s first and second element.
+And using `car` take a `Pair`'s first element,
+using `cdr` to take a `Pair`'s second element.
 
 ``` cicada
 let pair: Pair(String, Trivial) = cons("abc", sole)
