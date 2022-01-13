@@ -47,17 +47,6 @@ let xyh = "Xie Yuheng"
 xyh
 ```
 
-`let` can be nested in `{ ...; return ... }`.
-
-``` cicada
-let yh = {
-  let name = "Yuheng"
-  return name
-}
-
-yh
-```
-
 # Trivial
 
 `Trivial` is a `Type`, and `sole` is its only element.
@@ -65,4 +54,15 @@ yh
 ``` cicada
 check! Trivial: Type
 check! sole: Trivial
+```
+
+`let` can be nested in `{ ...; return ... }`.
+
+``` cicada
+let result = {
+  let x = sole
+  return x
+}
+
+result
 ```
