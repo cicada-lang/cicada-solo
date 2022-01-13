@@ -1,5 +1,15 @@
 - extract `ModuleCache`
 
+# manual
+
+- [manual] Introduction
+- [manual] Basic
+- [manual] Module
+- [manual] Datatype
+- [manual] Class
+- [manual] Implicit & VagueClass
+- [manual] Equality
+
 # inductive datatype -- questions
 
 > If the ambition of this project is too much pressure,
