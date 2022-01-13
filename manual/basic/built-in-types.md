@@ -39,7 +39,7 @@ We use double-quoted `String`.
 check! "Hello, World!": String
 ```
 
-We can use `let` to do assignment.
+We can use `let <name> = <exp>` to do assignment.
 
 ``` cicada
 let xyh = "Xie Yuheng"
@@ -164,4 +164,97 @@ same_as_chart! (Type) [
 ]
 ```
 
+# Function
+
+We write function as `(A) -> R`,
+where `A` is the argument type,
+and `R` is the return type.
+
+``` cicada
+check! (String) -> Trivial: Type
+check! (Pair(String, Trivial)) -> Pair(Trivial, String): Type
+```
+
+We use `(x) => ...` to construct **anonymous function**,
+which is also famously called **lambda**.
+
+``` cicada
+check! (x) => sole: (String) -> Trivial
+check! (pair) => cons(cdr(pair), car(pair)): (Pair(String, Trivial)) -> Pair(Trivial, String)
+```
+
+We can use `let <name>: <type> = <exp>` to give an anonymous function a name.
+
+``` cicada
+let very_trivial: (String) -> Trivial = (x) => sole
+
+check! very_trivial("any string"): Trivial
+```
+
+We can also use `function` to define a function.
+
+``` cicada
+function swap_pair(
+  pair: Pair(String, Trivial)
+): Pair(Trivial, String) {
+  return cons(cdr(pair), car(pair))
+}
+
+check! pair: Pair(String, Trivial)
+check! swap_pair(pair): Pair(Trivial, String)
+```
+
 # Pi
+
+We write `Pi` type as `(x: A) -> R`,
+where `x` might occur in `R`, or say, `R` depends on `x`.
+
+This is why `Pi` is called **dependent function type**.
+
+We read `(x: A) -> R` as
+
+> For all `x` in `A`, `R` is true.
+
+For function type the return type is fixed,
+while for `Pi` the return type can change,
+when the argument expression is different.
+
+``` cicada
+check! (T: Type) -> (T) -> T: Type
+```
+
+The return type of the about `Pi` is `(T) -> T`,
+it depends on the argument expression `T`.
+
+We have a built-in function of the above type,
+and we call this function `the`.
+
+``` cicada
+the(String, "abc")
+the(Trivial, sole)
+the((T: Type) -> (T) -> T, the)
+```
+
+It is defined as the following:
+
+``` cicada
+function the(T: Type, x: T): T {
+  return x
+}
+```
+
+# Absurd
+
+`Absurd` is a very special `Type`, because it has no elements.
+
+``` cicada
+check! Absurd: Type
+```
+
+We have a built-in function called `from_falsehood_anything`,
+if you have a element of type `Absurd`,
+you can use it to prove anything.
+
+``` cicada
+check! from_falsehood_anything: (target: Absurd, motive: Type) -> motive
+```
