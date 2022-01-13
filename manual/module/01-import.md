@@ -9,12 +9,13 @@ We can use `import` to reference definitions in other files.
 
 Thus one file can be viewed as a `Module` of definitions.
 
-For example, current file is located at `"/module/01-import.md"`,
-we can use relative path `"../datatype/01-nat.md"`,
-to locate `"/module/database/01-nat.md"`,
-in which a `datatype` called `Nat` is defined.
+For example,
 
-We can import this definition.
+- current file is located at `"/module/01-import.md"`,
+- we can use relative path `"../datatype/01-nat.md"`,
+  to locate `"/module/database/01-nat.md"`,
+- in which a `datatype` called `Nat` is defined,
+- and we import this definition.
 
 ``` cicada
 import { Nat } from "../datatype/01-nat.md"
