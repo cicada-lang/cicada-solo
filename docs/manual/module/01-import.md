@@ -14,7 +14,8 @@ For example,
 - current file is located at `"/module/01-import.md"`,
 - we can use relative path `"../datatype/01-nat.md"`,
   to locate `"/module/database/01-nat.md"`,
-- in which a `datatype` called `Nat` is defined,
+- in which a `datatype` called `Nat` is defined
+  (we will talk about `Nat` in the following chapters),
 - and we import this definition.
 
 ``` cicada

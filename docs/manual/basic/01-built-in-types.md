@@ -86,6 +86,10 @@ check! cons("abc", sole): Pair(String, Trivial)
 And using `car` take a `Pair`'s first element,
 using `cdr` to take a `Pair`'s second element.
 
+- `cons`, `car` and `cdr`.
+
+  Yes, that's Lisp's DNA, dancing in our cells.
+
 ``` cicada
 let pair: Pair(String, Trivial) = cons("abc", sole)
 
