@@ -1,27 +1,41 @@
 ---
 section: Datatype
-title: Natural number
+title: Natural Number
 ---
+
+We can use the `datatype` keyword to define new `datatype`s.
+
+We take natural number as the first `datatype` example.
 
 # Nat
 
 ``` cicada
 datatype Nat {
+  // `zero` is a `Nat`.
   zero: Nat
+  // `add1` to previous `Nat` is `Nat`.
   add1(prev: Nat): Nat
 }
+```
 
-Nat.zero
+After the definition, `Nat` is a `Type`.
 
-check! Nat.zero: Nat
-
-Nat.add1
-
+``` cicada
 check! Nat: Type
+```
+
+And we can use `Nat`'s constructors to construct `Nat`.
+
+``` cicada
 check! Nat.zero: Nat
+check! Nat.add1: (Nat) -> Nat
+
 check! Nat.add1(Nat.zero): Nat
 check! Nat.add1(Nat.add1(Nat.zero)): Nat
 ```
+
+We define some common natural numbers,
+and use them to write tests in the following code.
 
 ``` cicada
 let zero = Nat.zero
@@ -37,7 +51,69 @@ let nine = Nat.add1(eight)
 let ten = Nat.add1(nine)
 ```
 
-# induction Nat
+# add
+
+We can use the `induction` keyword to define functions that operates over `Nat`.
+
+`add` is one of the most basic function, it adds two `Nat`s togather.
+
+``` cicada
+function add(x: Nat, y: Nat): Nat {
+  return induction (x) {
+    // If `x` is `Nat.zero`,
+    //   the result of `add` is simply `y`.
+    case zero => y
+    // If `x` is `Nat.add1(prev)`,
+    //   the result of `add` is `add1` to `add(prev)`.
+    case add1(prev, almost) => Nat.add1(almost.prev)
+  }
+}
+```
+
+Note that, we did not recursively call `add(prev)`,
+but use `almost.prev` to get the result of the recursive call.
+
+- i.e. `almost.prev` is the same as `add(prev)`
+
+Let's write some tests.
+
+``` cicada
+add(zero, zero)
+add(zero, one)
+add(one, zero)
+add(one, one)
+add(two, two)
+```
+
+Applying a function that takes two arguments to only one argument,
+will return another function that takes one argument.
+
+This is called **currying**.
+
+``` cicada
+check! add: (Nat, Nat) -> Nat
+check! add(one): (Nat) -> Nat
+check! add(one)(one): Nat
+check! add(one, one): Nat
+```
+
+We often use `same_as_chart!` to write test.
+
+``` cicada
+same_as_chart! (Nat) [
+  add(two, three),
+  add(three, two),
+  five,
+]
+```
+
+# About induction over `Nat`
+
+By using `induction`, we are defining function using **recursive combinator**.
+
+If we view `induction` over `Nat` as a function, it roughly has the following definition.
+
+- The `motive` argument can be omitted (as we did), when the return type is simple.
 
 ``` cicada
 function induction_nat(
@@ -55,39 +131,6 @@ function induction_nat(
     case add1(prev, almost) => case_of_add1(prev, almost)
   }
 }
-```
-
-# add
-
-``` cicada
-function add(x: Nat, y: Nat): Nat {
-  return induction (x) {
-    case zero => y
-    case add1(prev, almost) => Nat.add1(almost.prev)
-  }
-}
-```
-
-``` cicada
-add(Nat.zero)
-add(Nat.zero, Nat.zero)
-add(Nat.zero, Nat.add1(Nat.zero))
-add(Nat.add1(Nat.zero), Nat.zero)
-add(Nat.add1(Nat.zero), Nat.add1(Nat.zero))
-```
-
-``` cicada
-same_as_chart! (Nat) [
-  add(
-    Nat.add1(Nat.add1(Nat.zero)),
-    Nat.add1(Nat.add1(Nat.add1(Nat.zero))),
-  ),
-  add(
-    Nat.add1(Nat.add1(Nat.add1(Nat.zero))),
-    Nat.add1(Nat.add1(Nat.zero)),
-  ),
-  Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))),
-]
 ```
 
 # mul
