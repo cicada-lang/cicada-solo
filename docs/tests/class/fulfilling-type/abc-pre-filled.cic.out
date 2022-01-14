@@ -1,0 +1,20 @@
+{ a: Trivial, b: sole, c: "c" }: class {
+  a: Type = Trivial
+  b: Trivial = sole
+  c: String
+}
+Trivial: Type
+sole: Trivial
+"c": String
+{ a: Trivial, b: sole, c: "c", d: "d", e: "e" }: class {
+  a: Type = Trivial
+  b: Trivial = sole
+  c: String = "c"
+  d: String
+  e: String
+}
+Trivial: Type
+sole: Trivial
+"c": String
+"d": String
+"e": String

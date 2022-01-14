@@ -1,0 +1,12 @@
+I infer the type to be:
+  Morphism(x, y)
+But the expected type is:
+  Morphism(x, x)
+
+docs/tests/class/category-with-a-typo.error.cic:
+ 34 |  ): Equal(
+ 35 |    Morphism(x, w),
+ 36 |    // compose(x, y, w)(f, compose(y, z, w)(g, h)),
+ 37 |    compose(x, x, w)(f, compose(y, z, w)(g, h)),
+ 38 |    compose(x, z, w)(compose(x, y, z)(f, g), h))
+ 39 |}

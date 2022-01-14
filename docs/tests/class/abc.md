@@ -1,0 +1,18 @@
+---
+section: Class
+title: ABC
+---
+
+``` cicada
+class ABC { a: Type, b: a, c: String }
+
+let abc: ABC = {
+  a: Trivial, b: sole, c: "c"
+}
+
+abc
+
+abc.a
+abc.b
+abc.c
+```

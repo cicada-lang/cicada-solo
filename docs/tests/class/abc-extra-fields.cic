@@ -1,0 +1,10 @@
+class ABC { a: Type, b: a, c: String }
+
+// NOTE extra fields
+
+let abcde: ABC = {
+  a: Trivial, b: sole, c: "c",
+  d: "d", e: "e",
+}
+
+abcde

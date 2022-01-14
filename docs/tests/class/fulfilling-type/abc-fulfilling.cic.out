@@ -1,0 +1,36 @@
+class {
+  a: Type
+  b: a
+  c: String
+}: Type
+class {
+  a: Type = Trivial
+  b: Trivial
+  c: String
+}: Type
+class {
+  a: Type = Trivial
+  b: Trivial = sole
+  c: String
+}: Type
+class {
+  a: Type = Trivial
+  b: Trivial = sole
+  c: String = "c"
+}: Type
+{ a: Trivial, b: sole, c: "c" }: class {
+  a: Type = Trivial
+  b: Trivial = sole
+  c: String
+}
+Trivial: Type
+sole: Trivial
+"c": String
+{ a: Trivial, b: sole, c: "c" }: class {
+  a: Type = Trivial
+  b: Trivial = sole
+  c: String = "c"
+}
+Trivial: Type
+sole: Trivial
+"c": String

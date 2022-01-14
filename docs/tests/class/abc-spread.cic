@@ -1,0 +1,13 @@
+class ABC { a: Type, b: a, c: String }
+
+let bc: class { b: Trivial, c: String } = {
+  b: sole, c: "c"
+}
+
+let abc: ABC = { a: Trivial, ...bc }
+
+abc
+
+abc.a
+abc.b
+abc.c

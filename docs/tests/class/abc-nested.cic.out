@@ -1,0 +1,17 @@
+{ x: "x", y: "y", z: { a: Trivial, b: sole, c: "c" } }: class {
+  x: String
+  y: String
+  z: class {
+    a: Type
+    b: a
+    c: String
+  }
+}
+{ a: Trivial, b: sole, c: "c" }: class {
+  a: Type
+  b: a
+  c: String
+}
+Trivial: Type
+sole: Trivial
+"c": String

@@ -1,9 +1,0 @@
-I infer the type to be:
-  String
-But the expected type is:
-  Type
-
-manual/basic/sigma/pair-can-only-take-type.error.cic:
- 1 |[_: "oil" | String]
- 2 |
-

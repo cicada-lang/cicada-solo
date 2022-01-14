@@ -1,0 +1,16 @@
+let a = String
+
+class Test {
+  X: Type = a
+  a: String
+  b: X
+
+  equal: Equal(Type, String, X)
+}
+
+the(Test, {
+  X: a,
+  a: "a",
+  b: "b",
+  equal: refl,
+})

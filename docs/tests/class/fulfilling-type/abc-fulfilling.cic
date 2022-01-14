@@ -1,0 +1,28 @@
+class ABC { a: Type, b: a, c: String }
+
+check! ABC: Type
+check! ABC(Trivial): Type
+check! ABC(Trivial, sole): Type
+check! ABC(Trivial, sole, "c"): Type
+
+// ABC :> ABC(Trivial) :> ABC(Trivial, sole) :> ABC(Trivial, sole, "c")
+
+let abc: ABC(Trivial, sole) = {
+  a: Trivial, b: sole, c: "c"
+}
+
+abc
+
+abc.a
+abc.b
+abc.c
+
+let fulled: ABC(Trivial, sole, "c") = {
+  a: Trivial, b: sole, c: "c"
+}
+
+fulled
+
+fulled.a
+fulled.b
+fulled.c

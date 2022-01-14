@@ -1,0 +1,20 @@
+(E, length) => Vector(E, length): (E: Type, length: Nat) -> Type
+(length) => Vector(String, length): (length: Nat) -> Type
+Vector(String, Nat.zero): Type
+(vague E) => Vector.null(vague E): (vague E: Type) -> Vector(E, Nat.zero)
+Vector.null(vague Nat): Vector(Nat, Nat.zero)
+(vague E, vague prev, head, tail) => Vector.cons(vague E, vague prev, head, tail): (vague E: Type, vague prev: Nat, head: E, tail: Vector(E, prev)) -> Vector(E, Nat.add1(prev))
+Vector.null(vague String): Vector(String, Nat.zero)
+Vector.cons(vague Nat, vague Nat.zero, Nat.add1(Nat.zero), Vector.null(vague Nat)): Vector(Nat, Nat.add1(Nat.zero))
+Vector.cons(vague Nat, vague Nat.zero, Nat.add1(Nat.zero), Vector.null(vague Nat)): Vector(Nat, Nat.add1(Nat.zero))
+Vector.cons(vague Nat, vague Nat.zero, Nat.add1(Nat.zero), Vector.null(vague Nat)): Vector(Nat, Nat.add1(Nat.zero))
+Vector.cons(vague String, vague Nat.zero, "a", Vector.null(vague String)): Vector(String, Nat.add1(Nat.zero))
+Vector.cons(vague String, vague Nat.zero, "a", Vector.null(vague String)): Vector(String, Nat.add1(Nat.zero))
+Vector.cons(vague String, vague Nat.zero, "a", Vector.null(vague String)): Vector(String, Nat.add1(Nat.zero))
+Vector.cons(vague String, vague Nat.add1(Nat.add1(Nat.zero)), "a", Vector.cons(vague String, vague Nat.add1(Nat.zero), "b", Vector.cons(vague String, vague Nat.zero, "c", Vector.null(vague String)))): Vector(String, Nat.add1(Nat.add1(Nat.add1(Nat.zero))))
+Vector.cons(vague Nat, vague Nat.zero, Nat.add1(Nat.zero), Vector.null(vague Nat)): Vector(Nat, Nat.add1(Nat.zero))
+Vector.cons(vague String, vague Nat.zero, "a"): Vector(String, Nat.add1(Nat.zero))
+(vague prev, head, tail) => Vector.cons(vague String, vague prev, head, tail): (vague prev: Nat, head: String, tail: Vector(String, prev)) -> Vector(String, Nat.add1(prev))
+Vector.cons(vague String, vague Nat.zero, "a", Vector.null(vague String)): Vector(String, Nat.add1(Nat.zero))
+refl: Equal(Vector(Nat, Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))))), Vector.cons(vague Nat, vague Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))), Nat.add1(Nat.zero), Vector.cons(vague Nat, vague Nat.add1(Nat.add1(Nat.add1(Nat.zero))), Nat.add1(Nat.add1(Nat.zero)), Vector.cons(vague Nat, vague Nat.add1(Nat.add1(Nat.zero)), Nat.add1(Nat.add1(Nat.add1(Nat.zero))), Vector.cons(vague Nat, vague Nat.add1(Nat.zero), Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))), Vector.cons(vague Nat, vague Nat.zero, Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))), Vector.null(vague Nat)))))), Vector.cons(vague Nat, vague Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))), Nat.add1(Nat.zero), Vector.cons(vague Nat, vague Nat.add1(Nat.add1(Nat.add1(Nat.zero))), Nat.add1(Nat.add1(Nat.zero)), Vector.cons(vague Nat, vague Nat.add1(Nat.add1(Nat.zero)), Nat.add1(Nat.add1(Nat.add1(Nat.zero))), Vector.cons(vague Nat, vague Nat.add1(Nat.zero), Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))), Vector.cons(vague Nat, vague Nat.zero, Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))), Vector.null(vague Nat)))))))
+refl: Equal(List(Nat), List.cons(vague Nat, Nat.add1(Nat.zero), List.cons(vague Nat, Nat.add1(Nat.add1(Nat.zero)), List.cons(vague Nat, Nat.add1(Nat.add1(Nat.add1(Nat.zero))), List.null(vague Nat)))), List.cons(vague Nat, Nat.add1(Nat.zero), List.cons(vague Nat, Nat.add1(Nat.add1(Nat.zero)), List.cons(vague Nat, Nat.add1(Nat.add1(Nat.add1(Nat.zero))), List.null(vague Nat)))))

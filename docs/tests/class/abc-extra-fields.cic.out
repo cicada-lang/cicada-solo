@@ -1,0 +1,5 @@
+{ a: Trivial, b: sole, c: "c" }: class {
+  a: Type
+  b: a
+  c: String
+}
