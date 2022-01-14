@@ -1,5 +1,9 @@
 # 蝉语 / Cicada Language
 
+[ [HOMEPAGE](https://cicada-lang.org)
+| [MANUAL](https://readonly.link/manuals/gitlab.com/cicada-lang/cicada)
+| [ABOUT](https://cicada-lang.org/about) ]
+
 Welcome **\*^-^\*/**
 
 Cicada language is a *dependently typed programming language* and *interactive theorem prover*.
