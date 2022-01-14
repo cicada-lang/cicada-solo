@@ -323,7 +323,7 @@ check! Equal(String, "abc", "de"): Type
 ```
 
 By the way, we use `// ...` to write comments in code,
-just like the above two lines.
+just like the two lines above.
 
 ------
 

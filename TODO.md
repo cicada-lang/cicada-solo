@@ -1,4 +1,8 @@
 - [manual] datatype/01.1-proving-theorems-about-nat.md
+
+  - https://en.wikipedia.org/wiki/Mathematical_induction
+  - https://en.wikipedia.org/wiki/How_to_Solve_It
+
 - [manual] equality/01-equal-utilities.md
 - [manual] datatype/02-list.md
 - [manual] datatype/03-vector.md
