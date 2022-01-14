@@ -3,6 +3,9 @@ section: Datatype
 title: List
 ---
 
+If `Nat` is the most basic `datatype`,
+`List` is the next basic `datatype`.
+
 # List
 
 ``` cicada
@@ -10,19 +13,26 @@ datatype List(E: Type) {
   null: List(E)
   cons(head: E, tail: List(E)): List(E)
 }
+```
 
-check! List: (Type) -> Type
+After the definition, `List` taken a `Type` is a `Type`.
+
+``` cicada
+check! List: (E: Type) -> Type
 check! List(String): Type
+check! List(Trivial): Type
+```
 
+Let construct a `List` of "a", "b", "c", step by step.
+
+``` cicada
 check! List.null: List(String)
-check! List.null(vague String): List(String)
-
 check! List.cons("a", List.null): List(String)
 check! List.cons("a", List.cons("b", List.null)): List(String)
 check! List.cons("a", List.cons("b", List.cons("c", List.null))): List(String)
 ```
 
-# induction List
+# About induction over List
 
 ``` cicada
 function induction_list(
@@ -56,6 +66,8 @@ function length(implicit E: Type, x: List(E)): Nat {
 }
 ```
 
+Tests.
+
 ``` cicada
 same_as_chart! (Nat) [
   length(the(List(String), List.cons("a", List.cons("b", List.cons("c", List.null))))),
@@ -73,6 +85,8 @@ function append(implicit E: Type, x: List(E), y: List(E)): List(E) {
   }
 }
 ```
+
+Tests.
 
 ``` cicada
 same_as_chart! (List(String)) [
@@ -101,6 +115,8 @@ function reverse(implicit E: Type, x: List(E)): List(E) {
   }
 }
 ```
+
+Tests.
 
 ``` cicada
 same_as_chart! (List(String)) [

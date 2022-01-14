@@ -1,9 +1,9 @@
-- [manual] Datatype -- 01.1-proving-theorems-about-nat.md
+- [manual] datatype/01.1-proving-theorems-about-nat.md
+- [manual] equality/01-equal-utilities.md
+- [manual] datatype/02-list.md
+- [manual] datatype/03-vector.md
 
-- [manual] Datatype -- 02-list.md
-- [manual] Datatype -- 03-vector.md
-
-- [manual] Class -- ABC
+- [manual] Class
 - [manual] Implicit & VagueClass
 
 # refactor
