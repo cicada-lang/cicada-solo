@@ -65,15 +65,26 @@ function add(x: Nat, y: Nat): Nat {
     case zero => y
     // If `x` is `Nat.add1(prev)`,
     //   the result of `add` is `add1` to `add(prev)`.
-    case add1(prev, almost) => Nat.add1(almost.prev)
+    case add1(_prev, almost) => Nat.add1(almost.prev)
   }
 }
 ```
 
-Note that, we did not recursively call `add(prev)`,
-but use `almost.prev` to get the result of the recursive call.
+Note that,
 
-- i.e. `almost.prev` is the same as `add(prev)`
+- We did not recursively call `add(prev)`,
+  but use `almost.prev` to get the result of the recursive call,
+
+  - i.e. `almost.prev` is the same as `add(prev)`.
+
+  - i.e. `induction` is like pattern matching,
+    but an extra argument called `almost` is given to the caller,
+    in which we can get the results of recursive calls.
+
+- We often add a `_` prefix for a name taken from pattern matching,
+  but not used in the following code.
+
+  - `_prev` is a example of this situation.
 
 Let's write some tests.
 
@@ -93,7 +104,6 @@ This is called **currying**.
 ``` cicada
 check! add: (Nat, Nat) -> Nat
 check! add(one): (Nat) -> Nat
-check! add(one)(one): Nat
 check! add(one, one): Nat
 ```
 
@@ -134,6 +144,9 @@ function induction_nat(
 ```
 
 # mul
+
+After understand the definition of `add`,
+we naturally want to define `mul`.
 
 ``` cicada
 function mul(x: Nat, y: Nat): Nat {
