@@ -9,8 +9,8 @@
     "default",
     "Basic",
     "Module",
-    "Equality",
     "Datatype",
+    "Equality",
     "Class",
     "Implicit & Vague"
   ]
