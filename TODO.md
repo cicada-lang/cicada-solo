@@ -1,4 +1,8 @@
-- [manual] Datatype
+- [manual] Datatype -- 01.1-proving-theorems-about-nat.md
+
+- [manual] Datatype -- 02-list.md
+- [manual] Datatype -- 03-vector.md
+
 - [manual] Class -- ABC
 - [manual] Implicit & VagueClass
 

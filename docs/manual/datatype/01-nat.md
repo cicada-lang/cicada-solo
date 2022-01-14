@@ -145,7 +145,7 @@ function induction_nat(
 
 # mul
 
-After understand the definition of `add`,
+After understood the definition of `add`,
 we naturally want to define `mul`.
 
 ``` cicada
@@ -156,6 +156,10 @@ function mul(x: Nat, y: Nat): Nat {
   }
 }
 ```
+
+Let write some tests,
+we use `{ ...; return ... }` to make the name `twelve`
+only visible inside the following `{ ... }`.
 
 ``` cicada
 {
@@ -170,6 +174,10 @@ function mul(x: Nat, y: Nat): Nat {
 
 # power_of & power
 
+Next we define power function.
+
+`power_of(x, y)` means `y` raised to the power of `x`.
+
 ``` cicada
 function power_of(x: Nat, y: Nat): Nat {
   return induction (x) {
@@ -179,11 +187,20 @@ function power_of(x: Nat, y: Nat): Nat {
 }
 ```
 
+We swap the argument to get a more natural reading of the function.
+
+`power(base, n)` means `base` raised to the power of `n`.
+
+- We define `power_of` first,
+  because its definition is similar to that of `add` and `mul`.
+
 ``` cicada
 function power(base: Nat, n: Nat): Nat {
   return power_of(n, base)
 }
 ```
+
+Some tests.
 
 ``` cicada
 same_as_chart! (Nat) [
@@ -195,14 +212,21 @@ same_as_chart! (Nat) [
 
 # gauss
 
+In primary school after the young Gauss misbehaved,
+his teacher gave him a task: adding the numbers from 1 to 100.
+
+`gauss(x)` calculates `0 + 1 + 2 + ... + x`,
+
 ``` cicada
-function gauss(x: Nat): Nat {
-  return induction (x) {
+function gauss(n: Nat): Nat {
+  return induction (n) {
     case zero => Nat.zero
     case add1(prev, almost) => add(Nat.add1(prev), almost.prev)
   }
 }
 ```
+
+Tests.
 
 ``` cicada
 same_as_chart! (Nat) [
@@ -213,124 +237,26 @@ same_as_chart! (Nat) [
 
 # factorial
 
+`factorial(n)` calculates `n!`.
+
+For example, `5! = 5 * 4 * 3 * 2 * 1 = 120`.
+
+Let's end this chapter with this famous function.
+
 ``` cicada
-function factorial(x: Nat): Nat {
-  return induction (x) {
+function factorial(n: Nat): Nat {
+  return induction (n) {
     case zero => Nat.add1(Nat.zero)
     case add1(prev, almost) => mul(Nat.add1(prev), almost.prev)
   }
 }
 ```
 
+Tests.
+
 ``` cicada
 same_as_chart! (Nat) [
   factorial(five),
   add(mul(ten, ten), mul(two, ten))
 ]
-```
-
-# add_commute
-
-## equal_map
-
-``` cicada
-function equal_map(
-  implicit X: Type,
-  implicit from: X,
-  implicit to: X,
-  target: Equal(X, from, to),
-  implicit Y: Type,
-  f: (X) -> Y,
-): Equal(Y, f(from), f(to)) {
-  return replace(
-    target,
-    (x) => Equal(Y, f(from), f(x)),
-    refl,
-  )
-}
-```
-
-## equal_swap
-
-``` cicada
-function equal_swap(
-  implicit A: Type,
-  implicit x: A,
-  implicit y: A,
-  xy_equal: Equal(A, x, y),
-): Equal(A, y, x) {
-  return replace(
-    xy_equal,
-    (w) => Equal(A, w, x),
-    refl,
-  )
-}
-```
-
-## equal_compose
-
-``` cicada
-function equal_compose(
-  implicit A: Type,
-  implicit x: A,
-  implicit y: A,
-  xy_equal: Equal(A, x, y),
-  implicit z: A,
-  yz_equal: Equal(A, y, z),
-): Equal(A, x, z) {
-  return replace(
-    yz_equal,
-    (w) => Equal(A, x, w),
-    xy_equal,
-  )
-}
-```
-
-## add_zero_commute
-
-``` cicada
-function add_zero_commute(
-  x: Nat
-): Equal(Nat, add(zero, x), add(x, zero)) {
-  return induction (x) {
-    (x) => Equal(Nat, add(zero, x), add(x, zero))
-    case zero => refl
-    case add1(prev, almost) => equal_map(almost.prev, Nat.add1)
-  }
-}
-```
-
-## add_add1_commute
-
-``` cicada
-function add_add1_commute(
-  x: Nat, y: Nat,
-): Equal(Nat, add(x, Nat.add1(y)), Nat.add1(add(x, y))) {
-  return induction (x) {
-    (x) => Equal(Nat, add(x, Nat.add1(y)), Nat.add1(add(x, y)))
-    case zero => refl
-    case add1(prev, almost) => equal_map(almost.prev, Nat.add1)
-  }
-}
-```
-
-## add_commute
-
-``` cicada
-function add_commute(
-  x: Nat, y: Nat,
-): Equal(Nat, add(x, y), add(y, x)) {
-  return induction (x) {
-    (x) => Equal(Nat, add(x, y), add(y, x))
-    case zero => add_zero_commute(y)
-    case add1(prev, almost) =>
-      equal_compose(
-        equal_map(almost.prev, Nat.add1),
-        equal_swap(add_add1_commute(y, prev)),
-      )
-  }
-}
-
-add_commute(two, three)
-add_commute(three, two)
 ```
