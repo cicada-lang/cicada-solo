@@ -1,4 +1,3 @@
-- [manual] Introduction
 - [manual] Datatype
 - [manual] Class -- ABC
 - [manual] Implicit & VagueClass
