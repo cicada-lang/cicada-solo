@@ -1,4 +1,4 @@
-# 蝉语 / Cicada Language
+# Cicada Language
 
 [ [HOMEPAGE](https://cicada-lang.org)
 | [MANUAL](https://readonly.link/manuals/gitlab.com/cicada-lang/cicada)
@@ -13,23 +13,6 @@ developing software and developing mathematics
 are increasingly the same kind of activity,
 and people who practices these developments,
 can learn from each other, and help each other in very good ways.
-
-## Install
-
-```
-npm i -g @cicada-lang/cicada
-```
-
-## Usage
-
-### Web Services
-
-The [cicada-lang.org](https://cicada-lang.org) website provides many web services,
-to help authors organize their projects and share with others.
-
-### Command Line Interface
-
-After installed the `@cicada-lang/cicada` package, you can run `cic help` to see help messages.
 
 ## Development
 
