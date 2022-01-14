@@ -83,8 +83,8 @@ We can use `cons` to construct `Pair`.
 check! cons("abc", sole): Pair(String, Trivial)
 ```
 
-And using `car` take a `Pair`'s first element,
-using `cdr` to take a `Pair`'s second element.
+And using `car` to get a `Pair`'s first element,
+using `cdr` to get a `Pair`'s second element.
 
 - `cons`, `car` and `cdr`.
 
@@ -139,10 +139,10 @@ same_as_chart! (Pair(Type, Pair(String, Trivial))) [
 
 # Sigma
 
-We write `Sigma` type as `[x: A | C]`,
+We write **`Sigma` type** as `[x: A | C]`,
 where `x` might occur in `C`, or say, `C` depends on `x`.
 
-This is why `Sigma` is called **dependent pair type**.
+This is why `Sigma` is also called **dependent pair type**.
 
 We read `[x: A | C]` as
 
@@ -150,7 +150,7 @@ We read `[x: A | C]` as
 
 For `Pair` the second type is fixed,
 while for `Sigma` the second type can change,
-when first expression is different.
+when the first expression is different.
 
 ``` cicada
 check! [x: Pair(Type, Type) | car(x)]: Type
@@ -171,9 +171,9 @@ same_as_chart! (Type) [
 
 # Function
 
-We write function as `(A) -> R`,
-where `A` is the argument type,
-and `R` is the return type.
+We write **function type** as `(A) -> R`,
+where `A` is the **argument type**,
+and `R` is the **return type**.
 
 ``` cicada
 check! (String) -> Trivial: Type
@@ -185,7 +185,9 @@ which is also famously called **lambda**.
 
 ``` cicada
 check! (x) => sole: (String) -> Trivial
-check! (pair) => cons(cdr(pair), car(pair)): (Pair(String, Trivial)) -> Pair(Trivial, String)
+
+check! (pair) => cons(cdr(pair), car(pair)):
+  (Pair(String, Trivial)) -> Pair(Trivial, String)
 ```
 
 We can use `let <name>: <type> = <exp>` to give an anonymous function a name.
@@ -211,18 +213,19 @@ check! swap_pair(pair): Pair(Trivial, String)
 
 # Pi
 
-We write `Pi` type as `(x: A) -> R`,
-where `x` might occur in `R`, or say, `R` depends on `x`.
+We write **`Pi` type** as `(x: A) -> R`,
+just like function type, `A` is the **argument type**, and `R` is the **return type**,
+but this time, `x` might occur in `R`, or say, `R` depends on `x`.
 
-This is why `Pi` is called **dependent function type**.
+This is why `Pi` is also called **dependent function type**.
 
 We read `(x: A) -> R` as
 
 > For all `x` in `A`, `R` is true.
 
 For function type the return type is fixed,
-while for `Pi` the return type can change,
-when the argument expression is different.
+while for `Pi`, when the argument expression is different,
+the return type can change.
 
 ``` cicada
 check! (T: Type) -> (T) -> T: Type
@@ -257,11 +260,13 @@ check! Absurd: Type
 ```
 
 We have a built-in function called `from_falsehood_anything`,
-if you have a element of type `Absurd`,
+
+If you have a element of type `Absurd`,
 you can use it to prove anything.
 
 ``` cicada
-check! from_falsehood_anything: (target: Absurd, motive: Type) -> motive
+check! from_falsehood_anything:
+  (target: Absurd, motive: Type) -> motive
 ```
 
 When we want to express a proposition is not true,
@@ -312,7 +317,13 @@ but we can not construct elements of this type.
 
 ``` cicada
 check! Equal(String, "abc", "de"): Type
+
+// NOTE There is no way by which we can construct
+//   an element of the type above.
 ```
+
+By the way, we use `// ...` to write comments in code,
+just like the above two lines.
 
 ------
 

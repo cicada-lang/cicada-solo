@@ -1,6 +1,6 @@
-(_) => List(_): (_: Type) -> Type
+(E) => List(E): (E: Type) -> Type
 List(String): Type
-List.null(vague String): List(String)
+List(Trivial): Type
 List.null(vague String): List(String)
 List.cons(vague String, "a", List.null(vague String)): List(String)
 List.cons(vague String, "a", List.cons(vague String, "b", List.null(vague String))): List(String)
