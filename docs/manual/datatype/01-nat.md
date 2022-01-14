@@ -107,7 +107,7 @@ same_as_chart! (Nat) [
 ]
 ```
 
-# About induction over `Nat`
+# About induction over Nat
 
 By using `induction`, we are defining function using **recursive combinator**.
 
