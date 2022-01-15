@@ -274,16 +274,9 @@ F(1) = 1
 F(n) = F(n-1) + F(n-2)
 ```
 
-| n | F(n) |
-|--:|:-----|
-| 0 | 0    |
-| 1 | 1    |
-| 2 | 1    |
-| 3 | 2    |
-| 4 | 3    |
-| 5 | 5    |
-| 6 | 8    |
-| 7 | 13   |
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7  |
+|---|---|---|---|---|---|---|----|
+| 0 | 1 | 1 | 2 | 3 | 5 | 8 | 13 |
 
 We use an iterative process for computing the Fibonacci numbers.
 The idea is to use a pair of integers `current` and `next`,
