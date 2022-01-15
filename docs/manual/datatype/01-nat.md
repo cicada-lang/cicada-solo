@@ -260,3 +260,70 @@ same_as_chart! (Nat) [
   add(mul(ten, ten), mul(two, ten))
 ]
 ```
+
+# fibonacci
+
+Actually, before we end this chapter,
+let's define another very famous function -- the Fibonacci function.
+
+- Thanks `u/hugogrant` for [asking about this example](https://www.reddit.com/r/ProgrammingLanguages/comments/s4crfg/comment/hsqgye6/?utm_source=share&utm_medium=web2x&context=3).
+
+``` plaintext
+F(0) = 0
+F(1) = 1
+F(n) = F(n-1) + F(n-2)
+```
+
+| n | F(n) |
+|---|------|
+| 0 | 0    |
+| 1 | 1    |
+| 2 | 1    |
+| 3 | 2    |
+| 4 | 3    |
+| 5 | 5    |
+| 6 | 8    |
+| 7 | 13   |
+
+We use an iterative process for computing the Fibonacci numbers.
+The idea is to use a pair of integers `current` and `next`,
+initialized `F(0) = 1` and `F(0) = 0`,
+and to repeatedly apply the simultaneous transformations:
+
+``` plaintext
+current <- next
+next <- current + next
+```
+
+First, we define a helper function -- `fibonacci_iter`, for the iterative process.
+
+``` cicada
+function fibonacci_iter(count: Nat): (current: Nat, next: Nat) -> Nat {
+  return induction (count) {
+    case zero =>
+      (current, next) => current
+    case add1(_prev, almost) =>
+      (current, next) => almost.prev(next, add(current, next))
+  }
+}
+```
+
+Then we can define the `fibonacci` using `fibonacci_iter`.
+
+``` cicada
+function fibonacci(n: Nat): Nat {
+  return fibonacci_iter(n, Nat.zero, Nat.add1(Nat.zero))
+}
+```
+
+Tests.
+
+``` cicada
+fibonacci(zero)
+fibonacci(one)
+fibonacci(two)
+fibonacci(three)
+fibonacci(four)
+fibonacci(five)
+fibonacci(six)
+```

@@ -2,7 +2,7 @@
   "title": "Cicada Language Manual",
   "version": "0.1.0",
   "authors": ["Xie Yuheng"],
-  "date": "2022",
+  "year": "2022",
   "src": "docs/manual",
   "main": "00.1-introduction.md",
   "sections": [

@@ -8,7 +8,7 @@
 - [manual] datatype/03-vector.md
 
 - [manual] Class
-- [manual] Implicit & VagueClass
+- [manual] Implicit & Vague
 
 # refactor
 
