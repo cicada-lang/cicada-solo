@@ -149,8 +149,8 @@ We read `[x: A | C]` as
 > There exists `x` in `A`, such that `C` is true.
 
 For `Pair` the second type is fixed,
-while for `Sigma` the second type can change,
-when the first expression is different.
+while for `Sigma`, when the first expression is different,
+the second type can change,
 
 ``` cicada
 check! [x: Pair(Type, Type) | car(x)]: Type
