@@ -39,16 +39,18 @@ and use them to write tests in the following code.
 
 ``` cicada
 let zero = Nat.zero
-let one = Nat.add1(zero)
-let two = Nat.add1(one)
-let three = Nat.add1(two)
-let four = Nat.add1(three)
-let five = Nat.add1(four)
-let six = Nat.add1(five)
-let seven = Nat.add1(six)
-let eight = Nat.add1(seven)
-let nine = Nat.add1(eight)
-let ten = Nat.add1(nine)
+let add1 = Nat.add1
+
+let one = add1(zero)
+let two = add1(one)
+let three = add1(two)
+let four = add1(three)
+let five = add1(four)
+let six = add1(five)
+let seven = add1(six)
+let eight = add1(seven)
+let nine = add1(eight)
+let ten = add1(nine)
 ```
 
 # add
@@ -60,12 +62,12 @@ We can use the `induction` keyword to define functions that operates over `Nat`.
 ``` cicada
 function add(x: Nat, y: Nat): Nat {
   return induction (x) {
-    // If `x` is `Nat.zero`,
+    // If `x` is `zero`,
     //   the result of `add` is simply `y`.
     case zero => y
-    // If `x` is `Nat.add1(prev)`,
+    // If `x` is `add1(prev)`,
     //   the result of `add` is `add1` to `add(prev)`.
-    case add1(_prev, almost) => Nat.add1(almost.prev)
+    case add1(_prev, almost) => add1(almost.prev)
   }
 }
 ```
@@ -129,11 +131,11 @@ If we view `induction` over `Nat` as a function, it roughly has the following de
 function induction_nat(
   target: Nat,
   motive: (Nat) -> Type,
-  case_of_zero: motive(Nat.zero),
+  case_of_zero: motive(zero),
   case_of_add1: (
     prev: Nat,
     almost: class { prev: motive(prev) },
-  ) -> motive(Nat.add1(prev)),
+  ) -> motive(add1(prev)),
 ): motive(target) {
   return induction (target) {
     motive
@@ -151,7 +153,7 @@ we naturally want to define `mul`.
 ``` cicada
 function mul(x: Nat, y: Nat): Nat {
   return induction (x) {
-    case zero => Nat.zero
+    case zero => zero
     case add1(_prev, almost) => add(almost.prev, y)
   }
 }
@@ -181,7 +183,7 @@ Next we define power function.
 ``` cicada
 function power_of(x: Nat, y: Nat): Nat {
   return induction (x) {
-    case zero => Nat.add1(Nat.zero)
+    case zero => add1(zero)
     case add1(prev, almost) => mul(almost.prev, y)
   }
 }
@@ -220,8 +222,8 @@ his teacher gave him a task: adding the numbers from 1 to 100.
 ``` cicada
 function gauss(n: Nat): Nat {
   return induction (n) {
-    case zero => Nat.zero
-    case add1(prev, almost) => add(Nat.add1(prev), almost.prev)
+    case zero => zero
+    case add1(prev, almost) => add(add1(prev), almost.prev)
   }
 }
 ```
@@ -246,8 +248,8 @@ Let's end this chapter with this famous function.
 ``` cicada
 function factorial(n: Nat): Nat {
   return induction (n) {
-    case zero => Nat.add1(Nat.zero)
-    case add1(prev, almost) => mul(Nat.add1(prev), almost.prev)
+    case zero => add1(zero)
+    case add1(prev, almost) => mul(add1(prev), almost.prev)
   }
 }
 ```
@@ -305,7 +307,7 @@ Then we can define the `fibonacci` using `fibonacci_iter`.
 
 ``` cicada
 function fibonacci(n: Nat): Nat {
-  return fibonacci_iter(n, Nat.zero, Nat.add1(Nat.zero))
+  return fibonacci_iter(n, zero, add1(zero))
 }
 ```
 
