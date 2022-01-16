@@ -101,7 +101,7 @@ export const import_entry = {
     "import_entry:name": [{ name: "identifier" }, { $ap: ["optional", '","'] }],
     "import_entry:name_alias": [
       { name: "identifier" },
-      '":"',
+      '"as"',
       { alias: "identifier" },
       { $ap: ["optional", '","'] },
     ],

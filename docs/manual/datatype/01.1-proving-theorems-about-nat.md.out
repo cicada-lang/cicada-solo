@@ -1,2 +1,10 @@
+(x: Nat, y: Nat) -> Equal(Nat, induction (x) { (_) => Nat case zero => y case add1(_prev, almost) => Nat.add1(almost.prev) }, induction (y) { (_) => Nat case zero => x case add1(_prev, almost) => Nat.add1(almost.prev) }): Type
+refl(vague Nat, vague Nat.zero): Equal(Nat, Nat.zero, Nat.zero)
+refl(vague Nat, vague Nat.add1(Nat.zero)): Equal(Nat, Nat.add1(Nat.zero), Nat.add1(Nat.zero))
+refl(vague Nat, vague Nat.add1(Nat.zero)): Equal(Nat, Nat.add1(Nat.zero), Nat.add1(Nat.zero))
+refl(vague Nat, vague Nat.add1(Nat.zero)): Equal(Nat, Nat.add1(Nat.zero), Nat.add1(Nat.zero))
+refl(vague Nat, vague Nat.add1(Nat.zero)): Equal(Nat, Nat.add1(Nat.zero), Nat.add1(Nat.zero))
+refl(vague Nat, vague Nat.add1(Nat.zero)): Equal(Nat, Nat.add1(Nat.zero), Nat.add1(Nat.zero))
+refl(vague Nat, vague Nat.add1(Nat.zero)): Equal(Nat, Nat.add1(Nat.zero), Nat.add1(Nat.zero))
 refl(vague Nat, vague Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))))): Equal(Nat, Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))), Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))))
-refl(vague Nat, vague Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))))): Equal(Nat, Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))), Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))))
+refl(vague Nat, vague Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero)))))))): Equal(Nat, Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))))), Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.add1(Nat.zero))))))))

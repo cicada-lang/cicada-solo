@@ -39,7 +39,7 @@ We use `Nat: NatFromURL` to rename the imported definition.
 
 ``` cicada
 import {
-  Nat: NatFromURL
+  Nat as NatFromURL
 } from "https://cdn.jsdelivr.net/gh/xieyuheng/the-little-typer-exercises@0.0.2/src/02.md"
 
 NatFromURL.zero
