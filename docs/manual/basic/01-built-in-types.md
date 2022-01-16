@@ -313,13 +313,12 @@ check! refl: Equal(Trivial, sole, sole)
 
 If the two elements are actually not the same,
 we can still use `Equal` to create a `Type`,
-but we can not construct elements of this type.
+but we will not be able to construct any elements of this type.
 
 ``` cicada
-check! Equal(String, "abc", "de"): Type
-
 // NOTE There is no way by which we can construct
-//   an element of the type above.
+//   an element of the following type.
+check! Equal(String, "abc", "de"): Type
 ```
 
 By the way, we use `// ...` to write comments in code,
