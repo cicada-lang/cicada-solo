@@ -1,12 +1,12 @@
-- [manual] class -- 01-record
-- [manual] class -- 02-inheritance
-- [manual] class -- 03-fulfilling-type
+- [manual] class/02-inheritance.md
+- [manual] class/03-fulfilling-type.md
 
 - [manual] equality/01-equal-utilities.md
 - [manual] datatype/02-list.md
 - [manual] datatype/03-vector.md
 
-- [manual] Implicit & Vague
+- [manual] implicit-n-vague/01-implicit.md
+- [manual] implicit-n-vague/02-vague.md
 
 # refactor
 

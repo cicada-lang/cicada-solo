@@ -1,8 +1,0 @@
-{ a: Trivial, b: sole, c: "c" }: class {
-  a: Type
-  b: a1
-  c: String
-}
-Trivial: Type
-sole: Trivial
-"c": String
