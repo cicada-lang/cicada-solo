@@ -1,4 +1,3 @@
-- [manual] class/02-inheritance.md
 - [manual] class/03-fulfilling-type.md
 
 - [manual] equality/01-equal-utilities.md

@@ -3,21 +3,25 @@ section: Class
 title: Inheritance
 ---
 
-> **Works on this chapter is not finished yet.**
+We can combine `class` and `extends`
+to extend an existing `class`.
 
 ``` cicada
-class ABC {
-  a: Type
-  b: a
-  c: String
-}
+import { ABC } from "./01-class-n-object.md"
 
 class ABCEFG extends ABC {
   e: Type
   f: e
   g: String
 }
+```
 
+If feels like the fields of the extension
+is merged into the fields of `ABC`.
+
+Object construction works as usual.
+
+``` cicada
 let abcefg: ABCEFG = {
   a: Trivial,
   b: sole,
@@ -26,9 +30,11 @@ let abcefg: ABCEFG = {
   f: sole,
   g: "g",
 }
+```
 
-abcefg
+So does the **dot notation**.
 
+``` cicada
 abcefg.a
 abcefg.b
 abcefg.c

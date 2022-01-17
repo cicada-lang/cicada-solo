@@ -4,7 +4,7 @@ title: Class & Object
 ---
 
 Like most of programming languages,
-we use the `class` keyword to define class.
+we use the `class` keyword to define `class`s.
 
 ``` cicada
 class ABC {
@@ -52,7 +52,7 @@ let my_abc: ABC = {
 }
 ```
 
-We can get the fields of an object by **dot notation**.
+We can get the fields of an object by the **dot notation**.
 
 ``` cicada
 check! my_abc.a: Type
