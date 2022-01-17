@@ -1,5 +1,3 @@
-- [manual] class/03-fulfilling-type.md
-
 - [manual] equality/01-equal-utilities.md
 - [manual] datatype/02-list.md
 - [manual] datatype/03-vector.md

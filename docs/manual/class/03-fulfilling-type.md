@@ -3,58 +3,66 @@ section: Class
 title: Fulfilling Type
 ---
 
-> **Works on this chapter is not finished yet.**
+A `class` is a `Type`.
 
-``` cicada todo
-class ABC { a: Type, b: a, c: String }
+**Fulfilling type** means that,
+
+> A partly fulfilled `class` is also a `Type`.
+
+We can partly fulfill a `class` by apply it to arguments,
+its fields will be fulfilled one by one.
+
+``` cicada
+import { ABC } from "./01-class-n-object.md"
 
 check! ABC: Type
+
 check! ABC(Trivial): Type
 check! ABC(Trivial, sole): Type
 check! ABC(Trivial, sole, "c"): Type
 
-// ABC :> ABC(Trivial) :> ABC(Trivial, sole) :> ABC(Trivial, sole, "c")
-
-let abc: ABC(Trivial, sole) = {
-  a: Trivial, b: sole, c: "c"
-}
-
-abc
-
-abc.a
-abc.b
-abc.c
-
-let fulled: ABC(Trivial, sole, "c") = {
-  a: Trivial, b: sole, c: "c"
-}
-
-fulled
-
-fulled.a
-fulled.b
-fulled.c
+check! ABC(String): Type
+check! ABC(String, "b"): Type
+check! ABC(String, "b", "c"): Type
 ```
+
+The object construction works as usual.
+
+``` cicada
+check! { a: Trivial, b: sole, c: "c" }: ABC(Trivial)
+check! { a: Trivial, b: sole, c: "c" }: ABC(Trivial, sole)
+check! { a: Trivial, b: sole, c: "c" }: ABC(Trivial, sole, "c")
+```
+
+**NOTE Subtyping is working in progress.**
+
+For examples,
+
+- `ABC(Trivial)` will be a subtype of `ABC`;
+- `ABC(Trivial, sole)` will be a subtype of `ABC(Trivial)`.
 
 # Prefilled Class
 
-``` cicada todo
-class ABC { a: Type = Trivial, b: a, c: String }
+Except be fulfilled, a `class` can also be prefilled.
 
-let abc: ABC(Trivial, sole) = {
+``` cicada todo
+class PrefilledABC {
+  a: Type = Trivial,
+  b: a,
+  c: String,
+}
+
+check! {
   a: Trivial,
   b: sole,
   c: "c",
-}
+}: PrefilledABC
+```
 
-abc
+Prefilled fields need not to be at the beginning.
 
-abc.a
-abc.b
-abc.c
-
-
-class ABCDE {
+``` cicada
+class PrefilledABCDE {
   a: Type
   b: a
   c: String = "c"
@@ -62,19 +70,24 @@ class ABCDE {
   e: String
 }
 
-let abcde: ABCDE(Trivial, sole, "c") = {
+check! {
   a: Trivial,
   b: sole,
   c: "c",
   d: "d",
   e: "e",
-}
+}: PrefilledABCDE
+```
 
-abcde
+Prefilled `class` can also be fulfilled by applying the `class` to arguments,
+note that the prefilled fields must be the same.
 
-abcde.a
-abcde.b
-abcde.c
-abcde.d
-abcde.e
+``` cicada
+check! {
+  a: Trivial,
+  b: sole,
+  c: "c",
+  d: "d",
+  e: "e",
+}: PrefilledABCDE(Trivial, sole, "c")
 ```
