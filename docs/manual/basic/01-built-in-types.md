@@ -90,6 +90,8 @@ using `cdr` to get a `Pair`'s second element.
 
   Yes, that's Lisp's DNA, dancing in our cells.
 
+  Thanks, John McCarthy (1927 - 2011).
+
 ``` cicada
 let pair: Pair(String, Trivial) = cons("abc", sole)
 

@@ -219,6 +219,8 @@ his teacher gave him a task: adding the numbers from 1 to 100.
 
 `gauss(x)` calculates `0 + 1 + 2 + ... + x`,
 
+- Thanks, Carl Friedrich Gauss (1777 - 1855), you are the prince of mathematics!
+
 ``` cicada
 function gauss(n: Nat): Nat {
   return induction (n) {
