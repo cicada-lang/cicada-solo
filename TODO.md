@@ -1,7 +1,12 @@
 - [manual] implicit-n-vague/01-implicit-arguments.md
 - [manual] implicit-n-vague/02-vague-arguments.md
 
+- [manual] class/04-mathematical-structure-as-class.md
+
+  - Mathematical Structure as Class
+
 - [manual] equality/01-equal-utilities.md
+
 - [manual] datatype/02-list.md
 - [manual] datatype/03-vector.md
 
