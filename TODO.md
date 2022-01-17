@@ -1,8 +1,11 @@
+- [manual] class -- 01-record
+- [manual] class -- 02-inheritance
+- [manual] class -- 03-fulfilling-type
+
 - [manual] equality/01-equal-utilities.md
 - [manual] datatype/02-list.md
 - [manual] datatype/03-vector.md
 
-- [manual] Class
 - [manual] Implicit & Vague
 
 # refactor

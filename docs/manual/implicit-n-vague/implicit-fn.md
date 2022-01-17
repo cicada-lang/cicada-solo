@@ -3,6 +3,8 @@ section: Implicit & Vague
 title: Implicit Function
 ---
 
+> **Works on this chapter is not finished yet.**
+
 # The bound variable name of `im-fn` does not matter.
 
 ``` cicada

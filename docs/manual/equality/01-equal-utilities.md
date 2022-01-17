@@ -3,6 +3,8 @@ section: Equality
 title: Equal Utilities
 ---
 
+> **Works on this chapter is not finished yet.**
+
 To understand `Equal` better,
 let's write some helper functions for it.
 

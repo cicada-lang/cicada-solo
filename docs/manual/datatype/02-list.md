@@ -3,6 +3,8 @@ section: Datatype
 title: List
 ---
 
+> **Works on this chapter is not finished yet.**
+
 If `Nat` is the most basic `datatype`,
 `List` is the next basic `datatype`.
 

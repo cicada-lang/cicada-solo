@@ -3,6 +3,8 @@ section: Implicit & Vague
 title: Implicit Application
 ---
 
+> **Works on this chapter is not finished yet.**
+
 # implicit argument insertion when applying implicit function
 
 ``` cicada

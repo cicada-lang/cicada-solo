@@ -3,6 +3,8 @@ section: Implicit & Vague
 title: Vague Pi
 ---
 
+> **Works on this chapter is not finished yet.**
+
 # my_cons
 
 ``` cicada

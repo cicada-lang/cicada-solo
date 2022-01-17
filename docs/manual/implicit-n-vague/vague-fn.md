@@ -3,6 +3,8 @@ section: Implicit & Vague
 title: Vague Function
 ---
 
+> **Works on this chapter is not finished yet.**
+
 # List
 
 ``` cicada

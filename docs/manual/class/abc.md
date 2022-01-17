@@ -3,6 +3,8 @@ section: Class
 title: ABC
 ---
 
+> **Works on this chapter is not finished yet.**
+
 ``` cicada
 class ABC { a: Type, b: a, c: String }
 

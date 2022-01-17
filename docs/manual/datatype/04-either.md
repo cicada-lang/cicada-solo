@@ -3,6 +3,8 @@ section: Datatype
 title: Either
 ---
 
+> **Works on this chapter is not finished yet.**
+
 # Either
 
 ``` cicada
