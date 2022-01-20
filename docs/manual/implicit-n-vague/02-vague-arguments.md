@@ -24,8 +24,9 @@ check! List.null: List(String)
 check! List.null: List(Trivial)
 ```
 
-`List.null` can be both `List(String)` and `List(Trivial)`,
-because `List.null` has been `vague` about its argument.
+How can `List.null` be both `List(String)` and `List(Trivial)`?
+
+Because `List.null` has been `vague` about its argument.
 
 The type of `List.null` is actually `(vague E: Type) -> List(E)`.
 
