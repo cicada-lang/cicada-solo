@@ -57,14 +57,14 @@ First, implicit `Pi` type is a `Type`.
 
 If we omit an implicit argument in a function application,
 the type checker will infer the type of the next non-implicit argument,
-and use this type to resolve the implicit argument, and insert it.
+and use this information to resolve the implicit argument, and insert it.
 
 Suppose I am the type checker, when I see `id("abc")`,
 
-1. I infer `id` to be `(implicit T: Type, x: T) -> T`,
-2. I infer the argument `"abc"` to be `String`,
-3. I know `T = String`,
-5. I insert the implicit argument for `id("abc")`, to get `id(implicit String, "abc")`.
+1. I infer `id` to be `(implicit T: Type, x: T) -> T`;
+2. I infer the argument `"abc"` to be `String`;
+3. Now I know `T = String`;
+4. I insert the implicit argument for `id("abc")`, to get `id(implicit String, "abc")`.
 
 Thus the following expressions are the same.
 
@@ -78,6 +78,8 @@ same_as_chart! (String) [
 # Using the implicit value
 
 We can use the implicit value in function body.
+
+An example would be a function that can return the type of its argument.
 
 ``` cicada
 function typeof(implicit T: Type, T): Type {

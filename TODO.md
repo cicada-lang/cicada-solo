@@ -1,5 +1,3 @@
-- [manual] implicit-n-vague/02-vague-arguments.md
-
 - [manual] class/04-mathematical-structure-as-class.md
 
   - Mathematical Structure as Class
