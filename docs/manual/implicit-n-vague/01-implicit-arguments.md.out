@@ -4,3 +4,6 @@ sole: Trivial
 sole: Trivial
 (implicit T: Type, x: T) -> T: Type
 refl: Equal(String, "abc", "abc")
+String: Type
+Trivial: Type
+Trivial: Type

@@ -74,3 +74,65 @@ same_as_chart! (String) [
   id(implicit String, "abc"),
 ]
 ```
+
+# Using the implicit value
+
+We can use the implicit value in function body.
+
+``` cicada
+function typeof(implicit T: Type, T): Type {
+  return T
+}
+
+typeof("abc")  // String
+typeof(sole)   // Trivial
+```
+
+# Multiple implicit arguments
+
+We can use multiple implicit arguments to find the `car` type of a `Pair`.
+
+``` cicada
+function car_type(
+  implicit A: Type,
+  implicit B: Type,
+  pair: Pair(A, B),
+): Type {
+  return A
+}
+
+let pair: Pair(Trivial, String) = cons(sole, "a")
+
+car_type(pair)  // Trivial
+```
+
+# Limits
+
+We do *not* support implicit argument over implicit argument.
+
+**The following is a counterexample.**
+
+``` cicada counterexample
+function k(
+  implicit A: Type,
+  implicit B: Type,
+  x: A,
+  y: B,
+): A {
+  return x
+}
+```
+
+*Nor* do we support implicit argument over one normal argument.
+
+**The following is a counterexample.**
+
+``` cicada counterexample
+function k(
+  implicit A: Type,
+  Trivial,
+  x: A,
+): A {
+  return x
+}
+```
