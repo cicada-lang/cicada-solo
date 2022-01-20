@@ -1,4 +1,4 @@
-- [manual] implicit-n-vague/01-implicit-arguments.md
+- [manual] implicit-n-vague/01-implicit-arguments.md -- improve
 - [manual] implicit-n-vague/02-vague-arguments.md
 
 - [manual] class/04-mathematical-structure-as-class.md

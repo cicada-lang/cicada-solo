@@ -1,0 +1,6 @@
+"abc": String
+sole: Trivial
+"abc": String
+sole: Trivial
+(implicit T: Type, x: T) -> T: Type
+refl: Equal(String, "abc", "abc")
