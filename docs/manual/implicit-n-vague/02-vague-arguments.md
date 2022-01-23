@@ -5,7 +5,7 @@ title: Vague Arguments
 
 Remind the definition of `List`.
 
-``` cicada
+```cicada
 datatype List(E: Type) {
   null: List(E)
   cons(head: E, tail: List(E)): List(E)
@@ -14,13 +14,13 @@ datatype List(E: Type) {
 
 After the definition `List.null` is a `List(String)`.
 
-``` cicada
+```cicada
 check! List.null: List(String)
 ```
 
 `List.null` is also a `List(Trivial)`.
 
-``` cicada
+```cicada
 check! List.null: List(Trivial)
 ```
 
@@ -30,13 +30,13 @@ Because `List.null` has been `vague` about its argument.
 
 The type of `List.null` is actually `(vague E: Type) -> List(E)`.
 
-``` cicada
+```cicada
 check! List.null: (vague E: Type) -> List(E)
 ```
 
 We can also explicitly apply `List.null` to a **vague argument**.
 
-``` cicada
+```cicada
 check! List.null(vague String): List(String)
 check! List.null(vague Trivial): List(Trivial)
 ```
@@ -52,7 +52,7 @@ we can use **vague arguments**
 to define a function -- `my_list_null`,
 who works just like the data constructor `List.null`.
 
-``` cicada
+```cicada
 function my_list_null(vague E: Type): List(E) {
   return List.null
 }
@@ -70,7 +70,7 @@ Suppose I am the type checker, I am checking `my_list_null: List(String)`.
 
 We can also define `my_list_cons` to be like `List.cons`.
 
-``` cicada
+```cicada
 function my_list_cons(vague E: Type, head: E, tail: List(E)): List(E) {
   return List.cons(head, tail)
 }

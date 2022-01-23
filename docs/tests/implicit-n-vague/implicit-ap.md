@@ -5,7 +5,7 @@ title: Implicit Application
 
 # implicit argument insertion when applying implicit function
 
-``` cicada
+```cicada
 function id(implicit A: Type, x: A): A {
   return x
 }
@@ -16,7 +16,7 @@ id(implicit String, "a")
 
 # multiple implicit arguments
 
-``` cicada
+```cicada
 function k(
   implicit A: Type, x: A,
   implicit B: Type, y: B,

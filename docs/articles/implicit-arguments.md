@@ -5,7 +5,7 @@ author: Xie Yuheng
 
 # Implicit function insertion
 
-``` cicada
+```cicada
 check! (x) => x: (implicit A: Type, A) -> A
 
 // Elaboration
@@ -19,7 +19,7 @@ check! (implicit A, x) => x: (implicit A: Type, A) -> A
 
 # Implicit application insertion
 
-``` cicada
+```cicada
 // Assume
 function id(implicit A: Type, x: A): A {
   return x
@@ -43,7 +43,7 @@ id(implicit String, "abc")
 
 ## What can go wrong
 
-``` cicada counterexample
+```cicada counterexample
 let poly: Maybe((implicit A: Type, A) -> A) =
   just((x) => x)
 ```
@@ -51,14 +51,14 @@ let poly: Maybe((implicit A: Type, A) -> A) =
 1. Infer `(implicit a: Type, a) -> Maybe(a)` for `just`
 2. Insert appilication to fresh meta `just(a)`
 3. Now we have `just(a): (a) -> Maybe(a)`
-2. Check `(x) => x` against `a`
-3. Unknown checking type, thus we do not know what to insert
-3. Infer `Maybe((b) -> b)` for `just((x) => x)`
-4. Fail to unify with `Maybe((implicit A: Type, A) -> A)`
+4. Check `(x) => x` against `a`
+5. Unknown checking type, thus we do not know what to insert
+6. Infer `Maybe((b) -> b)` for `just((x) => x)`
+7. Fail to unify with `Maybe((implicit A: Type, A) -> A)`
 
-# Implicit application insertion in *check-mode*
+# Implicit application insertion in _check-mode_
 
-We should distinguish between *check-mode* and *infer-mode* implicit arguments.
+We should distinguish between _check-mode_ and _infer-mode_ implicit arguments.
 
 For check-mode implicit arguments,
 we can implicit arguments from (and only from) return type.
@@ -67,7 +67,7 @@ We mark a pi type by the `vague` keyword
 to denote it can only be elaborated in check-mode,
 and such function application can not be curried.
 
-``` cicada
+```cicada
 datatype List(E: Type) {
   null: List(E)
   cons(head: E, tail: List(E)): List(E)
@@ -95,5 +95,6 @@ check! my_list_cons(vague String, "abc", List.null): List(String)
 When we want to make something implicit, we use unification.
 
 Examples:
+
 - global type inference
 - implicit function type

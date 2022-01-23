@@ -3,7 +3,7 @@ section: Class
 title: ABC
 ---
 
-``` cicada
+```cicada
 class ABC { a: Type, b: a, c: String }
 
 let abc: ABC = {

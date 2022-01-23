@@ -10,7 +10,7 @@ Let's write the identity function with implicit type argument.
 - `id1` is the same as `id2`, just in different syntax.
 - for `id1` and `id2`, an implicit function will be inserted to get `id3`.
 
-``` cicada
+```cicada
 function id1(implicit A: Type, x: A): A {
   return x
 }
@@ -29,7 +29,7 @@ id3("a")
 
 # return implicit value
 
-``` cicada
+```cicada
 function typeof(implicit T: Type, T): Type {
   return T
 }
@@ -40,7 +40,7 @@ typeof("abc")
 
 # multiple implicit arguments
 
-``` cicada
+```cicada
 function k(
   implicit A: Type, x: A,
   implicit B: Type, y: B,
@@ -53,7 +53,7 @@ k("abc", sole)
 
 # record of implicit arguments
 
-``` cicada
+```cicada
 let car_type_t = (
   implicit A: Type,
   implicit B: Type,
@@ -97,9 +97,9 @@ function cdr_type(
 cdr_type(the(Pair(Trivial, String), cons(sole, "a")))
 ```
 
-# do *not* support implicit argument over implicit argument
+# do _not_ support implicit argument over implicit argument
 
-``` cicada counterexample
+```cicada counterexample
 function k(
   implicit A: Type,
   implicit B: Type,
@@ -110,9 +110,9 @@ function k(
 }
 ```
 
-# do *not* support implicit argument over one argument
+# do _not_ support implicit argument over one argument
 
-``` cicada counterexample
+```cicada counterexample
 function k(
   implicit A: Type,
   Trivial,
@@ -127,7 +127,7 @@ function k(
 Definition is ok, but unification will fail, during the use of `my_car` and `my_cdr`,
 because we can not unify function yet.
 
-``` cicada
+```cicada
 function my_car(
   implicit A: Type,
   implicit B: (x: A) -> Type,

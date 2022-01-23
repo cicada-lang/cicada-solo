@@ -10,7 +10,7 @@ If `Nat` is the most basic `datatype`,
 
 # List
 
-``` cicada
+```cicada
 datatype List(E: Type) {
   null: List(E)
   cons(head: E, tail: List(E)): List(E)
@@ -19,7 +19,7 @@ datatype List(E: Type) {
 
 After the definition, `List` taken a `Type` is a `Type`.
 
-``` cicada
+```cicada
 check! List: (E: Type) -> Type
 check! List(String): Type
 check! List(Trivial): Type
@@ -27,7 +27,7 @@ check! List(Trivial): Type
 
 Let construct a `List` of "a", "b", "c", step by step.
 
-``` cicada
+```cicada
 check! List.null: List(String)
 check! List.cons("a", List.null): List(String)
 check! List.cons("a", List.cons("b", List.null)): List(String)
@@ -36,7 +36,7 @@ check! List.cons("a", List.cons("b", List.cons("c", List.null))): List(String)
 
 # About induction over List
 
-``` cicada
+```cicada
 function induction_list(
   implicit E: Type,
   target: List(E),
@@ -57,7 +57,7 @@ function induction_list(
 
 # length
 
-``` cicada
+```cicada
 import { Nat } from "./01-nat.md"
 
 function length(implicit E: Type, x: List(E)): Nat {
@@ -70,7 +70,7 @@ function length(implicit E: Type, x: List(E)): Nat {
 
 Tests.
 
-``` cicada
+```cicada
 same_as_chart! (Nat) [
   length(the(List(String), List.cons("a", List.cons("b", List.cons("c", List.null))))),
   Nat.add1(Nat.add1(Nat.add1(Nat.zero))),
@@ -79,7 +79,7 @@ same_as_chart! (Nat) [
 
 # append
 
-``` cicada
+```cicada
 function append(implicit E: Type, x: List(E), y: List(E)): List(E) {
   return induction (x) {
     case null => y
@@ -90,7 +90,7 @@ function append(implicit E: Type, x: List(E), y: List(E)): List(E) {
 
 Tests.
 
-``` cicada
+```cicada
 same_as_chart! (List(String)) [
   append(
     the(List(String), List.cons("a", List.cons("b", List.cons("c", List.null)))),
@@ -102,7 +102,7 @@ same_as_chart! (List(String)) [
 
 # reverse
 
-``` cicada
+```cicada
 function list_cons_back(implicit E: Type, e: E, x: List(E)): List(E) {
   return induction (x) {
     case null => List.cons(e, List.null)
@@ -120,7 +120,7 @@ function reverse(implicit E: Type, x: List(E)): List(E) {
 
 Tests.
 
-``` cicada
+```cicada
 same_as_chart! (List(String)) [
   list_cons_back("d", List.cons("a", List.cons("b", List.cons("c", List.null)))),
   List.cons("a", List.cons("b", List.cons("c", List.cons("d", List.null))))

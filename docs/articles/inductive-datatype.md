@@ -23,10 +23,10 @@ the art of inductive reasoning and discovering pattern.
 
 - We will generate `induction` eliminator from constructors of each datatype.
 
-  The input include one *type constructor* and many *data constructors*,
+  The input include one _type constructor_ and many _data constructors_,
   the arguments of type constructor are splitted into two groups:
-  *parameters* that are the same for all constructors,
-  and *indexes* that vary from constructor to constructor.
+  _parameters_ that are the same for all constructors,
+  and _indexes_ that vary from constructor to constructor.
 
   The output is the eliminator.
 
@@ -56,7 +56,7 @@ the art of inductive reasoning and discovering pattern.
 
 ## Nat
 
-``` cicada
+```cicada
 datatype Nat {
   zero: Nat
   add1(prev: Nat): Nat
@@ -67,7 +67,7 @@ datatype Nat {
 >
 > One case one callback, which take all constructor arguments.
 
-``` cicada
+```cicada
 let curried_ind_nat_t = (
   motive: (Nat) -> Type,
   case_of_zero: motive(Nat.zero),
@@ -88,7 +88,7 @@ and when the `target` is in scope, the implicit arguments over it are often also
 
 Thus we use the following type, instead of the type above.
 
-``` cicada
+```cicada
 let ind_nat_t = (
   target: Nat,
   motive: (Nat) -> Type,
@@ -102,7 +102,7 @@ let ind_nat_t = (
 
 Suppose we have the following syntax for applying induction:
 
-``` cicada wishful-thinking
+```cicada wishful-thinking
 induction (<target>) {
   (index, ..., target) => ...
   case <cons1>(<arg>, ...) => ...
@@ -113,7 +113,7 @@ induction (<target>) {
 
 Take `Nat` as an example, we have special syntax:
 
-``` cicada wishful-thinking
+```cicada wishful-thinking
 induction (target) {
   (n) => ...
   case zero => ...
@@ -123,7 +123,7 @@ induction (target) {
 
 ## List
 
-``` cicada
+```cicada
 datatype List(E: Type) {
   null: List(E)
   cons(head: E, tail: List(E)): List(E)
@@ -134,14 +134,14 @@ datatype List(E: Type) {
 >
 > During the definition of a inductive type,
 > the parameters are in scope,
-> and the indexes are *not* in scope.
+> and the indexes are _not_ in scope.
 
 > **Hypothesis: almost**
 >
 > One recursive occurrence of the defined type one almost for case,
 > whose type is the `motive` applied to the recursive occurrence parameter.
 
-``` cicada
+```cicada
 let ind_list_t = (
   implicit E: Type,
   target: List(E),
@@ -154,7 +154,7 @@ let ind_list_t = (
 ) -> motive(target)
 ```
 
-``` cicada wishful-thinking
+```cicada wishful-thinking
 induction (target) {
   (list) => ...
   case nil => ...
@@ -164,7 +164,7 @@ induction (target) {
 
 ## Vector
 
-``` cicada
+```cicada
 datatype Vector(E: Type) (length: Nat) {
   null: Vector(E, Nat.zero)
   cons(
@@ -175,9 +175,9 @@ datatype Vector(E: Type) (length: Nat) {
 }
 ```
 
-These new inductive datatypes might have both *parameters*,
+These new inductive datatypes might have both _parameters_,
 which do not vary between the constructors,
-and *indices*, which can vary between them.
+and _indices_, which can vary between them.
 
 In the definition of `Vector`, `E` is a parameter, `length` is an index.
 
@@ -194,7 +194,7 @@ TODO
 > We should not write implicit parameters over `motive`,
 > we should write implicit indices over `target`.
 
-``` cicada
+```cicada
 let induction_vector_t = (
   implicit E: Type,
   implicit length: Nat,
@@ -218,7 +218,7 @@ Why we can write implicit in cases' arguments?
 
 TODO
 
-``` cicada wishful-thinking
+```cicada wishful-thinking
 induction (target) {
   (length, target) => ...
   case vecnil => ...
@@ -228,14 +228,14 @@ induction (target) {
 
 ## Either
 
-``` cicada
+```cicada
 datatype Either(L: Type, R: Type) {
   inl(left: L): Either(L, R)
   inr(right: R): Either(L, R)
 }
 ```
 
-``` cicada
+```cicada
 let either_ind_t = (
   implicit L: Type,
   implicit R: Type,
@@ -246,7 +246,7 @@ let either_ind_t = (
 ) -> motive(target)
 ```
 
-``` cicada wishful-thinking
+```cicada wishful-thinking
 induction (target) {
   (target) => ...
   case inl(left) => ...
@@ -256,7 +256,7 @@ induction (target) {
 
 ## LessThan
 
-``` cicada wishful-thinking
+```cicada wishful-thinking
 datatype LessThan() (j: Nat, k: Nat) {
   zero_smallest: (n: Nat) -> LessThan(Nat.zero, Nat.add1(n))
   add1_smaller: (
@@ -269,7 +269,7 @@ datatype LessThan() (j: Nat, k: Nat) {
 We can not define `LessThan` as a datatype yet,
 let's prepare some partial definitions:
 
-``` cicada
+```cicada
 function LessThan(j: Nat, k: Nat): Type {
   return TODO
 }
@@ -288,7 +288,7 @@ function add1_smaller(
 
 Then we can define `ind_less_than_t`:
 
-``` cicada
+```cicada
 let ind_less_than_t = (
   implicit j: Nat,
   implicit k: Nat,
@@ -302,7 +302,7 @@ let ind_less_than_t = (
 ) -> motive(j, k, target)
 ```
 
-``` cicada wishful-thinking
+```cicada wishful-thinking
 induction (target) {
   (j, k, lt) => ...
   case zero_smallest(n) => ...
@@ -312,14 +312,14 @@ induction (target) {
 
 # Well-founded relation and Noetherian induction
 
-It seems a generalization of structural induction is *Noetherian induction*,
-which depends on the concept of [Well-founded relation][].
+It seems a generalization of structural induction is _Noetherian induction_,
+which depends on the concept of [well-founded relation][].
 
-[Well-founded relation]: https://en.wikipedia.org/wiki/Well-founded_relation
+[well-founded relation]: https://en.wikipedia.org/wiki/Well-founded_relation
 
 Preparing some partial definitions:
 
-``` cicada
+```cicada
 function Not(X: Type): Type {
   return (X) -> Absurd
 }
@@ -327,7 +327,7 @@ function Not(X: Type): Type {
 
 Ideally we want to use subtype relation `<:` to denotes non-empty subset.
 
-``` cicada wishful-thinking
+```cicada wishful-thinking
 class WellFounded {
   X: Type
   Relation(X, X): Type
@@ -342,7 +342,7 @@ Maybe we can view a property over `X` as a subset of `X`.
 
 We also need to describe `NonEmptyProperty`:
 
-``` cicada
+```cicada
 function NonEmptyProperty(implicit X: Type, P: (X) -> Type): Type {
   return [x: X | P(x)]
 }
@@ -371,7 +371,7 @@ class WellFounded {
 
 Maybe we should abstract `Subset` and `NonEmptySubset` first:
 
-``` cicada
+```cicada
 class Subset {
   X: Type
   Property: (X) -> Type
@@ -417,7 +417,7 @@ such that `x0 > x1 > x2 > ...`
 
 Now! Noetherian induction!
 
-``` cicada
+```cicada
 let noetherian_induction_t = (
   implicit X: Type,
   target: X,
@@ -440,17 +440,17 @@ designing a beautiful API.
 - TODO
 - Maybe it is about the finiteness guaranteed by well-founded-ness?
 
-**Exercise 2** Can you view *structural induction* as a special case of Noetherian induction?
+**Exercise 2** Can you view _structural induction_ as a special case of Noetherian induction?
 
-**Exercise 2.1** Maybe we should try the usual *mathematical induction* first:
-
-- TODO
-
-**Exercise 2.2** And we also should try *complete induction*, before we goes on:
+**Exercise 2.1** Maybe we should try the usual _mathematical induction_ first:
 
 - TODO
 
-**Exercise 2.3** Now view *structural induction* as a special case of Noetherian induction:
+**Exercise 2.2** And we also should try _complete induction_, before we goes on:
+
+- TODO
+
+**Exercise 2.3** Now view _structural induction_ as a special case of Noetherian induction:
 
 - TODO
 

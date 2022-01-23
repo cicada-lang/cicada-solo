@@ -3,7 +3,7 @@ title: One of Euler's conjecture
 subtitle: An example from "Patterns of plausible inference"
 ---
 
-``` cicada
+```cicada
 datatype Nat {
   zero: Nat
   add1(prev: Nat): Nat

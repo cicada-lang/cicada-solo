@@ -7,7 +7,7 @@ title: Vector
 
 # Vector
 
-``` cicada
+```cicada
 import { Nat, zero, one, two, three, four, five, six } from "./01-nat.md"
 
 datatype Vector(E: Type) (length: Nat) {
@@ -42,7 +42,7 @@ check! Vector.cons("a", Vector.cons("b", Vector.cons("c", Vector.null))): Vector
 
 We can bind partly applied data constructor to local variable.
 
-``` cicada
+```cicada
 check! {
   let f = Vector.cons(vague Nat, vague zero, one)
   return f(Vector.null)
@@ -70,7 +70,7 @@ check! {
 }: Vector(String, one)
 ```
 
-``` cicada
+```cicada
 // NOTE Application to given vague argument can be curried.
 check! {
   let f = Vector.cons(vague String)
@@ -89,7 +89,7 @@ check! {
 
 # induction Vector
 
-``` cicada
+```cicada
 function induction_vector(
   implicit E: Type,
   implicit length: Nat,
@@ -113,7 +113,7 @@ function induction_vector(
 
 # vector_append
 
-``` cicada
+```cicada
 import { add } from "./01-nat.md"
 
 function vector_append(
@@ -131,7 +131,7 @@ function vector_append(
 }
 ```
 
-``` cicada
+```cicada
 same_as_chart! (Vector(Nat, five)) [
   vector_append(
     the(
@@ -152,7 +152,7 @@ same_as_chart! (Vector(Nat, five)) [
 
 # list_from_vector
 
-``` cicada
+```cicada
 import { List } from "./02-list.md"
 
 function list_from_vector(
@@ -167,7 +167,7 @@ function list_from_vector(
 }
 ```
 
-``` cicada
+```cicada
 same_as_chart! (List(Nat)) [
   list_from_vector(
     the(Vector(Nat, three), Vector.cons(one, Vector.cons(two, Vector.cons(three, Vector.null))))

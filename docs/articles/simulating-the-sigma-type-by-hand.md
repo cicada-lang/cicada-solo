@@ -6,7 +6,7 @@ This example is found in [an issue of the-little-typer/pie](https://github.com/t
 
 # Simulating the Sigma type in Pie
 
-``` scheme
+```scheme
 (claim my-cons
   (Π ((A U)
        (B (-> A U))
@@ -44,7 +44,7 @@ This example is found in [an issue of the-little-typer/pie](https://github.com/t
 
 # Simulating the Sigma type in Cicada
 
-``` cicada
+```cicada
 function my_cons(
   A: Type,
   B: (A) -> Type,

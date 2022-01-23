@@ -6,7 +6,7 @@ title: Inheritance
 We can combine `class` and `extends`
 to extend an existing `class`.
 
-``` cicada
+```cicada
 import { ABC } from "./01-class-n-object.md"
 
 class ABCEFG extends ABC {
@@ -21,7 +21,7 @@ is merged into the fields of `ABC`.
 
 Object construction works as usual.
 
-``` cicada
+```cicada
 let abcefg: ABCEFG = {
   a: Trivial,
   b: sole,
@@ -34,7 +34,7 @@ let abcefg: ABCEFG = {
 
 So does the **dot notation**.
 
-``` cicada
+```cicada
 abcefg.a
 abcefg.b
 abcefg.c

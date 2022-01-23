@@ -4,7 +4,7 @@ section: Datatype
 
 # Fin
 
-``` cicada
+```cicada
 import { Nat } from "./01-nat.md"
 
 datatype Fin() (n: Nat) {

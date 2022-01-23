@@ -5,7 +5,7 @@ author: Zaoqi
 
 Learned from [a agda test](https://github.com/agda/agda/blob/master/test/Succeed/Hurkens.agda).
 
-``` cicada
+```cicada
 let Bottom: Type = (A: Type) -> A
 
 function Not(A: Type): Type {
@@ -57,6 +57,6 @@ let lem3: D = (p) => lem1((y) => p(tauon(sigma(y))))
 
 The checker will run into infinite loop:
 
-``` cicada counterexample
+```cicada counterexample
 let loop: Bottom = lem2(lem3)
 ```

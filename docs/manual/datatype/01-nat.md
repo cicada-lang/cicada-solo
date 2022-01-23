@@ -9,7 +9,7 @@ We take natural number as the first `datatype` example.
 
 # Nat
 
-``` cicada
+```cicada
 datatype Nat {
   // `zero` is a `Nat`.
   zero: Nat
@@ -20,13 +20,13 @@ datatype Nat {
 
 After the definition, `Nat` is a `Type`.
 
-``` cicada
+```cicada
 check! Nat: Type
 ```
 
 And we can use `Nat`'s constructors to construct `Nat`.
 
-``` cicada
+```cicada
 check! Nat.zero: Nat
 check! Nat.add1: (Nat) -> Nat
 
@@ -37,7 +37,7 @@ check! Nat.add1(Nat.add1(Nat.zero)): Nat
 We define some common natural numbers,
 and use them to write tests in the following code.
 
-``` cicada
+```cicada
 let zero = Nat.zero
 let add1 = Nat.add1
 
@@ -59,7 +59,7 @@ We can use the `induction` keyword to define functions that operates over `Nat`.
 
 `add` is one of the most basic function, it adds two `Nat`s togather.
 
-``` cicada
+```cicada
 function add(x: Nat, y: Nat): Nat {
   return induction (x) {
     // If `x` is `zero`,
@@ -90,7 +90,7 @@ Note that,
 
 Let's write some tests.
 
-``` cicada
+```cicada
 add(zero, zero)
 add(zero, one)
 add(one, zero)
@@ -103,7 +103,7 @@ will return another function that takes one argument.
 
 This is called **currying**.
 
-``` cicada
+```cicada
 check! add: (Nat, Nat) -> Nat
 check! add(one): (Nat) -> Nat
 check! add(one, one): Nat
@@ -111,7 +111,7 @@ check! add(one, one): Nat
 
 We often use `same_as_chart!` to write test.
 
-``` cicada
+```cicada
 same_as_chart! (Nat) [
   add(two, three),
   add(three, two),
@@ -127,7 +127,7 @@ If we view `induction` over `Nat` as a function, it roughly has the following de
 
 - The `motive` argument can be omitted (as we did), when the return type is simple.
 
-``` cicada
+```cicada
 function induction_nat(
   target: Nat,
   motive: (Nat) -> Type,
@@ -150,7 +150,7 @@ function induction_nat(
 After understood the definition of `add`,
 we naturally want to define `mul`.
 
-``` cicada
+```cicada
 function mul(x: Nat, y: Nat): Nat {
   return induction (x) {
     case zero => zero
@@ -163,7 +163,7 @@ Let write some tests,
 we use `{ ...; return ... }` to make the name `twelve`
 only visible inside the following `{ ... }`.
 
-``` cicada
+```cicada
 {
   let twelve = add(ten, two)
   return same_as_chart! (Nat) [
@@ -180,7 +180,7 @@ Next we define power function.
 
 `power_of(x, y)` means `y` raised to the power of `x`.
 
-``` cicada
+```cicada
 function power_of(x: Nat, y: Nat): Nat {
   return induction (x) {
     case zero => add1(zero)
@@ -196,7 +196,7 @@ We swap the argument to get a more natural reading of the function.
 - We define `power_of` first,
   because its definition is similar to that of `add` and `mul`.
 
-``` cicada
+```cicada
 function power(base: Nat, n: Nat): Nat {
   return power_of(n, base)
 }
@@ -204,7 +204,7 @@ function power(base: Nat, n: Nat): Nat {
 
 Some tests.
 
-``` cicada
+```cicada
 same_as_chart! (Nat) [
   power(four, three),
   power_of(three, four),
@@ -221,7 +221,7 @@ his teacher gave him a task: adding the numbers from 1 to 100.
 
 - Thanks, Carl Friedrich Gauss (1777 - 1855), you are the prince of mathematics!
 
-``` cicada
+```cicada
 function gauss(n: Nat): Nat {
   return induction (n) {
     case zero => zero
@@ -232,7 +232,7 @@ function gauss(n: Nat): Nat {
 
 Tests.
 
-``` cicada
+```cicada
 same_as_chart! (Nat) [
   gauss(ten),
   add(mul(five, ten), five),
@@ -247,7 +247,7 @@ For example, `5! = 5 * 4 * 3 * 2 * 1 = 120`.
 
 Let's end this chapter with this famous function.
 
-``` cicada
+```cicada
 function factorial(n: Nat): Nat {
   return induction (n) {
     case zero => add1(zero)
@@ -258,7 +258,7 @@ function factorial(n: Nat): Nat {
 
 Tests.
 
-``` cicada
+```cicada
 same_as_chart! (Nat) [
   factorial(five),
   add(mul(ten, ten), mul(two, ten))
@@ -272,29 +272,29 @@ let's define another very famous function -- the Fibonacci function.
 
 - Thanks `u/hugogrant` for [asking about this example](https://www.reddit.com/r/ProgrammingLanguages/comments/s4crfg/comment/hsqgye6/?utm_source=share&utm_medium=web2x&context=3).
 
-``` plaintext
+```plaintext
 F(0) = 0
 F(1) = 1
 F(n) = F(n-1) + F(n-2)
 ```
 
-| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7  | 8  | 9  | 10 |
-|---|---|---|---|---|---|---|----|----|----|----|
-| 0 | 1 | 1 | 2 | 3 | 5 | 8 | 13 | 21 | 34 | 55 |
+| 0   | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   | 9   | 10  |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 0   | 1   | 1   | 2   | 3   | 5   | 8   | 13  | 21  | 34  | 55  |
 
 We use an iterative process for computing the Fibonacci numbers.
 The idea is to use a pair of integers `current` and `next`,
 initialized `F(0) = 1` and `F(0) = 0`,
 and to repeatedly apply the simultaneous transformations:
 
-``` plaintext
+```plaintext
 current <- next
 next <- current + next
 ```
 
 First, we define a helper function -- `fibonacci_iter`, for the iterative process.
 
-``` cicada
+```cicada
 function fibonacci_iter(count: Nat): (current: Nat, next: Nat) -> Nat {
   return induction (count) {
     case zero =>
@@ -307,7 +307,7 @@ function fibonacci_iter(count: Nat): (current: Nat, next: Nat) -> Nat {
 
 Then we can define the `fibonacci` using `fibonacci_iter`.
 
-``` cicada
+```cicada
 function fibonacci(n: Nat): Nat {
   return fibonacci_iter(n, zero, add1(zero))
 }
@@ -315,7 +315,7 @@ function fibonacci(n: Nat): Nat {
 
 Tests.
 
-``` cicada
+```cicada
 fibonacci(zero)
 fibonacci(one)
 fibonacci(two)

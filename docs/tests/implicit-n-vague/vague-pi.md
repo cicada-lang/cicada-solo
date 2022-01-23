@@ -5,7 +5,7 @@ title: Vague Pi
 
 # my_cons
 
-``` cicada
+```cicada
 function my_cons(
   vague A: Type,
   vague B: (A) -> Type,
@@ -23,7 +23,7 @@ my_cons
 
 # List
 
-``` cicada
+```cicada
 datatype List(E: Type) {
   null: List(E)
   cons(head: E, tail: List(E)): List(E)
@@ -32,7 +32,7 @@ datatype List(E: Type) {
 
 # my_list_null
 
-``` cicada
+```cicada
 function my_list_null(vague A: Type): List(A) {
   return List.null
 }
@@ -45,7 +45,7 @@ check! my_list_null: List(String)
 
 # my_list_cons
 
-``` cicada
+```cicada
 function my_list_cons(vague A: Type, head: A, tail: List(A)): List(A) {
   return List.cons(head, tail)
 }
@@ -62,7 +62,7 @@ check! my_list_cons("a", my_list_cons("b", my_list_cons("c", List.null))): List(
 
 # my_list_null_pair
 
-``` cicada
+```cicada
 function my_list_null_pair(vague A: Type, vague B: Type): Pair(List(A), List(B)) {
   return cons(List.null, List.null)
 }
@@ -89,7 +89,7 @@ check! my_list_null_pair(vague String): (vague B: Type) -> Pair(List(String), Li
 
 # my_list_null_and_typeof_pair
 
-``` cicada
+```cicada
 function my_list_null_and_typeof_pair(
   vague A: Type,
   implicit T: Type,
@@ -107,7 +107,7 @@ check! my_list_null_and_typeof_pair(implicit String, "abc"): Pair(List(String), 
 
 # my_list_cons_and_typeof_pair
 
-``` cicada
+```cicada
 function my_list_cons_and_typeof_pair(
   vague A: Type,
   head: A,
@@ -127,7 +127,7 @@ check! my_list_cons_and_typeof_pair("a", List.null, implicit String, "abc"): Pai
 
 # my_list_null_pair_and_typeof_pair
 
-``` cicada
+```cicada
 function my_list_null_pair_and_typeof_pair(
   vague A: Type,
   vague B: Type,

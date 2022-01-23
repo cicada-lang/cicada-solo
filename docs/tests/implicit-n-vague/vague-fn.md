@@ -5,7 +5,7 @@ title: Vague Function
 
 # List
 
-``` cicada
+```cicada
 datatype List(E: Type) {
   null: List(E)
   cons(head: E, tail: List(E)): List(E)
@@ -14,7 +14,7 @@ datatype List(E: Type) {
 
 # vague-fn insertion -- on implicit-fn
 
-``` cicada
+```cicada
 check! (
   vague A,
   vague B,
@@ -68,7 +68,7 @@ check! (
 
 # vague-fn insertion -- on sigma
 
-``` cicada
+```cicada
 check! (
   vague A,
   vague B,

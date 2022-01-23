@@ -4,13 +4,13 @@ section: Datatype
 
 # MyEqual
 
-``` cicada
+```cicada
 datatype MyEqual(T: Type) (from: T, to: T) {
   refl(vague x: T): MyEqual(T, x, x)
 }
 ```
 
-``` cicada
+```cicada
 MyEqual.refl
 check! MyEqual.refl: MyEqual(String, "a", "a")
 ```
@@ -19,7 +19,7 @@ check! MyEqual.refl: MyEqual(String, "a", "a")
 
 TODO Can we use `induction` to define `my_equal_replace` -- just like `replace` for `Equal`?
 
-``` cicada todo
+```cicada todo
 function my_equal_replace(
   implicit X: Type,
   implicit from: X,

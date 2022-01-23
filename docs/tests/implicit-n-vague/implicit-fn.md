@@ -5,7 +5,7 @@ title: Implicit Function
 
 # The bound variable name of `im-fn` does not matter.
 
-``` cicada
+```cicada
 function typeof(implicit T: Type, x: T): Type {
   return T
 }
@@ -37,7 +37,7 @@ check! (implicit X, implicit Y, implicit Z, _pair) => cons(X, cons(Y, Z)): (impl
 
 ## pick_second_type
 
-``` cicada
+```cicada
 function pick_second_type(
   implicit A: Type,
   implicit B: Type,
@@ -92,7 +92,7 @@ check! (
 
 ## pick_third_type
 
-``` cicada
+```cicada
 function pick_third_type(
   implicit A: Type,
   implicit B: Type,

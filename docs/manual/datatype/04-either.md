@@ -7,7 +7,7 @@ title: Either
 
 # Either
 
-``` cicada
+```cicada
 datatype Either(L: Type, R: Type) {
   inl(left: L): Either(L, R)
   inr(right: R): Either(L, R)
@@ -16,7 +16,7 @@ datatype Either(L: Type, R: Type) {
 
 # induction Either
 
-``` cicada
+```cicada
 function induction_either(
   implicit L: Type,
   implicit R: Type,
@@ -35,7 +35,7 @@ function induction_either(
 
 # Maybe
 
-``` cicada
+```cicada
 datatype Maybe(E: Type) {
   nothing: Maybe(E)
   just(x: E): Maybe(E)
@@ -44,7 +44,7 @@ datatype Maybe(E: Type) {
 
 # example data
 
-``` cicada
+```cicada
 import { List } from "./02-list.md"
 
 let a: List(String) = List.cons("a", List.null)
@@ -54,7 +54,7 @@ let abc: List(String) = List.cons("a", List.cons("b", List.cons("c", List.null))
 
 # maybe_head
 
-``` cicada
+```cicada
 function maybe_head(implicit E: Type, list: List(E)): Maybe(E) {
   return induction (list) {
     case null => Maybe.nothing
@@ -63,7 +63,7 @@ function maybe_head(implicit E: Type, list: List(E)): Maybe(E) {
 }
 ```
 
-``` cicada
+```cicada
 same_as_chart! (Maybe(String)) [
   maybe_head(the(List(String), List.null)),
   Maybe.nothing,
@@ -79,7 +79,7 @@ same_as_chart! (Maybe(String)) [
 
 # maybe_tail
 
-``` cicada
+```cicada
 function maybe_tail(implicit E: Type, list: List(E)): Maybe(List(E)) {
   return induction (list) {
     case null => Maybe.nothing
@@ -88,7 +88,7 @@ function maybe_tail(implicit E: Type, list: List(E)): Maybe(List(E)) {
 }
 ```
 
-``` cicada
+```cicada
 same_as_chart! (Maybe(List(String))) [
   maybe_tail(the(List(String), List.null)),
   Maybe.nothing(vague List(String)),
@@ -112,13 +112,13 @@ same_as_chart! (Maybe(List(String))) [
 
 # list_ref
 
-``` cicada
+```cicada
 import { Nat, zero, one, two, three, four } from "./01-nat.md"
 ```
 
 ## list_ref_direct
 
-``` cicada
+```cicada
 function list_ref_direct(index: Nat, implicit E: Type, list: List(E)): Maybe(E) {
   return induction (index) {
     (_) => (List(E)) -> Maybe(E)
@@ -133,7 +133,7 @@ function list_ref_direct(index: Nat, implicit E: Type, list: List(E)): Maybe(E) 
 }
 ```
 
-``` cicada
+```cicada
 list_ref_direct(zero, abc)
 list_ref_direct(one, abc)
 list_ref_direct(two, abc)
@@ -143,7 +143,7 @@ list_ref_direct(four, abc)
 
 ## list_ref_aux
 
-``` cicada
+```cicada
 function list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
   return induction (index) {
     (_) => (List(E)) -> Maybe(E)
@@ -160,13 +160,13 @@ function list_ref_aux(E: Type, index: Nat): (List(E)) -> Maybe(E) {
 
 ## list_ref by list_ref_aux
 
-``` cicada
+```cicada
 function list_ref(index: Nat, implicit E: Type, list: List(E)): Maybe(E) {
   return list_ref_aux(E, index, list)
 }
 ```
 
-``` cicada
+```cicada
 list_ref(zero, abc)
 list_ref(one, abc)
 list_ref(two, abc)
@@ -182,7 +182,7 @@ check! list_ref(four, abc): Maybe(String)
 
 ## list_ref_vague
 
-``` cicada
+```cicada
 function list_ref_vague(vague E: Type, index: Nat): (List(E)) -> Maybe(E) {
   return induction (index) {
     case zero => (list) => maybe_head(list)
@@ -201,7 +201,7 @@ check! list_ref_vague(vague String, zero, abc): Maybe(String)
 check! list_ref_vague(zero, abc): Maybe(String)
 ```
 
-``` cicada
+```cicada
 check! list_ref_vague(zero, abc): Maybe(String)
 check! list_ref_vague(one, abc): Maybe(String)
 check! list_ref_vague(two, abc): Maybe(String)

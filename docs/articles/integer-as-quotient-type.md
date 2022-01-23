@@ -9,7 +9,7 @@ Firstly, we define `Integer` as a class (record type).
 An integer is defined as a pair of natural numbers, `left` and `right`.
 The intention of our definition, is to view the integer as equal to `left` minus `right`.
 
-``` cicada
+```cicada
 datatype Nat {
   zero: Nat
   add1(prev: Nat): Nat
@@ -29,7 +29,7 @@ We say `x` is equivalent to `y`,
 iff `x.left` minus `x.right` is equal to `y.left` minus `y.right`,
 after transposition, we have `add(x.left, y.right)` equal `add(y.left, x.right)`.
 
-``` cicada
+```cicada
 function add(x: Nat, y: Nat): Nat {
   return induction (x) {
     (_) => Nat
@@ -45,7 +45,7 @@ function IntegerEqual(x: Integer, y: Integer): Type {
 
 Example of equivalent integers:
 
-``` cicada
+```cicada
 let zero = Nat.zero
 let one = Nat.add1(zero)
 let two = Nat.add1(one)

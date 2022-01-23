@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc --watch",
-    "format": "prettier src --write",
+    "format": "prettier src docs --write",
     "test:js": "enchanter test node 'lib/**/*.test.js'",
     "test:snapshot": "enchanter snapshot node 'lib/**/*.snapshot.js' --extern snapshot",
     "test:manual": "enchanter snapshot './bin/cic.js' 'docs/manual/**/*.(cic|md)' --exclude 'docs/manual/**/*.error.(cic|md)'",

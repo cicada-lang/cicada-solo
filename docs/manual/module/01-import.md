@@ -18,7 +18,7 @@ For example,
   (we will talk about `Nat` in the following chapters),
 - and we import this definition.
 
-``` cicada
+```cicada
 import { Nat } from "../datatype/01-nat.md"
 
 Nat.zero
@@ -37,7 +37,7 @@ can be fetched from a URL of [jsdelivr](https://www.jsdelivr.com).
 Since the name `Nat` is already imported, and we can not redefine names.
 We use `Nat: NatFromURL` to rename the imported definition.
 
-``` cicada
+```cicada
 import {
   Nat as NatFromURL
 } from "https://cdn.jsdelivr.net/gh/xieyuheng/the-little-typer-exercises@0.0.2/src/02.md"

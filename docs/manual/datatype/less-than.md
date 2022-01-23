@@ -4,7 +4,7 @@ section: Datatype
 
 # LessThan
 
-``` cicada
+```cicada
 import { Nat } from "./01-nat.md"
 
 datatype LessThan() (j: Nat, k: Nat) {

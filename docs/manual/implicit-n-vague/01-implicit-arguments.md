@@ -14,7 +14,7 @@ we already have a function just like this.
 
 Remind the definition of `the`.
 
-``` cicada
+```cicada
 function the(T: Type, x: T): T {
   return x
 }
@@ -23,7 +23,7 @@ function the(T: Type, x: T): T {
 It takes a type and an argument of that type,
 then simply returns the second argument.
 
-``` cicada
+```cicada
 the(String, "abc")
 the(Trivial, sole)
 ```
@@ -34,7 +34,7 @@ Is it possible to take only one argument, like the original requirement?
 
 This is where `implicit` can be helpful.
 
-``` cicada
+```cicada
 function id(implicit T: Type, x: T): T {
   return x
 }
@@ -42,7 +42,7 @@ function id(implicit T: Type, x: T): T {
 
 Now `id` can be applied to one argument.
 
-``` cicada
+```cicada
 id("abc")
 id(sole)
 ```
@@ -51,7 +51,7 @@ id(sole)
 
 First, implicit `Pi` type is a `Type`.
 
-``` cicada
+```cicada
 (implicit T: Type, x: T) -> T
 ```
 
@@ -68,7 +68,7 @@ Suppose I am the type checker, when I see `id("abc")`,
 
 Thus the following expressions are the same.
 
-``` cicada
+```cicada
 same_as_chart! (String) [
   id("abc"),
   id(implicit String, "abc"),
@@ -81,7 +81,7 @@ We can use the implicit value in function body.
 
 An example would be a function that can return the type of its argument.
 
-``` cicada
+```cicada
 function typeof(implicit T: Type, T): Type {
   return T
 }
@@ -94,7 +94,7 @@ typeof(sole)   // Trivial
 
 We can use multiple implicit arguments to find the `car` type of a `Pair`.
 
-``` cicada
+```cicada
 function car_type(
   implicit A: Type,
   implicit B: Type,
@@ -110,11 +110,11 @@ car_type(pair)  // Trivial
 
 # Limits
 
-We do *not* support implicit argument over implicit argument.
+We do _not_ support implicit argument over implicit argument.
 
 **The following is a counterexample.**
 
-``` cicada counterexample
+```cicada counterexample
 function k(
   implicit A: Type,
   implicit B: Type,
@@ -125,11 +125,11 @@ function k(
 }
 ```
 
-*Nor* do we support implicit argument over one normal argument.
+_Nor_ do we support implicit argument over one normal argument.
 
 **The following is a counterexample.**
 
-``` cicada counterexample
+```cicada counterexample
 function k(
   implicit A: Type,
   Trivial,

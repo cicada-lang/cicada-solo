@@ -12,7 +12,7 @@ A `class` is a `Type`.
 We can partly fulfill a `class` by apply it to arguments,
 its fields will be fulfilled one by one.
 
-``` cicada
+```cicada
 import { ABC } from "./01-class-n-object.md"
 
 check! ABC: Type
@@ -28,7 +28,7 @@ check! ABC(String, "b", "c"): Type
 
 The object construction works as usual.
 
-``` cicada
+```cicada
 check! { a: Trivial, b: sole, c: "c" }: ABC(Trivial)
 check! { a: Trivial, b: sole, c: "c" }: ABC(Trivial, sole)
 check! { a: Trivial, b: sole, c: "c" }: ABC(Trivial, sole, "c")
@@ -45,7 +45,7 @@ For examples,
 
 Except be fulfilled, a `class` can also be prefilled.
 
-``` cicada todo
+```cicada todo
 class PrefilledABC {
   a: Type = Trivial,
   b: a,
@@ -61,7 +61,7 @@ check! {
 
 Prefilled fields need not to be at the beginning.
 
-``` cicada
+```cicada
 class PrefilledABCDE {
   a: Type
   b: a
@@ -82,7 +82,7 @@ check! {
 Prefilled `class` can also be fulfilled by applying the `class` to arguments,
 note that the prefilled fields must be the same.
 
-``` cicada
+```cicada
 check! {
   a: Trivial,
   b: sole,

@@ -2,7 +2,7 @@
 
 This is a C language family syntax sugar.
 
-``` cicada
+```cicada
 function id1(A: Type, x: A): A {
   return x
 }
@@ -25,7 +25,7 @@ id3(String, "a")
 
 We can write both `(x, y) => ...` and `(x) => (y) => ...` for function of two arguments.
 
-``` cicada
+```cicada
 let f: (Trivial) -> (Trivial) -> Trivial =
   (x, y) => sole
 

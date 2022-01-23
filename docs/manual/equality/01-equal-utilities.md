@@ -21,7 +21,7 @@ It expresses a common sense,
 
 # equal_map
 
-``` cicada
+```cicada
 function equal_map(
   implicit X: Type,
   implicit from: X,
@@ -40,7 +40,7 @@ function equal_map(
 
 # equal_swap
 
-``` cicada
+```cicada
 function equal_swap(
   implicit A: Type,
   implicit x: A,
@@ -57,7 +57,7 @@ function equal_swap(
 
 # equal_compose
 
-``` cicada
+```cicada
 function equal_compose(
   implicit A: Type,
   implicit x: A,
@@ -74,7 +74,7 @@ function equal_compose(
 }
 ```
 
-------
+---
 
 # Summary
 

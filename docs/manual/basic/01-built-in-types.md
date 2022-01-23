@@ -7,14 +7,14 @@ title: Built-in Types
 
 `Type` is a `Type`.
 
-``` cicada
+```cicada
 Type
 ```
 
 We can use `check! <exp>: <type>`,
 to make assertion about an expression's type.
 
-``` cicada
+```cicada
 check! Type: Type
 ```
 
@@ -25,7 +25,7 @@ hovering over them to see a menu button.
 
 `String` is a `Type`.
 
-``` cicada
+```cicada
 String
 
 check! String: Type
@@ -33,7 +33,7 @@ check! String: Type
 
 We use double-quoted `String`.
 
-``` cicada
+```cicada
 "Hello, World!"
 
 check! "Hello, World!": String
@@ -41,7 +41,7 @@ check! "Hello, World!": String
 
 We can use `let <name> = <exp>` to do assignment.
 
-``` cicada
+```cicada
 let my_name = "Xie Yuheng"
 
 my_name
@@ -51,14 +51,14 @@ my_name
 
 `Trivial` is a `Type`, and `sole` is its only element.
 
-``` cicada
+```cicada
 check! Trivial: Type
 check! sole: Trivial
 ```
 
 `let` can be nested in `{ ...; return ... }`.
 
-``` cicada
+```cicada
 let result = {
   let x = sole
   let y = x
@@ -73,13 +73,13 @@ result
 
 `Pair` taken two `Type`s, is a `Type`.
 
-``` cicada
+```cicada
 check! Pair(String, Trivial): Type
 ```
 
 We can use `cons` to construct `Pair`.
 
-``` cicada
+```cicada
 check! cons("abc", sole): Pair(String, Trivial)
 ```
 
@@ -92,7 +92,7 @@ using `cdr` to get a `Pair`'s second element.
 
   Thanks, John McCarthy (1927 - 2011).
 
-``` cicada
+```cicada
 let pair: Pair(String, Trivial) = cons("abc", sole)
 
 check! car(pair): String
@@ -106,20 +106,20 @@ because we read `Pair(A, C)` as
 
 The following two expressions are the same `Type`.
 
-``` cicada
+```cicada
 Pair(String, Trivial)
 Both(String, Trivial)
 ```
 
 Writing `cons(<exp>, <exp>)` is the same as writing `[<exp> | <exp>]`.
 
-``` cicada
+```cicada
 check! ["abc" | sole]: Pair(String, Trivial)
 ```
 
 We can write nested `Pair`.
 
-``` cicada
+```cicada
 check! Pair(Type, Pair(String, Trivial)): Type
 check! [String | ["abc" | sole]]: Pair(Type, Pair(String, Trivial))
 ```
@@ -130,7 +130,7 @@ many expressions of a given type are the same.
 For example, the following four expressions in `[ ... ]`,
 are different ways for writing the same thing.
 
-``` cicada
+```cicada
 same_as_chart! (Pair(Type, Pair(String, Trivial))) [
   [String, "abc" | sole],
   [String | ["abc" | sole]],
@@ -154,7 +154,7 @@ For `Pair` the second type is fixed,
 while for `Sigma`, when the first expression is different,
 the second type can change,
 
-``` cicada
+```cicada
 check! [x: Pair(Type, Type) | car(x)]: Type
 
 check! [cons(String, Trivial) | "ABC"]: [x: Pair(Type, Type) | car(x)]
@@ -164,7 +164,7 @@ check! [cons(Trivial, String) | sole]: [x: Pair(Type, Type) | car(x)]
 `Pair` is actually a special form of `Sigma`.
 The following two types are the same.
 
-``` cicada
+```cicada
 same_as_chart! (Type) [
   Pair(String, Trivial),
   [_: String | Trivial],
@@ -177,7 +177,7 @@ We write **function type** as `(A) -> R`,
 where `A` is the **argument type**,
 and `R` is the **return type**.
 
-``` cicada
+```cicada
 check! (String) -> Trivial: Type
 check! (Pair(String, Trivial)) -> Pair(Trivial, String): Type
 ```
@@ -185,7 +185,7 @@ check! (Pair(String, Trivial)) -> Pair(Trivial, String): Type
 We use `(x) => ...` to construct **anonymous function**,
 which is also famously called **lambda**.
 
-``` cicada
+```cicada
 check! (x) => sole: (String) -> Trivial
 
 check! (pair) => cons(cdr(pair), car(pair)):
@@ -194,7 +194,7 @@ check! (pair) => cons(cdr(pair), car(pair)):
 
 We can use `let <name>: <type> = <exp>` to give an anonymous function a name.
 
-``` cicada
+```cicada
 let very_trivial: (String) -> Trivial = (x) => sole
 
 check! very_trivial("any string"): Trivial
@@ -202,7 +202,7 @@ check! very_trivial("any string"): Trivial
 
 We can also use `function` to define a function.
 
-``` cicada
+```cicada
 function swap_pair(
   pair: Pair(String, Trivial)
 ): Pair(Trivial, String) {
@@ -229,7 +229,7 @@ For function type the return type is fixed,
 while for `Pi`, when the argument expression is different,
 the return type can change.
 
-``` cicada
+```cicada
 check! (T: Type) -> (T) -> T: Type
 ```
 
@@ -239,7 +239,7 @@ it depends on the argument expression `T`.
 We have a built-in function of the above type,
 and we call this function `the`.
 
-``` cicada
+```cicada
 the(String, "abc")
 the(Trivial, sole)
 the((T: Type) -> (T) -> T, the)
@@ -247,7 +247,7 @@ the((T: Type) -> (T) -> T, the)
 
 It is defined as the following:
 
-``` cicada
+```cicada
 function the(T: Type, x: T): T {
   return x
 }
@@ -257,7 +257,7 @@ function the(T: Type, x: T): T {
 
 `Absurd` is a very special `Type`, because it has no elements.
 
-``` cicada
+```cicada
 check! Absurd: Type
 ```
 
@@ -266,7 +266,7 @@ We have a built-in function called `from_falsehood_anything`,
 If you have a element of type `Absurd`,
 you can use it to prove anything.
 
-``` cicada
+```cicada
 check! from_falsehood_anything:
   (target: Absurd, motive: Type) -> motive
 ```
@@ -274,7 +274,7 @@ check! from_falsehood_anything:
 When we want to express a proposition is not true,
 we say that proposition leads to absurd.
 
-``` cicada
+```cicada
 function Not(T: Type): Type {
   return (T) -> Absurd
 }
@@ -285,21 +285,21 @@ function Not(T: Type): Type {
 Given a `Type`, and two expressions of that `Type`,
 we can create a new `Type` to express the two expressions are the same.
 
-``` cicada
+```cicada
 check! Equal(String, "abc", "abc"): Type
 check! Equal(Trivial, sole, sole): Type
 ```
 
 We can use `the_same` to construct elements of this type.
 
-``` cicada
+```cicada
 check! the_same(String, "abc"): Equal(String, "abc", "abc")
 check! the_same(Trivial, sole): Equal(Trivial, sole, sole)
 ```
 
 If we want to omit the first argument, we can use `same`.
 
-``` cicada
+```cicada
 check! same("abc"): Equal(String, "abc", "abc")
 check! same(sole): Equal(Trivial, sole, sole)
 ```
@@ -308,7 +308,7 @@ If we want to omit all arguments, we can use `refl`, which means "reflection".
 
 - We can omit all arguments, because after all, all the informations are already in the type.
 
-``` cicada
+```cicada
 check! refl: Equal(String, "abc", "abc")
 check! refl: Equal(Trivial, sole, sole)
 ```
@@ -317,7 +317,7 @@ If the two elements are actually not the same,
 we can still use `Equal` to create a `Type`,
 but we will not be able to construct any elements of this type.
 
-``` cicada
+```cicada
 // NOTE There is no way by which we can construct
 //   an element of the following type.
 check! Equal(String, "abc", "de"): Type
@@ -326,7 +326,7 @@ check! Equal(String, "abc", "de"): Type
 By the way, we use `// ...` to write comments in code,
 just like the two lines above.
 
-------
+---
 
 # Summary
 
