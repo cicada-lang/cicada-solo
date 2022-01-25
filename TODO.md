@@ -1,5 +1,3 @@
-- avoid using `ut/url` -- inject dependences
-
 - [manual] class/04-mathematical-structure-as-class.md
 
   - Mathematical Structure as Class

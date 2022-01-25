@@ -4,6 +4,7 @@ import * as Errors from "../lang/errors"
 import * as StmtOutputs from "../lang/stmt/stmt-outputs"
 import { Module } from "../module"
 import * as ut from "../ut"
+import { readURL } from "../ut/node/url"
 
 export class AppReplEventHandler extends ReplEventHandler {
   config: Config
@@ -28,7 +29,7 @@ export class AppReplEventHandler extends ReplEventHandler {
     const url = new URL("repl:")
 
     const mod = await Module.load(url, {
-      fileFetcher: { fetch: ut.readURL },
+      fileFetcher: { fetch: readURL },
     })
 
     try {

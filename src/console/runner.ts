@@ -1,7 +1,7 @@
 import Path from "path"
 import * as Errors from "../lang/errors"
 import { Module } from "../module"
-import * as ut from "../ut"
+import { readURL } from "../ut/node/url"
 
 let lastMod: any = null
 
@@ -14,7 +14,7 @@ export class Runner {
   ): Promise<{ error?: unknown }> {
     try {
       const mod = await Module.load(url, {
-        fileFetcher: { fetch: ut.readURL },
+        fileFetcher: { fetch: readURL },
       })
 
       await mod.runAll()
@@ -30,7 +30,7 @@ export class Runner {
       return { error: undefined }
     } catch (error) {
       const path = Path.relative(process.cwd(), url.pathname)
-      const text = await ut.readURL(url)
+      const text = await readURL(url)
       const report = this.reporter.report(error, { path, text })
 
       if (!opts?.silent) {
