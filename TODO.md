@@ -13,6 +13,13 @@
 
 # inductive datatype -- questions
 
+- it will be more natural to define fibonacci function by recursion
+
+  - we can do this if we can continue an induction for "the previous of the previous",
+    instead of starting a new induction for it.
+
+  - https://readonly.link/manuals/gitlab.com/cicada-lang/cicada/-/datatype/01-nat.md#fibonacci
+
 > If the ambition of this project is too much pressure,
 >   use refactoring as a therapy.
 
