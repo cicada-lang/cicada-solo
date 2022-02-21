@@ -32,7 +32,7 @@
   "devDependencies": {
     "@types/commonmark": "^0.27.5",
     "@types/nanoid": "^2.1.0",
-    "@types/node": "^17.0.17",
+    "@types/node": "^17.0.19",
     "npm-run-all": "^4.1.5",
     "pkg": "^5.5.2",
     "prettier": "^2.5.1",
@@ -43,10 +43,10 @@
     "@cicada-lang/partech": "^0.1.18",
     "@enchanterjs/enchanter": "^0.1.37",
     "@xieyuheng/ty": "^0.1.10",
-    "axios": "^0.25.0",
+    "axios": "^0.26.0",
     "commonmark": "^0.30.0",
     "fast-deep-equal": "^3.1.3",
-    "nanoid": "^3.2.0",
+    "nanoid": "^3.3.1",
     "node-watch": "^0.7.3",
     "picocolors": "^1.0.0",
     "readdirp": "^3.6.0"

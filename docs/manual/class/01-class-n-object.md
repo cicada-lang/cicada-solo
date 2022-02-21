@@ -23,7 +23,7 @@ check! ABC: Type
 Note that, the field `b` depends on the expression `a` from previous fields,
 this is called **dependent record type**,
 
-A `class` is muchd is like a `Sigma` -- **dependent pair type**,
+A `class` is like a `Sigma` -- **dependent pair type**,
 while the very important difference is that the names of fields are significant.
 
 For example, the following `class` has similar field types as `ABC`,
