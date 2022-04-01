@@ -7,7 +7,7 @@ export class ErrorReporter {
 
     if (error instanceof Errors.ExpTrace) {
       return error.report({ path, text })
-    } else if (error instanceof pt.ParsingError) {
+    } else if (error instanceof Errors.ParsingError) {
       return [
         path
           ? `I found syntax error in file: ${path}`

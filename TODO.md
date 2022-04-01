@@ -1,5 +1,12 @@
 - [refactor] extract `ModLoader`
+
+  - `Mod` has `loader: ModLoader`
+
 - [refactor] extract `ModCache`
+
+# syntax
+
+> Use sexp as syntax.
 
 # manual
 

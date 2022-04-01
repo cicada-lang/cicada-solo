@@ -1,4 +1,4 @@
-import pt from "@cicada-lang/partech"
+import { ParsingError } from "../errors"
 import { Exp } from "../exp"
 import { Parser } from "../parser"
 import { Stmt } from "../stmt"
@@ -26,11 +26,8 @@ export class ParserTester {
         ].join("\n")
       )
     } catch (error) {
-      if (error instanceof pt.ParsingError) {
-        return
-      } else {
-        throw error
-      }
+      if (error instanceof ParsingError) return
+      else throw error
     }
   }
 
@@ -46,11 +43,8 @@ export class ParserTester {
         ].join("\n")
       )
     } catch (error) {
-      if (error instanceof pt.ParsingError) {
-        return
-      } else {
-        throw error
-      }
+      if (error instanceof ParsingError) return
+      else throw error
     }
   }
 
