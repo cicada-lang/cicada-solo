@@ -13,9 +13,7 @@ export class Runner {
     opts?: { silent?: boolean }
   ): Promise<{ error?: unknown }> {
     try {
-      const mod = await this.loader.load(url, {
-        fileFetcher: { fetch: readURL },
-      })
+      const mod = await this.loader.load(url)
 
       await mod.runAll()
 

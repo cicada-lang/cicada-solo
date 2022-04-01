@@ -1,6 +1,6 @@
-- [refactor] `Mod` has `loader: ModLoader`
-- [refactor] inject `fetcher` to `ModLoader`'s constructor -- instead of `ModLoader.load`
 - [refactor] `ModLoader` inline methods about cache
+- [refactor] `Mod` has `loader: ModLoader`
+- [refactor] `ModLoader` use `fetcher` instead of `fileFetcher`
 
 # syntax
 

@@ -7,35 +7,29 @@ import { ModLoader } from "../mod"
 import { StmtOutput } from "../stmt"
 import { Value } from "../value"
 
-interface FileFetcher {
-  fetch(url: URL): Promise<string>
-}
-
 export class Mod {
   url: URL
-  fileFetcher: FileFetcher
+  loader: ModLoader
   blocks: BlockResource
   env: Env
   ctx: Ctx
 
   constructor(opts: {
     url: URL
-    fileFetcher: FileFetcher
+    loader: ModLoader
     blocks: BlockResource
     env: Env
     ctx: Ctx
   }) {
     this.url = opts.url
-    this.fileFetcher = opts.fileFetcher
+    this.loader = opts.loader
     this.blocks = opts.blocks
     this.env = opts.env
     this.ctx = opts.ctx
   }
 
   async import(url: URL): Promise<Mod> {
-    // TODO Should use `this.loader`
-    const loader = new ModLoader()
-    return await loader.load(url, { fileFetcher: this.fileFetcher })
+    return await this.loader.load(url)
   }
 
   resolve(path: string): URL {
