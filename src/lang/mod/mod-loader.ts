@@ -32,7 +32,7 @@ export class ModLoader {
   async load(url: URL, opts: { fileFetcher: FileFetcher }): Promise<Mod> {
     const { fileFetcher } = opts
 
-    const cached = Mod.getCachedMod(url)
+    const cached = this.getCachedMod(url)
     if (cached) {
       return cached
     }
@@ -49,7 +49,7 @@ export class ModLoader {
       ctx: Ctx.init(),
     })
 
-    Mod.setCachedMod(url, mod)
+    this.setCachedMod(url, mod)
     return mod
   }
 }

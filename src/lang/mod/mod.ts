@@ -1,9 +1,9 @@
 import ty from "@xieyuheng/ty"
 import { BlockResource } from "../block"
-import * as BlockParsers from "../block/block-parsers"
 import { Core, evaluate } from "../core"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
+import { ModLoader } from "../mod"
 import { StmtOutput } from "../stmt"
 import { Value } from "../value"
 
@@ -32,49 +32,10 @@ export class Mod {
     this.ctx = opts.ctx
   }
 
-  private static cache: Map<string, Mod> = new Map()
-
-  static deleteCachedMod(url: URL): boolean {
-    return this.cache.delete(url.href)
-  }
-
-  static getCachedMod(url: URL): Mod | undefined {
-    return this.cache.get(url.href)
-  }
-
-  static setCachedMod(url: URL, mod: Mod): Map<string, Mod> {
-    return this.cache.set(url.href, mod)
-  }
-
-  static async load(
-    url: URL,
-    opts: { fileFetcher: FileFetcher }
-  ): Promise<Mod> {
-    const { fileFetcher } = opts
-
-    const cached = Mod.getCachedMod(url)
-    if (cached) {
-      return cached
-    }
-
-    const text = await fileFetcher.fetch(url)
-
-    const parser = BlockParsers.createBlockParser(url)
-
-    const mod = new Mod({
-      url: url,
-      fileFetcher,
-      blocks: new BlockResource(parser.parseBlocks(text)),
-      env: Env.init(),
-      ctx: Ctx.init(),
-    })
-
-    Mod.setCachedMod(url, mod)
-    return mod
-  }
-
   async import(url: URL): Promise<Mod> {
-    return await Mod.load(url, { fileFetcher: this.fileFetcher })
+    // TODO Should use `this.loader`
+    const loader = new ModLoader()
+    return await loader.load(url, { fileFetcher: this.fileFetcher })
   }
 
   resolve(path: string): URL {

@@ -1,18 +1,19 @@
 import Path from "path"
 import { StmtOutput } from "src/lang/stmt"
 import * as Errors from "../lang/errors"
-import { Mod } from "../lang/mod"
+import { ModLoader } from "../lang/mod"
 import { readURL } from "../ut/node/url"
 
 export class Runner {
   reporter = new Errors.ErrorReporter()
+  loader = new ModLoader()
 
   async run(
     url: URL,
     opts?: { silent?: boolean }
   ): Promise<{ error?: unknown }> {
     try {
-      const mod = await Mod.load(url, {
+      const mod = await this.loader.load(url, {
         fileFetcher: { fetch: readURL },
       })
 

@@ -7,7 +7,7 @@ import Path from "path"
 import readdirp from "readdirp"
 import app from "../../app/node-app"
 import * as BlockParsers from "../../lang/block/block-parsers"
-import { Mod } from "../../lang/mod"
+import { ModLoader } from "../../lang/mod"
 import { BookConfigSchema } from "../../types"
 import { Runner } from "../runner"
 
@@ -21,6 +21,8 @@ export class CheckCommand extends Command<Args, Opts> {
 
   args = { book: ty.optional(ty.string()) }
   opts = { watch: ty.optional(ty.boolean()) }
+
+  loader = new ModLoader()
 
   // prettier-ignore
   help(runner: CommandRunner): string {
@@ -56,13 +58,44 @@ export class CheckCommand extends Command<Args, Opts> {
     if (argv["watch"]) {
       await check(root)
       app.logger.info(`Initial check complete, now watching for file changes.`)
-      await watch(root)
+      await this.watch(root)
     } else {
       const { errors } = await check(root)
       if (errors.length > 0) {
         process.exit()
       }
     }
+  }
+
+  async watch(dir: string): Promise<void> {
+    watcher(dir, { recursive: true }, async (event, file) => {
+      if (!file) return
+      if (!BlockParsers.canHandle(file)) return
+
+      const prefix = `${dir}/`
+      const path = file.slice(prefix.length)
+      const fullPath = Path.resolve(dir, path)
+      const url = new URL(`file:${fullPath}`)
+
+      if (event === "remove") {
+        this.loader.deleteCachedMod(url)
+        app.logger.info({ tag: event, msg: path })
+      }
+
+      if (event === "update") {
+        const t0 = Date.now()
+        const runner = new Runner()
+        this.loader.deleteCachedMod(url)
+        const { error } = await runner.run(url)
+        const t1 = Date.now()
+        const elapse = t1 - t0
+        if (error) {
+          app.logger.error({ tag: event, elapse, msg: path })
+        } else {
+          app.logger.info({ tag: event, elapse, msg: path })
+        }
+      }
+    })
   }
 }
 
@@ -88,35 +121,4 @@ async function check(root: string): Promise<{ errors: Array<unknown> }> {
   }
 
   return { errors }
-}
-
-async function watch(dir: string): Promise<void> {
-  watcher(dir, { recursive: true }, async (event, file) => {
-    if (!file) return
-    if (!BlockParsers.canHandle(file)) return
-
-    const prefix = `${dir}/`
-    const path = file.slice(prefix.length)
-    const fullPath = Path.resolve(dir, path)
-    const url = new URL(`file:${fullPath}`)
-
-    if (event === "remove") {
-      Mod.deleteCachedMod(url)
-      app.logger.info({ tag: event, msg: path })
-    }
-
-    if (event === "update") {
-      const t0 = Date.now()
-      const runner = new Runner()
-      Mod.deleteCachedMod(url)
-      const { error } = await runner.run(url)
-      const t1 = Date.now()
-      const elapse = t1 - t0
-      if (error) {
-        app.logger.error({ tag: event, elapse, msg: path })
-      } else {
-        app.logger.info({ tag: event, elapse, msg: path })
-      }
-    }
-  })
 }

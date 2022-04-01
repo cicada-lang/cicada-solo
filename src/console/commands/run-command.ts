@@ -5,7 +5,7 @@ import fs from "fs"
 import watcher from "node-watch"
 import Path from "path"
 import app from "../../app/node-app"
-import { Mod } from "../../lang/mod"
+import { ModLoader } from "../../lang/mod"
 import { Runner } from "../runner"
 
 type Args = { article: string }
@@ -18,6 +18,8 @@ export class RunCommand extends Command<Args, Opts> {
 
   args = { article: ty.string() }
   opts = { watch: ty.optional(ty.boolean()) }
+
+  loader = new ModLoader()
 
   // prettier-ignore
   help(runner: CommandRunner): string {
@@ -50,7 +52,7 @@ export class RunCommand extends Command<Args, Opts> {
 
       if (url.protocol === "file:") {
         app.logger.info(`Initial run complete, now watching for changes.`)
-        await watch(runner, url.pathname)
+        await this.watch(runner, url.pathname)
       } else {
         app.logger.info(`Can not watch non-local file.`)
       }
@@ -60,6 +62,29 @@ export class RunCommand extends Command<Args, Opts> {
         process.exit(1)
       }
     }
+  }
+
+  async watch(runner: Runner, path: string): Promise<void> {
+    watcher(path, async (event, file) => {
+      const url = new URL(`file:${path}`)
+
+      if (event === "remove") {
+        this.loader.deleteCachedMod(url)
+        app.logger.info({ tag: event, msg: path })
+        process.exit(1)
+      }
+
+      if (event === "update") {
+        this.loader.deleteCachedMod(url)
+        const { error } = await runner.run(url)
+
+        if (error) {
+          app.logger.error({ tag: event, msg: path })
+        } else {
+          app.logger.info({ tag: event, msg: path })
+        }
+      }
+    })
   }
 }
 
@@ -74,27 +99,4 @@ function createURL(path: string): URL {
   }
 
   throw new Error(`I can not create URL from path: ${path}`)
-}
-
-async function watch(runner: Runner, path: string): Promise<void> {
-  watcher(path, async (event, file) => {
-    const url = new URL(`file:${path}`)
-
-    if (event === "remove") {
-      Mod.deleteCachedMod(url)
-      app.logger.info({ tag: event, msg: path })
-      process.exit(1)
-    }
-
-    if (event === "update") {
-      Mod.deleteCachedMod(url)
-      const { error } = await runner.run(url)
-
-      if (error) {
-        app.logger.error({ tag: event, msg: path })
-      } else {
-        app.logger.info({ tag: event, msg: path })
-      }
-    }
-  })
 }
