@@ -1,4 +1,3 @@
-- move `lang/mod/code-block` to `lang/code-block`
 - rename `code-block` to `block`
 - use `infra/fetcher`
 - extract `ModLoader`

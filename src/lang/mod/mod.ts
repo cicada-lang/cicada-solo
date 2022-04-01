@@ -1,11 +1,11 @@
 import ty from "@xieyuheng/ty"
+import { CodeBlockResource } from "../code-block"
+import * as CodeBlockParsers from "../code-block/code-block-parsers"
 import { Core, evaluate } from "../core"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
-import * as CodeBlockParsers from "../mod/code-block-parsers"
 import { StmtOutput } from "../stmt"
 import { Value } from "../value"
-import { CodeBlockResource } from "./code-block-resource"
 
 export interface FileFetcher {
   fetch(url: URL): Promise<string>
