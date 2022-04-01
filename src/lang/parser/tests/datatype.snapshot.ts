@@ -1,6 +1,6 @@
 import { tester } from "../parser-tester-instance"
 
-tester.echo_stmts(`
+tester.echoStmts(`
 
 datatype Nat {
   zero: Nat

@@ -10,16 +10,16 @@ export class Block {
   constructor(
     public id: number,
     public code: string,
-    public stmts: Array<StmtEntry>
+    public entries: Array<StmtEntry>
   ) {}
 
   get outputs(): Array<undefined | StmtOutput> {
-    return this.stmts.map(({ output }) => output)
+    return this.entries.map(({ output }) => output)
   }
 
   updateCode(code: string): void {
     this.code = code
     const parser = new Parser()
-    this.stmts = parser.parse_stmts(code).map((stmt) => ({ stmt }))
+    this.entries = parser.parseStmts(code).map((stmt) => ({ stmt }))
   }
 }

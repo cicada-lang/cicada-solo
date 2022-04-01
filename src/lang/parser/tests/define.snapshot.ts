@@ -1,6 +1,6 @@
 import { tester } from "../parser-tester-instance"
 
-tester.echo_stmts(`
+tester.echoStmts(`
 
 let x = exp
 let x: T = exp

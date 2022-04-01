@@ -1,18 +1,18 @@
 import { tester } from "../parser-tester-instance"
 
-tester.echo_exp(`
+tester.echoExp(`
 {
   let x = a
   return f(x)
 }
 `)
 
-tester.echo_exp(`
+tester.echoExp(`
 {
   let x = a;
   return f(x)
 }
 `)
 
-tester.echo_exp(`{ let x = a return f(x) }`)
-tester.echo_exp(`{ let x = a; return f(x) }`)
+tester.echoExp(`{ let x = a return f(x) }`)
+tester.echoExp(`{ let x = a; return f(x) }`)

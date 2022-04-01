@@ -1,17 +1,17 @@
 import { tester } from "../parser-tester-instance"
 
-tester.echo_exp(`[a: A | C(a)]`)
-tester.echo_exp(`[_: A | C]`)
-tester.echo_exp(`[a: A | [b: B | C(a, b)]]`)
-tester.echo_exp(`[a: A, b: B | C(a, b)]`)
+tester.echoExp(`[a: A | C(a)]`)
+tester.echoExp(`[_: A | C]`)
+tester.echoExp(`[a: A | [b: B | C(a, b)]]`)
+tester.echoExp(`[a: A, b: B | C(a, b)]`)
 
-tester.echo_exp(`Pair(A, B)`)
+tester.echoExp(`Pair(A, B)`)
 
-tester.echo_exp(`cons(a, b)`)
-tester.echo_exp(`cons(a, cons(b, c))`)
+tester.echoExp(`cons(a, b)`)
+tester.echoExp(`cons(a, cons(b, c))`)
 
-tester.echo_exp(`[a | b]`)
-tester.echo_exp(`[a, b | c]`)
+tester.echoExp(`[a | b]`)
+tester.echoExp(`[a, b | c]`)
 
-tester.echo_exp(`car(target)`)
-tester.echo_exp(`cdr(target)`)
+tester.echoExp(`car(target)`)
+tester.echoExp(`cdr(target)`)

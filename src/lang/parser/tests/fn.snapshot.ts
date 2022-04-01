@@ -2,7 +2,7 @@ import { tester } from "../parser-tester-instance"
 
 // NOTE sugar for not repeating argument list
 
-tester.echo_stmts(`
+tester.echoStmts(`
 
 function id(A: Type, x: A): A {
   return x
@@ -25,7 +25,7 @@ let id: (A: Type, x: A) -> A =
 
 // NOTE sugar for multi-argument function
 
-tester.echo_stmts(`
+tester.echoStmts(`
 
 let f: (Trivial) -> (Trivial) -> Trivial =
   (x, y) => sole

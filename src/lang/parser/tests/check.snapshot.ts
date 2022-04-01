@@ -1,6 +1,6 @@
 import { tester } from "../parser-tester-instance"
 
-tester.echo_stmts(`
+tester.echoStmts(`
 
 function example(
   implicit A: Type,
@@ -20,7 +20,7 @@ function example(
 
 `)
 
-tester.echo_stmts(`
+tester.echoStmts(`
 
 check! inl(x): Either(A, (A) -> B)
 check! f(inl(x)): B

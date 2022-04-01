@@ -13,7 +13,7 @@ export class MarkdownBlockParser extends BlockParser {
           new Block(
             index,
             text,
-            parser.parse_stmts(text, offset).map((stmt) => ({ stmt }))
+            parser.parseStmts(text, offset).map((stmt) => ({ stmt }))
           )
       )
   }

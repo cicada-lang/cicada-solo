@@ -7,16 +7,16 @@ export class ParserTester {
   parser = new Parser()
 
   stmts(text: string): Array<Stmt> {
-    return this.parser.parse_stmts(text)
+    return this.parser.parseStmts(text)
   }
 
   exp(text: string): Exp {
-    return this.parser.parse_exp(text)
+    return this.parser.parseExp(text)
   }
 
-  not_stmts(text: string): void {
+  notStmts(text: string): void {
     try {
-      this.parser.parse_stmts(text)
+      this.parser.parseStmts(text)
       throw new Error(
         [
           `I (Syntax tester) expect the text to not be stmts, but they are.`,
@@ -34,9 +34,9 @@ export class ParserTester {
     }
   }
 
-  not_exp(text: string): void {
+  notExp(text: string): void {
     try {
-      this.parser.parse_exp(text)
+      this.parser.parseExp(text)
       throw new Error(
         [
           `I (Syntax tester) expect the text to not be exp, but it is.`,
@@ -54,15 +54,15 @@ export class ParserTester {
     }
   }
 
-  echo_stmts(text: string): void {
-    const stmts = this.parser.parse_stmts(text)
+  echoStmts(text: string): void {
+    const stmts = this.parser.parseStmts(text)
     for (const stmt of stmts) {
       console.log(stmt.format())
     }
   }
 
-  echo_exp(text: string): void {
-    const exp = this.parser.parse_exp(text)
+  echoExp(text: string): void {
+    const exp = this.parser.parseExp(text)
     console.log(exp.format())
   }
 }

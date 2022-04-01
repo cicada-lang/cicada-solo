@@ -1,6 +1,6 @@
 import { tester } from "../parser-tester-instance"
 
-tester.echo_stmts(`
+tester.echoStmts(`
 
 (vague A: Type, head: A, tail: List(A)) -> List(A)
 
