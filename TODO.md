@@ -1,7 +1,5 @@
-- [refactor] extract `ModLoader`
-
-  - `Mod` has `loader: ModLoader`
-
+- [refactor] use `ModLoader` to load `Mod` -- instead `Mod.load`
+- [refactor] `Mod` has `loader: ModLoader`
 - [refactor] extract `ModCache`
 
 # syntax

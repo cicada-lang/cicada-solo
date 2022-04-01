@@ -7,7 +7,7 @@ import { Env } from "../env"
 import { StmtOutput } from "../stmt"
 import { Value } from "../value"
 
-export interface FileFetcher {
+interface FileFetcher {
   fetch(url: URL): Promise<string>
 }
 
