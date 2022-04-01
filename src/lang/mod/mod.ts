@@ -8,24 +8,17 @@ import { StmtOutput } from "../stmt"
 import { Value } from "../value"
 
 export class Mod {
-  url: URL
   loader: ModLoader
   blocks: BlockResource
-  env: Env
-  ctx: Ctx
+  env: Env = Env.init()
+  ctx: Ctx = Ctx.init()
 
-  constructor(opts: {
-    url: URL
-    loader: ModLoader
-    blocks: BlockResource
-    env: Env
-    ctx: Ctx
-  }) {
-    this.url = opts.url
+  constructor(
+    public url: URL,
+    opts: { loader: ModLoader; blocks: BlockResource }
+  ) {
     this.loader = opts.loader
     this.blocks = opts.blocks
-    this.env = opts.env
-    this.ctx = opts.ctx
   }
 
   async import(url: URL): Promise<Mod> {

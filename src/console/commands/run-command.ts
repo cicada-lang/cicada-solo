@@ -69,13 +69,13 @@ export class RunCommand extends Command<Args, Opts> {
       const url = new URL(`file:${path}`)
 
       if (event === "remove") {
-        this.loader.deleteCachedMod(url)
+        this.loader.cache.delete(url.href)
         app.logger.info({ tag: event, msg: path })
         process.exit(1)
       }
 
       if (event === "update") {
-        this.loader.deleteCachedMod(url)
+        this.loader.cache.delete(url.href)
         const { error } = await runner.run(url)
 
         if (error) {

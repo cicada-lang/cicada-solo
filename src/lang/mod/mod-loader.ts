@@ -2,8 +2,6 @@ import { Fetcher } from "../../infra/fetcher"
 import { readURL } from "../../ut/node/url"
 import { BlockResource } from "../block"
 import * as BlockParsers from "../block/block-parsers"
-import { Ctx } from "../ctx"
-import { Env } from "../env"
 import { Mod } from "../mod"
 
 interface FileFetcher {
@@ -20,20 +18,8 @@ export class ModLoader {
     this.fileFetcher = options?.fileFetcher || { fetch: readURL }
   }
 
-  deleteCachedMod(url: URL): boolean {
-    return this.cache.delete(url.href)
-  }
-
-  getCachedMod(url: URL): Mod | undefined {
-    return this.cache.get(url.href)
-  }
-
-  setCachedMod(url: URL, mod: Mod): Map<string, Mod> {
-    return this.cache.set(url.href, mod)
-  }
-
   async load(url: URL): Promise<Mod> {
-    const cached = this.getCachedMod(url)
+    const cached = this.cache.get(url.href)
     if (cached) {
       return cached
     }
@@ -42,15 +28,12 @@ export class ModLoader {
 
     const parser = BlockParsers.createBlockParser(url)
 
-    const mod = new Mod({
-      url: url,
+    const mod = new Mod(url, {
       loader: this,
       blocks: new BlockResource(parser.parseBlocks(text)),
-      env: Env.init(),
-      ctx: Ctx.init(),
     })
 
-    this.setCachedMod(url, mod)
+    this.cache.set(url.href, mod)
     return mod
   }
 }

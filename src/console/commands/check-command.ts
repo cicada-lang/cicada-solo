@@ -78,14 +78,14 @@ export class CheckCommand extends Command<Args, Opts> {
       const url = new URL(`file:${fullPath}`)
 
       if (event === "remove") {
-        this.loader.deleteCachedMod(url)
+        this.loader.cache.delete(url.href)
         app.logger.info({ tag: event, msg: path })
       }
 
       if (event === "update") {
         const t0 = Date.now()
         const runner = new Runner()
-        this.loader.deleteCachedMod(url)
+        this.loader.cache.delete(url.href)
         const { error } = await runner.run(url)
         const t1 = Date.now()
         const elapse = t1 - t0

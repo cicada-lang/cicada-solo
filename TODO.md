@@ -1,4 +1,3 @@
-- [refactor] `ModLoader` inline methods about cache
 - [refactor] `Mod` has `loader: ModLoader`
 - [refactor] `ModLoader` use `fetcher` instead of `fileFetcher`
 
