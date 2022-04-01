@@ -1,9 +1,8 @@
 import Path from "path"
+import { StmtOutput } from "src/lang/stmt"
 import * as Errors from "../lang/errors"
 import { Mod } from "../lang/mod"
 import { readURL } from "../ut/node/url"
-
-let lastMod: any = null
 
 export class Runner {
   reporter = new Errors.ErrorReporter()
@@ -20,7 +19,8 @@ export class Runner {
       await mod.runAll()
 
       const output = mod.blocks.allOutputs
-        .map((output) => output.formatForConsole())
+        .filter((output) => output !== undefined)
+        .map((output) => (output as StmtOutput).formatForConsole())
         .join("\n")
 
       if (output && !opts?.silent) {

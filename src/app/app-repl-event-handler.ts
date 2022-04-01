@@ -41,7 +41,7 @@ export class AppReplEventHandler extends ReplEventHandler {
           const t = output.t.format()
           console.log(`${ut.colors.yellow(exp)}: ${ut.colors.blue(t)}`)
         } else {
-          console.log(output.format().trim())
+          if (output) console.log(output.format().trim())
         }
       }
       return true

@@ -88,24 +88,21 @@ export class Mod {
     this.env = this.env.extend(name, evaluate(this.env, inferred.core))
   }
 
-  private async step(): Promise<Array<StmtOutput>> {
-    const outputs = []
-    const block = this.blocks.nextOrFail({
-      env: this.env,
-      ctx: this.ctx,
-    })
-    for (const stmt of block.stmts) {
-      const output = await stmt.execute(this)
-      if (output) {
-        outputs.push(output)
-      }
+  private async step(): Promise<Array<undefined | StmtOutput>> {
+    const block = this.blocks.nextOrFail({ env: this.env, ctx: this.ctx })
+
+    for (const entry of block.stmts) {
+      const output = await entry.stmt.execute(this)
+      if (output) entry.output = output
     }
 
-    block.outputs = outputs
-    return outputs
+    return block.outputs
   }
 
-  async runWithNewCode(id: number, code: string): Promise<Array<StmtOutput>> {
+  async runWithNewCode(
+    id: number,
+    code: string
+  ): Promise<Array<undefined | StmtOutput>> {
     if (this.blocks.encountered(id)) {
       const backup = this.blocks.backTo(id)
       this.ctx = backup.ctx
@@ -116,7 +113,7 @@ export class Mod {
     return await this.runTo(id)
   }
 
-  async runTo(id: number): Promise<Array<StmtOutput>> {
+  async runTo(id: number): Promise<Array<undefined | StmtOutput>> {
     for (const block of this.blocks.remain()) {
       const outputs = await this.step()
 
@@ -128,7 +125,7 @@ export class Mod {
     throw new Error(`I can not find code block with id: ${id}`)
   }
 
-  async runAll(): Promise<Array<StmtOutput>> {
+  async runAll(): Promise<Array<undefined | StmtOutput>> {
     const outputs = []
     while (!this.blocks.finished()) {
       outputs.push(...(await this.step()))

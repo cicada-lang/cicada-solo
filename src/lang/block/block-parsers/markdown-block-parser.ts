@@ -10,11 +10,11 @@ export class MarkdownBlockParser extends BlockParser {
       .filter(({ info }) => info === "cicada")
       .map(
         ({ index, text, offset }) =>
-          new Block({
-            id: index,
-            code: text,
-            stmts: parser.parse_stmts(text, offset),
-          })
+          new Block(
+            index,
+            text,
+            parser.parse_stmts(text, offset).map((stmt) => ({ stmt }))
+          )
       )
   }
 }

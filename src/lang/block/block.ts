@@ -1,21 +1,25 @@
 import { Parser } from "../parser"
 import { Stmt, StmtOutput } from "../stmt"
 
-export class Block {
-  id: number
-  code: string
-  stmts: Array<Stmt>
-  outputs: Array<StmtOutput> = []
+export type StmtEntry = {
+  stmt: Stmt
+  output?: StmtOutput
+}
 
-  constructor(opts: { id: number; code: string; stmts: Array<Stmt> }) {
-    this.id = opts.id
-    this.code = opts.code
-    this.stmts = opts.stmts
+export class Block {
+  constructor(
+    public id: number,
+    public code: string,
+    public stmts: Array<StmtEntry>
+  ) {}
+
+  get outputs(): Array<undefined | StmtOutput> {
+    return this.stmts.map(({ output }) => output)
   }
 
   updateCode(code: string): void {
     this.code = code
     const parser = new Parser()
-    this.stmts = parser.parse_stmts(code)
+    this.stmts = parser.parse_stmts(code).map((stmt) => ({ stmt }))
   }
 }

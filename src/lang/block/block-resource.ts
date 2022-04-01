@@ -62,7 +62,9 @@ export class BlockResource {
   private eraseOutputFrom(index: number): void {
     for (const [i, block] of this.array.entries()) {
       if (i >= index) {
-        block.outputs = []
+        for (const entry of block.stmts) {
+          delete entry.output
+        }
       }
     }
   }
@@ -77,7 +79,13 @@ export class BlockResource {
     const parser = new Parser()
     const stmts = parser.parse_stmts(code)
     const id = this.nextId()
-    this.array.push(new Block({ id, code, stmts }))
+    this.array.push(
+      new Block(
+        id,
+        code,
+        stmts.map((stmt) => ({ stmt }))
+      )
+    )
   }
 
   get(id: number): Block | undefined {
@@ -106,7 +114,7 @@ export class BlockResource {
     }
   }
 
-  get allOutputs(): Array<StmtOutput> {
+  get allOutputs(): Array<undefined | StmtOutput> {
     return this.array.flatMap(({ outputs }) => outputs)
   }
 }
