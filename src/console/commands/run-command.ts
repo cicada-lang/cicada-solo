@@ -5,7 +5,7 @@ import fs from "fs"
 import watcher from "node-watch"
 import Path from "path"
 import app from "../../app/node-app"
-import { Mod } from "../../mod"
+import { Mod } from "../../lang/mod"
 import { Runner } from "../runner"
 
 type Args = { article: string }

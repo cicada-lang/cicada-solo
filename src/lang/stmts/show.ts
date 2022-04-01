@@ -1,7 +1,7 @@
-import { Mod } from "../../mod"
 import { evaluate } from "../core"
 import { Exp, infer } from "../exp"
 import * as Exps from "../exps"
+import { Mod } from "../mod"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 import * as StmtOutputs from "../stmt/stmt-outputs"
 import { readback } from "../value"

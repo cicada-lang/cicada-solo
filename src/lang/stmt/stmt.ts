@@ -1,5 +1,5 @@
 import pt from "@cicada-lang/partech"
-import { Mod } from "../../mod"
+import { Mod } from "../mod"
 import { StmtOutput } from "./stmt-output"
 
 export interface StmtMeta {

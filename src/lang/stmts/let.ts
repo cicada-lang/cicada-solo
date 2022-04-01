@@ -1,5 +1,5 @@
-import { Mod } from "../../mod"
 import { Exp, infer } from "../exp"
+import { Mod } from "../mod"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 
 export class Let extends Stmt {

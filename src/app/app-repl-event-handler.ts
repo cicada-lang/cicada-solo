@@ -1,8 +1,8 @@
 import { ReplEvent, ReplEventHandler } from "@enchanterjs/enchanter/lib/repl"
 import { Config } from "../config"
 import * as Errors from "../lang/errors"
+import { Mod } from "../lang/mod"
 import * as StmtOutputs from "../lang/stmt/stmt-outputs"
-import { Mod } from "../mod"
 import * as ut from "../ut"
 import { readURL } from "../ut/node/url"
 

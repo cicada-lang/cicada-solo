@@ -1,10 +1,10 @@
 import ty from "@xieyuheng/ty"
-import { Core, evaluate } from "../lang/core"
-import { Ctx } from "../lang/ctx"
-import { Env } from "../lang/env"
-import { StmtOutput } from "../lang/stmt"
-import { Value } from "../lang/value"
+import { Core, evaluate } from "../core"
+import { Ctx } from "../ctx"
+import { Env } from "../env"
 import * as CodeBlockParsers from "../mod/code-block-parsers"
+import { StmtOutput } from "../stmt"
+import { Value } from "../value"
 import { CodeBlockResource } from "./code-block-resource"
 
 export interface FileFetcher {

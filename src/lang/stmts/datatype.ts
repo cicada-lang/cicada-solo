@@ -1,6 +1,6 @@
-import { Mod } from "../../mod"
 import { Exp, infer } from "../exp"
 import * as Exps from "../exps"
+import { Mod } from "../mod"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 
 export class Datatype extends Stmt {

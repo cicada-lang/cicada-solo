@@ -1,6 +1,6 @@
-import { Mod } from "../../mod"
 import { check } from "../exp"
 import * as Exps from "../exps"
+import { Mod } from "../mod"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 
 export class ClassExtends extends Stmt {

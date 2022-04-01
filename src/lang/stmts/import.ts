@@ -1,5 +1,5 @@
-import { Mod } from "../../mod"
 import * as Errors from "../errors"
+import { Mod } from "../mod"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 
 export type ImportEntry = { name: string; alias?: string }

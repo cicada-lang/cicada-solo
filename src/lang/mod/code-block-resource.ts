@@ -1,7 +1,7 @@
-import { Ctx } from "../lang/ctx"
-import { Env } from "../lang/env"
-import { Parser } from "../lang/parser"
-import { StmtOutput } from "../lang/stmt"
+import { Ctx } from "../ctx"
+import { Env } from "../env"
+import { Parser } from "../parser"
+import { StmtOutput } from "../stmt"
 import { CodeBlock } from "./code-block"
 
 export class CodeBlockResource {

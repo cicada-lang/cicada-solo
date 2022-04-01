@@ -1,6 +1,6 @@
 import Path from "path"
 import * as Errors from "../lang/errors"
-import { Mod } from "../mod"
+import { Mod } from "../lang/mod"
 import { readURL } from "../ut/node/url"
 
 let lastMod: any = null

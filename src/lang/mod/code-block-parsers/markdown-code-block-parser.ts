@@ -1,5 +1,5 @@
 import * as commonmark from "commonmark"
-import { Parser } from "../../lang/parser"
+import { Parser } from "../../parser"
 import { CodeBlock } from "../code-block"
 import { CodeBlockParser } from "../code-block-parser"
 
