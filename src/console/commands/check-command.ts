@@ -6,7 +6,7 @@ import watcher from "node-watch"
 import Path from "path"
 import readdirp from "readdirp"
 import app from "../../app/node-app"
-import * as CodeBlockParsers from "../../lang/code-block/code-block-parsers"
+import * as BlockParsers from "../../lang/block/block-parsers"
 import { Mod } from "../../lang/mod"
 import { BookConfigSchema } from "../../types"
 import { Runner } from "../runner"
@@ -70,7 +70,7 @@ async function check(root: string): Promise<{ errors: Array<unknown> }> {
   let errors: Array<unknown> = []
 
   for (const { path } of await readdirp.promise(root)) {
-    if (CodeBlockParsers.canHandle(path)) {
+    if (BlockParsers.canHandle(path)) {
       const fullPath = Path.resolve(root, path)
       const url = new URL(`file:${fullPath}`)
       const t0 = Date.now()
@@ -93,7 +93,7 @@ async function check(root: string): Promise<{ errors: Array<unknown> }> {
 async function watch(dir: string): Promise<void> {
   watcher(dir, { recursive: true }, async (event, file) => {
     if (!file) return
-    if (!CodeBlockParsers.canHandle(file)) return
+    if (!BlockParsers.canHandle(file)) return
 
     const prefix = `${dir}/`
     const path = file.slice(prefix.length)

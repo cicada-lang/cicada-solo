@@ -2,14 +2,14 @@ import { Ctx } from "../ctx"
 import { Env } from "../env"
 import { Parser } from "../parser"
 import { StmtOutput } from "../stmt"
-import { CodeBlock } from "./code-block"
+import { Block } from "./block"
 
-export class CodeBlockResource {
-  array: Array<CodeBlock> = []
+export class BlockResource {
+  array: Array<Block> = []
   counter: number = 0
   backups: Array<{ env: Env; ctx: Ctx }> = []
 
-  constructor(array: Array<CodeBlock>) {
+  constructor(array: Array<Block>) {
     this.array = array
   }
 
@@ -17,30 +17,30 @@ export class CodeBlockResource {
     return this.array.length
   }
 
-  next(backup: { env: Env; ctx: Ctx }): CodeBlock | undefined {
+  next(backup: { env: Env; ctx: Ctx }): Block | undefined {
     this.backups.push(backup)
     return this.array[this.counter++]
   }
 
-  nextOrFail(backup: { env: Env; ctx: Ctx }): CodeBlock {
-    const codeBlock = this.next(backup)
-    if (codeBlock === undefined) {
+  nextOrFail(backup: { env: Env; ctx: Ctx }): Block {
+    const block = this.next(backup)
+    if (block === undefined) {
       throw new Error(`No more code blocks, length: ${this.length}`)
     }
 
-    return codeBlock
+    return block
   }
 
   finished(): boolean {
     return this.counter >= this.length
   }
 
-  remain(): Array<CodeBlock> {
+  remain(): Array<Block> {
     return this.array.slice(this.counter)
   }
 
   encountered(id: number): boolean {
-    const index = this.array.findIndex((codeBlock) => codeBlock.id === id)
+    const index = this.array.findIndex((block) => block.id === id)
     return index !== -1 && index < this.counter
   }
 
@@ -51,7 +51,7 @@ export class CodeBlockResource {
       )
     }
 
-    const index = this.array.findIndex((codeBlock) => codeBlock.id === id)
+    const index = this.array.findIndex((block) => block.id === id)
     this.counter = index
     const backup = this.backups[index]
     this.backups = this.backups.slice(0, index)
@@ -60,9 +60,9 @@ export class CodeBlockResource {
   }
 
   private eraseOutputFrom(index: number): void {
-    for (const [i, codeBlock] of this.array.entries()) {
+    for (const [i, block] of this.array.entries()) {
       if (i >= index) {
-        codeBlock.outputs = []
+        block.outputs = []
       }
     }
   }
@@ -77,20 +77,20 @@ export class CodeBlockResource {
     const parser = new Parser()
     const stmts = parser.parse_stmts(code)
     const id = this.nextId()
-    this.array.push(new CodeBlock({ id, code, stmts }))
+    this.array.push(new Block({ id, code, stmts }))
   }
 
-  get(id: number): CodeBlock | undefined {
-    return this.array.find((codeBlock) => codeBlock.id === id)
+  get(id: number): Block | undefined {
+    return this.array.find((block) => block.id === id)
   }
 
-  getOrFail(id: number): CodeBlock {
-    const codeBlock = this.get(id)
-    if (codeBlock === undefined) {
+  getOrFail(id: number): Block {
+    const block = this.get(id)
+    if (block === undefined) {
       throw new Error(`Fail to get code block for id: ${id}`)
     }
 
-    return codeBlock
+    return block
   }
 
   has(id: number): boolean {
@@ -98,9 +98,9 @@ export class CodeBlockResource {
   }
 
   updateCode(id: number, code: string): void {
-    const codeBlock = this.get(id)
-    if (codeBlock) {
-      codeBlock.updateCode(code)
+    const block = this.get(id)
+    if (block) {
+      block.updateCode(code)
     } else {
       console.warn(`I can not update non-existing code block of id: ${id}`)
     }

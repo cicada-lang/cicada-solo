@@ -19,7 +19,7 @@ export class Runner {
 
       await mod.runAll()
 
-      const output = mod.codeBlocks.allOutputs
+      const output = mod.blocks.allOutputs
         .map((output) => output.formatForConsole())
         .join("\n")
 

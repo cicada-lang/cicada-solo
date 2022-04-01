@@ -1,7 +1,7 @@
 import { Parser } from "../parser"
 import { Stmt, StmtOutput } from "../stmt"
 
-export class CodeBlock {
+export class Block {
   id: number
   code: string
   stmts: Array<Stmt>

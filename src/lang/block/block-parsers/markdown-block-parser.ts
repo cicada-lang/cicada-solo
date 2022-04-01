@@ -1,16 +1,16 @@
 import * as commonmark from "commonmark"
 import { Parser } from "../../parser"
-import { CodeBlock } from "../code-block"
-import { CodeBlockParser } from "../code-block-parser"
+import { Block } from "../block"
+import { BlockParser } from "../block-parser"
 
-export class MarkdownCodeBlockParser extends CodeBlockParser {
-  parseCodeBlocks(text: string): Array<CodeBlock> {
+export class MarkdownBlockParser extends BlockParser {
+  parseBlocks(text: string): Array<Block> {
     const parser = new Parser()
-    return collectCodeBlocks(text)
+    return collectBlocks(text)
       .filter(({ info }) => info === "cicada")
       .map(
         ({ index, text, offset }) =>
-          new CodeBlock({
+          new Block({
             id: index,
             code: text,
             stmts: parser.parse_stmts(text, offset),
@@ -19,7 +19,7 @@ export class MarkdownCodeBlockParser extends CodeBlockParser {
   }
 }
 
-function collectCodeBlocks(text: string): Array<{
+function collectBlocks(text: string): Array<{
   index: number
   info: string
   text: string
@@ -28,7 +28,7 @@ function collectCodeBlocks(text: string): Array<{
   const reader = new commonmark.Parser()
   const parsed: commonmark.Node = reader.parse(text)
 
-  const codeBlocks = []
+  const blocks = []
 
   const walker = parsed.walker()
 
@@ -41,7 +41,7 @@ function collectCodeBlocks(text: string): Array<{
     if (event.entering && node.type === "code_block") {
       const [start_pos, _end_pos] = node.sourcepos
       const [row, col] = start_pos
-      codeBlocks.push({
+      blocks.push({
         index: counter++,
         info: node.info || "",
         text: node.literal || "",
@@ -50,7 +50,7 @@ function collectCodeBlocks(text: string): Array<{
     }
   }
 
-  return codeBlocks
+  return blocks
 }
 
 function offsetFromPosition(text: string, row: number, col: number): number {

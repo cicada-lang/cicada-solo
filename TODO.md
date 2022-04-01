@@ -1,4 +1,3 @@
-- rename `code-block` to `block`
 - use `infra/fetcher`
 - extract `ModLoader`
 
@@ -165,7 +164,7 @@
 
 - [maybe] we also need `multi-fn` & `multi-pi` to be symmetric with `multi-ap`
 
-- [maybe] offset in `CodeBlock`
+- [maybe] offset in `Block`
 - [maybe] support using `let name = exp` to do local definitions in class
 
 - [general macro] `li! [...]` and `vec! [...]` can be general macro,

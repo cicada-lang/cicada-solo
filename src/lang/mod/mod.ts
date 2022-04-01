@@ -1,6 +1,6 @@
 import ty from "@xieyuheng/ty"
-import { CodeBlockResource } from "../code-block"
-import * as CodeBlockParsers from "../code-block/code-block-parsers"
+import { BlockResource } from "../block"
+import * as BlockParsers from "../block/block-parsers"
 import { Core, evaluate } from "../core"
 import { Ctx } from "../ctx"
 import { Env } from "../env"
@@ -14,20 +14,20 @@ export interface FileFetcher {
 export class Mod {
   url: URL
   fileFetcher: FileFetcher
-  codeBlocks: CodeBlockResource
+  blocks: BlockResource
   env: Env
   ctx: Ctx
 
   constructor(opts: {
     url: URL
     fileFetcher: FileFetcher
-    codeBlocks: CodeBlockResource
+    blocks: BlockResource
     env: Env
     ctx: Ctx
   }) {
     this.url = opts.url
     this.fileFetcher = opts.fileFetcher
-    this.codeBlocks = opts.codeBlocks
+    this.blocks = opts.blocks
     this.env = opts.env
     this.ctx = opts.ctx
   }
@@ -59,12 +59,12 @@ export class Mod {
 
     const text = await fileFetcher.fetch(url)
 
-    const parser = CodeBlockParsers.createCodeBlockParser(url)
+    const parser = BlockParsers.createBlockParser(url)
 
     const mod = new Mod({
       url: url,
       fileFetcher,
-      codeBlocks: new CodeBlockResource(parser.parseCodeBlocks(text)),
+      blocks: new BlockResource(parser.parseBlocks(text)),
       env: Env.init(),
       ctx: Ctx.init(),
     })
@@ -90,37 +90,37 @@ export class Mod {
 
   private async step(): Promise<Array<StmtOutput>> {
     const outputs = []
-    const codeBlock = this.codeBlocks.nextOrFail({
+    const block = this.blocks.nextOrFail({
       env: this.env,
       ctx: this.ctx,
     })
-    for (const stmt of codeBlock.stmts) {
+    for (const stmt of block.stmts) {
       const output = await stmt.execute(this)
       if (output) {
         outputs.push(output)
       }
     }
 
-    codeBlock.outputs = outputs
+    block.outputs = outputs
     return outputs
   }
 
   async runWithNewCode(id: number, code: string): Promise<Array<StmtOutput>> {
-    if (this.codeBlocks.encountered(id)) {
-      const backup = this.codeBlocks.backTo(id)
+    if (this.blocks.encountered(id)) {
+      const backup = this.blocks.backTo(id)
       this.ctx = backup.ctx
       this.env = backup.env
     }
 
-    this.codeBlocks.updateCode(id, code)
+    this.blocks.updateCode(id, code)
     return await this.runTo(id)
   }
 
   async runTo(id: number): Promise<Array<StmtOutput>> {
-    for (const codeBlock of this.codeBlocks.remain()) {
+    for (const block of this.blocks.remain()) {
       const outputs = await this.step()
 
-      if (codeBlock.id === id) {
+      if (block.id === id) {
         return outputs
       }
     }
@@ -130,7 +130,7 @@ export class Mod {
 
   async runAll(): Promise<Array<StmtOutput>> {
     const outputs = []
-    while (!this.codeBlocks.finished()) {
+    while (!this.blocks.finished()) {
       outputs.push(...(await this.step()))
     }
 
