@@ -1,4 +1,4 @@
-import { Module } from "../../module"
+import { Mod } from "../../mod"
 import { Exp, infer } from "../exp"
 import * as Exps from "../exps"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
@@ -21,7 +21,7 @@ export class Datatype extends Stmt {
     this.datatype = new Exps.TypeCtor(name, fixed, varied, ctors)
   }
 
-  async execute(mod: Module): Promise<StmtOutput | undefined> {
+  async execute(mod: Mod): Promise<StmtOutput | undefined> {
     mod.extendTypedCore(this.name, infer(mod.ctx, this.datatype))
     return undefined
   }

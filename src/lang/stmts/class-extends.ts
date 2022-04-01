@@ -1,4 +1,4 @@
-import { Module } from "../../module"
+import { Mod } from "../../mod"
 import { check } from "../exp"
 import * as Exps from "../exps"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
@@ -15,7 +15,7 @@ export class ClassExtends extends Stmt {
     this.ext = ext
   }
 
-  async execute(mod: Module): Promise<StmtOutput | undefined> {
+  async execute(mod: Mod): Promise<StmtOutput | undefined> {
     const t = new Exps.TypeValue()
     const core = check(mod.ctx, this.ext, t)
     mod.extendTypedCore(this.name, { t, core })

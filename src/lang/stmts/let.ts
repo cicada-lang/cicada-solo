@@ -1,4 +1,4 @@
-import { Module } from "../../module"
+import { Mod } from "../../mod"
 import { Exp, infer } from "../exp"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 
@@ -14,7 +14,7 @@ export class Let extends Stmt {
     this.exp = exp
   }
 
-  async execute(mod: Module): Promise<StmtOutput | undefined> {
+  async execute(mod: Mod): Promise<StmtOutput | undefined> {
     mod.extendTypedCore(this.name, infer(mod.ctx, this.exp))
     return undefined
   }

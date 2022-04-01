@@ -4,14 +4,14 @@ import { Ctx } from "../lang/ctx"
 import { Env } from "../lang/env"
 import { StmtOutput } from "../lang/stmt"
 import { Value } from "../lang/value"
-import * as CodeBlockParsers from "../module/code-block-parsers"
+import * as CodeBlockParsers from "../mod/code-block-parsers"
 import { CodeBlockResource } from "./code-block-resource"
 
 export interface FileFetcher {
   fetch(url: URL): Promise<string>
 }
 
-export class Module {
+export class Mod {
   url: URL
   fileFetcher: FileFetcher
   codeBlocks: CodeBlockResource
@@ -32,27 +32,27 @@ export class Module {
     this.ctx = opts.ctx
   }
 
-  private static cache: Map<string, Module> = new Map()
+  private static cache: Map<string, Mod> = new Map()
 
   static deleteCachedMod(url: URL): boolean {
     return this.cache.delete(url.href)
   }
 
-  static getCachedMod(url: URL): Module | undefined {
+  static getCachedMod(url: URL): Mod | undefined {
     return this.cache.get(url.href)
   }
 
-  static setCachedMod(url: URL, mod: Module): Map<string, Module> {
+  static setCachedMod(url: URL, mod: Mod): Map<string, Mod> {
     return this.cache.set(url.href, mod)
   }
 
   static async load(
     url: URL,
     opts: { fileFetcher: FileFetcher }
-  ): Promise<Module> {
+  ): Promise<Mod> {
     const { fileFetcher } = opts
 
-    const cached = Module.getCachedMod(url)
+    const cached = Mod.getCachedMod(url)
     if (cached) {
       return cached
     }
@@ -61,7 +61,7 @@ export class Module {
 
     const parser = CodeBlockParsers.createCodeBlockParser(url)
 
-    const mod = new Module({
+    const mod = new Mod({
       url: url,
       fileFetcher,
       codeBlocks: new CodeBlockResource(parser.parseCodeBlocks(text)),
@@ -69,12 +69,12 @@ export class Module {
       ctx: Ctx.init(),
     })
 
-    Module.setCachedMod(url, mod)
+    Mod.setCachedMod(url, mod)
     return mod
   }
 
-  async import(url: URL): Promise<Module> {
-    return await Module.load(url, { fileFetcher: this.fileFetcher })
+  async import(url: URL): Promise<Mod> {
+    return await Mod.load(url, { fileFetcher: this.fileFetcher })
   }
 
   resolve(path: string): URL {

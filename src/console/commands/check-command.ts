@@ -6,8 +6,8 @@ import watcher from "node-watch"
 import Path from "path"
 import readdirp from "readdirp"
 import app from "../../app/node-app"
-import { Module } from "../../module"
-import * as CodeBlockParsers from "../../module/code-block-parsers"
+import { Mod } from "../../mod"
+import * as CodeBlockParsers from "../../mod/code-block-parsers"
 import { BookConfigSchema } from "../../types"
 import { Runner } from "../runner"
 
@@ -101,14 +101,14 @@ async function watch(dir: string): Promise<void> {
     const url = new URL(`file:${fullPath}`)
 
     if (event === "remove") {
-      Module.deleteCachedMod(url)
+      Mod.deleteCachedMod(url)
       app.logger.info({ tag: event, msg: path })
     }
 
     if (event === "update") {
       const t0 = Date.now()
       const runner = new Runner()
-      Module.deleteCachedMod(url)
+      Mod.deleteCachedMod(url)
       const { error } = await runner.run(url)
       const t1 = Date.now()
       const elapse = t1 - t0

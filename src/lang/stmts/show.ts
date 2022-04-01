@@ -1,4 +1,4 @@
-import { Module } from "../../module"
+import { Mod } from "../../mod"
 import { evaluate } from "../core"
 import { Exp, infer } from "../exp"
 import * as Exps from "../exps"
@@ -16,7 +16,7 @@ export class Show extends Stmt {
     this.exp = exp
   }
 
-  async execute(mod: Module): Promise<StmtOutput | undefined> {
+  async execute(mod: Mod): Promise<StmtOutput | undefined> {
     const inferred = infer(mod.ctx, this.exp)
     const inferred_value = evaluate(mod.env, inferred.core)
     return new StmtOutputs.NormalTerm({

@@ -1,3 +1,5 @@
+- update deps
+
 - [manual] class/04-mathematical-structure-as-class.md
 
   - Mathematical Structure as Class

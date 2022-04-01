@@ -1,4 +1,4 @@
-import { Module } from "../../module"
+import { Mod } from "../../mod"
 import * as Errors from "../errors"
 import { Stmt, StmtMeta, StmtOutput } from "../stmt"
 
@@ -16,7 +16,7 @@ export class Import extends Stmt {
     this.entries = entries
   }
 
-  async execute(mod: Module): Promise<StmtOutput | undefined> {
+  async execute(mod: Mod): Promise<StmtOutput | undefined> {
     const url = mod.resolve(this.path)
     if (url.href === mod.url.href) {
       throw new Errors.ExpTrace(

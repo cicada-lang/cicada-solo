@@ -2,7 +2,7 @@ import { ReplEvent, ReplEventHandler } from "@enchanterjs/enchanter/lib/repl"
 import { Config } from "../config"
 import * as Errors from "../lang/errors"
 import * as StmtOutputs from "../lang/stmt/stmt-outputs"
-import { Module } from "../module"
+import { Mod } from "../mod"
 import * as ut from "../ut"
 import { readURL } from "../ut/node/url"
 
@@ -28,7 +28,7 @@ export class AppReplEventHandler extends ReplEventHandler {
     text = text.trim()
     const url = new URL("repl:")
 
-    const mod = await Module.load(url, {
+    const mod = await Mod.load(url, {
       fileFetcher: { fetch: readURL },
     })
 

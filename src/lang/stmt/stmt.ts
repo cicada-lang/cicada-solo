@@ -1,5 +1,5 @@
 import pt from "@cicada-lang/partech"
-import { Module } from "../../module"
+import { Mod } from "../../mod"
 import { StmtOutput } from "./stmt-output"
 
 export interface StmtMeta {
@@ -9,6 +9,6 @@ export interface StmtMeta {
 export abstract class Stmt {
   abstract meta: StmtMeta
 
-  abstract execute(mod: Module): Promise<StmtOutput | undefined>
+  abstract execute(mod: Mod): Promise<StmtOutput | undefined>
   abstract format(): string
 }

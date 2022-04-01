@@ -1,6 +1,6 @@
 import Path from "path"
 import * as Errors from "../lang/errors"
-import { Module } from "../module"
+import { Mod } from "../mod"
 import { readURL } from "../ut/node/url"
 
 let lastMod: any = null
@@ -13,7 +13,7 @@ export class Runner {
     opts?: { silent?: boolean }
   ): Promise<{ error?: unknown }> {
     try {
-      const mod = await Module.load(url, {
+      const mod = await Mod.load(url, {
         fileFetcher: { fetch: readURL },
       })
 

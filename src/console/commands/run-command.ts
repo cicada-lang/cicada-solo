@@ -5,7 +5,7 @@ import fs from "fs"
 import watcher from "node-watch"
 import Path from "path"
 import app from "../../app/node-app"
-import { Module } from "../../module"
+import { Mod } from "../../mod"
 import { Runner } from "../runner"
 
 type Args = { article: string }
@@ -81,13 +81,13 @@ async function watch(runner: Runner, path: string): Promise<void> {
     const url = new URL(`file:${path}`)
 
     if (event === "remove") {
-      Module.deleteCachedMod(url)
+      Mod.deleteCachedMod(url)
       app.logger.info({ tag: event, msg: path })
       process.exit(1)
     }
 
     if (event === "update") {
-      Module.deleteCachedMod(url)
+      Mod.deleteCachedMod(url)
       const { error } = await runner.run(url)
 
       if (error) {
