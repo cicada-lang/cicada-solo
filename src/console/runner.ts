@@ -1,12 +1,18 @@
+import fs from "fs"
 import Path from "path"
 import { StmtOutput } from "src/lang/stmt"
 import * as Errors from "../lang/errors"
 import { ModLoader } from "../lang/mod"
-import { readURL } from "../ut/node/url"
 
 export class Runner {
   reporter = new Errors.ErrorReporter()
   loader = new ModLoader()
+
+  constructor() {
+    this.loader.fetcher.register("file", (url) =>
+      fs.promises.readFile(url.pathname, "utf8")
+    )
+  }
 
   async run(
     url: URL,
@@ -29,7 +35,7 @@ export class Runner {
       return { error: undefined }
     } catch (error) {
       const path = Path.relative(process.cwd(), url.pathname)
-      const text = await readURL(url)
+      const text = await this.loader.fetcher.fetch(url)
       const report = this.reporter.report(error, { path, text })
 
       if (!opts?.silent) {

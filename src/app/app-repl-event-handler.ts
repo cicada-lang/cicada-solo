@@ -1,4 +1,5 @@
 import { ReplEvent, ReplEventHandler } from "@enchanterjs/enchanter/lib/repl"
+import fs from "fs"
 import { Config } from "../config"
 import * as Errors from "../lang/errors"
 import { ModLoader } from "../lang/mod"
@@ -12,6 +13,10 @@ export class AppReplEventHandler extends ReplEventHandler {
   constructor(opts: { config: Config }) {
     super()
     this.config = opts.config
+    this.loader.fetcher.register("file", (url) =>
+      fs.promises.readFile(url.pathname, "utf8")
+    )
+    this.loader.fetcher.register("repl", (url) => "")
   }
 
   greeting(): void {

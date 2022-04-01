@@ -1,6 +1,3 @@
-- [refactor] `Mod` has `loader: ModLoader`
-- [refactor] `ModLoader` use `fetcher` instead of `fileFetcher`
-
 # syntax
 
 > Use sexp as syntax.

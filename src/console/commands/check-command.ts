@@ -24,6 +24,13 @@ export class CheckCommand extends Command<Args, Opts> {
 
   loader = new ModLoader()
 
+  constructor() {
+    super()
+    this.loader.fetcher.register("file", (url) =>
+      fs.promises.readFile(url.pathname, "utf8")
+    )
+  }
+
   // prettier-ignore
   help(runner: CommandRunner): string {
     const { blue } = this.colors
