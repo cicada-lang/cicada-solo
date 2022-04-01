@@ -1,5 +1,5 @@
-- use `infra/fetcher`
-- extract `ModLoader`
+- [refactor] extract `ModLoader`
+- [refactor] extract `ModCache`
 
 # manual
 
@@ -11,10 +11,6 @@
 
 - [manual] datatype/02-list.md
 - [manual] datatype/03-vector.md
-
-# refactor
-
-- extract `ModuleCache`
 
 # inductive datatype -- questions
 
