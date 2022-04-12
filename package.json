@@ -35,15 +35,15 @@
     "@types/nanoid": "^2.1.0",
     "@types/node": "^17.0.23",
     "npm-run-all": "^4.1.5",
-    "pkg": "^5.5.2",
-    "prettier": "^2.6.1",
+    "pkg": "^5.6.0",
+    "prettier": "^2.6.2",
     "prettier-plugin-organize-imports": "^2.3.4",
     "typescript": "^4.6.3"
   },
   "dependencies": {
     "@cicada-lang/partech": "^0.1.19",
     "@enchanterjs/enchanter": "^0.1.41",
-    "@xieyuheng/test-case": "^0.0.12",
+    "@xieyuheng/test-case": "^0.0.13",
     "@xieyuheng/ty": "^0.1.12",
     "axios": "^0.26.1",
     "commonmark": "^0.30.0",

@@ -1,0 +1,24 @@
+class PreOrder {
+  Element: Type
+
+  Under(Element, Element): Type
+
+  reflexive(x: Element): Under(x, x)
+
+  transitive(
+    implicit x: Element,
+    implicit y: Element,
+    Under(x, y),
+    implicit z: Element,
+    Under(y, z),
+  ): Under(x, z)
+}
+
+class Order extends PreOrder {
+  antisymmetric(
+    implicit x: Element,
+    implicit y: Element,
+    Under(x, y),
+    Under(y, x),
+  ): Equal(Element, x, y)
+}

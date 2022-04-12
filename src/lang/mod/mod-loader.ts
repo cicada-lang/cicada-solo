@@ -12,10 +12,8 @@ export class ModLoader {
     if (cached) return cached
     const text = await this.fetcher.fetch(url)
     const parser = BlockParsers.createBlockParser(url)
-    const mod = new Mod(url, {
-      loader: this,
-      blocks: new BlockResource(parser.parseBlocks(text)),
-    })
+    const blocks = new BlockResource(parser.parseBlocks(text))
+    const mod = new Mod(url, { loader: this, blocks })
     this.cache.set(url.href, mod)
     return mod
   }
