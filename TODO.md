@@ -1,17 +1,43 @@
-# syntax
+- [syntax] change `[x: A | B(x)]` to `exists (x: A) B(x)`
 
-> Use sexp as syntax.
+  - to be symmetric with future `self (target) ...`
+
+- [syntax] `forall (x: A) B(x)` as an alternative to `(x: A) -> B(x)`
+
+  - to be symmetric with `exists (x: A) B(x)`
+
+- [syntax] `function (x: A) b(x)` as an alternative to `(x: A) => b(x)`
+
+  - no need to always write `{ ... }` -- different from javascript
+
+    - `function (x: A) { return b(x) }`
+
+  - to be symmetric with `exists (x: A) B(x)`
+
+- [syntax] `check` instead of `check!`
+- [syntax] `same_as_chart` instead of `same_as_chart!`
+
+- [refactor] improve `Mod` -- learn from implementation of `cicada-lang/lambda`
+
+- [syntax] [maybe] `recursion` (without `motive`) v.s. `induction` (with `motive`)
 
 # manual
 
-- [manual] class/04-mathematical-structure-as-class.md
+- [manual] `class/04-mathematical-structure-as-class.md`
 
   - Mathematical Structure as Class
 
-- [manual] equality/01-equal-utilities.md
+- [manual] `equality/01-equal-utilities.md`
 
-- [manual] datatype/02-list.md
-- [manual] datatype/03-vector.md
+- [manual] `datatype/02-list.md`
+- [manual] `datatype/03-vector.md`
+
+# fixpoint
+
+> Allow recursion.
+
+- the use of fixpoint keyword in coq
+  - can we add this to cicada?
 
 # inductive datatype -- questions
 
@@ -164,8 +190,8 @@
 - [maybe] offset in `Block`
 - [maybe] support using `let name = exp` to do local definitions in class
 
-- [general macro] `li! [...]` and `vec! [...]` can be general macro,
-  maybe `foldRight! (List.cons) [...]` and `foldRight! (Vector.cons) [...]`
+- [general macro] `li [...]` and `vec [...]` can be general macro,
+  maybe `fold_left (List.cons) [...]` and `fold_right (Vector.cons) [...]`
 
 - [maybe] extract `readback_type`
 - [maybe] extract `ctx.extend_type`
