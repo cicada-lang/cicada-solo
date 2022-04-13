@@ -4,6 +4,6 @@ But the expected type is:
   Type
 
 docs/tests/basic/sigma/pair-can-only-take-type.error.cic:
- 1 |[_: "oil" | String]
+ 1 |exists (_: "oil") String
  2 |
 

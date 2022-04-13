@@ -1,6 +1,6 @@
 the(
   Equal(
-    [_: String | String],
+    Pair(String, String),
     cons("ratatouille", "baguette"),
     cons("baguette", "ratatouille")),
   refl)

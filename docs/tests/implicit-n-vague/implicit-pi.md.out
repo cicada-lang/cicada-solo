@@ -7,11 +7,11 @@
 Trivial: Type
 String: Type
 "abc": String
-(implicit A: Type, implicit B: Type, pair: [_: A | B]) -> Type: Type
-(implicit A, implicit B, pair) => A: (implicit A: Type, implicit B: Type, pair: [_: A | B]) -> Type
-(implicit A, implicit B, pair) => A: (implicit A: Type, implicit B: Type, pair: [_: A | B]) -> Type
+(implicit A: Type, implicit B: Type, pair: exists (_: A) B) -> Type: Type
+(implicit A, implicit B, pair) => A: (implicit A: Type, implicit B: Type, pair: exists (_: A) B) -> Type
+(implicit A, implicit B, pair) => A: (implicit A: Type, implicit B: Type, pair: exists (_: A) B) -> Type
 Trivial: Type
 Trivial: Type
 String: Type
-(implicit A, implicit B, pair) => car(pair): (implicit A: Type, implicit B: (x: A) -> Type, pair: [x: A | B(x)]) -> A
-(implicit A, implicit B, pair) => cdr(pair): (implicit A: Type, implicit B: (x: A) -> Type, pair: [x: A | B(x)]) -> B(car(pair))
+(implicit A, implicit B, pair) => car(pair): (implicit A: Type, implicit B: (x: A) -> Type, pair: exists (x: A) B(x)) -> A
+(implicit A, implicit B, pair) => cdr(pair): (implicit A: Type, implicit B: (x: A) -> Type, pair: exists (x: A) B(x)) -> B(car(pair))

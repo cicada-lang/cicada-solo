@@ -19,7 +19,7 @@ export class SigmaFormater {
   format(): string {
     const bindings = this.format_bindings().join(", ")
     const cdr_t = this.format_cdr_t()
-    return `[${bindings} | ${cdr_t}]`
+    return `exists (${bindings}) ${cdr_t}`
   }
 
   private format_bindings(): Array<string> {

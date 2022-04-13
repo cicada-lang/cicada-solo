@@ -141,7 +141,7 @@ my_car
 function my_cdr(
   implicit A: Type,
   implicit B: (x: A) -> Type,
-  pair: [x: A | B(x)],
+  pair: exists (x: A) B(x),
 ): B(car(pair)) {
   return cdr(pair)
 }

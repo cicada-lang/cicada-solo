@@ -1,11 +1,15 @@
-[a: A | C(a)]
-[_: A | C]
-[a: A, b: B | C(a, b)]
-[a: A, b: B | C(a, b)]
+exists (a: A) C(a)
+exists (_: A) C
+exists (a: A, b: B) C(a, b)
+exists (a: A, b: B) C(a, b)
+exists (a: A) C(a)
+exists (_: A) C
+exists (a: A, b: B) C(a, b)
+exists (a: A, b: B) C(a, b)
 Pair(A, B)
-[a | b]
-[a | [b | c]]
-[a | b]
-[a | [b | c]]
+cons(a, b)
+cons(a, cons(b, c))
+cons(a, b)
+cons(a, cons(b, c))
 car(target)
 cdr(target)

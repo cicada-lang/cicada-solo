@@ -2,6 +2,6 @@ let t: Type = Type
 
 t
 
-let pair_of_types: Type = [_: Type | Type]
+let pair_of_types: Type = Pair(Type, Type)
 
 pair_of_types

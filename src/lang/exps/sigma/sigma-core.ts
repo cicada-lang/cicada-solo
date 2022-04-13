@@ -30,6 +30,6 @@ export class SigmaCore extends Core {
 
   alpha_format(ctx: AlphaCtx): string {
     const cdr_t_format = this.cdr_t.alpha_format(ctx.extend(this.name))
-    return `[${this.car_t.alpha_format(ctx)} | ${cdr_t_format}]`
+    return `exists (${this.car_t.alpha_format(ctx)}) ${cdr_t_format}`
   }
 }

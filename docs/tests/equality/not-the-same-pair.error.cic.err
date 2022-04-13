@@ -1,4 +1,4 @@
-I am expecting the following two values to be the same [_: String | String].
+I am expecting the following two values to be the same exists (_: String) String.
 But they are not.
 
 from left hand side (from) of Equal:
@@ -7,7 +7,7 @@ to right hand side (to) of Equal:
   ["baguette" | "ratatouille"]
 
 docs/tests/equality/not-the-same-pair.error.cic:
- 3 |    [_: String | String],
+ 3 |    Pair(String, String),
  4 |    cons("ratatouille", "baguette"),
  5 |    cons("baguette", "ratatouille")),
  6 |  refl)

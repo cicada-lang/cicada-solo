@@ -40,6 +40,6 @@ export class Cons extends Exp {
   }
 
   format(): string {
-    return `[${this.car.format()} | ${this.cdr.format()}]`
+    return `cons(${this.car.format()}, ${this.cdr.format()})`
   }
 }

@@ -1,4 +1,4 @@
-I am expecting the following two values to be the same (_: String, _1: String) -> [_2: String | String].
+I am expecting the following two values to be the same (_: String, _1: String) -> exists (_2: String) String.
 But they are not.
 
 from left hand side (from) of Equal:
@@ -7,7 +7,7 @@ to right hand side (to) of Equal:
   (y, x) => [x | y]
 
 docs/tests/equality/not-the-same-function.error.cic:
- 3 |    (String) -> (String) -> [_: String | String],
+ 3 |    (String) -> (String) -> Pair(String, String),
  4 |    (x, y) => cons(x, y),
  5 |    (y, x) => cons(x, y)),
  6 |  refl)

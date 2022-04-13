@@ -1,1 +1,1 @@
-[_: "oil" | String]
+exists (_: "oil") String

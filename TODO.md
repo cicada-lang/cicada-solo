@@ -1,6 +1,5 @@
-- [syntax] change `[x: A | B(x)]` to `exists (x: A) B(x)`
-
-  - to be symmetric with future `self (target) ...`
+- [syntax] remove `[x: A | B(x)]` use `exists (x: A) B(x)` instead
+- [syntax] remove `[x | y]` -- use `cons(x, y)` instead
 
 - [syntax] `forall (x: A) B(x)` as an alternative to `(x: A) -> B(x)`
 
@@ -20,6 +19,13 @@
 - [refactor] improve `Mod` -- learn from implementation of `cicada-lang/lambda`
 
 - [syntax] [maybe] `recursion` (without `motive`) v.s. `induction` (with `motive`)
+
+- [syntax] [maybe] use explicit `eval` keyword
+
+  - to reduce ambiguities introduced by allowing `exp` as `stmt`
+
+- `Pi` -- `readback` to `Arrow` if possible
+- `Sigma` -- `readback` to `Pair` if possible
 
 # manual
 

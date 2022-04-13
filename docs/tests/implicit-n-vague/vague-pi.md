@@ -11,7 +11,7 @@ function my_cons(
   vague B: (A) -> Type,
   x: A,
   y: B(x),
-): [x: A | B(x)] {
+): exists (x: A) B(x) {
   return cons(x, y)
 }
 

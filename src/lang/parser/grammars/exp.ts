@@ -74,6 +74,13 @@ export const operand = {
       { cdr_t: "exp" },
       '"]"',
     ],
+    "operand:sigma_exists": [
+      '"exists"',
+      '"("',
+      { bindings: "simple_bindings" },
+      '")"',
+      { cdr_t: "exp" },
+    ],
     "operand:cons": [
       '"cons"',
       '"("',
