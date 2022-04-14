@@ -112,7 +112,7 @@ check add(one, one): Nat
 We often use `same_as_chart` to write test.
 
 ```cicada
-compute same_as_chart (Nat) [
+same_as_chart (Nat) [
   add(two, three),
   add(three, two),
   five,
@@ -229,7 +229,7 @@ function power(base: Nat, n: Nat): Nat {
 Some tests.
 
 ```cicada
-compute same_as_chart (Nat) [
+same_as_chart (Nat) [
   power(four, three),
   power_of(three, four),
   add(mul(six, ten), four),
@@ -257,7 +257,7 @@ function gauss(n: Nat): Nat {
 Tests.
 
 ```cicada
-compute same_as_chart (Nat) [
+same_as_chart (Nat) [
   gauss(ten),
   add(mul(five, ten), five),
 ]
@@ -283,7 +283,7 @@ function factorial(n: Nat): Nat {
 Tests.
 
 ```cicada
-compute same_as_chart (Nat) [
+same_as_chart (Nat) [
   factorial(five),
   add(mul(ten, ten), mul(two, ten))
 ]

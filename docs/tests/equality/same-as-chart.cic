@@ -1,13 +1,13 @@
-compute same_as_chart (String) [
+same_as_chart (String) [
   "abc",
 ]
 
-compute same_as_chart (String) [
+same_as_chart (String) [
   "abc",
   "abc",
 ]
 
-compute same_as_chart (String) [
+same_as_chart (String) [
   "abc",
   "abc",
   "abc",

@@ -143,7 +143,7 @@ We can use `same_as_chart` to assert that
 many expressions of a given type are the same.
 
 ```cicada
-compute same_as_chart (Type) [
+same_as_chart (Type) [
   Pair(String, Trivial),
   exists (_: String) Trivial,
 ]

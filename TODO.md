@@ -1,7 +1,3 @@
-- [syntax] `same_as_chart` as stmt
-
-  ambr "compute same_as_chart" "same_as_chart"
-
 - [refactor] `Stmt` be able to `undo`
 - [refactor] improve `Mod` -- learn from implementation of `cicada-lang/lambda`
 
