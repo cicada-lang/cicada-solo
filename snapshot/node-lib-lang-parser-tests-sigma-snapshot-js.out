@@ -2,10 +2,6 @@ exists (a: A) C(a)
 exists (_: A) C
 exists (a: A, b: B) C(a, b)
 exists (a: A, b: B) C(a, b)
-exists (a: A) C(a)
-exists (_: A) C
-exists (a: A, b: B) C(a, b)
-exists (a: A, b: B) C(a, b)
 Pair(A, B)
 cons(a, b)
 cons(a, cons(b, c))

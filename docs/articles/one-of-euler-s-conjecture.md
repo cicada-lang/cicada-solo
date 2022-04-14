@@ -39,14 +39,13 @@ let eight = Nat.add1(seven)
 let nine = Nat.add1(eight)
 let ten = Nat.add1(nine)
 
-function euler_s_conjecture(n: Nat): [
-  x: Nat, p: Nat, _: Prime(p) |
-  Equal(
+function euler_s_conjecture(n: Nat): exists (
+  x: Nat, p: Nat, _: Prime(p)
+) Equal(
     Nat,
     add(mul(eight, n), three),
-    add(mul(x, x), add(p, p))
-  )
-] {
+    add(mul(x, x), add(p, p)),
+) {
   return TODO_NOTE("euler_s_conjecture")
 }
 ```

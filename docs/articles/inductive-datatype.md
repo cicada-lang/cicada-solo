@@ -344,7 +344,7 @@ We also need to describe `NonEmptyProperty`:
 
 ```cicada
 function NonEmptyProperty(implicit X: Type, P: (X) -> Type): Type {
-  return [x: X | P(x)]
+  return exists (x: X) P(x)
 }
 
 class WellFounded {

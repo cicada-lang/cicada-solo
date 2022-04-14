@@ -141,12 +141,12 @@ same_as_chart! (Pair(Type, Pair(String, Trivial))) [
 
 # Sigma
 
-We write **`Sigma` type** as `[x: A | C]`,
+We write **`Sigma` type** as `exists (x: A) C`,
 where `x` might occur in `C`, or say, `C` depends on `x`.
 
 This is why `Sigma` is also called **dependent pair type**.
 
-We read `[x: A | C]` as
+We read `exists (x: A) C` as
 
 > There exists `x` in `A`, such that `C` is true.
 
@@ -155,10 +155,10 @@ while for `Sigma`, when the first expression is different,
 the second type can change,
 
 ```cicada
-check! [x: Pair(Type, Type) | car(x)]: Type
+check! exists (x: Pair(Type, Type)) car(x): Type
 
-check! [cons(String, Trivial) | "ABC"]: [x: Pair(Type, Type) | car(x)]
-check! [cons(Trivial, String) | sole]: [x: Pair(Type, Type) | car(x)]
+check! [cons(String, Trivial) | "ABC"]: exists (x: Pair(Type, Type)) car(x)
+check! [cons(Trivial, String) | sole]: exists (x: Pair(Type, Type)) car(x)
 ```
 
 `Pair` is actually a special form of `Sigma`.
@@ -167,7 +167,7 @@ The following two types are the same.
 ```cicada
 same_as_chart! (Type) [
   Pair(String, Trivial),
-  [_: String | Trivial],
+  exists (_: String) Trivial,
 ]
 ```
 

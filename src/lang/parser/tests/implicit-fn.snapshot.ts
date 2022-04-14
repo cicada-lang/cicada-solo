@@ -5,7 +5,7 @@ tester.echoStmts(`
 function car_type(
   implicit A: Type,
   implicit B: Type,
-  pair: [_: A | B],
+  pair: Pair(A, B),
 ): Type {
   return A
 }
@@ -13,14 +13,14 @@ function car_type(
 let car_type: (
   implicit A: Type,
   implicit B: Type,
-  pair: [_: A | B],
+  pair: Pair(A, B),
 ) -> Type =
   (implicit A, pair) => A
 
 let car_type: (
   implicit A: Type,
   implicit B: Type,
-  pair: [_: A | B],
+  pair: Pair(A, B),
 ) -> Type =
   (implicit A, implicit B, pair) => A
 

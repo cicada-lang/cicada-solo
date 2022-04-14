@@ -68,13 +68,6 @@ export const operand = {
       { ret: "exp" },
     ],
     "operand:sigma": [
-      '"["',
-      { bindings: "simple_bindings" },
-      '"|"',
-      { cdr_t: "exp" },
-      '"]"',
-    ],
-    "operand:sigma_exists": [
       '"exists"',
       '"("',
       { bindings: "simple_bindings" },

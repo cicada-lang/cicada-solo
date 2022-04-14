@@ -1,4 +1,3 @@
-- [syntax] remove `[x: A | B(x)]` use `exists (x: A) B(x)` instead
 - [syntax] remove `[x | y]` -- use `cons(x, y)` instead
 
 - [syntax] `forall (x: A) B(x)` as an alternative to `(x: A) -> B(x)`

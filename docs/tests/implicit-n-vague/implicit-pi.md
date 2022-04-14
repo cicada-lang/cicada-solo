@@ -131,7 +131,7 @@ because we can not unify function yet.
 function my_car(
   implicit A: Type,
   implicit B: (x: A) -> Type,
-  pair: [x: A | B(x)],
+  pair: exists (x: A) B(x),
 ): A {
   return car(pair)
 }
